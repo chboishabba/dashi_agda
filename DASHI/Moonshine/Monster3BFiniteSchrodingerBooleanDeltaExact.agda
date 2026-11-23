@@ -11,8 +11,9 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerBooleanDeltaExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -23,10 +24,12 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorExact as Point
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as Compare
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as Extract
 
+boolToC3 : Bool → C3.Cyclotomic3
+boolToC3 true = C3.one
+boolToC3 false = C3.zero
+
 booleanDelta : H.X6 → V.SchrodingerFunction
-booleanDelta selected x with V.x6Equal selected x
-... | true = C3.one
-... | false = C3.zero
+booleanDelta selected x = boolToC3 (V.x6Equal selected x)
 
 ------------------------------------------------------------------------
 -- Coordinate-difference witnesses force the complete Boolean equality false.
@@ -110,11 +113,41 @@ booleanDeltaMemberFromExtraction inv witness =
 -- six-coordinate Boolean test, so reuse the already-proved covariance theorem.
 ------------------------------------------------------------------------
 
+vTritEqualIncrement : ∀ left right →
+  V.tritEqual (H.increment left) (H.increment right)
+  ≡ V.tritEqual left right
+vTritEqualIncrement neg neg = refl
+vTritEqualIncrement neg zer = refl
+vTritEqualIncrement neg pos = refl
+vTritEqualIncrement zer neg = refl
+vTritEqualIncrement zer zer = refl
+vTritEqualIncrement zer pos = refl
+vTritEqualIncrement pos neg = refl
+vTritEqualIncrement pos zer = refl
+vTritEqualIncrement pos pos = refl
+
 x6EqualTranslationCovariant :
   (axis : H.Axis6) (left right : H.X6) →
   V.x6Equal (H.translate axis left) (H.translate axis right)
   ≡ V.x6Equal left right
-x6EqualTranslationCovariant = Weight.x6EqualTranslationCovariant
+x6EqualTranslationCovariant H.axis0
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a0 b0 = refl
+x6EqualTranslationCovariant H.axis1
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a1 b1 = refl
+x6EqualTranslationCovariant H.axis2
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a2 b2 = refl
+x6EqualTranslationCovariant H.axis3
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a3 b3 = refl
+x6EqualTranslationCovariant H.axis4
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a4 b4 = refl
+x6EqualTranslationCovariant H.axis5
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a5 b5 = refl
 
 unitTranslationCarriesBooleanDeltaPointwise :
   (axis : H.Axis6) (selected : H.X6) →
@@ -122,30 +155,10 @@ unitTranslationCarriesBooleanDeltaPointwise :
     (V.translationAction axis (booleanDelta selected))
     (booleanDelta (H.translate axis selected))
 unitTranslationCarriesBooleanDeltaPointwise axis selected x =
-  let
-    inverseX = H.translateInverse axis x
-    cov = x6EqualTranslationCovariant axis selected inverseX
-    restore = Perm.translateAfterTranslateInverse axis x
-  in
-  -- Both functions branch only on the displayed Boolean equality.  Rewrite
-  -- the target equality back to the source/inverse equality.
   trans
-    refl
-    (helper axis selected x cov restore)
-  where
-  helper :
-    (axis : H.Axis6) (selected x : H.X6) →
-    V.x6Equal (H.translate axis selected)
-      (H.translate axis (H.translateInverse axis x))
-      ≡ V.x6Equal selected (H.translateInverse axis x) →
-    H.translate axis (H.translateInverse axis x) ≡ x →
-    booleanDelta selected (H.translateInverse axis x)
-      ≡ booleanDelta (H.translate axis selected) x
-  helper axis selected x cov restore
-    rewrite sym restore | cov
-    with V.x6Equal selected (H.translateInverse axis x)
-  ... | true = refl
-  ... | false = refl
+    (cong boolToC3 (sym (x6EqualTranslationCovariant axis selected (H.translateInverse axis x))))
+    (cong (λ y → boolToC3 (V.x6Equal (H.translate axis selected) y))
+          (Perm.translateAfterTranslateInverse axis x))
 
 record BooleanDeltaBoundary : Set where
   constructor boolean-delta-boundary

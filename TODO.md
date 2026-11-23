@@ -1,4 +1,27 @@
-## 2026-11-08 R583 literal Wilson finite algebra complete
+
+
+## AO Fleet max-cut convergence — 2026-10-29
+
+Golden Agda is authoritative.
+
+- [x] Normalize donor PR #1415 world/macro/sub-eigen/fibre types onto current master.
+- [x] Extend the hierarchy to exact eigenspace / primary topic / subtopic / fibre / goal levels.
+- [x] Represent only K = 50 or K = 100 as supported spectral truncation choices.
+- [x] Require an MP basis witness to carry covariance/eigenvalue/bulk-edge/orthonormality evidence without hidden floating-point assumptions.
+- [x] Reject hex literals, pointer-like memory addresses, raw UI tokens, and raw DOM tokens before topic admission.
+- [x] Normalize donor PR #1416 threshold/Pareto/noTypedMeet machinery onto current master.
+- [x] Normalize donor PR #1417 conductor width machinery onto current master.
+- [x] Add a total Fin 20 schedule with all slots occupied.
+- [x] Require every scheduled goal to be unblocked and Pareto eligible.
+- [x] Require pairwise noTypedMeet evidence for every two distinct worker slots.
+- [x] Add a finite combinatorial Max Cut owner with vertex partition, crossing-edge, discrete Laplacian, and GW/SDP receipt surfaces.
+- [x] Reuse existing YM gauge/Hodge commutator and NS exact commutator owners through explicit non-promoting adapters.
+- [x] Wire new owners through Interop and Fleet TOE aggregates.
+- [x] Mirror the golden public contract in dashi_lean4.
+- [x] Implement executable discriminator tests in dashiBRAIN.
+- [ ] Verify zero postulates, zero holes, zero TERMINATING/NON_TERMINATING, zero NO_POSITIVITY_CHECK, and zero ESD edits.
+- [ ] Append changelogs only after code and tests are in place.
+## 2026-11-08 V0 paired orbifold correction
 
 - [x] Original finite CMP119 Wilson test carrier is `List (ℝ × List Loop)`; construct zero, sum, coefficient scale, and convolution multiplication with `YangMillsCMP119LiteralWilsonSpanAdditiveExact`.
 - [x] Prove embedding of zero, addition, scaling and convolution multiplication into original real scalar Wilson observables using structural induction plus original Wilson word-concatenation source law.
@@ -51,6 +74,109 @@ See [full exact-lemma roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExact
 - [x] Reuse existing `BalabanClayExactOSPullbackRecombinationExact`, `BalabanReflectionPositiveCoarseGrainingTransportExact` and `BalabanClayOSPullbackBlockingBridgeExact`; do **not** request separate positivity for each CMP122 crossing-polymer summand where the fully recombined original physical OS form already has a valid pullback.
 - [ ] Prove `NativeBlockReflectsExactly` and positive-time pullback for the literal selected R445 two-link block/OS reflection plane. Original fine Wilson RP is standard imported but its chosen physical matrix/Haar realization must match the same fine measure.
 - [ ] Preserve the *entire* CMP119/122 renormalized reflected source through the same Wilson RG and both limits; combined source form (not isolated crossing labels) must remain RP.
+
+### D1. Finite cutoff frame bound
+
+Deliverable:
+
+```agda
+GershgorinFiniteFrameLowerBound :
+  NormalizedAtoms Dict_N →
+  μ_N = maxCrossTerm Dict_N →
+  (N - 1) * μ_N < 1 →
+  A_N ≥ 1 - (N - 1) * μ_N
+```
+
+Status:
+
+```text
+provable now as linear algebra
+```
+
+### D2. Phase-complete inert separation
+
+Deliverable:
+
+```agda
+PhaseCompleteInertSeparation :
+  MirrorB7Present →
+  InertPrimeSet9 →
+  μ_N ≤ separationBound_N
+```
+
+Status:
+
+```text
+conditional unless atom parametrisation is explicit enough
+```
+
+### D3. Uniform lower bound / PAWOTG equivalence
+
+Deliverable:
+
+```agda
+UniformFrameBoundEquivalentToPAWOTG :
+  inf_N A_N > 0 ↔ UniformSeparationPAWOTG
+```
+
+Status:
+
+```text
+good theorem target; may be two one-way lemmas
+```
+
+### D4. Mosco constructive sequence
+
+Deliverable:
+
+```agda
+MoscoRecoveryFromDenseFrames :
+  DenseUnion H_N H →
+  UniformFrameLowerBound →
+  ∀ f → ∃ f_N ∈ H_N , f_N → f
+```
+
+Status:
+
+```text
+conditional on density + uniform lower bound
+```
+
+### D5. No spectral pollution
+
+Deliverable:
+
+```agda
+NoSpectralPollutionFromMosco :
+  MoscoConvergence forms →
+  StrongResolventConvergence operators →
+  NoSpectralPollution
+```
+
+Status:
+
+```text
+conditional on standard functional analytic theorem
+```
+
+### D6. Python sweep
+
+Good as written, but add:
+
+```text
+μ_N
+(N-1)μ_N
+Gershgorin_lower = 1 - (N-1)μ_N
+actual_lambda_min
+```
+
+That gives the exact comparison between proof bound and measured bound.
+
+---
+
+## Manager E — YM analytic core
+
+### E1. Diameter-1 KP bound
 
 Correct target:
 
@@ -10188,298 +10314,308 @@ Cleanup
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
 
-## 2026-10-30 — CT11/M15 twin-prime max-cut status (#1408)
+## 2026-10-30 — Instagram parallel-needs formalisation
 
-- [x] Source-write actual Mangoldt proper-power support -> CT11 computed deduplicated candidate image; support exclusion in the other direction (new `TwinPrimeMangoldtProperPowerCandidateCoverageExact`).
-- [x] Source-write positive Nat base readout from original Chebyshev certified prime ownership, using standard-library nonprimality at 0 and 1; no extra global axiom. Source **not kernel-verified**.
-- [x] Execute independent finite integer oracle: 1,997 upper bounds, 1,995,003 shifted pairs, no support misses. Commit corresponding (not separately run) regression script; include 36=6² overcount adversary.
-- [ ] CT01: Agda --safe compiler check and repair through three TOE roots, strict 0 postulates/holes/unsafe termination; Lean translation only after golden proof.
-- [ ] CT02: construct the real all-prime-carrier, not just conditional ownership.
-- [ ] CT11/13: finite interval-position support cardinality bound <=2*properPowerCandidateDistinctCount and certified error-sum domination.
-- [ ] CT12/14: concrete ordered real log weights, bound error O(sqrt U log³ U) and prove o(X).
-- [ ] CT15: prove, do not assume, the unconditional positive gap-two shifted Mangoldt correlation with signed residual control.
-- [ ] CT16–CT18: extract arbitrary certified twin pairs from positive prime-only sum; prove genuine infinitude without premises.
-- [ ] Preserve Ibrahim original Monster-3B, Pareto/Snowball, QID and meta-introspector provenance; no same-object promotion, no protected ESD edits.
+- [ ] Kernel-check DASHI/Governance/ParallelNeedsInstitutionalTransitionExact.agda with --safe and trace all imported trust boundaries.
+- [ ] Keep source proposal, institution mandate, actual needs coverage and national replication as separate authority gates.
+- [ ] Source quantitative service-coverage and financial-runway tests if a real pilot is later identified; retain voluntary consent/exit and compatibility criteria.
+- [x] Require the MP covariance witness to identify Sigma with the empirical (1/M) A A^T producer.
+- [x] Require distinct worker slots to carry distinct goals.
+## 2026-10-30 — Trialectic 369 weighted digraph / native pants finite max-cut
 
-### 2026-10-30 CT13 follow-on after actual error-position envelope
+**Already source-written (not kernel-certified):** nine-position weighted
+directed matrix bridge; different attached faces on identical full graph;
+native 27-grid one-step adjacency; pants graph isomorphism candidate;
+27-cell 2-colour checkerboard and singleton exclusion; six S3 coordinate
+permutations; C3 and seam reflection graph homs; dedicated Lean mirror;
+finite semantics script; TOE and Ibrahim snowball imports.
 
-- [x] Source-write a list of the two possible error positions for every CT11 candidate value, with exact length 2*image length.
-- [x] Reuse the original deduplicator to prove `DistinctValues` and `nonzeroErrorPositionInDistinctEnvelope` for actual M15 error support (conditional on already-owned real Chebyshev prime identity).
-- [x] Source-write `distinctErrorPositionEnvelopeLengthBound` ≤ `2*floorSquareRoot(U)*floorBinaryExponent(U)`; independent integer oracle passed.
-- [ ] Kernel-check both the updated CT11/M15 module and the exact transitive import graph under --safe, no postulates/holes.
-- [ ] Connect genuine bounded-interval, indexed nonzero-error support count to the distinct covering image; instantiate real ordered logarithms, pointwise nonnegative residual weights, and the final O(sqrt(U) log³(U)) / o(X) estimate.
-- [ ] Prove CT15a/b/c unconditional positivity and signed correlation control; until then CT16-CT18 infinitude is unavailable.
+**P0** Run exact-head Agda `--safe` with no postulates, metas, termination
+escapes; inspect actual import chain, repair any errors, log exact command
+and result. Only then run pinned Lean/mirror. No CI required.
 
-### 2026-10-30 CT15 frontier research continuation (#1408)
+**P1** Supply domain-specific weight→branch-channel interpretation and
+actual pants `InterfaceMatch`; keep `TypedHyperfabric` restrictions,
+source provenance, time, identity and authority constraints first class.
 
-- [x] Inspect actual Agda prime arithmetic, Mangoldt BIDI, signed Möbius finite probe, CT11 cutoff, real-log owners; actual Lean source, agda2lean; latest Riemann/3×3/YM/Ibrahim PR heads.
-- [x] Source-write 103→105=3×5×7 negative-Möbius parity false-positive in original no-go Agda owner; use certified NatPrime and genuine 105 factorisation.
-- [x] Independently run finite Möbius sign / odd-squarefree contamination / cube-roughness oracle on five dyadic windows; commit reproducible checker (not separately executed from checkout).
-- [x] In original M16 Agda owner, source-write scalar total-vs-error disequality and arbitrary-observer separation → bounded true twin, plus cofinal conditional twin infinitude; **separation premise remains missing**.
-- [x] Reuse original stdlib Log₂ and in-repo core pow2 to source-write canonical floor-log, rectangle and extensional equivalence with old cutoff; **compiler pending**.
-- [ ] CT01: run actual Agda --safe transitive compilation, fix elaboration issues; no postulates/holes/termination escapes.
-- [ ] CT12–CT14: instantiate nondegenerate ordered ordinary-real logarithm with real Mangoldt weights; prove actual weighted support sum domination and E(X)=o(X).
-- [ ] CT15: originate and prove a uniform or cofinal analytic/spectral/arithmetic separation of *actual* ΛΛ correlation from proper-power error; Möbius signed cancellation and finite geometry do not suffice.
-- [ ] CT16–CT18: discharge the real cofinal observer/positivity theorem *without assumption* and close TwinPrimesInfinitelyOften with kernel receipt.
-- [ ] Historical ownership unchanged: Brun, Hardy–Littlewood, Chebyshev/von Mangoldt/Möbius, Lü–Wang–Wu, independent repo/PR authors, Ibrahim Monster 3B, Pareto/Snowball, meta-introspector, QIDs navigation-only, no ESD edits.
+**P2** Reuse and actually inhabit a `FaceMediationLaw` and
+`SecondOrderCellGluing` where source-paid, distinguishing the
+independent triadic face from edges, two-step walks and local colouring.
 
-### 2026-10-30 CT15 additional number-theory arithmetic cut
+**P3** Continue Pareto/snowball across this proven finite surface without
+promoting inherited paper claims, six permutations, Monster3B character
+fingerprints or a three-node asymmetric weight fixture to a physical,
+VOA or smooth-surface theorem.
 
-- [x] Reuse `Data.Nat.Properties.*-mono-≤` for arbitrary three-large-factor `B³` lower bound with no added postulates; add as `TwinPrimeOddCompositeCubeRoughCutExact.agda` (`--safe` declared).
-- [x] Import it into actual 103/105 odd squarefree counterfeit owner and prove its numerical cube bound; attach once to the three canonical TOE roots.
-- [x] State source equalities of computed/stdlib floor-log₂ power images and duplicate-free images; transport exact M15 position cover to `2*floorSquareRoot(U)*⌊log₂U⌋`.
-- [ ] Kernel-check new and existing sources with actual Agda and repair any parse/type/termination errors; no postulates or unsafe escapes.
-- [ ] Produce a complete proof-relevant Nat factor-list/Möbius parity classifier, including the three-factor/cube-root implication, using original stdlib factorisation, not an SSP15 finite class.
-- [ ] Prove genuine shifted-prime short-divisor/roughness cancellation or an unbounded cofinal actual Mangoldt separator; **this** is the front of the twin-prime conjecture and is NOT solved by this finite argument.
-- [ ] Prove `CT12–CT14` ordinary-real logarithmic weights and error sublinearity and unconditional `CT16–CT18` with Agda kernel acceptance. Keep original mathematical/Ibrahim/Pareto/Snowball/QID ownership and ESD isolation.
+See `Docs/TrialecticWeightedDirectedGraph369.md`.
 
-### 2026-10-30 FRACTRAN / Pickover hyperfabric integration (#1408)
+## 2026-10-30 P2 update — selected mediation
 
-- [x] Search actual fifteen-lane SSP signed valuation source: 7, 47, 59 ARE present. Verify the existing concrete FractranCOL interpreter is only five lanes; do not confuse symbolic SSP labels with arbitrary finite divisibility machines.
-- [x] Source-write explicit 59/329 genuine SSP valuation receipts and the factored 329=7×47 vs 59=59; use the previously certified twin outcomes, no invented factor proofs.
-- [x] Source-write actual ordered first-applicable FRACTRAN mini-rack [1/7,1/47]; 329→47, 59 no step, consuming FRACDASH numeric operational semantics.
-- [x] Instantiate exact CoarseFineReopening Nat using original 270-period BIDI; inhabit original Pickover SignedPhaseFibre and prove consumer-relevant residual necessity for 59/329 and generic exact-reopening twin sufficiency.
-- [x] Transport the actual Mangoldt pair correlation and its finite window S=P+E split through this SAME fibre using original sum BIDI; connect to all 3 TOE roots.
-- [x] Execute independent finite X=100,1000,10000 complete prime-denominator stage oracle (respectively 6,14,34 gates) and compare exact trial divisibility to actual twin decisions and lossy 270 wheel; commit reproducible checker (not executed from checkout).
-- [ ] Construct a **real** Nat→FRACTRAN machine compiler with verified first-applicable semantics, output readout and termination/step simulation, not just open SoundFractranTwinReadout record.
-- [ ] Build the growing prime-axis/scale-indexed arithmetic hyperfabric with genuinely scale-compatible analytic estimates, not just exact window gluing.
-- [ ] Prove CT15 cofinal actual Mangoldt total/error separation (or equivalent unbounded rough shifted-prime sector) and CT12–CT14 ordinary-real logarithms; twin-prime infinitude remains OPEN.
-- [ ] Run Agda transitive --safe kernel and Lean mirror checks once compiler available (not CI).
+Source-written selected finite face→next-depth-cell mediator through
+canonical Grothendieck T18 descent, with non-descent of output from
+identical weighted matrices. This is ONLY a selected fixture.
 
-### 2026-10-30 fixed FRACTRAN prefix parity/camouflage cut
+Pending: kernel verification; prove an *independently justified*
+domain-specific mediation law, its action equivariance and actual
+pants/sheaf matching before promoting any real-world synthesis.
 
-- [x] Prove source-level equivalence of certified finite pair-sieve survivor and paired FRACTRAN blocked-prefix semantics, explicitly distinguished from one actual rational fraction on a raw n.
-- [x] Reuse original finite double-factorisation owner to source-write cofinal fixed-rack false positives: any finite certified prime-test rack with a >=2 survivor has arbitrarily late composite pairs passing all its local checks.
-- [x] Directly instantiate Pickover strict-refinement theorem, not only its residual-separation necessity.
-- [x] Execute independent exact integer examples for finite racks [2,3,5], [2,3,5,7], [2,3,5,7,11] at t=1,10,100,100000.
-- [ ] Prove original finite sieve has a >=2 surviving seed for **all** certified finite axis lists (e.g. residue -1 modulo modulus product) rather than leaving seed explicit; do not duplicate underlying CRT/period machinery.
-- [ ] Prove a real first-applicable paired source-register FRACTRAN simulation and obtain certified outputs on all bounded input windows.
-- [ ] Prove genuine cofinal *prime* pair survivors, not cofinal *composite* camouflage; the latter is evidence of the hard obstruction.
-- [ ] Kernel-check these source-written Agdas and the full three-root import graph; no CI necessary.
+## Trialectic graph QID/Pareto max-cut: 2026-10-30 additional obligations
 
-### 2026-10-30 continued FRACTRAN first-applicable no-go
-- [x] Source-write exact ordered local trace `329→47→1`, terminal 1, and 59-stuck witness using original FRACDASH interpreter semantics.
-- [x] Source-write `noFixedFractranPrefixCanCertifyEveryTwin` as a genuine logical refutation of blocked finite-denominator prefix→TwinPrimeAt, not just a numeric counterexample; original factorable-survivor theorem owner retained.
-- [ ] Check these actual source terms in safe Agda kernel (toolchain unavailable here); repair any elaboration errors, do not promote source-written to kernel-verified.
-- [ ] Construct verified growing/machine-level FRACTRAN paired-register compiler and genuine analytic cofinal prime-pair separation; no finite rack or QID numerology can discharge this theorem.
+- [ ] Reuse existing two-colouring: give edgewise all-cut saturation
+  certificate and universal optimality for nonnegative weighted native grid.
+- [ ] Reuse SnowballExternalIdentityAvailabilityExact for verified
+  Q131476, Q1137726, Q727035, Q504843, Q174733, Q303100,
+  Q3385162, Q942557, Q840247, Q184410 identities.
+- [ ] Exact model edge enumeration: 54 undirected, 108 oriented edges;
+  do not confuse exhaustive Python run with Agda kernel certificate.
+- [ ] Link these results via existing Pareto/Ibrahim TOE consumer, and
+  mirror core mathematical claims in Lean after golden Agda.
+- [ ] Keep QID/source attribution and proof/physical promotion independent.
+- [ ] Kernel/type check and fix dependent Agda/Lean code at exact head
+  when compilers are available. No CI required.
 
-### 2026-10-31 shifted-pair error scale
-- [x] Classical elementary bound in real standard Mangoldt model: proper-prime-power error support <=2 floor(sqrt Y) floor(log2 Y) and mass E(Y)<=that count*(ln Y)^2; independent exact support audit y=100..100000.
-- [ ] Produce unconditional positive main-term lower bound S(Y)≥cY for shifted actual Λ(n)Λ(n+2) on unbounded Y, or another true cofinal total-error separation; finite graphs/FRACTRAN/Mangoldt split alone insufficient. This is open number theory, not a theorem generated by an interface.
+## 2026-10-30 two-ended directed hyperfabric extension
 
-### 2026-10-31 SOTA bounded-gap / exact-two BIDI
-- [x] Inspect original Agda bounded-pair/TwinPrimeAt, actual Mangoldt split and cofinal observer separator, and latest 2026 benchmark source docs.
-- [x] Add source-written BIDI for true gap-two located certificate ↔ original bounded prime pair with exact shift=2, and two cofinal transports; wire three TOE imports; provenance and hypothesis ledger.
-- [ ] Kernel check new Agda terms and construct Lean mirrors from exact source owners.
-- [ ] Import/translate the actual Lean PrimeGapsLib/PrimeGaps186 analytic declarations with their assumptions before claiming *the SOTA papers themselves* are formally integrated. Don't turn three external axioms or Bombieri–Vinogradov into invisible facts.
-- [ ] Build genuinely new prime-pair +2 distribution estimate or alternative cofinal exact-shift-two witness; open.
+- [ ] Instantiate `TypedHyperfabricCore` with both directed source
+  and target incidence, outgoing/incoming rows and exact weights.
+- [ ] Construct a compatible two-ended global section without imposing
+  symmetry of a forward/backward pair; demonstrate a loop case.
+- [ ] Consume the new owner from focused TOE imports and downstream Lean.
+- [ ] Do not promote ICLR2026 DSNN/DSHN source to empirical performance,
+  spectral theorem, or invented sheaf-Laplacian implementation.
 
-## 2026-10-31 — exact T0 cofinal BIDI / Pareto terminal backlog (PR #1408)
+## 2026-10-30 implementation status correction — max-cut/QID/directed hyperfabric
 
-- [x] Source-write `TwinPrimesInfinitelyOften → UnboundedCertifiedCountJumps` via actual prime witness at N+2, original certified exact count-jump theorem, and explicit Nat-order transport.
-- [x] Source-write two-way cofinal-window ⇔ exact-count-jumps transport; import the owner in all three canonical TOE roots.
-- [ ] Focused Agda kernel check (pinned golden configuration), strict safe import/zero-postulate closure and repair any errors. **No CI run requested.**
-- [ ] Build ordered-real exact prime-only weight bridge (positive log(p)log(p+2)) from `ΛΛ` to the original `TwinPrimeAt` count-jump/window readout; prove actual finite-endpoint S=P+E equality and error bound.
-- [ ] T10/CT15 **unconditional** cofinal genuine count jump or equivalent actual shifted-prime correlation lower bound. The equivalence proved above does **not** satisfy this.
-- [ ] K04/K05: actual Bishop-real Machin Cauchy modulus/limit setoid equality, true π branch and analytic zeta consumer continuity (not just abstract limit record).
-- [ ] R01/R02: independently audit source 7/8 theorem, same-object ξ reflection and true boundary arithmetic; R10 full off-line zero exclusion remains open.
-- [ ] P03/P10: effective certified winding and rational sign-separated interval for `sin(99^(9999!))`; fail closed on insufficient precision.
-- [ ] W04/W05: kernel-check original SSP15 ten-jet Vandermonde inverse and nine-jet integral collision; preserve retained sign, consumer and mathematical source owners.
+- [x] Golden Agda source: edge-saturated native 27-grid weighted cut
+  optimal for any finite supported edge list with Nat weights.
+- [x] 54 constructed unit edges with source-level count/weight proof
+  candidates; external exhaustive audit 54 unique undirected edges,
+  108 orientations, 14/13 checkerboard split.
+- [x] Verified ten live QID concept labels; exact synthetic fixture QID
+  explicitly unresolved; source ownership non-promotion maintained.
+- [x] Two-ended directed source+target compatible hyperfabric, loop and
+  asymmetry witnesses, plus downstream Lean mirror.
+- [x] Imported new owners across TOE/Unifier/Unified/Ibrahim rollups,
+  refreshed 2026 four-colour article to arXiv v3.
+- [ ] **Kernel:** Agda exact-head check including safe import closure
+  and dependent pattern matching; Lean exact-head check on pinned
+  toolchain. No CI required.
+- [ ] Formal *coverage + uniqueness* theorem for 54 generated
+  undirected grid edges (Python exhaustiveness is not a formal receipt).
+- [ ] Consumer-specific genuine pants interface/gluing, provenance-
+  justified independent face law, and exact C3/S3 action transport for
+  particular consumer records. No automatic Monster/YM/physical claim.
 
-## 2026-10-31 — K04 existing-Bishop reuse / quadratic import repair
+## QID role-type follow-on
 
-- [x] Inspect actual `BishopMachinArctanConstructionExact`, `BishopRound11MachinSetoidComplexInstanceExact`, rational tangent, branch/window and Lean cross-prover semantic receipt; recognize existing actual Bishop-real convergence instead of duplicating foundations.
-- [x] Repair malformed `SqrtThreeHalfDefect` and `GoldenRatioDefect` constructor result syntax in the canonical imported quadratic signed-fibre owner.
-- [x] Source-write arbitrary finite-stage compatibility, all-Nat-consumer and canonical prime-count induction in the existing zeta commuting-square owner.
-- [ ] Agda compiler verify changed dependent owners and all canonical imports (no CI requested, do not claim verification).
-- [ ] K04a: identify executable rational `q_n` with actual original Bishop `SeriesOf` partial sums under rational embedding.
-- [ ] K04b: prove explicit `4/25^n` modulus and `ConvergesTo q_n bishopMachinPi` on the real/setoid carrier using existing per-arctan convergence.
-- [ ] K04c: prove actual signed prime-valuation decomposition including non-SSP residual for every rational stage and a faithful readout BIDI.
-- [ ] K04d: actual zeta continuation domain, continuity at the named argument, completed commuting square.
-- [ ] K05: Agda trig/classical pi same-object identification, independent of the source-written Lean receipt.
+- [x] Reuse existing `KnowledgeCoordinate` for directed graph Dewey
+  511.54; avoid treating the wider 511.5 discipline as the same object.
+- [x] Distinct typed concept roles for graph homomorphism Q3385162,
+  graph isomorphism Q303100, max cut Q942557, and theorem Q184410.
+- [ ] Do not claim external QIDs certify kernel facts or identities
+  of particular DASHI synthetic graph, face, proof, or smooth surface.
 
-## 2026-10-31 — K04a actual finite signed Bishop stage
+## 2026-10-30 edge coverage and max-cut symmetry follow-on
 
-- [x] Source-write `BishopMachinSignedFiniteHistoryExact` over original `Machin.atanSignedTerm`, 16/4 weighted finite series, with a proof that signed partial stage is the original finite sum difference via `BishopFiniteSeriesDifferenceExact`.
-- [x] Import K04a leaf in three canonical TOE roots.
-- [ ] Kernel-check the new concrete Bishop K04a source owner and transitive golden imports.
-- [ ] Remaining K04a rational-stage equality: computational `q_n` formula = original Bishop `Sequence.SeriesOf` signed stage after exact rational embedding, avoiding artificial real comparisons.
-- [ ] K04b: combine original actual arctan Bishop convergence with finite linearity and explicit alternating remainder modulus.
+- [x] Reuse native graph and 54-edge list; produce every native
+  adjacency's oriented canonical slot witness, including reversal.
+- [x] Exact slot count/0..53 source equality and Lean `Nodup`
+  source-written proof.
+- [x] S3 and seam preserve this *actual selected checkerboard*;
+  maintain asymmetric 3-node graph counterexample.
+- [x] Reproduce finite orientation/partition calculations in Python.
+- [ ] Kernel-check Agda and Lean (CI unnecessary); address any
+  exact-head errors, transitive --safe issues and source drift.
+- [ ] Discharge Agda generic slot-code injectivity/list uniqueness.
+- [ ] Source-authorised trialectic 2-cell, higher-order seam and
+  provenance/authority compatibility for particular consumers only.
 
-## 2026-11-01 — K04a–K05 exact-source max-cut (PR #1408)
+- [x] Added typed `NoDuplicateSlots allNativeSlots` with
+  negative-comparison soundness and constructive membership.
+- [ ] Verify this closed 54-slot no-duplicate proof and optional
+  stronger generic slot-index/endpoint injectivity in kernel.
 
-- [x] K04a source: implement true `ℚᵘ` Machin `qMachinStage` and all-index Bishop rational embedding `qMachinStageEmbedsAsOriginalBishopPartial` using the original arctangent series and native `RealProperties.⋆-distrib` laws.
-- [x] K04b1 source: compose true Bishop arctangent series convergence into `machinSignedPartialConvergesToOriginalMachinPi` and `rationalMachinStagesConvergeToOriginalMachinPi`.
-- [x] K04c source: reuse standard-library proof-bearing all-prime `factorise` for true numerator/denominator, zero-specific branch, retained signed integer, actual SSP15 dictionary vs residual split and exact multiplicative proof; q1 non-SSP adversary.
-- [x] K04d partial source: concrete Bishop-complex point/limit sequence and genuine existing completed-zeta function's conditional half-plane agreement.
-- [x] K05 partial source: exact Round11 configured pi/Bishop Machin pi identity, original quarter angle and configured complex pi coordinates; no invented trig period identity.
-- [x] Extend rational finite exact checker: n=0, symbolic universal error coefficient `3844/1195 < 4`, finite Cauchy comparisons and q1=3804/1195 residual checks.
-- [ ] **Golden Agda kernel check** the new Bishop rational embedding/limit, factorisation/split, zeta halfplane, K05 Round11 modules and all transitive imports; no CI requested or run.
-- [ ] K04b2: Agda Bishop setoid quantitative inequality `|⋆q_n − bishopMachinPi|≤⋆e_n≤⋆(4/25^n)` using existing alternating first-omitted inequalities, plus Cauchy bound for j,k≥n.
-- [ ] K04c3: if needed explicit inverse signed rational-from-codec theorem (numerator sign, zero, full dictionary+residual product); prove the compact code remains a faithful full irrational-approximation history.
-- [ ] K04d2: prove `q_n>1` n≥1 in Bishop order, concrete analytic zeta half-plane realization, local uniform Dirichlet convergence and same-object convergence of completed zeta evaluations.
-- [ ] K05b: actual Bishop sin/cos addition and tangent law, quarter-angle branch semantics, sine=0/cos=−1 at pi_M, and independently characterized trigonometric π on the same Agda Bishop carrier. Do not import the source-written Lean result as an Agda proof.
-- [ ] Keep T10 actual prime-pair correlation, R10 RH zero exclusion and P10 `sin(99^(9999!))` terminal certificate OPEN.
+- [x] Explicit new C3 orbit-symmetrized weight and corresponding
+  two-ended compatible section, without falsely equating it to
+  the asymmetric original directed matrix.
+- [x] Formal source-written outgoing/incoming C3 weight transports.
+- [ ] Validate orbit-sum equations in Agda/Lean kernels; no CI needed.
+- [ ] Face mediation, provenance transport and actual Monster/physical
+  action must be separately sourced/proved for their own consumers.
 
-### 2026-11-01 K04b2 direct Bishop alternating-tail follow-on
-- [x] Source-write `BishopMachinQuantitativeOmittedTailExact`: instantiate original Bishop arctan interlacing + first-omitted theorem for every even/odd prefix of the original 1/5 and 1/239 signed series, with true Bishop `_≤_` bounds and explicit source provenance.
-- [x] Import its owner through the three canonical TOE roots.
-- [ ] Golden kernel verify `actualArctanEvenRemainderBound`, `actualArctanOddRemainderBound`, concrete four specializations, and transitive imports.
-- [ ] Prove exact first-omitted magnitude = embedded rational `1/((2n+1)d^(2n+1))` on original `Machin.atanMagnitudeTerm` (reusing power/nonnegative embedding), then scale/add all Bishop order inequalities to `|⋆q_n−pi_M|≤e_n≤4/25^n` and `|q_j−q_k|≤8/25^n`.
+### 2026-10-30 matrix–graph–wave/prime/Pickover crosscut
+- [x] Actual source inspection of PR #1438 graph/matrix C3 symmetrisation, directed hyperfabric, finite wave and consumer-indexed residual machinery (not PR text alone).
+- [x] Construct explicit 3-vertex C3 orbit-sum equality with divergent original directed-edge consumer; reuse graph source BIDI and generic collision theory; no auto-generating missing analytic source.
+- [x] Show any deterministic wave/spectral computation fed *only* the symmetrised matrix cannot recover the erased selected weight; attached original wave trit differs pos/zero.
+- [x] Reuse original directed source/target global-section owners to establish both fine graphs have compatible typed hyperfabric sections; global gluing alone is not sufficient.
+- [x] Wire into the four graph/TOE import roots; commit independent exact matrix checker and documentation. No ESD edits.
+- [ ] Agda/Lean kernel check for new and original graph module once compatible toolchain available (no CI obligation).
+- [ ] Twin CT15: prove actual arithmetic prime-only/error separation on cofinal windows; forbid replacing true `Λ(n)Λ(n+2)` with synthetic graph edge weights or using mere S3/C3 equivariance as a positivity theorem.
+- [ ] Pickover: construct a certified terminal analytic `π`-phase interval/sign at `99^(9999!)` with effective cost, not a finite CRT/C3/λ^9 graph label. Retain original Machin, wave and source-owner receipts.
 
-- [x] K04b2 source: identify every actual positive Bishop `atanMagnitudeTerm` with embedded original rational inverse-odd/power term; instantiate both 5 and 239 using original real-order nonnegativity.
-- [ ] K04b2 remaining: parity-aware combine weighted first-omitted source bounds to actual Machin `|⋆q_n−pi_M|`, prove rational power/denominator majorant and `4/25^n` all-n order in Agda; kernel-check.
+- [x] Further exact C4 discrete-wave Fourier witness: positive spectral mode energies (4,2,0,2) but zero lag-two correlation for synthetic f=(1,1,0,0); reuse original Gaussian-integer `ShiftDiscreteWaveStep` and `ShiftUnitaryLikeConstraint` code, no new wave algebra.
+- [x] Independent integer-pair DFT replay and original graph C3 nine-entry matrix equality both PASS; checked-in Python test expanded; no analytic claim promoted.
+- [ ] Prove PRIME-SPECIFIC spectral correlation lower bound in an actual arithmetic producer, not from positive Hilbert/Fourier energy alone, and certify full interval Pickover phase separately.
 
-- [x] K04c3 source: compose actual indexed zero-or-product factorisation with both SSP15 dictionary/residual product certificates, keeping zero numerator exceptional and source sign retained.
-- [ ] K04c3 kernel check and, if consumer requires a strict record round-trip, prove the signed-numerator/positive-denominator rational reconstruction from the existing encoded factor lists (not only absolute magnitudes).
+- [x] Inhabit actual matrix-vs-C3 `ResidualRepair` for every graph and original finite wave trit; prove explicit strict refinement from the existing source-owned consumer collision. No analytic cross-promotion.
 
-### 2026-11-01 second K04/K05 max-cut — implementation reality
+### 2026-10-30 retained-history correction and typed 9/18/27 integration
 
-- [x] New `BishopMachinCombinedRemainderBoundExact`: source-written real-order absolute triangle and weighted 16/4 remainder at both parity classes plus all-Nat parity completion and total actual `⋆q_n` first-omitted error theorem.
-- [x] New `BishopMachinGeometricEnvelopeNatExact`: all-natural exact cross-multiplied bound `3824·57121^n+20·25^n≤(2n+1)·4780·57121^n`; no finite-only induction shortcut.
-- [x] New `BishopMachinEventualHalfPlaneExact`: source-written constructive Bishop convergence eventually above any strict bound; instantiation to original `⋆q_n>3`.
-- [x] Repair invalid K05 strict rational-endpoint comparisons in original `BishopMachinQuarterAngleBranchExact` via actual source `3<pi_M<22/7`, positivity of 1/4 and exact rational equivalences.
-- [x] New `BishopMachinQuarterPhaseQuadruplicationAlgebraExact`: actual Round11 quarter sine/cosine values; algebraic fourfold 0/−1 phase from explicit quarter-equal/unit inputs; proof transporting TRUE sine/cosine fourfold analytic identities to original `sin(pi_M)=0`, `cos(pi_M)=-1` conditional on explicitly stated analytic premises.
-- [x] Import all four new owners in all three canonical TOE roots.
-- [x] Locally execute standalone Python Fraction assertions for q_n, e_n, nonconstant steps (n=0..100), and Cauchy windows (n=1..39). Source checks are NOT kernel proofs.
-- [ ] **Kernel-check and repair** new K04/K05 Agda files, original K04a/K04b source and three TOE imports. No compiler or CI was run in this session.
-- [ ] K04b2 finish **rational denominators** and positive-order transport from new Nat cross-product inequality through rational `*≤*` to Bishop `≤`. Then finish all-j,k Cauchy via triangle inequality.
-- [ ] K04d identify actual Bishop half-plane predicate, construct true complex `n^{-s}` via Bishop exp/log, uniform σ>1 tails and same-object completed-ζ continuity, and derive ζ(stage)→ζ(limit).
-- [ ] K05 prove concrete Round11 sine/cosine addition/fourfold laws, quarter equality from original tangent=1 and correct nonzero/branch, unit Pythagorean law, and independent classical π uniqueness. Conditional endpoint theorem is not a terminal theorem.
-- [ ] Retain terminal T10/R10/P10 research gates separately; do not promote analogies, estimates or source-written comparisons to kernel proofs.
+- [x] Inspect actual HistoryTimeIndexedConsumerFibreExact, HistoryTimeReasoningFibreTransportPathExact, ConsumerIndexedUntanglingTowerExact, CoarseDynamicsTraceCongruenceExact, WaveAlgorithmLift, ShiftWaveRefinementHierarchy and original nine-trit/Rubik typed codec.
+- [x] Correct static C3 orbit-only no-go scope: historical consumer-sufficiency is tested on the *complete retained temporal fibre*, not the current averaged matrix alone.
+- [x] Add golden source `TrialecticGraphWaveHistoricalFibreRecoveryExact`: prior/live/future source matrices, separate C3 orbit frames, exact consumer recovery after retained history, deterministic evolution postprocessing, and generic full-history collision no-go.
+- [x] Reuse actual 9 ordered directed cells, both source/target incidence roles for every edge, typed 27-choices-per-stage depth-three trit-cube round trip, and independently typed 2×9 Fricke block; no semantic collapse by cardinality.
+- [x] Attach new source to four TOE graph imports; keep ESD untouched.
+- [ ] Instantiate the historically retained observation in an actually computed, nontrivial graph-wave update with source-proved `WaveRefinementTower` and retained fibre projection compatibility; general postprocessing of full history is only the first closure layer.
+- [ ] For actual twin-prime `Λ(n)Λ(n+2)` and Pickover real phase, construct physical/arithmetic producer and quantitative consumer-specific analytic bounds; neither follows from this finite type-level interface.
+- [ ] Kernel typecheck Agda transitive imports / Lean native counterparts; no CI necessary.
+## 2026-11-08 Moonshine / Y443 / FLM highest-alpha active TODO router
 
-### 2026-11-01 K04b source quantitative closure / K04d domain reuse
+Canonical phase, deliverable, precise lemma and acceptance ledger:
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`.
 
-- [x] Source-written `DASHI.Analysis.BishopMachinGeometricBishopRateExact`: square(1/5) = 1/25 and square(1/239) ≤ 1/25, Nat-indexed source Bishop magnitude contraction; original 16/4 weighted sum, exact native rational base 16/5+4/239 = 3844/1195 ≤ 4.
-- [x] Source-written all-stage `machinBishopFourOver25Pow` and rational-power bridge `machinBishopFourOver25RationalStage` on the ACTUAL Bishop Machin π and exact rational q_n.
-- [x] Source-written monotone Bishop 1/25 powers and full two-index `machinBishopEightOver25PowCauchy` for all n≤j,k, using original real triangle.
-- [x] Extended exact rational Python regression to 64 stages, all-index Nat cross-product sample tests and 475 cutoff/Cauchy pairs; independently reproduced with Python Fraction.
-- [x] Fixed malformed Bishop absolute-value term in previous `BishopMachinCombinedRemainderBoundExact.weightedAbsoluteTriangle`.
-- [x] Extended actual `BishopMachinZetaRegularHalfPlaneExact`: eventual Bishop Re(q_n)>1 and conditional original zeta/Dirichlet equality, explicitly requiring interpretation of opaque analytic half-plane predicate.
-- [x] Wired new geometric Bishop rate owner into three canonical TOE roots.
-- [ ] **Kernel verification needed** for all K04b proofs, K04d additions and three TOE roots: only source-written candidates so far, Agda/CI not run.
-- [ ] K04d full genuine Bishop-complex exp/log Dirichlet-series uniform convergence and same-original completed-ζ continuity; derive ζ(q_n)→ζ(pi_M) from a concrete, not opaque, analytic realization.
-- [ ] K05 actual Round11 Bishop sine/cosine addition/Cauchy convolution, quarter-angle sine≈cosine and Pythagoras, fourfold identities, and unique classical-trigonometric π characterization in Agda. Other-real-carrier transcendentals do NOT discharge this bridge.
-- [ ] T10 / R10 / P10 terminal theorem conditions remain independently open, not inferred from K04b.
+- [x] R0: audit and reuse PRs #190/#208/#433/#437/#479/#1472;
+  eliminate duplicate grade-two operation-rigidity wrappers; preserve
+  source-written DGL weak-certificate no-go.
+- [ ] V0: inhabit the **original selected** Leech-orbifold/VOA source-law
+  witnesses and `SourceNativeGriessLaws`, not a freely chosen Set flag.
+- [ ] V1: exhibit real selected-to-published FLM all-mode two-sided VOA
+  equivalence; direct original FLM selection or sound DGL route, not both.
+- [ ] V2: true selected-G ↔ Q80 ↔ Monster isomorphisms and original
+  selected-versus-published u/v action equations on real generators.
+- [ ] V3: instantiate the already-written direct same-object capstone using
+  V0–V2; do not add another conditional wrapper.
 
-### 2026-11-01 fourth K04/K05 max-cut: reuse original shared Round11 source weld and derive genuine continuous-image convergence
+194 character classes, physical KK/GR and the original 4D YM mass gap
+belong to separate PR endpoints; no proof-status promotion from finite
+196884 counts or arithmetic. Agda kernel acceptance not asserted here.
 
-- [x] Source-write `BishopMachinQuarterSharedTrigWeldBidiExact`: use EXISTING `BishopRound11ClassicalTrigObjectWeldExact.compileRound11Pythagorean` to supply actual Round11/Machin quarter unit without duplicating a Pythagorean source authority, and compose the existing conditional endpoint at `bishopMachinPi`.
-- [x] Source-write `BishopMachinZetaSequentialContinuityReducerExact`: genuine Bishop epsilon-delta `BishopContinuousAt`, `bishopContinuousImageConverges` using original `Sequence.fast-ε-from-convergence` and `Sequence.con*`, and exact real+imag actual completed-zeta component convergence conditional on explicit local continuity of the ORIGINAL function.
-- [x] Wire both source owners into `EverythingTOESymmetryResolved369`, `Unifier`, `Unified/Everything` imports.
-- [x] Independently execute Python Fraction 64-stage Machin q_n and 475-pair cutoff/Cauchy assertions (bounded exact checks only).
-- [ ] **Pinned Agda kernel** check and repair all K04a–d/K05 source leaves and the three TOE roots; no typecheck/CI run from this connector-only implementation turn.
-- [ ] **K04d actual analytic terminal:** implement Bishop complex n^{−s} via original compatible exp/log and prove uniform convergence for σ>1, real/imag epsilon-delta continuity at original Machin π, and use the new continuous-image reducer. The abstract Meromorphic predicate is not a proof.
-- [ ] **K05 actual trig terminal:** prove the EXISTING shared Round11 classical/Bishop object weld (or direct native identity), genuine Bishop sine/cosine addition/quadruple-angle, quarter tangent/branch identification, and independent π uniqueness. Conditional polynomial and DLMF-source receipts alone do not suffice.
-- [ ] Keep T10 genuine twin-prime lower bound, R10 RH zero-exclusion and P10 giant sine sign independent/open.
+### 2026-11-08 V0 state-space subcut from original orbifold (PR #1472)
 
+- [x] Actual original fixed-sector and twisted-even inclusion injectivity and
+  disjointness; exact section/reconstruction from the existing selected
+  orbifold direct-sum carrier (VNaturalOrbifoldConstruction module).
+- [ ] Prove the OPPOSITE selected-carrier reconstruction law on every
+  orbifold state: reconstructTaggedState (identifyCarrier w) = w.
+  Current assembly fields do not exclude additional/junk VOA carrier states.
+- [ ] Prove source-native actual cross-sector Jacobi/locality, conformal
+  and grade-two mode structure, then published FLM all-mode equivalence;
+  independent source-action u/v maps remain V2.
 
-### K04b–K04d–K05 2026-11-02 same-object commuting square (PR #1408)
+Exact acceptance conditions and authorship in
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 
-- [x] Source-write actual rational q_n → Bishop signed finite-history → true zeta-input square and reuse K04b real-order 4/25^n and 8/25^n certificates (pending kernel).
-- [x] Source-write 1<Re(Machin pi) and actual original completed-zeta/half-plane stage/limit agreement and coordinatewise convergence **conditional on named analytic witnesses** (pending kernel).
-- [x] Source-write derivation of both Round11 fourfold identities from **one uniform signed-factorial double-angle law**, reusing original same-object Pythagorean weld (pending kernel).
-- [ ] Run pinned Agda Track A on K04/K05 imported leaves and all three TOE roots; repair all proof syntax, order transport, universe and definitional-equality failures; retain the source-only status until then.
-- [ ] Independent K04b-DENOM witness: translate all-n denominator Nat cross-multiplication into the actual unnormalised rational remainder and Bishop order; compare with independently written stronger direct Bishop rate.
-- [ ] K04d: implement original Bishop-complex log/exp and n^(−s) Dirichlet series, compact Re(s)>1 locally uniform tail bound, the original half-plane domain predicate, same-object zeta equality, component continuity, and inhabit AnalyticSameObjectGate.
-- [ ] K05: prove original Round11 signed-factorial sine/cosine double-angle Cauchy product, construct and verify the original classical/Bishop weld, prove actual quarter tangent/branch gives cos=sin, and prove independent trig π uniqueness.
-- [ ] Keep twin-prime positive shifted correlation (T10), RH mid-strip zero exclusion (R10), and giant sine phase sign (P10) OPEN and separate.
+- [x] Original selected orbifold state-fibre normalizer P=R∘I,
+  P²=P, tag preservation and equal-tag iff equal-normal-form;
+  source proof of original I-injective iff no-extra-states (PR #1472).
+- [ ] Inhabit ORIGINAL identifyCarrier injectivity from actual source
+  orbifold assembly. This is exactly equivalent to the previously
+  requested reverse reconstruction law; neither has been assumed.
 
+### 2026-11-08 V0 corrective pivot — tagged coproduct is not FLM linear direct sum
 
-### Dirichlet-native K04d cross-pollination — 2026-11-02
+- [x] Source-native no-go: old OrbifoldCarrier=A ⊎ B with disjoint
+  summand injections cannot send both true summand zeros to same VOA zero.
+- [x] Define correct paired LinearOrbifoldCarrier=A × B on actual source
+  summands, its common-zero canonical embeddings and injection proofs;
+  expose VNaturalConstruction.VnaturalLinearCarrier alongside legacy tagged.
+- [ ] Populate original componentwise linear structure and genuine mixed
+  vertex-operator laws on the paired source, including grading, vacuum,
+  translation, conformal Jacobi/locality and true selected/FLM comparison.
+- [ ] Migrate the selected orbifold assembly and dependent same-object
+  consumers through actual mode-preserving linear equivalence, rather than
+  trying to establish an insufficient no-junk property for legacy A ⊎ B.
 
-- [x] Reuse existing concrete Bishop Basel sum and automorphic Dirichlet comparison owner; create no new comparison/completeness authority.
-- [x] Source-write original Bishop-complex Dirichlet coordinate convergence from explicit literal Basel domination, with integer-2 Basel fibre and native `lim`.
-- [x] Source-write actual original completed-zeta ↔ Dirichlet coordinate commuting square on original Machin rational stages and π_M, conditional on exact analytic term/value identification.
-- [x] Attach source to three canonical TOE roots and synchronize provenance/missing-lemma register.
-- [ ] Pinned Agda golden typecheck of every K04b/K04d/K05 new owner and TOE imports; repair source candidates; no CI required by user.
-- [ ] K04d-TERM: original Bishop complex log of positive Nat, complex exponential and literal n^(−s) with true σ>3 Basel coordinate domination.
-- [ ] K04d-UNIFORM: locally uniform Dirichlet tails, finite term continuity, original completed-zeta epsilon-delta continuity; produce the actual analytic same-object evidence.
-- [ ] K04d-SAME: match original half-plane domain predicate and construct real original half-plane Dirichlet value agreement. Distinguish analytic zeta from finite/elliptic/PDE Dirichlet owners.
-
-
-- [x] K04d Basel at integer two: source-write all-Nat Bishop real/imag domination, construct the shared comparison witness and identify compiled limits by native uniqueness of limits (kernel pending).
-
-
-- [x] K04d-EXP: construct literal original-Riemann-carrier complex exponential by isomorphism from existing BishopSetoidComplexExact; identify Cartesian coordinates, arithmetic, setoid congruence (source-written, kernel pending).
-- [x] K04d-LOG-CANDIDATE: construct n+1 logarithm candidate from original Bishop convergent negative-log-one-minus series at n/(n+1), with explicit membership and native convergence (source-written, kernel pending).
-- [ ] Prove all-n configured Round11 unit-interval membership and the actual Bishop exp(log(n+1))=n+1 normalization; use to certify negative-real exponents and full σ>2 Basel domination.
-- [ ] Prove genuinely local-uniform Dirichlet tails, original analytic zeta identity, continuity and completion of the Machin commuting square; do not borrow unproved legacy-real log authority.
-
-
-- [x] Attach the concrete original Bishop `exp(−s · negativeLogOneMinus(rational n/(n+1)))` source terms, not an arbitrary term oracle, to both original completed-zeta stage/limit coordinate squares (source-written; original equality witnesses still open).
+The prior original identifyCarrier-injective/no-extra-states route is
+now **LEGACY SET-LEVEL ONLY** and does not close actual FLM V0.
+The precise proof/attribution and source no-go appear in canonical
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 
 
-### 2026-11-03 — Bishop K04d/K05 source-native max-cut (Agda golden)
+### 2026-11-08 V0.3/V0.4 current source implementation and concrete formal donor
 
-- [x] Audit actual Bishop exponential Cauchy, finite reindexing, Round11 trig, Nat-log, Dirichlet Basel and original Riemann zeta source owners.
-- [x] Source-write native Round11 sine/cosine `2 * bishopMachinPi` period as conditional output of the ONE pure-imaginary product and actual quarter equality; connect all three TOE import roots.
-- [x] Reconcile exact lemma ownership in `Docs/roadmaps/BishopK04dK05SourceNativeMaxCut20261103.md`.
-- [ ] K05-PRODUCT: native all-x,y mixed signed-factorial Cauchy coefficient theorem and the actual imaginary exponential addition law; derive Pythagorean and both trig additions as its consumers.
-- [ ] K04d-LOG: native exp of the original negative-log sum equals successor Nat (n≥1); do not use arbitrary log or classical carrier as same-object evidence.
-- [ ] K04d-CONTINUITY: finite-source term continuity, regional uniform-limit continuity, selected original ZetaHalfPlaneLayer/completed-zeta same-object identification.
-- [ ] K05-PI: actual Bishop atan/tangent quarter equality, independent first-positive-zero/least-positive-period trigonometric pi uniqueness.
-- [ ] Exact Agda `--safe` kernel type-check of new module, focused dependency root and full TOE imports, with zero postulates, holes and termination bypasses. No Agda executable available in this pass.
+- [x] Source-written pair-carrier graded module on the original fixed and
+  twisted-even sector carriers; actual fixed-point VOA operations/grades
+  transported through a demanded two-sided original-source identification.
+- [x] Original fixed-fixed vertex mode transport, explicit original
+  fixed-twisted theta-twisted-mode equation, and constructed four-channel
+  Z2-parity mode formula on the paired carrier.
+- [x] Find actual unconditional Popov–Rastelli LeanVOA theorem
+  VOA.Moonshine.moonshine (2026-11-04, arXiv:2611.06616),
+  with original Ynat, simplicity, c=24 and JShift grading; actual
+  TopPairs.top_pairs0 and topPairs_one source readback.
+- [ ] Inhabit fixedCarrier↔fixedPoint.fixedVOA actual grade/linear maps and
+  twisted-even genuine linear grade laws (SourceSectorGrading).
+- [ ] Inhabit actual original twisted-fixed and twisted-twisted operators,
+  mode-index map, top-pair source proof, and all-mode Agda-to-LeanVOA
+  same-object equivalence. Lean source theorem is NOT an Agda imported proof.
+- [ ] Same original 80-relator quotient group and published Monster action
+  on JMD u/v; no theorem inferred from the LeanVOA source's noncompiled
+  historical Aut(Moonshine)=Monster sketch.
 
-- [x] K05 source corollaries: conditional `round11SineAtTwoPi ≃ 0` and `round11CosineAtTwoPi ≃ 1` on the original Round11 Bishop series; exact-head Agda elaboration remains pending.
-
-
-### 2026-11-03 — K04d/K05 follow-on max-cut (source proof candidates)
-
-- [x] K04d Agda: source-native reciprocal cancellation reducer from `exp_B(-L(x)) ≃ 1-x` to `exp_B(L(x)) ≃ (1-x)⁻¹`, reusing existing Bishop all-real exp Cauchy and inverse uniqueness.
-- [x] K05 Agda: source Machin pi positive and no-earlier-positive-sine-zero compiler from the original imaginary product, quarter equality and strict sine-on-(0,pi_M) lemma.
-- [x] Connect both Agda owners to all three TOE import roots without editing ESD.
-- [x] Lean companion draft PR #104: original source-term log inverse, source-bound sine/cosine addition, quarter equality/first sine zero, literal Dirichlet exp term, genuine zeta continuity; verify source readback.
-- [ ] Golden native `exp_B(-sourceNegativeLogValue x) ≃ 1-x` from the original factorial/log coefficient composition, not a generic inverse-log authority.
-- [ ] Golden native all-x,y mixed signed factorial Cauchy coefficient and original Bishop sine/cosine exponential limit multiplication; no Lean semantic result substituted.
-- [ ] Golden selected finite-term continuity and uniform-limit actual `ZetaHalfPlaneLayer.zetaHalfPlane` / completed-zeta same-object identification.
-- [ ] Golden original atan-to-sine/cosine Machin quarter equality and strict sine positivity on (0,pi_M), or verified source-faithful proof import.
-- [ ] Exact-head Agda `--safe` kernel checks and zero-postulate/hole/import audit; exact-head Lean checks for all new mirror files. Neither run observed.
-
-### 2026-11-04 — Machin source-archaeology/max-cut (golden Agda #1408)
-
-- [x] Re-audit original `BishopMachinArctanConstructionExact`, `BishopMachinPiArchimedesWindowExact`, `BishopMachinRationalTangentAlgebraExact`, `BishopMachinQuarterAngleBranchExact`, `BishopMachinQuarterPhaseQuadruplicationAlgebraExact`, `BishopRound11ClassicalTrigObjectWeldExact`, the two-ball sine lower owner, and the Wilson Fourier Machin period carrier. Do not count a conditional source-weld record or a chosen period parameter as an independent trigonometric pi proof.
-- [x] Source-write `BishopMachinPiComplementReflectionFromImaginaryProductExact`: original signed-series `sin_B(pi_M−x)≃sin_B(x)` and `cos_B(pi_M−x)≃−cos_B(x)` from the *same* existing K05 product + quarter assumptions and actual Bishop parity.
-- [x] Source-write `BishopMachinQuarterStrictSineFromTwoBallExact`: existing original radius-two factorial-series sine lower and 3/4 < theta_M < 11/14 imply 87/128 ≤ sin_B(theta_M), hence strict positivity, with no new sine/trig assumption.
-- [x] Import both new owners into all three TOE roots and update K04d/K05 exact lemma roadmap.
-- [ ] Exact-head `agda --safe` elaboration and import validation of both new owners plus roots; no such run/receipt observed.
-- [ ] K04d native original source log-exp inverse; K05 native complex mixed-factorial Cauchy/limit product; K04d native uniform-limit and original selected zeta/completed same-object; K05 original arctangent/tangent equality and constructive interval sine positivity for the *first positive zero*.
-
-- [x] 2026-11-04 K05 Machin half-angle owner: `BishopMachinHalfPhaseFromImaginaryProductExact` reuses original 4θ_M≃π_M, original series double-angle and product-derived Pythagorean to show sin_B(2θ_M)≃1 and cos_B(2θ_M)≃0, conditional on precisely the already-live product + original quarter equality; imported into all three TOE roots, exact kernel receipt pending.
-
-### 2026-11-04 K05 maximal-source sign reuse (golden Agda PR #1408)
-
-- [x] Reuse original pinned Bishop locatedness `fast-corollary-2-17`, not a trichotomy postulate, to split x at thresholds 3/2 and 2.
-- [x] Source-write `BishopSinePositiveTwoBallFromCubicExact`: on actual Round11 sine, 0<x and |x|≤2 => x²≤4 => x(1−x²/6)>0 => sin_B(x)>0. Signed-series cubic lower and original term identification reused.
-- [x] Source-write `BishopMachinPiGlobalSineSignFromTwoBallExact`: on 0<x<pi_M the located split and pi_M<22/7 guarantee x or its Machin complement is inside radius two; native reflection transfers positivity.
-- [x] Feed constructed global sign into the existing `SourceMachinFirstPositiveSineZero` constructor. No global sine positivity assumption now required beyond original K05-PRODUCT and K05-QUARTER.
-- [x] Inspect *pinned* vendor/bishop RealProperties for exact order, locatedness and setoid-congruence signatures and correct earlier left-transport orientations.
-- [x] Wire both new modules to all three TOE roots and audit the updated roadmap.
-- [ ] Native Agda K05 mixed signed factorial Cauchy multiplication and actual original atan/tangent quarter equality still independently open; only then first-sine-zero becomes unconditional.
-- [ ] Exact-head Agda --safe kernel check and transitive imports of new modules; no observed kernel receipt.
+Canonical exact source named-lemma map:
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 
 
-### 2026-11-04 — K05 native complex Cauchy triangle continuation (golden source-written, kernel pending)
+- [x] Source-native paired VOA vertex-data assembly: genuine fixedVOA
+  vacuum/conformal/translation, even-twisted translation source, and actual
+  four-parity mode (actualSourcePairedVertexData), with original fixed
+  vacuum/conformal decoding and mode agreement proofs. Source-written,
+  not kernel-verified and NOT full VOA Jacobi/locality.
+- [ ] Port or substantively translate Popov–Rastelli LeanVOA YnatG/topPairs_one/
+  moonshine into the original Agda selected carrier with a real all-mode
+  isomorphism; authenticate the original V0/V1 source laws.
+- [ ] The TauCeti presented-group-to-Coxeter-quotient equivalence is NOT
+  a genuine selected group-to-published-Monster action identification;
+  original V2 group/action evidence remains open.
 
-- [x] Add `BishopGenericCauchyFromAbsoluteTriangleExact.cauchyTriangleConvergesToActualProduct`: reuse the native real finite rectangle, finite signed wing, double-tail convergence, and vanishing-difference lemmas. No invented Cauchy-product authority.
-- [x] Add actual Bishop setoid-complex triangle/Mertens reindexing and `round11PhaseTriangleConvergesFromFourAbsoluteTriangles`: compile 4 signed real Cauchy triangles to original Round11 complex phase product *when original absolute triangles converge*.
-- [x] Fix the missing `suc` import in the existing Round11 complex rectangle proof owner and expose both new owners in all 3 canonical TOE roots; leave protected ESD unchanged.
-- [x] Independently execute exact rational Gaussian grouped parity/telescope regression on 25 input pairs × 20 degrees: PASS 500/500 (not a kernel or universal proof).
-- [ ] K05-PRODUCT source-specific blockers: construct four actual absolute triangular convergence receipts, prove all-n grouped signed factorial parity coefficient/telescope theorem including the O_N correction, prove O_N→0 on Bishop via factorial majorant, finish original `Round11ImaginaryExpMultiplicative`.
-- [ ] K04d-LOG actual negative-log inverse and Nat specialization; K04d-CONTINUITY finite-term/uniform-limit and same-object original selected zeta; K05-PI actual arctan/trig quarter equality.
-- [ ] Exact-head `agda --safe` proof acceptance and all three TOE root checks; no executable/accepted workflow receipt observed in this pass.
+
+- [x] Pure source FT parity reduction: originalPureFTModeIsNativeTwisted
+  and originalPureFTModeAgreesWithLeechTwistedModule show that the
+  four-block paired source mode on (x,0) and (0,y) reproduces the
+  original Leech theta-twisted module after includePlus, under explicit
+  source zero laws (OriginalPureFTZeroLaws).
+- [ ] Inhabit those original zero laws, the genuine Wbar twisted-twisted
+  and reversed mixed block, and strong mixed Jacobi/locality from the
+  Popov–Rastelli LeanVOA donor on the selected Agda carrier.
 
 
-### 2026-11-05 — exact source-native K05 analytic closure / final finite parity cut (golden PR #1408)
+### 2026-11-09 native Lean group/VOA owner consolidation
 
-- [x] Native original Round11 concrete absolute sine and cosine histories selected, source term setoid-identifications transported, and concrete absolute series convergence derived.
-- [x] Native generic Bishop squeeze and increasing-history doubled-subsequence ⇒ full-sequence convergence; the original positive Cauchy triangle is squeezed between `R(n,n)` and `R(2n,2n)`.
-- [x] Construct *all four* original Round11 absolute-triangle convergence witnesses with zero caller-supplied analytic authority; derive the selected signed complex Cauchy triangle convergence to `expC(ix)*C expC(iy)`.
-- [x] Show signed sine×sine Cauchy coefficient tends to zero by pinned Bishop `∑xₙisConvergent⇒xₙ→0`, so the original odd/odd correction vanishes without an independent factorial tail.
-- [x] Write native general finite even/odd reindex for every degree and original signed-factorial ↔ doubled exponential coefficient identification; compile the final all-n parity equalities **as exact explicit inputs** to original expC multiplication and trig addition.
-- [x] Update all three canonical TOE import roots, K04d/K05 roadmap, and add dedicated exact-branch Agda --safe kernel receipt workflow.
-- [ ] **K05 terminal finite algebra:** prove for *all* Bishop x,y,n the two universal source grouped Cauchy identities: real difference `T_(n+1)-P_(n+1)≃O_n`; imaginary difference `T_(n+1)-P_(n+1)≃0`. Compose original finite binomial coefficients, signed-factorial source transport and all-degree parity reindex; no hypothetical authority/witness.
-- [ ] **K04d-LOG:** native `exp_B(-Σ_(m≥1) x^m/m)≃1-x` at every source interval x and original Nat-successor substitution.
-- [ ] **K04d-CONTINUITY:** native finite-term and uniform-limit continuity; original ZetaHalfPlaneLayer and completed-zeta full original same-object identification.
-- [ ] **K05-PI:** native Machin original arctan/tangent quarter equality; then instantiate existing conditional first-positive-sine-zero proof.
-- [ ] **Kernel gate:** retrieve successful Agda --safe exact-head focused and three TOE root receipt; workflow exists but no passing exact-head receipt yet. Distinguish source-written proof candidate from accepted Agda derivation. No ESD edits.
+- [x] Audit existing dashi_lean4 PR #47 owners: Maschke Griess
+  complement, FDRep <-> group-algebra original-action map, Schur
+  isotypic coordinate and canonical normalizer Hom action. These are
+  already proof-coded in Lean; do not reimplement in Agda as new work.
+- [x] Deduplicate two Agda original paired four-sector modules by
+  proving they have identical source-data mode, vacuum, conformal,
+  translation and fixed source operator through source-preserving
+  toNativeMixedParity/toNativeTranslation.
+- [ ] Discover exact current worktree/vendor Popov location before any
+  additional source migration; default-branch code search cannot locate
+  Popov files, but the source may already be available on another
+  branch or in a local mounted/vendor tree.
+- [ ] Construct real selected-to-Popov FLM all-mode map and original
+  source law proofs; do not duplicate the conditional four-block owners.
+- [ ] Actual selected Y443 quotient-to-Monster iso and original u/v
+  operator equality; then apply existing Lean representation machinery
+  and Agda pair-generation/VOA action capstone.
+
+See Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+### 2026-11-09 distinct Popov owners / same-source four-sector closure
+
+- [x] Inspect exact user-linked BalabanReducedFlatFaddeevPopovKernelExact:
+  its V. N. Popov is the Yang-Mills Faddeev-Popov author, NOT the Fedor
+  K. Popov of the Popov-Rastelli formal Moonshine VOA library.
+- [x] Complete two-sided original Agda four-sector source record equivalence:
+  fromNativeSources, nativeSourcesAfterFrom, fromAfterNativeSources,
+  atop the earlier mode/vacuum/conformal/translation equalities.
+- [x] Inspect dashi_lean4 #47 Monster representation theory as existing
+  post-recognition source; do not duplicate Maschke/Schur/Hom code.
+- [ ] Genuine original twisted-even linear/grade and mixed source laws;
+  actual selected all-mode correspondence to Popov-Rastelli Moonshine.
+- [ ] Actual Y443 selected group / Monster isomorphism and u/v action;
+  use existing capstone instead of another conditional wrapper.
+
+Canonical ledger: Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.

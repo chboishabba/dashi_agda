@@ -41,7 +41,6 @@ import DASHI.Moonshine.JCoefficientCharacterBridge as J
 import DASHI.Moonshine.MonsterCharacterTableExact as MCT
 
 record MonsterGradedVOABridge (Monster K : Set) : Setω where
-  constructor monster-graded-voa-bridge
   field
     monsterGroup : GR.Group Monster
     voaAction : GVOA.VOAWithGroupAction Monster K
@@ -65,8 +64,8 @@ open MonsterGradedVOABridge public
 
 monsterIdentityCoefficientIsGradeDimension :
   ∀ {Monster K} (bridge : MonsterGradedVOABridge Monster K) grade →
-  (GVOA.traceCoefficient (exactGradedTrace bridge)
-    (GR.Group.identity (GVOA.group (voaAction bridge))) grade)
+  GVOA.traceCoefficient (exactGradedTrace bridge)
+    (GR.identity (GVOA.group (voaAction bridge))) grade
   ≡ GVOA.gradeDimensionAsScalar (identityDimensionLaw bridge) grade
 monsterIdentityCoefficientIsGradeDimension bridge grade =
   GVOA.identityTraceCoefficientIsDimension
@@ -96,7 +95,6 @@ modularityDoesNotCollapseToGenusZero :
 modularityDoesNotCollapseToGenusZero ()
 
 record VOAArithmeticGeometryCrossPollination : Set₁ where
-  constructor voa-arithmetic-geometry-cross-pollination
   field
     gradedTraceToModularSeries : Set
     modularSeriesToArithmeticCoefficients : Set

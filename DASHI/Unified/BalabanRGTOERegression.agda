@@ -20,7 +20,6 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -56,7 +55,6 @@ import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241E
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as RegularEPredicate
 import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as RegularEDecoder
 import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
-import DASHI.Physics.YangMills.BalabanTopDownSummableRGIncrementExact as SummableRG
 import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
 import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as DensityDictionary
 import DASHI.Physics.YangMills.BalabanDensityToLiteralFiniteMeasureRound124Exact as Measure
@@ -71,9 +69,6 @@ import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as StressCauchy
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
-import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
-import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
-import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
 import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
@@ -196,21 +191,6 @@ balabanPublishedRGPhysicalSameObjectLevel : ProofLevel
 balabanPublishedRGPhysicalSameObjectLevel =
   PublishedRG.literalPhysicalStateToPublishedRGCarrierLevel
 
--- The compiler from a source-shaped dyadic increment majorant to a Cauchy
--- modulus is machine checked. The physical same-family majorant remains an
--- explicit conditional source-instantiation obligation.
-balabanSummableRGIncrementCauchyCompilerLevel : ProofLevel
-balabanSummableRGIncrementCauchyCompilerLevel =
-  SummableRG.summableRGIncrementCauchyCompilerLevel
-
-balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel : ProofLevel
-balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel =
-  SummableRG.physicalSameFamilyNormalizedCharacteristicIncrementLevel
-
-balabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional :
-  balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
-balabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional = refl
-
 balabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
 balabanScaleDensityFiniteMeasureWeldLevel =
   Measure.balabanDensityLiteralFiniteMeasureCompilerLevel
@@ -278,122 +258,6 @@ balabanStressCauchyModulusCompilerLevel =
 balabanStressCauchyPhysicalInsertionLevel : ProofLevel
 balabanStressCauchyPhysicalInsertionLevel =
   StressCauchy.literalStressInsertionIsCMP119LocalInsertionLevel
-
-------------------------------------------------------------------------
--- Canonical same-family Cauchy / Schwinger stress recovery cut.
---
--- Historical round numbers are provenance only.
--- The source-owned telescope and same-family recovery remove any separate
--- finite-to-continuum stress convergence payment.
-------------------------------------------------------------------------
-
-open SameFamilyRecovery public using
-  ( r129ExportsLiteralContinuumLimit
-  ; r129ExportsLiteralSchwingerMembership
-  ; r129ExportsLiteralStressDerivative
-  ; r129ExportsCompositeMarkedSourceData
-  )
-
-balabanSameFamilyRecoveryCompilerLevel : ProofLevel
-balabanSameFamilyRecoveryCompilerLevel =
-  SameFamilyRecovery.r129SameFamilyRecoveryCompilerLevel
-
-balabanSameFamilyRecoveryPhysicalLevel : ProofLevel
-balabanSameFamilyRecoveryPhysicalLevel =
-  SameFamilyRecovery.physicalR129SameFamilyRecoveryLevel
-
-balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129Recovery ≡ false
-balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129RecoveryIsFalse
-
-balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129Recovery ≡ false
-balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129RecoveryIsFalse
-
-balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129Recovery ≡ false
-balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129RecoveryIsFalse
-
-balabanGoal1CSourceCutCompilerLevel : ProofLevel
-balabanGoal1CSourceCutCompilerLevel =
-  Goal1C.round475CSourceCutCompilerLevel
-
-balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel : ProofLevel
-balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel =
-  Goal1C.c4FiniteStressInsertionIsCMP119LocalLevel
-
-balabanGoal1CStressCompletionIsCompletedMarkedStressLevel : ProofLevel
-balabanGoal1CStressCompletionIsCompletedMarkedStressLevel =
-  Goal1C.c4StressCompletionIsCompletedMarkedStressLevel
-
-balabanGoal1CCompletedStressIsClayStressLevel : ProofLevel
-balabanGoal1CCompletedStressIsClayStressLevel =
-  Goal1C.c4CompletedStressIsClayStressLevel
-
-balabanGoal1CLiteralDensityMetricDerivativeLevel : ProofLevel
-balabanGoal1CLiteralDensityMetricDerivativeLevel =
-  Goal1C.c4LiteralDensityMetricDerivativeLevel
-
-balabanGoal1CDensityAnchoredLaneInstantiationLevel : ProofLevel
-balabanGoal1CDensityAnchoredLaneInstantiationLevel =
-  Goal1C.c4DensityAnchoredLaneInstantiationLevel
-
-balabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
-balabanGoal1CContinuumStressRecoveryCompilerLevel =
-  Goal1C.c4ContinuumStressRecoveryCompilerLevel
-
-balabanGoal1CMetricPairingCompilerLevel : ProofLevel
-balabanGoal1CMetricPairingCompilerLevel =
-  Goal1C.c4MetricPairingCompilerLevel
-
-balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
-balabanGoal1CLiteralSourceInstantiationLevel =
-  Goal1C.literalRound475CSourceInstantiationLevel
-
-------------------------------------------------------------------------
--- Canonical five-package C max-cut.
--- Historical round labels remain provenance only.
-------------------------------------------------------------------------
-
-balabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
-balabanCPhysicalPackageMaxCutCompilerLevel =
-  CMaxCut.round527CPhysicalPackageMaxCutCompilerLevel
-
-balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
-balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
-  CMaxCut.c0LiteralGaugeInvariantLocalObservableFamilyLevel
-
-balabanC1MarkedCurvatureFamilyLevel : ProofLevel
-balabanC1MarkedCurvatureFamilyLevel =
-  CMaxCut.c1MarkedCurvatureFamilyLevel
-
-balabanC2PhysicalRemainderSharedTailLevel : ProofLevel
-balabanC2PhysicalRemainderSharedTailLevel =
-  CMaxCut.c2PhysicalRemainderSharedTailLevel
-
-balabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
-balabanC3OneStepAFRecurrenceIdentificationLevel =
-  CMaxCut.c3OneStepAFRecurrenceIdentificationLevel
-
-balabanC4DensityAnchoredStressLaneLevel : ProofLevel
-balabanC4DensityAnchoredStressLaneLevel =
-  CMaxCut.c4DensityAnchoredStressLaneLevel
-
-balabanCPhysicalPackageCount : Nat
-balabanCPhysicalPackageCount =
-  CMaxCut.cPhysicalPackageCount
-
-balabanLevel2ClayPromotionFlag : Bool
-balabanLevel2ClayPromotionFlag =
-  SameFamilyRecovery.clayPromotion
-
-balabanLevel2ClayPromotionStillFalse :
-  balabanLevel2ClayPromotionFlag ≡ false
-balabanLevel2ClayPromotionStillFalse =
-  SameFamilyRecovery.clayPromotionIsFalse
 
 balabanStressHilbertBoundCompilerLevel : ProofLevel
 balabanStressHilbertBoundCompilerLevel =
@@ -497,15 +361,6 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
-BalabanScaleTransferPromotion : Set
-BalabanScaleTransferPromotion =
-  RGFrontier.BalabanRGScaleTransferPromotion
-
-balabanScaleTransferPromotionImpossible :
-  BalabanScaleTransferPromotion → ⊥
-balabanScaleTransferPromotionImpossible =
-  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
-
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
@@ -513,13 +368,17 @@ legacyBalabanLaneAlsoDeclaresNoClayPromotion =
 
 ------------------------------------------------------------------------
 -- Reused typed continuum and RG-flow non-promotion owners.
+--
+-- The constructorless promotion types remain owned by their source receipts.
 ------------------------------------------------------------------------
 
 BalabanContinuumLimitReceipt : Setω
-BalabanContinuumLimitReceipt = ContinuumLimit.YMBalabanContinuumLimitReceipt
+BalabanContinuumLimitReceipt =
+  ContinuumLimit.YMBalabanContinuumLimitReceipt
 
 BalabanContinuumLimitPromotion : Set
-BalabanContinuumLimitPromotion = ContinuumLimit.YMBalabanContinuumLimitPromotion
+BalabanContinuumLimitPromotion =
+  ContinuumLimit.YMBalabanContinuumLimitPromotion
 
 balabanContinuumLimitPromotionImpossible :
   BalabanContinuumLimitPromotion → ⊥
@@ -527,21 +386,25 @@ balabanContinuumLimitPromotionImpossible =
   ContinuumLimit.ymBalabanContinuumLimitPromotionImpossibleHere
 
 DepthContinuumLimitReceipt : Setω
-DepthContinuumLimitReceipt = DepthContinuum.YMDepthAsContinuumLimitReceipt
+DepthContinuumLimitReceipt =
+  DepthContinuum.YMDepthAsContinuumLimitReceipt
 
 DepthContinuumLimitPromotion : Set
-DepthContinuumLimitPromotion = DepthContinuum.YMDepthContinuumLimitPromotion
+DepthContinuumLimitPromotion =
+  DepthContinuum.YMDepthContinuumLimitPromotion
 
 depthContinuumLimitPromotionImpossible :
   DepthContinuumLimitPromotion → ⊥
 depthContinuumLimitPromotionImpossible =
   DepthContinuum.ymDepthContinuumLimitPromotionImpossibleHere
 
-balabanContinuumLimitReceipt : ContinuumLimit.YMBalabanContinuumLimitReceipt
+balabanContinuumLimitReceipt :
+  BalabanContinuumLimitReceipt
 balabanContinuumLimitReceipt =
   ContinuumLimit.canonicalYMBalabanContinuumLimitReceipt
 
-depthContinuumLimitReceipt : DepthContinuum.YMDepthAsContinuumLimitReceipt
+depthContinuumLimitReceipt :
+  DepthContinuumLimitReceipt
 depthContinuumLimitReceipt =
   DepthContinuum.canonicalYMDepthAsContinuumLimitReceipt
 
@@ -597,21 +460,6 @@ record BalabanRGTOEReceipt : Set where
     stressPairingPhysicalWeld : ProofLevel
     stressCauchyModulusCompiler : ProofLevel
     stressCauchyPhysicalInsertion : ProofLevel
-    stressCauchyCompletionToMarkedStress : ProofLevel
-    stressCompletedMarkedIsClayStress : ProofLevel
-    sameFamilyRecoveryCompiler : ProofLevel
-    sameFamilyRecoveryPhysical : ProofLevel
-    goal1CSourceCutCompiler : ProofLevel
-    goal1CContinuumStressRecoveryCompiler : ProofLevel
-    goal1CMetricPairingCompiler : ProofLevel
-    goal1CLiteralSourceInstantiation : ProofLevel
-    cPhysicalPackageMaxCutCompiler : ProofLevel
-    c0LiteralGaugeInvariantLocalObservableFamily : ProofLevel
-    c1MarkedCurvatureFamily : ProofLevel
-    c2PhysicalRemainderSharedTail : ProofLevel
-    c3OneStepAFRecurrenceIdentification : ProofLevel
-    c4DensityAnchoredStressLane : ProofLevel
-    cPhysicalPackageCount : Nat
     stressHilbertBoundCompiler : ProofLevel
     stressHilbertPhysicalShell : ProofLevel
 
@@ -621,6 +469,14 @@ record BalabanRGTOEReceipt : Set where
     publishedRGContinuumTransferProved : Bool
     publishedRGContinuumTransferProvedIsFalse :
       publishedRGContinuumTransferProved ≡ false
+
+    osWightmanContinuumConstructionProved : Bool
+    osWightmanContinuumConstructionProvedIsFalse :
+      osWightmanContinuumConstructionProved ≡ false
+
+    uniformKPAbsorptionProved : Bool
+    uniformKPAbsorptionProvedIsFalse :
+      uniformKPAbsorptionProved ≡ false
 
     blockSpinTransferProved : Bool
     blockSpinTransferProvedIsFalse :
@@ -633,6 +489,10 @@ record BalabanRGTOEReceipt : Set where
     continuumMassGapProved : Bool
     continuumMassGapProvedIsFalse :
       continuumMassGapProved ≡ false
+
+    terminalPromotion : Bool
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
 
     clayPromotion : Bool
     clayPromotionIsFalse :
@@ -695,36 +555,6 @@ canonicalBalabanRGTOEReceipt =
         balabanStressCauchyModulusCompilerLevel
     ; stressCauchyPhysicalInsertion =
         balabanStressCauchyPhysicalInsertionLevel
-    ; stressCauchyCompletionToMarkedStress =
-        balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
-    ; stressCompletedMarkedIsClayStress =
-        balabanGoal1CCompletedStressIsClayStressLevel
-    ; sameFamilyRecoveryCompiler =
-        balabanSameFamilyRecoveryCompilerLevel
-    ; sameFamilyRecoveryPhysical =
-        balabanSameFamilyRecoveryPhysicalLevel
-    ; goal1CSourceCutCompiler =
-        balabanGoal1CSourceCutCompilerLevel
-    ; goal1CContinuumStressRecoveryCompiler =
-        balabanGoal1CContinuumStressRecoveryCompilerLevel
-    ; goal1CMetricPairingCompiler =
-        balabanGoal1CMetricPairingCompilerLevel
-    ; goal1CLiteralSourceInstantiation =
-        balabanGoal1CLiteralSourceInstantiationLevel
-    ; cPhysicalPackageMaxCutCompiler =
-        balabanCPhysicalPackageMaxCutCompilerLevel
-    ; c0LiteralGaugeInvariantLocalObservableFamily =
-        balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
-    ; c1MarkedCurvatureFamily =
-        balabanC1MarkedCurvatureFamilyLevel
-    ; c2PhysicalRemainderSharedTail =
-        balabanC2PhysicalRemainderSharedTailLevel
-    ; c3OneStepAFRecurrenceIdentification =
-        balabanC3OneStepAFRecurrenceIdentificationLevel
-    ; c4DensityAnchoredStressLane =
-        balabanC4DensityAnchoredStressLaneLevel
-    ; cPhysicalPackageCount =
-        balabanCPhysicalPackageCount
     ; stressHilbertBoundCompiler =
         balabanStressHilbertBoundCompilerLevel
     ; stressHilbertPhysicalShell =
@@ -737,6 +567,14 @@ canonicalBalabanRGTOEReceipt =
         balabanPublishedRGContinuumTransferOpenFlag
     ; publishedRGContinuumTransferProvedIsFalse =
         balabanPublishedRGContinuumTransferStillOpen
+    ; osWightmanContinuumConstructionProved =
+        balabanOSWightmanContinuumConstructionOpenFlag
+    ; osWightmanContinuumConstructionProvedIsFalse =
+        balabanOSWightmanContinuumConstructionStillOpen
+    ; uniformKPAbsorptionProved =
+        balabanRGUniformKPAbsorptionOpenFlag
+    ; uniformKPAbsorptionProvedIsFalse =
+        balabanRGUniformKPAbsorptionStillOpen
     ; blockSpinTransferProved =
         RGFrontier.balabanBlockSpinTransferProved
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -753,6 +591,10 @@ canonicalBalabanRGTOEReceipt =
             RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
     ; continuumMassGapProvedIsFalse =
         balabanRGContinuumMassGapStillOpen
+    ; terminalPromotion =
+        balabanTerminalPromotionOpenFlag
+    ; terminalPromotionIsFalse =
+        balabanTerminalPromotionStillOpen
     ; clayPromotion =
         RGFrontier.clayYangMillsPromoted
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -1666,49 +1508,3 @@ open SUNPushforwardNoBare public using
 import DASHI.Physics.YangMills.YMClayD1PhysicalRemoteCoverageNoGoExact as YMPhysicalPairCoverage
 
 import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as CMP119LiteralSpan
-
--- YM.REAL: root-free Fejer finite product positivity ONLY; continuous Haar remains OPEN.
-import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFejerFinite
-
--- YM.REAL unsafe Bishop trace source lives in separate non-safe regression root.
-
--- YM.REAL: actual finite weighted integration laws; analytic Haar still open.
-import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as BishopFiniteWeightedIntegral
-
--- YM.REAL unsafe Bishop determinant moved out of --safe regression.
-
--- YM.REAL unsafe Bishop SU2 unitarity moved out of --safe regression.
-
--- YM.REAL Bishop Cauchy limit source lives in separate regression root.
-
--- YM.REAL non-safe original Wilson normalization adapter isolated.
-
--- Original 4D Wilson finite second-order Nat arithmetic, not a Haar closure.
-import DASHI.Physics.YangMills.YMClayOriginalWilsonSecondOrderCombinatoricsExact as WilsonSecondOrder
-
--- Exact all-degree finite SU2 moments; analytic Haar/positivity still OPEN.
-import DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact as SU2ExactMoments
-
--- Original Fejer/SU2 all-degree finite character block cancellation.
-import DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact as SU2DyadicFourierPairs
-
--- Source-safe algebraic norm of rational S3 stereographic coordinates.
-import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as S3RationalStereoPolynomial
-
--- Exact positive rational degree-seven S3 orbit moment certificate.
-import DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact as S3RationalDegreeSeven
-
--- Compact exact rational SU2 degree-13 nine-invariant source certificate.
-import DASHI.Physics.YangMills.YMClayRationalS3DegreeThirteenInvariantCertificateExact as RationalS3Degree13
-
--- Exact eleven-invariant rational S3 degree-15 source certificate.
-import DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificateExact as RationalS3Degree15
-
--- Exact original L1 24cell induced rational Wilson T2 coarse density.
-import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as Rational24CellEffectiveRG
-
--- Original rational SU2 B4 sign/permutation norm and orbit-invariant generators.
-import DASHI.Physics.YangMills.YMClayOriginalRationalS3HyperoctahedralGeneratorsExact as OriginalRationalS3B4
-
--- All-degree odd coordinate monomial cancellation on genuine 16 signed rational S3 orbit multiset.
-import DASHI.Physics.YangMills.YMClayRationalS3OddSignOrbitCancellationExact as RationalS3OddOrbit

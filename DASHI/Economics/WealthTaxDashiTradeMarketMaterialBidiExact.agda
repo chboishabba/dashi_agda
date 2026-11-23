@@ -193,18 +193,8 @@ noOtherFundingImpliesSaleProceeds :
   newLoanCash route ≡ 0 →
   grossSaleCash route ≡
     Tax.taxPaidCash (taxExecution route) + executionCashCost route
-noOtherFundingImpliesSaleProceeds route noCash noLoan =
-  subst
-    (λ loan →
-      loan + grossSaleCash route ≡
-        Tax.taxPaidCash (taxExecution route) + executionCashCost route)
-    noLoan
-    (subst
-      (λ cash →
-        cash + newLoanCash route + grossSaleCash route ≡
-          Tax.taxPaidCash (taxExecution route) + executionCashCost route)
-      noCash
-      (fundingBalances route))
+noOtherFundingImpliesSaleProceeds route noCash noLoan
+  rewrite noCash | noLoan = fundingBalances route
 
 taxPaymentForRoute : FundingRoute → Nat
 taxPaymentForRoute route = Tax.taxPaidCash (taxExecution route)
@@ -3198,7 +3188,7 @@ policyIdentityIsAdmittedParetoSymmetry =
     (λ _ → refl)
     (λ _ eligible → eligible)
     (λ _ eligible → eligible)
-    (λ _ _ → refl)
+    (λ _ eligible → eligible)
     "identity-map-preserves-the-two-declared-economic-cost-axes"
 
 -- The rejection is not a claim that S3 is false. It means the specific

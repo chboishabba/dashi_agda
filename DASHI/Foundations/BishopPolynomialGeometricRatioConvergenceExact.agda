@@ -22,10 +22,7 @@ module DASHI.Foundations.BishopPolynomialGeometricRatioConvergenceExact where
 -- This owner compiles that estimate into an actual Bishop convergence theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_)
-import Data.Nat.Properties as NatP
 open import Data.Product.Base using (_,_)
 
 import Real as BishopReal
@@ -53,7 +50,6 @@ polyGeoTerm degree ratio n =
 record PolynomialGeometricNonnegative
     (degree : Nat)
     (ratio : BishopReal.ℝ) : Set₁ where
-  constructor polynomialGeometricNonnegative
   field
     termNonnegative :
       (n : Nat) →
@@ -76,7 +72,6 @@ open PolynomialGeometricNonnegative public
 record PolynomialGeometricRatioTail
     (degree : Nat)
     (ratio : BishopReal.ℝ) : Set₁ where
-  constructor polynomialGeometricRatioTail
   field
     contractionRatio : BishopReal.ℝ
 
@@ -115,14 +110,13 @@ polynomialGeometricSeriesConvergent positivity tail =
     (transitionIndex tail ,
       λ n nAtLeastTransition →
         BishopP.≤-respˡ-≃
-          (BishopP.≃-symm
-            (absTermIsTerm positivity (suc n)))
+          (absTermIsTerm positivity (suc n))
           (BishopP.≤-respʳ-≃
-            (BishopP.*-cong
-              BishopP.≃-refl
+            (BishopP.*-congˡ
+              (contractionRatio tail)
               (BishopP.≃-symm
                 (absTermIsTerm positivity n)))
-            (successorContractive tail n (NatP.m≤n⇒m≤1+n nAtLeastTransition))))
+            (successorContractive tail n nAtLeastTransition)))
 
 ------------------------------------------------------------------------
 -- 5. Quartic and sextic specializations used by E4/E6.
@@ -164,6 +158,7 @@ record PolynomialGeometricRatioBoundary : Set where
     sexticConvergenceCompiledFromSuccessorRatio : Bool
     eventualSuccessorRatioConstructedForEveryZeroLeRBelowOne : Bool
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open PolynomialGeometricRatioBoundary public
 
 canonicalPolynomialGeometricRatioBoundary :

@@ -1,0 +1,18 @@
+{
+  "scope": "hypothetical O_h T1g octupole/curvature selection rules only",
+  "checks_passed": 21,
+  "group_operations": 48,
+  "proper": 24,
+  "improper": 24,
+  "leading_time_even_scalar": "O_x**2 + O_y**2 + O_z**2",
+  "candidate_coefficient": "F=M2+2*xi*(O_x**2+O_y**2+O_z**2)+2*eta*(O_x*B_x+O_y*B_y+O_z*B_z)",
+  "homogeneous_ratio_only": "M2/(M2+2*xi*(O_x**2+O_y**2+O_z**2))",
+  "inverse_xi": "M2*(1/q-1)/(2*(O_x**2+O_y**2+O_z**2))",
+  "F_profile_second_derivative": "4*xi*(u_prime**2+u*u_double_prime)",
+  "opposite_domains_same_quadratic_gravity": true,
+  "fixed_external_B_allows_sign_sensitive_candidate": true,
+  "real_covariant_material_action": false,
+  "measured_xi_eta": false,
+  "real_gravity_field": false,
+  "local_execution": "SymPy exact 21/21 on source-equivalent model; committed blob not separately executed"
+}

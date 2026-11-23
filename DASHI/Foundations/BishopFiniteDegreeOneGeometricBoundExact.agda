@@ -22,9 +22,7 @@ module DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer.Base as ℤ using (+_)
-import Data.Integer.Properties as ℤP
 import Data.Nat.Properties as ℕP
-open import Relation.Binary.PropositionalEquality using (sym; subst₂)
 open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; 1ℚᵘ)
 import Data.Rational.Unnormalised.Properties as ℚP
 open import Data.Sum.Base using (inj₂)
@@ -53,11 +51,7 @@ natRealBelowSuccessor n =
   BishopP.p≤q⇒p⋆≤q⋆
     (NatEmbed.natAsRational n)
     (NatEmbed.natAsRational (suc n))
-    (ℚ.*≤*
-      (subst₂ ℤ._≤_
-        (sym (ℤP.*-identityʳ (+ n)))
-        (sym (ℤP.*-identityʳ (+ (suc n))))
-        (ℤ.+≤+ (ℕP.n≤1+n n))))
+    (ℚ.*≤* (ℤ.+≤+ (ℕP.n≤1+n n)))
 
 record BishopUnitIntervalRatio (q : BishopReal.ℝ) : Set₁ where
   field

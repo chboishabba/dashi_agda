@@ -151,20 +151,12 @@ receiptCareDefect =
 receiptInadequateForVoting :
   Query.AdequateFor assessedTax policySemantics corporateVoteQuery → ⊥
 receiptInadequateForVoting =
-  Query.queryAdequacyDefectBlocksFactorisation
-    {project = assessedTax}
-    {semantics = policySemantics}
-    {query = corporateVoteQuery}
-    receiptVotingDefect
+  Query.queryAdequacyDefectBlocksFactorisation receiptVotingDefect
 
 receiptInadequateForCare :
   Query.AdequateFor assessedTax policySemantics careProvisionQuery → ⊥
 receiptInadequateForCare =
-  Query.queryAdequacyDefectBlocksFactorisation
-    {project = assessedTax}
-    {semantics = policySemantics}
-    {query = careProvisionQuery}
-    receiptCareDefect
+  Query.queryAdequacyDefectBlocksFactorisation receiptCareDefect
 
 ------------------------------------------------------------------------
 -- SOURCE GENEALOGY: ORIGINAL TEXT != REPOSITORY MATHEMATICS.

@@ -7,25 +7,13 @@ skinparam packageStyle rectangle
 left to right direction
 
 package "Canonical theorem owners" {
-  component "R443\nWilson/Gibbs Haar action" as R443
-  component "R444\nPeter-Weyl Wilson square" as R444
-  component "R461\npublished Wilson RP application" as R461
-  component "CMP119 reflection max-cut\nE/R/B certificates stay explicit" as BREF
-  component "CMP119 literal residual weld\nEq.2.23 / E/R/B/V same-object cut" as CWELD
-  component "R534\nprojective measure extension" as R534
-  component "R535\nphysical projective representation" as R535
   component "R485\nGoal-1 representation-safe\nmaximum cut" as R485
   component "R546\n14-family irreducible\nsource frontier" as R546
   component "R558\n7-family critical path" as R558
-  component "BalabanRGTOERegression\ndensity / regular-E / Casimir /\nstress / non-promotion" as BRG
+  component "BalabanRGTOERegression\nmerged density / regular-E /\nCasimir / stress / non-promotion" as BRG
 }
 
 component "R559\nGoal-1 + Pareto\nnormalization owner" as R559
-component "BalabanR559TOEMaxCutExact\nsame-owner weld +\nnon-promotion receipt" as Joint
-component "YMImplementAToDTOEMaxCutExact\nreuse-only A-D receipt" as AD
-component "BalabanRGScaleTransferFrontierReceipt\ndirect promotion-token eliminator" as RGFrontier
-component "Gate4 Round6 ledger\npaid reduction proof levels" as G6L
-component "Gate4 Round6 cutset\n58 exact physical fields" as G58
 
 package "TOE facades" {
   component "EverythingTOESymmetryResolved369" as ROOT
@@ -35,39 +23,14 @@ package "TOE facades" {
 }
 
 component "R559Validation\nidentity + firewall +\n14/7 dispatch checks" as VAL
-component "A-D Validation\nowner identity +\nnon-promotion checks" as ADVAL
 
 R485 --> R559 : exact owner reuse
 R546 --> R559 : canonical SourceFamily
 R558 --> R559 : canonical CriticalFamily
 
-R559 --> Joint : Pareto / max-cut view
-BRG --> Joint : density / regular-E / Casimir / stress
-RGFrontier --> Joint : direct non-promotion theorem
-G6L --> Joint : paid reduction proof level
-G58 --> Joint : exact 58-count + proof posture
-
-R443 --> AD : A Wilson/Gibbs compiler
-R444 --> AD : A Peter-Weyl square
-R461 --> AD : A published Wilson RP
-BREF --> AD : B E/R/B reflection cut
-CWELD --> AD : C residual weld
-R534 --> AD : D projective extension
-R535 --> AD : D physical representation
-Joint --> AD : 58-gap + non-promotion boundary
-
 R559 --> ROOT : public normalized surface
 R559 --> UNI : public normalized surface
 R559 --> PHY : public normalized surface
-
-Joint --> ROOT : joint receipt + eliminator
-Joint --> UNI : joint receipt + eliminator
-Joint --> PHY : joint receipt + eliminator
-Joint --> UE : aggregate receipt + eliminator
-
-AD --> ROOT : A-D receipt + firewall
-AD --> UNI : A-D receipt + firewall
-AD --> PHY : A-D receipt + firewall
 
 BRG --> ROOT : merged Balaban RG surface
 BRG --> UNI : merged Balaban RG surface
@@ -77,36 +40,19 @@ ROOT --> VAL : facade agreement
 UNI --> VAL : facade agreement
 PHY --> VAL : facade agreement
 VAL --> UE : focused regression import
-
-ROOT --> ADVAL : A-D facade agreement
-UNI --> ADVAL : A-D facade agreement
-PHY --> ADVAL : A-D facade agreement
-ADVAL --> UE : validated A-D aggregate
 PHY --> UE : unified physics graph
 
 note bottom of R559
 No theorem ownership transfer.
 Conditional stays conditional.
-Finite or represented does not imply continuum.
+Finite/represented does not imply continuum.
 Clay completion remains false.
 No ESD or digital_esd mutation.
 end note
 
-note bottom of G58
-The cutset definition is machine checked.
-The inhabitants remain conditional.
-The A-D receipt does not discharge a field.
-end note
-
-note bottom of AD
-A-D reuses existing owners.
-Localization does not imply RP.
-Projective compilers do not promote continuum YM.
-end note
-
 note bottom of BRG
 Tadeusz Balaban and existing
-compact-Lie and Casimir source owners
+compact-Lie/Casimir source owners
 retain attribution.
 end note
 

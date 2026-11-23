@@ -4,7 +4,7 @@ from ksw668_f8_ternary_channel_drift import inspect
 class TernaryChannelSignedErrorBudget(unittest.TestCase):
  def setUp(self):
   def row(H,E4,E5):
-   return dict(raw_mode_values=H,
+   return dict(intrinsic_4D_weyl_spatial_operator='full_reconstructed_Delta3',raw_mode_values=H,
      retarded_TT_yy_scaled_by_eps4=sum(H),far_mode_values=[.1,.2,.3],
      receiver_mode_intrinsic_4D_electric_Weyl=E4,
      receiver_intrinsic_4D_electric_Weyl=sum(E4),

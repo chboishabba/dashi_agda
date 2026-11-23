@@ -54,11 +54,11 @@ centralSignChangesMode09
 centralSignChangesMode09
   (Bits.provenance-bits Bits.mode18IsIdentity Bits.mode45IsOrderThree) ()
 
--- No one of the four defect-compatible charts can make central-sign
--- multiplication act trivially on every Mode5 stratum.  But Completion10
--- BinaryPhase is trivial on the Mode5 quotient, because complement preserves
--- Mode5.  Therefore central -1 cannot source-select BinaryPhase at this quotient
--- level.
+/-- No one of the four defect-compatible charts can make central-sign
+multiplication act trivially on every Mode5 stratum.  But Completion10
+BinaryPhase is trivial on the Mode5 quotient, because complement preserves
+Mode5.  Therefore central -1 cannot source-select BinaryPhase at this quotient
+level. -/
 noCandidateChartIntertwinesModePreservingPhaseWithCentralSign :
   (bits : Bits.ProvenanceBits) →
   ((mode : Completion.ComplementMode5) →
@@ -68,7 +68,7 @@ noCandidateChartIntertwinesModePreservingPhaseWithCentralSign :
 noCandidateChartIntertwinesModePreservingPhaseWithCentralSign bits h =
   centralSignChangesMode09 bits (h Completion.mode09)
 
--- Compatibility name for the canonical frontier.
+/-- Compatibility name for the canonical frontier. -/
 completionModePreservingPhaseIsNotCentralSignOnStrata :
   (bits : Bits.ProvenanceBits) →
   ((mode : Completion.ComplementMode5) →

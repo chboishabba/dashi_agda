@@ -7,7 +7,6 @@ module DASHI.Core.FutureObservationLanguageQuotientExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using (sym; subst)
-open import Agda.Primitive using (Level)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.TypedDependencyCore as Dependency

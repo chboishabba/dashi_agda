@@ -191,11 +191,9 @@ base369DialecticRoundTrip state =
 dialecticBase369RoundTrip :
   (state : Dialectic.State9) →
   base369ToDialectic (dialecticToBase369 state) ≡ state
-dialecticBase369RoundTrip state =
-  trans
-    (cong nineTritsToDialectic
-      (Aggregate.flattenRebuildRoundTrip (dialecticToNineTrits state)))
-    (dialecticNineRoundTrip state)
+dialecticBase369RoundTrip state
+  rewrite Aggregate.flattenRebuildRoundTrip (dialecticToNineTrits state)
+        | dialecticNineRoundTrip state = refl
 
 epistemic9ToBase369 : Epistemic9 → Cube.OneRoundInteractionState
 epistemic9ToBase369 state =
@@ -208,11 +206,9 @@ base369ToEpistemic9 state =
 epistemic9Base369RoundTrip :
   (state : Epistemic9) →
   base369ToEpistemic9 (epistemic9ToBase369 state) ≡ state
-epistemic9Base369RoundTrip state =
-  trans
-    (cong nineTritsToEpistemic9
-      (Aggregate.flattenRebuildRoundTrip (epistemic9ToNineTrits state)))
-    (epistemic9RoundTrip state)
+epistemic9Base369RoundTrip state
+  rewrite Aggregate.flattenRebuildRoundTrip (epistemic9ToNineTrits state)
+        | epistemic9RoundTrip state = refl
 
 base369Epistemic9RoundTrip :
   (state : Cube.OneRoundInteractionState) →

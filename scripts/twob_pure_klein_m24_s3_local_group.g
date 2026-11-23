@@ -14,9 +14,6 @@
 if LoadPackage("atlasrep") <> true then
   Error("AtlasRep is required");
 fi;
-if IsDirectoryPath(Concatenation(UserHomeExpand("~"), "/.cache/atlasrep/datagens")) then
-  SetUserPreference("AtlasRep", "AtlasRepDataDirectory", Concatenation(UserHomeExpand("~"), "/.cache/atlasrep/"));
-fi;
 
 name := "2^(2+11+22).(M24xS3)";
 expectedOrder := 50472333605150392320;
@@ -154,12 +151,7 @@ AppendTo(out,"  \"s3_factor_kernel_order\": ",String(Size(kernelM24Projection)),
 AppendTo(out,"  \"m24_factor_kernel_order\": ",String(Size(kernelS3Projection)),",\n");
 AppendTo(out,"  \"pure_c3_order\": ",String(Order(pureC3)),",\n");
 AppendTo(out,"  \"pure_c3_three_block_orbit_size\": ",String(Length(pureC3Orbit)),",\n");
-AppendTo(out,"  \"pure_c3_orbit_points\": ");
-PrintNatList(out,pureC3Orbit);
-AppendTo(out,",\n");
-AppendTo(out,"  \"pure_c3_cycle\": \"a -> b -> c -> a\",\n");
 AppendTo(out,"  \"pure_c3_trivial_on_m24_factor\": true,\n");
-AppendTo(out,"  \"pure_c3_intertwines_m24\": true,\n");
 AppendTo(out,"  \"m24_factor_isomorphic\": true,\n");
 AppendTo(out,"  \"s3_factor_isomorphic\": true,\n");
 AppendTo(out,"  \"actual_2b_tate_action_identified\": false,\n");

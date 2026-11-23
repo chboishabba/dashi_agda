@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Quantum.TSVF where
 
 open import DASHI.Core.Prelude

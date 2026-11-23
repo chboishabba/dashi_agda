@@ -20,98 +20,68 @@ data ⊥ : Set where
 -- unless a constructorless authority token is supplied from outside.
 
 data DifferentialGeometryParityStatus : Set where
-  differentialGeometryTargetsOnlyNoPromotion :
-    DifferentialGeometryParityStatus
+  differentialGeometryTargetsOnlyNoPromotion : DifferentialGeometryParityStatus
 
 data DifferentialGeometryConcept : Set where
-  manifoldConcept :
-    DifferentialGeometryConcept
+  manifoldConcept : DifferentialGeometryConcept
 
-  smoothMapConcept :
-    DifferentialGeometryConcept
+  smoothMapConcept : DifferentialGeometryConcept
 
-  tangentBundleConcept :
-    DifferentialGeometryConcept
+  tangentBundleConcept : DifferentialGeometryConcept
 
-  cotangentBundleConcept :
-    DifferentialGeometryConcept
+  cotangentBundleConcept : DifferentialGeometryConcept
 
-  differentialFormConcept :
-    DifferentialGeometryConcept
+  differentialFormConcept : DifferentialGeometryConcept
 
-  vectorFieldConcept :
-    DifferentialGeometryConcept
+  vectorFieldConcept : DifferentialGeometryConcept
 
-  metricConcept :
-    DifferentialGeometryConcept
+  metricConcept : DifferentialGeometryConcept
 
-  connectionConcept :
-    DifferentialGeometryConcept
+  connectionConcept : DifferentialGeometryConcept
 
-  curvatureConcept :
-    DifferentialGeometryConcept
+  curvatureConcept : DifferentialGeometryConcept
 
 data DifferentialGeometryIdentityTarget : Set where
-  exteriorDerivativeSquaresToZeroTarget :
-    DifferentialGeometryIdentityTarget
+  exteriorDerivativeSquaresToZeroTarget : DifferentialGeometryIdentityTarget
 
-  cartanFormulaTarget :
-    DifferentialGeometryIdentityTarget
+  cartanFormulaTarget : DifferentialGeometryIdentityTarget
 
-  stokesTheoremTarget :
-    DifferentialGeometryIdentityTarget
+  stokesTheoremTarget : DifferentialGeometryIdentityTarget
 
-  poincareLemmaTarget :
-    DifferentialGeometryIdentityTarget
+  poincareLemmaTarget : DifferentialGeometryIdentityTarget
 
-  bianchiIdentityTarget :
-    DifferentialGeometryIdentityTarget
+  bianchiIdentityTarget : DifferentialGeometryIdentityTarget
 
 data DifferentialGeometryOpenObligation : Set where
-  missingManifoldAdapter :
-    DifferentialGeometryOpenObligation
+  missingManifoldAdapter : DifferentialGeometryOpenObligation
 
-  missingSmoothMapAdapter :
-    DifferentialGeometryOpenObligation
+  missingSmoothMapAdapter : DifferentialGeometryOpenObligation
 
-  missingTangentBundleAdapter :
-    DifferentialGeometryOpenObligation
+  missingTangentBundleAdapter : DifferentialGeometryOpenObligation
 
-  missingCotangentBundleAdapter :
-    DifferentialGeometryOpenObligation
+  missingCotangentBundleAdapter : DifferentialGeometryOpenObligation
 
-  missingDifferentialFormAdapter :
-    DifferentialGeometryOpenObligation
+  missingDifferentialFormAdapter : DifferentialGeometryOpenObligation
 
-  missingVectorFieldAdapter :
-    DifferentialGeometryOpenObligation
+  missingVectorFieldAdapter : DifferentialGeometryOpenObligation
 
-  missingMetricAdapter :
-    DifferentialGeometryOpenObligation
+  missingMetricAdapter : DifferentialGeometryOpenObligation
 
-  missingConnectionAdapter :
-    DifferentialGeometryOpenObligation
+  missingConnectionAdapter : DifferentialGeometryOpenObligation
 
-  missingCurvatureAdapter :
-    DifferentialGeometryOpenObligation
+  missingCurvatureAdapter : DifferentialGeometryOpenObligation
 
-  missingExteriorDerivativeSquaresToZeroProof :
-    DifferentialGeometryOpenObligation
+  missingExteriorDerivativeSquaresToZeroProof : DifferentialGeometryOpenObligation
 
-  missingCartanFormulaProof :
-    DifferentialGeometryOpenObligation
+  missingCartanFormulaProof : DifferentialGeometryOpenObligation
 
-  missingStokesTheoremProof :
-    DifferentialGeometryOpenObligation
+  missingStokesTheoremProof : DifferentialGeometryOpenObligation
 
-  missingPoincareLemmaProof :
-    DifferentialGeometryOpenObligation
+  missingPoincareLemmaProof : DifferentialGeometryOpenObligation
 
-  missingBianchiIdentityProof :
-    DifferentialGeometryOpenObligation
+  missingBianchiIdentityProof : DifferentialGeometryOpenObligation
 
-  missingPhysLeanParityAuthority :
-    DifferentialGeometryOpenObligation
+  missingPhysLeanParityAuthority : DifferentialGeometryOpenObligation
 
 canonicalDifferentialGeometryConcepts :
   List DifferentialGeometryConcept

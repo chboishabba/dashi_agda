@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-23",
+  "original_sources": [
+    {
+      "authors": "R. O. Becker",
+      "year": 1972,
+      "doi": "10.1038/235109a0",
+      "type": "rat partial limb DC intervention"
+    },
+    {
+      "authors": "R. O. Becker and J. A. Spadaro",
+      "year": 1972,
+      "pmcid": "PMC1806700",
+      "type": "original mammal electrical stimulation"
+    },
+    {
+      "authors": "N. J. Murugan et al.",
+      "year": 2022,
+      "doi": "10.1126/sciadv.abj2164",
+      "type": "adult frog wearable BioDome multidrug experiment"
+    },
+    {
+      "authors": "M. Levin",
+      "year": 2021,
+      "doi": "10.1016/j.cell.2021.02.034",
+      "type": "mechanistic bioelectric review"
+    },
+    {
+      "organization": "DARPA",
+      "year": 2019,
+      "id": "HR001119S0027",
+      "type": "BETR proposed closed-loop bioelectronics programme"
+    }
+  ],
+  "existing_repo_owners": [
+    "DASHI/Biology/Physical/SIBioelectricNetworkAdapterExact.agda",
+    "DASHI/Biology/Physical/ElectrochemicalMembranePowerExact.agda",
+    "DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda",
+    "DASHI/Biology/Morphogenesis/RegenerativeRepairBoundary.agda"
+  ],
+  "new_files": [
+    "scripts/radiobio_p0c_regenerative_source_controls_sympy.py",
+    "Docs/research/RadioBioP0CBeckerLevinBETRRegenerationSourceWeld20261123.md"
+  ],
+  "local_execution": {
+    "status": "PASS",
+    "sympy": "1.14.0",
+    "exact_committed_blob_run": false,
+    "equivalent_local_symbolic_tests_passed": true,
+    "three_arm_rank": 3,
+    "four_arm_rank": 4,
+    "parameters": 4,
+    "three_arm_unidentifiable_direction": [
+      "0",
+      "0",
+      "1",
+      "-1"
+    ],
+    "membrane_midpoint_power_residual": "0",
+    "unforced_decay_residual": "0",
+    "instantaneous_voltage_only_rank": 1,
+    "voltage_and_morphology_rank": 2
+  },
+  "scope": "EXACT_SYNTHETIC_STRUCTURAL_TEST_NOT_ANIMAL_DATA_REPLAY",
+  "human_regeneration_clinically_validated": false,
+  "no_original_animal_data_replayed": true,
+  "github_ci_used": false,
+  "agda_kernel_tested": false,
+  "open": "Original experimental treatment and animal outcomes, BETR actual awards/device outcomes, source-calibrated tissue voltage/control, prospective human trials"
+}

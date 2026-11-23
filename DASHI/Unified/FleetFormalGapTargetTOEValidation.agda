@@ -79,9 +79,12 @@ unifierContradictionGapsRemainSeparate :
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
 
-toeFleetPlanningBoundaryMatchesOwner :
-  TOE.toeFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
-toeFleetPlanningBoundaryMatchesOwner = refl
+-- Verify the selected planning coordinates without treating their values
+-- as scientific or formal proof authority.
+
+fleetTargetIsExactly58 :
+  Fleet.unformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetTargetIsExactly58 = refl
 
 previouslyDischarged584RemainSeparate :
   Fleet.dischargedCoreKnowledgeFibres Fleet.canonicalFleetFormalGapTargetReceipt ≡ 584
@@ -191,13 +194,13 @@ unifierFleetPlanningTextStillNotResidual =
   Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
 
 toeSpectralLabelStillNotOwnerIdentity :
-  Fleet.spectralLabelIdentifiesTheoremOwner
+  Fleet.spectralLabelsIdentifyTheoremOwners
     Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeSpectralLabelStillNotOwnerIdentity =
   TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
 
 unifierSpectralLabelStillNotOwnerIdentity :
-  Fleet.spectralLabelIdentifiesTheoremOwner
+  Fleet.spectralLabelsIdentifyTheoremOwners
     Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierSpectralLabelStillNotOwnerIdentity =
   Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
@@ -263,31 +266,57 @@ toeResidualFieldStillNotPromoted =
 
 
 ------------------------------------------------------------------------
--- Named-gap dispatch must fail closed until the external producer supplies
--- the identity of each member of the counted 58-gap class.
+-- Fleet R5 ordinal-cut root regression.
 ------------------------------------------------------------------------
 
-fleetNamedManifestStillOpen :
-  Fleet.namedFormalGapManifestAvailable ≡ false
-fleetNamedManifestStillOpen =
-  Fleet.namedFormalGapManifestAvailableIsFalse
+toeFleetOrdinalCutMatchesOwner :
+  TOE.toeFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+toeFleetOrdinalCutMatchesOwner = refl
 
-fleetDispatchRequiresNamedManifest :
-  Fleet.dispatchRequiresNamedFormalGapManifest ≡ true
-fleetDispatchRequiresNamedManifest =
-  Fleet.dispatchRequiresNamedFormalGapManifestIsTrue
+unifierFleetOrdinalCutMatchesOwner :
+  Unifier.unifierFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+unifierFleetOrdinalCutMatchesOwner = refl
 
-fleetCountDoesNotIdentifyGapObjects :
-  Fleet.externalGapCountIdentifiesIndividualGaps ≡ false
-fleetCountDoesNotIdentifyGapObjects =
-  Fleet.externalGapCountIdentifiesIndividualGapsIsFalse
+toeFleetFormalGapOrdinalCountStill58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountStill58 =
+  TOE.toeFleetFormalGapOrdinalCountIs58
 
-fleetDischargedFibresNotDispatchEligible :
-  Fleet.dischargedFibresEligibleForGapDispatch ≡ false
-fleetDischargedFibresNotDispatchEligible =
-  Fleet.dischargedFibresEligibleForGapDispatchIsFalse
+unifierFleetFormalGapOrdinalCountStill58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+unifierFleetFormalGapOrdinalCountStill58 =
+  Unifier.unifierFleetFormalGapOrdinalCountIs58
 
-fleetContradictionGapsNotDispatchEligible :
-  Fleet.contradictionGapsEligibleForFormalGapDispatch ≡ false
-fleetContradictionGapsNotDispatchEligible =
-  Fleet.contradictionGapsEligibleForFormalGapDispatchIsFalse
+toeFleetOrdinalStillCarriesNoPersistedIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalStillCarriesNoPersistedIdentity =
+  TOE.toeFleetOrdinalRowIdentityStillUnattached
+
+unifierFleetOrdinalStillCarriesNoPersistedIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+unifierFleetOrdinalStillCarriesNoPersistedIdentity =
+  Unifier.unifierFleetOrdinalRowIdentityStillUnattached
+
+toeFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityStillDoesNotCreateIdentity =
+  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity =
+  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
+
+toeFleetPlanningTextStillNotFormalResidual :
+  Fleet.externalPlanningTextCreatesFormalResidual
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPlanningTextStillNotFormalResidual =
+  TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
+
+unifierFleetPlanningTextStillNotFormalResidual :
+  Fleet.externalPlanningTextCreatesFormalResidual
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetPlanningTextStillNotFormalResidual =
+  Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual

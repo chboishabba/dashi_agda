@@ -186,11 +186,7 @@ taxDueNotAdequateToInferActualCollection :
   Query.AdequateFor
     assessedLiability fiscalSemantics actualCollection → ⊥
 taxDueNotAdequateToInferActualCollection =
-  Query.queryAdequacyDefectBlocksFactorisation
-    {project = assessedLiability}
-    {semantics = fiscalSemantics}
-    {query = actualCollection}
-    actualCollectionDefect
+  Query.queryAdequacyDefectBlocksFactorisation actualCollectionDefect
 
 ------------------------------------------------------------------------
 -- In-kind transfer and dual-class votes: loss of an ORDINARY share block

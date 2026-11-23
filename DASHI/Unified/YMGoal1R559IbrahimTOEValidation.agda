@@ -20,7 +20,7 @@ toeR559ReceiptMatchesOwner :
 toeR559ReceiptMatchesOwner = refl
 
 unifierR559ReceiptMatchesOwner :
-  Unifier.unifiedBalabanR559MaxCutReceipt
+  Unifier.unifierBalabanR559MaxCutReceipt
   ≡ YM.canonicalBalabanR559TOEMaxCutReceipt
 unifierR559ReceiptMatchesOwner = refl
 
@@ -92,7 +92,7 @@ toeScaleTransferPromotionStillImpossible =
 unifierScaleTransferPromotionStillImpossible :
   YM.ScaleTransferPromotion → ⊥
 unifierScaleTransferPromotionStillImpossible =
-  Unifier.unifiedBalabanScaleTransferNonPromotion
+  Unifier.unifierBalabanScaleTransferNonPromotion
 
 toeSearchPriorityStillNotProof :
   Ibrahim.SearchPriorityCreatesProof → ⊥

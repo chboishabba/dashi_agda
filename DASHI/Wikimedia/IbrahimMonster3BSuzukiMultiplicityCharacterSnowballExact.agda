@@ -262,9 +262,9 @@ atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity :
   AtlasRepModularModelCreatesComplexMonsterMultiplicity → ⊥
 atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity ()
 
-sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner :
+sourceFormulaDoesNotCreateSameObjectIntertwiner :
   SourceTensorFormulaCreatesSameObjectMonsterIntertwiner → ⊥
-sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner ()
+sourceFormulaDoesNotCreateSameObjectIntertwiner ()
 
 ------------------------------------------------------------------------
 -- Highest-alpha frontier.

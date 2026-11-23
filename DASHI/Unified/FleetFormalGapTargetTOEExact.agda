@@ -6,13 +6,24 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
 import DASHI.Interop.PNFResidualFieldInvariants as Residual
+import DASHI.Interop.SublinearTopicConductorCostExact as Conductor
+import DASHI.Interop.WorldEigenResidualStratification as Stratification
+import DASHI.Interop.HierarchicalSpectralParetoExact as Hierarchical
+import DASHI.Interop.SublinearTopicConductorCostExact as Conductor
+import DASHI.Interop.CombinatorialMaxCutPhysicsAlignmentExact as MaxCut
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Unified.BalabanRGTOERegression as BalabanRG
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
+import DASHI.Quantum.QuantumMereologyExact as QM
+import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
+import DASHI.Core.RelationalTrialecticDisambiguationExact as Disambiguation
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -47,8 +58,11 @@ record FleetFormalGapTargetReceipt : Set where
     dischargedFibresRemainDischarged : Bool
     contradictionGapsRemainSeparate : Bool
     eigenvalueMagnitudeCreatesProofAuthority : Bool
+    spectralLabelsIdentifyTheoremOwners : Bool
     externalCountCreatesFormalProof : Bool
     externalPlanningTextCreatesFormalResidual : Bool
+    metaIntrospectorReferenceRepos : String
+    metaIntrospectorProofBorrowed : Bool
     metaIntrospectorAttributionPreserved : Bool
     esdSurfaceEdited : Bool
 
@@ -75,14 +89,16 @@ canonicalFleetFormalGapTargetReceipt =
     false
     false
     false
+    false
+    "meta-introspector/zkperf; meta-introspector/zos-server; meta-introspector/erdfa-py; meta-introspector/aristotle-cli-rs"
+    false
     true
     false
 
 ------------------------------------------------------------------------
--- Exact canonical receipt facts.
---
--- These facts validate the DASHI receipt value only.
--- They do not validate the external spectral producer.
+-- Exact values of the recorded external planning receipt.
+-- These equalities validate this DASHI wrapper only.
+-- They do not validate the external producer run.
 ------------------------------------------------------------------------
 
 fleetRecordedDischargedCountIs584 :
@@ -113,17 +129,55 @@ fleetKeepsContradictionsSeparate :
   contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt ≡ true
 fleetKeepsContradictionsSeparate = refl
 
-fleetEigenvalueMagnitudeHasNoProofAuthority :
-  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt ≡ false
-fleetEigenvalueMagnitudeHasNoProofAuthority = refl
+------------------------------------------------------------------------
+-- Existing discharged motif owners.
+--
+-- These references prevent spectral planning labels from becoming new theorem
+-- owners. They do not assert that the external eigenvectors identify these
+-- modules by theorem.
+------------------------------------------------------------------------
 
-fleetExternalCountHasNoFormalProofAuthority :
-  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt ≡ false
-fleetExternalCountHasNoFormalProofAuthority = refl
+BalabanDischargedOwnerReceipt : Set
+BalabanDischargedOwnerReceipt =
+  BalabanRG.BalabanRGTOEReceipt
 
-fleetExternalPlanningTextHasNoFormalResidualAuthority :
-  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt ≡ false
-fleetExternalPlanningTextHasNoFormalResidualAuthority = refl
+fleetBalabanDischargedOwnerReceipt :
+  BalabanDischargedOwnerReceipt
+fleetBalabanDischargedOwnerReceipt =
+  BalabanRG.canonicalBalabanRGTOEReceipt
+
+fleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+fleetNSPhysicalM2SummationCompilerStatus =
+  NS.bSamplewiseM2SummationCompilerClosed
+
+fleetNSM2ToR568CompilerStatus :
+  Bool
+fleetNSM2ToR568CompilerStatus =
+  NS.bM2ToR568CompilerClosed
+
+QuantumMereologyDischargedBoundary : Set
+QuantumMereologyDischargedBoundary =
+  QM.QuantumMereologyBoundary
+
+fleetQuantumMereologyBoundary :
+  QuantumMereologyDischargedBoundary
+fleetQuantumMereologyBoundary =
+  QM.canonicalQuantumMereologyBoundary
+
+QuantumMereologyAttributionBoundary : Set
+QuantumMereologyAttributionBoundary =
+  QMSources.QuantumMereologyAttributionBoundary
+
+fleetQuantumMereologyAttributionBoundary :
+  QuantumMereologyAttributionBoundary
+fleetQuantumMereologyAttributionBoundary =
+  QMSources.canonicalQuantumMereologyAttributionBoundary
+
+fleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  spectralLabelsIdentifyTheoremOwners canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetSpectralLabelDoesNotIdentifyTheoremOwner = refl
 
 ------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
@@ -143,6 +197,90 @@ fleetResidualInvariantReceipt :
   Residual.PNFResidualFieldInvariantReceipt
 fleetResidualInvariantReceipt =
   Residual.canonicalPNFResidualFieldInvariantReceipt
+
+
+------------------------------------------------------------------------
+-- AO fleet discriminator / full-concurrency / combinatorial Max Cut surface.
+------------------------------------------------------------------------
+
+fleetAOSpectralStratificationBoundary :
+  Stratification.AOSpectralStratificationBoundary
+fleetAOSpectralStratificationBoundary =
+  Stratification.canonicalAOSpectralStratificationBoundary
+
+fleetTokenNoiseDoesNotCreateTopic :
+  Stratification.tokenNoiseCanCreateTopic
+    fleetAOSpectralStratificationBoundary
+  ≡ false
+fleetTokenNoiseDoesNotCreateTopic =
+  Stratification.tokenNoiseDoesNotCreateTopic
+
+fleetHierarchicalSpectralParetoBoundary :
+  Hierarchical.HierarchicalSpectralParetoBoundary
+fleetHierarchicalSpectralParetoBoundary =
+  Hierarchical.canonicalHierarchicalSpectralParetoBoundary
+
+fleetParallelDispatchRequiresNoTypedMeet :
+  Hierarchical.parallelDispatchRequiresNoTypedMeet
+    fleetHierarchicalSpectralParetoBoundary
+  ≡ true
+fleetParallelDispatchRequiresNoTypedMeet =
+  Hierarchical.parallelDispatchRequiresNoTypedMeetIsTrue
+    fleetHierarchicalSpectralParetoBoundary
+
+fleetSublinearConductorBoundary :
+  Conductor.DynamicConductorBoundary
+fleetSublinearConductorBoundary =
+  Conductor.canonicalDynamicConductorBoundary
+
+fleetSublinearCapacityIsBudget :
+  Conductor.workerCapacityIsBudgetNotModeSelector fleetSublinearConductorBoundary
+  ≡ true
+fleetSublinearCapacityIsBudget =
+  Conductor.capacityDoesNotSelectMode
+fleetTwentyWorkerConcurrencyBoundary :
+  Conductor.TwentyWorkerConcurrencyBoundary
+fleetTwentyWorkerConcurrencyBoundary =
+  Conductor.canonicalTwentyWorkerConcurrencyBoundary
+
+fleetWorkerCapacityIsTwenty :
+  Conductor.capacity fleetTwentyWorkerConcurrencyBoundary ≡ 20
+fleetWorkerCapacityIsTwenty =
+  Conductor.capacityIsTwenty fleetTwentyWorkerConcurrencyBoundary
+
+fleetSerialModuloEightIsNotFullConcurrency :
+  Conductor.serialModuloEightIsAcceptedAsTwentyWorkerSchedule
+    fleetTwentyWorkerConcurrencyBoundary
+  ≡ false
+fleetSerialModuloEightIsNotFullConcurrency =
+  Conductor.serialModuloEightIsAcceptedAsTwentyWorkerScheduleIsFalse
+    fleetTwentyWorkerConcurrencyBoundary
+
+fleetCombinatorialMaxCutPhysicsBoundary :
+  MaxCut.CombinatorialMaxCutPhysicsBoundary
+fleetCombinatorialMaxCutPhysicsBoundary =
+  MaxCut.canonicalCombinatorialMaxCutPhysicsBoundary
+
+fleetMaxCutDoesNotPromoteYangMills :
+  MaxCut.graphCutCreatesYangMillsEquation
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetMaxCutDoesNotPromoteYangMills =
+  MaxCut.maxCutDoesNotPromoteYangMills
+
+fleetMaxCutDoesNotPromoteNavierStokes :
+  MaxCut.graphCutCreatesNavierStokesEstimate
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetMaxCutDoesNotPromoteNavierStokes =
+  MaxCut.maxCutDoesNotPromoteNavierStokes
+
+fleetSDPReceiptDoesNotCreatePhysicsTheorem :
+  MaxCut.sdpReceiptCreatesPhysicsTheorem
+    fleetCombinatorialMaxCutPhysicsBoundary
+  ≡ false
+fleetSDPReceiptDoesNotCreatePhysicsTheorem =
+  MaxCut.sdpReceiptDoesNotCreatePhysicsTheorem
 
 fleetPlanningBoundary :
   Planning.PNFPlanningAdapterBoundary
@@ -174,32 +312,67 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
 --
--- Use canonical receipt facts. Do not manufacture proof by empty datatype.
+-- These are facts about the canonical receipt fields. They are not vacuous
+-- empty-type eliminators and they do not convert external planning data into
+-- theorem authority.
 ------------------------------------------------------------------------
 
 fleetEigenPriorityDoesNotCreateProof :
   eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
   ≡ false
-fleetEigenPriorityDoesNotCreateProof =
-  fleetEigenvalueMagnitudeHasNoProofAuthority
+fleetEigenPriorityDoesNotCreateProof = refl
 
 fleetExternalCountDoesNotCreateFormalDischarge :
   externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
   ≡ false
-fleetExternalCountDoesNotCreateFormalDischarge =
-  fleetExternalCountHasNoFormalProofAuthority
+fleetExternalCountDoesNotCreateFormalDischarge = refl
 
 fleetDischargedFibresRemainOutOfTarget :
   dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
   ≡ true
-fleetDischargedFibresRemainOutOfTarget =
-  fleetDoesNotRetargetDischargedFibres
+fleetDischargedFibresRemainOutOfTarget = refl
 
 fleetContradictionGapsRemainSeparate :
   contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
   ≡ true
-fleetContradictionGapsRemainSeparate =
-  fleetKeepsContradictionsSeparate
+fleetContradictionGapsRemainSeparate = refl
+
+fleetExternalPlanningTextDoesNotCreateFormalResidual :
+  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
+
+------------------------------------------------------------------------
+-- Typed non-promotion gates for the fleet planning frontier.
+--
+-- The Boolean receipt fields remain audit facts.
+-- These constructorless types give consumers exact fail-closed gates.
+-- They do not validate the external producer run.
+------------------------------------------------------------------------
+
+data FleetEigenPriorityCreatesProof : Set where
+
+data FleetExternalCountCreatesFormalDischarge : Set where
+
+data FleetDischargedFibreRetargetPermission : Set where
+
+data FleetContradictionGapReclassificationPermission : Set where
+
+fleetEigenPriorityPromotionImpossible :
+  FleetEigenPriorityCreatesProof → ⊥
+fleetEigenPriorityPromotionImpossible ()
+
+fleetExternalCountPromotionImpossible :
+  FleetExternalCountCreatesFormalDischarge → ⊥
+fleetExternalCountPromotionImpossible ()
+
+fleetDischargedFibresCannotBeRetargetedByThisBoundary :
+  FleetDischargedFibreRetargetPermission → ⊥
+fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+
+fleetContradictionsCannotBeRelabelledAsFormalGaps :
+  FleetContradictionGapReclassificationPermission → ⊥
+fleetContradictionsCannotBeRelabelledAsFormalGaps ()
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
@@ -288,76 +461,99 @@ fleetTextFallbackAuthorityStillFalse =
 
 
 ------------------------------------------------------------------------
--- Named Fleet-58 dispatch boundary.
+-- Exact Fleet R5 ordinal cut.
 --
--- The external producer pays the count class. It does not provide a named
--- 58-row manifest on the verified source surface. Count equality is not
--- object identity. Dispatch therefore remains closed.
+-- The carrier ranges over exactly the 58 reported unformalised gaps.
+-- It carries no persisted row name or theorem authority.
+-- The discharged 584 and contradiction 44 remain separate carriers.
 ------------------------------------------------------------------------
 
-record FleetFormalGapDispatchBoundary : Set where
-  constructor fleet-formal-gap-dispatch-boundary
+FleetDischargedOrdinal : Set
+FleetDischargedOrdinal = Fin 584
+
+FleetContradictionOrdinal : Set
+FleetContradictionOrdinal = Fin 44
+
+FleetFormalGapOrdinal : Set
+FleetFormalGapOrdinal = Fin 58
+
+fleetFormalGapOrdinalCount : Nat
+fleetFormalGapOrdinalCount =
+  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt
+
+fleetFormalGapOrdinalCountIs58 :
+  fleetFormalGapOrdinalCount ≡ 58
+fleetFormalGapOrdinalCountIs58 =
+  fleetRecordedUnformalisedGapCountIs58
+
+fleetDischargedOrdinalCount : Nat
+fleetDischargedOrdinalCount =
+  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt
+
+fleetDischargedOrdinalCountIs584 :
+  fleetDischargedOrdinalCount ≡ 584
+fleetDischargedOrdinalCountIs584 =
+  fleetRecordedDischargedCountIs584
+
+fleetContradictionOrdinalCount : Nat
+fleetContradictionOrdinalCount =
+  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt
+
+fleetContradictionOrdinalCountIs44 :
+  fleetContradictionOrdinalCount ≡ 44
+fleetContradictionOrdinalCountIs44 =
+  fleetRecordedContradictionCountIs44
+
+fleetOrdinalCarriesPersistedRowIdentity : Bool
+fleetOrdinalCarriesPersistedRowIdentity = false
+
+fleetOrdinalCarriesPersistedRowIdentityIsFalse :
+  fleetOrdinalCarriesPersistedRowIdentity ≡ false
+fleetOrdinalCarriesPersistedRowIdentityIsFalse = refl
+
+FleetSharedCardinalityCreatesIdentity : Set
+FleetSharedCardinalityCreatesIdentity =
+  Disambiguation.SharedCardinalityCreatesIdentity
+
+fleetSharedCardinalityDoesNotCreateIdentity :
+  FleetSharedCardinalityCreatesIdentity → ⊥
+fleetSharedCardinalityDoesNotCreateIdentity =
+  Disambiguation.sharedCardinalityDoesNotCreateIdentity
+
+record FleetR5OrdinalCutReceipt : Set₁ where
+  constructor fleet-r5-ordinal-cut-receipt
   field
-    countedFormalGapClassAvailable : Bool
-    namedFormalGapManifestAvailable : Bool
-    dispatchRequiresNamedFormalGapManifest : Bool
-    externalGapCountIdentifiesIndividualGaps : Bool
-    dischargedFibresEligibleForGapDispatch : Bool
-    contradictionGapsEligibleForFormalGapDispatch : Bool
+    targetOrdinal : Set
+    targetOrdinalIsCanonical : targetOrdinal ≡ FleetFormalGapOrdinal
+    targetCount : Nat
+    targetCountIs58 : targetCount ≡ 58
+    dischargedCount : Nat
+    dischargedCountIs584 : dischargedCount ≡ 584
+    contradictionCount : Nat
+    contradictionCountIs44 : contradictionCount ≡ 44
+    ordinalCarriesPersistedIdentity : Bool
+    ordinalCarriesPersistedIdentityIsFalse :
+      ordinalCarriesPersistedIdentity ≡ false
+    sharedCardinalityIdentityFirewall :
+      FleetSharedCardinalityCreatesIdentity → ⊥
 
-open FleetFormalGapDispatchBoundary public
+open FleetR5OrdinalCutReceipt public
 
-canonicalFleetFormalGapDispatchBoundary : FleetFormalGapDispatchBoundary
-canonicalFleetFormalGapDispatchBoundary =
-  fleet-formal-gap-dispatch-boundary
-    true
-    false
-    true
-    false
-    false
-    false
+canonicalFleetR5OrdinalCutReceipt : FleetR5OrdinalCutReceipt
+canonicalFleetR5OrdinalCutReceipt = record
+  { targetOrdinal = FleetFormalGapOrdinal
+  ; targetOrdinalIsCanonical = refl
+  ; targetCount = fleetFormalGapOrdinalCount
+  ; targetCountIs58 = fleetFormalGapOrdinalCountIs58
+  ; dischargedCount = fleetDischargedOrdinalCount
+  ; dischargedCountIs584 = fleetDischargedOrdinalCountIs584
+  ; contradictionCount = fleetContradictionOrdinalCount
+  ; contradictionCountIs44 = fleetContradictionOrdinalCountIs44
+  ; ordinalCarriesPersistedIdentity =
+      fleetOrdinalCarriesPersistedRowIdentity
+  ; ordinalCarriesPersistedIdentityIsFalse =
+      fleetOrdinalCarriesPersistedRowIdentityIsFalse
+  ; sharedCardinalityIdentityFirewall =
+      fleetSharedCardinalityDoesNotCreateIdentity
+  }
 
-namedFormalGapManifestAvailable : Bool
-namedFormalGapManifestAvailable =
-  FleetFormalGapDispatchBoundary.namedFormalGapManifestAvailable
-    canonicalFleetFormalGapDispatchBoundary
-
-namedFormalGapManifestAvailableIsFalse :
-  namedFormalGapManifestAvailable ≡ false
-namedFormalGapManifestAvailableIsFalse = refl
-
-dispatchRequiresNamedFormalGapManifest : Bool
-dispatchRequiresNamedFormalGapManifest =
-  FleetFormalGapDispatchBoundary.dispatchRequiresNamedFormalGapManifest
-    canonicalFleetFormalGapDispatchBoundary
-
-dispatchRequiresNamedFormalGapManifestIsTrue :
-  dispatchRequiresNamedFormalGapManifest ≡ true
-dispatchRequiresNamedFormalGapManifestIsTrue = refl
-
-externalGapCountIdentifiesIndividualGaps : Bool
-externalGapCountIdentifiesIndividualGaps =
-  FleetFormalGapDispatchBoundary.externalGapCountIdentifiesIndividualGaps
-    canonicalFleetFormalGapDispatchBoundary
-
-externalGapCountIdentifiesIndividualGapsIsFalse :
-  externalGapCountIdentifiesIndividualGaps ≡ false
-externalGapCountIdentifiesIndividualGapsIsFalse = refl
-
-dischargedFibresEligibleForGapDispatch : Bool
-dischargedFibresEligibleForGapDispatch =
-  FleetFormalGapDispatchBoundary.dischargedFibresEligibleForGapDispatch
-    canonicalFleetFormalGapDispatchBoundary
-
-dischargedFibresEligibleForGapDispatchIsFalse :
-  dischargedFibresEligibleForGapDispatch ≡ false
-dischargedFibresEligibleForGapDispatchIsFalse = refl
-
-contradictionGapsEligibleForFormalGapDispatch : Bool
-contradictionGapsEligibleForFormalGapDispatch =
-  FleetFormalGapDispatchBoundary.contradictionGapsEligibleForFormalGapDispatch
-    canonicalFleetFormalGapDispatchBoundary
-
-contradictionGapsEligibleForFormalGapDispatchIsFalse :
-  contradictionGapsEligibleForFormalGapDispatch ≡ false
-contradictionGapsEligibleForFormalGapDispatchIsFalse = refl

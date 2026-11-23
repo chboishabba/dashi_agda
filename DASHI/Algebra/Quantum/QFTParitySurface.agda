@@ -20,16 +20,11 @@ record Sigma {ℓ : Level} (A : Set ℓ) : Set ℓ where
 -- the analytic theorems that are still external or unproved in this repository.
 
 data EvidenceState : Set where
-  implementedSurface :
-    EvidenceState
-  candidateInterface :
-    EvidenceState
-  externalAuthorityRequired :
-    EvidenceState
-  blockedByAnalyticGap :
-    EvidenceState
-  deliberatelyNotPromoted :
-    EvidenceState
+  implementedSurface : EvidenceState
+  candidateInterface : EvidenceState
+  externalAuthorityRequired : EvidenceState
+  blockedByAnalyticGap : EvidenceState
+  deliberatelyNotPromoted : EvidenceState
 
 evidenceClosed : EvidenceState → Bool
 evidenceClosed implementedSurface = true
@@ -39,32 +34,19 @@ evidenceClosed blockedByAnalyticGap = false
 evidenceClosed deliberatelyNotPromoted = false
 
 data ParityAuthority : Set where
-  constructiveHilbertCompletionAuthority :
-    ParityAuthority
-  boundedOperatorCalculusAuthority :
-    ParityAuthority
-  selfAdjointSpectralTheoremAuthority :
-    ParityAuthority
-  unitaryStoneTheoremAuthority :
-    ParityAuthority
-  completedTensorProductAuthority :
-    ParityAuthority
-  ccrRepresentationTheoremAuthority :
-    ParityAuthority
-  carRepresentationTheoremAuthority :
-    ParityAuthority
-  fockSpaceConstructionAuthority :
-    ParityAuthority
-  operatorValuedDistributionDomainAuthority :
-    ParityAuthority
-  osterwalderSchraderReconstructionAuthority :
-    ParityAuthority
-  wightmanAxiomVerificationAuthority :
-    ParityAuthority
-  haagRuelleScatteringAuthority :
-    ParityAuthority
-  renormalizationGroupContinuumLimitAuthority :
-    ParityAuthority
+  constructiveHilbertCompletionAuthority : ParityAuthority
+  boundedOperatorCalculusAuthority : ParityAuthority
+  selfAdjointSpectralTheoremAuthority : ParityAuthority
+  unitaryStoneTheoremAuthority : ParityAuthority
+  completedTensorProductAuthority : ParityAuthority
+  ccrRepresentationTheoremAuthority : ParityAuthority
+  carRepresentationTheoremAuthority : ParityAuthority
+  fockSpaceConstructionAuthority : ParityAuthority
+  operatorValuedDistributionDomainAuthority : ParityAuthority
+  osterwalderSchraderReconstructionAuthority : ParityAuthority
+  wightmanAxiomVerificationAuthority : ParityAuthority
+  haagRuelleScatteringAuthority : ParityAuthority
+  renormalizationGroupContinuumLimitAuthority : ParityAuthority
 
 canonicalAuthorityCutset : List ParityAuthority
 canonicalAuthorityCutset =
@@ -389,14 +371,10 @@ record TensorSurface {ℓ₁ ℓ₂ : Level}
       evidenceClosed completedTensorProduct ≡ false
 
 data CommutationFamily : Set where
-  canonicalCommutationRelations :
-    CommutationFamily
-  canonicalAnticommutationRelations :
-    CommutationFamily
-  weylExponentiatedCCR :
-    CommutationFamily
-  cliffordCAR :
-    CommutationFamily
+  canonicalCommutationRelations : CommutationFamily
+  canonicalAnticommutationRelations : CommutationFamily
+  weylExponentiatedCCR : CommutationFamily
+  cliffordCAR : CommutationFamily
 
 record CCRLawRow : Set where
   field
@@ -909,36 +887,21 @@ record RenormalizationBoundarySurface : Set₁ where
       evidenceClosed nonperturbativeControl ≡ false
 
 data QFTParityItem : Set where
-  hilbertSpaces :
-    QFTParityItem
-  boundedOperators :
-    QFTParityItem
-  selfAdjointOperators :
-    QFTParityItem
-  unitaryOperators :
-    QFTParityItem
-  spectra :
-    QFTParityItem
-  tensorProducts :
-    QFTParityItem
-  ccrAlgebras :
-    QFTParityItem
-  carAlgebras :
-    QFTParityItem
-  fockSpace :
-    QFTParityItem
-  operatorValuedDistributionDomains :
-    QFTParityItem
-  fieldOperators :
-    QFTParityItem
-  wightmanAxioms :
-    QFTParityItem
-  osAxioms :
-    QFTParityItem
-  scatteringTheory :
-    QFTParityItem
-  renormalizationBoundaries :
-    QFTParityItem
+  hilbertSpaces : QFTParityItem
+  boundedOperators : QFTParityItem
+  selfAdjointOperators : QFTParityItem
+  unitaryOperators : QFTParityItem
+  spectra : QFTParityItem
+  tensorProducts : QFTParityItem
+  ccrAlgebras : QFTParityItem
+  carAlgebras : QFTParityItem
+  fockSpace : QFTParityItem
+  operatorValuedDistributionDomains : QFTParityItem
+  fieldOperators : QFTParityItem
+  wightmanAxioms : QFTParityItem
+  osAxioms : QFTParityItem
+  scatteringTheory : QFTParityItem
+  renormalizationBoundaries : QFTParityItem
 
 canonicalParityItems : List QFTParityItem
 canonicalParityItems =

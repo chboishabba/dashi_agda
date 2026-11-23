@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-23",
+  "title": "J18 native-J12-compatible spark-bank to HF switched nonlinear cap tank",
+  "scope": "SYNTHETIC_NUMERICAL_EXTENSION_NOT_ORIGINAL_FILSINGER_NETLIST",
+  "original_source_owner": {
+    "script": "scripts/check_smith_filsinger_j12_restored_cycles_20261122.py",
+    "git_blob_sha": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+    "historical_claim": "Filsinger described capacitor-bank/spark HF dump; explicit physical pin continuity not established",
+    "prior_docs": [
+      "Docs/research/SmithFilsingerHybridStudyExactRemainingLemmas20261115.md",
+      "Docs/research/SmithFilsingerCausalNonlinearSourceRollup20261115.md"
+    ]
+  },
+  "new_scripts": [
+    {
+      "path": "scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py",
+      "git_blob_sha": "430520c86fc471deada48835c7d048888745d2fa",
+      "local_exact_blob": true,
+      "local_python_exit_code": 0
+    },
+    {
+      "path": "scripts/check_smith_filsinger_j18b_restored_hf_dump_20261123.py",
+      "git_blob_sha": "69cf86bddff854f7e427f3445acbf9eceb3be66c",
+      "local_exact_blob": true,
+      "local_core_exit_code": 0,
+      "local_pairs_exit_code": 0
+    }
+  ],
+  "mathematical": {
+    "circuit_state": "Original J12 seven states [i,j,u,v,b,q,z] + HF inductor current ih and nonlinear capacitor voltage x",
+    "nonlinear_capacitor": "Q_h = Ch*(x+alpha*x^3); U_h = Ch*(x^2/2+3*alpha*x^4/4)",
+    "bank_law": "Cb db/dt = ju+jv-Gbleed*b-on*ih",
+    "hf_coil_law": "Lh dih/dt = on*(b-x)-(Rcoil+on*Rgap+(1-on)*Rfree)*ih-kh*u",
+    "hf_cap_law": "Ch*(1+3*alpha*x^2) dx/dt = on*ih-Gload*x",
+    "signed_interface": "J12 secondary gets +kh*ih in its u-charge equation; bank loses on*b*ih, HF gains it; secondary/HF coupling signs cancel",
+    "hf_energy_budget": "W_bank_to_hf - W_secondary_coupling_exchange = W_gap_heat+W_coil_heat+W_freewheel_heat+W_hf_load+Delta U_hf",
+    "natural_hf_frequency_model_units": "1/sqrt(Lh*Ch) ≈7.45356; NOT measured acoustic/RF",
+    "exact_SymPy_checks": 5,
+    "actual_pin_schematic": false,
+    "legacy_regression": {
+      "status": "PASS",
+      "max_absolute_state_difference": 5.4546358818630125e-9,
+      "matching_switch_events": 12,
+      "legacy_residual": 2.430444356882333e-8
+    }
+  },
+  "local_restored": {
+    "model_duration": "20*pi per cycle, dimensionless",
+    "numerical_tolerances": {
+      "restored_max_state_difference": 0.00002,
+      "energy_residual_gate": 0.00003,
+      "event_alignment_adjacent_max_shift": 0.02
+    },
+    "cases": {
+      "driver_only": {
+        "net_wave": -0.11989506180369904,
+        "hf_load": 0.02305610376310204,
+        "closure": 1.1971834634749712e-10,
+        "events": 20
+      },
+      "incident_amp_0_8": {
+        "net_wave": -0.004272375909934567,
+        "hf_load": 0.023504847792383037,
+        "closure": 1.0098023806026646e-10,
+        "events": 20
+      },
+      "incident_amp_1_2": {
+        "driver_work": 24.806882121525767,
+        "incident": 90.4778684233823,
+        "outgoing": 90.33705767333778,
+        "net_wave": 0.1408107500445226,
+        "hf_load": 0.024518152855580098,
+        "bank_to_hf_transfer": 0.012085215386222353,
+        "secondary_coupling_exchange": -0.18908517029807165,
+        "gap_heat": 0.0007028518406993333,
+        "coil_heat": 0.019897018530917503,
+        "freewheel_heat": 0.1560523622886763,
+        "storage_delta": -4.758149430017511e-11,
+        "conservation_residual": 3.963158690112323e-10,
+        "restored_max_state_difference": 1.3174630830725675e-10,
+        "events": 38,
+        "adjacent_event_time_shift": 0.000004115311853070125
+      }
+    },
+    "hf_subledger": {
+      "bank_and_secondary_signed_supply": 0.201170385684294,
+      "positive_load_and_losses": 0.20117038551587324,
+      "net_residual": 1.684207495689094e-10
+    },
+    "signed_incremental_wave_vs_driver_only": 0.2607058118482216,
+    "incremental_hf_load_vs_driver_only": 0.0014620490924780565,
+    "incremental_driver_work_vs_driver_only": 0.0004985449143113385,
+    "zero_hf_load": {
+      "status": "NO_RESTORATION_CERTIFICATE_IN_FOUR_CYCLES",
+      "load": 0,
+      "closure": 0.015850430911756155
+    },
+    "linear_cap_negative_control": {
+      "status": "RESTORED",
+      "net_wave": 0.14082397293371685,
+      "hf_load": 0.02444968337108605,
+      "events": 36,
+      "interpretation": "Nonlinear capacitance not shown necessary for positive absorption/output in chosen fixture"
+    },
+    "zero_secondary_coupling": {
+      "status": "NO_RESTORATION_CERTIFICATE_IN_FIVE_CYCLES",
+      "closure": 0.00008112691156780816,
+      "hf_load": 0.00020241257510667573,
+      "events": 2
+    }
+  },
+  "inverse_event_branch_controls": {
+    "amp_1_195_vs_1_205": {
+      "both_positive_net": true,
+      "net": [
+        0.1386599982943153,
+        0.14300083773606787
+      ],
+      "both_positive_hf_load": true,
+      "hf_load": [
+        0.02444196960091482,
+        0.02453809123997341
+      ],
+      "event_counts": [
+        36,
+        38
+      ],
+      "same_switch_event_history": false
+    },
+    "kh_0_118_vs_0_122": {
+      "both_positive_net": true,
+      "net": [
+        0.14069701177571403,
+        0.1409678070648681
+      ],
+      "both_positive_hf_load": true,
+      "hf_load": [
+        0.02345714872762292,
+        0.025611744148129348
+      ],
+      "event_counts": [
+        36,
+        40
+      ],
+      "same_switch_event_history": false
+    },
+    "global_smooth_inverse_theorem_established": false
+  },
+  "negative_admission": {
+    "HF_gap_energy_not_independent_source": true,
+    "Gload_x_sq_is_an_ideal_resistive_load_sink_not_measured_collected_power": true,
+    "intrinsic_HF_frequency_not_source_calibrated": true,
+    "J12_native_original_preserved": true,
+    "physical_Filsinger_pin_topology_certified": false,
+    "observed_earth_ionosphere_receiving_power": false,
+    "simultaneous_Duga_HAARP_SURA_Filsinger_field": false,
+    "supernatural_or_antigravity_coupling": false,
+    "agda_kernel_run": false,
+    "github_actions_or_ci_used": false
+  }
+}

@@ -36,7 +36,7 @@ record SourceArtifact : Set where
 
 open SourceArtifact public
 
-record ProvenanceAnchor (artifact : SourceArtifact) : Set where
+record ProvenanceAnchor (artifact : SourceArtifact) : Set₁ where
   constructor provenanceAnchor
   field
     provenanceReference : String

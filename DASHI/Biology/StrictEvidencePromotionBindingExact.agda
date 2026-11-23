@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- STRICT SAME-OBJECT / SAME-SCOPE PROMOTION BINDING
 --
--- Key equalities preserve stable externally visible identifiers. The actual
+-- Key equalities preserve stable externally visible identifiers.  The actual
 -- promotion obligations are proof-relevant relations indexed by the exact
 -- claim/evidence/estimand objects; arbitrary narrative strings cannot pay them.
 ------------------------------------------------------------------------

@@ -179,3 +179,35 @@ python3 scripts/check_bh4_xpollenation.py
 ```
 
 The aggregate checker includes acquisition, ranking, payment-preparation and joint-payment firewalls. CI is not the completion gate for this tranche.
+
+## Adjacent differential stimulant observer (2026-11-20)
+
+See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md), S1 and S3a: existing included finite observer owner now records matched initial stocks, distinct cytosolic/vesicular/extracellular balance witnesses, and endpoint non-identification of pool, synthesis and gross release. Synthetic only; exact-head Agda, real reaction/transport source evidence and empirical discrimination OPEN. This does not alter original 29x12 or P0–P3 payment.
+
+## Selected catecholamine source cut (2026-11-20)
+
+Run `python scripts/check_bh4_catecholamine_sympy.py` for S2a: selected Rhea 15-species/5-reaction chemistry with existing finite matrix producer, exact CHNOP/charge, pterin recycling, and feasible turnover-observer collision. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md) for attribution and S2b remaining source/369/physical boundary gates. This is local SymPy acceptance, not archived original panel payment, clinical inference or Agda kernel acceptance.
+
+## Joint reaction/transfer observer (2026-11-20)
+
+Run `python scripts/check_bh4_joint_observer_sympy.py` for selected S3b/S4a: exact joint rank/nullspace, 33 cardinality-minimal panels among 126 five-row subsets, repeated feasible silent circulation histories, explicit exchange negative control and native 369 incidence aggregation. Local replay uses recovered literal upstream definitions; full-module/Agda acceptance and physical source/kinetic payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conditional flux reconstruction
+
+Run `python scripts/check_bh4_flux_observer_sympy.py` for S4b: exact target-specific minimal flux panels, native weighted cycle closure, 54-rank reconstruction, and changing-conductance countermodel. Uses recovered native geometry and inspected SG sign; physical conductances, time histories, boundary exchanges and original source payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conductance-history compression
+
+Run `python scripts/check_bh4_conductance_history_sympy.py` for S4c: exact cycle-class ratio rank, rank-one updates, streaming residual decomposition, and two same-mass self-consistent Poisson states with inequivalent SG flux spaces. Selected positive-support algebra; physical trajectories and source payment OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Accepted implicit trajectory streaming
+
+Run `OPENBLAS_NUM_THREADS=1 python scripts/check_bh4_pnp_streaming_sympy.py` for S4c.5. Exact chord codec plus independent reaction-adjusted stock divergence, accepted implicit PNP steps, accumulated cycle residual and solver-defect bound. 48 local reconstructed-solver steps passed; exact full-module replay, original biochemical source payment and physical discrimination remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Situated consumer residual
+
+Run `python scripts/check_bh4_situated_observer_sympy.py` for S4c.6: exact conditional consumer-specific linear minimality, window-specific adjoints, chronology collisions and spatial net-flux cut. Local SymPy replay uses recovered native geometry only; existing included Agda countermodel imports original residual/descent owners for the finite release chronology witness (source-written, no kernel receipt). See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Finite admissible-future observer
+
+Run `python scripts/check_bh4_admissible_future_sympy.py` for S4c.7: chronological enabled histories, exact admissible-fibre difference spans, minimal linear residual/coordinate panels and a release-budget future-cone collision. Local SymPy execution only; synthetic masks and entitlement are not medication or measured physiology. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).

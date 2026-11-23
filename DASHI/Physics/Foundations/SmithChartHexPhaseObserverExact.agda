@@ -25,7 +25,6 @@ module DASHI.Physics.Foundations.SmithChartHexPhaseObserverExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
-open Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import Base369 as Base
 import DASHI.Foundations.Base369MobiusTransport as Mobius
@@ -83,21 +82,21 @@ smithAdmittancePreservesTriadicPhaseObservation :
   Mobius.hexTriadicPhase
     (observeHex O
       (Smith.normalizedReflection F z))
-smithAdmittancePreservesTriadicPhaseObservation {F} O z =
+smithAdmittancePreservesTriadicPhaseObservation O z =
   begin
     Mobius.hexTriadicPhase
       (observeHex O
-        (Smith.normalizedReflection F
-          (Smith.normalizedAdmittance F z)))
+        (Smith.normalizedReflection _
+          (Smith.normalizedAdmittance _ z)))
       ≡⟨ cong Mobius.hexTriadicPhase
             (smithAdmittanceObservedAsHexHalfTurn O z) ⟩
     Mobius.hexTriadicPhase
       (Mobius.mobiusTransport
-        (observeHex O (Smith.normalizedReflection F z)))
+        (observeHex O (Smith.normalizedReflection _ z)))
       ≡⟨ Mobius.mobiusTransport-preservesTriadicPhase
-            (observeHex O (Smith.normalizedReflection F z)) ⟩
+            (observeHex O (Smith.normalizedReflection _ z)) ⟩
     Mobius.hexTriadicPhase
-      (observeHex O (Smith.normalizedReflection F z))
+      (observeHex O (Smith.normalizedReflection _ z))
   ∎
 
 smithAdmittanceFlipsOrientationObservation :
@@ -113,22 +112,22 @@ smithAdmittanceFlipsOrientationObservation :
     (Mobius.hexOrientationPolarity
       (observeHex O
         (Smith.normalizedReflection F z)))
-smithAdmittanceFlipsOrientationObservation {F} O z =
+smithAdmittanceFlipsOrientationObservation O z =
   begin
     Mobius.hexOrientationPolarity
       (observeHex O
-        (Smith.normalizedReflection F
-          (Smith.normalizedAdmittance F z)))
+        (Smith.normalizedReflection _
+          (Smith.normalizedAdmittance _ z)))
       ≡⟨ cong Mobius.hexOrientationPolarity
             (smithAdmittanceObservedAsHexHalfTurn O z) ⟩
     Mobius.hexOrientationPolarity
       (Mobius.mobiusTransport
-        (observeHex O (Smith.normalizedReflection F z)))
+        (observeHex O (Smith.normalizedReflection _ z)))
       ≡⟨ Mobius.mobiusTransport-flipsOrientationPolarity
-            (observeHex O (Smith.normalizedReflection F z)) ⟩
+            (observeHex O (Smith.normalizedReflection _ z)) ⟩
     Mobius.flipOrientationPolarity
       (Mobius.hexOrientationPolarity
-        (observeHex O (Smith.normalizedReflection F z)))
+        (observeHex O (Smith.normalizedReflection _ z)))
   ∎
 
 record SmithHexCrossPollinationBoundary : Set where

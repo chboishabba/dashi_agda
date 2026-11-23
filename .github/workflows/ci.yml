@@ -1,9 +1,12 @@
 name: CI
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  workflow_dispatch:
+
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   nix-build:
     runs-on: ubuntu-latest

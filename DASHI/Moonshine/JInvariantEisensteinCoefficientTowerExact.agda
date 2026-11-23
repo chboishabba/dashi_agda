@@ -15,11 +15,11 @@ import DASHI.Physics.Closure.TriadicSectorQSeries as QS
 
 integerQSeriesCarrier : QS.QSeriesCarrier
 integerQSeriesCarrier = record
-  { Coeff = ℤ
-  ; zeroᶜ = + 0
-  ; oneᶜ = + 1
-  ; _+ᶜ_ = _+ℤ_
-  ; _*ᶜ_ = _*ℤ_
+  { QS.Coeff = ℤ
+  ; QS.zeroᶜ = + 0
+  ; QS.oneᶜ = + 1
+  ; QS._+ᶜ_ = _+ℤ_
+  ; QS._*ᶜ_ = _*ℤ_
   }
 
 e4Coefficient : Nat -> ℤ
@@ -40,8 +40,8 @@ coefficientAt n e6Sector = e6Coefficient n
 
 eisensteinCoefficientTower : QS.SectorTraceTower integerQSeriesCarrier
 eisensteinCoefficientTower = record
-  { Sector = EisensteinCoefficientSector
-  ; traceCoefficient = coefficientAt
+  { QS.Sector = EisensteinCoefficientSector
+  ; QS.traceCoefficient = coefficientAt
   }
 
 e4Prefix : (n : Nat) -> QS.Vec ℤ n

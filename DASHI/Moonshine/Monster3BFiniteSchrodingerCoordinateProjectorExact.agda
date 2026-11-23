@@ -44,7 +44,8 @@ projectAmplitude target value amplitude =
       (C3.multiply (negPhase target)
         (C3.multiply (phase value) amplitude))
       (C3.multiply (negDoublePhase target)
-        (C3.multiply (phase value) (C3.multiply (phase value) amplitude))))
+        (C3.multiply (phase value)
+          (C3.multiply (phase value) amplitude))))
 
 tripleAmplitude : C3.Cyclotomic3 → C3.Cyclotomic3
 tripleAmplitude amplitude = L.add amplitude (L.add amplitude amplitude)
@@ -53,98 +54,80 @@ projectAmplitudeSame :
   (target : Trit) → (amplitude : C3.Cyclotomic3) →
   projectAmplitude target target amplitude ≡ tripleAmplitude amplitude
 projectAmplitudeSame neg (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext sameNegOne sameNegTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    sameNegOne : (a + ((0ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + ((- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ a + (a + a)
-    sameNegOne = solve (a ∷ b ∷ [])
-
-    sameNegTwo : (b + ((0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + 1ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + ((- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ b + (b + b)
-    sameNegTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((0ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + ((- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ a + (a + a)
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + 1ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + ((- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - (- 1ℚ) * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ b + (b + b)
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeSame zer (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext sameZerOne sameZerTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    sameZerOne : (a + ((1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (1ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ a + (a + a)
-    sameZerOne = solve (a ∷ b ∷ [])
-
-    sameZerTwo : (b + ((1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + 0ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ b + (b + b)
-    sameZerTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (1ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ a + (a + a)
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + 0ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ b + (b + b)
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeSame pos (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext samePosOne samePosTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    samePosOne : (a + (((- 1ℚ) * (0ℚ * a - 1ℚ * b) - (- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (0ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ a + (a + a)
-    samePosOne = solve (a ∷ b ∷ [])
-
-    samePosTwo : (b + (((- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b) + (- 1ℚ) * (0ℚ * a - 1ℚ * b) - (- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + 1ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ b + (b + b)
-    samePosTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + (((- 1ℚ) * (0ℚ * a - 1ℚ * b) - (- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (0ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ a + (a + a)
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + (((- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b) + (- 1ℚ) * (0ℚ * a - 1ℚ * b) - (- 1ℚ) * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + 1ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ b + (b + b)
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentNegZer : (a : C3.Cyclotomic3) →
   projectAmplitude neg zer a ≡ C3.zero
 projectAmplitudeDifferentNegZer (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffNegZerOne diffNegZerTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffNegZerOne : (a + ((0ℚ * (1ℚ * a - 0ℚ * b) - 1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + ((- 1ℚ) * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - (- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
-    diffNegZerOne = solve (a ∷ b ∷ [])
-
-    diffNegZerTwo : (b + ((0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 1ℚ * (1ℚ * a - 0ℚ * b) - 1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + ((- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (- 1ℚ) * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - (- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
-    diffNegZerTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((0ℚ * (1ℚ * a - 0ℚ * b) - 1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + ((- 1ℚ) * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - (- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 1ℚ * (1ℚ * a - 0ℚ * b) - 1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + ((- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (- 1ℚ) * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - (- 1ℚ) * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentNegPos : (a : C3.Cyclotomic3) →
   projectAmplitude neg pos a ≡ C3.zero
 projectAmplitudeDifferentNegPos (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffNegPosOne diffNegPosTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffNegPosOne : (a + ((0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + ((- 1ℚ) * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - (- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
-    diffNegPosOne = solve (a ∷ b ∷ [])
-
-    diffNegPosTwo : (b + ((0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + ((- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (- 1ℚ) * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - (- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
-    diffNegPosTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + ((- 1ℚ) * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - (- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + ((- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (- 1ℚ) * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - (- 1ℚ) * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentZerNeg : (a : C3.Cyclotomic3) →
   projectAmplitude zer neg a ≡ C3.zero
 projectAmplitudeDifferentZerNeg (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffZerNegOne diffZerNegTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffZerNegOne : (a + ((1ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (1ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
-    diffZerNegOne = solve (a ∷ b ∷ [])
-
-    diffZerNegTwo : (b + ((1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + 0ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + 0ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
-    diffZerNegTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((1ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (1ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((1ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + 0ℚ * ((- 1ℚ) * a - (- 1ℚ) * b) - 0ℚ * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + 0ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentZerPos : (a : C3.Cyclotomic3) →
   projectAmplitude zer pos a ≡ C3.zero
 projectAmplitudeDifferentZerPos (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffZerPosOne diffZerPosTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffZerPosOne : (a + ((1ℚ * (0ℚ * a - 1ℚ * b) - 0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (1ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
-    diffZerPosOne = solve (a ∷ b ∷ [])
-
-    diffZerPosTwo : (b + ((1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 0ℚ * (0ℚ * a - 1ℚ * b) - 0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + 0ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
-    diffZerPosTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + ((1ℚ * (0ℚ * a - 1ℚ * b) - 0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (1ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + ((1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 0ℚ * (0ℚ * a - 1ℚ * b) - 0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + (1ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) + 0ℚ * (0ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b)) - 0ℚ * (0ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b) + 1ℚ * (0ℚ * a - 1ℚ * b) - 1ℚ * (0ℚ * b + 1ℚ * a - 1ℚ * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentPosNeg : (a : C3.Cyclotomic3) →
   projectAmplitude pos neg a ≡ C3.zero
 projectAmplitudeDifferentPosNeg (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffPosNegOne diffPosNegTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffPosNegOne : (a + (((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (0ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
-    diffPosNegOne = solve (a ∷ b ∷ [])
-
-    diffPosNegTwo : (b + (((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + 1ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
-    diffPosNegTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + (((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (0ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + (((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + (0ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) + 1ℚ * ((- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b)) - 1ℚ * ((- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b) + (- 1ℚ) * ((- 1ℚ) * a - (- 1ℚ) * b) - (- 1ℚ) * ((- 1ℚ) * b + (- 1ℚ) * a - (- 1ℚ) * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 projectAmplitudeDifferentPosZer : (a : C3.Cyclotomic3) →
   projectAmplitude pos zer a ≡ C3.zero
 projectAmplitudeDifferentPosZer (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext diffPosZerOne diffPosZerTwo
+  C3.cyclotomic3Ext step1 step2
   where
-    diffPosZerOne : (a + (((- 1ℚ) * (1ℚ * a - 0ℚ * b) - (- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (0ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
-    diffPosZerOne = solve (a ∷ b ∷ [])
-
-    diffPosZerTwo : (b + (((- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b) + (- 1ℚ) * (1ℚ * a - 0ℚ * b) - (- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + 1ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
-    diffPosZerTwo = solve (a ∷ b ∷ [])
-
+    step1 : (a + (((- 1ℚ) * (1ℚ * a - 0ℚ * b) - (- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (0ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
+    step1 = solve (a ∷ b ∷ [])
+    step2 : (b + (((- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b) + (- 1ℚ) * (1ℚ * a - 0ℚ * b) - (- 1ℚ) * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + (0ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) + 1ℚ * (1ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b)) - 1ℚ * (1ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b) + 0ℚ * (1ℚ * a - 0ℚ * b) - 0ℚ * (1ℚ * b + 0ℚ * a - 0ℚ * b))))) ≡ 0ℚ
+    step2 = solve (a ∷ b ∷ [])
 
 ------------------------------------------------------------------------
 -- Actual function operator written only from I, M, M^2, addition and

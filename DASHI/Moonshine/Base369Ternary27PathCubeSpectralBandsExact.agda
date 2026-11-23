@@ -110,6 +110,8 @@ record PeriodicVsPathCubeSpectralBoundary : Set where
     realEigenvectorsConstructedHere : Bool
     exactSqrtTwoScalarModelConstructedHere : Bool
 
+open PeriodicVsPathCubeSpectralBoundary public
+
 canonicalPeriodicVsPathCubeSpectralBoundary : PeriodicVsPathCubeSpectralBoundary
 canonicalPeriodicVsPathCubeSpectralBoundary =
   periodicVsPathCubeSpectralBoundary

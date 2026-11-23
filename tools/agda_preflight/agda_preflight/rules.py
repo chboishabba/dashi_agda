@@ -903,13 +903,7 @@ def extended_diagnostics(checker, s, D):
                         break
 
     # TSAGDA120/121/123: AST-backed rigid declaration sanity.
-    known_type_aliases = set()
-    for sname, sig in s.ast.signatures.items():
-        if sig.type_node is not None:
-            thead = terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node))
-            if thead and (thead == "Set" or thead.startswith("Set") or thead.startswith("Setω") or thead == "Prop"):
-                known_type_aliases.add(sname)
-    known_terms = (set(s.ast.clauses) | set(ctors)) - known_type_aliases
+    known_terms = set(s.ast.clauses) | set(ctors)
     for rname, rec in s.ast.records.items():
         for fname, field in rec.fields.items():
             if field.type_node is None:

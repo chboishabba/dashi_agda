@@ -1,0 +1,9 @@
+# YM P0 full-sector spectral detection — steelman BIDI (21 Nov 2026)
+
+Original reverse target: ONE original E1 OS reconstructed H_OS, all positive-time gauge-invariant Wilson vectors norm-dense in the full vacuum-orthogonal sector, one strictly positive physical energy gap. The source owners R281/R333/R577 and original YM #1536 all-Wilson-pairs/all-times R556/R278/OS1 commuting-square remain the consumer; do not replace or reconstruct a second Hamiltonian.
+
+Local exact SymPy independent countermodel in scripts/check_ym_full_spectral_detection_p0.py has 46/46 PASS. Positive same transfer T=diag(1,3/4,1/2) and common vacuum e0. One selected Wilson-like state e2 yields <e2,T^n e2>=(1/2)^n <= (2/3)^n for every n, but another nonvacuum vector e1 sees (3/4)^n and violates that proposed full-sector decay. The selected Krylov span rank=1; with a second observed state rank=2, equal to nonvacuum dimension. Thus even an all-times selected-family bound plus positivity and one H does not prove the full mass gap without a dense spectral-detecting test algebra.
+
+Actual existing D1 original small+large theorem YMClayD1OriginalFullWilsonSmallLargeFieldExact already provides the conditional full-source geometric inequality. Its unpaid payment is source-derived original full Wilson Gibbs CMP116/W1/W3 bound, uniform UV+volume physical rate, genuine E1 continuum limit, and SAME H_OS dense detection. Do not duplicate the inequality, choose fake observables, call finite rank a continuum proof, substitute an auxiliary transfer Hamiltonian, or infer a Clay gap. Agda/CI not run.
+
+BSD connection: original conductor-32 E32 eta/newform coefficient identification is a separate source identity; the new BSD #1538 eight-coefficient Sturm route is conditional on genuine same-level modular forms, and does not supply a YM spectrum. Shared principle is full source-faithful consumer detection, not physical theorem equivalence.

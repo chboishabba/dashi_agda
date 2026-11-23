@@ -29,119 +29,82 @@ import DASHI.Promotion.NeurochemicalAuthorityBoundary as Boundary
 data Never : Set where
 
 data NeurochemicalTransmissionCarrier : Set where
-  transmitterCandidateCarrier :
-    NeurochemicalTransmissionCarrier
+  transmitterCandidateCarrier : NeurochemicalTransmissionCarrier
 
-  receptorContextCarrier :
-    NeurochemicalTransmissionCarrier
+  receptorContextCarrier : NeurochemicalTransmissionCarrier
 
-  synapticTransmissionCarrier :
-    NeurochemicalTransmissionCarrier
+  synapticTransmissionCarrier : NeurochemicalTransmissionCarrier
 
-  volumeTransmissionCarrier :
-    NeurochemicalTransmissionCarrier
+  volumeTransmissionCarrier : NeurochemicalTransmissionCarrier
 
-  transporterClearanceCarrier :
-    NeurochemicalTransmissionCarrier
+  transporterClearanceCarrier : NeurochemicalTransmissionCarrier
 
-  enzymaticDegradationCarrier :
-    NeurochemicalTransmissionCarrier
+  enzymaticDegradationCarrier : NeurochemicalTransmissionCarrier
 
-  concentrationTimecourseCarrier :
-    NeurochemicalTransmissionCarrier
+  concentrationTimecourseCarrier : NeurochemicalTransmissionCarrier
 
-  receptorOccupancyCarrier :
-    NeurochemicalTransmissionCarrier
+  receptorOccupancyCarrier : NeurochemicalTransmissionCarrier
 
-  neuralEncodingCarrier :
-    NeurochemicalTransmissionCarrier
+  neuralEncodingCarrier : NeurochemicalTransmissionCarrier
 
-  plasticityModulationCarrier :
-    NeurochemicalTransmissionCarrier
+  plasticityModulationCarrier : NeurochemicalTransmissionCarrier
 
-  behaviorQuotientResidualCarrier :
-    NeurochemicalTransmissionCarrier
+  behaviorQuotientResidualCarrier : NeurochemicalTransmissionCarrier
 
 data NeurochemicalTransmissionMode : Set where
-  synapticVesicularMode :
-    NeurochemicalTransmissionMode
+  synapticVesicularMode : NeurochemicalTransmissionMode
 
-  extrasynapticVolumeMode :
-    NeurochemicalTransmissionMode
+  extrasynapticVolumeMode : NeurochemicalTransmissionMode
 
-  transporterReuptakeMode :
-    NeurochemicalTransmissionMode
+  transporterReuptakeMode : NeurochemicalTransmissionMode
 
-  enzymeClearanceMode :
-    NeurochemicalTransmissionMode
+  enzymeClearanceMode : NeurochemicalTransmissionMode
 
-  endocrineAdjacentMode :
-    NeurochemicalTransmissionMode
+  endocrineAdjacentMode : NeurochemicalTransmissionMode
 
-  peripheralCentralBoundaryMode :
-    NeurochemicalTransmissionMode
+  peripheralCentralBoundaryMode : NeurochemicalTransmissionMode
 
 data NeurochemicalTransmissionGuard : Set where
-  NoClinicalAuthorityClaim :
-    NeurochemicalTransmissionGuard
+  NoClinicalAuthorityClaim : NeurochemicalTransmissionGuard
 
-  NoTherapeuticAuthorityClaim :
-    NeurochemicalTransmissionGuard
+  NoTherapeuticAuthorityClaim : NeurochemicalTransmissionGuard
 
-  NoDoseResponseAuthorityClaim :
-    NeurochemicalTransmissionGuard
+  NoDoseResponseAuthorityClaim : NeurochemicalTransmissionGuard
 
-  NoDiseaseCausationClaim :
-    NeurochemicalTransmissionGuard
+  NoDiseaseCausationClaim : NeurochemicalTransmissionGuard
 
-  NoBehaviorCausationClaim :
-    NeurochemicalTransmissionGuard
+  NoBehaviorCausationClaim : NeurochemicalTransmissionGuard
 
-  NoPsychiatricDiagnosisClaim :
-    NeurochemicalTransmissionGuard
+  NoPsychiatricDiagnosisClaim : NeurochemicalTransmissionGuard
 
-  NoBiomarkerAuthorityClaim :
-    NeurochemicalTransmissionGuard
+  NoBiomarkerAuthorityClaim : NeurochemicalTransmissionGuard
 
-  NoBrainStateRecoveryClaim :
-    NeurochemicalTransmissionGuard
+  NoBrainStateRecoveryClaim : NeurochemicalTransmissionGuard
 
-  NoTransmitterOperatorIdentityClaim :
-    NeurochemicalTransmissionGuard
+  NoTransmitterOperatorIdentityClaim : NeurochemicalTransmissionGuard
 
-  NoFolkTransmitterEquivalenceClaim :
-    NeurochemicalTransmissionGuard
+  NoFolkTransmitterEquivalenceClaim : NeurochemicalTransmissionGuard
 
 data NeurochemicalTransmissionRoute : Set where
-  boundedNeurochemicalTransmissionRoute :
-    NeurochemicalTransmissionRoute
+  boundedNeurochemicalTransmissionRoute : NeurochemicalTransmissionRoute
 
-  clinicalPromotionRoute :
-    NeurochemicalTransmissionRoute
+  clinicalPromotionRoute : NeurochemicalTransmissionRoute
 
-  therapeuticPromotionRoute :
-    NeurochemicalTransmissionRoute
+  therapeuticPromotionRoute : NeurochemicalTransmissionRoute
 
-  doseResponsePromotionRoute :
-    NeurochemicalTransmissionRoute
+  doseResponsePromotionRoute : NeurochemicalTransmissionRoute
 
-  diseaseCausationRoute :
-    NeurochemicalTransmissionRoute
+  diseaseCausationRoute : NeurochemicalTransmissionRoute
 
-  behaviorCausationRoute :
-    NeurochemicalTransmissionRoute
+  behaviorCausationRoute : NeurochemicalTransmissionRoute
 
-  diagnosisRoute :
-    NeurochemicalTransmissionRoute
+  diagnosisRoute : NeurochemicalTransmissionRoute
 
-  biomarkerPromotionRoute :
-    NeurochemicalTransmissionRoute
+  biomarkerPromotionRoute : NeurochemicalTransmissionRoute
 
-  brainStateRecoveryRoute :
-    NeurochemicalTransmissionRoute
+  brainStateRecoveryRoute : NeurochemicalTransmissionRoute
 
-  transmitterOperatorIdentityRoute :
-    NeurochemicalTransmissionRoute
+  transmitterOperatorIdentityRoute : NeurochemicalTransmissionRoute
 
 AdmissibleNeurochemicalTransmissionRoute :
   NeurochemicalTransmissionRoute →

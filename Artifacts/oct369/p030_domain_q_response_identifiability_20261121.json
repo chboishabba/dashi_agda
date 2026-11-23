@@ -1,0 +1,56 @@
+{
+  "scope": "P0.30 retroactive known-response attribution + domain TR / finite-q site-source / finite thermodynamic B Hessian Maxwell relation, trial Mn3 Hamiltonian",
+  "checks_passed": 59,
+  "executed_git_blob_sha": "5de25d8131f2f07694f41c4b8e58547dd5ecdae8",
+  "local_python_environment": "Python NumPy 2.3.5 SciPy 1.17.0 SymPy 1.14.0, locally run 2026-11-21 (no GitHub CI)",
+  "exact_source_sha256": "250ba16570c44167f998ffbb3230b43bb6c492f90d8a7d2a88c2e200cad6c8d8",
+  "inherited_native_kubo_tests": 54,
+  "new_response_is_experimental_discovery": false,
+  "max_TR_H_residual": 1.2773028919215125e-15,
+  "max_domain_chi_even_residual": 1.9984014443252818e-15,
+  "max_domain_order_odd_residual": 1.9984014443252818e-15,
+  "max_partition_source_TR_residual": 7.105427357601002e-15,
+  "order_χ_four_k": [
+    0.7638734113104289,
+    0.9272748272404965,
+    0.7716156707382913,
+    0.8033158142502719
+  ],
+  "three_cell_uniform": {
+    "chi_spectral": 2.42848858947169,
+    "chi_free_energy_fd": 2.428488166117404,
+    "error": 4.2335428585005275e-7
+  },
+  "three_cell_qcos": {
+    "chi_spectral": 1.0705522260302271,
+    "chi_free_energy_fd": 1.0705522690557245,
+    "error": 4.3025497387105816e-8
+  },
+  "three_cell_qsin": {
+    "chi_spectral": 1.0705522260302271,
+    "chi_free_energy_fd": 1.0705522690557245,
+    "error": 4.3025497387105816e-8
+  },
+  "q_fractional_x": 0.3333333333333333,
+  "q_mixing_exact_3x3_SymPy": true,
+  "B_field": "locally harmonic Phi=x^3-3xy^2; B=(-3(x²-y²),6xy,0), divergence and curl zero",
+  "thermodynamic_Maxwell_relation": "dM/dmu=dN/dG on same finite grand potential Omega(mu,G)",
+  "finite_Maxwell_M": -2.202239487249076,
+  "finite_Maxwell_N": 11.212217710657582,
+  "finite_Maxwell_cross_analytic": 3.0023366278053647,
+  "finite_Maxwell_cross_dM_dmu_fd": 3.00233662697084,
+  "finite_Maxwell_cross_dN_dG_fd": 3.002336539677704,
+  "finite_Maxwell_residual": 8.729313583089038e-8,
+  "actual_PtMn3_Wannier": false,
+  "full_Sato_Hayami_Bloch_octupole": false,
+  "source_calibrated_Maxwell_coil": false,
+  "actual_mechanical_force_from_same_source": false,
+  "gravitational_effect": false,
+  "status": "one source-scope assertion is a noncomputational boundary; 59 source assertions include original-producer and nonpromotion checks; no Agda compile",
+  "attribution": {
+    "experimental": "Kang et al Nature 2026 PtMn3 OTT/TMR; Sprague et al 2026 CoTaSe2 published ARPES",
+    "native": "P0.18/P0.29 Bloch/Kubo, CoTaSe2 3D Wannier and symmetry/ARPES, MMP finite Kubo",
+    "theory": "Sato & Hayami Eq.22 known thermodynamic Maxwell identity; Ōiké/Peters/Shinada thermodynamic bulk",
+    "new": "finite q-bridge, domain parity no-inference control and finite mixed derivative verification"
+  }
+}

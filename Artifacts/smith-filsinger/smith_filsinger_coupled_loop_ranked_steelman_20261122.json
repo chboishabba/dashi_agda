@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-22",
+  "title": "Filsinger/Smith original-writing BIDI reverse-solve steelman: coupled-winding induced internal LC circulation and extraction backaction",
+  "sources": {
+    "midpointFilsinger": "Earlier user supplied spoken transcript only; reel attribution to Dfu9Jseviz9 provisional. Accessible NST midpoint; capacitor 'across the one coil you want'; two diodes off cap/two off here; two from each wire; all forward; joined positives; M/Earth/ground return; half big-coil potential; pole shift; dump and harvest amperage.",
+    "historicalSmithKelly": "DonSmithHighPowerDevices147PageOriginalPDFMaxCut20261112.md and SmithFilsingerNonlinearQuadratureMaxCut20261112.md: claimed driven coupled resonant L1/L2, split 17+17-turn L2, optional tuning capacitor across L2; Kelly/Darrer compiled source, not proof of identical Filsinger actual winding or outputs.",
+    "sourceIndex": "Artifacts/smith-filsinger/source_indexed_transcript_diagram_values_20261122.json: FM contains 4 narrated relation edges and 0 source-verified pin continuity edges.",
+    "differentReels": "Filsinger ZVS-shunt DfiqPnkPnP5 and 3-earth Dfi1D7CPzyM remain separate; ~7.8 kHz reported acoustic, not source-confirmed electrical resonance."
+  },
+  "method": "Logical assumption-minimization ranking across speech constraints, topology, nodal return, causal source, capacitor, diode and energy semantics. NOT a Bayesian posterior, original observed netlist, empirically demonstrated operation or validated historical mechanism.",
+  "candidateRanking": [
+    {
+      "id": "S1",
+      "rank": 1,
+      "name": "Selected centre-referenced tuned secondary and positive diode OR",
+      "sourceFit": "High within explicit prior spoken phrasing",
+      "requiredAssumptions": [
+        "selected tuned winding has ends U,V that acquire complementary source voltages around M, whether physically full NST secondary or centre-bonded coupled secondary",
+        "two diode packages physically from each opposite winding/cap terminal; common output P and actual load return M",
+        "actual extraction and spark reservoir properly modelled"
+      ],
+      "strengths": [
+        "two from each wire/cap-coil physical labels",
+        "all forward cathodes joined positive",
+        "half-voltage versus larger whole-secondary potential",
+        "midpoint return",
+        "cap across coil and coupled magnetically induced pole/phase shift"
+      ],
+      "liabilities": [
+        "Nst M versus selected tuned L2 own midpoint still unproved",
+        "diode duplication and sharing cannot be assumed benign",
+        "no confirmed physical signed source energy"
+      ],
+      "status": "Best LOW-EXTRA-EDGE STEELMAN, not proven original wiring"
+    },
+    {
+      "id": "S2",
+      "rank": 2,
+      "name": "Capacitor across one half-secondary with one effectively active forward diode input",
+      "sourceFit": "Moderate",
+      "requiredAssumptions": [
+        "narrated chosen coil is A-M half winding",
+        "all four diodes maybe package-redundant or some tied to M",
+        "positive output is half-wave and spark/storage bank may smooth"
+      ],
+      "strengths": [
+        "direct M return",
+        "literal across selected coil",
+        "half big coil potential"
+      ],
+      "liabilities": [
+        "two opposite described input groups collapse to one rectifying voltage input",
+        "does not naturally explain use of each opposite end for alternating current collection"
+      ],
+      "status": "Survives physically; source fit less natural"
+    },
+    {
+      "id": "S3",
+      "rank": 3,
+      "name": "Separately tuned resonator coupled magnetically and referencing M by finite capacitance or conductor",
+      "sourceFit": "Moderate-high Smith coupled L1/L2 motif; medium Filsinger bare return",
+      "requiredAssumptions": [
+        "independent tuned U-V resonator magnetically driven",
+        "a genuine copper/secondary midpoint bond or capacitance/displacement route establishes a load return to M",
+        "diode polarities, bank and discharge paths complete"
+      ],
+      "strengths": [
+        "strong meaning for 'one coil' and 'other coil' and phase/pole shift",
+        "parallel terminal cap and internal series LC circulation are both natural port representations"
+      ],
+      "liabilities": [
+        "NST midpoint and resonant L2 do not become same conductor by naming",
+        "weak Earth displacement may impede useful output",
+        "extra coupling/return parameters unknown"
+      ],
+      "status": "Best mechanism-level alternative; cannot be rejected from source words"
+    },
+    {
+      "id": "S4",
+      "rank": 4,
+      "name": "Conventional 4 diode bridge with DC negative hard-bonded to NST M",
+      "sourceFit": "Lower for literal all-forward joined positives",
+      "requiredAssumptions": [
+        "two of four diode packages form conventional N-to-winding return diodes despite 'all forward' narration",
+        "bridge negative N is directly bonded to M",
+        "nonideal winding resistance/mutual inductance pays clamp-current cost"
+      ],
+      "strengths": [
+        "four physical diode packages and rectification"
+      ],
+      "liabilities": [
+        "ideal unperturbed symmetric source inconsistent; finite-R clamp dissipates source work",
+        "bridge positive/negative differ from half-voltage P-M reference",
+        "narrated cap-coil grouping not obvious"
+      ],
+      "status": "Nonideal possible, but lower source-fit and added paid clamp mechanism"
+    }
+  ],
+  "coupledLoopForward": {
+    "terminalPortVsInternalLoop": "A capacitor physically connected across coil secondary L2 presents a parallel admittance at external winding terminals; for a magnetically induced EMF internal to L2, the closed winding-capacitor circulation equation has equivalent loop series impedance. These are different port abstractions and are NOT contradictory.",
+    "model": "Two passive linearly coupled windings. Source impressed primary Vs, primary impedance Z1=R1+i*w*L1, secondary internal induced loop Z2=R2+R_L+i*(w*L2-1/(w*C)), mutual M real and passive with M²<=L1*L2. R_L is an equivalent SERIES extraction resistance in this loop, not a verified physical diode/bank.",
+    "equations": [
+      "Vs=Z1 I1+i*w*M I2",
+      "0=i*w*M I1+Z2 I2",
+      "I2=-i*w*M*I1/Z2",
+      "Zin=Z1+w²M²/Z2",
+      "Re(Vs conjugate(I1))=R1 |I1|²+(R2+R_L)|I2|²"
+    ],
+    "atResonance": "w0=1/sqrt(L2*C), Z2=R2+R_L, I2=-i*w0*M I1/(R2+R_L) and extra positive reflected input resistance Rref=w0²M²/(R2+R_L)",
+    "couplingPolarity": "M->-M flips secondary current phase by π for same primary current while reflected resistance and power unchanged. A source reference to a magnetic 'pole shift' has a passive sign/phase mechanism but this is not an observed Filsinger implementation.",
+    "ambientSteelman": "May include a separately sourced environmental power port, but no invented P_env from phase shift. A lossless reactive capacitor has zero averaged real work; all useful work here paid by prescribed drive."
+  },
+  "inverseMaxExtraction": {
+    "additionalAssumptions": "Primary reactance compensated at selected electrical omega; prescribed fixed RMS source voltage Vs and positive primary resistance R1; denote K=(omega*M)^2; selected series-equivalent secondary RL extraction.",
+    "I1": "Vs*(R2+RL)/(R1*(R2+RL)+K)",
+    "I2": "-i*sqrt(K)*Vs/(R1*(R2+RL)+K)",
+    "Pout": "K*Vs²*RL/[R1*(R2+RL)+K]²",
+    "optimum": "RL_star=R2+K/R1, NOT simply R2 at fixed source voltage; at fixed I1 instead RL_star=R2.",
+    "PoutMax": "K*Vs²/[4*R1*(R1*R2+K)]",
+    "sourcePowerBalance": "Vs*I1=R1*I1²+R2*abs(I2)²+RL*abs(I2)²",
+    "example": "Normalized R1=2,R2=3,K=4,Vs=1,RL*=5: Pout=1/20, Pin=2/5, primary copper heat 8/25, secondary loss 3/100, useful fraction 1/8. All units model-defined, NOT Filsinger."
+  },
+  "inverseDiscriminators": [
+    "Whether the cap physically spans NST full A-B, NST A-M, or separately driven L2 is unresolved from the preserved words.",
+    "Two physical labels (capacitor, winding) can still be one electrical node pair; opposite diode inputs require actual U and V ends.",
+    "At electrical resonance the induced closed-loop secondary may carry quadrature current and load the primary, whereas an externally driven parallel tank may present high input impedance. Both predictions require knowing excitation port.",
+    "Changing winding polarity (dot convention) reverses induced secondary-current phase without creating extra real energy.",
+    "Strong coupling is bounded by M²<=L1*L2 for linear passive magnetically coupled inductors.",
+    "R_L selection needs full source loading: fixed primary current and fixed source voltage yield distinct maximum-output matching conditions.",
+    "Any natural Earth donor is separate in the signed energy balance; unknown return/reference cannot be silently promoted into source funding."
+  ],
+  "acceptance": {
+    "localExecutable": "/mnt/data/check_smith_filsinger_coupled_coil_bidi.py",
+    "result": "39/39 PASS SymPy 1.14.0 on executed local script",
+    "gitBlobOfLocal": "a1de794883b0f1b1b34dee403f9c4feaa46c974b",
+    "githubByteIdentity": "Not claimed; script currently local-only",
+    "agda": "Prior exact source typed owners #1537 reused, no new kernel-proven coupled power theorem claimed"
+  },
+  "sourceLimits": {
+    "originalFM": "0/4 source-verified original physical pin continuity",
+    "raw": "0/24 previously requested original empirical roles",
+    "agda": "Kernel not executed",
+    "historical": "Smith/Kelly/Darrer compiled designs versus Filsinger spoken proposals remain independent source instances"
+  },
+  "nextRoadmap": "Consume source-constrained candidate ranking and coupled-loop inverse as a conditional S1-S4 family, then extend source-specific gated nonlinear diode/cap/spark model using existing energy owners. Without a video, do not stall on physical pin attainment, but do not classify it as verified."
+}

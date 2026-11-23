@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-23",
+  "source_attribution": [
+    {
+      "authors": "A. A. Chernyshov et al.",
+      "title": "HF Heating Effects as Seen From Below and Above: First Results of Joint SURA–Ionosfera-M Experiment",
+      "doi": "10.1029/2026GL123503",
+      "experiment_date": "2025-08-20",
+      "publication_date": "2026-08-22"
+    },
+    {
+      "authors": "J. M. Manley and H. E. Rowe",
+      "title": "Some General Properties of Nonlinear Elements—Part I: General Energy Relations",
+      "doi": "10.1109/JRPROC.1956.275145",
+      "publication_year": 1956
+    },
+    {
+      "title": "Generation of whistler waves by continuous HF heating of the upper ionosphere",
+      "doi": "10.1002/2015RS005892"
+    }
+  ],
+  "local_execution": {
+    "python": "3.13.5",
+    "sympy": "1.14.0",
+    "github_ci_used": false,
+    "agda_checked": false,
+    "status": "PASS",
+    "original_repo_files_exact_byte_hash_verified": true,
+    "files": [
+      {
+        "path": "scripts/smith_filsinger_lorentz_ade_sympy.py",
+        "git_blob_sha": "af7a88e58ff300837db3cf42c1a6f51509444244",
+        "status": "MATCH_AND_EXECUTED_NATIVE"
+      },
+      {
+        "path": "scripts/smith_filsinger_sura2026_ade_source_weld_sympy.py",
+        "git_blob_sha": "6a126da7e41e8838112867a943519a936859c000",
+        "status": "MATCH_AND_EXECUTED_NATIVE"
+      },
+      {
+        "path": "scripts/smith_filsinger_sura2026_three_wave_energy_sympy.py",
+        "git_blob_sha": "7064beefbf404d6b1e517a5658e7247fe313f26e",
+        "status": "MATCH_AND_EXECUTED_NATIVE"
+      }
+    ],
+    "native_ade": {
+      "steps": 12,
+      "per_step_energy_residuals_zero": 12,
+      "aggregate_energy_residual": "0",
+      "controller_off_steps": 4,
+      "off_controller_work": "0",
+      "full_state_return": false,
+      "physical_source_meter": false
+    },
+    "conditional_three_wave": {
+      "HF_pump_kHz": 5350,
+      "candidate_LH_kHz": [
+        8,
+        9
+      ],
+      "HF_daughter_kHz": [
+        5341,
+        5342
+      ],
+      "LH_energy_fraction_of_pump_depleted": [
+        "4/2675",
+        "9/5350"
+      ],
+      "LH_energy_fraction_percent": [
+        0.149533,
+        0.168224
+      ],
+      "manley_rowe_residual": "0",
+      "total_passive_mode_conversion_residual": "0",
+      "LTI_fixed_coefficient_pure_harmonic_new_line_disallowed": true,
+      "second_harmonic_overlap_kHz": [
+        8.5,
+        9
+      ]
+    },
+    "caveat": "Conditional isolated three-wave event; not measured plasma source work, overall conversion efficiency, a universal system bound or actual received power."
+  },
+  "original_dataset": {
+    "reported_url": "https://links.cosmos.ru/87-3f-d4-49",
+    "redirect_to": "https://disk.cosmos.ru/d/3a0ad689ac1e4d37bef9",
+    "web_access": "REDIRECT_TARGET_NOT_ACCESSIBLE",
+    "container_access": "DNS_RESOLUTION_FAILURE",
+    "original_files_downloaded": 0,
+    "hashes_verified": 0
+  },
+  "data_and_attribution_boundary": "No original SURA E/B, ionosonde, TEC, SEE or optical data, source/receiver terminal meters or Agda kernel certificates were acquired."
+}

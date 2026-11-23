@@ -168,21 +168,24 @@ small gate; they are not replaced by it.
   evidence.
 - This module does not certify spaCy accuracy or a particular parser profile.
 
-## Resource-admission non-promotion
 
-Exact-work admission is separate from semantic promotion.
+## TOE handoff
 
-The current parent-frontier regression observes 8,206 object keys against an
-8,192 exact-work budget. The golden Agda owner records that execution as
-rejected. The rejection does not delete, truncate, weaken, or relabel the
-semantic key set. Increasing a runtime budget also does not create truth,
-admissibility, empirical, theorem, runtime, or legal authority.
+The semantic-promotion owner is imported directly by the three canonical TOE roots:
 
-A migration-209 runtime claim requires a reconciliation receipt that survives
-the database transaction. A receipt observed only inside a transaction that
-later rolls back is not a durable certification receipt.
+- `DASHI.EverythingTOESymmetryResolved369`;
+- `DASHI.Unifier`;
+- `DASHI.Unified.Everything`.
 
-This extends the existing promotion policy without changing the tetralemma
-semantic carrier. Resource admission controls whether an exact execution may
-run. The semantic promotion gate controls what evidence may become a promoted
-semantic position. Neither gate can impersonate the other.
+The same roots import `DASHI.Core.GovernanceTrajectoryRealisationExact` and `DASHI.Finance.DashiTradeFibreBridgeExact`.
+
+This creates one invariant handoff across legal and trading domains:
+
+- observation is evidence;
+- classification is evidence;
+- heuristic support is evidence;
+- none of these creates execution, legal, or semantic authority;
+- authority remains owned by the domain-specific gate.
+
+No literal Actionstep-specific formal owner exists on the current default branch. This policy therefore does not invent one. A future Actionstep adapter must consume this gate and preserve the same non-promotion invariant.
+

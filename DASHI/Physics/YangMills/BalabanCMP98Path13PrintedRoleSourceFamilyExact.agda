@@ -161,3 +161,11 @@ cmp98Path13PrintedPointInverseSemanticsLevel = machineChecked
 
 literalCMP98Path13PrintedRoleSourceInputsLevel : ProofLevel
 literalCMP98Path13PrintedRoleSourceInputsLevel = conditional
+
+-- Eq. (120)/(121) on exactly the same printed-role family as Eq. (119).
+printedRolePath13Equation120QSource :
+  ∀ {CoarseField} → PrintedRolePath13SourceFamilyInputs CoarseField →
+  Nat → Perturbation.Path13RationalPerturbation →
+  Historical.Path13PositiveBond → Lie.SU2LieAlgebra
+printedRolePath13Equation120QSource inputs =
+  TwoCarrier.assembledEquation120QSource (fieldFamily inputs)

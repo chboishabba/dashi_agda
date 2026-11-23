@@ -25,42 +25,30 @@ import UFTC_Lattice as UFTC
 -- vector / embedding rows remain non-authoritative proposal carriers.
 
 data CoordinateRebuildabilityStatus : Set where
-  checkedCoordinateRebuildability_noTextPromotion :
-    CoordinateRebuildabilityStatus
+  checkedCoordinateRebuildability_noTextPromotion : CoordinateRebuildabilityStatus
 
 data CoordinateReceiptComponent : Set where
-  signedAdjacencyRowsComponent :
-    CoordinateReceiptComponent
+  signedAdjacencyRowsComponent : CoordinateReceiptComponent
 
-  absoluteDegreeRowsComponent :
-    CoordinateReceiptComponent
+  absoluteDegreeRowsComponent : CoordinateReceiptComponent
 
-  signedLaplacianMethodTagsComponent :
-    CoordinateReceiptComponent
+  signedLaplacianMethodTagsComponent : CoordinateReceiptComponent
 
-  spectralCoordinateMapRowsComponent :
-    CoordinateReceiptComponent
+  spectralCoordinateMapRowsComponent : CoordinateReceiptComponent
 
-  textualFallbackRowsComponent :
-    CoordinateReceiptComponent
+  textualFallbackRowsComponent : CoordinateReceiptComponent
 
-  embeddingMethodDistinctionComponent :
-    CoordinateReceiptComponent
+  embeddingMethodDistinctionComponent : CoordinateReceiptComponent
 
-  rebuildabilityWitnessComponent :
-    CoordinateReceiptComponent
+  rebuildabilityWitnessComponent : CoordinateReceiptComponent
 
-  inadmissibleNonRebuildableRowsComponent :
-    CoordinateReceiptComponent
+  inadmissibleNonRebuildableRowsComponent : CoordinateReceiptComponent
 
-  vectorNonAuthorityGatesComponent :
-    CoordinateReceiptComponent
+  vectorNonAuthorityGatesComponent : CoordinateReceiptComponent
 
-  vectorNonAuthorityAdapterRowsComponent :
-    CoordinateReceiptComponent
+  vectorNonAuthorityAdapterRowsComponent : CoordinateReceiptComponent
 
-  residualCheckProductRowsComponent :
-    CoordinateReceiptComponent
+  residualCheckProductRowsComponent : CoordinateReceiptComponent
 
 canonicalCoordinateReceiptComponents :
   List CoordinateReceiptComponent
@@ -82,11 +70,9 @@ canonicalCoordinateReceiptComponents =
 -- Signed adjacency rows and absolute-degree rows.
 
 data AdjacencyRowKind : Set where
-  residualSignedAdjacencyRow :
-    AdjacencyRowKind
+  residualSignedAdjacencyRow : AdjacencyRowKind
 
-  textualFallbackAdjacencyRow :
-    AdjacencyRowKind
+  textualFallbackAdjacencyRow : AdjacencyRowKind
 
 record SignedAdjacencyRow : Set where
   constructor signedAdjacencyRow
@@ -206,14 +192,11 @@ canonicalAbsoluteDegreeDoesNotPromoteTruth =
 -- Signed Laplacian method tags and embedding-method distinction.
 
 data SignedLaplacianMethodTag : Set where
-  unsignedResidualGraphLaplacian :
-    SignedLaplacianMethodTag
+  unsignedResidualGraphLaplacian : SignedLaplacianMethodTag
 
-  signedContradictionResidualLaplacian :
-    SignedLaplacianMethodTag
+  signedContradictionResidualLaplacian : SignedLaplacianMethodTag
 
-  absoluteDegreeSignedResidualLaplacian :
-    SignedLaplacianMethodTag
+  absoluteDegreeSignedResidualLaplacian : SignedLaplacianMethodTag
 
 canonicalSignedLaplacianMethods :
   List SignedLaplacianMethodTag
@@ -224,14 +207,11 @@ canonicalSignedLaplacianMethods =
   ∷ []
 
 data CoordinateEmbeddingLane : Set where
-  finiteSpectralCoordinateLane :
-    CoordinateEmbeddingLane
+  finiteSpectralCoordinateLane : CoordinateEmbeddingLane
 
-  textualFallbackRenderingLane :
-    CoordinateEmbeddingLane
+  textualFallbackRenderingLane : CoordinateEmbeddingLane
 
-  vectorProposalLane :
-    CoordinateEmbeddingLane
+  vectorProposalLane : CoordinateEmbeddingLane
 
 record EmbeddingMethodDistinction : Set where
   constructor embeddingMethodDistinction
@@ -559,7 +539,7 @@ canonicalNonRebuildableHasNoEquation =
 
 data AdmissibleCoordinateRow : Set where
   admissibleSpectralCoordinateRow :
-    (row : SpectralCoordinateMapRow) →
+  (row : SpectralCoordinateMapRow) →
     mapRowAdmissible row ≡ true →
     AdmissibleCoordinateRow
 

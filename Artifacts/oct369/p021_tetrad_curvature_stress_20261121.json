@@ -1,0 +1,24 @@
+{
+  "scope": "exact 3+1 static tetrad/Levi-Civita, Rindler vs curved, not PtMn3 physical gravity solution",
+  "checks_passed": 33,
+  "metric": "diag(-A(x)**2,1,1,1)",
+  "R": "-2*Derivative(A(x),(x,2))/A(x)",
+  "Einstein": "diag(0,0,A''/A,A''/A)",
+  "Rindler_metric": "A=1+alpha*x",
+  "Rindler_spin_connection_nonzero": true,
+  "Rindler_spacetime_curvature_zero": true,
+  "curved_metric": "A=1+beta*x**2",
+  "curved_scalar_R": "-4*beta/(beta*x**2+1)",
+  "curved_G_yy_and_zz": "2*beta/(beta*x**2+1)",
+  "Bianchi_all_components": true,
+  "measured_material_or_nonminimal_coupling": false,
+  "vierbein_derived_from_PtMn3": false,
+  "material_Tmunu_from_physical_current": false,
+  "gravity_modification_or_human_lift_proven": false,
+  "local_execution": "33/33 exact SymPy checks on source file, 2026-11-21",
+  "attribution": {
+    "prior": "Cartan/Clifford/Levi-Civita/Einstein geometric identities",
+    "existing": "DASHI GRFirstOrderGravityScope and OCT369 P0.20",
+    "new": "OCT369 exact 3+1 static metric and spin-connection regression"
+  }
+}

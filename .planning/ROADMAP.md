@@ -79,50 +79,211 @@ Plans:
 | 4. Signature Elimination | 2/2 | Complete | 2026-03-01 |
 | 5. Closure Harness | 0/2 | Not started | - |
 
+## 2026-10-30 — parallel needs institutional-transition source cut
 
-## 2026-10-30 — PR #1407 finite cyclotomic sampled-to-index proof cut
+- [x] Inspect user-supplied reel transcript and reuse governance/community/provenance nonfactorability owners.
+- [x] Add source-bounded, receipt-gated Agda stage machine and a finite revenue/needs counterexample; wire governance and focused TOE roots.
+- [ ] Run Agda exact-head --safe typechecking and audit transitive imports (no Agda compiler in this environment).
+- [ ] Acquire real-world delivery, surplus, consent, locality compatibility and counterfactual receipts before any causal or governance promotion.
 
-Owner: `Docs/papers/R2P2ThreeModeBinaryTernaryNSAliasingMaxCut.md`, section **5j**. This cross-project cut does **not** redefine the historical Feb–Mar geometry closure phases above. Golden: original Agda first, Lean semantic donor second.
+## 2026-10-29 — AO fleet discriminator and Max Cut convergence
 
-- [x] Read original 27/729 and 41/81 Agda index/orbit machinery, exact `BilinearCyclotomicPadCutExact`, C3 Fourier authority boundary, YM finite Fubini, NS finite permutation, newest #1437/#1438 Agda and current #1433 NS, plus actual dashi_lean4 NS files.
-- [x] Source-write Q(i) and Q(ζ5) addition/multiplication and distributive laws in the existing scalar owners; instantiate the same generic algebra.
-- [x] Source-write generic finite Fubini/add/swap/scale/append/map/concat-map, **original 27×27→729** distributive expansion, and original C4/C5 group-character addition; project into all three TOE roots.
-- [x] Independently execute exact arithmetic: 8/64 scalar ring basis triples, 5+5 arbitrary 729-product input pairs, 64/125 original table-derived character-index clauses. Regression scripts extended in place; committed-checkout tests not run.
-- [ ] **P0:** kernel type-check each new and previously source-written 365/41, C4/C5 finite owner on the pinned Agda head (no CI requested); repair concrete errors before any machine-checked claim.
-- [ ] **P0:** using the generic 729 product/Fubini/character layer, prove `retainedSampledBilinear = fourGridGaussianIndexConvolutionAt` and `fullSampledBilinear125 = indexedFiveGridBilinearAt` for arbitrary actual fields/targets.
-- [ ] **P1:** once source and kernel align, attach the same-object Complex3/Leray/Galerkin operator with physical divergence-free energy and signed coefficients; do not import unmerged unrelated lanes silently.
-- [ ] **P2:** preserve original R440/R736/B4 physical analytic and real-ODE walls, Ma 87Sr versus R2P2 neutral-Yb measurements, Ibrahim/Monster 3B provenance; no same-object promotion from indices.
+### Current problem
+
+The previous fleet view mixed spectral basis coordinates, semantic topics, subtopics, fibres, and executable goals. It also treated capacity-bounded worker width as if it implied full W = 20 concurrency.
+
+The corrected hierarchy is:
+
+```text
+MP eigenspace basis
+→ primary topic quotient
+→ subtopic orbit
+→ complete-link fibre
+→ typed unblocked goal
+```
+
+The two supported spectral truncation choices are K = 50 and K = 100.
+
+Topic admission rejects lexical noise before quotienting. Hex literals, pointer-like memory addresses, raw UI tokens, and raw DOM tokens cannot become topic labels.
+
+### Reuse
+
+Use the existing #1415/#1416/#1417 theorem owners as donors.
+
+Do not create a second residual, Pareto, or conductor calculus.
+
+Reuse existing finite Laplacian, Yang–Mills commutator, and Navier–Stokes commutator owners for the Max Cut bridge.
+
+### New acceptance gates
+
+- [x] Golden Agda defines all five scale levels.
+- [x] Golden Agda records K = 50 and K = 100 explicitly.
+- [x] Golden Agda defines a typed token-admission firewall.
+- [x] A full schedule is total over twenty worker slots.
+- [x] Every scheduled goal is unblocked.
+- [x] Every scheduled goal is Pareto eligible.
+- [x] Every distinct scheduled pair has noTypedMeet evidence.
+- [x] Finite Max Cut has explicit partition, crossing-edge, Laplacian, and SDP-receipt interfaces.
+- [x] Max Cut operator reuse does not promote a Yang–Mills or Navier–Stokes same-object theorem.
+- [x] Lean mirrors the golden public contract.
+- [x] dashiBRAIN tests the concrete token filter, stratifier, full-width scheduler, and finite cut diagnostics.
+
+### Live non-promotion boundary
+
+Spectral rank does not create truth.
+
+Topic clustering does not create theorem authority.
+
+A finite graph cut does not create a gauge equation.
+
+An SDP relaxation does not create a PDE estimate.
+
+Worker occupancy does not create proof authority.
+## 2026-10-29 — Weighted directed graph / trialectics 369 seam
+
+- [x] Reuse three-position observer matrix, attached two-cell, non-geometric argument opposition, ternary hypervoxel and typed pants owners.
+- [x] Source-write exact rational-in-tenths 3x3 ↔ directed weighted graph round trips, 6-arc specimen, C3-weight obstruction and full-matrix attached-face non-descent.
+- [x] Wire relational rollup, TOE roots, Unified aggregate and 369 Max Cut facade.
+- [ ] Golden Agda exact-head kernel check, --safe/no-postulates/no-metas/no-termination-escape scan; no certification until run.
+- [ ] Check Lean mirror against golden proof statements under pinned toolchain.
+- [ ] Supply separately sourced hyperfabric stalk/incidence/section compatibility and 27-pants adjacency if advancing beyond the finite graph boundary.
+
+See `Docs/TrialecticWeightedDirectedGraph369.md` for attribution, the weight convention, proofs and non-promotion obligations.
+
+- [x] Follow-on: finite weight-graph outgoing-row hyperfabric section with incidence/restriction compatibility and mediated two-step path result (A²)[A,C]=2.2.
+
+## 2026-10-30 — Pareto/max-cut revision: native pants adjacency
+
+- [x] Inspect existing `TritGridStep`/`HypervoxelAdjacent`, pants-path
+  round trips, generic `GraphHom`, and snowball/Ibrahim proof boundaries.
+- [x] Source-write explicit nearest-neighbour `Pants3Adjacent` and
+  both directions of native voxel/pants graph homomorphisms.
+- [x] Source-write C3 rotation, second-slot seam flip, all six distinct
+  S3 coordinate permutations, and adjacency transport.
+- [x] Source-write a nontrivial two-colour proper colouring,
+  a singleton-colour obstruction and colour pullbacks.
+- [x] Add independent finite exhaustive semantics audit and
+  Pareto/snowball/Ibrahim non-promotion consumption; link TOE roots.
+- [ ] **P0 verification**: exact-head safe Agda; then pinned Lean;
+  synchronize branch if master moves; no CI obligation in this tranche.
+- [ ] **P1 situated seam**: independently supplied branch-channel
+  mapping, `InterfaceMatch`, matching restrictions and provenance.
+- [ ] **P2 triadic mediation**: existing `FaceMediationLaw` /
+  `SecondOrderCellGluing` with original graph retained.
+- [ ] **P3 stronger actions**: preserve typed colourings and sourced
+  consumer invariants under specific permissible group actions.
+- [ ] **P4 TOE/physics**: only theorem-bearing cross-domain transport,
+  no 3B/smoothness/continuum/scientific authority from numerology.
+
+For the precise finite cut and citations, see
+`Docs/TrialecticWeightedDirectedGraph369.md`. Older MDL / signature
+closure obligations in the five-phase roadmap above are independent;
+this 369 lane does not mark those completed.
+
+## 2026-10-30 — P2 finite medial instance (not semantic closure)
+
+- [x] Reuse existing `FaceMediationLaw`,
+  `GrothendieckFaceMediatedSection`, `promoteGrothendieckMediated`
+  and non-descent witnesses.
+- [x] Source-write one explicitly selected synthetic policy, an
+  inhabited carry and a proof candidate that the selected output
+  fails to descend from the complete weighted graph.
+- [ ] A **situated, source-authorized** mediation law and admissible
+  interfaces (separate from finite selected demonstration).
+- [ ] Exact-head `--safe` Agda and downstream pinned Lean verification
+  for both the pants graph/colour and selected mediation owners.
+
+## 2026-10-30 P0/P1 native weighted max-cut and QID high-alpha cut
+
+Maximal edgewise two-way cut can be derived from existing proved-candidate
+checkerboard properness. This bridges the user's graph-as-matrix
+example and 27-grid without falsely identifying them. Reuse graph
+isomorphism and a transported palette witness. QIDs are concept-only
+coordinates and cannot provide source, semantics, physics, or authority.
+
+- [ ] Source-write edge-saturated maximum cut for any nonnegative native
+  graph edge weights; record unit-weight 54 edge finite audit separately.
+- [ ] Verify QIDs against live Wikidata labels and source-atlas ownership.
+- [ ] Integrate into Ibrahim/Pareto snowball and downstream Lean.
+- [ ] Kernel-check each construction on exact branch head; keep
+  source-written and kernel-paid status split until then.
+
+## 2026-10-30 additional P1: directed two-ended fabric
+
+Source-side outgoing-row hyperfabric is already a finite fixture.
+The higher-value next cut is a **both-endpoint compatible section**
+that preserves the orientation and witnesses asymmetry. Reuse the
+existing `TypedHyperfabricCore`, not a new sheaf/hypergraph ontology.
+QIDs and 2026 directed-sheaf sources are attribution/comparison only.
+
+## 2026-10-30 source-written closure ledger — weighted max-cut/QID
+
+- [x] Native edgewise cut saturation and generic Nat-weighted
+  finite-list optimality, plus exact source-level 54-edge unit witnesses.
+- [x] Actual QID identities for ten graph/colouring/max-cut concepts;
+  specific fixture identity remains unresolved.
+- [x] Two-ended directed hyperfabric compatible section with
+  independently oriented source/target restriction maps.
+- [x] Golden TOE/import and Lean downstream mirrors synchronised.
+- [ ] Agda/Lean kernel verified status; exact-head transcript and safe,
+  metas, termination, postulate scans. No CI dependency.
+- [ ] 54-edge formal completeness/uniqueness and genuine selected
+  situated pants/gluing or face mediation interface.
+
+## 2026-10-30 QID role-typing refinement
+
+- [x] Type QID graph concept roles; distinguish discipline,
+  structure, representation, morphism, problem, theorem.
+- [x] Reuse existing Snowball Dewey/QID coordinate and inspected
+  511.54 directed graph vs 511.5 graph theory parent.
+- [x] Lean mirror role-indexed concept vocabulary.
+- [ ] Exact-head kernel checks and situated face/seam authority.
+
+## 2026-10-30 — further high-alpha 369 edge-coverage / symmetry cut
+
+- [x] Source-write native adjacency orientation canonicalisation
+  covering each of the three axes and four directed step cases.
+- [x] Source-write 54-slot chart, explicit map into existing
+  54-unit-edge witnesses and exact closed 0–53 slot-index census.
+- [x] Source-write all six S3 actions and the seam reflection as
+  *fixing the actual selected cut*, not just proper-colouring existence.
+- [x] Mirror both finite surfaces downstream in Lean; extend local
+  Python test with 54-edge/108-orientation and 162+27 action checks.
+- [x] Attach 2026 CSNN/Directo author/source roots to existing
+  attributed-source atlas; do not import algorithms or benchmarks.
+- [ ] Golden exact-head kernel, Lean pinned kernel, and Agda
+  abstract slot-index injectivity/list Nodup certification.
+- [ ] Sourced, consumer-specific higher-order face/pants transport
+  and real direction-preserving weighted representation actions.
 
 
-### 2026-10-30 5k source-character continuation (PR #1407)
-- [x] Reuse one scalar-polymorphic 729-pair Fubini proof for phase-weighted sampled products, multiply six C4/C5 cube-character factors using the existing scalar multiplication laws, and export both sample-local theorems from all TOE roots.
-- [x] Independently verify each exact weighted 729-pair product at all 64 C4 and all 125 C5 source sample addresses; extend in-place regressions. No pinned checkout run.
-- [ ] **P0:** prove actual FFT-padded synthesis equals source 27-mode character sum, normalized sample analysis equals character coefficient extraction, and C4³/C5³ orthogonality collapses to the original indexed 729-term operator. Kernel type-check all new source.
-- [ ] Preserve separate original NS R440/R736/B4 physical walls, clock calibration, Ibrahim/Monster and external historical proof ownership.
+## 2026-10-30 reuse-first local Python / Max-Cut / QID cut
 
+- [x] Inspected **actual existing** `GraphColouring369PantsWeightedMaxCutExact.agda`, `GraphColouring369PantsSymmetryCutInvariantExact.agda`, `GraphColouring369PantsQidParetoSnowballExact.agda`, and Lean mirror `AgdaMirror/Reasoning/GraphColouring369PantsMaxCutQid.lean`. Do not duplicate the native 27-vertex graph, its 54 edges, its already source-written all-nonnegative-weight saturating checkerboard theorem, or its typed QID identities. These are **source declarations, kernel acceptance pending**.
+- [x] Extend **existing** `scripts/verify_trialectic_369_graph_pants_finite.py` (commit `0615b1452cdf3c6f8ff05119ced21f8896c7fa56`) with deterministic BFS over 54 native undirected edges; show all 27 vertices reachable; for each initial colour, forced edge-crossing propagation uniquely reconstructs the checkerboard or complement. The classical connected-bipartite-graph implication says **when all 54 weights are strictly positive**, every optimum cut must saturate every edge, and these two partitions are the only optima. No enumeration of all `2^27` partitions is claimed. The updated exact branch script was not executed from a checkout.
+- [x] Independently execute local Python `verify_dashi_27grid_maxcut.py`: 27 vertices, exactly 54 undirected edges, six coordinate S3 symmetries, three coordinate reflections, 750 seeded nonnegative-weight assignments and 150,000 sampled challenger cuts. All passed; this is a computational fixture receipt, **not** Agda/Lean kernel acceptance.
+- [x] Inspect existing graph-QID source: **maximum cut Q942557**, **bipartite graph Q174733**, and other ten prior concept IDs; checked those two against current Wikidata item pages. These identify concepts, not the private DASHI native-grid instance, not historical publication priority, not the underlying proof, not the distinct 27-function conjugation quotient, and not the Monster 3B representation. Reuse `SnowballExternalIdentityAvailabilityExact`, typed `KnowledgeRole`, and the independently authored Ibrahim provenance custody.
+- [ ] **Genuine Agda uniqueness theorem** for strict positive weights and whole 54-edge grid needs a canonical connected path/certificate and extensional comparison of all optimal partitions to the two checkerboards; BFS Python is not a kernel theorem.
+- [ ] Source-checked same-object adapter to OpenAI family-102 **simple unweighted** `Graph.cutSize` with `u<v` orientation and canonical binary graph printer; distinguish the closed native bipartite class (trivial exact optimum) from unrestricted hardness. No unrestricted graph 102 theorem or SAT 378 speedup follows from this native fixture.
+- [ ] Exact-head Agda and Lean compiler receipts; no CI dependency and no ESD edit.
 
-### 2026-10-30 5l character-resolution payment, exact original sample order (PR #1407)
-- [x] Read live #1440/#1438/#1437 **source Agdas**, current draft C4/C5/729 owner code, and actual `dashi_lean4` NS contract/R440 counterexample; retain distinct YM/Ibrahim/Monster and finite Max Cut attribution.
-- [x] Source-write one reusable `finiteFourierExtractionFromOriginal729GivenResolution` from existing `sumAllSwap` and `sumAllScaleLeft`; instantiate C4 retained and C5 full-output actual normalized phases, selection predicates and sample orders with explicit resolution premises; expose in all three TOE roots.
-- [x] Independently execute exact source-order finite character kernel checks: C4 4096 group pairs + 19683 original pair/output cases, C5 15625 group pairs + 91125 original pair/output cases; update existing universal basis certificate in-place. A first N-versus-N³ normalization-check mistake was repaired before full passing run. Exact GitHub checkout not tested.
-- [ ] **P0** Prove actual `gaussianActualCharacterResolution` and `cyclotomicFiveActualCharacterResolution` using existing 1D/tensor orthogonality and original source sample order, then pinned Agda check.
-- [ ] **P0** Prove tensor FFT/padding synthesis/analysis = corresponding source character sums for arbitrary coefficient fields; compose with the now generic original 729 extraction to close both sampled/index equations.
-- [ ] **P1/P2** Preserve original physical Complex3/Leray/R440/R736/B4 and experimental clock roots; no same-object YM/NS or Ibrahim/Monster 3B promotion from combinatorial equivalences.
+- [x] Strengthened native canonical slots with an explicit
+  Agda `NoDuplicateSlots allNativeSlots` proof candidate;
+  close-list boolean evaluation has a source-written soundness
+  construction. No external checker receipt.
+- [ ] Check the new inductive distinctness and 54-slot code census
+  in Agda; separately prove generic slotId/endpoint injectivity
+  if required by a later consumer.
 
+## C3 source/target orbit-sum closure (source-written)
 
-### 2026-10-30 exact --safe closure gate (PR #1407)
-- [x] Check actual local branch owners plus `DASHI/Core/Prelude.agda` and original observer incidence for `{-# OPTIONS --safe #-}`: the file options are **absent** despite no obvious new trust escapes. Note: no escape scan certifies the Agda import closure.
-- [x] Verify original de-aliasing attribution: S. A. Orszag 1971 J. Atmos. Sci. DOI 10.1175/1520-0469(1971)028<1074:OTEOAI>2.0.CO;2; G. S. Patterson Jr./S. A. Orszag 1971 Phys. Fluids DOI 10.1063/1.1693365.
-- [x] Normalize C4 four-point scalar explicitly as `normalize 4 1`.
-- [ ] **P0:** pinned Agda `--safe` type-check with source dependency audit; do not claim certified golden just because no holes/postulates appear in static scans. Preserve original unmerged branches and ESD write protection.
-
-
-## 2026-10-30 5m source-ordered 3D character resolution (PR #1407)
-
-- [x] Inspect actual 27/729, C4/C5/Nyquist source, original Lean NS R440, and newest #1441/#1440/#1438/#1437 Agda owner code; reuse source QID guards and Ibrahim Pareto custody ownership.
-- [x] Source-write exact original four/five axis Nyquist-order normalized character-resolution (16/25 cases), generic 3-axis source Cartesian Fubini and Boolean selector product, C4/C5 full cube phase normalization/conjugation factorization and delta (64/125 original sample carriers).
-- [x] Source-write **unconditional** `gaussianSourceSampledEqualsIndexed` and `cyclotomicFiveSourceSampledEqualsIndexed`, then inherited original 729 integer-frequency convolution transport; attach to all three TOE roots. **These results refer to source character sums**, not actual FFT arrays; Agda kernel pending.
-- [x] Independent local exact checks: 16/25 original axis character resolution and 19,683/91,125 original pair→integer target selectors passed. Original Ibrahim QID and full historical corpus remain unpromoted.
-- [ ] **P0:** prove exact runtime padded tensor FFT arrays `retainedSampledBilinear`/`fullSampledBilinear125` agree with newly closed source character-sum representations for every arbitrary field and target. Do not reuse C3 `spectralConvolutionDiagonalises` as the missing group formula.
-- [ ] **P0:** actual exact-head Agda kernel, transitive `--safe` import proof and resulting repair of any concrete errors, then review merge-base conflicts.
-- [ ] **P1:** real NS Complex3/Leray/Galerkin same-object transport; R440/R736/B4 analytic and time-bound evolution separate. QID is not 2014 historical dump/edge evidence, Monster 3B representations require original same-object custody.
+- [x] Construct C3-invariant Nat-weight orbit sum for any
+  existing three-vertex weighted directed graph.
+- [x] Compute explicit circulant 3×3 image and preserve
+  original asymmetric C3 obstruction and not-same-object witness.
+- [x] Reuse existing source+target directed stalk and restrictions
+  for a generic compatible section with pointwise C3 transports.
+- [x] Mirror exact finite theorem boundary downstream in Lean and
+  consume in the canonical TOE/Ibrahim import graph.
+- [ ] Golden Agda and Lean kernel checks, full import safety, and
+  independently justified equivariant triadic face/pants gluing.

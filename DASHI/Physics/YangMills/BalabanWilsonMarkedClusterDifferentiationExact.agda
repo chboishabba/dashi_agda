@@ -21,7 +21,8 @@ module DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; cong; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (_++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)

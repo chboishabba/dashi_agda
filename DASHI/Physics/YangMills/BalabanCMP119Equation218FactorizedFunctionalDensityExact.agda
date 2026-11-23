@@ -16,6 +16,9 @@ module DASHI.Physics.YangMills.BalabanCMP119Equation218FactorizedFunctionalDensi
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as N
+open import Data.Rational.Base using (ℚ)
+import DASHI.Physics.YangMills.Balaban1989Theorem1UVStabilityExact as Source
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_)
@@ -202,3 +205,39 @@ literalCMP119Equation219ComponentExtractionLevel = conditional
 
 literalCMP119Equation220StepExtractionLevel : ProofLevel
 literalCMP119Equation220StepExtractionLevel = conditional
+
+-- Finite physical factorization, without constructing the contradictory
+-- legacy all-Nat input. Reuse the same sum and ordered product evaluators.
+module _
+    {trajectory split}
+    (h : History.BetaSplitInverseSquareTerminalHistoryData trajectory split)
+    (coverage : ∀ k → k N.≤ History.terminalScale h → History.ActiveScale h k)
+    {SlowField Sequence Component Step : Set}
+    (sequences : Nat → List Sequence)
+    (components : Nat → Sequence → List Component)
+    (steps : Nat → Sequence → Component → List Step)
+    (stepValue : Nat → Sequence → Component → Step → SlowField → ℝ)
+    (residual : Nat → Sequence → SlowField → ℝ)
+    (form bounds : Nat → (SlowField → ℝ) → Set)
+  where
+
+  finiteEquation218Density : Nat → SlowField → ℝ
+  finiteEquation218Density k slow =
+    realSum (sequences k)
+      (λ sequence → residual k sequence slow *ℝ
+        realProduct (components k sequence)
+          (λ component → realProduct (steps k sequence component)
+            (λ step → stepValue k sequence component step slow)))
+
+  finiteEquation218Flow :
+    Source.Balaban1989EffectiveDensityFlow ℚ (SlowField → ℝ)
+  finiteEquation218Flow =
+    Functional.finiteFunctionalDensityFlow h coverage
+      finiteEquation218Density form bounds
+
+  finiteEquation218PhysicalDensity :
+    ∀ k → k N.≤ History.terminalScale h →
+    Source.densityAt finiteEquation218Flow k ≡ finiteEquation218Density k
+  finiteEquation218PhysicalDensity =
+    Functional.finiteFunctionalDensityAgrees h coverage
+      finiteEquation218Density form bounds

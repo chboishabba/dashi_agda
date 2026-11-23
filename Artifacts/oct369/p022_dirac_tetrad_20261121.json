@@ -1,0 +1,14 @@
+{
+  "checks_passed": 42,
+  "scope": "4x4 Clifford gamma and 3+1 tetrad compatibility plus massless conserved current",
+  "Clifford_anticommutators": 16,
+  "tetrad_covariance_components": 16,
+  "massless_solution": "psi=(1,1,0,0)^T/sqrt(A)",
+  "current_t": "2/A**2",
+  "current_x": "-2/A",
+  "covariant_divergence": "0",
+  "physical_PtMn3_spinor": false,
+  "physical_metric_stress": false,
+  "execution": "42 tests passed in local SymPy run; exact GitHub source not separately re-run",
+  "origin": "DASHI P0.21 and classical Clifford/Dirac, new P0.22 consumer"
+}

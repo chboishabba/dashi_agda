@@ -42,28 +42,18 @@ x ≢ y = x ≡ y → ⊥
 -- economic interpretations.
 
 data CheckedStageToneFact : Set where
-  checkedStageToneProjectsToTriTruth :
-    CheckedStageToneFact
-  checkedOverflowProjectsToTriLow :
-    CheckedStageToneFact
-  checkedTetralemmaToneFactorization :
-    CheckedStageToneFact
-  checkedTriTruthResidualExcludesContradiction :
-    CheckedStageToneFact
+  checkedStageToneProjectsToTriTruth : CheckedStageToneFact
+  checkedOverflowProjectsToTriLow : CheckedStageToneFact
+  checkedTetralemmaToneFactorization : CheckedStageToneFact
+  checkedTriTruthResidualExcludesContradiction : CheckedStageToneFact
 
 data UncheckedInterpretationClaim : Set where
-  socialDevelopmentStagesUnchecked :
-    UncheckedInterpretationClaim
-  theologyUnchecked :
-    UncheckedInterpretationClaim
-  lacanianReadingUnchecked :
-    UncheckedInterpretationClaim
-  hegelianReadingUnchecked :
-    UncheckedInterpretationClaim
-  politicalPredictionUnchecked :
-    UncheckedInterpretationClaim
-  economicPredictionUnchecked :
-    UncheckedInterpretationClaim
+  socialDevelopmentStagesUnchecked : UncheckedInterpretationClaim
+  theologyUnchecked : UncheckedInterpretationClaim
+  lacanianReadingUnchecked : UncheckedInterpretationClaim
+  hegelianReadingUnchecked : UncheckedInterpretationClaim
+  politicalPredictionUnchecked : UncheckedInterpretationClaim
+  economicPredictionUnchecked : UncheckedInterpretationClaim
 
 data StageToneRowName : Set where
   seedToneRow : StageToneRowName
@@ -169,24 +159,15 @@ stageToneResidualExcludesContradiction overflow =
   triResidual-excludes-contradiction tri-low
 
 data InterpretationClaim : Set where
-  stageToneVocabularyClaim :
-    InterpretationClaim
-  tetralemmaVocabularyClaim :
-    InterpretationClaim
-  residualBoundaryClaim :
-    InterpretationClaim
-  socialDevelopmentStageClaim :
-    InterpretationClaim
-  theologicalClaim :
-    InterpretationClaim
-  lacanianClaim :
-    InterpretationClaim
-  hegelianClaim :
-    InterpretationClaim
-  politicalPredictionClaim :
-    InterpretationClaim
-  economicPredictionClaim :
-    InterpretationClaim
+  stageToneVocabularyClaim : InterpretationClaim
+  tetralemmaVocabularyClaim : InterpretationClaim
+  residualBoundaryClaim : InterpretationClaim
+  socialDevelopmentStageClaim : InterpretationClaim
+  theologicalClaim : InterpretationClaim
+  lacanianClaim : InterpretationClaim
+  hegelianClaim : InterpretationClaim
+  politicalPredictionClaim : InterpretationClaim
+  economicPredictionClaim : InterpretationClaim
 
 data ClaimPromotionVerdict : Set where
   checkedCarrierOnly : ClaimPromotionVerdict

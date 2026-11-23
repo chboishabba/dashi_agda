@@ -24,7 +24,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; s≤s)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; _<_)
+import Data.Rational.Tactic.RingSolver as Ring
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
+import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -249,3 +252,142 @@ path13NativeRadiusRawPathTelescopeLevel = machineChecked
 path13ExactRationalSU2OperatorRepresentationLevel : ProofLevel
 path13ExactRationalSU2OperatorRepresentationLevel =
   R171.cmp98RationalSU2OperatorRepresentationRound171Level
+
+------------------------------------------------------------------------
+-- Direct squared-chord route on the actual unit group.  Unlike the
+-- operator-defect representation socket above, this uses only the
+-- existing rational quaternion norm theorem and finite path recursion.
+------------------------------------------------------------------------
+
+chordRadiusSq : SU2.RationalUnitQuaternion → ℚ
+chordRadiusSq q =
+  Norm.normSq (QTelescope._-q_ (R187.eraseUnitQuaternion q) Q.oneQ)
+
+chordRadiusSqIsLiteral : ∀ q →
+  chordRadiusSq q ≡ SU2.literalChordalDistanceSq q
+chordRadiusSqIsLiteral (SU2.rationalUnitQuaternion a x y z _) =
+  Ring.solve-∀ a x y z
+
+unitRawNorm : ∀ q → Norm.normSq (R187.eraseUnitQuaternion q) ≡ 1ℚ
+unitRawNorm q = SU2.unitNormExact q
+
+unitProductDifference : ∀ u v →
+  QTelescope._-q_ (R187.eraseUnitQuaternion (Group.multiplyRationalSU2 u v)) Q.oneQ
+  ≡ ((QTelescope._-q_ (R187.eraseUnitQuaternion u) Q.oneQ)
+      Q.*q R187.eraseUnitQuaternion v)
+      Q.+q QTelescope._-q_ (R187.eraseUnitQuaternion v) Q.oneQ
+unitProductDifference (SU2.rationalUnitQuaternion a x y z _)
+                      (SU2.rationalUnitQuaternion b p q t _) =
+  Q.quaternionExt (Ring.solve-∀ a x y z b p q t)
+    (Ring.solve-∀ a x y z b p q t)
+    (Ring.solve-∀ a x y z b p q t)
+    (Ring.solve-∀ a x y z b p q t)
+
+unitProductChordBound : ∀ u v a b →
+  0ℚ ℚ.< a → 0ℚ ℚ.< b →
+  chordRadiusSq u ≤ a * a → chordRadiusSq v ≤ b * b →
+  chordRadiusSq (Group.multiplyRationalSU2 u v) ≤ (a + b) * (a + b)
+unitProductChordBound u v a b ap bp hu hv =
+  let du = QTelescope._-q_ (R187.eraseUnitQuaternion u) Q.oneQ
+      dv = QTelescope._-q_ (R187.eraseUnitQuaternion v) Q.oneQ
+      rightTransport = du Q.*q R187.eraseUnitQuaternion v
+      sameNorm : Norm.normSq rightTransport ≡ chordRadiusSq u
+      sameNorm rewrite Norm.normSqMultiplyExact du (R187.eraseUnitQuaternion v)
+                     | unitRawNorm v = ℚP.*-identityʳ (chordRadiusSq u)
+      transportedBound = subst (λ x → x ≤ a * a) (sym sameNorm) hu
+  in subst (λ x → Norm.normSq x ≤ (a + b) * (a + b))
+       (sym (unitProductDifference u v))
+       (Norm.radiusTriangleSquared a b rightTransport dv ap bp transportedBound hv)
+
+chordInverseExact : ∀ q →
+  chordRadiusSq (Group.inverseRationalSU2 q) ≡ chordRadiusSq q
+chordInverseExact q =
+  trans (cong (λ v → Norm.normSq (QTelescope._-q_ v Q.oneQ))
+    (Erasure.eraseInverse q))
+    (AdjointNorm.inverseDifferenceNormSqExact (R187.eraseUnitQuaternion q))
+
+epsChord : ℚ
+epsChord = Budget.perLinkDefectMajorant
+
+epsChordPositive : 0ℚ ℚ.< epsChord
+epsChordPositive = ℚP.positive⁻¹ epsChord
+
+linkSqBelowEpsSq : Relaxed.fourRhoSquare ≤ epsChord * epsChord
+linkSqBelowEpsSq =
+  ℚP.<⇒≤ (ℚP.positive⁻¹ (epsChord * epsChord - Relaxed.fourRhoSquare))
+
+path13OrientedChordSq : ∀ background → Background.SelectedInverseLinkRadius13 background →
+  ∀ site direction →
+  chordRadiusSq (Bond.orientedLink (R192.path13PhysicalPeriodicRealization background)
+    site direction) ≤ epsChord * epsChord
+path13OrientedChordSq background radius site (Carrier.pair axis true) =
+  subst (λ raw → Norm.normSq (QTelescope._-q_ raw Q.oneQ) ≤ epsChord * epsChord)
+    (sym (trans
+      (Erasure.eraseOrientedLinkPositive
+        (R192.path13PhysicalPeriodicRealization background) site axis)
+      (R192.path13RealizationErasesToPhysicalLink background site axis)))
+    (ℚP.≤-trans (path13PositiveLinkNormSqBelowRadius background radius axis site)
+      linkSqBelowEpsSq)
+path13OrientedChordSq background radius site (Carrier.pair axis false) =
+  let predecessor = Bond.negativeStep site axis
+      erased = trans
+        (Erasure.eraseOrientedLinkNegative
+          (R192.path13PhysicalPeriodicRealization background) site axis)
+        (cong Quaternion.quaternionConjugate
+          (R192.path13RealizationErasesToPhysicalLink background predecessor axis))
+      invbound = subst (λ d → d ≤ epsChord * epsChord)
+        (sym (AdjointNorm.inverseDifferenceNormSqExact (Background.link background axis predecessor)))
+        (ℚP.≤-trans (path13PositiveLinkNormSqBelowRadius background radius axis predecessor)
+          linkSqBelowEpsSq)
+  in subst (λ raw → Norm.normSq (QTelescope._-q_ raw Q.oneQ) ≤ epsChord * epsChord)
+       (sym erased) invbound
+
+chordBudget : Nat → ℚ
+chordBudget zero = 0ℚ
+chordBudget (suc n) = epsChord + chordBudget n
+
+chordBudgetNN : ∀ n → 0ℚ ≤ chordBudget n
+chordBudgetNN zero = ℚP.≤-refl
+chordBudgetNN (suc n) = ℚP.+-mono-≤
+  (ℚP.<⇒≤ epsChordPositive) (chordBudgetNN n)
+
+chordBudgetPositive : ∀ n → 0ℚ ℚ.< chordBudget (suc n)
+chordBudgetPositive n =
+  ℚP.<-≤-trans epsChordPositive
+    (subst (λ left → left ≤ epsChord + chordBudget n)
+      (ℚP.+-identityʳ epsChord)
+      (ℚP.+-monoʳ-≤ epsChord (chordBudgetNN n)))
+
+chordBudgetIsLengthTimesEps : ∀ n →
+  chordBudget n ≡ Sums.natAsRational n * epsChord
+chordBudgetIsLengthTimesEps zero = sym (ℚP.*-zeroˡ epsChord)
+chordBudgetIsLengthTimesEps (suc n) rewrite chordBudgetIsLengthTimesEps n =
+  PathBudget.successorBudgetExact n epsChord
+
+pathChordSqBelowLengthBudget : ∀ background →
+  Background.SelectedInverseLinkRadius13 background →
+  ∀ site word bound →
+  R164.listLength word ≤ bound →
+  chordRadiusSq (Bond.pathHolonomy
+    (R192.path13PhysicalPeriodicRealization background) site word)
+  ≤ chordBudget bound * chordBudget bound
+pathChordSqBelowLengthBudget background radius site [] bound le =
+  PathBudget.productNonnegative (chordBudget bound) (chordBudget bound)
+    (chordBudgetNN bound) (chordBudgetNN bound)
+pathChordSqBelowLengthBudget background radius site (_ ∷ _) zero ()
+pathChordSqBelowLengthBudget background radius site (d ∷ []) (suc zero) le =
+  let u = Bond.orientedLink (R192.path13PhysicalPeriodicRealization background) site d
+      fixed = path13OrientedChordSq background radius site d
+  in subst (λ q → chordRadiusSq q ≤ chordBudget 1 * chordBudget 1)
+       (sym (Group.identityRight u))
+       (subst (λ upper → chordRadiusSq u ≤ upper)
+         (Ring.solve []) fixed)
+pathChordSqBelowLengthBudget background radius site (d ∷ e ∷ es) (suc zero) (s≤s ())
+pathChordSqBelowLengthBudget background radius site (d ∷ ds) (suc (suc n)) (s≤s le) =
+  let real = R192.path13PhysicalPeriodicRealization background
+  in unitProductChordBound (Bond.orientedLink real site d)
+       (Bond.pathHolonomy real (Bond.walkStep site d) ds)
+       epsChord (chordBudget (suc n))
+       epsChordPositive (chordBudgetPositive n)
+       (path13OrientedChordSq background radius site d)
+       (pathChordSqBelowLengthBudget background radius (Bond.walkStep site d) ds (suc n) le)

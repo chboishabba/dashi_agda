@@ -370,3 +370,61 @@ by an orchestrator; it neither invokes nor implements orchestration.
 ## 2026-11-09 AST-first corrected P0 source owner
 
 The canonical first task is now to ingest all *available* pinned Lean declaration exports into one native expression DAG world in the existing `.dashi/repository.sqlite3`, **before** AO-relatedness and exact theorem gap matching. Source-written implementation and precise W01–W13 acceptance obligations: [dashi_lean4/docs/roadmap/JMDLeanASTWorldMaxCut.md](https://github.com/chboishabba/dashi_lean4/blob/chatgpt/jmd-image-owner-roadmap-20261109/docs/roadmap/JMDLeanASTWorldMaxCut.md). The 21,481 global and 1,996 Lean-starred repository IDs are already harvested, but they are **not yet 21,481 AST-indexed theorem libraries**. The source-accurate Lean AST world is the primary donor substrate; the existing Agda preflight symbol and gap index is the original target-owner substrate. Only *after* P0 source coverage and AST imports are measured should existing `itir.formal.inspect/route` and AO gap finding join them. Translator round-trip stability remains P4. This supersedes any earlier plan placing translator checking or image-oriented source routing ahead of native Lean AST ingestion.
+
+
+## 2026-11-20 consolidated Monster / Thompson / North Star implementation
+This section is the single current roadmap for the Monster lane on this JMD consolidation PR; preserves upstream general P0 AST discovery priority and supersedes the local W roadmap on narrow PR #1340 (source snapshot 58e9501eec24d9b0a974af27aa2805f123ace19f). Cross-PR donors are reused, not re-proved or assumed imported just because their names match. All actual H1–H5 obligations refer to the same original rational coordinate isomorphism.
+
+### Attributed prior work and source record
+## JMD–DASHI 3B/3C residual and North Star roadmap (2026-11-20)
+
+### Attribution
+JMD: supplied 3C centralizer diagram and NorthStarCompletionAudit / H1–H5 diagram.
+DASHI: supplied five-orbit origami diagram, residual 54; existing Heisenberg and cyclotomic owners.
+Joint synthesis: comparison, S3 candidate, Laplacian transfer. Diagrams are source records, not proof certificates.
+Published inputs: ATLAS of Finite Groups, Th and Fi23 page (https://gaetan.chenevier.perso.math.cnrs.fr/ALG1/ATLAS.pdf); Monster character table north-west corner, https://doi.org/10.1017/9781009401586 (chapter Monstrous Moonshine: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/E48A79B810EB9DE3D68ED68C97CEE07B/9781009401586c7_402-434.pdf/monstrous_moonshine.pdf).
+3B and 3C reduced traces 53 and -1; conformal extension 54 and 0. Normalizer S3 x Th is sourced, not constructed.
+
+### Exact finite model
+Q=F3^2/{±1}: one singleton and four pairs. D=Q x C2. Core D x F3^8 x C3, translation on last coordinate. Residual ordered distinct ternary pairs x F3^2, 54 states. B fixes residual; C translates last coordinate. Both have 196884 states, traces (196884,54,54) and (196884,0,0). Multiplicity difference (36,-18,-18)=18 L e0, L=3I-J, L²=3L. Sixfold factor is naturally S3 but a residual submodule inside the original Monster is not established.
+
+Local prior verifier rerun in Python/SymPy 1.14: PASS, explicit enumeration of both carriers. Agda and GAP not installed; new Agda source is UNVERIFIED.
+
+### Gates
+W01 attribution recorded; W02–W08 finite model derivation and local enumeration PASS; W09 published character input recovered, independent GAP certificate OPEN; W10 actual Th action OPEN; W11 cube-root/twisted VOA OPEN; W12 original Griess product OPEN; W13 sixfold model PASS; W14 Laplacian PASS; W15 source normalizer recovered, canonical residual embedding OPEN.
+W16 reflection discriminator: S3 irreducible multiplicities on weight two are (32814+t/2,32814-t/2,65628) for reflection trace t. Actual fusion and restricted character OPEN.
+JMD H1 common rational coordinate map OPEN; H2 original product preservation OPEN; H3 form preservation OPEN; H4 visible generator transport OPEN; H5 triality transport OPEN. These must all use the same map. JMD NorthStarCompletionAudit gate explicitly NOT PASSED; exact upstream Lean source not located by connector search. No promotion from finite character tests to H1–H5.
+
+### Continuation: source-owned 2A reflection and maximal S3 regular core
+Breuer, Magaard, Wilson, arXiv:2412.12182v1, Fact 1, constructs 3C from a product of two 2A involutions and identifies Th as stabilizer. This fixes the selected S3 reflection as 2A. Weight-two trace vector (196884,4372,0) gives multiplicities (35000,30628,65628). Maximal regular multiplicity is 30628, bounded by the sign constituent. Remainder (4372,0,4372) is 4372 natural ternary permutation representations. This is an abstract S3 representation isomorphism, not an actual selected basis or Th-equivariant splitting.
+Local SymPy 1.14 PASS: exact inverse, reconstruction, maximality negative control, regular and ternary character rows. Prior downloaded finite verifier rerun PASS; identified and corrected repository orbit assertion [1,2,2,2] to [1,2,2,2,2]. 
+W16 reflection source selection closed; arithmetic locally tested. W17 OPEN: CTblLib catalog https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/ctbltoc/data/S3xTh.html confirms 144 classes and stored fusion into M. Literal table rows not retrieved; local network DNS fails and GAP unavailable. Added local GAP acceptance program (UNEXECUTED) that requires full stored fusion, reconstructs all 144 classes, prints constituents, and checks selected reflection and rotation. W17 will close only on actual execution and constituent identification, not merely this runner.
+For each h in Th write x=character(1,h), y=character(s,h), z=character(r,h). The three multiplicity-space characters are x/6+y/2+z/3, x/6-y/2+z/3, (x-z)/3 respectively. Need their actual classwise values and irreducible decomposition. H1–H5 remain OPEN; Agda kernel acceptance remains OPEN. No attribution change.
+
+### JMD smoothness audit (20 November 2026)
+JMD correspondence: 54=6*9, 19683=3^9, first three primes, and scepticism about additive versus multiplicative structure. DASHI owns the origami carrier; joint synthesis is the representation comparison. Correct the conversational slip 2*3^2=18 (orbit count), not 54 (state count). Exact local SymPy factorint/isprime/gcd checks: 196830=2*5*3^9, 54=2*3^3, gcd=54, 196884=54*(5*3^6+1)=2^2*3^3*1823 with 1823 prime. Thus both summands are 5-smooth but their sum is not. A direct sum is not a tensor product; no multiplicative factorisation of the actual Monster module follows. 30628=2^2*13*19*31; 4372=2^2*1093. W19 arithmetic PASS, canonical tensor promotion OPEN.
+W17 source progress: Debian CTblLib 1.3.11-1 data/ctomonst.tbl exposes the literal 194-entry degree-196883 row (starts 196883,4371,275,782,53,-1); fusionsources.json confirms S3xTh -> M. Literal fusion vector and full Th constituents not yet recovered; W17b/c OPEN. Sources: https://sources.debian.org/src/gap-ctbllib/1.3.11-1/data/ctomonst.tbl and https://sources.debian.org/src/gap-ctbllib/1.3.11-1/data/fusionsources.json . No CI used.
+
+
+### Current owner reconciliation and acceptance gates
+| Gate | Existing owner / source | Acceptance deliverable | Current status |
+|---|---|---|---|
+| R01 | #1477; JMDMonsterRepresentationCrossPollinationMaxCutExact | JMD centralizer and North Star diagrams, JMD prime-smoothness prompt, DASHI origami, joint character/tensor comparison separately credited | recorded |
+| R02 | JMD capstone; Monster196883BabyBranchPrimeSupportExact; JMDGF4096MonsterTwoLocalProvenanceExact | four sourced branching charts, same dimension not same intertwiner | arithmetic and source conditional |
+| R03 | #480 #974 #1250; Monster3BBalancedRegularFibreExact; MonsterC3CyclotomicEvaluationExact | reuse 3B kernel and character route; cyclic model 53+1=54 | existing owners + local model PASS |
+| R04 | MonsterSubgroupBranchingBenchmarksExact; JMDDASHIThreeCResidualWeldExact | 3C normalizer source and 2A reflection, exact cyclic/S3 character inversion | published premises; local PASS |
+| R05 | CTblLib S3xTh / M; existing 3B restriction producer | literal 144-class fusion, source versions, class labels, class sizes, exact reconstruction | OPEN: GAP absent and table data retrieval blocked |
+| R06 | MonsterGradedTraceClosure | decompose 144 exact class values; identify each Th constituent and S3 label; export source certificate | OPEN |
+| R07 | #142 #144; ThompsonFourAvatarBridge; ThompsonPenumbralSpecialization | actual maps with three-regular restriction; no avatar equivalence shortcut | interfaces exist; inhabitants OPEN |
+| R08 | #208; ConwayNortonTheorem; MonsterGradedVOABridgeExact | same twisted module, normalized cube-root series, modularity | OPEN |
+| R09 | #1098 #1472 #437 | literal original Griess product/form and generator/triality transport, kernel audited | OPEN |
+| R10 | JMD NorthStarCompletionAudit | same F passes H1–H5, transitive axiom and dependency audit | NOT PASSED; upstream source not retrieved |
+| R11 | JMDDASHIThreeCResidualWeldExact; check_jmd_dashi_tensor_weld.py | common C3 tensor and actual sourced S3 tensor characters, exhaustive noncanonicality test | local Python/SymPy PASS; Agda unverified |
+| R12 | R06 + R11 | lift to actual Th or whole Monster invariant tensor factors, original-coordinate map, or prove obstruction | OPEN |
+
+The four charts of the actual ambient degree are 2+4371+96255+96256 (2A centralizer), 4096*24+98280+300 (two-local), 3*65610+54 (3B), 6*30628+3*4372 (3C S3). These are different restriction observations, not same-coordinate maps. Existing JMD capstone owns the first two and their prime/encoding observers.
+
+### R11 exact character tensor result
+For abstract C3, K=1+1215 Reg has dimension 3646 and trace 1. B=54 trivial and C=18 Reg give B⊗K and C⊗K with weight-two phase multiplicities (65664,65610,65610) and (65628,65628,65628). This also has a finite-set realization. For S3, R=(10,8,18), Q=(2186,0,730) in trivial/sign/standard multiplicities give characters (54,2,0), (3646,2186,1456), product (196884,4372,0). Both are permutation representations: R=8 Reg+2 Perm(3); Q=1456 trivial+730 Perm(3). No common embedding into the actual Griess coordinates is implied.
+Exhaustiveness: the dimension-3646 rotation trace is 1 mod 3, hence nonzero; the 54 factor must have zero rotation trace and standard multiplicity 18. Its two one-dimensional multiplicities sum to 18, so reflection trace is even in [-18,18]. It divides 4372=4*1093; the other factor has even reflection trace, leaving only ±2. For each sign the large factor standard multiplicity ranges from 0 to 730 and determines the other multiplicities. Exactly 1462 ordered pairs of isomorphism classes, including simultaneous sign twists. The entirely regular S3 factor 9 Reg has reflection trace zero, making every tensor product with it impossible for the selected 2A/3C source character. This is a noncanonicality and free-factor obstruction, not a Thompson or Monster tensor decomposition.
+Local execution: downloaded original cyclic verifier and S3 inversion verifier passed; newly written check_jmd_dashi_tensor_weld.py ran PASS in SymPy. The prior committed cyclic script is carried over, with corrected four-pair assertion; not falsely described as a byte-identical copy of downloaded verifier. Agda/GAP not installed, DNS fails for Debian table source; no CI. CTblLib catalog explicitly lists 144 classes, direct product D6 x Th, stored fusion into M: https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/ctbltoc/data/S3xTh.html . Aliases mm9/mn3c also recorded by CTblLib othernames.json. No literal fusion vector recovered. R05/R06 remain live implementation gates.

@@ -1,3 +1,78 @@
+**Source recovery:** YM #1536 now directly consumes the previously existing `YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact.actualOriginalMirrorC3Vector` to establish the finite full complex-coefficient Gram under the original physical R445 time mirror; only weighted-density/native-label closure is still assumed for that finite invariance, while genuine positive-time complex RP, cutoff E1 and same-H remain unproved. Kernel pending.
+
+## 22 November 2026 — Eisenstein/BSD versus original Wilson full finite complex Gram: strict source separation
+
+YM master-based #1536 now source-writes a [full finite complex-coefficient original-Wilson C3 reflected Gram](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/DASHI/Physics/YangMills/YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact.agda) reusing actual original Wilson/Haar normalized expectation and pre-existing T5 full double-sum, rather than independent finite covariance/RP/H. C3 invariance is **conditional** on actual original density, native labels and reflection. Equivalent exact local SymPy 55/55 passes for known finite Q8 eigenvalues and artificial spectral no-go; exact Git script and Agda kernel not run. Finite complex coefficients are not a full complex-valued physical cylinder algebra or a same-H OS action. Original physical E1/D1/D2/N1/G1 remain OPEN.
+
+BSD selected E32 (conductor 32, CM Gaussian Z[i]) and Lean E36 (conductor 36, CM Eisenstein Z[omega]) remain **distinct curves**. Neither E32 Kummer isogeny kernel nor E36 C3 arithmetic automorphism is an original Yang–Mills physical Gram-null, Hilbert vector or H eigenmode. Character projectors are only algebraic donors until a true physical same-E1 OS unitary and dense full-sector uniform rate is built. Source owners and attribution unchanged; **BSD K1–K5 and universal endpoint remain OPEN**.
+
+## 21 Nov 2026 — P0 GRH retained; BSD/RH Mellin already owned
+
+**Source-first weld forward:** original `MellinSplitFunctionalEquationExact`
+proves the algebraic functional-equation compiler. Original BSD
+`EllipticCMLevel32FrickeMellinExact` already consumes that
+with its central twice-tail identity; do not rebuild Mellin.
+Riemann G2 original
+`RiemannG2GammaMellinProofRelevantActionCompilerExact` already
+transports literal Gamma/Mellin tests to the original Weil Test,
+retaining admissibility and spectral/transform equality obligations.
+The remaining selected BSD proof is the **actual E32 analytic
+L(E,s)↔eta newform integral realization**, not a generic Mellin interface.
+
+GRH is **P0 alongside YM and BSD**, with **all-character Dirichlet**
+scope, not just zeta RH. The external original v4.33.1 source has
+independent reported compilation/kernel/axiom/challenge checks,
+but native Lean #113 adapter and exact root/Agda all-character
+admission remain OPEN. Controlling roadmap lives on Agda #1533:
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`.
+No signed-zero 369/CM source is allowed to replace the original
+`UpperTheory.EveryCharacter` without exact proof of transport.
+Physical YM E1/D1/D2/N1/G1 and universal BSD S6 remain separate
+main proof endpoints; round labels are iterations, never proof counts.
+
+---
+
+## 21 Nov 2026 P0 theorem-first interpretation (newer than the ledger below)
+
+**Round-number firewall:** R445, F19, CMP, source-index Rxxx,
+K1–K5 and PR branches are successive attempts or internal donors.
+None is a separately solved Clay theorem or a chronological physical
+RG/time stage. Do not report 1024-label equality, normalized q-series,
+finite moment acceptance or a positive experimental analogue as a
+fraction of the universal proof.
+
+**BSD target:** original conductor-32 E:y²=x³−x; the actual selected
+L(E,s) must be identified with genuine `eta(4z)^2 eta(8z)^2`
+Mellin data. Existing classical S4 already uses modularity, 2-isogeny,
+Fricke and positive eta tail; a new exact-rational, conditional
+explicit bound is documented in
+`Docs/roadmaps/BSDOriginalLevel32P0PositiveTailLowerBound20261121.md`:
+`L(E,1) >= 2*(64428653584/66556260225)*exp(-pi/(2sqrt2))>0`.
+This is NOT a newly proved Agda analytic eta/elliptic L-function.
+The actual Agda arbitrary normalized coefficient families are
+not yet tied to the original E32 all-n L-series (a constant-one
+normalized receipt exists as negative control). Universal BSD
+rank equality and full Sha are OPEN.
+
+**YM target:** original interacting four-dimensional continuum
+SU(N) Wilson/OS reconstruction, full-sector same-H positive gap,
+nontriviality and all compact simple groups. The finite #1536
+F19/R445 equalities are donors only; current source W1/W3
+uniform UV/IR estimates, E1 continuum, nonvacuous RP/OS, D2/N1/G1
+remain genuinely OPEN.
+
+**Prioritization:** develop the strongest SAME-OBJECT analytic/physical
+source lemmas next; run pinned kernels on existing code when available;
+do not use the number of historical wrappers as a proof-progress metric.
+
+## 21 Nov 2026 P0 revision: Agda BSD and YM original-owner separation
+
+- **BSD original E32:** K1--K5 producers and selected K4 genus-one/eta/Fricke arithmetic already exist on Agda `master`; do not treat #1500 historical branch as a missing replacement. New master-native `EllipticBSDOriginalLevel32SameCurveP0BIDIExact` sources original curve-typed p5 + q-series normalization and explicit coefficient BIDI, with missing original analytic modularity and Mellin as uninhabited inputs. Independent q-series/point-count finite checks 76/76 PASS, Agda compiler not run. External classical selected S4 analytic proof is not an Agda proof. K1/K2/K3/K5/S6 remain unproved.
+- **YM original Wilson:** #1444 shares original finite R445/F19 owners with `master`. #1536 now has source-written 128+896 full-label equality candidate (pending Agda kernel), and original finite blocked covariance and temporal/rp source welds. No physical original cutoff-uniform W1/W3, noncollapsed E1/OS, full H spectral gap or all-group G1 follows from those.
+- **Lean CM j=0:** PR #114 concerns E:y²=x³+1, conductor36, not original BSD E:y²=x³−x, conductor32. Its analytic convergence bound is a METHOD donor, never the original BSD selected-curve L-function by fiat. No Hecke/automorphic GRH consequence follows from ordinary/Dirichlet GRH.
+- **P0 order:** check native kernels/owner exact heads; finish YM original 1024-vector and Wilson-source interpretation; independently finish BSD E32 modularity/eta/Mellin and same-object L-data; preserve all E1/D1/D2/N1/G1 and K1-K5/S6 fail-closed boundaries. No new generic Wilson, Selmer, eta or L-function stack.
+
+
 # 17 Nov 2026 — BSD / RH source firewall, YM original physical cut
 
 **Implementation and status:** local SymPy checks PASS for the original small+large geometric compiler, a three-state same-H spectral counterexample, the S5 selected-curve scalar identity and two corrections to the pasted RH bump proposal. **No native Lean/Agda toolchain ran; NO physical YM gate was closed.** Expanded Clay portfolio is 14/28 resolved, 14/28 open, original six Clay endpoints 0/6.

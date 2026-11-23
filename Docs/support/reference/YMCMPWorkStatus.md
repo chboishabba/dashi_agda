@@ -4,6 +4,71 @@ Status: navigation / archaeology companion to `YMRHPRRoundArchaeologyAudit.md`. 
 
 Purpose: stop repeated proof-search from treating `CMP99`, `CMP102`, `CMP109`, `CMP116`, `CMP119`, or `CMP122` as one undifferentiated open task. Reopen a CMP-labelled object only when a current consumer exposes a specific unpaid same-object physical/source instantiation.
 
+## Current canonical Row-A1 source frontier
+
+The golden normalized owner is:
+
+`DASHI/Unified/YMA1SourceFrontierExact.agda`.
+
+The TOE roots import this owner through:
+
+- `DASHI/EverythingTOESymmetryResolved369.agda`;
+- `DASHI/Unifier.agda`;
+- `DASHI/Unified/Physics.agda`.
+
+The source-native finite Gaussian is
+
+```text
+Ahat(U) = C(U)^* A(U) C(U).
+```
+
+Its first background variation is
+
+```text
+D Ahat = C'^* A C + C^* A' C + C^* A C'.
+```
+
+The following pieces are compiler-paid in the current Agda graph:
+
+- eliminated-coordinate derivative algebra `Q C' = - Q' C`;
+- eliminated-pivot derivative algebra;
+- the mixed Wilson `s t^2` 64-atom product compiler;
+- the physical Wilson mixed-jet carrier;
+- the CMP99 left/right tangent trivialization bridge;
+- tangential connection trace cancellation;
+- explicit rational small-coupling quartic absorption.
+
+The current literal source payments remain:
+
+1. identify the CMP98 one-step `Q'` and selected pivot data;
+2. identify the source coordinate embedding and the same-object `C^* A C` variation;
+3. identify the 64-atom Wilson mixed Fourier symbol in the CMP99 normalization;
+4. prove a positive-measure lower patch for the full fixed-coordinate Gaussian;
+5. instantiate the five finite-g channels uniformly over the admissible preceding-coupling history;
+6. pay the current cumulative beta sensitivity theorem `q < 1` in Agda, or add an accepted cross-prover import policy.
+
+The preferred finite-g inequality is
+
+```text
+beta >= b_fixed - C_beta * gamma^4.
+```
+
+Once `b_fixed > 0` and `C_beta` is finite and nonnegative on the same family, the existing constructive small-coupling theorem chooses a positive `gamma`. Do not schedule another fourth-root or decimal-constant search as independent mathematics.
+
+The current parallel Lean results are evidence only. They do not change an Agda `conditional` proof level. The frozen A/B/C/D research count remains `4`.
+
+The canonical ZKP governance frame uses O/R/C/S/L/P/G/F and records explicit preconditions, invariants, and postconditions. The governance labels are process controls. They are not claims of ISO, NIST, ITIL, or Six Sigma certification.
+
+The current import graph is documented in `Docs/architecture/YMA1SourceFrontierTOE.puml`.
+
+The two counters are intentionally distinct:
+
+- Gate-4 formal-gap scope: `58`.
+- Frozen macroscopic research rows A/B/C/D: `4`.
+
+Do not infer that one counter discharges the other.
+
+
 ## Executive rule
 
 **DO NOT reopen “formalise CMP109/116/119/122” as a generic task.**

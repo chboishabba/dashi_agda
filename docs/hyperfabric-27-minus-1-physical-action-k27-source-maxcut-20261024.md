@@ -1,5 +1,80 @@
 # 27 − 1: same-action adversarial cut (hypervoxel / Albert / 26D string)
 
+## 23 November 2026 — Original typed 3-state relational-grammar and RH angular-four phase sourced bridge (RH #1533)
+
+Original Lacan/Frege `code1→code0,code1→code2` and Irigaray `code1↔code2` have **distinct directed grammar and role interpretation**, already no-six-relabel proof. Their UNDIRECTED skeletons are separately P3 (after one source-aware rechart, central code1) and K2⊔K1 (Irigaray isolated neither-code0), NOT the physical periodic C3. Native arithmetic balanced SSP path `-1—0—+1` is yet another interpretation; periodized C3 adds an endpoint chord. Exact sampled wave at π: native P3 & C3 coincide as `2J/3-I`, but K2⊔K1 is identity. Role-scope, direction/contact/zero and full original sign residual not lost.
+
+On ORIGINAL RH selected high-pole four-window atomic source, the surviving h=π/2 angular step is a **C4/signed 4-periodic Fourier** object, not a quotient of native spatial C3. The native finite C3×original Phase4 product recovers 12 integer source phases by CRT, two commuting source-selected rational 12×12 operators (`RH p(Z³)` and native `Uπ(Z⁴)`), and RH rank9/kernel3 with time ± split1+2. The original full analytic RH q is REAL and requires its own circle phase plus winding; original actual smooth positive-radius `K_R` already defeats even phase-C4-only sufficiency (q0/q4 same phase, response0 vs >R²/6). Source finite-radius Fourier zeros split on scale sqrt(R), `q±≈4±(6/π)m2^(1/4)√R`, high-pole test only, NOT ζ zeros. See [full original RH source proof](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHFourWindowC3C4AngularConsumerRealQuarticGeometry20261123.md).
+
+This is a concrete manifestation of the ORIGINAL `SectionedProjectionProvenanceBridgeExact`, `ConsumerDescentMinimalObserverExact` and binary/balanced-ternary signed-lost-data programme: source carrier/address identity is NOT enough to preserve a downstream operator. Retain all original 13-axis orientation, physical k/time, H05 source and actual q/winding/bump, no new C3/C4/13 ternary owner; no native graph/RH physical isometry or RH/GRH proof.
+
+---
+
+
+## 23 Nov 2026 — REAL T9 same-operator P3/C3 stroboscopic duality and residual-aware YM/NS/RH consumers
+
+The SOURCE original `Base369Ternary27HypervoxelFabricGeometryExact` has T9=(P3)^9, 19683 points; original periodic `Base369PeriodicTernaryTorusPathRestrictionBidiExact` has SAME T9 POINTS but different C3^9 edges. Existing exact P3³ quantum-walk U(pi) from `scripts/check_hyperfabric_path27_quantum_walk.py` **equals** C3³ U(pi) as a rational time operator, even though graphs/Laplacians differ. Tensor all nine original coordinates: `U_P3^9(pi)=U_C3^9(pi)=(2J/3-I)^tensor9`, periodic character multiplier `(-1)^support(q)`; original signed 512 spatial corners ↔ 512 periodic full-support characters share actual T9 carrier and k-indexed dual transport `G^k/G^-kT` for ALL 26 Singer stages with original sign/zero residual recovery. Fixed Singer G fails original graph/walk equivariance (walk commutator rank20), chart-induced U_k commutes, physical graph deformation not asserted.
+
+YM R445 original 4D L2 positive coarse site Q4 is a signed 4-coordinate face of T9; true coordinate sign reflections preserve original native P3/C3 graph and chosen Uπ/RH group-ring biharmonic finite operator. 64 original directed coarse links subdivide into 128 original SELECTED L4 fine labels; but 64 odd original midpoint sites map to 32 signed midpoint zeros. Keep each SOURCE odd1/odd3 **winding/branch residual** to make original arbitrary SU(N) local gauge transformation and noncommutative Wilson path consumer sufficient; original two-link SU(N) block theorem ALREADY exists. NS R529/530 Fourier sign chart and triad→T9 is also ALREADY source-built; finite Uπ phase factors through sign, dyadic radius and convolution do not. Binary support loses signed phase under a genuine Singer k-move. RH original p(T) can be evaluated as a finite negative biharmonic on periodic shift; still no actual ζ-zero identity.
+
+Sourced [full proof, checks, non-promotion](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHNSYMHyperfabricOriginalTemporalSufficientConsumerSubdivision20261123.md). Original C2 antipodal projective 13+orientation codec and historic Griess Griess/Sah Singer action remain owners. Time t/refinement k/source history/consumer version/sign/zero/magnitude not conflated, and shared carrier does NOT identify different Lacan/Irigaray relational grammars. Agda kernels and complete physical NS/YM/RH/TOE endpoints still OPEN.
+
+---
+
+
+## 23 November 2026 — SOURCE CORRECTION / nine-coordinate Fourier-shell addendum (native 27)
+
+The first new RH `check_rh_hyperfabric_k_time_spatial_intertwiner_20261123.py` used a shifted residue path `0–1–2` while applying F3³ addition with zero as group origin. **That graph labelling is NOT the native balanced SSP original `-1↔0↔+1` with centre zero.** Count equality does not establish source-geometry identity. The committed script was REPAIRED (RH commits `c276ef63`, `bc0846fd`) to enumerate and act on actual `(-1,0,+1)^3` and `(-1,0,+1)^9`, map `GF3` back to balanced labels, and treat antipode as literal global `x↦-x`. Source-equivalent local corrections pass native 54/81 spatial edges, 729 dual Fourier character pairs, and ALL 118,098 P3^9 source-edge inverse checks. Fixed-graph Singer no-go remains; true indexed-transport intertwiner remains valid.
+
+New FULL periodic nine-coordinate Fourier shell ledger: support-size r in 0..9 has multiplicity `C(9,r)*2^r`, namely
+`(1,18,144,672,2016,4032,5376,4608,2304,512)`, summing to 19,683. Maximal-support 512=8³ derives from the **three** native C3³ eight-mode strata. This is the distinct periodic C3^9 torus (177,147 edges), not nonwrapping P3^9 (118,098 edges), nor NS dyadic 1/128 / YM 16×8=128. Exact script updated `724c397e`, newline repaired `7d8c85ce`; detailed [source correction and spectrum](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricKTimeSpatialFourierIntertwinerAudit20261123.md), ledger `9707ab74`.
+
+**Keep TIME t distinct from refinement k, Fourier wavevector q and H05 Frobenius/consumer history**. Chart-conjugation cannot erase a nonzero `D_(t,k)`. The new Agda is source-written without kernel, the corrected script is read back but no byte-for-byte CI/Agda execution. Original RH signed FarExact/μ/slack, NS continuum and YM mass-gap endpoints remain open. Do not duplicate existing B3 spatial/Fourier intertwiner.
+
+---
+
+
+## 23 November 2026 — Source spatial graph geometry correction, 9-coordinate + independent k/time indexed intertwiner
+
+RH #1533 re-audited this native source against original `Base369Ternary27HypervoxelFabricGeometryExact`, `Base369PeriodicTernaryTorusPathRestrictionBidiExact`, `Base369Ternary27SignedSymmetryMonsterIntertwinerExact` and `Base369Ternary27CharacterAdjacencyEquivarianceExact`. **There already IS a source-paid fixed P3³ adjacency/Fourier intertwiner for coordinate reflections**: flips act on spatial x/y/z and conjugate the matching C3 character k→-k. This is NOT the same operator as original grade Singer (G=-M), whose 54/54 original P3³ edges and 81/81 distinct periodic C3³ edges move to nonedges of those fixed graphs. Correct limit of the prior no-go is **fixed graph** invariance, not absence of any spatial intertwiner.
+
+**True hyperfabric geometry:** 27-point spatial P3³ has 54 edges, periodic C3³ has 81; native `TernaryHyperformalPoint` consists of THREE original 27-voxel factors = P3^9 on 19,683 nodes with 118,098 nonwrapping edges, whereas the *separately sourced periodic C3^9 adjacency* has 177,147 edges. The original signer/permutation acts in all three factors; transporting original source edge witnesses with (G^k) defines real `E_(t,k)`, an exact chart isomorphism between consecutive k layers, even though the source's fixed spatial graph does not admit G as an automorphism. The 27×27 original Laplacian obeys `P_G L_k=L_(k+1)P_G` for `L_k=P_G^k L_0 P_G^-k`; fixed graph commutator rank24. The native periodic C3³ Fourier characteristic `χ_(G^-T q)(Gx)=χ_q(x)` checks all 729 position/frequency pairs; the true torus eigenvalue shells have multiplicities 1,6,12,8, the path graph does not share this Fourier diagonalization. Original C26 orientation cocycle and 13+13 parity remains separately retained as before.
+
+**k is NOT physical time:** a genuine source may have time (t), refinement (k), history/consumer version and dependent spatial graph (E_{t,k}); the original `PNFHistoryTimeHyperfabricDeltaExact` and `HistoryTimeIndexedConsumerFibreExact` already own history/time/consumer separation. A physical evolution (T_{t,k}) and refinement (R_{t,k}) have commuting defect (D=R_{t+1,k}T_{t,k}-T_{t,k+1}R_{t,k}). Chart conjugation transports the defect and never erases nonzero source values. New RH source `DASHI/Analysis/RHHyperfabricKTimeTransportedSpatialIntertwinerExact.agda` uses a typed `Time` parameter, actual original path/torus edge source witnesses, nonidentity k chart movement and separate sign/residual/mode/observed-zero. Local source-equivalent 118,098-edge and mod3 Fourier checks PASS; Agda compiler / CI NOT RUN. [Full source proof and limitations](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricKTimeSpatialFourierIntertwinerAudit20261123.md).
+
+**8/128/16 crosswalk kept correctly typed:** original NS dyadic radius8 gives hat gain1/128 and far-high factor8 produces 1/16; separate original YM 4D blocked cube has 16 sites ×8 selected fine links/site=128. H05's eight vertices and the periodic C3³ eight all-nonzero-frequency Fourier modes are again different source 8s. This is a meaningful geometry flag for checking chart source and normalizations, not a cross-domain theorem simply from numbers. Do not substitute those constants into the native graph operator.
+
+**No promotion:** same-object sourced spatial time evolution, H07 9DOF isometry, actual RH zeta-zero/μ/FarExact strict inequality and physical YM continuum operator are still OPEN; do not hide under a change of graph chart. No kernel receipt, no RH/GRH/TOE completion; original native P3³ and original C26/code/cocycle owners unchanged.
+
+---
+
+
+## 23 November 2026 — Native signed 13-axis C26 Singer transport consumed by RH nonidentity H05 square
+
+Original owner **remains this #1249 native punctured 27 P3³ graph, antipode, `HyperfabricPunctured27Projective13OrientationExact`** and original Griess/Sah grade order13 actor (Lean #52, existing Agda shears); the new consumer lives on [RH #1533](https://github.com/chboishabba/dashi_agda/pull/1533) under `DASHI/Analysis/RHFourWindowC26NativeHyperfabricSquareExact.agda`. [Provenance/sign receipt](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricC26NonidentityCommutingSquare20261123.md) and local mathematical test `scripts/check_rh_c26_native_signed_h05_nonidentity_square_20261123.py` are already on that branch. No duplicate native ternary/cube/13-axis source was introduced.
+
+The **original field-grade** M is order13, G=antipode∘M is order26; `charpoly_F3(G)=X³-X+1` irreducible and cyclic degree-three basis determinant 1 mod3: G is a primitive `GF(27)^×` Singer generator on 26 nonzero points. The 13 projective axes are `GF(27)^×/GF(3)^×`; their *source-canonical* orientation chart carries a 4-of-13 nonzero sign cocycle, and `G^13` flips orientation on each native axis. True 27=1 origin+13 even/odd paired directions, not false 27/3=13. The exact rational 26D grade permutation decomposes with `(I±A)/2` into **13 even and 13 odd** signed sectors; dropping the odd sector loses original source identity. Abstract cyclic extension `1→C2→C26→C13→1` is a field representation, NOT the original nonwrapping cube path-graph metric.
+
+Consumer original RH source π/3 fourth-window projection retains both nonzero raw observed-cancelling contributions; H05 x/y trace those sources and z applies actual grade G. Six finite faces (two projective/unfold and four z-naturality) commute, and source/sign/residual/mode/observation and H05 metadata remain independently recoverable. Exact local 26 state ×6 faces and 26×26 rational parity PASS; Agda source-written, NOT native kernel typechecked. **The 54/54 native spatial graph edges remain NON-equivariant**, so this does not infer original cube Laplacian, 9DOF frame, C13 spatial operator, RH signed FarExact, positivity/physical PDE, or a global TOE proof.
+
+The user's proposed naive RH θ=π/13 fourth centre maintains atomic negative-square ratio but makes the original positive-pole witness negative; safe construction is unchanged RH π/3 with an extra C26/Axis13+orientation indexed fibre. 2600 appears in other repository sources but is not identified with native C26 (26 states), 13 projective axes, or a sourced RH constant; no numerological promotion.
+
+---
+
+
+## 23 November 2026 — RH original four-window pi/13 cross-consumer, NOT native symmetry promotion
+
+Cross-programme consumer [RH PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533) reuses ORIGINAL native 27-point balanced ternary / 26 punctured points / 13 projective antipodal axes + orientation residual. New exact source analysis [full proof](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHQuarticGeneralAngleC13C26SourceCut20261123.md), [regression](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/scripts/check_rh_c13_c26_angle_stencil_20261123.py). **Do not duplicate the C2 13-axis codec or original Griess C13 grade actor here.**
+
+True original Griess order13 M on additive F3³ plus native antipode A=-I yields G=A∘M of order26 on the 26 NONORIGIN grade labels; G^13=A, and the whole nonzero set is one 26-cycle. Therefore the abstract one-step C26 character phase `π/13=2π/26` and projective C13 step `2π/13` are source-consistent as **representation coordinates**, not automatically lattice geometry. Full original nonwrapping P3³ adjacency is NOT preserved by M or G: 54/54 spatial edges map to nonedges. Native quotient has one centre plus thirteen antipodal pairs, fourteen C2 orbit classes; no C3 orbit claim, no 13↔J2 cofactor identity.
+
+Original RH pole cos16c is constant on the three sites 0,π/2,π. Changing only its fourth centre from π/3 to arbitrary θ yields a new exact projective identity `Pθ=(1-cos16θ)*Qθ/4`: the TWO-endpoint wedge always kills θ-site; with source J2=0 surviving three masses retain the ratio (-3,4,-1) and the original π/2-step biharmonic Fourier square, up to a θ-dependent coefficient. **This is not C13 graph/Fourier equivariance**: π/2 is 6.5 steps of π/13 and is off the 26-point integer angle grid. More importantly the naive pi/13 substitution makes both original RH positive-pole witnesses negative across the entire lambda corridor, and its fourth target strength falls below the old source bound. It therefore does NOT improve RH P0 under the existing premises.
+
+Prior art retained: antipodal 27→(13×Bool)+origin, native cube edge/holonomy, original C13 Griess/Albert Q-representation, C13-vs-full-SL3 and graph noncommutation remain separate. No source-native H05 nine-DOF metric, real Maxwell/physical lattice, actual ζ-zero or Agda/Lean kernel receipt is implied.
+
+---
+
+
 Date: 2026-10-24. Branch of Agda PR #1249; cross-prover companion Lean PR #84.
 This is a **source-selective physical and mathematical test**, not a proposal
 that dimensional coincidence identifies physical theories.

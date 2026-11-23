@@ -1,0 +1,88 @@
+{
+  "scope": "source-owner steelman P0.25 BIDI; native 27/26/13 address only, no physical metric correspondence",
+  "exact_local_assertions_passed": 54,
+  "original_Mn_fractional_sites": [
+    [
+      "0",
+      "1/2",
+      "1/2"
+    ],
+    [
+      "1/2",
+      "0",
+      "1/2"
+    ],
+    [
+      "1/2",
+      "1/2",
+      "0"
+    ]
+  ],
+  "C3_chart_orbit": [
+    [
+      -1,
+      0,
+      1
+    ],
+    [
+      1,
+      -1,
+      0
+    ],
+    [
+      0,
+      1,
+      -1
+    ]
+  ],
+  "native_cube_total": 27,
+  "chosen_site_by_domain": 6,
+  "selected_antipodal_pairs": 3,
+  "remaining_punctured_addresses": 20,
+  "remaining_antipodal_pairs": 10,
+  "remaining_cube_addresses": 21,
+  "AFM_T1g_projector_rank": 3,
+  "trial_order_norm_squared": "1/2",
+  "trial_order_conjugate_probe_overlap": "1/2",
+  "inverse_EM_generalized_source_gradient": "2*m*g/N (unmeasured physical units)",
+  "reverse_70kg_gradient": "1372931/(1000*N) (unmeasured source units)",
+  "minimal_GR_added_mass_magnitude": "g*r*r/G; repulsion via Newton monopole would need NEGATIVE active source",
+  "independent_sensor_channels": 3,
+  "two_channel_rank": 2,
+  "three_channel_rank": 3,
+  "nonidentifiable_null_direction": [
+    "-m*k-1",
+    "-k",
+    "1"
+  ],
+  "gravity_inverse": "a_grav = y_grav - k*y_pickup",
+  "EM_inverse": "F_EM = y_load + m*(y_grav-k*y_pickup)-y_pickup",
+  "six_claims": [
+    "reducedPassiveWeight",
+    "changedFreeFallResponse",
+    "remoteRepulsiveField",
+    "alteredInertialResponse",
+    "persistentPropulsiveImpulse",
+    "engineeredMetricResponse"
+  ],
+  "sources": [
+    "DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact",
+    "DASHI.Physics.Foundations.CMP119AntigravityTraceVsActiveStressFirewallExact",
+    "DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact",
+    "DASHI.Mathematics.Symmetry.Punctured27NineSheetBridgeExact",
+    "DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact",
+    "DASHI OCT369 P0.14–24"
+  ],
+  "actual_magnetic_domain_measured": false,
+  "calibrated_EM_or_gravity_couplings": false,
+  "material_to_ternary_metric_isometry": false,
+  "full_metric_field_measured": false,
+  "human_lift_demonstrated": false,
+  "local_run": "SymPy 1.14 finite exact BIDI assertions 54/54 on equivalent original source; repo source not independently replayed",
+  "agda_kernel_checked": false,
+  "attribution": {
+    "science": "Kang et al 2026 Nature DOI 10.1038/s41586-026-11172-5 own octupole switching; Hamilton, Clifford, Newton and Einstein prior art",
+    "native": "original DASHI antigravity six endpoint and balanced ternary owners",
+    "new": "C3 exact finite partial codec and measured-sensor rank reverse constraints"
+  }
+}

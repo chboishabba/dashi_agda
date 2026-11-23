@@ -17,8 +17,7 @@ import DASHI.Papers.Unification.TheoremInterface as Unification
 -- interface, while preserving the explicit terminal-unification false flag.
 
 data DCHoTTUnificationCandidateStatus : Set where
-  dchottInterpretationOfUnificationCandidate_terminalFalse :
-    DCHoTTUnificationCandidateStatus
+  dchottInterpretationOfUnificationCandidate_terminalFalse : DCHoTTUnificationCandidateStatus
 
 canonicalDCHoTTUnificationCandidateSummary : List String
 canonicalDCHoTTUnificationCandidateSummary =

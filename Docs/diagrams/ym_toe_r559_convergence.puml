@@ -11,12 +11,10 @@ package "Canonical Yang-Mills owners" {
   component "Compact-simple Casimir / beta floor" as Casimir
   component "CMP116 stress marked-shell bound" as StressShell
   component "Stress shell-energy / Hilbert bound" as StressHilbert
-  component "Goal-1 maximum cut R485" as Goal1
-  component "Irreducible 14-family view R546" as Irreducible
-  component "Critical 7-family path R558" as Critical
   component "Continuum / Clay non-promotion" as NonPromotion
 }
 
+component "External original Wilson #1536 C3/mirror\n1024 links, 1536 plaquettes, 18432 influence edges\nsmall-beta only" as OriginalWilsonC3
 component "YangMillsTOEConvergenceRound559Exact" as YMTOE
 component "EverythingTOESymmetryResolved369" as Root
 component "Unified.Physics" as UnifiedPhysics
@@ -28,10 +26,8 @@ RegularE --> YMTOE : exact owner reuse
 Casimir --> YMTOE : exact owner reuse
 StressShell --> YMTOE : exact owner reuse
 StressHilbert --> YMTOE : exact owner reuse
-Goal1 --> YMTOE : representation-safe maximum cut
-Irreducible --> YMTOE : source-family quotient
-Critical --> YMTOE : mass-gap / H6 critical path
 NonPromotion --> YMTOE : fail-closed gates
+OriginalWilsonC3 ..> YMTOE : review receipt only\nNOT an Agda import
 
 YMTOE --> Root : TOE import edge
 YMTOE --> UnifiedPhysics : normalized physics facade
@@ -39,38 +35,108 @@ YMTOE --> Unifier : exact re-export only
 
 note bottom of YMTOE
 Preconditions:
-canonical owners exist.\nR485 is the current representation-safe Goal-1 maximum cut.\n
+canonical owners exist.
+
 Invariants:
 finite RG is not continuum YM.
 Casimir floor is not the missing Wilson/FP/Haar estimate.
 stress compiler/bounds are not literal physical source closure.
 proof ownership stays with canonical modules.
+external YM #1536 C3/mirror geometry not in this branch's import graph.
+C3/θ support and Dobrushin adjacency equivariance are not physical RP/W3.
+bare-link q<1 only for beta<atanh(1/18), not beta(a) growing.
+TOE #1291 H05 and #1217 C3 physical grades stay distinct.
 
 Postconditions:
-root, Unified.Physics, and Unifier expose one YM TOE surface.\nR485 Goal-1 max-cut facts flow through R559 only.\ncontinuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
+root, Unified.Physics, and Unifier expose one YM TOE surface.
+continuum, OS/Wightman, mass-gap, and Clay promotion stay blocked.
 end note
 
 note bottom of Unifier
 Legacy placeholder interfaces are not proof authority.
 end note
 
-package "Literal two-Wilson source path" {
-  [TwoWilsonR413] as W413
-  [R444 twice-marked carrier] as W444
-  [R556 finite covariance] as W556
-  [General geometric trajectory] as WGeo
-}
-
-W413 --> W444 : source replay
-W444 --> W556 : quarter-dyadic family
-W444 --> WGeo : general A q^d family
-W556 --> R559 : exact finite covariance owner
-WGeo --> R559 : route-neutral decay owner
-
-note right of W413
-  Original source attribution stays with
-  Bałaban CMP99/CMP109/CMP116 owners.
-  DASHI owns only the typed composition.
+' 22-Nov external source receipt; graph/counts proven locally, not merged Agda
+note right of OriginalWilsonC3
+Original Wilson #1536 F19 fixed-W conditional: 64 native R445 pairs,
+896 coupled spectators, true 960-variable
+original Haar fibre at fixed coarse W.
+Each V degree 36, each S degree 18.
+Unmarked q<=36 tanh(beta); real two-global-mark
+q<=36 tanh(beta)+6r<=79/100 for beta<=1/144.
+Spatial bound controls ONLY conditional F19 Hessian;
+induced coarse K0(W), original weak-coupling
+physical W3 and same-H E1/D2 remain OPEN.
+C3 and mirror act with W transformed;
+not a proof of original positive-time RP.
 end note
 
+' 22-Nov stronger original Wilson first-R445 source: actual COARSE action
+note left of OriginalWilsonC3
+Native original full Wilson R445: each first fine link
+U0_i=W_i*V_i^-1 affects exactly 6 true plaquettes
+with 19 conditional variables and total osc<=96 beta.
+At disjoint affected plaquette stars,
+actual coarse log K0(W) 4-corner contrast is
+integral Cov(Delta_i,Delta_j), bounded by
+(96 beta)^2 q^d/(1-q), q=36 tanh(beta).
+At beta<=1/72 and d=3, <=4/9.
+This is actual coarse quasilocality at SMALL beta,
+NOT CMP119/122 renormalized ABSOLUTE W3
+or physical beta(a)->infinity; no TOE spectrum.
+end note
+
+' TWO-LEVEL original R445 coarse marginal Dobrushin: source-owned #1536,
+' NOT a local Agda theorem, NOT CMP119/122 weak-coupling W3.
+note right of OriginalWilsonC3
+TWO-LEVEL original R445 coarse marginal Dobrushin
+Source: exact first-RG original Wilson K0(W), 64 W,
+64 V + 896 full interacting spectator SU(N) Haar.
+Fibre q_f <= 36 tanh(beta).
+All-pairs coarse log mixed source MUST include
+E[J_ij] for THREE directly shared-source neighbours,
+plus Cov(source scores). Exact original overlap
+max_a sum_i n_i(a)=12, sum_a n_i(a)=24.
+Coarse q_c <= 3beta + 1152beta^2/(1-q_f).
+At beta<=1/72: q_f<=1/2, q_c<=35/72.
+NO global marked coarse q, no beta(a)->infinity,
+no CMP119/122 absolute W3 or E1/D2.
+TOE R559 is consumer and import graph unchanged.
+end note
+
+' GLOBALLY-MARKED original first-R445 source is external #1536 evidence.
+note right of OriginalWilsonC3
+GLOBALLY-MARKED original first-R445 source:
+TRUE original L4 Wilson/Haar, 64 R445 W,
+64 fibre V + 896 interacting spectators.
+Two GLOBAL affine plaquette marks F,G have disjoint
+conditional 4+4 variable supports; real |s|,|t|<=0.09.
+At beta<=1/144: marked fibre q<=13/25;
+all 64 induced coarse marked rows have exact
+16-term rational Neumann upper <11/20.
+Mixed coarse log source keeps E[direct J]
+PLUS Cov(first coarse source scores).
+NOT all mark configurations, complex Gibbs,
+beta(a)->infinity, absolute CMP119/122
+physical W3 shells or same-H OS/D2.
+The R559 TOE layer is only a source consumer,
+not a new Agda import or independent proof.
+end note
+
+' EXISTING published 4D weak-coupling RG already owned; not to be rebuilt.
+note bottom of OriginalWilsonC3
+EXISTING published 4D weak-coupling RG:
+CMP109 one-loop/active history + CMP119 raw
+E/R/B/V/background + CMP122 imported theorem1
+finite UV preservation and T-products already owned.
+Original Wilson F19 marked K(W;s,t) has a proven
+SMALL bare-beta one-step coarse contraction.
+Unpaid is SAME-SOURCE marked Wilson/FP/Haar
+weak-CMP density + its original scale history,
+then termwise ABSOLUTE CMP116/W3 rooted shells
+and nontrivial same-H continuum OS spectral gap.
+Do not promote a small effective g_k predicate to
+an actual original Wilson/CM P weak-cluster bound.
+No new Agda import; source authority stays canonical.
+end note
 @enduml

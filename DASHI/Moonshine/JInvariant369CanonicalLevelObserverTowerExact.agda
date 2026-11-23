@@ -100,8 +100,8 @@ level3CyclicAction :
   C3.OrderThreeAction Level.level3CuspFibre
 level3CyclicAction =
   record
-    { rotate = translateLevel3Residue
-    ; rotateCubed = translateLevel3ThreeTimes
+    { C3.rotate = translateLevel3Residue
+    ; C3.rotateCubed = translateLevel3ThreeTimes
     }
 
 level6To3GeneratorIntertwines :
@@ -158,13 +158,13 @@ negativeLiftProjects residue =
 
 positiveNegativeLiftsAreOrientationPair :
   (residue : Level.level3CuspFibre) →
-  (Level.hexToCRT6 (positiveLift6 residue)
+  Level.hexToCRT6 (positiveLift6 residue)
   ≡
-  (EisensteinPhase.positive , residue))
+  EisensteinPhase.positive , residue
   ×
-  (Level.hexToCRT6 (negativeLift6 residue)
+  Level.hexToCRT6 (negativeLift6 residue)
   ≡
-  (EisensteinPhase.negative , residue))
+  EisensteinPhase.negative , residue
 positiveNegativeLiftsAreOrientationPair residue =
   Level.crt6HexRoundTrip (EisensteinPhase.positive , residue)
   ,
@@ -343,11 +343,11 @@ level9TranslationDerived :
   canonicalLevel9At L (translatePoint T z)
   ≡
   Level.translateTriadic Q.two (canonicalLevel9At L z)
-level9TranslationDerived {L = L} T z =
+level9TranslationDerived T z =
   trans
     (cong Level.level27To9CoveringProjection
       (level27Translation T z))
-    (Level.level27To9TranslationEquivariant (level27At L z))
+    (Level.level27To9TranslationEquivariant (level27At _ z))
 
 level3TranslationDerived :
   ∀ {R}
@@ -357,11 +357,11 @@ level3TranslationDerived :
   canonicalLevel3At L (translatePoint T z)
   ≡
   Level.translateTriadic Q.one (canonicalLevel3At L z)
-level3TranslationDerived {L = L} T z =
+level3TranslationDerived T z =
   trans
     (cong Level.level9To3CoveringProjection
       (level9TranslationDerived T z))
-    (Level.level9To3TranslationEquivariant (canonicalLevel9At L z))
+    (Level.level9To3TranslationEquivariant (canonicalLevel9At _ z))
 
 observer27TranslationCommutes :
   ∀ {R}
@@ -371,14 +371,14 @@ observer27TranslationCommutes :
   canonicalObserver27At L (translatePoint T z)
   ≡
   Level.translateObserver27 (canonicalObserver27At L z)
-observer27TranslationCommutes {L = L} T z =
+observer27TranslationCommutes T z =
   trans
     (cong Level.level27ToObserver27
       (level27Translation T z))
     (sym
       (cong Level.level27ToObserver27
         (cong (Level.translateTriadic Q.three)
-          (Level.level27ObserverRoundTrip (level27At L z)))))
+          (Level.level27ObserverRoundTrip (level27At _ z)))))
 
 observer9TranslationCommutes :
   ∀ {R}
@@ -388,14 +388,14 @@ observer9TranslationCommutes :
   canonicalObserver9At L (translatePoint T z)
   ≡
   Level.translateObserver9 (canonicalObserver9At L z)
-observer9TranslationCommutes {L = L} T z =
+observer9TranslationCommutes T z =
   trans
     (cong Level.level9ToObserver9
       (level9TranslationDerived T z))
     (sym
       (cong Level.level9ToObserver9
         (cong (Level.translateTriadic Q.two)
-          (Level.level9ObserverRoundTrip (canonicalLevel9At L z)))))
+          (Level.level9ObserverRoundTrip (canonicalLevel9At _ z)))))
 
 ------------------------------------------------------------------------
 -- 9. Reflection-equivariant level lift.
@@ -438,11 +438,11 @@ level9ReflectionDerived :
   canonicalLevel9At L (reflectPoint S z)
   ≡
   Arithmetic.negateResidue (canonicalLevel9At L z)
-level9ReflectionDerived {L = L} S z =
+level9ReflectionDerived S z =
   trans
     (cong Level.level27To9CoveringProjection
       (level27Reflection S z))
-    (reduceNegate (level27At L z))
+    (reduceNegate (level27At _ z))
 
 level3ReflectionDerived :
   ∀ {R}
@@ -452,11 +452,11 @@ level3ReflectionDerived :
   canonicalLevel3At L (reflectPoint S z)
   ≡
   Arithmetic.negateResidue (canonicalLevel3At L z)
-level3ReflectionDerived {L = L} S z =
+level3ReflectionDerived S z =
   trans
     (cong Level.level9To3CoveringProjection
       (level9ReflectionDerived S z))
-    (reduceNegate (canonicalLevel9At L z))
+    (reduceNegate (canonicalLevel9At _ z))
 
 canonicalObserver27ReflectionCommutes :
   ∀ {R}

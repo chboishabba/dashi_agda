@@ -1,0 +1,42 @@
+{
+  "scope": "full local standalone site-energy P0.33 steelman acceptance; source file delivered as conversation artifact, NOT yet committed to GitHub",
+  "checks_passed": 66,
+  "source_git_blob_sha_expected": "19a89ee235e6952e8aea702a21b4cd5b3507bde6",
+  "source_sha256": "7f45c35085d171c03cba89f67478b259117c126ec1830c2deda23e8c0eff4025",
+  "local_environment": "SymPy 1.14 Python 3; no GitHub CI or Agda",
+  "phi4": "k4*u*(v^3-3*v*w^2)",
+  "phi5": "k5*(u^2-(v^2+w^2)/8)*(v^3-3*v*w^2)",
+  "magnetic_force": "-3*N*mu*a^2*k4",
+  "stiffness": "diag(6,-3,-3)*N*mu*a^2*k5",
+  "controller_required": "transverse Kctrl>Kz/2",
+  "targets": {
+    "full_g": {
+      "force_N": 686.4655,
+      "remote_metric_mass_kg": -146931513417.1374,
+      "mass_energy_J": -1.3205545860329043e+28,
+      "metric_clock": 1.0911369672198217e-16,
+      "Yukawa_alpha_source_70kg_range_1m": -2852866163.9270782
+    },
+    "one_percent_g": {
+      "force_N": 6.864655,
+      "remote_metric_mass_kg": -1469315134.1713738,
+      "mass_energy_J": -1.3205545860329042e+26,
+      "metric_clock": 1.0911369672198218e-18,
+      "Yukawa_alpha_source_70kg_range_1m": -28528661.63927078
+    }
+  },
+  "conditional_observation_matrix": "[[1,-m,-m,1],[0,1,1,k],[0,r/c^2,0,0],[0,0,0,1]]",
+  "matrix_det": "-r/c^2",
+  "without_clock_null": [
+    0,
+    -1,
+    1,
+    0
+  ],
+  "octupole_scalar_charge": "Qphi=lambda*integral(O dot B)",
+  "required_coupling": "-4*pi*f*g*r^2*exp(r/ell)/(alpha_target*I_OB*(1+r/ell))",
+  "measured_PtMn3": false,
+  "healthy_complete_scalar_metric_solution": false,
+  "real_device": false,
+  "gravity_observed": false
+}

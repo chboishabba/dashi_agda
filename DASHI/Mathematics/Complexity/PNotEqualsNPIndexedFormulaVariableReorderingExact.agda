@@ -37,8 +37,8 @@ renameFormula :
   (Fin sourceVariables → Fin targetVariables) →
   SAT.BooleanFormula sourceVariables →
   SAT.BooleanFormula targetVariables
-renameFormula rename (SAT.variable index) =
-  SAT.variable (rename index)
+renameFormula rename (SAT.formulaVar index) =
+  SAT.formulaVar (rename index)
 renameFormula rename (SAT.constant value) =
   SAT.constant value
 renameFormula rename (SAT.negate formula) =
@@ -73,7 +73,7 @@ renameEvaluation :
   SAT.evaluate
     formula
     (renameAssignment rename assignment)
-renameEvaluation rename (SAT.variable index) assignment =
+renameEvaluation rename (SAT.formulaVar index) assignment =
   refl
 renameEvaluation rename (SAT.constant value) assignment =
   refl
@@ -264,7 +264,7 @@ reorderingPreservesCookNodeCount :
     (Bridge.indexedToCook formula)
 reorderingPreservesCookNodeCount
     permutation
-    (SAT.variable index) =
+    (SAT.formulaVar index) =
   refl
 reorderingPreservesCookNodeCount
     permutation

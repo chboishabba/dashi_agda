@@ -31,40 +31,29 @@ PARTIAL =
   Residual.partial
 
 data InspectionLevel : Set where
-  nativeResidualInspection :
-    InspectionLevel
+  nativeResidualInspection : InspectionLevel
 
-  roleStructuralInspection :
-    InspectionLevel
+  roleStructuralInspection : InspectionLevel
 
-  typedMeetInspection :
-    InspectionLevel
+  typedMeetInspection : InspectionLevel
 
-  bridgeReceiptInspection :
-    InspectionLevel
+  bridgeReceiptInspection : InspectionLevel
 
-  implicitBackgroundInspection :
-    InspectionLevel
+  implicitBackgroundInspection : InspectionLevel
 
 data BridgeStrength : Set where
-  noBridge :
-    BridgeStrength
+  noBridge : BridgeStrength
 
-  bridgeReceiptRequired :
-    BridgeStrength
+  bridgeReceiptRequired : BridgeStrength
 
-  partialBridge :
-    BridgeStrength
+  partialBridge : BridgeStrength
 
-  exactBridge :
-    BridgeStrength
+  exactBridge : BridgeStrength
 
 data ComparisonVerdict : Set where
-  comparisonPermitted :
-    ComparisonVerdict
+  comparisonPermitted : ComparisonVerdict
 
-  comparisonBlockedPendingBridge :
-    ComparisonVerdict
+  comparisonBlockedPendingBridge : ComparisonVerdict
 
 bridgeStrengthCore :
   BridgeStrength →
@@ -98,14 +87,11 @@ data ComparisonStatus : Set where
     Residual.ResidualLevel →
     ComparisonStatus
 
-  roleStructuralAlwaysDefinedStatus :
-    ComparisonStatus
+  roleStructuralAlwaysDefinedStatus : ComparisonStatus
 
-  noTypedMeetAtInspectionStatus :
-    ComparisonStatus
+  noTypedMeetAtInspectionStatus : ComparisonStatus
 
-  bridgeReceiptRequiredStatus :
-    ComparisonStatus
+  bridgeReceiptRequiredStatus : ComparisonStatus
 
   partialBridgeWithNamedResidualStatus :
     String →
@@ -116,39 +102,29 @@ data ComparisonStatus : Set where
     ComparisonStatus
 
 data FibreRelation : Set where
-  sameFibre :
-    FibreRelation
+  sameFibre : FibreRelation
 
-  differentFibre :
-    FibreRelation
+  differentFibre : FibreRelation
 
 data DomainRelation : Set where
-  sameDomain :
-    DomainRelation
+  sameDomain : DomainRelation
 
-  differentDomain :
-    DomainRelation
+  differentDomain : DomainRelation
 
 data RoleRelation : Set where
-  sameRole :
-    RoleRelation
+  sameRole : RoleRelation
 
-  differentRole :
-    RoleRelation
+  differentRole : RoleRelation
 
 data SurfaceRelation : Set where
-  sameSurface :
-    SurfaceRelation
+  sameSurface : SurfaceRelation
 
-  differentSurface :
-    SurfaceRelation
+  differentSurface : SurfaceRelation
 
 data DivergentSurfacePart : Set where
-  predicateDiverges :
-    DivergentSurfacePart
+  predicateDiverges : DivergentSurfacePart
 
-  argumentDiverges :
-    DivergentSurfacePart
+  argumentDiverges : DivergentSurfacePart
 
 data BridgeReceipt : Set where
   explicitBridgeReceipt :
@@ -158,8 +134,7 @@ data BridgeReceipt : Set where
     BridgeReceipt
 
 data BridgeEvidence : Set where
-  bridgeAbsent :
-    BridgeEvidence
+  bridgeAbsent : BridgeEvidence
 
   bridgePresent :
     BridgeReceipt →
@@ -257,8 +232,7 @@ data StratifiedComparisonCase : Set where
     Residual.ResidualLevel →
     StratifiedComparisonCase
 
-  DifferentDomainSameRole :
-    StratifiedComparisonCase
+  DifferentDomainSameRole : StratifiedComparisonCase
 
   SameSurfaceDivergent :
     DivergentSurfacePart →

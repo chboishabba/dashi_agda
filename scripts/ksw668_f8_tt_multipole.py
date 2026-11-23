@@ -10,7 +10,7 @@ and full Weyl readout remain separate open acceptance requirements.
 import json, math, functools
 import numpy as np
 import sympy as sp
-from numba import njit, prange
+from numba import njit
 from ksw668_f8_fv_source_flux import exact_cell_averages,total_scaled_moments
 
 @functools.lru_cache(maxsize=1)
@@ -62,18 +62,18 @@ def averaged_sources(eps,rgrid,dr,quad_nodes=48):
             a[q,j]=moment/denominator
     return a
 
-@njit(cache=True,parallel=True)
+@njit(cache=True)
 def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2):
     nm,ny,nr=U.shape
     d2=dr*dr
-    for q in prange(nm):
+    for q in range(nm):
         d=3+4*q
         for iy in range(ny):
             z=b+iy*dy
             for ir in range(nr):
-                p=P[q,iy,ir] if iy<ny-1 or normal_order in (3,4) else 0.
+                p=P[q,iy,ir] if iy<ny-1 or normal_order==3 else 0.
                 m=M[q,iy,ir]
-                if iy==0 and normal_order not in (3,4):
+                if iy==0 and normal_order!=3:
                     m=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
                 w=.5*(p-m)
                 if ir==nr-1:
@@ -88,17 +88,8 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                         coeffminus*(U[q,iy,ir]-U[q,iy,ir-1]))/d2
                 force=radial-3*w/z
                 outU[q,iy,ir]=.5*((1+v)*p+(1-v)*m)
-                if normal_order in (3,4):
-                    if normal_order==4:
-                        # Original AdS weighted SBP split: Dw f=z^1.5 D(z^-1.5 f)+1.5f/z.
-                        if iy==0:
-                            dpy=((z/(z+dy))**1.5*P[q,iy+1,ir]-p)/dy+1.5*p/z
-                        elif iy==ny-1:
-                            dpy=(p-(z/(z-dy))**1.5*P[q,iy-1,ir])/dy+1.5*p/z
-                        else:
-                            dpy=((z/(z+dy))**1.5*P[q,iy+1,ir]-(z/(z-dy))**1.5*P[q,iy-1,ir])/(2*dy)+1.5*p/z
-                    else:
-                        dpy=(P[q,iy+1,ir]-p)/dy if iy==0 else ((p-P[q,iy-1,ir])/dy if iy==ny-1 else (P[q,iy+1,ir]-P[q,iy-1,ir])/(2*dy))
+                if normal_order==3:
+                    dpy=(P[q,iy+1,ir]-p)/dy if iy==0 else ((p-P[q,iy-1,ir])/dy if iy==ny-1 else (P[q,iy+1,ir]-P[q,iy-1,ir])/(2*dy))
                     outP[q,iy,ir]=(1+v)*dpy+force
                     if iy==ny-1:outP[q,iy,ir]-=2*(1+v)*p/dy
                 elif iy==ny-1:
@@ -109,16 +100,8 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                     outP[q,iy,ir]=(1+v)*(-3*p+4*P[q,iy+1,ir]-P[q,iy+2,ir])/(2*dy)+force
                 else:
                     outP[q,iy,ir]=(1+v)*(P[q,iy+1,ir]-p)/dy+force
-                if normal_order in (3,4):
-                    if normal_order==4:
-                        if iy==0:
-                            dmy=((z/(z+dy))**1.5*M[q,iy+1,ir]-m)/dy+1.5*m/z
-                        elif iy==ny-1:
-                            dmy=(m-(z/(z-dy))**1.5*M[q,iy-1,ir])/dy+1.5*m/z
-                        else:
-                            dmy=((z/(z+dy))**1.5*M[q,iy+1,ir]-(z/(z-dy))**1.5*M[q,iy-1,ir])/(2*dy)+1.5*m/z
-                    else:
-                        dmy=(M[q,iy+1,ir]-m)/dy if iy==0 else ((m-M[q,iy-1,ir])/dy if iy==ny-1 else (M[q,iy+1,ir]-M[q,iy-1,ir])/(2*dy))
+                if normal_order==3:
+                    dmy=(M[q,iy+1,ir]-m)/dy if iy==0 else ((m-M[q,iy-1,ir])/dy if iy==ny-1 else (M[q,iy+1,ir]-M[q,iy-1,ir])/(2*dy))
                     outM[q,iy,ir]=(v-1)*dmy+force
                     if iy==0:
                         target=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
@@ -134,17 +117,40 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
 
 @njit(cache=True)
 def enforce(U,P,M,v,amp,sources,normal_order=2):
-    if normal_order not in (3,4):
+    if normal_order!=3:
         M[:,0,:]=(2*amp*sources-(1+v)*P[:,0,:])/(v-1)
         P[:,-1,:]=0
     U[:,:,-1]=0;P[:,:,-1]=0;M[:,:,-1]=0
 
 def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 
+def affine_mode3_stage(stage,U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order):
+    if normal_order!=3: raise ValueError('affine lift requires mode 3')
+    if amp==0:
+        stage(U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        return
+    y=np.arange(U.shape[1])*dy
+    chi=np.maximum(1-y/.12,0.)**4
+    chi[-1]=0.
+    L=(amp/v)*src[:,None,:]*chi[None,:,None]
+    L[:,:,-1]=0.
+    DL=np.empty_like(L)
+    DL[:,0,:]=(L[:,1,:]-L[:,0,:])/dy
+    DL[:,-1,:]=(L[:,-1,:]-L[:,-2,:])/dy
+    DL[:,1:-1,:]=(L[:,2:,:]-L[:,:-2,:])/(2*dy)
+    stage(U,P-L,M-L,outU,outP,outM,dr,dy,b,v,0.,src,cp,cm,normal_order)
+    outU+=L
+    outP+=(1+v)*DL
+    outM+=(v-1)*DL
+
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
-              conservative_source=True,normal_order=2):
-    if normal_order not in (1,2,3,4):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT, 4 AdS-weighted SBP2 SAT')
+              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False,weak_source_load=False):
+    if weak_source_load and (not conservative_source or normal_order!=3):
+        raise ValueError('weak source requires conservative mode 3')
+    if affine_stage and normal_order!=3:raise ValueError('affine stage requires mode 3')
+    stage_run=functools.partial(affine_mode3_stage,stage) if affine_stage else stage
+    if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
             and r_outer>3 and y_outer>2 and 0<pulse<.12):
@@ -161,6 +167,9 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     # Exact moment-primitive cell integration for local compact TT source.
     src=(exact_cell_averages(eps,rg,dr) if conservative_source
          else normalized_sources(eps,rg))
+    if weak_source_load:
+        from ksw668_f8_weak_source import weak_source
+        src=weak_source(eps,rg,dr)
     source_conservative_moments=None
     if conservative_source:
         source_conservative_moments=[]
@@ -185,6 +194,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
             cm[q,j]=d*(j-.5)**(d-1)/den
     initial_source_support=np.where(np.any(src!=0,axis=0))[0]
     assert len(initial_source_support)>3
+    weak_hat_margin=None
+    if weak_source_load:
+        weak_hat_margin=rx-math.log(final_t)-(rg[initial_source_support[-1]]+dr)
+        if weak_hat_margin<=dr/2:raise ValueError('weak source hat support fails photon guard')
     nt=int(math.ceil(span/dt));dt=span/nt
     dims=(3,ny,nr)
     U=np.zeros(dims);P=U.copy();M=U.copy()
@@ -207,32 +220,49 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     now_wall=None
     prev_walldot=None
     now_walldot=None
-    for it in range(nt+1):
+    start_it=0
+    if checkpoint is not None:
+        from ksw668_f8_ssprk_checkpoint import NativeCheckpoint
+        ck=NativeCheckpoint(checkpoint,dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,
+            pulse=pulse,inside_chord=inside_chord,r_outer=r_outer,y_outer=y_outer,drive=drive,
+            conservative_source=conservative_source,normal_order=normal_order,nt=nt,affine_stage=affine_stage,weak_source_load=weak_source_load),
+            dims,src,cp,cm)
+        saved=ck.load()
+        if saved is not None:
+            start_it,U,P,M,prev_wall,now_wall,prev_walldot,now_walldot=saved
+        ck.start()
+    for it in range(start_it,nt+1):
         if it==nt-1:prev_wall=U[:,0,:].copy()
         if it==nt:now_wall=U[:,0,:].copy()
         T=T0+it*dt
         v,b,amp=coeff(T)
         enforce(U,P,M,v,amp,src,normal_order)
-        stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         if it==nt-1:prev_walldot=dU[:,0,:].copy()
         if it==nt:now_walldot=dU[:,0,:].copy()
         U1[:]=U+dt*dU;P1[:]=P+dt*dP;M1[:]=M+dt*dM
         v,b,amp=coeff(T+dt)
         enforce(U1,P1,M1,v,amp,src,normal_order)
-        stage(U1,P1,M1,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U1,P1,M1,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U2[:]=.75*U+.25*(U1+dt*dU)
         P2[:]=.75*P+.25*(P1+dt*dP)
         M2[:]=.75*M+.25*(M1+dt*dM)
         v,b,amp=coeff(T+dt/2)
         enforce(U2,P2,M2,v,amp,src,normal_order)
-        stage(U2,P2,M2,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U2,P2,M2,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U[:]=(U+2*(U2+dt*dU))/3
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
+        if checkpoint is not None:
+            cursor=it+1
+            if cursor%checkpoint_every==0 or cursor==nt+1 or ck.expired(budget):
+                ck.save(cursor,U,P,M,prev_wall,now_wall,prev_walldot,now_walldot)
+                if cursor<nt+1 and ck.expired(budget):
+                    raise InterruptedError(f'checkpoint saved at step {cursor}/{nt+1}')
     next_wall=U[:,0,:].copy()
     v,b,amp=coeff(T0+(nt+1)*dt)
     enforce(U,P,M,v,amp,src,normal_order)
-    stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+    stage_run(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
     next_walldot=dU[:,0,:].copy()
     def read_all(r):
         x=r/dr;ir=int(math.floor(x));q=x-ir
@@ -270,20 +300,19 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         Heta=S*HT
         Hetaeta=S*S*HTT-HT/(final_t*math.sqrt(1+final_t*final_t))
         Hetaeta_tangent=S*S*HTT_from_tangent-HT_from_tangent/(final_t*math.sqrt(1+final_t*final_t))
-        E4=-(Hetaeta+sum(derivxx))/(4*final_t**2)
-        E4_tangent=-(Hetaeta_tangent+sum(derivxx))/(4*final_t**2)
+        E4_legacy=-(Hetaeta+sum(derivxx))/(4*final_t**2)
+        E4=-(Hetaeta+sum(lapieces))/(4*final_t**2)
+        E4_tangent_legacy=-(Hetaeta_tangent+sum(derivxx))/(4*final_t**2)
+        E4_tangent=-(Hetaeta_tangent+sum(lapieces))/(4*final_t**2)
         # Source-free receiver: SMS projected 5D Weyl=-delta G4 TT.
         E5=-(Hetaeta+2*Heta-sum(lapieces))/(2*final_t**2)
         E5_tangent=-(Hetaeta_tangent+2*S*HT_from_tangent-sum(lapieces))/(2*final_t**2)
-        # Physically exact linear receiver attribution across native Base369
-        # unsigned channel slots q=0,1,2 -> ell=2q. The channel values are
-        # real physical amplitudes, NOT ternary digits; cyclic C3 rotation is
-        # NOT an AdS radial PDE symmetry (d=3/7/11 differ).
         mode_HT=[(tnext[j]-tprev[j])/(2*dt) for j in range(3)]
         mode_HTT=[(tnext[j]-2*pieces[j]+tprev[j])/(dt*dt) for j in range(3)]
         mode_Heta=[S*x for x in mode_HT]
         mode_Hetaeta=[S*S*mode_HTT[j]-mode_HT[j]/(final_t*math.sqrt(1+final_t*final_t)) for j in range(3)]
-        mode_E4=[-(mode_Hetaeta[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E4_legacy=[-(mode_Hetaeta[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E4=[-(mode_Hetaeta[j]+lapieces[j])/(4*final_t**2) for j in range(3)]
         mode_E5=[-(mode_Hetaeta[j]+2*mode_Heta[j]-lapieces[j])/(2*final_t**2) for j in range(3)]
         # Two independently discretized temporal readouts, per physical q.
         # These are diagnostics, NOT upper bounds on continuum Weyl error.
@@ -291,7 +320,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         mode_HTT_tangent=[(tdotnext[j]-tdotprev[j])/(2*dt) for j in range(3)]
         Seta=-1/(final_t*math.sqrt(1+final_t*final_t))
         mode_Hetaeta_tangent=[S*S*mode_HTT_tangent[j]+Seta*mode_HT_tangent[j] for j in range(3)]
-        mode_E4_tangent=[-(mode_Hetaeta_tangent[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E4_tangent_legacy=[-(mode_Hetaeta_tangent[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E4_tangent=[-(mode_Hetaeta_tangent[j]+lapieces[j])/(4*final_t**2) for j in range(3)]
         mode_E5_tangent=[-(mode_Hetaeta_tangent[j]+2*S*mode_HT_tangent[j]-lapieces[j])/(2*final_t**2) for j in range(3)]
         if (abs(sum(mode_E4_tangent)-E4_tangent)>1e-10*max(1.,abs(E4_tangent))
             or abs(sum(mode_E5_tangent)-E5_tangent)>1e-10*max(1.,abs(E5_tangent))):
@@ -309,11 +339,13 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         return dict(mode_ternary_digits=[0,1,2],mode_ell=[0,2,4],
            mode_E4=mode_E4,mode_E5=mode_E5,
            mode_E4_tangent=mode_E4_tangent,mode_E5_tangent=mode_E5_tangent,
+           mode_E4_legacy=mode_E4_legacy,mode_E4_tangent_legacy=mode_E4_tangent_legacy,
            mode_HT=mode_HT,mode_HT_tangent=mode_HT_tangent,
            mode_HTT=mode_HTT,mode_HTT_tangent=mode_HTT_tangent,
            mode_delta_HT=mode_delta_HT,mode_delta_HTT=mode_delta_HTT,
            mode_Hxx=derivxx,mode_Delta3H=lapieces,
            E4_tangent=E4_tangent,E5_tangent=E5_tangent,
+           E4_legacy=E4_legacy,E4_tangent_legacy=E4_tangent_legacy,
            HT_from_tangent=HT_from_tangent,HTT_from_tangent=HTT_from_tangent,
            r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
            Delta3H=sum(lapieces),HT=HT,HTT=HTT,
@@ -325,11 +357,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     return dict(model='original moving AdS5 a=t Neumann compact TT',
         original_radial_multipoles=[0,2,4],
         normal_order=normal_order,
+        affine_stage_homogenized=affine_stage,
         normal_only_characteristic_SBP_closed=(normal_order==1),
-        normal_second_order_SBP_SAT_weak_neumann=(normal_order in (3,4)),
-        weighted_original_AdS_SBP2SAT_full_semidiscrete_contract=(normal_order==4),
-        original_full_RK3_stability_certified=False,
-        strong_wall_neumann_enforced=(normal_order not in (3,4)),
+        normal_second_order_SBP_SAT_weak_neumann=(normal_order==3),
+        strong_wall_neumann_enforced=(normal_order!=3),
         full_coupled_weighted_SSPRK3_energy_proved=False,
         effective_radial_dimensions=[3,7,11],
         step_radial=dr,step_bulk=dy,step_time=dt,
@@ -338,8 +369,11 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         nominal_receiver_r=rx,receiver_grid_r=rr,
         source_adjusted_brane_photon_margin=gap,
         discrete_support_photon_margin=gap-dr/2,
-        conservative_source_cell_average=conservative_source,
-        source_cell_integration='exact compact TT endpoint primitives' if conservative_source else 'point sampling',
+        conservative_source_cell_average=conservative_source and not weak_source_load,
+        weak_source_load=weak_source_load,
+        weak_source_hat_photon_margin=weak_hat_margin,
+        source_cell_integration=('r-squared weak load / native shell mass' if weak_source_load else
+            ('exact compact TT endpoint primitives' if conservative_source else 'point sampling')),
         normalized_conservative_cell_moments=source_conservative_moments,
         corrected_radial_shell_volume=True,
         radial_polynomial_r2_consistency_exact=True,
@@ -364,6 +398,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         far_mode_projected_5D_electric_Weyl_tangent=far['mode_E5_tangent'],
         receiver_mode_Hxx=rec['mode_Hxx'],
         receiver_mode_Delta3H=rec['mode_Delta3H'],
+        receiver_mode_intrinsic_4D_electric_Weyl_legacy_axial=rec['mode_E4_legacy'],
+        receiver_mode_intrinsic_4D_electric_Weyl_tangent_legacy_axial=rec['mode_E4_tangent_legacy'],
+        far_mode_intrinsic_4D_electric_Weyl_legacy_axial=far['mode_E4_legacy'],
+        far_mode_intrinsic_4D_electric_Weyl_tangent_legacy_axial=far['mode_E4_tangent_legacy'],
+        intrinsic_4D_weyl_spatial_operator='full_reconstructed_Delta3',
+        receiver_dual_Weyl_temporal_second_derivative_cancellation=rec['projected5D_Eyy']-2*rec['intrinsic4D_Eyy'],
         retarded_TT_yy_scaled_by_eps4=yy,
         far_receiver_grid_r=far_r,far_mode_values=fc,
         far_TT_yy_scaled_by_eps4=fy,
@@ -373,8 +413,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         far_intrinsic_4D_electric_Weyl=far['intrinsic4D_Eyy'],
         far_projected_5D_electric_Weyl=far['projected5D_Eyy'],
         receiver_intrinsic_4D_electric_Weyl_tangent=rec['E4_tangent'],
+         receiver_intrinsic_4D_electric_Weyl_legacy_axial=rec['E4_legacy'],
+         receiver_intrinsic_4D_electric_Weyl_tangent_legacy_axial=rec['E4_tangent_legacy'],
         receiver_projected_5D_electric_Weyl_tangent=rec['E5_tangent'],
         far_intrinsic_4D_electric_Weyl_tangent=far['E4_tangent'],
+         far_intrinsic_4D_electric_Weyl_legacy_axial=far['E4_legacy'],
+         far_intrinsic_4D_electric_Weyl_tangent_legacy_axial=far['E4_tangent_legacy'],
         far_projected_5D_electric_Weyl_tangent=far['E5_tangent'],
         second_order_spatial_radial_readout=True,
         no_post_evolution_spatial_derivatives=False,

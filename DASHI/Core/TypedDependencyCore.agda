@@ -47,7 +47,6 @@ forgetDependencyToBool :
 forgetDependencyToBool witness = true
 
 record DependencyFamily (Index : Set) : Set₁ where
-  constructor dependencyFamily
   field
     Requirement : Index → Set
     requirementLabel : Index → String
@@ -59,7 +58,6 @@ record FamilyWitness
     {Index : Set}
     (family : DependencyFamily Index)
     (index : Index) : Set where
-  constructor familyWitness
   field
     witness : Requirement family index
     witnessReceipt : String
@@ -93,8 +91,7 @@ record AdmissibleAction
     {Action : Set}
     (system : DependentActionSystem State Action)
     (before : State)
-    (action : Action) : Set where
-  constructor admissibleAction
+    (action : Action) : Set ℓ where
   field
     precondition : Precondition system before action
     after : State
@@ -112,7 +109,6 @@ open AdmissibleAction public
 
 record IrreducibleTernaryDependency
     (A B C Joint AB AC BC : Set) : Set where
-  constructor irreducibleTernaryDependency
   field
     leftWitness : A
     middleWitness : B
@@ -126,7 +122,6 @@ record IrreducibleTernaryDependency
 open IrreducibleTernaryDependency public
 
 record DependencyUpgradeBoundary : Set where
-  constructor dependencyUpgradeBoundary
   field
     witnessCarriesMoreThanBoolean : Bool
     booleanProjectionAvailable : Bool

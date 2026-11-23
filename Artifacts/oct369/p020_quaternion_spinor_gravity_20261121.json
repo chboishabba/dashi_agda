@@ -1,0 +1,30 @@
+{
+  "scope": "same-coordinate quaternion C3, spinor lift, magnetic-order, internal-gauge versus Lorentz-frame discrimination",
+  "exact_assertions_passed": 57,
+  "finite_cocycle_cases": 9,
+  "quaternion_q": "(1+i+j+k)/2",
+  "quaternion_q_cube": "-1",
+  "negative_quaternion_cube": "+1",
+  "spinor_U_cube": "-I_2",
+  "spinor_rephased_negative_U_cube": "+I_2",
+  "spatial_C3": "(x,y,z) -> (z,x,y)",
+  "magnetic_observable_central_sign_invariant": true,
+  "physical_domain_reversal_distinct": true,
+  "coordinate_cube": 27,
+  "punctured_cube": 26,
+  "antipodal_quotient": 13,
+  "site_spin_hilbert_dim": 6,
+  "pure_SU2_spin_basis_curvature": "0",
+  "internal_nonabelian_curvature": "Matrix([[I/2, 0], [0, -I/2]])",
+  "physical_metric_curvature_established": false,
+  "physical_vierbein_spin_connection_established": false,
+  "full_stress_energy_from_actual_PtMn3": false,
+  "human_lift_or_gravity_response_observed": false,
+  "local_execution": "SymPy exact arithmetic; /mnt/data/oct369/check_oct369_p020_quaternion_spinor_gravity.py executed with 57/57 tests on 2026-11-21",
+  "attribution": {
+    "established": "Hamilton quaternion multiplication, Cartan/Clifford Spin3-SU2, pure-gauge curvature zero",
+    "prior_DASHI": "FiniteQuaternionDoubleCover, AlexanderHornedQuaternionC3SpinExact, AlexanderHornedC3SpinLiftSplitExact, CliffordSpinLift, CasimirQuaternionSU2GroupLawBridgeExact, GRFirstOrderGravityScope",
+    "original_PtMn3": "Kang and coauthors Nature 2026 DOI:10.1038/s41586-026-11172-5",
+    "new_DASHI": "P0.20 finite integration and GR non-promotion checks"
+  }
+}

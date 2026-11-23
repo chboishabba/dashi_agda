@@ -1,20 +1,3 @@
-## 18 November 2026 — exact 2T conjugation symmetry boundary and Burnside compression
-
-The checker `scripts/check_ym_original_L1_2t_symmetry_boundary_20261118.py` constructs the original 24 rational Hurwitz quaternions, uses the actual pair deficit `2 sum_{1<=a<b<=3}(q_a r_b-q_b r_a)^2`, and verifies exact group closure, inverses, and 13,824 ordered conjugation/pair identities. Simultaneous conjugation of *all four links* preserves the six-commutator action and coarse squared real trace `(Re(U0U1))²`; this is the legitimate symmetry for orbit reindexing. The source action is **not invariant under simultaneous left multiplication**: for `(-1,-1,-1,-i)` and `g=-j`, action changes from `0` to `6`. Hence no one-link gauge fixing by that action has been justified.
-
-There are **seven true 2T conjugacy classes**, sizes `1,1,6,4,4,4,4`, but **five distinct real trace values**, not seven. The four size-4 classes comprise two pairs sharing trace `+1/2` and `-1/2`. The source depends on relative orientations; independently replacing four variables by their seven class labels (`7^4`) is NOT an established action-preserving quotient. Exact Burnside counting for simultaneous conjugation gives `(2*24^4+16*6^4+6*4^4)/24=28576` true fine-configuration orbits, versus `331776` configurations (approximately 11.61x reduction). A formal Agda orbit enumerator and the original conditional-moment reindexing to the 24 blocked B values remain OPEN.
-
-**Related algebraic boundaries:** the sign-forgetting quotient `Trit→Bit` does not induce a quaternion/SU2 matrix isomorphism; the 2x2 quaternion-to-complex-matrix map needs independent ring laws. The group C3 acts on ternary sheets, but does not supply the B4 invariants, real Cauchy modulus or original physical RG. For F8, the diagonal `(6,14,22)` coefficients are a nonzero radial defect relative to the S3 symmetric average; they cannot be averaged away to assert full physical equivariance. Neither the full F8 theorem nor the 27-trit Hilbert/physical collapse interpretation is newly kernel-certified in this tranche.
-
-**Verification:** exact Python rational/conjugation and Burnside assertions locally checked; no Agda kernel receipt. Open targets remain finite original 24^4 conditional moments, complete B4 polynomial invariant induction, Bishop modulus/Haar invariance, SU2 matrix identification and physical Wilson RG/continuum transfer.
-
-## 18 November 2026 — exact finite 24-cell blocked expectation / variance
-
-PR #1444 now includes `YMClayOriginalL1Rational24CellBlockedMomentsExact.agda` and `scripts/check_ym_original_L1_24cell_blocked_moments_20261118.py`. From the existing positive three-class quadratic-Taylor blocked density (multiplicities 6/16/2), the Agda source writes a normalized rational functional on arbitrary coarse scalar observables `f(t)`, its constant-one and first/second moment equations, and the strictly positive rational variance of `t=(Re(U0U1))²`:
-`806306942803/12833778905928 > 0`. The exact independent Fraction calculation verifies 12 exact assertions. This proves finite normalized nonconstancy only, not a spectral mass gap.
-
-**Trust boundary:** No Agda compiler is available in the current execution environment, so the source-written Agda proofs are **not kernel accepted**. The exact original 24⁴ source action→conditional-moment theorem remains open in Agda. The full exponential Gibbs/Haar measure and continuum physical RG transfer remain open. Similarly the full Reynolds invariant basis, constructive effective `bn`, Bishop Cauchy/invariance and original SU(2) carrier equality remain open.
-
 ## 9 November: NEW actual SU(2) Wilson conditional analytic estimate (not a Clay endpoint)
 
 An independent analytic calculation on the **original** four-dimensional SU(2) Wilson one-link Gibbs conditional is in [YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md](YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md), with successfully executed exact-rational certificate `scripts/check_ym_su2_wilson_singlelink_uv_influence_20261109.py`. For six staple quaternion sum `S=R V` with `0≤R≤6` and coupling `β≥0`, the selected original one-link Haar conditional obeys `P(t(UV)≤0 | staples)≤3 exp(−βR/2)`, using the concrete SU(2) Haar cap `H(t≥1/2)>1/6`. Thus `P(t≤0)≤P(R<r₀)+3 exp(−βr₀/2)`, a quantitative reduction of this **local** large-field probability to actual original frustrating-staple mass. This proves a finite-volume-uniform aligned-staple conditional tail, not the requisite large-field **spatial covariance** bound.
@@ -638,6 +621,161 @@ flow and a 4D pure YM QFT are separate theorem targets.
 source-written adapters only. No Monster/3B, ESD or Clay promotion.
 
 # Clay Yang-Mills Proof Roadmap
+
+
+### P2 rational-trace / same-algebra alternative (30 October extension)
+
+The canonical `BalabanSU2RationalWilsonTraceBoundExact` proves
+`-1 <= realPart(q) <= 1` for rational unit-quaternion SU(2) data.
+`YMClayLiteralWilsonS2SameAlgebraBoundExact` now defines the proof-bearing
+`RationalSU2TraceGramBoundSource` and the explicit projections
+`rationalSU2TraceToSameAlgebraWilsonBounds` and
+`rationalSU2TraceBuildsCanonicalS2`. Once one same-carrier `pointwiseUnitBoundGivesGramBounded` interpretation and `traceIsLiteralWilson` equality are exhibited, **all loopwise boundedness fields** follow from the existing literal configuration-dependent Wilson-path theorem. The resulting
+canonical S2 inputs feed `YMClayLiteralWilsonP2ExpectationConvergenceExact`
+and the already-proved three selected expectation-limit compilers. This removes a family of duplicate P2 per-loop boundedness proofs. The record now additionally requires `traceIsLiteralWilson`, an explicit equality on the SAME physical loop carrier. Boundedness is transported along that equality with `subst`; an arbitrary synthetic trace observable cannot be substituted into P2.
+
+The exact
+remaining P2 obligations are now the trace→Gram physical interpretation,
+bounded-product closure, exact literal identity same-object equality, selected Euclidean
+translate/support-time identity, and actual measure convergence on the same
+physical theory. The rational-quaternion argument alone is **not** a proof
+over full continuum Haar SU(2), nor an independent gauge-measure limit.
+
+
+
+### Canonical rational Wilson-function donor (30 October late reuse correction)
+
+Further source-tree archaeology found the existing
+`BalabanLiteralRationalSU2WilsonBoundedAlgebraExact.agda` owner. It already
+constructs **configuration-dependent** `RationalWilsonPath n` observables
+using periodic bond holonomies, proves the complete pointwise unit bound
+`literalWilsonPathPointwiseUnitBounded`, and proves one/multiplication
+pointwise closure. The new P2 bridge now consumes this owner *directly*:
+`physicalWilsonObservable : RationalWilsonObservable n → TestObservable`,
+`traceIsLiteralWilson` on the actual path observable, and
+`pointwiseUnitBoundGivesGramBounded` transport the existing theorem onto
+the same physical `Gram.BoundedObservable` carrier. The bounded identity
+follows from the existing literal unit observable and an exact same-object
+identity equality, rather than being independently assumed.
+
+This replaces the earlier fixed-quaternion-per-path approximation: path
+holonomy necessarily depends on the configuration. The S2 adapter also fixes the literal SU(2) scalar ABI definitionally: `one = 1ℚ`, `groupRank = 1ℚ`, and scalar multiplication is rational multiplication, rather than accepting unconstrained numeric placeholders.
+
+Generic
+`Gram.BoundedObservable` multiplication closure is still a separate
+stronger physical algebra input than rational-image pointwise closure. This
+is the real remaining P2 implementation wall, alongside the physical
+trace/Gram map and limit/time semantics.
+
+
+
+### 30 October, subsequent source-first native-P2 max-cut
+
+The stronger already-existing donor chain is now authoritative for **native**
+rational Wilson paths:
+
+```
+BalabanLiteralRationalSU2WilsonBoundedAlgebraExact
+  -> BalabanLiteralRationalSU2WilsonCylinderBoundDataExact
+  -> BalabanLiteralWilsonNativeThermodynamicProducerExact
+  -> BalabanLiteralWilsonNativePhysicalMeasureExact
+  -> YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2Limits
+```
+
+The native physical-measure owner explicitly sets
+`Gram.BoundedObservable = Σ majorant, QuantitativeBound` and
+`Gram.multiplyObservable =` pointwise Wilson multiplication. Thus the earlier
+generic `RationalSU2TraceGramBoundSource` with its separately provided
+trace-to-Gram and generic multiplication closure is a **compatibility** route,
+not a primitive P2 input in the native path.
+
+In `YMClayLiteralWilsonS2SameAlgebraBoundExact`,
+`nativeWilsonSameAlgebraBoundInputs` reuses the already-produced
+quantitative Wilson path bound, unit bound, bounded products and native
+physical-measure definitions. No new analytic closure is assumed in this
+specialization. Moreover `nativeWilsonP2Limits` already constructs all
+three actual convergence proofs **without** support-distance/time geometry;
+support-distance belongs to P1. Its thermodynamic/expectation input package
+still must be physically inhabited; the syntactic construction is not itself
+a new four-dimensional measure-existence theorem.
+
+**Normalization fix:** the canonical `literalRationalSU2WilsonCylinderBounds`
+uses `groupRank = 1ℚ` for normalized Wilson traces. The new S2 adapter now
+matches this exact source, rather than confusing normalized trace with the
+matrix representation dimension two. This is a same-object semantic correction.
+
+P3 donor search also found pre-existing
+`YangMillsDirectSourceOSReconstructedSpectrumH3Exact` and
+`YangMillsClayCMP119RealSameOSH3Exact`. Both retain the physical
+selected-spectrum / actual reconstructed `H_OS` identification as a
+proof-bearing input; no new synthetic H3 spectrum is introduced.
+
+
+
+
+### R445 same-marked-moment source to native P2 (30 October continuation)
+
+Existing `BalabanClayT5MarkedMomentProducerRound444Exact` and
+`BalabanClayT5MarkedPreferredExpectationRound445Exact` already compile
+one marked-polymer moment closure into the exact preferred diagonal
+expectation producer on a selected thermodynamic family.
+`BalabanLiteralWilsonNativePhysicalMeasureExact.nativeWilsonPreferredFromMarked`
+now reuses that R445 input **on the same native Wilson thermodynamic
+carrier**, then
+`YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2FromMarkedSource`
+constructs the actual three P2 expectation limits using the existing
+`nativeWilsonP2Limits`. No second moment package, covariance shortcut,
+support-distance theorem or independent trace-to-Gram interpretation is
+introduced in the native route. Remaining inputs are the actual R445
+`boundedObservableTail`, continuum-tail witness, selected moment
+realization and physically identified native thermodynamic/measure family.
+The real CMP119 and rational P2 carriers are not asserted equal by analogy.
+
+The 2026 external literature scan included OpenAI's October 26 public
+scientific-collaboration announcement, Bałaban's original CMP116 record,
+and contemporary proof proposals; externally authored proof claims are
+inspiration/search inputs, not kernel proof terms or guaranteed physical
+witnesses. QIDs are discovery/provenance identifiers and do not substitute
+for mathematical same-object equalities; the existing Ibrahim/QID and
+Monster3B ownership fences remain unchanged.
+
+
+## 2026-10-30 — Route-S H1 direct-source Pareto weld
+
+The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
+repetition of the strong F1/F3/F4 Mosco path. The existing owners already
+provide the exact compiler spine:
+
+```text
+R320 DirectSelectedT5MarkedDecayPayment (literal selected two-J inequality)
+  -> YMClayRouteSH1DirectSelectedMarkedDecayExact.h1BuildsLocalizedR295
+  -> R313.exactT5JMagnitudeFromR295 (with rational |·| meaning)
+  -> R296.ExactT5JMagnitudePresentation
+  -> R333.CanonicalBOSIndexedApplication + Completion
+  -> OS.PhysicalMassGapCertificate on the SAME reconstructed H_OS
+```
+
+The new direct bridge in `YMClayDirectSourceOSMassGapFrontierExact` is an
+explicit Agda composition of **existing** owners, not a new selected-source
+inequality. It removes the apparent need to pay R295/R296 again after H1.
+Its remaining actual inputs are R320 physical source localization, rational
+absolute-magnitude interpretation, R333's physical Wilson/time, expectation
+limit and same-H_OS spectral witnesses. P1/P2/P3 in the September closed-world
+audit are the corresponding direct-route cut. The independent strong
+F1-C/F1-D/P_a/E_a/Mosco obligations are **not** terminal prerequisites of
+Route S, but remain available for the other Pareto lane.
+
+Source roots and authorship: Tadeusz Bałaban, CMP 116 (1988), DOI
+10.1007/BF01239022 (cluster expansions and differentiated localization);
+R295/R313/R320/R333 are independently authored DASHI theorem interfaces and
+compilers. A published paper, a typed import, a source-written proof and an
+exact-head kernel check are distinct evidence levels. No physical source
+witness is fabricated; no continuum or Clay promotion occurs from this weld.
+The direct consumer is now smaller and can be attacked at its actual literal
+Wilson P1/P2/P3 physical inputs; all-compact-simple-group and local-QFT
+extension remains a separate terminal scope. Reference comparison: OpenAI's
+26 October 2026 existence announcement is not an imported proof: its Yang–Mills
+Lean artifacts were not publicly released as of this review.
 
 Status: lemma roadmap; non-promoting.
 
@@ -1367,384 +1505,3 @@ See [full gate-ordered ledger](../physics/YMClaySUNMatrixR443R445R320R333MaxCut2
 The current selected #1444 R445 bridge has two new OWNED source-written lemmas: `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact` constructs the actual original side-four SU(N) finite-Gibbs weighted blocked-cylinder functional and derives positivity, linearity, correct original partition-normalization and selected coarse Wilson/Gibbs gauge laws from existing `PhysicalFiniteMeasureIntegrationLaws`. `YMClayFiniteRGPushforwardNonBareWitnessSafeExact` proves an independent finite fibre-multiplicity no-go to automatic bare coarse uniform weight. Its 64-state Q8-subgroup comparison checked 4,096 gauge transformations and the exact density mismatch in a toy finite model, **not** the physical selected SU(N) Wilson Gibbs law. Full details: [source and exact gate ledger](../physics/YMClaySUNMatrixR443R445R320R333MaxCut20261102.md#2026-11-04--r445-original-physical-blocked-cylinder-pushforward-max-cut-source-written-not-kernel-checked).
 
 **Remaining SOURCE→PHYSICAL gap:** show that this selected fine pushforward has a measurable coarse Haar Radon–Nikodym density/effective action, physical normalized disintegration and source-compatible RP cylinder transport, with actual beta(a), tightness/UV/IR uniform estimates and same physical source choice. Do not claim it is another bare Wilson weight; downstream R320 mixed-J, R333 same-H OS strictly positive gap/H6 and full Clay R⁴ remain open. Agda kernel/transitive postulate audit pending. Original 219 field inventory retained.
-
-
-### 2026-11-17 YM.REAL rational S3 maximum cut: root/pi-free original source
-
-SOURCE-FIRST: original rational SU2 carrier, finite positive-bond
-enumerator, positive reciprocal, original finite RG pushforward/
-disintegration and side-four blocked Gibbs pushforward are already
-in repo. Do not duplicate these theorem owners.
-
-The earlier concern about unavailable arbitrary Bishop square roots
-or identifying Machin pi with the classical trigonometric period is
-NOT a prerequisite for exact positive rational S3 cubature:
-- YMClayRationalS3StereographicNodeExact constructs the Pythagorean
-  identity for q(t)=((1-|t|²)/d,2t/d), d=1+|t|².
-- YMClayRationalS3StereographicConcreteExact proves d>0, inverts
-  it using the existing rational reciprocal and constructs the
-  ORIGINAL RationalUnitQuaternion (no assumed norm witness).
-- YMClayRationalS3PositiveWeightedNodesExact constructs strictly
-  positive rational J(t)=(1+|t|²)^-3 weights, nonempty positive
-  total, exact normalized mass one and original-to-Bishop SU2
-  unitary source reuse (transitive kernel acceptance pending).
-
-Four fully rational positive exact orbit cubatures are certified:
-  d=7  : 120 original rational sphere nodes, 330/330 monomials;
-  d=9  : 360 nodes, 715/715 monomials;
-  d=11 : 696 nodes, 1365/1365 monomials;
-  d=13 : 1000 nodes, 2380/2380 monomials.
-Total 4840 exact rational assertions; no pi, roots, floating-point
-or numerical optimizer in the committed certificate. The degree-7
-rule uses positive orbit masses 167/960, 1/15, 243/320.
-Its tensor product integrates the actual L=1 Wilson six-commutator
-cubic 20,502-term polynomial and confirms H(D³)=6445/48
-independently of the original Pochhammer-moment calculator.
-
-All-degree MATHEMATICAL proof route: positive full-support
-stereographic rational area J=8/(1+|t|²)^3; exact rational
-divergence-free SO4 generator identities and integration by
-parts derive all Pochhammer moments. Finite-dimensional rational
-moment vector is interior to convex hull of rational sphere
-evaluations; rational convex feasibility proves existence of
-positive exact rational cubature at each degree. Effective
-finite-dimensional Gram coercivity can certify a search margin:
-lambda >= det(G_d)/tr(G_d)^(dimension-1). Rational LDL examples
-through degree 3 are verified. This is NOT yet an inhabited Agda
-termination/search proof for arbitrary d.
-
-A second completely root-free Bishop route uses rational
-stereographic MIDPOINT sums. For |f|<=B and L-Lipschitz on
-the S3 chord, choose C=ceil(1+B+L), R_k=2^(k+16) C,
-h_k=R_k^-5; exact rational midpoint and tail bounds give
-normalized error <=2^(-k-3). This supplies an explicit
-fast-Cauchy precision schedule, but native Bishop order,
-multivariate midpoint integration and the vendor Sequence Cauchy
-inhabitant are still unproved in Agda.
-
-Existing original FiniteRG pushforward/disintegration is reused.
-Naive same-beta L2-to-L1 link selection is false; the correct
-RG blocking/induced effective action must be instantiated with the
-original rational-design Wilson Gibbs source.
-
-**Do not close YM.REAL:** exact mathematical all-degree rational
-existence and finite certificates are much stronger, but the
-all-degree constructive Agda producer, actual native Bishop
-completion, original SUN matrix equivalence, and typed original
-Wilson/RG cylinder weld still require kernel acceptance.
-New source ledger: Docs/physics/YMClayRationalS3HaarNoRootsMaxCut20261117.md.
-
-
-### 2026-11-17 continuation: compressed degree-13 source certificate and new degree-15 rational Wilson endpoint
-
-**New exact mathematical/algorithmic result:** signed-coordinate and
-permutation invariance reduces every polynomial of degree <=13 on S3
-to nine elementary symmetric constraints in yi=qi²:
-1, e2, e3, e4, e2², e2e3, e2³, e3², e2e4, using e1=1.
-The independent exact SymPy checker
-scripts/check_ym_s3_degree13_nine_invariants_20261117.py
-checks all nine weighted rational moments of the nine existing
-rational-orbit representatives and all symmetrized monomial orbits
-through y-degree 6. The full 2380-monomial checker remains an
-independent control. The new safe-source Agda
-YMClayRationalS3DegreeThirteenInvariantCertificateExact
-uses nine ACTUAL original RationalUnitQuaternion constructors and
-rational masses, with nine closed invariant arithmetic equations.
-This is NOT an Agda theorem formalizing the Reynolds
-sign/permutation symmetrization and basis spanning step.
-No pinned Agda kernel was available.
-
-**New degree-15 positive rational cubature:** a rational linear LP
-search over 20 low-denominator rational signed/permutation orbits
-found eleven positive orbit masses. They were reconstructed with an
-exact rational linear solve; the static certificate itself uses no
-LP, floats, roots, angles, pi, or square roots.
-scripts/check_ym_s3_exact_rational_orbit_degree15_20261117.py
-independently verified **3876/3876** full monomials, strict positive
-masses, exact unit norm and mass-one normalization.
-The fully expanded signed/permutation cubature has **1464 nodes**.
-The first 11 invariant constraints in yi of weighted degree <=7
-are 1, e2, e3, e4, e2², e2e3, e3², e2e4, e2³,
-e3e4, e2²e3. Numerical discovery is not proof;
-the committed rational certificate is the exact proof witness.
-
-**Concrete original Wilson finite-volume consequence.**
-A positive exact degree-15 rule in EACH original link integrates
-the actual polynomial Taylor series through degree 15 at all
-original periodic sides L>=2, since each elementary plaquette
-contains any one original positive bond at most once. The L=1
-commutator reuses each of two bonds twice, so degree 15
-integrates through Taylor order 7. In both cases the alternating
-Taylor bounds are genuinely valid for ALL beta>=0.
-At beta=1/(96 L⁴), the guaranteed interval width is
-1/10569646080 at L=1 (T7/T6), and
-1/46009701534740225458176000 at L>=2 (T15/T14).
-scripts/check_ym_original_wilson_rational_degree15_taylor_budget_20261117.py
-checks exact original edge incidence through L=4 and these
-factorial interval bounds. **The high-order endpoint integrals
-have not been expanded or evaluated**; the interval-width result
-does not claim an actual numerical partition value.
-
-**Trust:** these exact rational cubature witnesses substantially
-advance the physical polynomial cylinder, but do not inhabit
-the Bishop all-degree cubature/Cauchy/continuous-Haar source,
-the original full SUN matrix equivalence, or the selected RG
-disintegration bridge. No transitive Agda acceptance receipt,
-no mass-gap/continuum claim. Maintain YM.REAL OPEN.
-
-
-### 17 November 2026 — next implementation: degree-15 11-invariant source weld
-
-New finite original-SU2 source proof candidates, committed to PR #1444:
-
-- DASHI/Physics/YangMills/YMClayRationalS3DegreeFifteenInvariantCertificateExact.agda
-  reuses the original rational quaternion constructor and the prior
-  degree-13 invariant functions. Its 11 rational representatives
-  have norm-one closed polynomial witnesses, and it writes the exact
-  11 invariant moment equations as definitional rational arithmetic.
-  Tagged --safe but no pinned Agda/CI kernel result exists.
-- scripts/check_ym_s3_degree15_eleven_invariants_20261117.py
-  checks each invariant by independent exact methods: evaluate positive
-  rational orbit masses and expand into Pochhammer coordinate moments.
-  It verifies all 38 distinct signed-permutation orbit-sum monomials of
-  squared-coordinate degree <=7 reduce (using e1=1 on S3) into
-  the explicitly listed 11-dimensional invariant span.
-  Locally 11/11 moments and 38/38 orbit classes passed.
-- The independent scripts/check_ym_s3_exact_rational_orbit_degree15_20261117.py
-  passes 3876/3876 monomials on the 1464-node rational rule.
-  The original Wilson T15/T7 degree budget remains a bound, not
-  evaluated high-order Taylor partition coefficients.
-
-Exact source moment targets:
-1=1; e2=1/4; e3=1/48; e4=1/1920;
-e2^2=11/160; e2*e3=1/160; e3^2=3/4480;
-e2*e4=3/17920; e2^3=89/4480;
-e3*e4=3/143360; e2^2*e3=69/35840.
-
-NEXT KERNEL CUT: formalize in Agda the actual signed/permutation orbit
-averaging and its action on every coordinate monomial through degree
-15, then the invariant-basis reduction and the uniform positive
-finite orbit weights. A sum over one representative per orbit is
-NOT the actual full signed-permutation orbit measure.
-
-ORIGINAL WILSON/RG: reuse existing
-YMClayFiniteRGExistingPushPullReopeningWeldExact and
-BalabanFiniteProbabilityPartitionDisintegrationExact, rather than
-rebuilding finite disintegration. Instantiate them on the actual
-rational-design original SU2 link product Gibbs measure and the
-original selected block map, verify positive selected coarse fibres
-or remove zero-mass fibres, then bridge to the actual Bishop limit
-and original SUN matrix carrier. The RealAnalysisAxioms.ℝ legacy
-carrier remains different from Bishop Real.ℝ.
-
-Remaining YM.REAL formal obligations OPEN: universal constructive
-positive rational design search termination, native Bishop
-multivariate order/Cauchy proof, completed actual SU2 Haar
-bilateral invariance, pinned original SU(N) carrier mapping,
-original Wilson finite product and selected physical RG transfer.
-No pinned Agda kernel acceptance is claimed.
-
-
-### 2026-11-17 continuation: closed 24-cell original finite Wilson/RG
-
-NEW SOURCE FINDING: The rational 24-cell one-link degree-five
-cubature is closed under actual quaternion multiplication and
-conjugation. It is the 24-element binary tetrahedral subgroup.
-The constructed exact 24x24 multiplication table verifies
-closure, identity, inverses, and all 24^3=13824 associativity
-instances. Every left and right translation permutes the 24
-nodes, giving exact uniform bi-invariance on this finite subgroup.
-
-New Agda candidate:
-DASHI/Physics/YangMills/YMClayOriginalRationalWilsonTaylor2PositiveExact.agda.
-Uses prior original rational square positivity, rational ring
-identities and strict rational products to derive, without a
-positive-density assumption,
-
-   T2(S) = 1-S+S²/2 = (1+(1-S)²)/2 > 0
-
-for ANY rational action S. It deliberately makes no --safe
-transitive claim, since the original positivity imports are non-safe.
-
-New exact original Wilson finite RG checker:
-scripts/check_ym_original_L1_24cell_group_rg_20261117.py.
-It builds the true original L=1 4-link/6-positive-plane
-quaternion commutator action on all 24^4=331776 fine states.
-At beta=1/96 it assigns strictly positive rational quadratic
-Taylor Gibbs weights and pushes them forward through the
-ACTUAL noncommutative block B(U)=U0*U1. The coarse image is
-exactly the same 24-element rational SU2 subgroup, with 24^3
-fine configurations per coarse state. All coarse masses are
-strictly positive and normalized; direct and blocked weighted
-expectations are exactly equal. It recovers
-  H(D)=9/2; H(D²)=187/8;
-  Z_(L1,T2)=140731/147456;
-  E_(T2)(Re(U0 U1))=0.
-Exact quotient checks total 346302, including the complete
-degree-five Pochhammer monomial basis and 24^3 associativity
-tests. All arithmetic is rational; no Monte Carlo, pi or sqrt.
-
-This is a real finite original-source noncommutative RG
-PUSHFORWARD of a positive polynomial Gibbs measure. It is
-NOT the full exponential Wilson measure, the continuous
-SU2 Haar, the original Agda RG-record instantiation or a
-continuum/Clay result. The finite 24-cell integrates linkwise
-polynomial observables through degree five, but does not
-provide exactness for all analytic observables.
-
-Next kernel cut: construct the literal original RationalUnitQuaternion
-24x24 Cayley table and full finite carrier, instantiate the
-EXISTING BalabanFiniteProbabilityPartitionDisintegrationExact
-and YMClayFiniteRGExistingPushPullReopeningWeldExact owners
-with its positive T2 fine weights and block projection,
-and prove consistency with the actual Bishop/continuous Haar
-polynomial limit and original SUN matrix-carrier identity.
-All-degree Bishop, full exponential and RG source welds OPEN.
-Agda/Nix are unavailable here, so no kernel acceptance is claimed.
-
-
-### 2026-11-17 finite original Wilson RG: explicit induced effective action
-
-This continuation goes BEYOND a generic pushforward existence statement.
-The original L=1 24cell rational subgroup has exact 24x24
-noncommutative multiplication, uniform finite one-link Haar and
-complete degree<=5 S3 monomial moments. Tensor its 24 nodes over
-the original four positive links, enumerate ALL 24^4=331776 true
-six-commutator fine configurations, and use the provably positive
-rational Gibbs Taylor polynomial
-  T2(beta D)=1-beta D+(beta D)^2/2 > 0, beta=1/96.
-The actual selected noncommutative block is B=U0*U1 and lies
-inside the SAME original rational 24cell subgroup.
-
-NEW exact CONDITIONAL moment identities: with t=(Re B)^2,
-
-  E[D | B]   = 19/4 - t
-  E[D^2 | B] = 4t^2/3 - 169t/18 + 230/9.
-
-The actual induced effective coarse density relative to the
-uniform 24-cell law is therefore
-
-  W_beta(t) = 1 - beta*(19/4-t)
-             + beta^2/2*(4t^2/3-169t/18+230/9).
-
-Three exact trace-square coarse classes exist:
-  t=0   : 6 states, W=78955/82944;
-  t=1/4 : 16 states, W=422191/442368;
-  t=1   : 2 states, W=35459/36864.
-
-Their positive mass average is exactly
-  Z_(L1,T2)=(6 W0 +16 W1/4 +2 W1)/24=140731/147456.
-The normalized pushforward law has coarse mass W_beta(t)/(24 Z),
-and exact blocked real trace expectation zero. Conditional coarse
-fibre counts are 24^3; finite positive disintegration is exact.
-This is NOT a fake renormalized same-beta Wilson action; it is the
-explicitly INDUCED coarse density.
-
-Executable sources:
-- scripts/check_ym_original_L1_24cell_group_rg_20261117.py
-  (346302 exact group/Wilson/pushforward assertions);
-- scripts/check_ym_original_L1_24cell_induced_rg_20261117.py
-  (full 331776-state conditional moment enumeration and class checks).
-
-Kernel-facing algebraic source:
-DASHI/Physics/YangMills/YMClayOriginalL1Rational24CellEffectiveRGExact.agda,
-a --safe CANDIDATE carrying the actual three-class rational weights,
-closed exact rational positivity, and Z equality. This does NOT yet
-prove the original group conditional moment formulas in Agda, nor
-inhabit the previous finite partition/disintegration owner from the
-24^4 literal group table. No pinned Agda/CI receipt is available.
-
-This closes a concrete original finite-quadratic-Taylor RG
-MATHEMATICAL subproblem. It DOES NOT prove the full exponential
-Wilson coarse effective action, native Bishop all-degree/limit
-functional, same-original SUN source equivalence, 4D continuum
-Yang-Mills or Clay mass gap. Those remain OPEN.
-
-
-### 2026-11-17 additional Agda B4 source: original rational SU2 orbit generators
-
-New --safe SOURCE WRITTEN (not kernel-accepted):
-DASHI/Physics/YangMills/YMClayOriginalRationalS3HyperoctahedralGeneratorsExact.agda.
-It reuses the ORIGINAL rational SU2 quaternion record and previous
-e2/e3/e4 source owners. Four coordinate sign flips and adjacent
-swaps 01/12/23 are actual functions on the original unit quaternion,
-with the unit norm proved from source polynomial norm equality.
-The four invariants norm, e2, e3, e4 are proved invariant
-for each generator using exact rational ring equations, not
-just a numerical sample. It imports only the source-safe original
-quaternion and invariant owners and is attached to the canonical
-BalabanRGTOERegression safe-graph and local preflight.
-
-Independent exact symbolic source check:
-scripts/check_ym_original_rational_s3_b4_invariants_20261117.py
-passed 32/32 polynomial identities.
-
-NEXT exact Agda theorem for degree-15:
-1. Define/reuse the complete orbit enumeration of the B4 generator
-   action and prove signed-odd cancellation / uniform orbit
-   reindexing on the 1464-node rational design, not just the
-   representative-to-invariants map.
-2. Formalize the fundamental theorem of symmetric polynomials
-   specialized to four squared coordinates and e1=1 on the
-   original rational S3; derive the 11-dimensional degree-15
-   monomial normal form.
-3. Compose these with the already source-written 11 exact rational
-   moments of YMClayRationalS3DegreeFifteenInvariantCertificateExact.
-
-This is one formal finite exact cubature target, not an assumed
-Bishop continuous Haar or universal arbitrary-degree theorem.
-The all-degree rational convex-interior producer and native
-Bishop fast-Cauchy witness remain OPEN. Pinned Agda/Nix
-kernel acceptance was not available.
-
-
-### 2026-11-18 finite S3 Reynolds averaging: arbitrary-degree signed-orbit cancellation
-
-New source owner:
-DASHI/Physics/YangMills/YMClayRationalS3OddSignOrbitCancellationExact.agda
-(a safe-source candidate). It proves by Nat induction that the
-rational even-power operation is invariant under x to -x, the
-odd-power operation changes sign, and every pair f(x)+f(-x)
-vanishes for an odd function. It then enumerates the actual
-sixteen sign choices as a MULTISET (important when a rational
-coordinate is zero) and proves the sum vanishes whenever the
-first coordinate exponent is odd.
-There is NO degree cutoff, implicit Haar positivity input,
-square root, pi or abstract cubature-exactness field.
-
-Independent checker:
-scripts/check_ym_s3_sign_orbit_universal_parity_20261118.py
-passed 16384/16384 exact fraction checks for all exponent
-vectors in {0,...,7}^4 at four rational coordinate vectors,
-including zeros and non-unit inputs as a robustness control.
-The source theorem is universal over rational inputs, not
-derived from these finite examples.
-
-The first-coordinate theorem can be extended to oddness at
-any coordinate by the existing original B4 adjacent-swap
-generators. The remaining Agda lemma must establish that
-the full 16-signed multiset sum is invariant under swaps
-(including stabilizers/duplicates), then combine that with
-the existing degree-15 eleven-invariant source equations
-and a constructive four-variable elementary symmetric
-basis reduction.
-
-Current five-gate status:
-- All-degree rational cubature: universal odd-sign
-  cancellation source added; all-degree positive rational
-  design termination, complete permutation averaging
-  and symmetric basis remain OPEN.
-- Effective b_n and Bishop: native modulus/order and full
-  _isCauchy witness remain OPEN; rational schedules alone
-  are not native proof objects.
-- Haar: full two-sided Bishop invariant limit and positivity
-  completion remain OPEN.
-- SU2 matrix: original rational-to-Bishop source written;
-  kernel acceptance/full selected SUN identity OPEN.
-- Wilson/RG: actual positive L1 quadratic-Taylor finite
-  coarse law and 24^4 certificate stand; kernel
-  instantiation and full exponential/physical cross-cutoff
-  transfer OPEN.
-
-No pinned Agda/Nix toolchain or CI acceptance was available.
-Do not mark YM.REAL closed on SymPy or a source pragma alone.

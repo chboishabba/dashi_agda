@@ -48,7 +48,7 @@ data SourceRole : Set where
   historicalMention : SourceRole
   controlledPhysics : SourceRole
   unpaidFinding : SourceRole
-  originalPaper : SourceRole
+  historicalPaperRole : SourceRole
   governmentExperiment : SourceRole
   uninspectedPrimary : SourceRole
   secondaryReport : SourceRole
@@ -165,7 +165,7 @@ weld036 : SourceScopedClaimWeld
 weld036 = source-scoped-weld
   Video.claim036
   ((sourceEntry Atlas.liTorr1991) ∷ (sourceEntry Atlas.liTorr1992) ∷ (originalPaper Papers.liTorr1991Atom) ∷ (originalPaper Papers.liTorr1992Atom) ∷ (historicalSlide Slides.deck24) ∷ [])
-  originalPaper
+  historicalPaperRole
   "1991/1992 papers are theoretical mechanisms, not demonstrated gravitomagnetic spacecraft"
 
 weld037 : SourceScopedClaimWeld
@@ -228,7 +228,7 @@ weld051 : SourceScopedClaimWeld
 weld051 = source-scoped-weld
   Video.claim051
   ((sourceEntry Atlas.woodward1992) ∷ (originalPaper Papers.woodward1992Atom) ∷ (historicalSlide Slides.deck23) ∷ [])
-  originalPaper
+  historicalPaperRole
   "Woodward 1992 original model distinguished from independent Mach-effect thrust"
 
 weld053 : SourceScopedClaimWeld

@@ -5,7 +5,7 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
-open import DASHI.Unifier using (ℝ; toℝ; HilbertSpace)
+open import DASHI.Physics.Closure.QuantumCarrierCore using (ℝ; toℝ; HilbertSpace)
 open import DASHI.Quantum.DepthEmbeddingIsometry using (DepthCarrier)
 open import DASHI.Quantum.Stone using
   ( FinitelySupportedDepthColimitDomain

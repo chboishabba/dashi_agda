@@ -4,8 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
-import Tactic.RingSolver as Solver
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4; Axis4)
@@ -20,7 +19,7 @@ open import DASHI.Physics.YangMills.BalabanCanonicalBlockPathSamples using
 open import DASHI.Physics.YangMills.BalabanBlockedLinearAverageMainTerm using
   (blockOrigin)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (realSolverRing; su2QuaternionGroup)
+  (-‿inverseʳ; zeroʳ; su2QuaternionGroup)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   (SU2LieAlgebra; su2Lie; su2LieExt; lieZero; lieAdd; lieSubtract; lieScale;
    lieZeroLeft; lieZeroRight; su2Adjoint; su2AdjointAdd; su2AdjointScale;
@@ -78,43 +77,30 @@ linearAverageGaugeCovariant :
 linearAverageGaugeCovariant {L = L}
   mainWeight correctionWeight rootOp junctionOp gauge Y U A coarse axis =
   trans
-    (cong (λ correction → lieAdd
-      (su2BlockedLinearAverageMainTerm mainWeight
-        (gaugeTransformBond su2QuaternionGroup gauge U)
-        (transformAdjointBondField su2QuaternionGroup su2AdjointLinearModule gauge A)
-        coarse axis)
-      (lieScale correctionWeight correction))
-      (nestedRadialDifferenceSumGaugeCovariant rootOp junctionOp gauge Y U A
-        (canonicalBlockSamples (suc L) axis (blockOrigin coarse))))
-    (trans
-      (cong (λ main → lieAdd main
-        (lieScale correctionWeight
-          (su2Adjoint (gauge (blockOrigin coarse))
-            (nestedRadialDifferenceSum rootOp junctionOp Y U A
-              (canonicalBlockSamples (suc L) axis (blockOrigin coarse))))))
-        (su2BlockedLinearAverageGaugeCovariant mainWeight gauge U A coarse axis))
+    (cong₂ lieAdd
+      (su2BlockedLinearAverageGaugeCovariant mainWeight gauge U A coarse axis)
       (trans
-        (cong (lieAdd
-          (su2Adjoint (gauge (blockOrigin coarse))
-            (su2BlockedLinearAverageMainTerm mainWeight U A coarse axis)))
-          (sym (su2AdjointScale (gauge (blockOrigin coarse)) correctionWeight
-            (nestedRadialDifferenceSum rootOp junctionOp Y U A
-              (canonicalBlockSamples (suc L) axis (blockOrigin coarse))))))
-        (sym (su2AdjointAdd (gauge (blockOrigin coarse))
-          (su2BlockedLinearAverageMainTerm mainWeight U A coarse axis)
-          (linearizedAverageCorrection correctionWeight rootOp junctionOp Y U A coarse axis)))))
+        (cong (lieScale correctionWeight)
+          (nestedRadialDifferenceSumGaugeCovariant rootOp junctionOp gauge Y U A
+            (canonicalBlockSamples (suc L) axis (blockOrigin coarse))))
+        (sym (su2AdjointScale (gauge (blockOrigin coarse)) correctionWeight
+          (nestedRadialDifferenceSum rootOp junctionOp Y U A
+            (canonicalBlockSamples (suc L) axis (blockOrigin coarse)))))))
+    (sym (su2AdjointAdd (gauge (blockOrigin coarse))
+      (su2BlockedLinearAverageMainTerm mainWeight U A coarse axis)
+      (linearizedAverageCorrection correctionWeight rootOp junctionOp Y U A coarse axis)))
 
 lieSubtractSelf : ∀ X → lieSubtract X X ≡ lieZero
 lieSubtractSelf (su2Lie x y z) = su2LieExt
-  (Solver.solve (x ∷ []) realSolverRing)
-  (Solver.solve (y ∷ []) realSolverRing)
-  (Solver.solve (z ∷ []) realSolverRing)
+  (-‿inverseʳ x)
+  (-‿inverseʳ y)
+  (-‿inverseʳ z)
 
 lieScaleZeroVector : ∀ scalar → lieScale scalar lieZero ≡ lieZero
 lieScaleZeroVector scalar = su2LieExt
-  (Solver.solve (scalar ∷ []) realSolverRing)
-  (Solver.solve (scalar ∷ []) realSolverRing)
-  (Solver.solve (scalar ∷ []) realSolverRing)
+  (zeroʳ scalar)
+  (zeroʳ scalar)
+  (zeroʳ scalar)
 
 nestedIdentitySegment :
   ∀ {N : Nat} {{_ : NonZero N}}

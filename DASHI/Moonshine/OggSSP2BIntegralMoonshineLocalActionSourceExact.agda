@@ -42,7 +42,6 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 record IntegralMoonshineLocalActionSource : Set where
-  eta-equality
   constructor integral-moonshine-local-action-source
   field
     integralFormSource : String

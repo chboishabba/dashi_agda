@@ -22,7 +22,7 @@ open import Data.Nat.Divisibility using (_∣?_)
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact as Card
@@ -38,9 +38,7 @@ oneToLength zero = refl
 oneToLength (suc n) =
   trans
     (Card.appendLength (Hecke.oneTo n) (suc n ∷ []))
-    (trans
-      (NatP.+-comm (Reindex.listLength (Hecke.oneTo n)) 1)
-      (cong suc (oneToLength n)))
+    (cong suc (oneToLength n))
 
 ------------------------------------------------------------------------
 -- Drop the positive-coordinate component from the existing oneTo bounds.
@@ -68,11 +66,9 @@ divisorFilteredFoldBound n [] All.[] = z≤n
 divisorFilteredFoldBound n (d ∷ ds) (All._∷_ d≤n rest)
   with d ∣? n
 ... | yes dividesProof =
-  NatP.≤-trans
-    (NatP.+-mono-≤
-      d≤n
-      (divisorFilteredFoldBound n ds rest))
-    (NatP.≤-reflexive (sym (NatP.*-suc n (Reindex.listLength ds))))
+  NatP.+-mono
+    d≤n
+    (divisorFilteredFoldBound n ds rest)
 ... | no notDivides =
   NatP.≤-trans
     (divisorFilteredFoldBound n ds rest)
@@ -81,13 +77,11 @@ divisorFilteredFoldBound n (d ∷ ds) (All._∷_ d≤n rest)
   tail : Nat
   tail = n * Reindex.listLength ds
 
-  tailBelowNext : tail ≤ n * suc (Reindex.listLength ds)
+  tailBelowNext : tail ≤ n + tail
   tailBelowNext =
     NatP.≤-trans
       (NatP.m≤m+n tail n)
-      (NatP.≤-trans
-        (NatP.≤-reflexive (NatP.+-comm tail n))
-        (NatP.≤-reflexive (sym (NatP.*-suc n (Reindex.listLength ds)))))
+      (NatP.≤-reflexive (NatP.+-comm tail n))
 
 ------------------------------------------------------------------------
 -- Every oneTo candidate is at most n, hence sigma1(n) <= n*n.

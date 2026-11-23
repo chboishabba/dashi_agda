@@ -1,0 +1,118 @@
+{
+  "title": "Filsinger midpoint transcript: cap/coil node quotient, diode landing plus full-versus-half secondary winding span, exact ideal waveform inverse",
+  "date": "2026-11-22",
+  "sourceEvidence": {
+    "owner": "Original user-provided transcribed Filsinger midpoint/spark commentary, identity Dfu9Jseviz9 only provisionally associated",
+    "literalClaims": [
+      "two diodes come off the cap; two off here",
+      "two off this wire; two off that wire",
+      "all forward facing",
+      "ganging together positives",
+      "return to midpoint, earth, ground",
+      "capacitor across selected coil produces alleged pole shift",
+      "half potential of the big coil"
+    ],
+    "reopened": [
+      "Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md",
+      "Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md",
+      "Artifacts/smith-filsinger/cap_coil_parallel_node_quotient_bidi_20261122.json",
+      "DASHI/Physics/Motors/SmithFilsingerCapCoilParallelNodeQuotientBidiExact.agda"
+    ],
+    "publicOriginalStatus": "No independently retrievable exact video transcript/shot pin-map from public reel search. Repository is previous source transcription, not fresh direct original audiovisual verification.",
+    "notInferred": [
+      "winding section that capacitor spans",
+      "electrical relationship between coil ends U,V and midpoint M",
+      "whether all four cathodes actually connect positive P",
+      "load/spark-gap/storage capacitor output node identity",
+      "original ground/earth and natural signed source work"
+    ]
+  },
+  "assumptions": {
+    "conditionalNodeQuotient": "If C physically across selected L, C.first=L.first=U; C.second=L.second=V. Component labels do NOT establish distinct sources.",
+    "conditionalDiodeModel": "Four zero-drop ideal diodes, all anodes on selected U and/or V, all cathodes at P, instantaneous resistive load P-M, no output smoothing bank and no spark-gap conduction in selected forward test",
+    "drivingSine": "x sin(theta) ideal half-source voltage with x>0 and theta in [0,2*pi]; selected source does not change when load is connected",
+    "caseClassification": "The speaker's 'selected coil' may be whole A-B symmetric centre-tapped winding, only A-M half-section, or independent coil with unresolved M relationship. These are not source-verified actual wiring."
+  },
+  "hypotheses": [
+    {
+      "id": "T2",
+      "coilSpan": "U=A, V=B, M symmetric winding midpoint",
+      "inputGroups": "2 anodes U and 2 anodes V",
+      "forward": "P-M=max(0,+x sin theta,-x sin theta)=x abs(sin theta)",
+      "rectification": "full-wave",
+      "negativeHalfConduction": true,
+      "qualifiedMeaning": "requires complementary U/V voltage phases relative to M, not simply two physical component names"
+    },
+    {
+      "id": "T1",
+      "coilSpan": "U=A,V=B, M symmetric winding midpoint",
+      "inputGroups": "all 4 anodes U (component names differ)",
+      "forward": "P-M=max(0,x sin theta)",
+      "rectification": "half-wave",
+      "negativeHalfConduction": false,
+      "qualifiedMeaning": "satisfies four packages but only one distinct electrical input"
+    },
+    {
+      "id": "H2",
+      "coilSpan": "U=A,V=M across one half winding",
+      "inputGroups": "2 anodes U and 2 anodes V=M",
+      "forward": "P-M=max(0,x sin theta,0)",
+      "rectification": "half-wave",
+      "negativeHalfConduction": false,
+      "qualifiedMeaning": "physically opposite capacitor/coil ends STILL fail to guarantee full-wave if the selected coil is only half winding"
+    },
+    {
+      "id": "H1",
+      "coilSpan": "U=A,V=M across one half winding",
+      "inputGroups": "all 4 anodes U",
+      "forward": "P-M=max(0,x sin theta)",
+      "rectification": "half-wave",
+      "negativeHalfConduction": false,
+      "qualifiedMeaning": "same output as H2 under bare ideal assumptions"
+    }
+  ],
+  "idealUnfilteredPredictions": {
+    "Vpk": "x (same peak for T2/T1/H2/H1)",
+    "T2": {
+      "mean": "2x/pi",
+      "rms": "x/sqrt(2)",
+      "meanResistivePower": "x^2/(2 R)"
+    },
+    "T1_H2_H1": {
+      "mean": "x/pi",
+      "rms": "x/2",
+      "meanResistivePower": "x^2/(4 R)"
+    },
+    "withSamePeak": "T2 has twice the DC mean and twice the resistive output power compared with T1/H2/H1; RMS factor sqrt(2)",
+    "interpretation": "Cannot assign these values to narrated ~4kV or separate-reel ~3.8V/0.4W without original exact terminals, time, load and waveform."
+  },
+  "sourceCurrentIdentifiability": {
+    "oppositeDiodeGroups": "Incidence [[1,1,0,0],[0,0,1,1]] has rank 2/nullity 2: individual parallel package currents cannot be inferred from total branch current without additional resistive/dynamic constitutive laws",
+    "oneDiodeInputGroup": "Incidence [[1,1,1,1]] has rank 1/nullity 3, even less package-level inverse information",
+    "peakOnly": "All four ideal examples share peak x, so peak-output label is not a graph discriminator",
+    "negativeHalfPositiveCurrent": "Within exact ideal unsmoothed fixed-sinusoidal hypotheses this implies T2 (full winding AND opposite electrical input nodes); neither 'two off cap' nor 'across coil' alone implies T2.",
+    "storedOutputCounterexample": "An output storage capacitor remaining charged when diode input is zero can make one-input half-wave rectification appear as continuous positive DC; Coutput dV/dt=-V/R during diode-off, Uout=0.5 Coutput V^2, dUout/dt=-V^2/R. A spark gap or different source waveform invalidates simple statistical discrimination.",
+    "unmodelled": "diode forward drops and recovery, transformer winding mutual inductance, nonlinear/time-varying driver, spark gap, source retarded response, shunt conductance or antiresonant LC loading, actual grounding and environmental power."
+  },
+  "acceptance": {
+    "independentLocal": "64/64 PASS exact SymPy 1.14; executed file /mnt/data/check_filsinger_diode_node_landing_half_full_sympy_20261122.py",
+    "gitBlobIndependent": "099c4c4f9b006ed85affd8e8b002f573250a7dca",
+    "formalFile": "DASHI/Physics/Motors/SmithFilsingerDiodeLandingWaveformBidiExact.agda",
+    "formalStatus": "Finite Agda source written; no Agda kernel executed, physical source model cannot be admitted",
+    "originalEvidence": "Prior source archive still 0/24 raw device evidence roles, and no source-to-pin continuity has been authenticated."
+  },
+  "reverseNext": [
+    "First determine whether selected capacitor/coil is across A-B FULL secondary or A-M HALF section; this is independent of the component terminal quotient.",
+    "Then determine each forward diode's actual anode node (two U/two V versus four U) and cathode joined P, including whether physical packages share current.",
+    "Only THEN compare measured P-to-M signed electrical waveform, ideally with storage and spark dynamics modelled; peak-only measurements cannot discriminate ideal T2 vs T1.",
+    "Source-origin claim requires simultaneous signed original driver, environment/earth/chemical/RF, load and storage work. Other Filsinger reels cannot be merged."
+  ],
+  "safety": "Historical source and mathematical inverse study only; not HV build, direct test or probing instructions.",
+  "windingOwnerReturnRevision": {
+    "newCanonical": "Artifacts/smith-filsinger/midpoint_winding_owner_return_cut_bidi_20261122.json",
+    "scope": "Earlier E0 four-case waveform model prescribes U,V relative M. It does NOT establish selected tuned coil = NST full A-B or half A-M; a third candidate is separate tuned U-V with midpoint return absent, conductive, or capacitive/displacement. Ideal diode OR with fully floating no-return source island cannot sustain exterior diode currents under KCL, and capacitive return may emulate unloaded symmetric +/-half voltages.",
+    "provenance": "Source words preserved; no new original filmed pin-continuity certificate.",
+    "localSymPy": "Independent 55/55 PASS; committed focused byte-identical 33/33 PASS",
+    "agda": "DASHI/Physics/Motors/SmithFilsingerWindingOwnerReturnCutBidiExact.agda not kernel checked"
+  }
+}

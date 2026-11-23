@@ -20,5 +20,10 @@ class OriginalTernaryReceiverWeyl(unittest.TestCase):
   for k in ('receiver_mode_intrinsic_4D_electric_Weyl','receiver_mode_projected_5D_electric_Weyl'):
    self.assertTrue(all(math.isfinite(x) for x in self.source[k]))
  def test_no_C3_pde_promotion(self):self.assertTrue(self.source['unsigned_ternary_codec_not_physical_C3_action'])
+ def test_corrected_provenance(self):self.assertEqual(self.source['intrinsic_4D_weyl_spatial_operator'],'full_reconstructed_Delta3')
+ def test_legacy_spatial_difference(self):
+  r=self.source
+  for j in range(3):
+   self.assertAlmostEqual(r['receiver_mode_intrinsic_4D_electric_Weyl'][j]-r['receiver_mode_intrinsic_4D_electric_Weyl_legacy_axial'][j],(r['receiver_mode_Hxx'][j]-r['receiver_mode_Delta3H'][j])/(4*r['receiver_t']**2),places=10)
  def test_both_weyl_uncertified(self):self.assertFalse(self.source['full_Weyl_receiver_certified'])
 if __name__=='__main__':unittest.main(verbosity=2)

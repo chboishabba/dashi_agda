@@ -2,16 +2,16 @@
 module DASHI.Unified.BalabanRGTOEMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGap
 
 ------------------------------------------------------------------------
 -- Receipt completeness.
@@ -632,7 +632,6 @@ unifierClayStillFalse :
 unifierClayStillFalse =
   Unifier.balabanRGClayPromotionStillFalse
 
-
 ------------------------------------------------------------------------
 -- Direct scale-transfer non-promotion reachability.
 ------------------------------------------------------------------------
@@ -653,16 +652,23 @@ unifierBalabanScaleTransferPromotionImpossible =
   Unifier.unifierBalabanScaleTransferPromotionImpossible
 
 ------------------------------------------------------------------------
--- Typed continuum/RG non-promotion reachability.
+-- Typed continuum and depth-limit non-promotion reachability.
 ------------------------------------------------------------------------
 
 toeBalabanContinuumLimitReceiptMatchesOwner :
-  TOE.toeBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+  TOE.toeBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
 toeBalabanContinuumLimitReceiptMatchesOwner = refl
 
 unifierBalabanContinuumLimitReceiptMatchesOwner :
-  Unifier.unifierBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+  Unifier.unifierBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
 unifierBalabanContinuumLimitReceiptMatchesOwner = refl
+
+physicsBalabanContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsBalabanContinuumLimitReceipt
+  ≡ Balaban.balabanContinuumLimitReceipt
+physicsBalabanContinuumLimitReceiptMatchesOwner = refl
 
 toeBalabanContinuumLimitPromotionImpossible :
   Balaban.BalabanContinuumLimitPromotion → ⊥
@@ -674,13 +680,25 @@ unifierBalabanContinuumLimitPromotionImpossible :
 unifierBalabanContinuumLimitPromotionImpossible =
   Unifier.unifierBalabanContinuumLimitPromotionImpossible
 
+physicsBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanContinuumLimitPromotionImpossible =
+  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
+
 toeDepthContinuumLimitReceiptMatchesOwner :
-  TOE.toeDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+  TOE.toeDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
 toeDepthContinuumLimitReceiptMatchesOwner = refl
 
 unifierDepthContinuumLimitReceiptMatchesOwner :
-  Unifier.unifierDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+  Unifier.unifierDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
 unifierDepthContinuumLimitReceiptMatchesOwner = refl
+
+physicsDepthContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsDepthContinuumLimitReceipt
+  ≡ Balaban.depthContinuumLimitReceipt
+physicsDepthContinuumLimitReceiptMatchesOwner = refl
 
 toeDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
@@ -692,23 +710,115 @@ unifierDepthContinuumLimitPromotionImpossible :
 unifierDepthContinuumLimitPromotionImpossible =
   Unifier.unifierDepthContinuumLimitPromotionImpossible
 
-physicsBalabanContinuumLimitReceiptMatchesOwner :
-  Physics.yangMillsBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
-physicsBalabanContinuumLimitReceiptMatchesOwner = refl
-
-physicsBalabanContinuumLimitPromotionImpossible :
-  Balaban.BalabanContinuumLimitPromotion → ⊥
-physicsBalabanContinuumLimitPromotionImpossible =
-  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
-
-physicsDepthContinuumLimitReceiptMatchesOwner :
-  Physics.yangMillsDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
-physicsDepthContinuumLimitReceiptMatchesOwner = refl
-
 physicsDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
 physicsDepthContinuumLimitPromotionImpossible =
   Physics.yangMillsDepthContinuumLimitPromotionImpossible
+
+------------------------------------------------------------------------
+-- Direct fleet planning-owner agreement.
+-- Fleet 58 remains distinct from Yang-Mills Gate-4 58.
+------------------------------------------------------------------------
+
+toeFleetFormalGapReceiptMatchesOwner :
+  TOE.toeFleetFormalGapTargetReceipt ≡
+  FleetGap.canonicalFleetFormalGapTargetReceipt
+toeFleetFormalGapReceiptMatchesOwner = refl
+
+unifierFleetFormalGapReceiptMatchesOwner :
+  Unifier.unifierFleetFormalGapTargetReceipt ≡
+  FleetGap.canonicalFleetFormalGapTargetReceipt
+unifierFleetFormalGapReceiptMatchesOwner = refl
+
+toeFleetRecordedGapCountIs58 :
+  FleetGap.unformalisedFormalGaps TOE.toeFleetFormalGapTargetReceipt ≡ 58
+toeFleetRecordedGapCountIs58 =
+  TOE.toeFleetRecordedUnformalisedGapCountIs58
+
+unifierFleetRecordedGapCountIs58 :
+  FleetGap.unformalisedFormalGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ 58
+unifierFleetRecordedGapCountIs58 =
+  Unifier.unifierFleetRecordedUnformalisedGapCountIs58
+
+toeFleetDischargedCountIs584 :
+  FleetGap.dischargedCoreKnowledgeFibres TOE.toeFleetFormalGapTargetReceipt ≡ 584
+toeFleetDischargedCountIs584 =
+  TOE.toeFleetRecordedDischargedCountIs584
+
+unifierFleetDischargedCountIs584 :
+  FleetGap.dischargedCoreKnowledgeFibres Unifier.unifierFleetFormalGapTargetReceipt ≡ 584
+unifierFleetDischargedCountIs584 =
+  Unifier.unifierFleetRecordedDischargedCountIs584
+
+toeFleetContradictionCountIs44 :
+  FleetGap.polarityContradictionGaps TOE.toeFleetFormalGapTargetReceipt ≡ 44
+toeFleetContradictionCountIs44 =
+  TOE.toeFleetRecordedContradictionCountIs44
+
+unifierFleetContradictionCountIs44 :
+  FleetGap.polarityContradictionGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ 44
+unifierFleetContradictionCountIs44 =
+  Unifier.unifierFleetRecordedContradictionCountIs44
+
+toeFleetMotifCountIs3 :
+  FleetGap.macroscopicEigenMotifCount TOE.toeFleetFormalGapTargetReceipt ≡ 3
+toeFleetMotifCountIs3 =
+  TOE.toeFleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetMotifCountIs3 :
+  FleetGap.macroscopicEigenMotifCount Unifier.unifierFleetFormalGapTargetReceipt ≡ 3
+unifierFleetMotifCountIs3 =
+  Unifier.unifierFleetRecordedMacroscopicMotifCountIs3
+
+toeFleetTargetsOnlyFormalGaps :
+  FleetGap.targetOnlyUnformalisedFormalGaps TOE.toeFleetFormalGapTargetReceipt ≡ true
+toeFleetTargetsOnlyFormalGaps =
+  TOE.toeFleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetTargetsOnlyFormalGaps :
+  FleetGap.targetOnlyUnformalisedFormalGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyFormalGaps =
+  Unifier.unifierFleetTargetsOnlyUnformalisedFormalGaps
+
+toeFleetSpectralLabelDoesNotIdentifyOwner :
+  FleetGap.spectralLabelsIdentifyTheoremOwners TOE.toeFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelDoesNotIdentifyOwner =
+  TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleetSpectralLabelDoesNotIdentifyOwner :
+  FleetGap.spectralLabelsIdentifyTheoremOwners Unifier.unifierFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelDoesNotIdentifyOwner =
+  Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+toeFleetBalabanOwnerMatchesSource :
+  TOE.toeFleetBalabanDischargedOwnerReceipt ≡
+  FleetGap.fleetBalabanDischargedOwnerReceipt
+toeFleetBalabanOwnerMatchesSource = refl
+
+unifierFleetBalabanOwnerMatchesSource :
+  Unifier.unifierFleetBalabanDischargedOwnerReceipt ≡
+  FleetGap.fleetBalabanDischargedOwnerReceipt
+unifierFleetBalabanOwnerMatchesSource = refl
+
+toeFleetNSM2StatusMatchesSource :
+  TOE.toeFleetNSPhysicalM2SummationCompilerStatus ≡
+  FleetGap.fleetNSPhysicalM2SummationCompilerStatus
+toeFleetNSM2StatusMatchesSource = refl
+
+unifierFleetNSM2StatusMatchesSource :
+  Unifier.unifierFleetNSPhysicalM2SummationCompilerStatus ≡
+  FleetGap.fleetNSPhysicalM2SummationCompilerStatus
+unifierFleetNSM2StatusMatchesSource = refl
+
+toeFleetQuantumMereologyMatchesSource :
+  TOE.toeFleetQuantumMereologyBoundary ≡
+  FleetGap.fleetQuantumMereologyBoundary
+toeFleetQuantumMereologyMatchesSource = refl
+
+unifierFleetQuantumMereologyMatchesSource :
+  Unifier.unifierFleetQuantumMereologyBoundary ≡
+  FleetGap.fleetQuantumMereologyBoundary
+unifierFleetQuantumMereologyMatchesSource = refl
 
 ------------------------------------------------------------------------
 -- ZKP frame remains the existing typed contract.
@@ -719,6 +829,54 @@ validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
 
 
+------------------------------------------------------------------------
+-- Cross-root non-promotion coherence.
+-- The source owner defines each theorem.  Both roots reuse it.
+-- This adds no theorem authority and changes no ESD module.
+------------------------------------------------------------------------
+
+toeAndUnifierScaleDensityAgree :
+  TOE.toeBalabanScaleDensityFlowLevel
+  ≡ Unifier.toeBalabanScaleDensityFlowLevel
+toeAndUnifierScaleDensityAgree = refl
+
+toeAndUnifierRegularELocalizationAgree :
+  TOE.toeBalabanRegularELocalizationCarrierLevel
+  ≡ Unifier.toeBalabanRegularELocalizationCarrierLevel
+toeAndUnifierRegularELocalizationAgree = refl
+
+toeAndUnifierCasimirAgree :
+  TOE.toeBalabanHaarCasimirCoefficientLevel
+  ≡ Unifier.toeBalabanHaarCasimirCoefficientLevel
+toeAndUnifierCasimirAgree = refl
+
+toeAndUnifierStressAgree :
+  TOE.toeBalabanStressHilbertPhysicalShellLevel
+  ≡ Unifier.toeBalabanStressHilbertPhysicalShellLevel
+toeAndUnifierStressAgree = refl
+
+toeAndUnifierContinuumReceiptAgree :
+  TOE.toeBalabanContinuumLimitReceipt
+  ≡ Unifier.unifierBalabanContinuumLimitReceipt
+toeAndUnifierContinuumReceiptAgree = refl
+
+toeAndUnifierBlockSpinCannotPromote :
+  Balaban.balabanRGBlockSpinTransferOpenFlag ≡ false
+toeAndUnifierBlockSpinCannotPromote =
+  TOE.toeBalabanRGBlockSpinTransferStillOpen
+
+toeAndUnifierContinuumPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeAndUnifierContinuumPromotionImpossible =
+  Unifier.unifierBalabanContinuumLimitPromotionImpossible
+
+toeAndUnifierDepthPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeAndUnifierDepthPromotionImpossible =
+  TOE.toeDepthContinuumLimitPromotionImpossible
+------------------------------------------------------------------------
+-- Same-family and C-package max-cut agreement.
+------------------------------------------------------------------------
 ------------------------------------------------------------------------
 -- Same-family Cauchy / Schwinger stress recovery agreement.
 ------------------------------------------------------------------------
@@ -748,6 +906,15 @@ receiptGoal1CSourceCutCompilerMatchesOwner :
   ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
 receiptGoal1CSourceCutCompilerMatchesOwner = refl
 
+receiptCPhysicalPackageMaxCutMatchesOwner :
+  Balaban.cPhysicalPackageMaxCutCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+receiptCPhysicalPackageMaxCutMatchesOwner = refl
+
+receiptCPackageCountMatchesOwner :
+  Balaban.cPhysicalPackageCount Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageCount
+receiptCPackageCountMatchesOwner = refl
 receiptGoal1CContinuumStressCompilerMatchesOwner :
   Balaban.goal1CContinuumStressRecoveryCompiler Balaban.canonicalBalabanRGTOEReceipt
   ≡ Balaban.balabanGoal1CContinuumStressRecoveryCompilerLevel
@@ -773,65 +940,6 @@ unifierSameFamilyRecoveryCompilerMatchesOwner :
   ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
 unifierSameFamilyRecoveryCompilerMatchesOwner = refl
 
-toeGoal1CSourceCutCompilerMatchesOwner :
-  TOE.toeBalabanGoal1CSourceCutCompilerLevel
-  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
-toeGoal1CSourceCutCompilerMatchesOwner = refl
-
-unifierGoal1CSourceCutCompilerMatchesOwner :
-  Unifier.toeBalabanGoal1CSourceCutCompilerLevel
-  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
-unifierGoal1CSourceCutCompilerMatchesOwner = refl
-
-toeLevel2ClayPromotionStillFalse :
-  Balaban.balabanLevel2ClayPromotionFlag ≡ false
-toeLevel2ClayPromotionStillFalse =
-  TOE.toeBalabanLevel2ClayPromotionStillFalse
-
-unifierLevel2ClayPromotionStillFalse :
-  Balaban.balabanLevel2ClayPromotionFlag ≡ false
-unifierLevel2ClayPromotionStillFalse =
-  Unifier.toeBalabanLevel2ClayPromotionStillFalse
-
-------------------------------------------------------------------------
--- Canonical five-package C max-cut agreement.
-------------------------------------------------------------------------
-
-receiptCPhysicalPackageMaxCutMatchesOwner :
-  Balaban.cPhysicalPackageMaxCutCompiler Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
-receiptCPhysicalPackageMaxCutMatchesOwner = refl
-
-receiptC0MatchesOwner :
-  Balaban.c0LiteralGaugeInvariantLocalObservableFamily Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
-receiptC0MatchesOwner = refl
-
-receiptC1MatchesOwner :
-  Balaban.c1MarkedCurvatureFamily Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanC1MarkedCurvatureFamilyLevel
-receiptC1MatchesOwner = refl
-
-receiptC2MatchesOwner :
-  Balaban.c2PhysicalRemainderSharedTail Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanC2PhysicalRemainderSharedTailLevel
-receiptC2MatchesOwner = refl
-
-receiptC3MatchesOwner :
-  Balaban.c3OneStepAFRecurrenceIdentification Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanC3OneStepAFRecurrenceIdentificationLevel
-receiptC3MatchesOwner = refl
-
-receiptC4MatchesOwner :
-  Balaban.c4DensityAnchoredStressLane Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanC4DensityAnchoredStressLaneLevel
-receiptC4MatchesOwner = refl
-
-receiptCPackageCountMatchesOwner :
-  Balaban.cPhysicalPackageCount Balaban.canonicalBalabanRGTOEReceipt
-  ≡ Balaban.balabanCPhysicalPackageCount
-receiptCPackageCountMatchesOwner = refl
-
 toeCPhysicalPackageMaxCutMatchesOwner :
   TOE.toeBalabanCPhysicalPackageMaxCutCompilerLevel
   ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
@@ -851,3 +959,127 @@ unifierCPackageCountMatchesOwner :
   Unifier.toeBalabanCPhysicalPackageCount
   ≡ Balaban.balabanCPhysicalPackageCount
 unifierCPackageCountMatchesOwner = refl
+physicsSameFamilyRecoveryCompilerMatchesOwner :
+  Physics.yangMillsBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+physicsSameFamilyRecoveryCompilerMatchesOwner = refl
+
+toeGoal1CSourceCutCompilerMatchesOwner :
+  TOE.toeBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+toeGoal1CSourceCutCompilerMatchesOwner = refl
+
+unifierGoal1CSourceCutCompilerMatchesOwner :
+  Unifier.toeBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+unifierGoal1CSourceCutCompilerMatchesOwner = refl
+
+physicsGoal1CSourceCutCompilerMatchesOwner :
+  Physics.yangMillsBalabanGoal1CSourceCutCompilerLevel
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+physicsGoal1CSourceCutCompilerMatchesOwner = refl
+
+toeLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+toeLevel2ClayPromotionStillFalse =
+  TOE.toeBalabanLevel2ClayPromotionStillFalse
+
+unifierLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+unifierLevel2ClayPromotionStillFalse =
+  Unifier.toeBalabanLevel2ClayPromotionStillFalse
+
+physicsLevel2ClayPromotionStillFalse :
+  Balaban.balabanLevel2ClayPromotionFlag ≡ false
+physicsLevel2ClayPromotionStillFalse =
+  Physics.yangMillsBalabanLevel2ClayPromotionStillFalse
+-- Direct canonical scale-transfer eliminator reachability.
+------------------------------------------------------------------------
+
+toeDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+toeDirectScaleTransferPromotionImpossible =
+  TOE.toeBalabanScaleTransferPromotionImpossible
+
+unifierDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+unifierDirectScaleTransferPromotionImpossible =
+  Unifier.unifierBalabanScaleTransferPromotionImpossible
+-- Direct H1 (R320) -> R313/R296 -> R333 route: exact owner agreement.
+------------------------------------------------------------------------
+
+toeR320DirectOSCompilerIsCanonical :
+  TOE.toeBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+toeR320DirectOSCompilerIsCanonical = refl
+
+unifierR320DirectOSCompilerIsCanonical :
+  Unifier.unifierBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+unifierR320DirectOSCompilerIsCanonical = refl
+
+physicsR320DirectOSCompilerIsCanonical :
+  Physics.yangMillsBalabanR320RouteSToOSCompilerLevel
+  ≡ Balaban.balabanR320RouteSToOSCompilerLevel
+physicsR320DirectOSCompilerIsCanonical = refl
+
+toeR320NoSecondMagnitudeLeaf :
+  TOE.toeBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+toeR320NoSecondMagnitudeLeaf = refl
+
+unifierR320NoSecondMagnitudeLeaf :
+  Unifier.unifierBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+unifierR320NoSecondMagnitudeLeaf = refl
+
+physicsR320NoSecondMagnitudeLeaf :
+  Physics.yangMillsBalabanR320RouteSNoDuplicateMagnitude
+  ≡ Balaban.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+physicsR320NoSecondMagnitudeLeaf = refl
+
+
+------------------------------------------------------------------------
+-- Rational SU2 P2 trace/S2 same-owner regression.
+------------------------------------------------------------------------
+
+toeP2TraceCompilerMatchesOwner :
+  TOE.toeBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+toeP2TraceCompilerMatchesOwner = refl
+
+unifierP2TraceCompilerMatchesOwner :
+  Unifier.unifierBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+unifierP2TraceCompilerMatchesOwner = refl
+
+physicsP2TraceCompilerMatchesOwner :
+  Physics.yangMillsBalabanRouteSP2TraceToS2Level
+  ≡ Balaban.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+physicsP2TraceCompilerMatchesOwner = refl
+
+toeP2PhysicalInterpretationMatchesOwner :
+  TOE.toeBalabanRouteSP2PhysicalInterpretationLevel
+  ≡ Balaban.balabanRouteSP2TracePhysicalInterpretationLevel
+toeP2PhysicalInterpretationMatchesOwner = refl
+
+toeP2TracePaysPerLoopBoundsGivenInterpretation :
+  TOE.toeBalabanRouteSP2PerLoopBoundAfterInterpretation
+    ≡ Balaban.balabanRouteSP2TracePaysPerLoopBounds
+toeP2TracePaysPerLoopBoundsGivenInterpretation = refl
+
+
+toeR445NativeP2AgreesWithOwner :
+  TOE.toeBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+toeR445NativeP2AgreesWithOwner = refl
+
+unifierR445NativeP2AgreesWithOwner :
+  Unifier.unifierBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+unifierR445NativeP2AgreesWithOwner = refl
+
+physicsR445NativeP2AgreesWithOwner :
+  Physics.yangMillsBalabanRouteSP2R445CompilerLevel
+  ≡ Balaban.balabanRouteSP2R445NativeCompilerLevel
+physicsR445NativeP2AgreesWithOwner = refl

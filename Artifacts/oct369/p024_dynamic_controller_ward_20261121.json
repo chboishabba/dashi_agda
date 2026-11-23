@@ -1,0 +1,22 @@
+{
+  "checks_passed": 25,
+  "scope": "same tetrad, dynamical TWO-SCALAR effective action and same-source Ward; not actual PtMn3 T1g, spinor+Maxwell/SC or Einstein solution",
+  "coupled_Ward": "nabla^mu(E_mn)=-E_O d_nu O-E_C d_nu C",
+  "external_source_removed": "J=lambda*C with dynamic controller C",
+  "on_shell_stress_exchange_cancelled": true,
+  "sector_exchange": "+-lambda O d_x C",
+  "potential_positive_example": "m2=4,n2=9,lambda=3, Hessian det=27",
+  "potential_unstable_counterexample": "m2=4,n2=9,lambda=7, Hessian det=-13",
+  "nonminimal_order_coefficient": "F=M2+2xi O^2",
+  "local_execution": "25 symbolic assertions pass on equivalent standalone SymPy source; GitHub committed file not yet independently replayed",
+  "actual_PtMn3_hamiltonian": false,
+  "spinor_coupled_to_order": false,
+  "physical_EM_SC_battery_Tmunu": false,
+  "full_metric_solution": false,
+  "anomalous_gravity": false,
+  "attribution": {
+    "prior": "Noether conservation and classical scalar-tensor action",
+    "native_repo": "GRFirstOrderGravityScope, W4 matter stress, P0.22-23",
+    "new": "OCT369 dynamic effective controller and exact transfer cancellation"
+  }
+}

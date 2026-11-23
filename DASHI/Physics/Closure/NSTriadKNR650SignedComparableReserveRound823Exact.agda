@@ -53,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarri
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedNestedFourHelicityWallRound813Exact as R813
 import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact as R821
+import DASHI.Physics.Closure.NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact as R853
 import DASHI.Physics.Closure.NSTriadKNR650CCTouchedSignedRowsRound822Exact as R822
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
 
@@ -125,6 +126,17 @@ module SignedComparableReserve
 
   module Packet = Barrier.Packet
   module Four = Barrier.Four
+
+  -- R853 is the same R815 physical packet normal form, instantiated with
+  -- exactly the R408/R405/R821 carriers used by the R823 reserve/demand.
+  -- This proves an algebraic same-packet weld; it constructs neither
+  -- a complete-real ODE nor an R408 live physical trajectory.
+  module Normal = R853.CanonicalSelectedRateNormalForm
+    Time initialTime integrateTo
+    VectorDerivativeOf ScalarDerivativeOf
+    projectedCross vectorAlgebra zeroCalculus
+    hermitianCalculus constantScaleCalculus scalarDerivativeAlgebra
+    FTC integrationLinearity integrationTransport D C R
   module Shared = Barrier.Shared
 
   nu : ℚ
@@ -341,6 +353,72 @@ module SignedComparableReserve
     reservePlusW1BuildBarrier
       positive cutoff terminal (structures cutoff) W1
       (reserves cutoff terminal)
+
+
+  ------------------------------------------------------------------------
+  -- Original R823 ↔ R820 ↔ R815 ↔ R853 pointwise and integrated weld.
+  --
+  -- These are equality theorems on the identical live packet and time.
+  -- R820: four-helicity payment = R815 signed-orbit payment;
+  -- R853: R815 signed-orbit payment = 6*(12*C-P+(2nu-margin)*D);
+  -- R823: four-helicity payment = reserve - demand.
+  --
+  -- No free rate variable, enstrophy residual, new physical assumption,
+  -- real-ODE existence, or claimed R854 derivative inequality is used.
+  ------------------------------------------------------------------------
+
+  originalR823CompleteRateIsR853SelectedRate :
+    (cutoff : Nat) (time : Time)
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    At.completePhysicalRate cutoff time S
+    ≡ Normal.At.selectedNormalForm cutoff time S nu
+  originalR823CompleteRateIsR853SelectedRate cutoff time S =
+    trans
+      (sym (Four.At.actualR815RateIsFullR813CCTouchedViscousRate
+        cutoff time S nu))
+      (Normal.At.signedRateNormalForm cutoff time S nu)
+
+  originalR823ReserveDemandIsR853SelectedRate :
+    (cutoff : Nat) (time : Time)
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    At.signedReserve cutoff time S - At.cubicQuinticDemand cutoff time S
+    ≡ Normal.At.selectedNormalForm cutoff time S nu
+  originalR823ReserveDemandIsR853SelectedRate cutoff time S =
+    trans
+      (sym (At.actualFullRateIsReserveMinusDemand cutoff time S))
+      (originalR823CompleteRateIsR853SelectedRate cutoff time S)
+
+  originalR823IntegratedRateIsR853SelectedIntegral :
+    (cutoff : Nat) (terminal : Time)
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    integratedCompleteRate cutoff S terminal
+    ≡ integrateTo
+        (λ time → Normal.At.selectedNormalForm cutoff time S nu)
+        terminal
+  originalR823IntegratedRateIsR853SelectedIntegral cutoff terminal S =
+    Energy.integrationCongruent integrationLinearity
+      (λ time → originalR823CompleteRateIsR853SelectedRate
+        cutoff time S)
+      terminal
+
+  originalR823IntegratedReserveDemandIsR853SelectedIntegral :
+    (cutoff : Nat) (terminal : Time)
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    integratedReserve cutoff S terminal
+      - integratedDemand cutoff S terminal
+    ≡ integrateTo
+        (λ time → Normal.At.selectedNormalForm cutoff time S nu)
+        terminal
+  originalR823IntegratedReserveDemandIsR853SelectedIntegral
+      cutoff terminal S =
+    trans
+      (sym (integratedReserveMinusDemand cutoff S terminal))
+      (originalR823IntegratedRateIsR853SelectedIntegral
+        cutoff terminal S)
+
+-- Status boundary: these equalities do not construct the true real-time
+-- R408 packet or prove an inequality for every physical terminal time.
+-- The existing R823 reserve/W1 closure flags remain intentionally false.
 
 round823SameOriginalCCSignedRows : Bool
 round823SameOriginalCCSignedRows = true

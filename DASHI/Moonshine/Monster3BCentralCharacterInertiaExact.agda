@@ -69,19 +69,19 @@ open CentralPhaseAction public
 
 CentralEigenspace :
   ∀ {State} → CentralPhaseAction State → CentralPhase3 → Set
-CentralEigenspace action phase =
-  Σ _ (λ state → centralAct action state ≡ phaseScale action phase state)
+CentralEigenspace {State} action phase =
+  Σ State (λ state → centralAct action state ≡ phaseScale action phase state)
 
 stateOf :
   ∀ {State action phase} → CentralEigenspace {State} action phase → State
-stateOf (state , _) = state
+stateOf = proj₁
 
 centralEigenlaw :
   ∀ {State action phase} →
   (eigenstate : CentralEigenspace {State} action phase) →
   centralAct action (proj₁ eigenstate)
   ≡ phaseScale action phase (proj₁ eigenstate)
-centralEigenlaw = proj₂
+centralEigenlaw (_ , law) = law
 
 ------------------------------------------------------------------------
 -- Transformations either preserve or invert the chosen central generator.

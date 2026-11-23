@@ -347,20 +347,16 @@ path13CoarseWordLengthIs13 bond =
     (Periodic.segmentWordLength (Family.coarseSegmentFor bond))
     refl
 
-path13LiteralGammaLengthAtMost61 :
-  ∀ {CoarseField}
-    (reduced : Reduced.ReducedPath13FamilyGeometry CoarseField)
-    bond step point →
-  R164.listLength
-    (Geometry.literalGammaWord
-      (Family.geometrySourceAt
-        (Reduced.asPath13FamilyGeometry reduced) bond)
-      step point)
-  ≤ 61
-path13LiteralGammaLengthAtMost61 reduced bond step point =
+gammaWordLengthAtMost61 :
+  ∀ {n Value group}
+    (source : Geometry.Equation119GeometrySource n Value group)
+    step point →
+  R164.listLength (Periodic.segmentWord (Geometry.coarseSegment source step)) ≡ 13 →
+  R164.listLength (Geometry.literalGammaWord source step point) ≤ 61
+gammaWordLengthAtMost61 source step point coarseLength =
   let
     contour = Embed.canonicalCenteredContourWord point
-    coarse = Periodic.segmentWord (Family.coarseSegmentFor bond)
+    coarse = Periodic.segmentWord (Geometry.coarseSegment source step)
     contourBound = R172.canonicalContourLengthAtMost24 point
 
     reverseBound : R164.listLength (R155.reverseWord contour) ≤ 24
@@ -372,7 +368,7 @@ path13LiteralGammaLengthAtMost61 reduced bond step point =
     coarseBound : R164.listLength coarse ≤ 13
     coarseBound = subst
       (λ selectedLength → selectedLength ≤ 13)
-      (sym (path13CoarseWordLengthIs13 bond))
+      (sym coarseLength)
       ℕP.≤-refl
 
     sumBound :
@@ -390,6 +386,21 @@ path13LiteralGammaLengthAtMost61 reduced bond step point =
         (cong (λ n → R164.listLength contour + n)
           (R164.appendLength coarse (R155.reverseWord contour)))))
     sumBound
+
+path13LiteralGammaLengthAtMost61 :
+  ∀ {CoarseField}
+    (reduced : Reduced.ReducedPath13FamilyGeometry CoarseField)
+    bond step point →
+  R164.listLength
+    (Geometry.literalGammaWord
+      (Family.geometrySourceAt
+        (Reduced.asPath13FamilyGeometry reduced) bond)
+      step point)
+  ≤ 61
+path13LiteralGammaLengthAtMost61 reduced bond step point =
+  gammaWordLengthAtMost61
+    (Family.geometrySourceAt (Reduced.asPath13FamilyGeometry reduced) bond)
+    step point (path13CoarseWordLengthIs13 bond)
 
 path13RelativeClosedWord :
   ∀ {CoarseField} →

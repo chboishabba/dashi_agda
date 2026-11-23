@@ -1,4 +1,109 @@
+## 22 November 2026 — zero-aware 2-isogeny versus spatial C3/OS non-identity
+
+Cross-lane recovery: the finite C3 Wilson Gram and three-character sector detection on [YM master-based PR #1536](https://github.com/chboishabba/dashi_agda/pull/1536), [source note](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayOriginalWilsonC3SourceGramToOSSpectralFaithfulness20261122.md), do **not** transport elliptic isogeny kernel points to Yang–Mills zero-energy eigenvectors. The original BSD owner curve is E32: y²=x³−x (CM by Z[i]), with E[2]={O,(0,0),(1,0),(-1,0)}; the Eisenstein j=0 E36 curve y²=x³+1 (CM by Z[omega]) is not the same model, has different bad primes and different character data. A separate selected 2-isogeny and its dual satisfy phi_hat o phi=[2] only with the exceptional torsion/kernel branches and actual point at infinity included, **not** merely the rational affine chart. The genuine Kummer/Selmer square requires global/local cohomology, the real and 2-adic conditions, and kernel-accepted same-object maps; no finite C3 Fourier correspondence supplies those inputs.
+
+BSD P0 remains the existing classical selected E32 K1–K5 versus native formal S4 analytic eta/Mellin/model correspondence, including true global coefficients and L(E,1), with original Kummer/dual integration; selected classical known cases do not prove universal S6. The 22-Nov YM C3 toy adds a formal Gram-null and distinct vacuum solely as a *negative control*; do not confuse either with E32 torsion or Sha[2]. Preserve original source ownership, scalar zero vs phase exponent zero, local exceptional points and Frobenius indices; Lean E36 C3 donors cannot be relabelled as E32.
+
+
+## 21 November 2026 — Mellin source correction / weld-forward (latest)
+
+The **original Mellin compiler is ALREADY PRESENT** in
+`DASHI/Mathematics/Automorphic/MellinSplitFunctionalEquationExact.agda`:
+`MellinSplitData`, `completedTransform`, and the proved
+`mellinSplitFunctionalEquation`. The selected E32 owner
+`EllipticCMLevel32FrickeMellinExact` ALREADY imports it directly
+and proves `mellinCentralLowerEqualsUpper` and
+`mellinCentralValueIsTwiceTail` under the actual corresponding
+substitution and fixed-point premises. **Do not invent another Mellin
+split, eta transform skeleton, or anonymous analytic value.**
+
+The exact remaining P0 gap is to instantiate this existing source
+with the **actual original E:y²=x³−x analytic elliptic L(E,s)**
+and genuine infinite `eta(4z)^2 eta(8z)^2` form, with
+actual normalized modularity and change-of-variable proofs.
+The existing real positive-tail estimate is mathematically available
+conditional on the classical analytic identity; it does not supply
+the original function identity by itself. On the current Agda branch,
+`constantUnitNormalizedReceipt` demonstrates that an arbitrary
+`NormalizedOneDimensionalQSeries` is NOT a proof that the actual
+original E32 Fourier coefficients have been selected.
+
+**GRH also remains P0**, not postponed as a consequence of this
+selected-curve BSD work: original Lean #113 all-Dirichlet
+`UpperTheory.EveryCharacter` and independent full-source formal
+verification, then v4.33.1→root/Agda same-function admission.
+The active Agda #1533
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`
+controls that separate P0. Existing G2 Gamma/Mellin/Weil
+proof-relevant transport is a reusable theorem owner, not new
+analytic Dirichlet GRH by name matching.
+
+All R445/F19, K4/S4 and iteration numbers are method names, not
+main proof endpoints. No Agda kernel or analytic endpoint is promoted.
+
+---
+
 # BSD S4 original E:y²=x³−x — same-source 2-isogeny, level-32 newform, Mellin and central positivity
+
+## 21 November 2026 — P0 theorem-first correction (supersedes iteration-ledgers)
+
+**Proof target, not a round number:** for the original selected E32 curve,
+realize the actual analytic L(E,s), its exact same-curve modular/eta
+identity, and a genuine nonzero central value in a pinned formal carrier.
+Separately, pay selected Mordell-Weil/Selmer/Sha and eventually the
+universal BSD rank equality. K1–K5, S1–S6, source files and PR numbers
+are attempts/donors, never milestones on the main theorem by themselves.
+
+**Substantive mathematical P0 progress:** the original S4 classical
+Mellin/Fricke argument admits the explicit positive lower bound
+`L(E,1) >= 2*(64428653584/66556260225)*exp(-pi/(2*sqrt(2)))`
+(about **0.637588175627469**), conditional on the genuine original
+Dedekind eta product and the ORIGINAL E32 level-32 modular/Mellin
+identification. Proof: for t≥1/√32, r=exp(-8πt)<1/64 by the exact
+degree-eight Taylor rational certificate for exp(21/5)>64. The two
+positive infinite eta products are uniformly ≥62/63 and ≥4094/4095.
+The full proof and authority ledger:
+`Docs/roadmaps/BSDOriginalLevel32P0PositiveTailLowerBound20261121.md`.
+Independent exact-rational regression:
+`scripts/check_bsd_level32_original_positive_tail_bound_p0.py`.
+**This improves an explicit selected S4 classical estimate; it is NOT
+a native Agda proof, nor a proof of its imported Mellin identity.**
+
+**Critical same-object correction:** the new P0
+`NormalizedOneDimensionalQSeries f g` still accepts arbitrary f and g,
+even constant-one functions. Its source-written
+`constantUnitNormalizedReceipt` is a deliberate countermodel showing
+that abstract normalized all-n equality does **not** prove f is the
+actual original E32 elliptic newform. The `BSD.EllipticLFunctionData`
+record is indexed by E32 but its `eulerProduct : Set` and
+`analyticContinuation : Set` fields are *uninhabited semantic
+requirements*, not computed analytic L-functions. A p=5 original row
+does not fix all-n coefficients. The pending native theorem must
+identify the **actual original coefficients** and analytic function
+with the level-32 eta coefficients, then transfer the same Mellin value.
+
+**Next source proof payments:** actual analytic eta product and
+imaginary-axis positivity in the selected carrier; Newman/Ligozat
+analytic theorem and `dim S₂(Γ₀(32))=1` on a genuine form space;
+a verified E32 modularity/2-isogeny L-series equality for **all n**;
+typed Fricke/Mellin source equality; transitive kernel acceptance.
+No rank-zero selected BSD strong formula follows from a p5 receipt
+or from this improved positive-tail inequality alone.
+
+
+## 21 November 2026 — master-native Agda BSD P0 source weld
+
+**Reconciliation:** the source-identified original Agda golden BSD K1–K5 and conductor-32 K4 modules from historical #1500 already exist on `master` (key matching blob SHA checked). #1500 diverges substantially from current `master`; no 49,000-commit historical branch replay or second Kummer/eta/Hecke stack is warranted. The active P0 integration is a NEW `master`-based branch, `agent/bsd-p0-original-level32-samecurve-weld-20261121`.
+
+**New original proof candidate:** `DASHI/Mathematics/Arithmetic/EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda`. It reuses original `curveY2EqualsX3MinusX`, original `BirchSwinnertonDyerBoundary.EllipticLFunctionData` at precisely that curve, its literal original p=5 datum, and the ALREADY proved normalized-one-dimensional-q-series all-n forward theorem. It adds an explicit inverse normalization construction (given all-n equality and f₁=g₁=1, construct the one-dimensional proportionality record with c=1) and a no-definitionally-identical-j=0-model negative control. The same-source record's **actual modularity/dimension-one premise is not constructed**, and its `EllipticLFunctionData` is a typed interface rather than a realized global analytic function. The module is imported by the original BSD K1–K5 root and checker. Source-written; native kernel **not run**.
+
+**New exact independent local checks:** `scripts/check_bsd_original_level32_samecurve_p0.py` constructs f32=q∏(1−q⁴ⁿ)²(1−q⁸ⁿ)² to q^512 and compares every p<400 good-prime Fourier coefficient to direct original E:y²=x³−x point counts: 76/76 PASS. Distinct-curve counterexample at p=5: original E32 a₅=−2 while Lean #114 j=0 E36 a₅=0. This validates a finite signature, **not** same-curve analytic modularity or infinite Euler convergence.
+
+**Highest-value K4 P0 remaining:** genuinely instantiate the original level-32 eta product as a holomorphic weight-two cusp form via Dedekind/Newman/Ligozat and actual genus/dimension-one theorem; attach the ORIGINAL E32 modularity, including isogeny-invariant L(E,s) with optimal E':y²=x³+4x; establish exact source-level Mellin/Fricke equality to the same original analytic L(E,1) and strict positive real eta tail; run pinned Agda/Lean kernels and transitive axiom audit. The CLASSICAL S4 closure recorded earlier in this document is not a native proof receipt. Selected K1–K3/K5 and universal S6 remain separately OPEN.
+
+**YM separation:** #1444 original finite source owners and master-based #1536 P0 F19/R445 source permutations are distinct from this BSD selected-curve proof. Sharing original-source BIDI / constructive convergence methods does not identify their measures, Hamiltonians or L-functions.
+
+
 
 **16 November 2026. Exact gate S4: CLOSED in the user-authorized CLASSICAL MATHEMATICAL protocol, using previously established external modularity/eta theorems and new explicit same-selected-curve reduction; NOT Agda or Lean native kernel acceptance.** This is the rank-zero analytic L-value for the SINGLE selected conductor-32 curve. It is not the universal Birch–Swinnerton-Dyer conjecture, not the odd-primary Sha theorem, not selected MW rank=0, and does not close S3/S5/S6 or any of the six original Clay endpoints.
 

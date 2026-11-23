@@ -6,7 +6,6 @@ module DASHI.Statistics.ZipfFamilyFiniteExact where
 -- Johl Brown with OpenAI ChatGPT assistance (2026-10-27).
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
@@ -99,7 +98,8 @@ record AttributedObservation : Set where
 -- an equality-normalized PMF/CDF, and complex Hurwitz continuation
 -- are separate proof obligations. The finite fraction owner is reused.
 power : Nat → Nat → Nat
-power = Nat._^_
+power base zero = suc zero
+power base (suc exponent) = base * power base exponent
 
 -- The private power agrees definitionally with the standard-library
 -- natural exponentiation. NonZero is the *actual* denominator constraint,
@@ -125,8 +125,7 @@ mandelbrotDenominatorNonZero r shift exponent =
 
 zipfIsZeroShift : ∀ r exponent →
   mandelbrotDenominator r zero exponent ≡ zipfDenominator r exponent
-zipfIsZeroShift r exponent =
-  cong (λ base → power base exponent) (NatP.+-identityʳ (suc r))
+zipfIsZeroShift r exponent = refl
 
 -- Fractions here are unreduced exact numerator/denominator pairs.
 -- Every listed term's mathematical denominator is a positive power of

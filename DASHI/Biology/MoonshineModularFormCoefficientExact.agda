@@ -62,25 +62,25 @@ deltaInverseQ1 = 324
 deltaInverseQ2 = 3200
 
 jCoefficientMinus1 : Nat
-jCoefficientMinus1 = _*_ e4CubedQ0 deltaInverseQMinus1
+jCoefficientMinus1 = e4CubedQ0 * deltaInverseQMinus1
 
 jCoefficientZero : Nat
 jCoefficientZero =
-  _+_ (_*_ e4CubedQ0 deltaInverseQ0)
-      (_*_ e4CubedQ1 deltaInverseQMinus1)
+  e4CubedQ0 * deltaInverseQ0
+  + e4CubedQ1 * deltaInverseQMinus1
 
 jCoefficientOne : Nat
 jCoefficientOne =
-  _+_ (_+_ (_*_ e4CubedQ0 deltaInverseQ1)
-           (_*_ e4CubedQ1 deltaInverseQ0))
-      (_*_ e4CubedQ2 deltaInverseQMinus1)
+  e4CubedQ0 * deltaInverseQ1
+  + e4CubedQ1 * deltaInverseQ0
+  + e4CubedQ2 * deltaInverseQMinus1
 
 jCoefficientTwo : Nat
 jCoefficientTwo =
-  _+_ (_+_ (_+_ (_*_ e4CubedQ0 deltaInverseQ2)
-                (_*_ e4CubedQ1 deltaInverseQ1))
-           (_*_ e4CubedQ2 deltaInverseQ0))
-      (_*_ e4CubedQ3 deltaInverseQMinus1)
+  e4CubedQ0 * deltaInverseQ2
+  + e4CubedQ1 * deltaInverseQ1
+  + e4CubedQ2 * deltaInverseQ0
+  + e4CubedQ3 * deltaInverseQMinus1
 
 jMinusOneExact : jCoefficientMinus1 ≡ 1
 jMinusOneExact = refl

@@ -114,7 +114,7 @@ PreOSFiniteMomentRegularity {family = family} source expectation =
             (T5.divide (R559.moments source)
               (T5.exponentialMomentBound
                 (R559.moments source) observable)
-              (T5.lambda (R559.moments source))))))
+              (T5.scalarNatPower (T5.one (R559.moments source)) (T5.multiply (R559.moments source)) (T5.lambda (R559.moments source)) degree)))))
 
 PreOSFiniteExponentialGrowth :
   ∀ {Configuration sequenceLimit limitLaws quotient division
@@ -249,7 +249,7 @@ FiniteMomentRegularity {inputs = inputs} {group = group} source expectation =
             (T5.divide (R559.moments source)
               (T5.exponentialMomentBound
                 (R559.moments source) observable)
-              (T5.lambda (R559.moments source))))))
+              (T5.scalarNatPower (T5.one (R559.moments source)) (T5.multiply (R559.moments source)) (T5.lambda (R559.moments source)) degree)))))
 
 FiniteExponentialGrowth :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator

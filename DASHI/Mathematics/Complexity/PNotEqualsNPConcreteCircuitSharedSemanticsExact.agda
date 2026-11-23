@@ -240,7 +240,7 @@ gateExpressionCorrect :
   ∀ {inputs gates : Nat}
     {program : Circuit.GateProgram inputs gates}
     {assignment : Cook.Assignment} →
-  (realization : ProgramAssignmentRealizes program assignment) →
+  ProgramAssignmentRealizes program assignment →
   (gate : Circuit.Gate inputs gates) →
   Cook.evaluate
     (Compiler.gateExpressionFormula gate)
@@ -381,7 +381,7 @@ realizationSatisfiesSharedConstraints
       ≡ true
     gateConstraintAccepted =
       equivalenceConstraintTrueFromEqualValues
-        (Cook.variable (inputs + gates))
+        (Cook.formulaVar (inputs + gates))
         (Compiler.gateExpressionFormula gate)
         assignment
         (trans
@@ -492,7 +492,7 @@ sharedConstraintsGiveRealization
         assignment
     newestValueEqualExpression =
       equivalenceConstraintTrueImpliesEqualValues
-        (Cook.variable (inputs + gates))
+        (Cook.formulaVar (inputs + gates))
         (Compiler.gateExpressionFormula gate)
         assignment
         newestConstraintAccepted

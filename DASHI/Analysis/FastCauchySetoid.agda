@@ -9,12 +9,12 @@ open import DASHI.Analysis.FastCauchyReals
 fastCauchyIsEquivalence :
   ∀ (A : RationalMetricAuthority) →
   IsEquivalence (_≈R_ {A})
-IsEquivalence.refl (fastCauchyIsEquivalence A) {x} =
-  reflexive (canonicalFastCauchyEqualityLaws A) x
-IsEquivalence.sym (fastCauchyIsEquivalence A) {x} {y} xy =
-  symmetric (canonicalFastCauchyEqualityLaws A) {x} {y} xy
-IsEquivalence.trans (fastCauchyIsEquivalence A) {x} {y} {z} xy yz =
-  transitive (canonicalFastCauchyEqualityLaws A) {x} {y} {z} xy yz
+fastCauchyIsEquivalence A =
+  record
+    { refl = reflexive (canonicalFastCauchyEqualityLaws A)
+    ; sym = symmetric (canonicalFastCauchyEqualityLaws A)
+    ; trans = transitive (canonicalFastCauchyEqualityLaws A)
+    }
 
 fastCauchySetoid :
   RationalMetricAuthority →

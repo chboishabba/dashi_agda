@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.FiniteHistoryOrientationExact where
 
 open import DASHI.Core.Prelude

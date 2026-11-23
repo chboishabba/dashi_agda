@@ -27,7 +27,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl; cong; sym)
-open Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import Base369 as Base
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
@@ -115,17 +114,17 @@ sampleAt {R} L z =
 ------------------------------------------------------------------------
 
 sampleRetainsJ :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} (z : Klein.Point (Render.klein R)) →
+  ∀ {R L} (z : Klein.Point (Render.klein R)) →
   exactJ (sampleAt L z) ≡ Render.jValue R z
 sampleRetainsJ z = refl
 
 sampleRetainsPhase :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} (z : Klein.Point (Render.klein R)) →
+  ∀ {R L} (z : Klein.Point (Render.klein R)) →
   exactPhase (sampleAt L z) ≡ Render.jPhase R z
 sampleRetainsPhase z = refl
 
 phase3IsOrientationQuotient :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} (z : Klein.Point (Render.klein R)) →
+  ∀ {R L} (z : Klein.Point (Render.klein R)) →
   phaseResidue (phase3State (sampleAt L z))
   ≡
   Tower.level6To3
@@ -133,7 +132,7 @@ phase3IsOrientationQuotient :
 phase3IsOrientationQuotient z = refl
 
 level27DeterminesLevel9 :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} (z : Klein.Point (Render.klein R)) →
+  ∀ {R L} (z : Klein.Point (Render.klein R)) →
   levelResidue9 (level9State (sampleAt L z))
   ≡
   Level.level27To9CoveringProjection
@@ -141,7 +140,7 @@ level27DeterminesLevel9 :
 level27DeterminesLevel9 z = refl
 
 level9DeterminesLevel3 :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} (z : Klein.Point (Render.klein R)) →
+  ∀ {R L} (z : Klein.Point (Render.klein R)) →
   levelResidue3 (level3State (sampleAt L z))
   ≡
   Level.level9To3CoveringProjection
@@ -178,8 +177,8 @@ asLevel27TranslationLift :
   Tower.Level27TranslationLift R L
 asLevel27TranslationLift {A = A} W =
   record
-    { translatePoint = Replication.act A (T W)
-    ; level27Translation = level27Translates W
+    { Tower.translatePoint = Replication.act A (T W)
+    ; Tower.level27Translation = level27Translates W
     }
 
 ------------------------------------------------------------------------
@@ -294,14 +293,12 @@ record PhaseEqualsLevel3UnderT
 open PhaseEqualsLevel3UnderT public
 
 phaseAndLevelC3CannotBeGloballyIdentified :
-  ∀ {R}
-    {A : Replication.J369ModularAction R}
-    {L : Tower.CanonicalLevel27Lift R}
+  ∀ {R A L}
     {W : JointTAction R A L} →
   PhaseEqualsLevel3UnderT W →
   (z : Klein.Point (Render.klein R)) →
   Separation.Empty
-phaseAndLevelC3CannotBeGloballyIdentified {A = A} {L = L} {W = W} E z =
+phaseAndLevelC3CannotBeGloballyIdentified {L = L} {W = W} E z =
   Separation.level3TranslationNoFixedPoint
     (Tower.canonicalLevel3At L z)
     fixed
@@ -317,11 +314,11 @@ phaseAndLevelC3CannotBeGloballyIdentified {A = A} {L = L} {W = W} E z =
         (Tower.canonicalLevel3At L z)
         ≡⟨ sym (jointTLevel3Translates W z) ⟩
       Tower.canonicalLevel3At L
-        (Replication.act A (T W) z)
-        ≡⟨ sym (sameC3 E (Replication.act A (T W) z)) ⟩
+        (Replication.act _ (T W) z)
+        ≡⟨ sym (sameC3 E (Replication.act _ (T W) z)) ⟩
       phaseResidue
         (phase3State
-          (sampleAt L (Replication.act A (T W) z)))
+          (sampleAt L (Replication.act _ (T W) z)))
         ≡⟨ cong phaseResidue (jointTPhase3Invariant W z) ⟩
       phaseResidue (phase3State (sampleAt L z))
         ≡⟨ sameC3 E z ⟩
@@ -364,7 +361,7 @@ record JointReflectionAction
 open JointReflectionAction public
 
 jointRPhase6Reflects :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
+  ∀ {R L} →
   (W : JointReflectionAction R L) →
   (z : Klein.Point (Render.klein R)) →
   phase6State
@@ -377,7 +374,7 @@ jointRPhase6Reflects {R} W z =
     R (phaseReflection W) z
 
 jointRPhase3Reflects :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
+  ∀ {R L} →
   (W : JointReflectionAction R L) →
   (z : Klein.Point (Render.klein R)) →
   phaseResidue
@@ -387,23 +384,23 @@ jointRPhase3Reflects :
   ≡
   Arithmetic.negateResidue
     (phaseResidue (phase3State (sampleAt L z)))
-jointRPhase3Reflects {L = L} W z =
+jointRPhase3Reflects W z =
   begin
     phaseResidue
       (phase3State
-        (sampleAt L
+        (sampleAt _
           (Reflection.reflectPoint (phaseReflection W) z)))
       ≡⟨ cong Tower.level6To3 (jointRPhase6Reflects W z) ⟩
     Tower.level6To3
-      (Reflection.reflect6 (phase6State (sampleAt L z)))
+      (Reflection.reflect6 (phase6State (sampleAt _ z)))
       ≡⟨ phase3ReflectionCommutesHex
-            (phase6State (sampleAt L z)) ⟩
+            (phase6State (sampleAt _ z)) ⟩
     Arithmetic.negateResidue
-      (phaseResidue (phase3State (sampleAt L z)))
+      (phaseResidue (phase3State (sampleAt _ z)))
   ∎
 
 jointRLevel27Reflects :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
+  ∀ {R L} →
   (W : JointReflectionAction R L) →
   (z : Klein.Point (Render.klein R)) →
   levelResidue27
@@ -425,7 +422,7 @@ jointRLevel27Reflects {L = L} W z =
   ∎
 
 jointRLevel9Reflects :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
+  ∀ {R L} →
   (W : JointReflectionAction R L) →
   (z : Klein.Point (Render.klein R)) →
   levelResidue9
@@ -447,7 +444,7 @@ jointRLevel9Reflects {L = L} W z =
   ∎
 
 jointRLevel3Reflects :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
+  ∀ {R L} →
   (W : JointReflectionAction R L) →
   (z : Klein.Point (Render.klein R)) →
   levelResidue3
@@ -491,8 +488,7 @@ record JointJConjugation
 open JointJConjugation public
 
 jointRJConjugates :
-  ∀ {R}
-    {L : Tower.CanonicalLevel27Lift R}
+  ∀ {R L}
     {W : JointReflectionAction R L} →
   (J : JointJConjugation W) →
   (z : Klein.Point (Render.klein R)) →

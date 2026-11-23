@@ -23,24 +23,18 @@ receiptCount (_ ∷ receipts) =
 -- Receipt vocabulary.
 
 data ReceiptPromotionStatus : Set where
-  receiptNonPromoting :
-    ReceiptPromotionStatus
+  receiptNonPromoting : ReceiptPromotionStatus
 
-  receiptPromotionClaimed :
-    ReceiptPromotionStatus
+  receiptPromotionClaimed : ReceiptPromotionStatus
 
 data ReceiptPolarity : Set where
-  failClosedReceipt :
-    ReceiptPolarity
+  failClosedReceipt : ReceiptPolarity
 
-  advancingReceipt :
-    ReceiptPolarity
+  advancingReceipt : ReceiptPolarity
 
-  blockingReceipt :
-    ReceiptPolarity
+  blockingReceipt : ReceiptPolarity
 
-  boundaryReceipt :
-    ReceiptPolarity
+  boundaryReceipt : ReceiptPolarity
 
 ------------------------------------------------------------------------
 -- Generic receipt record.
@@ -154,9 +148,9 @@ canonicalGenericReceiptSummaryBridge =
   mkNonPromotingReceipt
     "receipt summary bridge"
     "DASHI.Promotion.ReceiptSummaryCore"
-    "canonicalExampleReceipts"
-    "promotion receipt summaries have a compatible non-promoting metadata shape"
-    "the promotion summary module has not been rewritten to import this core"
+    "receiptSummaryGenericReceipt / canonicalExampleGenericReceipts"
+    "promotion receipt summaries now project explicitly into the generic non-promoting receipt surface"
+    "promotion-specific lane labels and summary payload remain downstream structure rather than being erased by the generic projection"
     "agda -i . DASHI/Promotion/ReceiptSummaryCore.agda"
 
 canonicalAuthorityGateReceiptBridge :
@@ -165,8 +159,8 @@ canonicalAuthorityGateReceiptBridge =
   mkNonPromotingReceipt
     "authority gate receipt bridge"
     "DASHI.Promotion.AuthorityGateCore"
-    "canonicalAuthorityGateReceipts"
-    "authority-gate receipts already expose local false promotion-gate evidence"
+    "authorityGateGenericReceipt / canonicalAuthorityGateGenericReceipts"
+    "authority-gate receipts now project explicitly into the generic non-promoting receipt surface and retain list-level non-promotion proofs"
     "authority-kind-specific gate payloads remain outside the generic receipt surface"
     "agda -i . DASHI/Promotion/AuthorityGateCore.agda"
 

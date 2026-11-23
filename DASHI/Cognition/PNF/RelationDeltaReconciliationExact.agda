@@ -1,11 +1,8 @@
 module DASHI.Cognition.PNF.RelationDeltaReconciliationExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
-
-import DASHI.Core.AuthorityNonPromotionCore as Authority
 
 ------------------------------------------------------------------------
 -- Desired/current keyed relation reconciliation.
@@ -78,58 +75,3 @@ physicalWritesAreNotSemanticAuthority ()
 
 desiredMustCompareCurrent : DesiredRelationMaySkipCurrentComparison → ⊥
 desiredMustCompareCurrent ()
-
-------------------------------------------------------------------------
--- Single-owner authority routing.
---
--- A desired/current reconciler is not active merely because it exists.
--- The hot path must route candidate membership mutation through exactly one
--- owner.  Private delete/reinsert paths are forbidden.
-------------------------------------------------------------------------
-
-record RelationDeltaOwnerRouting : Set where
-  constructor relationDeltaOwnerRouting
-  field
-    candidateMutationOwnerCount : Nat
-    privateCandidateMutationBypassCount : Nat
-    hotPathReconcilerOwnerCount : Nat
-    reconciliationReceiptOwnerCount : Nat
-
-    candidateMutationOwnerUnique :
-      candidateMutationOwnerCount ≡ 1
-
-    privateCandidateMutationBypassZero :
-      privateCandidateMutationBypassCount ≡ 0
-
-    hotPathReconcilerOwnerUnique :
-      hotPathReconcilerOwnerCount ≡ 1
-
-    reconciliationReceiptOwnerMatchesHotPath :
-      reconciliationReceiptOwnerCount ≡ hotPathReconcilerOwnerCount
-
-open RelationDeltaOwnerRouting public
-
-data DuplicateCandidateMutationAuthority : Set where
-
-data HotPathMayBypassRelationDeltaOwner : Set where
-
-duplicateCandidateMutationAuthorityImpossible :
-  DuplicateCandidateMutationAuthority → ⊥
-duplicateCandidateMutationAuthorityImpossible ()
-
-hotPathBypassImpossible :
-  HotPathMayBypassRelationDeltaOwner → ⊥
-hotPathBypassImpossible ()
-
-
-------------------------------------------------------------------------
--- Execution ownership does not promote authority.
-------------------------------------------------------------------------
-
-record RelationDeltaAuthorityBoundary : Set where
-  constructor relationDeltaAuthorityBoundary
-  field
-    ownerRouting : RelationDeltaOwnerRouting
-    executionNonPromotion : Authority.AuthorityNonPromotionBundle
-
-open RelationDeltaAuthorityBoundary public
