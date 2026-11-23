@@ -939,3 +939,46 @@ Git bytes in this environment; locally tested independently
 constructed source has equivalent arithmetic/ownership semantics.
 Prior Chudnovsky analytic premises, Bishop same-real, external
 SOTA and complete formal machine/Agda cost-weld remain OPEN.
+
+
+## 23 November — COMP5h: exact quotient-consumer liveness and GMP endpoint scheduling
+
+Following the COMP5g tree-carrier lifetime optimization, the actual
+terminal certificate is further factored into two nonoverlapping
+resource lifetimes. Compute and retain only the integer quotient
+\(x=\lfloor N_L/D_L\rfloor\) from the lower endpoint;
+release its source numerator/denominator and the lower-series
+endpoint before constructing the upper witness
+\(N_U < (x+1)D_U\). Positivity and \(L\le U\) make this
+a semantics-preserving refactoring of the exact finite
+integer-floor certificate; no upper division, truncation or
+permutation of the ordered Chudnovsky product is introduced.
+The original Chudnovsky analytic identity and alternating
+tail remain external premises.
+
+The new instrumented
+\`scripts/check_pi_p0_endpoint_scoped.cpp\` and four-way
+\`scripts/check_pi_p0_cost_fibre_pareto.py\` instantiate
+the existing execution-fibre sum/peak and
+EfficientRecoverableQuotientExact consumer/liveness viewpoint
+as a native test plan; they are **not kernel-checked Agda
+implementations**. An independently compiled equivalent
+local C++ experiment shows the GMP managed-allocation
+peak at 1M changing **20,765,464 -> 17,111,176 bytes**
+relative to COMP5g, and at 10M
+**217,661,176 -> 181,920,552 bytes** (~16.4%).
+Compared with the earlier tree-retaining baseline,
+the 10M reduction is about 25.3%.
+Measured process VmHWM at 10M is
+**238,100 -> 195,172 KiB** under the same local
+execution conditions. The reported 10M
+~11.29/11.13-second times are single runs and
+do not prove a latency improvement; five paired
+1M runs likewise show overlapping times. All outputs
+match the pinned prior exact decimal SHA-256 receipts.
+The GitHub files have been read back; byte-identical
+compilation and execution of the committed C++ remain
+an open reproducibility gate. See the canonical
+\`Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md\`
+for full receipt tables, computational model boundaries,
+source authority and next experimental controls.
