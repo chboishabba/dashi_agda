@@ -11,7 +11,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (PhysicalBlockL; physicalBlockSites)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (SiteField; sumRational)
+  (SiteField; sumRational; sumRationalNegate)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
@@ -22,11 +22,11 @@ open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
   using (curlPlaneEnergy)
 
 scalarPlaneCurl : PositivePlaquettePlane4 → ScalarBondField4 → SiteField side4
-scalarPlaneCurl plane field site =
+scalarPlaneCurl plane fld site =
   forwardDifference4 (positivePlaneFirst plane)
-    (field (positivePlaneSecond plane)) site
+    (fld (positivePlaneSecond plane)) site
   - forwardDifference4 (positivePlaneSecond plane)
-    (field (positivePlaneFirst plane)) site
+    (fld (positivePlaneFirst plane)) site
 
 planeWilsonContribution :
   PositivePlaquettePlane4 → ScalarBondField4 → ScalarBondField4
@@ -68,9 +68,9 @@ planeWilsonContribution plane23 f (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) s =
   - backwardDifference4 axis2 (scalarPlaneCurl plane23 f) s
 
 scalarWilsonOperator : ScalarBondField4 → ScalarBondField4
-scalarWilsonOperator field axis site =
+scalarWilsonOperator fld axis site =
   sumRational positivePlaquettePlanes4
-    (λ plane → planeWilsonContribution plane field axis site)
+    (λ plane → planeWilsonContribution plane fld axis site)
 
 siteSum4Zero : siteSum4 (λ _ → 0ℚ) ≡ 0ℚ
 siteSum4Zero = go (physicalBlockSites side4)
@@ -78,100 +78,162 @@ siteSum4Zero = go (physicalBlockSites side4)
   go : ∀ (values : List (PhysicalBlockL side4)) →
     sumRational values (λ _ → 0ℚ) ≡ 0ℚ
   go [] = refl
-  go (value ∷ values) rewrite go values = ℚRing.solve-∀
+  go (value ∷ values) = cong (0ℚ +_) (go values)
 
-siteSumProductZero : ∀ field →
-  siteSum4 (λ site → field site * 0ℚ) ≡ 0ℚ
-siteSumProductZero field =
+mulZeroRightRaw : ∀ x → x * 0ℚ ≡ 0ℚ
+mulZeroRightRaw = ℚRing.solve-∀
+
+doubleNegCancelRaw : ∀ x → x ≡ - (- x)
+doubleNegCancelRaw = ℚRing.solve-∀
+
+mulNegRightRaw : ∀ a b → a * (- b) ≡ - (a * b)
+mulNegRightRaw = ℚRing.solve-∀
+
+curlPairingPointwiseRaw : ∀ a b → - (b * (a - b)) + a * (a - b) ≡ (a - b) * (a - b)
+curlPairingPointwiseRaw = ℚRing.solve-∀
+
+siteSumProductZero : (fld : PhysicalBlockL side4 → ℚ) →
+  siteSum4 (λ site → fld site * 0ℚ) ≡ 0ℚ
+siteSumProductZero fld =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
+    (siteSum4Cong
+      (λ site → fld site * 0ℚ)
+      (λ _ → 0ℚ)
+      (λ site → mulZeroRightRaw (fld site)))
     siteSum4Zero
 
-firstBackwardPairing : ∀ secondAxis field curvature →
-  siteSum4 (λ site → field site * backwardDifference4 secondAxis curvature site)
+firstBackwardPairing : ∀ secondAxis fld curvature →
+  siteSum4 (λ site → fld site * backwardDifference4 secondAxis curvature site)
   ≡ - siteSum4 (λ site →
-      forwardDifference4 secondAxis field site * curvature site)
-firstBackwardPairing secondAxis field curvature =
+      forwardDifference4 secondAxis fld site * curvature site)
+firstBackwardPairing secondAxis fld curvature =
   trans
-    (ℚRing.solve-∀)
+    (doubleNegCancelRaw
+      (siteSum4 (λ site → fld site * backwardDifference4 secondAxis curvature site)))
     (sym
-      (cong (λ value → - value)
+      (cong (-_)
         (periodicForwardBackwardSummationByParts
-          secondAxis field curvature)))
+          secondAxis fld curvature)))
 
-secondNegativeBackwardPairing : ∀ firstAxis field curvature →
-  siteSum4 (λ site → field site *
+secondNegativeBackwardPairing : ∀ firstAxis fld curvature →
+  siteSum4 (λ site → fld site *
     (- backwardDifference4 firstAxis curvature site))
   ≡ siteSum4 (λ site →
-      forwardDifference4 firstAxis field site * curvature site)
-secondNegativeBackwardPairing firstAxis field curvature =
+      forwardDifference4 firstAxis fld site * curvature site)
+secondNegativeBackwardPairing firstAxis fld curvature =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
+    (siteSum4Cong
+      (λ site → fld site * (- backwardDifference4 firstAxis curvature site))
+      (λ site → - (fld site * backwardDifference4 firstAxis curvature site))
+      (λ site → mulNegRightRaw (fld site) (backwardDifference4 firstAxis curvature site)))
     (trans
-      (siteSum4Scale (- 1ℚ)
-        (λ site → field site * backwardDifference4 firstAxis curvature site))
-      (trans
-        (ℚRing.solve-∀)
-        (sym
-          (periodicForwardBackwardSummationByParts
-            firstAxis field curvature))))
+      (sumRationalNegate (physicalBlockSites side4)
+        (λ site → fld site * backwardDifference4 firstAxis curvature site))
+      (sym
+        (periodicForwardBackwardSummationByParts
+          firstAxis fld curvature)))
 
-planeTwoAxisPairingExact : ∀ plane field →
-  siteSum4 (λ site → field (positivePlaneFirst plane) site
+planeTwoAxisPairingExact : ∀ plane fld →
+  siteSum4 (λ site → fld (positivePlaneFirst plane) site
     * backwardDifference4 (positivePlaneSecond plane)
-      (scalarPlaneCurl plane field) site)
-  + siteSum4 (λ site → field (positivePlaneSecond plane) site
+      (scalarPlaneCurl plane fld) site)
+  + siteSum4 (λ site → fld (positivePlaneSecond plane) site
     * (- backwardDifference4 (positivePlaneFirst plane)
-      (scalarPlaneCurl plane field) site))
-  ≡ curlPlaneEnergy plane field
-planeTwoAxisPairingExact plane field =
+      (scalarPlaneCurl plane fld) site))
+  ≡ curlPlaneEnergy plane fld
+planeTwoAxisPairingExact plane fld =
+  let dFirst = forwardDifference4 (positivePlaneFirst plane) (fld (positivePlaneSecond plane))
+      dSecond = forwardDifference4 (positivePlaneSecond plane) (fld (positivePlaneFirst plane))
+      curl = scalarPlaneCurl plane fld
+  in
   trans
     (cong₂ _+_
       (firstBackwardPairing (positivePlaneSecond plane)
-        (field (positivePlaneFirst plane)) (scalarPlaneCurl plane field))
+        (fld (positivePlaneFirst plane)) curl)
       (secondNegativeBackwardPairing (positivePlaneFirst plane)
-        (field (positivePlaneSecond plane)) (scalarPlaneCurl plane field)))
+        (fld (positivePlaneSecond plane)) curl))
     (trans
-      (sym (siteSum4Add
-        (λ site → - (forwardDifference4 (positivePlaneSecond plane)
-          (field (positivePlaneFirst plane)) site * scalarPlaneCurl plane field site))
-        (λ site → forwardDifference4 (positivePlaneFirst plane)
-          (field (positivePlaneSecond plane)) site * scalarPlaneCurl plane field site)))
-      (siteSum4Cong _ _ (λ site → ℚRing.solve-∀)))
+      (cong (_+ siteSum4 (λ site → dFirst site * curl site))
+        (sym (sumRationalNegate (physicalBlockSites side4)
+          (λ site → dSecond site * curl site))))
+      (trans
+        (sym (siteSum4Add
+          (λ site → - (dSecond site * curl site))
+          (λ site → dFirst site * curl site)))
+        (siteSum4Cong
+          (λ site → - (dSecond site * curl site) + dFirst site * curl site)
+          (λ site → (dFirst site - dSecond site) * (dFirst site - dSecond site))
+          (λ site → curlPairingPointwiseRaw (dFirst site) (dSecond site)))))
 
-scalarPlanePairingExact : ∀ plane field →
-  scalarBondInner field (planeWilsonContribution plane field)
-  ≡ curlPlaneEnergy plane field
-scalarPlanePairingExact plane01 field
-  rewrite siteSumProductZero (field axis2)
-        | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane01 field)
-scalarPlanePairingExact plane02 field
-  rewrite siteSumProductZero (field axis1)
-        | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane02 field)
-scalarPlanePairingExact plane03 field
-  rewrite siteSumProductZero (field axis1)
-        | siteSumProductZero (field axis2) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane03 field)
-scalarPlanePairingExact plane12 field
-  rewrite siteSumProductZero (field axis0)
-        | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane12 field)
-scalarPlanePairingExact plane13 field
-  rewrite siteSumProductZero (field axis0)
-        | siteSumProductZero (field axis2) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane13 field)
-scalarPlanePairingExact plane23 field
-  rewrite siteSumProductZero (field axis0)
-        | siteSumProductZero (field axis1) =
-  trans (ℚRing.solve-∀)
-    (planeTwoAxisPairingExact plane23 field)
+drop23Raw : ∀ a b → a + (b + (0ℚ + (0ℚ + 0ℚ))) ≡ a + b
+drop23Raw = ℚRing.solve-∀
+
+drop13Raw : ∀ a b → a + (0ℚ + (b + (0ℚ + 0ℚ))) ≡ a + b
+drop13Raw = ℚRing.solve-∀
+
+drop12Raw : ∀ a b → a + (0ℚ + (0ℚ + (b + 0ℚ))) ≡ a + b
+drop12Raw = ℚRing.solve-∀
+
+drop03Raw : ∀ a b → 0ℚ + (a + (b + (0ℚ + 0ℚ))) ≡ a + b
+drop03Raw = ℚRing.solve-∀
+
+drop02Raw : ∀ a b → 0ℚ + (a + (0ℚ + (b + 0ℚ))) ≡ a + b
+drop02Raw = ℚRing.solve-∀
+
+drop01Raw : ∀ a b → 0ℚ + (0ℚ + (a + (b + 0ℚ))) ≡ a + b
+drop01Raw = ℚRing.solve-∀
+
+scalarPlanePairingExact : ∀ plane fld →
+  scalarBondInner fld (planeWilsonContribution plane fld)
+  ≡ curlPlaneEnergy plane fld
+scalarPlanePairingExact plane01 fld =
+  let a = siteSum4 (λ site → fld axis0 site * planeWilsonContribution plane01 fld axis0 site)
+      b = siteSum4 (λ site → fld axis1 site * planeWilsonContribution plane01 fld axis1 site)
+  in
+  trans
+    (cong (a +_) (cong (b +_) (cong₂ _+_ (siteSumProductZero (fld axis2))
+      (cong (_+ 0ℚ) (siteSumProductZero (fld axis3))))))
+    (trans (drop23Raw a b) (planeTwoAxisPairingExact plane01 fld))
+scalarPlanePairingExact plane02 fld =
+  let a = siteSum4 (λ site → fld axis0 site * planeWilsonContribution plane02 fld axis0 site)
+      b = siteSum4 (λ site → fld axis2 site * planeWilsonContribution plane02 fld axis2 site)
+  in
+  trans
+    (cong (a +_) (cong₂ _+_ (siteSumProductZero (fld axis1))
+      (cong (b +_) (cong (_+ 0ℚ) (siteSumProductZero (fld axis3))))))
+    (trans (drop13Raw a b) (planeTwoAxisPairingExact plane02 fld))
+scalarPlanePairingExact plane03 fld =
+  let a = siteSum4 (λ site → fld axis0 site * planeWilsonContribution plane03 fld axis0 site)
+      b = siteSum4 (λ site → fld axis3 site * planeWilsonContribution plane03 fld axis3 site)
+  in
+  trans
+    (cong (a +_) (cong₂ _+_ (siteSumProductZero (fld axis1))
+      (cong (_+ (b + 0ℚ)) (siteSumProductZero (fld axis2)))))
+    (trans (drop12Raw a b) (planeTwoAxisPairingExact plane03 fld))
+scalarPlanePairingExact plane12 fld =
+  let a = siteSum4 (λ site → fld axis1 site * planeWilsonContribution plane12 fld axis1 site)
+      b = siteSum4 (λ site → fld axis2 site * planeWilsonContribution plane12 fld axis2 site)
+  in
+  trans
+    (cong₂ _+_ (siteSumProductZero (fld axis0))
+      (cong (a +_) (cong (b +_) (cong (_+ 0ℚ) (siteSumProductZero (fld axis3))))))
+    (trans (drop03Raw a b) (planeTwoAxisPairingExact plane12 fld))
+scalarPlanePairingExact plane13 fld =
+  let a = siteSum4 (λ site → fld axis1 site * planeWilsonContribution plane13 fld axis1 site)
+      b = siteSum4 (λ site → fld axis3 site * planeWilsonContribution plane13 fld axis3 site)
+  in
+  trans
+    (cong₂ _+_ (siteSumProductZero (fld axis0))
+      (cong (a +_) (cong (_+ (b + 0ℚ)) (siteSumProductZero (fld axis2)))))
+    (trans (drop02Raw a b) (planeTwoAxisPairingExact plane13 fld))
+scalarPlanePairingExact plane23 fld =
+  let a = siteSum4 (λ site → fld axis2 site * planeWilsonContribution plane23 fld axis2 site)
+      b = siteSum4 (λ site → fld axis3 site * planeWilsonContribution plane23 fld axis3 site)
+  in
+  trans
+    (cong₂ _+_ (siteSumProductZero (fld axis0))
+      (cong (_+ (a + (b + 0ℚ))) (siteSumProductZero (fld axis1))))
+    (trans (drop01Raw a b) (planeTwoAxisPairingExact plane23 fld))
 
 scalarWilsonPlaneRieszLevel : ProofLevel
 scalarWilsonPlaneRieszLevel = machineChecked

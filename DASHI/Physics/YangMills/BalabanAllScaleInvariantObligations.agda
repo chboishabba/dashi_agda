@@ -57,7 +57,7 @@ couplingPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.CouplingAdmissible profile (suc scale) (step scale state)
-couplingPreserved data = allowedIntervalPreserved data
+couplingPreserved dat = allowedIntervalPreserved dat
 
 ------------------------------------------------------------------------
 -- A2. Small-field radius.
@@ -92,9 +92,9 @@ fieldRadiusPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.FieldRadiusAdmissible profile (suc scale) (step scale state)
-fieldRadiusPreserved data scale state admissible =
-  radiusBoundImpliesAdmissible data (suc scale) (step scale state)
-    (radiusTransport data scale state admissible)
+fieldRadiusPreserved dat scale state admissible =
+  radiusBoundImpliesAdmissible dat (suc scale) (step scale state)
+    (radiusTransport dat scale state admissible)
 
 ------------------------------------------------------------------------
 -- A3. Polymer norm: one-step small-field estimate plus Step V.
@@ -147,9 +147,9 @@ polymerPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.PolymerAdmissible profile (suc scale) (step scale state)
-polymerPreserved data scale state admissible =
-  polymerBoundImpliesAdmissible data (suc scale) (step scale state)
-    (combinedBudgetBound data scale state admissible)
+polymerPreserved dat scale state admissible =
+  polymerBoundImpliesAdmissible dat (suc scale) (step scale state)
+    (combinedBudgetBound dat scale state admissible)
 
 ------------------------------------------------------------------------
 -- A4. Analyticity radius after composition, BCH, determinants, localization.
@@ -202,9 +202,9 @@ analyticityPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.AnalyticityAdmissible profile (suc scale) (step scale state)
-analyticityPreserved data scale state admissible =
-  retainedRadiusImpliesAdmissible data (suc scale) (step scale state)
-    (nextRadiusRetained data scale state admissible)
+analyticityPreserved dat scale state admissible =
+  retainedRadiusImpliesAdmissible dat (suc scale) (step scale state)
+    (nextRadiusRetained dat scale state admissible)
 
 ------------------------------------------------------------------------
 -- A5. Gauge chart and Faddeev--Popov invertibility.
@@ -240,10 +240,10 @@ gaugeFixingPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.GaugeFixingAdmissible profile (suc scale) (step scale state)
-gaugeFixingPreserved data scale state admissible =
-  chartAndInvertibilityImplyAdmissible data (suc scale) (step scale state)
-    (nextBackgroundWithinChart data scale state admissible)
-    (nextFaddeevPopovInvertible data scale state admissible)
+gaugeFixingPreserved dat scale state admissible =
+  chartAndInvertibilityImplyAdmissible dat (suc scale) (step scale state)
+    (nextBackgroundWithinChart dat scale state admissible)
+    (nextFaddeevPopovInvertible dat scale state admissible)
 
 ------------------------------------------------------------------------
 -- A6. Exponential polymer locality.
@@ -277,9 +277,9 @@ localityPreserved :
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
   AllScale.LocalityAdmissible profile (suc scale) (step scale state)
-localityPreserved data scale state admissible =
-  decayRateImpliesAdmissible data (suc scale) (step scale state)
-    (exponentialPolymerDecayRetained data scale state admissible)
+localityPreserved dat scale state admissible =
+  decayRateImpliesAdmissible dat (suc scale) (step scale state)
+    (exponentialPolymerDecayRetained dat scale state admissible)
 
 ------------------------------------------------------------------------
 -- A1--A6 assembled into the existing QuantitativeRGStep.

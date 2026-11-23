@@ -77,161 +77,161 @@ shiftForwardInsertAxis13 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) coordinate
 periodicFibreEnergy13 :
   SiteField Side13.side13 → Axis4 →
   Triple (CyclicIndex Side13.side13) → ℚ
-periodicFibreEnergy13 field axis transverse =
+periodicFibreEnergy13 fld axis transverse =
   sumRational (allCyclicIndices Side13.side13)
     (λ coordinate →
       sq
-        (field (insertAxis axis (Flat.cyclicNext coordinate) transverse)
-        - field (insertAxis axis coordinate transverse)))
+        (fld (insertAxis axis (Flat.cyclicNext coordinate) transverse)
+        - fld (insertAxis axis coordinate transverse)))
 
 periodicWrapEnergy13 :
   SiteField Side13.side13 → Axis4 →
   Triple (CyclicIndex Side13.side13) → ℚ
-periodicWrapEnergy13 field axis transverse =
+periodicWrapEnergy13 fld axis transverse =
   sq
-    (field (insertAxis axis Match.index0 transverse)
-    - field (insertAxis axis Match.index12 transverse))
+    (fld (insertAxis axis Match.index0 transverse)
+    - fld (insertAxis axis Match.index12 transverse))
 
-periodicFibreEnergyExpansion13 : ∀ field axis transverse →
-  periodicFibreEnergy13 field axis transverse
-  ≡ sqDiff (field (insertAxis axis Match.index1 transverse))
-       (field (insertAxis axis Match.index0 transverse))
-   + (sqDiff (field (insertAxis axis Match.index2 transverse))
-       (field (insertAxis axis Match.index1 transverse))
-   + (sqDiff (field (insertAxis axis Match.index3 transverse))
-       (field (insertAxis axis Match.index2 transverse))
-   + (sqDiff (field (insertAxis axis Match.index4 transverse))
-       (field (insertAxis axis Match.index3 transverse))
-   + (sqDiff (field (insertAxis axis Match.index5 transverse))
-       (field (insertAxis axis Match.index4 transverse))
-   + (sqDiff (field (insertAxis axis Match.index6 transverse))
-       (field (insertAxis axis Match.index5 transverse))
-   + (sqDiff (field (insertAxis axis Match.index7 transverse))
-       (field (insertAxis axis Match.index6 transverse))
-   + (sqDiff (field (insertAxis axis Match.index8 transverse))
-       (field (insertAxis axis Match.index7 transverse))
-   + (sqDiff (field (insertAxis axis Match.index9 transverse))
-       (field (insertAxis axis Match.index8 transverse))
-   + (sqDiff (field (insertAxis axis Match.index10 transverse))
-       (field (insertAxis axis Match.index9 transverse))
-   + (sqDiff (field (insertAxis axis Match.index11 transverse))
-       (field (insertAxis axis Match.index10 transverse))
-   + (sqDiff (field (insertAxis axis Match.index12 transverse))
-       (field (insertAxis axis Match.index11 transverse))
-   + (sqDiff (field (insertAxis axis Match.index0 transverse))
-       (field (insertAxis axis Match.index12 transverse))
+periodicFibreEnergyExpansion13 : ∀ fld axis transverse →
+  periodicFibreEnergy13 fld axis transverse
+  ≡ sqDiff (fld (insertAxis axis Match.index1 transverse))
+       (fld (insertAxis axis Match.index0 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index2 transverse))
+       (fld (insertAxis axis Match.index1 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index3 transverse))
+       (fld (insertAxis axis Match.index2 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index4 transverse))
+       (fld (insertAxis axis Match.index3 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index5 transverse))
+       (fld (insertAxis axis Match.index4 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index6 transverse))
+       (fld (insertAxis axis Match.index5 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index7 transverse))
+       (fld (insertAxis axis Match.index6 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index8 transverse))
+       (fld (insertAxis axis Match.index7 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index9 transverse))
+       (fld (insertAxis axis Match.index8 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index10 transverse))
+       (fld (insertAxis axis Match.index9 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index11 transverse))
+       (fld (insertAxis axis Match.index10 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index12 transverse))
+       (fld (insertAxis axis Match.index11 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index0 transverse))
+       (fld (insertAxis axis Match.index12 transverse))
    + 0ℚ)))))))))))))
-periodicFibreEnergyExpansion13 field axis transverse = refl
+periodicFibreEnergyExpansion13 fld axis transverse = refl
 
-openFibreEnergyExpansion13 : ∀ field axis transverse →
-  physicalFibreEdgeEnergy field axis transverse
-  ≡ sqDiff (field (insertAxis axis Match.index1 transverse))
-       (field (insertAxis axis Match.index0 transverse))
-   + (sqDiff (field (insertAxis axis Match.index2 transverse))
-       (field (insertAxis axis Match.index1 transverse))
-   + (sqDiff (field (insertAxis axis Match.index3 transverse))
-       (field (insertAxis axis Match.index2 transverse))
-   + (sqDiff (field (insertAxis axis Match.index4 transverse))
-       (field (insertAxis axis Match.index3 transverse))
-   + (sqDiff (field (insertAxis axis Match.index5 transverse))
-       (field (insertAxis axis Match.index4 transverse))
-   + (sqDiff (field (insertAxis axis Match.index6 transverse))
-       (field (insertAxis axis Match.index5 transverse))
-   + (sqDiff (field (insertAxis axis Match.index7 transverse))
-       (field (insertAxis axis Match.index6 transverse))
-   + (sqDiff (field (insertAxis axis Match.index8 transverse))
-       (field (insertAxis axis Match.index7 transverse))
-   + (sqDiff (field (insertAxis axis Match.index9 transverse))
-       (field (insertAxis axis Match.index8 transverse))
-   + (sqDiff (field (insertAxis axis Match.index10 transverse))
-       (field (insertAxis axis Match.index9 transverse))
-   + (sqDiff (field (insertAxis axis Match.index11 transverse))
-       (field (insertAxis axis Match.index10 transverse))
-   + (sqDiff (field (insertAxis axis Match.index12 transverse))
-       (field (insertAxis axis Match.index11 transverse))
+openFibreEnergyExpansion13 : ∀ fld axis transverse →
+  physicalFibreEdgeEnergy fld axis transverse
+  ≡ sqDiff (fld (insertAxis axis Match.index1 transverse))
+       (fld (insertAxis axis Match.index0 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index2 transverse))
+       (fld (insertAxis axis Match.index1 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index3 transverse))
+       (fld (insertAxis axis Match.index2 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index4 transverse))
+       (fld (insertAxis axis Match.index3 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index5 transverse))
+       (fld (insertAxis axis Match.index4 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index6 transverse))
+       (fld (insertAxis axis Match.index5 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index7 transverse))
+       (fld (insertAxis axis Match.index6 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index8 transverse))
+       (fld (insertAxis axis Match.index7 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index9 transverse))
+       (fld (insertAxis axis Match.index8 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index10 transverse))
+       (fld (insertAxis axis Match.index9 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index11 transverse))
+       (fld (insertAxis axis Match.index10 transverse))
+   + (sqDiff (fld (insertAxis axis Match.index12 transverse))
+       (fld (insertAxis axis Match.index11 transverse))
    + 0ℚ))))))))))))
-openFibreEnergyExpansion13 field axis transverse = refl
+openFibreEnergyExpansion13 fld axis transverse = refl
 
-periodicFibreSplitsOpenWrap13 : ∀ field axis transverse →
-  periodicFibreEnergy13 field axis transverse
-  ≡ physicalFibreEdgeEnergy field axis transverse
-    + periodicWrapEnergy13 field axis transverse
-periodicFibreSplitsOpenWrap13 field axis transverse
-  rewrite periodicFibreEnergyExpansion13 field axis transverse
-        | openFibreEnergyExpansion13 field axis transverse =
+periodicFibreSplitsOpenWrap13 : ∀ fld axis transverse →
+  periodicFibreEnergy13 fld axis transverse
+  ≡ physicalFibreEdgeEnergy fld axis transverse
+    + periodicWrapEnergy13 fld axis transverse
+periodicFibreSplitsOpenWrap13 fld axis transverse
+  rewrite periodicFibreEnergyExpansion13 fld axis transverse
+        | openFibreEnergyExpansion13 fld axis transverse =
   ℚRing.solve-∀
-    (field (insertAxis axis Match.index0 transverse))
-    (field (insertAxis axis Match.index1 transverse))
-    (field (insertAxis axis Match.index2 transverse))
-    (field (insertAxis axis Match.index3 transverse))
-    (field (insertAxis axis Match.index4 transverse))
-    (field (insertAxis axis Match.index5 transverse))
-    (field (insertAxis axis Match.index6 transverse))
-    (field (insertAxis axis Match.index7 transverse))
-    (field (insertAxis axis Match.index8 transverse))
-    (field (insertAxis axis Match.index9 transverse))
-    (field (insertAxis axis Match.index10 transverse))
-    (field (insertAxis axis Match.index11 transverse))
-    (field (insertAxis axis Match.index12 transverse))
+    (fld (insertAxis axis Match.index0 transverse))
+    (fld (insertAxis axis Match.index1 transverse))
+    (fld (insertAxis axis Match.index2 transverse))
+    (fld (insertAxis axis Match.index3 transverse))
+    (fld (insertAxis axis Match.index4 transverse))
+    (fld (insertAxis axis Match.index5 transverse))
+    (fld (insertAxis axis Match.index6 transverse))
+    (fld (insertAxis axis Match.index7 transverse))
+    (fld (insertAxis axis Match.index8 transverse))
+    (fld (insertAxis axis Match.index9 transverse))
+    (fld (insertAxis axis Match.index10 transverse))
+    (fld (insertAxis axis Match.index11 transverse))
+    (fld (insertAxis axis Match.index12 transverse))
 
 axisPeriodicFibreEnergy13 : Axis4 → SiteField Side13.side13 → ℚ
-axisPeriodicFibreEnergy13 axis field =
+axisPeriodicFibreEnergy13 axis fld =
   sumRational (physicalTransverseCoordinates Side13.side13)
-    (periodicFibreEnergy13 field axis)
+    (periodicFibreEnergy13 fld axis)
 
 axisWrapEnergy13 : Axis4 → SiteField Side13.side13 → ℚ
-axisWrapEnergy13 axis field =
+axisWrapEnergy13 axis fld =
   sumRational (physicalTransverseCoordinates Side13.side13)
-    (periodicWrapEnergy13 field axis)
+    (periodicWrapEnergy13 fld axis)
 
-axisPeriodicSplitsOpenWrap13 : ∀ axis field →
-  axisPeriodicFibreEnergy13 axis field
-  ≡ Direction.axisDirectionalEnergy axis field + axisWrapEnergy13 axis field
-axisPeriodicSplitsOpenWrap13 axis field =
+axisPeriodicSplitsOpenWrap13 : ∀ axis fld →
+  axisPeriodicFibreEnergy13 axis fld
+  ≡ Direction.axisDirectionalEnergy axis fld + axisWrapEnergy13 axis fld
+axisPeriodicSplitsOpenWrap13 axis fld =
   trans
     (sumRationalCong
       (physicalTransverseCoordinates Side13.side13) _ _
-      (periodicFibreSplitsOpenWrap13 field axis))
+      (periodicFibreSplitsOpenWrap13 fld axis))
     (sumRationalAdd
       (physicalTransverseCoordinates Side13.side13)
-      (physicalFibreEdgeEnergy field axis)
-      (periodicWrapEnergy13 field axis))
+      (physicalFibreEdgeEnergy fld axis)
+      (periodicWrapEnergy13 fld axis))
 
-axisWrapEnergyNonnegative13 : ∀ axis field →
-  0ℚ ≤ axisWrapEnergy13 axis field
-axisWrapEnergyNonnegative13 axis field =
+axisWrapEnergyNonnegative13 : ∀ axis fld →
+  0ℚ ≤ axisWrapEnergy13 axis fld
+axisWrapEnergyNonnegative13 axis fld =
   Schur.sumNonnegative
     (physicalTransverseCoordinates Side13.side13)
-    (periodicWrapEnergy13 field axis)
+    (periodicWrapEnergy13 fld axis)
     (λ transverse → FiniteL2.squareNonnegative
-      (field (insertAxis axis Match.index0 transverse)
-      - field (insertAxis axis Match.index12 transverse)))
+      (fld (insertAxis axis Match.index0 transverse)
+      - fld (insertAxis axis Match.index12 transverse)))
 
-axisPeriodicDominatesOpen13 : ∀ axis field →
-  Direction.axisDirectionalEnergy axis field
-  ≤ axisPeriodicFibreEnergy13 axis field
-axisPeriodicDominatesOpen13 axis field =
+axisPeriodicDominatesOpen13 : ∀ axis fld →
+  Direction.axisDirectionalEnergy axis fld
+  ≤ axisPeriodicFibreEnergy13 axis fld
+axisPeriodicDominatesOpen13 axis fld =
   subst
-    (λ upper → Direction.axisDirectionalEnergy axis field ≤ upper)
-    (sym (axisPeriodicSplitsOpenWrap13 axis field))
+    (λ upper → Direction.axisDirectionalEnergy axis fld ≤ upper)
+    (sym (axisPeriodicSplitsOpenWrap13 axis fld))
     (subst
       (λ lower → lower ≤
-        Direction.axisDirectionalEnergy axis field + axisWrapEnergy13 axis field)
-      (ℚRing.solve-∀ (Direction.axisDirectionalEnergy axis field))
-      (ℚP.+-mono-≤ ℚP.≤-refl (axisWrapEnergyNonnegative13 axis field)))
+        Direction.axisDirectionalEnergy axis fld + axisWrapEnergy13 axis fld)
+      (ℚRing.solve-∀ (Direction.axisDirectionalEnergy axis fld))
+      (ℚP.+-mono-≤ ℚP.≤-refl (axisWrapEnergyNonnegative13 axis fld)))
 
 axisSitePeriodicEnergy13 : Axis4 → SiteField Side13.side13 → ℚ
-axisSitePeriodicEnergy13 axis field =
+axisSitePeriodicEnergy13 axis fld =
   globalSiteSum
-    (λ site → sq (Flat.forwardDifference13 axis field site))
+    (λ site → sq (Flat.forwardDifference13 axis fld site))
 
-axisSitePeriodicMatchesFibre13 : ∀ axis field →
-  axisSitePeriodicEnergy13 axis field ≡ axisPeriodicFibreEnergy13 axis field
-axisSitePeriodicMatchesFibre13 axis field =
+axisSitePeriodicMatchesFibre13 : ∀ axis fld →
+  axisSitePeriodicEnergy13 axis fld ≡ axisPeriodicFibreEnergy13 axis fld
+axisSitePeriodicMatchesFibre13 axis fld =
   trans
     (sym
       (axisPartitionSumMatchesGlobal axis
-        (λ site → sq (Flat.forwardDifference13 axis field site))))
+        (λ site → sq (Flat.forwardDifference13 axis fld site))))
     (sumRationalCong
       (physicalTransverseCoordinates Side13.side13) _ _
       (λ transverse →
@@ -240,7 +240,7 @@ axisSitePeriodicMatchesFibre13 axis field =
             cong sq
               (trans
                 (cong
-                  (λ target → field target - field (insertAxis axis coordinate transverse))
+                  (λ target → fld target - fld (insertAxis axis coordinate transverse))
                   (shiftForwardInsertAxis13 axis coordinate transverse))
                 refl))))
 
@@ -265,15 +265,15 @@ componentPeriodicEnergyAsAxes13 multiplier coordinate =
       (λ axis → axisSitePeriodicMatchesFibre13 axis
         (Flat.multiplierField13 multiplier coordinate)))
 
-sumAxesOpenEnergyExact13 : ∀ field →
+sumAxesOpenEnergyExact13 : ∀ fld →
   sumRational (allCyclicIndices four)
-    (λ axis → Direction.axisDirectionalEnergy axis field)
-  ≡ ScalarPoincare.globalDirectionalEnergy field
-sumAxesOpenEnergyExact13 field = ℚRing.solve-∀
-  (Direction.axisDirectionalEnergy zeroᵢ field)
-  (Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) field)
-  (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field)
-  (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field)
+    (λ axis → Direction.axisDirectionalEnergy axis fld)
+  ≡ ScalarPoincare.globalDirectionalEnergy fld
+sumAxesOpenEnergyExact13 fld = ℚRing.solve-∀
+  (Direction.axisDirectionalEnergy zeroᵢ fld)
+  (Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) fld)
+  (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) fld)
+  (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld)
 
 componentPeriodicDominatesOpen13 : ∀ multiplier coordinate →
   ScalarPoincare.globalDirectionalEnergy
@@ -281,20 +281,20 @@ componentPeriodicDominatesOpen13 : ∀ multiplier coordinate →
   ≤ Flat.periodicComponentGradientEnergy13 multiplier coordinate
 componentPeriodicDominatesOpen13 multiplier coordinate =
   let
-    field = Flat.multiplierField13 multiplier coordinate
+    fld = Flat.multiplierField13 multiplier coordinate
     summed = Schur.sumPointwiseBelow
       (allCyclicIndices four)
-      (λ axis → Direction.axisDirectionalEnergy axis field)
-      (λ axis → axisPeriodicFibreEnergy13 axis field)
-      (λ axis → axisPeriodicDominatesOpen13 axis field)
+      (λ axis → Direction.axisDirectionalEnergy axis fld)
+      (λ axis → axisPeriodicFibreEnergy13 axis fld)
+      (λ axis → axisPeriodicDominatesOpen13 axis fld)
   in
   subst
     (λ lower → lower ≤ Flat.periodicComponentGradientEnergy13 multiplier coordinate)
-    (sym (sumAxesOpenEnergyExact13 field))
+    (sym (sumAxesOpenEnergyExact13 fld))
     (subst
       (λ upper →
         sumRational (allCyclicIndices four)
-          (λ axis → Direction.axisDirectionalEnergy axis field)
+          (λ axis → Direction.axisDirectionalEnergy axis fld)
         ≤ upper)
       (sym (componentPeriodicEnergyAsAxes13 multiplier coordinate))
       summed)

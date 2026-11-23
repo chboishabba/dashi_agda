@@ -52,15 +52,15 @@ record PeriodicFourierNormalizationMatch
     physicalBondSiteNorm : AxisSiteField L Scalar → Bound
     physicalBondMomentumNorm : AxisMomentumField L Scalar → Bound
 
-    physicalBondSiteNormDefinition : ∀ field →
-      physicalBondSiteNorm field ≡
+    physicalBondSiteNormDefinition : ∀ fld →
+      physicalBondSiteNorm fld ≡
       scaleBound (operations authority) physicalWeight
-        (bondSiteNormSq authority field)
+        (bondSiteNormSq authority fld)
 
-    physicalBondMomentumNormDefinition : ∀ field →
-      physicalBondMomentumNorm field ≡
+    physicalBondMomentumNormDefinition : ∀ fld →
+      physicalBondMomentumNorm fld ≡
       scaleBound (operations authority) physicalWeight
-        (bondMomentumNormSq authority field)
+        (bondMomentumNormSq authority fld)
 
 open PeriodicFourierNormalizationMatch public
 
@@ -69,17 +69,17 @@ physicalBondFourierParseval :
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound}
     {theorems : PeriodicTorus4FourierTheorems authority} →
     (matching : PeriodicFourierNormalizationMatch authority theorems) →
-    ∀ field →
-    physicalBondSiteNorm matching field ≡
+    ∀ fld →
+    physicalBondSiteNorm matching fld ≡
     physicalBondMomentumNorm matching
-      (bondFourierTransform authority field)
+      (bondFourierTransform authority fld)
 physicalBondFourierParseval {authority = authority} {theorems = theorems}
-  matching field
-  rewrite physicalBondSiteNormDefinition matching field
+  matching fld
+  rewrite physicalBondSiteNormDefinition matching fld
         | physicalBondMomentumNormDefinition matching
-            (bondFourierTransform authority field) =
+            (bondFourierTransform authority fld) =
   latticeSpacingNormalizationParseval theorems
-    (physicalWeight matching) field
+    (physicalWeight matching) fld
 
 literalTransformUsesInverseCardinality :
   ∀ {L : Nat} {Scalar Bound : Set}

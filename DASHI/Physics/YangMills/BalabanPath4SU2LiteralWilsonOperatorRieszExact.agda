@@ -18,35 +18,43 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
   using (siteSum4)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
-  using (scalarBondInner)
+  using (ScalarBondField4; scalarBondInner)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
-  using (componentCurlEnergy)
+  using (componentCurlEnergy; curlPlaneEnergy)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4ScalarWilsonOperatorExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
   (literalDiscreteCurlEnergy)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
   (componentScalarBondField; physicalTangentInner; literalCurlEnergyComponentFold)
 
-scalarWilsonOperatorPairingExact : ∀ field →
-  scalarBondInner field (scalarWilsonOperator field)
-  ≡ componentCurlEnergy field
-scalarWilsonOperatorPairingExact field =
+scalarWilsonOperatorPairingExact : (fld : ScalarBondField4) →
+  scalarBondInner fld (scalarWilsonOperator fld)
+  ≡ componentCurlEnergy fld
+scalarWilsonOperatorPairingExact fld =
   trans
-    (sumRationalCong (allCyclicIndices four) _ _ (λ axis →
-      trans
-        (sumRationalCong (physicalBlockSites side4) _ _ (λ site →
-          sym (sumRationalScale (field axis site)
-            positivePlaquettePlanes4
-            (λ plane → planeWilsonContribution plane field axis site))))
-        (sumSwap (physicalBlockSites side4) positivePlaquettePlanes4
-          (λ site plane → field axis site
-            * planeWilsonContribution plane field axis site))))
+    (sumRationalCong (allCyclicIndices four)
+      (λ axis → siteSum4 (λ site → fld axis site * scalarWilsonOperator fld axis site))
+      (λ axis → sumRational positivePlaquettePlanes4 (λ plane → siteSum4 (λ site → fld axis site * planeWilsonContribution plane fld axis site)))
+      (λ axis →
+        trans
+          (sumRationalCong (physicalBlockSites side4)
+            (λ site → fld axis site * scalarWilsonOperator fld axis site)
+            (λ site → sumRational positivePlaquettePlanes4 (λ plane → fld axis site * planeWilsonContribution plane fld axis site))
+            (λ site →
+              sym (sumRationalScale (fld axis site)
+                positivePlaquettePlanes4
+                (λ plane → planeWilsonContribution plane fld axis site))))
+          (sumSwap (physicalBlockSites side4) positivePlaquettePlanes4
+            (λ site plane → fld axis site
+              * planeWilsonContribution plane fld axis site))))
     (trans
       (sumSwap (allCyclicIndices four) positivePlaquettePlanes4
         (λ axis plane → siteSum4 (λ site →
-          field axis site * planeWilsonContribution plane field axis site)))
-      (sumRationalCong positivePlaquettePlanes4 _ _
-        (λ plane → scalarPlanePairingExact plane field)))
+          fld axis site * planeWilsonContribution plane fld axis site)))
+      (sumRationalCong positivePlaquettePlanes4
+        (λ plane → sumRational (allCyclicIndices four) (λ axis → siteSum4 (λ site → fld axis site * planeWilsonContribution plane fld axis site)))
+        (λ plane → curlPlaneEnergy plane fld)
+        (λ plane → scalarPlanePairingExact plane fld)))
 
 literalWilsonOperator : PhysicalSU2Tangent4 → PhysicalSU2Tangent4
 literalWilsonOperator tangent component (pair site axis) =

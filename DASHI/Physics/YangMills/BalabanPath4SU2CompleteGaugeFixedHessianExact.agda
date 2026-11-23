@@ -1,13 +1,17 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2CompleteGaugeFixedHessianExact where
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; 0ℚ; _≤_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
+  (squareNonnegative)
+import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
+import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
   (allCyclicIndices; four)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
@@ -17,9 +21,11 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumRationalZero)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
+open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
+  using (ScalarBondField4)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
-  (physicalTangentInner)
+  (componentScalarBondField; physicalTangentInner)
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
   (literalWilsonHessianPositivePlaneFold; literalWilsonHessianEqualsCurlEnergy)
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralWilsonOperatorRieszExact
@@ -70,18 +76,21 @@ sumRationalNonnegative (value ∷ values) term termNonnegative =
     (termNonnegative value)
     (sumRationalNonnegative values term termNonnegative)
 
-scalarBondInnerZeroRight : ∀ tangent →
+mulZeroRightRaw : ∀ x → x * 0ℚ ≡ 0ℚ
+mulZeroRightRaw = ℚRing.solve-∀
+
+scalarBondInnerZeroRight : (tangent : PhysicalSU2Tangent4) →
   physicalTangentInner tangent zeroPhysicalSU2Tangent4 ≡ 0ℚ
 scalarBondInnerZeroRight tangent =
   trans
     (cong₂ _+_
-      (bondInnerZeroRight (tangent component1))
+      (bondInnerZeroRight (componentScalarBondField tangent component1))
       (cong₂ _+_
-        (bondInnerZeroRight (tangent component2))
-        (bondInnerZeroRight (tangent component3))))
-    (ℚRing.solve-∀)
+        (bondInnerZeroRight (componentScalarBondField tangent component2))
+        (bondInnerZeroRight (componentScalarBondField tangent component3))))
+    refl
   where
-  bondInnerZeroRight : ∀ bondField →
+  bondInnerZeroRight : (bondField : ScalarBondField4) →
     sumRational (allCyclicIndices four)
       (λ axis →
         sumRational (physicalBlockSites side4)
@@ -101,11 +110,11 @@ scalarBondInnerZeroRight tangent =
               (physicalBlockSites side4)
               (λ site → bondField axis site * 0ℚ)
               (λ _ → 0ℚ)
-              (λ _ → ℚRing.solve-∀))
+              (λ site → mulZeroRightRaw (bondField axis site)))
             (sumRationalZero (physicalBlockSites side4))))
       (sumRationalZero (allCyclicIndices four))
 
-scalarBondInnerNonnegative : ∀ bondField →
+scalarBondInnerNonnegative : (bondField : ScalarBondField4) →
   0ℚ ≤ sumRational (allCyclicIndices four)
     (λ axis →
       sumRational (physicalBlockSites side4)
@@ -124,14 +133,14 @@ scalarBondInnerNonnegative bondField =
           DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.squareNonnegative
             (bondField axis site)))
 
-physicalTangentInnerNonnegative : ∀ tangent →
+physicalTangentInnerNonnegative : (tangent : PhysicalSU2Tangent4) →
   0ℚ ≤ physicalTangentInner tangent tangent
 physicalTangentInnerNonnegative tangent =
   ℚP.+-mono-≤
-    (scalarBondInnerNonnegative (tangent component1))
+    (scalarBondInnerNonnegative (componentScalarBondField tangent component1))
     (ℚP.+-mono-≤
-      (scalarBondInnerNonnegative (tangent component2))
-      (scalarBondInnerNonnegative (tangent component3)))
+      (scalarBondInnerNonnegative (componentScalarBondField tangent component2))
+      (scalarBondInnerNonnegative (componentScalarBondField tangent component3)))
 
 canonicalLiteralCoarseBlockData : LiteralCoarseBlockData PhysicalSU2Tangent4
 canonicalLiteralCoarseBlockData = record
@@ -143,11 +152,6 @@ canonicalLiteralCoarseBlockData = record
   ; innerCoarseZeroExact = scalarBondInnerZeroRight zeroPhysicalSU2Tangent4
   ; coarseNormNonnegativeExact = physicalTangentInnerNonnegative
   }
-
-canonicalLiteralWilsonOperatorMatch :
-  Path4SU2LiteralWilsonOperatorMatch PhysicalSU2Tangent4
-canonicalLiteralWilsonOperatorMatch =
-  literalWilsonOperatorMatch canonicalLiteralCoarseBlockData
 
 open LiteralCoarseBlockData public
 
@@ -181,6 +185,11 @@ literalWilsonOperatorMatch coarseData = record
   _|>_ : ∀ {A B : Set} → A → (A → B) → B
   value |> function = function value
 
+canonicalLiteralWilsonOperatorMatch :
+  Path4SU2LiteralWilsonOperatorMatch PhysicalSU2Tangent4
+canonicalLiteralWilsonOperatorMatch =
+  literalWilsonOperatorMatch canonicalLiteralCoarseBlockData
+
 completeLiteralGaugeFixedHessianData : ∀ {Coarse} →
   LiteralCoarseBlockData Coarse →
   DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact.GaugeFixedHessianQuadraticData
@@ -196,7 +205,7 @@ completeLiteralGaugeFixedHessianPeriodicDecompositionExact :
   DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact.gaugeFixedHessianQuadraticForm
     (completeLiteralGaugeFixedHessianData coarseData) tangent
   ≡ DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.physicalPeriodicReferenceDifferenceEnergy tangent
-    Data.Rational._+_
+    +
     DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact.blockAverageNormSq
       (completeLiteralGaugeFixedHessianData coarseData) tangent
 completeLiteralGaugeFixedHessianPeriodicDecompositionExact coarseData =
@@ -207,7 +216,7 @@ completeUniformReferenceHodgeCoercivity :
   ∀ {Coarse} (coarseData : LiteralCoarseBlockData Coarse) tangent →
   PhysicalBlockAverageZero tangent →
   DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate.configuredPathCoercivityConstant
-    Data.Rational._*_
+    *
     physicalUnweightedNormSq tangent
   ≤ DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact.gaugeFixedHessianQuadraticForm
       (completeLiteralGaugeFixedHessianData coarseData) tangent

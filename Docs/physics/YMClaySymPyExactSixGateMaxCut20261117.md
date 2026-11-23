@@ -11,9 +11,21 @@ The existing companion scripts were also rerun locally:
 - check_ym_dyadic_cyclotomic_full_20261117.py: 1374/1374
 - check_ym_bn_cauchy_schedule_20261117.py: 551/551
 
-Total 47624/47624 exact rational and symbolic assertions, without
-using approximate trigonometric arithmetic or simulation. These are
-finite/computational checks, NOT Agda kernel-accepted universal theorems.
+Three later geometry-forward finite checks were ported to master and
+executed with the project venv (`sympy 1.14.0`, exact `Fraction`
+arithmetic where applicable):
+
+- check_ym_w0_T_path_geometry_20261123.py: PASS, path coefficients
+  (13, 6, 14, 4) with the shared intermediate state retained.
+- check_ym_p0_original_wilson_marked_ordered_t_20261123.py: PASS, 1024
+  restricted Z2 states, four W-fibre four-column ordered-T identities.
+- check_ym_p0_original_gauge_orbit_20261123.py: PASS, 1024 links, 1536
+  plaquettes, connected frozen complements, and exact 2^265/2^248 counts.
+
+Total 47624/47624 earlier exact rational and symbolic assertions, plus
+the three later PASS controls, without using approximate trigonometric
+arithmetic or simulation. These are finite/computational checks, NOT Agda
+kernel-accepted universal theorems.
 
 ## Six constructive mathematical links
 

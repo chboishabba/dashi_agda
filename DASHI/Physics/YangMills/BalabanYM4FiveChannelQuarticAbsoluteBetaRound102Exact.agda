@@ -63,28 +63,28 @@ localQuarticUpper :
 localQuarticUpper dataSet cell =
   let
     data = lowerData dataSet
-    fourth = Beta.power4 (Five.coupling data)
+    fourth = Beta.power4 (Five.coupling dat)
     pointwise = Beta.sumMonotone
       Five.channels
-      (Five.channelRemainder data cell)
-      (λ channel → Five.channelCoefficient data cell channel * fourth)
+      (Five.channelRemainder dat cell)
+      (λ channel → Five.channelCoefficient dat cell channel * fourth)
       (channelUpper dataSet cell)
 
     identify :
       Sums.sumRational Five.channels
-        (λ channel → Five.channelCoefficient data cell channel * fourth)
-      ≡ Five.localCoefficient data cell * fourth
+        (λ channel → Five.channelCoefficient dat cell channel * fourth)
+      ≡ Five.localCoefficient dat cell * fourth
     identify = trans
       (Sums.sumRationalCong Five.channels
-        (λ channel → Five.channelCoefficient data cell channel * fourth)
-        (λ channel → fourth * Five.channelCoefficient data cell channel)
-        (λ channel → ℚRing.solve-∀ (Five.channelCoefficient data cell channel) fourth))
+        (λ channel → Five.channelCoefficient dat cell channel * fourth)
+        (λ channel → fourth * Five.channelCoefficient dat cell channel)
+        (λ channel → ℚRing.solve-∀ (Five.channelCoefficient dat cell channel) fourth))
       (trans
-        (Sums.sumRationalScale fourth Five.channels (Five.channelCoefficient data cell))
-        (ℚRing.solve-∀ fourth (Five.localCoefficient data cell)))
+        (Sums.sumRationalScale fourth Five.channels (Five.channelCoefficient dat cell))
+        (ℚRing.solve-∀ fourth (Five.localCoefficient dat cell)))
   in
   subst
-    (λ upper → Five.localRemainder data cell ≤ upper)
+    (λ upper → Five.localRemainder dat cell ≤ upper)
     identify pointwise
 
 globalQuarticUpper :
@@ -95,27 +95,27 @@ globalQuarticUpper :
 globalQuarticUpper dataSet =
   let
     data = lowerData dataSet
-    fourth = Beta.power4 (Five.coupling data)
+    fourth = Beta.power4 (Five.coupling dat)
     pointwise = Beta.sumMonotone
-      (Five.cells data)
-      (Five.localRemainder data)
-      (λ cell → Five.localCoefficient data cell * fourth)
+      (Five.cells dat)
+      (Five.localRemainder dat)
+      (λ cell → Five.localCoefficient dat cell * fourth)
       (localQuarticUpper dataSet)
 
     identify :
-      Sums.sumRational (Five.cells data)
-        (λ cell → Five.localCoefficient data cell * fourth)
-      ≡ Five.coefficientTotal data * fourth
+      Sums.sumRational (Five.cells dat)
+        (λ cell → Five.localCoefficient dat cell * fourth)
+      ≡ Five.coefficientTotal dat * fourth
     identify = trans
-      (Sums.sumRationalCong (Five.cells data)
-        (λ cell → Five.localCoefficient data cell * fourth)
-        (λ cell → fourth * Five.localCoefficient data cell)
-        (λ cell → ℚRing.solve-∀ (Five.localCoefficient data cell) fourth))
+      (Sums.sumRationalCong (Five.cells dat)
+        (λ cell → Five.localCoefficient dat cell * fourth)
+        (λ cell → fourth * Five.localCoefficient dat cell)
+        (λ cell → ℚRing.solve-∀ (Five.localCoefficient dat cell) fourth))
       (trans
-        (Sums.sumRationalScale fourth (Five.cells data) (Five.localCoefficient data))
-        (ℚRing.solve-∀ fourth (Five.coefficientTotal data)))
+        (Sums.sumRationalScale fourth (Five.cells dat) (Five.localCoefficient dat))
+        (ℚRing.solve-∀ fourth (Five.coefficientTotal dat)))
   in
-  subst (λ upper → Five.betaInt data ≤ upper) identify pointwise
+  subst (λ upper → Five.betaInt dat ≤ upper) identify pointwise
 
 fiveChannelQuarticAbsoluteBetaLevel : ProofLevel
 fiveChannelQuarticAbsoluteBetaLevel = machineChecked

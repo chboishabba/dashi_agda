@@ -31,9 +31,9 @@ open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExac
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
   using (axis0; axis1; axis2; axis3; siteSum4Cong)
 open import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
-  using (sumRationalRightScale; kroneckerDelta)
+  using (sumRationalRightScale)
 open import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
-  using (deltaSumIdentity; siteElementsDuplicateFree)
+  using (deltaSumIdentity; siteElementsDuplicateFree; kroneckerDelta)
 open import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact
   using (average0123EqualsGlobalMean)
 open import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed
@@ -86,7 +86,10 @@ kernelRowTotal : ∀ row →
   siteSum4 (λ column → scalarGreenKernel (subtractSite4 row column)) ≡ 1ℚ
 kernelRowTotal row =
   trans
-    (siteSum4Cong _ _ (λ column → kernelColumnSymmetry row column))
+    (siteSum4Cong
+      (λ column → scalarGreenKernel (subtractSite4 row column))
+      (kernelColumn row)
+      (λ column → kernelColumnSymmetry row column))
     (translatedKernelTotal row)
 
 ------------------------------------------------------------------------
@@ -105,17 +108,25 @@ kernelLaplacianFold offset =
   sumRational (allCyclicIndices four)
     (λ axis → kernelAxisLaplacian axis offset)
 
+laplacianFourFoldRaw : ∀ a0 a1 a2 a3 →
+  a0 + (a1 + (a2 + (a3 + 0ℚ))) ≡ a0 + a1 + a2 + a3
+laplacianFourFoldRaw = ℚRing.solve-∀
+
 kernelLaplacianFoldExact : ∀ offset →
   kernelLaplacianFold offset ≡ scalarKernelLaplacian offset
 kernelLaplacianFoldExact offset =
-  ℚRing.solve-∀
+  laplacianFourFoldRaw
+    (kernelAxisLaplacian axis0 offset)
+    (kernelAxisLaplacian axis1 offset)
+    (kernelAxisLaplacian axis2 offset)
+    (kernelAxisLaplacian axis3 offset)
 
 siteLocalLaplacian : SiteField side4 → SiteField side4
-siteLocalLaplacian field site =
+siteLocalLaplacian fld site =
   sumRational (allCyclicIndices four) (λ axis →
-    (field site + field site)
-    - (field (shiftForward4 axis site)
-      + field (shiftBackward4 axis site)))
+    (fld site + fld site)
+    - (fld (shiftForward4 axis site)
+      + fld (shiftBackward4 axis site)))
 
 kernelColumnAxisLaplacianExact : ∀ axis center site →
   (kernelColumn center site + kernelColumn center site)
@@ -134,7 +145,12 @@ kernelColumnLocalLaplacianExact : ∀ center site →
   ≡ scalarKernelLaplacian (subtractSite4 site center)
 kernelColumnLocalLaplacianExact center site =
   trans
-    (sumRationalCong (allCyclicIndices four) _ _
+    (sumRationalCong (allCyclicIndices four)
+      (λ axis →
+        (kernelColumn center site + kernelColumn center site)
+        - (kernelColumn center (shiftForward4 axis site)
+          + kernelColumn center (shiftBackward4 axis site)))
+      (λ axis → kernelAxisLaplacian axis (subtractSite4 site center))
       (λ axis → kernelColumnAxisLaplacianExact axis center site))
     (kernelLaplacianFoldExact (subtractSite4 site center))
 
@@ -158,6 +174,14 @@ scalarGreen source row =
   siteSum4 (λ column →
     scalarGreenKernel (subtractSite4 row column) * source column)
 
+stencilEmptyRaw : 0ℚ ≡ (0ℚ + 0ℚ) - (0ℚ + 0ℚ)
+stencilEmptyRaw = ℚRing.solve-∀
+
+stencilStepRaw : ∀ c f b w sc sf sb →
+  ((c + c) - (f + b)) * w + ((sc + sc) - (sf + sb))
+  ≡ ((c * w + sc) + (c * w + sc)) - ((f * w + sf) + (b * w + sb))
+stencilStepRaw = ℚRing.solve-∀
+
 sumStencilDistribute :
   ∀ {A : Set} (values : List A)
     (center forward backward weight : A → ℚ) →
@@ -168,10 +192,14 @@ sumStencilDistribute :
       + sumRational values (λ value → center value * weight value))
     - (sumRational values (λ value → forward value * weight value)
       + sumRational values (λ value → backward value * weight value))
-sumStencilDistribute [] center forward backward weight = ℚRing.solve-∀
+sumStencilDistribute [] center forward backward weight = stencilEmptyRaw
 sumStencilDistribute (value ∷ values) center forward backward weight
   rewrite sumStencilDistribute values center forward backward weight =
-  ℚRing.solve-∀
+  stencilStepRaw
+    (center value) (forward value) (backward value) (weight value)
+    (sumRational values (λ v → center v * weight v))
+    (sumRational values (λ v → forward v * weight v))
+    (sumRational values (λ v → backward v * weight v))
 
 kernelAxisStencilAtDifference : ∀ axis row column →
   ((scalarGreenKernel (subtractSite4 row column)
@@ -188,7 +216,7 @@ kernelAxisStencilAtDifference axis row column =
       (cong scalarGreenKernel (subtractSiteForward axis row column))
       (cong scalarGreenKernel (subtractSiteBackward axis row column)))
 
-axisLaplacianGreenExact : ∀ axis source row →
+axisLaplacianGreenExact : (axis : Axis4) (source : SiteField side4) (row : PhysicalBlockL side4) →
   ((scalarGreen source row + scalarGreen source row)
     - (scalarGreen source (shiftForward4 axis row)
       + scalarGreen source (shiftBackward4 axis row)))
@@ -205,41 +233,73 @@ axisLaplacianGreenExact axis source row =
         (λ column → scalarGreenKernel
           (subtractSite4 (shiftBackward4 axis row) column))
         source))
-    (siteSum4Cong _ _ (λ column →
-      cong (λ coefficient → coefficient * source column)
-        (kernelAxisStencilAtDifference axis row column)))
+    (siteSum4Cong
+      (λ column →
+        ((scalarGreenKernel (subtractSite4 row column)
+            + scalarGreenKernel (subtractSite4 row column))
+          - (scalarGreenKernel (subtractSite4 (shiftForward4 axis row) column)
+            + scalarGreenKernel (subtractSite4 (shiftBackward4 axis row) column)))
+        * source column)
+      (λ column →
+        kernelAxisLaplacian axis (subtractSite4 row column) * source column)
+      (λ column →
+        cong (λ coefficient → coefficient * source column)
+          (kernelAxisStencilAtDifference axis row column)))
 
-siteGreenLaplacianExact : ∀ source row →
+siteGreenLaplacianExact : (source : SiteField side4) (row : PhysicalBlockL side4) →
   siteLocalLaplacian (scalarGreen source) row
   ≡ siteSum4 (λ column →
       scalarKernelLaplacian (subtractSite4 row column) * source column)
 siteGreenLaplacianExact source row =
   trans
-    (sumRationalCong (allCyclicIndices four) _ _
+    (sumRationalCong (allCyclicIndices four)
+      (λ axis →
+        (scalarGreen source row + scalarGreen source row)
+        - (scalarGreen source (shiftForward4 axis row)
+          + scalarGreen source (shiftBackward4 axis row)))
+      (λ axis →
+        siteSum4 (λ column →
+          kernelAxisLaplacian axis (subtractSite4 row column) * source column))
       (λ axis → axisLaplacianGreenExact axis source row))
     (trans
       (sumSwap (allCyclicIndices four) (physicalBlockSites side4)
         (λ axis column →
           kernelAxisLaplacian axis (subtractSite4 row column)
           * source column))
-      (siteSum4Cong _ _ (λ column →
-        trans
-          (sumRationalRightScale
-            (allCyclicIndices four)
-            (λ axis → kernelAxisLaplacian axis
-              (subtractSite4 row column))
-            (source column))
-          (cong (λ value → value * source column)
-            (kernelLaplacianFoldExact (subtractSite4 row column))))))
+      (siteSum4Cong
+        (λ column →
+          sumRational (allCyclicIndices four) (λ axis →
+            kernelAxisLaplacian axis (subtractSite4 row column) * source column))
+        (λ column →
+          scalarKernelLaplacian (subtractSite4 row column) * source column)
+        (λ column →
+          trans
+            (sumRationalRightScale
+              (allCyclicIndices four)
+              (λ axis → kernelAxisLaplacian axis
+                (subtractSite4 row column))
+              (source column))
+            (cong (λ value → value * source column)
+              (kernelLaplacianFoldExact (subtractSite4 row column))))))
+
+addSubCancelMulRaw : ∀ a b v → a * v ≡ ((a + b) - b) * v
+addSubCancelMulRaw = ℚRing.solve-∀
 
 kernelLaplacianTimesExact : ∀ offset value →
   scalarKernelLaplacian offset * value
   ≡ (scalarDeltaAtZero offset - oneTwoFiftySix) * value
 kernelLaplacianTimesExact offset value =
   trans
-    (ℚRing.solve-∀)
+    (addSubCancelMulRaw (scalarKernelLaplacian offset) oneTwoFiftySix value)
     (cong (λ equationLeft → (equationLeft - oneTwoFiftySix) * value)
       (scalarGreenKernelEquation offset))
+
+deltaEmptyRaw : ∀ k → 0ℚ ≡ 0ℚ - k * 0ℚ
+deltaEmptyRaw = ℚRing.solve-∀
+
+deltaStepRaw : ∀ d k s sd ss →
+  (d - k) * s + (sd - k * ss) ≡ (d * s + sd) - k * (s + ss)
+deltaStepRaw = ℚRing.solve-∀
 
 sumDeltaMinusConstant :
   ∀ {A : Set} (values : List A) (delta source : A → ℚ) constant →
@@ -247,10 +307,13 @@ sumDeltaMinusConstant :
     (delta value - constant) * source value)
   ≡ sumRational values (λ value → delta value * source value)
     - constant * sumRational values source
-sumDeltaMinusConstant [] delta source constant = ℚRing.solve-∀
+sumDeltaMinusConstant [] delta source constant = deltaEmptyRaw constant
 sumDeltaMinusConstant (value ∷ values) delta source constant
   rewrite sumDeltaMinusConstant values delta source constant =
-  ℚRing.solve-∀
+  deltaStepRaw
+    (delta value) constant (source value)
+    (sumRational values (λ v → delta v * source v))
+    (sumRational values source)
 
 siteDeltaEqualsKronecker : ∀ left right →
   siteDelta4 left right
@@ -260,14 +323,19 @@ siteDeltaEqualsKronecker left right
 ... | yes equality = refl
 ... | no inequality = refl
 
-siteDeltaConvolutionExact : ∀ row source →
+siteDeltaConvolutionExact : (row : PhysicalBlockL side4) (source : SiteField side4) →
   siteSum4 (λ column → siteDelta4 row column * source column)
   ≡ source row
 siteDeltaConvolutionExact row source =
   trans
-    (siteSum4Cong _ _ (λ column →
-      cong (λ coefficient → coefficient * source column)
-        (siteDeltaEqualsKronecker row column)))
+    (siteSum4Cong
+      (λ column → siteDelta4 row column * source column)
+      (λ column →
+        kroneckerDelta (periodicTorus4DecidableEquality four) row column
+        * source column)
+      (λ column →
+        cong (λ coefficient → coefficient * source column)
+          (siteDeltaEqualsKronecker row column)))
     (deltaSumIdentity
       (periodicTorus4DecidableEquality four)
       siteElementsDuplicateFree
@@ -275,19 +343,24 @@ siteDeltaConvolutionExact row source =
       (complete (periodicTorus4Finite four) row)
       source)
 
-siteGreenLaplacianIdentity : ∀ source row →
+siteGreenLaplacianIdentity : (source : SiteField side4) (row : PhysicalBlockL side4) →
   siteLocalLaplacian (scalarGreen source) row
   ≡ source row - oneTwoFiftySix * siteSum4 source
 siteGreenLaplacianIdentity source row =
   trans
     (siteGreenLaplacianExact source row)
     (trans
-      (siteSum4Cong _ _ (λ column →
-        trans
-          (kernelLaplacianTimesExact
-            (subtractSite4 row column) (source column))
-          (cong (λ delta → (delta - oneTwoFiftySix) * source column)
-            (scalarDeltaAtZeroSubtract row column))))
+      (siteSum4Cong
+        (λ column →
+          scalarKernelLaplacian (subtractSite4 row column) * source column)
+        (λ column →
+          (siteDelta4 row column - oneTwoFiftySix) * source column)
+        (λ column →
+          trans
+            (kernelLaplacianTimesExact
+              (subtractSite4 row column) (source column))
+            (cong (λ delta → (delta - oneTwoFiftySix) * source column)
+              (scalarDeltaAtZeroSubtract row column))))
       (trans
         (sumDeltaMinusConstant
           (physicalBlockSites side4)
@@ -297,24 +370,32 @@ siteGreenLaplacianIdentity source row =
         (cong (λ value → value - oneTwoFiftySix * siteSum4 source)
           (siteDeltaConvolutionExact row source))))
 
-siteSumGreenExact : ∀ source → siteSum4 (scalarGreen source) ≡ siteSum4 source
+oneMulLeftRaw : ∀ x → 1ℚ * x ≡ x
+oneMulLeftRaw = ℚRing.solve-∀
+
+siteSumGreenExact : (source : SiteField side4) → siteSum4 (scalarGreen source) ≡ siteSum4 source
 siteSumGreenExact source =
   trans
     (sumSwap (physicalBlockSites side4) (physicalBlockSites side4)
       (λ row column →
         scalarGreenKernel (subtractSite4 row column) * source column))
-    (siteSum4Cong _ _ (λ column →
-      trans
-        (sumRationalRightScale
-          (physicalBlockSites side4)
-          (λ row → scalarGreenKernel (subtractSite4 row column))
-          (source column))
-        (trans
-          (cong (λ value → value * source column)
-            (translatedKernelTotal column))
-          (ℚRing.solve-∀))))
+    (siteSum4Cong
+      (λ column →
+        siteSum4 (λ row →
+          scalarGreenKernel (subtractSite4 row column) * source column))
+      source
+      (λ column →
+        trans
+          (sumRationalRightScale
+            (physicalBlockSites side4)
+            (λ row → scalarGreenKernel (subtractSite4 row column))
+            (source column))
+          (trans
+            (cong (λ value → value * source column)
+              (translatedKernelTotal column))
+            (oneMulLeftRaw (source column)))))
 
-averageScalarGreenExact : ∀ source row →
+averageScalarGreenExact : (source : SiteField side4) (row : PhysicalBlockL side4) →
   average0123 (scalarGreen source) row
   ≡ oneTwoFiftySix * siteSum4 source
 averageScalarGreenExact source row =
@@ -323,36 +404,54 @@ averageScalarGreenExact source row =
     (cong (oneTwoFiftySix *_) (siteSumGreenExact source))
 
 configuredSiteOperator : SiteField side4 → SiteField side4
-configuredSiteOperator field row =
-  siteLocalLaplacian field row + average0123 field row
+configuredSiteOperator fld row =
+  siteLocalLaplacian fld row + average0123 fld row
 
-configuredSiteGreenRightInverse : ∀ source row →
+subAddCancelRaw : ∀ a b → (a - b) + b ≡ a
+subAddCancelRaw = ℚRing.solve-∀
+
+configuredSiteGreenRightInverse : (source : SiteField side4) (row : PhysicalBlockL side4) →
   configuredSiteOperator (scalarGreen source) row ≡ source row
 configuredSiteGreenRightInverse source row =
   trans
     (cong₂ _+_
       (siteGreenLaplacianIdentity source row)
       (averageScalarGreenExact source row))
-    (ℚRing.solve-∀)
+    (subAddCancelRaw (source row) (oneTwoFiftySix * siteSum4 source))
 
 ------------------------------------------------------------------------
 -- Input-side shifts and commutation, giving the left inverse as well.
 ------------------------------------------------------------------------
 
-scalarGreenRespectsPointwise : ∀ {left right} →
+scalarGreenRespectsPointwise : ∀ {left right : SiteField side4} →
   (∀ site → left site ≡ right site) →
   ∀ row → scalarGreen left row ≡ scalarGreen right row
-scalarGreenRespectsPointwise pointwise row =
-  siteSum4Cong _ _ (λ column →
-    cong (λ value → scalarGreenKernel (subtractSite4 row column) * value)
-      (pointwise column))
+scalarGreenRespectsPointwise {left} {right} pointwise row =
+  siteSum4Cong
+    (λ column → scalarGreenKernel (subtractSite4 row column) * left column)
+    (λ column → scalarGreenKernel (subtractSite4 row column) * right column)
+    (λ column →
+      cong (λ value → scalarGreenKernel (subtractSite4 row column) * value)
+        (pointwise column))
 
-scalarGreenAdd : ∀ left right row →
+distribLeftRaw : ∀ a b c → a * (b + c) ≡ a * b + a * c
+distribLeftRaw = ℚRing.solve-∀
+
+scalarGreenAdd : (left right : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (λ site → left site + right site) row
   ≡ scalarGreen left row + scalarGreen right row
 scalarGreenAdd left right row =
   trans
-    (siteSum4Cong _ _ (λ column → ℚRing.solve-∀))
+    (siteSum4Cong
+      (λ column → scalarGreenKernel (subtractSite4 row column) * (left column + right column))
+      (λ column →
+        scalarGreenKernel (subtractSite4 row column) * left column
+        + scalarGreenKernel (subtractSite4 row column) * right column)
+      (λ column →
+        distribLeftRaw
+          (scalarGreenKernel (subtractSite4 row column))
+          (left column)
+          (right column)))
     (sumRationalAdd (physicalBlockSites side4)
       (λ column → scalarGreenKernel (subtractSite4 row column) * left column)
       (λ column → scalarGreenKernel (subtractSite4 row column) * right column))
@@ -367,9 +466,9 @@ scalarGreenConstantExact constant row =
       constant)
     (trans
       (cong (λ value → value * constant) (kernelRowTotal row))
-      (ℚRing.solve-∀))
+      (oneMulLeftRaw constant))
 
-shiftedInputForwardSum : ∀ axis source row →
+shiftedInputForwardSum : (axis : Axis4) (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (λ site → source (shiftForward4 axis site)) row
   ≡ siteSum4 (λ column →
       scalarGreenKernel
@@ -382,11 +481,18 @@ shiftedInputForwardSum axis source row =
         scalarGreenKernel
           (subtractSite4 row (shiftBackward4 axis column))
         * source column)))
-    (siteSum4Cong _ _ (λ column →
-      cong (λ offset → scalarGreenKernel offset * source column)
-        (subtractSiteRightBackward axis row column)))
+    (siteSum4Cong
+      (λ column →
+        scalarGreenKernel (subtractSite4 row (shiftBackward4 axis column))
+        * source column)
+      (λ column →
+        scalarGreenKernel (shiftForward4 axis (subtractSite4 row column))
+        * source column)
+      (λ column →
+        cong (λ offset → scalarGreenKernel offset * source column)
+          (subtractSiteRightBackward axis row column)))
 
-shiftedInputBackwardSum : ∀ axis source row →
+shiftedInputBackwardSum : (axis : Axis4) (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (λ site → source (shiftBackward4 axis site)) row
   ≡ siteSum4 (λ column →
       scalarGreenKernel
@@ -399,9 +505,21 @@ shiftedInputBackwardSum axis source row =
         scalarGreenKernel
           (subtractSite4 row (shiftForward4 axis column))
         * source column)))
-    (siteSum4Cong _ _ (λ column →
-      cong (λ offset → scalarGreenKernel offset * source column)
-        (subtractSiteRightForward axis row column)))
+    (siteSum4Cong
+      (λ column →
+        scalarGreenKernel (subtractSite4 row (shiftForward4 axis column))
+        * source column)
+      (λ column →
+        scalarGreenKernel (shiftBackward4 axis (subtractSite4 row column))
+        * source column)
+      (λ column →
+        cong (λ offset → scalarGreenKernel offset * source column)
+          (subtractSiteRightForward axis row column)))
+
+stencilLeftStepRaw : ∀ w c f b sc sf sb →
+  w * ((c + c) - (f + b)) + ((sc + sc) - (sf + sb))
+  ≡ ((w * c + sc) + (w * c + sc)) - ((w * f + sf) + (w * b + sb))
+stencilLeftStepRaw = ℚRing.solve-∀
 
 sumStencilWeightLeft :
   ∀ {A : Set} (values : List A)
@@ -413,12 +531,16 @@ sumStencilWeightLeft :
       + sumRational values (λ value → weight value * center value))
     - (sumRational values (λ value → weight value * forward value)
       + sumRational values (λ value → weight value * backward value))
-sumStencilWeightLeft [] weight center forward backward = ℚRing.solve-∀
+sumStencilWeightLeft [] weight center forward backward = stencilEmptyRaw
 sumStencilWeightLeft (value ∷ values) weight center forward backward
   rewrite sumStencilWeightLeft values weight center forward backward =
-  ℚRing.solve-∀
+  stencilLeftStepRaw
+    (weight value) (center value) (forward value) (backward value)
+    (sumRational values (λ v → weight v * center v))
+    (sumRational values (λ v → weight v * forward v))
+    (sumRational values (λ v → weight v * backward v))
 
-axisInputLaplacianGreenExact : ∀ axis source row →
+axisInputLaplacianGreenExact : (axis : Axis4) (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (λ site →
     (source site + source site)
     - (source (shiftForward4 axis site)
@@ -457,16 +579,23 @@ scalarGreenFiniteSum :
   ≡ sumRational values (λ value → scalarGreen (terms value) row)
 scalarGreenFiniteSum values terms row =
   trans
-    (siteSum4Cong _ _ (λ column →
-      sym (sumRationalScale
-        (scalarGreenKernel (subtractSite4 row column))
-        values
-        (λ value → terms value column))))
+    (siteSum4Cong
+      (λ column →
+        scalarGreenKernel (subtractSite4 row column)
+        * sumRational values (λ value → terms value column))
+      (λ column →
+        sumRational values (λ value →
+          scalarGreenKernel (subtractSite4 row column) * terms value column))
+      (λ column →
+        sym (sumRationalScale
+          (scalarGreenKernel (subtractSite4 row column))
+          values
+          (λ value → terms value column))))
     (sumSwap (physicalBlockSites side4) values
       (λ column value →
         scalarGreenKernel (subtractSite4 row column) * terms value column))
 
-siteGreenLaplacianCommutes : ∀ source row →
+siteGreenLaplacianCommutes : (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (siteLocalLaplacian source) row
   ≡ siteLocalLaplacian (scalarGreen source) row
 siteGreenLaplacianCommutes source row =
@@ -479,15 +608,30 @@ siteGreenLaplacianCommutes source row =
           + source (shiftBackward4 axis site)))
       row)
     (trans
-      (sumRationalCong (allCyclicIndices four) _ _
+      (sumRationalCong (allCyclicIndices four)
+        (λ axis →
+          scalarGreen
+            (λ site →
+              (source site + source site)
+              - (source (shiftForward4 axis site)
+                + source (shiftBackward4 axis site)))
+            row)
+        (λ axis →
+          siteSum4 (λ column →
+            kernelAxisLaplacian axis (subtractSite4 row column) * source column))
         (λ axis → axisInputLaplacianGreenExact axis source row))
       (sym
-        (trans
-          (sumRationalCong (allCyclicIndices four) _ _
-            (λ axis → axisLaplacianGreenExact axis source row))
-          refl))
+        (sumRationalCong (allCyclicIndices four)
+          (λ axis →
+            (scalarGreen source row + scalarGreen source row)
+            - (scalarGreen source (shiftForward4 axis row)
+              + scalarGreen source (shiftBackward4 axis row)))
+          (λ axis →
+            siteSum4 (λ column →
+              kernelAxisLaplacian axis (subtractSite4 row column) * source column))
+          (λ axis → axisLaplacianGreenExact axis source row))))
 
-scalarGreenAverageExact : ∀ source row →
+scalarGreenAverageExact : (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (average0123 source) row
   ≡ average0123 (scalarGreen source) row
 scalarGreenAverageExact source row =
@@ -499,7 +643,7 @@ scalarGreenAverageExact source row =
         (oneTwoFiftySix * siteSum4 source) row)
       (sym (averageScalarGreenExact source row)))
 
-configuredSiteGreenCommutes : ∀ source row →
+configuredSiteGreenCommutes : (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (configuredSiteOperator source) row
   ≡ configuredSiteOperator (scalarGreen source) row
 configuredSiteGreenCommutes source row =
@@ -512,7 +656,7 @@ configuredSiteGreenCommutes source row =
       (siteGreenLaplacianCommutes source row)
       (scalarGreenAverageExact source row))
 
-configuredSiteGreenLeftInverse : ∀ source row →
+configuredSiteGreenLeftInverse : (source : SiteField side4) (row : PhysicalBlockL side4) →
   scalarGreen (configuredSiteOperator source) row ≡ source row
 configuredSiteGreenLeftInverse source row =
   trans

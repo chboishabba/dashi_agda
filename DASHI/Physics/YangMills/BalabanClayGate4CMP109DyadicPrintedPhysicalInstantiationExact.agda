@@ -75,12 +75,12 @@ record DyadicCMP109PrintedPhysicalInputs
       CoarseBond coarseN → FineSite coarseN → FineBond coarseN
 
     printedRelativeProductUsesPhysicalPrincipalLog :
-      ∀ field coarse fineSite →
+      ∀ fld coarse fineSite →
       PrincipalLog.physicalLog principalLogMeaning
-        field coarse (crossingFineBond coarse fineSite)
+        fld coarse (crossingFineBond coarse fineSite)
       ≡ Printed.antiHermitianLogCoordinate printedData
           (Printed.printedEquation012RelativeProduct
-            printedData field coarse fineSite)
+            printedData fld coarse fineSite)
 
     derivativeEntry : CoarseBond coarseN → FineBond coarseN → Entry
     zeroDerivativeEntry : Entry

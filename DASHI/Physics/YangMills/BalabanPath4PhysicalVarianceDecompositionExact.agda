@@ -109,8 +109,7 @@ sumFourSquaresExact blockField =
         sq (martingaleField1 blockField site)
         + (sq (martingaleField2 blockField site)
         + sq (martingaleField3 blockField site))))
-    (cong₂ _+_
-      refl
+    (cong (globalNormSq (martingaleField0 blockField) +_)
       (trans
         (sumRationalAdd
           (physicalBlockSites side4)
@@ -118,8 +117,7 @@ sumFourSquaresExact blockField =
           (λ site →
             sq (martingaleField2 blockField site)
             + sq (martingaleField3 blockField site)))
-        (cong₂ _+_
-          refl
+        (cong (globalNormSq (martingaleField1 blockField) +_)
           (sumRationalAdd
             (physicalBlockSites side4)
             (λ site → sq (martingaleField2 blockField site))
@@ -144,8 +142,7 @@ sumPairCrossExact blockField =
         + (martingaleField1 blockField site * martingaleField2 blockField site
         + (martingaleField1 blockField site * martingaleField3 blockField site
         + martingaleField2 blockField site * martingaleField3 blockField site)))))
-    (cong₂ _+_
-      refl
+    (cong (globalBlockInner (martingaleField0 blockField) (martingaleField1 blockField) +_)
       (trans
         (sumRationalAdd
           (physicalBlockSites side4)
@@ -155,8 +152,7 @@ sumPairCrossExact blockField =
             + (martingaleField1 blockField site * martingaleField2 blockField site
             + (martingaleField1 blockField site * martingaleField3 blockField site
             + martingaleField2 blockField site * martingaleField3 blockField site))))
-        (cong₂ _+_
-          refl
+        (cong (globalBlockInner (martingaleField0 blockField) (martingaleField2 blockField) +_)
           (trans
             (sumRationalAdd
               (physicalBlockSites side4)
@@ -165,8 +161,7 @@ sumPairCrossExact blockField =
                 martingaleField1 blockField site * martingaleField2 blockField site
                 + (martingaleField1 blockField site * martingaleField3 blockField site
                 + martingaleField2 blockField site * martingaleField3 blockField site)))
-            (cong₂ _+_
-              refl
+            (cong (globalBlockInner (martingaleField0 blockField) (martingaleField3 blockField) +_)
               (trans
                 (sumRationalAdd
                   (physicalBlockSites side4)
@@ -175,8 +170,7 @@ sumPairCrossExact blockField =
                   (λ site →
                     martingaleField1 blockField site * martingaleField3 blockField site
                     + martingaleField2 blockField site * martingaleField3 blockField site))
-                (cong₂ _+_
-                  refl
+                (cong (globalBlockInner (martingaleField1 blockField) (martingaleField2 blockField) +_)
                   (sumRationalAdd
                     (physicalBlockSites side4)
                     (λ site →

@@ -76,19 +76,19 @@ fourierAuthority = record
   ; momentumCharacter = λ k x → one
   ; sourceMomentumCharacterMultiplication = λ k l x → refl
   ; sourceMomentumCharacterConjugation = λ k x → refl
-  ; scalarSiteNormSq = λ field → one
-  ; scalarMomentumNormSq = λ field → one
+  ; scalarSiteNormSq = λ fld → one
+  ; scalarMomentumNormSq = λ fld → one
   }
 
 siteFieldValueOne :
-  ∀ (field : Fourier.SiteField oneNat One) site → one ≡ field site
-siteFieldValueOne field site with field site
+  ∀ (fld : Fourier.SiteField oneNat One) site → one ≡ fld site
+siteFieldValueOne fld site with fld site
 ... | one = refl
 
 momentumFieldValueOne :
-  ∀ (field : Fourier.MomentumField oneNat One) momentum →
-  one ≡ field momentum
-momentumFieldValueOne field momentum with field momentum
+  ∀ (fld : Fourier.MomentumField oneNat One) momentum →
+  one ≡ fld momentum
+momentumFieldValueOne fld momentum with fld momentum
 ... | one = refl
 
 fourierTheorems : Fourier.PeriodicTorus4FourierTheorems fourierAuthority
@@ -97,7 +97,7 @@ fourierTheorems = record
   ; sourceCharacterCompleteness = λ x y → refl
   ; sourceFiniteFourierInversionLeft = siteFieldValueOne
   ; sourceFiniteFourierInversionRight = momentumFieldValueOne
-  ; sourceScalarFourierParseval = λ field → refl
+  ; sourceScalarFourierParseval = λ fld → refl
   }
 
 siteField : Fourier.SiteField oneNat One
@@ -125,46 +125,46 @@ differencePrimitives :
   Difference.PeriodicDifferencePrimitives oneNat One One
 differencePrimitives = record
   { fourierAuthority = fourierAuthority
-  ; forwardDifferencePrimitive = λ axis field site → one
-  ; backwardDifferencePrimitive = λ axis field site → one
+  ; forwardDifferencePrimitive = λ axis fld site → one
+  ; backwardDifferencePrimitive = λ axis fld site → one
   ; forwardDifferenceSymbolPrimitive = λ axis momentum → one
   ; backwardDifferenceSymbolPrimitive = λ axis momentum → one
-  ; blockConstraintOperatorPrimitive = λ field axis site → one
+  ; blockConstraintOperatorPrimitive = λ fld axis site → one
   ; blockConstraintFourierOperatorPrimitive =
-      λ field axis momentum → one
+      λ fld axis momentum → one
   }
 
 differenceTheorems :
   Difference.PeriodicDifferenceFourierTheorems differencePrimitives
 differenceTheorems = record
   { forwardDifferenceFourierSymbol =
-      λ axis field momentum → refl
+      λ axis fld momentum → refl
   ; backwardDifferenceFourierSymbol =
-      λ axis field momentum → refl
+      λ axis fld momentum → refl
   ; latticeGradientFourierSymbol =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; latticeDivergenceFourierSymbol =
-      λ field momentum → refl
+      λ fld momentum → refl
   ; latticeCurlFourierSymbol =
-      λ field pairIndex momentum → refl
+      λ fld pairIndex momentum → refl
   ; latticeCodifferentialFourierSymbol =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; gaugeFixingOperatorFourierSymbol =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; blockConstraintOperatorFourierSymbol =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; referenceHessianFourierSymbol =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; finiteFourierDiagonalizesScalarLaplacian =
-      λ field momentum → refl
+      λ fld momentum → refl
   ; finiteFourierDiagonalizesBondLaplacian =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; finiteFourierDiagonalizesGaugeFixingTerm =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; finiteFourierDiagonalizesBlockConstraintTerm =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   ; finiteFourierDiagonalizesReferenceLaplacian =
-      λ field axis momentum → refl
+      λ fld axis momentum → refl
   }
 
 orderedBound : Gap.OrderedAdditiveBound One

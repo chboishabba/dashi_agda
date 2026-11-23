@@ -72,147 +72,147 @@ replaceAxis axis coordinate site =
 edgeDifferenceField :
   SiteField Side13.side13 → Axis4 → CyclicIndex side12 →
   SiteField Side13.side13
-edgeDifferenceField field axis predecessor site =
-  field (replaceAxis axis (sucᵢ predecessor) site)
-  - field (replaceAxis axis (weakenIndex predecessor) site)
+edgeDifferenceField fld axis predecessor site =
+  fld (replaceAxis axis (sucᵢ predecessor) site)
+  - fld (replaceAxis axis (weakenIndex predecessor) site)
 
 axisAverageCommutesWithDistinctEdgeDifference :
-  ∀ averageAxis differenceAxis field predecessor site →
+  ∀ averageAxis differenceAxis fld predecessor site →
   averageAxis ≢ differenceAxis →
   edgeDifferenceField
-    (Average.axisAverage Side13.side13AverageData field averageAxis)
+    (Average.axisAverage Side13.side13AverageData fld averageAxis)
     differenceAxis predecessor site
   ≡ Average.axisAverage Side13.side13AverageData
-      (edgeDifferenceField field differenceAxis predecessor)
+      (edgeDifferenceField fld differenceAxis predecessor)
       averageAxis site
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ zeroᵢ field predecessor site distinct = emptyElim (distinct refl)
+  zeroᵢ zeroᵢ fld predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ zeroᵢ) field predecessor
+  zeroᵢ (sucᵢ zeroᵢ) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field predecessor
+  zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor
+  zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) zeroᵢ field predecessor
+  (sucᵢ zeroᵢ) zeroᵢ fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) field predecessor site distinct =
+  (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) fld predecessor site distinct =
   emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field predecessor
+  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor
+  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ field predecessor
+  (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) field predecessor
+  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) fld predecessor
   (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ))
-  field predecessor site distinct = emptyElim (distinct refl)
+  fld predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ)
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ))
-  field predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
+  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
   ℚRing.solve-∀
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field predecessor site distinct =
+  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor site distinct =
   emptyElim (distinct refl)
 
 edgeDifferenceAveragePointwise :
-  ∀ averageAxis differenceAxis field predecessor →
+  ∀ averageAxis differenceAxis fld predecessor →
   averageAxis ≢ differenceAxis →
   Norm.FieldEqual
     (edgeDifferenceField
-      (Average.axisAverage Side13.side13AverageData field averageAxis)
+      (Average.axisAverage Side13.side13AverageData fld averageAxis)
       differenceAxis predecessor)
     (Average.axisAverage Side13.side13AverageData
-      (edgeDifferenceField field differenceAxis predecessor) averageAxis)
-edgeDifferenceAveragePointwise averageAxis differenceAxis field predecessor distinct site =
+      (edgeDifferenceField fld differenceAxis predecessor) averageAxis)
+edgeDifferenceAveragePointwise averageAxis differenceAxis fld predecessor distinct site =
   axisAverageCommutesWithDistinctEdgeDifference
-    averageAxis differenceAxis field predecessor site distinct
+    averageAxis differenceAxis fld predecessor site distinct
 
 fixedPredecessorNormContraction :
-  ∀ averageAxis differenceAxis field predecessor →
+  ∀ averageAxis differenceAxis fld predecessor →
   averageAxis ≢ differenceAxis →
   Norm.globalNormSq
     (edgeDifferenceField
-      (Average.axisAverage Side13.side13AverageData field averageAxis)
+      (Average.axisAverage Side13.side13AverageData fld averageAxis)
       differenceAxis predecessor)
-  ≤ Norm.globalNormSq (edgeDifferenceField field differenceAxis predecessor)
-fixedPredecessorNormContraction averageAxis differenceAxis field predecessor distinct =
+  ≤ Norm.globalNormSq (edgeDifferenceField fld differenceAxis predecessor)
+fixedPredecessorNormContraction averageAxis differenceAxis fld predecessor distinct =
   subst
     (λ leftNorm →
-      leftNorm ≤ Norm.globalNormSq (edgeDifferenceField field differenceAxis predecessor))
+      leftNorm ≤ Norm.globalNormSq (edgeDifferenceField fld differenceAxis predecessor))
     (sym (Norm.globalNormRespectsPointwise
       (edgeDifferenceAveragePointwise
-        averageAxis differenceAxis field predecessor distinct)))
+        averageAxis differenceAxis fld predecessor distinct)))
     (Norm.axisAverageNormContraction Side13.side13AverageData
-      (edgeDifferenceField field differenceAxis predecessor) averageAxis)
+      (edgeDifferenceField fld differenceAxis predecessor) averageAxis)
 
 edgeDifferenceAtTransverse :
   SiteField Side13.side13 → Axis4 → CyclicIndex side12 →
   Triple (CyclicIndex Side13.side13) → ℚ
-edgeDifferenceAtTransverse field axis predecessor transverse =
-  field (insertAxis axis (sucᵢ predecessor) transverse)
-  - field (insertAxis axis (weakenIndex predecessor) transverse)
+edgeDifferenceAtTransverse fld axis predecessor transverse =
+  fld (insertAxis axis (sucᵢ predecessor) transverse)
+  - fld (insertAxis axis (weakenIndex predecessor) transverse)
 
 edgeDifferenceOnInsertedAxis :
-  ∀ field axis predecessor coordinate transverse →
-  edgeDifferenceField field axis predecessor
+  ∀ fld axis predecessor coordinate transverse →
+  edgeDifferenceField fld axis predecessor
     (insertAxis axis coordinate transverse)
-  ≡ edgeDifferenceAtTransverse field axis predecessor transverse
-edgeDifferenceOnInsertedAxis field axis predecessor coordinate transverse
+  ≡ edgeDifferenceAtTransverse fld axis predecessor transverse
+edgeDifferenceOnInsertedAxis fld axis predecessor coordinate transverse
   rewrite extractInsertTransverse axis coordinate transverse = refl
 
 axisPredecessorEnergy :
   Axis4 → SiteField Side13.side13 → CyclicIndex side12 → ℚ
-axisPredecessorEnergy axis field predecessor =
+axisPredecessorEnergy axis fld predecessor =
   sumRational (physicalTransverseCoordinates Side13.side13)
-    (λ transverse → sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+    (λ transverse → sq (edgeDifferenceAtTransverse fld axis predecessor transverse))
 
-fibreMultiplicityThirteen : ∀ field axis predecessor transverse →
+fibreMultiplicityThirteen : ∀ fld axis predecessor transverse →
   sumRational (allCyclicIndices Side13.side13)
     (λ coordinate →
-      sq (edgeDifferenceField field axis predecessor
+      sq (edgeDifferenceField fld axis predecessor
         (insertAxis axis coordinate transverse)))
-  ≡ thirteenℚ * sq (edgeDifferenceAtTransverse field axis predecessor transverse)
-fibreMultiplicityThirteen field axis predecessor transverse =
+  ≡ thirteenℚ * sq (edgeDifferenceAtTransverse fld axis predecessor transverse)
+fibreMultiplicityThirteen fld axis predecessor transverse =
   trans
     (sumRationalCong
       (allCyclicIndices Side13.side13)
       (λ coordinate →
-        sq (edgeDifferenceField field axis predecessor
+        sq (edgeDifferenceField fld axis predecessor
           (insertAxis axis coordinate transverse)))
       (λ coordinate →
-        sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+        sq (edgeDifferenceAtTransverse fld axis predecessor transverse))
       (λ coordinate →
         cong sq (edgeDifferenceOnInsertedAxis
-          field axis predecessor coordinate transverse)))
+          fld axis predecessor coordinate transverse)))
     (trans
       (sumRationalConstant
         (allCyclicIndices Side13.side13)
-        (sq (edgeDifferenceAtTransverse field axis predecessor transverse)))
-      (lengthThirteen field axis predecessor transverse))
+        (sq (edgeDifferenceAtTransverse fld axis predecessor transverse)))
+      (lengthThirteen fld axis predecessor transverse))
   where
   lengthThirteen : ∀ current currentAxis currentPredecessor currentTransverse →
     natAsRational (length (allCyclicIndices Side13.side13))
@@ -223,46 +223,46 @@ fibreMultiplicityThirteen field axis predecessor transverse =
   lengthThirteen current currentAxis currentPredecessor currentTransverse
     rewrite lengthAllCyclicIndices Side13.side13 = ℚRing.solve-∀
 
-globalEdgeDifferenceNormThirteenfold : ∀ field axis predecessor →
-  Norm.globalNormSq (edgeDifferenceField field axis predecessor)
-  ≡ thirteenℚ * axisPredecessorEnergy axis field predecessor
-globalEdgeDifferenceNormThirteenfold field axis predecessor =
+globalEdgeDifferenceNormThirteenfold : ∀ fld axis predecessor →
+  Norm.globalNormSq (edgeDifferenceField fld axis predecessor)
+  ≡ thirteenℚ * axisPredecessorEnergy axis fld predecessor
+globalEdgeDifferenceNormThirteenfold fld axis predecessor =
   trans
     (sym (axisPartitionSumMatchesGlobal axis
-      (λ site → sq (edgeDifferenceField field axis predecessor site))))
+      (λ site → sq (edgeDifferenceField fld axis predecessor site))))
     (trans
       (sumRationalCong
         (physicalTransverseCoordinates Side13.side13)
         (λ transverse →
           sumRational (allCyclicIndices Side13.side13)
             (λ coordinate →
-              sq (edgeDifferenceField field axis predecessor
+              sq (edgeDifferenceField fld axis predecessor
                 (insertAxis axis coordinate transverse))))
         (λ transverse →
           thirteenℚ * sq (edgeDifferenceAtTransverse
-            field axis predecessor transverse))
-        (fibreMultiplicityThirteen field axis predecessor))
+            fld axis predecessor transverse))
+        (fibreMultiplicityThirteen fld axis predecessor))
       (sumRationalScale
         thirteenℚ
         (physicalTransverseCoordinates Side13.side13)
         (λ transverse →
-          sq (edgeDifferenceAtTransverse field axis predecessor transverse))))
+          sq (edgeDifferenceAtTransverse fld axis predecessor transverse))))
 
 axisDirectionalEnergy : Axis4 → SiteField Side13.side13 → ℚ
-axisDirectionalEnergy axis field =
+axisDirectionalEnergy axis fld =
   sumRational (physicalTransverseCoordinates Side13.side13)
-    (physicalFibreEdgeEnergy field axis)
+    (physicalFibreEdgeEnergy fld axis)
 
-axisDirectionalEnergyAsPredecessorSum : ∀ axis field →
-  axisDirectionalEnergy axis field
+axisDirectionalEnergyAsPredecessorSum : ∀ axis fld →
+  axisDirectionalEnergy axis fld
   ≡ sumRational (allCyclicIndices side12)
-      (axisPredecessorEnergy axis field)
-axisDirectionalEnergyAsPredecessorSum axis field =
+      (axisPredecessorEnergy axis fld)
+axisDirectionalEnergyAsPredecessorSum axis fld =
   sumSwap
     (physicalTransverseCoordinates Side13.side13)
     (allCyclicIndices side12)
     (λ transverse predecessor →
-      sq (edgeDifferenceAtTransverse field axis predecessor transverse))
+      sq (edgeDifferenceAtTransverse fld axis predecessor transverse))
 
 -- Compatibility name retained for downstream users; the aggregate inequality
 -- is supplied by the canonical relation-preserving finite-sum fibre observer.
@@ -272,37 +272,37 @@ sumRationalMonotone :
   sumRational values left ≤ sumRational values right
 sumRationalMonotone = SumLift.sumRationalMonotoneViaFibre
 
-predecessorNormSumExact : ∀ field axis →
+predecessorNormSumExact : ∀ fld axis →
   sumRational (allCyclicIndices side12)
-    (λ predecessor → Norm.globalNormSq (edgeDifferenceField field axis predecessor))
-  ≡ thirteenℚ * axisDirectionalEnergy axis field
-predecessorNormSumExact field axis =
+    (λ predecessor → Norm.globalNormSq (edgeDifferenceField fld axis predecessor))
+  ≡ thirteenℚ * axisDirectionalEnergy axis fld
+predecessorNormSumExact fld axis =
   trans
     (sumRationalCong
       (allCyclicIndices side12)
-      (λ predecessor → Norm.globalNormSq (edgeDifferenceField field axis predecessor))
-      (λ predecessor → thirteenℚ * axisPredecessorEnergy axis field predecessor)
-      (globalEdgeDifferenceNormThirteenfold field axis))
+      (λ predecessor → Norm.globalNormSq (edgeDifferenceField fld axis predecessor))
+      (λ predecessor → thirteenℚ * axisPredecessorEnergy axis fld predecessor)
+      (globalEdgeDifferenceNormThirteenfold fld axis))
     (trans
       (sumRationalScale
         thirteenℚ
         (allCyclicIndices side12)
-        (axisPredecessorEnergy axis field))
+        (axisPredecessorEnergy axis fld))
       (cong (thirteenℚ *_)
-        (sym (axisDirectionalEnergyAsPredecessorSum axis field))))
+        (sym (axisDirectionalEnergyAsPredecessorSum axis fld))))
 
 thirteenTimesDirectionalEnergyContraction :
-  ∀ averageAxis differenceAxis field →
+  ∀ averageAxis differenceAxis fld →
   averageAxis ≢ differenceAxis →
   thirteenℚ * axisDirectionalEnergy differenceAxis
-    (Average.axisAverage Side13.side13AverageData field averageAxis)
-  ≤ thirteenℚ * axisDirectionalEnergy differenceAxis field
-thirteenTimesDirectionalEnergyContraction averageAxis differenceAxis field distinct =
+    (Average.axisAverage Side13.side13AverageData fld averageAxis)
+  ≤ thirteenℚ * axisDirectionalEnergy differenceAxis fld
+thirteenTimesDirectionalEnergyContraction averageAxis differenceAxis fld distinct =
   subst
     (λ leftValue →
-      leftValue ≤ thirteenℚ * axisDirectionalEnergy differenceAxis field)
+      leftValue ≤ thirteenℚ * axisDirectionalEnergy differenceAxis fld)
     (predecessorNormSumExact
-      (Average.axisAverage Side13.side13AverageData field averageAxis)
+      (Average.axisAverage Side13.side13AverageData fld averageAxis)
       differenceAxis)
     (subst
       (λ rightValue →
@@ -310,33 +310,33 @@ thirteenTimesDirectionalEnergyContraction averageAxis differenceAxis field disti
           (λ predecessor →
             Norm.globalNormSq
               (edgeDifferenceField
-                (Average.axisAverage Side13.side13AverageData field averageAxis)
+                (Average.axisAverage Side13.side13AverageData fld averageAxis)
                 differenceAxis predecessor))
         ≤ rightValue)
-      (predecessorNormSumExact field differenceAxis)
+      (predecessorNormSumExact fld differenceAxis)
       (sumRationalMonotone
         (allCyclicIndices side12)
         (λ predecessor →
           Norm.globalNormSq
             (edgeDifferenceField
-              (Average.axisAverage Side13.side13AverageData field averageAxis)
+              (Average.axisAverage Side13.side13AverageData fld averageAxis)
               differenceAxis predecessor))
         (λ predecessor →
-          Norm.globalNormSq (edgeDifferenceField field differenceAxis predecessor))
+          Norm.globalNormSq (edgeDifferenceField fld differenceAxis predecessor))
         (λ predecessor →
           fixedPredecessorNormContraction
-            averageAxis differenceAxis field predecessor distinct)))
+            averageAxis differenceAxis fld predecessor distinct)))
 
 distinctAxisDirectionalEnergyContraction :
-  ∀ averageAxis differenceAxis field →
+  ∀ averageAxis differenceAxis fld →
   averageAxis ≢ differenceAxis →
   axisDirectionalEnergy differenceAxis
-    (Average.axisAverage Side13.side13AverageData field averageAxis)
-  ≤ axisDirectionalEnergy differenceAxis field
-distinctAxisDirectionalEnergyContraction averageAxis differenceAxis field distinct =
+    (Average.axisAverage Side13.side13AverageData fld averageAxis)
+  ≤ axisDirectionalEnergy differenceAxis fld
+distinctAxisDirectionalEnergyContraction averageAxis differenceAxis fld distinct =
   ℚP.*-cancelˡ-≤-pos thirteenℚ
     (thirteenTimesDirectionalEnergyContraction
-      averageAxis differenceAxis field distinct)
+      averageAxis differenceAxis fld distinct)
 
 path13DistinctAxisDirectionalEnergyContractionLevel : ProofLevel
 path13DistinctAxisDirectionalEnergyContractionLevel = machineChecked
