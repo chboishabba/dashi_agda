@@ -1,4 +1,10 @@
 
+## 23 November 2026 — precise NS source-geometry correction and C1/C2 open
+
+[NS physical midpoint/rate-Cauchy exact radical and follow-up theorem obligations](NSRateResolvedCauchyRadicalOriginalSource20261123.md), with locally independently executed standard Python Fraction proof controls: **37/37 actual output-cutoff fibres, 26,934** incidence/midpoint/parity checks; exact 1D rate-generating polynomial, at most 3C²+1 rates, and exact positive Cauchy rank R with N−R radical. Prior 44/44 arithmetic fibres admitted seven forbidden k-outside-C outputs: do not treat them as original R568 source acceptance. Original Agda source R541/R567/R568/R596/R624/R628/R634/R652/R653/R687–R689 is already merged; preserve all owners. Full Galerkin D/M source attachment, genuine signed C1 upper and C2 lower, R565 scalar FTC and continuum regularity remain OPEN; no Agda/Lean/CI and no new Clay proof. All remaining BSD, Hodge, Karp, RH and YM gates remain unchanged.
+
+
+
 ## 23 November 2026 — genuine R568 signed C1/C2 source target and rate-resolved algebra
 
 [Source-aligned R568 exact rate-bucket and C1/C2 cutset](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md), [executed original cube + rational vector proxy checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py), blob a76e8847a61521a4c4cb88fcc861ebb4a92fb85f: 64/64 exact signed Cauchy row/grouped identities; positive kernel does NOT constrain sign of mixed unlifted-to-rate-lifted pairing (explicit 13/17 rates F=46/16575>0, L=−1/5<0). Proxy rational doubleForcing/doubleCell are NOT actually constructed from one physical Galerkin state. Existing source R596/R624/R628/R634/R687–R689 remain the prior original owners. R652/R653 already identify **C1/C2 as one same-trajectory sandwich** 2S_delta+G+H <= 4F <= B; **both sides OPEN**, with R565 FTC and 3D PDE endpoint separate. R236 C^5 spectator is a different signed instantaneous covariance; no R236/R568 interchange. Hodge/BSD/Karp/RH/YM original remaining endpoints unchanged. No kernel, no CI, 0/6 Clay prizes.
