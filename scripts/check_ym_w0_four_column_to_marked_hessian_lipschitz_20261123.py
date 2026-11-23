@@ -28,6 +28,7 @@ checks['symbolic']+=1
 assert S.simplify((M+Dp)/(K+Delta)**2-M/K**2-(Dp/(K+Delta)**2+M*(1/(K+Delta)**2-1/K**2)))==0
 checks['symbolic']+=1
 
+
 def evalK(v,x,y):
     a,b,c,d=v
     return a+x*b+y*c+x*y*d
