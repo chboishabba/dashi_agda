@@ -1,4 +1,7 @@
 module DASHI.Unified.Relate369HyperfabricPantsTOEExact where
+-- RH source-aligned coefficient gluing: positive normalization only, not RH/Monster promotion.
+import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
+
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -218,3 +221,19 @@ canonicalRelate369HyperfabricPantsTOEReceipt :
 canonicalRelate369HyperfabricPantsTOEReceipt =
   relate369-hyperfabric-pants-toe-receipt
     true false false false true false false false
+
+------------------------------------------------------------------------
+-- Original RH signed quartic four-window 128 normalization BIDI receipt.
+-- This reuses seven labelled coefficient factors, original six face labels,
+-- exact corner x residual reconstruction, and sheaf-compatible gluing.
+-- No actual analytic W/zero Monster group-action intertwiner is inferred.
+------------------------------------------------------------------------
+
+toeRH128Normalization :
+  RH128.coefficient RH128.allOnes ≡ 128
+toeRH128Normalization = RH128.normalizationFull
+
+toeRH128FineToCoarseBack :
+  (state : RH128.BinarySeven) →
+  RH128.joinCornerResidual (RH128.splitCornerResidual state) ≡ state
+toeRH128FineToCoarseBack = RH128.joinAfterSplit
