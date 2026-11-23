@@ -48,7 +48,7 @@ monsterAtlasClassNames := ClassNames(monster,"ATLAS");
 r := (1,2,3,4);
 s := (2,4);
 d4Group := Group([r,s]);
-if Size(d4Group) <> 8 or not not IsAbelian(d4Group) then
+if Size(d4Group) <> 8 or IsAbelian(d4Group) then
   Error("failed to construct the canonical order-eight dihedral group");
 fi;
 d4 := CharacterTable(d4Group);
