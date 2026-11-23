@@ -61,6 +61,8 @@
   "CI": false,
   "Agda_kernel": false,
   "checkpoint_selected_values_sha256": "59827154759aac9a0fa6e475a1cf214ec896e935e3a9a914e3e262667c45931d",
-  "local_reconstructed_checkpoint_git_blob": "1c5f36d554e915dc90fef5177775f62ee46b842b",
-  "original_checkpoint_raw_byte_replay_in_current_local_execution": false
+  "local_reconstructed_checkpoint_git_blob": "74c1a94b30c44a772016c93b39558bc446359832",
+  "original_checkpoint_raw_byte_replay_in_current_local_execution": true,
+  "raw_original_checkpoint_git_blob_verified": true,
+  "checkpoint_original_git_blob": "74c1a94b30c44a772016c93b39558bc446359832"
 }
