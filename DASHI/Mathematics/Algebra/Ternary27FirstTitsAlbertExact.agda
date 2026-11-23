@@ -11,22 +11,10 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 ------------------------------------------------------------------------
 -- TERNARY-27 -> FIRST-TITS / TRINIFICATION BASIS
 --
--- The older 27-point carrier is not identified with the underlying set of a
--- 27-dimensional Albert vector space.  Instead it is used as the exact basis
--- index set of the 27-dimensional function/vector carrier.  The three ternary
--- coordinates are read as
---
---   (sector,row,column) in 3 x 3 x 3,
---
--- i.e. as matrix units of M3 + M3 + M3.  This is the coordinate shape used by
--- the first-Tits/trinification presentation tested by the local exact Python
--- receipt.  The full vector carrier is ternary-valued functions on those 27
--- basis slots and therefore has the repository's independent 3^27 function-
--- space shape; no 27-point = 27-dimensional-set collapse is made here.
---
--- Characteristic three is deliberately kept visible: passing Jordan identities
--- over F3 does not by itself prove simplicity or the exact classical Albert/F4
--- recognition theorem.  That promotion remains a separate same-object gate.
+-- Synchronized from the exceptional/trinification donor branch.  The older
+-- 27-point carrier is used as the exact basis index set of M3 + M3 + M3:
+-- (sector,row,column) in 3 x 3 x 3.  No point-set/vector-space collapse is
+-- made; the full ternary vector carrier is the function space on the 27 slots.
 ------------------------------------------------------------------------
 
 data MatrixSector3 : Set where
@@ -87,10 +75,6 @@ basisStateCountIs27 = refl
 Ternary27FunctionVector : Set
 Ternary27FunctionVector = Geometry.Ternary27Point → SSP.SSPTrit
 
-------------------------------------------------------------------------
--- Exact algebra interface.
-------------------------------------------------------------------------
-
 record FirstTitsAlbertStructure : Set₁ where
   field
     Carrier : Set
@@ -131,23 +115,4 @@ canonicalTernary27FirstTitsLocalReceipt =
     true true true true true
     414 291 24 true
     false false false false
-    "The literal Ternary27Point carrier is now an exact basis-index set for the 27-dimensional M3^3 first-Tits/trinification coordinate space. Local exact F3 computation pays the Jordan/cubic diagnostics. Characteristic-three simplicity, same-kernel Agda product/intertwiner, and F4=Aut(J) remain separate obligations."
-
-------------------------------------------------------------------------
--- Non-promotion firewall.
-------------------------------------------------------------------------
-
-data BasisIndexingCreatesAlbertTheorem : Set where
-
-data LocalPythonCreatesAgdaKernelTheorem : Set where
-
-data JordanIdentityCreatesAlbertSimplicity : Set where
-
-basisIndexingDoesNotCreateAlbertTheorem : BasisIndexingCreatesAlbertTheorem → {A : Set} → A
-basisIndexingDoesNotCreateAlbertTheorem ()
-
-localPythonDoesNotCreateAgdaKernelTheorem : LocalPythonCreatesAgdaKernelTheorem → {A : Set} → A
-localPythonDoesNotCreateAgdaKernelTheorem ()
-
-jordanIdentityDoesNotCreateAlbertSimplicity : JordanIdentityCreatesAlbertSimplicity → {A : Set} → A
-jordanIdentityDoesNotCreateAlbertSimplicity ()
+    "The literal Ternary27Point carrier is an exact basis-index set for the 27-dimensional M3^3 first-Tits/trinification coordinate space. Local F3 computation pays Jordan/cubic diagnostics; characteristic-three simplicity, same-kernel product/intertwiner, and F4 recognition remain separate obligations."
