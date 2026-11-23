@@ -191,6 +191,23 @@ module _
     cong actualOriginalWilsonWeight
       (sourceIndexedLinkRecoversOriginal t k original)
 
+  -- Partition Z is transported as its own physical source
+  -- coefficient, not tacitly declared equal to a second measure.
+  originalIndexedWilsonPartition :
+    ∀ {Time : Set} → Time → Nat → ℝ
+  originalIndexedWilsonPartition t k =
+    Haar.productIntegral source (originalIndexedWilsonWeight t k)
+
+  originalIndexedWilsonPartitionIsOriginal :
+    ∀ {Time : Set} (t : Time) k →
+    originalIndexedWilsonPartition t k
+    ≡ Haar.productIntegral source actualOriginalWilsonWeight
+  originalIndexedWilsonPartitionIsOriginal t k =
+    Original.productIntegralCongruent source
+      (originalIndexedWilsonWeight t k)
+      actualOriginalWilsonWeight
+      (originalWilsonActionDensityIndexedEqualsOriginal t k)
+
   -- A single actual Wilson Haar density and a single original source
   -- partition for all fine-field 1,F,G,F*G. Nothing is integrated
   -- independently or recast as a new hyperfabric probability space.
@@ -271,7 +288,7 @@ module _
       (mark : OriginalVector → ℝ) →
     divide
       (originalIndexedWilsonMarkedNumerator t k mark)
-      (Haar.productIntegral source actualOriginalWilsonWeight)
+      (originalIndexedWilsonPartition t k)
     ≡
     Mark.sortedOriginalMarkedNormalized
       theory traceData exponential beta source divide
@@ -279,11 +296,9 @@ module _
   originalIndexedWilsonNormalizedEqualsOriginalF19
     t k divide mark =
     trans
-      (cong
-        (λ numerator →
-          divide numerator
-            (Haar.productIntegral source actualOriginalWilsonWeight))
-        (originalIndexedWilsonNumeratorIsOriginal t k mark))
+      (cong₂ divide
+        (originalIndexedWilsonNumeratorIsOriginal t k mark)
+        (originalIndexedWilsonPartitionIsOriginal t k))
       (Mark.originalCanonicalMarkedNormalizedIsSorted
         theory traceData exponential beta source divide
         (originalSortedPullbackMark mark))
