@@ -4,13 +4,13 @@
 # source script (SHA-pinned original ATLAS matrices).
 # No full matrix group Size or SylowSubgroup is called.
 set -euo pipefail
-cd "$(dirname "$0")/.."
 if [[ $# -ne 1 ]]; then
   echo "usage: $0 <#1098-original-ATLAS-rotation-2B-receipt.json>" >&2
   exit 2
 fi
 test -s "$1" || { echo "missing original #1098 word receipt" >&2; exit 2; }
 WORD_RECEIPT="$(realpath "$1")"
+cd "$(dirname "$0")/.."
 command -v gap >/dev/null || { echo "GAP + CTblLib required" >&2; exit 2; }
 mkdir -p build
 python3 -m py_compile scripts/monster3b_atlas_d4_word_to_4class_source_weld.py
