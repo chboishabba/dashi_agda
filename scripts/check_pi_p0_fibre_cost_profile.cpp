@@ -14,11 +14,41 @@
 #include <sys/resource.h>
 #include <vector>
 #include <cstdint>
+#include <cstdlib>
 #include <limits>
 using namespace std;
 using Z=mpz_class;
 using Clock=chrono::steady_clock;
-const Z C=Z(640320)*640320*640320,A=13591409,B=545140134;
+// Lazy GMP constants guarantee memory hooks are installed before GMP allocates.
+// Call mp_set_memory_functions in main before any Z has been constructed.
+static const Z& getC(){static const Z z=Z(640320)*640320*640320;return z;}
+static const Z& getA(){static const Z z=13591409;return z;}
+static const Z& getB(){static const Z z=545140134;return z;}
+#define C getC()
+#define A getA()
+#define B getB()
+struct GMPAllocation{
+ size_t live=0,peak=0,allocCalls=0,reallocCalls=0,freeCalls=0;
+ size_t requestedBytes=0,reallocatedOldBytes=0;
+};
+static GMPAllocation GA;
+static void* allocHook(size_t n){
+ void*p=std::malloc(n);if(!p)std::abort();
+ GA.live+=n;GA.peak=max(GA.peak,GA.live);
+ ++GA.allocCalls;GA.requestedBytes+=n;return p;
+}
+static void* reallocHook(void*p,size_t oldN,size_t n){
+ void*q=std::realloc(p,n);if(!q&&n)std::abort();
+ if(n>=oldN)GA.live+=n-oldN;else GA.live-=oldN-n;
+ GA.peak=max(GA.peak,GA.live);++GA.reallocCalls;
+ GA.requestedBytes+=n;GA.reallocatedOldBytes+=oldN;
+ return q;
+}
+static void freeHook(void*p,size_t n){
+ if(n>GA.live)std::abort();
+ GA.live-=n;++GA.freeCalls;std::free(p);
+}
+
 struct Triple{Z p,q,t;};
 // Explicit carrier-residency model, not measured GMP heap high-water.
 // mpz allocated limb capacity is read as a count, not a promise of RSS parity.
@@ -92,6 +122,7 @@ Receipt compute(unsigned digits,bool inplace){
  }
 }
 int main(int argc,char**argv){
+ mp_set_memory_functions(allocHook,reallocHook,freeHook);
  if(argc<3){cerr<<"usage: pi_codec_memory decimal_digits baseline|inplace [repetitions]\n";return 2;}
  unsigned digits=stoul(argv[1]);string mode=argv[2];bool inplace=mode=="inplace";if(!inplace&&mode!="baseline")return 2;
  unsigned reps=argc>3?stoul(argv[3]):3;vector<double> runs;string expected;
@@ -104,6 +135,10 @@ int main(int argc,char**argv){
    <<" max_depth="<<FC.maxSplitLeafDepth<<" peak_explicit_carrier_capacity_bytes="<<FC.maxFrontierCapacityBytes
    <<" final_carrier_capacity_bytes="<<FC.terminalCarrierBytes
    <<" endpoint_explicit_capacity_bytes="<<FC.endpointCapacityBytes
+   <<" gmp_peak_live_bytes="<<GA.peak<<" gmp_live_bytes_after_compute="<<GA.live
+   <<" gmp_alloc_calls="<<GA.allocCalls<<" gmp_realloc_calls="<<GA.reallocCalls
+   <<" gmp_free_calls="<<GA.freeCalls<<" gmp_total_requested_bytes="<<GA.requestedBytes
+   <<" gmp_reallocated_old_bytes="<<GA.reallocatedOldBytes
    <<" output_hash="<<result.hash
    <<" measured_GMP_total_live_heap=false model_is_upper_bound=false"<<"\n";
  cout<<"RUN "<<mode<<" "<<digits<<" "<<i<<" "<<fixed<<setprecision(4)<<result.ms<<" bits="<<result.bits<<" hash="<<result.hash<<"\n";}
