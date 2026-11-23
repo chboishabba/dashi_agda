@@ -94,7 +94,7 @@ def check(rotation_class=None):
             predicted_selected_phase_trace=compatible[0]['predicted_selected_phase_trace']))
     assert {(p["source_rotation_class"],p["source_z_times_rotation_class"],
              p["source_z_times_halfturn_class"],p["predicted_selected_phase_trace"])
-            for p in atlas_class_sieve()}=={
+            for p in all_sieved}=={
              ("4A","12B","6E",90),("4C","12H","6E",90),
              ("4C","12I","6E",90),("4D","12F","6B",66)}
     return {'status':'PASS_CONDITIONAL_MATHEMATICAL_GATE',
