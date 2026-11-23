@@ -349,6 +349,14 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonN3NativeC3DensityBIDIExact as
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact as OriginalF19FineFourMoments
 import DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact as OriginalF19ActualQFunctionalT
 
+-- Original P0.W3 1528-plaquette source-coupling return requires the 4
+-- additional ORIGINAL F19 fine marked coefficients H/FH/GH/FGH.
+-- This reuses the EXISTING W0 candidate physical-fine conditional T and
+-- actual 896 spectators; does not assert CMP119/122 selected physical T,
+-- absolute W3, interacting OS H or Agda kernel acceptance.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonW3ThirdMomentF19W0BIDIExact as OriginalW3ThirdFineMoments
+
+
 -- YM P0 / RH #1533 Singer k-index × original 369 zero-branch:
 -- all 1024 actual Wilson links, original 1536 plaquettes, original
 -- one-source F19 marked 1/F/G/FG and one source Z, with exact inverse
