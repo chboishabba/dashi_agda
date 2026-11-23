@@ -1,3 +1,78 @@
+## 23 November 2026 — major completion: ORIGINAL P3^9/C3^9 same time operator, signed 512-sector, and true YM gauge-fibre repair
+
+**Exact LOCAL tests independently executed:** `scripts/check_hyperfabric_original_stroboscopic_P3_C3_RH_YM_NS_20261123.py` (RH commit `af959127`, augmented source-signed binary no-go `21023a1f`), `scripts/check_hyperfabric_9d_source_walk_signed_corner_fourier_20261123.py` (commit `460544ef`), `scripts/check_ym_r445_hyperfabric_signed_midpoint_gauge_fibre_20261123.py` (commit `2ec179ac`). The expanded local source-equivalent scripts were executed with exact SymPy/rational arithmetic; GitHub script blobs read back but not independently replayed byte-for-byte; NO Agda/Lean compiler or CI authority.
+
+### P3 versus C3: an exact stroboscopic original-operator equality, not a graph identification
+
+The ORIGINAL source `scripts/check_hyperfabric_path27_quantum_walk.py` gives the rational `P3` walk at t=pi:
+```text
+L_P3 = [[1,-1,0],[-1,2,-1],[0,-1,1]]
+L_C3 = 3 I - J = [[2,-1,-1],[-1,2,-1],[-1,-1,2]]
+B = (2/3) J - I.
+spectra: spec(L_P3)={0,1,3}, spec(L_C3)={0,3,3}.
+U_P3(pi)=exp(-i pi L_P3)=B=exp(-i pi L_C3)=U_C3(pi).
+```
+The zero-projector in both graphs is J/3 and all nonzero eigenvalues are ODD, hence both exponential values have eigenvalues +1 on constant and -1 on its 2D orthocomplement. The matrices L_P3 and L_C3 are NOT equal; the equality holds for t∈pi·Z (and in particular t=pi), but NOT all t. This is a genuinely nontrivial **same-operator** time-source result on the original THREE trits, in contrast to earlier source-similar counts or transported charts.
+
+Tensor on the already-constructed original `TernaryHyperformalPoint=P3^9` and original `C3^9` periodic carrier:
+```text
+U_P3^9(pi) = B tensor^9 = U_C3^9(pi),
+dim=3^9=19683.
+B=(2/3)*(I+T+T²)-I for original C3 cyclic shift T.
+periodic Fourier mode q∈F3^9 eigenphase m(q)=(-1)^support(q).
+```
+This gives a real source-defined time-step on FULL 9D field amplitudes, without forming a 19683² dense matrix; its exact tensor factorization proves orthogonality/reversibility and source matrix equality. It DOES NOT assert physical graph adjacency evolves; the two different fixed graph Laplacians agree only after time-sampling.
+
+### The RH finite biharmonic group-ring operator genuinely acts on the original C3
+
+Evaluate the already sourced RH atomic high-pole Laurent polynomial `p(T)=-(20/351)(T+T^-1-2I)^2` on the ORIGINAL period-three C3 translation `T`. Exact 3×3 matrices:
+```text
+p(T)=-(20/39)*(I-J/3).
+spectrum: q=0 -> 0; q=±1 -> -20/39.
+[p(T),B]=0.
+```
+The native sign reflection R of -1↔+1 satisfies `RTR=T^-1`, so `Rp(T)=p(T)R`, and also `RB=BR`. This is an exact Fourier/intertwiner and a legitimate RH B_h polynomial **evaluation on a different finite representation**, not the claim that the original RH `q=4` physical angular character equals the C3 nontrivial character or an actual ζ zero.
+
+### TRUE 512-signed dual chart, across ALL 26 Singer stages
+
+The original 9D position corners `{±1}^9` and periodic C3^9 **full-support Fourier character** labels `{±1}^9` are the SAME 512 source addresses at k=0. At index k, transport position via (G^k) in all three original voxels, frequency via dual `G^{-kT}`. Then
+```text
+source corner c (512 choices)
+ ↦ p_k=G^k c                (signed position)
+ ↦ q_k=G^(-kT) c            (signed frequency)
+pairing q_k·p_k=c·c (mod3), source reconstructs c in BOTH ways.
+```
+Exact local enumeration checks ALL 512 corners at each of ALL 26 k charts, including BOTH inverse maps, step-naturality and source sign. A transported signed corner may have a zero current-coordinate even though it had NO zero in its origin chart: the number of images containing at least one zero is the precise 26-stage sequence `(0,512,504,504,448,504,504,504,504,448,504,504,512,0,512,504,504,448,504,504,504,504,448,504,504,512)`. Hence unindexed binary support is NOT a source-invariant observer of the reference sign stratum. The original U9(pi) source amplitude `<c|U9(pi)|0>= (2/3)^9=512/19683` on EVERY original signed corner (and `<0|U|0>=-1/19683`). The 512 corner count and 512 maximal Fourier shell count share the actual original signed T9 point/character indexing, and the same B tensor operator, **not a Monster/RH physical identification**.
+
+**Binary-vs-balanced-ternary dynamic consumer:** at k=0 the U9(pi) multiplier factors through binary support `1_{q_i != 0}`: `(-1)^support`. After a non-diagonal Singer chart, this binary support is NOT sufficient: `q=(1,1,0)`, `q'=(1,-1,0)` have identical binary support and equal k0 eigenphase +1, but `G^T q=(-1,1,-1)`, `G^T q'=(-1,0,1)` modulo3, giving k1 eigenphases -1 and +1. Original signed ternary q PLUS typed k remain sufficient. This is an actual dynamical `FactorsThrough` witness; not-not-true versus false and positional-grammar distinctions from original Lacan/Irigaray have different semantics and must not be inferred merely from trit labels.
+
+### YM: why the midpoint RESIDUAL is REQUIRED to preserve original SU(N) local gauge data
+
+Exact source `DASHI/Physics/YangMills/YMClayNativeSideFourTwoLinkPairSameObjectExact.agda` ALREADY proves `U_block(c,d)=U_first(2c,d)*U_second(2c+e_d,d)` for the original SUN source and even identifies the same selected original weighted Gibbs block map. Our new signed-P3^9 two-step incidence embedding maps 64 original coarse links to 128 ordered half-edges BUT the 64 distinct original ODD fine sites project to only **32** signed ternary-zero intermediate coordinates. Two independent odd residues `1` and `3` per projected midpoint are not equal source sites.
+
+If original fine local gauge transformations at these two odd sites differ, **no field defined solely on projected signed T9 midpoint vertices can carry both**; this is the user-requested `ConsumerNonDescentWitness` pattern. The repair is a fibre-labelled lifted vertex `(signed-midpoint,odd-source-branch)`, with both original source site identity and orientation/winding retained. The real source selected fine link labels are then 128 distinct oriented lifted edges, preserving inverse and path incidence.
+
+Exact 2×2 noncommuting SU2 subgroup Q8 locally tested all 64 original paths, with first/second link order (U_1U_2\ne U_2U_1). For ANY original local fine-site gauge field h (finite test chooses different h at odd 1/3), the ordered product transports by actual nonabelian gauge covariance:
+```text
+(h_x U1 h_m^-1)(h_m U2 h_y^-1)=h_x (U1 U2) h_y^-1.
+```
+All 32 source-midpoint collision pairs explicitly differ in gauge value, so factorization through unsigned/unfibrated midpoint FAILS; the branch-tagged lifted graph is the correct finite source graph. This is a **gauge-valued finite Wilson path implementation**, not just scalar incidence geometry; the ORIGINAL Agda theorem owns full SU(N) ordered path equality. UNPAID physical global steps: actual 1024-link Haar/Fubini/spectator disintegration, gauge field on entire native 9D hyperfabric with consistent plaquettes/curvature, actual weighted Wilson transfer/OS and continuum.
+
+### Consumer sufficiency exact distinction, original source
+
+Extended `DASHI/Analysis/RHHyperfabricNSDyadicSelectedConsumerNonDescentExact.agda`: on original `Round529.observePeriodicMode529`, `stroboscopicPhaseFactorsThroughSign` and `stroboscopicPhaseConsumerSufficient` are source-written **positive** selected-consumer theorems for original U(pi) character support parity. The existing same-module source-selected modes `k=8` and `k=9` prove **negative** `FactorsThrough` for original dyadic hat K=3 via 1 versus 7/8, and a selected sufficiency repair `(sign,hat)`. Its original field and convolution require signed integer magnitude; another negative control `k=7`, `k'=10` shares sign AND hat=3/4 but differs upon adding -7. An explicitly reversible binary BIT encoding of trits is valid if it retains BOTH support and signed residual; a binary **projection** that forgets direction/sign is not.
+
+### Next physical same-source welds
+
+1. Source-defined physical time evolution on FULL nine-coordinate field: selected U9(pi) is now **paid exactly** as a finite stroboscopic model. For full real time and changing graph, must construct literal source graph dynamics; no chart relabel can do this. Prove/reject nonzero original k/time defect with those actual source laws.
+2. YM P0: consume ORIGINAL `originalSUNBlockIsLiteralTwoLinkProduct` and `actualSelectedWeightedGibbsBlockIsNativePair` through the lifted 32×2 midpoint **gauge fibre**, then all 1024 actual links, 896 spectators and original Wilson plaquette/Haar operator. The ordered selected 2-link group law is ALREADY SOURCE-PROVED, stop asking for it again.
+3. NS: use original Round530 sign quotient only for consumers satisfying `FactorsThrough`; for full R406/triadic dynamics retain signed integer Fourier magnitudes, k/time, convolution and measures.
+4. RH: the finite operator polynomial and U9 pi compatibility are genuine, but one must source its action on original ζ-zero measure, smooth µ, `FarExact`, strict terminal and original `q=4` analytic witness. No Fourier-character count implies an actual zeta zero.
+
+All source README and roadmaps updated separately; no claimed RH, NS or YM Clay closure, no Agda/Lean kernel receipt or CI.
+
+---
+
 # RH/NS/YM × original hyperfabric: temporal source, consumer factorisation and directed YM subdivision (23 November 2026)
 
 ## Source ownership / executable receipts
