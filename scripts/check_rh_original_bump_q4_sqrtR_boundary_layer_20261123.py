@@ -44,7 +44,9 @@ hi=s.simplify(lead.subs({m:1,x:2}))
 assert lo==Q(5,26)-5*s.pi**4/22464
 assert s.simplify(hi-Q(20,351)*(81-s.pi**4))==0
 assert Q(5,26)-5*Q(22,7)**4/22464>0
-assert 6/Q(3)>2 or 6/Q(3)==2
+assert (Q(20,351)*(81-s.pi**4))<0 and 3<s.pi
+assert 6/s.pi<2
+assert 6/s.pi*Q(1,24)**Q(1,4)>Q(1,2)
 print("PASS original J2-selected high-pole K0(0)=K0(4)=0 and K1(4)=120/13")
 print("PASS exact K1'(4)",v)
 print("PASS sqrt(R) boundary: 60 m2/13 -5*pi^4 x^4/1404")
