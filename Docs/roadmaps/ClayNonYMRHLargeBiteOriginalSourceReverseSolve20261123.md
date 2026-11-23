@@ -72,6 +72,46 @@ Exact executed local reference: scripts/check_ns_original_helical_full_fibre_202
 3. Establish the actual cutoff-uniform analytic budget, physical commutator/tangent/endpoints and Galerkin continuation.
 4. Use the original NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact and merged #1539 physical W2 counterexamples rather than resurrecting refuted unconditional positivity.
 
+### A legitimate all-finite-source energy upper bound (not cutoff-uniform)
+
+The genuine mixed-product structure also gives a replacement for an
+impossible output-only bound. For arbitrary fixed-output physical
+incidences define N=|F(k)|, R=sum r, mu=R/N, M=sum A and
+B=sum (r-mu)A. The original signed covariance satisfies the **exact**
+source identity
+
+    S = -2N Re < M, B >.
+
+Apply Hermitian Cauchy-Schwarz across the actual incidence family and
+the standard complex cross-product Lagrange inequality:
+
+    |S| <= 2N ||M|| (sum (r-mu)^2)^(1/2)
+                       (sum ||A_{p,q}||^2)^(1/2)
+        <= 2N ||M|| (sum (r-mu)^2)^(1/2)
+                       sqrt(Eplus Eminus),
+
+where Eplus=sum_{p in cutoff}||P+u(p)||² and
+Eminus=sum_{q in cutoff}||P-u(q)||². The last inequality follows from
+||a×b||²<=||a||²||b||² and the fixed-output pair sum being a subset of
+the complete nonnegative (p,q) product sum. This is about the ACTUAL
+same Fourier field, not a supplied numerical norm of arbitrary cells.
+
+For the physical witness:
+    mu=1616/3, sum(r-mu)^2=1,005,066,656, Eplus=12,
+    Eminus(t)=4*(2t²+(3-2t)²), ||M||²=36.
+
+The executable exact squared inequality reduces to a quadratic
+polynomial in t with strictly positive leading coefficient and
+strictly negative discriminant, thus holds for EVERY real parameter t.
+This is a positive source-specific finite estimate consistent with
+the sign reversal and growth in the genuine original input energy.
+
+**Remaining blocker:** the prefactor 2N sqrt(sum(r-mu)^2) grows with
+the cutoff. Bounding it without its large carrier price requires a
+genuinely signed/cancelling R236/Bony and dynamical estimate; this
+finite ceiling is NOT B1–B4 cutoff-uniform regularity control. Use it
+as a valid fallback/negative-control metric, not a Clay promotion.
+
 ## Karp: original graph word all the way to first-enabled terminal observation
 
 This cut reuses, rather than rediscovers, original Agda owner sources:
