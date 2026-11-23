@@ -1,5 +1,12 @@
 # Navier–Stokes proof-control record — live A/B/C/D coordinator
 
+## 23 November 2026 — reverse-solve coherent-source lift and covariance kernels
+
+The [four-lane geometry-forward BIDI/reverse-solve](ClayFourLaneGeometryForwardBidiReverseSolve20261123.md) strengthens the earlier R236 region-shift negative control. For original six signed pair blocks, all-block-preserving regional shifts are exactly those constant on connected components of the graph with edge `(a,b)` whenever `n_b R_a - n_a R_b != 0`. Preserving only the **total** signed sum requires the weaker one-equation condition `sum_a c_a(NR_a-n_a R_total)=0`; nonzero cancelled block defects show it cannot pay physical B1–B4. Physical fixed-output work `w_i=2 Re<M,A_i>`, `M=sum A_i` additionally forces `sum_a n_a c_a=0`. For nonzero M, a general ambient Hilbert construction lifts any zero-sum shift, but it does NOT establish an admissible original helical/triad amplitude or NSE continuation. With M=0 a nonzero work shift cannot preserve that output.
+
+**Independent exact regression:** 2,400 random rational block/graph-kernel comparisons, 600 free amplitude-lift controls, cancelled-total/noncancelled-block and zero-output negative controls. [Script](../../scripts/check_clay_geometry_reverse_20261123.py). Original pair term, zero branches, global output and real physical source remain authoritative; **S2b2d1b2 signed coherent-covariance payment and cutoff-uniform control OPEN**.
+
+
 ## 23 November 2026 — exact R236 global-fold/recentering correction
 
 The historical original #1444 R236 signed pair-block and lattice-moment work remains a source donor; master-based #1539 owns the current physical W2 no-go/manuscript correction. New non-promoting exact consumer: [four-lane maximum-cut](ClayNonYMRHFourLaneGeometricMaxCut20261123.md), executable [regression](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py). For **negative** original pair differences, a common global work shift leaves every signed block invariant. Recenter the work separately by region `w_i' = w_i - c_A` instead and the exact cross-region error is `S'_AB-S_AB = (c_A-c_B)(n_B R_A-n_A R_B)`; within-region blocks are unchanged. The defect is computable from existing complete carrier moments without pair enumeration but cannot be ignored. Exact zero-work two-cell negative control gives error -2; deterministic exact-rational checks 1,200/1,200 PASS. Do not remove zero-work rate incidences or substitute independently recentered regional work for the original global coherent fold.
