@@ -40,6 +40,33 @@ open YMTOE public using
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
   )
 
+open YMTOE public using
+  ( SourceFamily
+  ; a1CurrentStepVariation
+  ; a2HistoryCoordinate
+  ; a3ProjectiveRepresentation
+  ; finiteT1AndPublishedOS
+  ; quantitativeT5CMP119Alignment
+  ; bWilsonWEXT
+  ; bSameHamiltonianEnergyDecay
+  ; actualGroupCompleteSource
+  ; densityToNormalizedFiniteMeasure
+  ; c0WilsonLocalObservable
+  ; c1MarkedCurvature
+  ; c2PhysicalRemainderTail
+  ; c3AFRecurrence
+  ; c4DensityAnchoredStress
+  ; CriticalFamily
+  ; a3SelectedRepresentation
+  ; t1FiniteOSSameFamily
+  ; t5QuantitativeSameFamily
+  ; b1SourceFirstWilsonWEXT
+  ; b2SameHamiltonian
+  ; g1ActualCompactSimple
+  ; h6MinimalWardNontriviality
+  )
+
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 
@@ -465,3 +492,87 @@ unifierYangMillsStressShellEnergyHilbertLevel =
 unifierYangMillsLiteralStressActivityEntropyLevel : ProofLevel
 unifierYangMillsLiteralStressActivityEntropyLevel =
   YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+
+
+------------------------------------------------------------------------
+-- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel =
+  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
+
+unifierYangMillsGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+unifierYangMillsGoal1A1CurrentStepBetaSourceLevel =
+  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
+
+unifierYangMillsGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+unifierYangMillsGoal1A3SourceNativeContinuumOSLevel =
+  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
+
+unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel =
+  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
+
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMTOE.toeGoal1A4FiniteRegularityLevel
+
+unifierYangMillsGoal1A5FiniteGrowthLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthLevel =
+  YMTOE.toeGoal1A5FiniteGrowthLevel
+
+unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel =
+  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
+
+unifierYangMillsGoal1BGeometricDecayCompilerLevel : ProofLevel
+unifierYangMillsGoal1BGeometricDecayCompilerLevel =
+  YMTOE.toeGoal1BGeometricDecayCompilerLevel
+
+unifierYangMillsGoal1BStandardSpectralTransferLevel : ProofLevel
+unifierYangMillsGoal1BStandardSpectralTransferLevel =
+  YMTOE.toeGoal1BStandardSpectralTransferLevel
+
+unifierYangMillsGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+unifierYangMillsGoal1CSameFamilySourceInstantiationLevel =
+  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
+
+unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+
+unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel =
+  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+
+unifierYangMillsGoal1MaximumCutCompilerLevel : ProofLevel
+unifierYangMillsGoal1MaximumCutCompilerLevel =
+  YMTOE.toeGoal1MaximumCutCompilerLevel
+
+unifierYangMillsGoal1ProjectiveProkhorovNotMandatory :
+  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+unifierYangMillsGoal1ProjectiveProkhorovNotMandatory = refl
+
+unifierYangMillsGoal1CompatibilityBRouteNotMandatory :
+  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+unifierYangMillsGoal1CompatibilityBRouteNotMandatory = refl
+
+unifierYangMillsGoal1ClayCompletionNotClaimed :
+  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
+unifierYangMillsGoal1ClayCompletionNotClaimed = refl
+
+
+------------------------------------------------------------------------
+-- Canonical R546/R558 family dispatch via R559.
+------------------------------------------------------------------------
+
+unifierYangMillsIrreducibleFamilyLevel :
+  SourceFamily → ProofLevel
+unifierYangMillsIrreducibleFamilyLevel =
+  YMTOE.toeIrreducibleFamilyLevel
+
+unifierYangMillsCriticalFamilyLevel :
+  CriticalFamily → ProofLevel
+unifierYangMillsCriticalFamilyLevel =
+  YMTOE.toeCriticalFamilyLevel
