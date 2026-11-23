@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-23",
+  "status": "J22_INDEPENDENT_NINE_STATE_HYBRID_NUMERICAL_PASS_NATIVE_J22_SCRIPT_NOT_BYTE_EXECUTED",
+  "provenance": {
+    "base_pr": 1537,
+    "source_type": "independent local numerical reimplementation of J18 differential equations",
+    "native_script": "scripts/check_smith_filsinger_j22_saltation_shooting_20261123.py",
+    "native_script_committed": true,
+    "native_script_byte_executed": false,
+    "uses_sympy_for_prior_exact_loss_floor": true,
+    "no_ci": true,
+    "no_agda": true,
+    "source_sha": {
+      "J12": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+      "J18": "f4270a475f010874056cfe3cdeff5ee8e43c44eb",
+      "J19": "cc5cec2d4f881b38b4c01ef79dd93f36e9ef1439",
+      "J20": "ed09b82287ec1ca0318b4f8e9d355f614d00d894",
+      "J21": "b4c865f465f1a4a2e8dd40820eb02a6456454d67"
+    }
+  },
+  "parameters": {
+    "gamma_internal": 0.0002,
+    "gamma_rad": 0.015,
+    "k": 0.35,
+    "kh": 2,
+    "Gload": 0.52,
+    "Rcoil": 0.05,
+    "Rgap": 0.09,
+    "wave_handedness": -1,
+    "off_return": "capacitive",
+    "source_amp": 1.2,
+    "drive_amp": 0,
+    "phase": 0.3
+  },
+  "event_diagnostics": {
+    "ordered_events": 22,
+    "min_signed_crossing_slope": 0.09203610153160026,
+    "min_separation": 0.02404775698299133,
+    "same_labels_under_direct_finite_differences": true
+  },
+  "variational": {
+    "saltation_formula": "S = I+(f_plus-f_minus) e_bank^T/(e_bank^T f_minus)",
+    "spectral_radius": 0.27108217975625043,
+    "min_singular_IminusM": 0.8072837915150336,
+    "condition_IminusM": 1.2605888765353908,
+    "relative_M_tolerance_drift": 0.0000023208469579210334,
+    "direct_FD_M_relative_errors": {
+      "h=1e-3": 0.000024516431960935886,
+      "h=3e-4": 0.00006457533259929406,
+      "h=1e-4": 0.00016596249803223283
+    },
+    "coarse_fd_relative_disagreement_at_1e5_vs_5e6": 0.9894259115191878
+  },
+  "shooting": {
+    "start_return_residual": 0.000001742117295311374,
+    "one_newton_return_residual": 1.4033219031261979e-13,
+    "independent_full_energy_solver_return_residual": 1.6080883291635928e-9
+  },
+  "work": {
+    "incident": 90.47786842338631,
+    "outgoing": 31.057934788687174,
+    "driver": 0,
+    "net_wave": 59.419933634699134,
+    "hf_load": 46.56165955856496,
+    "field_heat": 1.6460778536523146,
+    "gap_heat": 2.7936127405338023,
+    "coil_heat": 1.5524691519695832,
+    "copper1": 0.28704895697334565,
+    "copper2": 2.6275411343871706,
+    "diode": 0.4031753049860628,
+    "bleed": 3.5483489340082484,
+    "storage_delta": -8.50803871799144e-10,
+    "signed_residual": 4.744435955217341e-10,
+    "load_over_incident": 0.5146193248130271,
+    "capture": 0.6567344552885216
+  },
+  "radiative_22_event_sweep": [
+    {
+      "gamma_rad": 0.01,
+      "load_fraction": 0.4923534044389962,
+      "min_slope": 0.06499200718135444
+    },
+    {
+      "gamma_rad": 0.012,
+      "load_fraction": 0.508223010793171,
+      "min_slope": 0.08029215972474267
+    },
+    {
+      "gamma_rad": 0.014,
+      "load_fraction": 0.5142394723462451,
+      "min_slope": 0.08930679735580294
+    },
+    {
+      "gamma_rad": 0.015,
+      "load_fraction": 0.5146193248130271,
+      "min_slope": 0.09203610153160026
+    },
+    {
+      "gamma_rad": 0.016,
+      "load_fraction": 0.5136733661208893,
+      "min_slope": 0.09384895985679836
+    },
+    {
+      "gamma_rad": 0.018,
+      "load_fraction": 0.5087648018372446,
+      "min_slope": 0.0956649230567758
+    },
+    {
+      "gamma_rad": 0.02,
+      "load_fraction": 0.5010431206861364,
+      "min_slope": 0.09607362874842022
+    },
+    {
+      "gamma_rad": 0.023,
+      "load_fraction": 0.486372685823803,
+      "min_slope": 0.09607604099391534
+    }
+  ],
+  "negative_controls": {
+    "Gload_0_54_events": 0,
+    "kh_2_025_events": 44,
+    "kh_2_005_nonrestoring_alternating_events": "32/34",
+    "rad_0_008_bounded_nonrestoring": true,
+    "source_is_prescribed_unmeasured": true,
+    "original_filsinger_pin_edges_verified": 0,
+    "original_meter_roles_verified": 0
+  },
+  "exact_losses": {
+    "coil_loss_lower_bound": "Wcoil>=Rcoil Gload Wload",
+    "strict_unity_end_to_end_with_positive_Rcoil_Gload_load": false
+  },
+  "not_proven": [
+    "exact mathematical periodic orbit by interval arithmetic",
+    "same-branch parameter box",
+    "global maximum",
+    "observed Duga/HAARP/SURA environmental source to Filsinger input",
+    "physical Filsinger device wiring",
+    "gravitational response"
+  ]
+}
