@@ -8,6 +8,18 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J28 — exact third spark-ON existence and uniqueness from J27 physical event box (23 Nov 2026)
+
+**Committed, locally executed, byte-identical:** [J28 exact-rational Picard checker](../../scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py), Git blob `d4467d7a20c6742a61853ae1d042103a6ab4743e`; [full geometric argument](../research/SmithFilsingerJ28SparkOnExactPicardFromJ27EventBox20261123.md); [machine receipt](../../Artifacts/smith-filsinger/j28_spark_on_picard_20261123.json). Reuses actual J27 certified spark-OFF `t_OFF ∈ (3.49129269,3.49129275)` **and** its certified nine-coordinate J24 event box. Sharpen `b(t_OFF)=Voff=0.0018` exactly, retain all eight remaining state intervals and the uncertain absolute source clock, use true V-active/U-inactive/spark-OFF original nine-state equations. Grid-`10^22` outward rational Picard enclosures pass **20/20 pieces** of exact duration `0.002`, maximum five Picard iterations per piece. Exact Taylor/Lipschitz source phase; no numerical event-centre substitution.
+
+**New mathematical certification:** entire virtual spark-OFF continuation has U guard < `-0.6803265198587240702001`, V guard > `+0.0101320778981963261549`, bank slope > `+0.1137925300465354631967`. At elapsed 0.022, bank upper = `0.0058305289839750970472 < Von=0.006`; at elapsed 0.026, bank lower = `0.0061124694402624566398 > Von`. Thus exactly one original next spark-ON guard crossing occurs in the **dimensionless model-time** bracket `3.51329269 < t_ON < 3.51729275`, with no intervening U/V diode switching. Only virtual OFF-mode extension beyond the root is used for isolation: actual post-ON physical mode **NOT** yet integrated.
+
+**Status accounting:** J24 six-event actual nominal **occurrences located 3/6**, but its original 9/9-coordinate event-state **boxes paid only 2/6**. The third event-time enclosure is wider than the original J24 state-box admission requires; do not mark it paid. Original J18 numeric full-code byte replay, full-period `tau=20pi/11` monodromy, certified periodic fixed point, uniform 5D parameter-box result, Agda kernel, CI, calibrated real Filsinger source/pins and environmental extraction remain **OPEN**.
+
+**Next J28b → J29:** import sharper J27 actual event-state enclosure (instead of radius-1e-4 J24 overbox), reduce interval wrapping via higher-order Taylor, certify third original event-state box/saltation, propagate physical spark-ON→U-on→V-off→U-off guards with validated no-extra-event flow and saltation. Only then compute a certified centre return defect, full interval derivative and rational Banach/Krawczyk inclusion. Keep Maxwell XC+1 as a separate receiver-optimisation strand, and avoid merging #1537 into fast-moving master without full semantic reconciliation.
+
+---
+
 ## P0 J27 — validated physical diode handoff, spark-OFF root and 2/6 original J24 boxes (23 Nov 2026)
 
 **New native-source tree consumer:** [J27 byte-identical executed second-event checker](../../scripts/check_smith_filsinger_j27_second_spark_off_validated_20261123.py) Git blob **6c7d7781f11943fc5b1267a6259bf3dc14f374d3**. Replays original J26's 37 exact nominal pre-event slabs, the strict first diode-V event bracket, and first J24 9/9 box; uses original J25 arithmetic and explicit source-conserving V-diode-active nine-state equations. [Full research/geometry note](../research/SmithFilsingerJ27ValidatedDiodeHandoffAndSparkOffEvent20261123.md); [machine result](../../Artifacts/smith-filsinger/j27_first_two_events_validated_spark_off_20261123.json). No Actions/CI, Agda kernel, original source-mapping promotion, or hardware measurement.
