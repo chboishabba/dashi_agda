@@ -38,10 +38,8 @@ suzOuter := CharacterTable("Suz.2");
 two := CharacterTable("2.Suz.2");
 six := CharacterTable("6.Suz.2");
 main := CharacterTable("3^1+12:6.Suz.2");
-if main = fail then main := CharacterTable("3^(1+12):6.Suz.2"); fi;
 mn := CharacterTable("MN3B");
 if mn = fail then mn := CharacterTable("3^1+12.2.Suz.2"); fi;
-if mn = fail then mn := CharacterTable("3^(1+12).2.Suz.2"); fi;
 mon := CharacterTable("M");
 if ForAny([suz,suzOuter,two,six,main,mn,mon],x->x=fail) then
   Error("missing exact original Suzuki/main/MN3B/Monster source table");
@@ -77,9 +75,9 @@ mainToSix:=ExactStoredFusion(main,six,"main -> 6.Suz.2");
 mainToMN:=ExactStoredFusion(main,mn,"main -> MN3B");
 mnToMonster:=ExactStoredFusion(mn,mon,"MN3B -> M");
 
-if ForAny(Filtered([1..Length(sixToMain)], i -> OrdersClassRepresentatives(six)[i] <= 12),
+if ForAny([1..Length(sixToMain)],
           i->mainToSix[sixToMain[i]]<>i) then
-  Error("source SIX -> MAIN subgroup and MAIN -> SIX quotient do not commute on order <= 12 classes");
+  Error("source SIX -> MAIN subgroup and MAIN -> SIX quotient do not commute");
 fi;
 
 suzOrders:=OrdersClassRepresentatives(suz);
@@ -100,6 +98,7 @@ if OrdersClassRepresentatives(suzOuter)[suzOuterClass]<>2 then
 fi;
 
 twoOrders:=OrdersClassRepresentatives(two);
+twoSizes:=SizesConjugacyClasses(two);
 twoCentralPositions:=ClassPositionsOfCentre(two);
 twoCentralMinusOne:=Filtered(twoCentralPositions,i->twoOrders[i]=2);
 if Length(twoCentralMinusOne)<>1 then
@@ -163,6 +162,10 @@ for twoPos in sourceCandidates do
   fi;
   Add(liftRows,rec(twoPos:=twoPos,sixPos:=sixPos,
                    mainPos:=mainPos,mnPos:=mnPos,
+                   twoOrder:=twoOrders[twoPos],
+                   twoCentralizer:=Size(two)/twoSizes[twoPos],
+                   twoSquare:=twoPow2[twoPos],
+                   twoOuter:=twoToOuter[twoPos],
                    monsterPos:=monPos,monsterLabel:=lbl));
 od;
 
@@ -208,6 +211,10 @@ for i in [1..Length(liftRows)] do
     ",\"six_suz_class_position\":",row.sixPos,
     ",\"main_class_position\":",row.mainPos,
     ",\"mn3b_class_position\":",row.mnPos,
+    ",\"two_suz_class_order\":",row.twoOrder,
+    ",\"two_suz_centralizer_order\":",row.twoCentralizer,
+    ",\"two_suz_square_central_position\":",row.twoSquare,
+    ",\"two_suz_outer_image_position\":",row.twoOuter,
     ",\"monster_class_position\":",row.monsterPos,
     ",\"monster_four_label\":\"",row.monsterLabel,"\"}",
     SeparatorAfter(i,Length(liftRows)));

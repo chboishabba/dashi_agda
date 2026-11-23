@@ -85,3 +85,155 @@ The original [author archive](https://www.rwb.me.uk/table/index.html) explicitly
 | P4: kernel / end-to-end | Pending | Run the correct exact-head Agda/Lean targets; keep provenance and source-written/code-executed/kernel-verified levels separate |
 
 **Stop rule:** Do not infer a literal Monster action, unique eight-site chart, scalar `Fin90` basis acting as a representation, physical spin/optics, or quantum mechanism from the counts \(720+9=729\), \(12+78=90\), or a passing source-relative checksum. The remaining issue is actual selected-source *same-object* evidence, not shortage of generic construction machinery.
+
+
+## 23 November 2026 — source-owning OOM guard reconciliation
+
+The original source-owning #1250 branch now mirrors the safe candidate filter already present in TOE #1217: all three AtlasRep/CTblLib candidate acceptance paths check `IsPermGroup(candidate)` **before** calling `Size(candidate)`; the downstream `SylowSubgroup(G,2)` is only entered with such an accepted group. The two dihedral-group checks use `not IsAbelian(...)` in GAP. Source commit: [d0c2e722](https://github.com/chboishabba/dashi_agda/commit/d0c2e7224a856674c8fb6de8e85dc160fd2c8975).
+
+This prevents the previously identified unassisted 78-dimensional matrix-group Schreier–Sims route, but is **not** a blanket memory-safety theorem: constructing `AtlasGroup(info)` itself is still permitted before the representation guard, and no GAP execution of this exact commit was observed here. Failure to realize a suitable permutation model remains the documented `atlas-group-realization-residual`, not a successful actual D8 realization.
+
+**Current P0 ordering:** (1) exact-head source GAP replay of both 6.Suz and the guarded five-orbit screen, with untouched raw receipt/version/hash; (2) all-conductor 210-class audit and source-selected 12/78 full-class join, including explicit C2/C3 phase and direct/dual Sym2 checks; (3) quotient-first subgroup construction in the **central double cover** 2.Suz.2, then Schur–Zassenhaus odd-kernel lift into N_M(3B) and intersection with the 17 serialized character-compatible worlds; (4) only then actual Hom/VOA selected same-object intertwiner and inverse-projective cocycle on the original carrier. The degree-1782 Suz.2 permutation representation alone does not specify the double-cover lift: an involution downstairs can lift to order four upstairs.
+
+**Authority:** original ATLAS/AtlasRep and CTblLib inputs remain source owners; prior mathematics of Schur–Zassenhaus is classical; this branch patch is an engineering guard, not a newly discovered group-theoretic result. Earlier user-local 57/57 and 17-world PASS reports remain *reported* rather than independently executed in this update. GAP, Agda kernel and authentic 6.Suz source receipts are **not** claimed.
+
+
+## 23 November 2026 — user-local source execution, four-class discriminator and kernel receipt
+
+**Execution attribution:** The user's local GAP/CTblLib and Agda session reports the following completed evidence, independently from this GitHub source-reconciliation session. These outputs have not been re-executed from the newly committed GitHub branch here. Keep source-run evidence and exact-head verified repository receipts distinct.
+
+| Existing pipeline | User-local reported outcome | Exact authority boundary |
+| --- | --- | --- |
+| `check_monster_3b_suzuki_main_quotient_match.sh` | PASS: class-20 quotient kernel; source 12 pair main positions [327,328] descends to MN3B χ146; selected 78 pair [253,254] descends to χ109, positive Monster restriction multiplicity | Character-table and quotient occurrence, not a Monster Hom action |
+| `check_monster_3b_suzuki_actual_source_join.sh` | `SOURCE_RELATIVE_CHARACTER_JOIN_PASS`, all 210 classes via exact `CoeffsCyc` with full source signature and selected 12/78 rows | The join intentionally returns `original_source_authenticated=false` and `same_object_Monster_intertwiner_proved=false`; raw build JSON not attached to this commit |
+| `monster3b_atlas_suz2b_monster_4class_source_fusion.g` | `UNIQUE_SOURCE_FUSION`; candidate central-double-cover `2.Suz.2` class 5 maps to Monster `4D` | Source-class constraint selection; the source JSON sets `literal_source_word_2Suz_class_individually_identified=false` |
+| `monster3b_atlas_suz2b_monster_4class_receipt_validator.py` | PASS: conditional chain `4D -> 12F -> 6B`, predicted selected trace 66, nonfaithful 78 C2-positive branch | Conditional on same actual source word, chosen central generator, and phase / inversion lift; do not promote a selected same-object action |
+| `run_agda29_parallel_check.sh` on generated `Monster3BSuzukiMainQuotientMatchCertificate.agda` | User-reported exit 0, (10/10) Checking, 0 holes / 0 postulates | Generated character/quotient certificate only; not a same-object Hom/VOA kernel proof |
+| Monster Python regressions | 24/24 focused and 96/96 full Monster user-local PASS | Reported local working-tree state; exact pushed-head replay not independently observed |
+
+**Live-source consumer repairs in #1250:** phase-parity checker assertion now iterates `all_sieved`, because `atlas_class_sieve()` returns class coordinates without `predicted_selected_phase_trace`; the separate 4-class receipt validator now calls `check_phase_parity(k)["atlas_source_rotation_to_z_rotation_12_to_z_halfturn_6"]` instead of `select_rotation_class(k)`. Both reuse the existing semantic calculation rather than duplicate it. Source commits [065445ad](https://github.com/chboishabba/dashi_agda/commit/065445ad0ee514c8e8222e717aac10cd7201eed3) and [67531140](https://github.com/chboishabba/dashi_agda/commit/6753114056e31e142ec9955e27bbfe7b97f31dee).
+
+**Updated maximum-cut:** Original-source table/class-family discrimination is reported paid to the extent of the GAP receipts, including elimination of 4A/4C for the selected constraint family. Still **UNPAID**: proof that the particular 12D ATLAS D4 word maps to the unique class-5 double-cover row; explicit concrete `D8 <= N_M(3B)` subgroup word/relations and faithful central-cover lift; absolute `ζ3` versus `ζ3²` phase orientation on that original carrier; selected `Hom_E(H_ζ,W_ζ)` normalizer action and inverse-projective cocycle; and the physical TOE claim. The 17 character-compatible D4 fusions remain a *possibility screen*, not 17 realized subgroups.
+
+**Next high-alpha cut:** bind source 12D AtlasRep `r,m` to exact 2.Suz.2 class-5 using an explicit subgroup/representation witness, carry its centre and class fusion through MN3B, intersect the 17 serialized worlds, then attach the selected actual Hom carrier. Retain the published original sources and distinct #1098/#1250 owners; no finite 720/729 chart coincidence counts as an action witness.
+
+
+## 23 November 2026 — maximum-cut source D4 word / Suzuki centralizer / Monster 4D fusion weld
+
+**Original donor #1098, not a newly invented D4:** `scripts/monster3b_atlas_actual_d4_word_witness.py` builds original ATLAS GF3 matrices C,D and word `r = m (g m g^-1)`, `m = (CDCDCDCDCDCdCd)^5`, `g = CdCdCDCd`. Its finite group equations establish `r² = -I12`, `m² = I12`, `mrm = r^-1`. Original donor `scripts/monster3b_atlas_source_d4_rotation_suz_2b_seven_centralizer.py` supplies **two actual generator words** `DcDCDcdC` and `CDCdCdCd` yielding order-seven matrices commuting with r. From published Suzuki 2A/2B centralizer orders 3317760 and 161280, respectively, this identifies r's Suzuki quotient involution as **2B**.
+
+**New independent local arithmetic check:** using the original 12×12 ATLAS matrix entries already fetched from #1098, I recomputed the D4 relations, each order-seven witness and both commutators with exact integer arithmetic modulo 3. Both witnesses PASS. I also reconstructed the original MeatAxe plaintext files byte-for-byte from the fetched #1098 contents and verified both full SHA256 digests against the #1098 manifest (`ddd4919a…d35a031c2`, `433ba0f0…fcd15f`). This is a local exact GF3 and SHA256 replay, **not** a new GAP run, a group-generator intertwiner, or an Agda kernel proof. The earlier user-local full source join, 4D fusion and 96 Monster tests remain separately reported.
+
+**Existing original #1250 source fusion:** `monster3b_atlas_suz2b_monster_4class_source_fusion.g` enumerates the relevant 2.Suz.2 order-four classes satisfying `r² = -I` and projection to Suzuki class 2B. In the reported authentic local CTblLib receipt there is exactly one such candidate: **2.Suz.2 class 5**, mapping through 6.Suz.2 -> main -> MN3B -> Monster **4D**. The corresponding conditional ATLAS class route is **4D / 12F / 6B**, predicted trace **66**, selected nonfaithful-78/C2-plus branch. This is materially stronger than merely saying a 4D possibility exists; it is a uniqueness-of-class consequence **under the original source quotient identifications**.
+
+**New minimal source-owner consumer (committed to PR #1250):**
+- `scripts/monster3b_atlas_d4_word_to_4class_source_weld.py` joins the PREEXISTING #1098 Suzuki-2B source-word JSON and the PREEXISTING #1250 exact GAP fusion JSON. It refuses missing D4/7-centralizer evidence, altered centralizer premises, multiple candidate classes, wrong class index/Monster class, and false Hom/phase promotion. It retains literal 2.Suz.2, 6.Suz.2, main, MN3B, Monster class positions and both supplied receipt hashes.
+- `tests/test_monster3b_atlas_d4_word_to_4class_source_weld.py` contains 11 synthetic positive/negative contract cases.
+- `scripts/check_monster3b_atlas_d4_word_4class_weld.sh <#1098-witness.json>` executes original #1250 GAP fusion/validator plus the thin consumer, never the 78-dimensional matrix group.
+- The consumer's own status is **SOURCE_RELATIVE**, not authenticated original-source provenance or an Agda theorem. These new committed scripts/tests have not been run from this exact GitHub head here.
+
+**Necessary source-identity qualification:** original #1098 generator matrices are labeled `2.Suz:2`; the CTblLib source chain contains `2.Suz.2` and the actual Monster normalizer's quotient/diagonal factors. No *explicit generator-by-generator isomorphism + selected-diagonal action* has yet been attached proving that these two named realizations share precisely the selected quotient coordinates. Therefore the conjunction `source-word Suzuki 2B + unique CTblLib class5` establishes a **conditional class recognition weld** under that alignment, not a fully demonstrated same-object Monster generator lift. Do NOT replace the published original exact quotient map by name-matching groups.
+
+**Next P0 proof weld (no more generic character numerology):** source-generate the explicit 2.Suz:2 -> CTblLib 2.Suz.2 class/standard-generator alignment (or find a concrete faithful section in the original BW diagonal quotient), transport the exact ATLAS word r and reflection m, prove the resulting D8 fusion on one selected original N(3B) complement, and only then attach #1098 selected Hζ/Wζ/Hom action, central ζ vs ζ² orientation and cocycle. Class-based uniqueness and Schur–Zassenhaus ensure abstract existence/conjugacy, not original Monster element words.
+
+
+## 23 November 2026 — actual local replay and class-five invariants; no canonical-generator shortcut
+
+**User-local exact-source replay received:** The user's #1250 checkout executed the original #1098 rotation witness and `check_monster3b_atlas_d4_word_4class_weld.sh`. Its reported 11/11 Python tests and source-relative weld PASS provided literal source coordinates:
+`2.Suz.2:5 -> 6.Suz.2:9 -> main:54 -> MN3B:33 -> Monster:10 (4D)`.
+The local GAP study further finds `2.Suz.2` class 5 (ATLAS `4a`) has order 4 and centralizer 322560, squares to its central involution and lies over the inner Suzuki `2B) image; the other order-four square-central class 62 (`4f`) belongs to the outer coset, centralizer 2419200. The independently constructed #1098 word `r` has inner coset parity, its square is `-I12`, and its quotient involution is Suzuki `2B` by two order-seven centralizer witnesses. **This recognizes r's source class 5 subject to the original identification between the ATLAS and CTblLib `2.Suz.2` realizations.** The BW05 `BCCCBB` control has matching characteristic polynomial `(x²+1)^6` but belongs to a different coset; characteristic polynomial equality is not conjugacy.
+
+**New original-source certificate-strengthening (same owner #1250):** `monster3b_atlas_suz2b_monster_4class_source_fusion.g` now emits each candidate's actual CTblLib class order, centralizer size, square-class position and quotient-image position. `monster3b_atlas_d4_word_to_4class_source_weld.py` requires exactly order 4, centralizer 322560, equality of square class to the exported central `-I` and equality of the outer quotient-image class to the exported Suzuki `2B` image, in addition to uniqueness and complete original class chain. `tests/test_monster3b_atlas_d4_word_to_4class_source_weld.py` grows from 11 to 15 scenarios including four distinct new fail-closed regressions. This is a stronger **producer-consumer contract**; the refreshed pushed-head tests and fresh GAP output have not been executed here, and the old build JSON must be regenerated before calling the updated consumer.
+
+**Proof-authority correction:** A trivial `Out(2.Suz.2)`, even if established for the exact target group, says automorphisms are inner; it does **not** itself specify a canonical isomorphism between two presentations or identify their chosen generators. Likewise a claim that an alternating-form 12D irreducible is unique cannot be used as a concrete intertwiner without proving (i) the correct original extraspecial `E/Z(E)` action is isomorphic to that ATLAS representation, (ii) the exact central `-I` and outer similitude normalization match, and (iii) a matrix `T` exists and has been checked on each original generator against the selected diagonal quotient. The user's local BW 2005 `BCCCBB` and actual `r` lie in distinct outer parity classes, another warning against identifying words by 12D characteristic polynomials alone.
+
+**Abstract existence, source class recognition, and concrete action remain distinct:** Given a specific isomorphism `N_M(3B)/E ≅ 2.Suz.2`, Schur–Zassenhaus supplies a complement to `E` in the preimage of `<r,m> ≅ D8`; complements are conjugate by E, hence selected class images do not depend on complement choice. That does not supply Monster words or the explicit Heisenberg/VOA intertwiner. The next big P0 gate should request a source-certified quotient isomorphism and checked generator conjugations, then calculate the selected `E/Z(E)` action matrices and solve `T A_i = B_i T` over `F3` for a *single* invertible `T`; certify `T^T J_{actual} T` up to scalar, central inversion on `z`, the selected 12/78 and `Hom_E(Hζ,Wζ)` owner, and the `ζ` vs `ζ²` phase.
+
+
+## 23 November — exact ATLAS 12D symplectic basis weld and true independent Monster target frontier
+
+**Reuse, do not rebuild:** original ATLAS/AtlasRep MeatAxe generator files in
+`data/atlas/2Suzd2G1-f3r12aB0.m1/.m2`, the SHA-256 manifest
+`monster3b_atlas_actual_d4_word_witness.py` and source `J` alternating
+form, #1098 source Heisenberg machinery, #1250 source class-five
+fusion, and original published Barraclough-Wilson and CTblLib maps.
+Class 5 `4a` (order 4, centralizer 322560, square central -I,
+Suzuki 2B image) -> actual Monster `4D` remains the stronger
+source *class-recognition* result. This is not a basis-level
+same-object identification.
+
+NEW exact local GF(3) calculation on the *original* ATLAS 12x12
+C,D generator bytes, SHA-256 matched original m1 and m2:
+`scripts/monster3b_atlas_original_symplectic_basis_weld.py`
+(commits 15fd6b18, fbe09faa, 90104dc1; last source contains
+rectangular-rank padding correction and explicit D4 word checks),
+and the independently executed local source
+`/mnt/data/monster_basis_gate.py`. Source-reported rank(J)=12,
+and uniquely constrained alternating line in original source.
+Constructive characteristic-three symplectic Gram-Schmidt
+produces an explicit invertible T (12x12) such that
+    T^t J_source T = J_std;
+    C_source T = T C_std;
+    D_source T = T D_std.
+The exact T is stored in
+`Docs/receipts/monster3b_atlas_original_symplectic_basis_local_20261123.json`
+commit 22719b39 and can be recomputed from source.
+The F3 linear simultaneous-intertwiner equation space for
+the two *same-source* charts has nullity **one**; the given T is
+invertible, and the only other nonzero scalars over F3 are T
+and -T. Swapping C,D or replacing the target pair by identity
+gives nullity 0, exact negative controls.
+
+The same T transports the original actual ATLAS D4 mirror
+m=(CDCDCDCDCDCdCd)^5 and
+r=m(gmg^-1) for g=CdCdCDCd. Original source checks
+m^2=I, r^2=-I12, mrm=r^-1. Exact local replay
+checked the D4 relations and their conjugations in both
+coordinate charts; J multiplier of m is -1, r is +1.
+For canonical Heisenberg c(x,y) with alternating part J_std,
+the corrected cocycle defect
+D_g = g^t C_c g - lambda_g C_c is symmetric for both
+generator transports, and q_g(x)=2*x^t D_g x has the
+correct mod3 polarization. Distinguish C_c (cocycle matrix)
+from C_source (ATLAS generator). This is an explicit
+same-source coordinate/basis certificate, with the
+original time/source index, centre and sign retained.
+
+**Critical OPEN gate:** the source-original Monster normalizer
+producer actually EXISTS in
+`scripts/monster_3b_mmgroup_source_symplectic_basis.py`:
+it imports Melissa Lee et al. MonsterSubgroups actual g3b,h3b,
+x3b,y3b,gs,hs element words; verifies commutator symplectic
+form over the literal extraspecial E, conjugation of its 12
+basis elements and original MMV(7) phase transport.
+Its original source provenance is
+https://github.com/melissa-maths/MonsterSubgroups/blob/main/subgroups.py
+(blob c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2).
+This producer gives a *second actual original Monster E/Z(E)*
+representation when mmgroup is installed and run. **It does NOT
+supply the specific generator-word correspondence C_ATLAS,D_ATLAS
+to the g3b,h3b Monster quotient**. These are not assumed equal.
+Here the local Python environment lacks mmgroup; no actual
+MM-group word output was freshly executed. Until the quotient
+word correspondence is source-certified, a T from two
+same-source ATLAS coordinate presentations cannot be promoted
+as an ATLAS-to-actual-Monster intertwiner. Do not infer it from
+trivial Out, class5, a 12D character match, D4 trace agreement,
+an abstract complement or J-standardization.
+
+Next true P0: run/reuse the existing mmgroup source adapter on an
+environment with mmgroup, extract the TWO Monster-side matrices
+corresponding to explicit (source-identified!) ATLAS C and D
+quotient words, verify group relations, full 144-variable F3
+linear solve T A_i = B_i T and rank T=12, and check
+T^t J_B T=lambda J_A with consistent phase and Heisenberg
+central cocycle. Then and only then attach selected ζ vs
+ζ² and `Hom_E(H_ζ,W_ζ)` via original #1098 owners.
+No new Monster class, full Monster Hom or VOA action claimed.
+
+Previous 15 synthetic regression cases and the modified GAP
+producer remain SOURCE-WRITTEN, not freshly rerun in this
+packet. The new source was committed and GitHub-read-back
+verified but was not executed byte-for-byte after commit;
+the independent local computation and receipt are separated.
+No GAP, mmgroup, Lean, Agda or GitHub CI acceptance claimed.

@@ -9954,3 +9954,11 @@ twisted-even source laws, actual FLM all-mode isomorphism and original
 Y443/Monster group/action proof remain open. The dashi_lean4 #47
 Maschke/Schur/FDRep/Hom machinery is existing reusable code.
 No kernel run claimed.
+# Semantic naming migration — 2026-11-23
+
+The Wilson Yang–Mills pilot is complete (`edf74db0c3`) with 42 explicit
+registry entries and no remaining references to those old names. A repository-
+wide inventory found 3,388 live Agda filenames and 90 sibling Lean filenames
+with round-style labels outside generated/archive surfaces. The next batch is
+intentionally bounded and non-YM; long Physics and acquisition chains require
+curated semantic vocabularies before renaming.

@@ -5594,3 +5594,11 @@
   requiring positive integrated nonlinear input.  It can also choose a
   dominant output carrier by requested modal-activity coverage rather than a
   fixed low-coverage count.  N16 static and one-step staged CPU smokes pass.
+# 2026-11-23 — Repository-wide semantic naming inventory
+
+After the Wilson pilot, audited live Agda and sibling Lean paths for remaining
+round-style module names. Found 3,388 Agda and 90 Lean candidates, concentrated
+in Physics/NSBControl but also present in Moonshine, Culture, Education,
+Biology, Analysis, Governance, and Integration. Added
+`Docs/SemanticNamingInventory20261123.md`; the next implementation batch will
+use a curated non-YM family registry rather than unsafe global number stripping.
