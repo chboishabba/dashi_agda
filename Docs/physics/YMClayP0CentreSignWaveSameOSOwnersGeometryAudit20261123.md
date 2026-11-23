@@ -63,3 +63,12 @@ Next physical source cut: termwise ABSOLUTE original CMP116 marked Wilson connec
 The genuine 9-sheet centre, dual DC mode, physical gauge longitudinal null and RH actual ζ-zero or observed notch remain distinct typed objects; Singer k is an INDEXED CHART, not Euclidean physical t. H05 remains 8 vertices/12 maps/SIX faces. The original source units, history, signed zero, residual and admissible consumer matter.
 
 Attribution: Wilson/Haar, Osterwalder–Schrader, Bałaban CMP98/109/116/119/122, classical C3² Fourier/graph wave geometry, and existing DASHI SU(N), original YM/RH/TOE, Leech-wave, Base369 groupoid and semantic descent theorem owners.
+
+
+## Further original positive finite-transfer-gap donor (master audit)
+
+Two additional original masters sharpen the operator/provenance distinction:
+- DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge explicitly records a POSITIVE **FINITE transfer-matrix gap** and the formal relation H(a)=-a^(-1) log T(a), but marks physicalHamiltonianSpectralGapProvedHereStatus=false, continuumNormalizationEvidenceCompleteHere=false and transferToHamiltonianTheoremLocallyProved=false.
+- DASHI/Physics/YangMills/BalabanClayTransferHamiltonianGapSeparationExact explicitly carries different typed TransferGap and HamiltonianGap quantities with a conversion mapping dependent on the physical scale, and a conditional input for uniform physical conversion.
+
+Thus it would be wrong to say that the repo lacks a positive Hamiltonian or spectral-gap framework; these donors ARE important existing owners. It is equally wrong to infer a fixed 4D continuum physical mass from a positive dimensionless transfer gap, a finite chosen Hκ stiffness, or a proof record containing its positivity as a required field. The source must pay the cutoff-independent lower bound for -log eigenvalue ratios divided by the actual physical lattice spacing, and prove the SAME reconstructed interacting OS H/observable sector. Retain original physical t and k separate.
