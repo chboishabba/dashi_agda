@@ -20,10 +20,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 SOURCES={
  "retained":(ROOT/"scripts/check_pi_p0_fibre_cost_profile.cpp","078e76a0dbc603e89ac108f3d171764d4a66f247"),
- "released":(ROOT/"scripts/check_pi_p0_endpoint_lifetime.cpp","8ff286c6ec9ab23fe0d18c7d2833e1645c465b7a"),
- "scoped":(ROOT/"scripts/check_pi_p0_endpoint_scoped.cpp","4542c2a3e659c4620536a45d8df39c4cfa24e23e"),
- "shifted":(ROOT/"scripts/check_pi_p0_dyadic_quotient_shift.cpp","a8dae0366863d9d950aa8b5bd524b3503af960ed"),
- "power5":(ROOT/"scripts/check_pi_p0_power5_dyadic_certificate.cpp","7e9ea7775cc9143ffb0800b5a96b2fed40090cc2"),
+ "released":(ROOT/"scripts/check_pi_p0_endpoint_lifetime.cpp","4ec0401205768e4c744e7b8fcea5b425ba3ab8be"),
+ "scoped":(ROOT/"scripts/check_pi_p0_endpoint_scoped.cpp","de111d51d118acd2df420a62efc6e7174a797f77"),
+ "shifted":(ROOT/"scripts/check_pi_p0_dyadic_quotient_shift.cpp","94cce9524f32825fd2f82e41cd17895f97ca885a"),
+ "power5":(ROOT/"scripts/check_pi_p0_power5_dyadic_certificate.cpp","be8e746a5c73ed2ec212664b68e5eceacc4420e7"),
 }
 EXPECTED={
  10000:"ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
