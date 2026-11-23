@@ -61,7 +61,7 @@ Existing authentic Agda owners are:
 
 ### Executed new physical reference
 
-\`scripts/check_karp21_physical_multitape_trace_20261123.py\` (new exact Git blob \`a12e2428ce41c6643a5040409293f32a5e802cc8\`) implements an instrumented THREE-TAPE bit-cell/head-local execution reference:
+\`scripts/check_karp21_physical_multitape_trace_20261123.py\` (new exact Git blob \`e3dd076f6b97c26003dbc70ee6d740828fa94069\`) implements an instrumented THREE-TAPE bit-cell/head-local execution reference:
 
 - The input source and witness are read through explicit \`Tape.seek\`, \`Tape.read\` and \`Tape.write\` movements, each logged in unit cell/head steps. Decoded n,m,u,v,zigzag signed tokens and positive W are bit-registers serialized on a work tape with separators; no n-wide label vector.
 - For each original Elias gamma field, the input cursor scans the real zero prefix, marks the work tape, consumes its exact payload, performs binary predecessor, and stores the original gamma-token bit **interval**. Source length and the 3m suffix guard are checked before any m edge loop; original \`u<v<n\`, sorted strict edges, malformed tokens and suffix are faithfully rejected.
@@ -70,13 +70,13 @@ Existing authentic Agda owners are:
 
 ### Executed local acceptance (not a kernel claim)
 
-    PASS 9,642 / 9,642 original-word and certificate test cases
-    accepted 894
-    max observed local cell read/write/head moves 1,267
-    max observed persistent physical tape cells 239
-    max host control descriptor bits audited 497
+    PASS 9,942 / 9,942 original-word and certificate test cases
+    accepted 911
+    max observed local cell read/write/head moves 10,752
+    max observed persistent physical tape cells 1,139
+    max host control descriptor bits audited 3,006
 
-Includes exhaustive small sorted weighted graph choices, signed positive/negative weights, all binary witnesses in each selected family, short/extra certificates, malformed and mutated/truncated gamma words, and sparse huge-n graph words up to n=2^18. All exact tests run with local standard Python; the connector-created blob SHA equals the byte-identical executed file's \`git hash-object\`. No GitHub Actions CI was run.
+Includes 300 longer original signed graph histories (up to 16 edges), exhaustive small sorted weighted graph choices, signed positive/negative weights, all binary witnesses in each selected family, short/extra certificates, malformed and mutated/truncated gamma words, and sparse huge-n graph words up to n=2^18. All exact tests run with local standard Python; the connector-created blob SHA equals the byte-identical executed file's \`git hash-object\`. No GitHub Actions CI was run.
 
 ### Constructive resource geometry (candidate F2/F4 route, not yet finite-state formalized)
 

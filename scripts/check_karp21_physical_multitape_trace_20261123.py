@@ -252,6 +252,16 @@ def run():
         for k in range(len(w)+1):test(w[:k],c)
         for k in range(len(w)):
             test(w[:k]+(1-w[k],)+w[k+1:],c)
+    # Longer same-original histories: interleaved repeated endpoints, signed
+    # weights, and up to 16 edges rather than only 1/2-edge unit fixtures.
+    for _ in range(300):
+        n=rng.randrange(4,13)
+        pairs=list(combinations(range(n),2));rng.shuffle(pairs)
+        m=rng.randrange(min(16,len(pairs))+1)
+        edges=sorted((u,v,rng.randrange(-200,201)) for u,v in pairs[:m])
+        word=graph(n,edges,rng.randrange(1,50))
+        cert=tuple(rng.randrange(2) for _ in range(2*m))
+        test(word,cert)
     print('PASS physical local-head instrumented reference; cases',tests,'accepted',accepted,
           'max_actual_cell_operations',maxsteps,'max_live_tape_cells',maxheap,
           'max_uncompiled_controller_bits',maxcontrol)
