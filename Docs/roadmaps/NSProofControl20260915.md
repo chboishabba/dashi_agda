@@ -1,5 +1,17 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — original physical R236 helical source large-bite
+
+**Source-native initial-data no-go, not a free-cell vector test:** [Full derivation and owner receipts](ClayNonYMRHLargeBiteOriginalSourceReverseSolve20261123.md) and [source-specific exact script](../../scripts/check_ns_original_helical_full_fibre_20261123.py). Use actual R231 complex helical P+u(p)×P-u(q), Fourier reality/divergence-free support, original cutoff=16/output=(16,0,0) and ALL 18,513 fixed-output physical incidences including zero-work spectators. Exact source rates sum 9,972,336; R236 deep-FL=36, core=18,477, deep-HH=0. Selected nonzero (1,15),(8,8),(15,1) cells have physical original rates (226,128,226), and the strict Round25 j+3<j' classifier assigns FL/core/FL.
+
+The **same original coherent M=-6i e_x**, ||M||²=36, for the one-parameter real Fourier velocity b1=b15=t,b8=3-2t yields the exact all-source signed S(t)=547392384-87085152 t. Positive at t=1 (+460307232), zero at t=44/7, negative at t=13/2 (-18661104). All six block moments agree with independently enumerated active-spectator full pair summation. Thus output-only signed positivity or a fixed-M-only absolute estimate is physically source-incompatible even at one cutoff. This is NOT a counterexample to global regularity: underlying velocity energy grows with t.
+
+**Valid but nonuniform original-source ceiling:** for B=sum (r-mu)A, mu=(sum r)/N, the exact signed identity S=-2N Re<M,B> gives |S|<=2N||M|| sqrt(sum(r-mu)^2) sqrt(Eplus Eminus), where Eplus/Eminus are actual complete source helical modal energies. The physical fixture has mu=1616/3, centered rate-square sum=1,005,066,656, Eplus=12, Eminus=4*(2t²+(3-2t)²). An exact polynomial with positive leading term and negative discriminant establishes the squared inequality for every real t; the original local SymPy source-equivalent checks PASS. **This is NOT cutoff-uniform** and cannot close S2b2d1b2/B1–B4.
+
+**Next genuine large bridge:** derive a signed, cutoff-uniform physical estimate paying input mode energy/differentiated commutators and the complete Bony six-block plus critical-touching source; then connect the actual NSE Galerkin trajectory and continuation. Never recenter regions independently, discard zero-work spectators, replace original physical data with free A_i, or reuse refuted #1539 W2 positivity. No Agda kernel or CI claim.
+
+
+
 ## 23 November 2026 — reverse-solve coherent-source lift and covariance kernels
 
 The [four-lane geometry-forward BIDI/reverse-solve](ClayFourLaneGeometryForwardBidiReverseSolve20261123.md) strengthens the earlier R236 region-shift negative control. For original six signed pair blocks, all-block-preserving regional shifts are exactly those constant on connected components of the graph with edge `(a,b)` whenever `n_b R_a - n_a R_b != 0`. Preserving only the **total** signed sum requires the weaker one-equation condition `sum_a c_a(NR_a-n_a R_total)=0`; nonzero cancelled block defects show it cannot pay physical B1–B4. Physical fixed-output work `w_i=2 Re<M,A_i>`, `M=sum A_i` additionally forces `sum_a n_a c_a=0`. For nonzero M, a general ambient Hilbert construction lifts any zero-sum shift, but it does NOT establish an admissible original helical/triad amplitude or NSE continuation. With M=0 a nonzero work shift cannot preserve that output.
