@@ -162,7 +162,7 @@ def run():
     assert t==F('3.51329275')
     hleft=F('.0020475');hright=F('.0020482')
     left=step_off(t,hleft,root,delta,F('.000001'),bracket=True)[0]
-    right=step_off(t,hright,root,delta,F('.000001'),bracket=True)[0]
+    right,rightroot,rightdelta=step_off(t,hright,root,delta,F('.000001'),bracket=True)
     assert left['valid'] and right['valid']
     assert int(left['gON_end'][1])<0 and int(right['gON_end'][0])>0
     assert int(right['signed_ON_slope'][0])>0
@@ -198,6 +198,8 @@ def run():
        spark_ON_right_guard_grid=right['gON_end'],
        third_J24_spark_ON_box_included_all_nine=True,
        third_event_state_grid=[[str(x.a),str(x.b)] for x in third_state],
+       virtual_OFF_right_root=[str(v) for v in rightroot],
+       virtual_OFF_right_delta=[str(v) for v in rightdelta],
        spark_ON_saltation_determinant_grid=[str(determinant.a),str(determinant.b)],
        post_ON_flow_not_integrated=True,
        post_OFF_guard_rows=accepted,
