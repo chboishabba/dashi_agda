@@ -11,7 +11,7 @@ from fractions import Fraction as F
 from pathlib import Path
 import json
 from itertools import product
-from hashlib import sha256
+from hashlib import sha1, sha256
 
 q=lambda s: F(str(s))
 class I:
@@ -94,6 +94,9 @@ def jacobian_first_eight(U,V):
 
 def run(checkpoint_path):
     raw=Path(checkpoint_path).read_bytes(); ck=json.loads(raw)
+    original_blob=sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+    selected=sha256(json.dumps({key:ck[key] for key in ('status','t','nsteps','root','delta')}, sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    assert selected=='59827154759aac9a0fa6e475a1cf214ec896e935e3a9a914e3e262667c45931d'
     assert ck['status']=='J28B_PASS_SIGNED_VARIATIONAL_BLOCK' and ck['nsteps']==75
     assert F(ck['t'])==F('4.26534095')
     root=list(map(F,ck['root'])); delta=list(map(F,ck['delta']))
@@ -153,9 +156,10 @@ def run(checkpoint_path):
     assert bound==F(189,61100000) and bound<F(1,300000)
     return {
       'status':'J29A_PASS_EXACT_LOCAL_U_SWITCH_CONTINUITY_AND_QUADRATIC_HANDOFF_BOUND',
-      'checkpoint_selected_values_sha256':sha256(json.dumps({key:ck[key] for key in ('status','t','nsteps','root','delta')}, sort_keys=True,separators=(',',':')).encode()).hexdigest(),
+      'checkpoint_selected_values_sha256':selected,
       'checkpoint_original_Git_blob_expected':'74c1a94b30c44a772016c93b39558bc446359832',
-      'original_checkpoint_raw_bytes_replayed':False,
+      'actual_local_checkpoint_git_blob':original_blob,
+      'original_checkpoint_raw_bytes_replayed':original_blob=='74c1a94b30c44a772016c93b39558bc446359832',
       'checkpoint_headtime':str(F(ck['t'])),
       'certified_root_bracket_inherited':['4.27514095','4.27574095'],
       'model_time_duration_0p0104_Picard_tube':{'start':'4.26534095','end':'4.27574095','radius':str(radius),'exact_positive_Picard_slack_min':str(min(slacks)), 'all_9_coordinate_initial_error_included':True},
