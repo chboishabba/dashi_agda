@@ -90,7 +90,7 @@ weightTwoIsConformalPlusMonster :
   ≡ weightTwoConformalMultiplicity + weightTwoMonsterConstituentDimension
 weightTwoIsConformalPlusMonster = refl
 
-record MoonshineGradeBoundary : Set₁ where
+record MoonshineGradeBoundary : Set where
   constructor moonshineGradeBoundary
   field
     weightTwoOneIsVacuumLine : Set

@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.ConcreteComplex
-import DASHI.Analysis.PrincipalComplexLogRealization as Realization
+open import DASHI.Analysis.PrincipalComplexLogRealization
 
 ------------------------------------------------------------------------
 -- Algebraic complex-field completion.
@@ -146,7 +146,7 @@ ordinaryPrincipalPolarAuthority :
     {F : ComplexFieldAuthority (real (realPackage C)) D}
     (P : OrdinaryPolarData C D F) →
   OrdinaryPrincipalBranchLaws C D F P →
-  Realization.PrincipalPolarAuthority C
+  PrincipalPolarAuthority C
 ordinaryPrincipalPolarAuthority {C} {D} P B =
   record
     { Domain = Domain P

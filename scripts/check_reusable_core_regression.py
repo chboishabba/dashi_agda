@@ -163,16 +163,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--agda29-jobs",
         type=int,
-        default=8,
-        help="Parallel jobs for --agda29-parallel (default: 8).",
+        default=0,
+        help="Parallel jobs for --agda29-parallel (default: 0, auto-detect cores).",
     )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    if args.agda29_parallel and args.agda29_jobs < 1:
-        print(f"--agda29-jobs must be >= 1 (got {args.agda29_jobs})")
+    if args.agda29_parallel and args.agda29_jobs < 0:
+        print(f"--agda29-jobs must be >= 0 (got {args.agda29_jobs})")
         return 1
     active_agda_or_ghc()
 

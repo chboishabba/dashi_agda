@@ -2,7 +2,7 @@ module DASHI.Core.TypedDependencyCore where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level)
 
 ------------------------------------------------------------------------
 -- Typed dependency core.
@@ -47,7 +47,6 @@ forgetDependencyToBool :
 forgetDependencyToBool witness = true
 
 record DependencyFamily (Index : Set) : Set₁ where
-  constructor dependencyFamily
   field
     Requirement : Index → Set
     requirementLabel : Index → String
@@ -59,7 +58,6 @@ record FamilyWitness
     {Index : Set}
     (family : DependencyFamily Index)
     (index : Index) : Set where
-  constructor familyWitness
   field
     witness : Requirement family index
     witnessReceipt : String
@@ -69,17 +67,9 @@ open FamilyWitness public
 ------------------------------------------------------------------------
 -- Actions are not made admissible merely because an action constructor is
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
---
--- Preserve the original public API: State and Action are both explicit
--- parameters.  Only the state carrier is universe-polymorphic; Action remains
--- Set₀ because the existing repository consumers use ordinary symbolic action
--- types.  The record itself lives one level above State.
 ------------------------------------------------------------------------
 
-record DependentActionSystem
-    {ℓ : Level}
-    (State : Set ℓ)
-    (Action : Set) : Set (lsuc ℓ) where
+record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
   field
     Precondition : State → Action → Set
     Postcondition : State → Action → State → Set
@@ -88,13 +78,11 @@ record DependentActionSystem
 open DependentActionSystem public
 
 record AdmissibleAction
-    {ℓ : Level}
     {State : Set ℓ}
     {Action : Set}
-    (system : DependentActionSystem State Action)
+    (system : DependentActionSystem {State = State} Action)
     (before : State)
-    (action : Action) : Set where
-  constructor admissibleAction
+    (action : Action) : Set ℓ where
   field
     precondition : Precondition system before action
     after : State
@@ -112,7 +100,6 @@ open AdmissibleAction public
 
 record IrreducibleTernaryDependency
     (A B C Joint AB AC BC : Set) : Set where
-  constructor irreducibleTernaryDependency
   field
     leftWitness : A
     middleWitness : B
@@ -126,7 +113,6 @@ record IrreducibleTernaryDependency
 open IrreducibleTernaryDependency public
 
 record DependencyUpgradeBoundary : Set where
-  constructor dependencyUpgradeBoundary
   field
     witnessCarriesMoreThanBoolean : Bool
     booleanProjectionAvailable : Bool

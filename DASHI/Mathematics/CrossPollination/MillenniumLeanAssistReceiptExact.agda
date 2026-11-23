@@ -26,12 +26,7 @@ module DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
-
-import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TerminalSemanticsDecisionFailureExact as PNPQ1
-import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as NSReleased
 
 record MillenniumLeanAssistReceipt : Set where
   constructor millennium-lean-assist-receipt
@@ -94,78 +89,6 @@ record MillenniumLeanAssistReceipt : Set where
       String
 
     hodgeCP1CellularH2Source :
-      String
-
-    hodgeCP1SingularTransportSource :
-      String
-
-    bsdLocalPolynomialSameObjectSource :
-      String
-
-    bsdLocalEulerFactorSameObjectSource :
-      String
-
-    bsdActualLocalPointGroupSource :
-      String
-
-    bsdLocalKummerBoundaryCasesSource :
-      String
-
-    bsdLocalKummerSecantSource :
-      String
-
-    bsdLocalKummerTangentSource :
-      String
-
-    bsdLocalKummerSecantDispatchSource :
-      String
-
-    bsdLocalKummerTangentDispatchSource :
-      String
-
-    bsdGlobalPrimePlaceWeldSource :
-      String
-
-    bsdLocalKummerTorsionTranslationSource :
-      String
-
-    bsdLocalKummerHomomorphismSource :
-      String
-
-    bsdExplicitSelmerSubgroupSource :
-      String
-
-    bsdGlobalKummerQuotientToSelmerSource :
-      String
-
-    bsdGlobalKummerKernelExactSource :
-      String
-
-    bsdExplicitSelmerCokernelExactSource :
-      String
-
-    bsdSelmerShaCohomologicalBoundarySource :
-      String
-
-    bsdGlobalLocalFactorSameObjectSource :
-      String
-
-    bsdGlobalEulerPrimePowerSource :
-      String
-
-    bsdHasseEulerDirichletAgreementSource :
-      String
-
-    bsdEtaToActualLTransferSource :
-      String
-
-    hodgeTetrahedralNativeH2Source :
-      String
-
-    hodgeTetrahedralNormalizedToSingularSource :
-      String
-
-    hodgeCP1PrizeFacingClosureSource :
       String
 
     hodgeCP1QuotientSourcePresent :
@@ -234,78 +157,6 @@ record MillenniumLeanAssistReceipt : Set where
     hodgePointCellularGeneratorSourcePresent :
       Bool
 
-    hodgeCP1SingularTransportSourcePresent :
-      Bool
-
-    bsdLocalPolynomialSameObjectSourcePresent :
-      Bool
-
-    bsdLocalEulerFactorSameObjectSourcePresent :
-      Bool
-
-    bsdActualLocalPointGroupSourcePresent :
-      Bool
-
-    bsdLocalKummerBoundaryCasesSourcePresent :
-      Bool
-
-    bsdLocalKummerSecantSourcePresent :
-      Bool
-
-    bsdLocalKummerTangentSourcePresent :
-      Bool
-
-    bsdLocalKummerSecantDispatchSourcePresent :
-      Bool
-
-    bsdLocalKummerTangentDispatchSourcePresent :
-      Bool
-
-    bsdGlobalPrimePlaceWeldSourcePresent :
-      Bool
-
-    bsdLocalKummerTorsionTranslationSourcePresent :
-      Bool
-
-    bsdLocalKummerHomomorphismSourcePresent :
-      Bool
-
-    bsdExplicitSelmerSubgroupSourcePresent :
-      Bool
-
-    bsdGlobalKummerQuotientToSelmerSourcePresent :
-      Bool
-
-    bsdGlobalKummerKernelExactSourcePresent :
-      Bool
-
-    bsdExplicitSelmerCokernelExactSourcePresent :
-      Bool
-
-    bsdSelmerShaCohomologicalBoundarySourcePresent :
-      Bool
-
-    bsdGlobalLocalFactorSameObjectSourcePresent :
-      Bool
-
-    bsdGlobalEulerPrimePowerSourcePresent :
-      Bool
-
-    bsdHasseEulerDirichletAgreementSourcePresent :
-      Bool
-
-    bsdEtaToActualLTransferSourcePresent :
-      Bool
-
-    hodgeTetrahedralNativeH2SourcePresent :
-      Bool
-
-    hodgeTetrahedralNormalizedToSingularSourcePresent :
-      Bool
-
-    hodgeCP1PrizeFacingClosureSourcePresent :
-      Bool
-
     sourcesRootedInSynthesis :
       Bool
 
@@ -327,7 +178,7 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "c0bec1fd85751a4db719afddc472e548896613c3"
+    "196c1041eea4f5a62c4d99d8f6d0fd149a6c86b5"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
@@ -344,54 +195,6 @@ currentMillenniumLeanAssistReceipt =
     "Synthesis/MillenniumBSDTotalLocalKummer.lean"
     "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
     "Synthesis/MillenniumHodgeCP1CellularH2.lean"
-    "Synthesis/MillenniumHodgeCP1SingularTransport.lean"
-    "Synthesis/MillenniumBSDLocalPolynomialSameObject.lean"
-    "Synthesis/MillenniumBSDLocalEulerFactorSameObject.lean"
-    "Synthesis/MillenniumBSDActualLocalPointGroup.lean"
-    "Synthesis/MillenniumBSDLocalKummerBoundaryCases.lean"
-    "Synthesis/MillenniumBSDLocalKummerSecant.lean"
-    "Synthesis/MillenniumBSDLocalKummerTangent.lean"
-    "Synthesis/MillenniumBSDLocalKummerSecantDispatch.lean"
-    "Synthesis/MillenniumBSDLocalKummerTangentDispatch.lean"
-    "Synthesis/MillenniumBSDGlobalPrimePlaceWeld.lean"
-    "Synthesis/MillenniumBSDLocalKummerTorsionTranslation.lean"
-    "Synthesis/MillenniumBSDLocalKummerHomomorphism.lean"
-    "Synthesis/MillenniumBSDExplicitSelmerSubgroup.lean"
-    "Synthesis/MillenniumBSDGlobalKummerQuotientToSelmer.lean"
-    "Synthesis/MillenniumBSDGlobalKummerKernelExact.lean"
-    "Synthesis/MillenniumBSDExplicitSelmerCokernelExact.lean"
-    "Synthesis/MillenniumBSDSelmerShaCohomologicalBoundary.lean"
-    "Synthesis/MillenniumBSDGlobalLocalFactorSameObject.lean"
-    "Synthesis/MillenniumBSDGlobalEulerPrimePower.lean"
-    "Synthesis/MillenniumBSDHasseEulerDirichletAgreement.lean"
-    "Synthesis/MillenniumBSDEtaToActualLTransfer.lean"
-    "Synthesis/MillenniumHodgeTetrahedralNativeH2.lean"
-    "Synthesis/MillenniumHodgeTetrahedralNormalizedToSingular.lean"
-    "Synthesis/MillenniumHodgeCP1PrizeFacingClosure.lean"
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
     true
     true
     true
@@ -418,97 +221,3 @@ currentMillenniumLeanAssistReceipt =
     true
     false
     false
-
-
-------------------------------------------------------------------------
--- CURRENT LEAN MILLENNIUM EXTERNAL-ACCEPTANCE CUSTODY
---
--- This receipt updates external target custody without replacing the older
--- theorem-source receipt above. It records the exact independent target pin,
--- the existing DASHI same-object weld reuse rule, and the fail-closed status
--- of targets that LeanDojo marks as incomplete.
---
--- Attribution:
---   * LeanDojo and its contributors own the external Lean statements.
---   * Existing DASHI Lean/Agda theorem owners retain proof ownership.
---   * This Agda owner records custody and non-promotion only.
-------------------------------------------------------------------------
-
-record MillenniumExternalAcceptanceReceipt : Set where
-  constructor millennium-external-acceptance-receipt
-  field
-    leanRepository : String
-    leanPullRequest : String
-    leanBranch : String
-    leanObservedHead : String
-    leanDojoRepository : String
-    leanDojoCommit : String
-    leanDojoVendorPath : String
-    riemannExternalTarget : String
-    navierStokesExternalTargets : String
-    bsdExternalTarget : String
-    hodgeExternalTarget : String
-    yangMillsExternalTarget : String
-    riemannExistingTerminalSource : String
-    navierStokesLiteralTerminalSource : String
-    bsdExistingRankWeldSource : String
-    yangMillsExistingPhysicalWeldSource : String
-    exactExternalDeclarationsPinned : Bool
-    existingSameObjectWeldsReused : Bool
-    hodgeExternalTargetValid : Bool
-    yangMillsExternalTargetValid : Bool
-    directCrossToolchainAdapterKernelChecked : Bool
-    receiptCreatesPrizeProof : Bool
-
-open MillenniumExternalAcceptanceReceipt public
-
-currentMillenniumExternalAcceptanceReceipt :
-  MillenniumExternalAcceptanceReceipt
-currentMillenniumExternalAcceptanceReceipt =
-  millennium-external-acceptance-receipt
-    "chboishabba/dashi_lean4"
-    "#45"
-    "agent/millennium-external-target-adapters-20261006"
-    "9ab3f6a852af95061cd7ba5a890767ba7c1a1817"
-    "lean-dojo/LeanMillenniumPrizeProblems"
-    "603053dc267cf3efe422f438eb78098c0ececd6f"
-    "vendor/LeanMillenniumPrizeProblems"
-    "Millennium.ClayRiemannHypothesis"
-    "MillenniumNavierStokes.FeffermanA|B|C|D"
-    "MillenniumBirchSwinnertonDyer.ClayBirchSwinnertonDyer"
-    "MillenniumHodge.ClayHodge"
-    "MillenniumYangMills.ClayYangMills"
-    "Synthesis.RiemannSelectedRHMaxCutFrontier"
-    "ExternalClayNS/LiteralABCD.lean"
-    "Synthesis/MillenniumBSDUniversalRankWeld.lean"
-    "Welds/YMClayAssembly.lean"
-    true
-    true
-    false
-    false
-    false
-    false
-
-millenniumExternalDeclarationsPinned :
-  exactExternalDeclarationsPinned currentMillenniumExternalAcceptanceReceipt ≡ true
-millenniumExternalDeclarationsPinned = refl
-
-millenniumExistingSameObjectWeldsReused :
-  existingSameObjectWeldsReused currentMillenniumExternalAcceptanceReceipt ≡ true
-millenniumExistingSameObjectWeldsReused = refl
-
-millenniumHodgeExternalTargetInvalid :
-  hodgeExternalTargetValid currentMillenniumExternalAcceptanceReceipt ≡ false
-millenniumHodgeExternalTargetInvalid = refl
-
-millenniumYangMillsExternalTargetInvalid :
-  yangMillsExternalTargetValid currentMillenniumExternalAcceptanceReceipt ≡ false
-millenniumYangMillsExternalTargetInvalid = refl
-
-millenniumCrossToolchainAdapterStillNotKernelChecked :
-  directCrossToolchainAdapterKernelChecked currentMillenniumExternalAcceptanceReceipt ≡ false
-millenniumCrossToolchainAdapterStillNotKernelChecked = refl
-
-millenniumExternalReceiptDoesNotCreatePrizeProof :
-  receiptCreatesPrizeProof currentMillenniumExternalAcceptanceReceipt ≡ false
-millenniumExternalReceiptDoesNotCreatePrizeProof = refl

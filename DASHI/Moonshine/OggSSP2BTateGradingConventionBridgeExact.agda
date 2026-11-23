@@ -59,7 +59,6 @@ weightThreeMapsToEvenBRDegree = refl
 ------------------------------------------------------------------------
 
 record TwoBTateGradingSourceReceipt : Set where
-  eta-equality
   constructor two-b-tate-grading-source-receipt
   field
     borcherdsRybaUsesQExponentIndex : Bool

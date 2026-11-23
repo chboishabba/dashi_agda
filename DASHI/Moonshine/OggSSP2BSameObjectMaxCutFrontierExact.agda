@@ -79,7 +79,7 @@ completionTenPerFibre : Nat
 completionTenPerFibre = Three.completionTenPerFibre
 
 transportedSelectedTotal : Nat
-transportedSelectedTotal = _*_ threeTwoBFibres completionTenPerFibre
+transportedSelectedTotal = threeTwoBFibres * completionTenPerFibre
 
 transportedSelectedTotalIsThirty : transportedSelectedTotal ≡ 30
 transportedSelectedTotalIsThirty = Three.threeFibreCompletionCountIsThirty

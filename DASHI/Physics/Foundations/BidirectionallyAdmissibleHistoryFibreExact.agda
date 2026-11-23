@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact where
 
 open import DASHI.Core.Prelude

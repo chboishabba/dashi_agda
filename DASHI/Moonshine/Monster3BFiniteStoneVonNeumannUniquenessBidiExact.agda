@@ -3,6 +3,7 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Stone
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact as Commutant
 
 ------------------------------------------------------------------------
@@ -170,14 +171,14 @@ data UniquenessLeaf : Set where
   constructActualZetaRecognition : UniquenessLeaf
 
 
-data LeafStatus : Set where closed leafOpen blocked : LeafStatus
+data LeafStatus : Set where closed open blocked : LeafStatus
 
 leafStatus : UniquenessLeaf → LeafStatus
 leafStatus nonlinearSignatureInventory = closed
 leafStatus fixedPhaseSelectsUniqueSignature = closed
 leafStatus modelWitnessedIrreducibility = closed
 leafStatus modelScalarCommutant = closed
-leafStatus instantiateCharacterDeterminationTheorem = leafOpen
+leafStatus instantiateCharacterDeterminationTheorem = open
 leafStatus attachActualRestrictedIrreduciblesToSignature = blocked
 leafStatus constructActualZetaRecognition = blocked
 
@@ -185,7 +186,7 @@ highestImpactUniquenessLeaf : UniquenessLeaf
 highestImpactUniquenessLeaf = instantiateCharacterDeterminationTheorem
 
 highestImpactUniquenessLeafIsOpen :
-  leafStatus highestImpactUniquenessLeaf ≡ leafOpen
+  leafStatus highestImpactUniquenessLeaf ≡ open
 highestImpactUniquenessLeafIsOpen = refl
 
 ------------------------------------------------------------------------

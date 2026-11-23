@@ -1,98 +1,67 @@
-import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
--- RH source-aligned coefficient gluing: positive normalization only, not RH/Monster promotion.
-import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
--- Finite C2-equivariant source-carrier map; NOT a Monster-group or RH-zero action.
-import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as RH128C2
--- Source-typed RH 163840 dyadic tail, actual H_X->H_T reuse, NO analytic/Monster promotion.
-import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as RH163840
--- Actual native paired translation/dual symplectic automorphisms; no Monster-normalizer promotion.
-import DASHI.Analysis.RHQuartic128HeisenbergPairedSixSymplecticExact as RHHeisenberg
-
-import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
-import DASHI.Core.AuthorityNonPromotionCore as AuthorityOwner
-import DASHI.Unified.GRQuantumProofTerms as GRTypes
-import DASHI.Physics.Closure.FiniteRegionalSpectrum as UVSpectrum
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
-import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
-import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-
-
--- Reuse source-owned legal governance non-promotion proofs.
-import DASHI.Unified.LegalGovernanceNonPromotionTOEExact
-
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (Bool; false)
-open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
-open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
-open import Data.Nat.Base using (ℕ)
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
+------------------------------------------------------------------------
+-- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
+-- existing SSP/369 representation-reduction and physics instances.
+------------------------------------------------------------------------
 
--- Canonical TOE owners. Import once. Do not copy original proofs.
 import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
-import DASHI.Unified.GRQuantumProofTermRegression
+import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as Governance
+import DASHI.Unified.TOEGovernanceSemanticNonPromotionValidation
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow
+import DASHI.Law.ClosedIsNotAdequateExact as Closed
+import DASHI.Law.MaboRevisionReopenExact as MaboRevision
 
--- Reuse PR #1278's original semantic-closure theorem.
-import DASHI.Governance.FormalisationGovernanceCapstoneExact as Governance
-import DASHI.Core.KernelSemanticClosureBoundaryExact as Closure
-import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 
--- Reuse parent PR #1244. Keep each selected group carrier distinct.
-import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteStageExact as Horn
-import DASHI.Mathematics.Topology.AlexanderHornedC3VOAKernelBidiExact as VOA
-import DASHI.Mathematics.Topology.AlexanderHornedC3SUNLieGroupReuseExact as SUNHorn
-import DASHI.Mathematics.Topology.AlexanderHornedC3FiniteVOAActorExact
-import DASHI.Physics.YangMills.CompactLieInnerC3Exact as InnerC3
+------------------------------------------------------------------------
+-- Direct normalized governance and legal-research TOE surface.
+------------------------------------------------------------------------
 
--- Reuse the source-written chronological cylinder consumer from #1254.
-import DASHI.Mathematics.Topology.ExoticHornChronologicalCantorConsumerExact
+toeGovernanceHandoff :
+  Governance.TOEGovernanceHandoff
+toeGovernanceHandoff =
+  Governance.canonicalTOEGovernanceHandoff
 
--- Preconditions: finite horn word and natural depth.
--- Invariant: the original C3 word rotation respects expansion.
--- Postcondition: export the existing all-depth theorem unchanged.
-toeHornC3CommutesAtEveryFiniteStage :
-  (n : Nat) (w : Horn.Word) →
-  Horn.rotateWord (Horn.expandN n w) ≡
-  Horn.expandN n (Horn.rotateWord w)
-toeHornC3CommutesAtEveryFiniteStage =
-  Horn.rotationCommutesAtEveryFiniteStage
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalWorkflow.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  Governance.toeWorkflowTaskCompletionDoesNotCreateTruth
 
--- Preconditions: an original nonfaithful finite VOA actor witness.
--- Postcondition: full source-word recovery through this actor fails.
-toeVOAActorCannotRecoverExteriorSource :
-  (source : VOA.NonfaithfulVOAGroupActor) →
-  Transport.ClaimTransport
-    (VOA.actorOf source) (λ x → x) → ⊥
-toeVOAActorCannotRecoverExteriorSource =
-  VOA.cannotRecoverExteriorGroupFromSelectedVOAActor
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalWorkflow.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority =
+  Governance.toeWorkflowDatabaseCommitDoesNotCreateSemanticAuthority
 
--- Backwards-compatible name for the same source theorem.
-toeSelectedVOAActorCannotRecoverSource :
-  (source : VOA.NonfaithfulVOAGroupActor) →
-  Transport.ClaimTransport
-    (VOA.actorOf source) (λ x → x) → ⊥
-toeSelectedVOAActorCannotRecoverSource =
-  toeVOAActorCannotRecoverExteriorSource
+toeNoFreshDemandDoesNotProveConsumerAdequacy :
+  Closed.noFreshDemandIsConsumerAdequacyProof
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ false
+toeNoFreshDemandDoesNotProveConsumerAdequacy =
+  Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy
 
-toeKernelProofDoesNotEstablishSourceSemantics :
-  Closure.semanticallyExhaustive
-    Closure.criticalCapstoneStatus ≡ false
-toeKernelProofDoesNotEstablishSourceSemantics =
-  Governance.kernelClosureIsNotSemanticExhaustiveness
+toeExactNonfactorabilityMayReopenClosedFrontier :
+  Closed.exactNonfactorabilityMayReopenClosedFrontier
+    Closed.canonicalClosedIsNotAdequateBoundary
+  ≡ true
+toeExactNonfactorabilityMayReopenClosedFrontier =
+  Governance.toeExactNonfactorabilityMayReopenClosedFrontier
 
--- Import-only ownership. No new compact SU3 existence theorem.
--- No geometric exterior pi1 / Monster 3B / physical TOE promotion.
--- Historical DASHI.Unifier placeholders are not imported.
--- No ESD code, or any DASHI.Unified source, was edited.
+toeRevisionChangeReopensContextBeforeIdentity :
+  MaboRevision.revisionChangeReopensContextBeforeIdentity
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ true
+toeRevisionChangeReopensContextBeforeIdentity =
+  Governance.toeRevisionChangeReopensContextBeforeIdentity
+
+toeLatestRevisionLookupDoesNotPayContextReview :
+  MaboRevision.latestRevisionLookupPaysContextReview
+    MaboRevision.canonicalMaboRevisionReopenBoundary
+  ≡ false
+toeLatestRevisionLookupDoesNotPayContextReview =
+  Governance.toeLatestRevisionLookupDoesNotPayContextReview

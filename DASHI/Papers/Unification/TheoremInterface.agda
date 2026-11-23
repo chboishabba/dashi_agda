@@ -33,8 +33,7 @@ paperInterfaceStatement =
   "Paper-facing Unification interface: UCT.1-UCT.8 theorem grammar and consumer surfaces are imported from existing fail-closed receipts; UCT.1-UCT.4 remain the live wall; terminal unification promotion remains false."
 
 data UnificationPaperStatus : Set where
-  importedUCTReceiptsAssembled_terminalFalse :
-    UnificationPaperStatus
+  importedUCTReceiptsAssembled_terminalFalse : UnificationPaperStatus
 
 record UnificationPaperTheoremInterface : Setω where
   field

@@ -60,13 +60,13 @@ VOACarrier :
   ∀ {G K : Set} {group : GR.Group G} →
   VOA.MoonshineVOABridge G K group → Set
 VOACarrier bridge =
-  VOA.GradedModule.Carrier (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+  VOA.GradedModule.Carrier (VOA.gradedModule (VOA.voa bridge))
 
 VOAScalar :
   ∀ {G K : Set} {group : GR.Group G} →
   VOA.MoonshineVOABridge G K group → Set
 VOAScalar bridge =
-  VOA.GradedModule.Scalar (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+  VOA.GradedModule.Scalar (VOA.gradedModule (VOA.voa bridge))
 
 ------------------------------------------------------------------------
 -- 3. Same-carrier receipts attaching the order-three/cyclotomic structure to
@@ -94,46 +94,46 @@ record ActualMonster3BVOAPhaseActionSource
     inverseCentralOnEigenstate :
       (phase : Inertia.CentralPhase3) →
       (state : VOACarrier bridge) →
-      VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) centralElement state
+      VOA.VOAGroupAction.act (VOA.monsterAction bridge) centralElement state
       ≡ VOA.GradedModule._·_
-          (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+          (VOA.gradedModule (VOA.voa bridge))
           (cyclotomicScalar (phaseCyclotomic phase)) state →
-      VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) centralInverseElement state
+      VOA.VOAGroupAction.act (VOA.monsterAction bridge) centralInverseElement state
       ≡ VOA.GradedModule._·_
-          (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+          (VOA.gradedModule (VOA.voa bridge))
           (cyclotomicScalar (phaseCyclotomic (Inertia.invertPhase phase))) state
 
     preservingIntertwiner :
       (normalizer : G) →
       preservesOrInverts normalizer ≡ true →
       (state : VOACarrier bridge) →
-      VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) centralElement
-        (VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer state)
-      ≡ VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer
-          (VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) centralElement state)
+      VOA.VOAGroupAction.act (VOA.monsterAction bridge) centralElement
+        (VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer state)
+      ≡ VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer
+          (VOA.VOAGroupAction.act (VOA.monsterAction bridge) centralElement state)
 
     invertingIntertwiner :
       (normalizer : G) →
       preservesOrInverts normalizer ≡ false →
       (state : VOACarrier bridge) →
-      VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) centralElement
-        (VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer state)
-      ≡ VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer
+      VOA.VOAGroupAction.act (VOA.monsterAction bridge) centralElement
+        (VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer state)
+      ≡ VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer
           (VOA.VOAGroupAction.act
-            (VOA.MoonshineVOABridge.monsterAction bridge) centralInverseElement state)
+            (VOA.monsterAction bridge) centralInverseElement state)
 
     phaseLinearity :
       (normalizer : G) →
       (phase : Inertia.CentralPhase3) →
       (state : VOACarrier bridge) →
-      VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer
+      VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer
         (VOA.GradedModule._·_
-          (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+          (VOA.gradedModule (VOA.voa bridge))
           (cyclotomicScalar (phaseCyclotomic phase)) state)
       ≡ VOA.GradedModule._·_
-          (VOA.gradedModule (VOA.MoonshineVOABridge.voa bridge))
+          (VOA.gradedModule (VOA.voa bridge))
           (cyclotomicScalar (phaseCyclotomic phase))
-          (VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction bridge) normalizer state)
+          (VOA.VOAGroupAction.act (VOA.monsterAction bridge) normalizer state)
 
 open ActualMonster3BVOAPhaseActionSource public
 
@@ -150,13 +150,13 @@ centralPhaseActionFromVOA source =
   record
     { centralAct =
         VOA.VOAGroupAction.act
-          (VOA.MoonshineVOABridge.monsterAction (bridge source)) (centralElement source)
+          (VOA.monsterAction (bridge source)) (centralElement source)
     ; centralInverseAct =
         VOA.VOAGroupAction.act
-          (VOA.MoonshineVOABridge.monsterAction (bridge source)) (centralInverseElement source)
+          (VOA.monsterAction (bridge source)) (centralInverseElement source)
     ; phaseScale = λ phase state →
         VOA.GradedModule._·_
-          (VOA.gradedModule (VOA.MoonshineVOABridge.voa (bridge source)))
+          (VOA.gradedModule (VOA.voa (bridge source)))
           (cyclotomicScalar source (phaseCyclotomic phase)) state
     ; inverseCentralOnEigenstate = inverseCentralOnEigenstate source
     }
@@ -168,7 +168,7 @@ normalizerActionFromVOA :
 normalizerActionFromVOA source =
   record
     { phaseAction = centralPhaseActionFromVOA source
-    ; act = VOA.VOAGroupAction.act (VOA.MoonshineVOABridge.monsterAction (bridge source))
+    ; act = VOA.VOAGroupAction.act (VOA.monsterAction (bridge source))
     ; preservesOrInverts = preservesOrInverts source
     ; preservingIntertwiner = preservingIntertwiner source
     ; invertingIntertwiner = invertingIntertwiner source

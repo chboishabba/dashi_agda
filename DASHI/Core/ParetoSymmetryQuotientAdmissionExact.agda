@@ -60,7 +60,7 @@ mapsWeakDominance :
   Pareto.WeaklyDominates costs
     (mapModel symmetry left)
     (mapModel symmetry right)
-mapsWeakDominance symmetry {left = left} {right = right} dominates axis
+mapsWeakDominance symmetry dominates axis
   rewrite preservesAxisCost symmetry axis left
         | preservesAxisCost symmetry axis right =
   dominates axis

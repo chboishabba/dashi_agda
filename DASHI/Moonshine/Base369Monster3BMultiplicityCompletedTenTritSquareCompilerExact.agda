@@ -170,8 +170,8 @@ completedChartIntertwinesCompiled :
     (compiledTenByNineAct attachment inertia surface)
   ≡ completedActualAct attachment inertia
       (Completed.toCompletedTenTritSquare surface)
-completedChartIntertwinesCompiled attachment inertia (fine , sheet)
-  rewrite Completed.coarseAfterFin10 fine | Completed.tritSquareAfterFin9 sheet = refl
+completedChartIntertwinesCompiled attachment inertia surface
+  rewrite Completed.fromAfterToCompleted surface = refl
 
 compiledCompletedAttachment :
   ∀ {source : Action.ActualMonster3BActionRecognition} →

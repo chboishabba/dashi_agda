@@ -9,7 +9,7 @@ It verifies:
    Bishop compatibility commit;
 2. the pinned upstream base and local compatibility commit remain explicitly
    distinguished;
-3. the Agda 2.9 wrapper copies and includes bishop;
+3. the Agda 2.9 wrapper copies and includes vendor/bishop;
 4. all proof-critical backend modules are present;
 5. s = 11/4 and its decay arithmetic are exact;
 6. the quarter/thirty-second recurrences and 128/93 mass are exact;
@@ -25,7 +25,7 @@ from fractions import Fraction
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-BISHOP_PATH = REPO_ROOT / "bishop"
+BISHOP_PATH = REPO_ROOT / "vendor/bishop"
 
 UPSTREAM_BASE = "582c6afcdf805d06730c8c0aa970f4a6e033b611"
 PATCHED_GITLINK = "d6b24f905ec6596c2a63a1dcdfe4dda4ffe4a6a2"
@@ -50,15 +50,15 @@ def run_git(*args: str, cwd: Path = REPO_ROOT) -> str:
 
 
 def check_gitlink() -> bool:
-    print("[1/7] Checking patched bishop gitlink...")
+    print("[1/7] Checking patched vendor/bishop gitlink...")
     try:
-        index_line = run_git("ls-files", "-s", "bishop")
+        index_line = run_git("ls-files", "-s", "vendor/bishop")
     except RuntimeError as error:
         return fail(str(error))
 
     fields = index_line.split()
     if len(fields) < 4 or fields[0] != "160000":
-        return fail(f"bishop is not a gitlink: {index_line!r}")
+        return fail(f"vendor/bishop is not a gitlink: {index_line!r}")
     index_commit = fields[1]
     if index_commit != PATCHED_GITLINK:
         return fail(
@@ -66,7 +66,7 @@ def check_gitlink() -> bool:
         )
 
     if not BISHOP_PATH.is_dir():
-        return fail("bishop is not initialized")
+        return fail("vendor/bishop is not initialized")
     try:
         checkout_commit = run_git("rev-parse", "HEAD", cwd=BISHOP_PATH)
     except RuntimeError as error:
@@ -115,13 +115,13 @@ def check_wiring() -> bool:
     required_fragments = (
         "rsync -a --delete --prune-empty-dirs",
         "--include='*.agda'",
-        "-i bishop",
+        "-i vendor/bishop",
     )
     missing = [fragment for fragment in required_fragments if fragment not in content]
     if missing:
         return fail(f"wrapper is missing required wiring: {missing}")
 
-    print("  OK: shadow copy includes Agda sources and Agda receives -i bishop")
+    print("  OK: shadow copy includes Agda sources and Agda receives -i vendor/bishop")
     return True
 
 

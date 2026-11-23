@@ -25,59 +25,41 @@ map f (x ∷ xs) = f x ∷ map f xs
 -- Families.
 
 data FormalLensFamily : Set where
-  Algebraic :
-    FormalLensFamily
+  Algebraic : FormalLensFamily
 
-  Categorical :
-    FormalLensFamily
+  Categorical : FormalLensFamily
 
-  Logical :
-    FormalLensFamily
+  Logical : FormalLensFamily
 
-  OrderTheoretic :
-    FormalLensFamily
+  OrderTheoretic : FormalLensFamily
 
-  GraphTheoretic :
-    FormalLensFamily
+  GraphTheoretic : FormalLensFamily
 
-  Ontological :
-    FormalLensFamily
+  Ontological : FormalLensFamily
 
-  ProvenanceTheoretic :
-    FormalLensFamily
+  ProvenanceTheoretic : FormalLensFamily
 
-  Topological :
-    FormalLensFamily
+  Topological : FormalLensFamily
 
-  Geometric :
-    FormalLensFamily
+  Geometric : FormalLensFamily
 
-  NumberTheoretic :
-    FormalLensFamily
+  NumberTheoretic : FormalLensFamily
 
-  Dynamical :
-    FormalLensFamily
+  Dynamical : FormalLensFamily
 
-  OperatorTheoretic :
-    FormalLensFamily
+  OperatorTheoretic : FormalLensFamily
 
-  InformationTheoretic :
-    FormalLensFamily
+  InformationTheoretic : FormalLensFamily
 
-  StatisticalFamily :
-    FormalLensFamily
+  StatisticalFamily : FormalLensFamily
 
-  DecisionTheoretic :
-    FormalLensFamily
+  DecisionTheoretic : FormalLensFamily
 
-  CryptographicFamily :
-    FormalLensFamily
+  CryptographicFamily : FormalLensFamily
 
-  GovernanceTheoretic :
-    FormalLensFamily
+  GovernanceTheoretic : FormalLensFamily
 
-  SymbolicRationalFamily :
-    FormalLensFamily
+  SymbolicRationalFamily : FormalLensFamily
 
   NamedFormalLensFamily :
     String →
@@ -87,308 +69,207 @@ data FormalLensFamily : Set where
 -- Kinds.
 
 data FormalLensKind : Set where
-  Algebra :
-    FormalLensKind
+  Algebra : FormalLensKind
 
-  GeneratedAlgebra :
-    FormalLensKind
+  GeneratedAlgebra : FormalLensKind
 
-  UniversalAlgebra :
-    FormalLensKind
+  UniversalAlgebra : FormalLensKind
 
-  QuadraticCarrier :
-    FormalLensKind
+  QuadraticCarrier : FormalLensKind
 
-  GradedAlgebra :
-    FormalLensKind
+  GradedAlgebra : FormalLensKind
 
-  OperatorAlgebra :
-    FormalLensKind
+  OperatorAlgebra : FormalLensKind
 
-  VertexAlgebra :
-    FormalLensKind
+  VertexAlgebra : FormalLensKind
 
-  Group :
-    FormalLensKind
+  Group : FormalLensKind
 
-  Semigroup :
-    FormalLensKind
+  Semigroup : FormalLensKind
 
-  Monoid :
-    FormalLensKind
+  Monoid : FormalLensKind
 
-  Representation :
-    FormalLensKind
+  Representation : FormalLensKind
 
-  SymmetryAction :
-    FormalLensKind
+  SymmetryAction : FormalLensKind
 
-  InvariantTheory :
-    FormalLensKind
+  InvariantTheory : FormalLensKind
 
-  FixedPoint :
-    FormalLensKind
+  FixedPoint : FormalLensKind
 
-  Category :
-    FormalLensKind
+  Category : FormalLensKind
 
-  HigherCategory :
-    FormalLensKind
+  HigherCategory : FormalLensKind
 
-  Operad :
-    FormalLensKind
+  Operad : FormalLensKind
 
-  Topos :
-    FormalLensKind
+  Topos : FormalLensKind
 
-  Logic :
-    FormalLensKind
+  Logic : FormalLensKind
 
-  TypeTheory :
-    FormalLensKind
+  TypeTheory : FormalLensKind
 
-  Proof :
-    FormalLensKind
+  Proof : FormalLensKind
 
-  Certificate :
-    FormalLensKind
+  Certificate : FormalLensKind
 
-  Order :
-    FormalLensKind
+  Order : FormalLensKind
 
-  Lattice :
-    FormalLensKind
+  Lattice : FormalLensKind
 
-  Graph :
-    FormalLensKind
+  Graph : FormalLensKind
 
-  Hypergraph :
-    FormalLensKind
+  Hypergraph : FormalLensKind
 
-  Ontology :
-    FormalLensKind
+  Ontology : FormalLensKind
 
-  DescriptionLogic :
-    FormalLensKind
+  DescriptionLogic : FormalLensKind
 
-  Provenance :
-    FormalLensKind
+  Provenance : FormalLensKind
 
-  Topology :
-    FormalLensKind
+  Topology : FormalLensKind
 
-  AlgebraicTopology :
-    FormalLensKind
+  AlgebraicTopology : FormalLensKind
 
-  Homotopy :
-    FormalLensKind
+  Homotopy : FormalLensKind
 
-  Homology :
-    FormalLensKind
+  Homology : FormalLensKind
 
-  Cohomology :
-    FormalLensKind
+  Cohomology : FormalLensKind
 
-  FiberBundle :
-    FormalLensKind
+  FiberBundle : FormalLensKind
 
-  Fibration :
-    FormalLensKind
+  Fibration : FormalLensKind
 
-  Sheaf :
-    FormalLensKind
+  Sheaf : FormalLensKind
 
-  Cosheaf :
-    FormalLensKind
+  Cosheaf : FormalLensKind
 
-  KTheory :
-    FormalLensKind
+  KTheory : FormalLensKind
 
-  StableStructure :
-    FormalLensKind
+  StableStructure : FormalLensKind
 
-  PeriodicRecurrence :
-    FormalLensKind
+  PeriodicRecurrence : FormalLensKind
 
-  Obstruction :
-    FormalLensKind
+  Obstruction : FormalLensKind
 
-  SpectralSequence :
-    FormalLensKind
+  SpectralSequence : FormalLensKind
 
-  FiberClassification :
-    FormalLensKind
+  FiberClassification : FormalLensKind
 
-  Geometry :
-    FormalLensKind
+  Geometry : FormalLensKind
 
-  DifferentialGeometry :
-    FormalLensKind
+  DifferentialGeometry : FormalLensKind
 
-  AlgebraicGeometry :
-    FormalLensKind
+  AlgebraicGeometry : FormalLensKind
 
-  Manifold :
-    FormalLensKind
+  Manifold : FormalLensKind
 
-  LieTheory :
-    FormalLensKind
+  LieTheory : FormalLensKind
 
-  SpinGeometry :
-    FormalLensKind
+  SpinGeometry : FormalLensKind
 
-  Number :
-    FormalLensKind
+  Number : FormalLensKind
 
-  Arithmetic :
-    FormalLensKind
+  Arithmetic : FormalLensKind
 
-  Valuation :
-    FormalLensKind
+  Valuation : FormalLensKind
 
-  PrimeDecomposition :
-    FormalLensKind
+  PrimeDecomposition : FormalLensKind
 
-  LocalGlobal :
-    FormalLensKind
+  LocalGlobal : FormalLensKind
 
-  Modular :
-    FormalLensKind
+  Modular : FormalLensKind
 
-  Automorphic :
-    FormalLensKind
+  Automorphic : FormalLensKind
 
-  TransitionSystem :
-    FormalLensKind
+  TransitionSystem : FormalLensKind
 
-  RewriteDynamics :
-    FormalLensKind
+  RewriteDynamics : FormalLensKind
 
-  DynamicalSystem :
-    FormalLensKind
+  DynamicalSystem : FormalLensKind
 
-  Control :
-    FormalLensKind
+  Control : FormalLensKind
 
-  Automaton :
-    FormalLensKind
+  Automaton : FormalLensKind
 
-  FormalLanguage :
-    FormalLensKind
+  FormalLanguage : FormalLensKind
 
-  Operator :
-    FormalLensKind
+  Operator : FormalLensKind
 
-  Functional :
-    FormalLensKind
+  Functional : FormalLensKind
 
-  Hamiltonian :
-    FormalLensKind
+  Hamiltonian : FormalLensKind
 
-  Lyapunov :
-    FormalLensKind
+  Lyapunov : FormalLensKind
 
-  GradientFlow :
-    FormalLensKind
+  GradientFlow : FormalLensKind
 
-  Optimization :
-    FormalLensKind
+  Optimization : FormalLensKind
 
-  Information :
-    FormalLensKind
+  Information : FormalLensKind
 
-  Entropy :
-    FormalLensKind
+  Entropy : FormalLensKind
 
-  Probability :
-    FormalLensKind
+  Probability : FormalLensKind
 
-  Statistical :
-    FormalLensKind
+  Statistical : FormalLensKind
 
-  Inference :
-    FormalLensKind
+  Inference : FormalLensKind
 
-  Estimator :
-    FormalLensKind
+  Estimator : FormalLensKind
 
-  HypothesisTest :
-    FormalLensKind
+  HypothesisTest : FormalLensKind
 
-  ConfidenceInterval :
-    FormalLensKind
+  ConfidenceInterval : FormalLensKind
 
-  RobustStatistic :
-    FormalLensKind
+  RobustStatistic : FormalLensKind
 
-  OutlierDetection :
-    FormalLensKind
+  OutlierDetection : FormalLensKind
 
-  Sampling :
-    FormalLensKind
+  Sampling : FormalLensKind
 
-  ExperimentalDesign :
-    FormalLensKind
+  ExperimentalDesign : FormalLensKind
 
-  DecisionTheory :
-    FormalLensKind
+  DecisionTheory : FormalLensKind
 
-  Bayesian :
-    FormalLensKind
+  Bayesian : FormalLensKind
 
-  Frequentist :
-    FormalLensKind
+  Frequentist : FormalLensKind
 
-  CausalInference :
-    FormalLensKind
+  CausalInference : FormalLensKind
 
-  UncertaintyQuantification :
-    FormalLensKind
+  UncertaintyQuantification : FormalLensKind
 
-  ModelSelection :
-    FormalLensKind
+  ModelSelection : FormalLensKind
 
-  InformationCriterion :
-    FormalLensKind
+  InformationCriterion : FormalLensKind
 
-  Risk :
-    FormalLensKind
+  Risk : FormalLensKind
 
-  Reliability :
-    FormalLensKind
+  Reliability : FormalLensKind
 
-  ExtremeValue :
-    FormalLensKind
+  ExtremeValue : FormalLensKind
 
-  TimeSeries :
-    FormalLensKind
+  TimeSeries : FormalLensKind
 
-  StochasticProcess :
-    FormalLensKind
+  StochasticProcess : FormalLensKind
 
-  Cryptographic :
-    FormalLensKind
+  Cryptographic : FormalLensKind
 
-  TrapdoorProjection :
-    FormalLensKind
+  TrapdoorProjection : FormalLensKind
 
-  SecretWitness :
-    FormalLensKind
+  SecretWitness : FormalLensKind
 
-  QuotientResidue :
-    FormalLensKind
+  QuotientResidue : FormalLensKind
 
-  HiddenLift :
-    FormalLensKind
+  HiddenLift : FormalLensKind
 
-  Commitment :
-    FormalLensKind
+  Commitment : FormalLensKind
 
-  Governance :
-    FormalLensKind
+  Governance : FormalLensKind
 
-  SymbolicRational :
-    FormalLensKind
+  SymbolicRational : FormalLensKind
 
   NamedFormalLensKind :
     String →

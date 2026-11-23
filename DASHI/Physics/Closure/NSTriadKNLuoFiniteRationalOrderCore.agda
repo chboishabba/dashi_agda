@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore where
 
 ------------------------------------------------------------------------

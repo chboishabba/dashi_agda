@@ -29,14 +29,14 @@ open DualIdentityConfirmation public
 cleanZelphMissWikidataConfirmedCoveragePaid : DualIdentityConfirmation
 cleanZelphMissWikidataConfirmedCoveragePaid =
   dualIdentityConfirmation
-    Ternary.openState
+    Ternary.open
     Ternary.admitted
     Ternary.admitted
-    Ternary.openState
-    Ternary.openState
+    Ternary.open
+    Ternary.open
 
 zelphRouteRemainsOpen :
-  zelphRouteConfirmation cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.openState
+  zelphRouteConfirmation cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.open
 zelphRouteRemainsOpen = refl
 
 wikidataSubjectIsAdmitted :
@@ -48,11 +48,11 @@ coverageMayBeAdmittedFromWikidataSubject :
 coverageMayBeAdmittedFromWikidataSubject = refl
 
 sourceSupportRemainsOpen :
-  sourceSupport cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.openState
+  sourceSupport cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.open
 sourceSupportRemainsOpen = refl
 
 authorityRemainsOpen :
-  authority cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.openState
+  authority cleanZelphMissWikidataConfirmedCoveragePaid ≡ Ternary.open
 authorityRemainsOpen = refl
 
 record DualIdentityBoundary : Set where

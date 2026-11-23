@@ -122,26 +122,26 @@ canonicalPhaseReflection :
     (NormalizedRenderer.standardRenderer M A N Q O)
 canonicalPhaseReflection {AR = AR} I =
   record
-    { reflectPoint =
+    { Reflection.reflectPoint =
         JRef.reflectParameter
           (Standard.baseReflection AR)
 
-    ; reflectPhase =
+    ; Reflection.reflectPhase =
         reflectPhase I
 
-    ; phaseReflection =
+    ; Reflection.phaseReflection =
         phaseReflects I
 
-    ; observer3Intertwines =
+    ; Reflection.observer3Intertwines =
         observer3Intertwines I
 
-    ; observer6Intertwines =
+    ; Reflection.observer6Intertwines =
         observer6Intertwines I
 
-    ; observer9Intertwines =
+    ; Reflection.observer9Intertwines =
         observer9Intertwines I
 
-    ; observer27Intertwines =
+    ; Reflection.observer27Intertwines =
         observer27Intertwines I
     }
 
@@ -159,11 +159,11 @@ canonicalLevelReflection :
     L
 canonicalLevelReflection {AR = AR} I =
   record
-    { reflectPoint =
+    { Tower.reflectPoint =
         JRef.reflectParameter
           (Standard.baseReflection AR)
 
-    ; level27Reflection =
+    ; Tower.level27Reflection =
         level27Reflects I
     }
 
@@ -181,13 +181,13 @@ canonicalJointReflection :
     L
 canonicalJointReflection I =
   record
-    { phaseReflection =
+    { Joint.phaseReflection =
         canonicalPhaseReflection I
 
-    ; levelReflection =
+    ; Joint.levelReflection =
         canonicalLevelReflection I
 
-    ; sameReflectedPoint =
+    ; Joint.sameReflectedPoint =
         λ tau → refl
     }
 
@@ -202,7 +202,7 @@ canonicalNormalizedRendererAlignment :
     (canonicalJointReflection I)
 canonicalNormalizedRendererAlignment I =
   record
-    { reflectionPointAgrees =
+    { NormalizedRenderer.reflectionPointAgrees =
         λ tau → refl
     }
 

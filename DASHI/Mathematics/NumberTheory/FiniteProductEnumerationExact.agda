@@ -13,7 +13,6 @@ module DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
@@ -37,7 +36,7 @@ mapMember :
   ∀ {A B : Set}
     (f : A → B) {x : A} {xs : List A} →
   x ∈ xs → f x ∈ map f xs
-mapMember f (Any.here equality) = Any.here (cong f equality)
+mapMember f (Any.here equality) = Any.here equality
 mapMember f (Any.there member) = Any.there (mapMember f member)
 
 appendMemberLeft :

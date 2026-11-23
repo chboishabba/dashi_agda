@@ -16,8 +16,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ)
 open import Data.List.Base using (List; _∷_; [])
-open import Data.Empty using (⊥)
-open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
@@ -54,92 +52,7 @@ import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
 import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
-
-------------------------------------------------------------------------
--- Governed legal-workflow convergence.
-------------------------------------------------------------------------
-
-governedLegalWorkflowTOEInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
-governedLegalWorkflowTOEInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-governedSemanticPromotionTruthAuthorityClosed :
-  LegalGovernance.SemanticPromotionTruthAuthorityClosed
-governedSemanticPromotionTruthAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
-
-governedLegalCandidateSourceDoesNotCloseAuthority :
-  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
-governedLegalCandidateSourceDoesNotCloseAuthority =
-  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
-
-governedExactReuseDoesNotCreateSemanticAuthority :
-  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
-governedExactReuseDoesNotCreateSemanticAuthority =
-  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
-
-
-unifiedGovernedLegalWorkflowComplianceZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-unifiedGovernedLegalWorkflowComplianceZKPFrame =
-  DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact.canonicalGovernedLegalWorkflowComplianceZKPFrame
-
-------------------------------------------------------------------------
--- Current CMP119 preferred source frontier.
--- Historical numbered overlays remain provenance only.
--- The latest owner carries zero adapter debt and four physical/source packages.
-------------------------------------------------------------------------
-
-unifiedCMP119PreferredSourcePackageCount =
-  CMP119Preferred.remainingPreferredPackageCount
-
-unifiedCMP119PreferredAdapterDebt =
-  CMP119Preferred.remainingAdapterDebt
-
-unifiedCMP119PreferredWorkIsPhysicalSourcePackages =
-  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
-
-unifiedCMP119NoSyntheticPhysicalIdentificationAdded =
-  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
-
-unifiedCMP119RepresentationOnlySameObjectDebtRemains =
-  CMP119Preferred.representationOnlySameObjectDebtRemains
-
-scaleEvidenceReviewTOEReceipt :
-  SCALEReview.SCALEEvidenceReviewTOEReceipt
-scaleEvidenceReviewTOEReceipt =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
-
-scaleEvidenceReviewDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-scaleEvidenceReviewDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
-scaleEvidenceReviewTOEReceipt :
-  SCALEReview.SCALEEvidenceReviewTOEReceipt
-scaleEvidenceReviewTOEReceipt =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
-
-scaleEvidenceReviewDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-scaleEvidenceReviewDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
@@ -202,44 +115,27 @@ brainFMRIRemainsNonPromoting :
   Spine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 brainFMRIRemainsNonPromoting =
   refl
-
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
-  Physics.navierStokesJPromotionBlocked
-
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
-  Physics.yangMillsJPromotionBlocked
-
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion BrainFMRI.brainFMRIObject kind ≡ false
 brainFMRIFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     BrainFMRI.brainFMRIObject
-
 navierStokesFormalProjectionsRemainNonPromoting :
-  ∀ kind →
   Spine.objectProjectionPromotion Physics.navierStokesObject kind ≡ false
 navierStokesFormalProjectionsRemainNonPromoting =
-  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.navierStokesObject
-
 yangMillsFormalProjectionsRemainNonPromoting :
-  ∀ kind →
   Spine.objectProjectionPromotion Physics.yangMillsObject kind ≡ false
 yangMillsFormalProjectionsRemainNonPromoting =
-  Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
 import DASHI.Physics.Foundations.Round5FullBoundary as Round5
       Round5.Round5FullBoundary
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
-
--- Existing exact source-role and causal non-promotion owners.
--- The unified object table remains unchanged. No new physics is asserted.
-import DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact as SourceGenealogy
-import DASHI.Cognition.HardtIbrahimSourceRootMaxCutExact as SourceAuditCase
-import DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact as PassiveCausalCut

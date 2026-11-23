@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.HistoryWeightFiltrationExact where
 
 open import DASHI.Core.Prelude

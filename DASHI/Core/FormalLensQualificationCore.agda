@@ -31,50 +31,35 @@ listCount (_ ∷ xs) =
 -- Formal-lens vocabulary.
 
 data FormalLens : Set where
-  SymbolicRational :
-    FormalLens
+  SymbolicRational : FormalLens
 
-  Operator :
-    FormalLens
+  Operator : FormalLens
 
-  Functional :
-    FormalLens
+  Functional : FormalLens
 
-  Hamiltonian :
-    FormalLens
+  Hamiltonian : FormalLens
 
-  GradientFlow :
-    FormalLens
+  GradientFlow : FormalLens
 
-  ResistiveTransport :
-    FormalLens
+  ResistiveTransport : FormalLens
 
-  Spectral :
-    FormalLens
+  Spectral : FormalLens
 
-  Group :
-    FormalLens
+  Group : FormalLens
 
-  Category :
-    FormalLens
+  Category : FormalLens
 
-  Number :
-    FormalLens
+  Number : FormalLens
 
-  Lattice :
-    FormalLens
+  Lattice : FormalLens
 
-  Topological :
-    FormalLens
+  Topological : FormalLens
 
-  Probabilistic :
-    FormalLens
+  Probabilistic : FormalLens
 
-  Graph :
-    FormalLens
+  Graph : FormalLens
 
-  Information :
-    FormalLens
+  Information : FormalLens
 
   NamedFormalLens :
     String →
@@ -246,64 +231,48 @@ canonicalFormalLensVocabularyCompatibilityReceipt =
 -- Threshold, role, and residual boundary vocabulary.
 
 data QualificationRole : Set where
-  sourceLensRole :
-    QualificationRole
+  sourceLensRole : QualificationRole
 
-  targetLensRole :
-    QualificationRole
+  targetLensRole : QualificationRole
 
-  residualBoundaryRole :
-    QualificationRole
+  residualBoundaryRole : QualificationRole
 
-  thresholdWitnessRole :
-    QualificationRole
+  thresholdWitnessRole : QualificationRole
 
-  adapterConsumerRole :
-    QualificationRole
+  adapterConsumerRole : QualificationRole
 
   namedQualificationRole :
     String →
     QualificationRole
 
 data ThresholdLabel : Set where
-  requiredThresholdLabel :
-    ThresholdLabel
+  requiredThresholdLabel : ThresholdLabel
 
-  metThresholdLabel :
-    ThresholdLabel
+  metThresholdLabel : ThresholdLabel
 
-  missingThresholdLabel :
-    ThresholdLabel
+  missingThresholdLabel : ThresholdLabel
 
   namedThresholdLabel :
     String →
     ThresholdLabel
 
 data ThresholdStatus : Set where
-  thresholdRequired :
-    ThresholdStatus
+  thresholdRequired : ThresholdStatus
 
-  thresholdMet :
-    ThresholdStatus
+  thresholdMet : ThresholdStatus
 
-  thresholdMissing :
-    ThresholdStatus
+  thresholdMissing : ThresholdStatus
 
 data ResidualBoundaryLabel : Set where
-  explicitResidualBoundary :
-    ResidualBoundaryLabel
+  explicitResidualBoundary : ResidualBoundaryLabel
 
-  explicitOpenResidualBoundary :
-    ResidualBoundaryLabel
+  explicitOpenResidualBoundary : ResidualBoundaryLabel
 
-  explicitMissingThresholdResidualBoundary :
-    ResidualBoundaryLabel
+  explicitMissingThresholdResidualBoundary : ResidualBoundaryLabel
 
-  explicitBridgeResidualBoundary :
-    ResidualBoundaryLabel
+  explicitBridgeResidualBoundary : ResidualBoundaryLabel
 
-  explicitAdapterResidualBoundary :
-    ResidualBoundaryLabel
+  explicitAdapterResidualBoundary : ResidualBoundaryLabel
 
   namedResidualBoundary :
     String →

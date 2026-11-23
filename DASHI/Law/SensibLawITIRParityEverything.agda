@@ -15,13 +15,6 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
-import DASHI.Core.InstitutionalNormProductionExact as InstitutionalNorm
-import DASHI.Core.InstitutionalStatusSignalAdequacyExact as StatusSignal
-import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as ProximityInfluence
-import DASHI.Law.SensibLawLegalReasonablenessNormativityBridgeExact as LegalNormativity
-import DASHI.Law.SensibLawOperationalLegalityExact as OperationalLegality
-import DASHI.Law.SensibLawInstitutionalResponsibilityExact as InstitutionalResponsibility
-import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact as EpistemicConsequence
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -80,10 +73,13 @@ selectedFriendlyjordiesCompetingNarrativeBoundary :
 selectedFriendlyjordiesCompetingNarrativeBoundary =
   FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
 
+
+
 selectedFriendlyjordiesSourceTotality :
   FriendlyjordiesSourceTotality.SourceTotalComparison
 selectedFriendlyjordiesSourceTotality =
   FriendlyjordiesSourceTotality.canonicalFriendlyjordiesSourceTotality
+
 
 selectedFriendlyjordiesConstructiveSourceTotalityBoundary :
   FriendlyjordiesSourceTotality.ConstructiveSourceTotalityBoundary
@@ -94,36 +90,3 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
-
-
-------------------------------------------------------------------------
--- Canonical legal-governance semantic handoff.
---
--- Reuse existing owners. Do not create an Actionstep-specific ontology.
--- Runtime parity, semantic promotion, legal citation, and compliance remain
--- separate proof coordinates.
-------------------------------------------------------------------------
-
-open import DASHI.Interop.SensibLawSemanticPromotionPolicy public using
-  ( SemanticPromotionPolicySurface
-  ; semanticPromotionPolicySurface
-  ; heuristic-only-abstains
-  ; promotion-ignores-heuristic-bits
-  ; semantic-promotion-truth-authority-closed
-  ; semantic-promotion-legal-authority-closed
-  ; semantic-promotion-all-authority-closed
-  )
-
-open import DASHI.Core.CompositionalComplianceExact public using
-  ( CertifiedStage
-  ; CompositeCompliance
-  ; composeCertifiedStages
-  ; DependentCertifiedStage
-  )
-
-open import DASHI.Law.LegalAuthorityCitationExact public using
-  ( LegalCitation
-  ; LegalAuthorityUseReceipt
-  ; LegalCitationBoundary
-  ; canonicalLegalCitationBoundary
-  )

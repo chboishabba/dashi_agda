@@ -16,7 +16,7 @@ module DASHI.Physics.Closure.NSClayLiteralABCDExact where
 -- Existing in-repo owners reused rather than duplicated:
 --   * B: NSTriadKNFeffermanPeriodicClayStatementExact
 --   * C/D source-coordinate audit:
---       NSClayForcedBreakdownSourceCoordinatesExact
+--       NSTriadKNClayForcedBreakdownFormulationRound523Exact
 --
 -- IMPORTANT:
 --   Constructing these theorem TYPES does not inhabit them.  A checked proof
@@ -29,7 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSTriadKNFeffermanPeriodicClayStatementExact as B
-import DASHI.Physics.Closure.NSClayForcedBreakdownSourceCoordinatesExact as CD
+import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exact as CD
 
 ------------------------------------------------------------------------
 -- A. Unforced whole-space R^3 global existence and smoothness.
@@ -343,39 +343,39 @@ literalAllFourImpliesAnyOne completion =
 --
 -- These equalities do NOT prove C or D.  They state that the literal C/D
 -- theorem types above retain the exact coordinate distinctions already audited
--- historically instead of silently collapsing to "smooth forced blowup".
+-- by Round523 instead of silently collapsing to "smooth forced blowup".
 ------------------------------------------------------------------------
 
 cRequiresPositiveViscosity :
-  CD.requiredByC CD.positiveViscosity ≡ true
+  CD.requiredByC523 CD.positiveViscosity523 ≡ true
 cRequiresPositiveViscosity = refl
 
 cRequiresRapidInitialSpatialDecay :
-  CD.requiredByC CD.rapidInitialSpatialDecay ≡ true
+  CD.requiredByC523 CD.rapidInitialSpatialDecay523 ≡ true
 cRequiresRapidInitialSpatialDecay = refl
 
 cRequiresRapidForcingSpaceTimeDecay :
-  CD.requiredByC CD.rapidForcingSpaceTimeDecay ≡ true
+  CD.requiredByC523 CD.rapidForcingSpaceTimeDecay523 ≡ true
 cRequiresRapidForcingSpaceTimeDecay = refl
 
 cRequiresBoundedEnergy :
-  CD.requiredByC CD.boundedEnergyRequirement ≡ true
+  CD.requiredByC523 CD.boundedEnergyRequirement523 ≡ true
 cRequiresBoundedEnergy = refl
 
 dRequiresPositiveViscosity :
-  CD.requiredByD CD.positiveViscosity ≡ true
+  CD.requiredByD523 CD.positiveViscosity523 ≡ true
 dRequiresPositiveViscosity = refl
 
 dRequiresPeriodicInitialDatum :
-  CD.requiredByD CD.periodicInitialDatum ≡ true
+  CD.requiredByD523 CD.periodicInitialDatum523 ≡ true
 dRequiresPeriodicInitialDatum = refl
 
 dRequiresRapidForcingTimeDecay :
-  CD.requiredByD CD.rapidForcingTimeDecay ≡ true
+  CD.requiredByD523 CD.rapidForcingTimeDecay523 ≡ true
 dRequiresRapidForcingTimeDecay = refl
 
 dRequiresPeriodicSolution :
-  CD.requiredByD CD.periodicSolutionRequirement ≡ true
+  CD.requiredByD523 CD.periodicSolutionRequirement523 ≡ true
 dRequiresPeriodicSolution = refl
 
 ------------------------------------------------------------------------

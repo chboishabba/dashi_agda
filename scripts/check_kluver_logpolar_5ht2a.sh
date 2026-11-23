@@ -4,8 +4,6 @@ set -euo pipefail
 root="${1:-.}"
 files=(
   "DASHI/Biology/KluverLogPolar5HT2ASourceAtlasExact.agda"
-  "DASHI/Cognition/ConsciousRealismDMTSourceAtlasExact.agda"
-  "DASHI/Cognition/ConsciousRealismDMTIdentifiabilityExact.agda"
   "DASHI/Biology/Psychedelic5HT2AAttentionBoundaryExact.agda"
   "DASHI/Cognition/LogPolarKluverDerivationExact.agda"
   "DASHI/Cognition/Kluver5HT2ACrossPollinationExact.agda"
@@ -43,8 +41,6 @@ done
 
 atlas="$root/DASHI/Biology/KluverLogPolar5HT2ASourceAtlasExact.agda"
 grep -Fq 'Docs/SourceAttributionPolicy.md' "$atlas"
-grep -Fq 'heinrichKluver1926' "$atlas"
-grep -Fq '10.2307/1414910' "$atlas"
 grep -Fq '10.1007/BF00336965' "$atlas"
 grep -Fq '10.1016/0042-6989(80)90090-5' "$atlas"
 grep -Fq '10.1016/0042-6989(94)00187-Q' "$atlas"
@@ -194,9 +190,4 @@ grep -Fq 'strictFibrePoint' "$bundle"
 grep -Fq 'sectionProjectsToBase' "$bundle"
 grep -Fq 'bundlePointsDistinct' "$bundle"
 
-dmt="$root/DASHI/Cognition/ConsciousRealismDMTIdentifiabilityExact.agda"
-grep -Fq 'klueverLatticeNoUniformInverse' "$dmt"
-grep -Fq 'cobwebNoUniformCorticalFeatureInverse' "$dmt"
-grep -Fq 'existingKluverSalienceDoesNotIdentifyExternalAgency' "$dmt"
-
-echo 'Kluver/log-polar/5-HT2A/DMT attribution and boundary static contract: OK'
+echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'

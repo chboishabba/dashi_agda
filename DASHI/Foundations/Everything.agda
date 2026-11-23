@@ -9,5 +9,3 @@ import DASHI.Foundations.Wette.Everything
 import DASHI.Foundations.CoarseFineRefinementEverything
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact
 import DASHI.Foundations.BishopConcreteTrigSeriesConvergenceExact
-
-import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact

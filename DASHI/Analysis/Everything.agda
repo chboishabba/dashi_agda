@@ -125,7 +125,6 @@ import DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact
 import DASHI.Analysis.RiemannQuarticSignedPoleFourierMassLeanDonorExact
 import DASHI.Analysis.RiemannQuarticSignedPoleFourierTerminalLeanDonorExact
 import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact
-import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact
 import DASHI.Analysis.RiemannQuarticSignedPoleNormalizedOuterTerminalLeanDonorExact
 import DASHI.Analysis.RiemannQuarticFourthPrimitiveQuantitativeBudgetLeanDonorExact
 import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact
@@ -179,10 +178,6 @@ import DASHI.Analysis.RiemannQuarticSignedPoleVerticalRvMHorizontalRecutExact
 
 
 module DASHI.Analysis.Everything where
--- Source-typed RH 163840 dyadic tail, actual H_X->H_T reuse, NO analytic/Monster promotion.
-import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as RH163840
--- Actual native paired translation/dual symplectic automorphisms; no Monster-normalizer promotion.
-import DASHI.Analysis.RHQuartic128HeisenbergPairedSixSymplecticExact as RHHeisenberg
 
 -- Analysis domain ownership spine.
 

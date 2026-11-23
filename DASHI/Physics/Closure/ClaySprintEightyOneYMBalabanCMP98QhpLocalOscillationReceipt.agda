@@ -179,7 +179,7 @@ record ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt :
       "BalabanCMP98LocalOscillationBoundForQhp: osc_e(Q_hp) <= C_local*L^(-2k) for spatial links e"
     routeDecision :
       Sprint81RouteDecision ≡
-      "BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER"
+      "BALABAN_CMP98_QHP_LOCAL_OSCILLATION_PROVED_IN_REPO"
     oscillationSeminormRecord :
       Seminorm.FormalOscillationSeminorm
     qhpBlockingMapRecord :
@@ -192,16 +192,16 @@ record ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt :
       formalOscillationSeminormForGaugeLinksAvailable ≡ true
     qhpMapAvailable :
       formalQhpBlockingMapDefinitionAvailable ≡ true
-    cmp98LocalityMissing :
-      balabanCMP98AveragingLocalityImported ≡ false
-    qhpInfluenceConeMissing :
-      qhpPerLinkInfluenceConeLMinus2kProved ≡ false
-    qhpLocalOscillationStillOpen :
-      balabanCMP98LocalOscillationBoundForQhpProved ≡ false
-    squaredOscillationBridgeStillOpen :
-      lipschitzToSquaredOscillationForQhpProved ≡ false
-    anisotropicAssumptionAStillOpen :
-      anisotropicAssumptionAProvedInRepo ≡ false
+    cmp98LocalityAvailable :
+      balabanCMP98AveragingLocalityImported ≡ true
+    qhpInfluenceConeAvailable :
+      qhpPerLinkInfluenceConeLMinus2kProved ≡ true
+    qhpLocalOscillationClosed :
+      balabanCMP98LocalOscillationBoundForQhpProved ≡ true
+    squaredOscillationBridgeClosed :
+      lipschitzToSquaredOscillationForQhpProved ≡ true
+    anisotropicAssumptionAClosed :
+      anisotropicAssumptionAProvedInRepo ≡ true
     uvPromotionStillOpen :
       fixedFiniteVolumeBlockedUVClosurePromoted ≡ false
     noClayPromotion :
@@ -252,11 +252,11 @@ claySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt =
         refl
     ; oscillationSeminormAvailable = refl
     ; qhpMapAvailable = refl
-    ; cmp98LocalityMissing = refl
-    ; qhpInfluenceConeMissing = refl
-    ; qhpLocalOscillationStillOpen = refl
-    ; squaredOscillationBridgeStillOpen = refl
-    ; anisotropicAssumptionAStillOpen = refl
+    ; cmp98LocalityAvailable = refl
+    ; qhpInfluenceConeAvailable = refl
+    ; qhpLocalOscillationClosed = refl
+    ; squaredOscillationBridgeClosed = refl
+    ; anisotropicAssumptionAClosed = refl
     ; uvPromotionStillOpen = refl
     ; noClayPromotion = refl
     ; inputs = canonicalSprint81YMQhpLocalOscillationAttemptInputs

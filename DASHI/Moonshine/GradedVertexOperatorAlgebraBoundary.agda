@@ -36,7 +36,6 @@ open import Data.Integer.Base using (ℤ)
 import DASHI.Moonshine.GradedRepresentation as GR
 
 record GradedVertexOperatorAlgebra (K : Set) : Setω where
-  constructor graded-voa
   field
     Homogeneous : Nat → Set
     TotalCarrier : Set
@@ -65,27 +64,24 @@ open GradedVertexOperatorAlgebra public
 
 record GradedDimensionData (K : Set)
     (voa : GradedVertexOperatorAlgebra K) : Set₁ where
-  constructor graded-dimension-data
   field
     finiteDimension : Nat → Nat
-    dimensionCertified : (grade : Nat) → Set
+    dimensionCertified : ∀ grade → Set
 
 record VOACharacterData (K : Set)
     (voa : GradedVertexOperatorAlgebra K) : Set₁ where
-  constructor voa-character-data
   field
     centralCharge : K
     coefficient : Nat → K
     characterSeriesCarrier : Set
-    coefficientIsShiftedGradeDimension : (grade : Nat) → Set
+    coefficientIsShiftedGradeDimension : ∀ grade → Set
 
 record VOAWithGroupAction (G K : Set) : Setω where
-  constructor voa-with-group-action
   field
     group : GR.Group G
     voa : GradedVertexOperatorAlgebra K
     gradedRepresentation : GR.GradedRepresentation G K group
-    homogeneousCarrierAgreement : (grade : Nat) → Set
+    homogeneousCarrierAgreement : ∀ grade → Set
     groupActionPreservesVacuum : Set
     groupActionPreservesConformalVector : Set
     groupActionIntertwinesVertexModes : Set
@@ -95,16 +91,15 @@ open VOAWithGroupAction public
 record ExactGradedTrace
     {G K : Set}
     (actionData : VOAWithGroupAction G K) : Setω where
-  constructor exact-graded-trace
   field
     traceCoefficient : G → Nat → K
     coefficientIsRepresentationTrace : ∀ element grade →
       traceCoefficient element grade
-      ≡ (GR.trace
+      ≡ GR.trace
           (GR.grade (gradedRepresentation actionData) grade)
           (GR.action
             (GR.grade (gradedRepresentation actionData) grade)
-            element))
+            element)
 
 open ExactGradedTrace public
 
@@ -112,14 +107,13 @@ record IdentityTraceDimensionLaw
     {G K : Set}
     (actionData : VOAWithGroupAction G K)
     (traceData : ExactGradedTrace actionData) : Set₁ where
-  constructor identity-trace-dimension-law
   field
     gradeDimensionAsScalar : Nat → K
     identityEndTraceIsDimension : ∀ grade →
-      (GR.trace
+      GR.trace
         (GR.grade (gradedRepresentation actionData) grade)
         (GR.identityEnd
-          (GR.grade (gradedRepresentation actionData) grade)))
+          (GR.grade (gradedRepresentation actionData) grade))
       ≡ gradeDimensionAsScalar grade
 
 open IdentityTraceDimensionLaw public
@@ -129,7 +123,7 @@ identityTraceCoefficientIsDimension :
     (traceData : ExactGradedTrace actionData)
     (dimensionLaw : IdentityTraceDimensionLaw actionData traceData)
     grade →
-  traceCoefficient traceData (GR.Group.identity (group actionData)) grade
+  traceCoefficient traceData (GR.identity (group actionData)) grade
   ≡ gradeDimensionAsScalar dimensionLaw grade
 identityTraceCoefficientIsDimension {G} {K}
     actionData traceData dimensionLaw grade =
@@ -138,7 +132,7 @@ identityTraceCoefficientIsDimension {G} {K}
   in
   transEquality
     (coefficientIsRepresentationTrace traceData
-      (GR.Group.identity (group actionData)) grade)
+      (GR.identity (group actionData)) grade)
     (transEquality
       (congTrace representation
         (GR.actionIdentity representation))

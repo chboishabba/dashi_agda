@@ -24,17 +24,19 @@ tracked in:
 
 - `PublicationRoadmap.md`
 
+The current Paper-1 A/B/C/D nomenclature, transfer firewalls, periodic-B proof
+priority, and historical status of the same-output Gram/P3 attempt are frozen in:
+
+- `NSFourLanePublicationAddendum20260915.md`
+
+The dated addendum is a current control overlay; it does not delete the older
+publication roadmap or its historical sequencing record.
+
 Shared live paper support has moved to:
 
 - `../support/live/SupportCompendium.md`
 - `../support/live/PaperCommonCitationLedger.md`
 - `../support/live/PaperCommonNotationGlossary.md`
-
-## Revived Paper 2 and independent newer tracks (2026-11-20)
-
-Paper 2 is a standalone GR research satellite in preparation, not an addition to the live core renderer. Its implementation ledger is `../physics/KSW668F8YMNSNonlinearCurvatureRoadmap20261120.md`. Working title: *Conservative Moving-Boundary Geometry and Adjoint Curvature Attribution in Five-Dimensional Braneworld Dynamics*.
-
-Paper 9 (CM derivative certificates, #1529) and Paper 10 (finite Heisenberg/Monster, #1217) retain their separate track numbering. No Paper 11 is allocated. Papers 1 and 3 import only independently justified same-carrier lemmas; no GR, Clay or unification promotion follows from finite adjoint checks.
 
 ## Paper 8 Draft Support
 
@@ -109,5 +111,3 @@ Suggested arXiv primary classifications:
 
 Everything else under `papers/` is support, draft, or legacy material unless a
 later router explicitly promotes it.
-
-Paper 2 working manuscript: `drafts/Paper2ConservativeMovingBoundaryDraft.md` (LXXVII finite diagnostic and refinement boundary; not live-core promotion).

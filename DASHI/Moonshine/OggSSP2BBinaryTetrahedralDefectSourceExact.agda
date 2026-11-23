@@ -72,8 +72,8 @@ twoAdicCentralizerExponent orderFour = 2
 twoAdicCentralizerExponent orderThree = 1
 twoAdicCentralizerExponent orderSix = 1
 
--- Literal largest power of two dividing the representative centralizer order.
--- Kept explicit to avoid depending on a particular exponentiation API.
+/-- Literal largest power of two dividing the representative centralizer order.
+Kept explicit to avoid depending on a particular exponentiation API. -/
 twoPrimaryPart : OrderStratum → Nat
 twoPrimaryPart identity = 8
 twoPrimaryPart centralMinusOne = 8

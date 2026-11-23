@@ -235,5 +235,5 @@ suzukiFrontier = Suzuki.currentSuzukiMultiplicityFrontier
 occurrenceFrontier : Occurrence.RestrictionOccurrenceFrontier
 occurrenceFrontier = Occurrence.currentRestrictionOccurrenceFrontier
 
-gaugeFrontier : Gauge.DiagonalKernelGaugeFrontier
-gaugeFrontier = Gauge.currentDiagonalKernelGaugeFrontier
+gaugeFrontier : Gauge.DiagonalKernelGaugeCorrectionFrontier
+gaugeFrontier = Gauge.currentDiagonalKernelGaugeCorrectionFrontier

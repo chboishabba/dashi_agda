@@ -1,5 +1,7 @@
 module DASHI.Core.ComparisonLawCore where
 
+open import Agda.Builtin.Bool using (Bool)
+
 ------------------------------------------------------------------------
 -- Generic comparison law for two structured carriers projected into a
 -- common surface.
@@ -20,6 +22,7 @@ record ComparisonLawCore : Set₁ where
     rightProject   : RightCarrier → Surface
     Residual       : Surface → Surface → Set
     ComparisonLaw  : Surface → Surface → Set
+    comparisonNeverMeansTruth : Bool
 
 open ComparisonLawCore public
 

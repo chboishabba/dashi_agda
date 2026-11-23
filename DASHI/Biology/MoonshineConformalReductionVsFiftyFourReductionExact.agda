@@ -65,7 +65,7 @@ removedLinesAreDistinct :
   moonshineConformalRemovedLine ≡ fiftyFourInvariantRemovedLine → ⊥
 removedLinesAreDistinct ()
 
-record ReductionComparison : Set₁ where
+record ReductionComparison : Set where
   constructor reductionComparison
   field
     leftReduction : OnePlusReduction
@@ -83,7 +83,7 @@ canonicalReductionComparison =
     ⊥
     (λ impossible → ⊥)
 
-record ReductionAuthorityBoundary : Set₁ where
+record ReductionAuthorityBoundary : Set where
   constructor reductionAuthorityBoundary
   field
     equalDimensionPatternProvesSameRepresentation : Set

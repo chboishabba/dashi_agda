@@ -27,7 +27,7 @@ false ∧ _ = false
 -- fail-closed: no component promotes beyond its gate level.
 ------------------------------------------------------------------------
 
-record Tlurey369ChaosReceipt : Set where
+record Tlurey369ChaosReceipt : Set₁ where
   constructor tlurey369ChaosReceipt
   field
     traceReceipt    : TraceReceipt.DyadicNonaryTraceReceipt

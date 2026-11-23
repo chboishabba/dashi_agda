@@ -1,7 +1,6 @@
 module DASHI.Analysis.RiemannConstructedComplexCharacterCoreExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Agda.Builtin.Equality using (_≡_; refl; sym)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 

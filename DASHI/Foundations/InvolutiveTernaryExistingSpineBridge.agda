@@ -77,7 +77,7 @@ sspι-toTrit SSP.sspNegOne = refl
 sspι-toTrit SSP.sspZero = refl
 sspι-toTrit SSP.sspPosOne = refl
 
-record ExistingSpineBridgeReceipt : Set₁ where
+record ExistingSpineBridgeReceipt : Set where
   constructor receipt
   field
     sspCarrierIsGenericInvolutive : ITD.InvolutiveCarrier

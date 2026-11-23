@@ -1,3 +1,636 @@
+# 2026-07-25 C2 Balaban RG implementation planning
+
+- Mapped the next YM implementation lane to concrete module owners:
+  `CompactLieBlockAverage` for the coarse-block interface,
+  `YMSmallFieldSurvivalAuthority` for small-field cutoff and admissible-radius
+  control, `YMLargeFieldTemporalCutSeparation` for the large-field boundary,
+  and `BalabanRGLane` for the one-step RG aggregator.
+- Boundary receipts remain non-promoting:
+  `YMBalabanPhysicalBetaBridgeTargetReceipt` and
+  `YMBalabanRGScaleTransferFrontierReceipt`.
+- The next execution slice should make the coarse `Q` adapter explicit, then
+  thread the small/large field cutoffs and the RG step bookkeeping through the
+  lane modules.
+- No theorem-status or Clay-status change is recorded here.  This is a repo
+  planning update only.
+
+# 2026-07-17 NS interaction-closure pivot
+
+- **Evidence-authority freeze:** further finite-Galerkin production is paused
+  pending a pre-registered four-trace frozen-packet coercivity comparison.
+  The audit now atomically promotes JSON on its own filesystem; the sequential
+  runner additionally requires validated JSON, stdout, stderr, a status
+  receipt, and SHA-256 before declaring success. Added
+  `Docs/NSFrozenPacketCoercivityProtocol.md` and
+  `scripts/ns_normalized_profile_coercivity_report.py`. The report fixes a
+  post-peak adjacent-window Gamma-downcrossing rule and records the exact
+  finite forcing/geometry/alignment factorization when a trace contains it.
+  The durable phase `+0.04` trace has the same delayed-collapse pattern as
+  radial `-0.04`, but radial is legacy factor-free and phase lacks the new
+  runner sidecars; neither is a validated mechanism comparison yet.
+
+- **Preregistered coercivity panel completed:** the baseline, radial `-0.04`,
+  phase `+0.04`, and coherence `+0.04` N32 `.25T` GPU traces all promoted
+  through the durable receipt contract and all four SHA-256 sidecars verify.
+  Their frozen endpoint ratios are `.11234912`, `.11357468`, `.11221915`, and
+  `.11228539`; every trace has a post-peak adjacent-window Gamma ratio below
+  one. The exact finite factorization residual is at most `4.45e-16`.
+  However, forcing, geometry, and alignment all first cross the fixed 80%
+  decline threshold at the same next sampled checkpoint as the Gamma event.
+  Thus the panel supports robust delayed collapse in this local slice but does
+  **not** discriminate a leading mechanism. The next instrument is focused
+  subwindow factor telemetry, not another endpoint/profile search.
+
+- **Runner failure authority checked:** the local perturbation runner now
+  writes a durable `running` status before launching its child, then atomically
+  replaces it with `promoted` or `failed`. A success smoke verified the
+  checksum path; an intentional exit-7 audit verified that failed runs retain
+  stderr and a terminal failed status but no promoted receipt. The earlier
+  focused-telemetry attempt is explicitly discarded: it predates this guard
+  and left only zero-byte partials.
+
+- **Focused factor panel:** a detached rerun of the same four states completed
+  with 100 factor samples restricted to `[.07T,.16T]`; all status/checksum
+  receipts verify. From focused-window start to packet peak, positive
+  nonlinear alignment falls to `.7701--.7750` across all four traces, while
+  forcing and packet geometry retain `.8964--.8990` and `.9022--.9055`.
+  This is the first robust finite candidate for alignment/dephasing as the
+  leading loss factor. It remains a correlated finite-Galerkin observation:
+  it does not prove causality, a profile-uniform estimate, or any NS/BKM/Clay
+  statement.
+
+- **Frozen-packet coercivity trace:** `ns_normalized_profile_quotient_audit.py`
+  now accepts `--mechanism-trace-count` to add bounded fine checkpoints without
+  turning the endpoint-only interaction sampler into a false turnover trace.
+  Every trace row records frozen packet mass, signed and positive-part
+  nonlinear-to-viscous ratios, and profile-shape metrics; adjacent rows also
+  receive a trapezoidal positive-input/viscous-loss receipt. The evolution
+  summary records sampled packet peak and the first sampled `Gamma <= 1` time.
+  An N16 CPU smoke validated the JSON contract. This is instrumentation only:
+  it does not establish a profile-uniform coercivity bound or change any
+  NS/BKM/Clay gate.
+
+- **Radial coercivity receipt:** the same `epsilon=-.04` finite trajectory
+  was replayed with 50 mechanism checkpoints. The frozen packet peaks at
+  `t=1.875` with mass `1.14576`; its adjacent-window positive-part coercivity
+  ratio falls from `2.449` on `[.3125,.625]` to `.831` on `[1.875,2.1875]`,
+  then remains below `.49` after `t=2.5` and near `.10` late in the window.
+  The fine positive-part aggregate is `.46734`, distinct from the prior signed
+  aggregate `.39651/1.61255≈.246`. Radial width rises from `.2942` to `.4657`
+  by the peak while angular concentration drops from `.4721` to `.3884`; this
+  is a single finite correlation, not a coercive mechanism theorem.
+
+- **Local radial residence check:** the `epsilon=-.04` radial deformation of
+  the exact positive-chi survivor completes `.25T` with frozen/moving packet
+  ratios `.11357468/.11108409`. It has positive frozen nonlinear input
+  `.39650541` but viscous loss `.1.61254634`; it does not improve on the
+  original delayed-collapse trajectory. This is non-promoting finite-Galerkin
+  evidence only; no NS/BKM/Clay gate changes.
+
+- **Current finite promotion:** an exact positive-signed-chi survivor has
+  resolved frozen-packet growth on the first `.05T` segment
+  (`R=.1.04534501`, heat-compensated `1.3099675`).  Exact-state restart mode
+  then gives local frozen ratios `.62068407` and `.55569644` on segments 2 and
+  3.  The five contiguous segments are now complete: at `.25T=15.625`, the
+  common-reference moving packet is `.10985340` and the original frozen `j=2`
+  packet is `.11234973` of initial mass.  This is delayed collapse after a
+  short nonlinear burst, not sustained recurrence.  It is empirical,
+  finite-Galerkin evidence only and changes no NS/BKM/Clay authority.
+
+- Added `scripts/ns_normalized_profile_quotient_audit.py`, the first
+  non-self-similar profile-side receipt after the scale-copy audit.  It
+  generates reality-symmetric Leray Fourier fields whose independent shape
+  axes are angular width, radial log-width, helicity bias, and phase/spatial
+  coherence; it fixes finite dyadic critical mass exactly and records chi as
+  a matched-or-rejected coordinate.  It does not claim that one scalar can
+  impose both mass and chi at fixed carrier scale.  Its coarse interaction
+  receipt stratifies canonical input pairs by shell offsets, input angle and
+  locality, reports population/sample counts and Monte-Carlo uncertainty, and
+  has an opt-in exact small-carrier validation.  N16 / four-output smoke:
+  critical mass `1.0000000000000002`, and the stratified estimate differs by
+  `0.953%` from exact selected-carrier absolute activity.  This is an
+  estimator validation only; no profile-uniform law has been fitted.
+- The profile audit now also has an opt-in imported finite-Galerkin evolution
+  receipt.  It records moving-packet recurrence, exact-spectrum heat
+  compensation, dominant-shell displacement, and Hellinger turnover of the
+  coarse shell/angle/locality/helicity pushforward between start and endpoint.
+  A one-step N16 CPU smoke passed.  No production profile window has been run
+  yet; the next action is a bounded chi-matched profile census, not a new
+  literal scale copy.
+- First production quotient-profile result: the N32 `j=2` angular-cap
+  profile (`A_ang=.889`, chi mismatch `.000385`) completed one full parabolic
+  window (`T=62.5`, 62,500 GPU steps).  It has
+  `R_move=.00148286`, heat-compensated `G_move=.0272952`, no net final scale
+  displacement, and coarse interaction Hellinger-squared turnover `.944684`.
+  This is a strong loss/turnover observation for one chi-matched anisotropic
+  profile.  It is not a profile-uniform contraction theorem and is not
+  comparable to the earlier nine-triad quarter-window score without matching
+  duration and profile family.
+- Second production quotient-profile result: the chi-matched fully
+  phase-coherent/spatially localized profile (`spatial IPR fraction=.06164`)
+  also completed `T=62.5`.  It gives `R_move=.00104664`, heat-compensated
+  `G_move=.0201230`, no final scale displacement and coarse Hellinger-squared
+  turnover `.916276`.  Thus spatial coherence did not rescue the packet in
+  this pair of matched finite profiles; this remains a two-point empirical
+  observation, not a uniform conclusion.
+- Third tight-slice result: the plus-helicity-biased profile (`helicity bias
+  .8`, matched chi `.15017`) gives `R_move=.00138334`, `G_move=.0265966`,
+  shell displacement `-1`, and Hellinger-squared `.744322`.  Polarization
+  changes the coarse route but has not produced recurrence in the first three
+  matched profile axes.  This remains a finite, three-point empirical census.
+- **Adversarial-search correction:** the prior three profile trajectories were
+  selected by `chi_absolute`; their initial signed target transfer was
+  negative, so they are loss-oriented atlas points rather than recurrence
+  adversaries.  `ns_normalized_profile_quotient_audit.py` now has
+  `--chi-sign positive|negative|absolute`, target-dominance filtering,
+  `--selection-objective short-survival`, and an optional positive integrated
+  short-time nonlinear-input gate.  It can also enlarge a fixed output carrier
+  to a requested modal-activity coverage before computing coarse turnover.
+  N16 smokes cover signed filtering, 50% carrier coverage, and staged
+  short-survival selection.  The next production run must use this positive-
+  signed-chi staged selector; no further manually selected full-window atlas
+  run is scheduled first.
+- **Frozen-window survivor audit:** the selected positive-signed-chi phase
+  realization (`seed=20260718`, replay attempt `0`) now has an exact compressed
+  initial-state receipt and was rerun with a frozen-initial-packet telemetry
+  surface.  Over `0.05T`, the moving packet grows by `1.323%`, while the
+  frozen initial shell window grows by `4.534%`: `R_move=1.01323364` and
+  `R_frozen=1.04534448`.  The frozen nonlinear integral is positive
+  (`.50992680`) against frozen viscous loss (`.51619484`).  The dominant shell
+  changes from 2 to 3, so moving-window rates remain migration telemetry only;
+  the frozen observable is now the promotion authority.  This is one finite
+  short-window survivor, not a parabolic-window recurrence claim.  Required
+  next receipts are timestep convergence, then `0.25T` survival using the
+  saved state.
+- **Timestep convergence closed for the short survivor:** the exact same saved
+  state gives frozen-packet ratios `1.04534448`, `1.04534501`, and
+  `1.04534455` at `dt=.001`, `.0005`, and `.00025`, respectively.  The
+  finest receipt has heat-only frozen recurrence `.79799308` and nonlinear
+  heat-compensation `1.30996693`.  This closes the numerical validation of
+  the `.05T` finite survivor; it does not yet establish retention at `.25T`.
+- Added `scripts/ns_normalized_profile_staged_manifest.py` and its initial
+  64-row Latin-hypercube manifest.  It covers angular width, radial width,
+  helicity bias and spatial coherence jointly, with a static signed-chi gate,
+  short survival stage, and full-window survivor stage.  The manifest is
+  non-executing; the first positive-signed-chi baseline short-screen is
+  running separately.
+
+- **Decision: Sparse Finite-Network Retired**: The sparse finite-network mechanism is retired for the tested finite packet. The 1024-output replay provisionally classifies its target shell as effectively dense with strong dominant-set switching, so the nine-triad core does not control this trajectory. Future tuning of that hand-designed graph is retired; this is not a universal finite-network impossibility theorem.
+- **New Critical Path**:
+  `quotient exact NS scaling -> non-self-similar normalized profile families -> coarse full-interaction measure -> scale-breaking profile rigidity conjecture`.
+  Literal dyadic copies are dynamically conjugate and cannot reveal the missing rigidity theorem.
+- Implemented the exact cyclic-network dyadic scale-copy constructor for
+  `(N32,j2) -> (N64,j3)`.  Static receipts preserve the requested critical
+  role shares and double every physical wavevector while remaining inside the
+  dealiased carrier.  The fixed-shell-mass N64 trajectory completed with
+  `R_move=.57803` versus N32 `.30992`, but it does not preserve dynamical
+  similarity: initial nonlinear-to-viscous ratio falls from `.44424` to
+  `.15706` (factor `.353553`).  Raising N64 critical mass from `1` to `8`
+  restores the exact fixed-torus NS scaling: packet mass scales by `8`, both
+  nonlinear and viscous rates by `32`, and the replenishment ratio agrees to
+  `2.4e-15`.  Therefore no naive N128 copy is scheduled.  The next family must
+  vary profile shape after quotienting translation, scaling, and amplitude.
+- The exact 32-output replay completed.  At the endpoint those outputs cover
+  only `.125755` of full target-shell absolute modal activity, so no full-shell
+  closure regime is assigned.  Inside that declared carrier the interaction
+  distribution has broadened from `M50/M90/M99 = 4/11/18` and
+  `exp(H)=11.79` at `t=0` to `7825/27260/41257` and `exp(H)=28716.7` at the
+  quarter-window endpoint.  The leading 512 interactions carry only `.08720`
+  of endpoint activity and have zero retained-set overlap with the initial
+  top 512.  This is strong selected-carrier proliferation evidence, not an NS
+  theorem or a full-shell density classification.
+- Repaired closure checkpoint scheduling for viscous windows whose step count
+  is not divisible by four (`15625` in the production run).  Added exact
+  inverse-participation effective support, normalized effective-support
+  fractions, logarithmically extended exact capture curves, and in-memory
+  `J50/J90` or retained-top-set overlap receipts.  Added
+  `scripts/ns_interaction_closure_report.py`; its rank fits are explicitly
+  descriptive and truncated, and it withholds full-shell classification below
+  `.9` output-modal capture.  Python compile, CPU quarter-checkpoint smokes,
+  JSON serialization, and `git diff --check` pass.
+- The 1024-output replay completed with all five quarter checkpoints and
+  `output_modal_activity_capture = 1.0` (1024 of 1852 target-shell modes
+  capture 100% of modal activity), exceeding the `.9` full-shell classification
+  threshold.  The report classifies the full target shell as
+  **effectively dense with strong dominant-set switching**.  At the endpoint:
+  `M50/M90/M99 = 204292/742606/1143874` out of `1352440` nonzero interactions
+  in a `16778112`-element canonical space; Shannon effective support `770516`
+  (`.569` fraction); IPR effective support `484952` (`.358` fraction); the
+  retained top 2048 interactions carry only `.0247` of endpoint activity.
+  Retained-set Jaccard overlap to initial is `0.0` (complete turnover); to
+  the previous checkpoint is `.081`.  Stretched-exponential `beta = 0.2` and
+  power-law `alpha = 0.31` at endpoint.  Every interior checkpoint (Q1–Q3)
+  shows the same broad, rapidly switching regime with retained-to-initial
+  overlap below `.001`.  The geometric structure at the endpoint is dominated
+  by shell-pair `(0,2)` at `.466` with `.503` nonlocal ratio.  This closes
+  the interaction-closure regime question for the donor-heavy rank-01 phase-003
+  carrier on the nine-triad three-target cyclic graph at N32 `j=2`.
+- The 256-output replay completed with all five quarter checkpoints.  Endpoint
+  output-modal capture rises to `.571846`, still below the `.9` full-shell
+  classification threshold.  On this much wider carrier the endpoint has
+  `M50/M90/M99 = 59778/211662/322303`, Shannon effective support `221772.8`,
+  and IPR effective support `143060.3`; the top 1024 interactions carry only
+  `.034997`.  Checkpoint-to-checkpoint top-1024 Jaccard overlap stays around
+  `.01--.019`, with zero overlap against the initial core.  Every interior
+  checkpoint is similarly broad.  This retires a persistent or wandering
+  sparse empirical closure graph for the selected carrier and identifies an
+  effectively dense, rapidly switching interaction field there.
+- Closed the bounded donor-heavy pure-helicity phase tranche.  Four phase
+  streams on the best sign-diverse backbone give `R_move=.2747..3099`; the
+  best phase (`3`) still has only `.00562` designed target capture and `.96957`
+  support leakage.  Together with the three-backbone plateau near `.29`, this
+  satisfies the declared sparse-loop stopping rule (`max R_move < .4` and
+  capture `< .1`).  Further phase tuning of the nine-triad graph is stopped.
+  The best phase is now being rerun with 32-output exact interaction-closure
+  telemetry and 512 retained dominant interactions.
+- Added an opt-in full-convolution interaction-closure audit to the finite
+  packet search.  At quarter checkpoints it selects a declared number of
+  dominant target-shell output modes, reports their share of full absolute
+  modal activity, and exactly enumerates every canonical unordered input pair
+  for those outputs.  Receipts include signed reconstruction error, designed
+  interaction absolute capture, top-M capture curve, `M50/M90/M99`, Shannon
+  entropy, effective support, and retained dominant interaction rows.  Claims
+  are explicitly limited to the selected output carrier.
+- N32 CPU smokes reconstruct the selected modal transfer below `4e-18`.  With
+  32 outputs, the seven-step endpoint carrier captures `.96873` of full target
+  modal activity; `M50/M90/M99 = 5/16/93`, effective support is `19.16`, and
+  256 retained rows capture `.99985` of enumerated absolute activity.  This
+  validates the instrument only.  The already-running donor-heavy phase-2 CFD
+  run predates the instrumentation and remains part of the bounded phase
+  tranche.
+
+# 2026-07-16 NS quarter-window execution guard
+
+- Began the first bounded GPU quarter-window sentinel from the staged
+  pure-helicity/allocation manifest: balanced allocation, allocation-specific
+  static rank `0`, deterministic phase stream `0`.  It is intentionally only
+  one live CFD task while an unrelated parallel Agda check occupies several
+  CPU cores; no endpoint result is available yet.
+- Repaired a manifest correctness defect before launching the contrasting
+  outlet-suppressed task.  The planner had ranked static helicity envelopes
+  without replaying the exact dominance/tightness/role-floor contract of the
+  scheduled command.  It now performs a cheap exact `backend=none` replay per
+  selected rank and emits only phase streams that are admissible.  The search
+  also treats `0.04999999999999999` as the declared `0.05` role floor within
+  a `1e-12` representation tolerance.  A six-allocation manifest regression
+  passes; this is scheduler hygiene, not an NS result.
+- The completed balanced sentinel is an early null for its one selected seed:
+  at the exact quarter window it has moving-packet retention `.19076`,
+  heat-compensated retention `.36148`, negative/positive target transfer over
+  viscous loss `1.192/.0202`, designed-loop closure `1.25e-4`, and only
+  `.01298` designed-versus-full target activity capture.  Its `~.976` support
+  leakage means the nine-triad graph rapidly ceases to capture full target
+  dynamics.  This rejects only that seed; it does not retire the allocation,
+  pure-helicity family, topology, or any NS mechanism.  The admissible
+  outlet-suppressed contrast is now running.
+- The outlet-suppressed contrast completed with no improvement: `R_move=.16571`
+  versus the balanced `.19076`, heat-compensated `.35341`, capture `.00960`,
+  and support leakage `.97450`.  Lowering initial outlet mass is therefore not
+  a credible explanation for the balanced seed's rapid loss in this tested
+  rank/phase pair.  The next serial contrast is feedback-heavy allocation.
+
+- Completed the six-regime coarse allocation screen at one static rank and
+  phase stream per regime.  None is a quarter-window survivor.  Donor-heavy
+  is the empirical lead (`R_move=.28526`, positive/negative target transfer
+  over viscous `.3909/.8332`), but still has `.97823` support leakage and only
+  `.01440` target capture.  The other five allocations lie in
+  `R_move=.14893..191`.  The next bounded discriminator is sign-diverse
+  backbone helicity within donor-heavy, beginning with rank `1`.
+
+# 2026-07-16 finite Fourier triad-cancellation seam
+
+- Refined the cyclic-feedback role ledger into the correct diagnostic split.
+  Its integrated matrix is a nonnegative gross directed throughput convention,
+  so it now reports `T→O`, `O→F`, `F→T`, a bounded loop-closure fraction, and
+  an intended-loop balance rather than relying only on a signed ratio.  It
+  separately measures the absolute target-shell nonlinear activity captured
+  by the nine designed triads against the full target-shell nonlinear activity.
+  The designed-triad conservation residual remains an implementation receipt,
+  not a support-leakage measurement; quarter-window prefix ledgers make both
+  quantities available throughout an endpoint window.  A CPU smoke at four
+  exact quarter checkpoints retained residual at most `4.34e-19`.  This
+  validates telemetry only; its small capture on that short smoke is neither
+  a topology verdict nor a recurrence claim.
+
+- Corrected the static helicity seed ordering so requested role mass shares
+  are applied before the amplitude-weighted factor audit.  Thus each coarse
+  allocation regime receives an honest allocation-specific envelope ranking.
+  The ranking remains only a cheap phase-unoptimized seed, and no NS/BKM/Clay
+  gate changed.
+
+- Audited the current three-target cyclic graph at the *signed,
+  reality-reduced phase-constraint* level rather than mistaking its ordinary
+  bipartite graph cycle for physical holonomy.  The nine channel constraints
+  have rank nine and zero left kernel: every triad retains at least one private
+  mode, furnishing a diagonal nonzero minor.  Thus this topology cannot yield
+  a static phase-frustration theorem from graph sharing alone, although it can
+  still test dynamical relocking.  The script now emits this exact certificate
+  and a pure-mode-helicity factorization: six shared backbone modes give 64
+  coupled sign assignments, while the full 18-mode pure-helicity space has
+  262,144 assignments and separates into local donor-pair/four-choice and
+  side-leaf/two-choice blocks.  An optional static factor audit evaluates the
+  resulting 1,536 local geometric channel factors in under one second; it is
+  an envelope screen only, not phase optimization, CFD evolution, or a
+  Waleffe-class/holonomy theorem.  The next high-alpha evolution screen must
+  vary those mode helicities and admissible amplitude shares; it should not
+  spend further full windows on the already-rejected phase-only realization.
+
+- Added a reproducible pure-helicity/role-mass candidate surface to
+  `scripts/ns_phase_locked_packet_search.py`.  `--helicity-static-case` picks
+  one of the 64 backbone factor-table cases and records its full mode signs;
+  `--role-shares target,donor,outlet,feedback` rescales the actual
+  reality-paired dyadic carrier before the common critical normalization.
+  Realised shares are recomputed from that carrier, and target-dominance,
+  local-tightness, and minimum-role-share floors are explicit admission
+  constraints.  The selected private-leaf choices remain only an
+  independently-maximal-envelope seed, not joint phase optimization, mixed
+  polarization, a recurrence result, or an NS theorem.  `py_compile`,
+  static-carrier allocation, and a one-step-equivalent CPU evolution smoke
+  test passed; no full-window GPU result has been generated from this enlarged
+  family.
+
+- Added a designed-network role-transfer ledger to the evolved packet search.
+  At every saved solver state the nine intended triads are decomposed into
+  their three modal transfers; each triad's negative modal changes are
+  allocated to positive modal changes proportionally, yielding a conservative
+  donor-to-receiver matrix on `{target, donor, outlet, feedback}`.  Its time
+  integral now reports `feedback -> target`, `target -> outlet`, and their
+  ratio, with a retained per-triad conservation residual.  This deliberately
+  excludes unplanned convolution triads, whose effect remains visible through
+  full packet telemetry and support leakage.  A CPU evolution smoke check had
+  maximum triad residual `4.34e-19`; it validates the ledger wiring, not
+  feedback efficiency or recurrence.
+
+- A second static allocation check used helicity rank `2` with donor-heavy
+  requested shares `.25,.40,.15,.20`; the realised finite-carrier shares were
+  `.25,.40,.15,.20` to floating roundoff.  This confirms that the coarse
+  simplex configurations are actual hard initial-state constraints rather
+  than penalty terms.  No quarter-window or full-window result is inferred
+  from this static check.
+
+- Strengthened the cyclic-feedback adversarial packet search before
+  interpreting its one-window calibration.  The `j=2` viscous window is now
+  explicit as `T = 2^(-4) / nu = 62.5` for `nu=.001`; the graph fixes the
+  phases of three coordinate-independent target modes, thereby removing the
+  three translation phase gauges.  Checkpoints now retain the full dyadic
+  packet ledger rather than truncating at the target shell, and report the
+  moving packet `P_L` centred on the current dominant shell, its exact
+  mode-by-mode heat continuation, scale displacement, and full-field
+  correlation maximised over discrete translations.  A staged short evolved
+  moving-packet prefilter is available before a costly full endpoint run.
+  Static, short CPU, and staged-prefilter smoke checks pass.  The pending GPU
+  run predates these telemetry/selection upgrades, so it remains only a
+  static-seed, fixed-packet one-window calibration.
+  The graph now also exports its mode--triad incidence matrix and explicit
+  one-dimensional bipartite cycle basis.  It correctly marks helical coupling
+  holonomy as uncomputed: that requires the exact complex channel coefficients,
+  not topology alone.
+
+- A bounded GPU staged-endpoint smoke run completed under the upgraded
+  protocol: eight critical-mass-normalized phase samples, four short evolved
+  prefilter candidates, then one selected endpoint at `T=1.25 = .02 * 62.5`.
+  Its fixed-shell ratio was `.8959` versus exact heat `.9608` (a
+  heat-compensated `.9325`); its radius-one moving-packet ratio was `.9104`
+  and heat-compensated `.1.0292`, with no dominant-shell displacement.  This
+  short interval is useful only to validate the new selection/telemetry and
+  to show that fixed-packet and moving-packet readings differ; it is far too
+  short to test parabolic nonrecurrence.
+
+- The full old-protocol N32 cyclic-feedback calibration is complete.  It used
+  the `urms=1` normalization and evolved only the best of 64 *static initial
+  inflow* seeds (sample 55), for the correct full `j=2` window `T=62.5`.
+  Its fixed target packet has `R=2.736e-4`, versus a heat-compensated
+  `G=2.022e-3`; positive nonlinear target input is only `.107` of integrated
+  viscous loss while negative transfer is `4.85` times that loss.  The seed
+  therefore fails dramatically as a fixed-packet recurrence witness.  Since
+  it predates critical normalization, moving-packet telemetry, and endpoint
+  preselection, it does not decide the cyclic topology or a dynamic-packet
+  theorem.
+
+- Replayed the rejected sample 55 through the new exact complex helical
+  channel extractor.  Modal-transfer reconstruction error is below
+  `3.7e-18`, but channel saturation is heterogeneous across the graph
+  (`.020` to `.996` over its triad modal transfers).  Thus the seed is not
+  meaningfully classified by a single graph-level zero/nonzero holonomy; a
+  future holonomy statistic must select and weight exact channel constraints.
+  Launched the first relevant full candidate run: 32 critical-mass-normalized
+  phase samples, 8 candidates selected by an evolved moving-packet prefilter
+  at `.05*T`, then one full moving-packet endpoint at `T=62.5`.
+
+- That first relevant run completed and is a stronger sampled-family null
+  result.  The best short-prefilter candidate (sample 6) had
+  `R_move=.8268` and heat-compensated `G_move=1.0936` over `.05*T`, but at
+  the full window has `R_fixed=8.47e-4`, `R_move=1.06e-3`, and
+  `G_move=9.66e-3`; its dominant packet moves down one shell rather than
+  forward-cascading.  Positive nonlinear input is `.053` of integrated
+  viscous loss, negative input is `2.74` times that loss, and
+  translation-quotiented correlation is `.093`.  Thus a `.05*T` survival
+  screen selects transient replenishment rather than parabolic recurrence.
+  It rejects this sampled critical-normalized family under that short
+  selector, not the cyclic graph or a uniform theorem.
+
+- The longer `.25*T` survival selector confirms the phase-only negative
+  calibration: all four survivors have `R_move=.1123`–`.1140` and
+  heat-compensated `G_move=.2729`–`.2772`.  Its selected sample 4 still ends
+  at `R_fixed=1.13e-3`, `R_move=1.47e-3`, and `G_move=1.34e-2`, with a one
+  shell downward shift.  This retires further phase-only full-window searches
+  for this fixed-amplitude/helicity realization as low-alpha; it is not an
+  exhaustive topology, amplitude, helicity, or scale verdict.
+
+- Generalized `scripts/ns_phase_locked_packet_search.py` from a single
+  donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
+  lower donor pairs feed `r_i`, while shared `s_i` outlet modes feed the next
+  target.  The graph has nine checked zero-sum triads, 15 free helical phases,
+  reality partners, and every coordinate lies inside the componentwise
+  2/3-dealiased carrier.  Its default normalization now fixes total finite
+  `H^(1/2)` packet mass (with `urms` retained as an explicit alternate).
+  The endpoint score is now multi-window:
+  `min_m X_j((m+1)T)/X_j(mT)` and its mean log counterpart.  It records exact
+  heat continuation, dominance/tightness, direct designed-network correlation,
+  support leakage, and signed nonlinear replenishment over viscous loss.
+  A short CPU/GPU smoke agrees on the two-window ratios to the displayed
+  precision.  This makes a genuine shared-mode relocking adversary testable;
+  it is not yet an endpoint-optimized recurrence result or a packet theorem.
+
+- Recalibrated the N32 packet-residence audit against the exact heat
+  semigroup of the observed initial shell spectrum and a reconstructed
+  2/3-dealiased pseudospectral shell balance.  The earlier random trajectory's
+  `j=3` packet ratios `.0537`–`.0648` are heat-like or smaller: its exact
+  heat ratios are `.0590`–`.0839`, so the compensated values are `.772`–
+  `.910`; nonlinear inflow is only `.391`–`.483` of integrated viscous loss.
+  Thus that run is a resolved viscous-decay calibration, not nonlinear
+  leakage evidence.  Artifact:
+  `ns_critical_packet_phase_residence_audit_N32_critical_packet_seed17_`
+  `heat_balance_20260716.json`.
+
+- Added `scripts/ns_phase_locked_packet_search.py`, a deliberately
+  adversarial N32 shared-target helical donor-star search.  It fixes reality,
+  divergence freedom, 2/3 support, target-packet dominance/tightness, and
+  optimizes phases for initial target-shell inflow before measuring the
+  endpoint objective with the dashiCFD finite-Galerkin solver.  The best of
+  128 phase samples starts with nonlinear target inflow `8.12` times its
+  viscous loss, yet after the exact `15.625` window ends at
+  `X_3(T)/X_3(0)=.0703`, versus a heat-only `.1353`; its heat-compensated
+  ratio is `.519`.  This rejects this particular simple phase-locked donor
+  star as a recurrence witness.  It neither bounds more general shared-mode
+  networks nor establishes a packet theorem.  Artifact:
+  `ns_phase_locked_packet_search_N32_gpu_endpoint_20260716.json`.
+
+- Added `scripts/ns_critical_packet_phase_residence_audit.py` to test the
+  next non-static candidate directly on the finite Fourier carrier.  It uses
+  the scale-invariant dyadic packet
+  `X_j = 2^j * sum_{2^j <= |k| < 2^(j+1)} |u_hat(k)|^2`, requires a dominant
+  locally tight packet, and compares it with the nearest saved state at its
+  actual viscous time `c * 2^(-2j) / nu`.  It also records finite-difference
+  helical amplitude/phase telemetry, explicitly not an exact phase ODE.
+
+- The available N128 unforced archive is **not temporally resolved for this
+  test**: its snapshots span only `0.12`, while its dominant `j=5` packet has
+  nominal viscous time about `0.98` at `nu=0.001`; no dominant-tight packet
+  has a saved endpoint within the declared timing tolerance.  The generated
+  artifact therefore makes no recurrence or leakage claim.  This is a useful
+  negative calibration: do not use this short decaying trajectory as evidence
+  for the proposed critical-packet barrier.  A longer/higher-cadence targeted
+  Galerkin or DNS trajectory is required before formalizing that conjecture.
+  See `ns_critical_packet_phase_residence_audit_N128_20260716.json`.
+
+- Generated one purpose-built, shell-local N32 Galerkin trajectory to make the
+  recurrence audit genuinely time-resolved: random Leray-projected data in
+  `5 <= |k| <= 10`, `nu=.001`, 16,000 steps, and snapshots every `.1`.  On
+  the four fully recorded dominant-and-tight `j=3` windows, the packet ratio
+  after `2^(-6)/nu = 15.625` is `0.0530`–`0.0642` (largest observed ratio
+  `0.0642`).  This is positive calibration for viscous leakage in one smooth,
+  unforced, randomly phased finite family; it is **not** a uniform kappa, an
+  adversarial relocking search, or evidence for a critical-packet theorem.
+  The audit now rejects truncated end-of-record windows explicitly.  Artifact:
+  `ns_critical_packet_phase_residence_audit_N32_critical_packet_seed17_20260716.json`.
+
+- Replaced the rejected geometric helical-mismatch diagnostic with an exact
+  helical phase-saturation audit in
+  `scripts/ns_triad_edge_depletion_audit.py`.  Every modal transfer is now
+  reconstructed from eight helical channel terms, and every physical edge
+  difference is represented on their concatenated 16-term carrier.  Thus
+  `delta_sat = |Delta T| / A` gives the tautological local identity
+  `F_e = delta_sat^2 * (A_e^2 / d_e^2) * d_e`, with reconstruction and local
+  identity residuals below `6.7e-23` and `4.9e-27` in the N128 audit.
+
+- The first two-frame N128 falsification run (frames 0 and 6, cutoff 6,
+  6,000 canonical triads each) does not support **static** phase-saturation
+  bad-edge sparsity: at thresholds `eta = .75, .90, .95, .99`, the high-
+  saturation edge set carries respectively `46.7%, 18.4%, 6.3%, 2.4%` of
+  sampled normalized flux.  This rejects the immediate pointwise
+  `badEdgeSparsity` use of this exact defect.  It does not test a time-weighted
+  residence theorem, a different state-dependent cancellation defect, or any
+  global NS claim.  The artifact is
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260621/`
+  `ns_triad_edge_phase_saturation_audit_N128_20260716.json`.
+
+- The full 13-snapshot N128 series (3,000 canonical triads per frame; 117,000
+  edge observations) confirms the negative calibration.  `delta_sat > .90`
+  carries `19.3%` of normalized edge flux in aggregate and `18.8%`–`19.9%`
+  in every snapshot (`.95`: aggregate `6.4%`, range `5.1%`–`7.4%`; `.99`:
+  aggregate `2.2%`, range `1.8%`–`2.7%`).  This is not a time-integrated
+  residence counterexample—no snapshot-time quadrature is asserted—but it
+  removes any empirical reason to formalize simple phase-saturation residence
+  as the next NS mechanism.  See
+  `ns_triad_edge_phase_saturation_audit_N128_all_frames_20260716.json`.
+
+- Tightened the dissipation-normalised/depletion interfaces after review.
+  `ExtendedFlux` now has an explicit finite/infinite order; zero-density
+  quotients distinguish `0 / 0 = 0` from `nonzero / 0 = infinity`; and the
+  hierarchy target is the typed finite inequality
+  `FluxRem ≤∞ finite ((C / (epsilon * nu)) * X * D + Tail)`.  The strict
+  barrier is likewise a typed inequality, and
+  `strictDepletionBarrierImpliesAbsorption` is now a proved finite-order
+  consequence of it.  The physical good-edge hierarchy, bad-edge sparsity,
+  concrete division/order authority, and time-integration theorem remain
+  deliberately uninhabited.
+
+- Added `NSTriadKNDepletionBarrier`.  Its theorem
+  `depletionBarrierImpliesFluxHierarchy` is the mechanically proved finite
+  recombination: an exact good/bad split plus `goodEdgeHierarchy` and
+  `badEdgeSparsity` entails the aggregate flux hierarchy bound.  Those two
+  named NS inputs remain explicit; no depletion or Clay gate was promoted.
+- Added `scripts/ns_triad_edge_depletion_audit.py`, the first diagnostic keyed
+  to the Fourier edge-transfer quotient rather than physical-space strain
+  telemetry.  After discrete Leray projection, a 6,000-triad N128 sample has
+  modal conservation residual below `4.2e-14` relative on meaningful triads.
+  The tested mean pairwise helical-mismatch defect is not a viable immediate
+  controller: its flux correlation is `-0.036`, and at `eta=0.25` its bad set
+  contains `82.8%` of triads and `81.0%` of sampled normalized flux.  This
+  rejects that specific candidate as evidence for `badEdgeSparsity`; it says
+  nothing about a different incompressibility-exact defect.
+
+- Replaced the invalid one-sided physical controller claim with the canonical
+  bilinear edge-transfer surface: `physicalWeightedError` is exactly the sum
+  of `third * <B z, T(u)>` over zero-sum triads.  The former `Lneg`/`Labs`
+  pair remains diagnostic only; it cannot dominate this linear functional
+  uniformly under `z ↦ ε z`.
+- Added explicit weighted-edge Young and transfer-flux absorption targets.
+  They require an independently positive coercive edge weight and an actual
+  strict viscous/base-dissipation bound.  No concrete authority or absorption
+  witness has been supplied, so `transferFluxAbsorptionClosed = false`.
+- A fixed-weight scaling audit now rules out the simplest proposed absorption:
+  for state-independent `W`, the dual transfer flux is degree six in Fourier
+  amplitude while viscous dissipation is degree two.  Any viable controller
+  must expose state-dependent/coercivity normalisation or an additional energy
+  hierarchy; this is now a prior gate to profile Schur/q-gap work.
+
+- Added the dissipation-normalised replacement surfaces:
+  `NSTriadKNLocalViscousEdgeAllocation`,
+  `NSTriadKNDissipationNormalizedFluxRemainder`, and
+  `NSTriadKNFluxHierarchyEstimate`.  The local allocation now makes a
+  necessary combinatorial point explicit: a uniform three-slot weight has
+  cutoff-growing overlap, so any valid viscous split must use degree-normalised
+  incidence shares (or a proved equivalent partition of unity).  The quotient
+  uses an explicit extended zero-denominator convention; no theorem-level
+  delta regularisation is introduced.  The intended quartic estimate
+  `FluxRem <= C/(epsilon*nu) * X * D_z + TailRem` remains false/open until a
+  transfer-difference estimate and a dynamical control mechanism for `X` are
+  proved.
+
+- The next physical bridge is now fixed as a flux-inclusive estimate, not an
+  identification of the weighted Fourier error with the negative Gram form:
+  `|Q_NS| ≤ c * <z,LNeg z> + FluxRem`.  The current scalar authority has no
+  reusable Cauchy/Young theorem or concrete ordered-field instance, so this
+  remains a genuine analytic obligation rather than a missing API adapter.
+- There is a decisive non-singularity constraint on any proposed Young split:
+  `m^-_tau` can vanish on non-adverse triads, while the linear weighted-transfer
+  contrast need not.  Hence no uniformly strictly-positive Young parameter can
+  be bounded above by a multiple of `m^-_tau`; the transfer-flux term must be
+  defined and controlled independently, or the present negative-only Gram
+  weight cannot close the PDE bridge.
+- `scripts/ns_triad_negative_gram_flux_obstruction.py` now gives a
+  deterministic finite Fourier diagnostic for that obstruction: on
+  `(1,0,0) + (0,1,0) + (-1,-1,0) = 0`, the selected transfer is positive
+  (`m^- = 0`) while a nonconstant weighted transfer is nonzero.  It rules out
+  the negative-Gram-only candidate, not the required flux-inclusive bridge.
+- The same diagnostic also finds a near-zero distinguished-output transfer
+  with order-one three-mode transfer variation.  Therefore the current
+  `mAbs = amplitudeFactor * |one-output orbit transfer|` is not, by itself,
+  a viable uniform Young weight for the full weighted-energy term.  The
+  physical bridge needs a new modal-transfer/dissipation coefficient or a
+  genuinely independent flux estimate before it can feed Stage 3.
+
+- Strengthened `NSTriadKNExactLatticeTriadZeroSum` with exact cycle and swap
+  invariance of the Boolean zero-sum predicate.
+- In `NSTriadKNFiniteComplexFourierDynamics`, derived all three wave-dot
+  reversal identities from zero-sum geometry, additive wave-dot linearity, and
+  divergence-free coefficients; derived negative-mode pairing symmetry from
+  reality and the coordinate Hermitian form; and assembled the three literal
+  complex pair-zero lemmas.
+- The generic six-summand regrouping is now proved and the physical
+  modal-triad conservation constructor is derived from the explicit local
+  authorities.  The lane remains fail-closed on a concrete exact C3 authority;
+  no NS/Clay promotion state changed.
+- Migrated the weighted-energy transfer surface to `ZeroSumTriad`: physical
+  modal-transfer data and weighted contribution folds now retain the exact
+  `zeroSum? τ ≡ true` witness, rather than totalizing Fourier semantics over
+  arbitrary labelled triples.  The existing multiplier-difference authority
+  now applies directly to this carrier via a per-triad adapter.  The concrete
+  `1/3` normalization and finite weighted-energy dynamics identity remain
+  open.
+
 # 2026-06-24 ACL Schur-test proof repair
 
 - Repaired the mixed-tail ACL Schur-test receipt boundary so the sampled

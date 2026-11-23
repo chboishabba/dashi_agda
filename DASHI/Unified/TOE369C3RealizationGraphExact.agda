@@ -1,5 +1,89 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- Marked original R445 first-coarse contraction is NOT universal C3 identity.
+-- YM #1536 external source: original SU(N) Wilson L4 64 R445 coarse W,
+-- 64 V + 896 spectator Haar; two REAL globally affine distinct original
+-- closed y-z plaquette marks at (0,0,0,0) and (0,0,0,2).
+-- Their post-R445 conditional source supports are disjoint (4+4 variables).
+-- For beta<=1/144, |s|,|t|<=9/100, original marked fibre q<=13/25.
+-- Exact 64-row rational Neumann certificate on the true induced coarse
+-- globally marked law yields q_coarse_marked<11/20, after keeping
+-- BOTH direct mixed marked/Wilson Hessian and conditional score covariance.
+-- This is fixed L4 strong-coupling original-source analytic/combinatorial
+-- evidence, NOT universal 369/spatial/internal C3 realization, physical
+-- positive-time RP, beta(a)->infinity CMP119/122 absolute W3, or same-H gap.
+-- Cross-PR GitHub documentation only: no imported unmerged Agda proof,
+-- no change of conjecturalPhysicalRealization or physicalPromotion=false.
+
+
+-- 22-Nov original R445 TWO-LEVEL Dobrushin is NOT TOE physical closure.
+-- Literal #1536 full original compact SU(N) Wilson source at SMALL beta:
+-- 64 actual R445 W, 64 Haar V + all 896 interacting spectators.
+-- Exact first-selected-link face geometry gives only 3 directly overlapping
+-- other coarse W and max_a sum_i source-face-incidences n_i(a)=12.
+-- The original COARSE marginal K0(W) 4-corner mixed logarithmic Hessian
+-- must keep direct E[J_ij] plus first-source-score conditional Cov;
+-- dropping E[J_ij] breaks exactly 96 overlapping L4 coarse pairs.
+-- Fibre q_f<=36*tanh(beta); induced unmarked coarse Gibbs conditional
+-- q_c<=3*beta+1152*beta^2/(1-q_f). At beta<=1/72,
+-- q_f<=1/2 and q_c<=35/72. Source-local full Haar theorem,
+-- locally checked, NOT Agda kernel. This is only high-temp first RG.
+-- Globally affine marked coarse q, weak-coupling beta(a) history,
+-- renormalized CMP119/122 absolute physical W3, original OS/same-H gap
+-- and universal/internal 369-C3 physical identity all remain OPEN.
+-- No conjectural realization edge or physicalPromotion flag is changed.
+
+
+-- R445 induced coarse log source quasilocality is NOT a TOE equivalence.
+-- Actual YM #1536: a change in one original R445 W_i moves its first
+-- fine link and precisely six ORIGINAL Wilson plaquettes, on 19 actual
+-- fibre/spectator variables (site-oscillation sum <=96 beta).
+-- When two W contrasts have disjoint affected source plaquette sets,
+-- the true induced coarse log K0(W) four-corner contrast is exactly an
+-- integral of conditional first-source covariances, bounded by
+-- (96 beta)^2 q^distance/(1-q), q=36 tanh(beta), at SMALL beta only.
+-- This does not provide a physical SU(N) beta(a) running-law rate,
+-- same-object universal 369 C3, CMP119/122 W3 absolute cluster charges,
+-- positive-time RP or any same-H OS spectral gap. Cross-PR source note only;
+-- conjecturalPhysicalRealization grades / physicalPromotion=false unchanged.
+
+
+-- R445/F19 960-variable conditional source audit (2026-11-22): YM #1536 local original-Wilson source proof.
+-- Under the actual 64 two-link axial R445 product maps and all 896
+-- interacting original spectators, the fixed-coarse-W continuous SU(N)
+-- conditional Haar interaction graph has 960 variables: 64 V with weighted
+-- original-plaquette neighbour degree 36, 896 S with degree 18.
+-- Classical Dobrushin gives conditional q<=36*tanh(beta); with two GLOBAL
+-- original plaquette source labels and r=9/100: q<=36*tanh(beta)+6r,
+-- which is <=79/100 only for beta<=1/144. The conditional mixed F19
+-- action Hessian is spatially bounded in this 960-variable graph.
+-- C3/time mirror preserve variable LABEL incidence after transforming W,
+-- not the law at a fixed untransformed W, and do not prove positive-time RP.
+-- This leaves the induced coarse action K0(W), physical beta(a) UV,
+-- renormalized CMP119/122 ABSOLUTE W3, original same-H D2 and universal
+-- 369/internal gauge C3 realization as uninhabited physical sources.
+-- The source proof and locally checked geometry are branch-local to YM #1536;
+-- this is only a provenance comment, not an unmerged Agda proof import.
+
+
+-- 22 Nov 2026 CROSS-PR SOURCE NON-PROMOTION RECEIPT (YM #1536, TOE #1291/#1281):
+-- Genuine original Wilson L4 spatial C3 rotates positive-link spacetime
+-- labels while fixing time; its original time mirror commutes with C3
+-- on all 1024 native positive-link addresses. Both preserve the set of
+-- 1536 original positive-plaquette supports and the 18-neighbour / 18432
+-- directed source Dobrushin adjacency edges. Locally exact Python PASS,
+-- Git blob f7373e8d4ed4df8aa206604918f2a8a35b07881c on YM #1536.
+--
+-- This is SOURCE-SIDE SPATIAL geometry only. It does not inhabit any
+-- physical realisation edge below. In particular spatialXYZC3 is NOT
+-- an identified internal su2CartanU1Orientation, and a C3 representation
+-- does not supply the universal369Phase -> spatialXYZC3 physics map.
+-- The original SU(N) small-beta q <= 18*tanh(beta) insufficient at
+-- beta(a)->infinity; complex RP, CMP119/122 marked W3 absolute shells,
+-- same-H OS spectrum and TOE terminal physical closure remain OPEN.
+-- Cross-PR unmerged evidence is not an Agda import or kernel receipt.
+
+
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)

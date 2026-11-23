@@ -97,23 +97,23 @@ assembleStandardJRendererReadout :
   Normalized.StandardJRendererReadout M
 assembleStandardJRendererReadout C P =
   record
-    { Scalar = Scalar C
-    ; Phase = Phase C
-    ; Tone = Tone P
-    ; Colour = Colour P
+    { Normalized.Scalar = Scalar C
+    ; Normalized.Phase = Phase C
+    ; Normalized.Tone = Tone P
+    ; Normalized.Colour = Colour P
 
-    ; realPart = realPart C
-    ; imagPart = imagPart C
-    ; atan2 = atan2 C
-    ; toneOfValue = toneOfValue P
+    ; Normalized.realPart = realPart C
+    ; Normalized.imagPart = imagPart C
+    ; Normalized.atan2 = atan2 C
+    ; Normalized.toneOfValue = toneOfValue P
 
-    ; phaseColour = phaseColour P
-    ; composeTone = composeTone P
+    ; Normalized.phaseColour = phaseColour P
+    ; Normalized.composeTone = composeTone P
 
-    ; phase3 = phase3 P
-    ; phase6 = phase6 P
-    ; phase9 = phase9 P
-    ; phase27 = phase27 P
+    ; Normalized.phase3 = phase3 P
+    ; Normalized.phase6 = phase6 P
+    ; Normalized.phase9 = phase9 P
+    ; Normalized.phase27 = phase27 P
     }
 
 ------------------------------------------------------------------------

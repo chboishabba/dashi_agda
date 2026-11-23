@@ -93,7 +93,6 @@ record MinimalJointReflection
     (AR : Standard.NormalizedJReflectionAlgebra M A N Q)
     (L : Tower.CanonicalLevel27Lift
       (Renderer.standardRenderer M A N Q O)) : Set₁ where
-  constructor minimalJointReflection
 
   private
     R = Renderer.standardRenderer M A N Q O
@@ -182,16 +181,11 @@ minimalPhaseC3Reflects :
         (Render.jPhase
           (Renderer.standardRenderer M A N Q O)
           tau)))
-minimalPhaseC3Reflects {M} {A} {N} {Q} {O} W tau =
+minimalPhaseC3Reflects W tau =
   trans
     (cong Tower.level6To3
       (minimalPhase6Reflects W tau))
-    (Joint.phase3ReflectionCommutesHex
-      (Render.phase6
-        (Renderer.standardRenderer M A N Q O)
-        (Render.jPhase
-          (Renderer.standardRenderer M A N Q O)
-          tau)))
+    (Joint.phase3ReflectionCommutesHex _)
 
 ------------------------------------------------------------------------
 -- 5. Level tower reflection from the same analytic point.
@@ -207,11 +201,11 @@ minimalLevel27ReflectionLift :
     L
 minimalLevel27ReflectionLift {AR = AR} W =
   record
-    { reflectPoint =
+    { Tower.reflectPoint =
         JRef.reflectParameter
           (Standard.baseReflection AR)
 
-    ; level27Reflection =
+    ; Tower.level27Reflection =
         level27Reflects W
     }
 

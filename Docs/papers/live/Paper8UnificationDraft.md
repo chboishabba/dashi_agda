@@ -385,60 +385,6 @@ rows support the architecture story only: DCHoTT records interpretation
 coverage, the Cubical row records why no Cubical wrapper is fabricated, and
 the terminal unification guard remains false.
 
-### 9.1 Case study: externally verified GRH and same-object proof admission (21 November 2026)
-
-The RH/Dirichlet GRH programme illustrates why a receipt must not be
-promoted merely because it has a recognizable mathematical title.
-The **original external** Lean v4.33.1/Mathlib v4.33.1 source at pinned
-`chboishabba/riemann-hypothesis-lean` commit
-`7cbf7a0c32fca1badf05931879a37c3f8a2b03b4` declares five terminal
-theorems: `RiemannHypothesis`, zeta-zero location, all-Dirichlet-character
-right-half-plane nonvanishing, all-character critical-strip zero location,
-and its primitive-character version. The original author's work and the
-independent verification reports (including Andrew Sutherland's
-20 November 2026 MIT audit) are **external mathematical and kernel
-authorities**, not proofs produced by DASHI's local SymPy calculations.
-
-The already-owned direct-admission adapter
-`dashi_lean4/proofs/alpoge-lean433/RHAdmission.lean` imports the original
-`Main` in that pinned environment, and its local fail-closed
-acceptance script checks source identity and the exact five axiom
-receipts. Separate root
-`MillenniumExternal/ExactTargetSurface.lean` already identifies
-Mathlib `RiemannHypothesis` with the original selected
-`Millennium.ClayRiemannHypothesis`. **Neither adapter is a proof
-import across incompatible Lean/Mathlib editions by itself**. The
-original Agda `AlpogeGRHGeometricTransportExact` and
-`AlpogeRHOriginalClayEndpointBidiExact` remain proof-relevant
-**conditional** same-zero/critical-line transports for ordinary RH;
-they do not derive all-character GRH by reversing an ordinary RH
-implication.
-
-The local SymPy tests identify a useful arithmetic donor:
-the Euler factors omitted when passing from a primitive to an induced
-Dirichlet character are nonzero in `Re(s)>0`, since for `|z|=1`,
-`r=p^{-Re(s)}∈(0,1)`,
-`|1-rz|²=(1-r)²+2r(1-Re z)≥(1-r)²>0`.
-This protects a **mathematical zero-location equivalence within the
-open critical strip** once the actual analytic Dirichlet L-function
-identity and continuation have been supplied. Finite coefficient
-experiments (including cyclotomic SymPy audits) cannot establish
-the analytic continuation or the original all-character GRH theorem.
-
-This is a direct example of the paper's four-layer discipline:
-source ownership and kernel provenance → theorem/statement identity →
-same-object analytic semantics across consumers → justified theorem
-promotion. The existing Mellin split and Gamma/Mellin-to-Weil
-transports are available as separate original implementation
-owners; neither manufactures missing Dirichlet L-function data.
-The GRH **P0** controlling plan is
-`Docs/roadmaps/AlpogeGRHGeometricTransport20261121.md` on Agda #1533.
-At this source revision, local Lean/Agda cross-version kernel admission
-and Agda all-character semantic transport have not been completed.
-No claim about Yang–Mills, Navier–Stokes, elliptic BSD or all Hecke
-L-functions follows automatically from ordinary RH or the stated
-Dirichlet GRH results.
-
 ## 10. What this paper does not claim
 
 - It does not prove the Clay Yang-Mills mass gap problem.
@@ -487,8 +433,3 @@ mathematical-physics readership.
 | Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`. | The analytic content of those lanes remains in Papers 1 and 3 and in their cited external inputs. | Any analytic YM or NS proof narrative inside Paper 8. |
 | Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`. | External DHR authority may be cited by downstream illustrations. | Full DHR reconstruction, internal compact-group construction, or exact `G_DHR ~= G_SM`. |
 | Sections 6-8 and the blocker table freeze the architecture-level scope boundary for GR, empirical, and prediction consumers. | Any GR or empirical authority belongs to the downstream consumer lane that invokes it. | Continuum GR, empirical validation, terminal unification, or automatic promotion from closure grammar to observational adequacy. |
-
-
-### Scoped Paper 2 time-indexed hyperfabric example (2026-11-20)
-
-The Paper 2 local reconstructed F8 diagnostic uses distinct SSPRK3 computational incidences mapped to shared physical half-step control indices (2n,2n+2,2n+1). Pullback of control values and additive transpose aggregation preserve stage identity; observation affine offsets belong once to their receiver event. Complementary moving-interface ledgers and exterior unit-response/adjoint parity were locally exercised. The LXXVII independent refinement screen, however, shows large spatial curvature sensitivity despite algebraic closure to roughly 1.64e-13. This is an architecture-level example and not a literal Agda hyperfabric instantiation, continuum GR proof, observer-Hilbert identification or terminal unification result. See the canonical physics ledger and Paper 2 draft for the quantitative evidence and open gates.

@@ -26,7 +26,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl; cong; sym)
-open Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import Base369 as Base
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -81,26 +80,26 @@ standardRenderer :
   Render.JPhaseRenderingAlgebra
 standardRenderer M A N Q O =
   record
-    { klein =
+    { Render.klein =
         Standard.standardAnalyticKlein M A N Q
 
-    ; Scalar = Scalar O
-    ; Phase = Phase O
-    ; Tone = Tone O
-    ; Colour = Colour O
+    ; Render.Scalar = Scalar O
+    ; Render.Phase = Phase O
+    ; Render.Tone = Tone O
+    ; Render.Colour = Colour O
 
-    ; realPart = realPart O
-    ; imagPart = imagPart O
-    ; atan2 = atan2 O
-    ; toneOfValue = toneOfValue O
+    ; Render.realPart = realPart O
+    ; Render.imagPart = imagPart O
+    ; Render.atan2 = atan2 O
+    ; Render.toneOfValue = toneOfValue O
 
-    ; phaseColour = phaseColour O
-    ; composeTone = composeTone O
+    ; Render.phaseColour = phaseColour O
+    ; Render.composeTone = composeTone O
 
-    ; phase3 = phase3 O
-    ; phase6 = phase6 O
-    ; phase9 = phase9 O
-    ; phase27 = phase27 O
+    ; Render.phase3 = phase3 O
+    ; Render.phase6 = phase6 O
+    ; Render.phase9 = phase9 O
+    ; Render.phase27 = phase27 O
     }
 
 standardRendererPointIsAnalyticParameter :
@@ -177,9 +176,9 @@ jointJConjugationFromNormalizedRenderer :
 jointJConjugationFromNormalizedRenderer
     {M} {A} {N} {Q} {O} {AR} {W = W} E =
   record
-    { conjugateValue =
+    { Joint.conjugateValue =
         JRef.conjugate (Standard.baseReflection AR)
-    ; jConjugates = proof
+    ; Joint.jConjugates = proof
     }
   where
   R = standardRenderer M A N Q O

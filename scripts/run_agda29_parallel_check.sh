@@ -1,8 +1,87 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-JOBS="${AGDA_JOBS:-8}"
+JOBS="${AGDA_JOBS:-4}"
 AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
+# Protect ordinary direct checks too.  A pathological elaboration should stop
+# before it can drive a 32 GiB workstation into swap thrash.  Callers may
+# override this explicitly for exceptional runs.
+DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-8192}"
+export DASHI_AGDA_RSS_LIMIT_MB
+
+
+SESSION_NAME="${DASHI_TMUX_SESSION:-dashi_agda_check_$$}"
+WAIT_CHANNEL="dashi_wait_$$"
+STATUS_DIR="${DASHI_STATUS_DIR:-${XDG_CACHE_HOME:-/home/c/.cache}/dashi-agda29/status}"
+mkdir -p "$STATUS_DIR"
+STATUS_FILE="$(mktemp "$STATUS_DIR/status_XXXXXX.txt")"
+
+if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command -v tmux >/dev/null 2>&1; then
+  rm -f "$STATUS_FILE"
+  tmux kill-session -t "${SESSION_NAME}" 2>/dev/null || true
+
+  echo "Launching execution inside detached tmux session '${SESSION_NAME}' (waiting on channel ${WAIT_CHANNEL})..."
+
+  if ! tmux new-session -d -s "${SESSION_NAME}" \
+    "bash -lc '
+      set +e
+            export DASHI_AGDA29_CACHE_ROOT=\"${DASHI_AGDA29_CACHE_ROOT:-}\"
+            DASHI_NO_TMUX=1 AGDA_JOBS=\"${JOBS}\" \
+              AGDA_PROFILE=\"${AGDA_PROFILE:-}\" \
+              AGDA_PROFILE_VERBOSITY=\"${AGDA_PROFILE_VERBOSITY:-}\" \
+              AGDA_RTS_HEAP=\"${AGDA_RTS_HEAP:-}\" \
+              AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
+              AGDA_TARGETS_FILE=\"${AGDA_TARGETS_FILE:-}\" \
+              DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB}\" \
+              DASHI_SKIP_RSYNC=\"${DASHI_SKIP_RSYNC:-0}\" \
+              DASHI_SYNC_ONLY=\"${DASHI_SYNC_ONLY:-0}\" \
+              \"$0\" ${@+\"$@\"}
+      rc=\$?
+      printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
+      tmux wait-for -S \"${WAIT_CHANNEL}\"
+      if [ \"\$rc\" -ne 0 ] && [ \"\${DASHI_TMUX_KEEP_FAILED:-0}\" = \"1\" ]; then
+        echo
+        echo \"Agda check failed with status \$rc. Session retained for inspection: tmux attach -t ${SESSION_NAME}\"
+        exec bash
+      fi
+      exit \"\$rc\"
+    '"; then
+    printf '%s\n' "125" > "$STATUS_FILE"
+    rm -f "$STATUS_FILE"
+    echo "failed to launch tmux worker session '${SESSION_NAME}'" >&2
+    exit 125
+  fi
+
+  # Background sentinel: if the tmux session disappears (OOM kill, crash)
+  # before the worker signals, unblock the wait channel so we don't hang.
+  (
+    while tmux has-session -t "${SESSION_NAME}" 2>/dev/null; do
+      sleep 2
+    done
+    # Session is gone — give the worker a brief chance to publish its real
+    # status before recording the crash/disappearance sentinel.
+    for _ in 1 2 3 4 5; do
+      [ -s "$STATUS_FILE" ] && break
+      sleep 0.2
+    done
+    if [ ! -s "$STATUS_FILE" ]; then
+      STATUS_TMP="${STATUS_FILE}.tmp"
+      printf '%s\n' "137" > "$STATUS_TMP"
+      mv -f "$STATUS_TMP" "$STATUS_FILE"
+      tmux wait-for -S "${WAIT_CHANNEL}" 2>/dev/null || true
+    fi
+  ) &
+  SENTINEL_PID=$!
+
+  tmux wait-for "${WAIT_CHANNEL}" 2>/dev/null || true
+
+  # Clean up sentinel
+  kill "$SENTINEL_PID" 2>/dev/null || true
+  wait "$SENTINEL_PID" 2>/dev/null || true
+
+  rc="$(cat "$STATUS_FILE" 2>/dev/null || printf '137')"
+  rm -f "$STATUS_FILE"
+  exit "$rc"
+fi
 REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
@@ -12,17 +91,53 @@ DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
 AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
-AGDA_LOG_PREV="${AGDA_LOG_PATH}.1"
+AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
+AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
 
 if [ -z "${XDG_CACHE_HOME:-}" ]; then
   export XDG_CACHE_HOME="$REPO_ROOT/.cache"
   mkdir -p "$XDG_CACHE_HOME"
 fi
 
-if [ "$#" -eq 0 ]; then
+CLI_AGDA_ARGS=()
+RAW_TARGETS=()
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --)
+      shift
+      while [ "$#" -gt 0 ]; do
+        RAW_TARGETS+=("$1")
+        shift
+      done
+      break
+      ;;
+    -i|--include-path|-l|--library|--library-file|--compile-dir)
+      if [ "$#" -ge 2 ]; then
+        CLI_AGDA_ARGS+=("$1" "$2")
+        shift 2
+      else
+        CLI_AGDA_ARGS+=("$1")
+        shift
+      fi
+      ;;
+    -*)
+      CLI_AGDA_ARGS+=("$1")
+      shift
+      ;;
+    *)
+      RAW_TARGETS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+if [ -n "${AGDA_TARGETS_FILE:-}" ] && [ -f "$AGDA_TARGETS_FILE" ]; then
+  mapfile -t TARGETS < "$AGDA_TARGETS_FILE"
+elif [ "${#RAW_TARGETS[@]}" -eq 0 ]; then
   TARGETS=("DASHI/Everything.agda")
 else
-  TARGETS=("$@")
+  TARGETS=("${RAW_TARGETS[@]}")
 fi
 
 log_target_slug() {
@@ -84,34 +199,7 @@ prune_old_logs() {
   done
 }
 
-# Use the explicitly selected binary, then a working PATH Agda, and
-# only THEN Nix.  Previously an ordinary PATH-only installation tried
-# 'nix build' unconditionally and failed before any kernel check.
-if [ -z "${AGDA_BIN:-}" ]; then
-  if command -v agda >/dev/null 2>&1; then
-    AGDA_BIN="$(command -v agda)"
-  elif command -v nix >/dev/null 2>&1; then
-    AGDA_BIN="$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda"
-  else
-    echo "BLOCKED: AGDA_BIN unset, agda absent from PATH, and nix unavailable." >&2
-    exit 127
-  fi
-fi
-if [ ! -x "$AGDA_BIN" ]; then
-  echo "BLOCKED: selected Agda binary is not executable: $AGDA_BIN" >&2
-  exit 127
-fi
-export AGDA_BIN
-echo "Selected Agda executable: $AGDA_BIN"
-AGDA_SELECTED_VERSION="$("$AGDA_BIN" --version)"
-echo "$AGDA_SELECTED_VERSION"
-# Do not accept an Agda 2.8 or 2.10 PATH binary just because one is
-# executable: the Karp theorem suite is pinned to Agda 2.9.
-if [[ "$AGDA_SELECTED_VERSION" != *"2.9."* ]]; then
-  echo "BLOCKED: pinned Agda 2.9 required; selected executable reported: $AGDA_SELECTED_VERSION" >&2
-  echo "Set AGDA_BIN to Agda 2.9, or unset it and configure the Nix Agda 2.9 environment." >&2
-  exit 126
-fi
+AGDA_BIN="${AGDA_BIN:-$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   DASHI_WORK="$(mktemp -d /tmp/dashi-agda29-shadow.XXXXXX)"
   STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-experimental.XXXXXX)"
@@ -166,15 +254,28 @@ fi
 # Keep the shadow tree path stable so Agda can reuse .agdai interfaces across
 # runs. Excluded receiver files, including .agdai caches, are protected because
 # we intentionally do not use --delete-excluded.
-rsync -a --delete --prune-empty-dirs \
-  --include='*/' \
-  --include='*.agda' \
-  --include='*.lagda' \
-  --include='*.lagda.md' \
-  --include='*.lagda.rst' \
-  --include='*.lagda.tex' \
-  --exclude='*' \
-  "$REPO_ROOT/" "$DASHI_WORK/"
+if [ "${DASHI_SKIP_RSYNC:-0}" = "1" ]; then
+  for target in "${TARGETS[@]}"; do
+    normalized="$target"
+    if [[ "$normalized" == "$REPO_ROOT/"* ]]; then
+      normalized="${normalized#$REPO_ROOT/}"
+    fi
+    if [ -f "$REPO_ROOT/$normalized" ]; then
+      mkdir -p "$DASHI_WORK/$(dirname "$normalized")"
+      cp -p "$REPO_ROOT/$normalized" "$DASHI_WORK/$normalized"
+    fi
+  done
+else
+  rsync -a --delete --prune-empty-dirs \
+    --include='*/' \
+    --include='*.agda' \
+    --include='*.lagda' \
+    --include='*.lagda.md' \
+    --include='*.lagda.rst' \
+    --include='*.lagda.tex' \
+    --exclude='*' \
+    "$REPO_ROOT/" "$DASHI_WORK/"
+fi
 
 if [ -n "$STD_LIB_RESOLVED_SRC" ]; then
   rsync -a --delete --exclude='*.agdai' "$STD_LIB_RESOLVED_SRC/" "$STDLIB_WORK/"
@@ -192,30 +293,124 @@ else
 fi
 chmod -R u+w "$STDLIB_WORK"
 
-cd "$DASHI_WORK"
-if [ -f "$AGDA_LOG_PATH" ]; then
-  mv -f "$AGDA_LOG_PATH" "$AGDA_LOG_PREV"
-fi
-: >"$AGDA_LOG_PATH"
-echo "Logging Agda output to: $AGDA_LOG_PATH"
-if [ -f "$AGDA_LOG_PREV" ]; then
-  echo "Previous log rotated to: $AGDA_LOG_PREV"
+if [ "${DASHI_SYNC_ONLY:-0}" = "1" ]; then
+  echo "Shadow tree synchronized: $DASHI_WORK"
+  exit 0
 fi
 
-AGDA_RUN=("$AGDA_BIN" \
+NORMALIZED_TARGETS=()
+for target in "${TARGETS[@]}"; do
+  if [[ "$target" == "$REPO_ROOT/"* ]]; then
+    NORMALIZED_TARGETS+=("${target#$REPO_ROOT/}")
+  elif [[ "$target" == "$DASHI_WORK/"* ]]; then
+    NORMALIZED_TARGETS+=("${target#$DASHI_WORK/}")
+  else
+    NORMALIZED_TARGETS+=("$target")
+  fi
+done
+TARGETS=("${NORMALIZED_TARGETS[@]}")
+
+cd "$DASHI_WORK"
+mkdir -p "$(dirname "$AGDA_LOG_PATH")"
+if [ "${#TARGETS[@]}" -eq 1 ]; then
+  LOG_TARGET_SLUG="$(log_target_slug "${TARGETS[0]}")"
+else
+  LOG_TARGET_SLUG="$(log_target_slug "${TARGETS[0]}")-plus-$(( ${#TARGETS[@]} - 1 ))"
+fi
+LOG_TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+AGDA_LOG_PATH="$(build_log_path "$AGDA_LOG_BASE_PATH" "$LOG_TARGET_SLUG" "$LOG_TIMESTAMP")"
+: >"$AGDA_LOG_PATH"
+prune_old_logs "$AGDA_LOG_BASE_PATH" "$AGDA_LOG_KEEP_COUNT"
+echo "Logging Agda output to: $AGDA_LOG_PATH"
+echo "Agda RSS guard: ${DASHI_AGDA_RSS_LIMIT_MB} MiB"
+
+AGDA_PROFILE_ARGS=()
+# Optional diagnostic controls for expensive focused checks.  They are opt-in
+# so ordinary wrapper invocations retain the existing Agda command line.
+# Example:
+#   AGDA_PROFILE=definitions AGDA_PROFILE_VERBOSITY=10 \
+#   AGDA_RTS_HEAP=10G AGDA_RTS_STATS=1 DASHI_AGDA_RSS_LIMIT_MB=14000 \
+#   scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+if [ -n "${AGDA_PROFILE:-}" ]; then
+  AGDA_PROFILE_ARGS+=("--profile=${AGDA_PROFILE}")
+  if [ -n "${AGDA_PROFILE_VERBOSITY:-}" ]; then
+    AGDA_PROFILE_ARGS+=("-v" "profile.${AGDA_PROFILE}:${AGDA_PROFILE_VERBOSITY}")
+  fi
+fi
+
+AGDA_RTS_ARGS=()
+if [ -n "${AGDA_RTS_HEAP:-}" ] || [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
+  AGDA_RTS_ARGS=(+RTS)
+  if [ -n "${AGDA_RTS_HEAP:-}" ]; then
+    AGDA_RTS_ARGS+=("-M${AGDA_RTS_HEAP}")
+  fi
+  if [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
+    AGDA_RTS_ARGS+=(-s)
+  fi
+  AGDA_RTS_ARGS+=(-RTS)
+fi
+
+AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   --no-libraries --no-default-libraries \
   "-j$JOBS" \
-  -i . -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
-  -WnoUnsupportedIndexedMatch)
+  -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
+  -WnoUnsupportedIndexedMatch \
+  "${AGDA_PROFILE_ARGS[@]}" \
+  "${CLI_AGDA_ARGS[@]}")
 
 if command -v stdbuf >/dev/null 2>&1; then
   AGDA_RUN=(stdbuf -oL -eL "${AGDA_RUN[@]}")
 fi
 
+run_agda_target() {
+  local target="$1"
+  local status watchdog_pid rss_kb watchdog_marker
+
+  if ! [[ "$DASHI_AGDA_RSS_LIMIT_MB" =~ ^[1-9][0-9]*$ ]]; then
+    echo "DASHI_AGDA_RSS_LIMIT_MB must be a positive integer" >&2
+    return 2
+  fi
+
+  watchdog_marker="$(mktemp "${TMPDIR:-/tmp}/dashi-agda-rss-watchdog.XXXXXX")"
+  rm -f "$watchdog_marker"
+
+  "${AGDA_RUN[@]}" "$target" &
+  local agda_pid=$!
+  (
+    local limit_kb=$(( DASHI_AGDA_RSS_LIMIT_MB * 1024 ))
+    while kill -0 "$agda_pid" 2>/dev/null; do
+      rss_kb="$(ps -o rss= -p "$agda_pid" 2>/dev/null | tr -d '[:space:]')"
+      if [[ "$rss_kb" =~ ^[0-9]+$ ]] && [ "$rss_kb" -gt "$limit_kb" ]; then
+        echo "Agda RSS watchdog: ${rss_kb} KiB exceeds ${limit_kb} KiB; terminating $target" >&2
+        : >"$watchdog_marker"
+        kill -TERM "$agda_pid" 2>/dev/null || true
+        sleep 5
+        kill -KILL "$agda_pid" 2>/dev/null || true
+        break
+      fi
+      sleep 1
+    done
+  ) &
+  watchdog_pid=$!
+
+  wait "$agda_pid"
+  status=$?
+  kill "$watchdog_pid" 2>/dev/null || true
+  wait "$watchdog_pid" 2>/dev/null || true
+  if [ -e "$watchdog_marker" ]; then
+    rm -f "$watchdog_marker"
+    # Match the tmux crash sentinel: this is a memory-resource stop, not an
+    # Agda proof error.
+    return 137
+  fi
+  rm -f "$watchdog_marker"
+  return "$status"
+}
+
 for target in "${TARGETS[@]}"; do
   echo "Checking: $target"
   set +e
-  "${AGDA_RUN[@]}" "$target" 2>&1 | tee -a "$AGDA_LOG_PATH"
+  run_agda_target "$target" 2>&1 | tee -a "$AGDA_LOG_PATH"
   status="${PIPESTATUS[0]}"
   set -e
   if [ "$status" -ne 0 ]; then

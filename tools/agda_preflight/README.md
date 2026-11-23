@@ -1,170 +1,42 @@
-# DASHI repository intelligence
+# DASHI Agda preflight
 
-This package is the semantic core of the unified DASHI repository-intelligence
-product.
+A fast, deliberately non-elaborating front-end for Agda. Tree-sitter supplies the
+incremental syntax tree; the preflight layer adds module/name resolution,
+record/data/function summaries, telescopes, shallow type shapes, structural
+proof checks, trust-boundary policy checks, and an import DAG.
 
-Canonical interface:
+It **does not replace Agda**. Agda remains the kernel/typechecker and final source
+of truth. The preflight checker should prefer a false negative over pretending
+to solve dependent unification.
 
-```text
-dashi-repo
-  -> .dashi/repository.sqlite3
-```
+## Design boundary
 
-The product uses one SQLite/WAL database for repository semantics, preflight
-state, Git/PR history, development narrative, provenance/status annotations and
-promotion receipts.  Production subsystems do not exchange JSON files.
-
-## Authority boundary
-
-The repository-intelligence layer is deliberately non-elaborating.  It can
-parse, index, resolve, compare and structurally diagnose Agda source, but it
-**does not replace Agda**.  Agda remains the final type/proof authority.
-
-Development narrative is a separate authority domain: PR and commit prose may
-explain intent and guide archaeological discovery, but cannot establish theorem
-truth, empirical truth or source authority.
-
-## Canonical architecture
+The checker may do:
 
 ```text
-Agda source
-   |
-   v
-preflight Tree-sitter parser / resolver
-   |
-   +--> modules / imports / affected closure
-   +--> symbols / signatures / bodies / refs
-   +--> diagnostics / API fingerprints
-   |
-   v
-.dashi/repository.sqlite3
-   ^
-   |
-Git + PR harvest
-   +--> commits / parent edges / refs / touched paths
-   +--> PR membership
-   +--> narrative/frontier/nonclaim/verification statements
+parse
+  -> lexical/module scopes
+  -> import/open/using/hiding/renaming resolution
+  -> exported symbol index
+  -> record/data/constructor/projection index
+  -> telescope reconstruction
+  -> shallow type-shape propagation
+  -> bounded substitution/head comparison
+  -> structural diagnostics
+  -> DASHI trust-boundary diagnostics
+  -> reverse-import compile plan
 ```
 
-There is one canonical Agda parser implementation: `tools/agda_preflight`.
-The historical `scripts/repo_index.py` database is accepted only as a migration
-source.  New whole-repository inventory is produced by `dashi-repo index` using
-the preflight AST/interface parser.
-
-The old `repo_history` Agda extractor remains only as an optional parity and
-visualization adapter while historical scene parity is migrated; normal agent
-search, indexing, history and MCP do not depend on it.
-
-## Install
-
-A single virtual environment can contain both the semantic core and the
-visualization frontend:
-
-```bash
-python -m pip install -e './tools/agda_preflight[test,mcp]'
-python -m pip install -e './tools/visualization/repo_history[full]'
-```
-
-Both use the same Tree-sitter runtime line (`>=0.25,<0.27`).
-
-## Bootstrap
-
-Build current repository semantics and complete development history into the
-same database:
-
-```bash
-dashi-repo bootstrap --root . --github-prs chboishabba/dashi_agda
-```
-
-The two stages are also available separately:
-
-```bash
-dashi-repo index --root .
-dashi-repo harvest --root . --github-prs chboishabba/dashi_agda
-```
-
-`index` preserves existing provenance tags and requirement annotations for
-symbols that survive the rebuild.
-
-`harvest` stores commit topology, parent edges, refs, touched paths, pull
-requests and development narrative relationally.
-
-For an existing checkout with the old `.repo-index/index.sqlite3` database:
-
-```bash
-dashi-repo sync-index --root .
-```
-
-That is a one-way compatibility import into normalized `repo_*` tables; it is
-not the preferred producer.
-
-## Discovery
-
-```bash
-dashi-repo symbol FactorsThrough --root .
-dashi-repo related FactorsThrough --root .
-dashi-repo object DASHI.Core.QueryFactorisationSufficiency.FactorsThrough --root .
-dashi-repo discover 'finite spectral projector' --root .
-dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKN --root .
-```
-
-Normal search demotes modules containing `Round<digits>` to historical
-snapshots.  `related` distinguishes exact/signature/body equivalence from
-heuristic structural similarity; none of those labels manufacture Agda proof
-equality.
-
-A categorical negative discovery claim is fail-closed.  It is permitted only
-when:
-
-1. the native semantic inventory covers all canonical Agda files and is fresh;
-2. no live, historical, equivalent or materially similar semantic candidate
-   was found; and
-3. a complete Git-development-history harvest exists and narrative archaeology
-   found no related candidate.
-
-Otherwise discovery reports `search_incomplete` or a candidate-bearing status.
-
-## History and archaeology
-
-```bash
-dashi-repo history 'Balaban C3' --root .
-dashi-repo archaeology 'Balaban C3' --root .
-dashi-repo frontier Casimir --root .
-dashi-repo stale 'Balaban C3' --root .
-dashi-repo explain 'consumer sufficiency' --root .
-```
-
-These commands query development history already stored in the database.
-`stale` is explicitly heuristic: it identifies older frontier language that a
-later development event may have superseded.  It does not alter formal status.
-
-## Structural preflight
-
-The same product exposes the fast preflight loop:
-
-```bash
-dashi-repo diagnose DASHI/Biology/Everything.agda --root .
-dashi-repo next DASHI/Biology/Everything.agda --require-fix --root .
-dashi-repo affected DASHI/Core/Foo.agda --root .
-dashi-repo refresh DASHI/Core/Foo.agda --root .
-```
-
-The checker may perform:
-
-- Tree-sitter parsing and incremental syntax indexing;
-- lexical/module scope resolution;
-- import/open/using/hiding/renaming resolution;
-- exported-symbol, record/data/constructor/projection indexing;
-- telescope reconstruction and shallow type-shape propagation;
-- bounded structural checks and trust-boundary diagnostics;
-- dependency/API fingerprinting and reverse-affected closure.
-
-It must not claim:
+The checker must not attempt:
 
 - general dependent unification or metavariable solving;
-- arbitrary definitional equality/normalization;
-- full universe/positivity/termination checking;
-- cubical/path elaboration or reflection execution;
+- arbitrary definitional equality or normalization of recursive functions;
+- instance search;
+- full universe constraint solving;
+- indexed coverage;
+- full positivity or termination;
+- cubical/path elaboration;
+- reflection/macro execution;
 - proof validity.
 
 ## Interactive incremental workflow
@@ -678,44 +550,166 @@ SDK runtime.
 
 ## Current implementation status
 
-`dashi-repo-mcp` is the unified agent-facing server.  It extends the stable
-preflight toolset with repository discovery and development-history tools.
+The frontend is now **tree-sitter-first and regex-free for Agda syntax parsing**.
 
-The older `dashi-agda-mcp` command remains a compatibility surface with its
-original tool contract.
+The core modules:
 
-## Compatibility commands
-
-Existing `dashi-agda*` commands remain available while callers migrate.  New
-repository-intelligence behavior should be added to `dashi-repo` rather than
-creating another index/database/semantic service.
-
-## Database policy
-
-Persistent product state belongs in SQLite tables.  New repository-intelligence
-features should extend the shared database with normalized tables rather than
-introducing JSON caches or handoff files.
-
-Legacy serialized cache columns may remain temporarily where required for
-backward compatibility with older preflight requests, but they are not the
-canonical repository/discovery/history model and should be retired behind
-relational replacements rather than expanded.
-
-## Tests
-
-Run both packages in the same environment:
-
-```bash
-pytest tools/agda_preflight/tests -q
-pytest tools/visualization/repo_history/tests -q
+```text
+checker.py
+ast_index.py
+shapes.py
+rules.py
 ```
 
-Then exercise the product boundary:
+must not use regular expressions to interpret Agda syntax. A regression test
+enforces that invariant.
+
+The shallow type-shape layer follows two important soundness rules:
+
+- **Function-arrow structure is parsed before equality in the codomain.** A type
+  such as `(x : A) → f x ≡ g x` is represented as a `Pi` whose codomain is an
+  `Equality`, not as an equality whose left endpoint accidentally contains
+  the telescope.
+- **Equality incompatibility requires rigid evidence.** Different arbitrary
+  term/function heads are not treated as different types. Hard equality
+  diagnostics are reserved for cases such as constructors known to belong to
+  different datatypes, or an evident sort-vs-term mismatch.
+
+A single pre-arrow telescope segment may also contain multiple binders, e.g.
+`∀ {X} (s : State X) (x : X) → ...`; these are counted individually for
+arity diagnostics.
+
+The current implementation has structural AST support for:
+
+- modules, imports, opens, aliases and import directives;
+- records, fields, record constructors and record expressions;
+- data declarations and constructors;
+- signatures, function clauses, telescopes and binder visibility;
+- applications with explicit/implicit/instance arguments;
+- patterns and simple finite coverage;
+- pragmas, fixity declarations and syntax declarations;
+- shallow type shapes (`Sort`, `Head`, `Pi`, `Equality`, `Meta`,
+  `Literal`, `Unknown`);
+- reverse import graphs and semantic API snapshots.
+
+The original motivating failures are now detected structurally:
+
+- unapplied dependent projections such as `Parameter` instead of
+  `Parameter M`;
+- explicit projection receiver holes such as `Pareto.cost _` when a matching
+  record binder is in scope;
+- record-adapter kind mismatches such as `Nat → ⊤` being supplied to a
+  `Nat → Set` field.
+
+Any future syntax-sensitive diagnostic should extend `ast_index.py` or
+`shapes.py`; it should not add source-text parsing to `rules.py`.
+
+### Still intentionally delegated to Agda
+
+The following remain outside the preflight implementation boundary because they
+require real elaboration/kernel reasoning rather than shallow structural
+analysis:
+
+- dependent unification and metavariable solving;
+- arbitrary definitional equality and normalization;
+- instance search;
+- universe-constraint solving;
+- indexed datatype coverage;
+- full positivity and termination checking;
+- cubical/path elaboration;
+- reflection/macro execution;
+- proof validity.
+
+## Evidence provenance
+
+Every diagnostic has an explicit minimum evidence layer:
+
+```text
+TREE_SITTER
+    concrete syntax / source ranges / unambiguous tree structure
+
+DASHI_INDEX
+    tree-sitter + DASHI module/record/data/telescope/shape indexes
+
+AGDA_SCOPE
+    Agda-resolved scope/elaboration facts such as opens, renamings,
+    overloading, mixfix resolution and implicit insertion
+
+AGDA_TYPECHECKER
+    full Agda typechecking / kernel evidence
+```
+
+The evidence policy is executable, not documentation-only. A structural rule
+that requires `AGDA_SCOPE` cannot fail the fast preflight run merely because
+`rules.py` emitted an error-shaped suspicion. Without scope evidence it is
+downgraded to a warning with:
+
+```text
+confidence = insufficient-evidence
+evidence = dashi-index
+minimum_evidence = agda-scope
+evidence_sufficient = false
+```
+
+All documented `TSAGDA...` codes must be explicitly classified in
+`evidence.py`; an unclassified diagnostic is a programming error.
+
+
+Inspect the live policy matrix without reading source:
 
 ```bash
-dashi-repo bootstrap --root . --github-prs chboishabba/dashi_agda
-dashi-repo status --root .
-dashi-repo discover certainlyMissingXYZ --root .
+dashi-agda-evidence
+dashi-agda-evidence --level agda-scope
+dashi-agda-evidence --level agda-typechecker --json
+```
+
+The current scope-dependent family includes checks whose truth can change after
+Agda resolves opens/renamings, overloaded or mixfix names, or dependent local
+scope. Examples include:
+
+```text
+TSAGDA022  unknown/malformed alias use
+TSAGDA024  hiding entry validity across re-export chains
+TSAGDA026  rename/open collision
+TSAGDA027  ambiguous unqualified open
+TSAGDA055  ambiguous opened projection
+TSAGDA084  inaccessible-pattern scope
+TSAGDA113  apparently unbound RHS identifier
+TSAGDA154  ambiguous opened operator
+```
+
+### Aggregate scope refinement
+
+When pytest is collecting a dependency closure with `--agda-deps` and
+`--agda-auto-refine`, scope refinement is closure-aware rather than strictly
+per-module.
+
+The collector first probes the selected aggregate root. If that scope-check
+succeeds, every module in its collected dependency closure is marked as having
+`AGDA_SCOPE` evidence. If it fails, the collector recursively probes only the
+direct imported subtrees that remain unresolved:
+
+```text
+aggregate root
+  success -> certify whole closure
+  failure
+    -> probe imported subtree roots
+         success -> certify that subtree
+         failure -> descend again
+```
+
+Successful subtrees are cached, shared DAG dependencies are not re-probed, and
+failed frontier modules are cached so individual pytest items do not repeat the
+same failed scope process.
+
+For a shadow-tree or wrapper-based Agda environment, use an exit-code scope
+runner:
+
+```bash
+pytest --agda-preflight --agda-deps \
+  --agda-auto-refine=scope \
+  --agda-scope-runner 'scripts/run-shadow-scope.sh {file}' \
+  --agda-root . DASHI/Everything.agda -vv
 ```
 
 The runner command may contain the literal `{file}`; otherwise the absolute
@@ -949,7 +943,6 @@ These checks are intentionally restricted to simple non-indexed datatypes.
 - `TSAGDA087` trivial missing finite constructor case
 - `TSAGDA088` clause visibly unreachable after catch-all
 - `TSAGDA089` duplicate constructor branch
-- `TSAGDA090` qualified field in record construction
 
 ### Equality combinator structure
 
@@ -1046,15 +1039,6 @@ report:
 - `TSAGDA206` same-carrier adapter visibly switches carrier family
 - `TSAGDA207` bidi source/target outer shapes disagree
 - `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
-
-### Native Agda diagnostics
-
-- `TSAGDA300` `PatternShadowsConstructor`
-- `TSAGDA301` `RewritesNothing`
-- `TSAGDA302` `UserWarning` / deprecation
-- `TSAGDA390` `ParseError`
-- `TSAGDA398` other named/unnamed native Agda error
-- `TSAGDA399` other named/unnamed native Agda warning
 
 ## One-command triage workflow
 
@@ -1290,15 +1274,3 @@ Every new diagnostic should have:
 4. a documented boundary describing what it does not infer.
 
 The preflight checker is an error firewall, not a second theorem prover.
-
-## SAT/ETH exact-lemma snowball search (research-agent adapter, not a new index)
-
-The existing native `dashi-repo` is reused by [scripts/run_openai_math_symbol_snowball.py](../../scripts/run_openai_math_symbol_snowball.py), with [175 term/owner matches](../../docs/superpowers/plans/2026-10-31-local-symbol-snowball-terms.json) prioritized by the [39 exact theorem/certificate obligations](../../docs/superpowers/plans/2026-10-31-openai-math-exact-lemma-maxcut-ledger.md). Do not implement a competing SQLite symbol store. This query driver delegates semantic and historical search to `dashi-repo`, uses plain ripgrep as a Lean/Python fallback, and cannot certify theorem equality, absence or Agda-kernel acceptance.
-
-~~~
-python scripts/run_openai_math_symbol_snowball.py --agda-root . --lean-root ../dashi_lean4 --mode plan --group P0 --group P1 --group P2 --max-terms 40
-python scripts/run_openai_math_symbol_snowball.py --agda-root . --lean-root ../dashi_lean4 --mode both --max-terms 175 --related --out /tmp/dashi-similar-symbols.tsv
-python -m unittest discover -s scripts -p 'test_openai_math_symbol_snowball.py' -v
-~~~
-
-Read the [local agent workflow](../../docs/superpowers/plans/2026-10-31-local-symbol-snowball-agent.md) before editing original source or attributing same-object theorems. Native `LocalOptimizationCompilerExact`, `StandardSingleTapeMachineExact`, `PNotEqualsNPQ1ExecutedConstructionMachineExact`, and `OpenAIMathSharedTseitinUniqueExtensionExact` are important upstream reuse donors. ESD is import-only and no CI gate is involved.

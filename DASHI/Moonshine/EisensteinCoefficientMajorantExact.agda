@@ -161,14 +161,18 @@ e4CoefficientBound :
   240 * Q.sigma3 Q.canonicalDivisorPowerKernel n
   ≤ e4PolynomialCoefficient n
 e4CoefficientBound n =
-  NatP.*-monoʳ-≤ 240 (Q.canonicalSigma3QuarticBound n)
+  NatP.*-mono
+    NatP.≤-refl
+    (Q.canonicalSigma3QuarticBound n)
 
 e6CoefficientBound :
   (n : Nat) →
   504 * Q.sigma5 Q.canonicalDivisorPowerKernel n
   ≤ e6PolynomialCoefficient n
 e6CoefficientBound n =
-  NatP.*-monoʳ-≤ 504 (Q.canonicalSigma5SexticBound n)
+  NatP.*-mono
+    NatP.≤-refl
+    (Q.canonicalSigma5SexticBound n)
 
 ------------------------------------------------------------------------
 -- 6. Main majorant theorems.

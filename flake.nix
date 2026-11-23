@@ -14,9 +14,10 @@
       url = "github:agda/cubical/d0b9c7b0e9e4f816422c3447d7983b03274dd829";
       flake = false;
     };
+    agda29.url = "github:chboishabba/agda/86a1179c1f886da773dc53be920bcca5d876884e";
   };
 
-  outputs = { self, nixpkgs, flake-utils, zkperf, dchottSrc, cubicalSrc }:
+  outputs = { self, nixpkgs, flake-utils, zkperf, dchottSrc, cubicalSrc, agda29 }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -77,6 +78,36 @@
         agdaArgs = "-i . -i DCHoTT-Agda -i cubical -l standard-library";
         perf = pkgs.perf;
         zkperfParse = zkperf.packages.${system}.default;
+        generateTriadicProofs = ''
+          ${pkgs.python3}/bin/python scripts/generate_triadic_arithmetic_laws.py
+          ${pkgs.python3}/bin/python scripts/generate_triadic_depth_two_dft.py
+        '';
+
+        dashiAgda = pkgs.agdaPackages.mkDerivation {
+          pname = "dashi-agda";
+          version = "local";
+          src = ./.;
+          libraryName = "dashi-agda";
+          libraryFile = "dashi-agda.agda-lib";
+          meta = {
+            description = "DASHI Agda library with local DCHoTT and Cubical dependencies";
+          };
+          buildInputs = [
+            pkgs.agdaPackages.standard-library
+            dchottAgda
+            cubicalLocal
+            pkgs.python3
+          ];
+          buildPhase = ''
+            runHook preBuild
+            cp -R ${dchottSrc}/. DCHoTT-Agda
+            cp -R ${cubicalSrc}/. cubical
+            rm -f dchott-agda.agda-lib
+            ${generateTriadicProofs}
+            agda ${agdaArgs} DASHI/Everything.agda
+            runHook postBuild
+          '';
+        };
 
         dashiAgda = pkgs.agdaPackages.mkDerivation {
           pname = "dashi-agda";
@@ -103,7 +134,7 @@
         };
 
         authoritativeCheck = pkgs.runCommand "dashi-agda-authoritative-check" {
-          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales ];
+          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales pkgs.python3 ];
           src = ./.;
         } ''
           mkdir -p "$out"
@@ -119,13 +150,36 @@
           cp -R ${cubicalSrc}/. "$workdir/cubical"
           cd "$workdir"
           rm -f dchott-agda.agda-lib
+          ${generateTriadicProofs}
           agda ${agdaArgs} DASHI/Everything.agda \
             > "$out/check.log" 2>&1
           touch "$out/passed"
         '';
 
+        zetaCheck = pkgs.runCommand "dashi-agda-zeta-check" {
+          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales ];
+          src = ./.;
+        } ''
+          mkdir -p "$out"
+          workdir="$TMPDIR/dashi-agda-zeta"
+          cp -R "$src" "$workdir"
+          chmod -R u+w "$workdir"
+          export HOME="$TMPDIR/home"
+          mkdir -p "$HOME"
+          export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive"
+          export LANG="C.UTF-8"
+          export LC_ALL="C.UTF-8"
+          cp -R ${dchottSrc}/. "$workdir/DCHoTT-Agda"
+          cp -R ${cubicalSrc}/. "$workdir/cubical"
+          cd "$workdir"
+          rm -f dchott-agda.agda-lib
+          agda ${agdaArgs} DASHI/Analysis/ZetaTheoremSurface.agda \
+            > "$out/check.log" 2>&1
+          touch "$out/passed"
+        '';
+
         mergeSmokeCheck = pkgs.runCommand "dashi-agda-merge-smoke" {
-          buildInputs = [ agdaWithDashiDeps pkgs.bash pkgs.glibcLocales ];
+          buildInputs = [ agdaWithDashiDeps pkgs.bash pkgs.glibcLocales pkgs.python3 ];
           src = ./.;
         } ''
           mkdir -p "$out"
@@ -138,6 +192,7 @@
           export LANG="C.UTF-8"
           export LC_ALL="C.UTF-8"
           cd "$workdir"
+          ${generateTriadicProofs}
           AGDA_BIN="${agdaWithDashiDeps}/bin/agda" \
           AGDA_ARGS="${agdaArgs}" \
             ${pkgs.bash}/bin/bash scripts/run_agda_merge_smoke.sh \
@@ -211,10 +266,16 @@
             done
           fi
 
-          # Combine witnesses
-          cat "$OUTDIR"/*.witness.json > "$OUTDIR/all_witnesses.jsonl" 2>/dev/null || true
-          ${zkperf-parse}/bin/zkperf-parse --combine < "$OUTDIR/all_witnesses.jsonl" \
-            > "$OUTDIR/commitment.json" 2>/dev/null || true
+          echo "=== All recorded ==="
+          echo "Witnesses: $(wc -l < "$outdir/all_witnesses.jsonl")"
+          cat "$outdir/commitment.json"
+        '';
+      in {
+        checks = {
+          authoritative = authoritativeCheck;
+          zeta = zetaCheck;
+          merge-smoke = mergeSmokeCheck;
+        };
 
           echo "=== All recorded ==="
           echo "Witnesses: $(wc -l < "$OUTDIR/all_witnesses.jsonl")"
@@ -247,7 +308,9 @@
           dchott-agda = dchottAgda;
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
+          agda29-parallel = agda29.packages.${system}.debug.bin;
           check = authoritativeCheck;
+          zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
           inherit agdaRecord agdaRecordAll;
         };
@@ -262,11 +325,12 @@
             pkgs.python3
           ];
           shellHook = ''
-            echo "dashi_agda dev shell (with stdlib + zkperf)"
-            echo "  agda MonsterGroups.agda              # check one proof"
-            echo "  agda-record MonsterGroups.agda        # full perf record + symbols"
-            echo "  agda-record-all . recordings/         # batch all proofs"
-            echo "  nix build .#check                     # check all (sandboxed)"
+            echo "dashi_agda dev shell"
+            echo "  nix build .#check        # authoritative DASHI/Everything check"
+            echo "  nix build .#zeta-check   # focused zeta theorem-surface check"
+            echo "  nix build .#merge-smoke  # recursive merge-prep smoke check"
+            echo "  agda-record <file.agda>"
+            echo "  agda-record-all [outdir]"
           '';
         };
       }

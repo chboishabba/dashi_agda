@@ -10,7 +10,6 @@ module DASHI.Moonshine.JInvariantFormulaic369ReproductionBundleExact where
 
 open import DASHI.Core.Prelude
 
-import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantFormulaic369ModularReplicationExact as Replicate
 
@@ -50,7 +49,7 @@ pixelPhase B px = Render.exactPhase (sample B px)
 pixelObserver3 :
   (B : J369ReproductionBundle) →
   (px : Pixel B) →
-  Triadic.KernelTrit
+  DASHI.Biology.TriadicKernelLiftQuotientExact.KernelTrit
 pixelObserver3 B px = Render.observer3 (sample B px)
 
 ------------------------------------------------------------------------

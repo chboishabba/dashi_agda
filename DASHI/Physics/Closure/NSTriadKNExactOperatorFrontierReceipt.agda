@@ -6,6 +6,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceOperatorReceipt as PairIncidence
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceKernelFormulaReceipt as KernelFormula
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecompositionReceipt as ProfileDecomposition
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as ProfileBounds
+import DASHI.Physics.Closure.NSTriadKNForcedTailWeightedProductBoundReceipt as ForcedTail
 import DASHI.Physics.Closure.NSTriadKNMixedTailDiagonalResidueBridgeReceipt as DiagonalResidue
 import DASHI.Physics.Closure.NSTriadKNMixedTailBKMProjectionSmallnessReceipt as BKMProjection
 import DASHI.Physics.Closure.NSShahmurovAxisymmetricReductionExternalReceipt as Shahmurov
@@ -29,7 +33,7 @@ canonicalDocPath =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "Frontier status: the exact scripted pair-incidence operator is the only live mixed-tail Schur object, but the uniform profile-independent theorem ||L_FT,script^N||_op <= C / N is still open. Therefore SchurResidueScale remains open at the residue-transfer step, and the BKM/residence bridge remains open at the structural projection plus trajectory/residence assembly step."
+  "Frontier status: the exact scripted pair-incidence operator is the only live mixed-tail Schur object. Its repeated-pair kernel formula is fixed, the structural four-profile decomposition is closed, and the forced-tail, adversarial, and transition profiles are now closed locally via dependency-honest closure bridges. The first still-open Stage 3 profile theorem is therefore the residual weighted-product bound. The first still-open global theorem is the profile-wise weighted Schur product closure R_N(w_N) * C_N(w_N) <= C^2 / N^2 implying ||L_FT,script^N||_op <= C / N. That global bound is still open. Therefore SchurResidueScale remains open at the residue-transfer step, and the BKM/residence bridge remains open at the structural projection plus trajectory/residence assembly step."
 
 canonicalOperatorTheoremTarget : String
 canonicalOperatorTheoremTarget =
@@ -66,6 +70,23 @@ record NSTriadKNExactOperatorFrontierReceipt : Setω where
     pairIncidenceReadoutTextIsCanonical :
       pairIncidenceReadoutText ≡ PairIncidence.canonicalReadoutText
 
+    kernelFormulaReadoutText : String
+    kernelFormulaReadoutTextIsCanonical :
+      kernelFormulaReadoutText ≡ KernelFormula.canonicalReadoutText
+
+    profileDecompositionReadoutText : String
+    profileDecompositionReadoutTextIsCanonical :
+      profileDecompositionReadoutText ≡
+        ProfileDecomposition.canonicalReadoutText
+
+    profileBoundsReadoutText : String
+    profileBoundsReadoutTextIsCanonical :
+      profileBoundsReadoutText ≡ ProfileBounds.canonicalReadoutText
+
+    forcedTailWitnessReadoutText : String
+    forcedTailWitnessReadoutTextIsCanonical :
+      forcedTailWitnessReadoutText ≡ ForcedTail.canonicalReadoutText
+
     diagonalResidueReadoutText : String
     diagonalResidueReadoutTextIsCanonical :
       diagonalResidueReadoutText ≡ DiagonalResidue.canonicalReadoutText
@@ -85,6 +106,26 @@ record NSTriadKNExactOperatorFrontierReceipt : Setω where
     operatorTheoremTarget : String
     operatorTheoremTargetIsCanonical :
       operatorTheoremTarget ≡ canonicalOperatorTheoremTarget
+
+    weightedSchurProductRouteStated : Bool
+    weightedSchurProductRouteStatedIsTrue :
+      weightedSchurProductRouteStated ≡ true
+
+    pairIncidenceKernelFormulaDerived : Bool
+    pairIncidenceKernelFormulaDerivedIsTrue :
+      pairIncidenceKernelFormulaDerived ≡ true
+
+    profileDecompositionSurfaceImplemented : Bool
+    profileDecompositionSurfaceImplementedIsTrue :
+      profileDecompositionSurfaceImplemented ≡ true
+
+    profileBoundsSurfaceImplemented : Bool
+    profileBoundsSurfaceImplementedIsTrue :
+      profileBoundsSurfaceImplemented ≡ true
+
+    sampledForcedTailWitnessInstalled : Bool
+    sampledForcedTailWitnessInstalledIsTrue :
+      sampledForcedTailWitnessInstalled ≡ true
 
     schurResidueTarget : String
     schurResidueTargetIsCanonical :
@@ -150,6 +191,14 @@ canonicalNSTriadKNExactOperatorFrontierReceipt =
     refl
     PairIncidence.canonicalReadoutText
     refl
+    KernelFormula.canonicalReadoutText
+    refl
+    ProfileDecomposition.canonicalReadoutText
+    refl
+    ProfileBounds.canonicalReadoutText
+    refl
+    ForcedTail.canonicalReadoutText
+    refl
     DiagonalResidue.canonicalReadoutText
     refl
     BKMProjection.canonicalReadoutText
@@ -159,6 +208,16 @@ canonicalNSTriadKNExactOperatorFrontierReceipt =
     canonicalReadoutText
     refl
     canonicalOperatorTheoremTarget
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
     refl
     canonicalSchurResidueTarget
     refl

@@ -2,7 +2,6 @@ module DASHI.Foundations.PrimorialFactorAddressConcrete where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 
@@ -54,19 +53,38 @@ example35Decode = refl
 example35Product : primeExponentProduct4 example35Digits ≡ 126
 example35Product = refl
 
-nthDefault : Nat → Nat → List Nat → Nat
-nthDefault d zero (x ∷ xs) = x
-nthDefault d (suc n) (x ∷ xs) = nthDefault d n xs
-nthDefault d _ [] = d
-
-a276086List : List Nat
-a276086List =
-  1 ∷ 2 ∷ 3 ∷ 6 ∷ 9 ∷ 18 ∷ 5 ∷ 10 ∷ 15 ∷ 30 ∷
-  45 ∷ 90 ∷ 25 ∷ 50 ∷ 75 ∷ 150 ∷ 225 ∷ 450 ∷ 125 ∷ 250 ∷
-  375 ∷ 750 ∷ 1125 ∷ 2250 ∷ 625 ∷ 1250 ∷ 1875 ∷ 3750 ∷ 5625 ∷ 11250 ∷ []
-
 a276086Prefix : Nat → Nat
-a276086Prefix n = nthDefault 0 n a276086List
+a276086Prefix 0 = 1
+a276086Prefix 1 = 2
+a276086Prefix 2 = 3
+a276086Prefix 3 = 6
+a276086Prefix 4 = 9
+a276086Prefix 5 = 18
+a276086Prefix 6 = 5
+a276086Prefix 7 = 10
+a276086Prefix 8 = 15
+a276086Prefix 9 = 30
+a276086Prefix 10 = 45
+a276086Prefix 11 = 90
+a276086Prefix 12 = 25
+a276086Prefix 13 = 50
+a276086Prefix 14 = 75
+a276086Prefix 15 = 150
+a276086Prefix 16 = 225
+a276086Prefix 17 = 450
+a276086Prefix 18 = 125
+a276086Prefix 19 = 250
+a276086Prefix 20 = 375
+a276086Prefix 21 = 750
+a276086Prefix 22 = 1125
+a276086Prefix 23 = 2250
+a276086Prefix 24 = 625
+a276086Prefix 25 = 1250
+a276086Prefix 26 = 1875
+a276086Prefix 27 = 3750
+a276086Prefix 28 = 5625
+a276086Prefix 29 = 11250
+a276086Prefix n = 0
 
 a276087Prefix : Nat → Nat
 a276087Prefix 0 = 2

@@ -25,7 +25,7 @@ module DASHI.Moonshine.JInvariantSmithChartActionSeparationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import Base369 as Base
 import DASHI.Foundations.Base369MobiusTransport as HalfTurn
@@ -42,7 +42,7 @@ HalfTurnIsPhaseIdentity =
 smithHalfTurnIsNotModularTPhaseIdentity :
   ¬ HalfTurnIsPhaseIdentity
 smithHalfTurnIsNotModularTPhaseIdentity same =
-  hex0NotHex3 (sym (same Base.hex-0))
+  hex0NotHex3 (same Base.hex-0)
 
 HalfTurnIsModularReflection : Set
 HalfTurnIsModularReflection =
@@ -53,7 +53,7 @@ HalfTurnIsModularReflection =
 smithHalfTurnIsNotModularReflection :
   ¬ HalfTurnIsModularReflection
 smithHalfTurnIsNotModularReflection same =
-  hex0NotHex3 (sym (same Base.hex-0))
+  hex0NotHex3 (same Base.hex-0)
 
 ------------------------------------------------------------------------
 -- Yet the orientation-forgetting C3 quotient erases the Smith half-turn.
@@ -102,7 +102,9 @@ identityVsSmithHalfTurnCollideAtC3 = record
         sym
           (HalfTurn.mobiusTransport-preservesTriadicPhase x)
   ; witness = Base.hex-0
-  ; actionsDifferAtWitness = hex0NotHex3
+  ; actionsDifferAtWitness =
+      λ same →
+        hex0NotHex3 (sym same)
   }
 
 C3ObserverDeterminesHexAction : Set

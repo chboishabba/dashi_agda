@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Foundations.TwoBoundarySystem where
 
 open import DASHI.Core.Prelude

@@ -199,16 +199,16 @@ qDiskAnalyticLawsFromRingAndResidual :
   QDisk.QDiskAnalyticLaws C
 qDiskAnalyticLawsFromRingAndResidual C ring residual =
   record
-    { twoPi = twoPi C
-    ; twoPiDefinition = refl
-    ; twoPiPositive = twoPiPositive residual
-    ; positiveProduct = positiveProduct residual
-    ; negativeOfPositiveIsNegative =
+    { QDisk.twoPi = twoPi C
+    ; QDisk.twoPiDefinition = refl
+    ; QDisk.twoPiPositive = twoPiPositive residual
+    ; QDisk.positiveProduct = positiveProduct residual
+    ; QDisk.negativeOfPositiveIsNegative =
         negativeOfPositiveIsNegative residual
-    ; qExponentCartesian =
+    ; QDisk.qExponentCartesian =
         qExponentCartesianFromRing C ring
-    ; modulus = modulus residual
-    ; modulusOfComplexExponential =
+    ; QDisk.modulus = modulus residual
+    ; QDisk.modulusOfComplexExponential =
         modulusOfComplexExponential residual
     }
 

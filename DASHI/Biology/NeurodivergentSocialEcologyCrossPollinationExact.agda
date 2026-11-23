@@ -8,7 +8,6 @@ import DASHI.Biology.TrustedFriendRelationalScaffoldingExact as Friend
 import DASHI.Biology.NeuroqueerRelationshipEcologyExact as Neuroqueer
 import DASHI.Biology.PsilautNetworkResponseGeometryExact as Psilaut
 import DASHI.Biology.SolisSystemSensitivityBoundaryExact as Solis
-import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact as HistoryEcology
 import DASHI.Core.ContrastiveInterventionResponseExact as Response
 
 ------------------------------------------------------------------------
@@ -100,28 +99,6 @@ data SafeSpaceEqualsSafeFriendPermission : Set where
 
 safeSpaceDoesNotCollapseToSafeFriend : SafeSpaceEqualsSafeFriendPermission → ⊥
 safeSpaceDoesNotCollapseToSafeFriend ()
-
-
-------------------------------------------------------------------------
--- Merged embodied-history -> social-ecology reachability seam.
---
--- The former cross-draft obligation is now discharged on the shared Agda
--- ancestry.  This module re-exports the receipt.  The owner remains
--- EmbodiedSocialEcologyRelationalHistoryObligationExact.
-------------------------------------------------------------------------
-
-situatedReachabilityReceipt :
-  HistoryEcology.SituatedReachabilityTOEReceipt
-situatedReachabilityReceipt =
-  HistoryEcology.canonicalSituatedReachabilityTOEReceipt
-
-situatedReachabilityZKPFrame :
-  HistoryEcology.SituatedReachabilityZKPFrame
-situatedReachabilityZKPFrame =
-  HistoryEcology.canonicalSituatedReachabilityZKPFrame
-
-latencyCannotDetermineGuardedFutureCone =
-  HistoryEcology.latencyCannotDetermineFutureCone
 
 ------------------------------------------------------------------------
 -- PSILAUT stays an intervention-response observer.

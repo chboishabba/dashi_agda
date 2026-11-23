@@ -364,11 +364,8 @@ def application_view(source_bytes: bytes, node) -> Optional[AstApplication]:
         return None
 
     head_atom = atoms[0]
-    head_tokens = significant_tokens(source_bytes, head_atom)
-    if not head_tokens or head_tokens[0].text in {"(", "{", "{{", "⦃"}:
-        return None
     head_names = [
-        token for token in head_tokens
+        token for token in significant_tokens(source_bytes, head_atom)
         if token.node_type in {"qid", "id"}
     ]
     if not head_names:
@@ -604,16 +601,8 @@ def _signature_parts(source_bytes: bytes, node) -> Tuple[Tuple[str, ...], Option
             if name:
                 # A declaration LHS should be one name; avoid swallowing its args.
                 names = (name.split()[0],)
-    type_node = None
-    saw_colon = False
-    for child in node.children:
-        if child.type == ":":
-            saw_colon = True
-        elif saw_colon and child.type == "expr":
-            type_node = child
-            break
-    if type_node is None:
-        type_node = first_descendant(node, "expr")
+    exprs = list(descendants(node, "expr"))
+    type_node = exprs[-1] if exprs else None
     return names, type_node
 
 

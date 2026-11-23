@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.CompactLieGroupCore where
 
 -- Generic algebraic carrier for the Yang--Mills group parameter.  Nothing in

@@ -15,11 +15,8 @@ module DASHI.Physics.Closure.NSTriadKNMurrayBishopBackendScopeAudit where
 -- DOI: 10.1007/978-3-642-61667-9; 10.1145/3018610.3018614;
 -- 10.48550/arXiv.2205.08354; 10.1006/jfan.2001.3804; the repository audit has
 -- no DOI.
--- Upstream source pin: viktorcsimma/bishop commit
+-- Source pin: viktorcsimma/bishop commit
 -- 582c6afcdf805d06730c8c0aa970f4a6e033b611.
--- Compatibility patch: chboishabba/bishop commit
--- d6b24f905ec6596c2a63a1dcdfe4dda4ffe4a6a2
--- (direct child of the upstream base; Agda 2.9 / stdlib 2.0+ compatibility).
 -- Uses: the concrete Murray regular-sequence setoid, exact rational dyadic
 -- anchors, the concrete Sobolev exponent 11/4, and the direct-canonical
 -- 128/93 theorem.
@@ -46,27 +43,6 @@ bishopSourceCommit = "582c6afcdf805d06730c8c0aa970f4a6e033b611"
 
 bishopSourcePinned : Bool
 bishopSourcePinned = true
-
-bishopUpstreamRepository : String
-bishopUpstreamRepository = "viktorcsimma/bishop"
-
-bishopUpstreamBaseCommit : String
-bishopUpstreamBaseCommit = "582c6afcdf805d06730c8c0aa970f4a6e033b611"
-
-bishopUpstreamBaseRecorded : Bool
-bishopUpstreamBaseRecorded = true
-
-bishopCompatibilityRepository : String
-bishopCompatibilityRepository = "chboishabba/bishop"
-
-bishopCompatibilityCommit : String
-bishopCompatibilityCommit = "d6b24f905ec6596c2a63a1dcdfe4dda4ffe4a6a2"
-
-bishopAgda29CompatibilityPatchRecorded : Bool
-bishopAgda29CompatibilityPatchRecorded = true
-
-bishopCompatibilityGitlinkReachable : Bool
-bishopCompatibilityGitlinkReachable = true
 
 murrayBishopSetoidBackendClosed : Bool
 murrayBishopSetoidBackendClosed = true

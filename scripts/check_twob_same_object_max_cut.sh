@@ -53,7 +53,7 @@ grep -q 'toFiveModeRecognition' "${targets[5]}"
 grep -q 'defectProfileDoesNotConstructTwoProvenanceBits' "${targets[5]}"
 
 grep -q 'centralSignOnStratumInvolutive' "${targets[6]}"
-grep -q 'centralSignChangesMode09' "${targets[6]}" || grep -q 'centralSignMovesIdentity' "${targets[6]}"
+grep -q 'centralSignMovesIdentity' "${targets[6]}"
 grep -q 'completionModePreservingPhaseIsNotCentralSignOnStrata' "${targets[6]}"
 
 grep -q 'apparentParityConflictResolved' "${targets[7]}"

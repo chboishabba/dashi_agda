@@ -109,14 +109,14 @@ eisensteinKleinData :
   CKlein.ConstructedComplexKleinData C D F
 eisensteinKleinData C D F kernel terms normalization =
   record
-    { Point =
+    { CKlein.Point =
         CertifiedFiniteEisensteinPoint C D F kernel terms normalization
-    ; tau = tau
-    ; g2 =
+    ; CKlein.tau = tau
+    ; CKlein.g2 =
         λ point → Q.e4Truncated C kernel terms (tau point)
-    ; delta =
+    ; CKlein.delta =
         normalizedDelta C D F kernel terms normalization
-    ; deltaNonzero = normalizedDeltaNonzero
+    ; CKlein.deltaNonzero = normalizedDeltaNonzero
     }
 
 eisensteinKlein :
