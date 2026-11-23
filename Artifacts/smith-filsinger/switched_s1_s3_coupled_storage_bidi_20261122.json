@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-22",
+  "title": "S1/S3 source-grounded switched coupled coil charge/reservoir spark energy BIDI",
+  "source": "Original Filsinger 4-spoken-edge 0-proven-pin midpoint transcript, and separately Smith/Kelly/Darrer coupled L1/L2 references; source owners from existing #1537; no same-original physical identity promoted",
+  "systems": {
+    "S1": "Centre-referenced secondary tank v=U-V with symmetric ideal +/-v/2; diode collector j=max((abs(v)/2-b-Vforward)/Rd,0), secondary shunt capacitor C, bank Cb, bleed Gbleed, on/off hysteretic spark Gspark.",
+    "S3": "Separately magnetically driven U-V coil, capacitor C across it, Cu/Cv from each coil terminal to M, explicit displacement-return states; positive diode OR ju=max((u-b-Vforward)/Rd,0), jv=max((v-b-Vforward)/Rd,0); capacitance matrix [[C+Cu,-C],[-C,C+Cv]]; output bank and spark as S1.",
+    "common": "Two inductively coupled coils state [i1,i2], magnetic energy 0.5*L1*i1²+M*i1*i2+0.5*L2*i2²; L1*L2>M²; primary drive source Vs(t), resistor losses R1,R2 and diode nonideal Vforward,Rd. Cbank*db/dt = jtotal-(Gbleed+Gspark*switch)*b.",
+    "donor": "Explicit SYNTHETIC active current ienv=0.005*vU, whose positive signed energy is integral(vU*ienv dt). It is a second prescribed source, NOT an Earth/air energy observation or model of the actual Earth.",
+    "work": "Wdriver+Wenv+Einitial=Wcopper1+Wcopper2+Wdiodes+Wbleed+Wspark+Efinal, Wdiodes=int(Vforward*jtotal + Rd*sum(jk²)), Wspark=int(Gspark*b²) over on intervals. Stored energy includes both coupled coils, all ground capacitors and output bank. No double counting of reactive circulation.",
+    "numeric": "Dimensionless model units only; L1=2,L2=1.5,M=.6,R1=.35,R2=.28,C=1,Cb=.65,Cu=.4,Cv=.55,Rd=.12,Vforward=.1,Gbleed=.018,Gspark=1.1,spark_on=.22,spark_off=.075,drive=2sin(t),duration=24pi. Not original device data."
+  },
+  "results": {
+    "S1_driver_only": {
+      "Wdriver": 34.509814,
+      "Wenv": 0,
+      "Wspark": 3.359725,
+      "Efinal": 1.40738,
+      "transitions": 45
+    },
+    "S1_driver_env": {
+      "Wdriver": 34.605648,
+      "Wenv": 0.157415,
+      "Wspark": 3.421246,
+      "Efinal": 1.413187,
+      "transitions": 45
+    },
+    "S3_driver_only": {
+      "Wdriver": 31.911332,
+      "Wenv": 0,
+      "Wspark": 0.036029,
+      "Efinal": 1.451629,
+      "transitions": 2
+    },
+    "S3_driver_env": {
+      "Wdriver": 31.912929,
+      "Wenv": 0.086567,
+      "Wspark": 0.035537,
+      "Efinal": 1.493798,
+      "transitions": 2
+    },
+    "both_precharge_only": {
+      "Einitial": 0.26325,
+      "Wspark": 0.257213,
+      "Efinal": 0.00003,
+      "transitions": 1
+    },
+    "both_zero_initial_without_sources": "no spark, no useful output or losses",
+    "maximumWorkLedgerResidual": 3.610667320685934e-12,
+    "verification": "64/64 local exact SymPy 1.14 identities + switched ODE numerical ledgers PASS; no GitHub CI, no Agda kernel"
+  },
+  "inverse": [
+    "Changing donor-positive signed Wenv need not increase spark work: S3 shows Wspark decreases as Efinal rises.",
+    "Driver input changes under external coupling; compare total signed drive, donor, heat, bank and final energy.",
+    "Nonlinear diode bank is NOT equal to the earlier phasor series RL constant.",
+    "Precharged bank emits finite switch pulse from initial storage without ongoing source.",
+    "S3 Cu/Cv provide explicit displacement return, cannot be replaced by assuming hard NST centre tap.",
+    "Other Filsinger reels, reported acoustic frequency, historical Smith/Kelly split 17+17 and 47nF must not be merged into these dimensionless model settings."
+  ],
+  "implementation": {
+    "script": "/mnt/data/check_smith_filsinger_switched_s1_s3_bidi_20261122.py",
+    "localSHA1": "5ba414f9fd8bc49d138a148ecdb62e336c905776",
+    "githubStatus": "Full executable local only, JSON, formal Agda finite carrier and roadmap committed",
+    "agda": "DASHI/Physics/Motors/SmithFilsingerSwitchedCoupledStorageBidiExact.agda",
+    "priorOwners": [
+      "SmithFilsingerTimeIndexedTransferExact",
+      "SameObjectConservationLedgerExact",
+      "SmithFilsingerSourceEdgeAdmissionBidiExact",
+      "SmithFilsingerOriginalMaxwellMeterIntervalWeldExact"
+    ],
+    "agdaStatus": "Source-written only; no Agda typechecking, analytical differential proofs only in local SymPy"
+  },
+  "remaining": "Original FM source 0/4 pin verified, original 0/24 raw empirical roles. This is an inverse candidate comparison, not original machine performance."
+}

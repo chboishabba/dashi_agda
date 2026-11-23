@@ -1,0 +1,103 @@
+{
+  "title": "Filsinger source-worded centre-tap return, clamp current and capacitor/coil input-group BIDI",
+  "date": "2026-11-22",
+  "sourceScope": {
+    "transcript": "Prior user-supplied literal transcript; Filsinger commercial midpoint/spark proposal; exact linkage to Dfu9Jseviz9 remains provisional",
+    "exactPhrases": [
+      "two off of this wire, two off of that wire",
+      "two diodes come off the cap, two diodes come off here",
+      "all forward facing",
+      "ganging together positives",
+      "half the potential of the big coil",
+      "return to midpoint, earth, ground",
+      "capacitor across one coil causes a pole shift"
+    ],
+    "notCertified": [
+      "original video diode anode/cathode readback",
+      "which two spoken 'wires' share nodes with capacitor/coil ends",
+      "hard-bond versus finite-impedance return",
+      "actual Earth electrode and negative-bus node equivalence",
+      "time-synchronous signed input/output power"
+    ]
+  },
+  "priorCorrection": {
+    "previous": "Three survivors plus an ideal excluded full bridge hard-bond N=M were described as an exhaustive topology cut.",
+    "now": "The source phrases allow cap/coil diode-OR input groups and finite-impedance N-M links. CT/bridge/split-rail are not exhaustive; split-rail is a distinct load/reference assignment on a bridge skeleton rather than an independent four-diode orientation graph. Ideal bridge N=M is incompatible with an independently held nonzero ideal source voltage, but with finite source impedance it creates a real, energy-consuming winding clamp path rather than a logical impossibility.",
+    "physicalConclusion": "Physical operation not established or ruled out; actual current depends on transformer winding impedances, diode direction, return impedance, phase, switching and power sources."
+  },
+  "derivedElectricalModel": {
+    "selectedHypotheses": [
+      "A-M=+v and B-M=-v in ideal symmetric unloaded source",
+      "source impedances finite Rs>0 in nonideal loop comparison",
+      "ideal diode paths oriented N->negative outer winding for conventional bridge",
+      "resistive load RL>0 at separate positive branch",
+      "all quantities are symbolic/model values, not original hardware measurements"
+    ],
+    "idealSourceNoGo": "N=M imposes 0=V_N-V_M whereas an otherwise unperturbed conventional bridge imposes V_N-V_M=-abs(v), contradictory at abs(v)>0.",
+    "nonidealHardBond": {
+      "pathEachHalfCycle": "M=N -> conventional bridge return diode -> currently negative end (B if A positive, A if B positive) -> source winding and internal series impedance -> M",
+      "clampCurrent": "I_clamp=abs(v)/Rs for zero-drop diode and independent half-winding Thevenin model",
+      "clampHeat": "P_copper_clamp=abs(v)^2/Rs",
+      "positiveBranch": "V_load=abs(v)*RL/(Rs+RL); P_load=abs(v)^2*RL/(Rs+RL)^2",
+      "sourceFunding": "P_source=abs(v)^2/Rs + abs(v)^2/(Rs+RL) = P_copper_clamp + P_positive_copper + P_load",
+      "normalizedExample": {
+        "absV": 1,
+        "Rs": 1,
+        "RL": 2,
+        "Pload": "2/9",
+        "PclampCopper": 1,
+        "PotherCopper": "1/9",
+        "Psource": "4/3",
+        "PloadOverPsource": "1/6",
+        "units": "arbitrary normalized units, not a Filsinger observation"
+      },
+      "qualification": "Actual transformer halves are coupled and diode drops, saturation, core loss and parasitics alter the formula. Not a safe build suggestion."
+    },
+    "resistorMediated": "When N is coupled to M by finite resistance Rb, current abs(v)/(Rs+Rb); N-M=-abs(v)*Rb/(Rs+Rb); real source costs include losses in both resistances.",
+    "capacitorMediated": "At sinusoidal RMS V with series Rs and return capacitance C, I=V/(Rs+1/(i omega C)); Psource=Rs*abs(I)^2 and ideal cap average P=0. Low-frequency no path, high-frequency approaches short; can rotate current phase without an external generator.",
+    "coilCapResonantMediated": "Z=Rs+i(omega L-1/(omega C)); at resonance reactive terms cancel and source current = V/Rs; finite source losses still paid. Original coil/cap phase claim is a mechanism hypothesis, not physically identified values.",
+    "diodeOrCapCoilGroup": "Two packages from capacitor-coupled wire X and two from coil wire Y, each oriented X/Y->P and ganged cathodes, can diode-OR their respective branch potentials. This would be two effective positive rectifying paths, not proof of two independently replenished donors. If X/Y are actually the same node by wiring, their independence disappears."
+  },
+  "bidirectionalDiscriminators": [
+    {
+      "observation": "Four diode packages",
+      "forward": "Allows several skeletons/inputs",
+      "reverse": "Does not identify independent anode nodes or DC negative"
+    },
+    {
+      "observation": "All forward facing / positives ganging",
+      "forward": "Strict anodes-from-input and cathodes-to-P supports forward positive OR; conventional bridge uses return-directed diodes",
+      "reverse": "Check each diode orientation/which diode terminals are joined"
+    },
+    {
+      "observation": "Two diodes come off cap, two come off here",
+      "forward": "Cap and coil may be distinct source-group nodes X,Y",
+      "reverse": "Check if X and Y are electrically distinct and whether there is an actual capacitor between winding nodes"
+    },
+    {
+      "observation": "Return to midpoint, earth, ground",
+      "forward": "CT positive return, bridge with finite link, or hard bridge strap have distinct current paths",
+      "reverse": "Determine physical M/N/Earth node equality versus intervening resistor, capacitor, switch or diode"
+    },
+    {
+      "observation": "Half potential of big coil",
+      "forward": "Under symmetric CT P-M is abs(v), full bridge P-N is 2abs(v)",
+      "reverse": "Need measured voltage probe's endpoints, AC peak/RMS and rectified state"
+    },
+    {
+      "observation": "Pole shift when cap across coil",
+      "forward": "Capacitor and LC returns can change impedance/phase with zero net ideal capacitor work in a full cycle",
+      "reverse": "Need original phase, current and paid source work"
+    },
+    {
+      "observation": "0.4W/3.8V/48V Earth reel",
+      "forward": "Not the same source occasion as the midpoint transcript",
+      "reverse": "No legitimate cross-reel same-time power identification"
+    }
+  ],
+  "evidence": "Original Filsinger 0/24 raw empirical roles still absent from last audited evidence archive. No full source-pinned circuit image/real signed V(t)I(t) certified.",
+  "agda": "DASHI/Physics/Motors/SmithFilsingerMidpointReturnClampBacksolveExact.agda",
+  "sympy": "scripts/check_filsinger_midpoint_return_backsolve_sympy.py",
+  "verification": "65/65 local SymPy 1.14 PASS; Agda kernel unverified",
+  "safety": "analysis of existing source only; no high-voltage wiring advice or device build."
+}

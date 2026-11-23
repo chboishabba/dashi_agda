@@ -1,0 +1,144 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_LOCAL_NATIVE_J12_J16_SYNTHETIC_NO_PHYSICAL_PROMOTION",
+  "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "native_script": "scripts/check_smith_filsinger_j12_restored_cycles_20261122.py",
+  "native_original_blob": "5e4d272438556327034e1f8ae949c5102f06cf6a",
+  "native_updated_blob": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+  "native_change": "Optional p.get('drive_amp',2.) driver multiplier; default 2 sin(t) unchanged; explicit wave-only / driver-only control.",
+  "native_local_blob_exact": true,
+  "replay_script": "scripts/check_smith_filsinger_j17_wave_absorption_reverse_solve_20261123.py",
+  "replay_blob": "d0e5220367b17d121a453b147d7de1eec7ae5f7e",
+  "replay_local_blob_exact": true,
+  "replay_python_exit": 0,
+  "sympy_version": "1.14.0",
+  "native_model": "Original seven-state J12 nonlinear coil/capacitor/diode/bank/spark/outgoing wave, source-dependent signed energy ledger; synthetic dimensionless.",
+  "baseline": {
+    "source_amp": 0,
+    "phase_rad": 0.3,
+    "driver": 24.77932424824134,
+    "incident": 0,
+    "outgoing": 0.12290224468599521,
+    "net_wave": -0.12290224468599521,
+    "spark": 0.000060963768523760044,
+    "storage_delta": -4.726368185714591e-10,
+    "closure": 3.675001425534896e-7,
+    "switches": 20
+  },
+  "absorber": {
+    "source_amp": 1.2,
+    "phase_rad": 0.3,
+    "driver": 24.77872097974919,
+    "incident": 90.47786842338608,
+    "outgoing": 90.34126456987413,
+    "net_wave": 0.13660385351195714,
+    "spark": 0.0001748916845554123,
+    "storage_delta": 2.6435971411942205e-8,
+    "closure": 7.29106939406643e-7,
+    "energy_residual": 2.553750277911604e-8,
+    "switches": 6,
+    "restored_cycle": true
+  },
+  "root": {
+    "source_amp": 0.8256267643847331,
+    "net_wave": 0.000007639719612484441,
+    "incident": 42.82993294621186,
+    "outgoing": 42.82992530649225,
+    "source_amplitude_tolerance": 0.0003,
+    "phase_rad": 0.3,
+    "spark_thresholds": [
+      0.003,
+      0.0009
+    ],
+    "restored": true
+  },
+  "tradeoffs": {
+    "k_0_08": {
+      "net_wave": 0.2179773473388451,
+      "spark": 0.000023936008279153997,
+      "switches": 4
+    },
+    "k_0_15": {
+      "net_wave": 0.13660385351195714,
+      "spark": 0.0001748916845554123,
+      "switches": 6
+    },
+    "k_0_25": {
+      "net_wave": -0.02244588483048915,
+      "spark": 0.000877343253366228,
+      "switches": 8
+    },
+    "gamma_rad_0_04": {
+      "net_wave": 0.0377018235946025,
+      "spark": 0.00007309280730928252,
+      "switches": 6
+    },
+    "gamma_rad_0_16": {
+      "net_wave": 0.3560397724485824,
+      "spark": 0.0004305337781833814,
+      "switches": 6
+    },
+    "Vd_0_05": {
+      "net_wave": 0.13489601408802798,
+      "spark": 0.00021778594255373888,
+      "switches": 6
+    },
+    "Vd_0_15": {
+      "net_wave": 0.13808581860779157,
+      "spark": 0.00013691051068324825,
+      "switches": 6
+    }
+  },
+  "J16_local_event_controls": {
+    "source_amp_pm_0_005": {
+      "event_count_each": 6,
+      "matching_order": true,
+      "max_shift": 0.001644286252656002,
+      "both_absorbing": true
+    },
+    "source_phase_pm_0_005": {
+      "event_count_each": 6,
+      "matching_order": true,
+      "max_shift": 0.009799851961304284,
+      "both_absorbing": true
+    },
+    "coil_k_pm_0_005": {
+      "event_count_each": 6,
+      "matching_order": true,
+      "max_shift": 0.08031948609084338,
+      "both_absorbing": true
+    },
+    "global_switch_branch_stability": false,
+    "phase_pi_event_count": 8,
+    "note": "Event-count agreement alone is insufficient; small local event shifts do not establish global smoothness."
+  },
+  "driver_off_controls": {
+    "one_interval_1_2_source_only": {
+      "driver": 0,
+      "incident": 90.47786842338606,
+      "outgoing": 90.14594913778012,
+      "net_wave": 0.33191928560593453,
+      "spark": 0.00009637698651344046,
+      "storage_delta": 0.05510514785756909,
+      "restored_cycle": false
+    },
+    "one_interval_both_off": {
+      "driver": 0,
+      "incident": 0,
+      "outgoing": 0,
+      "spark": 0,
+      "storage_delta": 0
+    },
+    "periodic_source_only_28_iterations": "NO_RESTORATION_CERTIFICATE",
+    "periodic_source_only_50_iterations": "NO_RESTORATION_CERTIFICATE"
+  },
+  "work_formula": "W_driver + (W_incident-W_outgoing) = W_spark + W_diode + W_heat + (U_final-U_initial), with each tested native residual < 1e-6.",
+  "caveats": [
+    "Net positive wave work does not establish the fraction attributable to the useful load; the driver still contributes ~24.78 work units per restored cycle.",
+    "The spark-work improvement is tiny relative to total incident/outgoing power; external energy must not be inferred from absolute spark work.",
+    "The source-only one-interval storage gain is not a repeated restored operating state; 28/50 native period attempts failed to certify restoration.",
+    "No Filsinger pin-complete netlist or calibrated Duga/HAARP/SURA signal/receiver transfer kernel; synthetic device parameters only.",
+    "No physical antigravity response, no native Agda kernel run, no CI."
+  ],
+  "github_actions_ci_used": false
+}

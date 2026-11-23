@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-22",
+  "title": "Filsinger NST midpoint versus separately tuned coil: source-indexed BIDI return cut",
+  "source": {
+    "type": "Earlier user-supplied spoken transcript; exact commercial reel attribution provisional, no present video pin-map",
+    "phrases": [
+      "accessible NST midpoint",
+      "that cap goes across the one coil you want",
+      "two diodes come off the cap, two come off here",
+      "two off this wire, two off that wire",
+      "all forward facing, positive outputs ganged",
+      "return to midpoint, earth, ground",
+      "half the potential of the big coil",
+      "pole shift and receiving amperage-field claim"
+    ],
+    "owners": [
+      "Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md",
+      "Docs/research/DonSmithHighPowerDevices147PageOriginalPDFMaxCut20261112.md",
+      "Docs/research/SmithFilsingerNonlinearQuadratureMaxCut20261112.md"
+    ],
+    "editionBoundary": "Smith/Kelly split 17+17 secondary and optional 47nF across L2 belong to different historical diagram; NOT proof of Filsinger original winding",
+    "footage": "Direct authenticated original commercial reel frames and 147-page original user-uploaded PDF unavailable this turn"
+  },
+  "inverse": {
+    "selectedCoilOwner": [
+      "original NST whole A-B",
+      "original NST half A-M",
+      "separately tuned U-V, distinct from NST secondary"
+    ],
+    "actualReturn": [
+      "conductive to NST midpoint M",
+      "capacitive/displacement to M",
+      "no source-island path to M"
+    ],
+    "note": "Independent axes, not nine proven original hardware designs. A component labelled 'cap' across coil L shares its U,V nodes but does not identify that coil with NST A-B or A-M."
+  },
+  "isolatedCut": {
+    "premises": "Completely floating U/V source island, four ideal forward-only U/V-to-P diode edges, no other conductor/displacement/radiative/switch return, each diode current nonnegative",
+    "kcl": "i1+i2+i3+i4=0",
+    "result": "Each package current zero; sustained useful work through the positive-only diode cut must vanish in this ideal model",
+    "counterconditions": "Any physical external return including capacitance/leakage/another switch invalidates that no-return cut; not evidence of actual wired Filsinger absence of return"
+  },
+  "capacitiveReturnModel": {
+    "circuit": "ideal AC differential source U-V=e; Cu from U to M, Cv from V to M, positive real load conductance G from U to M; s=i*w",
+    "KCL": "(G+s*Cu)*U+s*Cv*V=0; U-V=e",
+    "U": "s*Cv*e/(G+s*(Cu+Cv))",
+    "V": "-(G+s*Cu)*e/(G+s*(Cu+Cv))",
+    "sourceCurrent": "Is=-s*Cv*V=(G+s*Cu)*U",
+    "fundedWork": "Re(e*conj(Is))=G*abs(U)^2; ideal capacitors absorb zero mean real power",
+    "noLoad": "When G=0: U=e*Cv/(Cu+Cv); V=-e*Cu/(Cu+Cv)",
+    "falseTap": "When Cu=Cv and G=0: U=+e/2, V=-e/2 even without a galvanic physical midpoint",
+    "load": "A positive G moves common-mode voltage; pure ideal hard tap would remain +/-e/2 if ideal zero source impedance; a real hard tap can also sag, so this is NOT unique original-source inference",
+    "normalized": "Cu=Cv=G=w=e=1 gives exactly 1/5 normalized input real power and load real power",
+    "important": "Proxy is linear resistive load, NOT Filsinger's nonlinear diode and spark gap model"
+  },
+  "evidenceGates": [
+    "Identify from original footage WHICH coil the capacitor spans: NST A-B, NST A-M, separate tuned coil, or other",
+    "Identify original physically continuous NST midpoint M versus a capacitive/electromagnetic reference",
+    "Identify all four anode/cathode landing nodes and the return of the actual measured P load",
+    "Measure and source-match full electrical v(t),i(t), driver/earth/donor/heat/storage before physical power admission",
+    "Avoid promoting Smith/Kelly figures, acoustic ~7.8kHz or other Filsinger reel numbers to this physical circuit"
+  ],
+  "code": {
+    "fullLocal": "/mnt/data/check_filsinger_midpoint_return_cut_bidi_sympy_20261122.py",
+    "fullLocalAcceptance": "55/55 PASS exact local SymPy 1.14; separate original local file",
+    "committed": "scripts/check_filsinger_midpoint_return_focused_20261122.py",
+    "committedAcceptance": "33/33 PASS exact local SymPy 1.14; Git blob e09b23a229c6643c594ecefd6e37b30fec7346b0 byte-identical to executed local script",
+    "formal": "DASHI/Physics/Motors/SmithFilsingerWindingOwnerReturnCutBidiExact.agda",
+    "formalStatus": "Source-written, uses Circuit36927ComponentGraphExact existing part-pin owner, Agda kernel not run"
+  },
+  "originalEvidence": "0/24 physically verified raw evidence roles from prior audit, unchanged",
+  "safety": "Pure archival and analytical inverse; no live high-voltage construction or probing instructions.",
+  "transientCorrection20261122": {
+    "reason": "Speaker source has spark-gap dumping; a truly floating but precharged source island may emit a transient while net island charge decreases.",
+    "generalLaw": "dQ_island/dt + sum outward diode currents = incoming return current",
+    "stationaryCut": "The old all-four-zero proof assumes no inward return and zero instantaneous net island charge derivative; or nonnegative outward currents integrated over a fully restored charge cycle.",
+    "finiteTime": "No-return source island may emit finite outward charge Q_start-Q_end. Restoration and repeated useful output require a physically supplied return or other input mechanism.",
+    "notEquivalent": "The selected capacitor across coil has internal differential storage; it does not automatically serve as an exterior/common-mode storage capacitance.",
+    "exactCheck": "28/28 PASS locally, /mnt/data/check_filsinger_transient_charge_return_sympy_20261122.py, Git hash 30de320edaea8ab5539be0c05c42977c50f48b80 local executed file only",
+    "source": "Artifacts/smith-filsinger/midpoint_transient_charge_return_bidi_20261122.json",
+    "physicalOriginal": "Undetermined physical source wiring and spark output; original raw evidence 0/24"
+  }
+}
