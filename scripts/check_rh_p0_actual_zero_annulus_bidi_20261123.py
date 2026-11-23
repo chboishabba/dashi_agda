@@ -125,3 +125,18 @@ for den in ('4','1000000'):
     print('PASS independent smooth signed fixture horizontal sign, alpha/q=1/'+den,
           'H/(alpha^2*q^2)=',mp.nstr(horizontal/(atest**2*qtest**2),18))
 print('OPEN: any real off-axis zero in the annulus; full signed physical zero-minus-mu+local-slack terminal')
+
+# EXACT original-W vertical signed-discrepancy bound from the existing RvM:
+# with M0=M2=0, |K(0,q)|<= ||P||1*L^4*q^4/24 =135000*q^4;
+# |dK(0,q)/dq|<= ||P||1*L^4*|q|^3/6 =540000*|q|^3.
+# For one of the annuli [q_min,q_max] with q_max=1/20000,
+# the Stieltjes IBP identity |integral K d(N-mu)| <=
+#  sup_{x in I}|N(A,x)-int_A^x mu| * (|K(B)|+int_I|K'|)
+# <= 2*C_RvM*log(2t+4)*270000*q_max^4.
+# So |E_vertical|<= 540000*C_RvM*log(2t+4)*q_max^4/r^2,
+# only O(log(t)/t^2), four powers too weak for O(a^4/t^6) target.
+assert M*L**4/F(24)==F(135000)
+assert M*L**4/F(6)==F(540000)
+assert F(2)*(F(135000)+F(540000)/4)==F(540000)
+print('PASS exact source RvM Stieltjes envelope constant 540000*C*log(2t+4)*q_max^4/r^2')
+print('OPEN P0 strict global actual-source signed estimate, full S and exact I')
