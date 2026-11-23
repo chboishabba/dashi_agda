@@ -2060,3 +2060,20 @@ On the exact two-annulus split, `E_rest=2D_W(t)−E_{I^-}−E_{I^+}`. If no orig
 **E2 fixture diagnostics:** [full proof/receipt](../proofs/RHP0FrozenTwoPrimeExactSourceWeldAndCost20261123.md); [committed source-aligned regression](../../scripts/check_rh_p0_frozen_two_prime_weld_20261123.py), a separate local execution with genuinely smooth C∞ `exp(-1/(1-x²))` source (NOT the noncomputable Mathlib W). Numerically solved J2=0, J4<0; smooth A det −0.0569799179, positive poles ~1.125,1.000 and T~2.08; 16 eight-invariant port fits across t=300/1000/80000/1e6 all pass residual <1.9e-18, but worst condition ~9.06e6. Conservative upper bound for this particular narrow-correction `||h''||1` grows from 1.331e5 at t=300 to 4.403e8 at 1e6, while max absolute unit-port arithmetic gradient drops 0.0486→2.292e-5. **This is not an all-constructions derivative lower bound.** Fixed-width, oscillatory, and minimal-norm projections must be considered before claiming E2 paid or an impossibility.
 
 **P0 gates:** E0 SOURCE ORIGINAL W → *inhabited* extended Lean carrier still OPEN; E1 existing TwoScale original prime source paid and new generic frozen adaptation is committed but Lean kernel OPEN; E2 exact absolute support/mass/sixth/eighth/tail and post-sixth budgets OPEN; E3 **independent complete signed arithmetic–zero/Gamma** strict estimate OPEN. Keep old R2-S0/S1, external Lean 4.33.1 all-character root-proof admission and Agda H_X/paperFT same-object obligations separate. No RH/GRH claim, no GitHub CI, no Lean/Agda kernel run this tranche.
+
+
+### 23 Nov P0 E0 EXACT geometric construction upgrade — differential-annihilator instead of SVD
+
+**New full original-source construction and executed EXACT symbolic receipt:** [§7: order-52 even source-annihilator](../proofs/RHP0FrozenTwoPrimeExactSourceWeldAndCost20261123.md) and [locally executed/checksum-matched SymPy script](../../scripts/check_rh_p0_exact_differential_annihilator_20261123.py) (Git blob `d06af1995d8b4f0e579122a31036e78db74a893e`, readback match). This is a **mathematical existence result**, not new Lean kernel closure.
+
+For each original selected W and fixed high t, r=t/16, exact source weights to annihilate are `cos(ru)`, `cos(2ru)`, `u^k B_g(u)` k=2,4,6,8, and the two original pole weights `cosh(u/2)cos(tu)cos(c r u)` c=1,2. Let D=d/du. The monic EVEN differential operator
+
+```text
+A(D) = (D²+r²)^9(D²+4r²)^9
+  * Π_(c=1,2) Π_(σ=±1)
+     [((D−1/2)²+(t+σcr)²)((D+1/2)²+(t+σcr)²)]
+```
+
+has **order52**. Its first factors annihilate every polynomial-cosine source moment through k8; its pole factors annihilate the exact cosh×cos(tu)×cos(cru) source weights. For even compact C∞ b near ±log2 or ±log3, `h=A(D)b` is EVEN compact C∞ and all **eight physical source integrals vanish exactly** by 52-fold integration by parts and formal self-adjointness. Choose b with derivatives 0..51 zero and derivative52=1 at the selected prime log; monicity gives `h(log p)=1`. Disjoint supports give zero at the other prime and for ALL n≥4. Thus h2/h3 are **explicit exact source-constraint kernel elements with independent prime evaluations**, at every fixed high t and every original selected W, with no unproved 8×22 rank assumption.
+
+**Paid:** E0 mathematical smooth constructibility and exact positive point-port values. **OPEN:** E0 Lean/Agda original source carrier inhabitation and kernel check (proposed [Lean #116](https://github.com/chboishabba/dashi_lean4/pull/116)); E2 52-derivative enlarged-support/absolute-sixth/eighth/FarExact/stability and amplitude bounds, which may be very expensive; E3 independent strict completed signed zero/Gamma/prime estimate, especially near-double prime resonances. Existing original TwoScale source theorem graph is reused; no new RH/GRH theorem or GitHub CI.
