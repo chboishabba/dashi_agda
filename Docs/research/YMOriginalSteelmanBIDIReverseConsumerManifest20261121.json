@@ -1,0 +1,276 @@
+{
+  "schema": "dashi.ym-steelman-bidi-reverse-consumer.v1",
+  "source_pr": 1536,
+  "source_head": "6c7d791b5745279ee86d4adcb1e0671c0f18ab6c",
+  "method": "reverse solve from original physical consumer; no parallel Hamiltonian, clock, measure or published RP theorem",
+  "owners": [
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalR445ReflectedWordCMP116BIDIExact.agda",
+      "symbols": [
+        "originalCenteredReflectedOSIsOriginalR320",
+        "originalMixedJIsSameCenteredReflectedOS"
+      ],
+      "role": "finite original Wilson n=3 centered OS/CMP116 same-source covariance",
+      "blob_sha": "43a9ba94c93307e7b1a2a0259bd2b62d5233dc34",
+      "symbol_receipts": [
+        {
+          "symbol": "originalCenteredReflectedOSIsOriginalR320",
+          "present": true
+        },
+        {
+          "symbol": "originalMixedJIsSameCenteredReflectedOS",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact.agda",
+      "symbols": [
+        "OriginalWilsonMarkedOS1PhysicalInputs",
+        "originalWEXTDownstreamFromOS1",
+        "originalMarkedOS1CompilesToR556",
+        "originalMarkedOS1SameSpectrumClustering"
+      ],
+      "role": "marked W1/W3, selected geometry and original R556 producer",
+      "blob_sha": "011a089d435aeb418eb1ca2b5da2585da3e374a4",
+      "symbol_receipts": [
+        {
+          "symbol": "OriginalWilsonMarkedOS1PhysicalInputs",
+          "present": true
+        },
+        {
+          "symbol": "originalWEXTDownstreamFromOS1",
+          "present": true
+        },
+        {
+          "symbol": "originalMarkedOS1CompilesToR556",
+          "present": true
+        },
+        {
+          "symbol": "originalMarkedOS1SameSpectrumClustering",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda",
+      "symbols": [
+        "originalAllWilsonPairsTimesTests",
+        "SameOSAllWilsonPairsTimesSpectrum",
+        "SameOriginalOS1R556TimeGeometry",
+        "originalWilsonSourceDistanceIsSameOS1Time"
+      ],
+      "role": "single all-pair/all-time covariance and R281 spectral consumer",
+      "blob_sha": "7a62a5b1eb48966cfe651c36817a545d4f8de57b",
+      "symbol_receipts": [
+        {
+          "symbol": "originalAllWilsonPairsTimesTests",
+          "present": true
+        },
+        {
+          "symbol": "SameOSAllWilsonPairsTimesSpectrum",
+          "present": true
+        },
+        {
+          "symbol": "SameOriginalOS1R556TimeGeometry",
+          "present": true
+        },
+        {
+          "symbol": "originalWilsonSourceDistanceIsSameOS1Time",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda",
+      "symbols": [
+        "originalWilsonTimeTranslationSquare",
+        "originalFiniteCovarianceSquare",
+        "originalContinuumCovarianceSquare",
+        "originalOS1SquareEndsInSameR281Spectrum"
+      ],
+      "role": "same original OS1/R556/R278/R281 commuting square",
+      "blob_sha": "47bf7b665dcff123611033fd4952a2ddece10a0b",
+      "symbol_receipts": [
+        {
+          "symbol": "originalWilsonTimeTranslationSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalFiniteCovarianceSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalContinuumCovarianceSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalOS1SquareEndsInSameR281Spectrum",
+          "present": true
+        }
+      ]
+    }
+  ],
+  "consumer_chain": [
+    {
+      "rank": 1,
+      "consumer": "actual continuum OS H spectral gap",
+      "existing": "R281 / P3 / R333 same-H spectral compiler",
+      "admission": "physical one-H identification, norm-dense nonvacuum Wilson test vectors, strict positive physical-time decay",
+      "status": "open_physical"
+    },
+    {
+      "rank": 2,
+      "consumer": "original same-family all-word all-time R281 covariance/correlation",
+      "existing": "SameOSAllWilsonPairsTimesSpectrum / originalOS1SquareEndsInSameR281Spectrum",
+      "admission": "one physical R281 spectrum indexed by ((original Wilson left,right),time) and same selected OS1 time translation",
+      "status": "conditional_compiler_available"
+    },
+    {
+      "rank": 3,
+      "consumer": "R556/R551/R278 original physical covariance convergence and clustering",
+      "existing": "originalMarkedOS1CompilesToR556 / originalMarkedOS1SameSpectrumClustering",
+      "admission": "original literal W1/W3 physical estimates, bounded Wilson F/G/FG, selected R304 source distance and finite-continuum law",
+      "status": "conditional_compiler_available"
+    },
+    {
+      "rank": 4,
+      "consumer": "native R445 fine/coarse reflected original Wilson observable",
+      "existing": "originalCenteredReflectedOSIsOriginalR320 / originalMixedJIsSameCenteredReflectedOS; published Wilson RP owner",
+      "admission": "real Wilson R445 to rational CMP119/T5 source scalar/measure compatibility, native reflection-positive-time and published expectation convention",
+      "status": "open_same_source"
+    }
+  ],
+  "geometric_consumers": [
+    "originalOS1TimeTranslate",
+    "R332.supportDistanceIsTime",
+    "R304.physicalDistance",
+    "originalWilsonTimeTranslationSquare",
+    "originalFiniteCovarianceSquare"
+  ],
+  "nonpromotion": [
+    "finite centered covariance != uncentered OS Gram",
+    "real R445 expectation != rational R575 CMP119/T5 without comparison",
+    "published Wilson RP available != same-original all-word application inhabited",
+    "one R281 correlation producer != reconstructed physical H_OS without identification",
+    "optical temporal reflection != Euclidean OS reflection",
+    "Maxwell Cartan U1 != interacting SU(N) Clay YM gap"
+  ],
+  "kernel_checked": false,
+  "local_test": "source symbol/blob validation only",
+  "CI": false,
+  "current_heads_rechecked_20261121": {
+    "ym_p0_1536": "6c7d791b5745279ee86d4adcb1e0671c0f18ab6c",
+    "ym_main_1444": "3bb917bc2ca8e84cc5674c2a2f33f42acf536061",
+    "arithmetic_lean_114": "558eba38b15007102cd06856c239411b7e84f81d"
+  },
+  "bsd_crosspollination": {
+    "status": "verified_method_donor_only_no_YM_to_BSD_theorem",
+    "existing_source_owners": [
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "DASHI/Physics/YangMills/YMClayE1TimeKResidualCylinderWaveTransportExact.agda",
+        "ref": "6c7d791b5745279ee86d4adcb1e0671c0f18ab6c",
+        "role": "same original E1 changing-cutoff and Euclidean time covariance consumer",
+        "blob": "5e54a7f77a94ce5b9880740e65207281925f44f2",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "DASHI/Physics/YangMills/YMClayOriginalF19CanonicalConnectedWilsonBIDIExact.agda",
+        "ref": "6c7d791b5745279ee86d4adcb1e0671c0f18ab6c",
+        "role": "same original F19 normalized real Wilson covariance",
+        "blob": "4611a1df97a6828c3cdff0095fde43133dcee14c",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "DASHI/Physics/YangMills/YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda",
+        "ref": "6c7d791b5745279ee86d4adcb1e0671c0f18ab6c",
+        "role": "one finite-continuum covariance and all-pairs/time R281 spectral correlation consumer",
+        "blob": "47bf7b665dcff123611033fd4952a2ddece10a0b",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "DASHI/Physics/YangMills/YMClayE1VariableCutoffCylinderLimitExact.agda",
+        "ref": "3bb917bc2ca8e84cc5674c2a2f33f42acf536061",
+        "role": "existing original E1 variable-cutoff compiler, physical convergence premise",
+        "blob": "69ddb3507a849caf4bfaacc2e3a0fb7df8d7067a",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "Docs/roadmaps/ClayYMBSDRHOriginalMaxCutImplementation20261117.md",
+        "ref": "master",
+        "role": "existing canonical separate YM D2/BSD S5/RH boundary source audit",
+        "blob": "94be9e92ed31fbc7e95b857bc02aa328dc1cde30",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "path": "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md",
+        "ref": "master",
+        "role": "selected E:y2=x3-x classical strong BSD with original CM Rubin attribution",
+        "blob": "a456a92150b07d453f777a03007f3c85e29a1ee4",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "path": "Synthesis/MillenniumBSDHasseEulerConvergence.lean",
+        "ref": "main",
+        "role": "BSD Hasse/Euler summability theorem donor",
+        "blob": "eceaeb7f56e6fc9bca6b9afcb1d0d6f21342a5ec",
+        "exists": true
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "path": "Integration/EisensteinJZeroHasseEulerConvergenceWeldExact.lean",
+        "ref": "558eba38b15007102cd06856c239411b7e84f81d",
+        "role": "j=0 curve Hasse convergence source written after method transfer",
+        "blob": "f57b2405da3afe5d9d854b7b37536fc4638cea2c",
+        "exists": true
+      }
+    ],
+    "exact_relations": [
+      {
+        "from": "Lean main BSD Hasse/Euler proof on y²=x³−x",
+        "to": "Lean #114 j=0 y²=x³+1 Hasse/Euler",
+        "type": "source_verified_analytic_method_reuse",
+        "shared": "Hasse Frobenius absolute trace bounds, prime majorant summability and nonzero local denominator infinite product, for Re(s)>3/2; all-curve statements must be re-proved for j=0",
+        "not_claimed": "BSD theorem transported to a different curve, full L(E,s) identity or critical line result"
+      },
+      {
+        "from": "YM #1536 n=3 F19/R445 real connected Gibbs/Wilson covariance",
+        "to": "YM #1444 E1 time-k cylinder and OS1/R556/R281 consumers",
+        "type": "source_written_conditional_forward_compiler",
+        "shared": "same selected original Wilson measure and finite observables; one all-pairs/time covariance",
+        "not_claimed": "interacting E1 existence, uniform physical W1/W3 clustering or same-H strict gap"
+      },
+      {
+        "from": "YM mass-gap same-H OS spectral exclusion",
+        "to": "BSD selected curve L(E,1)≠0 and Sha leading coefficient",
+        "type": "cross_problem_methodological_comparison_only",
+        "shared": "demand same-object spectra, exact source provenance, no unjustified analytic or limit promotion",
+        "not_claimed": "a theorem linking YM H_OS spectral gap to BSD L-series/rank/Sha, equality of spectral objects or reduction of one Clay conjecture to the other"
+      }
+    ],
+    "type_boundaries": [
+      "YM original Wilson SU(N) real Gibbs data vs CMP119/T5 rational state",
+      "YM physical OS semigroup and reconstructed Hamiltonian vs arithmetic Frobenius/Hecke Euler products",
+      "BSD E:y²=x³−x vs CM j=0 E:y²=x³+1",
+      "Hasse/Euler convergence for Re(s)>3/2 vs analytic continuation or L(E,1) central point",
+      "published Wilson RP authority vs actual native application and continuum",
+      "scalar source/numerical regression vs formal Agda/Lean kernel proof"
+    ],
+    "reverse_witness_priorities": [
+      "YM: selected physical W1/W3 uniform cutoff and volume estimates -> R556/R551 -> SAME original R281 spectral dictionary and OS H",
+      "YM: native R445 real measure -> rational R575 source and time-indexed changing-cutoff original E1 source, not a new source",
+      "BSD: original curve elliptic/Hecke same-object full analytic local factor + global L-series plus period/Sha/2-descent, not new YM H",
+      "Cross-lane: reuse analytic lemmas and geometric/operator interfaces only after identifying exact source type; preserve countermodels and provenance"
+    ],
+    "no_new_ym_bsd_implication": true,
+    "agda_kernel_checked": false,
+    "lean_kernel_checked_for_new_integration": false
+  }
+}
