@@ -70,7 +70,7 @@ r=t/16
 assert s.simplify(((2*t-x)-t)/r+(x-t)/r)==0
 left=r**(-2)*freq((-x+t)/r)
 right=r**(-2)*freq(-((x-t)/r))
-assert left==right
+assert s.simplify(left-right)==0
 print("PASS actual scaled Fourier reflection S_(t,r) R_q = R_x S_(t,r); ordinate center 2t-x")
 
 print("PASS source scalar flags 32t, 64logN, 80=8x10, 800=8x10^2, 768=3x256")
