@@ -87,6 +87,17 @@ minimum V-diode guard:    +110785166541520070171 / 10^22
 
 Thus the actual physical nominal trajectory (not only a virtual OFF extension) continues through `3.54929275` with both diode active sets and spark-ON mode certified, without event-time sampling or reset. The bank threshold margin remains positive but is becoming small under first-order interval wrapping. A longer continuation to U-on near `4.275489` needs higher-order centred Taylor/Lohner integration or the sharper J27 original event-state interval, not a declaration that the loose Picard wrapping is an actual spark-OFF event.
 
+## Independent symbolic identity check
+
+A separate [locally executed, byte-identical SymPy checker](../../scripts/check_smith_filsinger_j28_saltation_sympy_20261123.py) (Git blob `5a6939966020f1be888448744e54c355a6ee6676`) constructs the **full 9×9** rank-one spark saltation matrix from the two original mode vector fields. The only switching differences are in bank-voltage and HF-current derivatives; with bank-guard normal `n=e_b`, exactly
+
+```
+S = I + (f_ON - f_OFF) nᵀ / (nᵀ f_OFF)
+det(S) = (nᵀ f_ON)/(nᵀ f_OFF) = post_bank_slope/pre_bank_slope.
+```
+
+All SymPy equalities pass by symbolic reduction, independently of the interval root/trajectory calculation. This is a finite-model saltation identity, not experimental evidence.
+
 ## Reproducibility and non-promotion
 
 - Committed source Git blob: `5ccec728d86deba172ff208ea846df17686308a8`, **byte-identical** to the locally executed Python source; run `python scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py` to print all 20 interval witnesses.
