@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-23",
+  "task": "P2-F4 Duga exact native script execution",
+  "script": "scripts/radiobio_p2_duga_receiver_work_sympy.py",
+  "git_blob_sha": "90e7bc10706a922f1b3f7243f770bfdd98e74c8d",
+  "verified_local_git_blob_sha": "90e7bc10706a922f1b3f7243f770bfdd98e74c8d",
+  "matching": true,
+  "local_runtime": "Python 3, SymPy 1.14.0",
+  "script_exit_code": 0,
+  "script_status": "PASS",
+  "independent_checks": {
+    "count": 10,
+    "status": "PASS",
+    "names": [
+      "four_disjoint_windows",
+      "window_coverage",
+      "transmit_duty",
+      "total_quiet",
+      "tail_quiet",
+      "positive_aperture",
+      "inverse_square_aperture",
+      "time_averaged_aperture",
+      "gain_flux_scaling_ambiguity",
+      "original_power_unknowable"
+    ]
+  },
+  "numeric_illustration": {
+    "carrier_frequency_khz": [
+      16450,
+      16490,
+      16570,
+      16390
+    ],
+    "per_carrier_aperture_m2": [
+      26.4301566551,
+      26.3020882468,
+      26.048728247,
+      26.6240202354
+    ],
+    "sum_isotropic_aperture_m2": 105.40499338429,
+    "per_carrier_time_duty_fraction": 0.04,
+    "aggregate_duty_fraction": 0.16,
+    "equal_flux_duty_weighted_aperture_m2": 4.21619973537
+  },
+  "safety": "All numerical values describe a synthetic equal-flux, unity-gain model; no calibrated RF measurements, original Duga power budget or biomedical response are derived.",
+  "original_data_replay": false,
+  "github_actions_or_ci_run": false,
+  "agda_kernel_checked": false
+}
