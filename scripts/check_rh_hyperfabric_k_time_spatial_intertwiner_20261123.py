@@ -77,8 +77,10 @@ assert sum(spectral.values())==27
 # The true full spatial hyperfabric is (P3^3)^3 = P3^9; not 27 sites.
 # Count all SOURCE edges without giant 19,683-by-19,683 matrices.
 nodes=product(range(3),repeat=9)
-def hyper_forward(v,mat=G):
-    return act(v[:3],mat)+act(v[3:6],mat)+act(v[6:],mat)
+g_table={v:forward(v) for v in V}
+gi_table={v:backward(v) for v in V}
+def hyper_forward(v,table):
+    return table[v[:3]]+table[v[3:6]]+table[v[6:]]
 assert 27**3==19683
 expected=3*54*27**2
 count=0
@@ -86,10 +88,9 @@ for v in nodes:
     for axis in range(9):
         if v[axis]<2:
             w=v[:axis]+(v[axis]+1,)+v[axis+1:]
-            gv,gw=hyper_forward(v),hyper_forward(w)
-            assert hyper_forward(gv,S.eye(3))==gv
-            assert hyper_forward(gv,Gi)==v
-            assert hyper_forward(gw,Gi)==w
+            gv,gw=hyper_forward(v,g_table),hyper_forward(w,g_table)
+            assert hyper_forward(gv,gi_table)==v
+            assert hyper_forward(gw,gi_table)==w
             assert gv!=gw
             count+=1
 assert count==expected==118098
