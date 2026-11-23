@@ -158,3 +158,23 @@ for L in (3,4,5,6):
                 assert not leaf_peel((base,cap)+tuple(w for i,w in enumerate(ws) if i!=j))
     print("PASS source original periodic L=%d: %d links, 3 spatial planes, all nonwrapping time distances" % (L,4*L**4))
 print("OPEN variable-L common-beta full W3. Verified family is original source geometry with OTHER plaquettes switched OFF.")
+
+
+# W3 full-source restoration genuinely requires an E[FGH] THREE-mark
+# observation for each residual original plaquette H=t_p. The original
+# F19 FOUR-moment 1,F,G,FG source determines the base covariance, but
+# NOT this external-coupling derivative. The existing FineTest adapter
+# can reuse the same original source for each of the 8 products:
+# 1,F,G,FG,H,FH,GH,FGH -- no new Haar/blocked Hamiltonian is needed.
+from fractions import Fraction
+bare = [(Fraction(1,4),f,g) for f,g in product((-1,1),repeat=2)]
+lawA = [(w,f,g,f*g) for w,f,g in bare]
+lawB = [(w/2,f,g,h) for w,f,g in bare for h in (-1,1)]
+def moment(law,power):
+    return sum(w*f**power[0]*g**power[1]*h**power[2] for w,f,g,h in law)
+for powers in ((0,0,0),(1,0,0),(0,1,0),(1,1,0),
+               (0,0,1),(1,0,1),(0,1,1)):
+    assert moment(lawA,powers)==moment(lawB,powers)
+assert moment(lawA,(1,1,1))==1 and moment(lawB,(1,1,1))==0
+print("PASS source observation sufficiency negative control: same 7 moments but FGH=1 versus 0")
+print("NEXT original CMP119/122 T must control the actual 1528 source H_p FGH cumulants + absolute W3 and OS")
