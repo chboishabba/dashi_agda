@@ -126,7 +126,7 @@ def advance(p,incident,phase,state=None,active=False,t0=0.,T=None,
     named['secondary_coupling_exchange'] = named.pop('coupling_return')
     named['storage_delta']=energy(y[:9],p)-initial
     named['net_wave']=named['incident']-named['outgoing']
-    named['spark']=named['legacy_spark_heat'] if p['mode']=='legacy' else named['hf_transfer']
+    if p['mode']=='legacy': named['spark']=named['legacy_spark_heat']  # Never alias HF transfer as useful spark output
     loss_keys=('copper1','copper2','diode','bleed','legacy_spark_heat','field_heat',
                'gap_heat','hf_coil_heat','freewheel_heat','hf_load')
     named['residual']=named['driver']+named['net_wave']-sum(named[k] for k in loss_keys)-named['storage_delta']
