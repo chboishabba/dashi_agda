@@ -12,6 +12,18 @@ SymPy checks the source quadrature equality at t and t+tau symbolically, not num
 
 The numerical J22 orbit has 11 repeated off/on pairs; the corrected tau map sees **two** events, off at about 3.49129272117 and on at about 3.51534047913. Their separation is 0.02404775795; the positive direction-corrected slopes are about 0.09203613 and 0.14773999. The state/mode returns at tau to numerical tolerance, not just T.
 
+## Exact isolated loaded-linear-port matching (new byte-identical executed SymPy source)
+
+A separate [J23 exact checker](../../scripts/check_smith_filsinger_j23_exact_clock_loaded_port_20261123.py), **local and committed Git blob SHA 9d74f761045197dfa85ee86f6a256bb685400b0f match byte-for-byte**, executed under SymPy 1.14.0. Alongside the exact 11-fold source clock and nonlinear-capacitor pointwise work identity, it proves a distinct forward/reverse loaded-wave **linear one-port surrogate**.
+
+With positive radiative, internal, useful-load and parasitic damping gr,gi,gl,gp, let G=gi+gl+gp. At resonance the isolated port has reflected fraction (G-gr)^2/(G+gr)^2, wave capture 4grG/(G+gr)^2, and useful-load fraction 4grgl/(G+gr)^2. Differentiate the last exact rational function:
+
+    d(eta_load)/dgr = 4gl(G-gr)/(G+gr)^3.
+
+Its global maximum over positive gr occurs at gr=G (loaded critical coupling), with **eta_load_max=gl/(gi+gl+gp)**. Exact unity requires gi=gp=0 as an ideal loss limit. Re-matching gr to gi alone (instead of gi+gl+gp) is not sufficient in the presence of a load.
+
+**Scope firewall:** this is a rigorous identity for the *isolated linear surrogate*, NOT an exact reduction of the original J18 coupled, rectified, hysteretic, nonlinear nine-state system, and it does not supply its frequency-dependent effective gl or gp. Its purpose is to identify the proper direction of a physical loaded-port matching reverse solve; no equality is assumed between its critical damping and the selected nonlinear numerical optimum gamma_rad=0.015.
+
 ## Independent local replay; numerical scope
 
 The attached local J22 independent NumPy/SciPy system was actually executed, and one-period J23 reduction, two-event saltation/shooting, high-accuracy energy replay, and finite five-parameter corner continuations were newly executed. The new native-source **J23 checker was committed and inspected but has not been byte-identically executed** against original J18–J22 committed source. Do not mark that native acceptance gate as completed. No GitHub CI/Actions or Agda kernel.
