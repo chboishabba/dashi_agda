@@ -982,3 +982,62 @@ an open reproducibility gate. See the canonical
 \`Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md\`
 for full receipt tables, computational model boundaries,
 source authority and next experimental controls.
+
+
+## 23 November — COMP5i/j: exact dyadic quotient factorization, measured 10M Pareto improvement
+
+The exact quotient/upper-bound consumer admits two further
+semantics-preserving scheduling identities, with all integer
+divisors positive and all numerator inputs nonnegative:
+
+```
+floor(N/(D*2^k)) = floor(floor(N/2^k)/D)
+N < (x+1)*D*2^k  iff  floor(N/2^k) < (x+1)*D.
+```
+
+COMP5i moves the dyadic division to the numerator using
+`mpz_fdiv_q_2exp`, removes explicit oversized scaled
+denominators, and releases the square-root radicand immediately
+after computing the exact integer sqrt. COMP5j further uses
+`10^d=2^d*5^d`, constructing `5^d` and shifting by
+`k-d` (guarded by `k>=d`). Neither changes requested
+precision, ordered Chudnovsky P/Q/T algebra, its exact finite
+tail enclosure, or the one-quotient strict upper-bound test.
+
+The **independently locally compiled, equivalent** native C++
+variants reproduce prior SHA256 decimal strings at 10k,
+100k, 500k, 1M, 5M and 10M. At 1M, a five-run
+alternating comparison measured COMP5h median 698.071ms,
+COMP5i median 624.521ms and 17,111,176 versus
+14,124,952 GMP managed-live peak bytes. At 10M a single
+COMP5j run measured 148,669,512 GMP live peak bytes
+(166,072 KiB VmHWM); the original tree-retaining source
+had recorded 243,421,624 bytes: **38.93% less measured
+GMP allocation** relative to that historical same-program
+comparison, not an all-hardware theorem. COMP5j vs COMP5i
+at 1M has overlapping timing distributions and therefore
+only a memory-side preference.
+
+Native source-relative implementations are committed as
+`scripts/check_pi_p0_dyadic_quotient_shift.cpp` and
+`scripts/check_pi_p0_power5_dyadic_certificate.cpp`.
+`scripts/check_pi_p0_cost_fibre_pareto.py` now verifies Git
+blob identity, compiles six original/candidate modes and checks
+the previous decimal-hash receipts; the two new integer
+identities have separate exhaustive bounded tests in
+`tests/test_pi_p0_dyadic_quotient_certificate.py`.
+The mathematical identities hold for all stated integer
+inputs; finite tests are negative controls and reproducible
+regressions, not the mathematical reason for equivalence.
+
+The commit/file readbacks succeeded, but there was NO
+byte-identical execution of the newly committed C++ on this
+runtime; only locally compiled source-equivalent prototypes
+were run. No Agda kernel verification, independent exact
+Chudnovsky analytic premise proof, Bishop same-original-real
+weld, or external SOTA benchmark is claimed. The formal
+execution-fibre cost-model owner remains Section 10 and
+`FibreProgramComplexityExact.agda`; actual GMP allocator and
+RSS receipts are empirical cost consumers. Full source/metrics
+and the P0 acceptance gate live in
+`Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
