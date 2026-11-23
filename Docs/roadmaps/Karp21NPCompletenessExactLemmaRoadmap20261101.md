@@ -1,5 +1,12 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 23 November 2026 — endpoint-address bit budget on original sparse certificate (F4 subtask only)
+
+[Four-lane max-cut](ClayNonYMRHFourLaneGeometricMaxCut20261123.md) and [exact finite script](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py) preserve the original Karp21SparseEndpointConsistencySoundExact, Karp21FinFreeEndpointScanComparisonCountExact and Karp21SparseGraphWordNPBoundaryExact owner precedence. For an m-edge signed graph with 2m endpoint observations, a complete predecessor-pair equality scan performs exactly m(2m-1) address comparisons. Fixed-width endpoint address equality costs at most ell=max(1,ceil(log2 n)) bit inspections, so the address-equality component alone is bounded by m(2m-1)*ell. A source-faithful canonical graph-word length L with separately justified m<=L and ell<=L implies a coarse 2L^3 bit-inspection bound for this subroutine. This does not bound physical list traversal, parser work, tape motions, two-lane signed score arithmetic, peak heap or full machine runtime.
+
+**Local acceptance:** 78,006/78,006 finite sparse-word extensions and signed-score equivalences, including inconsistent shared-endpoint rejections, plus n=2^k,m=1 full-vertex-vector negative controls. This is an additional binary-resource diagnostic, not a replacement for the original mathematical sparse-soundness theorem or a native kernel certificate. **K0, F1–F4, G2/G3/G4, E20/Cell-Bits, original 20 direct reductions, 21 original NP memberships and universal SATNotInP remain OPEN.**
+
+
 ## 2026-11-12 precise phase update (F1/F3 and G3; no terminal closure)
 
 **Phase F1.1 — physically implemented/source-written:** `Karp21NativeBitTapePhysicalMachineExact` defines the actual literal four-symbol tape machine with local `TableProgram` and per-physical-instruction cell accounting. `Karp21NativeGammaPrefixPhysicalSimulationExact` compiles only the *zero-prefix* of original `GammaBinaryNativePayload.scanZeros` into a literal one-work-tape table. Source-written physical `k+1` instruction, zero-count mark and size lemmas; 16 table-dispatch checks and 21,799-case/1,529,243-step local differential PASS. It is **not** full gamma payload, N21 machine or Agda kernel certification.
