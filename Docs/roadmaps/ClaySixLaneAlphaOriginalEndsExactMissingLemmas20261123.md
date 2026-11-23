@@ -1,5 +1,13 @@
 # Clay six-lane alpha — original endpoints, BIDI and exact remaining lemmas (23 November 2026)
 
+## 23 November 2026 — R568 alpha correction: exact Cauchy rates and two-sided C1/C2
+
+[New R568 signed rate-bucket BIDI and exact remaining-lemma audit](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md), [byte-identically executed local checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py), Git blob a76e8847a61521a4c4cb88fcc861ebb4a92fb85f. 64 full literal original ordered cubic-fibre rational tests; 726/1352/2250 incidences become 42/67/92 integer rate classes on k=(5,0,0), C=5/6/7, with reversible incidence-sidecar and no loss of source p/q/zero records. **Free vector carrier sign control**, not literal NS flow: source-allowed rates 13 and 17 give unlifted R541/R567 scalar F=46/16575>0 and rate-lift scalar L=−1/5<0, while the Cauchy kernel is positive definite. Do not infer sign transfer from positivity, and do not call a zero-R236-work spectator double-zero in R568.
+
+The exact missing NS analytic target is **both sides** of existing R653 C1/C2 signed sandwich 2S_delta+G+H <= 4F <= B on the same physical R240/R405/R406 source, with R565 scalar FTC/terminal and actual 3D continuum still independent. Reuse original R596/R624/R628/R634 self/external signed source decompositions and R687–R689 rate-lifted cancellation. No new Agda root or CI acceptance. All other five Clay lanes unchanged; the genuine original prize count remains 0/6.
+
+
+
 **Authority:** This source-to-endpoint alpha index supplements the canonical six-Millennium, NS, Karp, BSD, Hodge, GRH and YM roadmaps. It reuses the original theorem owners. Mathematical classical theorem, executed finite/SymPy check, source-written Agda/Lean candidate, local kernel acceptance and original Clay prize proof are distinct categories. In this PR no new original Clay endpoint is proved (0/6).
 
 ## Verified source and new local receipts
