@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Core.FriendlyjordiesGovernanceQuestionExact as March
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as World
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as Reviewed
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewBindingExact as Binding
 import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
 
 reusesGenericHumanReviewReceipt :
@@ -15,6 +16,10 @@ reusesGenericHumanReviewReceipt = refl
 reusesExactReviewItemBinding :
   Reviewed.exactReviewItemBindingReused ≡ true
 reusesExactReviewItemBinding = refl
+
+reviewReceiptAndBindingSameProposition :
+  Binding.reviewReceiptAndBindingSameProposition ≡ true
+reviewReceiptAndBindingSameProposition = refl
 
 legalEvidenceDecisionRequired :
   Reviewed.legalEvidenceDecisionRequiredForHistoricalReview ≡ false
