@@ -178,3 +178,14 @@ T_(b,sharp)=max(32768,16 max_(p∈{2,3};j=1..26)
 ```
 
 For t≥T_(b,sharp), `||h_p||1≤1/4` exactly as before; `T_(b,sharp)≤T_(b,old)` in the same chosen bump family. No NUMERIC plateau derivative evaluation is claimed, so this is an improved **effective symbolic threshold** and mass bound, not a certified numeric cutoff. Original same-source target `d_W(a)≥c_*a⁴/r⁶`, admissible four port amplitudes `ε≤r^-5`, prime source O(r^-6), sharpened full added zero+Gamma O(r^-6 logt), and P0 strict gap all retain their previous statuses. **The geometric improvement does not cancel the logarithm or force a sign.** Agda/Lean source modules added on open draft PRs #1533/#116; no kernels or CI.
+
+
+## 9. SUPERCEDING P0 E2 thresholds — exact original dyadic 32768 is NOT t cutoff; 208 is equal-split only
+
+[New full P0 source proof and executable exact rational ledger](RHP0GeomFlag32768EqualSplit208AdaptivePrimeE2Source20261123.md). The earlier `t≥32768` for source-selected-W target floor, and `T_b=max(32768,16 max(208 E_j B_2j)^(1/2j))` are **sufficient but unnecessary** and now superseded as controlling E2 admissions.
+
+Original `RHQuartic163840DyadicTailHXIntertwinerExact` defines **actual** 32768=8⁵=2¹⁵ dyadic cells WITH continuous residual in the q^-6 tail, `∫_8∞q^-6dq=1/163840`. This is a true geometric source, different from an arbitrary low-bound on t. The old 208 was 26 equal terms × the reciprocal chosen 1/8 norm allowance, and coincides arithmetically with punctured27 central8; change δ or the bump mass and the per-term denominator changes, so 208 is NOT canonical.
+
+For an explicit compact C∞ flat-top from `η=*Uniform[-1/(256n²),1/(256n²)]`, the actual primitive has support radius1/32, plateau radius1/64, L1=3/32 and `||b_p^(m)||₁≤4·256^(m−1)((m−1)!)²`; no undetermined derivative norms. The 9+8+9 original source E_j majorant gives the EXACT rational positive polynomial `H(r)=3/32+Σ_{j=1}^{26}4E_j256^(2j−1)((2j−1)!)²/r^(2j)` such that `||Q_t(D)b_p||₁≤H(r)`. H(31829)>1/4≥H(31830); H(32768)<1/7 at **radius** r=32768 (t=524288). These are integer threshold certificates for this source majorant, not true global optima.
+
+The ORIGINAL selected-W strip target floor improves to `d_W(a)>a⁴/(100r⁶)` whenever t≥19440, r≥1215 (rational polynomial `61r⁴−90000000r²−562500000>0`). Source 4-port tenth-order cost `C_i≤K H/r`, `K=6484375/7134511104`; `ε_i=κ_i/[r⁵(1+H)]`, |κ_i|≤1, gives `Σ|ε_i| C_i < 4K/r⁶ < 64m_W`, all heights t≥19440. As r→∞, attenuation→32/35. The unattenuated ε_i=r^-5 bound is sufficient from r≥26871 (t≥429936). **This RETIRES arbitrary 208/T_b prerequisites for mathematical local E2 positivity; it does not pay the original full signed FarExact/post-sixth or E3 independent strict zero/Gamma/prime gap.** Actual source kernel/Agda not run.
