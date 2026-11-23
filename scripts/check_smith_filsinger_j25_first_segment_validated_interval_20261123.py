@@ -112,7 +112,11 @@ def f(t0,t1,x,on=True):
     return [di,dj,du,dv,db,dq,dr,dih,dc]
 
 def box_center(c,r):return [I(F(str(v))-r,F(str(v))+r) for v in c]
-ROOT=json.loads((Path(__file__).resolve().parents[1] / 'Artifacts/smith-filsinger/j23_fundamental_11fold_32corner_branch_continuation_20261123.json').read_text())['central']['numerical_two_event_root']
+# Decimal rational seed from the original J23 two-switch numerical receipt.
+# An exact rational centre, NOT a certified periodic fixed point.
+ROOT=['-0.04585851023046709','0.0967120405698972','1.9865816276887802',
+      '1.1890650910077614','2.3839347955003958','5.502919318568432',
+      '-5.781120275385947','-0.7451738522543331','-1.5585226674954609']
 
 def run(h=F(1,11)):
     assert h<=F(1,11)
