@@ -65,6 +65,18 @@ for x in YM:
         assert sum(a!=b for a,b in zip(x,mid))==1
         assert sum(a!=b for a,b in zip(mid,y))==1
 assert all((-1)**sum(a!=0 for a in x+(0,)*5)==1 for x in YM)
+# Binary support is sufficient for this special k=0 eigenphase,
+# but after the true SOURCE Singer chart G, two signed q labels with
+# the SAME binary support have DIFFERENT transported eigenphases.
+G=s.Matrix([[-1,-1,0],[0,-1,-1],[-1,-1,-1]])
+qplus=s.Matrix([1,1,0]);qminus=s.Matrix([1,-1,0])
+def support(v):return sum(int(z)%3!=0 for z in v)
+assert support(qplus)==support(qminus)==2
+assert (-1)**support(G.T*qplus)==-1
+assert (-1)**support(G.T*qminus)==1
+# Thus stage k must be carried, and (at k=1) binary support loses
+# signed interference information needed for this SAME finite consumer.
+
 # Consumer-specific factorization: sign/support suffices for the
 # special U(pi) eigenphase; NOT the original NS dyadic magnitude.
 def u_pi_consumer(sign):return (-1)**sum(x!=0 for x in sign)
