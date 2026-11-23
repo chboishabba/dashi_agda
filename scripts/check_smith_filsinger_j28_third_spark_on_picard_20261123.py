@@ -117,6 +117,7 @@ def run():
     end=F('0.04');h=F('0.002');s=F(0)
     witnesses=[]
     bank_at_0022=None;bank_at_0026=None
+    event_tube=None
     while s<end:
         s1=min(s+h,end)
         e,B,D,it=picard_step(X,t0lo+s,t0hi+s1,s1-s)
@@ -126,6 +127,8 @@ def run():
         witnesses.append({'s0':str(s),'s1':str(s1),'picard_iterations':it,'U_guard':gu.fl(),'V_guard':gv.fl(),'bank_slope':D[4].fl(),'bank_end':e[4].fl(),
           'U_guard_grid':[str(gu.a),str(gu.b)],'V_guard_grid':[str(gv.a),str(gv.b)],
           'bank_slope_grid':[str(D[4].a),str(D[4].b)]})
+        if s>=F('.022') and s1<=F('.026'):
+            event_tube=B if event_tube is None else [x.hull(y) for x,y in zip(event_tube,B)]
         if s1==F('.022'):bank_at_0022=e[4]
         if s1==F('.026'):bank_at_0026=e[4]
         X=e;s=s1
@@ -133,6 +136,15 @@ def run():
     # The root is strictly after s=0.022 and before s=0.026 by
     # exact outward-grid endpoint enclosures (not floating-point tests).
     assert bank_at_0022.b<P['Von'].a and bank_at_0026.a>P['Von'].b
+    assert event_tube is not None
+    # At ON guard, the bank coordinate is exactly Von, not its broad tube range.
+    event_tube[4]=I('.006')
+    jv=(event_tube[3]-event_tube[4]-P['Vd'])/P['Rd']
+    pre=(jv-P['Gbleed']*event_tube[4])/P['Cb']
+    post=(jv-P['Gbleed']*event_tube[4]-event_tube[7])/P['Cb']
+    assert pre.a>0 and post.b<0, ('bad spark saltation slopes',pre.fl(),post.fl())
+    determinant=post/pre
+    assert determinant.b<0
     return {'status':'PASS_EXACT_RATIONAL_J28_THIRD_EVENT_EXISTENCE_UNIQUENESS',
       'prior_state':'entire J27 9/9 source-validated J24 spark-OFF box intersected with exact b=Voff',
       'source_time_uncertainty':[str(t0lo),str(t0hi)],'virtual_off_duration':str(end),
@@ -140,6 +152,11 @@ def run():
       'bank_at_start_exact':'.0018','bank_at_end':X[4].fl(),
       'spark_ON_bracket_model_time':['3.51329269','3.51729275'],
       'bank_at_s_0022_grid':[str(bank_at_0022.a),str(bank_at_0022.b)],
+      'certified_spark_ON_state_tube_grid':[[str(z.a),str(z.b)] for z in event_tube],
+      'spark_ON_pre_bank_slope_grid':[str(pre.a),str(pre.b)],
+      'spark_ON_post_bank_slope_grid':[str(post.a),str(post.b)],
+      'spark_ON_saltation_determinant_grid':[str(determinant.a),str(determinant.b)],
+      'spark_ON_saltation_orientation_reversing':True,
       'bank_at_s_0026_grid':[str(bank_at_0026.a),str(bank_at_0026.b)],
       'minimum_guard_U_upper_grid':str(max(w['U_guard_grid'][1] for w in witnesses)),
       'minimum_guard_V_lower_grid':str(min(w['V_guard_grid'][0] for w in witnesses)),
