@@ -463,3 +463,131 @@ C++ sources before running. The workload at 10M with
 four modes * five repetitions is substantial. The
 formal Agda cost-weld and independent mathematical
 Bishop same-original-real bridge remain OPEN.
+
+
+## COMP5i/COMP5j — exact dyadic quotient relocation and decimal-power cancellation (23 November 2026)
+
+### Exact consumer algebra — not a floating approximation
+
+The COMP5h certificate contains the exact low-side quotient
+
+```text
+x = floor( N_L / (D_L * 2^k) )
+```
+
+with positive `D_L`, nonnegative `N_L`, and positive sqrt scaling `2^k`.
+Its upper test is the strict integer inequality
+`N_U < (x+1) * D_U * 2^k`.
+The following identities are exact for all integers `N>=0`, `D>0`,
+`k>=0`, `x>=0`:
+
+```text
+floor(N / (D*2^k)) = floor(floor(N/2^k) / D)
+N < (x+1)*D*2^k  iff floor(N/2^k) < (x+1)*D
+```
+
+**COMP5i** implements both shifts using GMP's `mpz_fdiv_q_2exp`
+and drops the huge explicit dyadic denominators. It also scopes the
+`10005 * 2^(2k)` square-root radicand so it does not overlap the
+terminal quotient products. It retains original ordered P/Q/T merges,
+exact sqrt lower/upper bounds and the strict upper certificate.
+No change to the Chudnovsky mathematical premise or its series bound.
+
+**COMP5j** retains that exact certificate, but additionally cancels
+the known factor `2^d` from `10^d=2^d*5^d` before building terminal
+numerators: construct `5^d`, and shift by `k-d` (with explicit guard
+`k>=d`) rather than construct `10^d` and shift by `k`.
+The full output still represents the original `10^d` decimal
+scaling; this is exact common-factor cancellation, not a reduction
+in requested decimal precision.
+
+### Execution evidence — independent local source-equivalent builds
+
+Local sources `/mnt/data/pi_comp5i_shift.cpp` and
+`/mnt/data/pi_comp5j_factor5.cpp` were compiled natively with
+`g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto`. The new committed sources
+`scripts/check_pi_p0_dyadic_quotient_shift.cpp` and
+`scripts/check_pi_p0_power5_dyadic_certificate.cpp`
+are transformations of the pinned GitHub COMP5h code, read back
+successfully, **but have not been compiled from their exact GitHub
+bytes**. That is an open source-replay gate.
+
+The local native GMP source-equivalent versions emitted the
+already pinned historical exact π SHA256s for 10k, 100k, 500k,
+1M, 5M, and 10M decimal places; the 1M hash was
+`130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18`,
+and the 10M hash was
+`ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999`.
+Each reported one successful exact upper-bound certificate.
+
+In addition, a locally executed standalone finite integer regression
+tested 13,878 (n,dyadic-shift,denominator) cases with 4 strict upper
+thresholds each, and 216 independent decimal-power cancellation
+triples with 3 upper thresholds each: both tests PASS.
+`tests/test_pi_p0_dyadic_quotient_certificate.py` stores the
+regression. The finite test is supporting validation, not a replacement
+for the all-integer proof of the identities above.
+
+Peak measured GMP-managed allocated bytes, single isolated process
+for 5M and 10M; these figures do NOT account for non-GMP heap or
+reproduce a formal kernel cost theorem:
+
+| digits | COMP5h scoped | COMP5i dyadic shift | COMP5j 5-power factor |
+|---:|---:|---:|---:|
+| 100,000 | 1,411,776 | 1,121,976 | 1,096,976 |
+| 1,000,000 | 17,111,176 | 14,124,952 | 13,874,952 |
+| 5,000,000 | 89,695,208 | 74,453,568 | 73,203,568 |
+| 10,000,000 | 181,920,552 | 151,169,512 | 148,669,512 |
+
+At 10M the final COMP5j source-equivalent implementation reduces
+GMP peak by **18.28% relative to COMP5h** and **38.92% relative to
+the earlier P/Q/T-retaining baseline peak** of 243,421,624 bytes.
+One process VmHWM observation at 10M for COMP5j is 166,072 KiB,
+versus 195,172 KiB for COMP5h; do not infer exact 1-to-1
+GMP/RSS accounting.
+
+Time comparison: five alternating independent-process 1M-digit runs
+for COMP5h and COMP5i gave medians **698.071 ms vs 624.521 ms**
+with observed ranges **669.36–706.18 ms** and
+**595.96–647.41 ms**, respectively; no range overlap in that
+sample, but not cross-device SOTA or general statistical proof.
+Five COMP5i-vs-COMP5j 1M runs gave medians **617.43 ms vs 617.80 ms**,
+overlapping; the 5-power improvement is principally memory-side.
+One 10M run gave COMP5i 10.535s and COMP5j 10.361s;
+these do not establish a robust runtime improvement. The
+candidate outputs and allocator measurements are attributable
+to independent local builds with callbacks installed before GMP
+allocation; separate-phase costs and hot/cold matched machine
+comparators remain P0 work.
+
+### Current owner and admission boundary
+
+Original performance/correctness owners are
+`FibreProgramComplexityExact.agda` (path-indexed sum/peak),
+`EfficientRecoverableQuotientExact.agda` (quotient/receipt/reopen),
+`StreamingResidencyComplexityErrorDNABidiExact.agda`
+(same-consumer streaming), and Paper 9 section 10 bit-cost model.
+The exact finite quotient identities show why
+intermediate high-width denominators are **not consumer-sufficiently
+necessary** once the shift can be moved into a numerator quotient.
+Runtime and memory results are measured execution-fibre *receipts*,
+not kernel-checked cost theorems.
+
+The PR's `scripts/check_pi_p0_cost_fibre_pareto.py` now includes
+the original baseline, in-place, COMP5g, COMP5h, COMP5i and COMP5j
+variants as separately compiled and Git-blob-pinned candidates.
+Before promoting a production default: execute the exact checked-out
+GitHub source, verify all pinned hashes, measure independent processes
+with controlled cold/hot order and process VmHWM/GMP allocation,
+and add end-to-end certificate verification (not hash equality alone).
+Classical Chudnovsky analytic identity/tail, formal Bishop same-real
+bridge, Agda kernel and external world SOTA comparison remain OPEN.
+
+Recommended bounded exact-source command, run on PR checkout:
+
+```bash
+python3 -m unittest tests/test_pi_p0_dyadic_quotient_certificate.py
+python3 scripts/check_pi_p0_cost_fibre_pareto.py \
+  --digits 100000 1000000 --reps 5 \
+  --out /tmp/pi-p0-fibre-sixway.json
+```
