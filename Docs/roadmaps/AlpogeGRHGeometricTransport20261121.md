@@ -1,3 +1,23 @@
+## 23 November 2026 — P0 max-cut: true 7-axis native 3B×SSP C₂⁷, original analytic Gamma reflection, complete outer-tail bound
+
+**Reuse current owners; full details:** [source and attribution proof ledger](../proofs/RHQuartic128NativeCechC2MonsterNormalization20261123.md). PR #1533 now extends `DASHI/Analysis/RHQuartic128Monster3BSSPSignedC2IntertwinerExact.agda`: 128 faithful action masks on the native `F₃⁶ × SignedSSP` *model* carrier; seven independent coordinate sign inversions (six X6 and one SSP) with `maskActLaw`, `actOnNativeSignedX6Law`, `encodeIntertwinesAllSeven`, `nativeActionFaithfulOnEncodedPatch`, and selected endpoint **negative control** each generator sends 128→64. Hence not seven independent symmetries of the actual fixed original RH `sampleTest`. The native Monster 3B 3-group itself cannot provide such involutions; this is a group of **model-coordinate sign automorphisms**, not an identified Monster group actor. Signed neutral retained, not in binary patch. Three TOE roots continue to import owner; no ESD changes.
+
+**Actual analytic same-object reflection:** The existing RH `RiemannG2CanonicalHXToHTCompilerExact` already builds target translation/modulation from H_X, and original Lean `FourthOrderQuotient.compactCosineTransform_even`, `signedOrdinateTestDeriv_center_reflection` plus `FourierMass.fullMuVariation` yield the genuine `S_{t,r}R_q=R_x S_{t,r}`, `r=t/16`, `R_x` physical ordinate reflection x→2t−x, `R_q` continuous Fourier q→−q. Thus exact V=(8/t)∫C_W(q)[μ(t+tq/16)+μ(t−tq/16)−2μ(t)]dq, with full q-line retained. Dirichlet conductor cancels in the paired variation for fixed κ, but stays as 64logN origin mode; κ, χ actual zero config and original source remain separate. This is the **actual original Gamma C₂** analytic intertwiner, not a fabricated seven-way physical action.
+
+**New full-tail certificate** from upstream Anthropic `GammaFacts.Mu` monotonic/even / μ(0)>−1 and explicit parity-uniform `GammaFactsChiProof` 10/π Stirling at only t(1+|q|/16)≥t≥200. Let L6=||P_W⁽⁶⁾||₁; J6=1/163840, J5=1/16384. Including q=±16 and all outside |q|>8,
+```
+|V_tail| ≤ (32L6/t)[(1/163840)(1+log(t/(2π))/(2π)+10/(πt²))
+                     +1/(524288π)].
+|V_W−G_W/(12πt²)| ≤ L6/(49152πt) + M4core/(24576πt)
+                     +800 M0core/(πt³) + (same V_tail upper bound).
+```
+All source `C_W` and original `W(t)` retained. New effect: entire Gamma variation is bounded **conditionally on actual L6(W)**; outer Gamma tail is no longer completely unestimated. **Still unpaid:** the source's selected W chooses R=min(1,R0,dTarget(t),dOrigin(t))/2; this is NOT an existing t-uniform lower bound on R. Uniform sixth derivative norm and independent signed zero-side margin remain strictly open; earlier fourth-Lipschitz K0 does not automatically supply sixth L1 regularity uniformity.
+
+**Direct strict P0 terminal check:** with H−I=2D from exact original Cutset/NMu, terminal gap H+S−(4d+I)=2D+S−4d; for target pair D≥2d, S≥0, so gap≥S≥0. All Gamma recuts are algebraically consistent and cannot produce negative gap by themselves. Thus strong **fail-closed** result, not RH. Exact flags: 80=8×10, 800=8×10² so log₁₀80=1+log₁₀8, log₁₀800=2+log₁₀8 but this is number-base accounting, not a Γ source log8; 32t comes from Fourier quadratic moment, 64logN is conductor origin shift, 768=3×16² from exact q^-4 integral. No semantic numerology.
+
+**Local check:** independent SymPy/mpmath [`check_rh_128_seven_independent_gamma_fulltail_20261123.py`](../../scripts/check_rh_128_seven_independent_gamma_fulltail_20261123.py) equivalent run PASS (128 masks, 2 parity×3 heights×12 q including q=16×4 conductors, terminal no-go). Original full repo committed script was not independently executed after upload; no Agda/Lean/CI run.
+
+---
 ## 23 Nov 2026 — RH 128 seven-bit six-face Cech and native 3B/SSP signed involution
 
 **Source first:** original 128=16x2x4 from selected FourierMass theorem, with 32t/64logN/800/768 exact factors and strict P0 sign firewall retained. [New full proof/attribution ledger](../proofs/RHQuartic128NativeCechC2MonsterNormalization20261123.md). Native reusable sources: `Base369Ternary27BoundaryNerveExact` (6 faces/12 edges/8 corners), `Base369Ternary27FaceHypercubeCechGluingBidiExact`, `ActualFaceHypercubeGluingFromSharedSliceExact`, `TernaryThirteenPantsSheafGluingTransportExact`, `Monster3BFiniteHeisenbergGeneratorsExact` (native X6), `SignedSSPFRACTRANWeaveExact` (signed multiplicity). Existing H05 RH Fourier `C4` no-descent/smoothing counterexample preserved.
