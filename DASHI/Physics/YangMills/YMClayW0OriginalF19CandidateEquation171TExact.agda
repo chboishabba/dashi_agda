@@ -90,6 +90,49 @@ module _
       integrand coarse
   candidateMassIsExistingOriginalF19 integrand coarse = refl
 
+  ----------------------------------------------------------------------
+  -- W0 geometry correction: one FIXED original Wilson density and a
+  -- FUNCTIONAL argument. Four marks do NOT define four physical Ts.
+  -- The underlying F19 Haar fibre and its 896 spectator integral are
+  -- identical for every observable, including F and G.
+  ----------------------------------------------------------------------
+
+  sourceFixedWilsonDensity : FineTest
+  sourceFixedWilsonDensity =
+    Original.originalFineWilsonWeight
+      theory traceData exponential beta source bilateral linear
+
+  sourceFixedWilsonT :
+    FineTest → SlowField → ℝ
+  sourceFixedWilsonT observable coarse =
+    candidateF19Mass
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear
+        observable)
+      coarse
+
+  -- Keep the actual W*F*G multiplication association selected by
+  -- Original.originalWilsonFineFG. No fake independence or implicit
+  -- associativity proof is required to retain its exact moment.
+  sourceFixedWilsonTTwoMarks :
+    FineTest → FineTest → SlowField → ℝ
+  sourceFixedWilsonTTwoMarks left right coarse =
+    candidateF19Mass
+      (Original.originalWilsonFineFG
+        theory traceData exponential beta source bilateral linear
+        left right)
+      coarse
+
+  -- Generic Eq171 semantic record accepts an evaluated integrand.
+  -- This is only a carrier adapter: its field name
+  -- equation171ExponentialDensity does NOT prove that a marked
+  -- spectator marginal is Bałaban's localized exponential action.
+
+  originalF19UnmarkedEquation171 :
+    Eq171.CMP122Equation171TOperationSemantics FinePairField SlowField
+  originalF19UnmarkedEquation171 =
+    originalF19CandidateEquation171 sourceFixedWilsonDensity
+
   -- The existing real-valued Eq.(1.71) record can express this
   -- candidate Haar constrained T without any rational embedding.
   -- Scale is intentionally inert at this original side-four cutoff.
@@ -135,23 +178,13 @@ module _
         theory traceData exponential beta source bilateral linear)
 
   sourceKF : FineTest → SlowField → ℝ
-  sourceKF left =
-    candidateF19Mass
-      (Original.originalWilsonFineF
-        theory traceData exponential beta source bilateral linear left)
+  sourceKF left = sourceFixedWilsonT left
 
   sourceKG : FineTest → SlowField → ℝ
-  sourceKG right =
-    candidateF19Mass
-      (Original.originalWilsonFineF
-        theory traceData exponential beta source bilateral linear right)
+  sourceKG right = sourceFixedWilsonT right
 
   sourceKFG : FineTest → FineTest → SlowField → ℝ
-  sourceKFG left right =
-    candidateF19Mass
-      (Original.originalWilsonFineFG
-        theory traceData exponential beta source bilateral linear
-        left right)
+  sourceKFG left right = sourceFixedWilsonTTwoMarks left right
 
   -- The same Haar reindex theorem proves each source column.
   physicalFineZEqualsCoarseCandidateT :
