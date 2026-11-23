@@ -26,17 +26,35 @@ def energy_range(d):
             x[0][1]+x[1][1]-sum(y[0] for y in x[2:]))
 
 def admit(d):
+    """Conservation checks are not independent empirical source verification.
+
+    Never promote the caller's 'SI' label or placeholder strings to a measured
+    source-to-terminal observation. Physical admission needs external provenance
+    and metrology review outside this mathematical regression.
+    """
     missing=[k for k in FIELDS if d.get(k) is None]
     if missing:return {'admitted':False,'reason':'MISSING_PHYSICAL_BOUNDARY','missing':missing}
     if d.get('units')!='SI':return {'admitted':False,'reason':'UNMEASURED_SI_CALIBRATION'}
     if not d.get('same_apparatus_cycle'):return {'admitted':False,'reason':'NO_SHARED_CYCLE'}
-    if d['incident'][0]<=0:return {'admitted':False,'reason':'ZERO_INCIDENT_DENOMINATOR'}
-    z=energy_range(d)
+    try:
+        intervals=[d[k] for k in ('incident','controller','reflected','load','heat','storage')]
+        if not all(isinstance(x,(tuple,list)) and len(x)==2 and all(
+            isinstance(v,Q) for v in x) and x[0]<=x[1] for x in intervals):
+            return {'admitted':False,'reason':'MALFORMED_RATIONAL_INTERVAL'}
+        if any(d[k][0]<0 for k in ('incident','controller','reflected','load','heat')):
+            return {'admitted':False,'reason':'NEGATIVE_PASSIVE_WORK'}
+        if d['incident'][0]<=0:return {'admitted':False,'reason':'ZERO_INCIDENT_DENOMINATOR'}
+        z=energy_range(d)
+    except (KeyError,TypeError,ValueError,ZeroDivisionError):
+        return {'admitted':False,'reason':'INVALID_MEASUREMENT_RECORD'}
     if not z[0]<=0<=z[1]:return {'admitted':False,'reason':'SIGNED_LEDGER_INCOMPATIBLE'}
-    return {'admitted':True,'receiver_efficiency_interval':
-            [str(d['load'][0]/d['incident'][1]),str(d['load'][1]/d['incident'][0])],
+    eta=[str(d['load'][0]/d['incident'][1]),str(d['load'][1]/d['incident'][0])]
+    return {'admitted':False,'mathematically_consistent':True,
+            'reason':'PHYSICAL_SOURCE_VERIFICATION_NOT_PERFORMED',
+            'synthetic_or_unverified_record':True,
+            'receiver_efficiency_interval_conditional':eta,
             'energy_residual_interval':[str(v) for v in z],
-            'source_only':d['controller']==(Q(0),Q(0))}
+            'source_only_controller_zero':d['controller']==(Q(0),Q(0))}
 
 def test():
     g=S.symbols('g0:4',real=True)
@@ -73,8 +91,8 @@ def test():
                 clock='synthetic',conversion='synthetic',source_identity='synthetic',
                 calibration='synthetic',units='SI',same_apparatus_cycle=True)
     good=admit(sample)
-    assert good['admitted'] and good['source_only']
-    assert good['receiver_efficiency_interval']==['49/101','51/100']
+    assert not good['admitted'] and good['mathematically_consistent'] and good['source_only_controller_zero']
+    assert good['receiver_efficiency_interval_conditional']==['49/101','51/100']
     for key in FIELDS:
         d=sample.copy();d.pop(key)
         assert not admit(d)['admitted'],key
@@ -87,6 +105,9 @@ def test():
     d=sample|{'incident':iv(0,0)}
     assert admit(d)['reason']=='ZERO_INCIDENT_DENOMINATOR'
     assert not admit({k:None for k in FIELDS})['admitted']
+    assert not admit(sample | {'calibration':'verified'})['admitted']
+    assert not admit(sample | {'storage':(Q(1),Q(-1))})['admitted']
+    assert not admit(sample | {'heat':(Q(-1),Q(0))})['admitted']
     return {'status':'PASS','scope':'EXACT_SYNTHETIC_BOUNDARY_ONLY',
             'sympy_version':S.__version__,'sources':CHANNELS,
             'single_receiver_rank':1,'independently_metered_rank':4,
@@ -95,8 +116,9 @@ def test():
             'duga_illustrative_on_fraction':'4/25',
             'duga_illustrative_off_fraction':'21/25',
             'synthetic_example':good,
+            'physical_admission_never_inferred_from_self_reported_strings':True,
             'missing_field_negative_controls':len(FIELDS),
-            'other_fail_closed_controls':4,
+            'other_fail_closed_controls':7,
             'physical_Filsinger_source_admitted':False,
             'gravity_source_admitted':False,'github_ci':False}
 
