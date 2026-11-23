@@ -29,7 +29,7 @@ def check():
     rin=r0-mp.mpf(".012");rfar=r0+mp.mpf(".1")
     rbrane=mp.log(12)
     assert rbrane+eps<rin<r0<rfar
-    assert rfar-eps-r0==mp.mpf(".06")
+    assert abs((rfar-eps-r0)-mp.mpf(".06"))<mp.mpf("1e-65")
     def source_t(delta):
         return mp.findroot(lambda x:f(x)-T0-delta,(1,mp.mpf("1.12")))
     def cone(delta,rrecv,rsource):
