@@ -129,7 +129,7 @@
   "banach_krawczyk_self_map_proved": false,
   "elevenfold_exact_periodic_monodromy_not_yet_certified": true,
   "full_uniform_five_parameter_family_proved": false,
-  "repository_source_note": "J29 three source checkers and J30 two new scripts are in locally executed source packet and still need native GitHub script installation; GitHub research and machine receipt readbacks are distinct from source-byte readback",
+  "repository_source_note": "PASS: all five locally executed J29 and J30 executable source files, plus both required J29 sixth-root checkpoints, are now installed on original PR #1537 with byte-identical verified Git blobs. No GitHub CI.",
   "local_executed_code_hashes": {
     "j30_section_projection_sha256": "0a17c4c8dde41851d6ba6b74d0464c304691f3bfa09035d061c2729e88e9536f",
     "j30_no_diode_return_sha256": "1db5f07cdf4f0c99cdc14523c8384da4da8ce165fe2e7f48ca73cbffdf6238cb"
@@ -140,5 +140,22 @@
     "Validated centre return defect below 8.42406e-9 and Jacobian error below 0.001 with contraction",
     "Banach/Krawczyk periodic existence, then original T=11*tau composition",
     "Physical source/pin/measurement separate"
+  ],
+  "repository_source_installation_status": "PASS_BYTE_IDENTICAL_J29_3_J30_2_INPUTS_2",
+  "repository_blobs_verified": {
+    "scripts/j29_affine_enclosure.py": "f7ed3c9d6cb400d1e894c3c5909ca63993961da3",
+    "scripts/j29_u_only.py": "94bf554898e15a7b548ad889be69d64d457513b9",
+    "scripts/j29_uv_active.py": "672ad36258811708cdb28544b04167d4b6a4abe1",
+    "scripts/j30_section_projection.py": "a5f9228756a6984147bc475dc9ae4dbc66fff00e",
+    "scripts/j30_no_diode_return.py": "7f5400310adc29159c9a6d2ac4accac460c7b205",
+    "receipts/J29_U_60.json": "0212a6cc21aed27c17d9b8a9219c4bfd19c21b8b",
+    "receipts/J29_SIXTH_MVT_REFINED.json": "f29c1536f388085e6dbc7ce0140f3bbb736bef07"
+  },
+  "replay_cli": [
+    "python scripts/j30_section_projection.py",
+    "python scripts/j30_no_diode_return.py handoff --out receipts/J30_U_HANDOFF.json",
+    "python scripts/j30_no_diode_return.py advance --input receipts/J30_U_HANDOFF.json --count 10 --out receipts/J30_10.json",
+    "Continue advance in checkpointed chunks of <=10 steps until nsteps=78, reusing each generated --out as next --input.",
+    "python scripts/j30_no_diode_return.py finish --input receipts/J30_78.json --out receipts/J30_TAU_RETURN.json"
   ]
 }
