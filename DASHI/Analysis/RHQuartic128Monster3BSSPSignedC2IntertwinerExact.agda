@@ -181,3 +181,197 @@ neutralInversionFixed = refl
 -- actual existing-carrier map. It does not supply the missing original
 -- analytic source realization or a Monster group automorphism.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- C2^7: SEVEN INDEPENDENT GENERATORS ON EXISTING FINITE MODEL CARRIERS.
+-- Earlier simultaneous complement/negation is the all-ones group element.
+-- Faithfulness is proved by the unique action on the all-false source.
+-- The target action consists of six coordinate sign automorphisms
+-- of the native F3^6 Heisenberg COORDINATE and the seventh signed SSP
+-- inversion. NOT an action of Monster 3^(1+12) itself: a 3-group has
+-- no nontrivial involutions. NOT independent RH analytic operations.
+------------------------------------------------------------------------
+
+xorBit : Bool → Bool → Bool
+xorBit false b = b
+xorBit true b = flipBit b
+
+xorBitAssociative : (a b c : Bool) →
+  xorBit a (xorBit b c) ≡ xorBit (xorBit a b) c
+xorBitAssociative false false false = refl
+xorBitAssociative false false true = refl
+xorBitAssociative false true false = refl
+xorBitAssociative false true true = refl
+xorBitAssociative true false false = refl
+xorBitAssociative true false true = refl
+xorBitAssociative true true false = refl
+xorBitAssociative true true true = refl
+
+xorBitCommutes : (a b : Bool) → xorBit a b ≡ xorBit b a
+xorBitCommutes false false = refl
+xorBitCommutes false true = refl
+xorBitCommutes true false = refl
+xorBitCommutes true true = refl
+
+xorBitRightFalse : (a : Bool) → xorBit a false ≡ a
+xorBitRightFalse false = refl
+xorBitRightFalse true = refl
+
+maskXor : RH128.BinarySeven → RH128.BinarySeven → RH128.BinarySeven
+maskXor (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (RH128.binarySeven na0 na1 na2 na3 nb0 nc0 nc1) =
+  RH128.binarySeven
+    (xorBit ma0 na0) (xorBit ma1 na1) (xorBit ma2 na2) (xorBit ma3 na3) (xorBit mb0 nb0) (xorBit mc0 nc0) (xorBit mc1 nc1)
+
+maskAct : RH128.BinarySeven → RH128.BinarySeven → RH128.BinarySeven
+maskAct = maskXor
+
+allFalse : RH128.BinarySeven
+allFalse = RH128.binarySeven false false false false false false false
+
+maskActAtFalse : (mask : RH128.BinarySeven) →
+  maskAct mask allFalse ≡ mask
+maskActAtFalse (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1)
+  rewrite xorBitRightFalse ma0
+        | xorBitRightFalse ma1
+        | xorBitRightFalse ma2
+        | xorBitRightFalse ma3
+        | xorBitRightFalse mb0
+        | xorBitRightFalse mc0
+        | xorBitRightFalse mc1 = refl
+
+maskActLaw : (m n state : RH128.BinarySeven) →
+  maskAct m (maskAct n state) ≡ maskAct (maskXor m n) state
+maskActLaw (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (RH128.binarySeven na0 na1 na2 na3 nb0 nc0 nc1) (RH128.binarySeven sa0 sa1 sa2 sa3 sb0 sc0 sc1)
+  rewrite xorBitAssociative ma0 na0 sa0
+        | xorBitAssociative ma1 na1 sa1
+        | xorBitAssociative ma2 na2 sa2
+        | xorBitAssociative ma3 na3 sa3
+        | xorBitAssociative mb0 nb0 sb0
+        | xorBitAssociative mc0 nc0 sc0
+        | xorBitAssociative mc1 nc1 sc1 = refl
+
+maskXorCommutes : (m n : RH128.BinarySeven) →
+  maskXor m n ≡ maskXor n m
+maskXorCommutes (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (RH128.binarySeven na0 na1 na2 na3 nb0 nc0 nc1)
+  rewrite xorBitCommutes ma0 na0
+        | xorBitCommutes ma1 na1
+        | xorBitCommutes ma2 na2
+        | xorBitCommutes ma3 na3
+        | xorBitCommutes mb0 nb0
+        | xorBitCommutes mc0 nc0
+        | xorBitCommutes mc1 nc1 = refl
+
+maskActCommutes : (m n state : RH128.BinarySeven) →
+  maskAct m (maskAct n state) ≡ maskAct n (maskAct m state)
+maskActCommutes m n state =
+  transEq (maskActLaw m n state)
+    (transEq (mapEq (λ mask → maskAct mask state)
+        (maskXorCommutes m n))
+      (reverseEq (maskActLaw n m state)))
+
+maskActionFaithful : (mask : RH128.BinarySeven) →
+  maskAct mask allFalse ≡ allFalse → mask ≡ allFalse
+maskActionFaithful mask eq =
+  transEq (reverseEq (maskActAtFalse mask)) eq
+
+maskActionsInjective :
+  (m n : RH128.BinarySeven) →
+  ((state : RH128.BinarySeven) →
+    maskAct m state ≡ maskAct n state) → m ≡ n
+maskActionsInjective m n forallEq =
+  transEq (reverseEq (maskActAtFalse m))
+    (transEq (forallEq allFalse) (maskActAtFalse n))
+
+tritNegateTwice : (x : Trit.Trit) → H.negate3 (H.negate3 x) ≡ x
+tritNegateTwice Trit.neg = refl
+tritNegateTwice Trit.zer = refl
+tritNegateTwice Trit.pos = refl
+
+signedNegateTwice :
+  (x : SSP.SignedMultiplicity) →
+  SSP.negateMultiplicity (SSP.negateMultiplicity x) ≡ x
+signedNegateTwice (SSP.negativeMultiplicity n) = refl
+signedNegateTwice SSP.zeroMultiplicity = refl
+signedNegateTwice (SSP.positiveMultiplicity n) = refl
+
+actTrit : Bool → Trit.Trit → Trit.Trit
+actTrit false x = x
+actTrit true x = H.negate3 x
+
+actSigned : Bool → SSP.SignedMultiplicity → SSP.SignedMultiplicity
+actSigned false x = x
+actSigned true x = SSP.negateMultiplicity x
+
+tritActLaw : (m n : Bool) (x : Trit.Trit) →
+  actTrit m (actTrit n x) ≡ actTrit (xorBit m n) x
+tritActLaw false false x = refl
+tritActLaw false true x = refl
+tritActLaw true false x = refl
+tritActLaw true true x = tritNegateTwice x
+
+signedActLaw : (m n : Bool) (x : SSP.SignedMultiplicity) →
+  actSigned m (actSigned n x) ≡ actSigned (xorBit m n) x
+signedActLaw false false x = refl
+signedActLaw false true x = refl
+signedActLaw true false x = refl
+signedActLaw true true x = signedNegateTwice x
+
+actOnNativeSignedX6 : RH128.BinarySeven → SignedX6 → SignedX6
+actOnNativeSignedX6 (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (H.x6 a0 a1 a2 a3 b0 c0 , c1) =
+  H.x6
+    (actTrit ma0 a0) (actTrit ma1 a1) (actTrit ma2 a2)
+    (actTrit ma3 a3) (actTrit mb0 b0) (actTrit mc0 c0) ,
+  actSigned mc1 c1
+
+actOnNativeSignedX6Law : (m n : RH128.BinarySeven) →
+  (state : SignedX6) →
+  actOnNativeSignedX6 m (actOnNativeSignedX6 n state) ≡
+    actOnNativeSignedX6 (maskXor m n) state
+actOnNativeSignedX6Law (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (RH128.binarySeven na0 na1 na2 na3 nb0 nc0 nc1)
+  (H.x6 a0 a1 a2 a3 b0 c0 , c1)
+  rewrite tritActLaw ma0 na0 a0
+        | tritActLaw ma1 na1 a1
+        | tritActLaw ma2 na2 a2
+        | tritActLaw ma3 na3 a3
+        | tritActLaw mb0 nb0 b0
+        | tritActLaw mc0 nc0 c0
+        | signedActLaw mc1 nc1 c1 = refl
+
+bitTritMaskIntertwines : (m b : Bool) →
+  bitTrit (xorBit m b) ≡ actTrit m (bitTrit b)
+bitTritMaskIntertwines false b = refl
+bitTritMaskIntertwines true b = tritFlipCommutes b
+
+bitSignedMaskIntertwines : (m b : Bool) →
+  bitSigned (xorBit m b) ≡ actSigned m (bitSigned b)
+bitSignedMaskIntertwines false b = refl
+bitSignedMaskIntertwines true b = signedFlipCommutes b
+
+encodeIntertwinesAllSeven :
+  (mask state : RH128.BinarySeven) →
+  encode (maskAct mask state) ≡
+    actOnNativeSignedX6 mask (encode state)
+encodeIntertwinesAllSeven (RH128.binarySeven ma0 ma1 ma2 ma3 mb0 mc0 mc1) (RH128.binarySeven sa0 sa1 sa2 sa3 sb0 sc0 sc1)
+  rewrite bitTritMaskIntertwines ma0 sa0
+        | bitTritMaskIntertwines ma1 sa1
+        | bitTritMaskIntertwines ma2 sa2
+        | bitTritMaskIntertwines ma3 sa3
+        | bitTritMaskIntertwines mb0 sb0
+        | bitTritMaskIntertwines mc0 sc0
+        | bitSignedMaskIntertwines mc1 sc1 = refl
+
+nativeActionFaithfulOnEncodedPatch :
+  (mask : RH128.BinarySeven) →
+  actOnNativeSignedX6 mask (encode allFalse) ≡ encode allFalse →
+  mask ≡ allFalse
+nativeActionFaithfulOnEncodedPatch mask eq =
+  maskActionFaithful mask
+    (encodeInjective
+      (transEq (encodeIntertwinesAllSeven mask allFalse) eq))
+
+allOnesNativeActionRecoversGlobalInversion :
+  (state : SignedX6) →
+  actOnNativeSignedX6 RH128.allOnes state ≡ invertSignedX6 state
+allOnesNativeActionRecoversGlobalInversion
+  (H.x6 a0 a1 a2 a3 b0 c0 , c1) = refl
