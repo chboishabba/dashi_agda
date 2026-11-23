@@ -227,6 +227,8 @@ class Checker:
     def repository_agda_files(self) -> Iterator[Path]:
         """Yield source Agda files while excluding generated/vendor/toolchain trees."""
         for path in self.root.rglob("*.agda"):
+            if not path.is_file():
+                continue
             try:
                 parts = set(path.relative_to(self.root).parts)
             except ValueError:
