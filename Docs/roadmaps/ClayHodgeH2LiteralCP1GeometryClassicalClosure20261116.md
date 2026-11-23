@@ -1,5 +1,12 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 23 November 2026 — selected all-r product-family extension (classical Künneth donor)
+
+The documented literal CP¹ and CP¹×CP¹ H2 cases admit an elementary **all finite products** extension X_r=(CP¹)^r without constructing a generic smooth-projective H3 instance. Under established projective-space Hodge, singular/de Rham comparison, algebraic divisor cycle and Künneth theorems, H*(X_r,Q)=Q[h_1,...,h_r]/(h_i²); its binomial(r,p) squarefree monomials in degree 2p are all rational (p,p) classes and represent actual codimension-p coordinate products of point divisors. Complementary intersection pairing int(h_I h_J)=1 iff J=I^c, otherwise zero. Factor permutations preserve products and natural cycle classes. Thus the known Hodge conjecture holds classically for each chosen X_r at all codimensions; this does not address arbitrary varieties or count H2 again.
+
+[Four-lane geometric proof and source boundary](ClayNonYMRHFourLaneGeometricMaxCut20261123.md); [exact regression](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py): 5,504 exact cup/intersection/permutation cases at r=0..7. The finite tests do not prove the arbitrary-r geometric comparisons. The existing ProjectiveLineGenericCycleClassWeldExact remains conditional on supplied actual geometry, and HodgeAlgebraicCycleClayCoreExact still requires authentic rational algebraic cycles on general X. **H1/H3 universal, generic comparison and native kernel acceptance remain OPEN.**
+
+
 **16 November 2026. H2 is CLASSICALLY MATHEMATICALLY CLOSED for the literal projective-line and product examples, under the established user-authorized classical/Python protocol. Native Agda kernel/geometric comparison remains OPEN. The universal Hodge conjecture H3 and general H1 source geometry remain OPEN.** This note pays the exact *special-case physical geometry* gate, not the general Hodge conjecture.
 
 ## Original owner audit and why old source was insufficient
