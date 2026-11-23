@@ -999,3 +999,41 @@ Original `chboishabba/dashi_agda/master` files **actually read**, not inferred f
 Local SymPy 1.14.0 run on `/mnt/data/check_rh_bidi_reverse_terminal_20261122.py`; its **exact Git blob** agrees with the committed GitHub file `scripts/check_rh_bidi_reverse_terminal_20261122.py`, blob `6eb3222e13d178ccc855f6ae24f1641221bb79d8`. `py_compile` PASS. **108/108 exact terminal substitutions**, sharpened/unsharpened cone counterexamples, true original rational atomic sign geometry, fixed-varying-`ε` no-go, and finite-tail BIDI examples PASS. The earlier existing `rh_uniform_source_audit_20261122.py` was rerun locally: original **256 determinant corners and 12,010 pole-weight derivative values** plus symbolic `t`-varying log-tail PASS. The independently sourced fourth-derivative/zero count is a theorem claim in existing Lean source (not locally kernel replayed). No direct empirical actual-zero numerical census, theorem of RH/GRH or peer-review implied.
 
 **High-alpha next**: attack R2-S0 via **one literal same-source finite signed-near + certified physical tail** and compare it with the *full* terminal `T-S` (or prove R2-S1 via the existing sharpened cone budget), not the weaker `T`. In parallel: R2-F0 original uniform determinant local SymPy math → compatible Lean kernel only when explicitly wanted; Agda-A1 may work independently, and external-E trust is separately gated. Update these two existing roadmaps with every new mathematical receipt.
+
+
+---
+
+## 23 Nov 2026 — R2-N0 source-original fourth-primitive RvM-only no-go; actual ζ test
+
+**P0 authority remains the same:** selected original `QuarticFourSignedPolePair W(t)`, full strict terminal `H_W+S_W<4d_W(rho)+I_W`, never just `H_W<4d+I`. Existing Lean source owners `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleFourierTerminal.lean` (`outerSymmetricDiscrepancyFourthPrimitive_eq_physical`, `OuterFourthPrimitiveUniformBound`, `postSixthCanonicalSignedHighCut_iff_completed_plus_localSlack`); `Synthesis/RiemannZetaMuZeroCountOneSided.lean` (actual RvM arbitrary-endpoint counts); `...NMu.lean` (explicit ordinate/horizontal separation), `...JointHorizontalJet.lean` (exact original per-zero combined kernel). Reuse them; no new representation.
+
+Set `r=t/16`, `eta=1/(pi+1)`, `D_t(s)=zetaMuCumulativeDiscrepancy(t-s,t+s)` (multiplicity-weighted actual ordinate count minus exact `mu` integral), and write the ORIGINAL physical fourth primitive
+
+```
+P4(t,Q)= ∫_{r eta}^{rQ} ((rQ-s)^3/6) D_t(s) ds .
+```
+
+**Exact RvM-only upper bound:** for a FIXED `eta<Q<16`, sufficiently large `t` with `t-rQ >= max(T0,4)`, the original RvM interval theorem gives `|D_t(s)| <= C(log(t-s+3)+log(t+s+4)) <= 2 C log(t+rQ+4)` on `[r eta,rQ]`. Therefore
+
+```
+|P4(t,Q)| <= [C/12] r^4 (Q-eta)^4 log(t+rQ+4).
+```
+
+The change `P4_normalized=P4_physical` IS theorem-bearing and pays the **coordinate** factor, but the count estimate still gives only `O(t^4 log t)` on a fixed normalized Q. **No height-uniform `OuterFourthPrimitiveUniformBound B` follows** from this count estimate.
+
+**Strong single-global countermodel to RvM-only derivation:** append synthetic ordinates `gamma_n=(17/16)*4^n` for `n>=4` to an abstract positive-ordinate counting configuration, plus negative conjugates (all at beta=1/2 if assigning physical complex coordinates). Across any interval `(A,B]`, the perturbation changes the count by at most `1+log_4(max(B,1))`, so preserves the class `O(log B)` of RvM discrepancy estimates after enlarging its constant. At `t_n=4^n`, `Q=4`, the physical source window `[3t_n/4,5t_n/4]` contains exactly the *one new* ordinate `gamma_n=t_n+r_n`, `r_n=t_n/16` (`eta<1<4`). Exact quartic cap/Fubini yields
+
+```
+Delta P4(t_n,4)
+  = ∫_{r_n}^{4r_n} ((4r_n-s)^3/6) ds
+  = (3r_n)^4/24
+  = (27/8) r_n^4  -> +infinity .
+```
+
+This is a **single global count-sequence** negative control, not a family of independently chosen one-height perturbations, and absolutely **not** a new ζ zero. It proves the logical *non-implication* of uniform fourth-primitive control from bare RvM count bounds (even with conjugation and critical-line coordinates), not failure of any stronger actual ζ analytic theorem. Extra zeta-specific cancellation or a bounded/quartic-renormalized primitive source remains necessary.
+
+**Actual ζ numerical BIDI:** independent `mpmath.zetazero` and `nzeros` at `t=200`, and ORIGINAL `mu(x)=[Re ψ(1/4+ix/2)-log(pi)]/(2 pi)`; `mu` primitive computed from continuous-branch `Im logGamma`, checked against independent numerical digamma integration (three intervals). At `Q=4`, 56 numerical zeros in `(150,250]`, direct original `P4=9132.92213389`; quartic-cap/µ crosscheck `9132.92213388`. At `Q=8`, 109 zeros in `(100,300]`, direct `P4=83561.24506020`; cap/µ crosscheck `83561.24506015`. Scaling by `r^4`: `0.37408449` and `3.42266860`. Original `D_t(rq)` changes sign in numerical windows (e.g., q=1 negative, q=2 positive), so no one-sided signed estimate is being inferred. These are **finite-height numerical checks**, not certified zero isolation nor a uniform theorem.
+
+**Executed and committed source:** `scripts/check_rh_p0_rvm_fourth_20261123.py`; exact local Git blob SHA `cffdf1f74178af2a9738b3ebd2e6405debdadcf7` matches GitHub readback. SymPy exact source kernels, two independent real actual-zero evaluations and one-global-countermodel checks PASS. Dependencies SymPy/mpmath/NumPy/SciPy. No Lean/Agda kernel, GitHub CI, actual-W analytic action, all-character Dirichlet theorem admission, or strict signed RH/GRH inequality has been proved.
+
+**Next exact remaining P0:** exploit original `signedLiteralPairSourceTerm_eq_normalizedPairKernel` and `signedNormalizedPairKernel_eq_jointJet` with *both* horizontal `alpha=16(beta-1/2)/t` and ordinate `q=(gamma-t)/(t/16)`, retain multiplicity, original `W(t)`, centered µ integral and `S_W>=0`. Needed is a genuinely independent signed fourth-order correlation/primitive estimate below `2d_W(rho)` (with full slack), or the previously established finite signed `H_n+E_n+S_W<T_W(rho)` certificate for every hypothetical off-line rho. Bare count, selected q-notch, finite model C2^7, RvM absolute tail or a recut of `H-I=2D` cannot pay this. R2-S0 remains OPEN; no RH or GRH proof.
