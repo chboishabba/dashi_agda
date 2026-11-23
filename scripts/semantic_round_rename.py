@@ -23,12 +23,35 @@ SKIP_DIRS = {
     ".git", ".lake", "__pycache__", ".dashi", ".autonomous-orchestrator",
     "output", "outputs", "output-final_aristotle", "build", "target",
     "vendor", "Provenance", "Artifacts", "media", "chatgpt_browser_profile",
+    "ImportedLeans",
 }
 SKIP_FILES = {"semantic-name-registry.json"}
 
 
 def module_path(root: Path, module: str, suffix: str = ".agda") -> Path:
     return root / (module.replace(".", "/") + suffix)
+
+
+def module_entry_path(
+    root: Path, lean_root: Path | None, entry: dict
+) -> Path:
+    repository = entry.get("repo", "agda")
+    if repository == "lean":
+        if lean_root is None:
+            raise SystemExit("Lean registry entries require --lean-root")
+        return module_path(lean_root, entry["from"], ".lean")
+    return module_path(root, entry["from"], ".agda")
+
+
+def module_target_path(
+    root: Path, lean_root: Path | None, entry: dict
+) -> Path:
+    repository = entry.get("repo", "agda")
+    if repository == "lean":
+        if lean_root is None:
+            raise SystemExit("Lean registry entries require --lean-root")
+        return module_path(lean_root, entry["to"], ".lean")
+    return module_path(root, entry["to"], ".agda")
 
 
 def load_registry(path: Path) -> tuple[list[dict], list[dict]]:
@@ -76,8 +99,8 @@ def validate(modules: list[dict], symbols: list[dict], root: Path, lean_root: Pa
         if new in seen_targets:
             raise SystemExit(f"duplicate module target: {new}")
         seen_targets.add(new)
-        old_path = module_path(root, old)
-        new_path = module_path(root, new)
+        old_path = module_entry_path(root, lean_root, entry)
+        new_path = module_target_path(root, lean_root, entry)
         if not old_path.exists() and not new_path.exists():
             raise SystemExit(f"missing module source and target: {old}")
         if old_path.exists() and new_path.exists():
@@ -113,13 +136,19 @@ def rewrite(root: Path, mapping: dict[str, str], write: bool) -> int:
     return changed
 
 
-def apply_module_moves(root: Path, modules: list[dict]) -> None:
+def apply_module_moves(root: Path, lean_root: Path | None, modules: list[dict]) -> None:
     for entry in modules:
-        old_path = module_path(root, entry["from"])
-        new_path = module_path(root, entry["to"])
+        old_path = module_entry_path(root, lean_root, entry)
+        new_path = module_target_path(root, lean_root, entry)
         if old_path.exists():
             new_path.parent.mkdir(parents=True, exist_ok=True)
-            subprocess.run(["git", "mv", str(old_path), str(new_path)], check=True)
+            repository = entry.get("repo", "agda")
+            git_root = lean_root if repository == "lean" else root
+            subprocess.run(
+                ["git", "mv", str(old_path), str(new_path)],
+                check=True,
+                cwd=git_root,
+            )
 
 
 def main() -> None:
@@ -144,7 +173,7 @@ def main() -> None:
         if lean_root:
             rewrite(lean_root, mapping, False)
         return
-    apply_module_moves(root, modules)
+    apply_module_moves(root, lean_root, modules)
     rewrite(root, mapping, True)
     if lean_root:
         rewrite(lean_root, mapping, True)

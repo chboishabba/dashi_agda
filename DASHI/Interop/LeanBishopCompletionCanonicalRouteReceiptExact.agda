@@ -8,9 +8,9 @@ module DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact where
 --   Integration.BishopVendoredRealEvaluation
 --   Integration.BishopVendoredCompletionEquivalence
 --   Integration.BishopVendoredCompletionAlgebraEquivalence
---   Integration.BishopRound11MachinCanonicalBinding
---   Integration.BishopRound11MachinReplayIrrelevance
---   Integration.MoonshineEisensteinRound11CanonicalRouteB
+--   Integration.BishopMachinCanonicalBinding
+--   Integration.BishopMachinReplayIrrelevance
+--   Integration.MoonshineEisensteinCanonicalRouteB
 --
 -- This receipt records machine-formal theorem content written on the pinned
 -- Lean branch.  It does NOT claim that those Lean files have an exact-head

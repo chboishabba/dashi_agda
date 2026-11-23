@@ -2,6 +2,9 @@
 
 ## Semantic naming migration checkpoint — 2026-11-23
 
+- Lean Bishop/Machin mirror batch is now applied in sibling `dashi_lean4` with
+  language-aware module moves; combined registry count is 100 and stale count
+  is zero. No Lean build was run; `.dashi`/GWB artifacts remain untouched.
 - Wilson YM pilot committed as `edf74db0c3`.
 - Bishop/Machin non-YM Agda batch is applied locally with 87 explicit registry
   entries and zero stale references under `scripts/semantic_round_rename.py`.

@@ -5,7 +5,7 @@ module DASHI.Interop.MachinLeanBindingManifestExact where
 --
 -- This is the Agda-side mirror of
 --
---   Integration.BishopRound11MachinBindingManifest
+--   Integration.BishopMachinBindingManifest
 --
 -- in chboishabba/dashi_lean4.
 --
