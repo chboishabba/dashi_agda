@@ -289,3 +289,60 @@ originalCechDoesNotPromoteMonster :
   Cech.modelGluingImpliesActualMonsterGluing
     Cech.canonicalFaceHypercubeCechBoundary ≡ false
 originalCechDoesNotPromoteMonster = refl
+
+
+------------------------------------------------------------------------
+-- Unique pointwise descent on the covered seven-bit coefficient carrier.
+-- The x-incident face is always one of the three face descriptions of
+-- the literal corner. A second global section agreeing with all local
+-- incident face data must agree with the glued section at every state.
+------------------------------------------------------------------------
+
+selectedXFaceIncident :
+  (state : BinarySeven) →
+  faceFor (Geometry.faceAxis (faceFor Geometry.xAxis state)) state
+  ≡ faceFor Geometry.xAxis state
+selectedXFaceIncident (binarySeven false a1 a2 a3 b0 c0 c1) = refl
+selectedXFaceIncident (binarySeven true a1 a2 a3 b0 c0 c1) = refl
+
+glueUniquePointwise :
+  (locals : FaceLocalSections) →
+  (matching : compatible locals) →
+  (candidate : GlobalSection) →
+  ((state : BinarySeven) → (face : Geometry.Face6) →
+   (incident : faceFor (Geometry.faceAxis face) state ≡ face) →
+   candidate state ≡ locals face state) →
+  (state : BinarySeven) →
+  candidate state ≡ glue locals matching state
+glueUniquePointwise locals matching candidate candidateRestricts state =
+  candidateRestricts state (faceFor Geometry.xAxis state)
+    (selectedXFaceIncident state)
+
+------------------------------------------------------------------------
+-- Source-native "three legs" means only three independently typed scalar
+-- stages: physical r=t/16, even Fourier inversion, profile origin value.
+-- It is not a smooth pair-of-pants cobordism and changes no original RH
+-- normalization. The actual pants InterfaceMatch is still distinct.
+------------------------------------------------------------------------
+
+record ThreeLegNormalization : Set where
+  constructor threeLegNormalization
+  field
+    physicalLeg : Nat
+    fourierLeg : Nat
+    originLeg : Nat
+open ThreeLegNormalization public
+
+normalizationLegs : BinarySeven → ThreeLegNormalization
+normalizationLegs state =
+  threeLegNormalization (physicalBlock state)
+    (fourierBlock state) (originBlock state)
+
+glueLegScalars : ThreeLegNormalization → Nat
+glueLegScalars legs =
+  physicalLeg legs * fourierLeg legs * originLeg legs
+
+threeLegGluingMatchesSourceCoefficient :
+  (state : BinarySeven) →
+  glueLegScalars (normalizationLegs state) ≡ coefficient state
+threeLegGluingMatchesSourceCoefficient state = refl
