@@ -232,20 +232,21 @@ axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteF site = refl
 
-diffPlusDiff : ∀ a b c d → (a - b) + (c - d) ≡ (a + c) - (b + d)
-diffPlusDiff = ℚRing.solve-∀
+private
+  sumRationalSubtractBase : 0ℚ ≡ 0ℚ - 0ℚ
+  sumRationalSubtractBase = sym (ℚP.+-inverseʳ 0ℚ)
 
-subSelfZero : ∀ a → a - a ≡ 0ℚ
-subSelfZero = ℚRing.solve-∀
+  sumRationalSubtractStep : ∀ a b c d → (a - b) + (c - d) ≡ (a + c) - (b + d)
+  sumRationalSubtractStep = ℚRing.solve-∀
 
 sumRationalSubtract :
   ∀ {A : Set} values (left right : A → ℚ) →
   sumRational values (λ value → left value - right value)
   ≡ sumRational values left - sumRational values right
-sumRationalSubtract [] left right = ℚRing.solve-∀
+sumRationalSubtract [] left right = sumRationalSubtractBase
 sumRationalSubtract (value ∷ values) left right
   rewrite sumRationalSubtract values left right =
-    diffPlusDiff (left value) (right value)
+    sumRationalSubtractStep (left value) (right value)
       (sumRational values left) (sumRational values right)
 
 axisCenteringFibreSumZero :
@@ -292,7 +293,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       (trans
         (cong (λ averagedTotal → total - averagedTotal)
           (sumOfAverageConstant dataSet total))
-        (subSelfZero total)))
+        (ℚP.+-inverseʳ total)))
 
 ------------------------------------------------------------------------
 -- Self-adjointness in the literal global block inner product.

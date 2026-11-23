@@ -251,16 +251,16 @@ canonicalFetchTraceExact = refl
 -- Explicit refinement back to semantic Hello World.
 ------------------------------------------------------------------------
 
-_==Tape_ : OutputTape → OutputTape → Bool
-[] ==Tape [] = true
-(x ∷ xs) ==Tape (y ∷ ys) with x == y
-... | true = xs ==Tape ys
+listEqual : List Nat → List Nat → Bool
+listEqual [] [] = true
+listEqual (x ∷ xs) (y ∷ ys) with x == y
+... | true = listEqual xs ys
 ... | false = false
-_ ==Tape _ = false
+listEqual _ _ = false
 
 recogniseHelloWorldCodes : OutputTape → Hello.Output
-recogniseHelloWorldCodes codes with codes ==Tape helloWorldCodes
-... | true  = Hello.helloWorld ∷ []
+recogniseHelloWorldCodes codes with listEqual codes helloWorldCodes
+... | true = Hello.helloWorld ∷ []
 ... | false = []
 
 encodedWordMachineRefinesSemanticHelloWorld :
@@ -313,5 +313,3 @@ canonicalEncodedWordMachineBoundary : EncodedWordMachineBoundary
 canonicalEncodedWordMachineBoundary =
   encodedWordMachineBoundary
     true true true true true false false false false
-
-open EncodedWordMachineBoundary public

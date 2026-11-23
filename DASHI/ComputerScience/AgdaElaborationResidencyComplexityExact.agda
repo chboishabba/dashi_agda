@@ -51,22 +51,31 @@ record ElaborationObservation : Set where
 open ElaborationObservation public
 
 data ElaborationIntervention : Set where
-  stageEqualityOrConversion          : ElaborationIntervention
-  exposeIndicesAndSplitInference     : ElaborationIntervention
-  nameAndShareIntermediateTerms      : ElaborationIntervention
-  performInterfaceConeSurgery        : ElaborationIntervention
-  noElaborationSurgerySelected       : ElaborationIntervention
+  stageEqualityOrConversion : ElaborationIntervention
+  exposeIndicesAndSplitInference : ElaborationIntervention
+  nameAndShareIntermediateTerms : ElaborationIntervention
+  performInterfaceConeSurgery : ElaborationIntervention
+  noElaborationSurgerySelected : ElaborationIntervention
 
-selectIntervention : ElaborationObservation -> ElaborationIntervention
-selectIntervention obs with residencyHeavy obs | conversionHeavy obs | constraintOrMetaHeavy obs | repeatedNormalizationOrPoorSharing obs | importedStateHeavy obs
-... | true  | true  | _     | _     | _     = stageEqualityOrConversion
-... | true  | false | true  | _     | _     = exposeIndicesAndSplitInference
-... | true  | false | false | true  | _     = nameAndShareIntermediateTerms
-... | true  | false | false | false | true  = performInterfaceConeSurgery
-... | true  | false | false | false | false = noElaborationSurgerySelected
-... | false | _     | _     | true  | _     = nameAndShareIntermediateTerms
-... | false | _     | _     | false | true  = performInterfaceConeSurgery
-... | false | _     | _     | false | false = noElaborationSurgerySelected
+selectInterventionHelper : Bool → Bool → Bool → Bool → Bool → ElaborationIntervention
+selectInterventionHelper true  true  _     _     _     = stageEqualityOrConversion
+selectInterventionHelper true  false true  _     _     = exposeIndicesAndSplitInference
+selectInterventionHelper true  false false true  _     = nameAndShareIntermediateTerms
+selectInterventionHelper true  false false false true  = performInterfaceConeSurgery
+selectInterventionHelper true  false false false false = noElaborationSurgerySelected
+selectInterventionHelper false _     _     true  _     = nameAndShareIntermediateTerms
+selectInterventionHelper false _     _     false true  = performInterfaceConeSurgery
+selectInterventionHelper false _     _     false false = noElaborationSurgerySelected
+
+selectIntervention : ElaborationObservation → ElaborationIntervention
+selectIntervention obs =
+  selectInterventionHelper
+    (residencyHeavy obs)
+    (conversionHeavy obs)
+    (constraintOrMetaHeavy obs)
+    (repeatedNormalizationOrPoorSharing obs)
+    (importedStateHeavy obs)
+
 
 ------------------------------------------------------------------------
 -- Non-collapse boundary.

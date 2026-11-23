@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Data.Fin using (Fin)
 import Data.Fin as Fin
 open import Data.List using (_++_)
+open import Data.Maybe using (Maybe; just; nothing)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Computation.JacquardOperationalSemanticsExact as Jacquard
@@ -284,17 +285,17 @@ compileProofToJacquardWitness codec proof =
 jacquardVisibleLoomEncoding :
   Loom.LoomEncoding PC.canonicalProjectionCategory PF.canonicalProjectionFibre
 jacquardVisibleLoomEncoding = record
-  { Loom.Strand = Jacquard.JacquardProgram 2
-  ; Loom.Weave = Jacquard.JacquardProgram 2
-  ; Loom.weaveId = λ program → []
-  ; Loom.weaveSeq = _++_
-  ; Loom.ProjectionSurface = VisiblePattern2
-  ; Loom.project = visibleProgram2
-  ; Loom.fibreEquivalent =
+  { Strand = Jacquard.JacquardProgram 2
+  ; Weave = Jacquard.JacquardProgram 2
+  ; weaveId = λ program → []
+  ; weaveSeq = _++_
+  ; ProjectionSurface = VisiblePattern2
+  ; project = visibleProgram2
+  ; fibreEquivalent =
       λ first second → visibleProgram2 first ≡ visibleProgram2 second
-  ; Loom.residual = λ first second → first ≡ second
-  ; Loom.closed = λ first second → visibleProgram2 first ≡ visibleProgram2 second
-  ; Loom.loomReading =
+  ; residual = λ first second → first ≡ second
+  ; closed = λ first second → visibleProgram2 first ≡ visibleProgram2 second
+  ; loomReading =
       "Jacquard proof loom: hidden program projects to visible warp/weft face pattern."
   }
 
