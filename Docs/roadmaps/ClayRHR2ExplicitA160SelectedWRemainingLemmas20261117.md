@@ -1,3 +1,10 @@
+## 23 Nov 2026 — R2 128 normalization actual face sheaf, C2 representation, H05 C4 negative control
+
+[New exact model, execution and attribution ledger](../proofs/RHQuartic128NativeCechC2MonsterNormalization20261123.md). Source 128=16×2×4 has a reversible *formal factor-label* `{0,1}⁷ ≅ (Base369 outer eight corners)×(16 residual states)`, with six genuine face charts / 12 edge overlaps / 8 corners and compatible global gluing. Existing native Monster3B `X6=F₃⁶` plus signed SSP yields 128 distinct nonzero encoded states and C2-equivariance under component sign negation. Weight flips `w↔128/w`: not an analytic symmetry of original fixed normalization. Neutral target is retained but outside binary image. This finite proof carrier and TOE imports are new source-written Agda, *kernel open*. Six actual Fourier sample values fail all 12 overlap tests, so cannot identify q samples with physical cube faces; earlier H05 C4 integer phase and real-q smoothing no-descent retained.
+
+Original `P''/(32t)` comes from 4×2/256, conductor `64 log N` from 128/2, Gamma 800=80×10 (NOT log(9−1)), and q-tail 768=3×16². None substitutes for the original selected-W full signed gap, its R-dependent derivative norms or `V_tail` at continuous q. Independent local SymPy PASS; 0 RH/GRH proof promotions.
+
+---
 ## 23 November 2026 — universal Gamma constant and GRH conductor zero-mode check
 
 Upstream Anthropic `Zeta23/ThmE/GammaFactsChiProof.lean` already proves `C_gamma=10/pi` in exact Stirling estimate for `mu_{kappa,N}` (κ=0/1, N≥1). Thus the preceding original selected W's t>=200 central bilateral Γ core bound has explicit coefficient `800*M0_core/(pi*t³)`. Full `V_W` still requires M2_tail and V_tail; original selected W(t) t-uniform profile norms are NOT paid. The χ conductor constant cancels from `Delta²mu` but persists in the center mode as `64*log N*OriginDet/(t R M0)` when applying the same analytic test; parity remains distinct. This is NOT a proof that the zeta-selected W is the χ-selected witness or that a χ-zero-side terminal holds. Local SymPy/digamma PASS; no native kernel.
