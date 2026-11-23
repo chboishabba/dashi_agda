@@ -21,6 +21,11 @@ arithmetic where applicable):
   restricted Z2 states, four W-fibre four-column ordered-T identities.
 - check_ym_p0_original_gauge_orbit_20261123.py: PASS, 1024 links, 1536
   plaquettes, connected frozen complements, and exact 2^265/2^248 counts.
+- check_ym_w4_triangular_mixing_signed_exact_20261123.py: PASS, exact signed
+  W4 lock with 384/384 conjugations, unique scalar Λ² invariant form, zero
+  trace-free anisotropic invariants and retained sign-flip profile.
+- check_ym_cmp102_signed_row_witness_20261123.py: PASS, 128 exact rational
+  signed-row index partitions, even/odd identifications and cancellations.
 
 Total 47624/47624 earlier exact rational and symbolic assertions, plus
 the three later PASS controls, without using approximate trigonometric

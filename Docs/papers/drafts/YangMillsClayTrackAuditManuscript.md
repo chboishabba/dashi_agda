@@ -677,7 +677,12 @@ sector:
 Z_{4<-6}(O^{W4,aniso}_6) subset O^{W4}_4 cap {O(4)-invariant}
 ```
 If validated, that claim would block the a^2 x a^{-2} -> O(1) residue attack
-structurally.
+structurally. A repository-local exact representation check
+(`scripts/check_ym_w4_triangular_mixing_signed_exact_20261123.py`) verifies the
+finite sign-bearing W4 shadow: the Λ² invariant form is uniquely scalar, the
+trace-free anisotropic invariant subspace is zero, and all 384 signed
+permutations preserve these facts. This does not prove the full source
+operator-sector inclusion above and carries no Clay promotion.
 
 ### 6.4  Wightman Reconstruction (2602.0092 Thm. 1.1)
 

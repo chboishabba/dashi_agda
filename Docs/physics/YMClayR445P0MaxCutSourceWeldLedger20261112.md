@@ -23,6 +23,11 @@
 - `scripts/check_ym_e1_harmonic_regrouping_countermodel.py`: exact rational bounded non-Cauchy sequence with **131071** checked adjacent differences `|a_(k+1)-a_k|≤2/k`, and alternating dyadic anchors 0,1. The mathematical witness disproves the supplied E1 inference that a bare `O(1/k)` step-error bound can be promoted to a geometric tail just by regrouping.
 - Run local authoritative Agda 2.9: `bash scripts/check_ym_r445_p0_maxcut_local.sh`. The full baseline regression includes all new P0.A–E modules via `scripts/check_ym_original_rg_p0_kernel.sh`. **No Agda kernel check was executed in this assistant runtime.**
 
+## 23 November 2026 sign-bearing finite additions
+
+- `scripts/check_ym_w4_triangular_mixing_signed_exact_20261123.py`: exact rational W4 signed-permutation lock; 384/384 full-group conjugations, Λ² invariant forms = 1 scalar, trace-free anisotropic invariants = 0, sign-flip profile retained. This replaces the former float/SVD nullity audit in `ym-audit/audit/tests/test_original_9.py::_test_p90_triangular_lock`. It is the finite representation shadow of Eriksson 2602.0096 Thm 8.5 / Cor 8.6, not the full imported operator-sector theorem.
+- `scripts/check_ym_cmp102_signed_row_witness_20261123.py`: exact rational signed-row weld; 128/128 index partitions, even/odd identifications, row cancellations and shifted-bracket zeros. It discharges the complementary-index algebra behind `signedEvenRow ~ evenPart` and `signedOddRow ~ -oddPart`; Agda transfer, analytic normalization, unit-norm/chord and physical CMP102 attachment remain open.
+
 ## Exact remaining finite welds
 
 1. **P0.B kernel receipt and source enumeration proof:** accept `originalR445ResidualCountIs896`, `originalR445PairResidualDistinct`, `originalR445PairResidualComplete`, `originalR445CanonicalReorderRoundTrip` and reverse. These are actual source-written proof terms, not merely numerical checks.
