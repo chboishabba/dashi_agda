@@ -10,6 +10,8 @@ Crucial: They are **one-time finite Galerkin states** in the exact real algebrai
 
 **Executable, byte-matched local run:** [scripts/check_ns_r568_physical_source_weld_exact_20261123.py](../../scripts/check_ns_r568_physical_source_weld_exact_20261123.py), Git blob efad812d7699118ccb0396eb0165d4e6ba323fa8, SHA256 **953fea1800e4cd8f5e2366a11debf7c9103930c8549461a70da181e657027e70** is the current executed byte-identical verifier, including the helical eigenspace acceptance checks.
 
+**Independent native-port witness input manifest:** [26 explicit positive-mode integer complex-vector rows for seeds 61/63](../physics/NSR568OriginalPhysicalAlgebraicWitnessModes20261123.csv), exact Git blob `8b9942326e3e3fa96779c61b64cd13bb5117aef5`, byte matched against the local CSV and checked row-for-row against the script's deterministic seed generator. Every original nonzero mode is then u_k=P_k a_k (for the 13 lex-positive modes), u_-k=conjugate(u_k), and u_0=0. This removes dependence on Python's pseudorandom generator as a native Agda/Bishop fixture artifact, while retaining the independent seeded executable.
+
 ## 1. Source normalization — no proxy D/M independent of the velocity
 
 Source ownership read on master, no numbered source modules were rewritten:
