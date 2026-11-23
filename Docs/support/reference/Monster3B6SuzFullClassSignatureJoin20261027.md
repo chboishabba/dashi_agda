@@ -85,3 +85,14 @@ The original [author archive](https://www.rwb.me.uk/table/index.html) explicitly
 | P4: kernel / end-to-end | Pending | Run the correct exact-head Agda/Lean targets; keep provenance and source-written/code-executed/kernel-verified levels separate |
 
 **Stop rule:** Do not infer a literal Monster action, unique eight-site chart, scalar `Fin90` basis acting as a representation, physical spin/optics, or quantum mechanism from the counts \(720+9=729\), \(12+78=90\), or a passing source-relative checksum. The remaining issue is actual selected-source *same-object* evidence, not shortage of generic construction machinery.
+
+
+## 23 November 2026 — source-owning OOM guard reconciliation
+
+The original source-owning #1250 branch now mirrors the safe candidate filter already present in TOE #1217: all three AtlasRep/CTblLib candidate acceptance paths check `IsPermGroup(candidate)` **before** calling `Size(candidate)`; the downstream `SylowSubgroup(G,2)` is only entered with such an accepted group. The two dihedral-group checks use `not IsAbelian(...)` in GAP. Source commit: [d0c2e722](https://github.com/chboishabba/dashi_agda/commit/d0c2e7224a856674c8fb6de8e85dc160fd2c8975).
+
+This prevents the previously identified unassisted 78-dimensional matrix-group Schreier–Sims route, but is **not** a blanket memory-safety theorem: constructing `AtlasGroup(info)` itself is still permitted before the representation guard, and no GAP execution of this exact commit was observed here. Failure to realize a suitable permutation model remains the documented `atlas-group-realization-residual`, not a successful actual D8 realization.
+
+**Current P0 ordering:** (1) exact-head source GAP replay of both 6.Suz and the guarded five-orbit screen, with untouched raw receipt/version/hash; (2) all-conductor 210-class audit and source-selected 12/78 full-class join, including explicit C2/C3 phase and direct/dual Sym2 checks; (3) quotient-first subgroup construction in the **central double cover** 2.Suz.2, then Schur–Zassenhaus odd-kernel lift into N_M(3B) and intersection with the 17 serialized character-compatible worlds; (4) only then actual Hom/VOA selected same-object intertwiner and inverse-projective cocycle on the original carrier. The degree-1782 Suz.2 permutation representation alone does not specify the double-cover lift: an involution downstairs can lift to order four upstairs.
+
+**Authority:** original ATLAS/AtlasRep and CTblLib inputs remain source owners; prior mathematics of Schur–Zassenhaus is classical; this branch patch is an engineering guard, not a newly discovered group-theoretic result. Earlier user-local 57/57 and 17-world PASS reports remain *reported* rather than independently executed in this update. GAP, Agda kernel and authentic 6.Suz source receipts are **not** claimed.
