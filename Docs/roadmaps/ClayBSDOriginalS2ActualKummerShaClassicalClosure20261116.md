@@ -1,5 +1,15 @@
 # BSD S2 — classical actual cohomological Selmer–Mordell–Weil–Sha[2] exactness
 
+## 23 November 2026 — selected E32 Tate degree-two descent and exact BIDI rank zero
+
+**New selected-curve CLASSICAL arithmetic route, not a second proof of this S2 classical exact-sequence theorem:** [full six-lane alpha ledger](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md), [byte-identically locally executed E32 isogeny regression](../../scripts/check_bsd_e32_original_2isogeny_bidi_20261123.py), Git blob d43aa30773b572551b749b5ac1b153be4c798ce5. The true original E:y²=x³−x (a=0,b=−1) has two-isogenous partner E':Y²=X³+4X (a'=0,b'=4). Exact forward/dual formulas and both generic compositions with [2], plus 11,616 independent original elliptic finite-field group-law checks, passed with exceptional O and (0,0) branches. These local receipts DO NOT supply an Agda elliptic group/continuous Galois-cohomology kernel theorem.
+
+**Classical mathematical rank 0 is now explicitly reverse-solved via Tate's known two-isogeny theorem, independently of BSD.** Square-class alpha(O)=1, alpha(T=(0,0))=b, alpha(x,y)=x mod rational squares for x≠0. Prime-support valuations put E alpha inside {±1}, both realized. For E' b'=4 support gives {±1,±2}; real Y²=X(X²+4) disallows negative classes and the rational point (2,4) attains 2, while O attains 1. Thus image sizes 2 and 2, and published Tate equality 2^(rank+2)=2*2 gives rank E(Q)=0. Sources: https://www.cmi.ac.in/~siddhi/Rank.pdf §2, https://web.math.pmf.unizg.hr/~duje/pdf/section15-5.pdf §15.5. **This does not establish Sha[2]=0 or the refined BSD formula**; the S2 classical real H¹ exact sequence already belongs to this file and is not replaced by a squareclass argument.
+
+**Native S1/S3 still OPEN:** define literal source E32/E' proper curves and group laws including all 2-torsion and O, source map kernels and both compositions, group-homomorphic Q×/Q×² alpha, valuation prime-support and real sign, actual Tate exact sequence and MW quotient; instantiate actual all-place cohomology/Selmer/Sha only in their original owners. Native Agda/Lean kernel NOT RUN. Selected arithmetic rank-0 **mathematical result** is classically settled; do not count the still-missing *native* S3 implementation as a second independent mathematical conjecture. Universal S6 remains OPEN.
+
+
+
 **16 November 2026. S2 CLOSED CLASSICALLY as an established universal arithmetic theorem, not a new result and NOT native Agda/Lean kernel checked.** This discharges the *actual cohomological connecting morphism and classical Sha* mathematical gate for the original curve E:y²=x³−x, indeed for any elliptic curve over Q. It does not compute its Selmer group, prove rank zero, prove Sha finite or establish strong/universal BSD.
 
 ## Original-source audit and exact owner
