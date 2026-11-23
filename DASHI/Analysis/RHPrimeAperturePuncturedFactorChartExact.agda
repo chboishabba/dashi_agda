@@ -168,3 +168,140 @@ sourceDyadicPowerMatchesTail =
 -- The two actual same-integer owners agree on 32768, but
 -- the source explicitly BLOCKS identifying dyadic x3 with Monster 3B.
 -- Equally no RH proof is licensed from the integer equality.
+
+
+------------------------------------------------------------------------
+-- P0 E2: user-identified 4*256 = ORIGINAL q=16 dyadic-cell index 1024.
+--
+-- The derivatives and q-tail have DIFFERENT SOURCE OWNERS:
+--  * source C∞ prime flat-top b_p has two ±log p centres and two
+--    interval-indicator jumps each => FOUR signed boundary jumps.
+--    Previous first box has halfwidth 1/256, so its TV derivative
+--    cost 4*256=1024.
+--  * ORIGINAL RHQuartic163840DyadicTailHXIntertwinerExact already has
+--    q=16 at dyadic cell index 1024 among 32768 continuous-residual
+--    tail cells; 32768=32*1024.
+-- This is a positive same-number BIDI/attribution bridge only.
+-- Changing smoothing widths changes the derivative bound but NOT
+-- the original tail-cell index: no false RH group/action or Monster 3B.
+--
+-- NEW chosen E2 source: reserve ONE original dyadic-index unit 1/1024
+-- for an infinite residual sequence of box halfwidths 2^-n/1024,
+-- n>=1; give the other SEVEN units to 52 equal primary boxes,
+-- each halfwidth 7/(52*1024).
+-- Total support smoothing halfwidth (7+1)/1024=1/128.
+-- The flat-top centred at ±log p starts from the SAME a=3/128
+-- indicator, giving support1/32, plateau1/64, mass3/32.
+-- New inverse primary width lambda=52*1024/7 is a chosen geometric
+-- scale, not equal to the old 256.
+--
+-- The true old 4E_j factor in the 26-degree source E(x) is the
+-- four BOUNDARY-JUMP total-variation factor; there are ALSO four
+-- different source prime ports (two primes x two endpoints).
+-- Neither identification turns the 26 weighted elementary-symmetric
+-- source coefficients into an F4/Albert representation.
+--
+-- Analytic infinite convolution, all L1 and source positivity bounds
+-- are in the mathematical proof ledger, not kernel-checked here.
+------------------------------------------------------------------------
+
+originalQSixteenDyadicCellIndex : Nat
+originalQSixteenDyadicCellIndex =
+  DyadicTail.crossingAtSixteenCellIndex
+
+oldFlatTopSymmetricPrimeCentres : Nat
+oldFlatTopSymmetricPrimeCentres = 2
+
+oldFlatTopIndicatorJumpsPerCentre : Nat
+oldFlatTopIndicatorJumpsPerCentre = 2
+
+oldFlatTopBoundaryJumps : Nat
+oldFlatTopBoundaryJumps =
+  oldFlatTopSymmetricPrimeCentres
+    * oldFlatTopIndicatorJumpsPerCentre
+
+oldFlatTopFirstBoxReciprocalHalfwidth : Nat
+oldFlatTopFirstBoxReciprocalHalfwidth = 256
+
+oldFlatTopSecondDerivativeTVBoundInteger : Nat
+oldFlatTopSecondDerivativeTVBoundInteger =
+  oldFlatTopBoundaryJumps * oldFlatTopFirstBoxReciprocalHalfwidth
+
+originalFourTimes256IsQSixteenCellIndex :
+  oldFlatTopSecondDerivativeTVBoundInteger
+    ≡ originalQSixteenDyadicCellIndex
+originalFourTimes256IsQSixteenCellIndex = refl
+
+sourceFullDyadicCapacityAsThirtyTwoCrossings :
+  32 * originalQSixteenDyadicCellIndex
+    ≡ DyadicTail.sourceDyadicCapacity
+sourceFullDyadicCapacityAsThirtyTwoCrossings =
+  DyadicTail.crossingScaledBackToDyadicCapacity
+
+sourceAnnihilatorEvenOrder : Nat
+sourceAnnihilatorEvenOrder =
+  2 * originalTwentySixSlotCount
+
+sourceAnnihilatorEvenOrderIs52 :
+  sourceAnnihilatorEvenOrder ≡ 52
+sourceAnnihilatorEvenOrderIs52 = refl
+
+rebalancedPrimaryBoxCount : Nat
+rebalancedPrimaryBoxCount = sourceAnnihilatorEvenOrder
+
+rebalancedPrimarySmoothingUnits : Nat
+rebalancedPrimarySmoothingUnits = 7
+
+rebalancedInfiniteTailSmoothingUnits : Nat
+rebalancedInfiniteTailSmoothingUnits = 1
+
+rebalancedTotalSmoothingUnits : Nat
+rebalancedTotalSmoothingUnits =
+  rebalancedPrimarySmoothingUnits
+    + rebalancedInfiniteTailSmoothingUnits
+
+rebalancedEightUnitsAreTheSourcePuncturedMiddleCount :
+  rebalancedTotalSmoothingUnits ≡ puncturedMiddleCount
+rebalancedEightUnitsAreTheSourcePuncturedMiddleCount = refl
+
+-- Rational lambda = this numerator / 7.
+rebalancedInversePrimaryBoxNumerator : Nat
+rebalancedInversePrimaryBoxNumerator =
+  rebalancedPrimaryBoxCount * originalQSixteenDyadicCellIndex
+
+rebalancedLambdaNumeratorIs53248 :
+  rebalancedInversePrimaryBoxNumerator ≡ 53248
+rebalancedLambdaNumeratorIs53248 = refl
+
+sourceTwoPrimeLabels : Nat
+sourceTwoPrimeLabels = 2
+
+sourceTwoOriginalEndpoints : Nat
+sourceTwoOriginalEndpoints = 2
+
+sourceIndependentPrimePortCount : Nat
+sourceIndependentPrimePortCount =
+  sourceTwoPrimeLabels * sourceTwoOriginalEndpoints
+
+sourceIndependentPortCountIsFour :
+  sourceIndependentPrimePortCount ≡ 4
+sourceIndependentPortCountIsFour = refl
+
+-- Equal cardinality DOES NOT identify two factors of four:
+-- the b_p indicator's 4 distributional jumps are NOT the four
+-- independent (prime,endpoint) source port labels.
+sourceBoundaryGradeBookkeeping : Nat
+sourceBoundaryGradeBookkeeping =
+  oldFlatTopBoundaryJumps * originalTwentySixSlotCount
+
+sourcePortGradeBookkeeping : Nat
+sourcePortGradeBookkeeping =
+  sourceIndependentPrimePortCount * originalTwentySixSlotCount
+
+sourceBoundaryBookkeepingIs104 :
+  sourceBoundaryGradeBookkeeping ≡ 104
+sourceBoundaryBookkeepingIs104 = refl
+
+sourcePortBookkeepingIs104 :
+  sourcePortGradeBookkeeping ≡ 104
+sourcePortBookkeepingIs104 = refl
