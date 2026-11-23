@@ -1,5 +1,7 @@
 # Clay YM P0.T — original Wilson action in the ordered two-mark F19 conditional source
 
+> **23 Nov geometry correction:** The ten-link Z2 field cylinder is **not closed under local source gauge transformations**: one original site pulse flips eight native fine bonds (one live, seven frozen). The full original Wilson action and marks are gauge invariant, but the restricted ensemble itself is not. [The exact source-gauge-orbit repair](YMClayP0OriginalWilsonGaugeSaturationF19IndexedTOEBIDI20261123.md) proves the 1014-frozen-bond complement connected, builds a finite *gauge-invariant centre-subgroup saturation* of 2^265 states, and keeps the globally normalized 1/F/G/FG responses unchanged. The four old fixed-W conditional covariances are **gauge-slice data**; transformed coarse W requires covariant conditional pushforward. This does **not** produce full SU(N) Haar or physical CMP119 T/W3/OS.
+
 **23 November 2026. Local exact arithmetic PASS. Physical CMP119/122 selected T and W3/OS remain OPEN.**
 
 ## Pre-existing theorem ownership
