@@ -143,4 +143,21 @@ for tt in (300.,1000.,80000.,1000000.):
 assert len(record)==16
 print("PASS 16 projected smooth-fixture ports; worst 8-residual=",max(x[3] for x in record),
       "worst conditioning=",max(x[4] for x in record))
+
+# The source phases never vanish together, but irrational rotation makes them
+# arbitrarily CLOSE to jointly zero. This is a genuine negative control for
+# any claimed high-t uniform arithmetic gain. Values below are numerical;
+# mathematical density follows from irrational log(3)/log(2).
+import mpmath as mp
+mp.mp.dps=65
+for k,cap in ((485,mp.mpf('0.003')),(7800,mp.mpf('0.00005')),
+              (39667,mp.mpf('0.00001'))):
+    resonance=(mp.mpf(k)+mp.mpf('0.5'))*mp.pi/mp.log(2)
+    phase2=mp.cos(resonance*mp.log(2))
+    phase3=mp.cos(resonance*mp.log(3))
+    assert abs(phase2)<mp.mpf('1e-55') and abs(phase3)<cap
+    print("PASS near joint prime resonance k=",k,"t=",mp.nstr(resonance,17),
+          "|cos(t log 3)|=",mp.nstr(abs(phase3),12))
+print("OPEN no height-uniform phase floor; bound full signed completed source independently")
+
 print("OPEN exact Mathlib witness carrier inhabitation, E2 high-tail, strict P0 signed bound; NO RH/GRH")
