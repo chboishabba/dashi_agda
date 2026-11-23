@@ -25,7 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
 import DASHI.Physics.YangMills.YangMillsWilsonSameHMassGapRound552Exact as R552
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as SameH
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
@@ -70,19 +70,19 @@ physicalMassGapCertificate path =
 
 round557FiniteToContinuumCovarianceCompilerLevel : ProofLevel
 round557FiniteToContinuumCovarianceCompilerLevel =
-  R556.round556SameFamilyCovarianceConvergenceCompilerLevel
+  R556.sameFamilyCovarianceConvergenceCompilerLevel
 
 round557ContinuumHalfRateCompilerLevel : ProofLevel
 round557ContinuumHalfRateCompilerLevel =
-  R556.round556WEXTCarrierIsExactSelectedCovarianceLevel
+  R556.wextCarrierIsExactSelectedCovarianceLevel
 
 round557MassGapCompilerLevel : ProofLevel
 round557MassGapCompilerLevel =
   R552.round552WilsonClusteringToGapCompilerLevel
 
-literalRound557SourceFirstWilsonCarrierLevel : ProofLevel
-literalRound557SourceFirstWilsonCarrierLevel =
-  R556.literalRound556SourceFirstWilsonCarrierLevel
+sourceFirstWilsonCarrierLevel : ProofLevel
+sourceFirstWilsonCarrierLevel =
+  R556.sourceFirstWilsonCarrierLevel
 
 literalRound557SameHamiltonianTransferLevel : ProofLevel
 literalRound557SameHamiltonianTransferLevel =

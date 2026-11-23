@@ -40,9 +40,9 @@ import DASHI.Moonshine.EisensteinConvergenceEndgameCutsetExact as Legacy
 import DASHI.Analysis.BishopSetoidComplexExact as BishopComplex
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidFiniteQSeriesExact as BishopQ
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidExtractionExact as BishopExtraction
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Source
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Source
 import DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact as LeanReceipt
-import DASHI.Interop.BishopRound11MachinBindingManifestExact as BindingManifest
+import DASHI.Interop.BishopMachinBindingManifestExact as BindingManifest
 import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact as CanonicalReceipt
 
 record BishopRouteBCurrentFrontier : Set where

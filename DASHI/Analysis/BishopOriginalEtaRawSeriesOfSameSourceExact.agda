@@ -25,7 +25,7 @@ import Real as Real
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalEtaRawAllCutoffPrefixExact as Raw
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 originalRawRealTerm :
   (Nat → BC.BishopComplex) → Nat → Real.ℝ
@@ -54,7 +54,7 @@ originalRawPrefixEqualsNativeSeriesOf term (suc n)
         | proj₂ (originalRawPrefixEqualsNativeSeriesOf term n) =
   refl , refl
 
-module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
+module OriginalRound11 (inputs : Round11.BishopCutset) where
   module Selected = Eta.OriginalRound11DirichletEta inputs
 
   originalRound11EtaRawPrefixSameNativeSeries :

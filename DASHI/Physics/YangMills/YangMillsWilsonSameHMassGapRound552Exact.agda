@@ -25,7 +25,7 @@ import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Ex
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
-import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as R551
+import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact as R551
 import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact as R302
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as R311
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap

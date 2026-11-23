@@ -25,7 +25,7 @@ import RealProperties as RP
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 import DASHI.Analysis.BishopOriginalEtaPairBlockTelescopingExact as Pair
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Recursion descends by two and advances the physical term source
 -- by two; it never uses any arbitrary Nat parity oracle.
@@ -113,7 +113,7 @@ originalRawOddPrefixEqualsSelectedPairsPlusOne term n
 
 -- Concrete original Round11 source instantiation: no replacement logNat
 -- candidate, exponent, or Dirichlet term-family can be slipped in here.
-module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
+module OriginalRound11 (inputs : Round11.BishopCutset) where
   module Selected = Eta.OriginalRound11DirichletEta inputs
 
   actualOriginalRound11RawEvenPrefix :

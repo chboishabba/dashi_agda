@@ -63,10 +63,10 @@ import DASHI.Foundations.BishopGeometricSeriesConvergenceExact as GeometricSerie
 import RealProperties as RP
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
-import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopTrigAtZeroExact as Origin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as MachinWindow
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -494,7 +494,7 @@ sourceExponentTwoImaginaryArgumentZero logNat n =
     RP.≃-refl (logNat n)
 
 sourceExponentTwoRealIsBasel :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n : Nat) →
   R._≃_
@@ -503,7 +503,7 @@ sourceExponentTwoRealIsBasel :
   R._≃_
     (A.re
       (bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         logNat sourceExponentTwo n))
     (Basel.baselTerm n)
 sourceExponentTwoRealIsBasel inputs logNat n logInverse =
@@ -512,19 +512,19 @@ sourceExponentTwoRealIsBasel inputs logNat n logInverse =
       (negativeTwoNatLogExponentialIsBasel logNat n logInverse)
       (RP.≃-trans
         (TrigCong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (sourceExponentTwoImaginaryArgumentZero logNat n))
         (Origin.round11CosineAtZero inputs)))
     (RP.*-identityʳ (Basel.baselTerm n))
 
 sourceExponentTwoImagIsZero :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n : Nat) →
   R._≃_
     (A.im
       (bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         logNat sourceExponentTwo n))
     R.0ℝ
 sourceExponentTwoImagIsZero inputs logNat n =
@@ -533,7 +533,7 @@ sourceExponentTwoImagIsZero inputs logNat n =
       RP.≃-refl
       (RP.≃-trans
         (TrigCong.bishopSinCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (sourceExponentTwoImaginaryArgumentZero logNat n))
         (Origin.round11SineAtZero inputs)))
     (let open RP.ℝ-Solver
@@ -546,7 +546,7 @@ sourceExponentTwoImagIsZero inputs logNat n =
 -- No domination authority: reconstruct the comparison witness
 -- from the literal coefficient equality and the ORIGINAL Basel owner.
 sourceExponentTwoBaselMajorant :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate) →
   ((n : Nat) →
     R._≃_
@@ -554,7 +554,7 @@ sourceExponentTwoBaselMajorant :
       (NatReal.natReal (suc n))) →
   Dirichlet.BishopDirichletBaselMajorantAt
     (bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat)
+      (Route.machinTranscendentals inputs) logNat)
     sourceExponentTwo
 sourceExponentTwoBaselMajorant inputs logNat logInverse = record
   { Dirichlet.dominationStart = zero
@@ -581,7 +581,7 @@ sourceExponentTwoBaselMajorant inputs logNat logInverse = record
 ------------------------------------------------------------------------
 
 sourceExponentTwoSumIsOriginalBasel :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate) →
   (inverseLaw : (n : Nat) →
     R._≃_ (Exp.bishopExp (logNat n))
@@ -589,7 +589,7 @@ sourceExponentTwoSumIsOriginalBasel :
   let
     terms =
       bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs) logNat
+        (Route.machinTranscendentals inputs) logNat
     bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
   in
   (R._≃_
@@ -603,7 +603,7 @@ sourceExponentTwoSumIsOriginalBasel inputs logNat inverseLaw =
   let
     terms =
       bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs) logNat
+        (Route.machinTranscendentals inputs) logNat
     bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
     same =
       Dirichlet.dirichletValuesRespectTermwiseEquality
@@ -623,7 +623,7 @@ sourceExponentTwoSumIsOriginalBasel inputs logNat inverseLaw =
 
 -- Concrete original -log(1-x) source, not an arbitrary NatLogCandidate.
 originalSourceExponentTwoSumIsBasel :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (inside : (n : Nat) →
     E.InOpenUnitInterval
       (Round11.elementarySeries inputs) (natLogArgument n)) →
@@ -631,14 +631,14 @@ originalSourceExponentTwoSumIsBasel :
     R._≃_
       (Exp.bishopExp
         (natLogViaOriginalNegativeLog
-          (Route.round11MachinTranscendentals inputs) inside n))
+          (Route.machinTranscendentals inputs) inside n))
       (NatReal.natReal (suc n))) →
   let
     logNat =
       natLogViaOriginalNegativeLog
-        (Route.round11MachinTranscendentals inputs) inside
+        (Route.machinTranscendentals inputs) inside
     terms = bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat
+      (Route.machinTranscendentals inputs) logNat
     bound = sourceExponentTwoBaselMajorant inputs logNat inverseLaw
   in
   (R._≃_
@@ -652,7 +652,7 @@ originalSourceExponentTwoSumIsBasel inputs inside inverseLaw =
   sourceExponentTwoSumIsOriginalBasel
     inputs
     (natLogViaOriginalNegativeLog
-      (Route.round11MachinTranscendentals inputs) inside)
+      (Route.machinTranscendentals inputs) inside)
     inverseLaw
 
 ------------------------------------------------------------------------
@@ -666,7 +666,7 @@ originalSourceExponentTwoSumIsBasel inputs inside inverseLaw =
 ------------------------------------------------------------------------
 
 sourceExponentTwoUniformFiniteTails :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (inverseLaw : (n : Nat) →
     R._≃_
@@ -678,7 +678,7 @@ sourceExponentTwoUniformFiniteTails :
   n ≥ UniformTails.baselUniformTailCutoff k →
   let
     terms = bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat
+      (Route.machinTranscendentals inputs) logNat
   in
   (R._≤_
     (R.∣ Seq.∑ (Dirichlet.realTerm terms sourceExponentTwo) m n ∣)
@@ -691,7 +691,7 @@ sourceExponentTwoUniformFiniteTails
     inputs logNat inverseLaw k m n mPast nPast =
   let
     terms = bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat
+      (Route.machinTranscendentals inputs) logNat
     majorant =
       sourceExponentTwoBaselMajorant inputs logNat inverseLaw
   in
@@ -706,7 +706,7 @@ sourceExponentTwoUniformFiniteTails
     k m n mPast nPast
 
 originalSourceExponentTwoUniformFiniteTails :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (inside : (n : Nat) →
     E.InOpenUnitInterval
       (Round11.elementarySeries inputs) (natLogArgument n)) →
@@ -714,7 +714,7 @@ originalSourceExponentTwoUniformFiniteTails :
     R._≃_
       (Exp.bishopExp
         (natLogViaOriginalNegativeLog
-          (Route.round11MachinTranscendentals inputs) inside n))
+          (Route.machinTranscendentals inputs) inside n))
       (NatReal.natReal (suc n))) →
   (k : Nat) → .{{_ : NonZero k}} →
   (m n : Nat) →
@@ -722,7 +722,7 @@ originalSourceExponentTwoUniformFiniteTails :
   n ≥ UniformTails.baselUniformTailCutoff k →
   let
     terms = bishopDirichletTermFromOriginalLogSeries
-      (Route.round11MachinTranscendentals inputs) inside
+      (Route.machinTranscendentals inputs) inside
   in
   (R._≤_
     (R.∣ Seq.∑ (Dirichlet.realTerm terms sourceExponentTwo) m n ∣)
@@ -736,7 +736,7 @@ originalSourceExponentTwoUniformFiniteTails
   sourceExponentTwoUniformFiniteTails
     inputs
     (natLogViaOriginalNegativeLog
-      (Route.round11MachinTranscendentals inputs) inside)
+      (Route.machinTranscendentals inputs) inside)
     inverseLaw k m n mPast nPast
 
 
@@ -752,14 +752,14 @@ sourceRealAxisExponent sigma =
   A.bishop-complex sigma R.0ℝ
 
 sourceRealAxisExponentialRealCoefficient :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (sigma : R.ℝ)
   (n : Nat) →
   R._≃_
     (A.re
       (bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         logNat (sourceRealAxisExponent sigma) n))
     (Exp.bishopExp
       (R._*_ (R.- sigma) (logNat n)))
@@ -769,21 +769,21 @@ sourceRealAxisExponentialRealCoefficient inputs logNat sigma n =
       RP.≃-refl
       (RP.≃-trans
         (TrigCong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (sourceExponentTwoImaginaryArgumentZero logNat n))
         (Origin.round11CosineAtZero inputs)))
     (RP.*-identityʳ
       (Exp.bishopExp (R._*_ (R.- sigma) (logNat n))))
 
 sourceRealAxisExponentialImaginaryZero :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (sigma : R.ℝ)
   (n : Nat) →
   R._≃_
     (A.im
       (bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         logNat (sourceRealAxisExponent sigma) n))
     R.0ℝ
 sourceRealAxisExponentialImaginaryZero inputs logNat sigma n =
@@ -792,7 +792,7 @@ sourceRealAxisExponentialImaginaryZero inputs logNat sigma n =
       RP.≃-refl
       (RP.≃-trans
         (TrigCong.bishopSinCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (sourceExponentTwoImaginaryArgumentZero logNat n))
         (Origin.round11SineAtZero inputs)))
     (let open RP.ℝ-Solver
@@ -844,7 +844,7 @@ machinSourceRealPartAboveTwo =
 ------------------------------------------------------------------------
 
 sourceExponentTwoUniformLimitError :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (inverseLaw : (n : Nat) →
     R._≃_ (Exp.bishopExp (logNat n))
@@ -854,7 +854,7 @@ sourceExponentTwoUniformLimitError :
   m ≥ UniformTails.baselUniformTailCutoff k →
   let
     terms = bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat
+      (Route.machinTranscendentals inputs) logNat
     majorant = sourceExponentTwoBaselMajorant
       inputs logNat inverseLaw
   in
@@ -877,7 +877,7 @@ sourceExponentTwoUniformLimitError
     inputs logNat inverseLaw k m mPast =
   let
     terms = bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs) logNat
+      (Route.machinTranscendentals inputs) logNat
     majorant = sourceExponentTwoBaselMajorant
       inputs logNat inverseLaw
   in
@@ -1090,17 +1090,17 @@ sourceIntegralComplexExponent logNat n count =
     R.0ℝ
 
 sourceIntegralExpTerm :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n count : Nat) →
   A.BishopComplex
 sourceIntegralExpTerm inputs logNat n count =
   ExpBridge.bishopAnalyticComplexExp
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     (sourceIntegralComplexExponent logNat n count)
 
 sourceIntegralExpTermReal :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n count : Nat) →
   R._≃_
@@ -1113,7 +1113,7 @@ sourceIntegralExpTermReal inputs logNat n count =
       (Exp.bishopExp (sourceNegativeLogSum logNat n count)))
 
 sourceIntegralExpTermImagZero :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n count : Nat) →
   R._≃_
@@ -1129,7 +1129,7 @@ sourceIntegralExpTermImagZero inputs logNat n count =
        (Exp.bishopExp (sourceNegativeLogSum logNat n count)))
 
 sourceIntegralExpRealBaselMajorant :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n k : Nat) →
   R._≃_ (Exp.bishopExp (logNat n))
@@ -1150,7 +1150,7 @@ sourceIntegralExpRealBaselMajorant inputs logNat n k inverseLaw =
       logNat n k inverseLaw)
 
 sourceIntegralExpImagBaselMajorant :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (n k : Nat) →
   R._≤_
@@ -1168,7 +1168,7 @@ sourceIntegralExpImagBaselMajorant inputs logNat n k =
     (Dirichlet.zeroAbsBelowBasel n)
 
 sourceIntegralExpFamily :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (k : Nat) →
   Dirichlet.BishopDirichletTermFamily
@@ -1179,7 +1179,7 @@ sourceIntegralExpFamily inputs logNat k s n =
 -- the half-plane parameter is deliberately unused. We do not
 -- misidentify this family as the full complex-variable zeta(s).
 sourceIntegralExpFamilyMajorant :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (inverseLaw : (n : Nat) →
     R._≃_ (Exp.bishopExp (logNat n))
@@ -1198,7 +1198,7 @@ sourceIntegralExpFamilyMajorant inputs logNat inverseLaw k s =
     }
 
 sourceIntegralExpFamilyConverges :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (logNat : NatLogCandidate)
   (inverseLaw : (n : Nat) →
     R._≃_ (Exp.bishopExp (logNat n))

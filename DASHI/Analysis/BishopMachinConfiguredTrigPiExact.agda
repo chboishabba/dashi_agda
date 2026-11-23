@@ -29,55 +29,55 @@ import DASHI.Analysis.BishopSetoidComplexExact as Complex
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- The actual Round11 trig dataSet names the SAME Bishop Pi constructed
 -- by the genuine convergent Machin series, not a number chosen afresh.
 configuredMachinPiIsOriginal :
-  (inputs : Round11.Round11BishopCutset) →
-  Complex.pi (Route.round11MachinTranscendentals inputs)
+  (inputs : Round11.BishopCutset) →
+  Complex.pi (Route.machinTranscendentals inputs)
     ≡ Machin.bishopMachinPi
 configuredMachinPiIsOriginal inputs = refl
 
 -- Native Bishop setoid equality for the canonical quarter angle.
 configuredFourTimesQuarterIsPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Bishop._≃_
     (Bishop._*_ (Bishop._⋆ (+ 4 / 1)) Quarter.machinQuarterAngle)
-    (Complex.pi (Route.round11MachinTranscendentals inputs))
+    (Complex.pi (Route.machinTranscendentals inputs))
 configuredFourTimesQuarterIsPi inputs =
   Quarter.fourTimesQuarterIsMachinPi
 
 -- The geometric source of piC is this exact configured real at 0i.
 configuredPiComplexReal :
-  (inputs : Round11.Round11BishopCutset) →
-  Complex.re (Complex.piC (Route.round11MachinTranscendentals inputs))
+  (inputs : Round11.BishopCutset) →
+  Complex.re (Complex.piC (Route.machinTranscendentals inputs))
     ≡ Machin.bishopMachinPi
 configuredPiComplexReal inputs = refl
 
 configuredPiComplexImaginaryZero :
-  (inputs : Round11.Round11BishopCutset) →
-  Complex.im (Complex.piC (Route.round11MachinTranscendentals inputs))
+  (inputs : Round11.BishopCutset) →
+  Complex.im (Complex.piC (Route.machinTranscendentals inputs))
     ≡ Bishop.0ℝ
 configuredPiComplexImaginaryZero inputs = refl
 
 -- True constructed sine/cosine consumers, already supplied as concrete
 -- Round11 signed-factorial power series. No assumption of sine(pi)=0.
 configuredSinAtMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Bishop.ℝ
 configuredSinAtMachinPi inputs =
   Elementary.bishopSin
-    (Complex.dataSet (Route.round11MachinTranscendentals inputs))
+    (Complex.dataSet (Route.machinTranscendentals inputs))
     Machin.bishopMachinPi
 
 configuredCosAtMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Bishop.ℝ
 configuredCosAtMachinPi inputs =
   Elementary.bishopCos
-    (Complex.dataSet (Route.round11MachinTranscendentals inputs))
+    (Complex.dataSet (Route.machinTranscendentals inputs))
     Machin.bishopMachinPi
 
 -- K05 terminal mathematical acceptance (NOT proved here):

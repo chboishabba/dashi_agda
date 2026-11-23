@@ -36,7 +36,7 @@ import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact a
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as R494
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 finiteAbsTriangle :

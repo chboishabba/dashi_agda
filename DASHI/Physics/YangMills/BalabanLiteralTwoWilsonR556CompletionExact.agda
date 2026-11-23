@@ -33,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanCanonicalDyadicTraversalShellExact as Dyad
 import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedLocalizationSourceExact as Downstream
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
 
 record RationalImageOrderReflection
     (embedding : Ring.RationalRealRingEmbedding) : Set₁ where

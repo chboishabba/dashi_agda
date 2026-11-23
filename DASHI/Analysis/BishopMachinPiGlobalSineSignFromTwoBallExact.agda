@@ -45,10 +45,10 @@ import DASHI.Foundations.BishopMachinPiRationalWindowExact as Window
 import DASHI.Analysis.BishopSinePositiveTwoBallFromCubicExact as SinePos
 import DASHI.Analysis.BishopMachinPiComplementReflectionFromImaginaryProductExact as Reflection
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact as First
 import DASHI.Physics.YangMills.BalabanBishopSineTwoBallCubicLowerExact as TwoBall
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 middle : R.ℝ
 middle = R._⋆ (+ 3 / 2)
@@ -147,7 +147,7 @@ machinComplementInsideTwoFromLocatedRight x xBelowPi middleBelowX =
       (machinComplementBelowTwoFromLocatedRight x middleBelowX))
 
 round11SinePositiveBeforeMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   First.NativeSinePositiveBeforeMachinPi inputs
@@ -176,7 +176,7 @@ round11SinePositiveBeforeMachinPi inputs product quarterEqual
 -- No formerly free global-sign input remains: source-owned
 -- locatedness + cubic sine positivity + SAME product/quarter inputs.
 round11MachinPiIsFirstPositiveSineZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   First.SourceMachinFirstPositiveSineZero inputs

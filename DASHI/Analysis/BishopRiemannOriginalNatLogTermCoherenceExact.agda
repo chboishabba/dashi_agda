@@ -29,8 +29,8 @@ import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Exact termwise source equality, not merely a comparison at one
 -- exponent, and not classical equality of a new complex carrier.

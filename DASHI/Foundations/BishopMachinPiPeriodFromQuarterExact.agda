@@ -24,10 +24,10 @@ import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as Cong
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 import DASHI.Moonshine.JInvariantBishopTrigUnitPhaseExact as UnitPhase
 
-module _ (inputs : Round11.Round11BishopCutset) where
+module _ (inputs : Round11.BishopCutset) where
 
   dataSet : E.BishopElementaryPowerSeriesData
   dataSet = Round11.elementarySeries inputs
@@ -100,7 +100,7 @@ module _ (inputs : Round11.Round11BishopCutset) where
     BP.≃-trans
       (BP.≃-symm
         (Cong.bishopSinCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           fourQuarterIsMachinPi))
       (BP.≃-trans
         (doubleSinAtTwoQuarter w)
@@ -124,7 +124,7 @@ module _ (inputs : Round11.Round11BishopCutset) where
     BP.≃-trans
       (BP.≃-symm
         (Cong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           fourQuarterIsMachinPi))
       (BP.≃-trans
         (doubleCosAtTwoQuarter w)

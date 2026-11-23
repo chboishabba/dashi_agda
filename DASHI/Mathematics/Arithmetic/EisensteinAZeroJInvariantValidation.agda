@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (0ℚ)
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantExact as J
 

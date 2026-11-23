@@ -12,7 +12,7 @@ import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finit
 import DASHI.Analysis.BishopTrigonometricDerivedSeriesConvergenceExact as Derived
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 ------------------------------------------------------------------------
 -- CONCRETE BISHOP TRIGONOMETRIC DERIVATIVE, BIDI
@@ -31,7 +31,7 @@ import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 
 record ConcreteBishopTrigDerivativeProblem : Set₁ where
   field
-    round11 : Round11.Round11BishopCutset
+    round11 : Round11.BishopCutset
     derivativeSeriesInterchange : Set
     reading : String
 
@@ -44,7 +44,7 @@ termIdentification :
   (P : ConcreteBishopTrigDerivativeProblem) →
   Terms.ConcreteSineCosineTermIdentification (dataSet P)
 termIdentification P =
-  Round11.round11ConcreteTermIdentification (round11 P)
+  Round11.concreteTermIdentification (round11 P)
 
 concreteDerivedTermIdentification :
   (P : ConcreteBishopTrigDerivativeProblem) →
@@ -138,7 +138,7 @@ finiteStillDoesNotAutoInterchange ()
 
 record Status : Set where
   field
-    round11ConcreteTermIdentificationOwned : Bool
+    concreteTermIdentificationOwned : Bool
     bishopPowerDerivativeOwned : Bool
     inverseFactorialDerivativeCoefficientOwned : Bool
     finiteSineTermDerivativeOwned : Bool
@@ -147,8 +147,8 @@ record Status : Set where
     cosineDerivedSeriesConvergenceOwned : Bool
     derivativeSeriesInterchangeClosed : Bool
 
-    round11ConcreteTermIdentificationOwnedIsTrue :
-      round11ConcreteTermIdentificationOwned ≡ true
+    concreteTermIdentificationOwnedIsTrue :
+      concreteTermIdentificationOwned ≡ true
     bishopPowerDerivativeOwnedIsTrue : bishopPowerDerivativeOwned ≡ true
     inverseFactorialDerivativeCoefficientOwnedIsTrue :
       inverseFactorialDerivativeCoefficientOwned ≡ true
@@ -162,7 +162,7 @@ open Status public
 
 canonicalStatus : Status
 canonicalStatus = record
-  { round11ConcreteTermIdentificationOwned = true
+  { concreteTermIdentificationOwned = true
   ; bishopPowerDerivativeOwned = true
   ; inverseFactorialDerivativeCoefficientOwned = true
   ; finiteSineTermDerivativeOwned = true
@@ -170,7 +170,7 @@ canonicalStatus = record
   ; sineDerivedSeriesConvergenceOwned = true
   ; cosineDerivedSeriesConvergenceOwned = true
   ; derivativeSeriesInterchangeClosed = false
-  ; round11ConcreteTermIdentificationOwnedIsTrue = refl
+  ; concreteTermIdentificationOwnedIsTrue = refl
   ; bishopPowerDerivativeOwnedIsTrue = refl
   ; inverseFactorialDerivativeCoefficientOwnedIsTrue = refl
   ; finiteSineTermDerivativeOwnedIsTrue = refl

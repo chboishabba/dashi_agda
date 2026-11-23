@@ -42,7 +42,7 @@ import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentation
 import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as EventAlgebra
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as Quantitative
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as WEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G1
 import DASHI.Physics.YangMills.YangMillsConcreteStructuralSemanticsRound517Exact as Structural
@@ -129,11 +129,11 @@ a3ExpectationIntegralIdentificationLevel =
 
 wextTwoMarkExpansionLevel : ProofLevel
 wextTwoMarkExpansionLevel =
-  WEXT.literalRound494WilsonTwoMarkExpansionLevel
+  WEXT.wilsonTwoMarkExpansionLevel
 
 wextConnectingWeightTailLevel : ProofLevel
 wextConnectingWeightTailLevel =
-  WEXT.literalRound494WilsonConnectingWeightTailLevel
+  WEXT.wilsonConnectingWeightTailLevel
 
 ------------------------------------------------------------------------
 -- The family count is a project scheduler count, not an atomic theorem count.

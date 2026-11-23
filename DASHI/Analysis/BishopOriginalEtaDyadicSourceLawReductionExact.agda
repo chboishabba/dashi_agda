@@ -40,8 +40,8 @@ import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 import DASHI.Analysis.BishopOriginalEtaEvenSourceScaleFiniteWeldExact as Scale
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Natural multiplication has already been normalized into the
 -- original indexing equation: source index 2k+1 means integer 2k+2.
@@ -128,11 +128,11 @@ originalEtaDyadicScaleFromLogAndExp T logNat s logLaw expLaw k =
 -- already used in BishopOriginalDirichletEtaFinitePairingExact.
 -- There is no new analytic family, witness function or source scale.
 module OriginalRound11
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   private
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     L = Terms.sourceCanonicalNatLogCandidate
 
   module Selected = Eta.OriginalRound11DirichletEta inputs

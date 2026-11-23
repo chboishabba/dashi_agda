@@ -1,5 +1,21 @@
 # Dashboard Plan
 
+## Semantic naming migration (active 2026-11-23)
+
+The Wilson Yang–Mills pilot is being migrated from historical `RoundNNN` names
+to term-appropriate semantic names. The authoritative mapping is
+`config/semantic-name-registry.json`; active names have no compatibility aliases,
+while historical round numbers remain recoverable in the registry and archive
+documentation. After the pilot is validated, extend the same staged registry
+process across the remaining Agda and Lean mirrors, resolving filename and
+symbol collisions explicitly before each batch.
+
+The repository-wide inventory is recorded in
+`Docs/SemanticNamingInventory20261123.md`. The next incomplete milestone is a
+bounded non-YM family with a curated semantic vocabulary; broad Physics and
+long acquisition chains remain collision-audited work, not mechanical digit
+stripping.
+
 ## Phase
 Stage C canonical bridge hardening complete; physics-closure execution checklist activated (active 2026-03-12).
 

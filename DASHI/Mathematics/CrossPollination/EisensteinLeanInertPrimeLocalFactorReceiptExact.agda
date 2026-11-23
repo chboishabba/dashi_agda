@@ -29,7 +29,7 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorRec
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 
 record LeanLocalCMFactorReceipt : Set where
   constructor lean-local-cm-factor-receipt

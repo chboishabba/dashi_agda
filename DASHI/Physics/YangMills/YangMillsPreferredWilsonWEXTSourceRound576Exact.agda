@@ -32,7 +32,7 @@ import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumu
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact as R575
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact as R573
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonWEXTCompletionRound574Exact as R574
 
 record PreferredWilsonMixedLogPhysicalSource
@@ -229,13 +229,13 @@ round576PreferredWEXTCompilerLevel = machineChecked
 round576MagnitudeCalibrationPhysicalInputRequired : Bool
 round576MagnitudeCalibrationPhysicalInputRequired = false
 
-literalRound576WilsonMixedLogClusterExpansionLevel : ProofLevel
-literalRound576WilsonMixedLogClusterExpansionLevel =
-  R573.literalRound573WilsonMixedLogClusterExpansionLevel
+wilsonMixedLogClusterExpansionLevel : ProofLevel
+wilsonMixedLogClusterExpansionLevel =
+  R573.wilsonMixedLogClusterExpansionLevel
 
-literalRound576ConnectingWeightTailLevel : ProofLevel
-literalRound576ConnectingWeightTailLevel =
-  R574.literalRound574ConnectingWeightTailLevel
+wilsonConnectingWeightTailLevel : ProofLevel
+wilsonConnectingWeightTailLevel =
+  R574.wilsonConnectingWeightTailLevel
 
 round576RationalMagnitudeContinuityLevel : ProofLevel
 round576RationalMagnitudeContinuityLevel =

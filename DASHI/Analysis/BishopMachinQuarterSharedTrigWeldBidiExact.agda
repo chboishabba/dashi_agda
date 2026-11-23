@@ -4,10 +4,10 @@ module DASHI.Analysis.BishopMachinQuarterSharedTrigWeldBidiExact where
 -- K05: REUSE THE ORIGINAL SHARED ROUND11 CLASSICAL/BISHOP TRIG WELD.
 --
 -- Actual original owners:
---   DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact
---   DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact
+--   DASHI.Analysis.BishopClassicalTrigObjectWeldExact
+--   DASHI.Analysis.BishopFactorDerivativeInterchangeExact
 --   DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact
---   DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact
+--   DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact
 --
 -- Under ONE source-owned and EXPLICIT same-object weld, the Round11
 -- Pythagorean theorem supplies the corresponding quarter-angle unit
@@ -31,8 +31,8 @@ open import Data.Product.Base using (_×_; _,_)
 import Real as Bishop
 import RealProperties as RP
 
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Weld
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as Weld
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Phase
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin

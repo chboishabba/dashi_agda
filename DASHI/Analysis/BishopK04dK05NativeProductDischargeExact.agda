@@ -22,7 +22,7 @@ open import Data.Product.Base using (_×_; _,_)
 import Real as R
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
 import DASHI.Analysis.BishopMachinTwoPointCayleyCompositionExact as TwoPoint
 import DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact as First
@@ -30,33 +30,33 @@ import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as Log
 import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Tails
-import DASHI.Foundations.BishopRound11SignedFactorialDegreeBinomialExact as Signed
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact as Signed
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- The native factorial coefficient theorem produces the ORIGINAL
 -- imaginary exponential product without any user-supplied hypothesis.
 sourceImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Product.Round11ImaginaryExpMultiplicative inputs
 sourceImaginaryProduct = Native.originalNativeImaginaryExpProduct
 
 -- Both addition laws are genuine values of the Round11 power series.
 sourceSineCosineAddition :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   C.BishopSineAdditionAt
-    (Route.round11MachinTranscendentals inputs) x y
+    (Route.machinTranscendentals inputs) x y
   ×
   C.BishopCosineAdditionAt
-    (Route.round11MachinTranscendentals inputs) x y
+    (Route.machinTranscendentals inputs) x y
 sourceSineCosineAddition =
   Signed.originalSineCosineAdditionFromNativeFactorials
 
 -- No independent Pythagorean premise: evaluate the same product
 -- at the anti-diagonal and use the original Round11 parity laws.
 sourcePythagorean :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (theta : R.ℝ) →
   let c = Product.cosB inputs theta
       s = Product.sinB inputs theta
@@ -67,7 +67,7 @@ sourcePythagorean inputs theta =
     inputs (sourceImaginaryProduct inputs) theta
 
 sourcePhaseBounds :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (theta : R.ℝ) →
   (R._≤_ (R.∣ Product.cosB inputs theta ∣) R.1ℝ)
   ×
@@ -80,11 +80,11 @@ sourcePhaseBounds inputs theta =
 -- the actual negative-log exponential-gap theorem. Every trig
 -- modulus, product, and Pythagorean input is supplied above.
 sourceBaselRegionFromLogIdentity :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Log.OriginalBishopNegativeLogExponentialGap →
   Tails.RegionBaselDomination
     (Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate)
     Region.sourceAboveTwoRegion
 sourceBaselRegionFromLogIdentity =
@@ -94,7 +94,7 @@ sourceBaselRegionFromLogIdentity =
 -- algebraic, product, sign or quarter-angle hypotheses once the
 -- two *actual original* atan/exponential values are supplied.
 sourceFirstPositiveZeroFromTwoOriginalAtans :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   TwoPoint.OriginalAtanFiveCayleyEvaluation inputs →
   TwoPoint.OriginalAtan239CayleyEvaluation inputs →
   First.SourceMachinFirstPositiveSineZero inputs

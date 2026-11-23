@@ -519,12 +519,12 @@ With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite tele
 
 Unlike an opaque `OriginalBishopQPeriodSource` field, this defines the literal original Bishop complex
 `q_T(τ) := BishopSetoidComplexExact.expC T (2 · (i · piC(T)) · τ)`,
-where `T = BishopRound11MachinSetoidComplexInstanceExact.round11MachinTranscendentals inputs` pins real exponential, sine, cosine and `pi=Machin.bishopMachinPi` to actual Round11 source functions. It transports its value to the same native Bishop complex series carrier previously used in `JInvariantBishopUnitDiskEisensteinCompletionExact`.
+where `T = BishopRound11MachinSetoidComplexInstanceExact.machinTranscendentals inputs` pins real exponential, sine, cosine and `pi=Machin.bishopMachinPi` to actual Round11 source functions. It transports its value to the same native Bishop complex series carrier previously used in `JInvariantBishopUnitDiskEisensteinCompletionExact`.
 
 - [x] **P2.Q13** `originalTwoPiI`, `originalBishopQAt`: selected original Bishop complex expression, not an abstract parameterization.
 - [x] **P2.Q14** `originalBishopQAtCongruent`: literal complex power-series exp preserves Bishop setoid congruence, reusing source `expCongruent` and `mulCongruent`.
 - [x] **P2.Q15** `originalBishopQAtForSeries`, `originalBishopQAtSeriesCongruent`, `originalBishopQAtSourceIdentified`: same-source complex carrier weld for already-existing E4/E6 q-series and their convergence owners.
-- [x] **P2.Q16** `originalRound11MachinQAt`, `originalRound11MachinQAtForSeries`: pin source `Round11BishopCutset` and actual Bishop Machin pi.
+- [x] **P2.Q16** `originalRound11MachinQAt`, `originalRound11MachinQAtForSeries`: pin source `BishopCutset` and actual Bishop Machin pi.
 - [ ] **P2.Q17** `originalBishopRound11MachinPiTrigPeriod`: prove the *specific* Bishop Machin value in Round11 has `sin(2*pi)=0`, `cos(2*pi)=1`, and that the selected real exponential has `exp(0)=1`; the existing Round11 source receipt marks Machin pi = classical trigonometric pi as **conditional**. This must not be inferred from numerical Archimedes bounds.
 - [ ] **P2.Q18** `originalBishopComplexExponentialAddition`: derive true native complex exp additive law from existing Bishop real exp Cauchy-product and Bishop sine/cosine addition formulae (identify and reuse originals).
 - [ ] **P2.Q19** `originalBishopQAtTPeriod`: prove `q_T(τ+1)≈Cq_T(τ)` from Q17–Q18 using same-source complex algebra and explicit translation.

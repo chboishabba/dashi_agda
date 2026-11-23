@@ -1,5 +1,17 @@
 # 2026-10-29 RH/Feynman TOE normalization
 
+# 2026-11-23 Semantic naming migration
+
+- Introduced `config/semantic-name-registry.json` and
+  `scripts/semantic_round_rename.py` for explicit, provenance-preserving
+  semantic renames.
+- Renamed the Wilson WEXT/mixed-log/continuum/source-first covariance owner
+  modules and updated their Agda import consumers. The pilot checker reports
+  zero stale references.
+- A blind Round-number deletion is rejected: the current tree has genuine
+  same-stem historical collisions, so each remaining family needs a curated
+  semantic owner name.
+
 - Reused the current Agda RH three-route max-cut as the golden frontier.
   Added one non-versioned Unified facade and wired it through `Unifier` and
   `EverythingTOESymmetryResolved369`. A1 carrier/curvature/compensation,
@@ -5582,3 +5594,18 @@
   requiring positive integrated nonlinear input.  It can also choose a
   dominant output carrier by requested modal-activity coverage rather than a
   fixed low-coverage count.  N16 static and one-step staged CPU smokes pass.
+# 2026-11-23 — Repository-wide semantic naming inventory
+
+After the Wilson pilot, audited live Agda and sibling Lean paths for remaining
+round-style module names. Found 3,388 Agda and 90 Lean candidates, concentrated
+in Physics/NSBControl but also present in Moonshine, Culture, Education,
+Biology, Analysis, Governance, and Integration. Added
+`Docs/SemanticNamingInventory20261123.md`; the next implementation batch will
+use a curated non-YM family registry rather than unsafe global number stripping.
+# 2026-11-23 — Bishop/Machin semantic naming batch
+
+Applied the bounded non-YM Bishop/Machin Route-B batch through the explicit
+semantic registry. Renamed active Agda module and declaration surfaces across
+Moonshine, Interop, Analysis, Foundations, Geometry, and the Bishop source
+cutset consumers. The registry checker reports zero stale references. Lean
+mirrors remain for the next language-aware batch; no full typecheck was run.

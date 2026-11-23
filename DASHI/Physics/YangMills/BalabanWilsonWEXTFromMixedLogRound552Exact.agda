@@ -23,8 +23,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
-import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact as R551
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
+import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionExact as R551
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as R494
 
 record WilsonWEXTFromMixedLogSource
     (Scale Volume Root State Observable SourceDirection Cluster : Set) : Set₁ where
@@ -98,16 +98,16 @@ asR494 source = record
       absoluteConnectingWeightSumBelowRootedShell source
   }
 
-round552WEXTAdapterCompilerLevel : ProofLevel
-round552WEXTAdapterCompilerLevel = machineChecked
+wextAdapterCompilerLevel : ProofLevel
+wextAdapterCompilerLevel = machineChecked
 
-round552IndependentCovarianceExpansionFieldRequired : Bool
-round552IndependentCovarianceExpansionFieldRequired = false
+independentCovarianceExpansionFieldRequired : Bool
+independentCovarianceExpansionFieldRequired = false
 
-literalRound552WilsonMixedLogClusterExpansionLevel : ProofLevel
-literalRound552WilsonMixedLogClusterExpansionLevel =
-  R551.literalRound551WilsonMixedLogClusterExpansionLevel
+wilsonMixedLogClusterExpansionLevel : ProofLevel
+wilsonMixedLogClusterExpansionLevel =
+  R551.wilsonMixedLogClusterExpansionLevel
 
-literalRound552ConnectingWeightTailLevel : ProofLevel
-literalRound552ConnectingWeightTailLevel =
-  R494.literalRound494WilsonConnectingWeightTailLevel
+wilsonConnectingWeightTailLevel : ProofLevel
+wilsonConnectingWeightTailLevel =
+  R494.wilsonConnectingWeightTailLevel

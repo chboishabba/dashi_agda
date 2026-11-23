@@ -9,7 +9,7 @@ import RealProperties as BishopP
 
 import DASHI.Analysis.BishopFactorDerivativeExact as Factor
 import DASHI.Analysis.BishopFactorDerivativeProductExact as Product
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Trig
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Trig
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 
 ------------------------------------------------------------------------

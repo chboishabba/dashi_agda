@@ -1,5 +1,13 @@
 # Compactified Context
 
+## Semantic naming migration checkpoint — 2026-11-23
+
+- Wilson YM pilot committed as `edf74db0c3`.
+- Bishop/Machin non-YM Agda batch is applied locally with 87 explicit registry
+  entries and zero stale references under `scripts/semantic_round_rename.py`.
+- The next batch is the language-aware Lean mirror migration; preserve current
+  `.dashi`/GWB artifacts and unrelated worker dirt.
+
 ## Current Interaction-Closure Pivot
 
 - C2 Balaban RG lane is now mapped onto concrete owners:

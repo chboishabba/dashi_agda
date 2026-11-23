@@ -28,7 +28,7 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceip
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 
 record LeanJZeroCMFormalSourceReceipt : Set where
   constructor lean-jzero-cm-formal-source-receipt

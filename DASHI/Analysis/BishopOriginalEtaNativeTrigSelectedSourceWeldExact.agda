@@ -32,13 +32,13 @@ import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
 import DASHI.Analysis.BishopOriginalNativeComplexExpAdditionFromTrigExact as Native
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
-module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
+module OriginalRound11 (inputs : Round11.BishopCutset) where
 
   private
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     L = Terms.sourceCanonicalNatLogCandidate
 
   module Selected = Eta.OriginalRound11DirichletEta inputs

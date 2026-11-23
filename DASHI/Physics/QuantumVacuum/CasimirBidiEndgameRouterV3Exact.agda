@@ -4,8 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.MetricConvergenceKernelBidiExact as Metric
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Trig
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as TrigWeld
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Trig
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as TrigWeld
 
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.QuantumVacuum.ParallelPlateTETMModeExpansionSourceTransportExact as MaxwellSource

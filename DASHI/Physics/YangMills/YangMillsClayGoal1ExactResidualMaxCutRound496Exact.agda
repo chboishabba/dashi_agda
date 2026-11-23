@@ -38,7 +38,7 @@ import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMaxCutRound505Exact
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as WEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
@@ -242,9 +242,9 @@ leafLevel a5RepresentedGrowthExtensionality =
   A45Ext.literalRound501GrowthExtensionalityLevel
 
 leafLevel bWilsonTwoMarkExpansion =
-  WEXT.literalRound494WilsonTwoMarkExpansionLevel
+  WEXT.wilsonTwoMarkExpansionLevel
 leafLevel bWilsonConnectingWeightTail =
-  WEXT.literalRound494WilsonConnectingWeightTailLevel
+  WEXT.wilsonConnectingWeightTailLevel
 leafLevel bSameHamiltonianTransferCoordinate =
   B.bSameHamiltonianLevel
 leafLevel bVacuumSectorPositiveEnergySemantics =
@@ -401,11 +401,11 @@ caratheodoryExtensionLevel =
 
 wextFiniteTriangleLevel : ProofLevel
 wextFiniteTriangleLevel =
-  WEXT.round494FiniteTriangleLevel
+  WEXT.finiteTriangleLevel
 
 wextAssemblyLevel : ProofLevel
 wextAssemblyLevel =
-  WEXT.round494WEXTCompilerLevel
+  WEXT.wextCompilerLevel
 
 bGeometricDecayCompilerLevel : ProofLevel
 bGeometricDecayCompilerLevel =

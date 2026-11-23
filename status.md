@@ -1,5 +1,16 @@
 # 2026-07-25 C2 Balaban RG implementation planning
 
+# 2026-11-23 Semantic naming migration
+
+- Added the explicit semantic-name registry and deterministic rename tool.
+- Completed the first Yang--Mills Wilson pilot: five owner modules and their
+  97 Agda consumers now use semantic module/declaration names without the
+  historical Round labels.
+- Historical round numbers remain in the registry/archive policy; no
+  compatibility aliases are introduced.
+- The remaining numbered families require collision-specific registry entries
+  before migration.
+
 - Mapped the next YM implementation lane to concrete module owners:
   `CompactLieBlockAverage` for the coarse-block interface,
   `YMSmallFieldSurvivalAuthority` for small-field cutoff and admissible-radius
@@ -9943,3 +9954,18 @@ twisted-even source laws, actual FLM all-mode isomorphism and original
 Y443/Monster group/action proof remain open. The dashi_lean4 #47
 Maschke/Schur/FDRep/Hom machinery is existing reusable code.
 No kernel run claimed.
+# Semantic naming migration — 2026-11-23
+
+The Wilson Yang–Mills pilot is complete (`edf74db0c3`) with 42 explicit
+registry entries and no remaining references to those old names. A repository-
+wide inventory found 3,388 live Agda filenames and 90 sibling Lean filenames
+with round-style labels outside generated/archive surfaces. The next batch is
+intentionally bounded and non-YM; long Physics and acquisition chains require
+curated semantic vocabularies before renaming.
+# Semantic naming batch 1 — Bishop/Machin Route-B (2026-11-23)
+
+Applied the first bounded non-YM migration after the Wilson pilot. The registry
+now has 87 explicit entries; Agda Bishop/Machin, Interop, analytic, foundation,
+and source-cutset module surfaces were renamed and 0 stale registry references
+remain. Lean mirrors are intentionally not changed in this batch. Full
+typechecking remains out of scope; structural validation passed.

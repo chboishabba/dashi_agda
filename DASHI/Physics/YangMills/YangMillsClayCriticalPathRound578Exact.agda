@@ -148,11 +148,11 @@ b1SourceFirstJetLocalizationCompilerLevel =
 
 b1WilsonMixedLogClusterExpansionLevel : ProofLevel
 b1WilsonMixedLogClusterExpansionLevel =
-  B1.literalRound576WilsonMixedLogClusterExpansionLevel
+  B1.wilsonMixedLogClusterExpansionLevel
 
 b1ConnectingWeightTailLevel : ProofLevel
 b1ConnectingWeightTailLevel =
-  B1.literalRound576ConnectingWeightTailLevel
+  B1.wilsonConnectingWeightTailLevel
 
 b1MagnitudeCalibrationPhysicalInputRequired : Bool
 b1MagnitudeCalibrationPhysicalInputRequired =

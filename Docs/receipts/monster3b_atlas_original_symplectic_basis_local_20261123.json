@@ -1,0 +1,43 @@
+{
+  "schema": "monster3b-atlas-original-source-symplectic-basis-local-v1",
+  "source": "ATLAS/AtlasRep original GF(3) 2.Suz:2 12D matrices, previous #1098 vendoring",
+  "original_SHA256": {
+    "2Suzd2G1-f3r12aB0.m1": "ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2",
+    "2Suzd2G1-f3r12aB0.m2": "433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f"
+  },
+  "T_rows_base3": [
+    "110011001022",
+    "010021001212",
+    "000220222112",
+    "001122021001",
+    "001102000020",
+    "000101000020",
+    "000010001110",
+    "000002000102",
+    "000010000000",
+    "000001000000",
+    "000000000002",
+    "000000000010"
+  ],
+  "basis_change_invertible": true,
+  "rank_source_alternating_form": 12,
+  "canonical_standard_symplectic_form": true,
+  "simultaneous_original_C_D_transport": true,
+  "simultaneous_original_D4_rotation_mirror_transport": true,
+  "source_intertwiner_space_dimension": 1,
+  "source_rotation_order": 4,
+  "source_rotation_square_is_minus_identity": true,
+  "source_mirror_order": 2,
+  "mirror_central_multiplier_mod3": 2,
+  "rotation_central_multiplier_mod3": 1,
+  "swapped_generator_negative_control_passed": true,
+  "identity_target_negative_control_passed": true,
+  "execution": "independent local GF3 source reimplementation; committed script not separately executed from GitHub fetched bytes",
+  "same_source_ATLAS_coordinate_transport_only": true,
+  "independent_Monster_E_quotient_generator_pair_present": false,
+  "actual_Monster_normalizer_words_imported": false,
+  "mmgroup_executed": false,
+  "Monster_generator_intertwiner_paid": false,
+  "H_zeta_W_zeta_cocycle_promoted": false,
+  "AGDA_kernel_checked": false
+}

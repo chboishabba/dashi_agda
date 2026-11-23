@@ -47,8 +47,8 @@ import DASHI.Analysis.BishopK04dConcreteAboveTwoPolynomialChartExact as Chart
 import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NatLog
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 sourceChartRealExponent :
   (eta : R.ℝ) (logNat : Terms.NatLogCandidate) (index : Nat) →
@@ -88,23 +88,23 @@ sourceChartExponentialFactorContinuous eta logNat index input limit converges =
       input limit converges)
 
 sourceOriginalTerm :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (logNat : Terms.NatLogCandidate) (eta : R.ℝ) →
   R.ℝ → Nat → A.BishopComplex
 sourceOriginalTerm inputs logNat eta t index =
   Terms.bishopDirichletExponentialTerm
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     logNat (Chart.sourcePolynomialChart eta t) index
 
 sourceOriginalTermRealContinuous :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (logNat : Terms.NatLogCandidate) (eta : R.ℝ) →
   (index : Nat) →
   U.SequentiallyContinuous
     (λ t → A.re (sourceOriginalTerm inputs logNat eta t index))
 sourceOriginalTermRealContinuous inputs logNat eta index =
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     c = E.bishopCos (C.dataSet T)
           (sourceChartImagExponent eta logNat index)
   in
@@ -115,14 +115,14 @@ sourceOriginalTermRealContinuous inputs logNat eta index =
     (Ring.sequentiallyContinuousConstant c)
 
 sourceOriginalTermImagContinuous :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (logNat : Terms.NatLogCandidate) (eta : R.ℝ) →
   (index : Nat) →
   U.SequentiallyContinuous
     (λ t → A.im (sourceOriginalTerm inputs logNat eta t index))
 sourceOriginalTermImagContinuous inputs logNat eta index =
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     c = E.bishopSin (C.dataSet T)
           (sourceChartImagExponent eta logNat index)
   in
@@ -133,14 +133,14 @@ sourceOriginalTermImagContinuous inputs logNat eta index =
     (Ring.sequentiallyContinuousConstant c)
 
 sourceOriginalFinitePartialRealContinuous :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (logNat : Terms.NatLogCandidate) (eta : R.ℝ) →
   (count : Nat) →
   U.SequentiallyContinuous
     (λ t →
       A.re (Dirichlet.dirichletPartial
         (Terms.bishopDirichletExponentialTerm
-          (Route.round11MachinTranscendentals inputs)
+          (Route.machinTranscendentals inputs)
           logNat)
         (Chart.sourcePolynomialChart eta t)
         count))
@@ -150,21 +150,21 @@ sourceOriginalFinitePartialRealContinuous inputs logNat eta (suc count) =
   Ring.sequentiallyContinuousAdd
     (λ t → A.re (Dirichlet.dirichletPartial
       (Terms.bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs) logNat)
+        (Route.machinTranscendentals inputs) logNat)
       (Chart.sourcePolynomialChart eta t) count))
     (λ t → A.re (sourceOriginalTerm inputs logNat eta t count))
     (sourceOriginalFinitePartialRealContinuous inputs logNat eta count)
     (sourceOriginalTermRealContinuous inputs logNat eta count)
 
 sourceOriginalFinitePartialImagContinuous :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (logNat : Terms.NatLogCandidate) (eta : R.ℝ) →
   (count : Nat) →
   U.SequentiallyContinuous
     (λ t →
       A.im (Dirichlet.dirichletPartial
         (Terms.bishopDirichletExponentialTerm
-          (Route.round11MachinTranscendentals inputs)
+          (Route.machinTranscendentals inputs)
           logNat)
         (Chart.sourcePolynomialChart eta t)
         count))
@@ -174,7 +174,7 @@ sourceOriginalFinitePartialImagContinuous inputs logNat eta (suc count) =
   Ring.sequentiallyContinuousAdd
     (λ t → A.im (Dirichlet.dirichletPartial
       (Terms.bishopDirichletExponentialTerm
-        (Route.round11MachinTranscendentals inputs) logNat)
+        (Route.machinTranscendentals inputs) logNat)
       (Chart.sourcePolynomialChart eta t) count))
     (λ t → A.im (sourceOriginalTerm inputs logNat eta t count))
     (sourceOriginalFinitePartialImagContinuous inputs logNat eta count)
@@ -184,7 +184,7 @@ sourceOriginalFinitePartialImagContinuous inputs logNat eta (suc count) =
 -- source Bishop negative-log composition; product and exp/trig
 -- finite-term continuity are all derived from existing source proofs.
 module NativeNatLogOriginalChartContinuous
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (sourceLogIdentity : NatLog.OriginalBishopNegativeLogExponentialGap)
   (eta : R.ℝ)
   where

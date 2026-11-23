@@ -31,9 +31,9 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanWilsonWEXTFromMixedLogRound552Exact as R552
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as R494
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact as R573
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
 
 record SourceFirstWilsonWEXTCompletion
     {Measure Observable SourceDirection Cluster Scale Volume Root : Set}
@@ -248,26 +248,26 @@ asR556 source = record
       upperOrderClosed source
   }
 
-round574FinalWilsonShellCompilerLevel : ProofLevel
-round574FinalWilsonShellCompilerLevel = machineChecked
+finalWilsonShellCompilerLevel : ProofLevel
+finalWilsonShellCompilerLevel = machineChecked
 
-round574R556AdapterLevel : ProofLevel
-round574R556AdapterLevel = machineChecked
+sourceFirstCovarianceAdapterLevel : ProofLevel
+sourceFirstCovarianceAdapterLevel = machineChecked
 
-literalRound574SourceFirstWilsonWEXTCompletionLevel : ProofLevel
-literalRound574SourceFirstWilsonWEXTCompletionLevel = conditional
+sourceFirstWilsonWEXTCompletionLevel : ProofLevel
+sourceFirstWilsonWEXTCompletionLevel = conditional
 
-round574FinalShellBoundStoredAsPhysicalInput : Bool
-round574FinalShellBoundStoredAsPhysicalInput = false
+finalShellBoundStoredAsPhysicalInput : Bool
+finalShellBoundStoredAsPhysicalInput = false
 
-literalRound574WilsonMixedLogClusterExpansionLevel : ProofLevel
-literalRound574WilsonMixedLogClusterExpansionLevel =
-  R573.literalRound573WilsonMixedLogClusterExpansionLevel
+wilsonMixedLogClusterExpansionLevel : ProofLevel
+wilsonMixedLogClusterExpansionLevel =
+  R573.wilsonMixedLogClusterExpansionLevel
 
-literalRound574ConnectingWeightTailLevel : ProofLevel
-literalRound574ConnectingWeightTailLevel =
-  R552.literalRound552ConnectingWeightTailLevel
+wilsonConnectingWeightTailLevel : ProofLevel
+wilsonConnectingWeightTailLevel =
+  R552.wilsonConnectingWeightTailLevel
 
-literalRound574MagnitudeCalibrationLevel : ProofLevel
-literalRound574MagnitudeCalibrationLevel =
-  R573.literalRound573MagnitudeIsRationalAbsoluteLevel
+wilsonMagnitudeCalibrationLevel : ProofLevel
+wilsonMagnitudeCalibrationLevel =
+  R573.wilsonMagnitudeIsRationalAbsoluteLevel

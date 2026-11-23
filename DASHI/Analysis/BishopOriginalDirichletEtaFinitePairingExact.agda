@@ -25,8 +25,8 @@ import RealProperties as RP
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Pointwise equality on the ACTUAL original Riemann-Bishop
 -- Cartesian complex, without claiming intensional equality
@@ -198,13 +198,13 @@ originalBishopEtaIsZetaMinusTwiceEven term n =
 -- EXACT SAME term family as
 -- BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog.
 module OriginalRound11DirichletEta
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   sourceTerms : BC.BishopComplex → Nat → BC.BishopComplex
   sourceTerms =
     Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate
 
   actualOriginalFiniteEtaZetaPairing :

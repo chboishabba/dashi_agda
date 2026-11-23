@@ -38,18 +38,18 @@ import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as A
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as D
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as UniformTails
-import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
+import DASHI.Analysis.BishopTrigModulusFromPythagoreanExact as Modulus
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
-import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Foundations.BishopTrigAtZeroExact as Origin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegativeExp
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 sourceLogPositiveIndex : Nat → R.ℝ
 sourceLogPositiveIndex n =
@@ -67,7 +67,7 @@ sourceDirichletRealExp s n =
     (R._*_ (R.- (A.re s)) (sourceLogPositiveIndex n))
 
 sourceSelectedPythagorean :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   A.BishopComplex → Nat → Set
 sourceSelectedPythagorean inputs s n =
   let
@@ -154,7 +154,7 @@ absoluteProductBelowBasel exponential phase index nonnegative scalarBound phaseB
         phaseBound))
 
 sourceComplexAboveTwoCoordinateBounds :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) (n : Nat) →
   R._<_ D.sourceTwoReal (A.re s) →
   R._≃_
@@ -163,7 +163,7 @@ sourceComplexAboveTwoCoordinateBounds :
   sourceSelectedPythagorean inputs s n →
   let
     terms = D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate
   in
   (R._≤_
@@ -197,7 +197,7 @@ sourceComplexAboveTwoCoordinateBounds
 -- No need to pretend that the genuine log(1)=0 head decays:
 -- convergence owner explicitly accepts a finite start index.
 sourceComplexAboveTwoMajorant :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   R._<_ D.sourceTwoReal (A.re s) →
   ((n : Nat) →
@@ -207,7 +207,7 @@ sourceComplexAboveTwoMajorant :
   ((n : Nat) → sourceSelectedPythagorean inputs s n) →
   Dirichlet.BishopDirichletBaselMajorantAt
     (D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate)
     s
 sourceComplexAboveTwoMajorant
@@ -230,7 +230,7 @@ sourceComplexAboveTwoMajorant
   }
 
 sourceComplexAboveTwoConverges :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   (aboveTwo : R._<_ D.sourceTwoReal (A.re s)) →
   (inverseLaw : (n : Nat) →
@@ -241,7 +241,7 @@ sourceComplexAboveTwoConverges :
     sourceSelectedPythagorean inputs s n) →
   let
     terms = D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate
     bound = sourceComplexAboveTwoMajorant
       inputs s aboveTwo inverseLaw pythagorean
@@ -256,7 +256,7 @@ sourceComplexAboveTwoConverges :
 sourceComplexAboveTwoConverges inputs s aboveTwo inverseLaw pythagorean =
   Dirichlet.dirichletPartialConverges
     (D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate)
     s
     (sourceComplexAboveTwoMajorant
@@ -280,10 +280,10 @@ zeroLogScalarExponent value =
     RP.≃-refl value
 
 sourceComplexZeroRealIsOne :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   let terms = D.bishopDirichletExponentialTerm
-       (Route.round11MachinTranscendentals inputs)
+       (Route.machinTranscendentals inputs)
        D.sourceCanonicalNatLogCandidate
   in
   R._≃_ (A.re (terms s zero)) R.1ℝ
@@ -296,16 +296,16 @@ sourceComplexZeroRealIsOne inputs s =
         ExpPositive.bishopExpZero)
       (RP.≃-trans
         (TrigCong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (zeroLogScalarExponent (A.im s)))
         (Origin.round11CosineAtZero inputs)))
     (RP.*-identityˡ R.1ℝ)
 
 sourceComplexZeroImagIsZero :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   let terms = D.bishopDirichletExponentialTerm
-       (Route.round11MachinTranscendentals inputs)
+       (Route.machinTranscendentals inputs)
        D.sourceCanonicalNatLogCandidate
   in
   R._≃_ (A.im (terms s zero)) R.0ℝ
@@ -318,7 +318,7 @@ sourceComplexZeroImagIsZero inputs s =
         ExpPositive.bishopExpZero)
       (RP.≃-trans
         (TrigCong.bishopSinCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (zeroLogScalarExponent (A.im s)))
         (Origin.round11SineAtZero inputs)))
     (let open RP.ℝ-Solver
@@ -327,10 +327,10 @@ sourceComplexZeroImagIsZero inputs s =
        RP.≃-refl)
 
 sourceComplexZeroBaselBound :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   let terms = D.bishopDirichletExponentialTerm
-       (Route.round11MachinTranscendentals inputs)
+       (Route.machinTranscendentals inputs)
        D.sourceCanonicalNatLogCandidate
   in
   (R._≤_ (R.∣ A.re (terms s zero) ∣) (Basel.baselTerm zero))
@@ -350,7 +350,7 @@ sourceComplexZeroBaselBound inputs s =
 -- All-index variable-complex-s majorant. The Pythagorean at each
 -- literal source phase and canonical exp/log inverse remain explicit.
 sourceComplexAboveTwoMajorantAllIndices :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (s : A.BishopComplex) →
   R._<_ D.sourceTwoReal (A.re s) →
   ((n : Nat) →
@@ -360,7 +360,7 @@ sourceComplexAboveTwoMajorantAllIndices :
   ((n : Nat) → sourceSelectedPythagorean inputs s n) →
   Dirichlet.BishopDirichletBaselMajorantAt
     (D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate)
     s
 sourceComplexAboveTwoMajorantAllIndices
@@ -400,7 +400,7 @@ sourceAboveTwoRegion s =
   R._<_ D.sourceTwoReal (A.re s)
 
 sourceAllAnglesPythagorean :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 sourceAllAnglesPythagorean inputs =
   (theta : R.ℝ) →
   let
@@ -411,7 +411,7 @@ sourceAllAnglesPythagorean inputs =
   R._≃_ (R._+_ (R._*_ c c) (R._*_ t t)) R.1ℝ
 
 sourceRegionWideBaselCertificate :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   ((n : Nat) →
     R._≃_
       (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
@@ -419,7 +419,7 @@ sourceRegionWideBaselCertificate :
   sourceAllAnglesPythagorean inputs →
   UniformTails.RegionBaselDomination
     (D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate)
     sourceAboveTwoRegion
 sourceRegionWideBaselCertificate
@@ -441,7 +441,7 @@ sourceRegionWideBaselCertificate
   }
 
 sourceRegionUniformDirichletValue :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (inverseLaw : (n : Nat) →
     R._≃_
       (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
@@ -454,7 +454,7 @@ sourceRegionUniformDirichletValue
     inputs inverseLaw pythagorean s aboveTwo =
   UniformTails.regionDirichletValue
     (D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate)
     sourceAboveTwoRegion
     (sourceRegionWideBaselCertificate
@@ -462,7 +462,7 @@ sourceRegionUniformDirichletValue
     s aboveTwo
 
 sourceRegionUniformLimitError :
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (inverseLaw : (n : Nat) →
     R._≃_
       (Exp.bishopExp (D.sourceCanonicalNatLogCandidate n))
@@ -475,7 +475,7 @@ sourceRegionUniformLimitError :
   m Nat.≥ UniformTails.baselUniformTailCutoff k →
   let
     terms = D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate
     value = sourceRegionUniformDirichletValue
       inputs inverseLaw pythagorean s aboveTwo
@@ -493,7 +493,7 @@ sourceRegionUniformLimitError
     inputs inverseLaw pythagorean k s aboveTwo m mPast =
   let
     terms = D.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       D.sourceCanonicalNatLogCandidate
     bound = sourceRegionWideBaselCertificate
       inputs inverseLaw pythagorean

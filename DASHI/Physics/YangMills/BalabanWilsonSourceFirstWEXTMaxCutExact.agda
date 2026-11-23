@@ -38,7 +38,7 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalKoteckyPreissExact
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCMP116ConnectingTailExact as Tail
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedKPT5SameObjectExact as KPT5
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as R494
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
 
 sourceFirstKPDatumConstructionLevel : ProofLevel

@@ -29,8 +29,8 @@ import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumu
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact as R575
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact as R573
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterJetExact as Jet
 import DASHI.Physics.YangMills.BalabanLiteralWilsonWEXTTheoremExact as WEXT

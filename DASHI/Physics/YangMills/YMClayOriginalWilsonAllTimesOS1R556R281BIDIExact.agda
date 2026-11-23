@@ -40,8 +40,8 @@ import DASHI.Physics.YangMills.BalabanClayT5JMagnitudeDirectShellRound296Exact a
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.BalabanClayT5OS1RotationRestorationExact as OS1
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact as R332
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
-import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as R551
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
+import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact as R551
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
