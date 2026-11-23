@@ -260,3 +260,29 @@ quotient relations, then solve the *same* invertible 12x12
 T over F3, transport J and cocycle, and attach the selected
 zeta/zeta² phases. Neither Out=1, Monster class 4D nor a
 one-dimensional ATLAS self-intertwiner pays this gate.
+
+
+## 23 November 2026 — ENDPOINT-FIRST 3B completion: cocycle elimination and actual 90D operator extraction
+
+This section consolidates the source-selected 28 candidate quotient intertwiners, genuine user-reported `mmgroup 1.0.8` E/Z(E) extraction and GAP/CTblLib fusion with the **actual endpoint**. The mathematical reductions are documented in [Monster3BEndpointFirstConstruction20261123](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md). No separate small acceptance script is required to continue the derivation; later full-group kernel/identity checks belong after the endpoint construction.
+
+**Original-source sector dimensions are exact.** The original 3B weight-two source has dimension 196884 with trace 54 on both z and z². The central idempotents give dimensions (65664,65610,65610), so for nontrivial phase and E=3^(1+12), the actual Stone–von Neumann 729-dimensional irreducible has multiplicity **90**. This is an actual character consequence, unlike simply choosing a finite `Fin 90` set.
+
+**Actual Heisenberg action of normalizer words is algebraically recoverable from the existing manifest.** For the source E group `(v,t)(w,u)=(v+w,t+u+c(v,w))`, with c=b.a', and quotient similitude A and phase multiplier lambda, the symmetric defect `E_A=A^T C A-lambda C` admits `q_A(v)=2v^T E_A v`. Its polarization is precisely the cocycle defect, regardless of symmetric-defect rank. The original manifest's twelve selected `translation_images/modulation_images` include central exponents `t_i`; they supply the **unique residual linear functional** `ell(e_i)=t_i-q_A(e_i)`, thus the actual automorphism `(v,t)->(Av,lambda*t+q_A(v)+ell(v))`. Composition of these polynomial automorphisms transports every powered candidate's **entire conjugation action on E**, not just its GF3 quotient; it still does not identify candidate group elements which act the same on E.
+
+**Full lift equations as one joint obstruction problem.** Multiplying proposed Monster C/D lifts by E corrections parameterized by two vectors u,v and two centre coordinates does not change their quotient pair. For each relator, its E/Z(E) residual is an affine function `r+L_Cu+L_Dv` (twisted relator/Fox linearization). If, and ONLY if, its original full-group residual belongs to E, solving these equations leaves centre-valued quadratic constraints from the known Heisenberg multiplication. The system is simultaneous across all target relators and representative candidate classes. Exact original relator residues and proof of kernel membership are not in the 28-hits summary; therefore no particular C/D group extension is falsely declared solved yet.
+
+**Actual 90D multiplicity action via a single Weil-vacuum column.** In characteristic zero, take `S_s=P_(0,s)W_s`, where `P_(0,s)=(1/729) sum_(b in F3^6) rho(B_b)` is the common modulation-fixed projector inside the original nontrivial-centre sector W_s. Define `P_(x,s)=T_x P_(0,s)T_x^-1`. The genuine linear evaluation and inverse are
+```
+Phi_s(e_x tensor u)=T_x u,
+Psi_s(w)=sum_x e_x tensor T_x^-1 P_(x,s)w .
+```
+Let g normalize E and map phase s to s'=lambda^-1 s. Choose the already constructed original-source Weil transport `K_g:H_s->H_s'` with `K_g e_0=sum_x k_x e_x`. By the E intertwiner/Schur argument, `Phi_s'^-1 rho(g)Phi_s=K_g tensor L_g`. For ANY x with `k_x != 0` and EVERY `u in S_s`,
+```
+       L_g u = k_x^-1 T_x^-1 P_(x,s') rho(g)u .
+```
+This extracts the actual multiplicity action from **one Weil vacuum column**, the original g action, and a modulation weight projector, without constructing a dense 65610-dimensional tensor matrix. The extraction acts between S_s and S_-s when lambda=-1; the source's outer anti-symplectic C must not be typed as an S_s endomorphism. The reciprocal gauge freedom `K_g -> alpha K_g`, `L_g -> alpha^-1 L_g` is retained and fixed jointly by original source relators. Finite-field GF3 matrix T and authentic MMV(7) phase samples alone do not supply the required complex rho(g) on W_s.
+
+**Character/constituent selection is independent.** For any phase-preserving g, the actual `chi_(W_s)(g)=(1/3) sum_j zeta^(-s*j) chi_W(z^j*g)`; then `chi_(W_s)(g)=chi_H(K_g) chi_(S_s)(L_g)`. Character division requires chi_H(K_g) != 0; otherwise use the projector extraction. The original GAP 210-class rows and exact fusion are the correct source for distinguishing faithful 12+78 from 12+Sym²12. An outer phase swap has no separate ordinary trace on a single W_s. Neither the dimension 90 nor a quotient GL12 conjugacy determines this constituent.
+
+**Endpoint scorecard, not a certification checklist:** the symmetric-cocycle correction and full actual E automorphism reconstruction formula are mathematically DONE from manifest coordinates; the characteristic-zero 90 sector DIMENSION and Hom evaluation/inverse are structurally DONE; simultaneous Monster group lift and original characteristic-zero g action remain the two specific SOURCE INPUTS preventing a fully numerical 90D operator and selected class/constituent. Finish those mathematically first; only then batch final verification. No invented full-group equality, class selection, original complex 90D matrix, or Monster VOA endpoint.
