@@ -36,8 +36,8 @@ This is an **interface/forward-model formula**, not a measured or calibrated res
 The existing J12 native signed work law already pays all events:
 
 \[
-W_{\rm driver}+(W_{\rm incident}-W_{\rm outgoing})+\Delta U_{\rm initial}
-= W_{\rm spark}+W_{\rm diode}+W_{\rm copper/bleed/internal}+\Delta U_{\rm final}
+W_{\rm driver}+(W_{\rm incident}-W_{\rm outgoing})
+= W_{\rm spark}+W_{\rm diode}+W_{\rm copper/bleed/internal}+(U_{\rm final}-U_{\rm initial})
 \]
 
 with a proper common boundary, and correct interpretation of \(\Delta U\). **Coherent waves sharing one mode have a cross term** \(2ab\cos\phi\); separate amplitudes cannot be freely added as independent delivered watts. An independent natural electrojet current or finite atmospheric generator crossing the same boundary must not be counted as both an external source and internal HF-heater conversion. LF envelope at the receiver does not establish LF radiated power. A gravity sensor has a separate momentum/stress surface; mechanically suspended magnets and current loops can create instrument artifacts.
