@@ -109,6 +109,7 @@ def residual_v(N,t0,root,h):
  bound[5]+=tail;bound[6]+=tail
  return P,[F(x,S) for x in bound]
 
+
 def gV_slope_active(tube):
     i,j,u,v,b,q,r,ih,x=tube
     jv=(v-b-p['Vd'])/p['Rd']
