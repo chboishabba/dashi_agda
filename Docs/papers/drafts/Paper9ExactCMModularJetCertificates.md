@@ -1557,3 +1557,96 @@ codec gives the proper lossless-condition interface.
 No GPU native, Agda/Lean or CI acceptance here; original
 classical Chudnovsky identity and Bishop same-real open,
 RH actual selected W and Monster action unrelated.
+
+
+## 23 Nov — P0 PQT × ternary-in-binary × SWAR source-owner correction and ablation
+
+The previous generic trit-to-GMP proposal was INCOMPLETE: original
+P/Q/T already has a source-native binary-splitting contract in
+`Docs/roadmaps/ConstructivePiBinarySplitMaxCut20261118.md` and
+`scripts/check_pi_projective.py`; the source-native ternary
+binary layout is `DASHI/Codec/TriadicPAdicCodec.agda`,
+`DASHI/Codec/BalancedTritBitFibre.agda`, and
+`DASHI/ComputerScience/TriadicCodecSWARPortableKernelCrossPollinationExact.agda`.
+Furthermore `TriadicSupportMaskSWARExecutionExact.agda` and
+`TriadicPrefixSWARExecutionExact.agda` already cite original
+COMPILED eight-byte-lane uint64 C11 SWAR active-count and prefix
+execution (8^8 exhaustive), while
+`TriadicSignCompactionSWARExecutionExact.agda` records the
+factorized 27-state dense-code execution. This is NOT equivalent to
+full raw-trit encode/decode, SIMD, ROCm, or GMP limb multiplication.
+The source also has `scripts/check_cm163_residue_swar.py`,
+which is GMP Kronecker modular residue **lanes plus CRT**, explicitly
+not fixed-word SWAR arithmetic. And Paper 9 already implements
+`scripts/check_cm163_window.py` with a historical single-process
+CM degree-41 57.2% RSS reduction, ~6% extra construction time,
+and exact coefficient parity (different workload from pi). These
+M1-M4 and CM SWAR results are REUSED, not rediscovered or promoted
+to fast-pi benchmarks.
+
+NEW specific Chudnovsky bridge:
+`scripts/check_pi_pqt_ternary_swar_block.cpp`, commit
+4d7a5645e450daaf7273ca76279fefbc1b458d31,
+Git blob 5c15064c0cce70a885c196a51776422a93ada9d6
+(GitHub readback matches committed UTF-8 source). Uses eight
+byte lanes in uint64 to encode balanced trits 0/positive/negative
+as 00/01/10, rejects 11; retains k as the original leaf residual.
+For actual Chudnovsky leaves, k=0 has zero support, and k>=1 has
+negative P (there is no positive-P leaf). Decode the signed trit
+before producing exact GMP P,Q,T, then combine contiguous leaf
+blocks B in {1,4,8,16} with the original noncommutative
+T=T_left*Q_right+P_left*T_right. Remainder not forgotten;
+output consumer is exact one-quotient-plus-strict-bound decimal floor
+of the unaltered Chudnovsky rational enclosure.
+
+Source-coded acceptance: exhaustive 3^8=6561 ternary-byte
+roundtrips, explicit invalid digit-3 rejection, 32 prefix P/Q/T
+identity comparisons against B=1, and full native π hashes.
+A separately constructed local C++ equivalent source was
+compiled with g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto.
+Local full-run PASS: for each B=1/4/8/16, d=100k,500k,1M,
+all 12 hashes exactly match existing original GMP certificates:
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711,
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9,
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+The committed C++ text has NOT been compiled byte-for-byte
+(only readback); do not claim compiler/kernel proof for it.
+
+5-process rotating-order single-invocation 1M runtime medians
+milliseconds, source-equivalent local program:
+B=1 729.822; B=4 750.199; B=8 718.826; B=16 724.350.
+Run ranges overlap strongly (e.g. B=8 from 691 to 765ms);
+no robust native SOTA speedup. At 100k:
+B=1 44.103; B=4 45.474; B=8 46.223; B=16 48.345.
+Earlier independent shell launches with 3 repetitions/process:
+at 1M B=1 733.002, B=4 687.039, B=8 748.209,
+B=16 730.296 milliseconds; inconsistent apparent winner,
+hence NO promotion. Fresh shell isolated peak RSS at 1M
+B=1 29536 KiB, B=4 30248, B=8 30204, B=16 29740
+(specific run only). A Python-parent subprocess RSS observation
+was contaminated by fork-inherited high water and is NOT admitted
+as a comparative peak memory receipt. Nothing proves less memory.
+
+Crucial limitation: this benchmark uses packed byte lanes for
+ternary sign/support **decoding**, not lane-parallel arithmetic
+on P/Q/T and NOT a measured SWAR multiplication kernel.
+At n=71430, largest leaf Q=C*k^3 is already 107 bits,
+exceeding a 64-bit scalar lane; GMP multi-limb multiplication
+remains essential. The full ternary alphabet includes +1
+for codec regression, but actual Chudnovsky P has only
+0/negative sign states. The codec cannot manufacture useful
+low-entropy structure in dense high-precision limbs.
+
+Prioritize P0 fastest independently certified π:
+(1) actual signed P/Q/T projects and quotient-residual consumer;
+(2) *genuine* SWAR only on independent small metadata or modular
+residue subproblems with exact CRT reconstruction and full
+setup/serialization costs, not magical packed GMP multiplication;
+(3) identify compute/RSS Pareto on real limb allocation,
+endpoint scheduling, and producer-local re-use; (4) independent
+cold/hot 1M+ tests. External SOTA comparison execution remains
+deferred, its P0 end objective intact.
+Do not conflate CM p41 RSS improvement or source SWAR
+8^8 acceptance with a π performance gain. Do not claim
+RH actual selected W, Monster group action, formal Bishop pi
+same-real, Agda/Lean kernel or GPU acceptance in this packet.
