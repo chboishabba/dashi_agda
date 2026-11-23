@@ -1,5 +1,12 @@
 # BSD — universal Clay-rank versus strong-refined scope, S5/S6 fail-closed (2026-11-17)
 
+## 23 November 2026 — original E32 inert-prime source-shortcut (no S6 promotion)
+
+The original conductor-32 curve E:y²=x³−x has a_p=0 for **every odd prime p≡3 (mod 4)**. The [four-lane max-cut](ClayNonYMRHFourLaneGeometricMaxCut20261123.md) gives a direct classical proof: f(x)=x³−x is odd, chi_p(-1)=-1, and x↦−x cancels the complete finite-field character sum, including zero-character fixed points. This is an exact all-inert-prime character lemma for the same E32, not an E36/CM-j=0 substitution. The [executed script](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py) checks 40 inert primes below 401; the split-prime p=5 has a_5=-2, so the shortcut does not apply to all primes.
+
+The symmetry eliminates explicit coefficient enumeration on the inert-prime branch but does not identify the full q-series, prove eta modularity or original E32 Mellin, give a new Sha computation, run a native Agda/Lean kernel, or discharge S6 universal BSD. Earlier S5 selected-curve classical Rubin closure remains established prior work. Both universal BSD endpoints remain OPEN.
+
+
 ## Important correction to supplied explanatory text
 
 Read Andrew Wiles, *The Birch and Swinnerton-Dyer Conjecture*, in Clay/AMS, *The Millennium Prize Problems* (2006), printed pages 32–33, official https://www.claymath.org/library/monographs/MPPc.pdf and Clay current unsolved listing https://www.claymath.org/millennium/birch-and-swinnerton-dyer-conjecture/ .
