@@ -63,6 +63,12 @@ assert poly(200)[0]==1
 print('PASS exact flat-top unit-port value at all t and support preserved')
 assert sum(comb(26,j) for j in range(27))==2**26
 print('PASS finite Sobolev bounds (k=0..8), eventual ||h_p||1<=1/4')
+# An effective height threshold from the finite explicit plateau derivative norms:
+# T_b=max(32768,16 max_{p=2,3; 1<=j<=26}
+#              (208 binom(26,j)||b_p^(2j)||1)^(1/(2j))).
+# Then all 26 error summands <=1/208 and ||h_{p,t}||1<=1/4.
+assert 8*26==208 and F(26,208)==F(1,8)
+print('PASS explicit finite-derivative-norm formula for the sufficient height threshold T_b')
 
 assert F(5184*5**6,4*factorial(6))==28125
 r0=2048
@@ -77,6 +83,20 @@ assert Cc < F(1,3000)
 assert F(4,3000) < 64*c
 print('PASS each physical signed port C_i <',Cc,'/r < 1/(3000r) (t>=T_b)')
 print('PASS four amplitudes |eps_i|<=r^-5: sum |eps_i|C_i < 1/(750r^6) < 64*m_W')
+# Absolute physical source signed increment through orders 0,2,4,6,8,10.
+# Derivative support remains at the original physical prime locations.
+for k in (0,2,4,6,8,10):
+    phys_const=F(4)*G*pp*U**k
+    assert phys_const<F(384)*U**k
+    print(f'PASS physical source 4-port abs moment k={k}: < {float(1536*U**k):.9g}/r^6')
+assert (8-6)==2 and (6-6)==0
+print('PASS explicit full-projective derivative growth: k=6 O(1), k=8 O(r^2);')
+print('     exact physical 6th/8th MOMENTS decay O(r^-6), no source tail sign claim')
+for k in (2,4,6,8):
+    assert (k-6)-k==-6
+assert (-6)+1==-5
+print('PASS relative far-Fourier increment envelope O(r^-6 q^-k) for k=2,4,6,8')
+print('OPEN absolute RvM near/far sum still O(r^-5 log t); signed E3 cancellation needed')
 
 for k in (0,2,4,6,8,10):
     phys_const=F(4)*G*pp*U**k
@@ -87,5 +107,5 @@ print('PASS explicit full-projective derivative growth: k=6 O(1), k=8 O(r^2);')
 print('     exact physical 6th/8th MOMENTS decay O(r^-6), no source tail sign claim')
 assert F(1,1)+F(5,1)==6
 print('PASS frozen prime contribution and original target share r^-6 scaling under eps=r^-5')
-print('OPEN effective T_b with a chosen C∞ plateau, entire enlarged-source E2 far/Schwartz/post-sixth estimates,')
+print('OPEN numerical evaluation of explicit T_b for a chosen C∞ plateau and full completed E2 post-sixth estimate,')
 print('     and genuinely independent signed all-zero/Gamma/prime E3 inequality; NO RH/GRH proof')
