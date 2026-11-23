@@ -235,8 +235,7 @@ originalFourTimes256IsQSixteenCellIndex = refl
 sourceFullDyadicCapacityAsThirtyTwoCrossings :
   32 * originalQSixteenDyadicCellIndex
     ≡ DyadicTail.sourceDyadicCapacity
-sourceFullDyadicCapacityAsThirtyTwoCrossings =
-  DyadicTail.crossingScaledBackToDyadicCapacity
+sourceFullDyadicCapacityAsThirtyTwoCrossings = refl
 
 sourceAnnihilatorEvenOrder : Nat
 sourceAnnihilatorEvenOrder =
