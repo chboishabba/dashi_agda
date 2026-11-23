@@ -15,6 +15,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstdlib>
+#include <fstream>
 #include <limits>
 using namespace std;
 using Z=mpz_class;
@@ -143,5 +144,11 @@ int main(int argc,char**argv){
    <<" measured_GMP_total_live_heap=false model_is_upper_bound=false"<<"\n";
  cout<<"RUN "<<mode<<" "<<digits<<" "<<i<<" "<<fixed<<setprecision(4)<<result.ms<<" bits="<<result.bits<<" hash="<<result.hash<<"\n";}
  sort(runs.begin(),runs.end());struct rusage usage{};getrusage(RUSAGE_SELF,&usage);
- cout<<"SUMMARY mode="<<mode<<" digits="<<digits<<" median_ms="<<runs[runs.size()/2]<<" peak_rss_kib="<<usage.ru_maxrss<<" hash="<<expected<<"\n";
+ // ru_maxrss may inherit a Python parent's historical high-water mark on
+ // fork/exec. Linux /proc/self/status VmHWM measures THIS process image.
+ size_t procHwmKiB=0;std::ifstream status("/proc/self/status");string statusLine;
+ while(getline(status,statusLine))if(statusLine.rfind("VmHWM:",0)==0){
+   istringstream stream(statusLine.substr(6));stream>>procHwmKiB;break;
+ }
+ cout<<"SUMMARY mode="<<mode<<" digits="<<digits<<" median_ms="<<runs[runs.size()/2]<<" peak_rss_kib="<<usage.ru_maxrss<<" proc_vmhwm_kib="<<procHwmKiB<<" hash="<<expected<<"\n";
 }
