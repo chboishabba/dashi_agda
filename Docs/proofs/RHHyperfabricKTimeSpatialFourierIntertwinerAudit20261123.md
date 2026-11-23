@@ -1,3 +1,19 @@
+## 23 November 2026 — exact FULL nine-coordinate torus spectral decomposition
+
+The original hyperfabric is three separate (C_3^3) periodic source factors, not one 27-mode periodic voxel. Since a 3D C3^3 additive Fourier character has support-multiplicity row `(1,6,12,8)`, the full 9D periodic Fourier character stratum of support r is exactly `binomial(9,r)*2^r`:
+
+```text
+r=0..9: 1,18,144,672,2016,4032,5376,4608,2304,512.
+sum = 19683 = 3^9;
+maximum-support r=9 = 512 = 8^3.
+```
+
+This is a true full-hyperfabric tensorization of the 8 high-support modes in each original three-trit voxel. The **periodic** C3^9 torus Laplacian has eigenvalue `3*r` with these multiplicities; the **nonperiodic** P3^9 path Laplacian does not share this C3-character eigenbasis. Do not mistake the genuine 8-mode 3D shell or 512-mode nine-dimensional stratum for the independent NS 1/128 gain, YM 16×8=128 incidence, or the H05 eight vertices. These are separate, precisely typed sources until linked by a proved operator intertwiner.
+
+The new runnable script now checks the full 10-shell counts (commits `724c397e`, `7d8c85ce`); independent local integer test `sum(C(9,r)*2^r)=19683` and 512=8³ PASS. The earlier source-trit coordinate repair `c276ef63` / `bc0846fd` remains essential.
+
+---
+
 ## 23 November 2026 — important native-path-coordinate repair after source reread
 
 The first committed Python checker used trit integers `0,1,2` but evaluated the path relation `0-1-2`, with centre 1. **That is NOT the ORIGINAL SSP-balanced source**, whose native nonwrap spatial path is `-1↔0↔+1`, with centre 0. Though the unlabelled graph is isomorphic and 54/81/118,098 edge counts are unchanged, using residue 0 as a group origin while taking residue 1 as spatial centre is NOT same-carrier faithful. It can invalidate marked coordinates, source incidence and k/time covariance.
