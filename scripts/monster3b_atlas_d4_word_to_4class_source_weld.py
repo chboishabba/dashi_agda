@@ -55,6 +55,20 @@ def check(word, fusion):
                   "main_class_position", "mn3b_class_position",
                   "monster_class_position")),
             "missing literal quotient class positions")
+    require(row.get("two_suz_class_order") == 4
+            and type(row.get("two_suz_class_order")) is int,
+            "actual 2.Suz.2 source row must have order 4")
+    require(row.get("two_suz_centralizer_order") == 322560
+            and type(row.get("two_suz_centralizer_order")) is int,
+            "actual class-five centralizer must be 322560")
+    require(type(row.get("two_suz_square_central_position")) is int
+            and row["two_suz_square_central_position"] ==
+                fusion.get("source_two_suz_central_minus_one_position"),
+            "actual class-five square must equal the original central -I")
+    require(type(row.get("two_suz_outer_image_position")) is int
+            and row["two_suz_outer_image_position"] ==
+                fusion.get("source_suz_outer_position"),
+            "actual class-five must project to the source Suzuki-2B image")
     require(row["two_suz_class_position"] == 5
             and row["monster_four_label"] == "4D"
             and fusion.get("all_possible_monster_four_labels") == ["4D"],
@@ -74,6 +88,10 @@ def check(word, fusion):
         "source_word_rotation_SLP": word["source_rotation_word"],
         "source_word_suzuki_class": "2B",
         "selected_two_suz_class_position": row["two_suz_class_position"],
+        "selected_two_suz_class_order": row["two_suz_class_order"],
+        "selected_two_suz_centralizer_order": row["two_suz_centralizer_order"],
+        "selected_two_suz_square_central_position": row["two_suz_square_central_position"],
+        "selected_two_suz_outer_image_position": row["two_suz_outer_image_position"],
         "selected_six_suz_class_position": row["six_suz_class_position"],
         "selected_main_class_position": row["main_class_position"],
         "selected_mn3b_class_position": row["mn3b_class_position"],
