@@ -93,3 +93,13 @@ assert s.limit(-n*s.log(1-1/n**2),n,s.oo)==0
 assert s.limit(-n*s.log(1-1/n),n,s.oo)==1
 print('PASS finite positive transfer gap can yield zero or positive continuum energy')
 print('OPEN actual xi zero exclusion, physical Yang-Mills CMP119/W3/OS and same-H continuum gap')
+
+
+# RH #1533 reflected zero pair in completed xi'/xi (not a zero of xi):
+# 1/(w-a)+1/(w+a)=2w/(w²-a²), retaining BOTH pole residues.
+w=s.symbols('w',real=True);A=s.symbols('A',real=True)
+pair=s.cancel(1/(w-a)+1/(w+a))
+assert pair.subs(w,0)==0
+assert s.simplify(s.diff(pair,w).subs(w,0)+2/(a*a))==0
+assert s.simplify(s.limit(2*w/(w*w-A*A),A,0)-2/w)==0
+print('PASS RH signed midpoint cancellation: nonzero jet -2/a²; coincident poles DO NOT vanish')
