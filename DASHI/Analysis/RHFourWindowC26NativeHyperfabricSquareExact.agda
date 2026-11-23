@@ -198,6 +198,58 @@ twentySixStepsReturn P.cornerPMP true = refl
 twentySixStepsReturn P.cornerPMM false = refl
 twentySixStepsReturn P.cornerPMM true = refl
 
+-- The genuine Griess order26 grade actor satisfies its irreducible
+-- GF(3) cubic X³-X+1 on the SAME original 27-point carrier.
+-- Finite-field interpretation uses a cyclic basis: the source is
+-- GF(27)^× as a regular C26 permutation, not the original P3^3 metric.
+-- The native GF(3) arithmetic owner is the original Griess module.
+import DASHI.Moonshine.Griess1990Moufang81IbrahimProjective13Exact as Griess
+import DASHI.Foundations.SSPTritCarrier as SSP
+
+addGrade : Cube.Ternary27Point → Cube.Ternary27Point → Cube.Ternary27Point
+addGrade (Cube.ternary27Point x y z) (Cube.ternary27Point a b c) =
+  Cube.ternary27Point (Griess.add3 x a) (Griess.add3 y b) (Griess.add3 z c)
+
+subGrade : Cube.Ternary27Point → Cube.Ternary27Point → Cube.Ternary27Point
+subGrade (Cube.ternary27Point x y z) (Cube.ternary27Point a b c) =
+  Cube.ternary27Point (Griess.sub3 x a) (Griess.sub3 y b) (Griess.sub3 z c)
+
+sourceFieldPolynomial : (x y z : SSP.SSPTrit) →
+  addGrade
+    (subGrade
+      (gradeOrder26 (gradeOrder26
+        (gradeOrder26 (Cube.ternary27Point x y z))))
+      (gradeOrder26 (Cube.ternary27Point x y z)))
+    (Cube.ternary27Point x y z)
+  ≡ Cube.origin
+sourceFieldPolynomial SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspNegOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspZero SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspZero SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspZero SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspPosOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspNegOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspNegOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspNegOne SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspZero SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspZero SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspZero SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspPosOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspPosOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspZero SSP.sspPosOne SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspNegOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspZero SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspZero SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspZero SSP.sspPosOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspPosOne SSP.sspZero = refl
+sourceFieldPolynomial SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne = refl
+
 -- Exact tensor-like source interface; no erased residual/source coordinates.
 Raw : Set
 Raw = Code26 × RH.Source4
