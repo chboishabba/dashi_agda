@@ -102,6 +102,33 @@ def picard_step(X,t0,t1,h):
         B=[b.hull(c).expand(F('0.000000001')) for b,c in zip(B,C)]
     raise RuntimeError('Picard inclusion failed at '+str((t0,t1))+' B='+str([x.fl() for x in B]))
 
+def field_on(t0,t1,X):
+    """Original J25/J27 spark ON field, still with V diode active, U inactive."""
+    D=field(t0,t1,X)
+    b,ih=X[4],X[7]
+    D[4]=D[4]-ih/P['Cb']
+    D[7]=D[7]+(b-P['Rgap']*ih)/P['Lh']
+    return D
+
+def certified_physical_on_handoff(X,tL,tR):
+    """Any event time in [tL,tR] and state X gives a state at common tR.
+
+    Event elapsed time is in [0,tR-tL]; Picard interval covers all such
+    lengths and clock phases, without resets or assuming a sampled root.
+    """
+    h=F(tR)-F(tL)
+    B=[z.expand(F('.0001')) for z in X]
+    for it in range(100):
+        D=field_on(tL,tR,B)
+        C=[z+I(0,h)*d for z,d in zip(X,D)]
+        if all(c.subset(b) for c,b in zip(C,B)):
+            gu,gv=event_guards(B)
+            assert gu.b<0 and gv.a>0 and (B[4]-P['Voff']).a>0
+            assert D[4].b<0,('post-ON bank slope not negative',D[4].fl())
+            return C,B,D,it+1
+        B=[b.hull(c).expand(F('0.000000001')) for b,c in zip(B,C)]
+    raise AssertionError('no physical post-ON Picard enclosure')
+
 def event_guards(B):
     return B[2]-B[4]-P['Vd'], B[3]-B[4]-P['Vd']
 
@@ -145,6 +172,8 @@ def run():
     assert pre.a>0 and post.b<0, ('bad spark saltation slopes',pre.fl(),post.fl())
     determinant=post/pre
     assert determinant.b<0
+    physical_end,physical_tube,physical_rhs,physical_iterations=certified_physical_on_handoff(
+        event_tube,F('3.51329269'),F('3.51729275'))
     return {'status':'PASS_EXACT_RATIONAL_J28_THIRD_EVENT_EXISTENCE_UNIQUENESS',
       'prior_state':'entire J27 9/9 source-validated J24 spark-OFF box intersected with exact b=Voff',
       'source_time_uncertainty':[str(t0lo),str(t0hi)],'virtual_off_duration':str(end),
@@ -157,6 +186,11 @@ def run():
       'spark_ON_post_bank_slope_grid':[str(post.a),str(post.b)],
       'spark_ON_saltation_determinant_grid':[str(determinant.a),str(determinant.b)],
       'spark_ON_saltation_orientation_reversing':True,
+      'physical_ON_post_event_certified_through':'3.51729275',
+      'physical_ON_handoff_picard_iterations':physical_iterations,
+      'physical_ON_handoff_all_9_state_grid':[[str(z.a),str(z.b)] for z in physical_end],
+      'physical_ON_handoff_no_extra_switch':True,
+      'physical_ON_bank_slope_grid':[str(physical_rhs[4].a),str(physical_rhs[4].b)],
       'bank_at_s_0026_grid':[str(bank_at_0026.a),str(bank_at_0026.b)],
       'minimum_guard_U_upper_grid':str(max(w['U_guard_grid'][1] for w in witnesses)),
       'minimum_guard_V_lower_grid':str(min(w['V_guard_grid'][0] for w in witnesses)),
