@@ -1,4 +1,10 @@
 
+## 23 November 2026 — genuine R568 signed C1/C2 source target and rate-resolved algebra
+
+[Source-aligned R568 exact rate-bucket and C1/C2 cutset](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md), [executed original cube + rational vector proxy checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py), blob a76e8847a61521a4c4cb88fcc861ebb4a92fb85f: 64/64 exact signed Cauchy row/grouped identities; positive kernel does NOT constrain sign of mixed unlifted-to-rate-lifted pairing (explicit 13/17 rates F=46/16575>0, L=−1/5<0). Proxy rational doubleForcing/doubleCell are NOT actually constructed from one physical Galerkin state. Existing source R596/R624/R628/R634/R687–R689 remain the prior original owners. R652/R653 already identify **C1/C2 as one same-trajectory sandwich** 2S_delta+G+H <= 4F <= B; **both sides OPEN**, with R565 FTC and 3D PDE endpoint separate. R236 C^5 spectator is a different signed instantaneous covariance; no R236/R568 interchange. Hodge/BSD/Karp/RH/YM original remaining endpoints unchanged. No kernel, no CI, 0/6 Clay prizes.
+
+
+
 ## 23 November 2026 — six-lane exact alpha ledger and two NEW non-universal source recoveries
 
 [**Controlling cross-lane original-ends and exact-unpaid-lemma ledger**](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md) on #1543, plus [BSD same-E32 degree-two isogeny and classical rank-zero Tate descent](../../scripts/check_bsd_e32_original_2isogeny_bidi_20261123.py) (**11,616/11,616** independent finite-group checks, both symbolic isogeny compositions, exact identical executed blob d43aa30773b572551b749b5ac1b153be4c798ce5) and [Hodge non-product literal Gr(2,4) Schubert rational-cycle inverse](../../scripts/check_hodge_gr24_schubert_cycle_bidi_20261123.py) (**7,200/7,200** exact inverse coefficient recoveries, blob c437b482b547ae0a5773ee9a8f5931b89a2778c0). New selected arithmetic E32 rank-zero math is an explicit instance of CLASSICAL Tate 2-isogeny descent, not deduced from BSD. The new Gr(2,4) selected H2 closure is classical Schubert/cellular geometry; neither yields universal BSD S6 nor Hodge H3.
