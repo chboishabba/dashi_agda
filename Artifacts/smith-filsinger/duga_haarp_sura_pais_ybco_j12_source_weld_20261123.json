@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_LOCAL_ORIGINAL_J12_EXACT_BLOB_PLUS_SOURCE_GATES",
+  "native_owner": {
+    "path": "scripts/check_smith_filsinger_j12_restored_cycles_20261122.py",
+    "git_blob_sha": "5e4d272438556327034e1f8ae949c5102f06cf6a",
+    "locally_reconstructed_exact_bytes": true,
+    "used_function": "advance",
+    "device_scope": "existing synthetic 7-state coupled-coil, diode, bank, spark, incoming/outgoing wave port"
+  },
+  "consumer": {
+    "path": "scripts/check_smith_filsinger_multisource_crosswalk_20261123.py",
+    "git_blob_sha": "36202b29bdf38e60e7bf8c1ffab63ccf1d5d5b45",
+    "locally_executed_exact_bytes": true,
+    "sympy": "1.14.0",
+    "numpy_scipy": "local installed",
+    "python_exit_code": 0
+  },
+  "source_identity": {
+    "electric_candidate_sources": [
+      "Duga selected HF carrier+10Hz pulse envelope with independently required antenna/mixer",
+      "HAARP 2005 D-region electrojet 575/2125Hz source and HF heater separated",
+      "HAARP 2011 F-region magnetosonic→E-region Hall separately",
+      "SURA 2025 pump and candidate LH/whistler waves (2026 publication)"
+    ],
+    "gravity_separate": [
+      "Pais Navy HFGWG patent claim, NOT measured gravitation",
+      "Li static YBCO null bound and Hathaway rotating/ RF replication status"
+    ],
+    "same_apparatus_historical_concurrency_established": false,
+    "acoustic_7800Hz_electrical_switching_established": false
+  },
+  "exact_symbolic_tests": {
+    "unknown_four_source_gains_scalar_receiver_rank": "1/4",
+    "four_separate_source_gain_meter_det": "s0*s1*s2*s3",
+    "coherent_wave_power": "a^2+b^2+2*a*b*cos(phi)",
+    "independent_phase_average": "a^2+b^2",
+    "filsinger_audio_7800Hz_outside_sura_8000_to_9000Hz": true,
+    "duga_10Hz_not_schumann_7_83Hz": true,
+    "gravity_sensor_not_electric_wave_port": true,
+    "force_and_field_momentum_closure_control": true
+  },
+  "native_circuit_one_interval": {
+    "model_time": "dimensionless 20*pi, initial state exactly zero, not a restored cycle",
+    "driver_only": {
+      "driver": 26.82631180257612,
+      "incident": 0,
+      "outgoing": 0.10319183611703815,
+      "net_wave": -0.10319183611703815,
+      "spark": 0.0344753164551608,
+      "storage_delta": 1.4421573946707202,
+      "residual": 2.518534003570494e-8,
+      "switches": 2
+    },
+    "generic_incident_wave": {
+      "driver": 26.823964861677975,
+      "incident": 0.6283185307179593,
+      "outgoing": 0.7259542136655354,
+      "net_wave": -0.09763568294757607,
+      "spark": 0.03503846365361674,
+      "storage_delta": 1.4455250085769618,
+      "residual": 2.4961178013427343e-8,
+      "switches": 2
+    },
+    "net_environmental_wave_positive_in_either": false
+  },
+  "not_proven": [
+    "source-specific transfer kernels, amplitude, physical clock and measured matching",
+    "independent Filsinger ground/antenna receiving load watts",
+    "calibrated gravitational force beyond electromagnetic/mechanical artifacts",
+    "original pin-complete device geometry, full Maxwell same-terminal measurement",
+    "Agda kernel acceptance"
+  ],
+  "github_actions_ci_used": false,
+  "source_data_replay": false,
+  "note": "Exact native J12 model and synthetic incident-wave interface only; distinct historical sources NOT summed as actual simultaneous fields. Do not infer antigravity, HAARP-to-Filsinger transfer, Duga-to-Filsinger power or self-running operation."
+}
