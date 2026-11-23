@@ -64,11 +64,32 @@ post-switch bank slope: [-0.1343215385828897080985, -0.1183978516917251962495]
 saltation determinant:  [-0.9389102684543578790234, -0.7737062817395606533548]
 ```
 
-The exact rank-one saltation determinant is the ratio `post_bank_slope/pre_bank_slope`; its entire certified interval is **strictly negative**, proving transverse, orientation-reversing ON switching at the **actual third event** of the J27-inherited nominal trajectory. Both physical modes are continuous in state but have different vector fields at the spark threshold; no artificial state reset is introduced. This independently validates the third event's signed saltation even though the original tiny J24 nine-coordinate centre box is **not** enclosed. No actual post-switch ON-mode ODE advance follows.
+The exact rank-one saltation determinant is the ratio `post_bank_slope/pre_bank_slope`; its entire certified interval is **strictly negative**, proving transverse, orientation-reversing ON switching at the **actual third event** of the J27-inherited nominal trajectory. Both physical modes are continuous in state but have different vector fields at the spark threshold; no artificial state reset is introduced. This independently validates the third event's signed saltation even though the original tiny J24 nine-coordinate centre box is **not** enclosed. The additional actual physical post-switch ON-mode ODE advance is documented below.
+
+## Exact physical no-reset handoff and 32 further ON-mode pieces
+
+The true spark-ON event is uncertain anywhere in the certified `3.51329269<t_ON<3.51729275` interval. Rather than reset at the numerical J24 centre or pretend an exact event time, take the validated nine-component event tube with **bank exactly `Von`**, and integrate the original physically ON right-hand side over **every elapsed duration between 0 and `0.00400006`** while bounding the absolute source clock over the full event window. In this mode the two rows changed from the virtual OFF extension are
+
+```
+db_ON/dt  = db_OFF/dt - ih/Cb
+dih_ON/dt = dih_OFF/dt + (b - Rgap*ih)/Lh.
+```
+
+One additional self-inclusive rational Picard tube (**five iterations**) encloses the physical nine-state trajectory at the common right endpoint `t_R=3.51729275`. Its U diode guard remains negative, V diode guard positive and bank remains strictly above the spark-OFF threshold: **no extra switch** during the uncertain-event handoff.
+
+From that common physical endpoint, the same directed interval arithmetic verifies **32/32 further true spark-ON-mode pieces**, each of exact duration `0.001`, through `t=3.54929275`. Exact minima/maxima, on grid `10^22`:
+
+```
+minimum bank-minus-Voff:  +647884022910137470 / 10^22
+maximum U-diode guard:    -6479824506135607551628 / 10^22
+minimum V-diode guard:    +110785166541520070171 / 10^22
+```
+
+Thus the actual physical nominal trajectory (not only a virtual OFF extension) continues through `3.54929275` with both diode active sets and spark-ON mode certified, without event-time sampling or reset. The bank threshold margin remains positive but is becoming small under first-order interval wrapping. A longer continuation to U-on near `4.275489` needs higher-order centred Taylor/Lohner integration or the sharper J27 original event-state interval, not a declaration that the loose Picard wrapping is an actual spark-OFF event.
 
 ## Reproducibility and non-promotion
 
-- Committed source Git blob: `8379d029d8ef37b08a5006eb60b71f98cc74ab57`, **byte-identical** to the locally executed Python source; run `python scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py` to print all 20 interval witnesses.
+- Committed source Git blob: `5ccec728d86deba172ff208ea846df17686308a8`, **byte-identical** to the locally executed Python source; run `python scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py` to print all 20 interval witnesses.
 - [Machine acceptance](../../Artifacts/smith-filsinger/j28_spark_on_picard_20261123.json): exact integer-grid inequalities and explicit proof boundaries.
 - Original six-guard J24 itinerary: **3/6 unique event occurrences and their switching direction/transversality now flow-certified**, but only **2/6 full original J24 nine-coordinate event boxes paid**. The coarse 0.004 event-time bracket is not enough to promote the third event-state box.
 - Source-typed original J18 full numerical script, Agda kernel, CI, independent Filsinger circuit pin graph, natural incident energy, full-period hybrid return map, rigorous periodic fixed point and uniform five-parameter orbit family are **not certified**.
