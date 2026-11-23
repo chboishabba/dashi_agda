@@ -1,4 +1,16 @@
 # Six-frontier original-source maximum cut — implementation rounds 9–10
+
+## 23 November 2026 — coordinator P0 real-helicity no-go and original-gate namespace reconciliation
+
+Current canonical machine-readable gate ledger: ClaySixFrontierABCExactGates20261114.json. New nonterminal original NS finite Galerkin negative control is under ns_r568_actual_galerkin_20261123, with 64/64 exact independently rerun in four 16-case checkpoints and two rigorously signed source-produced opposite-sign examples. See NSR568OriginalGalerkinHelicityRateSignCountercontrol20261123.md and scripts/check_ns_r568_physical_source_weld_exact_20261123.py, blob 9b6ea0db5c9698623c92df5bee94b6b087abe721.
+
+**Do not rename or reclassify the existing phases.** Portfolio B1 was CLOSED by REFUTING the unrestricted actual R820/R823 signed auxiliary and provides no positive regularity estimate. Portfolio B2 remains OPEN for a new valid cutoff-uniform signed physical barrier, W1 and continuation. Portfolio C1 and C2 are selected real finite R853/R854 Galerkin gates declared CLASSICALLY MATHEMATICALLY CLOSED by the explicit 15-Nov Python/SymPy protocol, while their native Agda field/time/kernel receipts remain OPEN. They are NOT the same as the local R568 C1 upper and R653 C2 strict-margin lower, both physically OPEN on the same original R240/R405 trajectory. The original six Clay endpoint count remains 0/6 and the canonical symbol-ledger count remains 135, with P0/B1/C1/C2 as four completed decisions and 11 still active gates.
+
+The new R568 finite signed countercontrol uses actual projected NS force, complete original ordered cubic fibre, divergence-free conjugate reality, positive/negative curl eigenspaces in Q(sqrt2,sqrt3,i), and the original R225/R388 same-state D/M. Unweighted forcing F and pair-rate lift L have OPPOSITE pointwise signs for physical static seeds 61 and 63. Thus an unconditional pointwise sign-transfer mechanism is false, not a way to pay B2; it does NOT disprove a compensated signed time-integrated inequality. Original R596/R560/R565/R570 and R652/R653 are already merged and should not be rebuilt; original R681 cross-gradient, R682 live R408/R664 same-object transport and R683 cross-gradient vector normal form are also ALREADY merged. R571-to-R568 M2 remains a conditional producer. The native source fixed rational field cannot directly represent the sqrt2/sqrt3 helical projectors; real algebraic-field/nativity, actual R240 time and scalar FTC remain unpaid, as do C1/C2 signed PDE estimates.
+
+**PR topology updated from historical 15-Nov text:** the old coordinator Agda #1499 is MERGED in master; #957 is closed unmerged; #1384 is a separate open TOE owner and not a competing R568 producer; #1543 is the current OPEN draft for original physical same-state countercontrol and coordinator receipts. No numbered RXYZ source rewrite, theorem promotion, Agda/Lean kernel claim or CI activation from this tranche.
+
+
 **Date:** 14 November 2026
 **Owner:** Agda Clay PR #1499 and Lean Clay PR #108 (both source rollups); historical owner branches are donors only.
 **Trust:** every linked source-written Agda/Lean candidate is **NOT**
