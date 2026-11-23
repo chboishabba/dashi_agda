@@ -1298,3 +1298,96 @@ COMP8 all-future-observer separation and CM cyclic winding/primitive
 necklaces/Masser remain OPEN, not reduced by decimal hash parity.
 Sweetgrass inspiration attributed to Robin Wall Kimmerer;
 proof authority remains arithmetic and classical Chudnovsky owners.
+
+
+## 23 November — COMP5d RH dyadic geometry transfer: exact atlas, order no-go, native timing
+
+Source-first RH donor (master as of 23 Nov): Docs/proofs/
+RHQuartic163840G2AnalyticDyadicHeisenbergP0MaxCut20261123.md,
+DASHI/Analysis/RHQuartic163840DyadicTailHXIntertwinerExact.agda,
+scripts/check_rh_163840_signed_dyadic_analytic_closure_20261123.py,
+and RH/GRH PR #1533. RH actual signed |q|^-6 reference measure has the
+exact chart u=(8/|q|)^5, signed ray s, 15-bit dyadic k=floor(32768u)
+and continuous theta=32768u-k, with q=+/-8(32768/(k+theta))^(1/5).
+The RH source explicitly proves only a measure-space reindexing;
+XOR on dyadic cells is NOT a smooth-test/source-action symmetry and
+its continuous residual cannot be discarded. This must NOT be
+conflated with the Monster native H6 or actual zeta-zero action.
+
+Concrete *different-source* Pi donor:
+For each ordered Chudnovsky leaf j let positive integer cost weight w_j
+be bitlength(Q_j) or bitlength(P_j)+bitlength(Q_j), with w_0=1.
+Define W=sum_j w_j and cumulative u=(sum_{i<j}w_i+theta*w_j)/W,
+theta in [0,1). Dyadic chart K=floor(32768u), residual rho=32768u-K.
+Retaining (K,rho) and the original weighted-prefix dictionary recovers
+u, original leaf j and theta EXACTLY by rational inversion. This is a
+genuine reversible weighted-coordinate geometry, but is NOT the RH
+q^-6 measure or its physical Gamma test, and 15bits alone is not
+sufficient to reconstruct an ordered 71k-leaf producer.
+
+Exact local Python fixture scripts/check_pi_rh_geometry_contract.py,
+commit 1037a53292ab451943c50570fb0c17ed6d5da151,
+source blob faab9cbffa40c4e732cce6a15b650b60bf7ae69a,
+byte-identical to executed local file:
+492/492 original-index and continuous-residual reconstructions PASS.
+At 1M decimal places original n=71430 leaves; all 32768 dyadic cell
+addresses occur, leaving 38662 duplicate address observations.
+Removing residual causes a provable information-loss collision.
+Negative control on actual Chudnovsky k=1,2 leaf matrices
+[[P,T],[0,Q]]: forward and backward products have DIFFERENT
+offdiagonal T/Q; swapping terms is not a lawful RH bit-mask
+reindexing. Explicit upper commutator entry
+1465872995519475397815282491520 !=0. The correct transport is
+ordered concatenation and associativity, not commutativity.
+
+Native tested scripts/check_pi_rh_geometric_split.cpp, commit
+0dcc8c24d801a760138d9a8f446a2a0a2f33eb54,
+blob 5b06a5ddaf51a720be240024d02cf6ed29c0feb8,
+byte-identical local g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto.
+Three choices: original index midpoint, weighted midpoint of
+cumulative Q_j bitlength, or cumulative P_j+Q_j bitlength. Every
+split remains contiguous and retains original leaf order, and
+uses plain (non-GCD) GMP fused decimal floor. This is the
+algorithmic analogue of an RH weighted-uniformization followed by
+dyadic subdivision, without assuming physical/source invariance.
+
+Five-run rotating-order within-process medians with integer 10^d,
+split, isqrt, integer endpoint products and floor divisions,
+decimal string+SHA-256; no compiler/startup:
+| decimal digits | index midpoint ms | Q-bit coordinate ms | P+Q-bit coordinate ms |
+|---:|---:|---:|---:|
+| 100000 | 42.597 | 41.586 | 41.697 |
+| 1000000 | 695.815 | 704.073 | 702.267 |
+
+At 1M, index midpoint is 0.9-1.2% faster even though the
+geometric coordinates provide an exact invertible atlas. Shape
+choice changes timing but NOT selected consumer or final size:
+at 1M 18472995 summed final P/Q/T bits for all modes.
+All produced prior exact SHA256:
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+1000000 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+Measurements include coordinate construction for both weighted
+modes but NOT unnecessary weight-array construction for the plain
+midpoint baseline. Earlier unadjusted control that built the
+weight-array even for midpoint is superseded by this fair timing.
+A 1ms difference at 100k is small and not a robust speedup claim;
+no new native breakthrough established.
+
+Conclusion: RH geometry helps define a *source-recoverable*
+coordinate, a correct dyadic partition, a collision/no-descent
+acceptance test and admissible ordered balancing heuristics.
+It does NOT grant a beneficial C2^7 action on Chudnovsky terms,
+a permutation of noncommutative triangular transport matrices,
+or improved end-to-end runtime on tested 1M. Further potential
+is geometric scheduling with actual measured multiplication cost
+and remainder theta, avoiding repeated coordinate setup via a
+streaming weight producer, and optimizing endpoint integer
+products, not reusing RH physical masks. COMP5 external SOTA
+remains deferred by explicit request. Original Bishop same-real,
+RH actual selected W signed inequality, CM winding/necklaces/Masser,
+Monster/VOA literal actions, FRACDASH reconstruction and
+COMP8 all-future-consumer sufficiency remain separate OPEN.
+Source attribution: classical Chudnovsky and ordered product,
+RH original selected quartic/Weil source and DASHI #1533;
+Robin Wall Kimmerer is cultural/methodological, not proof authority.
+No Agda/Lean/CI or RH/GRH theorem claim.
