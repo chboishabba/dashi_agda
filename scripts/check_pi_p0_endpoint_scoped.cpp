@@ -107,6 +107,7 @@ Receipt compute(unsigned digits,bool inplace){
  for(;;){
   Triple s=split(0,n,inplace);
   FC.terminalCarrierBytes=liveCarrier(s);
+  const size_t originalTerminalTripleBits=wordBits(s.p)+wordBits(s.q)+wordBits(s.t);
   Z pn=Z(-24)*(2*n-1)*(6*n-5)*(6*n-1),qn=C*Z(n)*n*n;
   // Compute the next-term endpoint using the original ordered P/Q/T first.
   Z num2=s.t*qn+s.p*pn*(A+B*n),den2=s.q*qn;
@@ -132,7 +133,7 @@ Receipt compute(unsigned digits,bool inplace){
   FC.endpointCapacityBytes=capBytes(num1)+capBytes(den1)+capBytes(num2)+capBytes(den2)
     +capBytes(top)+capBytes(topden)
     +capBytes(root)+capBytes(decimal)+capBytes(scale);
-  if(top<(floor+1)*topden){string output=floor.get_str();return {sha(output),chrono::duration<double,milli>(Clock::now()-start).count(),n,size_t(mpz_sizeinbase(s.p.get_mpz_t(),2))+mpz_sizeinbase(s.q.get_mpz_t(),2)+mpz_sizeinbase(s.t.get_mpz_t(),2)};}
+  if(top<(floor+1)*topden){string output=floor.get_str();return {sha(output),chrono::duration<double,milli>(Clock::now()-start).count(),n,originalTerminalTripleBits};}
   n+=max(1u,n/16);bits+=max(32u,bits/16);
  }
 }
