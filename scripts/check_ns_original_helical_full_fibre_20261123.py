@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Original physical periodic NS R236 source: all 18,513 output incidences.
+"""Original UNPROJECTED axial NS R236 source: all 18,513 output incidences.
+WARNING: this old axial source has M parallel to output k and P_k M=0.
+For nonzero Leray-transverse work use check_ns_transverse_large_bite_20261123.py.
 
 Owner chain: NSTriadKNPhysicalTriadEnumeration, PhysicalOutputFiber,
 NSTriadKNFixedOutputMixedCommutatorDampedTangentExact.mixedProductCell,
@@ -130,6 +132,7 @@ def main():
     print('PASS full physical fixed-output fibre, exact original helical projectors, '
           'reality, R236 strict routing, all spectators, independent signed blocks')
     print('SOURCE-NOGO: original rate geometry + fixed coherent M alone cannot give a signed payment')
+    print('Leray caveat: this axial M is longitudinal, P_k M=0. Do not treat it as a nonzero projected-output R568 witness.')
     print('OPEN: true NS trajectory, source-specific positive estimates, cutoff-uniform sum, Agda kernel')
 
 if __name__=='__main__':main()
