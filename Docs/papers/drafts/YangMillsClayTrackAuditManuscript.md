@@ -1,6 +1,6 @@
 # A DASHI Source-Intake Audit of the Eriksson--Balaban Yang--Mills Mass-Gap Route
 
-**Status:** v0.3 / P33-closed
+**Status:** v0.4 / source-intake only (non-promoting)
 **Date:** June 2026
 **Repository state:** `clayYangMillsPromoted = false` (authority/adjudication gate)
 
@@ -8,17 +8,17 @@
 
 ## Abstract
 
-**Status: v0.3 / P33-closed** — see Section 5.3 for the closure trace.
+**Status: v0.4 / source-intake only (non-promoting)** — see Section 5.3 for the intake trace.
 This manuscript reports a DASHI source-intake audit of the Eriksson--Balaban
-Yang--Mills route.  The audit records that the mathematical route gates close
-relative to 33 typed theorem surfaces (many still inhabited by imported/postulated witnesses),
+Yang--Mills route.  The audit records 33 named theorem surfaces and their
+claimed links (many still inhabited by imported/postulated witnesses),
 including P33, the field-regularity-to-link-weight-positivity bridge.
-The imported gates — terminal KP certificate, Balaban
-RG consumption, DLR-LSI discharge, OS0--OS4 Osterwalder--Schrader axioms,
-OS1/O(4) rotational covariance, Wightman reconstruction, continuum stability,
-and OS-route gauge compatibility — close conditional on the 33 typed theorem surfaces.
-The result is a conditional, receipt-backed
-dependency formalisation, not official Clay recognition.
+The imported gate summaries — terminal KP certificate, Balaban
+RG consumption, DLR-LSI claim, OS0--OS4 Osterwalder--Schrader records,
+OS1/O(4) rotational covariance, conditional Wightman reconstruction,
+continuum stability, and OS-route gauge compatibility — are bookkeeping
+entries conditional on those imported surfaces.  The result is a conditional
+dependency audit, not a mathematical proof or official Clay recognition.
 
 The promotion authority gate remains closed:
 
@@ -38,27 +38,28 @@ development can close the Clay promotion gate.
 
 ## 1.  Introduction and Non-Promotion Statement
 
-The DASHI repository contains a formally type-checked dependency audit of the
-Yang--Mills mass-gap route through the Eriksson--Balaban programme (viXra
-2602.0041--2602.0096).  The audit is organised as a network of typed gate
-records, each consuming named imported postulates from specific source papers.
+The DASHI repository contains a dependency audit of the Yang--Mills mass-gap
+route through the Eriksson--Balaban programme (viXra 2602.0041--2602.0096),
+organised as named gate records consuming imported postulates from specific
+source papers.  This is an intake/bookkeeping artifact, not an Agda kernel
+receipt for the analytic route or the Clay endpoint.
 
 DASHI has converted the P01–P33 Eriksson/Bałaban intake into concrete Set-level theorem records with structured mathematical content and witness slots. Many witnesses remain postulated/imported, so the route remains source-intake conditional rather than internally proved. clayYangMillsPromoted remains false.
 
-The audit state (33/33 typed theorem surfaces closed) is:
+The audit state is import-relative bookkeeping, not mathematical closure:
 
 | Field | Value | Gate type |
 |---|---|---|
-| `mathematicalSourceIntakeClosed` | `true` | Source intake complete (33/33 surfaces) |
-| `candidateForPeerReview` | `true` | Readiness assessment |
-| `candidateForClayTrack` | `true` | Substantive readiness |
+| `mathematicalSourceIntakeClosed` | `true` | Bookkeeping: 33/33 named surfaces recorded, mostly imported/postulated |
+| `candidateForPeerReview` | `false` | No submission-ready mathematical proof exists |
+| `candidateForClayTrack` | `false` | 0/6 terminal endpoints closed; no kernel receipt |
 | `qualifyingJournalPublication` | `false` | CMI $6 -- external |
 | `twoYearWaitingPeriodElapsed` | `false` | CMI $3(ii) -- external |
 | `globalMathematicsAcceptance` | `false` | CMI $3(iii) -- external |
 | `clayYangMillsPromoted` | `false` | Authority/adjudication -- inviolable |
 
-The middle two rows are internal to DASHI.  The bottom four rows are external
-and cannot be closed by any internal DASHI action.  They depend on qualifying peer-reviewed publication,
+The upper rows are internal bookkeeping; the remaining rows are external or
+authority gates and cannot be closed by any internal DASHI action.  They depend on qualifying peer-reviewed publication,
 the required waiting period, and global community acceptance.
 
 The CMI's own rules ([Clay Mathematics Institute][1]) require a proposed
@@ -70,15 +71,17 @@ CMI and Wikipedia still describe Yang--Mills/mass gap as an open problem.
 
 The one public claim this repository can honestly make is:
 
-> *DASHI contains a type-checked dependency graph showing that the 33 imported
-> assertions listed in `PostulateInventory.agda` entail, if those assertions
-> are true, the stated Wightman-axiom and positive-mass-gap conclusion for
-> four-dimensional SU(N) Yang--Mills theory on R^4.  The kernel receipt covers
-> only this implication wiring.  It does not establish the imported analytic
-> theorems, including the unpublished viXra inputs and P33 whose source theorem
-> is still TBD.  `clayYangMillsPromoted = false`: official Clay recognition
-> requires qualifying peer-reviewed publication, a two-year waiting period, and
-> broad community acceptance, none of which is currently satisfied.*
+> *DASHI contains a dependency graph of named gate records showing the
+> implication structure by which the 33 imported assertions listed in
+> `PostulateInventory.agda` would entail, if those assertions were true, the
+> stated Wightman-axiom and positive-mass-gap conclusion for four-dimensional
+> SU(N) Yang--Mills theory on R^4.  No Agda kernel receipt for those analytic
+> implications or for the physical Clay endpoint exists in this audit.  It
+> does not establish the imported analytic theorems, including the unpublished
+> viXra inputs and P33 whose source theorem is still TBD.
+> `clayYangMillsPromoted = false`: official Clay recognition requires
+> qualifying peer-reviewed publication, a two-year waiting period, and broad
+> community acceptance, none of which is currently satisfied.*
 
 [1]: https://www.claymath.org/millennium-problems/rules/ "Rules for the Millennium Prize Problems"
 
@@ -183,16 +186,16 @@ or any mass gap.
 
 ---
 
-## 3.  Prior Obstacles and Their Resolution
+## 3.  Prior Obstacles and Their Imported-Claim Status
 
 In the terminal source-intake architecture, the earlier DASHI blockers
-`BalabanPhysicalBetaBridge` and `PAWOTGUniformSeparation` are no longer
-terminal open gates: their roles are absorbed by the imported
+`BalabanPhysicalBetaBridge` and `PAWOTGUniformSeparation` are not closed as
+mathematical obligations; their roles are only represented by imported
 Eriksson--Balaban source claims --- specifically DLR-LSI (P12--P15),
 RG-Cauchy summability (P16--P18), the all-diameter KP certificate
-(P06--P11), and the continuum OS1/Wightman chain (P28--P31).  The
-resolution is source-intake relative: DASHI imports these results as
-named postulates; it does not independently reprove the underlying
+(P06--P11), and the continuum OS1/Wightman chain (P28--P31).  This is
+source-intake bookkeeping, not resolution: DASHI imports these results as
+named postulates and does not independently reprove the underlying
 analytic estimates.
 
 ### 3.1  The Beta Gap
@@ -229,13 +232,15 @@ companion paper.  Theorem 7.1 gives DLR-LSI, which implies Dobrushin--Shlosman
 complete analyticity and therefore exponential clustering.  Corollary 7.3 gives
 a positive lattice-level spectral gap Delta_phys >= m(beta, N_c, d) > 0.
 
-**RG-Cauchy summability (2602.0072).**  Assumption A2 (per-link oscillation
-bound with 2^{-2k} irrelevance) is discharged by the all-diameter KP
-certificate.  Theorem 1.3 closes the Efron--Stein influence seminorm (B6).
-Corollary 5.1 gives Cauchy summability for blocked observables:
+**RG-Cauchy summability (2602.0072).**  The imported text claims that
+Assumption A2 (per-link oscillation bound with 2^{-2k} irrelevance) is
+discharged by the all-diameter KP certificate, that Theorem 1.3 closes the
+Efron--Stein influence seminorm (B6), and that Corollary 5.1 gives Cauchy
+summability for blocked observables:
 |<F>_{a_{k+1}} - <F>_{a_k}| <= C a_k^2 = C * 2^{-2k}, and sum_k 2^{-2k} <
-infty.  This closes the subsequential ambiguity and establishes the continuum
-limit as a strict Cauchy sequence.
+infty.  Those source claims would close the subsequential ambiguity and
+establish the continuum limit as a strict Cauchy sequence only if the source
+theorems were independently validated.
 
 **All-diameter KP certificate (2602.0069, 2602.0056).**  The Step V spatial KP
 certificate (`allDiameterKPCertificate = true`) closes polymer activity
@@ -262,11 +267,11 @@ The canonical audit surface is the single typed record at:
 DASHI/Physics/YangMills/PostulateInventory.agda
 ```
 
-This file is the single source of truth for the 33 typed theorem surfaces.  It is
-both human-readable and type-checked by Agda.  The postulates are organised
-into five topological layers:
+This file is the single source of truth for the 33 named theorem-surface records.
+It is a human-readable Agda inventory; importing it is not a receipt for the
+analytic claims.  The records are organised into five source-intake layers:
 
-### Layer 0 -- Unconditional
+### Layer 0 -- Intake base (imported and internal; not mathematically unconditional)
 
 | ID | Name | Source |
 |----|------|--------|
@@ -384,21 +389,21 @@ The status distribution across the 33 postulates is summarized below:
 
 ### 4.2  Consuming Gates
 
-The 33 typed surfaces are consumed by 14 gate records:
+The 33 typed surfaces are linked to the gate records listed below:
 
 | Gate file | Postulates consumed | Status |
-|---|---|---|---|
-| `BalabanTreeDistanceDiameterCompatibility` | P01--P03 | Closed |
-| `BalabanSpatialLinkWeightLowerBound` | P04--P05 | Closed |
-| `BalabanPolymerDiameterEntropy` | P06--P09 | Closed |
-| `BalabanLargeFieldSuppression` | P10--P11 | Closed |
-| `BalabanAnisotropicDiameterCompatibility` | P20--P22, P33 | **Closed** (P33 bridge closed) |
-| `BalabanStepVSpatialKPCertificate` | P06--P11, P20--P22, P33 | **Closed** (all imported) |
-| `BalabanRGStepVLane` | P12--P18 | **Closed** (via Step V) |
-| `BalabanContinuumStabilityGate` | P19, P23--P27, P31 | Closed (conditional) |
-| `O4CovarianceRestorationGate` | P20--P22, P28--P30, P32 | Closed |
-| `BalabanRGLane` | Aggregate | **Closed** (Step V complete) |
-| `BalabanGaugeFixingCompatibilityGate` | OS route | Closed (gauge route independent) |
+|---|---|---|
+| `BalabanTreeDistanceDiameterCompatibility` | P01--P03 | Intake-closed |
+| `BalabanSpatialLinkWeightLowerBound` | P04--P05 | Intake-closed |
+| `BalabanPolymerDiameterEntropy` | P06--P09 | Intake-closed |
+| `BalabanLargeFieldSuppression` | P10--P11 | Intake-closed |
+| `BalabanAnisotropicDiameterCompatibility` | P20--P22, P33 | Intake-closed (P33 bridge imported) |
+| `BalabanStepVSpatialKPCertificate` | P06--P11, P20--P22, P33 | Intake-closed (all imported) |
+| `BalabanRGStepVLane` | P12--P18 | Intake-closed (via Step V) |
+| `BalabanContinuumStabilityGate` | P19, P23--P27, P31 | Intake-closed (conditional) |
+| `O4CovarianceRestorationGate` | P20--P22, P28--P30, P32 | Intake-closed |
+| `BalabanRGLane` | Aggregate | Intake-closed (Step V bookkeeping) |
+| `BalabanGaugeFixingCompatibilityGate` | OS route | Intake-closed (gauge route independent) |
 | `ClayPromotionAuthorityGate` | Authority layer | clayYangMillsPromoted = false |
 
 ---
@@ -584,10 +589,12 @@ relative to the full (P01,...,P33) typed theorem surfaces inventory.
 
 ### 5.4  What a reviewer can verify from this PDF
 
-1. **What is imported.** Each of the 33 typed surfaces in Section 4 names a specific
-   source paper and theorem.
-2. **What DASHI proves.** DASHI type-checks the dependency wiring (acyclic DAG,
-   single sink P31); it does not reprove the analytic estimates (see Appendix A).
+1. **What is imported.** The 33 typed surfaces in Section 4 name source papers
+   and theorems where recoverable; P33 remains an unknown-authority surface with
+   no cited source theorem.
+2. **What DASHI records.** DASHI names the dependency wiring in the intake
+   inventory; no Agda kernel receipt for an acyclic DAG, a single sink P31,
+   or the analytic route is asserted here (see Appendix A).
 3. **Where each result enters.** The gate table above shows the precise
    input-to-output mapping for every intermediate gate.
 
@@ -612,19 +619,21 @@ These three axioms follow from standard lattice arguments:
 All three are recorded as `true` in
 `BalabanContinuumStabilityGate.ContinuumStabilitySourceIntake`.
 
-### 6.2  Tier 2 -- Conditional on Hypothesis 5.2 (Now Discharged)
+### 6.2  Tier 2 -- Hypothesis 5.2 remains an open mathematical obligation
 
 Hypothesis 5.2 (uniform logarithmic Sobolev inequality for the pure Wilson
-measure) was the gap deferred by Remark 5.3 of (2602.0088).  It is now
-discharged via the DLR-LSI Dobrushin bypass:
+measure) was the gap deferred by Remark 5.3 of (2602.0088).  It is not proved
+in DASHI.  The imported 2602.0052 material would address it inside the
+postulate framework:
 
-1. **Yoshida--Guionnet--Zegarlinski criterion** (2602.0052 Lem. 6.3):
-   delta_k < alpha_blk/4 follows from polymer decay + pZeroPositive.
-2. **DLR-LSI theorem** (2602.0052 Thm. 7.1): Dobrushin--Shlosman complete
-   analyticity implies exponential clustering.
-3. **Cesi quasi-factorisation** gives the uniform LSI.
+1. **Imported Yoshida--Guionnet--Zegarlinski criterion** (2602.0052 Lem. 6.3):
+   delta_k < alpha_blk/4 is claimed to follow from polymer decay + pZeroPositive.
+2. **Imported DLR-LSI theorem** (2602.0052 Thm. 7.1): Dobrushin--Shlosman complete
+   analyticity is claimed to imply exponential clustering.
+3. **Imported Cesi quasi-factorisation** is claimed to give the uniform LSI.
 
-With Hypothesis 5.2 discharged, the remaining Tier 2 gates close:
+If those imported premises were independently established and validated, the
+following consequences would follow:
 
 - **OS4 (cluster property):** Exponential clustering from DLR-LSI.
 - **Physical mass gap:** Delta_phys > 0 from 2602.0088 Cor. 1.2.
@@ -634,21 +643,22 @@ With Hypothesis 5.2 discharged, the remaining Tier 2 gates close:
   analyticity).
 - **Multiscale correlator decoupling:** 2602.0088 Thm. 6.3.
 
-### 6.3  Tier 3 -- O(4) / OS1 Restoration (Closed via 2602.0092)
+### 6.3  Tier 3 -- O(4) / OS1 claims imported from 2602.0092
 
-The O(4) rotational covariance gate is closed by three steps from (2602.0092):
+The imported 2602.0092 material claims the O(4) rotational covariance gate
+through three steps:
 
-1. **Lattice Ward identity** (Prop. 3.2, unconditional): the rotation
+1. **Imported lattice Ward identity** (Prop. 3.2): the rotation
    generator acts on test functions and plaquette positions, not on link
-   variables.  The path-integral Jacobian is identically 1 (Fujikawa-style
-   anomaly is absent).  The identity is:
+   variables.  The path-integral Jacobian is claimed to be identically 1
+   (Fujikawa-style anomaly absent).  The claimed identity is:
    ```
    <S^eta_n, L_mu_nu f> = -sum_y eta^4 int f(x) <(delta_{mu_nu} s_W)(y)
      * prod_j O(x_j)> dx + E^eta_n(f)
    ```
    with |E^eta_n(f)| <= C_n eta^2 ||f||_{W^{1,1}}.
 
-2. **Symanzik breaking decomposition** (Prop. 3.4):
+2. **Imported Symanzik breaking decomposition** (Prop. 3.4):
    ```
    (delta_{mu_nu} s_W)(y) = g_0(eta)^{-2} eta^2
      [lambda_{mu_nu} O_aniso(y) + Q^{O(4)}_{mu_nu}(y) + O(eta^2)]
@@ -656,16 +666,18 @@ The O(4) rotational covariance gate is closed by three steps from (2602.0092):
    with lambda_{mu_nu} != 0 (Appendix A, using the 1D anisotropic quotient
    from 2602.0087 Thm. 3.6).
 
-3. **OS1 Euclidean covariance** (Thm. 4.2 + Cor. 4.3):
-   RHS = O(eta^2 log(eta^{-1})) -> 0, so L_{mu_nu} S_n = 0 in S'(R^4n).
-   Full O(4) covariance follows.
+3. **Imported OS1 Euclidean covariance** (Thm. 4.2 + Cor. 4.3):
+   RHS = O(eta^2 log(eta^{-1})) -> 0 is claimed to give
+   L_{mu_nu} S_n = 0 in S'(R^4n), hence full O(4) covariance.
 
-The triangular mixing preventive lock (2602.0096 Thm. 8.5+Cor. 8.6) confirms
-that there is no d=4 anisotropic sink in the W4-scalar gauge-invariant sector:
+The imported triangular mixing preventive lock (2602.0096 Thm. 8.5+Cor. 8.6)
+is claimed to rule out a d=4 anisotropic sink in the W4-scalar gauge-invariant
+sector:
 ```
 Z_{4<-6}(O^{W4,aniso}_6) subset O^{W4}_4 cap {O(4)-invariant}
 ```
-This blocks the a^2 x a^{-2} -> O(1) residue attack structurally.
+If validated, that claim would block the a^2 x a^{-2} -> O(1) residue attack
+structurally.
 
 ### 6.4  Wightman Reconstruction (2602.0092 Thm. 1.1)
 
@@ -725,15 +737,18 @@ DASHI/Physics/YangMills/ClayPromotionAuthorityGate.agda
 separates mathematical source-intake readiness from Clay-grade promotion.
 
 ```
-CurrentClayPromotionAuthorityGate = record
-  { mathematicalSourceIntakeClosed    = true  -- 33/33 typed surfaces closed
-  ; candidateForPeerReview            = true    -- package is auditable
-  ; candidateForClayTrack             = true    -- substantive readiness
-  ; qualifyingJournalPublication      = false   -- viXra != CMI qualifying outlet
-  ; twoYearWaitingPeriodElapsed       = false   -- no publication to start clock
-  ; globalMathematicsAcceptance       = false   -- no community consensus exists
-  ; clayOrSABConsiderationAvailable   = false
-  ; clayYangMillsPromoted             = false
+currentClayPromotionAuthorityGate : ClayPromotionAuthorityGate
+currentClayPromotionAuthorityGate = record
+  { historicalSourceIntakeLedgerClosed = true
+  ; mathematicalPhysicalConstructionClosed =
+      Frontier.clayPromotionClosed Frontier.canonicalYMOperatorContinuumFrontier
+  ; auditableForPeerReview = true
+  ; candidateForClayTrack = false
+  ; qualifyingJournalPublication = false
+  ; twoYearWaitingPeriodElapsed = false
+  ; globalMathematicsAcceptance = false
+  ; clayOrSABConsiderationAvailable = false
+  ; clayYangMillsPromoted = false
   }
 ```
 
@@ -760,21 +775,22 @@ No internal DASHI development can close these gates.  `clayYangMillsPromoted
 
 ## 9.  Conclusion
 
-DASHI contains a type-checked source-intake audit of the
-Eriksson--Balaban Yang--Mills route.  All mathematical route gates close
-relative to 33 typed theorem surfaces, including P33, the
-field-regularity-to-link-weight-positivity bridge.  The manuscript is
-**v0.3 / P33-closed** and ready for expert review.
+DASHI contains a source-intake dependency audit of the
+Eriksson--Balaban Yang--Mills route.  All 33 named theorem surfaces are
+recorded in the intake inventory, including P33, the
+field-regularity-to-link-weight-positivity bridge, but most remain
+imported or postulated.  This is not mathematical closure, and the
+manuscript is not a submission-ready proof.
 
-The gates that close include:
-- Step V / terminal KP certificate (P01--P11, P23--P24)
-- RG-lane consumption (P12--P18)
-- DLR-LSI / Hypothesis 5.2 discharge
-- OS0--OS4 from 2602.0088
-- OS1 / O(4) covariance from 2602.0092
-- Wightman reconstruction with positive mass gap from 2602.0092 Thm. 1.1
-- Continuum stability (P19, P25--P27, P31)
-- OS-route gauge compatibility per 2602.0096 S7.6
+The import-relative links recorded include:
+- Step V / terminal KP certificate intake (P01--P11, P23--P24)
+- RG-lane intake consumption (P12--P18)
+- Imported DLR-LSI claim for Hypothesis 5.2 (not discharged in DASHI)
+- OS0--OS4 source-intake records from 2602.0088
+- OS1 / O(4) source-intake records from 2602.0092
+- Conditional Wightman reconstruction with positive mass gap from 2602.0092 Thm. 1.1
+- Continuum stability source-intake records (P19, P25--P27, P31)
+- OS-route gauge compatibility source-intake per 2602.0096 S7.6
 
 This remains a conditional formalisation and dependency audit, not an official
 Clay promotion.  The promotion gate remains closed:
@@ -792,18 +808,20 @@ DASHI development can close that authority gate.
 
 ## Appendix A. Scope of the DASHI Formalisation
 
-DASHI establishes three things:
+DASHI records three things:
 
-1. **Type-checking of the dependency structure:** the gate records in
-   `PostulateInventory.agda` are verified by Agda's type checker.  The
-   dependency DAG is acyclic and has a single mathematical sink (P31).
+1. **Dependency-structure bookkeeping:** the gate records in
+   `PostulateInventory.agda` name a dependency structure.  No Agda kernel
+   receipt for the analytic route or the Clay endpoint is claimed here;
+   any acyclicity summary is bookkeeping, not a kernel-certified proof.
 
-2. **Logical correctness of the conditional chain:** if the 33 typed
-   theorem surfaces hold, then the stated
-   conclusions follow by the wiring encoded in the gate records.
+2. **Conditional-chain bookkeeping:** if the 33 named theorem surfaces hold,
+   then the stated conclusions would follow by the wiring described in the
+   gate records.
 
-3. **Audit transparency:** every imported claim names its source paper,
-   theorem number, and conditionality tier.  The audit surface is
+3. **Audit transparency:** imported claims name source papers, theorem numbers,
+   and conditionality tiers where recoverable; P33 is flagged as
+   unknown-authority with no cited source theorem.  The audit surface is
    machine-readable and diffable.
 
 DASHI does not establish:

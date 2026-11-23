@@ -92,11 +92,12 @@ def check(rotation_class=None):
             source_C2_trace=compatible[0]['source_C2_trace'],
             Schroedinger_inversion_lift_trace=compatible[0]['Schroedinger_inversion_lift_trace'],
             predicted_selected_phase_trace=compatible[0]['predicted_selected_phase_trace']))
-    assert {(p["source_rotation_class"],p["source_z_times_rotation_class"],
-             p["source_z_times_halfturn_class"],p["predicted_selected_phase_trace"])
-            for p in atlas_class_sieve()}=={
-             ("4A","12B","6E",90),("4C","12H","6E",90),
-             ("4C","12I","6E",90),("4D","12F","6B",66)}
+    if rotation_class is None:
+        assert {(p["source_rotation_class"],p["source_z_times_rotation_class"],
+                 p["source_z_times_halfturn_class"],p["predicted_selected_phase_trace"])
+                for p in all_sieved}=={
+                 ("4A","12B","6E",90),("4C","12H","6E",90),
+                 ("4C","12I","6E",90),("4D","12F","6B",66)}
     return {'status':'PASS_CONDITIONAL_MATHEMATICAL_GATE',
       'source_rotation_class_filter':rotation_class,
       'atlas_source_rotation_to_z_rotation_12_to_z_halfturn_6':all_sieved,

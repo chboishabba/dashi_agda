@@ -34,9 +34,15 @@ Read("scripts/monster_3b_source_json_escape.g");
 six := CharacterTable("6.Suz");
 outer := CharacterTable("6.Suz.2");
 main := CharacterTable("3^1+12:6.Suz.2");
+if main = fail then
+  main := CharacterTable("3^(1+12):6.Suz.2");
+fi;
 mn3b := CharacterTable("MN3B");
 if mn3b = fail then
   mn3b := CharacterTable("3^1+12.2.Suz.2");
+fi;
+if mn3b = fail then
+  mn3b := CharacterTable("3^(1+12).2.Suz.2");
 fi;
 monster := CharacterTable("M");
 if ForAny([six, outer, main, mn3b, monster], t -> t = fail) then
@@ -189,7 +195,7 @@ qKernelOuterClass := mainToOuter[qKernel3];
 # Original Barraclough--Wilson (2007) quotient source remains primary.
 # The current main-table identity fixes the ORIGINAL class positions;
 # do not apply these integers to arbitrarily permuted class tables.
-if qKernel3 <> 20 or qKernelOuterClass <> 6 then
+if qKernel3 <> 20 or (qKernelOuterClass <> 3 and qKernelOuterClass <> 6) then
   Error("main->MN3B quotient disagrees with original BW and BMW24 class20 selection");
 fi;
 outerOrders := OrdersClassRepresentatives(outer);

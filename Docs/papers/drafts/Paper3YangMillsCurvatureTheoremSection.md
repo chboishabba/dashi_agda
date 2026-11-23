@@ -1,7 +1,5 @@
 # Theorem 3.1: Finite-Depth Non-Flat Yang-Mills Curvature Witness
 
-## Theorem 3.1
-
 The DASHI carrier produces a non-flat discrete Yang-Mills geometry at finite
 depth.  More precisely, in the depth-9 finite carrier surface there is a
 selected `SFGCSite2D` connection whose curvature 2-form has an inhabited

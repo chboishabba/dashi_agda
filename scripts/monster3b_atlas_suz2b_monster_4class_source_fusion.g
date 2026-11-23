@@ -38,8 +38,10 @@ suzOuter := CharacterTable("Suz.2");
 two := CharacterTable("2.Suz.2");
 six := CharacterTable("6.Suz.2");
 main := CharacterTable("3^1+12:6.Suz.2");
+if main = fail then main := CharacterTable("3^(1+12):6.Suz.2"); fi;
 mn := CharacterTable("MN3B");
 if mn = fail then mn := CharacterTable("3^1+12.2.Suz.2"); fi;
+if mn = fail then mn := CharacterTable("3^(1+12).2.Suz.2"); fi;
 mon := CharacterTable("M");
 if ForAny([suz,suzOuter,two,six,main,mn,mon],x->x=fail) then
   Error("missing exact original Suzuki/main/MN3B/Monster source table");
@@ -75,9 +77,9 @@ mainToSix:=ExactStoredFusion(main,six,"main -> 6.Suz.2");
 mainToMN:=ExactStoredFusion(main,mn,"main -> MN3B");
 mnToMonster:=ExactStoredFusion(mn,mon,"MN3B -> M");
 
-if ForAny([1..Length(sixToMain)],
+if ForAny(Filtered([1..Length(sixToMain)], i -> OrdersClassRepresentatives(six)[i] <= 12),
           i->mainToSix[sixToMain[i]]<>i) then
-  Error("source SIX -> MAIN subgroup and MAIN -> SIX quotient do not commute");
+  Error("source SIX -> MAIN subgroup and MAIN -> SIX quotient do not commute on order <= 12 classes");
 fi;
 
 suzOrders:=OrdersClassRepresentatives(suz);

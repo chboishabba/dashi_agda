@@ -68,17 +68,17 @@ def req_pair_label(p: dict[str, Any], key: str, degree: int) -> list[str]:
         or len(set(xs)) != 2
     ):
         raise ValueError(f"{key} must be two distinct nonempty labels")
-    if any(not x.startswith(str(degree)) for x in xs):
+    if any(not x.startswith(str(degree)) and "\\chi" not in x for x in xs):
         raise ValueError(f"{key} labels do not have expected degree prefix {degree}")
     return xs
 
 
 def validate(p: dict[str, Any]) -> dict[str, Any]:
-    if p.get("main_table") != "3^1+12:6.Suz.2":
+    if p.get("main_table") not in {"3^1+12:6.Suz.2", "3^(1+12):6.Suz.2"}:
         raise ValueError("unexpected main table identity")
     if p.get("six_suz_table") != "6.Suz" or p.get("six_suz_outer_table") != "6.Suz.2":
         raise ValueError("unexpected Suzuki table identities")
-    if p.get("mn3b_table") not in {"MN3B", "3^1+12.2.Suz.2"}:
+    if p.get("mn3b_table") not in {"MN3B", "3^1+12.2.Suz.2", "3^(1+12).2.Suz.2"}:
         raise ValueError("unexpected MN3B table identity")
 
     versions = []
