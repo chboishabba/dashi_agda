@@ -1,3 +1,13 @@
+## 23 Nov RH P0 E3 — SymPy-first actual obstruction and new source-full-strip rank
+
+[Original source geometry and independent count/phase no-go](../proofs/RHP0E3SymPyFullStripSidebandRankAndArithmeticResonanceNoGo20261123.md), [EXACT locally executed script on the RH PR](../../scripts/check_rh_p0_e3_sideband_rank_resonance_20261123.py). User directs SymPy in lieu of Lean/Agda; no kernel or CI. The true source frozen Fourier wavepacket TWO sidebands omega=r,2r have matrix determinant `[H_a(0)+H_a(2r)][H_a(0)+H_a(4r)]−[H_a(r)+H_a(3r)]²`. Exact source r=t/16, original plateau M=3/32 and sharp 26-slot E_j derivative envelope yield **for every |a|≤1/2, r≥13576/t≥217216**: `det≥117M²/256`, `max(|K(r)|,|K(2r)|)≥(3/8)|pole*eps|M max(|A1|,|A2|)`. This is a **positive separation theorem for the auxiliary detector**, not the signed RH theorem; never claim actual zeta zeros at these packet centres.
+
+**Sharp strategic limit:** the present Riemann–von Mangoldt unit-window *upper count alone* admits an adversarial NON-ZETA model with O(logt) atoms at a nonzero physical packet, costing ≥45m/(256r⁶); it cannot remove the one remaining log from the absolute bound. Kronecker + unique factorization shows a separate all-real-height near-double-prime phase no-floor: `t_n=(n+1/2)π/log2` forces cos2=0 and cos3→0 along an infinite subsequence. This says NOTHING about actual off-line zero ordinates. Exact previous terminal signed source remains `2(D−2d)+S≥0`, and strict E3<0 requires **new number theory**, not source-equivalent rearrangement, dyadic/Albert cardinality, or smoother bumps.
+
+**P0 next:** original W actual all-zero/Gamma/prime signed-correlation or independently proved zero-location information; if shifting test centre to avoid phase resonance, FIRST prove source target nonnegative for off-centre mark. P0A external original candidate is source-graph pinned, not SymPy-provable; do not promote. RH/GRH OPEN.
+
+---
+
 ## RH CLAY P0 — priority correction: only final mathematical theorem is mandatory (23 Nov 2026)
 
 [Exact original-source requirement/negative-control ledger](../proofs/RHClayP0StrictNecessityAndOriginalKernelAdmission20261123.md). The \(27=1+26\) punctured-trit, \(52=2×26\) analytic envelope, dyadic 32768 and 1024, 208, 4E_j, and improved flat-top E2 heights are **optional original-detector engineering**, NOT Clay RH axioms or compulsory proof sublemmas. Do NOT continue those numerical coincidences as P0 unless they discharge the actual strict signed terminal.
