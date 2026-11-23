@@ -2417,3 +2417,94 @@ Source attribution: classical Chudnovsky and ordered product,
 RH original selected quartic/Weil source and DASHI #1533;
 Robin Wall Kimmerer is cultural/methodological, not proof authority.
 No Agda/Lean/CI or RH/GRH theorem claim.
+
+
+## 23 November — COMP5e RH-style sufficient quotient-residual witness; SOTA pi remains P0
+
+Keep **FASTEST INDEPENDENTLY CERTIFIED PI** the explicit P0 performance/research
+objective. Per user direction, postpone FLINT/y-cruncher external comparator
+execution for now, but do NOT demote the objective or infer world SOTA from
+internal matched GMP. Next practical optimization must cut actual end-to-end
+certification cost, retaining source identity, classical Chudnovsky premise,
+ordered product and exact decimal-floor acceptance.
+
+Donor: RH/GRH original selected-W source geometry #1533, true signed
+q^-6 weighted-tail dyadic atlas with a continuous residual and exact
+recovery; no unconditional bit-reindexing action on compact-smooth
+tests. The correct transferable principle is **consumer-sufficient
+quotient plus exact residual/boundary**, not 15-bit data magic or
+leaf rearrangement. COMP5d demonstrated a reversible weighted chart
+but no million-digit runtime win, and ruled out commuting term swaps.
+
+NEW COMP5e exact theorem in ordered rational arithmetic:
+For 0 <= L=N_L/D_L <= U=N_U/D_U with positive integer D_L,D_U,
+let x=floor(N_L/D_L). Then
+    floor(U)=x  iff  N_U < (x+1)*D_U.
+Because U>=L>=x, no second integer floor division is needed.
+The strict inequality preserves the exact integer boundary at U=x+1;
+a weak <= would be UNSOUND. If it fails, restore usual adaptive
+term-count and sqrt-precision refinement, without asserting digits.
+The lower quotient x is the compressed consumer; the upper-endpoint
+comparison is the retained boundary witness. This is elementary
+rational order algebra, not a new RH analytic theorem.
+
+Implemented on #1529 as
+scripts/check_pi_gmp_quotient_residual.cpp at commit
+0fae5e6beadec4aae7115564d90aa8d05e0df4ef,
+Git blob 28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e,
+GitHub source readback exact. It modifies the existing COMP5c
+GMP midpoint fused certificate to four order-rotated modes:
+plain_two_floors, plain_one_floor, cross_two_floors, cross_one_floor;
+all retain same interval endpoints, adaptive refinement, full
+decimal serialization/hash and original Chudnovsky term order.
+The committed source has NOT been independently fetched to the
+local compiler due to connector/runtime transfer limitations.
+A separately constructed, mathematically equivalent local native
+GMP/openssl source /tmp/pi_residual.cpp WAS compiled with
+g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto and executed.
+Do not call the committed binary byte-identically compiled.
+
+Exact independent Python Fraction control: 10000 random ordered
+positive-rational pairs, 6785 floor-crossing negative cases and
+exact equality-boundary controls all PASS.
+Local native mode 0 two floors, mode 1 one floor+comparison,
+mode 2 exploratory explicit remainder plus comparison (slower).
+Full output hashes equal for all modes:
+10000 ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+500000 fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9
+1000000 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+All remain CONDITIONAL on classical Chudnovsky identity and tail, not a new
+Agda/Bishop same-real proof.
+
+Rotating mode order five-run native medians (milliseconds, full
+binary split+sqrt+products+floor(s)+serialization/hash):
+| places | two floors | one floor + bound | saving |
+|---:|---:|---:|---:|
+| 500000 | 297.825 | 283.410 | 4.84% |
+| 1000000 | 722.597 | 702.946 | 2.72% |
+Independent seven-run 1000000: two 716.143 vs one 698.856 ms
+(2.41% improvement). Lower-volume 10000 three-run:
+1.648 vs 1.660 ms, noise/no win; 100000 three-run
+42.643 vs 40.310 ms (5.47%). Tests are same-machine within-process,
+not external SOTA or peak-RSS comparisons. Independent stage-med:
+at 1M five-run floor/comparison stage two=94.827ms vs one=75.682ms;
+serialization approximately unchanged (~71ms), so speedup is
+consistent with saving second large division. A naive extra
+remainder extraction costs more than it saves, negative control.
+
+P0 next maximum-cut: combine this one-quotient certificate with
+(1) original fastest GMP fused plain midpoint at >=500k, (2)
+precision/size crossover selection of cross-GCD only when measured
+net positive, (3) direct factor/scale sharing or smaller endpoint
+integer products, (4) controlled 1M-10M arithmetic scaling and
+RSS/allocations. Preserve complete decimal-floor agreement and
+deliberate integer-boundary adversarial controls; never optimize
+using raw hash agreement alone. COMP6 Monster/VOA actual action
+versus character, COMP7 FRACDASH full source reconstruction and
+COMP8 all-future-consumer/observer distinctions remain research
+donors, not substitutes for verified pi speed. CM winding/primitive
+necklaces/Masser still open. Original RH actual selected W and signed
+zero functional admissibility/open terminal remain separate.
+No CI, Lean, Agda kernel, independent external pi benchmark or
+world-SOTA claim.
