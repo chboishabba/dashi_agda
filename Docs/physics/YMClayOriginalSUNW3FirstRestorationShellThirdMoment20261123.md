@@ -96,3 +96,48 @@ Even at `tau=0`, `m_N(beta)->1` as `beta->infty`, so the SU(3) first-shell absol
 - Original eight-wall baseline and full source restoration are on [YM #1536](https://github.com/chboishabba/dashi_agda/pull/1536); original CMP119/122/116 donor is [#1444](https://github.com/chboishabba/dashi_agda/pull/1444).
 - The current branch was cut from the updated `master` rather than force-merging #1536's diverged history. The compact script in this branch is source-equivalent to the locally executed regression; it has not been byte-for-byte executed after GitHub upload.
 - No Agda/Lean/CI, global Wilson W3, same-H spectral gap, or Clay theorem is claimed.
+
+
+## F. Larger BIDI cut — exact SECOND restoration jet, original SU(2) L=4,d=2
+
+The exterior-leaf mechanism persists through **two** restoration insertions, not merely one. The native 4D complete-link census shows every non-section plaquette has at least two boundary links outside the original tube support, for every tested L=3,4,5,6, every 1<=d<L and every spatial plane. On these periodic original lattices any two distinct positive-oriented plaquettes share at most one original link (checked exhaustively via link-to-face incidence, not assumed). Hence adding a *distinct* second restored plaquette cannot eliminate every exterior Haar leaf. If it is the **same** exterior plaquette repeated, its holonomy is already Haar-independent of the entire (F,G) pair under mu_0, so the *connected* fourth cumulant still vanishes.
+
+Therefore, for the 1,528 restored original source faces of L4/d2, in the exact genuine full-source second variation
+\[
+\left.\partial_\tau^2\operatorname{Cov}_{\mu_\tau}(F,G)\right|_{\tau=0}
+=\beta^2\sum_{p,q\notin T_2}\kappa_{\mu_0}(F,G,t_p,t_q),
+\]
+**all 1,528^2 = 2,334,784 ordered terms reduce to just 3^2 = 9 ordered section pairs**, and all 2,334,775 other terms are identically zero. This is a source-geometric statement at tau=0, not a bound on any later interpolation value.
+
+For continuous SU(2), the original tube stationary class-function chain has exact four-wall transfer eigenvalues
+\[
+a=\left[\frac{I_2(\beta)}{I_1(\beta)}\right]^4
+\quad(\text{fundamental spin }1/2),\qquad
+b=\left[\frac{I_3(\beta)}{I_1(\beta)}\right]^4
+\quad(\text{adjoint spin }1).
+\]
+Using the original SU(2) multiplication law `t\,\chi_j=(\chi_{j+1/2}+\chi_{j-1/2})/2`, the nine connected fourth cumulants are:
+\[
+\begin{aligned}
+\kappa_4(F,G,H_i,H_i)&=-a^2/16&&(i=0,1,2),\\
+\kappa_4(F,G,H_0,H_1)&=\kappa_4(F,G,H_1,H_2)=(ab-2a^3)/16,\\
+\kappa_4(F,G,H_0,H_2)&=(b^2-2a^4)/16,
+\end{aligned}
+\]
+and symmetry supplies each reversed pair. Thus:
+\[
+\boxed{\left.\partial_\tau^2\operatorname{Cov}_{\mu_\tau}(F,G)\right|_{\tau=0}
+=\frac{\beta^2}{16}\left(-3a^2+4ab-8a^3+2b^2-4a^4\right).}
+\]
+Together with the proven zero SU(2) first derivative and original wall-only covariance `a^2/4`, this yields at **fixed finite L4 and beta** the exact Taylor jet
+\[
+\operatorname{Cov}_{\mu_\tau}(F,G)
+=\frac{a^2}{4}
++\frac{\tau^2\beta^2}{32}
+(-3a^2+4ab-8a^3+2b^2-4a^4)
++O_\beta(\tau^3).
+\]
+
+**Independent local source validation:** The script computes each SU(2) four-mark moment using exact spin-character multiplication and native four-wall transfer, sums all 9 connected fourth cumulants, and independently differentiates the **normalized** three-section source with the correct repeated-insertion factorials through order `u^2`. Both yield the same exact symbolic expression. The original-geometry second-order exterior Haar criterion is checked for all L3–L6. These are symbolic exact tests of the established compact-group character calculus; a complete corresponding Agda non-Abelian source/transfer kernel proof has not been produced.
+
+**Boundary:** this proves only the first two restoration derivatives at tau=0. At higher order, combinations of distinct exterior plaquettes can remove one another's free links and yield genuinely interacting rooted cluster activities. The physical CMP119/122 constrained T/large-field absolute W3 bound on the interval [0,1] remains wholly open. No continuum, physical mass gap or global full-Gibbs exponential clustering follows.
