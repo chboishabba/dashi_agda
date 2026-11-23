@@ -2,6 +2,56 @@
 
 Status: lemma roadmap; non-promoting.
 
+## 21 November 2026 — current Paper 1 / signed-payment correction
+
+**The authoritative current four-lane control record is still
+`Docs/roadmaps/NSProofControl20260915.md`, updated in the
+source-first Paper 1 PR created on 21 November.** The
+historical September B_comm, R568 and P3 proposals below
+are retained only as source-attributed donors.
+
+Original later source
+`ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md`
+and `ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md`
+record two specific **negative physical decisions**:
+- actual real N=2 six-mode physical Galerkin counterexample to the
+  unqualified universal R734/R735 augmented W2 positivity;
+- original 3–4–5 real finite-Galerkin physical R850/R853 short-time
+  strict negative signed integral, falsifying unrestricted
+  R820/R821/R823/R824/R825 complete positive-payment/reserve.
+
+Do NOT call these a counterexample to regularity, nor turn a
+falsified positive payment into a "still-open universal W2
+proof". R744–R752 still contributes exact algebraic
+two-dyadic-difference and integrated equivalence *conditional
+compilers*; the specific source-identity relation between
+its `G_751` residual and the falsified original sign
+functionals remains to be independently constructed/checked,
+not guessed. A valid alternative signed bound with explicit
+negative/remainder control and all-data coverage, cutoff-uniform
+W1 and continuation are required. The four Clay alternatives
+A (whole-space unforced), B (periodic unforced), C/D
+(forced breakdown) remain logically separate; C/D original
+released authorship and independent source validation
+are distinct from DASHI's status adapters.
+
+The live `Docs/papers/live/Paper1NavierStokesClayDraft.md`
+was revised in the new source-first NS manuscript branch.
+Its new local `scripts/check_ns_paper1_w2_nogo_sympy_20261121.py`
+uses exact SymPy rational arithmetic to confirm
+`r(0)=-28273644/125`, original R820/R823/R825
+algebra and the R854 strict short-time envelope,
+including sign/continuity negative controls.
+The locally executed script's Git blob
+`261766b264b5f5f81e8148b4f49f4341d6b31f75`
+matches the committed file. SymPy cannot typecheck
+Agda/Lean, prove physical R408 packet realization or
+close the continuum/all-data NSE theorem.
+No CI run, no source-native kernel or Clay completion.
+
+---
+
+
 ## Current control record (2026-09-16)
 
 This is a historical and broad dependency ledger.  For the current active
