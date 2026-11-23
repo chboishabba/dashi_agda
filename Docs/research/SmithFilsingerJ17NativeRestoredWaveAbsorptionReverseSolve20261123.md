@@ -13,31 +13,31 @@
 
 The J12 wave port computes
 
-$
+\[
 \begin{aligned}
 p_{\mathrm{in}}&=s_r^2+s_i^2,\\
 p_{\mathrm{out}}&=(s_r-hq)^2+(s_i-hz)^2,\\
 h&=\sqrt{2\gamma_{\mathrm{rad}}}.
 \end{aligned}
-$
+\]
 
 Local SymPy proves without approximation:
 
-$
+\[
 p_{\mathrm{wave,net}} =
 2h(s_r q+s_i z)-h^2(q^2+z^2).
-$
+\]
 
 Hence **positive finite-time net wave work** requires the integral of coherent source-to-resonator overlap to exceed the radiative response cost; it does not establish a separately measured source, positive electric load work, or efficiency. The original J12 *one-boundary* energy identity is
 
-$
+\[
 W_{\mathrm{driver}}+
 (W_{\mathrm{incident}}-W_{\mathrm{outgoing}})
 =
 W_{\mathrm{spark}}+W_{\mathrm{diode}}+
 W_{\mathrm{copper/bleed/internal}}+
 (U_1-U_0).
-$
+\]
 
 All terms are retained, and the model must return **all seven** states (including magnetic, electric, bank and internal radiating state) rather than a single capacitor voltage.
 
