@@ -7,6 +7,7 @@ equation rational interval primitive. No periodic-orbit or 5D parameter claim.
 """
 import json, math
 from fractions import Fraction as F
+from pathlib import Path
 import check_smith_filsinger_j25_first_segment_validated_interval_20261123 as j25
 I,S,p=j25.I,j25.S,j25.PARAM
 
@@ -229,6 +230,19 @@ def run():
     assert left['gV_slope_whole'][0]>0 and right['gV_slope_whole'][0]>0
     assert left['gU_whole'][1]<0 and right['gU_whole'][1]<0
     assert left['spark_whole'][0]>0 and right['spark_whole'][0]>0
+    # Discharge the FIRST J24 conditional event-state box using the entire
+    # isolated root-time bracket, with exact Fraction parsing of JSON decimals.
+    event_path=(Path(__file__).resolve().parents[1] / 'Artifacts/smith-filsinger/j24_six_hybrid_guard_centres_20261123.json')
+    centres=json.loads(event_path.read_text(),parse_float=F,parse_int=F)['events']
+    assert centres[0]['kind']=='diode' and centres[0]['name']=='V'
+    h_left=F('.009367008'); h_right=F('.009367010')
+    P,eps=residual(52,t,root,h_right)
+    whole=[evalpoly(row,I(0,h_right)).expand(F('.00000001')) for row in P]
+    E=bound_exp(get_A(whole),h_right,delta,eps)
+    certified_event_state=[evalpoly(row,I(h_left,h_right)).expand(e) for row,e in zip(P,E)]
+    original_box=[I(x-F('.0001'),x+F('.0001')) for x in centres[0]['x']
+    assert all(state.subset(box) for state,box in zip(certified_event_state,original_box))
+    event_box_inclusion_grid=[[str(x.a),str(x.b)] for x in certified_event_state]
     return dict(status='PASS_EXACT_RATIONAL_NOMINAL_FIRST_DIODE_V_EVENT',
         proof_source='independent transcription of native J18 in J25 interval primitive',
         fixed_initial_state_exact_decimal_rationals=j25.ROOT,
@@ -238,6 +252,8 @@ def run():
         event_unique_by_positive_guard_derivative=True,
         left_endpoint=left,right_endpoint=right,
         all_37_step_witnesses=rows,
+        first_J24_event_state_box_included_all_9_coordinates=True,
+        certified_first_event_state_grid=event_box_inclusion_grid,
         interval_arithmetic_grid_scale=str(S),
         source_input_is_synthetic_unmeasured=True,
         physical_after_crossing_not_integrated=True,
