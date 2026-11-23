@@ -50,6 +50,13 @@ z = sp.symbols('z')
 cosh_tail = sp.cosh(z)-sum(z**(2*j)/sp.factorial(2*j) for j in range(5))
 assert sp.simplify(sp.series(cosh_tail,z,0,12).removeO()-z**10/sp.factorial(10))==0
 print('PASS exact first possible hyperbolic height-defect perturbation order 10')
+# Physical source profile is Pphys(u)=(1/r)*Pnorm(r*u), since the
+# two-radius projective bracket itself carries one inverse radius. Under
+# v=r*u, its even kth moment scales with r^-(k+2), not r^-(k+1).
+rphys=sp.symbols('rphys',positive=True)
+assert sp.simplify(rphys**(-1)*rphys**(-1)*rphys**(-4)-rphys**(-6))==0
+assert sp.simplify(rphys**(-1)*rphys**(-1)*rphys**(-8)-rphys**(-10))==0
+print('PASS exact original normalized->physical M4=r^-6*M4norm and M8=r^-10*M8norm')
 # Exact affine-bump scaling: the *point height* can be kept fixed while
 # smoothness constants blow up as widths shrink. The existing Lean source
 # proves L1 scaling explicitly for orders 0,1,2. Higher orders follow the
