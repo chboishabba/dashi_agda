@@ -76,3 +76,36 @@ assert mp.log(abs(1-mp.mpf(24)**2/256))>0
 print('PASS actual digamma(mu) limit at six q coordinates and three heights')
 print('PASS log sign-change outside core: no global Gamma positivity')
 print('OPEN original W-dependent uniform M0/M4, outer q-tail and signed strict terminal')
+
+
+# GRH Gamma-only transport: exact upstream Zeta23/ThmE/GammaFactsChiProof.lean
+# mu_{k,N}(x) = [log(N/pi)+Re psi(1/4+k/2+i*x/2)]/(2*pi)
+# for k=0,1 and N>=1. Universal Stirling C_gamma=20/(2*pi)=10/pi.
+N = s.symbols('N', positive=True)
+shift = s.log(N)/(2*pi)
+mu0 = s.Function('mu0')
+muN = lambda x: mu0(x)+shift
+assert s.simplify(muN(t*a)+muN(t*b)-2*muN(t)
+                  -(mu0(t*a)+mu0(t*b)-2*mu0(t))) == 0
+assert s.simplify(
+    shift*128*pi*origin/(t*R*M0)-64*s.log(N)*origin/(t*R*M0)) == 0
+assert s.simplify(80*(10/pi)-800/pi) == 0
+print('PASS GRH conductor cancels Delta^2 mu; center retains 64*log N mode')
+print('PASS universal explicit Gamma core error 800/(pi*t^3)*M0_core')
+
+def mu_chi(x, parity, modulus):
+    return (mp.log(mp.mpf(modulus)/mp.pi)+mp.re(mp.digamma(
+        (mp.mpf('0.25')+mp.mpf(parity)/2)+mp.j*x/2)))/(2*mp.pi)
+for parity in (0,1):
+    for modulus in (1,5,71,10007):
+        for x in (1,200,1000):
+            asym = mp.log(mp.mpf(modulus)*x/(2*mp.pi))/(2*mp.pi)
+            assert abs(mu_chi(x,parity,modulus)-asym)<=10/(mp.pi*x*x)
+        for Q in (8,24):
+            def d2(mod):
+                return (mu_chi(2000*(1+Q/16),parity,mod)
+                        +mu_chi(2000*(1-Q/16),parity,mod)
+                        -2*mu_chi(2000,parity,mod))
+            assert abs(d2(modulus)-d2(1))<mp.mpf('1e-40')
+print('PASS both GRH parity sheets, four conductor test values, gamma constants and cancellation')
+print('OPEN original character-dependent zero sources/strict signed GRH terminal')
