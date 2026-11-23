@@ -38,6 +38,7 @@ import DASHI.Analysis.RiemannAnalyticComplexCharacterExtensionExact as HX
 import DASHI.Analysis.RiemannAristotlePoleNearTranslationModulationIntertwinerExact as HT
 import DASHI.Analysis.RiemannG2CanonicalHXToHTCompilerExact as HXCompiler
 import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as Finite128
+import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
 
 sourceDyadicBits : Nat
 sourceDyadicBits = 15
@@ -110,7 +111,7 @@ reuseOriginalConditionalAnalyticHT :
 reuseOriginalConditionalAnalyticHT = HXCompiler.canonicalHXToHT
 
 finiteSevenAxesActualDonor :
-  (mask state : Finite128.RH128.BinarySeven) →
+  (mask state : RH128.BinarySeven) →
   Finite128.encode (Finite128.maskAct mask state)
     ≡ Finite128.actOnNativeSignedX6 mask (Finite128.encode state)
 finiteSevenAxesActualDonor = Finite128.encodeIntertwinesAllSeven
