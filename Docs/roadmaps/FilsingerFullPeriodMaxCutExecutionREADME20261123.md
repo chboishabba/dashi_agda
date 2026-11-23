@@ -12,8 +12,8 @@ In your `chboishabba/dashi_agda` checkout at PR #1537's source branch:
 # Run the independent algebra checks first (SymPy required).
 python test_full_period_algebra.py
 
-# Install the single campaign runner into the checkout.
-cp check_filsinger_full_period_maxcut.py /path/to/dashi_agda/scripts/
+# The GitHub branch already contains the runner. For standalone offline
+# use, copy check_filsinger_full_period_maxcut.py into its scripts/ directory.
 cd /path/to/dashi_agda
 
 python scripts/check_filsinger_full_period_maxcut.py \
@@ -41,4 +41,4 @@ All source hashes are strictly checked. A drifted file refuses to start. Output 
 
 Existing original PR: https://github.com/chboishabba/dashi_agda/pull/1537
 
-Canonical merged-free roadmap entry: `Docs/roadmaps/FilsingerSixEventFullPeriodPhysicalAdmissionMaximumCut20261123.md`. The runner is supplied as a **downloadable candidate local file**, not claimed to have been merged or committed to GitHub. After executing, preserve its exact source SHA, error checkpoint, full interval witnesses and the *first failing* condition; do not turn an incomplete event into a new roadmap milestone. The programme should only publish a new theorem headline once **all six ordered original events plus the true nonzero-ball return-map inclusion** are paid.
+Canonical merged-free roadmap entry: `Docs/roadmaps/FilsingerSixEventFullPeriodPhysicalAdmissionMaximumCut20261123.md`. The runner, its independent algebra test, and this runbook are now **committed on PR #1537**; the download bundle is an offline copy for local testing. This is source-code acceptance only, not full trajectory/periodic-orbit certification. After executing, preserve its exact source SHA, error checkpoint, full interval witnesses and the *first failing* condition; do not turn an incomplete event into a new roadmap milestone. The programme should only publish a new theorem headline once **all six ordered original events plus the true nonzero-ball return-map inclusion** are paid.
