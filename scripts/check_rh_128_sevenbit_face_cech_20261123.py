@@ -93,3 +93,31 @@ assert len(set(round(float(x),12) for x in vals.values()))==6
 assert all(abs(vals[e[:2]]-vals[e[2:]])>mp.mpf("1e-12") for e in edges)
 print("PASS negative control: 6 Fourier probes DO NOT glue as 6 cube-face values (12/12 mismatches)")
 print("OPEN actual original selected-W / paperFT same-analytic-source, zero-side and Monster action intertwiner")
+
+
+# Native existing Monster3B X6 = F3^6 and SignedSSPFRACTRAN C2.
+# Bit->trit sends 0->-1, 1->+1; seventh bit is signed SSP unit.
+# Exact injected C2 action on EXISTING finite carriers, NOT a Monster group
+# action on original RH W / zero set.
+def monster_ssp_image(bits):
+    return tuple((1 if x else -1)%3 for x in bits[:6]),(1 if bits[6] else -1)
+def monster_ssp_inverse(img):
+    six,sign=img
+    assert all(x in (1,2) for x in six) and sign in (-1,1)
+    return tuple(int(x==1) for x in six)+(int(sign==1),)
+def signed_c2(img):
+    six,sign=img
+    return tuple((-x)%3 for x in six),-sign
+
+images={monster_ssp_image(bits) for bits in states}
+assert len(images)==128
+for bits in states:
+    image=monster_ssp_image(bits)
+    assert monster_ssp_inverse(image)==bits
+    flipped=tuple(1-x for x in bits)
+    assert monster_ssp_image(flipped)==signed_c2(image)
+    assert weight(bits)*weight(flipped)==128
+assert signed_c2(((0,)*6,0))==((0,)*6,0)
+assert ((0,)*6,0) not in images
+print("PASS 128/128 native F3^6 x signed-SSP BIDI, actual C2 and complement-weight reciprocity")
+print("PASS ternary neutral fixed point OUTSIDE nonzero binary image; no Monster group / RH source action")
