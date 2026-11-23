@@ -1,0 +1,15 @@
+{
+  "checks_passed": 14,
+  "weight_N": 686.4655,
+  "ideal_field_area_m2": 0.1,
+  "ideal_B_tesla": 0.13134976126104964,
+  "waterlike_chi_SI": -0.00000905,
+  "waterlike_density_kg_m3": 1000,
+  "required_B_dBdz_T2_per_m": -1361.7016403579114,
+  "minimal_GR_energy_for_1g_at_1m_joules": 1.3205545860329043e+28,
+  "octupole_unit_count": "1372931*a/(2000*E_scale*Abs(f_cell))",
+  "actual_lift_proven": false,
+  "real_field_safety": false,
+  "actual_octupole_force_calibrated": false,
+  "execution": "SymPy 14/14 local finite and symbolic comparator; no apparatus"
+}

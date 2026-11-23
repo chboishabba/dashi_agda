@@ -1,0 +1,100 @@
+{
+  "scope": "original Sato/Hayami full nondegenerate 18D Eq11–18 evaluation on P0.18 unfitted trial Mn3 H(k), no published bulk/experimental calibration",
+  "checks_passed": 115,
+  "local_executed_git_blob_sha": "f859a519864f8750312490d209d4d0244b92262a",
+  "test_environment": "Python local, numpy 2.3.5 scipy 1.17.0; original producer function extracts locally available; Agda/CI not run",
+  "max_U1_band_phase_residual": 8.872833023865212e-13,
+  "max_C3_tensor_covariance_residual": 8.498514392218937e-13,
+  "max_TR_domain_parity_residual": 5.314082507368312e-13,
+  "max_full_tensor_corrected_cell_embedding_error": 4.595343203184221e-13,
+  "max_corrected_velocity_residual": 7.070610315782289e-16,
+  "naive_full_tensor_cell_error_range": [
+    0.010905244241495592,
+    0.012597202507486758
+  ],
+  "spin_diagonal_and_offdiagonal_eq12_13_both_nonzero": true,
+  "full_tensor_irreps": "18=7+5+3+3 all nonzero at 4 generic k",
+  "sample_points": [
+    {
+      "k": [
+        0.17,
+        0.13,
+        -0.22
+      ],
+      "min_gap": 0.19933098327030097,
+      "M_norm": 0.009988511189453394,
+      "diag_norm": 0.009944058561036206,
+      "off_norm": 0.007229214107909836
+    },
+    {
+      "k": [
+        0.28,
+        -0.21,
+        0.09
+      ],
+      "min_gap": 0.5214127982910128,
+      "M_norm": 0.03129282774198591,
+      "diag_norm": 0.01977198421769567,
+      "off_norm": 0.017190734274934883
+    },
+    {
+      "k": [
+        -0.07,
+        0.16,
+        0.25
+      ],
+      "min_gap": 0.049613791047971034,
+      "M_norm": 0.019107315745670102,
+      "diag_norm": 0.016361584814688836,
+      "off_norm": 0.00717243165187393
+    },
+    {
+      "k": [
+        0.09,
+        0.11,
+        -0.28
+      ],
+      "min_gap": 0.4437315345328001,
+      "M_norm": 0.010450358828567392,
+      "diag_norm": 0.010643831651411844,
+      "off_norm": 0.006462456072704661
+    }
+  ],
+  "coarse_BZ_grid": [
+    {
+      "mesh": 3,
+      "C3_orbit_points": 81,
+      "min_gap": 0.037872866415944895,
+      "mean_octupole_tensor_norm": 0.009045306036291448
+    },
+    {
+      "mesh": 4,
+      "C3_orbit_points": 192,
+      "min_gap": 0.030239396409495356,
+      "mean_octupole_tensor_norm": 0.005960338589700448
+    },
+    {
+      "mesh": 5,
+      "C3_orbit_points": 375,
+      "min_gap": 0.023680111010900617,
+      "mean_octupole_tensor_norm": 0.0037215437931344807
+    }
+  ],
+  "BZ_CONVERGED": false,
+  "degeneracy_safe_Eq11_methods": false,
+  "actual_PtMn3_Wannier_H": false,
+  "measured_Octupole_domains": false,
+  "actual_Maxwell_controller_and_force": false,
+  "antigravity_or_lift": false,
+  "original_theory": {
+    "SatoHayami": "DOI 10.1038/s41535-026-00865-9 eq11-18 and methods",
+    "OikePetersShinada": "DOI 10.1103/frq1-9xx7 thermodynamic bulk",
+    "Kang": "DOI 10.1038/s41586-026-11172-5 experimental torque"
+  },
+  "native_DASHI": "P0.18 and P0.29 original producers, CoTaSe2 original Bloch/Kubo and crystal source",
+  "new_DASHI": "published Eq11 numerical consumer and basis-dependent source nonpromotion/negative controls",
+  "historical_full_115_suite_passed_on_blob": "f859a519864f8750312490d209d4d0244b92262a",
+  "current_p031_geometry_refactor_blob": "9884d70d33d892a829ea4141c9824f380e7c1e04",
+  "current_p031_full_115_suite_replayed_after_refactor": false,
+  "note_after_p032": "Historical 115/115 source verified for f859a519... P0.32 rewires only the geometry correction to shared helper; independent 56/56 geometry tests passed on exact new script and helper, full Eq11 suite needs replay against refactored file."
+}

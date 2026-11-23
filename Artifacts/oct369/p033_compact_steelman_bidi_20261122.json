@@ -1,0 +1,26 @@
+{
+  "scope": "P0.33 compact exact endpoint BIDI consumer, not calibrated PtMn3",
+  "checks_passed": 23,
+  "source_git_blob_sha": "94805b5bd4a05fee49d3913e60f0aa25dfac70cf",
+  "local_run": "23/23 local SymPy 1.14 passed on byte-exact compact source; git hash-object matched",
+  "magnetic_force": "-3*N*a^2*mu*k4",
+  "stiffness": "(6,-3,-3)*N*a^2*mu*k5",
+  "required_k4": "-m*g/(3*N*a^2*mu)",
+  "required_k5": "Kz/(6*N*a^2*mu)",
+  "transverse_controller_threshold": "Kcontrol>Kz/2",
+  "metric_gravity_target": "-f*g*r^2/G",
+  "metric_clock_target": "f*g*r/c^2",
+  "screened_fifth_force_target": "-f*g*r^2*exp(r/ell)/(G*Msource*(1+r/ell))",
+  "four_channel_full_rank": true,
+  "three_channel_metric_fifth_null": [
+    "0",
+    "-1",
+    "+1",
+    "0"
+  ],
+  "material_measured": false,
+  "real_coil_or_superconductor": false,
+  "observed_gravity": false,
+  "levitation": false,
+  "attribution": "standard Maxwell/Earnshaw, Newton/Einstein, Yukawa, Tolman-Laue; original DASHI antigravity owners P0.24-28; Kang et al experimental PtMn3"
+}

@@ -1,0 +1,22 @@
+{
+  "actual_PtMn3_H_k_derived": false,
+  "actual_octupole_tensor_derived": false,
+  "assert_statements_passed": 17,
+  "conventional_subsystem_gravity_potential": "-G*(-3*J/2 - h*cos(theta))/(c**2*r)",
+  "exchange_energy": "-3*J/2",
+  "full_apparatus_Tmunu_derived": false,
+  "generalized_octupole_angle_torque": "3*(beta_inter - beta_intra)*sin(theta)",
+  "nonminimal_gravity_inferred": false,
+  "order_reversal_energy_delta": "2*h*cos(theta)",
+  "order_reversal_gravity_potential_delta": "-2*G*h*cos(theta)/(c**2*r)",
+  "scope": "schematic three-site C3 torque-sector operator; NOT material PtMn3 or GR fit",
+  "source_theory_beta_eff": "beta_intra-beta_inter",
+  "staggered_channel_eigenvalue": "-beta_inter + beta_intra",
+  "symmetry_controls": {
+    "C3_order3": true,
+    "beta_equal_zero_staggered_torque": true,
+    "nonconservative_transport_not_assumed_energy_source": true,
+    "total_spin_zero": true
+  },
+  "uniform_channel_eigenvalue": "2*beta_inter + beta_intra"
+}

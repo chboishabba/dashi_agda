@@ -1,0 +1,35 @@
+{
+  "scope": "source-informed L12 face-centre geometry, chosen 120-degree trial texture; not published T1g or GR identification",
+  "mn_fractional_positions": [
+    [
+      "0",
+      "1/2",
+      "1/2"
+    ],
+    [
+      "1/2",
+      "0",
+      "1/2"
+    ],
+    [
+      "1/2",
+      "1/2",
+      "0"
+    ]
+  ],
+  "cluster_centroid": [
+    "1/3",
+    "1/3",
+    "1/3"
+  ],
+  "tensor_definition": "STF(Sym sum spin_i r_j r_k)",
+  "tensor_xyz": "-1/36",
+  "tensor_norm_squared": "1/96",
+  "C3_covariant": true,
+  "net_moment_zero": true,
+  "time_reversal_odd": true,
+  "exact_local_assertions": 21,
+  "published_T1g_operator_intertwiner_paid": false,
+  "material_H_k_and_tunnel_transport_paid": false,
+  "complete_Tmunu_and_gravitational_field_paid": false
+}

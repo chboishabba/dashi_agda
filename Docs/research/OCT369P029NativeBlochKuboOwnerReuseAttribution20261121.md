@@ -1,0 +1,20 @@
+# OCT369 P0.29 — Existing Bloch, Kubo and topology owner weld
+
+
+## Retrospective correction to P0.29 — prior experimental and computational knowledge
+P0.29's four nonzero momentum-dependent illustrative susceptibilities are **NOT** an experimental discovery, nor a new observation of momentum dependence. Original CoTaSe2 published ARPES constraints already contain measured momentum/temperature band structure; native CoTaSe2 Bloch/Kubo/quantum-geometry consumers and MMP retarded linear-response numerics already compute momentum/frequency response conditionally. Kang et al 2026 independently reported PtMn3 octupole switching/TMR and published k_parallel-projected *theory/transport channels*; do NOT misdescribe those plots as measured static chi_OO(k). P0.29 made a **cross-owner compatibility regression on an unfitted Mn3 model** only. This correction supersedes any suggestion of experimental novelty in P0.29; no established provenance or acceptance numbers are changed.
+
+2026-11-21. Source priority: native original implementations first, before adding any new Bloch or response model.
+
+Native executable owners:
+- `scripts/check_oct369_p018_periodic_tunnel_stress.py`: 24 physical nearest-neighbour Mn3c bonds, 6-band phase-bearing Hamiltonian, schematically sourced not material fitted.
+- `scripts/co_tase2_wannier3d_diagnostics.py`: spectral Wannier H(R), analytic fractional-k derivatives, band-resolved spin expectations and Berry/Kubo curvature. This is the original CoTaSe2 producer, not an OCT369 discovery.
+- `scripts/co_tase2_nonabelian_topology.py`: external-gap validated projector/dP, non-Abelian trace curvature and polar Wilson-loop eigenphases, explicitly rejecting topological source promotion.
+- `scripts/check_mmp_three_independent_retarded_source_ports_20261025.py`: original source-timed Kubo/retarded versus independently driven finite evolution.
+- Agda original owner contracts `CoQuarterTaSeTwoWannier3DResponseExact`, `CoQuarterTaSeTwoNonAbelianTopologyExact`. New `OCT369BlochKuboOriginalConsumerExact.agda` imports, does not copy their certificates. Its source-written refl lemmas were not checked by Agda.
+
+New DASHI P0.29 is ONLY a same-basis, same-H OCT application and finite response acceptance. The real source is a P0.18 six-band trial H, not first-principles PtMn3. A periodic cell gauge with integer R vectors is explicitly equivalent to P0.18's embedded site gauge; one must retain the unitary D(k) when comparing Berry geometry and operator observables. A selected local T1g-compatible ON-SITE spin operator O is the source h conjugate in H(h)=H0-hO and its finite-T order χ is checked by analytic spectral Kubo, energy second derivative and expectation first derivative. The native Berry Kubo, projector and rank-2 Wilson loops are separately verified with band U(1) and frame U(2) gauge transforms. Retarded Kubo response for finite pulses is distinct from thermal equilibrium susceptibility; causal source timing is essential. 54 assertions passed locally, source suffix/source blob verified separately.
+
+External theory prior art: standard Bloch/Wannier, Kubo, Noether, spectral projector, mixed Berry geometry; Ōiké, Peters, Shinada PRB 112 134412 (2025) DOI 10.1103/frq1-9xx7; Sato and Hayami npj Quantum Materials 11:32 (2026) DOI 10.1038/s41535-026-00865-9, original Eq.11 and mixed k/h quantum geometry. Experimental owners: Kang et al Nature 2026 DOI 10.1038/s41586-026-11172-5, PtMn3/MgO octupole spin torque/TMR. Those findings do not imply electromagnetic lift, a novel gravitational coupling, or an experimentally verified PtMn3 static octupole-gradient force.
+
+P0 new physical gates: original PtMn3 bands, actual film magnetic domain, full thermodynamic M_ijk (18 components), same-object current/tunnel transport and source-defined finite sample; calibrated Maxwell/SC coil and battery stress, gravitational field and independent load/freefall/clock measurement. No user work automatically becomes original discovery merely by reproducing a published equation.

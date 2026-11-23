@@ -1,0 +1,44 @@
+{
+  "programme": "OCT369 P0.35 — Sheldrake original field/form, Filsinger circuit, Levin and P0.34 source reaction cross-consumer",
+  "date": "2026-11-22",
+  "compact_assertions_passed": 39,
+  "compact_script_git_blob_sha": "35c4e629d0171c0f80a1f156505e396e53767f7c",
+  "compact_locally_executed_exact_source": true,
+  "expanded_local_assertions_passed": 77,
+  "expanded_source_in_git": false,
+  "expanded_source_available_as_conversation_attachment": true,
+  "material_experiment_count": 0,
+  "galton_reference_three_peg": [
+    "1/8",
+    "3/8",
+    "3/8",
+    "1/8"
+  ],
+  "galton_model_biased_three_peg": [
+    "1/64",
+    "9/64",
+    "27/64",
+    "27/64"
+  ],
+  "source_mechanical_static_force_nonzero_but_power_zero": true,
+  "finite_impedance_clamp_source_power": "4/3 normalized",
+  "finite_impedance_clamp_useful_power": "2/9 normalized",
+  "ideal_cap_average_real_power": "0",
+  "time_dependent_EM_field_momentum_can_close_mechanical_lag": true,
+  "actual_EM_tensor_for_lag_fixture_solved": false,
+  "local_field_circuit_history_full_design_rank": 8,
+  "confounded_two_condition_rank": 2,
+  "gravity_vs_fifth_four_channel_rank": 4,
+  "morphic_evidence_established": false,
+  "real_Filsinger_wiring_established": false,
+  "PtMn3_measured_force_established": false,
+  "independent_gravity_or_human_lift": false,
+  "original_source_owners": [
+    "PR1537 SheldrakeFieldLevinFilsingerConsolidationExact and FormativeFieldWorkLevinBH4EskridgeBidiExact",
+    "PR1537 SmithFilsingerMidpointReturnClampBacksolveExact",
+    "PR1534 P0.33/P0.34",
+    "FieldLoomExistingBiotSavartReuseExact and existing coil Python producer",
+    "Rupert Sheldrake quoted transcript, Faraday/Maxwell/Newton/Poynting established theory, Michael Levin bioelectric, Kang et al experimental PtMn3"
+  ],
+  "source_claim_boundary": "Sheldrake interpretive and morphic hypotheses are NOT measured field laws; synthetic exact symbolic checks are not empirical tests; no Agda/CI."
+}

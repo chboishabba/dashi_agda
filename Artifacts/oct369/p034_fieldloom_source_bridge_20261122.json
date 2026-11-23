@@ -1,0 +1,73 @@
+{
+  "scope": "P0.34 dual actual circular-filament Biot-Savart source and selected Pt-centred six-site magnetic trial; no real material/SI controller or gravitational device",
+  "original_FieldLoom_owner_sha": "342bf32aadda4d29b671f3b263d6afc7ea29b57e",
+  "local_full_source_git_sha": "c356c352e29c2e1406716af4c2ace026e4ef0b84",
+  "local_full_assertions_passed": 63,
+  "compact_committed_source_git_sha": "8f97961108a59a2ecdf68d54f9fd5c5dfb823ef2",
+  "compact_committed_assertions_passed": 26,
+  "full_local_source_in_GitHub": false,
+  "P033_full_source_recovered_in_GitHub": true,
+  "source_field_relative_error_vs_elliptic": 2.895712516937185e-14,
+  "mesh_trial": {
+    "a_m": 0.004,
+    "mu_Am2": 0.03,
+    "coil_R_m": 0.05,
+    "coil_h_m": 0.025,
+    "turns": 100,
+    "I_upper_A": 10,
+    "I_lower_A": -8
+  },
+  "full_six_site_body_force_N": 0.00033726480263597194,
+  "independent_both_coil_Lorentz_force_N": -0.0003372649988755809,
+  "force_reaction_relative_error": 5.818561778382671e-7,
+  "leading_multipole_force_N": 0.00033751633474281127,
+  "multipole_relative_error": 0.0007458000505045804,
+  "finite_body_K_matrix_N_per_m": [
+    [
+      0.0013402502190287351,
+      0,
+      5.145587511715946e-9
+    ],
+    [
+      0,
+      0.0013402502143277024,
+      0
+    ],
+    [
+      5.145587511715946e-9,
+      0,
+      -0.002680294301197163
+    ]
+  ],
+  "inverse_lift_illustrative": {
+    "weight_N": 686.4655,
+    "active_volume_m3": 1e-9,
+    "ideal_site_motifs": 7812500000000000000,
+    "a_m": 4e-10,
+    "mu_Am2": 2.78220302349e-23,
+    "coil_R_m": 0.05,
+    "turns": 100,
+    "I_difference_required_A": 5.052878211396425e+23,
+    "I_sum_for_vertical_100N_per_m_A": -1.0223217925325096e+21,
+    "selected_B_center_T": -919247512069930900,
+    "selected_B_1mm_magnitude_T": 5530785699993268000
+  },
+  "illustrative_local_10T_1mmcube": {
+    "E_B_J": 0.039788735772973836,
+    "mass_kg": 4.427093908810196e-19,
+    "ordinary_gravity_acceleration_1m_m_s2": 2.9547752875571885e-29
+  },
+  "full_wires_cross_section": false,
+  "London_or_Meissner_SC_boundary": false,
+  "full_Maxwell_surface_stress": false,
+  "actual_PtMn3_source_measured": false,
+  "gravitational_field_sourced_from_same_action": false,
+  "stable_human_lift": false,
+  "attribution": {
+    "classical": "Biot-Savart, Maxwell, Lorentz magnetic reciprocity, Earnshaw, Einstein/Newton",
+    "native": "FieldLoomExistingBiotSavartReuseExact, original psychotronics field_loom_coils and elliptic test, P0.27/33",
+    "experiment": "Kang et al 2026 original PtMn3 OTT/TMR, no gravity",
+    "quantum": "Sato & Hayami 2026 and Oike/Peters/Shinada 2025 own periodic magnetic octupole",
+    "DASHI_new": "finite same-source body/reaction and source-current inverse/model-specific infeasibility audit"
+  }
+}

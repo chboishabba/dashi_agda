@@ -1,0 +1,36 @@
+{
+  "scope": "independent Q8 triangle Wilson+three trial-spin finite fixture; NOT original #1536 physical measure",
+  "assertions_passed": 26,
+  "Q8_link_states": 512,
+  "exhaustive_local_gauge_checks": 262144,
+  "distinct_W_M_pairs": 20,
+  "Gibbs_weight_parameters": {
+    "q": "2",
+    "t": "3/2"
+  },
+  "partition_function": "2319702560357/322486272",
+  "mean_W": "5244114027/13726050653",
+  "mean_M": "2138113527255/178438658489",
+  "exact_centered_WM": "175302411423903820800/188404466528721726409",
+  "decimal_centered_WM": 0.9304578317795851,
+  "mixed_log_derivative_matches_covariance": true,
+  "Cartan_C4_link_states": 64,
+  "Cartan_C4_centered_WM": "-2037314700/9639901489",
+  "Cartan_C4_centered_WM_decimal": -0.2113418588690725,
+  "algebraic_order_changes_Q8": 48,
+  "algebraic_order_changes_Cartan_C4": 0,
+  "reordered_open_word_is_gauge_invariant": false,
+  "conditional_body_force": "2138113527255*alpha*kBT/178438658489",
+  "conditional_support_reaction": "-2138113527255*alpha*kBT/178438658489",
+  "original_R445_or_PtMn3_physical_measure_identified": false,
+  "actual_cluster_T1g_octupole_identified": false,
+  "physical_metric_stress_derived": false,
+  "actual_levitation_or_gravity_anomaly_measured": false,
+  "Clay_mass_gap_established": false,
+  "verification": "independent local execution of same Python source; Python standard library plus SymPy; exact rational arithmetic",
+  "attribution": {
+    "experimental": "Kang et al. Nature 2026, doi:10.1038/s41586-026-11172-5",
+    "existing": "Wilson, SU2/Q8, source cumulants; #1536 original R445 BIDI",
+    "new": "OCT369 finite gauge+spin same-source fixture; not original Wilson Gibbs"
+  }
+}

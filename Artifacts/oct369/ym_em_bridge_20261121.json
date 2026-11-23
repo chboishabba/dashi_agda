@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "su2_commutator": true,
+    "su2_noncommutative": true,
+    "su2_traceless": true,
+    "u1_scalar_commutes": true,
+    "su2_hermitian_field_strength": true,
+    "su2_curvature_term_nonzero": true,
+    "u1_curvature_commutator_zero": true
+  },
+  "passes": 7,
+  "scope": "local SymPy 7/7 gauge Lie algebra comparator, no Clay or gravity proof",
+  "YM_clay_solved": false,
+  "physical_PtMn3_gauge_identification": false,
+  "original_owners": [
+    "https://github.com/chboishabba/dashi_agda/pull/1535",
+    "https://github.com/chboishabba/dashi_agda/pull/1536"
+  ]
+}
