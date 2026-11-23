@@ -122,11 +122,28 @@ def cocycle_defect(g,phase):
  transported=mul(mul(transpose(g),c),g)
  defect=[[(transported[i][j]-phase*c[i][j])%3 for j in range(N)] for i in range(N)]
  return defect
+def atlas_relator(c,d):
+ # Source-original ATLAS 2.Suz:2 semipresentation word, including inverses.
+ # The separate source relation has exact order seven, not simply power=identity.
+ ci=inverse(c);di=inverse(d)
+ letters={"c":ci,"d":di,"C":c,"D":d}
+ product=eye()
+ for k in "cdcdcddcdd":product=mul(product,letters[k])
+ return product
+
+def source_relations(c,d):
+ unit=eye(); minus=neg(unit)
+ return (powm(c,2)==minus and powm(d,3)==unit and d!=unit
+         and powm(mul(c,d),28)==minus
+         and powm(mul(c,d),56)==unit
+         and powm(atlas_relator(c,d),7)==unit
+         and atlas_relator(c,d)!=unit)
+
 def check_pair(atlas_pair,monster_pair,actual_forms=False):
  c,d=atlas_pair;b,cand=monster_pair
- if powm(c,2)!=neg(eye()) or powm(d,3)!=eye():
-  raise ValueError("original ATLAS source generator relations missing")
- if powm(b,2)!=neg(eye()) or powm(cand,3)!=eye():
+ if not source_relations(c,d):
+  raise ValueError("original ATLAS source generator semipresentation missing")
+ if not source_relations(b,cand):
   return {"status":"REJECTED_TARGET_RELATIONS","intertwiner_dimension":None}
  basis=kernel([(c,b),(d,cand)])
  invertible=[t for t in basis if rank(t)==N] if len(basis)==1 else []
