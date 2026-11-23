@@ -98,6 +98,7 @@ if OrdersClassRepresentatives(suzOuter)[suzOuterClass]<>2 then
 fi;
 
 twoOrders:=OrdersClassRepresentatives(two);
+twoSizes:=SizesConjugacyClasses(two);
 twoCentralPositions:=ClassPositionsOfCentre(two);
 twoCentralMinusOne:=Filtered(twoCentralPositions,i->twoOrders[i]=2);
 if Length(twoCentralMinusOne)<>1 then
@@ -161,6 +162,10 @@ for twoPos in sourceCandidates do
   fi;
   Add(liftRows,rec(twoPos:=twoPos,sixPos:=sixPos,
                    mainPos:=mainPos,mnPos:=mnPos,
+                   twoOrder:=twoOrders[twoPos],
+                   twoCentralizer:=Size(two)/twoSizes[twoPos],
+                   twoSquare:=twoPow2[twoPos],
+                   twoOuter:=twoToOuter[twoPos],
                    monsterPos:=monPos,monsterLabel:=lbl));
 od;
 
@@ -206,6 +211,10 @@ for i in [1..Length(liftRows)] do
     ",\"six_suz_class_position\":",row.sixPos,
     ",\"main_class_position\":",row.mainPos,
     ",\"mn3b_class_position\":",row.mnPos,
+    ",\"two_suz_class_order\":",row.twoOrder,
+    ",\"two_suz_centralizer_order\":",row.twoCentralizer,
+    ",\"two_suz_square_central_position\":",row.twoSquare,
+    ",\"two_suz_outer_image_position\":",row.twoOuter,
     ",\"monster_class_position\":",row.monsterPos,
     ",\"monster_four_label\":\"",row.monsterLabel,"\"}",
     SeparatorAfter(i,Length(liftRows)));
