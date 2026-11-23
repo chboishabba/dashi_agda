@@ -1,3 +1,8 @@
+## 23 November 2026 — universal Gamma constant and GRH conductor zero-mode check
+
+Upstream Anthropic `Zeta23/ThmE/GammaFactsChiProof.lean` already proves `C_gamma=10/pi` in exact Stirling estimate for `mu_{kappa,N}` (κ=0/1, N≥1). Thus the preceding original selected W's t>=200 central bilateral Γ core bound has explicit coefficient `800*M0_core/(pi*t³)`. Full `V_W` still requires M2_tail and V_tail; original selected W(t) t-uniform profile norms are NOT paid. The χ conductor constant cancels from `Delta²mu` but persists in the center mode as `64*log N*OriginDet/(t R M0)` when applying the same analytic test; parity remains distinct. This is NOT a proof that the zeta-selected W is the χ-selected witness or that a χ-zero-side terminal holds. Local SymPy/digamma PASS; no native kernel.
+
+---
 ## 23 November 2026 — R2 direct Gamma second-difference / cubic defect source weld
 
 The original `128*pi*mu(t)*OriginDet/(t*R*M0)` has **exact normalization provenance** 16 (t/r) × 2 (even Fourier inversion) × 4 (projective origin); `128=2^7` does NOT identify an E7/Monster/Spin representation. The new original-profile true *ordinate* reflection q↔−q is
