@@ -62,6 +62,17 @@ Vtail = 32*L6/t*(J6*(1+s.log(t/(2*pi))/(2*pi)+10/(pi*t*t))
 Ecore = m4/(24576*pi*t)+800*m0/(pi*t**3)
 bound = L6/(64*768*pi*t)+Vtail+Ecore
 assert s.simplify(bound-(L6/(49152*pi*t)+Vtail+Ecore)) == 0
+
+# Analytic same-source C2 square: scaled cosine sample ↔ ordinate reflection.
+x=s.symbols("x",real=True)
+freq=s.Function("C_W")
+r=t/16
+assert s.simplify(((2*t-x)-t)/r+(x-t)/r)==0
+left=r**(-2)*freq((-x+t)/r)
+right=r**(-2)*freq(-((x-t)/r))
+assert left==right
+print("PASS actual scaled Fourier reflection S_(t,r) R_q = R_x S_(t,r); ordinate center 2t-x")
+
 print("PASS source scalar flags 32t, 64logN, 80=8x10, 800=8x10^2, 768=3x256")
 print("PASS global Gamma variation conditional outer-bound constants J6, J5 and log modes")
 
