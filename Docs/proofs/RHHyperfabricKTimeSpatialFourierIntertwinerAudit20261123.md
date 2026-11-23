@@ -1,3 +1,13 @@
+## 23 November 2026 — important native-path-coordinate repair after source reread
+
+The first committed Python checker used trit integers `0,1,2` but evaluated the path relation `0-1-2`, with centre 1. **That is NOT the ORIGINAL SSP-balanced source**, whose native nonwrap spatial path is `-1↔0↔+1`, with centre 0. Though the unlabelled graph is isomorphic and 54/81/118,098 edge counts are unchanged, using residue 0 as a group origin while taking residue 1 as spatial centre is NOT same-carrier faithful. It can invalidate marked coordinates, source incidence and k/time covariance.
+
+The corrected committed `scripts/check_rh_hyperfabric_k_time_spatial_intertwiner_20261123.py` (GitHub commits `c276ef63`, `bc0846fd`) now enumerates `(-1,0,+1)^3` and full `(-1,0,+1)^9`, with true path predicate `a=b or a=0 or b=0`, and maps mod3 arithmetic back into balanced representation via `(x+1)%3-1`. True antipode is now `x↦-x` (rather than a residue 2 label) and every k-chart uses the same original zero-centred source. The local independently executed corrected-source test confirms all original 54/81 edges, 729/729 dual-Fourier positions/frequencies and 118,098/118,098 nine-coordinate edge inverse recoveries PASS. The original fixed-path commutator rank24 had already been independently computed in genuine balanced coordinates, so that structural no-go remains valid. The updated source was read back; no byte-for-byte external runtime or Agda kernel receipt is claimed.
+
+**Acceptance correction:** never infer same-source geometry solely from matching numbers/edge spectra or from an abstract graph isomorphism; require literal source coordinate centre, orientation sign, incidence labels, original time/refinement indices and inverse. This repair is why the Hyperfabric P3³-versus-GF3³ distinction matters, even before actual RH zero transport.
+
+---
+
 # RH × hyperfabric: actual (k,t)-indexed spatial/Fourier intertwiner source audit (23 November 2026)
 
 **Source ownership / attribution.** The following pre-existing DONORS were read from `master` and reused on RH draft PR #1533:
