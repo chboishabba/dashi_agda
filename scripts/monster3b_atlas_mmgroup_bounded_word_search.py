@@ -11,7 +11,7 @@ import json
 from collections import deque
 from pathlib import Path
 from monster3b_atlas_mmgroup_cross_source_intertwiner_gate import (
- atlas, eye, neg, mul, inverse, powm, monster_matrix, check_pair
+ atlas, eye, neg, mul, inverse, powm, monster_matrix, check_pair, source_relations
 )
 
 def freeze(m):return bytes(x for row in m for x in row)
@@ -44,6 +44,9 @@ def search(atlas_pair,gens,depth,limit,pair_limit):
   for b,wb in dr:
    ab=mul(a,b)
    if powm(ab,28)!=mc:continue
+   # Preserve the original ATLAS semipresentation and its inverse-word
+   # order-seven discriminator; it is stronger than element orders alone.
+   if not source_relations(a,b):continue
    tested+=1
    if tested>pair_limit:raise ValueError("pair examination budget hit; result is partial")
    receipt=check_pair((C,D),(a,b))
