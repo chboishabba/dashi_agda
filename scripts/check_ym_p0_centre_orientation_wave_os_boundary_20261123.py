@@ -67,7 +67,6 @@ print("PASS source discrete wave: opposite signed velocities, equal zero amplitu
 print("PASS signed wave futures persist after exact DC-mode subtraction")
 print("OPEN original SU(N) Wilson same-source OS/Hamiltonian physical identification")
 
-
 # Original transfer-to-Hamiltonian issue: H(a)=-(1/a) log T(a).
 # BOTH finite transfer gaps are strictly positive for integer n>=2,
 # but their physical Hamiltonian energy limits are different.
