@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/"scripts/check_pi_p0_fibre_cost_profile.cpp"
-SOURCE_BLOB="4b6534f31db5ae4fd3b885560a3fd9d3429460e7"
+SOURCE_BLOB="078e76a0dbc603e89ac108f3d171764d4a66f247"
 EXPECTED={
  10000:"ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
  100000:"79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
@@ -65,7 +65,7 @@ def parse(stdout,digits,mode):
   raise AssertionError("carrier capacity exceeds GMP heap high water")
  if data["proc_vmhwm_kib"]<=0:
   raise AssertionError("Linux process-image VmHWM missing")
- if data["measured_GMP_total_live_heap"]!="false" or data["model_is_upper_bound"]!="false":
+ if data["measured_GMP_total_live_heap"]!="true" or data["model_is_upper_bound"]!="false":
   raise AssertionError("source lost its conservative model boundary")
  return data
 
