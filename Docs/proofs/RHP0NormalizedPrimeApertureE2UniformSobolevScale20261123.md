@@ -152,3 +152,29 @@ Since the exact original coefficients are `ε A_c=O(r^-5)*O(r^-1)=O(r^-6)`, the 
 **This improves the crude O(r^-5 log t) to O(r^-6 log t): only ONE logarithm remains versus the original quartic O(r^-6) target.** The improvement is a SAME-source geometric consequence of the two exact shifted Fourier packets for each on-line radius. It does NOT prove the missing strict terminal: `log t` is unbounded, prime phases can approach zero simultaneously, and the original post-sixth compensation `S_W` must be recomputed on this new test. Cancellation within the completed Weil identity is NOT independent proof of strict RH.
 
 Executed local exact SymPy cosine shift + compact flat-top C∞ Fourier fixture regression: `scripts/check_rh_p0_prime_wavepacket_e2_20261123.py`; same-source implementation is committed on DASHI PR #1533. Source unit-shell summation is an analytic proof argument, not new Lean kernel code. **E2 full source post-sixth and E3 independent sign still open.**
+
+
+## 8. P0 E2 improvement: **sharp** three-sheet punctured-27 coefficient envelope
+
+**Reference:** [complete 26/J geometric arithmetic proof ledger](RHP0Punctured27GeometricAnnihilatorCoefficientEnvelope20261123.md); [exact rational coefficient regression](../../scripts/check_rh_p0_punctured27_geometric_majorant_20261123.py); [native original typed 9+8+9 Agda chart](../../DASHI/Analysis/RHPrimeAperturePuncturedFactorChartExact.agda). This corrects the original `binom(26,j)*(256/t²)^j` estimate to an exact **source-sharp** factor-by-factor coefficient envelope.
+
+With the ORIGINAL physical scale `r=t/16`, `256/t²=1/r²`. The 52nd-order even annihilator's 26 effective **majorant** quadratic slots have three-sheet 9+8+9 weights: first nine `1` at r; middle eight as TWO virtual slots at each of the four ORIGINAL pole frequencies k r for k=14,15,17,18 with weights `1/k²`; last nine `1/4` at 2r. The exact original quartic at k r becomes `1+[2(k²−δ)/(k²+δ)²]x+[1/(k²+δ)²]x²`, x=(D/r)², δ=1/(4r²)>0. This is dominated coefficientwise by `(1+x/k²)²` and approaches that upper envelope as δ→0. **Four quartics do NOT factor into eight real quadratic factors**; the eight middle slots are for the bound ONLY.
+
+```text
+E(x)=(1+x)^9(1+x/4)^9 Π_(k=14,15,17,18)(1+x/k²)^2
+    =Σ_(j=0)^26 E_j x^j.
+
+0≤q_j(t)≤E_j/r^(2j)≤binom(26,j)/r^(2j)  (all t≥200).
+```
+
+Every E_j is the EXACT elementary symmetric polynomial of 26 original source majorant slot weights; `E_1=1294113017/114704100≈11.2821862253` versus old 26; `E_2≈58.8625457` vs old 325; `E_13≈2.953309` vs old 10400600; `E_26≈2.23716×10^-25` vs old 1. As t→∞, `q_j(t)r^(2j)→E_j` for every j, so **E_j is a SHARP t-uniform coefficientwise bound** within this ORIGINAL source. The 27 coefficients q0..q26 include the distinguished q0=1 plus 26 graded coefficients, but their 26 indexes are not canonically the same object as the 26 majorant-factor slots. The source `J=RI⊕J0` 1+26 and F4 dimension 52=2×26 match the INDEX SHAPE, not a Jordan multiplication or Lie representation. Antipodal sign survives in the original site chart, since outer-sheet weights are 1 versus 1/4.
+
+The same true **physical** Sobolev source gate improves to
+
+```text
+||h_(p,t)^(k)||1 ≤ Σ_(j=0)^26 E_j*r^(-2j)||b_p^(k+2j)||1,
+T_(b,sharp)=max(32768,16 max_(p∈{2,3};j=1..26)
+   (208 E_j ||b_p^(2j)||1)^(1/(2j))).
+```
+
+For t≥T_(b,sharp), `||h_p||1≤1/4` exactly as before; `T_(b,sharp)≤T_(b,old)` in the same chosen bump family. No NUMERIC plateau derivative evaluation is claimed, so this is an improved **effective symbolic threshold** and mass bound, not a certified numeric cutoff. Original same-source target `d_W(a)≥c_*a⁴/r⁶`, admissible four port amplitudes `ε≤r^-5`, prime source O(r^-6), sharpened full added zero+Gamma O(r^-6 logt), and P0 strict gap all retain their previous statuses. **The geometric improvement does not cancel the logarithm or force a sign.** Agda/Lean source modules added on open draft PRs #1533/#116; no kernels or CI.
