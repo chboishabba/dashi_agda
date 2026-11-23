@@ -6,7 +6,7 @@
 
 - Source-validated predecessor J28B isolates the fourth original switching root, U diode ON, at `4.27514095 < t_U < 4.27574095`, with both spark ON and diode V active. **J28B's original J24 fourth nine-coordinate state box still fails 7/9 inclusions.**
 - J28B's 75-step rational stage checkpoint at `t_0=4.26534095`: [canonical root and error radii](../../Artifacts/smith-filsinger/j28b_signed_75_step_exact_checkpoint_20261123.json), Git blob `74c1a94b30c44a772016c93b39558bc446359832`. For local testing, the 9 root/delta values and all status/time fields were reconstructed and compared against GitHub exactly; **the original checkpoint's raw bytes were not executed**, whereas the J29A checker source matches its Git blob.
-- New [locally executed independent Fraction checker](../../scripts/check_smith_filsinger_j29a_diode_u_continuity.py), Git blob `c2bc52828ea34c6af13f7c0cc8ef7dcd4047acf1`, reads the checked-in checkpoint when executed in the repository. [Machine acceptance](../../Artifacts/smith-filsinger/j29a_fourth_U_physical_handoff_20261123.json).
+- New [locally executed independent Fraction checker](../../scripts/check_smith_filsinger_j29a_diode_u_continuity.py), Git blob `07b1c4a48f69d08e53e5221c25ea47f685b63121`, reads the checked-in checkpoint when executed in the repository. [Machine acceptance](../../Artifacts/smith-filsinger/j29a_fourth_U_physical_handoff_20261123.json).
 
 ## Exact physical flow over the root, not virtual U-inactive prolongation
 
