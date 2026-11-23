@@ -265,3 +265,70 @@ module _
         refl)
       (sym (originalR445NativeBlockAgreesExplicitParity
         theory fine site axis))
+
+
+  ----------------------------------------------------------------------
+  -- CMP98 -> native R445/F19 relative holonomy correction. Do NOT
+  -- postulate that the published transported-contour nonlinear average
+  -- equals the straight two-bond path W. For an actual source average
+  -- Q at the SAME coarse bond, the relative defect is D=Q W^-1.
+  -- The source group laws give exact Q=D W, with W reconstructed
+  -- from the TRUE native F19 pair, at every original coarse bond.
+  --
+  -- The value "average" must be sourced from CMP98 Eq.(15) to obtain
+  -- its genuine source identity. This lemma does not solve the change
+  -- of the conditioned Haar kernel for a fibre-dependent D.
+  ----------------------------------------------------------------------
+
+  originalR445RelativeAverageDefect :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4)
+    (average : NativeLink) → NativeLink
+  originalR445RelativeAverageDefect fine site axis average =
+    SUN.sunMultiply theory average
+      (SUN.sunInverse theory
+        (SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+          theory fine (T.pair site axis)))
+
+  originalR445RelativeAverageDefectTimesNative :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4)
+    (average : NativeLink) →
+    SUN.sunMultiply theory
+      (originalR445RelativeAverageDefect fine site axis average)
+      (SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+        theory fine (T.pair site axis))
+    ≡ average
+  originalR445RelativeAverageDefectTimesNative
+    fine site axis average =
+    let
+      native = SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+        theory fine (T.pair site axis)
+    in
+    trans
+      (Bond.multiplyAssociative nativeSourceGroup
+        average (SUN.sunInverse theory native) native)
+      (trans
+        (cong (SUN.sunMultiply theory average)
+          (Bond.inverseLeft nativeSourceGroup native))
+        (Bond.identityRight nativeSourceGroup average))
+
+  originalR445RelativeAverageDefectTimesF19Pair :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4)
+    (average : NativeLink) →
+    SUN.sunMultiply theory
+      (originalR445RelativeAverageDefect fine site axis average)
+      (SUN.sunMultiply theory
+        (T.first (originalR445NativeF19RecoveredPair fine site axis))
+        (T.second (originalR445NativeF19RecoveredPair fine site axis)))
+    ≡ average
+  originalR445RelativeAverageDefectTimesF19Pair
+    fine site axis average =
+    trans
+      (cong
+        (SUN.sunMultiply theory
+          (originalR445RelativeAverageDefect fine site axis average))
+        (originalR445F19RecoveredPairBlockIsNative fine site axis))
+      (originalR445RelativeAverageDefectTimesNative
+        fine site axis average)
