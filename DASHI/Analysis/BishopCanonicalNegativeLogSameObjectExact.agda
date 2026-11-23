@@ -1,9 +1,9 @@
-module DASHI.Analysis.BishopRound11CanonicalNegativeLogSameObjectExact where
+module DASHI.Analysis.BishopCanonicalNegativeLogSameObjectExact where
 
 ------------------------------------------------------------------------
 -- K04d-LOG: CONCRETE, SOURCE-NATIVE ROUND11 BISHOP UNIT INTERVAL.
 --
--- The prior generic Round11BishopCutset carries an abstract
+-- The prior generic BishopCutset carries an abstract
 -- InOpenUnitInterval predicate. Such a predicate cannot be inhabited
 -- from 0<x<1 without either inspecting its selected definition or
 -- constructing a concrete selected dataset. We do the latter,
@@ -30,8 +30,8 @@ import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as Nat
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as NatRecip
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Dirichlet
 import DASHI.Physics.YangMills.BalabanBishopConfiguredTermIdentificationExact as Config
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 
 -- All existing nonlogarithmic power-series terms, coefficients and
 -- convergences remain DEFINITIONALLY those of the original dataset.
@@ -82,8 +82,8 @@ canonicalNegativeLogDataSet old = record
 -- every original propositional equality remains the exact same
 -- expression after this single-field logarithm replacement.
 canonicalNegativeLogRound11 :
-  Round11.Round11BishopCutset →
-  Round11.Round11BishopCutset
+  Round11.BishopCutset →
+  Round11.BishopCutset
 canonicalNegativeLogRound11 inputs = record
   { Round11.elementarySeries =
       canonicalNegativeLogDataSet
@@ -99,7 +99,7 @@ canonicalNegativeLogRound11 inputs = record
   }
 
 canonicalUnitIntervalWitness :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (n : Nat) →
   E.InOpenUnitInterval
     (Round11.elementarySeries
@@ -111,23 +111,23 @@ canonicalUnitIntervalWitness inputs n =
   Dirichlet.natLogArgumentBelowOneBishop n
 
 canonicalNatLogFromConfiguredSource :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Dirichlet.NatLogCandidate
 canonicalNatLogFromConfiguredSource inputs =
   Dirichlet.natLogViaOriginalNegativeLog
-    (Route.round11MachinTranscendentals
+    (Route.machinTranscendentals
       (canonicalNegativeLogRound11 inputs))
     (canonicalUnitIntervalWitness inputs)
 
 canonicalNatLogIsOriginalBishopSum :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (n : Nat) →
   R._≃_
     (canonicalNatLogFromConfiguredSource inputs n)
     (Dirichlet.sourceCanonicalNatLogCandidate n)
 canonicalNatLogIsOriginalBishopSum inputs n =
   Dirichlet.sourceOriginalConfiguredNatLogAgreement
-    (Route.round11MachinTranscendentals
+    (Route.machinTranscendentals
       (canonicalNegativeLogRound11 inputs))
     (canonicalUnitIntervalWitness inputs)
     (λ index termIndex → RP.≃-refl)
@@ -147,7 +147,7 @@ canonicalNatLogIsOriginalBishopSum inputs n =
 ------------------------------------------------------------------------
 
 canonicalSineSameOriginal :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (E.bishopSin
       (Round11.elementarySeries
@@ -162,7 +162,7 @@ canonicalSineSameOriginal inputs x =
       (Round11.elementarySeries inputs) x)
 
 canonicalCosineSameOriginal :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (E.bishopCos
       (Round11.elementarySeries
@@ -177,7 +177,7 @@ canonicalCosineSameOriginal inputs x =
       (Round11.elementarySeries inputs) x)
 
 canonicalExponentialSameOriginal :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (E.bishopExp
       (Round11.elementarySeries

@@ -280,7 +280,7 @@ Repository audited: `dashi_agda` at draft PR #1408, branch `feat/twin-prime-six-
 
 ## Exact remaining maximal cut, in proof order
 
-**K05-PRODUCT (P0)** — Prove `Round11ImaginaryExpMultiplicative inputs` for the original `Route.round11MachinTranscendentals inputs` and all Bishop reals x,y. Compile it from mixed signed factorial coefficients on `Real` with the existing finite convolution/reindexing and absolute-convergence/wing limits. The real-only `bishopExpAdd`, source-backed DLMF trigonometry, and abstract `ConstructedRealExponential` are not same-object substitutes. Output Pythagorean, both additions, phase modulus, π-shift and newly compiled 2π periodicity **from this single theorem**.
+**K05-PRODUCT (P0)** — Prove `Round11ImaginaryExpMultiplicative inputs` for the original `Route.machinTranscendentals inputs` and all Bishop reals x,y. Compile it from mixed signed factorial coefficients on `Real` with the existing finite convolution/reindexing and absolute-convergence/wing limits. The real-only `bishopExpAdd`, source-backed DLMF trigonometry, and abstract `ConstructedRealExponential` are not same-object substitutes. Output Pythagorean, both additions, phase modulus, π-shift and newly compiled 2π periodicity **from this single theorem**.
 
 **K04d-LOG (P0)** — For every n ≥ 1, prove `Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n) ≃ NatReal.natReal (suc n)`. The n=0 case is already proved. A possible source-native route is the identity exp_B(Σ_{k≥1}x^k/k) ≃ (1-x)^(-1) for 0<x<1, instantiated at the rational `Terms.natLogArgument`, with actual series-composition convergence and reciprocal uniqueness. Do not assert it from the generic logarithm-inverse record; its carrier and series identification must be proved.
 
@@ -329,7 +329,7 @@ Companion Lean file `Integration/BishopNegativeLogNativeRound11Semantics.lean` s
 
 ### K05-PRODUCT — same original sine/cosine
 
-Lean `Integration/BishopRound11ImaginaryProductSemanticReflection.lean` source-writes `sourceSineAddition`, `sourceCosineAddition`, and `sourceImaginaryExponentialProduct` for every `Round11MachinSourceBinding`. It evaluates the *original* signed-factorial Bishop limits, applies independently proved classical trig equations, and reflects equality into the vendored Bishop setoid. This is a real mathematical **Lean semantic proof** on source-faithful functions. It is **not** a direct native Agda mixed signed-factorial finite Cauchy coefficient proof. That exact native coefficient theorem and limit transport remain OPEN. Existing `BishopRound11ImaginaryProductPythagoreanReuseExact` already compiles the required Agda Pythagorean and modulus as consumers once product is paid.
+Lean `Integration/BishopRound11ImaginaryProductSemanticReflection.lean` source-writes `sourceSineAddition`, `sourceCosineAddition`, and `sourceImaginaryExponentialProduct` for every `MachinSourceBinding`. It evaluates the *original* signed-factorial Bishop limits, applies independently proved classical trig equations, and reflects equality into the vendored Bishop setoid. This is a real mathematical **Lean semantic proof** on source-faithful functions. It is **not** a direct native Agda mixed signed-factorial finite Cauchy coefficient proof. That exact native coefficient theorem and limit transport remain OPEN. Existing `BishopRound11ImaginaryProductPythagoreanReuseExact` already compiles the required Agda Pythagorean and modulus as consumers once product is paid.
 
 ### K04d-CONTINUITY — selected zeta must be the same function
 
@@ -411,7 +411,7 @@ This removes a *separate* reflection-identity obligation from global native sine
 
 ### New GOLDEN source theorem owner: strict quarter-angle sine positivity
 
-`DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda` directly instantiates the *existing original* radius-two alternating series source theorem with the original `Round11.round11ConcreteTermIdentification`, **without assuming K05 product, Pythagorean or trig/atan equality**.
+`DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda` directly instantiates the *existing original* radius-two alternating series source theorem with the original `Round11.concreteTermIdentification`, **without assuming K05 product, Pythagorean or trig/atan equality**.
 
 The real Machin branch gives `3/4 < theta_M < 11/14`. A direct rational comparison gives `theta_M <= 11/7` and `|theta_M| <= 2`. Hence `BalabanBishopOuterBrillouinSineGapExact.sineAboveEightySevenOverOneTwentyEight` supplies:
 `87/128 <= E.bishopSin (Round11.elementarySeries inputs) theta_M`.
@@ -447,7 +447,7 @@ This module is source-written with `{-# OPTIONS --safe #-}` and imported by all 
 1. `DASHI/Analysis/BishopSinePositiveTwoBallFromCubicExact.agda`. This finally extends the existing radius-two source interlacing theorem from a nonstrict **cubic** lower bound to strict positivity of the *original* Round11 signed-factorial sine. It uses native exact setoid arithmetic:
    `|x|<=2 ⇒ x*x<=4 ⇒ 1-x*x/6 >= 1/3 >0`;
    `0<x ⇒ 0<x(1-x*x/6)=x-x^3/6<=sin_B(x)`.
-   The proof consumes the actual `BalabanBishopSineTwoBallCubicLowerExact.sineCubicLowerTwoBall` and `Round11.round11ConcreteTermIdentification`. **No** imaginary product, trigonometric identity, Machin equality or differentiation is an input.
+   The proof consumes the actual `BalabanBishopSineTwoBallCubicLowerExact.sineCubicLowerTwoBall` and `Round11.concreteTermIdentification`. **No** imaginary product, trigonometric identity, Machin equality or differentiation is an input.
 
 2. `DASHI/Analysis/BishopMachinPiGlobalSineSignFromTwoBallExact.agda` reuses the EXACT **pinned vendor/bishop** `RealProperties.fast-corollary-2-17`: for separated rational thresholds `3/2<2`, every Bishop x satisfies `x<2 ⊎ 3/2<x` constructively. For `0<x<pi_M`, branch 1 uses the newly proven radius-two sine positivity; branch 2 uses the actual Machin interval `pi_M<22/7` to show `0<pi_M-x<22/7-3/2=23/14<2`, then the already derived same-series `round11SineMachinComplement` to transfer strict positivity back to x. The exact rational inequalities were independently checked with Python Fraction (3/2<2, 23/14<2, 1−4/6=1/3). No excluded-middle or undecidable real trichotomy.
 
@@ -583,7 +583,7 @@ not as Agda-kernel accepted theorems. Golden PR #1408.
 
 1. `DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda`
    transports the existing `Round11.elementarySeries` sine/cosine absolute
-   series convergence through `round11ConcreteTermIdentification` to the
+   series convergence through `concreteTermIdentification` to the
    literal signed-factorial sequences. Both real absolute limits are selected,
    not newly assumed.
 2. `DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda` proves generic
@@ -1262,7 +1262,7 @@ already exports
 
 ```agda
 originalImaginaryExponentialMultiplicative :
-  (inputs : Cutset.Round11BishopCutset) (x y : R.ℝ) →
+  (inputs : Cutset.BishopCutset) (x y : R.ℝ) →
   Complex._≈C_
     (Complex._*C_
       (Complex.expC T (Complex.pureImaginary x))
@@ -1270,7 +1270,7 @@ originalImaginaryExponentialMultiplicative :
     (Complex.expC T (Complex.pureImaginary (R._+_ x y)))
 ```
 
-where `T=Route.round11MachinTranscendentals inputs`. Thus the
+where `T=Route.machinTranscendentals inputs`. Thus the
 separate `Round11ImaginaryExpMultiplicative` **premise** in
 the original K05/K04d consumers has a source-written implementation,
 up to `Complex.≈C-sym`.

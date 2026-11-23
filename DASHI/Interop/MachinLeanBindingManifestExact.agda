@@ -1,13 +1,21 @@
-module DASHI.Interop.BishopRound11MachinBindingManifestExact where
+module DASHI.Interop.MachinLeanBindingManifestExact where
 
 ------------------------------------------------------------------------
--- CONTENT-ADDRESSED ROUND11 / MACHIN ROUTE-B BINDING MANIFEST
+-- RECIPROCAL AGDA-SIDE MANIFEST FOR THE ROUTE-B LEAN BINDING
 --
--- Reciprocal owner of:
---   dashi_lean4/Integration/BishopRound11MachinBindingManifest.lean
+-- This is the Agda-side mirror of
 --
--- This receipt pins the exact Agda source blobs consumed by the Lean mirror
--- surface.  It is provenance, not a transported proof term.
+--   Integration.BishopRound11MachinBindingManifest
+--
+-- in chboishabba/dashi_lean4.
+--
+-- The seven load-bearing Agda blobs below were checked against the live
+-- route-B branch when this receipt was written.  Their Git blob IDs match the
+-- Lean manifest exactly.
+--
+-- This module is provenance only: it does not claim that Lean imported or
+-- kernel-replayed the Agda declarations.  It sharpens the residual to one
+-- explicit generated/replay step.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -91,66 +99,66 @@ loadBearingBlobs =
   ∷ extractionBlob
   ∷ []
 
-record DeclarationBinding : Set where
-  constructor declaration-binding
+record SourceTheoremBinding : Set where
+  constructor source-theorem-binding
   field
     agdaOwner : String
     agdaDeclaration : String
     leanOwner : String
     leanDeclaration : String
 
-open DeclarationBinding public
+open SourceTheoremBinding public
 
-expBinding : DeclarationBinding
+expBinding : SourceTheoremBinding
 expBinding =
-  declaration-binding
+  source-theorem-binding
     (path sourceInstanceBlob)
-    "round11MachinExpConverges"
-    "Integration.BishopRound11MachinSourceBinding"
-    "Round11MachinSourceBinding.expConverges"
+    "machinExpConverges"
+    "Integration.BishopMachinSourceBinding"
+    "MachinSourceBinding.expConverges"
 
-sineBinding : DeclarationBinding
+sineBinding : SourceTheoremBinding
 sineBinding =
-  declaration-binding
+  source-theorem-binding
     (path sourceInstanceBlob)
-    "round11MachinSineConverges"
-    "Integration.BishopRound11MachinSourceBinding"
-    "Round11MachinSourceBinding.sinConverges"
+    "machinSineConverges"
+    "Integration.BishopMachinSourceBinding"
+    "MachinSourceBinding.sinConverges"
 
-cosineBinding : DeclarationBinding
+cosineBinding : SourceTheoremBinding
 cosineBinding =
-  declaration-binding
+  source-theorem-binding
     (path sourceInstanceBlob)
-    "round11MachinCosineConverges"
-    "Integration.BishopRound11MachinSourceBinding"
-    "Round11MachinSourceBinding.cosConverges"
+    "machinCosineConverges"
+    "Integration.BishopMachinSourceBinding"
+    "MachinSourceBinding.cosConverges"
 
-atanFifthBinding : DeclarationBinding
+atanFifthBinding : SourceTheoremBinding
 atanFifthBinding =
-  declaration-binding
+  source-theorem-binding
     (path sourceInstanceBlob)
-    "round11MachinAtanOneFifthConverges"
-    "Integration.BishopRound11MachinSourceBinding"
-    "Round11MachinSourceBinding.atanOneFifthConverges"
+    "machinAtanOneFifthConverges"
+    "Integration.BishopMachinSourceBinding"
+    "MachinSourceBinding.atanOneFifthConverges"
 
-atan239Binding : DeclarationBinding
+atan239Binding : SourceTheoremBinding
 atan239Binding =
-  declaration-binding
+  source-theorem-binding
     (path sourceInstanceBlob)
-    "round11MachinAtanOneTwoHundredThirtyNinthConverges"
-    "Integration.BishopRound11MachinSourceBinding"
-    "Round11MachinSourceBinding.atanOneTwoHundredThirtyNinthConverges"
+    "machinAtanOneTwoHundredThirtyNinthConverges"
+    "Integration.BishopMachinSourceBinding"
+    "MachinSourceBinding.atanOneTwoHundredThirtyNinthConverges"
 
-machinPiBinding : DeclarationBinding
+machinPiBinding : SourceTheoremBinding
 machinPiBinding =
-  declaration-binding
+  source-theorem-binding
     (path machinConstructionBlob)
     "bishopMachinPi"
     "Integration.BishopVendoredMachinPiSemantics"
     "machinPiB"
 
-declarationBindings : List DeclarationBinding
-declarationBindings =
+theoremBindings : List SourceTheoremBinding
+theoremBindings =
   expBinding
   ∷ sineBinding
   ∷ cosineBinding
@@ -159,28 +167,36 @@ declarationBindings =
   ∷ machinPiBinding
   ∷ []
 
-record BindingManifestBoundary : Set where
-  constructor binding-manifest-boundary
+record ReciprocalManifestBoundary : Set where
+  constructor reciprocal-manifest-boundary
   field
     agdaSourceCommitPinned : Bool
     bishopSubmoduleCommitPinned : Bool
-    loadBearingAgdaBlobsPinned : Bool
-    declarationBindingTableOwned : Bool
-    reciprocalLeanManifestSourceWritten : Bool
-    leanCanonicalBindingInhabited : Bool
-    leanBindingUniqueUpToBishopSetoid : Bool
-    leanCanonicalRouteBHypothesisFree : Bool
+    sevenLoadBearingBlobIdsRecorded : Bool
+    agdaAndLeanManifestBlobIdsMatch : Bool
+    declarationBindingTableRecorded : Bool
+    leanPrimitiveExtractionCompilerOwned : Bool
+    leanEndToEndRouteBCompilerOwned : Bool
+    leanPinnedDeltaIdentityOwned : Bool
+    leanCanonicalBishopCompletionBindingInhabited : Bool
+    leanEveryAdmissibleBindingSetoidEquivalentToCanonical : Bool
+    leanBishopQuotientEquivalentToLeanReal : Bool
+    leanBishopCompletionArithmeticCompatibilityOwned : Bool
+    leanBishopOrderReflectionOwned : Bool
+    leanHypothesisFreeCanonicalRouteBOwned : Bool
+    leanReplayIrrelevanceForMappedQE4E6DeltaOwned : Bool
     leanGeneratedBindingTableKernelMatchSourceOwned : Bool
 
-    generatedCrossProverReplayObserved : Bool
-    leanKernelReceiptObserved : Bool
-    agdaKernelReceiptObservedForCurrentHead : Bool
+    generatedAgdaToLeanReplayObserved : Bool
+    leanExactHeadKernelReceiptObserved : Bool
+    agdaExactHeadKernelReceiptObserved : Bool
 
-open BindingManifestBoundary public
+open ReciprocalManifestBoundary public
 
-canonicalBindingManifestBoundary : BindingManifestBoundary
-canonicalBindingManifestBoundary =
-  binding-manifest-boundary
-    true true true true true
-    true true true true
+canonicalReciprocalManifestBoundary :
+  ReciprocalManifestBoundary
+canonicalReciprocalManifestBoundary =
+  reciprocal-manifest-boundary
+    true true true true true true true true
+    true true true true true true true true
     false false false

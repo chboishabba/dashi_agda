@@ -18,10 +18,10 @@ module DASHI.Analysis.BishopOriginalZetaAboveTwoFromMeshLogExact where
 import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Log
 import DASHI.Analysis.BishopRiemannOriginalZetaAboveTwoExact as Zeta
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 module FromOriginalBishopMeshLog
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   module Actual = Zeta.FromOriginalNegativeLog

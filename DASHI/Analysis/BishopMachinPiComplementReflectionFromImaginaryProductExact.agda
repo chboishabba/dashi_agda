@@ -34,9 +34,9 @@ import RealProperties as RP
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as Parity
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 machinComplement : R.ℝ → R.ℝ
 machinComplement x = R._-_ Machin.bishopMachinPi x
@@ -62,7 +62,7 @@ machinComplementInvolutive x =
     RP.≃-refl Machin.bishopMachinPi x
 
 round11SineMachinComplement :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   (x : R.ℝ) →
@@ -72,7 +72,7 @@ round11SineMachinComplement :
 round11SineMachinComplement inputs product quarterEqual x =
   RP.≃-trans
     (TrigCong.bishopSinCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (machinComplementAsNegativePlusPi x))
     (RP.≃-trans
       (Product.round11SineShiftByMachinPi
@@ -84,7 +84,7 @@ round11SineMachinComplement inputs product quarterEqual x =
         (RP.neg-involutive (Product.sinB inputs x))))
 
 round11CosineMachinComplement :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   (x : R.ℝ) →
@@ -94,7 +94,7 @@ round11CosineMachinComplement :
 round11CosineMachinComplement inputs product quarterEqual x =
   RP.≃-trans
     (TrigCong.bishopCosCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (machinComplementAsNegativePlusPi x))
     (RP.≃-trans
       (Product.round11CosineShiftByMachinPi

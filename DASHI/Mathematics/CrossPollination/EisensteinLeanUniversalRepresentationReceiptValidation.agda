@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as Observer
 import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptExact as Receipt
 

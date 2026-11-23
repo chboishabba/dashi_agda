@@ -41,6 +41,174 @@
       "historical_rounds": [573],
       "owner": "yang-mills/source-first-wilson-mixed-log",
       "status": "pilot"
+    },
+    {
+      "from": "DASHI.Interop.BishopRound11MachinBindingManifestExact",
+      "to": "DASHI.Interop.BishopMachinBindingManifestExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact",
+      "to": "DASHI.Interop.LeanMachinCanonicalRouteBParityExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Interop.LeanRound11MachinReplayEvidenceExact",
+      "to": "DASHI.Interop.LeanMachinReplayEvidenceExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Interop.Round11MachinCrossProverRecognitionExact",
+      "to": "DASHI.Interop.MachinCrossProverRecognitionExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Interop.Round11MachinLeanBindingManifestExact",
+      "to": "DASHI.Interop.MachinLeanBindingManifestExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Moonshine.AbelBishopRound11QPeriodInstanceExact",
+      "to": "DASHI.Moonshine.AbelBishopQPeriodInstanceExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Moonshine.BishopRound11MachinEisensteinRouteBExact",
+      "to": "DASHI.Moonshine.BishopMachinEisensteinRouteBExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact",
+      "to": "DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11CanonicalNegativeLogSameObjectExact",
+      "to": "DASHI.Analysis.BishopCanonicalNegativeLogSameObjectExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact",
+      "to": "DASHI.Analysis.BishopClassicalTrigObjectWeldExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact",
+      "to": "DASHI.Analysis.BishopConcreteAbsoluteSeriesConvergenceExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact",
+      "to": "DASHI.Analysis.BishopFactorDerivativeInterchangeExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact",
+      "to": "DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11NativeComplexRectangleExact",
+      "to": "DASHI.Analysis.BishopNativeComplexRectangleExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11PowerSeriesDifferentiationSourceTransportExact",
+      "to": "DASHI.Analysis.BishopPowerSeriesDifferentiationSourceTransportExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11PowerSeriesLocalChartExact",
+      "to": "DASHI.Analysis.BishopPowerSeriesLocalChartExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact",
+      "to": "DASHI.Analysis.BishopTrigModulusFromPythagoreanExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Analysis.BishopRound11TrigSetoidInterchangeInstanceExact",
+      "to": "DASHI.Analysis.BishopTrigSetoidInterchangeInstanceExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Foundations.BishopRound11FiniteParityDegreeZeroExact",
+      "to": "DASHI.Foundations.BishopFiniteParityDegreeZeroExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-foundations",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Foundations.BishopRound11SignedFactorialDegreeBinomialExact",
+      "to": "DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-foundations",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Foundations.BishopRound11SignedFactorialExponentEncodingExact",
+      "to": "DASHI.Foundations.BishopSignedFactorialExponentEncodingExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-foundations",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Foundations.BishopRound11TrigAtZeroExact",
+      "to": "DASHI.Foundations.BishopTrigAtZeroExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-foundations",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Geometry.GielisRound11ActualComplexExponentialExact",
+      "to": "DASHI.Geometry.GielisActualComplexExponentialExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-analytic",
+      "status": "batch-1"
+    },
+    {
+      "from": "DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset",
+      "to": "DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact",
+      "historical_rounds": [11],
+      "owner": "bishop/machin-source",
+      "status": "batch-1"
     }
   ],
   "symbol_renames": [
@@ -228,6 +396,111 @@
       "from": "round553WilsonTimeDistanceMeaningLevel",
       "to": "wilsonTimeDistanceMeaningLevel",
       "historical_rounds": [553]
+    },
+    {
+      "from": "Round11BishopCutset",
+      "to": "BishopCutset",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinBindingBoundary",
+      "to": "MachinBindingBoundary",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinCrossProverRecognitionExact",
+      "to": "MachinCrossProverRecognitionExact",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinEisensteinSourceReceipt",
+      "to": "MachinEisensteinSourceReceipt",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinLeanBindingManifestExact",
+      "to": "MachinLeanBindingManifestExact",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinRouteBSourceReceipt",
+      "to": "MachinRouteBSourceReceipt",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11MachinSourceBinding",
+      "to": "MachinSourceBinding",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "Round11RouteBBoundary",
+      "to": "RouteBBoundary",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11BindingSpecializedToPinnedArithmetic",
+      "to": "bindingSpecializedToPinnedArithmetic",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11ConcreteTermIdentification",
+      "to": "concreteTermIdentification",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinAtanOneFifthConverges",
+      "to": "machinAtanOneFifthConverges",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinAtanOneTwoHundredThirtyNinthConverges",
+      "to": "machinAtanOneTwoHundredThirtyNinthConverges",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinBindingBoundary",
+      "to": "machinBindingBoundary",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinCosineConverges",
+      "to": "machinCosineConverges",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinExpConverges",
+      "to": "machinExpConverges",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinRouteBSourceLevel",
+      "to": "machinRouteBSourceLevel",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinSineConverges",
+      "to": "machinSineConverges",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinSourceReceiptOrigin",
+      "to": "machinSourceReceiptOrigin",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11MachinTranscendentals",
+      "to": "machinTranscendentals",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11RouteBBoundary",
+      "to": "routeBBoundary",
+      "historical_rounds": [11]
+    },
+    {
+      "from": "round11TrigSelected",
+      "to": "trigSelected",
+      "historical_rounds": [11]
     }
   ]
 }

@@ -10,8 +10,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Series
 import DASHI.Moonshine.AbelBishopOriginalComplexCarrierWeldExact as Weld
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Round11
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Cutset
 
 originalTwoPiI :
   (T : Complex.BishopSetoidComplexTranscendentals) →
@@ -63,13 +63,13 @@ originalBishopQAtSourceIdentified :
 originalBishopQAtSourceIdentified T (Complex.complex a b) = refl
 
 originalRound11MachinQAt :
-  Cutset.Round11BishopCutset →
+  Cutset.BishopCutset →
   Complex.BishopComplex → Complex.BishopComplex
 originalRound11MachinQAt inputs =
-  originalBishopQAt (Round11.round11MachinTranscendentals inputs)
+  originalBishopQAt (Round11.machinTranscendentals inputs)
 
 originalRound11MachinQAtForSeries :
-  Cutset.Round11BishopCutset →
+  Cutset.BishopCutset →
   Series.BishopComplex → Series.BishopComplex
 originalRound11MachinQAtForSeries inputs =
-  originalBishopQAtForSeries (Round11.round11MachinTranscendentals inputs)
+  originalBishopQAtForSeries (Round11.machinTranscendentals inputs)

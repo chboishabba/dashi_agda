@@ -6,8 +6,8 @@ open import Agda.Builtin.String using (String)
 import Real as Bishop
 
 import DASHI.Analysis.BishopPolarJacobianDeterminantExact as Determinant
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Shared
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Trig
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as Shared
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Trig
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.QuantumVacuum.BishopPolarCoordinateDerivativeCompilerExact as Coordinates
 

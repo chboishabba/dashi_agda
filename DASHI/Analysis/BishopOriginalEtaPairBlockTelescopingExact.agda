@@ -35,8 +35,8 @@ import RealProperties as RP
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- The original eta blocks are sums in the original Bishop complex
 -- carrier. No change in sign convention or zero/one-based indexing.
@@ -101,7 +101,7 @@ originalBishopEtaPrefixShiftedPairsExact term n (suc m)
       (originalShiftedEtaPairs term n m)
       (Eta.originalEtaBlock term (n + m)))
 
-module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
+module OriginalRound11 (inputs : Round11.BishopCutset) where
   module Selected = Eta.OriginalRound11DirichletEta inputs
 
   -- The original selected Round11 source, not just an arbitrary term.

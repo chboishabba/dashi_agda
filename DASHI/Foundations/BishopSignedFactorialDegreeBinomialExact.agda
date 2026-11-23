@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Foundations.BishopRound11SignedFactorialDegreeBinomialExact where
+module DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact where
 
 ------------------------------------------------------------------------
 -- K05 TERMINAL: ACTUAL ALL-N ROUND11 MIXED SIGNED FACTORIAL
@@ -48,21 +48,21 @@ import Real as R
 import RealProperties as RP
 
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Cutset
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Derivative
-import DASHI.Analysis.BishopRound11NativeComplexRectangleExact as Native
+import DASHI.Analysis.BishopNativeComplexRectangleExact as Native
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
-import DASHI.Foundations.BishopRound11FiniteParityDegreeZeroExact as Base
-import DASHI.Foundations.BishopRound11SignedFactorialExponentEncodingExact as Encoding
+import DASHI.Foundations.BishopFiniteParityDegreeZeroExact as Base
+import DASHI.Foundations.BishopSignedFactorialExponentEncodingExact as Encoding
 import DASHI.Foundations.BishopUnsignedFactorialCauchyParitySplitExact as Unsigned
 import DASHI.Foundations.BishopSignTwistedFiniteCauchyCoefficientExact as Twist
 import DASHI.Foundations.BishopGroupedCauchyParityTelescopeExact as Telescope
 
 signedCosCosDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -85,7 +85,7 @@ signedCosCosDegree inputs x y n =
       (Unsigned.evenExp x) (Unsigned.evenExp y) n)
 
 signedSinSinDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -108,7 +108,7 @@ signedSinSinDegree inputs x y n =
       (Unsigned.oddExp x) (Unsigned.oddExp y) n)
 
 signedCosSinDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -131,7 +131,7 @@ signedCosSinDegree inputs x y n =
       (Unsigned.evenExp x) (Unsigned.oddExp y) n)
 
 signedSinCosDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -154,7 +154,7 @@ signedSinCosDegree inputs x y n =
       (Unsigned.oddExp x) (Unsigned.evenExp y) n)
 
 originalEvenSignedFactorialDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -203,7 +203,7 @@ originalEvenSignedFactorialDegree inputs x y (suc m) =
                 source n))))))
 
 originalOddSignedFactorialDegree :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -235,9 +235,9 @@ originalOddSignedFactorialDegree inputs x y n =
             source n))))
 
 originalImaginaryExponentialMultiplicative :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   Complex._≈C_
     (Complex._*C_
@@ -251,16 +251,16 @@ originalImaginaryExponentialMultiplicative inputs x y =
     (originalOddSignedFactorialDegree inputs x y)
 
 originalSineCosineAdditionFromNativeFactorials :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   Complex.BishopSineAdditionAt T x y
   ×
   Complex.BishopCosineAdditionAt T x y
 originalSineCosineAdditionFromNativeFactorials inputs x y =
   Complex.imaginaryExponentialProductGivesAddition
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     x y
     (Complex.≈C-sym
       (originalImaginaryExponentialMultiplicative inputs x y))

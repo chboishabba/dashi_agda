@@ -335,7 +335,7 @@ The cofinal *arithmetic* endpoint is now bidirectional using **original proof-be
 
 ## 31 October — K04 source-root re-audit and finite-time closure (post-T0 follow-on)
 
-The source-first audit corrected a formerly broad handoff: **the Bishop-real Machin construction and convergence are NOT missing foundations**. In `DASHI.Foundations.BishopMachinArctanConstructionExact`, the original `atanSignedTerm`, `atanSeriesConvergent`, `bishopAtanHalfBallConverges` and `bishopMachinPi` already give bona fide Bishop-series and a constructed real. `DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact` already instantiates the actual two Machin arctangent convergence witnesses and uses that same `bishopMachinPi` in the Round11 complex transcendental owner. The rational tangent arithmetic and constructive branch window already have separate original owners `BishopMachinRationalTangentAlgebraExact`, `BishopMachinQuarterAngleBranchExact`, `BishopMachinPiRationalWindowExact`. `DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact` tracks the source-written Lean classical-π semantic theorem, explicitly WITHOUT a kernel/same-object cross-prover receipt. Do not reimplement these owners or count source flags as kernel evidence.
+The source-first audit corrected a formerly broad handoff: **the Bishop-real Machin construction and convergence are NOT missing foundations**. In `DASHI.Foundations.BishopMachinArctanConstructionExact`, the original `atanSignedTerm`, `atanSeriesConvergent`, `bishopAtanHalfBallConverges` and `bishopMachinPi` already give bona fide Bishop-series and a constructed real. `DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact` already instantiates the actual two Machin arctangent convergence witnesses and uses that same `bishopMachinPi` in the Round11 complex transcendental owner. The rational tangent arithmetic and constructive branch window already have separate original owners `BishopMachinRationalTangentAlgebraExact`, `BishopMachinQuarterAngleBranchExact`, `BishopMachinPiRationalWindowExact`. `DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact` tracks the source-written Lean classical-π semantic theorem, explicitly WITHOUT a kernel/same-object cross-prover receipt. Do not reimplement these owners or count source flags as kernel evidence.
 
 **Concrete new source-written finite-stage work** in `ZetaIrrationalFibreCommutingSquareBidiExact`: `stageIndexAfter`, `readoutStableAcrossFiniteSteps`, `consumerStableAcrossFiniteSteps`, `primeCountStableAcrossFiniteSteps`. Induction composes the original adjacent-stage equality for arbitrary finite steps and arbitrary retained-Nat consumer, not just 1/2 steps. This proves *only* compatible integer readouts; nonconstant rational approximants, Bishop Cauchy convergence and analytic zeta values remain separate.
 
@@ -1511,7 +1511,7 @@ Cartesian boundaries, not the terminal analytic open cuts.
 (commit `ab838741905676085eb960f7f61c642b85368273`,
 then `f6258148800b6c0f39c871d24900624f3bc5c8e5`)
 reuses the earlier geometric-series owner, original
-`Round11BishopCutset`, and vendored Bishop
+`BishopCutset`, and vendored Bishop
 `Sequence.uniqueness-of-limits`.
 
 - `canonicalNegativeLogDataSet old` builds a
@@ -1524,7 +1524,7 @@ reuses the earlier geometric-series owner, original
   Sine, cosine and exponential terms and their original
   absolute-convergence sources are reused unchanged.
 - `canonicalNegativeLogRound11 inputs` constructs a genuine
-  Round11BishopCutset. The existing configured sine/cosine
+  BishopCutset. The existing configured sine/cosine
   propositional term definitions are preserved.
 - `canonicalUnitIntervalWitness inputs n` constructs an
   ACTUAL selected predicate witness for every original

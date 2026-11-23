@@ -1,4 +1,4 @@
-module DASHI.Analysis.BishopRound11PowerSeriesLocalChartExact where
+module DASHI.Analysis.BishopPowerSeriesLocalChartExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 ------------------------------------------------------------------------
 -- ROUND11 LOCAL POWER-SERIES CHART
@@ -22,7 +22,7 @@ import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 
 record Round11LocalPowerSeriesChart : Set₁ where
   field
-    round11 : Round11.Round11BishopCutset
+    round11 : Round11.BishopCutset
 
     dataSet : Elementary.BishopElementaryPowerSeriesData
     dataSetIsRound11 : dataSet ≡ Round11.elementarySeries round11
@@ -44,13 +44,13 @@ record Round11LocalPowerSeriesChart : Set₁ where
 open Round11LocalPowerSeriesChart public
 
 canonicalRound11LocalPowerSeriesChart :
-  (cutset : Round11.Round11BishopCutset) →
+  (cutset : Round11.BishopCutset) →
   Round11LocalPowerSeriesChart
 canonicalRound11LocalPowerSeriesChart cutset = record
   { round11 = cutset
   ; dataSet = Round11.elementarySeries cutset
   ; dataSetIsRound11 = refl
-  ; concreteTerms = Round11.round11ConcreteTermIdentification cutset
+  ; concreteTerms = Round11.concreteTermIdentification cutset
   ; sineAbsolutelyConvergentAtEveryBishopPoint =
       Elementary.sineAbsoluteConvergence (Round11.elementarySeries cutset)
   ; cosineAbsolutelyConvergentAtEveryBishopPoint =

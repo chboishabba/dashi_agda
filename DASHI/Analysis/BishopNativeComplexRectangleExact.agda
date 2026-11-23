@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Analysis.BishopRound11NativeComplexRectangleExact where
+module DASHI.Analysis.BishopNativeComplexRectangleExact where
 
 ------------------------------------------------------------------------
 -- K05-PRODUCT: THE FINITE CARTESIAN RECTANGLE ON THE ACTUAL
@@ -36,13 +36,13 @@ import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 import DASHI.Foundations.BishopGroupedCauchyParityTelescopeExact as Telescope
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
-import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
+import DASHI.Analysis.BishopConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
 import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
 import DASHI.Analysis.BishopOneStepLagConvergenceExact as Lag
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 realTerms : (Nat → C.BishopComplex) → Nat → R.ℝ
 realTerms terms n = C.re (terms n)
@@ -103,7 +103,7 @@ complexFiniteRectangleProduct left right height width =
 -- The actual original signed-factorial terms; do not replace them
 -- with a newly declared complex exponential coefficient family.
 round11PhaseTerms :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → Nat → C.BishopComplex
 round11PhaseTerms inputs x n =
   C.complex
@@ -111,7 +111,7 @@ round11PhaseTerms inputs x n =
     (Concrete.sineSignedTerm x n)
 
 round11PhaseRectangleIsProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (height width : Nat) →
   C._≈C_
@@ -131,32 +131,32 @@ round11PhaseRectangleIsProduct inputs x y height width =
 -- The original TWO real convergence witnesses now form a single
 -- same-object complex-series convergence statement at actual expC.
 round11PhaseSeriesConvergesToOriginalExp :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (Seq._ConvergesTo_
     (λ count →
       C.re (complexFinitePartial (round11PhaseTerms inputs x) count))
     (C.re
-      (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.expC (Route.machinTranscendentals inputs)
         (C.pureImaginary x))))
   ×
   (Seq._ConvergesTo_
     (λ count →
       C.im (complexFinitePartial (round11PhaseTerms inputs x) count))
     (C.im
-      (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.expC (Route.machinTranscendentals inputs)
         (C.pureImaginary x))))
 round11PhaseSeriesConvergesToOriginalExp inputs x =
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     phaseEquality = C.imaginaryExponentialIsPhase T x
   in
   Seq.xₙ→x∧x≃y⇒xₙ→y
-    (Route.round11MachinCosineConverges inputs x)
+    (Route.machinCosineConverges inputs x)
     (RP.≃-symm (C.reEquivalent phaseEquality))
   ,
   Seq.xₙ→x∧x≃y⇒xₙ→y
-    (Route.round11MachinSineConverges inputs x)
+    (Route.machinSineConverges inputs x)
     (RP.≃-symm (C.imEquivalent phaseEquality))
 
 ------------------------------------------------------------------------
@@ -268,7 +268,7 @@ complexRectangleConvergesToProduct
 -- LIMIT (rectangular order).  The remaining K05 proof has to show
 -- that the signed-factorial TRIANGLE at x+y has that same limit.
 round11RectangleConvergesToOriginalExpProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (Seq._ConvergesTo_
     (λ n →
@@ -278,9 +278,9 @@ round11RectangleConvergesToOriginalExpProduct :
           (round11PhaseTerms inputs y) n n))
     (C.re
       (C._*C_
-        (C.expC (Route.round11MachinTranscendentals inputs)
+        (C.expC (Route.machinTranscendentals inputs)
           (C.pureImaginary x))
-        (C.expC (Route.round11MachinTranscendentals inputs)
+        (C.expC (Route.machinTranscendentals inputs)
           (C.pureImaginary y)))))
   ×
   (Seq._ConvergesTo_
@@ -291,17 +291,17 @@ round11RectangleConvergesToOriginalExpProduct :
           (round11PhaseTerms inputs y) n n))
     (C.im
       (C._*C_
-        (C.expC (Route.round11MachinTranscendentals inputs)
+        (C.expC (Route.machinTranscendentals inputs)
           (C.pureImaginary x))
-        (C.expC (Route.round11MachinTranscendentals inputs)
+        (C.expC (Route.machinTranscendentals inputs)
           (C.pureImaginary y)))))
 round11RectangleConvergesToOriginalExpProduct inputs x y =
   complexRectangleConvergesToProduct
     (round11PhaseTerms inputs x)
     (round11PhaseTerms inputs y)
-    (C.expC (Route.round11MachinTranscendentals inputs)
+    (C.expC (Route.machinTranscendentals inputs)
       (C.pureImaginary x))
-    (C.expC (Route.round11MachinTranscendentals inputs)
+    (C.expC (Route.machinTranscendentals inputs)
       (C.pureImaginary y))
     (round11PhaseSeriesConvergesToOriginalExp inputs x)
     (round11PhaseSeriesConvergesToOriginalExp inputs y)
@@ -358,7 +358,7 @@ complexTriangleIsMertens left right count =
         (imagTerms left) (realTerms right) count))
 
 round11PhaseTriangleIsMertens :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (count : Nat) →
   C._≈C_
@@ -471,13 +471,13 @@ complexTriangleConvergesToProduct
 -- K05 exact original-series specialization. No new formal product
 -- input: only the absolute-triangle source convergence witnesses.
 round11PhaseTriangleConvergesFromFourAbsoluteTriangles :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   FourAbsoluteTriangles
     (round11PhaseTerms inputs x)
     (round11PhaseTerms inputs y) →
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
   in
   (Seq._ConvergesTo_
     (λ n →
@@ -505,9 +505,9 @@ round11PhaseTriangleConvergesFromFourAbsoluteTriangles
   complexTriangleConvergesToProduct
     (round11PhaseTerms inputs x)
     (round11PhaseTerms inputs y)
-    (C.expC (Route.round11MachinTranscendentals inputs)
+    (C.expC (Route.machinTranscendentals inputs)
       (C.pureImaginary x))
-    (C.expC (Route.round11MachinTranscendentals inputs)
+    (C.expC (Route.machinTranscendentals inputs)
       (C.pureImaginary y))
     (round11PhaseSeriesConvergesToOriginalExp inputs x)
     (round11PhaseSeriesConvergesToOriginalExp inputs y)
@@ -521,7 +521,7 @@ round11PhaseTriangleConvergesFromFourAbsoluteTriangles
 ------------------------------------------------------------------------
 
 round11PhaseSourceAbsoluteConvergent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (Seq._isConvergent
     (Seq.SeriesOf
@@ -543,7 +543,7 @@ round11PhaseSourceAbsoluteConvergent inputs x =
 ------------------------------------------------------------------------
 
 round11SourceFourAbsoluteTriangles :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   FourAbsoluteTriangles
     (round11PhaseTerms inputs x)
@@ -612,10 +612,10 @@ round11SourceFourAbsoluteTriangles inputs x y =
 -- O_N, prove O_N→0, then use uniqueness of original complex limits
 -- to conclude expC(i*(x+y)) = expC(ix)*C expC(iy).
 round11OriginalComplexCauchyTriangleConverges :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
   in
   (Seq._ConvergesTo_
     (λ n →
@@ -658,7 +658,7 @@ round11OriginalComplexCauchyTriangleConverges inputs x y =
 ------------------------------------------------------------------------
 
 round11GroupedBoundaryReal :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11GroupedBoundaryReal inputs x y n =
   R._-_
@@ -671,7 +671,7 @@ round11GroupedBoundaryReal inputs x y n =
         (round11PhaseTerms inputs (R._+_ x y)) n))
 
 round11GroupedBoundaryImag :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11GroupedBoundaryImag inputs x y n =
   R._-_
@@ -684,13 +684,13 @@ round11GroupedBoundaryImag inputs x y n =
         (round11PhaseTerms inputs (R._+_ x y)) n))
 
 round11ProductFromVanishingGroupedBoundary :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   Seq._ConvergesTo_
     (round11GroupedBoundaryReal inputs x y) R.0ℝ →
   Seq._ConvergesTo_
     (round11GroupedBoundaryImag inputs x y) R.0ℝ →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   C._≈C_
     (C._*C_
@@ -741,7 +741,7 @@ round11ProductFromVanishingGroupedBoundary
 ------------------------------------------------------------------------
 
 round11SignedSineCauchyCoefficient :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11SignedSineCauchyCoefficient inputs x y =
   Row.cauchyCoefficient
@@ -749,9 +749,9 @@ round11SignedSineCauchyCoefficient inputs x y =
     (imagTerms (round11PhaseTerms inputs y))
 
 round11SignedSineCauchyTriangleConverges :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   Seq._ConvergesTo_
     (Row.trianglePartial
@@ -762,7 +762,7 @@ round11SignedSineCauchyTriangleConverges :
       (C.im (C.expC T (C.pureImaginary y))))
 round11SignedSineCauchyTriangleConverges inputs x y =
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     left = round11PhaseTerms inputs x
     right = round11PhaseTerms inputs y
     convergenceLeft = round11PhaseSeriesConvergesToOriginalExp inputs x
@@ -779,14 +779,14 @@ round11SignedSineCauchyTriangleConverges inputs x y =
     (imagImagConverges absolute)
 
 round11SignedSineCauchyCoefficientConvergesZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   Seq._ConvergesTo_
     (round11SignedSineCauchyCoefficient inputs x y)
     R.0ℝ
 round11SignedSineCauchyCoefficientConvergesZero inputs x y =
   let
-    T = Route.round11MachinTranscendentals inputs
+    T = Route.machinTranscendentals inputs
     coefficients = round11SignedSineCauchyCoefficient inputs x y
     productLimit =
       R._*_
@@ -803,13 +803,13 @@ round11SignedSineCauchyCoefficientConvergesZero inputs x y =
     coefficients (productLimit , triangleIsSeriesLimit)
 
 round11OddOddCorrection :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11OddOddCorrection inputs x y n =
   R.-_ (round11SignedSineCauchyCoefficient inputs x y n)
 
 round11OddOddCorrectionConvergesZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   Seq._ConvergesTo_
     (round11OddOddCorrection inputs x y)
@@ -842,7 +842,7 @@ round11OddOddCorrectionConvergesZero inputs x y =
 ------------------------------------------------------------------------
 
 round11ProductFromExactFiniteGroupedParity :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (∀ n →
     R._≃_
@@ -852,7 +852,7 @@ round11ProductFromExactFiniteGroupedParity :
     R._≃_
       (round11GroupedBoundaryImag inputs x y (suc n))
       R.0ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   C._≈C_
     (C._*C_
@@ -882,7 +882,7 @@ round11ProductFromExactFiniteGroupedParity
     inputs x y realBoundaryConverges imagBoundaryConverges
 
 round11TrigAdditionFromExactFiniteGroupedParity :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (∀ n →
     R._≃_
@@ -892,7 +892,7 @@ round11TrigAdditionFromExactFiniteGroupedParity :
     R._≃_
       (round11GroupedBoundaryImag inputs x y (suc n))
       R.0ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   C.BishopSineAdditionAt T x y
   ×
@@ -900,7 +900,7 @@ round11TrigAdditionFromExactFiniteGroupedParity :
 round11TrigAdditionFromExactFiniteGroupedParity
     inputs x y exactRealParity exactImagParity =
   C.imaginaryExponentialProductGivesAddition
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     x y
     (C.≈C-sym
       (round11ProductFromExactFiniteGroupedParity
@@ -919,7 +919,7 @@ round11TrigAdditionFromExactFiniteGroupedParity
 ------------------------------------------------------------------------
 
 round11CosCosDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11CosCosDegree inputs x y =
   Row.cauchyCoefficient
@@ -927,7 +927,7 @@ round11CosCosDegree inputs x y =
     (realTerms (round11PhaseTerms inputs y))
 
 round11SinSinDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11SinSinDegree inputs x y =
   Row.cauchyCoefficient
@@ -935,7 +935,7 @@ round11SinSinDegree inputs x y =
     (imagTerms (round11PhaseTerms inputs y))
 
 round11CosSinDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11CosSinDegree inputs x y =
   Row.cauchyCoefficient
@@ -943,7 +943,7 @@ round11CosSinDegree inputs x y =
     (imagTerms (round11PhaseTerms inputs y))
 
 round11SinCosDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11SinCosDegree inputs x y =
   Row.cauchyCoefficient
@@ -951,19 +951,19 @@ round11SinCosDegree inputs x y =
     (realTerms (round11PhaseTerms inputs y))
 
 round11OriginalCosineSourceDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11OriginalCosineSourceDegree inputs x y =
   realTerms (round11PhaseTerms inputs (R._+_ x y))
 
 round11OriginalSineSourceDegree :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R.ℝ → R.ℝ → Nat → R.ℝ
 round11OriginalSineSourceDegree inputs x y =
   imagTerms (round11PhaseTerms inputs (R._+_ x y))
 
 round11RealBoundaryIsNativeTelescope :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (count : Nat) →
   R._≃_
@@ -991,7 +991,7 @@ round11RealBoundaryIsNativeTelescope inputs x y count =
         (Telescope.nativeFiniteSeriesDifferenceLinear cc ss count)))
 
 round11ImagBoundaryIsNativeTelescope :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (count : Nat) →
   R._≃_
@@ -1024,7 +1024,7 @@ round11ImagBoundaryIsNativeTelescope inputs x y count =
 -- Notice the n=0 case uses previousCoefficient = 0, not sin*sin_0.
 
 round11OriginalEvenDegreeBinomialSuffices :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (∀ degree →
     R._≃_
@@ -1047,7 +1047,7 @@ round11OriginalEvenDegreeBinomialSuffices inputs x y evenDegree n =
       evenDegree (suc n))
 
 round11OriginalOddDegreeBinomialSuffices :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (∀ degree →
     R._≃_
@@ -1069,7 +1069,7 @@ round11OriginalOddDegreeBinomialSuffices inputs x y oddDegree n =
       oddDegree (suc n))
 
 round11ProductFromOriginalFactorialDegreeSplits :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   (∀ degree →
     R._≃_
@@ -1084,7 +1084,7 @@ round11ProductFromOriginalFactorialDegreeSplits :
         (round11CosSinDegree inputs x y degree)
         (round11SinCosDegree inputs x y degree))
       (round11OriginalSineSourceDegree inputs x y degree)) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   C._≈C_
     (C._*C_

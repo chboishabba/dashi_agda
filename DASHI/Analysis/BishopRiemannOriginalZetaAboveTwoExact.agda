@@ -37,18 +37,18 @@ import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
 import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
 import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NativeLog
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 module FromOriginalNegativeLog
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (originalLogIdentity : NativeLog.OriginalBishopNegativeLogExponentialGap)
   where
 
   sourceTerms : Dirichlet.BishopDirichletTermFamily
   sourceTerms =
     Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate
 
   sourceRegion : BC.BishopComplex → Set

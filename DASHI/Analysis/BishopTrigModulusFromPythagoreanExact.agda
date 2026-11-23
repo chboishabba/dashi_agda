@@ -1,4 +1,4 @@
-module DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact where
+module DASHI.Analysis.BishopTrigModulusFromPythagoreanExact where
 
 ------------------------------------------------------------------------
 -- K05 -> K04d SAME-OBJECT TRIG MODULUS COMPILER.
@@ -31,7 +31,7 @@ import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflection
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegativeExp
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Moonshine.JInvariantBishopTrigUnitPhaseExact as Phase
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 oneNonnegative : R.NonNegative R.1ℝ
 oneNonnegative =
@@ -98,7 +98,7 @@ bishopTrigSinAbsoluteBelowOne dataSet angle certificate =
 -- The exact selected Round11 signed-factorial functions. The input
 -- Pythagorean is a REAL equation on that same Round11 carrier.
 round11ModulusFromPythagorean :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (angle : R.ℝ) →
   let
     dataSet = Round11.elementarySeries inputs

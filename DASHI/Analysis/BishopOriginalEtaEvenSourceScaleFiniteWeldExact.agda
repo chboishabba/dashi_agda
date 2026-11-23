@@ -32,7 +32,7 @@ import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 import DASHI.Analysis.BishopOriginalEtaZetaEvenCutoffSeriesWeldExact as Weld
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopOriginalXiPolynomialReflectionSameCarrierExact as Xi
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Preserve both coordinates of the ORIGINAL Bishop setoid.
 complexAddBothCongruent :
@@ -168,7 +168,7 @@ originalEtaScaleToNativeZetaEvenCutoff terms s scale dyadic n =
 -- negative-log/exponential term family.  The source dyadic input
 -- remains independent and is NEVER inferred from a generic record.
 module OriginalRound11
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   module Selected = Eta.OriginalRound11DirichletEta inputs

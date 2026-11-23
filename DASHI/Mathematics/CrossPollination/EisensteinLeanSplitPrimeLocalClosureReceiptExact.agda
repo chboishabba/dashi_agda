@@ -42,7 +42,7 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanSplitPrimeLocalClosureRe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 
 record LeanSplitPrimeLocalClosureReceipt : Set where
   constructor lean-split-prime-local-closure-receipt

@@ -1,4 +1,4 @@
-module DASHI.Interop.LeanRound11MachinReplayEvidenceExact where
+module DASHI.Interop.LeanMachinReplayEvidenceExact where
 
 ------------------------------------------------------------------------
 -- EXACT-HEAD LEAN ROUTE-B REPLAY EVIDENCE SNAPSHOT

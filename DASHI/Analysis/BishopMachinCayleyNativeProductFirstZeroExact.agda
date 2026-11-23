@@ -29,16 +29,16 @@ import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NativeLog
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 open import Agda.Builtin.Nat using (Nat; suc)
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
-import DASHI.Foundations.BishopRound11SignedFactorialDegreeBinomialExact as Signed
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact as Signed
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as Cayley
 import DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact as First
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 originalNativeImaginaryExpProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Product.Round11ImaginaryExpMultiplicative inputs
 originalNativeImaginaryExpProduct inputs x y =
   C.≈C-sym
@@ -48,7 +48,7 @@ originalNativeImaginaryExpProduct inputs x y =
 -- No additional global sign, Pythagorean, quarter-angle, double-angle,
 -- complex product or first-zero assumptions.
 originalNativeFirstPositiveSineZeroFromCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Cayley.OriginalMachinCayleySameObjectEvaluation inputs →
   First.SourceMachinFirstPositiveSineZero inputs
 originalNativeFirstPositiveSineZeroFromCayley inputs cayleyEvaluation =
@@ -66,14 +66,14 @@ originalNativeFirstPositiveSineZeroFromCayley inputs cayleyEvaluation =
 ------------------------------------------------------------------------
 
 sourceRegionBaselFromNativeSignedFactorials :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   ((n : Nat) →
     R._≃_
       (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
       (NatReal.natReal (suc n))) →
   Uniform.RegionBaselDomination
     (Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate)
     Region.sourceAboveTwoRegion
 sourceRegionBaselFromNativeSignedFactorials inputs inverse =
@@ -90,11 +90,11 @@ sourceRegionBaselFromNativeSignedFactorials inputs inverse =
 ------------------------------------------------------------------------
 
 sourceRegionBaselFromOneNativeLogIdentity :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   NativeLog.OriginalBishopNegativeLogExponentialGap →
   Uniform.RegionBaselDomination
     (Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate)
     Region.sourceAboveTwoRegion
 sourceRegionBaselFromOneNativeLogIdentity inputs originalLogIdentity =

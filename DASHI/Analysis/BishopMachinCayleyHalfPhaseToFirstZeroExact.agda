@@ -39,30 +39,30 @@ import RealProperties as RP
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopSquareZeroReflectsSetoidZeroExact as SquareZero
 import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as CayleyBridge
 import DASHI.Foundations.BishopMachinExistingCayleyReuseExact as Cayley
 import DASHI.Analysis.BishopMachinPiGlobalSineSignFromTwoBallExact as Global
 import DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact as First
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- This is a concrete equality between the ACTUAL original Bishop
 -- signed-factorial exponential and the actual selected imaginary unit.
 -- It is not an abstract "Pi is the correct number" authority.
 OriginalMachinCayleyHalfPhase :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 OriginalMachinCayleyHalfPhase inputs =
   C._≈C_
     (C.expC
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       (C.pureImaginary Quad.twiceQuarter))
     C.imaginaryUnit
 
 sourceMachinHalfSineIsOneFromCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalMachinCayleyHalfPhase inputs →
   R._≃_
     (Quad.round11Sine inputs Quad.twiceQuarter)
@@ -72,14 +72,14 @@ sourceMachinHalfSineIsOneFromCayley inputs selectedCayley =
     (C.≈C-trans
       (C.≈C-sym
         (C.imaginaryExponentialIsPhase
-          (Route.round11MachinTranscendentals inputs)
+          (Route.machinTranscendentals inputs)
           Quad.twiceQuarter))
       selectedCayley)
 
 -- The original double-angle and Pythagorean laws come from ONE
 -- prior K05 product, not two additional trigonometric assumptions.
 sourceMachinSinDoubleIsOneFromCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   OriginalMachinCayleyHalfPhase inputs →
   R._≃_
@@ -113,7 +113,7 @@ differenceSquareAsUnitMinusSineDouble c s =
     RP.≃-refl c s
 
 sourceMachinQuarterDifferenceSquareZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   OriginalMachinCayleyHalfPhase inputs →
   let
@@ -148,7 +148,7 @@ sourceMachinQuarterDifferenceSquareZero inputs product halfPhase =
       oneMinusOneIsZero)
 
 sourceMachinQuarterEqualityFromCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   OriginalMachinCayleyHalfPhase inputs →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs)
@@ -175,7 +175,7 @@ sourceMachinQuarterEqualityFromCayley inputs product halfPhase =
 -- now takes exactly one source-specific Cayley half-phase equation,
 -- in addition to the common original K05 imaginary product.
 sourceMachinFirstPositiveZeroFromCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   OriginalMachinCayleyHalfPhase inputs →
   First.SourceMachinFirstPositiveSineZero inputs
@@ -193,17 +193,17 @@ sourceMachinFirstPositiveZeroFromCayley inputs product halfPhase =
 ------------------------------------------------------------------------
 
 OriginalMachinCayleySameObjectEvaluation :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 OriginalMachinCayleySameObjectEvaluation inputs =
   C._≈C_
     (C.expC
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       (C.pureImaginary Quad.twiceQuarter))
     (CayleyBridge.embedOriginalComplex
       Cayley.machinQuarterCayleyPhase)
 
 sourceMachinFirstPositiveZeroFromSameObjectCayley :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   OriginalMachinCayleySameObjectEvaluation inputs →
   First.SourceMachinFirstPositiveSineZero inputs

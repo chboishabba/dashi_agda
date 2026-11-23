@@ -33,8 +33,8 @@ import RealProperties as RP
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 machinHalfPhase : R.ℝ
 machinHalfPhase = Quad.twiceQuarter
@@ -49,7 +49,7 @@ doubleMachinHalfIsOriginalPi =
     Quarter.fourTimesQuarterIsMachinPi
 
 round11MachinHalfSineIsOne :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   R._≃_ (Quad.round11Sine inputs machinHalfPhase) R.1ℝ
@@ -66,7 +66,7 @@ round11MachinHalfSineIsOne inputs product quarterEqual =
         inputs product Quarter.machinQuarterAngle))
 
 round11MachinHalfCosineIsZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Product.Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   R._≃_ (Quad.round11Cos inputs machinHalfPhase) R.0ℝ

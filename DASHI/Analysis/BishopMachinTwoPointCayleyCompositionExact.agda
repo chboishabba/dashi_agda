@@ -42,8 +42,8 @@ import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as Parity
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 
 atanFive atan239 : R.ℝ
@@ -56,30 +56,30 @@ quadruple x = double (double x)
 octuple x = double (quadruple x)
 
 expImag :
-  Round11.Round11BishopCutset → R.ℝ → C.BishopComplex
+  Round11.BishopCutset → R.ℝ → C.BishopComplex
 expImag inputs x =
   C.expC
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     (C.pureImaginary x)
 
 -- Precisely the TWO original Bishop-power-series evaluations we
 -- must produce from the source arctan/log composition theorem.
 OriginalAtanFiveCayleyEvaluation :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 OriginalAtanFiveCayleyEvaluation inputs =
   C._≈C_
     (expImag inputs (double atanFive))
     (Bridge.embedOriginalComplex Cayley.fivePhase)
 
 OriginalAtan239CayleyEvaluation :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 OriginalAtan239CayleyEvaluation inputs =
   C._≈C_
     (expImag inputs (double atan239))
     (Bridge.embedOriginalComplex Cayley.twoHundredThirtyNinePhase)
 
 nativeExpImagProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x y : R.ℝ) →
   C._≈C_
     (expImag inputs (R._+_ x y))
@@ -91,7 +91,7 @@ nativeExpImagProduct inputs x y =
 -- supposed inverse-exponential law. The sine is odd, cosine even;
 -- exp_B(0) is the literal same factor on both sides.
 nativeExpImagNegateIsConjugate :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   C._≈C_
     (expImag inputs (R.-_ x))
@@ -115,7 +115,7 @@ nativeExpImagNegateIsConjugate inputs x =
 
 -- Native double composition; complex associativity is never assumed.
 nativeDoubleExp :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   C._≈C_
     (expImag inputs (double x))
@@ -125,7 +125,7 @@ nativeDoubleExp inputs x = nativeExpImagProduct inputs x x
 -- The previously selected rational multiplication is transported
 -- through original C._*C_ by the *existing* ring morphism.
 nativeFivePhaseSquared :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalAtanFiveCayleyEvaluation inputs →
   C._≈C_
     (expImag inputs (double (double atanFive)))
@@ -140,7 +140,7 @@ nativeFivePhaseSquared inputs fiveEvaluation =
           Cayley.fivePhase Cayley.fivePhase)))
 
 nativeFivePhaseFourth :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalAtanFiveCayleyEvaluation inputs →
   C._≈C_
     (expImag inputs (octuple atanFive))
@@ -157,7 +157,7 @@ nativeFivePhaseFourth inputs fiveEvaluation =
           Cayley.fivePhaseSquared Cayley.fivePhaseSquared)))
 
 native239ConjugatePhase :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalAtan239CayleyEvaluation inputs →
   C._≈C_
     (expImag inputs (R.-_ (double atan239)))
@@ -195,7 +195,7 @@ originalDoubleQuarterIsCayleyAngleSum =
 -- The remaining product, conjugation, and 8a-2b arithmetic are
 -- fully discharged in the selected Bishop complex.
 nativeCombinedCayleyFromTwoOriginalAtanValues :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalAtanFiveCayleyEvaluation inputs →
   OriginalAtan239CayleyEvaluation inputs →
   FirstFromCayley.OriginalMachinCayleySameObjectEvaluation inputs
@@ -203,7 +203,7 @@ nativeCombinedCayleyFromTwoOriginalAtanValues
     inputs fiveEvaluation twoHundredThirtyNineEvaluation =
   C.≈C-trans
     (C.expCongruent
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       (C.complex-equivalent
         RP.≃-refl
         originalDoubleQuarterIsCayleyAngleSum))
@@ -225,7 +225,7 @@ nativeCombinedCayleyFromTwoOriginalAtanValues
 -- The two precise pointwise source analytic identities are the
 -- *only* remaining mathematical K05-PI inputs.
 originalMachinFirstPositiveSineZeroFromTwoAtanCayleyValues :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   OriginalAtanFiveCayleyEvaluation inputs →
   OriginalAtan239CayleyEvaluation inputs →
   First.SourceMachinFirstPositiveSineZero inputs

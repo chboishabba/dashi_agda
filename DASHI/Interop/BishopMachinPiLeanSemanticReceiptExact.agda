@@ -12,9 +12,9 @@ module DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact where
 --     bishopMachinPi
 --
 -- Agda convergence receipts:
---   DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact
---     round11MachinAtanOneFifthConverges
---     round11MachinAtanOneTwoHundredThirtyNinthConverges
+--   DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact
+--     machinAtanOneFifthConverges
+--     machinAtanOneTwoHundredThirtyNinthConverges
 --
 -- Lean semantic compiler:
 --   chboishabba/dashi_lean4
@@ -83,8 +83,8 @@ currentBishopMachinPiLeanSemanticReceipt =
     "DASHI.Foundations.BishopMachinArctanConstructionExact.bishopAtanOneFifth"
     "DASHI.Foundations.BishopMachinArctanConstructionExact.bishopAtanOneTwoHundredThirtyNinth"
     "DASHI.Foundations.BishopMachinArctanConstructionExact.bishopMachinPi"
-    "DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact.round11MachinAtanOneFifthConverges"
-    "DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact.round11MachinAtanOneTwoHundredThirtyNinthConverges"
+    "DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact.machinAtanOneFifthConverges"
+    "DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact.machinAtanOneTwoHundredThirtyNinthConverges"
     true
     false
     false

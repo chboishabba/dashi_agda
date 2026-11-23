@@ -1,4 +1,4 @@
-module DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact where
+module DASHI.Analysis.BishopClassicalTrigObjectWeldExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
@@ -6,8 +6,8 @@ open import Agda.Builtin.String using (String)
 import Real as Bishop
 
 import DASHI.Analysis.SourceBackedTheoremTransportBidiExact as Transport
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
-import DASHI.Analysis.BishopRound11PowerSeriesDifferentiationSourceTransportExact as Diff
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopPowerSeriesDifferentiationSourceTransportExact as Diff
 import DASHI.Analysis.TrigonometricPythagoreanSourceAuthorityExact as PythSource
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 

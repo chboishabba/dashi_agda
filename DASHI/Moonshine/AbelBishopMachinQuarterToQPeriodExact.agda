@@ -18,8 +18,8 @@ import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Round11
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Cutset
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
 import DASHI.Moonshine.AbelBishopOriginalQParameterExact as Q
 
@@ -62,17 +62,17 @@ originalBishopTwoPiEqualsEightMachinQuarter =
     twiceFourQuarterIsEightQuarter
 
 originalRound11QPiIsActualMachin :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   Bishop._≃_
-    (Complex.pi (Round11.round11MachinTranscendentals inputs))
+    (Complex.pi (Round11.machinTranscendentals inputs))
     Machin.bishopMachinPi
 originalRound11QPiIsActualMachin inputs = BishopP.≃-refl
 
 originalRound11SelectedTwoPiIsEightMachinQuarter :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   Bishop._≃_
     (Bishop._*_ two
-      (Complex.pi (Round11.round11MachinTranscendentals inputs)))
+      (Complex.pi (Round11.machinTranscendentals inputs)))
     machinEightQuarter
 originalRound11SelectedTwoPiIsEightMachinQuarter inputs =
   BishopP.≃-trans
@@ -84,11 +84,11 @@ originalRound11SelectedTwoPiIsEightMachinQuarter inputs =
 -- Source ownership of q is unchanged: it is the real original expC
 -- selected at the same Round11 sine/cosine data and Bishop Machin pi.
 originalRound11QIsOriginalBishopExpression :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (tau : Complex.BishopComplex) →
   Complex._≈C_
     (Q.originalRound11MachinQAt inputs tau)
     (Q.originalBishopQAt
-      (Round11.round11MachinTranscendentals inputs) tau)
+      (Round11.machinTranscendentals inputs) tau)
 originalRound11QIsOriginalBishopExpression inputs tau =
   Complex.≈C-refl _

@@ -1,4 +1,4 @@
-module DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact where
+module DASHI.Interop.LeanMachinCanonicalRouteBParityExact where
 
 ------------------------------------------------------------------------
 -- LEAN ROUND11 / MACHIN CANONICAL ROUTE-B PARITY CAPSTONE

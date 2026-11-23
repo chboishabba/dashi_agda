@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact where
+module DASHI.Analysis.BishopConcreteAbsoluteSeriesConvergenceExact where
 
 ------------------------------------------------------------------------
 -- K05: ACTUAL ROUND11 ABSOLUTE SINE/COSINE CONVERGENCE.
@@ -27,7 +27,7 @@ import Sequence as Seq
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as Ext
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as T
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 concreteCosineAbsoluteTerms :
   R.ℝ → Nat → R.ℝ
@@ -40,7 +40,7 @@ concreteSineAbsoluteTerms x n =
   R.∣ T.sineSignedTerm x n ∣
 
 originalCosineAbsoluteTermEquivalent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -49,11 +49,11 @@ originalCosineAbsoluteTermEquivalent :
 originalCosineAbsoluteTermEquivalent inputs x n =
   RP.∣-∣-cong
     (T.cosineTermIsConcrete
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       x n)
 
 originalSineAbsoluteTermEquivalent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (n : Nat) →
   R._≃_
@@ -62,11 +62,11 @@ originalSineAbsoluteTermEquivalent :
 originalSineAbsoluteTermEquivalent inputs x n =
   RP.∣-∣-cong
     (T.sineTermIsConcrete
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       x n)
 
 concreteCosineAbsolutePartialEquivalent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (count : Nat) →
   R._≃_
@@ -80,7 +80,7 @@ concreteCosineAbsolutePartialEquivalent inputs x =
     (originalCosineAbsoluteTermEquivalent inputs x)
 
 concreteSineAbsolutePartialEquivalent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   (count : Nat) →
   R._≃_
@@ -97,7 +97,7 @@ concreteSineAbsolutePartialEquivalent inputs x =
 -- actual pinned Sequence convergence of the absolute term partials.
 -- The two target witnesses use the original source limit.
 round11ConcreteCosineAbsoluteConvergent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   Seq._isConvergent (Seq.SeriesOf (concreteCosineAbsoluteTerms x))
 round11ConcreteCosineAbsoluteConvergent inputs x =
@@ -112,7 +112,7 @@ round11ConcreteCosineAbsoluteConvergent inputs x =
     original
 
 round11ConcreteSineAbsoluteConvergent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   Seq._isConvergent (Seq.SeriesOf (concreteSineAbsoluteTerms x))
 round11ConcreteSineAbsoluteConvergent inputs x =

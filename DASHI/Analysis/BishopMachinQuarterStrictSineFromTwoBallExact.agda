@@ -33,7 +33,7 @@ import Real as R
 import RealProperties as RP
 
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 import DASHI.Physics.YangMills.BalabanBishopSineTwoBallCubicLowerExact as TwoBall
 import DASHI.Physics.YangMills.BalabanBishopOuterBrillouinSineGapExact as Outer
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
@@ -80,13 +80,13 @@ quarterInsideTwo =
     quarterBelowTwo
 
 quarterSignedSineInputs :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   TwoBall.ConcreteTwoBallSineInputs
     (Round11.elementarySeries inputs)
     Quarter.machinQuarterAngle
 quarterSignedSineInputs inputs = record
   { TwoBall.ConcreteTwoBallSineInputs.termIdentification =
-      Round11.round11ConcreteTermIdentification inputs
+      Round11.concreteTermIdentification inputs
   ; TwoBall.ConcreteTwoBallSineInputs.valueNonnegative =
       quarterNonnegative
   ; TwoBall.ConcreteTwoBallSineInputs.insideTwo =
@@ -94,7 +94,7 @@ quarterSignedSineInputs inputs = record
   }
 
 round11MachinQuarterSineAboveEightySevenOverOneTwentyEight :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R._≤_
     (Outer.embed Outer.lowerSine)
     (Elementary.bishopSin
@@ -106,7 +106,7 @@ round11MachinQuarterSineAboveEightySevenOverOneTwentyEight inputs =
     quarterBelowOuterUpper
 
 round11MachinQuarterSineStrictPositive :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R._<_
     R.0ℝ
     (Elementary.bishopSin

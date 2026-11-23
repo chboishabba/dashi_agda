@@ -7,8 +7,8 @@ import Real as Bishop
 
 import DASHI.Analysis.SourceBackedTheoremTransportBidiExact as Transport
 import DASHI.Analysis.ChangeOfVariablesMeasureSourceAuthorityExact as Source
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as TrigWeld
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Trig
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as TrigWeld
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Trig
 import DASHI.Physics.QuantumVacuum.BishopPolarJacobianSameTrigWeldCompilerExact as Jacobian
 
 ------------------------------------------------------------------------

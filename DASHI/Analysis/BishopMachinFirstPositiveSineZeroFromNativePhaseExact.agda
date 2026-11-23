@@ -34,8 +34,8 @@ import RealProperties as RP
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopMachinPiRationalWindowExact as Window
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
-import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 sourceMachinPiStrictPositive :
   R._<_ R.0ℝ Machin.bishopMachinPi
@@ -49,7 +49,7 @@ sourceMachinPiStrictPositive =
 -- Strict positivity of the ACTUAL Bishop sine power-series over the
 -- entire (0,pi_M) interval is the irreducible remaining sign theorem.
 NativeSinePositiveBeforeMachinPi :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 NativeSinePositiveBeforeMachinPi inputs =
   (x : R.ℝ) →
   R._<_ R.0ℝ x →
@@ -57,7 +57,7 @@ NativeSinePositiveBeforeMachinPi inputs =
   R._<_ R.0ℝ (Product.sinB inputs x)
 
 record SourceMachinFirstPositiveSineZero
-    (inputs : Round11.Round11BishopCutset) : Set where
+    (inputs : Round11.BishopCutset) : Set where
   constructor source-machin-first-positive-sine-zero
   field
     piPositive : R._<_ R.0ℝ Machin.bishopMachinPi
@@ -73,7 +73,7 @@ record SourceMachinFirstPositiveSineZero
 open SourceMachinFirstPositiveSineZero public
 
 nativeSineNoPriorZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   NativeSinePositiveBeforeMachinPi inputs →
   (x : R.ℝ) →
   R._<_ R.0ℝ x →
@@ -95,7 +95,7 @@ nativeSineNoPriorZero inputs sinePositive x xPositive xBeforePi sinZero =
   RP.<-irrefl RP.≃-refl impossible
 
 sourceMachinFirstSineZeroFromNativePhase :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Product.Round11ImaginaryExpMultiplicative inputs →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   NativeSinePositiveBeforeMachinPi inputs →

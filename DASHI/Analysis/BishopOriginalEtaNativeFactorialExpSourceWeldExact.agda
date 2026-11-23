@@ -37,8 +37,8 @@ import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 import DASHI.Analysis.BishopComplexExpFactEqualsNativeExpExact as ExpFact
 import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as Factorial
 import DASHI.Moonshine.AbelBishopOriginalComplexCarrierWeldExact as Weld
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- The first concrete missing bridge: the original Riemann eta source
 -- output is precisely the same native complex exponential as the
@@ -104,7 +104,7 @@ actualOriginalEtaTermFactorialSeriesConverges T logNat s n =
 -- family: consumes the real logarithm candidate actually constructed
 -- by the negative-log source and the existing Round11 Machin choice.
 module OriginalRound11
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   module Selected = Eta.OriginalRound11DirichletEta inputs
@@ -115,7 +115,7 @@ module OriginalRound11
     ≡
     Series.re
       (Weld.originalBishopExpOnSeries
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         (Series.complex
           (Analytic.re (Terms.bishopNegativeSLn
             Terms.sourceCanonicalNatLogCandidate s n))
@@ -123,7 +123,7 @@ module OriginalRound11
             Terms.sourceCanonicalNatLogCandidate s n))))
   originalRound11EtaTermIsNativeExpReal s n =
     actualOriginalEtaExponentialRealIsNativeFactorialLimit
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate s n
 
   -- Both genuine factorial-series component limits are now
@@ -153,5 +153,5 @@ module OriginalRound11
       (Analytic.im (Selected.sourceTerms s n))
   originalRound11EtaTermFactorialConvergence s n =
     actualOriginalEtaTermFactorialSeriesConverges
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate s n

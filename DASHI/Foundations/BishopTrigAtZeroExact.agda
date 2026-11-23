@@ -1,4 +1,4 @@
-module DASHI.Foundations.BishopRound11TrigAtZeroExact where
+module DASHI.Foundations.BishopTrigAtZeroExact where
 
 ------------------------------------------------------------------------
 -- K05 / K04d: NATIVE ROUND11 BISHOP SINE AND COSINE AT THE ORIGIN.
@@ -28,7 +28,7 @@ import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as Parity
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finite
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 zeroPowSuccessor : (n : Nat) →
   R._≃_ (R.pow R.0ℝ (suc n)) R.0ℝ
@@ -112,7 +112,7 @@ cosinePartialAtZero (suc count) =
     (RP.+-identityʳ R.1ℝ)
 
 round11SineAtZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R._≃_ (E.bishopSin (Round11.elementarySeries inputs) R.0ℝ) R.0ℝ
 round11SineAtZero inputs =
   Seq.uniqueness-of-limits
@@ -121,7 +121,7 @@ round11SineAtZero inputs =
       (λ {(suc n) → sinePartialAtZero (suc n)}))
 
 round11CosineAtZero :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R._≃_ (E.bishopCos (Round11.elementarySeries inputs) R.0ℝ) R.1ℝ
 round11CosineAtZero inputs =
   Seq.uniqueness-of-limits
@@ -139,14 +139,14 @@ round11CosineAtZero inputs =
 ------------------------------------------------------------------------
 
 private
-  sinB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+  sinB : Round11.BishopCutset → R.ℝ → R.ℝ
   sinB inputs = E.bishopSin (Round11.elementarySeries inputs)
 
-  cosB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+  cosB : Round11.BishopCutset → R.ℝ → R.ℝ
   cosB inputs = E.bishopCos (Round11.elementarySeries inputs)
 
 round11SineAdditionRightZero :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (sinB inputs (R._+_ x R.0ℝ))
     (R._+_
@@ -155,7 +155,7 @@ round11SineAdditionRightZero :
 round11SineAdditionRightZero inputs x =
   RP.≃-trans
     (TrigCong.bishopSinCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.+-identityʳ x))
     (RP.≃-symm
       (RP.≃-trans
@@ -169,7 +169,7 @@ round11SineAdditionRightZero inputs x =
            RP.≃-refl (sinB inputs x) (cosB inputs x))))
 
 round11CosineAdditionRightZero :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (cosB inputs (R._+_ x R.0ℝ))
     (R._-_
@@ -178,7 +178,7 @@ round11CosineAdditionRightZero :
 round11CosineAdditionRightZero inputs x =
   RP.≃-trans
     (TrigCong.bishopCosCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.+-identityʳ x))
     (RP.≃-symm
       (RP.≃-trans
@@ -193,7 +193,7 @@ round11CosineAdditionRightZero inputs x =
            RP.≃-refl (sinB inputs x) (cosB inputs x))))
 
 round11SineAdditionLeftZero :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (sinB inputs (R._+_ R.0ℝ x))
     (R._+_
@@ -202,7 +202,7 @@ round11SineAdditionLeftZero :
 round11SineAdditionLeftZero inputs x =
   RP.≃-trans
     (TrigCong.bishopSinCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.+-identityˡ x))
     (RP.≃-symm
       (RP.≃-trans
@@ -216,7 +216,7 @@ round11SineAdditionLeftZero inputs x =
            RP.≃-refl (sinB inputs x) (cosB inputs x))))
 
 round11CosineAdditionLeftZero :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (cosB inputs (R._+_ R.0ℝ x))
     (R._-_
@@ -225,7 +225,7 @@ round11CosineAdditionLeftZero :
 round11CosineAdditionLeftZero inputs x =
   RP.≃-trans
     (TrigCong.bishopCosCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.+-identityˡ x))
     (RP.≃-symm
       (RP.≃-trans
@@ -249,7 +249,7 @@ round11CosineAdditionLeftZero inputs x =
 ------------------------------------------------------------------------
 
 round11SineAdditionOpposite :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (sinB inputs (R._+_ x (R.- x)))
     (R._+_
@@ -259,7 +259,7 @@ round11SineAdditionOpposite inputs x =
   RP.≃-trans
     (RP.≃-trans
       (TrigCong.bishopSinCongruent
-        (Round11.round11ConcreteTermIdentification inputs)
+        (Round11.concreteTermIdentification inputs)
         (RP.+-inverseʳ x))
       (round11SineAtZero inputs))
     (RP.≃-symm
@@ -280,7 +280,7 @@ round11SineAdditionOpposite inputs x =
 -- is obtained from the SAME Round11 Pythagorean source statement.
 -- This is not a proof of Pythagorean or the full cosine addition law.
 round11CosineAdditionOppositeFromPythagorean :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (R._+_
       (R._*_ (cosB inputs x) (cosB inputs x))
@@ -296,7 +296,7 @@ round11CosineAdditionOppositeFromPythagorean
   RP.≃-trans
     (RP.≃-trans
       (TrigCong.bishopCosCongruent
-        (Round11.round11ConcreteTermIdentification inputs)
+        (Round11.concreteTermIdentification inputs)
         (RP.+-inverseʳ x))
       (round11CosineAtZero inputs))
     (RP.≃-symm
@@ -330,7 +330,7 @@ round11CosineAdditionOppositeFromPythagorean
 ------------------------------------------------------------------------
 
 round11PythagoreanFromCosineAdditionOpposite :
-  (inputs : Round11.Round11BishopCutset) (x : R.ℝ) →
+  (inputs : Round11.BishopCutset) (x : R.ℝ) →
   R._≃_
     (cosB inputs (R._+_ x (R.- x)))
     (R._-_
@@ -366,6 +366,6 @@ round11PythagoreanFromCosineAdditionOpposite
       (RP.≃-symm cosineAddOpposite)
       (RP.≃-trans
         (TrigCong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           (RP.+-inverseʳ x))
         (round11CosineAtZero inputs)))

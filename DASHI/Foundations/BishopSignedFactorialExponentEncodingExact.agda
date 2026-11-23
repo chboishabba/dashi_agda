@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Foundations.BishopRound11SignedFactorialExponentEncodingExact where
+module DASHI.Foundations.BishopSignedFactorialExponentEncodingExact where
 
 ------------------------------------------------------------------------
 -- K05 SIGNED SOURCE FACTORIAL ↔ EXISTING EXPONENTIAL COEFFICIENT.

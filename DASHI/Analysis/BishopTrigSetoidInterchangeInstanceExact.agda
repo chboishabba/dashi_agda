@@ -1,4 +1,4 @@
-module DASHI.Analysis.BishopRound11TrigSetoidInterchangeInstanceExact where
+module DASHI.Analysis.BishopTrigSetoidInterchangeInstanceExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat; suc)
@@ -14,7 +14,7 @@ import DASHI.Analysis.SetoidDerivativeLimitInterchangeBidiExact as Interchange
 import DASHI.Analysis.BishopConcreteSineCosineFiniteTermDerivativeExact as Finite
 import DASHI.Analysis.BishopConcreteTrigonometricDerivativeBidiExact as Concrete
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 ------------------------------------------------------------------------
 -- ROUND11 BISHOP TRIG -> GENERIC SETOID DERIVATIVE/LIMIT PROBLEM
@@ -73,7 +73,7 @@ open BishopTrigDerivativeSemantics public
 
 record Round11TrigInterchangeInstance : Set₁ where
   field
-    round11 : Round11.Round11BishopCutset
+    round11 : Round11.BishopCutset
     derivativeSemantics : BishopTrigDerivativeSemantics
 
     SineInterchangeControlAt : Bishop.ℝ → Set

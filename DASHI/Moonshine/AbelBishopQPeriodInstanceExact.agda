@@ -1,4 +1,4 @@
-module DASHI.Moonshine.AbelBishopRound11QPeriodInstanceExact where
+module DASHI.Moonshine.AbelBishopQPeriodInstanceExact where
 
 ------------------------------------------------------------------------
 -- SAME-SOURCE ORIGINAL ROUND11 q(τ) = exp_C(2π_M i τ).
@@ -21,7 +21,7 @@ import DASHI.Moonshine.AbelBishopOriginalQParameterExact as Q
 import DASHI.Moonshine.AbelBishopQSeriesSetoidPeriodTransportExact as Period
 import DASHI.Moonshine.JInvariantBishopUnitDiskEisensteinCompletionExact as Disk
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidSeriesExact as E
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Cutset
 
 originalBishopModularT :
   Series.BishopComplex → Series.BishopComplex
@@ -30,12 +30,12 @@ originalBishopModularT tau =
     (Exp._+C_ (Weld.toExponential tau) Exp.oneC)
 
 originalRound11Q :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   Series.BishopComplex → Series.BishopComplex
 originalRound11Q = Q.originalRound11MachinQAtForSeries
 
 originalRound11QPeriodSource :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (radius : Series.BishopComplex → Bishop.ℝ) →
   (diskEvidence : ∀ tau →
     Disk.BishopUnitDiskQ (originalRound11Q inputs tau) (radius tau)) →
@@ -55,7 +55,7 @@ originalRound11QPeriodSource inputs radius diskEvidence periodEvidence =
     }
 
 originalRound11E4TPeriod :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (radius : Series.BishopComplex → Bishop.ℝ) →
   (diskEvidence : ∀ tau →
     Disk.BishopUnitDiskQ (originalRound11Q inputs tau) (radius tau)) →
@@ -80,7 +80,7 @@ originalRound11E4TPeriod inputs radius diskEvidence periodEvidence tau =
     tau
 
 originalRound11E6TPeriod :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (radius : Series.BishopComplex → Bishop.ℝ) →
   (diskEvidence : ∀ tau →
     Disk.BishopUnitDiskQ (originalRound11Q inputs tau) (radius tau)) →

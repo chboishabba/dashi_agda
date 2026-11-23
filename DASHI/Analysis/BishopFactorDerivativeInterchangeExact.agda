@@ -1,4 +1,4 @@
-module DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact where
+module DASHI.Analysis.BishopFactorDerivativeInterchangeExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat; suc)
@@ -17,7 +17,7 @@ import DASHI.Analysis.SetoidDerivativeLimitInterchangeBidiExact as Interchange
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as Transport
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 ------------------------------------------------------------------------
 -- ROUND11 FACTOR-DERIVATIVE INTERCHANGE INSTANCE
@@ -34,7 +34,7 @@ import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 
 record Round11FactorInterchangeProblem : Set₁ where
   field
-    round11 : Round11.Round11BishopCutset
+    round11 : Round11.BishopCutset
 
     SineInterchangeControlAt : Bishop.ℝ → Set
     CosineInterchangeControlAt : Bishop.ℝ → Set
@@ -52,7 +52,7 @@ termIdentification :
   (P : Round11FactorInterchangeProblem) →
   Terms.ConcreteSineCosineTermIdentification (dataSet P)
 termIdentification P =
-  Round11.round11ConcreteTermIdentification (round11 P)
+  Round11.concreteTermIdentification (round11 P)
 
 concreteDerivativeProblem :
   Round11FactorInterchangeProblem →

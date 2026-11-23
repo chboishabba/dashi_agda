@@ -42,7 +42,7 @@ import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact as LeanParity
 import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact as DeltaIdentityReceipt
-import DASHI.Interop.Round11MachinLeanBindingManifestExact as ReplayManifest
+import DASHI.Interop.MachinLeanBindingManifestExact as ReplayManifest
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as EtaParity
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as EtaPhaseParity
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact as FinalMinCutParity

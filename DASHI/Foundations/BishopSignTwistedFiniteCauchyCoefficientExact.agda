@@ -33,7 +33,7 @@ import RealProperties as RP
 
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Term
-import DASHI.Foundations.BishopRound11SignedFactorialExponentEncodingExact as Encoding
+import DASHI.Foundations.BishopSignedFactorialExponentEncodingExact as Encoding
 
 module BishopSum = SemiringSum RP.+-*-semiring
 

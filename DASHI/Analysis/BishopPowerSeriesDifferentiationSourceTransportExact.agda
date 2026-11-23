@@ -1,11 +1,11 @@
-module DASHI.Analysis.BishopRound11PowerSeriesDifferentiationSourceTransportExact where
+module DASHI.Analysis.BishopPowerSeriesDifferentiationSourceTransportExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.SourceBackedTheoremTransportBidiExact as Transport
 import DASHI.Analysis.PowerSeriesTermwiseDifferentiationSourceAuthorityExact as Source
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
 
 ------------------------------------------------------------------------
 -- DLMF POWER-SERIES DIFFERENTIATION -> ROUND11 BISHOP FACTOR DERIVATIVE

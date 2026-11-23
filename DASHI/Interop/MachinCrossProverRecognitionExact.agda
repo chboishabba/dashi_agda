@@ -1,4 +1,4 @@
-module DASHI.Interop.Round11MachinCrossProverRecognitionExact where
+module DASHI.Interop.MachinCrossProverRecognitionExact where
 
 ------------------------------------------------------------------------
 -- ROUND11 / MACHIN CROSS-PROVER RECOGNITION FIREWALL
@@ -30,8 +30,8 @@ data ClaimOrigin : Set where
 bishopRepresentationOrigin : ClaimOrigin
 bishopRepresentationOrigin = vendoredExternalDependency
 
-round11MachinSourceReceiptOrigin : ClaimOrigin
-round11MachinSourceReceiptOrigin = agdaFormalReconstruction
+machinSourceReceiptOrigin : ClaimOrigin
+machinSourceReceiptOrigin = agdaFormalReconstruction
 
 canonicalLeanBindingOrigin : ClaimOrigin
 canonicalLeanBindingOrigin = leanFormalReconstruction

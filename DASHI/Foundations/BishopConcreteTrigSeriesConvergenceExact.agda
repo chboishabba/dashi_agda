@@ -22,23 +22,23 @@ import Sequence as BishopSequence
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as Transport
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 dataSet :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Elementary.BishopElementaryPowerSeriesData
 dataSet inputs = Round11.elementarySeries inputs
 
 termIdentification :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Terms.ConcreteSineCosineTermIdentification (dataSet inputs)
 termIdentification inputs =
-  Round11.round11ConcreteTermIdentification inputs
+  Round11.concreteTermIdentification inputs
 
 concreteSineSeriesConverges :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (point : BishopReal.ℝ) →
   BishopSequence._ConvergesTo_
     (BishopSequence.SeriesOf (Terms.sineSignedTerm point))
@@ -53,7 +53,7 @@ concreteSineSeriesConverges inputs point =
       point)
 
 concreteCosineSeriesConverges :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (point : BishopReal.ℝ) →
   BishopSequence._ConvergesTo_
     (BishopSequence.SeriesOf (Terms.cosineSignedTerm point))
@@ -68,7 +68,7 @@ concreteCosineSeriesConverges inputs point =
       point)
 
 record BishopConcreteTrigConvergenceReceipt
-    (inputs : Round11.Round11BishopCutset) : Set₁ where
+    (inputs : Round11.BishopCutset) : Set₁ where
   constructor bishop-concrete-trig-convergence-receipt
   field
     sine :
@@ -86,7 +86,7 @@ record BishopConcreteTrigConvergenceReceipt
 open BishopConcreteTrigConvergenceReceipt public
 
 canonicalBishopConcreteTrigConvergenceReceipt :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   BishopConcreteTrigConvergenceReceipt inputs
 canonicalBishopConcreteTrigConvergenceReceipt inputs =
   bishop-concrete-trig-convergence-receipt

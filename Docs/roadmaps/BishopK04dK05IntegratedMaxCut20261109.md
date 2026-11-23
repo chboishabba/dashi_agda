@@ -1310,7 +1310,7 @@ itself, not just rational-complex values:
 - `OriginalRound11DirichletEta.sourceTerms` is *literally*
   the same original `bishopDirichletExponentialTerm` from
   `BishopRiemannOriginalZetaAboveTwoExact`, configured with
-  original `round11MachinTranscendentals` and the original
+  original `machinTranscendentals` and the original
   `sourceCanonicalNatLogCandidate`.
 - `OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`
   inhabits the finite pairing for that actual native

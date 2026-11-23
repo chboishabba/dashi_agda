@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact where
+module DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact where
 
 ------------------------------------------------------------------------
 -- K04d / K05 SAME-OBJECT MAX-CUT REUSE.
@@ -36,25 +36,25 @@ import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
-import DASHI.Analysis.BishopRound11TrigModulusFromPythagoreanExact as Modulus
-import DASHI.Foundations.BishopRound11TrigAtZeroExact as Origin
+import DASHI.Analysis.BishopTrigModulusFromPythagoreanExact as Modulus
+import DASHI.Foundations.BishopTrigAtZeroExact as Origin
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- The Round11 zero-angle owner keeps these local abbreviations private.
 -- Give THIS source a transparent abbreviation of the same literal terms.
-sinB cosB : Round11.Round11BishopCutset → R.ℝ → R.ℝ
+sinB cosB : Round11.BishopCutset → R.ℝ → R.ℝ
 sinB inputs = E.bishopSin (Round11.elementarySeries inputs)
 cosB inputs = E.bishopCos (Round11.elementarySeries inputs)
 
 Round11ImaginaryExpMultiplicative :
-  Round11.Round11BishopCutset → Set
+  Round11.BishopCutset → Set
 Round11ImaginaryExpMultiplicative inputs =
   (x y : R.ℝ) →
-  let T = Route.round11MachinTranscendentals inputs
+  let T = Route.machinTranscendentals inputs
   in
   C._≈C_
     (C.expC T
@@ -66,7 +66,7 @@ Round11ImaginaryExpMultiplicative inputs =
 -- The true Pythagorean identity is DERIVED using only the
 -- anti-diagonal instance of the original source product.
 round11PythagoreanFromImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11ImaginaryExpMultiplicative inputs →
   (theta : R.ℝ) →
   let
@@ -80,14 +80,14 @@ round11PythagoreanFromImaginaryProduct inputs product theta =
   Origin.round11PythagoreanFromCosineAdditionOpposite inputs theta
     (proj₂
       (C.imaginaryExponentialProductGivesAddition
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         theta (R.- theta)
         (product theta (R.- theta))))
 
 -- The same ONE Cauchy-product obligation now produces the
 -- original Round11 phase magnitude bounds used by Dirichlet.
 round11ModulusFromImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11ImaginaryExpMultiplicative inputs →
   (theta : R.ℝ) →
   (R._≤_ (R.∣ cosB inputs theta ∣) R.1ℝ)
@@ -104,7 +104,7 @@ round11ModulusFromImaginaryProduct inputs product theta =
 --      yields full sine/cosine addition and the Pythagorean law.
 -- No THIRD trig-modulus or arbitrary-zeta authority is present.
 sourceRegionWideFromSingleImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   ((n : Nat) →
     R._≃_
       (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
@@ -112,7 +112,7 @@ sourceRegionWideFromSingleImaginaryProduct :
   Round11ImaginaryExpMultiplicative inputs →
   Uniform.RegionBaselDomination
     (Terms.bishopDirichletExponentialTerm
-      (Route.round11MachinTranscendentals inputs)
+      (Route.machinTranscendentals inputs)
       Terms.sourceCanonicalNatLogCandidate)
     Region.sourceAboveTwoRegion
 sourceRegionWideFromSingleImaginaryProduct inputs inverse product =
@@ -127,14 +127,14 @@ sourceRegionWideFromSingleImaginaryProduct inputs inverse product =
 ------------------------------------------------------------------------
 
 round11DoubleAngleFromImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11ImaginaryExpMultiplicative inputs →
   Quad.Round11BishopDoubleAngle inputs
 round11DoubleAngleFromImaginaryProduct inputs product = record
   { Quad.sineDouble = λ point →
       let
         laws = C.imaginaryExponentialProductGivesAddition
-          (Route.round11MachinTranscendentals inputs)
+          (Route.machinTranscendentals inputs)
           point point
           (product point point)
         sineAt = Quad.round11Sine inputs point
@@ -151,7 +151,7 @@ round11DoubleAngleFromImaginaryProduct inputs product = record
   ; Quad.cosineDouble = λ point →
       proj₂
         (C.imaginaryExponentialProductGivesAddition
-          (Route.round11MachinTranscendentals inputs)
+          (Route.machinTranscendentals inputs)
           point point
           (product point point))
   }
@@ -161,7 +161,7 @@ round11DoubleAngleFromImaginaryProduct inputs product = record
 -- separately owed atan/tan QUARTER semantic relation cos θ=sin θ.
 -- The Pythagorean is now DERIVED, not passed as a second hypothesis.
 round11MachinTrigEndpointFromImaginaryProduct :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Round11ImaginaryExpMultiplicative inputs) →
   R._≃_
     (Quad.quarterCos inputs)
@@ -191,7 +191,7 @@ round11MachinTrigEndpointFromImaginaryProduct
 ------------------------------------------------------------------------
 
 round11SineShiftByMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   (x : R.ℝ) →
@@ -205,7 +205,7 @@ round11SineShiftByMachinPi inputs product quarterEqual x =
         inputs product quarterEqual
     laws =
       C.imaginaryExponentialProductGivesAddition
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         x Machin.bishopMachinPi
         (product x Machin.bishopMachinPi)
   in
@@ -225,7 +225,7 @@ round11SineShiftByMachinPi inputs product quarterEqual x =
          (cosB inputs x)))
 
 round11CosineShiftByMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (product : Round11ImaginaryExpMultiplicative inputs) →
   R._≃_ (Quad.quarterCos inputs) (Quad.quarterSin inputs) →
   (x : R.ℝ) →
@@ -239,7 +239,7 @@ round11CosineShiftByMachinPi inputs product quarterEqual x =
         inputs product quarterEqual
     laws =
       C.imaginaryExponentialProductGivesAddition
-        (Route.round11MachinTranscendentals inputs)
+        (Route.machinTranscendentals inputs)
         x Machin.bishopMachinPi
         (product x Machin.bishopMachinPi)
   in

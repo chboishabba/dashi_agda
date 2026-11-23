@@ -3,7 +3,7 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorRec
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptExact as Receipt
 
 leanInertReceiptIsFormalReconstruction :

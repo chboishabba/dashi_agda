@@ -42,8 +42,8 @@ import DASHI.Analysis.BishopSequentialContinuityRingCompilerExact as Ring
 import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
 import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NatLog
 import DASHI.Foundations.BishopSquareNonnegativeExact as Square
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 bishopThree : R.ℝ
 bishopThree = R._⋆ (+ 3 / 1)
@@ -112,13 +112,13 @@ sourcePolynomialChartImagContinuous eta =
 ------------------------------------------------------------------------
 
 module OriginalNatLogPolynomialChart
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   (sourceLogIdentity : NatLog.OriginalBishopNegativeLogExponentialGap)
   (eta : R.ℝ)
   where
 
   sourceTerms = Terms.bishopDirichletExponentialTerm
-    (Route.round11MachinTranscendentals inputs)
+    (Route.machinTranscendentals inputs)
     Terms.sourceCanonicalNatLogCandidate
 
   sourceBasel =

@@ -1,4 +1,4 @@
-module DASHI.Moonshine.BishopRound11MachinEisensteinRouteBExact where
+module DASHI.Moonshine.BishopMachinEisensteinRouteBExact where
 
 ------------------------------------------------------------------------
 -- ACTUAL AGDA SOURCE CAPSTONE FOR ROUTE B
@@ -19,25 +19,25 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Source
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Source
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidFiniteQSeriesExact as Q
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 transcendentals :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Complex.BishopSetoidComplexTranscendentals
 transcendentals =
-  Source.round11MachinTranscendentals
+  Source.machinTranscendentals
 
 qOf :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Complex.BishopComplex →
   Complex.BishopComplex
 qOf inputs =
   Q.qOf (transcendentals inputs)
 
 e4Truncated :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Q.DivisorPowerKernel →
   Nat →
   Complex.BishopComplex →
@@ -46,7 +46,7 @@ e4Truncated inputs =
   Q.e4Truncated (transcendentals inputs)
 
 e6Truncated :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Q.DivisorPowerKernel →
   Nat →
   Complex.BishopComplex →
@@ -55,7 +55,7 @@ e6Truncated inputs =
   Q.e6Truncated (transcendentals inputs)
 
 discriminantNumeratorTruncated :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Q.DivisorPowerKernel →
   Nat →
   Complex.BishopComplex →
@@ -65,7 +65,7 @@ discriminantNumeratorTruncated inputs =
     (transcendentals inputs)
 
 normalizedDeltaTruncated :
-  Round11.Round11BishopCutset →
+  Round11.BishopCutset →
   Q.DivisorPowerKernel →
   Nat →
   Complex.BishopComplex →
@@ -75,7 +75,7 @@ normalizedDeltaTruncated inputs =
     (transcendentals inputs)
 
 qCongruent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   ∀ {left right} →
   Complex._≈C_ left right →
   Complex._≈C_
@@ -85,7 +85,7 @@ qCongruent inputs =
   Q.qOfCongruent (transcendentals inputs)
 
 e4Congruent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (kernel : Q.DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
@@ -97,7 +97,7 @@ e4Congruent inputs =
   Q.e4TruncatedCongruent (transcendentals inputs)
 
 e6Congruent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (kernel : Q.DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
@@ -109,7 +109,7 @@ e6Congruent inputs =
   Q.e6TruncatedCongruent (transcendentals inputs)
 
 discriminantNumeratorCongruent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (kernel : Q.DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
@@ -124,7 +124,7 @@ discriminantNumeratorCongruent inputs =
     (transcendentals inputs)
 
 normalizedDeltaCongruent :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (kernel : Q.DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
@@ -138,8 +138,8 @@ normalizedDeltaCongruent inputs =
   Q.normalizedDeltaTruncatedCongruent
     (transcendentals inputs)
 
-record Round11MachinEisensteinSourceReceipt
-    (inputs : Round11.Round11BishopCutset) : Set₁ where
+record MachinEisensteinSourceReceipt
+    (inputs : Round11.BishopCutset) : Set₁ where
   constructor round11-machin-eisenstein-source-receipt
   field
     sourceTranscendentals :
@@ -193,12 +193,12 @@ record Round11MachinEisensteinSourceReceipt
       normalizedDelta ≡
         normalizedDeltaTruncated inputs
 
-open Round11MachinEisensteinSourceReceipt public
+open MachinEisensteinSourceReceipt public
 
-canonicalRound11MachinEisensteinSourceReceipt :
-  (inputs : Round11.Round11BishopCutset) →
-  Round11MachinEisensteinSourceReceipt inputs
-canonicalRound11MachinEisensteinSourceReceipt inputs =
+canonicalMachinEisensteinSourceReceipt :
+  (inputs : Round11.BishopCutset) →
+  MachinEisensteinSourceReceipt inputs
+canonicalMachinEisensteinSourceReceipt inputs =
   round11-machin-eisenstein-source-receipt
     (transcendentals inputs)
     refl

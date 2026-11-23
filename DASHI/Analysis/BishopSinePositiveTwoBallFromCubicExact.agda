@@ -32,7 +32,7 @@ import RealProperties as RP
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
 import DASHI.Physics.YangMills.BalabanBishopSineTwoBallCubicLowerExact as Two
 import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Poly
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 square : R.ℝ → R.ℝ
 square x = R._*_ x x
@@ -124,7 +124,7 @@ cubicSineLowerFactors x =
     RP.≃-refl x
 
 round11SinePositiveOnStrictTwoBall :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   (x : R.ℝ) →
   R._<_ R.0ℝ x →
   R._≤_ (R.∣_∣ x) Two.bishopTwo →
@@ -139,7 +139,7 @@ round11SinePositiveOnStrictTwoBall inputs x xPos insideTwo =
         (Round11.elementarySeries inputs) x
     sourceInputs = record
       { Two.ConcreteTwoBallSineInputs.termIdentification =
-          Round11.round11ConcreteTermIdentification inputs
+          Round11.concreteTermIdentification inputs
       ; Two.ConcreteTwoBallSineInputs.valueNonnegative = xNN
       ; Two.ConcreteTwoBallSineInputs.insideTwo = insideTwo
       }

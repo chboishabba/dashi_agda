@@ -9962,3 +9962,10 @@ wide inventory found 3,388 live Agda filenames and 90 sibling Lean filenames
 with round-style labels outside generated/archive surfaces. The next batch is
 intentionally bounded and non-YM; long Physics and acquisition chains require
 curated semantic vocabularies before renaming.
+# Semantic naming batch 1 — Bishop/Machin Route-B (2026-11-23)
+
+Applied the first bounded non-YM migration after the Wilson pilot. The registry
+now has 87 explicit entries; Agda Bishop/Machin, Interop, analytic, foundation,
+and source-cutset module surfaces were renamed and 0 stale registry references
+remain. Lean mirrors are intentionally not changed in this batch. Full
+typechecking remains out of scope; structural validation passed.

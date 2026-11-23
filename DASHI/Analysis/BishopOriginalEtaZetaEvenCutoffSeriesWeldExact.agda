@@ -26,7 +26,7 @@ import Sequence as Sequence
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 -- Actual finite prefix, with the same terms and cutoff convention as
 -- the vendored Bishop Sequence.SeriesOf.
@@ -135,7 +135,7 @@ originalEtaAndEvenTermsIsNativeZetaPartial terms s n =
 -- Reuse the actual original Round11 native-exponential Dirichlet
 -- term family (whose chosen negative-log source remains genuine).
 module OriginalRound11
-  (inputs : Round11.Round11BishopCutset)
+  (inputs : Round11.BishopCutset)
   where
 
   module Selected = Eta.OriginalRound11DirichletEta inputs

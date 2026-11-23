@@ -29,9 +29,9 @@ import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Q
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as E
-import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
 two : R.ℝ
 two = R._⋆ (+ 2 / 1)
@@ -137,14 +137,14 @@ cosFourfoldIsMinusOneAtEqualUnitPhase x y equal unit =
 -- ACTUAL round11 trigonometric power-series functions and actual
 -- original Bishop Machin quarter-angle are the consumers.
 quarterSin quarterCos :
-  Round11.Round11BishopCutset → R.ℝ
+  Round11.BishopCutset → R.ℝ
 quarterSin inputs =
   E.bishopSin
-    (Complex.dataSet (Route.round11MachinTranscendentals inputs))
+    (Complex.dataSet (Route.machinTranscendentals inputs))
     Q.machinQuarterAngle
 quarterCos inputs =
   E.bishopCos
-    (Complex.dataSet (Route.round11MachinTranscendentals inputs))
+    (Complex.dataSet (Route.machinTranscendentals inputs))
     Q.machinQuarterAngle
 
 -- Constructive K05 reduction with no new postulate:
@@ -185,7 +185,7 @@ fourTimesQuarter =
   R._*_ (R._⋆ (+ 4 / 1)) Q.machinQuarterAngle
 
 round11Sine round11Cos :
-  Round11.Round11BishopCutset → R.ℝ → R.ℝ
+  Round11.BishopCutset → R.ℝ → R.ℝ
 round11Sine inputs =
   E.bishopSin (Round11.elementarySeries inputs)
 round11Cos inputs =
@@ -195,7 +195,7 @@ round11Cos inputs =
 -- independently; they are not exported as a postulate or smuggled into the
 -- original core. All other proof transport below is algebra/setoid.
 quarterSemanticBridgeToActualMachinPi :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   R._≃_ (quarterCos inputs) (quarterSin inputs) →
   R._≃_
     (R._+_
@@ -224,7 +224,7 @@ quarterSemanticBridgeToActualMachinPi
     actualSinTransport =
       RP.≃-symm
         (TrigCong.bishopSinCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           Q.fourTimesQuarterIsMachinPi)
     actualCosTransport :
       R._≃_
@@ -233,7 +233,7 @@ quarterSemanticBridgeToActualMachinPi
     actualCosTransport =
       RP.≃-symm
         (TrigCong.bishopCosCongruent
-          (Round11.round11ConcreteTermIdentification inputs)
+          (Round11.concreteTermIdentification inputs)
           Q.fourTimesQuarterIsMachinPi)
   in
   RP.≃-trans actualSinTransport
@@ -256,7 +256,7 @@ quarterSemanticBridgeToActualMachinPi
 ------------------------------------------------------------------------
 
 record Round11BishopDoubleAngle
-  (inputs : Round11.Round11BishopCutset) : Set where
+  (inputs : Round11.BishopCutset) : Set where
   field
     sineDouble :
       (point : R.ℝ) →
@@ -316,7 +316,7 @@ twiceTwiceIsFourTimesQuarter =
 -- same original Round11 series. Second path: canonical 4*theta.
 -- They commute through the Bishop real setoid and source congruence.
 actualSineFourfoldFromDouble :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11BishopDoubleAngle inputs →
   R._≃_
     (round11Sine inputs fourTimesQuarter)
@@ -324,7 +324,7 @@ actualSineFourfoldFromDouble :
 actualSineFourfoldFromDouble inputs law =
   RP.≃-trans
     (TrigCong.bishopSinCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.≃-symm twiceTwiceIsFourTimesQuarter))
     (RP.≃-trans
       (sineDouble law twiceQuarter)
@@ -333,7 +333,7 @@ actualSineFourfoldFromDouble inputs law =
         (sineDouble law Q.machinQuarterAngle)))
 
 actualCosineFourfoldFromDouble :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11BishopDoubleAngle inputs →
   R._≃_
     (round11Cos inputs fourTimesQuarter)
@@ -341,7 +341,7 @@ actualCosineFourfoldFromDouble :
 actualCosineFourfoldFromDouble inputs law =
   RP.≃-trans
     (TrigCong.bishopCosCongruent
-      (Round11.round11ConcreteTermIdentification inputs)
+      (Round11.concreteTermIdentification inputs)
       (RP.≃-symm twiceTwiceIsFourTimesQuarter))
     (RP.≃-trans
       (cosineDouble law twiceQuarter)
@@ -352,7 +352,7 @@ actualCosineFourfoldFromDouble inputs law =
 -- One exact shared double-angle law replaces TWO independent
 -- fourfold-angle analytic inputs in the K05 endpoint theorem.
 actualMachinTrigEndpointFromDoubleAngle :
-  (inputs : Round11.Round11BishopCutset) →
+  (inputs : Round11.BishopCutset) →
   Round11BishopDoubleAngle inputs →
   R._≃_ (quarterCos inputs) (quarterSin inputs) →
   R._≃_

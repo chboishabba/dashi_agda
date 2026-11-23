@@ -27,7 +27,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; mkℚ)
 import Data.Rational.Tactic.RingSolver as ℚRing
 import Relation.Binary.PropositionalEquality as Eq
 
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 
 ------------------------------------------------------------------------

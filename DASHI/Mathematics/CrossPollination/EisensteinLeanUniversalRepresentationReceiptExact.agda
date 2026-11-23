@@ -29,7 +29,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
-import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Interop.MachinCrossProverRecognitionExact as Attribution
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as Observer
 
 record LeanEisensteinFormalSourceReceipt : Set where

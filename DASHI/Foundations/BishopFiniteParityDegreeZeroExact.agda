@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Foundations.BishopRound11FiniteParityDegreeZeroExact where
+module DASHI.Foundations.BishopFiniteParityDegreeZeroExact where
 
 ------------------------------------------------------------------------
 -- K05 ORIGINAL FACTORIAL BINOMIAL DEGREE ZERO: BOTH COORDINATES.
@@ -27,8 +27,8 @@ import RealProperties as RP
 
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Terms
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
-import DASHI.Analysis.BishopRound11NativeComplexRectangleExact as Round11
-import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
+import DASHI.Analysis.BishopNativeComplexRectangleExact as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Cutset
 import DASHI.Foundations.BishopGroupedCauchyParityTelescopeExact as Telescope
 
 cosineFirstOriginalFactorial :
@@ -109,7 +109,7 @@ sineCosineFirstCoefficient x y =
       (RP.*-identityʳ x))
 
 originalEvenFactorialBinomialDegreeZero :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   R._≃_
     (R._-_
@@ -130,7 +130,7 @@ originalEvenFactorialBinomialDegreeZero inputs x y =
       (RP.≃-symm (cosineFirstOriginalFactorial (R._+_ x y))))
 
 originalOddFactorialBinomialDegreeZero :
-  (inputs : Cutset.Round11BishopCutset) →
+  (inputs : Cutset.BishopCutset) →
   (x y : R.ℝ) →
   R._≃_
     (R._+_

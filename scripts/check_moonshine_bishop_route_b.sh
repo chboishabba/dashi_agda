@@ -19,8 +19,8 @@ check_agda DASHI/Moonshine/JInvariantEisensteinBishopSetoidFiniteQSeriesExact.ag
 check_agda DASHI/Moonshine/JInvariantEisensteinBishopSetoidExtractionExact.agda
 check_agda DASHI/Moonshine/BishopRound11MachinEisensteinRouteBExact.agda
 check_agda DASHI/Interop/BishopRound11MachinBindingManifestExact.agda
-check_agda DASHI/Interop/Round11MachinLeanBindingManifestExact.agda
-check_agda DASHI/Interop/Round11MachinCrossProverRecognitionExact.agda
+check_agda DASHI/Interop/MachinLeanBindingManifestExact.agda
+check_agda DASHI/Interop/MachinCrossProverRecognitionExact.agda
 check_agda DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda
 check_agda DASHI/Moonshine/EisensteinBishopRouteBCurrentFrontierExact.agda
 check_agda DASHI/Moonshine/EisensteinConvergenceEndgameCutsetExact.agda
@@ -40,7 +40,7 @@ grep -q 'mappedRouteIndependentOfReplayBindingIsTrue'   DASHI/Interop/LeanBishop
 grep -q 'generatedAgdaReplayObservedIsFalse'   DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda
 
 grep -q 'actualCrossProverReplayObserved : Bool' \
-  DASHI/Interop/Round11MachinCrossProverRecognitionExact.agda
+  DASHI/Interop/MachinCrossProverRecognitionExact.agda
 
 grep -q 'actualAgdaRound11MachinBindingInLean : Bool' \
   DASHI/Moonshine/EisensteinConvergenceEndgameCutsetExact.agda

@@ -5602,3 +5602,10 @@ in Physics/NSBControl but also present in Moonshine, Culture, Education,
 Biology, Analysis, Governance, and Integration. Added
 `Docs/SemanticNamingInventory20261123.md`; the next implementation batch will
 use a curated non-YM family registry rather than unsafe global number stripping.
+# 2026-11-23 — Bishop/Machin semantic naming batch
+
+Applied the bounded non-YM Bishop/Machin Route-B batch through the explicit
+semantic registry. Renamed active Agda module and declaration surfaces across
+Moonshine, Interop, Analysis, Foundations, Geometry, and the Bishop source
+cutset consumers. The registry checker reports zero stale references. Lean
+mirrors remain for the next language-aware batch; no full typecheck was run.
