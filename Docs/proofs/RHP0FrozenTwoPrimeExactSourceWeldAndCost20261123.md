@@ -149,3 +149,35 @@ This is an explicit **mathematical C∞ construction** of the two independent ei
 **Acceptance:** Independently executed exact SymPy `scripts/check_rh_p0_exact_differential_annihilator_20261123.py` passed the even/monic/degree52 factors, all Fourier-polynomial root annihilations, the ±1/2 exponential pole modes, 52-jet values and the formal-adjoint identity. **Exact locally executed Git blob d06af1995d8b4f0e579122a31036e78db74a893e read back identical from PR #1533.** The source-construction strategy is also attached as a marked **non-kernel note** to Lean PR #116.
 
 **Non-promotion:** This pays **E0 mathematical existence**, not **E0 Lean kernel inhabitation** or E2. The 52nd derivative raises severe source-specific smoothness costs: operator coefficients depend on t and r, the normalized v=r u support moves to O(t), and all sixth/eighth/Schwartz and full far-tail budgets must be redone. The current original `quarticSignedPoleExplicitK0` is NOT valid for this extension, and the old `combinedCluster_eq_offGamma` cannot be used after prime support opens. An order-8 variable-coefficient Wronskian adjoint, or a lower-norm finite projection, might be cheaper, but requires separate boundedness and possible Wronskian-zero controls; do not promote this possibility as proven. An independent strict signed RH bound remains E3.
+
+
+## 8. E0 exact finite target-stability amplitude threshold (no handwaving around a→0)
+
+For each ORIGINAL selected high W whose `8/t<eps` target band covers `0<|a|≤1/2`, set
+
+    m_W := inf_{0<|a|≤1/2} d_W(a)/a^4.
+
+The signed original projective moments M0,M2 are exactly zero, M4 is negative; therefore `d_W(a)/a^4` extends continuously to a=0 with **positive** limit `T_W/(24*(t/16)^6)`. Since `d_W(a)>0` over the entire punctured physical critical strip for this W, compactness gives `m_W>0`. This is at EACH fixed t/W; no uniform-in-t floor is asserted.
+
+For each independent normalized prime port `h_i` from the 52nd-order annihilator, let `P_i(u)` be the actual original signed-projective PHYSICAL profile variation induced by its endpoint and original fixed source pole coefficients. All even moments through k=8 of `P_i` vanish exactly by the construction and the frozen on-line columns. Set
+
+    C_i(t,W):=(1/(4*10!))∫_R |P_i(u)| |u|^10 cosh(|u|/2)du <∞.
+
+The exact even Taylor tail inequality
+
+    |cosh(x)-Σ_(j=0)^4 x^(2j)/(2j)!|
+      ≤ |x|^10 cosh(|x|)/(10!)
+
+follows by comparing `(2n+10)!≥10! (2n)!` term by term; no derivative-near-zero quotient is needed. Hence for `|a|≤1/2`,
+
+    |d_(W+Σeps_i h_i)(a)-d_W(a)|
+      ≤ |a|^10 Σ_i |eps_i| C_i
+      ≤ (a^4/64) Σ_i |eps_i| C_i.
+
+The **concrete exact amplitude admission condition**
+
+    *** Σ_i |eps_i| C_i(t,W) < 64*m_W(t) ***
+
+therefore forces `d_extended(a)≥a^4*(m_W-Σ|eps_i|C_i/64)>0` for EVERY `0<|a|≤1/2`. This is stronger than simply asserting “sufficiently small amplitudes”: it specifies the exact source integral norm, the same physical a range, the correct r^-6 fourth-moment scaling and the required strict inequality. The positivity gate is mathematical; it is NOT a Lean high-derivative carrier theorem, a uniform-in-t estimate, or the actual P0 signed total bound. The revised **byte-identical locally executed** SymPy acceptance is `scripts/check_rh_p0_exact_differential_annihilator_20261123.py` Git blob `40657a85f82df507e73dd4869139cb6ad78fdaea`.
+
+The Lean draft PR #116 now also includes a true algebraic even pole annihilator **symbol** with theorem bodies and `QuarticFourFrozenPrimeAperture.signedMoment_eq_original` for k=2/4/6/8. That is not the full formal 52-fold integration-by-parts/jet constructor, which remains a real proof-attachment obligation. E2 still has to bound the enormous/possibly t-dependent C_i, the independent far/Schwartz and post-sixth costs; E3 is the independent strict complete arithmetic/zero/Gamma inequality.
