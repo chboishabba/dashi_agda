@@ -89,14 +89,13 @@ def test():
     assert [S.factor(t) for t in (H.T*H).inv()*H.T*H*S.Matrix([u,v])]==[u,v]
     g,k=S.symbols('g k',nonzero=True)
     assert S.simplify(g*u-(g/k)*(k*u))==0
-    # Zero terminal admittance is an exact negative control: incoming can
-    # still excite internal fields, while useful terminal work vanishes.
+    # The terminal-load-positive control does not test the G=0 topology.
     assert G_TERMINAL>0 and total['terminal']>0
     return dict(status='PASS',scope='EXACT_SYNTHETIC_MATCHED_WAVE_PORT_NO_FIELD_CALIBRATION',
         sympy=S.__version__,cells=2,steps=len(ledger),characteristic_impedance=str(Z),
         admittance=str(Y),terminal_conductance=str(G_TERMINAL),
         per_step_ADE_energy_zero=True,per_step_wave_port_identity_zero=True,
-        per_step_decomposed_energy_zero=True,full_cycle_energy_zero=True,
+        per_step_decomposed_energy_zero=True,four_step_energy_zero=True,
         source_rank=int(H.rank()),collinear_rank=1,exact_inverse=True,
         zero_source_zero_state=True,full_state_restored=False,
         totals={k:str(v) for k,v in total.items()},
