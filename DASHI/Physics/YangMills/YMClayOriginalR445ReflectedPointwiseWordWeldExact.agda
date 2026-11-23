@@ -41,8 +41,6 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact 
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as Word
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
 import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as Geometry
-import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as OriginalReversal
-import DASHI.Physics.YangMills.YMClayNativeSideFourTwoLinkPairSameObjectExact as OriginalPair
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -248,33 +246,96 @@ module _
       (originalFinitePlaquetteWord word)
 
 
-  -- REUSE ORIGINAL #1444/MASTER EXACT NATIVE THEOREM:
-  -- The non-Abelian inverse-of-two-link product was already proved
-  -- in YMClayNativeR445TemporalReversalExact. Do not restate the
-  -- algebra or claim the original site-reflection index map follows
-  -- from it automatically.
-  original1444SUNReversedTwoLinkIsInverseNativeBlock :
-    (fine : FineLinks) (bond : Torus.PositiveBond 2) →
+  -- Pure original noncommutative two-link inversion. This is a valid
+  -- symbolic identity for ANY original ExactLinkGroup, no commuting.
+  reverseOriginalTwoLink :
+    (u v : Link) →
     Bond.multiply originalGroup
-      (Bond.inverse originalGroup
-        (fine (OriginalPair.originalSecondFineBond originalGroup bond)))
-      (Bond.inverse originalGroup
-        (fine (OriginalPair.originalFirstFineBond originalGroup bond)))
+      (Bond.inverse originalGroup v)
+      (Bond.multiply originalGroup
+        (Bond.inverse originalGroup u)
+        (Bond.identity originalGroup))
     ≡
     Bond.inverse originalGroup
-      (originalSourceR445Block fine bond)
-  original1444SUNReversedTwoLinkIsInverseNativeBlock fine bond =
-    OriginalReversal.originalSUNTimeReversalTwoLink
-      theory fine bond
+      (Bond.multiply originalGroup u
+        (Bond.multiply originalGroup v
+          (Bond.identity originalGroup)))
+  reverseOriginalTwoLink u v =
+    trans
+      (cong
+        (Bond.multiply originalGroup (Bond.inverse originalGroup v))
+        (Bond.identityRight originalGroup (Bond.inverse originalGroup u)))
+      (sym
+        (trans
+          (cong (Bond.inverse originalGroup)
+            (cong (Bond.multiply originalGroup u)
+              (Bond.identityRight originalGroup v)))
+          (Bond.inverseProduct originalGroup u v)))
 
-  -- The NEW geometry payment is only the native index identification:
-  -- B(reflectField fine) equals reflectCoarse(B fine) at each actual
-  -- coarse bond, using OriginalPair's first/second original native
-  -- bond coordinates and the geometry module's selected site mirror.
-  -- After this is kernel-checked, it can feed the ORIGINAL existing
-  -- pointwise Wilson word/measure transport below.
-  -- The proof is not supplied by an arbitrary choice of reflection
-  -- plane; it must be constructed from the original Fin combine codec.
+  sourceReflectedCoarsePredecessor :
+    Geometry.CoarseSite → Geometry.CoarseSite
+  sourceReflectedCoarsePredecessor site =
+    Bond.negativeStep (Geometry.reflectCoarseSite site) Torus.zeroᵢ
+
+  sourceBackwardTimeFirst : FineLinks → Geometry.CoarseSite → Link
+  sourceBackwardTimeFirst fine site =
+    fine
+      (Torus.pair
+        (Geometry.evenCoarseOrigin
+          (sourceReflectedCoarsePredecessor site))
+        Torus.zeroᵢ)
+
+  sourceBackwardTimeSecond : FineLinks → Geometry.CoarseSite → Link
+  sourceBackwardTimeSecond fine site =
+    fine
+      (Torus.pair
+        (Bond.positiveStep
+          (Geometry.evenCoarseOrigin
+            (sourceReflectedCoarsePredecessor site))
+          Torus.zeroᵢ)
+        Torus.zeroᵢ)
+
+  -- Candidate exact-source 8-case bond theorem, using 16-case
+  -- ORIGINAL Fin.combine even-origin normal form from Geometry.
+  -- Spatial cases are definitional after that rewrite; time cases
+  -- are ONLY the original group inverse-of-ordered-product law.
+  -- This proof candidate has NO postulates or placeholders.
+  -- Agda typecheck is REQUIRED before marking the P0/F0 gate closed.
+  originalNativeReflectionAtEveryBond :
+    NativeR445ReflectionPointwise
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) Torus.zeroᵢ)
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z))
+          | Geometry.originalR445NativeOriginIsEven originalGroup
+              (sourceReflectedCoarsePredecessor (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z))) =
+    reverseOriginalTwoLink
+      (sourceBackwardTimeFirst fine (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)))
+      (sourceBackwardTimeSecond fine (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)))
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ Torus.zeroᵢ))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) Torus.zeroᵢ)
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z))
+          | Geometry.originalR445NativeOriginIsEven originalGroup
+              (sourceReflectedCoarsePredecessor (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z))) =
+    reverseOriginalTwoLink
+      (sourceBackwardTimeFirst fine (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)))
+      (sourceBackwardTimeSecond fine (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)))
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ Torus.zeroᵢ))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
+
 
   -- Reuse, rather than postulate, the original prior-owner SU(N) matrix
   -- trace-inverse contract when the actual Hermitian-adjoint trace law

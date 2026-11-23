@@ -40,15 +40,14 @@ for token in [
     "dashi.bh4-phase4-maxcut-run.v8",
 ]:
     assert token in run_text, f"missing runner ranking token: {token}"
-assert "dashi.bh4-phase4-maxcut-run.v5" in run_text or "dashi.bh4-phase4-maxcut-run.v6" in run_text, "missing runner schema v5/v6 token"
 
 for token in [
     "sabioKineticParameterCount",
     "sabioMappedParameterCandidates",
     "sabioFiniteReactionCandidateCoverage",
+    "rankSABIOCandidatesByFluxRelevance",
 ]:
     assert token in roadmap_text, f"missing roadmap ranking token: {token}"
-assert "fluxCandidateRankingToolReady" in roadmap_text or "rankSABIOCandidatesByFluxRelevance" in roadmap_text, "missing roadmap ranking token"
 
 for token in ["932", "875", "10", "RHEA:11920", "RHEA:19897"]:
     assert token in receipt_text, f"missing executed adjudication receipt token: {token}"

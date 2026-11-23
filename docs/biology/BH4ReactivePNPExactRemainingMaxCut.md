@@ -1,5 +1,9 @@
 # BH4 / 369 reactive-PNP: canonical exact maximum cut (2026-11-09)
 
+## Adjacent stimulant-response observer cut — 2026-11-20
+
+See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md) for the new finite pool/synthesis non-identifiability countermodel, attribution firewall and S1–S5 observer roadmap. This does not close or reorder the source-paid reactive-PNP P0–P3 gates; source-written only until exact-head Agda acceptance.
+
 ## Latest execution and implementation receipts (2026-11-09)
 
 - **Repository commits:** `scripts/reactive_pnp_369.py` and `scripts/test_reactive_pnp_369.py` are now present on this BH4 branch, explicitly labeled assistant-authored implementation assistance of prior PNP/SG methods on user-origin DASHI geometry; they are not physiology or Golden proof. Two additional regression declarations stress a purely synthetic 27×29/12 size analogue: `test_synthetic_29_species_12_reaction_instantaneous_dissipation` and `test_sg_per_edge_electrochemical_dissipation_sign`. Local execution of the same source/test bodies: **8/8 PNP tests passed**; 6 original plus 2 added. No original Rhea species or measured rates are used by those stress cases.
