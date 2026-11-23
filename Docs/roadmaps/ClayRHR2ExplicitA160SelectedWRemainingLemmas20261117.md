@@ -1,3 +1,13 @@
+## RH CLAY P0 — priority correction: only final mathematical theorem is mandatory (23 Nov 2026)
+
+[Exact original-source requirement/negative-control ledger](../proofs/RHClayP0StrictNecessityAndOriginalKernelAdmission20261123.md). The \(27=1+26\) punctured-trit, \(52=2×26\) analytic envelope, dyadic 32768 and 1024, 208, 4E_j, and improved flat-top E2 heights are **optional original-detector engineering**, NOT Clay RH axioms or compulsory proof sublemmas. Do NOT continue those numerical coincidences as P0 unless they discharge the actual strict signed terminal.
+
+**P0A priority:** Verify original author-sourced all-character/RH candidate `chboishabba/riemann-hypothesis-lean@7cbf7a0c`, whose pinned `Main` and `Statements` blobs were independently matched. Reuse already-merged `dashi_lean4` PR #113 `proofs/alpoge-lean433/check_original_p0_admission.sh` with the original Lean v4.33.1 and exact Mathlib; kernel/axiom receipt still not run in this turn. Native DASHI root v4.28.0 only takes `RiemannHypothesis` as an imported proof parameter, not an actual cross-version proof. Do not conflate source pin and theorem admission.
+
+**P0B alternative:** original `Cutset.two_target_le_combinedCluster` and FourierTerminal local slack give `D≥2d,\ S≥0`; the desired `2D+S<4d` is a genuinely independent mathematical hypothesis, not established by same-source identities or aperture coefficient reductions. Must prove from new zeta-specific bounds or stop independent detector avenue. Full E2 FarExact/post-sixth original actual-zero/Gamma and E3 independent strict sign open. RH and GRH open; no CI.
+
+---
+
 ## 23 Nov 2026 — R2 canonical H_X & q=16 Gamma crossing, 163840 BIDI, native H6 sign laws
 
 [Source complete new P0 ledger](../proofs/RHQuartic163840G2AnalyticDyadicHeisenbergP0MaxCut20261123.md). Existing `RiemannG2CanonicalHXToHTCompilerExact` is reused, not re-proved, but remains conditional on `CanonicalCharacterAttachment` for literal original W. Local SymPy proved general exp translation and real-even cos shift; mpmath tested Γ full bilateral integral across q≈16 stress fixture with residual ~1.23e−32 (NOT selected W). Four actual ζ-zero ordinate finite samples changed under phase shift; zero-side full original formula still requires separate theorem. Seven even cosine multipliers commute and retain original origin mass but shift P_W''/G_W: not C₂ nor guaranteed original selected witness. The exact physical C₂⁷ realization through compensated amplitude is a gauge and leaves Ψ/zeros/Gamma unchanged.
