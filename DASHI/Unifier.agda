@@ -1,6 +1,8 @@
 module DASHI.Unifier where
 -- RH source-aligned coefficient gluing: positive normalization only, not RH/Monster promotion.
 import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
+-- Finite C2-equivariant source-carrier map; NOT a Monster-group or RH-zero action.
+import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as RH128C2
 
 import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityOwner
