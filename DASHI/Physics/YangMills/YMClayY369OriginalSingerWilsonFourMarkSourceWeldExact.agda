@@ -288,8 +288,9 @@ module _
       (λ original →
         originalIndexedWilsonWeight t k original *ℝ
         mark (recoverCanonicalFromIndexed t k original))
-      (λ original →
-        actualOriginalWilsonWeight original *ℝ mark original)
+      (Mark.originalMarkedWilsonWeight
+        theory traceData exponential beta source
+        (originalSortedPullbackMark mark))
       (λ original →
         cong₂ _*ℝ_
           (originalWilsonActionDensityIndexedEqualsOriginal t k original)
