@@ -162,5 +162,13 @@
     "max_U_diode_guard_integer_grid": "-6479824506135607551628",
     "min_V_diode_guard_integer_grid": "110785166541520070171",
     "four_remaining_witnesses": "J24 boxes third through sixth not certified; fourth through sixth guard roots still open"
+  },
+  "independent_sympy_saltation": {
+    "script": "scripts/check_smith_filsinger_j28_saltation_sympy_20261123.py",
+    "git_blob": "5a6939966020f1be888448744e54c355a6ee6676",
+    "local_execution": "PASS",
+    "symbolic_9x9_rank_one_identity": true,
+    "determinant_post_over_pre": true,
+    "CI": false
   }
 }
