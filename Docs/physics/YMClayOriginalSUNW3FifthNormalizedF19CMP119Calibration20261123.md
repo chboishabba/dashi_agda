@@ -89,12 +89,12 @@ U_F=v_N(3+2M^4+3M^8)=U_G (from the exact 3/2/3 native section attachment counts)
 Each raw column contains both source/vacuum and marked score terms. Their exact normalized combination is
 
 \[
-\boxed{\frac{\delta D_5-\delta B_5-\delta C_5+
-(1-\Gamma_0)\delta A_5}{A_0}
+\boxed{\delta D_5-\delta B_5-\delta C_5+
+(1-\Gamma_0)\delta A_5
 =\beta^5v_N^4[24v_NM'M^7+8h_NM^8].}
 \]
 
-Here delta symbols represent *normalized by the common A0* source-relative cube additions (thus A0 is set to 1 in the displayed P expressions); the first displayed general four-column formula retains the original unnormalized A0 explicitly. Unknown common vacuum fifth-order contributions cancel identically. The same cancellation holds with arbitrary common vacuum terms through order four.
+Here delta symbols are the source-relative fifth-order cube additions **already divided by A0**; hence their boxed combination has no further division by A0. The earlier general four-column formula uses unnormalized Taylor columns and correctly retains division by A0. Unknown common vacuum fifth-order contributions cancel identically. The same cancellation holds with arbitrary common vacuum terms through order four.
 
 **Group calibration:** SU2 is (3/128) beta^5 M'M^7; SU3 is beta^5 M^7(M+18M')/1417176. Strictly positive for finite beta>0, SU(N), N>=2. Exactly 5! multiplies the Taylor coefficient to give the fifth restoration derivative's exterior part.
 
