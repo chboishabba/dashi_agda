@@ -301,3 +301,76 @@ module _
 
   -- No sourceKF*sourceKG/sourceK0 shortcut: sourceKFG retains the
   -- original fine-fibre mixed coefficient, including 896 spectators.
+
+
+  ----------------------------------------------------------------------
+  -- W0 PHYSICAL CHANGE-OF-AVERAGING TEST: Q NEED NOT EQUAL PAIR W.
+  --
+  -- CMP98's nonlinear, transported-contour block average Q(U) and
+  -- the straight original R445 pair holonomy W(U) are different
+  -- functions in general. F19 is an arbitrary-integrand theorem:
+  -- carry any selected Q(pairs,spectators) THROUGH the ORIGINAL
+  -- 64 native-pair and 896 spectator Haar disintegration.
+  --
+  -- The parameter "average" is a real original fine-field function;
+  -- supplying CMP98's literal Q and its domain/gauge constraints is
+  -- a further named source identification, not silently assumed here.
+  ----------------------------------------------------------------------
+
+  sourceAverageObservable :
+    (FinePairField → Vec Link 896 → SlowField) →
+    (SlowField → ℝ) →
+    FineTest
+  sourceAverageObservable average observable pairs spectators =
+    observable (average pairs spectators)
+
+  -- 1 marked Q-observable, ONE fixed original physical Wilson weight.
+  -- No Q=W premise, nor a change of variable on coarse W whose
+  -- Jacobian is presumed to be unity.
+  originalWilsonAverageMarkedNumeratorEqualsOriginalF19 :
+    (average : FinePairField → Vec Link 896 → SlowField)
+    (observable : SlowField → ℝ) →
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear
+        (sourceAverageObservable average observable))
+    ≡
+    Haar.productIntegral source
+      (sourceFixedWilsonT
+        (sourceAverageObservable average observable))
+  originalWilsonAverageMarkedNumeratorEqualsOriginalF19
+    average observable =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear
+        (sourceAverageObservable average observable))
+
+  -- Two marked Q-observables; their product is inside the SAME
+  -- physical conditional fibre, including all interacting spectators.
+  originalWilsonTwoAverageMarksEqualsOriginalF19 :
+    (average : FinePairField → Vec Link 896 → SlowField)
+    (left right : SlowField → ℝ) →
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalWilsonFineFG
+        theory traceData exponential beta source bilateral linear
+        (sourceAverageObservable average left)
+        (sourceAverageObservable average right))
+    ≡
+    Haar.productIntegral source
+      (sourceFixedWilsonTTwoMarks
+        (sourceAverageObservable average left)
+        (sourceAverageObservable average right))
+  originalWilsonTwoAverageMarksEqualsOriginalF19
+    average left right =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalWilsonFineFG
+        theory traceData exponential beta source bilateral linear
+        (sourceAverageObservable average left)
+        (sourceAverageObservable average right))
+
+  -- The two statements above are already unconditional within the
+  -- existing certified Haar algebra for the original selected
+  -- side-four cutoff. They do not identify the selected Q with
+  -- CMP98 Eq.(15) nor derive CMP119 scale-localized T^(j).
