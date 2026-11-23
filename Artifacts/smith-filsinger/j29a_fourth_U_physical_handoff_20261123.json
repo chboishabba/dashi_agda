@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-23",
+  "pr": 1537,
+  "status": "J29A_PASS_LOCAL_PHYSICAL_DIODE_U_PICARD_AND_QUADRATIC_SWITCH_HANDOFF",
+  "checker": "scripts/check_smith_filsinger_j29a_diode_u_continuity.py",
+  "checker_git_blob": "c2bc52828ea34c6af13f7c0cc8ef7dcd4047acf1",
+  "local_exact_script_byte_identical": true,
+  "inherited_checkpoint": "Artifacts/smith-filsinger/j28b_signed_75_step_exact_checkpoint_20261123.json",
+  "inherited_checkpoint_git_blob": "74c1a94b30c44a772016c93b39558bc446359832",
+  "source_selected_status_time_all_9_root_delta_values_match_original_GitHub": true,
+  "original_checkpoint_raw_byte_replay_locally": false,
+  "inherits_unique_U_activation_interval": [
+    "4.27514095",
+    "4.27574095"
+  ],
+  "proof_scope": "one exact rational J23 initial-value solution, source-only physical nine-state model; not periodic",
+  "method": {
+    "arithmetic": "exact Python Fraction, analytical radical enclosure, exact interval Picard",
+    "initial_step": "4.26534095",
+    "end": "4.27574095",
+    "source_trig": "sin and cos each bounded by [-1,+1] without source-phase sampling",
+    "initial_box_radius": "1/5",
+    "Picard_strict_initial_inclusion": true,
+    "monotone_Picard_refinement_rounds": 12,
+    "full_diode_current": "positive-part U and V current throughout whole interval",
+    "spark_mode": "ON",
+    "physical_mode_through_U_activation": true,
+    "minimum_actual_U_guard_derivative_approx": 0.511556623231216,
+    "minimum_actual_V_guard_approx": 0.005464434123194474,
+    "spark_OFF_excluded": true,
+    "extra_diode_crossing_excluded": true
+  },
+  "Jacobian": {
+    "row_norm_global_bound_exact": "227/3",
+    "analytic_capacitor_row_bound_exact": "227/3",
+    "comparison_L_rounded_up": "100",
+    "diode_U_Jacobian_jump_rank_one": true,
+    "diode_U_saltation_identity": true,
+    "diode_U_state_no_reset": true
+  },
+  "U_activation_error": {
+    "bracket_width": "3/5000",
+    "original_U_guard_slope_upper_exact_numerator": "1250439215531312157277744411153",
+    "original_U_guard_slope_upper_scale": "10^30",
+    "coarse_M": "63/50",
+    "source_aware_coefficient_norm": "500/39",
+    "error_at_same_right_endpoint_upper_exact": "189/61100000",
+    "error_at_same_right_endpoint_upper_approx": 0.00000309328968903437,
+    "Gronwall_rational_enclosure": "exp(100 w) <= 1/(1-100w) for 100w=0.06",
+    "event_box_attached": false
+  },
+  "J24_original_event_state_boxes_paid": 3,
+  "J24_total_boxes": 6,
+  "original_U_fourth_event_box_inclusions": 2,
+  "future_V_off_certified": false,
+  "future_U_off_certified": false,
+  "full_tau_return_map_certified": false,
+  "exact_periodic_orbit_proved": false,
+  "uniform_5_parameter_family_certified": false,
+  "source_metering_or_original_hardware_verified": false,
+  "CI": false,
+  "Agda_kernel": false
+}
