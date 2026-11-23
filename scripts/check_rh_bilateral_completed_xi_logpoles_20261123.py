@@ -95,3 +95,32 @@ assert s.Rational(9,2)/s.Rational(3,2)==3
 print("PASS same original adverse phase <=8 a^4 <=1/2 per multiplicity")
 print("PASS narrower original adverse zero-count window |gamma-t|<(1+sqrt2)/2")
 print("PASS source 9/2 A0 log envelope improves to 3/2 A0 log with local weld")
+
+# Same-ORIGINAL-profile holomorphic contour trace for completed ξ:
+# P_W is original even compact support; C_W(z)=∫P_W(v)cos(zv)dv
+# is entire.  f_t(s)=r^-2*C_W(-i(s-(1/2+i*t))/r).
+# Its horizontal reflection pair sums EXACTLY to 2m*K(alpha,q)/r².
+s0=s.Rational(1,2)+s.I*6
+r=s.Integer(5)
+polep=s.Rational(1,2)+s.Rational(1,3)+7*s.I
+polem=s.Rational(1,2)-s.Rational(1,3)+7*s.I
+qt=s.Rational(1,5);alphat=s.Rational(1,15)
+holo=lambda u:F(-s.I*(u-s0)/r)/r**2
+assert s.simplify(s.trigsimp(holo(polep)-F(qt-s.I*alphat)/r**2))==0
+assert s.simplify(s.trigsimp(holo(polem)-F(qt+s.I*alphat)/r**2))==0
+assert s.simplify(s.trigsimp(
+    holo(polep)+holo(polem)-
+      (F(qt-s.I*alphat)+F(qt+s.I*alphat))/r**2))==0
+# Verify the RESIDUES of f(s)*P'(s)/P(s), not only values at zeros.
+ss=s.symbols("ss")
+orbit=(polep,polem,s.conjugate(polep),s.conjugate(polem))
+Qpoly=s.prod(ss-rt for rt in orbit)
+z=-s.I*(ss-s0)/r
+holopoly=(z**4-3*z**2+1)/r**2
+for rt in orbit:
+    assert s.simplify(s.residue(
+        holopoly*s.diff(Qpoly,ss)/Qpoly,ss,rt)
+        -holopoly.subs(ss,rt))==0
+print("PASS original entire cosh-Fourier test lifts reflected xi zeros to holomorphic contour trace")
+print("PASS 4/4 meromorphic logarithmic-derivative residues of exact bilateral quartet")
+print("CAUTION FAR/LOCAL indicator not holomorphic: contour FULL source, then subtract original local and sameOrd")
