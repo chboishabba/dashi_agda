@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as WEXT
-import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as Continuum
+import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact as Continuum
 import DASHI.Physics.YangMills.YangMillsWilsonSameHMassGapRound552Exact as Gap
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as SameH
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
@@ -67,11 +67,11 @@ round553WEXTLevel =
 
 round553SameFamilyContinuumConvergenceLevel : ProofLevel
 round553SameFamilyContinuumConvergenceLevel =
-  Continuum.literalRound551SameFamilyWilsonCorrelationConvergenceLevel
+  Continuum.sameFamilyWilsonCorrelationConvergenceLevel
 
-round553WilsonTimeDistanceMeaningLevel : ProofLevel
-round553WilsonTimeDistanceMeaningLevel =
-  Continuum.literalRound551WilsonTimeDistanceMeaningLevel
+wilsonTimeDistanceMeaningLevel : ProofLevel
+wilsonTimeDistanceMeaningLevel =
+  Continuum.wilsonTimeDistanceMeaningLevel
 
 round553SameHamiltonianTransferLevel : ProofLevel
 round553SameHamiltonianTransferLevel =

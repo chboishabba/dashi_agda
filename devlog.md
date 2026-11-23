@@ -1,5 +1,17 @@
 # 2026-10-29 RH/Feynman TOE normalization
 
+# 2026-11-23 Semantic naming migration
+
+- Introduced `config/semantic-name-registry.json` and
+  `scripts/semantic_round_rename.py` for explicit, provenance-preserving
+  semantic renames.
+- Renamed the Wilson WEXT/mixed-log/continuum/source-first covariance owner
+  modules and updated their Agda import consumers. The pilot checker reports
+  zero stale references.
+- A blind Round-number deletion is rejected: the current tree has genuine
+  same-stem historical collisions, so each remaining family needs a curated
+  semantic owner name.
+
 - Reused the current Agda RH three-route max-cut as the golden frontier.
   Added one non-versioned Unified facade and wired it through `Unifier` and
   `EverythingTOESymmetryResolved369`. A1 carrier/curvature/compensation,

@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact where
+module DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionExact where
 
 ------------------------------------------------------------------------
 -- GOAL-1 B-WEXT / ROUND551:
@@ -93,21 +93,21 @@ connectedCovarianceExpansionExact source state left right =
     (literalWilsonMixedLogIsConnectedClusterSum
       source state left right)
 
-round551CumulantToCovarianceCompilerLevel : ProofLevel
-round551CumulantToCovarianceCompilerLevel =
+cumulantToCovarianceCompilerLevel : ProofLevel
+cumulantToCovarianceCompilerLevel =
   Cumulant.twoSourceConnectedCumulantCompilerLevel
 
-round551WilsonCovarianceExpansionCompilerLevel : ProofLevel
-round551WilsonCovarianceExpansionCompilerLevel = machineChecked
+wilsonCovarianceExpansionCompilerLevel : ProofLevel
+wilsonCovarianceExpansionCompilerLevel = machineChecked
 
-round551SecondPhysicalCovarianceIdentityRequired : Bool
-round551SecondPhysicalCovarianceIdentityRequired = false
+secondPhysicalCovarianceIdentityRequired : Bool
+secondPhysicalCovarianceIdentityRequired = false
 
-round551PrintedBalabanJEqualsWilsonObservableRequired : Bool
-round551PrintedBalabanJEqualsWilsonObservableRequired = false
+printedBalabanJEqualsWilsonObservableRequired : Bool
+printedBalabanJEqualsWilsonObservableRequired = false
 
 -- Genuine unpublished/source-extension theorem:
 -- instantiate the normalized source directions by the selected Wilson pair and
 -- prove their literal mixed-log derivative has the connected polymer expansion.
-literalRound551WilsonMixedLogClusterExpansionLevel : ProofLevel
-literalRound551WilsonMixedLogClusterExpansionLevel = conditional
+wilsonMixedLogClusterExpansionLevel : ProofLevel
+wilsonMixedLogClusterExpansionLevel = conditional

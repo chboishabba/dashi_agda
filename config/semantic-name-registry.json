@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "active_names_must_not_contain_round_numbers": true,
+    "historical_numbers_are_preserved_in_registry_and_archive_docs": true,
+    "compatibility_aliases": false,
+    "source_attribution_is_not_provenance_erased": true
+  },
+  "module_renames": [
+    {
+      "from": "DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact",
+      "to": "DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact",
+      "historical_rounds": [494],
+      "owner": "yang-mills/wilson-wext",
+      "status": "pilot"
+    },
+    {
+      "from": "DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact",
+      "to": "DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionExact",
+      "historical_rounds": [551],
+      "owner": "yang-mills/wilson-mixed-log",
+      "status": "pilot"
+    },
+    {
+      "from": "DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact",
+      "to": "DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact",
+      "historical_rounds": [551],
+      "owner": "yang-mills/wilson-continuum",
+      "status": "pilot"
+    },
+    {
+      "from": "DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact",
+      "to": "DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact",
+      "historical_rounds": [556],
+      "owner": "yang-mills/source-first-wilson",
+      "status": "pilot"
+    },
+    {
+      "from": "DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact",
+      "to": "DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact",
+      "historical_rounds": [573],
+      "owner": "yang-mills/source-first-wilson-mixed-log",
+      "status": "pilot"
+    }
+  ],
+  "symbol_renames": [
+    {
+      "from": "literalRound494WilsonConnectingWeightTailLevel",
+      "to": "wilsonConnectingWeightTailLevel",
+      "historical_rounds": [494]
+    },
+    {
+      "from": "literalRound551WilsonMixedLogClusterExpansionLevel",
+      "to": "wilsonMixedLogClusterExpansionLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "literalRound551SameFamilyWilsonCorrelationConvergenceLevel",
+      "to": "sameFamilyWilsonCorrelationConvergenceLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "literalRound551WilsonTimeDistanceMeaningLevel",
+      "to": "wilsonTimeDistanceMeaningLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "literalRound556SourceFirstWilsonCarrierLevel",
+      "to": "sourceFirstWilsonCarrierLevel",
+      "historical_rounds": [556]
+    },
+    {
+      "from": "literalRound573WilsonMixedLogClusterExpansionLevel",
+      "to": "wilsonMixedLogClusterExpansionLevel",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "literalRound494WilsonTwoMarkExpansionLevel",
+      "to": "wilsonTwoMarkExpansionLevel",
+      "historical_rounds": [494]
+    },
+    {
+      "from": "literalRound552ConnectingWeightTailLevel",
+      "to": "wilsonConnectingWeightTailLevel",
+      "historical_rounds": [552]
+    },
+    {
+      "from": "literalRound552WilsonMixedLogClusterExpansionLevel",
+      "to": "wilsonMixedLogClusterExpansionLevel",
+      "historical_rounds": [552]
+    },
+    {
+      "from": "literalRound557SourceFirstWilsonCarrierLevel",
+      "to": "sourceFirstWilsonCarrierLevel",
+      "historical_rounds": [557]
+    },
+    {
+      "from": "literalRound573MagnitudeIsRationalAbsoluteLevel",
+      "to": "wilsonMagnitudeIsRationalAbsoluteLevel",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "literalRound574ConnectingWeightTailLevel",
+      "to": "wilsonConnectingWeightTailLevel",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "literalRound574MagnitudeCalibrationLevel",
+      "to": "wilsonMagnitudeCalibrationLevel",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "literalRound574SourceFirstWilsonWEXTCompletionLevel",
+      "to": "sourceFirstWilsonWEXTCompletionLevel",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "literalRound574WilsonMixedLogClusterExpansionLevel",
+      "to": "wilsonMixedLogClusterExpansionLevel",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "literalRound576ConnectingWeightTailLevel",
+      "to": "wilsonConnectingWeightTailLevel",
+      "historical_rounds": [576]
+    },
+    {
+      "from": "literalRound576WilsonMixedLogClusterExpansionLevel",
+      "to": "wilsonMixedLogClusterExpansionLevel",
+      "historical_rounds": [576]
+    },
+    {
+      "from": "round551FiniteWEXTToHalfRateCompilerLevel",
+      "to": "finiteWEXTToHalfRateCompilerLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round551ContinuumOrderClosureCompilerLevel",
+      "to": "continuumOrderClosureCompilerLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round573R278MomentAlgebraCompilerLevel",
+      "to": "r278MomentAlgebraCompilerLevel",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "round573ConnectedCovarianceSameObjectLevel",
+      "to": "connectedCovarianceSameObjectLevel",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "round573MagnitudeBridgeCompilerLevel",
+      "to": "magnitudeBridgeCompilerLevel",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "round573PrintedJEqualsWilsonRequired",
+      "to": "printedJEqualsWilsonRequired",
+      "historical_rounds": [573]
+    },
+    {
+      "from": "round556SameFamilyCovarianceConvergenceCompilerLevel",
+      "to": "sameFamilyCovarianceConvergenceCompilerLevel",
+      "historical_rounds": [556]
+    },
+    {
+      "from": "round556WEXTCarrierIsExactSelectedCovarianceLevel",
+      "to": "wextCarrierIsExactSelectedCovarianceLevel",
+      "historical_rounds": [556]
+    },
+    {
+      "from": "round551CumulantToCovarianceCompilerLevel",
+      "to": "cumulantToCovarianceCompilerLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round551WilsonCovarianceExpansionCompilerLevel",
+      "to": "wilsonCovarianceExpansionCompilerLevel",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round551SecondPhysicalCovarianceIdentityRequired",
+      "to": "secondPhysicalCovarianceIdentityRequired",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round551PrintedBalabanJEqualsWilsonObservableRequired",
+      "to": "printedBalabanJEqualsWilsonObservableRequired",
+      "historical_rounds": [551]
+    },
+    {
+      "from": "round574FinalWilsonShellCompilerLevel",
+      "to": "finalWilsonShellCompilerLevel",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "round574R556AdapterLevel",
+      "to": "sourceFirstCovarianceAdapterLevel",
+      "historical_rounds": [574, 556]
+    },
+    {
+      "from": "round574FinalShellBoundStoredAsPhysicalInput",
+      "to": "finalShellBoundStoredAsPhysicalInput",
+      "historical_rounds": [574]
+    },
+    {
+      "from": "round552WEXTAdapterCompilerLevel",
+      "to": "wextAdapterCompilerLevel",
+      "historical_rounds": [552]
+    },
+    {
+      "from": "round552IndependentCovarianceExpansionFieldRequired",
+      "to": "independentCovarianceExpansionFieldRequired",
+      "historical_rounds": [552]
+    },
+    {
+      "from": "round494WEXTCompilerLevel",
+      "to": "wextCompilerLevel",
+      "historical_rounds": [494]
+    },
+    {
+      "from": "round494FiniteTriangleLevel",
+      "to": "finiteTriangleLevel",
+      "historical_rounds": [494]
+    },
+    {
+      "from": "round553WilsonTimeDistanceMeaningLevel",
+      "to": "wilsonTimeDistanceMeaningLevel",
+      "historical_rounds": [553]
+    }
+  ]
+}

@@ -4,15 +4,15 @@ module DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Validation where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as R494
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 compilerMachineChecked :
-  R494.round494WEXTCompilerLevel ≡ machineChecked
+  R494.wextCompilerLevel ≡ machineChecked
 compilerMachineChecked = refl
 
 triangleMachineChecked :
-  R494.round494FiniteTriangleLevel ≡ machineChecked
+  R494.finiteTriangleLevel ≡ machineChecked
 triangleMachineChecked = refl
 
 finalWEXTNotPrimitive :

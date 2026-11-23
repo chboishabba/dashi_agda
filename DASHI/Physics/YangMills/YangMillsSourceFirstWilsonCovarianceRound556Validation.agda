@@ -4,15 +4,15 @@ module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Valid
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as R556
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 covarianceLimitCompilerMachineChecked :
-  R556.round556SameFamilyCovarianceConvergenceCompilerLevel ≡ machineChecked
+  R556.sameFamilyCovarianceConvergenceCompilerLevel ≡ machineChecked
 covarianceLimitCompilerMachineChecked = refl
 
 carrierSelectionMachineChecked :
-  R556.round556WEXTCarrierIsExactSelectedCovarianceLevel ≡ machineChecked
+  R556.wextCarrierIsExactSelectedCovarianceLevel ≡ machineChecked
 carrierSelectionMachineChecked = refl
 
 noSeparateConvergenceLeaf :

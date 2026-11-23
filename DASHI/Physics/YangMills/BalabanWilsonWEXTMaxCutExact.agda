@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact where
+module DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact where
 
 ------------------------------------------------------------------------
 -- ROUND494 / WEXT MAX-CUT: TWO-MARK WILSON EXPANSION + ROOTED WEIGHT TAIL
@@ -171,14 +171,14 @@ twoMarkExpansionStillPhysical = true
 absoluteConnectingWeightTailStillPhysical : Bool
 absoluteConnectingWeightTailStillPhysical = true
 
-round494WEXTCompilerLevel : ProofLevel
-round494WEXTCompilerLevel = machineChecked
+wextCompilerLevel : ProofLevel
+wextCompilerLevel = machineChecked
 
-round494FiniteTriangleLevel : ProofLevel
-round494FiniteTriangleLevel = machineChecked
+finiteTriangleLevel : ProofLevel
+finiteTriangleLevel = machineChecked
 
-literalRound494WilsonTwoMarkExpansionLevel : ProofLevel
-literalRound494WilsonTwoMarkExpansionLevel = conditional
+wilsonTwoMarkExpansionLevel : ProofLevel
+wilsonTwoMarkExpansionLevel = conditional
 
-literalRound494WilsonConnectingWeightTailLevel : ProofLevel
-literalRound494WilsonConnectingWeightTailLevel = conditional
+wilsonConnectingWeightTailLevel : ProofLevel
+wilsonConnectingWeightTailLevel = conditional

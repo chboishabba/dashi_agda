@@ -1,5 +1,16 @@
 # 2026-07-25 C2 Balaban RG implementation planning
 
+# 2026-11-23 Semantic naming migration
+
+- Added the explicit semantic-name registry and deterministic rename tool.
+- Completed the first Yang--Mills Wilson pilot: five owner modules and their
+  97 Agda consumers now use semantic module/declaration names without the
+  historical Round labels.
+- Historical round numbers remain in the registry/archive policy; no
+  compatibility aliases are introduced.
+- The remaining numbered families require collision-specific registry entries
+  before migration.
+
 - Mapped the next YM implementation lane to concrete module owners:
   `CompactLieBlockAverage` for the coarse-block interface,
   `YMSmallFieldSurvivalAuthority` for small-field cutoff and admissible-radius

@@ -25,7 +25,7 @@ import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as A3
 import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact as FiniteOS
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as Quantitative
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as WEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Exact as AllG
 import DASHI.Physics.YangMills.YangMillsConcreteT1SemanticsRound516Exact as T1
@@ -113,11 +113,11 @@ finiteOSBosonicAttachmentLevel =
 -- WEXT remains two genuine Wilson source statements.
 wextTwoMarkExpansionLevel : ProofLevel
 wextTwoMarkExpansionLevel =
-  WEXT.literalRound494WilsonTwoMarkExpansionLevel
+  WEXT.wilsonTwoMarkExpansionLevel
 
 wextConnectingWeightTailLevel : ProofLevel
 wextConnectingWeightTailLevel =
-  WEXT.literalRound494WilsonConnectingWeightTailLevel
+  WEXT.wilsonConnectingWeightTailLevel
 
 ------------------------------------------------------------------------
 -- Firewalls: the preferred frontier contains theorem content only.

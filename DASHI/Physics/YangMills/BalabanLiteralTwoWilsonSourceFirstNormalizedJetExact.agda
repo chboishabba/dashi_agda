@@ -39,7 +39,7 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact as 
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterJetExact as Jet
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact as R575
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact as R573
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 literalKPClusterTerm :

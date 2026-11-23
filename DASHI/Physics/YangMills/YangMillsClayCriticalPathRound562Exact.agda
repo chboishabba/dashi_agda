@@ -40,9 +40,9 @@ import DASHI.Physics.YangMills.YangMillsClayPreferredA3FiniteCylinderRound554Exa
 import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact as T1
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559Exact as T5
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119OS05FromMomentsRound560Exact as OS05
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as B1
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as B1
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMassGapRound557Exact as BGap
-import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact as W1
+import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionExact as W1
 import DASHI.Physics.YangMills.BalabanWilsonWEXTFromMixedLogRound552Exact as WEXT
 import DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Exact as G1
 import DASHI.Physics.YangMills.YangMillsClayMinimalH6NontrivialityRound550Exact as H6
@@ -68,7 +68,7 @@ criticalLevel t1FiniteOSSameFamily =
 criticalLevel t5LiteralCMP119Moments =
   T5.literalRound559CMP119ExponentialMomentProducerLevel
 criticalLevel b1WilsonWEXT =
-  B1.literalRound556SourceFirstWilsonCarrierLevel
+  B1.sourceFirstWilsonCarrierLevel
 criticalLevel b2SameHamiltonian =
   BGap.literalRound557SameHamiltonianTransferLevel
 criticalLevel g1ActualCompactSimple =
@@ -130,15 +130,15 @@ t5SameFamilyExpectationAttachmentRequired =
 
 w1WilsonMixedLogClusterExpansionLevel : ProofLevel
 w1WilsonMixedLogClusterExpansionLevel =
-  W1.literalRound551WilsonMixedLogClusterExpansionLevel
+  W1.wilsonMixedLogClusterExpansionLevel
 
 w1CovarianceIdentityCompilerLevel : ProofLevel
 w1CovarianceIdentityCompilerLevel =
-  W1.round551WilsonCovarianceExpansionCompilerLevel
+  W1.wilsonCovarianceExpansionCompilerLevel
 
 w3ConnectingWeightTailLevel : ProofLevel
 w3ConnectingWeightTailLevel =
-  WEXT.literalRound552ConnectingWeightTailLevel
+  WEXT.wilsonConnectingWeightTailLevel
 
 finiteToContinuumWilsonCovarianceCompilerLevel : ProofLevel
 finiteToContinuumWilsonCovarianceCompilerLevel =

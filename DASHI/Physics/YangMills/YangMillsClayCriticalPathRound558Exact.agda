@@ -32,9 +32,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayPostSelectedCylinderFrontierRound548Exact as A3
 import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact as T1
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as T5
-import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as B1
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact as B1
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMassGapRound557Exact as BGap
-import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutExact as WEXT
 import DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Exact as G1
 import DASHI.Physics.YangMills.YangMillsClayMinimalH6NontrivialityRound550Exact as H6
 import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as C
@@ -59,7 +59,7 @@ criticalLevel t1FiniteOSSameFamily =
 criticalLevel t5QuantitativeSameFamily =
   T5.literalRound514SameFiniteExpectationAttachmentLevel
 criticalLevel b1SourceFirstWilsonWEXT =
-  B1.literalRound556SourceFirstWilsonCarrierLevel
+  B1.sourceFirstWilsonCarrierLevel
 criticalLevel b2SameHamiltonian =
   BGap.literalRound557SameHamiltonianTransferLevel
 criticalLevel g1ActualCompactSimple =
@@ -93,11 +93,11 @@ a3CylinderGeneratorRepresentationLevel =
 
 wextTwoMarkExpansionLevel : ProofLevel
 wextTwoMarkExpansionLevel =
-  WEXT.literalRound494WilsonTwoMarkExpansionLevel
+  WEXT.wilsonTwoMarkExpansionLevel
 
 wextConnectingWeightTailLevel : ProofLevel
 wextConnectingWeightTailLevel =
-  WEXT.literalRound494WilsonConnectingWeightTailLevel
+  WEXT.wilsonConnectingWeightTailLevel
 
 finiteToContinuumWilsonCovarianceLevel : ProofLevel
 finiteToContinuumWilsonCovarianceLevel =

@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact where
+module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceExact where
 
 ------------------------------------------------------------------------
 -- GOAL-1 B / ROUND556:
@@ -37,7 +37,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as WEXT
-import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as R551
+import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact as R551
 
 record IndexedSourceFirstWilsonCovarianceData
     {Measure Observable Scale Volume Root : Set}
@@ -197,12 +197,12 @@ indexedAsContinuumClustering
       upperOrderClosed source
   }
 
-round556SameFamilyCovarianceConvergenceCompilerLevel : ProofLevel
-round556SameFamilyCovarianceConvergenceCompilerLevel =
+sameFamilyCovarianceConvergenceCompilerLevel : ProofLevel
+sameFamilyCovarianceConvergenceCompilerLevel =
   R278.round278ConnectedCovarianceLimitCompilerLevel
 
-round556WEXTCarrierIsExactSelectedCovarianceLevel : ProofLevel
-round556WEXTCarrierIsExactSelectedCovarianceLevel = machineChecked
+wextCarrierIsExactSelectedCovarianceLevel : ProofLevel
+wextCarrierIsExactSelectedCovarianceLevel = machineChecked
 
 separateSameFamilyWilsonCovarianceConvergenceLeafRequired : Bool
 separateSameFamilyWilsonCovarianceConvergenceLeafRequired = false
@@ -212,5 +212,5 @@ printedJPresentationRequired = false
 
 -- Still physical: Wilson WEXT itself, bounded-test/source presentation,
 -- Euclidean time/support meaning and order closure.
-literalRound556SourceFirstWilsonCarrierLevel : ProofLevel
-literalRound556SourceFirstWilsonCarrierLevel = conditional
+sourceFirstWilsonCarrierLevel : ProofLevel
+sourceFirstWilsonCarrierLevel = conditional

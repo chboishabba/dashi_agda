@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact where
+module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceExact where
 
 ------------------------------------------------------------------------
 -- GOAL-1 B1 / ROUND573:
@@ -29,7 +29,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
-import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact as R551
+import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionExact as R551
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 
 r278MomentAlgebra :
@@ -157,23 +157,23 @@ genericAbsoluteCovarianceIsR278Magnitude
               (Gram.measureSequence dataSet cutoff) left right) =
   refl
 
-round573R278MomentAlgebraCompilerLevel : ProofLevel
-round573R278MomentAlgebraCompilerLevel = machineChecked
+r278MomentAlgebraCompilerLevel : ProofLevel
+r278MomentAlgebraCompilerLevel = machineChecked
 
-round573ConnectedCovarianceSameObjectLevel : ProofLevel
-round573ConnectedCovarianceSameObjectLevel = machineChecked
+connectedCovarianceSameObjectLevel : ProofLevel
+connectedCovarianceSameObjectLevel = machineChecked
 
-round573MagnitudeBridgeCompilerLevel : ProofLevel
-round573MagnitudeBridgeCompilerLevel = machineChecked
+magnitudeBridgeCompilerLevel : ProofLevel
+magnitudeBridgeCompilerLevel = machineChecked
 
 -- Genuine W1 source content remains the Wilson mixed-log cluster expansion.
-literalRound573WilsonMixedLogClusterExpansionLevel : ProofLevel
-literalRound573WilsonMixedLogClusterExpansionLevel =
-  R551.literalRound551WilsonMixedLogClusterExpansionLevel
+wilsonMixedLogClusterExpansionLevel : ProofLevel
+wilsonMixedLogClusterExpansionLevel =
+  R551.wilsonMixedLogClusterExpansionLevel
 
 -- Existing rational carrier calibration, not a new cluster theorem.
-literalRound573MagnitudeIsRationalAbsoluteLevel : ProofLevel
-literalRound573MagnitudeIsRationalAbsoluteLevel = conditional
+wilsonMagnitudeIsRationalAbsoluteLevel : ProofLevel
+wilsonMagnitudeIsRationalAbsoluteLevel = conditional
 
-round573PrintedJEqualsWilsonRequired : Bool
-round573PrintedJEqualsWilsonRequired = false
+printedJEqualsWilsonRequired : Bool
+printedJEqualsWilsonRequired = false

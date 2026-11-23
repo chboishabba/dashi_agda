@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact where
+module DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringExact where
 
 ------------------------------------------------------------------------
 -- GOAL-1 B / ROUND551:
@@ -125,18 +125,18 @@ continuumWilsonHalfRateBound {finite = finite} inputs left right time =
     (λ cutoff →
       finiteWilsonHalfRateBound inputs cutoff left right time)
 
-round551FiniteWEXTToHalfRateCompilerLevel : ProofLevel
-round551FiniteWEXTToHalfRateCompilerLevel =
+finiteWEXTToHalfRateCompilerLevel : ProofLevel
+finiteWEXTToHalfRateCompilerLevel =
   WEXT.round491R274CompilerReuseLevel
 
-round551ContinuumOrderClosureCompilerLevel : ProofLevel
-round551ContinuumOrderClosureCompilerLevel = machineChecked
+continuumOrderClosureCompilerLevel : ProofLevel
+continuumOrderClosureCompilerLevel = machineChecked
 
-literalRound551SameFamilyWilsonCorrelationConvergenceLevel : ProofLevel
-literalRound551SameFamilyWilsonCorrelationConvergenceLevel = conditional
+sameFamilyWilsonCorrelationConvergenceLevel : ProofLevel
+sameFamilyWilsonCorrelationConvergenceLevel = conditional
 
-literalRound551WilsonTimeDistanceMeaningLevel : ProofLevel
-literalRound551WilsonTimeDistanceMeaningLevel = conditional
+wilsonTimeDistanceMeaningLevel : ProofLevel
+wilsonTimeDistanceMeaningLevel = conditional
 
 printedJPresentationRequired : Bool
 printedJPresentationRequired = false
