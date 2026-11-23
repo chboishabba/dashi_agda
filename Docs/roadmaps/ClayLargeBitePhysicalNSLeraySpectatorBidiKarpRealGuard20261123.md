@@ -1,4 +1,60 @@
 # Clay non-RH/YM — large source-to-endpoint maximum-cut: transverse R236 / spectator BIDI and original N21 machine guard
+
+## 2026-11-23 P0 upgrade — all-rational helical witness and arbitrary-output cutoff geometry
+
+**This section supersedes the algebraic-square-root example below as the preferred source constructor.** It is a genuine **RATIONAL** Euclidean helical fixture (the selected input norms are integers), directly compatible with the numerical scalar type of the original rational Agda mode operators on the selected modes. No original Agda inhabitant or kernel proof is claimed. [Exactly locally executed script](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py), identical committed Git blob `892b4e5ab5c3542768038f8c6bbccc5fa8d83def`.
+
+Use k=(83,64,0), C>=83, ν=1, real Fourier coefficients at four positive p and four positive q, plus their negative conjugates for reality. Every selected p and q has an INTEGER Euclidean norm, so (P_+u(p)), (P_-u(q)) and their R231 crosses are EXACTLY rational in both real and imaginary coordinates.
+
+| p | q | (|p|,|q|) | physical rate | true R236 tag |
+|---|---|---|---:|---|
+| (0,64,0) | (83,0,0) | (64,83) | 10985 | CC |
+| (3,4,0) | (80,60,0) | (5,100) | 10025 | **deep-FL** |
+| (20,48,0) | (63,16,0) | (52,65) | 6929 | CC |
+| (35,0,0) | (48,64,0) | (35,80) | 7625 | CC |
+
+At the deep-FL pair the original strict-shell test is (j_p+3<j_q). Solve exactly for the **original minus-helicity modal coefficients**, keeping the plus-helicity coefficient at each listed p equal to 1:
+
+    (b0,b1,b2,b3) = (64t/15 - 5/4, 25/28, -13t/3, t).
+    M=sum_i b_i (P+u(p_i) cross P-u(q_i) / b_i) = (0,0,1).
+    k dot M = 0; P_k M=M, ||M||²=1.
+    (w0,w1,w2,w3) = (5/2 -128t/15, -1/2, 104t/15, 8t/5).
+    W=sum w=2, V=sum r_i w_i=22450 -167488 t/5.
+
+The real deep-FL work is **w1=-1/2**, not an inert label. The real/negative-conjugate helical support generates *exactly* the four original output-k nonzero products; it adds no hidden fifth pair.
+
+At t=-1/4, the SAME finite velocity field has V=154122/5 and W=2 at both original cutoffs. Entire complete original fibre moments (not a four-cell-only surrogate):
+
+| C | original incidences | rate total | exact S_C |
+|---|---:|---:|---:|
+| 83 | 1,444,884 | 18,905,343,884 | -33,634,973,008/5 |
+| 100 | 3,249,366 | 57,430,377,806 | +73,504,991,408/5 |
+
+### General geometric theorem, not a finite-row extrapolation
+
+For **any fixed output** (k=(k_1,k_2,k_3)) within the original cubic cutoff C and the complete resonant pair fibre ({p,qin[-C,C]^3capmathbb Z^3:p+q=k}), independent exact rectangular lattice arithmetic yields
+
+    n_j(C,k) = 2C - |k_j| + 1,
+    N(C,k) = product_{j=1}^3 n_j,
+    R(C,k)/N(C,k)
+           = nu*[ |k|²/2 + (1/6) sum_j (n_j² - 1) ].
+
+The rate formula assumes **nu>0** and original rate (r_{p,q}=
+u(|p|²+|q|²)). The position average is exactly (k_j/2) and the mean square deviation on each integer interval is ((n_j²-1)/12). The formula has **no** infinite-volume or continuum approximation. For any fixed finitely Fourier-supported physical velocity and fixed output k, once C covers that support, M, W=2||M||² and V stop changing, whereas
+
+    N(C,k) = 8 C³ + O(C²),
+    R(C,k)/N(C,k) = 2 nu C² + O(C),
+    S_C = R W - N V = 32 nu ||M||² C^5 + O(C^4).
+
+When nu=1 and ||M||²=1 this recovers the exact leading coefficient **32** independently of k. The exact SymPy regression proved the polynomial coefficient symbolically for arbitrary output labels, and independently enumerated **1,224** small integer cubic cutoffs/output modes to verify N and rate moments. Strict R236 and genuine helical eigenprojectors were tested on the rational four-cell actual source. The earlier C16/24 irrational L2 fixture is retained as a second diagnostic, not the preferred rational constructor.
+
+**BIDI consequence:** (V=mu_C W-S_C/N_C) is independent of zero-work spectator padding, as already reflected in original `centeredPairCovarianceAppendZero`. Raw (S_C) cannot have a finite cutoff-uniform absolute bound depending solely on cutoff-independent norms of a fixed smooth source with M≠0. This says nothing by itself about the *distinct* R568 signed nested time-integrated budget: the next proof must compose its existing R541/R542/R573/R547 signed owners and **cancel this representation artifact before inserting an absolute value**.
+
+### Karp source guard follow-up
+
+The corrected reference now matches the original **exact early guard** `3*m<=length(afterM)`, rather than the stronger but merely acceptance-equivalent `3*m+1<=length(afterM)`. Both original and native finite differential models were rerun locally: 132,281/132,281, 7,012 accepted, 5,062 malformed. It still does not certify Agda F1/F3/F2/F4 physical tape instructions.
+
+
 2026-11-23 · PR #1543 · geometry-forward, steelman, BIDI, reverse-solve · no YM/RH edits · no Clay promotion
 
 ## 0. Source-first audit and corrections to the preceding packet
