@@ -11,7 +11,7 @@ import sympy as sp
 import check_smith_filsinger_j18_hf_spark_tank_20261123 as hf
 
 P=dict(source_amp=1.2,Von=.006,Voff=.0018,Rfree=0.)
-HF_SHA='430520c86fc471deada48835c7d048888745d2fa'
+HF_SHA='f4270a475f010874056cfe3cdeff5ee8e43c44eb'
 T=hf.native.T
 
 def sha(path):
