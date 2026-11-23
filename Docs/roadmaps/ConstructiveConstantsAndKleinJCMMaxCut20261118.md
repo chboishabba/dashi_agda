@@ -1906,3 +1906,26 @@ No CI initiated or Agda kernel receipt.
 The existing master JInvariantAnalyticJCoarseFineObserverExact, JInvariantRiemannObserverResidualSufficiencyBidiExact, JInvariantSheafHyperformAdmissibleDescentExact and JInvariantJCoarseFineElevenTritChartShiftExact ALREADY own this observer/Fricke/relative-fibre story. Source-owner [YM #1536 four-mark/H05/j9 audit](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayP0FourMarkKTimeJ9SufficientConsumerCommutingSquare20261123.md) adds a **local exact SymPy collision receipt**, not new analytic-j theorem: for rational modular-j algebraic chart Q(a,b)=a²-ab+b²,V(a,b)=ab(b-a),j=256Q³/V², source pairs (1,2),(2,1) have identical j=1728 but opposite signed V=±2; at V=0 rational j is undefined/pole. Thus coarse j cannot FactorsThrough orientation-sign consumer, matching THIS roadmap's existing forgotten-V warning. It does not identify original elliptic/analytic τ states without source uniformization.
 
 Punctured nine T² has 8 nonzero + one fixed central zero; five antipodal inversion orbits × two sign orientations =10 labelled slots, two over zero. The *chosen* 9+1 pointed coding retains the extra zero-branch residual; it is NOT the already-proved **eleven-trit** 1+10 ↔2+9 source shift or J+1 marked Monster unit and must not silently become a physical YM gauge zero/ζ zero. H05 #1291 owns six-face indexed source; RH #1533 owns C26/time-k and signed actual-zero obstructions; YM #1536 owns four ORIGINAL marked F19 coefficients and the nonzero covariant mixed-log determinant. Cross-domain analogy only; original analytic-j Bishop λ(τ)/Eisenstein, source Fricke and sign/cusp domain still require separate proofs. No Agda/Lean/CI or claims of RH, Moonshine or Clay physics closure.
+
+
+## 23 November — P0 fast-π master-native consolidation
+
+P0 remains fastest independently certified π, although the external SOTA
+comparison has been deferred for execution. Original GMP source blobs
+from diverged historical PR #1529 are restored **byte-identically**
+on a clean master-based branch, with source-hash-checking compiler and
+certified decimal regression harness. A *separately built equivalent*
+local C++ implementation completed exact conditional decimal-floor
+certificates for 5 million and 10 million decimal places. At 10M,
+the observed elapsed time was 11.88 seconds for the in-place
+one-division path, with 265,988 KiB peak RSS and matching
+SHA-256 `ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999`.
+This is a single local execution, **not** a new external SOTA or a
+source-byte-identical GitHub executable replay. Mode differences at 1M
+vary substantially across runs; no universal one-floor or in-place
+performance winner is promoted. Complete receipts, compile commands,
+source identities, stop conditions, and next Pareto gates are maintained
+in `Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
+Analytic Chudnovsky premise and same-original-Bishop real identification
+remain separate. Preserve source structure, signs, and all future-consumer
+obligations; no dependency on unrelated Monster work.
