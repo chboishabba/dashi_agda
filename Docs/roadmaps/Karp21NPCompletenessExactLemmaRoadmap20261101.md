@@ -1,5 +1,13 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 23 November 2026 — exact original 3m guard final replay reconciliation
+
+`Karp21FinFreeRawSparseWordVerifierExact.readRawGraphWord` uses the original **exact** early source guard `3*m≤length(afterM)`; it does not compute `m≤n(n−1)/2`, nor does it demand `3*m+1≤length(afterM)` **at that parsing stage** (the missing positive W token is rejected later by its own reader). The two original/native models in `scripts/check_karp21_original_priority_end_to_end_20261123.py` have now both been corrected to the precise `3*m` early test. Full 132,281-case local differential replay still PASS, 7,012 accepted, 5,062 malformed; the updated Git blob has not separately been executed byte-for-byte. The earlier 2m(m−1) endpoint comparison correction remains valid and source-owned.
+
+**BIDI physical-cost quantifiers remain unpaid:** original first-enabled source rule count ≤m+1 is not a tape-head physical clock; original gamma-native bit width, complete live history, signed ledger and canonical word boundedness are only prerequisites for the exact finite TableProgram, bounded-stuttering physical simulation, heap/pointer/copy costs and polynomial-time physical receipt. Classical same-language NP membership (E2) does not solve the independent universal `SATNotInP` target.
+
+
+
 ## 23 November 2026 — original parser constructor source guard repair
 
 [Original-source/audited maximum-cut](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md). Direct reading of `Karp21FinFreeRawSparseWordVerifierExact.readRawGraphWord` and `Karp21NativeWholeBinaryGraphRuntimeExact` proves **the executable source parser uses a 3m≤suffix-length guard, NOT the additional test m≤n(n−1)/2**. The prior end-to-end reference had inserted the latter and charged a non-original n-squared numeric operation. On #1543 the phantom branch has been removed in both independent original and binary-side Python models, leaving all genuine gamma/zigzag/positive-threshold and history/first-enabled behavior intact. The **local corrected** 132,281-case differential still PASS, accepted 7,012, malformed 5,062.
