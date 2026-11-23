@@ -109,6 +109,32 @@ assert s.simplify(s.diff(cov, eps).subs(eps, 0)
 print("PASS exact independent Z3 transfer and differentiated three-section normalized source")
 
 
+# Independent exact *continuous* SU(2)/SU(3) Haar moments: Weyl
+# integration is constant-term extraction of the SU(N) Vandermonde
+# density on the rank-(N-1) maximal torus, divided by N!.
+# This explicitly computes h_3 instead of assuming a finite Z3 analogue.
+x, y = s.symbols("x y")
+
+
+def laurent_constant(expr):
+    expanded = s.expand(expr)
+    return s.simplify(sum(term for term in s.Add.make_args(expanded)
+                          if all(term.as_powers_dict().get(u, 0) == 0
+                                 for u in (x, y))))
+
+
+for rank, eigen, factorial, expected in (
+        (2, [x, 1/x], 2, [Q(1), Q(0), Q(1, 4), Q(0)]),
+        (3, [x, y, 1/(x*y)], 6, [Q(1), Q(0), Q(1, 18), Q(1, 108)])):
+    vandermonde = s.prod((1-eigen[i]/eigen[j])*(1-eigen[j]/eigen[i])
+                         for i in range(rank) for j in range(i+1, rank))
+    real_trace = (sum(eigen)+sum(1/u for u in eigen))/(2*rank)
+    actual = [laurent_constant(vandermonde*real_trace**power)/factorial
+              for power in range(4)]
+    assert actual == [s.Rational(q) for q in expected], (rank, actual)
+    print(f"PASS exact continuous SU({rank}) Weyl-Haar moments 0..3: {actual}")
+
+
 # Analytic SU(N) results used for the theorem:
 # v_N=E_Haar[t^2]; h_N=E_Haar[t^3].
 # Center selection annihilates h_N for N!=3. For SU(3), the unique
