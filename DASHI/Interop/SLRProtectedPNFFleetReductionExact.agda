@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Interop.SLRProtectedPNFFleetReductionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -64,7 +65,6 @@ spectralIsNotCertified ()
 admittedIsNotCertified : admittedCore ≡ kernelCertified → ⊥
 admittedIsNotCertified ()
 
-open import Data.Empty using (⊥)
 
 -- A conflict witness contains both polarities for the *same typed fibre*.
 -- Counts are observational inputs; this module does not infer a typed meet
