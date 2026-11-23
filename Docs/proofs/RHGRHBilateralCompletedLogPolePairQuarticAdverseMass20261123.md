@@ -1,3 +1,11 @@
+## 23 November 2026 — seven native signed axes and true Gamma/terminal same-object reflection audit
+
+[Detailed full Gamma exterior and C₂⁷ finite model ledger](RHQuartic128NativeCechC2MonsterNormalization20261123.md). Source analytical reflection uses actual `S_{t,t/16}` scaled cosine test and `x→2t−x`, with original `mu`, `paperFT`, full q-line, no zero-side substitution. Existing H_X→H_T owner already proves exp(i(b−t)u)=exp(−itu)exp(ibu) on canonical RH analytic carrier, distinct from finite 3B/SSP 7-mask action. Full Gamma tail bound using upstream actual `mu(0)>-1`, monotone, parity-uniform Stirling: at t≥200, L6=||P_W⁽⁶⁾||₁,
+`|V_tail|≤(32L6/t)[(1/163840)(1+log(t/(2π))/(2π)+10/(πt²))+1/(524288π)]`, valid at q=16 where log approximation is not. Hence complete absolute deviation of V from `globalCubicModeDefect/(12πt²)` is `L6/(49152πt)+M4core/(24576πt)+800M0core/(πt³)+Vtailbound`.
+
+Local source-equivalent SymPy/mpmath PASS; witness selected R(t) is not uniformly lower-bounded, and actual signed terminal `2D+S<4d` remains in contradiction with target-pair D≥2d and S≥0 unless independently established. Source-only group-action / RH no-promotion respected.
+
+---
 ## 23 Nov 2026 — add genuine finite 128 six-face sheaf and native C2 3B signed carrier, not RH-source action
 
 [Full exact new proof/negative-controls ledger](RHQuartic128NativeCechC2MonsterNormalization20261123.md). Reuses original selected W normalization 128=16 physical ×2 Fourier ×4 origin and original Base369 actual six outer face labels; constructs 128=8 literal outer corners ×16 residual, two-sided fine/coarse, local admissibility and pointwise unique gluing. Existing X6=F₃⁶ Monster3B Schrödinger model plus SSP signed unit supports a nontrivial 128-element *injected* C2 patch, with exact complement intertwining; flip sends original scalar w→128/w, so it is NOT a symmetry of fixed original RH source. The separate zero is a C2 fixed point outside image. An independently tested exact finite construction, not a native Monster group action or RH analytic source morphism. Original selected six q-probe values fail 12/12 face overlaps. 32t/64logN/800/768 roles are source-derived scalar arithmetic only. No new universal full negative margin: `2D+S<4d` remains blocked by `D≥2d`, `S≥0`.
