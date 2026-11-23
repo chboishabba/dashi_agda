@@ -82,6 +82,47 @@ def native_j12_paid_work():
           r['diode']-r['heat']-r['storage_delta'])<1e-6
     return results
 
+def coherent_four_source_fixture():
+    # A deliberately hypothetical frequency-converted, phase-locked input:
+    # NONE of these four historical measurements supplies such a common
+    # J12 omega=1.1 phasor, and they did not occur at one physical time.
+    components = {
+      'duga_hf_downconversion': (0.03, 0.),
+      'haarp_electrojet_vlf': (0.04, np.pi/2),
+      'haarp_fregion_hall': (0.02, np.pi),
+      'sura_lh_whistler': (0.01, -np.pi/2),
+    }
+    phasors = [a*np.exp(1j*phi) for a,phi in components.values()]
+    summed = sum(phasors)
+    amplitude = float(abs(summed))
+    phase = float(np.angle(summed))
+    independently_squared = sum(abs(z)**2 for z in phasors)
+    assert abs(amplitude**2 - independently_squared) > 1e-8
+    # This source cannot be assigned sum of individual energies without
+    # interference, and the real-world phase/frequency transform is absent.
+    z0 = np.zeros(7)
+    z1,on,case = advance(BASE|{'source_amp':amplitude}, True, phase,z0,False,0.)
+    assert all(np.isfinite(z1)) and abs(case['residual'])<1e-6
+    assert abs(case['incident']-amplitude**2*(20*np.pi))<1e-8
+    assert abs(case['driver']+case['net_wave']-case['spark']-case['diode']-
+               case['heat']-case['storage_delta'])<1e-6
+    # Perfect cancellation of a selected received coherent mode is a
+    # legitimate counterexample to blindly summing incoming source watts.
+    cancel = .05*np.exp(0j)+.05*np.exp(1j*np.pi)
+    assert abs(cancel)<1e-14
+    return {'status':'PASS','carrier_phase_locked_fixture_only':True,
+      'different_original_source_times_summed_as_real_wave':False,
+      'hypothetical_receiver_mode_components':list(components),
+      'phasor_amplitude':amplitude,'phasor_phase_rad':phase,
+      'coherent_mode_power':amplitude**2,
+      'sum_independent_amplitude_squared':float(independently_squared),
+      'incident_wave_work':case['incident'],
+      'outgoing_wave_work':case['outgoing'],
+      'net_wave_work':case['net_wave'],
+      'spark_work':case['spark'],
+      'full_work_residual':case['residual'],
+      'restored_state_established':False}
+
 def gravity_separate_and_clock_negative_controls():
     G,c,r,E=S.symbols('G c r E',positive=True)
     # Conditional Newtonian acceleration due to energy-as-gravitating-mass,
@@ -103,6 +144,7 @@ def run():
     return {'status':'PASS','scope':'EXACT_SYMBOLIC_AND_NATIVE_J12_SYNTHETIC_SOURCE_INTERFACE',
        'source_admission':exact_source_gates(),
        'original_j12_nonlin_circuit':native_j12_paid_work(),
+       'hypothetical_four_source_j12_phasor':coherent_four_source_fixture(),
        'gravity_force_channel':gravity_separate_and_clock_negative_controls(),
        'proven_same_apparatus_frequency_or_received_watts':False,
        'agda_kernel_verified':False,'original_RF_or_gravimeter_data_replayed':False}
