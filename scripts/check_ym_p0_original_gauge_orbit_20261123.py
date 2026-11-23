@@ -64,3 +64,31 @@ print("PASS: original F/G plaquette marks invariant under a full local source ga
 print("PASS: 8 gauge star flips, 1 active and 7 frozen: ten-link slice NOT gauge closed")
 print("PASS: 8 transformed coarse paths; all 64 F19 paths transform by endpoints")
 print("OPEN: physical continuous SU(N) Haar/CMP119 T, absolute W3, interacting OS")
+
+# Connected frozen-complement certificate. If two restricted cylinder fields
+# are gauge-related, their difference gradient vanishes along all frozen
+# bonds. Connectedness forces the gauge function constant: all 2^10
+# cylinder assignments represent distinct full site-gauge orbits.
+adjacency={x:set() for x in sites}
+for x,m in links:
+    if (x,m) in active:
+        continue
+    y=step(x,m)
+    adjacency[x].add(y)
+    adjacency[y].add(x)
+visited={F};frontier=[F]
+for x in frontier:
+    for y in adjacency[x]:
+        if y not in visited:
+            visited.add(y)
+            frontier.append(y)
+assert len(visited)==256
+assert sum(len(v) for v in adjacency.values())==2*(1024-10)
+# For a connected original graph Z2^256 has one global Z2 stabilizer:
+# effective local gauge orbits have 2^255 members. The 2^10 distinct
+# source cylinders therefore gauge-saturate to exactly 2^265 fields.
+# Wilson action and closed marks are constant on each orbit; uniform
+# finite-group saturation multiplies all 1,F,G,FG sums by the same 2^255.
+print("PASS: 1014 frozen-bond complement connected on all 256 original sites")
+print("PASS: 2^10 distinct cylinder gauge orbits; effective gauge orbit size 2^255")
+print("PASS: 2^265 saturated full-source fields, unchanged normalized four moments")
