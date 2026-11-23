@@ -16,7 +16,9 @@ from collections import Counter
 from fractions import Fraction
 import sympy as S
 
-# CRITICAL: original SSP source is BALANCED -1,0,+1 with 0 at centre.\n# Never use residue 0,1,2 with a path that treats 1 as the centre.\nV=list(product((-1,0,1),repeat=3))
+# CRITICAL: original SSP source is BALANCED -1,0,+1 with 0 at centre.
+# Never use residue 0,1,2 with a path that treats 1 as the centre.
+V=list(product((-1,0,1),repeat=3))
 I={v:i for i,v in enumerate(V)}
 M=S.Matrix([[1,1,0],[0,1,1],[1,1,1]])
 G=-M
