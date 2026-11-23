@@ -896,15 +896,15 @@ Local genuine numerical zero census at `t=200`: `Q=4` 56 zeros, physical `P4=913
 
 ## 23 Nov — P0 source joint 2D harmonic test and certified original W angular cones
 
-See [exact source-aligned mathematical ledger](../proofs/RHOriginalJointHarmonicQuarticUniformSectorsP020261123.md) and [executed identical-blob SymPy/mpmath test](../../scripts/check_rh_p0_harmonic_joint_kernel_20261123.py). Existing theorem owners in Lean \`main\` already identify the source \`signedNormalizedPairKernel\` as the original compact-profile cosine–cosh \`K_W(α,q)\`, with zero second moment and fourth moment \`-4 W.targetStrength\`, finite support and explicit uniform profile L1 mass. Exact harmonic \`∂²_αK+∂²_qK=0\` and the \`Re(q+iα)^4\` Taylor remainder give a new source-witness-uniform signed sector:
+See [exact source-aligned mathematical ledger](../proofs/RHOriginalJointHarmonicQuarticUniformSectorsP020261123.md) and [executed identical-blob SymPy/mpmath test](../../scripts/check_rh_p0_harmonic_joint_kernel_20261123.py). Existing theorem owners in Lean `main` already identify the source `signedNormalizedPairKernel` as the original compact-profile cosine–cosh `K_W(α,q)`, with zero second moment and fourth moment `-4 W.targetStrength`, finite support and explicit uniform profile L1 mass. Exact harmonic `∂²_αK+∂²_qK=0` and the `Re(q+iα)^4` Taylor remainder give a new source-witness-uniform signed sector:
 
-\`\`\`text
+```text
 rho_* = sqrt(alpha^2+q^2) in (0,1e-4],
 |q^4-6 alpha^2 q^2+alpha^4| >= rho_*^4/20
 => sign(K_W(alpha,q)-K_W(0,0)) = -sign(q^4-6alpha^2 q^2+alpha^4)
    with strict margin >= (9/12800)*rho_*^4.
-\`\`\`
+```
 
-This applies to *selected P0 W* with the original \`targetStrength>=7 pi^4/1600\` and \`t>=200\`, no fake fixed-R assumption. At physical \`t>=80000\`, \`|alpha|<=8/t<=1e-4\` for every hypothetical off-critical zero, but **its q-coordinate is not controlled by α**. The on-target q=0 axis exhibits an explicit positive combined height-defect after the correct original base-minus-pair normalization; it supplies no negative bound on the full off-ordinate signed zero-minus-mu source. The two-dimensional corners and uncategorized narrow cones are **not** discarded.
+This applies to *selected P0 W* with the original `targetStrength>=7 pi^4/1600` and `t>=200`, no fake fixed-R assumption. At physical `t>=80000`, `|alpha|<=8/t<=1e-4` for every hypothetical off-critical zero, but **its q-coordinate is not controlled by α**. The on-target q=0 axis exhibits an explicit positive combined height-defect after the correct original base-minus-pair normalization; it supplies no negative bound on the full off-ordinate signed zero-minus-mu source. The two-dimensional corners and uncategorized narrow cones are **not** discarded.
 
-**R2-S0 and R2-S1 still the only decisive actual terminal:** prove a strict signed \`H_W+S_W<4 d_W(rho)+I_W\` with the original actual zero multiplicities and Gamma integral and post-sixth nonnegative slack. Do not use the source angular sign cone to manufacture actual ζ zero positions or convert \`H-I=2D\` into an independent sign estimate. Countercontrols retained: R2-N0 RvM-only fourth-primitive cannot pay \`O(r^-4)\`, and any new Fourier response notch is not a zeta-zero. No Lean/Agda kernel or CI run on new claims; RH/GRH OPEN.
+**R2-S0 and R2-S1 still the only decisive actual terminal:** prove a strict signed `H_W+S_W<4 d_W(rho)+I_W` with the original actual zero multiplicities and Gamma integral and post-sixth nonnegative slack. Do not use the source angular sign cone to manufacture actual ζ zero positions or convert `H-I=2D` into an independent sign estimate. Countercontrols retained: R2-N0 RvM-only fourth-primitive cannot pay `O(r^-4)`, and any new Fourier response notch is not a zeta-zero. No Lean/Agda kernel or CI run on new claims; RH/GRH OPEN.
