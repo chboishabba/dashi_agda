@@ -18,8 +18,10 @@ import tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-SOURCE=ROOT/"scripts/check_pi_p0_fibre_cost_profile.cpp"
-SOURCE_BLOB="078e76a0dbc603e89ac108f3d171764d4a66f247"
+SOURCES={
+ "retained":(ROOT/"scripts/check_pi_p0_fibre_cost_profile.cpp","078e76a0dbc603e89ac108f3d171764d4a66f247"),
+ "released":(ROOT/"scripts/check_pi_p0_endpoint_lifetime.cpp","8ff286c6ec9ab23fe0d18c7d2833e1645c465b7a"),
+}
 EXPECTED={
  10000:"ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
  100000:"79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
@@ -77,10 +79,13 @@ def main():
  args=ap.parse_args()
  if args.reps<1 or args.reps%2==0:ap.error("--reps must be positive and odd")
  if any(d not in EXPECTED for d in args.digits):ap.error("unknown certified precision")
- blob=run(["git","hash-object",str(SOURCE)],cwd=ROOT).strip()
- if blob!=SOURCE_BLOB:raise AssertionError("committed C++ bytes moved: "+blob)
+ blobs={}
+ for name,(source,expected) in SOURCES.items():
+  blob=run(["git","hash-object",str(source)],cwd=ROOT).strip()
+  if blob!=expected:raise AssertionError("committed C++ bytes moved: "+str(source)+" "+blob)
+  blobs[name]=blob
  report=dict(schema="paper9-pi-p0-cost-fibre-allocator-ledger-v1",
-  exact_source_git_blob=blob,
+  exact_source_git_blobs=blobs,
   premises="classical Chudnovsky identity and alternating tail",
   certification="original GMP exact decimal floor + SHA256 output regressions",
   formal_agda_kernel_checked=False,external_sota_compared=False,
@@ -88,16 +93,22 @@ def main():
   peak_explicit_carrier_model_is_heap_upper_bound=False,
   source_pinned=True,samples=[],by_precision={})
  with tempfile.TemporaryDirectory(prefix="pi-p0-fibre-") as folder:
-  binary=str(Path(folder)/"pi-fibre")
-  run(["g++","-O3","-std=c++17","-Wall","-Wextra","-pedantic",str(SOURCE),
-       "-lgmpxx","-lgmp","-lcrypto","-o",binary],timeout=120,cwd=ROOT)
+  binaries={}
+  for name,(source,_) in SOURCES.items():
+   binary=str(Path(folder)/("pi-fibre-"+name))
+   run(["g++","-O3","-std=c++17","-Wall","-Wextra","-pedantic",str(source),
+        "-lgmpxx","-lgmp","-lcrypto","-o",binary],timeout=120,cwd=ROOT)
+   binaries[name]=binary
   for d in args.digits:
-   modes=["baseline","inplace"]
+   modes=["baseline","inplace","released"]
    records={name:[] for name in modes}
    for i in range(args.reps):
-    for mode in (modes if i%2==0 else list(reversed(modes))):
-     row=parse(run([binary,str(d),mode,"1"]),d,mode)
-     row["rotation"]=i;records[mode].append(row);report["samples"].append(row)
+    for name in (modes[i%3:]+modes[:i%3]):
+     variant="released" if name=="released" else "retained"
+     argmode="baseline" if name=="baseline" else "inplace"
+     row=parse(run([binaries[variant],str(d),argmode,"1"]),d,argmode)
+     row["implementation"]=name
+     row["rotation"]=i;records[name].append(row);report["samples"].append(row)
    profile={}
    for mode,rs in records.items():
     profile[mode]={name:statistics.median(x[name] for x in rs)
@@ -105,13 +116,11 @@ def main():
        "peak_explicit_carrier_capacity_bytes","gmp_alloc_calls",
        "gmp_realloc_calls")}
     profile[mode]["times_ms"]=[r["median_ms"] for r in rs]
-   base=profile["baseline"];new=profile["inplace"]
-   # Strict coordinatewise Pareto, not an attribution of causal speedup.
    dims=("median_ms","proc_vmhwm_kib","gmp_peak_live_bytes")
-   profile["inplace_dominates_baseline_observed"]=(
-      all(new[x]<=base[x] for x in dims) and any(new[x]<base[x] for x in dims))
-   profile["baseline_dominates_inplace_observed"]=(
-      all(base[x]<=new[x] for x in dims) and any(base[x]<new[x] for x in dims))
+   for a in modes:
+    profile[a]["observed_strict_dominates"]=[b for b in modes if a!=b and
+      all(profile[a][x]<=profile[b][x] for x in dims) and
+      any(profile[a][x]<profile[b][x] for x in dims)]
    profile["statistical_significance_established"]=False
    report["by_precision"][str(d)]=profile
  if args.out:args.out.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
