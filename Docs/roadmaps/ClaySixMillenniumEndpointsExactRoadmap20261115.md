@@ -1,4 +1,12 @@
 
+## 23 November 2026 — six-lane exact alpha ledger and two NEW non-universal source recoveries
+
+[**Controlling cross-lane original-ends and exact-unpaid-lemma ledger**](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md) on #1543, plus [BSD same-E32 degree-two isogeny and classical rank-zero Tate descent](../../scripts/check_bsd_e32_original_2isogeny_bidi_20261123.py) (**11,616/11,616** independent finite-group checks, both symbolic isogeny compositions, exact identical executed blob d43aa30773b572551b749b5ac1b153be4c798ce5) and [Hodge non-product literal Gr(2,4) Schubert rational-cycle inverse](../../scripts/check_hodge_gr24_schubert_cycle_bidi_20261123.py) (**7,200/7,200** exact inverse coefficient recoveries, blob c437b482b547ae0a5773ee9a8f5931b89a2778c0). New selected arithmetic E32 rank-zero math is an explicit instance of CLASSICAL Tate 2-isogeny descent, not deduced from BSD. The new Gr(2,4) selected H2 closure is classical Schubert/cellular geometry; neither yields universal BSD S6 nor Hodge H3.
+
+**NS P0** true original R568 signed global spacetime estimate and its separate scalar FTC/initial calibration remain OPEN; raw R236 C^5 spectator growth is a different instantaneous source and must NOT be represented as R568 no-go. **Karp E1** original positive-gamma physical TableProgram already exists, but whole-word/certificate/ledger/terminal physical compilation, actual host-control elimination, bounded stuttering and universal polynomial tape-time still OPEN; no SATNotInP claim. RH/GRH #1533 and YM #1536/#1544 retain their independently active canonical source roadmaps. This PR does not edit those original theorem owners. Exact native Agda/Lean/CI check has NOT RUN, no new six-prize endpoints proved: **0/6**. Retain the previous gate-count methodology until all same-object classical-vs-native statuses are reconciled, rather than incrementing a progress numerator from sample tests.
+
+
+
 
 ## 23 November 2026 — N21 local-head maximum-cut and R568 source-type correction
 
