@@ -1,5 +1,13 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — alpha multi-lane reconciling R568 analytic and R236 finite diagnostic
+
+New [six-lane source-grounded exact lemma index](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md); existing [R568/Karp maximum-cut owner](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md). The R236 exact complete-output covariance S_C=R_CW_C−N_CV_C and its C^5 spectator no-go with **actual P_kM=M** and active deep-FL source are now separate from the real R568 live global signed, *time-integrated* forcing-square object. Original R541/R542/R573/R547→R568 BIDI and existing source nestedBudgetBuildsR568 are ALREADY PRESENT and must NOT be duplicated. There is NO proved R236→R568 identity, so demanding a fabricated R236 cancellation first is incorrect.
+
+**Unpaid exact original lemmas:** (1) a cutoff-independent signed R568 NestedSpectatorSpacetimeBudget on actual R240/R405 Galerkin family, preserving k,alpha,beta,time and sign before norm; (2) R495/R565 scalar FTC and genuine initial selfFlux terminal calibration, and R503/R504 original terminal propagation as appropriate; (3) cutoff-to-original 3D PDE smoothness/existence with source forcing and admissible data. The merged #1539 physical W2 no-go remains a negative control. No Agda/Lean kernel checked here; no Clay NS proof promoted.
+
+
+
 ## 23 November 2026 — R568 analytic carrier is not R236 padded covariance
 
 **Source-owner/codomain correction; primary [NS+Karp complete maximum-cut](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md).** The existing \`NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact.centeredPairCovarianceAppendZero\` pays the exact instantaneous R236 zero-work padding cocycle, and the all-rational projected helical fixture proves \`S_C=R_CW_C-N_CV_C\` can have either sign and scale as \`32 nu ||M||² C^5\` for fixed input. However, DO NOT assume this R236 \`S_C\` is the live R568 forcing square or a term that must be canceled there: \`NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact\` defines the actual cutoff/time/output-indexed **\`4*integratedGlobalForcingFull\`** on a physical R240/R405 trajectory, globally summing \`R543.fullSquareSum(R567.forcingPair)\`. The R541 literal resolvent depends on **two** source cells' rates and R573 nested sign factors. No unconditional same-object R236→R568 identity was found in the inspected source; do not invent one.
