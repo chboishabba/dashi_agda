@@ -1119,3 +1119,81 @@ full-action non-descent, COMP7 FRACDASH reconstruction, COMP8
 future-consumer sufficiency, CM winding/primitive necklaces and
 level-163 Masser. Sweetgrass cultural/methodological attribution
 belongs to Robin Wall Kimmerer, not mathematical theorem authority.
+
+
+## 23 November — COMP5b fused native GMP integer-floor certificate
+
+New executable scripts/check_pi_gmp_fused_certificate.cpp committed on
+#1529 at 478cc4a4042910a28296a81e8cfe269adfdf95e8; source
+Git blob e356a56f33126059f2b1fa0db3b6668eeb747e80.
+GitHub readback and byte-identical locally compiled file verified
+with git hash-object. Exact command:
+g++ -O3 -std=c++17 scripts/check_pi_gmp_fused_certificate.cpp -lgmpxx -lgmp -o /tmp/check_pi_gmp_fused_certificate
+/tmp/check_pi_gmp_fused_certificate 100000 5
+
+Core identity: with Chudnovsky split (P,Q,T), next-leaf
+p_n=-24(2n-1)(6n-5)(6n-1), q_n=C*n^3,
+v=T/Q, v_next=(T*q_n+P*p_n*(A+B*n))/(Q*q_n).
+For n>=1 compare the exact positive endpoints v,v_next to choose
+S_low and S_high. With integer z=floor(2^bits sqrt(10005)),
+the certified decimal interval floors are
+floor(426880*z*10^d*den(S_high)/(2^bits*num(S_high)))
+and
+floor(426880*(z+1)*10^d*den(S_low)/(2^bits*num(S_low))).
+Compute entirely with mpz integer products and floor division.
+The equality of these floors is the selected consumer; ordinary
+mpq normalization is unnecessary. The analytic Chudnovsky identity
+and alternating-series bound remain EXTERNAL premises; this is
+arithmetic certification conditional on them, not a new proof of
+Bishop same-real analytic transport.
+
+Four modes use identical midpoint tree and tail/precision:
+plain-mpq, cross-gcd-mpq, plain-fused, cross-gcd-fused.
+Fresh byte-identical compiled-source execution (g++ 14.2.0, GMP),
+5 within-process runs per mode, includes binary split, isqrt,
+enclosure, floor, decimal conversion; compilation/startup excluded.
+Single-run medians in milliseconds (noise; repeat before SOTA claim):
+| places | plain mpq | cross mpq | plain fused | cross fused |
+|---:|---:|---:|---:|---:|
+| 1000 | .179120 | .148534 | .057937 | .066490 |
+| 10000 | 5.469310 | 4.533380 | 1.681440 | 1.821290 |
+| 50000 | 51.446400 | 44.901200 | 17.133100 | 16.449300 |
+| 100000 | 142.032000 | 116.518000 | 42.977700 | 41.341800 |
+
+Additional 5 independent process invocations x 3 samples:
+| places | median plain-mpq | cross-mpq | plain-fused | cross-fused |
+|---:|---:|---:|---:|---:|
+| 10000 | 5.235 | 4.526 | 1.666 | 1.730 |
+| 50000 | 50.282 | 44.141 | 16.621 | 16.200 |
+| 100000 | 134.599 | 116.239 | 43.679 | 42.684 |
+This suggests 63% faster certificate path at 50000, 100000 than
+cross-mpq, with the winning fused variant depending on precision.
+Cross-cancellation still substantially reduces final triple bits:
+50000 plain 784923, cross 451549;
+100000 plain 1633834, cross 903197.
+Do not require fully normalized (P,Q,T) when selected decimal-floor
+consumer accepts a sufficient projective representation.
+
+All four modes yielded exactly equal decimal strings and prefix
+hashes for d=1000,10000,50000,100000:
+1000 8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2
+10000 ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524
+50000 c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+Independent mpmath pi decimal hashes cross-checked for d=1000
+and 10000 (not a directed-rounding certified independent pi source).
+No FLINT/PARI/y-cruncher installed; python-flint package unavailable
+via this environment's offline package index, MPFR runtime is present
+but headers unavailable. No world SOTA or external matched comparison
+claimed. No Agda, Lean or CI executed.
+
+COMP5b native direct-quotient optimization exact PASS; matched internal
+GMP performance promising, not final SOTA. Next COMP5c: isolate
+split versus sqrt versus exact floor/string cost and compare to
+FLINT/MPFR on same machine if installed. Test 100k+ digit streaming,
+RSS, cold start, varied order, GMP version/CPU and robust intervals.
+Preserve COMP6 original Monster/VOA actions beyond scalar graded trace;
+COMP7 FRACDASH original instruction trace; COMP8 all-future-observer
+non-descent; CM winding/primitive necklaces, GMP selected coefficient,
+contour, level-163 Masser. Sweetgrass/Kimmerer attribution remains
+methodological and distinct from formal mathematical ownership.
