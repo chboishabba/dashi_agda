@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
-import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans)
 
@@ -232,18 +232,21 @@ axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteF site = refl
 
+diffPlusDiff : ∀ a b c d → (a - b) + (c - d) ≡ (a + c) - (b + d)
+diffPlusDiff = ℚRing.solve-∀
+
+subSelfZero : ∀ a → a - a ≡ 0ℚ
+subSelfZero = ℚRing.solve-∀
+
 sumRationalSubtract :
   ∀ {A : Set} values (left right : A → ℚ) →
   sumRational values (λ value → left value - right value)
   ≡ sumRational values left - sumRational values right
-sumRationalSubtract [] left right = OpaqueAlgebra.zeroSubtractSelf
-sumRationalSubtract (value ∷ values) left right =
-  trans
-    (cong ((left value - right value) +_)
-      (sumRationalSubtract values left right))
-    (OpaqueAlgebra.sumSubtractStep
-      (left value) (right value)
-      (sumRational values left) (sumRational values right))
+sumRationalSubtract [] left right = ℚRing.solve-∀
+sumRationalSubtract (value ∷ values) left right
+  rewrite sumRationalSubtract values left right =
+    diffPlusDiff (left value) (right value)
+      (sumRational values left) (sumRational values right)
 
 axisCenteringFibreSumZero :
   ∀ {L} (dataSet : NormalizedAxisAverageData L)
@@ -289,7 +292,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       (trans
         (cong (λ averagedTotal → total - averagedTotal)
           (sumOfAverageConstant dataSet total))
-        (OpaqueAlgebra.subtractSelfZero total)))
+        (subSelfZero total)))
 
 ------------------------------------------------------------------------
 -- Self-adjointness in the literal global block inner product.

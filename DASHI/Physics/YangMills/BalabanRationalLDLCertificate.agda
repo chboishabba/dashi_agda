@@ -2,13 +2,53 @@ module DASHI.Physics.YangMills.BalabanRationalLDLCertificate where
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
-  (sq; squareNonnegative; baseBelowBasePlusRemainder)
+open import Data.Sum.Base using (inj₁; inj₂)
+import Data.Rational.Tactic.RingSolver as ℚRing
+
+sq : ℚ → ℚ
+sq x = x * x
+
+negSquare : ∀ q → (- q) * (- q) ≡ q * q
+negSquare = ℚRing.solve-∀
+
+negZero : - 0ℚ ≡ 0ℚ
+negZero = ℚRing.solve-∀
+
+squareNonnegative : ∀ q → 0ℚ ≤ sq q
+squareNonnegative q with ℚP.≤-total 0ℚ q
+... | inj₁ zero≤q =
+  let
+    instance
+      qNonnegative : NonNegative q
+      qNonnegative = nonNegative zero≤q
+      qqNonnegative : NonNegative (q * q)
+      qqNonnegative = ℚP.nonNeg*nonNeg⇒nonNeg q q
+  in ℚP.nonNegative⁻¹ (q * q)
+... | inj₂ q≤zero =
+  subst (λ value → 0ℚ ≤ value) (negSquare q)
+    (let
+      zero≤negqRaw = ℚP.neg-antimono-≤ q≤zero
+      zero≤negq : 0ℚ ≤ - q
+      zero≤negq = subst (λ value → value ≤ - q) negZero zero≤negqRaw
+      instance
+        negqNonnegative : NonNegative (- q)
+        negqNonnegative = nonNegative zero≤negq
+        negqSquaredNonnegative : NonNegative ((- q) * (- q))
+        negqSquaredNonnegative = ℚP.nonNeg*nonNeg⇒nonNeg (- q) (- q)
+     in ℚP.nonNegative⁻¹ ((- q) * (- q)))
+
+baseBelowBasePlusRemainder : ∀ base remainder →
+  0ℚ ≤ remainder →
+  base ≤ base + remainder
+baseBelowBasePlusRemainder base remainder zero≤remainder =
+  subst (λ value → value ≤ base + remainder)
+    (ℚP.+-identityʳ base)
+    (ℚP.+-mono-≤ (ℚP.≤-refl {x = base}) zero≤remainder)
 
 ------------------------------------------------------------------------
 -- Generic exact LDL^T certificate consumer over rational coordinates.
