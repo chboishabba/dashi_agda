@@ -1,3 +1,14 @@
+## 23 November 2026 — SOURCE CORRECTION / nine-coordinate Fourier-shell addendum (RH geometry)
+
+The first new RH `check_rh_hyperfabric_k_time_spatial_intertwiner_20261123.py` used a shifted residue path `0–1–2` while applying F3³ addition with zero as group origin. **That graph labelling is NOT the native balanced SSP original `-1↔0↔+1` with centre zero.** Count equality does not establish source-geometry identity. The committed script was REPAIRED (RH commits `c276ef63`, `bc0846fd`) to enumerate and act on actual `(-1,0,+1)^3` and `(-1,0,+1)^9`, map `GF3` back to balanced labels, and treat antipode as literal global `x↦-x`. Source-equivalent local corrections pass native 54/81 spatial edges, 729 dual Fourier character pairs, and ALL 118,098 P3^9 source-edge inverse checks. Fixed-graph Singer no-go remains; true indexed-transport intertwiner remains valid.
+
+New FULL periodic nine-coordinate Fourier shell ledger: support-size r in 0..9 has multiplicity `C(9,r)*2^r`, namely
+`(1,18,144,672,2016,4032,5376,4608,2304,512)`, summing to 19,683. Maximal-support 512=8³ derives from the **three** native C3³ eight-mode strata. This is the distinct periodic C3^9 torus (177,147 edges), not nonwrapping P3^9 (118,098 edges), nor NS dyadic 1/128 / YM 16×8=128. Exact script updated `724c397e`, newline repaired `7d8c85ce`; detailed [source correction and spectrum](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricKTimeSpatialFourierIntertwinerAudit20261123.md), ledger `9707ab74`.
+
+**Keep TIME t distinct from refinement k, Fourier wavevector q and H05 Frobenius/consumer history**. Chart-conjugation cannot erase a nonzero `D_(t,k)`. The new Agda is source-written without kernel, the corrected script is read back but no byte-for-byte CI/Agda execution. Original RH signed FarExact/μ/slack, NS continuum and YM mass-gap endpoints remain open. Do not duplicate existing B3 spatial/Fourier intertwiner.
+
+---
+
 ## 23 November 2026 — P1 spatial/Fourier source intertwiner REUSE and genuine k/time hyperfabric graph transport
 
 Original existing source `DASHI/Moonshine/Base369Ternary27SignedSymmetryMonsterIntertwinerExact.agda` proves B3 signed coordinate reflections preserve FIXED P3³ native adjacency and send C3 character k to -k. Original `Base369Ternary27CharacterAdjacencyEquivarianceExact` owns C3³ Fourier characters; original `Base369PeriodicTernaryTorusPathRestrictionBidiExact` distinguishes nonwrapping spatial P3^9 from periodic C3^9. `TOE369CoarseFineIntertwinerMaxCutExact` is already a coarse/fine theorem consumer. DO NOT call all intertwiners missing: only the proposed genuine `G=-M` same-source RH zero/μ/signed FarExact intertwiner remains OPEN.
