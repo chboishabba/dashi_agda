@@ -32,6 +32,9 @@ import DASHI.Foundations.Base369BinaryTernaryRefinement as Resolution
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as SignedBit
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Physics.WaveAlgorithmLift as Wave
+import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as OriginalGauge
+open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as OriginalBond
 import Data.Vec.Base as Vec
 open import Data.Empty using (⊥)
@@ -490,3 +493,64 @@ originalFullSignedNineGaugeFibreRecoversEveryAddress field address =
 -- Wilson/F19 1024-link physical source BIDI. The pointwise codec
 -- proves source-label preservation; no NEW analytic SU(N) Haar law,
 -- dynamical 9D graph, CMP119 source T or continuum OS limit follows.
+
+
+------------------------------------------------------------------------
+-- EXACT FULL-1024 PHYSICAL-GAUGE ACTION: transport the source operator
+-- THROUGH the proven original 64×2×8 bond address and recover it.
+-- The actual SU(N) action is imported from the ORIGINAL periodic
+-- Wilson source, not redefined by arbitrary binary/Trit algebra.
+------------------------------------------------------------------------
+
+module _
+  {Matrix Complex : Set} {N : Nat}
+  (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+  where
+
+  Link369 : Set
+  Link369 = SUN.SUNMatrixElement theory
+
+  OriginalLinks369 : Set
+  OriginalLinks369 = OriginalGauge.SUNPeriodicLinks theory 3
+
+  OriginalGauge369 : Set
+  OriginalGauge369 = OriginalGauge.SUNPeriodicGauge theory 3
+
+  sourceLiftedSignedNineGaugeAction :
+    OriginalGauge369 →
+    (OriginalBinaryAddress → Link369) →
+    OriginalBinaryAddress → Link369
+  sourceLiftedSignedNineGaugeAction gamma lifted address =
+    OriginalGauge.periodicSUNGaugeTransform theory 3
+      (originalFullSignedNineGaugeFibreRecover lifted)
+      gamma
+      (encodeOriginalFine address)
+
+  -- FOR EVERY original positive-bond source label, the recovered
+  -- gauge-transformed lifted field is literally the original periodic
+  -- SU(N) gauge transformation of the recovered fine Wilson field.
+  -- No quotient on a signed midpoint: the address has all 8 residual
+  -- sheets, original axial phase, original oriented coarse bond and
+  -- source site. This is stronger than a 128-link-only finite square.
+  originalFullSignedNineRecoveredGaugeIsOriginalAt :
+    (gamma : OriginalGauge369)
+    (lifted : OriginalBinaryAddress → Link369)
+    (fine : R445.FineBond) →
+    originalFullSignedNineGaugeFibreRecover
+      (sourceLiftedSignedNineGaugeAction gamma lifted) fine
+    ≡
+    OriginalGauge.periodicSUNGaugeTransform theory 3
+      (originalFullSignedNineGaugeFibreRecover lifted)
+      gamma fine
+  originalFullSignedNineRecoveredGaugeIsOriginalAt
+    gamma lifted fine =
+    cong
+      (OriginalGauge.periodicSUNGaugeTransform theory 3
+        (originalFullSignedNineGaugeFibreRecover lifted) gamma)
+      (originalFineRoundTrip fine)
+
+  -- Original SU(N) Wilson action, all 1536 original plaquettes,
+  -- Haar measure and normalized marked F19 pushforward are ALREADY
+  -- owned separately by the original source modules. Source-written
+  -- pointwise gauge naturality here is not a new proof of product-Haar
+  -- Fubini on a hypothetical independent nine-dimensional YM model.
