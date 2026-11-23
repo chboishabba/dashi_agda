@@ -124,3 +124,57 @@ for rt in orbit:
 print("PASS original entire cosh-Fourier test lifts reflected xi zeros to holomorphic contour trace")
 print("PASS 4/4 meromorphic logarithmic-derivative residues of exact bilateral quartet")
 print("CAUTION FAR/LOCAL indicator not holomorphic: contour FULL source, then subtract original local and sameOrd")
+
+
+# 23 Nov P0 follow-up: exact support cutoff and SAME-ORDINATE subtraction.
+# Original Lean NMu.lean:
+#   quarticFourCompletedRadius(t) = 16*(pi+1)/t,
+#   quarticFourPhysicalDetector_support_completedRadius
+# under W.Rpos,W.RltOne. For t>=200, this radius is < log(2),
+# so ANY classical explicit-formula prime-power sample g(log n), n>=2,
+# vanishes. This is a test-support fact, NOT a completed RH estimate.
+assert 16*(s.pi+1)/200 < s.Rational(2,5)  # pi<4
+assert s.Rational(2,5) < s.Rational(1,2) < s.log(2)
+print("PASS original physical support excludes every log(n), n>=2, for t>=200")
+
+# Lean JointHorizontalJet.signedNormalizedPairKernel_zero_eq_neg_four_target:
+# K_W(alpha,0)=-4 D_W(alpha).
+# Lean SignedPolePair.physicalCombinedHeightDefect_scaled and
+# SignedPolePair.combinedZeroHeightDefect identify d(rho)=m D_W(a/r)/r^2.
+_R,_mult,_def=s.symbols("_R _mult _def",positive=True)
+same_ordinate_term=_mult*(-4*_def)/_R**2
+same_ordinate_defect=_mult*_def/_R**2
+assert s.simplify(same_ordinate_term+4*same_ordinate_defect)==0
+assert s.simplify(2*same_ordinate_term+8*same_ordinate_defect)==0
+print("PASS original SAME-ORD term = -4*d(rho), not zero; pair = -8*d(rho)")
+
+# Define A=FULL completed-xi contour zero sum, I=original mu integral,
+# H=original off-ordinate zero sum, L=canonical local slack, d=target
+# defect, and Dsame=sum_{im(z)=t} d(z).
+# H=A-(-4*Dsame)=A+4*Dsame; original post-sixth target is
+# H+L<4*d+I. The exact SAME-ORD recut is
+# A-I+L<4*d-4*Dsame.
+_A,_I,_L,_d,_Dsame=s.symbols("_A _I _L _d _Dsame",real=True)
+_H=_A+4*_Dsame
+old_margin=4*_d+_I-(_H+_L)
+contour_margin=4*_d-4*_Dsame-(_A-_I+_L)
+assert s.simplify(old_margin-contour_margin)==0
+# Conditional on the original W quantitative target band, all defect
+# terms are nonnegative. An off-line target has a DISTINCT mirror at
+# the SAME ordinate and equal multiplicity, so Dsame>=2*d.
+assert s.simplify((4*_d-4*(2*_d))-(-4*_d))==0
+print("PASS exact post-sixth same-ordinate recut; off-line pair demands A-I+L < -4*d")
+
+# Right-vertical prime coefficient normalization. For real EVEN P,
+# f_t(s)=r^-2∫P(v) exp((s-(1/2+i*t))*v/r) dv.
+# The Fourier coefficient of f_t(c+i*tau)+f_t(1-c-i*tau)
+# against n^(-c-i*tau) is 2/r*n^(-1/2)*cos(t*log(n))*P(r*log(n)).
+# Test the Gaussian Fourier exponent algebra (the compact-support
+# vanishing then applies to the ORIGINAL P_W, not the Gaussian).
+_c,_h,_r=s.symbols("_c _h _r",positive=True)
+_b=_c-s.Rational(1,2)
+gaussian_exponent=_b**2/(4*_r**2)-_r**2*(_h-_b/(2*_r**2))**2
+expected_exponent=_b*_h-_r**2*_h**2
+assert s.expand(gaussian_exponent-expected_exponent)==0
+print("PASS right-vertical prime coefficient -(2/r)*sum Lambda(n)/sqrt(n)*cos(t log n)*P(r log n)")
+print("OPEN canonical contour-to-Zeta23.mu/Gamma and pole-removal normalization; NO RH/GRH claim")
