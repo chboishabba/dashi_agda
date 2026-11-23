@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-23",
+  "pr": 1537,
+  "status": "J28B_VALIDATED_4TH_U_DIODE_ROOT_BUT_ONLY_3_OF_6_J24_EVENT_BOXES_PAID",
+  "checker": "scripts/check_smith_filsinger_j28b_signed_peano_baker_20261123.py",
+  "exact_source_blob_executed_locally": "1a357ce4719fb552680c1b042237283abb977b6a",
+  "dependencies": {
+    "J25": "5d723374d71281cc5583582cc17d15016deaa8a3",
+    "J26": "78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94",
+    "J27": "6c7d7781f11943fc5b1267a6259bf3dc14f374d3",
+    "J28": "e22573e6189ff460e80f9bc1de13b3787d169b79"
+  },
+  "proof_scope": {
+    "synthetic_source_only": true,
+    "driver_off": true,
+    "initial_condition": "exact rational J23 nine-state numerical seed; no periodic fixed-point proof",
+    "nominal_parameters_only": true,
+    "original_nine_state_equations": "independent exact rational transcription of J18 source with nonlinear HF capacitor and diodes",
+    "time_grid": "exact rational",
+    "arithmetic": "1e30-grid outward integer intervals and exact Fraction",
+    "piecewise_Taylor_order": 52,
+    "sign_aware_matrix_method": "Peano-Baker time-ordered expansion of interval 9x9 Jacobian powers to order 8, rigorous geometric tail, plus nonnegative residual-forcing comparison",
+    "signed_matrix_order": 8,
+    "dynamic_mode_guards": "V diode active, U diode inactive, spark ON until fourth root",
+    "ci_or_agda_used": false
+  },
+  "third_spark_on_handoff": {
+    "previous_time_uncertainty": [
+      "3.51534025",
+      "3.51534095"
+    ],
+    "width": 7e-7,
+    "validated_picard_both_modes": true,
+    "comparison_to_same_fixed_time_virtual_OFF": true,
+    "vector_field_differences_nonzero_components": [
+      "bank: -ih/Cb",
+      "HF inductor: (b-Rgap*ih)/Lh"
+    ],
+    "jump_error_per_coordinate_upper_approx": [
+      1.9444843013000625e-19,
+      6.481614073001331e-19,
+      1.0462059882667925e-12,
+      1.3982951371790655e-12,
+      1.9219758628443985e-7,
+      6.40799376949092e-20,
+      1.644716102563968e-26,
+      4.74242113794096e-8,
+      8.445248680098112e-14
+    ],
+    "naive_handoff_width_approx": 0.000007352023071036629,
+    "corrected_handoff_width_approx": 0.0000010772131410407437
+  },
+  "verified_post_ON": {
+    "count": 75,
+    "step_length": "1/100",
+    "start": "3.51534095",
+    "end": "4.26534095",
+    "checkpoint": "Artifacts/smith-filsinger/j28b_signed_75_step_exact_checkpoint_20261123.json",
+    "chunk_lengths": [
+      20,
+      20,
+      20,
+      15
+    ],
+    "all_pass": true,
+    "last_coordinate_error_max_approx": 0.00021617322259964082,
+    "U_guard_upper_pre_fourth_approx": -0.00006123865134535153,
+    "no_extra_spark_or_diode_events": true
+  },
+  "fourth_U_ON": {
+    "event_time_bracket": [
+      "4.27514095",
+      "4.27574095"
+    ],
+    "width_model_time": "0.0006",
+    "left_guard_exact_numerators": [
+      "-493670018764633578177957834",
+      "-197624742905230032107900594"
+    ],
+    "right_guard_exact_numerators": [
+      "101314275505167737563488545",
+      "398794631141835659556052187"
+    ],
+    "derivative_exact_numerators": [
+      "745538856686118870906132101358",
+      "1250439215531312157277744411153"
+    ],
+    "integer_scale": "10^30",
+    "unique_transverse_root": true,
+    "other_guards_correct_sign": true,
+    "fourth_event_state_J24_coordinate_membership": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "fourth_event_state_coordinates_in_original_J24_box": 2,
+    "J24_fourth_box_all_nine_paid": false,
+    "virtual_U_off_field_continued_for_event_isolation_only": true,
+    "actual_physical_U_active_flow_after_root_not_integrated": true
+  },
+  "validated_hybrid_crossings": 4,
+  "original_J24_event_state_boxes_paid": 3,
+  "total_J24_boxes": 6,
+  "full_period_Poincare_fixed_point_interval_proved": false,
+  "five_parameter_periodic_family_proved": false,
+  "original_measured_environmental_source_or_Filsinger_hardware_verified": false,
+  "strict_finite_loss_unity_not_claimed": true
+}
