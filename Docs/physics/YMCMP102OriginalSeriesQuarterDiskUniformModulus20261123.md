@@ -4,7 +4,7 @@
 
 ## Original source and exact scope
 
-The original CMP109 positive series coefficients are a_n=1/(2n+2)!, b_n=1/(2n+3)!. The existing `BalabanCMP109BishopRootFreeSeriesExact.agda` on current `master` already constructs Bishop `aSeries X inside` and `bSeries X inside` as limits of `Seq.SeriesOf (term aCoefficient X)` and its B counterpart for |X|<=1/4. This original analytic module is **not present on the current #1536 head**; importing it there, or moving the new CMP102 finite theorem to a compatible master head, is a separate branch/kernel operation. Nothing below redefines the represented limits.
+The original CMP109 positive series coefficients are a_n=1/(2n+2)!, b_n=1/(2n+3)!. The existing `BalabanCMP109BishopRootFreeSeriesExact.agda` on current `master` already constructs Bishop `aSeries X inside` and `bSeries X inside` as limits of `Seq.SeriesOf (term aCoefficient X)` and its B counterpart for |X|<=1/4. The original analytic module has since been imported onto #1536 at the identical source blob, and the same-source BIDI coefficient bridge is present. These source imports do not establish Agda kernel acceptance or the finite-polynomial limit comparison. Nothing below redefines the represented limits.
 
 The new original #1536 `YMClayCMP102OriginalEndpointCauchyShiftExact.agda` is a **source-written, kernel-pending** proof of the coefficient identities e_n=o_n at every degree, with e_0=2a_0, e_n=2a_n+sum_{i+j=n-1}a_i a_j for n>=1, o_0=1, o_1=2b_0, o_n=2b_{n-1}+sum_{i+j=n-2}b_i b_j for n>=2. Its precise endpoint/sign identifications remain a pinned-Agda verification obligation.
 
@@ -42,9 +42,30 @@ where G(X)=1-2A(X)-X A(X)^2+2X B(X)+X^2 B(X)^2, and this inequality holds for ev
 
 ## Precise remaining P0 obligations
 
-1. **Kernel/branch:** reconcile current master native CMP109 Bishop represented limits and #1536 original CMP102 finite theorem on one safe import graph, then typecheck pinned Agda 2.9 with all transitive imports. Do not treat a source comment, a `machineChecked` tag or Fraction check as kernel acceptance.
+1. **Kernel/branch:** typecheck the now co-located original CMP109 series, #1536 CMP102 finite theorem, same-source BIDI bridge and new finite-G limit transport under pinned Agda 2.9, including all transitive imports. Do not treat a source comment, a `machineChecked` tag or Fraction check as kernel acceptance.
 2. **Source analytic:** implement the specific polynomial/limit comparison above using existing `Sequence` convergence and real polynomial continuity; identify the actual CMP102/Bishop chart argument X=-w, not an arbitrary renamed formal variable.
 3. **Geometry:** source-selected Bishop quaternion norm, normalized SU(2) chord/trace deficit, CMP98 nonlinear background Q and actual CMP102 plaquette/minimizer domain. Earlier #1444 consumer remains conditional until a true same-module import/definition equality.
 4. **Dominant physical P0:** original interacting 4D Wilson/Haar/F19 and actual CMP119/122 physical T, termwise absolute CMP116/W3 rooted-shell bound uniform in cutoff/volume, interacting E1 reflection-positive continuum, dense same-H OS gap, N1/G1. No Clay theorem conclusion follows from this analytic identity.
 
 Attribution: original Wilson/Haar, Bałaban CMP98/102/109/116/119/122, classical factorial/Cauchy algebra, Bishop/Bridges and Murray/Csimma Bishop backend, prior DASHI original named owners. No substitute operator, new postulate, auxiliary gauge measure, or weakened radius.
+
+
+## 23 November 2026 — source-level original G-prefix limit transport
+
+On PR #1536, commit [050ce7ca](https://github.com/chboishabba/dashi_agda/commit/050ce7ca476c58b3945c4110d63d5f39395de1e4) adds `YMClayCMP102OriginalGFiniteLimitTransportExact.agda` using the *original* `CMP109.aSeries` and `CMP109.bSeries` with the *same* CMP102 coefficient histories and original `|X|<=1/4` premise. No new series or limit carrier is defined.
+
+The source-written theorem `originalGPrefixConvergesToOriginalG` builds the finite five-term G_N limit from existing Bishop `Sequence.xₙyₙ→x₀y₀`, `xₙ+yₙ→x₀+y₀`, `-xₙ→-x₀`, and the source BIDI A/B convergence proofs. `originalGZeroFromOriginalPrefixConvergence` then consumes an **explicit** `Seq._ConvergesTo_ (originalGPrefix X) 0` witness and applies the original `Sequence.uniqueness-of-limits`. **This zero-prefix premise is not discharged by this module.** The old mathematical rational inequality `|G_N(X)|<=3*4^-N` remains to be translated into this exact Bishop zero-convergence witness. Thus this is real source-written limit compatibility, not a kernel-certified G(X)=0 theorem.
+
+The new Agda file's Git blob is `670955eb1ed471584eec5637d4df6e6992c33322`, byte-identical to the locally authored source. Local Fraction cross-check: 80/80 five-term polynomial-expression comparisons for 16 prefix lengths at signed quarter-radius sample points. That check is **not an Agda kernel pass**.
+
+### Exact import-safety preflight, fail-closed
+
+A direct live source audit of 15 selected existing Agda files found **at least 13** specific `--safe` → non-`--safe` import edges. Affected safe consumers include `BishopFiniteEvenOddCauchyReindexExact`, `BishopUnsignedFactorialCauchyParitySplitExact`, `BishopSignTwistedFiniteCauchyCoefficientExact`, `BishopRound11SignedFactorialExponentEncodingExact`, and `YMClayCMP102NativeMasterSignedParitySpecializationExact`. Their non-safe imports include `BishopFinSumSeriesBridgeExact`, `BishopFiniteCauchyRowReindexExact`, `BishopExponentialSeriesConvergenceExact`, and other original parity/factorial owners. Count is a **lower bound within the selected dependency set**, not a whole-repository transitive audit. Do not solve this by deleting `--safe` pragmas without reviewing the full downstream trust contract.
+
+Next exact local acceptance command in a populated checkout with pinned Agda 2.9 and compatible stdlib, using the existing project wrapper rather than CI:
+
+```sh
+DASHI_REPO_ROOT="$PWD" scripts/run_agda29_parallel_check.sh DASHI/Physics/YangMills/YMClayCMP102OriginalGFiniteLimitTransportExact.agda
+```
+
+In the current execution environment, neither Agda nor Nix is present and network cloning is unavailable. **No compiler was run; the kernel/import-safety gate remains OPEN.** Independent physical CMP119/122 T, absolute W3 and same-H OS remain entirely unpromoted.
