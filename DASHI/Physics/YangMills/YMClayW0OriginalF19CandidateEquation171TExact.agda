@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact whe
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Vec.Base using (Vec)
+open import Data.Vec.Base using (Vec; _∷_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -66,6 +66,43 @@ module _
     Fibre.actualAllPairsFibreIntegral
       theory source bilateral integrand coarse
 
+  ----------------------------------------------------------------------
+  -- TRUE ORIGINAL F19 LOCALIZED ONE-PAIR T STEP, NOT A MODEL STEP.
+  --
+  -- At the first one of 64 native ordered pair-fibres, integrate its
+  -- actual SU(N) Haar V.  Hold coarse W fixed, feed the resulting
+  -- original pair (W V^-1,V) into the ORIGINAL 63-fibre continuation.
+  -- The continuation may couple arbitrarily to all other pairs.
+  -- No tensor factorization of the physical Wilson weight is assumed.
+  ----------------------------------------------------------------------
+
+  sourceFirstPairTStep :
+    Link → Vec Link 63 → (FinePairField → ℝ) → ℝ
+  sourceFirstPairTStep headCoarse tailCoarse integrand =
+    Haar.integrateOne source
+      (λ headFibre →
+        Fibre.actualAllPairsFibreIntegral
+          theory source bilateral
+          (λ restPairs →
+            integrand
+              (Fibre.pairFromCoarseAndFibre
+                theory source bilateral headCoarse headFibre
+               ∷ restPairs))
+          tailCoarse)
+
+  -- This is an actual geometry-respecting one-step source equality:
+  -- the left side unfolds directly into first-conditional-pair T
+  -- followed by the remaining 63 source pair-fibre T operations.
+  -- Both sides are the same original F19 source for EVERY integrand.
+  sourceF19FirstPairLocalizationExact :
+    (headCoarse : Link)
+    (tailCoarse : Vec Link 63)
+    (integrand : FinePairField → ℝ) →
+    sourceConstrainedHaarT (headCoarse ∷ tailCoarse) integrand
+    ≡ sourceFirstPairTStep headCoarse tailCoarse integrand
+  sourceF19FirstPairLocalizationExact headCoarse tailCoarse integrand =
+    refl
+
   -- 896 spectators are integrated inside the pair integrand.
   -- This is NOT an assertion that spectators are independent.
   spectatorMarginalOfFineIntegrand :
@@ -79,6 +116,23 @@ module _
   candidateF19Mass : FineTest → SlowField → ℝ
   candidateF19Mass integrand coarse =
     sourceConstrainedHaarT coarse
+      (spectatorMarginalOfFineIntegrand integrand)
+
+  -- Both original fine marks and all 896 interacting spectators travel
+  -- through that same ordered local step. Crucially F*G stays within
+  -- the continuation, not multiplied after the two Haar integrations.
+  sourceF19MarkedFirstPairLocalizationExact :
+    (headCoarse : Link)
+    (tailCoarse : Vec Link 63)
+    (integrand : FineTest) →
+    candidateF19Mass integrand (headCoarse ∷ tailCoarse)
+    ≡
+    sourceFirstPairTStep headCoarse tailCoarse
+      (spectatorMarginalOfFineIntegrand integrand)
+  sourceF19MarkedFirstPairLocalizationExact
+    headCoarse tailCoarse integrand =
+    sourceF19FirstPairLocalizationExact
+      headCoarse tailCoarse
       (spectatorMarginalOfFineIntegrand integrand)
 
   candidateMassIsExistingOriginalF19 :
