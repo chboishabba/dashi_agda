@@ -364,3 +364,8 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonW3ThirdMomentF19W0BIDIExact a
 -- NOT a new independent nine-dimensional Yang-Mills measure or
 -- automatic CMP119/122 RG/localized T or all-scale OS mass gap.
 import DASHI.Physics.YangMills.YMClayY369OriginalSingerWilsonFourMarkSourceWeldExact as OriginalY369IndexedWilsonFourMark
+
+-- CMP102 P0: exact original master CMP109 A/B represented series source
+-- and its native finite signed-row coefficient/convergence BIDI.
+-- This is an import-graph regression request, NOT a pinned Agda receipt.
+import DASHI.Physics.YangMills.YMClayCMP102OriginalCMP109BishopSeriesSameSourceBIDIExact as OriginalCMP102CMP109SeriesBIDI
