@@ -10,7 +10,7 @@ import numpy as np
 from pathlib import Path
 import check_smith_filsinger_j18_hf_spark_tank_20261123 as hf
 
-HF_SHA = '430520c86fc471deada48835c7d048888745d2fa'
+HF_SHA = 'f4270a475f010874056cfe3cdeff5ee8e43c44eb'
 T=20*np.pi
 P=dict(Von=.003,Voff=.0009,source_amp=1.2)
 
