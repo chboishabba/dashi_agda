@@ -8,6 +8,20 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J25 — uniform local validated J18 Picard tube and native J24 replay (23 Nov 2026)
+
+**Native replay now actually completed for J24:** byte-identical GitHub script `check_smith_filsinger_j24_six_guard_rational_20261123.py` (blob **aca23be82**) and input `j24_six_hybrid_guard_centres_20261123.json` (**edcec489**) executed locally; 6/6 original **conditional** rational event slopes passed. No CI/Agda.
+
+**First genuine J25 validated original-equation IVP slab:** [new committed byte-identical executed checker](../../scripts/check_smith_filsinger_j25_first_segment_validated_interval_20261123.py) Git blob **5d723374d71281cc5583582cc17d15016deaa8a3**, [research geometry/proof boundary](../research/SmithFilsingerJ25ValidatedFirstUniformPicardFlowAndExactGap20261123.md), and [machine receipt](../../Artifacts/smith-filsinger/j25_validated_uniform_initial_picard_tube_20261123.json). Exact rational / outward 10^30 integer-grid arithmetic constructs a full nine-state Picard enclosure on `0 <= t <= 1/11` from every initial state in a radius-`1e-7` box around the rationalized J23 seed, with initial spark ON. It uses actual nonlinear J18 equations, nonzero damping, `sqrt(2 gamma_rad)` rational-grid enclosure, matched source quadratures and rigorous Taylor sine/cosine bounds.
+
+**Uniform five-parameter result, not corner samples:** gamma_rad=[0.0149,0.0151], gamma_internal=[0.00015,0.00025], k=[0.3495,0.3505], kh=[1.9995,2.0005], Gload=[0.5195,0.5205]. Exact Picard self-inclusion succeeded for the complete parameter rectangle. Throughout the initial verified time slab, both diode guard upper bounds remain negative (U<=**-0.06375128**, V<=**-0.93734763**) and bank minus spark OFF threshold remains positive (**>=2.19418132**). Nine-state Jacobian infinity norm strictly below **27.603334**, giving a Picard contraction on each of four time pieces length `1/44`; uniqueness for the prescribed initial-value problem follows. The source checker carries exact unrounded integer bounds and all self-inclusion slacks in its output.
+
+**Critical restraint:** This covers **1/(20pi) of the source-period duration** (about 1.6%). It does **NOT** prove the rational J23 centre is the true periodic state, locate the first diode root at ~3.389, prove the six J24 event-state boxes enclose the actual trajectory, compute the full interval return map, or establish the nonlinear periodic fixed-point theorem. This *is* a true local IVP interval certificate, not a full-period orbit certificate. Original physical source and 100% useful-load claims remain open/separately excluded under finite resistance.
+
+**J26 maximum-cut remaining:** validated Taylor-model/Lohner (wrapping-controlled) advance across `[1/11,20pi/11]`; isolate four diode/spark guard roots and prove exclusion of all extras, interval saltation denominators and derivative composition; then interval `P_tau(B)` / `DP_tau(B)` on a rational state box, certified centre defect and contraction/Krawczyk inclusion. Uniform 5D parameter-orbit proof is separate after centre. Source-first J18–J24 preserved on existing PR #1537 (open versus master during this cut), no duplicate replacement theory. FM original pin continuity 0/4; natural source-meter roles 0/24.
+
+---
+
 ## P0 J24 — six-guard hybrid orbit geometry and exact rational conditional Newton budget (23 Nov 2026)
 
 **Base/source reconciliation:** GitHub default still `master`; PR #1537 is **open, unmerged**, and the J23 native checker is absent from master. Source graph remains on existing `research/sheldrake-field-filsinger-levin-consolidation-20261121` until an explicit source merge. Do not claim this J24 is master-native. Original J18–J23 byte-identical execution remains open because independent local archive files are not the original GitHub imports. No Actions/CI.
