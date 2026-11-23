@@ -1,5 +1,18 @@
 # 27 − 1: same-action adversarial cut (hypervoxel / Albert / 26D string)
 
+## 23 November 2026 — Native signed 13-axis C26 Singer transport consumed by RH nonidentity H05 square
+
+Original owner **remains this #1249 native punctured 27 P3³ graph, antipode, `HyperfabricPunctured27Projective13OrientationExact`** and original Griess/Sah grade order13 actor (Lean #52, existing Agda shears); the new consumer lives on [RH #1533](https://github.com/chboishabba/dashi_agda/pull/1533) under `DASHI/Analysis/RHFourWindowC26NativeHyperfabricSquareExact.agda`. [Provenance/sign receipt](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricC26NonidentityCommutingSquare20261123.md) and local mathematical test `scripts/check_rh_c26_native_signed_h05_nonidentity_square_20261123.py` are already on that branch. No duplicate native ternary/cube/13-axis source was introduced.
+
+The **original field-grade** M is order13, G=antipode∘M is order26; `charpoly_F3(G)=X³-X+1` irreducible and cyclic degree-three basis determinant 1 mod3: G is a primitive `GF(27)^×` Singer generator on 26 nonzero points. The 13 projective axes are `GF(27)^×/GF(3)^×`; their *source-canonical* orientation chart carries a 4-of-13 nonzero sign cocycle, and `G^13` flips orientation on each native axis. True 27=1 origin+13 even/odd paired directions, not false 27/3=13. The exact rational 26D grade permutation decomposes with `(I±A)/2` into **13 even and 13 odd** signed sectors; dropping the odd sector loses original source identity. Abstract cyclic extension `1→C2→C26→C13→1` is a field representation, NOT the original nonwrapping cube path-graph metric.
+
+Consumer original RH source π/3 fourth-window projection retains both nonzero raw observed-cancelling contributions; H05 x/y trace those sources and z applies actual grade G. Six finite faces (two projective/unfold and four z-naturality) commute, and source/sign/residual/mode/observation and H05 metadata remain independently recoverable. Exact local 26 state ×6 faces and 26×26 rational parity PASS; Agda source-written, NOT native kernel typechecked. **The 54/54 native spatial graph edges remain NON-equivariant**, so this does not infer original cube Laplacian, 9DOF frame, C13 spatial operator, RH signed FarExact, positivity/physical PDE, or a global TOE proof.
+
+The user's proposed naive RH θ=π/13 fourth centre maintains atomic negative-square ratio but makes the original positive-pole witness negative; safe construction is unchanged RH π/3 with an extra C26/Axis13+orientation indexed fibre. 2600 appears in other repository sources but is not identified with native C26 (26 states), 13 projective axes, or a sourced RH constant; no numerological promotion.
+
+---
+
+
 ## 23 November 2026 — RH original four-window pi/13 cross-consumer, NOT native symmetry promotion
 
 Cross-programme consumer [RH PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533) reuses ORIGINAL native 27-point balanced ternary / 26 punctured points / 13 projective antipodal axes + orientation residual. New exact source analysis [full proof](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHQuarticGeneralAngleC13C26SourceCut20261123.md), [regression](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/scripts/check_rh_c13_c26_angle_stencil_20261123.py). **Do not duplicate the C2 13-axis codec or original Griess C13 grade actor here.**
