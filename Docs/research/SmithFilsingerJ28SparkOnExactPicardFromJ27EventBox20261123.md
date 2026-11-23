@@ -54,11 +54,23 @@ entirely above `Von`. Since the bank derivative is strictly positive on the *ent
 
 in **dimensionless model time**. As in J26/J27, the OFF-mode equation is used virtually past the earliest possible threshold only to bracket the first root; the actual physical ON-mode flow after the root is **not** advanced by this proof.
 
+## Actual-event spark saltation, independent of the J24 box width
+
+The proven root occurs for elapsed time `0.022<s<0.026`. Hull the two self-inclusive Picard tubes intersecting this interval, then sharpen the bank coordinate to the **exact ON threshold** `b=Von=0.006`. On this whole actual-event enclosure, direct outward arithmetic gives
+
+```
+pre-switch bank slope:  [0.1430611029571664763050, 0.1530268714188615243284]
+post-switch bank slope: [-0.1343215385828897080985, -0.1183978516917251962495]
+saltation determinant:  [-0.9389102684543578790234, -0.7737062817395606533548]
+```
+
+The exact rank-one saltation determinant is the ratio `post_bank_slope/pre_bank_slope`; its entire certified interval is **strictly negative**, proving transverse, orientation-reversing ON switching at the **actual third event** of the J27-inherited nominal trajectory. Both physical modes are continuous in state but have different vector fields at the spark threshold; no artificial state reset is introduced. This independently validates the third event's signed saltation even though the original tiny J24 nine-coordinate centre box is **not** enclosed. No actual post-switch ON-mode ODE advance follows.
+
 ## Reproducibility and non-promotion
 
-- Committed source Git blob: `d4467d7a20c6742a61853ae1d042103a6ab4743e`, **byte-identical** to the locally executed Python source; run `python scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py` to print all 20 interval witnesses.
+- Committed source Git blob: `8379d029d8ef37b08a5006eb60b71f98cc74ab57`, **byte-identical** to the locally executed Python source; run `python scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py` to print all 20 interval witnesses.
 - [Machine acceptance](../../Artifacts/smith-filsinger/j28_spark_on_picard_20261123.json): exact integer-grid inequalities and explicit proof boundaries.
-- Original six-guard J24 itinerary: **3/6 unique event occurrences now flow-certified**, but only **2/6 full original J24 nine-coordinate event boxes paid**. The coarse 0.004 event-time bracket is not enough to promote the third event-state box.
+- Original six-guard J24 itinerary: **3/6 unique event occurrences and their switching direction/transversality now flow-certified**, but only **2/6 full original J24 nine-coordinate event boxes paid**. The coarse 0.004 event-time bracket is not enough to promote the third event-state box.
 - Source-typed original J18 full numerical script, Agda kernel, CI, independent Filsinger circuit pin graph, natural incident energy, full-period hybrid return map, rigorous periodic fixed point and uniform five-parameter orbit family are **not certified**.
 
 **Next J28b big bite:** tighten the third event-state tube using the sharper actual J27 interval root-state enclosure (not just the coarse J24 box), prove 9/9 original J24 spark-ON event-box inclusion and signed spark-ON saltation; carry the physical event-time handoff into the subsequent U-on, V-off and U-off branches. Then weld the six-guard full `tau=20*pi/11` return map, derivative and rational Banach/Krawczyk fixed-point admission. Preserve independent original physical source and measured receiver obligations.
