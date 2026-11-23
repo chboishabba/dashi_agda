@@ -160,5 +160,27 @@ def run(h=F(1,11)):
       covers_first_diode_event=False,full_tau_shooting_interval_proved=False,
       certified_current_exact_periodic_root=False,no_physical_source_metrology=True)
 
+def run_wide_five_parameter_box():
+    global RAD
+    bounds=dict(gamma_rad=('0.0149','0.0151'),
+                gamma_internal=('0.00015','0.00025'),
+                k=('0.3495','0.3505'),kh=('1.9995','2.0005'),
+                Gload=('0.5195','0.5205'))
+    for key,(a,b) in bounds.items():PARAM[key]=I(F(a),F(b))
+    # 2 gamma_rad in [0.0298,0.0302]; integer square-root enclosure.
+    low=F('0.0298')*S*S
+    high=F('0.0302')*S*S
+    ll=math.isqrt(low.numerator//low.denominator)
+    uu=math.isqrt(high.numerator//high.denominator)+1
+    RAD=I(ll,uu,raw=True)
+    r=run()
+    r['uniform_fixed_initial_state_box_over_parameters']=bounds
+    r['not_uniform_periodic_fixed_point_box']=True
+    return r
+
 if __name__=='__main__':
- print(json.dumps(run(),indent=2))
+ nominal=run()
+ wide=run_wide_five_parameter_box()
+ print(json.dumps(dict(status='PASS_TWO_VALIDATED_FIRST_SEGMENT_TUBES',
+       nominal=nominal,wide_five_parameter_box=wide,
+       whole_tau_interval_proof_complete=False),indent=2))
