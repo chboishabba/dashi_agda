@@ -118,3 +118,41 @@ Q8 is a **cubature approximation for this specific source**, not an equally accu
 **STILL OPEN:** the literal CMP119 (2.18) admissible Omega/Lambda/S determining-set sequences and (2.19)/(2.20)/(2.22) actual ordered T steps; exact CMP122 Eq.(1.71) *gauge-fixed* constrained operator with Faddeev–Popov/ghost/Jacobian, nonlinear Q_B averaging, R-modification and full E/R/B/V source density; original beta(a) multiscale four-mark physical source realization, differentiated actual residuals and literal original-vs-CMP119 four-column error terms; rooted *termwise absolute* W3 cutoff/volume-uniform connected shells and positive fixed-physical-distance rate; E1/D1/D2/N1/G1 original interacting R4 same-H OS gap. None follows merely from the exact local Bessel integral. No Agda/Lean kernel, CI or Clay solution claimed.
 
 Attribution: original Wilson 1974 lattice action, normalized compact Haar/standard SU2 quaternion and Bessel identities, Bałaban CMP109/116/119/122 original localization/RG physics, existing DASHI original F19/marked error/CMP116 W3 owners.
+
+
+## All SU(N): exact original twelve-staple external-field reduction
+
+The SU2 quaternion/Bessel formula above is a specialization of a source-exact **SU(N) matrix integral** that needs no invented effective action. In the source's one original ordered pair at fixed W and fixed other 959 variables, write the four positive-link face factors in their actual native orientation \`U_a U_b U_c^-1 U_d^-1\`. Each of the twelve affected faces contains exactly ONE of U0=WV^-1 or U1=V. Expand that single factor into fixed original matrices and either V or V^\u2020. Cyclicity and \`ReTr(M V^\u2020)=ReTr(M^\u2020 V)\` show that each affected original face contributes precisely \`ReTr(H_p V)/N\` for a unitary SU(N) staple matrix H_p determined by the actual source W/other links. Consequently,
+
+\`\`\`text
+H = sum_{p among 12 original touched plaquettes} H_p,
+||H||_op <= 12,
+S_original(V) = C - (1/N) ReTr(H V),
+C = sum_{p among other 1524 ORIGINAL plaquettes} J_p + 12.
+\`\`\`
+
+The resulting exact same-original-action **continuous SU(N)** one-fibre integration is
+
+\`\`\`text
+Z_N(H;beta) = int_SU(N) exp[(beta/N)*ReTr(H V)] dHaar(V),
+T0_original = exp(-beta*C) * Z_N(H;beta).
+\`\`\`
+
+If this source pair touches F, then the one original marked plaquette gives \`F(V)=1-ReTr(H_F V)/N\`, with H_F the corresponding original unitary staple. Its exact source marked mass is
+
+\`\`\`text
+TF_original = exp(-beta*C) *
+              [Z_N(H;beta) - beta^(-1) D_{H_F} Z_N(H;beta)]
+\`\`\`
+
+for beta>0, with the genuine continuous limit at beta=0, where \`D_{H_F}\` means the derivative of Z_N in its matrix source direction H_F. If that pair does not touch F, F is a constant of the frozen other variables and TF=F_const*T0. Likewise for G. No original pair touches both F and G, so one of the two is constant at each local conditional step; the **unique global FG** source column is preserved as TFG=G_const TF or F_const TG, or F_const G_const T0. That local factorization is not a factorization after integrating the remaining interacting spectators/other fibres and must not be promoted to zero global covariance.
+
+In the quaternion realization of SU2, ReTr(HV)/2=h.q and Z_2(H;beta)=2 I1(beta*|h|)/(beta*|h|), reproducing the exact all-background Bessel formula above. The all-N source identity follows for any N from original holonomy orientation, group matrix multiplication, adjoints and trace cyclicity, without an approximation. It is stronger than the arbitrary-background SU2 test, but **not** a closed elementary formula for Z_N at every N.
+
+Independent local SymPy 1.14.0 exact-matrix acceptance: **1,634/1,634 groups PASS**. The locally executed extended checker \`check_ym_p0_original_sun_matrix_staple_f19_t_20261123.py\` evaluates noncommuting rational SU2 matrices and noncommuting rational SO3\u2282SU3 matrices, the original full action's 1536 face words (with the 1524-face complement), the twelve actual source staple sum, direct Wilson action response at multiple SU(N) V, and the four globally marked original source factors. This is an independent finite matrix regression for N=2,3, plus a **symbolic all-N algebraic derivation**, not an all-N exhaustive numerical test.
+
+GitHub [compact reproducibility checker](../../scripts/check_ym_p0_original_sun_matrix_staple_f19_t_20261123.py). The two previous [arbitrary-background SU2](../../scripts/check_ym_p0_original_su2_arbitrary_background_f19_bessel_t_20261123.py) and [local Haar-cell/Q8 bound](../../scripts/check_ym_p0_original_sun_f19_continuous_haar_local_t_20261123.py) checkers are also committed. **Acceptance provenance:** the larger local extended programs produced the reported 2,936/2,936, 5,095/5,095 and 1,634/1,634 groups. The GitHub scripts were authored from those checked calculations and read back, but are compact source editions; do NOT claim their exact bytes were run locally or that their exact assertion totals are equal to the extended runs. Agda/Lean kernel and GitHub CI are still unrun.
+
+### Exact remaining high-priority physical weld
+
+Find/inhabit one *actual Ba\u0142aban CMP119 Sect.2* admissible Omega/Lambda/S history and matching CMP122 Eq.(1.71) **gauge-fixed constrained** T with Wilson/F19 variables, nonlinear printed Q_B, source E/R/B/V, FP/ghost/Jacobian, running beta(a), boundary residual, and genuine original global 1/F/G/FG differentiated step identity. Only then apply the already-owned CMP119 factorized marked approximation budget and this original-source Haar-cell modulus to the real physical T. Then prove the still-open individual **absolute** CMP116/W3 connected shell charges and cutoff/volume-uniform physical rate. The source exactness of Z_N does not itself attach it to CMP119's literal T or discharge W3/E1/D1/D2/N1/G1.
