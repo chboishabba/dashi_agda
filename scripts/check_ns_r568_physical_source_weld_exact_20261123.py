@@ -187,6 +187,23 @@ def inspect_source(u,k):
  lifted=sum((reHerm(D,M) for m,(D,_) in aggregated.items()
              for n,(_,M) in aggregated.items()),Z)
  assert lifted==reHerm(sumv(rs[i][3] for i in range(len(rs))),sumv(rs[i][4] for i in range(len(rs))))
+ # R290/R596/R560 same-object finite Cauchy-GRAM evolution in the actual
+ # algebraic helicity carrier.  Mdot_m=D_m-m*M_m is the R388 physical damped
+ # mixed-product tangent with nu=1, not an arbitrary time derivative.
+ # Qraw = sum K Re<M_a,M_b> is HALF the source R596 coherent-work Gram.
+ # Therefore Qraw'=2*Fpair-||sum_a M_a||^2;
+ # Qsource=2*Qraw has Qsource'=4*Fpair-2*||sum_a M_a||^2.
+ # A native scalar FTC and genuine R240 trajectory remain external obligations.
+ gram=sum((reHerm(Ma,Mb)/(m+n) for m,(_,Ma) in aggregated.items()
+           for n,(_,Mb) in aggregated.items()),Z)
+ mdot={m:vsub(D,vmul(F(m),M)) for m,(D,M) in aggregated.items()}
+ gram_prime=sum(((reHerm(mdot[m],Mb)+reHerm(Ma,mdot[n]))/(m+n)
+                 for m,(_,Ma) in aggregated.items()
+                 for n,(_,Mb) in aggregated.items()),Z)
+ coherent_self=reHerm(sumv(rs[i][4] for i in range(len(rs))),
+                     sumv(rs[i][4] for i in range(len(rs))))
+ assert gram_prime==F(2)*Fpair-coherent_self
+ assert gram==Z or exact_sign(gram)>0
  # Independently check both nontrivial source welds R225/R230/R542:
  # Msum = 4*sum(u_p^+ x u_q^-) and Dsum = 4*sum(forcing commutator cell).
  positive_mixed=VZERO;commutator=VZERO
@@ -219,7 +236,8 @@ def inspect_source(u,k):
  assert projection_pair==Fpair
  return {'F':Fpair,'L':lifted,'incidences':len(rs),'rates':len(by),
          'D_active':len(activeD),'M_active':len(activeM),'rank':len(by),
-         'nullity':len(rs)-len(by),'by':aggregated,'rows':rs}
+         'nullity':len(rs)-len(by),'by':aggregated,'rows':rs,
+         'Qraw':gram,'QrawPrime':gram_prime,'selfGram':coherent_self}
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--seeds',type=int,default=12);ap.add_argument('--start-seed',type=int,default=0);ap.add_argument('--require-opposite',action='store_true');ap.add_argument('--print-certificate',action='store_true')
@@ -239,6 +257,13 @@ def main():
          'interval',exact_bracket(o['F']),flush=True)
    print('CERT exact L in Q[sqrt2,sqrt3] =',tuple(str(x) for x in o['L'].c[:4]),
          'interval',exact_bracket(o['L']),flush=True)
+   print('CERT Qraw=1/2 R596 coherent-resolvent Gram =',
+         tuple(str(x) for x in o['Qraw'].c[:4]),
+         'interval',exact_bracket(o['Qraw']),flush=True)
+   print('CERT QrawPrime from actual R388 damped tangent =',
+         tuple(str(x) for x in o['QrawPrime'].c[:4]),
+         'interval',exact_bracket(o['QrawPrime']),flush=True)
+   print('CERT exact normalized source evolution: QsourcePrime=4F-2||Msum||^2',flush=True)
   print('PASS exact ORIGINAL projected Galerkin helical state',seed,'k',k,
         'N',o['incidences'],'R',o['rates'],'nullity',o['nullity'],
         'active D/M',o['D_active'],o['M_active'],
