@@ -49,7 +49,7 @@
       "h=3e-4": 0.00006457533259929406,
       "h=1e-4": 0.00016596249803223283
     },
-    "coarse_fd_relative_disagreement_at_1e5_vs_5e6": 0.9894259115191878
+    "coarse_fd_relative_disagreement_h_1e_minus_5_vs_5e_minus_6": 0.9894259115191878
   },
   "shooting": {
     "start_return_residual": 0.000001742117295311374,
