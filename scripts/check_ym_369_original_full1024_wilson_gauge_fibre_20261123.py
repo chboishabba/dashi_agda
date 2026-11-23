@@ -77,6 +77,20 @@ assert len(midpoints)==32
 assert all(len(s)==2 for s in midpoints.values())
 assert all({gauge(m) for m in s}=={1,2} for s in midpoints.values())
 assert len({sign9(s) for s in sites})==81
+# ZERO STRATA: each original C4 coordinate in {1,3} becomes signed zero,
+# adding an independent original 1-bit branch. On the whole original
+# 4-torus, a projected vertex with r signed zeros has exactly 2**r
+# source sites. These are NOT gauge-identifiable.
+signed_fibres=defaultdict(set)
+for site in sites:
+    signed_fibres[sign9(site)].add(site)
+strata={r:0 for r in range(5)}
+for signed,originals in signed_fibres.items():
+    r=sum(x==0 for x in signed[:4])
+    assert len(originals)==2**r
+    strata[r]+=1
+assert strata=={0:16,1:32,2:24,3:8,4:1}
+assert sum(strata[r]*2**r for r in strata)==256
 # Every lifted original source vertex, edge and Wilson plaquette is lossless.
 assert len({lifted_vertex(s) for s in sites})==256
 lifted={lifted_bond(b):field_value(b) for b in original_bonds}
@@ -136,6 +150,7 @@ for u,v in product(range(8),repeat=2):
 assert len({(mul(u,v),v) for u,v in product(range(8),repeat=2)})==64
 
 print('PASS: 256 actual original sites -> 81 signed-nine projected sites; 256 lifted vertices')
+print('PASS: exact source zero-stratum multiplicities {0:16, 1:32, 2:24, 3:8, 4:1}, branch sizes 2**r')
 print('PASS: 32 signed zero midpoints, each with 2 independent original gauge-site branches')
 print('PASS: all 1024 original Wilson positive bonds, 128 R445 selected, 896 spectators')
 print('PASS: 1024/1024 lifted link values and gauge transformation identities')
