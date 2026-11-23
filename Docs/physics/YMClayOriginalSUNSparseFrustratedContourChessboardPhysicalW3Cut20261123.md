@@ -133,3 +133,73 @@ The theorem above pays only the *unmarked ORIGINAL SU(N) bare high-deficit fixed
 [Source-identical standalone Python/SymPy checker](../../scripts/check_ym_p0_sun_sparse_bad_contours_20261123.py): **442,255 PASS**, original actual L4/L6/L8 4D 6L^4 plaquettes and 4L^4 positive links, 24/24 native classes, V/4 distinct faces per class, exact fourfold multiplicity, actual original 6-per-link/4-per-face incidence, arbitrary sampled witness mappings; symbolic rate algebra; mpmath high-precision source constant/rate thresholds for N2/3/4/5/8 and epsilon=1,1/2,1/4; explicit shrinking-threshold and sparse-spanning-density negative controls. **Exact committed checker Git blob \`a0feccdd82c4e3eebd8dfe9872eca9e4ca2d7aac\` matches the 7,181-byte locally executed file**; this is a real exact-content check, NOT Agda/Lean kernel or GitHub CI.
 
 **Status:** ordinary mathematical source argument **conditional on the externally established standard SU(N) Wilson site-reflection chessboard theorem for the selected closed-cube observable algebra**, source geometry locally exact PASS; all-group generality only SU(N) at fixed rank, and L dyadic for the dissemination claim. No complete physical running CMP119/122 source, absolute W3 or interacting same-H mass gap. Attribution Wilson, Haar/Weyl, Osterwalder–Seiler, Menotti–Pelissetto, FILS/Biskup chessboard, original DASHI SU2 chessboard and original SU(N) Weyl-cap pressure owners retained. 
+
+
+## 9. MASS GAP P0 further weld — exact SAME original two-global-mark bad-sector mixed-log response
+
+**Genuine original source theorem:** The preceding fixed-contour estimate can be consumed immediately by the SAME original Wilson/F19 normalized **one globally affine two-mark** source. This is a new *SIGNED mixed-response bad-sector error estimate*, **not** an identified CMP116 individual absolute marked cluster charge; it neither creates a replacement polymer gas nor pretends the good-conditioned measure equals CMP116's literal J.
+
+At any finite ORIGINAL SU(N) fully interacting Wilson Gibbs measure \(\mu\), with actual gauge-invariant closed original Wilson plaquette marks \(|F|,|G|\le1\), write
+\[
+K_\mu(s,t)=\mathbb E_\mu[(1+sF)(1+tG)]
+ =1+s b+t c+st d,\quad b=E_\mu F,\ c=E_\mu G,\ d=E_\mu FG.
+\]
+The single global factor \((1+sF)(1+tG)\) occurs ONCE before original fine F19 Haar integration, never independently for each polymer/T step. Its mixed log Hessian at zero is exactly \(\operatorname{Cov}_\mu(F,G)\); at nonzero s,t it is the normalized response of the same positive global affine source, not a signed formal activity sum.
+
+Let \(B\) be ANY measurable original event, e.g. a real native gauge-invariant connected bare bad-link component rooted at one Wilson mark and of length >=m. Let \(p=\mu(B)<1\), \(\mu_{\rm good}=\mu(\cdot\mid B^c)\), and \(K_{\rm good}(s,t)=E_{\mu_{\rm good}}[(1+sF)(1+tG)]\). For \(|s|,|t|\le \rho<1\), define \(\mu_{s,t}\) and \(\mu_{{\rm good},s,t}\) by the same positive affine tilt. Elementary exact logarithmic derivative and product geometry give
+\[
+\partial_s\partial_t\log K_\mu(s,t)
+ =\operatorname{Cov}_{\mu_{s,t}}
+ \left(\frac{F}{1+sF},\frac{G}{1+tG}\right).
+\]
+This retains the original globally unique marks even after source tilting; its mixed derivative is NOT an assumed independent-product covariance. The two rational functions are bounded in absolute value by \(M=1/(1-\rho)\).
+
+For any positive bounded probability law \(\nu=(1-p')\nu_{\rm good}+p'\nu_{\rm bad}\), and bounded \(|X|,|Y|\le M\), the exact law of total covariance gives
+\[
+\operatorname{Cov}_\nu(X,Y)=
+ (1-p')\operatorname{Cov}_{\nu_{\rm good}}(X,Y)
+ +p'\operatorname{Cov}_{\nu_{\rm bad}}(X,Y)
+ +p'(1-p')\,\Delta_X\Delta_Y.
+\]
+Use \(|\operatorname{Cov}(X,Y)|\le M^2\), \(|\Delta_X\Delta_Y|\le4M^2\) to get
+\[
+|\operatorname{Cov}_\nu(X,Y)-\operatorname{Cov}_{\nu_{\rm good}}(X,Y)|
+ \le 6p'M^2.
+\]
+Since the original affine weight is between \((1-\rho)^2\) and \((1+\rho)^2\), the tilted bad mass obeys
+\(p_{s,t}=\mu_{s,t}(B)\le((1+\rho)/(1-\rho))^2p\). Thus the **exact source bound**
+\[
+\boxed{
+\left|\partial_{st}\log K_\mu(s,t)
+  -\partial_{st}\log K_{\rm good}(s,t)\right|
+\le C_\rho\,p,\qquad
+C_\rho=6(1+\rho)^2/(1-\rho)^4.
+}
+\]
+At zero sources improve to \(6p\). For the EXISTING native two-affine-mark radius \(\rho=9/100\),
+\[
+\boxed{C_{9/100}=\frac{712860000}{68574961}\approx10.3953394884.}
+\]
+No small-field positivity of F or G is assumed; only normalized Wilson \(|F|,|G|\le1\) and a positive real original Gibbs law. The selected gauge-invariant bad event can depend on BOTH marks and every spectator link; neither conditional mark independence nor guessed factorization enters.
+
+**Direct original marked W3 BAD-SECTOR connection, precise but limited:** Let \(X_F\) be the four original positive links in mark F, \(X_G\) those in mark G and \(D=d_{\rm endpoint}(X_F,X_G)\) their genuine original positive-link endpoint-adjacency distance (NOT Singer k, RG scale or physical SI t). Let \(B_{F,G}^\epsilon\) mean a connected animal of original high-deficit links \(B_\ell^\epsilon\) touches both supports. Any such animal contains some root in \(X_F\), size at least \(D+1\). In the source regime q<1 of the preceding sections,
+\[
+p\le|X_F|\,\frac{u_{N,\beta,\epsilon}q_{N,\beta,\epsilon}^{D}}
+                              {1-q_{N,\beta,\epsilon}}
+=4\,\frac{u_{N,\beta,\epsilon}q_{N,\beta,\epsilon}^{D}}
+                              {1-q_{N,\beta,\epsilon}}.
+\]
+Consequently, whenever \(p<1\) and q<1,
+\[
+\boxed{\sup_{|s|,|t|\le\rho}
+ \left| \partial_{st}\log K_\mu(s,t)
+          -\partial_{st}\log K_{\mu(\cdot\mid (B_{F,G}^\epsilon)^c)}(s,t)
+ \right|
+ \le 4C_\rho\,\frac{u_{N,\beta,\epsilon}q_{N,\beta,\epsilon}^{D}}
+                               {1-q_{N,\beta,\epsilon}}.}
+\]
+This is a genuine SOURCE-IDENTICAL signed-mixed-log **exceptional-sector correction** with original support separation and no artificial volume factor; the four roots are the actual four native links of F. It remains compatible with both inherited action-Hessian and score-covariance decomposition when those are later physically identified with actual CMP119/122 T. Crucially, the *good-conditioned mixed response* may carry non-decaying connected contributions; proving the *error* small does not prove the whole Wilson covariance decays.
+
+**Original exact-rational four-moment regression:** [second executable](../../scripts/check_ym_p0_sun_original_two_mark_bad_event_20261123.py), Git blob \`d2e0df67a49c71dbf9706f1cec93518b8a2dab70\`, byte-identical to the independently executed local 4,307-byte source, **104/104 rational comparisons PASS**. It retains the ORIGINAL L4 1,024 link/1,536 native plaquette Wilson action and time-0/time-2 F/G marks, with all 1,012 remaining links frozen to identity and 12 time-0/1/2 cap links allowed in the SU2 centre subgroup; 4,096 exact integer-weighted fine states at beta=log2. Actual normalized full/cut four-coefficient fields were used for 25 rational s,t source tilts. Source reference covariance is nonzero (\(\approx5.32994\cdot10^{-8}\)), with bad-event mass \(\approx0.00122954664\). **THIS SLICE IS NOT original continuous SU2/SU(N) Haar integration.** The analytic total-covariance lemma above is the continuous-source general theorem; the finite subgroup is an independent regression/negative diagnostic, never a substitute for the physical positive Haar measure.
+
+**P0 acceptance credit now:** (1) original SU(N) gauge-invariant fixed-threshold sparse bad-link probability, conditional on existing physical site-RP/chessboard source theorem; (2) genuine same-original SU(N) globally affine two-Wilson signed-log bad-sector error with explicit physical-source link support D at microscopic units. **NOT PAID:** exact original CMP119/122 renormalized \(\Omega,\Lambda,S\)-internal-T good J identification, original large-field threshold \(\epsilon_j(a)\), termwise absolute differentiated KP cluster-activity dominance, full CMP116 rooted-shell volume/physical-cutoff-independent bound, original interacting E1 and dense same-H_OS mass gap/N1/G1. Do not promote this source-valid signed-error inequality to ABSOLUTE W3.
