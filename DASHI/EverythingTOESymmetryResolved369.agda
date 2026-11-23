@@ -35,131 +35,23 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
--- Reuse the existing exact finite GR/quantum proof-term regression.
--- It contains a terminal physical non-promotion theorem.
--- Do not replace this import with DASHI.Unifier placeholder axioms.
-import DASHI.Unified.GRQuantumProofTermRegression
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
+-- Reuse the existing TOE parents. Do not replace their carriers.
+import DASHI.Unifier
+import DASHI.Unified.PNFHyperfabric
+import DASHI.Unified.Physics
 
+-- Existing exact finite source obligations. These imports do not claim
+-- a wild exterior equivalence, Euclidean meridian bound, or physical W.
+-- Alexander/Hatcher are the topology roots. The stage/ribbon sources
+-- belong to the existing hyperfabric PR. PL surface donors belong to
+-- the separate exotic-topology PR; they are not copied here.
+import DASHI.Unified.HornStageClearanceC3SourceCutExact
+import DASHI.Mathematics.Topology.HatcherRibbonPeripheralBoundaryExact
 
-
-------------------------------------------------------------------------
--- Exact Yang-Mills theorem-owner exports.
---
--- These names come from the normalized YM TOE owner.
--- No proof is copied here.
-------------------------------------------------------------------------
-
-open YMTOE public using
-  ( sourceCouplingIsBetaHistoryCoupling
-  ; sourceSmallnessIsDerivedFromBetaHistory
-  ; betaHistoryGivesRepositoryCouplingCap
-  ; canonicalStateRunningCouplingIsBetaHistory
-  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
-  ; selectedDensityRepresentsExactBC1Potential
-  ; selectedDensityRepresentsBC2InitialPotential
-  ; stressSelectedDensityIndexIsUnifiedActionIndex
-  ; sourceDerivativeBelowExistingMarkedShell
-  ; stressCoefficientEnergyUniformBound
-  ; stressPairingSquaredCauchyFromShellEnergy
-  ; selectedRegularEIsLocalizedCompositeSum
-  ; universalCompactSimpleCasimirFloor
-  ; universalCompactSimpleBetaFloor
-  ; classificationAdjointCasimirAtLeastTwo
-  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
-  ; uniformRemainderBelowEveryCompactSimpleCoefficient
-  )
-
-------------------------------------------------------------------------
--- Direct Yang-Mills TOE exports.
---
--- These aliases keep the root fail-closed.
--- They do not create a second theorem owner.
-------------------------------------------------------------------------
-
-toe369YangMillsBetaDrivenSourceFlowLevel : ProofLevel
-toe369YangMillsBetaDrivenSourceFlowLevel =
-  YMTOE.toeBetaDrivenSourceFlowLevel
-
-toe369YangMillsBetaHistorySameStateCouplingLevel : ProofLevel
-toe369YangMillsBetaHistorySameStateCouplingLevel =
-  YMTOE.toeBetaHistorySameStateCouplingLevel
-
-toe369YangMillsCanonicalCompleteDensityLevel : ProofLevel
-toe369YangMillsCanonicalCompleteDensityLevel =
-  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
-
-toe369YangMillsGeneratedActionDensityCompilerLevel : ProofLevel
-toe369YangMillsGeneratedActionDensityCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
-
-toe369YangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
-toe369YangMillsCombinedRGUnifiedActionCompilerLevel =
-  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
-
-toe369YangMillsRegularEProjectionLevel : ProofLevel
-toe369YangMillsRegularEProjectionLevel =
-  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
-
-toe369YangMillsRegularELocalizationSourceLevel : ProofLevel
-toe369YangMillsRegularELocalizationSourceLevel =
-  YMTOE.toeCMP119RegularELocalizationSourceLevel
-
-toe369YangMillsStressScaleCompilerLevel : ProofLevel
-toe369YangMillsStressScaleCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
-
-toe369YangMillsStrictCasimirCarrierLevel : ProofLevel
-toe369YangMillsStrictCasimirCarrierLevel =
-  YMTOE.toeStrictCasimirCarrierCompilerLevel
-
-toe369YangMillsPublishedRGDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-toe369YangMillsPublishedRGDoesNotPromoteContinuum =
-  YMTOE.toePublishedRGDoesNotPromoteContinuum
-
-toe369YangMillsGeneratedActionDensityDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-toe369YangMillsGeneratedActionDensityDoesNotPromoteContinuum =
-  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
-
-toe369YangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-toe369YangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
-  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
-
-toe369YangMillsOSWightmanContinuumNotConstructed :
-  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
-toe369YangMillsOSWightmanContinuumNotConstructed =
-  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
-
-toe369YangMillsContinuumMassGapNotPromoted :
-  YMTOE.toeContinuumMassGapPromoted ≡ false
-toe369YangMillsContinuumMassGapNotPromoted =
-  YMTOE.toeContinuumMassGapPromotedIsFalse
-
-toe369YangMillsClayNotPromoted :
-  YMTOE.toeClayYangMillsPromoted ≡ false
-toe369YangMillsClayNotPromoted =
-  YMTOE.toeClayYangMillsPromotedIsFalse
-
-toe369YangMillsUniversalBetaFloorLevel : ProofLevel
-toe369YangMillsUniversalBetaFloorLevel =
-  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
-
-toe369YangMillsLiteralUniformRemainderFloorLevel : ProofLevel
-toe369YangMillsLiteralUniformRemainderFloorLevel =
-  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
-
-toe369YangMillsStressMarkedShellBoundLevel : ProofLevel
-toe369YangMillsStressMarkedShellBoundLevel =
-  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
-
-toe369YangMillsStressShellEnergyHilbertLevel : ProofLevel
-toe369YangMillsStressShellEnergyHilbertLevel =
-  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
-
-toe369YangMillsLiteralStressActivityEntropyLevel : ProofLevel
-toe369YangMillsLiteralStressActivityEntropyLevel =
-  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+-- Reuse the original native cube and source-specific non-promotion proofs.
+-- These imports do not identify finite sites, Albert J0, Monster VOA,
+-- or measured spacetime. All original authors and source owners remain.
+import DASHI.Unified.Hyperfabric27MinusOneAntipodalSameCarrierCutExact
+import DASHI.Unified.Hyperfabric27MinusOneOriginalPathInvariantNoGoExact
+import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact
+import DASHI.Unified.HyperfabricMonsterBosonicWorldsheetExistingOwnerCutExact
