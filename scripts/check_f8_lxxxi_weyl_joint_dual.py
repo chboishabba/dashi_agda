@@ -7,9 +7,9 @@ import json
 from fractions import Fraction as Q
 from math import ceil
 import numpy as np
-from check_f8_lxxx_weyl_3time_vjp import observer, coeff_clock, vjp
+from check_f8_lxxx_four_weyl_source_vjp import observer, clock, source_vjp
 from check_f8_lxxv_taylor import enclose
-from check_f8_lxxviii_joint_moments import bounds_from_loads, rational_witness, dual_bound
+from check_f8_lxxviii_joint_moments import box_error, exact_witness, dual_upper
 from ksw668_f8_weak_source import weak_source
 
 
@@ -17,16 +17,16 @@ def run(h):
     dr=float(h)*.04; dt=.00018; dy=.012; n=ceil(1/h)+1; nr=9
     grid=np.arange(n+1)*dr
     source=weak_source(.04, grid, dr)
-    lo,hi,rows,defect,bhat=bounds_from_loads(enclose(h,20),source,h)
-    witness,piv=rational_witness(lo,hi,rows,defect,h)
+    lo,hi,rows,defect=box_error(enclose(h,20),source,h)
+    witness,piv=exact_witness(lo,hi,rows,defect,h)
     assert all(x<=y<=z for x,y,z in zip(lo,witness,hi))
-    clock=coeff_clock(); A=np.array([[float(v) for v in row] for row in rows])
+    cs=clock(); A=np.array([[float(v) for v in row] for row in rows])
     max_bound=Q(0); wins=0; all_case=[]
     for location,radius in [('near',4.35*dr),('far',5.25*dr)]:
-        O=observer(radius,dr,.04,dt,12.,clock,nr)
+        O=observer(radius,dr,.04,dt,12.,cs,nr)[0]
         for ch in range(4):
             for q in range(3):
-                K=vjp(O[ch,q],clock,dt,dr,dy)
+                K=source_vjp(O[ch,q],cs,dt,dr,dy)
                 c=[]
                 for mode in range(3):
                     d=3+4*mode
@@ -35,12 +35,12 @@ def run(h):
                         c.append(Q(float(K[mode,i]))/W)
                 assert len(c)==len(lo)
                 z=[Q(0)]*4
-                b0=(-dual_bound([-v for v in c],lo,hi,rows,defect,defect,z),
-                     dual_bound(c,lo,hi,rows,defect,defect,z))
+                b0=(-dual_upper([-v for v in c],lo,hi,rows,defect,defect,z),
+                     dual_upper(c,lo,hi,rows,defect,defect,z))
                 fit=np.linalg.lstsq(A.T,np.array(list(map(float,c))),rcond=None)[0]
                 lam=[Q(float(v)).limit_denominator(10**8) for v in fit]
-                p0=(-dual_bound([-v for v in c],lo,hi,rows,defect,defect,[-v for v in lam]),
-                     dual_bound(c,lo,hi,rows,defect,defect,lam))
+                p0=(-dual_upper([-v for v in c],lo,hi,rows,defect,defect,[-v for v in lam]),
+                     dual_upper(c,lo,hi,rows,defect,defect,lam))
                 selected=(max(b0[0],p0[0]),min(b0[1],p0[1]))
                 actual=sum((x*y for x,y in zip(c,witness)),Q(0))
                 assert selected[0]<=actual<=selected[1]
