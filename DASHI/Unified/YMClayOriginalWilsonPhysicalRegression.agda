@@ -348,3 +348,11 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonN3NativeC3DensityBIDIExact as
 -- is a source-type regression request, not a compiler receipt.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact as OriginalF19FineFourMoments
 import DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact as OriginalF19ActualQFunctionalT
+
+-- YM P0 / RH #1533 Singer k-index × original 369 zero-branch:
+-- all 1024 actual Wilson links, original 1536 plaquettes, original
+-- one-source F19 marked 1/F/G/FG and one source Z, with exact inverse
+-- physical sorted bond permutation. t,k are chart/history labels,
+-- NOT a new independent nine-dimensional Yang-Mills measure or
+-- automatic CMP119/122 RG/localized T or all-scale OS mass gap.
+import DASHI.Physics.YangMills.YMClayY369OriginalSingerWilsonFourMarkSourceWeldExact as OriginalY369IndexedWilsonFourMark
