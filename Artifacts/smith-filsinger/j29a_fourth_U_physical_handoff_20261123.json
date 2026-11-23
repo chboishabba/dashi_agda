@@ -3,7 +3,7 @@
   "pr": 1537,
   "status": "J29A_PASS_LOCAL_PHYSICAL_DIODE_U_PICARD_AND_QUADRATIC_SWITCH_HANDOFF",
   "checker": "scripts/check_smith_filsinger_j29a_diode_u_continuity.py",
-  "checker_git_blob": "c2bc52828ea34c6af13f7c0cc8ef7dcd4047acf1",
+  "checker_git_blob": "07b1c4a48f69d08e53e5221c25ea47f685b63121",
   "local_exact_script_byte_identical": true,
   "inherited_checkpoint": "Artifacts/smith-filsinger/j28b_signed_75_step_exact_checkpoint_20261123.json",
   "inherited_checkpoint_git_blob": "74c1a94b30c44a772016c93b39558bc446359832",
@@ -59,5 +59,8 @@
   "uniform_5_parameter_family_certified": false,
   "source_metering_or_original_hardware_verified": false,
   "CI": false,
-  "Agda_kernel": false
+  "Agda_kernel": false,
+  "checkpoint_selected_values_sha256": "59827154759aac9a0fa6e475a1cf214ec896e935e3a9a914e3e262667c45931d",
+  "local_reconstructed_checkpoint_git_blob": "1c5f36d554e915dc90fef5177775f62ee46b842b",
+  "original_checkpoint_raw_byte_replay_in_current_local_execution": false
 }
