@@ -31,6 +31,10 @@ import DASHI.Physics.YangMills.YMClayR445OriginalAxialBondParityInjectiveExact a
 import DASHI.Foundations.Base369BinaryTernaryRefinement as Resolution
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact as SignedBit
 import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Physics.WaveAlgorithmLift as Wave
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as OriginalBond
+import Data.Vec.Base as Vec
+open import Data.Empty using (⊥)
 
 Bit : Set
 Bit = T.CyclicIndex 2
@@ -310,3 +314,179 @@ face12 (transverse u v w) = refl
 -- Each equation restricts to either value of the third fixed bit,
 -- giving six square faces. They do not imply continuum RP, W1/W3,
 -- SU(N) gauge invariance, all-cutoff clustering or Clay mass gap.
+
+
+------------------------------------------------------------------------
+-- RH #1533 -> YM P0: SOURCE 4D SIGNED-NINE MIDPOINT GAUGE FIBRE.
+--
+-- 4-coordinate native original 4-torus sites are projected to the
+-- first four of nine balanced trits; last five are zero. The two
+-- original ODD positions 1 and 3 project to the SAME trit ZERO.
+-- They are NOT the same SU(N) source gauge vertex. The original
+-- C4 coarse bit is the missing, reversible branch on that zero.
+--
+-- This is attached to the EXISTING full 1024 original-address codec,
+-- not a new Yang-Mills field type or independent blocking law.
+------------------------------------------------------------------------
+
+projectOriginalQuadToSignedTrit : R445.Quad → Wave.Trit
+projectOriginalQuadToSignedTrit T.zeroᵢ = Wave.neg
+projectOriginalQuadToSignedTrit (T.sucᵢ T.zeroᵢ) = Wave.zero
+projectOriginalQuadToSignedTrit
+  (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = Wave.pos
+projectOriginalQuadToSignedTrit
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) = Wave.zero
+
+originalSignedNineSite : R445.Site4 → Vec.Vec Wave.Trit 9
+originalSignedNineSite
+  (T.pair (T.pair x0 x1) (T.pair x2 x3)) =
+  projectOriginalQuadToSignedTrit x0 Vec.∷
+  projectOriginalQuadToSignedTrit x1 Vec.∷
+  projectOriginalQuadToSignedTrit x2 Vec.∷
+  projectOriginalQuadToSignedTrit x3 Vec.∷
+  Wave.zero Vec.∷ Wave.zero Vec.∷ Wave.zero Vec.∷
+  Wave.zero Vec.∷ Wave.zero Vec.∷ Vec.[]
+
+originalMidpointOne : R445.Quad
+originalMidpointOne = T.sucᵢ T.zeroᵢ
+
+originalMidpointThree : R445.Quad
+originalMidpointThree =
+  T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))
+
+originalTwoOddSitesHaveSameSignedObservation :
+  projectOriginalQuadToSignedTrit originalMidpointOne
+  ≡ projectOriginalQuadToSignedTrit originalMidpointThree
+originalTwoOddSitesHaveSameSignedObservation = refl
+
+originalOddMidpoint : Bit → R445.Quad
+originalOddMidpoint b = R445.coord b (T.sucᵢ T.zeroᵢ)
+
+originalOddMidpointHasSignedZero :
+  ∀ b → projectOriginalQuadToSignedTrit (originalOddMidpoint b)
+       ≡ Wave.zero
+originalOddMidpointHasSignedZero T.zeroᵢ = refl
+originalOddMidpointHasSignedZero (T.sucᵢ T.zeroᵢ) = refl
+
+-- REPAIR: retain the coarse SOURCE bit on the projected midpoint.
+-- This recovers the two physically independent original odd sites.
+originalOddMidpointBranchRecovers :
+  ∀ b → R445.coarse (originalOddMidpoint b) ≡ b
+originalOddMidpointBranchRecovers b =
+  R445.coarseCoordRoundTrip b (T.sucᵢ T.zeroᵢ)
+
+originalOddMidpointSourceRecovers :
+  ∀ x → R445.phase x ≡ T.sucᵢ T.zeroᵢ →
+    originalOddMidpoint (R445.coarse x) ≡ x
+originalOddMidpointSourceRecovers x odd =
+  trans
+    (cong (R445.coord (R445.coarse x)) (sym odd))
+    (originalCoordReconstructs x)
+
+-- Exact negative test: there is an original local gauge LABEL that
+-- assigns different values at 1 and 3. It therefore cannot factor
+-- through ONLY their common signed-zero midpoint. (Boolean labels
+-- witness a universal information-loss obstruction; the independent
+-- SU(N) local gauge transformation is checked by original source
+-- theorems and the noncommutative reference regression.)
+originalOddGaugeLabel : R445.Quad → Bool
+originalOddGaugeLabel T.zeroᵢ = false
+originalOddGaugeLabel (T.sucᵢ T.zeroᵢ) = false
+originalOddGaugeLabel (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = false
+originalOddGaugeLabel
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) = true
+
+falseCannotEqualTrue : false ≡ true → ⊥
+falseCannotEqualTrue ()
+
+originalSignedNineMidpointGaugeCannotDescend :
+  (observedGauge : Wave.Trit → Bool) →
+  (preservesEveryOriginalSite : ∀ x →
+    observedGauge (projectOriginalQuadToSignedTrit x)
+      ≡ originalOddGaugeLabel x) → ⊥
+originalSignedNineMidpointGaugeCannotDescend observedGauge preservation =
+  falseCannotEqualTrue
+    (trans
+      (sym (preservation originalMidpointOne))
+      (preservation originalMidpointThree))
+
+-- Exact native geometrical START/TARGET on every original positive
+-- fine bond. The signed-nine label is only an observation; the real
+-- fine site, axis and 128/896-bond residual remain the source labels.
+originalSourceOfFullBinaryAddress : OriginalBinaryAddress → R445.Site4
+originalSourceOfFullBinaryAddress address =
+  T.first (encodeOriginalFine address)
+
+originalTargetOfFullBinaryAddress : OriginalBinaryAddress → R445.Site4
+originalTargetOfFullBinaryAddress address =
+  OriginalBond.positiveStep
+    (T.first (encodeOriginalFine address))
+    (T.second (encodeOriginalFine address))
+
+originalSignedNineSourceOfFullBinaryAddress :
+  OriginalBinaryAddress → Vec.Vec Wave.Trit 9
+originalSignedNineSourceOfFullBinaryAddress address =
+  originalSignedNineSite (originalSourceOfFullBinaryAddress address)
+
+originalSignedNineTargetOfFullBinaryAddress :
+  OriginalBinaryAddress → Vec.Vec Wave.Trit 9
+originalSignedNineTargetOfFullBinaryAddress address =
+  originalSignedNineSite (originalTargetOfFullBinaryAddress address)
+
+originalSignedNineSourceCommutingAt :
+  ∀ fine →
+    originalSignedNineSourceOfFullBinaryAddress
+      (decodeOriginalFine fine)
+    ≡ originalSignedNineSite (T.first fine)
+originalSignedNineSourceCommutingAt fine =
+  cong (λ bond → originalSignedNineSite (T.first bond))
+    (originalFineRoundTrip fine)
+
+originalSignedNineTargetCommutingAt :
+  ∀ fine →
+    originalSignedNineTargetOfFullBinaryAddress
+      (decodeOriginalFine fine)
+    ≡ originalSignedNineSite
+        (OriginalBond.positiveStep (T.first fine) (T.second fine))
+originalSignedNineTargetCommutingAt fine =
+  cong (λ bond → originalSignedNineSite
+    (OriginalBond.positiveStep (T.first bond) (T.second bond)))
+    (originalFineRoundTrip fine)
+
+-- FULL 1024-link reversible SOURCE field transport. The 128 selected
+-- R445 positive bonds AND 896 spectators are indexed by the SAME
+-- original 64 × 2 × 8 address. Nothing is quotiented out.
+originalFullSignedNineGaugeFibreLift :
+  ∀ {Value : Set} → (R445.FineBond → Value) →
+  OriginalBinaryAddress → Value
+originalFullSignedNineGaugeFibreLift field address =
+  field (encodeOriginalFine address)
+
+originalFullSignedNineGaugeFibreRecover :
+  ∀ {Value : Set} → (OriginalBinaryAddress → Value) →
+  R445.FineBond → Value
+originalFullSignedNineGaugeFibreRecover field fine =
+  field (decodeOriginalFine fine)
+
+originalFullSignedNineGaugeFibreRecoversEveryLink :
+  ∀ {Value : Set} (field : R445.FineBond → Value) fine →
+    originalFullSignedNineGaugeFibreRecover
+      (originalFullSignedNineGaugeFibreLift field) fine
+    ≡ field fine
+originalFullSignedNineGaugeFibreRecoversEveryLink field fine =
+  cong field (originalFineRoundTrip fine)
+
+originalFullSignedNineGaugeFibreRecoversEveryAddress :
+  ∀ {Value : Set} (field : OriginalBinaryAddress → Value) address →
+    originalFullSignedNineGaugeFibreLift
+      (originalFullSignedNineGaugeFibreRecover field) address
+    ≡ field address
+originalFullSignedNineGaugeFibreRecoversEveryAddress field address =
+  cong field (originalAddressRoundTrip address)
+
+-- The actual SU(N) original 4D gauge action and the original Wilson
+-- 1536 plaquette/action/weighted Haar functions are consumed from
+-- YMClaySUNConstructedPeriodicGaugeCodecExact and the original
+-- Wilson/F19 1024-link physical source BIDI. The pointwise codec
+-- proves source-label preservation; no NEW analytic SU(N) Haar law,
+-- dynamical 9D graph, CMP119 source T or continuum OS limit follows.
