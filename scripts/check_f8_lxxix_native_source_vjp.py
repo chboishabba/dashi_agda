@@ -12,7 +12,7 @@ import numpy as np
 from ksw668_f8_tt_multipole import stage
 from warp_stage_adjoint import transpose
 from check_f8_lxxv_taylor import enclose
-from check_f8_lxxviii_joint_moments import bounds_from_loads, dual_bound, rational_witness
+from check_f8_lxxviii_joint_moments import box_error, dual_upper, exact_witness
 from ksw668_f8_weak_source import weak_source
 
 
@@ -91,8 +91,8 @@ def run(h):
     predicted=float(np.vdot(k,src))
     np.testing.assert_allclose(actual,predicted,rtol=1e-10,atol=1e-11)
     source=weak_source(eps,np.arange(n+1)*dr,dr)
-    lower,upper,rows,defect,_=bounds_from_loads(enclose(h,20),source,h)
-    witness,piv=rational_witness(lower,upper,rows,defect,h)
+    lower,upper,rows,defect=box_error(enclose(h,20),source,h)
+    witness,piv=exact_witness(lower,upper,rows,defect,h)
     assert witness is not None
     assert all(a<=x<=b for x,a,b in zip(witness,lower,upper))
     c=[]
@@ -103,8 +103,8 @@ def run(h):
             c.append(Q(float(k[q,i]))/w)
     zeros=[Q(0)]*4
     def enclosure(lam):
-        hi=dual_bound(c,lower,upper,rows,defect,defect,lam)
-        lo=-dual_bound([-x for x in c],lower,upper,rows,defect,defect,[-x for x in lam])
+        hi=dual_upper(c,lower,upper,rows,defect,defect,lam)
+        lo=-dual_upper([-x for x in c],lower,upper,rows,defect,defect,[-x for x in lam])
         return lo,hi
     box=enclosure(zeros)
     A=np.array([[float(a) for a in row] for row in rows])
