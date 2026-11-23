@@ -1071,3 +1071,13 @@ Correction to the shorthand `E_rest` language above: **its exact value is known*
 
 
 **R2-E4 sign-space split:** signed quartic selected W has `M4=−4T_W` and `K_W(0,q)<0` near q=0; any positive-definite/autocorrelation source has real Fourier response ≥0. Thus the eight moment-preserving prime apertures do **not** turn signed W into a Gram/Weil positivity producer. A separate test with an independent proof is needed. Do not assume RH-equivalent global Weil positivity when trying to prove RH. See `RHP0PrimeApertureProjectiveEightInvariantConstruction20261123.md` §9.
+
+---
+
+## 23 Nov — E0/E1 frozen prime 2/3 actual source and near-resonance boundary
+
+The [source-native E0/E1/E2 P0 max-cut ledger](RHP0FrozenTwoPrimeExactSourceWeldAndCost20261123.md) reconciles prior prime-aperture notes with original Lean `Synthesis/RiemannSelectedPrimeSensitiveTwoScale.lean`, whose complete 2/3 sample and 4-channel signed increment were already proven in source. New draft [Lean #116](https://github.com/chboishabba/dashi_lean4/pull/116) proposes **conditional** `QuarticFourFrozenPrimeAperture`: two original-W extended physical detectors, n≥4 zero prime samples, exact frozen two on-line responses, M2/M4/M6/M8, both pole responses, and original 4-channel source identity, plus generic original Weil two-prime coefficient `4 sum_{p=2,3}(log p/√p) cos(t log p)[P_two*g'_half(log p)*B_half -P_half*g'_two(log p)*B_two]`. The affine port formula has no ε² ONLY if the two original A responses are genuinely frozen; ordinary `detectorTwoScale` retains its quadratic term. Explicit lean source not yet compiled or declared accepted.
+
+Exact corridor determinant: −20/351 ± at most 17/60000; old `FourWindowPoleLocalization` permits choosing narrow R for positive poles at each fixed high t. At least one four-port prime gradient nonzero at every t if original smooth A response vectors are nonproportional. But near-double zero cos(t log2)/cos(t log3) phases become arbitrarily close to zero as t→∞, so no uniform gain. Smooth fixture J2 root, T≈2.08, original source pole signals and 16 eight-row fits pass local tests; worst condition ≈9e6 and chosen narrow-bump ||h''||1 triangle bounds very large (not lower bounds). The exact original four-channel equality remains circular as a proof of an independent strict bound.
+
+P0 payoffs NOT asserted: E0 real Lean smooth projected-carrier existence, E1 Lean kernel/axiom check, E2 absolute tail/sixth/eighth and post-sixth margin, E3 independent completed signed arithmetic–zero–Gamma strict high estimate. Original R2-S0/S1 and separate all-χ/Agda proof admission OPEN. [Full code-and-proof receipt](RHP0FrozenTwoPrimeExactSourceWeldAndCost20261123.md). NO CI, NO kernel, RH/GRH OPEN.
