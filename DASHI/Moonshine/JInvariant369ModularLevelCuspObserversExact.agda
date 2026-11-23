@@ -25,11 +25,11 @@ module DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact where
 -- structure.  It does NOT identify the full level-N modular cover with C_N.
 ------------------------------------------------------------------------
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Integer using (ℤ; 0ℤ; 1ℤ; +_)
+open import Data.Integer using (ℤ; 0ℤ; 1ℤ; +_; _+_; _-_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
@@ -46,13 +46,18 @@ import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Biology.EisensteinNineRingInterferenceExact as EisensteinPhase
 
+open import Data.Integer.Tactic.RingSolver using (solve-∀)
+
 ------------------------------------------------------------------------
 -- 1. Literal translation matrices.
 ------------------------------------------------------------------------
 
+translationDeterminant : ∀ n → 1ℤ * 1ℤ - n * 0ℤ ≡ 1ℤ
+translationDeterminant = solve-∀
+
 translationMatrix : ℤ → Eisenstein.SL2Z
 translationMatrix n =
-  Eisenstein.sl2z 1ℤ n 0ℤ 1ℤ refl
+  Eisenstein.sl2z 1ℤ n 0ℤ 1ℤ (translationDeterminant n)
 
 T : Eisenstein.SL2Z
 T = translationMatrix 1ℤ
@@ -111,11 +116,17 @@ translateTriadic :
 translateTriadic depth x =
   Arithmetic.addResidue (oneResidue depth) x
 
+reduceZero :
+  (depth : Nat) →
+  Q.reduce (Arithmetic.zeroResidue (suc depth)) ≡ Arithmetic.zeroResidue depth
+reduceZero zero = refl
+reduceZero (suc depth) rewrite reduceZero depth = refl
+
 reduceOne :
   (depth : Nat) →
   Q.reduce (oneResidue (suc depth)) ≡ oneResidue depth
 reduceOne zero = refl
-reduceOne (suc depth) = refl
+reduceOne (suc depth) rewrite reduceZero depth = refl
 
 reduceTranslate :
   (depth : Nat) →
@@ -1000,8 +1011,8 @@ record J369ModularLevelBoundary : Set where
     c6TranslationAgreesWithCRTAction : Bool
 
     level27To9To3CoveringMapsTranslationEquivariant : Bool
-    reflectionIdentifiedWithCuspInversionAt3_9_27 : Bool
-    cuspDihedralLawProvedAt3_6_9_27 : Bool
+    reflectionIdentifiedWithCuspInversionAt3-9-27 : Bool
+    cuspDihedralLawProvedAt3-6-9-27 : Bool
     fullLevelNDeckGroupClaimedCyclic : Bool
     hypervoxelC3CubedClaimedEqualToCyclicC27AsGroup : Bool
     canonicalLevelLiftedJFibresConstructed : Bool

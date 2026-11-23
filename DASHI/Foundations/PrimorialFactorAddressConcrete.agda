@@ -54,19 +54,19 @@ example35Decode = refl
 example35Product : primeExponentProduct4 example35Digits ≡ 126
 example35Product = refl
 
-a276086PrefixList : List Nat
-a276086PrefixList =
+nthDefault : Nat → Nat → List Nat → Nat
+nthDefault d zero (x ∷ xs) = x
+nthDefault d (suc n) (x ∷ xs) = nthDefault d n xs
+nthDefault d _ [] = d
+
+a276086List : List Nat
+a276086List =
   1 ∷ 2 ∷ 3 ∷ 6 ∷ 9 ∷ 18 ∷ 5 ∷ 10 ∷ 15 ∷ 30 ∷
   45 ∷ 90 ∷ 25 ∷ 50 ∷ 75 ∷ 150 ∷ 225 ∷ 450 ∷ 125 ∷ 250 ∷
   375 ∷ 750 ∷ 1125 ∷ 2250 ∷ 625 ∷ 1250 ∷ 1875 ∷ 3750 ∷ 5625 ∷ 11250 ∷ []
 
-nthDef : Nat → Nat → List Nat → Nat
-nthDef def zero (x ∷ _) = x
-nthDef def (suc n) (_ ∷ xs) = nthDef def n xs
-nthDef def _ [] = def
-
 a276086Prefix : Nat → Nat
-a276086Prefix n = nthDef 0 n a276086PrefixList
+a276086Prefix n = nthDefault 0 n a276086List
 
 a276087Prefix : Nat → Nat
 a276087Prefix 0 = 2

@@ -179,12 +179,12 @@ standardAnalyticKlein :
   Klein.KleinJAlgebra
 standardAnalyticKlein M A N Q =
   record
-    { Klein.Point = Eisenstein.Parameter M
-    ; Klein.Value = Eisenstein.Scalar M
-    ; Klein.g2 = Disc.E4 M
-    ; Klein.delta = Normalized.normalizedDelta M A N
-    ; Klein.cube = Disc.cube M
-    ; Klein.quotient = J._/ˢ_ Q
+    { Point = Eisenstein.Parameter M
+    ; Value = Eisenstein.Scalar M
+    ; g2 = Disc.E4 M
+    ; delta = Normalized.normalizedDelta M A N
+    ; cube = Disc.cube M
+    ; quotient = J._/ˢ_ Q
     }
 
 standardAnalyticKleinJIsStandardJ :

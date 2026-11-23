@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+export DASHI_NO_TMUX="${DASHI_NO_TMUX:-1}"
+
+
 bash -n scripts/profile_agda_elaboration_residency.sh
 bash -n scripts/profile_agda_elaboration_matrix.sh
 bash -n scripts/profile_agda_profiler_views.sh

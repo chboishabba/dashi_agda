@@ -45,11 +45,23 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawFriendlyjordiesWorldEvidenceRegression.agda
 
+      - name: Type-check Friendlyjordies causal-identification regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFriendlyjordiesCausalIdentificationRegression.agda
+
       - name: Type-check Friendlyjordies reviewed-world regression
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawFriendlyjordiesReviewedWorldEvidenceRegression.agda
+
+      - name: Type-check Friendlyjordies reviewed causal-identification regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFriendlyjordiesReviewedCausalIdentificationRegression.agda
 
       - name: Type-check Friendlyjordies rooted governance regression
         run: >-

@@ -9,6 +9,7 @@ import DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact
 import DASHI.Cognition.Teleodynamics.ScopedVerifierConcreteInstancesExact
 import DASHI.Cognition.Teleodynamics.ArtifactFutureSufficiencyExact
 import DASHI.Cognition.Teleodynamics.ScopedVerifierEvaluationProtocolExact
+import DASHI.Cognition.Teleodynamics.ScopedVerifierConsumerSufficiencyExact
 
 record ExternalArchitectureClaim : Set where
   constructor external-architecture-claim
@@ -29,7 +30,7 @@ gaisFalsehoodDetectorClaim : ExternalArchitectureClaim
 gaisFalsehoodDetectorClaim = external-architecture-claim "falsehood detector" true false "replaced by scoped verified/refuted/unresolved/out-of-domain verdicts"
 
 gaisIntentFoldingClaim : ExternalArchitectureClaim
-gaisIntentFoldingClaim = external-architecture-claim "intent folding / intent-conditioned distribution" true false "mapped to typed consumer/action semantics"
+gaisIntentFoldingClaim = external-architecture-claim "intent folding / intent-conditioned distribution" true false "mapped to typed consumer/action semantics; adequacy is paid by canonical FactorsThrough/ConsumerSufficient and comparison is restricted to Admissible x ConsumerAdequate eligibility"
 
 data StochasticityImpliesNoUnderstanding : Set where
 data KnowledgeGraphImpliesUniversalLogicGate : Set where
@@ -54,9 +55,13 @@ record GAISComparisonBoundary : Set where
     concreteValidatorInstancesPresent : Bool
     artifactTransitionMappingPresent : Bool
     artifactFutureSufficiencySurfacePresent : Bool
+    consumerRelativeAdequacySurfacePresent : Bool
+    admissibleConsumerEligibilitySurfacePresent : Bool
     matchedEvaluationProtocolPresent : Bool
     universalTruthOracleAccepted : Bool
     empiricalHeadToHeadStillRequired : Bool
 
 canonicalGAISComparisonBoundary : GAISComparisonBoundary
-canonicalGAISComparisonBoundary = gais-comparison-boundary true false true true true true true false true
+canonicalGAISComparisonBoundary =
+  gais-comparison-boundary
+    true false true true true true true true true false true

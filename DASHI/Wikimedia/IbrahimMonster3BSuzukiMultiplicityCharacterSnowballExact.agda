@@ -262,7 +262,7 @@ atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity :
   AtlasRepModularModelCreatesComplexMonsterMultiplicity → ⊥
 atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity ()
 
-sourceFormulaDoesNotCreateSameObjectIntertwiner :
+sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner :
   SourceTensorFormulaCreatesSameObjectMonsterIntertwiner → ⊥
 sourceFormulaDoesNotCreateSameObjectIntertwiner ()
 

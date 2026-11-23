@@ -40,7 +40,10 @@ assert data["s3_factor_kernel_order"] == 6
 assert data["m24_factor_kernel_order"] == 244823040
 assert data["pure_c3_order"] == 3
 assert data["pure_c3_three_block_orbit_size"] == 3
+assert len(data["pure_c3_orbit_points"]) == 3
+assert data["pure_c3_cycle"] == "a -> b -> c -> a"
 assert data["pure_c3_trivial_on_m24_factor"] is True
+assert data["pure_c3_intertwines_m24"] is True
 assert data["m24_factor_isomorphic"] is True
 assert data["s3_factor_isomorphic"] is True
 assert data["actual_2b_tate_action_identified"] is False

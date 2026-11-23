@@ -15,7 +15,11 @@ from .repository_annotations import (
 from .repository_cli import main as repository_main
 from .repository_coverage import repository_inventory_coverage
 from .repository_git_store import git_history_status, replace_git_history
-from .repository_inventory import refresh_repository_inventory
+from .repository_inventory import (
+    DEFAULT_INVENTORY_BATCH_SIZE,
+    configure_inventory_pragmas,
+    refresh_repository_inventory,
+)
 from .repository_store import (
     DEFAULT_REPOSITORY_DB,
     ensure_repository_schema,
@@ -34,6 +38,7 @@ def _connect(root: Path, database: Path) -> sqlite3.Connection:
     conn.execute("PRAGMA synchronous=NORMAL")
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute("PRAGMA busy_timeout=5000")
+    configure_inventory_pragmas(conn)
     ensure_repository_schema(conn)
     ensure_proof_router_schema(conn)
     return conn
@@ -87,6 +92,10 @@ def _status(argv) -> int:
     print(f"semantic_available\t{semantic.get('available', False)}")
     print(f"semantic_complete\t{semantic.get('complete', False)}")
     print(f"semantic_producer\t{semantic.get('producer')}")
+    print(f"semantic_generation\t{semantic.get('generation', 0)}")
+    print(f"semantic_target_generation\t{semantic.get('target_generation', 0)}")
+    print(f"semantic_generation_state\t{semantic.get('generation_state')}")
+    print(f"semantic_cursor\t{semantic.get('cursor')}")
     print(f"semantic_missing\t{len(semantic.get('missing', ()))}")
     print(f"semantic_stale\t{len(semantic.get('stale', ()))}")
     print(f"semantic_parse_errors\t{len(semantic.get('parse_errors', ()))}")
@@ -100,17 +109,52 @@ def _status(argv) -> int:
     return 0
 
 
+def _progress_reporter(stage: str):
+    last = [0.0]
+
+    def report(position: int, total: int, path: str) -> None:
+        import time
+
+        now = time.monotonic()
+        if now - last[0] >= 0.5 or position == total:
+            last[0] = now
+            print(
+                f"{stage}\t{position}/{total}\t{path}",
+                file=sys.stderr,
+                flush=True,
+            )
+
+    return report
+
+
 def _index(argv) -> int:
     parser = argparse.ArgumentParser(
         prog="dashi-repo index",
         description="Build the canonical whole-repo inventory with the preflight parser.",
     )
     _common(parser)
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=DEFAULT_INVENTORY_BATCH_SIZE,
+    )
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="Start a new generation even if a prior generation is in-progress.",
+    )
     args = parser.parse_args(argv)
     root = args.root.resolve()
+    print("stage\tindex\tstart", file=sys.stderr, flush=True)
     with _connect(root, args.database) as conn:
         annotations = capture_repository_annotations(conn)
-        result = refresh_repository_inventory(root, conn)
+        result = refresh_repository_inventory(
+            root,
+            conn,
+            progress=_progress_reporter("index"),
+            batch_size=args.batch_size,
+            resume=not args.no_resume,
+        )
         result["annotations_restored"] = restore_repository_annotations(
             conn,
             annotations,
@@ -122,12 +166,17 @@ def _index(argv) -> int:
         "symbols",
         "imports",
         "parse_errors",
+        "generation",
+        "resumed_files",
+        "indexed_files",
+        "batches",
         "annotations_restored",
         "elapsed_ms",
     ):
         print(f"{key}\t{result[key]}")
     for error in result["errors"]:
         print(f"parse_error\t{error['path']}\t{error['error']}")
+    print("stage\tindex\tdone", file=sys.stderr, flush=True)
     return 0 if not result["parse_errors"] else 2
 
 
@@ -163,13 +212,34 @@ def _bootstrap(argv) -> int:
     )
     _common(parser)
     parser.add_argument("--github-prs")
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=DEFAULT_INVENTORY_BATCH_SIZE,
+    )
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+    )
     args = parser.parse_args(argv)
     root = args.root.resolve()
-    index_code = _index(["--root", str(root), "--database", str(args.database)])
+    index_argv = [
+        "--root",
+        str(root),
+        "--database",
+        str(args.database),
+        "--batch-size",
+        str(args.batch_size),
+    ]
+    if args.no_resume:
+        index_argv.append("--no-resume")
+    index_code = _index(index_argv)
     forwarded = ["--root", str(root), "--database", str(args.database)]
     if args.github_prs:
         forwarded.extend(["--github-prs", args.github_prs])
+    print("stage\tharvest\tstart", file=sys.stderr, flush=True)
     history_code = _harvest(forwarded)
+    print("stage\tbootstrap\tdone", file=sys.stderr, flush=True)
     return max(index_code, history_code)
 
 

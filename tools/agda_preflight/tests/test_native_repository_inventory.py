@@ -80,3 +80,64 @@ def test_native_inventory_coverage_fails_closed_after_source_edit(tmp_path: Path
     assert coverage["complete"] is False
     assert "DASHI/Core/A.agda" in coverage["stale"]
     conn.close()
+
+
+def test_native_inventory_staged_batches_resume_after_interruption(tmp_path: Path):
+    for idx in range(5):
+        _write(
+            tmp_path,
+            f"DASHI.Core.M{idx}",
+            f"sym{idx} : Nat\nsym{idx} = {idx}\n",
+        )
+    database = tmp_path / ".dashi" / "repository.sqlite3"
+    database.parent.mkdir(parents=True)
+    conn = sqlite3.connect(database)
+    conn.row_factory = sqlite3.Row
+    ensure_repository_schema(conn)
+
+    # First complete generation (generation 1)
+    first = refresh_repository_inventory(tmp_path, conn, batch_size=2)
+    assert first["generation"] == 1
+    assert first["files"] == 5
+    assert first["batches"] == 3
+    assert repository_inventory_coverage(tmp_path, conn)["complete"] is True
+
+    # Simulate an interrupted generation 2 after batch 1 (2 files committed, fail on file 3)
+    seen = []
+
+    def interrupt_on_third(position: int, total: int, relative: str) -> None:
+        seen.append((position, relative))
+        if position == 3:
+            raise RuntimeError("simulated interruption after batch 1")
+
+    try:
+        refresh_repository_inventory(
+            tmp_path,
+            conn,
+            batch_size=2,
+            progress=interrupt_on_third,
+        )
+    except RuntimeError:
+        pass
+
+    # Batch 1 (files 1..2) is durably committed in generation 2, but generation 2 is in-progress
+    mid_coverage = repository_inventory_coverage(tmp_path, conn)
+    assert mid_coverage["complete"] is False
+    assert mid_coverage["generation"] == 1
+    assert mid_coverage["target_generation"] == 2
+    assert mid_coverage["generation_state"] == "in-progress"
+    assert mid_coverage["cursor"] == "DASHI/Core/M1.agda"
+
+    # Resuming completes generation 2, skipping the 2 already-committed files
+    resumed = refresh_repository_inventory(tmp_path, conn, batch_size=2)
+    assert resumed["generation"] == 2
+    assert resumed["resumed_files"] == 2
+    assert resumed["indexed_files"] == 3
+    assert resumed["files"] == 5
+    final_coverage = repository_inventory_coverage(tmp_path, conn)
+    assert final_coverage["complete"] is True
+    assert final_coverage["generation"] == 2
+    assert final_coverage["generation_state"] == "complete"
+    assert final_coverage["cursor"] is None
+    conn.close()
+

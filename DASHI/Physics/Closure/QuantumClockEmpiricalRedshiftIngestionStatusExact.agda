@@ -35,7 +35,7 @@ import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 -- thereby created.
 ------------------------------------------------------------------------
 
-record EmpiricalRedshiftIngestionStatus : Set where
+record EmpiricalRedshiftIngestionStatus : Set₁ where
   field
     experimentName : String
     sourceReceipt : Source.BothwellYe2022ReceiptBoundary

@@ -8,140 +8,98 @@ import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
 import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
-import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelReceiptExact
-import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelValidation
-import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelReceiptExact
-import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelValidation
-import DASHI.Foundations.E6F3RootLineSRGCrossKernelReceiptExact
-import DASHI.Foundations.E6F3RootLineSRGCrossKernelValidation
+import DASHI.Foundations.AlbertJordanExternalDonorExact
+import DASHI.Foundations.FirstTitsAlbertE6F4ClassicalSourceExact
+import DASHI.Foundations.RationalAlbertLeanRigidityAuthorityExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionValidation
-import DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeExact
-import DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeValidation
-import DASHI.Reasoning.Ternary27A5SixFaceReorganisationReceiptExact
-import DASHI.Reasoning.E6Ternary27FullSameActionReceiptExact
-import DASHI.Reasoning.Ternary27AlbertShapeFullE6BoundaryExact
-import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportExact
-import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportValidation
-import DASHI.Reasoning.E8StructuredTernary240E6A2ReceiptExact
-import DASHI.Reasoning.E8StructuredFullWeylReceiptExact
-
--- Actual rational Albert algebra.
-import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact
-import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact
-import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact
-
--- Explicit automorphism / triality lanes on the same carrier.
-import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact
-import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact
-import DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismExact
-import DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismValidation
-import DASHI.Mathematics.Algebra.RationalOctonionLinearityExact
-import DASHI.Mathematics.Algebra.RationalOctonionG2DerivationExact
-import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisG2SubgroupExact
-import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisAutomorphismExact
-import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact
-import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismValidation
-import DASHI.Mathematics.Algebra.RationalAlbertLinearJordanAutomorphismExact
-import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact
-import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyValidation
-import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureExact
-import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureValidation
-import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismFixesUnitExact
-
--- Albert derivation/F4 lane and terminal form diagnostics.
-import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact
-import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact
-import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawValidation
-import DASHI.Mathematics.Algebra.RationalAlbertF4DerivationExact
-import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4ReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertTrialityDerivationExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4CartanRootReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4RootDecompositionDiagnosticExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessValidation
-import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact
-
--- Same-carrier exceptional-group targets and sourced classification boundary.
-import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact
-import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact
-import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryValidation
-import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact
-import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
-import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
-import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
-
--- Monster-3B realization lane. Certified source matrices are vendored and
--- normalized into X6+X6*. Three source-word roles are kept separate:
--- depth-5 strict lift / field-presentation seed, depth-7 primitive center
--- inverter, and the preferred depth-8 primitive center-preserving inertia word.
--- The last one pays the selected GF(729) punctured 728-cycle and an exact
--- center-preserving Heisenberg lift at executable receipt level. Barraclough-
--- Wilson independently source-align the degree-729 extraspecial irreducibles.
---
--- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
--- surface. Constructive 729-state witness extraction closes the explicit
--- Schrodinger irreducibility leaf. The literal monomial action now also has an
--- exhaustive executable character derivation over all 3^13 Heisenberg
--- coordinates and all 729 additive-character sums. Companion Lean source-writes
--- the generic equal-character-simple-representation isomorphism theorem.
---
--- Promotion is proof-relevant: legacy Set-valued fields name proposition types
--- but do not count as proofs. The fixed-phase character compiler shows that
--- once the explicit Schrodinger rep and one actual selected constituent are
--- transported into the same representation theory, the equivariant H_zeta iso
--- fills both recognition/action witnesses. A second, shorter whole-character
--- route is now source-written generically: after the SAME actual restricted
--- sector has a proof-relevant classifier saying every simple submodule is
--- H_zeta, pinned mathlib `IsIsotypicOfType.linearEquiv_fun` assembles finite
--- H_zeta copies automatically. Literal ninety-constituent enumeration is thus
--- a fallback rather than a mandatory generic assembly step. The classifier,
--- Monster same-object bindings and copy count 90 remain independent payments.
---
--- The Suzuki 12+78 occurrence/orientation chain is hardened similarly:
--- external GAP/CTblLib execution remains evidence, while Agda promotion requires
--- inhabitants for pair restriction, main split, quotient descent, actual
--- Monster occurrence, same-object identity and individual zeta orientation.
-import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
-import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
-import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
-import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact
-import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftValidation
-import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact
-import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptValidation
-import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact
-import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftValidation
-import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
-import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
-import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact
-import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptValidation
-import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
-import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionValidation
-import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
-import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureValidation
-import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
-import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation
-import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
-import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
-import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact
-import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptValidation
-import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
-import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
-import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
-import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
-import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningExact
-import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningValidation
-import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutExact
-import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutValidation
-import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
-import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
-import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
-
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutExact
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutValidation
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneValidation
+
+-- Ternary basis / first-Tits / exceptional algebra recognition.
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsDerivationF4SignalExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsProofRelevantRecognitionHardeningExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsProofRelevantRecognitionHardeningValidation
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsCarrierExact
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsCarrierValidation
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsLawObligationsExact
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsPromotionMaxCutExact
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsPromotionMaxCutValidation
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsBasicLawWitnessesExact
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsBasicLawWitnessesValidation
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsUnitWitnessExact
+import DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsUnitWitnessValidation
+import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
+import DASHI.Reasoning.Ternary27FirstTitsMonster3BNormalizerFrontierExact
+import DASHI.Reasoning.Ternary27Monster3BPolarizationTransitionExact
+import DASHI.Reasoning.E6MinusculeFirstTitsWeightBasisBridgeExact
+import DASHI.Reasoning.E6MinusculeFirstTitsTitsExtensionExact
+
+-- Trinification / Standard Model / DHR frontier.
+import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
+import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
+import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact
+import DASHI.Physics.Closure.Ternary27TrinificationDHRMaxCutExact
+import DASHI.Physics.Closure.Ternary27E6ZetaTrinificationCentralizerExact
+import DASHI.Physics.Closure.Ternary27E6ZetaHolonomyBreakingFrontierExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoNeutralVEVBreakingExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoVEVMassSpectrumExact
+import DASHI.Physics.Closure.Ternary27TrinificationInvariantTwoVEVPotentialExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoVEVLocalStabilityExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoVEVStabilityConeExact
+import DASHI.Physics.Closure.Ternary27TwoStageE6ToSMBreakingExact
+
+-- Gravity: historical coordinate-Laplacian diagnostics retained for comparison.
+import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
+import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformPositiveGaugeVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
+import DASHI.Physics.Closure.E6HyperformTernary36GravityRefinementCandidateExact
+import DASHI.Physics.Closure.E6HyperformTernary36EntropyActionBoundaryExact
+
+-- Gravity: active intrinsic quadratic-class / H3-H2 incidence-bundle programme.
+import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact
+import DASHI.Physics.Closure.E6HyperformRadicalQuotientGravityBoundaryExact
+import DASHI.Physics.Closure.E6HyperformH3SameObjectEmbeddingExact
+import DASHI.Physics.Closure.E6HyperformTwoH3NondegenerateCandidateExact
+import DASHI.Physics.Closure.E6HyperformMetricDescentFrontierExact
+import DASHI.Physics.Closure.E6HyperformIntrinsicRadiationVacuumStressExact
+import DASHI.Physics.Closure.E6HyperformH3PhaseMetricLiftExact
+import DASHI.Physics.Closure.E6HyperformH3ResidualReopeningMetricExact
+import DASHI.Physics.Closure.E6HyperformH3PhaseOrderParameterExact
+import DASHI.Physics.Closure.E6HyperformH3H2PhaseIncidenceExact
+import DASHI.Physics.Closure.E6HyperformH3H2NineSheetChartExact
+import DASHI.Physics.Closure.E6HyperformH3H2OrderParameterGeometryExact
+import DASHI.Physics.Closure.E6HyperformH3H2OrderParameterDynamicsExact
+import DASHI.Physics.Closure.E6HyperformH3H2InvariantQuadraticDynamicsExact
+import DASHI.Physics.Closure.E6HyperformH3H2InvariantPotentialNoGoExact
+import DASHI.Physics.Closure.E6HyperformH3H2InvariantPotentialNoGoValidation
+import DASHI.Physics.Closure.E6HyperformH3H2IncidenceGroundStateExact
+import DASHI.Physics.Closure.E6HyperformH3H2IncidenceGroundStateValidation
+import DASHI.Physics.Closure.E6HyperformH3H2NoEquivariantSectionExact
+import DASHI.Physics.Closure.E6HyperformH3BaseGraphSpectrumExact
+import DASHI.Physics.Closure.E6HyperformH3H2FiniteBundleDynamicsExact
+import DASHI.Physics.Closure.E6HyperformH3H2CommonActionBridgeExact
+import DASHI.Physics.Closure.E6HyperformH3H2CommonActionBridgeValidation
+
+-- Measured neural/consciousness acquisition and protocol boundaries.
+import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
+import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
+import DASHI.Governance.ConsciousnessExceptionalSelectedTPSProtocolExact
+import DASHI.Governance.ConsciousnessExceptionalResidualIITBoundaryExact
+
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct14MaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct14TerminalMaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct16MaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct16MaxCutValidation

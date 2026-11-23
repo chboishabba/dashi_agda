@@ -17,11 +17,6 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --     verified five-swapped-pair basis;
 --   * binary-tetrahedral defect meaning is the centralizer 2-adic exponent,
 --     with sourced profile 3,3,2,1,1;
---   * defect preservation cuts D from 120 arbitrary bijections to exactly four
---     source-compatible charts, equivalently two independent source choices;
---   * mode27 -> orderFour is forced by the unique depth-2 stratum;
---   * binary-tetrahedral central -1 is NOT a shortcut for Completion10
---     BinaryPhase on the five-mode quotient;
 --   * transported 30 and its downstream arithmetic remain available.
 --
 -- Remaining same-object welds:
@@ -31,18 +26,15 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --      with that carrier.  Then the known C3 transport is automatic.
 --
 --   B' realize one observed M22:2 ten-module (restricting to 10a/10b) as a
---      genuine subquotient of one actual 2B Tate fibre.  The focused CTblLib
---      class-fusion/Brauer-character screen is now the finite test for the
---      M24-duad semisimplified ingress.
+--      genuine subquotient of one actual 2B Tate fibre.
 --
 --   C' prove the sourced M22:2 outer involution action descends to that SAME
 --      Tate subquotient and becomes the Completion10 binary phase.  The finite
 --      phase source is no longer open; only the actual-Tate same-object weld is.
 --
---   D  source the two remaining orientation decisions:
---        mode09/mode18 <-> identity/centralMinusOne,
---        mode36/mode45 <-> orderThree/orderSix.
---      The orderFour assignment is already forced.
+--   D  identify the five recognized Q10 modes with the five independently
+--      sourced binary-tetrahedral order strata.  The defect invariant itself
+--      is no longer open.
 --
 --   E  only after A'-D promote 30 -> 31 -> 279 to same-object observables.
 ------------------------------------------------------------------------
@@ -54,15 +46,11 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Moonshine.OggSSP2BPureKleinFourThreeTateFibreExact as Three
 import DASHI.Moonshine.OggSSP2BM22RuntimeMaxCutReceiptExact as Runtime
 import DASHI.Moonshine.OggSSP2BM22d2Completion10RuntimeReceiptExact as CompletionRuntime
 import DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact as ActionSource
 import DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact as DefectSource
-import DASHI.Moonshine.OggSSP2BDefectRecognitionAmbiguityExact as DefectAmbiguity
-import DASHI.Moonshine.OggSSP2BDefectTwoBitProvenanceSelectorExact as DefectBits
-import DASHI.Moonshine.OggSSP2BBinaryTetrahedralCentralSignPhaseNoGoExact as CentralSignNoGo
 import DASHI.Moonshine.OggP31CompletionTenTwoSevenNineCrossPollinationExact as P279
 
 ------------------------------------------------------------------------
@@ -79,7 +67,7 @@ completionTenPerFibre : Nat
 completionTenPerFibre = Three.completionTenPerFibre
 
 transportedSelectedTotal : Nat
-transportedSelectedTotal = threeTwoBFibres * completionTenPerFibre
+transportedSelectedTotal = _*_ threeTwoBFibres completionTenPerFibre
 
 transportedSelectedTotalIsThirty : transportedSelectedTotal ≡ 30
 transportedSelectedTotalIsThirty = Three.threeFibreCompletionCountIsThirty
@@ -143,7 +131,7 @@ formalTateCarrierWeldOpen =
   ActionSource.repoSameObjectTateCarrierWeldStillOpen
 
 ------------------------------------------------------------------------
--- 4. D invariant meaning is paid; exactly two source choices remain.
+-- 4. D invariant meaning is paid; actual mode recognition is not.
 ------------------------------------------------------------------------
 
 defectIdentityThree :
@@ -166,33 +154,6 @@ defectOrderSixOne :
   DefectSource.twoAdicCentralizerExponent DefectSource.orderSix ≡ 1
 defectOrderSixOne = DefectSource.defectOrderSixIsOne
 
-defectCompatibleChartCountIsFour :
-  DefectAmbiguity.defectCompatibleChartCount ≡ 4
-defectCompatibleChartCountIsFour =
-  DefectAmbiguity.defectCompatibleChartCountIsFour
-
-remainingDefectSourceDecisionCount : Nat
-remainingDefectSourceDecisionCount = 2
-
-remainingDefectSourceDecisionCountIsTwo :
-  remainingDefectSourceDecisionCount ≡ 2
-remainingDefectSourceDecisionCountIsTwo = refl
-
-orderFourAssignmentIsForced :
-  (bits : DefectBits.ProvenanceBits) →
-  DefectBits.chartFromBits bits Completion.mode27
-  ≡ DefectSource.orderFour
-orderFourAssignmentIsForced = DefectBits.orderFourIsForced
-
-centralSignShortcutStillKilled :
-  (bits : DefectBits.ProvenanceBits) →
-  ((mode : Completion.ComplementMode5) →
-    CentralSignNoGo.centralSignOnStratum (DefectBits.chartFromBits bits mode)
-    ≡ DefectBits.chartFromBits bits mode) →
-  ⊥
-centralSignShortcutStillKilled =
-  CentralSignNoGo.completionModePreservingPhaseIsNotCentralSignOnStrata
-
 ------------------------------------------------------------------------
 -- 5. Remaining formal same-object welds.
 ------------------------------------------------------------------------
@@ -202,6 +163,9 @@ data ActualTateTenSubquotientPaid : Set where
 data ActualTateCompletionActionPaid : Set where
 data ActualQ10ModeToOrderStratumRecognitionPaid : Set where
 
+-- Compatibility surface retained for existing downstream code.  After the
+-- M22:2 runtime result this means "the larger Completion10 action is paid on
+-- the actual Tate subquotient", not merely "a finite candidate exists".
 LargerCompletionActionPaid : Set
 LargerCompletionActionPaid = ActualTateCompletionActionPaid
 
@@ -243,7 +207,7 @@ p31To279StillObserverOnly : P31To279PromotedSameObject → ⊥
 p31To279StillObserverOnly ()
 
 ------------------------------------------------------------------------
--- 7. Canonical status after B'-screen construction / C'/D max-cut.
+-- 7. Canonical status after C' max-cut.
 ------------------------------------------------------------------------
 
 record SameObjectMaxCutStatus : Set where
@@ -264,9 +228,6 @@ record SameObjectMaxCutStatus : Set where
 
     binaryTetrahedralDefectMeaningSourced : Bool
     defectProfileThreeThreeTwoOneOnePaid : Bool
-    defectCompatibleChartCount : Nat
-    remainingDefectSourceDecisionCount : Nat
-    centralSignPhaseShortcutKilled : Bool
 
     formalIntegralTateCarrierWeldPaid : Bool
     actualTateTenSubquotientPaid : Bool
@@ -283,7 +244,7 @@ canonicalSameObjectMaxCutStatus =
   same-object-max-cut-status
     true true true true true
     true true true true true true
-    true true 4 2 true
+    true true
     false false false false
     false false true
-    "B': run the focused 2B-centralizer/M24 2-regular character screen and, if equal, promote the resulting actual Tate semisimplified M22 10a/10b subquotient receipt; C': prove the sourced M22:2 outer J2^5 action acts on that same quotient; D: source exactly two orientation decisions (depth-3 and depth-1); central -1 is ruled out as the Mode5-preserving BinaryPhase shortcut; only then promote 31/279"
+    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': identify one observed M22:2 ten-module as an actual Tate subquotient; C': prove its sourced outer J2^5 involution is the action on that same Tate subquotient; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"

@@ -24,6 +24,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl; sym; trans; cong)
+open Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantFormulaic369ModularReplicationExact as Replication

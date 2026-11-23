@@ -11,7 +11,7 @@ module DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.List.Base using (_++_)
+open import Data.List.Base using (List; []; _∷_; _++_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Membership.Propositional.Properties using (∈-++⁻)
 open import Data.List.Relation.Unary.Any as Any using ()
@@ -35,9 +35,9 @@ oneToUpperBound {zero} ()
 oneToUpperBound {suc n} {r} member
   with ∈-++⁻ (Hecke.oneTo n) member
 ... | inj₁ earlier =
-  NatP.≤-step (oneToUpperBound earlier)
-... | inj₂ (Any.here equality) =
-  subst (λ value → value ≤ suc n) equality NatP.≤-refl
+  NatP.≤-step (oneToUpperBound {n = n} earlier)
+... | inj₂ (Any.here refl) =
+  NatP.≤-refl
 ... | inj₂ (Any.there ())
 
 oneToPositive :
@@ -45,9 +45,8 @@ oneToPositive :
 oneToPositive {zero} ()
 oneToPositive {suc n} {r} member
   with ∈-++⁻ (Hecke.oneTo n) member
-... | inj₁ earlier = oneToPositive earlier
-... | inj₂ (Any.here equality) =
-  subst (λ value → suc zero ≤ value) equality (s≤s z≤n)
+... | inj₁ earlier = oneToPositive {n = n} earlier
+... | inj₂ (Any.here refl) = s≤s z≤n
 ... | inj₂ (Any.there ())
 
 oneToAllBounds :
@@ -55,7 +54,7 @@ oneToAllBounds :
   All.All (λ r → (suc zero ≤ r) × (r ≤ n)) (Hecke.oneTo n)
 oneToAllBounds n =
   All.tabulate λ member →
-    oneToPositive member , oneToUpperBound member
+    oneToPositive {n = n} member , oneToUpperBound {n = n} member
 
 ------------------------------------------------------------------------
 -- Completeness of the positive prefix.
@@ -70,11 +69,14 @@ strictFromLeDifferent {suc m} {suc n} (s≤s bound) different =
     (strictFromLeDifferent bound
       (λ equality → different (cong suc equality)))
 
+≤-pred : ∀ {m n : Nat} → suc m ≤ suc n → m ≤ n
+≤-pred (s≤s p) = p
+
 oneToComplete :
   ∀ {n r : Nat} →
   suc zero ≤ r → r ≤ n → r ∈ Hecke.oneTo n
-oneToComplete {zero} {r} positive bound with bound
-... | ()
+oneToComplete {zero} {zero} () bound
+oneToComplete {zero} {suc r} positive ()
 oneToComplete {suc n} {zero} () bound
 oneToComplete {suc n} {suc r} positive bound
   with suc r NatP.≟ suc n
@@ -86,7 +88,7 @@ oneToComplete {suc n} {suc r} positive bound
   Product.appendMemberLeft
     (oneToComplete
       positive
-      (strictFromLeDifferent bound different))
+      (≤-pred (strictFromLeDifferent bound different)))
 
 ------------------------------------------------------------------------
 -- Duplicate-freedom of 1,...,n.

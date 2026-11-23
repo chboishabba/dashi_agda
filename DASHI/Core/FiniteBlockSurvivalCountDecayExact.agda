@@ -28,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _-_)
 open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP using
-  (≤-refl; ≤-trans; *-mono-≤; *-assoc)
+  (≤-refl; ≤-reflexive; ≤-trans; *-monoʳ-≤; *-assoc; +-identityʳ)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 powNat : Nat → Nat → Nat
@@ -50,26 +50,26 @@ record BlockSurvivalRecurrence : Set where
 open BlockSurvivalRecurrence public
 
 survivorCountGeometricBound :
-  (data : BlockSurvivalRecurrence) →
+  (recurrence : BlockSurvivalRecurrence) →
   (q : Nat) →
-  survivors data q
-  ≤ powNat (contractionCount data) q * survivors data zero
-survivorCountGeometricBound data zero =
-  ≤-refl
-survivorCountGeometricBound data (suc q) =
+  survivors recurrence q
+  ≤ powNat (contractionCount recurrence) q * survivors recurrence zero
+survivorCountGeometricBound recurrence zero =
+  ≤-reflexive (sym (+-identityʳ (survivors recurrence zero)))
+survivorCountGeometricBound recurrence (suc q) =
   let
-    c = contractionCount data
-    Sq = survivors data q
-    S0 = survivors data zero
+    c = contractionCount recurrence
+    Sq = survivors recurrence q
+    S0 = survivors recurrence zero
 
-    step : survivors data (suc q) ≤ c * Sq
-    step = oneBlockBound data q
+    step : survivors recurrence (suc q) ≤ c * Sq
+    step = oneBlockBound recurrence q
 
     induction : Sq ≤ powNat c q * S0
-    induction = survivorCountGeometricBound data q
+    induction = survivorCountGeometricBound recurrence q
 
     scaled : c * Sq ≤ c * (powNat c q * S0)
-    scaled = *-mono-≤ ≤-refl induction
+    scaled = *-monoʳ-≤ c induction
 
     reassociate :
       c * (powNat c q * S0)

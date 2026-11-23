@@ -69,6 +69,15 @@ def _is_module_assignment_tsagda090(summary, diagnostic) -> bool:
             if assignment.line != diagnostic.line:
                 continue
             if assignment.name and assignment.name in diagnostic.message:
+                raw_text = getattr(assignment.node, "text", None)
+                if raw_text is not None:
+                    text = (
+                        raw_text.decode("utf-8", "ignore")
+                        if isinstance(raw_text, bytes)
+                        else str(raw_text)
+                    )
+                    if "=" in text and not text.strip().startswith("module"):
+                        return False
                 return True
     return False
 

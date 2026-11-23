@@ -2,7 +2,8 @@ module DASHI.Physics.YangMills.BalabanPath13PhysicalFibreMatchExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; -_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -93,26 +94,37 @@ path13CoordinatesFromPhysicalFibre fld axis transverse =
     (physicalFibre13Coordinate fld axis transverse index10)
     (physicalFibre13Coordinate fld axis transverse index11)
 
+isolate13 : ∀ a b c d e f g h i j k l m →
+  m ≡ (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (m + (0ℚ)))))))))))))) - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l))))))))))))
+isolate13 = ℚRing.solve-∀
+
+zeroReduction13 : ∀ a b c d e f g h i j k l →
+  0ℚ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l))))))))))))
+  ≡ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l))))))))))))
+zeroReduction13 = ℚRing.solve-∀
+
+dropZeroNorm13 : ∀ y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 →
+  sq y0 + (sq y1 + (sq y2 + (sq y3 + (sq y4 + (sq y5 + (sq y6 + (sq y7 + (sq y8 + (sq y9 + (sq y10 + (sq y11 + (sq y12 + (0ℚ)))))))))))))
+  ≡ sq y0 + (sq y1 + (sq y2 + (sq y3 + (sq y4 + (sq y5 + (sq y6 + (sq y7 + (sq y8 + (sq y9 + (sq y10 + (sq y11 + (sq y12))))))))))))
+dropZeroNorm13 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 =
+  cong (λ z → sq y0 + (sq y1 + (sq y2 + (sq y3 + (sq y4 + (sq y5 + (sq y6 + (sq y7 + (sq y8 + (sq y9 + (sq y10 + (sq y11 + z)))))))))))) (ℚP.+-identityʳ (sq y12))
+
+dropZeroEnergy13 : ∀ d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 →
+  d0 + (d1 + (d2 + (d3 + (d4 + (d5 + (d6 + (d7 + (d8 + (d9 + (d10 + (d11 + (0ℚ))))))))))))
+  ≡ d0 + (d1 + (d2 + (d3 + (d4 + (d5 + (d6 + (d7 + (d8 + (d9 + (d10 + (d11)))))))))))
+dropZeroEnergy13 d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 =
+  cong (λ z → d0 + (d1 + (d2 + (d3 + (d4 + (d5 + (d6 + (d7 + (d8 + (d9 + (d10 + z))))))))))) (ℚP.+-identityʳ d11)
+
 isolateThirteenthFromZero : ∀ a b c d e f g h i j k l m →
   a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (m + (0ℚ))))))))))))) ≡ 0ℚ →
-  m ≡ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (0ℚ)))))))))))))
+  m ≡ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l))))))))))))
 isolateThirteenthFromZero a b c d e f g h i j k l m total =
-  let
-    isolate :
-      m ≡ (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (m + (0ℚ)))))))))))))) - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (0ℚ)))))))))))))
-    isolate = ℚRing.solve-∀
-
-    zeroReduction :
-      0ℚ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (0ℚ)))))))))))))
-      ≡ - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (0ℚ)))))))))))))
-    zeroReduction = ℚRing.solve-∀
-  in
-  trans isolate
+  trans (isolate13 a b c d e f g h i j k l m)
     (trans
       (cong
-        (λ value → value - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l + (0ℚ))))))))))))))
+        (λ value → value - (a + (b + (c + (d + (e + (f + (g + (h + (i + (j + (k + (l)))))))))))))
         total)
-      zeroReduction)
+      (zeroReduction13 a b c d e f g h i j k l))
 
 physicalThirteenthCoordinateIsGeneratedLast :
   ∀ fld axis transverse →
@@ -173,8 +185,22 @@ physicalFibre13NormMatchesGenerated fld axis transverse =
         sq (physicalFibre13Coordinate fld axis transverse index0) + (sq (physicalFibre13Coordinate fld axis transverse index1) + (sq (physicalFibre13Coordinate fld axis transverse index2) + (sq (physicalFibre13Coordinate fld axis transverse index3) + (sq (physicalFibre13Coordinate fld axis transverse index4) + (sq (physicalFibre13Coordinate fld axis transverse index5) + (sq (physicalFibre13Coordinate fld axis transverse index6) + (sq (physicalFibre13Coordinate fld axis transverse index7) + (sq (physicalFibre13Coordinate fld axis transverse index8) + (sq (physicalFibre13Coordinate fld axis transverse index9) + (sq (physicalFibre13Coordinate fld axis transverse index10) + (sq (physicalFibre13Coordinate fld axis transverse index11) + (sq thirteenth + (0ℚ)))))))))))))
         ≡ Generated.path13NormSq
             (path13CoordinatesFromPhysicalFibre fld axis transverse))
-      (physicalThirteenthCoordinateIsGeneratedLast fld axis transverse)
-      (ℚRing.solve-∀))
+      (sym (physicalThirteenthCoordinateIsGeneratedLast fld axis transverse))
+      (dropZeroNorm13
+        (physicalFibre13Coordinate fld axis transverse index0)
+        (physicalFibre13Coordinate fld axis transverse index1)
+        (physicalFibre13Coordinate fld axis transverse index2)
+        (physicalFibre13Coordinate fld axis transverse index3)
+        (physicalFibre13Coordinate fld axis transverse index4)
+        (physicalFibre13Coordinate fld axis transverse index5)
+        (physicalFibre13Coordinate fld axis transverse index6)
+        (physicalFibre13Coordinate fld axis transverse index7)
+        (physicalFibre13Coordinate fld axis transverse index8)
+        (physicalFibre13Coordinate fld axis transverse index9)
+        (physicalFibre13Coordinate fld axis transverse index10)
+        (physicalFibre13Coordinate fld axis transverse index11)
+        (Generated.lastCoordinate
+          (path13CoordinatesFromPhysicalFibre fld axis transverse))))
 
 physicalFibre13EnergyMatchesGenerated :
   ∀ fld axis transverse →
@@ -189,8 +215,20 @@ physicalFibre13EnergyMatchesGenerated fld axis transverse =
         sqDiff (physicalFibre13Coordinate fld axis transverse index1) (physicalFibre13Coordinate fld axis transverse index0) + (sqDiff (physicalFibre13Coordinate fld axis transverse index2) (physicalFibre13Coordinate fld axis transverse index1) + (sqDiff (physicalFibre13Coordinate fld axis transverse index3) (physicalFibre13Coordinate fld axis transverse index2) + (sqDiff (physicalFibre13Coordinate fld axis transverse index4) (physicalFibre13Coordinate fld axis transverse index3) + (sqDiff (physicalFibre13Coordinate fld axis transverse index5) (physicalFibre13Coordinate fld axis transverse index4) + (sqDiff (physicalFibre13Coordinate fld axis transverse index6) (physicalFibre13Coordinate fld axis transverse index5) + (sqDiff (physicalFibre13Coordinate fld axis transverse index7) (physicalFibre13Coordinate fld axis transverse index6) + (sqDiff (physicalFibre13Coordinate fld axis transverse index8) (physicalFibre13Coordinate fld axis transverse index7) + (sqDiff (physicalFibre13Coordinate fld axis transverse index9) (physicalFibre13Coordinate fld axis transverse index8) + (sqDiff (physicalFibre13Coordinate fld axis transverse index10) (physicalFibre13Coordinate fld axis transverse index9) + (sqDiff (physicalFibre13Coordinate fld axis transverse index11) (physicalFibre13Coordinate fld axis transverse index10) + (sqDiff thirteenth (physicalFibre13Coordinate fld axis transverse index11) + (0ℚ))))))))))))
         ≡ Generated.path13Energy
             (path13CoordinatesFromPhysicalFibre fld axis transverse))
-      (physicalThirteenthCoordinateIsGeneratedLast fld axis transverse)
-      (ℚRing.solve-∀))
+      (sym (physicalThirteenthCoordinateIsGeneratedLast fld axis transverse))
+      (dropZeroEnergy13
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index1) (physicalFibre13Coordinate fld axis transverse index0))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index2) (physicalFibre13Coordinate fld axis transverse index1))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index3) (physicalFibre13Coordinate fld axis transverse index2))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index4) (physicalFibre13Coordinate fld axis transverse index3))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index5) (physicalFibre13Coordinate fld axis transverse index4))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index6) (physicalFibre13Coordinate fld axis transverse index5))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index7) (physicalFibre13Coordinate fld axis transverse index6))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index8) (physicalFibre13Coordinate fld axis transverse index7))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index9) (physicalFibre13Coordinate fld axis transverse index8))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index10) (physicalFibre13Coordinate fld axis transverse index9))
+        (sqDiff (physicalFibre13Coordinate fld axis transverse index11) (physicalFibre13Coordinate fld axis transverse index10))
+        (sqDiff (Generated.lastCoordinate (path13CoordinatesFromPhysicalFibre fld axis transverse)) (physicalFibre13Coordinate fld axis transverse index11))))
 
 physicalSide13FibrePoincare :
   ∀ fld axis transverse →

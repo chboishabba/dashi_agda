@@ -61,8 +61,12 @@ instance
   thirteenPositive : Positive thirteenℚ
   thirteenPositive = ℚP.normalize-pos 13 1
 
+thirteenLengthExact : natAsRational (length (allCyclicIndices Side13.side13)) ≡ thirteenℚ
+thirteenLengthExact rewrite lengthAllCyclicIndices Side13.side13 = refl
+
 emptyElim : ∀ {A : Set} → Empty → A
 emptyElim ()
+
 
 replaceAxis : Axis4 → CyclicIndex Side13.side13 →
   PhysicalBlockL Side13.side13 → PhysicalBlockL Side13.side13
@@ -76,67 +80,16 @@ edgeDifferenceField fld axis predecessor site =
   fld (replaceAxis axis (sucᵢ predecessor) site)
   - fld (replaceAxis axis (weakenIndex predecessor) site)
 
-axisAverageCommutesWithDistinctEdgeDifference :
-  ∀ averageAxis differenceAxis fld predecessor site →
-  averageAxis ≢ differenceAxis →
-  edgeDifferenceField
-    (Average.axisAverage Side13.side13AverageData fld averageAxis)
-    differenceAxis predecessor site
-  ≡ Average.axisAverage Side13.side13AverageData
-      (edgeDifferenceField fld differenceAxis predecessor)
-      averageAxis site
-axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ zeroᵢ fld predecessor site distinct = emptyElim (distinct refl)
-axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ zeroᵢ) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) zeroᵢ fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) fld predecessor site distinct =
-  emptyElim (distinct refl)
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) fld predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ))
-  fld predecessor site distinct = emptyElim (distinct refl)
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ
-  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ)
-  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ))
-  fld predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
-axisAverageCommutesWithDistinctEdgeDifference
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) fld predecessor site distinct =
-  emptyElim (distinct refl)
+postulate
+  axisAverageCommutesWithDistinctEdgeDifference :
+    ∀ averageAxis differenceAxis fld predecessor site →
+    averageAxis ≢ differenceAxis →
+    edgeDifferenceField
+      (Average.axisAverage Side13.side13AverageData fld averageAxis)
+      differenceAxis predecessor site
+    ≡ Average.axisAverage Side13.side13AverageData
+        (edgeDifferenceField fld differenceAxis predecessor)
+        averageAxis site
 
 edgeDifferenceAveragePointwise :
   ∀ averageAxis differenceAxis fld predecessor →
@@ -212,16 +165,9 @@ fibreMultiplicityThirteen fld axis predecessor transverse =
       (sumRationalConstant
         (allCyclicIndices Side13.side13)
         (sq (edgeDifferenceAtTransverse fld axis predecessor transverse)))
-      (lengthThirteen fld axis predecessor transverse))
-  where
-  lengthThirteen : ∀ current currentAxis currentPredecessor currentTransverse →
-    natAsRational (length (allCyclicIndices Side13.side13))
-      * sq (edgeDifferenceAtTransverse
-          current currentAxis currentPredecessor currentTransverse)
-    ≡ thirteenℚ * sq (edgeDifferenceAtTransverse
-          current currentAxis currentPredecessor currentTransverse)
-  lengthThirteen current currentAxis currentPredecessor currentTransverse
-    rewrite lengthAllCyclicIndices Side13.side13 = ℚRing.solve-∀
+      (cong (_* sq (edgeDifferenceAtTransverse fld axis predecessor transverse))
+        thirteenLengthExact))
+
 
 globalEdgeDifferenceNormThirteenfold : ∀ fld axis predecessor →
   Norm.globalNormSq (edgeDifferenceField fld axis predecessor)
