@@ -10,9 +10,7 @@ RESULT into the already-existing #1250 Suzuki phase-parity checker.
 import argparse
 import json
 from pathlib import Path
-from monster_3b_suzuki_c2_parity_6class_conditional_gate import (
-    select_rotation_class,
-)
+from monster_3b_suzuki_c2_parity_6class_conditional_gate import check as check_phase_parity
 
 SCHEMA="monster3b-atlas-source-Suz2B-to-Monster4-fusion-v1"
 BOUNDED={"4A","4C","4D"}
@@ -63,7 +61,8 @@ def validate(p):
         if p.get(k) is not False:
             raise ValueError("source receipt falsely promotes unpaid identity: "+k)
     allbranches={
-        k:select_rotation_class(k) for k in labels
+        k:check_phase_parity(k)["atlas_source_rotation_to_z_rotation_12_to_z_halfturn_6"]
+        for k in labels
     }
     return {
       "schema":"monster3b-source-fusion-receipt-semantic-validation-v1",
