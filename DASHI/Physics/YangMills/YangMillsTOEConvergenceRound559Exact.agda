@@ -2,539 +2,102 @@
 module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact where
 
 ------------------------------------------------------------------------
--- ZKP O/R/C/S/L/P/G/F
+-- ROUND559 / CURRENT-MASTER GOAL-1 MAX-CUT + PARETO TOE NORMALIZATION
 --
 -- O. Objective.
--- Connect the current Yang-Mills source frontier to the DASHI TOE graph.
--- Reuse existing theorem owners.
--- Do not create a second RG, stress, Casimir, continuum, or Clay ontology.
+-- Expose the existing R485 Goal-1 maximum cut and the R546/R558 scheduling
+-- quotients through one theorem-owner normalization surface.
 --
 -- R. Reuse.
--- R219 owns beta-driven CMP119 density and coupling coordinates.
--- R225 owns the preferred regular-E localization frontier.
--- CompactSimpleClassificationAdjointCasimirExact owns exact C_A positivity.
--- Round106 owns the canonical metric-stress representation compiler.
--- YMClayOSLiteralStressRouteParetoExact owns stress/OPE route separation.
--- R485 owns the representation-safe authoritative Goal-1 maximum cut.
--- R521 owns the concrete-semantics residual with zero opaque endpoint leaves.
--- R546 owns the authoritative fourteen-family irreducible source frontier.
--- R558 owns the seven-family critical mass-gap/nontriviality path.
--- YMClayPromotionBoundary owns the terminal fail-closed Clay boundary.
+-- R485 remains the representation-safe Goal-1 theorem owner.
+-- R546 remains the fourteen-family irreducible source owner.
+-- R558 remains the seven-family critical-path owner.
+-- This module copies no source proof and defines no duplicate family enum.
 --
--- C. Concrete result.
--- This file exposes exact theorem levels, current family counts, current
--- semantic firewalls, and exact non-promotion proofs.
+-- C. Composition.
+-- R485 + R546 + R558 -> R559 -> TOE facades.
 --
--- S. Scope and invariants.
--- A compiler fact is not a source theorem.
--- A source citation is not a same-object proof.
--- A finite RG identity is not a continuum Yang-Mills theorem.
--- C_A positivity is not the Wilson/ghost/Haar colour contraction.
--- A stress representation compiler is not the literal stress/OPE theorem.
--- A family count is a scheduling quotient, not a theorem count.
--- A TOE import edge cannot promote a Clay solution.
+-- S. Safety invariants.
+-- Conditional source facts remain conditional.
+-- Compiler closure remains distinct from physical source closure.
+-- Finite and represented statements do not promote continuum Yang-Mills.
+-- Family counts are scheduling quotients, not theorem counts.
+-- Clay completion remains false.
+-- ESD and digital_esd implementation surfaces are not imported or edited.
 --
 -- L. Lane.
--- This file is the Yang-Mills TOE integration lane.
--- It does not edit ESD or digital_esd modules.
--- It does not copy code from meta-introspector repositories.
+-- This lane owns only current-master Goal-1/Pareto normalization.
+-- The merged Balaban RG normalization stays in DASHI.Unified.BalabanRGTOERegression.
 --
 -- P. Postcondition.
--- TOE consumers reach canonical RG, regular-E, Casimir, stress, irreducible
--- Goal-1, source-family, critical-path, concrete-semantics, and Clay-boundary owners
--- through one normalized surface.
+-- The TOE graph can reach every normalized R485 coordinate and the canonical
+-- R546/R558 family dispatch without a parallel ontology.
 --
 -- G. Governance.
--- One claim uses one canonical owner.
--- Original mathematical and repository attribution stays with each owner.
--- Fail-closed promotion proofs remain explicit.
+-- Original mathematical and repository theorem owners retain attribution.
+-- Meta-introspector repositories retain separate authority.
+-- ITIL, ISO 9000, ISO/IEC 42001/27001/27701/23894, ISO 9241,
+-- NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only.
+-- No certification claim is made.
 --
--- F. Verification.
--- Source read-back must find every import and theorem below.
--- Kernel certification requires an exact-head Agda or CI receipt.
---
--- Preconditions.
--- The canonical source owners already exist in the repository.
--- Each compiler keeps its original proof level.
--- Each literal source seam keeps its original proof level.
--- The TOE graph imports this owner instead of copying source proofs.
---
--- Invariants.
--- One source fact has one canonical theorem owner.
--- The selected RG density keeps one scale identity across the action and stress lanes.
--- Finite RG facts do not create a continuum theorem.
--- Casimir positivity does not create a missing colour-contraction theorem.
--- Stress compilation does not create a literal stress/OPE source theorem.
--- ESD and digital_esd surfaces remain unchanged.
---
--- Postconditions.
--- The TOE root reaches the canonical Goal-1, density, action, regular-E, Casimir, and stress owners.
--- Unified.Physics reaches the same normalized aliases.
--- Unifier reaches the same normalized aliases.
--- The continuum, OS/Wightman, mass-gap, and Clay promotion gates remain false.
+-- F. Verification target.
+-- The focused regression checks alias identity, false firewalls, family counts,
+-- import reachability, trust escapes, and ESD path isolation.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact as R219
-import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
-import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
-import DASHI.Physics.YangMills.BalabanPreferredRegularEFrontierRound225Exact as R225
-import DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241Exact as R241
-import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as R244
-import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
-import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as R248
-import DASHI.Physics.YangMills.BalabanPublishedUVStabilityNonlinearRGCoreExact as PublishedRG
-import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as Casimir
-import DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact as BetaFloor
-import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as Stress106
-import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress105
-import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as Stress112
-import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as GeneratedDensity132
-import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as StressScale135
-import DASHI.Physics.YangMills.BalabanCombinedRGUnifiedActionRound141Exact as CombinedAction141
-import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound84SixAnalyticLemmaExact as Stress84
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound85SixAnalyticLemmaAttackExact as Stress85
 import DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact as R485
-import DASHI.Physics.YangMills.YangMillsClayConcreteSemanticsResidualRound521Exact as R521
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
-import DASHI.Physics.Closure.YMClayPromotionBoundary as Promotion
-import DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary as ContinuumBoundary
-import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR413FourStageConstructorExact as TwoWilsonR413
-import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR415CompletionExact as TwoWilsonR415
-import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as TwoWilsonR556
-import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonGeneralGeometricTrajectoryExact as TwoWilsonGeneral
-
 
 ------------------------------------------------------------------------
--- Exact theorem-owner re-exports.
---
--- Re-export canonical theorem owners.
--- Do not duplicate their proofs.
+-- Explicit O/R/C/S/L/P/G/F frame with preconditions, invariants, postconditions.
 ------------------------------------------------------------------------
 
-open BetaDensity public using
-  ( sourceCouplingIsBetaHistoryCoupling
-  ; sourceSmallnessIsDerivedFromBetaHistory
-  )
-
-open CanonicalDensity public using
-  ( betaHistoryGivesRepositoryCouplingCap
-  ; canonicalStateRunningCouplingIsBetaHistory
-  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
-  )
-
-open GeneratedDensity132 public using
-  ( selectedDensityRepresentsExactBC1Potential
-  ; selectedDensityRepresentsBC2InitialPotential
-  )
-
-open StressScale135 public using
-  ( stressSelectedDensityIndexIsUnifiedActionIndex
-  )
-
-open Stress105 public using
-  ( sourceDerivativeBelowExistingMarkedShell
-  )
-
-open Stress112 public using
-  ( stressCoefficientEnergyUniformBound
-  ; stressPairingSquaredCauchyFromShellEnergy
-  )
-
-open R244 public using
-  ( selectedRegularEIsLocalizedCompositeSum
-  )
-
-open BetaFloor public using
-  ( universalCompactSimpleCasimirFloor
-  ; universalCompactSimpleBetaFloor
-  ; classificationAdjointCasimirAtLeastTwo
-  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
-  ; uniformRemainderBelowEveryCompactSimpleCoefficient
-  )
-
-------------------------------------------------------------------------
--- Literal two-Wilson marked localization.
---
--- Reuse the current source-native constructors.
--- R413 removes the post-hoc R410 replay seam.
--- R556 is the finite covariance consumer used by the critical route.
--- The general geometric family removes the artificial quarter/half constants
--- when a source-native amplitude and ratio are available.
-------------------------------------------------------------------------
-
-toeLiteralTwoWilsonR415CompilerLevel : ProofLevel
-toeLiteralTwoWilsonR415CompilerLevel =
-  TwoWilsonR415.literalTwoWilsonR415CompilerLevel
-
-toeLiteralTwoWilsonR444TermConstructionLevel : ProofLevel
-toeLiteralTwoWilsonR444TermConstructionLevel =
-  TwoWilsonR415.literalTwoWilsonR444TermConstructionLevel
-
-toeLiteralTwoWilsonR445MixedLogIdentificationLevel : ProofLevel
-toeLiteralTwoWilsonR445MixedLogIdentificationLevel =
-  TwoWilsonR415.literalTwoWilsonR445MixedLogIdentificationLevel
-
-toeLiteralTwoWilsonR453ConnectedCoreLevel : ProofLevel
-toeLiteralTwoWilsonR453ConnectedCoreLevel =
-  TwoWilsonR415.literalTwoWilsonR453ConnectedCoreLevel
-
-toeLiteralTwoWilsonR451PhysicalCalibrationLevel : ProofLevel
-toeLiteralTwoWilsonR451PhysicalCalibrationLevel =
-  TwoWilsonR415.literalTwoWilsonR451PhysicalCalibrationLevel
-
-open TwoWilsonR413 public
-  using (LiteralTwoWilsonR413FourStageSource)
-  renaming
-    ( asCanonicalTwiceMarkedFourStage
-        to toeLiteralTwoWilsonR413ToR444
-    )
-
-open TwoWilsonR556 public
-  using (LiteralTwoWilsonQuarterDyadicFamily)
-  renaming
-    ( asR556
-        to toeLiteralTwoWilsonQuarterDyadicToR556
-    ; finiteCovarianceBelowCanonicalDyadicShell
-        to toeLiteralTwoWilsonFiniteCovarianceBelowCanonicalDyadicShell
-    )
-
-open TwoWilsonGeneral public
-  using (LiteralTwoWilsonGeneralGeometricFamily)
-  renaming
-    ( finiteCovarianceGeneralGeometricBound
-        to toeLiteralTwoWilsonFiniteCovarianceGeneralGeometricBound
-    ; asQuantitativeCorrelationDecayTrajectory
-        to toeLiteralTwoWilsonGeneralGeometricTrajectory
-    )
-
-------------------------------------------------------------------------
--- Balaban RG density and regular-E localization.
-------------------------------------------------------------------------
-
-toeBetaDrivenResidualFamilyCompilerLevel : ProofLevel
-toeBetaDrivenResidualFamilyCompilerLevel =
-  R219.betaDrivenCMP119ResidualFamilyCompilerLevel
-
-toeBetaDensityAndCouplingSameObjectLevel : ProofLevel
-toeBetaDensityAndCouplingSameObjectLevel =
-  R219.betaDensityAndCouplingSameObjectCompilerLevel
-
-toeLiteralBetaDrivenResidualFamilyLevel : ProofLevel
-toeLiteralBetaDrivenResidualFamilyLevel =
-  R219.literalBetaDrivenCMP119ResidualFamilyLevel
-
-toeLiteralBetaDrivenDifferentiatedCoordinateLevel : ProofLevel
-toeLiteralBetaDrivenDifferentiatedCoordinateLevel =
-  R219.literalBetaDrivenCMP119DifferentiatedCoordinateLevel
-
--- Exact same-object RG density/coupling owners.
--- These are not new RG facts.
--- They expose the canonical repository identity between the finite beta history,
--- the CMP122 effective-density flow, and the canonical complete-density state.
-toeBetaDrivenSourceFlowLevel : ProofLevel
-toeBetaDrivenSourceFlowLevel =
-  BetaDensity.balabanBetaDrivenSourceFlowLevel
-
-toeBetaHistoryIsLiteralCMP122CouplingLevel : ProofLevel
-toeBetaHistoryIsLiteralCMP122CouplingLevel =
-  BetaDensity.balabanBetaHistoryIsLiteralCMP122CouplingLevel
-
-toeBetaHistorySameStateCouplingLevel : ProofLevel
-toeBetaHistorySameStateCouplingLevel =
-  CanonicalDensity.balabanBetaHistorySameStateCouplingLevel
-
-toeBetaHistoryToCanonicalCompleteDensityLevel : ProofLevel
-toeBetaHistoryToCanonicalCompleteDensityLevel =
-  CanonicalDensity.balabanBetaHistoryToCanonicalCompleteDensityLevel
-
--- Round132 is the canonical same-action weld.
--- It maps the selected beta-driven density to the exact BC1/BC2 effective potential.
--- The compiler is checked.
--- The literal source realization remains conditional.
-toeUnifiedGeneratedActionDensityCompilerLevel : ProofLevel
-toeUnifiedGeneratedActionDensityCompilerLevel =
-  GeneratedDensity132.unifiedGeneratedActionDensityCompilerLevel
-
-toeLiteralUnifiedGeneratedActionDensityLevel : ProofLevel
-toeLiteralUnifiedGeneratedActionDensityLevel =
-  GeneratedDensity132.literalUnifiedGeneratedActionDensityLevel
-
--- Round141 reuses the existing CombinedRG trajectory.
--- It connects the complete density to the same effective-action realization.
--- It does not create a second RG state.
-toeCompleteDensityEffectiveActionRealizationCompilerLevel : ProofLevel
-toeCompleteDensityEffectiveActionRealizationCompilerLevel =
-  CombinedAction141.completeDensityEffectiveActionRealizationCompilerLevel
-
-toeLiteralCompleteDensityEffectiveActionRealizationLevel : ProofLevel
-toeLiteralCompleteDensityEffectiveActionRealizationLevel =
-  CombinedAction141.literalCompleteDensityEffectiveActionRealizationLevel
-
-toeRegularESourceProjectionLevel : ProofLevel
-toeRegularESourceProjectionLevel =
-  R225.regularESourceProjectionLevel
-
-toeRegularEPointwiseLocalizationLevel : ProofLevel
-toeRegularEPointwiseLocalizationLevel =
-  R225.regularEPointwiseLocalizationLevel
-
-toeRegularEContinuationCompilerLevel : ProofLevel
-toeRegularEContinuationCompilerLevel =
-  R225.regularEContinuationCompilerLevel
-
-toeRegularEBC1CompilerLevel : ProofLevel
-toeRegularEBC1CompilerLevel =
-  R225.regularEBC1CompilerLevel
-
-toeRegularEPhysicalSourceClosure : Bool
-toeRegularEPhysicalSourceClosure =
-  R225.round225PhysicalSourceClosure
-
-toeRegularEPhysicalSourceClosureIsFalse :
-  toeRegularEPhysicalSourceClosure ≡ false
-toeRegularEPhysicalSourceClosureIsFalse =
-  R225.round225PhysicalSourceClosureIsFalse
-
-------------------------------------------------------------------------
--- Source-native regular-E normalization.
---
--- These aliases keep the older preferred frontier for compatibility.
--- They also expose the later source-native path that starts from the literal
--- published density, selected regular-E coordinate, and active localization.
-------------------------------------------------------------------------
-
-toePublishedFlowToRegularEProjectionCompilerLevel : ProofLevel
-toePublishedFlowToRegularEProjectionCompilerLevel =
-  R241.publishedFlowToRegularEProjectionCompilerLevel
-
-toeCMP119RegularELocalizationSourceLevel : ProofLevel
-toeCMP119RegularELocalizationSourceLevel =
-  R244.cmp119RegularELocalizationSourceLevel
-
-toeLiteralCMP119RegularELocalizationCarrierLevel : ProofLevel
-toeLiteralCMP119RegularELocalizationCarrierLevel =
-  R244.literalCMP119RegularELocalizationCarrierLevel
-
-toeRegularESection2PredicateCompilerLevel : ProofLevel
-toeRegularESection2PredicateCompilerLevel =
-  R246.regularESection2PredicateCompilerLevel
-
-toeConcreteELocalizationSourceWitnessLevel : ProofLevel
-toeConcreteELocalizationSourceWitnessLevel =
-  R248.literalCMP122Theorem1OnConcreteELocalizationPredicateLevel
-
-------------------------------------------------------------------------
--- Published nonlinear RG and continuum non-promotion.
-------------------------------------------------------------------------
-
-toePublishedFourDimensionalNonlinearRGCoreLevel : ProofLevel
-toePublishedFourDimensionalNonlinearRGCoreLevel =
-  PublishedRG.publishedFourDimensionalNonlinearRGCoreLevel
-
-toePublishedRGPhysicalSameObjectLevel : ProofLevel
-toePublishedRGPhysicalSameObjectLevel =
-  PublishedRG.literalPhysicalStateToPublishedRGCarrierLevel
-
-toeFlat4DContinuumTransferProvedHere : Bool
-toeFlat4DContinuumTransferProvedHere =
-  ContinuumBoundary.flat4DContinuumTransferProvedHere
-
-toeFlat4DContinuumTransferProvedHereIsFalse :
-  toeFlat4DContinuumTransferProvedHere ≡ false
-toeFlat4DContinuumTransferProvedHereIsFalse =
-  refl
-
-toeContinuumMassGapPromoted : Bool
-toeContinuumMassGapPromoted =
-  ContinuumBoundary.continuumMassGapPromoted
-
-toeContinuumMassGapPromotedIsFalse :
-  toeContinuumMassGapPromoted ≡ false
-toeContinuumMassGapPromotedIsFalse =
-  refl
-
--- Exact non-promotion theorem.
--- A published finite RG stability owner does not construct the missing
--- four-dimensional continuum-transfer theorem.
-toePublishedRGDoesNotPromoteContinuum :
-  toeFlat4DContinuumTransferProvedHere ≡ false
-toePublishedRGDoesNotPromoteContinuum =
-  toeFlat4DContinuumTransferProvedHereIsFalse
-
--- The same boundary applies after the density/action normalization.
--- Round132 and Round141 are finite same-object compilers.
--- They do not construct the missing continuum transfer.
-toeGeneratedActionDensityDoesNotPromoteContinuum :
-  toeFlat4DContinuumTransferProvedHere ≡ false
-toeGeneratedActionDensityDoesNotPromoteContinuum =
-  toeFlat4DContinuumTransferProvedHereIsFalse
-
-toeCombinedRGUnifiedActionDoesNotPromoteContinuum :
-  toeFlat4DContinuumTransferProvedHere ≡ false
-toeCombinedRGUnifiedActionDoesNotPromoteContinuum =
-  toeFlat4DContinuumTransferProvedHereIsFalse
-
-toeDepthLimitNoSpectralPollutionProvedHere : Bool
-toeDepthLimitNoSpectralPollutionProvedHere =
-  ContinuumBoundary.depthLimitNoSpectralPollutionProvedHere
-
-toeDepthLimitNoSpectralPollutionProvedHereIsFalse :
-  toeDepthLimitNoSpectralPollutionProvedHere ≡ false
-toeDepthLimitNoSpectralPollutionProvedHereIsFalse =
-  ContinuumBoundary.depthLimitNoSpectralPollutionProvedHereIsFalse
-
-toeOSWightmanContinuumConstructionProvedHere : Bool
-toeOSWightmanContinuumConstructionProvedHere =
-  ContinuumBoundary.osWightmanContinuumConstructionProvedHere
-
-toeOSWightmanContinuumConstructionProvedHereIsFalse :
-  toeOSWightmanContinuumConstructionProvedHere ≡ false
-toeOSWightmanContinuumConstructionProvedHereIsFalse =
-  ContinuumBoundary.osWightmanContinuumConstructionProvedHereIsFalse
-
-toeTerminalPromotion : Bool
-toeTerminalPromotion =
-  ContinuumBoundary.terminalPromotion
-
-toeTerminalPromotionIsFalse :
-  toeTerminalPromotion ≡ false
-toeTerminalPromotionIsFalse =
-  ContinuumBoundary.terminalPromotionIsFalse
-
-------------------------------------------------------------------------
--- Compact-simple Casimir and stress.
-------------------------------------------------------------------------
-
-toeAdjointCasimirStrictPositivityLevel : ProofLevel
-toeAdjointCasimirStrictPositivityLevel =
-  Casimir.classificationAdjointCasimirStrictPositivityLevel
-
-
-toeCompactSimpleUniversalBetaFloorLevel : ProofLevel
-toeCompactSimpleUniversalBetaFloorLevel =
-  BetaFloor.compactSimpleUniversalBetaFloorLevel
-
-toeLiteralUniformRegularRemainderBelowUniversalFloorLevel : ProofLevel
-toeLiteralUniformRegularRemainderBelowUniversalFloorLevel =
-  BetaFloor.literalUniformRegularRemainderBelowUniversalFloorLevel
-
-toeWilsonGhostHaarToClassifiedCasimirLevel : ProofLevel
-toeWilsonGhostHaarToClassifiedCasimirLevel =
-  Casimir.literalWilsonGhostHaarToClassifiedCasimirLevel
-
-toeStrictCasimirCarrierCompilerLevel : ProofLevel
-toeStrictCasimirCarrierCompilerLevel =
-  Casimir.classificationToStrictCasimirCarrierLevel
-
-toeMetricStressRepresentationCompilerLevel : ProofLevel
-toeMetricStressRepresentationCompilerLevel =
-  Stress106.canonicalMetricStressRepresentationCompilerLevel
-
-toeLiteralMetricStressRepresentationLevel : ProofLevel
-toeLiteralMetricStressRepresentationLevel =
-  Stress106.literalCMP116MetricStressRepresentationLevel
-
-
-toeStressFirstVariationMarkedShellBoundLevel : ProofLevel
-toeStressFirstVariationMarkedShellBoundLevel =
-  Stress105.cmp116StressReusesFirstGradientMarkedShellLevel
-
-toeLiteralStressMetricSourceCoordinateWeldLevel : ProofLevel
-toeLiteralStressMetricSourceCoordinateWeldLevel =
-  Stress105.literalCMP116MetricSourceCoordinateWeldLevel
-
-toeLiteralFirstVariationStressPairingLevel : ProofLevel
-toeLiteralFirstVariationStressPairingLevel =
-  Stress105.literalCMP116FirstVariationStressPairingLevel
-
-toeStressShellEnergyToHilbertCompilerLevel : ProofLevel
-toeStressShellEnergyToHilbertCompilerLevel =
-  Stress112.stressShellEnergyToHilbertCompilerLevel
-
-toeLiteralStressActivityEntropyInstantiationLevel : ProofLevel
-toeLiteralStressActivityEntropyInstantiationLevel =
-  Stress112.literalStressCMP116ActivityEntropyInstantiationLevel
-
-toeLiteralStressCoefficientEnergyShellPrefixLevel : ProofLevel
-toeLiteralStressCoefficientEnergyShellPrefixLevel =
-  Stress112.literalStressCoefficientEnergyIsShellPrefixLevel
-
-toeUnifiedGeneratedActionStressScaleCompilerLevel : ProofLevel
-toeUnifiedGeneratedActionStressScaleCompilerLevel =
-  StressScale135.unifiedGeneratedActionStressScaleCompilerLevel
-
-toeLiteralUnifiedGeneratedActionStressScaleLevel : ProofLevel
-toeLiteralUnifiedGeneratedActionStressScaleLevel =
-  StressScale135.literalUnifiedGeneratedActionStressScaleLevel
-
-toeStressRouteClayPromotion : Bool
-toeStressRouteClayPromotion =
-  StressPareto.clayPromotion
-
-toeStressRouteClayPromotionIsFalse :
-  toeStressRouteClayPromotion ≡ false
-toeStressRouteClayPromotionIsFalse =
-  StressPareto.clayPromotionIsFalse
-
-toeStressLevel2SameFamilyRecoveryLevel : ProofLevel
-toeStressLevel2SameFamilyRecoveryLevel =
-  StressPareto.level2SameFamilyRecoveryLevel
-
-toeStressLevel2ShortDistanceOPELevel : ProofLevel
-toeStressLevel2ShortDistanceOPELevel =
-  StressPareto.level2ShortDistanceOPEStressAFLevel
-
-------------------------------------------------------------------------
--- Current Casimir/stress hard-analysis cutset.
---
--- Round84 keeps the conservative six-family count.
--- Round85 exposes the exact remaining physical leaves.
--- Downstream compiler facts stay distinct from those leaves.
-------------------------------------------------------------------------
-
-toeHardAnalyticLemmaUpperCount : Nat
-toeHardAnalyticLemmaUpperCount =
-  Stress84.round84HardAnalyticLemmaUpperCount
-
-toeHardAnalyticLemmaUpperCountIsSix :
-  toeHardAnalyticLemmaUpperCount ≡ 6
-toeHardAnalyticLemmaUpperCountIsSix = refl
-
-toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel : ProofLevel
-toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel =
-  Stress85.literalWilsonFPHaarFourJointOrbitHalfEnclosuresLevel
-
-toePhysicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel : ProofLevel
-toePhysicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel =
-  Stress85.physicalMarkedCoordinateRadiusProjectionAndCompositeHilbertModulusLevel
-
-toePhysicalPerShellHeatHessianDebtLevel : ProofLevel
-toePhysicalPerShellHeatHessianDebtLevel =
-  Stress85.physicalPerShellHeatHessianDebtLevel
-
-toePhysicalSameFamilyOPEProductAndOneStepAFIdentificationLevel : ProofLevel
-toePhysicalSameFamilyOPEProductAndOneStepAFIdentificationLevel =
-  Stress85.physicalSameFamilyOPEProductAndOneStepAFIdentificationLevel
-
-toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel : ProofLevel
-toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel =
-  Stress85.physicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel
-
-toeCompactSimpleUniversalCasimirFloorLevel : ProofLevel
-toeCompactSimpleUniversalCasimirFloorLevel =
-  Stress85.compactSimpleUniversalCasimirFloorLevel
-
-toeStressChargeLocalCoreCutoffRemovalLevel : ProofLevel
-toeStressChargeLocalCoreCutoffRemovalLevel =
-  Stress85.stressChargeLocalCoreCutoffRemovalLevel
+record Goal1ParetoTOEZKPFrame : Set where
+  field
+    O R C S L P G F : String
+    preconditions invariants postconditions : List String
+
+open Goal1ParetoTOEZKPFrame public
+
+canonicalGoal1ParetoTOEZKPFrame : Goal1ParetoTOEZKPFrame
+canonicalGoal1ParetoTOEZKPFrame = record
+  { O = "Normalize R485/R546/R558 into the existing DASHI TOE graph."
+  ; R = "Reuse canonical theorem owners before adding aliases."
+  ; C = "R485 + R546 + R558 -> R559 -> TOE facades."
+  ; S = "Keep conditional facts conditional and all promotion gates fail-closed."
+  ; L = "One disjoint Goal-1/Pareto normalization lane."
+  ; P = "Expose the canonical maximum cut and scheduling quotients through TOE."
+  ; G = "Preserve source attribution and repository authority boundaries."
+  ; F = "Verify alias identity, firewalls, graph reachability, and path isolation."
+  ; preconditions =
+      "R485 is the authoritative representation-safe Goal-1 maximum cut."
+      ∷ "R546 is the authoritative fourteen-family irreducible source frontier."
+      ∷ "R558 is the authoritative seven-family critical path."
+      ∷ []
+  ; invariants =
+      "R485/R546/R558 remain proof owners."
+      ∷ "R559 is normalization only."
+      ∷ "Unifier and TOE roots remain consumers."
+      ∷ "No ESD or digital_esd mutation occurs."
+      ∷ "No theorem authority is imported from meta-introspector repositories."
+      ∷ "Continuum and Clay promotion remain fail-closed."
+      ∷ []
+  ; postconditions =
+      "All normalized R485 coordinates are reachable through R559."
+      ∷ "Canonical R546/R558 family types and dispatch remain reusable."
+      ∷ "No duplicate family ontology is created."
+      ∷ "Clay completion remains unclaimed."
+      ∷ []
+  }
 
 ------------------------------------------------------------------------
 -- Current Goal-1 Clay maximum cut.
@@ -967,6 +530,14 @@ toeCriticalMinimalH6CompilerLevel : ProofLevel
 toeCriticalMinimalH6CompilerLevel =
   R558.minimalH6CompilerLevel
 
+toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired : Bool
+toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired =
+  R558.separateContinuumWilsonConvergenceFamilyRequired
+
+toeCriticalFiniteHamiltonianMoscoRouteRequired : Bool
+toeCriticalFiniteHamiltonianMoscoRouteRequired =
+  R558.finiteHamiltonianMoscoRouteRequired
+
 toeCriticalPrintedJRouteRequired : Bool
 toeCriticalPrintedJRouteRequired =
   R558.printedJRouteRequired
@@ -979,87 +550,12 @@ toeCriticalFullCLayerRequiredForMinimalH6 : Bool
 toeCriticalFullCLayerRequiredForMinimalH6 =
   R558.fullCLayerRequiredForMinimalH6
 
+toeCriticalFullCLayerRetainedForConservativeClayExistence : Bool
+toeCriticalFullCLayerRetainedForConservativeClayExistence =
+  R558.fullCLayerRetainedForConservativeClayExistence
+
 toeCriticalPathCompilerLevel : ProofLevel
 toeCriticalPathCompilerLevel =
   R558.round558CriticalPathCompilerLevel
 
 ------------------------------------------------------------------------
--- Concrete semantics residual.
-------------------------------------------------------------------------
-
-toeConcreteSemanticResidualCount : Nat
-toeConcreteSemanticResidualCount =
-  R521.residualLeafCount
-
-toeConcreteSemanticResidualCountIsThirtyThree :
-  toeConcreteSemanticResidualCount ≡ 33
-toeConcreteSemanticResidualCountIsThirtyThree = refl
-
-toeEndpointSemanticResidualCount : Nat
-toeEndpointSemanticResidualCount =
-  R521.endpointSemanticLeafCount
-
-toeEndpointSemanticResidualCountIsZero :
-  toeEndpointSemanticResidualCount ≡ 0
-toeEndpointSemanticResidualCountIsZero = refl
-
-------------------------------------------------------------------------
--- Critical-path exclusions.
-------------------------------------------------------------------------
-
-toeSeparateContinuumWilsonFamilyRequired : Bool
-toeSeparateContinuumWilsonFamilyRequired =
-  R558.separateContinuumWilsonConvergenceFamilyRequired
-
-toeSeparateContinuumWilsonFamilyRequiredIsFalse :
-  toeSeparateContinuumWilsonFamilyRequired ≡ false
-toeSeparateContinuumWilsonFamilyRequiredIsFalse = refl
-
-toeFiniteHamiltonianMoscoRouteRequired : Bool
-toeFiniteHamiltonianMoscoRouteRequired =
-  R558.finiteHamiltonianMoscoRouteRequired
-
-toeFiniteHamiltonianMoscoRouteRequiredIsFalse :
-  toeFiniteHamiltonianMoscoRouteRequired ≡ false
-toeFiniteHamiltonianMoscoRouteRequiredIsFalse = refl
-
-toeFullCLayerRetainedForConservativeClayExistence : Bool
-toeFullCLayerRetainedForConservativeClayExistence =
-  R558.fullCLayerRetainedForConservativeClayExistence
-
-------------------------------------------------------------------------
--- Exact non-promotion boundary.
-------------------------------------------------------------------------
-
-toeAllClayProvidersDerivedInRepo : Bool
-toeAllClayProvidersDerivedInRepo =
-  Promotion.allProvidersDerivedInRepo
-
-toeAllClayProvidersDerivedInRepoIsFalse :
-  toeAllClayProvidersDerivedInRepo ≡ false
-toeAllClayProvidersDerivedInRepoIsFalse =
-  Promotion.ClayPromotionBoundary.allProvidersDerivedInRepoIsFalse
-    Promotion.clayPromotionBoundary
-
-toeClayStatementBoundaryDischarged : Bool
-toeClayStatementBoundaryDischarged =
-  Promotion.clayStatementBoundaryDischarged
-
-toeClayStatementBoundaryDischargedIsFalse :
-  toeClayStatementBoundaryDischarged ≡ false
-toeClayStatementBoundaryDischargedIsFalse =
-  Promotion.ClayPromotionBoundary.clayStatementBoundaryDischargedIsFalse
-    Promotion.clayPromotionBoundary
-
-toeClayYangMillsPromoted : Bool
-toeClayYangMillsPromoted =
-  Promotion.clayYangMillsPromoted
-
-toeClayYangMillsPromotedIsFalse :
-  toeClayYangMillsPromoted ≡ false
-toeClayYangMillsPromotedIsFalse =
-  Promotion.ClayPromotionBoundary.noClayPromotion
-    Promotion.clayPromotionBoundary
-
-round559TOEConvergenceCompilerLevel : ProofLevel
-round559TOEConvergenceCompilerLevel = machineChecked

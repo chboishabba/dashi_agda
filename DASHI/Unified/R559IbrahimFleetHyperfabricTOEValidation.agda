@@ -1,7 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
-open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -27,32 +26,39 @@ unifiedReceiptMatchesOwner :
 unifiedReceiptMatchesOwner = refl
 
 toeFormalGapTargetIs58 :
-  TOE.toeFleetFormalGapsAre58 ≡ Owner.fleetFormalGapsAre58
+  TOE.toeFleetFormalGapsAre58
+  ≡ Owner.fleetFormalGapsAre58
 toeFormalGapTargetIs58 = refl
 
 unifierFormalGapTargetIs58 :
-  Unifier.unifierFleetFormalGapsAre58 ≡ Owner.fleetFormalGapsAre58
+  Unifier.unifierFleetFormalGapsAre58
+  ≡ Owner.fleetFormalGapsAre58
 unifierFormalGapTargetIs58 = refl
 
 toeDischargedFibresRemain584 :
-  TOE.toeFleetDischargedFibresAre584 ≡ Owner.fleetDischargedFibresAre584
+  TOE.toeFleetDischargedFibresAre584
+  ≡ Owner.fleetDischargedFibresAre584
 toeDischargedFibresRemain584 = refl
 
 unifierDischargedFibresRemain584 :
-  Unifier.unifierFleetDischargedFibresAre584 ≡ Owner.fleetDischargedFibresAre584
+  Unifier.unifierFleetDischargedFibresAre584
+  ≡ Owner.fleetDischargedFibresAre584
 unifierDischargedFibresRemain584 = refl
 
 toeContradictionGapsRemain44 :
-  TOE.toeFleetContradictionGapsAre44 ≡ Owner.fleetContradictionGapsAre44
+  TOE.toeFleetContradictionGapsAre44
+  ≡ Owner.fleetContradictionGapsAre44
 toeContradictionGapsRemain44 = refl
 
 unifierContradictionGapsRemain44 :
-  Unifier.unifierFleetContradictionGapsAre44 ≡ Owner.fleetContradictionGapsAre44
+  Unifier.unifierFleetContradictionGapsAre44
+  ≡ Owner.fleetContradictionGapsAre44
 unifierContradictionGapsRemain44 = refl
 
 toePadicLossStillExact :
   Owner.PadicPrefixRecovery → ⊥
-toePadicLossStillExact = TOE.toePadicPrefixCannotRecoverDiscardedDigit
+toePadicLossStillExact =
+  TOE.toePadicPrefixCannotRecoverDiscardedDigit
 
 unifierPadicLossStillExact :
   Owner.PadicPrefixRecovery → ⊥
@@ -61,30 +67,46 @@ unifierPadicLossStillExact =
 
 toeStreamLossStillExact :
   Owner.StreamThirdPrefixRecovery → ⊥
-toeStreamLossStillExact = TOE.toeTwoDigitStreamCannotRecoverThird
+toeStreamLossStillExact =
+  TOE.toeTwoDigitStreamCannotRecoverThird
 
 unifierStreamLossStillExact :
   Owner.StreamThirdPrefixRecovery → ⊥
-unifierStreamLossStillExact = Unifier.unifierTwoDigitStreamCannotRecoverThird
+unifierStreamLossStillExact =
+  Unifier.unifierTwoDigitStreamCannotRecoverThird
 
-fleetCountNoProofIsReceiptExact :
-  Fleet.externalCountCreatesFormalProof Owner.fleetFormalGapTargetReceipt ≡ false
-fleetCountNoProofIsReceiptExact =
+fleetCountStillDoesNotCreateFormalDischarge :
+  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
-fleetEigenPriorityNoProofIsReceiptExact :
-  Fleet.eigenvalueMagnitudeCreatesProofAuthority Owner.fleetFormalGapTargetReceipt ≡ false
-fleetEigenPriorityNoProofIsReceiptExact =
-  Owner.fleetEigenPriorityDoesNotCreateProof
-
-fleetDischargedStayExcludedIsReceiptExact :
-  Fleet.dischargedFibresRemainDischarged Owner.fleetFormalGapTargetReceipt ≡ true
-fleetDischargedStayExcludedIsReceiptExact =
+fleetDischargedFibresStillCannotBeRetargeted :
+  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
 
+toeYMGate4CountIs58 :
+  TOE.toeYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+toeYMGate4CountIs58 = refl
+
+unifierYMGate4CountIs58 :
+  Unifier.unifierYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifierYMGate4CountIs58 = refl
+
+toeFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58DoesNotIdentifyYMGate4 =
+  TOE.toeFleet58DoesNotIdentifyYMGate4
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  Unifier.unifierFleet58DoesNotIdentifyYMGate4
 
 ------------------------------------------------------------------------
--- Live frontier, target split, and canonical continuum no-go validation.
+-- Live frontier, target split, and typed continuum no-go validation.
 ------------------------------------------------------------------------
 
 toeCurrentGate4FrontierMatchesOwner :

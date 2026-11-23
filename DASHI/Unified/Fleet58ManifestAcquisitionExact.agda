@@ -1,15 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.Fleet58ManifestAcquisitionExact where
 
-------------------------------------------------------------------------
--- FLEET 58 NAMED-MANIFEST ACQUISITION MAX-CUT
---
--- The canonical Fleet owner pays the recorded 584 / 44 / 58 partition.
--- It does not provide 58 named gap identities.
--- This module binds that missing artifact to the generic acquisition carrier.
--- It constructs no synthetic gap row.
-------------------------------------------------------------------------
-
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -22,16 +13,13 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Pareto
 
 ------------------------------------------------------------------------
--- O/R/C/S/L/P/G/F
+-- Fleet 58 named-manifest acquisition boundary.
 --
--- O. DASHI TOE Fleet formal-gap frontier.
--- R. Reuse Fleet, BoundAcquisitionDemand, and Ibrahim Pareto/snowball.
--- C. Bind one exact acquisition route for the missing named manifest.
--- S. 584 stays discharged. 44 stays contradiction-only. 58 stays count-only.
--- L. source store -> manifest -> referee -> reuse/unify/extend/construct.
--- P. Per-gap dispatch is disabled until a named manifest is acquired.
--- G. Acquisition is not proof. Search priority is not proof.
--- F. The external named-manifest artifact is the current wall.
+-- The Fleet owner records 584 discharged fibres, 44 contradiction gaps,
+-- and 58 unformalised formal gaps.
+-- It does not contain the 58 row identities.
+-- This owner binds the exact missing artifact.
+-- It creates no synthetic gap row.
 ------------------------------------------------------------------------
 
 data ManifestRequirement : Set where
@@ -94,7 +82,7 @@ manifestAcquisitionUsesSelectedProducer =
   Bound.acquisitionUsesSelectedProducer manifestAcquisitionDemand
 
 ------------------------------------------------------------------------
--- Canonical recorded Fleet partition.
+-- Reuse the canonical Fleet partition.
 ------------------------------------------------------------------------
 
 fleetRecordedDischargedCount : Nat
@@ -127,32 +115,12 @@ fleetRecordedFormalGapCountIs58 :
 fleetRecordedFormalGapCountIs58 =
   Fleet.fleetRecordedUnformalisedGapCountIs58
 
-fleetTargetsOnlyFormalGapClass :
-  Fleet.targetOnlyUnformalisedFormalGaps
-    Fleet.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetTargetsOnlyFormalGapClass =
-  Fleet.fleetTargetsOnlyUnformalisedFormalGaps
-
-fleetDischargedClassRemainsClosed :
-  Fleet.dischargedFibresRemainDischarged
-    Fleet.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetDischargedClassRemainsClosed =
-  Fleet.fleetDoesNotRetargetDischargedFibres
-
-fleetContradictionClassRemainsSeparate :
-  Fleet.contradictionGapsRemainSeparate
-    Fleet.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetContradictionClassRemainsSeparate =
-  Fleet.fleetKeepsContradictionsSeparate
-
 ------------------------------------------------------------------------
--- Current manifest state.
+-- Current source-controlled manifest state.
 --
--- This is a repository/intake state coordinate.
--- It does not assert that no such artifact exists outside checked-in sources.
+-- The checked repository state contains the count and graph identity.
+-- It does not contain an immutable export of the 58 named rows.
+-- This coordinate says nothing about unqueried external database state.
 ------------------------------------------------------------------------
 
 named58ManifestAcquired : Bool
@@ -162,12 +130,20 @@ named58ManifestAcquiredIsFalse :
   named58ManifestAcquired ≡ false
 named58ManifestAcquiredIsFalse = refl
 
+countIdentifiesNamedRows : Bool
+countIdentifiesNamedRows = false
+
+countIdentifiesNamedRowsIsFalse :
+  countIdentifiesNamedRows ≡ false
+countIdentifiesNamedRowsIsFalse = refl
+
 perGapDispatchEnabled : Bool
-perGapDispatchEnabled = false
+perGapDispatchEnabled = named58ManifestAcquired
 
 perGapDispatchEnabledIsFalse :
   perGapDispatchEnabled ≡ false
-perGapDispatchEnabledIsFalse = refl
+perGapDispatchEnabledIsFalse =
+  named58ManifestAcquiredIsFalse
 
 manifestAcquisitionRouteBound : Bool
 manifestAcquisitionRouteBound = true
@@ -197,10 +173,6 @@ roundLineageRequiredIsTrue :
   roundLineageRequired ≡ true
 roundLineageRequiredIsTrue = refl
 
-SearchPriorityCreatesProof : Set
-SearchPriorityCreatesProof =
-  Pareto.SearchPriorityCreatesProof
-
 searchPriorityCreatesProof : Bool
 searchPriorityCreatesProof = false
 
@@ -215,35 +187,45 @@ esdSurfaceEditedIsFalse :
   esdSurfaceEdited ≡ false
 esdSurfaceEditedIsFalse = refl
 
+BoundDemandAutomaticallyPaysRequirement : Set
+BoundDemandAutomaticallyPaysRequirement =
+  Bound.BoundDemandAutomaticallyPaysRequirement
+
+BoundDemandAutomaticallyClosesConsumer : Set
+BoundDemandAutomaticallyClosesConsumer =
+  Bound.BoundDemandAutomaticallyClosesConsumer
+
+SameProducerIdentifiesResidual : Set
+SameProducerIdentifiesResidual =
+  Bound.SameProducerIdentifiesResidual
+
 ------------------------------------------------------------------------
--- Non-promotion.
+-- Reused non-promotion theorems.
 ------------------------------------------------------------------------
 
 acquisitionDoesNotPayRequirement :
-  Bound.BoundDemandAutomaticallyPaysRequirement → ⊥
+  BoundDemandAutomaticallyPaysRequirement → ⊥
 acquisitionDoesNotPayRequirement =
   Bound.bindingDoesNotPayRequirement
 
 acquisitionDoesNotCloseConsumer :
-  Bound.BoundDemandAutomaticallyClosesConsumer → ⊥
+  BoundDemandAutomaticallyClosesConsumer → ⊥
 acquisitionDoesNotCloseConsumer =
   Bound.bindingDoesNotCloseConsumer
 
 producerDoesNotIdentifyResidual :
-  Bound.SameProducerIdentifiesResidual → ⊥
+  SameProducerIdentifiesResidual → ⊥
 producerDoesNotIdentifyResidual =
   Bound.producerIdentityDoesNotIdentifyResidual
+
+SearchPriorityCreatesProof : Set
+SearchPriorityCreatesProof =
+  Pareto.SearchPriorityCreatesProof
 
 searchPriorityDoesNotCreateProof :
   SearchPriorityCreatesProof → ⊥
 searchPriorityDoesNotCreateProof =
   Pareto.searchPriorityDoesNotCreateProof
-
-data Count58CreatesNamedRows : Set where
-
-count58DoesNotCreateNamedRows :
-  Count58CreatesNamedRows → ⊥
-count58DoesNotCreateNamedRows ()
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -261,6 +243,7 @@ record Fleet58ManifestAcquisitionReceipt : Set₁ where
 
     sourceRepository : String
     sourceSurface : String
+    sourceDocumentGraphIdentity : String
 
     recordedDischargedCount : Nat
     recordedDischargedCountIs584 : recordedDischargedCount ≡ 584
@@ -271,6 +254,8 @@ record Fleet58ManifestAcquisitionReceipt : Set₁ where
 
     manifestPresent : Bool
     manifestPresentIsFalse : manifestPresent ≡ false
+    countNamesRows : Bool
+    countNamesRowsIsFalse : countNamesRows ≡ false
     perGapDispatch : Bool
     perGapDispatchIsFalse : perGapDispatch ≡ false
 
@@ -300,6 +285,7 @@ canonicalFleet58ManifestAcquisitionReceipt =
       Fleet.canonicalFleetFormalGapTargetReceipt)
     (Fleet.externalSourceSurface
       Fleet.canonicalFleetFormalGapTargetReceipt)
+    "pnf-document-graph:d14f740cb5ec4b39f22998832691f5932bae5e527118280f648f607b57456fc7"
     fleetRecordedDischargedCount
     fleetRecordedDischargedCountIs584
     fleetRecordedContradictionCount
@@ -308,8 +294,12 @@ canonicalFleet58ManifestAcquisitionReceipt =
     fleetRecordedFormalGapCountIs58
     named58ManifestAcquired
     named58ManifestAcquiredIsFalse
+    countIdentifiesNamedRows
+    countIdentifiesNamedRowsIsFalse
     perGapDispatchEnabled
     perGapDispatchEnabledIsFalse
+    manifestAcquisitionRouteBound
+    manifestAcquisitionRouteBoundIsTrue
     relatedSymbolsRequired
     relatedSymbolsRequiredIsTrue
     discoverRequired
@@ -320,6 +310,27 @@ canonicalFleet58ManifestAcquisitionReceipt =
     refl
     esdSurfaceEdited
     esdSurfaceEditedIsFalse
+
+------------------------------------------------------------------------
+-- ZKP O/R/C/S/L/P/G/F.
+------------------------------------------------------------------------
+
+canonicalFleet58ManifestZKPFrame : Pareto.TOEZKPFrame
+canonicalFleet58ManifestZKPFrame =
+  Pareto.toe-zkp-frame
+    "acquire an immutable named manifest for the 58 Fleet formal gaps before per-gap dispatch"
+    "reuse FleetFormalGapTargetTOEExact, BoundAcquisitionDemandExact, and Ibrahim Pareto/snowball"
+    "bind one exact acquisition demand; create no synthetic row and no duplicate Fleet owner"
+    "584 stays discharged; 44 stays separate; 58 stays count-only until the manifest arrives"
+    "one source-store-to-manifest acquisition lane"
+    "the source-controlled count and graph identity are present; the 58 row identities are not"
+    "acquisition is not proof; search priority is not proof; meta-introspector and ESD theorem authority is not imported"
+    "manifest present enables per-gap dispatch; absent manifest keeps dispatch false"
+    "after acquisition run related_symbols, discover, and round_lineage before reuse, unify, extend, or construct"
+    false
+    false
+    false
+    false
 
 attributionBoundary : String
 attributionBoundary =

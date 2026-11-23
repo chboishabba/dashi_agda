@@ -4,14 +4,50 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 ------------------------------------------------------------------------
 -- R559 / IBRAHIM / FLEET / HYPERFABRIC TOE NORMALIZATION
 --
--- O: expose existing R559, Ibrahim, fleet-58 and hyperfabric owners.
--- R: reuse canonical owners. Do not create parallel carriers.
--- C: add one receipt and exact aliases.
--- S: finite RG != continuum Yang-Mills; count/rank/address != proof.
--- L: one disjoint TOE normalization lane.
--- P: donors exist; 584/44/58 partition stays fixed; ESD stays read-only.
--- G: governance standards are process lenses only.
--- F: preflight, trust scan, ESD diff scan and Agda check remain the gate.
+-- O. Objective.
+-- Bind existing Yang-Mills R559/Balaban, Ibrahim Pareto/snowball,
+-- fleet 58-gap targeting, and generic indexed-hyperfabric owners.
+--
+-- R. Reuse.
+-- Reuse theorem-bearing owners unchanged.
+-- Do not create a second B^k carrier, factorisation calculus, p-adic lane,
+-- wave lane, WrongType ontology, or fleet ledger.
+--
+-- C. Construction.
+-- Expose one normalized receipt and exact aliases.
+--
+-- S. Safety.
+-- Finite RG does not imply continuum Yang-Mills.
+-- A fleet count does not create proof.
+-- A spectral coordinate does not create truth.
+-- A hyperfabric address does not create legal or cultural authority.
+-- A p-adic prefix does not recover discarded digits.
+-- Wave fine/coarse agreement does not create an unproved wave collision.
+--
+-- L. Lane.
+-- One TOE normalization lane.
+-- No ESD or digital_esd surface is edited.
+--
+-- Preconditions.
+-- All imported owners exist and retain attribution.
+--
+-- Invariants.
+-- One theorem keeps one owner.
+-- Search priority does not create proof.
+-- Arithmetic coincidence does not create Monster recognition.
+-- External planning text does not create a formal residual.
+-- Projection loss is query-relative.
+--
+-- Postconditions.
+-- The focused TOE can reach all four owner groups through one receipt.
+--
+-- G. Governance.
+-- ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF,
+-- Six Sigma and C4/PlantUML are process lenses only.
+--
+-- F. Verification.
+-- Exact-head preflight, trust scan, ESD diff scan, and Agda typecheck
+-- remain the certification gate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -26,10 +62,15 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
+import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
 import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
+
+------------------------------------------------------------------------
+-- Exact existing owners.
+------------------------------------------------------------------------
 
 r559BalabanReceipt : YM.BalabanR559TOEMaxCutReceipt
 r559BalabanReceipt = YM.canonicalBalabanR559TOEMaxCutReceipt
@@ -39,6 +80,10 @@ ibrahimParetoSnowballFrame = Ibrahim.canonicalTOEZKPFrame
 
 fleetFormalGapTargetReceipt : Fleet.FleetFormalGapTargetReceipt
 fleetFormalGapTargetReceipt = Fleet.canonicalFleetFormalGapTargetReceipt
+
+------------------------------------------------------------------------
+-- Fleet target stays exact and non-promoting.
+------------------------------------------------------------------------
 
 fleetDischargedFibres : Nat
 fleetDischargedFibres =
@@ -53,17 +98,13 @@ fleetFormalGaps =
   Fleet.unformalisedFormalGaps fleetFormalGapTargetReceipt
 
 fleetDischargedFibresAre584 : fleetDischargedFibres ≡ 584
-fleetDischargedFibresAre584 = Fleet.fleetRecordedDischargedCountIs584
+fleetDischargedFibresAre584 = refl
 
 fleetContradictionGapsAre44 : fleetContradictionGaps ≡ 44
-fleetContradictionGapsAre44 = Fleet.fleetRecordedContradictionCountIs44
+fleetContradictionGapsAre44 = refl
 
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
-fleetFormalGapsAre58 = Fleet.fleetRecordedUnformalisedGapCountIs58
-
-fleetTargetOnlyFlagIsTrue :
-  Fleet.targetOnlyUnformalisedFormalGaps fleetFormalGapTargetReceipt ≡ true
-fleetTargetOnlyFlagIsTrue = Fleet.fleetTargetsOnlyUnformalisedFormalGaps
+fleetFormalGapsAre58 = refl
 
 historicalGate4GapCount : Nat
 historicalGate4GapCount =
@@ -108,30 +149,63 @@ historicalGate4CountSelectedAsFleetTargetIsFalse :
   historicalGate4CountSelectedAsFleetTarget ≡ false
 historicalGate4CountSelectedAsFleetTargetIsFalse = refl
 
+
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedObligationCount
+
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedObligationCountIs58
+
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLedgerLevel
+
+ymGate4InhabitantsLevel =
+  YM.gate4CutsetInhabitantsLevel
+
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
+  Fleet.FleetEigenPriorityCreatesProof → ⊥
 fleetEigenPriorityDoesNotCreateProof =
-  Fleet.fleetEigenvalueMagnitudeHasNoProofAuthority
+  Fleet.fleetEigenPriorityDoesNotCreateProof
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
+  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
 fleetExternalCountDoesNotCreateFormalDischarge =
-  Fleet.fleetExternalCountHasNoFormalProofAuthority
+  Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
+  Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStayOutOfTarget =
-  Fleet.fleetDoesNotRetargetDischargedFibres
+  Fleet.fleetDischargedFibresCannotBeRetargetedByThisBoundary
 
 fleetContradictionGapsStaySeparate :
-  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
+  Fleet.FleetContradictionGapReclassificationPermission → ⊥
 fleetContradictionGapsStaySeparate =
-  Fleet.fleetKeepsContradictionsSeparate
+  Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
-fleetPlanningTextDoesNotCreateFormalResidual :
-  Fleet.externalPlanningTextCreatesFormalResidual fleetFormalGapTargetReceipt ≡ false
-fleetPlanningTextDoesNotCreateFormalResidual =
-  Fleet.fleetExternalPlanningTextHasNoFormalResidualAuthority
+
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  Fleet58EqualsYMGate4SameObject
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  fleet58CardinalityDoesNotProveYMGate4Identity
+
+------------------------------------------------------------------------
+-- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
+------------------------------------------------------------------------
 
 toeNineSiteCount : Fabric.siteCount 3 2 ≡ 9
 toeNineSiteCount = Fabric.threeAxis9
@@ -168,6 +242,10 @@ toeTwoDigitStreamCannotRecoverThird :
   StreamThirdPrefixRecovery → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   PadicWave.twoDigitViewCannotAnswerThirdDigit
+
+------------------------------------------------------------------------
+-- Existing fail-closed physical and Ibrahim boundaries.
+------------------------------------------------------------------------
 
 toeScaleTransferPromotionImpossible :
   YM.ScaleTransferPromotion → ⊥
@@ -254,16 +332,12 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     currentGate4FrontierSelfPromotion :
       Proof.promotable currentGate4Frontier ≡ false
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
-    eigenPriorityNoProof :
-      Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetReceipt ≡ false
-    externalCountNoProof :
-      Fleet.externalCountCreatesFormalProof fleetReceipt ≡ false
-    dischargedFibresExcluded :
-      Fleet.dischargedFibresRemainDischarged fleetReceipt ≡ true
-    contradictionGapsSeparate :
-      Fleet.contradictionGapsRemainSeparate fleetReceipt ≡ true
-    planningTextNoResidual :
-      Fleet.externalPlanningTextCreatesFormalResidual fleetReceipt ≡ false
+    fleetCountDoesNotDischarge :
+      Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+    dischargedFibreRetargetBlocked :
+      Fleet.FleetDischargedFibreRetargetPermission → ⊥
+    contradictionReclassificationBlocked :
+      Fleet.FleetContradictionGapReclassificationPermission → ⊥
 
 canonicalR559IbrahimFleetHyperfabricTOEReceipt :
   R559IbrahimFleetHyperfabricTOEReceipt
@@ -304,9 +378,7 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; currentGate4FrontierSelfPromotion =
       currentGate4FrontierDoesNotSelfPromote
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
-  ; eigenPriorityNoProof = fleetEigenPriorityDoesNotCreateProof
-  ; externalCountNoProof = fleetExternalCountDoesNotCreateFormalDischarge
-  ; dischargedFibresExcluded = fleetDischargedFibresStayOutOfTarget
-  ; contradictionGapsSeparate = fleetContradictionGapsStaySeparate
-  ; planningTextNoResidual = fleetPlanningTextDoesNotCreateFormalResidual
+  ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
+  ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
+  ; contradictionReclassificationBlocked = fleetContradictionGapsStaySeparate
   }

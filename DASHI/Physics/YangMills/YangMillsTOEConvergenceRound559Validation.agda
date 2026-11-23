@@ -1,6 +1,15 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation where
 
+------------------------------------------------------------------------
+-- FOCUSED CURRENT-MASTER R559 REGRESSION
+--
+-- Verify source-owner identity.
+-- Verify route-pruning and promotion firewalls.
+-- Verify the 14-family and 7-family scheduling quotients.
+-- Verify public reachability through the TOE root, Unifier, and Unified.Physics.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
@@ -8,317 +17,30 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as TOE
 import DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact as R485
 import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact as R546
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact as R558
+import DASHI.EverythingTOESymmetryResolved369 as Root
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Unifier as U
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-irreducibleFamilyCountIsFourteen :
-  TOE.toeIrreducibleSourceFamilyCount ≡ 14
-irreducibleFamilyCountIsFourteen = refl
-
-criticalFamilyCountIsSeven :
-  TOE.toeCriticalFamilyCount ≡ 7
-criticalFamilyCountIsSeven = refl
-
-concreteSemanticResidualIsThirtyThree :
-  TOE.toeConcreteSemanticResidualCount ≡ 33
-concreteSemanticResidualIsThirtyThree = refl
-
-endpointSemanticResidualIsZero :
-  TOE.toeEndpointSemanticResidualCount ≡ 0
-endpointSemanticResidualIsZero = refl
-
-opaqueEndpointsAreGone :
-  TOE.toeOpaqueEndpointPredicatesRemaining ≡ false
-opaqueEndpointsAreGone =
-  TOE.toeOpaqueEndpointPredicatesRemainingIsFalse
-
-constructorChoiceEqualitiesAreGone :
-  TOE.toeConstructorChoiceEqualitiesRemaining ≡ false
-constructorChoiceEqualitiesAreGone =
-  TOE.toeConstructorChoiceEqualitiesRemainingIsFalse
-
-remainingFamiliesAreNotAllProved :
-  TOE.toeAllRemainingFamiliesAlreadyProved ≡ false
-remainingFamiliesAreNotAllProved =
-  TOE.toeAllRemainingFamiliesAlreadyProvedIsFalse
-
-publishedRGDoesNotPromoteContinuum :
-  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
-publishedRGDoesNotPromoteContinuum =
-  TOE.toePublishedRGDoesNotPromoteContinuum
-
-continuumMassGapRemainsNonPromoted :
-  TOE.toeContinuumMassGapPromoted ≡ false
-continuumMassGapRemainsNonPromoted =
-  TOE.toeContinuumMassGapPromotedIsFalse
-
-regularESourceClosureRemainsOpen :
-  TOE.toeRegularEPhysicalSourceClosure ≡ false
-regularESourceClosureRemainsOpen =
-  TOE.toeRegularEPhysicalSourceClosureIsFalse
-
-sourceNativeRegularEProjectionCompilerIsChecked :
-  TOE.toePublishedFlowToRegularEProjectionCompilerLevel ≡ machineChecked
-sourceNativeRegularEProjectionCompilerIsChecked = refl
-
-regularESection2PredicateCompilerIsChecked :
-  TOE.toeRegularESection2PredicateCompilerLevel ≡ machineChecked
-regularESection2PredicateCompilerIsChecked = refl
-
-regularELocalizationSourceIsImported :
-  TOE.toeCMP119RegularELocalizationSourceLevel ≡ standardImported
-regularELocalizationSourceIsImported = refl
-
-regularELocalizationCarrierRemainsConditional :
-  TOE.toeLiteralCMP119RegularELocalizationCarrierLevel ≡ conditional
-regularELocalizationCarrierRemainsConditional = refl
-
-concreteELocalizationSourceWitnessRemainsConditional :
-  TOE.toeConcreteELocalizationSourceWitnessLevel ≡ conditional
-concreteELocalizationSourceWitnessRemainsConditional = refl
-
-stressRouteDoesNotPromoteClay :
-  TOE.toeStressRouteClayPromotion ≡ false
-stressRouteDoesNotPromoteClay =
-  TOE.toeStressRouteClayPromotionIsFalse
-
-currentHardAnalyticCutsetIsSix :
-  TOE.toeHardAnalyticLemmaUpperCount ≡ 6
-currentHardAnalyticCutsetIsSix =
-  TOE.toeHardAnalyticLemmaUpperCountIsSix
-
-casimirFloorCompilerIsChecked :
-  TOE.toeCompactSimpleUniversalCasimirFloorLevel ≡ machineChecked
-casimirFloorCompilerIsChecked = refl
-
-stressChargeCutoffRemovalCompilerIsChecked :
-  TOE.toeStressChargeLocalCoreCutoffRemovalLevel ≡ machineChecked
-stressChargeCutoffRemovalCompilerIsChecked = refl
-
-literalWilsonFPHaarLeafRemainsConditional :
-  TOE.toeLiteralWilsonFPHaarFourJointOrbitHalfEnclosuresLevel ≡ conditional
-literalWilsonFPHaarLeafRemainsConditional = refl
-
-physicalStressWardLeafRemainsConditional :
-  TOE.toePhysicalStressWardCommonCoreAndEssentialSelfAdjointnessLevel ≡ conditional
-physicalStressWardLeafRemainsConditional = refl
-
-clayYangMillsNotPromoted :
-  TOE.toeClayYangMillsPromoted ≡ false
-clayYangMillsNotPromoted =
-  TOE.toeClayYangMillsPromotedIsFalse
-
-toeConvergenceCompilerMachineChecked :
-  TOE.round559TOEConvergenceCompilerLevel ≡ machineChecked
-toeConvergenceCompilerMachineChecked = refl
-
-
-------------------------------------------------------------------------
--- Same-object scale-density-stress convergence regressions.
-------------------------------------------------------------------------
-
-betaDrivenSourceFlowIsChecked :
-  TOE.toeBetaDrivenSourceFlowLevel ≡ machineChecked
-betaDrivenSourceFlowIsChecked = refl
-
-betaHistoryIsLiteralCMP122CouplingIsChecked :
-  TOE.toeBetaHistoryIsLiteralCMP122CouplingLevel ≡ machineChecked
-betaHistoryIsLiteralCMP122CouplingIsChecked = refl
-
-betaHistorySameStateCouplingIsChecked :
-  TOE.toeBetaHistorySameStateCouplingLevel ≡ machineChecked
-betaHistorySameStateCouplingIsChecked = refl
-
-canonicalCompleteDensityCouplingIsChecked :
-  TOE.toeBetaHistoryToCanonicalCompleteDensityLevel ≡ machineChecked
-canonicalCompleteDensityCouplingIsChecked = refl
-
-generatedActionDensityCompilerIsChecked :
-  TOE.toeUnifiedGeneratedActionDensityCompilerLevel ≡ machineChecked
-generatedActionDensityCompilerIsChecked = refl
-
-generatedActionDensityLiteralSourceRemainsConditional :
-  TOE.toeLiteralUnifiedGeneratedActionDensityLevel ≡ conditional
-generatedActionDensityLiteralSourceRemainsConditional = refl
-
-combinedRGUnifiedActionCompilerIsChecked :
-  TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel ≡ machineChecked
-combinedRGUnifiedActionCompilerIsChecked = refl
-
-combinedRGUnifiedActionLiteralSourceRemainsConditional :
-  TOE.toeLiteralCompleteDensityEffectiveActionRealizationLevel ≡ conditional
-combinedRGUnifiedActionLiteralSourceRemainsConditional = refl
-
-generatedActionDensityStillDoesNotPromoteContinuum :
-  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
-generatedActionDensityStillDoesNotPromoteContinuum =
-  TOE.toeGeneratedActionDensityDoesNotPromoteContinuum
-
-combinedRGUnifiedActionStillDoesNotPromoteContinuum :
-  TOE.toeFlat4DContinuumTransferProvedHere ≡ false
-combinedRGUnifiedActionStillDoesNotPromoteContinuum =
-  TOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
-
-stressScaleCompilerIsChecked :
-  TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel ≡ machineChecked
-stressScaleCompilerIsChecked = refl
-
-literalStressScaleRemainsConditional :
-  TOE.toeLiteralUnifiedGeneratedActionStressScaleLevel ≡ conditional
-literalStressScaleRemainsConditional = refl
-
-strictCasimirCarrierIsChecked :
-  TOE.toeStrictCasimirCarrierCompilerLevel ≡ machineChecked
-strictCasimirCarrierIsChecked = refl
-
-depthLimitStillNotPromoted :
-  TOE.toeDepthLimitNoSpectralPollutionProvedHere ≡ false
-depthLimitStillNotPromoted =
-  TOE.toeDepthLimitNoSpectralPollutionProvedHereIsFalse
-
-osWightmanContinuumStillNotConstructed :
-  TOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
-osWightmanContinuumStillNotConstructed =
-  TOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
-
-terminalPromotionStillBlocked :
-  TOE.toeTerminalPromotion ≡ false
-terminalPromotionStillBlocked =
-  TOE.toeTerminalPromotionIsFalse
-
-
-------------------------------------------------------------------------
--- Normalized facade regressions.
-------------------------------------------------------------------------
-
-unifiedPhysicsBetaHistorySameStateCouplingMatchesTOE :
-  UnifiedPhysics.yangMillsTOEBetaHistorySameStateCouplingLevel
-  ≡ TOE.toeBetaHistorySameStateCouplingLevel
-unifiedPhysicsBetaHistorySameStateCouplingMatchesTOE = refl
-
-unifiedPhysicsStressScaleMatchesTOE :
-  UnifiedPhysics.yangMillsTOEStressScaleCompilerLevel
-  ≡ TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
-unifiedPhysicsStressScaleMatchesTOE = refl
-
-unifiedPhysicsOSWightmanBoundaryMatchesTOE :
-  UnifiedPhysics.yangMillsTOEOSWightmanContinuumBlocked
-  ≡ TOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
-unifiedPhysicsOSWightmanBoundaryMatchesTOE = refl
-
-unifierBetaHistorySameStateCouplingMatchesTOE :
-  U.unifierYangMillsBetaHistorySameStateCouplingLevel
-  ≡ TOE.toeBetaHistorySameStateCouplingLevel
-unifierBetaHistorySameStateCouplingMatchesTOE = refl
-
-unifierStressScaleMatchesTOE :
-  U.unifierYangMillsStressScaleCompilerLevel
-  ≡ TOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
-unifierStressScaleMatchesTOE = refl
-
-unifiedPhysicsGeneratedActionDensityMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGeneratedActionDensityCompilerLevel
-  ≡ TOE.toeUnifiedGeneratedActionDensityCompilerLevel
-unifiedPhysicsGeneratedActionDensityMatchesTOE = refl
-
-unifiedPhysicsCombinedRGUnifiedActionMatchesTOE :
-  UnifiedPhysics.yangMillsTOECombinedRGUnifiedActionCompilerLevel
-  ≡ TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
-unifiedPhysicsCombinedRGUnifiedActionMatchesTOE = refl
-
-unifierGeneratedActionDensityMatchesTOE :
-  U.unifierYangMillsGeneratedActionDensityCompilerLevel
-  ≡ TOE.toeUnifiedGeneratedActionDensityCompilerLevel
-unifierGeneratedActionDensityMatchesTOE = refl
-
-unifierCombinedRGUnifiedActionMatchesTOE :
-  U.unifierYangMillsCombinedRGUnifiedActionCompilerLevel
-  ≡ TOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
-unifierCombinedRGUnifiedActionMatchesTOE = refl
-
-unifierStrictCasimirCarrierMatchesTOE :
-  U.unifierYangMillsStrictCasimirCarrierLevel
-  ≡ TOE.toeStrictCasimirCarrierCompilerLevel
-unifierStrictCasimirCarrierMatchesTOE = refl
-
-unifierTerminalNonPromotionMatchesTOE :
-  U.unifierYangMillsTerminalPromotionBlocked
-  ≡ TOE.toeTerminalPromotionIsFalse
-unifierTerminalNonPromotionMatchesTOE = refl
-
-
-------------------------------------------------------------------------
--- Exact bound and owner-export regressions.
-------------------------------------------------------------------------
-
-universalBetaFloorCompilerIsChecked :
-  TOE.toeCompactSimpleUniversalBetaFloorLevel ≡ machineChecked
-universalBetaFloorCompilerIsChecked = refl
-
-literalUniformRemainderFloorRemainsConditional :
-  TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel ≡ conditional
-literalUniformRemainderFloorRemainsConditional = refl
-
-unifiedPhysicsUniversalBetaFloorMatchesTOE :
-  UnifiedPhysics.yangMillsTOEUniversalBetaFloorLevel
-  ≡ TOE.toeCompactSimpleUniversalBetaFloorLevel
-unifiedPhysicsUniversalBetaFloorMatchesTOE = refl
-
-unifierUniversalBetaFloorMatchesTOE :
-  U.unifierYangMillsUniversalBetaFloorLevel
-  ≡ TOE.toeCompactSimpleUniversalBetaFloorLevel
-unifierUniversalBetaFloorMatchesTOE = refl
-
-unifiedPhysicsRemainderFloorBoundaryMatchesTOE :
-  UnifiedPhysics.yangMillsTOELiteralUniformRemainderFloorLevel
-  ≡ TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
-unifiedPhysicsRemainderFloorBoundaryMatchesTOE = refl
-
-unifierRemainderFloorBoundaryMatchesTOE :
-  U.unifierYangMillsLiteralUniformRemainderFloorLevel
-  ≡ TOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
-unifierRemainderFloorBoundaryMatchesTOE = refl
-
-
-------------------------------------------------------------------------
--- Stress-bound regressions.
-------------------------------------------------------------------------
-
-stressMarkedShellBoundCompilerIsChecked :
-  TOE.toeStressFirstVariationMarkedShellBoundLevel ≡ machineChecked
-stressMarkedShellBoundCompilerIsChecked = refl
-
-stressShellEnergyHilbertCompilerIsChecked :
-  TOE.toeStressShellEnergyToHilbertCompilerLevel ≡ machineChecked
-stressShellEnergyHilbertCompilerIsChecked = refl
-
-literalStressMetricSourceWeldRemainsConditional :
-  TOE.toeLiteralStressMetricSourceCoordinateWeldLevel ≡ conditional
-literalStressMetricSourceWeldRemainsConditional = refl
-
-literalFirstVariationStressPairingRemainsConditional :
-  TOE.toeLiteralFirstVariationStressPairingLevel ≡ conditional
-literalFirstVariationStressPairingRemainsConditional = refl
-
-literalStressActivityEntropyInstantiationRemainsConditional :
-  TOE.toeLiteralStressActivityEntropyInstantiationLevel ≡ conditional
-literalStressActivityEntropyInstantiationRemainsConditional = refl
-
-literalStressCoefficientEnergyShellPrefixRemainsConditional :
-  TOE.toeLiteralStressCoefficientEnergyShellPrefixLevel ≡ conditional
-literalStressCoefficientEnergyShellPrefixRemainsConditional = refl
-
-unifiedPhysicsStressMarkedShellMatchesTOE :
-  UnifiedPhysics.yangMillsTOEStressMarkedShellBoundLevel
-  ≡ TOE.toeStressFirstVariationMarkedShellBoundLevel
-unifiedPhysicsStressMarkedShellMatchesTOE = refl
-
-unifierStressMarkedShellMatchesTOE :
-  U.unifierYangMillsStressMarkedShellBoundLevel
-  ≡ TOE.toeStressFirstVariationMarkedShellBoundLevel
-unifierStressMarkedShellMatchesTOE = refl
-
+rootGoal1A1MatchesOwner :
+  Root.toeGoal1A1CurrentStepBetaSourceLevel
+  ≡ TOE.toeGoal1A1CurrentStepBetaSourceLevel
+rootGoal1A1MatchesOwner = refl
+
+rootIrreducibleDispatchMatchesOwner :
+  Root.toeIrreducibleFamilyLevel Root.a1CurrentStepVariation
+  ≡ TOE.toeIrreducibleFamilyLevel TOE.a1CurrentStepVariation
+rootIrreducibleDispatchMatchesOwner = refl
+
+rootCriticalDispatchMatchesOwner :
+  Root.toeCriticalFamilyLevel Root.h6MinimalWardNontriviality
+  ≡ TOE.toeCriticalFamilyLevel TOE.h6MinimalWardNontriviality
+rootCriticalDispatchMatchesOwner = refl
+
+rootClayCompletionStillFalse :
+  Root.toeGoal1ClayCompletionClaimed ≡ false
+rootClayCompletionStillFalse = refl
 
 ------------------------------------------------------------------------
 -- Goal-1 R485 -> R559 maximum-cut normalization regressions.
@@ -466,57 +188,57 @@ goal1ClayCompletionStillNotClaimed = refl
 ------------------------------------------------------------------------
 
 unifiedPhysicsGoal1A1MatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1A1CurrentStepBetaSourceLevel
+  UnifiedPhysics.toeGoal1A1CurrentStepBetaSourceLevel
   ≡ TOE.toeGoal1A1CurrentStepBetaSourceLevel
 unifiedPhysicsGoal1A1MatchesTOE = refl
 
 unifiedPhysicsGoal1A3MatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1A3SourceNativeContinuumOSLevel
+  UnifiedPhysics.toeGoal1A3SourceNativeContinuumOSLevel
   ≡ TOE.toeGoal1A3SourceNativeContinuumOSLevel
 unifiedPhysicsGoal1A3MatchesTOE = refl
 
 unifiedPhysicsGoal1BSelectedMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel
+  UnifiedPhysics.toeGoal1BWilsonTwoInsertionConnectedShellLevel
   ≡ TOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
 unifiedPhysicsGoal1BSelectedMatchesTOE = refl
 
 unifiedPhysicsGoal1BGapMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1BGeometricDecayCompilerLevel
+  UnifiedPhysics.toeGoal1BGeometricDecayCompilerLevel
   ≡ TOE.toeGoal1BGeometricDecayCompilerLevel
 unifiedPhysicsGoal1BGapMatchesTOE = refl
 
 unifiedPhysicsGoal1CMatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1CSameFamilySourceInstantiationLevel
+  UnifiedPhysics.toeGoal1CSameFamilySourceInstantiationLevel
   ≡ TOE.toeGoal1CSameFamilySourceInstantiationLevel
 unifiedPhysicsGoal1CMatchesTOE = refl
 
 unifiedPhysicsGoal1G1MatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel
+  UnifiedPhysics.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
   ≡ TOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
 unifiedPhysicsGoal1G1MatchesTOE = refl
 
 unifiedPhysicsGoal1G2MatchesTOE :
-  UnifiedPhysics.yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel
+  UnifiedPhysics.toeGoal1G2SameSystemNontrivialitySemanticsLevel
   ≡ TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
 unifiedPhysicsGoal1G2MatchesTOE = refl
 
 unifierGoal1A1MatchesTOE :
-  U.unifierYangMillsGoal1A1CurrentStepBetaSourceLevel
+  U.toeGoal1A1CurrentStepBetaSourceLevel
   ≡ TOE.toeGoal1A1CurrentStepBetaSourceLevel
 unifierGoal1A1MatchesTOE = refl
 
 unifierGoal1BGapMatchesTOE :
-  U.unifierYangMillsGoal1BGeometricDecayCompilerLevel
+  U.toeGoal1BGeometricDecayCompilerLevel
   ≡ TOE.toeGoal1BGeometricDecayCompilerLevel
 unifierGoal1BGapMatchesTOE = refl
 
 unifierGoal1CMatchesTOE :
-  U.unifierYangMillsGoal1CSameFamilySourceInstantiationLevel
+  U.toeGoal1CSameFamilySourceInstantiationLevel
   ≡ TOE.toeGoal1CSameFamilySourceInstantiationLevel
 unifierGoal1CMatchesTOE = refl
 
 unifierGoal1G2MatchesTOE :
-  U.unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel
+  U.toeGoal1G2SameSystemNontrivialitySemanticsLevel
   ≡ TOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
 unifierGoal1G2MatchesTOE = refl
 
@@ -803,15 +525,15 @@ criticalPathCompilerIsChecked :
 criticalPathCompilerIsChecked = refl
 
 criticalSeparateWilsonFamilyNotRequired :
-  TOE.toeSeparateContinuumWilsonFamilyRequired ≡ false
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired ≡ false
 criticalSeparateWilsonFamilyNotRequired = refl
 
 criticalFiniteMoscoRouteNotRequired :
-  TOE.toeFiniteHamiltonianMoscoRouteRequired ≡ false
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired ≡ false
 criticalFiniteMoscoRouteNotRequired = refl
 
 criticalConservativeClayKeepsFullC :
-  TOE.toeFullCLayerRetainedForConservativeClayExistence ≡ true
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence ≡ true
 criticalConservativeClayKeepsFullC = refl
 
 
@@ -930,70 +652,108 @@ criticalFamilyDispatchH6MatchesR558 = refl
 ------------------------------------------------------------------------
 
 unifiedPhysicsIrreducibleDispatchMatchesTOE :
-  UnifiedPhysics.yangMillsTOEIrreducibleFamilyLevel
+  UnifiedPhysics.toeIrreducibleFamilyLevel
     TOE.a1CurrentStepVariation
   ≡ TOE.toeIrreducibleFamilyLevel TOE.a1CurrentStepVariation
 unifiedPhysicsIrreducibleDispatchMatchesTOE = refl
 
 unifiedPhysicsCriticalDispatchMatchesTOE :
-  UnifiedPhysics.yangMillsTOECriticalFamilyLevel
+  UnifiedPhysics.toeCriticalFamilyLevel
     TOE.h6MinimalWardNontriviality
   ≡ TOE.toeCriticalFamilyLevel TOE.h6MinimalWardNontriviality
 unifiedPhysicsCriticalDispatchMatchesTOE = refl
 
 unifierIrreducibleDispatchMatchesTOE :
-  U.unifierYangMillsIrreducibleFamilyLevel
+  U.toeIrreducibleFamilyLevel
     TOE.bWilsonWEXT
   ≡ TOE.toeIrreducibleFamilyLevel TOE.bWilsonWEXT
 unifierIrreducibleDispatchMatchesTOE = refl
 
 unifierCriticalDispatchMatchesTOE :
-  U.unifierYangMillsCriticalFamilyLevel
+  U.toeCriticalFamilyLevel
     TOE.b2SameHamiltonian
   ≡ TOE.toeCriticalFamilyLevel TOE.b2SameHamiltonian
 unifierCriticalDispatchMatchesTOE = refl
 
 
 ------------------------------------------------------------------------
--- Literal two-Wilson R413/R415/R556 convergence.
+-- Count-proof alias regressions.
 ------------------------------------------------------------------------
 
-literalTwoWilsonCompilerIsChecked :
-  TOE.toeLiteralTwoWilsonR415CompilerLevel ≡ machineChecked
-literalTwoWilsonCompilerIsChecked = refl
+irreducibleFamilyCountProofAliasMatches :
+  TOE.toeIrreducibleSourceFamilyCount ≡ 14
+irreducibleFamilyCountProofAliasMatches =
+  TOE.toeIrreducibleSourceFamilyCountIsFourteen
 
-literalTwoWilsonR444SourceRemainsConditional :
-  TOE.toeLiteralTwoWilsonR444TermConstructionLevel ≡ conditional
-literalTwoWilsonR444SourceRemainsConditional = refl
+criticalFamilyCountProofAliasMatches :
+  TOE.toeCriticalFamilyCount ≡ 7
+criticalFamilyCountProofAliasMatches =
+  TOE.toeCriticalFamilyCountIsSeven
 
-literalTwoWilsonR445SameObjectRemainsConditional :
-  TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel ≡ conditional
-literalTwoWilsonR445SameObjectRemainsConditional = refl
 
-literalTwoWilsonR453ConnectedCoreRemainsConditional :
-  TOE.toeLiteralTwoWilsonR453ConnectedCoreLevel ≡ conditional
-literalTwoWilsonR453ConnectedCoreRemainsConditional = refl
 
-literalTwoWilsonR451PhysicalCalibrationRemainsConditional :
-  TOE.toeLiteralTwoWilsonR451PhysicalCalibrationLevel ≡ conditional
-literalTwoWilsonR451PhysicalCalibrationRemainsConditional = refl
+------------------------------------------------------------------------
+-- R546 firewall validation.
+------------------------------------------------------------------------
 
-unifiedPhysicsTwoWilsonCompilerMatchesTOE :
-  UnifiedPhysics.toeLiteralTwoWilsonR415CompilerLevel
-  ≡ TOE.toeLiteralTwoWilsonR415CompilerLevel
-unifiedPhysicsTwoWilsonCompilerMatchesTOE = refl
+opaqueEndpointPredicatesMatchR546 :
+  TOE.toeOpaqueEndpointPredicatesRemaining
+  ≡ R546.opaqueEndpointPredicatesRemaining
+opaqueEndpointPredicatesMatchR546 = refl
 
-unifierTwoWilsonCompilerMatchesTOE :
-  U.toeLiteralTwoWilsonR415CompilerLevel
-  ≡ TOE.toeLiteralTwoWilsonR415CompilerLevel
-unifierTwoWilsonCompilerMatchesTOE = refl
+opaqueEndpointPredicatesRemainFalse :
+  TOE.toeOpaqueEndpointPredicatesRemaining ≡ false
+opaqueEndpointPredicatesRemainFalse =
+  TOE.toeOpaqueEndpointPredicatesRemainingIsFalse
 
-unifiedPhysicsTwoWilsonR445MatchesTOE :
-  UnifiedPhysics.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
-  ≡ TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
-unifiedPhysicsTwoWilsonR445MatchesTOE = refl
+constructorChoiceEqualitiesMatchR546 :
+  TOE.toeConstructorChoiceEqualitiesRemaining
+  ≡ R546.constructorChoiceEqualitiesRemaining
+constructorChoiceEqualitiesMatchR546 = refl
 
-unifierTwoWilsonR445MatchesTOE :
-  U.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
-  ≡ TOE.toeLiteralTwoWilsonR445MixedLogIdentificationLevel
-unifierTwoWilsonR445MatchesTOE = refl
+constructorChoiceEqualitiesRemainFalse :
+  TOE.toeConstructorChoiceEqualitiesRemaining ≡ false
+constructorChoiceEqualitiesRemainFalse =
+  TOE.toeConstructorChoiceEqualitiesRemainingIsFalse
+
+allRemainingFamiliesProvedFlagMatchesR546 :
+  TOE.toeAllRemainingFamiliesAlreadyProved
+  ≡ R546.allRemainingFamiliesAreAlreadyProved
+allRemainingFamiliesProvedFlagMatchesR546 = refl
+
+allRemainingFamiliesAreNotAlreadyProved :
+  TOE.toeAllRemainingFamiliesAlreadyProved ≡ false
+allRemainingFamiliesAreNotAlreadyProved =
+  TOE.toeAllRemainingFamiliesAlreadyProvedIsFalse
+
+
+------------------------------------------------------------------------
+-- R558 route-firewall max-cut validation.
+------------------------------------------------------------------------
+
+criticalSeparateContinuumWilsonMatchesR558 :
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired
+  ≡ R558.separateContinuumWilsonConvergenceFamilyRequired
+criticalSeparateContinuumWilsonMatchesR558 = refl
+
+criticalSeparateContinuumWilsonNotRequired :
+  TOE.toeCriticalSeparateContinuumWilsonConvergenceFamilyRequired ≡ false
+criticalSeparateContinuumWilsonNotRequired = refl
+
+criticalFiniteHamiltonianMoscoMatchesR558 :
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired
+  ≡ R558.finiteHamiltonianMoscoRouteRequired
+criticalFiniteHamiltonianMoscoMatchesR558 = refl
+
+criticalFiniteHamiltonianMoscoNotRequired :
+  TOE.toeCriticalFiniteHamiltonianMoscoRouteRequired ≡ false
+criticalFiniteHamiltonianMoscoNotRequired = refl
+
+criticalConservativeFullCLayerMatchesR558 :
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence
+  ≡ R558.fullCLayerRetainedForConservativeClayExistence
+criticalConservativeFullCLayerMatchesR558 = refl
+
+criticalConservativeFullCLayerRetained :
+  TOE.toeCriticalFullCLayerRetainedForConservativeClayExistence ≡ true
+criticalConservativeFullCLayerRetained = refl

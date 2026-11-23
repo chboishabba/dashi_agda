@@ -176,3 +176,35 @@ canonicalTOEZKPFrame = toe-zkp-frame
   "TOE root and Unifier reach the same exact owners and non-promotion proofs"
   "repo referee discovery/lineage, trust-escape audit, ESD diff audit, and Agda kernel check"
   false false false false
+
+
+------------------------------------------------------------------------
+-- Complete normalized type aliases for the reused non-promotion surface.
+--
+-- These names expose source-owned propositions through the TOE facade.
+-- They do not create new theorem authority.
+------------------------------------------------------------------------
+
+BalabanScaleTransferFrontierReceipt : Set
+BalabanScaleTransferFrontierReceipt =
+  BalabanTransfer.BalabanRGScaleTransferFrontierReceipt
+
+RoutePreferenceCreatesExecutionReceipt : Set
+RoutePreferenceCreatesExecutionReceipt =
+  Recognition.RoutePreferenceCreatesExecutionReceipt
+
+MergedLeanSourceCreatesKernelReceipt : Set
+MergedLeanSourceCreatesKernelReceipt =
+  Execution.MergedLeanSourceCreatesKernelReceipt
+
+NinetyOEISEqualityCreatesMultiplicityAction : Set
+NinetyOEISEqualityCreatesMultiplicityAction =
+  Execution.NinetyOEISEqualityCreatesMultiplicityAction
+
+FiniteIrreducibilityCreatesMonsterHZetaRecognition : Set
+FiniteIrreducibilityCreatesMonsterHZetaRecognition =
+  HZeta.FiniteIrreducibilityCreatesMonsterHZetaRecognition
+
+CurrentQidIdentifiesHistoricalTitle : Set
+CurrentQidIdentifiesHistoricalTitle =
+  Historical.CurrentQidIdentifiesHistoricalTitle

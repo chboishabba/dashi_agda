@@ -13,13 +13,9 @@ package "Canonical theorem owners" {
   component "CMP116 stress\nCauchy / Hilbert bounds" as Stress
   component "Published finite nonlinear RG" as PublishedRG
   component "Scale-transfer frontier" as Frontier
-  component "Finite RG reopening\\nobservable transport" as Reopening
-  component "Total covariance\\nresidual fibre term" as Covariance
-  component "369 source residual\\nconsumer non-descent" as Residual
   component "Continuum route boundary" as Continuum
 }
 
-component "TopDownSummableRGIncrement\nchecked tail compiler / conditional physical majorant" as SummableRG
 component "DASHI.Unified.\nBalabanRGTOERegression" as Normalized
 
 package "TOE consumers" {
@@ -34,15 +30,14 @@ component "Fleet formal-gap target\n58 unformalised slots" as Fleet58
 
 Density --> Normalized : reuse
 RegularE --> Normalized : reuse
-SummableRG --> Normalized : reuse / no source promotion
 Casimir --> Normalized : reuse
 Stress --> Normalized : reuse
 PublishedRG --> Normalized : reuse
-Frontier --> Normalized : strict authority + typed promotion eliminator
-Continuum --> Normalized : typed continuum non-promotion
+Frontier --> Normalized : strict authority
+Continuum --> Normalized : non-promotion
 
-Normalized --> TOE : direct owner aliases
-Normalized --> Unifier : direct owner aliases
+Normalized --> TOE : import / alias
+Normalized --> Unifier : import / alias
 Normalized --> Physics : import / alias
 
 TOE --> Validation : agreement
@@ -67,16 +62,6 @@ Invariants:
 - conditional != machineChecked
 - no ESD mutation
 - attribution stays with source owners
-end note
-
-note bottom of Reopening
-Categorical fibre reading:
-- coarse projection is not terminal
-- reopening kernel retains fine-fibre information
-- observable expectation transports exactly
-- conditional covariance retains residual correlation
-- Pi/Phi/Psi are structural roles
-- tau/zeta are not generic pipeline stages here
 end note
 
 note bottom of Continuum
