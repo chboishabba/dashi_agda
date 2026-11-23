@@ -1,3 +1,19 @@
+## 23 November 2026 — P0 128 = 16 × 2 × 4 normalization and exact bilateral Gamma core
+
+Read live `FourierMass`, `FourthOrderQuotient`, `NMu`, upstream Zeta23 `GammaFacts/Complete` and `GammaFacts/Mu` first. The original constant mode's **128** is not an arbitrary 7-bit carrier: `16` from physical r=t/16, `2*pi` from even Fourier inversion and `4` from the profile's origin projector, giving exactly `128*pi*OriginDet/(t*R*M0)`. Existing DASHI E7/128 OEIS module licenses `128=2^7` but forbids unproved same-carrier/spin interpretation.
+
+A new exact, original-profile **ordinate** reflection identity (distinct from horizontal alpha reflection):
+`V_W=(8/t)∫ C_W(q)[mu(t+tq/16)+mu(t-tq/16)-2mu(t)]dq`.
+For t>=200 and declared cutoff |q|<=8, Zeta23 published/proved Gamma Stirling gives
+`|V_core - (4/(pi*t))∫core C_W(q)log(1-q²/256)dq| <= 80*C_gamma*M0_core/t³`.
+Using `log(1-z)=-z+error`, |error|<=2z²/3 on z<=1/4, and existing Lean `∫q² C_W=-2*pi*P_W''(0)`, the source-aligned full scalar is
+`V_W=globalCubicModeDefect/(12*pi*t²)+M2_tail/(64*pi*t)+V_tail+E_core`,
+`|E_core|<=M4_core/(24576*pi*t)+80*C_gamma*M0_core/t³`.
+All tails explicit. `128` and `256=16²` each arise through actual morphisms; the chosen cutoff 8 is analyst-selected, not intrinsic. No sign is derived for the signed full Gamma source; full line includes q≈±16 where logarithmic asymptotic is nonuniform and the log sign changes beyond |q|=16sqrt(2). Source script `scripts/check_rh_128_gamma_bilateral_20261123.py` has local SymPy and digamma controls PASS. Original completed signed terminal remains OPEN; `D>=2d`, slack S>=0 so proof by recut is not enough.
+
+**Next max-cut:** prove selected-`W(t)` uniform bounds for `||P_W^(6)||_1`, `M0_core`, `M4_core` and actual `V_tail` (must not assume selected R bounded away from 0), then combine with a genuinely independent signed zero/archimedean estimate and original strict post-sixth slack. Preserve GRH χ-dependent conductor/Gamma and all-character quantifiers. No Lean/Agda kernel/CI.
+
+---
 ## 23 November 2026 — P0 SOURCE CORRECTION after latest Lean/RH owner recheck: completed contour versus SameOrd and Gamma
 
 Latest source shows prime-free and unmarked pole-cancelled **already theorem-bearing** in Lean `Synthesis/RiemannMarkedArithmeticCompletedOperatorAudit.lean`, not newly discovered. The exact scalar owner is `FourierMass`: `I_t=(128*pi*mu(t)/(t*R*M0))*OriginDet+fullMuVariation`, with original signed Gamma `-I_t/2`. Do not double charge this Gamma as another independent density. For selected original W, write D=sum_SameOrd combinedZeroHeightDefect, H=unhalved OFF-ordinate signed literal sum. Existing `Cutset.combinedCluster_eq_tsum` and `NMu.completedSignedResidual_eq_combinedCluster` give **D=(H-I)/2**. The *holomorphic extension of the off-ordinate K*, evaluated also on SameOrd, contributes `-4D` there; thus A_ext=H-4D, A_ext-I=-2D. This is an identity REARRANGEMENT, not a new independent upper bound, and A_ext must NOT be identified with the physical completed `sampleTest` without an exact SameOrd and `paperFT` normalization square. True terminal `H+S<4d+I` is `2D+S<4d`; source `D>=2d` for distinct reflected off-line pair and `S>=0` show why independent strict signed information is essential. Previous language suggesting an unrestricted deformed contour immediately supplies a separate signed estimate is superseded. See existing [bilateral proof ledger](../proofs/RHGRHBilateralCompletedLogPolePairQuarticAdverseMass20261123.md). No RH/GRH promotion.
