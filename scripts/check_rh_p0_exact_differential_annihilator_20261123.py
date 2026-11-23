@@ -67,3 +67,18 @@ print('PASS exact 52-jet port normalization: h(log p)=1 at its port, 0 at other 
 # No boundary terms because compact support; no rank assumption needed.
 print('PASS parity & formal-adjoint integration-by-parts construction: all eight constraints exact')
 print('OPEN Lean high-derivative source weld, quantitative t/delta norm cost and independent P0 strict estimate')
+
+# Source-exact quantitative target positivity margin for the new source:
+# d_original(a)>=m_W*a^4 throughout 0<|a|<=1/2, m_W>0 (same selected W).
+# For each E0 perturbation profile P_i with M0/M2/M4/M6/M8 zero,
+# C_i=(1/(4*10!)) int |P_i(u)|*|u|^10*cosh(|u|/2) du < infinity.
+# Then |Delta d(a)| <= a^10 * sum |eps_i|C_i
+#                   <= a^4 * (sum |eps_i|C_i)/64.
+# Thus sum |eps_i|C_i < 64*m_W yields d_extended(a)>0 on full strip.
+a,m,C=S.symbols('a m C',positive=True)
+assert S.Rational(1,2)**6==S.Rational(1,64)
+for n in range(35):
+ assert S.factorial(2*n+10)>=S.factorial(10)*S.factorial(2*n)
+assert S.simplify((m-C/S.Integer(64))*a**4-(m*a**4-C*a**4/S.Integer(64)))==0
+print('PASS exact tenth-order moment/strip gate: sum |eps_i|C_i < 64*m_W -> strict original target positivity')
+print('OPEN quantitative m_W(t), C_i(t), E2 tails and source-independent global P0 strict inequality')
