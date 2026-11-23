@@ -20,6 +20,7 @@ assert S.simplify(jet.subs({M2:0,M4:-4*T})-(M0-T*p4/6)) == 0
 assert S.simplify(S.diff(jet,q,2)+S.diff(jet,alpha,2)) == 0
 assert p4.subs(q,alpha) == -4*alpha**4
 assert p4.subs(alpha,0) == q**4
+assert p4.subs(q,0) == alpha**4
 print('PASS exact source J2/M4 polynomial and 2D harmonicity')
 
 # The genuine selected witness has ||P||_1 < 5184 and support |v| < pi+1 < 5
@@ -65,9 +66,11 @@ for small in ('0.1','0.01','0.0001'):
     a = mp.mpf(small)
     k0 = kernel(0,a)
     kd = kernel(a,a)
-    assert k0 < 0 < kd
+    kh = kernel(a,0)
+    assert k0 < 0 < kd and kh < 0
     assert abs(k0/(-a**4) - B(0)) < mp.mpf('0.005')
     assert abs(kd/(4*a**4)-B(0)) < mp.mpf('0.005')
+    assert abs(kh/(-a**4)-B(0)) < mp.mpf('0.005')
     print('PASS compact C-infinity P=-b4 fixture h=',small,
           'axis/h4=',mp.nstr(k0/a**4,10),'diag/h4=',mp.nstr(kd/a**4,10))
 print('OPEN: true zeros at these q, actual weighted zero-minus-mu, post-sixth slack and strict P0 terminal')
