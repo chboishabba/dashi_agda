@@ -1,3 +1,47 @@
+# 23 November — Formal-first P0 theorem programme (CURRENT; supersedes execution-first priorities)
+
+**Decision:** Deprioritise additional learner GPU microbenchmarks and fixed-horizon grokking reruns. Existing Leech PR #5 physical host acceptance: four-arm R4 FP64 20/20 matched training, differential VJP at most 4.68e-16 gradient difference, step-20 parameter difference 2.07e-11 at tolerance 1e-10; routing peak allocation -20.5%, routing backward -15.5%. These are scoped physical evidence, NOT kernel proofs or learned geometry. Original nine-point modular learner remains 3/8 training-fit after 200 updates and cannot be described as pre-grokking memorisation. Leech PR #5 currently 5a09681c. Original checkpoint/SLR fitted assets and F5 remain unopened.
+
+## P0-F1 — new universal future-trace characterization (formal source written)
+
+New Agda module `DASHI/Cognition/PNF/X369InputIndexedFutureConsumerExact.agda` extends existing autonomous `X369ConsumerSufficientCompressionNoGoExact.futureConsumerSufficiency` to a **family of original transitions indexed by arbitrary future activations/interventions**. The `trace` includes original observables before each transition.
+
+For original state `h`, admissible input `u`, observable `O_u(h)` and transition `T_u(h)`, define
+
+    h ≈ h'  iff  for EVERY finite input word w,
+                     Trace(w,h) = Trace(w,h').
+
+The new proof defines `TraceEquivalent` and establishes:
+1. `inputIndexedTraceDescent`: if `E(h)=E(h')` implies `O_u(h)=O_u(h')` and `E(T_u(h))=E(T_u(h'))` for EVERY u, induction proves equal output traces for EVERY finite word.
+2. `traceEquivalentObserves`: trace equivalence implies one-step output equality for each u (head of length-one trace).
+3. `traceEquivalentTransitions`: trace equivalence is preserved after the transition at every u (tail of prefixed trace).
+4. `everyStableCodecFibreIsTraceEquivalent`: any sound encoder fibre refines this full future-trace relation. This is the **maximally permissive behavioural equivalence** for deterministic original observations under all admissible inputs; NOT a claim of a finite-dimensional, computable or byte-minimal codec.
+5. `futureSeparationRefutesCodec`: one source-valid future word distinguishing two states that share a code refutes its proposed all-future sufficiency.
+
+The code is self-contained, uses primitive List/equality and ⊥, and **has not been checked by Agda 2.9 kernel**. No assumption of a learned task-phase action, actual HIP bit identity, full original R4 transition fidelity, checkpoint authentication or fitted generalization is made. Source-specific formal instantiation of `T_u`/`O_u` with original selected TopK, signed orientation, FFN, transition and inactive E histories is P0-F2, not an automatic consequence of the abstract theorem.
+
+## P0-F2 — original R4 source-specific fibre intersection (OPEN)
+
+Existing roadmap `X369R4HistoryObservabilityRankMaxCut20261117.md` proves `det(M_w)=d q(w)` and `M_w^T M_w=qI+(d²-q)J/3` with singular values |d|, sqrt(q), sqrt(q). Generic d≠0 and q>0 means **directed-score history rank 3**. Rank 2 only with d=0,q>0; rank 1 only when ws=wf=wr≠0. Do not confuse two directed FEATURE channels plus supplied DC with two-dimensional full recurrent STATE sufficiency.
+
+Even rank-2 directed-score equivalence does not suffice for the source C2 baseline `v·abs(h)`. More strongly, existing signed pair `h+=t(1,1,1)`, `h-=-t(1,1,1)` for a zero-sum directed head has identical C3 and absolute C2 router scores, yet selectable FFN/GELU or transition can separate them. Reuse `X369R4SourceReceiptAndHistoryFibreMaxCut20261117.md` and `X369R4GELUParityChartHistoryMaxCut20261117.md`; no duplicate carrier. Required: prove intersection of route, output, orientation, transition, inactive-history and externally typed task consumers, then prove or refute fibre stability for each original input branch including ties/guards. Existing physical selected-only future [0,2] vs [0,3] witness in FP32/FP64 is a finite no-go control, not a general positive quotient.
+
+## P0-F3 — exact relative-decision and error-transport theorem (OPEN)
+
+Reuse `X369R4RelativeErrorMaxCut20261117.md`, `X369QuantizedRouterDecisionMarginExact.agda`, `LeechLayerErrorTransportExact.agda` and the *original* C2 q-gate/chart owners. Prove strict TopK membership **and internal selected-slot order**, shift-invariant selected softmax error via oscillation, signed GELU chart jump `2 E_F`, transition Lipschitz/error transport and Nat cell admission. Separate ideal-real polynomial identities from prospective hardware roundoff. No independent certified native error budgets exist; retrospective 6/6 TopK observations at 1/256 are not universal.
+
+## P0-F4 — proved 369 learning explanation (OPEN)
+
+Preserve distinct propositions: full-channel gauge rotation does not add capacity; centered two-coordinate C3 quotient is consumer-indexed; gradient sufficiency requires equality of relevant derivatives in a neighbourhood (the aggregate-DC point equality counterexample has reverse-weight gradient (-3,2)); future sufficiency requires indexed trace congruence; invariant-only encoders cannot preserve a moving C3 label. Prove a labelled task action intertwiner BEFORE claiming that neural geometry explains modular generalisation. For genuine grokking require observed training fit followed by delayed independently held-out correctness; no such result yet.
+
+## P0-F5 — transitive Agda acceptance and owned fitted model (OPEN)
+
+Kernel-check the new module with current original Agda 2.9 import graph, original finite G0/C0/N0/F0 donors, TOE imports; no unverified postulates and no CI substitution. Then recover *original* fitted R4 assets through the existing source-bound producer; never fabricate missing checkpoints, run F5, modify original fingerprint owners or relabel synthetic mathematical examples as fitted.
+
+**Execution priority:** F1 kernel check → F2 source-specific positive/no-go proof → F3 guarded consumer error theorem → F4 learning-law explanation; use GPU only as a later independent witness. Original Leech-LILA attribution: Anatolii Kornienko.
+
+---
+
 ## 20 November — R1 repository recovery update
 
 Leech PR #5 now at `678b5e7dda932e56f10626ecc7ece6719f202494`. Detached `a77bf4d` was unavailable (GitHub 422); documented corrections reconstructed in commits 506680b8, 139fc645 and 678b5e7d. Original model blob verified `a2a250462ce8e663591cd8a8f784fad9bde1b15d`. R1 repository recovery complete for documented changes; exact detached-tree identity and fresh execution remain unverified. Original fitted artifacts not present in the inspected tracked Leech tree. R2 remains OPEN pending owned checkpoint, repair receipt, native R1 JSONL/summary, tokenizer, config and fitted delta. SLR C4.04a relation/mention integration is separate upstream work, not replacement input or semantic admission for R4. No F5 access or kernel claim.
