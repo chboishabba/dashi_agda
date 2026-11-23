@@ -2508,3 +2508,78 @@ necklaces/Masser still open. Original RH actual selected W and signed
 zero functional admissibility/open terminal remain separate.
 No CI, Lean, Agda kernel, independent external pi benchmark or
 world-SOTA claim.
+
+
+## 23 Nov — COMP5f codec transfer: actual compute-vs-peak-memory gate
+
+Source-first owners: `Docs/specs/TriadicResidualMaskSignCodec.md` and
+`DASHI/Codec/BalancedTritBitFibre.agda`: exact zero/support plus
+conditional sign fibre; `DASHI/Codec/IndexedCubeMaskSignExact.agda`:
+prefix and residual must be reconstructible; and
+`DASHI/Core/ConsumerDescentMinimalObserverExact.agda`: consumer-specific
+fibre-constancy and factorization. These justify retaining actual
+zero, sign and original-order residual witnesses, not encoding
+signed/zero matrix states as anonymous interchangeable integers.
+
+For Chudnovsky, source semigroup states (P,Q,T) correspond to
+upper-triangular [[P,T],[0,Q]]. Ordered composition has
+T_new=T_left Q_right+P_left T_right; leaves and concatenation order
+are noncommutative. A memory optimization may mutate the left
+state only AFTER preserving its old P for addmul. New implementation
+`scripts/check_pi_gmp_codec_memory.cpp`, commit
+913d03d7cbe9dc7d00ed87ce02676e386893758a, GitHub blob
+82027bc7acee4b4711f0ca1a2ed42dce1d60b8c5:
+baseline returns expression-composed temporary P/Q/T;
+in-place uses alias-safe GMP mpz_mul(T,T,Qr),
+mpz_addmul(T,P,Tr), then mpz_mul(P,P,Pr),mpz_mul(Q,Q,Qr).
+No loss of sign or physical zero support, no leaf permutation,
+no full postmerge GCD. Both routes feed the same one-quotient
+exact decimal floor and strict upper-bound consumer from COMP5e.
+
+Local source `/mnt/data/pi_codec_memory.cpp` independently
+implemented and g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto compiled,
+using the same algorithm (not byte-identical committed source
+replay). Tests 10k, 100k, 500k and 1M decimal places. All
+eight mode-precision combinations match existing exact SHA-256
+certified floor strings:
+10k ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524,
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711,
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9,
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+
+Fresh independent-process alternating 5-pair comparisons
+(1 run per process, CPU/system noise remains, cold RSS;
+time includes exact sqrt bound, split, floor, full decimal
+conversion + SHA256; excludes startup/compilation):
+| places | baseline median ms | in-place median ms | baseline median peak RSS KiB | in-place median peak RSS KiB |
+|---:|---:|---:|---:|---:|
+| 100000 | 47.571 | 45.218 | 6308 | 6356 |
+| 500000 | 306.490 | 295.829 | 15684 | 15912 |
+| 1000000 | 737.815 | 728.451 | 28380 | 28540 |
+
+Positive within-sample time effects ~4.95%,3.48%,1.27%;
+these do not establish a production SOTA optimization.
+**NO RSS IMPROVEMENT**: in-place has ~48,228,160 KiB higher
+peak RSS in these samples (about +0.8%,+1.5%,+0.6%).
+The source uses fewer large expression-temporary outputs,
+but GMP allocation reuse, heap high-water mark, recursive
+destruction, runtime allocator and many wider endpoint products
+make peak resident memory a distinct measurement.
+A preliminary three-repetition-per-process scan gave
+100k baseline/in-place 45.054/42.871ms,
+500k 302.905/287.380ms and 1M 724.470/722.563ms,
+also all exact hashes; timing variation reinforces the need
+for interleaving/order controls rather than a fixed speed claim.
+
+P0 SOTA Pi **remains priority** even as external SOTA
+comparator execution is deferred per direction. Next
+cut is true live GMP limb allocation peak (not merely RSS),
+memory arenas/streamed chunked leaves/partial-product lifetimes
+and endpoint product scheduling; require *Pareto* compute +
+memory gate and exact source-to-consumer BIDI. Avoid applying
+the 3-state trit support/sign codec to arbitrary dense GMP
+limbs with an unsupported compression guarantee; instead
+codec gives the proper lossless-condition interface.
+No GPU native, Agda/Lean or CI acceptance here; original
+classical Chudnovsky identity and Bishop same-real open,
+RH actual selected W and Monster action unrelated.
