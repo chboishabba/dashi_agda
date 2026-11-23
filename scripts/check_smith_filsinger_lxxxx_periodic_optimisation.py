@@ -36,5 +36,5 @@ assert S.factor(sums['net']-sums['terminal']-sums['ohmic']-sums['relaxation'])==
 print('exact pass',flush=True)
 eta=sums['terminal']/sums['incident']
 print('ETA',float(eta),'capture',float(sums['net']/sums['incident']),'ratio',float(sums['terminal']/sums['net']),flush=True)
-res={'status':'PASS','Z':str(Z),'G':str(G),'amplitude':str(amp),'incident':float(sums['incident']), 'reflected':float(sums['reflected']), 'terminal':float(sums['terminal']), 'ohmic':float(sums['ohmic']),'relaxation':float(sums['relaxation']),'net':float(sums['net']), 'eta':float(eta),'capture':float(sums['net']/sums['incident']), 'terminal_per_net':float(sums['terminal']/sums['net']),'observability_two_step_rank':rank,'storage_exact_zero':True,'energy_residual_exact_zero':True,'restored_exact':True}
+res={'status':'PASS','Z':str(Z),'G':str(G),'amplitude':str(amp),'incident':float(sums['incident']), 'reflected':float(sums['reflected']), 'terminal':float(sums['terminal']), 'ohmic':float(sums['ohmic']), 'relaxation':float(sums['relaxation']),'net':float(sums['net']), 'eta':float(eta),'capture':float(sums['net']/sums['incident']), 'terminal_per_net':float(sums['terminal']/sums['net']),'observability_two_step_rank':rank,'storage_exact_zero':True,'energy_residual_exact_zero':True,'restored_exact':True}
 print(json.dumps(res,indent=2),flush=True)
