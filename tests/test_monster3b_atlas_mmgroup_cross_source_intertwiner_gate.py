@@ -59,6 +59,15 @@ class OriginalAtlasGate(unittest.TestCase):
   with self.assertRaises(ValueError):G.candidate_word(["invented"],{"g3b":(G.eye(),1)})
  def test_missing_generator_image_rejected(self):
   with self.assertRaises(ValueError):G.monster_matrix({"translation_images":[],"modulation_images":[]})
+ def test_original_seven_relator(self):
+  c,d=G.atlas(ROOT)
+  self.assertTrue(G.source_relations(c,d))
+  r=G.atlas_relator(c,d)
+  self.assertEqual(G.powm(r,7),G.eye())
+  self.assertNotEqual(r,G.eye())
+ def test_seven_relator_rejects_false_identity(self):
+  c,d=G.atlas(ROOT)
+  self.assertFalse(G.source_relations(c,G.eye()))
  def test_gf3_inverse(self):
   c,d=G.atlas(ROOT)
   for m in (c,d):
