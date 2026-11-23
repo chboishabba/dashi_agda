@@ -38,7 +38,7 @@ def audit():
     assert s.simplify(QdotN+a*PN/dy)==0
     # At interior, use common central difference D for ALL 3 fields:
     dP,dM=s.symbols("dP dM")
-    qInterior=s.factor((a*dP+(v-1)*dM)/2 -
+    qInterior=s.factor((a*dP-(v-1)*dM)/2 -
                 (a*dP+c*dM)/2)
     assert qInterior==0
     # Explicit rational off-shell control: even with initially
