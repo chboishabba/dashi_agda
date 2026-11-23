@@ -1,11 +1,11 @@
 module DASHI.Analysis.FastCauchyReals where
 
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to zeroN)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
-open import DASHI.Analysis.ConstructiveRealSpine
+open import DASHI.Analysis.ConstructiveRealSpine using (ConstructedOrderedCompleteReal)
 
 ------------------------------------------------------------------------
 -- Canonical rapidly convergent rational representatives.
@@ -53,8 +53,9 @@ record FastCauchyReal (A : RationalMetricAuthority) : Set where
   field
     approximate : Nat → Q A
     fastCauchy : ∀ m n →
-      absQ A (_-Q_ A (approximate m) (approximate n))
-      ≤Q A (_+Q_ A (dyadicError A m) (dyadicError A n))
+      _≤Q_ A
+        (absQ A (_-Q_ A (approximate m) (approximate n)))
+        (_+Q_ A (dyadicError A m) (dyadicError A n))
 
 open FastCauchyReal public
 
@@ -62,22 +63,22 @@ open FastCauchyReal public
 -- Elementary natural-number infrastructure used to choose a common cutoff.
 
 maxN : Nat → Nat → Nat
-maxN zero n = n
-maxN (suc m) zero = suc m
+maxN zeroN n = n
+maxN (suc m) zeroN = suc m
 maxN (suc m) (suc n) = suc (maxN m n)
 
+reflexiveN : ∀ k → k ≤ k
+reflexiveN zeroN = z≤n
+reflexiveN (suc k) = s≤s (reflexiveN k)
+
 left≤max : ∀ m n → m ≤ maxN m n
-left≤max zero n = z≤n
-left≤max (suc m) zero = s≤s (left≤max m zero)
+left≤max zeroN n = z≤n
+left≤max (suc m) zeroN = reflexiveN (suc m)
 left≤max (suc m) (suc n) = s≤s (left≤max m n)
 
 right≤max : ∀ m n → n ≤ maxN m n
-right≤max zero n = reflexiveN n
-  where
-    reflexiveN : ∀ k → k ≤ k
-    reflexiveN zero = z≤n
-    reflexiveN (suc k) = s≤s (reflexiveN k)
-right≤max (suc m) zero = z≤n
+right≤max zeroN n = reflexiveN n
+right≤max (suc m) zeroN = z≤n
 right≤max (suc m) (suc n) = s≤s (right≤max m n)
 
 ≤N-trans : ∀ {a b c} → a ≤ b → b ≤ c → a ≤ c
@@ -104,14 +105,15 @@ _≈R_ {A} x y =
       ∀ m n →
       cutoff ≤ m →
       cutoff ≤ n →
-      absQ A (_-Q_ A (approximate x m) (approximate y n))
-      ≤Q A dyadicError A precision)
+      _≤Q_ A
+        (absQ A (_-Q_ A (approximate x m) (approximate y n)))
+        (dyadicError A precision))
 
 record FastCauchyEqualityLaws (A : RationalMetricAuthority) : Set₁ where
   field
-    reflexive : ∀ x → x ≈R x
-    symmetric : ∀ {x y} → x ≈R y → y ≈R x
-    transitive : ∀ {x y z} → x ≈R y → y ≈R z → x ≈R z
+    reflexive : ∀ x → _≈R_ {A} x x
+    symmetric : ∀ {x y} → _≈R_ {A} x y → _≈R_ {A} y x
+    transitive : ∀ {x y z} → _≈R_ {A} x y → _≈R_ {A} y z → _≈R_ {A} x z
 
 open FastCauchyEqualityLaws public
 
@@ -134,8 +136,8 @@ fastCauchyReflexive {A} x precision =
           (dyadicAntitone A cutoff≤n)))
 
 fastCauchySymmetric :
-  ∀ {A : RationalMetricAuthority}
-    {x y : FastCauchyReal A} →
+  ∀ {A : RationalMetricAuthority} →
+  ∀ {x y : FastCauchyReal A} →
   x ≈R y →
   y ≈R x
 fastCauchySymmetric {A} {x} {y} x≈y precision with x≈y precision
@@ -147,8 +149,8 @@ fastCauchySymmetric {A} {x} {y} x≈y precision with x≈y precision
       (close n m cutoff≤n cutoff≤m)
 
 fastCauchyTransitive :
-  ∀ {A : RationalMetricAuthority}
-    {x y z : FastCauchyReal A} →
+  ∀ {A : RationalMetricAuthority} →
+  ∀ {x y z : FastCauchyReal A} →
   x ≈R y →
   y ≈R z →
   x ≈R z
@@ -167,8 +169,9 @@ fastCauchyTransitive {A} {x} {y} {z} x≈y y≈z precision
     cutoffYZ≤common = right≤max cutoffXY cutoffYZ
 
     closeXZ : ∀ m n → common ≤ m → common ≤ n →
-      absQ A (_-Q_ A (approximate x m) (approximate z n))
-      ≤Q A dyadicError A precision
+      _≤Q_ A
+        (absQ A (_-Q_ A (approximate x m) (approximate z n)))
+        (dyadicError A precision)
     closeXZ m n common≤m common≤n =
       leTrans A
         (absTriangleDifference A
@@ -196,12 +199,12 @@ fastCauchyTransitive {A} {x} {y} {z} x≈y y≈z precision
 canonicalFastCauchyEqualityLaws :
   ∀ (A : RationalMetricAuthority) →
   FastCauchyEqualityLaws A
-canonicalFastCauchyEqualityLaws A =
-  record
-    { reflexive = fastCauchyReflexive
-    ; symmetric = fastCauchySymmetric
-    ; transitive = fastCauchyTransitive
-    }
+FastCauchyEqualityLaws.reflexive (canonicalFastCauchyEqualityLaws A) x =
+  fastCauchyReflexive {A} x
+FastCauchyEqualityLaws.symmetric (canonicalFastCauchyEqualityLaws A) {x} {y} rel =
+  fastCauchySymmetric {A} {x} {y} rel
+FastCauchyEqualityLaws.transitive (canonicalFastCauchyEqualityLaws A) {x} {y} {z} r1 r2 =
+  fastCauchyTransitive {A} {x} {y} {z} r1 r2
 
 constantFastReal :
   ∀ (A : RationalMetricAuthority) →
@@ -213,8 +216,9 @@ constantFastReal A q =
     constantIsFast
   where
     constantIsFast : ∀ m n →
-      absQ A (_-Q_ A q q)
-      ≤Q A (_+Q_ A (dyadicError A m) (dyadicError A n))
+      _≤Q_ A
+        (absQ A (_-Q_ A q q))
+        (_+Q_ A (dyadicError A m) (dyadicError A n))
     constantIsFast m n
       rewrite subSelfQ A q
             | absZero A =
@@ -277,7 +281,7 @@ record FastCauchyQuotientRealization
     distribRight : ∀ a b c → mul (add a b) c ≡ add (mul a c) (mul b c)
     subSelf : ∀ a → sub a a ≡ zero
 
-open FastCauchyQuotientRealization public
+open FastCauchyQuotientRealization
 
 fastCauchyConstructedReal :
   ∀ {A : RationalMetricAuthority}

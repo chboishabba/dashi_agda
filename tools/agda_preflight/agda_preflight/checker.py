@@ -622,6 +622,22 @@ class Checker:
                 if entry is None:
                     continue
                 record_name, _ = entry
+                ast_rec = summary.ast.records.get(record_name)
+                if ast_rec is not None and ast_rec.node is not None:
+                    start_line = ast_rec.line
+                    start_col = ast_rec.node.start_point[1]
+                    lines = summary.ast.source.splitlines()
+                    end_line = start_line
+                    for lno in range(start_line, len(lines)):
+                        line_str = lines[lno]
+                        if not line_str.strip():
+                            continue
+                        indent = len(line_str) - len(line_str.lstrip())
+                        if indent <= start_col:
+                            break
+                        end_line = lno + 1
+                    if start_line <= ast_sig.line <= end_line:
+                        continue
                 following = tokens[index + 1] if index + 1 < len(tokens) else None
                 # A type-valued projection is suspicious only when it terminates
                 # a type atom instead of receiving its record value.

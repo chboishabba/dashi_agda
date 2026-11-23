@@ -54,26 +54,25 @@ concatMapLength f (x ∷ xs) =
 pairBlockLength :
   ∀ {A : Set} {B : A → Set}
     (x : A) (values : List (B x)) →
-  Reindex.listLength (Dep.pairBlock x values)
+  Reindex.listLength (Dep.pairBlock {B = B} x values)
   ≡ Reindex.listLength values
-pairBlockLength x values = mapLength (λ value → x , value) values
+pairBlockLength {A} {B} x values =
+  mapLength {A = B x} {B = Σ A B} (λ value → _,_ {B = B} x value) values
 
 dependentPairsLength :
   ∀ {A : Set} {B : A → Set}
     (xs : List A) (fibres : (x : A) → List (B x)) →
-  Reindex.listLength (Dep.dependentPairs xs fibres)
+  Reindex.listLength (Dep.dependentPairs {B = B} xs fibres)
   ≡ Reindex.foldNat (λ x → Reindex.listLength (fibres x)) xs
 dependentPairsLength [] fibres = refl
-dependentPairsLength (x ∷ xs) fibres =
+dependentPairsLength {A} {B} (x ∷ xs) fibres =
   trans
-    (appendLength
-      (Dep.pairBlock x (fibres x))
-      (Dep.dependentPairs xs fibres))
-    (trans
-      (cong₂ _+_
-        (pairBlockLength x (fibres x))
-        (dependentPairsLength xs fibres))
-      refl)
+    (appendLength {A = Σ A B}
+      (Dep.pairBlock {B = B} x (fibres x))
+      (Dep.dependentPairs {B = B} xs fibres))
+    (cong₂ _+_
+      (pairBlockLength {B = B} x (fibres x))
+      (dependentPairsLength {B = B} xs fibres))
   where
   cong₂ : ∀ {A B C : Set} (f : A → B → C)
     {a a' : A} {b b' : B} →

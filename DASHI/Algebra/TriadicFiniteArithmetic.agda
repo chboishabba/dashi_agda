@@ -94,6 +94,15 @@ negateResidue :
 negateResidue [] = []
 negateResidue (x ∷ xs) = involution x ∷ negateResidue xs
 
+negateResidueInvolutive :
+  ∀ {n : Nat} →
+  (x : Q.Residue3Pow n) →
+  negateResidue (negateResidue x) ≡ x
+negateResidueInvolutive [] = refl
+negateResidueInvolutive (neg ∷ xs) rewrite negateResidueInvolutive xs = refl
+negateResidueInvolutive (zer ∷ xs) rewrite negateResidueInvolutive xs = refl
+negateResidueInvolutive (pos ∷ xs) rewrite negateResidueInvolutive xs = refl
+
 ------------------------------------------------------------------------
 -- Checked identity and inverse laws.
 

@@ -35,7 +35,7 @@ import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 mapMember :
   ∀ {A B : Set} (f : A → B) {x : A} {xs : List A} →
   x ∈ xs → f x ∈ map f xs
-mapMember f (Any.here equality) = Any.here equality
+mapMember f (Any.here equality) = Any.here (cong f equality)
 mapMember f (Any.there member) = Any.there (mapMember f member)
 
 appendMemberLeft :
@@ -69,7 +69,7 @@ uniqueAppendDisjoint :
   (∀ {x y} → x ∈ xs → y ∈ ys → x ≢ y) →
   Unique (xs ++ ys)
 uniqueAppendDisjoint {xs = []} leftUnique rightUnique cross = rightUnique
-uniqueAppendDisjoint {xs = x ∷ xs}
+uniqueAppendDisjoint {xs = x ∷ xs} {ys = ys}
     (AllPairs._∷_ fresh tailUnique) rightUnique cross =
   AllPairs._∷_ headFresh tailCombined
   where
@@ -109,8 +109,9 @@ pairBlockFirst :
   ∀ {A : Set} {B : A → Set}
     (x : A) {pair : Σ A B} {values : List (B x)} →
   pair ∈ pairBlock x values → proj₁ pair ≡ x
-pairBlockFirst x (Any.here refl) = refl
-pairBlockFirst x (Any.there member) = pairBlockFirst x member
+pairBlockFirst x {values = []} ()
+pairBlockFirst x {values = _ ∷ _} (Any.here refl) = refl
+pairBlockFirst x {values = _ ∷ _} (Any.there member) = pairBlockFirst x member
 
 dependentPairsFirstMember :
   ∀ {A : Set} {B : A → Set}
@@ -129,11 +130,11 @@ pairBlockUnique :
   ∀ {A : Set} {B : A → Set}
     (x : A) {values : List (B x)} →
   Unique values → Unique (pairBlock x values)
-pairBlockUnique x unique =
+pairBlockUnique {A} {B} x unique =
   UniqueP.map⁺ pairInjective unique
   where
   pairInjective :
-    ∀ {left right} → (x , left) ≡ (x , right) → left ≡ right
+    ∀ {left right : B x} → _≡_ {A = Σ A B} (x , left) (x , right) → left ≡ right
   pairInjective refl = refl
 
 dependentPairsUnique :
@@ -143,10 +144,10 @@ dependentPairsUnique :
   ((x : A) → Unique (fibres x)) →
   Unique (dependentPairs xs fibres)
 dependentPairsUnique {xs = []} fibres baseUnique fibreUnique = AllPairs.[]
-dependentPairsUnique {xs = x ∷ xs} fibres
+dependentPairsUnique {A} {B} {xs = x ∷ xs} fibres
     (AllPairs._∷_ fresh tailUnique) fibreUnique =
   uniqueAppendDisjoint
-    (pairBlockUnique x (fibreUnique x))
+    (pairBlockUnique {B = B} x (fibreUnique x))
     (dependentPairsUnique fibres tailUnique fibreUnique)
     cross
   where
@@ -155,7 +156,7 @@ dependentPairsUnique {xs = x ∷ xs} fibres
     left ∈ pairBlock x (fibres x) →
     right ∈ dependentPairs xs fibres →
     left ≢ right
-  cross leftMember rightMember equality =
+  cross {left} {right} leftMember rightMember equality =
     All.lookup fresh
       (dependentPairsFirstMember rightMember)
       firstEqual
@@ -220,9 +221,9 @@ concatMapUniqueRecoverable {xs = x ∷ xs} fibres
     left ≢ right
   cross leftMember rightMember equality
     with Product.concatMapMemberInverse fibres rightMember
-... | source , sourceMember , sourceOutputMember =
-  All.lookup fresh sourceMember
-    (recover leftMember sourceOutputMember equality)
+  ... | source , sourceMember , sourceOutputMember =
+    All.lookup fresh sourceMember
+      (recover leftMember sourceOutputMember equality)
 
 ------------------------------------------------------------------------
 -- This owner is finite/list-theoretic only.

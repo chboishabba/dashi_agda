@@ -200,18 +200,18 @@ eisensteinLimitKleinData :
   CKlein.ConstructedComplexKleinData C D F
 eisensteinLimitKleinData C D F S kernel normalization =
   record
-    { CKlein.Point =
+    { Point =
         CertifiedEisensteinLimitPoint C D F S kernel normalization
-    ; CKlein.tau = tau
-    ; CKlein.g2 =
+    ; tau = tau
+    ; g2 =
         λ point ->
           e4Limit C S kernel (tau point) (e4Cauchy point)
-    ; CKlein.delta =
+    ; delta =
         λ point ->
           limitNormalizedDelta
             C D F S kernel normalization
             (tau point) (e4Cauchy point) (e6Cauchy point)
-    ; CKlein.deltaNonzero = normalizedDeltaNonzero
+    ; deltaNonzero = normalizedDeltaNonzero
     }
 
 eisensteinLimitKlein :

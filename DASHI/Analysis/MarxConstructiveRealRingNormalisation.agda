@@ -6,7 +6,6 @@ open import Relation.Binary.PropositionalEquality
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.FastCauchyReals
-  hiding (zero; one; add; sub; mul; neg; abs; le; lt)
 open import DASHI.Analysis.FastCauchyQuotient
   hiding (zero; one; add; sub; mul; neg; abs; le; lt)
 open import DASHI.Analysis.MarxDifferentialCore
