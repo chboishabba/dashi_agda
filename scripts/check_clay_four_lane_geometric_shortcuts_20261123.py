@@ -101,10 +101,12 @@ def check_pnp():
                 for weights in product((-2, 0, 3), repeat=m):
                     edges = [(u, v, weight) for (u, v), weight in zip(chosen, weights)]
                     addr_width = max(1, (n - 1).bit_length())
-                    history_comparisons = m * (2 * m - 1)
-                    assert history_comparisons == sum(range(2 * m))
+                    history_comparisons = 2 * m * (m - 1)
+                    assert history_comparisons == sum(4 * j for j in range(m))
                     bit_upper = history_comparisons * addr_width
                     assert bit_upper >= history_comparisons
+                    if m <= 1:
+                        assert history_comparisons == 0
                     magnitude_bound = sum(abs(w) for _, _, w in edges)
                     for bits in product((0, 1), repeat=2 * m):
                         extended = pnp_extend(edges, bits, n)
