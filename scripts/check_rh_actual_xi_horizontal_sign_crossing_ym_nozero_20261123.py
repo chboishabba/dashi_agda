@@ -57,3 +57,20 @@ H=2*Dtotal+I
 assert sp.simplify(H+sigma-(4*d+I)-(2*excess+sigma))==0
 print('PASS signed RH terminal gap >= 0 under already-owned H-I=2D, D>=2d, S>=0')
 print('OPEN actual global RH exclusion, and physical original YM CMP119/W3/OS same-H')
+
+# A simple complex xi zero is a local 2D oriented winding, NOT two zeros.
+# Nonzero imaginary-part crossings need not enclose any xi zero.
+for label,t,want in [('zero1',mp.im(mp.zetazero(1)),1),
+                     ('zero2',mp.im(mp.zetazero(2)),1),
+                     ('nonzero20',mp.mpf(20),0)]:
+    c=mp.mpf('.5')+1j*t
+    radius=mp.mpf('.0003')
+    vals=[xi(c+radius*mp.exp(2j*mp.pi*k/128)) for k in range(129)]
+    assert min(abs(v) for v in vals)>mp.mpf('1e-12')
+    winding=sum(mp.arg(vals[k+1]/vals[k]) for k in range(128))/(2*mp.pi)
+    assert abs(winding-want)<mp.mpf('1e-24')
+    jacobian=abs(mp.diff(xi,c))**2
+    assert jacobian>0
+    print('NUMERIC COMPLEX winding',label, 'w=',mp.nstr(winding,7),
+          'Jacobian=',mp.nstr(jacobian,18))
+print('PASS: complex-zero winding distinguishes actual simple zero from imaginary-only crossing')
