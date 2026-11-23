@@ -45,7 +45,7 @@ monsterAtlasClassNames := ClassNames(monster,"ATLAS");
 r := (1,2,3,4);
 s := (2,4);
 d4Group := Group([r,s]);
-if Size(d4Group) <> 8 or not IsNonabelian(d4Group) then
+if Size(d4Group) <> 8 or IsAbelian(d4Group) then
   Error("failed to construct the canonical order-eight dihedral group");
 fi;
 d4 := CharacterTable(d4Group);
@@ -168,7 +168,7 @@ for groupName in groupNames do
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
   for info in infos do
     candidate := AtlasGroup(info);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "AtlasRep-info";
@@ -181,7 +181,7 @@ od;
 if G = fail then
   for groupName in groupNames do
     candidate := AtlasGroup(groupName);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "AtlasGroup-direct";
@@ -194,7 +194,7 @@ if G = fail and LoadPackage("browse") = true then
   groupInfos := GroupInfoForCharacterTable(mn3b);
   for groupInfo in groupInfos do
     candidate := GroupForGroupInfo(groupInfo);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "CTblLib-GroupForGroupInfo";
@@ -211,7 +211,7 @@ canonicalIsomorphismFound := false;
 ambientClassFusionUnique := false;
 actualFusionIsPossible := false;
 
-if G <> fail then
+if G <> fail and IsPermGroup(G) then
   P := SylowSubgroup(G,2);
   pElements := Elements(P);
   order4Elements := Filtered(pElements, x -> Order(x) = 4);
@@ -223,7 +223,7 @@ if G <> fail then
       Order(x) = 2 and not x in C4 and rr^x = rr^-1);
     if Length(candidatesS) > 0 then
       H := Group([rr,candidatesS[1]]);
-      if Size(H) = 8 and IsNonabelian(H) then
+      if Size(H) = 8 and not IsAbelian(H) then
         actualD4 := H;
         d4SubgroupFound := true;
         break;
@@ -334,6 +334,11 @@ AppendTo(output,"  \"character_compatible_fusions\": ");
 PrintCompatibleRows(output,compatible);
 AppendTo(output,",\n");
 AppendTo(output,"  \"atlas_group_realized\": ",JsonBool(atlasGroupRealized),",\n");
+if G = fail then
+  AppendTo(output,"  \"stage\": \"atlas-group-realization-residual\",\n");
+else
+  AppendTo(output,"  \"stage\": \"permutation-subgroup-realization\",\n");
+fi;
 if selectedConstructionSource = fail then
   AppendTo(output,"  \"group_construction_source\": null,\n");
 else
