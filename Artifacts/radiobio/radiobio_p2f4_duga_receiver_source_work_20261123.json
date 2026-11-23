@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_LOCAL_EQUIVALENT_CORE_SYMPY",
+  "original_source": {
+    "contemporary": "Monitoring Times August 1985 Woodpecker report",
+    "soviet_original": "A. Babakin February 1991 translated in JPRS-UMA-91-012",
+    "original_receiver_waveform_replayed": false
+  },
+  "mathematical_donor": "scripts/radiobio_p2_duga_original_four_windows_sympy.py",
+  "committed_script": "scripts/radiobio_p2_duga_receiver_work_sympy.py",
+  "model": {
+    "repetition_period_ms": 100,
+    "slots": 4,
+    "slot_ms": 7,
+    "illustrative_pulse_ms": 4,
+    "slot_occupancy_fraction": "7/25",
+    "rf_duty_fraction": "4/25",
+    "total_rf_off_fraction": "21/25",
+    "last_slot_trailing_silence_ms": 72,
+    "frequencies_khz": [
+      16450,
+      16490,
+      16570,
+      16390
+    ],
+    "isotropic_aperture_sum_m2_illustrative": 105.40499338429144,
+    "receiver_power_formula": "sum_i(pulse_i/frame * flux_density_i * c^2 G_i/(4*pi*f_i^2) * polarization_i * matching_i)",
+    "source_flux_density_measured": false,
+    "antenna_geometry_measured": false,
+    "physical_receiver_watts_known": false
+  },
+  "guards": [
+    "symbolic aperture expression",
+    "exact duty vs slot occupancy",
+    "LF local demodulation is not LF transmitted field",
+    "receiver voltage does not identify incident power without gain",
+    "passive detector load energy drawn from intercepted HF or explicit other source"
+  ],
+  "test": {
+    "sympy": "1.14.0",
+    "source_equivalent_core_pass": true,
+    "committed_exact_blob_executed": false,
+    "github_ci_used": false,
+    "agda_kernel_tested": false
+  },
+  "missing": "original calibrated RF time series, phase/polarization/gain, physical transmitter and receiver meters, ionosphere propagation, any biological exposure"
+}

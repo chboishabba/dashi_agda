@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-22",
+  "scope": "SOURCE_MAPPED_SYNTHETIC_HARNESS_NOT_EEG_REPLICATION",
+  "original_paper": {
+    "authors": "Connie X. Wang et al. (including Jacob N. H. Abrahams)",
+    "doi": "10.1523/ENEURO.0483-18.2019",
+    "pubmed": "31028046",
+    "dataset_DOIs": [
+      "10.22002/D1.930",
+      "10.22002/D1.931"
+    ]
+  },
+  "research_attribution": "Original EEG and methods: Wang et al.; analysis architecture: independent DASHI user-directed audit",
+  "source_acquisition": {
+    "caltech_repository_pages_visible": true,
+    "original_m_files_downloaded": 0,
+    "original_mat_files_downloaded": 0,
+    "md5_verified_original_files": 0,
+    "blocker": "Caltech signed object redirects inaccessible to tool; local container DNS failure; no verified source mirror"
+  },
+  "new_code": "scripts/radiobio_wang_crossfit.py",
+  "local_execution": {
+    "result": "PASS",
+    "method": "equivalent local prototype synthetic fixture",
+    "pseudo_participants": 6,
+    "conditions": 4,
+    "trials_per_condition": 12,
+    "splits": 4,
+    "checks_passed": 6,
+    "mean_synthetic_training_interaction": -0.04328075789408676,
+    "mean_synthetic_heldout_interaction": -0.04700969944559961,
+    "repo_exact_blob_executed": false,
+    "notes": "run committed blob before asserting exact-head local test"
+  },
+  "gate": "Must acquire original raw Caltech code and data; decode .mat and reproduce original EEGLAB preprocessing prior to declaring empirical replay",
+  "github_ci": false
+}

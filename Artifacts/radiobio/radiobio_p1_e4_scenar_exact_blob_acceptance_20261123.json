@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-23",
+  "source_study": {
+    "doi": "10.3390/jcm10235570",
+    "trial": "NCT03755817",
+    "original_data_doi": "10.5061/dryad.63xsj3v2s"
+  },
+  "code": {
+    "path": "scripts/radiobio_p1_scenar_original_replay.py",
+    "git_blob_sha": "a2a5da4ba73d2497e0dd549214be377f32b6eab7",
+    "exact_live_git_blob_recreated_and_executed": true,
+    "python_compile": "PASS",
+    "self_test": "PASS",
+    "synthetic_tests": 6,
+    "checks": [
+      "synthetic 60-person balanced 30/30 case",
+      "zero synthetic mean-change contrast",
+      "original XLSX remains unverified",
+      "duplicate participant IDs rejected",
+      "incorrect CSV SHA256 rejected",
+      "missing active or sham arm rejected even with allow-incomplete"
+    ],
+    "negative_extra_check": "Before fix one-arm allow-incomplete raised StatisticsError; after fix raises explicit ValueError",
+    "no_github_ci": true
+  },
+  "acquisition": {
+    "original_workbook_bytes": 0,
+    "original_workbook_sha256": null,
+    "source_web_status": "unavailable or 403",
+    "source_container_status": "DNS resolution failure",
+    "original_patient_level_trial_replay": false,
+    "published_p_at_rest": 0.22,
+    "original_mixed_model_reproduced": false
+  },
+  "confidence_boundary": "Exact code and synthetic admission tests validated; not original patient data or efficacy estimates."
+}

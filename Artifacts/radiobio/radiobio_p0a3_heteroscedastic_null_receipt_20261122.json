@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-22",
+  "source": {
+    "authors": "Connie X. Wang et al.",
+    "title": "Transduction of the Geomagnetic Field as Evidenced from Alpha-Band Activity in the Human Brain",
+    "doi": "10.1523/ENEURO.0483-18.2019",
+    "dataset_ids": [
+      "10.22002/D1.930",
+      "10.22002/D1.931"
+    ]
+  },
+  "scope": "Independent exact algebra and synthetic Gaussian null. NO original EEG recovered, analyzed or reproduced",
+  "script": "scripts/radiobio_heteroscedastic_window_sympy.py",
+  "symbolic": {
+    "formula": "-(v_AS-v_AF-v_SS+v_SF)/sqrt(pi*(v_AS+v_AF+v_SS+v_SF))",
+    "assumptions": "two independent candidate windows; independent centered Gaussian errors across four condition cells; positive potentially unequal variances",
+    "result": "PASS"
+  },
+  "simulation": {
+    "seed": 20261122,
+    "reps_per_case": 5000,
+    "subjects_per_rep": 29,
+    "candidate_windows": 2,
+    "cases": {
+      "balanced": {
+        "v": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "expected_bias": 0,
+        "measured_bias": 0.00232,
+        "heldout_bias": 0.00122,
+        "selected_false_positive": 0.0536,
+        "heldout_false_positive": 0.0536
+      },
+      "active_sweep_higher_variance": {
+        "v": [
+          4,
+          1,
+          1,
+          1
+        ],
+        "expected_bias": -0.63973,
+        "measured_bias": -0.65288,
+        "heldout_bias": -0.00774,
+        "selected_false_positive": 0.2596,
+        "heldout_false_positive": 0.0564
+      },
+      "active_fixed_higher_variance": {
+        "v": [
+          1,
+          4,
+          1,
+          1
+        ],
+        "expected_bias": 0.63973,
+        "measured_bias": 0.63871,
+        "heldout_bias": -0.00057,
+        "selected_false_positive": 0.2506,
+        "heldout_false_positive": 0.0464
+      },
+      "heterogeneous_variances_cancel": {
+        "v": [
+          4,
+          2,
+          4,
+          2
+        ],
+        "expected_bias": 0,
+        "measured_bias": -0.00217,
+        "heldout_bias": -0.01272,
+        "selected_false_positive": 0.0522,
+        "heldout_false_positive": 0.048
+      }
+    }
+  },
+  "validation": "Locally executed SymPy/NumPy/SciPy script; no GitHub CI",
+  "open": "Original Caltech signed storage inaccessible; original trial-level variance and alpha interactions unknown"
+}

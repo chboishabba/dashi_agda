@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-23",
+  "tier": "SCANNED_ORIGINAL_SOVIET_PERIOD_TRANSLATION_PLUS_CONTEMPORARY_RECEIVER_TEXT_AND_SYNTHETIC_EXACT_SIGNAL_MODEL",
+  "soviet_publication": {
+    "original_author": "Aleksandr Babakin",
+    "original_russian_publication": "Kommunist Vooruzhennykh Sil No.3 February 1991",
+    "translated_by": "US Joint Publications Research Service",
+    "report_id": "JPRS-UMA-91-012",
+    "translation_date": "1991-05-03",
+    "report_printed_pages": "45-48",
+    "doi": null,
+    "source_url": "https://coldwar.tech/media/pages/archive/documents/jprs-oth-radar-1991/1090cd240b-1783705138/jprs-uma-91-012.pdf",
+    "pdf_zero_index_pages_visually_inspected": [
+      47,
+      48,
+      49
+    ],
+    "DTIC": "ADA333791",
+    "original_russian_issue_inspected": false,
+    "primary_reported_claims": [
+      "F Kuzminskiy early-warning radar design",
+      "spring 1971 state design review",
+      "first radar construction 1975",
+      "two Soviet sites",
+      "6000-10000 km planned detection range",
+      "polar ionospheric attenuation and single-launch performance deficit"
+    ],
+    "source_claims_are_not_independent_acceptance_test": true
+  },
+  "receiver_reports": [
+    {
+      "journal": "Practical Wireless",
+      "date": "1983-09",
+      "url": "https://www.worldradiohistory.com/UK/Practical-Wireless/80s/PW%201983%2009.pdf",
+      "content_mode": "parsed_text",
+      "screenshot_status": "403"
+    },
+    {
+      "journal": "Monitoring Times",
+      "date": "1985-08",
+      "url": "https://www.worldradiohistory.com/Archive-Monitoring-TImes/1980s/Monitoring-Times-1985-08.pdf",
+      "content_mode": "parsed_text",
+      "screenshot_status": "403",
+      "rates_hz": [
+        10,
+        16,
+        20
+      ],
+      "four_windows_ms": 7,
+      "frame_ms": 100,
+      "quiet_ms": 72,
+      "pulse_width_reported_ms": [
+        3,
+        6
+      ],
+      "static_frequency_khz": [
+        16450,
+        16490,
+        16570,
+        16390
+      ],
+      "dynamic_example_frequency_khz": [
+        8070,
+        8230,
+        8310,
+        8260
+      ]
+    }
+  ],
+  "execution": {
+    "script": "scripts/radiobio_p2_duga_original_four_windows_sympy.py",
+    "git_blob_sha": "0c283df543351f8d844872b069266af40676ba88",
+    "exact_local_file_matches_git_blob": true,
+    "local_sympy_exact_checks": "PASS",
+    "python_compile": "PASS",
+    "pulse_width_ms_illustrative": 4,
+    "one_carrier_envelope_duty": "1/25",
+    "four_channel_envelope_duty": "4/25",
+    "gate_fourier_first_sideband_amplitude_squared": "sin(pi/25)**2/pi**2",
+    "frequency_assignment_return_s": 24,
+    "original_RF_samples_used": false,
+    "physiological_stimulation_inferred": false,
+    "github_ci_run": false,
+    "agda_kernel_run": false
+  },
+  "remaining": [
+    "Original Soviet technical performance and waveform data",
+    "Actual IF or RF recordings with calibrated instruments",
+    "Ionospheric propagation field and loss measurements",
+    "Original health/biology receptor evidence absent"
+  ],
+  "scenar_external_dependency": "https://doi.org/10.5061/dryad.63xsj3v2s; paused original XLSX inaccessible"
+}

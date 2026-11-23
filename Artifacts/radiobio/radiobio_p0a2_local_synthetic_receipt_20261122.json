@@ -1,0 +1,65 @@
+{
+  "title": "Wang 2019 alpha window-selection synthetic-null and original Caltech acquisition gate",
+  "date": "2026-11-22",
+  "source": {
+    "title": "Transduction of the Geomagnetic Field as Evidenced from Alpha-band Activity in the Human Brain",
+    "authors": "Wang et al.",
+    "doi": "10.1523/ENEURO.0483-18.2019",
+    "datasets": [
+      "10.22002/D1.930",
+      "10.22002/D1.931"
+    ]
+  },
+  "provenance": {
+    "research_direction": "user-directed",
+    "implementation": "DASHI independent exact/simulation source audit",
+    "original_experiment_credit": "Connie X. Wang and original coauthors",
+    "script": "scripts/radiobio_wang_window_bias_sympy.py",
+    "is_original_EEG_replay": false,
+    "is_hardware_experiment": false,
+    "has_original_MATLAB_bytes": false
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "github_ci_used": false
+  },
+  "math": {
+    "gaussian_two_window_expected_selected_min_unit_sigma": "-1/sqrt(pi)",
+    "iid_null_only": true
+  },
+  "local_execution": {
+    "status": "PASS",
+    "seed": 20261122,
+    "replications": 4000,
+    "participants_per_simulation": 29,
+    "conditions": 4,
+    "candidate_windows": 40,
+    "mean_selected_training": -1.07949,
+    "mean_selected_independent_holdout": 0.00033,
+    "mean_interaction_training": -0.00927,
+    "mean_interaction_holdout": -0.00894,
+    "interaction_type1_rate_training_0_05": 0.0558,
+    "interaction_type1_rate_holdout_0_05": 0.0478
+  },
+  "acquisition": {
+    "status": "BLOCKED_NO_ORIGINAL_BYTES",
+    "attempted_original_scripts": [
+      "analyzeDecDn.m",
+      "analyzeDecTest.m",
+      "analyzeIncTest.m"
+    ],
+    "failed": 3,
+    "verified_original_source_files": 0,
+    "reason": "Caltech source URLs redirect to short-lived S3 object links not fetchable by available web retriever; local shell lacks DNS/network access",
+    "tool": "scripts/radiobio_caltech_acquire.py",
+    "published_md5_not_locally_verified": true
+  },
+  "conclusions": [
+    "Selected minimum exhibits negative mean under balanced synthetic noise; heldout mean is near zero",
+    "Balanced four-condition matched interaction remains approximately centered with near nominal type I rate in tested iid null; not an empirical exoneration or invalidation",
+    "Full original-data replication requires actually downloaded validated original scripts and .mat bytes plus exact subject-level analysis"
+  ]
+}
