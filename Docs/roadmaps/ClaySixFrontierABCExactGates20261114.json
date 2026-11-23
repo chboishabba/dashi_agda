@@ -5537,6 +5537,126 @@
       "executed_git_blob": "8efba6064c86c86fb29c5f4cbaac4a5598dfc313",
       "B2_status": "OPEN_AND_BLOCKED_ON_ORIGINAL_UNRESTRICTED_SIGNED_PAYMENT",
       "caution": "A negative resolution of one invalid universal auxiliary estimate does not produce a positive B proof or close NS."
+    },
+    "ns_r568_actual_galerkin_20261123": {
+      "report_key": "ns_r568_actual_galerkin_20261123",
+      "stage": "NONTERMINAL_NEGATIVE_CONTROL",
+      "status": "ORIGINAL_SOURCE_FINITE_ALGEBRAIC_EXTENSION_ONLY",
+      "valid_gate_impact": "No new gate, no changed completed_gate_count, active_gate_count or six endpoint status",
+      "original_periodic_B_analytic": "R568 upper and R653 strict-margin lower OPEN",
+      "acceptance": "all 64 exact states re-run as four 16-state checkpoints; 2 genuine opposite-sign witnesses",
+      "proof_model": "Q(sqrt2,sqrt3,i) exact finite physical source; Agda rational field transport unproved",
+      "script_blob": "9b6ea0db5c9698623c92df5bee94b6b087abe721"
     }
+  },
+  "ns_r568_actual_galerkin_20261123": {
+    "as_of": "2026-11-23",
+    "scope": "Nonterminal original physical Fourier negative control on periodic-B R568 unweighted-vs-rate-lift pointwise sign; not a new six-endpoint gate and NOT a full R568/NS solution",
+    "original_source_owners": [
+      "NSTriadKNPhysicalTriadEnumeration.agda",
+      "NSTriadKNPhysicalOutputFiber.agda",
+      "NSTriadKNExactSignedGalerkinCoefficient.agda",
+      "NSTriadKNComplex3GalerkinEquationAudit.agda",
+      "NSTriadKNPeriodicHelicalFourierInfrastructure.agda",
+      "NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact.agda",
+      "NSTriadKNDoubleMixedPhysicalDampedTangentRound388Exact.agda",
+      "NSTriadKNFactoredFullTransposeSymmetryRound566Exact.agda",
+      "NSTriadKNR567CauchyGramFluxNormalFormRound596Exact.agda",
+      "NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact.agda"
+    ],
+    "true_galerkin_state_assumptions": "cutoff C=1; k=(1,0,0); all original ordered p+q=k, N=18; u conjugate-real and divergence-free; complete projected -iP_k sum; true +/- curl eigenspaces in Q(sqrt2,sqrt3,i); D and M built from the same u and N(u), not free proxies",
+    "reproduced_exact_blocks": [
+      {
+        "start_seed": 0,
+        "end_seed": 15,
+        "passed": 16,
+        "strict_opposite_signs": 0
+      },
+      {
+        "start_seed": 16,
+        "end_seed": 31,
+        "passed": 16,
+        "strict_opposite_signs": 0
+      },
+      {
+        "start_seed": 32,
+        "end_seed": 47,
+        "passed": 16,
+        "strict_opposite_signs": 0
+      },
+      {
+        "start_seed": 48,
+        "end_seed": 63,
+        "passed": 16,
+        "strict_opposite_signs": 2
+      }
+    ],
+    "reproduced_total": 64,
+    "strict_sign_reverse_seeds": [
+      61,
+      63
+    ],
+    "seed61": {
+      "F_sign": "positive",
+      "L_sign": "negative",
+      "F_decimal_approx": "12.393550441",
+      "L_decimal_approx": "-64.470874428"
+    },
+    "seed63": {
+      "F_sign": "negative",
+      "L_sign": "positive",
+      "F_decimal_approx": "-4.686082065",
+      "L_decimal_approx": "251.309121576"
+    },
+    "exact_helicity_field": "Q(sqrt(2),sqrt(3),i)",
+    "original_agda_owner_scalar_field": "Q (Rational.rationalRealField)",
+    "field_transport_installed": false,
+    "native_agda_kernel_checked": false,
+    "physical_R240_time_trajectory_inhabited": false,
+    "new_pointwise_sign_transfer_unrestricted": "REFUTED_ON_FINITE_TRUE_PROJECTED_GALERKIN_STATES",
+    "time_integrated_R568_C1_upper": "OPEN",
+    "time_integrated_R653_C2_lower": "OPEN",
+    "current_existing_producers_to_reuse": [
+      "R596 full Gram + weighted flux tangent",
+      "R560 literal mixed tangent live identity",
+      "R565 scalar FTC conditional",
+      "R652/R653 C1/C2 sandwich",
+      "R681 physical cross-gradient",
+      "R682 actual live same-object cross-gradient",
+      "R683 signed convolution vector",
+      "R571-to-R568 conditional M2 compiler"
+    ],
+    "independent_new_time_zero_energy_normalization": {
+      "Qraw": "sum_ab 1/(r_a+r_b) Re<M_a,M_b>",
+      "Qsource": "2*Qraw = the R596 coherent-work weighted Gram",
+      "Qraw_derivative": "2*F - Re<sum_a M_a,sum_a M_a>",
+      "Qsource_derivative": "4*F - 2*Re<sum_a M_a,sum_a M_a>",
+      "source_conditions": "fixed cutoff, positive nu=1, R388 derivative Mdot=D-r*M, formal coefficient identity; live scalar FTC and R240 source transport open",
+      "checked": "exact source-generated algebraic Fractions for 3 witness seeds; source script extended and byte-identical hash tested",
+      "seed61": {
+        "Qraw_positive": true,
+        "Qraw_approx": "113.549331294163",
+        "Qraw_derivative_approx": "-725.464561557643"
+      },
+      "seed63": {
+        "Qraw_positive": true,
+        "Qraw_approx": "69.022181372629",
+        "Qraw_derivative_approx": "-554.916309290484"
+      }
+    },
+    "artifacts": {
+      "source_script": "scripts/check_ns_r568_physical_source_weld_exact_20261123.py",
+      "source_script_blob": "9b6ea0db5c9698623c92df5bee94b6b087abe721",
+      "explicit_positive_modes": "Docs/physics/NSR568OriginalPhysicalAlgebraicWitnessModes20261123.csv",
+      "proof_ledger": "Docs/roadmaps/NSR568OriginalGalerkinHelicityRateSignCountercontrol20261123.md"
+    },
+    "canonical_gate_mapping": {
+      "NS_periodic_original_B": "B1 refuted unrestricted signed R820/R823 auxiliary, B2 true replacement W1/continuum OPEN",
+      "NS_selected_R853": "portfolio C1/C2 mathematically closed under classical Python/SymPy protocol; native R408/R853 Agda transport still OPEN",
+      "original_R568_R653_local_C1_C2": "different local two-sided signed inequality, both analytic sides OPEN; do not equate to portfolio C1/C2",
+      "original_Clay_ABCD": "A and B unforced distinct; C/D externally released proof integration, no assertion DASHI Agda proof",
+      "original_six_Millennium_endpoints": "0/6"
+    },
+    "coordinator_validation": "do not alter existing 135-symbol source audit or historical active/closed gate counts; existing 11 active and 4 completed including P0/B1(refuted)/C1/C2(classical) preserved"
   }
 }
