@@ -8,6 +8,7 @@ import DASHI.Cognition.Teleodynamics.ScopedVerifierConcreteInstancesExact as Con
 import DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact as Artifact
 import DASHI.Cognition.Teleodynamics.GAISArchitectureComparisonExact as GAIS
 import DASHI.Cognition.Teleodynamics.ScopedVerifierEvaluationProtocolExact as Eval
+import DASHI.Cognition.Teleodynamics.ScopedVerifierConsumerSufficiencyExact as Consumer
 
 universalOracleStaysFalse : Verify.ScopedVerifierArchitectureBoundary.universalFalsehoodDetectorClaimed Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
 universalOracleStaysFalse = refl
@@ -24,5 +25,29 @@ concreteProvenancePaid = refl
 gaisStillNeedsEmpirics : GAIS.GAISComparisonBoundary.empiricalHeadToHeadStillRequired GAIS.canonicalGAISComparisonBoundary ≡ true
 gaisStillNeedsEmpirics = refl
 
+gaisUsesEligibleStratum :
+  GAIS.GAISComparisonBoundary.admissibleConsumerEligibilitySurfacePresent
+    GAIS.canonicalGAISComparisonBoundary ≡ true
+gaisUsesEligibleStratum = refl
+
 architectureDoesNotImplyWin : Eval.EvaluationBoundary.architectureImpliesEmpiricalWin Eval.canonicalEvaluationBoundary ≡ false
 architectureDoesNotImplyWin = refl
+
+consumerMismatchRejected : Eval.EvaluationBoundary.consumerMismatchAccepted Eval.canonicalEvaluationBoundary ≡ false
+consumerMismatchRejected = refl
+
+validatorScopeMismatchRejected : Eval.EvaluationBoundary.validatorScopeMismatchAccepted Eval.canonicalEvaluationBoundary ≡ false
+validatorScopeMismatchRejected = refl
+
+eligibilityRequiredBeforeComparison :
+  Eval.EvaluationBoundary.eligibleStratumRequiredBeforeComparison
+    Eval.canonicalEvaluationBoundary ≡ true
+eligibilityRequiredBeforeComparison = refl
+
+consumerInadequateBaselineRejected :
+  Eval.EvaluationBoundary.consumerInadequateModelAcceptedForComparison
+    Eval.canonicalEvaluationBoundary ≡ false
+consumerInadequateBaselineRejected = refl
+
+validatorPassDoesNotPayAllConsumers : Consumer.ConsumerSufficiencyBoundary.validatorPassImpliesAllConsumerSufficiency Consumer.canonicalConsumerSufficiencyBoundary ≡ false
+validatorPassDoesNotPayAllConsumers = refl

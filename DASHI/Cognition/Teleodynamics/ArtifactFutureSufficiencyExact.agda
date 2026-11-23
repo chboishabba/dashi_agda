@@ -7,10 +7,6 @@ import DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact as Artifact
 cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
 cong f refl = refl
 
--- A concrete artifact class is future-sufficient only relative to declared
--- consumers.  Exact reconstruction from retained body+residual is sufficient
--- for equality of every declared consumer observation.
-
 record ArtifactFutureModel (Body Residual : Set) : Set₁ where
   constructor artifact-future-model
   field
@@ -39,6 +35,3 @@ futureObservationPreserved :
   observe M q (Artifact.body state)
 futureObservationPreserved {M = M} suff q =
   cong (observe M q) (reconstructExact suff)
-
--- The theorem is scoped: consumers outside Consumer M are not covered, and
--- validator success alone cannot synthesize reconstructExact.
