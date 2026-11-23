@@ -196,3 +196,67 @@ selected `H_zeta`/`W_zeta` representation action. Retain
 12+78 selected character, central phase zeta vs zeta^2 and
 actual Monster Hom gates separately. Do not promote source-
 relative 4D class recognition into a basis-level group action.
+
+
+## 23 November 2026 — user-local source replay and tightened cross-source filter
+
+Follow-up report from the user's own local `/home/c/Documents/code/dashi_agda`
+working tree: fetched PR #1250 up through `ea91ece6`; executed original
+`monster3b_atlas_original_symplectic_basis_weld.py` with rank(J)=12,
+one-dimensional common same-source intertwiner, both ATLAS D4 words,
+similitude and cocycle; reproduced its 12x12 matrix receipt; executed
+all **15/15** source-fusion contract regression tests; then regenerated
+original GAP CTblLib fusion JSON and executed the source-word to
+2.Suz.2 class 5 to Monster 4D driver. Its local printed result was
+`PASS: SOURCE-RELATIVE ATLAS D4 WORD -> 2.Suz.2 CLASS 5 -> MONSTER 4D`.
+Five original Monster focus test suites together gave **39/39 PASS**
+(1.34s). These are **USER-REPORTED LOCAL EXECUTION receipts**,
+not GitHub CI or independent execution by the current agent. The user
+also edited the GAP script locally before its successful replay;
+the modified local GAP bytes and generated JSON are NOT thereby
+assumed pushed or identical to the old PR #1250 Git blob.
+Do not claim that the current GitHub head's GAP script independently
+passed without ingesting its corrected bytes and source receipt.
+
+New original-relator strengthening on PR #1545:
+`scripts/monster3b_atlas_mmgroup_cross_source_intertwiner_gate.py`
+now checks the literal ATLAS source C,D semipresentation:
+C²=-I, D³=I and D nontrivial, (CD)^28=-I, (CD)^56=I,
+and exact order 7 for the source word
+`cdcdcddcdd` where lower-case c,d mean inverse matrices.
+The same *ordered inverse-letter* constraints are imposed on
+a proposed Monster quotient generator pair. The bounded
+word search filters by this original word before expensive
+linear nullspace calculations. Its regression suite now includes
+positive and negative original-relator tests (12 source-written
+unittest methods). Independently reimplemented local GF3
+source-matrix replay of original ATLAS literal m1/m2 bytes
+confirmed all four key relations, including relator^7=I
+and relator != I. This local proof is a necessary source
+semipresentation filter, NOT sufficient to certify the
+MonsterSubgroups generator-word map, quotient faithfulness,
+full group isomorphism or Monster H_zeta/W_zeta action.
+The new head's full Python suite and actual mmgroup work
+remain unexecuted from pushed exact bytes in this runtime.
+
+The existing master Agda compiler still wrongly types both
+generator actions as strict pairing-preserving; the
+ATLAS source outer generator C has multiplier -1.
+Correct next proof interface requires
+`omega(gx,gy)=lambda_g omega(x,y)`,
+`z -> lambda_g z` and the symmetric cocycle defect and
+quadratic correction, including negative- vs positive-phase
+transport. Preserve original generator labels, residuals,
+sign and zero modes. Avoid merging all historical #1250
+branch changes wholesale into master.
+
+P0 exact Monster-source gate remains: execute the original
+`monster_3b_mmgroup_source_symplectic_basis.py` producer on
+an mmgroup-equipped runtime, extract actual g3b,h3b
+12D E/Z(E) matrices and original centre, find source-identified
+ATLAS C,D generator words (bounded search only offers candidates),
+replay literal MM group identities and original normalizer
+quotient relations, then solve the *same* invertible 12x12
+T over F3, transport J and cocycle, and attach the selected
+zeta/zeta² phases. Neither Out=1, Monster class 4D nor a
+one-dimensional ATLAS self-intertwiner pays this gate.
