@@ -880,3 +880,26 @@ Preserve COMP6-8 and CM gates: minimal canonical form can be more costly
 than sufficient noncanonical carrier; test this separately for Monster/VOA
 orbit/action and FRACDASH reconstruction, do not infer equivalences.
 No CI initiated or Agda kernel receipt.
+
+
+## 23 November — P0 fast-π master-native consolidation
+
+P0 remains fastest independently certified π, although the external SOTA
+comparison has been deferred for execution. Original GMP source blobs
+from diverged historical PR #1529 are restored **byte-identically**
+on a clean master-based branch, with source-hash-checking compiler and
+certified decimal regression harness. A *separately built equivalent*
+local C++ implementation completed exact conditional decimal-floor
+certificates for 5 million and 10 million decimal places. At 10M,
+the observed elapsed time was 11.88 seconds for the in-place
+one-division path, with 265,988 KiB peak RSS and matching
+SHA-256 `ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999`.
+This is a single local execution, **not** a new external SOTA or a
+source-byte-identical GitHub executable replay. Mode differences at 1M
+vary substantially across runs; no universal one-floor or in-place
+performance winner is promoted. Complete receipts, compile commands,
+source identities, stop conditions, and next Pareto gates are maintained
+in `Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
+Analytic Chudnovsky premise and same-original-Bishop real identification
+remain separate. Preserve source structure, signs, and all future-consumer
+obligations; no dependency on unrelated Monster work.
