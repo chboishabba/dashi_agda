@@ -28,11 +28,13 @@ Proof: distribute `-(r_i-r_j)((w_i-c_A)-(w_j-c_B))` and sum; the correction is `
 
 The existing correct sparse witness uses **2m endpoint label bits**, not `n` full-vertex bits on a sparse graph with gamma-coded `n`. Repeated vertex occurrences must agree. A consistent endpoint-word extends to a full assignment, with the same original signed cut score; the existing source already owns this finite BIDI.
 
-If the verifier checks all earlier occurrences for each of `2m` observations, the exact number of address comparisons is
+The ORIGINAL source `Karp21FinFreeRawSparseWordVerifierExact.rawSparseScore` is **edge-batched**: at edge `j`, each new endpoint checks the `2j` older observations, and the two sibling endpoints are not checked against one another in this history loop. The existing source owner `Karp21FinFreePairwiseQuadraticCountExact.maxAddressComparisonsClosed` proves the full-scan upper bound
 
 ```
-C(m) = sum_{j=0}^{2m-1} j = m(2m-1).
+C(m) = sum_{j=0}^{m-1} 4j = 2m(m-1).
 ```
+
+It is exact for the worst-case full traversal, and early rejection / short-circuit comparisons can cost less. The earlier count `m(2m-1)` was incorrect for this constructor: it counted `m` nonexistent within-edge comparisons. In particular `C(1)=0`. Reuse the existing owner; do not duplicate an arithmetic theorem.
 
 Let `ell = max(1,ceil(log2(n)))` for `n>=1`. Fixed-width equality of two valid endpoint addresses costs at most `ell` bit inspections, so the **address-equality subroutine alone** has the conservative upper budget `C(m)*ell`. If the real canonical input word `L` separately proves `m<=L` and `ell<=L`, this sub-budget is at most `2L³`. The actual machine's parser, list traversal, tape-head motion, score arithmetic, signed weight width, heap, and rejection path **are not paid by this calculation**. It is not a source-accepted `PR.polynomialTimeVerifier`.
 
