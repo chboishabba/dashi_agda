@@ -124,8 +124,8 @@ def self_test():
         except ValueError as e:
             assert "SHA256" in str(e)
         one_arm=Path(tmp)/"one_arm.csv"
-        one_arm.write_text("participant_id,arm,rest_before,rest_after,rest_24h\\n"
-                           "synthetic1,on,8,5,8\\n")
+        one_arm.write_text("participant_id,arm,rest_before,rest_after,rest_24h\n"
+                           "synthetic1,on,8,5,8\n")
         try:
             summarize(one_arm,require_complete=False)
             raise AssertionError("empty sham arm bypassed")
