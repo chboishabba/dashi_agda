@@ -87,7 +87,7 @@ For k=0 this tends to zero as delta→0 despite fixed nonzero prime evaluation; 
 
 ## 7. Local test evidence and exact scope
 
-Executed locally, not GitHub CI: `scripts/check_rh_p0_prime_aperture_geometry_20261123.py` (SymPy, NumPy, 96-point Gaussian quadrature). Git blob SHA **d6ab3728389a9961651157c9c154add0e7c8b32d** was verified identical to the locally py-compiled and executed version. The code checks exact symbolic source projective/moment/pole invariances, tenth-order first perturbation, affine derivative scale, exact atomic corridor fractions/determinant; then both endpoint test geometries at t=200, 1000, 80000, 1000000. Each of 8 numerical **8×22** smooth-fixture constraint matrices has full rank, condition number approximately 858–1519, max residual **1.735×10^-18**, and two disjoint prime-point evaluation ports (1,0)/(0,1). It also tests basic prime-phase sign reversibility and actual **ATOMIC-limit projected** port coefficients. The bump `exp(-1/(1-x²))` is only a numerical C∞ fixture; native Mathlib-selected smooth R(t), μ(t) and original Lean test were NOT numerically reconstructed. **Exact mathematical existence proof is above; matrix residuals are not exact kernel proof receipts.**
+Executed locally, not GitHub CI: `scripts/check_rh_p0_prime_aperture_geometry_20261123.py` (SymPy, NumPy, 96-point Gaussian quadrature). Git blob SHA **c2dff1d56db20aa4a9d9f51e46dcb80b13937255** was verified identical to the locally py-compiled and executed version. The code checks exact symbolic source projective/moment/pole invariances, tenth-order first perturbation, affine derivative scale, exact atomic corridor fractions/determinant; then both endpoint test geometries at t=200, 1000, 80000, 1000000. Each of 8 numerical **8×22** smooth-fixture constraint matrices has full rank, condition number approximately 858–1519, max residual **1.735×10^-18**, and two disjoint prime-point evaluation ports (1,0)/(0,1). It also tests basic prime-phase sign reversibility and actual **ATOMIC-limit projected** port coefficients. The bump `exp(-1/(1-x²))` is only a numerical C∞ fixture; native Mathlib-selected smooth R(t), μ(t) and original Lean test were NOT numerically reconstructed. **Exact mathematical existence proof is above; matrix residuals are not exact kernel proof receipts.**
 
 ## 8. Reverse-solved P0 and exact next original-source welds
 
@@ -98,3 +98,15 @@ Executed locally, not GitHub CI: `scripts/check_rh_p0_prime_aperture_geometry_20
 The old RH P0 target `H_W-I_W+S_W<4d_W(target)` CANNOT simply be claimed for the extended W'. Its original identity exactly forces a nonnegative gap under a hypothetical target; the extended test introduces a new prime term and needs a wholly recertified original-source compiler. Keep the original R2-S0/R2-S1 lane open in parallel, but do not reapply original short-support theorem to the new aperture.
 
 **Attribution:** original Lean selected four-window signed source/pole and projective moment theorem owners; classical smooth point-evaluation/finite integral functional duality; standard Weil explicit formula; locally derived eight-constraint two-prime construction, inverse/source tradeoff and numerical acceptance. **RH/GRH OPEN**; no false proof admission or new Lean/Agda kernel receipt.
+
+
+## 9. Independent positivity route cannot be a re-label of this signed witness
+
+The same original selected W has `M0=0`, `M2=0`, `M4=-4*T_W<0`. Its REAL-axis Fourier cosine response therefore satisfies
+
+    K_W(0,q) = -(T_W/6)*q^4 + O(q^6) < 0
+    for all sufficiently small q != 0.
+
+By contrast an even Hermitian autocorrelation `Q=f*tilde(f)` has `hat Q(q)=|hat f(q)|^2≥0` on every real q. Therefore no source-original signed profile with `T_W>0` can itself be such a Gram-positive autocorrelation, and preserving M4 in the eight-invariant prime-aperture extension **preserves this incompatibility**. This is an elementary exact sign obstruction, not a new RH theorem or a refutation of Weil's positivity criterion.
+
+If pursuing a known Weil quadratic-positivity construction, introduce an **independent** companion arithmetic test, prove its own source identity and quantitative sign without assuming RH, and supply a genuine linear/cross-pair comparison with the signed W. Do not call the negative-quartic W "positive definite" or import a globally positive Weil functional by an RH-equivalent premise. The executed SymPy script now checks this quartic/Gram sign separation and has readback blob **c2dff1d56db20aa4a9d9f51e46dcb80b13937255**.
