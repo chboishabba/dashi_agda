@@ -148,3 +148,92 @@ The local GAP study further finds `2.Suz.2` class 5 (ATLAS `4a`) has order 4 and
 **Proof-authority correction:** A trivial `Out(2.Suz.2)`, even if established for the exact target group, says automorphisms are inner; it does **not** itself specify a canonical isomorphism between two presentations or identify their chosen generators. Likewise a claim that an alternating-form 12D irreducible is unique cannot be used as a concrete intertwiner without proving (i) the correct original extraspecial `E/Z(E)` action is isomorphic to that ATLAS representation, (ii) the exact central `-I` and outer similitude normalization match, and (iii) a matrix `T` exists and has been checked on each original generator against the selected diagonal quotient. The user's local BW 2005 `BCCCBB` and actual `r` lie in distinct outer parity classes, another warning against identifying words by 12D characteristic polynomials alone.
 
 **Abstract existence, source class recognition, and concrete action remain distinct:** Given a specific isomorphism `N_M(3B)/E ≅ 2.Suz.2`, Schur–Zassenhaus supplies a complement to `E` in the preimage of `<r,m> ≅ D8`; complements are conjugate by E, hence selected class images do not depend on complement choice. That does not supply Monster words or the explicit Heisenberg/VOA intertwiner. The next big P0 gate should request a source-certified quotient isomorphism and checked generator conjugations, then calculate the selected `E/Z(E)` action matrices and solve `T A_i = B_i T` over `F3` for a *single* invertible `T`; certify `T^T J_{actual} T` up to scalar, central inversion on `z`, the selected 12/78 and `Hom_E(Hζ,Wζ)` owner, and the `ζ` vs `ζ²` phase.
+
+
+## 23 November — exact ATLAS 12D symplectic basis weld and true independent Monster target frontier
+
+**Reuse, do not rebuild:** original ATLAS/AtlasRep MeatAxe generator files in
+`data/atlas/2Suzd2G1-f3r12aB0.m1/.m2`, the SHA-256 manifest
+`monster3b_atlas_actual_d4_word_witness.py` and source `J` alternating
+form, #1098 source Heisenberg machinery, #1250 source class-five
+fusion, and original published Barraclough-Wilson and CTblLib maps.
+Class 5 `4a` (order 4, centralizer 322560, square central -I,
+Suzuki 2B image) -> actual Monster `4D` remains the stronger
+source *class-recognition* result. This is not a basis-level
+same-object identification.
+
+NEW exact local GF(3) calculation on the *original* ATLAS 12x12
+C,D generator bytes, SHA-256 matched original m1 and m2:
+`scripts/monster3b_atlas_original_symplectic_basis_weld.py`
+(commits 15fd6b18, fbe09faa, 90104dc1; last source contains
+rectangular-rank padding correction and explicit D4 word checks),
+and the independently executed local source
+`/mnt/data/monster_basis_gate.py`. Source-reported rank(J)=12,
+and uniquely constrained alternating line in original source.
+Constructive characteristic-three symplectic Gram-Schmidt
+produces an explicit invertible T (12x12) such that
+    T^t J_source T = J_std;
+    C_source T = T C_std;
+    D_source T = T D_std.
+The exact T is stored in
+`Docs/receipts/monster3b_atlas_original_symplectic_basis_local_20261123.json`
+commit 22719b39 and can be recomputed from source.
+The F3 linear simultaneous-intertwiner equation space for
+the two *same-source* charts has nullity **one**; the given T is
+invertible, and the only other nonzero scalars over F3 are T
+and -T. Swapping C,D or replacing the target pair by identity
+gives nullity 0, exact negative controls.
+
+The same T transports the original actual ATLAS D4 mirror
+m=(CDCDCDCDCDCdCd)^5 and
+r=m(gmg^-1) for g=CdCdCDCd. Original source checks
+m^2=I, r^2=-I12, mrm=r^-1. Exact local replay
+checked the D4 relations and their conjugations in both
+coordinate charts; J multiplier of m is -1, r is +1.
+For canonical Heisenberg c(x,y) with alternating part J_std,
+the corrected cocycle defect
+D_g = g^t C_c g - lambda_g C_c is symmetric for both
+generator transports, and q_g(x)=2*x^t D_g x has the
+correct mod3 polarization. Distinguish C_c (cocycle matrix)
+from C_source (ATLAS generator). This is an explicit
+same-source coordinate/basis certificate, with the
+original time/source index, centre and sign retained.
+
+**Critical OPEN gate:** the source-original Monster normalizer
+producer actually EXISTS in
+`scripts/monster_3b_mmgroup_source_symplectic_basis.py`:
+it imports Melissa Lee et al. MonsterSubgroups actual g3b,h3b,
+x3b,y3b,gs,hs element words; verifies commutator symplectic
+form over the literal extraspecial E, conjugation of its 12
+basis elements and original MMV(7) phase transport.
+Its original source provenance is
+https://github.com/melissa-maths/MonsterSubgroups/blob/main/subgroups.py
+(blob c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2).
+This producer gives a *second actual original Monster E/Z(E)*
+representation when mmgroup is installed and run. **It does NOT
+supply the specific generator-word correspondence C_ATLAS,D_ATLAS
+to the g3b,h3b Monster quotient**. These are not assumed equal.
+Here the local Python environment lacks mmgroup; no actual
+MM-group word output was freshly executed. Until the quotient
+word correspondence is source-certified, a T from two
+same-source ATLAS coordinate presentations cannot be promoted
+as an ATLAS-to-actual-Monster intertwiner. Do not infer it from
+trivial Out, class5, a 12D character match, D4 trace agreement,
+an abstract complement or J-standardization.
+
+Next true P0: run/reuse the existing mmgroup source adapter on an
+environment with mmgroup, extract the TWO Monster-side matrices
+corresponding to explicit (source-identified!) ATLAS C and D
+quotient words, verify group relations, full 144-variable F3
+linear solve T A_i = B_i T and rank T=12, and check
+T^t J_B T=lambda J_A with consistent phase and Heisenberg
+central cocycle. Then and only then attach selected ζ vs
+ζ² and `Hom_E(H_ζ,W_ζ)` via original #1098 owners.
+No new Monster class, full Monster Hom or VOA action claimed.
+
+Previous 15 synthetic regression cases and the modified GAP
+producer remain SOURCE-WRITTEN, not freshly rerun in this
+packet. The new source was committed and GitHub-read-back
+verified but was not executed byte-for-byte after commit;
+the independent local computation and receipt are separated.
+No GAP, mmgroup, Lean, Agda or GitHub CI acceptance claimed.
