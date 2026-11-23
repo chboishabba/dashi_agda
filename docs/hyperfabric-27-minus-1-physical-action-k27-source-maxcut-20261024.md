@@ -1,5 +1,16 @@
 # 27 − 1: same-action adversarial cut (hypervoxel / Albert / 26D string)
 
+## 23 November 2026 — Original typed 3-state relational-grammar and RH angular-four phase sourced bridge (RH #1533)
+
+Original Lacan/Frege `code1→code0,code1→code2` and Irigaray `code1↔code2` have **distinct directed grammar and role interpretation**, already no-six-relabel proof. Their UNDIRECTED skeletons are separately P3 (after one source-aware rechart, central code1) and K2⊔K1 (Irigaray isolated neither-code0), NOT the physical periodic C3. Native arithmetic balanced SSP path `-1—0—+1` is yet another interpretation; periodized C3 adds an endpoint chord. Exact sampled wave at π: native P3 & C3 coincide as `2J/3-I`, but K2⊔K1 is identity. Role-scope, direction/contact/zero and full original sign residual not lost.
+
+On ORIGINAL RH selected high-pole four-window atomic source, the surviving h=π/2 angular step is a **C4/signed 4-periodic Fourier** object, not a quotient of native spatial C3. The native finite C3×original Phase4 product recovers 12 integer source phases by CRT, two commuting source-selected rational 12×12 operators (`RH p(Z³)` and native `Uπ(Z⁴)`), and RH rank9/kernel3 with time ± split1+2. The original full analytic RH q is REAL and requires its own circle phase plus winding; original actual smooth positive-radius `K_R` already defeats even phase-C4-only sufficiency (q0/q4 same phase, response0 vs >R²/6). Source finite-radius Fourier zeros split on scale sqrt(R), `q±≈4±(6/π)m2^(1/4)√R`, high-pole test only, NOT ζ zeros. See [full original RH source proof](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHFourWindowC3C4AngularConsumerRealQuarticGeometry20261123.md).
+
+This is a concrete manifestation of the ORIGINAL `SectionedProjectionProvenanceBridgeExact`, `ConsumerDescentMinimalObserverExact` and binary/balanced-ternary signed-lost-data programme: source carrier/address identity is NOT enough to preserve a downstream operator. Retain all original 13-axis orientation, physical k/time, H05 source and actual q/winding/bump, no new C3/C4/13 ternary owner; no native graph/RH physical isometry or RH/GRH proof.
+
+---
+
+
 ## 23 Nov 2026 — REAL T9 same-operator P3/C3 stroboscopic duality and residual-aware YM/NS/RH consumers
 
 The SOURCE original `Base369Ternary27HypervoxelFabricGeometryExact` has T9=(P3)^9, 19683 points; original periodic `Base369PeriodicTernaryTorusPathRestrictionBidiExact` has SAME T9 POINTS but different C3^9 edges. Existing exact P3³ quantum-walk U(pi) from `scripts/check_hyperfabric_path27_quantum_walk.py` **equals** C3³ U(pi) as a rational time operator, even though graphs/Laplacians differ. Tensor all nine original coordinates: `U_P3^9(pi)=U_C3^9(pi)=(2J/3-I)^tensor9`, periodic character multiplier `(-1)^support(q)`; original signed 512 spatial corners ↔ 512 periodic full-support characters share actual T9 carrier and k-indexed dual transport `G^k/G^-kT` for ALL 26 Singer stages with original sign/zero residual recovery. Fixed Singer G fails original graph/walk equivariance (walk commutator rank20), chart-induced U_k commutes, physical graph deformation not asserted.
