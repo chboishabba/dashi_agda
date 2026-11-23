@@ -61,6 +61,8 @@ def parse_rows(path, require_complete=True):
             vals.append(v)
         result.append((pid,arm,*vals))
     byarm={arm:[r for r in result if r[1]==arm] for arm in ARMS}
+    if any(len(byarm[a])==0 for a in ARMS):
+        raise ValueError("both active and sham arms must contain participants")
     if require_complete and (len(result)!=60 or any(len(byarm[a])!=30 for a in ARMS)):
         raise ValueError("not the reported complete 60-person / 30-per-arm trial; explicitly review missingness")
     return result,byarm
@@ -121,7 +123,15 @@ def self_test():
             raise AssertionError("checksum guard bypassed")
         except ValueError as e:
             assert "SHA256" in str(e)
-    return {"status":"PASS","synthetic_tests":5,"source_XLSX_loaded":False,
+        one_arm=Path(tmp)/"one_arm.csv"
+        one_arm.write_text("participant_id,arm,rest_before,rest_after,rest_24h\\n"
+                           "synthetic1,on,8,5,8\\n")
+        try:
+            summarize(one_arm,require_complete=False)
+            raise AssertionError("empty sham arm bypassed")
+        except ValueError as e:
+            assert "both active and sham" in str(e)
+    return {"status":"PASS","synthetic_tests":6,"source_XLSX_loaded":False,
             "original_patient_data_reproduced":False}
 
 
