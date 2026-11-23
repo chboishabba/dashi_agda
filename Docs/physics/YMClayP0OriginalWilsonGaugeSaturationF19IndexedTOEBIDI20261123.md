@@ -47,6 +47,21 @@ Delete just the two marked z-axis coarse W links from the native 64-link, 16-sit
 
 This distinction is crucial: **the original four per-W conditional covariances are values in the chosen source gauge slice, not values at each gauge-transformed W without further pushforward.** The global normalized source moments remain invariant. A physical CMP119/122 constrained T must specify the gauge-fixed or gauge-covariant coarse field and its Haar/FP/Jacobian map, not identify fixed representative W with its full coarse orbit.
 
+
+
+### Positive coarse-orbit BIDI: conditional source jet survives AFTER real gauge pushforward
+
+The preceding prohibition is against assigning fixed-W values to relabelled W **without construction**. This construction is now paid for the finite Z2 centre-gauge saturation. Independently row-reducing the actual original 16-site/64-directed-bond coarse gauge incidence map over F2 gives rank **15**, and each of the four selected two-bit W representatives is in a separate coset of its image. The explicit 62-frozen-coarse-bond connectivity is the matching constructive proof, not a numerical rank assumption.
+
+For each original representative coarse W0, every W' in its 2^15-member original coarse-site gauge orbit has exactly 2^240 fine-site gauge lifts per original 10-link cylinder assignment (kernel of fine effective Z2^255 -> coarse effective Z2^15). Since there are 2^8 original assignments per W0, each W' has 2^248 saturated fine configurations. For **each** source column alpha in {1,F,G,FG}, Wilson action and closed Wilson marks are invariant along the original gauge orbit, so the precise *unnormalized* transport is
+
+```
+K_alpha^sat(W') = 2^240 * K_alpha^slice(W0)   (raw finite counting).
+K_alpha^sat(W')/2^248 = K_alpha^slice(W0)/2^8.
+```
+
+Therefore the conditional normalized F/G means, FG moment, covariance `K0*KFG-KF*KG` divided by `K0^2`, and the full finite two-mark mixed-log jet are exactly constant along each **properly transported coarse W gauge orbit**. The original four representative conditional covariances are valid **after** this proved gauge-orbit pushforward; they must not be read at an arbitrary W outside the four saturated orbits, nor as CMP119 physical T data. This is the geometric-forward positive statement required to complement the negative gauge-closure control. The new GF2 rank/coset and 2^240 counting assertions pass in the source checker. Neither the full 2^1024 Z2 Gibbs law nor full SU(N) Haar/local RG is inferred.
+
 ## Verified source tests
 
 - [Original real Wilson action, direct vs staged finite four-mark F19](../../scripts/check_ym_p0_original_wilson_marked_ordered_t_20261123.py): local exact rational PASS on actual full 1536-plaquette action, restricted centre subgroup, four original W representatives.
