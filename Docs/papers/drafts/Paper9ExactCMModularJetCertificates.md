@@ -1533,7 +1533,7 @@ conversion + SHA256; excludes startup/compilation):
 
 Positive within-sample time effects ~4.95%,3.48%,1.27%;
 these do not establish a production SOTA optimization.
-**NO RSS IMPROVEMENT**: in-place has ~48,228,160 KiB higher
+**NO RSS IMPROVEMENT**: in-place has respectively +48, +228, and +160 KiB higher
 peak RSS in these samples (about +0.8%,+1.5%,+0.6%).
 The source uses fewer large expression-temporary outputs,
 but GMP allocation reuse, heap high-water mark, recursive
