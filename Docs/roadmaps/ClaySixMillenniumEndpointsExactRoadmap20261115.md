@@ -1,4 +1,10 @@
 
+## 23 November 2026 — actual projected NS helical sign barrier, no PDE promotion
+
+[New original finite Galerkin Fourier physical sign countercontrol](NSR568OriginalGalerkinHelicityRateSignCountercontrol20261123.md): 64/64 exact source-consistent C=1 u/G(u)/helicity/R225/R388/R566/R687 checks, two rigorous rational-algebraic witnesses of F>0>L and F<0<L on SAME constrained Galerkin states. The earlier freely supplied rational D/M countercontrol is superseded for physical same-state sign-transfer analysis; universal **pointwise** sign transfer is invalid even after imposing original finite dynamics at a phase-space point. The original native F=Q Agda field cannot exactly represent sqrt2/sqrt3 modes, so a lawful algebraic extension and proof transport are still missing. This has NO bearing on the possibility of a genuinely compensated time-integrated C1/C2 inequality. R568 cutoff-independent signed upper and R653 strict-margin lower remain OPEN, as do scalar FTC and universal 3D PDE proof. No Agda/Lean/CI acceptance. Five other Millennium lanes unchanged. 0/6 closed.
+
+
+
 ## 23 November 2026 — precise NS source-geometry correction and C1/C2 open
 
 [NS physical midpoint/rate-Cauchy exact radical and follow-up theorem obligations](NSRateResolvedCauchyRadicalOriginalSource20261123.md), with locally independently executed standard Python Fraction proof controls: **37/37 actual output-cutoff fibres, 26,934** incidence/midpoint/parity checks; exact 1D rate-generating polynomial, at most 3C²+1 rates, and exact positive Cauchy rank R with N−R radical. Prior 44/44 arithmetic fibres admitted seven forbidden k-outside-C outputs: do not treat them as original R568 source acceptance. Original Agda source R541/R567/R568/R596/R624/R628/R634/R652/R653/R687–R689 is already merged; preserve all owners. Full Galerkin D/M source attachment, genuine signed C1 upper and C2 lower, R565 scalar FTC and continuum regularity remain OPEN; no Agda/Lean/CI and no new Clay proof. All remaining BSD, Hodge, Karp, RH and YM gates remain unchanged.
