@@ -8,7 +8,7 @@ Two *genuine finite physical phase-space inputs* with divergence-free conjugate-
 
 Crucial: They are **one-time finite Galerkin states** in the exact real algebraic helicity scalar field E = Q(sqrt(2),sqrt(3)), with complexification E[i], rather than inhabitants of the currently hardwired **F=Q** in the R566/R567/R687 Agda owners. The source formula matches those owners coefficient for coefficient, but the certified field-extension/naturality bridge has **not** been installed in the native owner. No spacetime C1 or C2 sign/bound is being refuted. A local polynomial Galerkin ODE starting at each admissible initial state exists by standard finite-dimensional smooth ODE theory, and its strict signs persist on some sufficiently short time interval by continuity; **no explicit validated time interval or live R240 native proof is claimed**.
 
-**Executable, byte-matched local run:** [scripts/check_ns_r568_physical_source_weld_exact_20261123.py](../../scripts/check_ns_r568_physical_source_weld_exact_20261123.py), Git blob efad812d7699118ccb0396eb0165d4e6ba323fa8, SHA256 7d8a658bc3c05d0c73aaf061be16eb5b0bcad4306fb48f01bc9a8445c9166ff7 belongs to the pre-helicity-extra-check version and is **not** the current digest; use the Git blob as current exact-byte authority.
+**Executable, byte-matched local run:** [scripts/check_ns_r568_physical_source_weld_exact_20261123.py](../../scripts/check_ns_r568_physical_source_weld_exact_20261123.py), Git blob efad812d7699118ccb0396eb0165d4e6ba323fa8, SHA256 **953fea1800e4cd8f5e2366a11debf7c9103930c8549461a70da181e657027e70** is the current executed byte-identical verifier, including the helical eigenspace acceptance checks.
 
 ## 1. Source normalization — no proxy D/M independent of the velocity
 
