@@ -27,6 +27,12 @@ dupx=(x*x+1)**2/(4*x*(x*x-1))
 dupy=((3*x*x-1)/(2*y))*(x-dupx)-y
 assert s.factor(comp[0]-dupx)==0
 clear_curve_relation(comp[1]-dupy,y,x**3-x)
+# Exact reverse composition on the original partner Eprime, not just finite rows.
+compdual=(s.cancel(f.subs(x,H[0])),s.cancel(g.subs({x:H[0],y:H[1]})))
+dualdupX=(3*X**2+4)**2/(4*(X**3+4*X))-2*X
+dualdupY=((3*X**2+4)/(2*Y))*(X-dualdupX)-Y
+assert s.factor(compdual[0]-dualdupX)==0
+clear_curve_relation(compdual[1]-dualdupY,Y,X**3+4*X)
 # The dual genuinely has degree 2 and is defined on E' (including its O).
 # phi: E -> E' with ker={O,(0,0)}.  phihat: E' -> E with ker={O,(0,0)}.
 # On E 2-torsion x=+-1: phi(P)=(0,0), then phihat=(O).
