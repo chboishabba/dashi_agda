@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exact original NS R568 p+q=k rate geometry / Cauchy radical regression.
 
-Reuses original PhysicalTriadIncidence p,q,k geometry and input decay mass.
+Reuses original PhysicalTriadIncidence p,q,k geometry, INCLUDING k itself bounded by C, and input decay mass.
 All D/M here are independently assigned rational three-vector PROXIES:
 not the original Galerkin nonlinear force. This is finite algebra only.
 """
@@ -74,7 +74,7 @@ def run():
     for C in range(1,7):
         for k in [(1,0,0),(1,1,0),(2,0,0),(2,1,1),
                   (3,0,0),(3,2,1),(5,0,0),(0,0,2)]:
-            if max(abs(x) for x in k)>2*C:continue
+            if max(abs(x) for x in k)>C:continue
             items=fibre(C,k);same=midpoint_fibre(C,k);N=len(items)
             assert len(same)==N and set(same)==set(items)
             poly=rate_polynomial(C,k)
@@ -134,9 +134,9 @@ def run():
                       'Cauchy-rank=',len(R),'radical-dim=',N-len(R),
                       'parity-ceiling=',(hi-lo)//2+1)
             tested+=1;incidences+=N
-    assert tested==44
-    assert incidences==27452
-    assert direct_checks==14 and rank_checks==9
+    assert tested==37
+    assert incidences==26934
+    assert direct_checks==8 and rank_checks==4
     print('PASS',tested,'full real-source lattice fibres,',incidences,'incidence checks')
     print('PASS 1D polynomial multiplicities, exact midpoint BIDI, swap-odd null')
     print('PASS both-currency exact projector,',rank_checks,'strict Cauchy determinant cases')
