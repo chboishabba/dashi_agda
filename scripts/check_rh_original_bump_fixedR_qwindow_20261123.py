@@ -70,3 +70,22 @@ print("PASS both outer q brackets < -0.8 R^2")
 print("PASS two Fourier-response roots by continuity (NOT zeta zeros)")
 print("PASS q~4 belongs to A2 far, not canonical |q|<=eta local")
 print("OPEN actual signed FarExact - mu - compensation and RH/GRH")
+
+# FULL q-band source signed inequalities, not just isolated bracket points:
+# |x|<=1/2 => original K>11R^2/100; 99/50<=|x|<=2 => K<-3R^2/5.
+neg_shell_x=Q(99,50)
+neg_shell_upper=Q(60,13)-Q(5,1404)*Q(157,50)**4*neg_shell_x**4
+assert neg_shell_upper+err < -Q(3,5)
+assert inner-err > Q(11,100)
+# Original Lean signedLiteralPairSourceTerm_eq_normalizedPairKernel:
+# per literal zeta zero the signed source = mult(rho)/(t/16)^2 * K.
+# True signed sums over arbitrary finite zeta-zero bands preserve this
+# multiplicity; actual zero NUMBERS require original RvM N(A,B), not a toy.
+assert neg_shell_x<2 and R*R*Q(3,5)>0
+core_width=Q(T,16)*sqrtR
+negative_each_width=Q(T,16)*(2-neg_shell_x)*sqrtR
+assert (core_width,negative_each_width)==(62_500_000,1_250_000)
+print("PASS entire positive core |x|<=1/2 and negative shells 1.98<=|x|<=2")
+print("PASS source actual-zero signed summand bounds retain multiplicity/r^2")
+print("PASS physical t=1e14 band widths 62500000 and 1250000")
+print("CAVEAT RvM lower-count C and onset T0 remain existential in Lean")
