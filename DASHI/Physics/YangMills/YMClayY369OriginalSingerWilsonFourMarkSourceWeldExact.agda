@@ -23,7 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; _-ℝ_)
 import Data.Vec.Base as Vec
 
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -348,3 +348,82 @@ module _
   -- dependent Wilson Boltzmann weight. Our chart k is not a Balaban
   -- RG step, and none of this constructs CMP119 source domains,
   -- absolute UV-uniform CMP116 W3, or a continuum OS mass gap.
+
+  ----------------------------------------------------------------------
+  -- ROUND 1 / 2: ACTUAL WILSON DENSITY, NONCONSTANT SOURCE-TIME
+  -- SECOND DIFFERENCES AND K-INDEXED GRAPH CHART.
+  --
+  -- The source trajectory is a complete 1024 SU(N)-link original field
+  -- at EACH time.  t is a clock label and k is a separate Singer stage.
+  -- No assumption that the trajectory obeys nonlinear Yang--Mills.
+  -- This square consumes the actual source Wilson density/reconstruction
+  -- and preserves finite time second differences for ANY trajectory.
+  -- It does not create a physical continuum OS semigroup.
+  ----------------------------------------------------------------------
+
+  originalWilsonDensityTimeAt :
+    (Nat → OriginalVector) → Nat → ℝ
+  originalWilsonDensityTimeAt trajectory t =
+    actualOriginalWilsonWeight (trajectory t)
+
+  originalIndexedWilsonDensityTimeAt :
+    Nat → (Nat → OriginalVector) → Nat → ℝ
+  originalIndexedWilsonDensityTimeAt k trajectory t =
+    originalIndexedWilsonWeight t k (trajectory t)
+
+  -- Definition retains three real original time slices, not one
+  -- stationary zero mode and not physical step k masquerading as time.
+  originalWilsonTimeSecondDifference :
+    (Nat → OriginalVector) → Nat → ℝ
+  originalWilsonTimeSecondDifference trajectory t =
+    (originalWilsonDensityTimeAt trajectory (suc (suc t))
+      -ℝ originalWilsonDensityTimeAt trajectory (suc t))
+    -ℝ
+    (originalWilsonDensityTimeAt trajectory (suc t)
+      -ℝ originalWilsonDensityTimeAt trajectory t)
+
+  originalIndexedWilsonTimeSecondDifference :
+    Nat → (Nat → OriginalVector) → Nat → ℝ
+  originalIndexedWilsonTimeSecondDifference k trajectory t =
+    (originalIndexedWilsonDensityTimeAt
+       k trajectory (suc (suc t))
+      -ℝ originalIndexedWilsonDensityTimeAt k trajectory (suc t))
+    -ℝ
+    (originalIndexedWilsonDensityTimeAt k trajectory (suc t)
+      -ℝ originalIndexedWilsonDensityTimeAt k trajectory t)
+
+  originalIndexedWilsonTimeSecondIsOriginal :
+    ∀ k trajectory t →
+    originalIndexedWilsonTimeSecondDifference k trajectory t
+      ≡ originalWilsonTimeSecondDifference trajectory t
+  originalIndexedWilsonTimeSecondIsOriginal k trajectory t =
+    cong₂ _-ℝ_
+      (cong₂ _-ℝ_
+        (originalWilsonActionDensityIndexedEqualsOriginal
+          (suc (suc t)) k (trajectory (suc (suc t))))
+        (originalWilsonActionDensityIndexedEqualsOriginal
+          (suc t) k (trajectory (suc t))))
+      (cong₂ _-ℝ_
+        (originalWilsonActionDensityIndexedEqualsOriginal
+          (suc t) k (trajectory (suc t)))
+        (originalWilsonActionDensityIndexedEqualsOriginal
+          t k (trajectory t)))
+
+  originalPhysicalTimeSecondDifferenceCommutesWithSingerStage :
+    ∀ k trajectory t →
+    originalIndexedWilsonTimeSecondDifference
+      (suc k) trajectory t
+    ≡ originalIndexedWilsonTimeSecondDifference
+        k trajectory t
+  originalPhysicalTimeSecondDifferenceCommutesWithSingerStage
+    k trajectory t =
+    trans
+      (originalIndexedWilsonTimeSecondIsOriginal
+        (suc k) trajectory t)
+      (sym (originalIndexedWilsonTimeSecondIsOriginal
+        k trajectory t))
+
+  -- Source finite Wilson density vs time/k is an exact consequence of
+  -- recovering the ORIGINAL field. This is NOT a physical assertion
+  -- that the scalar Gibbs density is a solution of a traveling-wave
+  -- PDE or that the free Cartan transverse mode has an OS mass gap.
