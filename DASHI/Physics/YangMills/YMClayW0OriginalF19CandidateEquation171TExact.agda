@@ -177,6 +177,15 @@ module _
       (Original.originalFineWilsonWeight
         theory traceData exponential beta source bilateral linear)
 
+  -- Pointwise the same FIXED unmarked Eq171 candidate mass.
+  -- This is not an identification with the source-localized CMP122 T.
+  sourceK0IsUnmarkedEq171 :
+    (coarse : SlowField) →
+    sourceK0 coarse
+    ≡ Eq171.sourceTOperationMass
+        originalF19UnmarkedEquation171 0 coarse
+  sourceK0IsUnmarkedEq171 coarse = refl
+
   sourceKF : FineTest → SlowField → ℝ
   sourceKF left = sourceFixedWilsonT left
 
