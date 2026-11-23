@@ -102,3 +102,161 @@ Evidence status: the user supplied a local execution report (not the actual JSON
 Reported OOM root: AtlasRep Mmax7G0-f3r78B0 matrix group was sent into unassisted Size/SylowSubgroup; user reports permutation-only guard and IsAbelian predicate correction, stopped runaway processes, fail-closed atlas-group-realization-residual. No zero-risk resource guarantee. Reported rotation-class screen has 17 candidate fusion rows, 9 central half-turn Monster2A, 8 Monster2B, theta=(5,5,1,3,3)=3A1+B1+B2; all 17 compatible, none establishes realized subgroup. Reported 42B power bridge retained separately. Existing IbrahimMonsterN3BAdmissibleOOMConsumerRouteExact.agda at TOE blob f553f5ecba78510ee51801ac36f2794407e70093 explicitly proves declared-model factorization and ordinal route costs, not actual subgroup injection or existence. Live GitHub TOE head before update c54d2914 and donor #1250 c6a86e95; user-local changes not independently inspected or pushed by this documentation commit.
 Exact quotient-first mathematical refinement (standard Schur–Zassenhaus, not DASHI authorship): for E=3^(1+12) normal odd-order kernel and Q=N(3B)/E=2.Suz.2, any 2-subgroup embeds under projection. For an actual order-eight dihedral subgroup of Q, its preimage has a complement isomorphic to that subgroup, conjugate by E. For any cyclic 2-subgroup of Q the same complement existence/conjugacy implies unique lift of each 2-element up to E-conjugacy; conjugacy in Q then lifts to conjugacy in N, so projection is a bijection on conjugacy classes of 2-power-order elements. The stored N->Q quotient class map, with order preservation filter, is therefore the appropriate exact inverse-class consumer. This does not construct explicit group words in N or prove actual linear action. The degree1782 permutation representation of Suz.2 loses the central C2 of 2.Suz.2; cannot automatically lift a D8 found there as D8. Need actual double-cover subgroup relations/extension data (a reflection may lift to order four), then inverse odd-kernel class map and intersection with literal 17 rows. Do not equate generic candidate fusions with realized subgroup classes. Prefer existing quotient producer and stored exact fusions, bounded resources, no ambient matrix Size/Sylow.
 Acceptance sequence: ingest user-local patched producer/renderer/checker revisions and both actual JSON receipts plus generated certificate; run all-conductor export and existing selected character join on matched runtime and class signatures; report exact selected 78 C2/C3 and full Sym²/dual results, not infer them from 78a/b label. For quotient route recover actual 2.Suz.2 extension and D8, verify unique order-preserving inverse class coordinates and intersect the 17 rows. M08 pair-family occurrence user-reported PASS; independent receipt replay and selected full character identity OPEN; M09/M10d and actual M10f.7 OPEN. No new GAP, Agda, CI, or code regression executed in this documentation turn. 
+
+
+## 23 November 2026 — P0 actual-Monster source-word intertwiner weld (master-based)
+
+Reconciled current default `master`: PR #1250 remains **open**, branch
+`research/jfine-3b-character-steelman-20261024` has diverged
+(263 commits ahead and 99,812 behind at inspection, not an instruction
+to force-merge it). Source-word class 5 -> Monster 4D, class centralizer
+322,560 and original ATLAS basis receipt remain on the old PR head
+`ea91ece6`, not all present on master. This work is intentionally
+on a clean master-based branch, NOT on a guessed `main` branch.
+
+**Original producer reuse:** the existing master script
+`scripts/monster_3b_mmgroup_source_symplectic_basis.py` imports the
+published literal MonsterSubgroups MM words (Dietrich, Lee, Pisani,
+Popiel, 2026; source SHA c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2),
+reconstructs the actual extraspecial E/Z(E) basis by checked
+commutators, exports 12-column g3b/h3b matrices in its
+`normalizer_lifts` manifest, and tests MMV(7) sector transport.
+Its actual execution requires the mmgroup Python module, missing
+from this local environment. Do not substitute a synthetic matrix
+or claim that a manifest JSON alone authenticates original MM words.
+
+**New first-class admission consumer**:
+`scripts/monster3b_atlas_mmgroup_cross_source_intertwiner_gate.py`.
+It imports the manifest and an *explicit named generator-word map*
+C_ATLAS,D_ATLAS -> words in the actual g3b,h3b generators. It
+reconstructs the original pinned ATLAS GF3 12x12 matrices and
+checks SHA-256 of both original MeatAxe files; regenerates target
+matrices by multiplying the actual source-image matrices in the
+**supplied order**. Requires source outer multiplier for C = -1
+and source inner multiplier D = +1, and C²=-I, D³=I on both
+representations. It solves all 288 GF3 linear equations
+C_ATLAS T = T C_M and D_ATLAS T = T D_M for 144 entries of T,
+not separately chosen conjugators. For a one-dimensional
+nullspace with an invertible basis, verifies exact simultaneous
+matrix equations and the transported original alternating form
+`T^t J_ATLAS T = scalar J_MM` with nonzero scalar.
+Correct source J_MM from the original mmgroup producer has
+lower-left +I, upper-right -I. Additionally checks strict
+similitude laws and symmetric Heisenberg cocycle defects
+`g^t C_c g - lambda C_c`, and derives their characteristic-three
+quadratic central corrections. Even when all equations PASS,
+the output is explicitly **ALGEBRAIC_CANDIDATE_ONLY**; the
+original quotient-word identification and actual Monster Hom/VOA
+promotion remain unpaid until source group words and quotient
+isomorphism are independently checked.
+
+**Automatic bounded discovery**:
+`scripts/monster3b_atlas_mmgroup_bounded_word_search.py` enumerates
+bounded distinct GF3 normalizer quotient matrices from the original
+g3b/h3b source, retaining exact generator words and signed centre
+multiplier. Filters C²=-I, D³=I, and (CD)^28=-I before solving
+the simultaneous 144-entry intertwiner. Explicit depth, state and
+pair budgets cause a fail-closed error rather than a false
+non-existence theorem. A hit is a plausible original word
+correspondence candidate, NOT a proved isomorphism of the Monster
+group or phase module.
+
+Local exact GF3 independent replay on original ATLAS matrices:
+`C²=-I`, `D³=I`, common self-pair intertwiner nullity **1**,
+swapped C/D nullity **0**, identity/identity target nullity **0**.
+Source alternating form verifies
+`C^t J C=-J`, `D^t J D=J` exactly. The master Agda module
+`DASHI/Moonshine/Monster3BAtlasSymplecticBasisIntertwinerCompilerExact.agda`
+has a strict `preservesPairing` field for
+`RepositorySymplecticAction`; it therefore cannot instantiate the
+actual outer C generator with multiplier -1 without **extending to
+a source-correct similitude action and centre scaling**.
+This is an exact type-level obstruction, NOT a new analytic
+or group-theoretic theorem.
+
+Synthetic bounded search using C,D themselves as deliberately
+non-Monster stand-ins recovers one-letter C and D candidates.
+This tests search plumbing, NOT actual Monster-source fusion.
+Committed source and regression test files have been read back
+from GitHub; the complete committed tests, actual GAP producer,
+mmgroup 3B group words, and Agda compiler have **not** been
+executed from the exact new branch in this runtime.
+Only independent local GF3 calculations above are execution-supported.
+No existing master source overwritten. No Galois, group inner
+automorphism or matched character inference is used as a
+replacement for generator identification.
+
+**Next P0:** obtain original mmgroup manifest using its existing
+producer, run bounded matrix-word search, replay each candidate
+word as literal MM group elements against the published quotient
+semipresentation and original central word, establish the exact
+source isomorphism (not merely same matrix class), then certify
+simultaneous T, form multiplier, cocycle, centre action, and
+selected `H_zeta`/`W_zeta` representation action. Retain
+12+78 selected character, central phase zeta vs zeta^2 and
+actual Monster Hom gates separately. Do not promote source-
+relative 4D class recognition into a basis-level group action.
+
+
+## 23 November 2026 — user-local source replay and tightened cross-source filter
+
+Follow-up report from the user's own local `/home/c/Documents/code/dashi_agda`
+working tree: fetched PR #1250 up through `ea91ece6`; executed original
+`monster3b_atlas_original_symplectic_basis_weld.py` with rank(J)=12,
+one-dimensional common same-source intertwiner, both ATLAS D4 words,
+similitude and cocycle; reproduced its 12x12 matrix receipt; executed
+all **15/15** source-fusion contract regression tests; then regenerated
+original GAP CTblLib fusion JSON and executed the source-word to
+2.Suz.2 class 5 to Monster 4D driver. Its local printed result was
+`PASS: SOURCE-RELATIVE ATLAS D4 WORD -> 2.Suz.2 CLASS 5 -> MONSTER 4D`.
+Five original Monster focus test suites together gave **39/39 PASS**
+(1.34s). These are **USER-REPORTED LOCAL EXECUTION receipts**,
+not GitHub CI or independent execution by the current agent. The user
+also edited the GAP script locally before its successful replay;
+the modified local GAP bytes and generated JSON are NOT thereby
+assumed pushed or identical to the old PR #1250 Git blob.
+Do not claim that the current GitHub head's GAP script independently
+passed without ingesting its corrected bytes and source receipt.
+
+New original-relator strengthening on PR #1545:
+`scripts/monster3b_atlas_mmgroup_cross_source_intertwiner_gate.py`
+now checks the literal ATLAS source C,D semipresentation:
+C²=-I, D³=I and D nontrivial, (CD)^28=-I, (CD)^56=I,
+and exact order 7 for the source word
+`cdcdcddcdd` where lower-case c,d mean inverse matrices.
+The same *ordered inverse-letter* constraints are imposed on
+a proposed Monster quotient generator pair. The bounded
+word search filters by this original word before expensive
+linear nullspace calculations. Its regression suite now includes
+positive and negative original-relator tests (12 source-written
+unittest methods). Independently reimplemented local GF3
+source-matrix replay of original ATLAS literal m1/m2 bytes
+confirmed all four key relations, including relator^7=I
+and relator != I. This local proof is a necessary source
+semipresentation filter, NOT sufficient to certify the
+MonsterSubgroups generator-word map, quotient faithfulness,
+full group isomorphism or Monster H_zeta/W_zeta action.
+The new head's full Python suite and actual mmgroup work
+remain unexecuted from pushed exact bytes in this runtime.
+
+The existing master Agda compiler still wrongly types both
+generator actions as strict pairing-preserving; the
+ATLAS source outer generator C has multiplier -1.
+Correct next proof interface requires
+`omega(gx,gy)=lambda_g omega(x,y)`,
+`z -> lambda_g z` and the symmetric cocycle defect and
+quadratic correction, including negative- vs positive-phase
+transport. Preserve original generator labels, residuals,
+sign and zero modes. Avoid merging all historical #1250
+branch changes wholesale into master.
+
+P0 exact Monster-source gate remains: execute the original
+`monster_3b_mmgroup_source_symplectic_basis.py` producer on
+an mmgroup-equipped runtime, extract actual g3b,h3b
+12D E/Z(E) matrices and original centre, find source-identified
+ATLAS C,D generator words (bounded search only offers candidates),
+replay literal MM group identities and original normalizer
+quotient relations, then solve the *same* invertible 12x12
+T over F3, transport J and cocycle, and attach the selected
+zeta/zeta² phases. Neither Out=1, Monster class 4D nor a
+one-dimensional ATLAS self-intertwiner pays this gate.
