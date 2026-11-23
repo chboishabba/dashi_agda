@@ -33,6 +33,10 @@ def fusion_fixture():
         "schema": "monster3b-atlas-source-Suz2B-to-Monster4-fusion-v1",
         "candidates": [{
             "two_suz_class_position": 5,
+            "two_suz_class_order": 4,
+            "two_suz_centralizer_order": 322560,
+            "two_suz_square_central_position": 2,
+            "two_suz_outer_image_position": 4,
             "six_suz_class_position": 8,
             "main_class_position": 10,
             "mn3b_class_position": 12,
@@ -44,6 +48,8 @@ def fusion_fixture():
         "actual_monster_four_class_uniquely_forced_by_class_fusions": True,
         "all_possible_monster_four_labels": ["4D"],
         "source_suz_2b_position": 3,
+        "source_suz_outer_position": 4,
+        "source_two_suz_central_minus_one_position": 2,
         "literal_source_word_2Suz_class_individually_identified": False,
         "actual_6Suz_degree78_family_selected": False,
         "full_actual_Monster_Hom_constructed": False,
@@ -93,6 +99,22 @@ class SourceWeld(unittest.TestCase):
 
     def test_boolean_class_index(self):
         f=fusion_fixture();f["candidates"][0]["six_suz_class_position"]=True
+        with self.assertRaises(ValueError):check(word_fixture(),f)
+
+    def test_wrong_actual_centralizer(self):
+        f=fusion_fixture();f["candidates"][0]["two_suz_centralizer_order"]=2419200
+        with self.assertRaises(ValueError):check(word_fixture(),f)
+
+    def test_misidentified_square(self):
+        f=fusion_fixture();f["candidates"][0]["two_suz_square_central_position"]=3
+        with self.assertRaises(ValueError):check(word_fixture(),f)
+
+    def test_misidentified_outer_quotient(self):
+        f=fusion_fixture();f["candidates"][0]["two_suz_outer_image_position"]=5
+        with self.assertRaises(ValueError):check(word_fixture(),f)
+
+    def test_missing_actual_class_order(self):
+        f=fusion_fixture();del f["candidates"][0]["two_suz_class_order"]
         with self.assertRaises(ValueError):check(word_fixture(),f)
 
     def test_missing_source_manifest(self):
