@@ -13,11 +13,6 @@ from pathlib import Path
 
 WORD_SCHEMA = "monster3b-atlas-source-rotation-suzuki-2B-by-7-centraliser-v1"
 FUSION_SCHEMA = "monster3b-atlas-source-Suz2B-to-Monster4-fusion-v1"
-EXPECTED_MANIFEST = {
-    "2Suzd2G1-f3r12aB0.m1": "ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2",
-    "2Suzd2G1-f3r12aB0.m2": "433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f",
-}
-
 def require(condition, message):
     if not condition:
         raise ValueError(message)
