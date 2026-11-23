@@ -112,7 +112,7 @@ def f(t0,t1,x,on=True):
     return [di,dj,du,dv,db,dq,dr,dih,dc]
 
 def box_center(c,r):return [I(F(str(v))-r,F(str(v))+r) for v in c]
-ROOT=json.loads(Path('/mnt/data/j23_work/j23_fundamental_results.json').read_text())['corrected_fundamental_root']
+ROOT=json.loads((Path(__file__).resolve().parents[1] / 'Artifacts/smith-filsinger/j23_fundamental_11fold_32corner_branch_continuation_20261123.json').read_text())['central']['numerical_two_event_root']
 
 def run(h=F(1,11)):
     assert h<=F(1,11)
