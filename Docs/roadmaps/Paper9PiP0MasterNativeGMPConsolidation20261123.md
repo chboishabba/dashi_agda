@@ -358,3 +358,108 @@ heap and peak RSS**; simply making P/Q/T merges in-place did not.
 This validates the existing streaming-residency fibre distinction
 and provides a real memory-side Pareto candidate, not a
 formal Agda kernel proof or external SOTA record.
+
+
+## COMP5h — certified lower/upper endpoint lifetime separation (23 November 2026)
+
+**P0 purpose:** apply the pre-existing execution-path sum/peak consumer and
+streaming-residency formalism to the actual highest-memory segment of GMP
+Chudnovsky π certification. Prior COMP5g released the tree P/Q/T after
+constructing both series endpoints. COMP5h now also releases the
+*lower decimal quotient* numerator/denominator and their no-longer-used
+series endpoint **before** allocating the upper comparison witness.
+No reordering of the original leaf product, altered rounding,
+GCD substitution, truncation, or relaxed certificate.
+
+Mathematical consumer: compute lower decimal bound
+\`x = floor(numLow/denLow)\`, then the exact certificate condition
+\`numHigh < (x+1)*denHigh\`, with finite positive denominators and
+\`0 <= L <= U\`. After x is computed, the actual integer
+\`numLow\`, \`denLow\`, and the lower-series endpoint
+\`num2\`, \`den2\` are dead: none appears in the remaining
+comparison. The retained objects are x, upper-series endpoint
+num1/den1, sqrt bound and scaling. Terminal P/Q/T had already
+transferred its T/Q ownership and released P in COMP5g.
+This is a source-exact consumer-liveness consequence, not a new
+Chudnovsky theorem or full algebraic identity proof.
+
+New \`scripts/check_pi_p0_endpoint_scoped.cpp\` derives directly
+from the instrumented COMP5g C++ source. It uses a C++ lexical
+scope to destroy the exact lower \`numerator\` and \`denominator\`
+before forming \`top\`, and scoped GMP swaps to destroy \`num2\`
+and \`den2\`. \`scripts/check_pi_p0_cost_fibre_pareto.py\` now
+pins this exact Git blob alongside three prior modes and
+compiles them separately, with a four-variant empirical
+(time, GMP-managed live peak, Linux VmHWM) Pareto ledger.
+There is **no promotion to production default** until the
+exact committed source is compiled/run on a local branch checkout.
+
+Local source-equivalent C++ files in \`/mnt/data\`:
+\`pi_fibre_endpoint_move_local.cpp\` and
+\`pi_fibre_endpoint_scoped_local.cpp\`, compiled with
+\`g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto\`.
+The *committed GitHub C++ was read back and matches its
+intended source transformation*, but the local benchmark was
+on the independent source-equivalent versions, not the
+byte-identical Git blob. Both use GMP allocator callbacks
+installed before constructing GMP constants. They measure
+actual GMP live allocation, not just P/Q/T capacity projections.
+Linux \`/proc/self/status\` VmHWM independently measures RSS.
+
+| decimal places | old release GMP peak bytes | scoped GMP peak bytes | old release VmHWM KiB | scoped VmHWM KiB |
+|---:|---:|---:|---:|---:|
+| 100,000 | 1,766,088 | 1,411,776 | 5,420 | 5,176 |
+| 1,000,000 | 20,765,464 | 17,111,176 | 25,952 | 21,528 |
+| 5,000,000 | 107,433,544 | 89,695,208 | 119,104 | 97,796 |
+| 10,000,000 | 217,661,176 | 181,920,552 | 238,100 | 195,172 |
+
+Measured one-million-digit GMP peak reduction *relative to
+COMP5g* is 3,654,288 bytes (~17.6%). Relative to the earlier
+retained-PQT baseline's 23,074,600 bytes it is ~25.8%.
+At 10M COMP5h reduces the COMP5g GMP peak by 35,740,624
+bytes (~16.4%), and is ~25.3% under the original retained
+terminal P/Q/T peak of 243,421,624 bytes. MiB and KiB
+denominators should not be silently interchanged with MB.
+
+Rotated-order separate-process full certificates:
+| digits | samples/mode | COMP5g median ms | COMP5h median ms | interpretation |
+|---:|---:|---:|---:|---|
+| 100,000 | 5 | 41.779 | 41.173 | overlapping distributions |
+| 1,000,000 | 5 | 682.202 | 686.934 | overlapping distributions |
+| 5,000,000 | 2 | 4940.345 | 4875.550 | insufficient repetitions |
+| 10,000,000 | 1 | 11292.5 | 11128.1 | single observation |
+
+At 10M both variants reproduce the pinned SHA256
+\`ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999\`.
+At 5M both match
+\`09eb526274ac828a3a54614e72fac5baa8ab6b26b8484fe1b065f678b2c8dbad\`.
+1M and 100k match the previously pinned original hashes.
+These checks support executable *output parity*, not an
+independent mathematical proof of the Chudnovsky analytic
+identity, Agda formalization, or external SOTA.
+
+**Cost-fibre conclusion:** memory lives in a sequence of
+operations, not a collection of representations in isolation.
+The upper witness does not consume the lower-side products,
+so the two sides can occupy disjoint allocation lifetimes
+while retaining the same exact admission test. The lower
+intermediate is a *reopenable but unnecessary observation*
+for the surviving consumer; the quotient x is sufficient.
+Peak measured GMP allocation falls even though the
+underlying P/Q/T multiplication count is unchanged.
+No robust wall-time improvement has been certified, so
+this is a **memory-side Pareto candidate** under matched
+latency controls, not a new fastest-world π record.
+
+Next exact-source acceptance on PR #1546:
+\`\`\`bash
+python3 scripts/check_pi_p0_cost_fibre_pareto.py \
+  --digits 100000 1000000 5000000 10000000 --reps 5 \
+  --out build/pi-p0-cost-fibre-pareto.json
+\`\`\`
+Requires a writable \`build/\` directory or use an absolute
+output path; the script hashes and compiles all four committed
+C++ sources before running. The workload at 10M with
+four modes * five repetitions is substantial. The
+formal Agda cost-weld and independent mathematical
+Bishop same-original-real bridge remain OPEN.
