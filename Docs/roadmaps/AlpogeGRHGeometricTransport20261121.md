@@ -1,3 +1,12 @@
+## 23 November 2026 — GRH universal explicit Gamma correction: χ parity retained, conductor cancels only in variation
+
+The original **Anthropic** `Zeta23/ThmE/GammaFactsChiProof.lean` proves the `mu_{kappa,N}` Stirling coefficient `C_gamma=20/(2*pi)=10/pi` for BOTH parity values κ=0/1 and arbitrary N≥1. It is **independent of conductor**, despite the separate character-specific zero configuration. Hence original bilateral Gamma core improves from abstract `80*C_gamma*M0_core/t³` to **`800*M0_core/(pi*t³)`** at t≥200, |u|≤8. The full `u` integral is not truncated or given a sign.
+
+Exactly `mu_{kappa,N}=mu_{kappa,1}+log N/(2*pi)`: conductor's constant drops out of `Delta² mu`, while the centered density integral changes by `64*log N/(t*R*M0)*OriginDet_W`, using original zeta test `integral Psi_t=128*pi*OriginDet/(t*R*M0)`. This is a **Gamma-only** BIDI/commuting law; no χ-specific selected W, actual χ-zero source, complete prime/Weil normalization or strict global signed estimate has been supplied. Primitive nonprincipal χ has no pole term per upstream `ThmE/Hypotheses.lean`. Conjugate χ sheets, parity, conductor, zero multiplicity, and any zero-mode must be retained.
+
+Local original-source SymPy/digamma controls PASS: `scripts/check_rh_128_gamma_bilateral_20261123.py` (κ=0/1, N=1,5,71,10007), no Lean/Agda/CI. Source provenance: [GammaFactsChiProof](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/GammaFactsChiProof.lean) and [Hypotheses](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/Hypotheses.lean). Next P0: preserve χ-indexed conditional zero source and find independent signed estimate; selected-W tail norms still open.
+
+---
 ## 23 November 2026 — P0 128 = 16 × 2 × 4 normalization and exact bilateral Gamma core
 
 Read live `FourierMass`, `FourthOrderQuotient`, `NMu`, upstream Zeta23 `GammaFacts/Complete` and `GammaFacts/Mu` first. The original constant mode's **128** is not an arbitrary 7-bit carrier: `16` from physical r=t/16, `2*pi` from even Fourier inversion and `4` from the profile's origin projector, giving exactly `128*pi*OriginDet/(t*R*M0)`. Existing DASHI E7/128 OEIS module licenses `128=2^7` but forbids unproved same-carrier/spin interpretation.
