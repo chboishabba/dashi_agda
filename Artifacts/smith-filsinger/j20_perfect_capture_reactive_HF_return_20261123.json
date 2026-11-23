@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_LOCAL_J20_EXACT_J18_SOURCE_AND_REACTIVE_MODEL",
+  "native": {
+    "J12": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+    "J18": "f4270a475f010874056cfe3cdeff5ee8e43c44eb",
+    "J19": "cc5cec2d4f881b38b4c01ef79dd93f36e9ef1439",
+    "J20": "ed09b82287ec1ca0318b4f8e9d355f614d00d894"
+  },
+  "validation": "All exact Git blob hashes locally matched; J20 Python/SymPy exit 0; no CI or Agda",
+  "source": "Original J12/J18 nine-state Filsinger candidate; default backward compatibility preserved",
+  "model": "Optional counter-rotating matched incident quadrature and candidate OFF capacitive return to original HF inductor/capacitor; all nine stored states retained",
+  "cases": [
+    {
+      "id": "matched_finite_HF_losses",
+      "capture": 0.9891226309258643,
+      "HF_delivery": 0.9873294464208779,
+      "load": 0.23730237940723217,
+      "events": 8,
+      "closure": 7.188724490125864e-7,
+      "field_heat": 88.34508036718587
+    },
+    {
+      "id": "perfect_HF_subcircuit_ideal",
+      "capture": 0.9891235309255313,
+      "HF_delivery": 1,
+      "load": 0.24206163071946718,
+      "events": 8,
+      "closure": 6.850118289269957e-7,
+      "field_heat": 88.34402177782007
+    },
+    {
+      "id": "near_perfect_capture_and_perfect_HF_ideal",
+      "capture": 0.9997582410494531,
+      "HF_delivery": 1,
+      "load": 0.07097183733804256,
+      "incident": 90.47786842338706,
+      "events": 6,
+      "closure": 0.0000017929228468549496,
+      "field_heat": 90.31974864305607
+    },
+    {
+      "id": "high_HF_load_with_finite_losses",
+      "capture": 0.9896151047728355,
+      "HF_delivery": 0.9787772749927912,
+      "load": 0.8117008810680555,
+      "events": 12,
+      "closure": 1.822330575329545e-8,
+      "field_heat": 87.96272462860924
+    },
+    {
+      "id": "controller_OFF_wave_ON_restored",
+      "capture": 0.9901083517385132,
+      "HF_delivery": 0.9881084905175146,
+      "load": 0.14259586924805992,
+      "incident": 90.47786842338617,
+      "driver": 0,
+      "events": 22,
+      "closure": 2.0222670427116896e-8
+    },
+    {
+      "id": "wave_OFF_controller_ON_restored",
+      "load": 0.028611299015143407,
+      "driver": 24.69238841930436,
+      "events": 20,
+      "closure": 1.8423254088961727e-8
+    }
+  ],
+  "exact": {
+    "reduced_linear_reflection": "((gamma_internal-gamma_rad)/(gamma_internal+gamma_rad))^2 for matching handedness",
+    "reactive_energy": "dU_HF=on*b*i_h-k_h*u*i_h-(Rcoil+on*Rgap)*i_h^2-Gload*x^2",
+    "HF_ideal_load_one_requires_zero_resistive_HF_losses": true
+  },
+  "switch_controls": {
+    "amplitude_pm_0_005_shift": 0.0045002614763234305,
+    "HFCoupling_pm_0_0005_shift": 0.010187580553520093,
+    "phase_pm_0_001_shift": 0.006613007701389506,
+    "load_pm_0_005_shift": 0.03640862299442915,
+    "load_shift_fails_0_02_gate": true
+  },
+  "limitations": "No full 100% environmental-to-load conversion, no original measured RF-to-Filsinger source, physical zero-ohm coil/gap or source polarization, no gravity evidence; no global switching branch theorem",
+  "numeric_script": "scripts/check_smith_filsinger_j20_perfect_capture_reactive_return_20261123.py",
+  "local_full_receipt": "j20_local_receipt.json (local execution artifact, full numeric values)"
+}
