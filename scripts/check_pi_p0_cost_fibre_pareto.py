@@ -23,6 +23,7 @@ SOURCES={
  "released":(ROOT/"scripts/check_pi_p0_endpoint_lifetime.cpp","8ff286c6ec9ab23fe0d18c7d2833e1645c465b7a"),
  "scoped":(ROOT/"scripts/check_pi_p0_endpoint_scoped.cpp","4542c2a3e659c4620536a45d8df39c4cfa24e23e"),
  "shifted":(ROOT/"scripts/check_pi_p0_dyadic_quotient_shift.cpp","a8dae0366863d9d950aa8b5bd524b3503af960ed"),
+ "power5":(ROOT/"scripts/check_pi_p0_power5_dyadic_certificate.cpp","7e9ea7775cc9143ffb0800b5a96b2fed40090cc2"),
 }
 EXPECTED={
  10000:"ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
@@ -104,11 +105,11 @@ def main():
         "-lgmpxx","-lgmp","-lcrypto","-o",binary],timeout=120,cwd=ROOT)
    binaries[name]=binary
   for d in args.digits:
-   modes=["baseline","inplace","released","scoped","shifted"]
+   modes=["baseline","inplace","released","scoped","shifted","power5"]
    records={name:[] for name in modes}
    for i in range(args.reps):
     for name in (modes[i%3:]+modes[:i%3]):
-     variant=name if name in ("released","scoped","shifted") else "retained"
+     variant=name if name in ("released","scoped","shifted","power5") else "retained"
      argmode="baseline" if name=="baseline" else "inplace"
      row=parse(run([binaries[variant],str(d),argmode,"1"]),d,argmode)
      row["implementation"]=name
