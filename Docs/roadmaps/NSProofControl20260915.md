@@ -1,5 +1,15 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — original rate-Cauchy radical and exact R568 physical frontier
+
+[New original-source midpoint/rate-Cauchy radical theorem and precise unpaid lemmas](NSRateResolvedCauchyRadicalOriginalSource20261123.md). Existing original Agda R541/R567/R568/R596/R624/R628/R634/R652/R653/R687–R689 are already merged; DO NOT rebuild these source identities or mechanically rename checkpoint modules. The semantic naming inventory Docs/SemanticNamingInventory20261123.md remains authority for any later curated migration.
+
+**Source-domain correction:** original PhysicalTriadEnumeration requires k and p and q inside cutoff C. The new locally executed, independently enumerated signed rate-quotient geometry passes **37/37 actual output fibres, 26,934 incidences** (not the broader 44/27,452 abstract p+q tests, seven of which had illegal |k_i|>C). Exact midpoint d=p−q, parity m≡|k|² mod2, factorized source rate-multiplicity polynomial, strict distinct-rate Cauchy determinant and canonical rate projector were verified. For fixed k=(5,0,0), C=5 yields N=726 source cells, R=42 distinct input masses and exact kernel dimension N−R=684; C=6 yields (1352,67,1285). Both source currencies may be projected to within-rate averages without changing their exact Cauchy *bilinear* pair. Swap-odd is a strict subset of this kernel. All source p/q/phase/helicity coordinates need the original incidence sidecar for inverse recovery; summed buckets alone are not reversible.
+
+**This is algebra, not analytic payment**: the source doubleForcing/doubleCell values have not been constructed from the same physical R240 trajectory in the local proxy tests. The true original C1/C2 analytic goal remains the R653 sandwich 2 S_delta+G+H <=4F <= B(T,R,t) with source R568 cutoff-independent signed upper and original physical strict-margin lower separately OPEN. R565 scalar FTC, time integration, initial terminal and 3D PDE regularity remain OPEN. No Agda/Lean/CI run, 0/6 Clay endpoints.
+
+
+
 ## 23 November 2026 — exact R568 scalarization, known C1/C2 sandwich and source-specific signed frontier
 
 [**Controlling R568 rate-bucket source/BIDI audit**](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md), [byte-identical executed Python regression](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py), Git blob a76e8847a61521a4c4cb88fcc861ebb4a92fb85f. **64/64** complete original cubic output-fibre rational signed pair tests; 726/1352/2250 incidences compress to 42/67/92 original integer rate classes at fixed k=(5,0,0), cutoffs 5/6/7, preserving reversible original incidence sidecar. Exact two allowed input-rate carriers m=13,17 show unweighted pair-resolvent forcing F=46/16575>0 but rate-lift L=−1/5<0, even though the positive Cauchy rate matrix has determinant 1/49725. **Crucial firewall:** the assigned D/M doubleForcing/doubleCell are arbitrary rational source-*type* values, NOT verified simultaneous output of an actual R240 Galerkin solution. This refutes only positive-rate/kernel sign transport, not original physical NS.
