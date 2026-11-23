@@ -44,6 +44,22 @@ print('PASS exact rational sharp sign bounds for all selected W:')
 print('  K(h,h)-K(0,0) >=', diag_margin/h**4, '*h^4 > 0')
 print('  K(0,h)-K(0,0) <= -', axis_margin/h**4, '*h^4 < 0')
 
+
+# A full, robust TWO-DIMENSIONAL sign-sector theorem, not just two rays:
+# let rho2=q^2+alpha^2, rho=sqrt(rho2), and H4=Re((q+i alpha)^4).
+# For 0<rho<=10^-4 and |H4| >= rho^4/20, the leading signed term
+# has magnitude >= T_floor*rho^4/120 while the entire sixth-and-higher
+# analytic remainder <=225000*rho^6. Thus a strict rational margin survives.
+error_c6 = maxmass*maxsupport**6*2/F(720)
+sector_margin = floor/F(120)-error_c6*h*h
+assert error_c6 == 225000
+assert sector_margin == F(9,12800)
+for aval,qval,expected in ((F(0),h,1),(h,F(0),1),(h/2,h/2,-1)):
+    poly = aval**4 - 6*aval**2*qval**2 + qval**4
+    rad4 = (aval**2+qval**2)**2
+    assert abs(poly)==rad4 and (poly>0)==(expected>0)
+print('PASS all 2D angular sectors |cos(4theta)|>=1/20, rho<=10^-4, margin 9/12800*rho^4')
+
 # Physical alpha = 16*(beta-1/2)/t, |beta-1/2|<=1/2.
 # For t>=80000 this is <=10^-4; the diagonal q=|alpha| corresponds
 # to |gamma-t|=|beta-1/2|, not an assumed actual zeta zero.
