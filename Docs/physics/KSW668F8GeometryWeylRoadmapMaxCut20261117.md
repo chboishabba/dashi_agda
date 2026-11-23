@@ -1129,3 +1129,66 @@ Reuse audit: BalabanClayCommonTaylorRemainderToEnclosureExact (ordered remainder
 Panel coordinate u=c+Rw, R=(1-c)/2; recursively halve until r=(y-x)/(2R)<=1/8. A=1/(1-u²), A0=1/(1-c²); nonnegative reciprocal coefficients by two-term recurrence. E=exp(-(A-A0)) coefficients by nE_n=-sum_j j A_j E_(n-j). Truncated rational convolution degree N=20 for A^8, E, TT polynomial, radial measure and hat. Scalar prefactor exp(1-A0) enclosed by existing expneg. Positive majorant at s=1/2 uses A(s)^8 exp(1+A(s)-2A0), absolute TT polynomial, radial power and absolute hat coefficient sum. Geometric tail bound (r/s)^(N+1) times this full majorant; integrated error <= panel length times bound. Exact integration of even coefficients, odd terms cancel. Existing .99 endpoint collar retained. Classical power series identities justify the mathematical enclosure; original Bishop/Agda identification still OPEN. 
 
 Executed exact script locally with timeout 90s, exit 0. A/C 39/39 floating source load membership PASS, exact decimal mesh assumption. Maximum widths for ell 0,2,4 respectively A 6.011287064899487e-6, 1.24824695125466e-5, 3.7028626733927685e-7; C 5.764663747625376e-6, 1.1998844710515312e-5, 3.5740422526794345e-7. Compared to prior LXXII reported maximum widths, improvement roughly 4.7e7–1.1e8 fold. No per-node nesting against LXXII rerun, no receiver sensitivity/error acceptance, no finite-precision native mesh or floating evolution certification. Original production emitter unchanged. Next: tighter degree/panel budget and exact moment compatibility, native adjoint coefficient sensitivity and weighted enclosure consumption; complete native propagation and checkpoint restart gates remain OPEN. No CI or Agda execution.
+
+
+---
+
+# F8 P0 INTEGRATED EXECUTION DECISION — supersedes rolling microcuts (2026-11-23)
+
+**STOP SMALL BITES.** XCVI–XCIX and all earlier symbolic/truncation diagnostics are evidence and controls, NOT four more separate next steps. User directive is a construction/geometry-FIRST maximum cut, using the original AdS5 / induced 3+1 background, the already-existing matter and source, the ACTUAL original F8 production solver, and the repository's independently constructed action-Galerkin and weighted SBP comparators. No GitHub CI. Do not report finite results as continuum or detected gravitons. This is the CURRENT controlling roadmap for the next substantial packet; earlier sections' many individual NEXT lines are superseded.
+
+## 1. Source owner reconciliation; don't redo solved geometry
+
+At audit: default master c36aa4a423091063bb3741cc74044726279b47c4 and PR #1527 open/draft at d1c49e12fe5bf4dcbe2405f0428c155047f3f2c1 before new packet. Compared with master, PR #1527 had diverged: +55 / -~85,260 commits, 26 changed-file entries (mostly new source consumer scripts and canonical roadmap). The PR title/body still describe XL/YM S3 while branch contains later source P0. DO NOT force-update or blind merge a very old PR branch into master. Confirm exact source blob at actual final head; if later integrating to master, use a clean master-based transplant of only still-new accepted files.
+
+PREVIOUSLY PAID in different original owners:
+- Original 5D Einstein-AdS source, original moving a(t)=t induced 3+1 metric, all 16 background Israel components, conserved prescribed compact TT matter and source physical-clock pulse: Docs/physics/KSW668BraneBulkLevinStringTSFVMaxCut20261115.md and original scripts/ksw668_f8_tt_multipole.py / ks...fv_source_flux.py. 3+1 is a SELECTED brane embedding, not a unique emerging dimension from finite cones; distinguish KK projection and induced path cone.
+- Original geometry-derived independent action momentum p=U_T-vU_y and q=U_y, finite-element variational and two-stage Gauss reference: Docs/physics/KSW668F8YMNSNonlinearCurvatureRoadmap20261120.md; scripts/check_f8_geometry_variational.py, check_f8_geometric_constraints.py, check_f8_gauss_action.py, check_f8_gauss_trace_diagnostic.py. This reference has physical constructor and finite test records but no same-source complete G1–G6 proof.
+- Full original source-lifted weighted SBP and radial hierarchy: Docs/physics/KSW668F8FullCoupledWeightedSBPEnergyMaxCut20261115.md, scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py, ks...characteristic_constraint_maxcut.py, ks...radial_sobolev_hierarchy.py. Homogeneous mode4 semidiscrete E'< =5E, sourced lift E'< =6E+0.5||F||² recorded under premises; fully discrete coupled SSPRK3, forced dynamic Q and pointwise second-derivative receiver H4+epsilon estimates OPEN.
+- Historical original original-FV LV/LVI complete production, separate-process checkpoint runs and medium/time-halved full producer JSON exist on master at their OLD exact solver blobs. LXIX A0/A1/C0/C1 96 signature is an extracted-stage diagnostic, not a complete current weak-source native replay. LXXXVII native runner/checker and XCIV original terminal NPZ consumer exist on #1527. Far Weyl/field nonzero violates continuum compact-source null at far (by coordinate support bound) but its finite numerical mechanism is NOT proved.
+- XCVI–XCIX already establish original weak SAT Q boundary residual, source flux normalization PASS, artificial 1/v projection risk, regular W/A characteristic variable map, unclosed moving v_T trace, and manufactured H=z4 one-sided O(dy) truncation. A nonzero discrete Q alone does NOT prove wrong continuum geometry. Do not re-derive these again.
+
+## 2. One reproducible local ORIGINAL execution packet
+
+Source-owned new script scripts/run_f8_p0_integrated_local.py consolidates existing owners, no surrogate solver, and writes separate atomic JSON ledgers and logs. Invocation from a literal checkout of this PR, with master source files present:
+
+    python scripts/run_f8_p0_integrated_local.py --phase preflight --timeout 90
+    python scripts/run_f8_p0_integrated_local.py --phase native --timeout 90 --max-rounds 64
+    python scripts/run_f8_p0_integrated_local.py --phase compare --timeout 90
+
+Preflight fails closed on five original producer Git blob identities and four historical source receipt files. It runs the **existing** original coupled characteristic constraint, full weighted SBP energy, same-action geometric constraints, local Gauss construction, radial Sobolev, XCVI–XCIX moving SAT/trace, XCII/XCIII cones, and XCI/XCV source-backed full producer readout decompositions. Each module exits 0 to PASS within a 90 second local budget; missing/timeout/unsupported imports remain BLOCKED/FAIL. This meta-runner has not been executed from an exact checkout in this container. GitHub commit/readback and independent local SymPy controls do not substitute for it.
+
+Native phase delegates only to existing original run_f8_lxxxvii_native_96_local.sh and source-version-locked run_f8_lxix_native_source_matrix.py, cooperative 90s maximum slices, original NativeCheckpoint, A0/A1/C0/C1 two meshes, two source representations, near/far 3 physical ell modes x E4/E5 + tangent channels = 96 SIGNED original production outputs. Run may take many bounded slices; it is explicit opt-in on a machine with the actual checkout. Fail on changed source/checkpoint fingerprint, missing producer JSON, failed native exit, or full signed historical comparison. Historical parity is DIAGNOSTIC, not a physical certification.
+
+Compare phase checks all 96 outputs and optionally authenticated old full-native NPZ against exactly corresponding historical original FV full producer JSON via XCIV. Do not pass new weak-source checkpoint into old FV NPZ consumer. Missing NPZ is NOT_RUN, not forged. No output from this entire runner can mark physical far null, fully discrete coupled energy, independent continuum convergence, source-to-physical detector or Agda kernel PASS. Source pins are identity checks, and genuine future source changes need a separately recorded source version migration.
+
+## 3. Actual large research weld D1–D5: matched geometry and SAME physical state
+
+Compare three ORIGINAL construction alternatives, NOT three different physics models:
+A) native normal_order=3 independent characteristic SAT U/P/M;
+B) native normal_order=4 AdS weighted source-lifted SBP;
+C) existing action-derived U, canonical momentum, q Galerkin/Gauss, where q is constructed from field rather than free independent characteristic drift.
+
+All three must use IDENTICAL moving AdS5 (T=F(t), z=1/t, v=b_T, physical brane induced -dt²+t² dx_i²), identical real TT compact prepotential and original radial effective d=3/7/11, identical pulse, physical Israel source, near/far event clock, radial/normal domain and outer boundary assumptions. Keep source FV and separate weak-source intervention as explicit contrasts with their own source distributions; matched global moments do not imply same source or same receiver.
+
+At EVERY original substage and physical checkpoint, retain signed:
+- U,P,M or U,W,q, including two normal wall layers and 4 radial interpolation nodes; same-object Q=(P-M)/2-DyU, Q_T and original v_T, boundary physical G-A, upper incoming P_N, source work and strong wall trace;
+- full weighted z^-3 radial+normal moving energy, negative wall squares, source-lift work, constrained trace and original flux, including all sign and source/clock incidence;
+- raw H, radial H_r/H_rr, temporal H_T/H_TT and normal jets BEFORE intrinsic 4D and projected 5D electric Weyl reconstruction, at physically fixed near/far receivers;
+- true source cone support, forbidden far-field amplitudes and independent propagation/outer-boundary effects. Do not confuse a point cone with full compact spatial and temporal source.
+
+Acceptance requires 3+ independent radial resolutions, 3+ normal resolutions and 2+ independent time step values, common physical event/source and negative source-off controls. Measure nonzero far H BEFORE Weyl and quantify decay/error as mesh changes, not only parity of 96 signed numbers. To promote physical both-Weyl pointwise trace require a FULL moving forced/constraint-compatible energy and H4+epsilon trace/control, with source-to-Weyl and forbidden exterior source support bound, not merely first-order E or polynomial manufactured identities. Reuse existing formal FIO/microlocal and radial Sobolev owners rather than invent a new signature/369 geometric equivalence.
+
+## 4. One STOP/GO gate table
+
+| Gate | Definition | True status |
+|---|---|---|
+| D0 already-owned source/geometry | 5D metric, induced 3+1, 16 Israel, TT prescribed source and clock | HISTORICALLY ESTABLISHED, do not reprove |
+| D1 compatible full construction | same-source native SAT/SBP/action, including dynamic Q, flux, strong trace | OPEN |
+| D2 full discrete control | forced coupled time-dependent energy, SSPRK3/Gauss stability and trace error | OPEN, partial semidiscrete source-lift PASS |
+| D3 current 4-way native | A0/A1/C0/C1 original source code, authenticated checkpoints, complete signed 96 outputs | OPEN; old FV-only LV/LVI production separately completed |
+| D4 actual same-field receiver | independent normal/radial/temporal original jets, near/far H/E4/E5 with provenance | OPEN |
+| D5 causal + continuum | forbid far source signal, quantitative uniform exterior error, 3x spatial axes + independent time | FAIL/OPEN |
+| D6 physical theorem/experiment | true tensor retarded Green, source-to-detector coupling, pinned Agda/TOE and empirical evidence | OPEN |
+
+**STOP additional new numbered microcuts until a genuinely integrated source-local execution closes or materially falsifies a D1–D5 gate.** The next honest output should be a consolidated signed test ledger from actual local original runtime and a single geometry-compatible source-to-Weyl comparison, not another tiny exact identity. Original authors / attribution preserved (Caldwell–Langlois, Thorne, Israel and other cited physical/variational/SSPRK3/SBP prior work).
