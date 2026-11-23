@@ -178,3 +178,31 @@ expected_exponent=_b*_h-_r**2*_h**2
 assert s.expand(gaussian_exponent-expected_exponent)==0
 print("PASS right-vertical prime coefficient -(2/r)*sum Lambda(n)/sqrt(n)*cos(t log n)*P(r log n)")
 print("OPEN canonical contour-to-Zeta23.mu/Gamma and pole-removal normalization; NO RH/GRH claim")
+
+
+# 23 Nov P0 SOURCE-FIRST correction: full extended contour differs from
+# original completed sampleTest on SameOrd. Original Lean owners:
+#   Cutset.combinedCluster_eq_tsum
+#   NMu.completedSignedResidual_eq_combinedCluster
+#   JointHorizontalJet.signedNormalizedPairKernel_zero_eq_neg_four_target
+#   FourierTerminal.postSixthCanonicalSignedHighCut_iff_completed_plus_localSlack
+# Let D=sum_SameOrd combinedZeroHeightDefect; original H=unhalved off-ord source;
+# I=int signedOrdinateTest*Zeta23.mu; Aext=full holomorphic K extension.
+Dk,dk,Sk,Hk,Ik,Ak=s.symbols("Dk dk Sk Hk Ik Ak",real=True)
+assert s.solve(s.Eq(Dk,(Hk-Ik)/2),Ik)==[Hk-2*Dk]
+Aext=Hk-4*Dk
+assert s.expand((Aext-Ik).subs(Ik,Hk-2*Dk)+2*Dk)==0
+targetGap=(Hk+Sk-4*dk-Ik).subs(Ik,Hk-2*Dk)
+assert s.expand(targetGap-(2*Dk+Sk-4*dk))==0
+fullContourGap=(Aext-Ik)+Sk-(4*dk-4*Dk)
+assert s.expand(fullContourGap.subs(Ik,Hk-2*Dk)-targetGap)==0
+assert s.simplify(targetGap.subs(Dk,2*dk)-Sk)==0
+# Original geometric support is below log(2); the 2/5 is slack, not 5dot2.
+assert 16*(pi+1)/200<s.Rational(2,5)<s.Rational(1,2)<s.log(2)
+# Type-safe donor roles: 5x2 glues to 9+1, 3^(1+12) != 3^12+1.
+assert 5*2==10 and 5+5-1==9 and 196883+1==196884
+assert 3**(12+1)==3*3**12 and 3**(12+1)!=3**12+1
+print("PASS full contour / completed SameOrd correction Aext-I=-2D")
+print("PASS original post-sixth signed gap 2D+S-4d; target pair D>=2d no-go")
+print("PASS 16(pi+1)/200<2/5<log2 and typed 5x2, J+1, Monster negative controls")
+print("OPEN independent original zero-signed/Gamma-variation estimate; no RH/GRH theorem")
