@@ -1,5 +1,13 @@
 # Non-RH/YM P0 maximum-cut: authentic R568 analytic object and N21 local-head compiler boundary
 
+## 23 November 2026 — source-owned C1/C2 R568 algebra and new rate-class BIDI
+
+[**R568 exact rate bucket and C1/C2 source audit**](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md); [new locally executed Git-blob-identical signed cubic checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py) at a76e8847a61521a4c4cb88fcc861ebb4a92fb85f. Full R541/R567 forcing pair exact signed source-fibre scalarization by **separate** original D/M rate sums preserves the full Cauchy resolvent with reversible sidecar, for 64 rational test fixtures (max 648 incidences). Two allowed lattice rates 13 and 17 show opposite signs unlifted F=46/16575>0 and lifted L=−1/5<0; **these free rational D/M proxies are not a physical R240 Galerkin realization**. Positive Cauchy kernel does not supply a mixed-bilinear sign transfer.
+
+Reuse existing **R596** coherent self-work plus signed tangent identity; **R624/R628/R634** signed nested decomposition; **R687–R689** rate-lifted dynamic/input-Laplacian cancellation; and **R652/R653** already-proved C1/C2 original-trajectory equivalence. The actual desired signed sandwich is 2S_delta+G+H <= 4F <= B, not C1 in isolation. The left C2 and right R568 C1 inequalities are independently OPEN; scalar FTC R565 and original 3D NS endpoint also OPEN. Zero-valued *R236 work* does NOT imply both R568 doubleForcing/doubleCell vector legs vanish; only double-zero carriers are inert under rate bucket padding. New grouped source lemma/sidecar and live representation are possible finite welds but NOT new analytic payments. Karp E1 source obligations elsewhere in this roadmap remain unchanged. No kernel/CI.
+
+
+
 **23 November 2026.** Source-first / steelman / BIDI / reverse-solve. Intended for master-based PR #1543, all RH/YM source owners untouched. This is a proof-obligation correction plus a substantial executable original-word physical-cost reference, not a Navier–Stokes or P != NP proof.
 
 ## 1. NS: source-type correction — R236 centered work is NOT R568 nested forcing
