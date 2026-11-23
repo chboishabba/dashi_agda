@@ -15,6 +15,10 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
+import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as AIAgentAttribution
+import DASHI.Law.AustralianCommonwealthAgentComputerOffenceAttribution2026Exact as CommonwealthAgentLaw
+import DASHI.Law.OpenAIMedicareParliamentaryEvidence20261006Exact as MedicareHearing
+import DASHI.Law.AIAgentLegalAcquisitionProgress20261012Exact as AILegalProgress
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -73,13 +77,10 @@ selectedFriendlyjordiesCompetingNarrativeBoundary :
 selectedFriendlyjordiesCompetingNarrativeBoundary =
   FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
 
-
-
 selectedFriendlyjordiesSourceTotality :
   FriendlyjordiesSourceTotality.SourceTotalComparison
 selectedFriendlyjordiesSourceTotality =
   FriendlyjordiesSourceTotality.canonicalFriendlyjordiesSourceTotality
-
 
 selectedFriendlyjordiesConstructiveSourceTotalityBoundary :
   FriendlyjordiesSourceTotality.ConstructiveSourceTotalityBoundary
@@ -90,3 +91,37 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+-- AI-agent legal attribution is carried through the same SensibLaw parity
+-- surface. The primary-law owner pays the candidate statutory structure;
+-- hearing evidence separately pays post-incident response facts without
+-- back-propagating them into June fault or liability.
+selectedMedicareAIAgentLegalBoundary :
+  AIAgentAttribution.NamedIncidentLegalBoundary
+selectedMedicareAIAgentLegalBoundary =
+  AIAgentAttribution.medicareLegalAttributionBoundary
+
+selectedMedicare4781Boundary :
+  CommonwealthAgentLaw.Section4781ApplicationBoundary
+selectedMedicare4781Boundary =
+  CommonwealthAgentLaw.medicare4781ApplicationBoundary
+
+selectedMedicareParliamentaryResponse :
+  MedicareHearing.ParliamentaryResponseEvidence
+selectedMedicareParliamentaryResponse =
+  MedicareHearing.openAIParliamentaryResponseEvidence
+
+selectedCandidateOffenceSourceProgress :
+  AILegalProgress.LegalProducerProgress
+selectedCandidateOffenceSourceProgress =
+  AILegalProgress.candidateOffenceSourceAcquired
+
+selectedPostIncidentResponseProgress :
+  AILegalProgress.LegalProducerProgress
+selectedPostIncidentResponseProgress =
+  AILegalProgress.postIncidentOrganisationalResponse
+
+selectedCorporateFaultProgress :
+  AILegalProgress.LegalProducerProgress
+selectedCorporateFaultProgress =
+  AILegalProgress.corporateFaultStillOpen

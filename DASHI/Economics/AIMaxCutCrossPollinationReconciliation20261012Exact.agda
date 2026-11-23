@@ -1,9 +1,9 @@
 module DASHI.Economics.AIMaxCutCrossPollinationReconciliation20261012Exact where
 
-openState import DASHI.Core.Prelude
-openState import Agda.Builtin.Bool using (Bool; false; true)
-openState import Agda.Builtin.Equality using (_≡_; refl)
-openState import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Economics.AIMaxCutReconciliation20261012FinalExact as Prior
@@ -21,7 +21,7 @@ import DASHI.Economics.AIPolicyCausalEstimandIdentification20261012Exact as Poli
 ------------------------------------------------------------------------
 
 data XPState : Set where
-  openState partial paid : XPState
+  open partial paid : XPState
 
 record XPProducer : Set where
   constructor xp-producer
@@ -32,7 +32,7 @@ record XPProducer : Set where
     receipt : String
     createsGlobalCapitalRecoveryAuthority : Bool
 
-openState XPProducer public
+open XPProducer public
 
 headlineObserverNonDescentPaid : XPProducer
 headlineObserverNonDescentPaid = xp-producer
@@ -72,7 +72,7 @@ namedExternalCashEdgesPartial = xp-producer
 
 providerMarginStillOpen : XPProducer
 providerMarginStillOpen = xp-producer
-  "provider marginal serving margin" openState
+  "provider marginal serving margin" open
   "provider economics"
   "same-model engineering substitution cost, buyer-side hosted spread, and Cerebras segment accounting margins are paid, but no pure inference provider marginal-cost ledger or matched quality-adjusted marginal serving margin is observed" false
 
@@ -84,13 +84,13 @@ replacementCapexStillOpen = xp-producer
 
 policyCausalIdentificationStillOpen : XPProducer
 policyCausalIdentificationStillOpen = xp-producer
-  "policy burden -> market concentration causal identification" openState
+  "policy burden -> market concentration causal identification" open
   "Australian policy-economy lane"
   "observed proposal/outcome chronology is paid, but a typed causal estimand plus obligation-relative identification-family gate, realised same-basis cost measurement and market response are not yet jointly paid" false
 
 exhaustiveTerminalPayerStillOpen : XPProducer
 exhaustiveTerminalPayerStillOpen = xp-producer
-  "exhaustive terminal-payer provenance" openState
+  "exhaustive terminal-payer provenance" open
   "CoreWeave/global payer graph"
   "selected named external-cash edges do not identify anonymised realised top customers, contract realisation, or every financing/counterparty loop" false
 

@@ -1,9 +1,9 @@
 module DASHI.Economics.AIMaxCutReconciliation20261012FinalExact where
 
-openState import DASHI.Core.Prelude
-openState import Agda.Builtin.Bool using (Bool; false; true)
-openState import Agda.Builtin.Equality using (_≡_; refl)
-openState import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AIMaxCutReconciliation20261012Exact as Prior
 import DASHI.Economics.AIFixedBasketMarketSeries20261012Exact as Basket
@@ -27,7 +27,7 @@ import DASHI.Economics.AISameModelSelfHostCostBoundary20261012Exact as SelfHostC
 ------------------------------------------------------------------------
 
 data FinalState : Set where
-  openState partial paid : FinalState
+  open partial paid : FinalState
 
 record FinalProducer : Set where
   constructor finalProducer
@@ -38,7 +38,7 @@ record FinalProducer : Set where
     receipt : String
     promotesGlobalCapitalRecovery : Bool
 
-openState FinalProducer public
+open FinalProducer public
 
 selectedPublicEquityDynamicsPaid : FinalProducer
 selectedPublicEquityDynamicsPaid = finalProducer
@@ -113,7 +113,7 @@ coreWeaveNamedPayerSaturationPaid = finalProducer
 terminalPayerConsumerIndexingPaid : FinalProducer
 terminalPayerConsumerIndexingPaid = finalProducer
   "consumer-relative terminal-payer sufficiency" paid "selected-payer vs exhaustive-independence questions"
-  "named-payer external-cash evidence pays selected edge consumers while exhaustive CoreWeave terminal independence remains a separate openState consumer" false
+  "named-payer external-cash evidence pays selected edge consumers while exhaustive CoreWeave terminal independence remains a separate open consumer" false
 
 terminalPayerStillPartial : FinalProducer
 terminalPayerStillPartial = finalProducer
@@ -137,12 +137,12 @@ wholeComplexMarketDynamicsStillPartial = finalProducer
 
 globalOpenWeightTrajectoryStillOpen : FinalProducer
 globalOpenWeightTrajectoryStillOpen = finalProducer
-  "global open-weight usage trajectory" openState "global market"
+  "global open-weight usage trajectory" open "global market"
   "Vercel trajectory is platform-local and cannot establish global usage share" false
 
 sameCapabilityScarcityRentStillOpen : FinalProducer
 sameCapabilityScarcityRentStillOpen = finalProducer
-  "same-capability open/closed scarcity rent" openState "global model market"
+  "same-capability open/closed scarcity rent" open "global model market"
   "benchmark-normalised selected-pair pricing does not establish equal capability; the same-model engineering comparator is hosted-open versus self-hosted-open and therefore does not supply a closed/open scarcity-rent pair" false
 
 providerServingMarginStillPartial : FinalProducer
@@ -152,7 +152,7 @@ providerServingMarginStillPartial = finalProducer
 
 numericROICWACCStillOpen : FinalProducer
 numericROICWACCStillOpen = finalProducer
-  "numerical realised ROIC-WACC" openState "CoreWeave/global"
+  "numerical realised ROIC-WACC" open "CoreWeave/global"
   "the sign-only CoreWeave spread is closed under declared conditions, but a numerical point still requires a fixed invested-capital convention, equity cost and capital weights" false
 
 ------------------------------------------------------------------------

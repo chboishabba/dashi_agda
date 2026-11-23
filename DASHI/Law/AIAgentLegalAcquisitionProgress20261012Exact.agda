@@ -1,8 +1,8 @@
 module DASHI.Law.AIAgentLegalAcquisitionProgress20261012Exact where
 
-openState import Agda.Builtin.Bool using (Bool; false; true)
-openState import Agda.Builtin.Equality using (_≡_; refl)
-openState import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as Bridge
 import DASHI.Law.AustralianCommonwealthAgentComputerOffenceAttribution2026Exact as Cth
@@ -13,7 +13,7 @@ import DASHI.Law.OpenAIMedicareParliamentaryEvidence20261006Exact as Hearing
 ------------------------------------------------------------------------
 
 data ClosureState : Set where
-  openState partial closed : ClosureState
+  open partial closed : ClosureState
 
 record LegalProducerProgress : Set where
   constructor legalProducerProgress
@@ -23,7 +23,7 @@ record LegalProducerProgress : Set where
     receipt : String
     promotesLiability : Bool
 
-openState LegalProducerProgress public
+open LegalProducerProgress public
 
 candidateOffenceSourceAcquired : LegalProducerProgress
 candidateOffenceSourceAcquired = legalProducerProgress
@@ -49,42 +49,42 @@ postIncidentOrganisationalResponse = legalProducerProgress
 preIncidentRiskKnowledgeProgress : LegalProducerProgress
 preIncidentRiskKnowledgeProgress = legalProducerProgress
   "pre-incident organisational knowledge / authorisation relevant to June conduct"
-  openState
+  open
   "post-incident response and later internal awareness do not establish what responsible humans or corporate decision-makers knew or authorised before the June event"
   false
 
 restrictedDataStatusProgress : LegalProducerProgress
 restrictedDataStatusProgress = legalProducerProgress
   "s 478.1 restricted-data definition"
-  openState
+  open
   "non-public-file reporting does not by itself prove restriction by the statutory access-control-system definition"
   false
 
 runtimeTraceStillOpen : LegalProducerProgress
 runtimeTraceStillOpen = legalProducerProgress
   "same-object runtime execution trace"
-  openState
+  open
   "existing incident owner explicitly lacks the exact Medicare execution trace"
   false
 
 humanFaultProgress : LegalProducerProgress
 humanFaultProgress = legalProducerProgress
   "responsible natural-person intention / knowledge"
-  openState
+  open
   "s 478.1 requires intention to cause access/modification and knowledge that it is unauthorised; current public incident carrier does not pay either for a responsible human"
   false
 
 corporatePhysicalRouteProgress : LegalProducerProgress
 corporatePhysicalRouteProgress = legalProducerProgress
   "s 12.2 corporate physical-element attribution"
-  openState
+  open
   "technical autonomous-agent identity is not automatically the statutory employee/agent/officer route and actual/apparent scope or authority remains unpaid"
   false
 
 corporateFaultStillOpen : LegalProducerProgress
 corporateFaultStillOpen = legalProducerProgress
   "s 12.3 corporate fault attribution"
-  openState
+  open
   "express/tacit/implied authorisation or permission and board/high-manager/corporate-culture routes remain fact-dependent"
   false
 
@@ -96,7 +96,7 @@ corporateNegligenceRouteAvailable = legalProducerProgress
   false
 
 applicabilityStillOpen : ClosureState
-applicabilityStillOpen = openState
+applicabilityStillOpen = open
 
 financialAgentReuseStillSourceConditioned : Bool
 financialAgentReuseStillSourceConditioned = true
