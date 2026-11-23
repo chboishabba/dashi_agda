@@ -7990,3 +7990,29 @@ Cleanup state:
 - All seven named flags remain false: YM Clay, NS Clay, gravity prediction,
   Schwarzschild weak-field match, Gate3 spectral gap, W4 calibration, and SSP
   3D embedding obligation.
+# NS bidi continuation checkpoint — 2026-09-10
+
+Fetched origin and checked out `agent/ns-bidi-r588-continuation` from the latest
+NS R580 branch at `6cd63dcd7` (R588 integration). The unrelated untracked
+`tools/slr-discourse-reconstruct/Cargo.lock` is preserved.
+R589 now supplies the literal outer R440 signed-cross three-class equality,
+holding the full amplitude fixed while partitioning forcing via R581.
+This is draft source reviewed without Agda, as explicitly requested.
+R589 now also constructs actual deep/shoulder masks and exact signed
+critical-cone recombination without payment assumptions. FL uses min/max input
+shells; HH conservatively uses the smaller high input shell. Next: prove
+cutoff-uniform physical payments on these precise masks, then instantiate the
+historical payment record. Agda remains prohibited and elaboration unverified.
+The conditional constructor `historicalWeldFromLiteralPayments589` and consumer
+`literalPaymentsBoundCommonCross589` now perform that record assembly from
+explicit inequalities on the literal masses. No same-object equality input is
+needed. No canonical physical payment witness has been constructed; R294 only
+constrains weight swap symmetry, not size or decay.
+Direct-row follow-up: R541 provides the concrete spectator reciprocal weight,
+but R545's row is weighted on only one side; R440 has two weighted aggregates.
+R590 now splits the literal R545 forcing half into deep outer FL and its
+complement without changing that weight placement. Next analytic work should
+target these literal terms, with spectator summation retained. The R589
+conditional R588 constructor alone is not a same-object proof for this row.
+R588 embeds a fully paid R284 record, so its missing witness must not be
+reported as just an unproved equality. Full NS/Clay objective remains active.

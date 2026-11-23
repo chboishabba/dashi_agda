@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans)
 
@@ -82,9 +82,10 @@ normalizedAverageOfConstant {L} dataSet value =
     (cong (weight dataSet *_)
       (sumRationalConstant (allCyclicIndices L) value))
     (trans
-      (ℚP.*-assoc
-        (weight dataSet)
-        (natAsRational (length (allCyclicIndices L))) value)
+      (sym
+        (ℚP.*-assoc
+          (weight dataSet)
+          (natAsRational (length (allCyclicIndices L))) value))
       (trans
         (cong (_* value) (normalized dataSet))
         (ℚP.*-identityˡ value)))
@@ -235,9 +236,14 @@ sumRationalSubtract :
   ∀ {A : Set} values (left right : A → ℚ) →
   sumRational values (λ value → left value - right value)
   ≡ sumRational values left - sumRational values right
-sumRationalSubtract [] left right = ℚRing.solve-∀
-sumRationalSubtract (value ∷ values) left right
-  rewrite sumRationalSubtract values left right = ℚRing.solve-∀
+sumRationalSubtract [] left right = OpaqueAlgebra.zeroSubtractSelf
+sumRationalSubtract (value ∷ values) left right =
+  trans
+    (cong ((left value - right value) +_)
+      (sumRationalSubtract values left right))
+    (OpaqueAlgebra.sumSubtractStep
+      (left value) (right value)
+      (sumRational values left) (sumRational values right))
 
 axisCenteringFibreSumZero :
   ∀ {L} (dataSet : NormalizedAxisAverageData L)
@@ -283,7 +289,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       (trans
         (cong (λ averagedTotal → total - averagedTotal)
           (sumOfAverageConstant dataSet total))
-        (ℚRing.solve-∀)))
+        (OpaqueAlgebra.subtractSelfZero total)))
 
 ------------------------------------------------------------------------
 -- Self-adjointness in the literal global block inner product.

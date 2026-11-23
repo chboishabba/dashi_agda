@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.ComputerScience.AgdaProfilerObservationFibreExact where
 
 ------------------------------------------------------------------------
@@ -18,17 +17,17 @@ open import DASHI.Core.Prelude
 import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact as Residency
 
 data AgdaTimingProfile : Set where
-  internalTiming : AgdaTimingProfile
-  moduleTiming : AgdaTimingProfile
+  internalTiming   : AgdaTimingProfile
+  moduleTiming     : AgdaTimingProfile
   definitionTiming : AgdaTimingProfile
 
 data AgdaCounterProfile : Set where
-  sharingProfile : AgdaCounterProfile
+  sharingProfile       : AgdaCounterProfile
   serializationProfile : AgdaCounterProfile
-  constraintProfile : AgdaCounterProfile
-  metaProfile : AgdaCounterProfile
-  interactiveProfile : AgdaCounterProfile
-  conversionProfile : AgdaCounterProfile
+  constraintProfile    : AgdaCounterProfile
+  metaProfile          : AgdaCounterProfile
+  interactiveProfile   : AgdaCounterProfile
+  conversionProfile    : AgdaCounterProfile
 
 record AgdaProfilerConfiguration : Set where
   constructor agdaProfilerConfiguration
