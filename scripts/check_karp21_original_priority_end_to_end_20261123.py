@@ -45,7 +45,7 @@ def ref_parse(word):
     n,pos=x;x=ref_gamma(word,pos)
     if x is None:return None
     m,pos=x
-    if m>n*(n-1)//2 or 3*m+1>len(word)-pos:return None
+    if 3*m+1>len(word)-pos:return None
     edges=[];prev=(-1,-1)
     for _ in range(m):
         fields=[]
@@ -108,8 +108,11 @@ def native_parse(word,c):
     nle,n,pos=x;x=native_gamma(word,pos,c)
     if x is None:return None
     mle,m,pos=x
+    # ORIGINAL raw source has ONLY the 3*m suffix-length guard; no binomial(n,2) check.
+    # Canonical strict ordered simple edges imply m<=n(n-1)/2 AFTER valid parsing.
+    # Do not construct or charge a nonexistent n-squared integer register.
     # Bound m using ACTUAL remaining source length before any m-loop.
-    if len(word)-pos<1 or cmp(n*(n-1)//2,m,c) or cmp((len(word)-pos-1)//3,m,c):
+    if len(word)-pos<1 or cmp((len(word)-pos-1)//3,m,c):
         return None
     edges=[];prev=(-1,-1)
     for _ in range(m):
