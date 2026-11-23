@@ -903,3 +903,39 @@ in `Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
 Analytic Chudnovsky premise and same-original-Bishop real identification
 remain separate. Preserve source structure, signs, and all future-consumer
 obligations; no dependency on unrelated Monster work.
+
+
+## 23 November — COMP5g consumer-indexed GMP execution-fibre optimization
+
+The prior section 10 execution/bit-cost formalism now has a concrete
+native source-relative resource witness, recorded in
+\`Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md\`
+and separately committed \`check_pi_p0_fibre_cost_profile.cpp\`,
+\`check_pi_p0_endpoint_lifetime.cpp\` and
+\`check_pi_p0_cost_fibre_pareto.py\`. The instrumentation charges
+four integer products and one addition per ordered P/Q/T merge;
+it explicitly distinguishes (a) modeled live P/Q/T limb
+capacity, (b) **actual GMP allocator peak** from hooks installed
+before GMP initialization, (c) Linux process VmHWM, and (d)
+end-to-end measured wall time. This instantiates the
+FibreProgramComplexityExact / EfficientRecoverableQuotientExact /
+StreamingResidencyComplexityErrorDNABidiExact planning interface
+at source/execution-receipt level, **not** an Agda kernel proof.
+
+At 1M digits, an equivalent locally compiled C++ implementation
+with early terminal-carrier transfer/destruction reduced actual
+peak GMP bytes 23,074,600 -> 20,765,464 (10.0%) and median
+process VmHWM 27,800 -> 25,952 KiB (6.6%), with same exact
+certified output; five-run rotating-order times 689.851 ms
+(retained) vs 697.337 ms (released), not reliable evidence of
+a speed change. At 10M digits the new single-run source-equivalent
+receipt is 243,421,624 -> 217,661,176 GMP bytes (10.6%),
+265,632 -> 238,056 KiB VmHWM (~10.4%), both completing
+~11.38 seconds, and matching existing SHA256
+\`ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999\`.
+The 5M hash also matches. The committed GitHub source and full
+exact-source runner have not been compiled/executed as exact
+Git bytes in this environment; locally tested independently
+constructed source has equivalent arithmetic/ownership semantics.
+Prior Chudnovsky analytic premises, Bishop same-real, external
+SOTA and complete formal machine/Agda cost-weld remain OPEN.
