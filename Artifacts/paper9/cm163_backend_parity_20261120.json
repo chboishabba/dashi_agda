@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-20",
+  "environment": {"python": "3.13.5", "sympy": "1.14.0", "gmp": "6.3.0", "architecture": "x86_64", "cpu": "Intel Xeon Platinum 8573C", "os": "Linux 6.18.57, glibc 2.41"},
+  "method": "separate sequential subprocesses; exact signed-hex JSON byte comparison; one run per backend; timer covers construction, derivative checks, serialization but excludes imports",
+  "source_git_blobs": {
+    "scripts/check_cm163_modular_diagonal.py": "add8e35866aa1e9f379b4a57059c4487e4c7241c",
+    "scripts/check_cm163_derivative_slice.py": "0c1f7d04618943d6b9941f433ceed8c5cd9fd590",
+    "scripts/check_cm163_fast.py": "6c1a051c2832d9afd549680b3a6401383023989e",
+    "scripts/check_cm163_backend_parity.py": "d737ef34938ee5c1557e08ee322f785c5d2ec7d8"
+  },
+  "scalar": {"diagonal_seconds": 8.899486372000013, "construction_seconds": 31.606400973000007, "total_seconds": 31.649009697999986, "peak_rss_kib": 143412, "coefficient_slots": 126, "coefficient_bits": 241632, "max_output_coefficient_bits": 3371, "serialized_bytes": 61113},
+  "fast": {"diagonal_seconds": 4.252409968999984, "construction_seconds": 16.159672922000027, "total_seconds": 16.208337046999986, "peak_rss_kib": 533716, "coefficient_slots": 126, "coefficient_bits": 241632, "max_output_coefficient_bits": 3371, "serialized_bytes": 61113, "packed_operand_bits": 204771028, "packed_multiplications": 52},
+  "full_coefficient_byte_parity": true,
+  "kappa": "-77859659565707/19943834790540897829879824384000",
+  "s2": "77265280/90856689",
+  "regression_run": {"signed_products": 64, "inverse_logder_comparisons": 64, "complete_small_prime_polynomial_comparisons": 8, "levels": [3,5,7,11]},
+  "boundary": "single local comparison, not an asymptotic speedup or complete live-memory theorem; no fresh kernel receipt; dyadic enclosure not rerun in this packet"
+}

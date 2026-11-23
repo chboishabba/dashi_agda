@@ -111,3 +111,18 @@ Suggested arXiv primary classifications:
 
 Everything else under `papers/` is support, draft, or legacy material unless a
 later router explicitly promotes it.
+
+
+## Independent working manuscript — Paper 9 (20 November 2026)
+
+- `drafts/Paper9ExactCMModularJetCertificates.md`: Exact CM Derivative
+  Certificates from Modular Polynomial Slices (math.NT; math.NA, cs.SC).
+
+This is an independent computational mathematics candidate, prepared in
+parallel with the three live core drafts; not yet promoted to the live
+submission corpus. See the Publication Roadmap addendum and the constructive
+constants technical roadmap. No change to the three-core PDF generator,
+Clay claim flags, or generated satellite index is intended. Exact local
+SymPy/integer reproduction, complexity review, prior-art comparison and
+additional CM cases are required before submission; native kernel claims
+remain separate.
