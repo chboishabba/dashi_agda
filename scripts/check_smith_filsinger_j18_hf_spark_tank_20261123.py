@@ -64,6 +64,7 @@ def advance(p,incident,phase,state=None,active=False,t0=0.,T=None,
     if T is None:T=native.T
     p=native.BASE|DEFAULT|p
     assert p['mode'] in ('legacy','hf')
+    assert p.get('off_return','original') in ('original','capacitive')
     assert p['L1']*p['L2']>p['M']**2 and p['Lh']>0 and p['Ch']>0
     assert p['alpha']>=0 and all(p[k]>=0 for k in
        ('Gload','Rgap','Rcoil','Rfree','Gbleed','gamma_rad','gamma_internal'))
@@ -83,7 +84,9 @@ def advance(p,incident,phase,state=None,active=False,t0=0.,T=None,
         i,j,u,v,b,q,r,ih,x=y[:9]
         drv=p.get('drive_amp',2.)*np.sin(t)
         sr=p['source_amp']*np.cos(p['omega']*t+phase) if incident else 0.
-        si=p['source_amp']*np.sin(p['omega']*t+phase) if incident else 0.
+        handedness=p.get('wave_handedness',1.)
+        assert handedness in (-1.,1.)
+        si=handedness*p['source_amp']*np.sin(p['omega']*t+phase) if incident else 0.
         ju=max((u-b-p['Vd'])/p['Rd'],0.)
         jv=max((v-b-p['Vd'])/p['Rd'],0.)
         hf=(p['mode']=='hf')
@@ -94,9 +97,11 @@ def advance(p,incident,phase,state=None,active=False,t0=0.,T=None,
         dq=p['omega']*r-(p['gamma_rad']+p['gamma_internal'])*q-p['k']*u/2+rad*sr
         dr=-p['omega']*q-(p['gamma_rad']+p['gamma_internal'])*r+rad*si
         if hf:
-            resistance=p['Rcoil']+p['Rgap']*on+p['Rfree']*(not on)
-            dih=(on*(b-x)-resistance*ih-p['kh']*u)/p['Lh']
-            dx=(on*ih-p['Gload']*x)/(p['Ch']*(1+3*p['alpha']*x*x))
+            reactive=(p.get('off_return','original')=='capacitive')
+            xi=1. if reactive else float(on)
+            resistance=p['Rcoil']+p['Rgap']*on+(0. if reactive else p['Rfree']*(not on))
+            dih=(on*b-xi*x-resistance*ih-p['kh']*u)/p['Lh']
+            dx=(xi*ih-p['Gload']*x)/(p['Ch']*(1+3*p['alpha']*x*x))
         else:
             dih=0.;dx=0.
         pout=(sr-rad*q)**2+(si-rad*r)**2
@@ -105,7 +110,7 @@ def advance(p,incident,phase,state=None,active=False,t0=0.,T=None,
                p['Gbleed']*b*b,(not hf)*p['Gspark']*on*b*b,
                2*p['gamma_internal']*(q*q+r*r),
                hf*p['Rgap']*on*ih*ih,hf*p['Rcoil']*ih*ih,
-               hf*p['Rfree']*(not on)*ih*ih,hf*p['Gload']*x*x,
+               hf*(p.get('off_return','original')!='capacitive')*p['Rfree']*(not on)*ih*ih,hf*p['Gload']*x*x,
                hf*on*b*ih,hf*p['kh']*u*ih]
         return np.r_[ij,uv,bank,dq,dr,dih,dx,works]
     for _ in range(700):
