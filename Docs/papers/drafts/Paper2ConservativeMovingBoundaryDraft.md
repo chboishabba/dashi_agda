@@ -13,3 +13,8 @@ Prior short-window local runs detected all seven mutations for both normal order
 ## Open numerical and formal obligations
 
 Three-level independent source/field/jet refinement; receiver stencil alignment, stability and separate radial/normal extension; original guarded production receiver; longer-window applicable mutations; strong trace convergence; literal Agda hyperfabric and CMYKalpha/full pose. The canonical implementation roadmap is `../../physics/KSW668F8YMNSNonlinearCurvatureRoadmap20261120.md`. Paper 8 imports only scoped finite architecture. No Clay or unification promotion.
+
+
+## LXXIX — independently audited native source/moment interface
+
+The source programme in PR #1527 has constructed exact rational four-row moment witnesses and a signed dual-bound interface, but their loads are not yet proven identical to the native `exact_cell_averages` physical source used for the receiver programme on PR #1530. The local four-mesh control preserves original integrated l0/l2=0 and l4~2.57617 while naive cell-centre u²-weighting produces nonzero, nonmonotone fourth-row defects. These do not refute the continuum identity; they prohibit silently substituting cell averages for source-specific exact weak loads. The remaining paper obligation is a same-load coefficient-level interface (including within-cell weighted moments), then a genuine native receiver VJP and certified numerical error ledger. This manuscript remains a working satellite, not a continuum GR result.
