@@ -155,3 +155,33 @@ for d in (1, 2, 3):
     print(f"PASS original t={d}: 4d={4*d} side plaquettes and chosen Haar coefficient")
 print("NOTE t=3 on L4 is a NONMINIMAL tube by periodic reverse time; no inferred decay.")
 print("OPEN: original full absolute W3 cluster-charge sum, weak beta(a), CMP119/122/OS same-H")
+
+
+# Six ORIGINAL physical source tubes: three spatial transverse planes
+# x two distinct shortest periodic time paths from x0=0 to x0=2.
+# This cardinal 6 is NOT H05's six indexed cube faces.
+all_routes={}
+for a,b in combinations((1,2,3),2):
+    mark0=((0,0,0,0),a,b)
+    mark2=((2,0,0,0),a,b)
+    for label,times in (('forward',(0,1)),('reverse',(2,3))):
+        wall=[]
+        for t in times:
+            for ax,other in ((a,b),(b,a)):
+                for disp in (0,1):
+                    x=[0,0,0,0]
+                    x[0]=t
+                    x[other]=disp
+                    wall.append((tuple(x),0,ax))
+        assert len(set(wall))==8
+        assert not parity((mark0,mark2)+tuple(wall))
+        counts=Counter(e[:2] for p in (mark0,mark2)+tuple(wall)
+                       for e in plaques[p])
+        assert len(counts)==20 and set(counts.values())=={2}
+        all_routes[(a,b,label)]=tuple(wall)
+assert len(all_routes)==6
+for a,b in combinations((1,2,3),2):
+    assert set(all_routes[(a,b,'forward')]).isdisjoint(
+           all_routes[(a,b,'reverse')])
+print("PASS 3 original transverse spatial planes x 2 true periodic time paths: 6 original Wilson tubes")
+print("NOTE: 6 tube-route labels do NOT identify H05's six indexed cube faces")
