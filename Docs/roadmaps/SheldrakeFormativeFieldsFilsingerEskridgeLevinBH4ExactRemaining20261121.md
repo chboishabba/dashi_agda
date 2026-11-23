@@ -8,6 +8,26 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J29A — physical U-diode switching tube and quadratic uncertainty comparison (23 Nov 2026)
+
+**New source-reused maximum cut, not a new device model:** [locally executed exact rational J29A checker](../../scripts/check_smith_filsinger_j29a_diode_u_continuity.py), byte-identical committed Git blob **`c2bc52828ea34c6af13f7c0cc8ef7dcd4047acf1`**, [mathematical note](../research/SmithFilsingerJ29APhysicalDiodeUHandoffAndQuadraticComparison20261123.md), [committed machine receipt](../../Artifacts/smith-filsinger/j29a_fourth_U_physical_handoff_20261123.json). Consumes original J28B stage-75 rational checkpoint `74c1a94b30c44a772016c93b39558bc446359832`; all original 9 root and 9 delta strings, status and time were compared against the live GitHub checkpoint. **Its raw original JSON bytes were not executed locally**: local replay used a data-equivalent reconstruction. No CI or Agda kernel, original J18 numeric executable still not byte-replayed.
+
+**Actual physical fourth-switch continuation:** from the original verified J28B endpoint `t=4.26534095` through the right endpoint `4.27574095`, exact `Fraction` Picard self-inclusion holds for a positive-part two-diode original nine-state field with spark ON and prescribed source sin/cos conservatively in `[-1,1]`. Initial nine-coordinate box radius `1/5` strictly includes its Picard image; **12** exact narrowing inclusions retain physical mode membership, prove V forward guard lower approx `+0.0054644341`, bank spark-ON guard positive, and U guard derivative lower approx **`+0.5115566232`** throughout. Coupled with J28B's opposite signed U-root endpoints, this pays actual U-on physical continuation to the fixed right time and excludes an extra switch. This is a **coarse true-ODE flow enclosure**, not a fictitious virtual-U-off continuation or a new J24 event-state box.
+
+**No artificial U saltation:** original `f_Uon-f_Uoff=(u-b-Vd)/Rd*(0,0,-1.55/1.17,-1/1.17,1/Cb,0,0,0,0)`. Therefore at the true guard, the **vector field and all nine states are continuous**, its Jacobian jump is rank one, and the transverse state-saltation matrix is **exactly identity**; downstream smooth variational matrices still change. Exact analytical Jacobian/capacitor row bound is `227/3<100` on the proven local state domain. Reusing J28B's **rigorous U-guard upper slope** `1.250439215531...`, coarsened to `63/50`, and event bracket width `3/5000`, a same-fixed-endpoint Gronwall/positive-part comparison gives
+
+```
+|| x_physical(4.27574095) - x_virtual_U_off(4.27574095) ||_infty
+  <= (500/39) * (63/50) * (3/5000)^2 / (2*(1 - 100*3/5000))
+   = 189/61100000 < 3.094e-6
+```
+
+in dimensionless state/model time; no physical source power or measured efficiency follows. The conditional source premise is J28B's original exact guard/isolation proof, not a new measurement.
+
+**Status firewall:** 4/6 original nominal hybrid crossing **roots** are certified; only 3/6 full original nine-coordinate J24 **event-state boxes** paid, since the fourth fits **2/9**. The true physical U-on branch is now locally contained to the fourth bracket's right endpoint, but the broad J29A box cannot pay the fourth J24 tiny source-centre box. J29B should first tighten componentwise original event-state inclusion with the original signed Peano–Baker checkpoint / high-order Lohner, then advance physical U+V active to V OFF and U OFF and construct a certified `tau=20*pi/11` hybrid return map/Banach fixed point. Uniform 5D parameter family, natural field source metrology, actual device pins, XC+1 receiver optimization and Agda kernel remain independent OPEN obligations. **Do not merge #1537 without branch-source reconciliation.**
+
+---
+
 ## P0 J28 — exact third spark-ON existence and uniqueness from J27 physical event box (23 Nov 2026)
 
 **Committed, locally executed, byte-identical:** [J28 exact-rational Picard checker](../../scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py), Git blob `5ccec728d86deba172ff208ea846df17686308a8`; [full geometric argument](../research/SmithFilsingerJ28SparkOnExactPicardFromJ27EventBox20261123.md); [machine receipt](../../Artifacts/smith-filsinger/j28_spark_on_picard_20261123.json). Reuses actual J27 certified spark-OFF `t_OFF ∈ (3.49129269,3.49129275)` **and** its certified nine-coordinate J24 event box. Sharpen `b(t_OFF)=Voff=0.0018` exactly, retain all eight remaining state intervals and the uncertain absolute source clock, use true V-active/U-inactive/spark-OFF original nine-state equations. Grid-`10^22` outward rational Picard enclosures pass **20/20 pieces** of exact duration `0.002`, maximum five Picard iterations per piece. Exact Taylor/Lipschitz source phase; no numerical event-centre substitution.
