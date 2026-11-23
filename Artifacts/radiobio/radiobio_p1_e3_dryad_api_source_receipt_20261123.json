@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-23",
+  "status": "ACQUISITION_BLOCKED_ORIGINAL_PATIENT_DATA_NOT_REPLAYED",
+  "study": {
+    "doi": "10.3390/jcm10235570",
+    "trial": "NCT03755817",
+    "published_between_group_rest_p": 0.22,
+    "arms": {
+      "active": 30,
+      "sham": 30
+    },
+    "journal_abstract_medials": {
+      "sham_pre": 8,
+      "sham_post": 5,
+      "active_pre": 7,
+      "active_post": 4
+    },
+    "dryad_abstract_medials": {
+      "sham_pre": 7.5,
+      "sham_post": 5,
+      "active_pre": 6.5,
+      "active_post": 4
+    },
+    "note": "Median discrepancies are publication vs deposit abstracts, not proof of data error; verify original workbook."
+  },
+  "dataset": {
+    "doi": "10.5061/dryad.63xsj3v2s",
+    "author": "Marc Fischler",
+    "filename": "Scenar_-_Dryad_Corrigé.xlsx",
+    "published": "2021-08-25",
+    "estimated_size_kb": 21.86,
+    "api_documentation": "https://github.com/datadryad/dryad-app/blob/main/documentation/apis/README.md",
+    "attempted_urls": [
+      "https://datadryad.org/downloads/file_stream/915627",
+      "https://datadryad.org/api/v2/files/915627/download",
+      "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.63xsj3v2s"
+    ],
+    "web_file_result": "403_INACCESSIBLE",
+    "web_api_result": "UNAVAILABLE",
+    "local_result": "DNS_RESOLUTION_FAILURE_ALL_ATTEMPTS",
+    "original_bytes": 0,
+    "original_workbook_sha256": null,
+    "source_schema_known": false
+  },
+  "helper": {
+    "path": "scripts/radiobio_p1_dryad_acquire.py",
+    "local_git_blob_sha": "297b263ffd4704098b88392568f9c37a52ab7a77",
+    "matched_live_repository_blob": true,
+    "executed_plan_only": true,
+    "executed_download_fail_closed": true,
+    "python_compile": "PASS",
+    "source_checkout_native": true
+  },
+  "safety": "No original individual patient measurements, raw workbook, clinical mixed model or p-value reproduced; no CI."
+}
