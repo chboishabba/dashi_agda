@@ -23,6 +23,8 @@ GRID={
  'medium-dt-half':(.008,.012,.0009),'fine-dt-half':(.006,.009,.0006)
 }
 def verify():
+    # Historical receipt only; never reinterpret as corrected E4.
+    # Availability depends on the historical artifact being present.
     d=json.loads(RECEIPT.read_text())
     assert not d['closure']['three_grid_original_E4_E5_acceptance']
     assert not d['closure']['pointwise_H4epsilon_to_Weyl']
@@ -43,14 +45,16 @@ def verify():
     assert d['finite_SBP2_boundary_Udot_only_repair_no_go']['independent_weak_Israel_wall_and_far_source_generically_incompatible']
     return d
 
-def replay_grid(label):
+def replay_grid(label,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False):
     if label not in GRID:raise ValueError('choose one named original mesh')
     from ksw668_f8_tt_multipole import propagate
     dr,dy,dt=GRID[label]
     result=propagate(dr=dr,dy=dy,dt=dt,eps=.04,final_t=12.,
         pulse=.065,inside_chord=.012,r_outer=3.01,y_outer=2.01,
-        normal_order=3,conservative_source=True)
-    keys=('step_radial','step_bulk','step_time','raw_mode_values',
+        normal_order=3,conservative_source=True,checkpoint=checkpoint,budget=budget,checkpoint_every=checkpoint_every,affine_stage=affine_stage)
+    from ksw668_f8_ternary_channel_drift import require_corrected
+    require_corrected([result])
+    keys=('intrinsic_4D_weyl_spatial_operator','step_radial','step_bulk','step_time','raw_mode_values',
         'receiver_mode_intrinsic_4D_electric_Weyl',
         'receiver_mode_projected_5D_electric_Weyl',
         'receiver_mode_intrinsic_4D_electric_Weyl_tangent',
@@ -58,10 +62,17 @@ def replay_grid(label):
         'far_mode_intrinsic_4D_electric_Weyl',
         'far_mode_projected_5D_electric_Weyl',
         'discrete_support_photon_margin')
-    report={k:result[k] for k in keys}
+    # Preserve the complete original receiver and geometry receipt so downstream
+    # signed comparisons do not lose axial controls, tangent or aggregate data.
+    for k in keys:
+        if k not in result: raise ValueError('missing required receiver field: '+k)
+    report=dict(result)
+    report['requested_mesh']={'dr':dr,'dy':dy,'dt':dt}
+    report['receiver_receipt_schema']='XLIX-full-spatial-v2'
     report.update(grid=label,physical_early_Weyl_acceptance=False,
         same_original_adS5_model=True)
-    outfile=REPO/'Artifacts/ksw668'/('ads5_f8_XI_replay_'+label+'.json')
+    outfile=REPO/'Artifacts/ksw668'/('ads5_f8_XLIX_corrected_replay_'+label+('_affine' if affine_stage else '')+'.json')
+    outfile.parent.mkdir(parents=True,exist_ok=True)
     outfile.write_text(json.dumps(report,indent=2)+'\n')
     return outfile
 
@@ -69,7 +80,15 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser()
     ap.add_argument('--run-grid',choices=tuple(GRID))
     ap.add_argument('--accept',action='store_true',help='fail closed for physical Weyl convergence')
+    ap.add_argument('--checkpoint',type=Path)
+    ap.add_argument('--budget',type=float,default=75.)
+    ap.add_argument('--checkpoint-every',type=int,default=8)
+    ap.add_argument('--affine-stage',action='store_true')
     args=ap.parse_args()
-    if args.run_grid:print('Completed numerical mesh only:',replay_grid(args.run_grid))
-    else:print('Exact THREE-GRID NEGATIVE acceptance receipt checked:',verify()['schema'])
+    if args.budget<=0 or args.checkpoint_every<=0:ap.error('positive budget and checkpoint interval required')
+    if args.run_grid:
+        try:print('Completed numerical mesh only:',replay_grid(args.run_grid,args.checkpoint,args.budget,args.checkpoint_every,args.affine_stage))
+        except InterruptedError as exc:
+            print(str(exc));raise SystemExit(75)
+    else:print('Historical LEGACY AXIAL negative receipt checked:',verify()['schema'])
     if args.accept:raise SystemExit(42)

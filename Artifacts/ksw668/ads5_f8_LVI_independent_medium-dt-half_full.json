@@ -1,0 +1,188 @@
+{
+  "model": "original moving AdS5 a=t Neumann compact TT",
+  "original_radial_multipoles": [
+    0,
+    2,
+    4
+  ],
+  "normal_order": 3,
+  "affine_stage_homogenized": false,
+  "normal_only_characteristic_SBP_closed": false,
+  "normal_second_order_SBP_SAT_weak_neumann": true,
+  "strong_wall_neumann_enforced": false,
+  "full_coupled_weighted_SSPRK3_energy_proved": false,
+  "effective_radial_dimensions": [
+    3,
+    7,
+    11
+  ],
+  "step_radial": 0.008,
+  "step_bulk": 0.012,
+  "step_time": 0.0008997539681680747,
+  "radius_bins": 378,
+  "bulk_bins": 169,
+  "steps": 3011,
+  "eps": 0.04,
+  "pulse": 0.065,
+  "receiver_t": 12.0,
+  "nominal_receiver_r": 2.5373657609619378,
+  "receiver_grid_r": 2.5373657609619378,
+  "source_adjusted_brane_photon_margin": 0.012459111173937387,
+  "discrete_support_photon_margin": 0.008459111173937387,
+  "conservative_source_cell_average": true,
+  "source_cell_integration": "exact compact TT endpoint primitives",
+  "normalized_conservative_cell_moments": [
+    1.6940658945086005e-15,
+    1.009741958682895e-14,
+    2.5761698809461437
+  ],
+  "corrected_radial_shell_volume": true,
+  "radial_polynomial_r2_consistency_exact": true,
+  "radial_discrete_green_energy_nonpositive": true,
+  "source_weighted_moments_l0_l2_zero": true,
+  "radial_only_SSPRK3_Gershgorin_CFL_guard": 0.26111648393354675,
+  "full_moving_T_y_r_SSPRK3_stability_certified": false,
+  "receiver_convergence_not_implied_by_discrete_energy": true,
+  "raw_mode_values": [
+    -1.1886217254392693e-07,
+    -5.885586826172957e-06,
+    -1.9742487489743316e-07
+  ],
+  "unsigned_ternary_mode_digits": [
+    0,
+    1,
+    2
+  ],
+  "unsigned_ternary_harmonic_ell": [
+    0,
+    2,
+    4
+  ],
+  "unsigned_ternary_codec_not_physical_C3_action": true,
+  "receiver_mode_intrinsic_4D_electric_Weyl": [
+    3.1489503486254607e-06,
+    -2.989003658714101e-05,
+    -1.128497204866474e-06
+  ],
+  "receiver_mode_projected_5D_electric_Weyl": [
+    1.1287700943926052e-08,
+    -2.2091320945684856e-06,
+    -7.444742125627764e-08
+  ],
+  "receiver_mode_intrinsic_4D_electric_Weyl_tangent": [
+    3.1483691935720583e-06,
+    -2.989263379405234e-05,
+    -1.1285489274333427e-06
+  ],
+  "receiver_mode_projected_5D_electric_Weyl_tangent": [
+    1.017338727023711e-08,
+    -2.213363922342564e-06,
+    -7.452008263252359e-08
+  ],
+  "receiver_mode_H_T_derivative_readout_disagreement": [
+    6.8876124239766745e-09,
+    1.381335902873556e-07,
+    4.417548904905661e-09
+  ],
+  "receiver_mode_H_TT_derivative_readout_disagreement": [
+    -3.3238938571369166e-07,
+    -1.4847246455843705e-06,
+    -2.955637446019812e-08
+  ],
+  "far_mode_intrinsic_4D_electric_Weyl": [
+    -1.9605988364819768e-07,
+    -9.147895901370822e-07,
+    -3.24794251956932e-08
+  ],
+  "far_mode_projected_5D_electric_Weyl": [
+    -6.7508710041665275e-09,
+    -3.1548436226757714e-08,
+    -1.079623227206275e-09
+  ],
+  "far_mode_intrinsic_4D_electric_Weyl_tangent": [
+    -1.9606521505291324e-07,
+    -9.147547491097509e-07,
+    -3.247782843913369e-08
+  ],
+  "far_mode_projected_5D_electric_Weyl_tangent": [
+    -6.759413436392711e-09,
+    -3.147294514144156e-08,
+    -1.076256521223514e-09
+  ],
+  "receiver_mode_Hxx": [
+    -0.0009631074202774923,
+    0.00799404524971093,
+    0.00030515802458958344
+  ],
+  "receiver_mode_Delta3H": [
+    -0.0009377847273117412,
+    0.008132530776863545,
+    0.0003096991761566993
+  ],
+  "receiver_mode_intrinsic_4D_electric_Weyl_legacy_axial": [
+    3.1929133572465565e-06,
+    -2.964961032472328e-05,
+    -1.1206132611735645e-06
+  ],
+  "receiver_mode_intrinsic_4D_electric_Weyl_tangent_legacy_axial": [
+    3.1923322021931536e-06,
+    -2.9652207531634608e-05,
+    -1.120664983740433e-06
+  ],
+  "far_mode_intrinsic_4D_electric_Weyl_legacy_axial": [
+    -1.974827601160126e-07,
+    -9.229573123486944e-07,
+    -3.279953630414303e-08
+  ],
+  "far_mode_intrinsic_4D_electric_Weyl_tangent_legacy_axial": [
+    -1.9748809152072813e-07,
+    -9.229224713213631e-07,
+    -3.279793954758352e-08
+  ],
+  "intrinsic_4D_weyl_spatial_operator": "full_reconstructed_Delta3",
+  "receiver_dual_Weyl_temporal_second_derivative_cancellation": 5.3466875071883213e-05,
+  "retarded_TT_yy_scaled_by_eps4": -6.201873873614317e-06,
+  "far_receiver_grid_r": 2.649365760961938,
+  "far_mode_values": [
+    1.825798907556173e-08,
+    1.1306364450332146e-07,
+    4.3402089084162185e-09
+  ],
+  "far_TT_yy_scaled_by_eps4": 1.356618424872994e-07,
+  "fixed_physical_receiver_cubic_interpolation": true,
+  "receiver_intrinsic_4D_electric_Weyl": -2.7869583443381285e-05,
+  "receiver_projected_5D_electric_Weyl": -2.27229181487936e-06,
+  "far_intrinsic_4D_electric_Weyl": -1.1433288989810462e-06,
+  "far_projected_5D_electric_Weyl": -3.937893045827688e-08,
+  "receiver_intrinsic_4D_electric_Weyl_tangent": -2.7872813527913634e-05,
+  "receiver_intrinsic_4D_electric_Weyl_legacy_axial": -2.757731022864955e-05,
+  "receiver_intrinsic_4D_electric_Weyl_tangent_legacy_axial": -2.758054031318189e-05,
+  "receiver_projected_5D_electric_Weyl_tangent": -2.277710617704854e-06,
+  "far_intrinsic_4D_electric_Weyl_tangent": -1.143297792601797e-06,
+  "far_intrinsic_4D_electric_Weyl_legacy_axial": -1.1532396087689233e-06,
+  "far_intrinsic_4D_electric_Weyl_tangent_legacy_axial": -1.153208502389674e-06,
+  "far_projected_5D_electric_Weyl_tangent": -3.93086150990563e-08,
+  "second_order_spatial_radial_readout": true,
+  "no_post_evolution_spatial_derivatives": false,
+  "no_spatial_Fourier_Bessel_inverse": true,
+  "compact_support_of_boundary_stress": true,
+  "numerical_convergence_certified": false,
+  "both_Weyl_numerically_evaluated": true,
+  "full_Weyl_receiver_certified": false,
+  "Agda_kernel_accepted": false,
+  "physical_graviton_measured": false,
+  "grid": "medium-dt-half",
+  "requested_mesh": {
+    "dr": 0.008,
+    "dy": 0.012,
+    "dt": 0.0009
+  },
+  "receiver_receipt_schema": "XLIX-full-spatial-v2",
+  "physical_early_Weyl_acceptance": false,
+  "same_original_adS5_model": true,
+  "source_git_blobs": {
+    "ksw668_f8_tt_multipole.py": "26f089b2aea202a82f19db7faa6c0e3eaa4554c5",
+    "ksw668_f8_ssprk_checkpoint.py": "4e319596d9064e7c9238b4a6570401e94df8a521",
+    "ksw668_f8_fv_source_flux.py": "dec4e79e3a4899952a5deceb786324bc0745982c"
+  }
+}
