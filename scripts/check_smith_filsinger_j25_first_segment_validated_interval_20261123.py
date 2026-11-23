@@ -118,6 +118,38 @@ ROOT=['-0.04585851023046709','0.0967120405698972','1.9865816276887802',
       '1.1890650910077614','2.3839347955003958','5.502919318568432',
       '-5.781120275385947','-0.7451738522543331','-1.5585226674954609']
 
+def jacobian_infinity_lipschitz_bound(tube):
+    """Exact outward interval derivative on the verified ON / no-diode tube."""
+    p=PARAM; c=tube[8]; ih=tube[7]
+    z=I(0); J=[[z for _ in range(9)] for _ in range(9)]
+    J[0][0]=-p['R1']*I('1.5')/I('2.64')
+    J[0][1]=p['M']*p['R2']/I('2.64')
+    J[0][2]=-p['M']/I('2.64'); J[0][3]=p['M']/I('2.64')
+    J[1][0]=p['M']*p['R1']/I('2.64')
+    J[1][1]=-p['L1']*p['R2']/I('2.64')
+    J[1][2]=p['L1']/I('2.64');J[1][3]=-p['L1']/I('2.64')
+    J[2][1]=-I('.55')/I('1.17')
+    J[2][5]=I('1.55')*p['k']/I('1.17')
+    J[2][7]=I('1.55')*p['kh']/I('1.17')
+    J[3][1]=I('.4')/I('1.17')
+    J[3][5]=p['k']/I('1.17'); J[3][7]=p['kh']/I('1.17')
+    J[4][4]=-p['Gbleed']/p['Cb'];J[4][7]=-I(1)/p['Cb']
+    J[5][2]=-p['k']/I(2)
+    J[5][5]=-p['gamma_rad']-p['gamma_internal'];J[5][6]=p['omega']
+    J[6][5]=-p['omega'];J[6][6]=-p['gamma_rad']-p['gamma_internal']
+    J[7][2]=-p['kh']/p['Lh'];J[7][4]=I(1)/p['Lh']
+    J[7][7]=-(p['Rcoil']+p['Rgap'])/p['Lh'];J[7][8]=-I(1)/p['Lh']
+    g=I(1)+I('1.5')*c**2
+    J[8][7]=I(1)/(p['Ch']*g)
+    J[8][8]=-p['Gload']/(p['Ch']*g)-(ih-p['Gload']*c)*I(3)*c/(p['Ch']*g**2)
+    upper=max(sum(max(abs(x.a),abs(x.b)) for x in row) for row in J)
+    # Divide [0,1/11] into four equal time parts; 1/44 * L < 1.
+    assert upper*1 < S*44
+    return dict(max_infty_jacobian_norm_upper=ceil_div(upper,1)/S,
+                time_part_for_picard_contraction='1/44',
+                strict_contraction_on_each_part=upper < 44*S,
+                conservatively_bounded_by_44=True)
+
 def run(h=F(1,11)):
     assert h<=F(1,11)
     initial=box_center(ROOT,F(1,10**7))
@@ -146,13 +178,14 @@ def run(h=F(1,11)):
     gs=tube[4]-PARAM['Voff']
     assert gu.b<0 and gv.b<0 and gs.a>0
     assert (I(1)+I('1.5')*tube[8]**2).a>=S
+    local_lipschitz=jacobian_infinity_lipschitz_bound(tube)
     return dict(status='PASS_VALIDATED_LOCAL_FLOW_TUBE_PICARD',duration=str(h),
       initial_state_halfwidth='1e-7',iterations_to_exact_inclusion=n+1,
       radii=[I(v,v,raw=True).asfloat()[0] for v in radii],
       diode_U_guard_interval=gu.asfloat(),diode_V_guard_interval=gv.asfloat(),
       spark_off_guard_interval=gs.asfloat(),
       exact_picard_inclusion=True,initial_spark_mode='ON',
-      verified_guard_free_segment=True,
+      verified_guard_free_segment=True,local_lipschitz=local_lipschitz,
       exact_integer_outward_rounding_scale=str(S),
       positive_sqrt_radiative_exact_grid=True,
       trigonometric_taylor_remainder_rational=True,
