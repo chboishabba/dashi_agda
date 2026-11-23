@@ -10,7 +10,7 @@ import json
 from itertools import product
 from pathlib import Path
 from monster3b_atlas_source_word_order_d4_gate import parse_meataxe, mm, ident, neg, rank
-from monster3b_atlas_actual_d4_word_witness import FORM_ROWS, SOURCE_DIGESTS
+from monster3b_atlas_actual_d4_word_witness import FORM_ROWS, SOURCE_DIGESTS, W_ORDER10, CONJUGATOR, evaluate, power
 
 N=12
 def tr(a): return [list(r) for r in zip(*a)]
@@ -92,6 +92,23 @@ def audit(root):
     for original,b in zip((C,D),canonical):assert mm(original,T)==mm(T,b)
     assert mm(mm(tr(canonical[0]),J0),canonical[0])==neg(J0)
     assert mm(mm(tr(canonical[1]),J0),canonical[1])==J0
+    # Transport the *actual original-source* D4 word, not merely the generators.
+    # No identification with an independent Monster E/Z(E) representation.
+    def selected_d4(c,d):
+        w=evaluate(W_ORDER10,c,d)
+        mirror=power(w,5)
+        g=evaluate(CONJUGATOR,c,d)
+        rotate=mm(mirror,mm(mm(g,mirror),inv(g)))
+        return mirror,rotate
+    mirror,rotation=selected_d4(C,D)
+    mirror0,rotation0=selected_d4(*canonical)
+    assert mm(mirror,T)==mm(T,mirror0)
+    assert mm(rotation,T)==mm(T,rotation0)
+    assert mm(mirror,mirror)==ident()
+    assert mm(rotation,rotation)==neg(ident())
+    assert mm(mm(mirror,rotation),mirror)==power(rotation,3)
+    assert mm(mm(tr(rotation0),J0),rotation0)==J0
+    assert mm(mm(tr(mirror0),J0),mirror0)==neg(J0)
     # Original C acts on Heisenberg centre by -1; D acts by +1.
     # J0=C0^T-C0 is the alternating part of the standard cocycle.
     cocycle=[[0]*N for _ in range(N)]
@@ -120,7 +137,7 @@ def audit(root):
                 original_matrix_sha256_matched=True,
                 same_source_basis_T=T, canonical_C=canonical[0],canonical_D=canonical[1],
                 canonical_J=J0, source_form_rank=12,
-                conjugating_T_invertible=True, generator_pair_transport=True,
+                conjugating_T_invertible=True, generator_pair_transport=True, original_D4_word_transport=True,
                 common_intertwiner_dimension=len(basis),
                 cocycle_defect_ranks=defect_ranks,
                 central_multiplier_C=2,central_multiplier_D=1,
