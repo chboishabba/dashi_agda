@@ -30,7 +30,7 @@ def acquire(output, timeout=15):
                 data = response.read(5_000_001)
                 if len(data) > 5_000_000:
                     raise ValueError('Unexpected source payload larger than 5 MB')
-                if data[:4] != b'PK\\x03\\x04':
+                if data[:4] != b'PK\x03\x04':
                     raise ValueError('Not a ZIP/XLSX content signature; archive package requires manual handling')
                 digest = hashlib.sha256(data).hexdigest()
                 output.parent.mkdir(parents=True, exist_ok=True)
