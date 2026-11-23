@@ -1,5 +1,38 @@
 # NS R568 P0 — exact same-state Galerkin helical sign countercontrols and source field weld
 
+## 23 November — coordinator source-derivative normalization and exact time-zero sign audit
+
+**Canonical source-owner audit:** already merged R596 shows 4F = the complete Gram coherent work plus the weighted Gram-flux tangent. R597 defines coherent work as twice the real Hermitian cross, and R560/R388 prove the actual same-system double-mixed damping/forcing tangent. Thus defining the *raw* positive Cauchy quadratic
+
+    Qraw(t)=sum_{alpha,beta in actual fibre} Re<M_alpha(t),M_beta(t)> / (r_alpha+r_beta)
+
+and F(t)=sum K_ab Re<D_alpha,M_beta], where the source R388 law is M'_alpha = D_alpha-r_alpha M_alpha, gives the **finite exact normalized derivative**
+
+    Qraw' = 2F - ||sum_alpha M_alpha||^2.
+
+In the literal **R596 coherent-work** normalization Qsource = 2 Qraw, the equation becomes
+
+    Qsource' = 4F - 2 ||sum_alpha M_alpha||^2,
+
+exactly consistent with R596's original 4F normal form (its Gram pair is twice Re, not Re). No new Agda lemma or cutoff-independent estimate is claimed. Physical time realization requires R240/R560 derivative authority and R565 scalar FTC; an algebraic-time-zero identity cannot be promoted directly to time-integrated C1.
+
+The exact source-produced checker was extended *in place* to compute both Cauchy raw Gram Qraw and its R388 mixed-product time derivative, independently through the actual RATE-BUCKET aggregation, and to verify equality with 2F−the original coherent self-norm for each test state. It also rigorously confirms Qraw positivity by outward rational real-algebraic intervals. Current Git blob **9b6ea0db5c9698623c92df5bee94b6b087abe721**, checked against a byte-identical locally reconstructed file. Previous blob efad812d7699118ccb0396eb0165d4e6ba323fa8 was the preceding successful script before this extra acceptance check and remains a historical version, not current.
+
+**Two physical seed-time-zero receipts** (all signs rigorous exact Q(sqrt2,sqrt3) rational-enclosure arithmetic):
+
+- Seed 61: F>0>L, Qraw between 113.549331294160 and 113.549331294219, while Qraw' between −725.464561557930 and −725.464561557598.
+- Seed 63: F<0<L, Qraw between 69.022181372628 and 69.022181372642, while Qraw' between −554.916309290680 and −554.916309290471.
+
+Thus Qraw can be positive while its derivative is strictly negative even when unweighted F>0. Neither raw Q positivity nor the R596 exact evolution controls F's signed spacetime integral without an upper bound for Q at the endpoint and the integrated mixed-product self norm, and additional independent R653 C2 strict-margin payment. The rate quotient is not a guaranteed bound for those quantities as C→∞. The positive self-norm is not a licence to replace all four signs by a positive estimate.
+
+**Independent run bookkeeping:** 64/64 earlier same-state finite acceptance was additionally re-executed in four 16-case chunks at the previous source blob; the current extended source produced the same two exact witness certificates and completed its first 16-state chunk with the stronger Q-derivative assertions. Its remaining chunks must be rerun before claiming a fresh 64/64 on the **current blob**. No Agda/Lean kernel or CI run. This is source-faithful algebra in E=Q(sqrt2,sqrt3), not a native rational-F Agda result.
+
+**Coordinator gate mapping:** six-endpoint portfolio B1 is the ALREADY-REFUTED unrestricted R820/R823 positive signed auxiliary; portfolio B2 remains OPEN for valid signed W1/continuum. Portfolio C1/C2 are the 15-Nov CLASSICALLY closed selected R853 finite Galerkin ODE/rate gates under a Python/SymPy proof protocol, but native Agda field/time translation is OPEN. The local R568 C1/R653 C2 signed two-sided inequalities are entirely different objects, both ANALYTICALLY OPEN. The canonical JSON adds a nonterminal NS rate-sign-no-go record without altering four completed/11 active gate decisions or 0/6 original Clay endpoints.
+
+**Already merged preferred potential B producer:** R681 p-dot-q geometry, R682 same live R408/R664/R665 trajectory, R683 signed cross-gradient vector convolution; all the algebra is already source-written. The actual quantitative signed cross-gradient compensation and cutoff-uniform aggregation, along with true field-extension/native acceptance and scalar FTC, remain unpaid. Do not reconstruct R596/R682/R683 or count the field gap as paid by an abstract generic carrier.
+
+
+
 **23 November 2026. Original-source physical Fourier formula audit; independent finite algebraic verification; no claimed Navier–Stokes estimate or Agda/Lean kernel acceptance.**
 
 ## 0. High-alpha result and what is NOT claimed
