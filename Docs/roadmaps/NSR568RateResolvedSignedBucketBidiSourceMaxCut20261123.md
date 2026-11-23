@@ -1,5 +1,13 @@
 # R568 original signed rate-resolvent: exact bucket BIDI and two-sided analytic cut
 
+## 23 November 2026 — exact optimal rate quotient supersedes the loose class-count ceiling
+
+[Refined actual-source midpoint/rate-Cauchy radical proof and executable](NSRateResolvedCauchyRadicalOriginalSource20261123.md). The preliminary 6C²+1 rate-count ceiling is true but loose. Actual input masses satisfy m=(|k|²+|p−q|²)/2 and m≡|k|² mod2; the stronger **3C²+1** ceiling and source-specific bounds from d_i parity/limits hold. Exact source rate-multiplicity generating polynomial factors over the THREE coordinate intervals, with coefficients counting every ordered original p/q incidence. The duplicate-rate Cauchy matrix has rank EXACTLY the number of distinct rates and radical of dimension N−R: all within-rate zero-sum vectors, not only swap antisymmetry. The exact rational projector Pi onto bucket averages satisfies Pi²=Pi and Pi K=K Pi=K. This finite identity is available for original D/M *types*; it does not show the arbitrary exact rational proxy D/M used in the tests are actual Galerkin nonlinear forcing.
+
+**Correct original domain:** PhysicalTriadEnumeration requires |k_i|<=C as well as p,q cutoff. Valid source 37/37 fibres, 26,934 incidence checks; 8 literal independent O(N²) rational pair comparisons and 4 exact strict Cauchy determinant checks. Broader preliminary 44/44 included 7 k-outside-cutoff diagnostics; do not promote that count as authentic source. Source k=(5,0,0), C=5: N=726,R=42,ker=684; C=6: N=1352,R=67,ker=1285. Existing R541/R567/R687 cancellations and R624/R628/R634 integrations remain prior art. Pending source weld: REAL Row.D.doubleForcing and Row.doubleCell for identical physicalSystem/C/k/t, with original provenance sidecar. Pending ANALYTIC: R568 C1, R653 C2, R565 FTC, 3D PDE endpoint. Semantic module renaming remains outside this PR.
+
+
+
 **23 November 2026 — source-first result and remaining lemmas.** This is new finite algebra on the exact original cubic incidence geometry, not a PDE estimate or Navier–Stokes proof. Preserve existing numbered Agda module filenames: they encode real original theorem/checkpoint identities and must not be mechanically renamed. The separate Docs/SemanticNamingInventory20261123.md and config/semantic-name-registry.json own the semantic-name migration.
 
 ## Existing source (reuse, do not reproduce)
