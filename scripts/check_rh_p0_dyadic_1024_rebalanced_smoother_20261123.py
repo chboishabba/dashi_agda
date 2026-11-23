@@ -63,3 +63,24 @@ print("PASS all four independent r^-5 amplitudes r>=5534, t>=88544")
 print("PASS aperture mass cap H<=1/4 r>=9621, t>=153936")
 print("PASS adaptive amplitude r>=1215 and near-endpoint negative control")
 print("OPEN full E2 true FarExact/post-sixth and independent E3 signed cut; no kernel")
+
+
+# The source full oscillatory Fourier shell uses h^(k) for k<=8, so the
+# E0 order-52 operator asks for bump derivatives up to k+52=60.
+# The first 52 equal boxes cover eta derivatives through order52;
+# m-1>52 consumes n=m-1-52 of the tail boxes with reciprocal widths
+# 1024*2, 1024*4, ..., 1024*2^n.
+def Bm(m):
+    if m==0:return F(3,32)
+    n=max(0,m-1-52)
+    return 4*lam**min(m-1,52)*1024**n*2**(n*(n+1)//2)
+assert Bm(1)==4 and Bm(2)==4*lam
+assert Bm(53)==4*lam**52
+assert Bm(60)==4*lam**52*1024**7*2**28
+for k in (0,2,4,6,8):
+    for r in (1215,5534,9621,32768):
+        Hk=sum(E[j]*Bm(k+2*j)/F(r)**(2*j) for j in range(27))
+        assert Hk>=Bm(k)
+        if k==0:assert Hk==H(r)
+    print(f"PASS exact source aperture derivative W^({k},1) finite envelope through m=60")
+print("OPEN full actual-zero/Gamma FarExact and post-sixth despite explicit aperture Sobolev constants")
