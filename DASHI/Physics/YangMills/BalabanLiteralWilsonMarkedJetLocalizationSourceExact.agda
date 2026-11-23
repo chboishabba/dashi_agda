@@ -17,7 +17,8 @@ module DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedJetLocalizationSourceEx
 -- been eliminated.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; ∣_∣; _≤_)
 import Data.Rational.Properties as ℚP

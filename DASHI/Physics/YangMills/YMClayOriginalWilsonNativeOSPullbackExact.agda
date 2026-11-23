@@ -33,7 +33,6 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; _*ℝ_; _<ℝ_; _≤ℝ_)
 
-import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as Published
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
@@ -247,42 +246,6 @@ module _
               Physical.density originalFineGibbsMeasure fine
               *ℝ product)
             (cong₂ _*ℝ_ (compatible left fine) refl)))
-
-
-  -- Apply the published theorem on the ORIGINAL FINE Wilson observable,
-  -- not on a separately chosen coarse Wilson action. The existing native
-  -- pullback carries the result to the actual induced action.
-  originalR445OSPositiveFromPublishedFineWilson :
-    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
-    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
-    (published : Published.WilsonReflectionPositivityData FineObservable ℝ)
-    (fineReflect : FineObservable → FineObservable)
-    (coarseReflect : CoarseObservable → CoarseObservable) →
-    NativeBlockReflectsExactly fineReflect coarseReflect →
-    (CoarsePositiveTime : CoarseObservable → Set) →
-    (∀ observable → CoarsePositiveTime observable →
-      Published.PositiveTimeObservable published (actualCoarsePullback observable)) →
-    (∀ observable → CoarsePositiveTime observable →
-      Published.GaugeInvariant published (actualCoarsePullback observable)) →
-    (∀ value → Published.Nonnegative published value → 0ℝ ≤ℝ value) →
-    (∀ observable → CoarsePositiveTime observable →
-      Published.reflectedProductExpectation published (actualCoarsePullback observable)
-      ≡ originalFineOSQuadratic fineReflect (actualCoarsePullback observable)) →
-    ∀ observable → CoarsePositiveTime observable →
-      0ℝ ≤ℝ actualR445CoarseOSQuadratic coarseReflect observable
-  originalR445OSPositiveFromPublishedFineWilson
-      ordered strictToWeak published fineReflect coarseReflect compatible
-      CoarsePositiveTime positiveTime gaugeInvariant realOrder sameSource
-      observable valid =
-    subst (λ value → 0ℝ ≤ℝ value)
-      (originalR445ReflectedQuadraticIsFineWilsonQuadratic
-        ordered strictToWeak fineReflect coarseReflect compatible observable)
-      (subst (λ value → 0ℝ ≤ℝ value)
-        (sameSource observable valid)
-        (realOrder _
-          (Published.wilsonPositivityAtAnySeparationParity
-            published Published.evenSitePlane (actualCoarsePullback observable)
-            (gaugeInvariant observable valid) (positiveTime observable valid))))
 
 -- Reflection compatibility of the original 64-block ordered native map,
 -- fine Wilson OS positivity for the selected physical plane, and actual

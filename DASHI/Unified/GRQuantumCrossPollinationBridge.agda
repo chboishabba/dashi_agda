@@ -12,7 +12,7 @@ open import DASHI.Unified.GRQuantumUnification
 -- it records where proof terms can be transported into the unified closure.
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPBase369Bridge
-import DASHI.Foundations.SSPPrimeLane369DepthPhaseBridge
+import DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge
 import DASHI.Geometry.SSP369Ultrametric
 import DASHI.Geometry.SSP369SymmetryIsometry
 import DASHI.Geometry.DifferentialGeometryParity
@@ -88,7 +88,7 @@ canonicalCrossPollinationSeams =
     false
   ∷ mkCrossPollinationSeam
     phaseDepthWaveLane
-    "DASHI.Foundations.SSPPrimeLane369DepthPhaseBridge"
+    "DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge"
     "WaveLift / CanonicalCommutationClosure"
     "Depth-indexed phase transport supplies a finite precursor for the noncommuting depth/refinement algebra and the unitary wave completion."
     true

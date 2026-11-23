@@ -1,9 +1,5 @@
 # Infoton / January Walker P30 maximum-cut — 15 November 2026
 
-
-> **16 November 2026 — original-owner correction:** The \`U(3) = [SU(3)_c × U(1)_em]/Z3\` selection rule and \`3Q_em ≡ −t_c (mod 3)\` were **already** derived for the same original 27 states in Johl Brown's DASHI KK/E6/Higgs source programme. Original owning roadmap: \`Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md\`; original execution: \`scripts/check_kk_e6_post_e21_u3_photon.py\`; antecedents: Agda #1106 and #1241. **Matthew Reece** is now an explicitly credited independent published source (JHEP 10 (2023) 116; §2 eqs. (2.1)–(2.4); DOI 10.1007/JHEP10(2023)116), **not the originator of these DASHI computations or a code contributor**. The structured source is \`DASHI.Physics.Gravity.KKE6TrinificationDiagonalZThreeQuotientExact.reece2023AxionGaugeGlobalFormSource\`. The finite three-label \`conditionalU3QuotientChargeCancellation\` is only a presentation/reader projection of the stronger existing source-specific result. The separate Reece axion-coupling selection constraint is published prior art, **not** proved by our existing 27-state checker.
-
-
 **Scope:** exact primary-source/intake audit, finite mathematical counterexamples, and a runnable neutral comparator. **No original P30 implementation, energy experiment, ECC equivalence or Clay theorem is claimed.** This is an independent P30 gate ledger, not the existing 15-gate Clay closure ledger.
 
 ## Primary sources and provenance (do not collapse)
@@ -80,49 +76,3 @@ Local Python 11/11 passed 2026-11-15; the **Agda kernel target is not certified*
 **DASHI Agda remains golden.** Existing \`DASHI/Algebra/BalancedTernaryIntegerExact.agda\`, \`DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda\`, \`DASHI/Codec/BalancedTritBitFibre.agda\`, \`DASHI/Programmes/FRACDASHExact.agda\`, and \`DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda\` are reused, **not duplicated or declared equivalent to P30**. Existing \`DASHI/Quantum/QuantumBirthmarkHistorySectorDarkEnergyExact.agda\` already cautions against a Landauer→gravity converse.
 
 **Critical path B1 + B2 + B3 ⇒ C1 ⇒ C2.** It is not scientifically defensible to estimate a 75× electricity cut until the original P30 verifier and matched ECC work exist. D1–D3, E1–E3 are separate model and authority gates; they are not closed by algebra. All open gates have named original-evidence criteria; this pass does not claim to finish unprovided original code or unavailable physical experiments.
-
-
-## 15 November 2026 second maximum-cut addendum
-
-See [round-2 source / physical-discriminator audit](./InfotonP30WalkerRound2PhysicalDiscriminators20261115.md) and the real SECDED reference and non-original-P30 negative control in \`scripts/infoton_p30_ecc_maxcut.py\` and \`scripts/test_infoton_p30_ecc_maxcut.py\`.
-
-**Independent ledger after round 2: 8/19 CLOSED / 11 OPEN.** The new E1 closure is **NEGATIVE**: a primary-source NRC 1980 reactor protection 100ms technical-specification threshold and independently verified less-than-50ms actual tests refute the purported *universal fixed two-second blindness* claim. Separately IAEA INSAG-7 describes ~5min supervisory SKALA calculations and <1s selected DREG data capture; conflating them with fast protection is invalid.
-
-A real (72,64) syndrome-based SECDED reference corrects all 72 single-bit and detects all 2556 double-bit corruptions. An explicitly non-P30 coprime-unit surrogate does *not* detect 4352/5376 legal one-position substitutions, disproving residue membership alone as universal ECC. **Neither test runs Walker's unavailable original P30 codec.**
-
-The 130kW→1.73kW slide is conditional on *all* rack load scaling with a non-equivalent counted-operation ratio. With 25% fixed load, the conditional projected remaining rack power is 33.796kW; no measured efficiency or water elimination is inferred. Original P30 implementation/verification, Agda kernel checking, real GPU/rack Wattmeter, reactor-specific physical testing, biology spectroscopy and gauge-charge derivations remain OPEN.
-
-
-## 15 November 2026: quantum-369 + critical safety + thermal rebase
-
-See [the exact cross-programme weld](./InfotonP30WalkerQuantum369CriticalSystemsThermalWeld20261115.md) and its new source-written Agda module \`DASHI/Quantum/Infoton369FermiChargeBoundaryExact.agda\`.
-
-Corrections: Walker's **300 K** Infoton mass is a reference-temperature value of the family \`k_B T ln(2)/c²\`; FD \`1/3\` is independent of temperature **at the scaled energy offset**. Existing finite qutrit Weyl and magnetic C3 are exact, but not automatically SU3 colour charge. Reece, JHEP 10 (2023) 116 §2 provides a physically relevant **conditional Z3 centre / fractional-charge congruence** for \`[SU(3)×U(1)]/Z3\`. New module reuses existing C3 arithmetic to source-write its three cases, and separately proves that **occupation alone** cannot recover charge labels. The positive FD→electromagnetic gauge charge endpoint remains OPEN; kernel checking of this new finite module remains OPEN.
-
-Existing thermal owners already give PUE/ERF/ERE and exact source-heat versus compressor-output boundaries; do not substitute a fresh rack-only PUE model or confuse useful heat with electrical savings. Real critical systems have scope-dependent **binding** standards (10 CFR 50.55a(h), FIPS 140-3), but the unspecified nine laws in the reel have not been located and an IBM byte-only obligation is not demonstrated.
-
-**This rebase does not change the original 8/19 Infoton closure ledger: 11 physical/authority/codec gates remain OPEN.** It makes the proof prerequisites and donor reuse more specific without promoting finite source-written material to independent physical endpoints.
-
-
-## 16 Nov 2026 — original physical-adapter max-cut (source code and local tests)
-
-Companion: [Infoton original physical-adapter max-cut](./InfotonOriginalPhysicalAdapterMaxCut20261116.md). **Original endpoint count unchanged: 8/19 adjudicated, 11 OPEN.**
-
-The **actual** DASHI physical law owners were located and reused, not replaced: \`DASHI.Physics.Laws.ExistingPhysicsAdapter\`, \`ThermodynamicStatisticalLaws\`, \`GaugeInteractionLaws\`, \`QuantumFieldLaws\`, \`StandardModelLawBoundary\`, \`ConstantsMetrologyBoundary\`, \`Environment.QuantitiesConservation.WaterBalance\`, and the original heat/PUE/ERF owner. New \`DASHI/Quantum/InfotonOriginalPhysicalAdapterWeldExact.agda\` reuses actual original QED \`+4/6\` versus \`-2/6\`, original E6 centre theorem, site heat/water and canonical physics status. Its \`noOriginalQuarkChargeFromFDScalarAlone\` is a finite **conditional impossibility** for a universal scalar-only charge map, not a no-go on every richer model. It requires a separately specified fermion/gauge-action selector for Walker's positive charge claim.
-
-New \`scripts/infoton_original_physical_adapters_maxcut.py\` and tests implement calibrated-measurement **acceptance gates** for the same data, fault corpus, hardware, workload, service and physical energy and water quantities. Tests directly run the *byte-identical original* \`scripts/datacentre_thermal_reuse_dispatch.py\` (Git blob \`84670c75f2775422c2ce7e284283cc66b50f1f14\`), including heat offtake/no-offtake conservation cases. **41/41 Python tests PASSED locally** across original 23 bundled P30/ECC cases and new 18 physical-adapter cases. GitHub blobs of the three new source/test files match the tested local copies exactly.
-
-Both new Agda source modules are imported in the **Quantum domain rollup** and **EverythingTOESymmetryResolved369 import graph**. The pinned Agda checker is unavailable in the current container, so **B4 remains OPEN**; use \`scripts/check_infoton_original_physical_maxcut.sh\` in a full pinned Agda checkout for original 27-state E6 gauge regression + original thermal dispatcher + Python tests + strict 2.8.0.2 kernel checking. This shell script is not itself an Agda verification result.
-
-GitHub API inspection of Walker's public \`JanuaryNWalker/Infoton\` main (16 Nov 2026) shows only README.md and LICENSE, despite a reported P30 demonstration. No original P30 source codec, detector observation, metered rack energy or site water data is present in that checked public code. No physical positive endpoint is promoted by our framework's existence.
-
-
-## 16 November 2026 — source-constrained reverse engineering of P30
-
-The inverse reconstruction is now **implemented and tested**, not only proposed. See \`docs/research/InfotonP30BackPropagation20261116.md\`, \`scripts/p30_backprop_candidates.py\` and \`scripts/test_p30_backprop_candidates.py\`. Both source files are byte-for-byte Git-blob verified against the locally executed source.
-
-Source-constrained observation from Walker's own page 29: 163 characters → 489 encode operations → 167 positions; CHAR round-trip 167 bytes; PACKED round-trip 171 bytes; DIRECT write-only 116 bytes. The example phrase, ASCII-normalized, is exactly 163 bytes. The eight source \`U(30)\` coprime rays can be paired with an *inferred* 32-depth coordinate to cover 256 byte states. Both the natural and reflected-Gray code mappings round-trip all bytes, differ from one another, and reproduce the source's 163/489/167/171 counts under an explicitly **inferred** 4-position length header, three-stage bookkeeping convention and four-byte CRC32 on the packed format. **16/16 local tests PASS**, including every single payload-bit fault in the illustrative 171-byte CRC format.
-
-The same physical capacity cut is decisive: \`8 × 32 = 256\` leaves zero unused states, so an eight-bit position-label bijection by itself supplies neither entropy compression nor intrinsic ECC. CRC needs a read verification and detects rather than corrects faults. A universal 163→116 lossless reduction is impossible; the *particular* 163-byte natural-language example could compress below 116 using an appropriate statistical model. The original DIRECT write-only framing/decoder is unknown.
-
-**Explicit model nonidentifiability:** two different encoders satisfy every observed aggregate total. The source-derived facts are real; the radial depth, encoding permutation, four-byte headers and CRC are our *possible inverse models*, **NOT recovered original P30 internals**. P30's actual original source ECC, energy and water validation remain outstanding; **8/19 adjudicated, 11 OPEN**. No change to the six Clay endpoints.

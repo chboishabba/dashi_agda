@@ -186,17 +186,17 @@ data CorrectionAdequacyCoordinate : Set where
 
 data CorrectionAdequacyState : Set where
   paid : CorrectionAdequacyState
-  open : CorrectionAdequacyState
+  openState : CorrectionAdequacyState
   outcomeEvidenceRequired : CorrectionAdequacyState
 
 
 currentCorrectionAdequacyState :
   CorrectionAdequacyCoordinate → CorrectionAdequacyState
-currentCorrectionAdequacyState affectedCommunityAuthorityBearing = open
-currentCorrectionAdequacyState independentReviewAvailable = open
-currentCorrectionAdequacyState externalEvidenceAdmissible = open
-currentCorrectionAdequacyState dissentDoesNotSelfInvalidate = open
-currentCorrectionAdequacyState correctionCanChangeDecision = open
+currentCorrectionAdequacyState affectedCommunityAuthorityBearing = openState
+currentCorrectionAdequacyState independentReviewAvailable = openState
+currentCorrectionAdequacyState externalEvidenceAdmissible = openState
+currentCorrectionAdequacyState dissentDoesNotSelfInvalidate = openState
+currentCorrectionAdequacyState correctionCanChangeDecision = openState
 currentCorrectionAdequacyState realisedCountryOutcomeObserved = outcomeEvidenceRequired
 currentCorrectionAdequacyState recurrencePreventionObserved = outcomeEvidenceRequired
 

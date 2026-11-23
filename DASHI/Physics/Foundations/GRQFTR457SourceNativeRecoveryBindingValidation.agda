@@ -12,6 +12,18 @@ noSecondContinuumConstruction :
   B.additionalContinuumConstructionNeededForGRQFTRecoverQFT ≡ false
 noSecondContinuumConstruction = refl
 
-legacyProjectionStillLive :
-  B.legacyProjectionCompatibilityStillRequired ≡ true
-legacyProjectionStillLive = refl
+formalLegacyProjectionRetired :
+  B.legacyProjectionCompatibilityStillRequired ≡ false
+formalLegacyProjectionRetired = refl
+
+round131AttachmentCompilerOwned :
+  B.round131RecoveredAttachmentToR457SameObjectCompilerOwned ≡ true
+round131AttachmentCompilerOwned = refl
+
+r457IndependentEqualityNotRequired :
+  B.independentR457RecoveryEqualityRequiredAfterRound131Attachment ≡ false
+r457IndependentEqualityNotRequired = refl
+
+round131RecoveredAttachmentStillLive :
+  B.round131RecoveredQFTAttachmentForR457StillRequired ≡ true
+round131RecoveredAttachmentStillLive = refl

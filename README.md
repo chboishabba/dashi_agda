@@ -42,6 +42,31 @@ Repository automation follows a resource-conscious, newest-run-wins policy;
 see [`.github/WORKFLOW_PHILOSOPHY.md`](.github/WORKFLOW_PHILOSOPHY.md) before
 adding or broadening a GitHub Actions workflow.
 
+### Checking Agda modules locally
+
+Use the parallel-check wrapper, not `agda` directly:
+
+```bash
+scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+```
+
+With no target it checks `DASHI/Everything.agda`. Useful knobs:
+
+```bash
+AGDA_JOBS=4 scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+DASHI_AGDA29_CLEAN=1 scripts/run_agda29_parallel_check.sh DASHI/Everything.agda
+```
+
+The wrapper resolves the Agda 2.9 binary from the sibling
+`/home/c/Documents/code/agda` flake, rsyncs a source-only shadow of this repo
+(plus the stdlib `experimental` checkout) under
+`${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29`, and reuses `.agdai` interfaces
+across runs. `DASHI_NO_TMUX=1` runs in the current shell instead of a detached
+tmux session. Full mechanics, cache controls, and the Track A (authoritative
+flake) vs Track B (fast parallel feedback) distinction are documented in
+[`Docs/AgentOperationalNotes.md`](Docs/AgentOperationalNotes.md).
+
 The high-level claim classes remain:
 
 - `proved`: canonical Agda theorem spine and specifically discharged closure claims;

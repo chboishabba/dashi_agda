@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
@@ -23,7 +26,10 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
       - 'DASHI/Unified/**'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -31,6 +37,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
@@ -38,8 +47,21 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
+      - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
+      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
       - 'Docs/diagrams/ym_toe_r559_convergence.puml'
@@ -69,6 +91,14 @@ jobs:
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
           dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo related b4ResearchLeafNowOnlyPhysicalR440Payment --root . --limit 20
+          dashi-repo related historicalNestedInnerPureCommutatorExposed --root . --limit 20
+          dashi-repo discover 'Navier Stokes current physical R440 noncore core payment historical signed external commutator non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNR650 --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNExternal --root .
           dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
           dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
           dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
@@ -77,8 +107,21 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetFormalGapOrdinalCount --root . --limit 20
+          dashi-repo related fleetSharedCardinalityDoesNotCreateIdentity --root . --limit 20
+          dashi-repo discover 'Fleet 58 formal gap target ordinal non-promotion spectral identity firewall' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.Fleet --root .
           dashi-repo related BalabanRGTOEReceipt --root .
+          dashi-repo related BalabanScaleTransferPromotion --root . --limit 20
+          dashi-repo related balabanScaleTransferPromotionImpossible --root . --limit 20
+          dashi-repo related fleetRecordedUnformalisedGapCountIs58 --root . --limit 20
+          dashi-repo discover 'Balaban scale transfer promotion continuum non-promotion Fleet 58 canonical owner' --root . --limit 40
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
+          dashi-repo related balabanSameFamilyRecoveryCompilerLevel --root . --limit 20
+          dashi-repo related balabanGoal1CSourceCutCompilerLevel --root . --limit 20
+          dashi-repo related r129ExportsLiteralSchwingerMembership --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
@@ -87,8 +130,14 @@ jobs:
           dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
           dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
-          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress RG continuum non-promotion' --root .
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo related canonicalEarthEmbeddingTOEReceipt --root . --limit 20
+          dashi-repo related learnedCoordinateDoesNotCreatePhysicalIdentity --root . --limit 20
+          dashi-repo related gradientDoesNotCreateCausalEnvironmentalEffect --root . --limit 20
+          dashi-repo discover 'Earth embedding TESSERA AlphaEarth learned coordinates gradients physical interpretation Woogaroo non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Geo.EarthEmbedding --root .
+          dashi-repo diagnose DASHI/Geo/EarthEmbeddingAcquisitionExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
@@ -101,6 +150,36 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda --root .
+          dashi-repo diagnose DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda --root .
+          dashi-repo related stateDecode-stateCode --root . --limit 20
+          dashi-repo related compilerSuccessDoesNotCreateKernelSuccess --root . --limit 20
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo related toe27RotationOrderThree --root . --limit 20
+          dashi-repo related toe27OriginFixed --root . --limit 20
+          dashi-repo related toe27MonsterPhaseConjugationIntertwiner --root . --limit 20
+          dashi-repo related toe27MonsterRepresentationNotPromoted --root . --limit 20
+          dashi-repo related toe27MonsterEmbeddingNotPromoted --root . --limit 20
+          dashi-repo related toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner --root . --limit 20
+          dashi-repo discover '369 max cut kernel bidi ternary 27 Monster representation embedding non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
+          dashi-repo related named58ManifestAcquired --root . --limit 20
+          dashi-repo related perGapDispatchEnabled --root . --limit 20
+          dashi-repo related countIdentifiesNamedRows --root . --limit 20
+          dashi-repo discover 'Fleet 58 named manifest acquisition per-gap dispatch boundary' --root . --limit 40
+          dashi-repo related fleetCoordinateRebuildabilityReceipt --root . --limit 20
+          dashi-repo related fleetNumericABIReceipt --root . --limit 20
+          dashi-repo related fleetResidualInvariantReceipt --root . --limit 20
+          dashi-repo related fleetPromotionObligationIndex --root . --limit 20
+          dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
+          dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
+          dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
 
       - name: Reject ESD surface changes
         shell: bash
@@ -112,6 +191,25 @@ jobs:
             echo "ESD surface change detected" >&2
             exit 1
           fi
+
+      - name: Fast Agda preflight on converged TOE graph
+        run: |
+          files=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+          )
+          for file in "${files[@]}"; do
+            dashi-agda-preflight --root . "$file"
+          done
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -160,16 +258,33 @@ jobs:
       - name: Reject trust escapes
         run: |
           sources=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Geo/EarthEmbeddingWoogarooExact.agda
+            DASHI/Geo/EarthEmbeddingGeometryExact.agda
+            DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
+            DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
+            DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda
+            DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
+            DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
@@ -178,7 +293,7 @@ jobs:
             DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -188,10 +303,30 @@ jobs:
         run: |
           agda --version
           modules=(
+            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
+            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
+            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
+            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
+            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
           )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"

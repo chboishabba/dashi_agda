@@ -2,8 +2,8 @@ module DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact where
 
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
-open import Data.Rational.Base using (ℚ)
-open import Data.Rational.Tactic.RingSolver using (solve)
+open import Data.Rational.Base using (ℚ; 0ℚ) renaming (_+_ to _+ℚ_)
+import Data.Rational.Properties as ℚP
 open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
@@ -32,11 +32,29 @@ cubeEqual (cubeS t ts) (cubeS u us) =
 
 addZeroLeft : (a : C3.Cyclotomic3) → V.addC3 C3.zero a ≡ a
 addZeroLeft (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext (solve (a ∷ [])) (solve (b ∷ []))
+  C3.cyclotomic3Ext (ℚP.+-identityˡ a) (ℚP.+-identityˡ b)
 
 addZeroRight : (a : C3.Cyclotomic3) → V.addC3 a C3.zero ≡ a
 addZeroRight (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext (solve (a ∷ [])) (solve (b ∷ []))
+  C3.cyclotomic3Ext (ℚP.+-identityʳ a) (ℚP.+-identityʳ b)
+
+plusZeroZero : (a : C3.Cyclotomic3) → V.addC3 a (V.addC3 C3.zero C3.zero) ≡ a
+plusZeroZero (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (cong (a +ℚ_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (cong (b +ℚ_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ b))
+
+zeroPlusPlusZero : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 a C3.zero) ≡ a
+zeroPlusPlusZero (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (ℚP.+-identityˡ (a +ℚ 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (ℚP.+-identityˡ (b +ℚ 0ℚ)) (ℚP.+-identityʳ b))
+
+zeroPlusZeroPlus : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 C3.zero a) ≡ a
+zeroPlusZeroPlus (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (ℚP.+-identityˡ (0ℚ +ℚ a)) (ℚP.+-identityˡ a))
+    (trans (ℚP.+-identityˡ (0ℚ +ℚ b)) (ℚP.+-identityˡ b))
 
 multiplyRightOne : (a : C3.Cyclotomic3) → C3.multiply a C3.one ≡ a
 multiplyRightOne a = trans (L.multiplyCommutative a C3.one) (L.oneActsLeft a)
@@ -96,12 +114,6 @@ interpretLiftHead head observed (combine left right) tail =
     (gateAdd (V.tritEqual head observed)
       (interpret left tail)
       (interpret right tail))
-  where
-  cong₂ :
-    ∀ {A B C : Set}
-      (f : A → B → C) {a a' : A} {b b' : B} →
-      a ≡ a' → b ≡ b' → f a b ≡ f a' b'
-  cong₂ f refl refl = refl
 
 decompose :
   ∀ {n} → (TritCube n → C3.Cyclotomic3) → DeltaCombination n
@@ -124,22 +136,19 @@ decomposeExact {suc n} f (cubeS neg tail)
         | interpretLiftHead zer neg (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos neg (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS neg t)) tail
-        | addZeroLeft C3.zero
-        | addZeroRight (f (cubeS neg tail)) = refl
+        | plusZeroZero (f (cubeS neg tail)) = refl
 decomposeExact {suc n} f (cubeS zer tail)
   rewrite interpretLiftHead neg zer (decompose (λ t → f (cubeS neg t))) tail
         | interpretLiftHead zer zer (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos zer (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS zer t)) tail
-        | addZeroRight (f (cubeS zer tail))
-        | addZeroLeft (f (cubeS zer tail)) = refl
+        | zeroPlusPlusZero (f (cubeS zer tail)) = refl
 decomposeExact {suc n} f (cubeS pos tail)
   rewrite interpretLiftHead neg pos (decompose (λ t → f (cubeS neg t))) tail
         | interpretLiftHead zer pos (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos pos (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS pos t)) tail
-        | addZeroLeft (f (cubeS pos tail))
-        | addZeroLeft (f (cubeS pos tail)) = refl
+        | zeroPlusZeroPlus (f (cubeS pos tail)) = refl
 
 Cube6 : Set
 Cube6 = TritCube 6
@@ -266,6 +275,8 @@ record TernaryFiniteFunctionDeltaBasisBoundary : Set where
     pointMassIdentifiedWithScaledBooleanDelta : Bool
     all729DeltasSpanEverySchrodingerFunction : Bool
     MonsterRepresentationIdentifiedByThisAlone : Bool
+
+open TernaryFiniteFunctionDeltaBasisBoundary public
 
 canonicalTernaryFiniteFunctionDeltaBasisBoundary :
   TernaryFiniteFunctionDeltaBasisBoundary

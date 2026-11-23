@@ -309,10 +309,40 @@
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
           agda29-parallel = agda29.packages.${system}.debug.bin;
+          lean-world-bin = pkgs.lean4;
           check = authoritativeCheck;
           zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
           inherit agdaRecord agdaRecordAll;
+        };
+
+        # Focused federation proof shell: avoids the unrelated zkperf Rust
+        # workspace build (which can fail before Agda starts).
+        devShells.federated-topology = pkgs.mkShell {
+          buildInputs = [ agdaWithDashiDeps pkgs.python3 pkgs.bash ];
+          shellHook = ''
+            echo "Federated topology focused Agda shell (no zkperf dependency)"
+          '';
+        };
+
+        # Reuses the same pinned nixpkgs/flake.lock as the Agda runners.
+        # A repo's lean-toolchain MUST match this Lean binary; the worker
+        # refuses mismatches rather than silently selecting another version.
+        devShells.lean-world = pkgs.mkShell {
+          packages = [
+            pkgs.lean4
+            (pkgs.python3.withPackages (ps: [ ps.psycopg ]))
+            pkgs.bash
+            pkgs.coreutils
+            pkgs.git
+            pkgs.postgresql_16
+            pkgs.rustc
+            pkgs.cargo
+          ];
+          shellHook = ''
+            echo "DASHI source-pinned Lean elaboration worker shell"
+            echo "  nix develop .#lean-world --command lean --version"
+          '';
         };
 
         devShells.default = pkgs.mkShell {

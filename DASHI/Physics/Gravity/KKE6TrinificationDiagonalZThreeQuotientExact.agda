@@ -20,45 +20,6 @@ module DASHI.Physics.Gravity.KKE6TrinificationDiagonalZThreeQuotientExact where
 open import DASHI.Core.Prelude
 import DASHI.Core.FormalClaimTransportGeometryExact as Transport
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
-import DASHI.Core.AttributedSourceCore as Attribution
-
-------------------------------------------------------------------------
--- REUSE/ATTRIBUTION (source identity != source ownership)
---
--- ORIGINAL DASHI RESEARCH INTEGRATION: Johl Brown / DASHI; original first-
--- Tits E6 27 source #1106 and physical KK / Higgs global-quotient programme
--- #1241, including the later same-27 U(3) residual photon checker:
--- scripts/check_kk_e6_post_e21_u3_photon.py.
---
--- INDEPENDENT PUBLISHED SOURCE / SCHOLARLY CONTRIBUTOR: Matthew Reece,
--- JHEP 10 (2023) 116, section 2 eqs (2.1)-(2.4); complementary axion
--- photon/gluon coupling correlation eq (1.4). The source establishes the
--- relevant global-form/triality selection rule in the literature; it is
--- NOT authorship of these DASHI original-27 calculations and not a
--- substitute for the conditional Higgs/physical-dynamics prerequisites.
---
--- Already-existing prior literature and origin credits remain in
--- Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md.
-------------------------------------------------------------------------
-
-reece2023AxionGaugeGlobalFormSource : Attribution.AttributedSource
-reece2023AxionGaugeGlobalFormSource = Attribution.mkDOISource
-  "Matthew Reece"
-  "Axion-gauge coupling quantization with a twist"
-  "Journal of High Energy Physics 2023, article 116 (JHEP10(2023)116)"
-  "2023"
-  "10.1007/JHEP10(2023)116"
-  "https://doi.org/10.1007/JHEP10(2023)116"
-  Attribution.academicArticleSource
-  "Independent published U(3)=[SU(3) x U(1)]/Z3 triality/electric-charge selection rule and axion coupling quantization; citation does not assign authorship of Johl Brown's DASHI first-Tits 27, chosen VEV, global stabilizer, or source-specific checker"
-  Attribution.publicAttribution
-
-reece2023GlobalFormAtlas : Attribution.AttributedSourceAtlas
-reece2023GlobalFormAtlas = Attribution.mkSourceAtlas
-  "KK/E6 colour plus electromagnetism external published source"
-  "Johl Brown / DASHI original first-Tits 27 and selected physical Higgs integration"
-  (reece2023AxionGaugeGlobalFormSource ∷ [])
-  "Published prior-art attribution to Matthew Reece; finite original-27 calculation and source-specific physical prerequisites retain their existing DASHI origin"
 
 data ZThree : Set where
   z0 z1 z2 : ZThree

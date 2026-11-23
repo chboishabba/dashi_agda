@@ -35,6 +35,7 @@ import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as Extens
 import DASHI.Culture.AmyEskridgeOSINTSnowballExact as OSINT
 import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact as Demise
 import DASHI.Culture.AmyEskridgeVideoZoomClipSourceWeldExact as Zoom
+import DASHI.Culture.AmyEskridgeVideoOriginalClipLineageExact as Lineage
 
 data EvidentiaryCarrier : Set where
   unpaidCarrier : String → EvidentiaryCarrier
@@ -45,6 +46,7 @@ data EvidentiaryCarrier : Set where
   historicalRoster : Extension.RosterExtensionReceipt → EvidentiaryCarrier
   obituaryRecord : Demise.DemiseSnowballAtom → EvidentiaryCarrier
   clipSource : Zoom.ExactClipJoin → EvidentiaryCarrier
+  originalVideoClip : Lineage.ClipLineage → EvidentiaryCarrier
   pairedCarriers : EvidentiaryCarrier → EvidentiaryCarrier → EvidentiaryCarrier
 
 record VideoClaimJoin : Set where
@@ -501,155 +503,155 @@ claimJoin063 = video-claim-join
 claimJoin064 : VideoClaimJoin
 claimJoin064 = video-claim-join
   Video.claim064
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip05))
+  "Dan Burisch interview source family, edited clip05, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 064 at 16:02 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin065 : VideoClaimJoin
 claimJoin065 = video-claim-join
   Video.claim065
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip05))
+  "Dan Burisch interview source family, edited clip05, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 065 at 16:09 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin066 : VideoClaimJoin
 claimJoin066 = video-claim-join
   Video.claim066
-  (unpaidCarrier "unlocated-16:49")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (originalVideoClip Lineage.clip06)
+  "Original Philip K. Dick 1977 Metz philosophical speech identified in clip06; 1977 recorded statement does not establish timeline changes or any Burisch device"
   "Claim 066 at 16:49 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin067 : VideoClaimJoin
 claimJoin067 = video-claim-join
   Video.claim067
-  (unpaidCarrier "unlocated-17:13")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (originalVideoClip Lineage.clip07)
+  "Original Deutsch 1995 Noorderlicht interview clip07 located; quantum multiverse quotation cannot be used as apparatus validation or timeline intervention"
   "Claim 067 at 17:13 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin068 : VideoClaimJoin
 claimJoin068 = video-claim-join
   Video.claim068
-  (unpaidCarrier "unlocated-17:42")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (documentSource Source.videoTranscript)
+  "The attributed source is Be Inspired narrator synthesis in the original 2026 video, not an independently located primary operational witness or scientific effect"
   "Claim 068 at 17:42 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin069 : VideoClaimJoin
 claimJoin069 = video-claim-join
   Video.claim069
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip08))
+  "Dan Burisch interview source family, edited clip08, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 069 at 18:02 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin070 : VideoClaimJoin
 claimJoin070 = video-claim-join
   Video.claim070
-  (documentSource Source.bem2011)
-  "NLM abstract pays the existence of Bem's 9-psychology-experiment paper, not the narration's anticipatory physiology or successful replication"
+  (pairedCarriers (documentSource Source.bem2011) (originalVideoClip Lineage.clip09))
+  "Bem 2011 cognitive/affective experimental paradigm vs separate physiological presentiment; the 18:35 original audiovisual voice is still UNLOCATED, and clip09 is a locator/status record, not a verified clip identity"
   "Claim 070 at 18:35 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin071 : VideoClaimJoin
 claimJoin071 = video-claim-join
   Video.claim071
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip10))
+  "Dan Burisch interview source family, edited clip10, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 071 at 19:15 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin072 : VideoClaimJoin
 claimJoin072 = video-claim-join
   Video.claim072
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip10))
+  "Dan Burisch interview source family, edited clip10, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 072 at 19:26 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin073 : VideoClaimJoin
 claimJoin073 = video-claim-join
   Video.claim073
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip10))
+  "Dan Burisch interview source family, edited clip10, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 073 at 20:00 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin074 : VideoClaimJoin
 claimJoin074 = video-claim-join
   Video.claim074
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip11))
+  "Dan Burisch interview source family, edited clip11, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 074 at 21:35 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin075 : VideoClaimJoin
 claimJoin075 = video-claim-join
   Video.claim075
-  (unpaidCarrier "unlocated-23:01")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (documentSource Source.videoTranscript)
+  "The attributed source is Be Inspired narrator synthesis in the original 2026 video, not an independently located primary operational witness or scientific effect"
   "Claim 075 at 23:01 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin076 : VideoClaimJoin
 claimJoin076 = video-claim-join
   Video.claim076
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip12))
+  "Dan Burisch interview source family, edited clip12, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 076 at 24:09 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin077 : VideoClaimJoin
 claimJoin077 = video-claim-join
   Video.claim077
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip12))
+  "Dan Burisch interview source family, edited clip12, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 077 at 24:32 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin078 : VideoClaimJoin
 claimJoin078 = video-claim-join
   Video.claim078
-  (unpaidCarrier "unlocated-24:52")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (documentSource Source.videoTranscript)
+  "The attributed source is Be Inspired narrator synthesis in the original 2026 video, not an independently located primary operational witness or scientific effect"
   "Claim 078 at 24:52 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin079 : VideoClaimJoin
 claimJoin079 = video-claim-join
   Video.claim079
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip13))
+  "Dan Burisch interview source family, edited clip13, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 079 at 26:39 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin080 : VideoClaimJoin
 claimJoin080 = video-claim-join
   Video.claim080
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip13))
+  "Dan Burisch interview source family, edited clip13, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 080 at 27:08 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin081 : VideoClaimJoin
 claimJoin081 = video-claim-join
   Video.claim081
-  (unpaidCarrier "unlocated-27:17")
-  "Quoted claims, scientific analogy and narrated synthesis require independent operational, physical, or contextual evidence"
+  (documentSource Source.videoTranscript)
+  "The attributed source is Be Inspired narrator synthesis in the original 2026 video, not an independently located primary operational witness or scientific effect"
   "Claim 081 at 27:17 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin082 : VideoClaimJoin
 claimJoin082 = video-claim-join
   Video.claim082
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip14))
+  "Dan Burisch interview source family, edited clip14, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 082 at 28:41 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin083 : VideoClaimJoin
 claimJoin083 = video-claim-join
   Video.claim083
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip14))
+  "Dan Burisch interview source family, edited clip14, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 083 at 29:11 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin084 : VideoClaimJoin
 claimJoin084 = video-claim-join
   Video.claim084
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip15))
+  "The original 2007 speaker said equipment was 'not being used right now' THEN. This is a 2007 first-person status assertion, not a 2026 operational finding."
   "Claim 084 at 29:49 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin085 : VideoClaimJoin
 claimJoin085 = video-claim-join
   Video.claim085
-  (documentSource Source.burischCamelot)
-  "Same original Dan Burisch interview supports attribution of testimony only; repeated clips are not independent witnesses"
+  (pairedCarriers (documentSource Source.burischCamelot) (originalVideoClip Lineage.clip16))
+  "Dan Burisch interview source family, edited clip16, original June 2007 speaker testimony. The reused Camelot carrier counts as ONE origin; apparatus/event claims remain unverified."
   "Claim 085 at 31:35 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin086 : VideoClaimJoin

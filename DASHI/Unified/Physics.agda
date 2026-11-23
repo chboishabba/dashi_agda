@@ -16,7 +16,14 @@ import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact as PlaquetteTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Physics.Foundations.TSFVFeynmanDerivationObligationsExact as Feynman
+import DASHI.Physics.Closure.FeynmanKelvinTrajectoryCrossPollinationExact as FeynmanExperiment
+import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as QuantumPath
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.YMA1SourceFrontierExact as YMA1Frontier
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 
@@ -275,6 +282,43 @@ yangMillsBalabanStressCauchyModulusCompilerLevel =
 yangMillsBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 yangMillsBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+yangMillsBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+yangMillsBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+yangMillsBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+yangMillsBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+yangMillsBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+yangMillsBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+yangMillsBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+yangMillsBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+yangMillsBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+yangMillsBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+yangMillsBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+yangMillsBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+yangMillsBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+yangMillsBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+yangMillsBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+yangMillsBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
 yangMillsBalabanStressHilbertBoundCompilerLevel : ProofLevel
 yangMillsBalabanStressHilbertBoundCompilerLevel =
@@ -573,8 +617,142 @@ navierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+navierStokesInstantaneousVectorSnapshotClosed : Bool
+navierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+navierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  navierStokesInstantaneousVectorSnapshotClosed ≡ true
+navierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+navierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+navierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  navierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+navierStokesRealFiniteODETransportClosed : Bool
+navierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+navierStokesRealFiniteODETransportStillOpen :
+  navierStokesRealFiniteODETransportClosed ≡ false
+navierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+navierStokesUniversalR823IntegratedReserveRefuted : Bool
+navierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+navierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  navierStokesUniversalR823IntegratedReserveRefuted ≡ false
+navierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+navierStokesInstantaneousSnapshotClayPromotion : Bool
+navierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+navierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  navierStokesInstantaneousSnapshotClayPromotion ≡ false
+navierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
 -- Current periodic-B shared weighted wall from R736.
 -- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Current periodic-B authoritative wall.
+-- The normalized facade follows NSABCDMaxCut20261007Exact and the current
+-- pure-analysis owner.  Historical R736 and external-commutator routes remain
+-- reachable below only as donor/provenance surfaces.
+------------------------------------------------------------------------
+
+navierStokesCurrentBHighestInformationIsPhysicalR440 : Bool
+navierStokesCurrentBHighestInformationIsPhysicalR440 =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440
+
+navierStokesCurrentBHighestInformationIsPhysicalR440IsTrue :
+  navierStokesCurrentBHighestInformationIsPhysicalR440 ≡ true
+navierStokesCurrentBHighestInformationIsPhysicalR440IsTrue =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+navierStokesCurrentB4PhysicalPaymentClosed : Bool
+navierStokesCurrentB4PhysicalPaymentClosed =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentClosed
+
+navierStokesCurrentB4PhysicalPaymentStillOpen :
+  navierStokesCurrentB4PhysicalPaymentClosed ≡ false
+navierStokesCurrentB4PhysicalPaymentStillOpen =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentStillOpen
+
+navierStokesCurrentB4FourMomentScalarClosed : Bool
+navierStokesCurrentB4FourMomentScalarClosed =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosed
+
+navierStokesCurrentB4FourMomentScalarClosedIsTrue :
+  navierStokesCurrentB4FourMomentScalarClosed ≡ true
+navierStokesCurrentB4FourMomentScalarClosedIsTrue =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+navierStokesCurrentB4ZeroPaddingAuditClosed : Bool
+navierStokesCurrentB4ZeroPaddingAuditClosed =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosed
+
+navierStokesCurrentB4ZeroPaddingAuditClosedIsTrue :
+  navierStokesCurrentB4ZeroPaddingAuditClosed ≡ true
+navierStokesCurrentB4ZeroPaddingAuditClosedIsTrue =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+navierStokesCurrentB1PhysicalProducerClosed : Bool
+navierStokesCurrentB1PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB1PhysicalProducerClosed
+
+navierStokesCurrentB2PhysicalProducerClosed : Bool
+navierStokesCurrentB2PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB2PhysicalProducerClosed
+
+navierStokesCurrentB3PhysicalProducerClosed : Bool
+navierStokesCurrentB3PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB3PhysicalProducerClosed
+
+navierStokesCurrentBContinuationInputsClosed : Bool
+navierStokesCurrentBContinuationInputsClosed =
+  NSClayTOE.currentPeriodicBContinuationInputsClosed
+
+navierStokesCurrentBR823ShouldReopen : Bool
+navierStokesCurrentBR823ShouldReopen =
+  NSClayTOE.currentPeriodicBR823ShouldReopen
+
+navierStokesCurrentBR823ShouldNotReopen :
+  navierStokesCurrentBR823ShouldReopen ≡ false
+navierStokesCurrentBR823ShouldNotReopen =
+  NSClayTOE.currentPeriodicBR823ShouldNotReopen
+
+navierStokesHistoricalExternalCommutatorPureRouteClosed : Bool
+navierStokesHistoricalExternalCommutatorPureRouteClosed =
+  NSClayTOE.historicalExternalSignedCommutatorRouteReachedPureCommutator
+
+navierStokesHistoricalExternalCommutatorRoutePromotesClay : Bool
+navierStokesHistoricalExternalCommutatorRoutePromotesClay =
+  NSClayTOE.historicalExternalSignedCommutatorRoutePromotesClay
+
+navierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay :
+  navierStokesHistoricalExternalCommutatorRoutePromotesClay ≡ false
+navierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay =
+  NSClayTOE.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+-- R736 remains theorem-bearing provenance.  It is not the current B max-cut.
 ------------------------------------------------------------------------
 
 navierStokesSharedWeightedExactlyTwoLeaves : Bool
@@ -739,6 +917,85 @@ yangMillsYMA1CompletionDoesNotSelfPromote :
   ≡ false
 yangMillsYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Feynman experiment / path-integral non-promotion facade.
+--
+-- Proof ownership remains in the existing Foundations and Closure owners.
+-- The experiment supports the finite path-amplitude/action-phase layer.
+-- It does not validate TSFV or derive the Feynman propagator from TSFV.
+------------------------------------------------------------------------
+
+FeynmanDerivationBoundaryType : Set
+FeynmanDerivationBoundaryType =
+  Feynman.TSFVFeynmanDerivationBoundary
+
+feynmanArchitectureCompatibleFlag : Bool
+feynmanArchitectureCompatibleFlag =
+  Feynman.architectureCompatibleWithFeynman
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanHistoryRealisationSuppliedFlag : Bool
+feynmanHistoryRealisationSuppliedFlag =
+  Feynman.justifiedHistoryTransitionRealizationSupplied
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanPropagatorDerivedFlag : Bool
+feynmanPropagatorDerivedFlag =
+  Feynman.tsfvCurrentlyDerivesFeynmanPropagator
+    Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanExperimentValidatesTSFVFlag : Bool
+feynmanExperimentValidatesTSFVFlag =
+  FeynmanExperiment.experimentValidatesTSFV
+    FeynmanExperiment.canonicalFeynmanKelvinTrajectoryBridge
+
+feynmanDerivationBoundary :
+  Feynman.TSFVFeynmanDerivationBoundary
+feynmanDerivationBoundary =
+  Feynman.canonicalTSFVFeynmanDerivationBoundary
+
+feynmanExperimentBridge :
+  FeynmanExperiment.FeynmanKelvinTrajectoryBridge
+feynmanExperimentBridge =
+  FeynmanExperiment.canonicalFeynmanKelvinTrajectoryBridge
+
+feynmanQuantumPathSurface :
+  QuantumPath.QuantumPathFibreObservationQuotient
+feynmanQuantumPathSurface =
+  QuantumPath.canonicalQuantumPathFibreObservationQuotient
+
+feynmanArchitectureCompatible :
+  Feynman.architectureCompatibleWithFeynman feynmanDerivationBoundary ≡ true
+feynmanArchitectureCompatible = refl
+
+feynmanStructuralNonseparableActionDerived :
+  Feynman.nonseparableTransitionActionDerived feynmanDerivationBoundary ≡ true
+feynmanStructuralNonseparableActionDerived = refl
+
+feynmanHistoryRealisationStillOpen :
+  Feynman.justifiedHistoryTransitionRealizationSupplied feynmanDerivationBoundary ≡ false
+feynmanHistoryRealisationStillOpen = refl
+
+feynmanActionPhaseCalibrationStillOpen :
+  Feynman.actionToPhaseCalibrationSupplied feynmanDerivationBoundary ≡ false
+feynmanActionPhaseCalibrationStillOpen = refl
+
+tsfvDoesNotCurrentlyDeriveFeynmanPropagator :
+  Feynman.tsfvCurrentlyDerivesFeynmanPropagator feynmanDerivationBoundary ≡ false
+tsfvDoesNotCurrentlyDeriveFeynmanPropagator = refl
+
+feynmanExperimentDoesNotValidateTSFV :
+  FeynmanExperiment.experimentValidatesTSFV feynmanExperimentBridge ≡ false
+feynmanExperimentDoesNotValidateTSFV = refl
+
+feynmanStationaryDoesNotImplyMinimum :
+  FeynmanExperiment.stationaryImpliesMinimum feynmanExperimentBridge ≡ false
+feynmanStationaryDoesNotImplyMinimum = refl
+
+feynmanStationaryDoesNotImplyMetricShortest :
+  FeynmanExperiment.stationaryImpliesMetricShortest feynmanExperimentBridge ≡ false
+feynmanStationaryDoesNotImplyMetricShortest = refl
 
 
 ------------------------------------------------------------------------

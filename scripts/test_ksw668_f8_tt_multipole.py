@@ -78,5 +78,5 @@ class OriginalTTMultipole(unittest.TestCase):
  def test_new_CFL_input_guard_rejects_old_unstable_ratio(self):
   with self.assertRaises(ValueError):propagate(**dict(PARAM,dt=.004))
  def test_reject_unknown_normal_stencil(self):
-  with self.assertRaises(ValueError):propagate(**dict(PARAM,normal_order=5))
+  with self.assertRaises(ValueError):propagate(**dict(PARAM,normal_order=3))
 if __name__=='__main__':unittest.main(verbosity=2)

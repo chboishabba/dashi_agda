@@ -25,7 +25,9 @@ module DASHI.Reasoning.PNFWaveSynthesisCommutatorExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans; cong)
 open import Data.Integer using (ℤ; +_; -_; _+_; _*_)
+open import Data.Product using (_,_)
 
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
@@ -215,10 +217,14 @@ schrodingerStepPreservesSuperposition :
   ≡ Wave.waveAdd
       (Wave.schrodingerStep H left)
       (Wave.schrodingerStep H right)
-schrodingerStepPreservesSuperposition H additiveH left right
-  rewrite hamiltonianAdditive additiveH left right
-        | mulIPreservesSuperposition (H left) (H right) =
-  waveAddMedial left right (Wave.mulI (H left)) (Wave.mulI (H right))
+schrodingerStepPreservesSuperposition H additiveH left right =
+  trans
+    (cong
+      (Wave.waveAdd (Wave.waveAdd left right))
+      (trans
+        (cong Wave.mulI (hamiltonianAdditive additiveH left right))
+        (mulIPreservesSuperposition (H left) (H right))))
+    (waveAddMedial left right (Wave.mulI (H left)) (Wave.mulI (H right)))
 
 shiftHamiltonianIsAdditive :
   (state : SPWSI.ShiftWavePhaseState) →

@@ -6,14 +6,6 @@ Classical inputs: SU2-doublet stabilizers, compact covering groups,
 SM hypercharge normalization. Selected-source implementation by
 Johl Brown / OpenAI ChatGPT. NOT physical vacuum or quantum completion.
 
-Published crosscheck / contribution: Matthew Reece,
-"Axion-gauge coupling quantization with a twist", JHEP 10 (2023) 116,
-https://doi.org/10.1007/JHEP10(2023)116 , sec. 2 eqs. (2.1)-(2.4).
-The quotient/triality charge relationship is established in that
-independent published work; the source-specific 27-state E6 Higgs-chain
-script is original DASHI research implementation, NOT Reece's script.
-Reece's axion-gluon/photon correlation eq (1.4) is NOT checked here.
-
 In K cover: SU2R=diag(z^3,z^-3) after E32 and
 SU2L=diag(z^-3,z^3) after E21 (adapted component basis).
 Thus SU3L weights (-2,+4,-2) and SU3R weights (+4,-2,-2)

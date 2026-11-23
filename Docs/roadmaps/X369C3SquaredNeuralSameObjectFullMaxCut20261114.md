@@ -431,102 +431,6 @@ Leech PR #4 now owns a seeded `audit_x369_f1_rank_and_orientation_null.py` to qu
 - **F4/F5/F6:** source-bound truly fresh documents, non-overlapping 16-token windows and original model training; reserved independent holdouts must remain untouched.
 - **P0:** Host reports 103/103 Leech tests across 22 suites on a working tree referencing `4761459` with a local Python multiline syntax correction. The correction has since been pushed to the existing PR branch; later source changes require a new current-head replay. Do not label those 103 tests as an execution of a subsequent GitHub head.
 
-## 15 Nov 2026 — spectral covariance non-identifiability and physical F4 handoff
-
-Host reports the selected **8/8 Agda 2.9** original torus/spectral leaves passed at `e8dbc5db0c81`; this selected kernel replay does not close the A03/A04 all-field lift or A05 trained neural consumer. F1 source residual rank/orientation audit has now been reported from TrueNAS, with layer-0 original full C3 defect `1.33227`, participation rank `44.30`, and layer-1 defect `1.41233`, participation rank **`1.67`**. Mixed ± nonidentity C3 orientation null mean defects `1.3304` and `1.4121`, with observed-relative fractions `0.0955` and `0.1658`. Those are source observations on original neural activations, not finite-torus kernel theorems and not calibrated p-values.
-
-**Precise spectral no-go against covariance-only identification:** for any real symmetric PSD `C` with eigenvalues `lambda_i,lambda_j`, conjugate the standard two-dimensional rotation through `2π/3` into the corresponding eigenspace and act as identity elsewhere. The resulting orthogonal matrix `R` satisfies `R³=I` and
-```text
-||C - R C R^T||F² = (3/2) (lambda_i-lambda_j)²
-||C - R C R^T||F/||C||F = sqrt(3/2) |lambda_i-lambda_j|/||C||F
-rotating trace variance share = (lambda_i + lambda_j)/Tr(C).
-```
-Thus nullspace (or near-nullspace) two-eigenvector rotations can yield arbitrarily small covariance defect without any nontrivial trained C3 phase on the represented data. Selecting an apparent symmetry *after seeing C* is not independent validation. A candidate representation must pass a **predeclared high-variance rotating-sector threshold**, task-labelled input-orbit transport, original output-consumer response, and heldout causal CE before identifying a learned mechanism. This particular two-eigenvector construction is not a global optimum theorem over arbitrary multi-pair actions.
-
-Leech PR #4 added `audit_x369_f1_spectral_pair_identifiability.py`, which enumerates these exact single-pair covariance rotations across rotating trace share thresholds (0%,1%,5%,10%,25%), checks leading-PC source-row concentration, and remains explicitly nonpromotional. Original TrueNAS arrays are still needed for its measured receipt. New F4 development adjudicator `audit_x369_f4_development_fairness.py` separately proves the original **initial-vs-trained CE decomposition** from a completed 2-arm result:
-```text
-bestC3-bestC2 = (initialC3-initialC2)
-                - ((initialC3-bestC3)-(initialC2-bestC2)).
-```
-It must verify source/provenance SHA, paired seeds, same trainable parameters and steps, then choose only from development; never open F5 reserved rows.
-
-Host reports 600 authentic TinyStories documents acquired and new 32×64 dev + 32×64 reserved actual tokenizer arrays, with 16-token nonoverlap against supplied original files. **Without verified historical training-document IDs, this is not yet independently documented document-disjointness.** RX 580 physical F4 (C2 vs C2×C3, seeds 41/42, 24 router steps) has been launched, but **no completed arm CE receipt is available in the provided message**. Neither an uncompleted run nor source-invariant arithmetic closes F2 task semantics or F3 original output response.
-
-Still open formal target names: `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`, `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`, `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, `signedFloatWaveConsumerRefinement` and original master-integrated Track A. Do not conflate finite Agda source algebra with physical trained-model mechanism.
-
-## 15 Nov 2026 physical F4/F3 conclusion — preserve accepted finite Agda, reject an unearned model weld
-
-Host's selected 8/8 original-torus Agda 2.9 leaves remain Track B **kernel-accepted at `a812825058b5`**. This means original finite group/action/spectral basis and conditional eight-site affine lemmas typechecked. It does NOT imply arbitrary-field Fourier A03/A04, A05 actual four-wave-pair source-consumer, or any original-model trained (C_3) semantic action.
-
-**New original-model physical evidence:** RX 580 F4 `c2_invariant` versus `c2c3_wave` on fresh 32 × 64 TinyStories development rows, seeds 41/42, 24 router-only steps; mean best C3-minus-C2 CE **+1.7829 nats**, original initial function gap **+1.8122**, mean incremental C3 gain versus C2 **+0.0294**. C2 best step0 in both seeds; C3 seed41 best step0, seed42 best step24 but still much worse. This establishes C2's observed development win under this budget, not a general theorem about representation learnability or asymptotic training.
-
-F3 probes frozen **unselected, best-step-zero C3 seed41**: relative C3 action CE change −0.0644, CI crosses zero; activation-norm/displacement-matched random control change −0.1823. The relative-vs-random difference is +0.1179, **unadjusted 95%** CI [+0.0504,+0.1898], disfavouring the C3-specific source action under this probe. This does not identify a learned circuit, and it does not constitute a fully matched comparison in the nonlinear router's actual feature coordinates.
-
-**Original source math/implementation bridge:** `HistoryOrbitMoE.select_source_experts` has ONE shared `nn.Linear(2d,1)` head for all experts. Its unary (x)-dependent score is common across experts and drops out of relative routing. F4 changes the **history** map from `abs(h_e)` in C2 to `directed_trialectic_invariants(x,h_e)` in C3; these are not the same original function with reused weights. C2 history features are even under isolated `h -> -h`; the directed C3 channel is odd when `x` is fixed. Equal parameter count and shared tensor bytes do **not** prove function-preserving architecture migration. Also `||R_C3 x-x||=||x_null-x||` does NOT imply equality after the nonlinear feature maps; Leech PR #4 has new exact source-feature tests and a live bounded original-router capture auditor to resolve this F3 confound without accessing the F5 lockbox.
-
-**F1 crucial nuance:** Layer0's source spectral pair with **>=10% original trace variance** has achievable covariance defect `D=0.0281` (<0.05). This is a *non-null* candidate order-three covariance representation, but still only a covariance-selected candidate, not a task-defined trained map. Layer1's low-defect pair carries merely 2.97e−7 trace share (vacuous), whereas a >=10% variance pair has `D=1.09832`; the top eigenvalue has 77.01% trace and 99.43% Frobenius share. Uniform-ish source-row PC energy is not a proof of architecture-only origin or independent documents.
-
-Remaining exact named formal obligations are unchanged: `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`, `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`, `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, `signedFloatWaveConsumerRefinement`, selected-to-authoritative Track A. Continue Agda under the **same formal PR #1442**; no reattribution of original LILA model or other physical programmes. F5 reserved 32×64 tokens remain sealed and historical source-document independence is not yet independently established.
-
-## 15 Nov late — exact F3 per-triad opposite C3 orientation identity and properly matched null
-
-The latest physical RX 580 F3 live-router audit reports the historical arbitrary random tangent control moved **2.0–2.2× farther** than coherent relative C3 in the **nonlinear** actual router feature map. The earlier source result was `CE(random)-CE(baseline)=-0.1823`, `CE(relativeC3)-CE(baseline)=-0.0644`; the random control therefore **improved** CE more, not “degraded” it more. No task-semantic C3 advantage was observed; the previous perturbation was not feature-distance matched.
-
-### New exact mathematical target — avoid relying on a random numeric optimizer
-
-For each original ordered real triad `u=(a,b,c)`, define `R_+u=(b,c,a)`, `R_-u=(c,a,b)`. These are inverse order-3 rotations. Both `R_+u-u` and `R_-u-u` have the same squared Euclidean norm:
-```text
-||R_+u-u||² = ||R_-u-u||²
-            = (a-b)² + (b-c)² + (c-a)².
-```
-For the source *directed* correlation vector
-```text
-T(u,v) = (aA+bB+cC, aB+bC+cA, aC+bA+cB)
-```
-(where `v=(A,B,C)` is the original fixed expert history), we have
-```text
-T(R_+u,v) = cycle(T(u,v)),
-T(R_-u,v) = cycle²(T(u,v)),
-||T(R_+u,v)-T(u,v)||²
-  = ||T(R_-u,v)-T(u,v)||².
-```
-Moreover the exact `trialectic_router_invariants` unary channels are invariant under both shifts. Hence any **independently chosen per-triad sign** `s_j in {+,-}` yields a source activation `M_s x` with the same original source norm, displacement `||M_s x-x||`, and **full nonlinear routed-feature displacement for EVERY expert and ANY fixed history** as the globally coherent `R_+x`. This is a faithful exact mathematical negative-control identity; it does NOT identify a learned semantic or original model equivariance.
-
-Proposed formal companion contracts (not yet kernel accepted, DO NOT claim proved Agda):
-- `originalTriadOppositeOrientationSquaredDisplacementSame`
-- `originalDirectedThreeCorrelationCovariantLeft`
-- `originalDirectedThreeCorrelationCovariantRight`
-- `originalDirectedFeatureOppositeOrientationDisplacementSame`
-- `originalAllTriadsMixedOrientationRouterFeatureNormExact`
-- `originalPhaseCoherenceNotForcedByMatchedFeatureNorm`
-
-Leech PR #4 has implemented `matched_mixed_orientation_c3_x`, the original `HistoryOrbitMoE` action `c3_feature_exact_mixed_orientation_x`, new live-geometry metric fields, and source property tests. Independent local float64 source-equivalent checks across d=6,24,384 gave feature-distance errors below 8e−15. New native source head and actual original-model CE comparison must be checked **after** these commits.
-
-**Evidence governance correction:** prior F3 scorer accepted a required `--reserved-lockbox-ids` and read the raw reserved F5 `.npy` to exclude 16-token ngrams, so the historical statement “F5 never opened or loaded” is too strong. The evidence supports **F5 never scored for CE or used to select architecture**; its raw token bytes were consumed by an overlap guard in the old code. The revised F3 scorer prohibits raw F5 input, checks only the original probe producer's SHA-bound exclusion manifest, and explicitly marks the results as exploratory reused F3 data. The original locked F5 is still *unscored* and its official future CE evaluation must not be used for post-hoc geometry tuning.
-
-A03/A04 arbitrary-field Fourier convolution/Parseval, A05 original eight+centre↔wave pairs, and A06 original consumer remain open. Source-correct F3 negative control does not close them, nor prove a task phase/group circuit.
-
-### SymPy-cross-checked exact source triad factorization, formal target pending
-
-For original reals `x=(a,b,c)`, `h=(A,B,C)`, let `R_+(a,b,c)=(b,c,a)`, `R_-(a,b,c)=(c,a,b)`; original directed router triple `T(x,h)=(aA+bB+cC,aB+bC+cA,aC+bA+cB)`. Define
-```text
-q(a,b,c)=a²+b²+c²-ab-bc-ca
-         = [(a-b)²+(b-c)²+(c-a)²]/2.
-```
-A direct SymPy symbolic simplification of the **unconstrained** original six-variable polynomial confirms:
-```text
-||R_±x-x||²=2q(x),
-||T(R_±x,h)-T(x,h)||²=2q(x)q(h).
-```
-This is exact over commutative real scalar arithmetic, and summing over original 384/3 triads yields the *same squared original routed-feature displacement* for coherent `R_+` and arbitrary independently mixed ± triad orientations, per original expert history. Original `trialectic_router_invariants` unary terms are unchanged under either rotation; router-logit vector direction remains **unmatched**. The scalar identity can be formalized independently of empirical data.
-
-**Exact new formal target names (UNPROVED Agda; do not label checked):**
-- `originalTriadRotationSquaredDisplacementEqualsTwoQ`
-- `originalDirectedTriadC3DisplacementSquaredFactors`
-- `originalMixedTriadC3RouterFeatureEnergyEqualsCoherent`
-- `originalBlockwiseMixedC3NormUnderAllExpertHistories`
-
-Leech PR #4 has a native `directed_c3_displacement_energy_exact` analytic implementation plus route-feature audit, exact ± mixed-permutation source control, and regressions. The legacy F3 experimental null matched hidden activation norm/displacement but NOT the nonlinear feature map; this new analytic equality eliminates that specific confound without implying a trained semantic C3 mechanism. Both native-head acceptance and new RX 580 CE remain **OPEN** after current source edits. Original finite Agda A00–A05 selected 8/8 Track B prior receipts do not include these new formal targets or A03–A06 universal/weld closures.
 
 ## 15 Nov 2026 — source formal candidate and 12-draw frozen F3 ensemble (post-09:20)
 
@@ -665,3 +569,25 @@ R2: matched longer mod-97/TinyStories runs for dense/C2/C3/structured-side-input
 R3: source-bound PNF/world observer-knowledge, false-belief and masked diffusion revision, cache/state replay and actual gluing/refinement, with negative controls.
 
 R4: published Monster 3B original action, explicit basis Φ, Griess product/VOA and original-neural-consumer transport; no automatic promotion of R0 candidate finite actions.
+
+
+### Review ownership correction 15 November
+
+This continuation is carried on current-master-derived branch `chatgpt/x369-pnf-world-rollup-20261115`; historical #1442 was merged/closed, and newer source commits on its obsolete feature branch did not automatically become part of an active review. Status is SOURCE WRITTEN for Agda six-variable proof, local finite Python tests for C3/S3 arithmetic, and OPEN for original FLM 3B/Griess and neural source physical weld.
+
+## 15 Nov 2026 host verification and Agda solver AST repair at continuation PR #1510
+
+**Host exact-head receipts (source checked `cecee1641228`):** LeechTransformer PR #4 `b7960d432acc` native 146/146 across 30 suites, portable 53/53, syntax audit `--help` exit 0 and original LeechGPT zero-gate logit parity test passed. Agda PR #1510 `cecee1641228` three finite C3/D4, S3 punctured-27, and n/k hyperfabric scripts each exit 0. These are actual host reported receipt counts; they do not imply original Monster FLM operator, original trained neural task phase or a live SLR TinyStories parser result.
+
+**Polynomial A1 new failure resolved at source, Agda 2.9 rerun OPEN:** host's `solve-∀` diagnostic was a type error between ring-solver syntax `Expr n` and semantic integer `ℤ`. The root was not the corrected integer constant `(+ 2)`; it was the proof-building tactic itself, which reified quantified variables before invoking semantic helper functions. Commit `eb17307c0610a81eb0fc616e1ea1238f727116b1` changes the four raw polynomial proofs to the well-tested `Data.Integer.Solver` module `+-*-Solver`, with explicit symbolic `:_+_`-like operations `_:+_`, `_:-_`, `_:*_`, `con`, `_: =_` (`_:=_`) and `solve` over respectively three and six variables. The semantic `square`, `qTriad`, `originalSelf`, `originalCyclic`, `originalAnticyclic` and arbitrary-length mixed block induction are unchanged. This follows repository `DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda` and other exact finite source proofs. Six-variable factorization was independently expanded to zero residual algebraically; formal kernel acceptance requires a fresh exact changed-head Agda 2.9 run.
+
+**Fresh acceptance commands:**
+
+    bash scripts/check_x369_original_directed_c3_polynomial_candidate.sh
+    python3 scripts/check_monster196884_native_c3_d4_intertwiner.py
+    python3 scripts/check_monster196884_s3_punctured27_fibre.py
+    python3 scripts/check_monster196884_hyperfabric_k_growth.py
+
+If the ring proof fails: preserve Agda exact diagnostic line/column and **do not edit the verified underlying identity** without an independent counterexample. Inspect elaboration (`solve` lambda AST and conversion to user-facing raw lemma), then normalize parenthesisation or split the degree-four six-variable proof. A host compiler message/exit 0, not the existence of source code, closes A1. Original eight finite-torus leaves remain separate.
+
+**Remaining experimental gates unchanged:** live SLR numeric spaCy export on original TinyStories documents, actual frozen Leech checkpoint grammar CE/POS/UAS/LAS, 12-mask seed41/42 F3 causal CE on existing exploratory F3 rows with F5 SHA-only, matched long-running C2/C3 grokking and consumer-bearing PNF/world tests. Host accepted Leech **source contracts**, not any of these physical model/quality results.

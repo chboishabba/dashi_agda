@@ -101,17 +101,12 @@ iidTwoDrawMeanDistinct law =
 
 -- Exactly four ordered outcomes: 00, 01, 10, 11.
 -- Their probabilities factor because IID is part of the model.
-iidTwoDrawMeanAlg : (p q : ℚ) →
-  ((p * p) * 1ℚ + (p * q) * twoℚ + (q * p) * twoℚ + (q * q) * 1ℚ)
-    + (p * p + q * q) ≡ twoℚ * ((p + q) * (p + q))
-iidTwoDrawMeanAlg p q = solve (p ∷ q ∷ [])
-
 iidTwoDrawMeanPlusCollisionIsTwo :
   (law : TwoRankIIDLaw) →
   iidTwoDrawMeanDistinct law + iidTwoDrawCollision law ≡ twoℚ
 iidTwoDrawMeanPlusCollisionIsTwo law =
   trans
-    (iidTwoDrawMeanAlg (p law) (q law))
+    (solve (p law ∷ q law ∷ []))
     (trans
       (cong (λ total → twoℚ * (total * total)) (normalizedPQ law))
       (trans

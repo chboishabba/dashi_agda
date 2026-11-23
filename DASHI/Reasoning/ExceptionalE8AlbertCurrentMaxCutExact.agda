@@ -3,38 +3,38 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 ------------------------------------------------------------------------
 -- CURRENT EXCEPTIONAL E8 / ALBERT / MONSTER-3B MAX-CUT
 --
--- Structured E8 (companion Lean) is source-written through an intrinsic
--- inverse-Cartan glue reflection and E8 Coxeter root datum on 240 roots.
+-- Local exceptional discovery is paid through split-root-datum recognition:
+-- actual H_3(O_Q), arbitrary inner derivations, exact 52=28+8_v+8_s+8_c
+-- triality, Cartan/chirality, exact symbolic Q(i) 4+48 root spaces, exact root
+-- grading on all 1128 root pairs, and independent companion-Lean F4 root/Weyl
+-- data.  The remaining Albert/F4 wall is FORM/GROUP classification over Q.
 --
--- Rational Albert (this Agda branch) now contains:
---   * H_3(O_Q) = Q^3 + O_Q^3, coordinate dimension 27;
---   * identity, trace and cubic norm;
---   * explicit Jordan product, commutativity, unit and Jordan identity;
---   * coordinate S3 automorphisms preserving product/cubic;
---   * two explicit octonion signed-monomial automorphism generators;
---   * exhaustive signed-basis runtime closure 1344;
---   * diagonal Albert lift, commuting with coordinate S3, combined runtime
---     automorphism subgroup order 8064;
---   * exact rational derivation system rank 677 in 729 unknowns, hence
---     dim Der(J)=52;
---   * all 351 inner commutators span exact rational rank 52.
---
--- Negative control:
--- a natural order-192 signed-monomial line stabilizer times the independent
--- coordinate S3 has order 1152, but this is NOT promoted to W(F4); the missing
--- ingredient is the nontrivial D4 triality action, not order alone.
---
--- Remaining exceptional-algebra wall:
---   source-native D4/Spin(8) triality (or equivalent Cartan/root recognition),
---   then identify Der(J) as Lie type F4 and Aut(J) as the corresponding F4
---   algebraic/Lie group.
+-- The independent Monster-3B lane now owns the vendored ATLAS 12-dimensional
+-- GF(3) source matrices, exact symplectic normalization into repository X6+X6*,
+-- a degree-six field-producing compression, its GF(729) presentation weld, and
+-- for the selected source word an exact asymmetric-Heisenberg quadratic central
+-- correction.  Full-normalizer extension/kernelization and downstream Monster
+-- orbit/stabilizer/output/physical semantics remain separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact as F4Cut
+import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact as Cubic
+import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisG2SubgroupExact as G2
+import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact as Triality
+import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as Known
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as DerivLaw
+import DASHI.Mathematics.Algebra.RationalAlbertTrialityDerivationExact as TrialityDeriv
+import DASHI.Mathematics.Algebra.RationalAlbertF4CartanRootReceiptExact as Cartan
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as ExactRoots
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact as Grading
+import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact as SplitF4
+import DASHI.Mathematics.Algebra.RationalAlbertLinearJordanAutomorphismExact as LinearAut
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact as Classification
+import DASHI.Reasoning.AlbertF4LeanCrossProverMaxCutReceiptExact as LeanF4
+import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact as MonsterAtlas
 
 record ExceptionalCurrentMaxCut : Set where
   constructor exceptional-current-max-cut
@@ -49,19 +49,44 @@ record ExceptionalCurrentMaxCut : Set where
     rationalAlbertCoordinateDimension27Paid : Bool
     rationalAlbertCubicNormPaid : Bool
     rationalAlbertJordanProductSourceWritten : Bool
-    rationalAlbertJordanLawsSourceWritten : Bool
-    rationalAlbertCoordinateS3AutomorphismsSourceWritten : Bool
-    signedMonomialOctonionAutomorphismsSourceWritten : Bool
-    signedMonomialClosure1344RuntimeChecked : Bool
-    signedMonomialAlbertLiftSourceWritten : Bool
-    explicitAlbertAutomorphismSubgroup8064RuntimeChecked : Bool
-    derivationConstraintRank677RuntimeChecked : Bool
-    derivationDimension52RuntimeChecked : Bool
-    innerDerivationSpan52RuntimeChecked : Bool
-    order1152RejectedAsWeylF4Recognition : Bool
-    nontrivialD4TrialityPaid : Bool
-    f4LieAlgebraRecognitionPaid : Bool
+    rationalAlbertJordanIdentitySourceWritten : Bool
+
+    signedBasisG2SubgroupPaid : Bool
+    selectedMoufangTrialityAutomorphismPaid : Bool
+    knownAlbertGeneratorFamilyPaid : Bool
+    typedLinearJordanAutomorphismCarrierPaid : Bool
+    allInnerDerivationLawsSourceWritten : Bool
+
+    exactInnerDerivationDimension52Paid : Bool
+    exactTrialityTwentyEightEightEightEightPaid : Bool
+    exactTrialityBracketPatternPaid : Bool
+    exactCartanFourVectorSpinSpinPaid : Bool
+    exactQIRootSpacesFourPlusFortyEightPaid : Bool
+    exactRootGradingAll1128PairsPaid : Bool
+    splitQIRootDatumTypeF4Recognized : Bool
+    floatingRootExtractionSuperseded : Bool
+
+    companionLeanFoldedWeylOrder1152Paid : Bool
+    companionLeanF4Root48Rank4Paid : Bool
+    companionLeanSpinCover384ToD4_192Paid : Bool
+    companionLeanFourD4AlbertAutomorphismsPaid : Bool
+    companionLeanG05ProjectiveOuterLiftPaid : Bool
+    companionLeanG24CurrentSignedBasisObstructionPaid : Bool
+
+    allConcreteClassificationHypothesesOwned : Bool
+    remainingClassificationIsQFormAndGroupLevel : Bool
+    generalExceptionalClassificationFormalizedInRepo : Bool
+    rationalFormF4RecognitionPaid : Bool
     fullF4AutomorphismRecognitionPaid : Bool
+    actualE6UnitStabilizerRecognitionPaid : Bool
+
+    monsterNormalizerCertifiedSourceDataLocated : Bool
+    monsterSymplectic12IntertwinerCompilerTyped : Bool
+    monsterRawAtlasMatricesImported : Bool
+    monsterSelectedGF729CompressionWeldPaid : Bool
+    monsterSelectedWordHeisenbergCentralCorrectionPaid : Bool
+    monsterSelectedWordHeisenbergLiftRuntimePaid : Bool
+    monsterFullNormalizerHeisenbergActionPaid : Bool
     monsterNormalizerPhysicalRealizationPaid : Bool
 
     originalPuncturedT5SameObjectRecognitionPaid : Bool
@@ -74,8 +99,24 @@ canonicalExceptionalCurrentMaxCut =
   exceptional-current-max-cut
     240 696729600
     true true true
+    true true true true true
+    true true true true true
+    true true true true
+    ExactRoots.canonicalBoundary.exactQIRootSpaceDecompositionPaidByProducer
+    Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
+    SplitF4.canonicalBoundary.splitLieRootDatumTypeF4Recognized
+    true
     true true true true true true
-    true true true true
-    true true true true
-    false false false false false false
-    "Structured E8 is closed at source level. The rational Albert algebra, cubic norm, Jordan laws, explicit S3 and signed-monomial automorphisms are source-written; exact rational runtime gives dim Der(J)=52 with inner span 52. The active exceptional wall is nontrivial D4/Spin(8) triality and Lie/root classification to identify Der(J) and Aut(J) as F4, not another cardinality match."
+    Classification.canonicalBoundary.allConcreteExceptionalHypothesesOwned
+    Classification.canonicalBoundary.remainingClassificationIsQFormAndGroupLevel
+    false false false false
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.certifiedMonsterNormalizerRepresentationLocated
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.sourceToRepositoryActionInterfacePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.rawAtlasMatricesImported
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedGF729PresentationWeldRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedWordQuadraticCentralCorrectionRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedWordHeisenbergLiftRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.fullNormalizerHeisenbergActionPaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.physicalNormalizerRealizationPaid
+    false false
+    "Structured E8 is paid through the intrinsic 240-root Coxeter datum. The rational Albert programme is paid through exact split-Q(i) F4 root grading; its formal seam is classification of the original Q-form and full groups. Monster 3B now has vendored ATLAS matrices, exact X6+X6* normalization, the selected degree-six GF(729) field weld and an exact selected-word Heisenberg quadratic central correction; remaining Monster work is extension/kernelization to the consumed full normalizer subgroup plus orbit/stabilizer, output-equivariance and physical-realization semantics. Original-T5 recognition and empirical LILA remain independent lanes."

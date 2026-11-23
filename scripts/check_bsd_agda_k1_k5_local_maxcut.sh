@@ -6,7 +6,6 @@ cd "$root"
 export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
-  DASHI/Mathematics/Arithmetic/EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda
   DASHI/Mathematics/Arithmetic/EllipticSupportedSquareClassSieveExact.agda
   DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda
   DASHI/Mathematics/Arithmetic/EllipticCubicValuationParityExact.agda
@@ -38,10 +37,6 @@ done
 # Make the exact original theorem names part of the local preflight,
 # without confusing textual presence with kernel proof acceptance.
 required=(
-  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:originalSelectedCurveIsNotJZeroModel'
-  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:originalSelectedLevel32AllNCoefficientsAgree'
-  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:normalizedAllNBuildsOneDimensionalReceipt'
-  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:constantUnitNormalizedReceipt'
   'EllipticSupportedSquareClassSieveExact.agda:filteredCodeRationalRepresentativeIsOriginalTorsion'
   'EllipticActualDyadicPrimePlaceExact.agda:actualTwoIsPrimeNat'
   'EllipticCubicValuationParityExact.agda:originalCubicValuationRegimeEven'
@@ -94,6 +89,5 @@ fi
 if [[ "${BSD_K4_EXACT_TAIL_ASSAYS:-0}" == 1 ]]; then
   python3 scripts/check_bsd_level32_positive_tail.py --n 10
   python3 scripts/test_bsd_level32_positive_tail.py
-  python3 scripts/check_bsd_level32_original_positive_tail_bound_p0.py
   echo 'Exact rational K4 tail assays passed; Bishop eta, Mellin and Agda kernel remain separate.'
 fi

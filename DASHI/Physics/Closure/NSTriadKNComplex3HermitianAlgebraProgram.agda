@@ -137,13 +137,30 @@ complexConjugateMultiply {F = F}
           (Algebra.realNegateMultiplyRight F ar bi)
           (Algebra.realNegateMultiplyLeft F ai br))
 
+cong₂ :
+  ∀ {a b c : Level}
+    {A : Set a} {B : Set b} {C : Set c}
+    (f : A → B → C)
+    {x x' : A} {y y' : B} →
+  x ≡ x' → y ≡ y' → f x y ≡ f x' y'
+cong₂ f refl refl = refl
+
+cong₃ :
+  ∀ {a b c d : Level}
+    {A : Set a} {B : Set b} {C : Set c} {D : Set d}
+    (f : A → B → C → D)
+    {x x' : A} {y y' : B} {z z' : C} →
+  x ≡ x' → y ≡ y' → z ≡ z' → f x y z ≡ f x' y' z'
+cong₃ f refl refl refl = refl
+
 complex3AddZeroRight :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Add v (C3.complex3Zero F) ≡ v
-complex3AddZeroRight (C3.complex3 vx vy vz)
-  rewrite Algebra.complexAddZeroRight vx
-        | Algebra.complexAddZeroRight vy
-        | Algebra.complexAddZeroRight vz = refl
+complex3AddZeroRight (C3.complex3 vx vy vz) =
+  cong₃ C3.complex3
+    (Algebra.complexAddZeroRight vx)
+    (Algebra.complexAddZeroRight vy)
+    (Algebra.complexAddZeroRight vz)
 
 complex3NegateZero :
   ∀ {r} (F : C3.RealField r) →
@@ -154,35 +171,38 @@ complex3NegateZero F
 complex3SubtractZero :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Subtract v (C3.complex3Zero F) ≡ v
-complex3SubtractZero {F = F} v
-  rewrite complex3NegateZero F
-        | complex3AddZeroRight v = refl
+complex3SubtractZero {F = F} v =
+  trans
+    (cong (C3.complex3Add v) (complex3NegateZero F))
+    (complex3AddZeroRight v)
 
 complex3ScaleZero :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Scale (C3.complexZero F) v ≡ C3.complex3Zero F
-complex3ScaleZero (C3.complex3 vx vy vz)
-  rewrite complexMultiplyZeroLeft vx
-        | complexMultiplyZeroLeft vy
-        | complexMultiplyZeroLeft vz = refl
+complex3ScaleZero (C3.complex3 vx vy vz) =
+  cong₃ C3.complex3
+    (complexMultiplyZeroLeft vx)
+    (complexMultiplyZeroLeft vy)
+    (complexMultiplyZeroLeft vz)
 
 bilinearDot3Conjugate :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.complexConjugate (C3.bilinearDot3 u v)
   ≡ C3.bilinearDot3 (C3.complex3Conjugate u) (C3.complex3Conjugate v)
 bilinearDot3Conjugate
-  (C3.complex3 ux uy uz) (C3.complex3 vx vy vz)
-  rewrite complexConjugateAdd
-            (C3.complexAdd
-              (C3.complexMultiply ux vx)
-              (C3.complexMultiply uy vy))
-            (C3.complexMultiply uz vz)
-        | complexConjugateAdd
-            (C3.complexMultiply ux vx)
-            (C3.complexMultiply uy vy)
-        | complexConjugateMultiply ux vx
-        | complexConjugateMultiply uy vy
-        | complexConjugateMultiply uz vz = refl
+  (C3.complex3 ux uy uz) (C3.complex3 vx vy vz) =
+  trans
+    (complexConjugateAdd
+      (C3.complexAdd (C3.complexMultiply ux vx) (C3.complexMultiply uy vy))
+      (C3.complexMultiply uz vz))
+    (trans
+      (cong (λ first → C3.complexAdd first (C3.complexConjugate (C3.complexMultiply uz vz)))
+        (complexConjugateAdd (C3.complexMultiply ux vx) (C3.complexMultiply uy vy)))
+      (cong₂ C3.complexAdd
+        (cong₂ C3.complexAdd
+          (complexConjugateMultiply ux vx)
+          (complexConjugateMultiply uy vy))
+        (complexConjugateMultiply uz vz)))
 
 hermitianPairingConjugateSymmetric :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
@@ -211,17 +231,17 @@ realModePairingIsBilinear E k v =
 record HermitianScalingCutset
     {r : Level} (F : C3.RealField r) : Set (lsuc r) where
   field
-    complexMultiplyAssociative : ∀ a b c →
+    complexMultiplyAssociative : (a b c : C3.Complex F) →
       C3.complexMultiply (C3.complexMultiply a b) c
       ≡ C3.complexMultiply a (C3.complexMultiply b c)
 
-    hermitianPairingScaleLeft : ∀ scalar u v →
+    hermitianPairingScaleLeft : (scalar : C3.Complex F) (u v : C3.Complex3 F) →
       C3.hermitianPairing3 (C3.complex3Scale scalar u) v
       ≡ C3.complexMultiply
           (C3.complexConjugate scalar)
           (C3.hermitianPairing3 u v)
 
-    hermitianPairingScaleRight : ∀ scalar u v →
+    hermitianPairingScaleRight : (scalar : C3.Complex F) (u v : C3.Complex3 F) →
       C3.hermitianPairing3 u (C3.complex3Scale scalar v)
       ≡ C3.complexMultiply scalar (C3.hermitianPairing3 u v)
 

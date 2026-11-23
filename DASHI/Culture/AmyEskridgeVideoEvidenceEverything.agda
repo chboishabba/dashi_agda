@@ -57,3 +57,39 @@ import DASHI.Culture.AmyEskridgeVideoSurroundingProducerWeldExact
 -- Primary reports omitted by the edited video but present in HAL5's original
 -- scientific/source genealogy; ownership retained by report authors.
 import DASHI.Culture.AmyEskridgeVideoOmittedOriginalResearchWeldExact
+
+-- Exact 11-US research cohort versus 11-person Fox media roster and
+-- pre-existing R68-R88 programme/custody/FOIA gates; no guessed identity.
+import DASHI.Culture.AmyEskridgeVideoUS11PriorArtReconciliationExact
+
+-- Specific 16:02-32:04 original-source BIDI to already-built temporal
+-- experimental evidence fibres, Mandela-memory controls and conditional
+-- prediction scoring; no new physical-device authority.
+import DASHI.Culture.AmyEskridgeVideoLateSectionEvidenceBidiExact
+import DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact
+
+-- Bem steelman-v-realistic null: recorded scalar nonidentifiability,
+-- conditional selection bias, distinct source-specific historical receipts.
+import DASHI.Culture.AmyEskridgeBemSteelmanRealisticIdentifiabilityExact
+
+-- Existing DASHI classical statistical/scaffold and canonical experiment
+-- discriminator owners; actual original historical correspondence 2018.
+import DASHI.Culture.AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact
+import DASHI.Culture.AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact
+
+-- New genuine statistics and Aristotle experiment-discriminator consumers.
+-- Tukey IQR fences remain separate from Tukey-Kramer HSD. The latter is
+-- post-hoc only, conditional on sourced pooled ANOVA and quantile bounds.
+import DASHI.Statistics.OneWayANOVAPooledMSEExact
+import DASHI.Statistics.TukeyKramerPostHocExact
+import DASHI.Statistics.TukeyKramerIntervalCalibrationExact
+import DASHI.Culture.AmyEskridgeBemAristotleExperimentalProofSearchWeldExact
+
+-- Original received EXP1.xlsx: actual 100-person 2011 main t endpoint replay,
+-- 40+60 trial denominators, 826/1560 source versus 828 later citation.
+-- No participant rows uploaded to the public repository.
+import DASHI.Culture.AmyEskridgeBemExp1OriginalWorkbookReplayExact
+
+import DASHI.Culture.AmyEskridgeTransparentPsiOriginalCodePriorSensitivityExact
+
+import DASHI.Culture.AmyEskridgeTransparentPsiCorrectionAndModeratorWeldExact

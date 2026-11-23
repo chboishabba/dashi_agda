@@ -1,24 +1,10 @@
 module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateQuotedStagedRootedSourceExact where
 
-------------------------------------------------------------------------
--- EXACT CANDIDATE-QUOTED ROOT -> TOTAL ROOTED SOURCE STAGE
---
--- Same-object weld:
---   executable candidate-code realization
---   + fixed-width codec
---   -> exact candidate-quoted Q2 state s_D
---   -> exact indexed root currentFormula(s_D)
---   -> total staged rooted-source outcome at recursiveMeasure(s_D).
---
--- This does not assume SAT correctness, opposite-SAT semantics or mandatory
--- Q1 progress.  It makes the first exhaustive-constructor branch explicit on
--- the exact candidate-coupled state.
-------------------------------------------------------------------------
-
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _<_)
 
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
@@ -28,9 +14,9 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFixedWidthCandidateQuotedRootExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CompletedRootedSourceGateExact as Completed
-import DASHI.Mathematics.Complexity.PNotEqualsNPQ1StagedRootedConstructorExact as Staged
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1StagedRootedSourceConstructorExact as Staged
 
-module CandidateStage
+module CandidateStagedSource
   {cost : PR.PolynomialCostModel Cook.BooleanFormula}
   {candidate : Direct.PolynomialSATDeciderCandidate cost}
   (code : Actual.CandidateCodeRealization candidate)
@@ -43,14 +29,10 @@ module CandidateStage
   candidateState =
     Fixed.fixedWidthCandidateQuotedState code codec
 
-  indexedArity : Nat
-  indexedArity =
-    Bridge.formulaVariableBound
-      (Q2.currentFormula candidateState)
-
   indexedRoot :
-    DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact.BooleanFormula
-      indexedArity
+    SAT.BooleanFormula
+      (Bridge.formulaVariableBound
+        (Q2.currentFormula candidateState))
   indexedRoot =
     Bridge.cookToIndexed
       (Q2.currentFormula candidateState)
@@ -59,61 +41,31 @@ module CandidateStage
   candidateBudget =
     Q2.recursiveMeasure candidateState
 
-  rootedSourceOutcome :
-    Staged.RootedSourceStageResult
-      indexedRoot
-      candidateBudget
-  rootedSourceOutcome =
-    Staged.runRootedSourceStage
-      indexedRoot
-      candidateBudget
+  stagedSource :
+    Staged.RootedSourceStage indexedRoot candidateBudget
+  stagedSource =
+    Staged.stagedRootedSource indexedRoot candidateBudget
 
-  ----------------------------------------------------------------------
-  -- The exact exhaustive-constructor source-work obstruction.
-  ----------------------------------------------------------------------
-
-  sourceWorkExhaustion : Set
-  sourceWorkExhaustion =
-    candidateBudget
-    ≤
+  sourceWork : Nat
+  sourceWork =
     Completed.completedRootedSourceWork indexedRoot
 
-  sourceWorkFits : Set
-  sourceWorkFits =
-    Completed.completedRootedSourceWork indexedRoot
-    <
-    candidateBudget
+  sourceReadyImpliesWorkFits :
+    ∀ {terminalKeys exact fits} →
+    stagedSource
+    ≡ Staged.sourceReady terminalKeys exact fits →
+    sourceWork < candidateBudget
+  sourceReadyImpliesWorkFits {fits = fits} equality = fits
 
-  sourceExhaustionForcesStageFailure :
-    sourceWorkExhaustion →
-    Completed.completedRootedSourceGate
-      indexedRoot
-      candidateBudget
-    ≡
-    Data.Maybe.Base.nothing
-  sourceExhaustionForcesStageFailure =
-    Staged.sourceExhaustionImpliesCompletedGateFailure
+  budgetExhaustedImpliesMeasureBelowSourceWork :
+    ∀ {exhausted} →
+    stagedSource
+    ≡ Staged.budgetExhausted exhausted →
+    candidateBudget ≤ sourceWork
+  budgetExhaustedImpliesMeasureBelowSourceWork
+      {exhausted = exhausted}
+      equality = exhausted
 
-  sourceReadyExcludesExhaustion :
-    Staged.RootedSourceReady indexedRoot candidateBudget →
-    sourceWorkExhaustion →
-    ⊥
-  sourceReadyExcludesExhaustion ready exhausted =
-    Data.Nat.Properties.<⇒≱
-      (Staged.sourceWorkFits ready)
-      exhausted
-
-------------------------------------------------------------------------
--- MAX-CUT CONSEQUENCE
---
--- On the exact candidate-coupled state, the exhaustive source constructor is
--- no longer an abstract possibility. Its first stage has a total computed
--- outcome.  If source work exhausts the recursive measure, this construction
--- route is closed. If sourceReady is returned, the remaining debts are the
--- explicitly staged global packing/admission/emitting-machine/full-charge
--- obligations.
---
--- A theorem that every polynomial candidate MUST nevertheless progress cannot
--- be obtained from this source gate: it must either prove strict source fit on
--- the candidate-generated root or provide a cheaper non-exhaustive constructor.
-------------------------------------------------------------------------
+  candidateBudgetIsRecursiveMeasure :
+    candidateBudget ≡ Q2.recursiveMeasure candidateState
+  candidateBudgetIsRecursiveMeasure = refl

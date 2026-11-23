@@ -2,9 +2,11 @@ module DASHI.Interop.SLRSharedEvidenceReducerExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SLRSprint2CanonicalEvidenceConvergenceExact as Sprint2
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Interop.SLRReviewedEvidencePaymentExact as Reviewed
 
 ------------------------------------------------------------------------
@@ -134,3 +136,115 @@ reviewBoundaryAnchor = Reviewed.canonicalReviewedEvidencePaymentParity
 
 sprint2ManifestationAnchor : Sprint2.CanonicalManifestationEnvelopeParity
 sprint2ManifestationAnchor = Sprint2.canonicalManifestationEnvelope
+
+
+------------------------------------------------------------------------
+-- Lazy public-parser span materialization.
+--
+-- The parser emits only PublicParserLazySpanRequest.
+-- The shared reducer is the first surface that constructs EvidenceSpan.
+-- The exact generation licence is retained by type.
+------------------------------------------------------------------------
+
+record LazyLicensedSpanReduction
+    (request : Canonical.PublicParserLazySpanRequest) : Set where
+  constructor lazy-licensed-span-reduction
+  field
+    reductionGenerationLicence :
+      Canonical.SpanGenerationLicence
+        (Canonical.requestSourceRevisionRef request)
+        (Canonical.requestSpanRef request)
+
+    reductionGenerationLicenceIsRequestLicence :
+      reductionGenerationLicence
+      ≡ Canonical.requestGenerationLicence request
+
+    materializedSpan :
+      Canonical.EvidenceSpan
+
+    materializedSpanIsPublicParserResult :
+      materializedSpan
+      ≡ Canonical.publicParserMaterializeLazySpan request
+
+    retainedSourceRevision :
+      Canonical.spanSourceRevisionRef materializedSpan
+      ≡ Canonical.requestSourceRevisionRef request
+
+    retainedSpanReference :
+      Canonical.spanRef materializedSpan
+      ≡ Canonical.requestSpanRef request
+
+    retainedSpanKind :
+      Canonical.spanKind materializedSpan
+      ≡ Canonical.requestSpanKind request
+
+    reducerConsumesGenerationLicence : Bool
+    reducerConsumesGenerationLicenceIsTrue :
+      reducerConsumesGenerationLicence ≡ true
+
+    lazyReductionCreatesSemanticAuthority : Bool
+    lazyReductionCreatesSemanticAuthorityIsFalse :
+      lazyReductionCreatesSemanticAuthority ≡ false
+
+    lazyReductionCreatesReuseAuthority : Bool
+    lazyReductionCreatesReuseAuthorityIsFalse :
+      lazyReductionCreatesReuseAuthority ≡ false
+
+open LazyLicensedSpanReduction public
+
+sharedReducerMaterializeLazySpan :
+  (request : Canonical.PublicParserLazySpanRequest) →
+  LazyLicensedSpanReduction request
+sharedReducerMaterializeLazySpan request =
+  lazy-licensed-span-reduction
+    (Canonical.requestGenerationLicence request)
+    refl
+    (Canonical.publicParserMaterializeLazySpan request)
+    refl
+    refl
+    refl
+    refl
+    true refl
+    false refl
+    false refl
+
+------------------------------------------------------------------------
+-- Deterministic regression fixture.
+------------------------------------------------------------------------
+
+lazyTextRangeFixture : Canonical.PublicParserLazySpanRequest
+lazyTextRangeFixture =
+  Canonical.mkLazyTextRangeRequest
+    "revision-fixture"
+    "span-fixture"
+    3
+    9
+
+lazyTextRangeReduction :
+  LazyLicensedSpanReduction lazyTextRangeFixture
+lazyTextRangeReduction =
+  sharedReducerMaterializeLazySpan lazyTextRangeFixture
+
+lazyTextRangeReductionRetainsRevision :
+  Canonical.spanSourceRevisionRef
+    (materializedSpan lazyTextRangeReduction)
+  ≡
+  "revision-fixture"
+lazyTextRangeReductionRetainsRevision = refl
+
+lazyTextRangeReductionRetainsSpanRef :
+  Canonical.spanRef
+    (materializedSpan lazyTextRangeReduction)
+  ≡
+  "span-fixture"
+lazyTextRangeReductionRetainsSpanRef = refl
+
+lazyTextRangeReductionDoesNotCreateSemanticAuthority :
+  lazyReductionCreatesSemanticAuthority lazyTextRangeReduction
+  ≡ false
+lazyTextRangeReductionDoesNotCreateSemanticAuthority = refl
+
+lazyTextRangeReductionDoesNotCreateReuseAuthority :
+  lazyReductionCreatesReuseAuthority lazyTextRangeReduction
+  ≡ false
+lazyTextRangeReductionDoesNotCreateReuseAuthority = refl
