@@ -2223,3 +2223,104 @@ COMP7 FRACDASH original instruction trace; COMP8 all-future-observer
 non-descent; CM winding/primitive necklaces, GMP selected coefficient,
 contour, level-163 Masser. Sweetgrass/Kimmerer attribution remains
 methodological and distinct from formal mathematical ownership.
+
+
+## 23 November — COMP5c: stage-level GMP profiling, 1M digits, delayed cross-GCD
+
+Live original #1529 head c0f1081b6aef87368794d7c0f61290cdf5247b3f.
+New compiled exact benchmark scripts/check_pi_gmp_stage_profile.cpp, commit
+ca0c67c033decbe0c262cba8a4f03e32702f86c9, blob
+6a570bdcbd0c28b05aa6894dbf31e353c1908936.
+Local g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto executable was run on
+the byte-identical Git blob (local git hash-object and connector readback
+both equal). All modes use Chudnovsky midpoint P/Q/T, original n=d//14+2,
+exact alternating next term and integer-isqrt bounds, exact integer
+floor(10^d*L)==floor(10^d*U) certificate (conditional on classical identity).
+GMP C++ 14.2.0 Linux; SHA-256 through OpenSSL, no CI, Agda or external SOTA.
+The policy to defer external SOTA is explicit.
+
+The instrumentation splits total work into original binary split; decimal
+power 10^d; square root of 10005*2^(2bits); endpoint product assembly;
+both floor divisions; decimal conversion + SHA256; and residual unaccounted
+timer overhead. All are timed inside each certified invocation; compiler and
+process startup are excluded. Tight bits=ceil(d*log2(10))+64 rather than
+previous wide bits=4d+32. Endpoints are exactly bracketed in BOTH precision
+modes; if decimal floors differ n and bits are expanded, never silently
+rounding. Tight option is an engineering heuristic with 64-bit margin;
+no optimality theorem, and the sqrt rational interval remains outward.
+
+Single-process rotated-order three-run medians for wide and tight at d=100000:
+| method | wide ms | tight ms | final triple summed bits |
+|---|---:|---:|---:|
+| plain midpoint | 42.823 | 40.410 | 1633834 |
+| full cross-GCD | 41.981 | 40.234 | 903197 |
+
+At d=500000 (three-run medians):
+| method | wide ms | tight ms | final triple bits |
+|---|---:|---:|---:|
+| plain | 315.402 | 302.051 | 8915236 |
+| full cross | 341.328 | 335.009 | 4517094 |
+At d=1000000 (three-run medians):
+| method | wide ms | tight ms | final triple bits |
+|---|---:|---:|---:|
+| plain | 701.866 | 688.932 | 18472995 |
+| full cross | 798.615 | 782.499 | 9034322 |
+
+Important change of recommendation: cross-GCD is not a universal default
+with fused certification. Beyond 500k it reduces final triple size
+but raises elapsed time because the GCD merge work exceeds savings in
+later endpoint arithmetic. With tight 1M, plain component medians:
+split 288.738ms, sqrt 39.466ms, power10 4.749ms,
+endpoints 194.998ms, floor divisions 90.796ms,
+serialization+SHA 71.903ms. Cross component medians:
+split 451.491ms, sqrt 40.001ms, power10 4.572ms,
+endpoints 138.429ms, divisions 78.962ms,
+serialization+SHA 68.981ms.
+Component medians should not be summed as they are selected
+independently; these are stage attribution, not machine-independent cost.
+
+Follow-up in the *committed* binary tested thresholded GCD only
+when merge interval length >= L (L=2 full, 8,32,128,512,2048;
+plain no GCD), all using tight bits. At d=1000000, five-run
+rotated-order within-process median total milliseconds:
+| schedule | ms | triple summed bits |
+|---|---:|---:|
+| plain | 692.117 | 18472995 |
+| full cross L=2 | 761.927 | 9034322 |
+| L=8 | 768.782 | 9034478 |
+| L=32 | 739.913 | 9035324 |
+| L=128 | 738.351 | 9039413 |
+| L=512 | 749.063 | 9059579 |
+| L=2048 | 754.617 | 9153108 |
+None beats plain for 1M in this local 7-configuration sweep.
+At d=500000 (3-run): plain 308.603, L=2 324.970, L=8
+312.820, L=32 305.467, L=128 308.143, L=512 315.087,
+L=2048 317.880 ms. Tiny L=32 advantage is not robustly
+established; no production promotion. At d=100000 (3-run),
+plain 42.177, full 43.173, L=8 40.633, L=32 40.304,
+L=128 39.771, L=512 41.099, L=2048 42.061 ms.
+
+All seven schedules give identical certified decimal output and
+only one refinement attempt at 100k, 500k, 1M. Output SHA256s
+(complete integer floor string with initial 3, no decimal point):
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711;
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9;
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+This is exact INTERNAL parity across independent tree representations,
+NOT independently proved equality with the original Bishop pi real.
+No external pi software, native GPU, matched RSS, hardware portability,
+or full kernel proof acceptance.
+
+COMP5c stage profile and 1M exact consumer PASS. 1M cross-GCD
+performance gate NEGATIVE; choose plain fused midpoint as currently
+best tested 1M mode, retaining earlier cross-GCD advantages at smaller
+precision and its usefulness for other selected consumers. Further work:
+tune integer endpoint product schedule/abbreviated quotients,
+benchmark crossover across hardware, profile RSS and allocation,
+precision-adaptive guard bits, and use exact ABI-valid library
+comparisons only later as requested. COMP6 Monster/VOA full operator
+vs character distinctions, COMP7 FRACDASH exact reconstruction,
+COMP8 all-future-observer separation and CM cyclic winding/primitive
+necklaces/Masser remain OPEN, not reduced by decimal hash parity.
+Sweetgrass inspiration attributed to Robin Wall Kimmerer;
+proof authority remains arithmetic and classical Chudnovsky owners.
