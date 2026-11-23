@@ -339,3 +339,12 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact 
 -- on that scalar donor plus closed 1024-label canonical permutation.
 -- No new Gibbs/OS/Hamiltonian, full CMP119 extras, or kernel receipt.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonN3NativeC3DensityBIDIExact as OriginalN3NativeC3Density
+
+-- W0 corrected source-owned CMP98-average / original F19 functional triangle:
+-- keeps native R445 even/odd pair, actual 896 spectators, all original
+-- fine marks and arbitrary nonlinear fine-field coarse observable Q(U).
+-- CMP98 Eq.(15) source Q construction and CMP119 constrained localized
+-- history equality remain explicit open physical inputs; this import
+-- is a source-type regression request, not a compiler receipt.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact as OriginalF19FineFourMoments
+import DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact as OriginalF19ActualQFunctionalT
