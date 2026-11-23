@@ -50,6 +50,13 @@ z = sp.symbols('z')
 cosh_tail = sp.cosh(z)-sum(z**(2*j)/sp.factorial(2*j) for j in range(5))
 assert sp.simplify(sp.series(cosh_tail,z,0,12).removeO()-z**10/sp.factorial(10))==0
 print('PASS exact first possible hyperbolic height-defect perturbation order 10')
+# Geometry no-go: the original signed W cannot itself be an even real
+# autocorrelation/positive-definite test. Its Fourier K(0,q) begins with
+# -(T_W/6)q^4<0; a Gram square |F(q)|^2 is >=0 on all real q.
+Tpos,qpos,amp=sp.symbols('Tpos qpos amp',positive=True)
+assert sp.simplify((-Tpos*qpos**4/sp.Integer(6))/qpos**4)==-Tpos/6
+assert sp.simplify((amp*qpos**2)**2/qpos**4)==amp**2
+print('PASS original negative quartic sector incompatible with a single positive-definite autocorrelation channel')
 # Physical source profile is Pphys(u)=(1/r)*Pnorm(r*u), since the
 # two-radius projective bracket itself carries one inverse radius. Under
 # v=r*u, its even kth moment scales with r^-(k+2), not r^-(k+1).
