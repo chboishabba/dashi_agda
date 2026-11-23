@@ -199,8 +199,7 @@ def run_cli():
           advance(json.loads(a.input.read_text()),a.count) if a.mode=='advance'
           else isolate_fourth(json.loads(a.input.read_text())))
     a.out.parent.mkdir(parents=True,exist_ok=True)
-    a.out.write_text(json.dumps(data,indent=2,sort_keys=True)+'
-')
+    a.out.write_text(json.dumps(data,indent=2,sort_keys=True)+'\n')
     print(json.dumps({k:data[k] for k in data if k in ('status','t','nsteps','U_activation_time_bracket','validated_crossings','original_J24_event_boxes_paid')},sort_keys=True))
 
 if __name__=='__main__':run_cli()
