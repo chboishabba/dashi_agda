@@ -203,11 +203,24 @@ module _
         originalIndexedWilsonWeight t k original *ℝ
         mark (recoverCanonicalFromIndexed t k original))
 
+  -- The already-existing ORIGINAL F19 theorem takes a mark on the
+  -- SORTED source vector. Restore the original canonical mark using
+  -- the SOURCE-PROVED INVERSE permutation; do not mis-apply a mark to
+  -- a field in the other coordinate order.
+  originalSortedPullbackMark :
+    (OriginalVector → ℝ) → OriginalVector → ℝ
+  originalSortedPullbackMark mark sorted =
+    mark
+      (Haar.permuteLinks
+        (Original.inverseProgram (Original.actualPairProgram theory))
+        sorted)
+
   originalCanonicalWilsonMarkedNumerator :
     (OriginalVector → ℝ) → ℝ
-  originalCanonicalWilsonMarkedNumerator =
+  originalCanonicalWilsonMarkedNumerator mark =
     Mark.canonicalOriginalMarkedNumerator
       theory traceData exponential beta source
+      (originalSortedPullbackMark mark)
 
   originalIndexedWilsonNumeratorIsOriginal :
     ∀ {Time : Set} (t : Time) k mark →
@@ -223,7 +236,12 @@ module _
       (λ original →
         cong₂ _*ℝ_
           (originalWilsonActionDensityIndexedEqualsOriginal t k original)
-          (cong mark (sourceIndexedLinkRecoversOriginal t k original)))
+          (trans
+            (cong mark (sourceIndexedLinkRecoversOriginal t k original))
+            (sym
+              (cong mark
+                (Original.inverseAfterForward
+                  (Original.actualPairProgram theory) original)))))
 
   originalIndexedWilsonFourMoments :
     ∀ {Time : Set} (t : Time) k
@@ -256,7 +274,8 @@ module _
       (Haar.productIntegral source actualOriginalWilsonWeight)
     ≡
     Mark.sortedOriginalMarkedNormalized
-      theory traceData exponential beta source divide mark
+      theory traceData exponential beta source divide
+      (originalSortedPullbackMark mark)
   originalIndexedWilsonNormalizedEqualsOriginalF19
     t k divide mark =
     trans
@@ -266,7 +285,8 @@ module _
             (Haar.productIntegral source actualOriginalWilsonWeight))
         (originalIndexedWilsonNumeratorIsOriginal t k mark))
       (Mark.originalCanonicalMarkedNormalizedIsSorted
-        theory traceData exponential beta source divide mark)
+        theory traceData exponential beta source divide
+        (originalSortedPullbackMark mark))
 
   -- This is a real ORIGINAL-SOURCE functional, NOT a new time/grade
   -- dependent Wilson Boltzmann weight. Our chart k is not a Balaban
