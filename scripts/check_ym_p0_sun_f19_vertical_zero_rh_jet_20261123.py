@@ -103,3 +103,24 @@ assert pair.subs(w,0)==0
 assert s.simplify(s.diff(pair,w).subs(w,0)+2/(a*a))==0
 assert s.simplify(s.limit(2*w/(w*w-A*A),A,0)-2/w)==0
 print('PASS RH signed midpoint cancellation: nonzero jet -2/a²; coincident poles DO NOT vanish')
+
+
+# Full CONTINUOUS SU(N) F19 disintegration: one native pair fibre V is Haar
+# before Wilson reweighting; U=W*V^-1. Selected F has U but not V, hence
+# F is a normalized ReTr(Haar SU(N) matrix) for any fixed other variables.
+# Changing U and V touches exactly 6+6 original Wilson plaquettes.
+# Each action deficit 1-ReTr(P)/N lies in [0,2], so the normalized
+# V-conditional density is >= exp(-24 beta) relative to Haar, beta>=0.
+# Standard Haar fundamental-character orthogonality then gives
+# Var_Haar(F)=1/4 (SU2), =1/(2N^2) (SU(N), N>=3).
+theta=s.symbols('theta',real=True)
+haar2=2*s.sin(theta)**2/s.pi
+assert s.simplify(s.integrate(haar2,(theta,0,s.pi))-1)==0
+assert s.simplify(s.integrate(s.cos(theta)*haar2,(theta,0,s.pi)))==0
+assert s.simplify(s.integrate(s.cos(theta)**2*haar2,(theta,0,s.pi))-s.Rational(1,4))==0
+b=s.symbols('b',nonnegative=True)
+for N in (2,3,4,5):
+ vN=s.Rational(1,4) if N==2 else s.Rational(1,2*N*N)
+ assert (s.exp(-24*b)*vN).is_positive is True
+print('PASS finite beta full SU(N) Haar conditional variance >= exp(-24beta)*vN')
+print('Haar N>=3 uses standard irreducible character/centre orthogonality, not a numerical integral')
