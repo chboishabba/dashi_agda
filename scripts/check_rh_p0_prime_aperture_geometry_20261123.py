@@ -44,6 +44,12 @@ for moment in (m2,m4,m6,m8):
 for w in (c1,c2,p1,p2):
     assert (ee*w).subs(w,0)==0
 print('PASS SymPy exact 8-constraint projective moment/pole invariance and automatic M0')
+# With even M0,M2,...,M8 all preserved, the first possible change
+# in the original signed hyperbolic target defect is O(alpha^10).
+z = sp.symbols('z')
+cosh_tail = sp.cosh(z)-sum(z**(2*j)/sp.factorial(2*j) for j in range(5))
+assert sp.simplify(sp.series(cosh_tail,z,0,12).removeO()-z**10/sp.factorial(10))==0
+print('PASS exact first possible hyperbolic height-defect perturbation order 10')
 
 log2,log3,log4=np.log(2),np.log(3),np.log(4)
 core200=16*(np.pi+1)/200
