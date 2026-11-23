@@ -880,3 +880,60 @@ Preserve COMP6-8 and CM gates: minimal canonical form can be more costly
 than sufficient noncanonical carrier; test this separately for Monster/VOA
 orbit/action and FRACDASH reconstruction, do not infer equivalences.
 No CI initiated or Agda kernel receipt.
+
+
+## 23 November 2026 — COMP3b exact prime-valuation carrier; performance negative control
+
+Continuation of COMP1/COMP2/COMP3a from scripts/check_pi_cross_cancel.py,
+with the same original Chudnovsky P_k=-24(2k-1)(6k-5)(6k-1),
+Q_k=640320^3 k^3 and the *same* rational interval and decimal-floor
+consumer. New scripts/check_pi_prime_valuation.py on this PR,
+commit e45255afd9065ad23b3d4fbef28eca2478a164ce;
+the locally executed script and connector readback have the identical
+Git blob 8ae26be179e4664eb373ec8628136c66b96a250a.
+
+At each leaf build exact prime-exponent Counter maps for |P| and Q.
+Represent 640320^3 through triple the exponents of 640320; multiply
+leaf factors 24,(2k-1),(6k-5),(6k-1) and k^3. At each internal merge
+compute the intersection e_l=min(v_l(P_left),v_l(Q_right)), reconstruct
+g=prod_l l^e_l and divide P_left,Q_right *before* constructing
+P_left*P_right,Q_left*Q_right,T_left*Q_right+P_left*T_right.
+Update the maps by the exact cross cancellation, then sum remaining
+P and Q exponents. This is an exact factorization invariant of the
+cross-only triple, not of T. No factorization of an arbitrary large
+post-merge integer is attempted.
+
+Local CPython execution: 64/64 prefixes (n=1..64) match cross-GCD
+**identical P,Q,T integers** and reconstruct |P|,Q exactly from
+the tracked prime maps. Three-run sequential medians for certified
+decimal floors, with shared integer-isqrt and Fraction output:
+| digits | n | cross-GCD ms | valuation-map ms | final sum of P/Q/T bits |
+|---:|---:|---:|---:|---:|
+| 1000 | 73 | 0.595 | 1.932 | 9030 |
+| 10000 | 716 | 26.930 | 41.999 | 90233 |
+| 50000 | 3573 | 534.913 | 612.077 | 451549 |
+
+Exactly the same certified decimal strings at all three precisions,
+including prior SHA256 for 50000:
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+The SPF sieve construction is outside both timed modes (and adds extra
+overhead to the valuation approach in end-to-end use); separate map
+reconstruction assertions are also outside the timed inner loop.
+Full-map bookkeeping is 14.4% *slower* than cross-GCD at 50000 digits
+and produces NO smaller integer carrier. This is a matched local
+negative result, not a native GMP/FLINT/MPFR or external SOTA benchmark.
+The cross-GCD route remains the fastest of these two modes at 50000.
+
+COMP3b exact predictive factoring PASS finite reference; COMP3b
+*performance improvement FAILED at these scales*. Narrow next cut:
+selective valuations for known small/smooth primes; compute the
+residual cross-GCD or a certified residual-coprimality check to preserve
+exactness, and measure the factor-map setup cost. COMP4 tree-shape and
+COMP5 native/externally certified pi remain OPEN. Preserve CM M15k-p
+wheel/primitive repetition, GMP selective coefficients, contour and
+full 163 Masser, and COMP6 Monster/VOA full-operator versus trace
+non-descent, COMP7 FRACDASH reconstruction, COMP8 consumer quotients.
+No cultural-metaphor-to-mathematical-authority promotion:
+Robin Wall Kimmerer / Braiding Sweetgrass is methodological attribution.
+No Agda/Lean compiler or CI run; classical Chudnovsky identity is
+external and Bishop same-real transport remains OPEN.
