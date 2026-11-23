@@ -28,6 +28,7 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as P9
 import DASHI.Mathematics.Symmetry.Punctured27NineSheetBridgeExact as Original
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
+import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as DyadicTail
 
 -- The four punctured central-plane antipodal pairs are assigned the four
 -- original pole frequency branches. This assignment is a CHOSEN chart.
@@ -112,3 +113,58 @@ central17 = refl
 
 central18 : factorDenominator (Original.middleNonzero P9.positiveOppositeDiagonal) ≡ 324
 central18 = refl
+
+
+------------------------------------------------------------------------
+-- P0 constants audit: different SAME-NUMBER geometries, NO false action.
+--
+-- 32768 = 8^5 = 2^15 is already the original SOURCE dyadic tail
+-- chart capacity, with a retained continuous residual theta.
+-- The separate low-tech t>=32768 analytic sufficient threshold was
+-- OPTIONAL and is superseded by an exact source-target floor from
+-- t>=19440 (r>=1215). No t↔dyadic-action identification follows.
+--
+-- 208 = 26*8 coincides with the punctured cube's 26 source sites
+-- and the middle plane's eight oriented points, but its prior
+-- analytical 1/208 was an EQUAL SPLIT of a chosen 1/8 error
+-- budget across 26 polynomial terms: change the bump width and
+-- this allocation changes. No invariant 208-dimensional action.
+--
+-- The full nonuniform punctured-shell E2 coefficients E_j and the
+-- positive *weighted polynomial* H(r) replace equal term splitting.
+-- Proved with source exact fractions by local regression; neither
+-- H(r) nor a zeta sign theorem is kernel-welded here.
+------------------------------------------------------------------------
+
+puncturedMiddleCount : Nat
+puncturedMiddleCount = 8
+
+originalTwentySixSlotCount : Nat
+originalTwentySixSlotCount = 26
+
+formerEqualSplitCount : Nat
+formerEqualSplitCount = originalTwentySixSlotCount * puncturedMiddleCount
+
+old208Is26TimesEight : formerEqualSplitCount ≡ 208
+old208Is26TimesEight = refl
+
+-- The original dyadic chart has its own independent analytic owner,
+-- not the new coefficient-bound chart.
+sourceDyadicFlag32768 : Nat
+sourceDyadicFlag32768 = DyadicTail.sourceDyadicCapacity
+
+sourceDyadicFlagIs32768 : sourceDyadicFlag32768 ≡ 32768
+sourceDyadicFlagIs32768 = DyadicTail.sourceDyadicCapacityIs32768
+
+sourceTailCutoffMatchesPuncturedEight :
+  DyadicTail.tailCutoff ≡ puncturedMiddleCount
+sourceTailCutoffMatchesPuncturedEight = refl
+
+sourceDyadicPowerMatchesTail :
+  DyadicTail.tailCutoffFifthPower ≡ sourceDyadicFlag32768
+sourceDyadicPowerMatchesTail =
+  DyadicTail.tailCutoffFifthPowerIsSourceDyadicCapacity
+
+-- The two actual same-integer owners agree on 32768, but
+-- the source explicitly BLOCKS identifying dyadic x3 with Monster 3B.
+-- Equally no RH proof is licensed from the integer equality.
