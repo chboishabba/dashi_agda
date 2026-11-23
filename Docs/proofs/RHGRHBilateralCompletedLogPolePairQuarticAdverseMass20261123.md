@@ -1,3 +1,74 @@
+## 23 November 2026 — P0 continuation: prime-free right contour and an exact adverse same-ordinate subtraction
+
+**Original source owners verified on chboishabba/dashi_lean4 main.** NMu.lean already owns quarticFourCompletedRadius(t)=16(pi+1)/t, quarticFourPhysicalDetector_support_completedRadius and the literal N-mu normalization. JointHorizontalJet.lean already owns signedLiteralPairSourceTerm_eq_normalizedPairKernel, signedNormalizedPairKernel_eq_combinedIntegral, and (critically) signedNormalizedPairKernel_zero_eq_neg_four_target. SignedPolePair.lean already owns physicalCombinedHeightDefect_scaled and combinedZeroHeightDefect with the TRUE zero multiplicity. RiemannProjectiveRvMMuGammaSameObject.lean already owns projectiveRvMMuPair_eq_literalGammaTerm. FourierTerminal.lean owns the exact post-sixth terminal including local-budget slack. Reuse these; do not build a parallel RH geometry.
+
+### A. Prime-power sampling vanishes exactly at t>=200
+
+The original selected signed profile P_W(v) has support |v|<=pi+W.R<pi+1, while its physical g_W,t has support |u|<=16(pi+1)/t. For every t>=200 and n>=2,
+
+    16(pi+1)/t <=16(pi+1)/200 < 2/5 < 1/2 < log(2) <= log(n).
+
+Hence every standard explicit-formula prime-power sample g_W,t(log n) is exactly zero. This also annihilates character-weighted prime-power samples chi(n)*g_W,t(log n) without eliminating the chi-specific conductor and gamma channels.
+
+For the SAME profile and r=t/16, s0=1/2+i t, define
+    f_W,t(s)=r^-2 integral_R P_W(v) exp((s-s0)*v/r) dv.
+Evenness makes this exactly the previously constructed entire cosh/cosine lift. After a completed-xi functional-equation contour reflection to Re(s)=c>1, the right-line test is f(s)+f(1-s). Fourier inversion produces the zeta'/zeta term
+
+    -(2/r) sum_(n>=2) Lambda(n)/sqrt(n)
+           * P_W(r log n) * cos(t log n) = 0  (t>=200).
+
+The 2/r, n^-1/2 and ±t sheets have been checked by a Gaussian Fourier-exponent normalization fixture; the ORIGINAL compact P_W, not that Gaussian, supplies exact support vanishing. This is not yet a kernel-checked right-contour theorem (horizontal boundary, interchange, and conventions must be paid).
+
+Crucially, on Re(s)>1 the completed logarithmic derivative also has
+
+    xi'/xi(s)=zeta'/zeta(s)+1/s+1/(s-1)
+               -(1/2)log(pi)+(1/2)digamma(s/2).
+
+Even if all prime samples vanish, the rational pole-removal and Gamma integral remain. The existing Zeta23.mu/Gamma theorem is the right owner, but its actual sampleTest/paperFT normalization and factors cannot be skipped. Do not claim A_W=I_W.
+
+### B. Exact same-ordinate defect = -4 times the original physical zero defect
+
+At an ACTUAL zero sigma with Im(sigma)=t, displacement a=heightOf(sigma), multiplicity m_sigma, and r=t/16, the theorem signedNormalizedPairKernel_zero_eq_neg_four_target gives
+
+    K_W(a/r,0)=-4 D_W(a/r).
+
+Combining it with physicalCombinedHeightDefect_scaled and the TRUE combinedZeroHeightDefect definition yields
+
+    (m_sigma/r^2) K_W(a/r,0)
+      = -4 W.combinedZeroHeightDefect(sigma).
+
+Let D_same(t)=sum_{Im(sigma)=t} W.combinedZeroHeightDefect(sigma) across ALL actual same-ordinate zero events (fixed critical-axis zeros once). Define A_W(t) as the FULL reflected completed-xi contour zero sum with this original normalization, H_W(t) the original literal OFF-ORDINATE signed sum, and I_W(t)=integral W.signedOrdinateTest(tau)*Zeta23.mu(tau) d tau. Exact subtraction gives
+
+    J_same(t) = -4 D_same(t),
+    A_W(t) = H_W(t) + J_same(t),
+    **H_W(t) = A_W(t) + 4 D_same(t)**.
+
+The sign is important: removing same-ordinate poles makes the off-ordinate residual HIGHER, not lower. This was obscured by the previous generic local-subtraction wording.
+
+### C. The full post-sixth terminal becomes a stricter NEGATIVE contour margin
+
+Keep canonical local-budget slack S_W>=0 and target defect d_W(rho)>0 for a hypothetical off-line zero rho at the same ordinate. The already-verified exact terminal is
+
+    H_W(t)+S_W(t)<4 d_W(rho)+I_W(t).
+
+Substitute the exact same-ordinate correction:
+
+    **A_W(t)-I_W(t)+S_W(t) < 4 d_W(rho)-4 D_same(t)**.
+
+Under the ORIGINAL quantitative target-band assumption 8/t<W.quantitativeTargetRadius, every zero defect is nonnegative. The off-line rho and its distinct same-ordinate horizontal reflection have equal multiplicities and equal positive defects, so D_same(t)>=2 d_W(rho). Thus a necessary condition is
+
+    **A_W(t)-I_W(t)+S_W(t)<-4 d_W(rho)<0**.
+
+This is a genuine signed no-shortcut result. Prime-free source sampling by itself cannot supply the required strict negative surplus. Even a hypothetical later A_W-I_W=0 would be incompatible with this strict inequality for an off-line target, but that equality is NOT established by the support check; Gamma and pole-removal remain to be identified exactly with original mu.
+
+### D. Max-cut next: one same-object archimedean scalar, not another reflection model
+
+(1) Kernel-check the FULL contour/Abel exhaustion with correct horizontal edges and original outer 1/2; (2) identify its rational and Gamma term with the original projective sampleTest, paperFT and Zeta23.mu pairing, not a surrogate log-density; (3) prove or refute the required A_W-I_W+S_W<-4d_W(rho) with actual source and all same-ordinate defects. For GRH retain chi, conjugate chi, conductor, parity, gamma and primitive/imprimitive pole removal, even though the prime sample support argument itself is character-neutral.
+
+Local SymPy 1.14 source-equivalent support inequality, Gaussian Fourier normalization, -4d per zero, -8d per horizontal reflection pair and terminal-recut algebra PASS. Appended to the EXISTING bilateral-pole regression. No local FULL regression, Lean/Agda kernel or CI was run. No RH or GRH proof is claimed.
+
+---
+
 ## 23 November 2026 — NEW: original finite far-zero sum as a completed-ξ'/ξ HOLOMORPHIC CONTOUR TRACE (the actual requested two-sided-pole weld)
 
 This reuses the ORIGINAL Lean signed normalized pair kernel and its `signedLiteralPairSourceTerm_eq_normalizedPairKernel` theorem, plus the original completed-ξ/Weil/Abel machinery. It is **NOT a new arbitrary kernel**, and the contour transformation by itself does not make a sign-changing source positive.
