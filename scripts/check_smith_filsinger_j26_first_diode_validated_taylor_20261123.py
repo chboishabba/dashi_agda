@@ -240,7 +240,7 @@ def run():
     whole=[evalpoly(row,I(0,h_right)).expand(F('.00000001')) for row in P]
     E=bound_exp(get_A(whole),h_right,delta,eps)
     certified_event_state=[evalpoly(row,I(h_left,h_right)).expand(e) for row,e in zip(P,E)]
-    original_box=[I(x-F('.0001'),x+F('.0001')) for x in centres[0]['x']
+    original_box=[I(x-F('.0001'),x+F('.0001')) for x in centres[0]['x']]
     assert all(state.subset(box) for state,box in zip(certified_event_state,original_box))
     event_box_inclusion_grid=[[str(x.a),str(x.b)] for x in certified_event_state]
     return dict(status='PASS_EXACT_RATIONAL_NOMINAL_FIRST_DIODE_V_EVENT',
