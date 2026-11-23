@@ -154,3 +154,114 @@ originalR445NativeBlockAgreesExplicitParity theory fine site axis =
       (cong fine
         (originalR445NativeSecondBondIsParity
           (Signed.sunExactSignedLinkGroup theory) site axis)))
+
+
+------------------------------------------------------------------------
+-- W0 SOURCE GEOMETRIC WELD: native R445 <-> genuine F19 fibre pair.
+--
+-- Source geometry, NOT a fresh block map: for every one of 64 native
+-- side-two bonds, the pair consists of its two distinct original
+-- parity-selected side-four positive bonds. Recover the FIRST fine
+-- holonomy from (native W, SECOND fine holonomy V) as W V^-1.
+-- The normal F19 fibre coordinates therefore reconstruct exactly
+-- the native R445 holonomy, pointwise on the ORIGINAL fine field.
+--
+-- No integration, arbitrary activity equality, gauge-fixing or
+-- scale-dependent CMP119 T is smuggled into this geometry theorem.
+------------------------------------------------------------------------
+
+module _
+  {Matrix Complex : Set} {N : Nat}
+  (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+  where
+
+  NativeLink : Set
+  NativeLink = SUN.SUNMatrixElement theory
+
+  nativeSourceGroup : Bond.ExactLinkGroup NativeLink
+  nativeSourceGroup = Signed.sunExactSignedLinkGroup theory
+
+  originalSecondFineBond :
+    (site : Parity.Site2) (axis : T.Axis4) → T.PositiveBond 4
+  originalSecondFineBond site axis =
+    Parity.originalR445SelectedFineBond
+      (T.pair site axis) (T.sucᵢ T.zeroᵢ)
+
+  originalFirstFineBond :
+    (site : Parity.Site2) (axis : T.Axis4) → T.PositiveBond 4
+  originalFirstFineBond site axis =
+    Parity.originalR445SelectedFineBond
+      (T.pair site axis) T.zeroᵢ
+
+  -- An actual native F19 fibre codec, not an alternative averaging.
+  originalR445NativeF19RecoveredPair :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4) →
+    T.Product NativeLink NativeLink
+  originalR445NativeF19RecoveredPair fine site axis =
+    T.pair
+      (SUN.sunMultiply theory
+        (SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+          theory fine (T.pair site axis))
+        (SUN.sunInverse theory (fine (originalSecondFineBond site axis))))
+      (fine (originalSecondFineBond site axis))
+
+  -- U = (U V) V^-1, with the genuine native path and the selected
+  -- source parity indices, not an equality supplied as a field.
+  originalR445NativeFirstRecoveredFromF19 :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4) →
+    SUN.sunMultiply theory
+      (SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+        theory fine (T.pair site axis))
+      (SUN.sunInverse theory (fine (originalSecondFineBond site axis)))
+    ≡ fine (originalFirstFineBond site axis)
+  originalR445NativeFirstRecoveredFromF19 fine site axis =
+    let
+      first = fine (originalFirstFineBond site axis)
+      second = fine (originalSecondFineBond site axis)
+    in
+    trans
+      (cong
+        (λ block → SUN.sunMultiply theory
+          block (SUN.sunInverse theory second))
+        (originalR445NativeBlockAgreesExplicitParity theory fine site axis))
+      (trans
+        (Bond.multiplyAssociative nativeSourceGroup
+          first second (SUN.sunInverse theory second))
+        (trans
+          (cong (SUN.sunMultiply theory first)
+            (Bond.inverseRight nativeSourceGroup second))
+          (Bond.identityRight nativeSourceGroup first)))
+
+  -- Inverse fibre decode: exact original two physical link values.
+  originalR445NativeF19RecoveredPairIsOriginal :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4) →
+    originalR445NativeF19RecoveredPair fine site axis
+    ≡ T.pair
+        (fine (originalFirstFineBond site axis))
+        (fine (originalSecondFineBond site axis))
+  originalR445NativeF19RecoveredPairIsOriginal fine site axis =
+    cong₂ T.pair
+      (originalR445NativeFirstRecoveredFromF19 fine site axis)
+      refl
+
+  -- Forward fibre encode: F19's U V = W on the genuine native R445
+  -- blocked bond. This closes the source-selected local geometric
+  -- triangle in BOTH directions, not the full CMP119 T integral.
+  originalR445F19RecoveredPairBlockIsNative :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (site : Parity.Site2) (axis : T.Axis4) →
+    SUN.sunMultiply theory
+      (T.first (originalR445NativeF19RecoveredPair fine site axis))
+      (T.second (originalR445NativeF19RecoveredPair fine site axis))
+    ≡ SUNBlock.nativeSUNBlockLinks {m = 1} {l = 1}
+        theory fine (T.pair site axis)
+  originalR445F19RecoveredPairBlockIsNative fine site axis =
+    trans
+      (cong₂ (SUN.sunMultiply theory)
+        (originalR445NativeFirstRecoveredFromF19 fine site axis)
+        refl)
+      (sym (originalR445NativeBlockAgreesExplicitParity
+        theory fine site axis))
