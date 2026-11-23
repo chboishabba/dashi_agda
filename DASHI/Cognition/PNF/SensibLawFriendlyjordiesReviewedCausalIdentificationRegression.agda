@@ -13,13 +13,13 @@ exactReviewBindingRequired :
   Reviewed.exactReviewBindingRequired ≡ true
 exactReviewBindingRequired = refl
 
-samePropositionReviewBindingRequired :
-  Reviewed.samePropositionReviewBindingRequired ≡ true
-samePropositionReviewBindingRequired = refl
-
 reviewDoesNotReplaceIdentification :
   Reviewed.reviewReceiptReplacesIdentificationGate ≡ false
 reviewDoesNotReplaceIdentification = refl
+
+identificationDoesNotReplaceReview :
+  Reviewed.identificationGateReplacesReviewReceipt ≡ false
+identificationDoesNotReplaceReview = refl
 
 reviewedIdentificationCreatesRanking :
   Reviewed.reviewedIdentificationCreatesUniversalPartyRanking ≡ false
