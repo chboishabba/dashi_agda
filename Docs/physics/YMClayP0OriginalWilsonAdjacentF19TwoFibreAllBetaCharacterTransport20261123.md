@@ -97,3 +97,39 @@ Run: python scripts/check_ym_p0_original_adjacent_pair_continuous_su2_character_
 3. **Same-H interacting R4 OS gap still OPEN:** the real continuum interacting Wilson/Schwinger OS measure, noncollapsed dense vacuum-orthogonal gauge-invariant core, common reconstructed selfadjoint H, and spectral estimate at physical time t are still absent. The existing YMOriginalD2FullSectorBidiDetection20261121.md source shows decay of a selected observable alone does not imply a gap on the full same-H sector. Source physical -log Q(a)/a, uniform amplitude and observable spectral detection must be paid before the existing gap compilers are invoked.
 
 Attribution: original Wilson action and compact SU2 Haar/Peter-Weyl/Schur/Bessel identities; Bałaban CMP109/116/119/122; original DASHI F19, CMP119, W3 and OS owners. NO Clay solution claimed.
+
+
+## 23 Nov extension — exact all-SU(N) adjacent-pair source character convolution
+
+This is not limited to SU2. With the SAME two native original links in y,z directions and every remaining original L4 link fixed I, the original 23 touched face words give, by the original SU(N) trace and adjoint algebra, for EVERY N>=2,
+
+S_N(V,W)=23-11 t_N(V)-11 t_N(W)-t_N(V^-1 W),
+
+where t_N(U)=ReTr(U)/N. The same full original 1024-link/1536-plaquette background is retained; 1513 faces are exactly untouched. The shared original F deficit remains 1-t_N(V^-1 W), and remote G deficit is constant zero on this selected slice only.
+
+Let lambda index the SU(N) irreducible representations, with dimension d_lambda and character chi_lambda. For x>=0, define the coefficients of the exact normalized compact Haar central function
+
+f_x(U)=exp[x t_N(U)]=sum_lambda A_lambda(x) chi_lambda(U).
+
+This is an exact classical Peter-Weyl character expansion. **Its Fourier coefficients are NONNEGATIVE**: f_x=exp[(x/(2N))(chi_fund+chi_antifund)] has a positive power series in tensor products of the fundamental and antifundamental representations, and tensor-product character decomposition has nonnegative integer multiplicities. Since |chi_lambda(U)|<=d_lambda and sum_lambda d_lambda A_lambda(x)=f_x(I)=exp(x), the character series converges absolutely and uniformly for every finite x>=0.
+
+Schur orthogonality/convolution, respecting SU(N) conjugate representation labels, now gives the full original two-fibre **continuous SU(N) Haar** result for all beta>=0:
+
+J_N(a,b,c)
+= integral_SU(N)^2 exp[a t_N(V)+b t_N(W)+c t_N(V^-1 W)] dH(V)dH(W)
+= sum_lambda A_lambda(a) A_lambda(b) A_lambda(c)/d_lambda.
+
+(The middle factor would naturally carry the dual label; here A_lambda=A_dual(lambda) because f_x(U)=f_x(U^-1).)
+
+The actual original Wilson two-pair source is T_N(beta)=exp(-23beta) J_N(11beta,11beta,beta), and the shared original F source mass is exp(-23beta)(J_N-partial_c J_N) with c=beta after differentiation. All Fourier terms are nonnegative. At beta>0 the fundamental contribution is strictly positive, so the independent-trivial-character shortcut is STRICTLY false for ALL N>=2.
+
+**Exact N-dependent first nontrivial interaction** in the reduced character sum (before its exp(-23beta) normalization):
+
+- SU(2), self-dual fundamental: 121 beta^3/16 + O(beta^5).
+- Every SU(N), N>=3, distinct fundamental/antifundamental: 121 beta^3/(4N^4) + O(beta^4).
+
+The N>=3 result follows because A_fund(x)=x/(2N)+O(x^2), A_antifund(x)=x/(2N)+O(x^2), and each representation has dimension N. For SU2, the two linear terms coincide in one self-dual fundamental, giving A_fund(x)=x/2+O(x^3). This is a *source-internal* strict positive connected near-pair correction, not the physical two-remote-mark W3 cluster.
+
+The exact locally executed [all-rank noncommuting original matrix regression](../../scripts/check_ym_p0_original_adjacent_pair_allrank_character_20261123.py) passed **68/68 assertion groups** using native original source plaquettes at N=2,3,4,5 and rational exact noncommuting SU(N) matrices; it independently checked the original action, F/G source marks and rank-dependent fundamental coefficients. GitHub blob **e1549b154126b8cb3db400b14003a17ad7c1a6a9**, verified byte-identical to the executed file. This is a mathematical all-rank Peter-Weyl argument plus tests on four ranks, not a numerical all-rank summation and not a full physical constrained T.
+
+**The same three physical leaves remain OPEN**: selected genuine CMP119/122 Omega/Lambda/S (S internal), nonlinear Q_B and E/R/B/V/FP/gauge/Haar Jacobian T at running beta(a); absolute localized CMP116/W3 all two-remote-mark connected activity with uniformly summable physical-distance shells; and noncollapsed interacting R4 continuum same-H OS full-sector spectrum. Nothing about character positivity for this *coherent adjacent pair* implies positivity of individual activities in arbitrary exterior/large-field configurations; the original SU3 signed-baryon exterior already demonstrates why.
