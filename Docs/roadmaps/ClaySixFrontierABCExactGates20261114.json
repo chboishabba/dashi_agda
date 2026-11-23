@@ -5544,7 +5544,7 @@
       "status": "ORIGINAL_SOURCE_FINITE_ALGEBRAIC_EXTENSION_ONLY",
       "valid_gate_impact": "No new gate, no changed completed_gate_count, active_gate_count or six endpoint status",
       "original_periodic_B_analytic": "R568 upper and R653 strict-margin lower OPEN",
-      "acceptance": "all 64 exact states re-run as four 16-state checkpoints; 2 genuine opposite-sign witnesses",
+      "acceptance": "CURRENT blob 9b6ea0db5c9698623c92df5bee94b6b087abe721 re-executed all 64 finite exact states in 4 checkpointed blocks; 2 real-helicity same-state opposite-sign witnesses; R596 source-normalized Cauchy-Gram derivative validated all seeds",
       "proof_model": "Q(sqrt2,sqrt3,i) exact finite physical source; Agda rational field transport unproved",
       "script_blob": "9b6ea0db5c9698623c92df5bee94b6b087abe721"
     }
@@ -5632,7 +5632,7 @@
       "Qraw_derivative": "2*F - Re<sum_a M_a,sum_a M_a>",
       "Qsource_derivative": "4*F - 2*Re<sum_a M_a,sum_a M_a>",
       "source_conditions": "fixed cutoff, positive nu=1, R388 derivative Mdot=D-r*M, formal coefficient identity; live scalar FTC and R240 source transport open",
-      "checked": "exact source-generated algebraic Fractions for 3 witness seeds; source script extended and byte-identical hash tested",
+      "checked": "CURRENT source blob 9b6ea0db5c9698623c92df5bee94b6b087abe721 independently re-executed across ALL 64 physical same-state Galerkin seeds in 4 checkpointed blocks of 16; two opposite-sign witnesses; source raw Gram positivity and exact R388 derivative normal form on each seed",
       "seed61": {
         "Qraw_positive": true,
         "Qraw_approx": "113.549331294163",
