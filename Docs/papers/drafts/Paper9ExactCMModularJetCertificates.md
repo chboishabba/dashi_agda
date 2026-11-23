@@ -1046,3 +1046,76 @@ COMP5 fast pi SOTA, CM winding / necklaces / 163 Masser and COMP6-8
 Monster-VOA / FRACDASH / observer-fibre remain OPEN.
 No Agda or CI. Kimmerer Sweetgrass relation is cultural/methodological
 attribution, not theorem authority.
+
+
+## 23 November — COMP5 native GNU GMP baseline, byte-identical source acceptance
+
+Native source committed as scripts/check_pi_native_gmp.cpp at
+2df45bf7be24dda3e9fdf7ae7f8cdd4028af2d45, Git blob
+b5d1d9b7555f559aa4a99225dc98c9ee96a7a9ff.
+The local compiled C++ source has exactly that git hash-object, and
+GitHub connector readback matches byte for byte. Compile locally:
+g++ -O3 -std=c++17 scripts/check_pi_native_gmp.cpp -lgmpxx -lgmp -o /tmp/check_pi_native_gmp
+Run /tmp/check_pi_native_gmp 50000 plain 5 and
+/tmp/check_pi_native_gmp 50000 cross 5.
+Compiler GNU g++ 14.2.0, GMP C++/libgmp.so.10 on Linux x86-64.
+No GitHub CI used; no Agda proof promoted.
+
+Uses original Chudnovsky P/Q/T midpoint tree with optional pre-product
+gcd(P_left,Q_right) and GMP mpz_class/mpq_class, exact integer sqrt of
+10005*2^(2*bits), alternating-tail rational endpoints and integer
+floor(10^d*L)==floor(10^d*U) before decimal emission. Includes binary
+splitting, interval computation, square root, rational floors and
+decimal string conversion INSIDE each timed run; excludes compilation,
+process startup and hashes. Source retains classical Chudnovsky
+pi identity as EXTERNAL premise and original Bishop same-real
+transport OPEN. Distinguish certified precision conditional on the
+identity from a new standalone analytic derivation.
+
+Exact output parity for d=1000,10000,50000:
+hashes respectively
+8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2,
+ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524,
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Matches prior exact CPython reference and matches native
+plain/cross outputs. Native final P/Q/T summed bit sizes at
+d=50000 plain 784923 versus cross 451549.
+
+Five-run within-process native medians, milliseconds:
+| digits | plain GMP | cross GMP | relative cross improvement |
+|---:|---:|---:|---:|
+| 1000 | .168645 | .179010 | negative |
+| 10000 | 4.869130 | 4.517620 | 7.2% |
+| 50000 | 49.345400 | 44.222700 | 10.4% |
+
+Second independent invocation using identical source/toolchain
+again matches ALL exact hashes; five-run medians at d=50000:
+plain 51.5054 ms, cross 45.8929 ms (10.9% faster).
+Single subprocess /usr/bin/time -v for cross d=50000 reported
+peak RSS 3076 KiB, NOT matched plain-v-cross peak RSS and NOT
+a reliable isolated algorithmic memory comparison.
+Relative timings are confined to this specific environment;
+do not extrapolate to native GPU or world-record scale.
+
+No installed y-cruncher, PARI/GP or FLINT development headers were
+found locally. External SOTA remains OPEN. Public source comparators:
+FLINT documentation on fast constants and binary splitting
+https://flintlib.org/doc/algorithms/integers/binary-splitting.html ;
+FLINT arb_const_pi https://flintlib.org/doc/constants.html ;
+y-cruncher official https://www.numberworld.org/y-cruncher/ .
+Their published results do NOT constitute matched hardware/precision/
+certification benchmarking. Next COMP5: same-environment
+FLINT arb_const_pi with explicit uncached work, MPFR/AGM and y-cruncher
+if available, verify identical decimal floor plus independently
+documented rounding guarantees; compare threads, cold/warm cache,
+peak RSS, and complete end-to-end output costs. Consider GMP low-level
+mpn in-place multiplication, reduced rational construction overhead,
+and streaming output for 100k-1M digits.
+
+COMP3a cross cancellation remains valid and beneficial natively
+at d=10000,50000; COMP3b selected-valuation and COMP4 alternative trees
+stay negative controls. Preserve the unified COMP6 Monster/VOA
+full-action non-descent, COMP7 FRACDASH reconstruction, COMP8
+future-consumer sufficiency, CM winding/primitive necklaces and
+level-163 Masser. Sweetgrass cultural/methodological attribution
+belongs to Robin Wall Kimmerer, not mathematical theorem authority.
