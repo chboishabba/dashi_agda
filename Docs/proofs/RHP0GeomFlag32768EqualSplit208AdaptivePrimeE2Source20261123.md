@@ -157,3 +157,17 @@ If one insists on unattenuated `|ε_i|≤r^-5`, a direct positivity admission us
 **Unpaid:** Mathlib/Agda kernel construction of infinite-convolution flat-top and full 52-fold integration by parts, Lean source frozen pair inhabitation, native original FarExact/Schwartz/post-sixth E2 total across **actual zeros and Gamma**, and E3 an INDEPENDENT strict completed signed zero/Gamma/prime upper estimate uniformly in off-line displacement and near-double prime phase resonance. Previous `|ΔZero|+|ΔGamma|=O(r^-6 logt)` remains; no source-coherent log removal or negativity follows from the adaptive local budget. RH and GRH OPEN, no CI.
 
 **Exact executed source:** [full local script](../../scripts/check_rh_p0_geomflag_208_adaptive_e2_20261123.py), reproducible compact committed regression on [DASHI RH PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533); `DASHI/Analysis/RHPrimeAperturePuncturedFactorChartExact.agda` updated to import the original dyadic owner rather than recoding capacity. The script's rational P0 gates were executed locally; Lean/Agda compiler/kernel tests were not.
+
+
+---
+
+## P0 correction / new 1024 and four-times-E_j simplification (23 Nov)
+
+The source's earlier `4·256` in `||b_p''||1≤4·256` is **exactly 1024**, the *same integer* as the already original RH dyadic tail's `q=16` boundary cell index 1024 (of 32768). Derivations differ: four distributional jumps and box reciprocal width 256, versus dyadic v=(8/q)^5 at q=16 giving 32768/32. This correspondence is numerically exact but is NOT a common source action or a proof of RH. The subsequent chosen smoother deliberately reuses `1/1024` as its infinite dyadic residual support budget; that is an explicit chosen coordination, not a forced geometry.
+
+**Superseding high-derivative admission:** [full proof and exact local regression](RHP0Dyadic1024FourEJ26RebalancedSmoothMaxCut20261123.md). Replace the old `h_n=1/(256n²)` smooth kernel by **52=2·26 equal halfwidth-7/(52·1024) kernels** and an infinite dyadic residual with halfwidths 2^(-n)/1024. The total smoother radius remains 1/128, and the physical p=2/3 even flat top retains radius 1/32, plateau 1/64 and mass 3/32. Now `lambda=52·1024/7`, `||b_p^(m)||1≤4lambda^(m-1)` for m≤53, with explicit residual-box bounds for m=54..60 needed by k≤8. The 26 prior source `4E_j` terms collapse to **one original geometric polynomial E evaluation**:
+`H_dyadic(r)=3/32+(4/lambda)[E((lambda/r)^2)-1]`.
+
+Exact rational tests yield r≥5130,t≥82080 for a **one-active-port l1 budget**, r≥5534,t≥88544 for the original **four fully independent** |eps_i|≤r^-5 cube, and r≥9621,t≥153936 for `H_dyadic≤1/4`. Compare old t≥429936 and t≥509280. At r=1215 adaptive attenuation remains tiny (~1.08e−21), so positive target admission is not an arithmetic dominance proof. At very large r (e.g.65536) old smoother is slightly better in this conservative upper bound; choosing min of source families per height is legal, but no globally smooth-in-height choice claimed.
+
+The number **4** inside `4E_j` is four signed **bump boundaries**, NOT the separate factor four from the two primes × two original endpoint detectors, and NOT an F4 action. A chosen one-active-port `l1` budget removes the latter fourfold worst-case mass sum without removing the former four boundary contributions. Neither improves the STILL-OPEN signed completed E3 source `O(r^-6 logt)` to a strict negative bound. Full E2 actual FarExact/post-sixth and Lean/Agda kernel remain OPEN.
