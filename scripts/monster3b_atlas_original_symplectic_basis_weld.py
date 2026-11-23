@@ -40,7 +40,7 @@ def symplectic_chart(j):
         E.append(a);F.append(b);new=[]
         for v in remaining:
             w=[(x-pairing(v,j,b)*y+pairing(v,j,a)*z)%3 for x,y,z in zip(v,a,b)]
-            if any(w) and rank(columns(new+[w]))>len(new):new.append(w)
+            if any(w) and rank([r+[0]*(N-len(r)) for r in columns(new+[w])])>len(new):new.append(w)
         remaining=new
     return columns(E+F)
 def nullspace(generator_pairs):
