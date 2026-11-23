@@ -43,7 +43,7 @@ E_{\mu_0}[F G H_k]
 \]
 For `k` strictly between the caps this follows from conditional independence of the two chain segments given the middle slice; for the endpoint, integrate `F^2G` or `FG^2` using the same transfer eigenvalue. Because all first moments are zero, the triple expectation is already the connected third cumulant.
 
-This is an analytic compact-group/transfer proof at finite lattice size, **not** an Agda kernel-verified proof of its non-Abelian gauge-fixing isomorphism. The exact rational `Z_3` transfer regression separately checks the three-section conditional-cumulant algebra and the derivative of the independently normalized source; it is explicitly **not** a numerical replacement for continuous SU(3) Haar.
+This is an analytic compact-group/transfer proof at finite lattice size, **not** an Agda kernel-verified proof of its non-Abelian gauge-fixing isomorphism. The checker separately verifies the three-section conditional-cumulant algebra and differentiated normalization on exact rational `Z_3`, and **also** independently evaluates the actual continuous SU(2)/SU(3) Haar moments through Weyl–Vandermonde Laurent constant-term extraction. The finite `Z_3` transfer is not a substitute for continuous SU(3) Haar; the SU(3) moment is checked directly by the Weyl integral.
 
 ## C. Exact SU(N) center/epsilon trilinear selection
 
@@ -92,7 +92,7 @@ Even at `tau=0`, `m_N(beta)->1` as `beta->infty`, so the SU(3) first-shell absol
 
 ## Evidence / trust
 
-- Executed locally (Python/SymPy exact arithmetic): [original 4D shell census and independent finite transfer](../../scripts/check_ym_original_w3_first_restoration_shell_20261123.py), 42/42 lattice cases; exact rational derivative control passes.
+- Executed locally (Python/SymPy exact arithmetic): [original 4D shell census, independent finite transfer and continuous SU(2)/SU(3) Haar Weyl moments](../../scripts/check_ym_original_w3_first_restoration_shell_20261123.py), 42/42 lattice cases; exact rational derivative control passes; direct Weyl–Vandermonde constant-term integrals give SU(2) moments (1,0,1/4,0) and SU(3) moments (1,0,1/18,1/108). The committed compact checker retains the same algorithms, but its exact uploaded bytes were not separately executed.
 - Original eight-wall baseline and full source restoration are on [YM #1536](https://github.com/chboishabba/dashi_agda/pull/1536); original CMP119/122/116 donor is [#1444](https://github.com/chboishabba/dashi_agda/pull/1444).
 - The current branch was cut from the updated `master` rather than force-merging #1536's diverged history. The compact script in this branch is source-equivalent to the locally executed regression; it has not been byte-for-byte executed after GitHub upload.
 - No Agda/Lean/CI, global Wilson W3, same-H spectral gap, or Clay theorem is claimed.
