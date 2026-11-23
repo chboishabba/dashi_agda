@@ -11,7 +11,7 @@ native Agda kernel or universal sign claim is implied.
 from fractions import Fraction as Q
 from collections import Counter, defaultdict
 from itertools import product
-from sympy import Matrix, I, Rational, simplify
+from sympy import Matrix, I, Rational, simplify, symbols, Poly, discriminant, expand
 
 CUT = 16
 K = (16, 0, 0)
@@ -92,6 +92,23 @@ def main():
     rows=list(fibre())
     assert len(rows)==17*33*33==18513
     assert sum(r for _,_,r,_ in rows)==9972336
+
+    # All-finite-source *nonuniform* signed energy payment:
+    # S=-2*N*Re<M,sum(r-mu) A>, and complex cross-product Lagrange
+    # plus convolution Cauchy gives
+    # |S|² <= (2N)² ||M||² sum(r-mu)² E_plus E_minus.
+    N=len(rows);mu=Q(1616,3)
+    variance=sum((Q(r)-mu)**2 for _,_,r,_ in rows)
+    assert variance==1005066656
+    t=symbols('t',real=True)
+    eplus=12 # 3 positive modes + conjugate negative modes, ||h+||²=2
+    eminus=4*(2*t**2+(3-2*t)**2)
+    s=547392384-87085152*t
+    certificate=expand((2*N)**2*36*variance*eplus*eminus-s*s)
+    polynomial=Poly(certificate,t)
+    assert polynomial.LC()>0 and discriminant(certificate,t)<0
+    print('PASS full-source finite energy ceiling for all real t; rate variance',variance)
+
     assert Counter(t for _,_,_,t in rows)=={'CC':18477,'FL':36}
     tagged={(p[0],q[0]):t for p,q,_,t in rows
             if p[1:]==(0,0) and (p[0],q[0]) in {(1,15),(8,8),(15,1)}}
