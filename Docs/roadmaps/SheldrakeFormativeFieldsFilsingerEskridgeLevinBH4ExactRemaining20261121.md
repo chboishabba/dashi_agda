@@ -8,6 +8,22 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J26 — validated first diode-V activation, 9/9 original J24 event-box weld (23 Nov 2026)
+
+**Maximum-cut progress:** [J26 original-equation interval consumer](../../scripts/check_smith_filsinger_j26_first_diode_validated_taylor_20261123.py) has been executed locally **byte-identically with committed Git blob `78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94`**. It imports original J25 exact rational interval primitives (not the original J18 SciPy numeric source) and retains all nine original J18 state equations, synthetic source-only, finite-loss topology and original Smith/Filsinger attribution. [Full J26 proof geometry](../research/SmithFilsingerJ26ValidatedFirstDiodeVEventAndJ24BoxWeld20261123.md); [machine acceptance/status](../../Artifacts/smith-filsinger/j26_nominal_first_diode_validated_2ns_bracket_20261123.json).
+
+**Actual nominal rational initial-state certificate, not sampling:** Using exact Fraction polynomial coefficient recursion, rational sine/cosine Taylor remainders, 10^30 directed grid intervals, a denominator-cleared HF capacitor defect, and a 9×9 *componentwise positive* Jacobian majorant with exact rational matrix-exponential geometric tail, 37/37 pre-event time slabs have **strict self-consistent error enclosure** and all original guards validated. 33 slabs of length 0.1 plus four of length 0.02 reach `t=3.38`. All along, diode-U and diode-V inactive, spark ON. At t=3.38 max state coordinate comparison error <**5.709e-10**.
+
+**First real diode-V root:** Mathematical continuation of the *diode-inactive* smooth field brackets the unique forward-activation at **3.389367008 < t_V < 3.389367010**, width **2×10^-9 dimensionless model-time units**, NOT hardware nanoseconds. At left V-guard interval strictly negative [-6.516e-10,-1.609e-10]; at right strictly positive [+2.582e-10,+7.489e-10]; all derivative slopes in the bracket >=**0.4262477887** and other guards stay correctly signed. The continuation beyond the root is ONLY a virtual inactive smooth extension to locate the unique zero; physical after-event V diode-ON evolution has **not** been validated.
+
+**J24 condition paid at the first of six events:** J26 encloses all nine original state coordinates at *every possible first-event time in the certified bracket* and proves **9/9 componentwise inclusion** in the J24 fixed radius-1e-4 original V diode event centre box (exact decimal Fraction comparison). The earlier J24 local slope lemma for **this first event** is thereby attached to an actual guaranteed original-equation nominal initial-value trajectory; the remaining five J24 boxes still need integration.
+
+**Critical proof boundary:** The rationalized J23 initial seed is a single exactly specified point but has NOT been proved periodic; J26 is **nominal only**, unlike the J25 initial 1/11 slab uniform over five independent parameters. Does not prove interval return map, exact orbit existence, uniform box of periodic orbits, natural wave-source transfer, physical Filsinger original pins, or 100% energy conversion.
+
+**J27 next:** start from **uncertain first-event time/state** with V diode active (`jv=(v-b-Vd)/Rd>0`, `ju=0`), carrying interval inclusion and no artificial state jump; validate the forward physical flow to spark OFF near **3.4912927**, isolate its root and signed saltation denominator, then ON, U/V diode events, exact `tau=20pi/11` return map and preconditioned Banach inclusion. After centre fixed point, separately validate whole 5D parameter rectangle. No CI/Agda kernel.
+
+---
+
 ## P0 J25 — uniform local validated J18 Picard tube and native J24 replay (23 Nov 2026)
 
 **Native replay now actually completed for J24:** byte-identical GitHub script `check_smith_filsinger_j24_six_guard_rational_20261123.py` (blob **aca23be82**) and input `j24_six_hybrid_guard_centres_20261123.json` (**edcec489**) executed locally; 6/6 original **conditional** rational event slopes passed. No CI/Agda.
