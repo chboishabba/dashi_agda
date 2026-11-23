@@ -3,6 +3,8 @@ module DASHI.Unified.Relate369HyperfabricPantsTOEExact where
 import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
 -- Finite C2-equivariant source-carrier map; NOT a Monster-group or RH-zero action.
 import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as RH128C2
+-- Source-typed RH 163840 dyadic tail, actual H_X->H_T reuse, NO analytic/Monster promotion.
+import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as RH163840
 
 
 open import DASHI.Core.Prelude
@@ -239,3 +241,10 @@ toeRH128FineToCoarseBack :
   (state : RH128.BinarySeven) →
   RH128.joinCornerResidual (RH128.splitCornerResidual state) ≡ state
 toeRH128FineToCoarseBack = RH128.joinAfterSplit
+
+-- Exact original source-tail coefficient donor; analytical integral remains separate.
+toeRH163840SourceDyadicTail : RH163840.tailDenominator ≡ 163840
+toeRH163840SourceDyadicTail = RH163840.tailDenominatorIs163840
+
+toeRHZeroOrdinateCrossingDyadicCell : RH163840.crossingAtSixteenCellIndex ≡ 1024
+toeRHZeroOrdinateCrossingDyadicCell = refl
