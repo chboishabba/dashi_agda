@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-23",
+  "tier": "ORIGINAL_PUBLISHED_STUDY_SUMMARY_PLUS_SYNTHETIC_REPLAY_CONTRACT",
+  "original_study": {
+    "doi": "10.3390/jcm10235570",
+    "pmcid": "PMC8658569",
+    "trial": "NCT03755817",
+    "n_total": 60,
+    "active_n": 30,
+    "sham_n": 30,
+    "intervention": "single SCENAR treatment versus sham",
+    "primary_p_between_groups": 0.22,
+    "primary_between_group_superiority_established": false,
+    "observed_median_IQR_rest_sham_pre": [
+      8,
+      4
+    ],
+    "observed_median_IQR_rest_sham_post": [
+      5,
+      3
+    ],
+    "observed_median_IQR_rest_on_pre": [
+      7,
+      3
+    ],
+    "observed_median_IQR_rest_on_post": [
+      4,
+      4
+    ],
+    "time_by_group_interaction_reported_significant": false,
+    "followup_effect_persisted_at_24h": false
+  },
+  "dataset": {
+    "authors": "Marc Fischler",
+    "doi": "10.5061/dryad.63xsj3v2s",
+    "published_date": "2021-08-25",
+    "landing_page": "https://datadryad.org/dataset/doi:10.5061/dryad.63xsj3v2s",
+    "listed_original_filename": "Scenar_-_Dryad_Corrigé.xlsx",
+    "listed_size_bytes_approx": 21860,
+    "download_url": "https://datadryad.org/downloads/file_stream/915627",
+    "direct_web_download": "HTTP_403",
+    "container_download": "FAILED",
+    "bytes_verified": 0,
+    "original_sha256": null,
+    "original_field_map": null,
+    "participant_level_replay": false
+  },
+  "code": "scripts/radiobio_p1_scenar_original_replay.py",
+  "test": {
+    "status": "PASS_LOCAL_EQUIVALENT_CORE_ONLY",
+    "source_original_data_used": false,
+    "synthetic_participants": 60,
+    "synthetic_active": 30,
+    "synthetic_sham": 30,
+    "mean_change_contrast": 0,
+    "full_committed_blob_executed": false,
+    "github_ci_used": false,
+    "agda_kernel_used": false
+  },
+  "caveat": "Original medians and reported p-values are author-reported; cannot reconstruct mixed model or individual causal effects from summary data."
+}
