@@ -1,5 +1,10 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 23 November 2026 — complementary-pairing inverse and cycle reconstruction
+
+[Geometry-forward BIDI/reverse-solve](ClayFourLaneGeometryForwardBidiReverseSolve20261123.md) strengthens the classical finite-product result: for `X_r=(CP¹)^r`, the rational complementary intersection pairing is a permutation matrix. For a class `alpha=sum_{|I|=p} a_I h_I`, recover each original coefficient **exactly** via `a_I=int(alpha h_(I^c))`, then return the genuine rational algebraic coordinate-cycle sum `sum_I a_I [coordinate_point_cycle_I]`. This explicit forward/reverse correspondence is classical Künneth/divisor geometry only, not a universal Hodge cycle-preimage or native `ProjectiveLineGenericCycleClassWeldExact` constructor. Exact rational script checks 900 reconstructed class vectors at `r=0..8`; [script](../../scripts/check_clay_geometry_reverse_20261123.py). General H1/H3 and Agda kernel acceptance OPEN.
+
+
 ## 23 November 2026 — selected all-r product-family extension (classical Künneth donor)
 
 The documented literal CP¹ and CP¹×CP¹ H2 cases admit an elementary **all finite products** extension X_r=(CP¹)^r without constructing a generic smooth-projective H3 instance. Under established projective-space Hodge, singular/de Rham comparison, algebraic divisor cycle and Künneth theorems, H*(X_r,Q)=Q[h_1,...,h_r]/(h_i²); its binomial(r,p) squarefree monomials in degree 2p are all rational (p,p) classes and represent actual codimension-p coordinate products of point divisors. Complementary intersection pairing int(h_I h_J)=1 iff J=I^c, otherwise zero. Factor permutations preserve products and natural cycle classes. Thus the known Hodge conjecture holds classically for each chosen X_r at all codimensions; this does not address arbitrary varieties or count H2 again.
