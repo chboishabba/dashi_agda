@@ -28,6 +28,7 @@ module DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -375,3 +376,48 @@ allOnesNativeActionRecoversGlobalInversion :
   actOnNativeSignedX6 RH128.allOnes state ≡ invertSignedX6 state
 allOnesNativeActionRecoversGlobalInversion
   (H.x6 a0 a1 a2 a3 b0 c0 , c1) = refl
+
+
+------------------------------------------------------------------------
+-- EXACT ORIGINAL SOURCE-ENDPOINT NEGATIVE CONTROL.
+-- All seven source-labelled factor axes are separately action-bearing on
+-- the native 3B x SSP finite carrier.  But NONE preserves the selected
+-- original full coefficient (all seven labels=1): each sends 128 -> 64.
+-- This rules out silently treating the faithful C2^7 representation as
+-- seven independent symmetries of the ACTUAL fixed sampleTest normalization.
+------------------------------------------------------------------------
+
+data SevenGenerator : Set where
+  physical0 physical1 physical2 physical3 : SevenGenerator
+  evenFourier : SevenGenerator
+  profileOrigin0 profileOrigin1 : SevenGenerator
+
+singleton : SevenGenerator → RH128.BinarySeven
+singleton physical0 = RH128.binarySeven true false false false false false false
+singleton physical1 = RH128.binarySeven false true false false false false false
+singleton physical2 = RH128.binarySeven false false true false false false false
+singleton physical3 = RH128.binarySeven false false false true false false false
+singleton evenFourier = RH128.binarySeven false false false false true false false
+singleton profileOrigin0 = RH128.binarySeven false false false false false true false
+singleton profileOrigin1 = RH128.binarySeven false false false false false false true
+
+allSevenGeneratorsMoveOriginalCoefficient :
+  (generator : SevenGenerator) →
+  RH128.coefficient (maskAct (singleton generator) RH128.allOnes) ≡ 64
+allSevenGeneratorsMoveOriginalCoefficient physical0 = refl
+allSevenGeneratorsMoveOriginalCoefficient physical1 = refl
+allSevenGeneratorsMoveOriginalCoefficient physical2 = refl
+allSevenGeneratorsMoveOriginalCoefficient physical3 = refl
+allSevenGeneratorsMoveOriginalCoefficient evenFourier = refl
+allSevenGeneratorsMoveOriginalCoefficient profileOrigin0 = refl
+allSevenGeneratorsMoveOriginalCoefficient profileOrigin1 = refl
+
+noPhysicalSymmetryFromNormalizationFactor :
+  (generator : SevenGenerator) →
+  RH128.coefficient (maskAct (singleton generator) RH128.allOnes) ≡ 128 →
+  ⊥
+noPhysicalSymmetryFromNormalizationFactor generator equality
+  rewrite allSevenGeneratorsMoveOriginalCoefficient generator = bad equality
+  where
+  bad : 64 ≡ 128 → ⊥
+  bad ()
