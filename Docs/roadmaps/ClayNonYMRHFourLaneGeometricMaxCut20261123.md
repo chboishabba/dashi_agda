@@ -1,5 +1,13 @@
 # Clay four-lane geometric maximum-cut — 23 November 2026
 
+## 23 November 2026 — P0 physical projected-outcome supersession
+
+**New authoritative advanced result** is the [all-rational original helical source geometry and full-cutoff BIDI](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md), not merely the initial free A_i/region-recentering diagnostic. The first axial 3-cell test had Leray-null M; the later 4-cell rational non-axis output `k=(83,64,0)` has **P_kM=M!=0**, genuine strict deep-FL work and complete source covariance opposite signs at cutoffs 83 and 100 while physical V remains fixed. The general `S_C=32ν||M||²C^5+O(C^4)` is proved from the actual complete rectangular source moments. Use the already-existing `centeredPairCovarianceAppendZero` and the R541/R542/R573/R547→R568 signed source owners, not a new abstract covariance theorem. This is **NOT** an estimate on original time-integrated R568 or a regularity proof.
+
+**Karp gate correction:** original 3m suffix guard, no binomial(n,2) runtime, no stronger 3m+1 early requirement. Same input source replay still 132,281 local cases PASS. Actual physical TableProgram and Agda kernel still OPEN; original universal P vs NP lower-bound remains separate.
+
+
+
 **Scope:** Navier–Stokes, P≠NP/Karp-21, BSD and Hodge mathematical work. **RH and Yang–Mills are status-only dependencies; do not modify their theorem owners or active roadmaps in this cut.** Base branch: `master`. Primary earlier source owners and authors keep attribution. The named six Clay Millennium problems remain unproved here.
 
 ## Source precedence and acceptance
