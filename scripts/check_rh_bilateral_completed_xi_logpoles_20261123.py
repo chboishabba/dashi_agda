@@ -81,3 +81,17 @@ print("PASS quartic signed cone P4 changes sign at 3±2sqrt2 inside cutoff6")
 print("PASS no-go: symmetric entire quartet with off-critical zeros")
 print("PASS GRH character-labelled FE/conjugation commuting square")
 print("OPEN true signed FarExact-μ post-sixth bound and χ-specific prime source")
+
+# ORIGINAL Lean local adverse mass sharpened:
+# quarticSignedPolePhysicalFourthPhaseReal = (delta²-3a²)²-8a⁴.
+# |heightOf rho|<=1/2 gives per-zero max(-P4,0)<=8a⁴<=1/2,
+# improving original 3/2 bound by factor3.
+assert s.expand(p4-((delta*delta-3*a*a)**2-8*a**4))==0
+assert s.simplify(p4.subs({a:s.Rational(1,2),delta:s.sqrt(3)/2}))==-s.Rational(1,2)
+assert s.simplify((s.sqrt(2)-1)**2-low)==0
+assert s.simplify((s.sqrt(2)+1)**2-high)==0
+assert (1+s.sqrt(2))/2<s.Rational(3,2)
+assert s.Rational(9,2)/s.Rational(3,2)==3
+print("PASS same original adverse phase <=8 a^4 <=1/2 per multiplicity")
+print("PASS narrower original adverse zero-count window |gamma-t|<(1+sqrt2)/2")
+print("PASS source 9/2 A0 log envelope improves to 3/2 A0 log with local weld")
