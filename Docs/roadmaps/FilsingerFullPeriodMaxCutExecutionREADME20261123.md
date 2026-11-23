@@ -9,12 +9,12 @@ This is a candidate implementation **not yet executed end-to-end**. The native r
 In your `chboishabba/dashi_agda` checkout at PR #1537's source branch:
 
 ```bash
-# Run the independent algebra checks first (SymPy required).
-python test_full_period_algebra.py
-
-# The GitHub branch already contains the runner. For standalone offline
-# use, copy check_filsinger_full_period_maxcut.py into its scripts/ directory.
+# Checkout the PR branch, then run independent source/geometry checks.
 cd /path/to/dashi_agda
+python scripts/test_filsinger_full_period_maxcut_algebra.py
+
+# This branch already contains the runner. The ZIP also contains offline
+# copies of both Python scripts and the byte-identical upstream checkpoint.
 
 python scripts/check_filsinger_full_period_maxcut.py \
   --checkpoint Artifacts/smith-filsinger/j28b_signed_75_step_exact_checkpoint_20261123.json \
