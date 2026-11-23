@@ -16,18 +16,18 @@ from collections import Counter
 from fractions import Fraction
 import sympy as S
 
-V=list(product(range(3),repeat=3))
+# CRITICAL: original SSP source is BALANCED -1,0,+1 with 0 at centre.\n# Never use residue 0,1,2 with a path that treats 1 as the centre.\nV=list(product((-1,0,1),repeat=3))
 I={v:i for i,v in enumerate(V)}
 M=S.Matrix([[1,1,0],[0,1,1],[1,1,1]])
 G=-M
 Gi=G.inv_mod(3)
 def act(v,mat=G):
-    return tuple(int(z%3) for z in mat*S.Matrix(v))
+    return tuple((int(z)+1)%3-1 for z in mat*S.Matrix(v))
 def forward(v):return act(v)
 def backward(v):return act(v,Gi)
 def path(a,b):
     return sum(x!=y for x,y in zip(a,b))==1 and all(
-        x==y or abs(x-y)==1 for x,y in zip(a,b))
+        x==y or x==0 or y==0 for x,y in zip(a,b))
 def periodic(a,b):
     return sum(x!=y for x,y in zip(a,b))==1
 def edges(relation):
@@ -48,7 +48,7 @@ c3=edges(periodic)
 assert len(p3)==54 and len(c3)==81
 P=permutation(forward)
 assert P**26==S.eye(27)
-assert P**13==permutation(lambda v:tuple(-x%3 for x in v))
+assert P**13==permutation(lambda v:tuple(-x for x in v))
 E=adjacency(p3)
 T=adjacency(c3)
 assert sum(path(forward(a),forward(b)) for a,b in p3)==0
@@ -59,7 +59,7 @@ for es,mat in ((p3,E),(c3,T)):
     assert pushed*P==P*mat
     assert len(es)==sum(int(pushed[i,j]) for i in range(27) for j in range(i+1,27))
     assert mat!=pushed
-assert sum(path((2-x,a,b),(2-y,a,b)) for a,b in ((0,0),(1,1)) for x,y in [(0,1)])==2
+assert path((-1,0,0),(0,0,0)) and path((0,0,0),(1,0,0))
 
 # Exact signed C3^3 Fourier-character dual map (G^-1)^T.
 dual=Gi.T
@@ -76,7 +76,7 @@ assert sum(spectral.values())==27
 
 # The true full spatial hyperfabric is (P3^3)^3 = P3^9; not 27 sites.
 # Count all SOURCE edges without giant 19,683-by-19,683 matrices.
-nodes=product(range(3),repeat=9)
+nodes=product((-1,0,1),repeat=9)
 g_table={v:forward(v) for v in V}
 gi_table={v:backward(v) for v in V}
 def hyper_forward(v,table):
@@ -86,7 +86,7 @@ expected=3*54*27**2
 count=0
 for v in nodes:
     for axis in range(9):
-        if v[axis]<2:
+        if v[axis]<1:
             w=v[:axis]+(v[axis]+1,)+v[axis+1:]
             gv,gw=hyper_forward(v,g_table),hyper_forward(w,g_table)
             assert hyper_forward(gv,gi_table)==v
