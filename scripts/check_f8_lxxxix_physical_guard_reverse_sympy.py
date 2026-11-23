@@ -30,8 +30,8 @@ for name,dr in [('A1',sp.Rational(8,1000)),('C1',sp.Rational(6,1000))]:
     margin=float(g.subs(t,12).evalf(45))
     slope=float(sp.diff(g,t).subs(t,12).evalf(45))
     assert abs(float(gg(root)))<1e-12 and margin>0
-    assert float(gg(root-sp.Rational(1,100)))<0
-    assert float(gg(root+sp.Rational(1,100)))>0
+    assert float(gg(float(root)-0.01))<0
+    assert float(gg(float(root)+0.01))>0
     results[name]=dict(radial_spacing=float(dr),threshold_t=root,
         margin_at_12=margin,margin_slope_at_12=slope,
         source_outer_edge=float(source_last_plus_dr),
