@@ -13,7 +13,20 @@
     "agda_kernel": false,
     "native_J18_SciPy_script_byte_executed": false,
     "J29_new_scripts_uploaded_to_GitHub": false,
-    "local_source_archive": "J29_six_event_affine_validated_proof_packet_20261123.zip"
+    "local_source_archive": "J29_six_event_affine_validated_proof_packet_20261123.zip",
+    "packaged_J29_source_entire_replay_completed": true,
+    "packaged_source_has_byte_identical_local_replay": true,
+    "full_replay_stages": {
+      "affine_fulltime_validated": 75,
+      "U_plus_V_active": 8,
+      "U_only": 60,
+      "correlated_handoffs": 2,
+      "event_root_test_replays": 3,
+      "full_J24_five_boxes": 5
+    },
+    "packaged_archive_integrity_verified": true,
+    "archive_size_approx_kb": 350,
+    "repo_native_new_J29_sources_uncommitted": true
   },
   "source_files": [
     {
@@ -89,7 +102,11 @@
       -0.1470930852353018
     ],
     "max_whole_tube_error": 0.000046055382489653366,
-    "original_J24_sixth_box_admission": false
+    "original_J24_sixth_box_admission": false,
+    "mean_value_refined_bracket_approx": [
+      4.928568535376962,
+      4.928936104895576
+    ]
   },
   "verified_crossings": 6,
   "original_J24_six_event_state_boxes_fully_paid": 5,
