@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-23",
+  "status": "J29_INDEPENDENT_EXACT_RATIONAL_NOMINAL_SIX_CROSSINGS_FIVE_OF_SIX_J24_ORIGINAL_EVENT_BOXES_PASS",
+  "source_owner": {
+    "repository": "chboishabba/dashi_agda",
+    "pr": 1537,
+    "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+    "base": "master"
+  },
+  "execution": {
+    "local_python_exact_arithmetic": true,
+    "ci": false,
+    "agda_kernel": false,
+    "native_J18_SciPy_script_byte_executed": false,
+    "J29_new_scripts_uploaded_to_GitHub": false,
+    "local_source_archive": "J29_six_event_affine_validated_proof_packet_20261123.zip"
+  },
+  "source_files": [
+    {
+      "path": "scripts/j29_affine_enclosure.py",
+      "git_blob_sha1": "f7ed3c9d6cb400d1e894c3c5909ca63993961da3",
+      "sha256": "23bed87f23283977727e510ed0841694c5ff682ba8680d1e247641ed9a4b1aca"
+    },
+    {
+      "path": "scripts/j29_uv_active.py",
+      "git_blob_sha1": "672ad36258811708cdb28544b04167d4b6a4abe1",
+      "sha256": "4ebb2b21a70bd09a026ffb031824084aac4bc0a64188308c54fe53e5bfb152e2"
+    },
+    {
+      "path": "scripts/j29_u_only.py",
+      "git_blob_sha1": "94bf554898e15a7b548ad889be69d64d457513b9",
+      "sha256": "2b0c89af71e01af9c5ecf53ccd3361dfaaba15de889064c321c2ccef1efba2be"
+    }
+  ],
+  "mathematical_repair": "J28B signed endpoint transition bounds do not automatically enclose the intermediate-time flow. J29 uses a monotone absolute-Jacobian matrix exponential for full-step Picard inclusion and uses signed Peano-Baker only at endpoints, with persistent labelled affine uncertainty directions and outward 1e30-grid remainder rounding.",
+  "model": "original nine-state J18 source-only equations independently transcribed; prescribed synthetic wave; drive OFF; nominal rational J23 numerical seed, not proven periodic",
+  "numerics_not_used_as_proof": true,
+  "proof_method": {
+    "time_grid": "rational",
+    "state_error_grid": "10^30 directed integers",
+    "Taylor_order": 52,
+    "Peano_Baker_order": 8,
+    "noncommutative_time_ordered_matrix": true
+  },
+  "accepted_segments": {
+    "post_third_spark_to_fourth_U_ON": 75,
+    "U_and_V_active_to_fifth_V_OFF": 8,
+    "U_only_to_sixth_U_OFF": 60
+  },
+  "fourth_U_ON": {
+    "time_bracket": [
+      "4.275487825",
+      "4.27549016875"
+    ],
+    "original_J24_event_state_coordinates_included": 9,
+    "total_coordinates": 9,
+    "positive_crossing_slope_enclosure": [
+      0.7973578094652771,
+      1.1988822270481443
+    ],
+    "max_whole_tube_error": 7.05292846268926e-7
+  },
+  "fifth_V_OFF": {
+    "time_bracket": [
+      "4.32383391875",
+      "4.32384016875"
+    ],
+    "original_J24_event_state_coordinates_included": 9,
+    "total_coordinates": 9,
+    "negative_crossing_slope_enclosure": [
+      -0.8545776384392725,
+      -0.020637596526536715
+    ],
+    "max_whole_tube_error": 9.721933196659242e-7
+  },
+  "sixth_U_OFF": {
+    "initial_time_bracket": [
+      "4.92784016875",
+      "4.92984016875"
+    ],
+    "exact_MVT_tightening_approx": [
+      4.928568535376962,
+      4.928936104895576
+    ],
+    "original_J24_event_state_coordinates_included": 0,
+    "total_coordinates": 9,
+    "negative_crossing_slope_enclosure": [
+      -0.15060562444756,
+      -0.1470930852353018
+    ],
+    "max_whole_tube_error": 0.000046055382489653366,
+    "original_J24_sixth_box_admission": false
+  },
+  "verified_crossings": 6,
+  "original_J24_six_event_state_boxes_fully_paid": 5,
+  "critical_remaining": [
+    "Sixth J24 original 9-coordinate event state box not yet enclosed",
+    "True physical diode U OFF flow after last root not validated",
+    "Full tau=20*pi/11 hybrid return map not interval enclosed",
+    "No validated derivative DP_tau on a nonzero rational state ball",
+    "No Banach/Krawczyk exact periodic fixed point or uniform 5D parameter family",
+    "No observed environmental RF source or physical Filsinger device energy measurement"
+  ],
+  "exact_periodic_orbit_certified": false,
+  "physical_100_percent_conversion_claim": false
+}
