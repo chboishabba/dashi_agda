@@ -1,3 +1,28 @@
+## 23 November 2026 — GRH Gamma parity/conductor exact square; universal explicit 800/pi bound
+
+**New external prior-art owner found and reused:** upstream [Anthropic Zeta23 `ThmE/GammaFactsChiProof.lean`](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/GammaFactsChiProof.lean), [`ThmE/Hypotheses.lean`](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/Hypotheses.lean) and [`ThmE/RvMChi.lean`](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/RvMChi.lean) already define and prove character parity `kappa∈{0,1}`, conductor `N>=1`, the completed `mu_{kappa,N}(x)=[log(N/pi)+Re digamma(1/4+kappa/2+i*x/2)]/(2*pi)`, and the **universal, conductor-independent and parity-independent** explicit Stirling estimate
+`|mu_{kappa,N}(x)-log(N*|x|/(2*pi))/(2*pi)|<=10/(pi*x^2)` for |x|>=1. This is paid upstream; do not invent another Gamma asymptotic theorem. For kappa=0,N=1 it is the existing zeta `Zeta23.mu` source.
+
+**GRH conductor commuting square, new elementary consequence:** `mu_{kappa,N}(x)=mu_{kappa,1}(x)+log N/(2*pi)` for a fixed parity. Thus `Delta2 mu_{kappa,N}(t,u) = mu(t+tu/16)+mu(t-tu/16)-2mu(t)` is **independent of conductor N**, while parity remains labelled through `1/4+kappa/2`. The *full* original selected W analytic Gamma variation `V_{kappa,N}(W,t)` is therefore equal to `V_{kappa,1}(W,t)` for every even test C_W with convergent integrals; this is a Gamma-only statement, NOT a χ-zero-sum identity or a new GRH source weld. Conversely, the character conductor survives exactly in the center mode:
+```
+I_{kappa,N}(W,t)-I_{kappa,1}(W,t)
+  = [log N/(2*pi)]*integral Psi_t
+  = [64*log N/(t*R*M0)]*OriginDet_W.
+```
+This new visible `64=128/2=2^6` is an algebraic zero-mode consequence, not a new 6D physical representation. For genuine primitive nonprincipal χ the original Theorem E source has **no pole term** (unlike zeta); prime coefficients χ(n) vanish if the actual physical test vanishes at log n, but the FULL χ explicit-formula normalization/target witness has not been welded.
+
+**Stronger concrete P0 core:** insert the source universal `C_gamma=10/pi` in the preceding exact t>=200, |u|<=8 core bound:
+```
+|V_core - (4/(pi*t))*integral_core C_W(u)*log(1-u^2/256) du|
+  <= (800/(pi*t^3))*M0_core.
+```
+This coefficient applies to both κ=0/1 and all conductor N≥1 at the Gamma-only level. The cubic/tail identity remains exactly
+`V_W=globalCubicModeDefect/(12*pi*t²)+M2_tail/(64*pi*t)+V_tail+E_core`,
+with `|E_core|<=M4_core/(24576*pi*t)+800*M0_core/(pi*t³)`. The uniform scalar coefficient does NOT certify the selected-W t-uniform L1/derivative norms, nor the sign of `V_tail`, nor any zero-side `χ` transport.
+
+Local SymPy coefficient and actual mpmath digamma controls PASS at parity 0/1, conductor values 1,5,71,10007 and multiple heights; original source code [`check_rh_128_gamma_bilateral_20261123.py`](../../scripts/check_rh_128_gamma_bilateral_20261123.py) committed. Exact-head Lean/Agda kernel and end-to-end repo script execution not claimed. P0 strict signed RH/GRH terminal remains OPEN.
+
+---
 ## 23 November 2026 — P0 new bilateral Gamma core, 128 provenance and cubic obstruction weld
 
 **Live owners checked first:** RH PR #1533 branch at `a1bf59c5` before this new tranche; Lean PR #113 still `5b22b8f8`. Original `RiemannProjectiveQuarticFourWindowSignedPoleFourierMass.lean` proves `integral signedOrdinateTest = 128*pi*OriginDet/(t*R*M0)` and `fullMuIntegral = centerDensityMode+fullMuVariation`; original `...FourthOrderQuotient.lean` proves both `integral q^2*C_W(q) = -2*pi*P_W''(0)` and `globalCubicModeDefect = 6*pi*(t/16)*P_W''(0)`. Upstream original [Anthropic Zeta23 GammaFacts](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/GammaFacts/Complete.lean) establishes even/smooth `mu` and the Stirling field `|mu(x)-log(|x|/(2*pi))/(2*pi)|<=C_gamma/x^2` for |x|>=1; `GammaFacts/Mu.lean` identifies `mu(x)=(Re digamma(1/4+i*x/2)-log pi)/(2*pi)`. Attribution: these are existing producers, not new in this PR.
