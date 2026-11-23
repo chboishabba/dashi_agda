@@ -74,6 +74,15 @@ When the Heisenberg trace is NONZERO this yields a multiplicity trace. When it v
 
 The existing GAP/CTblLib 210-class exact source fusion fixes the *character* selection if its branch is unique and the selected full character rows agree in the original class order. Distinguishing 12+78 from 12+Sym²12 requires their actual selected rows and correct central C2 phase; dimension and GF3 quotient alone cannot decide it. Actual 196884D Monster action on MMV(7) samples is an authentic characteristic-7 transport test, **not** characteristic-zero complex multiplicity recognition (7 divides the Suzuki group order).
 
+## C1. Character-theoretic source payment of both multiplicities (already in the repo)
+
+Original source script `scripts/check_monster27_voa_3b_primitive_charge_exact.py` gives the original weight-two 3B McKay–Thompson coefficient and 3B class trace: `dim(V_2)=196884`, `Tr(z|V_2)=Tr(z²|V_2)=54` (weight-two trivial plus irreducible 196883 with character 53). Then the actual central idempotents above imply **exactly**
+`dim W_0=(196884+54+54)/3=65664`,
+`dim W_1=dim W_2=(196884-54)/3=65610`.
+Since the genuine E nontrivial centre irreducible has dimension 729, this supplies the actual characteristic-zero **multiplicity** `dim Hom_E(H_s,W_s)=65610/729=90`. The equalities derive from the original character and Stone–von Neumann theorem, not a guessed `Fin90` label.
+
+This resolves the DIMENSION endpoint, **not** the source 12+78 constituent selection or equivariant linear evaluation/gauge: the 210 class characteristic-zero 6.Suz rows, actual normalizer words and the explicit characteristic-zero operator action still decide those. Characteristic-7 MMV samples are separate and cannot pay these characteristic-zero maps.
+
 ## D. The endpoint equations and maximal mathematical synthesis
 
 One unified source-faithful answer will consist of:
