@@ -86,8 +86,9 @@ def field(t0,t1,X):
     dx=(ih-p['Gload']*x)/(p['Ch']*(I(1)+I('1.5')*x.sq()))
     return [di,dj,du,dv,db,dq,dr,dih,dx]
 
-def picard_step(X,t0,t1):
-    h=F(t1)-F(t0)
+def picard_step(X,t0,t1,h):
+    # Elapsed integration duration is exact; source-clock endpoints are uncertain.
+    h=F(h)
     B=[x.expand(F('0.00001')) for x in X]
     used=0
     for it in range(200):
@@ -118,7 +119,7 @@ def run():
     bank_at_0022=None;bank_at_0026=None
     while s<end:
         s1=min(s+h,end)
-        e,B,D,it=picard_step(X,t0lo+s,t0hi+s1)
+        e,B,D,it=picard_step(X,t0lo+s,t0hi+s1,s1-s)
         gu,gv=event_guards(B)
         assert gu.b<0 and gv.a>0,(str(s),gu.fl(),gv.fl())
         assert D[4].a>0,(str(s),D[4].fl())
