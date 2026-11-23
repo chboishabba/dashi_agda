@@ -15,7 +15,7 @@ That term is **all dissipated by definition**. The [J17 native wave-absorption c
 
 ## New native J18 extension: nine states, no replacement circuit
 
-Actual pre-existing native J12 file at Git blob **\`f5f66e343a979dfe2bc70f68e1e98fce75817653\`**, unchanged. [J18 HF extension](../../scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py) at exact executed blob **\`430520c86fc471deada48835c7d048888745d2fa\`** preserves all seven original state variables \((i,j,u,v,b,q,z)\), same physical branch labels, diode rectification, electromagnetic input/outgoing and hysteretic thresholds. It adds only two explicitly **candidate** HF states:
+Actual pre-existing native J12 file at Git blob **`f5f66e343a979dfe2bc70f68e1e98fce75817653`**, unchanged. [J18 HF extension](../../scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py) at exact executed blob **`430520c86fc471deada48835c7d048888745d2fa`** preserves all seven original state variables \((i,j,u,v,b,q,z)\), same physical branch labels, diode rectification, electromagnetic input/outgoing and hysteretic thresholds. It adds only two explicitly **candidate** HF states:
 
 - \(i_h\): switched HF loop current with finite \(L_h\), coil loss \(R_c\), gap loss \(R_g\) when ON and **assumed** resistive freewheel return \(R_f\) when OFF. This hypothesised return topology remains unverified.
 - \(x\): voltage of a passive candidate nonlinear HF capacitance \(Q_h(x)=C_h(x+\alpha x^3)\), \(\alpha\ge0\), with separate ideal load conductance \(G_L\). For this selected constitutive law, \(U_h=C_h(x^2/2+3\alpha x^4/4)\), which local SymPy verifies exactly via \(dU_h=x\,dQ_h\). There is no claimed measured varactor/nonlinear dielectric in the original device.
@@ -97,13 +97,13 @@ This corrects the earlier J17 recommendation to treat higher spark heat as highe
 
 ## Acceptance and remaining max-cut
 
-[Exact local J18 extension](../../scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py) Git blob \`430520c86fc471deada48835c7d048888745d2fa\`; [J18b restored and source/branch controls](../../scripts/check_smith_filsinger_j18b_restored_hf_dump_20261123.py) Git blob \`69cf86bddff854f7e427f3445acbf9eceb3be66c\`; both independently byte-matched and executed locally with SymPy 1.14.0 / NumPy/SciPy. Commands (from clean checkout):
+[Exact local J18 extension](../../scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py) Git blob `430520c86fc471deada48835c7d048888745d2fa`; [J18b restored and source/branch controls](../../scripts/check_smith_filsinger_j18b_restored_hf_dump_20261123.py) Git blob `69cf86bddff854f7e427f3445acbf9eceb3be66c`; both independently byte-matched and executed locally with SymPy 1.14.0 / NumPy/SciPy. Commands (from clean checkout):
 
-\`\`\`bash
+```bash
 python scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py
 python scripts/check_smith_filsinger_j18b_restored_hf_dump_20261123.py --stage core
 python scripts/check_smith_filsinger_j18b_restored_hf_dump_20261123.py --stage pairs
-\`\`\`
+```
 
 [Machine receipt](../../Artifacts/smith-filsinger/j18_hf_spark_tank_restored_reverse_20261123.json). Each result is a conditional dimensionless model with source/authorship retained and original empirical work gates still OPEN. GitHub Actions and Agda kernel not invoked.
 
