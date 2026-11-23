@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_BYTE_IDENTICAL_J24_RATIONAL_GUARDS_AND_J25_VALIDATED_INITIAL_FLOW_UNIFORM_5D_IVP",
+  "pr": 1537,
+  "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "code": "scripts/check_smith_filsinger_j25_first_segment_validated_interval_20261123.py",
+  "native_j25_source_blob": "5d723374d71281cc5583582cc17d15016deaa8a3",
+  "j24_original_source_blob": "aca23be82c5f6e742af4abeb00925594026f589a",
+  "j24_original_event_data_blob": "edcec489212e81b473af5ea1049b958236781d12",
+  "execution": {
+    "python_local": true,
+    "source_blob_match": true,
+    "github_actions_ci": false,
+    "exact_core_arithmetic": "integer directed rounding grid scale 10^30, exact Fraction Taylor remainder and integer-root radiative amplitude",
+    "displayed_floats_are_only_reports": true
+  },
+  "fixed_initial_state_box": {
+    "coordinate_seed": "J23 numerical two-switch centre, exact decimal rationals pinned in J25 script",
+    "sup_radius": "1/10000000",
+    "spark_mode_initial": "ON",
+    "exact_periodic_fixed_point_not_proved": true
+  },
+  "validated_time_interval": {
+    "start": "0",
+    "end": "1/11",
+    "fundamental_tau": "20*pi/11",
+    "covers_first_diodes_or_spark": false,
+    "Picard_self_inclusion": true,
+    "max_Jacobian_inf_norm_nominal": 27.6,
+    "max_Jacobian_inf_norm_wide": 27.603333333333335,
+    "uniqueness_by_four_substeps": {
+      "length": "1/44",
+      "contraction_less_than_one": true
+    }
+  },
+  "nominal": {
+    "verified": true,
+    "Picard_iterations": 11,
+    "guard_U_interval_approx": [
+      -0.929279730769914,
+      -0.06542660485331724
+    ],
+    "guard_V_interval_approx": [
+      -1.6511407300759984,
+      -0.9385986789092703
+    ],
+    "spark_OFF_guard_approx": [
+      2.1946368294514835,
+      2.569632761549308
+    ],
+    "minimum_Picard_self_inclusion_slack_integer_grid": 7.746541260455903e+26
+  },
+  "wide_five_parameter_box": {
+    "rad": [
+      "0.0149",
+      "0.0151"
+    ],
+    "internal": [
+      "0.00015",
+      "0.00025"
+    ],
+    "k": [
+      "0.3495",
+      "0.3505"
+    ],
+    "kh": [
+      "1.9995",
+      "2.0005"
+    ],
+    "Gload": [
+      "0.5195",
+      "0.5205"
+    ],
+    "verified_uniform_IVP": true,
+    "Picard_iterations": 11,
+    "guard_U_interval_approx": [
+      -0.9309550557043698,
+      -0.0637512799188614
+    ],
+    "guard_V_interval_approx": [
+      -1.6523917827977135,
+      -0.9373476261875553
+    ],
+    "spark_OFF_guard_approx": [
+      2.1941813182860037,
+      2.570088272714788
+    ],
+    "guard_U_upper_integer_grid": "-63751279918861391963202747120",
+    "min_Picard_slack_integer_grid": "775373599825702527812919818",
+    "exact_Jacobian_row_norm_upper_integer_grid": "27603333333333333333333333333336",
+    "grid_scale": "1000000000000000000000000000000"
+  },
+  "proof_missing": [
+    "Validated continuation from t=1/11 through the first diode crossing (~3.389)",
+    "Isolated roots and interval flow tubes for all six diode/spark guards",
+    "Interval derivative of full tau Poincare map over a nonzero state ball",
+    "Verified centre-return defect and Banach/Krawczyk inclusion",
+    "Uniform periodic fixed point over the five-parameter box",
+    "Original environmental wave and physical Filsinger terminal/energy work"
+  ],
+  "no_exact_periodic_orbit_claim": true,
+  "no_100_percent_physical_energy_claim": true
+}
