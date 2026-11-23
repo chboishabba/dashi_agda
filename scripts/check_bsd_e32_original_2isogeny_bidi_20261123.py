@@ -81,4 +81,25 @@ for p in [3,5,7,11,13,17,19,23,29,31,37]:
             checks+=1
     print('p',p,'E(Fp)',len(ps),'Eprime(Fp)',len(qs),'hom/dual PASS')
 print('PASS exact rational function field forward/dual compositions, all exceptional 2-torsion,',checks,'independent group law pairs')
-print('OPEN: globally enumerated Kummer/Selmer local conditions (2-adic, real), Sha and same-curve analytic native K4, universal S6')
+
+# Exact selected rank-zero *classical* descent, invoking Tate's
+# two-isogeny theorem (not a locally proved Agda theorem):
+#   2^(r+2) = |alpha_E(E(Q))| * |alpha_Eprime(Eprime(Q))|.
+# Prime-support: any x square class in alpha(y^2=x^3+a*x^2+b*x)
+# has a squarefree representative dividing b. For b=-1 only +-1;
+# for b'=4 only +-1, +-2. Eprime real equation X*(X^2+4)>=0
+# excludes X<0; exceptional X=0 has class b'=4=1.
+E_candidates={-1,1}
+Eprime_candidates={-2,-1,1,2}
+E_actual={1,-1}  # O and T=(0,0) with b=-1
+Eprime_actual={1,2}  # O and rational point (2,4); X cannot be negative
+assert E_actual==E_candidates
+assert Eprime_actual=={n for n in Eprime_candidates if n>0}
+assert 2*2==2**(0+2)
+# (2,4) doubles to (0,0) on Eprime, and dual sends it to (1,0).
+sl=(3*2*2+4)//(2*4)
+assert sl==2 and sl*sl-2*2==0 and sl*(2-0)-4==0
+print('CLASSICAL SAME-E32 RANK ZERO (Tate two-isogeny): squareclasses E={+1,-1}, Eprime={+1,+2}, 2^(r+2)=4 => r=0')
+print('SOURCE DEBT: native Kummer squareclass support, both exceptional torsion branches, Tate descent exact sequence remain unproved locally')
+
+print('OPEN: native Kummer/Tate descent receipt, Sha and same-curve analytic native K4, universal S6')
