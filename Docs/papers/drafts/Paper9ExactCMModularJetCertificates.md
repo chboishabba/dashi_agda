@@ -974,9 +974,9 @@ construction excluded but small):
 | 50000 | 554.043 | 574.189 | 607.291 | 620.726 |
 
 Selective <=7 is ~3.6% slower than existing cross-GCD at 50000;
-higher selected-prime bounds become slower. More than half the
+higher selected-prime bounds become slower. Approximately half the
 selected <=7 merge calls still need a nontrivial residual GCD at
-50000 (5325 of 10716 calls across three runs). 127 reduces
+50000 (5325 of 10716 calls across three runs, 49.69%). 127 reduces
 residual-nontrivial cases to 450/10716, but adds greater overhead.
 No native GMP, memory/RSS, randomized order, external SOTA or Agda
 acceptance in this packet. COMP3b exact constructive route retains
