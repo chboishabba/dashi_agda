@@ -55,7 +55,7 @@ We varied **five independent native coefficients** around the J22 point while ma
 | sigma_min(I-M_tau) | **0.118725652** | 0.120286387 |
 | Independent work solver state closure | 7.74e-11 | 4.70e-9 |
 | Absolute signed energy residual | 3.84e-11 | 3.93e-11 |
-| Absolute storage drift | 1.59e-9 maximum |  |
+| Absolute storage drift | 0 | **3.492e-9** |
 | Short return-map residual after shooting | 4.2e-14 | 1.404e-10 |
 
 The *tight* box with each half-width reduced to one-tenth also passed all 32 cold-seed corners, 32/32. **Corner checks and finite sampled homotopies are NOT an interval enclosure across every point in the box.** Do not call these bounded parameter results rigorous existence/uniqueness or a certified physical optimum. The source-only loading is dimensionless model output, not measured Earth-to-device energy.
