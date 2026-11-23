@@ -320,3 +320,41 @@ runs and verified semantic equivalence. The classical analytic
 Chudnovsky identity, Bishop same-original-real certificate,
 formal Agda execution-fibre instantiation and external world-SOTA
 comparison remain OPEN.
+
+
+### COMP5g.1 — fresh 5M/10M extension of actual allocator measurements
+
+The same independently compiled local retained and early-released
+in-place GMP versions were executed once per 5M and 10M setting.
+Both keep original ordered P/Q/T, source Chudnovsky tail, integer sqrt
+and exact one-quotient strict upper-bound certificate. Their
+decimal-output SHA256 values match each other and prior precision
+receipts.
+
+| digits | retained wall ms | released wall ms | retained GMP peak bytes | released GMP peak bytes | retained/released process VmHWM KiB |
+|---:|---:|---:|---:|---:|---|
+| 5000000 | 5146.06 | 4944.39 | 119,912,000 | 107,433,544 | 131,404 / 119,216 |
+| 10000000 | 11382.5 | 11374.5 | 243,421,624 | 217,661,176 | 265,632 / 238,056 |
+
+Thus the **measured GMP peak** falls ~10.4% at 5M and
+~10.6% at 10M (at 10M delta 25,760,448 bytes);
+Linux-process VmHWM falls ~9.3% at 5M and ~10.4% at 10M.
+At 10M the two single-run wall times differ by ~8ms;
+this is NOT robust proof of a runtime improvement. The earlier
+five-run 1M wall-time distributions overlap significantly.
+These source-equivalent local execution results are distinct from
+unexecuted committed exact-source code.
+
+5M SHA: \`09eb526274ac828a3a54614e72fac5baa8ab6b26b8484fe1b065f678b2c8dbad\`.
+10M SHA: \`ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999\`.
+
+The committed exact-source Pareto script now also accepts
+\`--digits 5000000 10000000\` with pinned SHA checks. For its
+three-way baseline vs in-place vs released comparison, monitor
+total cost separately and preserve per-process isolation.
+The strongest supported architectural conclusion is that
+**early terminal-carrier lifetime termination pays actual GMP
+heap and peak RSS**; simply making P/Q/T merges in-place did not.
+This validates the existing streaming-residency fibre distinction
+and provides a real memory-side Pareto candidate, not a
+formal Agda kernel proof or external SOTA record.
