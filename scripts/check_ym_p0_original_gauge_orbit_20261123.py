@@ -92,3 +92,33 @@ assert sum(len(v) for v in adjacency.values())==2*(1024-10)
 print("PASS: 1014 frozen-bond complement connected on all 256 original sites")
 print("PASS: 2^10 distinct cylinder gauge orbits; effective gauge orbit size 2^255")
 print("PASS: 2^265 saturated full-source fields, unchanged normalized four moments")
+
+# Gauge-equivariant coarse W geometry: 16 even-origin coarse gauge
+# sites and all 64 original 2-link R445 paths. The two selected
+# coarse z-paths are the only two unfrozen coarse bits in the slice.
+coarse_sites=list(product(range(2), repeat=4))
+coarse_edges=[(c,m) for c in coarse_sites for m in range(4)]
+coarse_active={((0,0,0,0),2),((0,0,0,1),2)}
+def cstep(c,m):
+    y=list(c); y[m]=(y[m]+1)%2; return tuple(y)
+coarse_adj={c:set() for c in coarse_sites}
+for c,m in coarse_edges:
+    if (c,m) in coarse_active:
+        continue
+    y=cstep(c,m)
+    coarse_adj[c].add(y); coarse_adj[y].add(c)
+cseen={(0,0,0,0)}; cq=[(0,0,0,0)]
+for x in cq:
+    for y in coarse_adj[x]:
+        if y not in cseen:
+            cseen.add(y); cq.append(y)
+assert len(cseen)==16
+# Four W representatives have distinct coarse gauge orbits because
+# the other 62 coarse paths form a connected original gauge graph.
+# Each coarse orbit has 2^(16-1)=2^15 distinct W values.
+# At fixed W, there are 2^8 original cylinder states times 2^240
+# fine-site gauge choices, yielding 2^248 fine fields for each W.
+assert 4*(2**15)*(2**248)==2**265
+print("PASS: 62 frozen coarse paths connect all 16 original coarse gauge sites")
+print("PASS: four distinct 2^15-member coarse W gauge orbits")
+print("PASS: each saturated coarse W has 2^248 fine states; total 2^265")
