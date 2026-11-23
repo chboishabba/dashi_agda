@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module DASHI.Geometry.GielisRound11ActualComplexExponentialExact where
+module DASHI.Geometry.GielisActualComplexExponentialExact where
 
 ------------------------------------------------------------------------
 -- Original Round11 Bishop sine/cosine actually IS the imaginary-axis
@@ -20,7 +20,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Trig
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpZero
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin

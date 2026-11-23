@@ -1,4 +1,4 @@
-module DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset where
+module DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -30,35 +30,35 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Bishop real remains a separate constructive input.
 ------------------------------------------------------------------------
 
-record Round11BishopCutset : Set₁ where
+record BishopCutset : Set₁ where
   field
     elementarySeries : Elementary.BishopElementaryPowerSeriesData
     configuredDefinitions :
       ConfiguredTerms.ConfiguredConcreteTermDefinitions elementarySeries
 
-open Round11BishopCutset public
+open BishopCutset public
 
-round11ConcreteTermIdentification :
-  (inputs : Round11BishopCutset) →
+concreteTermIdentification :
+  (inputs : BishopCutset) →
   ConcreteTerms.ConcreteSineCosineTermIdentification
     (elementarySeries inputs)
-round11ConcreteTermIdentification inputs =
+concreteTermIdentification inputs =
   ConfiguredTerms.configuredConcreteTermIdentification
     (configuredDefinitions inputs)
 
 round11ParityInputs :
-  (inputs : Round11BishopCutset) →
+  (inputs : BishopCutset) →
   ParityLimit.BishopSeriesLimitParityInputs
     (elementarySeries inputs)
 round11ParityInputs inputs =
   SeriesTransport.bishopSeriesLimitParityInputsFromTermParity
     (ConcreteTerms.identifiedSineOddTermFamily
-      (round11ConcreteTermIdentification inputs))
+      (concreteTermIdentification inputs))
     (ConcreteTerms.identifiedCosineEvenTermFamily
-      (round11ConcreteTermIdentification inputs))
+      (concreteTermIdentification inputs))
 
 round11NonnegativeHalfBallChart :
-  (inputs : Round11BishopCutset) →
+  (inputs : BishopCutset) →
   (value : BishopReal.ℝ) →
   BishopReal.NonNegative value →
   BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
@@ -66,12 +66,12 @@ round11NonnegativeHalfBallChart :
     (elementarySeries inputs) value
 round11NonnegativeHalfBallChart inputs value nonnegative inside =
   FullBall.nonnegativeHalfBallChart
-    (round11ConcreteTermIdentification inputs)
+    (concreteTermIdentification inputs)
     (round11ParityInputs inputs)
     nonnegative inside
 
 round11ReflectedNegativeHalfBallChart :
-  (inputs : Round11BishopCutset) →
+  (inputs : BishopCutset) →
   (representative : BishopReal.ℝ) →
   BishopReal.NonNegative representative →
   BishopReal._≤_
@@ -83,7 +83,7 @@ round11ReflectedNegativeHalfBallChart :
 round11ReflectedNegativeHalfBallChart
     inputs representative nonnegative inside =
   FullBall.reflectedNegativeHalfBallChart
-    (round11ConcreteTermIdentification inputs)
+    (concreteTermIdentification inputs)
     (round11ParityInputs inputs)
     nonnegative inside
 
@@ -180,7 +180,7 @@ open Round11PhysicalCutset public
 
 record Round11CompleteCutset : Set₁ where
   field
-    bishop : Round11BishopCutset
+    bishop : BishopCutset
     stepV : Round11StepVCutset
     p06 : Round11P06Cutset
     p11 : Round11P11Cutset

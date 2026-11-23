@@ -21,8 +21,8 @@ open import Data.Rational.Unnormalised using (_/_)
 import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Trig
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Shared
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as Shared
 
 square : Bishop.ℝ → Bishop.ℝ
 square x = Bishop._*_ x x

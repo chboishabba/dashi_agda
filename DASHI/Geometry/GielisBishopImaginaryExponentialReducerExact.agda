@@ -28,8 +28,8 @@ open import Data.Rational.Unnormalised using (_/_)
 import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
-import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
-import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Shared
+import DASHI.Analysis.BishopFactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopClassicalTrigObjectWeldExact as Shared
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Trig
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopExponentialCauchyProductExact as RealExp
