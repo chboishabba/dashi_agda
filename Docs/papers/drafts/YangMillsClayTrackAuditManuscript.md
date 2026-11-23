@@ -70,16 +70,15 @@ CMI and Wikipedia still describe Yang--Mills/mass gap as an open problem.
 
 The one public claim this repository can honestly make is:
 
-> *DASHI contains a formally type-checked dependency audit showing that,
-> conditional on the 33 typed theorem surfaces (many still inhabited by imported/postulated witnesses) listed in
-> `PostulateInventory.agda`,
-> four-dimensional SU(N) Yang--Mills theory on R^4 admits a
-> Wightman-axiom-satisfying quantum field theory with a positive
-> mass gap Delta_phys >= c_N Lambda_YM > 0.  This is a conditional
-> source-intake formalisation.  `clayYangMillsPromoted = false`: official
-> Clay recognition requires qualifying peer-reviewed publication, a two-year
-> waiting period, and broad community acceptance, none of which is currently
-> satisfied.*
+> *DASHI contains a type-checked dependency graph showing that the 33 imported
+> assertions listed in `PostulateInventory.agda` entail, if those assertions
+> are true, the stated Wightman-axiom and positive-mass-gap conclusion for
+> four-dimensional SU(N) Yang--Mills theory on R^4.  The kernel receipt covers
+> only this implication wiring.  It does not establish the imported analytic
+> theorems, including the unpublished viXra inputs and P33 whose source theorem
+> is still TBD.  `clayYangMillsPromoted = false`: official Clay recognition
+> requires qualifying peer-reviewed publication, a two-year waiting period, and
+> broad community acceptance, none of which is currently satisfied.*
 
 [1]: https://www.claymath.org/millennium-problems/rules/ "Rules for the Millennium Prize Problems"
 
@@ -216,9 +215,12 @@ proposed RG proof; it rules out the perturbative bridge as a practical finite
 proof and demonstrates why the nonperturbative Balaban block-spin construction
 is required.
 
-### 3.2  Resolution via the Eriksson Series
+### 3.2  Imported resolution claims in the Eriksson Series
 
-The Eriksson series resolves both blockers through three mechanisms:
+This subsection reports what the imported Eriksson preprints assert.  DASHI has
+not independently reproved the DLR-LSI, RG-Cauchy, or all-diameter KP estimates,
+so none of them is a DASHI theorem here.  The series claims to address both
+blockers through three mechanisms:
 
 **DLR-LSI (2602.0052).**  The Dobrushin bypass (Lemma 6.3: delta_k < alpha_blk/4
 via polymer decay + pZeroPositive, using the Yoshida--Guionnet--Zegarlinski
@@ -244,8 +246,11 @@ The corrected `absorptionConditionSatisfied` gate (replacing the category-error
 via asymptotic freedom, which is the actual condition required by the
 Balaban--Eriksson scheme.
 
-Together, these three mechanisms discharge both `BalabanPhysicalBetaBridge` and
-`PAWOTGUniformSeparation`.  The beta gap is no longer an open blocker.
+Together, these three imported assertion packages would discharge
+`BalabanPhysicalBetaBridge` and `PAWOTGUniformSeparation` inside the postulate
+framework.  Outside that framework the analytic beta and uniform-separation
+estimates remain mathematically open; the beta gap has not been closed by a
+DASHI estimate.
 
 ---
 
@@ -321,12 +326,13 @@ into five topological layers:
 |----|------|--------|
 | P31 | `ImportedWightmanReconstructionWithMassGap` | Eriksson 2602.0092 Thm. 1.1+S5 |
 
-All 33 typed surfaces are `true` in the inventory.  The dependency graph is
-acyclic with a single sink at P31.  P33 (FieldRegularityImpliesSingleLinkPositivity)
-is now the explicit composite bridge from field regularity to single-link positivity.
-The downstream gates `anisotropicDiameterLossControlled`,
-`allDiameterKPCertificate`, and `rgLaneAdvanced` are `true`
-relative to the full 33 typed theorem surfaces inventory.
+All 33 typed surfaces are flagged `true` in the inventory; this flag is
+bookkeeping for the dependency audit, not mathematical truth.  In particular P33
+(FieldRegularityImpliesSingleLinkPositivity) still has no cited source theorem.
+The dependency graph is acyclic with a single sink at P31.  The downstream gates
+`anisotropicDiameterLossControlled`, `allDiameterKPCertificate`, and
+`rgLaneAdvanced` are likewise flagged `true` only relative to the full 33 typed
+theorem surfaces inventory.
 
 ### 4.1  Witness Verification Status Table
 
@@ -663,8 +669,8 @@ This blocks the a^2 x a^{-2} -> O(1) residue attack structurally.
 
 ### 6.4  Wightman Reconstruction (2602.0092 Thm. 1.1)
 
-With OS0--OS4 and OS1 all closed, the Wightman reconstruction theorem
-(2602.0092 Thm. 1.1 + S5) gives:
+If OS0--OS4 and OS1 were established and the imported reconstruction statement
+(2602.0092 Thm. 1.1 + S5) were externally validated, that statement would give:
 
 - A Hilbert space H with a unitary representation U(Lambda, a) of the
   Poincare group.
@@ -673,8 +679,10 @@ With OS0--OS4 and OS1 all closed, the Wightman reconstruction theorem
 - A positive mass gap: Delta_phys >= c_N Lambda_YM > 0.
 - Non-trivial scattering: S^c_4 != 0.
 
-This is recorded as `wightmanReconstructionAvailable = true` in the
-`ContinuumStabilitySourceIntake`.
+No such terminal receipt exists in DASHI.  The flag
+`wightmanReconstructionAvailable = true` in `ContinuumStabilitySourceIntake`
+records only the import-relative wiring, not an established Wightman theory or
+mass gap.
 
 ---
 
