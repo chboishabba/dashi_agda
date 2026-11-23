@@ -1,3 +1,45 @@
+## 23 November 2026 — NEW: original finite far-zero sum as a completed-ξ'/ξ HOLOMORPHIC CONTOUR TRACE (the actual requested two-sided-pole weld)
+
+This reuses the ORIGINAL Lean signed normalized pair kernel and its `signedLiteralPairSourceTerm_eq_normalizedPairKernel` theorem, plus the original completed-ξ/Weil/Abel machinery. It is **NOT a new arbitrary kernel**, and the contour transformation by itself does not make a sign-changing source positive.
+
+For the SAME original selected witness W, put `r=t/16`, `s0=1/2+i t`, and let `P_W(v)=quarticFourSignedPoleCombinedProfile W.R W.muHalf W.muTwo t v`. This P_W is **real, even, smooth, compactly supported** by the original Lean source. Define its entire (complex-frequency) cosine transform and the holomorphic s-plane lift:
+
+  C_W(z) = integral_(v∈R) P_W(v)*cos(z*v) dv,
+  f_(W,t)(s) = r^(-2) C_W( -i (s-s0)/r )
+             = r^(-2) integral P_W(v)*cosh((s-s0)*v/r) dv.
+
+At an ACTUAL zero `rho=1/2+a+i gamma`, `-i(rho-s0)/r=q-i alpha`, where `q=(gamma-t)/r` and `alpha=a/r`. At its SAME CHARACTER/SAME ORDINATE reflected partner `rho#=1-conj(rho)=1/2-a+i gamma`, `z(rho#)=q+i alpha`. Because the source P_W is REAL and EVEN,
+
+  f_(W,t)(rho)+f_(W,t)(rho#)
+     = (2/r²) integral P_W(v)*cosh(alpha v)*cos(qv) dv
+     = (2/r²)*W.signedNormalizedPairKernel(alpha,q).
+
+For multiplicity m, the RHS is **exactly the sum of BOTH** pre-existing Lean literal original zero-source summands. Critical-line zero a=0 is a reflection FIXED POINT; use its original multiplicity once, never pair it with a copy. Since `f(rho#)=conj(f(rho))`, the sum on any reflection-saturated finite source set is real, and equals the original REAL signed test kernel sum with multiplicities.
+
+Now take a finite rectangle D invariant under `s↦1-conj(s)`, containing the relevant finite original zeta zeros but none on its boundary. The completed function `xi(s)=s(s-1)pi^(-s/2)Gamma(s/2)zeta(s)/2` is ENTIRE with exactly those nontrivial zeros. By the genuine residue theorem,
+
+  (1/(2*pi*i)) * contour_∂D [ f_(W,t)(s) * xi'(s)/xi(s) ] ds
+    = sum_(rho∈Zeros(xi)∩D) mult(rho)*f_(W,t)(rho)
+    = sum_(rho∈Zeros(xi)∩D) mult(rho)/r²
+        *W.signedNormalizedPairKernel(a_rho/r, q_rho).
+
+For the finite symmetric rectangle, this is an **exact full zero-side source identity**. The original source `FarExact` is a HARD CUT `|q|>eta` and excludes the `SameOrd t` zero guard: the indicator is NOT holomorphic. To recover FarExact from the contour, one must subtract the original `|q|<=eta` local zero terms, including the same-ordinate zeros and original endpoint conventions; similarly for a finite zero exhaustion, preserve explicit rectangle-endpoint atoms. **Do not place a discontinuous Far indicator inside the contour integral.**
+
+The user-requested RH route is now a precise SAME-W commuting square:
+
+  ACTUAL completed ξ zeros with retained ±a, multiplicity and γ
+       → (old) literal original signed K zero sum,
+       ↘ via residue theorem                              ↗ via original W kernel,
+        contour ∮ f_(W,t)(s) [ξ'/ξ](s) ds.
+
+The WHOLE contour (not Far alone) can be deformed to vertical lines `Re(s)=1+epsilon` and `Re(s)=-epsilon`, using `ξ(s)=ξ(1-s)` to relate sides, and on the right `ζ'/ζ=-sum Λ(n)n^-s` where Re(s)>1. Its gamma, pole-removal and normalization terms produce the ORIGINAL `mu`/prime source. This is a route for using BOTH pole sides against the actual far signed integral and existing original `RiemannZetaMuExactAbel` / `FourierMass` machinery. But proving a UNIFORM HEIGHT bound on the deformed vertical and horizontal contour pieces, including local subtraction, positive/negative far-band cancellation, and strict post-sixth margin remains the exact open P0 inequality. The contour identity is standard residue theory specialized to the original W, not a new proof of positivity or RH.
+
+**Executed exact SymPy receipt:** original atomic `F(z)=-(320/351)sin(pi z/4)^4` at a finite rational quadruple (`gamma=7,t=6,r=5,a=1/3`) reproduces the original two-sided value `F(q±i alpha)/r²`; a rational polynomial analytic f on a 4-zero reflected `Q(s)` satisfies all FOUR *actual meromorphic residues*
+  `Res_(s=rho) f(s)*Q'(s)/Q(s)=f(rho)`.
+Local source-equivalent script `/mnt/data/rh_bilateral_logpoles_complex_notch_sympy_20261123.py` executed PASS; committed source `scripts/check_rh_bilateral_completed_xi_logpoles_20261123.py` extended in commit `7d84996e`. No infinite contour estimate or kernel acceptance claimed.
+
+---
+
 # RH P0 / GRH — completed-log-pole bilateral reflection, mediating zero and exact signed adverse-phase sharpening (23 November 2026)
 
 **Source ownership, no duplicates.** Reuse Lean `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean` (already proves original even 0/2/4 target/reflection reconstruction), `...SignedPoleJointHorizontalJet.lean` (already identifies literal per-actual-zero source with the normalized signed pair kernel), `...SignedPoleNMu.lean` (already carries outer 1/2 literal off-ordinate t-sum), `...SignedPoleLocalRemainderBounds.lean` (already defines literal fourth favorable/adverse phase masses and a 3/2-per-multiplicity envelope), `...SignedPoleConeDecomposition.lean` (original local cone delta²<=6a²), `...SignedPoleV4EndpointAbsorb.lean`, `...SignedPoleFourierTerminal.lean` (original outstanding strict terminal). No changes to original physical witness or imported Lean source. Portable source-specific SymPy regression `scripts/check_rh_bilateral_completed_xi_logpoles_20261123.py`, local expanded `/mnt/data/rh_bilateral_logpoles_complex_notch_sympy_20261123.py` both derived from the exact source formulae. Local SymPy 1.14 checks PASS. No Lean/Agda kernel or CI claim.
