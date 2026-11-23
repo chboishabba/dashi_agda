@@ -1,3 +1,43 @@
+## P0 ADDENDUM — ORIGINAL positive-radius source REFUTES phase-only descent and yields a √R Fourier-zero splitting law
+
+**This section corrects an essential potential overreach from the pure atomic C4 bridge above.** The ORIGINAL `scripts/check_rh_original_bump_explicit_radius_20261122.py` already proves a source-specific selected positive-radius q=4 high-pole sign, under its recorded Fourier remainder/IVT majorants (not Lean kernel): for **R=10^-10**, `K_{R,∞}(0,4)>R²/6`, and for physical `t≥10^14, |a|≤1/2`, `K_{R,t}(a,4)>11R²/300>0`. The **same original source** has `K_{R,∞}(0,0)=0` identically because its normalized projective q-observer is `Q(q)=2(A1(A(q-2)+A(q+2))-A2(A(q-1)+A(q+1)))` and evenness gives `Q(0)=4(A1 A2-A2 A1)=0`. The actual selected q4 source is POSITIVE while the atomic `F(4)=0`. Thus two original REAL frequency arguments q=0,4 with identical four-phase circle coordinate `z(q)=1` have DIFFERENT high-pole positive-radius original responses. **The original smooth physical response does NOT FactorsThrough the four-phase quotient**, even though the atomic F does. This is a genuine same-original-source consumer collision, stronger than q1/q4 C3-only aliasing. A phase-only finite RH smoothing square is therefore REFUTED, not merely unproved.
+
+Independent exact local source symbolic regression `scripts/check_rh_smooth_bump_c4_alias_obstruction_20261123.py` (local) and `scripts/check_rh_original_bump_q4_sqrtR_boundary_layer_20261123.py` (committed) consume original centre angles (0,π/3,π/2,π), endpoint λ=1/2,2/3, source J2 roots `μ0=(13λ-8)/(144-54λ)`, original selected pole `P=(A15+A17)A2/2-(A14+A18)A1/2`, and original q-profile Q above. For `e=E[Y²]/2`, the source's fixed-shape even normalized bump (Y=R Z) gives `e=(m2/2)R², m2=E[Z²]∈[1/24,1]`. The original exact J2-root first variation `μ1` then produces the source **uniform finite-q-neighbourhood Taylor**:
+```text
+K_R(q)=F(q)+e K1(q)+O(R^4)     for q in a compact neighbourhood of 4,
+K1(4)=120/13,
+K1'(4)=-200*sqrt(3)*pi/117 -10/13 +764*pi/351,
+F(4+δ)=-5*pi^4*δ^4/1404 +5*pi^6*δ^6/33696+O(δ^8).
+```
+Uniformity of the last O(R⁴) follows from the original compact bump Fourier remainder bounds for |q±2|≤18 and the nonzero `∂μ J2` at both endpoints, not from a Gaussian approximation or an arbitrary finite-operator change of chart. The source local SymPy derivatives passed. **Finite-t original phase/derivative neighbourhoods need a separate q-uniform pole bound**; the old 13e6/t² receipt at exactly q4 is NOT silently extended to all q.
+
+Set `ε=√R`, `q=4+xε`. The SAME original source asymptotically satisfies, uniformly for x in compact real intervals and one fixed normalized bump shape,
+```text
+K_R(4+x√R)/R²
+  = (60*m2/13) -(5*pi^4/1404)*x^4 +O(√R).
+```
+The leading polynomial has two nonzero SIMPLE roots
+```text
+x_±=±(6/pi)*m2^(1/4).
+```
+The original J2 root is analytic in R near zero (source nonzero Jacobian and compactly supported scaled even bump), so the rescaled physical projective source extends smoothly in ε near zero. The ordinary implicit function theorem gives TWO actual **high-pole smooth-source Fourier-response zeros**, one on either side of q4, with the claimed asymptotics
+```text
+q_±(R)=4 ± (6/pi)*m2^(1/4)*√R +o(√R),   R↓0.
+```
+These are OBSERVED Fourier-response zeros of the `J2`-selected original smooth high-pole projective *test*, not ζ zeros, not signed A2 zeros, and not proof of any new actual RH zero.
+
+Even without solving the root exactly, the original m2 bounds give UNIVERSAL sufficiently-small-R sign brackets:
+```text
+K_R(4±(1/2)√R)>0,    K_R(4±2√R)<0
+```
+because the positive worst-case leading coefficient at m2=1/24,x=1/2 is `5/26 -5*pi^4/22464>0` using π<22/7; the negative worst case at m2=1,x=2 is `(20/351)*(81-pi^4)<0` since π>3. Source-bounded uniform O(√R) makes both signs rigorous for sufficiently small R. The explicitly selected R=10^-10 q4 positive certificate is independently stronger at the CENTRE; we do NOT claim the outward sign bracket for this one fixed R or for t≥10^14 without a new explicit q-uniform remainder proof.
+
+**New geometric construction required for actual finite-width observables:** the original atomic `q mod4` angular phase is a valid consumer sufficient statistic only for F. To reconstruct `K_R` even on integer q one needs at least its **winding/frequency index** (q0 versus q4) plus original bump moment/source R, pole t and normalized branch data. On real q the exact phase and winding pair `(e^{i*pi*q/2}, floor(q/4))` with a chosen phase representative recovers q, while the original H05 sign/history/refinement/Frobenius/consumer and original ζ-zero multiplicities must still be retained independently. The source-specific F `R=0` is a quotient where winding becomes unobservable; finite R reopens that fibre. This is precisely the original `ConsumerFibreRepairExact` / `SectionedProjectionProvenanceBridgeExact` pattern, and the mathematical reason to distinguish Fourier-observed zero, q-labelled cancellation, actual ζ-zero and nonempty source.
+
+**Next RH analytic cut:** use this source-identified `R²` versus `δ⁴` boundary layer when designing an original `K_{R,t}(q)` quantitative **q-neighbourhood** transport (with physical pole, horizontal a and source derivatives). For the A2 strict terminal the genuinely signed `FarExact` against `μ`/compensation remains independent. Do NOT confuse the new Fourier-response root splitting with ζ-zero production or claim that q smoothing is the actual angular bump.
+
+---
+
 # RH P0: source-correct C3 spatial × C4 angular phase, Lacan/Irigaray grammar and real-q quartic coercivity (23 November 2026)
 
 **Selected exact SOURCE**: Lean `Synthesis/RiemannProjectiveQuarticFourWindowAtomic.lean`, `...PoleSameObject.lean`, `...SignedPoleTarget.lean`, RH Agda `RHFourWindowBiharmonicFiniteCubeExact.agda`, original H05 `GovernedIndexedResidualCubeExact.agda`. Already-proved atomic high-pole source `Docs/proofs/RHA2AtomicBiharmonicStencilCoefficientAnatomy20261122.md` and original Bishop π proof notes own the negative-square fourth-difference, raw `pi/3` cancellation and finite-t/positive-radius nonpromotion. **New source module** `DASHI/Analysis/RHFourWindowAngularC3C4SufficientConsumerExact.agda` reuses original `FiniteThreeCycleTorusExact.Residue3`, `ShiftPhaseTableInterference.Phase4`, `ConsumerDescentMinimalObserverExact` / `ObserverFactorizedRefinementExact`, and retains original RH `Source4`. Exact local regression `scripts/check_rh_angular_c3_c4_grammar_mixed_consumer_20261123.py`; real-q inequality `scripts/check_rh_atomic_real_angle_quartic_coercivity_20261123.py`. LOCAL SymPy rational and exhaustive integer finite checks PASS; committed Agda not kernel-typechecked, no Lean/CI.
