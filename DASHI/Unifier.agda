@@ -3,6 +3,8 @@ module DASHI.Unifier where
 import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
 -- Finite C2-equivariant source-carrier map; NOT a Monster-group or RH-zero action.
 import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as RH128C2
+-- Source-typed RH 163840 dyadic tail, actual H_X->H_T reuse, NO analytic/Monster promotion.
+import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as RH163840
 
 import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityOwner
