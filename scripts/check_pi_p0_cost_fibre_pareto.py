@@ -21,6 +21,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCES={
  "retained":(ROOT/"scripts/check_pi_p0_fibre_cost_profile.cpp","078e76a0dbc603e89ac108f3d171764d4a66f247"),
  "released":(ROOT/"scripts/check_pi_p0_endpoint_lifetime.cpp","8ff286c6ec9ab23fe0d18c7d2833e1645c465b7a"),
+ "scoped":(ROOT/"scripts/check_pi_p0_endpoint_scoped.cpp","4542c2a3e659c4620536a45d8df39c4cfa24e23e"),
 }
 EXPECTED={
  10000:"ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
@@ -102,11 +103,11 @@ def main():
         "-lgmpxx","-lgmp","-lcrypto","-o",binary],timeout=120,cwd=ROOT)
    binaries[name]=binary
   for d in args.digits:
-   modes=["baseline","inplace","released"]
+   modes=["baseline","inplace","released","scoped"]
    records={name:[] for name in modes}
    for i in range(args.reps):
     for name in (modes[i%3:]+modes[:i%3]):
-     variant="released" if name=="released" else "retained"
+     variant=name if name in ("released","scoped") else "retained"
      argmode="baseline" if name=="baseline" else "inplace"
      row=parse(run([binaries[variant],str(d),argmode,"1"]),d,argmode)
      row["implementation"]=name
