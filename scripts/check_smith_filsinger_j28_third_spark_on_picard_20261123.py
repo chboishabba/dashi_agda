@@ -129,6 +129,26 @@ def certified_physical_on_handoff(X,tL,tR):
         B=[b.hull(c).expand(F('0.000000001')) for b,c in zip(B,C)]
     raise AssertionError('no physical post-ON Picard enclosure')
 
+def certified_ON_segments(X,t_start,count=32,h=F('.001')):
+    """Prove a second, common-clock physical-ON run after uncertain handoff."""
+    t=F(t_start);rows=[]
+    for idx in range(count):
+        B=[z.expand(F('.00001')) for z in X]
+        for it in range(80):
+            D=field_on(t,t+h,B)
+            C=[z+I(0,h)*d for z,d in zip(X,D)]
+            if all(v.subset(b) for v,b in zip(C,B)):break
+            B=[b.hull(c).expand(F('0.000000001')) for b,c in zip(B,C)]
+        else:raise AssertionError(('ON Picard self-inclusion',idx))
+        gu,gv=event_guards(B)
+        spark=B[4]-P['Voff']
+        assert gu.b<0 and gv.a>0 and spark.a>0, ('extra switch',idx)
+        X=[z+I(h)*d for z,d in zip(X,D)]
+        rows.append(dict(t0=str(t),t1=str(t+h),iterations=it+1,
+          spark_lower=str(spark.a),U_guard_upper=str(gu.b),V_guard_lower=str(gv.a)))
+        t+=h
+    return X,t,rows
+
 def event_guards(B):
     return B[2]-B[4]-P['Vd'], B[3]-B[4]-P['Vd']
 
@@ -174,6 +194,8 @@ def run():
     assert determinant.b<0
     physical_end,physical_tube,physical_rhs,physical_iterations=certified_physical_on_handoff(
         event_tube,F('3.51329269'),F('3.51729275'))
+    physical_on_end,physical_on_time,physical_on_rows=certified_ON_segments(physical_end,F('3.51729275'))
+    assert physical_on_time==F('3.54929275')
     return {'status':'PASS_EXACT_RATIONAL_J28_THIRD_EVENT_EXISTENCE_UNIQUENESS',
       'prior_state':'entire J27 9/9 source-validated J24 spark-OFF box intersected with exact b=Voff',
       'source_time_uncertainty':[str(t0lo),str(t0hi)],'virtual_off_duration':str(end),
@@ -191,6 +213,12 @@ def run():
       'physical_ON_handoff_all_9_state_grid':[[str(z.a),str(z.b)] for z in physical_end],
       'physical_ON_handoff_no_extra_switch':True,
       'physical_ON_bank_slope_grid':[str(physical_rhs[4].a),str(physical_rhs[4].b)],
+      'post_event_physical_ON_segments':len(physical_on_rows),
+      'post_event_physical_ON_continuation_through':str(physical_on_time),
+      'post_event_physical_ON_endpoint_grid':[[str(z.a),str(z.b)] for z in physical_on_end],
+      'post_event_ON_min_spark_margin_grid':str(min(int(q['spark_lower']) for q in physical_on_rows)),
+      'post_event_ON_max_U_guard_grid':str(max(int(q['U_guard_upper']) for q in physical_on_rows)),
+      'post_event_ON_min_V_guard_grid':str(min(int(q['V_guard_lower']) for q in physical_on_rows)),
       'bank_at_s_0026_grid':[str(bank_at_0026.a),str(bank_at_0026.b)],
       'minimum_guard_U_upper_grid':str(max(w['U_guard_grid'][1] for w in witnesses)),
       'minimum_guard_V_lower_grid':str(min(w['V_guard_grid'][0] for w in witnesses)),
