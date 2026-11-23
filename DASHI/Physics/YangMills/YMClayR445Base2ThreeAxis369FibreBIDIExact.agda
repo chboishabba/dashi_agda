@@ -584,3 +584,192 @@ originalSignedNineMidpointMetricCannotDescend signedDistance preserves =
     (trans
       (sym (preserves originalMidpointOne))
       (preserves originalMidpointThree))
+
+
+------------------------------------------------------------------------
+-- MINIMAL SOURCE ZERO-BRANCH CODEC, NOT AN OPAQUE SOURCE-SITE ID.
+--
+-- Original C4 positive site coordinate:
+--   0 -> neg, 1 -> zero with branch 0,
+--   2 -> pos, 3 -> zero with branch 1.
+-- Every original zero occurrence contributes exactly ONE reversible bit.
+-- Thus original C4^4 is precisely the fourfold dependent signed-zero
+-- fibre: r observed zeros -> 2^r independent original source sites.
+------------------------------------------------------------------------
+
+data OriginalSignedQuadZeroBranch : Set where
+  sourceNegative : OriginalSignedQuadZeroBranch
+  sourceZeroWith : Bit → OriginalSignedQuadZeroBranch
+  sourcePositive : OriginalSignedQuadZeroBranch
+
+originalQuadToSignedZeroBranch :
+  R445.Quad → OriginalSignedQuadZeroBranch
+originalQuadToSignedZeroBranch T.zeroᵢ = sourceNegative
+originalQuadToSignedZeroBranch (T.sucᵢ T.zeroᵢ) =
+  sourceZeroWith T.zeroᵢ
+originalQuadToSignedZeroBranch
+  (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = sourcePositive
+originalQuadToSignedZeroBranch
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) =
+  sourceZeroWith (T.sucᵢ T.zeroᵢ)
+
+originalSignedZeroBranchToQuad :
+  OriginalSignedQuadZeroBranch → R445.Quad
+originalSignedZeroBranchToQuad sourceNegative = T.zeroᵢ
+originalSignedZeroBranchToQuad (sourceZeroWith T.zeroᵢ) =
+  T.sucᵢ T.zeroᵢ
+originalSignedZeroBranchToQuad
+  (sourceZeroWith (T.sucᵢ T.zeroᵢ)) =
+  T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))
+originalSignedZeroBranchToQuad sourcePositive =
+  T.sucᵢ (T.sucᵢ T.zeroᵢ)
+
+originalSignedZeroBranchObservation :
+  OriginalSignedQuadZeroBranch → Wave.Trit
+originalSignedZeroBranchObservation sourceNegative = Wave.neg
+originalSignedZeroBranchObservation (sourceZeroWith _) = Wave.zero
+originalSignedZeroBranchObservation sourcePositive = Wave.pos
+
+originalQuadToSignedZeroBranchThenBack :
+  ∀ x →
+    originalSignedZeroBranchToQuad
+      (originalQuadToSignedZeroBranch x) ≡ x
+originalQuadToSignedZeroBranchThenBack T.zeroᵢ = refl
+originalQuadToSignedZeroBranchThenBack
+  (T.sucᵢ T.zeroᵢ) = refl
+originalQuadToSignedZeroBranchThenBack
+  (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = refl
+originalQuadToSignedZeroBranchThenBack
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) = refl
+
+originalSignedZeroBranchThenQuadThenBack :
+  ∀ b →
+    originalQuadToSignedZeroBranch
+      (originalSignedZeroBranchToQuad b) ≡ b
+originalSignedZeroBranchThenQuadThenBack sourceNegative = refl
+originalSignedZeroBranchThenQuadThenBack
+  (sourceZeroWith T.zeroᵢ) = refl
+originalSignedZeroBranchThenQuadThenBack
+  (sourceZeroWith (T.sucᵢ T.zeroᵢ)) = refl
+originalSignedZeroBranchThenQuadThenBack sourcePositive = refl
+
+originalSignedZeroBranchProjectsExactly :
+  ∀ x →
+    originalSignedZeroBranchObservation
+      (originalQuadToSignedZeroBranch x)
+    ≡ projectOriginalQuadToSignedTrit x
+originalSignedZeroBranchProjectsExactly T.zeroᵢ = refl
+originalSignedZeroBranchProjectsExactly
+  (T.sucᵢ T.zeroᵢ) = refl
+originalSignedZeroBranchProjectsExactly
+  (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = refl
+originalSignedZeroBranchProjectsExactly
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) = refl
+
+record OriginalFourSignedZeroBranches : Set where
+  constructor sourceFourSigned
+  field
+    sourceC0 sourceC1 sourceC2 sourceC3 :
+      OriginalSignedQuadZeroBranch
+open OriginalFourSignedZeroBranches public
+
+originalSourceSiteToFourSignedBranches :
+  R445.Site4 → OriginalFourSignedZeroBranches
+originalSourceSiteToFourSignedBranches
+  (T.pair (T.pair a b) (T.pair c d)) =
+  sourceFourSigned
+    (originalQuadToSignedZeroBranch a)
+    (originalQuadToSignedZeroBranch b)
+    (originalQuadToSignedZeroBranch c)
+    (originalQuadToSignedZeroBranch d)
+
+originalFourSignedBranchesToSourceSite :
+  OriginalFourSignedZeroBranches → R445.Site4
+originalFourSignedBranchesToSourceSite
+  (sourceFourSigned a b c d) =
+  T.pair
+    (T.pair
+      (originalSignedZeroBranchToQuad a)
+      (originalSignedZeroBranchToQuad b))
+    (T.pair
+      (originalSignedZeroBranchToQuad c)
+      (originalSignedZeroBranchToQuad d))
+
+originalFourSignedZeroBranchesRoundTrip :
+  ∀ site →
+    originalFourSignedBranchesToSourceSite
+      (originalSourceSiteToFourSignedBranches site) ≡ site
+originalFourSignedZeroBranchesRoundTrip
+  (T.pair (T.pair a b) (T.pair c d))
+  rewrite originalQuadToSignedZeroBranchThenBack a
+        | originalQuadToSignedZeroBranchThenBack b
+        | originalQuadToSignedZeroBranchThenBack c
+        | originalQuadToSignedZeroBranchThenBack d = refl
+
+originalSourceSiteFourSignedBranchesRoundTrip :
+  ∀ labelled →
+    originalSourceSiteToFourSignedBranches
+      (originalFourSignedBranchesToSourceSite labelled) ≡ labelled
+originalSourceSiteFourSignedBranchesRoundTrip
+  (sourceFourSigned a b c d)
+  rewrite originalSignedZeroBranchThenQuadThenBack a
+        | originalSignedZeroBranchThenQuadThenBack b
+        | originalSignedZeroBranchThenQuadThenBack c
+        | originalSignedZeroBranchThenQuadThenBack d = refl
+
+originalFourSignedBranchesNineObservation :
+  OriginalFourSignedZeroBranches → Vec.Vec Wave.Trit 9
+originalFourSignedBranchesNineObservation
+  (sourceFourSigned a b c d) =
+  originalSignedZeroBranchObservation a Vec.∷
+  originalSignedZeroBranchObservation b Vec.∷
+  originalSignedZeroBranchObservation c Vec.∷
+  originalSignedZeroBranchObservation d Vec.∷
+  Wave.zero Vec.∷ Wave.zero Vec.∷ Wave.zero Vec.∷
+  Wave.zero Vec.∷ Wave.zero Vec.∷ Vec.[]
+
+originalFourSignedBranchesProjectionIsSource :
+  ∀ site →
+    originalFourSignedBranchesNineObservation
+      (originalSourceSiteToFourSignedBranches site)
+      ≡ originalSignedNineSite site
+originalFourSignedBranchesProjectionIsSource
+  (T.pair (T.pair a b) (T.pair c d))
+  rewrite originalSignedZeroBranchProjectsExactly a
+        | originalSignedZeroBranchProjectsExactly b
+        | originalSignedZeroBranchProjectsExactly c
+        | originalSignedZeroBranchProjectsExactly d = refl
+
+-- All source endpoints (including the 896 spectator-link endpoints)
+-- use this SAME minimal reversible site carrier, not separate
+-- model vertices. Original directed positive-bond labels keep the
+-- orientation, original gauge-site branches and all residual sheets.
+originalFullBinaryAddressMinimalSignedSource :
+  OriginalBinaryAddress → OriginalFourSignedZeroBranches
+originalFullBinaryAddressMinimalSignedSource address =
+  originalSourceSiteToFourSignedBranches
+    (originalSourceOfFullBinaryAddress address)
+
+originalFullBinaryAddressMinimalSignedTarget :
+  OriginalBinaryAddress → OriginalFourSignedZeroBranches
+originalFullBinaryAddressMinimalSignedTarget address =
+  originalSourceSiteToFourSignedBranches
+    (originalTargetOfFullBinaryAddress address)
+
+originalMinimalSignedSourceRecoversAt :
+  ∀ address →
+    originalFourSignedBranchesToSourceSite
+      (originalFullBinaryAddressMinimalSignedSource address)
+    ≡ originalSourceOfFullBinaryAddress address
+originalMinimalSignedSourceRecoversAt address =
+  originalFourSignedZeroBranchesRoundTrip
+    (originalSourceOfFullBinaryAddress address)
+
+originalMinimalSignedTargetRecoversAt :
+  ∀ address →
+    originalFourSignedBranchesToSourceSite
+      (originalFullBinaryAddressMinimalSignedTarget address)
+    ≡ originalTargetOfFullBinaryAddress address
+originalMinimalSignedTargetRecoversAt address =
+  originalFourSignedZeroBranchesRoundTrip
+    (originalTargetOfFullBinaryAddress address)
