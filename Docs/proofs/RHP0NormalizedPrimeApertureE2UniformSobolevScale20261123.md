@@ -100,10 +100,55 @@ in particular sixth moment <5859.375/r⁶ and eighth <9155.2734375/r⁶. These a
 
 The bracket still oscillates at frequency r: `|B_g^(m)|≤G_*(1+2^m)r^(m-1)`. With each flat-top `||h^(l)||1` bounded, Leibniz gives `||(ΔP_phys)^(k)||1=O(r^(k-6))`; for k=8 this can grow O(r²), so the *full raw physical derivative* bound is NOT uniform. Integration by parts at normalized ordinate offset `q=(γ−t)/r` gives a genuine incremental Fourier estimate `|Fourier(ΔP_phys)(r q)|=O(r^-6 |q|^-k)` for fixed q≠0, including the physical horizontal factor `cosh((β−1/2)u)`.
 
-**Critical unresolved E2/E3 distinction:** a normalized unit-q band contains O(r log t) actual zeta zeros by RvM; summing these envelopes in absolute value produces only O(r^-5 log t), a factor O(r log t) larger than the original O(r^-6) target. The source-zero/Gamma *signed* correlation and complete post-sixth slack must be bounded independently; this does not follow from cancellation in the same explicit-formula equality. The full original E2 FarExact/Schwartz/post-sixth compiler has NOT been re-certified here.
+**Coarse generic normalized-q bound, NOT optimal:** counting O(r log t) actual zeta zeros across a unit-q band against a generic r^-6 envelope only yields O(r^-5 log t). However the original frozen projective product has exact PHYSICAL-frequency sidebands at ±r,±2r. The sharper wavepacket cut below improves the global absolute increment to O(r^-6 log t), leaving ONE LOG, not one power of t. The original complete post-sixth and independent E3 signed strict estimate are still UNPAID.
 
 ## 6. Execution and remaining gates
 
 Executed local exact rational `scripts/check_rh_p0_normalized_annihilator_e2_20261123.py`; full independent five-height polynomial coefficient regression, all-t factor bound, source m_W floor, four-port C_i and epsilon scale, sixth/eighth absolute moments and relative Fourier scaling PASS. Source and run receipt on [Agda PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533) (draft, unmerged); new normalized scalar-annihilator even/zero source theorem bodies on [Lean PR #116](https://github.com/chboishabba/dashi_lean4/pull/116) (draft, NOT compiled). This is a SAME original selected-W source estimate conditional on constructing the fixed flat-top extension, not a substitute bump claimed to be the original W.
 
 **OPEN:** E0 Lean actual smooth inhabited carrier; E1 formal kernel verification; E2 a numeric evaluation of T_b for an explicitly implemented plateau and the full original post-sixth/far-shell/Zeta23 acceptance with all rates; E3 an INDEPENDENT strict complete signed prime/zero/Gamma estimate at every hypothetical off-line height, including near resonance. No Lean/Agda kernel or GitHub CI run. RH/GRH remain OPEN.
+
+
+## 7. IMPORTANT E2 SHARPENING — physical Fourier sidebands remove the artificial factor r
+
+The generic normalized q derivative bound above is too pessimistic for the **actual original source construction**, because the physical bracket is the precise cosine combination `A1 cos(2ru)−A2 cos(ru)`, not an arbitrary rapidly oscillating function. For a port `P_i(u)=4 P_pole ε h(u)[A1 cos(2ru)−A2 cos(ru)]`, let
+
+```text
+H_a(ξ) = ∫ h(u) cosh(a u) cos(ξ u)du,
+ω=γ−t,  |a|=|β−1/2|≤1/2.
+```
+
+Then the **EXACT** physical horizontal-and-ordinate Fourier kernel is
+
+```text
+K_i(a,ω)=2 P_pole ε [
+    A1( H_a(ω+2r)+H_a(ω−2r) )
+   −A2( H_a(ω+r)+H_a(ω−r) )].
+```
+
+This follows from `cos(mru)cos(ωu)=[cos((ω+mr)u)+cos((ω−mr)u)]/2`, preserving the source factor FOUR and both horizontal and ordinate coordinates. The FOUR packets are centered at physical offsets ±r and ±2r, each with fixed O(1) physical-frequency width (NOT O(r)). Because `h=Q_t(D)b_p` has uniform `W^{k,1}` bounds at every fixed k, `h(u)cosh(a u)` does too uniformly over the true critical strip. Thus for k≥3,
+
+```text
+|H_a(ξ)| ≤ C_{b,k}/(1+|ξ|)^k
+```
+
+with `C_{b,k}` independent of t once t≥T_b.
+
+The original Riemann–von Mangoldt arbitrary-endpoint zero count implies, INCLUDING actual zero multiplicities and both ±ordinate ranges, a bound `N([y+n,y+n+1])≤C log(y+n+3)` for y≥1. For each packet center `y=t±r` or `t±2r` (all comparable to t), summing physical **unit-width** shells using `Σ_{n≥0}(1+n)^-3<∞` yields
+
+```text
+Σ_{actual nontrivial zeros ρ} m_ρ |H_{βρ−1/2}(γρ−y)|
+     = O_{b}(log(t+3)),
+∫_ℝ |H_0(τ−y)| |Zeta23.mu(τ)|dτ
+     = O_{b}(log(t+3)).
+```
+
+Since the exact original coefficients are `ε A_c=O(r^-5)*O(r^-1)=O(r^-6)`, the **FULL absolute increment**, summed over the complete physical zero and Gamma channels, satisfies
+
+```text
+|ΔZero|+|ΔGamma| = O_b(r^-6 log(t+3)).
+```
+
+**This improves the crude O(r^-5 log t) to O(r^-6 log t): only ONE logarithm remains versus the original quartic O(r^-6) target.** The improvement is a SAME-source geometric consequence of the two exact shifted Fourier packets for each on-line radius. It does NOT prove the missing strict terminal: `log t` is unbounded, prime phases can approach zero simultaneously, and the original post-sixth compensation `S_W` must be recomputed on this new test. Cancellation within the completed Weil identity is NOT independent proof of strict RH.
+
+Executed local exact SymPy cosine shift + compact flat-top C∞ Fourier fixture regression: `scripts/check_rh_p0_prime_wavepacket_e2_20261123.py`; same-source implementation is committed on DASHI PR #1533. Source unit-shell summation is an analytic proof argument, not new Lean kernel code. **E2 full source post-sixth and E3 independent sign still open.**
