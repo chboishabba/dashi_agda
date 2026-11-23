@@ -1,3 +1,16 @@
+## 23 November 2026 — R2 P0: complete Gamma exterior bounded through q=16; independent 7-axis native-model action
+
+[Original selected-W, X6/SSP, Gamma and terminal proof ledger](../proofs/RHQuartic128NativeCechC2MonsterNormalization20261123.md). Existing RH G2 H_X→H_T translation–modulation intertwiner located and retained; original same-object Fourier cosine ordinate involution `x↦2t−x` commutes with physical rescaling (r=t/16), yielding the full symmetric Δ²μ integral with every q included. Distinguish that **one genuine analytic C₂** from new **7 independent finite model coordinate involutions** on native F₃⁶×signed SSP. All seven generators act, commute, and intertwine with 128 masks, but none preserves original selected factor endpoint: 128→64. Therefore no source group-action promotion.
+
+**Full Gamma tail now controlled in terms of selected W's actual L6=||P_W⁽⁶⁾||₁**:
+`|V_tail|≤(32L6/t)[(1/163840)(1+log(t/(2π))/(2π)+10/(πt²))+1/(524288π)]`.
+Combining original Fourier moment / cubic defect / central Stirling:
+`|V−G/(12πt²)|≤L6/(49152πt)+M4core/(24576πt)+800M0core/(πt³)+above V_tail bound`.
+The zero-ordinate q=16 crossing is included using monotonic digamma bound, not false log asymptotic. Existing existential W(t) has t-dependent R threshold, so no uniform L6 or signed RH terminal bound follows.
+
+**Strict terminal** remains H+S−4d−I=2D+S−4d≥S≥0 if reflected off-line target exists. This cannot be made negative by rearranging μ. 80,800 have valid base-ten log representations; source constants come from Stirling (80×10/π), not log8 spectral action; 32t / 64logN / 768 typed separate. Source-written Agda; local equivalent Python/SymPy PASS, kernel OPEN.
+
+---
 ## 23 Nov 2026 — R2 128 normalization actual face sheaf, C2 representation, H05 C4 negative control
 
 [New exact model, execution and attribution ledger](../proofs/RHQuartic128NativeCechC2MonsterNormalization20261123.md). Source 128=16×2×4 has a reversible *formal factor-label* `{0,1}⁷ ≅ (Base369 outer eight corners)×(16 residual states)`, with six genuine face charts / 12 edge overlaps / 8 corners and compatible global gluing. Existing native Monster3B `X6=F₃⁶` plus signed SSP yields 128 distinct nonzero encoded states and C2-equivariance under component sign negation. Weight flips `w↔128/w`: not an analytic symmetry of original fixed normalization. Neutral target is retained but outside binary image. This finite proof carrier and TOE imports are new source-written Agda, *kernel open*. Six actual Fourier sample values fail all 12 overlap tests, so cannot identify q samples with physical cube faces; earlier H05 C4 integer phase and real-q smoothing no-descent retained.
