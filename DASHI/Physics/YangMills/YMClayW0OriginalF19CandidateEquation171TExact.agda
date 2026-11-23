@@ -128,11 +128,6 @@ module _
   -- equation171ExponentialDensity does NOT prove that a marked
   -- spectator marginal is Bałaban's localized exponential action.
 
-  originalF19UnmarkedEquation171 :
-    Eq171.CMP122Equation171TOperationSemantics FinePairField SlowField
-  originalF19UnmarkedEquation171 =
-    originalF19CandidateEquation171 sourceFixedWilsonDensity
-
   -- The existing real-valued Eq.(1.71) record can express this
   -- candidate Haar constrained T without any rational embedding.
   -- Scale is intentionally inert at this original side-four cutoff.
@@ -152,6 +147,11 @@ module _
     ; Eq171.CMP122Equation171TOperationSemantics.equation171DefinesTOperationMass =
         λ cutoff coarse → refl
     }
+
+  originalF19UnmarkedEquation171 :
+    Eq171.CMP122Equation171TOperationSemantics FinePairField SlowField
+  originalF19UnmarkedEquation171 =
+    originalF19CandidateEquation171 sourceFixedWilsonDensity
 
   -- Only this finite candidate source and its F19 normalization,
   -- not the selected CMP119 step / E-R-B-V physical dictionary.
