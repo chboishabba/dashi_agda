@@ -117,3 +117,44 @@ assert sp.simplify(sp.diff(C,e).subs(e,0)-K)==0
 assert len(P)-len(walls)==1528
 print("PASS exact normalized source log-Hessian restoration: 1528 original residual plaquettes")
 print("OPEN literal CMP119/122 nonfactorizing T, original homogeneous Wilson absolute W3, OS physical same-H")
+
+
+# Source-native variable-cutoff negative/positive controls: a true original
+# periodic four-dimensional Wilson lattice at L=3,4,5,6 (not merely L4).
+# The *single activated 4d-wall prism* is a topological sphere for each
+# d=1..L-1 and each of the THREE spatial transverse original planes.
+from itertools import combinations
+for L in (3,4,5,6):
+    def linkset(p):
+        x,a,b=p
+        def advance(k):
+            y=list(x);y[k]=(y[k]+1)%L;return tuple(y)
+        return frozenset(((x,a),(advance(a),b),(advance(b),a),(x,b)))
+    def leaf_peel(face_list):
+        remaining=set(face_list)
+        while remaining:
+            c=Counter(e for p in remaining for e in linkset(p))
+            free={p for p in remaining if any(c[e]==1 for e in linkset(p))}
+            if not free:break
+            remaining.remove(min(free))
+        return remaining
+    for d in range(1,L):
+        for a,b in combinations((1,2,3),2):
+            base=((0,0,0,0),a,b)
+            cap=((d,0,0,0),a,b)
+            ws=[]
+            for t in range(d):
+                for ax,other in ((a,b),(b,a)):
+                    for k in (0,1):
+                        at=[0,0,0,0];at[0]=t;at[other]=k
+                        ws.append((tuple(at),0,ax))
+            fs=(base,cap)+tuple(ws)
+            inc=Counter(e for p in fs for e in linkset(p))
+            assert len(ws)==4*d and len(set(ws))==4*d
+            assert len(inc)==8*d+4 and set(inc.values())=={2}
+            assert leaf_peel(fs)==set(fs)
+            assert not leaf_peel((base,)+tuple(ws))
+            for j in range(len(ws)):
+                assert not leaf_peel((base,cap)+tuple(w for i,w in enumerate(ws) if i!=j))
+    print("PASS source original periodic L=%d: %d links, 3 spatial planes, all nonwrapping time distances" % (L,4*L**4))
+print("OPEN variable-L common-beta full W3. Verified family is original source geometry with OTHER plaquettes switched OFF.")
