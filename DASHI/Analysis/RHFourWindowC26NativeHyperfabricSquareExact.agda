@@ -27,6 +27,8 @@ import DASHI.Moonshine.Griess1990MoufangCoherentSL3SectionSourceExact as Sah
 import DASHI.Analysis.RHFourWindowBiharmonicFiniteCubeExact as RH
 import DASHI.Core.GovernedIndexedResidualCubeExact as Q
 import DASHI.Core.GovernedDiagramCore as Diagram
+import DASHI.Moonshine.Griess1990Moufang81IbrahimProjective13Exact as Griess
+import DASHI.Foundations.SSPTritCarrier as SSP
 
 Code26 : Set
 Code26 = P.Axis13 × Bool
@@ -203,8 +205,6 @@ twentySixStepsReturn P.cornerPMM true = refl
 -- Finite-field interpretation uses a cyclic basis: the source is
 -- GF(27)^× as a regular C26 permutation, not the original P3^3 metric.
 -- The native GF(3) arithmetic owner is the original Griess module.
-import DASHI.Moonshine.Griess1990Moufang81IbrahimProjective13Exact as Griess
-import DASHI.Foundations.SSPTritCarrier as SSP
 
 addGrade : Cube.Ternary27Point → Cube.Ternary27Point → Cube.Ternary27Point
 addGrade (Cube.ternary27Point x y z) (Cube.ternary27Point a b c) =
