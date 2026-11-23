@@ -1,3 +1,84 @@
+## 23 November 2026 — P0 MAX-CUT: SEVEN genuine finite generators, original Gamma C2 reflection, full-tail and terminal audit
+
+**LATEST live source recheck (do not reset heads):** RH #1533 at c9995e49 before this tranche, Lean #113 at 5b22b8f8, H05 indexed cube #1291 at 46bf5b9f. Source owners below are reused, not replaced. New code is AGDA **source-written**, NOT kernel-accepted; local SymPy/mpmath independent run PASS. No new RH/GRH/Monster-group theorem.
+
+### A. Seven independent signed axes, actual original X6 and SSP labels (completed finite stage)
+
+The earlier module \`DASHI/Analysis/RHQuartic128Monster3BSSPSignedC2IntertwinerExact.agda\` supplied a **single** simultaneous C2 negation. It now defines:
+- seven-bit \`maskXor\` / \`maskAct\` with XOR associative and commutative, \`maskActLaw\` and \`maskActCommutes\`;
+- **seven independent coordinate generators** acting on the actual existing \`Monster3BFiniteHeisenbergGeneratorsExact.X6=F3^6\` by six *separate* \`negate3\` automorphisms, and on \`SignedSSPFRACTRANWeaveExact.SignedMultiplicity\` by seventh \`negateMultiplicity\`;
+- \`actOnNativeSignedX6Law\`, \`encodeIntertwinesAllSeven\` and \`nativeActionFaithfulOnEncodedPatch\`. A mask is recovered by acting on the all-false encoded state; 128 distinct masks, no unintended scalar-action kernel. Simultaneous inversion is the all-ones mask.
+- the native X6 all-zero coordinate and signed zero survive as fixed points, but lie outside the nonzero binary image; no binary-forgets-sign move.
+- precise source-ENDPOINT negative control: for any of the seven distinct singleton generators \`coefficient(maskAct(generator,allOnes))=64\`, not 128. Hence they are **not seven source-preserving transformations of the original fixed selected \`sampleTest\`**. The extra actions are actual finite-model coordinates, NOT known elements of the Monster 3-group (which has no involutions), nor an original seven-parameter physical scaling. The \`C2^7\` acts by coordinate sign automorphisms, not by the order-three Heisenberg translations.
+
+The exact existing analytic RH intertwiner is *not missing or a Monster theorem*: \`DASHI/Analysis/RiemannG2CanonicalHXToHTCompilerExact.agda\` already compiles \`exp(i(b-t)u)=exp(-itu)exp(ibu)\` from the canonical \`RiemannAnalyticComplexCharacterExtensionExact\` H_X. \`RiemannG2GammaMellinProofRelevantActionCompilerExact.agda\` owns the proof-relevant implementation-to-Weil action seam; the original realized data/admissibility arguments are distinct from the new finite \`C2^7\` action.
+
+### B. ACTUAL analytic same-object Gamma intertwiner, not the seven-bit model
+
+For the ORIGINAL \`QuarticFourSignedPolePair W\` let \`r=t/16\`,
+\`C_W(q)=integral P_W(v) cos(qv)dv\`,
+\`Psi_t(x)=r^-2 C_W((x-t)/r)\`. Existing Lean \`FourthOrderQuotient.compactCosineTransform_even\` and \`signedOrdinateTestDeriv_center_reflection\` ensure the center-even test; \`FourierMass\` owns \`fullMuVariation\`, integrability and normalization, \`NMu\` the original \`signedOrdinateTest\`.
+
+Define actual reflection \`R_q f(q)=f(-q)\`, physical-ordinate reflection \`R_x psi(x)=psi(2t-x)\`, and \`S_{t,r}f(x)=r^-2 f((x-t)/r)\`. Direct calculation proves
+\`S_{t,r}∘R_q=R_x∘S_{t,r}\`, \`R_q C_W=C_W\`, \`R_x Psi_t=Psi_t\`, and (full-line absolutely integrable, no artificial support truncation)
+\`\`\`
+V_W(t) = integral_x Psi_t(x)(mu(x)-mu(t))dx
+       = (1/2) integral_x Psi_t(x)[mu(x)+mu(2t-x)-2mu(t)] dx
+       = (8/t) integral_q C_W(q)
+           [mu(t+tq/16)+mu(t-tq/16)-2mu(t)]dq.
+\`\`\`
+**This is the real original source C2 analytic commutation square**. It cancels the odd first Taylor mode exactly. It is not seven commuting analytic actions; the binary factor axes remain a distinct model. Upstream Zeta23 \`muq κ N\` conductor shift is an exact **constant**, so it disappears from this second difference for fixed parity and survives only as \`64 log N/(t R M0) OriginDet_W\` in the center mode. It does NOT identify χ zero configurations or parity.
+
+### C. NEW complete Gamma uniform-*coefficient* tail envelope, INCLUDING q=±16
+
+Use REAL theorem-bearing upstream [Anthropic Zeta23 GammaFacts](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/GammaFacts/Mu.lean) \`mu\` even and monotone on the nonnegative ordinates, \`mu(0)>-1\`, and [\`GammaFactsChiProof\`](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/ThmE/GammaFactsChiProof.lean) \`|mu_{κ,1}(y)-log(|y|/2π)/(2π)|≤10/(π y²)\` for |y|≥1, both κ. For \`t≥200\` and any q,
+\`\`\`
+A=t(1+|q|/16),  mu_{κ,1}(0)≤mu_{κ,1}(t±tq/16)≤mu_{κ,1}(A);
+|Delta² mu_{κ,1}(t,q)|≤2(mu_{κ,1}(A)-mu_{κ,1}(0))
+                         ≤2(mu_{κ,1}(A)+1)
+                         ≤2[1+log(t/(2π))/(2π)+|q|/(32π)+10/(π t²)].
+\`\`\`
+The last step applies Stirling ONLY at the upper ordinate \`A≥t≥200\` and uses \`log(1+|q|/16)≤|q|/16\`. It is therefore valid at **q=±16**, where one shifted ordinate is zero and the naive pointwise logarithmic approximation is invalid. The conductor cancels before applying this bound, so the same absolute *variation* bound holds for every N≥1 and both κ (with the same analytic W, not a character-specific constructed W).
+
+For compact C∞ ORIGINAL \`P_W\`, integrate six times by parts in the cosine Fourier transform: \`|C_W(q)|≤L6/|q|^6\`, where \`L6=||P_W^(6)||_1\`. Let \`V_tail=(8/t)∫_|q|>8 C_W(q)Delta²mu(t,q)dq\`. The actual full-line estimate is
+\`\`\`
+|V_tail| ≤ (32 L6/t) [
+  (1/163840) (1+log(t/(2π))/(2π)+10/(π t²))
+  + 1/(524288 π)
+].
+\`\`\`
+The exact antiderivatives are \`∫_8∞q^-6 dq=1/163840\`, \`∫_8∞q^-5 dq=1/16384\`; 1/524288π is the latter divided by 32π. This is **new source-specific quantitative control** of the whole exterior region, conditional on the same original selected W's finite \`L6\` and not uniform in t until \`L6(W(t))\` is paid.
+
+With \`G_W=6π(t/16)P_W''(0)\`, \`M0_core=∫_|q|≤8 |C_W|\`, \`M4_core=∫_|q|≤8 q^4|C_W|\`, the already-verified core and full Fourier second moment imply
+\`\`\`
+|V_W-G_W/(12πt²)| ≤
+   L6/(49152πt) + M4_core/(24576πt) + 800 M0_core/(πt³)
+   + (32 L6/t)[(1/163840)(1+log(t/(2π))/(2π)+10/(πt²))
+                 +1/(524288π)].
+\`\`\`
+No q-region, neutral crossing, or Fourier tail has been dropped. \`M2_tail\` exactly contributes the first \`L6/(49152πt)\` envelope using \`2∫_8∞q^-4 dq=1/768\`.
+
+**Main remaining W(t) problem:** source \`PostSixthAbsorb.exists_quarticFourSignedPolePair_with_strength_floor_and_negative_origin\` chooses \`R=min(1,R0,dTarget(t),dOrigin(t))/2\`, where the small-radius thresholds can depend on t. The previous uniform fourth-Lipschitz \`K0\` does NOT by itself bound the sixth-derivative L1 norm of the independently chosen W(t) uniformly. A new selected-W quantitative derivative envelope or cancellation estimate must be proved before promoting to a height-uniform estimate. No new universal Gamma sign is asserted.
+
+### D. Direct test against original TRUE post-sixth terminal: exact fail-closed floor
+
+Reuse Lean \`Cutset.combinedCluster_eq_tsum\`, \`NMu.completedSignedResidual_eq_combinedCluster\` and \`FourierTerminal.postSixthCanonicalSignedHighCut_iff_completed_plus_localSlack\`. With D_t original SAME-ordinate defect cluster, H_t full OFF-ordinate signed source, I_t full original Gamma/μ integral, S_t original nonnegative local budget slack, d_t the target defect:
+\`\`\`
+H_t-I_t=2D_t,
+Gap := H_t + S_t - (4d_t+I_t) = 2D_t + S_t - 4d_t.
+\`\`\`
+If a target off-critical zero exists, the paired reflection has SAME t, multiplicity, positive defect; original theorem \`two_target_le_combinedCluster\` gives \`D_t≥2d_t>0\`. Thus \`Gap≥S_t≥0\`. The desired strict terminal would require \`Gap<0\`, so it **cannot be established by rearranging** the already-complete Gamma/zero equality. The new Gamma full-tail estimate is an independent control of the density functional but does NOT pay the strict zero-side cancellation or selected-W uniformity. This recovers precisely why proving the strict terminal would rule out off-critical zeros if derived independently. Do not claim RH or GRH from the lower bound.
+
+### E. Flags, measured rather than pattern promoted
+
+The original quadratic moment gives \`P_W''(0)/(32t)\`, where \`32=16²/8=2^5\` after the 4/(πt) log core and inverse-cosine moment. It does not produce the unrelated BSD level-32 Fricke transformation. \`64 log N\` is conductor \`log N\` times the exact 128/2 density conversion, not \`log n\` prime powers. \`80=8×10\` and \`800=8×10²\`; therefore \`log_10 80=1+log_10 8\` and \`log_10 800=2+log_10 8\`, but original 80=8×(4+4+2) and 800=80×(10/π) after factoring 1/π from upstream Stirling. This is a legitimate scientific-notation conversion **not** the source of a \`log8\` contribution to μ or zero counts. \`768=3×16²\` from the exact sixth-derivative Fourier-tail primitive; no pants or source-geometry factor was inferred from 3 alone.
+
+**Local acceptance:** independent \`/tmp/rh_128_7_gamma_full.py\` (SymPy/mpmath) PASS: all 128 mask C2^7 actions, 128×128 mask combinations on the chosen encoded source state, 128×128 source equivariance matrix, 21 generator pairs, exact logarithm/ratio constants, both κ, T=200/800/2000, 12 q including 16 and four conductor values, strict signed terminal gap. Committed regression [\`scripts/check_rh_128_seven_independent_gamma_fulltail_20261123.py\`](../../scripts/check_rh_128_seven_independent_gamma_fulltail_20261123.py) is source-equivalent but not separately executed after GitHub upload. No Agda/Lean kernel / CI.
+
+**STATUS:** finite C2^7 action and actual original analytic Gamma-C2 involution mathematics established at source/independent local level; connecting the 7 factor model to 7 independent *physical* source operations is demonstrably not a symmetry of the fixed 128 coefficient. No Monster group action, no analytic selected-W group action, no GRH all-character zero-source weld, and no strict signed P0 proof.
+
+---
+
 # RH P0 — original 128 normalization to seven-bit / six-face Čech and native 3B×SSP C₂
 
 **23 November 2026. Branch:** RH/GRH PR #1533. **Status:** executable finite mathematical construction; Agda source-written but **kernel NOT run**; **no RH/GRH strict signed bound**.
