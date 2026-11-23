@@ -117,6 +117,6 @@ Locally executed Python/SymPy 1.14 [checker](../../scripts/check_ym_original_w3_
 - Formal truncated-power-series equality for arbitrary common vacuum coefficients a2,a3,a4,a5 and normalized connected orders 1..4 vanishing.
 - Independent exact SU2/SU3 substitutions and explicit wrong-normalization / missing-connected-channel negative controls.
 
-Source checker committed and read back via connector; exact uploaded bytes are **not** independently executed after upload. Agda kernel/CI not run. The continuous SU(N) cube source identity is based on analytic Haar/Schur orthogonality rather than any finite Q8 replacement.
+**Exact uploaded-byte local execution verified:** copied the committed script into the local Python/SymPy 1.14 runtime, all assertions PASS; `git hash-object` of the executed file equals GitHub's blob SHA `993a474c85498c28582fd1d95f490bc2cac7ffc8`. This is exact checker acceptance, not Agda kernel/CI or continuous Haar quadrature of arbitrary SU(N). Agda kernel/CI not run. The continuous SU(N) cube source identity is based on analytic Haar/Schur orthogonality rather than any finite Q8 replacement.
 
 **Status: normalized original-Wilson/F19 fifth-order calibration PASS; historically selected CMP119/122 T-source identification OPEN; all-tau / UV cutoff uniform W3, CMP116, E1/D1/D2/N1/G1 OPEN.** Prior Wilson/Haar/Bałaban source attribution and DASHI original F19 owner precedence retained.
