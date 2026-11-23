@@ -56,6 +56,20 @@ in dimensionless state/model time; no physical source power or measured efficien
 
 ---
 
+## P0 J31 proof target — direct fifteen-variable six-guard shooting inclusion (23 Nov 2026)
+
+**A much bigger route to the endpoint than another original J24 box-tightening loop:** [J30B exact augmented Schur theorem](../research/SmithFilsingerJ30BSixGuardAugmentedShootingSchur20261123.md) and [byte-identically executed SymPy exact rational regression](../../scripts/check_smith_filsinger_j30_six_guard_schur_20261123.py) (Git blob `e7726e5f65e9e0be1dc18787c85de24ea5594f0a`) establish the exact structural reduction for the **original nine state coordinates plus the six native crossing times**. With a prescribed seven-segment branch itinerary, define the **15-dimensional** residual `F=(X_tau(x0,t1..t6)-x0, g1(X(t1)),...,g6(X(t6)))`. The six event-time guard Jacobian `G_t` is lower triangular with diagonal the actual pre-event signed threshold slopes. Exact Schur elimination then proves
+
+    det D(F) = (prod_j pre_guard_slope_j) * det(M_tau-I_9).
+
+This is a general block/implicit-event algebra theorem and **does not imply the actual original hybrid derivative has been interval enclosed**. The source algebraic checker passes; six original crossing slopes are transverse on the *nominal* initial-value path, but actual periodic existence is still OPEN. Sign conventions must consistently preserve the downward crossing orientations.
+
+**J31 single big-bite construction:** assemble seven short independent high-order source-preserving Taylor/Lohner physical-mode IVP charts at the original six event times, with verified mode signs, nonzero signed slopes and no extra guard roots. Build a rational `15×15` inverse preconditioner `C`, validated interval `F(z0)` and full interval `DF(B)` on a nonzero rational 15D state+time box. Certify a direct Krawczyk inclusion `z0-CF(z0)+(I-C[DF(B)])(B-z0)⊂int(B)` with a strict contraction/uniqueness argument. This is an alternative to paying the arbitrary original J24 sixth radius-1e-4 state box first: that old 5/6 box diagnostic remains open, but is **not a logical prerequisite** when all original physical guards are instead revalidated directly on the 15D box. Avoid widening a single global 9D IVP tube through the whole source period.
+
+**Nothing prematurely promoted:** current J30 full source-period enclosure is still for one exactly chosen rational initial point; it includes initial coordinates in broad return intervals but has no proven exact periodic fixed point or certified `DP_tau(B)`. Uniform 5-parameter period-family theorem, measured original Filsinger pins, ambient HF wave input and 100% finite-loss delivery remain separately unpaid.
+
+---
+
 ## P0 J30 — full 6-event original-equation nominal return to exact τ, periodic fixed point OPEN (23 Nov 2026)
 
 **Significant maximum-cut result:** [J30 formal proof audit and source-period analysis](../research/SmithFilsingerJ30AllSixGuardFullSourcePeriodReturnValidated20261123.md) and [machine acceptance with exact nine-coordinate return intervals](../../Artifacts/smith-filsinger/j30_nominal_full_tau_return_enclosure_20261123.json) now confirm the physical original-equation **U/V both OFF, spark ON** flow after the sixth crossing through the exact original incident-wave fundamental period `τ=20π/11`. This reuses J25–J29 exact source-only state and mode construction. All six transverse crossing times remain certified for **one exact rational nominal initial state**; **5/6 original J24 full nine-coordinate event-state boxes remain paid**, the sixth box is still open. The sixth guard-state affine section projection improves its J24 coordinate inclusion from 0/9 to **3/9** but is not sufficient for full admission.
