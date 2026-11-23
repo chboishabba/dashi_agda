@@ -1,5 +1,15 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 23 November 2026 — original parser constructor source guard repair
+
+[Original-source/audited maximum-cut](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md). Direct reading of `Karp21FinFreeRawSparseWordVerifierExact.readRawGraphWord` and `Karp21NativeWholeBinaryGraphRuntimeExact` proves **the executable source parser uses a 3m≤suffix-length guard, NOT the additional test m≤n(n−1)/2**. The prior end-to-end reference had inserted the latter and charged a non-original n-squared numeric operation. On #1543 the phantom branch has been removed in both independent original and binary-side Python models, leaving all genuine gamma/zigzag/positive-threshold and history/first-enabled behavior intact. The **local corrected** 132,281-case differential still PASS, accepted 7,012, malformed 5,062.
+
+For a VALID parsed graph, strict canonical u<v<n increasing distinct edges imply m≤binom(n,2) by injection, but this is a *post-parse mathematical consequence*, not the runtime guard or a primitive instruction. The literal 3m guard establishes m≤|source word|/3 independent of gamma value n (which can be exponential in source-bit length). Native endpoint words have ≤|word| bits, stored chronological endpoints ≤2m, all original full-history equality comparisons ≤2m(m−1), positive/negative ledger widths bounded by source bits plus log(m+1), and the priority source run ≤m+1 rules. These do not count literal tape head moves, functional list allocations or temporary copies.
+
+**Original author/owner precedence:** retain `Karp21FinFreePairwiseQuadraticCountExact` (2m(m−1)), `Karp21NativeWholeBinaryPriorityMachineExact`, `Karp21NativeBinaryToOriginalRawMachineStepExact`, `Karp21NativeWholeBinaryFiniteRunExact`; no replacement parser/Agda theorem invented. Focus the unpaid E1 compiler as a **single F1/F2/F3/F4 physical TableProgram + bounded stuttering + all-heap polynomial**. Mathematical E2 original NP membership already known; universal `SATNotInP` remains mathematically independent, and is NOT approached by sparse certificate counts.
+
+
+
 ## 23 November 2026 — original Karp E1 end-to-end priority source maximum-cut
 
 **Larger source-level integration, not another NP-membership proof:** [Full original first-enabled and NS source ledger](ClayNonYMRHLargeBiteOriginalSourceReverseSolve20261123.md), [executable reference](../../scripts/check_karp21_original_priority_end_to_end_20261123.py). Reuses Karp21NativeWholeBinaryPriorityMachineExact, Karp21NativeBinaryToOriginalRawMachineStepExact, Karp21NativeWholeBinaryStepPotentialExact, Karp21NativeWholeBinaryFiniteRunExact and Karp21FinFreePairwiseQuadraticCountExact, not a new guessed source. The actual Elias gamma(n+1), gamma(m+1), m ordered signed zigzag triples, positive gamma W, no-suffix parser is replayed with all malformed/prefix/extra-certificate routes, positive/negative signed ripple ledgers and actual ordered priority advance/finish/reject.
