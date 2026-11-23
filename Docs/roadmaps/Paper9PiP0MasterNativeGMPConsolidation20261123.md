@@ -191,3 +191,132 @@ are consumer-equivalent and which are actually time-space Pareto.
 Only then promote one production default. Formal Agda
 instantiation and kernel replay remain OPEN; do not call this
 roadmap note a kernel proof or a completed machine cost theorem.
+
+
+## 23 November — COMP5g: real GMP heap execution-fibre and endpoint-lifetime Pareto
+
+**Reuses rather than replaces** the already existing execution-cost algebra:
+\`FibreProgramComplexityExact.agda\` sum/peak path consumers,
+\`EfficientRecoverableQuotientExact.agda\` construction/receipt/reopen
+costs, and \`StreamingResidencyComplexityErrorDNABidiExact.agda\`
+same-outcome residency refactoring. Original Paper 9 §10 is the
+bit-cost model; these additions are native *measurements* for its
+concrete Chudnovsky P/Q/T execution path, not new Agda kernel proofs.
+
+Source \`scripts/check_pi_p0_fibre_cost_profile.cpp\` is a separately
+preserved instrumented derivative of original
+\`scripts/check_pi_gmp_codec_memory.cpp\`. Each merge records the
+**four ordered product operands** (P_L P_R, Q_L Q_R,
+T_L Q_R, P_L T_R), one additive combination, max operand and result
+bit widths, full tree merge count, schoolbook product bit-pair
+PROXY and an explicit live-carrier-capacity PROXY. It retains both
+baseline and in-place variants and exact π SHA-256 consumer.
+An installed-before-initialization GMP memory allocator callback
+measures actual **GMP-managed live bytes** with alloc/realloc/free
+size accounting and peak. This does not include the non-GMP C++
+heap, OpenSSL scratch, allocator internal fragmentation or kernel
+page residency. Thus an independent Linux process image VmHWM
+is measured too. Beware ru_maxrss may inherit the Python parent's
+prior high-water on fork/exec; the raw ru_maxrss column is retained,
+but process \`/proc/self/status\` VmHWM is used in comparisons.
+
+The arithmetic work at d=1M is exactly:
+n=71,430 leaves, 71,429 internal merges, 285,716 ordered
+P/Q/T scalar-integer product sites, and 71,429 additive sites
+per full binary tree. The child-operand bit-width model reports
+\`74,635,285,787,351\` schoolbook bit-pairs, largest operand
+3,746,858 bits, result 7,279,373 bits and max recursion depth 17.
+This is **NOT** an observed CPU instruction count or a GMP
+multiplication-complexity theorem. The original ordinary
+\`O(M_int(d log d) log d)\` model remains authoritative.
+
+At d=1M, in the isolated instrumented local source:
+baseline expression-temporary explicit carrier-capacity peak
+4,618,336 bytes, in-place carrier-capacity peak 2,309,552 bytes.
+However the actual GMP-heap peak is the **same** in both modes:
+23,074,600 bytes. The terminal endpoint/quotient phase dominates
+and makes this a negative overall memory result for carrier reuse.
+
+**New tested optimization:** \`scripts/check_pi_p0_endpoint_lifetime.cpp\`,
+a derivative of the instrumented original, computes both
+series endpoint numerators/denominators while P/Q/T is still
+available, then uses \`std::move(s.t)\` and
+\`std::move(s.q)\` to transfer the original numerator and
+denominator into the terminal consumer and destructs
+\`s.p\` via a scoped GMP swap BEFORE large products, division and
+serialization allocate. No leaf permutations, truncations, GCD
+changes or heuristic certification. Exact same accepted π
+decimal SHA-256 at 100k, 500k, 1M; all have one successful
+certificate attempt, with original Chudnovsky analytic premise.
+
+Local separately constructed C++ sources
+\`/mnt/data/pi_fibre_alloc_local.cpp\` (retained)
+and \`/mnt/data/pi_fibre_endpoint_move_local.cpp\` (released)
+were compiled using g++ -O3 -std=c++17, linked GMP/OpenSSL;
+they implement the exact same source-level algorithm but were
+not byte-identical compilations of the committed new C++ files.
+The original committed files were read back from GitHub; the
+new exact-source runner is SOURCE-COMMITTED and not yet executed
+from a checked-out clone of this PR.
+
+Independent initial single-run receipts:
+| digits | mode | heap live peak bytes | process RSS KiB | time ms |
+|---:|---|---:|---:|---:|
+| 100000 | retain | 1,970,336 | 5,556 | 42.170 |
+| 100000 | release | 1,766,088 | 5,420 | 42.041 |
+| 500000 | retain | 11,385,168 | 15,888 | 282.456 |
+| 500000 | release | 10,270,752 | 14,816 | 288.416 |
+| 1000000 | retain | 23,074,600 | 27,800 | 672.598 |
+| 1000000 | release | 20,765,464 | 25,948 | 694.804 |
+
+Fresh 5-run alternating mode medians, each separate native process;
+Linux VmHWM (not inherited ru_maxrss):
+| digits | mode | runtime median ms | runtime range ms | GMP heap peak bytes | VmHWM median KiB |
+|---:|---|---:|---:|---:|---:|
+| 100000 | retain | 42.365 | 40.98–42.74 | 1,970,336 | 5,620 |
+| 100000 | release | 42.651 | 41.69–43.69 | 1,766,088 | 5,420 |
+| 1000000 | retain | 689.851 | 667.93–723.76 | 23,074,600 | 27,800 |
+| 1000000 | release | 697.337 | 673.96–741.33 | 20,765,464 | 25,952 |
+
+For 1M, exact GMP-heap reduction is 2,309,136 bytes (10.007%),
+median process VmHWM reduction 1,848 KiB (6.65%).
+The runtime distributions overlap; a ~1.1% median time penalty
+in these particular runs is **not** established as a robust change.
+Memory gain is reproducible within this local test.
+All four precision/mode outputs agree with pinned historical
+SHA-256 digests, including 1M
+\`130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18\`.
+SHA parity is a regression; the underlying exact integer interval
+admission is the semantic consumer.
+
+New exact-source reproduction runner:
+\`scripts/check_pi_p0_cost_fibre_pareto.py\` uses Git blob
+hash checks and local C++17 compilation of the committed
+instrumented retained and released sources; for each precision
+it runs three program variants (baseline expression temporaries,
+in-place carrier reuse, in-place plus released endpoint P/Q/T)
+in deterministic rotated order in independent processes, checks
+exact digit hashes and structural P/Q/T counts, and constructs a
+three-coordinate empirical Pareto frontier (time, real GMP peak,
+Linux process VmHWM). It reports no statistical significance
+without enough evidence and does not infer a formalized
+source-to-consumer equivalence or an external record.
+Run from branch checkout:
+
+\`\`\`bash
+python3 scripts/check_pi_p0_cost_fibre_pareto.py \
+  --digits 10000 100000 500000 1000000 --reps 5 \
+  --out build/pi-p0-cost-fibre-pareto.json
+\`\`\`
+
+**P0 next big bite**: extend the measured live-heap stage lifetime
+ledger to reduce the large terminal numerator/denominator
+products; consider operand factor sharing, multiplication-buffer
+reuse, and early scope release. Re-estimate exact height and time
+cost with \`M_int\` and \`D_int\`, with measured bit-width traces
+as inputs; keep the lowest-memory variant available for a fixed
+RSS envelope, but promote a latency default only after matched
+runs and verified semantic equivalence. The classical analytic
+Chudnovsky identity, Bishop same-original-real certificate,
+formal Agda execution-fibre instantiation and external world-SOTA
+comparison remain OPEN.
