@@ -1,3 +1,68 @@
+## 23 November 2026 — next same-source WELD: actual ζ-zero signed FAR buckets, not just Fourier-response roots
+
+The already-existing Lean theorem QuarticFourSignedPolePair.signedLiteralPairSourceTerm_eq_normalizedPairKernel (in RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean around line 415) establishes an **EXACT per-actual-zero identity** for any sigma outside SameOrd(t):
+
+  W.signedLiteralPairSourceTerm sigma
+    = mult(sigma)/(t/16)^2
+      * W.signedNormalizedPairKernel
+          (heightOf(sigma)/(t/16))
+          ((Im sigma-t)/(t/16)).
+
+The newly certified K(R,t,a,q) **is this original same-source signedNormalizedPairKernel** for the selected original smooth J2-null four-window endpoints, with original finite pole coefficients and genuine horizontal normalization. No extra invented ζ/Fourier identification is required to USE the kernel to estimate per-zero contributions. We still must supply the original W inhabitant with selected fixed R and the target-band data if demanding a Lean-typed theorem; the quantitative sign bounds themselves are source-conditional at those endpoint values.
+
+The rational q error <0.058 R² holds for the FULL fixed interval |q-4|<=2sqrtR, not just selected q values, so we can sharpen to entire **positive and negative source sets**:
+
+  positive core B_+(t):
+    |q-4| <= (1/2)*sqrtR,
+    K(R,t,a,q) > (11/100) R²,
+    all |a|<=1/2, t>=1e14.
+
+  two negative thin shells B_-^(L/R)(t):
+    (99/50)*sqrtR <= |q-4| <= 2sqrtR,
+    K(R,t,a,q) < -(3/5) R².
+  (The exact worst-case leading upper at |x|=99/50, m2<=1 is
+   60/13 -(5/1404)*(157/50)^4*(99/50)^4<-0.705,
+   so adding the worst error <0.058 still gives <-0.6.)
+
+Let r=t/16 and let N_t(B) denote the ORIGINAL zetaZeroConfig.N(A,B) count with its actual multiplicities for the corresponding ordinate half-open window (A,B]. Since every literal zeta zero has |heightOf(sigma)|<=1/2, the **actual source zero SUMS** over these disjoint far buckets obey
+
+  SUM_positive(W,t)
+  = sum_{sigma: q_sigma in B+} W.signedLiteralPairSourceTerm(sigma)
+  >= (11/100)*R²/r² * N_t(B+).
+
+  SUM_negative(W,t)
+  = sum_{sigma: q_sigma in B-} W.signedLiteralPairSourceTerm(sigma)
+  <= -(3/5)*R²/r² * N_t(B-).
+
+All factors mult(sigma) and r^-2 are original positive source factors; NO collapse of signed multiplicities or recovered zero coordinates. The strictness is whenever each bucket contains at least one zero.
+
+The actual original RvM arbitrary-endpoint bound (Synthesis/RiemannZetaMuZeroCountOneSided.lean) gives for sufficiently large A and A<B,
+
+  N(A,B) >= integral_A^B Zeta23.mu(tau)d tau
+            - C*(log(A+3)+log(B+4))
+
+for original-source existential C>=0 and onset T0. The original explicit mu lower envelope (RiemannProjectiveQuarticFourWindowSignedPoleV4EndpointAbsorb.lean) is
+
+  mu(tau) >= [log(A/(2pi)) -20/A²] /(2pi),
+  for tau>=A>=1.
+
+Consequently for each bucket of physical width ell=B-A,
+
+  N(A,B) >= ell*[log(A/(2pi))-20/A²]/(2pi)
+             - C*(log(A+3)+log(B+4)).
+
+The physical widths at t=1e14 are EXACTLY:
+  full positive core width r*sqrtR = 62,500,000;
+  each negative thin shell width r*(sqrtR/50)=1,250,000.
+
+For fixed R=1e-10 these widths grow LINEARLY in t while the RvM error is O(log t); since mu(A)~log t/(2pi), EACH band contains actual zeta zeros for **all sufficiently large t** (there is an existential threshold T depending on the original unknown C,T0). This is a new logically sound *actual-zero* consequence: at sufficiently high t the SAME exact literal far source has both strictly positive and strictly negative nonempty subwindow contributions. It neither locates a ζ zero at a Fourier-response root nor proves any zero is off the critical line. Do NOT assert this nonemptiness at the fixed t=1e14 from the present existential-C Lean theorem alone.
+
+**Important limitation:** positive and negative signed buckets coexist; their ratio, the complement outside the buckets, the entire fullMuIntegral and center-density/variation, and the nonnegative post-sixth local slack are unbounded in the direction needed for the original RH terminal. Bucket signs cannot be summed without retaining the complement and actual number/density/magnitude. A strictly signed A2/GRH conclusion still requires precisely Lean's LiteralFarMinusMuUniformHighEstimate for the SAME selected witness W. The newly closed q-window provides a usable source-specific decomposition, not a complete FarExact bound.
+
+LOCAL exact-source rational checks for FULL q bands and widths appended to scripts/check_rh_original_bump_fixedR_qwindow_20261123.py (commit 35b380e7); full independent local SymPy script also PASS. No Agda/Lean kernel, no CI or GRH/RH proof.
+
+---
+
 # RH P0 — fixed-radius finite-pole and horizontal-uniform Fourier-notch certificate (23 November 2026)
 
 **Original owner:** Lean Synthesis/RiemannProjectiveQuarticFourWindowAtomic.lean, RiemannProjectiveQuarticFourWindowPoleSameObject.lean, RiemannProjectiveQuarticFourWindowSignedPolePair.lean, RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean; prior source regressions check_rh_original_bump_explicit_radius_20261122.py and check_rh_original_bump_q4_sqrtR_boundary_layer_20261123.py. New rational regression scripts/check_rh_original_bump_fixedR_qwindow_20261123.py on RH PR #1533. The full local SymPy script was executed successfully. No Lean/Agda kernel or GitHub CI.
