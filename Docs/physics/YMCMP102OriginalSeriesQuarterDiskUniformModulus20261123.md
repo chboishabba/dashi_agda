@@ -69,3 +69,33 @@ DASHI_REPO_ROOT="$PWD" scripts/run_agda29_parallel_check.sh DASHI/Physics/YangMi
 ```
 
 In the current execution environment, neither Agda nor Nix is present and network cloning is unavailable. **No compiler was run; the kernel/import-safety gate remains OPEN.** Independent physical CMP119/122 T, absolute W3 and same-H OS remain entirely unpromoted.
+
+
+## 23 November 2026 — local SymPy all-degree independent acceptance (instead of Agda/Lean)
+
+Executed Python 3 with **SymPy 1.14.0** locally, not GitHub CI and not Agda/Lean. The committed independent checker is
+[scripts/check_ym_cmp102_sympy_source_certificate_20261123.py](../../scripts/check_ym_cmp102_sympy_source_certificate_20261123.py) from commit [78937348](https://github.com/chboishabba/dashi_agda/commit/78937348be3a214f66ce83d53fe86400b35a73f4), Git blob **768a766a567c74b58b25de79efe6f8e579eb1d20**, verified byte-identical against the locally executed file (SHA-256 \`9109433495d14a8dd6cae11477dc21b476fb72c04b36b067cbfa6c29a0e4026a\`). Result: **2,602/2,602 exact assertion groups PASS**, including generic symbolic n, original 128 explicit coefficient degrees, 48 finite prefix polynomials, 240 signed original-radius boundary samples, 48 omitted-endpoint negative controls and factorial/majorant/tail constants.
+
+Crucially, the generic **all-degree symbolic** cancellation is not extrapolated from those 128 degrees:
+
+\`\`\`text
+sum_{k=0}^{2n+2} (-1)^k binomial(2n+2,k)
+= (1-1)^(2n+2) = 0, for all n>=0.
+\`\`\`
+
+Even/odd split of the original \`exp(z)*exp(-z)\` coefficient reproduces *exactly* the source CMP102 shifted Epart/Opart including the odd degree-0 singleton and both even/odd endpoints. SymPy independently reduces the original same-series function after the analytic substitution \`X=z**2\`:
+
+\`\`\`text
+E = 1+X*A = cosh(z)
+z*(1+X*B) = sinh(z)
+X*G = 1-E**2+z**2*(sinh(z)/z)**2
+    = 1-cosh(z)**2+sinh(z)**2 = 0.
+\`\`\`
+
+\`G(0)=0\` is verified through the removable origin. This also gives an *ordinary complex-entire analytic identity* when the factorial functions are continued, **without changing the original Bishop CMP109 construction domain** \`|X|<=1/4\`.
+
+The positive factorial majorants are unchanged: \`A_N(1)<=6/11\`, \`B_N(1)<=10/57\`, \`L1<=1089001/393129<3\`. For every N>=1 the original \`G_N\` coefficients vanish below degree N, and its first surviving coefficient is precisely **2a_N**. Hence the same uniform estimate \`|G_N(X)|<=3*4^-N\` and original tail modulus hold across all real \`|X|<=1/4\`. The coefficient and norm conclusions follow symbolically from finite algebra, ratio inequalities and the binomial identity; grid evaluations are regression controls, not the proof.
+
+### Acceptance boundary
+
+This is mathematical/SymPy closure of the all-degree analytic CMP102 A/B identity against the original factorial histories. It **does not** elaborate Agda, certify the original Bishop \`Seq._ConvergesTo_\` theorem \`originalGPrefix -> 0\`, fix the documented \`--safe\` import graph, identify the CMP102 native quaternion/chord physical source, or supply any original CMP119/122 physical T, absolute W3 or same-H OS mass gap. The Agda source \`originalGZeroFromOriginalPrefixConvergence\` still requires that explicit Bishop zero-convergence input; do not confuse the SymPy certificate with an inhabitant of that type. No Clay result is promoted.
