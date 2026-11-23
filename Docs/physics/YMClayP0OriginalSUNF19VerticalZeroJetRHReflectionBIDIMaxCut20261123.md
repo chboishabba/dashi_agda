@@ -67,3 +67,30 @@ But the uninhabited source fields are explicit in the real code. R494 literal ab
 Full executable local source in sandbox: /mnt/data/ym_p0/check_ym_sun_f19_zerojet_rhline_20261123.py, Python/SymPy exact PASS (all 1536 source plaquettes, N2/3/4/5, three disjoint six-face stars, 64 W, source Gibbs/1/F/G/FG jets, true SU(N) gauge conjugation, RH xi-type parity and off-line countermodel, reflected pair poles, transfer scaling). Committed compact source-equivalent script: scripts/check_ym_p0_sun_f19_vertical_zero_rh_jet_20261123.py. The compact copy was not separately locally executed byte-for-byte, so no such claim is made. No native Agda/Lean kernel, CI or proof of RH/Clay gap.
 
 Attribution: Wilson, Haar, Faddeev–Popov, Bałaban CMP98/109/116/119/122, Osterwalder–Schrader, Riemann xi functional equation, original DASHI SU(N) and fine/coarse R445/F19, RH #1533 and TOE H05 #1291 signed-zero source owners.
+
+## F. Stronger full continuous SU(N) F19 Haar result — positive conditional fine-Wilson variance
+
+This is MORE than a selected field-space curve: it follows analytically for the ORIGINAL full finite continuous SU(N) product-Haar Wilson density, with no Z2 restriction or spectator deletion. It does NOT require a new Haar constructor: original YMClaySUNWeightedDisjointPairFibreReparamExact and YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact already supply the one-source 64-pair/896-spectator Haar disintegration.
+
+For ANY selected complete 64-holonomy coarse field W, fix all F19 fine pair-fibre variables and 896 spectators EXCEPT the Haar variable V of the marked source pair U=W V^-1. The closed fine plaquette F includes U (one positive source edge) but does NOT include its next-bond partner V. Holding all other source variables fixed, its holonomy is a fixed left/right translate of V^-1, hence Haar-distributed in SU(N) under the reference product-Haar fibre. In particular, its normalized real-trace F has Haar mean zero and Haar variance
+
+    v_N = 1/4 for N=2;
+    v_N = 1/(2 N^2) for N>=3.
+
+The standard facts follow from irreducible fundamental-character orthogonality: E_Haar |Tr U|^2=1, and E_Haar (Tr U)^2=0 for N>=3 (also from a nontrivial SU(N) centre phase z^2), while SU(2) has real fundamental trace and E(Tr U)^2=1. The local SymPy regression directly checks the SU(2) Weyl class integral with normalized density 2 sin²(theta)/pi: E cos(theta)=0 and E cos²(theta)=1/4. N>=3 imports the standard Schur/Peter-Weyl character identity; no claimed independent SymPy integration of arbitrary SU(N).
+
+When V varies with U=W V^-1, ONLY the two disjoint native six-plaquette stars incident to U and V can change. All 12 plaquette normalized deficits d_p=1-ReTr(P_p)/N lie between 0 and 2. At physical beta>=0, the conditional V-dependent original Wilson Gibbs factor exp(-beta sum_of_12 d_p) is bounded between exp(-24 beta) and 1. Upon normalization over V against Haar, the probability density is therefore >=exp(-24 beta) pointwise. For ANY real constant c and ANY frozen other original F19 variables,
+
+    E_Wilson[(F-c)^2 | W, others]
+      >= exp(-24 beta) E_Haar[(F-c)^2].
+
+Take infimum over c to get conditional variance at least exp(-24 beta) v_N. The law of total conditional variance, averaging all 63 other native V fibres and all 896 spectators under the ACTUAL one original interacting Wilson density, yields for every W:
+
+    Var_Wilson(F | W)
+       >= exp(-24 beta) * {1/4, N=2; 1/(2N^2), N>=3} > 0.
+
+This is a FINITE-VOLUME, FULL CONTINUOUS SU(N) PRODUCT-HAAR, source-specific theorem, not a centre-slice toy: fine closed Wilson F is NOT measurable as a function of the 64 coarse W alone even almost surely. By Haar full support and strict Wilson positivity, both fine-F sign sectors have positive conditional probability for every W; the exact F=0 crossing itself is a measure-zero hypersurface in generic fibres. The retained sign is information about the fine observable and/or first jet, NOT proof of two independent spatial zeros, two Hamiltonian vacua or a separate physical zero-energy oscillator.
+
+**Cutoff warning:** exp(-24 beta(a)) tends to zero along beta(a)->infinity; this inequality is not uniform in the weak-coupling continuum cutoff, is NOT a positive lower bound on an OS nonvacuum spectral gap, and does NOT bound the original distinct two-mark F,G covariance (which may cancel after integration). P0.T actual CMP119/122 localized density, true absolute CMP116/W3 source coupling and physical rate, original RP/OS same H remain open. We have paid the original *fine-to-coarse SufficientConsumer nonfactorability* at finite Wilson Haar, not the Clay mass-gap problem.
+
+This new source certificate is added to the committed compact checker using the original twelve-plaquette incidence, SU2 exact Weyl integral and symbolic exp(-24 beta) bound. Independently extended local Python/SymPy checker has rerun and passed. Classical compact-group Schur orthogonality is an imported mathematical identity, not a new Agda kernel receipt or a claimed local SU(N) full manifold integration.
