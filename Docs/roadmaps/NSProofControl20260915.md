@@ -1,5 +1,15 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — rational source P0 and arbitrary-output fifth-degree padding obstruction
+
+[**Primary all-rational source geometry and exact theorem**](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md), [**executed exact SymPy regression**](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py), Git blob `892b4e5ab5c3542768038f8c6bbccc5fa8d83def` (matches locally executed file). This supersedes the earlier sqrt(2)/sqrt(226) construction as the preferred physical input realization and is completely different from the original Leray-null axial negative control.
+
+Original Fourier output k=(83,64,0), all four selected p/q input modes have **integer Euclidean norm**, so the actual P_+u(p)×P_-u(q) helicity products and exact source amplitudes are rational. The strict Round25 deep-far-low cell `p=(3,4,0), q=(80,60,0)` has genuine nonzero coherent work -1/2, and the fixed projected mixed M=(0,0,1)=P_k M. Free source parameter t gives modal coefficients (64t/15−5/4, 25/28, −13t/3, t), W=2 and V=22450−167488t/5. For the **same physical field** t=−1/4, V=154122/5, the complete carrier gives at C83 N=1,444,884, signed S=−33,634,973,008/5; at C100 N=3,249,366, signed S=+73,504,991,408/5. Zero-work original spectator incidences are included. This is a source-level sign change even with a NONZERO transverse output; no global NSE solution constructed.
+
+**Arbitrary-output geometric theorem:** For fixed original k and C covering its components, `n_j=2C−|k_j|+1`, `N_C=Πn_j`, `R_C/N_C=ν[|k|²/2+Σ(n_j²−1)/6]`. For any fixed finitely Fourier-supported velocity with M≠0 and `W=2||M||²`, the original uncompensated centered R236 source is `S_C=R_C W−N_C V=32ν||M||² C^5+O(C^4)`. This is an exact arithmetic theorem, independently checked on **1,224** finite cubic modes and symbolically. The existing `NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact.centeredPairCovarianceAppendZero` ALREADY owns general zero-work padding; only the rational physical realization and cutoff exact shape are new. **Original nested signed R568 spacetime source and physical cutoff-uniform estimate remain OPEN**: do NOT confuse R236 source diagnostic with R568 itself. Reuse original R541/R542/R573/R547/R568 weld; cancel spectator terms before norms.
+
+
+
 ## 23 November 2026 — projected-output geometry correction and exact spectator-cutoff BIDI
 
 **Primary new source-specific maximum-cut:** [transverse physical source, exact cutoff sign reversal, prior-owner audit and reverse-solved R568 gate](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md), [executed exact SymPy script](../../scripts/check_ns_transverse_large_bite_20261123.py), Git blob `36c9b14784b5d4fe9c6cb4874b312e572ecdc3f0` (matches locally executed file).
