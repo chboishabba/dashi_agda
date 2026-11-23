@@ -70,8 +70,10 @@ def trig_bounds(t0,t1):
     assert 0<a<=b<1
     l=sin_rational_0_to_1(a);u=sin_rational_0_to_1(b)
     sinx=I(l.a,u.b,raw=True)
+    assert sinx.a>0 # cosine derivative is negative on this angle sector
     l=cos_rational_0_to_1(b);u=cos_rational_0_to_1(a)
     cosx=I(l.a,u.b,raw=True)
+    assert cosx.a>0 # sine derivative is positive on this sector
     return sinx,cosx
 
 def sqrt_03():
@@ -146,6 +148,7 @@ def jacobian_infinity_lipschitz_bound(tube):
     # Divide [0,1/11] into four equal time parts; 1/44 * L < 1.
     assert upper*1 < S*44
     return dict(max_infty_jacobian_norm_upper=ceil_div(upper,1)/S,
+                exact_Jacobian_row_norm_upper_integer=upper,
                 time_part_for_picard_contraction='1/44',
                 strict_contraction_on_each_part=upper < 44*S,
                 conservatively_bounded_by_44=True)
@@ -173,6 +176,8 @@ def run(h=F(1,11)):
         radii=[max(r,ceil_div(26*q,25)) for r,q in zip(radii,required)]
         assert max(radii)<10*S,'Picard tube too wide'
     assert included,'Picard enclosure failed'
+    picard_slack=[min(c.a-t.a,t.b-c.b) for c,t in zip(cover,tube)]
+    assert min(picard_slack)>=0
     gu=tube[2]-tube[4]-PARAM['Vd']
     gv=tube[3]-tube[4]-PARAM['Vd']
     gs=tube[4]-PARAM['Voff']
@@ -182,8 +187,11 @@ def run(h=F(1,11)):
     return dict(status='PASS_VALIDATED_LOCAL_FLOW_TUBE_PICARD',duration=str(h),
       initial_state_halfwidth='1e-7',iterations_to_exact_inclusion=n+1,
       radii=[I(v,v,raw=True).asfloat()[0] for v in radii],
+      radii_integer_grid=radii,
+      exact_Picard_self_inclusion_slack_integer_grid=picard_slack,
       diode_U_guard_interval=gu.asfloat(),diode_V_guard_interval=gv.asfloat(),
       spark_off_guard_interval=gs.asfloat(),
+      exact_guards_integer_grid=dict(U=[gu.a,gu.b],V=[gv.a,gv.b],spark_OFF=[gs.a,gs.b]),
       exact_picard_inclusion=True,initial_spark_mode='ON',
       verified_guard_free_segment=True,local_lipschitz=local_lipschitz,
       exact_integer_outward_rounding_scale=str(S),
