@@ -116,6 +116,35 @@ def test(t):
     # Linearized basic Weil prime sample: signs reverse under eps -> -eps
     signed_gain=prime2**2+prime3**2
     assert signed_gain>0 and (-signed_gain)<0
+    # Projective signed two-endpoint channel (ATOMIC endpoint response limit).
+    # The sign/size of the full prime summand in the original Lean test remains
+    # a separate same-source explicit-formula weld, not assumed here.
+    def atomic_pole(lam):
+        mu=float(mu0(lam)); lam=float(lam)
+        centres=[0,np.pi/3,np.pi/2,np.pi]
+        weights=[1,-1,lam,mu]
+        def pair(weight):
+            return sum(cw*weight(u) for cw,u in zip(weights,centres))
+        on1=pair(lambda v:np.cos(v))
+        on2=pair(lambda v:np.cos(2*v))
+        pole1=pair(lambda v:np.cosh(8*v/t)*np.cos(16*v)*np.cos(v))
+        pole2=pair(lambda v:np.cosh(8*v/t)*np.cos(16*v)*np.cos(2*v))
+        return pole1*on2-pole2*on1
+    ph=atomic_pole(lam_half);pt=atomic_pole(lam_two)
+    a1h,a2h=[float(x) for x in a]
+    a1t,a2t=[float(x) for x in b]
+    projected=[]
+    for prime,u in ((2,log2),(3,log3)):
+        bh=a1h*np.cos(2*(t/16)*u)-a2h*np.cos((t/16)*u)
+        bt=a1t*np.cos(2*(t/16)*u)-a2t*np.cos((t/16)*u)
+        # First derivative of the projective signed profile at each prime,
+        # relative to independent perturbations of the two endpoints.
+        phalf=4*pt*bh
+        ptwo=-4*ph*bt
+        projected.extend([phalf*np.cos(t*u),ptwo*np.cos(t*u)])
+    assert max(abs(x) for x in projected)>0.01
+    print('  atomic projective two-prime phases',
+          [f'{x:+.5f}' for x in projected], '(fixture; Lean weld pending)')
     print(f'  candidate scalar prime phases w2={prime2:+.8f} '
           f'w3={prime3:+.8f}; both-sign perturbations are possible')
 
