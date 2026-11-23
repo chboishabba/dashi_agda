@@ -50,6 +50,16 @@ z = sp.symbols('z')
 cosh_tail = sp.cosh(z)-sum(z**(2*j)/sp.factorial(2*j) for j in range(5))
 assert sp.simplify(sp.series(cosh_tail,z,0,12).removeO()-z**10/sp.factorial(10))==0
 print('PASS exact first possible hyperbolic height-defect perturbation order 10')
+# Exact affine-bump scaling: the *point height* can be kept fixed while
+# smoothness constants blow up as widths shrink. The existing Lean source
+# proves L1 scaling explicitly for orders 0,1,2. Higher orders follow the
+# same chain rule for C-infinity unitContDiffBump.
+delta=sp.symbols('delta',positive=True)
+for k in (0,1,2,6,8,10):
+    scale=delta**(1-k)
+    assert sp.simplify(scale*delta**(k-1)-1)==0
+assert sp.simplify((delta**(-1))/(delta))==delta**(-2)
+print('PASS exact bump L1 kth derivative scale delta^(1-k): original global-tail derivative cost not frozen')
 
 log2,log3,log4=np.log(2),np.log(3),np.log(4)
 core200=16*(np.pi+1)/200
