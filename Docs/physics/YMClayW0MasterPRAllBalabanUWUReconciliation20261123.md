@@ -89,3 +89,18 @@ Search of GitHub's default-branch code index for literal `UWU`, `U_W_U`, `U_W(U)
 ## Verification
 
 Github master and multiple PR heads inspected with direct Agda file readbacks, PR metadata and changed-file lists. This is a **source/provenance audit**: no local Agda toolchain/kernel, no new executed SymPy numerical result, no CI, no all-PR/all-paper completeness certificate. Structural predicates tagged `machineChecked` were not promoted to physical theorems. Keep Wilson/Haar; Bałaban CMP95/96/98/99(1)/(3)/109/116/119/122; Dobrushin–Föllmer; KP; and original DASHI contributor attribution separate.
+
+
+## Constructor-use search against the current master code index (not a proof of absence)
+
+After the first provenance update, searched exact **definition and consumer symbol uses** on the current default-branch GitHub index:
+
+- `CMP119Equation218FactorizedFunctionalData`: 5 indexed file hits, declaration plus abstract `Factor` consumer/compiler parameters, including `BalabanCMP119Equation171WeightedStepApproximationExact` and CMP119 Antigravity contribution compilers. **No native original Wilson/F19 concrete record inhabitant in those hits**. This is a bounded search result, not exhaustive across PR heads, aliases or unindexed definitions.
+- `sourceApplicationIsEquation171Mass`: 7 master hits; in inspected Eq171 source-limit/physical-realization owners, the source equality is a **record field**. A compiler consuming it is not its original-Wilson source proof.
+- `LiteralWilsonMarkedLocalizationSource`: 3 master hits: its declaration, `YangMillsProjectiveMereologyBridgeExact` supplied source parameter, and `BalabanLiteralTwoWilsonR556CompletionExact` downstream compiler. **No original source-created inhabitant in these exact hits.**
+- `chargeSumBelowPhysicalRootedShell`: 5 master hits, four documentation and a **field definition** in `BalabanLiteralTwoWilsonCMP116ConnectingTailExact`. No inspected source estimator inhabits it.
+- `normalizedWilsonResponseIsMarkedMixedDerivative`: two master hits, existing WEXT/theorem data-field declaration and marked-localization source, not a separate original-physical proof.
+- `sourceTAt`: 2 master hits, the original Eq171 weighted-step and Antigravity step approximation input fields. The concrete source step family was not discovered in these direct hits.
+- `BetaDrivenCompleteDensityInputs`: GitHub search cap reached ≥95 master hits across Balaban YM, CMP119/Antigravity, casimir, stress and other consumers. **This is ubiquitous**; it would be false to call the beta-driven record missing. Need the exact original Wilson/F19 single-family **inhabitant** plus its equality, not another record.
+
+This search materially improves the status wording: all *compiler* definitions and many typed data owners are recovered; the only unresolved claim is their actual **same-original-source instantiation with source operator equality**. Do not infer mathematical impossibility or no implementation from one code index.
