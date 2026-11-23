@@ -1,0 +1,144 @@
+{
+  "date": "2026-11-23",
+  "status": "J30_PASS_NOMINAL_SIX_EVENT_EXACT_IRRATIONAL_TAU_RETURN_ENCLOSURE_BUT_NOT_PERIODIC_FIXED_POINT",
+  "pr": 1537,
+  "base": "master",
+  "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "provenance": {
+    "source": "original source-only nine-state J18 equations independently transcribed in J25–J30 exact rational scripts",
+    "synthetic_wave_not_naturally_identified": true,
+    "driver_on": false,
+    "original_numerical_J18_source_byte_executed": false,
+    "github_ci_used": false,
+    "agda_kernel_used": false
+  },
+  "proof_scope": {
+    "initial_condition": "exact rational nine-dimensional J23 numerical seed (not proved periodic)",
+    "nominal_only": true,
+    "physical_original_filsinger_terminal_or_meter_verified": false
+  },
+  "six_original_hybrid_crossings_unique": true,
+  "original_J24_six_guard_boxes_paid": 5,
+  "sixth_J24_event_state_box": {
+    "initial_J29_original_membership": 0,
+    "J30_correlated_section_projection_membership": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    "final_all_nine_state_box_paid": false,
+    "exact_section_projection_code_sha256": "0a17c4c8dde41851d6ba6b74d0464c304691f3bfa09035d061c2729e88e9536f"
+  },
+  "sixth_U_OFF_handoff": {
+    "bounded_original_root_time": [
+      "118763222704486979432589457030223322057/24096899911609601083074179150560000000",
+      "118772079990387566784735834168684442057/24096899911609601083074179150560000000"
+    ],
+    "use_fixed_rational_right_endpoint": true,
+    "both_smooth_mode_Picard_inclusions": true,
+    "virtual_U_on_to_physical_U_off": "diode current continuous and exactly zero at threshold; no state reset",
+    "guard_U_derivative_negative_in_both_modes": true,
+    "state_handoff_added_error_each_coordinate": "1/1000000",
+    "handoff_state_error_actual_less_than": "1/1000000",
+    "fourth_and_fifth_event_welds_preserved": true
+  },
+  "after_sixth_event": {
+    "mode": "U diode OFF, V diode OFF, spark ON",
+    "validated_segments": 78,
+    "each_segment_length": "1/100",
+    "starting_time": "118772079990387566784735834168684442057/24096899911609601083074179150560000000",
+    "last_rational_checkpoint_time_approx": 5.708936104895576,
+    "whole_time_diode_and_spark_guards_validated": true,
+    "exact_rational_Taylor_order": 52,
+    "signed_peano_baker_endpoint_order": 8,
+    "monotone_fulltime_absolute_jacobian_comparison": true,
+    "interval_rounding_grid": "10^30"
+  },
+  "irrational_period": {
+    "tau": "20*pi/11",
+    "pi_method": "Machin identity pi=16*atan(1/5)-4*atan(1/239); 26-term alternating rational partial sums and remainders",
+    "true_tau_rational_error_less_than": "5e-38",
+    "final_16_decimal_outward_time_bracket": [
+      "57119866428905331/10000000000000000",
+      "14279966607226333/2500000000000000"
+    ],
+    "final_time_bracket_width": "1/10000000000000000",
+    "direct_Picard_bridge_to_irrational_time_passed": true
+  },
+  "initial_rational_state": [
+    "-0.04585851023046709",
+    "0.0967120405698972",
+    "1.9865816276887802",
+    "1.1890650910077614",
+    "2.3839347955003958",
+    "5.502919318568432",
+    "-5.781120275385947",
+    "-0.7451738522543331",
+    "-1.5585226674954609"
+  ],
+  "final_return_state_integer_interval_grid": [
+    [
+      "-46055888162564411851954452902",
+      "-45661122705384119566303532826"
+    ],
+    [
+      "96074969969251803641862133577",
+      "97349071941841418801366643328"
+    ],
+    [
+      "1983131168833363072976714910202",
+      "1990032164370646069824859131082"
+    ],
+    [
+      "1186697729040045784297053629089",
+      "1191432539582920834544982006697"
+    ],
+    [
+      "2381895047935423602281319991519",
+      "2385974573912905199191802657272"
+    ],
+    [
+      "5502824591524301334728118726327",
+      "5503014041199404297807920262546"
+    ],
+    [
+      "-5781137842199069219191063343087",
+      "-5781102689472852227402312452058"
+    ],
+    [
+      "-754193918079976812544573100849",
+      "-736153782115212391890718611106"
+    ],
+    [
+      "-1560648527654690329289150175555",
+      "-1556396830881494078213418051184"
+    ]
+  ],
+  "final_return_grid_scale": "1000000000000000000000000000000",
+  "all_nine_return_intervals_contain_respective_initial_coordinate": true,
+  "maximum_return_interval_width_approx": 0.01804013596476442,
+  "full_period_exact_nine_state_return_enclosed": true,
+  "exact_periodic_fixed_point_proved": false,
+  "return_map_interval_jacobian_on_nonzero_ball_proved": false,
+  "banach_krawczyk_self_map_proved": false,
+  "elevenfold_exact_periodic_monodromy_not_yet_certified": true,
+  "full_uniform_five_parameter_family_proved": false,
+  "repository_source_note": "J29 three source checkers and J30 two new scripts are in locally executed source packet and still need native GitHub script installation; GitHub research and machine receipt readbacks are distinct from source-byte readback",
+  "local_executed_code_hashes": {
+    "j30_section_projection_sha256": "0a17c4c8dde41851d6ba6b74d0464c304691f3bfa09035d061c2729e88e9536f",
+    "j30_no_diode_return_sha256": "1db5f07cdf4f0c99cdc14523c8384da4da8ce165fe2e7f48ca73cbffdf6238cb"
+  },
+  "next": [
+    "Corrected Lohner/transversality-aligned interval transport to pay last J24 event state box",
+    "Interval P_tau and saltation-aware DP_tau over a nonzero initial rational state box",
+    "Validated centre return defect below 8.42406e-9 and Jacobian error below 0.001 with contraction",
+    "Banach/Krawczyk periodic existence, then original T=11*tau composition",
+    "Physical source/pin/measurement separate"
+  ]
+}
