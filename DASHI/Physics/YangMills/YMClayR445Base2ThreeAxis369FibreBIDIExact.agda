@@ -554,3 +554,33 @@ module _
   -- owned separately by the original source modules. Source-written
   -- pointwise gauge naturality here is not a new proof of product-Haar
   -- Fubini on a hypothetical independent nine-dimensional YM model.
+
+
+-- Physical locality warning: the ORIGINAL C4 graph has shortest-path
+-- distance d_C4(1,3)=2, while the signed-nine projection sends both
+-- sites to the SAME trit zero. So a putative physical Wilson W3
+-- separation cannot factor through signed-trit distance alone.
+-- The original source-site fibre (or an isometric equivalent) MUST
+-- be kept when transporting CMP116 rooted-shell distances.
+
+originalC4DistanceFromOne : R445.Quad → Nat
+originalC4DistanceFromOne T.zeroᵢ = suc zero
+originalC4DistanceFromOne (T.sucᵢ T.zeroᵢ) = zero
+originalC4DistanceFromOne
+  (T.sucᵢ (T.sucᵢ T.zeroᵢ)) = suc zero
+originalC4DistanceFromOne
+  (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))) = suc (suc zero)
+
+zeroCannotEqualTwo : zero ≡ suc (suc zero) → ⊥
+zeroCannotEqualTwo ()
+
+originalSignedNineMidpointMetricCannotDescend :
+  (signedDistanceFromOne : Wave.Trit → Nat) →
+  (preservesOriginalDistances : ∀ x →
+    signedDistanceFromOne (projectOriginalQuadToSignedTrit x)
+      ≡ originalC4DistanceFromOne x) → ⊥
+originalSignedNineMidpointMetricCannotDescend signedDistance preserves =
+  zeroCannotEqualTwo
+    (trans
+      (sym (preserves originalMidpointOne))
+      (preserves originalMidpointThree))
