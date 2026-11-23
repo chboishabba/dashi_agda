@@ -1,5 +1,17 @@
 # 27 − 1: same-action adversarial cut (hypervoxel / Albert / 26D string)
 
+## 23 November 2026 — SOURCE CORRECTION / nine-coordinate Fourier-shell addendum (native 27)
+
+The first new RH `check_rh_hyperfabric_k_time_spatial_intertwiner_20261123.py` used a shifted residue path `0–1–2` while applying F3³ addition with zero as group origin. **That graph labelling is NOT the native balanced SSP original `-1↔0↔+1` with centre zero.** Count equality does not establish source-geometry identity. The committed script was REPAIRED (RH commits `c276ef63`, `bc0846fd`) to enumerate and act on actual `(-1,0,+1)^3` and `(-1,0,+1)^9`, map `GF3` back to balanced labels, and treat antipode as literal global `x↦-x`. Source-equivalent local corrections pass native 54/81 spatial edges, 729 dual Fourier character pairs, and ALL 118,098 P3^9 source-edge inverse checks. Fixed-graph Singer no-go remains; true indexed-transport intertwiner remains valid.
+
+New FULL periodic nine-coordinate Fourier shell ledger: support-size r in 0..9 has multiplicity `C(9,r)*2^r`, namely
+`(1,18,144,672,2016,4032,5376,4608,2304,512)`, summing to 19,683. Maximal-support 512=8³ derives from the **three** native C3³ eight-mode strata. This is the distinct periodic C3^9 torus (177,147 edges), not nonwrapping P3^9 (118,098 edges), nor NS dyadic 1/128 / YM 16×8=128. Exact script updated `724c397e`, newline repaired `7d8c85ce`; detailed [source correction and spectrum](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHHyperfabricKTimeSpatialFourierIntertwinerAudit20261123.md), ledger `9707ab74`.
+
+**Keep TIME t distinct from refinement k, Fourier wavevector q and H05 Frobenius/consumer history**. Chart-conjugation cannot erase a nonzero `D_(t,k)`. The new Agda is source-written without kernel, the corrected script is read back but no byte-for-byte CI/Agda execution. Original RH signed FarExact/μ/slack, NS continuum and YM mass-gap endpoints remain open. Do not duplicate existing B3 spatial/Fourier intertwiner.
+
+---
+
+
 ## 23 November 2026 — Source spatial graph geometry correction, 9-coordinate + independent k/time indexed intertwiner
 
 RH #1533 re-audited this native source against original `Base369Ternary27HypervoxelFabricGeometryExact`, `Base369PeriodicTernaryTorusPathRestrictionBidiExact`, `Base369Ternary27SignedSymmetryMonsterIntertwinerExact` and `Base369Ternary27CharacterAdjacencyEquivarianceExact`. **There already IS a source-paid fixed P3³ adjacency/Fourier intertwiner for coordinate reflections**: flips act on spatial x/y/z and conjugate the matching C3 character k→-k. This is NOT the same operator as original grade Singer (G=-M), whose 54/54 original P3³ edges and 81/81 distinct periodic C3³ edges move to nonedges of those fixed graphs. Correct limit of the prior no-go is **fixed graph** invariance, not absence of any spatial intertwiner.
