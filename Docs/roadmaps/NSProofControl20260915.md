@@ -1,5 +1,13 @@
 # Navier–Stokes proof-control record — live A/B/C/D coordinator
 
+## 23 November 2026 — exact R236 global-fold/recentering correction
+
+The historical original #1444 R236 signed pair-block and lattice-moment work remains a source donor; master-based #1539 owns the current physical W2 no-go/manuscript correction. New non-promoting exact consumer: [four-lane maximum-cut](ClayNonYMRHFourLaneGeometricMaxCut20261123.md), executable [regression](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py). For **negative** original pair differences, a common global work shift leaves every signed block invariant. Recenter the work separately by region `w_i' = w_i - c_A` instead and the exact cross-region error is `S'_AB-S_AB = (c_A-c_B)(n_B R_A-n_A R_B)`; within-region blocks are unchanged. The defect is computable from existing complete carrier moments without pair enumeration but cannot be ignored. Exact zero-work two-cell negative control gives error -2; deterministic exact-rational checks 1,200/1,200 PASS. Do not remove zero-work rate incidences or substitute independently recentered regional work for the original global coherent fold.
+
+**Still open:** same-real-Galerkin physical source work identity, original classifier/kernel check, source-specific valid signed B1–B4 replacement after the refuted unrestricted W2/W2-payment, cutoff-uniform W1/critical barrier and PDE continuation. NS A/B remain independent; C/D are external-proof integration. No proof-status promotion.
+
+
+
 Status: authoritative live routing/control document; non-promoting.
 
 Current-state date: `2026-09-23 AEST`.
