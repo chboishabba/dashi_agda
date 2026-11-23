@@ -4,7 +4,7 @@
   "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
   "pr": 1537,
   "script": "scripts/check_smith_filsinger_j28_third_spark_on_picard_20261123.py",
-  "source_git_blob": "8379d029d8ef37b08a5006eb60b71f98cc74ab57",
+  "source_git_blob": "5ccec728d86deba172ff208ea846df17686308a8",
   "script_byte_identical_to_local_execution": true,
   "local_python_execution": true,
   "CI": false,
@@ -102,5 +102,65 @@
       "12292539693217503650850",
       "12344561239231578104237"
     ]
-  ]
+  ],
+  "physical_spark_ON_event_handoff": {
+    "uncertain_actual_event_bracket": [
+      "3.51329269",
+      "3.51729275"
+    ],
+    "fixed_common_right_endpoint": "3.51729275",
+    "post_ON_field_exact_original_no_reset": true,
+    "picard_self_inclusion_iterations": 5,
+    "all_9_coordinate_state_enclosure_on_grid": [
+      [
+        "1374476203168603443777",
+        "1385047713382698487439"
+      ],
+      [
+        "-3906154486400661076474",
+        "-3869456789496087041461"
+      ],
+      [
+        "-5697972474123596706838",
+        "-5648244036248654847131"
+      ],
+      [
+        "1171080710042818778978",
+        "1181201688493720598975"
+      ],
+      [
+        "54518223160167759583",
+        "60000000000000000000"
+      ],
+      [
+        "-1627748349522247506939",
+        "-907880155248305038262"
+      ],
+      [
+        "81539163085232733789231",
+        "81564021283907619889597"
+      ],
+      [
+        "1731003848037880564282",
+        "1802987170010365198623"
+      ],
+      [
+        "12244433467210276946097",
+        "12344561239231578104237"
+      ]
+    ]
+  },
+  "physical_spark_ON_post_event_continuation": {
+    "duration": "0.032",
+    "from": "3.51729275",
+    "through": "3.54929275",
+    "pieces": 32,
+    "each_duration": "0.001",
+    "all_picard_accepted": true,
+    "no_U_diode_or_V_diode_or_spark_OFF_guard": true,
+    "min_spark_above_Voff_integer_grid": "647884022910137470",
+    "max_U_diode_guard_integer_grid": "-6479824506135607551628",
+    "min_V_diode_guard_integer_grid": "110785166541520070171",
+    "four_remaining_witnesses": "J24 boxes third through sixth not certified; fourth through sixth guard roots still open"
+  }
 }
