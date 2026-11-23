@@ -27,6 +27,25 @@ Ghat(a,epsilon)
 
 Over a full 13-axis cycle the parity of `Σ omega_M(a)` is zero, but the `13` copies of the explicit antipode XOR 1 contribute one remaining flip. Hence `Ghat^13` flips sign and does NOT send it to scalar zero. This cocycle is the key point: replacing Ghat with (a→next13(a), epsilon→not epsilon) in the canonical section is incorrect on four axes, even though a different coherent 13-cycle section can trivialize the M cocycle by a change of gauge.
 
+## I-bis. Intrinsic finite-field geometry: Singer cycle, not a coincidental 13
+
+The original real 27-element additive grade carrier is F3³. Relative to the original x/y/z coordinate basis, the source selected Griess grade word is
+`M=[[1,1,0],[0,1,1],[1,1,1]] mod3`, and the signed lift is `G=-M`. Its original 3×3 characteristic polynomial is
+
+```text
+charpoly_F3(G)(X) = X³ - X + 1.
+```
+
+At X=0,1,2 its value in F3 is always 1, so the cubic is irreducible. The original nonzero input basis vector `v=(1,0,0)` gives an explicit **cyclic** basis `[v,Gv,G²v]` with determinant `1 mod3`. The exact local GF3 matrix identities `G³-G+I=0`, `G¹³=-I`, `G²⁶=I` certify that (after this source-compatible basis choice) the native additive F3³ space is the finite field `F27=F3[X]/(X³-X+1)`, with the original G actor equal to multiplication by primitive residue `alpha=X mod f`. Since `alpha` has multiplicative order26=27-1, it is a **Singer cycle** on the 26 nonzero field elements; on the projective quotient the actor is the Singer 13-cycle on PG(2,3).
+
+```text
+1 -> F3× = C2 -> F27× = C26 -> (F27× / F3×) = C13 -> 1.
+```
+
+This exact sequence splits as abstract groups because gcd(2,13)=1, but our ORIGINAL projective Axis13 codec uses the **canonical first-nonzero-positive** orientation section and introduces the four-flip sign cocycle. A split abstract group presentation does NOT mean the canonical `Axis13×Bool` transport has zero local sign corrections. The field multiplication interpretation is of the original F3³ additive-grade/label action, not native P3³ path graph adjacency or Albert Jordan multiplication. Do not misread the coincident Gaussian norm `13=3²+2²` as a proved isometry to this Singer projective geometry.
+
+The new source-written Agda `sourceFieldPolynomial` in `RHFourWindowC26NativeHyperfabricSquareExact.agda` lists all 27 native trit constructor cases for `G³-G+I=0`; **it is not independently Agda typechecked**. The portable script now checks the exact 3×3 polynomial, cyclic determinant1 and original 26×26 character/parity identities. This is finite algebra, not a C26 action on zeta zeros.
+
 ## II. Genuine six-face H05 finite cube, with nonidentity z-axis
 
 The previously constructed RH source traced square carries `Source4` containing BOTH nonzero raw π/3 contributions and their cancellation witness. Its `TracedFold` and `TracedFive` retain `Source4` in both legs, unlike the lossy observed stencil alone. The NEW `nativeC26H05Cube` is exactly the ORIGINAL typed H05 cube with:
