@@ -81,6 +81,12 @@ def run():
     source_off=one('controller_on_wave_off',dict(source_amp=0.))
     minus=one('source_amplitude_minus',dict(source_amp=1.195))
     plus=one('source_amplitude_plus',dict(source_amp=1.205))
+    kh_minus=one('secondary_HF_coupling_minus',dict(kh=.1195))
+    kh_plus=one('secondary_HF_coupling_plus',dict(kh=.1205))
+    ph_minus=one('source_phase_minus',phase=.299)
+    ph_plus=one('source_phase_plus',phase=.301)
+    gl_minus=one('HF_load_conductance_minus',dict(Gload=.155))
+    gl_plus=one('HF_load_conductance_plus',dict(Gload=.165))
     assert abs(hf100['HF_internal_load_fraction']-1)<1e-10
     assert abs(joint['HF_internal_load_fraction']-1)<1e-10
     assert joint['wave_capture_fraction']>.999
@@ -91,6 +97,13 @@ def run():
     assert high_output['HF_load']>base['HF_load'] and high_output['wave_capture_fraction']>.98
     shift=max(abs(a-b) for a,b in zip(minus['event_times'],plus['event_times']))
     assert shift<.02
+    shifts={}
+    for key,aa,bb in [('HF_coupling',kh_minus,kh_plus),('source_phase',ph_minus,ph_plus),('HF_load_conductance',gl_minus,gl_plus)]:
+        assert aa['events']==bb['events']==base['events']==8
+        assert aa['event_labels']==bb['event_labels']==base['event_labels']
+        shifts[key]=max(abs(a-b) for a,b in zip(aa['event_times'],bb['event_times']))
+    assert shifts['HF_coupling']<.02 and shifts['source_phase']<.02
+    assert shifts['HF_load_conductance']>.02  # avoid false global inverse smoothness certificate
     # This is not 100% *external-to-load* conversion. The native resonator
     # internal damping is very large in the wave-matched fixtures.
     assert joint['HF_load']/joint['incoming']<.01
@@ -100,7 +113,11 @@ def run():
        local_perturbations=dict(source_amplitude_1_195_vs_1_205={
          'same_8_event_labels':minus['event_labels']==plus['event_labels']==base['event_labels'],
          'maximum_aligned_event_time_shift':shift,
-         'both_restored':True}),
+         'both_restored':True},
+         HF_coupling_pm_0_0005_event_time_shift=shifts['HF_coupling'],
+         phase_pm_0_001_event_time_shift=shifts['source_phase'],
+         load_pm_0_005_event_time_shift=shifts['HF_load_conductance'],
+         load_pair_fails_0_02_event_alignment=True),
        full_external_to_HF_load_100percent_claim=False,
        documented_original_device_100percent_physical_coupling=False,
        actual_Duga_HAARP_SURA_to_device_transfer=False,
