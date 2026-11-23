@@ -34,6 +34,8 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as T
 import DASHI.Physics.YangMills.YMClayR445OriginalAxialBondParityInjectiveExact as R445
 import DASHI.Physics.YangMills.YMClayR445Base2ThreeAxis369FibreBIDIExact as Fib
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as OriginalWilson
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -173,6 +175,44 @@ module _
           cong (sourceCanonicalField original)
             (Fib.originalFineRoundTrip bond)))
       (Codec.originalBondsEncodeDecodeExactly 4 original)
+
+  -- ACTUAL ORIGINAL 4D plaquette and six-plane action, not only the
+  -- scalar Gibbs-density equality. In particular this holds at EACH
+  -- original of the 1536 positive oriented Wilson plaquette labels;
+  -- original path orientation and spectator interactions are unchanged.
+  originalIndexedPlaquetteIsOriginal :
+    ∀ {Time : Set} (t : Time) k original
+      (plaquette : Plaquette.PeriodicPlaquette 3) →
+    OriginalWilson.periodicSUNPositivePlaquette
+      theory 3
+      (Codec.decodeOriginalBonds 4
+        (recoverCanonicalFromIndexed t k original)) plaquette
+    ≡
+    OriginalWilson.periodicSUNPositivePlaquette
+      theory 3 (Codec.decodeOriginalBonds 4 original) plaquette
+  originalIndexedPlaquetteIsOriginal t k original plaquette =
+    cong
+      (λ vector →
+        OriginalWilson.periodicSUNPositivePlaquette
+          theory 3 (Codec.decodeOriginalBonds 4 vector) plaquette)
+      (sourceIndexedLinkRecoversOriginal t k original)
+
+  originalIndexedSixPlaneWilsonDeficitIsOriginal :
+    ∀ {Time : Set} (t : Time) k original →
+    OriginalWilson.periodicSUNSixDeficit
+      theory traceData 3
+      (Codec.decodeOriginalBonds 4
+        (recoverCanonicalFromIndexed t k original))
+    ≡
+    OriginalWilson.periodicSUNSixDeficit
+      theory traceData 3
+      (Codec.decodeOriginalBonds 4 original)
+  originalIndexedSixPlaneWilsonDeficitIsOriginal t k original =
+    cong
+      (λ vector →
+        OriginalWilson.periodicSUNSixDeficit
+          theory traceData 3 (Codec.decodeOriginalBonds 4 vector))
+      (sourceIndexedLinkRecoversOriginal t k original)
 
   actualOriginalWilsonWeight : OriginalVector → ℝ
   actualOriginalWilsonWeight =
