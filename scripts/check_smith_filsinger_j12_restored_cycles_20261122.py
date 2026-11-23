@@ -15,7 +15,7 @@ def advance(p,inc,phi,state,active,t0):
   return float(np.array([i,j])@L@np.array([i,j])/2+np.array([u,v])@A@np.array([u,v])/2+p['Cb']*b*b/2+q*q+z*z)
  E0=energy(state);y=np.r_[state,np.zeros(9)];t=t0;switches=0;event_log=[]
  def rhs(t,y,on):
-  i,j,u,v,b,q,z=y[:7];drive=2*np.sin(t)
+  i,j,u,v,b,q,z=y[:7];drive=p.get('drive_amp',2.)*np.sin(t)
   sr=p['source_amp']*np.cos(p['omega']*t+phi) if inc else 0.
   si=p['source_amp']*np.sin(p['omega']*t+phi) if inc else 0.
   ju=max((u-b-p['Vd'])/p['Rd'],0.);jv=max((v-b-p['Vd'])/p['Rd'],0.)
