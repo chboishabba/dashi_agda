@@ -72,3 +72,17 @@ Two additional original masters sharpen the operator/provenance distinction:
 - DASHI/Physics/YangMills/BalabanClayTransferHamiltonianGapSeparationExact explicitly carries different typed TransferGap and HamiltonianGap quantities with a conversion mapping dependent on the physical scale, and a conditional input for uniform physical conversion.
 
 Thus it would be wrong to say that the repo lacks a positive Hamiltonian or spectral-gap framework; these donors ARE important existing owners. It is equally wrong to infer a fixed 4D continuum physical mass from a positive dimensionless transfer gap, a finite chosen Hκ stiffness, or a proof record containing its positivity as a required field. The source must pay the cutoff-independent lower bound for -log eigenvalue ratios divided by the actual physical lattice spacing, and prove the SAME reconstructed interacting OS H/observable sector. Retain original physical t and k separate.
+
+
+## Exact scaling negative control: positive finite transfer gap can have zero continuum mass
+
+The committed original-source wave checker now includes local **SymPy analytic limits** to reconcile master YMSprint107 and BalabanClayTransferHamiltonianGapSeparationExact. Write physical spacing a=1/n and a selected normalized transfer eigenvalue λ₂(a) in (0,1), so finite transfer gap δ(a)=1-λ₂(a)>0 and the corresponding candidate physical energy is E(a)=-log λ₂(a)/a.
+
+Two positive-for-every-finite-n examples have opposite continuum outcomes:
+
+    λ₂(a)=1-a²   =>  E(a)=-log(1-a²)/a -> 0;
+    λ₂(a)=1-a    =>  E(a)=-log(1-a)/a  -> 1.
+
+Both have strictly positive finite transfer gaps at n≥2; the first has ZERO physical continuum energy. Local SymPy 1.14 exact limits and positive n=2 tests PASS. This is not claiming that either chosen transfer spectrum is the original Wilson one: the counterexample proves that *finite spectral positivity alone* does not logically pay the uniform original Wilson/OS same-H mass-gap rate. Stronger proof obligation: a physically sourced, all-cutoff selected transfer eigenvalue ratio with -log(λ₂(a))≥m a for fixed m>0, plus source-proven T=e^(-a H_OS) on the identical interacting reconstructed Hilbert space and suitable spectral/core convergence; no cheating by choosing a different Hamiltonian for each chart.
+
+The exact committed checker Git blob 1a61b644cc7f617acd69ee0a52ead50ec092337f matches the **locally executed** Python file byte-for-byte, including this counterexample. No CI or native Agda/Lean acceptance.
