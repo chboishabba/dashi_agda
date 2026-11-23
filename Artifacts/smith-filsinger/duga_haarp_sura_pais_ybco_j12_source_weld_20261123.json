@@ -10,7 +10,7 @@
   },
   "consumer": {
     "path": "scripts/check_smith_filsinger_multisource_crosswalk_20261123.py",
-    "git_blob_sha": "36202b29bdf38e60e7bf8c1ffab63ccf1d5d5b45",
+    "git_blob_sha": "f2babc0626e286f6b8a1cf1f10d7d5a6dd794de3",
     "locally_executed_exact_bytes": true,
     "sympy": "1.14.0",
     "numpy_scipy": "local installed",
@@ -73,5 +73,38 @@
   ],
   "github_actions_ci_used": false,
   "source_data_replay": false,
-  "note": "Exact native J12 model and synthetic incident-wave interface only; distinct historical sources NOT summed as actual simultaneous fields. Do not infer antigravity, HAARP-to-Filsinger transfer, Duga-to-Filsinger power or self-running operation."
+  "note": "Exact native J12 model and synthetic incident-wave interface only; distinct historical sources NOT summed as actual simultaneous fields. Do not infer antigravity, HAARP-to-Filsinger transfer, Duga-to-Filsinger power or self-running operation.",
+  "hypothetical_coherent_four_source_input": {
+    "status": "PASS_LOCAL_NATIVE_J12",
+    "provenance": "Hypothetical, phase-locked normalized receiver-mode projection ONLY; four historical HF/ionosphere events not contemporaneous, no physical source-to-J12 mode calibration.",
+    "components": {
+      "duga_hf_downconversion": {
+        "amplitude": 0.03,
+        "phase_rad": 0
+      },
+      "haarp_electrojet_vlf": {
+        "amplitude": 0.04,
+        "phase_rad": "pi/2"
+      },
+      "haarp_fregion_hall": {
+        "amplitude": 0.02,
+        "phase_rad": "pi"
+      },
+      "sura_lh_whistler": {
+        "amplitude": 0.01,
+        "phase_rad": "-pi/2"
+      }
+    },
+    "normalized_phasor_amplitude": 0.03162277660168379,
+    "normalized_phasor_phase_rad": 1.2490457723982544,
+    "coherent_mode_power": 0.001,
+    "sum_independent_amplitudes_squared": 0.003,
+    "incident_work": 0.06283185307179583,
+    "outgoing_work": 0.16477395206006226,
+    "net_wave_work": -0.10194209898826644,
+    "spark_work": 0.034392012034694754,
+    "work_residual": 2.510990171344929e-8,
+    "cancels_mode_example": "Equal amplitudes in opposing phase give zero selected received phasor, not zero original distant source emissions.",
+    "original_device_field_or_GR_wave_measured": false
+  }
 }
