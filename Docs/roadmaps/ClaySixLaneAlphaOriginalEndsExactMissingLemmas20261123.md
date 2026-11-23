@@ -1,5 +1,11 @@
 # Clay six-lane alpha — original endpoints, BIDI and exact remaining lemmas (23 November 2026)
 
+## 23 November 2026 — NS rate-kernel exact radical, corrected physical-output census
+
+[Original R568 midpoint/rate-Cauchy radical exact result](NSRateResolvedCauchyRadicalOriginalSource20261123.md) supersedes the earlier loose rate-bucket enumeration bound. Actual original output requires |k_i|<=C, so valid source arithmetic acceptance is **37/37** full original output fibres / **26,934** incidence checks, not 44/27,452 from broad k-outside-cutoff mathematical test cases. Original rate masses have midpoint symmetry, parity m≡|k|² mod2 and **<=3C²+1** classes. The positive rational Cauchy matrix exactly factors through source rate incidence B with rank #distinct rates R and radical of dimension N−R; entire within-rate zero-sum sector, containing but generally larger than p/q swap-odd, is invisible to both-currency signed R541/R567 pairing. C=5,k=(5,0,0) gives N=726,R=42,null=684. Full original source sidecar is required to reverse the quotient. **Analytic C1/C2 remains OPEN**; the proxy doubleForcing/doubleCell values in local tests are not produced by a physical R240 trajectory. Existing merged R541/R567/R568/R596/R624/R628/R634/R652/R653/R687–R689 owner implementations remain unreplaced. Other Clay lanes unchanged; 0/6 original Clay results.
+
+
+
 ## 23 November 2026 — R568 alpha correction: exact Cauchy rates and two-sided C1/C2
 
 [New R568 signed rate-bucket BIDI and exact remaining-lemma audit](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md), [byte-identically executed local checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py), Git blob a76e8847a61521a4c4cb88fcc861ebb4a92fb85f. 64 full literal original ordered cubic-fibre rational tests; 726/1352/2250 incidences become 42/67/92 integer rate classes on k=(5,0,0), C=5/6/7, with reversible incidence-sidecar and no loss of source p/q/zero records. **Free vector carrier sign control**, not literal NS flow: source-allowed rates 13 and 17 give unlifted R541/R567 scalar F=46/16575>0 and rate-lift scalar L=−1/5<0, while the Cauchy kernel is positive definite. Do not infer sign transfer from positivity, and do not call a zero-R236-work spectator double-zero in R568.
