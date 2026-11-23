@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-23",
+  "status": "J26_VALIDATED_NOMINAL_FIRST_DIODE_V_EVENT_AND_J24_FIRST_BOX_PASS",
+  "pr": 1537,
+  "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "model": "source-only synthetic nine-state J18 equations; spark initially ON; finite losses present",
+  "initial_state": "exact decimal rational J23 corrected numerical root; NOT known to be an exactly periodic fixed point",
+  "verifier": "scripts/check_smith_filsinger_j26_first_diode_validated_taylor_20261123.py",
+  "original_J25_interval_primitive_git_blob": "5d723374d71281cc5583582cc17d15016deaa8a3",
+  "J26_byte_identical_executed_git_blob": "78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94",
+  "first_J24_event_input_blob": "edcec489212e81b473af5ea1049b958236781d12",
+  "proof_engine": {
+    "arithmetic": "exact Fraction and outward-rounded integer interval grid 1e30",
+    "Taylor_polynomial_order": 52,
+    "trigonometric_remainder": "rational global Maclaurin error of sine/cosine evaluated at exact rational phase+omega*t0",
+    "force_tail_amplitude_upper": "0.21 >= 1.2 sqrt(0.03)",
+    "nonlinear_capacitor_residual": "evaluate polynomial numerator Ch(1+1.5*x^2)*xprime-(ih-Gload*x) / Ch D",
+    "error_comparison": "componentwise exp(A*h)*(delta+h*epsilon) with nonnegative interval-absolute 9x9 Jacobian majorant, rational 90-term power series and rational geometric tail",
+    "interval_R_bootstrap": "each verified error enclosure strictly inside full nine-state polynomial tube radius",
+    "initial_interval_radius": "0, exact rational seed point",
+    "recentering": "23 exact decimal places, rounding included in next-step input error",
+    "numerical_ODE_tolerance_as_proof": false
+  },
+  "fixed_nominal_parameters": {
+    "gamma_rad": ".015",
+    "gamma_internal": ".0002",
+    "k": ".35",
+    "kh": "2",
+    "Gload": ".52",
+    "source_amp": "1.2",
+    "phase": ".3",
+    "source_handedness": -1,
+    "drive_amp": 0
+  },
+  "pre_event": {
+    "guard_free_segments_passed": 37,
+    "time_start": "0",
+    "time_end": "169/50",
+    "first_33_lengths": "1/10",
+    "last_4_lengths": "1/50",
+    "max_coordinate_error_at_3_38_approx": 5.708051918658334e-10,
+    "diode_U_never_forward_active": true,
+    "diode_V_never_forward_active": true,
+    "spark_never_off": true
+  },
+  "first_event": {
+    "diode": "V",
+    "direction": "inactive_to_active",
+    "exact_time_bracket": [
+      "3.389367008",
+      "3.389367010"
+    ],
+    "width": "0.000000002",
+    "left_guard_grid": [
+      "-651597411248886414062",
+      "-160939671526256149074"
+    ],
+    "right_guard_grid": [
+      "258225570387092877961",
+      "748883318183163981197"
+    ],
+    "grid_scale": "1000000000000000000000000000000",
+    "derivative_positive_bracket_grid": [
+      "426247788744114099342293235488",
+      "490842212743420651763121683172"
+    ],
+    "derivative_bracket_lower_approx": 0.4262477887441141,
+    "diode_U_negative_through_bracket": true,
+    "spark_OFF_guard_positive_through_bracket": true,
+    "virtual_inactive_continuation_after_event": "Only to prove a unique root; not a physical post-event solution",
+    "J24_original_event_state_all_9_coordinates_within_rational_1e_minus_4_box": true,
+    "event_state_coordinate_enclosures_grid": [
+      [
+        "123483120947734383917338212290",
+        "123483121214504440764857080342"
+      ],
+      [
+        "-330688654941424884296315668373",
+        "-330688653910844116812121775961"
+      ],
+      [
+        "-614989920552971304098707695525",
+        "-614989919472216598399173244031"
+      ],
+      [
+        "124781944454916501835915448264",
+        "124781944725765294139977408249"
+      ],
+      [
+        "24781943962350095167727597148",
+        "24781945121045794806628180840"
+      ],
+      [
+        "-1268216642687118123708321944576",
+        "-1268216624974793402732299997755"
+      ],
+      [
+        "8050844908753638760038512340988",
+        "8050844911802310956938663116423"
+      ],
+      [
+        "291472312915266268756567940241",
+        "291472316151400380923053590367"
+      ],
+      [
+        "1364145482120435743017162815666",
+        "1364145484279937213722697187997"
+      ]
+    ],
+    "first_of_six_J24_event_box_inclusion_paid": true
+  },
+  "proof_missing": [
+    "J27: validated physical post-V diode-ON continuation to spark-OFF",
+    "remaining three diode and two spark crossings (five total)",
+    "validated monodromy and interval full-period return map",
+    "Banach/Krawczyk periodic-orbit existence",
+    "uniform five-parameter box",
+    "original physical Filsinger pins and measured environmental source"
+  ],
+  "exact_periodic_orbit_proved": false,
+  "uniform_five_parameter_event_flow_proved": false,
+  "physical_hardware_source_proved": false,
+  "github_actions_ci_run": false
+}
