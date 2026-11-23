@@ -591,3 +591,62 @@ python3 scripts/check_pi_p0_cost_fibre_pareto.py \
   --digits 100000 1000000 --reps 5 \
   --out /tmp/pi-p0-fibre-sixway.json
 ```
+
+
+## 23 November — independent-oracle lane in lieu of original workstation replay
+
+The local container cannot resolve github.com for a full Git checkout.
+The connected GitHub source API was used to read, update and verify
+the exact original PR #1546 files; this is not a claim that the full
+committed C++ source was compiled in the local container.
+Native GMP/OpenSSL and g++ **are** available, and existing
+locally constructed equivalent COMP5i/j binaries remain available.
+Re-executing those locally compiled COMP5j code paths against
+independently computed `mpmath.pi` decimal values gave SHA-256
+equality at **100, 1000 and 10000 decimal places** (independent
+algorithm and decimal production, with 40 guard digits). This
+cross-engine result is strictly stronger than comparing the same
+GMP implementation against its own old hash, but still is **not**
+a theorem proving the classical Chudnovsky series or the
+Bishop original-real formalization.
+
+New reproducible independent checker
+`scripts/check_pi_p0_independent_decimal_oracle.py`
+pins the actual committed COMP5j Git blob
+`be8e746a5c73ed2ec212664b68e5eceacc4420e7`,
+compiles it natively, and compares SHA-256 of its certified
+decimal string against high-precision `mpmath.pi`
+for 100, 1000, 10000 digits. This particular committed checker
+is GitHub read-back verified but **not run** against exact GitHub
+bytes in this environment; the independent local experiment
+above compiled source-equivalent C++.
+
+**Receipt correction discovered and committed:** the scoped,
+dyadic-shift and power-five source variants moved/released P/Q/T
+early but their legacy `Receipt.bits` field read the **moved-from**
+`s.p,s.q,s.t` instead of the original terminal product.
+This did not change any numerical certificate or hash, but
+corrupted a performance/bit-cost observation. All four
+optimized C++ variants now snapshot the original triple
+bit-width before ownership transfer and report that exact
+snapshot; their Git blob SHA pins in the six-way Pareto runner
+were updated as a single ordered follow-up. Do not promote old
+`Receipt.bits` values from these variants as physical bit
+width measurements.
+
+Available bounded local acceptance when Git checkout is
+possible:
+
+```bash
+python3 scripts/check_pi_p0_independent_decimal_oracle.py \
+ --digits 100 1000 10000 --out /tmp/pi-p0-oracle.json
+python3 tests/test_pi_p0_dyadic_quotient_certificate.py
+python3 scripts/check_pi_p0_cost_fibre_pareto.py \
+ --digits 100000 1000000 --reps 5 \
+ --out /tmp/pi-p0-sixway.json
+```
+
+The local 100–10000 oracle is an immediate, executed
+in-lieu cross-engine acceptance; the full exact-source
+compilation/large matched Pareto/independent SOTA and
+Agda proof remain OPEN.
