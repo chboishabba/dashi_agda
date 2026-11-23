@@ -17,8 +17,8 @@ GB=s.groebner([h3,h4],h,c,order='lex',domain=s.QQ)
 classes={'empty':s.S.One,'1':h,'2':h*h-c,'11':c,'21':h*c,'22':c*c}
 degree={'empty':0,'1':1,'2':2,'11':2,'21':3,'22':4}
 cycles={'empty':'Gr(2,4)','1':'Schubert hyperplane divisor',
-        '2':'lines contained in a fixed projective plane',
-        '11':'lines passing through a fixed projective point',
+        '2':'lines through a fixed projective point',
+        '11':'lines contained in a fixed projective plane',
         '21':'Schubert projective line', '22':'Schubert point'}
 # Schubert partition duality by complements in the 2x2 rectangle.
 dual={'empty':'22','1':'21','2':'2','11':'11','21':'1','22':'empty'}
