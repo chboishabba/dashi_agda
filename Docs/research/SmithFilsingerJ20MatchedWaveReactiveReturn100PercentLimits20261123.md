@@ -30,8 +30,8 @@ The **full** J18 HF/coupled coil/spark/diode circuit is nonlinear and has \(k>0\
 ## Native nine-state source owner and reactive OFF topology
 
 Retain original J12/J18 \((i,j,u,v,b,q,z,i_h,x)\), all work integrators, spark on/off hysteresis, source/return identities, and dimensionless clock. J18 original script [is now optionally parameterised](../../scripts/check_smith_filsinger_j18_hf_spark_tank_20261123.py) at exact locally verified Git blob **f4270a475f010874056cfe3cdeff5ee8e43c44eb**:
-- \`wave_handedness=-1\` changes only \(s_i\) to \(-A\sin(\omega t+\phi)\). Its DEFAULT +1 matches every previous J18/J19 run.
-- \`off_return=capacitive\` replaces the OFF-state dissipative resistance with the **hypothetical closed inductor-capacitor path**. The HF inductor's return current charges the existing nonlinear capacitor even while the spark is OFF; the bank supplies the HF branch only while ON.
+- `wave_handedness=-1` changes only \(s_i\) to \(-A\sin(\omega t+\phi)\). Its DEFAULT +1 matches every previous J18/J19 run.
+- `off_return=capacitive` replaces the OFF-state dissipative resistance with the **hypothetical closed inductor-capacitor path**. The HF inductor's return current charges the existing nonlinear capacitor even while the spark is OFF; the bank supplies the HF branch only while ON.
 - The full HF energy remains
 \[
  U_h=\tfrac12 L_h i_h^2+C_h(\tfrac12x^2+\tfrac34\alpha x^4),
@@ -76,7 +76,7 @@ Near the finite-loss matched 8-event restored point:
 - \(\phi=0.299\) vs \(0.301\): 8/8 ordered events, paired shift **0.0066130**;
 - \(G_L=0.155\) vs \(0.165\): still 8/8 events but **0.0364086** time shift, **FAILS** J19's strict 0.02 time-matching gate; don't call the entire load sweep smooth.
 
-The previous **counter-rotating \(k=0.05\)** one-port study had **99.9758%** apparent capture at the last checked interval but *no restored-cycle certificate* in that geometry. It is **not** this newly verified, matched-hand, capacitive-return fixture. Wider native J20 sweeps also observed non-restoring parameter directions. Global rank, uniqueness, and event-transversality proof **OPEN**.
+The earlier **matched-handed \(k=0.05\), original resistive-OFF-return** attempt had **99.9758%** apparent capture at the last checked interval but *no restored-cycle certificate* in that geometry. It is **not** this newly verified, matched-hand, capacitive-return fixture. Wider native J20 sweeps also observed non-restoring parameter directions. Global rank, uniqueness, and event-transversality proof **OPEN**.
 
 ## Cross-owner physics and next work
 
