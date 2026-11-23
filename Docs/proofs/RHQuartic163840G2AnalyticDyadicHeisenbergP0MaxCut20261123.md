@@ -78,3 +78,48 @@ under original nonnegative local slack and D_t≥2d_t. A **new independent** upp
 - Independently executed local \`/mnt/data/rh_heisenberg_6mask_local.py\`: 64 symplectic matrices, 4096 mask pairs, 19200 actual H6 finite-group spot checks, failing unpaired sign — **PASS**.
 - Repository companion scripts \`scripts/check_rh_g2_analytic_163840_native_dyadic_20261123.py\` and \`scripts/check_rh_128_native_heisenberg_pair_sign_20261123.py\` committed/read-back pending; they were **not run separately from their fetched GitHub blobs**.
 - Original sources: Zeta23/Anthropic \`GammaFacts/Mu\`, \`ThmE/GammaFactsChiProof\`; original dashi_lean4 selected quartic Fourier mass and terminal; original DASHI H_X/H_T, Monster H6, signed SSP, dyadic order. DASHI contribution is the above cross-source tests, analytic algebra, typed crosswalk and no-promotion ledger.
+
+
+---
+
+## 23 November — seven EXACT measure-space actions and compact Fourier obstruction (next tranche)
+
+**New locally tested code:** `scripts/check_rh_163840_signed_dyadic_analytic_closure_20261123.py` (separate from the previous 163840 chart regression). This strengthens the previous **number/chart** correspondence to a faithful action on the **actual weighted Gamma-tail integration domain**. It is NOT a physical C2^7 action on the selected original Weil test, not an SSP generator identification, not a Monster group action, and not a zero-distribution estimate.
+
+Set `T={q∈R: |q|>8}`, `dν(q)=|q|^-6 dq`. On either signed ray write `s=sgn(q)∈{±1}`, `u=(8/|q|)^5∈(0,1)`, `N=32768=2^15`, `k=floor(Nu)` and `θ=Nu−k∈[0,1)`. Thus `q=s 8(N/(k+θ))^(1/5)` (away from null boundaries). The **exact signed full-tail** measure relation is
+
+```text
+∫_{|q|>8} F(q) |q|^-6 dq
+ = 1/(163840 · 32768)
+   Σ_{s=±1} Σ_{k=0}^{32767} ∫₀¹
+     F(s · 8 · (32768/(k+θ))^(1/5)) dθ .
+```
+
+For `m∈{0,...,63}` and `ε∈{0,1}`, the operations
+
+```text
+T_(m,ε) : (s,k,θ) ↦ ((-1)^ε s, k XOR m, θ)
+T_a T_b = T_(a XOR b) = T_b T_a ; T_a² = identity .
+```
+
+form a faithful `C₂⁶×C₂=C₂⁷` **measure-preserving** action on this signed weighted tail. The 15-bit address retains its continuous residual θ; six of the fifteen cell bits carry the selected dyadic toggles; the seventh sign is the **physical ordinate reflection**. The separate signed SSP carrier is an analogy/possible bookkeeping donor only: no same-source correspondence between its signed multiplicity and `sgn(q)` has been proved. Nor is this cell action the native Heisenberg six-sign action. Original `q=±16` crossing remains at `k=1024` on each ray. The q^-6 reference measure beyond |q|>16 is 1/32 of the positive-ray (or two-sided) reference mass, NOT the signed Gamma or zeta mass.
+
+For the **actual** original even `C_W` and exact bilateral `Δ²μ_{κ,N}(t,q)`, `q↦−q` fixes the integrand; six bit operators preserve the integral by measure reindexing **only if the entire transformed integrand is pulled back**. They do NOT preserve `C_W(q)` or `Δ²μ(t,q)` separately, nor the physical selected test.
+
+### Strict test-space closure no-go
+
+For each `j=0,...,5`, set `k_j=N−2^j`. At the cell boundary `u_j=k_j/N`, the left and right `u` image limits under XOR `2^j` are, **exactly**, `1` and `1−2^(j+1)/N` (different by `2^(j+1)/N`). Their inverse q-image limits lie in [8,8.1] and differ. Choose **any smooth even nonnegative nonzero compact bump** `P` supported in `(-1/4,1/4)` with positive mass away from zero. Its ordinary cosine Fourier transform satisfies
+
+```text
+C_P'(q) = -2 ∫₀^(1/4) v P(v) sin(qv)dv < 0   for 8 ≤ q ≤ 8.1,
+```
+
+because `0<qv<8.1/4<π`. Thus `C_P(q(T_j(u)))` has a genuine jump at `u_j`. Fourier transforms of integrable functions are continuous; consequently the bit-toggled source is **not in the full compact-smooth Fourier class**. This is an explicit closure counterexample, not a universal claim that the particular existentially selected W has such a jump.
+
+There is also a topological obstruction: every Lebesgue-measure-preserving homeomorphism of `[0,1]` is either identity or reflection (monotonicity plus interval-length preservation), so no faithful **continuous** `C₂⁶` action can be obtained by such 1D cell rearrangements. The dyadic operation necessarily leaves the continuous source-test category, except for genuine reflection. Finite H6/SSP axes and numerical bit labels cannot repair the analytic/admissibility requirement by themselves.
+
+### Acceptance and proof boundary
+
+Local exact `5·8⁵` Jacobian, 32768 cell maps for all 64 masks, 128 mask laws and 4096 pair compositions, six exact jump sizes with separate smooth Gaussian fixture, q=±16 Gamma reflection and six two-cell Gamma integral reindexings for each parity all **PASS**. The compact bump inequality is a direct sign proof; numeric Gaussian is only a negative-control fixture. The existing earlier selected-W Gamma bound remains conditional on `L6(W(t))`. The original terminal remains `Gap=2(D−2d)+S≥0` under a hypothetical reflected off-axis pair. No new *independent* strict signed zero bound, kernel receipt, RH or GRH claim follows.
+
+**Next P0 min-cut:** source-native admissible `sampleTest/paperFT` map for original selected W, selected-W uniform derivative envelope with its actual variable R(t), and actual signed `H_W+S_W<4d_W+I_W` independent of mere reindexing (including horizontal zero coordinate/multiplicity). Avoid a new finite-index dictionary in place of the signed estimate.
