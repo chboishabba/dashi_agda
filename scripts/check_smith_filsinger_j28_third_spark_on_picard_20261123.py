@@ -138,7 +138,7 @@ def certified_ON_segments(X,t_start,count=32,h=F('.001')):
             D=field_on(t,t+h,B)
             C=[z+I(0,h)*d for z,d in zip(X,D)]
             if all(v.subset(b) for v,b in zip(C,B)):break
-            B=[b.hull(c).expand(F('0.000000001')) for b,c in zip(B,C)]
+            B=[b.hull(c).expand(F('.000000001')) for b,c in zip(B,C)]
         else:raise AssertionError(('ON Picard self-inclusion',idx))
         gu,gv=event_guards(B)
         spark=B[4]-P['Voff']
