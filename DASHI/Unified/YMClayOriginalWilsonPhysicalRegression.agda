@@ -369,6 +369,8 @@ import DASHI.Physics.YangMills.YMClayY369OriginalSingerWilsonFourMarkSourceWeldE
 -- and its native finite signed-row coefficient/convergence BIDI.
 -- This is an import-graph regression request, NOT a pinned Agda receipt.
 import DASHI.Physics.YangMills.YMClayCMP102OriginalCMP109BishopSeriesSameSourceBIDIExact as OriginalCMP102CMP109SeriesBIDI
+-- Actual original G_N → G source-limit transport; G_N → 0 still OPEN.
+import DASHI.Physics.YangMills.YMClayCMP102OriginalGFiniteLimitTransportExact as OriginalCMP102GFiniteLimit
 
 -- P0 MASS GAP: reuse the existing master/native original connecting charge
 -- small/large/mixed SECTOR compiler, byte-identically imported onto #1536.
