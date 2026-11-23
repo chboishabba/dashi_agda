@@ -77,3 +77,51 @@ oddFiniteRowExtensional n expected pointwise =
 --       Shift.signedOddRow n  ~= - Shift.oddPart n
 -- The existing conditional consumer then discharges g_n=0.
 -- None of these three source-specific payments is claimed here.
+
+
+------------------------------------------------------------------------
+-- Bounded source reindex: only k < suc n is needed.
+-- The earlier unbounded finite-row consumer remains for compatibility.
+-- Nat's source order is used, not an assumed finite-set equivalence.
+------------------------------------------------------------------------
+
+import Data.Nat.Base as N
+import Data.Nat.Properties as NP
+
+boundedBishopFiniteSumCongruent :
+  {left right : Nat → B.ℝ} →
+  (count : Nat) →
+  (∀ k → N._≤_ (suc k) count → B._≃_ (left k) (right k)) →
+  B._≃_ (B.∑₀ left count) (B.∑₀ right count)
+boundedBishopFiniteSumCongruent N.zero pointwise = P.≃-refl
+boundedBishopFiniteSumCongruent (suc count) pointwise =
+  P.+-cong
+    (boundedBishopFiniteSumCongruent count
+      (λ k bound → pointwise k
+        (NP.≤-trans bound (NP.n≤1+n count))))
+    (pointwise count (N.s≤s N.≤-refl))
+
+evenFiniteRowBounded :
+  (n : Nat) (expected : Nat → B.ℝ) →
+  (∀ k → N._≤_ (suc k) (suc n) →
+    B._≃_ (sourceEvenTerm n k) (expected k)) →
+  B._≃_
+    (Shift.signedEvenRow n)
+    (B._+_
+      (B.∑₀ expected (suc n))
+      (Signed.signedTerm (sourceDegree n) (sourceDegree n)))
+evenFiniteRowBounded n expected pointwise =
+  P.≃-trans (originalEvenRowFromTerms n)
+    (P.+-cong
+      (boundedBishopFiniteSumCongruent (suc n) pointwise)
+      P.≃-refl)
+
+oddFiniteRowBounded :
+  (n : Nat) (expected : Nat → B.ℝ) →
+  (∀ k → N._≤_ (suc k) (suc n) →
+    B._≃_ (sourceOddTerm n k) (expected k)) →
+  B._≃_ (Shift.signedOddRow n)
+          (B.∑₀ expected (suc n))
+oddFiniteRowBounded n expected pointwise =
+  P.≃-trans (originalOddRowFromTerms n)
+    (boundedBishopFiniteSumCongruent (suc n) pointwise)
