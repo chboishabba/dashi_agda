@@ -1,5 +1,13 @@
 
 
+## 23 November 2026 — all-rational NS source and arbitrary-output fifth-degree geometry
+
+**New [source-grounded large P0 geometric theorem](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md):** selected output k=(83,64,0) with FOUR genuine rational Pythagorean helical input pairs, one physically active strict deep-FL, no square-root-inaccessible mode scalars, Fourier reality, and `P_kM=M=e_z`. Same field across cutoffs C=83/100, physical `V=154122/5`, exact original complete covariance `S83=-33634973008/5`, `S100=+73504991408/5`. General 3-axis lattice count `N=Π(2C−|k_j|+1)`, mean mass `R/N=ν[|k|²/2+Σ((2C−|k_j|+1)²−1)/6]`, hence for fixed finite Fourier velocity `S_C=32ν||M||² C^5+O(C^4)`. Exact Git-byte-identical locally executed [regression](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py) 1,224 independent small geometric cutoffs plus symbolic all-output leading coefficient. **The old axial M||k fixture was Leray-null and does not pay projected output; the irrational C16 source also remains merely a diagnostic.** Existing `centeredPairCovarianceAppendZero` already proves the general padding cocycle; don't duplicate it. Critical R541/R542/R573/R547/R568 signed original spacetime cutoff budget still OPEN, 0/6 Clay endpoints.
+
+**Karp source correction completed:** exact raw guard is `3m≤remaining suffix length`, no speculative executable binomial(n,2) test and no stronger early `3m+1` guard. Corrected Python original/native bitword replay still 132,281/132,281 local PASS, not a physical TableProgram and not a P≠NP lower bound. BSD selected E32 S4/S5 classical prior work and Hodge general p=1 classical prior work carry unchanged. RH/GRH and YM untouched.
+
+
+
 ## 23 November 2026 — literal Leray-transverse source and no phantom N21 binomial gate
 
 [Big source-origin geometry/reverse-solve ledger](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md) and [exact byte-matched local regression](../../scripts/check_ns_transverse_large_bite_20261123.py) supersede the prior axial NS fixture **as a projected-output test**: axial M was parallel k and hence Leray-null. New original 5-cell helical Fourier field has **M=(0,0,1)=P_kM**, nonzero strict-LH/deep-FL work and all 18,513/79,233 original incidences for cutoffs 16/24. With the SAME fixed initial field, the negative R236 source changes sign (`S16≈−8.55e6`, `S24≈+5.38e7`); exact (S_C=32C^5+O(C^4)) for fixed physical W and V is inherited from existing `centeredPairCovarianceAppendZero` padding algebra. This is a physical-source diagnostic; **the R568 signed nested spacetime estimate remains OPEN** and is not contradicted by an R236 cutoff-dependent coordinate.
