@@ -1,5 +1,8 @@
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
+-- RH source-aligned coefficient gluing: positive normalization only, not RH/Monster promotion.
+import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
+
 import DASHI.Unified.TOEExistingNonPromotionReuseExact as ExistingBoundary
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityOwner
 import DASHI.Unified.GRQuantumProofTerms as GRTypes
