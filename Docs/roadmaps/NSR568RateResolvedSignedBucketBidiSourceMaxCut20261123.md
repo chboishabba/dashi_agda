@@ -1,5 +1,11 @@
 # R568 original signed rate-resolvent: exact bucket BIDI and two-sided analytic cut
 
+## 23 November 2026 — actual-source helical Galerkin sign-transfer negative control
+
+[**Substantive physical finite-state advance**](NSR568OriginalGalerkinHelicityRateSignCountercontrol20261123.md). The previous two-free-carrier rates 13/17 rational countercontrol is now **superseded in physical strength**, not invalidated, by two fully source-generated C=1 real-helicity Galerkin velocity states. Complete ordered source -iP_k quadratic forcing, exact positive/negative curl eigenprojectors, actual R225 doubleCell and R388 doubleForcing, original R566 pair scalar and R687 rate-lift all pass 64/64 EXACT algebraic checks. Two seeds 61/63 yield **F>0>L and F<0<L**, independently certified by outward rational sqrt intervals, with fixed output k=(1,0,0), 18 incidences and three rates. The no-go is only for **unconditional pointwise sign transfer** (including true finite Galerkin forcing) and NOT for all possible time-integrated physical C1/C2 upper/lower mechanisms. The native source uses Rational.rationalRealField; exact physical helicity on non-axis modes requires a field extension and naturality proof before Agda admission. Latest blob `efad812d7699118ccb0396eb0165d4e6ba323fa8`; remaining signed spacetime C1/C2 unchanged OPEN.
+
+
+
 ## 23 November 2026 — exact optimal rate quotient supersedes the loose class-count ceiling
 
 [Refined actual-source midpoint/rate-Cauchy radical proof and executable](NSRateResolvedCauchyRadicalOriginalSource20261123.md). The preliminary 6C²+1 rate-count ceiling is true but loose. Actual input masses satisfy m=(|k|²+|p−q|²)/2 and m≡|k|² mod2; the stronger **3C²+1** ceiling and source-specific bounds from d_i parity/limits hold. Exact source rate-multiplicity generating polynomial factors over the THREE coordinate intervals, with coefficients counting every ordered original p/q incidence. The duplicate-rate Cauchy matrix has rank EXACTLY the number of distinct rates and radical of dimension N−R: all within-rate zero-sum vectors, not only swap antisymmetry. The exact rational projector Pi onto bucket averages satisfies Pi²=Pi and Pi K=K Pi=K. This finite identity is available for original D/M *types*; it does not show the arbitrary exact rational proxy D/M used in the tests are actual Galerkin nonlinear forcing.
