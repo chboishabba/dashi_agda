@@ -1,3 +1,13 @@
+# 24 November — F2 sparse labelled quotient theorem (CURRENT)
+
+[Source-legal sparse R4 proof](X369R4SparseLabelledObservableQuotient20261124.md), [SymPy regression](../../scripts/check_x369_sparse_labelled_quotient_sympy.py). Cross-pollination from Clay P0 #1548/#119 complete separator and cost separation, ramified Langlands/GCT #1549/#120 labelled residual reconstruction and masking. No Clay or arithmetic Langlands promotion.
+
+Actual coherent R4, E=4, d=6, top_k=2, fixed tag triad and independent payload triad per expert, three labelled probes select (0,j) with strict logits (2,1,0,0) up to permutation. Source-legal paired GELU implements exact linear payload; orientation +1. All present outputs are a*p0+b*pj. Identity selected transitions: exact quotient 9 coordinates, kernel (b*v,-a*v,-a*v,-a*v), forward descent and reverse labelled reconstruction. Anchor payload erasure: four-input word (u1,u1,u2,u3) recovers all 12 payload coordinates, determinant a*b^3. Thus same present observer has different recurrent quotient under actual legal transition choices. Continuous lower dimension and finite alphabet bit lower bounds scoped to tagged domain. Local exact SymPy passed strict probe, ranks, inverse and 16 binary scalar cases; no original Torch or kernel run.
+
+F2a/b/c paid for this restricted ideal-real family only. Next generalized source-valid labelled probe and transition-invariant kernel characterization, then nonlinear chart/actual fitted reachable domain. F3–F6 remain open at original general scope. Preserve source fingerprint and original attribution.
+
+---
+
 # 24 November — master-based formal endpoint continuation (CURRENT)
 
 Merged #1526 ended at 274faf58; master base c36aa4a4. Recovered the exact F1 module from 44cd25ec and formal-first header from d9f95478 (historical wording corrected below). This continuation is not a claim of kernel acceptance. Native source owner: [Leech #5](https://github.com/chboishabba/LeechTransformer/pull/5), audited HistoryOrbitMoE at 6beb8556.
