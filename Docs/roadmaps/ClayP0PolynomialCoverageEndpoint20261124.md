@@ -391,3 +391,173 @@ if __name__=='__main__':
 | G5/N6 | machine coverage and endpoint transfer | classical coverage argument supplied; original formal weld conditional |
 
 G10a-c refine G6a-c, not additional mandatory phases for another successful route. Highest alpha now: back-solve through the exact relative-power inclusion W^[r] <= V^[r+1] while retaining the joint kernel of M, rather than collapse all fibres to degree or frozen rank. Seek a target-dependent obstruction that cannot be discharged by a common reused nonlinear term (in a batch of W products their expansions have the form sum of V-products + c times one element of V, since c^2=c and 1 in V). The latter identity is exact: (u_i+alpha_i c)(v_i+beta_i c) = u_i v_i + c(alpha_i v_i+beta_i u_i+alpha_i beta_i), and summing combines all reuse into one coefficient. It gives a reverse-search branch rule, not yet a serial rank-charge bound. Use equality, conjunction, cubic, quadratic half-rank and cheap shared decoders as adversarial controls. A zero marginal excludes one step, not all short paths. Do not optimize a finite proof-search graph as if its search cost were SAT runtime. Keep direct uniform N4/N5 and behavioural alternative available. No superpolynomial separation, native kernel certification, or proof of P != NP claimed.
+
+
+## 11. P0-G10/G11 — serial rank transport and affine orbit collapse (2026-11-24)
+
+P0 is the literal Clay P vs NP endpoint. User-supplied geometric donors: hyper-hollow B4 signed-permutation cell collapse (Round55/56, #564), hierarchical tree addresses, multiscale contraction, collar absorption, chord/arc shortcut, and CRT independent-channel collapse. Only their transferable mathematical patterns are used here. No physics, E8/Monster identification, UV, continuum-measure or fluid-regularity theorem is inferred or needed. The previous G7–G10 packet is the direct source; inspected both controlling branches at 6082f641fa6f (Agda #1548) and 1b4855b5be32 (Lean #119), same blob cfcbd095abd6d886d94225cce3e71d8b1ca37bc3. Aristotle #607/#678 governs backward discriminators and counterexamples.
+
+### G10a-local: exact rank-lift transport for a productive extension
+
+Let W=V+<c>, c=ab outside V; U=V/<1>. Choose a basis of U and the appended c in W/<1>. A bivector on W/<1> decomposes uniquely as B0+c wedge L, where B0 in exterior^2 U and L in U. Its alternating matrix has blocks [B0 L; L^T 0] (coordinates of L in the selected basis). Its rank equals rank(B0) plus 0 if L lies in the column space of B0, or plus 2 otherwise. Proof: if L=B0 t, a congruence change of the appended vector eliminates L and t^T B0 t=0; otherwise L pairs nontrivially with the radical, adding exactly a hyperbolic pair (or use rank-nullity on the bordered matrix). Rank and column-space membership do not depend on the choice of compatible basis.
+
+Consequently the exact G8a batch-cost transport is
+
+    batch_W(f+W) = min { rank(B0)/2 + 1[L notin im B0] :
+                        M_V(B0) = f+cL (mod W) }.
+
+Here M_V has values in A_n/V and equality modulo W means compose the quotient A_n/V -> A_n/W. L is represented by any lift to V (changing lift by 1 changes cL by c, absorbed modulo W). Empty fibre has infinity cost. Proof: apply G8a in W and the unique bivector decomposition; the image is M_V(B0)+cL modulo W. This is exact for all productive edges, and includes arbitrary reuse of the new generator. It pays a local transport identity, **not** G10a's requested global serial-safe bounded-charge invariant: the shifted target f+cL may be much easier or harder than f, and might change on every step. Cubic f remains the negative control (initial frozen batch infinite, after one product finite). Do not replace this minimization with rank of one arbitrary lift, or impose equality modulo V without allowing the c offset.
+
+### G11a: exact orbit quotient of Boolean product flags (B4 pattern)
+
+Use G=AGL(n,2) acting on A_n by precomposition with affine bijections (use inverses for a left action if desired). It preserves addition, multiplication and 1, and preserves V0. Hence g(V+<ab>)=gV+<(ga)(gb)>: productive edges and their cost are equivariant. The quotient graph has an edge [V]->[W] iff some representatives have an edge. Every quotient path starting at [V0] lifts to an actual path by transporting the next edge so its source is the current representative. Conversely every actual path projects at identical length.
+
+For a fixed f, goal states are V containing f. Full-group orbit distance from [V0] to the set of orbits with some representative containing f equals actual distance to f: lift the path, then use a single group transformation mapping its final state to the representative containing f; V0 stays fixed. Alternatively carry the pair (V,f+V0), or restrict to the stabilizer of f+V0 to keep the target fixed throughout local backward search. Do not quotient by arbitrary GL(A_n): preservation of multiplication is essential. For multi-output target S use its orbit or its stabilizer. Canonicalization/search cost is not execution cost.
+
+The complete affine coset action on scalar functions modulo V0 has 3 orbits for n=3 (sizes 1,7,8) and 8 orbits for n=4 (sizes 1,16,28,35,120,448,560,840). The reachable flag layers have:
+
+| n | depth | states | orbit types | orbit sizes |
+|---|---:|---:|---:|---|
+| 3 | 0 | 1 | 1 | 1 |
+| 3 | 1 | 7 | 1 | 7 |
+| 3 | 2 | 35 | 2 | 7,28 |
+| 4 | 0 | 1 | 1 | 1 |
+| 4 | 1 | 35 | 1 | 35 |
+| 4 | 2 | 2485 | 4 | 105,280,420,1680 |
+
+These are exact finite local Python bitset results, not a correspondence to B4/E8 or an asymptotic lower bound. All depth-two orbits are hit from depth-one representatives. Checked rank-transport formula on one incoming edge per depth-one and depth-two orbit: n=3 three edges, 2112 (B0,L) pairs, 16 residual distances; n=4 five edges, 132096 pairs, 1408 residual distances; independent BFS on frozen product-direction XOR sums agreed on all 1424 attainable distances. No CI/kernel run.
+
+### G11b: no-go for forcing orbit-invariant intermediate states (chord/arc pattern)
+
+Quotienting the actual graph is not the same as restricting all states to invariant subspaces. For n>=4 consider the S_n-symmetric target AND(x1,...,xn). Any first productive S_n-invariant extension of V0 must have its one-dimensional quotient line fixed (F2 has no nontrivial scalar), and its generator modulo affine is a nonzero invariant quadratic form. Coordinate permutations are transitive on unordered variable pairs, so that form must be q=sum_{i<j} x_i x_j. Its polar matrix has all off-diagonal entries 1 and diagonal 0: rank n if n even, n-1 if n odd (kernel consists of constant vectors for odd n). Hence rank >=4. But a single product of affine forms has quadratic polar rank <=2. There is no productive invariant first state, whereas the symmetric target has an unrestricted path of n-1 AND gates. This is an exact symmetry-breaking shortcut. A lower bound on symmetry-restricted paths, monotone paths, block-local paths or chosen representatives without lifting cannot certify unrestricted MC. The orbit quotient G11a is sound precisely because it does not exclude such paths.
+
+Also, orbit reduction cannot by itself collapse all functions to a polynomial family: there are 2^(2^n-n-1) affine cosets and |AGL(n,2)|=2^n product_{i=0}^{n-1}(2^n-2^i) <=2^(n^2+n). Thus there are at least 2^(2^n-n^2-2n-1) scalar coset orbits. This lower bound counts orbits, not SAT circuit size. To extract a stronger theorem one must exploit a particular succinct target, not assume all cases reduce to a few types at arbitrary n.
+
+### G11c: hierarchical slice and gluing (tree / CRT / collar pattern)
+
+For a split x=(u,t), t one Boolean bit, write f=f0(u)+t(f0(u)+f1(u)). Restriction to t=0 or 1 never increases MC; independent branch computations can be glued by one additional AND. Therefore max(MC(f0),MC(f1)) <= MC(f) <= MC(f0)+MC(f1)+1. Lower bound by MAX, not SUM: one gate can work simultaneously on both restrictions. The same applies to hierarchical restrictions on many bits. Under the algebra isomorphism A_n = A_(n-1) x A_(n-1) (two Boolean slices), multiplication is coordinatewise; a gate is shared across the slices. CRT-like independent coordinate representation is not independent resource payment. Any dyadic/p-adic-style decomposition or weighted multiscale charging must establish bounded overlap on actual primitives (R4); geometric contraction of a residual is neither a lower bound on work nor proof of asymptotic separation. This does not assert any physics donor theorem. The two-sided inequality is an exact general control for multiscale attempts.
+
+### G12 highest-alpha frontier
+
+| ID | Exact obligation | Status |
+|---|---|---|
+| G10a-local | borderedAlternatingRank / reverseBatchLiftTransport | mathematical derivation, exact local checks |
+| G11a | affineOrbitProductFlagPathLift / targetOrbitDistanceExact | mathematical derivation, finite orbit check |
+| G11b | invariantFlagShortcutCounterexample / orbitCountNoGo | mathematical derivation |
+| G11c | sliceRestrictionAndGluingBound | mathematical derivation |
+| G12a / G10a / G6a | serialTargetShiftBound: control f -> f+cL for all legal histories with bounded per-gate charge, using joint rank fibres, not sum of restrictions | OPEN |
+| G12b / G10b / G6b | SAT-specific goal gap for the same invariant, after orbit lifting | OPEN |
+| G12c / G10c / G6c | superpolynomial gap in encoded input length | OPEN |
+| G5/N6 | polynomial coverage / actual Clay terminal | classical coverage derivation; source attachment and actual lower bound remain unpaid |
+
+Next BIDI action: seek a SAT-specific obstruction in the joint slice/target-shift rank-lift fibre that is invariant under arbitrary representative changes; use orbit quotient only to eliminate duplicate proof-search states. Discriminate by comparing cheap symmetry-breaking flags and shared slice circuits against proposed progress measures. Need a reason a single cL cannot resolve many target obligations, not a bound on canonicalization or proof search. Explore exact small residuals and original SAT restrictions only as falsification; do not let extended finite orbit census delay the endpoint. G12a-c refine G6, not an extra mandatory phase; direct uniform N4/N5 remains active OR route. No superpolynomial lower bound or Clay closure claimed.
+
+### Local reproduction (Python exact integer GF(2); no CI)
+
+```python
+from itertools import combinations
+
+def red(x,B):
+    for b in B:
+        if x>>(b.bit_length()-1)&1:x^=b
+    return x
+
+def ext(B,x):
+    x=red(x,B)
+    if not x:return B
+    p=1<<(x.bit_length()-1)
+    return tuple(sorted([b^x if b&p else b for b in B]+[x],reverse=True))
+
+def basis(xs):
+    B=()
+    for x in xs:B=ext(B,x)
+    return B
+
+def span(B):
+    s=[0]
+    for b in B:s += [x^b for x in s]
+    return s
+
+def affine(n):
+    return basis([(1<<(1<<n))-1]+[sum(1<<x for x in range(1<<n) if x>>i&1) for i in range(n)])
+
+def dirs(V):
+    return {red(a&b,V) for a,b in combinations(span(V),2)}-{0}
+
+def succ(V):
+    return {ext(V,c) for c in dirs(V)}
+
+def gens(n):
+    N=1<<n; ps=[]
+    for i in range(n):ps.append([x^(1<<i) for x in range(N)])
+    for i in range(n-1):
+        ps.append([x^(((x>>i^x>>(i+1))&1)*((1<<i)|(1<<(i+1)))) for x in range(N)])
+        ps.append([x^(((x>>(i+1))&1)<<i) for x in range(N)])
+    return ps
+
+def transform(f,p):
+    return sum(1<<i for i,j in enumerate(p) if f>>j&1)
+
+def orbits(S,action,ps):
+    remaining=set(S); out=[]
+    while remaining:
+        seed=min(remaining);seen={seed};queue=[seed]
+        for s in queue:
+            for p in ps:
+                t=action(s,p); assert t in S
+                if t not in seen:seen.add(t);queue.append(t)
+        remaining-=seen;out.append((seed,seen))
+    return out
+
+def lift_tables(V,W,c,n):
+    mask=(1<<(1<<n))-1
+    U=basis(v^mask if v&1 else v for v in V)
+    assert len(U)==len(V)-1
+    d=len(U); es=list(combinations(range(d),2))
+    images=[red(U[i]&U[j],V) for i,j in es]
+    rev={}
+    for w in range(1<<len(es)):
+        rows=[0]*d;z=0
+        for h,(i,j) in enumerate(es):
+            if w>>h&1:rows[i]^=1<<j;rows[j]^=1<<i;z^=images[h]
+        B=basis(rows);r=len(B);assert r%2==0
+        for l,L in enumerate(span(U)):
+            zW=red(z^(c&L),W)
+            cost=r//2+bool(red(l,B))
+            rev[zW]=min(rev.get(zW,100),cost)
+    direct={0:0};fr={0};D=dirs(W)
+    while fr:
+        nxt={a^b for a in fr for b in D}-direct.keys()
+        level=direct[next(iter(fr))]+1
+        for z in nxt:direct[z]=level
+        fr=nxt
+    assert rev==direct
+    return (1<<len(es))*(1<<d),len(direct)
+
+for n in (3,4):
+    V=affine(n);ps=gens(n);layer={V};first=None;second=None
+    for d in range(3):
+        O=orbits(layer,lambda W,p:basis(transform(w,p) for w in W),ps)
+        print(n,d,len(layer),len(O),sorted(len(x[1]) for x in O))
+        if d==1:first=O
+        if d==2:second=O
+        if d<2:layer=set().union(*(succ(W) for W in layer))
+    piv={b.bit_length()-1 for b in V}
+    qs=span(tuple(1<<i for i in range(1<<n) if i not in piv))
+    Q=orbits(set(qs),lambda f,p:red(transform(f,p),V),ps)
+    print('function cosets',len(Q),sorted(len(x[1]) for x in Q))
+    actual=set().union(*(succ(W) for _,orb in first for W in orb))
+    rs=set().union(*(succ(W) for W,_ in first))
+    assert all(any(w in rs for w in orb) for _,orb in second)
+    assert actual==set().union(*(orb for _,orb in second))
+    count=cases=targets=0
+    for W,_ in first:
+        c=next(w for w in W if red(w,V))
+        a,b=lift_tables(V,W,c,n);count+=1;cases+=a;targets+=b
+    for W,_ in second:
+        P=next(P for _,orb in first for P in orb if all(not red(p,W) for p in P) and W in succ(P))
+        c=next(w for w in W if red(w,P))
+        a,b=lift_tables(P,W,c,n);count+=1;cases+=a;targets+=b
+    assert (count,cases,targets)==({3:(3,2112,16),4:(5,132096,1408)}[n])
+    print('reverse lift',count,cases,targets)
+```
