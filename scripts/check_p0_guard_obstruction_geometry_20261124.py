@@ -161,6 +161,59 @@ def random_signed_tests():
     return 250, modes, max_terms
 
 
+def coefficient_support(obstructions):
+    """Ternary join convolution; retain support when signed coefficients cancel."""
+    alpha, support = {frozenset(): 1}, {frozenset()}
+    for sigma in obstructions:
+        updated = dict(alpha)
+        for rho, coefficient in alpha.items():
+            tau = join(rho, sigma)
+            if tau is not None:
+                updated[tau] = updated.get(tau, 0) - coefficient
+        alpha = updated
+        next_support = set(support)
+        for rho in support:
+            tau = join(rho, sigma)
+            if tau is not None:
+                next_support.add(tau)
+        support = next_support
+    return alpha, support
+
+
+def signed_from_coefficients(q, alpha, eta):
+    total = 0
+    for tau, coefficient in alpha.items():
+        fixed = dict(tau)
+        if any((eta >> i & 1) and i not in fixed for i in range(q)):
+            continue
+        phase = sum((eta >> i & 1) * bit for i, bit in fixed.items()) & 1
+        total += coefficient * (-1 if phase else 1) * (1 << (q-len(fixed)))
+    return total
+
+
+def ternary_recurrence_tests():
+    rng, modes, max_states = Random(73), 0, 0
+    for _ in range(100):
+        q, r = rng.randint(1,4), rng.randint(1,4)
+        C = []
+        for _ in range(rng.randint(0,min(14,3*(q+r)))):
+            w = rng.randint(2,min(3,q+r))
+            while True:
+                vs = rng.sample(range(q+r),w)
+                if any(v<q for v in vs) and any(v>=q for v in vs): break
+            C.append(tuple((v,rng.randrange(2)) for v in vs))
+        O = obstructions(q,r,C)
+        alpha, support = coefficient_support(O)
+        reverse_alpha, reverse_support = coefficient_support(tuple(reversed(O)))
+        assert alpha == reverse_alpha and support == reverse_support
+        max_states = max(max_states,len(support))
+        for eta in range(1<<q):
+            value = signed_from_coefficients(q,alpha,eta)
+            assert value == signed_ie(q,O,eta) == brute_signed(q,O,eta)
+            modes += 1
+    return 100,modes,max_states
+
+
 def parity_tests():
     rows = []
     for q in range(1,7):
@@ -249,6 +302,7 @@ def main():
     print("random_cover cases/assignments/terms/max_terms:",random_cover_tests())
     print("random_signed cases/modes/max_terms:",random_signed_tests())
     print("parity q/clauses/obstruction_terms; zero_modes; signed_modes:",parity_tests())
+    print("ternary recurrence cases/modes/max_support_states:",ternary_recurrence_tests())
     print("local_full_parity L/R/clauses/nonempty_left_fibres/right_counts:",local_full_parity_smoke())
     print("PASS: exact finite regressions only; no asymptotic lower bound claimed.")
 
