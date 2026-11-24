@@ -650,3 +650,42 @@ The local 100–10000 oracle is an immediate, executed
 in-lieu cross-engine acceptance; the full exact-source
 compilation/large matched Pareto/independent SOTA and
 Agda proof remain OPEN.
+
+
+## 24 November — COMP5k/l projective geometry (execution DEFERRED)
+
+User explicitly deferred testing/benchmarking and requested fresh
+geometry optimization using newest PRs. Audited newest #1550
+(input-indexed consumer sufficiency), #1549 (shared sparse
+geometric representation), #1548 (semantic coverage/cost
+separation) and original #1529. Only source-legal
+consumer/quotient and shared-computation ideas apply to Pi.
+
+Two **UNTESTED candidate source files** now exist, both derived
+from the latest pinned COMP5j GMP implementation:
+- \`scripts/check_pi_p0_signed_tail_cone.cpp\` (COMP5k):
+  the original 2x2 upper-triangular P/Q/T matrix product has
+  next-term signed delta \(\delta=P_n p_n(A+Bn)\), whose
+  sign is \((-1)^n\). Select the adjacent rational endpoint
+  order by parity/source signs; eliminate *both* giant
+  numerator/denominator cross-products and avoid an extra
+  leaf by sorting either parity via constant-time swaps.
+- \`scripts/check_pi_p0_residual_witness.cpp\` (COMP5l):
+  choose even n so \(\delta>0\) and use TWO exact
+  quotient/remainder fibres for the lower integer quotient
+  to rewrite the strict upper-bound certificate as
+  \(x\delta+\rho+\lfloor(\ell+FC)/2^k\rfloor<Tq\).
+  This avoids the upper numerator's large \((R+1)\)
+  radical multiplication, while introducing retained
+  remainders with not-yet-measured cost and residency.
+
+The full derivation, exact positivity, signs, matrix-source
+identity, conservative performance hypotheses and future
+acceptance cuts live in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+No new execution results, compilation, SymPy checks, Agda
+kernel checks, source-independent π theorem or external
+SOTA claim were made. Retain COMP5j as the measured historical
+baseline, and do not inject these untested candidates into
+the six-way default Pareto runner until the testing
+deferral is lifted.
