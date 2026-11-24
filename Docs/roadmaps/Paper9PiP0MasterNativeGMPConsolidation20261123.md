@@ -746,3 +746,31 @@ The classical Chudnovsky analytic source and Bishop
 same-real theorem remain open formal obligations. Preserve
 the already measured COMP5j certificate/benchmark receipts
 without confusing the new untested candidates with them.
+
+
+### COMP5o — exact independent signed-square verifier (research implementation, UNTESTED)
+
+Added \`scripts/pi_p0_signed_square_verifier.hpp\`, a *separately
+compilable consumer* for a candidate integer x and
+**source-authenticated** original P/Q/T triple. Let
+\(F=426880\,10^d\), \(S_{\rm lo}=N_{\rm lo}/D_{\rm lo}\),
+\(S_{\rm hi}=N_{\rm hi}/D_{\rm hi}\).
+Conditional on the same original infinite Chudnovsky
+π identity and alternating-tail bound, the following
+two EXACT INTEGER slacks suffice for the accepted floor:
+
+\[
+10005(FD_{\rm hi})^2-(xN_{\rm hi})^2\ge0,\qquad
+((x+1)N_{\rm lo})^2-10005(FD_{\rm lo})^2>0.
+\]
+
+This does not use \`mpz_sqrt\` in the verifier and
+retains original signed parity. A malicious arbitrary
+triple could still pass signs, so exact P/Q/T producer
+replay or original source receipt verification is REQUIRED.
+The independent verifier may cost more large products
+and RAM than COMP5j/m: no measured or claimed speedup.
+Full proof boundaries are in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+Testing deferred; no compilation, benchmark or kernel
+acceptance for COMP5o.
