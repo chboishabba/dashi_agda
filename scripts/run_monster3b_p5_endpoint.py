@@ -261,6 +261,18 @@ def main():
                             "--out",out/"quadratic12_character_candidates.json"]):
                             report["lemma_status"]["M3B-L10A_mod31_to_ordinary_character"]=\
                                 "EXACT_BOUNDED_CANDIDATES; WEIL_PHASE_COHERENCE_NOT_YET_CLOSED"
+                        if cover.is_file():
+                            if run("actual_mod31_outer_phase_pair",[
+                                sys.executable,
+                                SCRIPTS/"monster3b_mm31_outer_phase_pair.py",
+                                "--plus",plus,"--minus",minus,
+                                "--manifest",args.manifest,"--cover",cover,
+                                "--outdir",out/"actual_mod31_outer_phase_pair"]):
+                                report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
+                                    "GENUINE_MOD31_OUTER_PROJECTIVE_ACTION; NOT_COMPLEX"
+                            else:
+                                report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
+                                    "ACTUAL_MOD31_OUTER_PHASE_SOURCE_FAILED"
                     else:
                         report["lemma_status"]["M3B-L10A_mod31_to_ordinary_character"]=\
                             "OPPOSITE_PHASE_PRODUCER_FAILED"
