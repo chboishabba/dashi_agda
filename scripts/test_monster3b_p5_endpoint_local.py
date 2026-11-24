@@ -43,6 +43,13 @@ def main():
     import numpy as np
     assert mm31.rank31(np.eye(4,dtype=np.int16))==4
     assert mm31.rank31(np.zeros((4,4),dtype=np.int16))==0
+    null=mm31.nullspace31(np.array([[1,0,0],[0,1,0]],dtype=np.int16))
+    assert null.shape==(3,1) and null[2,0]==1
+    B=np.array([[1,0],[0,1],[1,1]],dtype=np.int16)
+    D=np.array([[5,7],[1,3]],dtype=np.int16)
+    assert np.array_equal(mm31.coordinates_in_columns(B,
+        mm31.matmul31(B,D)),D%31)
+
     assert np.array_equal(mm31.matmul31(np.eye(2,dtype=np.int16),
                    np.array([[5,27],[12,2]],dtype=np.int16)),
                    np.array([[5,27],[12,2]],dtype=np.int16))
