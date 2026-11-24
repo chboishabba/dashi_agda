@@ -133,17 +133,23 @@ def compare(work,timeout,native_dir,full_json,ck_file,sidecar=None):
     # terminal files; do NOT pretend the current A0/A1 checkpoints are old FV.
     if bool(full_json)!=bool(ck_file):
         report["checks"]["checkpoint"]={"status":"BLOCKED","reason":"supply both --production-json and --checkpoint"}
-    elif full_json:
+    elif full_json and sidecar is None:
         consumer=ROOT/"scripts/check_f8_xciv_checkpoint_wall_stencil.py"
         report["checks"]["checkpoint"]=(run_one("checkpoint-raw-wall",
             [sys.executable,str(consumer),"--checkpoint",str(ck_file.resolve()),
             "--production-json",str(full_json.resolve())],work,timeout)
             if consumer.is_file() else {"status":"BLOCKED","missing_file":str(consumer)})
+    elif sidecar is not None and full_json and ck_file:
+        report["checks"]["checkpoint"]={"status":"COVERED_BY_SAME_CLOCK_STATE","reason":"new source-pinned consumer accepts FV and weak and verifies original wall/receipt"}
     else:
         report["checks"]["checkpoint"]={"status":"NOT_RUN","reason":"authenticated original NPZ not provided"}
-    report["status"]=("PASS_RECEIPT_PARITY_ONLY" if
-        report["checks"]["four-way-96-signed"]["status"]=="PASS"
-        else "OPEN_NATIVE_96_PARITY")
+    compulsory=["four-way-96-signed"]
+    if sidecar is not None:
+        compulsory.append("same-time-native-state")
+    failures=[k for k in compulsory if report["checks"].get(k,{}).get("status")!="PASS"]
+    report["status"]=("PASS_RECEIPT_AND_SAME_CLOCK_ONLY" if sidecar is not None else
+                      "PASS_RECEIPT_PARITY_ONLY") if not failures else "OPEN_OR_FAILED_REQUIRED_ACCEPTANCE"
+    report["required_checks_failed_or_missing"]=failures
     report["continuum_causal_null_accepted"]=False
     report["physical_signal_accepted"]=False
     return report
@@ -201,5 +207,5 @@ def main():
     print(json.dumps({"ledger":str(report),"status":result["status"]},indent=2))
     # Intentionally nonzero unless a scoped phase truly passed.
     return 0 if result["status"] in ("PASS_PREFLIGHT_ONLY",
-              "PASS_RECEIPT_PARITY_ONLY","NATIVE_RECEIPT_PARITY_PASS_ONLY","NATIVE_CAPTURED_96_PASS_ONLY") else 2
+              "PASS_RECEIPT_PARITY_ONLY","PASS_RECEIPT_AND_SAME_CLOCK_ONLY","NATIVE_RECEIPT_PARITY_PASS_ONLY","NATIVE_CAPTURED_96_PASS_ONLY") else 2
 if __name__=="__main__":raise SystemExit(main())
