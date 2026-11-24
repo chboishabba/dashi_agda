@@ -1,5 +1,10 @@
 # Active Clay rollup — 24 November 2026
 
+## 24 November — attribution-preserving exterior/orientation cut
+
+All four exact cuts, attribution and original source-owner ledger. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.
+
+
 ## 24 November — original midpoint rates, signed base change, actual dihedral producers, exact Robin boundary
 
 Parent 937d29aeb27e1044cf40f2c1e3c821cd71eba9bd. Stay on four; donor PRs #1548/#1549/#1546/#1291 untouched, no tests on π. Actual local timeout-90 SymPy/Fraction [checker](../../scripts/check_clay_four_midpoint_dihedral_20261124.py), exact Git blob 8c5300081c8ad16b21675b206090f57ad02199e6. 62 projected divergence-free cells and 3844 ordered pair checks; 569 odd-prime eigenspace fixtures plus 3 identities; 3 cyclotomic conductor matrix suites; exact 5040 early maximum/960 boundary integer sieve and strict rational log/exp bounds. No native kernel/CI, actual continuum trajectory, local Selmer computation, new cycle construction or universal Clay endpoint. P0 original endpoint; P1 exact rate/character/source geometry; P2 paid local analytic sectors and actual published donor; P3 universal quantifier and exterior/residual estimates; P4 literal consumers; P5 native admission. Do not treat finite source algebra as all-data analysis. RH source ingress remains shortest, BSD universal comparison open, NS physical midpoint sector paid classically under actual Fourier realization, Hodge dihedral families genuine published geometry not all K3.

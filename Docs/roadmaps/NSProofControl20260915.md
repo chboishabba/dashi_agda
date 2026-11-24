@@ -1,5 +1,10 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 24 November — attribution-preserving exterior/orientation cut
+
+A2-far: exact Tonelli tail payment, leaves middle sector and independent continuation. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.
+
+
 ### NS A2-midpoint — physical rate reference and incompressible inner sector
 
 Read actual NSTriadKNWeightedGramFluxCompilerRound290Exact (d6195329dae2fc92ca803a6af31262a9f2073816), original R541 (03abac6be9845f07078ef74342ab1a3514c4e0e8), original rate-bucket roadmap NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md (24e08380308d5fb6a27878c4ee3a3558253d9ce4), Euclidean canonical projected interaction (1d8ee0f795e254795f6d6f2adfd4933c7e54f63f), canonical saturation (07b714d8fb4bba385e521e710f7914270bc8ae01). On same output xi, a=nu|xi|², d_alpha=eta_alpha-xi/2, zeta_alpha=xi-eta_alpha, physical cell rate r_alpha=nu(|eta_alpha|²+|zeta_alpha|²)=a/2+2nu|d_alpha|². Thus r_alpha+r_beta=a+s, s=2nu Delta², Delta²=|d_alpha|²+|d_beta|². In original R290 physical damping and R541 resolvent geometry this is exact, not a freely selected arbitrary reference. For Euclidean canonical divergence-form projected cells it is also the rate from differentiating the two input Fourier modes' viscous terms, at fixed xi and nu; their nonlinear tangent remains to be constructed on actual real trajectory. R290's helical cells and Euclidean N_alpha are NOT asserted identical: transport the rate formula, not the field currencies. The prior additive reference can now be chosen exactly at the physical heat-rate level, with single-cell nonnegative centered rates 2nu|d_alpha|². No repair error there; actual source-level native Fourier/measure and tangent population still unpaid. Preserve independent zero output, diagonal and ordered-pair conventions.

@@ -1,5 +1,10 @@
 # BSD — universal Clay-rank versus strong-refined scope, S5/S6 fail-closed (2026-11-17)
 
+## 24 November — attribution-preserving exterior/orientation cut
+
+S6-Q5: selected actual twist rank=analytic rank=1 and Sha[2^infty]=0; universal S6 open. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.
+
+
 ### BSD S6-Q — signed quadratic base-change decomposition
 
 For squarefree d!=1, K=Q(sqrt(d)) a quadratic field, E^d its quadratic twist and twist isomorphism i:E^d_K->E_K satisfying g i=-i for nontrivial g in Gal(K/Q). For odd ell, e_±=(1±g)/2 are exact orthogonal idempotents at every ell^n layer, compatible with transitions. Restriction/corestriction on global and all local Galois cohomology, and natural Kummer diagrams (including ramified and infinite places) identify Sel_{ell^n}(E/Q) with plus invariants in Sel_{ell^n}(E/K) and via i the twist Sel_{ell^n}(E^d/Q) with minus invariants. Reason: group cohomology of order 2 vanishes on ell-primary modules for ell odd, res-cor=norm and cor-res=[2], local Kummer image descends via same cor-res and invertibility; at split places use both conjugate factors. Likewise MW/ell^n and Sha[ell^n] split naturally and Kummer short exact sequence respects signs. Reference Morgan and Paterson, On 2-Selmer groups of twists after quadratic extension https://doi.org/10.1112/jlms.12533 for local norm/Kummer framework; the odd-prime split follows directly from invertibility of 2, not a 2-primary theorem from that paper. At ell=2, integral 1/2 is unavailable; rationalize the compatible Tate modules of the Kummer tower, where norm/restriction has inverse after division by 2. Do not assert integral 2^n decomposition.
