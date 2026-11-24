@@ -221,3 +221,173 @@ if __name__ == '__main__':
     assert search(3, 2) == ([1, 7, 8], 8)
     assert search(4, 3) == ([1, 35, 988, 1024], 36)
 ```
+
+
+## 10. P0-G7/G8 — joint dual Walsh geometry and frozen-batch rank (2026-11-24)
+
+Priority remains literal Clay P vs NP. This section advances the G6 research action using exact classical derivations and local GF(2) probes, not a new infrastructure or certification prerequisite. G6a–c remain open. Both controlling PRs were read at heads 70c6529a83c2 (Agda #1548) and 6b2e96c63c9c (Lean #119), common blob 0d71c3b1f398479afcf9c3c43b6503ca59e5e93a. Reuse Aristotle #607/#678 (BIDI, collision, discriminator, guarded merge/reopen), #123 (JMD MDL and FRACTRAN), #1006, #1040, #1129, #1291 and #1546 as in preceding sections.
+
+### G7a: exact joint residual multiplicity by dual rank
+
+Fix V containing V0, U=V/<1> of dimension d, R=A_n/V of dimension k; mu: U x U -> R is alternating bilinear. For ell in R*, let omega_ell=ell o mu with rank r_ell. For z in R define N_V(z)=#{(a,b) in U^2: mu(a,b)=z}. Character orthogonality gives
+
+    N_V(z) = 2^(2d-k) sum_{ell in R*} (-1)^ell(z) 2^(-r_ell).
+
+Proof: insert the orthogonality indicator for mu(a,b)+z=0. The sum of (-1)^omega_ell(a,b) over b is 2^d if a belongs to the radical and zero otherwise. The radical has dimension d-r_ell, hence the double sum is 2^(2d-r_ell). Sum over ell. This handles joint constraints, not independent per-ell charges. All quantities are exact; implementation uses integer Walsh transform of 2^(2d-r_ell) and division by 2^k. For z != 0, each contributing pair is independent and each two-plane has six ordered bases, all mapping to the same residual; P_V(z)=N_V(z)/6. The zero fibre includes dependent pairs and cannot be divided by six. G3 backward predecessor is equivalent to positive N_V(z) for the specified nonzero direction; an unsigned rank histogram cannot replace the signed character sum.
+
+### G7b: projected dual, sound refinement and saturation
+
+For a selected dual subspace L <= R*, dimension j, replace R by L*, mu by its projection, and k by j in G7a. The count equals the sum of full-fibre counts over directions having the same L-signature. Enlarging L therefore monotonically decreases the projected count for a fixed target z. A zero count excludes the full target; a positive projected count need not imply full reachability. This is a sound Aristotle discriminator refinement, not a cost lower bound on the execution being analysed. Do not charge the Walsh transform's work to the target circuit.
+
+A useful reversed inequality: if every nonzero ell in L has rank >= rho, then every projected target has positive count whenever (2^j-1)2^(-rho)<1. Indeed its normalized signed sum is at least 1-(2^j-1)2^(-rho). In particular rho>=j suffices for j>0. Large dual ranks can make ALL projected directions available in a single gate, rather than impose an obstruction. Keep this as an adversarial control against rank-growth heuristics.
+
+### G7c: exact annihilator transport and cardinality no-go
+
+For a productive extension W=V+<c>, c=ab outside V, W^perp=V^perp intersect {ell:ell(c)=0}. This cuts the dual dimension by one. For a surviving ell, the form on W/<1> has a matrix obtained by bordering the old alternating matrix by the column ell(v_i c), its transpose, and a zero corner (ell(c^2)=ell(c)=0). Its rank increases by either zero or two: if the column is in the old column space, congruence eliminates it (the self-pairing vanishes); otherwise it adds a hyperbolic pair. This does not bound the rank of a functional which disappears, and must not be used as such.
+
+Fix f outside V, let E_f(V)={ell in V^perp:ell(f)=1}. Then |E_f(V)|=2^(k-1). If f remains outside W, the new and target constraints are linearly independent on V^perp, and |E_f(W)|=|E_f(V)|/2. If f is in W, E_f(W) is empty: the last gate discharges ALL surviving target witnesses. Thus unweighted witness cardinality and its logarithm, without target-specific product geometry, are determined only by dimension and goal membership; they do not distinguish different off-goal targets at a fixed depth. A single gate can remove exponentially many witnesses, even at V0 (choose f=x1*x2). Independent witness charging and a universally bounded log-loss at terminal transition fail. This is an exact negative control for N4b, not a general impossibility theorem for weighted or structured potentials.
+
+### G8a: exact frozen-operand batch metric by minimum alternating rank lift
+
+Let M: exterior^2 U -> R be the induced multiplication map. Represent a bivector b by its alternating coefficient matrix (zero diagonal, symmetric in characteristic two). Define
+
+    batch_V(z) = min_{b: M(b)=z} rank(b)/2,
+
+with infinity for an empty fibre. This is precisely the minimum number of products of operands from the ORIGINAL fixed V whose XOR equals z modulo V. Every r-term sum of wedges has matrix rank <=2r by rank subadditivity. Conversely an alternating matrix of rank 2r admits a congruence to r hyperbolic blocks plus zeros (split off a pair with nonzero pairing and take its orthogonal complement, inductively). Transporting back expresses the bivector as a sum of r decomposable wedges. Applying M yields r products; affine/free V terms can be added without AND. This works for arbitrary V and quotient kernel, not only initial affine V. For V0 and quadratic f it reproduces the established half-rank theorem for quadratic Boolean forms (Mirwald–Schnorr 1992; https://www.sciencedirect.com/science/article/pii/0304397592902358). That known theorem covers unrestricted scalar quadratic complexity; the batch formula here is derived for any fixed V.
+
+Do NOT infer a lower bound on arbitrary serial flags from this batch metric: x1*x2*x3 is outside V0^2 (so batch_V0 is infinite), yet two serial gates compute it. For a serial lower bound the changing V must be charged and controlled.
+
+### G8b: exact serial-safe relative degree potential
+
+For r>=1 let V^[r] be the linear span of products of at most r elements of V; 1 in V ensures monotonicity. Define delta_V(f)=min{r>=1:f in V^[r]}. This is finite since V contains the input variables. If W=V+<c>, c=ab, a,b in V, expand any product of r W operands as a sum of terms. Because c^j=c for j>=1, each term either has <=r V factors or has c times <=r-1 V factors. Hence W^[r] subset V^[r+1]. It follows that delta_V(f)-delta_W(f)<=1 for every productive edge, including unrestricted reuse. This is a concrete G6a-style potential Phi_f(V)=delta_V0(f)-delta_V(f). At every goal-containing V, delta_V(f)=1, so the bound is delta_V0(f)-1=max(1,deg(f))-1. It recovers the known degree bound, at most n-1; G6c not paid. It is important that this is an actual edgewise proof, not an empirically fitted potential.
+
+A stronger-looking fixed-cut matrix-rank potential also fails: equality of two m-bit strings has communication matrix I_(2^m) of rank 2^m over F2, yet compute AND of the m affine equality bits with m-1 AND gates. Exponential cut rank is not exponential nonlinear cost. Use this easy family as a negative control for arbitrary rank-based potentials.
+
+### G9: serial-safe affine-restriction lower bound (known mathematics, reusable)
+
+Along an m-gate AND/XOR/NOT circuit, start with the entire input affine space; on the surviving flat all prior gates are affine. For the next AND, both operands restrict to affine functions. If either is constant, the product is affine; otherwise impose one nontrivial affine constraint setting one operand to zero. The flat remains nonempty, losing at most one dimension. At the end all outputs restrict to affine functions on a common affine flat of dimension >=n-m (or >=0). Thus for any output space W, MC(W)>=n-max{dim H: all outputs restrict affinely on the affine flat H}. For quadratic scalar f, its polar form has rank 2r, and the maximum totally isotropic dimension is n-r (radical plus maximal isotropic in symplectic quotient), yielding MC(f)>=r even with arbitrary nonlinear intermediates. Symplectic decomposition realizes r products, proving equality. This is established gate-elimination/normality mathematics (https://pmc.ncbi.nlm.nih.gov/articles/PMC4957665/ and Mirwald–Schnorr above), not a novel separation. The bound is capped by n, so use as a serial-safe discriminator only.
+
+### Exact local execution receipt
+
+Python integer bitsets and GF(2) elimination, no CI or proof-assistant kernel. G7a/b: independent direct ordered-pair counts compared to Walsh-transform rank counts; all 48 states and 38,984 residual coordinates agree (counts include zero). Full dual at V0 and all productive one-gate successor subspaces for n=3 and n=4. At n=5,6,7,8 use first eight coordinates of reduced quotient only, not full dual. Checked total pair count and divisibility by six for nonzero directions. Full cases: n=3 depth 0: 1 state/16 coordinates/7 nonzero supported directions; depth 1: 7/56/49; n=4 depth 0: 1/2048/35; depth 1: 35/35840/2975. Four projected states add 1024 coordinates. Projected nonzero support sizes 64,71,71,71 respectively. G8a: all alternating matrices on U enumerated and compared with shortest XOR-sum distance using fixed-V product directions: 44 states, 36,360 matrix lifts, 4,608 attainable residual distances, all agreed. n=3: 8 states, 456 lifts, 64 distances, max batch distance 1; n=4: 36 states, 35,904 lifts, 4544 distances, max distance 2. These are finite falsification checks, not proofs of asymptotic complexity.
+
+Reproducer (same integer algorithm as executed; combines checks in one entry point):
+```python
+from collections import Counter
+from itertools import combinations
+
+def red(v,B):
+    for b in B:
+        if v & (1<<(b.bit_length()-1)): v^=b
+    return v
+
+def ext(B,v):
+    v=red(v,B)
+    if not v:return B
+    p=1<<(v.bit_length()-1)
+    return tuple(sorted([b^v if b&p else b for b in B]+[v],reverse=True))
+
+def span(B):
+    s=[0]
+    for b in B:s += [v^b for v in s]
+    return s
+
+def affine(n):
+    B=()
+    for x in [(1<<(1<<n))-1]+[sum(1<<j for j in range(1<<n) if j>>i&1) for i in range(n)]:B=ext(B,x)
+    return B
+
+def rank(rows):
+    B=()
+    for r in rows:B=ext(B,r)
+    return len(B)
+
+def fwht(v):
+    v=v.copy(); h=1
+    while h<len(v):
+        for i in range(0,len(v),2*h):
+            for j in range(i,i+h):
+                a,b=v[j],v[j+h];v[j],v[j+h]=a+b,a-b
+        h*=2
+    return v
+
+def verify(B,n,selected=None):
+    N=1<<n
+    Q=tuple(b ^ ((1<<N)-1) if b&1 else b for b in B)
+    R=()
+    for q in Q:R=ext(R,q)
+    d=len(R);assert d==len(B)-1
+    piv={b.bit_length()-1 for b in B}; free=[i for i in range(N) if i not in piv]
+    if selected is not None:free=free[:selected]
+    k=len(free)
+    def label(v):
+        r=red(v,B)
+        return sum(((r>>p)&1)<<j for j,p in enumerate(free))
+    M=[[label(a&b) for b in R] for a in R]
+    assert all(M[i][i]==0 for i in range(d))
+    spectrum=[]
+    for l in range(1<<k):
+        rows=[sum((((l&c).bit_count()&1)<<j) for j,c in enumerate(row)) for row in M]
+        r=rank(rows);assert r%2==0
+        spectrum.append(1<<(2*d-r))
+    transform=fwht(spectrum)
+    assert all(x>=0 and x%(1<<k)==0 for x in transform)
+    predicted=[x>>k for x in transform]
+    s=span(R); direct=Counter(label(a&b) for a in s for b in s)
+    assert predicted==[direct[i] for i in range(1<<k)]
+    assert sum(predicted)==1<<(2*d)
+    assert all(x%6==0 for x in predicted[1:])
+    return len(predicted),sum(x>0 for x in predicted[1:]), min((x//6 for x in predicted[1:] if x),default=0),max(predicted[1:],default=0)//6
+
+def batch(V,n):
+    mask=(1<<(1<<n))-1; U=()
+    for v in V: U=ext(U,v^mask if v&1 else v)
+    d=len(U); edges=list(combinations(range(d),2)); images=[red(U[i]&U[j],V) for i,j in edges]
+    minlift={}
+    for w in range(1<<len(edges)):
+        rows=[0]*d; z=0
+        for h,(i,j) in enumerate(edges):
+            if w>>h&1:
+                rows[i]^=1<<j; rows[j]^=1<<i; z^=images[h]
+        r=rank(rows);assert r%2==0
+        minlift[z]=min(minlift.get(z,d),r//2)
+    s=span(U); dirs={red(a&b,V) for a,b in combinations(s,2)}-{0}
+    dist={0:0}; fringe={0}
+    while fringe:
+        nxt={a^b for a in fringe for b in dirs}-dist.keys()
+        for v in nxt: dist[v]=dist[next(iter(fringe))]+1
+        fringe=nxt
+    assert minlift==dist
+    return 1<<len(edges),len(dist),max(dist.values())
+
+if __name__=='__main__':
+    states=coords=lifts=targets=batchstates=0
+    for n in (3,4):
+        V=affine(n); vals=span(V)
+        first={ext(V,a&b) for a,b in combinations(vals,2) if red(a&b,V)}
+        for W in {V}|first:
+            r=verify(W,n); states+=1; coords+=r[0]
+            l,t,m=batch(W,n); batchstates+=1;lifts+=l;targets+=t
+    for n in (5,6,7,8):
+        r=verify(affine(n),n,8);states+=1;coords+=r[0]
+    assert (states,coords)==(48,38984)
+    assert (batchstates,lifts,targets)==(44,36360,4608)
+    print('DUAL AND BATCH EXACT COUNTS PASS',states,coords,batchstates,lifts,targets)
+```
+
+### Aristotle frontier / phase and next mathematical action
+
+| ID | Exact deliverable | Status |
+|---|---|---|
+| G7a | jointDualRankResidualCount; nonzeroPlaneCount | derived, exact finite checks |
+| G7b | projectedDualCountMonotone; rankSaturationSufficient | derived, finite projected check of count only |
+| G7c | annihilatorHyperplaneUpdate; survivingRankBorderBound; targetWitnessCardinalityNoGo | derived, proof above |
+| G8a | frozenBatchMinimumAlternatingRankLift | derived, exact finite checks |
+| G8b | relativeDegreeEdgeBound | derived, serial-safe but <=n-1 |
+| G9 | commonAffineRestrictionBound / quadraticRankExact | classical proof above; known, <=n |
+| G10a | historySensitiveRankLiftTransport | OPEN: find serial-safe joint obstruction not reset by a single reused product |
+| G10b | SATSpecificGoalSeparation | OPEN: actual canonical SAT family, not random functions or arbitrary truth tables |
+| G10c | superpolynomialSerialPotential | OPEN: prove all-edge bound and superpolynomial goal gap on same carrier |
+| G5/N6 | machine coverage and endpoint transfer | classical coverage argument supplied; original formal weld conditional |
+
+G10a-c refine G6a-c, not additional mandatory phases for another successful route. Highest alpha now: back-solve through the exact relative-power inclusion W^[r] <= V^[r+1] while retaining the joint kernel of M, rather than collapse all fibres to degree or frozen rank. Seek a target-dependent obstruction that cannot be discharged by a common reused nonlinear term (in a batch of W products their expansions have the form sum of V-products + c times one element of V, since c^2=c and 1 in V). The latter identity is exact: (u_i+alpha_i c)(v_i+beta_i c) = u_i v_i + c(alpha_i v_i+beta_i u_i+alpha_i beta_i), and summing combines all reuse into one coefficient. It gives a reverse-search branch rule, not yet a serial rank-charge bound. Use equality, conjunction, cubic, quadratic half-rank and cheap shared decoders as adversarial controls. A zero marginal excludes one step, not all short paths. Do not optimize a finite proof-search graph as if its search cost were SAT runtime. Keep direct uniform N4/N5 and behavioural alternative available. No superpolynomial separation, native kernel certification, or proof of P != NP claimed.
