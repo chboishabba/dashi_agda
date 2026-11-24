@@ -266,6 +266,53 @@ def main():
             record["CDCinv_preserves_original_zeta_sector"]=True
             record["CDCinv_vacuum_Weil_scalar_determined"]=False
             record["CDCinv_original_6Suz_standard_word_identified"]=False
+            # Source action is on the RIGHT (mmgroup MMV API):
+            # for column-coordinate matrices M_(d*e)=M_e M_d.
+            # Projecting after each factor inserts the B-vacuum idempotent.
+            # Its exact failure to multiply is the original Weil
+            # projective 2-cocycle, not numerical floating-point drift.
+            if record.get("actual_D_vacuum_sandwich_mod31_rank")==90:
+                D0=np.load(a.outdir/"actual_D_vacuum_sandwich_mod31.npz")["D0"]
+                def projected_word(ww):
+                    cols=[]
+                    for vec in basis_mmv:
+                        t=project(vec*ww)
+                        remainder,coords=row_span_coefficients(
+                            np.asarray(t["E"],dtype=np.int16)%PRIME,
+                            basis_arrays,pivots)
+                        if np.any(remainder):
+                            raise ValueError("original product word vacuum image outside B-subspace")
+                        cols.append(coords)
+                    return np.asarray(cols,dtype=np.int16).T%PRIME
+                DE0=projected_word(d*e)
+                ED0=projected_word(e*d)
+                np.savez_compressed(
+                    a.outdir/"actual_inner_pair_vacuum_cocycle_mod31.npz",
+                    D0=D0,E0=E0,DE0=DE0,ED0=ED0)
+                def scalar_ratio(actual,expect):
+                    expected=np.asarray(expect,dtype=np.int16)%PRIME
+                    product=np.asarray(actual,dtype=np.int16)%PRIME
+                    nz=np.argwhere(expected!=0)
+                    if nz.size==0:
+                        return {"is_scalar":bool(np.all(product==0)),
+                                "scalar":None,"nonzero_reference":False}
+                    i,j=(int(x) for x in nz[0])
+                    alpha=int(product[i,j])*pow(int(expected[i,j]),-1,PRIME)%PRIME
+                    return {"is_scalar":bool(np.array_equal(
+                            product,(alpha*expected)%PRIME)),
+                            "scalar":alpha,"nonzero_reference":True}
+                record["original_MM31_vacuum_pair_DE_cocycle"]=scalar_ratio(
+                    matmul31(E0,D0),DE0)
+                record["original_MM31_vacuum_pair_ED_cocycle"]=scalar_ratio(
+                    matmul31(D0,E0),ED0)
+                record["original_MM31_projected_product_word_order"]={
+                    "DE":"D then C D C^-1 (right action; E0 @ D0)",
+                    "ED":"C D C^-1 then D (right action; D0 @ E0)"}
+                record["Weil_projective_cocycle_original_source_computed"]=bool(
+                    record["original_MM31_vacuum_pair_DE_cocycle"]["is_scalar"] and
+                    record["original_MM31_vacuum_pair_ED_cocycle"]["is_scalar"])
+                record["Weil_scalar_cocycle_promoted_to_complex"]=False
+
             E03=matmul31(matmul31(E0,E0),E0)
             cube_scalar=int(E03[0,0])
             cube_is_scalar=np.array_equal(
