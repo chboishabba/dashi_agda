@@ -36,6 +36,23 @@ def main():
         ast.parse((HERE/name).read_text(),filename=name)
     group=load(SCRIPTS[0])
     assert group.selftest()["pure_F3_linear_affine_section"]=="PASS"
+    assert len(group.signed_relator_rephase())==9
+    # Regress the report's nontrivial Hom orientation bug. For an actual
+    # noncommuting conjugate pair (B,D)=(T^-1 C T,T^-1 D T),
+    # the source intertwiner must solve C*T = T*B, not T*C = B*T.
+    atlas=load("monster3b_atlas_mmgroup_cross_source_intertwiner_gate.py")
+    C,D=atlas.atlas(HERE.parent)
+    shift=[[int(j==(i+1)%12) for j in range(12)] for i in range(12)]
+    shift_inv=atlas.inverse(shift)
+    B=atlas.mul(atlas.mul(shift_inv,C),shift)
+    Dprime=atlas.mul(atlas.mul(shift_inv,D),shift)
+    result=atlas.check_pair((C,D),(B,Dprime))
+    assert result["status"]=="ALGEBRAIC_CANDIDATE_ONLY"
+    assert result["invertible_basis_witness"]
+    T=result["T_rows_F3"]
+    assert atlas.mul(C,T)==atlas.mul(T,B)
+    assert atlas.mul(D,T)==atlas.mul(T,Dprime)
+
     homo=load(SCRIPTS[3])
     assert homo.selftest()["toy_GL2_noncommuting_unique_Hom"]=="PASS"
     builder=load(SCRIPTS[4])
@@ -91,6 +108,8 @@ def main():
       "status":"PASS_LOCAL_PURE_ALGORITHMS",
       "python_syntax_modules":SCRIPTS,
       "GF3_canonical_E_correction":"PASS",
+      "GF3_nontrivial_conjugate_intertwiner_orientation":"PASS",
+      "signed_outer_C3_relator_rephasing_9_cases":"PASS",
       "Qzeta3_noncommuting_Hom_GL2":"PASS",
       "derived_90_same_C3_scalar_trace":"PASS",
       "Magma_original_source_export_staging":"PASS",
