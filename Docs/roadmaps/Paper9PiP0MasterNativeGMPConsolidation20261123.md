@@ -1099,8 +1099,8 @@ COMP5j, experimental COMP5t/u, and the six-way
 production benchmark are not overwritten.
 
 New files:
-\`scripts/pi_p0_shared_radical_sector.hpp\` and
-\`scripts/check_pi_p0_shared_radical_schedule.cpp\`.
+`scripts/pi_p0_shared_radical_sector.hpp` and
+`scripts/check_pi_p0_shared_radical_schedule.cpp`.
 
 With \(H=426880\,5^d\), \(R=\lfloor
 2^b\sqrt{10005}\rfloor\), original
@@ -1157,7 +1157,7 @@ q-products may dominate. The exact
 source equations, S20–S25 proof/negative
 control gates and all producer-consumer
 links are in
-\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
 **Compilation, tests, CI, Agda/Lean,
 profiling and SOTA comparison
 are all deferred by user instruction.**
