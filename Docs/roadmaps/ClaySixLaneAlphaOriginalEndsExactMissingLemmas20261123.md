@@ -1,5 +1,10 @@
 # Active Clay rollup — 24 November 2026
 
+## 24 November — shell/dyadic/intersection continuation
+
+Four exact next cuts and attributed source ledger. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — attribution-preserving exterior/orientation cut
 
 All four exact cuts, attribution and original source-owner ledger. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.

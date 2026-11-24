@@ -1,5 +1,10 @@
 ## 23 Nov RH CLAY P0 — SymPy in lieu: actual E3 source sign frontier and sharp two-sideband rank
 
+## 24 November — shell/dyadic/intersection continuation
+
+P4-AR-native: optional independent Robin/Lagarias exact-source admission adapter, kernel unexecuted. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — attribution-preserving exterior/orientation cut
 
 RH original source path: optional nine receipt audit committed, compatible kernel unavailable. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.

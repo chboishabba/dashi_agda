@@ -1,5 +1,10 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 24 November — shell/dyadic/intersection continuation
+
+H3-intersection: exact projected intersection criterion for a nonzero orientation cycle; no witness constructed. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — attribution-preserving exterior/orientation cut
 
 H3-orientation: relative determinant projector and precise all-powers conditional producer; actual determinant cycle open. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.

@@ -1,5 +1,10 @@
 # BSD — universal Clay-rank versus strong-refined scope, S5/S6 fail-closed (2026-11-17)
 
+## 24 November — shell/dyadic/intersection continuation
+
+S6-Q2: integral quadratic restriction/norm defect killed by 2; selected Sha over Q(sqrt5) finite elementary 2-primary, actual size open. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — attribution-preserving exterior/orientation cut
 
 S6-Q5: selected actual twist rank=analytic rank=1 and Sha[2^infty]=0; universal S6 open. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.

@@ -1,5 +1,10 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 24 November — shell/dyadic/intersection continuation
+
+A2-asym: energy-paid dyadic low-input sectors; comparable-frequency signed sector unpaid. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — attribution-preserving exterior/orientation cut
 
 A2-far: exact Tonelli tail payment, leaves middle sector and independent continuation. [Complete derivation, original-author attribution, exact local checker and remaining gates](ClayFourExteriorOrientationAttribution20261124.md). No CI/native kernel or universal endpoint promotion. Donor branches and ESD unchanged.
