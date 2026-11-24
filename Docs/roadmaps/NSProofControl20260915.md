@@ -1,5 +1,33 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 24 November 2026 — NS reverse-solved R568 C1 as positive endpoint Cauchy Gram plus literal mixed-helicity trace
+
+**Controlling six-endpoint steelman and exact mathematical proof:** [ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md#24-november-2026--endpoint-first-six-clay-steelman-forwardbidi-reverse-solve-and-r568-positive-trace-necessity), updated **in place**, not another competing roadmap. Canonical machine-readable gate receives independent ns_r568_endpoint_trace_steelman_20261124 (no gate/count changes), paired [exact endpoint forward/backward SymPy test](../../scripts/check_ns_r568_endpoint_trace_steelman_20261124.py), Git blob f5e4b640f2d04b13fdf97fc1c29a2d7de6135981. **Program-wide P0 is actual P versus NP, owner Agda #1548 / Lean #119; NS #1543 remains separate P0 live physical signed lane.**
+
+**Mathematical theorem, conditional only on original REAL/algebraic R240 trajectory, literal R388 double-mixed derivative and ordinary scalar FTC:** For each C and k != 0 let I_C(k) be EXACT original p+q=k ordered fibre, r_a=nu(|p_a|²+|q_a|²)>0 and M_a=R225.doubleMixedCell. The literal R596 source coherent Cauchy Gram is Q_C=2 sum_{k !=0} sum_ab Re<M_a,M_b>/(r_a+r_b) >=0; output coherent trace H_C=sum_{k !=0}||sum_a M_a||² >=0. Source R388 M'_a=D_a-r_a M_a; R596 and the R597 factor 2 give 4 F_C=Q'_C+2H_C, where F_C=R568.globalForcingFull (NOT rate-lifted R687 work). Therefore after genuine R565 FTC:
+
+    4 * int_0^T F_C = Q_C(T)-Q_C(0)+2*int_0^T H_C.
+
+**EXACT endpoint-C1 BIDI:** original R568 uniform 4 int F_C<=B(u0,nu,T) iff Q_C(T)+2int H_C<=B(u0,nu,T)+Q_C(0). Both Q_C(T),int H_C are positive and individually require bounds when Q_C(0) is uniformly bounded; this is not an assumed C1 proof. R225/R224 already yields sum_a M_a=4 sum_{p+q=k}u_p^+ cross u_q^-, hence H_C=16||P_C,nonzero(u_C^+ cross u_C^-)||²_L2 by Parseval. The *unpaid* trace is 32 int||P_C,nonzero(u_C^+ cross u_C^-)||²_L2. R681/R682/R683 source already owns the live signed p-dot-q cross-gradient/vector; connect quantitative compensation to this exact trace and terminal Q, do not rebuild finite normal forms.
+
+**NEW classical bounded initial Gram:** for mean-zero smooth 2pi-periodic u0, s>3/2, and standard nonzero-mode orthogonal helical P+/-:
+- R225 M=2(A−B) and |A|,|B|<=|u_p||u_q| imply |M|<=4|u_p||u_q|.
+- Midpoint m>=|k|²/2 gives K_ab<=1/(nu|k|²); for |k|>=1, source-complete convolution gives Q_C(0)<=32/nu ||u0Fourier||_ell1^4.
+- By Cauchy–Schwarz, Q_C(0)<=32/nu (sum_{k in Z3}(1+|k|²)^(-s)) ||u0||_{H^s}^4, uniformly C. This pays the selected **initial R596 Gram** CLASSICALLY, not the different R565 initial selfFlux calibration, nonzero-mean Galilean transport or native Agda.
+- The classical Laplace representation Q_C=2 sum_k int_{heat-s >=0} ||sum_a exp(-r_a heat-s)M_a||² d heat-s proves positivity; auxiliary heat s != physical time t. Do not promote real exponential to an inhabited rational Agda field.
+
+**C2 remains separately OPEN:** with original R557 J_C=int(selfGram+selfFluxTangent), R648 physical retained surplus S_delta, R652/R653 exact coupling yields the combined BIDI original C1/C2 sandwich
+
+    2*S_delta+J_C+Q_C(0) <= Q_C(T)+2 int H_C <= B(u0,nu,T)+Q_C(0).
+
+The left is exactly strict-margin R653 C2, the right exactly R568 C1; neither follows from the other. Native real Galerkin/FTC source, uniform H and Q(T), original strict packet retained margin, R503/R504 terminal barrier and full 3D PDE continuation still unpaid. R571 M2->R568 is CONDITIONAL. Portfolio NS-B1 refuted signed R820/R823 is a different gate; selected portfolio C1/C2 Python/SymPy **classically closed** but native open and NOT this local C1/C2. Fefferman original unforced A and externally sourced forced C/D remain separate.
+
+**Independent proof-controls:** exact SymPy source-type 18 original C=1 ordered cells and 3 rate classes, both direct 324-pair and compressed 9-pair time-polynomials, Qraw'=2F-H, forward original integral and reverse inequality in both allowed/disallowed budget cases, wrong-factor rejection, and original lattice midpoint bounds for every nonzero output C=1,2 PASSED locally on equivalent source. Committed script readback SHA above, not independently executed byte-for-byte. This formal derivative test uses an ABSTRACT polynomial M/D path; real NS time-zero forcing remains separately tested at true-source 64/64 original #1543. No new Agda/Lean kernel/CI, no completed NS end-point or 6-Clay mathematical theorem.
+
+**Exact next deliverables:** NS-P0 source-real field and R240 time; NS-P1 actual native R596/Q' and R565 FTC; NS-P1 initial smooth Q bound already classically paid, field port pending; NS-P2 actual uniform projected mixed-helicity H in time AND terminal Q(T); NS-P2 independently strict original R653 retained margin; NS-P3 original full periodic 3D Galerkin limit/continuation. Use the existing R225/R388/R440/R560/R565/R568/R596/R624/R652/R653/R681/R682/R683/R686/R571 owners and consumer contracts. See six-lane roadmap for phase/lemma/producer/consumer/PR table and attribution.
+
+
+
 ## 23 November 2026 — authoritative periodic-B coordinator: physical R568 no-go, already-owned R682 and distinct C1/C2 namespaces
 
 **Canonical machine-readable gates:** ClaySixFrontierABCExactGates20261114.json, new ns_r568_actual_galerkin_20261123 independent nonterminal record; detailed source/normalization receipts in NSR568OriginalGalerkinHelicityRateSignCountercontrol20261123.md. This coordinator now uses the 15-Nov **latest gate decisions**, not the older historical fragments below. Four portfolio gates are completed as *decisions*: P0 original source audit; B1 closed by REFUTING the unrestricted R820/R823/R825 physical positive reserve; C1/C2 the selected radius-four R71/R74/R853/R854 finite real Galerkin mathematical-classical route CLOSED only under the user-authorized Python/SymPy protocol. Eleven gates remain active and 0/6 original Millennium endpoints solved. Native R408/R853 formal source field/trajectory transport and full Agda kernel are OPEN despite classical selected C1/C2. This is NOT equivalent to original R568/R653 C1/C2: the latter is the still-UNPAID **periodic-B** same-trajectory signed upper and strict-margin lower sandwich 2*S_delta+G+H <= 4F <= B(T,R,t). Portfolio B2 asks for a genuinely valid replacement signed barrier/W1 and cutoff-uniform all-data continuation; B1's refuted positivity is not to be reintroduced.
