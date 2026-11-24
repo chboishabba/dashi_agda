@@ -4,7 +4,8 @@ from pathlib import Path
 import numpy as np
 from ksw668_f8_tt_multipole import F
 from ksw668_f8_fv_source_flux import exact_cell_averages
-from ksw668_f8_signed_route_stage import step,save,load
+from ksw668_f8_signed_route_stage import step
+from check_f8_signed_receiver_window import save_window,load_window,receiver_report
 
 def main():
     p=argparse.ArgumentParser()
@@ -37,17 +38,18 @@ def main():
         v=-1/math.sqrt(1+t*t);b=1/t;q=2*(T-T0)/pulse-1
         amp=-6*a.drive*math.sqrt(1-v*v)/b*math.exp(1-1/(1-q*q)) if abs(q)<1 else 0.
         return v,b,amp
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_weighted_normal_stage.py','ksw668_f8_signed_route_stage.py',Path(__file__).name]
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_weighted_normal_stage.py','ksw668_f8_signed_route_stage.py',Path(__file__).name,'check_f8_signed_receiver_window.py','check_f8_h05_signed_receiver_cube.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_p0_original_same_clock_state.py']
     identity=dict(route=a.route,dr=dr,dy=dy,dt=dt,nt=nt,final_t=a.final_t,drive=a.drive,
                   source=hashlib.sha256(src.tobytes()).hexdigest(),
                   files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files})
-    X,k=load(a.checkpoint,identity) if a.checkpoint.exists() else (np.zeros((6,3,ny,nr)),0)
-    if X.shape!=(6,3,ny,nr) or k>nt or np.any(X[:,:,:,-1]):raise ValueError('checkpoint geometry mismatch')
+    X,k,window=load_window(a.checkpoint,identity) if a.checkpoint.exists() else (np.zeros((6,3,ny,nr)),0,{})
+    if X.shape!=(6,3,ny,nr) or k>nt+1 or np.any(X[:,:,:,-1]):raise ValueError('checkpoint geometry mismatch')
     start=time.monotonic()
-    while k<nt:
+    while k<nt+1:
         X=step(X,T0+k*dt,dt,coeff,dr,dy,src,cp,cm,a.route);k+=1
         if not np.isfinite(X).all():raise ValueError('nonfinite state')
-        if k%8==0 or k==nt or time.monotonic()-start>a.budget:save(a.checkpoint,X,k,identity)
+        if k>=nt-1:window[k]=X.copy()
+        if k%8==0 or k>=nt-1 or time.monotonic()-start>a.budget:save_window(a.checkpoint,X,k,identity,window)
         if time.monotonic()-start>a.budget:break
     U,P,M,R,J,K=X
     D=np.empty_like(U);D[:,0]=(U[:,1]-U[:,0])/dy;D[:,-1]=(U[:,-1]-U[:,-2])/dy
@@ -56,16 +58,13 @@ def main():
     err=np.max(abs(Q-R-J-K))
     scale=1+np.max(abs(Q))+np.max(abs(R))+np.max(abs(J))+np.max(abs(K))+np.max(abs(D))+np.max(abs(P))+np.max(abs(M))
     if err/scale>1e-8:raise ValueError('signed constraint ledger failed')
-    result=dict(route=a.route,k=k,nt=nt,ledger_error=float(err),status='COMPLETE_EXPERIMENT_ONLY' if k==nt else 'CHECKPOINTED')
-    if k==nt:
-        from check_f8_p0_original_same_clock_state import cubic
-        span=Tend-T0;near=math.sqrt(span*span-(1-1/a.final_t)**2)-.012
-        # Far receiver selection is not authenticated native receipt; explicit grid probe.
-        far=min(rg[-3],near+.1)
-        result['probes']={}
-        for name,r in [('near',near),('far_probe',far)]:
-            ids,w=cubic(r,dr,nr)
-            result['probes'][name]=dict(r=float(r),mode_H=[float((r/eps)**ell*(w@U[i,0,ids])) for i,ell in enumerate((0,2,4))])
+    result=dict(route=a.route,k=k,nt=nt,ledger_error=float(err),status='COMPLETE_EXPERIMENT_ONLY' if k==nt+1 else 'CHECKPOINTED')
+    if k==nt+1:
+        span=Tend-T0;bulk=math.sqrt(span*span-(1-1/a.final_t)**2)
+        result['receiver_clock_index']=nt
+        result['latest_checkpoint_index']=nt+1
+        result['probes']={name:receiver_report(window,nt,T0,dt,coeff,a.final_t,r,eps,dr,dy,src,cp,cm,a.route)
+                          for name,r in [('near',bulk-.012),('far',bulk+.1)]}
     print(json.dumps(result))
-    return 0 if k==nt else 2
+    return 0 if k==nt+1 else 2
 if __name__=='__main__':raise SystemExit(main())
