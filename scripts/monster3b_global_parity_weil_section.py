@@ -99,6 +99,8 @@ def replay(C,D):
         return M,s
     results={}
     for s in (1,2):
+        if not np.array_equal(word("CDc",s)[0],ops["E",s]):
+            raise ValueError("canonical E independent word mismatch")
         if not np.array_equal(word("CC",s)[0],J):
             raise ValueError("C2 not canonical parity")
         for name,w in (("C4","CCCC"),("D3","DDD"),("CD56","CD"*56),
