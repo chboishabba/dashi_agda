@@ -1502,3 +1502,77 @@ P0 roadmap S13–S19:
 No compilation, benchmark, numerical
 test, proof-assistant kernel run or
 new world-record claim this tranche.
+
+
+## 24 November — COMP5v: one source-common terminal radical for both adjacent endpoints
+
+From the genuine projective Chudnovsky
+signed affine edge \(E_n=(T',Q',V)\),
+retain the original next leaf \(q=q_n\),
+\(H=426880\,5^d\), and dyadic integer
+sqrt \(R=\lfloor2^b\sqrt{10005}\rfloor\).
+Define \(Z=HQ'\), \(Y=ZR\).
+For even series cutoff n the exact
+original source endpoints are
+\(S_{\rm lo}=T'/Q'\) and
+\(S_{\rm hi}=V/(Q'q)\);
+the lower/upper terminal
+radical numerators are respectively
+\(qY\) and \(Y+Z\). For odd n the
+endpoints reverse, and these
+numerators are \(Y\) and
+\(q(Y+Z)\). Thus a **single
+common** \(Y=HQ'R\) multiplies
+the radical across both
+certificate consumers, rather
+than two independently
+constructed root products.
+This factorization is source
+algebra, not a new π identity.
+
+The nested lower Euclidean
+quotient and remainders
+\(A=2^k(xN_h+\rho)+\ell\)
+and upper \(W=2^ku+\eta\)
+are literally the same values
+as COMP5u, with \(k=b-d\).
+The first exact upper test
+is \(u<(x+1)N_l\). Only on
+its failure is \(\eta=W\bmod2^k\)
+produced; the signed floor
+correction and exact
+root-guard-versus-series-suffix
+decision stay unchanged.
+The authenticated original
+prime-local gauge retains
+signed residual \(\delta\),
+source zero mode and precise
+n,d,b indexing. For raw-source
+remainder reconstruction, the
+indexed scale and **dyadic carry**
+remain necessary; output-floor
+homogeneity does not imply
+remainder homogeneity.
+
+The two new untested files
+\`pi_p0_shared_radical_sector.hpp\`
+and \`check_pi_p0_shared_radical_schedule.cpp\`
+preserve the old COMP5u/t
+versions. Separate primitive-work
+counters charge source
+q-products, common radical
+multiply, lower division,
+failure-only upper remainder
+and signed shifts. **No C++
+compilation or benchmark,
+Agda/Lean kernel, GMP memory
+measurement or external SOTA
+claim** is made. The full
+source algebra, proper
+attribution to G83 as
+a methodological example,
+and exact outstanding gates
+S20–S25 are recorded in the
+Paper 9 projective residual
+roadmap. Measured COMP5j
+remains the historical baseline.
