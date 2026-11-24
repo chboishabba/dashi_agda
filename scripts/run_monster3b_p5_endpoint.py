@@ -104,6 +104,19 @@ def main():
         save()
         return receipt["status"]=="EXIT_0"
     try:
+        # This original ATLAS 2.Suz:2 729 scalar theorem needs no
+        # Steel, Magma, GAP, mmgroup or user-supplied source archive.
+        # It is a selected quotient-chart donor, NOT a literal Monster
+        # 729-to-196884 vector identification.
+        if run("ATLAS_original_729_Weil_replay",[
+            sys.executable,
+            SCRIPTS/"check_monster3b_atlas_source729_relator.py",
+            "--out",out/"ATLAS_original_729_Weil_relator.json"]):
+            report["lemma_status"]["M3B-L10B_ATLAS_existing_729_Weil_model"]=\
+                "EXACT_2SUZ2_QUOTIENT_R7_ONE_BOTH_PHASES; NOT_MM_SAME_OBJECT"
+        else:
+            report["lemma_status"]["M3B-L10B_ATLAS_existing_729_Weil_model"]=\
+                "SOURCE_729_ATLAS_REPLAY_FAILED"
         original12=None
         source_path=srcdir/"d12.6Suz.nfdeg2.M"
         source_available=False
