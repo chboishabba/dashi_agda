@@ -856,3 +856,172 @@ No actual local field oracle evaluations or kernel proof. Standard character the
 ### R42. Next combined mathematical tranche
 
 Target the compatibility of the actual marked slice projector, signed rail correlations and globally sound selector norm descent. R39 isolates the missing global extension: minterm-weight computations are not sufficient unless correct on supersets. Seek a universal resource argument for genuinely consumer-relevant correlation/overlap handling across slices, or a precise counterexample, with actual all-circuit coverage. Do not propose another source character census, local ramification calculation, quotient-count bound, or per-minterm charge as the endpoint. R38 proves quotient count alone is too weak and G21 provides conditional widespread trace-width constraint; they are compatible because a few shared quotient outputs can generate many negative rails. Native weld only after mathematical progress. Continue Langlands, no Monster endpoint prerequisite or changes to #1545/#1548/#119.
+
+## 14. R43–R49 — dense-scope ramified fibre compression and thin-band upward closure (2026-11-24)
+
+User directed stay on Langlands, using G22–27 (attachments and supplied G25–27) as inspiration. Read both mounted attachments. Live other-worker #1548 ead847b32e6a2e10666f209ff6305c222e5de38c and #119 8a8f77430e62a12a77111a12ae6c19aaecf59f3f, matching roadmap blob 790854f6eb326974377356c840c10d38945bf1c8. Existing Langlands heads #1549 464691089a12257aee5a0374f36dc293aa04c7fe and #120 9c181a9fd0efe4101ccfdf96805b005c7af1c67e; matching blob 71f8d6eef6ec3693f6db8d98c9968b252d5d4d7d. No changes to other worker's branches. Actual inspected master donors: DASHI/Mathematics/Complexity/PNotEqualsNPRestrictionQuotientCircuitSemanticsExact.agda 393fe5a7ad26ac00c3076768ee3b9f0091c1305c, quotientCircuitComputesDP/rootDecision; PNotEqualsNPRestrictionQuotientSATAuthorityExact.agda 05977a2ed2b6d89c4769fbe5c0763fc3f95ab93d, quotientSATAuthorityExact (conditional exact finite-state restriction, no state bound); BooleanFormulaSATSelfReductionExact.agda 5991b2b90cf03be35769ca5ef6d8b47622aab24f, restrictionEvaluation, liftFalse/liftTrue; DASHI/Core/ConsumerFibreRepairExact.agda 5bab8f89861559c14f3877acd5e11424b21a6a6d, necessary collision separation not general sufficient cost. Reuse R16/29 local norm, R23 zero-residual, R24 governed cube, R36–37 actual projectors, G23 actual assignment fibre, G27 exact minterm recognizer. No native certification or new infrastructure phase.
+
+### R43. Dense-scope residual bound (strictly wider than G27 minterm slice)
+
+Let B_m = all nonempty variable subsets I of size <=3; b(m)=|B_m|, N_m=sum_I 2^|I|. A_I(t)={p:t_(I,p)=1} is the allowed polarity set in the absent-clause selector. SAT iff an assignment x satisfies x|I in A_I for all I. If some A_I is empty reject. Otherwise k=|t|-b(m)=sum_I (|A_I|-1)>=0. A singleton scope means |A_I|=1 (not necessarily |I|=1), and forces every variable in its unique pattern. If two such scopes force different values of the same variable, reject. Let F be the variables fixed by any singleton scope, with consistent fixed values c, and R=complement F, r=|R|. Every scope meeting R must contain >=2 allowed patterns, hence pays >=1 unit of k. Exact combinatorial bound
+    b(m)-b(m-r) <= k.
+Each variable occurs in d_m=1+(m-1)+binom(m-1,2) scopes, each scope counts at most three of the r incidences, so
+    r*d_m <= 3k.
+In particular k<d_m implies r=0 (one unresolved variable alone is incident to d_m scopes). This does not assert every nonzero excess creates a genuinely free variable; r is a conservative residual count, further propagation can reduce it. N_m=Theta(m^3), d_m=Theta(m^2). This exploits the dense original selector geometry, not the density of a general sparse CNF representation. G27's b+1 counterexample is detected by the stronger singleton-SCOPE overlap checks.
+
+### R44. Same-object ramified restriction and exact charged algorithm
+
+With the actual R36 assignment carrier D=C^(F2^m) and ramified P=1+U, retain the embedding J:C^(F2^R)->D, J|y>=|c union y>. J*J=I, JJ*=E_c the original coordinate-fibre projector. Every singleton-scope constraint is diagonal and forces its pattern, hence Pi_t E_c=Pi_t=E_c Pi_t. For an individual falsifying pattern C=(I,p), J*Q_C J=0 if any p_i disagrees with c on I intersect F, otherwise it is the falsification projector for p|_(I intersect R) (identity when I intersect R is empty). This is the exact G23 fibre-mask transport on actual assignment projectors. Equivalently the R29 local norm factors u'^(s_C q_C(x)) restrict to the same norm test on the residual scope, or a constant; the full character and original source labels can be retained in provenance. No new local field or character identification is needed.
+
+For each residual scope L subset R, |L|<=3, define B_L as intersection over original I with I intersect R=L of the allowed patterns restricted after checking c. Include L=empty; B_empty is either {()} or empty, not a discarded zero mode. Missing residual scopes mean unrestricted, whereas empty B_L means impossible. Then the compressed projector Pi_R is the product of original restricted diagonal conditions; aggregation by L is literal intersection, retaining a source I for each rejected pattern. Exact identities:
+    J* Pi_t J = Pi_R; J Pi_R J* = Pi_t;
+    im(Pi_t tensor I_P) ~= im(Pi_R tensor I_P)
+as actual Weil representations, by J tensor I_P; all central S3 and marked C3 phase projectors commute with J since they act on P. Both Hom dimensions and W(t)=Tr Pi_R are unchanged. R37 normalized Fourier compression on residual D_R has eigenvalue W(t)/2^r, not the original W(t)/2^m; record this normalization. This is a genuine same-object submodule compression, not just matching dimensions. It preserves exact witness recovery y -> c union y; conflicting singleton scopes give empty fibre rather than a fabricated c. R24 face gluing requires same marked c and compatible restrictions; independent charts with inconsistent fixed assignments must not be identified.
+
+Construction scans each original scope at most eight patterns, records fixed c and checks consistency, intersects <=8-bit residual masks. O(N_m) fixed-word operations plus polynomial indexing/bit-cost overhead; residual scope count <=b(r)+1. Enumerate 2^r residual assignments, evaluate all residual scopes, sum exact count using O(r+1)-bit integers. Time poly(N_m)+(r+1)^O(1) 2^r, with explicit original-witness reconstruction and memory poly(N_m) if streaming. In particular bound poly(N_m)*2^{O(k/m^2)} for m>=2; when k=O(m^2 log m), polynomial time (constant in O fixed), including exact count. For k<d_m, at most one assignment, recover or reject in one scan plus original validation. No free rank operation, implicit exponentially wide matrix, or independent charge per original assignment used. This is a positive algorithm on a promised band, not all-input polynomial SAT.
+
+### R45. Wider positive/monotone band via bounded actual obstruction cores
+
+Define H_l(t) as conjunction over all collections of at most l distinct original scopes of the proposition that some jointly consistent selection of one available pattern per scope exists. For each collection, enumerate <=8^l pattern choices with consistent shared variable labels, OR the corresponding AND of selector bits. H_l is monotone; G<=H_l globally. Size O(l*8^l*(b(m)+1)^l), fixed l polynomial; operations are positive marked-line support operations (AND tensor, OR sum/support), within R32. This is joint overlap, not independent per-scope projections; no need to decide whether a scope is singleton inside H_l.
+
+If unsat due empty scope or inconsistent unique patterns there is a 1- or 2-scope obstruction. Otherwise R44 fixes c. For each of 2^r assignments y of R, choose an original scope whose allowed relation rejects c union y. For each chosen original scope, attach at most 3 singleton scopes that force its variables in F. The resulting collection is jointly unsatisfiable: any assignment satisfying it must agree with c on the fixed coordinates used, and every possible residual y has one selected blocking scope. Thus there exists a core of <=4*2^r scopes. Alternatively, for each forbidden residual pattern (L,p), choose one original scope that excludes it on c, and add forcing scopes for its fixed variables. There are at most 1+N_r such patterns, counting the empty pattern; same contradiction. Therefore one may take
+    l(r)=4 min(2^r,1+N_r).
+For k bounded by C*m^2 with fixed C, r bounded, so some fixed l gives a polynomial-size positive representation/monotone support circuit exact on ALL such inputs (including below b, where an empty scope forces rejection). Specifically H_4 is exact whenever |t|<b+d_m. This is an unconditional wider monotone tractable band, not conditional on a hypothetical SAT circuit as R39. Upper bound H_l may be much larger than nonmonotone algorithm when r grows; no claim polynomial monotone size for k=O(m^2 log m).
+
+Sharp order for fixed l>=4: choose l+1 unresolved variables, all remaining variables fixed to zero. All scopes allow every pattern consistent with those fixed coordinates, except pair scopes forming a cycle on the unresolved variables. Set l edges equality and the closing edge disequality. Full conjunction inconsistent, but any l-scope collection omits some edge and is satisfiable; the omitted-edge claim follows from a path of binary equalities/disequalities. All original scopes nonempty, all scopes meeting R have >=2 patterns. Excess k=sum_I(2^|I intersect R|-1)-2(l+1) <=7(l+1)d_m, also >=d_m. Thus H_l can fail at Theta(m^2) excess for any fixed l>=4; no uniform finite overlap width works across all selectors. This is a width-two parity-cycle constraint embedded in full width-three selector carrier, not a general unrestricted lower bound. It is a counterexample to that specific local checker, not to all possible algorithms.
+
+### R46. BIDI: thin-band padding preserves the original hard problem
+
+Take arbitrary selector on q original variables, embed into m>=q variables. For scopes I contained in the q variables, copy every input coordinate unchanged. For every other I, set the available pattern bits to constants admitting exactly assignments with all added-variable coordinates 0; no further constraints on the original variables. Original assignment and padded witness are in bijection x -> (x,0^(m-q)), including empty solution relation. At projector level J_pad* Pi_padded J_pad=Pi_original, Pi_padded=J_pad Pi_original J_pad*, same actual P and Hom dimensions. The embedding is a monotone projection, not an existential reduction with hidden preprocessing. All added coordinates fixed by singleton scopes; any original empty scope remains empty, hence promise is upper bound only (weights below b allowed). Excess satisfies
+    |t_padded|-b(m) <= 7[b(m)-b(m-q)] <= 7 q d_m.
+For fixed epsilon>0 choose polynomial m in q with q<=m^(3 epsilon) (if epsilon>=1/3 take m=q or larger). Then padded instances lie in |t|<=b(m)+O(N_m^(2/3+epsilon)). This is an NP-hard promise family, with explicit uniform polynomial reduction and exact #witness preservation. For a two-sided band b<=|t|, detect empty original scopes in polynomial preprocessing and map to a known no-instance at b+1 as G27; that variant is no longer a pure monotone projection, so do NOT use it for monotone lower bounds. Combined with R44, polynomial-time exact algorithm up to O(N^(2/3) log N), and NP-hardness for every fixed power increase N^(2/3+epsilon), without assuming P!=NP. The gap between these scales remains.
+
+Monotone / limited-negation transport uses the upper-bound-only band. Choose m=ceil(q^a), fixed a>max(1,1/(3epsilon)), so input length N_m=Theta(q^(3a)). G22 CKR lower bound on q-variable source yields exp(Omega(q^(1/4) log q)) for delta=1/12, i.e. exp(Omega(N_m^(1/(12a)) log N_m)) along hard subsequences, even for circuits only required correct on this promised band. R32 fixed-type positive rep model inherits bound. G25 Amano–Maruoka CLIQUE bound also preserves genuine negation gates under this projection; loglog of graph n vs padded N differs by O(1), so excluded polynomial size at <=(1/6)log2 log2 N-O(1) NOTs along its appropriate (different) hard sequence. References verified in current turn: https://epubs.siam.org/doi/10.1137/S0097539701396959 (Amano–Maruoka); https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/ (CKR). Apply to R32 positive support gates plus R33 canonical Boolean-valued marked-line quotient (one NOT), charged constant-cost support operations. Arbitrary higher-dimensional variable-map cokernel/rank is not one Boolean NOT, and not covered absent its own compiler. R38/G26 logarithmic shared inversion remains valid, so this is a limited nonmonotone theorem, not unrestricted. G24 transversal/different mismatch independence is not a count of paid gates. Do not infer global SAT cost from input density, actual r, or exponential dimension.
+
+### R47. Local execution and reproduction
+
+Actual local Python/SymPy: all 260 selector inputs m=1,2; 118 consistent nonempty fibre cases with exact matrix equalities J*J=I, J*Pi J=Pi_R, J Pi_R J*=Pi, normalized residual Fourier trace; 162 unsat cores across those inputs. 600 deterministic random planted/partially constrained inputs m=3..8, 340 consistent nonempty fibre cases, 286 unsat core checks. 1040 padding witness-count and excess-bound comparisons (all 260 inputs, each padded to m=3..6). Five cycle witnesses (m,l)=(5,4),(6,4),(6,5),(7,6),(8,7) with k=95,130,179,301,468; each omitted-edge conjunction satisfiable. No CI/native prover or field oracle. Reproducible core of actual checker (complete small exhaustive and padding/cycle fixtures; random generator below):
+```python
+from itertools import product,combinations
+from math import comb
+from random import Random
+import sympy as S
+def scopes(m):return [I for j in range(1,min(3,m)+1) for I in combinations(range(m),j)]
+def patterns(I):return list(product((0,1),repeat=len(I)))
+def nbits(m):return sum(2**len(I) for I in scopes(m))
+def solve(m,A):
+    Ilist=scopes(m);X=list(product((0,1),repeat=m))
+    masks={I:sum(1<<j for j,x in enumerate(X) if tuple(x[i] for i in I) in A[I]) for I in Ilist}
+    full=(1<<len(X))-1;actual=full
+    for v in masks.values():actual &= v
+    if any(not A[I] for I in Ilist):return actual,None,[next(I for I in Ilist if not A[I])],masks
+    fixed={};src={}
+    for I in Ilist:
+        if len(A[I])==1:
+            for i,v in zip(I,next(iter(A[I]))):
+                if i in fixed and fixed[i]!=v:return actual,None,[src[i],I],masks
+                fixed[i]=v;src[i]=I
+    R=tuple(i for i in range(m) if i not in fixed);r=len(R);k=sum(len(A[I])-1 for I in Ilist);d=1+(m-1)+comb(m-1,2)
+    assert len(Ilist)-len(scopes(m-r))<=k and r*d<=3*k
+    B={};prov={}
+    for I in Ilist:
+        J=tuple(i for i in I if i in R)
+        allowed={tuple(p[j] for j,i in enumerate(I) if i in R) for p in A[I] if all(i not in fixed or p[j]==fixed[i] for j,i in enumerate(I))}
+        if J not in B:B[J]=set(patterns(J))
+        B[J]&=allowed
+        for p in patterns(J):
+            if p not in allowed:prov[J,p]=I
+    restored=0;fibre=[];good=[];failed=[]
+    for y in patterns(R):
+        D=dict(fixed);D.update(zip(R,y));x=tuple(D[i] for i in range(m));idx=X.index(x);fibre.append(idx)
+        bad=next(((J,tuple(D[i] for i in J)) for J in B if tuple(D[i] for i in J) not in B[J]),None)
+        good.append(int(bad is None))
+        if bad is None:restored|=1<<idx
+        else:failed.append(prov[bad])
+    assert restored==actual
+    core=[]
+    if not actual:
+        selected=set(failed) if len(failed)<=len(prov) else set(prov.values())
+        core=set(selected)
+        for I in selected:core.update(src[i] for i in I if i in fixed)
+        assert len(core)<=4*min(2**r,1+nbits(r))
+        z=full
+        for I in core:z&=masks[I]
+        assert z==0
+    if m<=2:
+        J=S.zeros(len(X),len(fibre))
+        for a,b in enumerate(fibre):J[b,a]=1
+        P=S.diag(*[actual>>i&1 for i in range(len(X))]);Bmat=S.diag(*good)
+        assert J.T*J==S.eye(len(fibre)) and J.T*P*J==Bmat and J*Bmat*J.T==P
+        assert S.trace(Bmat)==actual.bit_count()
+        v=S.ones(len(fibre),1);E=v*v.T/len(fibre)
+        assert S.trace(Bmat*E)==S.Rational(actual.bit_count(),len(fibre))
+    return actual,r,core,masks
+def all_inputs(m):
+    I=scopes(m);C=[(i,p) for i in I for p in patterns(i)]
+    for t in range(1<<len(C)):
+        A={i:set() for i in I}
+        for j,(i,p) in enumerate(C):
+            if t>>j&1:A[i].add(p)
+        yield A
+def pad(A,r,m):
+    return {I:A[I] if all(i<r for i in I) else {p for p in patterns(I) if all(i<r or p[j]==0 for j,i in enumerate(I))} for I in scopes(m)}
+def cycle(m,l):
+    R=set(range(l+1));B={I:{p for p in patterns(I) if all(i in R or p[j]==0 for j,i in enumerate(I))} for I in scopes(m)}
+    for i in range(l):B[i,i+1]={(0,0),(1,1)}
+    B[0,l]={(0,1),(1,0)}
+    return B
+def check_core(m,core,ms):
+    if core:
+        z=(1<<(2**m))-1
+        for I in core:z&=ms[I]
+        assert not z
+for m in (1,2):
+    for A in all_inputs(m):
+        a,r,c,ms=solve(m,A);check_core(m,c,ms)
+rng=Random(20261124)
+for m in range(3,9):
+    for q in range(100):
+        x=tuple(rng.randrange(2) for _ in range(m));R=set(rng.sample(range(m),rng.randrange(m+1)));A={}
+        for I in scopes(m):
+            candidates=[p for p in patterns(I) if all(i in R or p[j]==x[i] for j,i in enumerate(I))]
+            a={p for p in candidates if rng.random()<.65}
+            if q%3==0:a.add(tuple(x[i] for i in I))
+            if not a:a.add(rng.choice(candidates))
+            A[I]=a
+        a,r,c,ms=solve(m,A);check_core(m,c,ms)
+for r in (1,2):
+    for A in all_inputs(r):
+        a,*_=solve(r,A)
+        for m in range(3,7):
+            B=pad(A,r,m);b,*_=solve(m,B)
+            assert a.bit_count()==b.bit_count()
+            assert sum(len(s) for s in B.values())-len(scopes(m))<=7*(len(scopes(m))-len(scopes(m-r)))
+for m,l in [(5,4),(6,4),(6,5),(7,6),(8,7)]:
+    A=cycle(m,l);a,r,core,ms=solve(m,A);assert not a and r==l+1
+    for omit in [(i,i+1) for i in range(l)]+[(0,l)]:
+        z=(1<<(2**m))-1
+        for I,mask in ms.items():
+            if I!=omit:z&=mask
+        assert z
+    k=sum(len(s)-1 for s in A.values());d=1+(m-1)+comb(m-1,2)
+    assert d<=k<=7*(l+1)*d
+```
+
+### R48. Updated P0 ledger, producers and consumers
+
+| Gate / phase | Exact deliverable | Status |
+|---|---|---|
+| R43 / B | dense-scope residual bound | G23/G27 original scope incidence -> derived |
+| R44 / B-C | original ramified norm/projector fibre compression, exact count and witness with explicit FPT cost | R29/R36/R37, restriction-quotient semantic and SAT authority, R23 zero fibre -> derived |
+| R45 / C | bounded joint obstruction core and exact positive support on wider near-minterm band | R32, G16/G27, source scope overlap -> derived; parity-cycle control |
+| R46 / C-D | reverse monotone padded projection, NP-hard thin band and restricted superpoly transport | G22/G25, R33, R44 -> derived |
+| R47 | exact local checks | executed, not kernel certification |
+| R7a' / LGC4d / C | actual global overlap consumer and charged compression beyond bounded residual | R44 gives an exact conditional parameter algorithm, R46 shows dense padding cannot alone shrink arbitrary original hard core |
+| R7b' / LGC5 / C | universal serial-safe cost across arbitrary shared signed/quotient computation, or a direct uniform lower bound | OPEN P0; use R46 promised source if helpful, not independent rank/trace/quotient count |
+| R7c / LGC6 / D | superpolynomial unrestricted separation on same actual selector/padded source | OPEN P0; G25 limited negations and G26 logarithmic ceiling distinct |
+| LGC7/N6 / E | literal Clay endpoint via existing standard machine coverage/consumer | conditional, not inhabited |
+
+### R49. Next endpoint-first tranche
+
+Use R44 as a concrete solved compression, not a new generic certification project. Need either a lower bound on every polynomial unrestricted algorithm for actual thin-band residual instances (sufficient by R46), or a costed normalization preserving G24/G25 constraints beyond shared logarithmic inversion; do not assume high r forces independent work or claim local character count is a lower bound. For a positive alternative investigate actual residual scope interaction structure and whether arbitrary nonlinear operations can compress rank nonvanishing; the reverse projection shows any generally efficient method on the hard band solves original SAT. Retain width-two negative controls, marked incidence, dependent zeros and all original labels. No unrelated Monster/YM/RH work. Standard CSP restriction, finite-dimensional projector and prior lower-bound authority credited; original DASHI/JMD owners and other worker G22–27 retained. No claim P!=NP.
