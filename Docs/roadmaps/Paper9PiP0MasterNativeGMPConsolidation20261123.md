@@ -866,7 +866,7 @@ New connected implementation:
   bounded-depth source-width planner with recorded
   output demand (decimal digits, root working bits),
   modelled branch peak, modelled P/Q/T widths and
-  separately charged C++ plan heap. It chooses only
+  separately listed C++ plan object payload (not measured total C++ heap). It chooses only
   evaluation order of the two child computations;
   original matrix merge remains ordered.
 - \`scripts/check_pi_p0_precision_projective_schedule.cpp\` —
