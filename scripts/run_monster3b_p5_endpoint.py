@@ -218,6 +218,23 @@ def main():
             report["lemma_status"]["M3B-L12R_literal_MM_4D_class"]=\
                 "BLOCKED_ON_AUTHENTIC_CANONICAL_MONSTER_WORD"
 
+        # Reuse the prior exact 729 Schr/Weil compiler on the already
+        # authenticated real MM-group quotient; no Steel/Magma, GAP or
+        # 729D dense operator materialization is needed.
+        cover=out/"mmgroup_canonical_cover_hit0.json"
+        weilmodel=out/"source_original729_Weil_model.json"
+        if cover.is_file():
+            model_paid=run("original729_weil_model",[
+                sys.executable,
+                SCRIPTS/"monster3b_original729_weil_source_cocycle_weld.py",
+                "--cover",cover,"--out",weilmodel])
+            report["lemma_status"]["M3B-L10B_existing_729_Weil_kernel"]=( 
+                "EXACT_CHOSEN_729_MODEL_COCYCLE_AND_R7_RELATOR" if model_paid
+                else "EXISTING_729_MODEL_SOURCE_ALIGNMENT_FAILED")
+        else:
+            model_paid=False
+            report["lemma_status"]["M3B-L10B_existing_729_Weil_kernel"]=\
+                "BLOCKED_ON_AUTHENTIC_CORRECTED_GROUP_C_D_MATRICES"
         if args.actual_mod31_hom or args.both_mod31_phases:
             cover=out/"mmgroup_canonical_cover_hit0.json"
             if not args.manifest.exists():
@@ -246,6 +263,14 @@ def main():
                 report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=(
                     "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
                     if positive else "FAILED")
+                if positive and model_paid:
+                    if run("original729_actual_plus_vacuum_weld",[
+                        sys.executable,
+                        SCRIPTS/"monster3b_original729_actual_vacuum_weld.py",
+                        "--model",weilmodel,"--phase1",plus,
+                        "--outdir",out/"source729_actual_mod31_plus"]):
+                        report["lemma_status"]["M3B-L10B_original729_MM31_plus_gauge"]=\
+                            "MODEL_729_TO_ACTUAL_90_PROJECTIVE_COMPARISON_NOT_CHAR0"
                 if args.both_mod31_phases and positive:
                     minus=out/"actual_mmv31_hom_opposite"
                     other=[sys.executable,
@@ -254,6 +279,15 @@ def main():
                         "--prime",31,"--opposite-phase"]
                     if cover.exists():other.extend(["--cover",cover])
                     if run("actual_mod31_hom_opposite",other):
+                        if model_paid:
+                            if run("original729_actual_minus_vacuum_weld",[
+                                sys.executable,
+                                SCRIPTS/"monster3b_original729_actual_vacuum_weld.py",
+                                "--model",weilmodel,"--phase2",minus,
+                                "--outdir",out/"source729_actual_mod31_minus"]):
+                                report["lemma_status"]["M3B-L10B_original729_MM31_minus_gauge"]=\
+                                    "MODEL_729_TO_ACTUAL_OPPOSITE_PHASE_PROJECTIVE_COMPARISON"
+
                         if run("quadratic12_character_lift",[
                             sys.executable,
                             SCRIPTS/"monster3b_quadratic12_character_lift.py",
