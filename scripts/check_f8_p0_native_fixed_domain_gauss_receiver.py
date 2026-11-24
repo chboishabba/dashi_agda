@@ -3,7 +3,7 @@
 Reuses source-owned moving hp FE, d=3/7/11 weighted native FV radial
 operators, conservative compact TT cell averages and physical F(t).
 Batched Gauss-2 algebra has an independent old per-eigenmode one-step
-parity test. Same radial domain r=0..3.0 at each dr; original t=12
+parity test. Original native parameter r_outer=3.01 and y_outer=2.01 at each dr; t=12
 near/far physical receiver events. No CI, original mode3/4 replay,
 Weyl promotion or certified continuum convergence.
 """
@@ -16,6 +16,16 @@ from check_f8_p0_native_radial_action_bridge import source_clock
 class BatchedNativeGauss(NativeGauss):
     def __init__(self,ne,nr,dr):
         super().__init__(ne,nr,dr)
+        # Affine-rescale the original FE reference domain [0,2.1] to
+        # the ORIGINAL native LXXXVII moving normal y_outer=2.01.
+        fe=self.phys.fe
+        scale=2.01/fe.Y[-1]
+        fe.h*=scale
+        fe.Y*=scale
+        fe.g*=scale
+        fe.dphi/=scale
+        fe.offset*=scale
+        assert abs(fe.Y[-1]-2.01)<1e-12
         self.lam=np.concatenate(self.eigs)
         self.src_flat=np.concatenate(self.src)
         self.nmode=3*nr
@@ -95,11 +105,11 @@ def audit():
     span=F(12)-F(1)
     rows=[]
     for ne in (2,3):
-        for dr in (.01,.008,.006):
-            nr=round(3./dr)+1
-            assert abs((nr-1)*dr-3.)<1e-12
+        for dr in (.012,.008,.006):
+            nr=int(np.ceil(3.01/dr))+1
+            assert (nr-2)*dr<3.01+1e-12 and (nr-1)*dr>=3.01
             g=BatchedNativeGauss(ne,nr,dr)
-            for dt in (.02,.01):
+            for dt in (.004,.002):
                 U,m,t,n=g.evolve_batched(dt,span,True)
                 Uoff,moff,_,_=g.evolve_batched(dt,span,False)
                 assert np.array_equal(Uoff,np.zeros_like(Uoff))
@@ -116,15 +126,15 @@ def audit():
                     energy=energy,source_off_exact_zero=True,receivers=values))
     # A finite forbidden-field negative control, NOT causality closure.
     assert all(abs(x['receivers']['far']['signed_total_H'])>0 for x in rows)
-    return dict(status='PASS finite fixed-domain original-source action/Gauss forward',
-      radial_domain=[0,3.],normal_domain=[0,2.1],
+    return dict(status='PASS finite original-parameter-domain original-source action/Gauss forward',
+      requested_radial_outer=3.01,normal_domain=[0,2.01],
       original_receiver_t=12,source_on_runs=len(rows),
       source_off_exact_zero_runs=len(rows),
       batched_vs_serial_one_step_abs_error=parity,
       rows=rows,physical_far_causal_null='FAIL finite',
       original_mode3_mode4_comparison='NOT_RUN',
       original_both_Weyl='NOT_EVALUATED',
-      convergence='UNPROVED; nonmonotone across dr/dt and low-order normal FE',
+      convergence='UNPROVED; nonmonotone across dr/dt, low-order p1 normal FE; native SSPRK3 dt differs',
       execution='Local source-equivalent owner modules must be run from literal PR checkout for authentic head acceptance')
 
 if __name__=='__main__':
