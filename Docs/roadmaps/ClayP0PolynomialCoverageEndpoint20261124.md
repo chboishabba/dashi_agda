@@ -2706,3 +2706,105 @@ assert (n,better)==(240,111)
 | N6 | originalClayTransport | conditional #1040 / #1129 |
 
 Aristotle BIDI: use the G61 original moment contraction as a legitimate Hermite bypass on sparse sources, and G60/G63 for source-aware pruning on actual packets. Highest-alpha next step is to bound the generation of *surviving* signed support combinations or find a shared contraction of them, with a real cost inequality on full G48 locally-full hard inputs. Do not infer hardness from the artificial choice of deformation or require high degree/large support as a prerequisite. Neither the restricted matching minimum nor the finite checks pay unrestricted N4. No new mandatory certification phase.
+
+
+## 27. P0-G65–G69 — GEOMETRY-FORWARD: signed separator contraction and exact source-minor transport (2026-11-24)
+
+User direction: geometry-forward; retain original zero mode, signed residual, independent history/time/k/chart/version/precision/consumer indices and actual indexed hyperfabric. Literal Clay P vs NP is P0, not a requirement to materialize every representation. Start with actual source incidence and jointly reusable separator geometry, before polynomial expansion or arithmetic certification; steelman legitimate contractions, BIDI from original SAT endpoint, account for actual work and avoid independently charging overlaps. Both P0 branches read at 549739130a81 / e6a60428933b, common blob 8395076082289854f8f9609b67604285824470e9. Input user pasted G60–G64. Reuse G13 original selector, G16/G17 binary control, G28/G33 parity contraction, G45/G46 locally-full compiler, G48 forced flag, G56–G59 indexed modes, G60–G64 signed support/valuation; #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 shared computation, #1129 machine coverage, #1040 terminal, #1474/#1502 reductions, #607/#678 Aristotle. Reopened actual existing DASHI/Crypto/ConstraintCouplingSearchExact.agda (blob 6972ab099c268b3711dad9ab378d5e8620067c85, disconnected cut and bounded separator accounting; cites Arnborg–Corneil–Proskurowski 1987 DOI 10.1137/0608024); DASHI/Crypto/ObservationSeparatorGeometryExact.agda (blob ccbe9275669def08a2c37cc945c19e61990bece1, before/after separator work and observation cost); DASHI/Codec/IndexedCubeHyperfibreExact.agda (blob ce42b07fbaf430685ce172895cc482f933073577, actual typed cube, version alignment and history/time owner). These are donors, not a claim of native SAT attachment. No TOE, Monster, Langlands or crypto edits. Inclusion–exclusion, tree decomposition dynamic programming and elementary tensor-product evaluation are classical; the source-specific exact transport and pruning control below are derived, not claimed novel general algorithms.
+
+### G65 — exact no-go for valuation-only rejection on actual clause/equality networks
+
+Represent each normalized nonempty non-tautological clause by its Boolean allowed-pattern tensor, with independent occurrence ports; each used original variable has an equality tensor over its occurrences. Isolated variables are separated with factor 2 each for exact counts (or ignored for decision). For each clause its full-support integer multilinear coefficient is +1 or -1, since the forbidden-pattern indicator is a product of one literal factor per port and the clause indicator is one minus that product. The constant coefficient of every used-variable equality tensor is 1 (all-zero assignment accepted). Therefore the row tensor product has full support S=[M] with odd coefficient, and the column tensor product has empty support U with coefficient 1. At origin G61's individual contribution a_S b_U 2^(M-|S union U|) is odd, independently of satisfiability. The minimum individual valuation is exactly zero on every such network, including UNSAT. If no clauses, the empty network contraction is 1 after removing isolated variables. Thus an optimizer that merely computes the best individual support valuation cannot establish that all terms vanish modulo 2, even on UNSAT. Actual cancellation and joint contraction are necessary in this representation. This does not exclude other semantic decision algorithms or pruning after shared aggregation.
+
+### G66 — source-variable signed cover algebra
+
+For each selected clause C let E_C(x) be its forbidden pattern indicator on its original scope I_C. Then b(x)=prod_C(1-E_C(x)). Expanding on original clause choices J, the joint forbidden-pattern product vanishes if two assignments disagree on a common original variable; otherwise it fixes exactly the union D(J) of those scopes. Hence
+
+    W = sum_(compatible J subset clauses) (-1)^|J| * 2^(q-|D(J)|).
+
+This is classical inclusion–exclusion with exact source overlap and signed coefficients; no independent occurrence charge or cancellation-free relaxation. At mod 2^h, compatible J with q-|D(J)|>=h vanish, but the remaining sum can cancel. Retain each original variable's three partial-pinning basis states e_0 (neutral/unassigned, TWO extensions), e_- (pin Boolean zero), e_+ (pin Boolean one); conflict is algebraic zero, not e_0. Define e_0 as multiplicative unit, e_-^2=e_-, e_+^2=e_+, e_-e_+=0. This is a commutative associative rank-three algebra over integers (or any chosen coefficient ring); tensor over named variables. A clause is 1 minus the product of its actual forbidden pins. The sum-over-assignments functional on a variable sends e_0 to 2 and each signed pin to 1. Tensor evaluation of the product gives the exact count. Keep signed sums rather than support-only saturation.
+
+### G67 — geometry-first elimination and exact frontier contraction
+
+Given an ordering of the actual clauses, introduce original variables at first occurrence; after last occurrence eliminate them by the extension functional. At a step use the set of live variables including current scope, of size <=w (this is a bag size, not graph width minus one). Maintain a signed partial-pin coefficient table D on 3^w basis states. New clause: keep each old contribution and subtract its compatible pin refinement; incompatible refinement is zero. When eliminating a variable multiply each entry by 2 if neutral, 1 otherwise, aggregate identical residual states. This is exactly the signed cover formula grouped by boundary; no exponential expansion in the number of clauses is required if w is small. Cost O(poly(input length)*3^w) ring operations for this supplied order, O(3^w) table entries; bit costs charged (coefficients bounded by 2^(number of processed clauses+q)). Isolated variables multiply 2 in final count. For arbitrary tree decomposition of the primal graph (edges join variables co-occurring in a clause), assign each clause to a bag containing its scope (clique property of subtrees of a tree). Use standard tree DP with Boolean boundary assignments: multiply child messages on bag assignments and local clause indicators, sum over bag variables not on parent intersection. Running intersection ensures eliminated variables never reappear in another branch, and every clause used once. With bag size <=w+1 and polynomially many bags, cost poly(input, decomposition size)*2^(w+1) operations; count bit length O(q), modular version valid. Decomposition search is not free. This is an upper bound for a supplied geometric decomposition, not a lower bound for arbitrary algorithms. Decision can use OR rather than signed summation if only nonemptiness needed.
+
+### G68 — exact consumer quotient and zero/signed modes
+
+The evaluation map on the partial-pinning algebra is e_0 -> (1,1), e_- -> (1,0), e_+ -> (0,1); target has pointwise multiplication. It is a surjective algebra homomorphism. Kernel generated by e_0-e_--e_+; for w named live variables the tensor product map onto functions on {0,1}^w is surjective and has free integer kernel rank 3^w-2^w (tensor pin basis gives an explicit splitting). This remains a quotient over any coefficient ring. The kernel is a consumer-invisible dependent residual, not equality of the original source histories. Multiplying by clause filters, introducing a neutral variable and eliminating by extension functional commute with evaluation, since extension functional is sum of the two evaluation coordinates. Hence the entire signed cover DP can be jointly compressed to the actual binary boundary evaluation table without enumerating any global support pairs. For the fixed interface of arbitrary signed boundary functions and all future full pin contexts, the 2^w linear output coordinates are independent (each pin queries one function value). Not a standard-machine lower bound; source structure may allow cheaper implicit states. Fourier coordinates on this boundary have zero mode sum and signed modes sum_b f(b)(-1)^(h dot b). One-bit transform gives f_0+f_1, f_0-f_1; recovering f from integer modes modulo 2^p requires up to w additional binary precision digits for inverse Walsh, not an unconditional precision requirement for algorithms staying in evaluation coordinates. Keep explicit neutral provenance and source label even when the chosen consumer uses quotient, retain signed gain/loss and actual face defects per G58/G64. Coordinate permutations intertwine evaluation; arbitrary lossy chart changes need their own residual. No blanket H05/H07/H14 commutation assertion. The processed constraint history remains separately indexed from the geometric elimination order; reordering factors preserves terminal count but changes intermediate signed records.
+
+### G69 — locally-full compiler preserves actual primal separator geometry up to a constant
+
+Let original normalized selected width<=3 clauses have primal graph G, treewidth w, with isolated original vertices included. G46 creates private literal occurrence copies, the six globally-zero gadget variables Z, and equality clauses linking each copy to its original via one of Z. It may create copies for inactive selector clauses too. In the compiled primal graph G', delete Z, contract each copy-original edge, and discard loops/duplicate edges. The resulting graph is exactly G: equality clauses become loops, active clause copies become original clause scopes, inactive copies add no edges between distinct originals. Thus G is a minor and tw(G')>=tw(G) (minor monotonicity follows by deleting vertices from bags and merging the connected occurrence subtrees of endpoints of a contracted edge, which share a bag).
+
+For upper bound take any tree decomposition of G. Add all six Z vertices to every original bag. Every active clause scope I is contained in some original bag (pairwise intersecting connected subtrees of a tree have common intersection); attach a leaf containing I, its <=3 private copies, and all six Z. Its size <=12. For inactive clause occurrences attach one leaf per copy containing its original, copy and all six Z to a bag containing that original. Every compiled equality edge and active clause edge is covered, and each vertex's bags stay connected. All gadget edges are covered by Z in original bags. Hence
+
+    tw(G) <= tw(G') <= max(tw(G)+6, 11).
+
+This applies to the ordinary G46 compiler with arbitrary selected clause pattern, including the universal occurrence allocation. Balanced inert alternatives only involve one copy and Z, already covered by its leaf. It is an actual graph transport, not an assumption that locally unrestricted tensors are intrinsically difficult. Given original decomposition the above construction has polynomial cost in compiled input length; no claim of efficient optimal treewidth computation. In particular G46 can hide all local unary, affine and parity reductions while preserving bounded-treewidth exact contraction. Conversely large primal treewidth alone is not a time lower bound: the formula imposing equality on every pair has complete primal graph, yet only two satisfying assignments and trivial signed-component contraction. Its G46 locally-full compilation has at least that treewidth by minor transport and is also easy by recognizing the constant gadget/occurrence equality construction. The key target is cost after all *semantic* graph contractions, not raw width, expanded monomials or local affine rank.
+
+### Actual local regression, no CI/native kernel
+
+Executed /tmp/p0_geometry_forward.py with exact Python integers: 660 original formulas (all 260 selectors q=1,2; 100 seeded formulas at each q=3..6), including 311 UNSAT, comparing signed frontier DP and binary boundary DP to full enumeration. 86,402 actual boundary evaluation equalities checked. Independently checked 300 signed union expansions on q=1..5 with up to ten clauses. Checked 180 actual G46 primal decompositions and contracted graph equality, q=1..6, 30 seeded active selector sets per q, allocating all private occurrences. All passed. Reproduction core for signed and evaluation contraction (forbidden patterns in tuples, no implicit witness pruning):
+
+```python
+from itertools import combinations,product
+from collections import defaultdict
+from random import Random
+rng=Random(369)
+def clauses(q):
+ return [(I,p) for d in range(1,min(3,q)+1) for I in combinations(range(q),d) for p in product((0,1),repeat=d)]
+def brute(q,C):
+ return sum(all(any((x>>i&1)!=v for i,v in zip(I,p)) for I,p in C) for x in range(1<<q))
+def dp(q,C):
+ last={i:j for j,(I,p) in enumerate(C) for i in I}; first={}
+ for j,(I,p) in enumerate(C):
+  for i in I:first.setdefault(i,j)
+ D={():1}; E={():1}; active=[]; checks=0
+ for j,(I,p) in enumerate(C):
+  new=sorted(i for i in I if first[i]==j);active+=new;ix=[active.index(i) for i in I]
+  T=defaultdict(int)
+  for a,v in D.items():
+   b=a+(-1,)*len(new);T[b]+=v
+   if all(b[k] in (-1,s) for k,s in zip(ix,p)):
+    z=list(b)
+    for k,s in zip(ix,p):z[k]=s
+    T[tuple(z)]-=v
+  V=defaultdict(int)
+  for a,v in E.items():
+   for x in product((0,1),repeat=len(new)):
+    b=a+x
+    if any(b[k]!=s for k,s in zip(ix,p)):V[b]+=v
+  for x in product((0,1),repeat=len(active)):
+   assert sum(v for b,v in T.items() if all(a==-1 or a==s for a,s in zip(b,x)))==V[x];checks+=1
+  keep=[k for k,i in enumerate(active) if last[i]>j];gone=[k for k,i in enumerate(active) if last[i]==j]
+  D=defaultdict(int);E=defaultdict(int)
+  for a,v in T.items():D[tuple(a[k] for k in keep)]+=v*2**sum(a[k]==-1 for k in gone)
+  for a,v in V.items():E[tuple(a[k] for k in keep)]+=v
+  active=[active[k] for k in keep]
+ assert D[()]==E[()]
+ return D[()]*2**(q-len(last)),checks
+n=checks=unsat=0
+for q in range(1,7):
+ C=clauses(q)
+ Fs=([C[i] for i in range(len(C)) if t>>i&1] for t in range(1<<len(C))) if q<=2 else (rng.sample(C,rng.randrange(min(20,len(C))+1)) for _ in range(100))
+ for F in Fs:
+  ans,c=dp(q,F);assert ans==brute(q,F);n+=1;checks+=c;unsat+=ans==0
+assert (n,checks,unsat)==(660,86402,311)
+```
+
+Additional executed tests: 60 seeded formulas each q=1..5, select up to 10 clauses; enumerate all clause subsets, maintain map variable->forbidden bit, add (-1)^|J| times 2^(q-len(map)) only when no conflict; compare brute. For graph tests after those seeded draws: q=1..6, 30 trials each, choose up to 12 selected clauses from all possible patterns, build original path decomposition by first/last occurrence plus singleton bags for isolated variables, extend bags by Z and append leaves exactly as G69. Check every compiled scope contained in a bag, every vertex's bag subgraph connected by DFS, max bag size minus one <=max(original width+6,11), and quotient edge set after deleting Z and mapping private copies to originals equals original selected-clause primal edges. No measured asymptotic performance or native certification claimed.
+
+### Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G65 | actualClauseEqualityZeroValuationControl | derived, all normalized nonempty clause networks after free-variable removal |
+| G66 | signedOriginalCompatibleCover / inhabitedNeutralPinAlgebra | derived and tested |
+| G67 | chronologicalSeparatorContraction / suppliedTreeDecompositionDecision | derived, exact frontier tests; classical bounded-width algorithm |
+| G68 | ternaryBoundaryEvaluationQuotient / indexedSignedModeTransport | derived and tested; consumer-specific, retain source and precision |
+| G69 | locallyFullCompilerPrimalMinor / boundedWidthTransport | derived and tested; source graph, not intrinsic cost |
+| N4/G12a | unrestrictedSerialCharge | OPEN: must survive semantic geometry contraction, arbitrary sharing and other nonlocal algorithms |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; G48 uniform flag or G38 stronger nonuniform slice |
+| N6 | originalClayTransport | conditional #1040/#1129 |
+
+Geometry-forward continuation: identify actual source separators after legitimate semantic contraction and study a global resource inequality or an exact shortcut on G48. Do not require all algorithms to use these separators, or charge width, signed cover size, channel dimension, individual valuation, or precision debt as unavoidable cost. G65 rules out valuation-only rejection; G69 lets us separate actual geometric hardness from merely hiding locally visible reductions. The neutral zero mode and signed residual are retained through the typed source/consumer hyperfabric, but materialization is optional. Keep direct uniform endpoint active. No additional mandatory certification phase and no P!=NP claim.
