@@ -121,6 +121,7 @@ def original_phase(model,folder,phase):
           "ordinary_complex_character_attached":False}
     return {"original_Monster_phase":phase,"root_zeta3_mod31":root,
         "provenance":word_status,"source_manifest":state.get("source_manifest"),
+        "original_source_blob_sha":state.get("original_E_source_blob_sha"),
         "words":rows}
 
 def run(model,plus=None,minus=None):
@@ -138,12 +139,23 @@ def run(model,plus=None,minus=None):
         if folder is not None:
             result["phases"][str(s)]=original_phase(model,folder,s)
     if plus is not None and minus is not None:
-        if result["phases"]["1"]["source_manifest"]!=result["phases"]["2"]["source_manifest"]:
-            raise ValueError("opposite phases do not originate from same Monster E manifest")
+        p=result["phases"]["1"];q=result["phases"]["2"]
+        if (p["provenance"]=="EXACT_SOURCE_WORD_TEXT_MATCH"
+            and q["provenance"]=="EXACT_SOURCE_WORD_TEXT_MATCH"):
+            result["cross_phase_word_identity_status"]="EXACT_LITERAL_CANONICAL_C_D_MATCH"
+        elif (p.get("original_source_blob_sha") is not None
+              and p.get("original_source_blob_sha")==q.get("original_source_blob_sha")
+              and p["source_manifest"]==q["source_manifest"]):
+            result["cross_phase_word_identity_status"]="SHARED_SOURCE_WITH_LEGACY_WORD_ID_UNRECORDED"
+        else:
+            result["cross_phase_word_identity_status"]=(
+                "UNVERIFIED_CROSS_PHASE_SOURCE_PROVENANCE; NO_CHAR_LIFT")
         for name in ("D","E"):
             p=result["phases"]["1"]["words"].get(name,{})
             q=result["phases"]["2"]["words"].get(name,{})
-            if (p.get("status")=="PROJECTIVE_DUAL_SYM2_CHARACTER_WELD_CONSISTENT"
+            if (result["cross_phase_word_identity_status"]!=
+                  "UNVERIFIED_CROSS_PHASE_SOURCE_PROVENANCE; NO_CHAR_LIFT"
+                and p.get("status")=="PROJECTIVE_DUAL_SYM2_CHARACTER_WELD_CONSISTENT"
                 and q.get("status")=="PROJECTIVE_DUAL_SYM2_CHARACTER_WELD_CONSISTENT"
                 and p["chosen_729_model_K_g_cubed_gamma_mod31"]==1
                 and q["chosen_729_model_K_g_cubed_gamma_mod31"]==1):
