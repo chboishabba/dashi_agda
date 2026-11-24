@@ -108,15 +108,19 @@ def build(data,outpath):
         raise ValueError("Q(zeta3) field polynomial must be [1,1,1]")
     if data.get("matrix_convention")!="left_action_column_vectors":
         raise ValueError("explicit left-action column-vector convention required")
-    if data.get("selected_6Suz_12_irr_position") not in (153,154):
-        raise ValueError("selected GAP 6.Suz 12 Irr must be 153 or154")
+    selected = data.get("selected_6Suz_12_irr_position")
+    if selected is not None and selected not in (153,154):
+        raise ValueError("selected GAP 6.Suz 12 Irr must be 153/154 or null")
+    # Steel's original group-module basis has no automatic literal class
+    # map to CTblLib; until original word/class attachment, the row is null.
     genes=data.get("generators")
     if not isinstance(genes,dict) or not genes:
         raise ValueError("explicit ordinary source12 generator matrices required")
     result={
        "schema":"monster3b-ordinary12-dual-sym2-90-v1",
        "source":source,"field":"Q(zeta3), zeta3^2+zeta3+1=0",
-       "claimed_6Suz_12_irr":data["selected_6Suz_12_irr_position"],
+       "claimed_6Suz_12_irr":selected,
+       "original_GAP_12_character_orientation_verified":False,
        "source_generator_to_6Suz_original_GAP_class_verified":False,
        "source_generator_to_Monster_mmgroup_word_verified":False,
        "actual_Monster_Hom_intertwiner_verified":False,
