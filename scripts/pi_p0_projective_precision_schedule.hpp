@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <limits>
 #include <memory>
+#include <stdexcept>
 
 namespace paper9_projective_schedule {
 
@@ -113,6 +114,20 @@ inline std::unique_ptr<Plan> makePlan(
   ledger.digits=digits;
   ledger.precisionBits=precisionBits;
   std::unique_ptr<Plan> root=build(0,cutoff,0,precisionBits,ledger);
+  ledger.modelPeakBytes=root->predictedPeakBytes;
+  ledger.planningObjectPayloadBytes=ledger.planNodes*sizeof(Plan);
+  return root;
+}
+
+// Planner for a REAL source suffix [a,b); never relabel the leaf indexes.
+// Reusing [0,b-a) would change all original p_j,q_j, A+B*j factors.
+inline std::unique_ptr<Plan> makePlanInterval(
+    unsigned begin,unsigned end,unsigned digits,unsigned precisionBits,
+    PlanningLedger& ledger) {
+  if(end<begin)throw std::invalid_argument("reverse source interval");
+  ledger=PlanningLedger{};
+  ledger.digits=digits;ledger.precisionBits=precisionBits;
+  auto root=build(begin,end,0,precisionBits,ledger);
   ledger.modelPeakBytes=root->predictedPeakBytes;
   ledger.planningObjectPayloadBytes=ledger.planNodes*sizeof(Plan);
   return root;
