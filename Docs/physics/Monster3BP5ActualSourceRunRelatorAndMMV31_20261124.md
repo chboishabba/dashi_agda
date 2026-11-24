@@ -74,3 +74,18 @@ Notably **\(31\nmid |6.\mathrm{Suz}|=2690072985600\)** (factorization \(2^{14}3^
 **Work strategy:** do not restart the full 78/90 original GAP source search, the 28 quotient witnesses or the 78s full Monster source projection. The next high-value original-source action is inspecting the **already cached Steel \`.M\`** and making a Magma-free exact extraction if its literal format permits, or executing its original Magma module if Magma is made available; then compare its 12D reduction (ζ→5 or 25) with the genuinely original MMV31 12D source block using the correct source group words and residual \(R^7=z\). One source-alignment programme, not piecemeal certificates.
 
 **Provenance boundary:** authentic workstation execution details are transcribed from the supplied P5 report; no independent access to workstation paths, original JSON or \`.npz\` was available here. This document records source acceptance with that explicit boundary and is not a claim of full endpoint theorem certification.
+
+
+## 5. New source-inner generator reduction: two authentic modular 12D actions
+
+**After the reported workstation run, a further exact generator reduction was implemented; it has NOT been re-executed on the workstation.** Let \(G=\langle C,D\rangle\le\mathbb M\), and define the sign homomorphism \(\lambda:G\to\{\pm1\}\) from its action on the selected centre \(z_{3B}\), with \(\lambda(C)=-1,\lambda(D)=1\). The Reidemeister–Schreier transversal \(\{1,C\}\) gives a generating set for its centre-preserving kernel:
+
+\[
+\boxed{\ker\lambda=\left\langle D,\;CDC^{-1},\;C^2\right\rangle.}
+\]
+
+This is an exact **group-theoretic** result about the actual generated subgroup \(G\), not a claim that \(G\) has already been proven equal to the entire original published normalizer \(H\). The corrected Monster element \(CDC^{-1}\) has order three and preserves \(z\), so it supplies a **second independent source inner generator** for the original \(90D\) modular B-vacuum, in addition to the already-observed \(D\). The actual Monster word is derived directly as a group product of the already reported corrected \(C,D\), not invented.
+
+**New committed consumer** \`scripts/monster3b_actual_mmv31_hom_projector.py\` retains every existing \`D\` artifact and additionally, when a canonical cover receipt is given, computes the genuine projected \(90D\) \(CDC^{-1}\) vacuum sandwich over \(\mathbb F_{31}\), its rank, cubic scalar diagnostic, and, if it commutes with the source \(C^2\) involution, the induced \(12D\) and \(78D\) blocks on the *same original modular eigenbasis*. It writes \`actual_CDCinv_vacuum_sandwich_mod31.npz\` and \`actual_CDCinv_12_78_vacuum_sandwich_mod31.npz\` conditionally, preserving the source \(k_0(CDC^{-1})\) Weil-vacuum scalar as **unknown**, just like \(k_0(D)\).
+
+These two phase-preserving group words replace a single-generator modular diagnostic with a **source generator pair** for the index-two kernel. They are a more useful comparison target for a future exact \(\mathbb Q(\zeta_3)\to\mathbb F_{31}\) reduction of Steel's faithful12 matrices. Scalar normalization and original abstract-to-MM word map remain genuine mathematical inputs, and no new modular execution is falsely claimed.
