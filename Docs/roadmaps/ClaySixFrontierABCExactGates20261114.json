@@ -5547,6 +5547,17 @@
       "acceptance": "CURRENT blob 9b6ea0db5c9698623c92df5bee94b6b087abe721 re-executed all 64 finite exact states in 4 checkpointed blocks; 2 real-helicity same-state opposite-sign witnesses; R596 source-normalized Cauchy-Gram derivative validated all seeds",
       "proof_model": "Q(sqrt2,sqrt3,i) exact finite physical source; Agda rational field transport unproved",
       "script_blob": "9b6ea0db5c9698623c92df5bee94b6b087abe721"
+    },
+    "ns_r568_endpoint_trace_steelman_20261124": {
+      "stage": "NEW_CLASSICAL_ENDPOINT_REDUCTION_P0_NS_B_NOT_PRIZE",
+      "source_key": "ns_r568_endpoint_trace_steelman_20261124",
+      "gate_change": "NONE",
+      "status": "MATHEMATICAL_CONDITIONAL_ON_TRUE_GALERKIN_TIME_FTC",
+      "classical_initial_gram": "CUT_OFF_INDEPENDENT_SMOOTH_MEAN_ZERO_BOUND_DERIVED",
+      "true_C1": "OPEN",
+      "true_C2": "OPEN",
+      "all_Clay_endpoints_proved": "0/6",
+      "script_blob": "f5e4b640f2d04b13fdf97fc1c29a2d7de6135981"
     }
   },
   "ns_r568_actual_galerkin_20261123": {
@@ -5658,5 +5669,73 @@
       "original_six_Millennium_endpoints": "0/6"
     },
     "coordinator_validation": "do not alter existing 135-symbol source audit or historical active/closed gate counts; existing 11 active and 4 completed including P0/B1(refuted)/C1/C2(classical) preserved"
+  },
+  "ns_r568_endpoint_trace_steelman_20261124": {
+    "as_of": "2026-11-24",
+    "scope": "Mathematical endpoint-first bidirectional reverse solve of original live R568 C1 and independent R653 C2 from original R225/R388/R596/R652 source. Conditional on genuine physical real-field trajectory and scalar FTC. Not a Clay proof, new owner module, or added original 135-symbol index entry.",
+    "canonical_report": "Docs/roadmaps/ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md#24-november-2026--endpoint-first-six-clay-steelman-forwardbidi-reverse-solve-and-r568-positive-trace-necessity",
+    "checked_producers": [
+      "R225.doubleMixedCell",
+      "R388.doubleMixedDampedTangent",
+      "R596.fourForcingFullIsGramPlusFlux",
+      "R597.fullGramIsCoherentFold",
+      "R560 literal double-mixed derivative",
+      "R565/R570 scalar-FTC conditional",
+      "R568.globalForcingFull and CommutatorOnlySpacetimeBudget568",
+      "R652.integratedFourForcingIsTwoR406PlusDiagonal",
+      "R653.CoupledPhysicalPacketPayment",
+      "R681/R682/R683 physical live cross-gradient",
+      "R571SecondMomentToR568Bridge (conditional)"
+    ],
+    "mathematical_identity": "Qsource_C=2 sum_k sum_ab (r_a+r_b)^(-1) Re<M_a,M_b>; H_C=sum_k ||sum_a M_a||^2; for a true differentiable R388 trajectory 4 F_C=Qsource_C'+2 H_C; with FTC 4 int F_C=Qsource_C(T)-Qsource_C(0)+2 int H_C",
+    "positive_source_geometry": "Qsource_C(t)=2 sum_k int_0^inf ||sum_a exp(-r_a s) M_a(t)||^2 ds >=0 (classical real/complex analytic, not Agda rational exponential)",
+    "mixed_helicity_trace": "H_C=16 ||P_C,nonzero (u_C^+ cross u_C^-)||_L2^2 exactly from original R225 complete output fibre",
+    "c1_endpoint_equivalence": "4 int F_C<=B iff Qsource_C(T)+2 int H_C<=B+Qsource_C(0) under same physical trajectory and FTC",
+    "c2_endpoint_equivalence": "2 S_delta+J_C+Qsource_C(0)<=Qsource_C(T)+2 int H_C iff original R653 strict-margin lower, where J_C=int(R557.selfGram+R557.selfFluxTangent), conditional on original R652 and N0",
+    "classical_smooth_mean_zero_initial_gram_ceiling": {
+      "status": "CLASSICALLY_DERIVED_IN_ROADMAP_NOT_KERNEL_TYPECHECKED",
+      "hypothesis": "fixed smooth mean-zero u0 on 2pi-periodic T3, Galerkin original cube truncations, true transverse helical orthogonal projectors, constant viscosity nu>0, s>3/2",
+      "elementary_cell_bound": "||R225.doubleMixedCell(p,q)|| <= 4||u_p||||u_q||",
+      "elementary_rate_bound": "(r_alpha+r_beta)^(-1)<=1/(nu |k|^2) for every k!=0, via 2(|p|^2+|q|^2)>=|k|^2",
+      "result": "0<=Qsource_C(0)<=32/nu ||u0Fourier||_ell1^4<=32/nu (sum_k(1+|k|^2)^(-s)) ||u0||_H^s^4 independently of cutoff C",
+      "important_boundary": "NOT an R565 initial selfFlux bound; nonzero-mean handling separate; not proof of endpoint T or integrated trace control"
+    },
+    "proposed_unpaid_lemmas": [
+      "NS-P0 actual real/algebraic helicity + genuine physical continuous R240/R405 time",
+      "NS-P1 actual R560/R596 global derivative and scalar FTC (N0)",
+      "NS-P2 uniform positive mixed-helicity projected trace 32 int ||P_C,nonzero(u+ cross u-)||_2^2",
+      "NS-P2 uniform terminal Qsource_C(T), without circular regularity hypothesis",
+      "NS-P2 original R653 strict surplus / positive retained margin, independent of C1",
+      "NS-P3 original periodic B all-data cutoff-uniform continuation/Fefferman literal",
+      "NS-P4 native Agda/Lean kernel and source-carrier check after endpoint mathematics"
+    ],
+    "acceptance": {
+      "script": "scripts/check_ns_r568_endpoint_trace_steelman_20261124.py",
+      "blob": "f5e4b640f2d04b13fdf97fc1c29a2d7de6135981",
+      "local_exact_math": "sympy 1.14 executed an equivalent source-type polynomial check; committed script Git blob read back unchanged, not separately byte-for-byte run",
+      "exact_fixture": "C=1 k=(1,0,0) N=18; rates {1:2,3:8,5:8}; full direct and bucket Q/F; derivative and integrated two-way truth checks, wrong factor-two falsifier, k,p,q midpoint lower bound C=1,2",
+      "sample_Qsource_0": "419/20",
+      "sample_Qsource_T": "11309/540",
+      "sample_two_integrated_H": "5921/81",
+      "sample_four_integrated_F": "29602/405",
+      "physical_state_companion": "scripts/check_ns_r568_physical_source_weld_exact_20261123.py; true Galerkin initial-source 64/64, two opposite-sign witnesses; NOT a full physical real-time path",
+      "native_kernel": false,
+      "CI": false
+    },
+    "framework_guard": {
+      "source_vs_math": "N0 derivative requires real R240 calculus plus FTC to become true full trajectory; mathematical finite classical proof is not an Agda kernel inhabitant",
+      "periodic_vs_whole": "B does not imply unforced A; forced C/D external source is separate",
+      "portfolio_vs_local_gate": "portfolio B1 signed reserve refuted, B2 open; selected portfolio C1/C2 classical Python/SymPy closed but native open; local R568 C1/R653 C2 analytically open",
+      "no_false_energy_to_L4": "An arbitrary divergence-free smooth time-spacetime concentration has Leray-energy-like bounds but unbounded int ||u||_4^4; NOT a physical NS trajectory or a refutation of special mixed-helicity trace",
+      "originals": "Do not duplicate merged numbered RXYZ sources or deprecate existing R682/R683",
+      "endpoint_count_DASHI": "0/6"
+    },
+    "current_cross_lane_P0": {
+      "Agda": "https://github.com/chboishabba/dashi_agda/pull/1548",
+      "Lean": "https://github.com/chboishabba/dashi_lean4/pull/119",
+      "Lean_resource": "https://github.com/chboishabba/dashi_lean4/pull/118",
+      "Lean_GCT": "https://github.com/chboishabba/dashi_lean4/pull/120",
+      "controlling": "N1-N3 polynomially charged semantic normalization, U2-U4 unavoidable-resource charging and A2 universal SAT lower bound in parallel; no new P0 owner duplicated on NS PR1543"
+    }
   }
 }
