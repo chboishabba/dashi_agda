@@ -855,6 +855,13 @@ cost ledger and references:
 
 ## 24 November — COMP5s: exact projective source and output-precision-indexed peak scheduling (UNTESTED)
 
+The candidate also emits counts of source prime-content
+calls, local modular checks, valuation divisions and exact
+GMP leaf reductions. These are not free normalization
+operations, and their measured time/bit cost remains OPEN.
+The reported C++ planning-object payload omits allocator
+overhead, unlike the separately measured GMP heap peak.
+
 **P0 endpoint:** pursue fastest *independently certified* pi with
 correct source and cost. At user's explicit direction, testing,
 native compilation, benchmarks, Agda/Lean, CI and external SOTA
@@ -862,20 +869,20 @@ comparison stay **deferred**. COMP5j measured historical results
 are unchanged and NOT reassigned to this candidate.
 
 New connected implementation:
-- \`scripts/pi_p0_projective_precision_schedule.hpp\` —
+- `scripts/pi_p0_projective_precision_schedule.hpp` —
   bounded-depth source-width planner with recorded
   output demand (decimal digits, root working bits),
   modelled branch peak, modelled P/Q/T widths and
   separately listed C++ plan object payload (not measured total C++ heap). It chooses only
   evaluation order of the two child computations;
   original matrix merge remains ordered.
-- \`scripts/check_pi_p0_precision_projective_schedule.cpp\` —
+- `scripts/check_pi_p0_precision_projective_schedule.cpp` —
   exact COMP5r normalized leaves, guaranteed factor
   24 and indexed prime content \(h_j\) computed
   from original small factors; positive scalar
   \(\prod 24h_j\) retained as a deterministic
   interval/source recipe. A callable
-  \`reopenOriginalRawSource\` reconstructs literal
+  `reopenOriginalRawSource` reconstructs literal
   original P/Q/T if requested, charging the
   recomputed big-integer scale. Fast pi consumer
   DOES NOT call this expensive reopening.
@@ -895,8 +902,8 @@ source P/Q/T limbs may be dropped.
 The planner forecasts integer carrier sizes
 from exact original leaf-factor **inequalities**
 on \(|p'_j|\), \(q'_j\) and \(|T/Q|\),
-numerically approximated by \`lgamma\` and
-\`log2\` ONLY for scheduling. It chooses
+numerically approximated by `lgamma` and
+`log2` ONLY for scheduling. It chooses
 between \(p_{L\to R}=\max(p_L,s_L+p_R,m)\)
 and \(p_{R\to L}=\max(p_R,s_R+p_L,m)\)
 at top levels. Unplanned subtree cost and
@@ -906,7 +913,7 @@ calibrated optimal memory schedule.
 Actual source values are never
 truncated by this estimator.
 
-Separate \`FIBRE\` coordinates include
+Separate `FIBRE` coordinates include
 source scale recipe; selected sign and
 original cutoff; scheduling precision,
 plan nodes, right-first decisions,
@@ -919,7 +926,7 @@ with a kernel execution-cost theorem.
 Complete math, producer/consumer source
 coordinates, positivity and original-source
 proof obligations plus S1–S6 roadmap:
-\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
 Any future actual P/Q/T truncation requires
 an independent error/strict-boundary
 admission proof; no such work is claimed.
