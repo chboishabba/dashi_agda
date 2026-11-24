@@ -1506,6 +1506,24 @@ new world-record claim this tranche.
 
 ## 24 November — COMP5v: one source-common terminal radical for both adjacent endpoints
 
+
+
+The integrated source was also
+reviewed for the inherited adjacent
+denominator allocation:
+`viewEndpoints(edge)` was removed
+from COMP5v's fast path so \(Q'q_n\)
+is not materialized independently
+before computing its shared radical
+factors. When \(1\le n<2^{20}\),
+the exact source factor
+\(q_n=(640320n)^3<2^{120}\);
+this finite cutoff bit-width
+motivates small-factor multiplication
+as opposed to duplicating a large
+root multiplication, but is not a
+GMP memory/time benchmark.
+
 From the genuine projective Chudnovsky
 signed affine edge \(E_n=(T',Q',V)\),
 retain the original next leaf \(q=q_n\),
