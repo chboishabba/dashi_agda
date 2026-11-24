@@ -306,15 +306,12 @@ Receipt compute(unsigned digits,bool inplace){
  refreshRoot();
  for(;;){
    ++RetryWork.certificateAttempts;
-   // Positive adjacent endpoints, with odd/even orientation selected
-   // solely by the exact signed source residual.
-   const auto endpoints=paper9_affine_retry::viewEndpoints(edge);
-   const Z& lowerNum=endpoints.lowerNum(edge);
-   const Z& lowerDen=endpoints.lowerDen(edge);
-   const Z& upperNum=endpoints.upperNum(edge);
-   const Z& upperDen=endpoints.upperDen(edge);
-   if(lowerNum<=0||lowerDen<=0||upperNum<=0||upperDen<=0)
-      throw runtime_error("invalid positive source interval");
+   // Source-typed affine edge is the complete selected consumer input.
+   // Do NOT call viewEndpoints(): it eagerly allocates Q'*q_n, precisely
+   // the redundant adjacent denominator COMP5v was designed to avoid.
+   // The shared classifier uses T',Q',V and literal original q_n directly.
+   if(!paper9_affine_retry::signedConeAdmissible(edge))
+      throw runtime_error("invalid positive signed source edge");
    // Exact source-constrained three-sector contraction. The arithmetic
    // consumes low quotient remainders and the already needed upper
    // dyadic bound. It does not construct the huge radical-square slacks.
@@ -325,8 +322,7 @@ Receipt compute(unsigned digits,bool inplace){
    Z floor=std::move(decision.x);
    FC.endpointCapacityBytes=max(FC.endpointCapacityBytes,
      capBytes(root)+capBytes(decimal5)+
-     capBytes(edge.t)+capBytes(edge.q)+capBytes(edge.v)+
-     capBytes(endpoints.nextDen));
+     capBytes(edge.t)+capBytes(edge.q)+capBytes(edge.v));
    if(decision.sector==paper9_dyadic_sector::Sector::AdmitFloor){
      string output=floor.get_str();
      return {sha(output),
