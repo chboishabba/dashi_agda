@@ -165,6 +165,16 @@ def certify_chart(k,h):
  end=[start[i]+h*f0[i]+(h*h/F(2))*acceleration[i] for i in range(9)]
  if not all(x.within(y,strict=False) for x,y in zip(end,tube)):
   raise AssertionError('Taylor2 endpoint excluded from previously valid Picard tube')
+ # On a genuine zero-guard initial event, fixed post-event slope makes
+ # its diode branch physically admissible for t>0. All *other* diode and
+ # spark hysteresis guards must be strict over the whole Picard tube.
+ gu=guard(3,tube);gv=guard(0,tube)
+ U,V,chi=mode
+ last=k-1 if k else -1
+ if last not in (3,5):assert (gu.a>0 if U else gu.b<0)
+ if last not in (0,4):assert (gv.a>0 if V else gv.b<0)
+ if chi:assert (tube[4]-F('0.0018')).a>0
+ else:assert (tube[4]-F('0.006')).b<0
  slope=[]
  if k:
   prev=guard_slope(k-1,f(tube,window,MODES[k-1]))
@@ -186,7 +196,10 @@ def certify_chart(k,h):
      jacobian_9x9_endpoint_interval=[list(map(I.record,row)) for row in Phi],
      derivative_fulltube_inf_lipschitz_bound=str(L),peano_q=str(q),
      peano_tail_component_radius=str(tail),
-     exact_Picard_inward=True,fulltime_branch_slope_transverse=bool(k),
+     exact_Picard_inward=True,
+     non_switching_physical_diodes_and_spark_thresholds_strict=True,
+     after_switching_physical_mode_valid_if_event_guard_zero=True,
+     fulltime_branch_slope_transverse=bool(k),
      original_source_full_chart_orbit_attached=False)
 
 def main():
@@ -203,6 +216,8 @@ def main():
     rational_source_constants=True,original_physically_smooth_modes=7,
     exact_Picard_tubes=7,certified_9x9_variational_shortcharts=7,
     signed_pre_and_post_event_slopes=6,
+    non_switching_guard_tubes=7,
+    all_seven_modes_physically_admissible_conditional_on_event_zero=True,
     input_state_radius='1/10000',input_time_radii=['0']+['1/200000']*5+['1/5000'],
     J29_first_five_original_event_boxes_geometrically_covered=True,
     actual_source_smooth_chart_seed_proof_for_first_five_requires_J29_receipt=True,
