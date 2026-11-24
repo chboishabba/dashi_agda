@@ -160,6 +160,12 @@ def certify_chart(k,h):
  tail=q*q/(1-q)
  Phi=[[I(int(i==j))+h*J[i][j]+I(-tail,tail) for j in range(9)] for i in range(9)]
  f0=f(start,t0,mode)
+ # Endpoints vary in absolute source clock. The flow map obeys
+ # dPhi/dt1=f(t1,Phi), dPhi/dt0=-D_xPhi*f(t0,x0).
+ # These bounds hold on the correlated fixed-duration t1=t0+h slice,
+ # NOT the full independent 69D event-time rectangle.
+ f_terminal=f(tube,I(tc-time_radius+h,tc+time_radius+h),mode)
+ dt_start=[-sum((Phi[i][j]*f0[j] for j in range(9)),I(0)) for i in range(9)]
  sn,co=phase(window)
  ft=[I(0) for _ in range(9)]
  ft[5]=-PARAM['omega']*K*sn;ft[6]=-PARAM['omega']*K*co
@@ -196,6 +202,9 @@ def certify_chart(k,h):
      source_interval_f_guard_slope_pre_post=slope,
      endpoint_9D_Taylor2_interval=[v.record() for v in end],
      jacobian_9x9_endpoint_interval=[list(map(I.record,row)) for row in Phi],
+     fixed_duration_slice_partial_start_time=[v.record() for v in dt_start],
+     fixed_duration_slice_partial_end_time=[v.record() for v in f_terminal],
+     independent_start_end_time_rectangle_Jacobian_proved=False,
      derivative_fulltube_inf_lipschitz_bound=str(L),peano_q=str(q),
      peano_tail_component_radius=str(tail),
      exact_Picard_inward=True,
