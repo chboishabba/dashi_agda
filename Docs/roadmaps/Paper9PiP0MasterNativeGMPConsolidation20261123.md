@@ -1087,3 +1087,78 @@ positive/negative S13–S19 obligations:
 and independent world-SOTA comparisons
 remain deferred**. No new measured
 runtime/memory figure.
+
+
+## 24 November — COMP5v common-root source contraction (TESTING DEFERRED)
+
+COMP5v is a separately committed **UNTESTED** extension of
+COMP5u's exact signed affine/prime-local projective π
+certificate controller. It preserves the original
+source and its suffix-only retries; the measured
+COMP5j, experimental COMP5t/u, and the six-way
+production benchmark are not overwritten.
+
+New files:
+\`scripts/pi_p0_shared_radical_sector.hpp\` and
+\`scripts/check_pi_p0_shared_radical_schedule.cpp\`.
+
+With \(H=426880\,5^d\), \(R=\lfloor
+2^b\sqrt{10005}\rfloor\), original
+normalized terminal edge
+\((T',Q',V)\), next source denominator
+\(q=q_n\), define \(Z=HQ'\), \(Y=ZR\).
+The original two endpoint products factor exactly:
+
+| Original n | Lower \(A=HRD_h\) | Upper \(W=H(R+1)D_l\) |
+|---|---|---|
+| even | \(qY\) | \(Y+Z\) |
+| odd | \(Y\) | \(q(Y+Z)\) |
+
+Therefore ONE \(Y=HQ'R\) source-common
+large radical product feeds both adjacent
+original source endpoints. No fake
+commutation of the noncommutative P/Q/T
+matrix or change of source leaf order.
+We also avoid separate materialization
+of original adjacent denominator \(Q'q\)
+when creating terminal bound numerators.
+The source sign/residual determines
+which parity branch is used.
+
+The exact nested quotient/remainder and
+COMP5u three-sector classifier are
+unchanged. On an ordinary successful
+strict upper comparison, the large
+upper dyadic remainder \(\eta=W\bmod2^k\)
+is never built; only a failing comparison
+requires \(\eta\) and the signed
+\(\lfloor(\eta-HD_l)/2^k\rfloor\)
+correction. Structural counters expose
+one shared radical product, source
+q-products, lower divmod, upper quotient,
+lazy upper remainder, dyadic corrections,
+source versus root retries and existing
+prime-local GMP producer work.
+
+The final floor consumer is invariant
+under source projective scaling, BUT
+the Euclidean raw-source remainders
+still demand G14's exact indexed
+dyadic carry. Raw signed source
+reconstruction and full analytic
+Chudnovsky/Bishop proofs remain
+separate consumer obligations.
+
+Potentially lower multiplication
+duplication does NOT establish lower
+bit complexity, wall-time, GMP heap
+or process RSS: the additional
+q-products may dominate. The exact
+source equations, S20–S25 proof/negative
+control gates and all producer-consumer
+links are in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+**Compilation, tests, CI, Agda/Lean,
+profiling and SOTA comparison
+are all deferred by user instruction.**
+No new quantitative result.
