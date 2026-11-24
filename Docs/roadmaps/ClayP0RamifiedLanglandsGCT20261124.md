@@ -2768,3 +2768,64 @@ Core pseudocode:
 | R7c/LGC6 literal Clay separation | OPEN |
 
 Next: actual mixed affine/orbit/frontier decomposition on original weighted Weil probe, not a compulsory rank invariant. For any global result admit primal decision, clause simplification, symmetry, contextual quotient, nilpotent sorting and arbitrary direct machine algorithms. No general Langlands correspondence claim or unrestricted separation. No unrelated branch edits.
+
+## 2026-11-24 — R150–R156: mixed affine/orbit/pin interface and costed nonlinear packet composition
+
+Scope: Langlands continuation only; G94–G98 donor source Agda #1548 head 5bfc4a078984, Lean #119 head 12ec96edf1b6 (live PR metadata verified). Their flat bijunctive cover obstruction and disjoint OR3 compositional bypass are credited, not new Langlands results. Continue R128–134 affine gluing, R135–143 contextual algebra, R144–149 actual reset and signed intersection. No unrelated branch edits.
+
+### R150. Joint geometric interface
+For original Boolean guards x, let gamma(x)=(Hx mod 2,Bx,x|K), with H binary, B nonnegative integral, K original labelled pins. Replace H by a row basis for rank r; restore redundant syndrome coordinates by the original row map. The pushforward W(gamma)=sum_{x:gamma(x)=gamma} prod_i w_i(x_i) charges each original guard exactly once. Joint rather than marginal pushforward is essential; no generic independence of chart observations. If using a fixed affine offset, add it once, not per block. A zero coordinate in the pin projection is an actual false branch; the earlier R145 unpinned neutral is represented by omission of the coordinate, not by that false value.
+
+### R151. Division-free coefficient algebra
+Use the group algebra of binary syndrome and pin coordinates tensored with the polynomial algebra of count coordinates. For columns H_i,B_i and e_i the pin coordinate unit or zero, the joint packet is prod_i (w_i(0)+w_i(1) X^H_i u^B_i Y^e_i). X and Y exponents add by XOR, u by ordinary nonnegative addition. Coefficient extraction gives W. No Fourier division or field assumptions. Induction on source labels proves the identity over any commutative ring. With r rank, k=|K|, L_j=sum_i B_ji, ambient M=2^(r+k) prod_j(L_j+1); reachable support can be smaller. Iterative monomial shifts cost O(q M) ring operations plus polynomial coordinate bookkeeping. Explicit reachable state enumeration is charged; large count coefficients encoded in binary do not automatically imply polynomial M.
+
+### R152. Mixed separator law and exact observer collision
+Let left/right share original S and have disjoint private interiors, with source weights assigned once. Suppose their private-contracted functions satisfy L(x_S)=ell(alpha(x_S)), R(x_S)=rho(beta(x_S)) for all original separator assignments (certify this factorization, not merely sampled equality). Then P=sum_{a,b} W_S(a,b) ell(a) rho(b), by partitioning the original separator sum. W_S is the joint pushforward of its original unary weights; neither private sum includes those weights. This extends to finitely many factors with a shared separator and pairwise disjoint private interiors. Each private consumer may use R136/R139/R146 or affine/orbit methods only when its boundary contract is certified. For general overlap graphs need further conditional messages or charge explicit separators. The matrices [[1,0],[0,1]] and [[0,1],[1,0]] have identical marginals and different (0,0) consumer; realizable by a unit-weight binary source with alpha=x and beta=x vs beta=1-x. Thus separate chart marginals do not determine the joint consumer. All delta consumers distinguish any unequal joint packets; a restricted actual consumer family may quotient further by its common kernel, but this is a scoped observation statement, not a mandatory computation or lower bound.
+
+### R153. Disjoint nonlinear region packets and additive global interface
+For disjoint original blocks B_j with local acceptance F_j, define P_j=sum_{x_Bj} F_j(x_Bj) w_Bj(x_Bj) X^(H_j x_Bj) u^(B'_j x_Bj) Y^p_j. Then P=prod_j P_j by distributivity and disjoint source weights. Apply any global acceptance test g of the joint coordinates after this convolution, giving P_t=sum_gamma g(gamma)[gamma]P. No need to expand G94 flat witness-preserving binary cover. Complexity O(sum C_j+m M^2) ring operations using direct convolution, plus coordinate bookkeeping and global consumer evaluation; C_j includes local packet discovery/construction. A supplied certified chart may reduce C_j, but a black box scalar cannot serve as a boundary packet without a factorization proof. Local bounded-size enumeration is one valid construction.
+Actual disjoint OR3 family of G94–98 with global Hamming weight h and parity s of the first original guard in each block: each local packet sums the seven accepting assignments. At unit weights, local support consists of (s,h)=(0,1),(0,2),(1,1),(1,2),(1,3). Exact coefficients are respectively 2,1,1,2,1. Their m-fold convolution has 4m+1 reachable states for m>=1: for each h=m..3m-1 both parities occur (vary number a of first bits from max(0,h-2m) to min(m,h), an interval of >=2 integers for m>=1 and h<3m), while h=3m forces parity m mod 2. Each a in that interval is feasible because remaining pairs contribute h-a between m-a and 2m. Thus m=12,24,48 give 49,97,193 states and total acceptance weight 7^m. The added global observations are not an assertion that the G94 lower bound survives every additional filter. A desired Boolean g can be compiled via a unique-extension Boolean circuit/Tseitin graph into the earlier selector source; auxiliary weights must be unit on both values or explicitly retained, and size/cost of g charged. This example is a regional source control, not a proof of general contraction on every original Langlands selector.
+
+### R154. Support and signed packet separation / reverse weld
+Alongside ring-valued W retain Boolean support S(gamma)=exists x extending original acceptance and coordinate gamma. Compose S using OR/AND convolution independent of signed weights; it does not test W!=0. For example weights +1,-1 in the same inhabited neutral signature give W=0,S=1. Store one original local witness per inhabited coordinate or an exact local witness algorithm, and predecessor (old coordinate, local coordinate) for each inhabited prefix convolution state. Reverse gives one genuine source witness for any admissible target; it does not invert the scalar or recover all original witnesses. Store all alternatives if full fibre enumeration required, with output cost. Pin labels, local source IDs and original assignment constraints preserved. Independent history/tau/k/j/v/field/p_c/p/consumer indices and R145 signed subset residual retained; contraction order not chronology. Weight-independent S is source support, not nonzero weighted contribution support. Contextual annihilation does not imply S=0.
+
+### R155. Rank-two terminal precision
+For actual R85 consumer D_t=3A-4P_t with A=prod_i(w_i(0)+w_i(1)), all above packets and separator contractions are division-free. Work modulo 2^(H+2) for numerator, recover P_t mod 2^H; binary extension ring result algebraic, scalar modular tests only. If g filters accepting source, rejection is A-P_t relative to all original assignments (including any explicitly encoded auxiliary source, with intended unique-lift consumer accounted for). No mandatory counting for unrestricted deterministic decision. The mixed contraction theorem is conditional on supplied valid local signatures and paid packet construction.
+
+### R156. Actual local acceptance and reproduction
+Local Python integer and SymPy run, seed 150: 240 joint block-vs-exhaustive comparisons; 1200 modular comparisons (2,4,8,9,25); 586 reconstructed witnesses verified against original clauses and target signatures; 240 rank-two mod8 residual checks; 180 overlapping separator comparisons with arbitrary signed unary weights and private Boolean factors; 32 disjoint OR3 joint comparisons with exhaustive original sums; 3 large OR3 cases (12,24,48 blocks) exact total 7^m and reachable states 49,97,193; 2 collision controls (exact symbolic equal marginals, signed zero with inhabited support). Total 2483 comparison groups passed. No CI, native proof kernel, extension-ring execution or asymptotic runtime measurement. Local script langlands_r150_156.py; reproduction core below, standalone script not separately committed.
+
+    gamma_add(a,b) = (a.s XOR b.s, a.h+b.h, a.p XOR b.p)
+    block_packet(ids, clauses):
+        for original local assignment y:
+            if clauses_accept(y):
+                t = sum_gamma(columns[i] for i with y[i]==1)
+                W[t] += product(w[i][y[i]] for i in ids)
+                S.add(t); local_witness[t] = y
+        return W,S,local_witness
+    D={zero:1}; T={zero}
+    for region in disjoint_regions:
+        W,S,local_witness=block_packet(region)
+        Dnew[gamma_add(s,t)] += D[s]*W[t] for all s,t
+        Tnew={gamma_add(s,t) for s in T,t in S}
+        store one (s,t) predecessor per Tnew coordinate
+        D,T=Dnew,Tnew
+    P=sum(D[g] for g satisfying global filter)
+    reverse target through predecessors and local witnesses
+
+Test fixture uses random 1..9 guards, blocks up to size 3, 0..3 syndrome rows, 0..2 count rows with column entries 0..2, <=3 pinned guards, signed weights -3..3, random clauses including repetitions and empty clauses. Overlap fixture: 1..7 separator guards, two syndrome bits, count and pin first coordinate, one private Boolean per side, random Boolean tables on the indicated chart and private bit; compare direct full assignment sum against joint weighted law. OR3 q=3m exhaustive small m=1..4 (8 draws each), large m=12,24,48.
+
+| Gate | Status |
+|---|---|
+| R150 joint source signature | derived |
+| R151 division-free joint generating kernel | derived; packet convolution tested |
+| R152 mixed separator law, marginal collision | derived and tested |
+| R153 disjoint nonlinear regional convolution | derived and tested |
+| R154 independent support and reverse witness weld | implemented and tested |
+| R155 rank-two precision transport | derived; mod8 tested |
+| R156 local regression | 2483 passed |
+| R7a'/LGC4d general paid nonlinear contraction | OPEN |
+| R7b'/LGC5 unrestricted deterministic resource obstruction | OPEN |
+| R7c/LGC6 original endpoint separation | OPEN |
+
+Next: derive paid mixed separator discovery and a regional tree contraction on the actual compiled selector with shared labels, including signed pin constraints and affine syndrome quotient compatibility. Need a theorem covering cyclic cross-region dependencies without compulsory expanded boundaries, or a direct endpoint argument. Do not infer unrestricted cost from M, flat cover, semantic backdoor, nilpotence, or rank. No general Langlands correspondence claim.
