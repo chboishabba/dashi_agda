@@ -2,6 +2,16 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — P5 original complex12 producer FOUND; exact field \(\mathbb Q(\zeta_3)\)
+
+**NEW upstream acquisition, not an extra proof loop:** Allan Steel's [Ordinary Representations Database](https://magma.maths.usyd.edu.au/~allan/reps/db/) has the **real ordinary faithful degree12 \(6.\mathrm{Suz}\)** minimal-field representation, source file [\`d12.6Suz.nfdeg2.M\`](https://magma.maths.usyd.edu.au/~allan/reps/db/d12.6Suz.nfdeg2.M). Listed character-field degree **2**, Schur index **1**. Faithful central \(C_3\) trace \(12\zeta^{\pm1}\) forces \(\mathbb Q(\zeta_3)\subseteq K\), and \([K:\mathbb Q]=2\) forces **\(K=\mathbb Q(\zeta_3)\)**. Schur index 1 gives a faithful 12D model **defined over this field**, and \(12\oplus\mathrm{Sym}^2(12^\vee)\) produces the whole selected 90D inner action over that same field.
+
+**Exact remaining P5 source attachment:** retrieve/inspect the *original* \`.M\` matrices (not available in this runtime), preserve Steel attribution/licensing, identify their original standard generators and \`6.Suz\` selected character Irr153 vs154 in GAP's full class order; transport the same matrices, including Galois pair, into the chosen source \(6.Suz.2\) cover and original Monster H/mmgroup word; then construct an actual source-to-\(\mathrm{Hom}_E(H_s,W_s)\) 12D intertwiner with compatible 729 Weil gauge. Only after that attach the functorial 78D/90D matrices. **Do not confuse AtlasRep \(\mathrm{GF}(7)/\mathrm{GF}(13)/\mathrm{GF}(25)\) 12D representations or the \(\mathbb F_3\) 12D quotient with this ordinary source.**
+
+Source: [full selected-dual-symmetric-square result and exact field proof](../physics/Monster3BGAPSelectedDualSymSquare12To90Endpoint20261124.md). The web-listed original Magma source is NOT yet downloaded/parsed and is NOT claimed to already align with the user-local MM generator words. P6 remains deferred.
+
+---
+
 ## 24 November 2026 — authentic original GAP result: selected 78 = Nebe Sym², source 4D UNIQUE
 
 **Authoritative new result from the user-reported original GAP execution, not an inferred source choice.** Both original sources completed \`EXIT_0\` in ~16.81s: GAP \`4.16dev\`, CTblLib \`1.3.11\`, status \`MAIN_AND_FUSION_SOURCE_MATCHED\`. [Complete exact result, provenance, derivation and remaining proof obligations](../physics/Monster3BGAPSelectedDualSymSquare12To90Endpoint20261124.md). Original main receipt SHA256 \`507a9508e6377fd51d9e4b728690191451071cb537ed296922fc33d71d196598\` and fusion receipt SHA256 \`4b5b12cdfad130b882acac48a06e9d3ed84a6a470062b6f86f74beaa31b6c7e2\` (reported from workstation, raw files not present in this session). Do not repeat already-paid degree-family enumeration.
