@@ -226,3 +226,86 @@ Pay `Good` via genuine gauge-invariant original plaquette/contour or renormalize
 **Physical CMP116 source input cannot be relabelled:** Bałaban CMP116 (1.29), (1.33)–(1.36), (2.38)–(2.41) are localized SMALL-FIELD fluctuation/effective-action terms (source extract on master, 1988 paper); the actual original full-Gibbs \`mixedDerivativeMagnitudeBelowSelectedShell\` R320 remains uninhabited. The master e70 payment audit enumerates the still-missing selected-J source identification, large/mixed-field residual, source tree distances→physical rooted metric, cutoff-uniform constant/rate, E1/OS same-H and full N1/G1. The next P0 mathematical bite is a TRUE original full-Gibbs physical two-source connecting estimate and its termwise-absolute physical shell on the source-selected CMP119/122 T, not another finite compiler or status flip.
 
 **Endpoint**: \`clayYangMillsPromoted=false\`, \`YangMillsClaySolved=false\`; no physical source, W3, OS, mass gap, Agda kernel or CMI completion claim.
+
+
+## 24 November — GEOMETRY-FORWARD terminal theorem dependency queue (31 physical/source joins, not 31 compiler tasks)
+
+**User-directed P0 = full mathematically proved Yang–Mills existence and positive mass gap.** This is a *steelman hypothesis-led proof plan*, not an assertion that the analytic estimates hold. Pin the canonical same-object definition, original SU(N) all-cutoff Wilson, two global original F/G marks, physical Yang–Mills continuum and one non-vacuum same-H spectral exclusion. **Current status** six physics fronts unpaid (R320/CMP116, R445, E1/OS2, D2, N1, G1); additional W0/T literal source-identification joints unpaid. Master at e70fa21c8c8bc09919f0aea15e40199163798948; 350e2c6a20fbf445f489a2c7354836cb6f153ad6 safely source-wrote finite R445 weighted, R445 path, R349, OS2 square, exterior cancellation, G1 scope; e70 payment audit remains definitive. PR #1536 is divergent master-based; neither master nor other worker's dirty research tree modified.
+
+### Dependency skeleton (CHOSEN SUFFICIENT ROUTE, not logically required of every future YM proof)
+
+\`(Original 4D Wilson SU(N), Haar, native F/G and signed holonomy; PAID algebra) → {T1/T2/T3 literal CMP119/122 source; R445 physical two-mark good/bad transport} → [D1.03/R320 physical full-Gibbs ABSOLUTE connecting estimate, all original histories] → {E1.01–07 interacting continuum, N1.01–03 noncollapse, G1.01–04 group scope} → [D2.01–05 SAME-H all-nonvacuum strictly positive spectral gap] → physical theorem + independent assessment/promotion process.\`
+
+D1.03 and E1.03 are TWO independent hard mathematical frontiers to work in parallel. E1/OS construction is not a consequence of finite W3 alone. A direct source-produced full-Gibbs continuum clustering route *could bypass* R445 comparison machinery and parts of CMP116, but cannot bypass existence/axioms, a positive full-sector same-H gap and genuine interacting noncollapse.
+
+### P0.W0/T — source-selected RG/gauge (3 high-impact source joins)
+
+- **T1 source histories:** instantiate one actual nonempty CMP119 admissible \`Ω,Λ,S\`, with literal \`Q_B\`, actual background minimizer, scale labels, E/R/B/V, running \`β(a)\`, and the operator's \`S_j\` sum INSIDE \`T_k\`. The F19 conditional one-pair source and 64 original ordered pairs exist, but neither is automatically this nonlinear source RG operator.
+- **T2 physical gauge/FP:** instantiate actual CMP122 Eq.(1.71) rT on selected X, its 384 possible coordinate frames with SOURCE weights (not assume normalized average), \`σ(g h_B),δ_(rT)(B)\`, relevant background/ghost/FP/Jacobian, original characteristic/large-field constraints and reversed-FP component integration. Prove exact correct orbit-average identity for EVERY non-invariant factor, including signed normalization/residual, not just gauge-invariant Wilson S and F/G. Rooted Haar Jacobian 1 ≠ arbitrary background-gauge FP determinant.
+- **T3 original mixed-source identity:** show original full interacting 1024-link \`1,F,G,FG\` four-column Wilson polynomial \`K(s,t)\` is the SAME source-selected normalized T history sum/pullback at the actual R445 two-mark coarse map; or derive true four-column quantitative relative errors plus differentiated remainder. Keep physical time \`t\`, block RG \`k\`, original gauge site/face indices, all 896 spectators and gauge-orbit zero mode distinct.
+
+### P0.R445 — 5 existing B1–B5 theorem fields (physics NOT paid)
+
+Canonical owner: \`Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md\`; master's finite coupling and kernel-chain Agda source compilers now exist but were not kernel-run. The **renormalized target law Q** and original blocked effective P must live on the actual SAME two-support gauge-invariant observation algebra X containing both original marks.
+
+1. \`originalR445ActualConditionalKernelTVUniform\` (B1): actual conditional \`A_X\` with authentic Wilson/selected Q_B/E/R/B/V gauge source and true normalizer.
+2. \`originalR445PhysicalExteriorInfluenceSiteBound\` (B2): actual selected target's exterior site responses, good-sector spatial decay, signed/historical dependence and potentially mixed-field interpolation. Prior bare original SU2 single exterior TV→1 at \`β→∞\` NEGATES a uniform worst-case bare one-link strict Dobrushin contraction, NOT every renormalized target envelope.
+3. \`originalR445ExteriorDisagreementCoupling\` (B3): ONE coupling π of the *actual* exterior measures, with true distance-weighted and **bad-intermediate-path** budget, not per-site independent optimizers.
+4. \`originalR445ActualLocalizedEffectiveTargetTVBound\` (B4): full actual physics disintegration + B1–B3 on common X; then sharp mathematical \`|Cov_P(f,g)−Cov_Q(f,g)|≤TV(P_X,Q_X)\` for same bounded [0,1] f,g (4 TV for native [0,2] F,G).
+5. \`originalR445LocalTVCutoffUniformSummable\` (B5): **uniform two-mark physical-distance** summable error \`sup_(cutoff,volume)Σ_k(a_k(X_R)+b_k(X_R))≤C_err e^(−m_err R)\`; per-fixed-R finite sum alone is NOT physical mass. Independently show physical decay of the genuine target Q, and do not mistake signed TV covariance transfer for termwise absolute W3.
+
+### P0.D1 / R320 / CMP116 — 4 exact physical leaves (CENTRAL alpha)
+
+Canonical named owner: \`DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda\`, theorem-valued \`mixedDerivativeMagnitudeBelowSelectedShell\`. Requires on the exact selected source:
+
+1. \`originalCMP116MarkedAnalyticDomain\` (D1.01): true differentiated physical \`J\` insertion, analytic radius/source history and full Gibbs measure, not only CMP116 small-field \`t_D\` derivatives.
+2. \`originalMixedLogHessianEqualsPhysicalCovariance\` (D1.02): existing normalized second log derivative algebra paid, but SAME original T/application and all physical original moments still require identification.
+3. **\`originalFullWilsonSmallPlusLargePhysicalClustering\` (D1.03):** a bound \`Σ_{Γ connects supports(F),supports(G)} |w^physical_(a,L,k)(Γ)| ≤ C_G e^(−m_G R)\` for all actual connected **incompatibility/Ursell** and residual physical E/R/B/V terms; source-marked original S_j inside T, FP/ghost/large/mixed/frustrated sectors, entropy, exact positive physical SI rate, cutoff/volume uniform. Existing CMP116 (1.29),(1.36),(2.38) are small-field localized effective-action bounds, NOT this full-Gibbs physical absolute activity theorem. Current root/scale geometry must match physical Euclidean time (not just fibre distance).
+4. \`sameE1PhysicalCovarianceLimitPreservesClustering\` (D1.04): exact E1 Schwinger limit on SAME physical marked word algebra and cutoff-independent \`m_G>0\`. Signed cancellation is insufficient for W3; absolute connected estimate is stronger.
+
+**Geometry-forward proposed proof:** formulate a genuine *two-support separating physical slice/cutset charge lemma*: every source-selected connected polymer crossing a distance R must hit a chain of disjoint physical-time separators, with quantified local cost/good-vs-bad compensation. Prove the cost using the selected \`Q_B\` RG activity, original nonabelian transport/Bianchi constraints, true chessboard frustrated-contour bounds, and entropy ledger. Explicitly control bad *mixed paths* and long-range scale interactions instead of falsely assuming independent plaquette events. A geometric cutset alone does not supply a uniform cost. Audit whether the real running β(a) and all large-field histories pay \`q(a)\` with \`inf_a[-log q(a)/a]>0\`; never derive it by reusing the desired mass gap as a premise.
+
+### P0.E1 — 7 named SAME-family continuum construction leaves (INDEPENDENT hard front)
+
+1. \`originalCutoffHaarAndPhysicalTrajectory\` (E1.01): authentic varying a,L original Wilson measure, asymptotically free bare beta(a), no fake continuum from fixed L4.
+2. \`originalGaugeInvariantCylinderLocalRealization\` (E1.02): a nonconstant local gauge-invariant physical observable algebra at fixed spatial sizes, consistent geometric/holonomy refinement.
+3. **\`originalWilsonConvergesFromUniformCauchy\` (E1.03):** full family of gauge-invariant cylinder/Schwinger expectations, volume/cutoff uniform Cauchy+tightness, compatibility/projective limits; preserve nontrivial correlations.
+4. \`originalWilsonFineReflectionAndContinuumOS\` (E1.04): real native selected-time full Wilson reflection positivity, all positive-half-space words and entire RP Gram matrix, not only the R445 selected 16-source geometry. Already merged #1535 is a finite reflection-geometry donor, not a proof of physical finite Wilson RP on the selected all-word source.
+5. \`originalWilsonContinuumEuclideanAxioms\` (E1.05): locality, Euclidean covariance including O(4), regularity/temperedness, OS0/1/2/3/5 as required, with selected physical same-G source.
+6. \`sameE1OSHilbertAndGenerator\` (E1.06): one RP quotient/completion, vacuum and positive-time transfer semigroup with nonnegative self-adjoint \`H_OS\`; no distinct H per observable/branch.
+7. \`originalContinuumYangMillsIdentification\` (E1.07): physically correct interacting 4D YM structure and identification, not a free or zero random field.
+
+### P0.D2 — 5 named same-H physical spectral leaves
+
+1. \`sameE1OSReconstructedHamiltonianIdentity\` (D2.01): one reconstructed H and SAME E1 Schwinger source.
+2. \`sameE1PhysicalMassScaleUniform\` (D2.02): one common **positive physical** m_G, not a fixed-lattice spectral gap/unit error.
+3. \`sameE1AllNonvacuumSpectralDetection\` (D2.03): full centered gauge-invariant local-word dense core in the nonvacuum sector \`Ω^\perp\`; no invisible low-energy states.
+4. **\`sameE1FullHamiltonianSpectralExclusion\` (D2.04):** for every core v, source-prove \`⟨v,e^(−tH_OS)v⟩≤C_v e^(−m_G t)\`, all t≥0, with one common m_G; finite C_v may DEPEND on v. Then spectral projections \`1_[0,m_G−ε](H_OS)\` kill the dense core, hence all nonvacuum H (including zero-energy nonvacuum directions). The abstract dense-core spectral implication is already a donor; the physical core bound and construction are NOT.
+5. \`sameE1PhysicalGapClayInterpretation\` (D2.05): units, vacuum uniqueness, full spectral gap, limits and original group correct.
+
+### P0.N1 — 3 physical nontriviality leaves (PARALLEL)
+
+1. \`originalRenormalizedLocalGaugeInvariantObservable\` (N1.01): select a true local Wilson-loop/curvature-smeared physical observable with genuine scale renormalization and gauge invariance.
+2. **\`originalInteractingNoncollapseCumulant\` (N1.02):** source-prove a finite nonzero continuum two-point variance and a genuinely interacting/non-Gaussian witness as appropriate, with controlled RG loss and selected physical scaling. A fixed-cutoff 1536-face nonzero covariance or Q8 witness does NOT pay this.
+3. \`sameE1NontrivialityWitness\` (N1.03): the noncollapsed witness is an element of exactly the SAME E1/OS theory used for D2.
+
+### P0.G1 — 4 full group-scope leaves (PARALLEL; not just SU2)
+
+1. \`allCompactSimpleGroupScopeNonvacuous\` (G1.01): genuine all-compact-simple group scope including global forms and faithful finite-dimensional unitary representation, zero-mode and topology.
+2. **\`eachGOriginalHaarWilsonAndLocalRG\` (G1.02):** apply true SU(N) (or general G) Haar/Wilson/representation/casimir, Lie chart and original selected FP/RG without inserting SU2-specific class-function identities or assuming SU(N) covers every simple group.
+3. \`eachGSameSystemE1D2N1\` (G1.03): actual E1/D2/N1 for every selected G, not only group-index well-typed records.
+4. \`eachGUniformUVVolumePhysicalLimit\` (G1.04): quantitative estimates cutoff/volume uniform for each fixed G; constants may depend on G.
+
+### Steelman geometric invariant at every producer → consumer handoff
+
+Carry a *single indexed original object* \`(G,a,L,k,t,R,Ω/Λ/S,original U,coarse W,F,G,physical source)\`, plus gauge orbit/holonomy, nonabelian BCH signed residual, axial/FP determinant, Wilson partition normalizer and physical measures. Keep distinct: (i) gauge zero mode, (ii) topological/global sectors, (iii) signed deviations and \`FG−F·G\` connected cumulant, (iv) physical Euclidean time \`t\` versus RG scale \`k\`, (v) physical distance \`R\` versus combinatorial rooted distance, (vi) original Wilson versus selected renormalized target \`Q\`. A coarse equality must explicitly reconstruct the original observation + its residual; exact geometry or a finite "machineChecked" compiler never changes the actual proof status.
+
+### Execution order — BIG BITES, two fronts concurrently
+
+**P0-A physical source+decay:** T1–T3 true CMP119/122 selected weighted operator and a full original marked log-Ursell identity, using anchored axial source as a comparison input; prove D1.03 directly if possible, otherwise B1–B5 good/bad **joint** two-support weighted coupling + separately source-proven full absolute CMP116 shell. Output must be an ACTUAL inhabitant of \`mixedDerivativeMagnitudeBelowSelectedShell\` on its selected source, plus physical rate, not another conditional compiler.
+
+**P0-B interacting continuum:** E1.02/E1.03 original nonconstant gauge-invariant cylinder Cauchy/tightness and all-word RP to E1.04–E1.07, with independent N1.02 noncollapse. Source geometry, previously merged reflection #1535 and existing finite OS2 compilers are donors, but the physical source and uniform estimates must actually be produced.
+
+**P0-C final weld:** once the SAME E1 exists and its all-local-word positive exponent is derived, pay D2.03/D2.04 by the dense spectral-projection theorem; generalize source estimates with G1.02–04. Then full mathematical proof audit, kernel/trust/postulate provenance and ordinary independent publication/review, without manually flipping \`clayYangMillsPromoted\`.
+
+**Roadmap claim:** 28 canonical named E1/D1/R445/D2/N1/G1 fields plus T1–T3 source joins = **31 theorem/source obligations**; this is a *dependency inventory*, not 31 independent discoveries or a count of remaining lines of code. Many finite and algebraic consumers are already implemented; the actual novel mathematics concentrates in **T1/T2/T3, D1.03, E1.03, N1.02, G1.02, and source-specific same-H D2.03/D2.04**. All remain OPEN at this date. 
