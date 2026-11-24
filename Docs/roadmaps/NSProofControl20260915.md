@@ -1,5 +1,25 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+
+## 24 November — N2e: fractional signed transfer bridge from weighted to original R568
+
+For the selected true mean-zero unforced periodic Galerkin flow, let Lambda=sqrt(-Delta) on nonzero modes, 0<=a<=1/4, E_a=||Lambda^a u||_2^2, D_a=||Lambda^(a+1)u||_2^2 and T_a=E'_a+2nu D_a=-2 Re sum_k |k|^(2a) conj(u_k) dot N_k, where N is the actual projected convective term. Q_a,H_a,F_a here mean the original per-output quantities with weight |k|^(4a-1), NOT the R596 rate index; a=0 is N2c and a=1/4 is original unweighted R568. Keep C,k,p,q,helicity,t,heat-s,rate sidecar,zero sector and a separately. Original nonzero-mode observer excludes k=0; the selected velocity has zero mean, not a theorem for all data.
+
+Classical estimate: for every mean-zero w, ||Lambda^(2a-1/2) P_C,nonzero(w+ cross w-)||_2^2 <= K_a E_a(w) D_a(w). Proof: duality against H^(1/2-2a); periodic homogeneous Sobolev embeddings H^a -> L^(6/(3-2a)), H^(1+a) -> L^(6/(1-2a)), H^(1/2-2a) -> L^(6/(2+4a)); the reciprocal exponents sum to one, including a=1/4 (dual L2). Orthogonal helical and output projections contract the relevant Sobolev norms. K_a independent of C for each fixed a.
+
+Use literal R596 heat representation Q_a(T)=32 int_s product norm squared at v_s=exp(nu s Delta)u(T); E'_a(v_s)=-2nu D_a(v_s), so Q_a(T)<=8 K_a E_a(T)^2/nu. H_a(t)=16 times that product norm squared at u(t); 2 int H_a <=32 K_a int E_a D_a. Exact physical E'_a=-2nu D_a+T_a gives 32 int E_a D_a=(8/nu)(E_a(0)^2-E_a(T)^2+2 int E_a T_a). Therefore
+
+    Q_a(T)+2 int H_a <= (8 K_a/nu)(E_a(0)^2+2 int E_a T_a).
+
+At a=0, T_0=0 exactly, recovering N2c; at a=1/4, the output weight is one. New sufficient route (NOT equivalent to C1): cutoff-uniform upper bound on signed int E_(1/4) T_(1/4) on original trajectories, then existing R568 C1 endpoint identity with bounded Q(0). Do not infer this bound from energy or weighted N2c. This is a standard Sobolev/energy deduction attached to the original Gram, not a general regularity theorem.
+
+Actual signed source construction: for original complete ordered p+q=k, nonzero p,q,k within cutoff, A=i(u_p dot q)(u_q dot conj u_k). Incompressibility u_p dot p=0, reality u_-p=conj u_p, orthogonal Leray projection against u_k, imply A(-p,k,q)=-conj A(p,q,k). The involution preserves the cubic cutoff and original triad labels. Thus T_a= -sum (|k|^(2a)-|q|^(2a)) Re A, from averaging the direct -2 weighted sum with its partner. Equal-radius observer cancellation does NOT imply vanished source interactions. Retain all radial weights and the original signed pair. Negative controls: a=0 transfer must be identically zero; arbitrary positive shell packets still defeat weighted-to-unweighted inference; signed radial difference alone gives no fixed sign. No assumption of universal pairwise compensation.
+
+Executed local SymPy 1.14 exact checker [fractional transfer](../../scripts/check_ns_r568_fractional_signed_transfer_20261124.py), Git blob 8da4eaff8e43047fb705987a27b172b61b37f198: 1,056 conjugate involutions across four rational complex divergence-free conjugate-real C=1 states; four independent symbolic radial-weight identities (including zero unweighted transfer), one formal polynomial energy telescoping identity. These are finite time-slice tests and algebra, not physical trajectories or an analytic bound. No CI, kernel, or new prize endpoint.
+
+Phase/deliverable: P1 original geometry and P2 fractional bridge derived classically; P2 NS-N2f uniform signed int E_(1/4)T_(1/4) OPEN (or alternate original shell budget); use existing R681/R682/R683 cross-gradient/vector source, check actual physical paired histories and both directions, not new generic carriers. R653 C2 strict surplus independent OPEN; P3 genuine continuation and 3D PDE, P4 existing R503/R504 consumers, P5 native R565/field/FTC and kernel trust remain open. Original R225/R388/R596/R568 owners and factor two/four unchanged. Historical #1543 and TOE #1384 provenance; #1551 active.
+
+
 ## 24 November 2026 — N2c weighted endpoint budget and exact shell residual
 
 Portfolio P0 is RH/BSD/NS/Hodge; P versus NP donor only and YM separate. Historical gate P0 audit IDs and counts are unchanged. Retain zero mode, signed residual and indexed hyperfabric.
