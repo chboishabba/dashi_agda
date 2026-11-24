@@ -3513,11 +3513,11 @@ assert (zchecks,control)==(240,50)
 Geometry-forward Aristotle BIDI: the real improvement is G85/G86, an actual exact upper-bound algorithm bypassing both compulsory linear channel enumeration and chronological boundary enumeration on nested guard geometry. G84 says even affine conditional fibres and constant full right coefficient rank can retain the hard joint selector. G87 admits source-dependent commutation and explicitly defeats a compulsory interleaving charge. Next investigate actual noncommuting interaction and reusable subword transfer or the direct standard-machine N4 endpoint, without assuming a particular branching program, word, or its optimized form is universally necessary. Do not replace SAT by counting, full global symmetry, optimal normalization or rank computation. Preserve zero mode, inhabited neutral fibre, signed residual and indexed hyperfabric as semantics, not mandatory materialization. No P!=NP claim, no additional certification prerequisite.
 
 
-## 29. P0 continuation — G75–G79: obstruction cubes, signed ternary contraction, and the parity anti-control (2026-11-24)
+## 32. P0 continuation — G89–G93: obstruction cubes, signed ternary contraction, and the parity anti-control (2026-11-24)
 
-**Controlling endpoint remains literal Clay P vs NP.** This section continues G70–G74 and the Aristotle BIDI route. It does not create a new prerequisite programme. Geometry is the proof-search coordinate system; no count of paths, cubes, antichain members, separator states, or semantic classes is promoted to a lower bound on arbitrary computation.
+**Controlling endpoint remains literal Clay P vs NP.** This section continues G70–G88 and the Aristotle BIDI route. It does not create a new prerequisite programme. Geometry is the proof-search coordinate system; no count of paths, cubes, antichain members, separator states, or semantic classes is promoted to a lower bound on arbitrary computation.
 
-### G75 — exact path-pair obstruction cubes
+### G89 — exact path-pair obstruction antichain and obstruction CNF (formalizes G77)
 
 Let the left variables be \(L\), with \(q=|L|\), and let every clause cross \(L\mid R\), have width at most three, and contain at least one variable on each side. A literal \((v,b)\) is satisfied when \(x_v=b\).
 
@@ -3559,7 +3559,7 @@ An empty obstruction pin set gives an empty clause and no good left assignment; 
 
 The path-label operations form an antichain semiring: alternatives are antichain union; path composition is pairwise compatible pin-union followed by antichain reduction. The G73 Boolean guarded-closure DAG remains the compact producer. The antichain is an optional expansion, not the required execution representation.
 
-### G76 — signed ternary join contraction and inhabited-support ledger
+### G90 — signed ternary join contraction and inhabited-support ledger (extends G76)
 
 The partial-assignment space is
 
@@ -3633,7 +3633,7 @@ W_F=\sum_x |\{y:F(x,y)\}|.
 
 The ledger must distinguish: (i) bottom from incompatible pins (empty intersection); (ii) an inhabited \(\tau\) whose signed coefficient is zero; and (iii) cancellation in a nontrivial Walsh mode because a character is free on a neutral coordinate. None of these signed zeros is evidence that the original fibre is uninhabited. Keep source identity, multiplicity, support, coefficient, history/time, closure-stage \(k\), and chart/refinement indices distinct.
 
-### G77 — parity is an exponential-antichain negative control
+### G91 — parity is an exponential-antichain negative control (strengthens G78)
 
 For \(q\ge1\), take left variables \(g,x_1,\ldots,x_q\) and right variables \(z_0,\ldots,z_q\). For each \(i\), add the four clauses encoding
 
@@ -3684,7 +3684,7 @@ This is a decisive negative control: an exponential path-obstruction antichain c
 
 A side-preserving G72 occurrence-copy lift makes the same control locally unrestricted: put each private occurrence copy on its source variable's side, enforce equality using fixed-zero gadget variables on the opposite side, and pad the binary endpoint clauses with a positive zero-gadget literal. Every emitted relation is a three-variable clause with one forbidden pattern; scopes are distinct and crossing, and all unary/binary projections are full. The valid left slice (zero gadget coordinates and consistent left copies) retains the odd-parity bad points. Any subcube containing two distinct valid odd points also contains a consistent-copy even point, so any path-pair cube cover still needs at least \(2^{q-1}\) members. This is a cover-size theorem, **not** a circuit lower bound.
 
-### G78 — exact factor-through boundary: the semantic quotient is not a SAT/UNSAT collision
+### G92 — exact factor-through boundary: the semantic quotient is not a SAT/UNSAT collision
 
 G71's canonical key \(\kappa(x)=\operatorname{Canonical}_{2\mathrm{CNF}}(F_x)\) preserves the entire right witness relation. It therefore distinguishes an empty fibre from a nonempty fibre. It is a consumer-complete semantic quotient, not the lossy observer required by the existing P-vs-NP collision route.
 
@@ -3694,9 +3694,9 @@ This is consistent with the existing Clay owners:
 - PNotEqualsNPPolynomialObserverNoGoExact rules out promoting identity, injective, or merely polynomial-time representations to a collision.
 - PNotEqualsNPResourceBoundedSelfDiagonalExact retains the separate semantic self-diagonal versus resource-closure split.
 
-G75–G77 do not yet supply a candidate-specific SAT/UNSAT collision or universal polynomial-decider failure. Do not promote them to SATLowerBoundProducer.
+G89–G91 do not yet supply a candidate-specific SAT/UNSAT collision or universal polynomial-decider failure. Do not promote them to SATLowerBoundProducer.
 
-### G79 — Aristotle BIDI next cut: consumer-complete residual transport
+### G93 — Aristotle BIDI next cut: consumer-complete residual transport (extends G79/G88)
 
 Forward producer: guarded implication DAG, antichain path-pair labels, signed ternary join coefficients, inhabited-support ledger.
 
@@ -3715,11 +3715,11 @@ A proposed signature is admissible only if its forward reconstruction and backwa
 
 | Gate | Exact obligation | Status |
 |---|---|---|
-| G75 | Path-pair obstruction-cube coverage and obstruction CNF | Derived and tested |
-| G76 | Signed ternary coefficient/support recurrence and Walsh formula | Derived and tested |
-| G77 | Exponential-antichain parity anti-control; side-preserving local-full lift | Derived; local q=1 lift tested |
-| G78 | Semantic quotient versus actual SAT/UNSAT observer collision boundary | Derived from existing owners |
-| G79 | Consumer-complete residual signature across arbitrary future guard cuts | Open search |
+| G89 | Path-pair obstruction-cube coverage and obstruction CNF | Derived and tested |
+| G90 | Signed ternary coefficient/support recurrence and Walsh formula | Derived and tested |
+| G91 | Exponential-antichain parity anti-control; side-preserving local-full lift | Derived; local q=1 lift tested |
+| G92 | Semantic quotient versus actual SAT/UNSAT observer collision boundary | Derived from existing owners |
+| G93 | Consumer-complete residual signature across arbitrary future guard cuts | Open search |
 | N4 | Unavoidable global selection cost across all sharing, bypasses, recomputation, and representations | **Open** |
 | N5 | Unrestricted superpolynomial lower bound / universal polynomial SAT failure | **Open** |
 | N6 | Literal Clay P vs NP endpoint transport through SATLowerBoundProducer | Conditional consumer |
@@ -3738,14 +3738,14 @@ Exact Python-integer results:
 
 These are finite exact local regressions only. No CI, Agda kernel, Lean kernel, or asymptotic lower-bound verification was run. The parity antichain theorem for all \(q\) is the direct subcube argument above, not an extrapolation from the finite table.
 
-Existing donors reopened and retained: ConstraintCouplingSearchExact; ResidualConstraintDecompositionExact; ObservationSeparatorGeometryExact; TransformLocalFibreGeometryExact; IndexedCubeHyperfibreExact; VerifiedFractranCrankPipeline; PNotEqualsNPClayCoreExact; PNotEqualsNPDirectSATLowerBoundExact; PNotEqualsNPObserverCoverageExact; PNotEqualsNPPolynomialObserverNoGoExact; PNotEqualsNPResourceBoundedSelfDiagonalExact. Aristotle BIDI search remains linked to #607/#678. FRACTRAN/MDL #123, FactorsThrough #1006, sharing #1546, machine/terminal coverage #1040/#1129, and the existing G22/G30/G45–G74 producers remain donors, not proof prerequisites.
+Existing donors reopened and retained: ConstraintCouplingSearchExact; ResidualConstraintDecompositionExact; ObservationSeparatorGeometryExact; TransformLocalFibreGeometryExact; IndexedCubeHyperfibreExact; VerifiedFractranCrankPipeline; PNotEqualsNPClayCoreExact; PNotEqualsNPDirectSATLowerBoundExact; PNotEqualsNPObserverCoverageExact; PNotEqualsNPPolynomialObserverNoGoExact; PNotEqualsNPResourceBoundedSelfDiagonalExact. Aristotle BIDI search remains linked to #607/#678. FRACTRAN/MDL #123, FactorsThrough #1006, sharing #1546, machine/terminal coverage #1040/#1129, and the existing G22/G30/G45–G88 producers remain donors, not proof prerequisites.
 
 **P0 priority:** find a representation-independent obstruction to global selection, or discharge one of the existing direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes. Do not count the antichain. Retain the zero mode, inhabited neutral fibre, signed residual, and indexed hyperfabric.
 
 
 ## 32. P0-G89–G93 — GEOMETRY-FORWARD: exact rank-one decision boundary and rank-two guard transfer (2026-11-24)
 
-Literal Clay P vs NP P0. Inputs: both current pasted files, G84–G88 and Langlands R128–R133 (reported #1549/#120 b9443ceb0f28/dd6c33352dca, blob 30b6833e0b111b8eaa70d96269a459a0520766cb). Use shared-orientation accounting as donor, not a new Langlands endpoint. Initial live P0 reads 41bf8d6ed02d / 43898587b2e0, common blob d13acfbfda00542f3cd762659c2c9fce1f251cb7. Reconciled concurrent appended guard-obstruction section at Agda e193c4f777f9 / Lean e9acb018e2fe: both contents equal except repository-relative reproducer link. Preserve that work and its original IDs; in this section denote its duplicate G75–G79 labels as GO75–GO79 (parallel obstruction-cube ledger), distinct from main sections 29–30 G75–G83. GO78's consumer-complete quotient is not a SAT/UNSAT collision, and GO79's signature is a proof-search instrument, not mandatory state. Reuse G16/G17 median/implication graph, G45–G48 flag, G51 quotient, G53–G59 signed precision, G65–G83 separator/guard geometry, G84–G88 ordered transfer, GO75–GO79 guarded-path residual, section 27 ConstraintCouplingSearchExact / ObservationSeparatorGeometryExact / IndexedCubeHyperfibreExact, #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 sharing, #1474/#1502 Karp/Cook-Levin, #1129 costed machine, #1040 SATDecisionFailure, #607/#678 Aristotle. Classical 2SAT algorithm Aspvall–Plass–Tarjan 1979 DOI 10.1016/0020-0190(79)90002-4; counting control Valiant 1979 DOI 10.1137/0208032 (#monotone-2CNF completeness). No literature novelty claim for elementary matrix factoring or classical reductions. No other programme edits, CI or native kernel.
+Literal Clay P vs NP P0. Inputs: both current pasted files, G84–G88 and Langlands R128–R133 (reported #1549/#120 b9443ceb0f28/dd6c33352dca, blob 30b6833e0b111b8eaa70d96269a459a0520766cb). Use shared-orientation accounting as donor, not a new Langlands endpoint. Initial live P0 reads 41bf8d6ed02d / 43898587b2e0, common blob d13acfbfda00542f3cd762659c2c9fce1f251cb7. Reconciled concurrent appended guard-obstruction section at Agda e193c4f777f9 / Lean e9acb018e2fe: both contents equal except repository-relative reproducer link. Preserve that work and its original IDs; in this section denote its duplicate G89–G93 labels as GO75–GO79 (parallel obstruction-cube ledger), distinct from main sections 29–30 G89–G83. GO78's consumer-complete quotient is not a SAT/UNSAT collision, and GO79's signature is a proof-search instrument, not mandatory state. Reuse G16/G17 median/implication graph, G45–G48 flag, G51 quotient, G53–G59 signed precision, G65–G83 separator/guard geometry, G84–G88 ordered transfer, GO75–GO79 guarded-path residual, section 27 ConstraintCouplingSearchExact / ObservationSeparatorGeometryExact / IndexedCubeHyperfibreExact, #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 sharing, #1474/#1502 Karp/Cook-Levin, #1129 costed machine, #1040 SATDecisionFailure, #607/#678 Aristotle. Classical 2SAT algorithm Aspvall–Plass–Tarjan 1979 DOI 10.1016/0020-0190(79)90002-4; counting control Valiant 1979 DOI 10.1137/0208032 (#monotone-2CNF completeness). No literature novelty claim for elementary matrix factoring or classical reductions. No other programme edits, CI or native kernel.
 
 ### G89 — exact rank-one guard support is bijunctive
 
