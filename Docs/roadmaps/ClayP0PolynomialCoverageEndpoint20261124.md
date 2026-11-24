@@ -3106,3 +3106,202 @@ assert (n,bad,four)==(9840,255,510)
 | N6 | originalClayTransport | conditional #1040/#1129 |
 
 Geometry-forward Aristotle BIDI: the remaining source geometry is the interaction of repeated original guard labels across independently contractible regions. G76 allows eliminating them to the true original factors, not merely hiding them. G78 establishes that exponential projected clause complexity is not sufficient to charge general work; parity has a linear shared weighted transfer even when product weights break the unweighted symmetry. Next investigate actual reusable guard interactions (and shortcuts via nonlocal basis changes), or direct uniform-machine N4/N5, rather than postulate obligatory full stabilizer, prime CNF, separator table or path listing. Preserve zero mode, inhabited neutral fibre, signed residual, actual source and independent time/k-indexed hyperfabric as semantics, not mandatory materialization. No new certification prerequisite; no P!=NP claim.
+
+
+## 30. P0-G79–G83 — GEOMETRY-FORWARD: minimal joint linear overlap, indexed refinement and rigid full-affine guard carriers (2026-11-24)
+
+Literal Clay P vs NP P0. User big-paste files read directly from /mnt/data/Pasted text.txt and /mnt/data/Pasted text (2).txt: G75–G78 and Langlands R114–R118 (reported #1549/#120 dd68910684ca / cc5228088c20, blob d34da42a75e2ef3cb975c70c6b785ebf813eab49). Both actual P0 roadmaps read at a81e2f6d0eea / 048398039a65, common blob cafd38e41ff43f8fd4565ba234d49ee066b14c32. Use R114 syndrome trellis, R115/R116 exact conditional symmetry and weighted orientation, R117 symmetry-free gadget as donors, not independent Langlands work. Reuse G13 original selector, G16/G17 binary control, G33 signed components, G45–G48 flag/local-full, G56–G59 signed indexed modes, G65–G69 source separator, G70–G78 guard geometry and parity transfer, ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact (actual blobs in section 27), #1291 H05, #1006 FactorsThrough and self-reduction, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 costed machine, #1040 terminal, #607/#678 Aristotle. Elementary finite linear algebra, affine coding and separator DP used; no claim of literature novelty. No changes to other programmes; no CI/native kernel.
+
+### G79 — minimal joint overlap subspace (not pairwise overlap)
+
+After any certified consistent affine restriction, parameterize original source by y in F2^q via x=a+By, retaining the affine anchor and inverse on its image. Inconsistent restriction rejects. Each remaining factor j is a function of linear forms spanning U_j in the dual E=(F2^q)^*. Use independent bases and absorb actual offsets in its local table f_j:U_j^* -> R (R a commutative coefficient ring). Put T=sum U_j, r=dim T, D_j=U_j intersect sum_{i!=j} U_i, D=sum D_j, d=dim D. All subspaces obtained by Gaussian elimination on actual original labelled forms. Pairwise intersections can miss dependencies: U1=<a>, U2=<b>, U3=<a+b> pairwise disjoint yet D=<a,b>.
+
+Claim T/D is direct sum of U_j/D_j. First U_j intersect D=D_j: if u=sum d_i lies in U_j, subtract d_j, then u-d_j in U_j intersect sum(other U_i), hence in D_j. Next if sum u_i in D, choose d_i in D_i whose sum equals that vector; sum(u_i-d_i)=0, so every u_i-d_i belongs to D_i, and hence u_i belongs to D_i. This proves the direct sum, including empty or zero subspaces. Moreover D is the least subspace L of E for which the images of the U_j in E/L sum directly. Necessity: u in D_j is expressible as sum of other U_i, so its image must be zero in any direct sum quotient; D subset L. Sufficiency for L=D by previous proof. IMPORTANT: not every larger L works: U1=<a>, U2=<b>, D=0, quotient by <a+b> makes their two images equal and nonzero. Initial test harness used an erroneous iff for arbitrary L; corrected to necessity and directness at D. This is the least linear conditioning space for making ALL regional linear observation coordinates independent, not a minimum arbitrary nonlinear decision representation, nor a lower bound on unrestricted algorithms. A local table may not actually need every supplied form; exact semantic removal is allowed before computing spans.
+
+### G80 — joint nonlinear block contraction with private degrees eliminated once
+
+For each s in D^* define regional message
+
+    M_j(s|D_j)=sum_{alpha in U_j^*: alpha|D_j=s|D_j} f_j(alpha).
+
+By G79, any tuple of local functionals agreeing with the given s on all D_j has exactly one extension to T^*: choose a complement of D in T and compatible local private coordinates; equivalently sum the local functionals on U_j, well-defined because any relation sum u_j=0 has all u_j in D_j and sum s(u_j)=0. Every functional on T has exactly 2^(q-r) extensions to E, which correspond to actual original parameters y. Therefore
+
+    Z=sum_y prod_j f_j(y|U_j)
+     =2^(q-r) sum_{s in D^*} prod_j M_j(s|D_j).
+
+This exact division-free contraction holds over any commutative ring, including signed integer coefficients and modular arithmetic. With explicit local tables, build messages by summing each table once over its restriction fibres (coordinates obtained by Gaussian elimination); outer loop over 2^d signatures, each message lookup via linear restriction. Arithmetic operation bound poly(input description)*(sum_j 2^dim U_j + 2^d), charge local table access, ring bit costs, and any chosen affine parametrization. For satisfiability of Boolean factors use OR for each sum and AND for product; the free extension factor is always inhabited and does not become zero mod p. Bounded local rank and d=O(log N) is a polynomial decision subclass. Larger rank can still be treated by splitting/recursive contraction or any other legitimate algorithm. For ordinary coordinate scopes, D is precisely span of original coordinates used in >=2 factors; after affine substitution D captures multiway dependencies invisible to pairwise label overlap. This is a true extension of G76 independent regions and R114 affine trellis, not a claim of a new optimal general algorithm.
+
+Weights: include unary weights on original source coordinates as extra factor(s) on their actual linear forms after affine substitution, including anchor. A general weight may enlarge D, as in R111/R114; can fold into existing factors when forms permit, with actual cost. Original signed Fourier mode h gives a factor (-1)^(h dot x) depending on a single linear form plus anchor sign, so may be absorbed or included as a one-dimensional factor. Retain exact zero mode separately. An inhabited neutral fibre or local signed sum that vanishes in the ring is not empty; original Boolean support and source provenance separate. Free extension multiplier is not an independent repeated-guard charge. Overlap ranks and table sizes are representation-dependent, not standard-machine time lower bounds.
+
+### G81 — exact indexed overlap update under a new regional factor
+
+For fixed affine chart, append a new observation subspace V. Old T,D as above, K=V intersect T. Let pi_j:T/D -> U_j/D_j be the canonical projection of G79. The new shared subspace D' contains D, lies in T, and
+
+    D'/D = direct sum_j pi_j((K+D)/D)  inside T/D.
+
+Proof: the new factor has overlap K. Old region's new overlap is U_j intersect (sum_{i!=j} U_i+V); any element of it is an old sum plus v with v in V intersect T, so its image modulo D is the j-th component of some k in K. Conversely decompose any k in K into old u_j; each u_j is in the new overlap of U_j because it equals k minus the other components. The projections span exactly the displayed subspace, and the image of K already lies in their sum. Thus D' can be computed from old direct-sum geometry and actual new overlap, without assuming that merely adding K to D is sufficient. Example old U1=<a>, U2=<b>, add V=<a+b>: K has dimension 1, but D' has dimension 2. If K=0 the new factor is independent and D unchanged. This exact rank/refinement rule is for adding a factor without changing old chart/factor spans; deletion, semantic simplification or affine reparametrization can shrink or otherwise change the separator, so preserve separate indices. Keep (history,tau,k,j,version,ring,creation/requested precision,consumer,separator partition) independent, actual source masks and gain/loss G58, signed weights and dependent residual G68. Retain map D^* <- D'^* by restriction and actual new regional source tables; summing over refined source fibres recovers old baseline before applying new filter, not equality of old and new filtered counts. No new H05/H07/H14 closure or mandatory materialization. A larger quotient can couple previously independent components, so recompute actual quotient property rather than rely on rank monotonicity.
+
+### G82 — constant-multiplicity nonlinear code removes even GLOBAL affine and translation reductions
+
+This strengthens R117 on the projected ORIGINAL guard carrier (not on all deterministic right auxiliaries). On four binary coordinates (little-endian integer masks) choose disjoint five-point sets
+
+    A_0={0,1,2,4,8}, A_1={3,5,6,9,11}, A=A_0 union A_1.
+
+Both A_b have full affine dimension 4; verify by taking four independent differences to a chosen anchor (or exact finite Gaussian elimination). Both have trivial translation stabilizers since odd size, are not translates of each other, and A also has trivial stabilizer. The last two claims are fixed finite checks of all 16 translations (explicit test below); no asymptotic assumption. Encode every logical original bit x_i by a raw 4-bit block in A_(x_i). For any original relation X define
+
+    E(X)=union_{x in X} product_i A_(x_i).
+
+Exact decoding maps every raw block to its type; fibres disjoint and each original witness has exactly 5^q extensions. If X is nonempty, any one x supplies a product of full-affine-hull factors, so aff(E(X))=F2^(4q). For any translation h preserving E(X), fix a raw block i and choose a nonempty slice obtained by fixing all other raw blocks. Such a slice is A_0, A_1 or A, because the other decoded logical bits fixed and admissible original i values either singleton or both. Translation carries it bijectively to another nonempty slice, with shift h_i. Distinct slice types cannot be translates (different cardinalities or explicit A0/A1 check); each type has trivial stabilizer. Hence h_i=0 for every block. Thus every nonempty encoded relation has complete affine hull and trivial global translation stabilizer, not merely local full hulls or conditional trivial stabilizers.
+
+Polynomial source compiler: impose raw domain A on each block by forbidding six invalid four-bit patterns. For every selected original clause forbidding logical pattern p on d<=3 distinct variables, forbid all 5^d tuples of corresponding raw block representatives (each is a clause of width 4d<=12). Exact raw relation is E(V(F)), and local raw factor tables on code domains have full affine hull whenever nonempty (any allowed logical tuple yields product of full-affine sets). All factor arities bounded by 12 and count polynomial in original clause list. Apply G75's deterministic OR evaluation chain and G72 zero gadget/private-right-copy crossing compiler to EACH bounded-width raw clause: the same construction works for constant width d, with at most 6d-2 right vertices per clause after removing gadget (d state variables, 2 first-step copies, 5 each later OR, 1 final unit copy). For d<=12 bound 70. Original raw guard variables on left; after fixed gadget elimination left induced graph independent, right components bounded, all nongadget clauses exactly one left and two right vertices, every selected ternary scope allows 7/8 patterns and distinct scopes. Deterministic auxiliaries uniquely determined for each valid satisfying raw assignment. The GLOBAL projected left relation on named raw guards (excluding gadget left constants) is exactly E(V(F)); do not claim full affine hull in whole compiled auxiliary space. SAT preserved; NP-completeness on these promised encodings by polynomial reduction. Original logical weights z_i recovered via local block weight 1 on A0, z_i on A1, auxiliary weights 1: raw zero-mode and weighted polynomial multiply by 5^q, exact integer recovery, modular inverse over binary/ternary rings (5 unit), explicit depth q over 5-adic field. Signed logical characters encoded by same block weights. Arbitrary unary raw weights need not have constant fibre factor; retain actual local orientation sums. Decoding is a legal nonlinear shortcut; do not charge this artificial rigidity or require finding the complete hull before deciding. G82 eliminates a proposed affine/symmetry-only sufficient strategy even if global symmetry/hull for inhabited instances were given, but computing whether hull is empty already contains SAT. No stronger unrestricted lower bound follows. Fixed code proof is finite, general transport is mathematical, no new native certification.
+
+### G83 — explicit dense full-affine easy control, exponential balanced linear separator
+
+For q>=3 use original ternary clauses forbidding 111 on EVERY triple. Actual relation X={x:|x|<=2} contains 0 and each coordinate vector, hence full affine hull. Stabilizer trivial: if h has weight>2, translates 0 outside X; if weight 2 add a disjoint unit vector; if weight 1 add two disjoint unit vectors (possible q>=3), producing weight 3. Every local factor allows 7/8 patterns. For any balanced partition of the triple factors into sides each containing at least one-third of all triples, let U,V be their variable unions. As in G39, if both have an exclusive variable, a triple containing the two exclusive variables could belong to neither, contradiction. Thus one side covers all q and the shared set is the other side's union of size s. It covers at least binom(q,3)/3 triples, and binom(s,3)/binom(q,3)<= (s/q)^3, so s>=q/3^(1/3). This gives a linear-dimensional shared span at every such balanced cut of the actual original local factors. Every binary factor contraction tree with >=3 leaves admits a cut with both sides >=one-third leaves (centroid node and largest incident component), so a procedure mandatorily materializing all linear boundary states at such cut incurs exponential table size. This is NOT a lower bound even for all tensor algorithms, let alone general SAT: actual functions can have sparse/symbolic states. Here the exact weighted witness polynomial is 1+sum_i z_i+sum_{i<j} z_i z_j. Division-free update of sectors (E0,E1,E2,O) initialized (1,0,0,0):
+
+    (E0,E1,E2,O) <- (E0,E1+z E0,E2+z E1,(1+z) O+z E2).
+
+O retains overflow (weight>=3), with total E0+E1+E2+O=prod(1+z_i). Count is 1+q+binom(q,2); signed modes via z_i=+/-1; actual Boolean support separate from modular zero. O(q) ring operations, no per-separator-state materialization, even with broken translation symmetry. Thus full affine hull, trivial exact stabilizer, dense genuinely nonlinear factors, and large balanced shared linear separators can coexist with a simple global shortcut. This is a decisive check against converting G79 minimality in its linear model into N4. G82 also decodable; neither code rigidity nor tree cuts prove a lower bound for unrestricted computation.
+
+### Actual local exact regression (Python integers, no CI/kernel)
+
+Executed /tmp/p0_affine_overlap.py. 700 random finite subspace arrangements (q=1..7, 100 each), 8,400 alternative quotient necessity checks, 6,104 conditioned joint Cartesian fibre comparisons, 700 signed contractions compared with exhaustive assignments AND separately constructed message tables, 700 appended-factor refinement identities. Initial overly strong test that every larger quotient is independent failed; corrected to exact least-subspace theorem and the projected overlap update, all corrected checks passed. Fixed code search found A0/A1 above; exhaustive 16 translations on each of the three slice types and each distinct type comparison. 20 arbitrary logical relations on q=1,2 with exact decoded witnesses/multiplicity, 18 nonempty full affine hull and 18 trivial global stabilizer comparisons. 300 actual normalized selector formulas (all 260 q=1,2, 40 seeded q=3) checked 105,600 raw assignments and exact counts and 300 signed weighted sums. For q<=2 enumerate all raw words, for q=3 enumerate valid raw-domain products. Tested raw forbidden-pattern factor predicate, not an integrated emitted crossing DPLL run this tranche; width-12 chain compiler transport follows from explicit G75 extension. 678 balanced triple-factor cuts (q=4,5), 200 weighted dense-control recurrence comparisons (q=3..12), including overflow identity; full affine and trivial stabilizer checked on those 10 carriers. Reproducer core (small explicit sets only for regression; polynomial basis operations are the mathematical production method):
+
+```python
+from itertools import combinations,product
+from random import Random
+from collections import Counter
+from math import prod
+def span(xs):
+ s={0}
+ for x in xs:s|={a^x for a in s}
+ return s
+def basis(xs):
+ b={}
+ for x in xs:
+  while x:
+   k=x.bit_length()-1
+   if k in b:x^=b[k]
+   else:b[k]=x;break
+ return tuple(b.values())
+def dim(s):return len(s).bit_length()-1
+def sig(x,B):return sum(((x&b).bit_count()%2)<<i for i,b in enumerate(B))
+def overlap(U):
+ T=span(a for u in U for a in u)
+ J=[u&span(a for k,v in enumerate(U) if j!=k for a in v) for j,u in enumerate(U)]
+ return T,J,span(a for v in J for a in v)
+def combvec(b,mask):
+ v=0
+ for i,a in enumerate(b):
+  if mask>>i&1:v^=a
+ return v
+def coords(b,a):return next(k for k in range(1<<len(b)) if combvec(b,k)==a)
+rng=Random(369);cases=keys=minimal=weighted=revisions=0
+for q in range(1,8):
+ for trial in range(100):
+  n=rng.randrange(1,6)
+  B=[basis([rng.randrange(1<<q) for _ in range(rng.randrange(0,min(4,q)+1))]) for j in range(n)]
+  U=[span(b) for b in B];T,J,D=overlap(U)
+  assert all(u&D==j for u,j in zip(U,J))
+  assert dim(T)-dim(D)==sum(dim(u)-dim(j) for u,j in zip(U,J))
+  for _ in range(12):
+   L=span([rng.randrange(1<<q) for _ in range(rng.randrange(q+1))])
+   direct=dim(span(T|L))-dim(L)==sum(dim(span(u|L))-dim(L) for u in U)
+   assert not direct or D<=L;minimal+=1
+  f=[[rng.randrange(-3,4) for _ in range(1<<len(b))] for b in B]
+  h=rng.randrange(1<<q)
+  if h:B.append((h,));f.append([1,-1])
+  U=[span(b) for b in B];T,J,D=overlap(U);db=basis(D)
+  groups={}
+  for x in range(1<<q):groups.setdefault(sig(x,db),[]).append(x)
+  z=0
+  for s,xs in groups.items():
+   P=[{sig(x,b) for x in xs} for b in B]
+   joint={tuple(sig(x,b) for b in B) for x in xs}
+   assert len(joint)==prod(map(len,P))==1<<(dim(T)-dim(D))
+   z+=prod(sum(t[p] for p in ps) for t,ps in zip(f,P));keys+=1
+  messages=[]
+  for b,t,dj in zip(B,f,J):
+   dd=basis(dj);loc=[coords(b,a) for a in dd];glob=[coords(db,a) for a in dd];M=Counter()
+   for k,v in enumerate(t):M[sig(k,loc)]+=v
+   messages.append((M,glob))
+  assert z==sum(prod(M[sig(k,glob)] for M,glob in messages) for k in range(1<<len(db)))
+  assert z*2**(q-dim(T))==sum(prod(t[sig(x,b)] for b,t in zip(B,f)) for x in range(1<<q))
+  cases+=1;weighted+=1
+  V=span([rng.randrange(1<<q) for _ in range(2)]);K=V&T
+  _,_,new=overlap(U+[V])
+  jj=[u&span(K|span(a for k,v in enumerate(U) if k!=j for a in v)) for j,u in enumerate(U)]
+  assert D<=new and new==span(D|K|set().union(*jj));revisions+=1
+assert (cases,keys,minimal,weighted,revisions)==(700,6104,8400,700,700)
+A={0,1,2,4,8};B={3,5,6,9,11};C=[A,B];union=A|B
+def stab(S,d):return {h for h in range(1<<d) if {x^h for x in S}==S}
+def affdim(S):
+ a=next(iter(S));return len(basis([a^x for x in S]))
+assert all(affdim(S)==4 for S in C)
+for S in (A,B,union):
+ assert stab(S,4)=={0}
+ for V in (A,B,union):
+  if S!=V:assert all({a^h for a in S}!=V for h in range(16))
+rc=aff=st=0
+for q in (1,2):
+ for mask in range(1<<(1<<q)):
+  X={x for x in range(1<<q) if mask>>x&1}
+  Y={sum(a<<(4*i) for i,a in enumerate(t)) for x in X for t in product(*(C[x>>i&1] for i in range(q)))}
+  assert len(Y)==5**q*len(X)
+  assert {sum(((y>>(4*i)&15) in B)<<i for i in range(q)) for y in Y}==X;rc+=1
+  if Y:assert affdim(Y)==4*q and stab(Y,4*q)=={0};aff+=1;st+=1
+assert (rc,aff,st)==(20,18,18)
+def clauses(q):return [(I,p) for k in range(1,min(q,3)+1) for I in combinations(range(q),k) for p in product((0,1),repeat=k)]
+def ok(F,x):return all(any((x>>i&1)!=v for i,v in zip(I,p)) for I,p in F)
+def rawok(F,y,q):
+ return all((y>>(4*i)&15) in union for i in range(q)) and all(any((y>>(4*i)&15) not in C[v] for i,v in zip(I,p)) for I,p in F)
+fc=rawchecks=weightchecks=0
+for q in (1,2,3):
+ cs=clauses(q)
+ fs=([cs[i] for i in range(len(cs)) if t>>i&1] for t in range(1<<len(cs))) if q<=2 else (rng.sample(cs,rng.randrange(0,min(12,len(cs))+1)) for _ in range(40))
+ for F in fs:
+  X=[x for x in range(1<<q) if ok(F,x)]
+  ys=range(1<<(4*q)) if q<=2 else (sum(a<<(4*i) for i,a in enumerate(t)) for t in product(sorted(union),repeat=q))
+  Z=W=0;z=[rng.randrange(-3,4) for _ in range(q)]
+  for y in ys:
+   v=rawok(F,y,q);valid=all((y>>(4*i)&15) in union for i in range(q));x=sum(((y>>(4*i)&15) in B)<<i for i in range(q))
+   assert v==(valid and ok(F,x));rawchecks+=1
+   if v:Z+=1;W+=prod(z[i] for i in range(q) if x>>i&1)
+  assert Z==5**q*len(X)
+  assert W==5**q*sum(prod(z[i] for i in range(q) if x>>i&1) for x in X);fc+=1;weightchecks+=1
+assert (fc,rawchecks,weightchecks)==(300,105600,300)
+cut=0
+for q in (4,5):
+ E=list(combinations(range(q),3));n=len(E)
+ for t in range(1<<n):
+  if 3*t.bit_count()<n or 3*t.bit_count()>2*n:continue
+  U=set().union(*(set(I) for j,I in enumerate(E) if t>>j&1));V=set().union(*(set(I) for j,I in enumerate(E) if not(t>>j&1)))
+  assert U==set(range(q)) or V==set(range(q))
+  assert 3*len(U&V)**3>=q**3;cut+=1
+assert cut==678
+n=0
+for q in range(3,13):
+ Y={x for x in range(1<<q) if x.bit_count()<=2}
+ assert affdim(Y)==q and stab(Y,q)=={0}
+ for _ in range(20):
+  z=[rng.randrange(-4,5) for _ in range(q)];a,b,c,o=1,0,0,0
+  for w in z:a,b,c,o=a,b+w*a,c+w*b,o*(1+w)+w*c
+  assert a+b+c==sum(prod(z[i] for i in range(q) if x>>i&1) for x in Y)
+  assert a+b+c+o==prod(1+w for w in z);n+=1
+assert n==200
+```
+
+### Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G79 | leastJointLinearOverlap / directPrivateQuotient | derived and tested; pairwise overlap insufficient |
+| G80 | exactNonlinearRegionalMessageContraction | derived and tested; actual paid upper bound |
+| G81 | indexedNewFactorOverlapRefinement | derived and tested; source chart fixed |
+| G82 | fullAffineAperiodicGuardEncoding / constantMultiplicityTransport | derived, raw relation tested; G75 bounded-width compiler extension derived, not separately integrated DPLL-tested |
+| G83 | balancedLinearSeparatorDenseEasyControl | derived and tested; cheap weighted transfer defeats universal width charge |
+| N4/G12a | unrestrictedSerialCharge | OPEN: allow nonlinear decoding, global sharing, arbitrary algorithmic alternatives |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; G48 uniform flag / G38 stronger nonuniform central slice |
+| N6 | originalClayTransport | conditional #1040/#1129 |
+
+Geometry-forward Aristotle BIDI: G79–G81 give an actual least linear independence interface, not a required state representation. G82 shows that removing affine equations and exact translation symmetries alone need not eliminate the hard guard relation; G83 shows that even exponential linear separator materialization is not necessary for easy instances with these same invariants. Do not pursue more compulsory rank, hull, symmetry or width proxies as if they were N4. Highest-alpha next test is a target-specific bound on actual nonlinear transformation/composition cost that admits all these shortcuts, or direct uniform-machine obstruction; explicitly allow original logical decoding of G82, compact cardinality sectors of G83, and all G37 reported subexponential shortcuts. Preserve original zero mode, signed residual, inhabited neutral fibre and separate time/k-indexed hyperfabric as semantics. No new certification prerequisite and no P!=NP claim.
