@@ -290,3 +290,33 @@ This extracts the actual multiplicity action from **one Weil vacuum column**, th
 **Character/constituent selection is independent.** For any phase-preserving g, the actual `chi_(W_s)(g)=(1/3) sum_j zeta^(-s*j) chi_W(z^j*g)`; then `chi_(W_s)(g)=chi_H(K_g) chi_(S_s)(L_g)`. Character division requires chi_H(K_g) != 0; otherwise use the projector extraction. The original GAP 210-class rows and exact fusion are the correct source for distinguishing faithful 12+78 from 12+Sym²12. An outer phase swap has no separate ordinary trace on a single W_s. Neither the dimension 90 nor a quotient GL12 conjugacy determines this constituent.
 
 **Endpoint scorecard, not a certification checklist:** the symmetric-cocycle correction and full actual E automorphism reconstruction formula are mathematically DONE from manifest coordinates; the characteristic-zero 90 sector DIMENSION and Hom evaluation/inverse are structurally DONE; simultaneous Monster group lift and original characteristic-zero g action remain the two specific SOURCE INPUTS preventing a fully numerical 90D operator and selected class/constituent. Finish those mathematically first; only then batch final verification. No invented full-group equality, class selection, original complex 90D matrix, or Monster VOA endpoint.
+
+
+## 24 November 2026 — actual 90D multiplicity operators are Hom-functorial, with canonical 12+78 source projectors
+
+The [complete same-object mathematical construction](../../physics/Monster3BActualHomMultiplicityCharacterProjectorEndpoint20261124.md) now supplies the canonical P3/P4 endpoint **formula**, with the [living L01–L13R roadmap](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md) remaining the owner of source attachments. It uses the existing Barraclough–Wilson extension of the \(729\)-dimensional extraspecial representation to the phase-preserving inertia, rather than manufacturing a synthetic 90D representation.
+
+Let \(W_s=P_sW\) be the **actual original characteristic-zero Monster** central-phase eigensector; \(H_s\) is the genuine \(729\)-dimensional Stone–von Neumann irreducible of \(E=3^{1+12}\). Set \(S_s=\operatorname{Hom}_E(H_s,W_s)\), so \(\dim S_s=90\), with \(\Phi_s(h\otimes f)=f(h)\). For any original inertia element \(g\), and the **same-source** ordinary extension \(K_s(g)\) of the Heisenberg action, define
+\[
+(L_s(g)f)(h)=\rho_W(g)f(K_s(g)^{-1}h).
+\]
+This is an honest \(90\)-dimensional representation of the chosen phase-preserving inertia on the actual Hom carrier, with exact
+\[
+\rho_W(g)\Phi_s=\Phi_s(K_s(g)\otimes L_s(g)).
+\]
+The source-selected 729D phase-changing outer action instead maps \(S_s\to S_{-s}\); do not type it as an internal same-phase operator.
+
+For an actual modulation subgroup \(B\), the canonical fixed-vacuum realization \(S_s\cong \Pi_{0,s}W_s\), with \(\Pi_{0,s}=729^{-1}\sum_{b\in B}\rho_W(b)\), gives an exact matrix-free recipe. If \(K_s(g)e_0=\sum_x k_xe_x\) and \(k_x\ne0\), then
+\[
+L_s(g)u=k_x^{-1}T_x^{-1}\Pi_{x,s}\rho_W(g)u
+\quad (u\in \Pi_{0,s}W_s).
+\]
+One nonzero Weil-vacuum column suffices. Independence of \(x\) follows from the actual tensor intertwining property.
+
+The existing Ibrahim phase-resolved character weld **already pays the original character-level 12+78 split**. After identifying the just-constructed \(S_s\) action's *same-object* 210-class character with the source \(\chi_{12}+\chi_{78}\), the two central idempotents
+\[
+e_a=\frac{\chi_a(1)}{|Q|}\sum_{q\in Q}\chi_a(q^{-1})L_s(q),\quad a\in\{12,78\},
+\]
+on the correct source phase-preserving quotient/extension \(Q\) give the **genuine** invariant direct sum \(S_s=\operatorname{im}e_{12}\oplus\operatorname{im}e_{78}\) and the constituent operators by restriction. Group/central extension is mandatory: a projective \(L_s\) needs its correct extension, not an idempotent in an incorrectly chosen quotient algebra.
+
+**Endpoint solution vs missing source data:** the actual-Hom operator and constituent-projector construction are mathematically explicit, but the full original characteristic-zero \(\rho_W\) on the selected words, honest compatible \(K_s\) gauge, exact 210-class same-object equality, and the simultaneous full Monster C/D group-extension residuals remain necessary for numerical matrices and the final source-identical Paper 10 action. Reuse the existing 28 candidate quotient witnesses, authentic mmgroup manifest and GAP/CTblLib machinery; do not initiate another certification cycle.
