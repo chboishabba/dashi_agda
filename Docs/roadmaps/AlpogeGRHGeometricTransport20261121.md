@@ -1,5 +1,10 @@
 ## 23 Nov RH CLAY P0 — SymPy in lieu: actual E3 source sign frontier and sharp two-sideband rank
 
+## 24 November — temporal/descent/orientation continuation
+
+P4-abelian: classical Dedekind consequence of Dirichlet GRH, source scope retained; no native receipt. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — shell/dyadic/intersection continuation
 
 P4-AR-native: optional independent Robin/Lagarias exact-source admission adapter, kernel unexecuted. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.

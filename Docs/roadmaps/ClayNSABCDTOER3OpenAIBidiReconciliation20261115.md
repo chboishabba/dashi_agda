@@ -1,5 +1,10 @@
 # Navier–Stokes A/B/C/D × TOE × OpenAI: corrected source-exact maximum cut
 
+## 24 November — temporal/descent/orientation continuation
+
+A2-time: exact temporal transport, independent B/C/D preserved. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — shell/dyadic/intersection continuation
 
 A2-asym: further whole-space sectors, independent B/C/D preserved. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.

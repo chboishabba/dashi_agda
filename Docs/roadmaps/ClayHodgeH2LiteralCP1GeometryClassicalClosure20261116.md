@@ -1,5 +1,10 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 24 November — temporal/descent/orientation continuation
+
+H3-trace: exact orientation trace metric and conditional finite sign monodromy, actual cycle still open. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — shell/dyadic/intersection continuation
 
 H3-intersection: exact projected intersection criterion for a nonzero orientation cycle; no witness constructed. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.

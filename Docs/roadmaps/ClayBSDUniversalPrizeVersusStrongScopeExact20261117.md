@@ -1,5 +1,10 @@
 # BSD — universal Clay-rank versus strong-refined scope, S5/S6 fail-closed (2026-11-17)
 
+## 24 November — temporal/descent/orientation continuation
+
+S6-Q5K: actual selected E/Q(sqrt5) isogeny descent candidate exhaustion, Sha[2^infty]=0; universal S6 open. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.
+
+
 ## 24 November — shell/dyadic/intersection continuation
 
 S6-Q2: integral quadratic restriction/norm defect killed by 2; selected Sha over Q(sqrt5) finite elementary 2-primary, actual size open. [Complete derivation, attribution, exact checker and remaining gates](ClayFourShellDyadicIntersection20261124.md). No native kernel or universal endpoint promotion.
