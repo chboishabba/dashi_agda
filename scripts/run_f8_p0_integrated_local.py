@@ -31,6 +31,7 @@ CHECKS={
  "original-source-lifted-SBP-energy":"scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py",
  "same-action-geometric-constraints":"scripts/check_f8_geometric_constraints.py",
  "same-action-Gauss-local-control":"scripts/check_f8_gauss_action.py",
+ "original-native-radial-action-bridge":"scripts/check_f8_p0_native_radial_action_bridge.py",
  "original-radial-sobolev":"scripts/ksw668_f8_radial_sobolev_hierarchy.py",
  "geometry-brane-cones":"scripts/check_f8_xcii_induced_31_cones_sympy.py",
  "geometry-compact-causal-null":"scripts/check_f8_xciii_same_source_cones_and_far_null.py",
