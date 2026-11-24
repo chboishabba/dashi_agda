@@ -17,7 +17,7 @@ The state is \(x=(i,j,u,v,b,q,r,i_h,c)\). The smooth mode is \(m=(U,V,\chi)\in\{
 \dot c&=(i_h-0.52c)/[0.12(1+1.5c^2)].
 \end{aligned}
 \]
-These retain all physical synthetic circuit components, original source quadratures, real nonlinear capacitor and real diode positive-part *branch boundaries*. The smooth extensions are prescribed independently and require actual guard signs to be physically admissible. The exact source mode itinerary is \((0,0,1),(0,1,1),(0,1,0),(0,1,1),(1,1,1),(1,0,1),(1,0,1)\) only if unchanged; the **actual source final** seven modes used in the executed kernel are \((0,0,1),(0,1,1),(0,1,0),(0,1,1),(1,1,1),(1,0,1),(0,0,1)\). The latter is controlling.
+These retain all physical synthetic circuit components, original source quadratures, real nonlinear capacitor and real diode positive-part *branch boundaries*. The smooth extensions are prescribed independently and require actual guard signs to be physically admissible. The exact original seven-mode itinerary used by the executed source kernel is \((0,0,1),(0,1,1),(0,1,0),(0,1,1),(1,1,1),(1,0,1),(0,0,1)\).
 
 All source coefficient and J24-centre literals are exact rational input; interval endpoints are rounded outward to lattice \(10^{-30}\). The source \(\sqrt3\) is enclosed by integer isqrt. Trigonometric source values use 37 rational sine/cosine Taylor terms with explicit geometric absolute remainder and the rigorous bound \(|\sin'|,|\cos'|\le1\) over a rational time interval. Forward dual interval differentiation computes the full real source \(9\times9\) Jacobian, including the nonlinear cap denominator.
 
@@ -39,7 +39,7 @@ For the **physical mode** check, every guard other than the one just switching h
 
 ## Seven source-specific enclosures (not full seven segments)
 
-Each input state box has original J24-centre halfwidth \(10^{-4}\); its spatial Picard tube has halfwidth \(10^{-3}\). The source-owned J26–J29 first-five exact event root brackets and J30 sixth exact rational root bracket are individually checked to lie inside the new input clock boxes: halfwidth \(1/200000\) for events 1–5, \(1/5000\) for event 6, and clock \(t_0=0\) for chart 0. The exact previous J29 machine receipt proves **five of six original J24 event-state boxes**; the new geometric input box strictly contains each of those five source-recorded original boxes. **The sixth full state box is still OPEN**, even though its exact root time lies in its new time box.
+Each input state box has original J24-centre halfwidth \(10^{-4}\); its spatial Picard tube has halfwidth \(10^{-3}\). The source-owned J26–J29 first-five exact event root brackets and J30 sixth exact rational root bracket are individually checked to lie inside the new input clock boxes: halfwidth \(1/200000\) for events 1–5, \(1/5000\) for event 6, and clock \(t_0=0\) for chart 0. The exact previous J29 machine receipt proves **five of six original J24 event-state boxes**; the new geometric input state box coincides with each J24 centre's \(\pm10^{-4}\) original box; it does not shrink the upstream state uncertainty. **The sixth full state box is still OPEN**, even though its exact root time lies in its new time box.
 
 | Chart | Original smooth mode (U,V,spark) | Accepted exact duration \(h\) | Upper rational \(q\) |
 |---:|---|---|---:|
