@@ -11,7 +11,7 @@ def rows(t):
     R=-B+2*v*E+c*Y+(a-3/b)*D+L
     box=-B+2*v*E+c*Y+a*D+L
     N=v*v*B+2*v*c*E+c*c*Y-v*v*a*D
-    return np.array([-b*b*(S*S*B+J*A-L)/4,
+    return np.array([-b*b*(S*S*B+J*A+L)/4,
         -b*b*(S*S*B+J*A+X)/4,
         b*b*(-N/(2*c)+box/6),
         -b*b*(S*S*B+(J+2*S)*A-L)/2,F,R])
