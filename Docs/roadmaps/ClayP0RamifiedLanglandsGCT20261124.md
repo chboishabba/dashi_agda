@@ -1414,3 +1414,154 @@ The 78 additional specialization checks used a concrete H + threshold gate DAG a
 ### R70. Next substantive direction
 
 The new result allows an exponential arithmetic bound to survive arbitrary repetition localized to small original-variable sets, and explicitly proves why even linear spatial spread cannot pay global cost. Do not turn it into another mandatory representation phase. Need attack actual hard fixed-weight inputs from R50, not just easy minterms from R65. Characterize support-preserving idempotent/absorption shortcuts for original clause-overlap constraints and compare them against G35 width-two reachability and R57/R58 affine/dual algorithms. R59/R60 reported interpolation/tensor algorithm audit remains an independent shortcut control; no additional external proof audit performed this turn. The nonuniform sufficient endpoint is superpoly monotone size of one central sandwich, not formal multiplicity alone; direct uniform N4/N5 route remains sufficient and weaker. Standard source credit, DASHI/JMD ownership and G38–41 preserved; no unrelated branches or claim P!=NP.
+
+## 18. R71–R77 — exact local-field Newton modes and Smith-optimal Cauchy tile contraction (2026-11-24)
+
+Stay on Langlands. Read mounted attachments directly (G42–44 and R64–70). Live G42–44 #1548 cbc4dd1496c0a2a1e85044400d4a1c3251aa35c2 / #119 003733c92e00485c5ea08640cf4393582021c516, identical blob 85df78165b31c999e23568155b94480c517600bf. Live Langlands #1549 d70f6ff3ec7f57f3cedac262473f55f2a0a74b66 / #120 ec3e8df4f1532c9c03b432c9b34aa8f4126b4cde, blob c0299815fb96222d14546fcf9dbb28df7abe6ca5. G44 cheap canonical-minterm checker is a decisive control; no further minterm-only trace census. Work on actual general paired inputs J_q(t,1-t)=G_q(t) with source-preserving R50 embedding and R51 Weil Hom multiplicity.
+
+Actual external source reopened: OpenAI, *The Exponential Time Hypothesis is False*, October 25 revised manuscript, build/quantitative-reduction.tex and build/quantitative-contraction.tex (https://github.com/openai/math/tree/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build), Appendix D tensor interface, packet packing, Cauchy deformation, integrality, tapered Hermite, cross modes, recursion identity. Source is a reported theorem, not a full independent proof audit. Classical Cauchy determinant, Newton forward differences, DVR Smith normal form and Legendre factorial valuation credited as standard mathematics; new contribution is exact specialization and charged factorization on the source's actual tiles. No claim of priority for general identities.
+
+Reopened original DASHI owners: DASHI/Algebra/RamifiedLocalValuationSharpnessExact.agda at #585 head 2cb821df49890b51605d1b990ee0b497e490b88c, blob 833c9a5592ecf1a1664be34dae11032627359aea (not on master; ramifiedSharpCoefficientValuation needs supplied unit/branch factorization, supplied explicitly below); master DASHI/Arithmetic/SixWheelCRTExact.agda 7f5648752595f796f16c7e6de68a557f77366fd0; DASHI/Information/PNFFiniteRankNullityBridgeExact.agda 964c9f7974fb115d76722fa87c1d17572dda39fe (field rank-nullity boundary, not an existing DVR Smith proof); DASHI/Core/QueryFactorisationSufficiency.agda 98c592232292bbb6c5f0df047c8df3fd42be30d3 (FactorsThrough). R2 actual Q2(i), R29/30 actual ramified Q3 parameter, R36/50/51 original witness count, R59 Hermite precision, R64 occurrence grade distinct from valuation. Retain JMD attribution; no edits outside Langlands PRs.
+
+### R71. Actual Appendix D arithmetic interface on general selectors
+
+The original source's packet length L=2^a, grid {-L,...,L-1}, C(T)=prod_grid(T-j), and Cauchy deformation W_xy(T)=C(T)/(C'(0)(T-y+x)), satisfy W(0)=I. The original count is recovered from deformed contraction through Hermite reconstruction; the proof groups ports by one coordinate of a label, with cross terms expanded and truncated by 2-adic valuation. At an active probe T=t+2^(a+1)z, i=v2(t), split column tiles y=y0+2^(i+1)j, and optionally row tiles x=x0+2^(i+1)l. For a crossing pair in an unequal-symbol packet their i-th bits coincide, so v=v2(t-y0+x0)<=i. Then v2(T-y0+x0)=v, and
+    W_(x0+2^(i+1)l,y0+2^(i+1)j)(T)
+      = gamma/(u+A(l-j)),
+    u=(T-y0+x0)/2^v a unit,
+    A=2^(i+1-v), k=v2(A)>=1,
+    gamma=C(T)/(2^v C'(0)).
+The source integrality lemma gives v2(gamma)>=a+1-v (or gamma=0). Full tile length n=L/2^(i+1), with dummy/unused ports removed by restriction. For arbitrary residue-lift z in the source's unramified extension the same normalized valuation applies. All formulas below hold over the appropriate DVR, with p=2 and p uniformizer in that extension. Do NOT change the source to p=3 automatically: the packet flip and tapered recovery are binary-specific.
+
+For general paired selector rails, t is the original constraint data, u_rail=1-t is padding and not an additional independent assignment variable. Original W(t) is contraction of local indicator factors with equality wires, equivalently the R36 projector trace. At central weight the actual R51 Hom multiplicity equals this count; same-object isometry R50 fixes dummy variables. Clause-network degree reduction and parity-test density reduction are the source's own techniques; no new asymptotic bound asserted merely from recoding. R71 concerns actual cross-group arithmetic in that contraction, not minterm trace repetition.
+
+### R72. Exact Newton modes give extra factorial divisibility
+
+For any prime p, u a p-adic unit, A divisible by p, and finite column j=0,...,n-1, set f(j)=1/(u-Aj). The exact forward-difference identity is
+    Delta^b f(0)= b! A^b / product_(h=0..b)(u-Ah).
+Proof by induction using difference of reciprocal products with adjacent intervals; at each difference factor (b+1)A is gained. Newton inversion on integer j gives
+    gamma/(u-Aj)
+      = sum_(b=0..n-1) gamma*b!*A^b/[prod_(h=0..b)(u-Ah)] * binom(j,b)
+with binom(j,b)=0 for b>j. This is finite and exact, not a Taylor approximation. When u varies with row by A*l, remains unit and valuations are unchanged. For each tile replace ordinary power moments by shared column moments
+    M_b(X)=sum_(real j) binom(j,b) X_j.
+The coefficient on M_b has exact valuation e+k b+v_p(b!), where e=v_p(gamma), k=v_p(A)>=1 (assuming gamma nonzero). Thus at precision p^H, omit all b with e+k b+v_p(b!)>=H, and all b>=n. This is valid with missing ports by taking X_j=0. Integer binomials, unit denominators, O(n^2) elementary operations per tile (or incremental coefficient products), all residues mod p^H, bit complexity polynomial in explicit tile size and precision. The actual source's power-mode coefficient bound gains at least one valuation per degree; our exact Newton weights expose factorial divisibility and finite tile cutoff. No extra row subdivision needed for this one-sided formula if v,k,e vary by row: use the minimal valuation for common truncation and per-row exact coefficients. Retains row and column group labels, so legitimate local substitute for the shared linear forms in source. To claim an improved total recursion one must separately re-account all mode weights, packet entries, multiplicities, and inherited precision. Legendre v_p(b!)=(b-s_p(b))/(p-1); improvement in large-b weight is constant factor at fixed k, not new asymptotic exponent.
+
+### R73. Complete Cauchy tiles have exact Smith spectrum
+
+Let O be a DVR of characteristic zero with uniformizer p, v(p)=1, containing the integers, u unit, A valuation k>=1, gamma nonzero valuation e>=0. Consider complete n_r x n_c tile B_ij=gamma/(u+A(i-j)), 0<=i<n_r,0<=j<n_c, and n=min(n_r,n_c). For an r x r minor at distinct row positions I and columns J, Cauchy determinant gives
+    v(det B_(I,J))=r e + k*r(r-1)
+      + sum_(i<i' in I) v_p(i'-i)
+      + sum_(j<j' in J) v_p(j'-j).
+All denominator factors are units, so this is exact, no cancellation estimate. Integer Vandermonde product for any r distinct integer nodes divisible by product_(h=0..r-1) h!: determinant of integer matrix [binom(i,h)] equals Vandermonde divided by that product. Equality of valuations attained at contiguous indices 0..r-1. Therefore determinantal divisor valuation
+    D_r = r e + k*r(r-1) + 2 sum_(h=0..r-1) v_p(h!), D_0=0.
+By DVR Smith theorem the invariant factors have valuations
+    E_j = e+2 k j+2 v_p(j!), j=0..n-1.
+All finite, sorted strictly increasing. This proof constructs source-native unit times branch-power valuation rather than importing a generic sharpness claim. Rectangular complete tile covered. If arbitrary holes in row/column sets, same minor formula gives exact determinantal optimization by separately minimizing the two Vandermonde valuations, and D_r at least the complete bound; do not infer each individual exponent inequality solely from prefix-sum inequalities. For upper channel bound, simply restrict a complete-tile factorization. If gamma=0 all channels vanish. Unramified base change preserves exponents with same normalization; in ramified extension of index f normalized uniformizer valuation multiplies all exponents by f. E.g. Q2(i) v_(1+i)(2)=2, so exponents double and precision 2^H corresponds to uniformizer exponent 2H, leaving channel count unchanged. This is lattice valuation, not Artin conductor or R64 unramified Frobenius degree. The abstract formula at p=3 also applies over the ramified Q3 field with the analogous normalization, but gives no binary-to-ternary algorithm proof.
+
+### R74. Exact minimum linear channel count at fixed precision and its scope
+
+Over R=O/(p^H) let rho_H(B) be the least number of R-linear scalar channels through which the explicit tile map factors: B=UV with inner dimension rho. Smith form gives factorization with one channel for each E_j<H, all others zero. Conversely image of B requires exactly that many generators (image diagonal direct sum of ideals p^E_j R; reduce the image module by p times itself and count residue-field dimension). If B factors through R^r, im V is a submodule of R^r, generated by <=r elements over this principal ideal chain ring, so its image under U also generated by <=r. Thus
+    rho_H(B) = #{j<n:e+2kj+2v_p(j!)<H}.
+This is an exact restricted linear-information lower bound and constructive upper bound, not merely rank over residue field (which can be zero while nonzero torsion channels survive). It concerns exact uniform evaluation of the TILE MAP for arbitrary ports. Boolean ports include unit vectors, so any linear factorization correct on every Boolean port vector must agree on the full matrix. It does not exclude nonlinear summaries, output-specific contraction, dependence between ports, cancellations across packets or arbitrary circuit algorithms. Compute factorization by DVR modular elimination: select minimum-valuation nonzero pivot, swap row/col, invert unit part modulo remaining precision, eliminate row/column by quotients by pivot (exact divisibility); record elementary invertible transforms. O(n_r n_c min(n_r,n_c)) ring operations, polynomial bit overhead in precision. Keep row/column group separation by doing operations within complete single-group tiles; each retained rank-one component contributes a moment of the corresponding column group and weighted row vector in its target group. For holes restrict the completed factorization. Completing/splitting row tiles may increase overall number of modes, so optimizing each block does not assert an end-to-end gain over published one-sided packing. Example k=1,e=1,p=2,H=9,n>=8: geometric cutoff with exact starting e needs 8 degrees; Newton retains b=0..4 (5 channels), Smith exponents E_0=1,E_1=3,E_2=7,E_3=9,... so 3 channels. This is exact for complete tile, not an estimated compression ratio for SAT.
+
+Source uses weight-budget enumeration. For comparison, if a hypothetical palette has c distinct available modes at each consecutive weight 1..B, then all 2^(cB) subsets of those modes satisfy budget P whenever c B(B+1)/2<P. Choosing B proportional to sqrt(P/c) (when P/c sufficiently large and palette extends that far) gives exp(Omega(sqrt(cP))) candidates for literal full budget enumeration. The source upper counting estimate is of that shape with c=O(M/D), P=O(MD/u). This is an exact combinatorial lower bound on enumerating an ideal filled palette, NOT an assertion that actual source instances have that palette or that every feasible monomial contributes; DAG sharing, degree restrictions, sparse terms and cancellation may remove them. Replacing weights by constant-factor larger Newton/Smith weights alone cannot change this abstract exponent order in the filled regime. Need new global contraction or structure-specific reduction of actual feasible support, not just valuation rescaling. Do not count candidates as mandatory work for arbitrary algorithm.
+
+### R75. Actual local checks
+
+Executed /tmp/langlands_r71.py locally with Python exact Fraction and SymPy determinant. 972 Newton reconstruction comparisons across p=2,3,5, k=1..3, units 1,p+1,2p+1, tile sizes 1..8, plus valuation and modular truncation assertions at H=1,2,3,5,8,13. 752 individual minor valuations for p=2,3, k=1,2, units 1,7, sizes 1..4, plus exact minimal determinantal divisor checks. 416 modular pivot/channel checks at H=1..13. 1252 actual source packet entry identities for a=1..4, i=0..a-1, t=2^i, z=1,2 and all same-i-bit row/column residues. Total 3392 counted comparisons, all passed, no CI or kernel proof. Reproduce core:
+```python
+from fractions import Fraction as F
+from math import comb,factorial,prod
+from itertools import combinations,product
+from sympy import Matrix
+def v(n,p):
+    if not n:return float('inf')
+    j=0;n=abs(n)
+    while n%p==0:n//=p;j+=1
+    return j
+def vf(x,p):
+    return v(x.numerator,p)-v(x.denominator,p) if x else float('inf')
+def mod(x,p,H):
+    x=F(x);R=p**H
+    return x.numerator*pow(x.denominator,-1,R)%R
+newton=minor=rank=actual=0
+for p in (2,3,5):
+ for k in (1,2,3):
+  A=p**k
+  for u in (1,p+1,2*p+1):
+   for n in range(1,9):
+    f=[F(1,u-A*j) for j in range(n)]
+    d=[F(factorial(b)*A**b,prod(u-A*j for j in range(b+1))) for b in range(n)]
+    for j in range(n):
+     assert f[j]==sum(comb(j,b)*d[b] for b in range(j+1));newton+=1
+    for b,z in enumerate(d):assert vf(z,p)==k*b+v(factorial(b),p)
+    for H in (1,2,3,5,8,13):
+     for j in range(n):
+      assert mod(f[j],p,H)==mod(sum(comb(j,b)*d[b] for b in range(j+1) if k*b+v(factorial(b),p)<H),p,H)
+for p,k,u in product((2,3),(1,2),(1,7)):
+ if u%p==0:continue
+ A=p**k
+ for n in range(1,5):
+  B=Matrix(n,n,lambda i,j:F(1,u+A*(i-j)));vals=[]
+  for r in range(1,n+1):
+   vv=[]
+   for I in combinations(range(n),r):
+    for J in combinations(range(n),r):
+     value=vf(F(B.extract(I,J).det()),p)
+     expect=sum(v(A*(j-i),p) for i,j in combinations(I,2))+sum(v(A*(j-i),p) for i,j in combinations(J,2))
+     assert value==expect;vv.append(value);minor+=1
+   val=min(vv)
+   assert val==2*(k*r*(r-1)//2+sum(v(factorial(j),p) for j in range(r)));vals.append(val)
+  E=[x-y for x,y in zip(vals,[0]+vals[:-1])]
+  assert E==[2*k*j+2*v(factorial(j),p) for j in range(n)]
+  for H in range(1,14):
+   R=p**H;D=[[mod(F(B[i,j]),p,H) for j in range(n)] for i in range(n)];rr=0
+   for t in range(n):
+    w,i,j=min((v(D[i][j],p),i,j) for i in range(t,n) for j in range(t,n))
+    if w>=H:break
+    D[t],D[i]=D[i],D[t]
+    for row in D:row[t],row[j]=row[j],row[t]
+    fac=p**w;inv=pow(D[t][t]//fac,-1,R//fac)
+    for i in range(t+1,n):
+     c=(D[i][t]//fac)*inv%(R//fac)
+     for j in range(t,n):D[i][j]=(D[i][j]-c*D[t][j])%R
+    rr+=1
+   assert rr==sum(x<H for x in E);rank+=1
+for a in range(1,5):
+ L=2**a;grid=range(-L,L);D=prod(-s for s in grid if s)
+ for i in range(a):
+  t=2**i;step=2**(i+1);n=L//step
+  for z in (1,2):
+   T=t+2**(a+1)*z;gamma=F(prod(T-s for s in grid),D)
+   for x0 in range(step):
+    for y0 in range(step):
+     if (x0>>i&1)!=(y0>>i&1):continue
+     den=T-y0+x0;w=v(den,2);assert w<=i
+     u=den//2**w;A=step//2**w;g=gamma/2**w
+     assert vf(g,2)>=a+1-w
+     for x in range(n):
+      for y in range(n):
+       expected=gamma/F(den+step*(x-y))
+       d=[g*F(factorial(b)*A**b,prod(u+A*(x-j) for j in range(b+1))) for b in range(y+1)]
+       assert expected==sum(comb(y,b)*d[b] for b in range(y+1));actual+=1
+assert (newton,minor,rank,actual)==(972,752,416,1252)
+```
+The modular elimination test counts pivots using row elimination; existence of both row/column transforms follows independently from the DVR argument. These are exact algebraic regressions, not a full implementation of the external algorithm, an actual p-adic oracle or an asymptotic benchmark.
+
+### R76. Updated endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R71 | actual shared tensor Cauchy deformation on original paired input | source interface inspected; no full algorithm audit |
+| R72 | Newton moment contraction with factorial valuation and finite tile cutoff | derived, checked |
+| R73 | exact complete-tile Smith invariant exponents and ramified base change | derived, checked |
+| R74 | minimum modular linear channel count; explicit factorization; filled-palette enumeration boundary | derived restricted bound, not circuit separation |
+| R75 | exact local Fraction/SymPy regressions | executed |
+| R7a'/LGC4d | actual globally support-preserving arithmetic contraction beyond local tiles | open; local tile maps characterized, global support not |
+| R7b'/LGC5 | unavoidable global cost allowing nonlinear summaries, signed contractions, idempotence and arbitrary sharing | OPEN P0 |
+| R7c/LGC6 | central sandwich superpoly or direct uniform SAT separation | OPEN P0 |
+| LGC7/N6 | original Clay endpoint transport | existing conditional consumer |
+
+### R77. Next substantive mathematical tranche
+
+Move from full individual tile maps to actual consumer-specific contraction: (1) compute what rank-one mode products survive Boolean port/equality constraints and original local tensors, (2) seek exact joint low-dimensional quotient with original witness preservation or a barrier to such quotients, (3) test whether regrouping and shared signed recursions can avoid enumerating the entire filled-palette support. Do not require evaluation of the entire tile map from every SAT decision algorithm, nor charge the exact Smith spectrum as global cost. R74 is a sharp linear interface theorem, not general lower bound. The fixed-width subexponential theorem's full proof and implementation remain outside this partial audit; no exponent improvement claimed. G42–44 credited, R57–60 contraction/precision and R64–70 grades/cheap reuse controls remain admissible. No separate certification prerequisite; stay on Langlands, literal Clay endpoint P0.
