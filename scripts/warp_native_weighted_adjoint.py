@@ -3,7 +3,7 @@ No SI calibration or continuum certification."""
 import numpy as np
 from math import ceil, sqrt, log
 from scipy.optimize import brentq
-from ksw668_f8_tt_multipole import stage, F
+from ksw668_f8_tt_multipole import F\nfrom ksw668_f8_weighted_normal_stage import matched_stage as stage
 from ksw668_f8_fv_source_flux import exact_cell_averages, total_scaled_moments
 from warp_stage_adjoint import transpose, donor_parity
 
