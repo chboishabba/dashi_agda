@@ -30,6 +30,7 @@ SCRIPTS=[
  "monster3b_original729_actual_vacuum_weld.py",
  "check_monster3b_atlas_source729_relator.py",
  "monster3b_actual_order3_projective_sym2_weld.py",
+ "monster3b_actual_projective_sym2_intertwiner.py",
  "run_monster3b_p5_endpoint.py",
 ]
 def load(filename):
@@ -86,6 +87,11 @@ def main():
     result_sym2=sym2.selftest()
     assert result_sym2["six_mu6_rephasings_plus_minus_gamma_tested"]
     assert len(result_sym2["checks"])==6
+    iso=load("monster3b_actual_projective_sym2_intertwiner.py")
+    local_operator_proof=iso.selftest()
+    assert local_operator_proof["wrong_78_generator_rejected"]
+    assert local_operator_proof["positive_two_generator_same_source_shape"][
+        "status"]=="ACTUAL_MM_MOD31_SIMULTANEOUS_78_INTERTWINER"
     actual_weld=load("monster3b_original729_actual_vacuum_weld.py")
     assert actual_weld.eval31(["-1/27","0"],5)==(-pow(27,-1,31))%31
     mm31=load("monster3b_actual_mmv31_hom_projector.py")
@@ -154,6 +160,7 @@ def main():
       "original_ATLAS_729_R7_one_both_phases":"PASS",
       "original_ATLAS_729_D_E_vacuum_minus_one_over27":"PASS",
       "actual_MM_dual_Sym2_gauge_invariant_six_mu6_model_algebra":"PASS",
+      "constructive_mod31_78_operator_intertwiner_and_negative_control":"PASS",
 
       "actual_Steel_Magma_GModule_executed":False,
       "actual_GAP_CTBLib_executed":False,
