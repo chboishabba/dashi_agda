@@ -83,6 +83,27 @@ function main(){
       if(mod===8)rows.push({n,kind,T,l,m,k,cutRows:a.rows,retained:a.retained,products:a.products,scalar:a.z,inhabited:a.ok,neutralRows:a.neutralRows});
     }
   }
-  return {runs,bruteCases,marginals,witnesses,neutral,conditional,outputInvariance,compiled,rows};
+
+  // Reverse-solve an actual failure using an unseen clause on the empty source.
+  let forcedCases=0,forcedFailures=0,unforced=0,gainWitnesses=0,bisectCalls=0;
+  for(const n of [2,3,5,7])for(let kind=0;kind<3;kind++)for(const T of [0,2,5]){
+    const cs=clauses(n),tab=machine(kind),k=Math.min(cs.length,Math.max(2*n,T,n)),u=cs.map(()=>0);
+    const x=direct(tab,T,u,n,cs).x;forcedCases++;
+    const j=cs.findIndex((c,i)=>i>=k&&!Cval(c,x));
+    if(j<0){unforced++;continue;}
+    u[j]=1;const p=direct(tab,T,u,n,cs);
+    if(p.score||p.x.join()!==x.join())throw Error("forced failure");
+    const y=Array(n).fill(0),lit=cs[j][0];y[Math.abs(lit)-1]=+(lit>0);
+    if(!Cval(cs[j],y))throw Error("constructed witness");
+    const path=[u.slice()];for(let i=0;i<n;i++){const v=path.at(-1).slice();v[2*i+y[i]]=1;path.push(v);}
+    const s=path.map(v=>direct(tab,T,v,n,cs).score);
+    if(s[0]!==0||s[n]!==1)throw Error("anchor");
+    let lo=0,hi=n,calls=0;while(hi-lo>1){const mid=(lo+hi)>>1;calls++;if(direct(tab,T,path[mid],n,cs).score)hi=mid;else lo=mid;}
+    const w=direct(tab,T,path[hi],n,cs).x,ref=2*lo+y[lo];
+    if(!path[lo].every((v,i)=>!v||Cval(cs[i],w))||!Cval(cs[ref],w)||s[lo]||!s[hi])throw Error("gain");
+    if(calls>Math.ceil(Math.log2(n)))throw Error("budget");
+    forcedFailures++;gainWitnesses++;bisectCalls+=calls;
+  }
+  return {runs,bruteCases,marginals,witnesses,neutral,conditional,outputInvariance,compiled,forcedCases,forcedFailures,unforced,gainWitnesses,bisectCalls,rows};
 }
 console.log(JSON.stringify(main()));
