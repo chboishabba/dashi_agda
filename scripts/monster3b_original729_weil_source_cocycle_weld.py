@@ -100,6 +100,77 @@ def column(R,j):
     if len(out)!=3**rank:raise AssertionError("repo Weil support cardinality incorrect")
     return out
 
+def _rank3(matrix):
+    A=np.asarray(matrix,dtype=np.int64).copy()%3
+    nrows,ncols=A.shape;k=0
+    for col in range(ncols):
+        p=next((j for j in range(k,nrows) if A[j,col]),None)
+        if p is None:continue
+        A[[k,p]]=A[[p,k]]
+        A[k]=A[k]*int(A[k,col])%3
+        for j in range(nrows):
+            if j!=k and A[j,col]:
+                A[j]=(A[j]-int(A[j,col])*A[k])%3
+        k+=1
+        if k==nrows:break
+    return k
+
+def _inverse3(matrix):
+    A=np.asarray(matrix,dtype=np.int64)%3
+    n=len(A)
+    if A.shape!=(n,n):raise ValueError("GF3 inverse matrix not square")
+    M=np.concatenate((A,np.eye(n,dtype=np.int64)),axis=1)
+    for col in range(n):
+        pivot=next((i for i in range(col,n) if M[i,col]),None)
+        if pivot is None:raise ValueError("chosen Weil B-support rows not independent")
+        M[[col,pivot]]=M[[pivot,col]]
+        M[col]=M[col]*int(M[col,col])%3
+        for i in range(n):
+            if i!=col and M[i,col]:
+                M[i]=(M[i]-int(M[i,col])*M[col])%3
+    return M[:,n:]
+
+def kernel_entry(R,row,j):
+    """One exact original compiled Weil coefficient, O(r²), no 729 loop.
+
+    Source 729 compiler supplies B,origin,a and phase polynomial. The
+    support equation origin+a*x+B*t=y has UNIQUE t because B is full
+    rank. Solve it once per entry with a cached left inverse of B.
+    """
+    n=len(R["origin"]);rk=R["rank"]
+    x=np.asarray(trits(j,n),dtype=np.int64)
+    y=np.asarray(trits(row,n),dtype=np.int64)
+    a=np.asarray(R["a"],dtype=np.int64)
+    v=(y-np.asarray(R["origin"],dtype=np.int64)-a@x)%3
+    B=np.asarray(R["B"],dtype=np.int64).reshape(n,rk)
+    if rk:
+        if "_support_pivots" not in R:
+            chosen=[]
+            for k in range(n):
+                if _rank3(B[chosen+[k]])>len(chosen):
+                    chosen.append(k)
+                if len(chosen)==rk:break
+            if len(chosen)!=rk:
+                raise AssertionError("original repo Weil support B lacks rank")
+            R["_support_pivots"]=chosen
+            R["_support_inverse"]=_inverse3(B[chosen]).tolist()
+        inds=R["_support_pivots"]
+        inverse=np.asarray(R["_support_inverse"],dtype=np.int64)
+        t=(inverse@v[inds])%3
+        if not np.array_equal((B@t)%3,v):return Q0
+        ts=t.tolist()
+    else:
+        if np.any(v):return Q0
+        ts=[]
+    u=x.tolist()+ts
+    q=R["constant"]+sum(a*b for a,b in zip(R["linear"],u))
+    q+=sum(a*b*b for a,b in zip(R["square"],u))
+    idx=0
+    for i in range(len(u)):
+        for j in range(i+1,len(u)):
+            q+=R["cross"][idx]*u[i]*u[j];idx+=1
+    return ROOTS[q%3]
+
 def f3_mul(A,B):return (A@B)%3
 def f3_pow(A,k):
     z=I12.copy()
@@ -128,8 +199,8 @@ def coeff_of_product(g,h,gh):
     h0=column(h,0)
     value=Q0
     for j,c_h in h0.items():
-        kg=column(g,j).get(row,Q0)
-        value=add(value,mul(kg,c_h))
+        kg=kernel_entry(g,row,j)
+        if kg!=Q0:value=add(value,mul(kg,c_h))
     return mul(value,inv(target[row]))
 
 def cocycle(A,lamA,B,lamB,source_phase):
@@ -260,6 +331,10 @@ def selftest():
     I=I12.copy()
     assert k00(I,1,1)["k0_unitary_model_Qzeta3"]==["1","0"]
     assert cocycle(I,1,I,1,1)["unitary_gauge_multiplier_Qzeta3"]==["1","0"]
+    for j in (0,1,7,728):
+        row1=column(model(I,1,1),j)
+        assert row1=={j:Q1}
+        assert kernel_entry(model(I,1,1),j,j)==Q1
     # A genuine rank-6 symplectic Fourier transform, not a generic
     # 90-dimensional synthetic model. F^2=-I and F^4=I.
     f=np.zeros((12,12),dtype=np.int64)
