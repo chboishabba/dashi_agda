@@ -369,3 +369,135 @@ assert len(Vs)==8 and count==7424
 Next combined R7a'/b'/c mathematical tranche: use phase-sensitive local pairings or multi-arrow gluing, test actual dependence on signs (not only conductor), and seek a bounded global charging theorem that survives easy quadratic bent packets and arbitrary g. R9 explains exactly how projective gauge can cancel rather than impose computational cost; do not count the number/dimension of complementary Hom modules or the number of cocycle conditions as paid primitives. A full simultaneous lift may carry a genuine cohomological obstruction but requires a specified source group/action and proof of connection to *all* low-cost algorithms; no such source action is inferred from this construction. Do not repeat local tests as a gate to endpoint mathematics; use #1548/#119 for general G6. Remain on Langlands, no RH/BSD/YM/Monster prerequisite.
 
 Prior art and attribution: rank/codimension bound is Theorem 2 in *Boolean Functions with Multiplicative Complexity 3 and 4*, https://pmc.ncbi.nlm.nih.gov/articles/PMC7918276/ and https://www.nist.gov/publications/boolean-functions-multiplicative-complexity-3-and-4 (not a new DASHI lower bound). Maiorana–McFarland/Walsh formulas are classical bent-function theory; see e.g. https://drops.dagstuhl.de/storage/00lipics/lipics-vol362-itcs2026/html/LIPIcs.ITCS.2026.72/LIPIcs.ITCS.2026.72.html for a modern use (its query-complexity bound is not a circuit bound). Local reciprocity is R2 standard authority. R8–R11 arithmetic representation crosswalk, exact mu4 adaptation and profile-based negative-control synthesis are DASHI working mathematics, no priority claim over existing representation or Boolean function theory. Preserve JMD/DASHI split from #123 and Monster source-specific character attribution.
+
+## 10. R14–R20 — F2/F3 source bridge, cubic ramification and selector-SAT (2026-11-24)
+
+User directed reuse of existing F2/F3 bridge, stay on Langlands. Attached continuation and selector geometry are the basis; other worker owns G13a–e and G12a–c. Live #1548 head 9cd7ebdc7459ed956f77281642ce62754f8483e2 and #119 ca3364ab5eb500b976b16f55a8cad3dadf3246d5 match the supplied selector-SAT handoff. Langlands work extends #1549/#120; not a Monster, RH, BSD or YM detour.
+
+### R14. Actual default-branch F2/F3 donors inspected
+
+- DASHI/ComputerScience/BinaryBalancedTernarySubcarrierExact.agda, blob c9ade4f43191c2790f62230c805e95d29e2e36e6: embedBit false=sspNegOne, true=sspPosOne, binaryTernaryRoundTrip, centreIsUnusedByBinaryEmbedding, binaryEmbeddingPreservesBooleanComplementAsAntipode, binaryTernaryStreamRoundTrip, binaryInBalancedTernaryRepresentation. This is exact antipodal subcarrier, not additive field map.
+- DASHI/Codec/BalancedTritBitFibre.agda, 9fa72fc85938f78aa64cc53443a06ada3824280a: encodeFibre/decodeFibre and inverse laws, supportBit, OptionalSignBit, encode-commutes-involution, wordBitCost-support-plus-sign. Zero has no sign bit, nonzero sign retained.
+- DASHI/Interop/CodecCarrierFibreBridge.agda, a11a165afb47e32129eea923cc4e14f4d189436c: sspToFibre/fibreToSSP inverse, signToPolarity and flip compatibility.
+- DASHI/Foundations/Base369BinaryTernaryRefinement.agda, 6345afd94fda8b8b5a45f635bf3fba6486c1998d: Resolution23, independent binaryDepth/ternaryDepth, binary-ternary-refinement-commutes, circlePhaseRefinementDiamond (3->6/9->18).
+- DASHI/Arithmetic/SixWheelCRTExact.agda, 7f5648752595f796f16c7e6de68a557f77366fd0: r6CRT23RoundTrip, crt23R6RoundTrip, survivor residues (1,1),(1,2). Actual mixed-prime residue chart, not merely cardinality.
+- DASHI/Mathematics/Topology/AlexanderHornedMixedPrimeCRTWeldExact.agda, af2baed60578bcf481b874e20ed8d40507b7724c: explicit mixed address system, ternaryBinaryTwoBitRoundTrip and binaryPairUnusedCode; distinguishes inverse-system sets from ring transport.
+- DASHI/ComputerScience/ShorStandardBinaryTernaryStoredProgramComputerExact.agda, 5d4df6e47176d71a68f1c9ea3983fe85ef107d9b: rebuildBinaryState/rebuildTernaryState, same decoded order15/order21 executions; finite concrete source, not universal machine-cost theorem.
+- DASHI/Foundations/TernaryGolay/BinaryTernaryMacWilliamsUnification.agda, ea6e20fc9fe3ecb91c64e1943d6c5e29071c9984: common q-ary distribution/coefficients, general theorem and binary octad boundary explicitly separate. Do not infer arbitrary code equivalence from it.
+- DASHI/Computation/SSSPBinaryTernarySymmetryRefinementBidiExact.agda, 556b91905ac69913ccbd7f763eed30c554accb23: explicit refinement and symmetry distinction. Source bodies inspected at master; no new kernel run.
+
+### R15. Gate transport preserving the actual antipodal convention
+
+Use e(b)=2b-1 in F3 (false=-1,true=+1), not the opposite sign convention of the earlier Hilbert phase (-1)^b=-e(b). On the nonzero antipodal carrier, with s=e(a),t=e(b):
+    e(NOT a)=-s;
+    e(a XOR b)=-st;
+    e(a AND b)=(s+t+st-1)/2 in F3.
+Derive the last equation from a=(s+1)/2,b=(t+1)/2 and 2ab-1. All outputs stay in the nonzero fibre. A ternary arithmetic implementation of a Boolean DAG uses O(1) fixed-field operations per Boolean gate and preserves sharing. In reverse, use the existing support/sign fibre with a canonical zero code and fixed finite lookup Boolean circuits per F3 operation; each fixed-field primitive has constant Boolean gate count, so total gate size polynomially equivalent. This does NOT preserve free-XOR multiplicative complexity at unit cost: XOR maps to signed multiplication in F3. No unital ring homomorphism F2->F3 exists (1+1=0 would map to 2=0). No common field containing both as subfields. Mixed prime lanes are paired typed charts, not a shared linear vector space. R9 mu4 cocycle still needs fourth roots: C3 phase does not repair order-two diagonal defects. This explicit sign preservation closes the transport sublemma, not a cost shortcut.
+
+### R16. Genuine cubic local Langlands lane at 3
+
+Let K=Q3(zeta), zeta primitive cube root, pi=1-zeta. pi^2-3pi+3=0 is Eisenstein, so pi uniformizer, v_K(3)=2. Let L=K(theta), theta^3=pi. Eisenstein over K gives degree 3, totally ramified, theta uniformizer; K contains mu3, so L/K is cyclic Galois. For sigma(theta)=zeta theta and either nonidentity automorphism:
+    v_L(sigma(theta)-theta)=v_L(zeta-1)+v_L(theta)=3+1=4.
+Since O_L=O_K[theta] (Eisenstein uniformizer generates integral ring here), this gives lower ramification groups G0=G1=G2=G3=C3, G4=1; one break 3, also upper break 3 for this cyclic group. For either nontrivial one-dimensional character the Artin conductor exponent over K is 4 (each nontrivial group contributes one). Local reciprocity gives eta:K^*->mu3 with kernel N_(L/K)(L^*), conductor exponent 4, thus nontrivial on 1+pi^3 O_K and trivial on 1+pi^4 O_K. Choose u in 1+pi^3 O_K with eta(u)=zeta (if primitive inverse, square it). This is an existence and finite constant-field choice from the conductor theorem, not an explicitly evaluated cubic Hilbert symbol on a guessed unit. GL1 LLC gives the corresponding Weil character; eta is distinct from the earlier quadratic chi over Q2. The character may be written as a norm-residue/Hilbert symbol with convention fixed by eta; in particular eta(u^j)=zeta^j. The sign -1 itself is a cube, so do not naively copy the Q2 Hilbert sign pairing at 3.
+
+The actual ternary carrier t in {-1,0,+1} maps to eta^t; inversion swaps the nonzero phases and fixes zero. For the repository's binary antipodal subcarrier, use eta^{e(b)}, NOT eta^b unless explicitly converting the index. Character support via trivial/nontrivial recovers the support bit, and distinction eta versus eta^-1 recovers sign. Conductors alone cannot distinguish the two signs: both exponent 4. Thus the full ramified character, not its conductor, is the typed codec consumer. Character tensor exponent addition is F3 addition, not F2 XOR on the antipodal subset. The paired binary and ternary chart can be read as local parameters at two different base fields, without asserting an LLC equivalence across characteristics. It is a genuine GL1 local arithmetic representation, not a proof of new global Langlands.
+
+If an unramified rank-d parameter at K is used, twisting by eta^t gives conductor 0 for t=0 and 4d for t!=0, and invariant dimension d or 0 respectively, by splitting into unramified Weil characters over C. Do not call that parameter the prior P11 at 2; no base change to 3 or global compatibility is assumed. For global arithmetic provenance K is the completion of Q(zeta3) at its prime over 3 and L is the completion of Q(zeta3, cube root(1-zeta3)); local calculation suffices.
+
+### R17. Selector-SAT as exact local norm descent, not a free deterministic section
+
+Use other worker's actual fixed NP-complete selector family. Variables m; N_m=2m+4 binom(m,2)+8 binom(m,3); selectors s_C for each non-tautological width<=3 clause; for a Boolean assignment x, q_C(x)=1 iff C falsified. Their exact geometry F_m(s)=1 iff exists x with s_C q_C(x)=0 for every C. Each q_C is a product of at most 3 false-literal bits. Represent Boolean auxiliary gate values on the repo antipodal fibre using R15. The forbidden-bit p_C=s_C q_C(x) is 0/1 (decode from antipodal convention first). Define local character eta^{p_C}, or equivalently norm obligation
+    u^{p_C} in N_(L/K)(L^*).
+This holds iff p_C=0 since eta(u)=zeta. Similarly at Q2 use a fixed element with chi=-1 (e.g. -1 under R2) and the quadratic norm condition. The exact same Boolean existential relation can be expressed in either arithmetic lane and jointly:
+    F_m(s)=1 iff exists x such that for every C eta(u^{s_C q_C(x)})=1
+           iff exists x such that for every C u^{s_C q_C(x)} is a norm.
+For a satisfying witness every norm equation has explicit solution 1, since p_C=0; for a violated constraint no local solution. No unresolved local-field search, no enormous field elements: u fixed once, exponents bounded. O(N_m) small indexed obligations and constant-size gate records, with the x existential coordinates explicit. If using norm polynomials with coordinate variables for L/K, N(z0+z1 theta+z2 theta^2)=z0^3+pi z1^3+pi^2 z2^3-3pi z0 z1 z2; obtained by multiplying the three conjugates (standard cubic norm identity). It equals u^p with p=0/1 so RHS 1+(u-1)p; enforce p Boolean. This is an existential presentation over K with Boolean witness restrictions and fixed field parameters. Do not infer arbitrary local field quantifier elimination is cheap or yields a polynomial circuit. The number of norm equations is not a lower bound on decision operations. Multiplying all phase conditions into one character loses violations: 3 nontrivial eta factors cancel, and 6 violations cancel in both 2- and 3-lanes. Keep indexed labels and simultaneous constraints, as in R8/other worker's joint intersection geometry. A valid SAT decider need not produce a witness; however standard SAT self-reduction can turn a polynomial selector decider into a polynomial witness extractor by adding unit clauses one at a time. At each of m stages test one extension using the same fixed N_m encoding; if a satisfiable input, at least one polarity preserves satisfiability, and accumulated units select one assignment. Thus a polynomial-time or polynomial-size circuit decider yields a polynomially costed deterministic section of the norm relation on satisfiable inputs (and a rejection marker otherwise). Conversely a polynomially costed section plus verifier decides SAT. This is a precise decision/search transport, not a theorem that a section cannot exist. Noncanonical choices cannot be charged as independent obligations.
+
+### R18. Unconditional linear lower bound on the actual selector target
+
+Use R10 relative ramified translation stabilizer, now on the concrete target rather than arbitrary functions:
+    S(F_m)={h in F2^N_m : Delta_h F_m constant}.
+Every selector coordinate is essential: for C choose an assignment falsifying it, select exactly m unit clauses forcing that assignment. This configuration is satisfiable, but adding C (not among those units) makes it unsatisfiable. F_m is decreasing under inclusion. If h!=0 and Delta_h F_m=0 identically, fix all coordinates outside supp(h). Then the all-zero and all-one choices on supp(h) have equal output, hence monotonicity forces every intermediate choice to have equal output. Thus every coordinate in supp(h) would be inessential, contradiction.
+If Delta_h F_m=1 identically, for m>=2 choose two disjoint unsatisfiable selector cores A={positive and negative units of variable 1}, B={positive and negative units of variable 2}. Choose s with all A entries 1 and all B entries of s+h equal 1 (possible because A and B disjoint). Then F_m(s)=F_m(s+h)=0, contradiction. Hence S(F_m)={0} for m>=2. For m=1, F_1=1+s_+s_- and direct check yields S=0 too.
+By R10 every arbitrary shared AND circuit computing the actual selector SAT function has
+    MC(F_m)>=ceil(N_m/2).
+For m=2 N=8 bound 4; m=3 N=26 bound 13; m=4 N=64 bound 32. (N_3=6+12+8=26.) This strengthens the other worker's unit-clause restriction bound 2m-1 at sufficiently large m. It is a direct application of the known linear-structure lower bound, not a novel general circuit lower bound nor superpolynomial growth. The relative GL1 inertia line at each translated selector input supplies the same obstruction; moving to eta phases does not multiply the lower bound. The invariant saturates at N_m, so no LGC6 promotion.
+
+### R19. Joint 2/3 arithmetic count boundary
+
+For a fixed selector s, let W(s)=number of satisfying assignments (0<=W<=2^m). Exact arithmetic detection of W=0 is equivalent to SAT rejection. The fixed residue mod 6 cannot detect it: m=3, a single width-two clause leaves 6 satisfying assignments, indistinguishable from 0 mod2 and mod3. This is an actual selector-instance negative control, not random counts.
+Choose a,b with 2^a 3^b>2^m. CRT implies W=0 iff W mod2^a=W mod3^b=0, because W is in the unique residue interval. Bit lengths O(m), and one can choose a,b=O(m); this is a true mixed-prime arithmetic observer (extends SixWheelCRTExact to coprime powers), not an efficient algorithm for obtaining W's residues. For a fixed x the conjunction of local conditions is a product of character projectors (1+eta^p+eta^(2p))/3, and similarly quadratic (1+chi^p)/2 with the appropriate evaluated phase. The product equals the Boolean witness indicator. Summing over all x gives W. This exact orthogonality formula permits Fourier/representation manipulations, but naive sum is exponential; divisions occur in characteristic zero, not in F3 or F2. Computing W mod prime powers may itself be difficult. Do not substitute residue sizes or character-packet dimensions for execution costs. No result on MOD_m P or #P completeness needed or claimed here.
+A genuine next phase-sensitive target: a structured norm/character representation of the selector relation with a deterministic *charged* section/projection invariant that survives arbitrary gate sharing. Existing exact joint flat intersections supply incidence data but R11 and G13e prohibit charging all witnesses or regions independently. Seek an actual universal incremental bound sensitive to the width-two/three interactions, not another proof of local solvability.
+
+### R20. Local execution and roadmap
+
+Actually ran local Python/SymPy this continuation, script:
+```python
+from itertools import product, combinations
+from sympy import symbols, expand, resultant
+enc=lambda b:2*b-1
+dec=lambda t:(t+1)//2
+c=0
+for a,b in product(range(2),repeat=2):
+    s,t=enc(a),enc(b)
+    assert (-s*t-enc(a^b))%3==0
+    assert (2*(s+t+s*t-1)-enc(a&b))%3==0
+    assert (-s-enc(1-a))%3==0
+    assert dec(s)==a
+    c+=4
+for t,u in product((-1,0,1),repeat=2):
+    assert (t+u)%3==(t%3+u%3)%3
+    assert (t*u)%3==((t%3)*(u%3))%3
+    c+=2
+z,T=symbols('z T')
+assert expand(resultant(z*z+z+1,T**3-1+z,z))==T**6-3*T**3+3
+def clauses(m):
+    return [(I,p) for k in range(1,min(3,m)+1)
+            for I in combinations(range(m),k) for p in product(range(2),repeat=k)]
+for m in (1,2):
+    C=clauses(m); N=len(C); xs=list(product(range(2),repeat=m))
+    fals=[sum(1<<j for j,(I,p) in enumerate(C)
+              if tuple(x[i] for i in I)==p) for x in xs]
+    f=[int(any(s&z==0 for z in fals)) for s in range(1<<N)]
+    stab=[h for h in range(1<<N)
+          if len({f[s]^f[s^h] for s in range(1<<N)})==1]
+    assert stab==[0]
+    assert all(any(f[s]!=f[s^(1<<i)] for s in range(1<<N)) for i in range(N))
+w=0
+for m in range(1,6):
+    C=clauses(m)
+    for j,(I,p) in enumerate(C):
+        x=[0]*m
+        for i,b in zip(I,p): x[i]=b
+        units=[k for k,(J,q) in enumerate(C) if len(J)==1 and q[0]!=x[J[0]]]
+        assert j not in units
+        def sat(S):
+            return any(all(tuple(y[i] for i in C[k][0])!=C[k][1] for k in S)
+                       for y in product(range(2),repeat=m))
+        assert sat(units) and not sat(units+[j]); w+=1
+crt=0
+for m in range(1,9):
+    a=b=0
+    while 2**a*3**b<=2**m:
+        if a<=b:a+=1
+        else:b+=1
+    for k in range(2**m+1):
+        assert (k%(2**a)==0 and k%(3**b)==0)==(k==0);crt+=1
+assert (c,w,crt)==(34,230,518)
+```
+Counts: 34 finite gate/fibre arithmetic comparisons; one resultant identity; 260 translation candidates exhaustively checked (m=1,2), 10 coordinate essentiality checks in those truth tables; 230 forced-assignment witnesses across m=1..5; 518 CRT zero-test count comparisons. No local-field oracle evaluation, no numeric u chosen, no kernel/CI; general ramification proof at standard LCF authority boundary. No tests for unclaimed asymptotic statements.
+
+| ID / phase | Exact deliverable | Producer -> consumer / status |
+|---|---|---|
+| R14 / A | F2/F3 and support/sign source reconciliation | actual master blobs above -> R15/16; inspected |
+| R15 / A | antipodal gate translation + polynomial total gate transport both ways, no free-XOR MC equivalence | BinaryBalancedTernarySubcarrierExact, BalancedTritBitFibre, existing concrete DAG -> R17; derived |
+| R16 / B | cubic Kummer local field, conductor 4, eta/eta^-1 sign-sensitive character fibre | R2, RamifiedLocalValuationSharpnessExact, local reciprocity, Base369 refinement -> R17; mathematical construction supplied at standard theorem authority; native adapter/explicit unit optional |
+| R17 / B | selector existential local norm relation and polynomial decision/section equivalence | G13c/d #1548/#119, R15/16, original SAT reduction #1040/#1129/#1474 -> R7a'/b'; derived |
+| R18 / C | S(F_m)=0 and MC>=ceil(N_m/2) | R8/R10, G13c selector target -> known linear lower bound, derived; no asymptotic promotion |
+| R19 / C | exact CRT residue zero detection and fixed-mod6 collision on actual selector instances | SixWheelCRTExact, G13 selector incidence -> charge control; derived |
+| R7a'/LGC4d / C | phase-sensitive relation consumer beyond R11/R19 and existential presentation, canonical up to valid section choice | R8/R9/R16/R17, P11 section independence, indexed hyperfabric #1291; open |
+| R7b'/LGC5 / C | universal serial-safe resource bound for that consumer across all circuits (or direct uniform machines), not capped linearly/polynomially by definition | R5/R10/R18, G12a/G6, #123 charge; open |
+| R7c/LGC6 / D | same invariant strict superpolynomial separation on selector SAT or canonical SAT, with polynomial reduction transport | G12b/c, R17, #1040/#1129/#1474; open |
+| N6/LGC7 / E | literal Clay endpoint | conditional consumer; not inhabited |
+
+Attribution: classical Kummer theory, local class field theory and Artin conductor filtration formula (standard authorities already recorded R2/R3; use only explicit theorem boundaries); classical SAT decision-to-search self-reduction; known linear structure MC bound R10; elementary CRT. DASHI crosswalk uses actual binary/ternary owners and local arithmetic; preserve JMD FRACTRAN/MDL attribution. No claims of field isomorphism, new LLC theorem, or P≠NP. Endpoint mathematics next, not repeat certification.
