@@ -3854,3 +3854,93 @@ Existing donors reopened and retained: ConstraintCouplingSearchExact; ResidualCo
 
 **P0 priority:** find a representation-independent obstruction to global selection, or discharge one of the existing direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes. Do not count the antichain. Retain the zero mode, inhabited neutral fibre, signed residual, and indexed hyperfabric.
 
+
+
+## 34. P0-G94–G98 — geometry-forward: exact majority-defect backdoors and exponential flat binary-cover cost (2026-11-24)
+
+Stay on literal Clay P vs NP. Inputs: current pasted G89–G93 rank boundary (section 32 locally labelled GO75–GO79), section 33 independent guard-obstruction route, G16/G17 majority closure, G84–G88 ordered shared guard transfer. Retain #1006 FactorsThrough, #1546 sharing, #123 JMD lowering with attribution, #1040/#1129 SATDecisionFailure and costed machine, #607/#678 Aristotle BIDI. Section order differs on the two branches due to parallel work; append without reordering or overwriting existing sections. Gate names G94–G98 are new in the inspected roadmaps. No claim of literature novelty for elementary majority/cover arguments.
+
+### G94 — exponential flat witness-preserving rank-one cover
+
+Let S_m be the satisfying assignments of F_m=AND_i(x_i1 OR x_i2 OR x_i3) on 3m distinct original bits. One-hot witness set W_m={100,010,001}^m has size 3^m. Every rank-one word's nonzero support over an effective field is bijunctive by section 32, also after existential projection of arbitrary Boolean auxiliaries. For any sound majority-closed chart A subset S_m, its projection to each block is majority-closed and excludes 000, so misses at least one one-hot state e_j (majority of all three is 000). Consequently A is contained in the product chart requiring OR of the other two bits per block: the only forbidden local states are 000 and e_j. In particular |A intersect W_m|<=2^m. Every exact flat union of projected rank-one charts requires at least ceil((3/2)^m) charts even with cross-block constraints, overlaps, and arbitrary auxiliary counts. This is a semantic flat-cover lower bound, not an unrestricted decision time bound.
+
+### G95 — exact reduction to ternary box covering, matching exponential rate
+
+For p in {0,1,2}^m define B_p on W_m by w_i != p_i at every block and lift to the binary CNF AND_i OR of the two coordinates other than p_i. Every chart in G94 can be enlarged to one such B_p lift without leaving S_m. Conversely covering all W_m by B_p covers S_m, because every satisfying assignment dominates a one-hot assignment and the lifted charts are upward closed. Hence optimal flat chart count equals the minimum number of these ternary boxes covering the ternary cube. Independently sample k exclusions uniformly; a fixed witness is covered with probability (2/3)^m per sample. Union bound gives failure probability <= 3^m exp(-k(2/3)^m)<1 for k=ceil((3/2)^m(m ln 3+1)). Therefore the lower and upper exponential rates agree. This is an existence upper bound, not an efficient generator claim. Exact small minima m=1,2,3 are 2,3,5 by enumerating box subsets (see local regression).
+
+### G96 — exact semantic strong backdoor via majority defects
+
+For S subset {0,1}^n, collect D(a,b,c)={i:a_i,b_i,c_i not all equal} for triples a,b,c in S with coordinatewise majority outside S. For original-coordinate pin set K, all residual fibres S|p (including empty) are majority-closed iff K intersects every defect D. Forward: a missed D leaves all three witnesses together in the same K fibre and the invalid majority has the same pins. Backward: any fibre violation gives a missed D. Projection/extension of fixed pins preserves majority. By the usual Boolean majority/2CNF characterization (G16), minimum strong semantic backdoor size is exactly the transversal number of this defect hypergraph; for no defects it is zero. This invariant depends on original labelled support, not transfer representation, but constructing the full hypergraph or extracting a minimum transversal is not claimed polynomial. Keep defect triples and their excluded majority as signed source residual; do not conflate empty fibre with inhabited neutral guard.
+
+### G97 — reverse-pin exact characterization for monotone CNF
+
+Let P be inclusion-minimal positive clauses (remove duplicate and subsumed clauses). K is a strong semantic backdoor iff every C in P has |C minus K|<=2. Sufficiency: all surviving clauses under any pins have width<=2. Necessity: for C with |C minus K|>=3 set K intersect C to zero and K minus C to one. C minus K remains minimal: any surviving D with D minus K subset C minus K must have D subset C, so D=C. A monotone relation with a minimal clause E of width>=3 is nonbijunctive: set all outside E to one and choose three assignments with distinct single ones in E; all satisfy every clause by minimality, while their majority has zeros on E. Thus exact for all pins, not merely the all-zero branch. For S_m, K must hit each disjoint block, and one pin per block suffices; optimum m. The 2^m exhaustive branch count is not a lower bound on adaptive or compositional decision. Empty/universal monotone relations handled by empty clause/no clauses.
+
+### G98 — compositional bypass, indexed weighted transport, and exact unpaid endpoint
+
+The same S_m has a linear-size AND of local unions: (x_i1) OR (NOT x_i1 AND (x_i2 OR x_i3)); both local alternatives are bijunctive and disjoint. Thus a factored AND/OR representation is linear and a single witness is obtained by setting x_i1=1 for every i. Flat chart blowup and optimal semantic backdoor size cannot be mandatory time charges for arbitrary algorithms, even preserving full support through shared composition. Exact unary-weight acceptance for independent blocks is product_i [product_j(w_ij(0)+w_ij(1))-product_j w_ij(0)]; rejected weight is total minus acceptance. Each block's disjoint chart sum gives the same result without flat expansion. Overlapping covers require Boolean union or overlap correction, not naive signed sum. This example has 7^m accepting states, 8^m-7^m rejected states and nonzero signed modes as determined by weights; keep these semantics, not obligatory materialization. Retain independent (history,tau,k,j,version,original guard,source chart,pin,consumer,ring,precision) and defect witnesses, signed residual and neutral fibre. No implication from exponential flat cover to time lower bound; allowing arbitrary nonlinear coordinate decoders also escapes the original-coordinate projection hypothesis.
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G94 | flatBijunctiveCoverLowerBound | proved; scoped to explicit flat union |
+| G95 | ternaryBoxCoverEquivalenceAndRate | proved; small minima tested |
+| G96 | semanticBackdoorIffDefectTransversal | proved and tested |
+| G97 | monotonePrimeClauseBackdoorIff | proved and tested |
+| G98 | factoredCoverBypass / weightedResidual | derived, no unrestricted charge |
+| N4 | unavoidable cost across all legal sharing, recomputation, nonlinear charts and bypasses | OPEN |
+| N5 | universal polynomial SAT failure / unrestricted separation | OPEN |
+| N6 | original Clay transport through SATLowerBoundProducer | conditional |
+
+Next endpoint search: do not strengthen flat expansion counts. Seek a decision-specific invariant preserved by costed composition and arbitrary machine simulation, or the direct candidate-failure / observer-collision / resource-closed diagonal OR routes from the existing producers. Any proposed mandatory charge must pass G98 as an anti-control; an observer collision must separate actual SAT from UNSAT, not merely distinguish witness relations. G96 is a source-geometry diagnostic, not an extra Clay prerequisite. No native Agda/Lean kernel or CI execution, no P!=NP claim.
+
+### Local exact regression (dependency-free Python)
+
+Executed locally: all 128 subsets of OR3, 93 majority-closed, all contained in one pair-OR; exact ternary box minima 2,3,5 for m=1,2,3; all 168 monotone 4-bit relations (including constants), 2688 pin-set tests with both prime-clause and defect criteria; all 256 arbitrary 3-bit relations, 2048 pin-set tests with the defect criterion. All passed. Reproducer:
+
+```python
+from itertools import product, combinations
+from math import ceil
+def maj(a,b,c): return (a&b)|(a&c)|(b&c)
+def closed(S): return all(maj(*t) in S for t in combinations(S,3))
+S=set(range(1,8)); count=0
+for mask in range(128):
+    A={x for x in S if mask>>(x-1)&1}
+    if closed(A):
+        count+=1
+        assert any(x not in A for x in (1,2,4))
+        assert any(all(x & (7^e) for x in A) for e in (1,2,4))
+print('OR3 subsets',128,'majority-closed',count)
+for m in range(1,4):
+    words=list(product(range(3),repeat=m)); full=(1<<len(words))-1
+    boxes=[sum(1<<i for i,w in enumerate(words) if all(a!=b for a,b in zip(w,p))) for p in words]
+    for k in range(ceil((3/2)**m),len(words)+1):
+        found=None
+        for inds in combinations(range(len(words)),k):
+            union=0
+            for j in inds: union |= boxes[j]
+            if union==full: found=inds; break
+        if found is not None: break
+    print('cover',m,k,[words[i] for i in found])
+n=4; allx=range(1<<n); total=0; checks=0; defect_checks=0
+for mask in range(1<<(1<<n)):
+    A={x for x in allx if mask>>x&1}
+    if any((x|(1<<i)) not in A for x in A for i in range(n)): continue
+    total+=1
+    C=[15^x for x in allx if x not in A and all((x|(1<<i)) in A for i in range(n) if not x>>i&1)]
+    D={((a^b)|(b^c)) for a,b,c in combinations(A,3) if maj(a,b,c) not in A}
+    for K in allx:
+        fibres={p:{x for x in A if (x&K)==p} for p in allx if p&K==p}
+        actual=all(closed(f) for f in fibres.values())
+        assert actual==all((c&~K).bit_count()<=2 for c in C)
+        assert actual==all(K&d for d in D)
+        checks+=1
+print('monotone relations',total,'backdoor tests',checks,'two characterizations each')
+for mask in range(256):
+    A={x for x in range(8) if mask>>x&1}
+    D={((a^b)|(b^c)) for a,b,c in combinations(A,3) if maj(a,b,c) not in A}
+    for K in range(8):
+        actual=all(closed({x for x in A if x&K==p}) for p in range(8) if p&K==p)
+        assert actual==all(K&d for d in D)
+        defect_checks+=1
+print('general relation backdoor checks',defect_checks)
+```
