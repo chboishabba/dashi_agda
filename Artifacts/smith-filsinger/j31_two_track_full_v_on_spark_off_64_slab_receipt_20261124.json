@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-24",
+  "status": "PASS_SOURCE_J31_ORIGINAL_EVENT1_TO_EVENT2_64_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG",
+  "source_model": "Original prescribed-wave finite-loss nine-state J25/J31 real mode (U=0,V=1,spark=ON)",
+  "original_source_owner_pr": 1537,
+  "executable": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
+  "committed_source_blob": "3bb225902125b6fbb95d1c00bc520c9c001f87f9",
+  "run": "python scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py --segment 1 --out receipt.json",
+  "execution": {
+    "local_Python_Fraction": true,
+    "byte_identical_new_executable": true,
+    "source_dependency_blobs": [
+      "eb685d88e5fbfb8c33f17b676be7ce01baaeca7e",
+      "47493fbefba44c20e7cb82e31521627f13611800"
+    ],
+    "no_github_ci": true,
+    "full_source_interval_json_sha256": "cbf0e03a0f6a1a5a29ae38e7ce65cb9da00bbc5192e6d0ed4a7b9948db77a55e",
+    "full_source_interval_json_bytes": 282414,
+    "full_json_regenerable_from_committed_source": true,
+    "full_json_not_copied_into_compact_receipt": true
+  },
+  "time": {
+    "start": "3.389367008894",
+    "end": "3.491292721190",
+    "start_end_independent_halfwidth": "1/200000",
+    "all_J29_exact_root_brackets_within_time_boxes": true,
+    "internal_fixed_source_refinement_knots": 63
+  },
+  "initial_box": {
+    "coordinates": 9,
+    "state_halfwidth": "1/10000",
+    "original_J29_J24_event1_full_state_box_external_source_receipt": true
+  },
+  "validated_original_source_math": {
+    "strict_Picard_fulltime_slabs": 64,
+    "ordered_PB8_variational_slabs": 64,
+    "original_u_diode_off_all_slabs": 64,
+    "original_v_diode_on_entry_positive_derivative_until_guard_strictly_positive": true,
+    "first_slab_with_strictly_positive_v_diode_guard": 2,
+    "original_spark_on_initial_bank_above_off_threshold": true,
+    "first_slab_with_bank_threshold_interval_containing_zero": 56,
+    "remaining_slabs_with_strictly_negative_bank_derivative": 8,
+    "original_terminal_spark_OFF_guard_zero_required_externally": true,
+    "original_J24_event2_numerical_centre_in_interval": 9,
+    "original_J24_event2_entire_original_state_box_in_interval": false,
+    "rigorous_full_9x9_state_derivative_interval": true,
+    "rigorous_start_clock_and_end_clock_derivatives": true
+  },
+  "strict_display_bounds": {
+    "minimum_initial_v_on_slope_lower_approx": "0.4034455195",
+    "maximum_u_off_guard_upper_approx": "-0.6786099075",
+    "minimum_spark_on_bank_offset_before_exit_approx": "0.0001437842384",
+    "maximum_final_bank_slope_upper_approx": "-0.04981017716",
+    "maximum_local_q_approx": "0.04409346342765",
+    "maximum_terminal_state_coordinate_width_approx": "0.00315314864415",
+    "maximum_terminal_tangent_entry_width_approx": "0.00340284747192"
+  },
+  "physical_condition": "Only if original start guard V=0 and original terminal spark OFF guard b-0.0018=0 are jointly met. Positive V entry derivative and negative spark-bank terminal suffix rule out extra switches in this full smooth segment.",
+  "paid_complete_original_smooth_segments_cumulative": 3,
+  "unpaid_original_smooth_segments": 4,
+  "proof_firewall": {
+    "six_root_times_J29_nominal_verified": 6,
+    "original_J24_state_boxes_paid": 5,
+    "original_J30_nominal_tau_return_enclosed": true,
+    "actual_original_sixth_event_state_unpaid": true,
+    "simultaneous_69D_guard_root_unproved": true,
+    "all_original_69D_F_and_DF_unproved": true,
+    "strict_original_Krawczyk_69D": false,
+    "exact_periodic_orbit": false,
+    "physical_device_measured": false,
+    "formal_kernel": false,
+    "github_ci": false
+  }
+}
