@@ -1935,3 +1935,134 @@ for q in range(1,21):
 | N6 | originalClayTransport | conditional #1040 terminal / #1129 standard-machine coverage |
 
 Aristotle BIDI: G44 proves that studying only canonical padded minterm acceptance, even with a stronger linear repeat-span theorem, cannot close the unrestricted endpoint by demanding more repeat coordinates. Shift the mathematical discriminator to nonminimal selectors on the paired slice and require globally correct support, not just witness recognition. Analyze actual signed arithmetic/interpolation costs from the reported G37/R59 algorithm and target-specific width-three correlations; no inference from #P-hard exact multiplicity, independent rank, trace size or restricted circuit complexity alone. No new certification prerequisite; no unconditional P!=NP claim.
+
+
+## 22. P0-G45–G48 — globally rigid locally full ternary constraints and the exact global-compression endpoint (2026-11-24)
+
+Controlling endpoint: literal Clay P vs NP, no Langlands/Monster endpoint work. Inputs: user G42–G44 and Langlands R64–R67 (reported #1549/#120 d70f6ff3ec7f / ec3e8df4f153). Read both original pasted files in the local container; read both P0 roadmaps live at cbc4dd1496c0 / 003733c92e00, common blob 85df78165b31c999e23568155b94480c517600bf. Reuse G13 original selector carrier, G16 median and pair-hull obstruction, G22/G30 monotone CLIQUE projection, G25 actual NOT count, G28/G33/G34 local unary and signed component contraction, G38/G43 central paired encoding, G44 cheap minterm checker, and attached R57 affine-hull contraction. Existing #1006 FactorsThrough/decision-to-witness and ConsumerFibreRepairExact, #1291 signed indexed residual, #123 JMD lowering, #1546 shared DAG, #1474/#1502 Karp/Cook-Levin, #1129 standard machine, #1040 terminal, #607/#678 Aristotle remain source owners/consumers. No new native theorem attachment or kernel check claimed. This packet shifts from accepting traces to actual nonminimal general selectors and asks what local contraction can and cannot remove. No novelty claim about general CSP rigidity or reductions to restricted 3-SAT.
+
+### G45 — explicit constant-size, globally unique, locally full forcing gadget
+
+Let Z have six Boolean variables indexed 0..5. List the 20 triples I in lexicographic order; on each triple forbid exactly one pattern, encoded little-endian by the digit of
+
+    16763747126132141175
+
+in that order. All digits nonzero, hence all-zero assignment allowed. Exact enumeration of all 64 assignments proves it is the unique witness (reproducer below); this finite exhaustive proof suffices for a fixed gadget. Each local triple relation has 7 of 8 patterns. Every unary and binary projection is full, and every nonzero linear functional on F2^3 takes both values (each of its two fibres has size 4 before one deletion). Therefore every local affine hull is full. All remaining scopes, including unary and binary scopes, are unrestricted. G28 unary domain reduction, G33 pair parity contraction, and R57 local affine equations discover no fixed coordinate or equality, yet global solution space is {0}. The exact joint affine hull has dimension zero rather than six. More generally any two disjoint copies of this gadget force all their coordinates zero; add a cross-block clause forbidding 000 to obtain UNSAT, or forbid 111 on the same scope to retain the unique zero witness. These two examples have identical scope cardinalities, local unary/pair projections and local affine hulls, but distinct global decision. This is a precise FactorsThrough collision for that observer, not an assertion of large computational work: the gadget itself is constant size.
+
+### G46 — parsimonious locally-full compiler, with arbitrary selector inputs and fixed-weight option
+
+Define promise L_m: all unary and binary selector patterns available, and each ternary scope either has all 8 patterns or exactly 7. In particular every local unary and pair projection and every affine hull is full; every assignment on at most two variables extends to any third variable while respecting all constraints on those three variables (not a claim of global 3-consistency closure beyond these original scopes).
+
+For arbitrary input selector on q variables, list its N_q possible nonempty width<=3 clauses C_j. Introduce one distinct new occurrence variable a for each literal occurrence in this whole list, whether or not the clause is selected. Add one G45 zero block Z, disjoint from all original and occurrence variables. For every occurrence variable a corresponding to original x, add the two distinct 3-clauses
+
+    (not x OR a OR z_0), (x OR not a OR z_1).
+
+The zero gadget forces z_0=z_1=0 globally, so exactly a=x. For each original clause, use its occurrence copies with the same literal signs, padding a clause of width two with z_0 and a unit with z_0,z_1. Include this new width-three clause iff the original clause is selected. Its triple scope is unique: copies are private to each original clause, the equality triples contain one original and one copy, and zero-block triples contain neither. All clauses have three distinct variables, with at most one clause on any triple. Every target selector coordinate is constant or one original absent-clause bit t_j. Thus this is an explicit monotone coordinate projection into L_m, m=q+6+sum_j |C_j|=O(N_q). All original witnesses extend uniquely by copied values and zero gadget, and every target witness restricts to an original one. W_m(E(t))=W_q(t) exactly. General 3-CNF input with any clause list can use the same compiler with O(number of literal occurrences) variables, including repeated original scopes (normalize literals/tautologies first; empty clause can be mapped to the fixed UNSAT cross-block gadget).
+
+Fixed-weight option: for each C_j add an alternative inert width-three clause on {its first occurrence a,z_2,z_3}, namely (a OR not z_2 OR z_3), selected iff C_j is NOT selected. Since z_2=0 globally this constraint is always satisfied. Scope distinct from all others; even for a unit main scope {a,z_0,z_1} is different. Now every input has exactly 20+2*sum_j|C_j|+N_q forbidden patterns, and exact witness count unchanged. The two conditional available bits are t_j and 1-t_j, so this fixed-weight reduction is a general Boolean projection, NOT monotone. It places the hard instances at one explicitly prescribed weight near the full selector layer; no claim they lie at the central weight or in the near-minterm tractable band. Combining with G38's separate central embedding preserves all witness counts but that embedding does not preserve local fullness of all the added scopes.
+
+Consequences: selector decision on L_m is NP-complete (and exact counting #P-hard by the parsimonious projection from #3SAT); the same holds with the above fixed-weight promise along the compiler lengths. All G28/G33/R57 contractions return the maximal local ambiguity/rank residual even on these instances. This is a target-specific width-three hard core after the previously used local contraction stages. It does not show no other global or arithmetic algorithm can solve the core in polynomial time.
+
+### G47 — retain the strongest monotone bound on the locally-full core without variable blowup
+
+The generic G46 projection from full q-variable selector adds O(N_q) variables and would weaken G30's exponent. Instead apply the local-full compiler directly to G22's original CLIQUE construction: n vertex-choice bits, O(n) fixed threshold circuit auxiliaries and O(n) fixed width<=3 clauses from bounded-fanin Tseitin encoding. Split occurrences and add zero block ONLY for the fixed threshold clauses, adding O(n) variables. For each graph pair {i,j} keep the direct conditional clause (not x_i OR not x_j OR z_0), selected iff the original edge is absent. Each conditional triple distinct and contains two original vertex variables, whereas every fixed compiler triple with an original variable also contains a private copy. All are in L_m, m=Theta(n), and number of forbidden coordinates is O(n^2), even on negative graphs. Projection maps each conditional absent bit directly to positive graph edge; no gates or NOTs added. Witness bijection to chosen cliques of size >=k, with fixed auxiliary gates uniquely determined by choice bits. Thus the external Błasiok–Meierhöfer CCC 2025 Corollary 5 (https://drops.dagstuhl.de/storage/00lipics/lipics-vol339-ccc2025/html/LIPIcs.CCC.2025.4/LIPIcs.CCC.2025.4.html, rechecked this turn) transfers exactly as G30: any AND/OR circuit correct on the locally-full promised inputs (even with at most O(m^2) forbidden coordinates) has size >=2^Omega(N^(5/36) log N) on the chosen hard subsequence, exponent can approach 1/6 from below by G30. Same monotone projection preserves the G25 limited actual-NOT lower bound on its own hard lengths. This is a restricted-model gate lower bound on a nonminimal locally-full promise family, not the central sandwich: G36 forbids the direct monotone slice projection, and the fixed-weight variant of G46 uses complements. No unconditional unrestricted separation.
+
+### G48 — exact global affine compression is Clay-equivalent, even on satisfiable locally-full formulas
+
+Let F(x) be arbitrary width<=3 CNF on q variables. Introduce flag b and enforce b=>F(x) via clauses (not b OR C). For a three-literal C=(l1 OR l2 OR l3), introduce fresh a with a=l1 OR l2, encoded by (not l1 OR a),(not l2 OR a),(l1 OR l2 OR not a), and (not b OR a OR l3). For shorter C, no extra bit needed. This is width<=3 and all auxiliaries uniquely determined for each (x,b). Now apply G46 with all clauses selected. Result is satisfiable (every x extends at b=0) and belongs to L_m. Exact counts on flag fibres:
+
+    W(b=0)=2^q, W(b=1)=W(F).
+
+Hence the distinguished coordinate b is globally forced zero iff F is UNSAT. Deciding whether b can take value one is NP-hard, even given a known satisfying witness at b=0 (construct from x=0, the gate definitions and G46 copies). Deciding globally forced zero is coNP-hard under the same promise. Computing the exact global affine hull, or even its projection to this single flag coordinate, would solve original SAT. Conversely if P=NP, compute a basis of the true affine hull in polynomial time: find one witness by SAT self-reduction; iteratively find a witness outside current affine span by adding a polynomial circuit for violation of at least one of its defining linear equations (XOR and OR gates, encoded with uniquely defined Tseitin auxiliaries). Each successful query increases affine dimension, so at most m+1 iterations, and termination certifies that all witnesses lie in the current span. Unsatisfiable case detected by initial query. Therefore polynomial-time exact global affine-hull construction on satisfiable locally-full promise instances is equivalent to P=NP. The one-bit global support query suffices for the hard direction; no counting assumption. This explains precisely why replacing local affine contraction by exact joint affine contraction cannot be assumed polynomial as an enabling lemma. It is an equivalent endpoint, not a proof of lower bound. The flag construction is distinct from original signed occurrence counts and allows all unrestricted computations.
+
+### Actually executed local regression (exact integer arithmetic, no CI/kernel)
+
+Local Python /tmp/p0_global_rigidity.py: 64 assignments of G45 checked, unique zero; 20 local scopes checked for full pair projections and all 7 nonzero linear directions. All original selectors q=1,2 (260), both ordinary and fixed-weight compilers (520 total), verified by independent exact DPLL model counting of the full emitted formula, with no forced-zero assumption passed to DPLL; 25,804 emitted clauses checked individually for width, unique triple scope and full projections. 36 seeded flag instances q=1,2,3, both flag fibres (72 model-count comparisons), plus local checks on all emitted flag constraints; total compiler local checks including flags 28,700. All passed. The G47 asymptotic transport follows from explicit construction and external theorem, not a new graph-family execution or numerical extrapolation. Reproducer core:
+```python
+from itertools import combinations,product
+from functools import lru_cache
+from collections import Counter
+from random import Random
+D='16763747126132141175'
+F0=[tuple((i,1-(int(p)>>j&1)) for j,i in enumerate(I))
+    for I,p in zip(combinations(range(6),3),D)]
+def brute(q,F):
+ return [x for x in range(1<<q) if all(any((x>>i&1)==v for i,v in C) for C in F)]
+assert brute(6,F0)==[0]
+def local(F):
+ seen=set()
+ for C in F:
+  assert len(C)==3 and len({i for i,v in C})==3
+  I=tuple(sorted(i for i,v in C));assert I not in seen;seen.add(I)
+  p=sum((1-dict(C)[i])<<j for j,i in enumerate(I));A=set(range(8))-{p}
+  for j,k in combinations(range(3),2):assert {(a>>j&1,a>>k&1) for a in A}==set(product(range(2),repeat=2))
+  for h in range(1,8):assert {(a&h).bit_count()%2 for a in A}=={0,1}
+ return len(F)
+assert local(F0)==20
+def compile_(q,clauses,t,balanced=False):
+ z=list(range(q,q+6));F=[tuple((q+i,v) for i,v in C) for C in F0];m=q+6
+ for j,C in enumerate(clauses):
+  assert 1<=len(C)<=3
+  cc=[]
+  for i,v in C:
+   a=m;m+=1;cc.append((a,v))
+   F.extend([((i,0),(a,1),(z[0],1)),((i,1),(a,0),(z[1],1))])
+  if not(t>>j&1):F.append(tuple(cc+[(z[k],1) for k in range(3-len(cc))]))
+  elif balanced:F.append(((cc[0][0],1),(z[2],0),(z[3],1)))
+ return m,F
+@lru_cache(None)
+def count(F,free):
+ if not F:return 1<<free.bit_count()
+ if any(not C for C in F):return 0
+ def sub(i,v):return tuple(sorted(set(tuple(l for l in C if l[0]!=i) for C in F if (i,v) not in C)))
+ for C in F:
+  if len(C)==1:
+   i,v=C[0];return count(sub(i,v),free^(1<<i))
+ freq=Counter(i for C in F for i,v in C);i=max(freq,key=freq.get)
+ return sum(count(sub(i,v),free^(1<<i)) for v in (0,1))
+def cnt(m,F):return count(tuple(sorted(set(tuple(sorted(C)) for C in F))),(1<<m)-1)
+def clauses_(q):
+ return [tuple(zip(I,p)) for w in range(1,min(3,q)+1) for I in combinations(range(q),w) for p in product(range(2),repeat=w)]
+checks=localchecks=0
+for q in (1,2):
+ C=clauses_(q);L=sum(map(len,C))
+ for t in range(1<<len(C)):
+  expected=len(brute(q,[c for j,c in enumerate(C) if not t>>j&1]))
+  for bal in (False,True):
+   m,F=compile_(q,C,t,bal);localchecks+=local(F)
+   if bal:assert len(F)==20+2*L+len(C)
+   assert cnt(m,F)==expected;checks+=1
+assert (checks,localchecks)==(520,25804)
+def flag_formula(q,F):
+ b=q;m=q+1;A=[]
+ for C in F:
+  if len(C)<=2:A.append(((b,0),)+C)
+  else:
+   a=m;m+=1;l,r,s=C
+   A.extend([((l[0],1-l[1]),(a,1)),((r[0],1-r[1]),(a,1)),(l,r,(a,0)),((b,0),(a,1),s)])
+ return m,A,b
+rng=Random(369);fc=0
+for q in (1,2,3):
+ C=clauses_(q)
+ for trial in range(12):
+  F=rng.sample(C,rng.randrange(len(C)+1));m,A,b=flag_formula(q,F)
+  mm,B=compile_(m,A,0);localchecks+=local(B)
+  assert cnt(mm,B+[((b,0),)])==1<<q
+  assert cnt(mm,B+[((b,1),)])==len(brute(q,F))
+  fc+=1
+assert (2*fc,localchecks)==(72,28700)
+```
+
+### Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G45 | locallyFullGloballyUniqueTernaryGadget / localObserverCollision | exact finite construction and proof |
+| G46 | parsimoniousLocallyFullSelectorProjection / fixedWeightLocallyFullHardness | derived and exact DPLL checks |
+| G47 | locallyFullSparseForbiddenMonotoneLowerBound | G30 external theorem via compressed projection, restricted AND/OR; G25 separate limited NOT |
+| G48 | globalForcedFlagHardness / exactGlobalAffineHullClayEquivalence | derived and flag checks, original decision-to-witness consumer |
+| N4/G12a | unrestrictedSerialCharge | OPEN: arbitrary global shortcuts including signed/affine/character/interpolation; no local observer invariant suffices by itself |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN: full locally-full promise, canonical central slice, or direct uniform route |
+| N6 | originalClayTransport | conditional #1040 / #1129 coverage |
+
+Aristotle BIDI: the exact new residual core is locally full yet globally rigid. No need to invent more local affine/median measurements or require expensive count extraction; the one-bit global support query is already equivalent to Clay decision. Next examine global contraction algorithms on this actual core, including the reported 2026 subexponential tensor contraction (G37; not independently audited in this packet). A bound merely on local projections, cardinalities, raw rank, repeat counts, or closure stages would fail to charge arbitrary standard-machine work; the global affine-hull equivalence is an alternative mathematical endpoint, not an established lower bound. No extra phase, no CI/kernel detour, no P!=NP claim.
