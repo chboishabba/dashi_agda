@@ -1186,3 +1186,117 @@ assert (checks,totalcoef)==(1544,222)
 ### R56. Next substantive tranche
 
 Attack the central sandwich support function on its actual marked exterior module, not another coefficient census. The degree lift exposes exact witness count in one coefficient, but Boolean support need not recover that count; any resource charge must apply to arbitrary Boolean monotone DAGs computing the sandwich, not only multiplicity-preserving arithmetic circuits. R53 rules out the existing direct clique projection, so seek a genuinely different approximation/lifting or uniform-machine argument; keep G30 stronger lower bound for the full G and R46 promised bands. A useful positive attack is a sound costed simplification of exterior-support contraction that survives the original central slice, which would be an algorithm for SAT by R50. No promotion from #P hardness to P vs NP, no field homomorphism, no invented Galois action on selector labels. Standard Fourier/exterior/CSP/complexity theory credited; DASHI/JMD and G28–32 ownership retained. No unrelated branch work or CI.
+
+## 16. R57–R63 — affine hull and dual character descent, 3-adic Hermite precision and subexponential shortcut reconciliation (2026-11-24)
+
+Stay on Langlands; read both current attached texts directly from mounted paths. Live other-worker #1548 d0d7d21873068fa4dc4957b24f810774163c3d53, #119 48f329a5b3ae372020f146ff68e50d51c238f9d3, matching blob 59fae07307670ad14bada57b7eb6c8cd6cd17ee3. Live Langlands #1549 d5222023331280549d5b6ddb89ce915e8974b910 / #120 afa8a6d16ac77bb540fd885c97fd2fec78403b48, matching blob 6f241c8c78d2fc157ba6608e743de691ad3ef807. No edits of other worker branches. G33 signed components, G34 component budget, G35 nonbijunctive backdoor, G36 stronger bounded-support projection no-go, G37 reported subexponential theorem transport remain their owners. G35 is a DECISION upper bound; a general bijunctive residual is not an affine residual and exact #2SAT is #P-complete (e.g. monotone negative 2CNF counts independent sets). Do not infer polynomial exact counting just from a 2-SAT decision shortcut. R57 extends G33 by all affine hull equations, R58 gives exact primal/dual Fourier counting, R59 gives actual p-adic interpolation precision, R60 uses new external algorithm authority conditionally.
+
+Actual master source bodies reopened:
+- DASHI/Information/PNFFiniteRankNullityBridgeExact.agda 964c9f7974fb115d76722fa87c1d17572dda39fe: centeredMatrixRankNullity, covarianceRankNullity, source-specific map with external rank-nullity authority. Not an existing GF2 solver.
+- DASHI/Reasoning/DustNoiseWalshCanonicalAdapterExact.agda c6bab37a08ab38e90141f7ae41997695fa808755: fullProbeReconstruction/fullProbeIdentifiability, reuses finite 16-point rational Walsh owner; no promotion into arbitrary circuit proof or new YM work.
+- DASHI/Core/QueryFactorisationSufficiency.agda 98c592232292bbb6c5f0df047c8df3fd42be30d3, existing FactorsThrough semantics.
+- DASHI/Arithmetic/SixWheelCRTExact.agda 7f5648752595f796f16c7e6de68a557f77366fd0: actual CRT inverse; R19/R25 mixed-prime lift.
+- DASHI/Foundations/PolynomialC3S3ReflectionParityFourierExact.agda 9a7a180555dad4a042b2978d576a66814b5fc15c: correct C2 Fourier over characteristic 3, not C3 averaging there. Reuse signed coordinate transport, not identification of all groups.
+- R29 original actual S3 local extension and tame sign epsilon, R36/R44 projector/isometric source restriction, R50–52 exterior sandwich and coefficient formula, G33/R43 original parity/fixed-coordinate producers. Standard linear algebra, Fourier orthogonality and Hermite interpolation credited as classical; DASHI crosswalk is source-specific costed construction. JMD and other worker original attribution preserved.
+
+### R57. Affine-hull compression of the same original assignment space
+
+For each original scope I, nonempty A_I subset F2^I, compute all local equations h dot z = c which hold for every z in A_I. There are <=7 nonzero h per scope. Their common solutions are precisely aff(A_I). Lift to actual original coordinate labels and combine Mx=c; empty scopes or inconsistent system reject. All genuine satisfying assignments lie in this affine space. Gaussian elimination gives an injective parametrization x=x0+B y, y in F2^d, d=m-rank M. This incorporates G28's unary support and G33's parity constraints (each equation obtained from scope support), as well as genuine ternary parity, e.g. x1+x2+x3=1. Do not replace the remaining relation by its affine hull. Define J_B on named assignment basis by J_B|y>=|x0+B y>. Then J_B*J_B=I, original Pi_t factors through this affine fibre, J_B*Pi_t J_B=Pi_res and J_B Pi_res J_B*=Pi_t. J_B tensor I_P intertwines the original S3 Weil action (acts only on P=1+U), commutes with central and marked cubic sector projectors, preserves all actual Hom dimensions and exact witness count. On original central padded slice R50, same isometry followed by the marked wedge inclusion R51 yields the same exterior Hom count. Every affine-only instance has Pi_res=I, W=2^d; no enumeration. All linear equations are over F2, no field homomorphism to F3; arithmetic character values live in characteristic zero.
+
+### R58. Dual character contraction with explicit resource charge
+
+For each residual scope, write f_I(y)=1_{x0|I+B_I y in A_I}. The original local normalized Walsh coefficients a_I(h)=2^{-|I|}sum_{z in A_I}(-1)^(h dot z) are cheaply computed on <=8 patterns. Substituting the affine map yields
+    f_I(y)=sum_{h in F2^I} a_I(h)(-1)^(h dot x0|I) (-1)^((B_I^T h) dot y).
+Combine actual equal frequency labels B_I^T h, retaining signs and cancel exact zeros. A zero local function gives empty fibre; remove constant-one factors. Let L_I be a matrix with independent rows spanning the support frequencies of f_I, excluding zero from rank. k_I=rank L_I<=3. Then f_I(y)=g_I(L_I y) on the full F2^d, since L_I is surjective onto F2^k_I and each frequency has a unique coordinate relative to rows. This g_I is a Boolean function with <=8 entries, computed by small Walsh inversion; its normalized Fourier coefficients are the merged coefficients indexed by alpha_I. Stack L_I into L of s=sum k_I rows, rank r. The common local translation-invariance kernel is ker L: individual f_I(y+v)=f_I(y) for all y iff every support frequency pairs trivially with v. This is the largest translation subgroup preserving EVERY retained local factor, not necessarily largest preserving their product (cancellations or inconsistency may enlarge latter). It is a source-labelled consumer-sufficient quotient, not a rank lower bound.
+
+Two exact equivalent contractions of the original Hom multiplicity:
+    W = 2^(d-r) sum_{z in im L} product_I g_I(z_I),
+    W = 2^d sum_{alpha in ker L^T} product_I ghat_I(alpha_I).
+Proof first: fibre size of linear surjection L onto its image is 2^(d-r). Second: expand each Fourier factor and average over y, using character orthogonality. The sum retains only dual labels whose XOR-weighted frequency is zero. This is trivial-character projection on the external finite assignment translation group. The sign values +/-1 can be evaluated via the actual quadratic local Weil character epsilon at a fixed reflection (R30), but independent external frequency labels are NOT independent local Galois automorphisms. R30's actual ramified S3 P attaches after contraction and is not changed by it. Odd-odd contributions can become even, as in R31; the sum is signed, and local support nonvanishing cannot replace it. k_I=0 constant handling retains the zero mode.
+
+Use unnormalized integer coefficients c_I(alpha)=2^k_I ghat_I(alpha). Then W=2^(d-s) sum_{ker L^T} product c_I, with exact final division if s>d. Each product bit length O(s), sum bit length O(s+d), exact Gaussian elimination over binary matrices and rank parametrizations charged poly(N). Primal enumerates 2^r, dual enumerates 2^(s-r), so deterministic exact count cost poly(N)*2^min(r,s-r), not independent cost for each original assignment/character. For each local factor compute its span coordinates in a chosen independent global row basis by Gaussian elimination (DO NOT enumerate full span to construct coordinates; test script does so only for tiny instances). Further exact direct-sum decomposition: connect global basis-coordinate indices which occur together in a factor's row representations. Each connected block uses disjoint independent global coordinates, so W=2^(d-r) product_B W_B, W_B the count on that block. Let r_B number of basis coordinates and s_B sum of k_I in its factors. Work poly(N) times sum_B 2^min(r_B,s_B-r_B) (include +1 for no blocks), not product of those costs. This is a constructive bound for chosen basis and graph, not a claim globally optimal decomposition or unrestricted lower bound. It supplies exact multiplicities, not automatically a compact original submodule basis or a same-budget witness extractor; witness recovery by conditioning needs its own repeated cost accounting.
+
+Controls: one ternary parity constraint on six variables leaves d=5, r=s=0, W=32; disjoint three binary OR scopes on six variables leave d=r=s=6, three independent blocks with W=3^3=27, dual nullity zero. Dense complete collection of binary OR scopes has no affine constraints, full r=m and s=2 binom(m,2), yet W=m+1 (at most one zero). Thus both r and s-r can be large on polynomial-time count instances, even after this particular block decomposition. Do not charge primal/dual rank, nonaffine count, sign support or kernel dimension as unavoidable work. The remaining target needs semantic resource lower bound after arbitrary sharing. For central sandwich F_K on any weight w, combine computed W with binomial factors; at w=K equality F_K=W. Support outside layer decided by weight alone. No promotion of #P-hard coefficient to decision lower bound.
+
+### R59. Actual 3-adic Hermite recovery and its precision loss (interpolation shortcut)
+
+Reviewed actual OpenAI October 25 2026 revised source, https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex , Theorem 1.1 and overview of Sections 3–6: occurrence-specific rational polynomial linear replacements restore original clause variables at T=0; at positive integer probes i=1..Q grouped by bounded integer measurements; conditioning on measurements separates group sums; shifted-form corrections divisible by z are handled by truncated Taylor data, using inclusion-exclusion on <=J-1 fixed coordinates. This is source review, not full proof audit. We derive an independent exact p-adic final recovery rule for the SAME probe nodes, not assume changing to Teichmuller nodes preserves their measurement designs.
+
+Write H(T) for the rational deformation of the actual count, H(0)=W, deg H<QJ; Taylor jet h_(i,k)=[z^k]H(i+z), k<J. For integral H define
+    L_i(T)=product_(j!=i,1<=j<=Q)((T-j)/(i-j))^J,
+    B_i(z)=product_(j!=i)(1+z/(i-j))^(-J) mod z^J.
+L_i has order J at all other nodes, and B_i is the inverse of L_i(i+z) in truncated ring. Hermite CRT gives
+    H(T)=sum_i L_i(T) [H(i+z) B_i(z)]_(<J) evaluated at z=T-i.
+Degree <QJ and equality of all jets prove equality. At zero,
+    L_i(0)=((-1)^(i-1) binom(Q,i))^J is INTEGER,
+    H(0)=sum_i L_i(0) sum_(k+l<J) h_(i,k) [z^l]B_i(z) (-i)^(k+l).
+Set lambda=(J-1) floor(log_3(Q-1)) for Q>=2, lambda=0 for Q=1. Each coefficient [z^l] B_i is sum of products of negative-binomial coefficients (integers) divided by products of (i-j) with total exponent l. Therefore v_3([z^l]B_i)>=-l floor(log_3(Q-1)); every final recovery weight w_(i,k) lies in 3^(-lambda) Z_3. Thus knowing INTEGRAL jets modulo 3^(h+lambda) suffices to reconstruct H(0) modulo 3^h. This is a sharper sufficient precision budget than charging full confluent Vandermonde determinant: L_i(0) is already integral. Compute scaled weights 3^lambda w_(i,k) as 3-adic integers, accumulate mod 3^(h+lambda), take canonical divisible residue and divide by 3^lambda. No rational infinite precision needed for this final step; polynomial number of ring ops in Q,J and precision bits, with truncated products and modular inverses of 3-adic units. If H rational, choose known positive integer scale D0 clearing all coefficients (e.g. D0=D^L for a common denominator D of replacement coefficients and total clause polynomial degree L); use jets of H'=D0 H. Then extra v3(D0) digits suffice, divide out its power of 3 and invert unit part. Exact rational local evaluation or denominator tracking of internal measurement reconstruction is still required: final modular rule does not prove arbitrary intermediate divisions valid modulo 3^h. Scaling may be polynomial bit length when original coefficients have polynomial bit length, as in reported rational source. Do not infer improved asymptotic contraction exponent from this final precision formula.
+
+Since 0<=W<=2^d, choose 3^h>2^d (h=floor(d log_3 2)+1, or exact integer comparison). The residue of W then determines W and its nonvanishing. This is characteristic-zero 3-adic scalar computation, not reducing actual complex S3 irreps mod 3, not replacing norm subgroup membership with valuation, and not a field hom F2->F3. Over Q3 use original ramified P; coefficients of endomorphism traces are rational/3-adic scalars; h digits needed for exact count, not merely leading cubic phase. Actual R29 extension and conductor remain unchanged. The earlier R19/R25 CRT zero-mode boundary is retained.
+
+### R60. Interpolation support no-go and exact published-bound transport
+
+The recovery weights are genuinely signed. Even simple univariate H(T)=T vs H'(T)=1+T have identical support of every Taylor jet at all positive probes, while H(0)=0 and H'(0)=1. Example H(T)=T arises from genuine original contradictory unit clauses x and not x, with first occurrence unchanged and negative clause's variable replaced by (1-T)x: sum_x x*(1-(1-T)x)=T. H'(T)=1+T can be realized with a single positive literal replaced by (1+T)x. Thus a generic observer retaining only which probe jets vanish cannot recover even original SAT nonvanishing, although these tiny examples are not proof every algorithm's selected designs lose necessary support. They show why positive semiring recovery from probe supports alone cannot be presumed. Our 3-adic precision bound retains signed scalar residuals, not virtual dimensions of deformed representations. No claim deformed factors are actual Boolean projectors for T!=0. H(0) is trace on original Pi_t, but away from zero the arithmetic deformation is not that submodule.
+
+External source Theorem 1.1 reports time poly(n+M)*2^{O_k(n log log n/sqrt(log n))}, polynomial space for fixed width, and bounded clause density time poly(n+M)*2^{O_{k,D}(n/sqrt(log n))}; Sections 3–6 rational interpolation route gives weaker n(log log n)^2/sqrt(log n) exponent, sharper bound by Appendix D tensor contraction. Distinguish reported theorem from independent audit; current turn read actual source sections, not whole proof. Independent source noting finite crossover limits: https://arxiv.org/abs/2611.00517 . G37 credit. After G33 parity component contraction (c variables), width stays <=3, so conditional reported upper applies poly(N)*2^{O(c log log c/sqrt(log c))}; do NOT apply directly with d from R57 since arbitrary affine coordinate substitution can turn each literal into a long parity. Encoding new parity auxiliaries can expand variable count; cost separately. Conditional exact count/exterior support on whole central family: w!=K trivial, w=K original width3 selector SAT on m variables, so deterministic bit-time poly(N)*2^{O(m log log m/sqrt(log m))}, with m=Theta(N^(1/3)); standard bounded-fanin circuitization may square time but keeps subexponential form. Valiant 1986, *Negation is Powerless for Boolean Slice Functions*, DOI 10.1137/0215037, https://epubs.siam.org/doi/10.1137/0215037 (classical Berkowitz antecedent) yields constant-factor monotone simulation plus O(N log^2 N). Thus conditional monotone size of central sandwich <=poly(N)*2^{O(N^(1/3) log log N/sqrt(log N))}; a lower-bound target claiming 2^{Omega(m)} on this family would conflict with reported algorithm. This does not imply polynomial size nor refute the full-G monotone lower bound of G30/R53; full G not a slice. G36's bounded-support extension rules out direct local preprocessing for the known CLIQUE projection, not all global monotone reductions. On parity-contracted inputs R58's exact Fourier/block algorithm is unconditional and can be chosen instead of reported algorithm when cheaper. Need general cost bound against both; do not add formal-certification prerequisite.
+
+### R61. Local exact execution (actually performed)
+
+Executed /tmp/langlands_r57.py in container, exact Python integers and Fraction; no CI, native prover or local-field oracle. 740 original selector inputs (all 260 m=1,2 and 480 deterministic random m=3..8), 489 consistent nonempty-affine-reduction cases, 366 block-level primal/dual comparisons with dual-nullity cap 14; three explicit controls as above. For Q=1..12,J=1..6: all 1,638 monomials of degree 0..QJ-1 tested Hermite linear weights, and 1,638 separate modular 3-adic recovery checks at h=8; denominator valuations checked for every weight. All passed. Tiny test enumerates span and brute force as oracle, not asymptotic algorithm. Reproduce exact weights and modular check:
+```python
+from fractions import Fraction as F
+from math import comb
+def conv(a,b,J):return [sum(a[i]*b[j-i] for i in range(j+1)) for j in range(J)]
+def vp(n):
+    n=abs(n);v=0
+    while n and n%3==0:n//=3;v+=1
+    return v
+def weights(Q,J):
+    out=[]
+    for i in range(1,Q+1):
+        b=[F(1)]+[F(0)]*(J-1)
+        for j in range(1,Q+1):
+            if i!=j:b=conv(b,[F((-1)**l*comb(J+l-1,l),(i-j)**l) for l in range(J)],J)
+        L=F(1)
+        for j in range(1,Q+1):
+            if i!=j:L*=F(-j,i-j)**J
+        assert L==((-1)**(i-1)*comb(Q,i))**J
+        out.append([L*sum(b[l]*(-i)**(k+l) for l in range(J-k)) for k in range(J)])
+    return out
+checks=0
+for Q in range(1,13):
+    for J in range(1,7):
+        w=weights(Q,J);loss=(J-1)*max([vp(j) for j in range(1,Q)] or [0])
+        M=3**(8+loss)
+        assert all(vp(v.denominator)<=loss for row in w for v in row)
+        for deg in range(Q*J):
+            jet=[[comb(deg,j)*i**(deg-j) if deg>=j else 0 for j in range(J)] for i in range(1,Q+1)]
+            assert sum(w[i][j]*jet[i][j] for i in range(Q) for j in range(J))==int(deg==0)
+            z=0
+            for i in range(Q):
+                for j in range(J):
+                    a=w[i][j]*3**loss
+                    assert a.denominator%3
+                    z=(z+a.numerator*pow(a.denominator,-1,M)*(jet[i][j]%M))%M
+            assert z%3**loss==0 and z//3**loss==int(deg==0);checks+=1
+assert checks==1638
+```
+Affine/dual reproduction algorithm: enumerate original scopes I of size 1..3 in increasing size/lexicographic order, local pattern p in little-endian integer order; for m=1,2 enumerate every selector bitmask; for m=3..8 use Random(20261124), 80 cases each, start with all patterns, draw planted=rng.randrange(1<<m), pick rng.sample(list(A),min(len(A),rng.randrange(1,9))) scopes, keep each pattern with rng.random()<.6, add planted pattern in even cases. Use Gaussian elimination on every locally constant nonzero parity, reject empty/inconsistent, affine substitute, compute merged local Walsh coefficients as R58, use independent row basis and connect indices co-occurring in each factor, calculate each block primal count and dual count when s_B-r_B<=14, compare whole product times 2^(d-r) with brute-force original count. The actual executed script is local; the reproducer and construction above record the tests without claiming a native proof or certification of the asymptotic external theorem.
+
+### R62. Endpoint-first ledger
+
+| Gate/phase | Deliverable | Status / source -> consumer |
+|---|---|---|
+| R57/B-C | actual affine-hull projector compression; rank-nullity count on affine-only residual | derived; G33/R44 -> R58 |
+| R58/C | exact dual-character contraction, common kernel and independent block count | derived; R2/R30 sign, R31, R52, FactorsThrough -> genuine charged shortcut and controls |
+| R59/C | p-adic Hermite final recovery with explicit precision loss | derived; R19/R25 and actual reported probe/jet construction -> R60; no claim full preprint audit |
+| R60/C | probe-support no-go, reported subexponential algorithm transport and central-slice size ceiling | derived support counterexample, external theorem-dependent time bound; G37 + Berkowitz–Valiant -> N4/N5 |
+| R61 | exact local checks | executed, no CI or kernel |
+| R7a'/LGC4d/C | joint ramified arithmetic residual beyond affine/dual/measurement compression | actual conditional algorithms and precise scalar consumer supplied; universal resource obstruction open |
+| R7b'/LGC5/C | universal charged obstruction surviving signed dual sum, arbitrary quotient/shared circuit and interpolation/tensor shortcuts | OPEN P0 |
+| R7c/LGC6/D | superpoly central sandwich monotone size or direct uniform-machine SAT lower bound | OPEN P0; cannot reuse full G's monotone bound or raw exponential dimension |
+| LGC7/N6/E | literal Clay endpoint | conditional existing consumer only |
+
+### R63. Next mathematical tranche
+
+Do not initiate another rank/character census. R58 gives concrete bidirectional primal/dual cost and R59 supplies exact finite 3-adic recovery. Next inspect the actual shared-measurement design construction and Appendix D contraction in the reported preprint, identify precise paid parameters, and ask whether a new signed contraction or obstruction can be proved on the original central sandwich under those operations. A universal size lower bound would need to survive any alternative representation, not just these exact evaluation methods; a positive polynomial-time algorithm on central slice would solve original SAT via R50. Do not conflate finite coefficient reconstruction or #P hardness with Boolean lower bound. No unrelated Monster/YM/RH work; no new kernel certification requirement.
