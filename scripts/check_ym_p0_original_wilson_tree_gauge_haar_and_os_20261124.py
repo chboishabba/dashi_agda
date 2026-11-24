@@ -158,6 +158,28 @@ checks['finite_haar']+=4
 assert reduced[0]>0 and reduced[3]*reduced[0]-reduced[1]*reduced[2]!=0
 checks['finite_haar']+=2
 
+# STRONGER W1/W3 transport: EACH labelled bare original Mayer coefficient,
+# not merely its summed signed two-source covariance, is Haar-tree invariant.
+# This is for gauge-invariant individual Wilson plaquette factors, NOT yet
+# Bałaban's gauge-fixed R-modified CMP116 physical polymer activities.
+def marked_mayer(e0,e1,e2,e3,mask):
+    l1=prod(e0,e1,e2); l2=prod(e0,e1,inv(e3)); l3=mul(l1,inv(l2))
+    F=1-l1[0]; G=1-l2[0]
+    factors=tuple(q**(1-l[0])-1 for l in (l1,l2,l3))
+    z=Q(1)
+    for j in range(3):
+        if mask & (1<<j):z*=factors[j]
+    return (z,z*F,z*G,z*F*G)
+for mask in range(8):
+    fullco=(Q(0),)*4; redco=(Q(0),)*4
+    for e0,e1,e2,e3 in product(Q8,repeat=4):
+        fullco=add(fullco,marked_mayer(e0,e1,e2,e3,mask))
+    for e2,e3 in product(Q8,repeat=2):
+        redco=add(redco,marked_mayer(one,one,e2,e3,mask))
+    for left,right in zip(fullco,redco):
+        assert left/Q(8**4)==right/Q(8**2)
+        checks['finite_haar']+=1
+
 # Same-H dense-core implication (a logical consumer, not Wilson spectral data):
 # If for every vector in a DENSE centered subspace of one positive OS H,
 # <v,e^-tH v> <= C_v e^-mt for all t, then spectral projection below m
