@@ -5559,6 +5559,13 @@
       "all_Clay_endpoints_proved": "0/6",
       "script_blob": "f5e4b640f2d04b13fdf97fc1c29a2d7de6135981",
       "signed_lower_corollary": "CLASSICAL uniform-in-cutoff lower bound 4 int F >=-32/nu ||u0Fourier||_ell1^4, NOT R568 C1 upper nor R653 C2"
+    },
+    "pnp_p0_g13_live_20261124": {
+      "scope": "current owner #1548 source-geometry reconciliation, no historical 135-term reclassification",
+      "owner_head": "9cd7ebdc7459ed956f77281642ce62754f8483e2",
+      "first_unpaid": "G12a/G12b/G12c arbitrary serial triangular AND resource obstruction (or parallel universal N4/N5)",
+      "universal_endpoint": "OPEN",
+      "status_change": "NONE"
     }
   },
   "ns_r568_actual_galerkin_20261123": {
@@ -5746,5 +5753,41 @@
       "original_R653_C2": "NOT PAID: strict physical retained-margin packet lower is a different relative inequality",
       "formal_rational_field_kernel": "OPEN"
     }
+  },
+  "pnp_p0_g13_live_20261124": {
+    "as_of": "2026-11-24",
+    "controlling_owner": "https://github.com/chboishabba/dashi_agda/pull/1548",
+    "inspected_head": "9cd7ebdc7459ed956f77281642ce62754f8483e2",
+    "controlling_roadmap": "Docs/roadmaps/ClayP0PolynomialCoverageEndpoint20261124.md on PR #1548; blob 7254ad6c6460bb355e57e7bdbcea4cc18dd6fa61",
+    "lean_owners": [
+      "https://github.com/chboishabba/dashi_lean4/pull/119",
+      "https://github.com/chboishabba/dashi_lean4/pull/118",
+      "https://github.com/chboishabba/dashi_lean4/pull/120"
+    ],
+    "nonduplicate_crosswalk": "Docs/roadmaps/ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md six-Clay endpoint-first section 24 Nov; no new P0 compiler on NS #1543",
+    "now_existing_mathematics": {
+      "G13a": "V+aV=(1+a)V direct-sum aV, fixed operand restriction/chord criterion",
+      "G13b": "two AND targets modulo V exactly parallel ab+uv OR serial (ab+u)v (all a,b,u,v in V including constants)",
+      "G13c": "3SAT NP-complete clause-selector function F_m on N_m=sum 2^j binom(m,j)=Theta(m^3); assignment flats H_x with joint codimension",
+      "G13d": "polynomial existential quadratic witness lift vs deterministic triangular AND lift, NOT equivalent as efficient solver",
+      "G13e": "minimum DNF size 2^m, unit-only same-family restriction also DNF 2^m but MC=2m-1, so DNF flat count NOT a paid all-AND lower bound"
+    },
+    "actual_open": [
+      "G12a/G6a serialTargetShiftBound under arbitrary serial nonlinear re-use and state translation",
+      "G12b/G6b selectorGoalSeparation from simultaneous width-2 and width-3 interactions",
+      "G12c/G6c selectorSuperpolynomialGrowth in ENCODED length N_m for unrestricted triangular deterministic lifts",
+      "N1–N3 polynomially costed semantics-preserving standard model coverage (parallel)",
+      "N4/N5 U2–U4 universal charged SAT lower bound (parallel)",
+      "N6 literal original Clay SATLowerBoundProducer terminal consumption after true theorem"
+    ],
+    "negative_controls": [
+      "Unit-only selector consistency U_m has 2^m DNF terms but exact MC=2m-1",
+      "G13b must permit parallel AND and serial AND with operands including constants; earlier restricted constant bug fixed by P0 owner",
+      "A polynomial existential quadratic lift is not a deterministic polynomial computation",
+      "Do not measure lower bound against m or number of assignments when input has N_m=Theta(m^3) bits"
+    ],
+    "independent_new_checks_here": "No G13 owner suite rerun on NS #1543; inspected source only; do not copy #1548 proofs or imply kernel receipt",
+    "universal_P_not_equals_NP": "OPEN",
+    "original_six_Clay_endpoints_proved_by_DASHI": "0/6"
   }
 }
