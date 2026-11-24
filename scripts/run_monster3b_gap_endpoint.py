@@ -105,7 +105,7 @@ def strict_main_receipt(data: dict, validate) -> dict:
             raise ValueError("incomplete source 12/78 original Irr pairing records")
         def pairs(key):
             raw = data[key]
-            if (not isinstance(raw, list) or len(raw) != 2
+            if (not isinstance(raw, list) or len(raw) not in (0, 2)
                 or any(not isinstance(p, list) or len(p) != 2 or
                        any(type(n) is not int for n in p)
                        for p in raw)):
@@ -123,7 +123,8 @@ def strict_main_receipt(data: dict, validate) -> dict:
         if type(selected_dual) is not bool:
             raise ValueError("selected same-C3 dual Sym2 bit must be boolean")
         if core["full_nebe"]:
-            if (selected_dual is not True or
+            if (len(same) != 2 or len(direct) != 2 or len(dual) != 2 or
+                selected_dual is not True or
                 {tuple(x) for x in same} != {tuple(x) for x in dual} or
                 {tuple(x) for x in same} & {tuple(x) for x in direct}):
                 raise ValueError("selected Nebe Sym2 same-C3 and dual-Sym2 maps disagree")
