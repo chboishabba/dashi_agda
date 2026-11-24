@@ -1176,3 +1176,85 @@ MORE work and memory than the existing GMP
 radical certificate. No performance gain is
 claimed. Complete equations in the projective
 residual roadmap, G6/COMP5o.
+
+
+### 24 November — COMP5p/q/r: exact projective source content as a terminal resource quotient
+
+The latest P-vs-NP #1548 signed-source
+valuation analysis and ramified
+Langlands/GCT #1549 relative
+reconstruction/carry ledger reinforce a
+source-level rule: factor out **known exact
+common content before constructing large
+representations**, while keeping the
+source scale and signed residual needed
+for selected future consumers. This
+is analogy and methodology, not an
+application of either research programme's
+separation/correspondence claims.
+
+In the *original* Chudnovsky leaf matrix
+\(M_j=\bigl(\begin{smallmatrix}p_j&t_j\\0&q_j\end{smallmatrix}\bigr)\),
+every \(j\ge1\) admits the exact
+positive scalar 24:
+\(M'_j=M_j/24\). Under the
+original ordered multiplication, for
+\([0,n)\) the normalized triple is
+\((P',Q',T')=(P,Q,T)/24^{n-1}\).
+The signed adjacent delta and every
+original rational \(T/Q\) right-extension
+consumer are unchanged by this
+common projective gauge; literal
+raw P/Q/T is NOT unchanged.
+Maximum uniform factor is 24 since
+\(\gcd(|p_1|,|p_2|)=
+\gcd(120,5544)=24\).
+
+The *additional* per-index exact
+gcd \(h_j=\gcd(
+(2j-1)(6j-5)(6j-1),
+(640320^3/24)j^3)\)
+has only support on primes 3,5,23,29
+(with the universal 2^3 already removed).
+Its prime valuations are computable
+from named small source factors and j,
+without calling a general GMP gcd.
+Normalize the leaf by \(24h_j\);
+record the original-source
+scale recipe \(\prod_{j=1}^{n-1}24h_j\)
+as an indexed provenance witness.
+The exact mathematical projective
+identity follows by bilinearity of
+the upper triangular matrix product,
+not by empirical π hash agreement.
+
+New research implementation files
+\`check_pi_p0_projective24_leaf.cpp\`
+(COMP5p), \`check_pi_p0_projective24_residual_witness.cpp\`
+(COMP5q), and
+\`check_pi_p0_indexed_prime_content.cpp\`
+(COMP5r) are deliberately standalone,
+**uncompiled and untested**, with no
+new timing or GMP memory measurements.
+The first uses direct factor-free
+leaf formation; the second also
+uses the COMP5l signed remainder
+witness; the third computes exact
+prime-local extra factor by constant
+prime support tests plus two exact
+divisions. All three leave the prior
+measured COMP5j default unchanged.
+
+Projective source authenticity and
+literal original raw-triple reopening
+remain distinct consumers and must be
+charged separately under Paper 9 §10,
+\`FibreProgramComplexityExact\` and
+\`EfficientRecoverableQuotientExact\`.
+Full equations and exact PNP/Langlands
+attribution boundaries live in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+No Agda/Lean kernel, source-verified
+benchmark, new analytic Chudnovsky
+identity/Bishop result or external SOTA
+claim is made.
