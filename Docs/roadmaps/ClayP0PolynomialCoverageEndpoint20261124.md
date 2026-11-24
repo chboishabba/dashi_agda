@@ -813,3 +813,157 @@ assert (jet_checks,filtration_checks)==(46486,71)
 | N6 | originalClayTransport | #1040 conditional terminal; actual universal SAT failure unpaid |
 
 Highest-alpha next action: back-solve the width-three-specific obstruction from the deterministic section (or decision) on the full original selector carrier, not just its isolated maximal-selector neighbourhood. The new exact jet calculation gives a discriminator and the width-two shortcut disproves the proposed simple charge; use Aristotle #607/#678 collision/reopening, #123 costed lowering, #1006 FactorsThrough, #1291 indexed joint geometry and #1546 shared computation. Test any next target-sensitive measure against width-one and width-two families before spending time on more finite flag census. Direct uniform N4/N5 remains an OR route, and is weaker than unrestricted circuit separation. Do not claim that phase-sensitive data alone evade natural-proofs or other complexity barriers. No unconditional separation or native kernel verification claimed.
+
+
+## 14. P0-G16–G19 — binary/ternary constraint geometry, monotone separation and propagation lift obstruction (2026-11-24)
+
+**Controlling endpoint: literal Clay P vs NP.** Continue P0-C/D, no additional mandatory research phase. Reuse the two supplied inspiration documents (G14/G15 and the binary/ternary arithmetic donor #1549/#120); no Langlands or Monster closure is needed. G14's unrestricted MC(F_m,3)>=N_m,3-1 is stronger than the donor's stabilizer bound ceil(N_m,3/2). Retain both with their scope. Field, carrier cardinality, clause width, relation arity and circuit basis are distinct.
+
+Source owners reopened on default branch this turn:
+- DASHI/Codec/BalancedTritBitFibre.agda, blob 9fa72fc85938f78aa64cc53443a06ada3824280a: encodeFibre/decodeFibre, decode-encode, encode-decode, supportBit, OptionalSignBit, encode-commutes-involution. Zero has absent sign; signed nonzero fibres remain distinct.
+- DASHI/ComputerScience/BinaryBalancedTernarySubcarrierExact.agda, blob c9ade4f43191c2790f62230c805e95d29e2e36e6: embedBit false=-1, true=+1, binaryTernaryRoundTrip, centreIsUnusedByBinaryEmbedding, complement as antipode.
+- DASHI/Foundations/Base369BinaryTernaryRefinement.agda, blob 6345afd94fda8b8b5a45f635bf3fba6486c1998d: Resolution23, binary-ternary-refinement-commutes, circlePhaseRefinementDiamond. Refinement index diamond, not a cost-preserving reduction of arbitrary constraints.
+- DASHI/Mathematics/Complexity/Karp21CliqueSetPackingExact.agda, blob ddffdd6e4276c263f3e96be129598c502005a3b2: cliqueToPacking, packingToClique. Witness equivalence, not an existing monotone selector compiler; supply actual monotone projection below.
+- Earlier G13/G14/G15 and #1040 terminal, #1129 costed machine, #1006 SAT self-reduction and FactorsThrough, #1474/#1502 Karp/Cook-Levin, #123 JMD lowering, #1291 indexed geometry, #607/#678 Aristotle and #1546 sharing remain controlling donors. Previous heads ca442a027f3d / cb77c205529e, common blob 75267c821aa140e8f0dbb7e28ea9d068c3888e05.
+
+### G16a — pairwise reconstruction equals median closure (known bijunctive characterization)
+
+For m>=1 and R subset {0,1}^m, H2(R) is the intersection of inverse images of all nonempty unary and binary projections of R. Every binary Boolean relation is coordinatewise majority-closed: if a forbidden pair were the median of three allowed pairs, at least two rows match its first coordinate and two match its second, so one row matches both. Thus H2 is median-closed and contains R. Conversely if S is median-closed and a point has every unary/binary projection in S, induct on the number k of coordinates matched by a point of S. Base k<=2 holds by hypothesis. For k>=3 take three witnesses agreeing on the desired k coordinates except possibly three different single coordinates, one omitted per witness. Their median agrees on all k. Apply to S=median closure of R; its unary/binary projections equal those of R by binary closure. Hence H2(R)=medianClosure(R). Equivalently a Boolean relation is 2-CNF definable iff median-closed, because each excluded unary/binary pattern contributes a clause of width at most two. Empty relation included by contradictory units. This is classical Schaefer bijunctivity (https://doi.org/10.1145/800133.804350), not a claimed new dichotomy.
+
+For a 3-clause excluding 000, all pair projections are full and H2(R) is the full cube; 100,010,001 are models with median 000. Literal complement transports all eight polarities. More generally, three satisfying assignments of a 3-CNF violate a clause in their coordinatewise median iff the three rows of truth values of that clause's literals form a 3x3 permutation matrix: every row must have at least one true literal; median failure means every column has at most one; hence exactly one per row and column. This identifies the minimal local ternary defect. It does not prove a global resource lower bound; Horn 3-CNF and ternary parity equations are tractable by other algebraic closures.
+
+### G16b — actual support/sign witness bridge and projection no-go
+
+For each active clause of width two use a Boolean antipodal witness choosing its satisfied literal; width three uses an actual balanced trit t in {-1,0,+1} labelling its three literal positions. Require t=label_i implies literal_i(x)=1 for each i. Then there exists a local witness iff clause is true. Inactive selectors may have arbitrary witness; for fixed input select only active clauses. For width two the implication on a witness bit and assignment bit is a 2-clause. For width three these constraints are binary RELATIONS on a mixed 3-element/2-element domain. The problem is still NP-complete: pairwise arity is not Boolean domain size. Encode the trit by the existing support/sign fibre, for example fixed two-bit codes zero=(0,0), positive=(1,0), negative=(1,1); the sign bit in the zero code is padding, not a sign of zero. The three-way local witness survives losslessly. There is no existential 2-CNF formula with original assignment bits as visible coordinates whose projection is this single 3-clause, for any number of Boolean auxiliaries or any encoding of the witness: existential projection preserves median closure (choose three lifts and take their median), contradiction to G16a. This is a genuine representation-transport no-go in the specified language, not a prohibition of polynomial algorithmic reductions to arbitrary Boolean circuits or a proof of P!=NP. A 3-ary witness domain and a width-three Boolean clause are not the same object.
+
+### G17 — genuine superpolynomial bound on monotone selector computation
+
+Use complementary selector bits t_C=1+s_C (one means clause absent), and G_m,w(t)=F_m,w(1+t), a monotone increasing function. Equivalently U_m,w(s)=1+F_m,w(s) is monotone unsatisfiability. AND/OR circuits for the two functions have equal complexity by swapping AND/OR and constants under Boolean duality.
+
+Width two: build literal implication graph with edge bits given by selected clauses; a unit gives the implication not l -> l. Reachability on 2m vertices can be computed by Boolean Floyd-Warshall, R^h_ij=R^(h-1)_ij OR (R^(h-1)_ih AND R^(h-1)_hj). Unsatisfiability iff any variable and its negation are mutually reachable. This gives an O(m^3) monotone AND/OR circuit for U_m,2, and by duality for G_m,2. It does not claim that plain unit propagation on an arbitrary 2-CNF is complete.
+
+Width three: explicit monotone projection from CLIQUE(n,k) to G_M,3. Use k slots and Boolean variables x_(i,v) for each slot and each graph vertex. Fixed clauses require exactly one vertex per slot (pairwise at-most-one, one at-least-one disjunction per slot) and different vertices in different slots. Convert each length-n positive at-least-one clause to width <=3 by the usual fresh-variable chain (a1 OR a2 OR y1), (not y1 OR a3 OR y2), ..., (not y_last OR a_(n-1) OR a_n). Existential equivalence follows by eliminating each auxiliary: exists y [(a OR y) AND (not y OR b)] iff a OR b, for disjunctions a,b. For n>=3 use n-3 fresh variables per slot, so M=k(2n-3). For each i<j and u!=v, include the 2-clause (not x_(i,u) OR not x_(j,v)) iff edge {u,v} is absent. With t-complementary selectors the fixed clauses have t=0, unused t=1, conditional nonedge clauses t=e_(u,v) (the graph edge input). Conditional clauses are distinct up to canonical order and never conflict with fixed clauses; repeated graph input wires are free fanout. Thus all target inputs are constants or unnegated graph inputs, and
+
+    CLIQUE_n,k(e)=G_M,3(t(e)).
+
+Both directions: a satisfying assignment chooses k distinct pairwise adjacent vertices; a clique can be ordered into the slots and all fresh chain variables chosen to satisfy fixed constraints. M=O(kn), N_M,3=Theta(M^3); no truth-table expansion, no additional circuit gate charged for the projection.
+
+External theorem (not a new DASHI lower bound proof): Cavalar, Kumar and Rossman, Monotone Circuit Lower Bounds from Robust Sunflowers, Algorithmica, Theorem 5, https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/ : for fixed delta in (0,1/3) and k=n^(1/3-delta), monotone CLIQUE size is Omega(n^(delta^2*k/2)). Choose delta=1/12 and n along perfect fourth powers, k=n^(1/4). Restrict any monotone G_M,3 circuit by the explicit projection without increasing its gate count. Since N=N_M,3=Theta(n^(15/4)), this establishes on that subsequence
+
+    MonotoneSize(G_M,3) >= 2^Omega(N^(1/15) log N).
+
+This is a genuine superpolynomial lower bound on the SAME original selector family in the monotone circuit model, with standard shared DAGs and arbitrary monotone bypasses. It is imported by an explicit new projection construction here, not a new proof of the external theorem. It is NOT an unrestricted AND/XOR/NOT lower bound. In particular G14's MC>=N-1 remains the general lower bound. A monotone circuit size lower bound cannot be converted by declaring XOR free and monotone; XOR and NOT can create nonmonotone internal functions even for a monotone output.
+
+### G18 — deterministic lift obstruction for fixed propagation-complete encodings
+
+A useful corollary for G13/G15: let E_M(s,z) be any fixed finite CNF with auxiliaries z, where setting selected s_C=1 and leaving the remaining selectors unassigned makes E satisfiable exactly when the selected 3-CNF is satisfiable. For example E can encode the existential relation under total selector assignments; by monotonicity its existentially unassigned selectors have the same consistency property. Assume unit propagation on E under those positive partial selector assignments detects every unsatisfiable case. Let L count selector variables, auxiliary variables and clause literal occurrences, including empty clause overhead. Then simulate all unit derivations synchronously by monotone Boolean circuitry. For each literal l, d_l^0 is 1 for initially given units (positive selector l has input s_C; other literals start false unless forced by fixed units). Recur
+
+    d_l^(r+1) = d_l^r OR OR_{K containing l} AND_{a in K minus {l}} d_(not a)^r.
+
+Include contradiction if some clause has all its literals falsified or both l and not l are derived. Fixed empty clauses immediately trigger contradiction. This is monotone, and forward chaining of at most 2p literals (p variables) stabilizes by 2p rounds. Width may be arbitrary, using bounded-fanin gates with O(L^2) per round, O(L^3) overall. For satisfiable inputs the inference is sound; assumed completeness means output equals U_M,3. G17 implies L is superpolynomial, quantitatively at least 2^Omega(N^(1/15) log N) along the same subsequence (taking a cubic root changes only constants). This rules out polynomial-size fixed CNF encodings making unit propagation a complete decision procedure for every positive partial selector input, even with arbitrary auxiliary variables. This is the selector-specific application of established propagator/monotone circuit correspondence (Bessiere, Katsirelos, Narodytska, Walsh, IJCAI 2009, https://ijcai.org/Abstract/09/076). The proof does not require a uniform construction of E and does not apply to input-dependent preprocessing, branching, arbitrary resolution search or arbitrary nonmonotone circuit evaluation.
+
+Width two has a polynomial propagation checker: encode the monotone reachability circuit for U_M,2 by forward Horn implications (AND: not a OR not b OR g; OR: not a OR g, not b OR g) and impose not output. When a positive partial input forces U=1, forward propagation derives output and contradiction. When U=0, choose unspecified inputs zero and assign gates actual values, yielding a satisfying checker. Thus there is a concrete polynomial vs superpolynomial separation for fixed complete propagation lifts, not a conclusion about arbitrary deterministic sections.
+
+### G19 — chord control and remaining Clay obstruction
+
+General monotone-to-unrestricted cost equivalence is false: bipartite perfect matching has polynomial algorithms and superpolynomial monotone circuit lower bounds (Razborov 1985; see https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/RAN/MATCHING/matching.pdf and https://eccc.weizmann.ac.il/report/2025/102/). This is the same-endpoint chord control for G17/G18. Neither median failure, ternary encoding, exponential labelled jet rank, nor monotonicity of target output implies an unrestricted lower bound. The P0 question is a width-three-specific charge on all nonmonotone triangular lifts, or a direct standard-machine proof; no generic monotonicization lemma is admissible.
+
+Precise potential crosswalk: let U be the actual monotone unsat function and let C range over all bounded-fanin circuits, including nonmonotone. G17 gives lower bound L(N) only for circuits with AND/OR and monotone input coordinates. A sufficient but unproved target-specific transport would map every correct general C for U to a monotone circuit of size poly(N,|C|), or more weakly at most 2^o(N^(1/15) log N) for polynomial-size C along the hard subsequence. No such transport asserted. Alternative G12 route remains any noncircular serial-safe measure separating actual 3-SAT and exceeding all polynomials in N. If proving transport, ensure all arbitrary nonmonotone internal functions, XOR, NOT, sharing, input-dependent branch choices and alternate encodings are allowed; matching refutes universal monotone transport. Do not assume canonicalization solves it.
+
+### Executed local regression
+
+Local Python integer/bitset execution (no CI or native kernel): all 276 Boolean relations on 1–3 coordinates tested for equality of explicit median closure and pair-projection hull (4+16+256). All 192 three-clause polarity / injective two-bit trit-label encoding combinations tested for exact projection and median failure. All 220 graph instances across (n,k)=(2,1),(2,2),(3,1),(3,2),(3,3),(4,1),(4,2),(4,3) tested by evaluating every assignment of the emitted fixed and conditional 3-CNF using integer bitsets, independently comparing with enumerated vertex subsets. All 260 width-two selector inputs at m=1,2 compared between Floyd-Warshall and brute-force SAT. No native proof or asymptotic test claim. Reproducer:
+
+```python
+from itertools import combinations, permutations
+
+def med(a,b,c):return (a&b)|(a&c)|(b&c)
+checks=0
+for n in (1,2,3):
+    for s in range(1<<(1<<n)):
+        R={x for x in range(1<<n) if s>>x&1}; H=set(R)
+        while True:
+            W=H|{med(a,b,c) for a,b,c in combinations(H,3)}
+            if W==H:break
+            H=W
+        scopes=[1<<i for i in range(n)]+[(1<<i)|(1<<j) for i,j in combinations(range(n),2)]
+        ps=[{a&M for a in R} for M in scopes]
+        assert H=={a for a in range(1<<n) if all(a&M in p for M,p in zip(scopes,ps))}
+        checks+=1
+assert checks==276
+checks=0
+for pol in range(8):
+    for enc in permutations(range(4),3):
+        R={(x<<2)|enc[i] for x in range(8) for i in range(3) if ((x^pol)>>i)&1}
+        assert {x>>2 for x in R}==set(range(8))-{pol}
+        assert med(((pol^1)<<2)|enc[0],((pol^2)<<2)|enc[1],((pol^4)<<2)|enc[2]) not in R
+        checks+=1
+assert checks==192
+
+def clique_cnf(n,k):
+    fixed=[]; conditional=[]; m=k*n
+    for i in range(k):
+        p=[1+i*n+v for v in range(n)]
+        for a,b in combinations(p,2):fixed.append((-a,-b))
+        while len(p)>3:
+            m+=1;fixed.append((p[0],p[1],m));p=[-m]+p[2:]
+        fixed.append(tuple(p))
+    for i,j in combinations(range(k),2):
+        for u in range(n):
+            for v in range(n):
+                c=(-(1+i*n+u),-(1+j*n+v))
+                if u==v:fixed.append(c)
+                else:conditional.append((tuple(sorted((u,v))),c))
+    return m,fixed,conditional
+checks=0
+for n,k in [(2,1),(2,2),(3,1),(3,2),(3,3),(4,1),(4,2),(4,3)]:
+    m,fix,cond=clique_cnf(n,k);full=(1<<(1<<m))-1
+    v=[sum(1<<a for a in range(1<<m) if a>>i&1) for i in range(m)]
+    def mask(c):
+        t=0
+        for a in c:t|=v[a-1] if a>0 else full^v[-a-1]
+        return t
+    base=full
+    for c in fix:base&=mask(c)
+    edges=list(combinations(range(n),2));constraints=[full]*len(edges)
+    for e,c in cond:constraints[edges.index(e)]&=mask(c)
+    for z in range(1<<len(edges)):
+        a=base
+        for i,b in enumerate(constraints):
+            if not(z>>i&1):a&=b
+        expected=any(all(z>>edges.index(e)&1 for e in combinations(S,2)) for S in combinations(range(n),k))
+        assert bool(a)==expected
+        checks+=1
+assert checks==220
+checks=0
+for n in (1,2):
+    clauses=[tuple(2*j+((p>>i)&1) for i,j in enumerate(I)) for w in (1,2) for I in combinations(range(n),w) for p in range(1<<w)]
+    for s in range(1<<len(clauses)):
+        chosen=[c for i,c in enumerate(clauses) if s>>i&1]
+        R=[[int(i==j) for j in range(2*n)] for i in range(2*n)]
+        for c in chosen:
+            a=c[0];b=c[-1];R[a^1][b]=1;R[b^1][a]=1
+        for h in range(2*n):
+            R=[[R[i][j] or (R[i][h] and R[h][j]) for j in range(2*n)] for i in range(2*n)]
+        ans=not any(R[2*i][2*i+1] and R[2*i+1][2*i] for i in range(n))
+        brute=any(all(any(((x>>(a//2))&1)==a%2 for a in c) for c in chosen) for x in range(1<<n))
+        assert ans==brute;checks+=1
+assert checks==260
+```
+
+### Consolidated active frontier
+
+| ID | Exact deliverable | Status and producer/consumer |
+|---|---|---|
+| G16a | pairHullEqualsMedianClosure / ternaryPermutationDefect | classical proof + finite check; Schaefer, FactorsThrough; G13 joint relation |
+| G16b | signedTritClauseWitnessProjection / noExistential2CNFLift | proof + finite check; actual BalancedTritBitFibre / BinaryBalancedTernarySubcarrierExact; G13 existential lift |
+| G17a | widthTwoMonotoneReachability | classical constructive proof + finite check; G15b |
+| G17b | cliqueMonotoneSelectorProjection / monotoneSelectorSuperpoly | explicit projection and external Theorem 5; Karp owner #1474/#1502; restricted superpoly result |
+| G18 | noPolynomialFixedCompletePropagationLift | proof via monotone unrolling; Bessiere et al.; G13/G15 restricted deterministic-lift obstruction |
+| G19 | unrestrictedMonotoneShortcutNoGo | known matching counterexample; chord comparator |
+| G12a/G6a/N4 | unrestrictedSerialCharge / targetSpecificCostedTransport | OPEN; no generic monotonicization; all legal nonmonotone triangular gates |
+| G12b/G6b | unrestrictedSelectorGoalSeparation | OPEN; G17 applies only to monotone circuits |
+| G12c/G6c/N5 | unrestrictedSuperpolynomialGrowth | OPEN; or direct uniform standard-machine failure |
+| N6 | originalClayTransport | #1040 conditional terminal, #1129 standard machine coverage; unconditional endpoint unpaid |
+
+Aristotle alpha priority: we now have a superpolynomial restricted resource obstruction on the exact NP-complete family, and a sharp propagation-lift no-go. Do not spend another round on finite geometry census or prove a generic monotone normalization which matching refutes. Attack the difference between unrestricted triangular lift and complete monotone propagation on the original selector carrier: either bound all nonmonotone shortcut use by a target-specific resource inequality, or pivot to direct uniform N4/N5 with actual machine work. Preserve both OR routes; neither new native certification nor a Langlands/Monster task is needed. No unconditional P!=NP claim.
