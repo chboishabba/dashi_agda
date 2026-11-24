@@ -1247,3 +1247,42 @@ Unweighted source-on field norms at dt=.004/.002/.001/.0005: Nr9 [1.7766345,1.84
 D1 has materially advanced: SAME original d=3,7,11 FV radial source/operator plus moving canonical action, source-work ledger, and ACTUAL Gauss-2 source-on/off short-pulse forward evolution across 3 grids and 4 times. D1 remains OPEN for the original mode3/mode4 versus action comparison at the same physical full radial/normal domain. D2 fully discrete forced stability and higher trace regularity OPEN. D3 original current FV/weak A0/A1/C0/C1 native 96 signed outputs OPEN. D4 t12 same-state physical wall jets and both Weyl OPEN. D5 out-of-cone far null FAIL/OPEN and independent fixed-domain convergence OPEN. D6 retarded Green, Agda/TOE and detector OPEN.
 
 NEXT ONE substantial cut: extend this existing radial-native Gauss construction to fixed original t12 receiver-containing radial domain, compare ORIGINAL mode3/mode4/action across source-on/off and independent dr/dy/dt while keeping outer boundary and source distribution fixed. Retain stagewise Israel residual, Q, dynamic moving trace, canonical source/energy work, radial/temporal/normal jets, both electric Weyl and far causal support; do not add more isolated identities or promote short-pulse tests as detector results.
+
+
+---
+
+## F8 P0 — same-domain physical t12 action/Gauss acceptance, 24 November 2026
+
+**This section supersedes the prior short-pulse-only NEXT step, not the original source owners.** Keep the original moving AdS5 induced 3+1 metric, 16-component background Israel, conserved compact TT three-multipole source, source FV and weak source as distinct, original mode3/mode4 and master action/SBP owners unchanged. No GitHub CI or physical detection promotion.
+
+### Three original-geometry execution blockers exposed and corrected
+
+1. The native radial Gauss forward inverse-clock function was hard-coded to t in [1,1.3], literally preventing the physical t=12 receiver. Corrected with a monotone, guarded bracket expansion in scripts/check_f8_p0_native_radial_gauss_forward.py (commit 86e52245). The source-equivalent local solver reached t=12.
+2. The radial action bridge asserted absolute max|V L-L^T V|<1e-8. At fixed r_outer=3, mode d=11 gives dr=.03 absolute residual 2.4680048e-8 but *relative* 6.2623e-15, and dr=.025 absolute 3.2829121e-8 / relative 6.9441e-15. This was a false positive caused by strong shell-volume scale, not demonstrable weighted-adjoint failure. Replaced with max relative weighted-operator norm tolerance 5e-12 in scripts/check_f8_p0_native_radial_action_bridge.py (commit 9f3c6d2b). Do not weaken source provenance.
+3. The original short Gauss loop rebuilt identical normal FE stage matrices per radial eigenmode. New batched native FV modal Gauss reuses each original physical-clock normal stage and solves across modal sectors; one-step source-equivalent batched/serial original code parity max abs 1.734723475976807e-18. The transformation still preserves original V-weighted d=3,7,11 FV radial operators and compact TT source.
+
+### Actual fixed physical domain and completed local executions
+
+Use physical radial [0,3.0] FIXED for all radial refinements, normal y=[0,2.1], compact source eps=.04, pulse in original bulk time span .065, original t=12 receiver at r_near=2.537365760961938 and r_far=2.649365760961938. Original same-function source / moving geometry, FE order p=1 normal, two-stage Gauss and shell-weighted radial eigendecomposition; no sine-basis substitution. Output H_ell=(r/eps)^ell cubic_interpolated U_ell at y=0, NOT original E4/E5 or continuum pointwise Weyl.
+
+Local source-equivalent stand-alone experiment was actually executed using owner-equivalent original FE/FV definitions in the workspace, NOT a literal full Git checkout: **18 source-ON physical t12 runs plus 18 exact-zero source-OFF controls**. Coarse domain runs 12 on +12 off: ne=2 or 3, dr=(.04,.03,.025), dt=(.04,.02). Fine-domain runs 6 on +6 off: ne=2, dr=(.010,.008,.006), dt=(.02,.01). All t=12, finite state and positive canonical energy, original near/far readouts recorded; new integrated GitHub exact-head 12-on/12-off test file was committed but itself has NOT been byte-identically replayed in full Git checkout.
+
+| original dr, ne=2 | signed far H, dt=.02 | signed far H, dt=.01 | canonical energy at dt=.01 |
+|---|---:|---:|---:|
+| .010 | -3.8087285637444256e-5 | -4.420058967621054e-5 | .010842517544701915 |
+| .008 | -4.550797764901593e-6 | -6.872380654264162e-6 | 4.8347879589291095e-5 |
+| .006 | -2.35554463868019e-5 | -2.852541638691038e-5 | .004043773002742062 |
+
+Coarse ne=2 and dt=.02 far H: dr=.04 +1.0780187980229226e-7; dr=.03 +4.962381060345421e-8; dr=.025 +5.17617002724364e-5, with energy increasing similarly. Keeping the physical radial domain fixed removes the previous varying-outer-radius confound, but field H and energy remain highly NONMONOTONE across dr and dt. The fine grid dr=.006 at dt=.01 has positive near H +1.560239528970314e-5, while dr=.01 and .008 near H are negative. This is NOT any claimed uniform continuum convergence or detected propagation.
+
+### Independent source-cell check, not an arithmetic-blame shortcut
+
+New scripts/check_f8_p0_compact_fv_source_independent.py compares the original exact FV primitive cell integrals with independent 200-point Gauss-Legendre quadrature of the ORIGINAL differentiated compact TT multipole functions and exact d=3,7,11 shell weights. The independently executed local equivalent comparison on dr=(.04,.03,.025,.010,.008,.006) matched within worst max-cell relative discrepancy ~2.00838e-8 at dr=.006. At dr=.025 the discrepancy is ~1.0464e-13 despite huge source coefficients. Thus the strong mesh dependence of the highly differentiated compact source is NOT explained by an incorrect primitive antiderivative. At these dr, only roughly 2-8 finite-volume source cells carry the eps=.04 support. Exact FV integration alone does not guarantee sufficient resolution or a mesh-uniform evolution error estimate.
+
+### Integrated code/acceptance and one next large original-physics gate
+
+PR #1547 retains master-based source ownership: new scripts/check_f8_p0_native_fixed_domain_gauss_receiver.py (batched two-stage Gauss, physical t12 near/far H, 3 fine dr x2 FE ne x2 dt x source ON/OFF); new scripts/check_f8_p0_compact_fv_source_independent.py (independent source quadrature); both are registered in scripts/run_f8_p0_integrated_local.py. No changes to original mode3/4 solvers. These committed scripts need literal source-head execution on a clean PR checkout before a repository-byte acceptance claim.
+
+D1 partial: original-carrier action/Gauss full physical t12 H field trajectories measured locally under a fixed radial domain; THREE-WAY original mode3/mode4/action same-state comparison OPEN. D2 fully discrete forced stability, strong trace, uniform high regularity OPEN. D3 current A0/A1/C0/C1 96 signed original native output and checkpoint replay OPEN. D4 action near/far H measured, but independent time/radial/normal jets and original both-Weyl E4/E5 OPEN. D5 far source continuum causal null still FAIL for finite native and independent action discretizations; no uniform convergence. D6 physical tensor Green, Agda/TOE and detector OPEN.
+
+**Single large next action, no XC microcuts:** run original mode3 and mode4 checkpointed original compact TT source on the SAME physical radial/normal domains and matching clock/receiver, compare their raw U/P/M vs action U/W/q and Israel flux, source work, H,Hr,Hrr,Ht,Htt, and signed E4/E5; independently refine 3 radial/3 normal/2 dt without moving boundaries of the study. The action normal p=1 test is not enough for second derivatives and must include p>=3 or independent high-order trace reconstruction. Resolve far field causal-null with an actual bound or measured decay before physics claims.
