@@ -2,6 +2,46 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — P5 CANONICAL 729 SOURCE AUDIT: no missing model; scalar/relator solved in a declared gauge
+
+**Authoritative latest P5 mathematical result; supersedes any historical phrase calling 729 Schr/Weil arithmetic “missing.”** See [full original-source donor and consumer audit, explicit 729 kernel, calculated original ATLAS coefficients and exact R⁷ phase](../physics/Monster3BExisting729WeilSourceReuseAndRelatorWeld20261124.md). **The repository already owns the 729 finite Schrödinger carrier, Weyl operators, both marked phases, exact symplectic-similitude quadratic lifts, Fourier support/cyclotomic kernels, point projectors, Stone–von Neumann conditional transport and inverse-cocycle theorem.** No parallel 729 framework is needed.
+
+**NEW exact numerical ORIGINAL ATLAS quotient model theorem (locally computed directly from source SHA-pinned C,D,J,P, both phases):** in the existing \`toe_cyclotomic_operator.py\` support/phase compiler with \(\Delta=\zeta-\zeta^2\), \(K_g=\Delta^{-\operatorname{rank}b_g}\operatorname{TOEKernel}(g)\), the selected original ATLAS symplectic chart has
+\[
+\begin{gathered}
+\kappa_C=-1/3,\quad \kappa_D=\kappa_{CDC^{-1}}=-1/27,\\
+\kappa_{DE}=\kappa_{ED}=\kappa_R=-1/27,\quad
+\alpha(D,CDC^{-1})=\alpha(C,C)=1,\\
+\boxed{K_{R,s}^{\,7}=I_{729}\quad(s=1,2),\quad R=cdcdcddcdd.}
+\end{gathered}
+\]
+The original exact R-power cocycle staircase is \((1,-1,1,-1,1,1)\). These values are **ATLAS-source chart/gauge-specific**, NOT automatic zero-vacuum coefficients in the differently polarized user-local MM B-vacuum. [New source replay](../../scripts/check_monster3b_atlas_source729_relator.py), locally independently calculated; this committed script awaits checkout execution. User's previously reported full Monster \(\,R(C,D)^7=z_{3B}\ne1\) is a DIFFERENT original object/source observation.
+
+**M3B-L12R mathematical new order7 scalar payment:** for the selected quotient \(R\) of exact order7, the repo model chosen \(K_R\) has \(K_R^7=\gamma_s I\) with \(\gamma_s\in\mu_6\). Since \(\gcd(7,6)=1\), there is a UNIQUE \(\mu_6\) rephase \(\gamma_s^{-1}K_R\) of order seven. Therefore, in a source-compatible same Monster \(W_s\simeq H_s\otimes S_s\) evaluation, the **original full-Monster** \(\rho(R)^7=\rho(z)=\zeta^s I\) forces \(\boxed{(L_{R,s}^{\mathrm{ord7}})^7=\zeta^s I_{90}}\). This is an **exact relator-specific 729→90 central-cover phase**, not a generic unknown \(k_0\). Full group/global \(\mu_6\) scalar coherence, phase-changing C and standard MM word→4D remain distinct open source endpoints.
+
+**NEW producer→consumer weld actually implemented:** [\`scripts/monster3b_original729_weil_source_cocycle_weld.py\`](../../scripts/monster3b_original729_weil_source_cocycle_weld.py) takes the genuine already-verified MM corrected C/D 12D quotient matrices, imports the EXISTING \`toe_cyclotomic_operator.compile_shape\` and computes *exact actual-source-chart* \(\kappa_D,\kappa_E,\kappa_C\) including zero, their paired signed \(\alpha_s\), and \(K_R^7\) using a one-entry support inverse (\(O(r^2)\) per lookup, never a dense 729² operator). [\`scripts/monster3b_original729_actual_vacuum_weld.py\`](../../scripts/monster3b_original729_actual_vacuum_weld.py) compares those model coefficients to the already user-reported **actual MMV(31)** vacuum projective products, with the necessary original RIGHT-action order:
+\[
+\boxed{\beta_s(D,E)=\kappa_{D,s}\kappa_{E,s}/[\alpha_s(D,E)\kappa_{DE,s}]}
+\]
+only when all denominators are nonzero and source group/polarization agree; it can produce actual source-derived 12D/78D modular projective matrices normalized by the **chosen original 729 model** coefficient. This replaces ad-hoc unknown scalar guessing with a transparent source equation. It DOES NOT yet prove these are honest ordinary complex \(6.\mathrm{Suz}\) matrices, or that the original 729 model is literally aligned to the genuine \(W_s\) basis. [Unified P5 runner](../../scripts/run_monster3b_p5_endpoint.py) now reuses both new producers independent of Magma.
+
+**Exact phase/lemma statuses — latest:**
+
+| Phase / lemma | Paid now in repo | Still genuinely open (not missing abstract 729 math) |
+|---|---|---|
+| P2 / L04–L07 | genuine user-reported Monster C,D and signed \(R^7=z_{3B}\); original quotient + source 4D class known | literal corrected MM C→4D unique class identification, not inferred from order4 |
+| P3 / L09 | old 729 exact Schr/Heisenberg/Weil/projectors, canonical conditional Hom; actual MMV31 B-fixed90 + C2 signed 12/78 report | proof that exact model and actual W_s \(\rho\) have same original linear E/normalizer field/gauge |
+| P4 / L11 | source GAP 12a/b, Nebe nonfaithful dual-Sym²78, C2 trace+66, selected class/diagonal descent paid | absolute source \(6.\mathrm{Suz}\) standard word and phase alignment |
+| P5 / **L10A** | selected complex12 character field Qζ; exact bounded 517-value two-phase inversion; NEW model k0 scalar computable from original existing 729 | produce/identify genuine 12D source operators in same group/normalization (Steel ordinary source useful, Magma not mathematically compulsory) |
+| P5 / **L10B** | new exact quotient-model 729 scalar/cocycle and source-aware MMV31 comparison, existing actual modular B-vacuum | apply same E/point projector gauge to literal full Monster W_s, solve remaining global cocycle/word equivalence |
+| P5 / **L10C** | authentic source type \(12\oplus\mathrm{Sym}^2(12^\vee)\), exact functor complete | original source-specific complex matrices if numerical ordinary operators are requested |
+| P5 / **L12R** | original \(R^7=z\) actual group, exact ATLAS model \(K_R^7=1\), and **unique order7 model gauge** forcing \(L_R^7=\zeta^s\) | outer source C and global 6Suz.2 central-cover cocycle, literal Monster 4D word/phase; avoid projecting quotient class to original word |
+| P6 | intentionally deferred | source-identical endpoint mathematics first, no fresh generic certification |
+
+**Original attribution and old-owner reuse:** 729 operators \`Monster3BFiniteSchrodingerFullActionLawExact\`, \`FiniteSchrodingerPointProjectorExact\`, \`toe_cyclotomic_operator.py\` and \`check_toe_atlas_weil.py\` are established earlier repository work, not new inventions; Barraclough–Wilson, original ATLAS, Dietrich–Lee–Pisani–Popiel and Ibrahim's original Hom/12+78 retain their own source attribution. Keep \(\zeta/\zeta^2\), diagonal K vs central z, **zero-vacuum obstruction**, signed \(R^7\) residual, source chart/basis, original field p31/p127, and same Monster word indices distinct. Do NOT rerun original 78 family search or declare model characteristic-zero Hom equals original modular Monster vector module.
+
+---
+
 ## 24 November 2026 — NEW MAGMA-FREE mathematical endpoint: literal Monster 4D & bounded ordinary12 from two true phases
 
 **Canonical theorem and source algorithms:** [\`Monster3BMagmaFreeExactPhaseAndClassWeld20261124.md\`](../physics/Monster3BMagmaFreeExactPhaseAndClassWeld20261124.md). This supersedes an execution-only understanding of L10A/L10B/L12R: **Magma is not mathematically necessary to identify an ordinary faithful12 CHARACTER or a literal MM 4D class**, provided original 729 Weil scalars and paired source word are consistently attached. The original MAGMA SOURCE 12D matrix bytes remain useful for a numeric complex basis but are NOT a reason to stop mathematical progress.
