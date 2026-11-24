@@ -1917,3 +1917,139 @@ To reproduce optimized recovery: set C=L*(2*u-2)+L//2**(u-1), h=(B+C)//C, for ea
 | LGC7/N6 | original conditional consumer | existing |
 
 Next actual mathematical target: bypass generic Hermite recovery by exploiting the restricted deformed tensor polynomial class or construct a new source-preserving contraction with no comparable precision amplification; fixed-packing pin examples are deliberately easy so an eventual lower bound must permit preprocessing them away. In particular investigate direct factorization of origin evaluation through actual tensor constraints/zero-support, rather than merely shrinking output p or counting all local channels. R94 establishes obstruction only to black-box polynomial patch recovery at too-small simultaneous scaled budgets; R95 gives a genuine actual-interface collision but lower absolute bound, not an unrestricted resource theorem. G53–55 modular/weighted/probe shortcuts and R87–89 exact history residual remain admissible. No new representation census, no certification detour, no unrelated branch work or P!=NP claim.
+
+## 22. R99–R106 — source two-rail defect contraction, global floor complexity and binary/ternary local-field correction (2026-11-24)
+
+Stay on Langlands. Read both mounted pasted attachments directly, R92–98 and G56–59. Actual live Langlands #1549 ef1661868132496f322b4054f7db427409e1070e / #120 e97832116b0ae028c8a354fa31e391907ab64492, shared blob 9eac2e92de0d22baf34ee9a46c6512bf66fafee8. IMPORTANT live G worker has advanced beyond attachment G56–59: #1548 549739130a81fbfb254a8f3d54df28246be8b68b / #119 e6a60428933be7f64ac2b662a6bd0fedb3b4c6e3, identical roadmap blob 8395076082289854f8f9609b67604285824470e9. Read actual G60–64: local multilinear degree, coherent alternate coefficient lifts, direct moment identity, exact Cauchy entry content, matching minimum per support pair. Reuse these, not duplicate them. G45/46 locally-full source, G48 global flag, G49–52 joint kernels and nonlinear rank escape, G53–55 low precision consumers, G56–58 low-order contextual source and indexed horizon, G59 clustered Hermite collision credited to G worker. Existing R78–82 genuine ramified Weil rank-two probe, R85 weighted witness polynomial, R87–89 indexed residual, R92–96 tapered precision, original H05 #1291 / GovernedIndexedResidualCubeExact (previously verified blob 42b70ebb7376813076934f2245ce6011b76f10c8) are direct owners. JMD attribution boundary retained; standard tensor-network basis changes, Walsh diagonalization, Smith forms and CNF bounded occurrence reductions are classical, no claim of novelty for those general tools. New source-specific derivation below concerns the two-rail monomial-support pair floor and inverse local defect kernel, not an unrestricted complexity theorem.
+
+External original source reopened: OpenAI October 25 revised preprint, build/quantitative-contraction.tex, https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/quantitative-contraction.tex, lines 1710–1828, actual W_xy and F(T)=sum_(X,Y) A(Y) B(X) prod_x l_(Y_x)((W(T)X)_x). At origin W=I. This is a partial source interface audit, not a full proof audit or runtime claim. No edits outside the existing Langlands PRs.
+
+### R99. Actual two-rail source lift of the G61 moment contraction
+
+Take original q-variable width<=3 constraints on scopes I_C, each with nonempty allowed relation R_C. Write E for labelled variable occurrences (i,C), n=|E|. Introduce two genuine binary tensor wires X_(e,0),X_(e,1) per occurrence, total M=2n. On row side, one variable vertex per i with local multilinear polynomial
+    A_i(X)=sum_(b=0,1) prod_(e incident i) X_(e,b).
+Column side one original constraint vertex per C with local polynomial
+    B_C(X)=sum_(y in R_C) prod_(e=(i,C)) X_(e,1-y_i).
+A and B are products over these disjoint local port sets, respectively; tensor entries are evaluations on Boolean local ports, not independent fictitious coefficients. If i isolated A_i=2, retain it as factor (or remove explicitly counting its free assignment multiplicity). In the nonisolated case every global monomial coefficient is +1, all A supports and all B supports have exactly n selected wires. Use explicit integer lifts (local creation precision sufficient to represent these actual nonnegative table entries); modulo2 canonical Boolean entries have the same odd multilinear supports, hence same floor-zero test, but do not use alternate lifts to claim higher-precision floors without tracking G60/R96.
+
+At origin G61 sum over ports is exact:
+    sum_X A(X) B(X)=sum_(x, (y_C in R_C)) 2^(M-|S_x union U_y|).
+Each e agrees x_i=y_i iff the chosen rails are complementary and cover both; disagreement covers just one. Thus M-|S union U|=sum_C d_H(x|I_C,y_C). Define one-incidence defect kernel K_lambda(x,y)=lambda^[x!=y] with lambda=2 for actual Boolean summation. Then
+    Z_t(lambda)=sum_x prod_C sum_(y in R_C) lambda^d_H(x|I_C,y).
+    Z_t(2)=actual origin contraction, Z_t(0)=W(t), with 0^0=1.
+For a single forbidden pattern p on d=|I_C| coordinates, the local sum is (1+lambda)^d-lambda^d_H(x|I_C,p). Free source variables and original witness labels preserved. The formal lambda-polynomial records all mismatch strata with nonnegative coefficients, but the binary evaluation 2 mixes them by valuation/carry; no free extraction of constant coefficient from arbitrary exact integer value. In particular Z_t(2) mod2=W mod2. Retain exact source zero mode separately, do not equate parity with SAT. This is a real origin tensor contraction in the source interface, not an invented auxiliary interaction.
+
+### R100. Exact global floor = minimum number of violated original clauses
+
+For fixed x, minimizing over allowed local patterns independently gives sum_C min_(y in R_C) d_H(x|I_C,y). For R_C all patterns except one p, this is 0 when x|I_C!=p, else 1; a full relation contributes 0. Thus
+    min_(supported S,U) [v2(a_S)+v2(b_U)+M-|S union U|]
+       = min_x number of violated original clauses.
+For nonisolated variables use coefficient 1 on all supports as above. Isolated variables can be removed and their free count factor retained separately; don't charge it as defect. This is the EXACT global optimum of the per-pair G61/G63 valuation-floor problem at origin, not valuation of the sum, since the number of minimum terms may be even. Every zero-floor pair corresponds to exactly one satisfying x and vice versa (local patterns forced to x), so floor-zero support count is parsimonious. Optimizing the floor, or merely asking if some zero-floor pair exists, is NP-hard / NP-complete respectively, even uniform degrees n on each side and all monomial coefficients +1. The reduction uses arbitrary original clauses, then can retain the G46 locally-full promise. To make the reduction polynomial in EXPLICIT local table input size, first split every original variable's literal occurrences into copies and join by equality chain (two binary clauses per adjacent pair); every copy occurs in at most five clauses, and every original witness has a unique copy extension. Then G46 can use a separate six-zero gadget per original clause rather than one shared gadget: attach private occurrence copies, link equalities using that clause's own z0,z1 and pad its gate clause. Each local gadget has constant scope count and variables have bounded occurrence; each scope has 7 or 8 allowed patterns and all unary/binary/affine projections full. Unique extension and polynomial input length still hold. All two-rail vertex arities bounded by an absolute constant; explicit tables constant-size per vertex (no hidden unbounded-arity expansion). This variant is derived here, no claim of testing the entire compiler family anew. For ordinary bounded-occurrence CNF the simpler first split suffices. Global floor optimization is thus an actual hard operation if chosen as required by a pruning algorithm. It is NOT an unavoidable operation for any SAT algorithm; parity of minimum terms can cancel and other computation may avoid finding the minimum. G63 remains polynomial per fixed support pair.
+
+### R101. Hard global support pruning on a genuine nonzero Cauchy patch can be an artificial deformation debt
+
+Use four real slots per occurrence, grouped inside full packets of length L divisible by 4, no cross-packet shift needed for the selected rows. For e, slots 4r,4r+2 hold active row rails b=0,1; slots 4r+1,4r+3 are corresponding active column rails. Make odd row ports free (tensor 1) and both even column ports obligatory in one-port monomials. The column clause tensor chooses complementary odd rail for each occurrence. At actual probe t=1, G62 gives zero-content W only for column y=row x+1, and all other entries have positive integer valuation. The selected active even rows have exact unique zero-cost shifts inside their four-slot group. By G63 minimum for each pair is M-|U union shifted(S)|; positive-cost alternative matches cannot improve it. This equals original number of disagreed incidences. Therefore the global floor zero query on this actual fixed complete Cauchy packet interface at nonzero t is NP-complete by R100. The coefficientwise mod2 patch reduces to the truncated shift, so its contraction mod2 equals W(t_original) mod2. Use t_original as selector, t=1 as probe; do not identify.
+
+At original deformation origin, however, active even row rails are already all covered by even columns, and exactly one odd rail per occurrence is uncovered regardless of x,y. Hence every term has defect n and
+    F(0)=2^n * 2^q * prod_C |R_C|.
+This is directly polynomial-time computable (bit length polynomial in explicit problem size). This is a stronger negative control: even NP-hard global pruning at a chosen actual shifted interface need not be necessary to compute original contraction. This construction specifies fixed full packet layouts and the source W/Boolean tensor formula. It does not establish that the external packing algorithm with its balanced-label schedule would choose this layout, or that a preprocessing-aware solver would deform this trivial disconnected origin network. No claim of a lower bound on that algorithm or original SAT from shifted cost. R94 generic Hermite collision is not shown to be realized at its full scaled MD_i/u depth on actual bounded-arity tensor instances; this tranche does not pay that open source attachment.
+
+### R102. Exact local binary inverse recovers original weighted rank-two consumer with no inherited precision loss
+
+K=K_2=[[1,2],[2,1]], det=-3. Let f_C in {0,1}^(2^d) be the actual original constraint table. Instead of restricting clause monomial supports to R_C, put signed coefficient vector
+    beta_C=(K^-1)^tensor d f_C,
+    K^-1=(1/3)[[-1,2],[2,-1]].
+Use all patterns y as potential supports with those coefficients (omit zero). Then for each original x,
+    sum_y beta_C(y) 2^d_H(x|I_C,y)=f_C(x|I_C).
+The clause basis correction is exact over Q and over Z/2^H since 3 unit. For original width d<=3 the local transform and tensor table construction cost constant ring operations per bounded-arity table, polynomial in precision. Multiply each variable monomial for value b by the actual unramified weight z_i^b as in R85. Summation yields
+    Z_corrected = sum_x prod_i z_i^x_i prod_C f_C(x|I_C)=P_t(z).
+Original R85 signed rank-two D=3 A(z)-4 Z_corrected, A(z)=prod(1+z_i), retained separately. For binary weighted residue use coefficient ring of R85, inverse still exists since determinant odd. Can compute P directly mod2, or D mod8, no need for Hermite or high internal precision in these LOCAL transforms. Exact rational coefficients have only powers of 3 as denominators (per local table exponent<=d), can use finite-ring representatives; actual tensor entries agree at intended creation precision, preserve lift recipe. Negative signs are necessary for some tables; no independent charge per matching term, and no assertion that the corrected global contraction is cheap. The global computation is still a bounded-degree tensor contraction / original SAT-count consumer. This provides a direct arithmetic producer with no generic origin-recovery precision debt locally; apply G61 moments or graph separators when applicable, not an unrestricted polynomial solver.
+
+### R103. Ternary coefficient prime has exact zero-mode depth and a locally-full source collision
+
+Do not identify coefficient prime with original Weil field Q3 or Frobenius. Over Z_3, Walsh matrix on d bits is unimodular (det a power of 2). K eigenvalues 3 on zero frequency (1,1), -1 on signed residual (1,-1). Thus
+    K^tensor d has eigenvalues 3^(d-|h|)(-1)^|h|, h subset [d].
+Its exact DVR Smith valuations are j with multiplicity binom(d,j), j=0..d. Over Z_2 all are units. Over Z_3/(3^H) minimum linear channels for full explicit local map = sum_(j=0..min(d,H-1)) binom(d,j). The zero mode carries depth d, top signed residual depth 0, intermediate support modes retain their own valuation. To recover arbitrary input vector modulo 3^H from blurred vector alone, uniform precision H+d sufficient and necessary: inverse divides the zero mode by 3^d, and nonzero source vector 3^(H-1) times allones maps to 3^(H-1+d) times allones. This is restricted arbitrary-vector observer claim, not necessary for known constraint tables or SAT.
+
+Actual locally-full source d=3: f_p=1-delta_p for forbidden pattern p, or f_full=1. g_p=K^tensor d f_p. Modulo 3, full relation maps to zero; forbidden pattern maps to a nonzero signed top Walsh mode depending ONLY on parity of p. Two distinct p,r of same parity have identical g mod3, with exact difference content 1: their Fourier difference has top coefficient zero and a weight-(d-1) coefficient nonzero of valuation zero (omit a differing bit), while every other active weight has depth>=1. Opposite parity has depth zero. Full vs forbidden has depth zero (difference a single K column containing unit). Thus for d=3 the actual 9 local relation tables collapse to three observed classes modulo3, but modulo9 distinguish all nine. This is actual source-specific loss, not generic count-only hypothetical collision. Original zero mode S(0)=7 or8 and original signed residuals retained, even if blurred zero mode lost modulo3. The binary inverse and ternary loss are distinct coefficient-field behaviours of the SAME actual source map. No implication of physical phase or local Galois identification; R79 original inertia and R80 rank-one collision remain independent. At d<=3 the full source correction is constant-size, so not a superpoly barrier.
+
+### R104. Nonidentity moment-chart transport in the existing indexed cube
+
+Use original H05 eight vertices/twelve arrows/six faces, history, chronological tau, refinement k, Frobenius j, version, coefficient ring/precision, creation lift, intended consumer retained. Here third axis is actual invertible moment chart K^tensor d over Q or binary coefficient ring, not physical motion or original spatial Singer action. For diagonal source filter Q, actual conjugate chart filter is Q'=K Q K^-1 (write K for tensor power). Then KQ=Q'K, and two commuting source masks Q,R retain commutation after transport, providing all six faces and endpoint paths when original labelled joint residual atoms are carried. R87/R88 original zero mode, gain/loss and A00 joint loss remain actual source labels. If one incorrectly keeps the old diagonal Q after changing chart, exact defect
+    (KQ-QK)_(x,y)=K_(x,y)(Q_y-Q_x).
+At mod3 the chart is not invertible, so there is no automatic conjugated filter; retain the discarded valuation strata / actual source or prove consumer sufficiency separately. This is a concrete finite arithmetic chart weld, not a proof that lossy mod3 faces commute, no H07/H14 or physical 9DOF promotion. All global matrices only semantic descriptions; local tensorized chart producer is cheap per bounded-width table, materialization of full assignment carrier not required by decision. G56 low-order source reconstruction remains separate from cost of producing those modes. Chronological and refinement indices not merged with deformation parameter or Frobenius.
+
+### R105. Actual local execution
+
+Executed /tmp/langlands_r99.py locally using exact Python integers, Fraction and SymPy Smith normal forms. 140 global minimum/violated-clause comparisons, 140 positive origin parity comparisons, 140 exact corrected weighted count/modular comparisons, 12698 explicit shifted support-pair checks, 1152 actual rational Cauchy patch entry coefficient parity checks (complete L=4,8), 4 Smith forms d=1..4, 185 local full/deleted-pattern collision valuation checks, 80 chart defect identities, 480 cube face and 480 endpoint-path checks, 32 independent original/shifted Boolean tensor-table contractions (shifted direct table checks when <=3 occurrences). All passed. The test enumeration includes small free-variable cases; free counts preserved. No CI/native kernel, actual proof-assistant implementation or full external recursion runtime benchmark. Reproduction core:
+```python
+from itertools import product,combinations
+from fractions import Fraction as F
+from math import prod
+import sympy as S
+from sympy.matrices.normalforms import smith_normal_form
+from sympy.polys.domains import ZZ
+def words(d):return list(product((0,1),repeat=d))
+def dist(a,b):return sum(x!=y for x,y in zip(a,b))
+def mv(A,v):return [sum(x*y for x,y in zip(r,v)) for r in A]
+def K(d):return [[2**dist(x,y) for y in words(d)] for x in words(d)]
+def J(d):return [[F((-1)**(d-dist(x,y))*2**dist(x,y),3**d) for y in words(d)] for x in words(d)]
+def vp(n,p):
+ if n==0:return float('inf')
+ n=abs(n);v=0
+ while n%p==0:n//=p;v+=1
+ return v
+for d in range(1,5):
+ W=words(d);n=len(W);A=K(d);B=J(d)
+ for i in range(n):assert mv(A,[r[i] for r in B])==[int(i==j) for j in range(n)]
+ S1=smith_normal_form(S.Matrix(A),domain=ZZ)
+ assert sorted(vp(int(S1[i,i]),3) for i in range(n))==sorted(d-sum(w) for w in W)
+ tables=[[1]*n]+[[int(i!=j) for i in range(n)] for j in range(n)]
+ G=[mv(A,f) for f in tables]
+ for i,j in combinations(range(n+1),2):
+  assert min(vp(a-b,3) for a,b in zip(G[i],G[j]))==int(i>0 and j>0 and sum(W[i-1])%2==sum(W[j-1])%2)
+from random import Random
+rng=Random(369)
+# Actual script also interleaves chart random samples before these selector samples.
+for q in range(1,5):
+ scopes=[s for d in range(1,min(q,3)+1) for s in combinations(range(q),d)]
+ for c in range(35):
+  cs=[(I,tuple(rng.randrange(2) for _ in I)) for I in rng.choices(scopes,k=rng.randrange(5))]
+  allowed=[[y for y in words(len(I)) if y!=p] for I,p in cs]
+  coeff=[mv(J(len(I)),[int(y!=p) for y in words(len(I))]) for I,p in cs]
+  zero=0;positive=0;corrected=F(0);wanted=0;floor=999
+  z=[rng.randrange(1,8,2) for _ in range(q)]
+  for x in words(q):
+   xx=[tuple(x[i] for i in I) for I,p in cs];u=sum(a==p for a,(_,p) in zip(xx,cs))
+   assert sum(min(dist(a,y) for y in pp) for a,pp in zip(xx,allowed))==u
+   floor=min(floor,u);zero+=int(u==0);weight=prod(z[i]**x[i] for i in range(q))
+   positive+=prod(sum(2**dist(a,y) for y in pp) for a,pp in zip(xx,allowed))
+   wanted+=weight*int(u==0)
+   corrected+=weight*prod(sum(2**dist(a,y)*b for y,b in zip(words(len(I)),bb)) for a,(I,p),bb in zip(xx,cs,coeff))
+   for yy in product(*allowed):
+    row=set();col=set();m=0
+    for (I,p),y in zip(cs,yy):
+     for i,b in zip(I,y):
+      row.add(m+2*x[i]);col.update((m,m+2,m+2*(1-b)+1));m+=4
+    assert m-len(col|{a+1 for a in row})==sum(dist(tuple(x[i] for i in I),y) for (I,p),y in zip(cs,yy))
+  assert (floor==0)==bool(zero) and positive%2==zero%2 and corrected==wanted
+```
+Additional chart checks: for each d=1..4 and 20 seeded random signed vectors v and masks Q,R, compare KQv to (KQK^-1)Kv, all six two-axis faces and six paths; check wrong-chart commutator entry formula. Exact patch checks: for each L=4,8, t in [-L,L-1], x,y in [0,L-1], explicitly multiply factors [t-s,2L] for s!=y-x, divide by C'(0), confirm all rational coefficients 2-integral and residue polynomial is the constant [y=x+t]. Independent table checks explicitly sum A(X)B(X) on original 2n ports and A(shift X)B(X) on 4n ports for small inputs; compare closed forms. All tests actually executed; compact reproducer may use different random sequence than full script because chart draws omitted here. Counts reported from full actual run.
+
+### R106. Updated endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R99 | exact dual-rail origin moment/defect kernel with original witness strata | derived |
+| R100 | global G63/G61 support-floor minimization equals minimum violated clauses; NP-complete zero floor | derived, restricted; explicit bounded arity via occurrence split |
+| R101 | actual nonzero Cauchy patch hard global floor on easy original contraction | derived, fixed-packet negative control |
+| R102 | direct local binary inverse, original weighted rank-two scalar, no LOCAL Hermite debt | derived; global contraction unpaid |
+| R103 | exact binary/ternary Smith and signed-zero-mode spectrum, actual local 7/8-pattern observer collision | derived |
+| R104 | nonidentity moment chart, six exact finite faces, actual wrong-chart defect and lossy ternary boundary | derived; no physical/kernel promotion |
+| R105 | exact local regressions | executed |
+| R7a'/LGC4d | shared global computation of corrected local factors or original weighted support | OPEN; per-pair matching and global floor are different, alternative algorithms admitted |
+| R7b'/LGC5 | unavoidable unrestricted deterministic standard-machine cost | OPEN P0 |
+| R7c/LGC6 | original Clay separation via uniform SAT or sufficient central-slice route | OPEN P0 |
+| LGC7/N6 | original conditional consumer | existing |
+
+Next endpoint-first: exploit signed corrected local factor network directly (not full local-factor census), seek actual global shared contraction or unavoidable bound surviving all legal preprocessing and nonlinear shortcuts. In particular global support-pair minimum is now exactly a hard query but the nonzero patch control proves it may be unnecessary even for that actual input; do not make it a mandatory lower-bound premise. R94/G59 strongest generic Hermite collision not realized here at full generic depth in actual bounded-arity tensor subclass. Keep G60–64 source pruning and G56–59 low-order/horizon controls, R85 weighted one-bit support and H05 zero/residual/index boundaries. No claim of a new overall SAT exponent or P!=NP; no unrelated branch or native certification detour.
