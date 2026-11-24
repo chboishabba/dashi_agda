@@ -2,8 +2,10 @@
 """J31 exact rational seven-mode source local tubes and tangent envelopes.
 
 Original finite-loss J23/J25 nine-state prescribed-wave smooth branches.
-Independent rational J24 numerical centres are chart *seeds*, not certified
-original event states. Does not prove full segments, 69D Krawczyk or orbit.
+The first five J24 state boxes and J29 root brackets are external exact
+source receipts: their membership in our input boxes is explicitly checked.
+Sixth event state is ONLY an independent rational fixture (3/9 J24 box).
+Does not prove full segments, 69D Krawczyk or orbit.
 All interval arithmetic rounds outward to a rational 1e-30 grid.
 """
 from fractions import Fraction as F
@@ -75,6 +77,12 @@ STATES=[
  ['0.08472814436407','-0.32935984299057','1.33978173940005','0.83433116172484','1.23978173940005','8.13119780949747','0.42908731743842','-0.98106986849663','-1.1666415376269']]
 TIMES=['0','3.389367008894','3.491292721190','3.515340479143','4.275489023275','4.323837945006','4.928751407316']
 SIGNS=(1,-1,1,1,-1,-1)
+# Source-owned J26–J29 five certified event brackets (see original receipts).
+# This code checks geometric containment, not the upstream ODE proofs.
+BRACKETS=(('3.389367008','3.389367010'),
+ ('3.49129269','3.49129275'),('3.51534025','3.51534095'),
+ ('4.275487825','4.27549016875'),
+ ('4.32383391875','4.32384016875'))
 
 def taylor_point(z,trig,n=36):
  """Rigorous rational sin/cos at rational point, explicit tail bound."""
@@ -132,7 +140,10 @@ def guard_slope(k,fx):
 
 def certify_chart(k,h):
  mode=MODES[k];tc=F(TIMES[k]);xc=list(map(F,STATES[k]));h=F(h)
- start_radius=F(1,10**8);time_radius=F(1,10**9);tube_radius=F(1,10000)
+ start_radius=F(1,10000);time_radius=(F(0) if k==0 else F(1,5000) if k==6 else F(1,200000));tube_radius=F(1,1000)
+ if 1<=k<=5:
+  left,right=map(F,BRACKETS[k-1])
+  assert tc-time_radius<left<right<tc+time_radius
  start=[I(a-start_radius,a+start_radius) for a in xc]
  tube=[I(a-tube_radius,a+tube_radius) for a in xc]
  t0=I(tc-time_radius,tc+time_radius)
@@ -165,7 +176,9 @@ def certify_chart(k,h):
  return dict(k=k,mode=list(mode),start_t=TIMES[k],h=str(h),
      original_source_smooth_rhs='J25/J31 nine-state fixed diode/spark branch',
      original_J24_rational_numerical_centre_seed_only=True,
-     original_J29_certified_event_state_attached=False,
+     J29_original_full_J24_box_covered_by_chart=(1<=k<=5),
+     J29_original_receipt_still_required=True,
+     original_J29_source_proof_reexecuted_here=False,
      initial_ball_radius=str(start_radius),initial_time_radius=str(time_radius),
      proven_fulltime_picard_tube_radius=str(tube_radius),
      source_interval_f_guard_slope_pre_post=slope,
@@ -190,8 +203,10 @@ def main():
     rational_source_constants=True,original_physically_smooth_modes=7,
     exact_Picard_tubes=7,certified_9x9_variational_shortcharts=7,
     signed_pre_and_post_event_slopes=6,
-    input_state_radius='1/100000000',input_time_radius='1/1000000000',
-    actual_source_chart_seed_proof=False,
+    input_state_radius='1/10000',input_time_radii=['0']+['1/200000']*5+['1/5000'],
+    J29_first_five_original_event_boxes_geometrically_covered=True,
+    actual_source_smooth_chart_seed_proof_for_first_five_requires_J29_receipt=True,
+    sixth_full_J24_box_attached=False,
     original_full_seven_chart_69D_interval_certificate=False,
     strict_original_69D_Krawczyk=False,
     periodic_fixed_point_proved=False,source_pi_period_endpoint_in_this_cut=False,
