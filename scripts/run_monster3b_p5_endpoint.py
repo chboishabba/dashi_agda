@@ -70,6 +70,7 @@ def main():
     ap.add_argument("--skip-gap",action="store_true")
     ap.add_argument("--actual-mod31-hom",action="store_true",
         help="also construct actual mmgroup MMV(31) 90D Hom vacuum and 12/78 C2 sectors")
+    ap.add_argument("--require-char0-expression",action="store_true",help="fail unless exact source-bound characteristic-zero expression is produced")
     ap.add_argument("--both-mod31-phases",action="store_true",
         help="construct zeta=5 and 25 source Hom sectors, recover exact Qzeta12 candidate characters")
     ap.add_argument("--reuse-mod31-plus",type=Path,
@@ -82,6 +83,7 @@ def main():
     ap.add_argument("--outdir",type=Path)
     args=ap.parse_args()
     if args.timeout<1:ap.error("--timeout must be >0")
+    if args.require_char0_expression:args.both_mod31_phases=True
     base=ROOT/"build/monster3b-p5-endpoint"
     out=(args.outdir or base/("run-"+datetime.now(timezone.utc).strftime(
         "%Y%m%dT%H%M%SZ")+"-"+str(os.getpid()))).resolve()
@@ -304,25 +306,31 @@ def main():
                 report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=\
                     "MISSING_AUTHENTIC_MANIFEST"
             else:
-                plus=(args.reuse_mod31_plus.resolve() if args.reuse_mod31_plus
-                      else out/"actual_mmv31_hom")
-                if args.reuse_mod31_plus:
-                    state=json.loads((plus/"mmv31_hom_status.json").read_text())
-                    if (state.get("p"),state.get("zeta_mod_p"),
-                        state.get("number_independent_B_fixed_vectors"))!=(31,5,90):
-                        raise ValueError("reused original mod31+ receipt has wrong phase/rank")
-                    report["stages"]["actual_mod31_hom"]={
-                        "status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE",
-                        "path":str(plus)}
-                    positive=True
-                else:
-                    arguments=[sys.executable,
-                        SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
-                        "--manifest",args.manifest,
-                        "--outdir",plus,"--prime",31]
-                    if cover.exists():
-                        arguments.extend(["--cover",cover])
-                    positive=run("actual_mod31_hom",arguments)
+                def original_phase(name,reuse,dest,root):
+                    arguments=[sys.executable,SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                        "--manifest",args.manifest,"--outdir",dest,"--prime",31]
+                    if root==25:arguments.append("--opposite-phase")
+                    if cover.exists():arguments.extend(["--cover",cover])
+                    if reuse:
+                        reuse=reuse.resolve()
+                        state=json.loads((reuse/"mmv31_hom_status.json").read_text())
+                        if (state.get("p"),state.get("zeta_mod_p"),
+                            state.get("number_independent_B_fixed_vectors"))!=(31,root,90):
+                            raise ValueError("reused original phase receipt has wrong phase/rank")
+                        required=("actual_C2_12_78_mod31.npz","actual_C2_on_90_mod31.npz",
+                            "actual_D_12_78_vacuum_sandwich_mod31.npz",
+                            "actual_CDCinv_12_78_vacuum_sandwich_mod31.npz",
+                            "actual_inner_pair_vacuum_cocycle_mod31.npz")
+                        saved=json.loads(cover.read_text()) if cover.exists() else {}
+                        if (all((reuse/f).is_file() for f in required) and
+                            all(state.get(k) and state.get(k)==saved.get(k)
+                                for k in ("canonical_C_word","canonical_D_word"))):
+                            report["stages"][name]={"status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE","path":str(reuse)}
+                            return reuse,True
+                        arguments.extend(["--reuse-basis",reuse])
+                    return dest,run(name,arguments)
+                plus,positive=original_phase("actual_mod31_hom",args.reuse_mod31_plus,
+                    out/"actual_mmv31_hom",5)
                 report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=(
                     "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
                     if positive else "FAILED")
@@ -361,21 +369,8 @@ def main():
                         report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_plus"]=\
                             "ACTUAL_MM_78_SOURCE_OPERATOR_OBSTRUCTION"
                 if args.both_mod31_phases and positive:
-                    minus=(args.reuse_mod31_minus.resolve() if args.reuse_mod31_minus
-                           else out/"actual_mmv31_hom_opposite")
-                    other=[sys.executable,
-                        SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
-                        "--manifest",args.manifest,"--outdir",minus,
-                        "--prime",31,"--opposite-phase"]
-                    if cover.exists():other.extend(["--cover",cover])
-                    if args.reuse_mod31_minus:
-                        state=json.loads((minus/"mmv31_hom_status.json").read_text())
-                        if (state.get("p"),state.get("zeta_mod_p"),state.get("number_independent_B_fixed_vectors"))!=(31,25,90):
-                            raise ValueError("reused original mod31- receipt has wrong phase/rank")
-                        report["stages"]["actual_mod31_hom_opposite"]={"status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE","path":str(minus)}
-                        opposite=True
-                    else:
-                        opposite=run("actual_mod31_hom_opposite",other)
+                    minus,opposite=original_phase("actual_mod31_hom_opposite",args.reuse_mod31_minus,
+                        out/"actual_mmv31_hom_opposite",25)
                     if opposite:
                         if model_paid:
                             if run("original729_actual_minus_vacuum_weld",[
@@ -487,7 +482,10 @@ def main():
                 ("LINDSEY_SOURCE_AVAILABLE; NEEDS_ACTUAL_CHAR0_HOM" if lindsey_ok else "BLOCKED_ON_ORDINARY_SOURCE_AND_REAL_CHAR0_HOM")
             report["lemma_status"]["M3B-L12R_complex_outer_intertwiner"]=\
                 ("LINDSEY_SIGNED_SOURCE_AVAILABLE; NEEDS_ACTUAL_MM_Q7_AND_CHAR0_HOM" if lindsey_ok else "BLOCKED_ON_ORDINARY_SOURCE_AND_REAL_SOURCE_OUTER_WORD_MAP")
-        report["status"]="STAGED_MATHEMATICAL_ENDPOINTS_WITH_REMAINING_SOURCE_ATTACHMENT"
+        exact_paid=report["lemma_status"].get("M3B-L10B_L10C_exact_char0_Hom_expression")=="EXACT_GROUP_ALGEBRA_WITNESS_NOT_DENSE_EVALUATION"
+        report["status"]=("EXACT_CHAR0_EXPRESSION_PRODUCED_NOT_DENSE_EVALUATION" if exact_paid else
+            "REQUIRED_CHAR0_EXPRESSION_UNPAID" if args.require_char0_expression else
+            "STAGED_MATHEMATICAL_ENDPOINTS_WITH_REMAINING_SOURCE_ATTACHMENT")
     except Exception as exc:
         report["status"]="ERROR_FAIL_CLOSED"
         report["error"]={"type":type(exc).__name__,"message":str(exc),
@@ -497,5 +495,5 @@ def main():
     print("MONSTER3B_P5_STATUS:",report["status"])
     print("ENDPOINT_SUMMARY:",summary)
     print("SOURCE_CHECKS:",json.dumps(report["lemma_status"],indent=2))
-    return 0 if report["status"]!="ERROR_FAIL_CLOSED" else 2
+    return 2 if report["status"] in ("ERROR_FAIL_CLOSED","REQUIRED_CHAR0_EXPRESSION_UNPAID") else 0
 if __name__=="__main__":raise SystemExit(main())
