@@ -94,3 +94,131 @@ Use n-bit SAT decision function SAT_n on a fixed canonical encoding, including i
 ## 7. Next consolidated mathematical tranche
 
 A/B: attach standard canonical machine to concrete DAG and sparse polynomial graph using the proved induction and polynomial envelope; attach same-object semantics to existing shared compiler and native Lean factorization. No need to build a parallel geometric Langlands category. C/D in parallel: select an invariant on semantic graphs with a universal gate-change or trace-charging bound; reject candidates on equality, parity, duplicated gates, shared subcircuits, zero-cost extensional abstract carrier, identity observer, and modular extension controls. Prove a hard family with a gap exceeding every polynomial *in charged cost*, not merely in rank/cardinality, then close LGC7/N6. Only after an endpoint derivation seek full independent kernel certification. If local geometry cannot constrain unrestricted computations, retain it as a scoped donor and pursue direct standard-machine lower bound in parallel. No promotion from finite experiments, published authority, provenance or shared nomenclature.
+
+## 8. LGC-R1–R7 — genuine ramified Langlands continuation (2026-11-24)
+
+Stay on the Langlands owner, not a second generic G6 search. The other P0 worker's actual #1548 head 70c6529a83c2841c5b07c517aad1efa9f6bc0723 (roadmap blob 0d71c3b1f398479afcf9c3c43b6503ca59e5e93a, inspected tail) and Lean #119 head 6b2e96c63c9c4fb404177c7710ca1688d06f837a supply G1–G5: Boolean algebra A=F2^X, X={0,1}^n, affine V0, product flags V'=V+span(ab), exact multiplicative complexity MC, exterior residual and bounded-potential transport. Use as input, not duplicate. LGC5/LGC6 and G6 remain open. Below are new mathematical derivations and negative controls specifically for arithmetic Langlands. No native prover or global separation claimed.
+
+### R1. The existing gate graph is split étale, not ramified
+
+Strengthen LGC1a over Z, not only fields. In the integral graph ring, successively eliminate z_j using the monic linear relation z_j-f_j(earlier)=0. This gives an isomorphism with Z[x_1,...,x_n]/(x_i^2-x_i). The factors x_i and x_i-1 generate the unit ideal, so CRT inductively identifies the ring with product_{a in X} Z. Explicit orthogonal idempotents e_a=product_i(x_i if a_i=1 else 1-x_i) sum to 1 and give the evaluation isomorphism. The acceptance equation selects the factors with output one (including empty product ring if no input accepted). Hence the scheme is finite split étale over Spec Z; all Galois actions on geometric points are trivial, and this remains so in residue characteristic two. The presentation may be short while the split product is exponentially large. Intrinsic inertia, conductor and ramification of this graph cannot distinguish circuit complexity. This exact theorem rules out a naive LGC4 identification with wild geometry. To get real ramification one must introduce a genuine arithmetic cover/local system, not rename gate graph fibres.
+
+### R2. A genuine GL(1) ramified gate representation
+
+Use K=Q_2, L=K(i), pi=1+i. The polynomial T^2-2T+2 of pi is Eisenstein at 2, so L/K is totally ramified of degree two. pi^2=2i, hence 2=-i*pi^2 with unit -i. In the normalization v_L(pi)=1, v_L(2)=2. This is the exact factorization consumed by historical RamifiedLocalValuationSharpnessExact; not a purported inference of a factorization from a ramification label. The local quadratic character chi of K^* associated by local reciprocity to L/K is the Hilbert-symbol character chi(u)=(-1,u)_2. For u=2^r v, v an odd unit, chi(u)=(-1)^((v-1)/2) (parity of odd-unit residue modulo 4; chi(2)=1 since 2=N(1+i)). Thus chi is trivial on 1+4Z_2, nontrivial on 1+2Z_2, conductor exponent 2. On the Weil side use the corresponding quadratic character via GL1 local Langlands (local class field theory). Global donor is the quadratic character of Q(i)/Q, equivalently the primitive Dirichlet character modulo 4, odd at infinity. Keep the smooth character of Q_2^* distinct from the Dirichlet character extended by zero on even integers.
+
+For each actual Boolean value a in F2 let rho_a=chi^a. Tensor product realizes XOR: rho_a tensor rho_b=rho_(a+b). Tensor with chi realizes NOT. The Hilbert pairing realizes AND exactly:
+    (-1^a,-1^b)_2 = (-1)^(ab),
+where the arguments mean (-1)^a and (-1)^b. In particular rho_(ab)=chi raised to (1-symbol)/2. For the odd-unit formula only (-1,-1)_2=-1 is nontrivial. Independent elementary nonnorm proof: x^2+y^2=-1 over Q_2 is impossible, since if either coordinate has negative valuation, scaling by the smallest common denominator and reducing modulo 4 yields a primitive sum of squares equal to 0 mod 4, impossible; integral coordinates have squares 0 or 1 mod 4, never sum to 3. All other sign pairs are split. This is a real local reciprocity/quaternion operation, not the tensor product of two characters (which is XOR). In cohomological language it is the Kummer cup product valued in Br(K)[2], then the explicit two-element re-encoding; no claim it is a tensor functor. At odd primes the Hilbert symbols of these two units are 1, while the real Hilbert symbol is also (-1)^(ab). Global reciprocity product is therefore 1, even on an AND output of 1: multiplying all places erases the nontrivial local bit. Retain labelled places.
+
+The representation of a fixed input's computation is built with one local sign/character label per gate, with constant bit cost per gate at this fixed field. This is an actual GL1 arithmetic encoding of operations, but the family over all x can be exponentially large and computing its aggregate invariants is not free. It does not prove general geometric Langlands nor a cost equivalence of arbitrary automorphic operations.
+
+### R3. Attach to existing P11 Jacquet–Langlands on the same local component
+
+Reopened historical files at #585 head 2cb821df49890b51605d1b990ee0b497e490b88c, actual source bodies:
+- DASHI/Algebra/RamifiedLocalValuationSharpnessExact.agda blob 833c9a5592ecf1a1664be34dae11032627359aea, ramifiedSharpCoefficientValuation, unitDepthOneBranchPowerDepth.
+- DASHI/Core/SectionIndependentConsumerExact.agda blob f68f75b46abdd0e073b02eeab24c1fc66b7e63e4, factorizationImpliesSectionIndependence, sectionIndependenceImpliesFactorization under SectionFamilyCoversFine.
+- DASHI/Moonshine/P11JacquetLanglandsRepresentationStandardAuthorityExact.agda blob 4ebb8197b03cb9cf84198aa2cceef77063b7c821, p11QuaternionLocalAtTwoUnramified, p11BrandtA2IsMinusTwo, imported same local component at 2; not a global equality of representations of different groups.
+- DASHI/Moonshine/P11JacquetLanglandsSectionIndependenceExact.agda blob cb2e01ec0333d1099f870193b85476c62fed115e, transportedU2DependenceDetectedByGenericCriterion and satakeResidualSectionIndependent. Distinct coordinate alignments have same Satake residual but different transported operator. #596 is historical integration owner. These source bodies are inspected, not fresh kernel authority.
+- Default-branch search found EllipticRationalKummerOpenExact and EllipticRationalTwoTorsionKummerExact plus BSD local valuation parity scripts, but no exact-name HilbertSymbol/LocalReciprocity/ArtinConductor search hits; this is index-limited, not a claim of absence. Elliptic Kummer maps and multiplicative squareclass Kummer here are different typed objects.
+
+Let R be the rank-two Frobenius-semisimple unramified Weil–Deligne parameter of the existing common local pi_2 (N=0), in the weight-two arithmetic normalization with Frobenius polynomial P(T)=1+2T+2T^2 from a_2=-2, det=2. At the representation-level authority boundary, define R_a=R tensor chi^a. LLC twisting compatibility attaches pi_2 tensor (chi^a composed with det) on GL2. Since R is unramified, inertia acts trivially before twisting and by the nontrivial scalar quadratic character after twisting. Consequently:
+    a=0: dim R_a^I=2, Artin conductor exponent 0, inverse Euler factor P(T);
+    a=1: dim R_a^I=0, Artin conductor exponent 4, inverse Euler factor 1.
+Proof of conductor: split R over an algebraic closure into two unramified Weil characters (Frobenius semisimple); twisting either by chi has conductor exponent 2, and Artin conductor is additive. Alternatively the lower ramification groups for L/K are G0=G1=C2, G2=1 (sigma(pi)-pi=-2i, valuation 2; O_L=Z_2[pi]); each nontrivial group contributes codimension 2 in the twisted rank-two representation. The unramified parameter has N=0 and twisting preserves it. No canonical marked U2 coordinate action is claimed; use parameter-level invariants only. No assertion of a new global modularity proof, global level calculation or fixed-space isomorphism. This is a genuinely ramified local twist of the exact previously unramified JL lane.
+
+### R4. Unlabelled Langlands profiles fail completely as universal hardness invariants
+
+For any Boolean function f on X, let w(f)=#{x:f(x)=1}, N=|X|. Form the finite direct sum of global quadratic Galois characters
+    M_f = direct_sum_(x in X) chi_global^f(x)
+        = 1^(N-w(f)) direct_sum chi_global^w(f).
+This is a characteristic-zero representation; its associated local Weil parameters are sums of the corresponding local characters, not an assertion that a reducible direct sum is a cuspidal GL_N representation. At every place the entire unlabelled isomorphism class depends only on N,w. At 2, inertia dimension N-w, Artin conductor exponent 2w, inverse Euler factor (1-T)^(N-w) (trivial Frobenius on unramified summands). For the P11-twisted variant direct_sum R_f(x), the same claims hold with dimension 2(N-w), conductor 4w, factor P(T)^(N-w). At the global character level the Artin L-function is zeta(s)^(N-w) L(s,chi_-4)^w, initially Re(s)>1, extending where the factors do. This is an identity of representation-theoretic factors, not a computational way to determine w. All multiplicities, inertia filtration, local factors and any invariant of the unlabelled representation factor through weight. The previous signed multiplicity and section-independence producers apply exactly: reordering input summands leaves the packet unchanged but may change f.
+
+**Bounded-increment no-go:** a single AND x1*x2 at n>=2 produces weight 2^(n-2) from the zero function, so the raw conductor changes by 2^(n-1) (GL1) or 2^n (P11 rank-two variant). Counting conductor as one unit per ramified place/fibre does not charge actual nonlinear operations. Normalizing by N instead gives a bounded scalar, not superpolynomial goal growth.
+
+**Balanced masking theorem (unrestricted circuits):** put F(x,z)=f(x)+z in F2. Then MC(F)=MC(f): add XOR at zero multiplicative cost for upper bound, and set z=0 for lower bound, as restrictions cannot increase multiplicative complexity. Yet w(F)=2^n independent of f, so M_F and every local/global unlabelled representation datum are identical to those of the easy affine output z. More generally for any fixed k>=0, append k+1 mask variables and put F_k(x,z)=f(x)+sum_(j=0)^k z_j. For EVERY restriction of at most k coordinate positions, at least one mask variable remains free; flipping that variable pairs inputs with opposite output. Each restricted representation has exactly equal trivial and ramified multiplicities, same as easy parity of the mask variables. This proves equality of *all labelled coordinate-restriction profiles of order <=k*, at every place and for the P11 twist, including full inertia filtration, conductors, Euler factors, and all invariant consumers of these packets. MC equality again follows by restriction all z=0. If k grows polynomially with original n, new width remains polynomial, so a superpolynomial MC family stays superpolynomial in padded width (with the conventional family parameter or subsequence). The theorem applies to SAT as well, but gives no proof its MC is high.
+
+For an unconditional impossibility of using these profiles as a complete complexity proxy, count circuits with m ANDs and free affine gates: at stage j each AND uses two affine-linear combinations of at most n+1+j currently available generators; output uses another affine combination. At most 2^[2m(n+1)+m(m-1)+n+m+1] functions realizable with exactly m slots (pad redundant ANDs to cover <=m). For any fixed polynomial m(n) exponent is polynomial in n, smaller than 2^n for large n; some functions have MC>m. Choose a sequence exceeding every fixed polynomial by the same counting with e.g. m=2^(floor(n/3)). Their masked profiles coincide exactly with affine functions. This is a no-go for any claimed *general* superpolynomial lower-bound measure that depends only on these profiles and is bounded polynomially on easy circuits; it does not exclude an encoding-specific SAT predicate or all Langlands-derived invariants. Recovering the fully input-labelled representation determines f pointwise, but entails potentially exponential data and still has no global gate-cost theorem. Seek a richer efficiently describable relation rather than a higher unlabelled moment.
+
+### R5. Exact bridge to the other worker's dual alternating geometry, with joint-charge obstruction
+
+Identify A=F2^X with functions on Boolean points. Each linear functional ell is a weight vector lambda_x over F2. For V containing 1 and ell in V^perp, define
+    H_ell(a,b) = product_(x in X) [ ((-1)^a(x),(-1)^b(x))_2 ]^lambda_x
+               = (-1)^ell(ab).
+Thus the worker's alternating form omega_ell(a,b)=ell(ab) on V/<1> is exactly the exponent of a product of genuine local Hilbert symbols. Bilinearity follows from multiplication and linearity, diagonal vanishes since a^2=a and ell(a)=0, and adding constants is invisible because ell(V)=0. The pairing is weighted and place-labelled; global all-place reciprocity would erase it. For a productive p=ab outside V, V'^perp = V^perp intersect {ell:ell(p)=0}. Evaluation at p is a nonzero linear functional on V^perp (extend basis V by p); its kernel has codimension one. Therefore a single gate simultaneously kills exactly half of the annihilators, namely 2^(dim A-dim V-1), including many nonzero forms. Cannot sum independent Hilbert obstructions as independent paid operations. Counting all killed witnesses, even using higher ramification labels, is not a universal charge. Log of annihilator size decreases exactly one, independent of target f, and reaching any subspace containing f alone only forces one extra dimension. Retain joint residual correlations and decomposable-plane constraints. This bridge is a pointwise class-field-theoretic realization of G3; not a solution of G6.
+
+### R6. Local exact execution, actually run this continuation (no CI)
+
+Re-executed previous reported gate/rank regression in the local runtime: 48/48 gate equations with unique root at characteristics 2,3,5,7, 8/8 identity-matrix ranks (SymPy DomainMatrix, Q, dimensions 2^1 through 2^8). These reproduce the earlier document's reported figures; execution evidence in this continuation, not retroactive proof of an earlier run. New exact checks: 16/16 Hilbert sign vs primitive conic residue checks mod 4,8,16,32; 5/5 Gaussian odd norm image checks mod 4..64; 4/4 integral idempotent evaluation matrices n=1..4; 7,424/7,424 masked local profile comparisons for every 3-input truth table and k=0,1,2, over every coordinate subset size <=k and all its assignments; explicit n=3 affine annihilator has 16 elements, x1*x2 discharges exactly 8. These finite checks do not certify local class field theory, analytic L-functions or arbitrary circuit lower bounds. Proofs above establish the general elementary consequences independently.
+
+Reproduction (Python/SymPy, no external data):
+```python
+from itertools import product, combinations
+import sympy as S
+from sympy.polys.matrices import DomainMatrix
+gate = rank = hilbert = mask = 0
+for p in (2,3,5,7):
+    for a,b in product(range(2), repeat=2):
+        for z in (1-a,a*b,a+b-a*b):
+            assert [v for v in range(p) if (v-z)%p==0] == [z]
+            gate += 1
+for m in range(1,9):
+    assert DomainMatrix.eye((2**m,2**m),S.QQ).rank()==2**m
+    rank += 1
+for k in range(2,6):
+    q=2**k
+    for a,b in product(range(2), repeat=2):
+        u,v=(-1)**a,(-1)**b
+        symbol=(-1)**(((u-1)//2)*((v-1)//2))
+        soluble=any((u*x*x+v*y*y-z*z)%q==0 and (x%2 or y%2 or z%2)
+                    for x,y,z in product(range(q),repeat=3))
+        assert symbol==(-1)**(a*b) and soluble==(symbol==1)
+        hilbert+=1
+t=S.symbols('t')
+assert S.discriminant(t*t+2*t+2,t)==-4
+for q in (4,8,16,32,64):
+    norms={(a*a+b*b)%q for a,b in product(range(q),repeat=2) if (a*a+b*b)%2}
+    assert norms=={a for a in range(q) if a%4==1}
+for n in range(1,5):
+    X=list(product(range(2),repeat=n))
+    E=S.Matrix([[S.prod(xi if ai else 1-xi for xi,ai in zip(x,a))
+                 for a in X] for x in X])
+    assert E==S.eye(2**n)
+for k in (0,1,2):
+    n=3+k+1
+    X=list(product(range(2),repeat=n))
+    subsets=[I for j in range(k+1) for I in combinations(range(n),j)]
+    for f in range(256):
+        ys=[((f>>sum(x[i]<<i for i in range(3)))&1)^(sum(x[3:])%2) for x in X]
+        for I in subsets:
+            counts={a:[0,0] for a in product(range(2),repeat=len(I))}
+            for x,y in zip(X,ys):
+                counts[tuple(x[i] for i in I)][y]+=1
+            assert all(c==[2**(n-len(I)-1)]*2 for c in counts.values())
+            mask+=1
+X=list(product(range(2),repeat=3))
+V=[sum((((i&1)^sum(((i>>(j+1))&1)*x[j] for j in range(3)))%2)<<k
+       for k,x in enumerate(X)) for i in range(16)]
+p=sum((x[0]*x[1])<<k for k,x in enumerate(X))
+L=[l for l in range(256) if all((l&v).bit_count()%2==0 for v in V)]
+assert len(L)==16 and sum((l&p).bit_count()%2 for l in L)==8
+assert (gate,rank,hilbert,mask)==(48,8,16,7424)
+```
+
+### R7. Exact remaining Langlands-only proof obligations and consumers
+
+| Lemma | Status and next mathematical deliverable |
+|---|---|
+| R1/LGC4a | Integral split-étale theorem derived; retire naive graph inertia as complexity measure. |
+| R2/LGC4b | Genuine ramified GL1 sign character/Hilbert gate transport derived using standard class field theory; native valuation and source-specific character adapters open. |
+| R3/LGC4c | Same P11 local rank-two twist conductor/Euler factor derived at explicit LLC authority boundary; attach historical p11 unramified parameter and conductor adapter. |
+| R4/LGC5a | Unlabelled and bounded-order coordinate local-profile no-go proved; never promote raw conductor, multiplicity, Euler factors or their global products to universal cost. |
+| R5/G3 | Weighted local Hilbert-symbol realization and exact joint annihilator update proved; no independent private-gate charges. |
+| R7a/LGC4d | Construct a *label-aware, compositional* local system/Weil representation or cohomological object whose arithmetic data is sensitive to cross-coordinate dependencies and well-defined under admissible section/representation changes. Charge any n-dependent labels, local systems and coefficient encodings. Must defeat R4 masking; no brute-force exponential truth-table materialization as a purported efficient compiler. |
+| R7b/LGC5 | Prove a noncircular invariant on that object with a uniform bound under EVERY legal product extension (or every actual machine transition), including simultaneous discharge, shared gates and arbitrary XOR; explicitly derive how local correspondence and gluing transport that bound. R5 rules out naive cardinality. |
+| R7c/LGC6 | On canonical SAT family, prove any goal object forces superpolynomial accumulated charged progress, for all fixed polynomial budgets. No conclusion from hard arbitrary functions, ramified extension existence, prime counts or analogies with BSD/RH. |
+| LGC7/N6 | Existing DirectSATLowerBoundExact conditional endpoint plus standard-machine coverage. No new endpoint inhabitant. |
+
+Priority R7a/b/c in one mathematical tranche, not new certification infrastructure. Candidate next target is a section-independent but relation-sensitive *labelled* character packet with an explicit universal edge-cost theorem; local/global Langlands equivalence alone does not bound the cost of obtaining the packet. If no such theorem, retain this lane as a mathematically scoped donor; other worker owns general multiplicative-complexity route. No requirement to solve RH, BSD or YM first.
+
+Source attribution: classical local reciprocity and quadratic Hilbert pairing: Kiran Kedlaya, https://kskedlaya.org/cft/sec_localrecip.html ; Romyar Sharifi, https://www.math.ucla.edu/~sharifi/notes/algnum-ch09.html ; John Voight, *Quaternion Algebras*, DOI 10.1007/978-3-030-56694-4, local and global Hilbert symbols (https://link.springer.com/chapter/10.1007/978-3-030-56694-4_12 and _14); Ralf Schmidt, *Some remarks on local newforms for GL(2)*, https://math.unt.edu/~schmidt/papers/gl2.pdf ; LLC parameter/conductor compatibility https://doi.org/10.1017/S1474748024000227 ; LLC twisting https://masaooi.github.io/LLC.pdf. These are standard theorem authorities, not claimed reproofs of LLC. DASHI owns only the gate-encoding, profile no-go and crosswalk synthesis here; preserve JMD attribution and other worker's G1–G5 ownership. P11 arithmetic normalization distinct from unitary automorphic normalization; inverse Euler factor at a ramified twist is 1 in either convention. No source of a universal lower bound is imported by citation.
