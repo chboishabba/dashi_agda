@@ -2714,3 +2714,57 @@ To reproduce certificate tests: flatten matrices, build echelon basis using pivo
 | LGC7/N6 | original conditional consumer | existing |
 
 Next geometry-forward: R140 isolates actual noncommutative M2 acceptance core in G84, but easy repeat clause control prevents promoting this as intrinsic hardness. Investigate reusable source-specific products in this core (rank-one actual resets, repeated original labels, true source factorization, weighted scalar vs all endpoint matrix), or direct standard-machine resource theorem, not another compulsory rank or commutator invariant. Admit G85–88 noncrossing/cover, R128–134 matroid cuts, R136/R139 nilpotent and consumer-specific shortcuts, and arbitrary direct SAT decision; do not replace endpoint by exact count or maximal algebra optimization. Preserve zero mode, inhabited neutral fibre, signed residual, original time/k/Frob/history/precision and consumer. No new certification prerequisite, no P!=NP claim, no unrelated branch edits.
+
+## 2026-11-24 — R144–R149: original clause-reset / signed ternary intersection contraction
+
+Scope: Langlands only. G89–G93 (#1548/#119) are donor mathematics, not a branch migration. Continue actual R140 G84 matrices and R85 weighted rank-two Weil consumer. Gate numbering continues after live R143.
+
+### R144. Actual rank-one clause reset
+Project row vectors of the original G84 three-state transfer to their U,S coordinates (the rejected absorbing coordinate is retained in the source, not identified with an empty assignment). The induced literal matrices are I,Y=[[0,1],[0,1]], and boundary R=[[0,0],[1,0]]. For literal truth values L_jr, e_U^T prod_r Y^L_jr R=(1-V_j)e_U^T with V_j=prod_r(1-L_jr), since Y^2=Y and e_U^T R=0. Thus the actual weighted acceptance P_t=sum_x prod_i w_i(x_i) prod_j(1-V_j(x)); for R85 w_i=(1,z_i). No independence of repeated labels assumed. D_t=3A-4P_t, A=prod_i(w_i(0)+w_i(1)).
+
+### R145. Signed ternary intersection (dual clause selection)
+V_j is the indicator of a partial falsifying assignment sigma_j. Repeated identical pins coalesce; opposite pins make a tautological clause (V_j=0). Empty clause has V_j=1. For each partial assignment sigma use E_sigma(x)=1 iff x extends sigma. E_empty=1; E_sigma E_rho=E_(sigma union rho) on compatibility, 0 otherwise. The ternary pin states are unpinned (neutral, both values inhabited), pinned 0, pinned 1; incompatible intersection is bottom, distinct from neutral. Expand F_t=prod_j(1-E_sigma_j). Exact weighted contraction is sum over compatible selected clause subsets S of (-1)^|S| prod_{i forced by union} w_i(sigma_i) prod_{i unforced}(w_i(0)+w_i(1)). This is inclusion-exclusion on the original violation cylinders, not an assumed new intrinsic lower bound. Identical union states can merge with signed coefficients, not independent per-occurrence guard weights. Conflict graph alone is insufficient: the union records repeated same-polarity pins and pays their weights only once.
+
+### R146. Exact sparse frontier
+For a supplied clause order, frontier after step j is original guards appearing in both processed and remaining clauses. Initialize D[empty]=product of total weights of never-occurring guards. At each clause, copy each state coefficient to the unselected branch, subtract it into the compatible union state on the selected branch, and drop incompatible branches with an exact contradictory-pin certificate. Forget all guards at their final occurrence, multiplying by the weight of their pinned value or the sum of weights if unpinned. Merge equal remaining keys by addition; coefficient zero only deletes a contribution to this consumer, not the source fibres. At termination D[empty]=P_t. Inductively D is the signed sum over prefix selections with all completed guards contracted; future factors cannot mention forgotten guards, proving the step over any commutative ring. If max frontier width is b, at most 3^b live states and at most twice that many temporary branch contributions per clause. Fixed-width array implementation O(c q 3^b) ring operations and polynomial bookkeeping; sparse dictionary sorting may add log factors. Compare primal 2^b frontier DP on the same cut, which is a better worst-case width bound; dual advantage is sparse reached states or symbolic cancellation, not a superior universal exponent. No requirement to compute an optimal order. Exact component separation, duplicate clauses and subsumed violation cylinders can be simplified with certificates. Reverse direction: each expansion branch determines the chosen source clause occurrences and their intersection, but merged coefficients do not recover those choices; source IDs, signs and independent provenance remain attached. A final scalar cannot recover the complete source.
+
+### R147. Symmetry/orbit contraction beyond wide frontiers
+Suppose the normalized signed clause set is invariant under all permutations within supplied disjoint blocks B_l of original guards (can certify sufficient syntactic invariance by adjacent transposition checks on the set). Then F_t depends only on count vector h_l=sum_{i in B_l} x_i. For arbitrary signed and unequal weights form Q_l(u)=prod_{i in B_l}(w_i(0)+w_i(1)u). Exact P_t=sum_h F_t(x_h) prod_l [u^h_l]Q_l(u), where x_h is any canonical assignment of the indicated counts. Compute coefficient arrays by multiplication, O(sum_l |B_l|^2) ring operations; evaluate source on prod_l(|B_l|+1) representatives. Polynomial for fixed block count even without weight symmetry. Reverse orbit members are the original assignments with that count vector, not reconstructed from the contracted coefficient. Original clause example: all positive r-subset clauses on q guards, F=1 iff #zeros<r; P_t=sum_{h=q-r+1}^q [u^h]Q(u). For fixed r>=2, polynomial source size, complete primal interaction graph, nonnilpotent actual G84 transfer algebra, but one-block polynomial contraction. This is a negative control against mandatory frontier/algebra cost, not an intrinsic lower bound.
+
+### R148. Precision / indexed transport
+All contractions division-free. For actual R85 D_t=3A-4P_t, D mod 2^(H+2) and A at sufficient precision recover P_t mod 2^H by exact division of the known divisible residual; e.g. D mod8 yields P mod2. Ring result also applies to unramified extension coefficients, but only scalar modular rings were executed in this tranche. Preserve independent (history,tau,k,j,v,field,p_c,p,consumer) indices plus original clause/literal occurrence IDs, pin orientations, zero mode, conflict witnesses, signed subset residual, live frontier, and optional symmetry orbit certificate. Clause processing order is an algebraic contraction order, not physical chronology. The neutral pin does not stand for zero coefficient or absence of assignment. Exact accepting/rejected weights sum to A. G92 counting/decision distinction retained: this weighted contraction is not a compulsory intermediate for arbitrary decision algorithms.
+
+### R149. Local acceptance and reproducible core
+Executed in local Python integers and SymPy, seed 144. Actual 3x3 matrix reset truth comparisons 63/63 (all literal strings length 0..5); signed dual vs exhaustive 400/400 (q=1..8, 0..9 clauses, clause length 0..4, weights -3..3, repeated labels, contradictory pins, empty clauses); modular 2000/2000 (2,4,8,9,25); rank-two mod8 identity 400/400; all-positive r-subset orbit 165/165 (q=2..10, r=1..min(q,4), five signed weight draws). Total 3028 comparison groups. No CI/native kernel, no extension-field execution, no measured asymptotic speed claim.
+
+Core pseudocode:
+    normalize each clause to its falsifying partial assignment; skip contradictory pins
+    last[i] = last clause containing i
+    D = {(): product(sum(w[i]) for absent i)}
+    for j,c in enumerate(clauses):
+        E = defaultdict(0)
+        for s,a in D.items():
+            E[s] += a
+            if compatible(s,c): E[union(s,c)] -= a
+        D = defaultdict(0)
+        for s,a in E.items():
+            for i with last[i]==j:
+                a *= w[i][s[i]] if i in s else sum(w[i])
+                erase i from s
+            D[s] += a
+        reduce coefficients in target ring; remove zero coefficients
+    return D.get((),0)
+
+| Gate | Status |
+|---|---|
+| R144 actual G84 reset / weighted scalar | derived, tested |
+| R145 signed compatible pin union | derived, tested |
+| R146 sparse frontier contraction | implemented, tested |
+| R147 certified block symmetry orbit contraction | derived; one-block family tested |
+| R148 precision and indexed residual | derived; scalar mod8 tested |
+| R149 local exact regression | executed |
+| R7a'/LGC4d global paid nonlinear contraction | OPEN |
+| R7b'/LGC5 unrestricted unavoidable deterministic cost | OPEN |
+| R7c/LGC6 literal Clay separation | OPEN |
+
+Next: actual mixed affine/orbit/frontier decomposition on original weighted Weil probe, not a compulsory rank invariant. For any global result admit primal decision, clause simplification, symmetry, contextual quotient, nilpotent sorting and arbitrary direct machine algorithms. No general Langlands correspondence claim or unrestricted separation. No unrelated branch edits.
