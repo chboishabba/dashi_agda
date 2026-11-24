@@ -112,6 +112,7 @@ def run(a):
     return {"status":"SOURCE_BOUND_MOD31_SIGNED_GENERATOR_WELD","relators":results,
             "outer_loop":loop,"paired_quadratic_character_lifts":chars,"model_sha256":sha(a.model),
             "outer_receipt_sha256":sha(a.outer/"actual_MM31_outer_phase_result.json"),
+            "operator_packet_sha256":sha(a.outdir/"canonical_signed_normalizer_mod31.npz"),
             "characteristic_zero_numeric_matrices":False,
             "full_presentation_authenticated":False}
 
