@@ -376,3 +376,30 @@ For each *descended* character the distinct extraspecial 3B-centre trace is \(-d
 
 The correct diagonal scalar equation remains \(s+\epsilon(u_s+k_a)=0\bmod3\), retaining the central scalar \(u_s\) of the original 729 Weil extension; hence the selected 12 and 78 must use the same Suzuki central C3 phase. The original GAP producer now enforces two matched conjugate pairings and cross-checks exact class20 trace descent against **the pre-existing full 210-class character matcher**. No source CTblLib execution, numeric 78-selection, or original complex same-object operator has been asserted in this update. Original source attribution: Barraclough–Wilson, Bray–Wilson, BMW, CTblLib; user attached Langlands is mathematical analogy only.
 
+
+
+## 24 November 2026 — authentic GAP selects nonfaithful Sym²78 and uniquely identifies source 4D
+
+**This supersedes all earlier conjectures that the actual Monster chooses the faithful degree78.** The user-executed original GAP 4.16dev/CTblLib 1.3.11 main/Fusion sources both passed \`EXIT_0\`, reporting \`MAIN_AND_FUSION_SOURCE_MATCHED\`. The source-to-endpoint theorem and raw receipt checksums are recorded in [Monster3BGAPSelectedDualSymSquare12To90Endpoint20261124](../../physics/Monster3BGAPSelectedDualSymSquare12To90Endpoint20261124.md) and the [living P0–P6 roadmap](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md). The raw original main JSON was not mounted here; the results below reproduce the user's supplied authentic run report rather than claiming independent source execution.
+
+Original \`6.Suz\` faithful12 Irr153/154 (\`\\chi_{115}\` pair) and **selected 78 Irr79/80** (\`\\chi_{78}\` pair) are exactly **Nebe nonfaithful Sym²12/direct-dual family** by the original complete 210-class character comparison. Their selected degree90 central \(C_2\) trace is **+66**, not -90, and there are exactly two Suzuki central-C3-compatible 12/78 pairings. The 12 and 78 source products descend from original main Irr327/253 into MN3B Irr146/109 with Monster occurrence one apiece; the original diagonal K is main class20 (distinct from E-centre class2).
+
+The important new *marked-phase* consequence is
+\[
+\boxed{S_s|_{6.\mathrm{Suz}}\cong V_{12,s}\oplus\mathrm{Sym}^2(V_{12,s}^{\vee}).}
+\]
+For a genuine complex faithful \(6.\mathrm{Suz}\) 12D generator matrix \(A_g\), the full source 90D inner operator is equivalent to
+\[
+\boxed{L_s(g)\sim A_g\oplus\mathrm{Sym}^2((A_g^{-1})^\top).}
+\]
+The **dual** is required: direct \(\mathrm{Sym}^2V_s\) reverses the nontrivial central C3 scalar, while dual Sym² retains the same one. The full-character source equality and two same-C3 pairings establish this within each unoriented conjugate sector; the absolute \(\zeta/\zeta^2\) orientation and original word-specific source matrix are not supplied by ordinary unmarked characters.
+
+The central \(6.\mathrm{Suz}\) order-two source element acts on the actual multiplicity Hom space by \(J_s=L_s(t_2)\), spectrum \((-1)^{12},(+1)^{78}\), trace **66**. Thus **two operators suffice** to define the actual \(12/78\) Hom-block projectors:
+\[
+\Pi_{12,s}=\frac{I-J_s}{2},\qquad \Pi_{78,s}=\frac{I+J_s}{2}.
+\]
+Do **not** apply these to \(W_s\) before removing the original \(729\)-dimensional Heisenberg/Weil factor. The original N group-algebra idempotent construction remains valid, but the actual selected central involution now provides the smaller projection.
+
+The **original source four-class ambiguity is paid**: stored \(2.\mathrm{Suz}.2\) class 5→\(6.\mathrm{Suz}.2\) class 9→main class54→MN3B class33→Monster class10 selects **4D**, uniquely for the original class with the specified square-to-2B criterion. This is not the same as identifying user-local \(C=(g_{3B}h_{3B}^{-1})^{15}\) or another of the 28 quotient candidates as that original Monster 4D group element.
+
+**Paper 10 remaining actual operator endpoint:** obtain the complex faithful 6.Suz 12D standard-source matrices with correct \(6.\mathrm{Suz}.2\) cover scalar and actual Monster word/Hom realization; match the user-local MM words to those source elements and selected original 4D class. Then reconstruct the 78/90 action through the dual-Sym² construction and original intertwiner, preserving outer phase exchange and full central-cover relations. There is no remaining independent selected-78 family or source 4-class search. Formal certification deferred.
