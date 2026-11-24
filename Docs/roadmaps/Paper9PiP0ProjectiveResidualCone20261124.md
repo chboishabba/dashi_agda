@@ -922,10 +922,13 @@ The source's \`FIBRE\` receipt separates
 \`schedule_merges\`,
 \`schedule_right_first\`,
 \`schedule_predicted_peak_bytes\`
-and \`schedule_cpp_plan_heap_bytes\`
+and \`schedule_cpp_plan_object_payload_bytes\`
 from actual \`gmp_peak_live_bytes\` and
-Linux VmHWM. The C++ plan allocation is
-not covered by the GMP allocation hooks.
+Linux VmHWM. The C++ plan object's payload-byte estimate is
+\`planNodes*sizeof(Plan)\`: it excludes allocator overhead and
+is **not** total measured C++ heap allocation. Neither
+ordinary C++ planner allocation nor OpenSSL allocation is
+covered by the GMP allocation hooks.
 The normal \`FC\` measured source
 operand-width and explicit carrier
 observations remain separate from
