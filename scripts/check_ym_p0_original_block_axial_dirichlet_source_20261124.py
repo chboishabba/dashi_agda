@@ -109,6 +109,46 @@ counts['scale_radius']+=1
 # its gauge orbit: continuous SU(N) Haar first moment is 0; fixed tree value 1.
 assert sum(q[0] for q in Q8)==0 and one[0]==1
 counts['open_link_nogo']+=1
+# Check the 2^4 coordinate reflections and 4! permutations mentioned in
+# Balaban CMP122 Eq.(1.71) as 384 frames of OUR candidate axial tree.
+# This is NOT a proof that the candidate graph equals his source-selected rT.
+from itertools import permutations
+def transform_frame_point(x,perm,flips):
+ return tuple((1-x[perm[i]] if flips[i] else x[perm[i]])%L for i in range(4))
+def oriented_native_edge(x,y):
+ for a in range(4):
+  if step(x,a)==y:return (x,a),1
+  if step(y,a)==x:return (y,a),-1
+ raise AssertionError((x,y))
+original_config={e:one for e in links}
+for e in rng.sample(links,130):original_config[e]=rng.choice(Q8)
+original_moments=original(original_config)
+all_frames=set()
+for perm in permutations(range(4)):
+ for flips in product((0,1),repeat=4):
+  r=transform_frame_point(root,perm,flips)
+  ext=transform_frame_point(external,perm,flips)
+  anchor_edge,sgn=oriented_native_edge(r,ext)
+  h={r:inv(original_config[anchor_edge]) if sgn==1 else original_config[anchor_edge]}
+  selected=[anchor_edge]
+  for child in order[1:]:
+   p,e,oldsign=parents[child]
+   x=transform_frame_point(p,perm,flips)
+   y=transform_frame_point(child,perm,flips)
+   ref,sign=oriented_native_edge(x,y)
+   h[y]=mul(h[x],original_config[ref] if sign==1 else inv(original_config[ref]))
+   selected.append(ref)
+  assert len(set(selected))==16 and set(h)==B and ext not in h
+  frame=tuple(sorted(selected))
+  assert frame not in all_frames
+  all_frames.add(frame)
+  X=gauge(original_config,h)
+  assert all(X[e]==one for e in selected)
+  assert original(X)==original_moments
+  counts['source_rotated_candidate_frame']+=1
+assert len(all_frames)==384
+counts['source_rotated_candidate_frame']+=1
+
 print('PASS',s.__version__,sum(counts.values()),dict(counts))
 print('Original full L4 Wilson action/marks: exactly 16 anchored tree links -> 1008 remaining')
 print('Standard Dirichlet Landau local sufficient radius delta < 1/3, NOT CMP122 background FP')
