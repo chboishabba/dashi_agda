@@ -2504,3 +2504,205 @@ assert (hermite,lagrange)==(192,144)
 | N6 | originalClayTransport | conditional #1040 terminal / #1129 costed coverage |
 
 Aristotle BIDI: G56 shows the full source is determined by small exact low-order interface, but G57 prevents naive closed linear updates; neither implies exponential algorithmic time. G59 is a concrete inherited-precision control on low-final-precision shortcuts; verify the actual deformation polynomial image and nodes before importing it. Prioritize a paid producer for the flag or actual useful contraction factors, and test both source-specific precision reduction and its obstruction; do not impose exact high modes, universal context support, full count or fixed observer as a necessary prerequisite to original SAT decision. Preserve independent indices and signed/zero modes as semantics, not mandatory materialization. Direct uniform endpoint remains P0. No P!=NP claim or extra certification phase.
+
+
+## 26. P0-G60–G64 — actual multilinear producer, precision-aware degree pruning and joint support matching (2026-11-24)
+
+Controlling endpoint: literal Clay P vs NP. Both user pasted files read at /mnt/data/Pasted text.txt and /mnt/data/Pasted text (2).txt: Langlands R92–R96 (reported #1549/#120 heads ef1661868132/e97832116b0a) and G56–G59. Both P0 branches read live at 970b7f363c41 / 4da19bd486b3, common blob 123338b300164bf7442da0e9cd5aa9d5325f4b93. Actual source inspected: https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/quantitative-contraction.tex, Cauchy deformation, packet orientation, mode expansion and child descriptions (not an independent verification of the entire external theorem). Use G13/G45–G48 original selector/flag, G49–G52 count vs support, G53–G55 modular/weighted consumers, G56–G59 low modes and indexed signed residuals; R71–R74 Newton/Smith and R92–R96 taper and lift. Existing #1291/H05 GovernedIndexedResidualCubeExact (blob 42b70ebb7376813076934f2245ce6011b76f10c8), #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 standard-machine coverage, #1040 terminal, #607/#678 Aristotle. No Langlands/TOE/Monster edits. Classical multilinear Boolean interpolation/Mobius transform used; no claim of novelty for that transform or matching algorithms. The new results are a source-specific degree/valuation/matching interface and exact restrictions on its use.
+
+### G60 — actual multilinear producer degree rather than wire-count degree
+
+In an active call with M real row ports and M real column ports (each side indexed by its named original edge), A(Y),B(X) are products of chosen lifted tensor entries. Source F(T)=sum_X,Y A(Y) B(X) prod_x l_(Y_x)((W(T)X)_x), l_0(z)=1-z, l_1(z)=z. Define Atilde(Z)=sum_Y A(Y) prod_x l_(Y_x)(Z_x)=sum_S a_S prod_(x in S) Z_x; unique multilinear extension with coefficients by subset Mobius inversion. Exactly
+
+    F(T)=sum_X B(X) Atilde(W(T)X).
+
+Since the row vertices' port sets are disjoint, Atilde is the product of their local multilinear extensions. Degree d_A is the sum of local degrees over Q for nonzero integer tensors (over rings use <= sum). Zero tensor implies zero contraction. Degree F<=d_A(2L-1), not necessarily M(2L-1). No change to the original contraction. Reversing the network sides and constructing the packets for that orientation permits degree <=min(d_A,d_B)(2L-1) at the chosen call; do not claim the two deformed polynomials are identical or ignore the packing requirements. With fixed active nodes and multiplicity parameter C from R93, sufficient linear taper becomes ceil((d_A(2L-1)+1)/C), including the smaller valid degree bound, subject to the rest of the source proof's constraints. This is a degree reduction, not an end-to-end asymptotic result.
+
+At target origin precision 2^h, choose the local multilinear coefficients modulo 2^h, retaining explicit signed or canonical coefficient representatives, and evaluate those polynomials on Boolean inputs to give alternate integer lifts of local tensor entries. Every changed entry agrees modulo 2^h with its original. These lifts can delete all coefficients divisible by 2^h, and the resulting alternate deformation has degree bounded by the sum of the largest nonzero coefficient degrees in the local modular tables. It has the same F(0) mod 2^h. In addition the two entire local patch polynomials agree coefficientwise modulo 2^h by patch integrality and congruence of multilinear coefficients. They need NOT agree at the higher inherited precision required by Hermite recovery. Any use of the reduced degree requires running the recovery on the coherent alternate lifted deformation, NOT substituting its bound into an unchanged source algorithm or silently lifting residues again. Keep creation precision, chosen coefficient representatives, alternate-lift recipe, and actual difference (an integer multiple of 2^h at the tensor entry) separately indexed; retain R96 carry defects. If using canonical entry lifts as mandated by the existing source recursion, only their actual integral degree bound is immediate. Computing local coefficients explicitly costs O(r*2^r) ring operations for arity r by subset transform; for succinct high-arity tensors this is not a free polynomial operation. Polynomial for bounded arity; any full recursion integration must charge extraction and altered recipe evaluation. No claimed improvement to the published runtime.
+
+### G61 — signed exact original contraction and degree/valuation profile
+
+Let Btilde(X)=sum_U b_U X^U, with identical conventions for the columns. Boolean X_i^2=X_i gives the exact original origin contraction
+
+    F(0)=sum_(S,U) a_S b_U 2^(M-|S union U|).
+
+At precision 2^h terms with v2(a_S)+v2(b_U)+M-|S union U|>=h are exactly zero. In particular parity is sum over S union U=[M] of the products of coefficient parities. This is signed Mobius arithmetic on source supports, not a nonnegative term-count lower bound; equal supports combined before testing cancellation. At each patch W(t+alpha z) has coefficients in Z_2, so the same expansion of Atilde(WX) Btilde(X) has X support at most |S|+|U|. Let a_i=min_{|S|=i} v2(a_S), b_j=min_{|U|=j} v2(b_U), infinity for absent coefficients. Then coefficientwise content v2(F(t+alpha z)) is >=
+
+    min_(i,j) (a_i+b_j+max(0,M-i-j)).
+
+This holds for the whole integral local polynomial, not just its constant coefficient. In particular if d_A+d_B<M, parity vanishes everywhere (and at origin). A zero modular result does not certify UNSAT; the exact integer zero mode and original witness source remain distinct from this observation. G54 weighted fingerprints are admissible, changing the actual truth graph with paid overhead.
+
+Profiles for products of local tensors on disjoint ports are min-plus convolutions of their local profiles: each global support has one local decomposition, so no artificial independent charge for overlapping coordinates. With explicit local tables, the convolution is polynomial in M and table input size. For sparse row-side multilinear expansion, evaluate at origin without interpolation: mu_B(S)=sum_X B(X) X^S = product_v sum_{X_v} B_v(X_v) X_v^(S intersect ports(v)). These local moments are superset zeta transforms of local tables (or computed directly with charged cost). Then F(0)=sum_S a_S mu_B(S). Given all local tables, with at most K row monomials, O(poly(M,table lengths)+K*poly(M)) ring operations suffice by enumerating local support choices (skip zero factors). Constant total row degree yields polynomial K; arbitrary product of sparse local tables may have exponential K. This is a direct modular/exact contraction shortcut, not a universal polynomial SAT solver. Bit precision and coefficient production must be charged.
+
+### G62 — exact valuation of every actual scaled Cauchy entry
+
+Use original grid G={-L,...,L-1}, L=2^a, alpha=2L, C(T)=prod_{s in G}(T-s), W_xy(T)=C(T)/(C'(0)(T-d)), d=y-x. For an actual node t in G and real row/column within same packet, define coefficientwise content lambda_t(x,y)=min over coefficients v2(W_xy(t+alpha z)). Then
+
+    lambda_t(x,y)=0 if d=t,
+                  a+1-v2(t-d) otherwise.
+
+Proof: grid complete mod 2^(a+1); for s!=t, v2(t-s)<=a, so each linear factor t-s+alpha z has exact content v2(t-s), while t-s=0 gives exact content a+1. Content is additive under products over Q_2[z] (divide by minimal powers and multiply nonzero reduced polynomials over F2). The common derivative denominator has valuation sum_{s!=t} v2(t-s), independent of node. Remove factor d; formula follows. Cross-packet entries are zero (infinite content), padded ports absent, not additional independent choices. Thus modulo 2^h, any off-shift entry can only survive when v2(t-d)>=a+2-h; at h=1 only exact shift survives. No claim that computing the shifted node solves the original origin. Actual packet orientation uses this shift to align distinct group symbols; simply reindexing columns to restore original equality also restores the original cross-group dependencies. An invertible chart cannot make those original edges disappear. This is why replacing Hermite recovery with the origin shift alone is not an algorithmic improvement.
+
+### G63 — exact joint-support valuation floor for each source monomial pair via matching
+
+For given nonzero a_S,b_U in the actual source, expand Atilde(WX): choose map phi from row support S to real columns, using finite-cost packet entries. A row with no available entry makes its term zero, handle separately. The contribution of the choice has coefficientwise valuation exactly
+
+    v2(a_S)+v2(b_U)+sum_(x in S) lambda_t(x,phi(x))
+                         +M-|U union image(phi)|,
+
+for the single product term before summing different choices. This follows from content additivity and Boolean cube summation; repeated columns contribute only once to the image. The floor across all maps has a polynomial matching solution. Define mu_x=min_y lambda_t(x,y), build bipartite graph on S and [M] minus U with edges at lambda_t(x,y)=mu_x, and let nu(S,U,t) be maximum matching size. Then
+
+    min_phi [sum_x lambda_t(x,phi(x))+M-|U union image(phi)|]
+       = sum_x mu_x + M-|U| - nu(S,U,t).
+
+Proof: For any phi choose one distinct row representative for each distinct image outside U; they form a matching. Each such row with cost above mu_x pays at least one additional valuation digit (integer costs), cancelling its one-unit support benefit. Thus benefit minus extra cost <= maximum matching of cheapest edges. Conversely choose maximum matching on cheapest edges and assign all unmatched rows any cheapest column. No new outside-U column can be reached by an unmatched row at cheapest cost, since adding that edge would enlarge the matching; hence the attained value is exactly RHS. This is an exact minimum on the actual maps, not an assumption of independent row work. It is >=max(0,M-|S|-|U|), the earlier degree-only bound, and may be strictly stronger. Add coefficient valuations then minimize over supported pairs gives a sound lower bound on actual patch content. It is NOT equality for the sum: additional signed cancellation may occur between minimal terms. If the bound is >=h all terms vanish at requested patch precision. A pair can be pruned independently if its floor is >=h. Computing matching is polynomial PER chosen pair, but the pair family can be exponential. Do not claim polynomial total selection or infer time lower bound from the matching number. At origin W(0)=I, there is only phi(x)=x and we recover G61 exactly; no generic patch interpolation required on sparse cases. This retains source support overlap (zero mode and residual, no double charge) while admitting arbitrary shared computation.
+
+### G64 — indexed precision and resource consequences
+
+Retain (history,tau,k,j,version,coefficient ring,creation precision,requested precision,node,consumer) as independent coordinates; tau event time, k source chart/refinement, j iteration. Each row/column support refers to actual original edge identities and local vertex identities, even after an orientation reversal or invertible chart. The zero mode W and signed Fourier S(h) from G56 remain source semantics; an observed modular zero of a chosen weighted contraction is a separate fact. Retain gain/loss and overlap ledgers G58 and the exact creation-precision carry from R96. The matching graph is transported with the named row/column costs under invertible relabeling; actual degree depends on chosen basis/lift and is not declared invariant under arbitrary chart transformations. Coefficient truncation changes the representation at the requested precision; record the discarded signed coefficients, not an assertion that the original tensor is zero. No mandatory materialization of entire signed spectrum. Actual bounded-arity Boolean tensors can have degree M (e.g. pin every row bit to 1, product of unary pins), and B the same, giving F(0)=1 and no useful degree/support pruning at the origin. This is an easy source control: high degree/valuation budget does not imply intrinsic cost. R95's pinned deformation likewise confirms inherited precision can be an artificial debt. N4 needs actual total work under all legal shortcuts, not degree, channel count, matching count or chosen lift cost. G48 uniform flag and G38 central slice remain OR routes. No proof of P!=NP, no CI/kernel detour, no end-to-end algorithm improvement.
+
+### Actually executed local regression (Python Fraction, exact integer, no CI/native kernel)
+
+Local /tmp/p0_g60.py: 1,302 exact scaled Cauchy entry contents (L=1,2,4,8,16, all nodes and realizable differences); 2,120 exact matching vs exhaustive map minima (L=1,2,4, all nodes and all support pairs); 840 deformed polynomial degree/content/origin checks and 840 alternate-lift comparisons (all 256 pairs of Boolean two-port tables, 24 seeded signed four-port table pairs, nodes -1,0,1 and lift precisions 1,2,3); 240 additional sparse signed polynomial pair comparisons of matching bound vs actual patch content, of which 111 strictly improve the degree-only bound. Initial finite sentinel for infinity caused an all-zero tensor test failure; replaced by actual infinity and reran all successfully. Exact fraction arithmetic throughout, no extrapolation. Core reproduction (helpers for polynomial add/mul with ascending coefficients and vp2 of rational numerator minus denominator, infinity for zero):
+
+```python
+from fractions import Fraction as F
+from itertools import product
+from math import prod
+from random import Random
+rng=Random(369)
+def vp(x):
+    if not x:return float("inf")
+    x=F(x);n=abs(x.numerator);d=x.denominator
+    return (n&-n).bit_length()-(d&-d).bit_length()
+def add(a,b):
+    c=[F(0)]*max(len(a),len(b))
+    for i,x in enumerate(a):c[i]+=x
+    for i,x in enumerate(b):c[i]+=x
+    return c
+def mul(a,b):
+    c=[F(0)]*(len(a)+len(b)-1)
+    for i,x in enumerate(a):
+        for j,y in enumerate(b):c[i+j]+=x*y
+    return c
+def ct(f):return min(map(vp,f))
+def anf(A,m):
+    a=list(A)
+    for j in range(m):
+        for s in range(1<<m):
+            if s>>j&1:a[s]-=a[s^(1<<j)]
+    return a
+def ev(a,x):return sum(v for s,v in enumerate(a) if s&x==s)
+def deg(a):return max((s.bit_count() for s,v in enumerate(a) if v),default=-1)
+def prof(a,m):return [min((vp(v) for s,v in enumerate(a) if s.bit_count()==d),default=float("inf")) for d in range(m+1)]
+def patch(L,t):
+    R=range(-L,L);den=prod(-s for s in R if s);out={}
+    for d in range(1-L,L):
+        f=[F(1,den)]
+        for s in R:
+            if s!=d:f=mul(f,[t-s,2*L])
+        out[d]=f
+    return out
+def contract(A,B,W,m):
+    a=anf(A,m);res=[F(0)]
+    for X,b in enumerate(B):
+        if not b:continue
+        rows=[]
+        for i in range(m):
+            z=[F(0)]
+            for j in range(m):
+                if X>>j&1:z=add(z,W[j-i])
+            rows.append(z)
+        for S,c in enumerate(a):
+            if not c:continue
+            z=[F(c*b)]
+            for i in range(m):
+                if S>>i&1:z=mul(z,rows[i])
+            res=add(res,z)
+    return res
+def match(R,V,E):
+    matched={}
+    def aug(i,seen):
+        for j in V:
+            if (i,j) not in E or j in seen:continue
+            seen.add(j)
+            if j not in matched or aug(matched[j],seen):matched[j]=i;return True
+        return False
+    return sum(aug(i,set()) for i in R)
+def bound(C,S,U,m):
+    R=[i for i in range(m) if S>>i&1];V=[j for j in range(m) if not(U>>j&1)]
+    mu={i:min(C[i]) for i in R}
+    E={(i,j) for i in R for j in range(m) if C[i][j]==mu[i]}
+    return sum(mu.values())+len(V)-match(R,V,E)
+n=0
+for L in (1,2,4,8,16):
+    a=L.bit_length()-1
+    for t in range(-L,L):
+        for d,f in patch(L,t).items():
+            assert ct(f)==(0 if t==d else a+1-vp(t-d))
+            assert (f[0]==0)==(t!=d)
+            n+=1
+assert n==1302
+n=0
+for m in (1,2,4):
+    a=m.bit_length()-1
+    for t in range(-m,m):
+        C=[[0 if t==j-i else a+1-vp(t-j+i) for j in range(m)] for i in range(m)]
+        for S,U in product(range(1<<m),repeat=2):
+            R=[i for i in range(m) if S>>i&1]
+            exact=min(sum(C[i][j] for i,j in zip(R,phi))+m-(U|sum(1<<j for j in set(phi))).bit_count() for phi in product(range(m),repeat=len(R)))
+            assert exact==bound(C,S,U,m);n+=1
+assert n==2120
+n=nl=0
+for m in (2,4):
+    pairs=product(product((0,1),repeat=1<<m),repeat=2) if m==2 else (([rng.randrange(-3,4) for _ in range(1<<m)],[rng.randrange(-3,4) for _ in range(1<<m)]) for _ in range(24))
+    W={t:patch(m,t) for t in (-1,0,1)}
+    for A,B in pairs:
+        a,b=anf(A,m),anf(B,m);aa,bb=prof(a,m),prof(b,m)
+        floor=min(aa[i]+bb[j]+max(0,m-i-j) for i,j in product(range(m+1),repeat=2))
+        for t in W:
+            z=contract(A,B,W[t],m)
+            assert all(c==0 for i,c in enumerate(z) if i>max(0,deg(a))*(2*m-1))
+            assert ct(z)>=floor
+            if t==0:assert z[0]==sum(x*y for x,y in zip(A,B))
+            n+=1
+        for h in (1,2,3):
+            ah=[v%(1<<h) for v in a];Al=[ev(ah,x) for x in range(1<<m)]
+            assert all((x-y)%(1<<h)==0 for x,y in zip(A,Al))
+            z=contract(Al,B,W[1],m);z0=contract(A,B,W[1],m)
+            assert ct(add(z,[-c for c in z0]))>=h
+            assert all(c==0 for i,c in enumerate(z) if i>max(0,deg(ah))*(2*m-1))
+            nl+=1
+assert (n,nl)==(840,840)
+n=better=0
+for m in (2,4):
+    for t in (-1,0,1):
+        W=patch(m,t);C=[[ct(W[j-i]) for j in range(m)] for i in range(m)]
+        Bnd={(S,U):bound(C,S,U,m) for S,U in product(range(1<<m),repeat=2)}
+        for _ in range(40):
+            a=[0]*(1<<m);b=a.copy()
+            for S in rng.sample(range(1<<m),rng.randrange(1,min(4,1<<m)+1)):a[S]=rng.choice((-2,-1,1,2))
+            for U in rng.sample(range(1<<m),rng.randrange(1,min(4,1<<m)+1)):b[U]=rng.choice((-2,-1,1,2))
+            A=[ev(a,x) for x in range(1<<m)];B=[ev(b,x) for x in range(1<<m)]
+            lo=min(vp(v)+vp(w)+max(0,m-S.bit_count()-U.bit_count()) for S,v in enumerate(a) if v for U,w in enumerate(b) if w)
+            hi=min(vp(v)+vp(w)+Bnd[S,U] for S,v in enumerate(a) if v for U,w in enumerate(b) if w)
+            assert hi>=lo and ct(contract(A,B,W,m))>=hi
+            assert sum(A[x]*B[x] for x in range(1<<m))==sum(v*w*2**(m-(S|U).bit_count()) for S,v in enumerate(a) for U,w in enumerate(b))
+            n+=1;better+=hi>lo
+assert (n,better)==(240,111)
+```
+
+### Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G60 | actualMultilinearProducerDegree / coherentModularCoefficientLift | derived and tested; actual source degree, alternate-lift recursion integration open |
+| G61 | exactSignedSupportUnionContraction / localMomentSparseShortcut | derived and tested; zero mode vs observed parity retained |
+| G62 | exactScaledCauchyEntryContent | derived and tested on original grid |
+| G63 | minimumSupportValuationMatching | derived and tested; exact single-pair minimum, cancellation and total pair generation not solved |
+| G64 | indexedPrecisionResourceBoundary | derived; G58/R96, no H05 closure claim |
+| N4/G12a | unrestrictedSerialCharge | OPEN: arbitrary algorithms, coherent alternate lifts, support sharing, cancellation and input-dependent contraction |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; G48 uniform flag / G38 stronger nonuniform slice |
+| N6 | originalClayTransport | conditional #1040 / #1129 |
+
+Aristotle BIDI: use the G61 original moment contraction as a legitimate Hermite bypass on sparse sources, and G60/G63 for source-aware pruning on actual packets. Highest-alpha next step is to bound the generation of *surviving* signed support combinations or find a shared contraction of them, with a real cost inequality on full G48 locally-full hard inputs. Do not infer hardness from the artificial choice of deformation or require high degree/large support as a prerequisite. Neither the restricted matching minimum nor the finite checks pay unrestricted N4. No new mandatory certification phase.
