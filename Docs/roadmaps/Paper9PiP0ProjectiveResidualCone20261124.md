@@ -1281,3 +1281,251 @@ follows until a real source-matched
 execution and controlled comparison
 exists. The original measured COMP5j
 remains the performance baseline.
+
+
+## 24 November — COMP5u: PNP G79–G83 inspired consumer-sector contraction and exact dyadic carry (NO TESTING)
+
+### Source attribution and strict transfer boundary
+
+User-provided 24 Nov P-vs-NP G79–G83 note studies **affine shared
+separators** over \(\mathbb F_2\) and, in G83, gives a nonlinear
+four-sector running contraction that avoids materializing exponentially
+many separator assignments. That is a *methodological donor only*.
+Paper 9's Chudnovsky P/Q/T matrices and dyadic Euclidean remainders
+are over the ordered integers, **not** \(\mathbb F_2\); its G79
+least-shared-subspace theorem and G80 contraction formula do NOT
+prove any π identity or runtime bound. The actual lesson from
+G83 is to cost the final source-adequate **consumer decision**, not
+the size of an expanded geometric observer. The existing
+P-vs-NP nonlinear composition lower-bound targets remain separate.
+
+COMP5t's original exact square-slack retry classifier is a valid
+research construction but on every inconclusive admission can
+construct several huge integer squares and the entire decimal
+factor \(F=426880\,10^d\). We can decide safe refinement using
+the much smaller **dyadic division-remainder sectors** already
+present in the actual floor certificate. This is a mathematical
+alternative with different possible work, not a measured speedup.
+
+### G12 — joint dyadic quotient-remainder decomposition
+
+For original signed and source-authenticated adjacent series endpoints
+\(0<S_{\rm lo}=N_l/D_l\le S\le S_{\rm hi}=N_h/D_h\),
+take positive \(d\) decimal places, current original radical index
+\(b\ge d\), \(R_b=\lfloor2^b\sqrt{10005}\rfloor\),
+\(k=b-d\), \(H=426880\,5^d>0\). The original π source gives
+
+\[
+10^d\pi=426880\,10^d\sqrt{10005}/S,\qquad
+H R_b/2^k\le426880\,10^d\sqrt{10005}
+          <H(R_b+1)/2^k.
+\]
+
+The correct conservative lower endpoint is exactly
+\(x=\lfloor H R_bD_h/(2^k N_h)\rfloor\).
+Retain *both* Euclidean remainders without truncation:
+
+\[
+A=H R_bD_h=2^k(xN_h+\rho)+\ell,\quad
+0\le\rho<N_h,\quad0\le\ell<2^k.
+\]
+
+The source-lower quotient's upper-radical floor crosses the
+next decimal integer iff
+
+\[
+\boxed{\rho+
+ \left\lfloor\frac{\ell+HD_h}{2^k}\right\rfloor
+ \ge N_h.}
+\tag{G12-left}
+\]
+
+Separately the ordinary upper-bound witness uses
+\(W=H(R_b+1)D_l=2^k u+\eta\),
+\(0\le\eta<2^k\).
+Its strict upper admission is simply
+
+\[
+\boxed{u<(x+1)N_l.}
+\tag{G12-admit}
+\]
+
+Rather than form an independent \(H R_bD_l\) product, reuse
+this **same** upper-radical numerator:
+\(H R_bD_l=W-HD_l\). The lower-radical floor of the
+upper source endpoint is therefore exactly
+
+\[
+\boxed{
+\left\lfloor\frac{H R_bD_l}{2^k}\right\rfloor
+  =u+\left\lfloor\frac{\eta-HD_l}{2^k}\right\rfloor .
+}
+\tag{G12-right}
+\]
+
+The inner signed floor is essential: \(\eta-HD_l\) can be
+negative, so the implementation uses GMP
+\`mpz_fdiv_q_2exp\` (Euclidean floor) rather than C++
+signed truncation toward zero. The two formulas avoid
+computing \(\sqrt{10005}\) or a **full radicand square**
+during sector selection; the exact integer square-root
+\(R_b\) for the ordinary certificate remains required.
+
+### G13 — exact three-sector consumer and what it does NOT establish
+
+Let \(v=(x+1)N_l\).
+The three genuine decision sectors are:
+
+1. **Admit** when \(u<v\). Both original positive
+   outward π endpoints prove \(\lfloor10^d\pi\rfloor=x\).
+2. **ExtendSeries** when the admission fails,
+   \(u+\lfloor(\eta-HD_l)/2^k\rfloor\ge v\), and
+   \(\rho+\lfloor(\ell+HD_h)/2^k\rfloor<N_h\).
+   The actual source upper π endpoint is at least
+   \(x+1\), while its lower endpoint lies below
+   \(x+1\). Therefore further radical bits **cannot**
+   make the current source pair certify x; compute an
+   original-indexed Chudnovsky suffix \([n,n')\) and
+   recompose the original ordered matrix.
+3. **RefineRadical** in all remaining authentic cases.
+   Root precision is the safe refinement direction;
+   it may over-refine b even if a full exact-square
+   classifier would already show a source obstruction.
+   Do NOT claim this is the least-cost choice or that
+   series source is definitely sufficient.
+
+An **invalid source/zero-sign** state is rejected by the
+authenticated affine edge and positive endpoint checks
+*before* this classifier; it is NOT silently counted
+as another positive numerical sector. This mirrors
+G83's retained zero/excluded residual, without
+identifying finite-field guard states with these
+integer inequalities.
+
+With a fixed positive rational source pair, each
+radical enclosure tightens as \(b\) increases;
+the two endpoint values \(K/S_{\rm lo}\) and
+\(K/S_{\rm hi}\) are irrational because
+\(\sqrt{10005}\) is irrational and all
+other factors are nonzero rationals.
+Consequently both upper/lower dyadic ambiguity
+bands eventually separate from any fixed
+integer boundary. Such a statement does NOT
+replace the original series-tail certificate
+or establish a uniform practical runtime bound.
+The series cutoff index \(n\), radical guard
+\(b\), digit demand \(d\), source prime-local
+scale recipe and sign must remain independent.
+
+### COMP5u — original-source, suffix-only implementation (UNTESTED)
+
+- \`scripts/pi_p0_dyadic_sector_contraction.hpp\`:
+  pure GMP integer sector classifier with two
+  dyadic quotient/remainder operations, the
+  exact lower integer quotient/remainder,
+  lazy upper-root and lower-root ambiguity
+  corrections, and structural operation
+  counters. It keeps no global SAT separator
+  or F2 matrix. Signed right-side correction
+  is explicitly floor-divided.
+- \`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`:
+  derives from COMP5t's exact projective
+  indexed-prime source, affine edge, single
+  authenticated prefix and right-ordered
+  suffix-only extension. It replaces only
+  the *retry classifier*, leaves the original
+  dyadic root and strict upper arithmetic
+  consumer intact, preserves the original
+  \`[n,n')\` source indices and positive
+  scale recipe, and emits separate
+  \`retry_sector_*\` cost counts.
+  Unlike COMP5t it does **not** build
+  \(10005(FD)^2\) slacks on failed
+  ordinary admission. The old COMP5t
+  implementation remains available and
+  unmodified for later comparison.
+
+**Important memory/cost negative control:** the
+residue representation retains \(\rho,\ell,\eta\)
+and performs additional signed dyadic shifts and
+\(H D_l,H D_h\) multiplications, potentially
+increasing GMP memory and runtime. Avoiding
+four large squares does NOT prove this path
+dominates COMP5t or COMP5j; a larger auxiliary
+state may be cheaper to *consume* yet more
+expensive to *construct*. The GMP allocator
+and full source-work/receipt ledgers are
+authoritative only after deferred execution.
+
+### G14 — projective raw-remainder reopening requires a dyadic carry
+
+The final rational/decimal floor consumer is
+homogeneous under the original prime-local
+source scale \(G=G_{0,n}>0\):
+\(A_{\rm raw}=GA_{\rm norm}\) and
+\(N_{\rm raw}=GN_{\rm norm}\). But the normalized
+nested Euclidean quotient-remainder pairs are
+**not** individually scalar homogeneous.
+If
+
+\[
+ A'=2^k(xN'+\rho')+\ell',
+ \quad0\le\rho'<N',\quad0\le\ell'<2^k,
+\]
+
+then define the *indexed dyadic carry*
+
+\[
+c=\left\lfloor\frac{G\ell'}{2^k}\right\rfloor.
+\]
+
+The exact reconstructed raw-source remainder
+coordinates are
+
+\[
+\boxed{
+N=GN',\quad \rho=G\rho'+c,\quad
+\ell=(G\ell')\bmod2^k.}
+\]
+
+In particular \(0\le \rho<N\). The **quotient x is
+unchanged**, while the low/high remainders can
+change discontinuously with the source gauge.
+This is the actual carry/reopening phenomenon
+analogous to, but not dependent on, Langlands
+R96's relative-index caution.
+
+The optional source-reconstruction function
+\`reopenRawDyadicFibre\` in the new header
+implements the exact positive-scale carry,
+checking the canonical remainder bounds.
+It is NOT invoked in fast π production,
+where the normalized gauge is sufficient.
+Raw source authentication still requires
+an independently authenticated ordered
+leaf producer and the original \(G\) recipe.
+The signed residual simultaneously reopens
+as \(\delta=G\delta'\), preserving zero mode
+and orientation. The raw and normalized
+Euclidean receipts must never be silently
+identified.
+
+### S13–S19 next exact obligations
+
+| Gate | Obligation | Status |
+|---|---|---|
+| S13 | G12 nested Euclidean identities and negative signed-floor correction | Source algebra derived; formal Agda/Lean proof OPEN |
+| S14 | G13 safe three-sector refinement for authenticated positive endpoints, incl. odd/even source sign | Derived; source code UNTESTED |
+| S15 | Full source-scaled/remainder carry BIDI G14 and original signed delta | Reopening helper committed; source authenticity/kernel OPEN |
+| S16 | Correct terminal floor and series suffix after guard-only vs source-only retry | Candidate committed, exact-source replay DEFERRED |
+| S17 | Costed comparison against COMP5t: lower quotient divmod, upper dyadic divmod, scaled endpoint products, extra residency vs four radical squares | Structural work counters, no empirical or proved dominance |
+| S18 | Negative controls: modular-zero vs true source zero; near-boundary \(x+1\), wrong sign of \(\eta-HD_l\), odd cutoff, source-scale carry and source observer collisions | Contracts stated, tests DEFERRED |
+| S19 | P0 analytic Chudnovsky/Bishop same-original-real and external speed/verification frontier | OPEN, no change to independent SOTA |
+
+**Testing remains deferred by user request.**
+No C++ compilation, runtime checks, Python/SymPy
+execution, GMP timing/RSS, GitHub CI, Agda/Lean
+kernel proof or world-record claim was made.
+The historical COMP5j measured baseline is
+unchanged and COMP5u is not inserted into the
+six-way benchmark default.
