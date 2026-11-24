@@ -6,8 +6,8 @@
     "source_model": "Original J25–J31 prescribed-wave synthetic finite-loss nine-state diode/spark switching equations"
   },
   "executable": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
-  "executable_git_blob": "5e3ecdde05e48a98fd1572cf07a83df5508a03a9",
-  "executable_local_sha256": "dd166ba36c07e3fd214e38f6e2f8485a2bdaf87318898711d9a5f15a221cc1f4",
+  "executable_git_blob": "3bb225902125b6fbb95d1c00bc520c9c001f87f9",
+  "executable_local_sha256": "a07f855c8058bf9867cc9abafd865103bd3e56ffbe4efed475ffa9bdaf27597b",
   "source_dependency": "scripts/check_smith_filsinger_j31_pb8_anisotropic_six_time_20261124.py",
   "source_dependency_blob": "eb685d88e5fbfb8c33f17b676be7ce01baaeca7e",
   "original_rhs_dependency": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
@@ -15,10 +15,11 @@
   "execution": {
     "mode": "local Python Fraction, no CI",
     "exact_committed_executable_byte_identical": true,
-    "full_exact_outward_rational_replay_sha256": "b34308237740d3153e1639871b91c2fa73f9ee9afe2c86d4e4fa8e03780f337c",
-    "full_exact_replay_bytes": 222673,
+    "full_exact_outward_rational_replay_sha256": "ff70260ab5da7b6883fdd592968ffa7a148d8613899f2411bf7f9082700f4a16",
+    "full_exact_replay_bytes": 150235,
     "full_replay_output_directly_regenerable": true,
-    "full_replay_uploaded": false
+    "full_replay_uploaded": false,
+    "local_executed_cli": "python scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py --segment 4 --out receipt.json"
   },
   "original_segment": {
     "k": 4,
@@ -59,10 +60,11 @@
     "source_spark_ON_threshold_above_all_slabs": 32,
     "original_J24_event5_numerical_centre_in_full_endpoint": 9,
     "original_J24_event5_whole_state_box_in_full_endpoint": false,
-    "certified_complete_smooth_source_segments_total": 2,
+    "certified_complete_smooth_source_segments_total": 3,
     "original_69D_full_flow_DF": false,
     "exact_periodic_orbit": false,
-    "hardware_source_metered": false
+    "hardware_source_metered": false,
+    "current_32_slab_leg_does_not_prove_other_legs": true
   },
   "exact_integer_grid_acceptance": {
     "min_U_post_entry_slope_first_four": "352985044346138525301982607927/500000000000000000000000000000",
@@ -87,5 +89,6 @@
   "original_J24_full_boxes": 5,
   "J30_nominal_tau_return_enclosed": true,
   "github_ci_used": false,
-  "formal_kernel_checked": false
+  "formal_kernel_checked": false,
+  "reconciliation": "Shared source implementation now also validates event1 V-ON to event2 spark-OFF with 64 source slabs. This receipt remains only for event4 U-ON to event5 V-OFF. Earlier prior two-track execution has been byte-reexecuted with the new shared source and exact rational up-rounded uncertainty grid."
 }
