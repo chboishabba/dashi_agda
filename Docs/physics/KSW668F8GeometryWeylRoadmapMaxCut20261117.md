@@ -1286,3 +1286,39 @@ PR #1547 retains master-based source ownership: new scripts/check_f8_p0_native_f
 D1 partial: original-carrier action/Gauss full physical t12 H field trajectories measured locally under a fixed radial domain; THREE-WAY original mode3/mode4/action same-state comparison OPEN. D2 fully discrete forced stability, strong trace, uniform high regularity OPEN. D3 current A0/A1/C0/C1 96 signed original native output and checkpoint replay OPEN. D4 action near/far H measured, but independent time/radial/normal jets and original both-Weyl E4/E5 OPEN. D5 far source continuum causal null still FAIL for finite native and independent action discretizations; no uniform convergence. D6 physical tensor Green, Agda/TOE and detector OPEN.
 
 **Single large next action, no XC microcuts:** run original mode3 and mode4 checkpointed original compact TT source on the SAME physical radial/normal domains and matching clock/receiver, compare their raw U/P/M vs action U/W/q and Israel flux, source work, H,Hr,Hrr,Ht,Htt, and signed E4/E5; independently refine 3 radial/3 normal/2 dt without moving boundaries of the study. The action normal p=1 test is not enough for second derivatives and must include p>=3 or independent high-order trace reconstruction. Resolve far field causal-null with an actual bound or measured decay before physics claims.
+
+
+---
+
+## F8 P0 — governing native-domain correction and partial original-parameter receiver test (2026-11-24)
+
+**This newest correction supersedes the previous 0..3.0 / 0..2.1 fixed-domain examples as the governing native-comparison baseline.** The original current native four-way driver on master uses r_outer=3.01, y_outer=2.01, dr=.008 or .006, dy=.012, dt=.0012, eps=.04 and final_t=12, and original native propagate enforces dr<eps/3. Thus earlier dr=.04/.03/.025 action reference studies and fixed r_outer=3.0, y_outer=2.1 tests are only independent construction diagnostics, NOT parameter-matched original native comparisons. Explicitly preserve this falsification of the earlier broad same-domain wording.
+
+### Source-owner patches on focused draft #1547
+
+- Corrected original action FV radial shell V L=L^T V scale guard: old absolute 1e-8 falsely failed for high-d volumes; new normalized 5e-12 weighted-operator tolerance (9f3c6d2b).
+- Corrected Gauss inverse F(t) bracketing so t=12 is reachable, instead of short-pulse-only [1,1.3] (86e52245).
+- Added batched original FV radial eigenmode Gauss solver and original t12 near/far wall H, plus independent exact-cell FV-versus-200-node direct profile quadrature, registered both in integrated local preflight (335020f4, 9985e188, 5e8563a6). The batched-versus-serial identical one-step local error was 1.734723475976807e-18.
+- **Updated the committed receiver diagnostic again** to requested radial outer r_outer=3.01 and normal outer y_outer=2.01, ne=(2,3), original native-admissible dr=(.012,.008,.006) and Gauss dt=(.004,.002) (aae91d7b). Affine scaling of existing hp FE normal geometry changes h, quadrature weights, physical node locations, and derivative shape functions consistently, without overwriting master FE. Actual radial terminal nodes follow original ceil(r_outer/dr)+1 convention.
+
+### Locally completed genuine-original-parameter receiver experiments, limited scope
+
+Local code uses original-source-equivalent FE, conservative exact FV radial d=3/7/11 and original compact TT source definitions, not byte-identical repo-head producer checkout. At actual moving-clock t=12 and physical near/far receivers on original r_outer=3.01 / y_outer=2.01 requested domains, source-on action/Gauss and exact-zero source-off were completed for SIX ne=2 runs (three dr x two Gauss dt), plus ONE ne=3,dr=.012,dt=.004 run. The rest of ne=3 sweep was interrupted: status PARTIAL, not 12/12 PASS. p=1 normal FE is not original mode3 SBP and dt=.004/.002 is NOT native SSPRK3 dt=.0012.
+
+| native-admissible dr, ne=2 | signed far H, Gauss dt=.004 | signed far H, dt=.002 | terminal canonical energy at dt=.002 |
+|---|---:|---:|---:|
+| .012 | -1.004328012605307e-5 | -1.0044714576002205e-5 | .0013586261017759034 |
+| .008 | -7.629811140861025e-6 | -7.637048964199147e-6 | 4.4450730517766785e-5 |
+| .006 | -3.192877967284985e-5 | -3.194620460497012e-5 | .0042438099726308225 |
+
+At ne=3,dr=.012,dt=.004, signed far H=-1.4065117389510964e-5, canonical energy=.0017562153353360651; the matched ne=2,dr=.012,dt=.004 far H=-1.004328012605307e-5. Changing normal FE resolution also changes amplitude. The dt pair differs relatively little at each fixed dr while the far H and energy strongly change across radial dr, supporting a construction/source-resolution research priority but NOT identifying a unique cause.
+
+### Independent original FV source control
+
+Independent 200-node quadrature of the source-defined fourth-derivative TT profiles reproduces exact primitive FV cell averages on dr=(.04,.03,.025,.01,.008,.006) to maximum normalized cell discrepancy ~2.00838e-8. Sharp, alternating source coefficients (for example dr=.025 ell=2 source maximum 2585.18 versus dr=.03 18.54) are present in independent quadrature; they are NOT proof the analytic FV antiderivative is wrong. Coarse dr=.025 violates original native source resolution guard and is a diagnostic only. The compact differentiated source is under-resolved on modest radial grids. Proving evolution convergence requires a native source sampling/regularity and exterior cone bound, not just exact cell integration.
+
+### D1-D6 acceptance after this actual integration
+
+D0: original selected brane/AdS5/Israel/TT construction established, unchanged. D1: compatible native-FV radial action/Gauss forward to true original receiver time and original requested outer boundaries demonstrated in finite local source-equivalent tests, but original mode3/mode4 on same states and all original normal data OPEN. D2: fully discrete forced action/SBP stability, source trace and uniform H4+epsilon regularity OPEN. D3: current original FV-versus-weak A0/A1/C0/C1 full 96 signed authentic native outputs OPEN. D4: near/far action wall H only, no independent physical H_r,H_rr,H_t,H_tt, Israel wall jets and both Weyl E4/E5 OPEN. D5: continuum forbidden far source response still FAIL for finite original FV and action methods, not a demonstrated convergent physical signal; three-grid spatial/normal/time convergence OPEN. D6: tensor Green/Agda/TOE/detector OPEN.
+
+**The next one large bite** remains the original native mode3/weighted SBP mode4/action-Gauss same-source full-time comparison with original domain and physically consistent dr,dy,dt: extract source-pinned full U/P/M or canonical m and q at real t12 near/far, record same-stage Q, Israel G-A, weighted energy/source work and independent radial/temporal/normal jets, E4/E5, source-on/off and exterior causal null. Do not re-label these finite action H results a same-state original native Weyl acceptance. No CI or duplicate physics branch.
