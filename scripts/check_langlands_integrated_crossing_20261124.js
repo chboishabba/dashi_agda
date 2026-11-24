@@ -76,7 +76,20 @@ function run(){
   if(!g[0][0])return null;let x=0n,s=0;
   for(let i=0;i<G.groups.length;i++){const t=G.layers[i][s].findIndex((j,t)=>j>=0&&packets[i].has(G.sig[i][t])&&g[i+1][j]);ck(t>=0,"witness");x|=packets[i].get(G.sig[i][t]);s=G.layers[i][s][t]}return x;
  }
- let source=0,chart=0,prec=0,updates=0,witnesses=0,neutral=0,full=0,used=0,probeUsed=0,probeCost=0,updatedGates=0,fullGates=0,delta=0;const large=[];
+ let secants=0,faces=0,source=0,chart=0,prec=0,updates=0,witnesses=0,neutral=0,full=0,used=0,probeUsed=0,probeCost=0,updatedGates=0,fullGates=0,delta=0;const large=[];
+ function messages(G,w,pins){
+  const packets=G.groups.map(g=>{let a=Array(8).fill(Z);a[0]=O;for(const i of g){const t=Array(8).fill(Z);for(let s=0;s<8;s++)for(let b=0;b<2;b++)if(!pins.has(i)||pins.get(i)===b){const k=nextSig(s,b);t[k]=add(t[k],mul(a[s],w[i][b]))}a=t}return a});
+  const m=G.groups.length,f=[[O]],g=Array(m+1);g[m]=G.terminal.map(s=>[1,2,3].map(k=>s===k?O:Z));
+  for(let k=0;k<m;k++){const t=Array(k===m-1?G.terminal.length:G.layers[k+1].length).fill(Z);for(let i=0;i<G.layers[k].length;i++)for(let j=0;j<G.sig[k].length;j++){const v=G.layers[k][i][j];if(v>=0)t[v]=add(t[v],mul(f[k][i],packets[k][G.sig[k][j]]))}f.push(t)}
+  for(let k=m-1;k>=0;k--)g[k]=G.layers[k].map(e=>[0,1,2].map(c=>e.reduce((a,v,j)=>v<0?a:add(a,mul(packets[k][G.sig[k][j]],g[k+1][v][c])),Z)));
+  return {packets,f,g};
+ }
+ function pairedSecant(G,w,p,q,a,b){
+  const old=messages(G,w,p),neu=messages(G,w,q),d=[Z,Z,Z];
+  for(let k=0;k<G.groups.length;k++)for(let i=0;i<G.layers[k].length;i++)for(let j=0;j<G.sig[k].length;j++){const v=G.layers[k][i][j];if(v<0)continue;const s=G.sig[k][j],dm=sub(neu.packets[k][s],old.packets[k][s]);if(eq(dm,Z))continue;for(let c=0;c<3;c++)d[c]=add(d[c],mul(mul(old.f[k][i],dm),neu.g[k+1][v][c]))}
+  for(let c=0;c<3;c++){ck(eq(old.g[0][0][c],a[c+1].v)&&eq(neu.g[0][0][c],b[c+1].v),"independent backward stratum");ck(eq(d[c],sub(b[c+1].v,a[c+1].v)),"paired stratum secant");secants++}
+  const src=a=>sub(a[2].v,a[1].v),mixed=sub(src(b),src(a));ck(eq(mixed,sub(d[1],d[0])),"mixed source/pin face");faces++;
+ }
  function fixture(n,F,F2,w,small){
   const before=basisWork,ow=obligationWork,G=compile(n,F,F2),cost=basisWork-before,oc=obligationWork-ow,J=compile(n,F,F2,true,false),raw=compile(n,F,F2,false,false),pins=new Map(),C=circuit(n,G,w),ref=circuit(n,J,w),rawC=circuit(n,raw,w);let localUpdate=0,localFull=0;
   function check(){
@@ -88,12 +101,12 @@ function run(){
    for(let h=1;h<=H;h++){const x=C.precision(h,false),y=C.precision(h,true);for(let k=1;k<=3;k++){ck(eq(x.v[k],red(a[k].v,h))&&eq(y.v[k],x.v[k]),"precision");prec++}full+=x.full;used+=x.used;probeUsed+=y.used;probeCost+=y.probeOps}
   }
   check();
-  for(let t=0;t<3;t++){const i=rnd(n),b=rnd(2);if(pins.has(i)){pins.delete(i);localUpdate+=C.update(i,0,w[i][0],true)+C.update(i,1,w[i][1],true);localFull+=2*C.gates;ref.update(i,0,w[i][0],true);ref.update(i,1,w[i][1],true);rawC.update(i,0,w[i][0],true);rawC.update(i,1,w[i][1],true)}else{pins.set(i,b);localUpdate+=C.update(i,1-b,Z,false);localFull+=C.gates;ref.update(i,1-b,Z,false);rawC.update(i,1-b,Z,false)}
-   const fresh=circuit(n,G,w,pins).values();for(let k=1;k<=3;k++)ck(same(C.values()[k],fresh[k]),"incremental");updates++;check()}
+  for(let t=0;t<3;t++){const beforePins=new Map(pins),before=C.values();const i=rnd(n),b=rnd(2);if(pins.has(i)){pins.delete(i);localUpdate+=C.update(i,0,w[i][0],true)+C.update(i,1,w[i][1],true);localFull+=2*C.gates;ref.update(i,0,w[i][0],true);ref.update(i,1,w[i][1],true);rawC.update(i,0,w[i][0],true);rawC.update(i,1,w[i][1],true)}else{pins.set(i,b);localUpdate+=C.update(i,1-b,Z,false);localFull+=C.gates;ref.update(i,1-b,Z,false);rawC.update(i,1-b,Z,false)}
+   const fresh=circuit(n,G,w,pins).values();for(let k=1;k<=3;k++)ck(same(C.values()[k],fresh[k]),"incremental");updates++;pairedSecant(G,w,beforePins,pins,before,C.values());pairedSecant(G,w,pins,beforePins,C.values(),before);check()}
   updatedGates+=localUpdate;fullGates+=localFull;return {n,clauses:[F.length,F2.length],groups:G.groups.length,singleGroups:J.groups.length,rows:G.rows,removed:G.removed,cross:G.cross,peak:G.peak,singlePeak:J.peak,attempts:G.attempts,singleAttempts:J.attempts,basisCost:cost,obligationChecks:oc,rawGroupedPeak:raw.peak,rawGroupedAttempts:raw.attempts,gates:C.gates,singleGates:ref.gates,localUpdate,localFull};
  }
  for(let t=0;t<100;t++){const n=3+rnd(5),F=Array.from({length:rnd(8)},()=>Array.from({length:rnd(4)},()=> (rnd(2)?1:-1)*(1+rnd(n))));if(t%2===0)F.push(...pc([0,1,2],rnd(2)));const F2=F.slice();if(t%3===0&&F2.length)F2.splice(rnd(F2.length),1);else if(t%3===1)F2.push(...pc([0,1,2],rnd(2)));else F2.push([1]);const w=Array.from({length:n},()=>Array.from({length:2},()=>[rnd(32),rnd(32),rnd(32)]));fixture(n,F,F2,w,true)}
  for(const [m,k] of [[6,8],[12,16],[24,24]]){const n=m*k,F=[];for(let j=0;j<m;j++){const a=j*k,b=((j+1)%m)*k;F.push([...Array.from({length:k},(_,i)=>a+i+1),...Array.from({length:k},(_,i)=>-(b+i+1))]);F.push(...pc([a,a+1,a+2],1),...pc([a,b],0))}const F2=F.slice();F2.splice(1,1);F2.push([1]);const w=Array.from({length:n},()=>[[2,0,0],[1,1,0]]);large.push(fixture(n,F,F2,w,false))}
- const cancelF=[];for(let j=0;j<32;j++)cancelF.push(...pc([2*j,2*j+1],0));const cancellation=fixture(64,cancelF,[...cancelF,[1]],Array.from({length:64},()=>[O,O]),false);return {cancellation,source,chart,prec,updates,witnesses,neutral,full,used,probeUsed,probeCost,updatedGates,fullGates,delta,large};
+ const cancelF=[];for(let j=0;j<32;j++)cancelF.push(...pc([2*j,2*j+1],0));const cancellation=fixture(64,cancelF,[...cancelF,[1]],Array.from({length:64},()=>[O,O]),false);const stars=[];for(const n of [9,13,33,129,257]){const F=Array.from({length:n-1},(_,i)=>[i+1,n]),F2=[...F,[n]],w=Array.from({length:n},()=>[[2,0,0],[1,1,0]]),ow=obligationWork,G=compile(n,F,F2),oc=obligationWork-ow,raw=n<=13?compile(n,F,F2,false,false):null,C=circuit(n,G,w),pins=new Map();for(let t=0;t<3;t++){const a=C.values();let common=O,loss=O;for(let i=0;i<n-1;i++){common=mul(common,pins.has(i)?w[i][pins.get(i)]:add(...w[i]));loss=mul(loss,pins.has(i)&&pins.get(i)===0?Z:w[i][1])}common=mul(common,pins.has(n-1)&&pins.get(n-1)===0?Z:w[n-1][1]);loss=mul(loss,pins.has(n-1)&&pins.get(n-1)===1?Z:w[n-1][0]);ck(eq(a[3].v,common)&&eq(a[1].v,loss)&&eq(a[2].v,Z),'star independent formula');ck(!a[2].s&&a[3].s&&a[1].s===(t===0),'star support');for(const k of [1,3])if(a[k].s){const x=witness(G,pins,k);ck(x!==null&&(+sat(F,x)+2*(+sat(F2,x)))===k,'star witness')}if(t<2){const p=new Map(pins),old=C.values();pins.set(t,0);C.update(t,1,Z,false);pairedSecant(G,w,p,pins,old,C.values());pairedSecant(G,w,pins,p,C.values(),old)}}stars.push({n,peak:G.peak,attempts:G.attempts,rawPeak:raw?.peak,rawAttempts:raw?.attempts,obligationChecks:oc,gates:C.gates})}return {stars,secants,faces,cancellation,source,chart,prec,updates,witnesses,neutral,full,used,probeUsed,probeCost,updatedGates,fullGates,delta,large};
 }
 console.log(JSON.stringify(run(),null,2));
