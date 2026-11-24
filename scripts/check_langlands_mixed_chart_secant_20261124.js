@@ -39,6 +39,21 @@ function run(){
   if(c[0]<0)return {empty:true,layers:[],peak:0,states:0,attempts:G.attempts};
   ck(c[0]===0,"root quotient");return {layers,terminal:1,peak,states,attempts:2*(states-1)};
  }
+ function commonChart(graphs,n){
+  // Shared interning of labelled suffix functions, not a scalar equality test.
+  const ids=graphs.map(g=>Array(g.empty?0:g.terminal).fill(0));let checks=0,peak=0;
+  for(let k=n-1;k>=0;k--){
+   const intern=new Map(),sets=[];
+   graphs.forEach((g,j)=>{
+    if(g.empty){sets.push(new Set());return}
+    const a=g.layers[k].map(e=>{const f=e.map(t=>t<0?-1:ids[j][t]);if(f.every(t=>t<0))return -1;const key=f.join(",");if(!intern.has(key))intern.set(key,intern.size);return intern.get(key)});
+    ids[j]=a;sets.push(new Set(a.filter(x=>x>=0)));
+   });
+   const ref=sets[0];for(const S of sets){ck(S.size===ref.size&&[...S].every(x=>ref.has(x)),"common suffix chart");checks++}peak=Math.max(peak,intern.size);
+  }
+  ck(graphs.every((g,j)=>(g.empty?-1:ids[j][0])===(graphs[0].empty?-1:ids[0][0])),"common root");
+  return {checks,peak};
+ }
  function evalG(G,n,w,pins=new Map()){
   if(G.empty)return {v:Z,s:false,witness:null,f:[],g:[]};
   const f=[[O]],bs=[[true]],g=Array(n+1),support=Array(n+1);
@@ -56,21 +71,21 @@ function run(){
  }
  function brute(n,F,w,p){let v=Z,s=false;for(let x=0n;x<bit(n);x++){if(!sat(F,x)||[...p].some(([i,b])=>!!(x&bit(i))!==!!b))continue;s=true;let a=O;for(let i=0;i<n;i++)a=mul(a,w[i][+(!!(x&bit(i)))]);v=add(v,a)}return {v,s}}
  const same=(a,b)=>eq(a.v,b.v)&&a.s===b.s;
- let original=0,chart=0,quotients=0,extracts=0,secants=0,mixed=0,probes=0,witnesses=0,neutral=0,aborts=0,large=[];
+ let commonChecks=0,commonPeak=0,original=0,chart=0,quotients=0,extracts=0,secants=0,mixed=0,probes=0,witnesses=0,neutral=0,aborts=0,large=[];
  function fixture(n,F,w,small){
   const E=extract(n,F);if(small)for(let x=0n;x<bit(n);x++){let h=0n;for(let i=0;i<n;i++)if(x&bit(i))h^=E.cols[i];ck(sat(F,x)===(sat(E.F,x)&&h===E.target),"extraction BIDI");extracts++}
   const i=rnd(n),j=(i+1+rnd(n-1))%n,p=new Map([[i,rnd(2)]]),q=new Map([[j,rnd(2)]]),pq=new Map([...p,...q]),none=new Map(),P=[none,p,q,pq],G={},Q={},V={};
   for(const kind of ["primal","incidence","mixed"]){const g=build(n,F,kind,small?60000:30000);G[kind]=g;if(g.aborted){aborts++;continue}const h=quotient(g,n);Q[kind]=h;V[kind]=P.map(p=>evalG(g,n,w,p));
    P.forEach((pin,k)=>{const a=V[kind][k],b=evalG(h,n,w,pin);ck(same(a,b),"quotient");quotients++;if(a.s){ck(sat(F,a.witness)&&[...pin].every(([i,v])=>!!(a.witness&bit(i))===!!v),"original witness");ck(sat(F,b.witness)&&[...pin].every(([i,v])=>!!(b.witness&bit(i))===!!v),"quotient witness");witnesses+=2;if(eq(red(a.v,1),Z))neutral++}});
-   const v=V[kind];for(const [a,b] of [[0,1],[0,2],[1,3],[2,3],[1,0],[2,0],[3,1],[3,2],[0,3],[3,0]]){ck(eq(secant(g,n,w,P[a],P[b],v[a],v[b]),sub(v[b].v,v[a].v)),"paired secant");secants++}
+   const v=V[kind];for(const [a,b] of [[0,1],[0,2],[1,3],[2,3],[1,0],[2,0],[3,1],[3,2],[0,3],[3,0]]){ck(eq(secant(g,n,w,P[a],P[b],v[a],v[b]),sub(v[b].v,v[a].v)),"paired secant");ck(eq(secant(h,n,w,P[a],P[b],evalG(h,n,w,P[a]),evalG(h,n,w,P[b])),sub(v[b].v,v[a].v)), 'quotient secant');secants++}
    const left=sub(sub(v[3].v,v[1].v),sub(v[2].v,v[0].v)),right=sub(sub(v[3].v,v[2].v),sub(v[1].v,v[0].v));ck(eq(left,right),"mixed");mixed++;
    const A=w.reduce((a,b)=>mul(a,add(...b)),O),D=v.map(x=>sub(scale(A,3),scale(x.v,4)));for(let h0=1;h0<=3;h0++){const d=red(sub(D[3],D[0]),h0+2);ck(d.every(x=>x%4===0)&&eq(d.map(x=>x/4),red(sub(v[0].v,v[3].v),h0)),"Weil");probes++}
   }
-  for(const kind of Object.keys(V)){for(let k=0;k<4;k++){ck(same(V[kind][k],V.mixed[k]),"chart endpoint");chart++;if(small){ck(same(V[kind][k],brute(n,F,w,P[k])),"brute");original++}}}
+  const common=commonChart(Object.keys(V).map(k=>G[k]),n);commonChecks+=common.checks;commonPeak=Math.max(commonPeak,common.peak);for(const kind of Object.keys(V)){for(let k=0;k<4;k++){ck(same(V[kind][k],V.mixed[k]),"chart endpoint");chart++;if(small){ck(same(V[kind][k],brute(n,F,w,P[k])),"brute");original++}}}
   return {n,clauses:F.length,rows:E.rows.length,removed:E.removed,rank:G.mixed.rank,charts:Object.fromEntries(Object.keys(G).map(k=>[k,{peak:G[k].peak,attempts:G[k].attempts,states:G[k].states,aborted:!!G[k].aborted,quotientStates:Q[k]?.states,quotientPeak:Q[k]?.peak}])),base:V.mixed[0].v,inhabited:V.mixed[0].s};
  }
  for(let t=0;t<100;t++){const n=3+rnd(6),F=Array.from({length:rnd(10)},()=>Array.from({length:rnd(4)},()=> (rnd(2)?1:-1)*(1+rnd(n))));if(t%2===0)F.push(...parityClauses([0,1,2],rnd(2)));if(t%7===0)F.push(...parityClauses([0,1,2],0),...parityClauses([0,1,2],1));const w=Array.from({length:n},()=>Array.from({length:2},()=>[rnd(32),rnd(32),rnd(32)]));fixture(n,F,w,true)}
  for(const m of [6,12,24]){const n=6*m,F=[];for(let j=0;j<m;j++){const a=6*j,b=6*((j+1)%m);F.push([...Array.from({length:6},(_,k)=>a+k+1),...Array.from({length:6},(_,k)=>-(b+k+1))]);F.push(...parityClauses([a,a+1,a+2],1),...parityClauses([a+3,a+4,a+5],1),...parityClauses([a,b],0))}const w=Array.from({length:n},()=>[[2,0,0],[1,1,0]]);large.push(fixture(n,F,w,false))}
- return {original,chart,quotients,extracts,secants,mixed,probes,witnesses,neutral,aborts,large};
+ return {commonChecks,commonPeak,original,chart,quotients,extracts,secants,mixed,probes,witnesses,neutral,aborts,large};
 }
 console.log(JSON.stringify(run(),null,2));
