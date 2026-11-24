@@ -30,7 +30,7 @@ struct PlanningLedger {
   unsigned activeDepth=0;
   size_t planNodes=0, scheduledMerges=0, rightFirstMerges=0;
   long double modelPeakBytes=0;
-  size_t planningHeapBytes=0; // ordinary C++ heap, NOT GMP allocator bytes
+  size_t planningObjectPayloadBytes=0; // exact sizeof(Plan)*count; excludes C++ allocator overhead
 };
 
 // Conservative mathematical magnitude estimates for the normalized source
@@ -114,7 +114,7 @@ inline std::unique_ptr<Plan> makePlan(
   ledger.precisionBits=precisionBits;
   std::unique_ptr<Plan> root=build(0,cutoff,0,precisionBits,ledger);
   ledger.modelPeakBytes=root->predictedPeakBytes;
-  ledger.planningHeapBytes=ledger.planNodes*sizeof(Plan);
+  ledger.planningObjectPayloadBytes=ledger.planNodes*sizeof(Plan);
   return root;
 }
 
