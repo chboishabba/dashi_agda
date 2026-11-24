@@ -1079,3 +1079,66 @@ it does not prove any Chudnovsky or performance result.
 The user requested **deferred testing**: source implementation
 and GitHub readback only, no new executable acceptance,
 benchmarks, Agda kernel check or independent SOTA comparison.
+
+
+## 24 November — COMP5m/n: radical-aligned geometric quotient and width-scheduled P/Q/T tree
+
+Two new **UNTESTED** source-preserving candidate implementations
+were committed to master-based Paper 9 PR #1546 with testing
+explicitly deferred. They are rooted in the original
+\(2\times2\) upper-triangular Chudnovsky P/Q/T matrix product
+and consumer-indexed complexity formalism (Paper 9 §10).
+
+**COMP5m, output-aligned radical enclosure:** for
+\(K_d=426880\,10^d\sqrt{10005}\), \(g\ge0\), set
+\(H_{d,g}=\lfloor2^g K_d\rfloor\) by a large
+exact integer square-root. The original signed adjacent
+series endpoints \(S_\mathrm{lo}=N_\mathrm{lo}/D_\mathrm{lo}\)
+and \(S_\mathrm{hi}=N_\mathrm{hi}/D_\mathrm{hi}\)
+give the outward interval
+
+\[
+\frac{H_{d,g}D_\mathrm{hi}}{2^gN_\mathrm{hi}}
+ \le10^d\pi<
+\frac{(H_{d,g}+1)D_\mathrm{lo}}{2^gN_\mathrm{lo}}.
+\]
+
+Its exact lower decimal-floor quotient and strict upper
+comparison use dyadic numerator shifts as in COMP5i; an
+inconclusive comparison widens both the series cutoff and
+root guard. This eliminates the **separate** 5-power
+post-sqrt product but requires a dense huge-integer square
+to form the radicand, so performance may get WORSE.
+This outward interval is not asserted to equal COMP5j's
+finite interval; both refer conditionally to the same
+original analytic Chudnovsky π source.
+
+**COMP5n, exact ordered product with changed execution path:**
+\(Q[a,b)=\prod_{j=\max(a,1)}^{b-1}640320^3j^3\).
+Its log width can be estimated from differences of
+\(\log\Gamma\) without computing a large integer.
+Execute the child predicted wider **first** and retain
+it while computing the other, but compose the original
+left/right factors in exactly the same order
+
+\[
+M[a,b)=M[a,m)M[m,b),\qquad
+M=\begin{pmatrix}P&T\\0&Q\end{pmatrix}.
+\]
+
+This is merely a schedule change: no change of leaf
+semantics, signs, tail error, radical certificate or
+ordered product. Its cost estimator is a heuristic,
+not an exact minimizer or hardware-independent
+memory theorem. The existing \`FibreProgramComplexityExact\`
+sum/peak, streaming residency and quotient-reopen ledgers
+remain authoritative.
+
+Source files: \`scripts/check_pi_p0_output_aligned_root.cpp\`
+and \`scripts/check_pi_p0_width_scheduled_pqt.cpp\`.
+Full derivations, newly indexed deliverables, negative
+controls and future acceptance criteria:
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+Neither source has been compiled or benchmarked, nor were
+Agda/Lean, CI or independent SOTA checks run; no new
+performance numbers or formal analytic closure are claimed.
