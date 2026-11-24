@@ -2031,3 +2031,16 @@ kernel, measured latency/RSS or
 external performance audit is
 claimed for COMP5w. Source file
 readback is not executable acceptance.
+
+
+## COMP5x — four-corner virtual boundary geometry (untested)
+
+G21–G22: set Z=HQ', Y=ZR, U=Y+Z, B=(x+1)Nl, C=(x+1)Nh, k=b-d. The four corners (lower pi lower root, lower pi upper root, upper pi lower root, upper pi upper root) are (qY,qU,Y,U) in even parity and (Y,U,qY,qU) in odd parity, divided by their respective positive endpoint numerators and 2^k. The original COMP5w policy is exactly: admit if upper-pi upper-root numerator < 2^k B; otherwise refine if upper-pi lower-root numerator < 2^k B; otherwise refine if lower-pi upper-root numerator >= 2^k C; otherwise extend source. The intermediate test is essential and must not be dropped.
+
+G23–G24: compare a with b*2^k using bit lengths first, then high-to-low virtual shifted GMP value limbs (GMP_NUMB_BITS, GMP_NUMB_MASK). No quotient, remainder, shifted integer or full signed subtraction constructed by the comparator. Exact equality is a separate comparison result; equality never admits. Zero inputs and k=0 are included. Worst-case equal-length comparison scans O(limbs); early bit-length/limb mismatch may terminate sooner. Positive source validation precedes classification.
+
+G25–G26: retain unscaled U in both parity branches; odd opposite corner is U directly, so no late exact division or divisibility check is needed. Preserve signed affine edge, original scale recipe, source zero mode, root and suffix indices, and G14 raw-remainder carry reconstruction. Raw boundary residuals scale linearly under positive source gauge, unlike Euclidean remainders. Predicate equivalence is algebraic, native and kernel acceptance remain open.
+
+G27: retained Y through admission, U and temporary parity products may increase live allocation relative to COMP5w. The virtual comparator avoids its own GMP temporaries but does not prove lower total peak heap, RSS or runtime. Compare direct corner retention versus destructive W-scale path and failure-only reconstruction, with separate branch counts and actual GMP heap instrumentation. No performance promotion.
+
+Source owners: scripts/pi_p0_boundary_sector.hpp and scripts/check_pi_p0_boundary_schedule.cpp. COMP5w and measured COMP5j preserved. No compilation, tests, CI, formal kernel or benchmarks performed, per inherited deferral.
