@@ -1565,3 +1565,153 @@ The modular elimination test counts pivots using row elimination; existence of b
 ### R77. Next substantive mathematical tranche
 
 Move from full individual tile maps to actual consumer-specific contraction: (1) compute what rank-one mode products survive Boolean port/equality constraints and original local tensors, (2) seek exact joint low-dimensional quotient with original witness preservation or a barrier to such quotients, (3) test whether regrouping and shared signed recursions can avoid enumerating the entire filled-palette support. Do not require evaluation of the entire tile map from every SAT decision algorithm, nor charge the exact Smith spectrum as global cost. R74 is a sharp linear interface theorem, not general lower bound. The fixed-width subexponential theorem's full proof and implementation remain outside this partial audit; no exponent improvement claimed. G42–44 credited, R57–60 contraction/precision and R64–70 grades/cheap reuse controls remain admissible. No separate certification prerequisite; stay on Langlands, literal Clay endpoint P0.
+
+## 19. R78–R84 — deterministic flag, dual symmetric square and exact rank-two local converse obstruction (2026-11-24)
+
+Stay on Langlands. Read both mounted attachments directly: R71–77 and G45–48. Live G45–48 Agda #1548 head 08dad6fd61b5144d5329a024b44a5737d04b71a4, roadmap blob b59cb2b86687bcfd4495533b52b6c10c6acf7ef4; G48 Lean #119 head 20bb8b46381b as supplied by user attachment (not separately fetched this turn). Live Langlands Agda #1549 b5b345e833d92021e2f687981f62ae618dfb9942, Lean #120 e3e6d6a66349876ef5bc84e0ca0f8620edb5a59c, shared blob fb821059e5744459abf6df4401b51f01fc280dd8. Monster donor #1545 live 9838a134f2154732929b615028bfacb8265bba8c, roadmap blob 02821b90bf7e16e7c3b8c7bc831e30f686cf84bf; user's reported authentic GAP 12+Sym^2(12^dual) source-selection inspires the functorial same-phase construction ONLY. No Monster source family or matrix claims are re-certified here, no other branches edited. The actual rank-two parameter is our existing R29/R30, not a restriction of Monster.
+
+Source producers reopened on master: DASHI/Foundations/PolynomialC3S3ReflectionParityFourierExact.agda 9a7a180555dad4a042b2978d576a66814b5fc15c (signed reflection coordinates, not a new local reciprocity theorem); DASHI/Core/ConsumerFibreRepairExact.agda 5bab8f89861559c14f3877acd5e11424b21a6a6d (necessary separation); DASHI/Core/QueryFactorisationSufficiency.agda 98c592232292bbb6c5f0df047c8df3fd42be30d3; DASHI/Moonshine/PenumbralSQModuleLift.agda dd1f89c24dc29f21d7030ac9799b1639ee5a3c35 (symmetric/exterior power interface, no imported complexity theorem). R29 actual totally ramified S3 extension of Q3, U standard 2-dimensional irrep with a(U)=5, N=0, R30 P=1+U, R36 original projector, R50 central embedding, R57/R58 exact count, R59 and R71–74 precision and tile contraction, G45/46 compiler and G48 forced flag are direct mathematical producers. Standard representation theory, local reciprocity/LLC, Deligne epsilon twist and multiplicativity credited, not new general local converse theorem. Verify epsilon twist authority: https://msp.org/ant/2016/10-6/ant-v10-n6-p04-p.pdf (unramified twist formula, sign convention irrelevant for quadratic twist); https://openmaths.org/courses/LG-GAL/local-l-factors-and-epsilon-factors.html ; LLC compatibility with pair gamma factors: Helm and Moss, *Converse theorems and the local Langlands correspondence in families*, https://pmc.ncbi.nlm.nih.gov/articles/PMC6413487/ section 7. This tranche derives an explicit source-specific collision and one-observer repair, not a universal computational lower bound.
+
+### R78. Constant-cardinality deterministic truth graph on the locally-full core
+
+For original q-variable selector t, let F_t(x) be the original clause-conjunction truth function; M=2^q and W(t)=sum_x F_t(x). Instead of G48's optional b=1 branch, build a deterministic gate evaluation graph with distinguished output b=F_t(x). For each gate use the usual width-at-most-three equivalence clauses for binary AND/OR or unary NOT (constant/empty-conjunction cases use a unit). Each assignment x extends uniquely to the gate variables and b, with no other assignments. Graph size polynomial in explicit selector length N_q. To keep topology independent of t if desired, compute the fixed circuit of all clause tests t_C OR not q_C(x) with t input variables pinned by unit constraints; the pin values are input data, not unknown variables. Apply actual G46 compiler: six-variable zero gadget with forbidden-pattern digits 16763747126132141175 in lexicographic triple order; private literal occurrence variables, two equality clauses padded by globally zero gadget coordinates; original gate clauses padded to distinct ternary scopes. All local unary and binary projections and affine hulls full, each triple allows seven or eight patterns. The unique extension property survives. Optional fixed-weight G46 paired inert clause construction may be applied to the uniform conditional source encoding; not needed for this theorem. R50 separate central embedding preserves the truth graph but does NOT retain local fullness of newly added dummy scopes.
+
+Let Y_t be actual satisfying assignment set of emitted truth graph; D_t=C^{Y_t} with named source assignment coordinates. Write P_b for its diagonal idempotents marking b, not the previous P=1+U Weil representation. Then rank P_0=M-W, rank P_1=W, total M independent of t. Restriction x map is an actual bijection with all original assignments, unlike previous witness-only compression. Restricting to flag 1 recovers the actual original satisfying submodule via isometry. The flag query on this always-satisfiable, locally-full family is NP-complete even with known satisfying assignment (evaluate any x, no need to know its output ahead of evaluation). No assertion that every locally-full formula is a truth graph. G48 originally used a known b=0 witness and global affine hull; R78 uses deterministic graph to fix total dimension and supports both fibre counts.
+
+### R79. Actual phase-matched dual symmetric square, with a hidden unramified tag
+
+Let F=Q3, U the genuine R29/R30 standard irrep of the totally ramified S3 quotient of W_F. Let xi be the unramified quadratic character, xi(Phi)=-1 on fixed Frobenius, xi|I=1. Because inertia surjects onto S3, U|I is irreducible and a Frobenius lift Phi can be chosen to act trivially on U (multiply any lift by an inertia preimage of the inverse S3 element). Set V_b=U tensor xi^b. V_0,V_1 distinct: their traces at this lift are 2 and -2, or inertia Schur lemma forces any intertwiner to be scalar and then fails at Phi. V_b has the same inertia restriction and conductor 5; det V_b=det U=epsilon (tame sign), and V_b is self-dual. Use explicit standard matrices R=[[-1,-1],[1,0]], J=[[0,1],[1,0]], with R^3=J^2=I, JRJ=R^-1. Sym^2(U^dual)=1+U by S3 character identity, or invariant quadratic form and trace values (3,1,0) on identity/reflection/3-cycle. Since xi^2=1, Sym^2(V_b^dual)=Sym^2(U^dual)=1+U, actual functorial equality on chosen carrier. On marked C3 eigenline of phase zeta^k its dual square has phase zeta^(-2k)=zeta^k, exactly the same-phase mechanism in the Monster inspiration, while the mixed square has phase one. This is a two-dimensional Weil parameter, not the Monster 12D module.
+
+Define B_b=V_b direct_sum V_b direct_sum Sym^2(V_b^dual). Doubling is essential for R80 epsilon cancellation; the ordinary V_b+Sym^2(V_b^dual) block alone does not give that cancellation. Each actual 7D block has N=0, determinant epsilon, conductor 15, inertia restriction 1+3U|I, and cubic phase multiplicities (1,3,3) for (0,+,-). Both share standard L(T)=1/(1-T). All are honest smooth finite-image complex Weil representations, no virtual negative multiplicities. The actual source-aligned parameter is
+    R_t = direct_sum_(y in Y_t) B_{b(y)}
+        ~= 1^{M} + U^{3M-2W} + (U tensor xi)^{2W}.
+The direct sum is indexed by the original deterministic graph, not an independently chosen count. Named flag sectors can be recovered by actual Frobenius spectral projector (I-rho(Phi))/2, zero on invariant line and Sym^2 component, rank 4W. Because Phi chosen to act trivially on U, tr rho(Phi)=7M-8W. Cubic and all inertia action identical for every t at fixed q; determinant epsilon^M, a=15M, dimension 7M. Standard L(T)=(1-T)^(-M). No free matrix materialization: dim exponential and input is succinct original selector with compiler, not explicit matrices.
+
+### R80. All rank-one twisted local factors fail, not just standard L
+
+For ANY smooth quasi-character chi of W_F, U tensor chi and U tensor xi tensor chi are irreducible 2D, hence no inertia invariants: invariants are W_F-stable and a smooth irreducible rep of W_F/I_F=Z is one-dimensional. Both standard L-factors are 1, as are their dual L-factors. Their Artin conductors agree (xi unramified). Deligne unramified-twist rule at common additive character psi and Haar normalization gives
+    eps(s, U tensor xi tensor chi,psi)
+       = (-1)^{a(U tensor chi)+2 n(psi)} eps(s,U tensor chi,psi)
+(up to reciprocal sign convention, same for -1). Thus the squares of these epsilon factors agree for every chi. Multiplicativity plus common symmetric square proves
+    L(s,B_0 tensor chi)=L(s,B_1 tensor chi),
+    eps(s,B_0 tensor chi,psi)=eps(s,B_1 tensor chi,psi),
+    gamma(s,B_0 tensor chi,psi)=gamma(s,B_1 tensor chi,psi).
+The same for R_t at fixed q, with all chi, every psi and corresponding same measure. Determinant and conductor independent. This is a full rank-one local-factor observer collision, even granting oracle access to infinitely many twists; not a computational lower bound. Two inputs at same q, empty conjunction versus contradictory unit pair, have W=M vs 0, yet identical such observer. Same holds on actual locally-full truth graph. Standard local converse theorems with adequate twisting ranks are not contradicted: here rank one is insufficient for high-dimensional parameter. By LLC each B_b corresponds to an actual GL7 parameter, and R_t to GL_(7M), preserving pair factors; rank-one equality already a known phenomenon in general, no novel universal local converse claim. Original resource question concerns succinct graph/selector representation, not computation polynomial in exponentially large 7M. No global automorphic representation asserted.
+
+### R81. A single fixed rank-two probe repairs the exact original consumer
+
+Take actual U^dual as a fixed 2D test parameter (GL2 supercuspidal via R30 LLC). On I, End(U)^I=C by irreducibility, with Frobenius acting +1 on this line; (U tensor xi tensor U^dual)^I carries xi. The remaining trivial summand of R_t tensored with U^dual has no I-fixed vector. Therefore
+    L(R_t tensor U^dual,T)
+      = (1-T)^(-(3M-2W)) (1+T)^(-2W).
+It has a pole at T=-1 iff original SAT is true, and pole order 2W. The fixed rank-two probe is the minimal maximal twist rank for distinguishing THIS family: all rank-one factors fail and this rank-two factor suffices. No assertion about general minimal local converse rank. Exact first logarithmic derivative at zero also suffices:
+    D=[T] log L(R_t tensor U^dual,T)=3M-4W,
+    W=(3M-D)/4.
+Here [T] log equals [T] L since constant term is 1. The Frobenius trace on the full actual module gives same information via (7M-tr)/8, but rank-two local factor is genuinely local Langlands pair observer rather than a newly named Boolean bit. The flag-1 projector rank or pole-presence decision, on succinctly supplied R_t graph recipe, is NP-complete, exact W recovery #P-hard via parsimonious source. A polynomial-time algorithm for the pole-presence query on this succinct promise family iff P=NP (membership via original witness, reduction above). Exact coefficient extraction #P-hard but does not imply superpoly support lower bound. In particular neither local conductor, local fullness, nor even all GL1 twists suffice as semantic quotient; actual rank-two repair is consumer-sufficient. This provides a uniform Clay-equivalent endpoint separate from the stronger nonuniform central-slice lower bound; it does not prove either endpoint.
+
+### R82. Costed scalar consumer of the existing tile contraction
+
+For each original x, the deterministic truth graph has unique y, so D=sum_y (3-4b(y)) =3M-4W, and tr=sum_y(7-8b(y)). Thus the required rank-two coefficient is a signed scalar tensor contraction on the SAME original graph, not construction of its full local factor rational function or all Smith modes from R74. Add a scalar unary terminal weight 3-4b to actual gate tensor network; use the same equality wires and local factors. At original deformation T=0 the R71 contraction gives D with this changed boundary tensor. Outside original parameter deformation need not retain honest dimensions. This terminal weight has fixed bit cost, respects fixed width (or one extra unary factor), and does not enlarge port dimension except any explicit output wire. Can also use directly b as terminal to compute W, so no hidden new algorithm. R71–74 source-specific linear full-tile channel lower bound cannot be imposed on this single scalar query without a separate global consumer argument. Any exact signed/interpolation algorithm computing W yields D at polynomial extra cost, and conversely. This is an exact forward/reverse reduction for the scalar arithmetic consumer, NOT a claim of paid rank-two oracle.
+
+At p=3, 4 is a unit, so D modulo 3^h with 3^h>M recovers W exactly using W=(3M-D)/4 mod 3^h. At p=2, need two additional digits: D modulo 2^(q+3) suffices because W<=2^q, quotient after division by 4 modulo 2^(q+1). For full trace the loss is 3 binary digits, none at p=3. In the actual binary Appendix D algorithm keep p=2 and inherited reconstruction precision; R59 general p-adic Hermite recovery adds its precision losses, not automatic ternary replacement. This reduces output information to O(q) digits, not total contraction time. It shows rank-two consumer repair can be represented at low output bit width even though it is globally hard; information-size or channel census alone cannot close N4. Full local factors may be huge even in this fixed finite-quotient family. No end-to-end subexponential exponent improvement claimed.
+
+### R83. Local exact execution
+
+Actually ran /tmp/langlands_r78.py locally in Python and SymPy. 36 group-product symmetric-square checks, 6 exact character identities, 2 inertia projector identities/ranks, 54 truth-graph compiler cases with independent DPLL counts of both flag fibres (108 fibre comparisons), 3970 emitted clauses checked for three distinct variables and unique scopes, 132 rank-two count/trace/3-adic reconstruction cases (all W=0..2^q for q=1..6); all passed. The six-variable source gadget checked all 64 assignments. No actual local field or epsilon-factor oracle run; R80 is a proof using classical unramified twist theorem, not numerical root-number verification. No CI or native proof assistant. Reproduction:
+```python
+import itertools as it
+import random
+import sympy as S
+R=S.Matrix([[-1,-1],[1,0]]); J=S.Matrix([[0,1],[1,0]])
+assert R**3==S.eye(2) and J**2==S.eye(2) and J*R*J==R.inv()
+def sym2(A):
+ a,b,c,d=list(A);return S.Matrix([[a*a,a*b,b*b],[2*a*c,a*d+b*c,2*b*d],[c*c,c*d,d*d]])
+G=[R**i*J**j for i in range(3) for j in range(2)]
+for A in G:
+ assert S.trace(sym2(A.inv().T))==1+S.trace(A)
+ for B in G:assert sym2((A*B).inv().T)==sym2(A.inv().T)*sym2(B.inv().T)
+I4=sum((S.kronecker_product(A,A.inv().T) for A in G),S.zeros(4))/6
+I3=sum((sym2(A.inv().T) for A in G),S.zeros(3))/6
+assert I4**2==I4 and I4.rank()==1 and I3**2==I3 and I3.rank()==1
+for b in (0,1):
+ V=(-1)**b*S.eye(2); B=S.diag(V,V,sym2(V.inv().T));assert B.det()==1 and B.trace()==3+4*(-1)**b
+Z=[tuple((i+1)*(-1 if (int(k)>>j)&1 else 1) for j,i in enumerate(I)) for I,k in zip(it.combinations(range(6),3),'16763747126132141175')]
+def sat(F,x):return all(any(x[abs(l)-1]==int(l>0) for l in C) for C in F)
+assert [x for x in it.product((0,1),repeat=6) if sat(Z,x)]==[(0,)*6]
+def graph(q,F):
+ C=[];nextid=q
+ def gate(a,b,op):
+  nonlocal nextid
+  nextid+=1;y=nextid
+  if op=='or': C.extend([(-a,y),(-b,y),(a,b,-y)])
+  else:C.extend([(a,-y),(b,-y),(-a,-b,y)])
+  return y
+ out=[]
+ for cl in F:
+  a=cl[0]
+  for l in cl[1:]:a=gate(a,l,'or')
+  out.append(a)
+ if out:
+  a=out[0]
+  for l in out[1:]:a=gate(a,l,'and')
+  nextid+=1;b=nextid;C.extend([(-a,b),(a,-b)])
+ else:nextid+=1;b=nextid;C.append((b,))
+ return nextid,b,C
+def compile_full(n,F):
+ C=Z[:];a=6+n
+ for cl in F:
+  L=[]
+  for l in cl:
+   x=6+abs(l);a+=1;C.extend([(-x,a,1),(x,-a,2)]);L.append(a if l>0 else -a)
+  L+=list(range(1,4-len(L)))
+  C.append(tuple(L))
+ assert all(len(c)==3 and len(set(map(abs,c)))==3 for c in C)
+ assert len({tuple(sorted(map(abs,c))) for c in C})==len(C)
+ return a,C
+def count(n,F):
+ def rec(C,remaining):
+  while True:
+   if not C:return 1<<len(remaining)
+   if any(not c for c in C):return 0
+   unit=next((c[0] for c in C if len(c)==1),None)
+   if unit is None:break
+   remaining=remaining-{abs(unit)};C=[tuple(z for z in c if z!=-unit) for c in C if unit not in c]
+  v=min(abs(z) for c in C for z in c)
+  return sum(rec([tuple(z for z in c if z!=-l) for c in C if l not in c],remaining-{v}) for l in (v,-v))
+ return rec(list(F),set(range(1,n+1)))
+rng=random.Random(20261124);cases=clauses=0
+for q in (1,2,3):
+ pool=[tuple(i*s for i,s in zip(I,sg)) for k in range(1,q+1) for I in it.combinations(range(1,q+1),k) for sg in it.product((-1,1),repeat=k)]
+ FF=[[],[(1,),(-1,)]]+[[pool[j] for j in rng.sample(range(len(pool)),rng.randrange(min(6,len(pool))+1))] for _ in range(16)]
+ for F in FF:
+  w=sum(sat(F,x) for x in it.product((0,1),repeat=q));n,b,C=graph(q,F);m,D=compile_full(n,C)
+  assert count(m,D+[(b+6,)])==w and count(m,D+[(-b-6,)])==2**q-w
+  cases+=1;clauses+=len(D)
+assert (cases,clauses)==(54,3970)
+counts=0
+for q in range(1,7):
+ M=2**q
+ for w in range(M+1):
+  A=3*M-2*w;B=2*w;trace=A-B
+  assert (3*M-trace)//4==w and A+B==3*M
+  assert 7*M-8*w==M+2*trace
+  mod=3**(q+1);assert ((7*M-(7*M-8*w))*pow(8,-1,mod))%mod==w
+  counts+=1
+assert counts==132
+```
+
+### R84. Updated endpoint ledger
+
+| Gate / phase | Deliverable | Status / producer -> consumer |
+|---|---|---|
+| R78 / B-C | fixed-cardinality locally-full truth graph with unique source extension | derived, exact DPLL; G45/46/48 -> R79 |
+| R79 / C | actual unramified quadratic tag, phase-matched dual symmetric-square block | derived; R29/30 + Monster functorial inspiration, not Monster transport |
+| R80 / C | complete rank-one twisted L/epsilon/gamma observer collision | derived using standard local-factor identities; FactorsThrough obstruction |
+| R81 / C-D | one rank-two pair probe, exact pole/first coefficient, uniform Clay-equivalent succinct query | derived; no unrestricted lower bound |
+| R82 / C | signed scalar terminal contraction and binary/ternary precision | derived; R71–74 full tile channel cost not automatically consumer cost |
+| R83 | local exact execution | completed; no native certification |
+| R7a'/LGC4d | actual global scalar consumer contraction beyond current arithmetic shortcuts | open; exact target R81; cannot charge full tile map or rank-one observer |
+| R7b'/LGC5 | universal resource obstruction for rank-two pole presence under arbitrary nonlinear computation/sharing | OPEN P0 |
+| R7c/LGC6 | unrestricted superpoly separation via central sandwich or direct uniform succinct local-probe query | OPEN P0 |
+| LGC7/N6 | literal Clay endpoint | existing conditional consumer |
+
+Next endpoint-first: work on actual scalar support contraction in R82, not a bigger representation or local-factor census. The marked phase and all rank-one factors are provably insufficient, a rank-two repair is exact but computing it is the original SAT problem. Need a width-three-specific obstruction surviving arbitrary signed contraction and Boolean idempotence, or a polynomial cost algorithm for the rank-two pole query. R57–60 affine/dual and reported subexponential algorithm, R71–74 local compression, G44 cheap minterm checker remain legitimate shortcuts. No further native certification phase, no unrelated work, no claim P!=NP. Retain original G45–48 and Monster source credit, DASHI/JMD attribution rules and classical LLC authority.
