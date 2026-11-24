@@ -731,8 +731,8 @@ benchmarker remain unchanged.
    still composes \((P_L,Q_L,T_L)\) and
    \((P_R,Q_R,T_R)\) in strictly original left-right
    upper-triangular matrix order.
-   The scheduling heuristic is NOT proven to minimize
-   Gomory/Sethi–Ullman/GMP peak memory, and its lgamma
+   The scheduling heuristic is NOT a proved
+   Sethi–Ullman or GMP peak-memory optimum, and its lgamma
    overhead may dominate. No performance gain claimed.
 
 The complete same-source mathematical derivation, cost-path
