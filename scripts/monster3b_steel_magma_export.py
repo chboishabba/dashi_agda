@@ -107,7 +107,7 @@ Monster3BOut cat:= " \"ordinary_source_character_orientation_verified\":false,\n
 Monster3BOut cat:= " \"original_generator_to_ATLAS_standard_words_verified\":false,\n";
 Monster3BOut cat:= " \"magma_GModule_symbol\":\"MODNAME\",\n";
 Monster3BOut cat:= " \"magma_primitive_cube_root_coordinates\":[";
-Monster3BOut cat:= Monster3BPair(Monster3BZeta) cat:= "],\n";
+Monster3BOut cat:= Monster3BPair(Monster3BZeta);\nMonster3BOut cat:= "],\\n";
 Monster3BOut cat:= " \"generators\":{\n";
 for i in [1..#Monster3BGenerators] do
   if i gt 1 then Monster3BOut cat:= ",\n"; end if;
