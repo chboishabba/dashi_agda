@@ -97,48 +97,64 @@ def main():
         save()
         return receipt["status"]=="EXIT_0"
     try:
+        original12=None
+        source_path=srcdir/"d12.6Suz.nfdeg2.M"
+        source_available=False
         if args.source_file:
-            source=args.source_file.resolve()
-            if not source.is_file():raise ValueError("--source-file not found")
-            source_path=source
-            report["stages"]["acquire"]={"status":"USER_SOURCE_FILE"}
+            source_path=args.source_file.resolve()
+            source_available=source_path.is_file()
+            report["stages"]["acquire"]={
+                "status":"USER_SOURCE_FILE" if source_available else "SOURCE_FILE_MISSING",
+                "path":str(source_path)}
         else:
-            source_path=srcdir/"d12.6Suz.nfdeg2.M"
-            if run("acquire",[sys.executable,
+            source_available=run("acquire",[sys.executable,
                 SCRIPTS/"monster3b_steel_ordinary12_to90.py","--acquire",
-                "--source-root",srcdir]) is False:
-                raise RuntimeError("original Steel source acquisition failed")
-        if not args.skip_magma:
-            if not run("magma_export",[sys.executable,
+                "--source-root",srcdir])
+        if not source_available:
+            report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
+                "STEEL_SOURCE_NOT_AVAILABLE; MMGROUP_STAGE_WILL_STILL_RUN"
+        elif not args.skip_magma:
+            if run("magma_export",[sys.executable,
                     SCRIPTS/"monster3b_steel_magma_export.py",
                     "--source",source_path,"--outdir",out,
                     "--module",args.module,"--magma","--timeout",args.timeout]):
-                raise RuntimeError("original Magma module export failed; inspect magma_export.log")
-            original12=out/"steel12_source_generators.json"
+                original12=out/"steel12_source_generators.json"
+                report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
+                    "SOURCE_MAGMA_PRODUCED"
+            else:
+                report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
+                    "SOURCE_MAGMA_EXPORT_FAILED; MMGROUP_STAGE_WILL_STILL_RUN"
         else:
             original12=srcdir/"steel12_source_generators.json"
-            if not original12.is_file():raise RuntimeError(
-                "--skip-magma but prior original Steel source JSON is absent")
-        report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=(
-            "SOURCE_MAGMA_PRODUCED" if not args.skip_magma else "PREEXISTING_JSON_NOT_REVALIDATED")
-        report["source12_json"]=str(original12);save()
-        if not run("derive90",[sys.executable,
-                SCRIPTS/"monster3b_steel_ordinary12_to90.py",
-                "--matrix-json",original12,"--out",
-                out/"ordinary12_derived90.json"]):
-            raise RuntimeError("Q(zeta3) 12→78→90 exact field construction failed")
-        report["lemma_status"]["M3B-L10C_inner_90_from_source12"]="DERIVED_EXACT"
-        if not args.skip_gap:
-            if run("gap_fingerprint",[sys.executable,
-                    SCRIPTS/"monster3b_gap_ordinary12_class_fingerprint.py",
-                    "--source",original12,"--outdir",out,
-                    "--run-gap","--timeout",args.timeout]):
-                report["lemma_status"]["M3B-L10A_class_orientation"]=(
-                    "EXACT_FINGERPRINT_CANDIDATES_NOT_CANONICAL_CLASS_WORD")
+            if not original12.is_file():original12=None
+            report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
+                ("PREEXISTING_JSON_NOT_REVALIDATED" if original12 else
+                 "MISSING_SOURCE_JSON_WITH_SKIP_MAGMA")
+        if original12 is not None:
+            report["source12_json"]=str(original12);save()
+            if run("derive90",[sys.executable,
+                    SCRIPTS/"monster3b_steel_ordinary12_to90.py",
+                    "--matrix-json",original12,"--out",
+                    out/"ordinary12_derived90.json"]):
+                report["lemma_status"]["M3B-L10C_inner_90_from_source12"]="DERIVED_EXACT"
             else:
-                report["lemma_status"]["M3B-L10A_class_orientation"]="GAP_FINGERPRINT_FAILED"
+                report["lemma_status"]["M3B-L10C_inner_90_from_source12"]="FAILED"
+            if not args.skip_gap:
+                if run("gap_fingerprint",[sys.executable,
+                        SCRIPTS/"monster3b_gap_ordinary12_class_fingerprint.py",
+                        "--source",original12,"--outdir",out,
+                        "--run-gap","--timeout",args.timeout]):
+                    report["lemma_status"]["M3B-L10A_class_orientation"]=\
+                        "EXACT_FINGERPRINT_CANDIDATES_NOT_CANONICAL_CLASS_WORD"
+                else:
+                    report["lemma_status"]["M3B-L10A_class_orientation"]="GAP_FINGERPRINT_FAILED"
+            else:
+                report["lemma_status"]["M3B-L10A_class_orientation"]="DEFERRED"
         else:
-            report["lemma_status"]["M3B-L10A_class_orientation"]="DEFERRED"
+            report["lemma_status"]["M3B-L10C_inner_90_from_source12"]=\
+                "BLOCKED_ON_AUTHENTIC_STEEL_12_MATRICES"
+            report["lemma_status"]["M3B-L10A_class_orientation"]=\
+                "BLOCKED_ON_AUTHENTIC_STEEL_12_MATRICES"
         if not args.skip_mmgroup:
             if not args.manifest.exists():
                 report["stages"]["mmgroup_canonical_words"]={
@@ -171,19 +187,25 @@ def main():
                         "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
                 else:
                     report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]="FAILED"
-        if run("hom_outer",[sys.executable,
-               SCRIPTS/"monster3b_ordinary12_hom_outer_weld.py",
-               "--source",original12,"--out",out/"hom_outer_weld.json",
-               * (["--hom",str(args.hom)] if args.hom else []),
-               * (["--outer-map",str(args.outer_map)] if args.outer_map else [])]):
-            report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]=(
-                "CONDITIONAL_EXACT_LINEAR_WELD; SOURCE_AUTHENTICATION_OPEN"
-                if args.hom else "NEEDS_ACTUAL_COMPLEX_MONSTER_HOM")
-            report["lemma_status"]["M3B-L12R_complex_outer_intertwiner"]=(
-                "CONDITIONAL_TWISTED_INTERTWINER; WORD_GAUGE_OPEN"
-                if args.outer_map and args.hom else "NEEDS_SOURCE_OUTER_AND_COMPLEX_HOM")
+        if original12 is not None:
+            if run("hom_outer",[sys.executable,
+                   SCRIPTS/"monster3b_ordinary12_hom_outer_weld.py",
+                   "--source",original12,"--out",out/"hom_outer_weld.json",
+                   * (["--hom",str(args.hom)] if args.hom else []),
+                   * (["--outer-map",str(args.outer_map)] if args.outer_map else [])]):
+                report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]=(
+                    "CONDITIONAL_EXACT_LINEAR_WELD; SOURCE_AUTHENTICATION_OPEN"
+                    if args.hom else "NEEDS_ACTUAL_COMPLEX_MONSTER_HOM")
+                report["lemma_status"]["M3B-L12R_complex_outer_intertwiner"]=(
+                    "CONDITIONAL_TWISTED_INTERTWINER; WORD_GAUGE_OPEN"
+                    if args.outer_map and args.hom else "NEEDS_SOURCE_OUTER_AND_COMPLEX_HOM")
+            else:
+                report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]="ERROR"
         else:
-            report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]="ERROR"
+            report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]=\
+                "BLOCKED_ON_ORIGINAL_STEEL_12_AND_REAL_CHAR0_HOM"
+            report["lemma_status"]["M3B-L12R_complex_outer_intertwiner"]=\
+                "BLOCKED_ON_ORIGINAL_STEEL_12_AND_REAL_SOURCE_OUTER_WORD_MAP"
         report["status"]="STAGED_MATHEMATICAL_ENDPOINTS_WITH_REMAINING_SOURCE_ATTACHMENT"
     except Exception as exc:
         report["status"]="ERROR_FAIL_CLOSED"
