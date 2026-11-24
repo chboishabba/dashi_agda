@@ -534,3 +534,44 @@ The original quotient order7 \(R\) and exact cocycle staircase \((1,-1,1,-1,1,1)
 This pays the **relator-specific 729 scalar mathematical obstruction** without running Magma or independently constructing a 729 operator. The still-genuine terminal obligations are a globally coherent \(6.\mathrm{Suz}.2\) scalar/outer source-word selection, the original 729-to-actual Monster W_s basis/evaluation identification, the exact ordinary same-Hom 12/78 matrices, and literal corrected MM C→Monster 4D. None follows solely from matching dimension, quotient character class or these finite-model coefficients.
 
 Attribution: original ATLAS/AtlasRep, Barraclough–Wilson, finite Weil theory, original TOE and finite-Heisenberg code, Dietrich–Lee–Pisani–Popiel Monster words and Ibrahim's original phase/multiplicity/Hom sources. Preserve the original signed central \(R^7=z\), diagonal class20 versus extraspecial centre, zero-vacuum, phase and model-chart distinctions; P6 certification remains after endpoint mathematics.
+
+
+## 24 November 2026 — gauge-independent Monster 3B P5 **operator** weld, not merely a trace test
+
+The original 729-dimensional Schrödinger/finite Weil model, Heisenberg cocycle correction, phase-changing similitudes and inverse normalizer cocycle are pre-existing source code (Agda and TOE/AtlasRep), not unresolved prerequisites. This continuation sharpens the genuine same-object problem: can the *actual* \(\mathrm{MMV}(31)\) 78-dimensional C²-eigenblock of the Monster be explicitly transported into the dual symmetric square of the *actual* 12-dimensional C²-eigenblock, simultaneously for the corrected Monster inner words \(D\) and \(E=CDC^{-1}\), without choosing the remaining scalar gauge? See the [complete original-source derivation and exact phase/lemma ledger](../../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md) and [living P0–P6 roadmap](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md).
+
+For a genuine inner order-three word \(g\in\{D,E\}\), the existing model Weil projective cocycle computes
+\[
+K_{g,s}^3=\gamma_{g,s} I_{729},\qquad
+\gamma_{g,s}=\alpha_s(g,g)\alpha_s(g,g^2).
+\]
+The new source consumer [\`monster3b_original729_weil_source_cocycle_weld.py\`](../../scripts/monster3b_original729_weil_source_cocycle_weld.py) explicitly records both original word cubic scalars in exact \(\mathbb Q(\zeta_3)\) for both signed phases. If the actual Monster \(W_s\simeq H_s\otimes S_s\) evaluation uses that *same original source Heisenberg gauge*, the genuine Monster relation \(\rho(g)^3=I\) requires
+\[
+B_{12,g}^3=B_{78,g}^3=\gamma_{g,s}^{-1}I
+\]
+for the **actual modular source** multiplicity blocks divided by the exactly compiled nonzero Weil B-vacuum coefficient. Their original 12 and 78 sizes are the already-paid actual C² eigenvalues, not independent invented carriers.
+
+The source GAP selection gives the full ordinary character identity \(S_s\simeq V_{12,s}\oplus\operatorname{Sym}^2(V_{12,s}^\vee)\). There is an unknown cubic rephasing \(c_g\) with \(c_g^3=\gamma_{g,s}\), but **it cancels exactly from the 12/78 character and operator relations**. Explicitly, write \(A_{12,g}=c_g B_{12,g}\), \(A_{78,g}=c_g B_{78,g}\). Since \(A_{12,g}^3=I\), the symmetric-square character formula and \(B_{12,g}^{-1}=\gamma_g B_{12,g}^2\) give the phase-safe equation
+\[
+\boxed{2\operatorname{tr}(B_{78,g})=
+       \operatorname{tr}(B_{12,g})+
+       \gamma_g[\operatorname{tr}(B_{12,g}^2)]^2.}
+\]
+This is the original-source [\`monster3b_actual_order3_projective_sym2_weld.py\`](../../scripts/monster3b_actual_order3_projective_sym2_weld.py) test: its source inputs are the actual \(\mathrm{MMV}(31)\) \(D,E\) 12/78 matrices, the prior TOE-derived \(\kappa,\gamma\), and literal original C². It refuses zero-vacuum, mismatched source provenance, noncentral cubes and incorrect 78 characters. All six \(\mu_6\) model gauge options (including \(\gamma=-1\)) satisfy the formula in an independently locally executed synthetic 12/78 test; a deliberately changed 78 character fails. **These tests do not instantiate the actual Monster \(\mathrm{MMV}(31)\) receiver in this environment.**
+
+Crucially, the operator relation is even stronger:
+\[
+\boxed{T_{78,g}
+=\gamma_g^{-1}\operatorname{Sym}^2((B_{12,g}^{-1})^\top)
+=\gamma_g\,\operatorname{Sym}^2((B_{12,g}^2)^\top).}
+\]
+The original 78-dimensional Monster block should be *simultaneously* conjugate to those two constructed operators by ONE \(78\times78\) invertible map \(F_s\),
+\[
+\boxed{F_s B_{78,D}=T_{78,D}F_s,\qquad
+       F_s B_{78,E}=T_{78,E}F_s.}
+\]
+The [new constructive source operator program](../../scripts/monster3b_actual_projective_sym2_intertwiner.py) avoids a 6084-variable dense Kronecker solve: it finds a simple shared eigenvalue in \(h(D,E)=aD+bE+cDE\), propagates matching D/E words from a one-dimensional eigenspace to a full 78-dimensional cyclic basis, computes \(F\) as the target-to-source basis change and checks every entry of both generator equations and the inverse. A locally executed independent \(\mathbb F_{31}\) prototype with two noncommuting original-shaped order-three generators, a hidden random 78×78 conjugacy, model phase \(\gamma_D=-1\), and 78 generated vectors recovered the full \(F\); a wrong second source generator did not. The actual original Monster 12/78 inputs have not been run through the newly committed operator program in this assistant runtime, and no Magma or unrelated quotient search was necessary for the new mathematical construction.
+
+This provides a clear **next promoted endpoint**: if original \(\mathrm{MMV}(31)\) source data produce an invertible \(F_s\) for the corrected \(D,E\), the **same actual modular Monster 78D action** is explicitly identified with \(\operatorname{Sym}^2(12^\vee)\) on these generators, stronger than coincident character values. It does not automatically identify all \(6.\mathrm{Suz}.2\) ordinary complex matrices or the literal corrected C with Monster class4D. Global standard-generator word alignment, phase-inverting outer \(C\), all normalizer relators and original characteristic-zero \(W_s\) remain the precise still-unpaid mathematical source welds; the prior \(R^7=z_{3B}\) signed central residual remains separate and preserved.
+
+Original attribution retained: finite Schrödinger/Weil/Stone–von Neumann theory, source AtlasRep \(\mathrm{GF}(3)^{12}\), Barraclough–Wilson original Monster normalizer characters/fusion, Dietrich–Lee–Pisani–Popiel MonsterSubgroups words, and Ibrahim 12/78/90 character/isotypic/Hom source constructions. New code is a source-to-source consumer and representation-intertwiner algorithm, not a replacement original 729 model or a new ordinary 6Suz representation. The class20 diagonal-kernel C3 versus extraspecial Monster z, zero-vacuum, signed ζ/ζ² phase, p31/p127 indexed charts and source vs target field boundaries remain explicit.
