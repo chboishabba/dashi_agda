@@ -172,7 +172,7 @@ def selftest():
           for i in range(12) for j in range(i,12)]
     assert len(full)==78
     out=[]
-    for unit in (1,z,zi):
+    for unit in (1,z,zi,P-1,(-z)%P,(-zi)%P):
         A=np.diag([v*pow(unit,-1,P)%P for v in vals])
         B=np.diag([v*pow(unit,-1,P)%P for v in full])
         gamma=pow(unit,3,P)
@@ -182,7 +182,16 @@ def selftest():
                 and scalar_matrix(cubic(B),pow(gamma,-1,P))):
             raise AssertionError("gauge-independent dual-Sym² trace identity failed")
         out.append({"cube_root_gauge":unit,"trace_78":t78,"prediction":expected})
+    # A changed 78 constituent must not be accidentally accepted merely
+    # because its carrier still has dimension 78.
+    corrupted=np.diag([1]*78)
+    corrupted[0,0]=z
+    assert (trace(corrupted)%P)!=(
+        (trace(np.diag(vals))+
+         trace(modmul(np.diag(vals),np.diag(vals)))**2)
+        *pow(2,-1,P))%P
     return {"status":"PASS_EXACT_GAUGE_INVARIANT_12_TO_78_TOY",
+       "six_mu6_rephasings_plus_minus_gamma_tested":True,
        "three_unresolved_rephasings_preserved":True,
        "checks":out,"actual_Monster_receipts_executed_here":False}
 
