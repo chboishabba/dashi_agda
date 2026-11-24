@@ -117,6 +117,11 @@ def main():
         else:
             report["lemma_status"]["M3B-L10B_ATLAS_existing_729_Weil_model"]=\
                 "SOURCE_729_ATLAS_REPLAY_FAILED"
+        lindsey_ok=run("lindsey_ordinary_signed_source",[sys.executable,
+            SCRIPTS/"monster3b_lindsey_ordinary_signed.py",
+            "--out",out/"lindsey_ordinary_signed.json"])
+        report["lemma_status"]["M3B-L10A_L10C_Lindsey_ordinary_source"]=(
+            "EXACT_ORDINARY_SIGNED_12_78_90_ATLAS_CHART" if lindsey_ok else "SOURCE_REPLAY_FAILED")
         original12=None
         source_path=srcdir/"d12.6Suz.nfdeg2.M"
         source_available=False
@@ -184,7 +189,7 @@ def main():
                 report["lemma_status"]["M3B-L10A_class_orientation"]="DEFERRED"
         else:
             report["lemma_status"]["M3B-L10C_inner_90_from_source12"]=\
-                "BLOCKED_ON_AUTHENTIC_STEEL_12_MATRICES"
+                ("LINDSEY_SOURCE_AVAILABLE; STEEL_INDEPENDENT_DONOR_NOT_AVAILABLE" if lindsey_ok else "NO_ORDINARY_SOURCE_MATRICES")
             report["lemma_status"]["M3B-L10A_class_orientation"]=\
                 "BLOCKED_ON_AUTHENTIC_STEEL_12_MATRICES"
         if not args.skip_mmgroup:
@@ -400,6 +405,13 @@ def main():
                                         "--outer",out/"actual_mod31_outer_phase_pair","--outdir",full_join])
                                     report["lemma_status"]["M3B-L10B_L10C_L12R_canonical_signed_mod31"]=(
                                         "SOURCE_BOUND_MOD31_SIGNED_GENERATOR_WELD" if full_ok else "CANONICAL_SOURCE_RESIDUAL")
+                                    if full_ok:
+                                        source_join=run("lindsey_actual_MM31_source_join",[
+                                            sys.executable,SCRIPTS/"monster3b_lindsey_actual_mod31_join.py",
+                                            "--cover",cover,"--model",canonical_model,"--packet-dir",full_join,
+                                            "--outdir",out/"lindsey_actual_MM31"])
+                                        report["lemma_status"]["M3B-L10A_L10B_L10C_L12R_Lindsey_MM31"]=(
+                                            "SOURCE_BOUND_SIGNED_MOD31_12_78_WELD" if source_join else "SOURCE_JOIN_RESIDUAL")
 
                             else:
                                 report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
@@ -423,9 +435,9 @@ def main():
                 report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]="ERROR"
         else:
             report["lemma_status"]["M3B-L10B_complex_12_Hom_intertwiner"]=\
-                "BLOCKED_ON_ORIGINAL_STEEL_12_AND_REAL_CHAR0_HOM"
+                ("LINDSEY_SOURCE_AVAILABLE; NEEDS_ACTUAL_CHAR0_HOM" if lindsey_ok else "BLOCKED_ON_ORDINARY_SOURCE_AND_REAL_CHAR0_HOM")
             report["lemma_status"]["M3B-L12R_complex_outer_intertwiner"]=\
-                "BLOCKED_ON_ORIGINAL_STEEL_12_AND_REAL_SOURCE_OUTER_WORD_MAP"
+                ("LINDSEY_SIGNED_SOURCE_AVAILABLE; NEEDS_ACTUAL_MM_Q7_AND_CHAR0_HOM" if lindsey_ok else "BLOCKED_ON_ORDINARY_SOURCE_AND_REAL_SOURCE_OUTER_WORD_MAP")
         report["status"]="STAGED_MATHEMATICAL_ENDPOINTS_WITH_REMAINING_SOURCE_ATTACHMENT"
     except Exception as exc:
         report["status"]="ERROR_FAIL_CLOSED"
