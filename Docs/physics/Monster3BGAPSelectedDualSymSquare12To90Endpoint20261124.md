@@ -55,3 +55,12 @@ The selected faithful-vs-Sym² 78 branch, general 78D character search, generic 
 **Next endpoint cut, NO new matrix construction:** obtain/read the cited original \`.M\` source, recover original standard \`6.Suz\` generator words and the quadratic character field, check its original selected 12 character equals GAP source \`Irr(6.Suz)[153]\` or \`[154]\` in the identical 210-class order, then align its standard generators with source \`6.Suz.2\`/MN3B/MM words and chosen 729 phase. Once a concrete \(12\times12\) original complex standard-source \(A_g\) is aligned, the selected \(78\) and \(90\) matrices are **functorially** given by \(\operatorname{Sym}^2((A_g^{-1})^\top)\), and the last remaining step is same-object Monster Hom isotypic intertwiner and outer phase swap. This is an **actual external producer discovery**, not proof that all remaining endpoints have been paid.
 
 Source context: GAP AtlasRep's published 6.Suz available matrices list 12D over GF(7), GF(13), GF(25), but no listed ordinary 12D. Primary Steel database linked above fills exactly that missing characteristic-zero data-source role.
+
+
+### Minimal field sharpened to \(\mathbb Q(\zeta_3)\)
+
+Steel's listing gives character-field degree **2** and Schur index **1** for the faithful ordinary degree12 \(6.\mathrm{Suz}\) representation. Since the central order-three Suzuki generator acts on this faithful irreducible as \(\zeta_3^{\pm1}I\), its character value \(12\zeta_3^{\pm1}\) generates \(\mathbb Q(\zeta_3)\). This is itself degree two over \(\mathbb Q\); hence the character field is **exactly**
+\[
+\boxed{\mathbb Q(\zeta_3)=\mathbb Q(\sqrt{-3}).}
+\]
+Schur index one permits the ordinary representation to be defined over that very field. Consequently the selected \(V_{12}\oplus\operatorname{Sym}^2(V_{12}^\vee)\) **inner \(6.\mathrm{Suz}\) 90D action** may be represented entirely over \(\mathbb Q(\zeta_3)\), because taking inverses, transposes, symmetric squares and direct sums does not extend the base field. This result concerns the 12/90D *multiplicity representation*; it does not assert that all \(729\)-dimensional Weil operators or the original full Monster matrices are already represented in the same source basis. It also does not supply the actual 12D matrix entries, which remain in Steel's original external Magma file pending inspection.
