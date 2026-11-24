@@ -1018,10 +1018,10 @@ that explicit representation size is not synonymous
 with actual source-preserving consumer work.
 
 New standalone **UNTESTED** source:
-\`scripts/pi_p0_dyadic_sector_contraction.hpp\`.
+`scripts/pi_p0_dyadic_sector_contraction.hpp`.
 New integrated original-source/COMP5t-derived **UNTESTED**
 implementation:
-\`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`.
+`scripts/check_pi_p0_dyadic_sector_schedule.cpp`.
 No historical COMP5j or COMP5t baseline is overwritten.
 
 For original authenticated positive ordered Chudnovsky endpoints,
@@ -1073,7 +1073,7 @@ c=\lfloor G\ell'/2^k\rfloor,\quad
 \rho=G\rho'+c,\quad
 \ell=(G\ell')\bmod2^k.
 \]
-The new optional \`reopenRawDyadicFibre\`
+The new optional `reopenRawDyadicFibre`
 constructs these exact raw-source
 remainders; raw producer authenticity
 is still independently required.
@@ -1082,7 +1082,7 @@ P-vs-NP's finite-field separator theorem.
 
 Full equations, decision-proof and
 positive/negative S13–S19 obligations:
-\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
 **All testing/benchmarking/Agda/Lean/CI
 and independent world-SOTA comparisons
 remain deferred**. No new measured
