@@ -1336,3 +1336,160 @@ for m in range(3,9):
 | N6 | originalClayTransport | #1040 conditional terminal, #1129 costed machine coverage |
 
 Next Aristotle BIDI: distinguish the hard global upward closure of the explicit minterm relation from its easy exact layer recognition. Invert from G25's actual NOT-budget lower bound toward G26's logarithmic cap, but only by proving size bounds, never by assuming many disjoint mismatches mean many NOT gates. General matching shortcut and G21/G24 padding remain controls. The direct uniform N4/N5 route remains a weaker sufficient OR route; no need to solve a stronger nonuniform endpoint if direct machine proof succeeds. No claim of P!=NP, no CI or kernel detour.
+
+
+## 18. P0-G28–G32 — exact ambiguity budget, hard near-minterm bands and fixed-weight gluing (2026-11-24)
+
+Controlling endpoint remains literal Clay P vs NP, P0-C/D. Input: G25–G27 and attached Langlands R36–R39 (reported Agda #1549 / Lean #120 heads 464691089a12 / 9c181a9fd0ef). Use only original assignment projectors and weight-slice transport, no Langlands/Monster closure. Both P0 roadmaps read at ead847b32e6a / 8a8f77430e62, common blob 790854f6eb326974377356c840c10d38945bf1c8. Existing producers: G13/G14 exact selector incidence and overlap, G17/G22 CLIQUE projection, G20 dual rails, G21/G24 orbit masks, G25–G27 actual limited negation and minterm layer, #1291 indexed geometry, #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 shared intermediates, #1474/#1502 encoding, #1129 standard-machine coverage, #1040 terminal, #607/#678 Aristotle. All new derivations below are classical mathematical arguments, not claims of new kernel proof or literature novelty.
+
+### G28 — sharp ambiguity budget and monotone exact near-layer checker
+
+Use t_(I,p)=1 for available local falsifying patterns, all nonempty scopes I of size <=3. G_m(t)=1 iff some x has every pattern t_(I,x|I)=1. Write b(m)=sum_{j=1}^3 binom(m,j), N_m=sum_{j=1}^3 2^j binom(m,j), e=|t|-b(m). If some scope has no available pattern then G=0; otherwise e>=0. For each variable i, let R_i(t) be intersection, over all I containing i, of the projection to i of the available patterns in that scope. These are necessary value domains; each of the two membership bits is a monotone AND of small ORs. Let A={i:R_i={0,1}}, a=|A|. Every scope meeting A has >=2 available patterns, since a singleton pattern would resolve all its coordinates. Thus
+
+    e >= B_m(a) := b(m)-b(m-a).
+    a D_m <= 3e, D_m=b(m)-b(m-1)=1+(m-1)+binom(m-1,2).
+
+The second inequality counts incidences between ambiguous variables and scopes; each ambiguous variable has D_m incidences and a scope has at most three. First inequality is sharp for every a: choose two assignments x,y differing in exactly a coordinates and take t=P_x union P_y; each affected scope contributes exactly one extra pattern, and the viable domains are both values precisely on the differing coordinates. This is the original G14 overlap identity, now used as a tight input-budget constraint rather than a computational lower bound.
+
+Define H_*(t)=AND_I OR_p [t_(I,p) AND AND_{i in I} [p_i in R_i(t)]]. Size O(N_m) in bounded-fanin monotone gates: sum of incidences <=3b(m), <=8 patterns per scope; all domain rails can be shared. G<=H_* globally. If H_*=1 then all scopes and all domains are nonempty. If |t|<b(m)+D_m, a=0, so the singleton domains specify x, and each scope has its pattern; hence G=H_* on the entire band. Sharp for THIS one-round checker: for m>=3 allow both singleton values of variable 1, fix all other singleton variables to zero. For scopes containing 1 use two patterns with both values of 1 and other bits zero, except scope {1,2} use (0,0),(1,1) and {1,3} use (1,0),(0,1). Other scopes allow just zero. Then R_1={0,1}, others {0}; H_*=1, G=0 by conflicting demands on variable 1, |t|=b+D_m. This is not a hardness proof at the boundary; further constraint propagation can solve this example.
+
+### G29 — exact parameterized shortcut and monotone band gluing
+
+Reject empty domains or scopes, then enumerate the a ambiguous variables, fixing all singleton domains and checking each completed assignment against every scope. Time O(N_m*2^a) indexed Boolean operations, with ordinary polynomial overhead on standard machines. In particular e=O(m^2 log m) gives a=O(log m) and polynomial time on that promise. No claim that optimal running time must grow like this. This is a legitimate shared-computation shortcut.
+
+For fixed h in 0..m define R_{T,z} as wire restriction to patterns agreeing with assignment z on T, deleting inconsistent pattern coordinates. Let
+
+    J_h(t) = AND_{T subset [m], |T|=h} OR_{z in {0,1}^T} H_*(R_(T,z)(t)).
+
+This is monotone, size O(N_m * binom(m,h) * 2^h). If G=1, every T has a matching z from a witness, hence J_h=1. If G=0 and all scopes nonempty and a<=h, choose T containing all ambiguous variables. Under each z on T, every surviving domain has <=1 value: outside T domains only shrink, inside T the restriction fixes the value. If H_* accepts, these singleton domains provide a witness, contradiction. Thus J_h=0. If a scope empty, all restricted checkers reject. Consequently for h<m, J_h=G on |t|<b(m)+B_m(h+1); for h=m it computes G everywhere (exponential upper bound). For constant h the band has polynomial monotone circuits. Important quantifier order AND_T OR_z, not OR_T OR_z (a bad T could miss ambiguity). This is exact cross-restriction gluing for a controlled band, not a universal per-gate lower-bound potential.
+
+### G30 — sharpen the G22 external monotone bound (CCC 2025)
+
+Retrieved and checked Błasiok and Meierhöfer, Hardness of Clique Approximation for Monotone Circuits, CCC 2025, Corollary 5, DOI 10.4230/LIPIcs.CCC.2025.4, https://drops.dagstuhl.de/storage/00lipics/lipics-vol339-ccc2025/html/LIPIcs.CCC.2025.4/LIPIcs.CCC.2025.4.html (explicit corollary on exact CLIQUE). For fixed delta>0 and k<=n^(1/2-delta)/log^2 n the monotone complexity is n^Omega(delta^2 k). Take delta=1/24 and k=floor(n^(5/12)); for sufficiently large n it satisfies the bound, since 5/12<11/24. G22 uses arbitrary fixed k, O(n) variables and a monotone projection, so N=Theta(n^3) yields
+
+    MonSize(G_M,3) >= 2^Omega(N^(5/36) log N).
+
+More generally for any fixed 0<eta<1/6 choose a fixed delta sufficiently small and k=floor(n^(1/2-3eta)); gives exponent 1/6-eta on the corresponding selector lengths. This replaces the older CKR exponent 1/12 in G21/G24 consequences (same proofs), for example hypothetical polynomial circuits need transversal >epsilon N^(5/36) on almost every minterm. This is external theorem transport, not an unrestricted lower bound. G25 limited-negation bound is separate; do not promote this strengthened monotone result to that model.
+
+### G31 — hard bands by same-object monotone padding
+
+Embed arbitrary selector on r active variables into m>=r variables, with m-r dummy variables fixed to zero by singleton scopes. For pure-active scopes copy original input t_(I,p); for every other scope allow exactly those patterns whose dummy bits are all zero, without constraining their active bits. Denote this projection P_{r,m}. Each target coordinate is a constant or one original unnegated selector input. Therefore no gate/NOT overhead for monotone projection. G_m(P_{r,m}(t))=G_r(t): a target witness restricts to an original witness, and original witness extends by zero dummy values. The active variables are original carrier coordinates, not an independently synthesized object.
+
+Let B be the number of fixed 1 coordinates outside pure-active scopes. Then |P(t)|=B+|t| and maximum weight is B+N_r=b(m)+E_{m,r}, where
+
+    E_{m,r}=sum_{j=1}^3 sum_{l=1}^j binom(r,l)binom(m-r,j-l)(2^l-1)
+          <=7[b(m)-b(m-r)] <=7r D_m=O(r m^2).
+
+Use binom outside valid ranges =0. This includes the pure-active scopes and is exact at full input. Thus any circuit correct on all |t|<=b(m)+E_{m,r}, even if arbitrary outside the promise, computes full G_r after restriction. Set m=3r^d for fixed integer d>=2. Output input length N=Theta(r^(3d)) polynomial in original input size; E=O(N^(2/3+1/(3d)))=o(N). The promised band is NP-hard under polynomial deterministic reduction, and its accepted language (check the promise and a witness) is in NP. By composing G30 at active r with the padding, any monotone circuit correct on the whole band requires size
+
+    2^Omega(N^(5/(36d)) log N)
+
+on the hard subsequence. For d fixed, still superpolynomial. For any fixed epsilon>0 choose d large enough that 1/(3d)<=epsilon; hence a band of excess O(N^(2/3+epsilon)) can retain NP-hardness and a superpolynomial monotone bound. No unrestricted lower bound follows, and the reduction does not put hard instances in the proven polynomial region e=O(m^2 log m). This is a precise distinction between thin relative width and genuinely small ambiguity.
+
+### G32 — single fixed-weight NP-hardness and unrestricted equivalence
+
+In the same padding, take m>=3r. There are >=N_r distinct dummy-only non-singleton patterns having at least one dummy bit 1 (e.g. for r>=2 there are 3 binom(2r,2)+7 binom(2r,3) such coordinates, >=N_r; r=1 already has three such pair patterns). They are currently zero and cannot become part of any witness because dummy singleton domains force zero. Choose N_r of these slack coordinates and place 1-t_j in the j-th slack coordinate. Weight is now exactly B+N_r=b(m)+E_{m,r} for every input, and satisfiability unchanged. This is a polynomial general Boolean projection with complemented inputs, NOT a monotone projection. Thus even a single specified weight layer at that excess is NP-hard (ordinary polynomial reduction), and the associated exact-weight language is in NP; one can choose m=3r^d and reject other lengths to define a uniform language. It does not have the G31 monotone lower bound by that reduction.
+
+More generally for any Boolean circuit C on N bits, dual rail D(t,u) has O(size(C)) monotone size and agrees with C on u=1-t. Define L_k(t)=D(t,([sum_{j!=i}t_j>=k])_i). Threshold banks have polynomial size (G26). On |t|=k negative rails are exact; on |t|<k all negative rails zero, on |t|>k all one. Thus L_k agrees with C on its slice, underapproximates below and overapproximates above (relative to C; no target monotonicity needed for the comparison). For monotone G, define T_k=[|t|>=k] and
+
+    S_k(t)= T_(k+1)(t) OR (T_k(t) AND L_k(t)).
+    S_k(t)= T_(k+1)(t) OR (T_k(t) AND G(t)).
+
+First form monotone; equality by weight cases. It is the monotone sandwich extension of the exact slice (all lower points false, all upper points true). This provides polynomial-size monotone sandwich circuits for every k if general C is polynomial. Conversely if all these monotone sandwich circuits have a common polynomial size bound, compute G(t)=OR_k ([|t|=k] AND S_k(t)) with polynomial overhead and shared weight bank. Uniform version requires polynomially constructible circuits; nonuniform version alone is equivalent to polynomial circuit families, not to P. Therefore a general nonuniform selector lower bound is equivalent to superpolynomial growth of worst-case monotone sandwich-extension complexity over k; merely proving a globally sound monotone extension expensive is insufficient. The latter extension is a different function. G31 band has comparisons between different weights and a monotone projection; G32 single slice erases these comparisons and can express general negation through padding. That is the precise cross-weight gluing boundary. Do not transfer G31 lower bound to G32 by treating complemented rails as free monotone inputs. Attached R37 rank-one Fourier detector remains exact but W(t)/2^m may be 2^-m; extracting it is not a free primitive and no precision/representation lower bound here.
+
+### Local execution (Python integer masks, no CI/native kernel)
+
+Executed 1260 selector inputs (all 260 at m=1,2; 250 seeded inputs for each m=3..6), checking H_* sound overapproximation, exact ambiguity budget, viable-domain witness restriction, near-band exactness and J_h on promised inputs for h<=2. Eight sharp boundary counterexamples m=3..10 verified. 920 semantic padding comparisons (monotone band and balanced fixed slice) for (r,m)=(1,3),(2,6),(3,9), all original selectors at r=1,2 and 200 seeded r=3 selectors. All passed. Reproduction core:
+
+```python
+from itertools import combinations
+from random import Random
+from math import comb
+def b(m):return sum(comb(m,j) for j in range(1,min(3,m)+1))
+def carrier(m):
+    S=[I for j in range(1,min(3,m)+1) for I in combinations(range(m),j)]
+    C=[(I,p) for I in S for p in range(1<<len(I))]
+    ix={c:i for i,c in enumerate(C)}
+    P=[sum(1<<ix[I,sum((x>>i&1)<<j for j,i in enumerate(I))] for I in S) for x in range(1<<m)]
+    return S,C,ix,P
+def support(t,m,S,ix):
+    R=[3]*m
+    for I in S:
+        pats=[p for p in range(1<<len(I)) if t>>ix[I,p]&1]
+        for j,i in enumerate(I):R[i]&=sum(1<<a for a in {p>>j&1 for p in pats})
+    return R
+def H(t,m,S,ix):
+    R=support(t,m,S,ix)
+    return all(any(t>>ix[I,p]&1 and all(R[i]>>(p>>j&1)&1 for j,i in enumerate(I)) for p in range(1<<len(I))) for I in S)
+def restrict(t,C,T,z):
+    return t & sum(1<<k for k,(I,p) in enumerate(C) if all(i not in T or (p>>j&1)==(z>>i&1) for j,i in enumerate(I)))
+def glue(t,m,S,C,ix,h):
+    return all(any(H(restrict(t,C,T,z),m,S,ix) for z in range(1<<m) if z&~sum(1<<i for i in T)==0) for T in combinations(range(m),h))
+def check(t,m,S,C,ix,P):
+    g=any(t&p==p for p in P);R=support(t,m,S,ix);a=R.count(3);hh=H(t,m,S,ix)
+    assert not g or hh
+    if all(any(t>>ix[I,p]&1 for p in range(1<<len(I))) for I in S):
+        assert t.bit_count()-b(m)>=b(m)-b(m-a)
+    if t.bit_count()<2*b(m)-b(m-1):assert hh==g
+    assert any(t&p==p and all(R[i]>>(x>>i&1)&1 for i in range(m)) for x,p in enumerate(P))==g
+    for h in range(min(2,m)+1):
+        if h==m or t.bit_count()<2*b(m)-b(m-h-1):assert glue(t,m,S,C,ix,h)==g
+rng=Random(369);count=0
+for m in (1,2,3,4,5,6):
+    S,C,ix,P=carrier(m)
+    if m<=2: inputs=range(1<<len(C))
+    else:
+        inputs=[]
+        for _ in range(250):
+            t=P[rng.randrange(1<<m)]
+            for i in rng.sample(range(len(C)),rng.randrange(len(C)+1)):t^=1<<i
+            inputs.append(t)
+    for t in inputs:check(t,m,S,C,ix,P);count+=1
+assert count==1260
+for m in range(3,11):
+    S,C,ix,P=carrier(m);t=0
+    for I in S:
+        pats=[0] if 0 not in I else [0,3] if I==(0,1) else [1,2] if I==(0,2) else [0,1]
+        for p in pats:t|=1<<ix[I,p]
+    assert t.bit_count()==2*b(m)-b(m-1) and H(t,m,S,ix) and not any(t&p==p for p in P)
+def pad(t,r,m,balanced):
+    S,C,ix,P=carrier(m);s,c,jx,ps=carrier(r);v=0
+    for j,(I,p) in enumerate(C):
+        take=(t>>jx[I,p]&1) if I[-1]<r else all(not(p>>k&1) for k,i in enumerate(I) if i>=r)
+        if take:v|=1<<j
+    if balanced:
+        slack=[j for j,(I,p) in enumerate(C) if len(I)>1 and all(i>=r for i in I) and p!=0]
+        assert len(slack)>=len(c)
+        for j,k in enumerate(slack[:len(c)]):
+            if not(t>>j&1):v|=1<<k
+    return v
+count=0
+for r,m in ((1,3),(2,6),(3,9)):
+    s,c,jx,ps=carrier(r);S,C,ix,P=carrier(m)
+    E=pad((1<<len(c))-1,r,m,False).bit_count()-b(m)
+    assert E<=7*(b(m)-b(m-r))
+    inputs=range(1<<len(c)) if r<=2 else [rng.getrandbits(len(c)) for _ in range(200)]
+    for t in inputs:
+        g=any(t&p==p for p in ps)
+        for bal in (False,True):
+            v=pad(t,r,m,bal)
+            assert any(v&p==p for p in P)==g and v.bit_count()<=b(m)+E
+            if bal:assert v.bit_count()==b(m)+E
+            count+=1
+assert count==920
+```
+
+### Active endpoint ledger (no additional prerequisite phase)
+
+| Gate | Deliverable | Status / producer and consumer |
+|---|---|---|
+| G28 | sharpAmbiguityBudget / nearMintermMonotoneExact | proof + finite checks; G13/G14/G27 |
+| G29 | ambiguityParameterizedDecision / boundedBandMonotoneGluing | proof + finite checks; G28, #1291, #1006 |
+| G30 | strengthened2025CliqueSelectorMonotoneBound | external Corollary 5 via G22; restricted; updates G21/G24 |
+| G31 | monotoneDummyPadding / hardShrinkingWeightBand | proof + finite checks; G22/G30 |
+| G32 | fixedWeightNPCompleteProjection / sliceSandwichCircuitEquivalence | proof + padding checks; G26 dual rails, attached R39 |
+| N4/G12a | unrestrictedSerialCharge | OPEN: bound actual cross-weight/same-layer nonmonotone computation, permit G29 and G32 shortcuts |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN: e.g. superpoly worst slice sandwich monotone complexity, or direct uniform machine route |
+| N6 | originalClayTransport | #1040 conditional terminal / #1129 costed machine coverage |
+
+Aristotle BIDI: prioritize the explicit hardest promise bands between e=O(m^2 log m) and e=O(m^(2+epsilon)), not further local rank census. A new sufficient nonuniform endpoint is lower bounding the actual sandwich S_k rather than the full monotone extension G (G32 makes their polynomial-family complexity equivalent to general circuits). G31 is insufficient for S_k since the monotone projection spans multiple layers. Fixed-weight complemented padding demonstrates exactly where the ordinary monotone argument fails. Need a lower bound surviving that shortcut, or pivot to direct uniform N4/N5; no additional formal certification prerequisite or unrestricted separation claim.
