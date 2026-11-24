@@ -43,7 +43,7 @@ function run(){
  for(let d=1;d<=32;d++){const u=Array.from({length:d},(_,i)=>+(i===0)),v=Array.from({length:d},(_,i)=>+(i===d-1)),T=Array.from({length:d},(_,i)=>Array.from({length:d},(_,j)=>+(j===Math.min(i+1,d-1))));const a=find(u,[T],v,2);ck(a.w.length===d-1,"sharp");delays++}
  // Actual ordinary CNF syntax control: repeated A/B clauses, unit x1 gain iff m=n.
  const evalF=(F,x)=>F.every(c=>c.some(l=>x[Math.abs(l)-1]===+(l>0)));
- function W(F){if(F.some(c=>c.length===1&&c[0]===1))return [1,0];let a=0,b=0;for(const c of F){if(c.join()==="1,2")a++;else if(c.join()==="1,-2")b++;else return [0,0]}return a===b?[0,0]:[1,0]}
+ function W(F){const pins=[null,null];let conflict=false;for(const c of F)if(c.length===1){const i=Math.abs(c[0])-1,b=+(c[0]>0);if(pins[i]!==null&&pins[i]!==b)conflict=true;pins[i]=b}if(!conflict&&pins.every(v=>v!==null))return pins;if(F.some(c=>c.length===1&&c[0]===1))return [1,0];let a=0,b=0;for(const c of F){if(c.join()==="1,2")a++;else if(c.join()==="1,-2")b++;else return [0,0]}return a===b?[0,0]:[1,0]}
  let gains=0,source=0;
  for(let a=1;a<=48;a++)for(let b=1;b<=48;b++){const F=[...Array.from({length:a},()=>[1,2]),...Array.from({length:b},()=>[1,-2])],Fp=[...F,[1]],g=+(!evalF(F,W(F))&&evalF(Fp,W(Fp)));ck(g===+(a===b),"source equality gain");if(g)gains++;source++}
  return {membership,search,zero,nonzero,maxRows,delays,source,gains};
