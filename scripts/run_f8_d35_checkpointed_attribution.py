@@ -11,6 +11,7 @@ from ksw668_f8_fv_source_flux import exact_cell_averages
 from ksw668_f8_signed_route_stage import step, reverse_step
 from warp_native_geometric_receiver import receiver_bank
 from warp_israel_affine import radial_source_at_receiver, offsets
+from check_f8_signed_window import window_rows
 
 def atomic(path, **arrays):
     tmp=path.with_suffix('.tmp')
@@ -40,8 +41,8 @@ def run(a):
     sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py',Path(__file__).name]
-    ident=json.dumps(dict(route=a.route,h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py',Path(__file__).name]
+    ident=json.dumps(dict(route=a.route,window=a.window,h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
     def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
     def read(k):
         with np.load(work/f'forward-{k:08d}.npz',allow_pickle=False) as z:
@@ -65,27 +66,43 @@ def run(a):
     def readout(o,x):return np.sum(o*x,axis=(0,2,3))
     results={}
     for pos,rx in enumerate(rxs):
-        bc=receiver_bank(12,rx,.04,drc,dyc,h,vel,nt,nc,mc)
-        bf=receiver_bank(12,rx,.04,drf,dyf,h,vel,nt,nf,mf)
+        if a.window:
+            ts=np.array([1/coeff(T0+n*h)[1] for n in range(end+1)])
+            ic,wc,*_=window_rows(ts,h,rx,.04,drc,nc,span-.15,.10)
+            jf,wf,*_=window_rows(ts,h,rx,.04,drf,nf,span-.15,.10)
+            # The original SMS row is source-free at both exterior probe radii.
+            if np.any(sc[:,ic]) or np.any(sf[:,jf]):raise ValueError('window source-free receiver required')
+        else:
+            bc=receiver_bank(12,rx,.04,drc,dyc,h,vel,nt,nc,mc)
+            bf=receiver_bank(12,rx,.04,drf,dyf,h,vel,nt,nf,mf)
         gc=radial_source_at_receiver(sc,coeff(T0+nt*h)[2],rx,.04,drc)
         gf=radial_source_at_receiver(sf,coeff(T0+nt*h)[2],rx,.04,drf)
-        for ch in range(6):
+        for ch in range(2 if a.window else 6):
             def obs(n):
                 o=np.zeros_like(xf)
-                if nt-1<=n<=end:o[:3]=bf[ch,n-nt+1]
+                if a.window:o[0,:,0,:][:,jf]=wf[ch,n]
+                elif nt-1<=n<=end:o[:3]=bf[ch,n-nt+1]
                 return o
             path=work/f'reverse-{pos}-{ch}.npz'
             cursor=end;lam=obs(end);signed=np.zeros((2,6,3));absolute=signed.copy()
+            mismatch=np.zeros(3);direct=np.zeros(3)
             if path.exists():
                 with np.load(path,allow_pickle=False) as z:
                     if z['identity'].item()!=ident:raise ValueError('reverse identity')
-                    cursor=int(z['cursor']);lam=z['lam'];signed=z['signed'];absolute=z['absolute']
+                    cursor=int(z['cursor']);lam=z['lam'];signed=z['signed'];absolute=z['absolute'];mismatch=z['mismatch'];direct=z['direct']
+                    if any(digest(z[k])!=z[k+'_sha'].item() for k in ('lam','signed','absolute','mismatch','direct')):raise ValueError('reverse digest mismatch')
+                    if mismatch.shape!=(3,) or direct.shape!=(3,) or not np.isfinite([mismatch,direct]).all():raise ValueError('reverse observation integrity')
                     if cursor not in cuts or lam.shape!=xf.shape or signed.shape!=(2,6,3) or absolute.shape!=signed.shape or not all(np.isfinite(x).all() for x in (lam,signed,absolute)):raise ValueError('reverse integrity')
             for lo,hi in reversed(list(zip(cuts,cuts[1:]))):
                 if hi>cursor:continue
                 c,f=read(lo);ds=[]
                 for n in range(lo,hi):
                     z=S(c);cn=C(c,n);fn=G(f,n)
+                    if a.window and (np.any(wc[ch,n]) or np.any(wf[ch,n])):
+                        oc=np.sum(wc[ch,n]*c[0,:,0,:][:,ic],axis=1)
+                        of=np.sum(wf[ch,n]*f[0,:,0,:][:,jf],axis=1)
+                        oz=np.sum(wf[ch,n]*z[0,:,0,:][:,jf],axis=1)
+                        mismatch+=oz-oc;direct+=of-oc
                     aa=G(z,n);bb=G(z,n,sm);cc=S(cn)
                     ds.append((aa-bb,bb-cc));c,f=cn,fn
                 ce,fe=read(hi)
@@ -96,15 +113,20 @@ def run(a):
                         signed[j]+=value;absolute[j]+=abs(value)
                     lam=obs(n)+reverse_step(lam,T0+n*h,h,coeff,drf,dyf,a.route)
                 cursor=lo
-                atomic(path,identity=ident,cursor=cursor,lam=lam,signed=signed,absolute=absolute)
+                arrays=dict(lam=lam,signed=signed,absolute=absolute,mismatch=mismatch,direct=direct)
+                atomic(path,identity=ident,cursor=cursor,**arrays,**{k+'_sha':digest(v) for k,v in arrays.items()})
                 if time.monotonic()-start>=a.budget:return {'phase':'reverse','probe':pos,'row':ch,'cursor':cursor}
             c0,f0=read(0);initial=readout(lam,f0-S(c0))
-            mismatch=np.zeros(3);direct=np.zeros(3)
-            for i,n in enumerate((nt-1,nt,end)):
-                c,f=read(n)
-                mismatch+=readout(bf[ch,i],S(c)[:3])-readout(bc[ch,i],c[:3])
-                direct+=readout(bf[ch,i],f[:3])-readout(bc[ch,i],c[:3])
-            off=offsets(gf)[ch]-offsets(gc)[ch];direct+=off
+            if a.window:
+                if np.any(wc[ch,end]) or np.any(wf[ch,end]):raise ValueError('terminal window support')
+                off=np.zeros(3)
+            else:
+                mismatch=np.zeros(3);direct=np.zeros(3)
+                for i,n in enumerate((nt-1,nt,end)):
+                    c,f=read(n)
+                    mismatch+=readout(bf[ch,i],S(c)[:3])-readout(bc[ch,i],c[:3])
+                    direct+=readout(bf[ch,i],f[:3])-readout(bc[ch,i],c[:3])
+                off=offsets(gf)[ch]-offsets(gc)[ch];direct+=off
             pred=initial+signed.sum(axis=(0,1))+mismatch+off
             bound=abs(initial)+absolute.sum(axis=(0,1))+abs(mismatch)+abs(off)
             if not np.all(np.isfinite([direct,pred,bound])) or not np.all(abs(pred-direct)<=1e-8*np.maximum(1.,bound)):raise ValueError('endpoint ledger mismatch')
@@ -112,5 +134,5 @@ def run(a):
     return dict(phase='complete_experiment',identity=ident,results=results,physical_causal_null_certified=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75)
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75);p.add_argument('--window',action='store_true',help='fixed compact E4/SMS window, separate from instantaneous receiver')
     a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase']=='complete_experiment' else 75)
