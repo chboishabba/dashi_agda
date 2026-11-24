@@ -610,7 +610,7 @@ Executed Python integer truth-table and GF(2) elimination, no CI. G13a: 120+1136
 |---|---:|---:|---:|---:|---:|
 |3|8|16|16|8|0|
 |4|64|996|1024|960|28|
-All exact. The serial normal form initially failed with v restricted modulo constants; corrected to v in full V. Unit family ANF verified for m=1..7, degree 2m and 2^m terms; exact MC=2m-1 follows from proof, not enumeration of all circuits. Pair codimension formula checked for 10,795 distinct assignment pairs m=1..7. Union-of-flats vs clause truth evaluated on all selector inputs for m=1,2 (16+256=272). Reproduce with basis/ext/red/span/affine/dirs helpers from section 11, using:
+All exact. The serial normal form initially failed with v restricted modulo constants; corrected to v in full V. Unit family ANF verified for m=1..7, degree 2m and 2^m terms; exact MC=2m-1 follows from proof, not enumeration of all circuits. Pair codimension formula checked for 10,795 distinct assignment pairs m=1..7. Union-of-flats vs clause truth evaluated on all selector inputs for m=1,2 (4+256=260). Reproduce with basis/ext/red/span/affine/dirs helpers from section 11, using:
 ```python
 from itertools import combinations
 from math import comb
