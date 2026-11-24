@@ -160,8 +160,26 @@ def exhaustive_proof():
         actual=lift_character((a+Z*b)%P,(a+ZI*b)%P)
         if actual is None or (actual["a"],actual["b"])!=(a,b):
             raise AssertionError("bounded two-phase source collision")
+    # A synthetic order3 12D matrix with multiplicities 5,4,3
+    # has character 2+zeta; source projective vacuum scalars 7,9.
+    # The local arithmetic must include the genuine choice, but must
+    # NOT collapse its remaining cubic central-cover gauge to a guess.
+    A=np.diag([1]*5+[Z]*4+[ZI]*3).astype(np.int64)
+    B=np.diag([1]*5+[ZI]*4+[Z]*3).astype(np.int64)
+    candidates=all_lifts((7*A)%P,(9*B)%P)
+    if candidates["status"]!="ORDER3_CHARACTER_CANDIDATES_NOT_GLOBAL_GAUGE":
+        raise AssertionError("order3 source normalization stage failed")
+    choices=candidates["candidates"]
+    if len(choices)!=3 or not any(
+        v["candidate_exact_character"]["a"]==2 and
+        v["candidate_exact_character"]["b"]==1 and
+        v["Weil_scalar_plus_mod31"]==7 and
+        v["Weil_scalar_minus_mod31"]==9 for v in choices):
+        raise AssertionError("original-phase projective cubic scalar search incorrect")
     return {"exact_bounded_Qzeta3_values":len(pairs),
        "collisions":0,"phase_roots":[Z,ZI],
+       "toy_order3_projective_scalar_candidates":len(choices),
+       "actual_central_cover_gauge_selected":False,
        "derivation":"|chi|<=12, Norm chi=a²-ab+b²<=144",
        "actual_MM_source_executed":False}
 
