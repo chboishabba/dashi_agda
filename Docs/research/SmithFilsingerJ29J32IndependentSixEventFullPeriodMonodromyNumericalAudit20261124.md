@@ -19,6 +19,20 @@ Across the six event states, the maximum numerical component discrepancy from J2
 
 The reproducible local three-script campaign and exact JSON samples/9×9 matrix are in the conversation-side download bundle **Filsinger_full_six_event_numerical_audit_20261124.zip**, SHA256 `34e4892b62672b84e93aff4124f10bf74fd754e736d9af1601c363370280e18b`, and its original J28B checkpoint Git blob `74c1a94b30c44a772016c93b39558bc446359832`. Locally executed scripts' Git-hash bytes (when placed at repository `scripts/` paths) are: six-event `69aa771ed0af9fb0b33d4109cbf7d9cc1dd44557`, nine-by-nine tangent `481cc5b693e7244d582a136aa06d828fb41d46b7`, nonzero-ball probe `06cb58ae1141ead5867ba5e8dbc7246cbfa18edb`. They are independent local tools, **not source-owner byte-execution**. [Machine-level summary](../../Artifacts/smith-filsinger/j29_j32_full_period_numerical_6event_monodromy_ball_audit_20261124.json) records the strict claim firewall.
 
+## Five-setting independent numerical convergence control
+
+The full six-event integrator was independently replayed five times at progressively tighter tolerances and smaller maximum step lengths. **All five runs retained exactly V ON → spark OFF → spark ON → U ON → V OFF → U OFF**, with the terminal spark ON. These are not outward error estimates:
+
+| DOP853 relative tolerance | Maximum step | Terminal defect infinity norm |
+|---:|---:|---:|
+| 2e-10 | 0.0200 | 1.68245e-9 |
+| 2e-11 | 0.0100 | 2.01440e-10 |
+| 3e-12 | 0.0060 | 2.88702e-12 |
+| 6e-13 | 0.0030 | 6.31717e-12 |
+| 2e-13 | 0.0015 | 1.87472e-12 |
+
+The last three values fluctuate on the ~1e-12–1e-11 numerical-solver floor, so they **must not be extrapolated to a theorem** about the exact residual. The six event labels and approximate times remain stable through the refinement. The five-run receipt is appended to the [single machine summary](../../Artifacts/smith-filsinger/j29_j32_full_period_numerical_6event_monodromy_ball_audit_20261124.json). The untouched local step-state traces are in the conversation-side source bundle.
+
 ## Independently reproduced nine-by-nine hybrid monodromy
 
 Solve the full `9+81` ODE, with the original signed J25/J28B Jacobian of the physically active U/V positive-part sectors. A diode current is zero at its kink, so state and vector field are continuous and the diode saltation is exactly identity, although the Jacobian changes. Apply **both real spark saltations** to the tangent:
