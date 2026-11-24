@@ -1027,3 +1027,257 @@ physics/TOE source. No CPU/GPU
 benchmark, Python, SymPy, CI, Agda,
 Lean or external pi SOTA execution
 was performed.
+
+
+## 24 November — COMP5t: exact affine edge, radical/series separation and suffix-only continuation (testing deferred)
+
+**Scope:** The Paper 9 P0 objective remains the fastest independently
+certified decimal floor of π, conditional on the original Chudnovsky
+analytic identity, alternating-series enclosure and source authenticity.
+This tranche adds **source-exact architectural candidates only**.
+No compilation, test execution, benchmarks, CI, Agda/Lean kernel check
+or external SOTA check was authorized or performed.
+
+### G9 — three-coordinate affine edge is bidirectional, not a lossy quotient
+
+Continue the original locally normalized, ordered
+\(2\times2\) upper-triangular source matrix
+\(M'_n=\left(\begin{smallmatrix}P'_n&T'_n\\0&Q'_n
+\end{smallmatrix}\right)\), together with cutoff index \(n\ge2\).
+Let the ORIGINAL unnormalized next leaf factors be
+
+\[
+p_n=-24(2n-1)(6n-5)(6n-1),\quad
+q_n=640320^3n^3,\quad a_n=13591409+545140134n .
+\]
+
+The genuinely new edge coordinate (a known next-source
+consumer, not an arbitrary derived number) is
+
+\[
+V_n=T'_nq_n+P'_np_na_n.
+\]
+
+The **affine edge** is
+\(E_n=(n,T'_n,Q'_n,V_n)\). It provides the exact pair
+
+\[
+S_n=\frac{T'_n}{Q'_n},\qquad
+S_{n+1}=\frac{V_n}{Q'_nq_n}.
+\]
+
+Crucially, the source-to-edge map has an exact inverse,
+
+\[
+\boxed{
+P'_n=\frac{V_n-T'_nq_n}{p_na_n},
+\quad Q'_n=Q'_n,\quad T'_n=T'_n .
+}
+\]
+
+The numerator is the ORIGINAL signed next-term residual
+\(\delta'_n\) and is divisible by the nonzero source factor
+\(p_na_n\) for an authentic ordered Chudnovsky product.
+No precision truncation or numerical approximation is involved.
+For even \(n\), \(\delta'_n>0\); for odd \(n\),
+\(\delta'_n<0\). The empty interval remains the source
+identity \(M'[a,a)=I\), not a fabricated edge; the edge is
+used only for the terminal authentic prefix \(n\ge2\).
+The projective original-to-normalized gauge scale
+\(G_{0,n}=\prod_{j=1}^{n-1}(24h_j)\) is a **distinct
+source-indexed receipt**; from an edge one first recovers
+normalized P/Q/T, and to recover the literal original
+raw P/Q/T one additionally multiplies by \(G_{0,n}\).
+
+The precise identity is **source-relative**:
+without a producer witness that the original ordered
+leaf composition generated \((P',Q',T')\), divisibility
+and sign tests alone cannot authenticate a forged edge.
+No all-consumer observability theorem is claimed:
+consumers that demand original raw coordinates must
+pay the source-scale reopening cost. The selected
+series and certification consumers are sufficient
+on this affine edge and its indexed recipe.
+
+### G10 — root versus series refinement has an exact square-slack discriminator
+
+Let \(S_{\rm lo}=N_{\rm lo}/D_{\rm lo}\),
+\(S_{\rm hi}=N_{\rm hi}/D_{\rm hi}\) be the
+original positive *source-consecutive* rational
+series bounds, ordered using the signed residual.
+Let
+
+\[
+F=426880\,10^d,\quad
+K=F\sqrt{10005},\quad
+L=K/S_{\rm hi},\quad
+U=K/S_{\rm lo}.
+\]
+
+The target is \(L\le10^d\pi\le U\), conditional
+on the original analytic source. The current
+dyadic lower-root enclosure gives \(x=\lfloor
+F R_bD_{\rm hi}/(2^bN_{\rm hi})\rfloor\),
+where \(R_b=\lfloor2^b\sqrt{10005}\rfloor\).
+Thus **always** \(x\le L\).
+
+On ordinary exact integer upper-witness failure,
+evaluate the following source-identified squared
+slacks (all denominators and terms positive):
+
+\[
+D_b=10005(FD_{\rm hi})^2-
+        ((x+1)N_{\rm hi})^2,
+\qquad
+D_n=((x+1)N_{\rm lo})^2-
+        10005(FD_{\rm lo})^2 .
+\]
+
+This yields an **exact three-way discriminator**:
+
+1. \(D_b\ge0\): then \(x+1\le L\).
+   The dyadic root guard has not yet recovered
+   the actual source-lower integer floor.
+   Increase **only** the radical precision \(b\),
+   keeping the same edge and original cutoff \(n\).
+2. \(D_b<0,\ D_n>0\): then
+   \(x\le L<x+1\) and \(U<x+1\);
+   the original decimal floor \(x\) is already
+   certified by the integer-square upper witness.
+   Admit without increasing either index.
+3. \(D_b<0,\ D_n\le0\): then
+   \(x=\lfloor L\rfloor\) is *already*
+   the exact lower-source floor, while the
+   source upper bound is insufficient.
+   Increasing the radical guard cannot improve
+   the fixed-source floor: extend **only** \(n\).
+
+The irrationality of \(\sqrt{10005}\) means
+the boundary \(L=x+1\) is not an equality
+for positive rational endpoints, but the
+implementation still handles equality
+conservatively. This is a **mathematical
+resource decision**, not an empirical
+prediction: it separates which source/precision
+coordinate still blocks a strict certificate.
+It is not a proof that the expensive exact
+square comparisons are cheaper than an
+extra standard split or a finer root.
+
+The two possible refinements are separately
+monotone with their original mathematical meaning:
+larger \(b\) improves the outward root interval,
+and larger \(n\) narrows the alternating series
+enclosure (regardless of n parity, with the source
+sign controlling orientation). A successful
+witness always retains the original signed
+admission gate and its precise integer \(x\).
+
+### G11 — suffix-only ordered extension of the authenticated projective source
+
+Suppose the certificate needs more series
+terms, from \(n\) to \(n'>n\). From the current
+affine edge, exactly reconstruct normalized
+\((P'_n,Q'_n,T'_n)\) by the single
+source-factor \`mpz_divexact\` above.
+Compute only the NEW original-indexed
+suffix \([n,n')\) using the COMP5s
+precision-aware planner and exact prime-local
+leaf normalization. Then compose
+
+\[
+\boxed{
+M'_{0,n'}=M'_{0,n}\,M'_{n,n'}
+}
+\]
+
+in original left-to-right order; never
+multiply \(M'_{n,n'}M'_{0,n}\).
+Because the scale recipe composes as
+\(G_{0,n'}=G_{0,n}G_{n,n'}\),
+the result is the same normalized
+full Chudnovsky matrix as a fresh
+\([0,n')\) binary split, **up to
+different associative parenthesization**,
+which is exact for the original
+upper-triangular monoid. Compute the
+new signed affine edge for cutoff \(n'\)
+and release the old next-term observation.
+
+A precision-only retry keeps \(E_n\)
+**unchanged** and recomputes only the
+radical root at larger bit index \(b\),
+with source-normalized P completely dead.
+A series-only retry can retain the
+existing cached radical root at the same
+\(b\). The initial full prefix is built
+once; no full-prefix rebuild is needed
+on later retries. This is not a
+worst-case latency theorem: suffix
+splits, signed P reopening, new
+endpoints and conditional big squares
+all incur real costs.
+
+### New source owners and cost-fibre counters
+
+- \`scripts/pi_p0_affine_edge_retry.hpp\` —
+  reversible three-coordinate source edge,
+  original signed residual, authentic-source
+  inverse and exact root/series square-slack
+  repair classifier.
+- \`scripts/check_pi_p0_affine_retry_schedule.cpp\` —
+  source-normalized GMP leaf producer and
+  original ordered merge from COMP5s;
+  stores only \(E_n\) between certificate
+  attempts, uses \`makePlanInterval\` for
+  truly indexed suffixes, guards the
+  unsigned \(n,b\) refinements, uses an
+  optional \(F\) product only if the
+  ordinary certificate fails, and
+  retains the original SHA output
+  consumer on either admission route.
+- \`scripts/pi_p0_projective_precision_schedule.hpp\` —
+  extended with \`makePlanInterval(begin,end)\`
+  so a suffix is scheduled using its
+  actual original leaf indices rather
+  than silently replacing \([n,n')\)
+  with \([0,n'-n)\).
+
+The added \`FIBRE\` fields count
+\`retry_initial_tree_builds\`,
+\`retry_suffix_tree_builds\`,
+\`retry_signed_P_reopening_divisions\`,
+\`retry_guard_only_refinements\`,
+\`retry_series_only_refinements\`,
+\`retry_exact_square_classifications\`,
+\`retry_square_slack_admissions\`,
+\`retry_root_builds\`,
+\`retry_certificate_attempts\` and
+aggregate scheduled plan nodes.
+These are structural operation counts,
+not a certified total-cost bound or a
+new runtime receipt. Original source
+prime-valuation, GMP exact leaf division,
+allocator peak and output hash counters
+remain separate. Beware: the derived
+next denominator \(Q'_nq_n\) can be
+large and must be re-materialized per
+attempt; reduced *resident P* alone
+does not establish lower actual RSS.
+
+### S7–S12: precise remaining bridge obligations
+
+| Gate | Exact obligation | Status |
+|---|---|---|
+| S7 | Original \(M'\leftrightarrow E_n\) inverse, including nonzero signed divisor, source \(j=0\) and zero-mode distinction | Source-level algebra written; Agda/Lean kernel OPEN |
+| S8 | \((x+1)S_{\rm hi}\le K\) square-slack test and upper signed square-slack equivalence, with full positivity | Algebraic derivation written; kernel OPEN |
+| S9 | Genuine indexed suffix composition and scale recipe \(G_{0,n'}=G_{0,n}G_{n,n'}\) under noncommutative ordered merge | Implementation candidate, kernel OPEN |
+| S10 | Separate \(n\)-refinement and \(b\)-refinement termination under original analytic tail and non-integral target | Conditional mathematical argument; formal analytic/Bishop source OPEN |
+| S11 | Consumer-relative exact performance model charging signed P reopening, classified square work, regenerated denominator and compiler/allocator peak | Structural counters committed; cost calibration OPEN |
+| S12 | Exact GitHub-source build and independent output/bound/negative acceptance, source authenticity, memory/time Pareto and SOTA | Testing explicitly DEFERRED |
+
+No “cost saved” or fastest π claim
+follows until a real source-matched
+execution and controlled comparison
+exists. The original measured COMP5j
+remains the performance baseline.
