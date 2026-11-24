@@ -2225,3 +2225,115 @@ assert checks==65552
 | N6 | originalClayTransport | conditional #1040 / #1129 standard-machine coverage |
 
 Aristotle BIDI: the next meaningful attack must constrain a paid algorithmic operation on the actual G48 flag or full nonminimal central-slice family. The rank of a joint response function, precision-relative Smith spectrum and context-equivalence classes are not independently chargeable; G50/G52 provide explicit cheap controls. Inspect shared signed tensor contraction as a legitimate upper-bound mechanism, and seek an unavoidable resource inequality for computing its useful factors (or a direct standard-machine contradiction) that does not require reconstructing all context responses. No new certification prerequisite, no unconditional P!=NP claim.
+
+
+## 24. P0-G53–G55 — precision-sensitive zero test, weighted parity fingerprints, exact deterministic probe budget (2026-11-24)
+
+Controlling endpoint remains literal Clay P vs NP, P0-C/D. Inputs: user pasted R78–R82 deterministic truth graph and signed scalar D=3M-4W (reported Langlands #1549/#120 heads 950852bf6615 / 64c2f1cd5091) plus G49–G52; both files read in container. Both P0 roadmaps read live at 57c5bc5fe260 / be4988049c2c, common blob 74a172e67e18677af55249b2fdd6ba688b2fe646. No Monster/Langlands endpoint edits. Existing producers/consumers: G13 original selector, G16/G17 binary control, G22 threshold circuits, G26 shared Boolean gates, G38/G43 central slice, G45/G46 locally-full parsimonious compiler, G48 global flag, G50 triple-choice witness subfamily, G51 canonical consumer quotient, G37 external reported SAT algorithm; #1006 FactorsThrough/self-reduction, #1291 signed residuals, #123 JMD lowering, #1546 shared computation, #1474/#1502 reductions, #1129 costed machine coverage, #1040 terminal, #607/#678 Aristotle. Classical sources: Valiant–Vazirani, NP is as easy as detecting unique solutions (1986), https://doi.org/10.1016/0304-3975(86)90135-0 (randomized parity-SAT hardness already known); Schwartz–Zippel polynomial identity testing, https://people.seas.harvard.edu/~salil/cs225/spring09/lecnotes/Chap2.pdf. New contributions here are the explicit same-object weighted truth-graph interface and exact deterministic probe budget on G50; no claim of novelty for randomized parity hardness or general polynomial identity testing.
+
+### G53 — exact unweighted precision criterion and logarithmic-precision transport
+
+Let original q assignment bits, M=2^q, W integer in [0,M], and D=3M-4W as in attached R82. For any fixed positive integer modulus a, observing D mod a is equivalent to observing W mod d=a/gcd(a,4), since 4(W-W')=0 mod a iff d divides W-W'. With several observations let L=lcm(d_1,...,d_l). Zero is distinguishable from every positive count iff L>M: if L<=M, W=L has precisely the zero transcript. This also holds for adaptive deterministic residue-only algorithms: follow the zero transcript, which fixes the queried moduli; if their effective lcm is <=M the positive count L follows the same path and receives the same decision. This is not a lower bound for algorithms that also inspect the original formula, change its weights or otherwise derive formula-dependent observations.
+
+All integer counts c in [0,M] occur on the original carrier: the q-bit comparator [integer(x)<c] has O(q) bounded-fanin gates, with q+1-bit constant c (handle c=M separately). Its deterministic Tseitin graph has unique auxiliary extension per x, and G46 can hide all its locally visible affine/unary constraints while preserving exact flag counts. Thus the collision is realizable by succinct formulas, not merely by arbitrary integers. In particular for a single 2-adic residue D mod 2^H, H>=2, effective modulus 2^(H-2), and H>=q+3 is necessary and sufficient in this observer model. The zero-path joint effective modulus must have log2 L>q; this is a precision requirement, not independently paid time.
+
+There is no need for high precision in any SINGLE contraction. Query D modulo 4j for j=2,...,2q+2, each O(log q) bits. Then L=lcm(1,...,2q+2)>2^q. Proof: put n=q+1. Each p-adic valuation of binom(2n,n) is sum over powers p^i<=2n of floor(2n/p^i)-2floor(n/p^i), each 0 or 1; hence binom(2n,n) divides lcm(1,...,2n). The central binomial coefficient is >=2^(2n)/(2n+1)>2^(n-1) for n>=2. So check whether all D residues agree with 3M; no CRT reconstruction of W is necessary. Can instead query only maximal prime powers <=2q+2 and multiply by 4 in the D modulus. Polynomial number of logarithmic-precision original contractions suffices, deterministically, with poly(q) preprocessing. If the reported tensor algorithm's exact count precision is a significant expense, this supplies an alternative consumer; it does NOT show its entire interpolation and division budget can be reduced to these digits. Intermediate denominators/valuation losses must still be charged. No claim of polynomial-time modular #SAT or end-to-end speedup.
+
+### G54 — constant-precision randomized weighted parity fingerprint
+
+Work over F=GF(2^k), k=ceil(log2(4q)) for q>=1, Q=2^k. A field description can be built uniformly in poly(q) time by enumerating monic degree-k binary polynomials and testing irreducibility (even naive divisor enumeration is polynomial in q). For original witness set V(t) define the multilinear polynomial
+
+    P_t(z_1,...,z_q)=sum_{x in V(t)} prod_{i:x_i=1} z_i   in F[z].
+
+Distinct original assignments give distinct monomials, all coefficients one, so P_t=0 identically iff UNSAT, even in characteristic 2. Degree <=q. Uniform independent z_i in F, by Schwartz–Zippel a satisfiable t gives P_t(z)!=0 with probability >=1-q/Q>=3/4. This is different from unweighted counting modulo 2, which may vanish on a nonempty even-cardinality fibre.
+
+For each trial choose an independent uniform k-bit mask lambda and use the F2-linear bit functional ell_lambda(v)=dot(lambda, coordinate_vector(v)) over F2. For nonzero v exactly half masks give ell=1. Define original per-assignment deterministic flag
+
+    b_(z,lambda)(x) = F_t(x) AND ell_lambda(prod_i z_i^x_i).
+
+Then the parity of its 1-fibre W_(z,lambda) is exactly ell_lambda(P_t(z)), by linearity. The flag circuit is explicitly polynomial cost: start accumulator 1 in F; each assignment bit chooses either unchanged accumulator or multiplication by fixed z_i (a k-by-k binary linear map); use O(k^2) XOR/mux gates per original bit, plus O(k) gates for the final linear functional and O(N) original evaluation. Bounded-fanin gates encoded by their truth constraints (fresh output; unique extension for every x); G46 compiler preserves the exact truth-graph fibre counts and local fullness. The full graph remains always satisfiable with total M=2^q, including the rejected flag branch; only W_(z,lambda) changes. No exponential witness expansion is constructed.
+
+The attached signed scalar for this modified graph is D_(z,lambda)=3M-4W_(z,lambda). A single residue modulo 8 returns exactly the parity bit: D-3M is 4 mod 8 iff flag-one count odd. UNSAT yields zero parity for every trial. SAT yields one with probability at least (3/4)*(1/2)=3/8. Three independent trials, OR the returned bits, miss with probability <=(5/8)^3<1/3. More trials exponentially reduce one-sided error. Alternatively use all k coordinate functionals per field evaluation and test the vector nonzero (miss <=1/4 per evaluation). This is randomized polynomial reduction to constant-precision signed contraction on polynomially enlarged locally-full deterministic graphs, with O(q log q) random bits per trial. It is a field-polynomial version of the known randomized parity-SAT hardness (Valiant–Vazirani); it need not isolate a unique witness. It does NOT imply P=NP from polynomial-time parity contraction: that would give NP=RP, not an unconditional deterministic equality. No equivalence of #P and NP is assumed; even P=NP alone is not known to give polynomial parity counting. Further, precision modulo 8 of the final scalar is not a proof of constant precision at every internal arithmetic division/interpolation step.
+
+### G55 — sharp deterministic universal linear-probe budget
+
+A probe is any F2-linear functional of the original witness incidence vector in F2^(2^q), with one output bit. Its coefficient function h(x) may be arbitrary, not just a product-weight linear functional from G54. Crucially the selection of probes is independent of the input selector t (may depend on q and previous answers, not on inspecting t). Decision can be an arbitrary nonlinear function of answers. For all selectors of length N=N_q there are <=2^N positive or negative inputs. G54 detects each positive input with probability >=3/8 and never detects a negative. Take L=2N+1 independent random seeds; union bound over positive selectors gives 2^N*(5/8)^L<1. Thus there EXISTS a common deterministic seed list of length 2N+1 detecting every satisfiable selector and no unsatisfiable selector. It is nonuniform advice of O(N q log q) bits, not a known polynomial uniform construction. In particular polynomial-size circuits for parity contraction on these compiled graphs would imply SAT in P/poly through this list, but no converse or unconditional lower bound.
+
+For a matching worst-case lower bound in this probe model use G50's locally-full three-group construction at its original compiled variable count m. It realizes every subset A of M0=r^3=Theta(N_m) authentic fixed witnesses, with all other witness bits identically zero. Restrict any deterministic linear-probe decision procedure to this subfamily and follow its zero transcript. Fewer than M0 queried bits define a homogeneous linear system on M0 arbitrary incidence bits with a nontrivial kernel. Take a nonzero kernel vector A: it is an actual satisfiable compiled selector, and all its answers along this path are identical to empty A. Adaptivity cannot fix the collision because the path is fixed by the answers. Hence at least M0 probes are necessary in the worst case, even for arbitrary linear forms. This proves Theta(N) deterministic one-bit universal linear-probe complexity along G50's compiler lengths, versus O(1) randomized probes for bounded one-sided error. The input-independent condition is essential: a standard machine reads t and can choose probes or directly compute support using that information. In fact G50's easy family accepts iff some allowed triple bit is one, O(N) gates, illustrating why this optimal information bound is not N4. Do not count generating these probe responses as free, and do not sum their computation costs independently without controlling shared subgraphs.
+
+### Actually executed local regression (Python integer, SymPy irreducibility, exact DPLL; no CI/kernel)
+
+Local /tmp/p0_precision.py checked 1,049,616 field evaluation pairs: all arbitrary witness subsets for q=1,2,3 and every point in fields of sizes 4,8,16, using irreducible polynomials 0b111,0b1011,0b10011 (SymPy independently checked). For each nonempty subset verified the exact zero-count upper bound q Q^(q-1); 966,466 nonzero outputs each checked over every lambda for balanced bit functionals. For q=1..10 all 2,056 comparator target counts checked by evaluating every assignment; same 2,056 signed-scalar residue zero tests checked and central-binomial divisibility verified. For 24 seeded actual width<=3 selector formulas (8 each q=1,2,3), emitted deterministic Boolean truth graph for original evaluation AND weighted parity functional, then G46 local-full compiler. Independent exact DPLL counted both flag fibres (48 comparisons) and checked their sum 2^q, filtered count and modulus 8 parity. Initial counter hit Python recursion depth on unit propagation; replaced with iterative batched unit propagation, reran all and passed. No asymptotic extrapolation. Core reproduction code (the G46 compiler and exact model-count method from section 22 can be reused, with iterative unit propagation for the larger graphs):
+
+```python
+from itertools import product
+from math import lcm,comb
+from sympy import Poly,symbols
+x=symbols('x')
+def mul(a,b,k,irr):
+ r=0
+ while b:
+  if b&1:r^=a
+  b>>=1;a<<=1
+  if a>>k:a^=irr
+ return r
+def ev(S,weights,k,irr):
+ v=0
+ for a in S:
+  z=1
+  for i,w in enumerate(weights):
+   if a>>i&1:z=mul(z,w,k,irr)
+  v^=z
+ return v
+checks=nonzero=0
+for q,k,irr in [(1,2,7),(2,3,11),(3,4,19)]:
+ Q=1<<k
+ assert Poly(sum(((irr>>j)&1)*x**j for j in range(k+1)),x,modulus=2).is_irreducible
+ zeros=[0]*(1<<(1<<q))
+ for weights in product(range(Q),repeat=q):
+  terms=[ev([a],weights,k,irr) for a in range(1<<q)]
+  vals=[0]*len(zeros)
+  for S in range(1,len(vals)):
+   b=S&-S;vals[S]=vals[S^b]^terms[b.bit_length()-1]
+  for S,v in enumerate(vals):
+   zeros[S]+=v==0;checks+=1
+   if S and v:
+    assert sum((v&lam).bit_count()%2 for lam in range(Q))==Q//2
+    nonzero+=1
+ assert zeros[0]==Q**q
+ assert all(z*Q<=q*Q**q for z in zeros[1:])
+assert (checks,nonzero)==(1049616,966466)
+checks=0
+for q in range(1,11):
+ M=1<<q
+ def comparator(a,c):
+  if c==M:return 1
+  eq=1;lt=0
+  for i in reversed(range(q)):
+   b=a>>i&1;d=c>>i&1
+   lt|=eq & (1-b) & d;eq&=1^(b^d)
+  return lt
+ L=lcm(*range(2,2*q+3))
+ assert L>M and L%comb(2*q+2,q+1)==0
+ for c in range(M+1):
+  assert sum(comparator(a,c) for a in range(M))==c
+  D=3*M-4*c
+  assert all((D-3*M)%(4*j)==0 for j in range(2,2*q+3))==(c==0)
+  checks+=1
+assert checks==2056
+```
+
+Compiler reproduction detail: use gate truth-table encoding for AND/OR/XOR (for each consistent input bit pair forbid incorrect output, deleting constant wires and repeated identical input coordinates). Construct accumulator bit arrays acc initially [1,0,...,0]. For each i, derive rows[b]={j: bit_b(mul(1<<j,z_i,k,irr))=1}; calculate each v_b as XOR of acc[j] in row b, then new_acc[b]=OR(AND(not x_i,acc[b]),AND(x_i,v_b)). Final flag = AND(original CNF gate evaluation, XOR of accumulator bits selected by lambda). Leave flag unconstrained, compile entire gate graph by G46 using every gate clause selected. Count compiled formula with additional flag unit b=0 or b=1 via exact DPLL, batched unit propagation and cache cleared between cases; flag query units are tests, not part of locally-full source. Seed Random(53), q=1,2,3 as above, 8 trials each: C list all clauses ordered by width, lexicographic scope, lexicographic signs; F=rng.sample(C,rng.randrange(len(C)+1)); z_i=rng.randrange(Q); lambda=rng.randrange(Q). Compare true fibre with sum(ell_lambda(ev([a],z,k,irr)) for satisfying original a), false+true=2^q, and (D-3M) mod 8=4 iff true count odd. This spells out the emitted gate graph used in the executed test, not an independent claimed native kernel verification.
+
+### Active endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G53 | exactUnweightedResidueZeroCriterion / logarithmicPrecisionModularCover | derived and checked; R82 |
+| G54 | weightedWitnessFieldFingerprint / parityTruthGraph / constantPrecisionRandomizedDecision | derived and tested; classical Schwartz–Zippel, Valiant–Vazirani |
+| G55 | universalLinearProbeDeterministicThetaN / nonuniformSeedCover | derived; G50 exact subfamily and union bound; restricted observer only |
+| N4/G12a | unrestrictedSerialCharge | OPEN: must survive low-precision modular/weighted contractions, input-dependent probes, sharing and arbitrary direct decision |
+| N5/G12c | originalUnrestrictedSuperpolynomialGrowth | OPEN: G48 uniform forced flag, G38 nonuniform central slice |
+| N6 | originalClayTransport | conditional #1040 terminal / #1129 coverage |
+
+Aristotle BIDI: exact count precision and explicit representation dimension cannot be required for decision. G53 gives deterministic low-precision cover; G54 constant final precision uses weights and changes the graph with paid polynomial overhead. Actual reported 2026 tensor/Hermite algorithm's internal valuation losses and mode costs must be analyzed for these modular consumers before claiming speedup. In particular low final precision does not bound intermediate denominators. To settle literal Clay, need a deterministic uniform resource lower bound for SAT itself (or a valid polynomial solver), not merely hardness of parity/counting or a universal linear-observer lower bound. No new certification or representation prerequisite, no P!=NP claim.
