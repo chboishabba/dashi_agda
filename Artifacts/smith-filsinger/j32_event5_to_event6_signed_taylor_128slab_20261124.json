@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-24",
+  "pr": 1537,
+  "status": "PASS_J32_EVENT5_VOFF_TO_EVENT6_UOFF_ORIGINAL_SOURCE_128_PICARD_PB6_TAYLOR7_CONDITIONAL",
+  "original_source": "J25–J31 original nine-state Smith/Filsinger prescribed-wave synthetic finite-loss diode/spark",
+  "source_files": [
+    {
+      "path": "scripts/check_smith_filsinger_j32_source_taylor_jets_20261124.py",
+      "sha": "22cff0bcc48f9cec68ec2c173237b0b224745197"
+    },
+    {
+      "path": "scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py",
+      "sha": "d87baf7ef935be5041bb36216cd2ee8a78d3345a"
+    },
+    {
+      "path": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
+      "sha": "47493fbefba44c20e7cb82e31521627f13611800"
+    }
+  ],
+  "execution": {
+    "method": "Exact local Python Fraction, four clean 32-slab checkpoints: 0–31,32–63,64–95,96–127",
+    "new_J32_executable_bytes_git_blob_verified": true,
+    "original_J31_primitive_local_copy_uses_memoization_but_same_mathematical_functions": true,
+    "original_J31_dependency_full_blob_rerun": false,
+    "full_deterministic_fraction_result_sha256": "91025015aa33aa0422346d8a3aa2b504254f7a8a65f75adc3ce256ebe8973520",
+    "full_result_bytes": 55802,
+    "regenerable_from_committed_source": true,
+    "reproduction": "python scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py --k 5 --N 128 --order 6 --stop 32 --checkpoint J32.tmp.json --out J32.partial.json; then --stop 64 --resume, --stop 96 --resume, and final --resume --out J32.full.json",
+    "github_CI": false,
+    "formal_kernel": false
+  },
+  "original_segment": {
+    "from": "event5 V diode OFF",
+    "to": "event6 U diode OFF",
+    "mode": [
+      1,
+      0,
+      1
+    ],
+    "start_clock": "4.323837945006",
+    "end_clock": "4.928751407316",
+    "start_clock_halfwidth": "1/200000",
+    "end_clock_halfwidth": "1/5000",
+    "original_exact_J29_J30_root_brackets_included": 2,
+    "original_start_J24_state_radius": "1/10000",
+    "previous_J29_event5_state_box_external_receipt_required": true
+  },
+  "source_proof": {
+    "strict_fulltime_Picard_slabs": 128,
+    "chronological_source_PB6_9x9_variational_slabs": 128,
+    "reference_solution_taylor_degree": 6,
+    "analytic_Lagrange_jet_order": 7,
+    "exact_rational_grid": "1e-30",
+    "source_sqrt3_and_sin_cos_interval_bounds": true,
+    "source_nonlinear_capacitor_retained": true,
+    "affine_state": "rational reference point + signed error interval R + chronologically transported 9x9 interval H times original labelled state deviation",
+    "positive_U_ON_guard_fulltime_slabs": 127,
+    "negative_U_OFF_terminal_guard_derivative_slabs": 1,
+    "original_V_diode_OFF_checked_fulltime_slabs": 128,
+    "original_spark_ON_checked_fulltime_slabs": 128,
+    "original_V_OFF_start_post_switch_slope_negative": true,
+    "original_U_OFF_end_pre_switch_slope_negative_for_independent_end_time_box": true,
+    "original_actual_U_OFF_end_guard_zero_required_not_proved": true,
+    "independent_start_end_clock_source_Picard_extensions": 2,
+    "full_9x9_DxPhi_interval_for_independent_event_clocks": true,
+    "full_9D_start_time_partial_interval": true,
+    "full_9D_end_time_partial_interval": true,
+    "max_fulltime_q_strict_upper": "0.130435",
+    "max_reference_error_radius_strict_upper": "3e-9",
+    "max_source_input_image_radius_strict_upper": "0.000308",
+    "max_terminal_coordinate_interval_diameter_strict_upper": "0.003910",
+    "final_U_OFF_guard_interval_outward_decimal": "[-0.000345,0.000800]",
+    "final_U_OFF_guard_slope_outward_decimal": "[-0.201185,-0.097554]"
+  },
+  "exact_geometric_inclusion": {
+    "original_event6_numerical_centre_in_source_terminal_interval": 9,
+    "original_event6_narrow_J24_target_box_inside_broad_source_terminal_interval": 9,
+    "broad_source_terminal_interval_inside_original_event6_narrow_J24_target_box": 0,
+    "original_J24_sixth_full_event_state_box_paid": false,
+    "alternative_source_derived_broad_event6_state_domain_available": true
+  },
+  "independent_numerical_diagnostic": {
+    "separate_original_source_SciPy_ivp_and_finite_difference_Jacobian": true,
+    "terminal_state_membership": "9/9",
+    "full_Dx_nominal_clock_membership": "81/81",
+    "full_Dx_independent_clocks_membership": "81/81",
+    "start_clock_partial_membership": "9/9",
+    "end_clock_partial_membership": "9/9",
+    "diagnostic_only_not_a_rigorous_proof": true
+  },
+  "remaining": {
+    "original_complete_conditional_smooth_mode_count": 4,
+    "of": 7,
+    "unpaid_full_modes": [
+      "0→event1",
+      "event3→event4",
+      "event6→τ=20π/11"
+    ],
+    "source_all_seven_mode_full_69D_F_and_DF": false,
+    "original_54_signed_nine_state_matches_retained": true,
+    "six_original_guard_zero_residuals_retained": true,
+    "original_69_strict_Krawczyk_rows": false,
+    "exact_periodic_orbit": false,
+    "actual_original_source_hardware_energy_measured": false,
+    "no_rebase_or_merge": true
+  }
+}
