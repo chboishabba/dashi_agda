@@ -75,7 +75,26 @@ An independently exhaustive three-site four-edge double-loop Q8 gauge model chec
 
 All four columns match exactly and the normalized mixed covariance is **1266/24649 ≠0**, so the test excludes accidental FG factorization. This SMALL-GRAPH control is not the original L4 action, and Q8 finite counting is not continuous SU(N) Haar. It verifies noncommutative orientation/inverse/counting; the general Haar proof is the separate triangular group argument.
 
-**25,760/25,760 exact assertion groups PASS** on Python+SymPy 1.14.0, broken down as: 4 group, 8 graph, 72 rooted-gauge, 18,432 actual full plaquette gauge-covariance, 3,072 original R445 F19, 4,166 finite-group Haar quotient, 6 independent OS finite-matrix negative-control checks. Git object **f28784c1c64bd0687f25c30b491e7d95f76d14e1**, verified byte-identical to the executed local script. No kernel, CI or numerical continuous-Haar quadrature was invoked.
+**25,792/25,792 exact assertion groups PASS** on Python+SymPy 1.14.0, broken down as: 4 group, 8 graph, 72 rooted-gauge, 18,432 actual full plaquette gauge-covariance, 3,072 original R445 F19, 4,198 finite-group Haar quotient plus termwise Mayer checks, 6 independent OS finite-matrix negative-control checks. Git object **68fa75114f0ddccb686acb688b5a5a451da11515**, verified byte-identical to the executed local script. No kernel, CI or numerical continuous-Haar quadrature was invoked.
+
+
+## 4a. Termwise original Wilson Mayer/W3 bare-source transport (stronger than a signed log)
+
+Every *individual* original plaquette-factor label p is gauge invariant: for bare Wilson trace t_p(U)=ReTr(P_p(U))/N, the Mayer factor f_p(U)=exp(beta_p*t_p(U))-1 is a class function of its own original plaquette word. For **every** finite labelled subset S of actual original plaquettes, and every A∈{1,F,G,FG} built from the two globally unique original Wilson marks, define the genuine original-source coefficient
+
+    z_(S,A)^full = ∫_(G^E) A(U) ∏_(p∈S) f_p(U) dH^E(U).
+
+The rooted-tree theorem applies **separately to EACH** such product, not just to the complete four-column partition: \`z_(S,A)^full = z_(S,A)^tree\`. Thus any FINITE selected original factor-activity family \`C\` obeys exactly
+
+    Σ_(S∈C) |z_(S,A)^full| = Σ_(S∈C) |z_(S,A)^tree|.
+
+No triangle inequality loss, cancellation, changed link supports or gauge-volume normalization occurs at this step. Whenever a finite labelled Ursell/log coefficient is assembled algebraically from the same original z_(S,A) inputs, its value also commutes with rooted-tree gauge fixing, provided the exact same factor-incompatibility labels and normalization are retained. This is an **exact original bare Wilson Mayer representation identity**, not an absolute upper bound for that sum and NOT an identification of Bałaban's distinct R-modified, gauge-fixed CMP116 activities with these bare plaquette factors. On the genuine CMP119/122 renormalized W3 lane, the original-source activity map, absolute domination and physical rooted shell remain OPEN.
+
+The independent full-enumeration Q8 two-loop negative-control fixture additionally verifies **32/32 exact source-matched individual coefficient equalities**: all 2^3 bare Wilson Mayer interaction subsets times each of 1,F,G,FG under normalized 4096-configuration full Haar versus normalized 64-configuration rooted-gauge Haar. This increases local acceptance from 25,760 to **25,792**, with committed script blob **68fa75114f0ddccb686acb688b5a5a451da11515** byte-identical to the new executed file. The abstract compact-Haar theorem is independent of Q8.
+
+### Current master-only W3 source donors, not missing theoretical producers
+
+Actual current \`master\` already holds \`Docs/physics/YMClayOriginalWilsonMarkedMayerAbsoluteEntropyCut20261123.md\` (one labelled factor-connected 4D Wilson Mayer activity family and rooted-tree combinatorial majorant; **explicitly not the full Ursell log W3**), \`Docs/physics/YMClayOriginalSUNW3SingleOmittedPlaquetteCensus20261123.md\` (one-outside-plaquette Haar-leaf invisibility, original intermediate time-one mark variance and collective cube-flip counterexample), and \`Docs/physics/YMClayOriginalSUNW3CubeFlipTwelveCouplingExact20261123.md\` (24 actual distinct original twelve-interaction connected multivariate derivatives, 98,304 parity checks). These are provenance-backed *master donor files*, absent from the inspected #1536 head but already in its target \`master\`: **do not duplicate or blindly cherry-pick**. They strengthen the bare original W3 source, yet supply neither full homogeneous running-beta Ursell absolute sum nor the literal CMP119/CMP116 physical rooted charge. Current original real affine strong-coupling marked W1 Dobrushin also already exists on master for beta≤1/72 with a row bound 13/25; it does not survive a beta(a)→∞ weak-coupling trajectory by that same estimate.
 
 ## 5. Same-H reverse spectral theorem: no universal vector prefactor needed
 
