@@ -3305,3 +3305,209 @@ assert n==200
 | N6 | originalClayTransport | conditional #1040/#1129 |
 
 Geometry-forward Aristotle BIDI: G79–G81 give an actual least linear independence interface, not a required state representation. G82 shows that removing affine equations and exact translation symmetries alone need not eliminate the hard guard relation; G83 shows that even exponential linear separator materialization is not necessary for easy instances with these same invariants. Do not pursue more compulsory rank, hull, symmetry or width proxies as if they were N4. Highest-alpha next test is a target-specific bound on actual nonlinear transformation/composition cost that admits all these shortcuts, or direct uniform-machine obstruction; explicitly allow original logical decoding of G82, compact cardinality sectors of G83, and all G37 reported subexponential shortcuts. Preserve original zero mode, signed residual, inhabited neutral fibre and separate time/k-indexed hyperfabric as semantics. No new certification prerequisite and no P!=NP claim.
+
+
+## 31. P0-G84–G88 — GEOMETRY-FORWARD: ordered shared guards, affine fibres, noncrossing contraction and commutation residuals (2026-11-24)
+
+Literal Clay P vs NP remains the endpoint. Read both current pasted files directly: G79–G83 and Langlands R121–R125 (reported #1549/#120 48577ab92422/266ade6fd1f5, blob 364a28fec27af403adf73906d6e76ae4465d56ca). Both P0 roadmaps read live at 7821f6d2b7efd70919b68f21850af115b73123a1 / 448970922066a2204029ab4fa1ba82ba60638278, common blob 71e8d067fe40c5a4c3192bde6da0685ba1b8a33f. Use R122 matroid intersection as a restricted linear interface and R124 shared-orientation induced coupling as a donor, not a new Langlands endpoint. Continue G70–G83 from actual repeated original guard geometry; do not charge expanded channel ranks or compulsory materialization. Producers/consumers: G13 original selector, G16/G17, G33 signed components, G45–G48 flag, G51 consumer quotient, G53–G59 indexed modes, G65–G69 signed separators, G70–G78 crossing/guard/parity, G79–G81 minimal linear overlap, G82/G83 controls, existing ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact (section 27), #1291 H05, #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 standard machine, #1040 terminal, #607/#678 Aristotle. Use classical deterministic branching programs/finite automata, bounded-occurrence splitting, matrix products, noncrossing partitions and vertex-cover branching; no claim of literature novelty. Preserve original zero mode, inhabited neutral fibre, signed residual and separate time/k-indexed hyperfabric; no other programme edits, no CI/native kernel.
+
+### G84 — constant-state transfer and two-sided affine-fibre hardness
+
+Take normalized nonempty clauses of width <=3 on original left bits x. Use a row-vector deterministic three-state automaton U,S,D: U means all previous clauses satisfied, current clause not satisfied; S means current clause satisfied; D means a previous clause failed. For a literal that is false the transition is identity; for a true literal U->S, S->S, D->D. At every clause boundary reset U->D, S->U, D->D. Starting row e_U, ending accept column e_U^T, the resulting product F(x)=e_U product_j M_j(x_i) e_U^T is exactly the original CNF truth function. Boundary reset matrices are constant and do not introduce independent guards. State D is explicit excluded residual, not neutral. Empty formula accepts; empty clause handled by immediate reset/rejection. Each original guard label occurs once per actual literal occurrence, not replaced by independent per-occurrence choices.
+
+Introduce a right state row p_j for each step, impose p_0=e_U, p_j=p_(j-1)(M_j(0)+x_i(M_j(1)-M_j(0))) over F2, and p_m[U]=1. Constant transitions use no x. These are equations of total degree <=2, and no within-side nonlinear terms. Fix x: the initial and transition equations form a square block lower-triangular system with identity diagonal on all 3(m+1) right unknowns, hence full column rank and a unique right run before terminal equation. The complete right fibre is that one run if accepted, empty otherwise. The coefficient rank is constant on ALL x; adding the single terminal equation increases augmented rank by precisely 1 on rejected x and by 0 on accepted x. Fix all p_j: every equation is affine in original left guards, so the left fibre is affine or empty, computable by Gaussian elimination. The joint relation is parsimoniously equivalent to original SAT. Thus NP-completeness survives even with both conditional fibres affine and the right-side conditional coefficient matrix always full column rank. This is a bilinear-equation model, NOT a new claim of crossing-only 3-CNF with affine fibres in all original auxiliary coordinates; converting equations to a Boolean gate graph may lose that fibre property. G48 always-inhabited flag may be evaluated by a deterministic transfer of its bounded-width truth-graph clauses with the original flag retained as a guard. No claim that a rank check at specified x is hard.
+
+Bounded occurrence strengthening: split each variable with t>=2 occurrences into t private logical bits, each used in one original clause, and add cyclic implications (not a_i OR a_(i+1)), indices mod t. The directed cycle forces all copies equal, so every original assignment has exactly one extension to its copies, and conversely all satisfying copy assignments reconstruct original used bits. Each copy appears at most three times (one original clause and two cycle implications). Keep unused original variables as free bits for parsimonious counting. t=1 needs no extra clauses. Width <=3, polynomial-size reduction. Hence width-three deterministic transfer SAT remains NP-complete with each guard read at most three times and both conditional fibres affine in the bilinear formulation. This does not show that all orderings or all representations must use costly repeated reads.
+
+### G85 — actual division-free contraction for noncrossing guard words
+
+General source word of m positions, each labelled by original guard i or a constant, with d-by-d matrices M_j(0),M_j(1) over any commutative coefficient ring R. For a constant position both matrices equal, no guard weight. Use independent unary weights w_i(0),w_i(1), including signed Fourier factors w_i(1)=(-1)^h_i z_i. Define the entire weighted transfer
+
+    T = sum_x (prod_i w_i(x_i)) M_1(x_label1)...M_m(x_labelm).
+
+Unused guard factors contribute w_i(0)+w_i(1). At each original guard the weight occurs once regardless of read count. This computes the exact matrix of all source endpoint consumers, not just the scalar. For deterministic Boolean transitions the acceptance and rejection sectors sum to the full baseline; keep their actual supports distinct from signed or modular cancellations. Boolean semiring evaluation with all allowed input weights true computes existence; signed/ring transfer does not by itself provide nonemptiness from a modular zero.
+
+Call two distinct labels interleaved if there are positions i<j<k<l with word[i]=word[k]=a, word[j]=word[l]=b. Constants ignored. When no pair interleaves, the partition of occurrence positions into guard labels is noncrossing. Exact recursive contraction: start at the first nonconstant guard a, with all occurrence positions i1<...<it. Every other label occurring strictly between i1 and it lies entirely within exactly one gap (i_j,i_(j+1)); otherwise a,b,a,b occurs. Labels after it are also disjoint from all these gaps. Constant prefixes can simply multiply on the left. Thus recursively compute gap matrices G_j and suffix S, then
+
+    T_block = (sum_(b=0,1) w_a(b) M_i1(b) G_1 M_i2(b)...G_(t-1) M_it(b)) S.
+
+This follows by factoring the finite assignment sums of disjoint labels, preserving the original order of noncommuting matrices. Each gap computed ONCE and reused for both orientations. No division, no independence assumption for repeated positions, no commutation of overlapping matrices. There are O(m) matrix products/additions (each occurrence and gap belongs to one recursion), hence O(m d^3) ordinary ring operations after polynomial parsing; memory polynomial, exact bit costs charged (for signed integer input with bounded bit length, products/sums here have polynomial bit length in explicit word and matrices). All unused guards separately handled. In particular the nested word 1,2,...,q,q,...,2,1 has q simultaneously live labels at its middle cut, but contracts in O(q d^3) operations. This is an actual shared contraction bypassing a potentially exponential chronological separator table, including arbitrary signed noncommuting transfers. No requirement to list the intermediate assignment fibres. Not all original SAT words are noncrossing.
+
+### G86 — vertex-cover parameterization of actual interleaving obstruction
+
+Build a simple graph on original guard labels with edge for each interleaved pair. This is computable in polynomial word length even by exhaustive quadruples. If K is a vertex cover of size k, enumerate the 2^k assignments to these actual original labels (not occurrences), replace each of their occurrences by the corresponding constant matrix, multiply their unary weights once, and contract the remaining noncrossing word by G85. Sum all conditional matrices. Exact cost O(2^k poly(m,d,q)) operations including parsing and weights; no assumption of free cover discovery. Given budget k, choose an uncovered edge and branch on either endpoint, removing incident edges; at most 2^k poly(m,q) work finds a cover of size <=k or proves none. Iterative budget search gives the same fixed-parameter exponential dependence on minimum k up to polynomial factors. Decision version uses Boolean semiring and original existential support. Thus bounded width and k=O(log N) give a polynomial algorithm for this actual supplied representation, even when raw live boundary width is linear. Word order may be changed if source semantics proves it; no assumption an optimal word can be obtained efficiently. This is an upper bound, not a claim that all computation is required to use this order/cover or that k bounds time below.
+
+### G87 — exact commutation shortcut and signed swap defect
+
+For adjacent distinct source labels a,b, if M_i(u)M_j(v)=M_j(v)M_i(u) for all u,v in {0,1}, they can be swapped together with their position and original label without changing ANY assignment's transfer. Constants covered by same criterion. The exact signed residual when the criterion fails is prefix times [M_i(u),M_j(v)] times suffix, where [A,B]=AB-BA. Its weighted sum is the actual consumer difference, not a declaration that two chronological histories are identical. If two labels commute at every mutual occurrence pair, grouping all their occurrences is permitted by repeated swaps through those positions. If all different labels commute pairwise, group by label, preserve within-label order and contract
+
+    T=prod_i (sum_(b=0,1) w_i(b) prod_(j:label j=i) M_j(b))
+
+with constant factors handled by compatible commutation (or kept in their original order if no swap needed). This costs O(m d^3) ring operations after certificate/ordering costs. More generally use any supplied verified swaps to a noncrossing word before G85/G86; computing optimal normalization is not assumed polynomial. An invertible simultaneous chart change preserves commutators, with start/end maps transported; arbitrary lossy changes do not.
+
+Control: word (1,2,...,q) repeated THREE times; each guard read three times, interleaving graph complete, minimum cover q-1. At every occurrence choose identity for 0 and the same involution X for 1 swapping two states (third fixed), so all commute and X^3=X. Weighted contraction is product_i(w_i(0) I + w_i(1) X), O(q) fixed-size matrix operations. The accept sector is even parity and rejected sector odd parity on the two active states. This provides a cheap exact contraction even with maximal interleaving and bounded read count. It also allows general weights breaking an unweighted translation symmetry. Do not turn the interleaving cover size into an unrestricted lower bound.
+
+### G88 — indexed composition and remaining obligation
+
+Keep (source history,tau,k,j,version,coefficient ring,creation/requested precision,word/position,original label,consumer) independent. The actual original guard word is a chart/algorithmic ordering, not a replacement for chronological source events. Nested contraction groups disjoint source labels, while interleaving conditioning retains the original pin and aggregates its two actual orientations. A neutral unassigned bit has both possibilities; modular cancellation is not empty source. Retain acceptance zero mode, signed character moments, rejected residual and original witness extension map. When reordering by commutation, retain source-position bijection and exact swap certificates; if not commuting retain signed defect, rather than silently identify histories. G58 gain/loss and governed six-face residual semantics unchanged, no blanket H05/H07/H14 closure. R122 linear rank and G79 shared linear overlap remain usable but not obligatory. G84 makes the individual affine computations even cheaper than G70; G85–G87 give actual nonlinear composition algorithms, rather than another compulsory width invariant. Remaining N4 is actual global work under all legitimate orderings, semantic substitutions, commutation, branching, signed contractions and arbitrary standard-machine shortcuts. No unrestricted lower bound follows from constant-width program SAT hardness, full rank, or the size of a particular interleaving graph.
+
+### Actually executed local regression (exact Python integers/GF2, no CI/kernel)
+
+Local /tmp/p0_guardword.py: 350 formulas (260 exhaustive q=1,2, 30 seeded each q=3..5); 2,712 original assignments with explicit full right coefficient rank and augmented rank comparison to source CNF; 2,712 original assignment to bounded-occurrence copy extensions checked (reverse follows from equality-cycle proof; did NOT exhaust all independent copy assignments). 360 arbitrary signed noncommuting 3x3 matrix word contractions via minimum vertex cover versus exhaustive source guard assignments; 360 minimum cover checks versus exhaustive subsets. 112 direct noncrossing comparisons including ten deeply nested words q=1..10 (some also included in 360); 240 actual signed formula accept/reject contractions (q=1..6, 40 each) compared with exhaustive assignments, including unused guard factors. 50 complete-interleaving commuting controls (q=1..10, five each) checked against exhaustive source assignments. All passed. No runtime benchmark or native kernel claim. Core reproducer (matrix operations exact Python ints; deterministic seed 369, sampling as described below):
+
+```python
+from itertools import product,combinations
+from random import Random
+from collections import Counter
+rng=Random(369)
+I=((1,0,0),(0,1,0),(0,0,1))
+def mul(A,B):return tuple(tuple(sum(A[i][k]*B[k][j] for k in range(3)) for j in range(3)) for i in range(3))
+def add(A,B):return tuple(tuple(A[i][j]+B[i][j] for j in range(3)) for i in range(3))
+def scale(a,A):return tuple(tuple(a*x for x in row) for row in A)
+def edges(word):
+ e=set()
+ for i,j,k,l in combinations(range(len(word)),4):
+  a,b=word[i],word[j]
+  if a is not None and b is not None and a!=b and a==word[k] and b==word[l]:e.add(tuple(sorted((a,b))))
+ return e
+def cover(E,k):
+ if not E:return set()
+ if k==0:return None
+ a,b=min(E)
+ for x in (a,b):
+  c=cover({e for e in E if x not in e},k-1)
+  if c is not None:return c|{x}
+ return None
+def nested(word,ms,w):
+ if not word:return I
+ a=word[0]
+ if a is None:return mul(ms[0][0],nested(word[1:],ms[1:],w))
+ ix=[i for i,b in enumerate(word) if b==a];last=ix[-1]
+ gaps=[nested(word[i+1:j],ms[i+1:j],w) for i,j in zip(ix,ix[1:])]
+ C=scale(0,I)
+ for b in (0,1):
+  P=ms[0][b]
+  for G,j in zip(gaps,ix[1:]):P=mul(mul(P,G),ms[j][b])
+  C=add(C,scale(w[a][b],P))
+ return mul(C,nested(word[last+1:],ms[last+1:],w))
+def brute(word,ms,w):
+ labels=sorted(set(word)-{None});C=scale(0,I)
+ for vals in product((0,1),repeat=len(labels)):
+  x=dict(zip(labels,vals));P=I;z=1
+  for a in labels:z*=w[a][x[a]]
+  for a,M in zip(word,ms):P=mul(P,M[0 if a is None else x[a]])
+  C=add(C,scale(z,P))
+ return C
+def conditioned(word,ms,w,K):
+ C=scale(0,I);K=sorted(K)
+ for vals in product((0,1),repeat=len(K)):
+  x=dict(zip(K,vals));z=1
+  for a in K:z*=w[a][x[a]]
+  ws=[None if a in x else a for a in word]
+  M=[(m[x[a]],m[x[a]]) if a in x else m for a,m in zip(word,ms)]
+  C=add(C,scale(z,nested(ws,M,w)))
+ return C
+def matrix(f):return tuple(tuple(int(j==f[i]) for j in range(3)) for i in range(3))
+R=matrix((2,0,2));N=I;Y=matrix((1,1,2))
+def compile_formula(F):
+ word=[];ms=[]
+ for c in F:
+  for i,v in c:word.append(i);ms.append(tuple(Y if b==v else N for b in (0,1)))
+  word.append(None);ms.append((R,R))
+ return word,ms
+def val(F,x):return int(all(any(x[i]==v for i,v in C) for C in F))
+def rank(rows):
+ piv={}
+ for v in rows:
+  while v:
+   k=v.bit_length()-1
+   if k in piv:v^=piv[k]
+   else:piv[k]=v;break
+ return len(piv)
+def right_rank(word,ms,x):
+ n=3*(len(word)+1);A=[1<<j for j in range(3)];rhs=[1,0,0];p=[1,0,0]
+ for t,(i,M) in enumerate(zip(word,ms)):
+  T=M[0 if i is None else x[i]]
+  for j in range(3):
+   A.append((1<<(3*(t+1)+j))|sum((T[k][j]&1)<<(3*t+k) for k in range(3)));rhs.append(0)
+  p=[sum(p[k]*T[k][j] for k in range(3))%2 for j in range(3)]
+ assert rank(A)==n
+ A.append(1<<(3*len(word)));rhs.append(1)
+ return rank([a|(b<<n) for a,b in zip(A,rhs)])-n,p[0]
+fc=ac=cc=0
+for q in range(1,6):
+ C=[tuple(zip(J,p)) for k in range(1,min(3,q)+1) for J in combinations(range(q),k) for p in product((0,1),repeat=k)]
+ Fs=([C[j] for j in range(len(C)) if t>>j&1] for t in range(1<<len(C))) if q<=2 else (rng.sample(C,rng.randrange(min(8,len(C))+1)) for _ in range(30))
+ for F in Fs:
+  word,ms=compile_formula(F)
+  for x in product((0,1),repeat=q):
+   r,v=right_rank(word,ms,x);assert v==val(F,x) and r==1-v;ac+=1
+  C2=[];uses=[[] for _ in range(q)];n=0
+  for c in F:
+   C2.append(tuple((n+j,v) for j,(i,v) in enumerate(c)))
+   for j,(i,v) in enumerate(c):uses[i].append(n+j)
+   n+=len(c)
+  for L in uses:
+   if len(L)>1:C2.extend([((a,0),(b,1)) for a,b in zip(L,L[1:]+L[:1])])
+  assert max(Counter(i for c in C2 for i,v in c).values(),default=0)<=3
+  for x in product((0,1),repeat=q):
+   y=[0]*n
+   for i,L in enumerate(uses):
+    for a in L:y[a]=x[i]
+   assert val(C2,y)==val(F,x);cc+=1
+  fc+=1
+assert (fc,ac,cc)==(350,2712,2712)
+rchecks=nc=vc=0
+for q in range(1,7):
+ for _ in range(60):
+  word=list(range(q))*2+[rng.randrange(q) for i in range(rng.randrange(3))];rng.shuffle(word)
+  E=edges(word);K=next(c for k in range(q+1) if (c:=cover(E,k)) is not None)
+  assert all(set(e)&K for e in E)
+  assert len(K)==min(len(J) for j in range(q+1) for J in combinations(range(q),j) if all(set(e)&set(J) for e in E));vc+=1
+  ms=[tuple(tuple(tuple(rng.randrange(-2,3) for j in range(3)) for i in range(3)) for b in (0,1)) for _ in word];w={i:(rng.randrange(-3,4),rng.randrange(-3,4)) for i in range(q)}
+  assert conditioned(word,ms,w,K)==brute(word,ms,w);rchecks+=1
+  if not E:assert nested(word,ms,w)==brute(word,ms,w);nc+=1
+for q in range(1,11):
+ word=list(range(q))+list(reversed(range(q)));assert not edges(word)
+ ms=[tuple(tuple(tuple(rng.randrange(-1,2) for j in range(3)) for i in range(3)) for b in (0,1)) for _ in word];w={i:(1,rng.randrange(-2,3)) for i in range(q)}
+ assert nested(word,ms,w)==brute(word,ms,w);nc+=1
+assert (rchecks,nc,vc)==(360,112,360)
+zchecks=0
+for q in range(1,7):
+ C=[tuple(zip(J,p)) for k in range(1,min(3,q)+1) for J in combinations(range(q),k) for p in product((0,1),repeat=k)]
+ for _ in range(40):
+  F=rng.sample(C,rng.randrange(min(6,len(C))+1));word,ms=compile_formula(F);L=set(word)-{None};E=edges(word);K=next(c for k in range(q+1) if (c:=cover(E,k)) is not None)
+  w={i:(rng.randrange(-3,4),rng.randrange(-3,4)) for i in range(q)};T=conditioned(word,ms,w,K);free=1
+  for i in set(range(q))-L:free*=sum(w[i])
+  a=d=0
+  for x in product((0,1),repeat=q):
+   v=1
+   for i,b in enumerate(x):v*=w[i][b]
+   if val(F,x):a+=v
+   else:d+=v
+  assert (free*T[0][0],free*T[0][1],free*T[0][2])==(a,0,d);zchecks+=1
+X=matrix((1,0,2));control=0
+for q in range(1,11):
+ word=list(range(q))*3;assert len(edges(word))==q*(q-1)//2
+ ms=[(I,X)]*len(word)
+ for _ in range(5):
+  w={i:(rng.randrange(-3,4),rng.randrange(-3,4)) for i in range(q)};P=I
+  for i in range(q):P=mul(P,add(scale(w[i][0],I),scale(w[i][1],X)))
+  assert P==brute(word,ms,w);control+=1
+assert (zchecks,control)==(240,50)
+```
+
+### Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G84 | constantWidthBilinearGuardTransfer / fullColumnRankAffineFibres / boundedReadHardness | derived and tested source evaluation and rank, copy extension tested |
+| G85 | noncrossingGuardWordDivisionFreeContraction | derived and tested; actual upper bound, arbitrary noncommuting matrices |
+| G86 | interleavingVertexCoverContraction | derived and tested; FPT upper bound including cover search |
+| G87 | certifiedGuardSwap / signedCommutatorResidual / denseCommutingControl | derived and tested commuting control |
+| G88 | indexedGuardCompositionResourceBoundary | derived; actual source and separate zero/signed/rejected sectors |
+| N4/G12a | unrestrictedSerialCharge | OPEN: cost under all legitimate nonlinear/ordering/commutation/shared computation shortcuts |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; original uniform G48 flag / stronger nonuniform G38 |
+| N6 | originalClayTransport | conditional #1040/#1129 |
+
+Geometry-forward Aristotle BIDI: the real improvement is G85/G86, an actual exact upper-bound algorithm bypassing both compulsory linear channel enumeration and chronological boundary enumeration on nested guard geometry. G84 says even affine conditional fibres and constant full right coefficient rank can retain the hard joint selector. G87 admits source-dependent commutation and explicitly defeats a compulsory interleaving charge. Next investigate actual noncommuting interaction and reusable subword transfer or the direct standard-machine N4 endpoint, without assuming a particular branching program, word, or its optimized form is universally necessary. Do not replace SAT by counting, full global symmetry, optimal normalization or rank computation. Preserve zero mode, inhabited neutral fibre, signed residual and indexed hyperfabric as semantics, not mandatory materialization. No P!=NP claim, no additional certification prerequisite.
