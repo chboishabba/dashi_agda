@@ -50,6 +50,20 @@ infimum and retain the sum: one coupling need not optimize all coordinates.
 This weighted form can remain small despite almost maximal full exterior TV
 if differences occur where the conditional influence vanishes.
 
+### Agda finite compilers
+
+`DASHI/Physics/YangMills/YMClayR445WeightedExteriorInfluenceFiniteExact.agda`
+proves the generic finite-rational coupling inequality (I) and its
+pair-resolved form (III) under explicit nonnegative weights and explicit
+kernel-distance budgets. It is a finite lemma only and does not pay any of the
+physical B1--B5 obligations below.
+
+`DASHI/Physics/YangMills/YMClayR445ExteriorKernelTVChainFiniteExact.agda`
+proves the finite coordinate-chain/TV telescope used when an exterior change is
+resolved as a list of adjacent site changes. It is likewise only a rational
+finite inequality with caller-supplied budgets; it does not supply the actual
+Wilson kernel or exterior-influence estimates.
+
 ## Reproducible exact regression
 
 `python3 scripts/check_ym_r445_weighted_exterior_influence.py`
