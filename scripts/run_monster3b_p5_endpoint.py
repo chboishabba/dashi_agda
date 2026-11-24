@@ -65,6 +65,8 @@ def main():
     ap.add_argument("--skip-mmgroup",action="store_true")
     ap.add_argument("--skip-magma",action="store_true")
     ap.add_argument("--skip-gap",action="store_true")
+    ap.add_argument("--actual-mod31-hom",action="store_true",
+        help="also construct actual mmgroup MMV(31) 90D Hom vacuum and 12/78 C2 sectors")
     ap.add_argument("--timeout",type=int,default=900)
     ap.add_argument("--outdir",type=Path)
     args=ap.parse_args()
@@ -152,7 +154,24 @@ def main():
                         "ACTUAL_MM_CONJUGATION_AND_CENTRAL_RELATOR_DATA; COMPLEX_OUTER_OPEN"
                 else:
                     report["lemma_status"]["M3B-L10B_MM_E_canonical_word"]="FAILED"
-        if run("hom_outer",[sys.executable,
+        if args.actual_mod31_hom:
+            cover=out/"mmgroup_canonical_cover_hit0.json"
+            if not args.manifest.exists():
+                report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=\
+                    "MISSING_AUTHENTIC_MANIFEST"
+            else:
+                arguments=[sys.executable,
+                    SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                    "--manifest",args.manifest,
+                    "--outdir",out/"actual_mmv31_hom"]
+                if cover.exists():
+                    arguments.extend(["--cover",cover])
+                if run("actual_mod31_hom",arguments):
+                    report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=\
+                        "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
+                else:
+                    report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]="FAILED"
+                if run("hom_outer",[sys.executable,
                SCRIPTS/"monster3b_ordinary12_hom_outer_weld.py",
                "--source",original12,"--out",out/"hom_outer_weld.json",
                * (["--hom",str(args.hom)] if args.hom else []),
