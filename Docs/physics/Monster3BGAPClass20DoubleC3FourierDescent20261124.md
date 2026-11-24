@@ -24,7 +24,7 @@ K is normal, hence \(\Pi_K\) is CENTRAL in \(\mathbf C[\widetilde N]\). By irred
 \]
 Furthermore \(\boxed{V\text{ descends to }N\iff \chi(k)=d}\). This determines descent **from one original main-table class**. A negative result is an exact nonzero diagonal-central-phase obstruction, not a failed numerical test.
 
-For the published Barraclough–Wilson \(1458\)-Heisenberg times outer \(24=12+12\) split and \(156=78+78\) split, the source full-class \(MN3B\) matcher establishes one descended and one non-descended character in each pair. The exact class-20 alternatives must therefore be
+For the published Barraclough–Wilson \(1458\)-Heisenberg times outer \(24=12+12\) split and \(156=78+78\) split, for the **Monster-selected** degree-12 and degree-78 pairs, the source full-class \(MN3B\) matcher requires one descended and one non-descended component. Other scanned degree-78 families may have no K-trivial component (or no unique one) and must be *skipped*, not treated as a fatal counterexample to the theorem. The exact class-20 alternatives must therefore be
 \[
 \begin{array}{c|rr}
 \text{main irreducible degree}&\text{descended }\chi(k)&\text{rejected }\chi(k)\\
