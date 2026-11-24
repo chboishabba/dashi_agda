@@ -64,6 +64,71 @@ def rank31(rows):
         if r==m:break
     return r
 
+def nullspace31(M):
+    """Exact F31 right nullspace basis, returned as n-by-nullity columns."""
+    A=np.asarray(M,dtype=np.int16).copy()%PRIME
+    nrows,ncols=A.shape
+    pivots=[];r=0
+    for col in range(ncols):
+        k=next((i for i in range(r,nrows) if A[i,col]),None)
+        if k is None:continue
+        A[r],A[k]=A[k].copy(),A[r].copy()
+        A[r]=(A[r]*pow(int(A[r,col]),-1,PRIME))%PRIME
+        for i in range(nrows):
+            if i!=r and A[i,col]:
+                A[i]=(A[i]-int(A[i,col])*A[r])%PRIME
+        pivots.append(col);r+=1
+        if r==nrows:break
+    free=[j for j in range(ncols) if j not in pivots]
+    out=np.zeros((ncols,len(free)),dtype=np.int16)
+    for idx,j in enumerate(free):
+        out[j,idx]=1
+        for i,p in enumerate(pivots):
+            out[p,idx]=(-A[i,j])%PRIME
+    return out
+
+def coordinates_in_columns(B,images):
+    """Return X s.t. B X = images, or fail exact ambient residual."""
+    B=np.asarray(B,dtype=np.int16)%PRIME
+    Y=np.asarray(images,dtype=np.int16)%PRIME
+    m,n=B.shape
+    if Y.shape[0]!=m or rank31(B.T)!=n:
+        raise ValueError("invalid full-rank modular eigenbasis")
+    # Pivot ROWS of B give invertible n-by-n square system.
+    R=B.copy();chosen=[];r=0
+    for i in range(m):
+        a=R[i].copy()
+        for p,row in chosen:
+            if a[p]:a=(a-int(a[p])*row)%PRIME
+        if not np.any(a):continue
+        p=int(np.flatnonzero(a)[0])
+        a=(a*pow(int(a[p]),-1,PRIME))%PRIME
+        chosen.append((p,a));r+=1
+        if r==n:break
+    if len(chosen)!=n:raise ValueError("eigenvector coordinate basis lost full rank")
+    idx=[]
+    selected=[]
+    for i in range(m):
+        # Select original rows incrementally by rank of 12D row vectors
+        if rank31(np.asarray(selected+[B[i].copy()],dtype=np.int16))>len(selected):
+            selected.append(B[i].copy());idx.append(i)
+        if len(selected)==n:break
+    Z=np.asarray(selected,dtype=np.int16)
+    W=Y[idx]
+    aug=np.concatenate([Z,W],axis=1).astype(np.int16)
+    for j in range(n):
+        k=next((i for i in range(j,n) if aug[i,j]),None)
+        if k is None:raise ValueError("source modular basis singular")
+        aug[j],aug[k]=aug[k].copy(),aug[j].copy()
+        aug[j]=(aug[j]*pow(int(aug[j,j]),-1,PRIME))%PRIME
+        for i in range(n):
+            if i!=j and aug[i,j]:
+                aug[i]=(aug[i]-int(aug[i,j])*aug[j])%PRIME
+    X=aug[:,n:]
+    if not np.array_equal(matmul31(B,X),Y):
+        raise ValueError("original modular source action fails eigenbasis closure")
+    return X
+
 def matmul31(A,B):
     return (np.asarray(A,dtype=np.int64)@np.asarray(B,dtype=np.int64))%PRIME
 
@@ -208,6 +273,28 @@ def main():
                         90-rankplus,90-rankminus]
                     record["selected_12_plus_78_dimensions_found"]=(sorted([
                         90-rankplus,90-rankminus])==[12,78])
+                    if record["selected_12_plus_78_dimensions_found"]:
+                        eig_r=nullspace31((J-r*Id)%PRIME)
+                        eig_neg=nullspace31((J+r*Id)%PRIME)
+                        eig12=eig_r if eig_r.shape[1]==12 else eig_neg
+                        eig78=eig_neg if eig_r.shape[1]==12 else eig_r
+                        np.savez_compressed(a.outdir/"actual_C2_12_78_mod31.npz",
+                                           eig12=eig12,eig78=eig78)
+                        record["actual_12D_Hom_eigenvectors_mod31"]=True
+                        if record.get("actual_D_vacuum_sandwich_mod31_rank")==90:
+                            D0=np.load(a.outdir/"actual_D_vacuum_sandwich_mod31.npz")["D0"]
+                            commutes=np.array_equal(
+                              matmul31(J,D0),matmul31(D0,J))
+                            record["D_vacuum_sandwich_commutes_with_C2"]=commutes
+                            if commutes:
+                                D12=coordinates_in_columns(eig12,matmul31(D0,eig12))
+                                D78=coordinates_in_columns(eig78,matmul31(D0,eig78))
+                                np.savez_compressed(
+                                    a.outdir/"actual_D_12_78_vacuum_sandwich_mod31.npz",
+                                    D12=D12,D78=D78)
+                                record["actual_mod31_D12_sandwich_matrix_extracted"]=True
+                                record["D12_Weil_coefficient_normalized"]=False
+
             status_file.write_text(json.dumps(record,indent=2)+"\n")
     print(json.dumps(record,indent=2))
     return 0
