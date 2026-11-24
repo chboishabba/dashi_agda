@@ -60,7 +60,7 @@ def selftest():
     # Check at least a genuinely mixed signed permutation M.
     cols=[[int(i==j) for i in range(N)] for j in range(N)]
     cols[0],cols[7]=cols[7],cols[0]
-    rows=[[(-col[6:]+col[:6])[i]%3 for i in range(N)] for col in cols]
+    rows=[[( (-col[6+j] if j<6 else col[j-6]) )%3 for j in range(N)] for col in cols]
     ell=[(2*j+1)%3 for j in range(N)]
     u=rref_solve(rows,[(-x)%3 for x in ell])
     assert all((ell[i]+omega(u,cols[i]))%3==0 for i in range(N))
