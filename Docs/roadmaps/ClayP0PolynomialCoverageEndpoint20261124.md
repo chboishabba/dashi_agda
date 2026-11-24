@@ -96,3 +96,128 @@ One large endpoint-directed tranche: construct explicit standard fixed-machine c
 Required falsification tests: identity and output observers; repeated identical queries; bypass inputs; alternative algorithms and rereads; shared gate/DAG and recomputation; fast pi equal-output memory/work separation; RSA certificate/quantum/classical cost distinctions; expanded vs sparse exponent representation; hardcoded per-length truth tables; invalid/promise input escape; exponential expansion hidden by encoding; arbitrary negation and fanout; multi-input/cross-run charge leakage; diagonal quotation budget circularity. Compare against known relativization, natural-proofs and algebrization barriers when applicable, without claiming avoidance by renaming the model.
 
 Exit only when a valid standard-model unconditional SAT lower bound or equivalent universal SAT failure is mathematically derived. Report precise failed lemmas and counterexamples rather than promoting conditional machinery. Subsequent native verification is separate. All phases serve Clay P vs NP as P0.
+
+
+## 9. P0-G — Aristotle BIDI nonlinear-generation geometry (2026-11-24)
+
+**Status:** classical mathematical derivations and finite falsification probe, not kernel certification or a Clay separation. P0 remains solving the endpoint. This is an OR route for N4/N5, in parallel with the standard-machine route. It targets a stronger nonuniform lower bound; failure here does not rule out a direct uniform proof.
+
+### G1–G3: exact model and bidirectional geometry
+
+For n input bits use the Boolean algebra A_n = F2[x_1,...,x_n]/(x_i^2-x_i), identified with F2-valued functions on the n-cube, with pointwise multiplication. Set V0=span(1,x_1,...,x_n). Vertices are linear subspaces containing V0. A productive directed edge V -> W has W=V+span(ab), a,b in V, ab not in V. Its cost is one AND. Every step grows dimension exactly one.
+
+**G1 (circuit-to-path):** Any bounded-fanin Boolean circuit can be rewritten with AND/XOR/NOT; OR(a,b)=a+b+ab, and any binary Boolean gate has affine terms plus at most one product. Scan gates topologically; available functions are the span of inputs, 1 and AND outputs. XOR/NOT preserve the span; AND adds at most one direction. Skip redundant ANDs. This maps any s-gate circuit to a path of length <= s ending at a subspace containing its output f. All input rereads, arbitrary fanout, sharing, recomputation and nonlinear feedback are allowed. No tree expansion.
+
+**G2 (path-to-circuit):** At each edge express a and b as affine combinations of inputs and earlier AND outputs, compute their product once, retain it. Express f in final span. An m-edge path costs m ANDs and O((m+1)(n+m+1)) bounded-fanin Boolean gates in total. Thus shortest productive path length to f exactly equals multiplicative complexity MC(f). Polynomial MC and polynomial unrestricted circuit size are equivalent as nonuniform family existence statements, not uniform synthesis statements. We need no efficient optimal-path search. Every proper V containing V0 has an outgoing edge: if closed under product, it contains all monomials and hence A_n.
+
+**G3 (exterior quotient):** For fixed V define mu_V(a,b)=ab+V in A_n/V. It is bilinear and alternating (a^2=a). Since 1*b=b in V, it factors through the exterior square of V/<1>. The productive directions are exactly the nonzero images of decomposable bivectors. For a two-plane over F2, the three nonzero vectors are a,b,a+b; all basis choices yield the same product modulo V, since a(a+b)=a+ab. Replacing a or b by its translate by 1 also changes only an element of V. Thus exact observer quotient: retain V and image of a plane, not arbitrary syntax. In reverse, V is a legal predecessor of W iff V0 subset V, V is a codimension-one subspace of W and a decomposable bivector maps to the unique nonzero line W/V under mu_V. One must test decomposability, not just membership in the linear image of mu_V; the latter can represent a sum of multiple products. G3 is a local admissibility theorem, not a lower bound on all paths.
+
+### G4: backward cost certificate, and what remains
+
+For a potential P on the reachable subspace vertices, P(V0)=0 and P(W)-P(V)<=1 for every productive edge imply P(V)<=m along every length-m path. If P(V)>=b_n for all V containing f_n, then MC(f_n)>=b_n. Proof: telescope increments along every path. This is the geometric bounded-charge certificate, not a claim that such a useful P has been constructed. Exact shortest distance is a circular choice; seek a separately justified invariant using the product-plane constraint. Arbitrary span dimension alone cannot pay a single-output hard target (it could enter in one direction if arbitrary extensions were free). Merely counting possible inputs or using the identity observer fails; a polynomial input-length entropy cap cannot establish superpolynomial work.
+
+A sound explicit baseline: deg(f)<=m+1 for nonconstant f with m AND gates. Regard each AND output as a fresh formal Boolean variable y_i. The final output is affine in input and y variables. Substitute y_i in reverse topological order by a product of two affine forms in earlier variables; multilinear reduction means each substitution raises degree by at most one. Thus MC(f)>=deg(f)-1, attained by n-way conjunction. This degree certificate is bounded by n-1, so is not an asymptotic separation. One-step discriminator: for quadratic f, the off-diagonal coefficient matrix over F2 of the quadratic part of ab has rank <=2 (outer sum u v^T + v u^T); conversely rank-two alternating form is decomposable and gives one AND modulo affine terms. x1*x2+x3*x4 has rank four, so requires exactly two ANDs; adding rank bounds across arbitrary nonlinear stages without proof is invalid.
+
+G5 coverage: any fixed deterministic finite-tape standard machine halting on every length-n input in t(n) steps has a bounded-fanin circuit of size O((t(n)+1)(n+t(n)+1)) with machine-dependent constants. Encode O(n+t) cells, head indicators, fixed alphabet/control; read symbols by head-conditioned OR reductions, update control and cell/head encodings locally; unroll t steps, halt absorbing. Hence a superpolynomial MC lower bound for canonical binary SAT f_n (invalid input rejected) implies SAT not in P. This is a sufficient classical coverage argument, not yet a native Agda/Lean source attachment. Keep f_n fixed before analyzing arbitrary circuits. Use no uncharged construction of exponential truth tables as an algorithm. Truth tables here are mathematical carriers for lower bounds.
+
+G6 controlling open lemma: construct explicit noncircular P_n (or a different globally admissible path obstruction) whose edge increment is at most one for **all** reachable V and decomposable planes, with goal value b_n for every V containing canonical SAT f_n; prove for every c,k>=1 there exists n with b_n>c(n+1)^k. Alternatively prove direct uniform N4/N5. If obtained, G5 and N3/N6 transport to SATLowerBoundProducer. No superpolynomial bound claimed. This nonuniform route would prove NP not subset P/poly. Check Razborov–Rudich natural-proofs conditions (largeness, constructivity, usefulness) rather than assuming an algebraic reformulation evades barriers; their obstruction is conditional on strong pseudorandomness assumptions.
+
+### Aristotle search control and exact producer ledger
+
+Inspected current controlling PRs #1548 (Agda) and #119 (Lean), same initial roadmap blob 88690cd04eb28e0972c6b5ee92e4f47de573afda; source owner DASHI/Reasoning/AristotleMCGSHypergraphExact.agda (#607), and DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda (#678, blob ffbd5374100bdc2dae8c536589ec0a87912912c0). The former owns SearchHypergraph, StateProved/ActionProved, QuotientSound and FeedbackRefinement; the latter separates collision/discriminator/refinement/guarded merge/reopening. Use these, not another scheduler. Alpha here is qualitative frontier impact, not an invented numeric score. Use direct source proofs to close theorem leaves; finite experiments may only falsify or steer. Preserve JMD FRACTRAN/MDL provenance (#123), DASHI residual/geometry extensions and established external multiplicative-complexity theory separately.
+
+| Gate | Exact deliverable | Producer / current boundary |
+|---|---|---|
+| G1/G2 | circuitToProductFlag / productFlagToCircuit | proof above, #123 simulation, #1546 shared DAG, #1006 cost; native source transport open |
+| G3 | multiplicationResidualAlternating / decomposablePlaneSuccessorIff | proof above, FactorsThrough and indexed quotient #1291; native weld open |
+| G4 | flagPotentialLowerBound / reverseEliminationDegreeBound | proof above; linear-degree control not endpoint |
+| G5 | boundedMachineToBooleanCircuit / polynomialMCExclusionTransfers | proof sketch above, #1129 standard-machine/interpreter, #1040 terminal |
+| G6a | SATProductFlagPotentialStepBound | OPEN; all legal nonlinear extensions, not restricted circuits |
+| G6b | SATProductFlagGoalSeparation | OPEN; same canonical f_n, all goal states |
+| G6c | SATProductFlagSuperpolynomialGrowth | OPEN; arbitrary c,k, not a finite sample |
+| N6 | originalClayTransport | conditional source consumer #1040; no unconditional producer |
+
+Aristotle AND action for this route requires G5 AND G6a AND G6b AND G6c; other OR routes remain available. G1–G4 establish a concrete search carrier and reject false cuts. Highest-alpha next probe: find a product-plane obstruction that remains bounded under arbitrary previous nonlinear generators and separates all goal-containing flags; try dual annihilators ell(V)=0, whose pullback ell(ab) is alternating on V/<1>, and joint constraints on their decomposable images. A single rank or nonzero dual obstruction at V0 is insufficient. Track the collision between a candidate invariant on easy conjunction/parity and the proposed hard family; reopen if an unrestricted shared nonlinear witness violates it. Do not equate proof-search depth with target runtime. Retain external RC2 as restricted proving ground, not a dependency.
+
+### Finite exact falsification probe
+
+Locally executed Python bitset/GF(2) arithmetic; no CI or Agda/Lean kernel execution. Enumerate productive subspaces with canonical reduced bases; independently compare plane-derived directions with all-pair product directions at initial and first-step subspaces. Output cosets are counted modulo affine V0, so multiply by 2^(n+1) for number of functions. Each first-admitted coset has exact minimum AND count by G1/G2 and exhaustive breadth-first search in this small carrier.
+
+| n | exact 0 AND | exact 1 AND | exact 2 AND | exact 3 AND | total affine cosets | independent pair checks |
+|---|---:|---:|---:|---:|---:|---:|
+| 3 | 1 | 7 | 8 | 0 | 16 | 8 |
+| 4 | 1 | 35 | 988 | 1024 | 2048 | 36 |
+
+For n=4 retained 35 depth-one and 2485 depth-two subspaces. All affine cosets reached at depth three. 44 independent direction-set comparisons passed at depths zero and one, not all deeper states. These finite results neither prove an asymptotic result nor assert novelty of the known multiplicative complexity model. Reproduction code is below.
+
+References: Boyar, Peralta, Pochuev, *On the multiplicative complexity of Boolean functions over the basis (AND,XOR,1)* (2000), https://www.sciencedirect.com/science/article/pii/S0304397599001826 ; NIST overview https://csrc.nist.gov/Projects/circuit-complexity ; degree bound and small-function results https://pmc.ncbi.nlm.nih.gov/articles/PMC7802510/ ; Razborov–Rudich natural proofs https://www.cs.toronto.edu/tss/files/papers/1-s2.0-S002200009791494X-main.pdf . The subspace/exterior formulation is a working synthesis here, not a claimed novel published theorem.
+
+```python
+from itertools import combinations
+
+def reduce(v, basis):
+    for b in basis:
+        if v & (1 << (b.bit_length() - 1)):
+            v ^= b
+    return v
+
+def extend(basis, v):
+    v = reduce(v, basis)
+    if not v:
+        return basis
+    pivot = 1 << (v.bit_length() - 1)
+    return tuple(sorted([b ^ v if b & pivot else b for b in basis] + [v], reverse=True))
+
+def span(basis):
+    values = [0]
+    for b in basis:
+        values += [v ^ b for v in values]
+    return values
+
+def affine(n):
+    basis = ()
+    for f in [(1 << (1 << n)) - 1] + [sum(1 << x for x in range(1 << n) if x >> i & 1) for i in range(n)]:
+        basis = extend(basis, f)
+    return basis
+
+def plane_directions(basis):
+    q = sorted(v for v in span(basis) if v and not v & 1)
+    return {r for a, b in combinations(q, 2) if a ^ b > b if (r := reduce(a & b, basis))}
+
+def all_pair_directions(basis):
+    return {r for a, b in combinations(span(basis), 2) if (r := reduce(a & b, basis))}
+
+def search(n, max_depth):
+    base = affine(n)
+    seen = {0}
+    layer = {base}
+    counts = [1]
+    checks = 0
+    for depth in range(1, max_depth + 1):
+        following, reachable = set(), set()
+        for v in layer:
+            directions = plane_directions(v)
+            if depth <= 2:
+                assert directions == all_pair_directions(v)
+                checks += 1
+            for d in directions:
+                w = extend(v, d)
+                assert len(w) == len(v) + 1 and reduce(d, w) == 0
+                if depth < max_depth:
+                    following.add(w)
+                quotient = ()
+                for b in w:
+                    quotient = extend(quotient, reduce(b, base))
+                reachable.update(span(quotient))
+        counts.append(len(reachable - seen))
+        seen.update(reachable)
+        print(f'n={n} AND={depth} new={counts[-1]} cumulative={len(seen)} retained_states={len(following) if depth < max_depth else "not retained"}')
+        layer = following
+    assert len(seen) == 1 << ((1 << n) - len(base))
+    print(f'n={n} counts={counts} independent_all_pair_checks={checks}')
+    return counts, checks
+
+if __name__ == '__main__':
+    assert search(3, 2) == ([1, 7, 8], 8)
+    assert search(4, 3) == ([1, 35, 988, 1024], 36)
+```
