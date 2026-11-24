@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-24",
+  "status": "PASS_J31_INDEPENDENT_NUMERICAL_SOURCE_SPECIFIC_15D_69D_GEOMETRY_NOT_INTERVAL_PROOF",
+  "scope": "original Smith/Filsinger synthetic nine-state J25 equation transcription, seven prescribed physical mode charts, six actual event guards; numerical SciPy DOP853, NumPy and independent monodromy",
+  "nominal_initial_seed_source": "J23 rational seed",
+  "source_clock": "tau=20*pi/11",
+  "source_owner_pr": 1537,
+  "source_reproducer": "scripts/check_smith_filsinger_j31_source_15d_69d_shooting_20261124.py",
+  "source_numerical_dependencies": {
+    "independent_full_period_numerical_audit": "69aa771ed0af9fb0b33d4109cbf7d9cc1dd44557",
+    "independent_full_period_monodromy_audit": "481cc5b693e7244d582a136aa06d828fb41d46b7"
+  },
+  "original_J29_exact_nominal_event_roots": 6,
+  "original_J24_exact_9dimensional_state_boxes": 5,
+  "original_J30_exact_nominal_tau_return_enclosure": true,
+  "ordered_transition_names": [
+    "V_ON",
+    "spark_OFF",
+    "spark_ON",
+    "U_ON",
+    "V_OFF",
+    "U_OFF"
+  ],
+  "original_six_guard_pre_slopes_numerical": [
+    0.4549114929191138,
+    -0.09203612847924929,
+    0.14773998661567345,
+    0.9927847383272892,
+    -0.4437045815272511,
+    -0.14935957596955762
+  ],
+  "scheduled_15d": {
+    "state_unknowns": 9,
+    "event_time_unknowns": 6,
+    "initial_residual_inf_approx": 3.494929345926323e-11,
+    "corrected_residual_inf_approx": 1.687538997430238e-14,
+    "saltation_schur_vs_independently_assembled_hybrid_matrix_inf_approx": 7.17958678619901e-16,
+    "hybrid_matrix_vs_independent_9x9_integrator_inf_approx": 1.2864765698041014e-10,
+    "rationalized_twelve_decimal_preconditioner_I_minus_CJ_at_sampled_centre_inf_approx": 3.871275819748696e-12,
+    "maximum_fifteen_coordinate_finite_difference_error_approx": 3.552733511427799e-9,
+    "true_15d_center_residual_interval_certified": false,
+    "full_15d_DF_over_nonzero_box_certified": false
+  },
+  "true_sparse_multichart_69d": {
+    "state_x0_unknowns": 9,
+    "event_interface_states": 54,
+    "event_times": 6,
+    "total_unknowns": 69,
+    "event_interface_matching_equations": 54,
+    "periodic_return_equations": 9,
+    "guard_equations": 6,
+    "full_jacobian_entries": 4761,
+    "actual_nonzero_entries": 748,
+    "matching_residual_inf_approx": 0,
+    "numerical_Newton_elimination_69d_vs_15d_inf_approx": 2.930990605243323e-24,
+    "full_69d_matrix_condition_2_approx": 8497.855618703225,
+    "seven_chart_step_counts": [
+      284,
+      11,
+      4,
+      66,
+      10,
+      53,
+      66
+    ],
+    "full_69d_interval_DF_certified": false
+  },
+  "mathematical_point": "15D scheduled-switch shooting is algebraically equivalent after 54 matching-variable eliminations to 69D genuinely independent seven-chart multiple shooting; 15D alone has no independent interface-state variables.",
+  "remaining_exact_certificate": [
+    "Pin exact real source smooth Taylor/Lohner charts and full-time guard signs on a nonzero 69D box",
+    "Construct outward-rational centre F and full [DF] for all 69 equations or eliminate their verified enclosure into the 15D Schur system",
+    "Prove strict preconditioned Krawczyk inward inclusion and contraction/uniqueness",
+    "Only then promote nominal tau-periodic orbit, 11-fold T monodromy, and separate original physical admission"
+  ],
+  "local_execution_reproduced": true,
+  "committed_compact_reproducer_byte_identity_to_local_executed_longer_donor_not_claimed": true,
+  "exact_periodic_fixed_point_proved": false,
+  "rigorous_nonzero_ball_Jacobian_proved": false,
+  "original_hardware_or_environmental_wave_metered": false,
+  "github_ci": false,
+  "agda_kernel": false
+}
