@@ -127,7 +127,9 @@ def validate(k=4):
  full_end=[centre_with_variation[i]+I(-DT,DT)*end_f[i] for i in range(9)]
  original_next=list(map(F,s.STATES[k+1]))
  terminal_center_included=[v.a<=x<=v.b for v,x in zip(full_end,original_next)]
- assert all(terminal_center_included)
+ target_box_in_output=[v.a<=x-F('0.0001') and x+F('0.0001')<=v.b for v,x in zip(full_end,original_next)]
+ output_in_target_box=[x-F('0.0001')<=v.a and v.b<=x+F('0.0001') for v,x in zip(full_end,original_next)]
+ assert all(terminal_center_included) and all(target_box_in_output) and not any(output_in_target_box)
  return dict(status=('PASS_SOURCE_J31_ORIGINAL_EVENT1_TO_EVENT2_64_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG' if k==1 else 'PASS_SOURCE_J31_ORIGINAL_EVENT4_TO_EVENT5_32_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG'),
   original_mode=list(mode),original_smooth_segment=('event1 V ON to event2 spark OFF' if k==1 else 'event4 U ON to event5 V OFF'),
   complete_smooth_segment_covered=True,nonzero_original_J24_state_radius='1/10000',
@@ -139,7 +141,8 @@ def validate(k=4):
   original_spark_ON_guard_over_all_slabs=(k==4),
   all_strict_picard_slabs=Nlocal,all_PB8_9x9_tangent_slabs=Nlocal,
   source_J24_next_event_centre_in_terminal_enclosure=terminal_center_included,
-  source_J24_next_event_full_box_in_terminal_enclosure=False,
+  source_J24_target_box_geometrically_contained_in_broad_output=target_box_in_output,
+  source_output_certified_inside_narrow_J24_target_box=output_in_target_box,
   original_source_DxPhi_interval=[[x.record() for x in row] for row in P],
   original_source_partial_start_clock=[v.record() for v in partial_start],
   original_source_partial_end_clock=[v.record() for v in partial_end],
