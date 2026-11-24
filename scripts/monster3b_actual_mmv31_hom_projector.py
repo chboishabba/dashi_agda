@@ -225,6 +225,19 @@ def main():
         raise RuntimeError(f"only {len(pivots)} linearly independent actual MMV31 B-fixed vectors")
     if a.cover is not None:
         cover=json.loads(a.cover.read_text())
+        if cover.get("actual_mmgroup_used") is not True or (
+            cover.get("original_source_blob_sha")!=m["source_blob_sha"]):
+            raise ValueError("original MMV receipt and canonical cover source provenance differ")
+        # Future comparisons must identify the very SAME literal corrected
+        # full Monster C,D, not rely on a shared 90D dimension or same
+        # source-manifest pathname. These fields are retro-compatible with
+        # the user's already-paid legacy ζ5 rank90 receipt.
+        record["canonical_C_word"]=cover["canonical_C_word"]
+        record["canonical_D_word"]=cover["canonical_D_word"]
+        record["original_E_source_blob_sha"]=m["source_blob_sha"]
+        record["original_signed_ATLAS_R7_central_z_power"]=(
+            cover.get("central_cover_relators",{})
+                 .get("ATLAS_R7",{}).get("central_z_power"))
         c=MM(cover["canonical_C_word"])
         d=MM(cover["canonical_D_word"])
         j=c**2
