@@ -505,13 +505,13 @@ Inspect original current work, not PR title alone:
 - [P vs NP #1548](https://github.com/chboishabba/dashi_agda/pull/1548),
   G60–G64 actual source-supported multilinear producer, signed
   coefficient valuations and sparse support matching (inspected
-  24 Nov at head \`7dcee418032a9a6fc7ca32eafe40033253ac925e\`).
+  24 Nov at head `7dcee418032a9a6fc7ca32eafe40033253ac925e`).
   G61 stresses **content removal before expansion** and warns
   that apparent bit savings can cost more total generation.
 - [Ramified Langlands/GCT #1549](https://github.com/chboishabba/dashi_agda/pull/1549),
   R85–R91 weighted source consumer and zero-mode separation,
   R92–R96 valuation/creation-precision/carry reconciliation
-  (inspected 24 Nov at head \`73bf0b2a23a3a1918807448ddf8f1a3b6bfb5412\`).
+  (inspected 24 Nov at head `73bf0b2a23a3a1918807448ddf8f1a3b6bfb5412`).
   Its **relative, indexed source** requirement is especially relevant
   to an exact projective P/Q/T gauge that is mathematically
   equivalent but not the *literal raw* original integers.
@@ -592,18 +592,18 @@ remains a separately costed obligation.
 
 ### COMP5p — direct 24-normalized leaves, not post-hoc GCD (UNTESTED)
 
-New C++ \`scripts/check_pi_p0_projective24_leaf.cpp\`:
+New C++ `scripts/check_pi_p0_projective24_leaf.cpp`:
 for each nonzero source leaf constructs \(-f_j\)
 and \((640320^3/24)j^3\) **directly**,
 with the original terminal signed-tail parity,
 dyadic root, one-division upper-bound certificate,
 and original n-retry schedule of COMP5k.
 Its FIBRE receipt declares
-\`source_gauge=projective_leaf_24\` and
-\`source_scale_24_exponent=n-1\`.
-At interval size n, every terminal P/Q/T entry
-can be at most \(24^{n-1}\) times smaller
-in absolute magnitude in the normalized gauge;
+`source_gauge=projective_leaf_24` and
+`source_scale_24_exponent=n-1`.
+For interval \([0,n)\), the original nonzero terminal P/Q/T
+entries are exactly \(24^{n-1}\) times their normalized
+counterparts;
 the exact logarithmic reduction is
 \((n-1)\log_2 24\) in each nonzero terminal
 component's positive bit-height, up to integer
@@ -660,7 +660,7 @@ where \(c_3=2\) and
 This is exact finite-prime source arithmetic;
 there are no missing large-prime divisors
 of the local \(\gcd\). No generic GMP
-\`mpz_gcd\` need be invoked.
+`mpz_gcd` need be invoked.
 
 The resulting primitive positive-index leaf is
 \((p'_j/h_j,q'_j/h_j,t'_j/h_j)\), and its
@@ -689,13 +689,13 @@ modular reduction.
 
 ### COMP5q/r — two independent consumers of this geometry
 
-- **COMP5q**, \`scripts/check_pi_p0_projective24_residual_witness.cpp\`:
+- **COMP5q**, `scripts/check_pi_p0_projective24_residual_witness.cpp`:
   use guaranteed projective 24 source leaves but
   terminal COMP5l exact quotient/remainder
   signed residual witness, instead of the COMP5k
   upper radical multiplication. Even cutoff and
   both remainder fibres are preserved.
-- **COMP5r**, \`scripts/check_pi_p0_indexed_prime_content.cpp\`:
+- **COMP5r**, `scripts/check_pi_p0_indexed_prime_content.cpp`:
   use the fixed S-supported exact local \(h_j\)
   valuation recipe to divide the *already
   24-normalized* source leaf by \(h_j\).
@@ -710,7 +710,7 @@ modular reduction.
 
 Potential performance trade-offs are substantial:
 per-leaf \(\nu_\ell\) divisions, extra
-\`mpz_divexact\` work and scale-metadata
+`mpz_divexact` work and scale-metadata
 processing must be charged. Source-normalized
 leaves reduce downstream big-integer operand
 widths, but neither overall operation count
@@ -743,9 +743,9 @@ selected π certificate consumer and
 parity/signed residual through the normalized
 carrier. It should charge lookup/valuation
 preprocessing and optional reopening in the
-existing \`FibreProgramComplexityExact\` and
-\`EfficientRecoverableQuotientExact\` terms.
-Use \`QueryFactorisationSufficiency\` for
+existing `FibreProgramComplexityExact` and
+`EfficientRecoverableQuotientExact` terms.
+Use `QueryFactorisationSufficiency` for
 the consumer-relative positive theorem;
 do not make a global all-consumers claim.
 
