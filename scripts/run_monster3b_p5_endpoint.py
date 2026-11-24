@@ -29,6 +29,8 @@ from __future__ import annotations
 import argparse
 from datetime import datetime,timezone
 import json
+import hashlib
+import shutil
 import os
 from pathlib import Path
 import subprocess
@@ -63,6 +65,7 @@ def main():
     ap.add_argument("--hom",type=Path)
     ap.add_argument("--outer-map",type=Path)
     ap.add_argument("--skip-mmgroup",action="store_true")
+    ap.add_argument("--reuse-cover",type=Path,help="reuse the original corrected MM cover JSON; verify literal phase in a separate small stage")
     ap.add_argument("--skip-magma",action="store_true")
     ap.add_argument("--skip-gap",action="store_true")
     ap.add_argument("--actual-mod31-hom",action="store_true",
@@ -71,6 +74,7 @@ def main():
         help="construct zeta=5 and 25 source Hom sectors, recover exact Qzeta12 candidate characters")
     ap.add_argument("--reuse-mod31-plus",type=Path,
         help="reuse prior authentic zeta=5 rank90 source folder; only build missing phase")
+    ap.add_argument("--reuse-mod31-minus",type=Path,help="reuse complete original opposite-phase packet")
     ap.add_argument("--actual-mod127-hom",action="store_true",
         help="independent original Monster MMV(127) 90D B-vacuum source")
 
@@ -125,7 +129,12 @@ def main():
         original12=None
         source_path=srcdir/"d12.6Suz.nfdeg2.M"
         source_available=False
-        if args.source_file:
+        if args.skip_magma:
+            # Cached ordinary matrices are usable without the Magma source.
+            # Lindsey is independently available and no network is needed.
+            source_available=True
+            report["stages"]["acquire"]={"status":"SKIPPED_MAGMA_EXPORT"}
+        elif args.source_file:
             source_path=args.source_file.resolve()
             source_available=source_path.is_file()
             report["stages"]["acquire"]={
@@ -155,18 +164,6 @@ def main():
             report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
                 ("PREEXISTING_JSON_NOT_REVALIDATED" if original12 else
                  "MISSING_SOURCE_JSON_WITH_SKIP_MAGMA")
-        if args.actual_mod127_hom and args.manifest.exists():
-            other127=[sys.executable,
-                SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
-                "--manifest",args.manifest,"--prime",127,
-                "--outdir",out/"actual_mmv127_hom"]
-            if (out/"mmgroup_canonical_cover_hit0.json").is_file():
-                other127.extend(["--cover",
-                    out/"mmgroup_canonical_cover_hit0.json"])
-            ok127=run("actual_mod127_hom",other127)
-            report["lemma_status"]["M3B-L10B_actual_mod127_Hom_vacuum"]=(
-                "SECOND_SPLIT_GOOD_PRIME_SOURCE; NOT_COMPLEX_HOM"
-                if ok127 else "FAILED")
         if original12 is not None:
             report["source12_json"]=str(original12);save()
             if run("derive90",[sys.executable,
@@ -192,7 +189,18 @@ def main():
                 ("LINDSEY_SOURCE_AVAILABLE; STEEL_INDEPENDENT_DONOR_NOT_AVAILABLE" if lindsey_ok else "NO_ORDINARY_SOURCE_MATRICES")
             report["lemma_status"]["M3B-L10A_class_orientation"]=\
                 "BLOCKED_ON_AUTHENTIC_STEEL_12_MATRICES"
-        if not args.skip_mmgroup:
+        if args.reuse_cover:
+            source_cover=args.reuse_cover.resolve()
+            reuse_data=json.loads(source_cover.read_text())
+            manifest_data=json.loads(args.manifest.read_text())
+            if (reuse_data.get("actual_mmgroup_used") is not True or
+                reuse_data.get("original_source_blob_sha")!=manifest_data.get("source_blob_sha") or
+                not all(reuse_data.get(k) for k in ("canonical_C_word","canonical_D_word"))):
+                raise ValueError("invalid reused source cover")
+            shutil.copyfile(source_cover,out/"mmgroup_canonical_cover_hit0.json")
+            report["stages"]["mmgroup_canonical_words"]={"status":"REUSED_ORIGINAL_COVER",
+                "path":str(source_cover),"sha256":hashlib.sha256(source_cover.read_bytes()).hexdigest()}
+        elif not args.skip_mmgroup:
             if not args.manifest.exists():
                 report["stages"]["mmgroup_canonical_words"]={
                     "status":"MISSING_AUTHENTIC_MANIFEST","path":str(args.manifest)}
@@ -207,6 +215,29 @@ def main():
                         "ACTUAL_MM_CONJUGATION_AND_CENTRAL_RELATOR_DATA; COMPLEX_OUTER_OPEN"
                 else:
                     report["lemma_status"]["M3B-L10B_MM_E_canonical_word"]="FAILED"
+        cover=out/"mmgroup_canonical_cover_hit0.json"
+        phase_receipt=out/"literal_standard_D_phase.json"
+        phase_paid=False
+        if cover.is_file() and args.manifest.is_file():
+            phase_paid=run("literal_standard_D_phase",[sys.executable,
+                SCRIPTS/"monster3b_literal_standard_D_phase.py",
+                "--manifest",args.manifest,"--cover",cover,"--out",phase_receipt])
+            report["lemma_status"]["M3B-L12R_literal_standard_D_phase"]=(
+                "ACTUAL_MM_STANDARD_WORD_AND_CENTRAL_RESIDUAL" if phase_paid else "SOURCE_PHASE_RESIDUAL")
+            if phase_paid:
+                report["original_source_6Suz_standard_generator_to_MM_word_identified"]=True
+        if args.actual_mod127_hom and args.manifest.exists():
+            other127=[sys.executable,
+                SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                "--manifest",args.manifest,"--prime",127,
+                "--outdir",out/"actual_mmv127_hom"]
+            if (out/"mmgroup_canonical_cover_hit0.json").is_file():
+                other127.extend(["--cover",
+                    out/"mmgroup_canonical_cover_hit0.json"])
+            ok127=run("actual_mod127_hom",other127)
+            report["lemma_status"]["M3B-L10B_actual_mod127_Hom_vacuum"]=(
+                "SECOND_SPLIT_GOOD_PRIME_SOURCE; NOT_COMPLEX_HOM"
+                if ok127 else "FAILED")
         # Independent source outer-2C class candidate, not the inner r/2B fusion.
         if not args.skip_gap:
             outer_class_ok=run("outer_C_source_class_fusion",[
@@ -330,13 +361,22 @@ def main():
                         report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_plus"]=\
                             "ACTUAL_MM_78_SOURCE_OPERATOR_OBSTRUCTION"
                 if args.both_mod31_phases and positive:
-                    minus=out/"actual_mmv31_hom_opposite"
+                    minus=(args.reuse_mod31_minus.resolve() if args.reuse_mod31_minus
+                           else out/"actual_mmv31_hom_opposite")
                     other=[sys.executable,
                         SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
                         "--manifest",args.manifest,"--outdir",minus,
                         "--prime",31,"--opposite-phase"]
                     if cover.exists():other.extend(["--cover",cover])
-                    if run("actual_mod31_hom_opposite",other):
+                    if args.reuse_mod31_minus:
+                        state=json.loads((minus/"mmv31_hom_status.json").read_text())
+                        if (state.get("p"),state.get("zeta_mod_p"),state.get("number_independent_B_fixed_vectors"))!=(31,25,90):
+                            raise ValueError("reused original mod31- receipt has wrong phase/rank")
+                        report["stages"]["actual_mod31_hom_opposite"]={"status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE","path":str(minus)}
+                        opposite=True
+                    else:
+                        opposite=run("actual_mod31_hom_opposite",other)
+                    if opposite:
                         if model_paid:
                             if run("original729_actual_minus_vacuum_weld",[
                                 sys.executable,
@@ -412,6 +452,15 @@ def main():
                                             "--outdir",out/"lindsey_actual_MM31"])
                                         report["lemma_status"]["M3B-L10A_L10B_L10C_L12R_Lindsey_MM31"]=(
                                             "SOURCE_BOUND_SIGNED_MOD31_12_78_WELD" if source_join else "SOURCE_JOIN_RESIDUAL")
+                                        if source_join and phase_paid:
+                                            char0=run("exact_char0_Hom_expression",[sys.executable,
+                                                SCRIPTS/"monster3b_char0_reynolds_witness.py",
+                                                "--manifest",args.manifest,"--cover",cover,"--phase",phase_receipt,
+                                                "--model",canonical_model,"--outer",out/"actual_mod31_outer_phase_pair",
+                                                "--canonical",full_join,"--join",out/"lindsey_actual_MM31",
+                                                "--plus",plus,"--minus",minus,"--out",out/"exact_char0_Hom_expression.json"])
+                                            report["lemma_status"]["M3B-L10B_L10C_exact_char0_Hom_expression"]=(
+                                                "EXACT_GROUP_ALGEBRA_WITNESS_NOT_DENSE_EVALUATION" if char0 else "CHAR0_EXPRESSION_SOURCE_RESIDUAL")
 
                             else:
                                 report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
