@@ -28,7 +28,7 @@ class NativeAction:
         self.L=[];self.V=[]
         for d in DIMS:
             l,vol=radial_stiffness(d,nr,dr)
-            assert np.max(abs(vol[:,None]*l-l.T*vol[None,:]))<1e-8
+            assert np.max(abs(vol[:,None]*l-l.T*vol[None,:])) <= 5e-12*max(1.,np.max(abs(vol[:,None]*l)),np.max(abs(l.T*vol[None,:])))
             self.L.append(l);self.V.append(vol)
         self.V=np.array(self.V)
         self.S=exact_cell_averages(self.eps,np.arange(nr)*dr,dr)
