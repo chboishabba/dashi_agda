@@ -1594,3 +1594,95 @@ S20–S25 are recorded in the
 Paper 9 projective residual
 roadmap. Measured COMP5j
 remains the historical baseline.
+
+
+## 24 November — COMP5w: source-specific elimination of lower dyadic Euclidean residues
+
+A further terminal consumer contraction is available from
+the **same original source** as COMP5v. For authenticated
+positive adjacent Chudnovsky series bounds,
+\(H=426880\,5^d\), \(k=b-d\),
+\(R=\lfloor2^b\sqrt{10005}\rfloor\),
+and signed affine edge
+\(E_n=(T',Q',V)\), put \(q=q_n\),
+\(Z=HQ'\), \(Y=ZR\).
+The lower/upper dyadic numerators
+remain \(A=qY,W=Y+Z\) for even
+cutoff and \(A=Y,W=q(Y+Z)\)
+for odd cutoff.
+
+**Two quotient-only operations**
+already give the same conservative
+integer floor:
+
+\[
+x=\left\lfloor
+   \frac{\lfloor A/2^k\rfloor}{N_h}
+  \right\rfloor.
+\]
+
+There is no reason to materialize
+the low-endpoint dyadic remainder
+\(\ell\) or integer remainder
+\(\rho\), even on the rare failed
+certificate path. Compute only
+the upper dyadic quotient
+\(u=\lfloor W/2^k\rfloor\);
+accept if \(u<(x+1)N_l\).
+On failure, construct the upper
+remainder \(\eta=W\bmod2^k\)
+and signed correction
+\(\lfloor(\eta-HD_l)/2^k\rfloor\).
+If fixed-source upper
+obstruction is established,
+test the potential lower-source
+radical crossing using the
+*opposite* upper-root numerator:
+
+\[
+H(R+1)D_h=
+ \begin{cases}
+ qW,&n\text{ even},\\
+ W/q,&n\text{ odd}.
+ \end{cases}
+\]
+
+This is an exact identity of
+the source adjacent denominators
+\(Q',Q'q_n\), not a heuristic
+approximation. The odd quotient
+is divisible exactly by \(q_n\);
+the code rejects an impossible
+nondivisible value. Comparing
+its dyadic quotient against
+\((x+1)N_h\) yields the SAME
+three-sector retry decision
+as COMP5u/v, without recomputing
+the big radical product or
+any lower remainders. The
+true source suffix, signed
+residual, prime-local scale,
+zero-mode, requested decimal
+precision, root guard and
+original P/Q/T producer
+remain separately indexed.
+
+Independent new UNTESTED
+candidate sources:
+`scripts/pi_p0_lazy_lower_sector.hpp`
+and
+`scripts/check_pi_p0_lazy_lower_schedule.cpp`.
+No new analytic Chudnovsky
+identity, Bishop same-real
+formalization, Agda/Lean
+kernel, source-executed GMP
+receipt, or empirical timing/
+memory improvement is claimed.
+The completion and negative
+control gates S26–S32 appear
+in the Paper 9 projective
+residual roadmap; the
+historically measured COMP5j
+programme and external
+performance acceptance
+remain independent.
