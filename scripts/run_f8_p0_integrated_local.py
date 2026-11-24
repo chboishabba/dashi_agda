@@ -33,13 +33,17 @@ CHECKS={
  "same-action-Gauss-local-control":"scripts/check_f8_gauss_action.py",
  "original-native-radial-action-bridge":"scripts/check_f8_p0_native_radial_action_bridge.py",
  "original-native-radial-Gauss-forward":"scripts/check_f8_p0_native_radial_gauss_forward.py",
- "original-native-fixed-domain-t12-action-receivers":"scripts/check_f8_p0_native_fixed_domain_gauss_receiver.py",
+
  "original-compact-FV-independent-source":"scripts/check_f8_p0_compact_fv_source_independent.py",
  "original-radial-sobolev":"scripts/ksw668_f8_radial_sobolev_hierarchy.py",
  "geometry-brane-cones":"scripts/check_f8_xcii_induced_31_cones_sympy.py",
  "geometry-compact-causal-null":"scripts/check_f8_xciii_same_source_cones_and_far_null.py",
  "original-receipt-spatial-temporal":"scripts/check_f8_xci_existing_production_attribution_sympy.py",
  "original-receipt-field-lower-bound":"scripts/check_f8_xcv_far_wall_lower_bound_sympy.py",
+}
+EXTENDED_CHECKS={
+ "original-native-fixed-domain-t12-action-receivers":
+     "scripts/check_f8_p0_native_fixed_domain_gauss_receiver.py",
 }
 REFERENCE_FILES=[
  "Artifacts/ksw668/ads5_f8_LVI_corrected_refinement_compact_20261120.json",
@@ -81,7 +85,7 @@ def check_sources():
                      "expected":sha,"observed":observed}
     return result
 
-def prepare(work,timeout):
+def prepare(work,timeout,extended=False):
     records={"phase":"preflight","source_identity":check_sources(),
              "checks":{},"reference_files":{}}
     for path in REFERENCE_FILES:
@@ -91,17 +95,18 @@ def prepare(work,timeout):
     if not all(x["status"]=="PASS" for x in records["source_identity"].values()):
         records["status"]="FAIL_SOURCE_PROVENANCE"
         return records
-    for label,rel in CHECKS.items():
+    for label,rel in {**CHECKS,**(EXTENDED_CHECKS if extended else {})}.items():
         p=ROOT/rel
         records["checks"][label]=(run_one(label,[sys.executable,str(p)],work,timeout)
                                    if p.is_file() else {"status":"BLOCKED","missing_file":rel})
+    records["extended_receiver_suite"]=("INCLUDED" if extended else "NOT_RUN; opt in with --extended")
     records["status"]=("PASS_PREFLIGHT_ONLY" if
         all(x["status"]=="PASS" for x in records["checks"].values())
         and all(x["status"]=="PASS" for x in records["reference_files"].values())
         else "INCOMPLETE_OR_FAILED_PREFLIGHT")
     return records
 
-def compare(work,timeout,native_dir,full_json,ck_file):
+def compare(work,timeout,native_dir,full_json,ck_file,sidecar=None):
     report={"phase":"compare","source_identity":check_sources(),"checks":{}}
     if not all(x["status"]=="PASS" for x in report["source_identity"].values()):
         report["status"]="FAIL_SOURCE_PROVENANCE"
@@ -112,6 +117,18 @@ def compare(work,timeout,native_dir,full_json,ck_file):
             "native-96-parity",[sys.executable,str(parity),"--work",str(native_dir.resolve())],
             work,timeout)
     else:report["checks"]["four-way-96-signed"]={"status":"BLOCKED","missing_file":str(parity)}
+    if sidecar is not None:
+        if full_json is None or ck_file is None:
+            report["checks"]["same-time-native-state"]={"status":"BLOCKED","reason":"sidecar requires production JSON and checkpoint"}
+        else:
+            consumer=ROOT/"scripts/check_f8_p0_original_same_clock_state.py"
+            report["checks"]["same-time-native-state"]=(run_one(
+                "same-time-mode3-geometry",[
+                sys.executable,str(consumer),
+                "--checkpoint",str(ck_file.resolve()),
+                "--sidecar",str(sidecar.resolve()),
+                "--production-json",str(full_json.resolve())],work,timeout)
+                if consumer.is_file() else {"status":"BLOCKED","missing_file":str(consumer)})
     # Checkpoint forensics are optional independently supplied original
     # terminal files; do NOT pretend the current A0/A1 checkpoints are old FV.
     if bool(full_json)!=bool(ck_file):
@@ -140,14 +157,20 @@ def main():
     p.add_argument("--production-json",type=Path)
     p.add_argument("--checkpoint",type=Path)
     p.add_argument("--max-rounds",type=int,default=64)
+    p.add_argument("--extended",action="store_true",
+                   help="also run full t12 12-case action/Gauss suite; not part of short preflight")
+    p.add_argument("--capture-receiver-state",action="store_true",
+                   help="run transparent receiver-clock mode3 P/M capture; requires fresh work directory")
+    p.add_argument("--sidecar",type=Path,
+                   help="authenticated same-time NPZ for --phase compare")
     args=p.parse_args()
     assert 1<=args.timeout<=90 and 1<=args.max_rounds<=10000
     args.work.mkdir(parents=True,exist_ok=True)
     now=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
     if args.phase=="preflight":
-        result=prepare(args.work,args.timeout)
+        result=prepare(args.work,args.timeout,args.extended)
     elif args.phase=="compare":
-        result=compare(args.work,args.timeout,args.native_dir,args.production_json,args.checkpoint)
+        result=compare(args.work,args.timeout,args.native_dir,args.production_json,args.checkpoint,args.sidecar)
     else:
         source=check_sources()
         result={"phase":"native","source_identity":source,
@@ -155,14 +178,15 @@ def main():
         if all(x["status"]=="PASS" for x in source.values()):
             runner=ROOT/"scripts/run_f8_lxxxvii_native_96_local.sh"
             if runner.is_file():
-                env={**os.environ,"F8_MAX_ROUNDS":str(args.max_rounds)}
+                env={**os.environ,"F8_MAX_ROUNDS":str(args.max_rounds),"F8_CAPTURE_RECEIVER_STATE":"1" if args.capture_receiver_state else "0"}
                 log=args.work/"native-cooperative.log"
                 with log.open("w") as out:
                     try:
                         proc=subprocess.run(["bash",str(runner),str(args.native_dir.resolve())],
                                             cwd=ROOT,env=env,stdout=out,
                                             stderr=subprocess.STDOUT)
-                        result["status"]="NATIVE_RECEIPT_PARITY_PASS_ONLY" if proc.returncode==0 else "NATIVE_INCOMPLETE_OR_FAIL"
+                        result["status"]=("NATIVE_CAPTURED_96_PASS_ONLY" if args.capture_receiver_state else "NATIVE_RECEIPT_PARITY_PASS_ONLY") if proc.returncode==0 else "NATIVE_INCOMPLETE_OR_FAIL"
+                        result["receiver_clock_sidecars"]=("REQUIRED_ALL_FOUR" if args.capture_receiver_state else "NOT_RUN")
                         result["exit_code"]=proc.returncode
                     except OSError as e:
                         result["status"]="NATIVE_BLOCKED"
@@ -177,5 +201,5 @@ def main():
     print(json.dumps({"ledger":str(report),"status":result["status"]},indent=2))
     # Intentionally nonzero unless a scoped phase truly passed.
     return 0 if result["status"] in ("PASS_PREFLIGHT_ONLY",
-              "PASS_RECEIPT_PARITY_ONLY","NATIVE_RECEIPT_PARITY_PASS_ONLY") else 2
+              "PASS_RECEIPT_PARITY_ONLY","NATIVE_RECEIPT_PARITY_PASS_ONLY","NATIVE_CAPTURED_96_PASS_ONLY") else 2
 if __name__=="__main__":raise SystemExit(main())
