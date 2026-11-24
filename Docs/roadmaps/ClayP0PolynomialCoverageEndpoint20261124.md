@@ -1658,3 +1658,121 @@ assert count==800
 | N6 | originalClayTransport | existing conditional #1040, #1129 coverage |
 
 Highest alpha: rather than attempting another unnegated CLIQUE projection into a sandwich (G36 rules it out even with small-support preprocessing), inspect genuinely global monotone reductions or direct lower-bound methods on the original balanced hard slice. In parallel, audit the reported 2026 #SAT algorithm's actual paid operations (including any field/rank/tensor work) as a necessary shortcut control and potential source of a different uniform-time endpoint. Do not infer lower bounds from ETH or from restricted proof-search complexity. No assertion of P!=NP or extra mandatory kernel phase.
+
+
+## 20. P0-G38–G41 — canonical central slice, exponential formal arithmetic bound and the exact squarefree-trace gap (2026-11-24)
+
+Controlling endpoint remains literal Clay P vs NP, P0-C/D. Inputs: attached Langlands R50–R53 (reported #1549/#120 heads d52220233312 / afa8a6d16ac7) and P0 G33–G37. No new Langlands/Monster work. Both P0 roadmaps read at d0d7d2187306 / 48f329a5b3ae, common blob 59fae07307670ad14bada57b7eb6c8cd6cd17ee3. Existing producers: G13 original clause scopes, G14 parity degree, G16/G17 width-two median/reachability, G22/G30 monotone CLIQUE, G26/G32 dual rails and slices, G31 padding, G33 signed contraction, G36 projection no-go, #1291 joint residuals, #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 sharing, #1129 standard machine coverage, #1040 terminal, #1474/#1502 original reductions, #607/#678 Aristotle. Classical arithmetic balanced-decomposition method attribution: Schnorr/Hyafil/Valiant and the exposition https://web.vu.lt/mif/s.jukna/boolean/minkowski.html ; see also Cavalar–Kumar–Rossman https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/ (monotone decomposition). Distinguish formal polynomial computation, counting on Boolean inputs, and decision; Jukna, Lower Bounds for Monotone Counting Circuits, https://arxiv.org/abs/1502.01865 ; Notes on Boolean Read-k and Multilinear Circuits, https://arxiv.org/abs/2207.08701. The source-specific bounds below are derived, not a claim of literature novelty or native kernel certification.
+
+### G38 — canonical central-slice transport with slack budget
+
+For q active variables take m=4(q+1), d=m-q dummies forced zero by singleton scopes, K=N_m/2 (N_m even). For every non-pure-active scope permit exactly patterns with dummy bits zero. Write B for number of fixed 1 coordinates outside pure-active scopes. Their contribution is at most half the number of those coordinates, because each such scope has >=1 dummy. The deficit from half is at least binom(d,2)+3 binom(d,3) from dummy-only pair/triple scopes; this is >=N_q/2=q+2 binom(q,2)+4 binom(q,3) (d>=3q+4; pair term >=q^2, triples contain at least two disjoint q-subsets). Hence B+N_q<=K. There are N_m-N_q-B-d inactive outside-active coordinates excluding the d forbidden singleton patterns, which must remain zero. Since K<=N_m-d, there are enough slack coordinates for N_q complements and K-(B+N_q) further ones. Assign one separate slack coordinate 1-t_j to every active input t_j, and the remaining constants to reach K. All original witnesses extend uniquely by dummy zero, no new witness is introduced, and output weight is K. Thus exact witness-count-preserving general projection (not monotone). G32's Berkowitz–Valiant slice simulation plus this explicit polynomial padding yields equivalence of polynomial general circuit families for G_q and polynomial monotone circuit families for the single canonical central sandwich S_m. Uniform P endpoint additionally requires efficient uniform construction. No assumption that arbitrary monotone projection can implement this: G36 forbids the proposed CLIQUE route.
+
+### G39 — direct exponential nonnegative arithmetic lower bound on source witness polynomial
+
+For w=2 or 3 use all scopes I of 1..w variables. b_w(m)=sum binom(m,j), N_w(m)=sum 2^j binom(m,j). Let
+    W_m(t)=sum_x prod_I t_(I,x|I).
+This is a homogeneous multilinear formal polynomial of degree b=b_w(m), with 2^m distinct monomials. More generally allow any nonempty subset X of its monomials, with arbitrary strictly positive coefficients. Claim for m>=3: every bounded-fanin nonnegative (+,times) arithmetic DAG for such a formal polynomial has size at least |X|*2^(-(m-r0)), where r0=min{r:b_w(r)>=b_w(m)/3}. In particular W_m requires >=2^r0>=2^(m/3) gates, hence exp(Omega(N_w(m)^(1/w))). Constants arbitrary nonnegative; zero/dead gates discarded.
+
+Proof: use the classical balanced-product decomposition. For completeness, in a live monotone circuit for a homogeneous multilinear output, every gate is homogeneous/multilinear because any gate monomial can be extended by a fixed nonzero context monomial along a live path to the output; no cancellation. For each output monomial choose a parse tree, descend through plus gates and the larger-degree child of products until first degree <=2b/3; the selected gate has degree >=b/3 (unless at root, which has degree b). For each such gate g, collect all context monomials from parse trees with a distinguished occurrence of g. Replacing that occurrence by any monomial of g still yields an output monomial. Thus the products of the gate polynomial A_g with a nonnegative context polynomial B_g have support contained in output and together cover output; at most one product per gate. This does not unroll or charge the original DAG per parse tree. A,B have complementary degrees in [b/3,2b/3].
+
+In any nonzero balanced product AB supported within W, fixing a monomial of B forces every monomial of A to choose exactly one pattern from the same complementary set of scopes; similarly for B. Write the resulting partition of scopes as S_A,S_B, and U,V for their unions of original assignment variables. If there is i in U minus V and j in V minus U, the pair scope {i,j} cannot belong to either side, contradiction. Thus U=[m] or V=[m]. Each side has >=b/3 scopes, so each union has size >=r0. For any shared coordinate i in U intersect V, all monomials of A and B must agree on its value: all cross products are valid assignment monomials. Thus all product monomials have fixed bits on at least r0 original coordinates. At most 2^(m-r0) distinct assignment monomials per product. Covering |X| proves the bound. Finally b_w(r)<=r b_w(m)/m by binomial ratios, so r0>=m/3. This is a direct same-object geometric resource lower bound for formal nonnegative arithmetic with arbitrary sharing, stronger in its own model than counting expanded terms. It holds for width two as well; that fact is a mandatory shortcut control. It is NOT an unrestricted circuit lower bound or an assertion about arbitrary arithmetic circuits with subtraction, or about all circuits counting on Boolean inputs (powers can collapse on the Boolean cube).
+
+### G40 — lift the formal arithmetic bound to the actual central exterior polynomial
+
+For w=3 define the homogeneous polynomial
+    W_K(t)=sum_{L subset [N_m], |L|=K} W_m(1_L) prod_{j in L} t_j,
+and F_K=W_K+e_(K+1)(t), where e_j is the elementary symmetric polynomial. This is exactly the attachment R51/R52 exterior multiplicity on Boolean inputs; F_K support equals S_m. On Boolean t, W_K(t)=W_m(t)*binom(|t|-b_m,K-b_m), interpreted zero if |t|<b_m. The formal polynomial is not merely the Boolean support.
+
+Suppose a nonnegative arithmetic circuit of size s computes F_K (or W_K) formally. Homogeneous degree-K extraction retains W_K with polynomial overhead O(s*(K+1)^2): track each gate's homogeneous components up to K, addition componentwise and multiplication by truncated convolution. Set all nonactive selector coordinates to 1 except forbidden dummy singleton patterns (zero); leave pure-active q-variable inputs as indeterminates. Denote T=N_m-N_q-d the number of available nonactive coordinates. Extract the homogeneous degree-b_q part in the active variables, again by truncated convolution. Every surviving W_K monomial has a witness with all dummies zero. At active degree b_q it contains precisely one original minterm P_x, since the witness forces all b_q coordinates and there are no extra active coordinates. Every original x contributes exactly binom(T-(b_m-b_q),K-b_m) choices of additional outside-active coordinates, the same positive integer lambda for every x. This is because the remaining b_m-b_q padded witness coordinates are fixed, and the extra K-b_m may be chosen anywhere among the remaining available outside-active coordinates. K>=b_m and T+b_q>=K (follows from the G38 slack budget; its balanced padding gives a central input extending each original minterm). Hence the extracted polynomial is lambda W_q. G39 gives s*poly(N_m)>=2^(q/3); m=4(q+1), so s>=exp(Omega(N_m^(1/3))) on this padded subsequence. This directly bounds the formal nonnegative exterior multiplicity computation, without charging its representation dimension or assuming #P!=FP. It does not give a lower bound for Boolean support, or for an arithmetic algorithm whose output only agrees with F_K on Boolean inputs but uses nonmultilinear powers or cancellation.
+
+### G41 — exact Boolean trace obstruction, including arbitrary shared DAGs
+
+Let C be an arbitrary monotone AND/OR circuit computing S_m with size s. Replace AND by formal multiplication, OR by formal addition, Boolean constants by 0,1. The resulting nonnegative polynomial P_C agrees in SUPPORT on total Boolean inputs; it need not equal F_K or be multilinear. Every monomial's support is an accepting input (set its variables 1), hence has cardinality >=K. Therefore the degree-K homogeneous part is squarefree, and each of its monomials corresponds to a true central input. Conversely a true central input t appears in that degree-K part iff C has some accepting formal parse monomial of degree K, equivalently a trace that uses each of the K coordinates exactly once. It is legal for an arbitrary monotone circuit to lack such a trace.
+
+Perform the same degree-K extraction, outside-active restriction and degree-b_q extraction as G40. The result has nonnegative coefficients, and support a subset X of W_q's monomials. Indeed every degree-K surviving monomial is a true central input, with dummy singleton constraints forcing dummies zero; at active degree b_q its active support must be exactly a minterm. Conversely every central true input with active support exactly P_x, dummies forced by singleton restrictions, and a squarefree accepting trace contributes that original monomial. In particular this applies to the canonical padding E(P_x) from G38. G39's subset bound yields
+
+    |X| / 2^q <= poly(N_m)*(s+1) * 2^(-r0(q)).
+
+This also holds if X is empty. Thus if central sandwich circuits have polynomial size, all but an exp(-Omega(q)) fraction of original assignments x have NO squarefree accepting trace at their padded minterm, in fact at ANY central completion of P_x respecting the dummy singleton zeros. This is a necessary property of hypothetical small circuits, not a contradiction. Conversely any family of correct central-sandwich monotone circuits in which a non-negligible exp(-o(q)) fraction of original padded minterms has a squarefree trace must have exponential size. Syntactically multilinear monotone circuits (disjoint variable supports at every AND) meet the trace requirement automatically; indeed the more general read-1 property on just these padded positives suffices. This bound is on actual central slice, not a transfer of the ordinary CLIQUE bound through the forbidden projection G36.
+
+Decisive width-two control: all proofs G38–G41 apply with w=2 (K>=b, same dummy pair deficit >=q^2=N_q/2, central padding valid); the G39 formal polynomial is exponentially hard in q, yet G17's monotone reachability decision and the cheap sandwich gate wrapper give polynomial-size monotone circuits for width-two central sandwich. Therefore these small circuits necessarily bypass formal squarefree arithmetic traces on almost every padded minterm. One cannot infer a universal cheap trace-preserving normalization, even for a tractable SAT subclass. Absorption and multiplicative idempotence on Boolean inputs are essential legal shortcuts. G39/G40 do not prove that exact counting or recovering the attachment's #P-hard coefficient is necessary for decision; they directly separate the specified positive formal arithmetic resource model from Boolean support, and G41 states precisely what remains missing. Repeated variable use alone cannot be charged to time (e.g. x AND x=x, shared repeated squaring in formal arithmetic). No claim that width-three circuits have more unavoidable repeat work than width-two.
+
+### Executed local regression (exact Python integers, no CI/kernel)
+
+Executed 14,246 balanced scope partitions (width 2/3, m=2..4, including every balanced partition), checking one union covers all m, shared-coordinate lower bound, and exact fibre cardinalities. Executed 436 central-padding instances for q=1..5 (all 260 small original inputs, 40 seeded plus all minterms for each q=3..5), checking weight, dummy singleton zeros and complete witness-set equivalence. Independently enumerated all 70 K-subsets in the small m=2,q=1 central formal lift; extracted coefficients equal 3 times W_1. No actual general circuit synthesis or unrestricted asymptotic numerical extrapolation claimed. Reproducer:
+
+```python
+from itertools import combinations
+from math import comb
+from collections import defaultdict
+from random import Random
+def scopes(m,w=3):return [I for j in range(1,min(w,m)+1) for I in combinations(range(m),j)]
+def pattern(x,I):return sum(((x>>i)&1)<<j for j,i in enumerate(I))
+def b(m,w=3):return len(scopes(m,w))
+checks=0
+for w in (2,3):
+ for m in range(2,5):
+  S=scopes(m,w);B=len(S);allv=set(range(m))
+  for z in range(1<<B):
+   d=z.bit_count()
+   if 3*d<B or 3*d>2*B:continue
+   A=set().union(*(set(I) for i,I in enumerate(S) if z>>i&1))
+   C=set().union(*(set(I) for i,I in enumerate(S) if not(z>>i&1)))
+   R=A&C
+   assert A==allv or C==allv
+   assert 3*len(R)>=m
+   f=defaultdict(int)
+   for x in range(1<<m):f[pattern(x,sorted(R))]+=1
+   assert len(f)==1<<len(R) and set(f.values())=={1<<(m-len(R))}
+   checks+=1
+assert checks==14246
+rng=Random(369);count=0
+for q in range(1,6):
+ m=4*(q+1);S=scopes(q)
+ C=[(I,p) for I in S for p in range(1<<len(I))];ix={c:i for i,c in enumerate(C)}
+ L=[(I,p) for I in scopes(m) for p in range(1<<len(I))];J={c:i for i,c in enumerate(L)}
+ B=0;slack=[]
+ for j,(I,p) in enumerate(L):
+  if I[-1]<q:continue
+  if all(not(p>>k&1) for k,i in enumerate(I) if i>=q):B|=1<<j
+  elif len(I)>1:slack.append(j)
+ K=len(L)//2;n=len(C);e=K-B.bit_count()-n
+ assert 0<=e<=len(slack)-n
+ const=B|sum(1<<j for j in slack[n:n+e])
+ P=[sum(1<<ix[I,pattern(x,I)] for I in S) for x in range(1<<q)]
+ P2=[sum(1<<J[I,pattern(x,I)] for I in scopes(m)) for x in range(1<<q)]
+ inputs=range(1<<n) if q<=2 else [rng.getrandbits(n) for _ in range(40)]+P
+ for t in inputs:
+  u=const|sum(1<<(J[c] if t>>i&1 else slack[i]) for i,c in enumerate(C))
+  assert u.bit_count()==K and all(not(u>>J[((i,),1)]&1) for i in range(q,m))
+  assert [x for x,p in enumerate(P) if t&p==p]==[x for x,p in enumerate(P2) if u&p==p]
+  count+=1
+assert count==436
+q=1;m=2;L=[(I,p) for I in scopes(m) for p in range(1<<len(I))]
+K=len(L)//2;bq=b(q);bm=b(m);ix={c:i for i,c in enumerate(L)}
+P=[sum(1<<ix[I,pattern(x,I)] for I in scopes(m)) for x in range(1<<m)]
+active=sum(1<<i for i,(I,p) in enumerate(L) if I[-1]<q)
+forbidden=1<<ix[((1,),1)];coef=defaultdict(int);checked=0
+for S in combinations(range(len(L)),K):
+ z=sum(1<<i for i in S);w=sum(z&p==p for p in P)
+ if not(z&forbidden) and (z&active).bit_count()==bq and w:coef[z&active]+=w
+ checked+=1
+T=len(L)-active.bit_count()-1;kappa=comb(T-(bm-bq),K-bm)
+assert checked==70 and kappa==3
+assert dict(coef)=={1<<ix[((0,),p)]:kappa for p in (0,1)}
+```
+
+### Consolidated endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G38 | canonicalCentralSliceWitnessProjection | derived and checked, R50/G32, Berkowitz–Valiant |
+| G39 | balancedScopeProductCoverBound / witnessFormalArithmeticExponential | derived and checked geometric lemmas; arbitrary nonnegative arithmetic DAG |
+| G40 | centralMultiplicityFormalArithmeticLowerBound | derived via positive homogeneous extraction; R51/R52 |
+| G41 | centralSquarefreeTraceFractionBound / widthTwoTraceShortcut | derived; restricted central sandwich lower bound and decisive cheap-width-two control |
+| N4/G12a | unrestrictedSerialCharge | OPEN: genuine width-three-specific resource obstruction, permit arbitrary Boolean idempotence/absorption and signed arithmetic |
+| N5/G12c | canonicalCentralSliceUnrestrictedSuperpoly | OPEN; G38 equivalence stronger nonuniform route |
+| N6 | originalClayTransport | conditional #1040 terminal / #1129 costed coverage; direct uniform N4/N5 stays OR |
+
+Highest-alpha Aristotle BIDI: do not try to lift G39 by generic arithmetic normalization: G41's tractable width-two control explicitly rules that out. The central-slice problem is whether width-three-specific correlations make the unrestricted repeated-variable/absorption shortcuts expensive in total work, not whether an exponential formal polynomial or #P-hard coefficient exists. Investigate Boolean product-support overlap at a balanced scope cut (which can duplicate shared scope coordinates and permit supersets on upper weight layers) and require a charge that accounts for those overlaps without ruling out G17 reachability. Keep direct uniform-machine route and the G37 reported subexponential algorithm audit alive; no assumption of ETH or a new certification prerequisite. No unrestricted separation claimed.
