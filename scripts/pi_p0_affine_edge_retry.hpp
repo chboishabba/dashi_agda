@@ -78,24 +78,15 @@ inline bool signedConeAdmissible(const Edge& edge){
 // Output-oriented views: for even n, S_n is lower; for odd n, S_n+1.
 // The next denominator is derived from Q_n and the original q_n source.
 struct OrderedEndpoints {
- const Z *lowerNum=nullptr,*lowerDen=nullptr;
- const Z *upperNum=nullptr,*upperDen=nullptr;
  Z nextDen=0;
+ const Z& lowerNum(const Edge& e)const{return (e.n&1u)?e.v:e.t;}
+ const Z& lowerDen(const Edge& e)const{return (e.n&1u)?nextDen:e.q;}
+ const Z& upperNum(const Edge& e)const{return (e.n&1u)?e.t:e.v;}
+ const Z& upperDen(const Edge& e)const{return (e.n&1u)?e.q:nextDen;}
 };
 inline OrderedEndpoints viewEndpoints(const Edge& edge){
  if(!signedConeAdmissible(edge))throw std::invalid_argument("bad source edge");
- OrderedEndpoints x;
- x.nextDen=edge.q*nextQ(edge.n);
- if((edge.n&1u)==0){
-   x.lowerNum=&edge.t;x.lowerDen=&edge.q;
-   x.upperNum=&edge.v;x.upperDen=&x.nextDen;
- }else{
-   x.lowerNum=&edge.v;x.lowerDen=&x.nextDen;
-   x.upperNum=&edge.t;x.upperDen=&edge.q;
- }
- // NOTE: addresses of nextDen inside a movable value are NOT stable
- // across return-by-value; callers must bind denominators after return.
- return x;
+ return {edge.q*nextQ(edge.n)};
 }
 
 // Source-typed continuation classifier for current lower integer x.
