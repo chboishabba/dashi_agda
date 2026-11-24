@@ -23,6 +23,13 @@ check_blob scripts/ksw668_f8_fv_source_flux.py dec4e79e3a4899952a5deceb786324bc0
 check_blob scripts/ksw668_f8_weak_source.py 69f35c6569667034214035d810dee06251a6d2ad
 check_blob scripts/ksw668_f8_ssprk_checkpoint.py 2ef1bfbd4df98c29168a8f8b626efbecb71cdf99
 check_blob scripts/run_f8_lxix_native_source_matrix.py 94e6303eab04823ab7f39244d21a32c98a300a07
+driver="scripts/run_f8_lxix_native_source_matrix.py"
+if [[ "${F8_CAPTURE_RECEIVER_STATE:-0}" == "1" ]]; then
+    driver="scripts/run_f8_p0_native_receiver_state_capture.py"
+    [[ -f "$driver" && -f scripts/check_f8_p0_original_same_clock_state.py ]] || {
+        echo "Missing same-clock F8 capture or diagnostic module" >&2; exit 2;
+    }
+fi
 mkdir -p "$work"
 for label in A0 A1 C0 C1; do
     finished=0
@@ -30,13 +37,23 @@ for label in A0 A1 C0 C1; do
         echo "[$label] local 90s guard round=$round budget=$budget" >&2
         set +e
         OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=2 timeout --signal=TERM --kill-after=3s 90s \
-            python -u scripts/run_f8_lxix_native_source_matrix.py "$label" \
+            python -u "$driver" "$label" \
               --work "$work" --budget "$budget" \
               > "$work/$label.round$round.log" 2>&1
         status=$?
         set -e
         if [[ $status -eq 0 ]]; then
             test -s "$work/$label.json" || { echo "missing $label JSON" >&2; exit 1; }
+            if [[ "${F8_CAPTURE_RECEIVER_STATE:-0}" == "1" ]]; then
+                test -s "$work/$label.receiver-state.npz" || {
+                    echo "Missing authentic receiver-time same-state sidecar $label" >&2; exit 2;
+                }
+                python -u scripts/check_f8_p0_original_same_clock_state.py \
+                  --checkpoint "$work/$label.npz" \
+                  --sidecar "$work/$label.receiver-state.npz" \
+                  --production-json "$work/$label.json" \
+                  > "$work/$label.same-clock-geometry.json"
+            fi
             echo "[$label] native production exit=0 JSON ready" >&2
             finished=1
             break
