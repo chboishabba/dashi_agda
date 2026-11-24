@@ -26,6 +26,27 @@ def cubic(r,dr,nr):
                       -(q+1)*q*(q-2)/2,(q+1)*q*(q-1)/6])
     return indices,weights
 
+def signed_normal_fibre(U,P,M,dy,v,A):
+    """Exact algebraic chart; signed arrays, not an imposed boundary solution."""
+    if not (np.isfinite(dy) and dy>0 and np.isfinite(v) and abs(v)<1):
+        raise ValueError('invalid timelike geometry')
+    W=((1+v)*P+(1-v)*M)/2
+    N=(P-M)/2
+    D=np.empty_like(U)
+    D[:,0,:]=(U[:,1,:]-U[:,0,:])/dy
+    D[:,-1,:]=(U[:,-1,:]-U[:,-2,:])/dy
+    D[:,1:-1,:]=(U[:,2:,:]-U[:,:-2,:])/(2*dy)
+    Q=N-D
+    G=((1+v)*P[:,0,:]+(v-1)*M[:,0,:])/2
+    I=G-A
+    K=v*W[:,0,:]+(1-v*v)*D[:,0,:]-A
+    defect=I-(1-v*v)*Q[:,0,:]-K
+    # Scale by the operands, not the (possibly cancelling) residual.
+    scale=1+abs(G)+abs(A)+abs(W[:,0,:])+abs(N[:,0,:])+abs(D[:,0,:])
+    if not np.all(np.isfinite(defect)) or np.max(abs(defect)/scale)>1e-12:
+        raise ValueError('signed Israel/kinematic compatibility failed')
+    return W,N,Q,G,I,K,defect
+
 def diagnose(U,P,M,Ut,source,dr,dy,b,v,amp):
     if U.ndim!=3 or U.shape!=P.shape or U.shape!=M.shape or U.shape!=Ut.shape:
         raise ValueError('nonidentical original 3D stage arrays')
@@ -35,19 +56,22 @@ def diagnose(U,P,M,Ut,source,dr,dy,b,v,amp):
     if not all(np.isfinite(x).all() for x in (U,P,M,Ut,source)):
         raise ValueError('nonfinite original state')
     # Mode3 has Dirichlet radial endpoint: stage(U) sets U_T=0 there.
-    W=((1+v)*P+(1-v)*M)/2
+    W,N,Q,G,I,K,defect=signed_normal_fibre(U,P,M,dy,v,amp*source)
     assert np.allclose(Ut[:,:,:-1],W[:,:,:-1],rtol=1e-12,atol=2e-13)
-    Q=np.empty_like(U)
-    Q[:,0,:]=(P[:,0,:]-M[:,0,:])/2-(U[:,1,:]-U[:,0,:])/dy
-    Q[:,-1,:]=(P[:,-1,:]-M[:,-1,:])/2-(U[:,-1,:]-U[:,-2,:])/dy
-    Q[:,1:-1,:]=(P[:,1:-1,:]-M[:,1:-1,:])/2-(U[:,2:,:]-U[:,:-2,:])/(2*dy)
-    G=((1+v)*P[:,0,:]+(v-1)*M[:,0,:])/2
     source_boundary=amp*source
     V=np.stack([(((np.arange(nr)+.5)*dr)**d-
                   ((np.maximum(np.arange(nr)-.5,0))*dr)**d)/d for d in (3,7,11)])
     def weighted(x):
         return float(np.sqrt(np.sum(V*x*x)))
-    return dict(Q_wall_weighted_l2=weighted(Q[:,0,:]),
+    return dict(signed_normal_inverse_coefficient=1/(1-v*v),
+                signed_characteristic_inverse_max_abs=float(max(np.max(abs(P-W-(1-v)*N)),np.max(abs(M-W+(1+v)*N)))),
+                signed_compatibility_max_abs=float(np.max(abs(defect))),
+                signed_compatibility_weighted_l2=weighted(defect),
+                israel_kinematic_obstruction_weighted_l2=weighted(K),
+                # Original unweighted mode3 SAT derivative of Q, not a time integral.
+                mode3_Qdot_wall_weighted_l2=weighted(-2*I/dy),
+                mode3_Qdot_upper_weighted_l2=weighted(-(1+v)*P[:,-1,:]/dy),
+                Q_wall_weighted_l2=weighted(Q[:,0,:]),
                 Q_upper_weighted_l2=weighted(Q[:,-1,:]),
                 Q_full_max_abs=float(np.max(np.abs(Q[:,:,:-1]))),
                 israel_residual_weighted_l2=weighted(G-source_boundary),
@@ -99,6 +123,7 @@ def read(ckpath,sidepath,prodpath):
     if not math.isclose(v,-1/math.sqrt(1+receipt['receiver_t']**2),abs_tol=1e-12):
         raise ValueError('moving brane velocity mismatch')
     diag=diagnose(U,P,M,Ut,source,dr,dy,b,v,amp)
+    W,N,Q,G,I,K,defect=signed_normal_fibre(U,P,M,dy,v,amp*source)
     outputs={}
     for place,r,key in (('near',receipt['nominal_receiver_r'],'raw_mode_values'),
                         ('far',receipt['far_receiver_grid_r'],'far_mode_values')):
@@ -113,7 +138,15 @@ def read(ckpath,sidepath,prodpath):
         Gr=np.array([(r/receipt['eps'])**ell*(w@
                ((1+v)*P[i,0,ids]+(v-1)*M[i,0,ids])/2)
                for i,ell in enumerate(ELL)])
+        def observe(field):
+            return np.array([(r/receipt['eps'])**ell*(w@field[i,ids]) for i,ell in enumerate(ELL)])
+        Ir=observe(I); Kr=observe(K); Nr=observe(N[:,0,:]); Wr=observe(W[:,0,:])
         outputs[place]=dict(r=r,original_stencil=ids.tolist(),mode_H=H.tolist(),
+                            mode_normal=Nr.tolist(),mode_tangent=Wr.tolist(),
+                            mode_israel_residual=Ir.tolist(),mode_compatibility_obstruction=Kr.tolist(),
+                            mode3_Qdot_wall=(-2*Ir/dy).tolist(),
+                            signed_israel_residual=float(np.sum(Ir)),
+                            signed_compatibility_obstruction=float(np.sum(Kr)),
                             mode_Q_wall=Qr.tolist(),mode_G_wall=Gr.tolist(),
                             signed_H=float(np.sum(H)),
                             signed_Q_wall=float(np.sum(Qr)),
