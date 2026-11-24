@@ -233,3 +233,191 @@ serialization. Only then add candidates to the performance
 default/Pareto runner or promote a faster path. The
 original Bishop same-real proof and analytic-source authority
 remain distinct OPEN obligations.
+
+
+## 24 November — COMP5m/n: output-aligned radical and width-directed ordered evaluation
+
+User instruction remains **defer testing**. Code, mathematical source
+derivations, PR reconciliation and GitHub byte readbacks only.
+No new timing, performance, integer oracle, compilation, CI,
+formal kernel or numerical acceptance evidence is claimed.
+
+### G4 / COMP5m — directly output-aligned integer radical
+
+New **UNTESTED** source:
+\`scripts/check_pi_p0_output_aligned_root.cpp\` (derived from
+COMP5k so odd/even signed-tail ordering survives unchanged).
+
+Let \(\alpha_d=426880\,10^d\sqrt{10005}>0\). For a *separate*
+adjustable guard-bit index \(g\ge 0\), define
+
+\[
+H_{d,g}=\left\lfloor 2^g\alpha_d\right\rfloor,\qquad
+H_{d,g}^2\le
+10005\,(426880\,10^d)^2\,2^{2g}<(H_{d,g}+1)^2 .
+\]
+
+The second strict inequality holds simply from
+\(\lfloor\sqrt N\rfloor=H\); it does not require an unverified
+numerical sqrt approximation.
+
+After the original signed-tail ordering, write both positive
+source-adjacent series endpoints as
+
+\[
+0<S_{\mathrm{lo}}=\frac{N_\mathrm{lo}}{D_\mathrm{lo}}
+\le S=\frac{13\,591\,409+\cdots}{1}
+\le S_{\mathrm{hi}}=\frac{N_\mathrm{hi}}{D_\mathrm{hi}} .
+\]
+
+The middle \(S\) is the ORIGINAL infinite Chudnovsky series;
+the displayed heuristic numerator in this abstract line is
+not a separate normalization or a derivation. The valid
+analytic tail enclosure is still an EXTERNAL premise.
+The exact output-scaled π interval is
+
+\[
+\frac{H_{d,g}D_\mathrm{hi}}{2^g N_\mathrm{hi}}
+\le 10^d\pi <
+\frac{(H_{d,g}+1)D_\mathrm{lo}}{2^g N_\mathrm{lo}}.
+\]
+
+Compute \(x=\lfloor H_{d,g}D_\mathrm{hi}/
+(2^g N_\mathrm{hi})\rfloor\). The exact admission condition is
+
+\[
+(H_{d,g}+1)D_\mathrm{lo}
+<(x+1)\,2^g N_\mathrm{lo},
+\]
+equivalently (for nonnegative integers),
+\[
+\left\lfloor
+ \frac{(H_{d,g}+1)D_\mathrm{lo}}{2^g}
+\right\rfloor
+<(x+1)N_\mathrm{lo}.
+\]
+
+No multiplication of separately approximated \(\sqrt{10005}\)
+with the \(5^d\) decimal factor is needed *after* the square
+root. The radical producer instead computes the large
+integer radicand by a \(d\)-digit prefactor square
+and a constant multiplication, with a GMP in-place
+multiplication sequence and immediate scope release.
+This **may be slower or use more peak memory** than a cheap
+bit-shifted radicand followed by \(5^d\) multiplication.
+The root guard \(g\) starts at 64 and increases if the
+strict certificate is inconclusive; the series cutoff
+\(n\) also increases. Two monotone positive enclosures are
+refined rather than relying on a one-unit output interval.
+
+**Important source equivalence boundary:** the COMP5m
+finite interval is a *different outward enclosure* of the
+same \(10^d\pi\) target than COMP5j's dyadically scaled
+\(\sqrt{10005}\) interval; the two finite endpoints need
+NOT be equal. A successful certificate proves the SAME
+integer output consumer, conditional on the original
+Chudnovsky identity and alternating-series tail. No
+stronger equality of the full observation fibres is claimed.
+If the π floor is ambiguous, the algorithm must NOT
+accept, and it must refine guard/series indices.
+The code has explicit unsigned-index and mp_bitcnt_t
+overflow fail-closed checks, but all runtime and general
+termination/resource properties require later acceptance.
+
+### G5 / COMP5n — width-informed evaluation of *the same* matrix product
+
+New **UNTESTED** source:
+\`scripts/check_pi_p0_width_scheduled_pqt.cpp\` (derived from
+the COMP5j production-performance candidate, with the same
+finite sqrt and same signed/unsigned boundary as that owner).
+
+For any original interval \([a,b)\), \(q_0=1\) and for
+\(j\ge1\), \(q_j=640320^3j^3\). Therefore for
+\(u=\max(a,1)\), \(b>u\), the exact logarithmic Q-width is
+
+\[
+\log_2 Q(a,b)
+=3(b-u)\log_2 640320
++3\log_2\left(\frac{(b-1)!}{(u-1)!}\right).
+\]
+
+The C++ schedule estimates this using
+\(\lgamma(b)-\lgamma(u)\), including finite floating
+approximation; **only the choice of subtree evaluation order**
+depends on it. It evaluates the child with the larger
+estimated Q-width first, then retains that child while
+computing the smaller child. At the merge it ALWAYS
+computes the source-ordered
+
+\[
+  M(a,m)\,M(m,b),\quad
+  (P,Q,T)=(P_LP_R,\;Q_LQ_R,\;
+             T_LQ_R+P_LT_R).
+\]
+
+So no leaf permutations, parenthesized algebra changes,
+reversed matrix multiplication, source-provenance loss or
+change to the consumer are proposed. Only the *execution
+path* through the source carrier is altered.
+The upper-triangular matrix product is generally
+noncommutative: \(M_RM_L\neq M_LM_R\).
+This candidate uses a simple Q-width proxy, NOT a
+proven optimal Sethi–Ullman schedule. Predicted Q-width
+alone does not model actual scratch, live GMP heap,
+source T-growth, CPU overhead or hardware cache.
+It could increase latency or memory.
+
+For a genuine peak-memory optimality claim one would
+need an exact cost model for subtree output storage and
+unretained execution peaks. If child A has output
+residency \(s_A\), intrinsic execution peak \(p_A\), and
+B has \(s_B,p_B\), then ignoring shared merge scratch:
+
+\[
+\begin{aligned}
+\operatorname{peak}(A\!\to\!B)
+ &=\max(p_A,\;s_A+p_B),\\
+\operatorname{peak}(B\!\to\!A)
+ &=\max(p_B,\;s_B+p_A).
+\end{aligned}
+\]
+
+The full merge adds a peak common to either child
+evaluation order. The current width-only scheduling
+does not certify that \(s_i,p_i\) are accurately bounded
+or that its choice minimizes these expressions.
+This gives a more principled *future* DP/Pareto gate
+than deciding from precision alone.
+
+### Producer–consumer boundaries, status and next maximum cut
+
+- G4 uses original exact \(\operatorname{isqrt}\) on a
+  new output-aligned radicand; G5 only changes the
+  original ordered product's execution path.
+- Both retain P, Q, T leaf signs, zero/residual and
+  original marked analytic-source conditions. The
+  indexed guard \(g\) and split indices \([a,m),[m,b)\)
+  remain distinct: changing an output precision guard
+  is NOT the same as changing series terms or
+  reparenthesizing P/Q/T.
+- The current six-variant GMP Pareto runner is unchanged;
+  COMP5k/l/m/n are independent research files and
+  have no new verified output/performance receipts.
+- Original owners: Paper 9 §10, original #1529,
+  source-preserving GMP #1546, consumer-indexed
+  FibreProgramComplexityExact, recoverable quotients and
+  residency constraints. Newer #1550 provides a
+  useful reminder of all-future consumer adequacy but
+  does NOT prove any π theorem.
+- When testing deferral is lifted: compare output
+  enclosures **against the same π target**, not require
+  equal finite source intervals; verify both source
+  parities, strict lower/upper inequalities and guards;
+  profile radicand multiplication, sqrt width, retained
+  limbs and peak RSS separately; distinguish
+  width-prediction cost from any memory reduction; run
+  genuine exact-source acceptance and independently
+  certified external SOTA comparison only on request.
+- Current mathematical endpoints still open:
+  the Bishop same-real analytic source certificate
+  and a formal kernel-level execution/cost theorem.
