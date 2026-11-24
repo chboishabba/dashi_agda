@@ -148,7 +148,32 @@ def main():
     if a.cover is not None:
         cover=json.loads(a.cover.read_text())
         c=MM(cover["canonical_C_word"])
+        d=MM(cover["canonical_D_word"])
         j=c**2
+        if d*z!=z*d:
+            record["D_preserves_original_zeta_sector"]=False
+        elif len(pivots)==90:
+            # Projected phase-preserving D acts on the genuine 90D
+            # B-vacuum carrier as k_0(D)*L_D, with unknown nonzero/zero
+            # Weil-vacuum matrix coefficient k_0. This is an ACTUAL
+            # modular operator but not yet a normalized 6.Suz word action.
+            columns=[]
+            for w in basis_mmv:
+                t=project(w*d)
+                x,coords=row_span_coefficients(
+                    np.asarray(t["E"],dtype=np.int16)%PRIME,
+                    basis_arrays,pivots)
+                if np.any(x):
+                    raise ValueError("D projected action leaves B-fixed 90D space")
+                columns.append(coords)
+            D0=np.asarray(columns,dtype=np.int16).T%PRIME
+            np.savez_compressed(a.outdir/"actual_D_vacuum_sandwich_mod31.npz",
+                                D0=D0)
+            record["D_preserves_original_zeta_sector"]=True
+            record["actual_D_vacuum_sandwich_mod31_rank"]=rank31(D0)
+            record["D_vacuum_Weil_scalar_k0_determined"]=False
+            record["source_GAP_standard_D_word_identified"]=False
+        
         # This is meaningful if the canonical affine-zero -I C²
         # maps every B_i to B_i^-1 with no extra z phase.
         stabilizer=all(j*b*j**-1==b**-1 for b in B)
