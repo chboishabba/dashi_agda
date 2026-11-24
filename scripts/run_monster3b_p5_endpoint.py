@@ -170,6 +170,35 @@ def main():
                         "ACTUAL_MM_CONJUGATION_AND_CENTRAL_RELATOR_DATA; COMPLEX_OUTER_OPEN"
                 else:
                     report["lemma_status"]["M3B-L10B_MM_E_canonical_word"]="FAILED"
+        # Literal class4D via the genuine 196883 Monster character.
+        # Independent of Steel/Magma and of the expensive full MMV(31)
+        # projection.  Only a UNIQUE original GAP Monster class
+        # position10 match can upgrade the local C-word to 4D.
+        cover=out/"mmgroup_canonical_cover_hit0.json"
+        if cover.is_file():
+            classargs=[sys.executable,
+                SCRIPTS/"monster3b_literal_mm_4d_character_class.py",
+                "--cover",cover,"--outdir",out/"literal_MM_C_4D",
+                "--timeout",args.timeout]
+            if args.skip_gap:classargs.append("--skip-gap")
+            if run("literal_MM_C_class4D",classargs):
+                classreceipt=out/"literal_MM_C_4D/literal_MM_C_4D_status.json"
+                if classreceipt.is_file():
+                    classdata=json.loads(classreceipt.read_text())
+                    report["literal_MM_C_class_status"]=classdata["status"]
+                    report["specific_Hit0_MM_group_word_in_class_4D_identified"]=(
+                        classdata.get("original_MM_C_4D_confirmed") is True)
+                    report["lemma_status"]["M3B-L12R_literal_MM_4D_class"]=(
+                        "EXACT_MONSTER_4D" if
+                        report["specific_Hit0_MM_group_word_in_class_4D_identified"]
+                        else "ORIGINAL_CHARACTER_CLASS_PENDING_OR_NOT_4D")
+            else:
+                report["lemma_status"]["M3B-L12R_literal_MM_4D_class"]=\
+                    "CHARACTER_SOURCE_STAGE_FAILED"
+        else:
+            report["lemma_status"]["M3B-L12R_literal_MM_4D_class"]=\
+                "BLOCKED_ON_AUTHENTIC_CANONICAL_MONSTER_WORD"
+
         if args.actual_mod31_hom:
             cover=out/"mmgroup_canonical_cover_hit0.json"
             if not args.manifest.exists():
