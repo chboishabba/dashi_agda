@@ -10,7 +10,7 @@
     },
     {
       "path": "scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py",
-      "sha": "d87baf7ef935be5041bb36216cd2ee8a78d3345a"
+      "sha": "a9b773a5e716eea21439d5df40657a1c3d0b4512"
     },
     {
       "path": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
@@ -27,7 +27,9 @@
     "regenerable_from_committed_source": true,
     "reproduction": "python scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py --k 5 --N 128 --order 6 --stop 32 --checkpoint J32.tmp.json --out J32.partial.json; then --stop 64 --resume, --stop 96 --resume, and final --resume --out J32.full.json",
     "github_CI": false,
-    "formal_kernel": false
+    "formal_kernel": false,
+    "final_git_blob_replayed_k5_last_32_after_k3_admission": true,
+    "original_k5_full_rational_output_sha256_unchanged": "91025015aa33aa0422346d8a3aa2b504254f7a8a65f75adc3ce256ebe8973520"
   },
   "original_segment": {
     "from": "event5 V diode OFF",
@@ -89,11 +91,10 @@
     "diagnostic_only_not_a_rigorous_proof": true
   },
   "remaining": {
-    "original_complete_conditional_smooth_mode_count": 4,
+    "original_complete_conditional_smooth_mode_count": 5,
     "of": 7,
     "unpaid_full_modes": [
       "0→event1",
-      "event3→event4",
       "event6→τ=20π/11"
     ],
     "source_all_seven_mode_full_69D_F_and_DF": false,
@@ -102,6 +103,7 @@
     "original_69_strict_Krawczyk_rows": false,
     "exact_periodic_orbit": false,
     "actual_original_source_hardware_energy_measured": false,
-    "no_rebase_or_merge": true
+    "no_rebase_or_merge": true,
+    "event3_to_event4_additional_full_source_receipt": "Artifacts/smith-filsinger/j32_event3_to_event4_signed_taylor_128slab_20261124.json"
   }
 }
