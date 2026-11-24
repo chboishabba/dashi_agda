@@ -109,6 +109,31 @@ Monster3BOut cat:= " \"magma_GModule_symbol\":\"MODNAME\",\n";
 Monster3BOut cat:= " \"magma_primitive_cube_root_coordinates\":[";
 Monster3BOut cat:= Monster3BPair(Monster3BZeta);
 Monster3BOut cat:= "],\n";
+// Source group words are evaluated in the ORIGINAL Steel group. Their
+// (order, trace, trace-square) fingerprints narrow original GAP class
+// candidates without guessing a 6.Suz standard-generator correspondence.
+Monster3BWordPairs := [ <"G." cat Sprint(i),Monster3BOriginalGroup.i>
+                            : i in [1..Ngens(Monster3BOriginalGroup)] ];
+if Ngens(Monster3BOriginalGroup) ge 2 then
+  Append(~Monster3BWordPairs,
+      <"G.1*G.2",Monster3BOriginalGroup.1*Monster3BOriginalGroup.2>);
+  Append(~Monster3BWordPairs,
+      <"G.1*G.2^-1",Monster3BOriginalGroup.1/Monster3BOriginalGroup.2>);
+  Append(~Monster3BWordPairs,
+      <"G.1^-1*G.2",Monster3BOriginalGroup.1^-1*Monster3BOriginalGroup.2>);
+end if;
+Monster3BOut cat:= " \"fingerprints\":[";
+for i in [1..#Monster3BWordPairs] do
+  if i gt 1 then Monster3BOut cat:= ","; end if;
+  w:=Monster3BWordPairs[i][2];
+  A:=Monster3BRho(w);
+  Monster3BOut cat:= "{\"word\":\"" cat Monster3BWordPairs[i][1];
+  Monster3BOut cat:= "\",\"group_order\":" cat Sprint(Order(w));
+  Monster3BOut cat:= ",\"trace\":" cat Monster3BPair(Trace(A));
+  Monster3BOut cat:= ",\"trace_square\":" cat Monster3BPair(Trace(A^2));
+  Monster3BOut cat:= "}";
+end for;
+Monster3BOut cat:= "],\n";
 Monster3BOut cat:= " \"generators\":{\n";
 for i in [1..#Monster3BGenerators] do
   if i gt 1 then Monster3BOut cat:= ",\n"; end if;
