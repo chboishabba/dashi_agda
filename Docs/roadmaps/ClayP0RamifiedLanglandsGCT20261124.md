@@ -1300,3 +1300,117 @@ Affine/dual reproduction algorithm: enumerate original scopes I of size 1..3 in 
 ### R63. Next mathematical tranche
 
 Do not initiate another rank/character census. R58 gives concrete bidirectional primal/dual cost and R59 supplies exact finite 3-adic recovery. Next inspect the actual shared-measurement design construction and Appendix D contraction in the reported preprint, identify precise paid parameters, and ask whether a new signed contraction or obstruction can be proved on the original central sandwich under those operations. A universal size lower bound would need to survive any alternative representation, not just these exact evaluation methods; a positive polynomial-time algorithm on central slice would solve original SAT via R50. Do not conflate finite coefficient reconstruction or #P hardness with Boolean lower bound. No unrelated Monster/YM/RH work; no new kernel certification requirement.
+
+## 17. R64–R70 — actual unramified occurrence grades and widespread active-coordinate reuse (2026-11-24)
+
+Stay on Langlands. Read both current attachments directly using mounted paths /mnt/data/Pasted text.txt and /mnt/data/Pasted text (2).txt. Live other-worker heads #1548 e25853446aac2f9e20303e42899dfe71d1681653 / #119 e0e150cde49a6321de1a13ea5dc8a0882e4df4c8, identical blob 4ace4df1bf48d96d9dd51ac2d125d609762ea761. Live Langlands heads #1549 75fe88e1e1d856fbd3d3f93702792a7c28dbb8c0 / #120 b0c59146024cb81c3c7217b1e4582886b5c7e1a9, identical blob 7530e7e6f5f96c81d6b023eaa194c03e3ddba3ca. No edits to G worker or Monster. G38–41 credit: central sandwich, balanced-product arithmetic lower bound, lifted multiplicity lower bound, squarefree-trace restriction and width-two control. R29/R30 actual ramified S3 Weil parameter P=1+U; R32 positive support simulation; R33 marked-line quotient; R50 central padding; R51 exterior count; R57–60 exact affine/dual and interpolation controls remain direct producers. Classical prior art: Jukna, *Lower Bounds for Monotone Counting Circuits*, https://arxiv.org/abs/1502.01865 ; *Notes on Monotone Read-k Circuits*, https://eccc.weizmann.ac.il/report/2022/094/ (repeated occurrence in syntactically produced polynomial; our measure instead counts original-variable footprint of repeated selector coordinates). Standard LLC and conductor compatibility https://docs.magma-maths.org/ModularArithmeticGeometry/RepresentationsOfLocalFields/introduction.html ; Harris ICM 2002 https://www.imj-prg.fr/wp-content/uploads/2020/prix/harris2002.pdf . Do not claim general arithmetic-to-Boolean conversion or priority for classical grading, balanced decomposition or tensor categories.
+
+### R64. Real Weil degree tag versus idempotent geometric support
+
+For a formal accepting trace of a bounded-fanin monotone Boolean DAG, replace OR by addition and AND by multiplication. Positive integer trace monomials M=prod_C t_C^(n_C) retain degree D=sum n_C, support S=|{C:n_C>0}|, excess D-S. The support observer on 0/1 inputs does not retain multiplicities. Choose unramified smooth complex Weil character nu, trivial on inertia, nu(Frob)=3 for a fixed Frobenius convention. A selected input line carries nu; an unselected one is the zero representation; constants carry degree-zero trivial lines or zero. Direct sum and tensor on these SCALAR graded objects realize the evaluated nonnegative trace polynomial, with each trace contributing nu^D. Attach the original P only at the end (tensor P at each gate would change S3 constituents). For each fixed Boolean input the result is an actual finite-dimensional Weil representation with N=0:
+    R_C(t)=direct_sum_j (P tensor nu^j)^{a_j(t)}
+where a_j is the coefficient of z^j in the arithmetized circuit with active input t_i replaced by z*t_i. Marked fixed coordinates may instead carry degree zero. Hom_WF(nu^j,R_C)=C^{a_j}; likewise Hom_WF(U tensor nu^j,R_C) has that dimension, since U irreducible and a nontrivial power of nu cannot be its self-twist (determinant or finite Frobenius spectral modulus). All twists preserve the original inertia and cubic phase action, so a(U tensor nu^j)=5. P has one inertia-invariant line, U has none. Thus L(R_C,T)=prod_j (1-3^j T)^(-a_j). The poles at distinct 3^-j recover the occurrence-grade multiplicities IF exact local factor supplied. Conductor alone equals 5 sum_j a_j, not a degree discriminator. This is a concrete local arithmetic tag, not a free local factor algorithm, not new local Langlands correspondence, no field map between F2 and F3. The trace expansion may have exponential degree, coefficient length and dimension, so do not materialize or charge it as unavoidable work.
+
+Truncated grade extraction has a charged symbolic implementation: for cap d, maintain homogeneous components of every gate through d; addition componentwise and multiplication by convolution. At most O((s+n+1)(d+1)^2) scalar arithmetic gates for a size-s bounded fan-in DAG with n input coordinates; no assumption coefficients explicitly small, this is formal arithmetic gate model. This computes degree d component even if actual max degree huge. It is a genuine implementation of isotypic grade selection on the actual evaluated modules, not a free rank gate. We will apply it only after fixing coordinates, with d<=b(q)=O(q^3).
+
+There is a sharp categorical escape: a nonzero finite-dimensional actual representation B satisfying B tensor B ~= B must be a one-dimensional trivial character (dimension d^2=d, then chi^2=chi). In particular a nontrivial grade nu cannot be preserved under literal tensor AND plus exact idempotence. However on one fixed marked line nu the actual subspace intersection B_a cap B_b (a,b Boolean) realizes AND and subspace sum realizes OR at constant Boolean cost; both are honest equivariant operations. Alternatively twist a product of two selected grade-one lines by nu^-1 after the AND. These implement Boolean grade saturation, not multiplicity-preserving tensor grading. Thus exact local Weil operators by themselves do not ban reuse. For marked support sets A,B, union weight equals |A|+|B|-|A cap B|; a grade correction by nu^(-|A cap B|) reconstructs union grade when intersection supplied. Scalar degrees alone cannot determine overlap (equal singleton sets vs distinct singleton sets). This does NOT require all algorithms to track intersections explicitly.
+
+### R65. Fixed dummy background, preserving the original minterm section without complementary inputs
+
+Distinguish the hard constant-weight complemented padding R50 from a simpler monotone fixed-background section used ONLY for the trace theorem. Use q original assignment variables, m=4(q+1), N=N_m, K=N/2. For each dummy singleton keep allowed zero pattern on and forbidden one pattern off; other scopes touching dummies allow all patterns consistent with dummy zeros. Let A be total number of compatible coordinates (including all N_q original active bits); R50 establishes A<=K and inert non-singleton capacity N-A-(m-q), with N-K>=N_q+(m-q). Set a fixed background D of size K-b(q) outside the active coordinates, including all A-N_q compatible outside bits and fill K-b(q)-(A-N_q) inert bits. This is feasible since K>=A, N_q>=b(q), and N-K>=N_q-b(q)+(m-q). All added inert bits are incompatible with dummy zeros, so cannot affect witness sets. Same construction for width two: with q<=m/4, compatible A<=b_2(m)+q*m+binom(q,2) <= K_2=m^2 for m>=8, and N_q<=2q^2, giving same capacity. Hence section E0(t)=D union t_active satisfies
+    |E0(t)|=K-b(q)+|t|,  W_m(E0(t))=W_q(t),
+    Pi_E0(t)=J_pad Pi_t J_pad*.
+This is exact same-object norm/projector and phase/Hom preservation by R44/R50, and is a MONOTONE coordinate projection, but NOT a reduction of full G to sandwich: above b(q) the sandwich automatically accepts. On E0(t) central sandwich equals
+    f_q(t)=0 if |t|<b(q), G_q(t) if |t|=b(q), 1 if |t|>b(q).
+At weight b(q), positive inputs precisely original minterms P_x (all 2^q). This section is actually easy (G27 O(N) checker H, with threshold b+1 OR H). This fact is mandatory control; no hard-source lower-bound transport from E0. A circuit C for actual full central sandwich restricts by constants to a circuit C0 for f_q; study accepting traces on exactly the original P_x in this section. Dummy-coordinate repetitions are irrelevant to this theorem. They become constants; do not claim a statement for arbitrary complemented embedding.
+
+### R66. Partial idempotence repair and exponential widespread-reuse inequality
+
+For any accepting trace on a minterm P_x, the distinct active selector support must equal P_x: smaller weight rejected. Define R(M)={C:n_C>=2} among ORIGINAL active coordinates, footprint U(M)=union_{C in R(M)} I_C subset [q], where I_C original scope. No independent charge per occurrence. For h<=q let X_h be the x for which SOME accepting trace of C0 has |U(M)|<=h. Pad U(M) to exactly h original variables U. Fix ALL selector coordinates on scopes I contained in U to the actual pattern x|I (1 on it, 0 on the other patterns). There are b(h) fixed ones. This removes all occurrences of those selectors at cost of constants; every remaining active coordinate occurs exactly once in the chosen trace. For each pair (U,a) with |U|=h and a in F2^U, form degree d=b(q)-b(h) homogeneous component of arithmetized C0 after this specialization. Reattach the monomial of the b(h) fixed ones, call result P_(U,a). Its formal size <=C (s+N_m+1)(b(q)+1)^2 for an absolute constant C (s size of original C). Every monomial of P_(U,a) has degree b(q); its support is accepted by f_q (setting all support bits to 1, other unfixed bits 0, respecting specialization). Thus support has cardinality >=b(q) and equals degree, so no repeat; that support must be an original minterm. No other fixed-scope polarity variables remain. Consequently P_(U,a) is a nonnegative homogeneous polynomial supported on a subset of original W_q's assignment monomials. Every x in X_h appears in at least one such polynomial. This covers with at most binom(q,h)*2^h marked grade repairs; use actual source scope provenance, not abstract cardinalities.
+
+Re-prove the subset version of G39 balanced-product bound to avoid relying on exact coefficients. For any nonzero polynomial supported on W_q, homogeneous nonnegative arithmetic circuit of size S produces a support cover by at most O(S+N_q) balanced products A B, with each factor degree between b/3 and 2b/3 (q>=2, b>=3). Proof: choose an accepting parse tree for each monomial, descend through addition or through multiplication child of largest degree until first gate of degree <=2b/3; degree >=b/3 since parent >2b/3 and split binary. Homogeneous gates, zero branches ignored. For each selected gate, use union of all formal parse-tree contexts with one occurrence replaced by that gate's placeholder; substituting any monomial of the gate gives output monomial with nonnegative coefficient, so product support lies in output. Only need existence of these contexts, not a costed algorithm for constructing them. At most one support product per gate. Homogenization already gives actual homogeneous circuit. Each product must partition scopes into fixed two sets: fix one monomial of B, positivity and squarefree one-per-scope property force same complementary scope set for every A monomial; symmetrically for B. Let V_A,V_B be unions of their original variables. Since every pair occurs as a scope, at least one union is all [q]. Also b(|V_A|)>=b(q)/3, b(|V_B|)>=b(q)/3 and b(v)/b(q)<=v/q (binomial ratio termwise), so |V_A cap V_B|>=q/3. ALL cross-combinations must agree on overlap, so these shared original coordinates fixed across product, containing at most 2^(2q/3) distinct minterm monomials. Coefficients irrelevant. This holds for width two or three.
+
+Combine: if beta_h=|X_h|/2^q, then
+    beta_h <= C' (s+N_m+1)(b(q)+1)^2 * binom(q,h)*2^h * 2^(-q/3).
+All sharing retained in homogeneous gate DAG and balanced cover. h=0 recovers squarefree-trace statement on this fixed section; h>0 permits arbitrary repeated occurrences within scopes on h original variables, and does NOT bound the exponent of any reused selector. Take h=floor(q/32); binom(q,h)<=2^(q H_2(h/q)), H_2(1/32)+1/32<1/3 (also follows from binom<= (e q/h)^h). Hence if s=poly(N_m), beta_h<=2^(-Omega(q)). For all but exponentially small fraction of actual original minterms, every accepting trace repeats active coordinates on >q/32 original variables (up to rounding). Since each repeated selector involves <=3 variables, every such trace uses >q/96 distinct repeated active selector coordinates, up to rounding. Conversely a family where every minterm has a trace with footprint<=q/32 requires exponential size in q=Theta(N_m^(1/3)). This is a restricted lower bound for concrete trace property, NOT an unrestricted Boolean lower bound. The theorem is on a fixed easy section, not a distribution over all central inputs. No charge of independent work per repeated coordinate; in fact the next gate proves why such a charge would be wrong. It strengthens the squarefree trace control by allowing arbitrary occurrence reuse localized to a small original-variable region and gives a linear (not merely q/log q) widespread footprint, because marked masks are indexed by original variables, not arbitrary subsets of N_q selectors.
+
+### R67. Exact cheap width-two AND width-three control: order of repeated footprint is tight
+
+Use G27 monotone checker H(t)=AND_I OR_p [t_(I,p) AND product_(i in I) t_({i},p_i)]. H is exact at weights<=b(q); H OR threshold_(b(q)+1) computes f_q in polynomial-size monotone gates for BOTH widths. Threshold can be built by standard O(N_q^2) DP or sorting network. At minterm P_x choose unique selected pattern for each scope. The explicit accepting parse term contains exactly original P_x as its support; all repeated selectors are singleton-scope bits, one per original variable, with multiplicity 1+d_q (the leading t_I plus every occurrence from a scope containing that variable, including singleton). This has q distinct repeated selectors and footprint q, even though total original scope count is Theta(q^3) for width3. Thus linear spread in R66 is attainable by a cheap concrete circuit, and C0 is known easy even for width3. Not evidence of unavoidable large work. Neither repeat count, occurrence degree, overlap size, conductor, nor #trace count by itself lower-bounds unrestricted total gate count. Need width-three-specific GLOBAL constraints on central slice outside fixed-background minterm section. G39/G40 formal lower bounds remain valid even on easy decision relations. Actual positive support computation with marked-line intersection and sum can erase occurrence grades while retaining Boolean semantics; R64 shows why a grade-preserving tensor restriction is not coverage of all Boolean circuits. Width-two implication reachability remains a separate full-family polynomial negative control.
+
+### R68. Actual local exact execution
+
+Executed /tmp/langlands_r64.py in container Python and SymPy, no CI/native prover. Results: 556 constant-background padding and witness-count comparisons across widths 2 and 3, q=1..3 (all q<=2 selector inputs, explicit q=3 fixtures); 78 specialization mask/grade filters on local checker; 28 explicit accepting minterm trace constructions; 14246 balanced scope partitions across widths 2 and 3, q=2..4; 729 exact distinct local Euler-denominator polynomials for grade multiplicity vectors a in {0,1,2}^6, with explicit 3-dimensional permutation matrices for original S3 inertia and invariant rank 1. Grade filters inspect H branch, threshold b+1 cannot contribute at cap b-b(h) because all its original terms squarefree of degree b+1 and at most b(h) selected bits are set to one. No evaluation of actual p-adic field oracle, no native proof, finite tests are algebraic regressions independent of general proof.
+
+Compact reproduction of mask geometry, actual padding and explicit H traces, plus exact local grade signatures:
+```python
+from itertools import combinations,product
+from collections import Counter
+from math import comb
+import sympy as S
+def scopes(m,w):return [I for j in range(1,min(m,w)+1) for I in combinations(range(m),j)]
+def coords(m,w):return [(I,p) for I in scopes(m,w) for p in product((0,1),repeat=len(I))]
+def minterms(m,w):
+    C=coords(m,w);idx={c:i for i,c in enumerate(C)}
+    return [sum(1<<idx[I,tuple(x[i] for i in I)] for I in scopes(m,w)) for x in product((0,1),repeat=m)]
+padding=traces=partitions=0
+for w in (2,3):
+    for q in (1,2,3):
+        m=4*(q+1);C=coords(m,w);I=scopes(m,w);ix={c:i for i,c in enumerate(C)};orig=coords(q,w);pos=[ix[c] for c in orig]
+        good={i for i,(J,p) in enumerate(C) if all(j<q or a==0 for j,a in zip(J,p))}
+        fixed=good-set(pos);inert=[i for i,(J,p) in enumerate(C) if i not in good and len(J)>1]
+        K=len(C)//2;extra=K-len(scopes(q,w))-len(fixed);assert 0<=extra<=len(inert)
+        base=sum(1<<i for i in fixed)+sum(1<<i for i in inert[:extra])
+        P=[sum(1<<ix[J,tuple(x[j] if j<q else 0 for j in J)] for J in I) for x in product((0,1),repeat=q)]
+        Q=minterms(q,w);cases=range(1<<len(orig)) if q<=2 else Q+[0,(1<<len(orig))-1]+[p^1 for p in Q]
+        for t in cases:
+            v=base+sum(1<<pos[j] for j in range(len(pos)) if t>>j&1)
+            assert v.bit_count()==K-len(scopes(q,w))+t.bit_count()
+            assert sum(v&p==p for p in P)==sum(t&p==p for p in Q)
+            assert all(v>>ix[(j,),(0,)]&1 and not v>>ix[(j,),(1,)]&1 for j in range(q,m))
+            padding+=1
+        idx={c:i for i,c in enumerate(orig)}
+        for x in product((0,1),repeat=q):
+            M=[]
+            for J in scopes(q,w):
+                p=tuple(x[j] for j in J);M.append(idx[J,p]);M.extend(idx[(j,),(v,)] for j,v in zip(J,p))
+            assert sum(1<<i for i in set(M)) in Q
+            assert all(len(orig[i][0])==1 for i,k in Counter(M).items() if k>1)
+            traces+=1
+    for q in range(2,5):
+        I=scopes(q,w);B=len(I)
+        for mask in range(1<<B):
+            k=mask.bit_count()
+            if 3*k<B or 3*k>2*B:continue
+            U=set().union(*(set(J) for j,J in enumerate(I) if mask>>j&1));V=set().union(*(set(J) for j,J in enumerate(I) if not mask>>j&1))
+            assert len(U)==q or len(V)==q
+            assert 3*len(U&V)>=q;partitions+=1
+assert (padding,traces,partitions)==(556,28,14246)
+R=S.Matrix(3,3,lambda i,j:int(i==(j+1)%3));J=S.Matrix(3,3,lambda i,j:int(i==(-j)%3));E=(S.eye(3)+R+R**2)/3
+assert E*E==E and E.rank()==1 and R*E==E and J*E==E
+T=S.symbols('T');bases=[S.Poly(1-3**j*T,T) for j in range(6)];seen=set()
+for a in product(range(3),repeat=6):
+    p=S.Poly(1,T)
+    for j,k in enumerate(a):p*=bases[j]**k
+    key=tuple(p.all_coeffs());assert key not in seen;seen.add(key)
+assert len(seen)==729
+```
+The 78 additional specialization checks used a concrete H + threshold gate DAG and truncated monomial-occurrence multisets: at each gate union supports under OR, concatenate/sort exponent multiset under AND, discard degrees >cap; for each U of each size and each a, substitute fixed-scope selectors to constants, cap=b(q)-b(|U|), verify every degree-cap H monomial is squarefree and after reattachment lies in original minterms. Actual script local; no claim of native kernel proof. Sum of distinct reported comparison categories 15637 (556+78+28+14246+729), overlapping categories not claimed independent trials.
+
+### R69. Endpoint-first ledger
+
+| Gate/phase | Mathematical deliverable | Status / producer -> consumer |
+|---|---|---|
+| R64 / B-C | actual unramified occurrence-grade Weil tags, local factor and charged homogeneous extraction | derived; R29/R30/R32, formal trace arithmetization, classical LLC -> R66 |
+| R65 / C | fixed dummy-background section with exact original norm projector/Hom witness transport | derived; R44/R50/G27 -> R66; easy section, not hard monotone projection |
+| R66 / C | partial idempotence repair, widespread linear original-variable reuse in traces of any small full central sandwich circuit on this section | derived restricted lower bound; G39/G41 -> actual overlap control |
+| R67 / C | cheap polynomial explicit H and marked-line equivariant idempotence control | derived; width2 AND width3 easy section; refutes independent charge from repeat footprint alone |
+| R68 | exact local tests | actually executed; no kernel/CI |
+| R7a'/LGC4d/C | consumer-relevant width-three interaction beyond occurrence saturation on actual hard central inputs | open; R66 localized obstruction but R67 proves not endpoint |
+| R7b'/LGC5/C | universal serial-safe charge under arbitrary idempotence/absorption, quotient, signed contraction, measurement/interpolation and sharing | OPEN P0 |
+| R7c/LGC6/D | superpoly unrestricted separation via central sandwich or direct uniform-machine route | OPEN P0 |
+| LGC7/N6/E | literal Clay endpoint | existing conditional consumer |
+
+### R70. Next substantive direction
+
+The new result allows an exponential arithmetic bound to survive arbitrary repetition localized to small original-variable sets, and explicitly proves why even linear spatial spread cannot pay global cost. Do not turn it into another mandatory representation phase. Need attack actual hard fixed-weight inputs from R50, not just easy minterms from R65. Characterize support-preserving idempotent/absorption shortcuts for original clause-overlap constraints and compare them against G35 width-two reachability and R57/R58 affine/dual algorithms. R59/R60 reported interpolation/tensor algorithm audit remains an independent shortcut control; no additional external proof audit performed this turn. The nonuniform sufficient endpoint is superpoly monotone size of one central sandwich, not formal multiplicity alone; direct uniform N4/N5 route remains sufficient and weaker. Standard source credit, DASHI/JMD ownership and G38–41 preserved; no unrelated branches or claim P!=NP.
