@@ -1214,3 +1214,36 @@ Local test on 2026-11-24, no CI: original-function-equivalent standalone numeric
 Crucial scope: D1 source/operator interface has an actual six-case finite forced-energy result; full same-source continuous-time evolution comparison of original mode3 / mode4 / radial-native action is OPEN. D2 fully discrete stability/constraint and H4-plus trace OPEN. D3 current native A0/A1/C0/C1 96-signed end-to-end OPEN. D4 actual evolved wall and receiver jets and both Weyl OPEN. D5 original far causal-null FAIL and independent mesh-continuum OPEN. D6 formal/physical OPEN. Do NOT promote this finite energy identity or prior sine-mode action numerics to full physical source-to-receiver correspondence.
 
 NEXT SINGLE BIG CUT: use this radial-native action bridge in the existing Gauss/banded evolution owner, while retaining exact physical clock/Israel source/outer conditions; execute forward on same compact 3-mode FV source for the original mode3, mode4 and action formulations. Record state/energy/strong trace and near/far field jets before E4/E5 on at least three independently refined radial/normal meshes and two dt, with source-off and far-cone null negative controls. Preserve all historical master and PR #1527 prior art and original attribution; no GitHub CI. Do not resume serial XC microcuts.
+
+
+---
+
+## Latest-PR donor review and integrated native-FV Gauss forward (2026-11-24)
+
+**This is one integrated D1 construction step, not a numbered microcut.** The connected GitHub recent-PR scan included #1550, #1549, #1548, #1547, #1546, #1545, #1544, #1543, #1537, #1524, #1520, and #1519. Reuse only genuine same-source, same-operator donor interfaces.
+
+### Relevant owners and boundaries
+
+- PR #1520: original F8 full moving-AdS coupled weighted-SBP energy, source lifting and both-Weyl failclose. It expressly distinguishes physical AdS normal z from 3D radial distance r; eigenvalues of weighted FV L3/L7/L11 are NOT Kaluza-Klein masses. Reuse source-conservative shell weights and energy, not unsupported modular or KK interpretations.
+- PR #1543: explicit original-source/physical-endpoint/trace proof boundary, useful as an acceptance discipline; NS R568 trace does not prove an F8 Weyl trace.
+- PRs #1537 and #1519: actual signed source-work and storage-ledger negative controls in unrelated physics. Borrow ledger discipline only, not motor/Filsinger sources.
+- PR #1524: stale pass marker, dirty-source and absent dependency fail-close controls. Adapt F8 acceptance without GH CI.
+- PR #1544: original Wilson source normalization is separate SU(N) physics; not an Israel-source substitute.
+
+### Native FV radial eigenbasis into ORIGINAL action FE and Gauss-2
+
+New focused PR #1547 source-owned script scripts/check_f8_p0_native_radial_gauss_forward.py imports the already committed scripts/check_f8_p0_native_radial_action_bridge.py and existing master hp normal FE / native radial FV / exact compact source owners. For each ell=0,2,4 with d=3,7,11, symmetrize the ORIGINAL radial finite-volume matrix S_d=-sqrt(V_d) L_d / sqrt(V_d). Compute S_d R_d=R_d Lambda_d and B_d=V_d^(-1/2) R_d. Identities B_d^T V_d B_d=I and L_d B_d=-B_d Lambda_d are checked. Project the ACTUAL compact FV source to modal amplitudes by B_d^T V_d source_d, and reconstruct it. This preserves the native radial source and radial operator exactly as finite-dimensional linear algebra; Lambda_d is NOT a KK mass, and the sine-basis action donor was not silently substituted.
+
+Each radial eigenmode uses the EXISTING moving hp normal AdS matrices M(T), C(T), K(T), canonical state [U,m], physical Israel pulse, absorbing outer normal force and original F(t) clock. It is evolved with the two-stage fourth-order Gauss-Legendre collocation at the correct physical stage clock positions. The script checks weighted orthogonality, native-source modal reconstruction, original native-vs-modal first-order RHS parity, finite energy, active compact source and exact zero initial/source-off trajectories.
+
+### Local source-equivalent forward evidence, NOT full production
+
+An equivalent local numerical implementation was executed with original-owner-equivalent local FE, radial FV and compact source functions, not a literal byte-identical checkout. There are 3 radial/normal grids (FE elements,Nr,dr)=(2,9,.008),(3,12,.006),(4,15,.004); four dt=.004,.002,.001,.0005 on each; source-on/off = 24 separate short trajectories. Observation is T-F(1)=.068, t=1.049864423456425 after the original .065 pulse, not the physical t=12. All 12 source-off histories remain exactly zero and all 12 source-on states are finite/nonzero with positive canonical energy. Original native versus transformed modal RHS maximum absolute mismatch at the 3 grids: 1.2302e-10, 1.6871e-10, 5.1557e-9. These small absolute errors reflect weighted eigenbasis roundoff, not proved uniform operator norm stability.
+
+Unweighted source-on field norms at dt=.004/.002/.001/.0005: Nr9 [1.7766345,1.8432598,1.8475571,1.8478285]; Nr12 [1.9137754,1.8494727,1.8466628,1.8464896]; Nr15 [6.9776086,11.7706580,12.1247825,12.1475977]. Finest dt field-norm differences (.001 versus .0005): .00027135, .00017326, .02281512. These are not spatial convergence results. The 3 truncated radial boxes have distinct physical outer radii and DO NOT include the original near/far receivers. The raw field norms are not radial V_d-weighted. Source-on canonical energy at finest dt: 4.4190816e-5, .00534532895, .00242557829. Independent local evidence saved as f8-p0-latest-pr-native-gauss-forward-evidence.zip. The exact committed module has not been executed byte-for-byte against a full repository checkout. No CI.
+
+### Updated large-bite STOP/GO boundary
+
+D1 has materially advanced: SAME original d=3,7,11 FV radial source/operator plus moving canonical action, source-work ledger, and ACTUAL Gauss-2 source-on/off short-pulse forward evolution across 3 grids and 4 times. D1 remains OPEN for the original mode3/mode4 versus action comparison at the same physical full radial/normal domain. D2 fully discrete forced stability and higher trace regularity OPEN. D3 original current FV/weak A0/A1/C0/C1 native 96 signed outputs OPEN. D4 t12 same-state physical wall jets and both Weyl OPEN. D5 out-of-cone far null FAIL/OPEN and independent fixed-domain convergence OPEN. D6 retarded Green, Agda/TOE and detector OPEN.
+
+NEXT ONE substantial cut: extend this existing radial-native Gauss construction to fixed original t12 receiver-containing radial domain, compare ORIGINAL mode3/mode4/action across source-on/off and independent dr/dy/dt while keeping outer boundary and source distribution fixed. Retain stagewise Israel residual, Q, dynamic moving trace, canonical source/energy work, radial/temporal/normal jets, both electric Weyl and far causal support; do not add more isolated identities or promote short-pulse tests as detector results.
