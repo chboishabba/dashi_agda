@@ -38,6 +38,7 @@ def transpose(y,dr,dy,b,v,order):
 
 def donor_parity():
     from ksw668_f8_weighted_normal_stage import matched_stage as stage
+    from ksw668_f8_tt_multipole import stage as original_source_stage
     rng=np.random.default_rng(1530); nm,ny,nr=3,7,11; dr,dy,b,v=.008,.012,.4,-.3
     cp=np.zeros((nm,nr));cm=cp.copy()
     for q in range(nm):
@@ -47,4 +48,13 @@ def donor_parity():
         stage(*x,*out,dr,dy,b,v,0.,np.zeros((nm,nr)),cp,cm,order)
         lhs=np.vdot(out,y);rhs=np.vdot(x,transpose(y,dr,dy,b,v,order));assert np.isclose(lhs,rhs,rtol=1e-12,atol=1e-8)
         print(order,lhs,rhs,abs(lhs-rhs))
+        if order==4:
+            legacy2=np.zeros_like(out);mislabel4=np.zeros_like(out)
+            original_source_stage(*x,*legacy2,dr,dy,b,v,0.,np.zeros((nm,nr)),cp,cm,2)
+            original_source_stage(*x,*mislabel4,dr,dy,b,v,0.,np.zeros((nm,nr)),cp,cm,4)
+            # Direct source-level counterexample: old "4" was EXACTLY 2.
+            assert np.array_equal(legacy2,mislabel4)
+            # The separate weighted split is genuinely different.
+            assert float(np.max(np.abs(out-mislabel4)))>1e-7
+            print('weighted mode4 mismatch correction: original_stage(4)==original_stage(2); matched weighted != legacy',flush=True)
 if __name__=='__main__':donor_parity()
