@@ -1776,3 +1776,162 @@ assert dict(coef)=={1<<ix[((0,),p)]:kappa for p in (0,1)}
 | N6 | originalClayTransport | conditional #1040 terminal / #1129 costed coverage; direct uniform N4/N5 stays OR |
 
 Highest-alpha Aristotle BIDI: do not try to lift G39 by generic arithmetic normalization: G41's tractable width-two control explicitly rules that out. The central-slice problem is whether width-three-specific correlations make the unrestricted repeated-variable/absorption shortcuts expensive in total work, not whether an exponential formal polynomial or #P-hard coefficient exists. Investigate Boolean product-support overlap at a balanced scope cut (which can duplicate shared scope coordinates and permit supersets on upper weight layers) and require a charge that accounts for those overlaps without ruling out G17 reachability. Keep direct uniform-machine route and the G37 reported subexponential algorithm audit alive; no assumption of ETH or a new certification prerequisite. No unrestricted separation claimed.
+
+
+## 21. P0-G42–G44 — conditioned repeat traces, paired central slice and the sharp linear-repeat shortcut (2026-11-24)
+
+Controlling endpoint remains literal Clay P vs NP. Inputs: attached G38–G41 and Langlands R57–R60 (reported #1549/#120 heads 75fe88e1e1d8 / b0c59146024c). Only P0 roadmaps modified. Both read live at e25853446aac / e0e150cde49a, common blob 4ace4df1bf48d96d9dd51ac2d125d609762ea761. Reuse G13 original selector scopes, G16/G17 binary control, G26 shared inversion, G32/G38 central padding, G39/G41 balanced arithmetic extraction, G28/G33 parity compression, #1291 signed residuals, #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 sharing, #1129 standard-machine coverage, #1040 terminal, #1474/#1502 reductions, #607/#678 Aristotle. The formal polynomial / Boolean support distinction and classical slice-function and arithmetic-decomposition attribution remain as in sections 19–20. New derivations are internal mathematical arguments, not independent native-kernel proofs or claims of literature novelty.
+
+### G42 — recover squarefree traces by conditioning, not prohibiting reuse
+
+Let C be any correct monotone Boolean circuit for central sandwich S_m, gate size s; replace AND by formal product and OR by formal sum as in G41. Denote resulting nonnegative polynomial P. Every monomial support is a true input, so has at least K coordinates. For a set R of r<=K distinct input coordinates define
+
+    E_R(P) = (prod_{i in R} t_i) * [homogeneous degree K-r] P|_{t_i=1 for i in R}.
+
+Every surviving conditioned monomial has support size at least K-r, since adjoining R produces a true input of C. With formal degree exactly K-r, it must be squarefree, disjoint from R. Thus E_R is squarefree homogeneous degree K, and its monomials are all true central inputs. If a true central input L admits a formal accepting trace whose repeated-variable set is contained in R subset L, that trace contributes the monomial of L to E_R. This remains true with arbitrary shared DAGs, because only the formal polynomial is used and no parse-tree expansion is charged to the circuit. Homogeneous extraction has O((s+1)(K+1)^2+N) gate overhead by truncated convolution.
+
+Sum E_R over all R of cardinality r. Any positive central L with a trace using at most r distinct repeated variables is represented (extend the repeated set to r coordinates inside L). Use the same dummy singleton zeros and outside-active substitution as G40/G41, then extract active degree b_q. Result is supported on a subset X of W_q's original monomials. In particular it includes every x whose canonical padded minterm E(P_x) has such a trace, or even any central completion of P_x respecting dummy singleton zeros with such a trace. G39 gives
+
+    fraction of such x <= poly(N)*(s+1)*binom(N,r)*2^(-r0(q)),
+
+where r0(q)>=q/3 from G39, N=Theta(q^3), q original assignment count, m=4(q+1). Thus for polynomial s, r<=epsilon*q/log N with sufficiently small fixed epsilon gives exponentially small fraction. This strengthens G41 beyond r=0, still only a necessary property of small circuits.
+
+### G43 — exploit original scope labels to obtain linear, rather than q/log N, repeat necessity
+
+Use exactly G38's canonical central padding. Its active input t has n=N_q bits, paired slack rails u_j are 1-t_j in the encoding; they occupy distinct inactive selector coordinates. Other coordinates are fixed constants of total weight K-n. Fix all these constants in C, leaving t,u independent. In particular all forbidden dummy singleton patterns stay zero, and all fixed compatible patterns involving dummies remain one. Because every u_j is an inactive coordinate, original SAT semantics is G_q(t) for ALL t,u, not just paired encodings. The restricted circuit C' therefore computes the exact monotone two-rail sandwich
+
+    J_q(t,u) = [|t|+|u|>n] OR ([|t|+|u|=n] AND G_q(t)).
+
+This is a same-object restriction, no added gates. A canonical positive encoding for minterm P_x is v_x=(1_Px,1-1_Px), of weight n. For any trace at v_x define its source repeat set T_trace as the union of original assignment scopes I of repeated rail variables t_(I,p) or u_(I,p). Repetitions of fixed constants in C have already been eliminated by restriction.
+
+For T subset [q] of size h and z in F2^T, define R(T,z) as follows: for each original scope I contained in T, retain exactly the selected rail for each of its pattern coordinates. That is t_(I,z|I) and all u_(I,p) for p != z|I. Then |R|=N_h and R(T,x|T) subset support(v_x). If T_trace subset T, the mask contains every repeated rail of that trace. Apply G42 to C' with threshold n and mask R; the result is a squarefree polynomial supported on true layer-n inputs of J_q. Substitute all u rails by 1 and extract homogeneous active degree b_q. Each remaining monomial is an actual original witness monomial: its active support has size b_q, and G_q(t)=1 requires one full minterm. Any v_x with a trace satisfying T_trace subset T contributes its W_q monomial.
+
+Sum over all masks with |T|=h. There are exactly 2^h binom(q,h) masks (or at most this many distinct masks). If gamma_h is the fraction of original assignments x with any accepting trace at v_x whose source repeat set has size <=h, the preceding extraction and G39 prove
+
+    gamma_h <= poly(N)*(s+1)*2^h*binom(q,h)*2^(-r0(q)).
+
+For h=floor(q/32), binary entropy H_2(1/32)+1/32 < 1/3, so any polynomial s implies gamma_h <=2^(-Omega(q)). This is a linear original-coordinate repeat-span requirement on almost every canonical padded minterm, and implies Omega(q) distinct repeated rail variables (each rail involves at most 3 source variables). It does not count repetitions of dummy constants, expanded multiplicities, or separate costs per trace. The conditioning masks are chosen independently of the original execution; their construction overhead is charged in the comparison arithmetic circuit. Width-two also satisfies this theorem, so it is not a width-three-specific lower bound. No inference that a single gate cannot serve many such repeats.
+
+### G44 — explicit sound linear-size underapproximation on the SAME canonical minterms
+
+The following construction establishes why G43 alone cannot pay N4. For the independent active/paired rails t,u define
+
+    A(t,u)=AND_I OR_p [
+        t_(I,p) AND (AND_{r != p} u_(I,r))
+                 AND (AND_{i in I} t_({i},p_i))
+    ].
+
+Each scope has <=8 patterns; all operations bounded arity or reducible to constant-size gates per pattern. Size O(n). Any accepting formal trace selects one positive pattern rail and the other negative rails for every scope, hence contains at least n distinct coordinates, one per input pair. If the total rail weight is exactly n, every pair contains exactly one selected rail; for each scope the chosen pattern is its unique available positive pattern. The singleton consistency factors ensure that these unique patterns agree with a single original assignment. Thus A=1 on the layer n iff (t,u)=(P_x,1-P_x) for some x. In particular A<=J_q on ALL inputs: below layer n A cannot accept, on layer n it accepts only original minterms, above layer n J_q=1. This is exact soundness, not a local overapproximation.
+
+At v_x choose the unique pattern p=x|I in every scope. The resulting trace uses each selected rail once except the q selected singleton positive rails, which may be repeated by the consistency factors. Exactly those q rails repeat (including the singleton's own support factor). Thus repeat-coordinate count is q, source repeat union is all q coordinates. This is O(q) distinct repeated rails, not a claim about the expanded multiplicity total.
+
+Lift A to the actual central sandwich S_m by ANDing it with every fixed-one coordinate of G38's padding (K-n coordinates, disjoint from rails). Leave all other coordinates unrestricted. Every accepting input has weight >=K. If weight=K, no other coordinates can be 1, the paired rails have weight n, and the exact minterm property supplies an original assignment extending by dummy zero. If weight>K, S_m accepts automatically. Therefore the lifted checker is a globally sound monotone underapproximation of S_m, size O(N), covering EVERY canonical padded minterm. Its chosen accepting traces on those inputs have exactly q repeated rail coordinates; fixed ones appear once. If C is any correct central circuit, ORing this checker into C preserves exact output, adds only O(N) gates, and ensures those traces on all canonical padded minterms. So a proposed lower bound demanding more than q repeated coordinates there cannot follow from correctness alone at polynomial overhead, unless the general circuit lower bound has already been proved. G43's linear scale is tight up to constants for this selected positive family. Crucially the checker is not a circuit computing the whole sandwich: for example at a paired encoding of the full active selector t=1, u=0, the target accepts but A rejects as long as some scope has >=2 patterns. It accepts minterms, not all satisfying active selectors and not all true central inputs.
+
+This isolates a precise hard operation: decide global existence of a compatible minterm on general central inputs, including paired encodings of nonminimal active selectors, not merely recognize canonical encodings of witnesses or count repeated coordinates there. The low-repeat obstruction is real but the same-object checker gives its exact shortcut boundary. No generic normalization from Boolean circuits to formal arithmetic can hold (G41 width-two control). No claim of a lower bound for arbitrary Boolean support.
+
+### Affine and signed contraction reconciliation
+
+R57/R58's affine-hull compression, primal/dual character contraction and independent block sum are admissible upper-bound methods. In particular affine rank/nullity and number of independent original coordinates cannot themselves charge time. Arbitrary affine substitution may increase clause width; keep the original bounded-width formulas or charge a re-encoding before applying any fixed-width SAT algorithm. R59/R60's interpolation recovery has signed coefficients; its support-only counterexample H_0(T)=T, H_1(T)=1+T is an additional exact FactorsThrough obstruction, not a work lower bound. The previously reported subexponential #SAT algorithm in G37/R60 remains an external theorem boundary, not independently proved here. No reliance on ETH or on exponential search necessity. No new Langlands or Monster task.
+
+### Executed local regression (Python integer masks, no CI/kernel)
+
+Executed 13,884 paired layer inputs: exhaustive q=1 (6) and q=2 (12,870), plus q=3 (8 planted canonical positives and 1,000 seeded layer samples); independently compared the G44 checker with the exact property u=1-t and t=P_x. All 14 canonical positive traces had exactly the asserted q repeated singleton rails. Executed 39 source-coordinate mask/homogeneous extraction comparisons on explicit expansions of the original G27 H checker for q=1,2,3 (2,16,4096 formal terms respectively). This independently verifies the conditioning principle on those small layer checkers, not an exhaustive test of all arbitrary circuits. Also checked the central slack inequalities for q=1..20. All passed. Reproducer:
+
+```python
+from itertools import combinations
+from collections import Counter
+from random import Random
+from math import comb
+
+def carrier(q):
+    S=[I for j in range(1,4) for I in combinations(range(q),j)]
+    C=[(I,p) for I in S for p in range(1<<len(I))]
+    ix={v:i for i,v in enumerate(C)}
+    def pat(x,I):return sum(((x>>i)&1)<<j for j,i in enumerate(I))
+    P=[sum(1<<ix[I,pat(x,I)] for I in S) for x in range(1<<q)]
+    return S,C,ix,P,pat
+
+def check_pairs(q):
+    S,C,ix,P,pat=carrier(q);n=len(C);full=(1<<n)-1
+    def checker(t,u):
+        return all(any(t>>ix[I,p]&1 and
+            all(u>>ix[I,r]&1 for r in range(1<<len(I)) if r!=p) and
+            all(t>>ix[(i,),p>>j&1]&1 for j,i in enumerate(I))
+            for p in range(1<<len(I))) for I in S)
+    count=pos=0
+    if q<=2:
+        inputs=((z&full,z>>n) for J in combinations(range(2*n),n)
+                for z in [sum(1<<j for j in J)])
+    else:
+        rng=Random(369)
+        inputs=[(t,full^t) for t in P]+[(z&full,z>>n)
+            for _ in range(1000)
+            for z in [sum(1<<j for j in rng.sample(range(2*n),n))]]
+    for t,u in inputs:
+        v=checker(t,u)
+        assert v==(u==full^t and t in P)
+        pos+=v;count+=1
+    for x,t in enumerate(P):
+        u=full^t;assert checker(t,u)
+        trace=[]
+        for I in S:
+            p=pat(x,I);trace.append(ix[I,p])
+            trace.extend(n+ix[I,r] for r in range(1<<len(I)) if r!=p)
+            trace.extend(ix[(i,),p>>j&1] for j,i in enumerate(I))
+        counts=Counter(trace)
+        assert set(counts)=={i for i in range(n) if t>>i&1}|{n+i for i in range(n) if u>>i&1}
+        assert {i for i,k in counts.items() if k>1}=={ix[(i,),x>>i&1] for i in range(q)}
+    return count,pos,len(P)
+assert [check_pairs(q) for q in (1,2,3)]==[(6,2,2),(12870,4,4),(1008,8,8)]
+
+def masks(q):
+    S,C,ix,P,pat=carrier(q);b=len(S);terms=[()]
+    for I in S:
+        F=[tuple([ix[I,p]]+[ix[(i,),p>>j&1] for j,i in enumerate(I)])
+           for p in range(1<<len(I))]
+        terms=[a+f for a in terms for f in F]
+    checks=0
+    for Tbits in range(1<<q):
+        T={i for i in range(q) if Tbits>>i&1}
+        for z in range(1<<q):
+            if z&~Tbits:continue
+            R={ix[I,pat(z,I)] for I in S if set(I)<=T}
+            out=set()
+            for a in terms:
+                rem=[i for i in a if i not in R]
+                if len(rem)==b-len(R):
+                    assert len(set(rem))==len(rem)
+                    t=sum(1<<i for i in set(rem)|R)
+                    assert t in P;out.add(t)
+            expected={p for x,p in enumerate(P) if
+                all(p>>i&1 for i in R) and
+                all(ix[(i,),x>>i&1] in R for i in range(q))}
+            assert out==expected
+            checks+=1
+    return checks,len(terms)
+assert [masks(q) for q in (1,2,3)]==[(3,2),(9,16),(27,4096)]
+
+for q in range(1,21):
+    m=4*(q+1);d=m-q
+    b=lambda x:sum(comb(x,j) for j in (1,2,3))
+    N=lambda x:sum((1<<j)*comb(x,j) for j in (1,2,3))
+    B=sum(comb(q,l)*comb(d,j-l)*(1<<l)
+          for j in (1,2,3) for l in range(j))
+    K=N(m)//2
+    assert B+N(q)<=K<=N(m)-d
+    assert B<=K-b(q)<=N(m)-N(q)-d
+```
+
+### Consolidated endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G42 | conditionedHomogeneousRepeatTraceExtraction | derived; general central circuit, polynomial cost per mask |
+| G43a | exactPairedRailCentralRestriction | derived; same-object G38 |
+| G43b | sourceRepeatMaskCover / linearRepeatSpanNecessity | derived; conditional on polynomial size; G39/G42 |
+| G44 | canonicalMintermSoundPairedChecker / linearRepeatShortcut | derived and locally tested; explicit O(N) sound underapproximation; NOT complete decision |
+| N4/G12a | unrestrictedSerialCharge | OPEN: actual total work on general active selector inputs, permit repeat/absorption, affine and signed contraction, shared interpolation |
+| N5/G12c | canonicalCentralSliceUnrestrictedSuperpoly | OPEN; G38 nonuniform equivalence; direct uniform route remains OR |
+| N6 | originalClayTransport | conditional #1040 terminal / #1129 standard-machine coverage |
+
+Aristotle BIDI: G44 proves that studying only canonical padded minterm acceptance, even with a stronger linear repeat-span theorem, cannot close the unrestricted endpoint by demanding more repeat coordinates. Shift the mathematical discriminator to nonminimal selectors on the paired slice and require globally correct support, not just witness recognition. Analyze actual signed arithmetic/interpolation costs from the reported G37/R59 algorithm and target-specific width-three correlations; no inference from #P-hard exact multiplicity, independent rank, trace size or restricted circuit complexity alone. No new certification prerequisite; no unconditional P!=NP claim.
