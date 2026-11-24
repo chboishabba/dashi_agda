@@ -15,13 +15,15 @@ N=32
 DT=F('0.000005')
 ZERO=F(0)
 
-def validate():
- k=4;a=F(s.TIMES[k]);b=F(s.TIMES[k+1]);mode=s.MODES[k]
- assert mode==(1,1,1)
+def validate(k=4):
+ Nlocal=64 if k==1 else N
+ assert k in (1,4)
+ a=F(s.TIMES[k]);b=F(s.TIMES[k+1]);mode=s.MODES[k]
+ assert mode==((0,1,1) if k==1 else (1,1,1))
  T0=I(a-DT,a+DT);T1=I(b-DT,b+DT)
- for j,T in ((3,T0),(4,T1)):
+ for j,T in ((k-1,T0),(k,T1)):
   lo,hi=map(F,s.BRACKETS[j]);assert T.a<lo<hi<T.b
- grid=[a+(b-a)*F(j,N) for j in range(N+1)]
+ grid=[a+(b-a)*F(j,Nlocal) for j in range(Nlocal+1)]
  centre=[I(F(v)) for v in s.STATES[k]]
  initial=[I(F(v)-F('0.0001'),F(v)+F('0.0001')) for v in s.STATES[k]]
  variation=[F('0.0001')]*9
@@ -37,13 +39,13 @@ def validate():
  assert DT*max(sum(x.mag() for x in row) for row in f0_jac)<F(1)
  variation=[variation[i]+DT*fstart[i].mag() for i in range(9)]
  P=[[I(int(i==j)) for j in range(9)] for i in range(9)]
- slabs=[];U_pending=True;V_pending=False
- for j in range(N):
+ slabs=[];U_pending=(k==4);V_pending=(k==1)
+ for j in range(Nlocal):
   ta,tb=grid[j],grid[j+1];h=tb-ta
   # Absolute source input/output clock envelopes are independent on first
   # and last slab, all internal knot times are exact rational refinements.
   clockstart=T0 if j==0 else I(ta)
-  clockend=T1 if j==N-1 else I(tb)
+  clockend=T1 if j==Nlocal-1 else I(tb)
   H=clockend-clockstart;assert H.a>0
   timebox=I(clockstart.a,clockend.b)
   mid=[(q.a+q.b)/2 for q in centre]
@@ -61,19 +63,30 @@ def validate():
   state=[I(centre[i].a-variation[i],centre[i].b+variation[i]) for i in range(9)]
   pic=[state[i]+I(0,H.b)*fx[i] for i in range(9)]
   assert all(x.within(y) for x,y in zip(pic,X)),('Picard',j)
-  # Actual source physical guards; no virtual root assumed.
+  # Actual source guard topology, including both one-sided switch slopes.
   gU=s.guard(3,X);gV=s.guard(4,X)
   gUdot=s.guard_slope(3,fx);gVdot=s.guard_slope(4,fx)
-  if U_pending:
-   if gU.a>0:U_pending=False
-   else:assert gUdot.a>0,('U ON conditional entry slope',j)
-  else:assert gU.a>0,('U ON physically positive',j)
-  if not V_pending:
-   if gV.a<=0:
-    V_pending=True
-    assert gVdot.b<0,('V OFF exit slope',j)
-  else:assert gVdot.b<0,('V OFF last interval slope',j)
-  assert (X[4]-F('0.0018')).a>0,('spark ON bank guard',j)
+  bank=X[4]-F('0.0018');bankdot=fx[4]
+  if k==4:
+   if U_pending:
+    if gU.a>0:U_pending=False
+    else:assert gUdot.a>0,('U ON conditional entry slope',j)
+   else:assert gU.a>0,('U ON physically positive',j)
+   if not V_pending:
+    if gV.a<=0:
+     V_pending=True;assert gVdot.b<0,('V OFF exit slope',j)
+   else:assert gVdot.b<0,('V OFF last interval slope',j)
+   assert bank.a>0,('spark ON bank guard',j)
+  else:
+   assert gU.b<0,('U OFF diode',j)
+   if V_pending:
+    if gV.a>0:V_pending=False
+    else:assert gVdot.a>0,('V ON conditional entry slope',j)
+   else:assert gV.a>0,('V ON physically positive',j)
+   if not U_pending:
+    if bank.a<=0:
+     U_pending=True;assert bankdot.b<0,('spark OFF exit slope',j)
+   else:assert bankdot.b<0,('spark OFF terminal slope',j)
   tangent,tail,_,L,q=pb.pb8(J,H,N=8)
   P=pb.matmul(tangent,P)
   # Zero-input nominal centre is independently enclosed by a second-order
@@ -87,22 +100,23 @@ def validate():
   # Positive, componentwise comparison bound for the x0 uncertainty.
   M=[[z.mag() for z in row] for row in J]
   tail_cmp=q*q/F(2)/(1-q/F(3))
-  variation_next=[variation[i]+H.b*sum((M[i][z]*variation[z] for z in range(9)),F(0))+
-                  tail_cmp*max(variation) for i in range(9)]
+  variation_next=[s.up(variation[i]+H.b*sum((M[i][z]*variation[z] for z in range(9)),F(0))+
+                  tail_cmp*max(variation)) for i in range(9)]
   # Actual terminal source-clock movement will be separately charged via
   # the explicit dPhi/dt1 = f(t1,Phi) identity below.
   slabs.append(dict(k=j,mode=list(mode),start_time=clockstart.record(),end_time=clockend.record(),
-   independent_start_end_time=j in (0,N-1),
+   independent_start_end_time=j in (0,Nlocal-1),
    exact_Picard=True,source_U_guard=gU.record(),source_U_guard_slope=gUdot.record(),
    source_V_guard=gV.record(),source_V_guard_slope=gVdot.record(),
+   source_bank_OFF_threshold_signed=bank.record(),source_bank_slope=bankdot.record(),
    physical_V_on_conditional_on_terminal_guard_zero=V_pending,
-   source_spark_bank_on=True,q=str(q),PB8_tail=str(tail),
+   source_spark_bank_on=bank.a>0,q=str(q),PB8_tail=str(tail),
    max_input_uncertainty=str(max(variation)),source_centre_end=[v.record() for v in centre_next]))
   centre=centre_next;variation=variation_next
-  if j==N-1:last_tube=X
+  if j==Nlocal-1:last_tube=X
  # On a true terminal event5 guard gV=0, strict gV'<0 on the suffix and
  # positive gV on the prefix imply no earlier physical V OFF switch.
- assert not U_pending and V_pending
+ assert (not U_pending and V_pending) if k==4 else (U_pending and not V_pending)
  # Full independent event-time derivatives remain from the ordered 9x9 flow.
  centre_with_variation=[I(v.a-variation[i],v.b+variation[i]) for i,v in enumerate(centre)]
  end_f=s.f(last_tube,T1,mode)
@@ -111,21 +125,21 @@ def validate():
  partial_end=end_f
  # Added explicit endpoint-time uncertainty for output-state enclosure.
  full_end=[centre_with_variation[i]+I(-DT,DT)*end_f[i] for i in range(9)]
- original_next=list(map(F,s.STATES[5]))
+ original_next=list(map(F,s.STATES[k+1]))
  terminal_center_included=[v.a<=x<=v.b for v,x in zip(full_end,original_next)]
  assert all(terminal_center_included)
- return dict(status='PASS_SOURCE_J31_ORIGINAL_EVENT4_TO_EVENT5_32_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG',
-  original_mode=list(mode),original_smooth_segment='event4 U ON to event5 V OFF',
+ return dict(status=('PASS_SOURCE_J31_ORIGINAL_EVENT1_TO_EVENT2_64_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG' if k==1 else 'PASS_SOURCE_J31_ORIGINAL_EVENT4_TO_EVENT5_32_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG'),
+  original_mode=list(mode),original_smooth_segment=('event1 V ON to event2 spark OFF' if k==1 else 'event4 U ON to event5 V OFF'),
   complete_smooth_segment_covered=True,nonzero_original_J24_state_radius='1/10000',
-  original_J29_event4_box_source_receipt_external=True,
+  original_J29_full_original_event_start_box_receipt_external=True,
   exact_root_time_brackets_paid_by_J29_external=True,
   independent_original_event_start_end_clock_halfwidth=str(DT),
-  original_U_ON_physically_valid_conditional_on_event4_guard_zero=True,
-  original_V_ON_physically_valid_conditional_on_event5_guard_zero=True,
-  original_spark_ON_guard_over_all_slabs=True,
-  all_strict_picard_slabs=N,all_PB8_9x9_tangent_slabs=N,
-  source_J24_event5_centre_in_terminal_enclosure=terminal_center_included,
-  source_J24_event5_full_box_in_terminal_enclosure=False,
+  original_entry_switch_valid_conditional_on_initial_guard_zero=True,
+  original_exit_switch_valid_conditional_on_final_guard_zero=True,
+  original_spark_ON_guard_over_all_slabs=(k==4),
+  all_strict_picard_slabs=Nlocal,all_PB8_9x9_tangent_slabs=Nlocal,
+  source_J24_next_event_centre_in_terminal_enclosure=terminal_center_included,
+  source_J24_next_event_full_box_in_terminal_enclosure=False,
   original_source_DxPhi_interval=[[x.record() for x in row] for row in P],
   original_source_partial_start_clock=[v.record() for v in partial_start],
   original_source_partial_end_clock=[v.record() for v in partial_end],
@@ -135,8 +149,8 @@ def validate():
   periodic_point_proved=False,hardware_metered=False,slabs=slabs)
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,required=True);args=ap.parse_args()
- obj=validate();args.out.parent.mkdir(parents=True,exist_ok=True)
+ ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,required=True);ap.add_argument('--segment',type=int,choices=[1,4],default=4);args=ap.parse_args()
+ obj=validate(args.segment);args.out.parent.mkdir(parents=True,exist_ok=True)
  args.out.write_text(json.dumps(obj,indent=2)+'\n')
  print(json.dumps({z:obj[z] for z in ('status','all_strict_picard_slabs','all_PB8_9x9_tangent_slabs','original_69D_Krawczyk')},indent=2))
  for d in obj['slabs']:
