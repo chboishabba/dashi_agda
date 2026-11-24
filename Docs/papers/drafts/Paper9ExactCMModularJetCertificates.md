@@ -1041,3 +1041,41 @@ execution-fibre cost-model owner remains Section 10 and
 RSS receipts are empirical cost consumers. Full source/metrics
 and the P0 acceptance gate live in
 `Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
+
+
+## 24 November — P0 geometric acceleration candidates COMP5k/l (not tested)
+
+The original ordered Chudnovsky binary-splitting triple
+\((P,Q,T)\) is an upper-triangular matrix carrier
+\(M=\left(\begin{smallmatrix}P&T\\0&Q\end{smallmatrix}\right)\).
+The original merge is matrix multiplication and its adjacent
+series increment is exactly
+\(\delta_n/(Q_nq_n)\), where
+\(\delta_n=P_np_n(13591409+545140134n)\) has sign
+\((-1)^n\) for \(n\ge2\). Thus the rational endpoint
+orientation can be selected from the **original signed
+source** without multiplying two enormous cross-products
+(COMP5k). An even-index section also gives a new
+quotient/remainder upper-witness identity (COMP5l).
+Let \(B=Tq+\delta\), \(C=Qq\),
+\(F=426880\cdot5^d\), \(R=\lfloor
+\sqrt{10005\cdot2^{2b}}\rfloor\), \(k=b-d\).
+If \(FRC=2^k u+\ell\) and \(u=xB+\rho\)
+with canonical nonnegative Euclidean remainders, then
+the original strict upper certificate is **equivalent** to
+\(x\delta+\rho+\lfloor(\ell+FC)/2^k\rfloor<Tq\).
+The retained residual witness replaces the second upper
+root-times-decimal numerator but might cost more live
+integer memory or quotient/remainder work. It is an
+exact alternative certificate, not an established
+optimization or SOTA result.
+
+Original attribution, full algebra, source labels, and the
+bounded next research plan are in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+The latest #1550/#1549 work supplies generic
+source/consumer adequacy and sharing inspiration only;
+it does not prove any Chudnovsky or performance result.
+The user requested **deferred testing**: source implementation
+and GitHub readback only, no new executable acceptance,
+benchmarks, Agda kernel check or independent SOTA comparison.
