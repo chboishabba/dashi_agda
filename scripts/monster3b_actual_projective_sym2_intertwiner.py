@@ -152,6 +152,65 @@ COEFS=[(1,1,0),(1,2,0),(1,3,0),(1,5,0),(2,3,0),
        (3,7,0),(1,1,1),(1,2,1),(2,1,3),(1,3,2),
        (5,7,1),(7,11,2),(13,4,9)]
 
+def cyclic_linear_fallback(S,T):
+    """Cyclic vector transport with just 78 target-vector unknowns.
+    No simple eigenvalue is required. When the source is simple, any
+    nonzero seed is cyclic and any nonzero equivariant map is invertible.
+    """
+    n=78
+    for seed_index in range(n):
+        vectors=[]; operators=[]; reduced=[]; pivots=[]
+        def accept(v,W):
+            x=v.copy()%P
+            for p,row in zip(pivots,reduced):
+                x=(x-int(x[p])*row)%P
+            nz=np.flatnonzero(x)
+            if not len(nz):return
+            p=int(nz[0]);pivots.append(p)
+            reduced.append(x*pow(int(x[p]),-1,P)%P)
+            vectors.append(v.copy()%P);operators.append(W.copy()%P)
+        accept(eye(n)[:,seed_index],eye(n))
+        j=0
+        while j<len(vectors) and len(vectors)<n:
+            for g in ("D","E"):
+                accept(S[g]@vectors[j]%P,modmul(T[g],operators[j]))
+                if len(vectors)==n:break
+            j+=1
+        if len(vectors)!=n:continue
+        B=np.column_stack(vectors);Binv=inverse(B)
+        W=np.stack(operators)
+        constraints=[]
+        for g in ("D","E"):
+            coeff=modmul(Binv,modmul(S[g],B))
+            for i in range(n):
+                constraints.append((modmul(T[g],W[i])-np.tensordot(coeff[:,i],W,axes=1))%P)
+        R=np.concatenate(constraints,axis=0)
+        # RREF in the target-vector unknowns, not n² matrix unknowns.
+        piv=[];j=0
+        for col in range(n):
+            nz=np.flatnonzero(R[j:,col])
+            if not len(nz):continue
+            k=j+int(nz[0]);R[[k,j]]=R[[j,k]]
+            R[j]=R[j]*pow(int(R[j,col]),-1,P)%P
+            row=R[j].copy()
+            R=(R-R[:,col,None]*row)%P
+            R[j]=row;piv.append(col);j+=1
+        free=[i for i in range(n) if i not in piv]
+        if not free:return None,{"status":"CYCLIC_SOURCE_NO_NONZERO_HOM","isomorphism_disproved":True}
+        for col in free:
+            w=np.zeros(n,dtype=np.int64);w[col]=1
+            for k,p in enumerate(piv):w[p]=-R[k,col]%P
+            F=modmul(np.column_stack([M@w%P for M in W]),Binv)
+            if not all(np.array_equal(modmul(F,S[g]),modmul(T[g],F)) for g in ("D","E")):
+                raise AssertionError("cyclic linear equation mismatch")
+            try:inverse(F)
+            except ValueError:continue
+            return F,{"status":"ACTUAL_MM_MOD31_SIMULTANEOUS_78_INTERTWINER",
+                "method":"cyclic_linear_target_vector","hom_nullity":len(free),
+                "cyclic_span_rank":n,"original_6Suz_ordinary_character_zero":False}
+        return None,{"status":"CYCLIC_HOM_BASIS_SINGULAR","hom_nullity":len(free),"isomorphism_disproved":False}
+    return None,{"status":"NO_CYCLIC_STANDARD_SEED_FOUND","isomorphism_disproved":False}
+
 def find_intertwiner(S,T):
     if not all(S[k].shape==(78,78) and T[k].shape==(78,78)
                for k in ("D","E")):
@@ -174,10 +233,7 @@ def find_intertwiner(S,T):
                 return None,{"status":"SAME_SOURCE_OPERATOR_OBSTRUCTION",
                     "simple_eigenvalue":lam,"polynomial_coefficients":list(coefs),
                     **result}
-    return None,{"status":"NO_CYCLIC_COMMON_SIMPLE_EIGENVALUE_IN_BOUNDED_SOURCE_FAMILY",
-        "candidate_polynomials":len(COEFS),
-        "simple_common_eigenvalues_tried":tried,
-        "isomorphism_disproved":False}
+    return cyclic_linear_fallback(S,T)
 
 def from_source(model,folder,phase,outdir):
     phase_info=original_phase(model,folder,phase)
