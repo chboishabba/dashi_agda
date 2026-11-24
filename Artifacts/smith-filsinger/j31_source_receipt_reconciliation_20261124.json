@@ -1,0 +1,34 @@
+{
+  "Agda_kernel": false,
+  "J30_recorded_arithmetic": {
+    "max_return_width_approx": 0.01804013596476442,
+    "max_return_width_exact": "18040135964764420653854489743/1000000000000000000000000000000",
+    "original_receipt_raw_byte_verified": false,
+    "source_receipt_blob_expected": "7ddea1ef36e1602e4e113bebd5e5bb351eb31910",
+    "tau_grid_endpoints": [
+      "57119866428905331/10000000000000000",
+      "14279966607226333/2500000000000000"
+    ],
+    "tau_grid_width_exact": "1/10000000000000000",
+    "tau_true_26_term_Machin_uncertainty_approx": 4.943917258176874e-38,
+    "tau_true_26_term_Machin_uncertainty_exact": "72655538208968912637057600179709465177012225596419032914168340354308724908499924667203186008922622309062216116821026494765740816/1469594542441057668631813230313378569540029833323257219995788215116741073281417809293767409010998857178282788797315254710498388439621209045071736909449100494384765625",
+    "verified_nine_recorded_return_interval_seed_inclusions": 9,
+    "width_over_original_raw_defect_budget_approx": 2141501.36214182
+  },
+  "exact_periodic_fixed_point_proved": false,
+  "full_tau_nominal_IVP_return_enclosure_source_receipt": true,
+  "local_no_ci": true,
+  "nominal_exact_roots_source_receipt_count": 6,
+  "original_J24_event_state_box_source_receipt_count": 5,
+  "physical_synthetic_model_only": true,
+  "schur": {
+    "augmented_dimension": 15,
+    "exact_det_identity": true,
+    "exact_schur_block_factorisation": true,
+    "guard_times": 6,
+    "real_source_interval_Jacobian_proved": false,
+    "state_coordinates": 9
+  },
+  "status": "PASS_J31_SOURCE_RECEIPT_ARITHMETIC_AND_15D_ALGEBRA_ONLY",
+  "uniform_15D_nonzero_ball_inclusion_proved": false
+}
