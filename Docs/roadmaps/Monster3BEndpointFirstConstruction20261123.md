@@ -2,6 +2,26 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — original GAP endpoint run handoff
+
+**Single executable now committed:** [\`scripts/run_monster3b_gap_endpoint.py\`](../../scripts/run_monster3b_gap_endpoint.py), PR #1545. This executes **the two existing primary CTblLib producers**, not new simulated character tables:
+
+1. \`monster_3b_suzuki_main_quotient_match.g\`: all source degree-78 families, main diagonal class-20 C3, distinct true 3B centre, 6.Suz central C2/C3, exact 210-class 12/78 rows, full main→MN3B→Monster character occurrence, faithful78 versus Nebe Sym²78.
+2. \`monster3b_atlas_suz2b_monster_4class_source_fusion.g\`: exact stored 2.Suz.2→6.Suz.2→main→MN3B→Monster order-four source class fusion, including an explicit ambiguity status rather than guessed 4D.
+
+**User workstation command (GAP + CTblLib required):**
+\`\`\`bash
+python3 scripts/run_monster3b_gap_endpoint.py --timeout 900
+\`\`\`
+
+The runner writes a **fresh per-execution** \`build/monster3b-gap-endpoint/run-<UTC>-<PID>/\` directory and never consumes stale prior JSON. It stages the literal existing GAP scripts with **only their receipt destination rewritten** to run-local files. The canonical outputs are \`endpoint_summary.json\`, \`original_main_character_receipt.json\`, \`original_four_class_fusion_receipt.json\`, and \`main_gap.log\` / \`fusion_gap.log\`; if a stage fails the summary persists with error and full log. \`--skip-fusion\` runs only the main character selector. The summary checks newly introduced K-class20 values for selected 17496 and113724, selected actual z_E paired-phase values, two source 12/78 C3 alignments, and still invokes the existing complete 210-class/cyclotomic original receipt validator. It never claims absolute zeta orientation, the user-local MM word→H source class, or original characteristic-zero Monster linear matrices.
+
+**Source producers → mathematical consumers:** Original GAP receipts + existing class functions → exact selected 12a/b and 78a/b source row, actual faithful-vs-Sym² branch, marked phase/diagonal quotient → \`IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact\`, \`IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact\`, direct N-idempotents / actual Hom S12⊕S78, \`Monster3BNormalizerCocycleCancellationExact\` and Paper10. The class fusion receipt supplies original 2.Suz.2/6.Suz.2/main/MN3B/Monster **class positions**, not a canonical match for the 28 mmgroup quotient-word hits. That final word identification is still M3B-L07/M3B-L10R/L12R. No formal certification/CI was requested or undertaken.
+
+**Run state:** committed source, GitHub readback. The user's local GAP runtime must execute it; no CTblLib runtime result is asserted in this update.
+
+---
+
 ## 24 November 2026 — GAP native class-20 TWO-C3, signed residual and selected 12/78 phase weld
 
 **New exact source-first result:** [main-table class20 double-C3 Fourier/odd-orientation theorem](../physics/Monster3BGAPClass20DoubleC3FourierDescent20261124.md), implemented inside the EXISTING original GAP producer \`scripts/monster_3b_suzuki_main_quotient_match.g\` on this PR. Inspiration from the supplied Langlands S3 descent is confined to the algebraic need to retain **sign under outer inversion**; it is not Monster source evidence or a Langlands claim.
