@@ -1,13 +1,13 @@
 {
   "date": "2026-11-24",
-  "status": "PASS_SOURCE_RATIONAL_J31_SEVEN_MODE_PICARD_6_TWO_TIME_MICROJACOBIANS_ONE_CORRELATED_NOT_GLOBAL_69D",
+  "status": "PASS_SOURCE_RATIONAL_7_PICARD_5_INDEPENDENT_TIME_1_FIXED_1_CORRELATED_NOT_GLOBAL_69D",
   "source_scope": "original prescribed-source J25/J31 nine-state finite-loss diode/spark smooth branch family",
   "code_path": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
-  "exact_committed_git_blob": "b4f7bd83307771ff0e2fd228bd43cffb059d25c0",
+  "exact_committed_git_blob": "47493fbefba44c20e7cb82e31521627f13611800",
   "executed_local_bytes_git_blob_match": true,
   "full_reproducible_local_rational_receipt": {
-    "sha256": "bb8189e9ec42b44b1503cb8d354b53271d4bb8b178db7aca719dd7e40eb663bf",
-    "byte_length": 146365,
+    "sha256": "6694e27910564f63dae5736fa06fc440a5671d9774acf74422b24d86ab4e11ef",
+    "byte_length": 146409,
     "output_generated_by_committed_code": true,
     "full_9x9_and_time_sensitivity_enclosures_generated_on_rerun": true
   },
@@ -23,7 +23,7 @@
     "IVP": "strict Picard self-map on uniform full-time spatial tube X with infinity Lipschitz L, q=L*h<1",
     "endpoint": "exact second-order integral Taylor enclosure using partial_t f+J(X)*f(X)",
     "tangent": "rigorous Peano-Baker first term h*J(X), remainder no larger than (L*h)^2/(1-L*h)",
-    "time_partials": "Six shortcharts (initial source time fixed on chart 0) have independent t0/t1 rational time-box derivatives; chart 6 only has correlated fixed h, not independent times. All require whole-segment weld for source 69D global acceptance.",
+    "time_partials": "Exactly five genuinely independent nonzero start/end clock rectangles (charts 1–5); chart 0 has fixed t0=0 and fixed local terminal clock, chart 6 has a correlated t1=t0+h slice. No full 69D event-time Jacobian.",
     "exact_guard": "pre/post derivatives of same named event surface separately; pre signs +,-,+,+,-,-; spark OFF/ON post signs reverse; all remaining diode and hysteresis guards strict on entire local tube"
   },
   "geometry": {
@@ -51,9 +51,10 @@
     "original_69D_Krawczyk_inclusion": false,
     "exact_periodic_orbit": false,
     "physical_source_metered": false,
-    "independent_two_absolute_time_shortchart_jacobians": 6,
+    "independent_two_absolute_time_shortchart_jacobians": 5,
     "sixth_chart_correlated_start_end_time_only": true,
-    "full_independent_seven_chart_69D_DF": false
+    "full_independent_seven_chart_69D_DF": false,
+    "initial_fixed_time_shortchart": 1
   },
   "chart_replay": [
     {
@@ -68,8 +69,9 @@
       "q_upper": "0.003369141",
       "peano_tail_upper": "0.000011390",
       "pre_post_slope": [],
-      "independent_two_time_chart": true,
-      "source_duration_interval": "1/8192"
+      "independent_two_time_chart": false,
+      "source_duration_interval": "1/8192",
+      "time_category": "fixed_source_clock"
     },
     {
       "k": 1,
@@ -96,7 +98,8 @@
       "source_duration_interval": [
         "2613/51200000",
         "3637/51200000"
-      ]
+      ],
+      "time_category": "independent_t0_t1_rational_rectangle"
     },
     {
       "k": 2,
@@ -123,7 +126,8 @@
       "source_duration_interval": [
         "2613/51200000",
         "3637/51200000"
-      ]
+      ],
+      "time_category": "independent_t0_t1_rational_rectangle"
     },
     {
       "k": 3,
@@ -150,7 +154,8 @@
       "source_duration_interval": [
         "2613/51200000",
         "3637/51200000"
-      ]
+      ],
+      "time_category": "independent_t0_t1_rational_rectangle"
     },
     {
       "k": 4,
@@ -177,7 +182,8 @@
       "source_duration_interval": [
         "2869/25600000",
         "3381/25600000"
-      ]
+      ],
+      "time_category": "independent_t0_t1_rational_rectangle"
     },
     {
       "k": 5,
@@ -204,7 +210,8 @@
       "source_duration_interval": [
         "2869/25600000",
         "3381/25600000"
-      ]
+      ],
+      "time_category": "independent_t0_t1_rational_rectangle"
     },
     {
       "k": 6,
@@ -228,7 +235,8 @@
         ]
       ],
       "independent_two_time_chart": false,
-      "source_duration_interval": "1/16384"
+      "source_duration_interval": "1/16384",
+      "time_category": "correlated_fixed_duration_t1_eq_t0_plus_h"
     }
   ],
   "source_receipt_attached_from_J29_J30_not_reproved_here": true,
