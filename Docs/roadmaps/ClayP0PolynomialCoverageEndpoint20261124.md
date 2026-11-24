@@ -1212,3 +1212,127 @@ assert (maskchecks,transchecks)==(18184,8038)
 | N6 | originalClayTransport | #1040 conditional consumer; unconditional endpoint unpaid |
 
 Aristotle BIDI: the explicit sufficient threshold is a correct polynomial-size alternate realization with beta_h>=exp(-o(N^(1/12) ln N)) and h=o(N^(1/12)), which would contradict G24 on the G22 subsequence. Do not assume this exists; generic monotonicization is false. Need an actual resource inequality that survives quotient/negation, sharing, bypass and recomputation. Prioritize proving or disproving such a target-specific transport and keep the direct uniform N4/N5 route active. A large transversal alone is not a resource lower bound; no further finite census or generic certification prerequisite. No P!=NP claim.
+
+
+## 17. P0-G25–G27 — actual limited negation, shared global inversion and exact minterm-layer obstruction (2026-11-24)
+
+Controlling endpoint remains Clay P vs NP, P0-C/D. User continuation from G22–G24 (heads 3245b317cb3f / bf7785458979, common blob f5dc95814f0c6d6cc1136889a87eb12f36ed3331, both read live). This packet attacks the gap between geometric mismatch independence and actual paid nonmonotone operations. No external programme or certification prerequisite. Reuse G13/G14/G17/G20–G24, #1291 indexed residuals, #1546 shared intermediates, #123 JMD lowering, #1006 FactorsThrough/self-reduction, #1129 standard-machine coverage, #1040 terminal, #1474/#1502 encoding, #607/#678 Aristotle. G22's compressed threshold circuit and actual Karp adder donor are relevant; do not count abstract term expansions as gates.
+
+### G25 — transport a genuinely nonmonotone restricted-model lower bound
+
+Amano and Maruoka, SIAM J. Comput. 35(1), 201–216 (2005), DOI 10.1137/S0097539701396959, https://epubs.siam.org/doi/10.1137/S0097539701396959 (publisher abstract inspected): for their specified growing clique size k=(log n)^(3 sqrt(log n)), circuits on n-vertex graphs with at most floor((1/6) log log n) NOT gates require at least 2^((1/5)(log n)^sqrt(log n)) gates (use the theorem's integer conventions and sufficiently large n). This is an established external result, not a new proof here. G22 works for arbitrary k<=n, using O(log n) comparison with the fixed threshold (not just power-of-two k). Its projection substitutes only constants or unnegated edge bits into G_M,3; hence neither total gate count nor number of NOT gates increases. With M=Theta(n), N=Theta(n^3), the same lower bound transfers to selector circuits along the resulting lengths whenever their NOT budget is <= floor((1/6) log_2 log_2 n), equivalently a sufficient asymptotic budget (1/6) log_2 log_2 N-O(1). Superpolynomial size follows since (log n)^sqrt(log n) grows faster than log N. This extends G22's monotone model to genuine but limited nonmonotonicity. Does not apply to free XOR or arbitrary nonmonotone gates without counting their basis expansion. G14 remains the unrestricted MC lower bound N-1. G24 remains a conditional geometric statement.
+
+### G26 — explicit shared logarithmic inversion mechanism (classical Markov–Fischer scope)
+
+Every general AND/OR/NOT circuit with N input bits and size S can be transformed into a circuit of size O(S+N^3) with <=ceil(log_2(N+1)) actual NOT gates. This classical polynomial-overhead phenomenon is known as Fischer's theorem (see Jukna, Boolean Function Complexity, section 10.4, https://web.vu.lt/mif/s.jukna/boolean/bool-V7.pdf, search excerpt inspected). The following explicit elementary construction is useful as a same-object shared-resource counterexample, not claimed novel.
+
+Use input bits t_i and weight w=sum t_i. For any input list, all monotone threshold wires T_k=[sum>=k] can be computed by triangular dynamic programming T_{j,k}=T_{j-1,k} OR (t_j AND T_{j-1,k-1}), constants T_{j,0}=1, T_{j,k}=0 for k>j. All thresholds for full list cost O(N^2). Let ell=ceil(log_2(N+1)) and z_j=1-bit_j(w). Compute z_j in descending j. For each possible high prefix H (a multiple of 2^(j+1) not exceeding N), include the monotone term
+
+    T_(H+2^j) AND product_{i>j: bit_i(H)=0} z_i
+
+when H+2^j<=N. OR all these terms and negate once to obtain z_j. Proof: any term whose prefix factors are true has H's high set bits containing all actual high set bits of w, thus H>=actual high prefix. If H is strictly larger, its threshold exceeds w; if equal, its threshold is true exactly when bit_j(w)=1. The actual high prefix is among the candidates whenever the bit is one. Induction gives exact complemented weight bits with ell NOT gates. Total number of high-prefix terms across j is O(N), each O(log N) gates.
+
+For each i compute monotone thresholds U_(i,k)=[sum_{j!=i}t_j>=k] with O(N^2) gates per list, U_(i,0)=1. Then
+
+    not t_i = OR_{k=0}^{N-1} [ U_(i,k) AND product_{j: bit_j(k)=0} z_j ].
+
+If all prefix factors hold, set bits of k contain those of w so k>=w. The threshold requires k<=w-t_i. Thus success iff t_i=0, with k=w then available (w<=N-1). Each output costs O(N^2+N log N), giving O(N^3) across all outputs. The only NOTs in the entire complement generator are the ell shared weight-bit negations. Convert an arbitrary circuit to dual polarities using G20b (linear overhead), then connect positive and complemented input wires from the generator. This supplies the claimed cost bound. The exact complement-vector computation is on the original input carrier; it is not a virtual signed operation or free oracle.
+
+Consequences: (i) a lower bound solely on the number of NOT gates larger than ell cannot prove unrestricted superpolynomial complexity; every function admits this many NOTs, and if its unrestricted size is polynomial so is the transformed size. (ii) Large G24 transversal/matching width does not imply a proportional number of NOT gates: all N complements share the same ell-bit mechanism. The number of actual NOTs can be far smaller than the number of independent original assignment mismatches. (iii) the gap between the G25 budget ~log log N and this log N ceiling is real. A superpolynomial size lower bound for selector circuits allowing ell NOT gates would suffice for NP not subset P/poly via this polynomial transport; no such bound is known/proved here. This is an exact alternative endpoint sufficient condition, not a new mandatory phase. Do not count NOT operations in free-XOR circuits without converting basis.
+
+### G27 — the actual minterm layer is cheap; upward closure is the hard extension
+
+For selector absent-clause bits t indexed by scopes I (1<=|I|<=3) and falsifying patterns p on I, define the monotone circuit
+
+    H(t) = AND_I OR_{p in {0,1}^I} [ t_(I,p) AND product_{i in I} t_({i},p_i) ].
+
+This is O(N) bounded-fanin gates. For every satisfying selector G(t)=1, a witness x supplies the local p=x|I in every term; hence G<=H. Conversely if H(t)=1 and |t|<=b=sum binom(m,j), at least one allowed pattern in each of the b scopes is required, so there is exactly one pattern per scope. Singleton scopes determine a unique x; every chosen local pattern must agree with these singleton choices. Thus t=P_x, an actual minterm. Therefore H=G on the ENTIRE region |t|<=b, including all minterms and all inputs immediately below them. H is a monotone overapproximation, not the G21 underapproximation, so this does not contradict G22 or pay G24.
+
+Sharp escape: for every m>=3, take singleton variable 1 with both allowed values, all other singleton variables fixed zero. Choose exactly one pattern per nonsingleton scope, all zero except scope {1,3}, where the pattern demands x_1=1 and x_3=0. Scope {1,2} demands x_1=0 and x_2=0. Every chosen pattern is locally compatible with the singleton supports, H=1, but there is no global witness, G=0. This has |t|=b+1. Therefore agreement with all minterms, all their lower neighbours, or every selector of weight <=b is insufficient for the hard upward closure. Even the pair-only family admits the same local-consistency false positive, but its global implication reachability is cheap. Distinguish width-three global consistency, not merely any local conflict.
+
+Define B(t)=H(t) AND NOT [|t|>=b+1]. This exact minterm recognizer has O(N^2) size and one actual NOT gate. It accepts all and only original minterms; G is its upward closure (exists u<=t with B(u)=1). Since G22 is superpolynomial monotone, minterm recognition + upward closure cannot be assumed to be a free or polynomial monotone operation. A general circuit for G can be ORed with B while retaining correctness at polynomial overhead, but no cheap monotone underapproximation covering every minterm follows. This is a strong same-object control against charging negation, witness count or correctness on selected boundary samples. The global selection task is exactly the missing part; no conclusion about the size of arbitrary circuits implementing upward closure.
+
+### Local exact regression, no CI/kernel
+
+Executed the following Python integer gate-DAG implementation: all 2046 input assignments for N=1..10 verified both complemented weight bits and every output complement. Gate counts (N,size,NOTs): (1,8,1),(2,31,2),(3,69,2),(4,147,3),(5,248,3),(6,380,3),(7,554,3),(8,840,4),(9,1143,4),(10,1499,4). Independently checked H>=G on all 260 selector inputs for m=1,2, and equality on their entire weight<=b region. Six explicit sharp false positives m=3..8 passed. These are finite checks of the formulas, not asymptotic experiments or native certification.
+
+```python
+from itertools import combinations
+class Circuit:
+ def __init__(self,n): self.n=n;self.g=[]
+ def gate(self,op,a,b=None):
+  self.g.append((op,a,b));return self.n+1+len(self.g)
+ def AND(self,a,b):return self.gate('&',a,b)
+ def OR(self,a,b):return self.gate('|',a,b)
+ def NOT(self,a):return self.gate('!',a)
+ def all(self,op,xs):
+  r=1 if op=='&' else 0
+  for x in xs:r=self.gate(op,r,x)
+  return r
+ def thresholds(self,xs):
+  T=[1]
+  for x in xs:
+   T=[1]+[self.OR(T[j] if j<len(T) else 0,self.AND(T[j-1],x)) for j in range(1,len(T)+1)]
+  return T
+ def eval(self,x):
+  a=[0,1]+[(x>>i)&1 for i in range(self.n)]
+  for op,u,v in self.g:a.append(1-a[u] if op=='!' else a[u]&a[v] if op=='&' else a[u]|a[v])
+  return a
+def compile_neg(n):
+ C=Circuit(n);xs=list(range(2,n+2));L=n.bit_length();T=C.thresholds(xs);z={}
+ for j in reversed(range(L)):
+  terms=[]
+  for H in range(0,n+1,1<<(j+1)):
+   k=H+(1<<j)
+   if k<=n:terms.append(C.all('&',[T[k]]+[z[i] for i in range(j+1,L) if not(H>>i&1)]))
+  z[j]=C.NOT(C.all('|',terms))
+ out=[]
+ for i in range(n):
+  Ti=C.thresholds(xs[:i]+xs[i+1:]);terms=[]
+  for t in range(n):terms.append(C.all('&',[Ti[t]]+[z[j] for j in range(L) if not(t>>j&1)]))
+  out.append(C.all('|',terms))
+ assert sum(op=='!' for op,*_ in C.g)==L
+ return C,z,out
+checks=0
+for n in range(1,11):
+ C,z,out=compile_neg(n)
+ for x in range(1<<n):
+  a=C.eval(x);w=x.bit_count()
+  assert all(a[z[j]]==1-(w>>j&1) for j in z)
+  assert all(a[v]==1-(x>>i&1) for i,v in enumerate(out));checks+=1
+assert checks==2046
+def carrier(m):
+ I=[I for w in range(1,min(3,m)+1) for I in combinations(range(m),w)]
+ C=[(I0,p) for I0 in I for p in range(1<<len(I0))]
+ idx={c:i for i,c in enumerate(C)}
+ def G(t):
+  return any(all(t>>idx[I0,sum((x>>j&1)<<k for k,j in enumerate(I0))]&1 for I0 in I) for x in range(1<<m))
+ def H(t):
+  return all(any(t>>idx[I0,p]&1 and all(t>>idx[(j,),p>>k&1]&1 for k,j in enumerate(I0)) for p in range(1<<len(I0))) for I0 in I)
+ return I,C,idx,G,H
+checks=0
+for m in (1,2):
+ I,C,idx,G,H=carrier(m)
+ for t in range(1<<len(C)):
+  g,h=G(t),H(t);assert not g or h
+  if t.bit_count()<=len(I):assert g==h
+  checks+=1
+assert checks==260
+for m in range(3,9):
+ I,C,idx,G,H=carrier(m)
+ t=sum(1<<idx[I0,1 if I0==(0,2) else 0] for I0 in I)|(1<<idx[(0,),1])
+ assert t.bit_count()==len(I)+1 and H(t) and not G(t)
+```
+
+### Updated endpoint-first ledger (no extra phase)
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G25 | selectorLimitedNegationSuperpoly | external Amano–Maruoka theorem transported by G22; restricted genuine nonmonotonicity |
+| G26 | sharedLogarithmicInputInversion / polynomialLogNegationNormalization | explicit proof and executed gate DAG; classical scope, #1546 sharing, G20 dual rails |
+| G27 | selectorMintermLayerExact / sharpLocalHullEscape / oneNegationMintermRecognizer | derived and checked; G13/G14 and same-object G23 |
+| G12a/N4 | unrestrictedSerialCharge | OPEN: actual total work including shared inversion and arbitrary nonmonotone bypasses |
+| G12b/N5 | selectorUnrestrictedSuperpoly | OPEN: alternatively show superpoly size even with ceil(log_2(N+1)) NOT gates; sufficient by G26 |
+| N6 | originalClayTransport | #1040 conditional terminal, #1129 costed machine coverage |
+
+Next Aristotle BIDI: distinguish the hard global upward closure of the explicit minterm relation from its easy exact layer recognition. Invert from G25's actual NOT-budget lower bound toward G26's logarithmic cap, but only by proving size bounds, never by assuming many disjoint mismatches mean many NOT gates. General matching shortcut and G21/G24 padding remain controls. The direct uniform N4/N5 route remains a weaker sufficient OR route; no need to solve a stronger nonuniform endpoint if direct machine proof succeeds. No claim of P!=NP, no CI or kernel detour.
