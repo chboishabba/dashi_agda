@@ -295,6 +295,8 @@ int main(int argc,char**argv){
    <<" source_scale_recipe=product_local_extra_content_j_1_to_n_minus_1"
    <<" source_prime_support=2-3-5-23-29"
    <<" source_reopen_requires_scale=true"
+   <<" source_zero_mode=empty_interval_P1_Q1_T0"
+   <<" source_tail_sign="<<((result.n&1u)?"negative":"positive")
    <<" schedule_model=precision_indexed_projective_peak"
    <<" schedule_precision_bits="<<currentPlanLedger.precisionBits
    <<" schedule_digits="<<currentPlanLedger.digits
@@ -302,7 +304,8 @@ int main(int argc,char**argv){
    <<" schedule_merges="<<currentPlanLedger.scheduledMerges
    <<" schedule_right_first="<<currentPlanLedger.rightFirstMerges
    <<" schedule_predicted_peak_bytes="<<setprecision(1)<<currentPlanLedger.modelPeakBytes
-   <<" schedule_cpp_plan_heap_bytes="<<currentPlanLedger.planningHeapBytes
+   <<" schedule_cpp_plan_object_payload_bytes="<<currentPlanLedger.planningObjectPayloadBytes
+   <<" schedule_cpp_allocator_overhead_measured=false"
    <<" schedule_model_is_measured_or_certified=false"
    <<" source_full_integer_exact=true"
    <<" source_truncation_performed=false"
