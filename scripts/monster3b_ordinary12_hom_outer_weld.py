@@ -22,7 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from sympy import Integer, Rational, sqrt, simplify, re, im
+from sympy import Rational, sqrt, simplify, re, im, conjugate
 from sympy.polys.domains import QQ
 from sympy.polys.matrices import DomainMatrix
 
@@ -52,7 +52,7 @@ def inv(A):
     D=DomainMatrix(A,(len(A),len(A)),K)
     return D.inv().to_list()
 def sigma(A):
-    return [[K.from_sympy(K.to_sympy(x).subs(sqrt(-3),-sqrt(-3)))
+    return [[K.from_sympy(conjugate(K.to_sympy(x)))
              for x in row] for row in A]
 def word_value(word,gens):
     if not isinstance(word,list): raise ValueError("word must be list of generator tokens")
