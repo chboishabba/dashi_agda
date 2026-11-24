@@ -236,9 +236,10 @@ def local_full_parity_smoke():
             good.append(x)
             count = 0
             for y in range(1<<len(rvars)):
-                count += all(any((((x>>v)&1) if v<len(lvars) else
-                                  ((y>>(v-len(lvars))&1)) == b)
-                                 for v,b in c) for c in CC)
+                count += all(any(
+                    (((x >> v) & 1) if v < len(lvars) else
+                     ((y >> (v-len(lvars))) & 1)) == b
+                    for v,b in c) for c in CC)
             counts.append(count)
     assert (len(lvars),len(rvars),len(C),len(good),sorted(counts),sum(counts)) == (12,16,86,3,[1,2,2],5)
     return len(lvars),len(rvars),len(C),len(good),sorted(counts)
