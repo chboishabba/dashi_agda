@@ -150,27 +150,34 @@ def certify_chart(k,h):
  tube=[I(a-tube_radius,a+tube_radius) for a in xc]
  t0=I(tc-time_radius,tc+time_radius)
  window=I(tc-time_radius,tc+time_radius+h)
+ # Independent (t0,t1) boxes when k<=5: t0=tc±tr,
+ # t1=tc+h±tr. Last k=6 still needs correlated moving endpoint.
+ full_two_time=(k<=5)
+ dtime=I(h-2*time_radius,h+2*time_radius) if full_two_time else I(h)
+ assert dtime.a>0
+ hmax=dtime.b
  fx,J=fJ(tube,window,mode)
- pic=[a+I(0,h)*v for a,v in zip(start,fx)]
+ pic=[a+I(0,hmax)*v for a,v in zip(start,fx)]
  if not all(x.within(y) for x,y in zip(pic,tube)):return None
  L=max(sum(v.mag() for v in row) for row in J)
- q=L*h
+ q=L*hmax
  if q>=1:return None
  # dx/dx0 Peano-Baker: I + h*J(tube) + nonnegative tail <= q^2/(1-q)
  tail=q*q/(1-q)
- Phi=[[I(int(i==j))+h*J[i][j]+I(-tail,tail) for j in range(9)] for i in range(9)]
+ Phi=[[I(int(i==j))+dtime*J[i][j]+I(-tail,tail) for j in range(9)] for i in range(9)]
  f0=f(start,t0,mode)
  # Endpoints vary in absolute source clock. The flow map obeys
  # dPhi/dt1=f(t1,Phi), dPhi/dt0=-D_xPhi*f(t0,x0).
- # These bounds hold on the correlated fixed-duration t1=t0+h slice,
- # NOT the full independent 69D event-time rectangle.
+ # First six subcharts cover independent end-time/start-time boxes
+ # (source clock 0 fixed); last k=6 is a correlated t1=t0+h slice.
+ # Neither implies a full, unsplit 69D whole-segment interval Jacobian.
  f_terminal=f(tube,I(tc-time_radius+h,tc+time_radius+h),mode)
  dt_start=[-sum((Phi[i][j]*f0[j] for j in range(9)),I(0)) for i in range(9)]
  sn,co=phase(window)
  ft=[I(0) for _ in range(9)]
  ft[5]=-PARAM['omega']*K*sn;ft[6]=-PARAM['omega']*K*co
  acceleration=[ft[i]+sum((J[i][j]*fx[j] for j in range(9)),I(0)) for i in range(9)]
- end=[start[i]+h*f0[i]+(h*h/F(2))*acceleration[i] for i in range(9)]
+ end=[start[i]+dtime*f0[i]+(dtime.square()/F(2))*acceleration[i] for i in range(9)]
  if not all(x.within(y,strict=False) for x,y in zip(end,tube)):
   raise AssertionError('Taylor2 endpoint excluded from previously valid Picard tube')
  # On a genuine zero-guard initial event, fixed post-event slope makes
@@ -198,13 +205,16 @@ def certify_chart(k,h):
      J29_original_receipt_still_required=True,
      original_J29_source_proof_reexecuted_here=False,
      initial_ball_radius=str(start_radius),initial_time_radius=str(time_radius),
+     start_time_interval=t0.record(),
+     end_time_interval=I(tc+h-time_radius,tc+h+time_radius).record(),
+     elapsed_time_interval=dtime.record(),
      proven_fulltime_picard_tube_radius=str(tube_radius),
      source_interval_f_guard_slope_pre_post=slope,
      endpoint_9D_Taylor2_interval=[v.record() for v in end],
      jacobian_9x9_endpoint_interval=[list(map(I.record,row)) for row in Phi],
-     fixed_duration_slice_partial_start_time=[v.record() for v in dt_start],
-     fixed_duration_slice_partial_end_time=[v.record() for v in f_terminal],
-     independent_start_end_time_rectangle_Jacobian_proved=False,
+     source_local_partial_start_time=[v.record() for v in dt_start],
+     source_local_partial_end_time=[v.record() for v in f_terminal],
+     independent_start_end_time_rectangle_Jacobian_proved=full_two_time,
      derivative_fulltube_inf_lipschitz_bound=str(L),peano_q=str(q),
      peano_tail_component_radius=str(tail),
      exact_Picard_inward=True,
@@ -230,6 +240,7 @@ def main():
     non_switching_guard_tubes=7,
     all_seven_modes_physically_admissible_conditional_on_event_zero=True,
     input_state_radius='1/10000',input_time_radii=['0']+['1/200000']*5+['1/5000'],
+    independent_start_end_time_subchart_rectangles=6,
     J29_first_five_original_event_boxes_geometrically_covered=True,
     J29_J30_all_six_exact_root_time_brackets_geometrically_covered=True,
     actual_source_smooth_chart_seed_proof_for_first_five_requires_J29_receipt=True,
