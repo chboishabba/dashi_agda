@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-24",
+  "status": "PASS_SOURCE_7_PICARD_6_GENUINE_INDEPENDENT_TIME_PB8_NOT_LONG_69D",
+  "owner_pr": 1537,
+  "source_file": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
+  "source_file_blob": "47493fbefba44c20e7cb82e31521627f13611800",
+  "new_executable": "scripts/check_smith_filsinger_j31_pb8_anisotropic_six_time_20261124.py",
+  "new_executable_exact_git_blob": "eb685d88e5fbfb8c33f17b676be7ce01baaeca7e",
+  "replay_origin": "Local Python Fraction; new script byte-identical to committed Git blob; imported same source f, fJ, guard, phase and event literals; local source-module copy was an earlier byte version (cd1d8...) retaining unchanged source primitives; not a byte-identical replay against newest dependency blob",
+  "full_local_fraction_receipt_sha256": "50272cdc814f03b933eb00f469c70f72d0d784cc3c7dcb5907c8208d5908b8e1",
+  "full_local_fraction_receipt_bytes": 146113,
+  "exact_method": {
+    "input_state_halfwidth": "1/10000",
+    "event_time_halfwidths": [
+      "0",
+      "1/200000",
+      "1/200000",
+      "1/200000",
+      "1/200000",
+      "1/200000",
+      "1/5000"
+    ],
+    "sixth_anisotropic_tube_radii": [
+      "3/2000",
+      "3/2000",
+      "3/2000",
+      "3/2000",
+      "3/2000",
+      "3/500",
+      "3/250",
+      "3/1000",
+      "3/1000"
+    ],
+    "picard": "X0 + [0,h_upper] f(X,T) strictly interior X; physical smooth source mode, exact 1e-30 outward grid",
+    "tangent": "ordered 9x9 Peano-Baker n=0..8 J(X)^n * duration^n / n!, with time-ordered products enclosed and geometric tail q^9/(9!*(1-q/10))",
+    "clock_derivatives": "d_t0 Phi=-D_xPhi*f(t0,x0), d_t1 Phi=f(t1,Phi), independent for six event windows; chart0 clocks fixed",
+    "source_slope": "pre switch +,-,+,+,-,-; both spark post signs reverse",
+    "conditional_physical_scope": "true source event zero surfaces and upstream J29/J30 root receipts external; sixth J24 state box unpaid"
+  },
+  "checks": {
+    "seven_source_mode_Picard_tubes_passed": 7,
+    "seven_source_PB8_matrix_inclusions_passed": 7,
+    "all_81_PB8_entries_included_in_PB1_per_chart": true,
+    "six_genuinely_nonzero_start_end_time_rectangles": 6,
+    "initial_fixed_time_rectangles": 1,
+    "signed_pre_and_post_guards_verified": 6,
+    "sixth_anisotropic_pre_slope_negative": true,
+    "isotropic_picard_admissible_but_pre_slope_interval_straddles_zero": true,
+    "all_six_original_J29_J30_root_brackets_in_time_domains": true,
+    "original_J24_five_box_membership_external_J29_source_receipt": true,
+    "complete_seven_smooth_segment_maps": false,
+    "complete_69D_F_original": false,
+    "complete_69D_DF_original": false,
+    "69_strict_original_Krawczyk_slacks": false,
+    "exact_periodic_orbit": false,
+    "original_physical_receiver_metered": false
+  },
+  "chart_ceilings_rational_grid": {
+    "q_units": "q strictly less than q_upper_nano / 1e9, exact test executed",
+    "PB8_tail_units": "Peano tail < pb8_tail_upper / 1e30 (exact rational upward rounding, tail only)",
+    "PB1_tail_units": "Peano tail < pb1_tail_upper / 1e30",
+    "charts": [
+      {
+        "k": 0,
+        "h": "1/8192",
+        "duration": [
+          "1/8192",
+          "1/8192"
+        ],
+        "q_upper_nano": 3369141,
+        "pb8_tail_upper": 155,
+        "pb1_tail_upper": "11389481315222184116407820"
+      },
+      {
+        "k": 1,
+        "h": "1/16384",
+        "duration": [
+          "2613/51200000",
+          "3637/51200000"
+        ],
+        "q_upper_nano": 1960571,
+        "pb8_tail_upper": 2,
+        "pb1_tail_upper": "3851386865005830532731881"
+      },
+      {
+        "k": 2,
+        "h": "1/16384",
+        "duration": [
+          "2613/51200000",
+          "3637/51200000"
+        ],
+        "q_upper_nano": 1823382,
+        "pb8_tail_upper": 1,
+        "pb1_tail_upper": "3330793000187747956532896"
+      },
+      {
+        "k": 3,
+        "h": "1/16384",
+        "duration": [
+          "2613/51200000",
+          "3637/51200000"
+        ],
+        "q_upper_nano": 1960571,
+        "pb8_tail_upper": 2,
+        "pb1_tail_upper": "3851386865005830532731881"
+      },
+      {
+        "k": 4,
+        "h": "1/8192",
+        "duration": [
+          "2869/25600000",
+          "3381/25600000"
+        ],
+        "q_upper_nano": 6979679,
+        "pb8_tail_upper": 108408,
+        "pb1_tail_upper": "49058329866347128971022478"
+      },
+      {
+        "k": 5,
+        "h": "1/8192",
+        "duration": [
+          "2869/25600000",
+          "3381/25600000"
+        ],
+        "q_upper_nano": 3645141,
+        "pb8_tail_upper": 314,
+        "pb1_tail_upper": "13335660533999079864727538"
+      },
+      {
+        "k": 6,
+        "h": "1/2000",
+        "duration": [
+          "1/10000",
+          "9/10000"
+        ],
+        "q_upper_nano": 24840001,
+        "pb8_tail_upper": 9946754985,
+        "pb1_tail_upper": "632742934492801181344599861"
+      }
+    ]
+  },
+  "proof_firewall": {
+    "original_J29_nominal_six_exact_crossings": 6,
+    "original_J24_full_state_boxes_paid": 5,
+    "J30_nominal_tau_return_enclosed": true,
+    "sixth_time_interval_valid_for_local_source_but_actual_state_attachment_open": true,
+    "source_local_nine_state_PB8_jacobian_proved": true,
+    "all_physical_long_segments": false,
+    "nonzero_rational_69D_box_F_and_DF": false,
+    "original_69D_Krawczyk": false,
+    "exact_periodic_fixed_point": false,
+    "measured_100_percent_energy_extraction": false,
+    "github_ci": false,
+    "proof_assistant_kernel": false
+  }
+}
