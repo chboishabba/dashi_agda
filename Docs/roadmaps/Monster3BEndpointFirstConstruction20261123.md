@@ -2,6 +2,30 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — P3/P4 mathematical advance: actual Hom action and unique 12+78 projectors
+
+**New endpoint derivation:** [same-object characteristic-zero 90D Hom operator and 12+78 idempotent construction](../physics/Monster3BActualHomMultiplicityCharacterProjectorEndpoint20261124.md). This is the canonical P3/P4 mathematical theorem and replaces the idea of fabricating a separate 90×90 matrix model. Distinguish abstract theorem and actual-source instantiation carefully.
+
+For \`W_s=P_sW\` and **the actual** \(E=3^{1+12}\), \`S_s=Hom_E(H_s,W_s)\` is the genuine 90-dimensional multiplicity carrier. The source-attached authentic modulation subgroup \(B\) yields the fixed-vacuum subspace \`S_s ≅ (W_s)^B\`, projector \(\Pi_{0,s}=729^{-1}\sum_{b\in B}\rho(b)\), and 729 mutual-orthogonal translation projectors \(\Pi_{x,s}\). The evaluation inverse is constructive, \(\Phi_s(e_x\otimes u)=T_xu\), \(\Psi_s(w)=\sum_x e_x\otimes T_x^{-1}\Pi_{x,s}w\). This is a general **actual-carrier operator construction**, provided original characteristic-zero \(\rho\) and genuine section are attached.
+
+**The new explicit 90D representation formula** uses the original Barraclough–Wilson extension \(K_s\) of the 729D Heisenberg representation to the phase-preserving \(6.\mathrm{Suz}\) inertia:
+\[
+(L_s(g)f)(h)=\rho_W(g)f(K_s(g)^{-1}h).
+\]
+It is an honest linear action on the same actual \(S_s\) whenever the \(K_s\) gauge is chosen as a genuine extension of the same source inertia action. The operator can be evaluated without dense 65610D tensors: if \(K_s(g)e_0=\sum_x k_xe_x\), any nonzero \(k_x\) yields \(\boxed{L_s(g)u=k_x^{-1}T_x^{-1}\Pi_{x,s}\rho_W(g)u}\) for actual \(u\in(W_s)^B\), and the expression is independent of the selected nonzero \(x\). For the outer phase reversal \(g\), use \(L_g:S_s\to S_{-s}\), NOT an internal \(S_s\)-endomorphism.
+
+**Character projector construction, precisely conditional on same-object matching:** the existing \`IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact.agda\` already establishes the original **character/Clifford** \(8748=729\cdot12,\ 56862=729\cdot78\). If the genuine actual Hom action just constructed has the specified original \(6.\mathrm{Suz}\) character \(\chi_{12}+\chi_{78}\) with central phases and class ordering matched, then the central idempotents
+\[
+e_a=\frac{\chi_a(1)}{|Q|}\sum_{q\in Q}\chi_a(q^{-1})L_s(q),\quad a\in\{12,78\},
+\]
+on the **correct phase-preserving group \(Q\) to which \(L_s\) actually descends**, satisfy \(S_s=\mathrm{im}\,e_{12}\oplus\mathrm{im}\,e_{78}\), with ranks 12,78. The actual constituent operators are restrictions of the original \(L_s\). This is canonical up to source-equivalent bases and removes the *mathematical need to guess a separate 90D carrier*. It **does not assert** that user-local 28 quotient hits or mod-7 MMV samples provide the original complex \(\rho_W\), or that character values produce numerical matrices.
+
+**Updated exact lemmas:** M3B-L09R actual \(B\) projector / \(\Phi_s,\Psi_s\); L10R original honest \(K_s\), Hom action, one-column extraction and phase-reversing variant; L11R attach actual \(\chi_{S_s}=\chi_{12}+\chi_{78}\) on the 210-class exact source/centre; L12R coherent outer \(S_s\to S_{-s}\) scalar gauge; L13R faithful selected 78 central \(C_2\) class and wrong-family exclusion. P3's **abstract solution is mathematical**, same-object concrete operator attachment open. P4's **canonical constituent-projector theorem is mathematical**, actual source character equality and numerical action open. P2 simultaneous original Monster full-group lift remains open and independent; P6 certification remains deferred.
+
+**Producer/consumer crosswalk:** Barraclough–Wilson ordinary 729 extension, \`IbrahimMonster3BLinearMultiplicityHomSpaceExact\` and \`Monster3BMultiplicityEvaluationExact\` → actual Hom \(\Phi_s,\Psi_s\); original character-level \`IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact\` + GAP 210-class row / centre → \(e_{12},e_{78}\); \`Monster3BNormalizerCocycleCancellationExact\` + \`Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact\` → paired scalar/cocycle; \`Monster3BActualZetaPromotionPipelineExact\`, Paper 10 original cyclotomic operations → final action. **Do not rebuild** these sources, rerun the 28 candidate search or use \(Fin90\) as a concrete representation.
+
+---
+
 ## Endpoints and exact interpretation
 
 **E0 — source group:** actual Monster normalizer elements realizing the original ATLAS (2.Suz:2) generators on the same (E=3^{1+12}), with an explicit (E)-corrected coherent group lift, relators and source class positions. A matrix conjugacy on (E/Z(E)) is **not** equality of lifts or identification of the group extension.
