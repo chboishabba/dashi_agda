@@ -1,6 +1,6 @@
 # Filsinger J31 — seven original-source rational microchart tubes, tangent enclosures and spark turnaround
 
-**24 November 2026 · PR #1537 · Smith/Filsinger-attributed prescribed-wave finite-loss nine-state model.** The new proof producer is [the executable source interval kernel](../../scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py), with [machine acceptance receipt](../../Artifacts/smith-filsinger/j31_native_seven_shortcharts_rational_picard_20261124.json). The executed local Python bytes match GitHub blob **cd1d800246a700f27f7a1584692fba84ac08e9fb**. No CI, Agda kernel, measured original environmental wave or physical receiver is claimed. **The original 69D Krawczyk theorem remains OPEN.**
+**24 November 2026 · PR #1537 · Smith/Filsinger-attributed prescribed-wave finite-loss nine-state model.** The new proof producer is [the executable source interval kernel](../../scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py), with [machine acceptance receipt](../../Artifacts/smith-filsinger/j31_native_seven_shortcharts_rational_picard_20261124.json). The executed local Python bytes match GitHub blob **b4f7bd83307771ff0e2fd228bd43cffb059d25c0**. No CI, Agda kernel, measured original environmental wave or physical receiver is claimed. **The original 69D Krawczyk theorem remains OPEN.**
 
 ## Actual original nine-state finite-loss smooth vector fields
 
@@ -33,7 +33,7 @@ The strict first inclusion and Picard contraction give existence/uniqueness and 
 D_x\Phi_m\in I+hJ_m(X)+[-e,e]^{9\times9},
 \qquad e=q^2/(1-q).
 \]
-That remainder is a safe positive series bound for \(q<1\), not an empirical ODE solver tolerance. Finally \(\partial_{t_1}\Phi=f_m(t_1,\Phi)\) and \(\partial_{t_0}\Phi=-D_x\Phi\,f_m(t_0,x_0)\) are enclosed on the **correlated fixed-duration** slice \(t_1=t_0+h\). No independent two-time rectangle is certified yet; this is a documented remaining J31 derivative condition.
+That remainder is a safe positive series bound for \(q<1\), not an empirical ODE solver tolerance. Finally \(\partial_{t_1}\Phi=f_m(t_1,\Phi)\) and \(\partial_{t_0}\Phi=-D_x\Phi\,f_m(t_0,x_0)\) are enclosed on **independent start/end clock rectangles** for shortcharts 1–5 (and the fixed initial-clock chart 0). Their input clock boxes imply the strictly positive elapsed-time interval ([h-2delta_t,h+2delta_t]); Picard and Peano–Baker use its upper endpoint for all-time validity, and each derivative uses the full duration interval. Shortchart 6 is certified only on the **correlated fixed-duration** slice (t_1=t_0+h), because the sixth event input-time uncertainty exceeds the current short step. The complete independently timed 69D whole-segment Jacobian is still OPEN.
 
 For the **physical mode** check, every guard other than the one just switching has strict sign over the entire Picard tube, including the opposing hysteresis spark threshold. For the newly switched diode, the signed post-switch derivative forces physical positive-part branch admissibility at positive local times **provided the true state at the switching instant satisfies its exact guard zero**. The receipt retains that conditional rather than asserting all members of a rectangular seed box themselves satisfy the event guard.
 
@@ -44,14 +44,14 @@ Each input state box has original J24-centre halfwidth \(10^{-4}\); its spatial 
 | Chart | Original smooth mode (U,V,spark) | Accepted exact duration \(h\) | Upper rational \(q\) |
 |---:|---|---|---:|
 | 0 | (0,0,ON) | \(1/8192\) | 0.003369141 |
-| 1 | (0,1,ON) | \(1/16384\) | 0.001684571 |
-| 2 | (0,1,OFF) | \(1/16384\) | 0.001566695 |
-| 3 | (0,1,ON) | \(1/16384\) | 0.001684571 |
-| 4 | (1,1,ON) | \(1/8192\) | 0.006451197 |
-| 5 | (1,0,ON) | \(1/8192\) | 0.003369141 |
+| 1 | (0,1,ON) | \(1/16384\) | 0.001960571 |
+| 2 | (0,1,OFF) | \(1/16384\) | 0.001823382 |
+| 3 | (0,1,ON) | \(1/16384\) | 0.001960571 |
+| 4 | (1,1,ON) | \(1/8192\) | 0.006979679 |
+| 5 | (1,0,ON) | \(1/8192\) | 0.003645141 |
 | 6 | (0,0,ON) | \(1/16384\) | 0.001684571 |
 
-All \(q\) and slope display bounds are **coarse rational outward upper/lower bounds** derived from the exact Fraction results, not 64-bit acceptance tests. Each source chart has: complete Picard tube PASS, second-order flow endpoint PASS, 81/81 variational entry enclosures PASS and fixed-duration two-time derivative formulas PASS. Both diode and spark *non-switching* guards are proved strict on the whole microtube. No chart is falsely expanded to its full segment.
+All \(q\) and slope display bounds are **coarse rational outward upper/lower bounds** derived from the exact Fraction results, not 64-bit acceptance tests. Each source chart has: complete Picard tube PASS, second-order flow endpoint PASS, 81/81 variational entry enclosures PASS and time-derivative formulas PASS, with **six locally independent clock-box certificates** (chart 0 has the original fixed start time) and a seventh correlated fixed-duration certificate. Both diode and spark *non-switching* guards are proved strict on the whole microtube. No chart is falsely expanded to its full segment.
 
 ## Correct six signed guard transitions and spark-turnaround theorem
 
@@ -70,8 +70,8 @@ The six named crossings have pre-switch slope signs \((+,-,+,+,-,-)\). Their *pr
 
 ## Executed source, machine reproducibility and exact remaining proof
 
-The committed script was locally executed with Python Fraction and no CI, producing the full 143177-byte exact rational 9×9/timing receipt (SHA256 **b933c040666663f18bca4ec788118ef41d6b987299145425d0ef96d7aa6ba68c**); the smaller committed [machine receipt](../../Artifacts/smith-filsinger/j31_native_seven_shortcharts_rational_picard_20261124.json) pins the full deterministic replay and source blobs. No local-file handoff is requested: on the repository checkout, invoke the committed script with the --out argument to reproduce the full exact JSON.
+The committed script was locally executed with Python Fraction and no CI, producing the full 146365-byte exact rational 9×9/timing receipt (SHA256 **bb8189e9ec42b44b1503cb8d354b53271d4bb8b178db7aca719dd7e40eb663bf**); the smaller committed [machine receipt](../../Artifacts/smith-filsinger/j31_native_seven_shortcharts_rational_picard_20261124.json) pins the full deterministic replay and source blobs. No local-file handoff is requested: on the repository checkout, invoke the committed script with the --out argument to reproduce the full exact JSON.
 
-**Still OPEN:** Carry the full time-indexed seven source segments using high-order Taylor/Lohner or correlated affine-noise transport rather than treating wide local interval output boxes as independently recentered centres; admit the sixth actual event interface state or prove an alternative source-admissible 69D domain; handle independently variable start/end event times in the full 69D Jacobian; establish all 69 strict outward-rational Krawczyk slacks and uniqueness. Then and only then claim an exact \(\tau=20\pi/11\) orbit. The original physical Filsinger pin/energy/source metrology, five-parameter family and original hardware 100% energy claim remain separate unproved gates.
+**Still OPEN:** Carry the full time-indexed seven source segments using high-order Taylor/Lohner or correlated affine-noise transport rather than treating wide local interval output boxes as independently recentered centres; admit the sixth actual event interface state or prove an alternative source-admissible 69D domain; complete independent start/end timing on the sixth shortchart and all complete seven-segment 69D Jacobian entries; establish all 69 strict outward-rational Krawczyk slacks and uniqueness. Then and only then claim an exact \(\tau=20\pi/11\) orbit. The original physical Filsinger pin/energy/source metrology, five-parameter family and original hardware 100% energy claim remain separate unproved gates.
 
 This proof carries a typed source zero guard, signed pre/post residuals, physical event time, chart refinement and full interface matching separately; it does not treat a local certificate as global endpoint equality. See [J31 69D projective Schur owner](SmithFilsingerJ31P0ProjectiveSparseResidualConeCrossPR20261124.md) and [authoritative live roadmap](../roadmaps/FilsingerP0SixGuardExactStatusAndJ31ShootingCut20261124.md).
