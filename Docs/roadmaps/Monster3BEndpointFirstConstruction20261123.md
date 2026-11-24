@@ -26,6 +26,46 @@ on the **correct phase-preserving group \(Q\) to which \(L_s\) actually descends
 
 ---
 
+## 24 November 2026 — P3/P4 stronger source-first closure: original N-isotypic projection BEFORE Hom
+
+**New mathematical cut:** [actual normalizer-restriction idempotents constructing same-object 12+78](../physics/Monster3BActualNormalizerIdempotentSameObject1278Endpoint20261124.md). This supersedes P4's earlier **circular route** “compute actual 90D character, then look for its 12+78 summands.” The original source already has the complete coefficient-one restricted character components of \(V_{196883}|_N\) by Breuer–Magaard–Wilson and An–Wilson degree inventory, and Barraclough–Wilson/Ibrahim identify the two nontrivial-central-phase paired outer character families:
+\[
+143+17496+65520+113724=196883,\qquad
+1+143+65520+17496+113724=196884.
+\]
+Do NOT infer the original source labels from degree count alone. The **explicit premise** is the genuine \(\rho_W|_N\) four-character restriction with selected \(\theta_{17496}\), \(\theta_{113724}\), phase-paired and with no central-zero component. The original Agda owner \`IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda\` pays the degree-occurrence and \`IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact.agda\` pays the Clifford phase split; the original selected source class/word match is still an attachment leaf.
+
+**Strong new direct operator formula:** On the **same actual Monster weight-two module** \(W\) define
+\[
+E_d=\frac{d}{|N|}\sum_{g\in N}\theta_d(g^{-1})\rho_W(g),
+\quad
+P_s=\tfrac13\sum_{j=0}^2\zeta^{-sj}\rho_W(z)^j.
+\]
+The \(E_d\) are central group-algebra idempotents and hence commute with the phase projectors \(P_s\) even though \(z\) is inverted by the outer generator. The 17496 and 113724 isotypic subspaces have no centre-trivial part; the outer automorphism exchanges phases, so \(\operatorname{rank}(P_sE_{17496})=8748\) and \(\operatorname{rank}(P_sE_{113724})=56862\) for each \(s\in\{1,2\}\). The actual original carrier decomposes **without guessing matrices**:
+\[
+W_s=P_sW=(P_sE_{17496}W)\oplus(P_sE_{113724}W).
+\]
+Now take Hom, **not** an arbitrary \(Fin90\):
+\[
+S_{12,s}=\operatorname{Hom}_E(H_s,P_sE_{17496}W),\quad
+S_{78,s}=\operatorname{Hom}_E(H_s,P_sE_{113724}W),
+\]
+so the *same* \(S_s=\operatorname{Hom}_E(H_s,W_s)\) is \(S_{12,s}\oplus S_{78,s}\), dimensions **12 and 78**. The source inertia \(K_s\) defines the actual operators by \(L_{a,s}(g)f=\rho_W(g)\circ f\circ K_s(g)^{-1}\) and the prior one-column Weil-vacuum formula restricts to each actual block. This is an **abstract characteristic-zero same-object operator construction**, not a computed 12×12/78×78 matrix and not proof that the user-local Hit0 quotient word is a specific source class. It removes the demand to identify \(\chi_{S_s}\) independently *before* defining and splitting the genuine Hom space.
+
+### Exact lemmas and current status after this cut
+
+- **M3B-L08** original \(3B\) trace and \(729\times90\) already paid; **M3B-L09R** obtains the actual Hom sectors and \(\Phi,\Psi\) constructively **under the original \(\rho_W|_E\) and chosen genuine section**; no standalone model recognition assumption or fabricated \(Fin90\) action.
+- **M3B-L11S (NEW, direct group-algebra split):** under the original complete restricted character/source-row premise \(R_{\rm actual}\), prove \(\operatorname{im}E_{17496}\), \(\operatorname{im}E_{113724}\) are actual \(N\)-stable subspaces of \(W\), commute with \(P_s\), yield ranks \(8748,56862\), and give direct Hom subspaces ranks \(12,78\). **Mathematical theorem constructed, source-selected class/character coordinates must be matched to the same actual \(N\) in the mmgroup word pipeline.**
+- **M3B-L11R** reclassified: no longer a prerequisite for *existence or same-object direct sum*; the remaining equality \(\chi_{S_s}=\chi_{12}+\chi_{78}\) fixes the original \(6.\mathrm{Suz}\) class-by-class labels/central \(C_2,C_3\) orientation and scalar extension. Existing GAP 210-class owners supply it; do not rerun degree occurrence.
+- **M3B-L10R** unchanged for actual source-*normalized numerical* matrices: \(\rho_W(g)\), genuine \(K_s(g)\), selected original Monster C/D lift required. The functorial operator \(L_s\) and block restrictions are mathematically *defined on the actual representation* already.
+- **M3B-L04–L07 / L12R** still open mathematical full-group generator-lift, kernel membership, central relator corrections, selected class and outer centre inversion. Nothing about isotypic projectors implies original ATLAS semipresentation words identify full Monster elements.
+
+**Updated P3 deliverable:** actual \(W_s\), group-algebra idempotents and true \(S_{12,s}\oplus S_{78,s}\); distinction between existence theorem and uncomputed original matrices. **Updated P4 deliverable:** original source-paired character isotypic operators and exact 12/78 restrictions, then pin class labels/outer gauge. **Updated P5:** actual \(K\otimes L\) and original Paper10 operator attach. **P6** certification remains deferred until mathematical endpoints.
+
+**Producer → consumer additions:** Breuer–Magaard–Wilson restriction and An–Wilson full degree inventory → \`IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact\` → \(E_d\) on original \(\rho_W\); Barraclough–Wilson source \(729\) extension/Clifford split → \`IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact\` → \(P_sE_d\) → \`IbrahimMonster3BLinearMultiplicityHomSpaceExact\`; \`Monster3BNormalizerCocycleCancellationExact\` and \`Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact\` → \(L_{a,s}\) and phase swap → \`Monster3BActualZetaPromotionPipelineExact\` / Paper10.
+
+---
+
 ## Endpoints and exact interpretation
 
 **E0 — source group:** actual Monster normalizer elements realizing the original ATLAS (2.Suz:2) generators on the same (E=3^{1+12}), with an explicit (E)-corrected coherent group lift, relators and source class positions. A matrix conjugacy on (E/Z(E)) is **not** equality of lifts or identification of the group extension.
