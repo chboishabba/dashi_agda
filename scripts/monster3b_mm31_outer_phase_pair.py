@@ -15,6 +15,7 @@ Characteristic-zero 12D Hom/outer and literal 4D class are NOT inferred.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import numpy as np
@@ -141,6 +142,21 @@ def main():
             or manifest.get("source_blob_sha")!=
              "c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2"):
             raise ValueError("not the same authenticated original Monster 3B E")
+        source_hashes={}
+        for label,folder,state in (("plus",a.plus,plus),("minus",a.minus,minus)):
+            for key in ("canonical_C_word","canonical_D_word"):
+                if state.get(key)!=cover.get(key) or not state.get(key):
+                    raise ValueError("missing or mismatched literal C/D source identity: "+key)
+            if state.get("original_E_source_blob_sha")!=manifest["source_blob_sha"]:
+                raise ValueError("source E identity mismatch")
+            for filename in ("mmv31_hom_status.json","actual_C2_12_78_mod31.npz",
+                    "actual_C2_on_90_mod31.npz","actual_D_12_78_vacuum_sandwich_mod31.npz",
+                    "actual_CDCinv_12_78_vacuum_sandwich_mod31.npz"):
+                source_hashes[label+"/"+filename]=hashlib.sha256((folder/filename).read_bytes()).hexdigest()
+        record["source_packet_sha256"]=source_hashes
+        record["canonical_C_word"]=cover["canonical_C_word"]
+        record["canonical_D_word"]=cover["canonical_D_word"]
+        record["original_E_source_blob_sha"]=manifest["source_blob_sha"]
         z=MM(manifest["center_word"])
         B=[MM(s) for s in manifest["modulation_words"]]
         if len(B)!=6 or z.order()!=3:
