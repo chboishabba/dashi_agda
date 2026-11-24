@@ -1788,3 +1788,246 @@ performed in this tranche. Mathematical
 source identities do not imply a
 speedup until bit-cost and memory
 work are actually established.
+
+
+## 24 November — COMP5w: no lower remainders; same three-sector decision from upper W (NO TESTING)
+
+**Programme and source owners.** This is an exact next cut from
+COMP5v's source-common radical product and COMP5u's signed
+three-sector retry. The original Chudnovsky leaf P/Q/T ordered
+matrix, source-local positive projective scale
+\(G_{0,n}=\prod_{1\le j<n}24h_j\), signed affine edge, true
+original-index suffix continuation, root guard b and requested
+decimal precision d remain separate source-indexed carriers.
+COMP5j is the historical measured owner; COMP5t/u/v continue
+as independent alternate source candidates. The user explicitly
+DEFERRED executable testing and benchmarks.
+
+### G18 — final floor consumer needs only two nested quotients
+
+For original positive signed adjacent series endpoints,
+let \(H=426880\,5^d\), \(k=b-d\),
+\(R=\lfloor2^b\sqrt{10005}\rfloor\),
+\(q=q_n>0\) and original normalized affine edge
+\(E_n=(n,T',Q',V)\). Define \(Z=HQ'\) and \(Y=ZR\).
+As in G15, \(A=HRD_h=qY\) for even n or \(Y\) for
+odd n, while \(W=H(R+1)D_l=Y+Z\) for even n or
+\(q(Y+Z)\) for odd n. The lower candidate floor is exactly
+
+\[
+\boxed{x=\left\lfloor\frac{
+     \lfloor A/2^k\rfloor}{N_h}\right\rfloor}
+\]
+
+since nested integer floor equals
+\(\lfloor A/(2^kN_h)\rfloor\) for positive N_h.
+This uses `mpz_fdiv_q_2exp` and
+`mpz_fdiv_q` (quotient-only), **not**
+`mpz_fdiv_qr_2exp` or `mpz_fdiv_qr`.
+In particular it neither creates \(\ell\)
+nor \(\rho\) on successful admission.
+The first strict upper test is the
+identical original source consumer
+
+\[
+u=\left\lfloor W/2^k\right\rfloor
+<(x+1)N_l .
+\]
+
+The implementation retains neither original
+\(A\) nor its shifted quotient after
+\(x\) has been computed, retaining only
+its eventual integer output consumer.
+
+### G19 — the OTHER source-endpoint upper root is obtained from W
+
+Only after first upper admission fails,
+materialize \(\eta=W\bmod 2^k\).
+The original upper π endpoint lower-radical
+bound is still exactly
+
+\[
+u+\left\lfloor\frac{\eta-HD_l}{2^k}\right\rfloor
+=\left\lfloor\frac{HRD_l}{2^k}\right\rfloor.
+\]
+
+If this is BELOW \((x+1)N_l\),
+then the upper-source boundary may be
+radically ambiguous: safely refine
+only b, retaining n and E_n.
+
+Otherwise \(\lfloor HRD_l/2^k\rfloor
+\ge(x+1)N_l\); the source UPPER π bound
+is obstructed even at the LOWER root
+enclosure. Now the G12/COMP5v
+decision would inspect the lower
+pair's \(\rho,\ell\). But their exact
+two-residue correction is *identically*
+the following **opposite-source
+upper-radical** quotient:
+
+\[
+\left\lfloor\frac{H(R+1)D_h}{2^k}\right\rfloor.
+\]
+
+Because the actual adjacent source
+denominators are \(Q'\) and \(Q'q_n\),
+we can reconstruct that source
+numerator **from the existing W**:
+
+\[
+\boxed{
+H(R+1)D_h=
+\begin{cases}
+q_n W,&n\text{ even},\\
+W/q_n,&n\text{ odd}.
+\end{cases}}
+\]
+
+The even branch is an exact multiplication
+by the indexed positive leaf \(q_n\).
+The odd branch is an **EXACT DIVISION**
+(\(W=q_n(Y+Z)\)) with a fail-closed
+divisibility check; do not silently
+replace it with rounded division.
+No new large radical multiplication,
+lower dyadic \(\ell\), or integer
+\(\rho\) is ever required.
+
+Thus the exact conservative
+three-sector policy is:
+
+1. **Admit** when
+   \(\lfloor W/2^k\rfloor<(x+1)N_l\).
+2. **RefineRadical** when admission
+   fails but
+   \(\lfloor HRD_l/2^k\rfloor<(x+1)N_l\).
+3. After both fail, set
+   \(v=\lfloor H(R+1)D_h/2^k\rfloor\).
+   If \(v\ge(x+1)N_h\), **RefineRadical**;
+   otherwise **ExtendSeries**, by
+   reconstructing original normalized
+   P from the signed residual and
+   appending only original-indexed
+   suffix \([n,n')\).
+
+The invalid source/zero-sign domain
+is rejected *before* these sectors.
+The policy is EXACTLY the same as
+COMP5u/v because the G12 lower
+crossing equality is equivalent to
+this opposite-upper-root inequality.
+This is a mathematical equivalence of
+the original decision predicates,
+not proof that particular native
+source execution or performance is
+correct. The policy can safely over-refine
+b in the same cases as COMP5u.
+
+### G20 — reverse source and true cost fibres
+
+The edge-source BIDI remains
+\((P',Q',T')\leftrightarrow(n,T',Q',V)\)
+with exact
+\(P'=(V-T'q_n)/(p_n(A+Bn))\)
+and source scale recipe \(G_{0,n}\).
+The original root/suffix index,
+signed residual and source zero mode
+survive. Projective normalization
+preserves the final integer floor,
+but IF a future raw-coordinate
+consumer asks for the normalized
+Euclidean lower remainders, COMP5u's
+G14 exact dyadic carry formula still
+applies: it has not been replaced
+by a false scalar equality.
+COMP5w does not invoke this
+reopening, because its selected
+decision consumer does not ask for
+\(\rho,\ell\) at all.
+
+The ordinary successful path is
+a single source-common radical
+product, initial parity q multiplication
+only if even, **two lower quotient-only
+operations**, one upper dyadic quotient,
+one exact comparison and no lower
+or upper remainders. It also does
+not build \(Q'q_n\) as a standalone
+terminal denominator.
+
+On a failing upper witness, the
+algorithm pays for \(\eta\), one
+signed dyadic correction and, only
+on the genuine fixed-source obstruction
+candidate, one **late** opposite
+endpoint multiplication by \(q_n\)
+(even) or exact division by \(q_n\)
+(odd), plus another dyadic quotient.
+These steps can be expensive, and
+a fail-closed divisibility check is
+a real extra cost. When n is less
+than \(2^{20}\) the source
+\(q_n=(640320\,n)^3<2^{120}\),
+but this conditional bound is
+NOT a proof of better timing or
+GMP peak allocation.
+
+The new `Counts` receipt
+separates common radical construction,
+lower quotient-only calls, lower
+remainders constructed (always 0
+by construction), first upper quotient,
+failure-only \(\eta\), source
+obstruction checks, the late even
+multiply / odd exact divide, signed
+root corrections, selected sector
+and the existing prefix/root/suffix
+work. These are source operation
+COUNTS, not end-to-end measured
+GMP bit costs or process memory.
+Avoid claiming a physical
+improvement before source-matched
+testing and benchmark acceptance.
+
+### New source owners and controlling gates S26–S32
+
+- `scripts/pi_p0_lazy_lower_sector.hpp`:
+  standalone pure exact original
+  signed-source three-sector
+  classifier from the shared
+  radical, with QUOTIENT-only
+  lower floor, failure-only upper
+  remainder and conditional
+  opposite-source quotient
+  reconstruction.
+- `scripts/check_pi_p0_lazy_lower_schedule.cpp`:
+  integrated independently selectable
+  COMP5v-derived GMP source
+  keeping the COMP5s projective
+  prime-content producer,
+  precision-indexed tree plan,
+  authentic signed affine edge,
+  original scale/provenance,
+  root-only precision retries
+  and suffix-only source retries.
+  Prior measured COMP5j and
+  experimental COMP5u/v
+  implementations are unchanged.
+
+| Gate | Proof/acceptance obligation | Status |
+|---|---|---|
+| S26 | G18 nested floor equality for \(N_h>0\), including \(k=0\), with no hidden remainder dependency | Derived; formal kernel OPEN |
+| S27 | G19 parity q identity, odd exact-divisible construction, both signed correction branches, same COMP5u/v result sectors | Exact source identities derived; compiled and negative parity testing DEFERRED |
+| S28 | Original normalized projective P/Q/T, signed-edge inversion, positive source zero-mode separation, exact G14 raw-remainder carry when explicitly reopened | Existing source contracts; independent producer/kernel verification OPEN |
+| S29 | Native source liveness: release A/shifted quotient before upper W, do not allocate standalone Q'q; failure-only eta/late opposite witness | Source implementation committed; actual heap accounting DEFERRED |
+| S30 | Bit-work model for lower quotient-only vs divmod, cost of late q multiply/exact divide and divisibility check, GMP scratch, branch-frequency, planner allocations and source-reopening cost | Structural counters only; optimization cost theorem OPEN |
+| S31 | Preserve genuine original-index suffix composition and separately monotone root guard; fail closed on overflow, source invalidity, odd/even signs | Candidate source contract; exact-source acceptance DEFERRED |
+| S32 | Independent π source proof, Bishop same-real, exact-source hash/strict-bound regression, calibrated Pareto, external world SOTA | OPEN; user-requested deferral |
+
+No compiler, test suite, local Python
+or SymPy check, CI run, Agda/Lean
+kernel, measured latency/RSS or
+external performance audit is
+claimed for COMP5w. Source file
+readback is not executable acceptance.
