@@ -2808,3 +2808,144 @@ Additional executed tests: 60 seeded formulas each q=1..5, select up to 10 claus
 | N6 | originalClayTransport | conditional #1040/#1129 |
 
 Geometry-forward continuation: identify actual source separators after legitimate semantic contraction and study a global resource inequality or an exact shortcut on G48. Do not require all algorithms to use these separators, or charge width, signed cover size, channel dimension, individual valuation, or precision debt as unavoidable cost. G65 rules out valuation-only rejection; G69 lets us separate actual geometric hardness from merely hiding locally visible reductions. The neutral zero mode and signed residual are retained through the typed source/consumer hyperfabric, but materialization is optional. Keep direct uniform endpoint active. No additional mandatory certification phase and no P!=NP claim.
+
+
+## 28. P0-G70–G74 — geometry-forward two-sided bijunctive fibres and guarded implication transport (2026-11-24)
+
+Controlling endpoint literal Clay P vs NP. User continuation of G65–G69, attached source read in container; geometry-forward, retain original zero mode, inhabited neutral fibre, signed residual and indexed hyperfabric. Both roadmaps read live at 7dcee418032a / c315cce7c3d8, common blob 89d6606ba60c7e5626218d4b48f3f21455362374. Producers: G13 original selector, G16 median/pair-hull, G17 implication reachability, G22/G30 compressed CLIQUE, G45–G48 locally-full compiler/flag, G51 canonical consumer quotient, G56–G59 modes/history, G65–G69 signed separator and graph minor; existing ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact (section 27), #1291 H05, #1006 FactorsThrough and decision-to-witness, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 costed machine coverage, #1040 terminal, #607/#678 Aristotle. Standard 2-SAT implication graph and median closure are classical; source-specific compiler and two-sided transport derived here. No claim of novelty for general restricted-SAT hardness, no native kernel execution or CI. No changes to other programmes.
+
+### G70 — crossing ternary geometry, both conditional fibres bijunctive
+
+Partition source variables into L,R. Suppose every selected clause meets both sides and has width <=3. Fix any assignment x on L. Delete each clause already satisfied by x, remove all its remaining left literals from the others. Every residual clause on R has width 1 or 2 (no empty clause since original clause crosses). Similarly fixing y on R yields 2-CNF on L. Each conditional existence query therefore has a polynomial implication-graph algorithm; no assertion that conditional exact counts are polynomial. General cut of any width-three formula has this property for the crossing clauses ONLY, not arbitrary internal right/left clauses.
+
+### G71 — exact semantic separator and signed class contraction
+
+For a 2-CNF H on r right variables, and any boundary subset B, its existential projection to B is majority-closed: the solution relation of each binary clause is majority-closed, intersections preserve this, and three projected witnesses can be lifted and combined by coordinatewise majority. G16 then recovers the projected relation exactly from unary/binary pattern supports. Compute these supports by polynomially many 2-SAT queries with one or two pinned variables; separately test satisfiability and represent empty relation by an explicit bottom marker (also valid for B empty). Output canonical formula K_B(H): forbid all missing unary/binary patterns on B. This is a polynomial-time source-specific semantic contraction for decision. At B=R the key kappa(x)=K_R(F_x) is equal iff the right witness relations are equal. For every future context on R alone, equality of keys implies equal count and existence for that fixed left assignment; different keys distinguished by a full right pin context. This is the minimal equivalence relation for all those contexts, not a minimal bit representation or lower bound on arbitrary computation. Existential projection onto a proper subset does NOT preserve conditional multiplicities: y OR z projects to both y values but has 1 and 2 extensions respectively. Keep count weights when the consumer needs them.
+
+For each key K, let X_K be its actual source fibre of left assignments. With original left/right independent weights a(x),c(y) (including signed Fourier characters, or symbolic witness weights), the exact sum is
+
+    Z = sum_K (sum_{x in X_K} a(x)) * (sum_{y models K} c(y)).
+
+For a general cut, internal left constraints filter X_K and internal right constraints multiply the second sum; crossing residual key remains 2-CNF but internal right SAT may not. For unweighted count this retains W as zero mode; for signed modes retain h_L,h_R independently and their products. A zero signed class weight does not imply an empty X_K; retain its inhabited support, source provenance and gain/loss separately. All additions and multiplications in the coefficient ring, creation precision and lift residual as G64. Original chronological history tau and refinement/chart k independent of chosen cut/elimination order, and original labels transported in any chart. Grouping is exact for fixed crossing source and future right-only contexts. A new crossing event can split a class; retain original source descriptions rather than assert canonical keys alone suffice for arbitrary updates. G58 six-face source mask identity and dependent residual remain separate from any lossy quotient.
+
+Computing one key costs polynomial in input and r, but generating all reachable keys and multiplicities may be exponential. Example r independent crossing equalities x_i=y_i: each x induces its own singleton right relation, 2^r keys, even though whole formula is easy and primal graph a matching. Thus number of semantic classes cannot be charged independently to unrestricted time. Another control: all crossing binary clauses not x_i OR y_j have complete bipartite primal graph, but only two residual keys (all y free if x=0, all y pinned 1 otherwise); large width need not imply many keys.
+
+### G72 — explicit locally-full crossing-only parsimonious compiler
+
+Construct eight zero-gadget variables Z indexed 0..7, with left Z0..Z3, right Z4..Z7. List in lexicographic order all 48 triples I with min(I)<4<=max(I); forbid the little-endian pattern given by the corresponding digit of
+
+    737362511425175275471342317614566635167417725234
+
+Every digit nonzero. Exact exhaustive enumeration of 256 assignments (reproducer below) gives unique all-zero solution. Each clause allows 7/8 patterns, all unary/pair projections and affine hull full as in G45. Every clause crosses the named partition. This is a fixed finite source witness, not an assumed new forcing theorem.
+
+For arbitrary normalized width<=3 input formula/selector on q original variables, put originals on L. Allocate distinct private copies a per literal occurrence for each possible original clause (or just given list). First copy on L, later copies on R. For every occurrence of x add
+
+    (not x OR a OR Z6), (x OR not a OR Z7).
+
+Both cross, with distinct scopes and global equality because Z6=Z7=0. For each selected original clause use its occurrence copies with original signs, pad a unit with Z4,Z5 and a binary with Z0. All ternary clauses now cross, every scope unique: private copies separate main clauses, equality clauses contain original variables, gadget contains neither. Every local relation on a selected triple has exactly one forbidden pattern and all other scopes full. Original witness extends uniquely by copies and fixed gadget; converse by original clause semantics. Selector projection uses only constants and original unnegated absent-clause bit (one per main clause), so monotone. Output variable count O(q+total occurrences) and full selector length polynomial. Hence SAT on this promise is NP-complete, exact witness count preserved, despite all local affine/pair projections being full and every one-side pinned conditional decision in P. This also applies to G48's always-inhabited known-witness flag construction. The flag can remain on L, with exact original b=0 and b=1 fibre counts unchanged. No claim of P!=NP.
+
+Fixed-weight option: if original main clause inactive, select the inert alternative (a_first OR not Z6 OR Z7). Crosses and distinct from main/padded equality scopes; always true globally. Exactly one main/alternative per original clause, so total selected count 48+2*occurrences+number of clauses, independent of input. This is a complemented projection, not monotone. No central-weight assertion. Empty source formula permitted; original empty clause handled separately by fixed UNSAT or pre-normalization.
+
+Geometry transport: deleting Z and contracting occurrence-original edges gives original primal graph exactly. Add eight Z to each bag of original tree decomposition; attach leaf of active scope originals + up to three copies + Z, size <=14. Inactive copies attach individually to original bag with Z; inert alternative contained there. Thus tw(G)<=tw(G')<=max(tw(G)+8,13). Given original decomposition construction polynomial; no assumption of polynomial optimal treewidth. The locally-full crossing constraint need not inflate geometric width asymptotically.
+
+### G73 — guarded implication paths: shared polynomial residual evaluator, not a polynomial joint selector
+
+For each crossing clause C write its left literals and right literals separately. Let g_C(x) be conjunction of the negations of its left literals; length <=2. This is the exact activation guard of its right residual clause. Build a symbolic implication graph on the 2r right literals. A residual (u OR v) supplies edges not u -> v and not v -> u, both labelled g_C; unit treated as u=v. OR duplicate edge guards, include identity reachability. Compute symbolic transitive closure by Floyd–Warshall using shared AND/OR gates:
+
+    A^(k+1)_ij = A^k_ij OR (A^k_ik AND A^k_kj).
+
+For each fixed x, induction gives exactly the actual right implication reachability. Define bad(x)=OR_i (A_(i+,i-)(x) AND A_(i-,i+)(x)). Then good(x)=not bad(x) iff right fibre inhabited. Symbolic evaluator has O(number of clauses+r^3) bounded-fanin gates, uniform polynomial construction in original input and source labels; negated left literals shared, one final NOT for complement; no unrolling of path families or semantic class enumeration. All guard dependencies retained (not independent switches). This is a legitimate global joint *representation* shortcut beyond G71. It returns the exact Boolean function of left variables whose nonemptiness is the original problem. If both sides nonempty, |L|<=O(log N) yields polynomial enumeration of left assignments (similarly right); no such bound for all instances. Finding x with good(x)=1 remains NP-complete by G72. For UNSAT, every left assignment activates contradictory two-way paths, but may activate different paths. The circuit computes this universally indexed failure predicate on each input; it does not decide its tautology for free. This isolates the actual global existence operation while allowing shared paths, different orderings, signed cancellation and alternate representations. No lower bound on arbitrary algorithms from count of paths, classes or reachability matrix entries.
+
+### G74 — retain G30's actual restricted lower bound on this geometry
+
+Rechecked Błasiok–Meierhöfer CCC 2025 Corollary 5, https://drops.dagstuhl.de/storage/00lipics/lipics-vol339-ccc2025/html/LIPIcs.CCC.2025.4/LIPIcs.CCC.2025.4.html. Use G22's O(n)-variable fixed threshold circuit/clauses for choosing at least k vertices. Put original vertex and gate variables on L. Compile only fixed threshold clauses via G72; conditional missing-edge clause (not x_i OR not x_j OR Z4) crosses and occupies distinct scope (two original variables, one zero gadget). All emitted constraints locally-full and crossing, total m=Theta(n), N=Theta(n^3). Every conditional clause depends monotonically on one graph edge bit in absent-clause coordinates. Exact CLIQUE projection preserves gate size (and actual NOT count for G25's separate restricted theorem). Taking k=floor(n^(5/12)), delta=1/24 as G30 yields 2^Omega(N^(5/36) log N) monotone size lower bound on the promise. Thus even every conditional fibre's tractable decision does not remove the established monotone lower bound for selecting one. This is a restricted-model result, NOT a lower bound for general circuits or for computing the guarded evaluator on a specified x. Fixed-weight alternative uses complemented projection; no monotone transfer there.
+
+### Actual local execution (Python integers, no CI/kernel)
+
+Ran /tmp/p0_cross.py. Found fixed gadget at first seeded draw Random(369), exhaustive all 256 assignments gives unique zero. 580 full compiler model counts (all 260 original q=1,2 selectors, 30 seeded q=3, both ordinary and fixed-weight alternatives) checked by independent exact DPLL on complete emitted clauses, no pre-set gadget values; 50,865 emitted clauses checked for unique scopes and crossing width. 600 random 2-CNF existential projections (r=1..6, 100 each) verified 3,931 projected assignments by implication reachability vs exhaustive witness projection. 400 random crossing formulas r=1..4 each side, 3,000 left residual keys, checked grouped exact count and both zero/signed left character sums against original exhaustive joint enumeration. 400 additional crossing formulas r=1..5 each side, 4,960 left assignments: evaluated guarded closure bitsets against exhaustive right-existence queries, all passed. Bitsets are finite test harness, not claimed algorithmically cheap truth-table materialization. Exact symbolic recurrence above uses gates. Reproducer core for compiler and semantic/guarded closure (same code structure used in tests):
+
+```python
+from itertools import combinations,product
+from collections import Counter,defaultdict
+from functools import lru_cache
+from random import Random
+D='737362511425175275471342317614566635167417725234'
+G=[tuple((i,1-(int(p)>>j&1)) for j,i in enumerate(I))
+   for I,p in zip((I for I in combinations(range(8),3) if min(I)<4<=max(I)),D)]
+def clauses(q):return [tuple(zip(I,p)) for w in range(1,min(3,q)+1) for I in combinations(range(q),w) for p in product((0,1),repeat=w)]
+def brute(q,F):return sum(all(any((x>>i&1)==v for i,v in C) for C in F) for x in range(1<<q))
+assert len(G)==48 and brute(8,G)==1 and all(any(v==0 for i,v in C) for C in G)
+def compile_(q,C,t,bal):
+ z=list(range(q,q+8));m=q+8;R=set(z[4:]);F=[tuple((q+i,v) for i,v in c) for c in G]
+ for j,c in enumerate(C):
+  a=[]
+  for k,(i,v) in enumerate(c):
+   p=m;m+=1;a.append((p,v))
+   if k:R.add(p)
+   F.extend([((i,0),(p,1),(z[6],1)),((i,1),(p,0),(z[7],1))])
+  if not(t>>j&1):F.append(tuple(a+([(z[4],1),(z[5],1)] if len(a)==1 else [(z[0],1)] if len(a)==2 else [])))
+  elif bal:F.append(((a[0][0],1),(z[6],0),(z[7],1)))
+ assert len({tuple(sorted(i for i,v in c)) for c in F})==len(F)
+ assert all(len(c)==len({i for i,v in c})==3 and 0<len({i for i,v in c}&R)<3 for c in F)
+ return m,F,R
+@lru_cache(None)
+def cnt(F,free):
+ while True:
+  if not F:return 1<<free.bit_count()
+  if any(not c for c in F):return 0
+  units={c[0] for c in F if len(c)==1}
+  if not units:break
+  if len({i for i,v in units})!=len(units):return 0
+  ix={i for i,v in units};free &= ~sum(1<<i for i in ix)
+  F=tuple(sorted({tuple(l for l in c if l[0] not in ix) for c in F if not any(l in units for l in c)}))
+ i=Counter(i for c in F for i,v in c).most_common(1)[0][0]
+ return sum(cnt(tuple(sorted({tuple(l for l in c if l[0]!=i) for c in F if (i,v) not in c})),free^(1<<i)) for v in (0,1))
+def sat2(r,F):
+ if any(not c for c in F):return False
+ R=[1<<i for i in range(2*r)]
+ for c in F:
+  a,b=c[0],c[-1];i=2*a[0]+a[1];j=2*b[0]+b[1]
+  R[i^1]|=1<<j;R[j^1]|=1<<i
+ for k in range(2*r):
+  for i in range(2*r):
+   if R[i]>>k&1:R[i]|=R[k]
+ return not any(R[2*i]>>(2*i+1)&1 and R[2*i+1]>>(2*i)&1 for i in range(r))
+def project(r,F,B):
+ if not sat2(r,F):return [()]
+ out=[]
+ for d in (1,2):
+  for I in combinations(B,d):
+   for p in product((0,1),repeat=d):
+    if not sat2(r,F+[((i,v),) for i,v in zip(I,p)]):out.append(tuple((i,1-v) for i,v in zip(I,p)))
+ return out
+def guard_eval(r,F):
+ full=(1<<(1<<r))-1;A=[[0]*(2*r) for _ in range(2*r)]
+ for i in range(2*r):A[i][i]=full
+ for c in F:
+  g=sum(1<<x for x in range(1<<r) if all(x>>i&1!=v for i,v in c if i<r))
+  D=[(i-r,v) for i,v in c if i>=r];u=2*D[0][0]+D[0][1];v=2*D[-1][0]+D[-1][1]
+  A[u^1][v]|=g;A[v^1][u]|=g
+ for k in range(2*r):
+  for i in range(2*r):
+   for j in range(2*r):A[i][j]|=A[i][k]&A[k][j]
+ bad=0
+ for i in range(r):bad|=A[2*i][2*i+1]&A[2*i+1][2*i]
+ return full^bad
+```
+
+Sampling details to replay counts: Random(369), consume 48 rng.randrange(1,8) for gadget discovery, matching D. For q=1,2 enumerate all selector integers t; q=3 draw 30 rng.getrandbits(len(C)); compare both compiler modes with brute(q,[c for j,c in enumerate(C) if not t>>j&1]), clear count cache each call. Then for r=1..6 choose 100 2-CNFs by sampling 0..min(len(C),12) clauses uniformly without replacement from all width1/2, choose random subset B of size rng.randrange(r+1); compare projected support against exhaustive assignments. Next r=1..4, 100 each sample crossing formulas up to 20 clauses; group all x by project(r,residual,list(range(r))), compare sums len(group)*brute(r,key) and signed sums for h=0 and h=(1<<r)-1 against full joint enumeration. Finally r=1..5, 80 each sample crossing formula up to 30 clauses, compare guard_eval bits against exhaustive y existence for each x. All exact finite tests, no asymptotic inference.
+
+### Active P0 ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G70 | twoSidedConditionalBijunctiveGeometry | derived |
+| G71 | canonicalSemanticSeparator / signedClassContraction | derived and tested; G16/G51/G68 |
+| G72 | crossingLocallyFullZeroGadget / parsimoniousTwoSidedCompiler / minorTransport | derived and tested, fixed-weight variant separate |
+| G73 | guardedImplicationPathEvaluator | derived and tested; joint nonemptiness OPEN |
+| G74 | crossingPromiseMonotoneBound | external G30 theorem transported, restricted |
+| N4/G12a | unrestrictedSerialCharge | OPEN: cost of selecting globally inhabited fibre or other direct uniform endpoint, allow all shared symbolic algorithms |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; G48 forced flag or G38 central slice |
+| N6 | originalClayTransport | conditional #1040 / #1129 |
+
+Geometry-forward Aristotle BIDI: G73 gives a real polynomial shared representation of every conditional fibre's existence. Do not charge class enumeration, raw separator width, path count, conditional count or arithmetic precision as required for decision. The remaining joint support query over the guarded evaluator is NP-complete on G72. Next target the existence of a compatible assignment of the ORIGINAL guard variables, or a direct standard-machine lower-bound argument; distinguish the easy symbolic representation from its global nonemptiness. Preserve source zero mode, inhabited neutral fibre, signed residual and independently indexed histories, not obligatory materialization. No new certification prerequisite; no P!=NP claim.
