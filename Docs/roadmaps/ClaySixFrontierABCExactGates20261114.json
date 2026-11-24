@@ -5557,7 +5557,8 @@
       "true_C1": "OPEN",
       "true_C2": "OPEN",
       "all_Clay_endpoints_proved": "0/6",
-      "script_blob": "f5e4b640f2d04b13fdf97fc1c29a2d7de6135981"
+      "script_blob": "f5e4b640f2d04b13fdf97fc1c29a2d7de6135981",
+      "signed_lower_corollary": "CLASSICAL uniform-in-cutoff lower bound 4 int F >=-32/nu ||u0Fourier||_ell1^4, NOT R568 C1 upper nor R653 C2"
     }
   },
   "ns_r568_actual_galerkin_20261123": {
@@ -5736,6 +5737,14 @@
       "Lean_resource": "https://github.com/chboishabba/dashi_lean4/pull/118",
       "Lean_GCT": "https://github.com/chboishabba/dashi_lean4/pull/120",
       "controlling": "N1-N3 polynomially charged semantic normalization, U2-U4 unavoidable-resource charging and A2 universal SAT lower bound in parallel; no new P0 owner duplicated on NS PR1543"
+    },
+    "classical_signed_lower_corollary": {
+      "status": "CLASSICALLY_DERIVED_FOR_TRUE_FINITE_REAL_GALERKIN_WITH_FIXED_SMOOTH_MEAN_ZERO_INITIAL_DATA",
+      "original_R568_direction": "LOWER_ONLY; R568 C1 requires UPPER and remains OPEN",
+      "statement": "forall C,T, 4 int_0^T F_C >= -Qsource_C(0) >= -32/nu ||u0Fourier||_ell1^4; equivalently int F_C >= -8/nu ||u0Fourier||_ell1^4",
+      "proof": "Qsource_C(T)>=0 and H_C>=0 in exact R596-R388 FTC plus initial Gram N2",
+      "original_R653_C2": "NOT PAID: strict physical retained-margin packet lower is a different relative inequality",
+      "formal_rational_field_kernel": "OPEN"
     }
   }
 }
