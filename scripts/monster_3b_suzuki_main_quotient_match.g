@@ -381,24 +381,24 @@ for family in outer78Families do
     # Monster character remain indispensable same-object selection.
     trialClass20Position := Class20SelectedDescender(trial78.support, 113724);
     if trialClass20Position <> fail then
-    trialDesc78 := List(trial78.support, FindMN3BDescent);
-    trialPaid78 := Filtered([1..Length(trialDesc78)],
-                           k -> trialDesc78[k] <> fail);
-    if Length(trialPaid78) = 1 then
-      if trial78.support[trialPaid78[1]] <> trialClass20Position then
-        Error("78 descent full-row pullback disagrees with class20 invariant projector");
+      trialDesc78 := List(trial78.support, FindMN3BDescent);
+      trialPaid78 := Filtered([1..Length(trialDesc78)],
+                             k -> trialDesc78[k] <> fail);
+      if Length(trialPaid78) = 1 then
+        if trial78.support[trialPaid78[1]] <> trialClass20Position then
+          Error("78 descent full-row pullback disagrees with class20 invariant projector");
+        fi;
+        trialMN3B := trialDesc78[trialPaid78[1]];
+        if IsInt(monsterMults[trialMN3B]) and
+           monsterMults[trialMN3B] > 0 then
+          Add(surviving78Families,
+            rec(outerPos:=family.outerPos,
+                sixPositions:=family.sixPositions,
+                split:=trial78,
+                descend:=trialDesc78,
+                paid:=trialPaid78));
+        fi;
       fi;
-      trialMN3B := trialDesc78[trialPaid78[1]];
-      if IsInt(monsterMults[trialMN3B]) and
-         monsterMults[trialMN3B] > 0 then
-        Add(surviving78Families,
-          rec(outerPos:=family.outerPos,
-              sixPositions:=family.sixPositions,
-              split:=trial78,
-              descend:=trialDesc78,
-              paid:=trialPaid78));
-      fi;
-    fi;
     fi;
   fi;
 od;
