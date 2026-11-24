@@ -1142,3 +1142,37 @@ controls and future acceptance criteria:
 Neither source has been compiled or benchmarked, nor were
 Agda/Lean, CI or independent SOTA checks run; no new
 performance numbers or formal analytic closure are claimed.
+
+
+### COMP5o — exact square-slack verification without a second radical
+
+The candidate-digit production and independent
+certification consumers can be separated in the
+existing recoverable-quotient/complexity framework.
+Given **source-verified** positive consecutive
+Chudnovsky bounds \(S_{\rm lo}\le S\le S_{\rm hi}\)
+and \(F=426880\,10^d\), a candidate nonnegative
+integer x is admitted when
+
+\[
+x S_{\rm hi}\le F\sqrt{10005}
+ <(x+1)S_{\rm lo}.
+\]
+
+Because every term in these inequalities is
+nonnegative, both can be checked using exact
+integer-square slacks, with nonnegative lower
+slack and strictly positive upper slack.
+The header \`scripts/pi_p0_signed_square_verifier.hpp\`
+constructs those signed slacks using the original
+P/Q/T source cone, no \`mpz_sqrt\` in the verifier.
+This is a conditional *same-output* certificate,
+not a new infinite-series proof; caller source
+authentication, original analytic premises,
+receipt reopening and full formal kernel
+verification remain separate OPEN obligations.
+The untested square-based verifier may require
+MORE work and memory than the existing GMP
+radical certificate. No performance gain is
+claimed. Complete equations in the projective
+residual roadmap, G6/COMP5o.
