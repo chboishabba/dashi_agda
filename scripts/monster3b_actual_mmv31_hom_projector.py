@@ -239,6 +239,41 @@ def main():
             record["D_vacuum_Weil_scalar_k0_determined"]=False
             record["source_GAP_standard_D_word_identified"]=False
         
+        # Reidemeister-Schreier for the index-two centre-preserving
+        # kernel in <C,D>: generators D, C D C^-1, C².
+        # This second *authentic* inner group word gives an independent
+        # 90D vacuum sandwich and (if J commutes) 12D/78D source blocks.
+        # Its Weil-vacuum scalar is not inferred from a projective matrix.
+        e=c*d*c**-1
+        record["inner_kernel_generators"]="D; C D C^-1; C²"
+        record["CDCinv_actual_word"]=str(e)
+        if e*z!=z*e:
+            raise ValueError("actual inner word C D C^-1 does not preserve centre")
+        if len(pivots)==90:
+            columns=[]
+            for w in basis_mmv:
+                t=project(w*e)
+                x,coords=row_span_coefficients(
+                    np.asarray(t["E"],dtype=np.int16)%PRIME,
+                    basis_arrays,pivots)
+                if np.any(x):
+                    raise ValueError("C D C^-1 vacuum sandwich leaves the B-fixed 90D space")
+                columns.append(coords)
+            E0=np.asarray(columns,dtype=np.int16).T%PRIME
+            np.savez_compressed(
+                a.outdir/"actual_CDCinv_vacuum_sandwich_mod31.npz",E0=E0)
+            record["actual_CDCinv_vacuum_sandwich_mod31_rank"]=rank31(E0)
+            record["CDCinv_preserves_original_zeta_sector"]=True
+            record["CDCinv_vacuum_Weil_scalar_determined"]=False
+            record["CDCinv_original_6Suz_standard_word_identified"]=False
+            E03=matmul31(matmul31(E0,E0),E0)
+            cube_scalar=int(E03[0,0])
+            cube_is_scalar=np.array_equal(
+                E03,cube_scalar*np.eye(90,dtype=np.int16)%PRIME)
+            record["actual_CDCinv_sandwich_cube_is_scalar"]=bool(cube_is_scalar)
+            record["actual_CDCinv_sandwich_cube_scalar_mod31"]=(
+                cube_scalar if cube_is_scalar else None)
+
         # This is meaningful if the canonical affine-zero -I C²
         # maps every B_i to B_i^-1 with no extra z phase.
         stabilizer=all(j*b*j**-1==b**-1 for b in B)
@@ -294,6 +329,28 @@ def main():
                                     D12=D12,D78=D78)
                                 record["actual_mod31_D12_sandwich_matrix_extracted"]=True
                                 record["D12_Weil_coefficient_normalized"]=False
+                        if record.get("actual_CDCinv_vacuum_sandwich_mod31_rank")==90:
+                            E0=np.load(
+                                a.outdir/"actual_CDCinv_vacuum_sandwich_mod31.npz")["E0"]
+                            ecomm=np.array_equal(
+                                matmul31(J,E0),matmul31(E0,J))
+                            record["CDCinv_vacuum_sandwich_commutes_with_C2"]=bool(ecomm)
+                            if ecomm:
+                                E12=coordinates_in_columns(eig12,matmul31(E0,eig12))
+                                E78=coordinates_in_columns(eig78,matmul31(E0,eig78))
+                                np.savez_compressed(
+                                    a.outdir/"actual_CDCinv_12_78_vacuum_sandwich_mod31.npz",
+                                    E12=E12,E78=E78)
+                                record["actual_mod31_CDCinv12_sandwich_matrix_extracted"]=True
+                                record["CDCinv12_Weil_coefficient_normalized"]=False
+                                E12cube=matmul31(matmul31(E12,E12),E12)
+                                candidate=int(E12cube[0,0])
+                                is_scalar=np.array_equal(
+                                    E12cube,candidate*np.eye(12,dtype=np.int16)%PRIME)
+                                record["CDCinv12_sandwich_cube_is_scalar"]=bool(is_scalar)
+                                record["CDCinv12_sandwich_cube_scalar_mod31"]=(
+                                    candidate if is_scalar else None)
+
 
             status_file.write_text(json.dumps(record,indent=2)+"\n")
     print(json.dumps(record,indent=2))
