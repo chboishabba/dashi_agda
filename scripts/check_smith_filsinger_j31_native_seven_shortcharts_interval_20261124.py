@@ -150,9 +150,9 @@ def certify_chart(k,h):
  tube=[I(a-tube_radius,a+tube_radius) for a in xc]
  t0=I(tc-time_radius,tc+time_radius)
  window=I(tc-time_radius,tc+time_radius+h)
- # Independent (t0,t1) boxes when k<=5: t0=tc±tr,
+ # Independent (t0,t1) boxes when 1<=k<=5: t0=tc±tr,
  # t1=tc+h±tr. Last k=6 still needs correlated moving endpoint.
- full_two_time=(k<=5)
+ full_two_time=(1<=k<=5)
  dtime=I(h-2*time_radius,h+2*time_radius) if full_two_time else I(h)
  assert dtime.a>0
  hmax=dtime.b
@@ -168,8 +168,9 @@ def certify_chart(k,h):
  f0=f(start,t0,mode)
  # Endpoints vary in absolute source clock. The flow map obeys
  # dPhi/dt1=f(t1,Phi), dPhi/dt0=-D_xPhi*f(t0,x0).
- # First six subcharts cover independent end-time/start-time boxes
- # (source clock 0 fixed); last k=6 is a correlated t1=t0+h slice.
+ # Only charts k=1..5 have genuine independently variable clock boxes.
+ # Chart k=0 has fixed physical source clock, and k=6 is a
+ # correlated t1=t0+h slice.
  # Neither implies a full, unsplit 69D whole-segment interval Jacobian.
  f_terminal=f(tube,I(tc-time_radius+h,tc+time_radius+h),mode)
  dt_start=[-sum((Phi[i][j]*f0[j] for j in range(9)),I(0)) for i in range(9)]
@@ -240,7 +241,8 @@ def main():
     non_switching_guard_tubes=7,
     all_seven_modes_physically_admissible_conditional_on_event_zero=True,
     input_state_radius='1/10000',input_time_radii=['0']+['1/200000']*5+['1/5000'],
-    independent_start_end_time_subchart_rectangles=6,
+    independent_start_end_time_subchart_rectangles=5,
+    original_initial_chart_fixed_clock=1,
     J29_first_five_original_event_boxes_geometrically_covered=True,
     J29_J30_all_six_exact_root_time_brackets_geometrically_covered=True,
     actual_source_smooth_chart_seed_proof_for_first_five_requires_J29_receipt=True,
