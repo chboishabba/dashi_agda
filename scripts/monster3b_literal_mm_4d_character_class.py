@@ -37,7 +37,7 @@ def gap_source(trace,trace2,output):
             " and chi[pow2[j]]="+str(e))
     conditions="ord[j]=4"+filterpart(trace,1)+filterpart(trace2,2)
     path=json.dumps(str(output.resolve()))
-    return f'''if LoadPackage("ctbllib") <> true then Error("CTblLib required"); fi;
+    return fr'''if LoadPackage("ctbllib") <> true then Error("CTblLib required"); fi;
 m:=CharacterTable("M");;
 ord:=OrdersClassRepresentatives(m);;
 classes:=ClassNames(m);;
