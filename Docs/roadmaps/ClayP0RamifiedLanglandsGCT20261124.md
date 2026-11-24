@@ -2316,3 +2316,134 @@ for n in range(1,4):
 | LGC7/N6 | original conditional consumer | existing |
 
 Next geometry-forward: G75–G76 original guard hypergraph survives local component elimination; R114–116 now eliminate complete conditional translation and weighted affine geometry when available. R117 proves there need not be any remaining conditional symmetry, yet artificial rigidity can be removed cheaply; neither it nor G78's prime cube count can be charged as unrestricted work. Seek actual coupled residual contraction or a direct standard-machine lower-bound theorem, allowing arbitrary shared symbolic reachability and nonlinear factorization. Preserve original source zero mode, inhabited neutral fibre, signed residual, time/k/iteration/creation precision/consumer indices; no compulsory coefficient materialization, no certification detour or P!=NP claim.
+
+## 25. R121–R127 — original weighted gluing geometry, exact matroid-intersection rank and shared-orientation residual (2026-11-24)
+
+Geometry-forward; stay on Langlands. Read current mounted attachments R114–120 and G75–78. Live Agda #1549 dd68910684ca33c5c11101cf8cf78772e27ee517 / Lean #120 cc5228088c202b2486624c8739c6ad1d655d2096, shared blob d34da42a75e2ef3cb975c70c6b785ebf813eab49. Live G worker #1548 a81e2f6d0eea3f2f8f768eeb68ec5f18d7986cbf / #119 048398039a65de5c4e2d459074c8ced9caa1c9b7, shared blob cafd38e41ff43f8fd4565ba234d49ee066b14c32. Credit G75–78 original repeated-guard component elimination and weighted parity control. R58 affine dual, R85 actual unramified weighted rank-two Weil probe, R102 binary inverse, R108 bilateral unweighted gluing, R114 affine syndrome trellis, R115–117 conditional symmetry and rigidity control are direct producers. Existing ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact and H05 #1291 / GovernedIndexedResidualCubeExact (previously verified blob 42b70ebb7376813076934f2245ce6011b76f10c8) remain source owners. Master code search for matroid/Matroid found corpus indexes but no direct theorem module in returned results (not exhaustive absence). Classical Edmonds–Lawler matroid intersection theorem and polynomial algorithm credited: MIT lecture notes https://ocw.mit.edu/courses/18-997-topics-in-combinatorial-optimization-spring-2004/e987389ab7a39eac57490805adcec8bc_co_lec11.pdf and https://www.extremalcombinatorics.com/optimization/notes/sec_matroidIntersection.html. New result is exact weighted pairing rank for the actual transverse source geometry and a division-free factorization, not a new general matroid theorem or unrestricted lower bound. JMD attribution boundary retained. No unrelated branch edits.
+
+### R121. Original coordinate coupling on a transverse affine gluing block
+
+R108: common affine boundary c+W, H'=H intersect W, J'=J intersect W, D=H' intersect J', S=H'+J'. First take D=0. On any fixed coset of S in W the original named coordinates have unique parameterization x=c+A u+B v, over F2, A and B column bases for H', J'. Let a=dim H', b=dim J'. Each regional source message is constant along its own symmetry space up to a certified character. Thus one message depends on v and the other on u, with character signs in the original x factoring as a constant times one row sign times one column sign (absorb into the messages); arbitrary signs do not alter the rank. This step does not require compatible restrictions on D, which is zero here. Use independent R85 unramified product weights z_i^x_i (formal indeterminates first, actual coefficient specializations later). Exact block matrix is
+    M_z(u,v)=prod_i z_i^(c_i xor A_i u xor B_i v).
+Each original coordinate has two binary row vectors A_i,B_i, possibly zero. These are actual repeated coordinate restrictions, not independent edge labels or a separately postulated matrix. A zero row on either side is a unary or scalar weight; mixed rows carry the actual coupling. At z_i=1 all entries are one (up to separable character signs) and rank is 1, reproducing the transverse R108 case. Generic weights can restore many channels.
+
+### R122. Exact generic rank from matroid intersection, not independent channel charging
+
+Define r_A(I)=rank_F2 {A_i:i in I}, r_B analogously, ground set E=original boundary coordinate indices. Let
+    nu = max{|J| : {A_i:i in J} and {B_i:i in J} each independent}
+       = min_{I subset E} [r_A(I)+r_B(E minus I)].
+Equality and polynomial computation of maximum common independent set and dual rank partition follow from classical matroid intersection using Gaussian-elimination independence oracles. Zero rows are loops. No optimal semantic stabilizer or global separator assumed; the result uses the actual certified A,B.
+
+Theorem: over the rational function field K(z_1,...,z_w) for ANY coefficient field K,
+    rank M_z = 2^nu.
+Proof upper bound, stronger than field rank: for any I, J=E minus I, use s=A_I u and t=B_J v, with 2^r_A(I) and 2^r_B(J) possible syndromes. Define
+    L_(s,t)(u) = [A_I u=s] prod_(i in J) z_i^(c_i xor A_i u xor t_i),
+    R_(s,t)(v) = [B_J v=t] prod_(i in I) z_i^(c_i xor s_i xor B_i v).
+Then M_z(u,v)=sum_(s,t) L_(s,t)(u) R_(s,t)(v) identically in ANY commutative ring (0^0=1). Exactly one pair of syndromes contributes for each u,v. Minimize partition to obtain 2^nu channels. This factorization also gives an exact division-free weighted scalar contraction sum_(s,t)(sum_u f(u)L_(s,t)(u))(sum_v g(v)R_(s,t)(v)), including source signs absorbed earlier. On explicit regional messages, grouped construction costs O(poly(w)*(2^(a+r_B(J))+2^(b+r_A(I))+2^nu)) ring operations; generating regional messages, other blocks, optimal original separators and bit costs remain paid. This is not necessarily faster than direct evaluation for every input. Polynomial matroid intersection finds the compact partition/bases without materializing all channels; full factors may still be exponential.
+
+Lower bound: take a maximum common independent index set C of size nu, specialize z_i=1 for i not in C, retain z_i as variables for i in C. Both maps u->A_C u and v->B_C v are surjective onto F2^nu. Choose one representative per syndrome on each side. The resulting 2^nu square submatrix, after independent row/column permutations removing c_C, is tensor product over i in C of [[1,z_i],[z_i,1]]. Determinants 1-z_i^2 nonzero as polynomials over EVERY field, including characteristic 2. Thus a full minor exists at specialization, so generic rank >=2^nu. Together with division-free upper bound equality. For fixed actual weights rank can decrease; no claim generic rank holds for all finite-field samples of R85 or that choosing this specialization is sufficient for SAT fingerprints. Formal rank is exact minimum separated linear channels for this whole block over the rational function field, not a lower bound on arbitrary nonlinear computation or one scalar consumer.
+
+### R123. Exact specialized Smith spectrum and binary/ternary precision
+
+On the above common-independent-set specialization, over a DVR O and integral z_i, elementary unit-pivot operations diagonalize [[1,z],[z,1]] to diag(1,1-z^2). Tensor products of these invertible row/column operations diagonalize the full specialized matrix; duplicated rows/columns outside the chosen syndrome representatives add only zeros. Nonzero Smith valuations are the sorted subset sums
+    sum_(i in T) v_p(1-z_i^2), T subset C,
+with infinity representing exact zero invariant factors. At precision p^H the minimum linear channels equals number of subset sums <H by the previously used chain-ring image-generator argument. No generic Smith claim for arbitrary unspecialized weights. At p=2 in an unramified extension, choosing a nontrivial Teichmuller unit z whose residue is not 1 gives v_2(1-z^2)=0; characteristic 2 squaring is injective. With ordinary odd integer weights, v_2(1-z^2)>=3 (or infinity), so extra residual depth occurs. At p=3, z residue +/-1 causes positive depth, but nontrivial residue outside +/-1 in a suitable extension gives a unit. The coefficient prime remains independent of original Q3 Weil ramification. This tracks actual signed residual and zero-mode degeneration, not an intrinsic precision demand.
+
+Concrete geometry control: take w=2m, A rows (e_i,0) and B rows (e_i,e_i) for paired original coordinates i, i+m (equivalently A first m basis, B first and second m basis). Combined columns independent; H and J disjoint. nu=m. Specialize z_(i+m)=1; weighted block is tensor product of m two-by-two kernels and can have rank 2^m while unweighted rank 1. For factorized messages, each block scalar is product of m two-bit sums, O(m) ring operations; general explicit messages can use tensor transform, O(m 2^m) rather than dense matrix evaluation O(4^m). This is another exact exponential-rank/cheap-scalar negative control. Use only actual original weights, not an assertion that source independence always holds.
+
+### R124. Nontrivial shared intersection creates an additional genuine coupling
+
+Do not apply R122 unchanged when D != 0. Choose actual direct complements of D in H',J', parameterize x=c+A u+B v+G d on each S block, with d in F2^delta, delta=dim D. Then
+    M_z(u,v)=sum_d chi(d) prod_i z_i^(c_i xor A_i u xor B_i v xor G_i d)
+up to separable row/column signs. In the weighted case incompatible characters on D no longer imply cancellation. Apply R122's same partition to each fixed d (constant c changes) to get exact rank upper bound min(2^a,2^b,2^(delta+nu)), and division-free factorization with d included in channel labels. Alternatively R114 trellis sums each actual D-coset; no claim cheaper overall. This upper bound is not asserted sharp in general.
+
+Actual source example: A=e1, B=e2, G=(1,1,1) in F2^3, c=0 and signs trivial. There is no mixed A/B coordinate, so nu=0. Shared d integrates to
+    M=[[1+z1*z2*z3, z2+z1*z3],[z1+z2*z3, z1*z2+z3]],
+    det M=z3(1-z1^2)(1-z2^2).
+Generic rank 2, exceeding 2^nu. Thus shared orientation itself mediates coupling after marginalization. At all weights=1, matrix constant 2; over binary precision1 it vanishes while actual shared fibre has two points. With chi(d)=(-1)^d the two outer products subtract, again potentially nonzero at general weights. Inhabited neutral fibre, original count, signed cancellation, weighted residue separate. More generally disjoint pure A and B coordinates and one common orientation give sum of two outer products; generic rank 2 even though no direct mixed coordinate exists. No complete arbitrary-D generic-rank theorem claimed; investigate actual elimination of shared orientations or multiple separators rather than substituting the unweighted multiplicity.
+
+### R125. Indexed hyperfabric and source semantics
+
+Retain original source history, event time tau, chart/refinement k, Frobenius iteration j, source version, coefficient field, creation/requested precision, R85 sample, intended consumer; additionally actual affine block anchor c, basis A,B,G, matroid partition I and its common independent certificate, and chart cut order if using trellis. Matroid rank is invariant under invertible basis changes in u and v separately; arbitrary mixing of left/right coordinates changes the chosen separator and arbitrary source-coordinate linear rechart may make product weights coupled. Transport the weights, original labels and sign forms, not only dimensions. R108's signed unweighted zero mode, R114 actual affine orientation and R87–89 gain/loss/overlap atoms remain independently indexed. A new source event can change the original symmetry spaces and all their certificates; do not assert old weighted factorization commutes with arbitrary lossy updates. No new physical H05/H07/H14 claim and no required materialization of every mode or channel.
+
+### R126. Actual local regression
+
+Executed /tmp/langlands_r121.py with exact Python integers, modular elimination, and SymPy rank/Smith normal forms. 315 seeded full-column-rank binary A,B pairs (a,b=1..3; w in [a+b,a+b+4]); 315 common-independent-set vs min-rank-partition comparisons by exhaustive small-instance oracle; 630 specialized rank checks over Q and F5; 1260 exact signed scalar factorizations modulo 2,8,9,125 and rank upper checks over F5; 240 specialized Smith valuation spectra (m=1..4,20 draws each, primes 2,3,5); 100 general-D rank-upper checks, weak since tested small dimensions make bound automatic; separately 48 nonvacuous common-orientation pure-A/B rank-2 cases (a,b=1..4, z=2,3,4) and one symbolic SymPy determinant identity. Total 2594 comparison groups, of which 100 are weak controls. No native kernel, CI, integrated matroid algorithm implementation or runtime benchmark. Small reference enumeration is not the production polynomial algorithm. Reproduction core:
+```python
+from itertools import product
+from math import prod
+from random import Random
+from sympy import Matrix, ZZ
+from sympy.matrices.normalforms import smith_normal_form
+rng=Random(369)
+def rank(v):
+ B={}
+ for x in v:
+  while x:
+   i=x.bit_length()-1
+   if i in B:x^=B[i]
+   else:B[i]=x;break
+ return len(B)
+def bit(x):return x.bit_count()%2
+def proj(x,L):return tuple(bit(x&i) for i in L)
+def mat(A,B,z,c,a,b):
+ return [[prod(z[i]**(bit(A[i]&x)^bit(B[i]&y)^(c>>i&1)) for i in range(len(A))) for y in range(1<<b)] for x in range(1<<a)]
+for a,b in product(range(1,4),repeat=2):
+ for case in range(35):
+  w=rng.randrange(a+b,a+b+5)
+  while True:
+   A=[rng.randrange(1<<a) for _ in range(w)];B=[rng.randrange(1<<b) for _ in range(w)]
+   if rank([x|(y<<a) for x,y in zip(A,B)])==a+b:break
+  c=rng.randrange(1<<w);masks=range(1<<w)
+  def sub(v,m):return [x for i,x in enumerate(v) if m>>i&1]
+  m=max((m for m in masks if rank(sub(A,m))==rank(sub(B,m))==m.bit_count()),key=int.bit_count)
+  cut=min(masks,key=lambda m:rank(sub(A,m))+rank(sub(B,((1<<w)-1)^m)))
+  nu=m.bit_count();assert nu==rank(sub(A,cut))+rank(sub(B,((1<<w)-1)^cut))
+  z=[2 if m>>i&1 else 1 for i in range(w)]
+  assert Matrix(mat(A,B,z,c,a,b)).rank()==2**nu
+  I=[i for i in range(w) if cut>>i&1];J=[i for i in range(w) if not(cut>>i&1)]
+  for mod in (2,8,9,125):
+   z=[rng.randrange(-3,5) for _ in range(w)];M=mat(A,B,z,c,a,b)
+   f=[rng.randrange(-3,4) for _ in range(1<<a)];g=[rng.randrange(-3,4) for _ in range(1<<b)]
+   al={proj(x,[A[i] for i in I]) for x in range(1<<a)};be={proj(y,[B[i] for i in J]) for y in range(1<<b)}
+   assert len(al)*len(be)==2**nu
+   v=0
+   for s,t in product(al,be):
+    L=sum(f[x]*prod(z[i]**(bit(A[i]&x)^t[j]^(c>>i&1)) for j,i in enumerate(J)) for x in range(1<<a) if proj(x,[A[i] for i in I])==s)
+    R=sum(g[y]*prod(z[i]**(s[j]^bit(B[i]&y)^(c>>i&1)) for j,i in enumerate(I)) for y in range(1<<b) if proj(y,[B[i] for i in J])==t)
+    v+=L*R
+   assert v%mod==sum(f[x]*g[y]*M[x][y] for x in range(1<<a) for y in range(1<<b))%mod
+for n in range(1,5):
+ for _ in range(20):
+  z=[rng.choice([0,2,3,4,5,7,8,9]) for _ in range(n)]
+  M=Matrix([[prod(z[i]**(((x^y)>>i)&1) for i in range(n)) for y in range(1<<n)] for x in range(1<<n)])
+  S=smith_normal_form(M,domain=ZZ)
+  def vp(x,p):
+   if not x:return float('inf')
+   v=0
+   while x%p==0:x//=p;v+=1
+   return v
+  for p in (2,3,5):
+   assert sorted(vp(abs(int(S[i,i])),p) for i in range(1<<n))==sorted(sum(vp(1-z[i]**2,p) for i in range(n) if x>>i&1) for x in range(1<<n))
+for a,b in product(range(1,5),repeat=2):
+ for z in (2,3,4):
+  M=Matrix([[z**(x.bit_count()+y.bit_count())+3*z**(a+b-x.bit_count()-y.bit_count()) for y in range(1<<b)] for x in range(1<<a)])
+  assert M.rank()==2
+```
+
+### R127. Endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R121 | Original weighted transverse affine block and shared-coordinate coupling | derived |
+| R122 | Exact generic rank 2^nu via matroid intersection, division-free optimal field-linear interface | derived, tested; D=0, actual specialization may lower rank |
+| R123 | Exact specialized DVR Smith subset-sum spectrum; exponential rank cheap product control | derived, tested |
+| R124 | Shared orientation mediated coupling, explicit determinant, general upper factorization | derived, tested; full general-D generic rank OPEN |
+| R125 | Indexed source and signed/neutral residual transport | derived semantics |
+| R126 | Exact local regressions | executed |
+| R7a'/LGC4d | Global weighted contraction of repeated original guard dependencies, including shared orientations and message production | OPEN |
+| R7b'/LGC5 | Unavoidable unrestricted deterministic cost after all legitimate contractions | OPEN P0 |
+| R7c/LGC6 | Original Clay uniform separation or sufficient central sandwich | OPEN P0 |
+| LGC7/N6 | Original conditional consumer | existing |
+
+Next geometry-forward: extend source-specific weighted gluing to nontrivial shared orientations, or identify global guard interaction factorization that actually pays the original rank-two scalar rather than the whole matrix. R122 is sharp for its linear interface but a large nu is not a resource lower bound on arbitrary algorithms; even the tensor-product control has cheap scalar contraction. Do not require global stabilizer, optimum separator, full Smith spectrum, or entire message production if the actual consumer bypasses it. Preserve original zero mode, inhabited neutral fibre, signs, actual history/time/k/iteration/creation precision and observer labels. No certification detour, no unrelated PR edits or P!=NP claim.
