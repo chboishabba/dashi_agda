@@ -3511,3 +3511,233 @@ assert (zchecks,control)==(240,50)
 | N6 | originalClayTransport | conditional #1040/#1129 |
 
 Geometry-forward Aristotle BIDI: the real improvement is G85/G86, an actual exact upper-bound algorithm bypassing both compulsory linear channel enumeration and chronological boundary enumeration on nested guard geometry. G84 says even affine conditional fibres and constant full right coefficient rank can retain the hard joint selector. G87 admits source-dependent commutation and explicitly defeats a compulsory interleaving charge. Next investigate actual noncommuting interaction and reusable subword transfer or the direct standard-machine N4 endpoint, without assuming a particular branching program, word, or its optimized form is universally necessary. Do not replace SAT by counting, full global symmetry, optimal normalization or rank computation. Preserve zero mode, inhabited neutral fibre, signed residual and indexed hyperfabric as semantics, not mandatory materialization. No P!=NP claim, no additional certification prerequisite.
+
+
+## 29. P0 continuation — G75–G79: obstruction cubes, signed ternary contraction, and the parity anti-control (2026-11-24)
+
+**Controlling endpoint remains literal Clay P vs NP.** This section continues G70–G74 and the Aristotle BIDI route. It does not create a new prerequisite programme. Geometry is the proof-search coordinate system; no count of paths, cubes, antichain members, separator states, or semantic classes is promoted to a lower bound on arbitrary computation.
+
+### G75 — exact path-pair obstruction cubes
+
+Let the left variables be \(L\), with \(q=|L|\), and let every clause cross \(L\mid R\), have width at most three, and contain at least one variable on each side. A literal \((v,b)\) is satisfied when \(x_v=b\).
+
+For a clause \(C\), define its left activation guard as the partial assignment
+
+\[
+\gamma_C=\{(v,1-b):(v,b)\in C,\ v\in L\}.
+\]
+
+The residual right clause \(D_C=C\cap R\) has width one or two. Its ordinary 2-SAT implication edge or edges all carry the same guard \(\gamma_C\). A path is active at \(x\) exactly when \(x\) extends the compatible union of all its edge guards.
+
+For each right variable \(i\), pair a path \(P:i^+\leadsto i^-\) with a path \(Q:i^-\leadsto i^+\). If the union of their guard pins is consistent, call that union an obstruction cube \(\sigma(P,Q)\). Let \(\mathcal O_F\) be the inclusion-minimal antichain of all such path-pair labels, discarding inconsistent unions and any label subsumed by a smaller pin set.
+
+The exact theorem is
+
+\[
+\boxed{
+\{x:F_x\text{ is unsatisfiable}\}
+=\bigcup_{\sigma\in\mathcal O_F}[\sigma],
+}
+\]
+
+where \([\sigma]\) is the set of full left assignments extending \(\sigma\).
+
+Proof: an active contradictory path pair gives a 2-SAT contradiction; conversely, if \(F_x\) is unsatisfiable, the 2-SAT implication criterion supplies a variable with mutually reachable complementary literals and hence an active path pair. Antichain pruning does not change the union.
+
+Therefore the existential projection onto the left variables has the exact obstruction-CNF representation
+
+\[
+\boxed{
+\exists y\,F(x,y)
+\iff
+\bigwedge_{\sigma\in\mathcal O_F}
+\ \bigvee_{(v,b)\in\sigma}(x_v\ne b).
+}
+\]
+
+An empty obstruction pin set gives an empty clause and no good left assignment; an empty obstruction family gives the true relation. This is exact quantifier elimination for this guarded 2-SAT fibre presentation. It is not claimed to be a polynomial-size CNF.
+
+The path-label operations form an antichain semiring: alternatives are antichain union; path composition is pairwise compatible pin-union followed by antichain reduction. The G73 Boolean guarded-closure DAG remains the compact producer. The antichain is an optional expansion, not the required execution representation.
+
+### G76 — signed ternary join contraction and inhabited-support ledger
+
+The partial-assignment space is
+
+\[
+\mathcal P_L=\{*,0,1\}^{q}.
+\]
+
+Here \(*\) is an inhabited neutral coordinate with two extensions; \(0\) and \(1\) are pinned coordinates with one extension each. Compatible partial assignments join by union. Opposite pins on the same coordinate join to bottom, representing an empty intersection.
+
+For \(\mathcal O_F=(\sigma_1,\ldots,\sigma_m)\), define the signed coefficient map by
+
+\[
+\alpha_0(\varnothing)=1,\qquad
+\alpha_0(\tau)=0\quad(\tau\ne\varnothing),
+\]
+
+\[
+\boxed{
+\alpha_{j+1}(\tau)
+=
+\alpha_j(\tau)
+-
+\sum_{\rho:\ \rho\sqcup\sigma_{j+1}=\tau}\alpha_j(\rho),
+}
+\]
+
+where incompatible joins contribute nothing. Independently define the inhabited-support bit
+
+\[
+s_0(\varnothing)=1,\qquad s_0(\tau)=0\quad(\tau\ne\varnothing),
+\]
+
+\[
+\boxed{
+s_{j+1}(\tau)
+=
+s_j(\tau)\ \lor\
+\bigvee_{\rho:\ \rho\sqcup\sigma_{j+1}=\tau}s_j(\rho).
+}
+\]
+
+The coefficient recurrence is the expansion of the product of obstruction complements. The support recurrence records whether any compatible subfamily actually inhabits that intersection, even when its signed coefficient cancels to zero. Both recurrences are order-independent because they represent the same finite product and the same family of compatible subfamily joins.
+
+Writing \(G_F(x)=1\) exactly when the right fibre is nonempty,
+
+\[
+G_F(x)=\prod_{\sigma\in\mathcal O_F}(1-\mathbf1_{[\sigma]}(x))
+      =\sum_{\tau\in\mathcal P_L}\alpha_m(\tau)\mathbf1_{[\tau]}(x).
+\]
+
+For a Walsh character \(\chi_\eta(x)=(-1)^{\eta\cdot x}\), its signed residual is
+
+\[
+\boxed{
+Z_\eta
+=
+\sum_{\tau\in\mathcal P_L}\alpha_m(\tau)
+\begin{cases}
+(-1)^{\eta\cdot\tau}\,2^{q-|\operatorname{dom}\tau|},
+ & \operatorname{supp}(\eta)\subseteq\operatorname{dom}\tau,\\
+0,&\text{otherwise}.
+\end{cases}
+}
+\]
+
+In particular, \(Z_0\) counts left assignments with an inhabited right fibre. It is **not** the total number of satisfying pairs. The latter remains the separate multiplicity consumer
+
+\[
+W_F=\sum_x |\{y:F(x,y)\}|.
+\]
+
+The ledger must distinguish: (i) bottom from incompatible pins (empty intersection); (ii) an inhabited \(\tau\) whose signed coefficient is zero; and (iii) cancellation in a nontrivial Walsh mode because a character is free on a neutral coordinate. None of these signed zeros is evidence that the original fibre is uninhabited. Keep source identity, multiplicity, support, coefficient, history/time, closure-stage \(k\), and chart/refinement indices distinct.
+
+### G77 — parity is an exponential-antichain negative control
+
+For \(q\ge1\), take left variables \(g,x_1,\ldots,x_q\) and right variables \(z_0,\ldots,z_q\). For each \(i\), add the four clauses encoding
+
+\[
+z_i=x_i\oplus z_{i-1}.
+\]
+
+Also add the two crossing clauses
+
+\[
+(g\lor\neg z_0),\qquad(g\lor\neg z_q).
+\]
+
+Every clause crosses the partition and has width at most three. If \(g=1\), the endpoints are unconstrained and every \(x\) has two right witnesses. If \(g=0\), the endpoints force \(z_0=z_q=0\), so a right witness exists exactly when \(x\) has even parity, and is then unique. Thus
+
+\[
+G_F(g,x)=g\lor[\operatorname{parity}(x)=0],
+\]
+
+\[
+\{(g,x):F_{(g,x)}\text{ is unsatisfiable}\}
+=\{(0,x):\operatorname{parity}(x)=1\}.
+\]
+
+Every subcube contained in this bad set must pin \(g=0\) and every \(x_i\): freeing \(g\) admits \(g=1\), and freeing any \(x_i\) admits an even-parity assignment. Hence the path-pair obstruction cover has exactly \(2^{q-1}\) singleton cubes. The symbolic G73 closure still has size \(O(q^3)\), while the source has only \(4q+2\) clauses. The fibre-support function itself has a linear-size parity circuit.
+
+The zero mode and full witness multiplicity are different:
+
+\[
+Z_0=2^q+2^{q-1}=3\cdot2^{q-1},
+\qquad
+W_F=2\cdot2^q+2^{q-1}=5\cdot2^{q-1}.
+\]
+
+For characters indexed by \((\eta_g,\eta_x)\), the support Walsh modes are
+
+\[
+Z_{(\eta_g,\eta_x)}
+=
+\begin{cases}
+(-1)^{\eta_g}2^q+2^{q-1},&\eta_x=0,\\
+2^{q-1},&\eta_x=(1,\ldots,1),\\
+0,&\text{otherwise}.
+\end{cases}
+\]
+
+This is a decisive negative control: an exponential path-obstruction antichain can describe an easy function. **Antichain cardinality, path count, or the cost of expanding the obstruction CNF cannot be charged as unavoidable SAT computation.**
+
+A side-preserving G72 occurrence-copy lift makes the same control locally unrestricted: put each private occurrence copy on its source variable's side, enforce equality using fixed-zero gadget variables on the opposite side, and pad the binary endpoint clauses with a positive zero-gadget literal. Every emitted relation is a three-variable clause with one forbidden pattern; scopes are distinct and crossing, and all unary/binary projections are full. The valid left slice (zero gadget coordinates and consistent left copies) retains the odd-parity bad points. Any subcube containing two distinct valid odd points also contains a consistent-copy even point, so any path-pair cube cover still needs at least \(2^{q-1}\) members. This is a cover-size theorem, **not** a circuit lower bound.
+
+### G78 — exact factor-through boundary: the semantic quotient is not a SAT/UNSAT collision
+
+G71's canonical key \(\kappa(x)=\operatorname{Canonical}_{2\mathrm{CNF}}(F_x)\) preserves the entire right witness relation. It therefore distinguishes an empty fibre from a nonempty fibre. It is a consumer-complete semantic quotient, not the lossy observer required by the existing P-vs-NP collision route.
+
+This is consistent with the existing Clay owners:
+- PNotEqualsNPDirectSATLowerBoundExact requires failure for every polynomial-time SAT decider, yielding SATNotInP and then the literal Clay endpoint.
+- PNotEqualsNPObserverCoverageExact requires, for every anchored polynomial candidate, a polynomial observer and a satisfiable/unsatisfiable pair with the same observer representation.
+- PNotEqualsNPPolynomialObserverNoGoExact rules out promoting identity, injective, or merely polynomial-time representations to a collision.
+- PNotEqualsNPResourceBoundedSelfDiagonalExact retains the separate semantic self-diagonal versus resource-closure split.
+
+G75–G77 do not yet supply a candidate-specific SAT/UNSAT collision or universal polynomial-decider failure. Do not promote them to SATLowerBoundProducer.
+
+### G79 — Aristotle BIDI next cut: consumer-complete residual transport
+
+Forward producer: guarded implication DAG, antichain path-pair labels, signed ternary join coefficients, inhabited-support ledger.
+
+Backward consumer: the exact decision \(\exists x\,G_F(x)\), or equivalently the literal SAT decision on the compiled formula.
+
+The next alpha search is to construct a **consumer-complete residual signature across a cut of the original guard variables**. It must compose under future guard events and preserve, separately:
+1. nonempty versus empty residual support;
+2. right-witness multiplicity when that is the consumer;
+3. zero mode and signed Walsh residuals;
+4. the actual source pins and their provenance;
+5. the independent chronological, closure-stage, and chart/refinement indices.
+
+A proposed signature is admissible only if its forward reconstruction and backward consumer equivalence both hold. It must not assume that equal scalar residuals imply equal inhabited fibres, or that a locally identical 2-SAT residual remains identical after a new crossing guard event. The signature is a proof-search instrument, not a mandatory materialization or an extra Clay prerequisite.
+
+**Unpaid Clay obligations remain unchanged:**
+
+| Gate | Exact obligation | Status |
+|---|---|---|
+| G75 | Path-pair obstruction-cube coverage and obstruction CNF | Derived and tested |
+| G76 | Signed ternary coefficient/support recurrence and Walsh formula | Derived and tested |
+| G77 | Exponential-antichain parity anti-control; side-preserving local-full lift | Derived; local q=1 lift tested |
+| G78 | Semantic quotient versus actual SAT/UNSAT observer collision boundary | Derived from existing owners |
+| G79 | Consumer-complete residual signature across arbitrary future guard cuts | Open search |
+| N4 | Unavoidable global selection cost across all sharing, bypasses, recomputation, and representations | **Open** |
+| N5 | Unrestricted superpolynomial lower bound / universal polynomial SAT failure | **Open** |
+| N6 | Literal Clay P vs NP endpoint transport through SATLowerBoundProducer | Conditional consumer |
+
+### Exact local regression and source ownership
+
+Committed dependency-free reproducer: [scripts/check_p0_guard_obstruction_geometry_20261124.py](../scripts/check_p0_guard_obstruction_geometry_20261124.py) in both P0 branches.
+
+Exact Python-integer results:
+- 300 random crossing formulas; 2,220 left assignments; all guarded-path obstruction covers agreed with independent 2-SAT implication closure; 470 total antichain terms, maximum 9.
+- 250 random formulas; 1,846 Walsh modes agreed between inclusion-exclusion and direct assignment sums; maximum 10 obstruction terms.
+- 100 random formulas; 764 Walsh modes verified the ternary coefficient recurrence, reverse-order invariance, and support ledger; maximum 17 inhabited partial-assignment states.
+- Parity widths \(q=1,\ldots,6\): exact obstruction antichain sizes \(1,2,4,8,16,32\).
+- Parity widths \(q=1,\ldots,4\): all 60 support Walsh modes checked; zero modes \(3,6,12,24\).
+- G72 side-preserving local-full parity smoke: 48-clause zero gadget has exactly one solution; compiled instance has \(12\) left and \(16\) right variables, \(86\) crossing clauses with unique scopes, three nonempty left fibres, right witness counts \(1,2,2\), and total witness count \(5\).
+
+These are finite exact local regressions only. No CI, Agda kernel, Lean kernel, or asymptotic lower-bound verification was run. The parity antichain theorem for all \(q\) is the direct subcube argument above, not an extrapolation from the finite table.
+
+Existing donors reopened and retained: ConstraintCouplingSearchExact; ResidualConstraintDecompositionExact; ObservationSeparatorGeometryExact; TransformLocalFibreGeometryExact; IndexedCubeHyperfibreExact; VerifiedFractranCrankPipeline; PNotEqualsNPClayCoreExact; PNotEqualsNPDirectSATLowerBoundExact; PNotEqualsNPObserverCoverageExact; PNotEqualsNPPolynomialObserverNoGoExact; PNotEqualsNPResourceBoundedSelfDiagonalExact. Aristotle BIDI search remains linked to #607/#678. FRACTRAN/MDL #123, FactorsThrough #1006, sharing #1546, machine/terminal coverage #1040/#1129, and the existing G22/G30/G45–G74 producers remain donors, not proof prerequisites.
+
+**P0 priority:** find a representation-independent obstruction to global selection, or discharge one of the existing direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes. Do not count the antichain. Retain the zero mode, inhabited neutral fibre, signed residual, and indexed hyperfabric.
