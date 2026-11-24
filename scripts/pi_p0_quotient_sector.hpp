@@ -15,6 +15,7 @@ struct BoundaryCounts : paper9_defect_sector::BoundaryCounts {
  uint64_t signedResidualProducts=0,signedTailSubmul=0,dyadicCarryProducts=0;
  uint64_t zeroCorrectionBeforeCarry=0,zeroCorrectionAfterCarry=0;
  uint64_t correctedFloors=0,correctionDivmods=0,multiIntegerCorrections=0;
+ uint64_t singleCorrectionBitProofs=0,singleCorrectionExactChecks=0;
  uint64_t commonSlackChecks=0,correctedSlackChecks=0,correctedRadicalProducts=0;
  uint64_t observedFZeros=0;
 };
@@ -103,22 +104,40 @@ inline Decision classify(unsigned digits,unsigned rootBits,const Z& root,
  // opposite lower-source upper-radical crossing remains necessary.
  {Z dead;rho.swap(dead);}
  {Z dead;ell.swap(dead);}
- Z V=T*q+e;
- ++source.evenEndpointProducts;
- Z correction,r;
- mpz_fdiv_qr(correction.get_mpz_t(),r.get_mpz_t(),F.get_mpz_t(),V.get_mpz_t());
- ++boundary.correctionDivmods;
+ // Negative deficit d=-F. If d<=V, h=1 and the corrected
+ // slack is exactly d: no division and no remainder reconstruction.
+ // Prove d<q*T<=V with lower bit-length bounds when possible.
+ const size_t lt=mpz_sizeinbase(T.get_mpz_t(),2),
+              lq=mpz_sizeinbase(q.get_mpz_t(),2),
+              ld=mpz_sizeinbase(F.get_mpz_t(),2);
+ Z L;
  ++boundary.correctedFloors;
- if(correction>=0||r<0||r>=V)
-   throw std::logic_error("invalid signed quotient correction");
- if(correction < -1)++boundary.multiIntegerCorrections;
- x0+=correction;
- if(x0<0)throw std::logic_error("negative corrected floor");
- Z L=V-r;
- {Z dead;V.swap(dead);}
- {Z dead;r.swap(dead);}
+ if(lt-1>=ld || lq-1>=ld-(lt-1)){
+   ++boundary.singleCorrectionBitProofs;
+   x0-=1;
+   L.swap(F);
+   mpz_neg(L.get_mpz_t(),L.get_mpz_t());
+ }else{
+   Z V=T*q+e;
+   ++source.evenEndpointProducts;
+   if(mpz_cmpabs(F.get_mpz_t(),V.get_mpz_t())<=0){
+     ++boundary.singleCorrectionExactChecks;
+     x0-=1;
+     L.swap(F);
+     mpz_neg(L.get_mpz_t(),L.get_mpz_t());
+   }else{
+     Z correction,r;
+     mpz_fdiv_qr(correction.get_mpz_t(),r.get_mpz_t(),F.get_mpz_t(),V.get_mpz_t());
+     ++boundary.correctionDivmods;
+     ++boundary.multiIntegerCorrections;
+     if(correction>=-1||r<0||r>=V)
+       throw std::logic_error("invalid multi-integer correction");
+     x0+=correction;
+     L=V-r;
+   }
+ }
+ if(x0<0||L<=0)throw std::logic_error("invalid corrected floor or slack");
  {Z dead;F.swap(dead);}
- {Z dead;correction.swap(dead);}
  mpz_addmul(eta.get_mpz_t(),base.get_mpz_t(),q.get_mpz_t());
  ++boundary.correctedRadicalProducts;
  ++boundary.correctedSlackChecks;

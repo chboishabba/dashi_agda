@@ -425,6 +425,8 @@ int main(int argc,char**argv){
    <<" quotient_zero_correction_before_carry="<<BoundaryWork.zeroCorrectionBeforeCarry
    <<" quotient_zero_correction_after_carry="<<BoundaryWork.zeroCorrectionAfterCarry
    <<" quotient_corrected_floors="<<BoundaryWork.correctedFloors
+   <<" quotient_single_correction_bit_proofs="<<BoundaryWork.singleCorrectionBitProofs
+   <<" quotient_single_correction_exact_checks="<<BoundaryWork.singleCorrectionExactChecks
    <<" quotient_correction_divmods="<<BoundaryWork.correctionDivmods
    <<" quotient_multi_integer_corrections="<<BoundaryWork.multiIntegerCorrections
    <<" quotient_common_slack_checks="<<BoundaryWork.commonSlackChecks
