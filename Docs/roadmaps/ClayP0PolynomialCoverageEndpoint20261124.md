@@ -561,3 +561,108 @@ for n in (3,4):
     assert (count,cases,targets)==({3:(3,2112,16),4:(5,132096,1408)}[n])
     print('reverse lift',count,cases,targets)
 ```
+
+
+## 12. P0-G13 — same-endpoint computational chords and the actual SAT selector geometry (2026-11-24)
+
+Clay P vs NP remains the sole P0 endpoint. This packet replaces a generic search for a hard geometry with a specific NP-complete family and exact local lift criteria. It does not claim a superpolynomial bound or close N4/N5/G12. Source review (default-branch file blobs):
+- [KSW668BraneBulkRationalNullComparatorExact](https://github.com/chboishabba/dashi_agda/blob/master/DASHI/Physics/Gravity/KSW668BraneBulkRationalNullComparatorExact.agda), blob 73e84d841e6d5311d227afa21fc055191a047375: ambientNullArrivalSavesFour, noIntrinsicAmbientEqualLengthHere, sameSourceDestinationCoordinate. Reuse the same-endpoint ambient/intrinsic distinction, not the physical claim. Actual computational shortcuts must preserve the identical Boolean target and legal cost.
+- [Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact](https://github.com/chboishabba/dashi_agda/blob/master/DASHI/Moonshine/Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact.agda), blob 9f83005c83acd25e9a9d3665a3780b9c8bcf36a1: central correction and cocycle compatibility separated; characteristic-three half-polarization is NOT transported to characteristic two. Reuse linear-first, coupled quadratic residual methodology only.
+- [PNotEqualsNPDirectSATLowerBoundExact](https://github.com/chboishabba/dashi_agda/blob/master/DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda), blob 0838b3252b3ffb91993e4cb47a5d5c06a00e4fe1: actual SATDecisionFailure, anchored candidates and terminal consumers. #1040/#1129/#1474/#1502 remain standard machine and formula owners; #123 JMD computational lowering, #1006 costed FactorsThrough, #1546 sharing, #1291 indexed geometry, #607/#678 Aristotle remain donors. Prior PR heads 049e4ed2d9f7 / b35f249b3b21, common blob 27d6e518c1e242062d759e13f22c476623afbd95.
+
+### G13a — fixed-operand linear chord lift (unrestricted preceding V)
+
+Let V contain 1 and the inputs, a in V, X_i={x:a(x)=i}. Then f in V+aV iff f|X_i in V|X_i for both i=0,1. Necessity by restriction; sufficiency choose u,v in V matching the two restrictions, and f=(1+a)u+av=u+a(u+v). This is an exact single-AND shortcut test; solve for u,v by GF(2) Gaussian elimination after choosing a. Equivalently V+aV=(1+a)V direct-sum aV, as disjoint-support function spaces. Dimension equals rank of each restricted evaluation matrix added, and dual nonmembership is a linear witness annihilating the entire V+aV. A collision here means a linear dependence of rows with incompatible target labels, not necessarily two inputs indistinguishable by V (V contains inputs). A fixed a can be chosen modulo 1. Enumerating a is still exponential in dim V; proof-search cost is not circuit cost.
+
+### G13b — exact two-gate chord normal form
+
+Modulo additions from V, the targets reachable with <=2 productive ANDs over V are exactly the union of
+(i) parallel: ab+uv, a,b,u,v in V;
+(ii) serial: (ab+u)v, a,b,u,v in V.
+For the proof, let c=ab be the first gate and the second have operands u+alpha*c, v+beta*c with binary alpha,beta. The output is d+gamma*c+(u+alpha*c)(v+beta*c), d in V. If both alpha,beta zero, the result is parallel (gamma may be zero). If exactly one is one, absorb gamma into the other operand via v+gamma, and absorb the resulting affine-in-V correction. If both one, use (u+c)(v+c)=(u+c)(u+v+1) by idempotence; then absorb gamma as in the one-serial case. Conversely both forms are legal two-gate circuits. This also works using any representative c of the first direction modulo V since the difference is absorbed into u. It is an exact local chord characterization, not an all-depth lower bound; two-gate serial and parallel routes must both remain live. The failed first probe excluded constants from the second serial operand; it missed legal outputs. Restoring all of V (including 1) corrected the mismatch. This is a concrete Aristotle collision/reopening.
+
+### G13c — a specific NP-complete geometric target (no arbitrary truth-table family)
+
+For m>=1, let C_m contain all non-tautological clauses on j distinct variables, 1<=j<=3, with every polarity. Put N_m=sum_{j=1}^3 2^j binom(m,j), interpreting out-of-range binomials as zero. Input s in F2^N_m selects clauses. Define F_m(s)=1 iff conjunction of selected clauses is satisfiable; language rejects lengths not equal to an N_m. Membership in NP: m-bit assignment, evaluate each selected clause. NP-hardness: normalize arbitrary 3-CNF (rename variables to 1..m, delete repeated literals/clauses and tautologies, handle empty clause separately), set corresponding selector bits. Construction polynomial in original input length; N_m=Theta(m^3) and m<=original length after renaming. The standard 3-SAT NP-completeness theorem gives this language NP-complete; #1474/#1502 provide existing reduction/codec donors. This is a concrete classical reduction, not yet an attachment to the precise repository binary formula codec. No superpolynomial blowup hidden; input length is N_m, NOT 2^m.
+
+For each assignment x, define Z_x={C: x falsifies C}. A satisfying selector lies on the coordinate flat H_x={s:s_C=0 for C in Z_x}. Thus the actual positive set is exactly union_{x in F2^m} H_x. Put b(m)=sum_{j=1}^3 binom(m,j). Each |Z_x|=b(m) (one falsified polarity per variable subset), so dim H_x=N_m-b(m). If dist_H(x,y)=h, common falsified clauses use only the m-h agreeing coordinates, hence |Z_x intersect Z_y|=b(m-h), and
+
+    codim(H_x intersect H_y)=2 b(m)-b(m-h).
+
+For arbitrary assignment set X, codim intersection H_x = sum over coordinate subsets I, 1<=|I|<=3, of |{x|I:x in X}|; this follows because distinct restrictions correspond to distinct falsified polarities. This is the exact joint overlap invariant, not a sum of pairwise distances. Signed permutations of assignment coordinates induce clause-selector permutations preserving the entire family; quotienting witnesses does not restrict circuits to symmetry-invariant intermediate flags. For an arbitrary V and selector operand a, G13a applies on the original selector cube, not on the assignment cube: do not conflate the two.
+
+### G13d — solve the existential lift, isolate deterministic resource obstruction
+
+For each clause C let q_C(x) be the product of its false-literal indicators, so it equals one iff C is false. For width 3 introduce p_C=l_1*l_2 and q_C=p_C*l_3; width 2 needs q_C=l_1*l_2; width 1 already affine. All these are quadratic equations, and require s_C*q_C=0 for each clause. For fixed (s,x) auxiliaries are uniquely determined by those definitions; after existentially quantifying x and auxiliaries, the projection is precisely F_m. There are O(N_m) auxiliary variables/constraints, explicitly. With x fixed the remaining selector constraints are linear, the coordinate flats above. This is the promised linear + quadratic extension model, not a deterministic algorithm: x is existential.
+
+An unrestricted m_gate-AND scalar circuit is equivalently a triangular quadratic lift: fresh bits y_i=A_i(s,y_<i) B_i(s,y_<i), both affine, followed by an affine output. For each s, y_i are uniquely generated in order; arbitrary XOR/fanout and all prior generators allowed. Conversely any such system gives exactly that AND count (including redundant gates, which may be removed). Thus the geometric lower-bound problem is to exclude polynomial-size TRIANGULAR DETERMINISTIC lifts of this concrete existential projection. Merely exhibiting polynomial equations or unique satisfying assignments is insufficient; the equations must admit the specified triangular execution. If MC(F_m) is superpolynomial in N_m then the selector language has no polynomial bounded-fanin circuits by G1/G2, and hence is not in P by G5; NP-completeness implies P != NP. This route would establish the stronger NP not subset P/poly. The uniform N4/N5 route stays active in parallel.
+
+### G13e — exact covering obstruction and matching shortcut control
+
+Every assignment gives the maximal allowed selector s^x=1 outside Z_x and 0 on Z_x. All these 2^m selectors are distinct (unit clauses distinguish assignments) and equally sized, so no one dominates another; every positive input is below one of them. Any DNF implicant that contains two different maxima also contains their bitwise OR (each literal fixed on both remains fixed). That OR is not positive, by maximality. Thus minimum DNF term count is exactly 2^m: one term per maximal selector suffices, as the flat formula shows. Since N_m=Theta(m^3), this is superpolynomial in encoded input length, but ONLY a DNF lower bound. Do not promote this to unrestricted MC.
+
+Restrict all width-two and width-three selector bits to zero. Then F_m restricted is the unit-clause consistency function U_m=product_i(1+p_i*n_i), with p_i,n_i the positive and negative unit selectors. It has degree 2m and hence MC>=2m-1 by G8b; m pair products and m-1 combining ANDs attain equality. Its DNF also needs exactly 2^m terms by the same maximal-selector argument. This is the actual same-family chord negative control, not an unrelated easy function. It proves MC(F_m)>=2m-1 under restriction, which is only Omega(N_m^(1/3)). Therefore the missing lemma cannot be paid merely by counting maximal flats, their DNF terms or assignment witnesses. Need width-two/three interaction obstruction surviving arbitrary triangular lifts.
+
+### Local exact checks (not kernel proofs)
+
+Executed Python integer truth-table and GF(2) elimination, no CI. G13a: 120+1136=1256 fixed operand subspace equalities V+aV=(1+a)V direct-sum aV at initial and all first productive states of n=3,4. G13b: independent exhaustive two-gate product-flag outputs modulo V0 versus union of forms:
+| n | parallel | serial | union | serial only | parallel only |
+|---|---:|---:|---:|---:|---:|
+|3|8|16|16|8|0|
+|4|64|996|1024|960|28|
+All exact. The serial normal form initially failed with v restricted modulo constants; corrected to v in full V. Unit family ANF verified for m=1..7, degree 2m and 2^m terms; exact MC=2m-1 follows from proof, not enumeration of all circuits. Pair codimension formula checked for 10,795 distinct assignment pairs m=1..7. Union-of-flats vs clause truth evaluated on all selector inputs for m=1,2 (16+256=272). Reproduce with basis/ext/red/span/affine/dirs helpers from section 11, using:
+```python
+from itertools import combinations
+from math import comb
+for n in (3,4):
+    V=affine(n); mask=(1<<(1<<n))-1; D=dirs(V)
+    first={ext(V,c) for c in D}; checks=0
+    for W in {V}|first:
+        Q=basis(v^(mask if v&1 else 0) for v in W)
+        for a in span(Q):
+            assert basis([*W,*[a&b for b in W]])==basis([*[v&(mask^a) for v in W],*[v&a for v in W]])
+            checks+=1
+    direct={0}|D
+    for W in first:
+        for r in dirs(W)|{0}:
+            direct.update(red(r^w,V) for w in W)
+    par={a^b for a in D|{0} for b in D|{0}}
+    ser={red((c^u)&v,V) for c in D|{0} for u in span(V) for v in span(V)}
+    assert direct==par|ser
+    assert (checks,len(par),len(ser),len(direct))==({3:(120,8,16,16),4:(1136,64,996,1024)}[n])
+def b(m):return sum(comb(m,j) for j in range(1,min(3,m)+1))
+pairs=0
+for m in range(1,8):
+    cs=[(I,p) for j in range(1,min(3,m)+1) for I in combinations(range(m),j) for p in range(1<<j)]
+    Z=[sum(1<<h for h,(I,p) in enumerate(cs) if p==sum(((x>>i)&1)<<j for j,i in enumerate(I))) for x in range(1<<m)]
+    assert len(set(Z))==len(Z) and all(z.bit_count()==b(m) for z in Z)
+    for x,y in combinations(range(1<<m),2):
+        assert (Z[x]&Z[y]).bit_count()==b(m-(x^y).bit_count())
+        pairs+=1
+    if m<=2:
+        for s in range(1<<len(cs)):
+            assert any(not s&z for z in Z)==any(all(not(s>>h&1) or any(((x>>i)&1)!=((p>>j)&1) for j,i in enumerate(I)) for h,(I,p) in enumerate(cs)) for x in range(1<<m))
+    n=2*m
+    a=[int(all(not((x>>(2*i)&1) and (x>>(2*i+1)&1)) for i in range(m))) for x in range(1<<n)]
+    for i in range(n):
+        for x in range(1<<n):
+            if x>>i&1:a[x]^=a[x^(1<<i)]
+    assert a[-1]==1 and sum(a)==1<<m
+assert pairs==10795
+```
+
+### Endpoint-first frontier (same P0-C/D, no new prerequisite phase)
+
+| Gate | Exact deliverable | Status / producers and consumers |
+|---|---|---|
+| G13a | fixedOperandLinearChordIff | derived, finite checks; FactorsThrough, chord same-endpoint donor; feeds G7/G10 |
+| G13b | twoGateParallelOrSerialNormalForm | derived, exact checks; G8/G10, #1546 shared DAG; feeds BIDI search |
+| G13c | selector3SATPolynomialReduction / selectorFlatsJointIntersection | classical construction derived; #1474/#1502; actual original codec weld still open |
+| G13d | selectorExistentialQuadraticLift / triangularLiftCircuitIff | derived; #123 simulation, #1129 machine, Monster linear/quadratic methodology (no F3 arithmetic imported) |
+| G13e | selectorDNFExact / unitRestrictionMCExact | derived; width-one negative control; only restricted superpoly DNF and linear-in-m general MC |
+| G12a/G6a | serialTargetShiftBound | OPEN: target-specific admissible invariant, all triangular gates, including both chord types |
+| G12b/G6b | selectorGoalSeparation | OPEN: simultaneous width-two/three obligations with actual s-input semantics |
+| G12c/G6c | selectorSuperpolynomialGrowth | OPEN: gap exceeds all polynomials in N_m, not assignment count |
+| N6 | originalClayTransport | #1040 conditional producer; no unconditional payment |
+
+Highest alpha: use the explicit clause-coordinate overlap lattice, not a generic dimension count, and backsolve necessary triangular lift properties on F_m while requiring the same measure to correctly admit the unit-only shortcut. Try linear completion on arbitrary a already available (not merely coordinate splits), and retain joint rank-lift fibres under serial target shifts. Any potential must survive all such chords; a proof of only the two-gate local criterion does not extend automatically. The existential quadratic lift's witness uniqueness conditional on x does not construct x. Keep direct uniform machine lower bound and behavioural diagonal alternative alive. Endpoint mathematics first; no new Monster/physics task, no exhaustive large flag census, no CI. Native Agda/Lean attachment follows the mathematical endpoint.
