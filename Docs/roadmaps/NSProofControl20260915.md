@@ -1,5 +1,16 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+### NS P2 — N2f signed low-advector bound and conditional critical tail closure
+
+Same original unforced mean-zero cubic Galerkin system, R225/R388/R596/R568/R653, N2e. Let 0<a<=1/4, w(k)=|k|^(2a), E_a=||Lambda^a u||_2^2, D_a=||Lambda^(a+1)u||_2^2, T_a original signed fractional transfer. In paired identity A(p,q,k)=i(u_p dot q)(u_q dot conj u_k), A(-p,k,q)=-conj A. Incompressibility u_p dot q=u_p dot k permits min(|q|,|k|) bound, which is essential (do not use one large radial weight on both). For q,k!=0,
+|w(k)-w(q)| min(|q|,|k|) <= 2a |p| |k|^a |q|^a
+by mean value with exponent 2a<=1 and ||k|-|q||<=|p|. Define M_R(t)=sum_{0<|p|<=R}|p||u_p|. Low-advector paired sector |p|<=R is invariant under involution, so |T_a^low|<=2a M_R E_a by translated Cauchy-Schwarz, zero equal-radius terms retained in source. No high-frequency truncation of q,k required.
+
+For high advector p>R, split q low/high in ORIGINAL direct expression -2 sum w(k) Re A, not independently paired expression (q-low not invariant). With q low, |k|<=2|p|, so |T_high,low|<=2^(a+1) M_R E_a by weighted convolution. For high-high let u_H=P_{|k|>R}u, divergence form, orthogonal Leray, fractional product inequality and periodic Sobolev give |T_high,high|<=2||Lambda^a(u_H tensor u_H)||2 sqrt(D_a) <= C_a ||u_H||3 D_a. Classical fractional Leibniz for 0<a<1, L3 x L6 and mean-zero Sobolev; constants independent of C,R. No assertion sign of high-high. Hence T_a <= B_a M_R E_a + C_a ||u_H||3 D_a with B_a=2a+2^(a+1). For fixed R, M_R<= (sum_{|p|<=R}|p|²)^(1/2) ||u0||2 by original energy. IF there is R independent of C and t<=T with sup_{C,t}||u_H||3 <= nu/C_a, then E'_a+nu D_a<=B_a M_R E_a. Gronwall gives E_a(t)<=E_a(0)e^(B_a Mbar_R t), int D_a finite uniformly C; N2e yields original unweighted R568 C1 at a=1/4. This is a conditional high-tail criterion, not a proof of all-data uniform smallness, not claimed necessary, nor R653 C2. Need actual R681/R682/R683 quantitative signed high-high compensation (or establish uniform critical L3 tail by an independent genuine estimate), original strict R653 surplus, physical time/native field/FTC and 3D limit. Keep C,p,q,k,helicity,t,a,R,aux heat s, rate residual, sign and original nonzero output/zero sector. Low advector estimate not an absolute bound on the unrestricted source.
+
+Actual negative control at C=1: p=(1,0,0), q=(0,1,0), k=(1,1,0), u_p=(0,1,0), u_q=(0,0,1), u_k=(0,0,i), conjugate negative modes and all other modes zero. Genuine real divergence-free Galerkin initial state, T_a=4(1-2^a), reversed by -u with same E_a,D_a. Thus T_a at a>0 is not sign-definite even on actual physical source initial states; not a statement about time-integrated sign or blow-up. At a=0 exact cancellation restored. 12 exact ordered triad checks with symbolic w1,w2, both signs. Source R240/R408/R664/R665/R681-683 as named in existing NSProofControl -> R568/R653 -> R503/R504. P2 partial conditional math, P3/P4/P5 open. No new universal NS theorem.
+
+
 
 ## 24 November — N2e: fractional signed transfer bridge from weighted to original R568
 
