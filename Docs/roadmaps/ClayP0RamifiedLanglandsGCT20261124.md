@@ -2158,3 +2158,161 @@ Additional actual tests used product weight sums over each exact intersection, a
 | LGC7/N6 | literal Clay endpoint | existing conditional consumer |
 
 Next: geometry-forward. Reverse-solve a joint weighted support contraction that adapts to actual separator symmetries without computing the full stabilizer; allow G73's shared guarded evaluator, local certificates and arbitrary direct algorithms. Study cost of source-specific surviving coupled residual, not raw graph width or class count. R108 exact rank is restricted; R110 exact symmetry recognition is hard but not obligatory. No proof P!=NP, no certification detour, no unrelated PR edits, no physical TOE promotion.
+
+## 24. R114–R120 — geometry-forward weighted affine trellis, complete conditional stabilizer and symmetry-free crossing fibres (2026-11-24)
+
+Stay on Langlands. Read both mounted pasted attachments directly: R107–R111 and G70–G74. Live Langlands Agda #1549 0208b560be2af193f7d6c68f20e79cf70adc2c30 / Lean #120 69e842c43939f74b297b604b19c5e825a9eda175, shared blob 51fb25c94ed2a4d07eef35c26aee26ba1e17bc13. Live general P vs NP worker has advanced to G75–G78: #1548 a81e2f6d0eea3f2f8f768eeb68ec5f18d7986cbf / #119 048398039a65de5c4e2d459074c8ced9caa1c9b7, shared blob cafd38e41ff43f8fd4565ba234d49ee066b14c32. Read actual G75–78 section: bounded right components, exact guard hypergraph elimination, shared path pairs, exponential prime guard control and division-free parity transfer. Credit G70–78, no edits to their PRs. Existing R58 affine/Walsh contraction, R85 weighted actual rank-two Weil probe, R87–89 indexed original loss atoms, R102 binary local inverse, R103 ternary depth, R107–113 exact signed separator and symmetry recognition remain owners. Existing H05 #1291 / GovernedIndexedResidualCubeExact (previously verified blob 42b70ebb7376813076934f2245ce6011b76f10c8), ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact retained. Geometry-forward, actual incidence -> signed/neutral residual -> semantic contraction -> paid resource; preserve JMD attribution boundary. Classical linear-code syndrome trellis, Gaussian elimination and 2-SAT implication algorithms are not newly claimed inventions. This is an actual weighted consumer weld and a source-specific rigidity construction. No external SAT algorithm audit or new unrestricted lower bound.
+
+### R114. Weighted intersection is an affine syndrome fibre; division-free geometric contraction
+
+R108's signed coset pairing has entries sum_(x in A_i intersect B_j) chi_L(x)chi_R(x) lambda(x), with lambda(x)=prod z_i^x_i from R85. Every nonempty intersection is an affine coset c+D of the actual shared translation subspace D=H intersect J. Unlike unweighted R108, incompatible characters on D do not force a zero weighted entry. Do not reuse the unweighted Smith spectrum for arbitrary weights.
+
+Choose a binary parity-check matrix C with ker C=D, from actual basis by Gaussian elimination. For the given affine coset set s=Cc; let C_i denote its original-coordinate columns. With sign character chi_h(x)=(-1)^(h dot x), the required scalar is
+    E_s(z,h) = sum_(Cx=s) prod_i [(-1)^h_i z_i]^x_i.
+Works over ANY commutative coefficient ring; signs and neutral contributions retained (not a local Weil Galois action on binary coordinates). At cut l define U_l=span(C_1,...,C_l), V_l=span(C_(l+1),...,C_w). Feasible partial syndromes are
+    B_l=U_l intersect (s+V_l).
+For nonempty fibre B_l is an affine copy of U_l intersect V_l, with dimension
+    kappa_l=rank(C_prefix)+rank(C_suffix)-rank(C).
+Use actual coordinate ordering, independent of chronological time tau, source chart k and Frobenius j. Initialize m_0(0)=1. For each state u in B_l, transitions with bit b=0,1 go to u+b C_(l+1) if in B_(l+1), accumulating m_l(u) times w_(l+1)^b, where w_i=(-1)^h_i z_i. Return m_w(s). Exact induction on partial assignments; no division by 2, no Walsh normalization, no generic Hermite recovery. If s not in im C return known empty affine fibre. If scalar zero on nonempty fibre, retain observed zero separately. Feasible affine layer bases and memberships computed by Gaussian elimination, no need to enumerate the full prefix/suffix spans (finite tests below use such enumeration as independent small-instance check). Time O(poly(w,rank C)*(1+sum_l 2^kappa_l)) ring/bit operations with ring cost and coefficient growth charged separately; space O(poly(w)+2^max kappa_l) ring entries. Also legitimate primal orbit enumeration 2^dim D, choose cheaper certified route; no free optimal ordering or global separator search. G78 even parity is exactly one syndrome coordinate with at most two live states, not a new parity algorithm. Free coordinate columns zero yield independent factors 1+w_i. At any cut, two feasible distinct partial syndromes have disjoint nonempty suffix extension sets, so the residual feasibility row classes number 2^kappa_l, and corresponding Boolean compatibility matrix has rank 2^kappa_l over every field (disjoint nonzero all-ones blocks). This is a restricted exact state result, not a lower bound for arbitrary computation.
+
+For R108 weighted gluing, use this trellis per needed coset intersection, or share layers/syndrome tables when justified by actual message consumer. Arbitrary regional f,g may need exponentially many intersections; per-fibre polynomial width is NOT global polynomial cost. In particular the zero-mode W and signed h residual are separate specializations; E_s(1,0)=2^dim D, E_s(1,h)=0 if h nontrivial on D, while a weighted residue can be nonzero. Original labels and source affine coset retained. Coefficient prime remains independent of original ramified Weil field Q3, and R85 unramified tags remain actual original source weights.
+
+### R115. Complete translation stabilizer of an individual inhabited bijunctive fibre is polynomially computable
+
+Use G71 actual canonical unary/binary projections for a satisfiable conditional 2-CNF relation R on n right variables. They determine R exactly by majority closure (or just note all original clauses have arity <=2, so an assignment satisfying every projected constraint satisfies the original clauses). Each projection computable by polynomially many 2-SAT tests with one/two pins. Empty fibre is separately marked; don't assign it an inhabited neutral orbit.
+
+A translation h in F2^n preserves R iff its local projections preserve every unary/binary projection. Necessity is direct; sufficiency follows from the exact reconstruction. On a unary projection of size 1, h_i=0; size 2 gives no condition. On binary projections the exact stabilizers are:
+- singleton: both bits zero;
+- two-element axis pair: pinned coordinate cannot flip, other free;
+- two-element diagonal/antidiagonal: h_i=h_j (signed equality orientation retained as relation data);
+- three elements: both bits zero (an odd cardinality subset cannot be invariant under a nonzero involution);
+- full four elements: no condition.
+Thus union-find on diagonal-pair edges and freezing the components touched by pinned or three-pattern projections gives the COMPLETE group, generated by disjoint coordinate block flips of the remaining unforced components. Polynomial in original 2-CNF size; no need for exponential truth table or exact count. General R110 coNP-hard recognition is not contradicted: it concerned the entire joint width-three relation, not a fixed conditional 2-CNF fibre.
+
+### R116. Exact weighted quotient by the complete conditional stabilizer
+
+Each free component C is connected by actual signed equalities, so its configurations are exactly a_C and complement a_C, with a chosen anchor fixed to 0 for a_C. A component of one variable is permitted. Since the component flip preserves R, its cross-component pair projections with outside variables are products of the full unary bit and the outside unary projection. The actual canonical relation therefore decomposes as the Cartesian product of the two-point free components and a residual bijunctive relation R_core on the remaining coordinates. Equivalently, gauge pin one anchor per free component, yielding a unique representative per orbit; the orientation bits recover the original assignment bijectively. Use actual free-component pattern signs, not a raw coordinate drop.
+
+For arbitrary independent unary weights w_i(0),w_i(1), possibly signed or zero, exact contraction is
+    P_R(w)=P_core(w) prod_C [prod_(i in C) w_i(a_Ci) + prod_(i in C) w_i(1-a_Ci)].
+All factors computed directly with O(n) ring operations once the component structure and orientations are certified. Unweighted zero mode multiplies by 2^number_of_components; a signed/weighted factor can vanish despite its source component containing two actual orientations. In binary coefficient rings use the displayed sum, not division by the zero mode. If only support needed, gauge pins preserve existence and the representative witness polynomial is formally nonzero iff R inhabited; for weighted original rank-two consumer retain the actual factor, not merely the representative. This is a complete symmetry contraction for this individual fibre, including arbitrary product weights, but computing P_core exactly is not generally supplied by the polynomial decision algorithm. G75 has trivial-size right components, G76 can eliminate them directly; do not require stabilizer computation there. On changing guard assignment or crossing event, component orientation and membership may change, so retain original source rather than blindly reusing old quotient.
+
+### R117. Actual crossing extension removes ALL conditional translation symmetries at known multiplicity
+
+For one right variable y attach four fresh private right variables a,b,c,d. Introduce the six binary clauses
+    (not y OR a), (not y OR b),
+    (y OR c), (y OR d),
+    (a OR b), (c OR d).
+When y=0, c=d=1 and (a,b) ranges over the three nonzero binary patterns. When y=1, a=b=1 and (c,d) ranges over those same three patterns. Each original y has exactly three extensions, independent of y. The relation on these five coordinates restricted to y fixed 0 or 1 has trivial translation stabilizer (fixed coordinates cannot flip, and a three-element subset has no nonzero translation). With both y values allowed, no translation can flip y: the set of variable auxiliary coordinates in the two conditional fibres differs (translations preserve which coordinates vary). A translation fixing y then has to vanish on all auxiliaries by the same three-element argument. Therefore EACH nonempty projection onto this five-coordinate block has trivial stabilizer, whether y is fixed or free.
+
+Apply to every right coordinate of the actual G72 crossing compiler (including its right zero-gadget variables if desired), before asking about global selection. Pad each new binary clause with left gadget literal Z0, globally forced zero by the original G72 eight-zero gadget. Each new ternary clause has exactly one left and two right coordinates, unique scope because all auxiliaries private and the six pairs are distinct; each selected relation still allows seven of eight patterns and full unary/pair/affine local projections. On every inhabited left fibre Z0=0, so gadget semantics exact. Every translation of the extended right relation must preserve each of its five-coordinate projections, hence all original and auxiliary bits are fixed. The full conditional right translation stabilizer is trivial on EVERY nonempty left fibre. The original left geometry, conditional 2-SAT tractability, and actual original guard labels retained. If applying to G75, each nongadget right component grows only by constant factor (at most 5x), private gadgets attached to deleted original gadget variables become isolated small components; left induced edges unchanged. For tree decomposition of original primal graph, add Z0 to all bags and attach a bag {y,a,b,c,d,Z0} to an original bag containing y; width <=max(tw(original compiled)+1,5). Right treewidth <=max(old,4) by a right bag of five. No free large-width or semantic contraction inference.
+
+If r is number of extended right variables, every original joint witness has exactly 3^r extensions. This is NOT parsimonious; it is exact constant multiplicity. With weights on original coordinates and all new auxiliaries assigned weight 1, extended witness polynomial is exactly 3^r P_original(z), not a new original Weil parameter. Recover original R85 weighted rank-two scalar D=3A-4P using division by 3^r in binary coefficient rings (unit). Over ternary ring the raw scaled output has additional r digits of valuation; use higher precision or eliminate private gadgets directly, not a required intrinsic precision cost. Exact original counts can divide as integers. If all extended bits need arbitrary weights, use actual branch-dependent gadget factor rather than assuming constant multiplicity. Known original witness extends explicitly by setting all aux bits to 1. Original SAT decision thus remains NP-complete even on locally-full crossing geometry with polynomial individual fibre decision, polynomial COMPLETE conditional symmetry discovery, and trivial conditional symmetry on all inhabited fibres. This shows full conditional stabilizer quotient alone cannot give a universal SAT solver unless P=NP. It does not rule out other semantic contractions: indeed each private gadget can be eliminated immediately by G76, proving that conditional rigidity itself cannot be charged as unavoidable cost. G75's repeated original guard labels still carry the remaining interaction. No unrestricted lower bound.
+
+### R118. Indexed residual and consumer transport
+
+Retain H05 history, event time tau, source refinement/chart k, Frobenius iteration j, version, original named guard coordinates, coefficient ring, creation precision and chosen consumer. Add trellis cut index l separately (not tau/k). Affine fibre basis/anchor, free-component signed parity labels and representative gauge are dependent on actual source state. For each new event, restrict original relation and recompute or certify its new quotient; gain/loss identities from R87–89 remain on original carrier and weighted scalar sums additive, with no implication observed zero equals empty source. In particular removing a component flip after a pin is a refinement of admissible source orientations; reconstruct pre-event from original representative plus orientation, not from the coarse product scalar. Chart changes must transport parity-check columns, weights and source masks together; arbitrary linear chart may turn product weights into coupled factors, so R114 trellis must use actual original coordinate weights or their correctly transformed coupled factors. R96 creation-precision carry remains separate. No automatic six-face equality for arbitrary lossy projection, no physical H07/H14 or 9DOF promotion. Preserve existing H05 owner; no unrelated branches changed.
+
+### R119. Actual local regression
+
+Executed /tmp/langlands_r114.py in local Python exact integers, seeded Random(369). 2240 weighted affine trellis comparisons (560 random syndrome systems on 1..8 bits, moduli 2,8,9,125, signed weights); 571 complete stabilizer comparisons, 571 exact gauge/reconstruction checks and 571 weighted free-component factor comparisons (700 random 2-CNFs on 1..7 bits, skip empty); three complete local rigidity projection cases; all 256 original G72 zero-gadget assignments; three actual 13-variable crossing gadget formula checks (enumerated complete assignments, free/fixed y); 136 nonempty arbitrary source right relations on 1..3 variables, with all private extensions and weighted multiplicity/projection rigidity checked. Total 4351 comparisons/groups passed. No CI/native prover or external algorithm benchmark. Test harness computes projections and small spans by exhaustive enumeration for independence, not claimed polynomial implementation of the production algorithms; production method is 2-SAT pins and Gaussian elimination as proved. Compact reproduction:
+```python
+from itertools import product,combinations
+from random import Random
+from math import prod
+from collections import defaultdict
+rng=Random(369)
+def span(g):
+ s={0}
+ for x in g:s|={y^x for y in s}
+ return s
+def trellis(cols,s,z,sg,mod):
+ n=len(cols); pre=[span(cols[:i]) for i in range(n+1)]; suf=[span(cols[i:]) for i in range(n+1)]
+ if s not in pre[-1]:return 0
+ L=[pre[i]&{s^x for x in suf[i]} for i in range(n+1)]
+ D={0:1}
+ for i,c in enumerate(cols):
+  E=defaultdict(int)
+  for t,a in D.items():
+   if t in L[i+1]:E[t]=(E[t]+a)%mod
+   if t^c in L[i+1]:E[t^c]=(E[t^c]+a*z[i]*sg[i])%mod
+  D=E
+ return D.get(s,0)
+for n in range(1,9):
+ for _ in range(70):
+  r=rng.randrange(n+1); C=[rng.randrange(1<<r) for i in range(n)];s=rng.randrange(1<<r)
+  z=[rng.randrange(-3,6) for i in range(n)];sg=[rng.choice([-1,1]) for i in range(n)]
+  from functools import reduce
+  from operator import xor
+  X=[x for x in range(1<<n) if reduce(xor,(C[i] for i in range(n) if x>>i&1),0)==s]
+  v=sum(prod(z[i]*sg[i] for i in range(n) if x>>i&1) for x in X)
+  for m in (2,8,9,125):assert trellis(C,s,z,sg,m)==v%m
+def rel(n,F):return {x for x in range(1<<n) if all(any((x>>i&1)==b for i,b in c) for c in F)}
+def stab(R,n):return {h for h in range(1<<n) if {x^h for x in R}==R}
+def cert(R,n):
+ par=list(range(n));frozen=set()
+ def root(i):
+  while par[i]!=i:i=par[i]
+  return i
+ for i in range(n):
+  if len({x>>i&1 for x in R})==1:frozen.add(i)
+ for i,j in combinations(range(n),2):
+  P={(x>>i&1,x>>j&1) for x in R}
+  if len(P)==3:frozen.update((i,j))
+  if len(P)==2 and len({a for a,b in P})==2 and len({b for a,b in P})==2:par[root(i)]=root(j)
+  if len({a for a,b in P})==1:frozen.add(i)
+  if len({b for a,b in P})==1:frozen.add(j)
+ return [sum(1<<i for i in range(n) if root(i)==g) for g in {root(i) for i in range(n)}-{root(i) for i in frozen}]
+for n in range(1,8):
+ pool=[tuple(zip(I,b)) for k in (1,2) for I in combinations(range(n),k) for b in product((0,1),repeat=k)]
+ for _ in range(100):
+  R=rel(n,rng.choices(pool,k=rng.randrange(2*n+1)))
+  if not R:continue
+  G=cert(R,n);assert span(G)==stab(R,n)
+  pins=[(g&-g).bit_length()-1 for g in G];Q={x for x in R if all(not(x>>i&1) for i in pins)}
+  assert {x^h for x in Q for h in span(G)}==R
+  z=[rng.randrange(-2,6) for _ in range(n)];w=lambda x,I:prod(z[i] for i in I if x>>i&1)
+  used=0;factor=1;x0=min(Q)
+  for g in G:
+   I=[i for i in range(n) if g>>i&1];used|=g;assert all((x&g)==(x0&g) for x in Q)
+   factor*=w(x0,I)+w(x0^g,I)
+  assert sum(w(x,range(n)) for x in R)==factor*sum(w(x,[i for i in range(n) if not(used>>i&1)]) for x in Q)
+F=[((0,0),(1,1)),((0,0),(2,1)),((0,1),(3,1)),((0,1),(4,1)),((1,1),(2,1)),((3,1),(4,1))]
+R=rel(5,F)
+for allowed in ({0},{1},{0,1}):
+ S={x for x in R if x%2 in allowed};assert len(S)==3*len(allowed) and stab(S,5)=={0}
+D='737362511425175275471342317614566635167417725234'
+Z=[tuple((i,1-(int(p)>>j&1)) for j,i in enumerate(I)) for I,p in zip((I for I in combinations(range(8),3) if min(I)<4<=max(I)),D)]
+assert rel(8,Z)=={0}
+H=[tuple((i+8,b) for i,b in C)+((0,1),) for C in F]
+for b in (None,0,1):
+ C=Z+H+([] if b is None else [((8,b),(0,1),(1,1))])
+ assert len({tuple(sorted(i for i,v in c)) for c in C})==len(C)
+ S=rel(13,C);assert all(x%256==0 for x in S) and len(S)==(6 if b is None else 3) and stab(S,13)=={0}
+for n in range(1,4):
+ for _ in range(50):
+  R={x for x in range(1<<n) if rng.randrange(2)}
+  if not R:continue
+  E={x|sum(g<<(n+4*i) for i,g in enumerate(ys)) for x in R for ys in product(*[[g>>1 for g in rel(5,F) if g%2==(x>>i&1)] for i in range(n)])}
+  assert len(E)==len(R)*3**n
+  for i in range(n):assert stab({((x>>i)&1)|(((x>>(n+4*i))&15)<<1) for x in E},5)=={0}
+  z=[rng.randrange(-2,5) for i in range(n)];w=lambda x:prod(z[i] for i in range(n) if x>>i&1)
+  assert sum(map(w,E))==3**n*sum(map(w,R))
+```
+
+### R120. Endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R114 | original affine weighted signed syndrome trellis, exact feasible separator dimension | derived, checked; local coset not global pair enumeration |
+| R115 | complete conditional bijunctive translation stabilizer by canonical unary/pair geometry | derived, checked; empty separately |
+| R116 | free-component orientation quotient, division-free arbitrary weighted factors | derived, checked |
+| R117 | crossing locally-full extension with trivial stabilizers on every nonempty conditional fibre, constant 3^r weighted multiplicity | derived, checked; NP-complete global decision, easy private elimination |
+| R118 | source-indexed weighted quotient/neutral/zero/carry transport | derived semantics; no new physical/kernel claim |
+| R119 | exact local regressions | executed |
+| R7a'/LGC4d | global weighted contraction of original repeated guard interactions after all legal reductions | OPEN |
+| R7b'/LGC5 | unavoidable unrestricted deterministic cost without mandatory stabilizer/trellis/prime cube materialization | OPEN P0 |
+| R7c/LGC6 | literal Clay uniform separation or sufficient central sandwich | OPEN P0 |
+| LGC7/N6 | original conditional consumer | existing |
+
+Next geometry-forward: G75–G76 original guard hypergraph survives local component elimination; R114–116 now eliminate complete conditional translation and weighted affine geometry when available. R117 proves there need not be any remaining conditional symmetry, yet artificial rigidity can be removed cheaply; neither it nor G78's prime cube count can be charged as unrestricted work. Seek actual coupled residual contraction or a direct standard-machine lower-bound theorem, allowing arbitrary shared symbolic reachability and nonlinear factorization. Preserve original source zero mode, inhabited neutral fibre, signed residual, time/k/iteration/creation precision/consumer indices; no compulsory coefficient materialization, no certification detour or P!=NP claim.
