@@ -22,6 +22,7 @@ SCRIPTS=[
  "monster3b_gap_ordinary12_class_fingerprint.py",
  "monster3b_ordinary12_hom_outer_weld.py",
  "monster3b_steel_ordinary12_to90.py",
+ "monster3b_actual_mmv31_hom_projector.py",
  "run_monster3b_p5_endpoint.py",
 ]
 def load(filename):
@@ -38,6 +39,13 @@ def main():
     homo=load(SCRIPTS[3])
     assert homo.selftest()["toy_GL2_noncommuting_unique_Hom"]=="PASS"
     builder=load(SCRIPTS[4])
+    mm31=load("monster3b_actual_mmv31_hom_projector.py")
+    import numpy as np
+    assert mm31.rank31(np.eye(4,dtype=np.int16))==4
+    assert mm31.rank31(np.zeros((4,4),dtype=np.int16))==0
+    assert np.array_equal(mm31.matmul31(np.eye(2,dtype=np.int16),
+                   np.array([[5,27],[12,2]],dtype=np.int16)),
+                   np.array([[5,27],[12,2]],dtype=np.int16))
     magma=load(SCRIPTS[1])
     # The actual primitive ζ3 scalar central action is preserved on
     # dual Sym² of a faithful12; none of these are Steel group generators.
@@ -80,6 +88,7 @@ def main():
       "derived_90_same_C3_scalar_trace":"PASS",
       "Magma_original_source_export_staging":"PASS",
       "GAP_210_class_fingerprint_staging":"PASS",
+      "actual_MMV31_rank_algorithms":"PASS_LOCAL_F31_ONLY",
       "actual_Steel_Magma_GModule_executed":False,
       "actual_GAP_CTBLib_executed":False,
       "actual_Monster_mmgroup_word_executed":False,
