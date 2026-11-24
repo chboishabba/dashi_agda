@@ -1262,6 +1262,13 @@ claim is made.
 
 ## 24 November — COMP5s: projective \(\mathbf{PQT}\) gauge with precision-indexed exact execution
 
+Source producer complexity remains charged: the native
+candidate counts its prime-local divisibility probes,
+valuation divisions and two exact GMP divisions per positive
+leaf, separately from execution-order planning and optional
+raw source reopening. No measured speed or total-cost
+dominance follows solely from shorter P/Q/T limbs.
+
 An exact source-normalizing gauge and a
 precision-sensitive execution scheduler
 have been combined in **UNTESTED**
@@ -1280,7 +1287,7 @@ M'_{a,b}=G_{a,b}^{-1}M_{a,b}
 \]
 
 An optional, explicitly costed
-\`ProjectiveSourceReceipt\` opens the
+`ProjectiveSourceReceipt` opens the
 original raw P/Q/T by multiplying the
 normalized triple by recomputed \(G\).
 This is source-coordinate recovery, NOT
@@ -1305,7 +1312,7 @@ changes. Existing full-precision GMP
 integer merges, signed tail, zero mode,
 strict upper π admission and output
 hash are unmodified. A floating
-\`lgamma\` width estimator is NEVER
+`lgamma` width estimator is NEVER
 used to decide P/Q/T digits or bounds;
 it is a memory-cost HEURISTIC and
 cannot justify lossy truncation.
@@ -1316,13 +1323,13 @@ a bounded-depth schedule. Planner object payload is reported separately
 from GMP heap; allocation overhead is still
 uncounted, as required for honest accounting by
 Paper 9 §10 and
-\`FibreProgramComplexityExact.agda\`.
+`FibreProgramComplexityExact.agda`.
 The implementation and source-specific
 cost/proof ledger are respectively
-\`scripts/pi_p0_projective_precision_schedule.hpp\`,
-\`scripts/check_pi_p0_precision_projective_schedule.cpp\`,
+`scripts/pi_p0_projective_precision_schedule.hpp`,
+`scripts/check_pi_p0_precision_projective_schedule.cpp`,
 and
-\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
 S1 source homogeneity, S2 optional
 raw reopening and S3 correct
 consumer-specific semantics are
