@@ -1365,7 +1365,7 @@ upper source endpoint is therefore exactly
 
 The inner signed floor is essential: \(\eta-HD_l\) can be
 negative, so the implementation uses GMP
-\`mpz_fdiv_q_2exp\` (Euclidean floor) rather than C++
+`mpz_fdiv_q_2exp` (Euclidean floor) rather than C++
 signed truncation toward zero. The two formulas avoid
 computing \(\sqrt{10005}\) or a **full radicand square**
 during sector selection; the exact integer square-root
@@ -1419,7 +1419,7 @@ scale recipe and sign must remain independent.
 
 ### COMP5u — original-source, suffix-only implementation (UNTESTED)
 
-- \`scripts/pi_p0_dyadic_sector_contraction.hpp\`:
+- `scripts/pi_p0_dyadic_sector_contraction.hpp`:
   pure GMP integer sector classifier with two
   dyadic quotient/remainder operations, the
   exact lower integer quotient/remainder,
@@ -1428,7 +1428,7 @@ scale recipe and sign must remain independent.
   counters. It keeps no global SAT separator
   or F2 matrix. Signed right-side correction
   is explicitly floor-divided.
-- \`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`:
+- `scripts/check_pi_p0_dyadic_sector_schedule.cpp`:
   derives from COMP5t's exact projective
   indexed-prime source, affine edge, single
   authenticated prefix and right-ordered
@@ -1436,9 +1436,9 @@ scale recipe and sign must remain independent.
   the *retry classifier*, leaves the original
   dyadic root and strict upper arithmetic
   consumer intact, preserves the original
-  \`[n,n')\` source indices and positive
+  `[n,n')` source indices and positive
   scale recipe, and emits separate
-  \`retry_sector_*\` cost counts.
+  `retry_sector_*` cost counts.
   Unlike COMP5t it does **not** build
   \(10005(FD)^2\) slacks on failed
   ordinary admission. The old COMP5t
@@ -1496,7 +1496,7 @@ analogous to, but not dependent on, Langlands
 R96's relative-index caution.
 
 The optional source-reconstruction function
-\`reopenRawDyadicFibre\` in the new header
+`reopenRawDyadicFibre` in the new header
 implements the exact positive-scale carry,
 checking the canonical remainder bounds.
 It is NOT invoked in fast π production,
