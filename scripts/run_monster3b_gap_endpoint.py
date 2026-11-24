@@ -90,6 +90,50 @@ def strict_main_receipt(data: dict, validate) -> dict:
             or data["common_729_necessary_equal_C3_phase_pair_count"] != 2):
         raise ValueError("selected 12 and 78 do not share original double-C3 phase constraint")
 
+    # New GAP receipt coordinates are source 6.Suz Irr positions, not a
+    # chosen Monster/mmgroup generator word. Preserve existing older receipts
+    # (which reported the exact family but not literal pair membership).
+    pair_keys = (
+        "six_suz_same_c3_12_to_78_irr_pairs",
+        "six_suz_direct_sym2_12_to_78_irr_pairs",
+        "six_suz_dual_sym2_12_to_78_irr_pairs",
+        "selected_same_c3_90_is_12_plus_dual_sym2_12",
+    )
+    pair_metadata = {}
+    if any(key in data for key in pair_keys):
+        if not all(key in data for key in pair_keys):
+            raise ValueError("incomplete source 12/78 original Irr pairing records")
+        def pairs(key):
+            raw = data[key]
+            if (not isinstance(raw, list) or len(raw) != 2
+                or any(not isinstance(p, list) or len(p) != 2 or
+                       any(type(n) is not int for n in p)
+                       for p in raw)):
+                raise ValueError(f"invalid source Irr pairing list: {key}")
+            if any(p[0] not in data["six_suz_degree12_positions"] or
+                   p[1] not in data["six_suz_degree78_positions"] for p in raw):
+                raise ValueError(f"source Irr pair outside selected 12/78 characters: {key}")
+            if len({tuple(p) for p in raw}) != 2:
+                raise ValueError(f"duplicated 12/78 pairing in {key}")
+            return raw
+        same = pairs(pair_keys[0])
+        direct = pairs(pair_keys[1])
+        dual = pairs(pair_keys[2])
+        selected_dual = data[pair_keys[3]]
+        if type(selected_dual) is not bool:
+            raise ValueError("selected same-C3 dual Sym2 bit must be boolean")
+        if core["full_nebe"]:
+            if (selected_dual is not True or
+                {tuple(x) for x in same} != {tuple(x) for x in dual} or
+                {tuple(x) for x in same} & {tuple(x) for x in direct}):
+                raise ValueError("selected Nebe Sym2 same-C3 and dual-Sym2 maps disagree")
+        pair_metadata = {
+            "same_c3_12_to_78_irr_position_pairs": same,
+            "direct_sym2_12_to_78_irr_position_pairs": direct,
+            "dual_sym2_12_to_78_irr_position_pairs": dual,
+            "selected_same_c3_90_is_12_plus_dual_sym2_12": selected_dual,
+        }
+
     faithful = core["selected_faithful"]
     sym2 = core["full_nebe"]
     # Faithfulness and the original complete Sym^2 comparison are distinct
@@ -110,6 +154,7 @@ def strict_main_receipt(data: dict, validate) -> dict:
             "selected_12_c2_plus_78_c2_trace": core["source_trace"],
             "source_78_vs_sym2_trace": core["sym2_trace"],
             "same_c3_phase_pairings_count": 2,
+            **pair_metadata,
         },
         "original_group_tables": {
             "main": data["main_table"],
