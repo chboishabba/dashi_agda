@@ -27,9 +27,20 @@
 using namespace std;
 using Z=mpz_class;
 using Clock=chrono::steady_clock;
+// Native source-work count, distinct from floating cost estimates and
+// from actual GMP allocator or elapsed-time measurements.
+struct LeafCostCounters {
+ uint64_t primeContentCalls=0,smallModChecks=0,smallDivSteps=0;
+ uint64_t exactGmpLeafDivisions=0;
+};
+static LeafCostCounters LeafWork;
 static unsigned valuation64(uint64_t x,unsigned prime){
  unsigned v=0;
- while(x!=0 && (x%prime)==0){x/=prime;++v;}
+ while(x!=0){
+   ++LeafWork.smallModChecks;
+   if(x%prime)break;
+   x/=prime;++v;++LeafWork.smallDivSteps;
+ }
  return v;
 }
 // 640320=2^6*3*5*23*29.
@@ -40,6 +51,7 @@ static unsigned valuation64(uint64_t x,unsigned prime){
 // Every further common prime is therefore among 3,5,23,29.
 // This computes the exact h_j=gcd(p'_j,q'_j) without a GMP gcd.
 static Z leafExtraContent(unsigned index){
+ ++LeafWork.primeContentCalls;
  if(index==0)return Z(1);
  const uint64_t j=index;
  const uint64_t f1=2*j-1,f2=6*j-5,f3=6*j-1;
@@ -157,6 +169,7 @@ Triple split(unsigned a,unsigned b,bool inplace,size_t resident=0,size_t depth=0
      const Z extra=leafExtraContent(a);
      mpz_divexact(p.get_mpz_t(),p.get_mpz_t(),extra.get_mpz_t());
      mpz_divexact(q.get_mpz_t(),q.get_mpz_t(),extra.get_mpz_t());
+     LeafWork.exactGmpLeafDivisions+=2;
    }
    Triple x{p,q,(A+B*a)*p};
    ++FC.leaves;observeTriple(x,resident,depth);return x;
@@ -195,6 +208,7 @@ string sha(const string&s){unsigned char hash[32];SHA256((const unsigned char*)s
 struct Receipt{string hash;double ms;unsigned n;size_t bits;};
 Receipt compute(unsigned digits,bool inplace){
  FC=FibreCost{};
+ LeafWork=LeafCostCounters{};
  auto start=Clock::now();
  unsigned n=digits/14+2;
  const long double wantedBits=std::ceil(static_cast<long double>(digits)
@@ -297,6 +311,11 @@ int main(int argc,char**argv){
    <<" source_reopen_requires_scale=true"
    <<" source_zero_mode=empty_interval_P1_Q1_T0"
    <<" source_tail_sign="<<((result.n&1u)?"negative":"positive")
+   <<" leaf_prime_content_calls="<<LeafWork.primeContentCalls
+   <<" leaf_small_mod_checks="<<LeafWork.smallModChecks
+   <<" leaf_small_div_steps="<<LeafWork.smallDivSteps
+   <<" leaf_exact_gmp_division_calls="<<LeafWork.exactGmpLeafDivisions
+   <<" source_reopening_executed_in_fast_path=false"
    <<" schedule_model=precision_indexed_projective_peak"
    <<" schedule_precision_bits="<<currentPlanLedger.precisionBits
    <<" schedule_digits="<<currentPlanLedger.digits
