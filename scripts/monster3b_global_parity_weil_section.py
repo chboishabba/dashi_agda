@@ -82,7 +82,7 @@ def replay(C,D):
     J=I[:,parity_index(6)]
     ops={};records={}
     for s in (1,2):
-        for g,A,l in (("C",C,2),("D",D,1)):
+        for g,A,l in (("C",C,2),("D",D,1),("E",C@D@f3_pow(C,3)%3,1)):
             ops[g,s],records[g,s]=canonical(A,l,s)
     def word(w,s):
         # left action: rightmost literal generator acts first
@@ -105,16 +105,17 @@ def replay(C,D):
                        ("C2_vs_CD28","CC"+"dc"*28),
                        ("R7","cdcdcddcdd"*7)):
             # Efficiently evaluate base word then power when it preserves phase.
-            if name in ("CD56","R7"):
-                base="CDCD" if name=="CD56" else "cdcdcddcdd"
+            if name in ("CD56","R7","C2_vs_CD28"):
+                base="CDCD" if name!="R7" else "cdcdcddcdd"
                 B,t=word(base,s)
                 if t!=s:raise ValueError("relator base changes phase")
-                count=14 if name=="CD56" else 7
+                count={"CD56":28,"C2_vs_CD28":14,"R7":7}[name]
                 M=I.copy()
                 while count:
                     if count&1:M=B@M%P
                     B=B@B%P;count//=2
                 target=s
+                if name=="C2_vs_CD28":M=J@M%P
             else:
                 M,target=word(w,s)
             results[f"{s}:{name}"]=bool(target==s and np.array_equal(M,I))
@@ -141,6 +142,11 @@ def main():
     else:ap.error("provide actual cover or original ATLAS donor")
     result=replay(C,D)
     result["source_chart"]="original ATLAS donor" if a.atlas else "literal corrected MM quotient"
+    if not a.atlas:
+        result["canonical_C_word"]=cover["canonical_C_word"]
+        result["canonical_D_word"]=cover["canonical_D_word"]
+        result["original_E_source_blob_sha"]=cover["original_source_blob_sha"]
+        result["central_cover_relators"]=cover["central_cover_relators"]
     a.out.parent.mkdir(parents=True,exist_ok=True)
     a.out.write_text(json.dumps(result,indent=2)+"\n")
     print(result["status"])
