@@ -1,0 +1,211 @@
+{
+  "status": "NUMERIC_SAMPLES_ONLY_NOT_INTERVAL_PROOF",
+  "radius": 1e-07,
+  "centre_return_defect_inf": 1.9173551635276453e-12,
+  "center_preconditioned_defect_inf": 2.0450610327873598e-12,
+  "C_norm_inf": 11.731499449907552,
+  "worst_sampled_jacobian_variation": 5.693089720837721e-07,
+  "worst_sampled_preconditioned_q": 8.544002451275196e-07,
+  "samples": [
+    {
+      "coordinate": 0,
+      "sign": -1,
+      "Jacobian_inf_variation": 4.6954952518827794e-08,
+      "q": 6.850693568526498e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912926873304286,
+        3.515340450573515
+      ]
+    },
+    {
+      "coordinate": 0,
+      "sign": 1,
+      "Jacobian_inf_variation": 4.692982895739342e-08,
+      "q": 6.848979661333369e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912927550498667,
+        3.515340507712901
+      ]
+    },
+    {
+      "coordinate": 1,
+      "sign": -1,
+      "Jacobian_inf_variation": 1.9196097267608e-07,
+      "q": 2.7400737847867713e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912925828838697,
+        3.5153403596098864
+      ]
+    },
+    {
+      "coordinate": 1,
+      "sign": 1,
+      "Jacobian_inf_variation": 1.9195319738481847e-07,
+      "q": 2.7399631235477494e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292859496946,
+        3.5153405986771182
+      ]
+    },
+    {
+      "coordinate": 2,
+      "sign": -1,
+      "Jacobian_inf_variation": 2.004681496135894e-07,
+      "q": 3.0694648127398946e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292460441894,
+        3.5153402413585417
+      ]
+    },
+    {
+      "coordinate": 2,
+      "sign": 1,
+      "Jacobian_inf_variation": 2.0047165214930746e-07,
+      "q": 3.069455734940748e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912929819396408,
+        3.5153407169291766
+      ]
+    },
+    {
+      "coordinate": 3,
+      "sign": -1,
+      "Jacobian_inf_variation": 3.0043636440853574e-07,
+      "q": 4.545245972763661e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912926000927413,
+        3.5153403513538746
+      ]
+    },
+    {
+      "coordinate": 3,
+      "sign": 1,
+      "Jacobian_inf_variation": 3.00368083693903e-07,
+      "q": 4.5442959065317164e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292842287693,
+        3.515340606932671
+      ]
+    },
+    {
+      "coordinate": 4,
+      "sign": -1,
+      "Jacobian_inf_variation": 5.693089720837721e-07,
+      "q": 8.544002451275196e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912921665247234,
+        3.515339956076483
+      ]
+    },
+    {
+      "coordinate": 4,
+      "sign": 1,
+      "Jacobian_inf_variation": 5.692905120360456e-07,
+      "q": 8.543776120139022e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491293275860728,
+        3.515341002215169
+      ]
+    },
+    {
+      "coordinate": 5,
+      "sign": -1,
+      "Jacobian_inf_variation": 9.21252986648205e-08,
+      "q": 1.3790725157762952e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912927991268807,
+        3.5153405525307657
+      ]
+    },
+    {
+      "coordinate": 5,
+      "sign": 1,
+      "Jacobian_inf_variation": 9.213986973941914e-08,
+      "q": 1.3792740910619892e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292643253509,
+        3.5153404057557416
+      ]
+    },
+    {
+      "coordinate": 6,
+      "sign": -1,
+      "Jacobian_inf_variation": 2.3522342855420916e-07,
+      "q": 3.524587782104493e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292480677161,
+        3.5153402521882917
+      ]
+    },
+    {
+      "coordinate": 6,
+      "sign": 1,
+      "Jacobian_inf_variation": 2.3522322251806616e-07,
+      "q": 3.524593479074188e-07,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912929617040978,
+        3.5153407060990953
+      ]
+    },
+    {
+      "coordinate": 7,
+      "sign": -1,
+      "Jacobian_inf_variation": 8.073952548637991e-09,
+      "q": 1.0166484469095992e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912927139604832,
+        3.5153404714363097
+      ]
+    },
+    {
+      "coordinate": 7,
+      "sign": 1,
+      "Jacobian_inf_variation": 8.072089163323887e-09,
+      "q": 1.0161201452754283e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912927284197663,
+        3.5153404868500573
+      ]
+    },
+    {
+      "coordinate": 8,
+      "sign": -1,
+      "Jacobian_inf_variation": 4.100832002576146e-08,
+      "q": 6.160563698175822e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.491292741842203,
+        3.5153404954651033
+      ]
+    },
+    {
+      "coordinate": 8,
+      "sign": 1,
+      "Jacobian_inf_variation": 4.0999445637558e-08,
+      "q": 6.160235584168968e-08,
+      "periodic_modestatus": true,
+      "saltation_times": [
+        3.4912927005380583,
+        3.515340462821278
+      ]
+    }
+  ],
+  "derivative_uniform_bound_proved": false,
+  "banach_fixed_point_proved": false
+}
