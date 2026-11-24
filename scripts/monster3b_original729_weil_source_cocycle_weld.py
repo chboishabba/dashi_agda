@@ -283,6 +283,9 @@ def source_calculation(cover):
       "original_6Suz_standard_word_attached":False,
       "chosen_scalar_gauge":"Delta^-rank; Delta=ζ-ζ²=1+2ζ; unitary Schr model only",
       "same_Monster_group_words":"D, E=CDC^-1, C, R=cdcdcddcdd",
+      "canonical_C_word":cover.get("canonical_C_word"),
+      "canonical_D_word":cover.get("canonical_D_word"),
+      "original_E_manifest_sha":cover.get("original_source_blob_sha"),
       "phases":{}}
     for phase in (1,2):
         named={"D":(D,1),"E":(E,1),"C":(C,2),"C2":(f3_pow(C,2),1),
@@ -295,6 +298,34 @@ def source_calculation(cover):
             ("D_D","D","D"),("E_E","E","E")):
             a,la=named[left];bb,lb=named[right]
             pair[label]=cocycle(a,la,bb,lb,phase)
+        # NEW M3B-L10B: for genuine inner order-three words g=D,E,
+        # the full Monster word has g^3=1 but a chosen projective 729
+        # section has K_g^3=gamma_g I. This gamma is calculated from
+        # the EXISTING 729 kernel, not guessed from a cubic scalar.
+        # Consequently the same-source multiplicity B_g has
+        # B_g^3=gamma_g^-1 I, on BOTH 12/78 constituent blocks.
+        order3={}
+        for gname in ("D","E"):
+            mat,_=named[gname]
+            sq=f3_mul(mat,mat)
+            if not np.array_equal(f3_mul(mat,sq),I12):
+                raise ValueError("original Monster D/E order-three quotient changed")
+            first=pair[gname+"_"+gname]
+            second=cocycle(mat,1,sq,1,phase)
+            alpha1=(F(first["unitary_gauge_multiplier_Qzeta3"][0]),
+                    F(first["unitary_gauge_multiplier_Qzeta3"][1]))
+            alpha2=(F(second["unitary_gauge_multiplier_Qzeta3"][0]),
+                    F(second["unitary_gauge_multiplier_Qzeta3"][1]))
+            gamma=mul(alpha1,alpha2)
+            if rootsix(gamma) is None:
+                raise ValueError("chosen order-three Weil model cubic scalar not in mu6")
+            order3[gname]={
+                "K_g_cube_scalar_Qzeta3":pack(gamma),
+                "K_g_cube_scalar_mu6":rootsix(gamma),
+                "forced_90D_projective_cube_Qzeta3":pack(inv(gamma)),
+                "source_character_12_78_honest_linearized":False,
+                "first_cocycle":first,
+                "second_cocycle":second}
         # Power R^7 in the exact finite model. This uses 6 successive
         # original repo-compiled K_R*K_R^j cocycles, no 729x729 matrix.
         Rpow=R.copy()
@@ -325,6 +356,7 @@ def source_calculation(cover):
         multiplicity_relator=mul(central_expected,inv(product_scalar))
         result["phases"][str(phase)]={
            "vacuum":vacuum,"pairs":pair,
+           "order3_model_cubic_scalars":order3,
            "R7_model_729_unitary_scalar_Qzeta3":pack(product_scalar),
            "R7_model_729_mu6":rootsix(product_scalar),
            "R7_unique_mu6_rephase_to_exact_729_order7_Qzeta3":
