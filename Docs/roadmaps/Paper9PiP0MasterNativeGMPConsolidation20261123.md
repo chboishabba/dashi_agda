@@ -774,3 +774,80 @@ Full proof boundaries are in
 \`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
 Testing deferred; no compilation, benchmark or kernel
 acceptance for COMP5o.
+
+
+## 24 November — PNP/Langlands source valuation donors and COMP5p/q/r (TESTING DEFERRED)
+
+Audited live P-vs-NP [#1548](https://github.com/chboishabba/dashi_agda/pull/1548)
+(G60–G64 signed source support/valuation pruning and
+charged alternate representations) and Langlands/GCT
+[#1549](https://github.com/chboishabba/dashi_agda/pull/1549)
+(R85–R96 source labels, signed zero, creation versus
+inherited precision and relative reconstruction). The
+proper π application is **source-exact projective
+common-factor elimination**, not an imported SAT or
+Langlands theorem. New mathematical authority is
+the ORIGINAL Chudnovsky leaf factors and original
+ordered triangular P/Q/T multiplication.
+
+For j>=1, \`p_j=-24*f_j\`,
+\`q_j=640320^3*j^3\`, \`t_j=(A+B*j)*p_j\`,
+with \`f_j=(2*j-1)*(6*j-5)*(6*j-1)\`.
+Since \`640320=24*26680\`,
+each nonzero leaf has a guaranteed common 24.
+**COMP5p**
+\`scripts/check_pi_p0_projective24_leaf.cpp\`
+constructs the 24-normalized leaf *before*
+binary splitting, rather than materializing
+the extra factor or computing a generic gcd.
+For the original \`[0,n)\` tree
+\`(P',Q',T')=(P,Q,T)/24^(n-1)\`
+with exact sign, series ratios, future
+right-multiplication and π-floor consumer.
+The source gauge and n-1 scale exponent
+are recorded; reopening the literal
+raw source triple requires restoring
+that factor. It is NOT necessary for a
+homogeneous quotient/inequality consumer.
+
+**COMP5q**
+\`scripts/check_pi_p0_projective24_residual_witness.cpp\`
+combines the same projective-24 leaf
+normalization with COMP5l's exact signed
+two-remainder upper certificate.
+**COMP5r**
+\`scripts/check_pi_p0_indexed_prime_content.cpp\`
+extracts additional exact local
+\`h_j=gcd(f_j,(640320^3/24)*j^3)\`
+from **only** primes \`{3,5,23,29}\`
+using valuations of original small
+linear factors and j. Why no other
+prime can divide the gcd:
+\`gcd(j,2j-1)=gcd(j,6j-1)=1\`,
+\`gcd(j,6j-5)=gcd(j,5)\`;
+the constant 640320 has prime support
+\`{2,3,5,23,29}\` and \`f_j\` is odd.
+The resulting true leaf scale is
+\`24*h_j\`, with source reopening
+recipe \`prod_(1<=j<n) 24*h_j\`.
+No generic GMP gcd; two exact
+post-construction divisions by small
+source-justified h_j remain.
+
+Neither design changes the signed
+zero mode, coefficient precision,
+series tail, root enclosure or
+original source attribution.
+No performance claim: valuation
+preprocessing, exact divisions, receipt
+storage and optional source reopening
+are real costs, not free compression.
+The existing measured COMP5j baseline
+and selected six-way cost runner stay
+unchanged. **All tests, compilation,
+benchmarks, kernel execution and
+external SOTA comparisons remain
+explicitly deferred.** Full proof,
+newly indexed P/Q/T source contracts,
+cost ledger and references:
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
