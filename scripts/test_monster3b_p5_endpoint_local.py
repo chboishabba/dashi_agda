@@ -26,6 +26,9 @@ SCRIPTS=[
  "monster3b_literal_mm_4d_character_class.py",
  "monster3b_quadratic12_character_lift.py",
  "monster3b_mm31_outer_phase_pair.py",
+ "monster3b_original729_weil_source_cocycle_weld.py",
+ "monster3b_original729_actual_vacuum_weld.py",
+ "check_monster3b_atlas_source729_relator.py",
  "run_monster3b_p5_endpoint.py",
 ]
 def load(filename):
@@ -68,6 +71,18 @@ def main():
     assert bounded["exact_bounded_Qzeta3_values"]==517
     assert bounded["collisions"]==0
     assert bounded["toy_order3_projective_scalar_candidates"]==3
+    # These donor identities reuse the repository's original compiled
+    # 729 Weil kernel and SHA-pinned 2.Suz:2 ATLAS C,D, not fake Monster W.
+    weil=load("monster3b_original729_weil_source_cocycle_weld.py")
+    assert weil.selftest()["status"]=="PASS_PURE_EXISTING_729_MODEL"
+    atlas_weil=load("check_monster3b_atlas_source729_relator.py")
+    receipt=atlas_weil.source_replay()
+    assert set(receipt["phases"])=={"1","2"}
+    for phase in ("1","2"):
+        assert receipt["phases"][phase]["K_R7_exact_scalar_Qzeta3"]==["1","0"]
+        assert receipt["phases"][phase]["vacuum"]["D"]["k0_unitary_model_Qzeta3"]==["-1/27","0"]
+    actual_weld=load("monster3b_original729_actual_vacuum_weld.py")
+    assert actual_weld.eval31(["-1/27","0"],5)==(-pow(27,-1,31))%31
     mm31=load("monster3b_actual_mmv31_hom_projector.py")
     import numpy as np
     assert mm31.rank31(np.eye(4,dtype=np.int16))==4
@@ -130,6 +145,9 @@ def main():
       "literal_Monster_4D_GAP_character_script_staging":"PASS",
       "bounded_Qzeta12_character_lift_517_of_517":"PASS",
       "Weil_order3_scalar_ambiguity_correctly_retained":"PASS",
+      "existing_729_Weil_source_fast_cocycle":"PASS",
+      "original_ATLAS_729_R7_one_both_phases":"PASS",
+      "original_ATLAS_729_D_E_vacuum_minus_one_over27":"PASS",
 
       "actual_Steel_Magma_GModule_executed":False,
       "actual_GAP_CTBLib_executed":False,
