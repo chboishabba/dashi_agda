@@ -615,3 +615,143 @@ NOTE: variable j in loop shadows chart function after chart comparisons; no late
 | LGC7/N6 / E | Clay endpoint transport via standard cost model | existing conditional consumer, no unconditional theorem |
 
 Next mathematical tranche: investigate mediator-aware joint feasibility across clause overlaps (not repeat constructor tests). Show which *source-specific* relations enforce nonlocal choices even after arbitrary earlier computational sharing, and prove a valid global charge or find a counterexample. The exact signed edge gluing and branch residual transport do not solve witness selection. Stay on arithmetic Langlands/norm descent and coordinate with #1548/#119 on G12; no Monster/RH/YM prerequisite. Attribution: original DASHI constructors, #1291 H05, JMD source boundary as in earlier sections; standard character theory and integer CRT; no priority claim for elementary difference codec/cube facts.
+
+## 12. R28–R35 — nonabelian ramified descent, signed mediator gluing and monotone representation lower bound (2026-11-24)
+
+Stay on Langlands. Both current user attachments read from actual mounted files. Adopt the other worker's G16–G19 as scoped donors: median/pairwise hull and no existential 2-CNF for a 3-clause, monotone selector projection and superpolynomial lower bound, complete propagation obstruction, nonmonotone shortcut no-go. Live #1548 a33655646b928536a02578623cc81b491d53d28d and #119 ae18da2457eb01d7585347b7f6c39f13c2b9683c agree with supplied handoff. #1549 679397137e12cfb48174eb41d205354a97e00a03 / #120 fa917cfc5c58cc6f40e3f1168ee80b935b56cc01 / #1291 d8f05ff5fc68da3c918d50c67f00edecc1e62648. No changes to other worker's branches. G16 applies to Boolean bijunctive relations, not arbitrary binary encodings; the full inhabited ternary witness including neutral selection is essential. R21–R27 zero/residual distinction retained.
+
+### R28. Actual reused C2/C3/S3 and descent source owners
+
+Inspected master source bodies:
+- DASHI/ComputerScience/BalancedTernaryC2C3DihedralCodecBridgeExact.agda ae1704bb5e880c46c97f1e2db3566fcf020087f6: antipodeOrderTwo, cycleOrderThree, antipodeConjugatesCycleToInverse, binaryPresentationIntertwinesAntipode, binarySupportForgetsOnlyOrientation, qutritPresentationIntertwinesCycle.
+- DASHI/Foundations/TernaryPermutationS3LawsExact.agda baeed264a0a4811f3cad463f101eb6c27f7928b6: literal permutation multiplication, applyComposition, nonCommutativeWitness.
+- DASHI/Foundations/PolynomialC3S3ReflectionParityFourierExact.agda 9a7a180555dad4a042b2978d576a66814b5fc15c: evenAverage, oddHalfDifference, reconstructPositive/Negative, decodeAfterEncodeAt, exact 11=7+4 chart over F3. The existing chart is reflection diagonalization, not C3 averaging in characteristic 3.
+- DASHI/Foundations/PolynomialC3S3ReflectionParityLinearExact.agda e888873013b05d0122c5f7ecb8b41d649f1bcae9: evenAverageAdditive, oddHalfDifferenceAdditive, decodeAdditiveAt.
+- Docs/papers/PolynomialMonodromyTernaryQuaternionBridge.md ca5a81f465a54bcdf4f791871c9b9e2e5b1559dc: distinct finite permutations, cyclic subgroups, signed codec, monodromy authorities; do not promote finite monodromy to arbitrary field/Galois proof.
+- scripts/check_polynomial_c3_s3_reynolds_character_exact.py ade7974a862e2cbffb85572f1c1ec5419d7402b2; scripts/check_polynomial_s3_c2_reflection_fourier_20261029.py 824caee0b79c9b5c50c76d52ae1620d337fb8381: rational C3/S3 averaging, reflection parity source checks; no new execution of those scripts.
+- DASHI/Mathematics/Complexity/SATDecisionToWitnessSelfReductionExact.agda a0371c7d8243f7c22c57f7255ab79c63baf7d4b5: recoverWitness conditional on exact decision oracle and satisfiableSplits. R17/G15 decision-search reuse.
+- DASHI/Mathematics/Complexity/Karp21CliqueSetPackingExact.agda ddffdd6e4276c263f3e96be129598c502005a3b2: cliqueToPacking/packingToClique semantic equivalence, not alone an executable polynomial encoding.
+- DASHI/Analysis/RHGRHDirichletCubicHeckeLocalCorrespondenceExact.agda 2d82566d2de56baa789aad3b6b027ed7721ebf26: separates quadratic conductor/discriminant from cubic local factors; does not construct global Groessencharacter. We do not reopen RH or equate these cubic characters.
+
+### R29. A genuinely nonabelian local extension; correction of descent scope of R16
+
+R16 used K=Q3(zeta), pi=1-zeta, L=K(cuberoot pi). Valid cyclic cubic extension of K, but NOT Galois over F=Q3. For conjugation tau(zeta)=zeta^-1, tau(pi)/pi=1+zeta=-zeta^2. If Kummer lines [tau(pi)] and [pi] agree in K*/K*^3, valuation mod 3 forces the same power (not power 2), and -zeta^2 would be a cube. This would give a primitive ninth root in K, impossible: Phi_9(X+1) is Eisenstein of degree 6 over F. Thus do not assert eta from R16 is conjugate-self-dual or that its induction has S3 image. R16 arithmetic stays valid over K; new source-selected character eta' below replaces it for THIS nonabelian descent only.
+
+Take M=K(theta), theta^3=3. v_K(3)=2, so 3 is not a cube. M/K cyclic cubic and totally ramified (valuation of theta is 2/3 relative to K). M is splitting field over F of X^3-3; degree 6, with sigma(theta)=zeta theta fixing K, tau(theta)=theta and tau(zeta)=zeta^-1. Thus sigma^3=tau^2=1 and tau sigma tau=sigma^-1, actual S3. This realizes the existing dihedral donor on a genuine arithmetic Galois group. Uniformizer w=theta^2/pi has normalized M-valuation 4-3=1; w^3=zeta*pi=zeta-zeta^2 and w^6=-3. The polynomial X^6+3 is Eisenstein over F, so O_M=O_F[w]. For sigma and sigma^2, v_M(sigma(w)-w)=v_M(zeta^2-1)+1=4. For any reflection, the ratio g(w)/w reduces to -1 modulo w (tau(w)/w=-zeta), so difference valuation 1. Lower filtration G0=S3, G1=G2=G3=C3, G4=1. Over K the cubic character eta' has conductor exponent 4; tau exchanges eta' and eta'^-1. Via local reciprocity eta' is a character of K* with norm kernel N_(M/K)M*. Choose fixed unit u' with eta'(u')=zeta. R17 norm relation can use this new character/extension without changing Boolean semantics. New norm polynomial is a^3+3b^3+9c^3-9abc, not the pi-radicand norm. No numerical u' claimed.
+
+### R30. Actual GL2 parameter with a genuine fixed mediator and signed descent failure
+
+Let U=Ind_(W_K)^(W_F) eta' be the irreducible standard 2D representation of the actual S3 quotient (N=0). Restriction U|W_K=eta' direct_sum eta'^-1; induction of the inverse yields the same U. Let epsilon be the quadratic sign character of S3/C3. Artin formula a_F(rho)=sum_i [G_i:G_0] in the denominator times codim rho^(G_i) gives a_F(epsilon)=1 and a_F(U)=2+3*(1/2)*2=5. Hence standard rank-two LLC attaches U to a genuine irreducible supercuspidal GL2(F) representation of conductor exponent 5; Euler factor 1. Trivial induced parameter Ind 1=1 direct_sum epsilon has conductor 1 and inverse Euler factor 1-T. This is standard LLC authority, not a new LLC theorem; operations below on Weil parameters do not mean tensor products of automorphic GL2 representations within the same group.
+
+Three-state module P=1 direct_sum U is the permutation representation on three roots. Restriction to W_K splits into one line per cubic character t=-1,0,+1. Mark sigma and its eigenlines using E_t=(1/3)sum_{j=0}^2 zeta^(-tj) rho(sigma)^j; E_t E_s=delta_(t,s) E_t, sum E_t=I, tau E_t tau^-1=E_-t. Coefficients characteristic zero, NOT averaging in F3. The true trivial line E_0 P is inhabited rank one; in spatial root-label basis it is span(1,1,1) and E_0=J/3, not the spatial basis vector labelled 0. The balanced spatial mediator is fixed under reflection, not under the full cycle. Fourier zero and spatial zero must be distinguished and transported by the actual Fourier chart, retaining the label. Reflection preserves the P3 path; full S3 action on roots does not preserve nonwrapping incidence. Do not infer graph equivalence.
+
+For a literal truth mask (a_-,a_0,a_+) in {0,1}^3, define actual endomorphism A=sum a_t E_t. This is W_K-equivariant, but W_F-equivariant iff a_-=a_+, by Schur on 1+U or direct conjugation. Therefore full unmarked descent cannot distinguish arbitrary asymmetric clause-witness masks. This is a precise source-specific obstruction to forgetting the orientation; it does not obstruct every algorithm. Define e=(a_++a_-)/2, o=(a_+-a_-)/2. Then
+    A_even=a_0 E_0+e(E_++E_-),
+    A_odd=o(E_+-E_-),
+    A=A_even+A_odd.
+The odd line in End(P) transforms by epsilon under W_F conjugation, so the orientation residual is an actual sign subrepresentation (conductor 1), not an invented bit. Even mask e and mediator a_0, with signed odd o, reconstruct exactly. Even quotient has 2*3=6 classes; endpoint count 1 carries one binary orientation residual, count 0 or 2 has unit residual. Total 8 masks. This matches the existing reflection parity chart's proof shape, with different coefficient field, actual three-state module, and actual ramified action. On a fixed clause use G16 witness t=-1,0,+1 with l_t(x)=1 requirement; a_t=l_t(x), or a_t=1 if clause absent. Mediator t=0 is the actual middle literal, not missing witness or always-satisfied constraint. Existential projection is trace(A)>0. Under simultaneous reflection of literal labels and module, transport A covariantly. If source labels fixed, cannot simply claim descended A is equivariant. Marked fibres and shared overlap from R23/R24 must be retained.
+
+### R31. Exact odd-residual gluing and shortcut on a shared witness
+
+For masks A,B on the SAME marked witness line system, common feasible witness count is
+    Tr(AB)=a_0 b_0+2(e_A e_B+o_A o_B).
+Discarding odd residual and multiplying averaged masks yields a wrong answer, e.g. both masks allow + only versus one allows + only and other - only: same even data but intersection counts 1 and 0. This is an actual failure of FactorsThrough for independent reflection quotients on a shared witness. It is not an assertion all local clause selectors share one witness; original clause witness variables are distinct, original assignment variables can be shared. Preserve which variable/coordinate each factor refers to.
+
+The precise reconstruction/gluing law is
+    (e,o)*(f,p)=(ef+op, ep+of);
+    a_0 multiplies independently.
+This is the ordinary coordinatewise product in the original two endpoints under the even/odd chart. The odd-odd term is essential: epsilon tensor epsilon=1. For k masks on one witness, product has 2^(k-1) formal even-parity terms if expanded, yet two even/odd accumulators and one mediator scalar compute the same result in O(k) fixed-size operations (or simply multiply original three diagonal entries). Hence number of odd terms is NOT paid cost. This is an explicit nonmonotone/signed arithmetic shortcut on the actual local residual structure. No global SAT algorithm follows; different witness variables coupled by constraints require actual indexed contraction/selection, not this single shared-witness product. G16 median obstruction supplies the failure of existential Boolean 2CNF, not a lower bound on arbitrary signed network contractions. R24 six-face gluing remains valid with ordered marked endpoints; recharting alone cannot remove an actual overlap failure.
+
+### R32. Superpolynomial lower bound in a defined positive representation calculus
+
+Verify external theorem separately: Cavalar–Kumar–Rossman, *Monotone Circuit Lower Bounds from Robust Sunflowers*, DOI 10.1007/s00453-022-01000-3, https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/ and https://arxiv.org/abs/2012.03883, n^Omega(k) for k<=n^(1/3-o(1)). Other worker G17 uses monotone projection CLIQUE_(n,k) -> selector absence G_(M,3), M=O(kn), N=Theta(M^3); k=floor(n^1/4) gives 2^Omega(N^(1/15) log N) on projected lengths. This is a valid restricted-model transport (standard result plus supplied explicit projection), not a new proof of CKR.
+
+Define a concrete characteristic-zero positive Weil representation DAG model: fixed finite quotient groups (e.g. C2, C3, S3 and their fixed products) and a fixed finite list of their irreducible types; input absence bit t_C represented by either zero object or a fixed actual representation (monotone inclusion), fixed constants; operations direct sum, tensor product, dual, fixed induction/restriction, fixed isotypic projection, invariant space, and dimensions of equivariant Hom between actual semisimple reps, using the multiplicity signature. All these operations have nonnegative integer structure coefficients (Hom dimension bilinear dot product); no arbitrary kernel/cokernel of a varying map, subtraction of virtual characters, phase comparison, arbitrary Fourier coordinate gates, data-dependent type search, or external SAT oracle. Output nonzero multiplicity/support test. More generally any fixed-arity operation whose output multiplicities are explicitly nonnegative polynomial combinations of input multiplicities, with charged structure coefficients/monomial occurrences, fits. Support sigma(a)=1 iff a>0 satisfies sigma(a+b)=sigma(a) OR sigma(b), sigma(ab)=sigma(a) AND sigma(b). Thus every such representation DAG translates to a monotone Boolean DAG of O(size) when type tables fixed (or O(total charged monomial occurrences) for explicitly growing types), preserving all fan-out and sharing. Proof for S3 tensor: (a tensor b)_k=sum_(i,j) N_ij^k a_i b_j, hence support is OR over fixed N_ij^k>0 of support(a_i) AND support(b_j). S3 fusion U tensor U=1 direct_sum epsilon direct_sum U, epsilon tensor U=U. Ind/restriction matrices are nonnegative. Character-valued signs of traces are not multiplicity signs: the proof is in actual multiplicity semiring.
+
+Therefore positive fixed-type representation computation of G_(M,3) requires
+    size >= 2^Omega(N^(1/15) log N).
+This is an actual superpolynomial lower bound in the defined representation resource model, via G17 and support transport. If using symbolic giant groups/types, arbitrary representations with implicit exponential support, or arbitrary maps, separately prove and charge coverage; theorem does not cover them. A fortiori nonnegative arithmetic DAG that computes exact witness count W(t) (or any nonnegative value nonzero iff selector SAT) requires that many operations. The local norm relation admits positive witness-count presentation: for a fixed assignment x form tensor product over clauses of 1 when x satisfies C, and t_C copies of 1 otherwise; take direct sum over all x. Dimension W(t), actual trivial representation. Can alternatively mark local ternary literal-witness masks, whose nonzero intersection enforces the relation; do not charge each summand independently without the support simulation theorem. This expression has exponential witness enumeration; lower bound says no polynomial positive DAG compression in this model. Width-two monotone Boolean reachability admits polynomial support DAG by G17; AND/OR use tensor/direct sum on trivial types, interpreting output only by support. This upper is in symbolic support-operation cost, not a claim polynomial explicit dimensions or bit sizes. No lower bound for unrestricted arithmetic circuits or all Langlands constructions.
+
+### R33. Exact nonmonotone escape within actual equivariant linear algebra
+
+It is not enough to demand actual representations, exact intertwiners, honest diagrams or zero-aware residuals: a genuine equivariant cokernel already realizes NOT with constant cost. Represent bit b by the marked subspace B_b=b*C inside the fixed trivial Weil line C. Then C/B_b has dimension 1-b. Both inclusion and quotient are actual equivariant maps; no virtual representations or negative-dimensional objects. Preserve ambient basis and use canonical coordinate quotient (zero or C). AND is tensor product of the marked subspaces inside C tensor C=C; NOT is the quotient just described, OR by De Morgan. Every standard Boolean circuit lifts gate-by-gate to bounded-dimension, polynomially costed actual equivariant operations (copy/reference fan-out allowed). Conversely the restricted Boolean-valued tensor/quotient gate fragment decodes to the original Boolean circuit; this is not a reverse compiler for arbitrary rank/kernel computations on succinct huge representations. Hence exact genuine Galois/Langlands-compatible representation computations need NOT be monotone even when all objects and maps honest. Example B_0->C has cokernel C, B_1->C has cokernel 0. A positive support gate cannot reproduce that reversal. A fixed-type circuit with positive-support gates can use arbitrary internal phase conventions but cannot evade R32 as long as every output support factors through input supports monotonically and cheaply. If such factorization fails, keep the extra residual, with actual charged operations. This establishes a sharp restricted frontier: positive compression obstructed, actual equivariant quotient escape available, proving all efficient unrestricted paths fail still G12a/R7b' open. Do NOT claim number of NOT/quotient operations must itself be superpolynomial, or that forbidding signs on input suffices. The target is joint cost in the actual unrestricted source, not requiring nonmonotone computation to behave monotonically.
+
+### R34. Actual local exact execution and standard theorem authority
+
+Executed local Python/SymPy in current turn, no CI or native kernel. Algebraic cyclotomic identities including shifted Phi9, permutation relations, 36 group products, 9 character projector products, 6 reflection/eigen equations, 8 literal masks (6 even classes), 729 pairs of nonnegative multiplicity triples (sum and fusion support transport), explicit shared witness collision, 4096 four-mask exact even/odd products, 4 Boolean quotient/AND/OR input pairs. These tests check finite algebra, not local field oracle evaluations or general CKR/LLC theorems. General proofs above independent of finite results. Reproduction (compact equivalent checks):
+```python
+from itertools import product
+from fractions import Fraction as F
+import sympy as S
+from sympy import Matrix, eye, zeros
+z,w=S.symbols('z w')
+red=lambda p:S.rem(S.expand(p),z*z+z+1,z)
+for p in [(1-z)**2+3*z,(z*(1-z))**2+3,
+          (z*(1-z))*(1-z)**3-9,(1-z)*(1+z)-(1-z*z)]:
+    assert red(p)==0
+assert S.expand(S.cyclotomic_poly(9,z).subs(z,w+1))==w**6+6*w**5+15*w**4+21*w**3+18*w**2+9*w+3
+T=range(3); P=lambda f:Matrix(3,3,lambda i,j:int(i==f(j)))
+R=P(lambda j:(j+1)%3); J=P(lambda j:(-j)%3)
+assert R**3==eye(3) and J**2==eye(3) and J*R*J==R**2
+G=[R**i*J**j for i,j in product(T,range(2))]
+assert len({tuple(g) for g in G})==6
+assert all(a*b in G for a,b in product(G,repeat=2))
+E=[sum((z**((-k*i)%3)*R**i for i in T),zeros(3))/3 for k in T]
+rm=lambda m:m.applyfunc(red)
+for i,j in product(T,repeat=2):
+    assert rm(E[i]*E[j]-(E[i] if i==j else zeros(3)))==zeros(3)
+assert rm(sum(E,zeros(3))-eye(3))==zeros(3)
+for i in T:
+    assert rm(J*E[i]*J-E[-i%3])==zeros(3)
+    assert rm(R*E[i]-z**i*E[i])==zeros(3)
+assert E[0]==S.ones(3)/3 and E[0]!=S.diag(1,0,0)
+masks=list(product(range(2),repeat=3)); classes=set()
+for a,b,c in masks:
+    A=rm(a*E[0]+b*E[1]+c*E[2]); even=rm((A+J*A*J)/2); odd=rm((A-J*A*J)/2)
+    assert rm(even+odd-A)==zeros(3)
+    assert (rm(J*A*J-A)==zeros(3))==(b==c)
+    assert rm(even-a*E[0]-F(b+c,2)*(E[1]+E[2]))==zeros(3)
+    assert rm(odd-F(b-c,2)*(E[1]-E[2]))==zeros(3)
+    classes.add((a,b+c))
+assert len(classes)==6
+p=(0,1,0);q=(0,0,1)
+assert (p[0],p[1]+p[2])==(q[0],q[1]+q[2])
+assert any(a*b for a,b in zip(p,p)) and not any(a*b for a,b in zip(p,q))
+chars=[(1,1,1),(1,-1,1),(2,0,-1)]; weights=(1,3,2)
+Fus=[[[sum(weights[t]*chars[i][t]*chars[j][t]*chars[k][t] for t in T)//6 for k in T] for j in T] for i in T]
+assert Fus[2][2]==[1,1,1] and Fus[1][2]==[0,0,1]
+vs=list(product(range(3),repeat=3))
+for a,b in product(vs,repeat=2):
+    out=[sum(a[i]*b[j]*Fus[i][j][k] for i,j in product(T,repeat=2)) for k in T]
+    supp=[any(a[i]>0 and b[j]>0 and Fus[i][j][k]>0 for i,j in product(T,repeat=2)) for k in T]
+    assert [x>0 for x in out]==supp
+    assert [x+y>0 for x,y in zip(a,b)]==[x>0 or y>0 for x,y in zip(a,b)]
+for a,b in product(range(2),repeat=2):
+    assert a*b==int(a and b) and 1-a==int(not a) and 1-(1-a)*(1-b)==int(a or b)
+for ms in product(masks,repeat=4):
+    c,e,o=1,F(1),F(0); direct=[1,1,1]
+    for a,b,d in ms:
+        u,v=F(b+d,2),F(b-d,2)
+        c,e,o=c*a,e*u+o*v,e*v+o*u
+        direct=[x*y for x,y in zip(direct,(a,b,d))]
+        assert (c,e+o,e-o)==tuple(direct)
+    assert c+2*e==sum(direct)
+```
+Sources: Serre, *Local Fields*, Artin conductor filtration (LMFDB https://www.lmfdb.org/knowledge/show/artin.conductor); standard GL2 LLC irreducible Weil parameter/supercuspidal and conductor compatibility https://docs.magma-maths.org/ModularArithmeticGeometry/RepresentationsOfLocalFields/introduction.html ; CKR DOI above. Local Kummer and group/representation formulas are standard theory with explicit elementary derivations here. Preserve original DASHI finite-source owners, JMD attribution and other worker G16–G19. No claim of priority for local S3 example, Reynolds decomposition, support semiring, or basic quotient gate.
+
+### R35. Exact remaining P0 roadmap / producers -> consumers
+
+| Gate / phase | Deliverable | Status |
+|---|---|---|
+| R28 / A | Source C2/C3/S3, reflection Fourier, witness and Karp reconciliation | inspected; source owners above -> R29–33 |
+| R29 / B | Actual S3 local Galois extension and correct R16 descent boundary, conductor filtration | derived; R16, ramification donor, dihedral source -> R30 |
+| R30 / B | GL2 standard parameter, marked mediator, even/odd descent and conductor | derived at standard LLC authority; #585/#596 section independence, reflection parity -> R31 |
+| R31 / B–C | Signed joint mask reconstruction, exact O(k) shared-witness gluing | derived; R23/R24, G16 -> R7a'; negative control on independent sign charges |
+| R32 / C | Positive representation support simulation and superpoly selector lower bound | derived restricted theorem via G17/CKR; fixed type/explicit coefficient cost, arbitrary shared DAG |
+| R33 / C | Actual bounded-dimension equivariant quotient Boolean compiler | derived; all gates, shared source, no free general rank; no generic monotone transport |
+| R7a' / LGC4d / C | Source-marked arithmetic relation sensitive to width-three joint constraints beyond positive support | local descent and signed gluing supplied; global cost-sensitive consumer still open |
+| R7b' / LGC5 / C | Universal charged global invariant or obstruction under signed/quotient shortcuts AND arbitrary nonlinear reuse, not just positive support | OPEN P0, connect R31–33 to G12a/N4 on original DAGs |
+| R7c / LGC6 / D | Superpolynomial separation of same unrestricted invariant on actual selector 3-SAT | OPEN P0; G17 only restricted, G12b/c/N5 |
+| LGC7/N6 / E | Original Clay endpoint via standard cost model | conditional source consumer, no unconditional producer |
+
+Next consolidated mathematical target: determine what extra global constraints of the actual selector norm network force charged progress even with the R33 quotient gates and R31 shared signed contraction. Do not try to prove arbitrary honest representation transport is monotone, or charge every independent mask/character/cocycle term. R32 supplies a precise monotone baseline, R33 a mandatory unrestricted escape. No generic certification programme or other Millennium prerequisite.
