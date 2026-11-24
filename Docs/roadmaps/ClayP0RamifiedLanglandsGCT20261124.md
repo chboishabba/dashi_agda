@@ -1025,3 +1025,164 @@ for m,l in [(5,4),(6,4),(6,5),(7,6),(8,7)]:
 ### R49. Next endpoint-first tranche
 
 Use R44 as a concrete solved compression, not a new generic certification project. Need either a lower bound on every polynomial unrestricted algorithm for actual thin-band residual instances (sufficient by R46), or a costed normalization preserving G24/G25 constraints beyond shared logarithmic inversion; do not assume high r forces independent work or claim local character count is a lower bound. For a positive alternative investigate actual residual scope interaction structure and whether arbitrary nonlinear operations can compress rank nonvanishing; the reverse projection shows any generally efficient method on the hard band solves original SAT. Retain width-two negative controls, marked incidence, dependent zeros and all original labels. No unrelated Monster/YM/RH work. Standard CSP restriction, finite-dimensional projector and prior lower-bound authority credited; original DASHI/JMD owners and other worker G22–27 retained. No claim P!=NP.
+
+## 15. R50–R56 — single central sandwich, actual exterior-power Weil module and Fourier coefficient boundary (2026-11-24)
+
+User directed stay on Langlands. Read both current mounted attachments (R43–49 and G28–32). Live G28–32 #1548 9cc331b5ae03f07af335618ca74d8640a88b5269 / #119 4f8af7050230ba8c07387e55d47f761dc0fc63ad, identical blob 777a62b796d53f3c753b79ee0bb038e566888a37. Live Langlands #1549 07ced79e5be47401151c646d5cca13330fea789e / #120 1568c2c4738bf310d70fa291cfecded797c9c6e2, blob aed00d1cb12ad323b16de59c7015d94fabc75219. No edit of other worker branches. G28 intersects each variable's available-value projections across all scopes, improving R43 singleton-scope forcing: empty domains reject, singleton domains fix, ambiguous a has b(m)-b(m-a)<=k. Sharp via union of two minterms at distance a. G28's O(N) monotone checker is exact before b+d_m; use this in place of larger H_4 for that first band. R44 same-object isometry applies equally to the stronger fixed domains (all solutions satisfy them). G30 external theorem verified against actual HTML Corollary 5: Jarosław Błasiok and Linus Meierhöfer, *Hardness of Clique Approximation for Monotone Circuits*, CCC 2025, DOI 10.4230/LIPIcs.CCC.2025.4, https://drops.dagstuhl.de/storage/00lipics/lipics-vol339-ccc2025/html/LIPIcs.CCC.2025.4/LIPIcs.CCC.2025.4.html ; k<=n^(1/2-delta)/log^2 n gives n^Omega(delta^2 k). G22 with delta=1/24, clique k=floor(n^(5/12)), yields exp(Omega(N^(5/36) log N)), replacing the earlier G22/CKR 1/12 exponent. R46 padded exponent a becomes 5/(36a), distinct from G25 limited negation. This theorem concerns full monotone G, NOT its sandwich. G32 fixed-weight and sandwich equivalence credited to other worker.
+
+Inspected actual master donors: DASHI/Moonshine/PenumbralSQModuleLift.agda dd1f89c24dc29f21d7030ac9799b1639ee5a3c35 (LambdaRingModuleCarrier with exteriorPower/symmetricPower/trace, an interface not a complexity theorem); PenumbralSuperFockFactor.agda 988d2d5c31d6f297234e76e3090fad5cfc917a05 (GradedModuleSeriesCarrier with exterior algebra and Cauchy coefficient law); Monster3BMultiplicityCharacterProjectorExact.agda 64641da0802c773aaff383551df17227cfc767ba (multiplicityProjectorTrace, source trace inputs explicit); ConsumerFibreRepairExact.agda 5bab8f89861559c14f3877acd5e11424b21a6a6d; Karp21NativeBinaryAdderWidthBoundExact.agda 4016924f3bfc88bf850410e983a74bea9e996088 (actual addBitsOutputBitWidthLinear, not full cost). These are typed patterns, not imported kernel proofs of new statements. R28–37 actual local Weil module, R38 shared inverter, R44 original assignment compression and R46 padding remain the direct producers. No other Millennium or Monster endpoint reopened.
+
+### R50. A single canonical CENTRAL sandwich family is sufficient, with same-object witness preservation
+
+For q>=1 original variables set m=4(q+1)>=8. Let b(m)=sum_(j=1..3) binom(m,j), N=N_m=sum 2^j binom(m,j), K=floor(N/2) (N even). Fix added variables q+1..m to zero using their actual singleton scopes, never modify their incompatible singleton bits. Call a pattern compatible if all its dummy coordinates are zero. There are
+    A=b(m)+q*d_m+binom(q,2)*(m-1)+binom(q,3)
+compatible selector coordinates: expand 2^|I intersect [q]| by subsets of active coordinates and count scopes containing each subset. In particular q<=m/4, d_m<=m^2/2 (m>=2), hence A<=(125/384)m^3+5m/6<=K for m>=8, since K=(2/3)m^3-m^2+(4/3)m. Of the N-A incompatible coordinates, m-q are forbidden dummy singleton bits and MUST remain zero; all others are inert under the fixed assignment. There is room for N_q distinct complemented copies plus K-A constant ones, because N-K>=N_q+(m-q); use N_q<=2q^3<=m^3/32 and m<=m^3/64. Fix compatible coordinates outside original scopes to one; copy original N_q bits t_i in their original scopes; reserve a distinct inert coordinate for 1-t_i; set K-A further inert bits to one; all remaining inert bits zero. Then total weight (A-N_q)+N_q+(K-A)=K independent of t. Dummy singletons are intact, and every original witness extends uniquely to (x,0^(m-q)). Explicit signed projection E: each output bit is input, its complement, or constant; O(N_m)=O(N_q) coordinate-size overhead for fixed factor m/q, counting explicit wire indices polynomial. Not monotone, because nonconstant monotone maps from full Boolean cube cannot land entirely in a constant-weight antichain.
+
+Actual R36/44 isometry J appends dummy zeros. Pi_E(t)=J Pi_t J*, and J tensor I_P identifies actual Weil submodules, both S3 central idempotents and marked C3 projectors, all multiplicity counts W(E(t))=W(t). Exact witness inverse. Inert complementary bits are not dummy witness variables, nor erased mediator support: they affect selected weight but cannot affect the original constrained assignment fibre.
+
+Define S_(m,K)(t)=[|t|>=K+1] OR ([|t|>=K] AND G_m(t)). G32 shows any ordinary circuit size s for G_m gives monotone circuit for S_(m,K) with polynomial overhead (construct D(t,u), replace u_i by [sum_(j!=i)t_j>=K], sandwich with the two thresholds). Conversely S_(m,floor(N_m/2)) evaluated on E(t) equals G_q(t), ordinary complemented projection overhead polynomial. Thus G in P/poly iff the SINGLE canonical central sandwich family has polynomial monotone circuits. Worst over all K no longer necessary. This is a nonuniform sufficient Clay separation route, stronger than direct P!=NP; uniform converse requires effective circuit construction, no unsupported equivalence between NP outside P/poly and P!=NP. Can instead use direct uniform original N4/N5 route. Same result in R32 positive support model with fixed trivial-type Boolean support and charged gates: support simulation gives reverse and AND/OR lift gives forward; arbitrary succinct high-dimensional rank gates are not free. G32 was the general sandwich equivalence; fixed central size and exact parsimonious same-object transport are the new crosswalk.
+
+### R51. Actual exterior-power representation for the sandwich, not just a renamed truth bit
+
+Let V=C^N with named selector-coordinate basis e_C and trivial Weil action. For t define T_t=span{e_C:t_C=1}, dimension w=|t|. For each original assignment x, P_x is the actual weight-b minterm, V_x=span{e_C:C in P_x}. All coordinate subspaces are actual subobjects of V; choose standard coordinate complement V_x^perp. For b<=K<=N define
+    A_K(t)=direct_sum_(x in F2^m) [Lambda^b(V_x intersect T_t) tensor Lambda^(K-b)(V_x^perp intersect T_t)].
+Then define actual W_F=Weil(Q3) representation
+    M_K(t)=(A_K(t) direct_sum Lambda^(K+1) T_t) tensor P,
+with P=1+U from R30, acting trivially on all wedge factors, and exterior convention Lambda^0 C^0=C, Lambda^r=0 above dimension. Keep the assignment-labelled summands (do NOT identify identical exterior basis vectors from different x). They embed via wedge product into separate copies of Lambda^K V, plus the distinct Lambda^(K+1) V summand; all source projectors/embeddings commute with the original central S3 and marked C3 phase idempotents on P. Let W(t)=#satisfying original assignments. With binomial zero outside its legal nonnegative range and first term zero if w<b,
+    dim Hom_WF(1,M_K(t))=dim Hom_WF(U,M_K(t))
+       =F_K(t)= W(t) binom(w-b,K-b)+binom(w,K+1).
+Proof: first wedge is dimension 1 precisely when P_x subset t; on each such x the second available coordinate space has dimension w-b. On w<K both terms zero; w=K gives exactly W(t); w>K second term positive. Hence support F_K=S_(m,K). At w=K, actual assignment-indexed wedge bases give a canonical isomorphism up to fixed basis-order sign to the original R36 satisfying submodule, via x -> wedge of P_x followed by all remaining t coordinates. Fix standard coordinate ordering to normalize. Below K the zero representation is genuine empty object; on K it may be zero or inhabited; above K the extra wedge is inhabited regardless of actual witness relation, so must retain grade and origin if original SAT is the consumer. S_k=1 above K is not a SAT assertion. This is exact same-object exterior realization of the sandwich, not a free algorithm. Dimension of a wedge of a coordinate space is a binomial coefficient (support cheaply thresholded), but the sum over x and its joint marked incidence still costs work. Do not charge all x independently or allow a succinct high-dimensional exterior rank as one uncharged gate. Positive arithmetic DAGs computing F_K simulate monotone support, yet arbitrary monotone Boolean circuits need not compute F_K's exact multiplicities. Lower bound on exact count alone would not imply Boolean circuit lower bound.
+
+### R52. Fourier coefficients: cheap bare witness polynomial, hard sandwich multiplicity coefficient
+
+Treat selector coordinates as a separate Boolean translation carrier, not independent Galois automorphisms or a field map F2->F3. For H subset [N] use normalized Walsh coefficient fhat(H)=2^-N sum_t f(t)(-1)^|H intersect t| (can attach quadratic local character evaluation chi from R2 to each parity; label H external). Bare W(t)=sum_x product_(C in P_x)t_C has
+    What(H)=(-1)^|H| 2^-b * #{x:H subset P_x}.
+This follows by averaging each monomial: coordinates in H outside P_x cancel; those in P_x are forced t_i=1. Count is zero if the original falsifying patterns in H assign conflicting values to a common variable; otherwise 2^(m-|union of scopes in H|). Thus every individual coefficient can be computed in poly(N) exact bit operations. Inverse sum over H still exponentially many terms; coherent signs before evaluation do not eliminate cancellations on arbitrary input. Pointwise coefficient access does not give a polynomial algorithm for W or support W. This is more precise than raw spectral-rank counts.
+
+For the first multiplicity term define the multilinear positive polynomial
+    W_K(t)=sum_x sum_(J subset [N]\P_x, |J|=K-b) product_(C in P_x union J)t_C.
+It equals W(t) binom(w-b,K-b) on Boolean inputs, and equivalently sum_(L subset [N], |L|=K) W(L) product_(C in L)t_C. Therefore the degree-K monomial coefficient indexed by H of cardinality K is W(H). The general Walsh formula is
+    W_Khat(H)=(-1)^|H| 2^-K sum_x binom(N-|P_x union H|,K-|P_x union H|),
+with invalid binomial zero. In particular at |H|=K,
+    W_Khat(H)=(-1)^K 2^-K W(H).
+Since e_(K+1)(t)=sum_(|L|=K+1)prod_(C in L)t_C, full F_K=W_K+e_(K+1) has
+    F_Khat(H)=(-1)^K [2^-K W(H)+(N-K)2^-(K+1)]  (|H|=K).
+This is an exact extraction of original witness multiplicity from ONE canonical coefficient, using the R50 central embedding H=E(t). Exact coefficient query of this weight-lifted multiplicity family is #P-hard under polynomial-time reductions: selector witness counting includes #3SAT via the explicit original clause-coordinate encoding, with unused coordinates absent, and R50 is parsimonious. In particular a polynomial algorithm for these exact rational coefficients implies polynomial SAT decision; the binary output length is polynomial because counts <=2^m and denominators powers of 2 of exponent <=N. No lower bound on arbitrary Boolean support from #P hardness. Bare W coefficient easy versus sandwich W_K coefficient hard is a precise loss of arithmetic simplification under degree-lift, not an assertion that every Fourier approach fails. Exact zero/inhabited test of W(H) on the selected layer can be expressed by subtracting the known exterior contribution (N-K)/2 after normalization, retaining the signed residual. Treat subtraction as genuine arithmetic work, not a positive support gate.
+
+### R53. Why the known monotone CLIQUE theorem cannot directly reach the sandwich via monotone projections
+
+General lemma: if f(e)=S_K(p(e)) for a monotone coordinate projection p (constants or unnegated input bits, allowing repetition), then projected weight w(e)=c+sum_i a_i e_i with a_i>=0. Every positive input must have w>=K, every negative input w<=K. Thus if distributions D_+,D_- supported on positive and negative inputs respectively satisfy E_(D_-) e_i > E_(D_+) e_i for EVERY essential input coordinate, no such projection exists: any nonconstant p has some a_i>0, giving E_-w>E_+w, contradicting E_-w<=K<=E_+w. It is enough that strict inequality holds for every coordinate used. Equivalently the two convex hulls of positive and negative input marginal vectors cannot be strictly ordered that way under the required nonnegative weight functional.
+
+For CLIQUE_(n,k), 3<=k<n, choose uniformly relabelled k-clique plus isolated vertices as positive and uniformly relabelled balanced complete (k-1)-partite graph as negative. The negative edge count exceeds binom(k,2). Elementary proof: the (k-1)-partite graph with k-2 singleton parts and one part n-k+2 has edge-count difference from binom(k,2) equal to (k-2)(n-k)-1; positive except k=3,n=4, where balanced bipartite has 4>3. Balancing parts cannot decrease edge count. Therefore each negative edge marginal exceeds the positive marginal, and no nonconstant unnegated coordinate projection of this CLIQUE family to ANY S_K exists, regardless of selector padding or duplicated edges. This is not a barrier to general monotone reductions with nontrivial preprocessing, distributional/lifting arguments, or proving sandwich lower bounds by another method. It specifically excludes direct transfer of G22/G30 via their monotone coordinate projection and is consistent with R50's use of complemented inputs. A purely monotone projection to constant weight is already impossible by antichain; this argument also rules out varying projected weights for this CLIQUE family. No global lower bound on sandwich follows. G30 improves the full G and positive rep lower bounds but does not pay N5 in the new endpoint. Do not silently reuse its exponent for sandwich.
+
+### R54. Actual local exact execution
+
+Ran /tmp/langlands_r50.py and /tmp/langlands_wedge.py in local container Python; exact integer and Fraction arithmetic, no CI/native prover/field oracle. Counts: 396 central padding and witness-count comparisons (all 260 m=1,2 originals, 128 deterministic m=3 inputs +8 minterms), 260 bare Walsh coefficient comparisons, 222 degree-K Walsh coefficient checks, 1544 sandwich support checks, 4753 Turan density comparisons for 4<=n<=100, 3<=k<n; additionally 1544 explicit wedge-basis counts and 222 full F_K coefficient checks. All passed. The padding test evaluates only the original active assignments with dummy zero after checking every original dummy singleton, as justified by exact embedding, not brute force over all padded assignments. General claims are derived independently of finite checks. Reproduction (both actual scripts merged without changing their tested comparisons):
+```python
+from itertools import combinations,product
+from math import comb
+from random import Random
+from fractions import Fraction
+def scopes(m): return [I for j in range(1,min(3,m)+1) for I in combinations(range(m),j)]
+def coords(m): return [(I,p) for I in scopes(m) for p in product((0,1),repeat=len(I))]
+def b(m): return len(scopes(m))
+def N(m): return len(coords(m))
+def minterms(m):
+    C=coords(m); ids={c:i for i,c in enumerate(C)}
+    return [sum(1<<ids[I,tuple(x[i] for i in I)] for I in scopes(m)) for x in product((0,1),repeat=m)]
+def count(t,P): return sum(p&t==p for p in P)
+def fwht(v):
+    v=v[:];h=1
+    while h<len(v):
+        for i in range(0,len(v),2*h):
+            for j in range(i,i+h):
+                a,c=v[j],v[j+h];v[j]=a+c;v[j+h]=a-c
+        h*=2
+    return v
+def pad(q,m):
+    C=coords(m); ids={c:i for i,c in enumerate(C)};old=coords(q)
+    var=[ids[c] for c in old]
+    good=[i for i,(I,p) in enumerate(C) if all(j<q or v==0 for j,v in zip(I,p))]
+    gs=set(good);vs=set(var)
+    inert=[i for i,(I,p) in enumerate(C) if i not in gs and len(I)>1]
+    K=len(C)//2;A=len(good)
+    assert A==b(m)+q*(1+(m-1)+comb(m-1,2))+comb(q,2)*(m-1)+comb(q,3)
+    assert A<=K and len(inert)>=len(var)+K-A
+    mask=sum(1<<i for i in gs-vs)+sum(1<<i for i in inert[len(var):len(var)+K-A])
+    def emb(t):
+        return mask+sum(1<<(var[j] if t>>j&1 else inert[j]) for j in range(len(var)))
+    P=[sum(1<<ids[I,tuple(x[j] if j<q else 0 for j in I)] for I in scopes(m)) for x in product((0,1),repeat=q)]
+    return emb,P,C,ids,K
+rng=Random(20261124);padding=0;binary=0;coeff=0;support=0;proj=0
+for q in (1,2,3):
+    P=minterms(q);n=N(q);m=4*(q+1);emb,Ppad,C,ids,K=pad(q,m)
+    inputs=range(1<<n) if q<3 else [rng.randrange(1<<n) for _ in range(128)]+P
+    for t in inputs:
+        T=emb(t);assert T.bit_count()==K
+        assert count(T,Ppad)==count(t,P)
+        for j in range(q,m):
+            assert T>>ids[(j,),(0,)]&1 and not T>>ids[(j,),(1,)]&1
+        padding+=1
+for m in (1,2):
+    C=coords(m);n=len(C);P=minterms(m);B=b(m);W=[count(t,P) for t in range(1<<n)];F=fwht(W)
+    for H in range(1<<n):
+        fixed={};ok=True
+        for i,(I,p) in enumerate(C):
+            if H>>i&1:
+                for j,v in zip(I,p):
+                    if j in fixed and fixed[j]!=v:ok=False
+                    fixed[j]=v
+        expected=(-1)**H.bit_count()*((1<<(m-len(fixed))) if ok else 0)
+        assert F[H]==expected*(1<<(n-B));binary+=1
+    for K in range(B,n+1):
+        Wk=[w*comb(t.bit_count()-B,K-B) if t.bit_count()>=K else 0 for t,w in enumerate(W)]
+        Fk=fwht(Wk)
+        for H in range(1<<n):
+            if H.bit_count()==K:
+                assert Fk[H]==(-1)**K*W[H]*(1<<(n-K));coeff+=1
+        for t,w in enumerate(W):
+            wt=t.bit_count();actual=Wk[t]+comb(wt,K+1)
+            assert bool(actual)==(wt>K or (wt==K and bool(w)));support+=1
+for n in range(4,101):
+    for k in range(3,n):
+        sizes=[n//(k-1)+(i<n%(k-1)) for i in range(k-1)]
+        neg=comb(n,2)-sum(comb(s,2) for s in sizes)
+        assert neg>comb(k,2);proj+=1
+assert (padding,binary,coeff,support,proj)==(396,260,222,1544,4753)
+checks=totalcoef=0
+for m in (1,2):
+    n=N(m);B=b(m);P=minterms(m);W=[count(t,P) for t in range(1<<n)]
+    for K in range(B,n+1):
+        vals=[]
+        for t,w in enumerate(W):
+            ix=[i for i in range(n) if t>>i&1]
+            wedges=[sum(1<<i for i in J) for J in combinations(ix,K)]
+            dim=sum(count(J,P) for J in wedges)+len(list(combinations(ix,K+1)))
+            expected=(w*comb(len(ix)-B,K-B) if len(ix)>=K else 0)+comb(len(ix),K+1)
+            assert dim==expected
+            vals.append(dim);checks+=1
+        F=fwht(vals)
+        for H in range(1<<n):
+            if H.bit_count()==K:
+                assert Fraction(F[H],1<<n)==(-1)**K*(Fraction(W[H],1<<K)+Fraction(n-K,1<<(K+1)))
+                totalcoef+=1
+assert (checks,totalcoef)==(1544,222)
+```
+
+### R55. Endpoint ledger (no new certification phase)
+
+| Gate / phase | Deliverable | Status / producer -> consumer |
+|---|---|---|
+| R50 / B-C | central half-weight parsimonious projection, single-slice nonuniform equivalence and original Weil fibre | derived; G32, R44/R46, R38 -> R51 and N5 sufficient target |
+| R51 / C | actual exterior-power sandwich representation with preserved marked phase/Hom multiplicity | derived; R30/R36, exterior interfaces -> R52 |
+| R52 / C | exact bare Fourier coefficient formula, top-layer sandwich coefficient #P-hard extraction | derived; R2/R37, R50/R51 -> charged arithmetic observer; not decision lower bound |
+| R53 / C | marginal obstruction to direct monotone CLIQUE-to-sandwich projection | derived; G22/G30/G32, actual selector weight -> avoid invalid lower-bound transfer |
+| R54 | local exact tests | executed, no kernel/CI |
+| R7a' / LGC4d / C | actual arithmetic consumer with cost-sensitive joint residual and central-slice support | exact target R51; efficient coefficient oracle not free; universal charge open |
+| R7b' / LGC5 / C | universal shared nonlinear/quotient resource charge or a lower bound for monotone positive support computation of CENTRAL sandwich | OPEN P0; positive full-G lower bound not sufficient, R53 mandatory negative control |
+| R7c / LGC6 / D | superpolynomial unrestricted separation via central sandwich or direct original uniform-machine N4/N5 | OPEN P0; central-sandwich route gives stronger NP not in P/poly |
+| LGC7/N6 / E | original Clay endpoint | existing conditional consumer only |
+
+### R56. Next substantive tranche
+
+Attack the central sandwich support function on its actual marked exterior module, not another coefficient census. The degree lift exposes exact witness count in one coefficient, but Boolean support need not recover that count; any resource charge must apply to arbitrary Boolean monotone DAGs computing the sandwich, not only multiplicity-preserving arithmetic circuits. R53 rules out the existing direct clique projection, so seek a genuinely different approximation/lifting or uniform-machine argument; keep G30 stronger lower bound for the full G and R46 promised bands. A useful positive attack is a sound costed simplification of exterior-support contraction that survives the original central slice, which would be an algorithm for SAT by R50. No promotion from #P hardness to P vs NP, no field homomorphism, no invented Galois action on selector labels. Standard Fourier/exterior/CSP/complexity theory credited; DASHI/JMD and G28–32 ownership retained. No unrelated branch work or CI.
