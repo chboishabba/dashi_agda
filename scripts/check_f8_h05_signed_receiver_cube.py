@@ -44,6 +44,16 @@ def cube(states, vel, obs, source_offset):
         for a in reversed(perm):x=edge(x,a,1)
         equal(x,base);paths[str(perm)]=True
     values={str(bits):observe(x) for bits,x in vertices.items()}
+    # Existing independent geometric jet bank factors through U,W histories.
+    # It is blind to these normal characteristic interventions, not to arbitrary U jets.
+    for val in values.values():equal(val,values[str((0,0,0))])
+    for bits,x in vertices.items():
+        dn=(x[:,1]-x[:,2]-base[:,1]+base[:,2])/2
+        expected=-sum((X[:,3+a] for a in range(3) if bits[a]),np.zeros_like(dn))
+        equal(dn,expected)
+        for i,v in enumerate(vel):
+            dg=((1+v)*(x[i,1]-base[i,1])+(v-1)*(x[i,2]-base[i,2]))/2
+            equal(dg,(1-v*v)*expected[i])
     # At zero-initial constraint ledger Q=R+J+K, the last vertex has
     # zero unweighted Q. This is an intervention, not a solution.
     return faces,paths,values
