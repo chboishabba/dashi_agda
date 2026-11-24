@@ -933,3 +933,74 @@ admission proof; no such work is claimed.
 Original analytic Chudnovsky identity,
 Bishop same-original-real and independent
 world SOTA comparison remain OPEN.
+
+
+## 24 November — COMP5t: exact affine-edge and suffix-only retries (NO TESTS)
+
+The COMP5s precision-indexed projective normalized GMP producer
+has a new, separately selectable **UNTESTED** COMP5t continuation:
+\`scripts/pi_p0_affine_edge_retry.hpp\` and
+\`scripts/check_pi_p0_affine_retry_schedule.cpp\`.
+User-directed testing deferral remains active; no local
+compiler, C++ benchmark, SymPy/Python test, CI,
+Agda/Lean kernel or external SOTA comparison was run.
+
+At original terminal \(n\ge2\), the future series observer
+already consumes \(V=T'_nq_n+P'_np_n(A+Bn)\).
+Thus the source-indexed affine edge
+\(E_n=(T'_n,Q'_n,V)\) retains exactly enough to
+recover the **normalized** original P/Q/T via
+\(P'_n=(V-T'_nq_n)/(p_n(A+Bn))\), with exact
+signed nonzero divisor. The projective leaf source scale
+\(G_{0,n}=\prod_{j=1}^{n-1}24h_j\) remains a
+separately indexed, optionally reopened raw-source receipt.
+This is an actual original-source algebraic bijection,
+not a lossy decimal-hash quotient; authentication of
+the underlying P/Q/T producer remains a separate gate.
+
+When the ordinary strict upper witness fails, choose
+the exact next refinement using two integer-square slacks
+with positive series endpoints
+\(S_\mathrm{lo}=N_\mathrm{lo}/D_\mathrm{lo}\) and
+\(S_\mathrm{hi}=N_\mathrm{hi}/D_\mathrm{hi}\),
+candidate \(x\), \(F=426880\,10^d\):
+
+\[
+D_b=10005(FD_\mathrm{hi})^2-((x+1)N_\mathrm{hi})^2,\quad
+D_n=((x+1)N_\mathrm{lo})^2-10005(FD_\mathrm{lo})^2.
+\]
+
+- \(D_b\ge0\): root precision insufficient for exact
+  fixed-source lower floor; increase only \(b\) and
+  KEEP the identical authenticated edge.
+- \(D_b<0,D_n>0\): same output floor is certified
+  by signed-square upper witness; accept.
+- \(D_b<0,D_n\le0\): source interval too wide,
+  increase **only** \(n\), reopening P from
+  signed edge residual by exact division and
+  computing the genuine original-indexed suffix
+  \([n,n')\). Recompose original ordered
+  \(M'_{0,n}M'_{n,n'}\); KEEP the existing root
+  and decimal factor.
+
+The source-indexed suffix planner is implemented as
+\`makePlanInterval(begin,end)\`, not by incorrect
+rebasing to zero. Structural counters track all
+classification squares, guard-only/root rebuilds,
+series-only/source suffix builds, signed P reopening
+divisions, prefix-built-once admission and all actual
+leaf valuations. Those comparisons may consume
+substantial additional memory and runtime; no
+speedup/memory improvement is claimed. A
+three-coordinate edge does NOT assert that any
+unseen raw source or independent analytic π
+identity has been proved.
+
+Full derivation and exact S7–S12 proof/acceptance
+obligations: \`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+COMP5j is still the original measured candidate;
+COMP5t is not added to the historical six-way
+GMP Pareto default. Source parity, positive cone,
+zero-mode identity, \(n,d,b\) separate indexes,
+signed delta, scale recipe and original strict
+decimal-floor consumer remain explicit.
