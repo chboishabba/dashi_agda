@@ -4,7 +4,7 @@
   "source_model": "Original prescribed-wave finite-loss nine-state J25/J31 real mode (U=0,V=1,spark=ON)",
   "original_source_owner_pr": 1537,
   "executable": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
-  "committed_source_blob": "3bb225902125b6fbb95d1c00bc520c9c001f87f9",
+  "committed_source_blob": "d4c8513c3142bb87ed8ebf06a7503409da34bd86",
   "run": "python scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py --segment 1 --out receipt.json",
   "execution": {
     "local_Python_Fraction": true,
@@ -14,10 +14,13 @@
       "47493fbefba44c20e7cb82e31521627f13611800"
     ],
     "no_github_ci": true,
-    "full_source_interval_json_sha256": "cbf0e03a0f6a1a5a29ae38e7ce65cb9da00bbc5192e6d0ed4a7b9948db77a55e",
-    "full_source_interval_json_bytes": 282414,
+    "full_source_interval_json_sha256": "34e4dc04ff414439c238e866dce5e2e53c94e7ba7968c3225799202fd6071b16",
+    "full_source_interval_json_bytes": 282675,
     "full_json_regenerable_from_committed_source": true,
-    "full_json_not_copied_into_compact_receipt": true
+    "full_json_not_copied_into_compact_receipt": true,
+    "full_exact_outward_rational_replay_sha256": "34e4dc04ff414439c238e866dce5e2e53c94e7ba7968c3225799202fd6071b16",
+    "full_exact_replay_bytes": 282675,
+    "local_executed_cli": "python scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py --segment 1 --out receipt.json"
   },
   "time": {
     "start": "3.389367008894",
@@ -42,7 +45,7 @@
     "remaining_slabs_with_strictly_negative_bank_derivative": 8,
     "original_terminal_spark_OFF_guard_zero_required_externally": true,
     "original_J24_event2_numerical_centre_in_interval": 9,
-    "original_J24_event2_entire_original_state_box_in_interval": false,
+    "original_J24_event2_entire_original_state_box_in_interval": "Target box is contained in broad flow output; converse is false; neither implies an original exact event match.",
     "rigorous_full_9x9_state_derivative_interval": true,
     "rigorous_start_clock_and_end_clock_derivatives": true
   },
@@ -70,5 +73,13 @@
     "physical_device_measured": false,
     "formal_kernel": false,
     "github_ci": false
+  },
+  "executable_git_blob": "d4c8513c3142bb87ed8ebf06a7503409da34bd86",
+  "exact_directional_original_J24_target_box_test": {
+    "source_numeric_J24_target_box_inside_broad_flow_output_coordinates": 9,
+    "full_flow_output_inside_narrow_original_J24_target_box_coordinates": 0,
+    "first_direction_is_not_event_box_admission": true,
+    "full_target_box_paid_by_this_source_enclosure": false,
+    "actual_simultaneous_shooting_root_proved": false
   }
 }
