@@ -1004,3 +1004,86 @@ GMP Pareto default. Source parity, positive cone,
 zero-mode identity, \(n,d,b\) separate indexes,
 signed delta, scale recipe and original strict
 decimal-floor consumer remain explicit.
+
+
+## 24 November — COMP5u: dyadic 3-sector retry geometry from PNP G83 (TESTING DEFERRED)
+
+Using the user's G79–G83 P-vs-NP guard-geometry note as
+**methodological inspiration**, not as a theorem about π,
+COMP5u contracts the failed-certificate decision to three
+exact integer residue sectors rather than fully expanding
+two expensive square-root-free signed-square slacks on
+every failed dyadic upper witness. The G83 lesson is
+that explicit representation size is not synonymous
+with actual source-preserving consumer work.
+
+New standalone **UNTESTED** source:
+\`scripts/pi_p0_dyadic_sector_contraction.hpp\`.
+New integrated original-source/COMP5t-derived **UNTESTED**
+implementation:
+\`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`.
+No historical COMP5j or COMP5t baseline is overwritten.
+
+For original authenticated positive ordered Chudnovsky endpoints,
+\(H=426880\,5^d\), \(k=b-d\), \(R=\lfloor2^b\sqrt{10005}\rfloor\),
+the lower quotient and its two remainders are
+
+\[
+H R D_h=2^k(xN_h+\rho)+\ell,\quad
+0\le\rho<N_h,\quad0\le\ell<2^k.
+\]
+
+For \(W=H(R+1)D_l=2^k u+\eta\),
+the exact consumer result is:
+- **Admit:** \(u<(x+1)N_l\).
+- **Extend source suffix:** ordinary admission failed;
+  \(u+\lfloor(\eta-HD_l)/2^k\rfloor
+     \ge (x+1)N_l\)
+  AND \(\rho+\lfloor(\ell+HD_h)/2^k\rfloor<N_h\).
+  Lower output floor is resolved, but original series
+  upper endpoint cannot yet admit; recompute only
+  source suffix \([n,n')\) after signed-P reopening.
+- **Refine radical guard:** all remaining authentic
+  cases; retain the exact affine edge and
+  original cutoff, increase only \(b\).
+  This can over-refine relative to COMP5t's full
+  square-slack classifier, so it is SAFE but
+  not certified minimal-cost.
+
+The algorithm uses quotient/remainders and
+one signed floor-shift on \(\eta-HD_l\);
+mistaking floor division for signed truncation
+would corrupt source obstruction.
+The source end, initial tree, original
+prime-local projective normalization,
+identity/zero mode and signed residual
+are unchanged. Structural cost fields
+distinguish dyadic quotient/remainders,
+integer division, scaled denominator
+products, guard/source decisions and
+false positives for any modelled memory
+estimate. No performance promotion.
+
+**Original-coordinate BIDI:** final \(\pi\)
+output is projectively homogeneous,
+but intermediate dyadic remainders
+are not. With raw scale \(G>0\),
+\[
+c=\lfloor G\ell'/2^k\rfloor,\quad
+\rho=G\rho'+c,\quad
+\ell=(G\ell')\bmod2^k.
+\]
+The new optional \`reopenRawDyadicFibre\`
+constructs these exact raw-source
+remainders; raw producer authenticity
+is still independently required.
+This transfer is not inferred from
+P-vs-NP's finite-field separator theorem.
+
+Full equations, decision-proof and
+positive/negative S13–S19 obligations:
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+**All testing/benchmarking/Agda/Lean/CI
+and independent world-SOTA comparisons
+remain deferred**. No new measured
+runtime/memory figure.
