@@ -759,3 +759,257 @@ No new empirical timing/RSS claim. Exact
 finite-source algebra is distinguished
 from analytic Chudnovsky–Bishop same-real
 proof, which remains open.
+
+
+## 24 November — COMP5s: output-precision-indexed projective source execution DP (testing deferred)
+
+**User goal:** combine actual COMP5r source-local
+projective normalization with consumer-specific
+evaluation scheduling, and retain signed residual,
+zero mode, full source provenance and exact BIDI
+reconstruction. This is **a new, separate UNTESTED
+candidate**, not a replacement for the historical
+measured COMP5j or the six-way acceptance runner.
+
+### Owner and actual source files
+
+- \`scripts/pi_p0_projective_precision_schedule.hpp\`
+  implements a bounded-depth, source-width-based
+  binary-tree execution planner. Its precision index
+  comes from the current output demand \(d\) and
+  the original dyadic square-root working bit index
+  \(b\), not from a made-up model clock.
+- \`scripts/check_pi_p0_precision_projective_schedule.cpp\`
+  derives directly from the original COMP5r C++ leaf
+  producer and GMP certificate. Every original
+  positive-index leaf is divided by the **exact**
+  source factor \(24h_j\) from the prime support
+  \(\{3,5,23,29\}\), and no generic GMP gcd is
+  required. A separately callable receipt
+  \`ProjectiveSourceReceipt{begin,end}\` and
+  \`reopenOriginalRawSource\` construct \(G(a,b)\)
+  only when a consumer actually requests raw P/Q/T.
+
+### Source-complete, homogeneous geometry
+
+Let \(M_{a,b}=\left(
+\begin{smallmatrix}P&T\\0&Q\end{smallmatrix}\right)\)
+be the ORIGINAL Chudnovsky ordered matrix product,
+\(M'_{a,b}\) its locally content-normalized image,
+and \(G_{a,b}=\prod_{a\le j<b,j\ge1}(24h_j)>0\).
+For all original intervals:
+
+\[
+M'_{a,b}=G_{a,b}^{-1}M_{a,b},\qquad
+G_{a,b}=G_{a,m}G_{m,b},\qquad
+M'_{a,b}=M'_{a,m}M'_{m,b}.
+\]
+
+The source matrix product is in general
+NONCOMMUTATIVE. Choosing a right child before
+the left child **for execution only** does not
+change the merge order: always compute
+\(M'_L M'_R\). The zero mode
+\([a,a)\mapsto(1,1,0)\) remains the identity;
+the original \(j=0\) leaf is not normalized.
+The normalized next-term signed residual is
+\(\delta'_n=P'_n p_n(A+Bn)\);
+with original \(q_n>0,Q'_n>0\), its sign
+\((-1)^n\) and the exact adjacent interval
+are unchanged. The raw residual is
+\(\delta_n=G_{0,n}\delta'_n\).
+Thus all presently chosen homogeneous
+\(T/Q\), signed adjacent interval and
+integer floor certificate consumers factor
+through \((M',G_{\rm recipe})\). Consumers
+asking for literal original P/Q/T require
+the separate exact reopening, including
+its actual \(O(n)\) factor recipe and large
+integer multiplication costs. Merely
+recording the SCALE is not authenticity
+of original leaf multiplication: signed
+source provenance and/or an independent
+source replay remains required.
+
+### Source-derived bit-width forecast, not a floating proof of a bound
+
+For \(u=\max(1,a)\), \(r=\max(0,b-u)\),
+write \(L=\log_2((b-1)!/(u-1)!)\) if \(b>u\),
+else \(L=0\). The *algebraic* inequalities
+from the normalized original leaves give
+
+\[
+\begin{aligned}
+\log_2 |P'_{a,b}|
+ &\le r\log_2 72+3L,\\
+\log_2 Q'_{a,b}
+ &\le r\log_2 (640320^3/24)+3L,\\
+|T'_{a,b}/Q'_{a,b}|
+ &\le(b-a)\,(13591409+545140134(b-1)).
+\end{aligned}
+\]
+
+The last inequality follows by expanding
+the ordered upper-triangular product into
+one term per original leaf: every normalized
+nonzero source \(|p_j/q_j|\) equals the
+raw ratio and is strictly below one,
+and the \(j=0\) prefix is one.
+Therefore absolute sums of terms are
+bounded by the count times the largest
+source \(A+Bj\). If \([a,a)\) is empty
+then \(T=0\) exactly, rather than an
+arbitrary small nonzero positive value.
+
+The implementation evaluates these
+formulae with \`std::lgamma\` in floating
+arithmetic and adds slack to estimate
+\((w_P,w_Q,w_T)\) and the P/Q/T carrier
+bytes \(s\). The floating forecasts are
+NOT certified integer upper bounds;
+they are **execution-order heuristics**
+only, and cannot be used to truncate a
+source integer, weaken a sign gate or
+deduce correctness of the output.
+
+### Precision-adaptive peak-memory DP, no silent loss
+
+Let \(d\) be decimal digits and \(b\)
+the current dyadic root precision.
+The *output demand* enters the planner
+as a scheduling threshold
+\(\max(4096,b/16)\) bits: only
+projected large source subtrees within
+the top ten recursion depths receive
+a two-child schedule; the rest retain
+the original ordered left-first execution.
+Thus requested precision changes the
+**planning effort**, not the integer
+computation or its analytic stopping gate.
+
+For children L/R with estimated retained
+carrier sizes \(s_L,s_R\),
+unretained execution peaks \(p_L,p_R\),
+and a common merge scratch estimate
+\(m\), the two execution choices have
+
+\[
+p_{L\to R}
+=\max(p_L,s_L+p_R,m),\qquad
+p_{R\to L}
+=\max(p_R,s_R+p_L,m).
+\]
+
+The planner uses this simple recursion
+to select the cheaper predicted order
+at each scheduled internal node while
+retaining \(P_LP_R,Q_LQ_R,
+T_LQ_R+P_LT_R\). An unscheduled
+subtree is modeled with the coarse
+heuristic \(p=4s\); its merge scratch
+is estimated from projected operand
+width. These prices are **not measured
+GMP scratch or proved bounds**.
+They deliberately omit cache,
+OpenSSL output hashing, actual
+malloc fragmentation and CPU time.
+No proof of globally optimal memory
+scheduling or speed improvement follows.
+
+The source's \`FIBRE\` receipt separates
+\`schedule_precision_bits\`,
+\`schedule_plan_nodes\`,
+\`schedule_merges\`,
+\`schedule_right_first\`,
+\`schedule_predicted_peak_bytes\`
+and \`schedule_cpp_plan_heap_bytes\`
+from actual \`gmp_peak_live_bytes\` and
+Linux VmHWM. The C++ plan allocation is
+not covered by the GMP allocation hooks.
+The normal \`FC\` measured source
+operand-width and explicit carrier
+observations remain separate from
+the heuristic peak forecast.
+
+### Exact indexed producer/consumer ledger and next named obligations
+
+The original coordinates are
+\((\text{source version},[a,b),n,d,b,
+\text{normalization recipe},P',Q',T',
+\operatorname{sgn}\delta,
+\text{certificate output},
+\text{cost model version})\).
+Here \(n\) is the series cutoff, \(d\)
+requested digits, and \(b\) the dyadic
+root precision. These three indexes
+are NOT interchangeable with H05's
+history, physical event time, Frobenius
+or geometric chart-depth coordinates.
+The scale recipe is deterministic
+from original source leaf indices.
+Original raw and normalized zero modes
+and signed residuals are retained,
+and source-reconstruction loss is
+never hidden in a coarse observed
+π SHA256.
+
+- **S1 source-to-projective:** original
+  \(M\to (M',G_{\rm recipe})\),
+  with exact scalar homogeneity and
+  \(j=0\) exception (mathematical
+  construction supplied; original Agda
+  proof instantiation still OPEN).
+- **S2 projective-to-source:** callable
+  \`reopenOriginalRawSource\` reconstructs
+  the literal triple with charged
+  factor recomputation. This preserves
+  algebraic reversibility, not
+  independent original producer
+  authentication (OPEN).
+- **S3 consumer descent:** exact
+  \(T/Q\), signed tail, adjacent bounds,
+  strict upper dyadic floor and
+  existing analytic-premise boundary
+  preserved (source algebra supplied,
+  code UNTESTED and formal kernel OPEN).
+- **S4 peak-path planner:** same ordered
+  matrix product with altered child
+  evaluation order and separately
+  recorded working-precision/plan
+  overhead (implementation UNTESTED;
+  calibrated GMP cost model OPEN).
+- **S5 forbidden precision shortcut:**
+  dropping low/high source limbs from
+  P/Q/T using only \(d\) or \(b\)
+  **is not certified**, because an
+  altered residual can change the
+  strict floor-admission decision.
+  An actual certified truncation would
+  require outward signed error
+  enclosures, carry accounting and
+  proof that BOTH inequalities survive.
+  None is implemented or claimed.
+- **S6 acceptance and SOTA:** local
+  C++ compilation and exact-source
+  output parity, sign order for both
+  cutoffs, true GMP allocation/latency,
+  independent certified verifier,
+  Bishop same-original-real transport,
+  and external SOTA remain OPEN per
+  user's testing deferral.
+
+This reuse is owned by the existing
+\`FibreProgramComplexityExact.agda\`
+sum/peak path formalism,
+\`EfficientRecoverableQuotientExact.agda\`
+construction/reopen separation,
+\`StreamingResidencyComplexityErrorDNABidiExact.agda\`
+memory semantics, and
+\`QueryFactorisationSufficiency.agda\`
+consumer-specific descent.
+The full indexed hyperfabric identity
+is \emph{not} assumed for an unrelated
+physics/TOE source. No CPU/GPU
+benchmark, Python, SymPy, CI, Agda,
+Lean or external pi SOTA execution
+was performed.
