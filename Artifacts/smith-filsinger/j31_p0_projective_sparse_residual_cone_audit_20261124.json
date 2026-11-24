@@ -4,7 +4,7 @@
   "source_scope": "Original prescribed-source Filsinger nine-state seven-mode, synthetic wave, finite loss",
   "source_owner_pr": 1537,
   "code_path": "scripts/check_smith_filsinger_j31_projective_sparse_preconditioner_20261124.py",
-  "code_git_blob": "4512265447debf1da61c3868fb3ce89aacc13d31",
+  "code_git_blob": "3b1876c75de56bb066b91a7123b4dc3fe8d23896",
   "donors": {
     "pnp": [
       "chboishabba/dashi_agda#1548",
@@ -25,7 +25,12 @@
     "quotient_variables": 15,
     "positive_rational_slacks": 69,
     "hidden_matching_residual_negative_control": "PASS_REJECTED",
-    "source_ODE_witness": false
+    "source_ODE_witness": false,
+    "coordinate_chart_slack_equivalence_passed": true,
+    "coordinate_gauge": "positive diagonal 2,3,5 repeated across all 69 coordinates",
+    "equation_gauge": "positive diagonal 3,7 repeated across all 69 equations",
+    "source_reopening_69_of_69": true,
+    "new_source_fixture_acceptance": "PASS_EXACT_RATIONAL_69D_POSITIVE_PROJECTIVE_CHART_SLACK_EQUIVALENCE"
   },
   "source_numeric": {
     "provenance": "Longer local J31 source-equation counterpart of committed compact J31; not byte replay of newly committed script",
@@ -51,5 +56,11 @@
   "exact_periodic_orbit_proved": false,
   "hardware_metered": false,
   "github_ci_used": false,
-  "formal_kernel": false
+  "formal_kernel": false,
+  "latest_inspected_donors": {
+    "pnp": "Agda #1548 G65–G74 / Lean #119",
+    "pi": "Agda #1546 G7/G8 COMP5p/q/r / historical #1529",
+    "langlands": "Agda #1549 R99–R106 / Lean #120"
+  },
+  "compact_committed_source_fresh_byte_identity_rerun": false
 }
