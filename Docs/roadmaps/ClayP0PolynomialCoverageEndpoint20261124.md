@@ -967,3 +967,126 @@ assert checks==260
 | N6 | originalClayTransport | #1040 conditional terminal, #1129 standard machine coverage; unconditional endpoint unpaid |
 
 Aristotle alpha priority: we now have a superpolynomial restricted resource obstruction on the exact NP-complete family, and a sharp propagation-lift no-go. Do not spend another round on finite geometry census or prove a generic monotone normalization which matching refutes. Attack the difference between unrestricted triangular lift and complete monotone propagation on the original selector carrier: either bound all nonmonotone shortcut use by a target-specific resource inequality, or pivot to direct uniform N4/N5 with actual machine work. Preserve both OR routes; neither new native certification nor a Langlands/Monster task is needed. No unconditional P!=NP claim.
+
+
+## 15. P0-G20/G21 — inhabited zero fibres, hazard geometry and quantitative nonmonotone shortcut necessity (2026-11-24)
+
+P0 remains literal Clay P vs NP. Inputs: user-provided G16–G19 packet and R21–R25 inhabited-zero/mediator packet from Agda #1549 / Lean #120 (reported heads 679397137e12 / fa917cfc5c58 in attachment). The controlling P0 PRs were read at a33655646b92 / ae18da2457eb, common blob 13695a138f7448770397cc004da199cfab8a7ca8. No Langlands, Monster, physics or other endpoint prerequisite. Reopened source bodies on default branch:
+- DASHI/Core/GovernedIndexedResidualCubeExact.agda blob 42b70ebb7376813076934f2245ce6011b76f10c8: Cube, Faces, ExactFaces, ResidualFaces, six endpoint transports. Residual witnesses are not automatically commutation proofs.
+- DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda blob 2a5069418e25572f04941591dbc83334862c012d: OrientationResidual27, AntipodalCode27, encode27/decode27; centre has unit ORIENTATION residual, unlike the zero-difference VALUE residual below.
+- DASHI/Codec/TriadicMaskSignFactorization.agda blob db62f5518adc7fd3815c56ead5e20a8071db4b5a: FactorizedTrit, encode/decode inverse. This is a lossless trit codec, not a licence to discard source-dependent value residuals.
+- G11/G13/G14/G16/G17, #1291 indexed cube, #607/#678 Aristotle, #1006 FactorsThrough and SAT self-reduction, #123 JMD lowering, #1546 sharing, #1129 standard machine, #1040 terminal, #1474/#1502 reductions remain active.
+
+### G20a — typed zero fibre and partial information
+
+For child feasibility a,b in {0,1}, integer d=b-a in {-1,0,1}. The fibre over d=0 has two distinct inhabitants (0,0) and (1,1); the other fibres each have one. Retain r=a on the zero fibre. Parent feasibility is |d|+(1-|d|)r. This is an exact bijective dependent codec, not the antipodal orientation codec. It grants no lower bound by counting unresolved branches: computing a,b together or computing their OR without explicitly producing them is legal.
+
+A separate useful ternary carrier is partial Boolean information {0,?,1}, with ? denoting both possible completions, not signed difference zero or balanced arithmetic zero. Use rails (p,q) with p=1 meaning definitely true and q=1 meaning definitely false. Allowed values 0=(0,1), ?=(0,0), 1=(1,0), with (1,1) inconsistent. For AND, p=p1 AND p2, q=q1 OR q2; for OR, p=p1 OR p2, q=q1 AND q2; NOT swaps rails. These local rules are sound under every common completion, but not complete with reconvergent correlated inputs: x OR NOT x evaluates to ? for unknown x, yet every Boolean completion yields 1. Exact joint completion retains the dependency; independent rail abstraction loses it. This is the inhabited-zero/correlation version of the existing chord warning. Do not conflate the 15-state common-source difference image with the partial-information rails.
+
+For monotone selector G=G_m,3 on absent-clause bits, its exact partial semantics on a cube [l,u] is determined by G(l),G(u) (monotonicity). Local evaluation of an arbitrary correct Boolean circuit can be strictly less informative. Hazard-free circuits for monotone functions are known to have the same minimum size as monotone circuits (Ikenmeyer et al., https://arxiv.org/abs/1711.01904 ; Jukna, Notes on Hazard-Free Circuits, https://arxiv.org/abs/2012.10976). G17 therefore already excludes polynomial-size hazard-free selector circuits. A direct one-sided proof and stronger quantitative symmetry statement follow.
+
+### G20b — dual-rail mask transport, shared DAGs retained
+
+Let C be an arbitrary bounded-fanin Boolean AND/OR/NOT circuit for G. Convert to De Morgan form D(p,q) with positive and negative input rails using both polarities of every intermediate gate, constant-factor overhead (at most two AND/OR gates per original binary AND/OR gate; NOT swaps rails, XOR if present first expands to constant-size AND/OR/NOT). D is monotone as a function of its 2N independent rails and D(t,1-t)=G(t). Do not unroll the DAG. Denote its gate size by s.
+
+For a mask A subset [N], define the monotone underapproximation
+    H_A(t)=D(t AND 1_A, 1_(complement A)).
+Proof: set v=t AND 1_A; 1_(complement A)<=1-v, so H_A(t)<=D(v,1-v)=G(v)<=G(t). This covers all nonmonotone internal functions in C; only the masked approximation is monotone. Each H_A is obtained by wire substitution, size <=s. At A=all coordinates, H_A(t)=D(t,0), the definite-positive rail on input t_j=1 for j in support(t), ? otherwise. This rail is exactly the strong Kleene definite-true output, proved by gate induction using the two rails.
+
+G13 gives exactly 2^m minimal true supports P_x=Z_x in the absent-clause coordinates, all of size b=sum_{j=1}^3 binom(m,j). Every true input contains one. These supports form a transitive orbit under assignment translations h in F2^m acting as clause-polarity permutations g_h. The target is invariant under those permutations, so H_A(g_h(t))<=G(t). For a hazard-free C, D(1_P,0)=1 at every minterm P (all completions true), hence D(t,0)=G(t); this is a direct no-overhead monotone transfer. Even one-sided preservation on all minterms suffices, not general three-valued exactness.
+
+### G21a — exact width of negative evidence on minterm traces
+
+Consider the formal DNF of D (conceptual expansion only, no runtime or storage charge assigned to C). Each trace is a pair of sets (P,Q) of positive and negative literal coordinates. At the total minterm input 1_Px, every accepting trace has positive set contained in P_x and negative set disjoint from P_x. Its positive set must equal P_x: otherwise the smaller positive support itself satisfies that same trace, contradicting minimality. Define w_C(x) as the least |Q| over accepting traces at 1_Px. This is well-defined even with arbitrary reconvergence, cancellation, shared gates and repeated literal use. A formal DNF term with contradictory literals never accepts a total input. w_C(x)=0 iff D(1_Px,0)=1, i.e. no hazard on this particular definite-true partial input. This is the pointwise form of the negation-width notion of Jukna–Lingas, Lower bounds for Boolean circuits of bounded negation width (JCSS 129, 2022), https://web.vu.lt/mif/s.jukna/papers/negwidth_abs.html . Their theorem gives a general monotone simulation from bounded worst-case width. The following proof derives a selector-specific distributional variant via transitivity; no claim of literature novelty.
+
+Let alpha_w = fraction of the 2^m minterms with w_C(x)<=w. For each good minterm choose one trace (P_x,Q_x) of negative width <=w. Draw A by independent inclusion of each coordinate with probability p=b/(b+w) for w>=1. Probability that P_x subset A and Q_x disjoint A is p^b(1-p)^|Q_x| >= q_w=p^b(1-p)^w. On this event H_A(1_Px)=1. For w=0 set p=q_w=1. For independently uniform translation h, g_h(P_x) is uniform among all minterms. Hence for every fixed minterm, a random masked/translated H_A(g_h(t)) accepts it with probability >=alpha_w q_w.
+
+If alpha_w>0, choose K=ceil((m ln 2+1)/(alpha_w q_w)) independent copies. Probability some minterm is missed by all copies is <=2^m exp(-K alpha_w q_w)<1. Therefore there exist K specific masks and translations such that OR of their underapproximations accepts ALL minterms and, by monotonicity, exactly computes G. Its size <=K(s+1). Denote actual monotone circuit complexity by L_m. Consequently, also trivially for alpha_w=0,
+
+    alpha_w q_w <= (m ln 2+2)(s+1)/L_m.
+
+Proof of constant: K<= (m ln2+1)/(alpha_w q_w)+1 <=(m ln2+2)/(alpha_w q_w). This is a global shared-circuit statement, not a sum of independently charged branch costs. Mask/translation choice is existential nonuniform; no algorithm for finding them is needed for the contradiction to a nonuniform lower bound. Orbit argument applies to actual selector minterms, not an assumed transitive orbit of arbitrary internal states.
+
+### G21b — quantitative consequence for any putative polynomial selector circuit
+
+G17 is based on Cavalar–Kumar–Rossman, Monotone Circuit Lower Bounds from Robust Sunflowers, Theorem 5 (verified exact statement this turn, https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/): for fixed delta in (0,1/3), k=n^(1/3-delta), monotone CLIQUE complexity Omega(n^(delta^2 k/2)). The G17 monotone projection at delta=1/12 gives L_m>=exp(c N^(1/15) ln N) for some c>0 and all sufficiently large m on the specified subsequence, N=N_m,3. This is the source of the following inequalities; not a new proof of CLIQUE hardness.
+
+For w>=1, q_w=(b/(b+w))^b (w/(b+w))^w >= exp(-w) (w/(b+w))^w by ln(1+w/b)<=w/b. For 1<=w<=N, -ln q_w <= w(1+ln(2N)), using b<=N. Suppose s is polynomial in N. Choose a sufficiently small fixed epsilon>0 depending on c, w=floor(epsilon N^(1/15)). Then
+
+    alpha_w <= exp(-Omega(N^(1/15) ln N)).
+
+Thus, conditional on a polynomial-size unrestricted selector circuit existing, all but an exponentially small FRACTION of assignment-minterms require more than epsilon N^(1/15) distinct negative literal conditions in EVERY accepting formal trace. In particular the fraction of hazard-free minterm partial evaluations (w=0) is at most (m ln2+2)(s+1)/L_m. This strengthens the worst-case negation-width consequence to an almost-every-minterm requirement for the actual target. It concerns minterm traces and partial information, not the number of NOT gates, number of actual execution steps, or complexity of computing a witness. It holds on the hard subsequence. Width-two monotone reachability yields a hazard-free circuit with alpha_0=1; G15 width-two full-jet-rank control is retained.
+
+### G21c — precise remaining unrestricted obstruction; width cannot be charged naïvely
+
+Even a simple monotone f(t)=t_1 can be represented as t_1 AND product_{i>1}(t_i OR NOT t_i), using O(N) gates; its sole minterm trace requires N-1 distinct negative literals. More generally appending all coordinate tautologies to a correct monotone circuit for G forces w_C(x)=N-b at every minterm with only O(N) added gates. This shows that high formal width and local hazard can be created cheaply, and even if avoidable padding is removed there is no established upper bound on width for size-optimal general circuits. Do not confuse a necessary property of small circuits with a superpolynomial charge. A single unknown gate can also affect many partial inputs; counting hazards cannot be summed as execution costs. Matching remains a generic nonmonotone shortcut control.
+
+The genuine remaining alternative: a target-specific transformation or inequality that bounds the cost of genuine correlation-dependent shortcuts (not removable tautology hazards) enough to contradict G21b, or a direct uniform-machine lower bound. For example, a polynomial-size correct general circuit admitting a polynomial-overhead alternate realization with alpha_w>=exp(-o(N^(1/15) ln N)) and w=o(N^(1/15)) would contradict G21a on the hard subsequence. This is sufficient but OPEN and must not be assumed. Full hazard-free conversion is not needed, and is generically impossible at polynomial cost. No unrestricted separation has been established.
+
+### Executed local checks, no CI/kernel
+
+Local Python integer and Fraction run: 4 dependent zero reconstructions; 1040 Boolean evaluations of guarded minterm circuits (m=1,2, four guard widths 0..3); 262208 mask/input underapproximation comparisons; 24 exact minimum negative-width and 24 hazard-rail checks, plus exact mask-event probability and translation orbit membership for the corresponding cases. These test local formulas, not the asymptotic distribution theorem. Guarded DNF circuits are small controls, not polynomial-size constructions for all selector lengths. Reproducer:
+```python
+from itertools import product, combinations
+from fractions import Fraction
+from random import Random
+
+def masks(m,w):
+    C=[(I,p) for j in range(1,min(w,m)+1) for I in combinations(range(m),j) for p in range(1<<j)]
+    Z=[sum(1<<i for i,(I,p) in enumerate(C) if p==sum(((x>>j)&1)<<k for k,j in enumerate(I))) for x in range(1<<m)]
+    return C,Z
+for a,b in product((0,1),repeat=2):
+    d=b-a;r=a if d==0 else 0
+    assert abs(d)+(1-abs(d))*r==a|b
+def terms(Z,N,style):
+    rng=Random(4387+style);out=[]
+    for P in Z:
+        outside=[i for i in range(N) if not(P>>i&1)]
+        Q=sum(1<<i for i in rng.sample(outside,min(len(outside),style)))
+        a=Q
+        while True:
+            out.append((P|a,Q^a))
+            if a==0:break
+            a=(a-1)&Q
+    return out
+def ev(T,P,Q):return any(not(A&~P or B&~Q) for A,B in T)
+def complete(Z,t):return any(not(P&~t) for P in Z)
+checks=maskchecks=hazards=widthchecks=0
+for m in (1,2):
+    C,Z=masks(m,3);N=len(C);U=(1<<N)-1
+    for style in (0,1,2,3):
+        T=terms(Z,N,style)
+        for t in range(1<<N):
+            assert ev(T,t,U^t)==complete(Z,t);checks+=1
+            for A in range(1<<N):
+                assert not ev(T,t&A,U^A) or complete(Z,t);maskchecks+=1
+        for P in Z:
+            w=min(B.bit_count() for A,B in T if A==P and not B&P)
+            assert w==min(style,N-P.bit_count());widthchecks+=1
+            assert ev(T,P,0)==(w==0);hazards+=1
+            if w:
+                b=P.bit_count();p=Fraction(b,b+w)
+                W=next(B for A,B in T if A==P and B.bit_count()==w and not B&P)
+                prob=sum(p**a.bit_count()*(1-p)**(N-a.bit_count()) for a in range(1<<N) if P&a==P and not(a&W))
+                assert prob==p**b*(1-p)**w
+            for h in range(1<<m):
+                perm=[C.index((I,pol^sum(((h>>j)&1)<<k for k,j in enumerate(I)))) for I,pol in C]
+                assert sum(((P>>i)&1)<<j for i,j in enumerate(perm)) in Z
+assert (checks,maskchecks,hazards,widthchecks)==(1040,262208,24,24)
+```
+
+### Updated active P0-C/D ledger
+
+| ID | Exact deliverable | Status / producer and consumer |
+|---|---|---|
+| G20a | dependentZeroFeasibilityCodec / partialRailSoundness | derived and typed; #1291, R23/R24, FactorsThrough; G15 section consumer |
+| G20b | maskedDualRailMonotoneUnderapprox / mintermHazardFreeTransport | derived, local exact tests; hazard-free theory, G17 |
+| G21a | mintermNegativeWidthOrbitCover | derived by probabilistic cover; G11/G13 minterms, G17, Jukna–Lingas bounded width |
+| G21b | smallCircuitAlmostEveryMintermNeedsNegativeEvidence | conditional theorem on small circuit, quantitative; G17 and G21a; NOT a separation |
+| G21c | cheapNegativeWidthPaddingCounterexample | derived; #1546 sharing and chord control |
+| G12a/G6a/N4 | unrestrictedSerialCharge / genuineCorrelationShortcutBound | OPEN; all legal arbitrary triangular gates, not just local uncertainty |
+| G12b/G6b | selectorGoalSeparationBeyondMonotone | OPEN; actual original selector semantics |
+| G12c/G6c/N5 | unrestrictedSuperpolynomialGrowth | OPEN; alternative direct uniform machine route |
+| N6 | originalClayTransport | #1040 conditional terminal, #1129 coverage; unconditional endpoint unpaid |
+
+Next Aristotle BIDI action: study unavoidable correlation dependencies of accepting traces across the actual width-three clause-overlap geometry. Reverse from G21a's explicit sufficient threshold, seek a target-specific low-width realization or direct cost obstruction for the necessary widespread negative evidence. Do not assume negative width, local unknowns, phase defects, cube flatness, or branch count charge time. Use exact minterm orbits only for sound cover/transport, no forced symmetric intermediate states. Keep direct uniform N4/N5 in parallel, and distinguish this stronger nonuniform route. No new infrastructure/certification prerequisite and no P!=NP claim.
