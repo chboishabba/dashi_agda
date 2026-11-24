@@ -2949,3 +2949,160 @@ Sampling details to replay counts: Random(369), consume 48 rng.randrange(1,8) fo
 | N6 | originalClayTransport | conditional #1040 / #1129 |
 
 Geometry-forward Aristotle BIDI: G73 gives a real polynomial shared representation of every conditional fibre's existence. Do not charge class enumeration, raw separator width, path count, conditional count or arithmetic precision as required for decision. The remaining joint support query over the guarded evaluator is NP-complete on G72. Next target the existence of a compatible assignment of the ORIGINAL guard variables, or a direct standard-machine lower-bound argument; distinguish the easy symbolic representation from its global nonemptiness. Preserve source zero mode, inhabited neutral fibre, signed residual and independently indexed histories, not obligatory materialization. No new certification prerequisite; no P!=NP claim.
+
+
+## 29. P0-G75–G78 — geometry-forward: shared guard geometry, bounded internal components and exact parity control (2026-11-24)
+
+Controlling endpoint literal Clay P vs NP. User supplied three pasted files, read directly in container: Langlands R99–R104 (reported #1549/#120 73bf0b2a23a3/f3141d518702), R107–R111 (0208b560be2a/69e842c43939), and G70–G74. Continue general P vs NP (no Langlands/Monster/TOE edits). Both P0 branches read live at f10fa7a0852e / d941e2e046eb, common blob 61c3a293db787f0d094eba2920b50480b2255d10. Geometry-forward, retain zero mode, inhabited neutral fibre, signed residual, original source labels and independently indexed hyperfabric. Use R102 invertible local correction and R108/R109 certified signed symmetry as allowed shortcuts; R110 exact symmetry recognition Clay-equivalence is a boundary, not a required operation. Existing G13, G16/G17, G45–G48, G51, G53–G59, G65–G74, ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact (section 27), #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 costed standard machine coverage, #1040 terminal, #607/#678 Aristotle. Classical gate encodings, variable elimination, implication graphs, parity CNF size and two-state automata used; no literature novelty claim. No native kernel certification or CI.
+
+### G75 — locally-full crossing compiler with bounded right components and independent left guards
+
+Let F be any normalized CNF of nonempty clauses of width <=3 on original left variables x. For each clause C independently create one private right state r_i for each literal l_i, enforcing r_1=l_1 and r_i=r_(i-1) OR l_i for i>=2 and r_last=1. Encode r_1=l_1 by (not l_1 OR r_1),(l_1 OR not r_1); each OR step by (not r_prev OR r_i),(not l_i OR r_i),(r_prev OR l_i OR not r_i). This preliminary formula has at most one original left variable and one or two right variables per clause, including pure-right units/binaries. It has exactly one right extension for each satisfying x and none for nonsatisfying x; the whole right induced graph is disjoint paths.
+
+Use actual G72 eight-variable zero gadget Z0..Z7 with Z0..Z3 left, Z4..Z7 right. For EVERY right literal occurrence in each preliminary clause allocate a private right copy a of right variable r, enforcing equality with (not r OR a OR Z0),(r OR not a OR Z1). Use copies in main clause; if no left variable pad with Z0, if only one right variable pad with Z4. All nongadget emitted clauses have exactly one left and two right variables, all scopes distinct (main scopes use private copies, equality scopes use original right r and copy, gadget neither). Every selected scope has exactly seven of eight allowed patterns, all other scopes full, so local affine and pair projections full. All eight Z are globally zero and each private copy uniquely determined. Thus original witness projection is a bijection. General formula encoding is polynomial in clause list; full selector length polynomial. Original source empty clause can be handled separately, empty formula works with gadget only. Exact witness preservation extends to G48 known-witness flag; no assumption of large conditional count complexity.
+
+Delete the eight gadget vertices: left induced graph has no edges, and each right connected component belongs to one original clause block, with <=16 right vertices (width-three chain: 3 originals, 2 copies for first equivalence, 5 copies per later OR, 1 for final unit). The right graph has treewidth <=7 even before deleting the four right gadget vertices: original path bags of size <=2, attach leaf containing the one/two original right states and one/two copies for each preliminary clause; add all four right gadget vertices to every bag, connect distinct block decompositions via an auxiliary bag of gadget vertices. Every equality/main right edge is covered; every vertex's bags connected. Left induced graph has treewidth <=3 (only gadget can have left-left edges). Despite these restrictions, SAT on this crossing promise is NP-complete, and exact counting #P-hard via parsimonious reduction. The guard labels repeated across right components carry all original interaction. This is stronger than G72's individual conditional 2-SAT result, and prevents a claim that small internal treewidth on BOTH sides ensures polynomial joint decision. No unrestricted lower bound.
+
+### G76 — exact component elimination and guard interaction hypergraph
+
+After the fixed gadget is eliminated using its constant-size proof, let right components be R_j and N_j the original left guard variables adjacent to them. The existential right projection factors as H(x)=prod_j H_j(x|N_j), where H_j is one iff the component has an allowed extension. For exact count/weighted contraction replace H_j by the corresponding regional extension sum, which is not necessarily Boolean. Computing a table for one component by direct enumeration costs O(poly(local clauses)*2^(|N_j|+|R_j|)) with arithmetic bit costs; zero table entry in a signed ring need not mean no extensions. For G75 |N_j|<=3, |R_j|<=16, and the unweighted extension count is exactly the original clause indicator, by unique extension. Eliminating these components restores the original clause hypergraph on left labels, not a new independent selector per occurrence. Thus the cost of component projection is polynomial but the remaining global product can represent any original 3-CNF. Retain source original guard label, occurrence, event history, time tau, chart/refinement k, iteration j, version, coefficient ring, creation/requested precision, consumer as separate fields. For independent weights on original left coordinates the zero/signed/weighted contractions recover G53/G56; weights on private right variables can be included in the local extension sum before elimination. Local R102 inverse does not change the original incidence identity. Contract only on certified symmetry subspaces relative to the actual weighted consumer (R108/R111); do not require computing exact stabilizers. In a new crossing event, previously separate right components can join and guard scopes can enlarge; retain original constraint records and signed gain/loss, not a claim that old tables suffice.
+
+### G77 — guard path pairs, exact forbidden cubes and overlap
+
+In G73's symbolic right implication graph, every edge carries an activation guard (a conjunction of at most two original left literals), or a disjunction of guards if multiple clauses share an edge. Retain named clause witnesses for those alternatives. For each pair of directed simple paths from a right literal u to not u and back, choose one original guard per edge, and take the union of their signed left literals. A conflict (both pins for the same source variable) makes this path pair infeasible, distinct from a neutral unassigned coordinate. Otherwise the union is a partial assignment cube. Every extension of that cube activates the contradictory cycle and is bad. Conversely for every bad x, active implication reachability supplies both simple paths and an active guard per edge; their consistent union contains x. Hence the union of all such cubes is exactly B(x), the bad-left set. Each path has at most 2r-1 edges for r right variables, so a path-pair certificate has <=4r-2 edge occurrences; shared guard coordinates counted once. Empty guards/cubes mean unconditional edges/contradiction respectively, not empty fibre. This is an exact proof-search description; shared symbolic transitive closure G73 avoids explicit path listing. Minimal forbidden guard cubes are minimal partial assignments all of whose completions are bad; they may also arise by merging/consensus across multiple path certificates (do not assert every prime cube itself comes from one pair). Expanding every such cube is not required by arbitrary algorithms.
+
+### G78 — exponential prime guard obstruction with a cheap signed two-state contraction
+
+Construct another original crossing network on q>=1 left bits x_i, right path states r_0..r_q, r_0=r_q=0, r_i=r_(i-1) XOR x_i. For each step use four ternary truth-graph clauses, one for each input pair, excluding its incorrect output. Apply the same G75 private-right-copy compiler and gadget. Every nongadget clause crosses with one left and two right coordinates; unique right extension iff x has even parity. After deleting gadget, right graph is path of constant-size local bags (original adjacent state pair plus at most two private copies per main clause leaf); before deletion right treewidth <=7, left <=3 by the same decomposition. No claim of constant-size right COMPONENT for this parity example: it is a path of growing length.
+
+Every proper partial assignment on left variables has both even and odd extensions by a free bit, so the minimal bad cubes are exactly the 2^(q-1) full odd assignments. Any CNF on original left variables alone defining the projected even-parity relation needs at least 2^(q-1) non-tautological clauses: each clause's falsifying subcube must lie in odd parity, hence has to be a single full odd assignment. Matching upper by forbidding each odd assignment. This is an exact guard-only CNF size obstruction even for an easy original projected relation. It does NOT rule out auxiliary variables, circuits, signed weights or shared automata. The actual path evaluator is linear size.
+
+Retain the original zero mode and signed character residual: for b(x)=[even parity], unnormalized Walsh S(0)=S(all_ones)=2^(q-1), all other coefficients zero (q>=1), by b=(1+chi_all)/2 over Q. Its exact translation stabilizer is the even-weight subspace (q-1 dimensional), supplied by the known source XOR geometry, not a computed arbitrary global stabilizer. General product weights z_i can break translation symmetry; nevertheless there is an exact division-free shared contraction over ANY commutative ring. Initialize (E,O)=(1,0); for each original variable i, update
+
+    (E,O) <- (E+z_i O, O+z_i E)
+
+using both old states, keeping the odd signed/complementary fibre. E is the weighted even-parity witness polynomial, O its odd counterpart. Over integers E+O=prod_i(1+z_i), E-O=prod_i(1-z_i). These identities retain both baseline and signed residual; never divide by a possibly nonunit 2 or infer emptiness from E=0 modulo p^H. In any ring the recurrence takes O(q) operations; in odd characteristic the displayed two modes recover E by division by 2, but binary consumers should use the direct recurrence. Character sign choices can be incorporated into z_i. This is an explicit adaptive weighted contraction with two state sectors, valid even when weights break the original symmetries. The original assignments and time/ refinement/chart indices remain attached; state aggregation is consumer-specific. For original compiled auxiliaries set their weights to 1 to recover these exact left witness polynomials; arbitrary auxiliary weights require the appropriate local transition weights.
+
+Thus even exponentially many minimal incompatible guard cubes and high projected CNF size coexist with a tiny exact weighted contraction and a polynomial decision circuit. Do not charge these expansions or independent path certificates as unavoidable time. G75/G76 isolate a genuinely hard guard-sharing geometry with trivial individual components; G78 prevents turning the number of bad cubes into a universal cost bound. Both upper and obstruction are model-specific; no P!=NP assertion.
+
+### Actually executed local regression (exact Python/DPLL, no CI/kernel)
+
+Local /tmp/p0_guardgeo.py: 256 original gadget assignments checked (unique zero). 320 complete compiled SAT model-count comparisons (260 exhaustive q=1,2 selectors and 20 seeded q=3,4,5 formulas each); 37,058 emitted clause checks, distinct crossing scopes, exact right component owner and size <=16, left independent outside gadget. For parity q=1..8 checked 8 complete counts and 510 fixed-left fibre counts, 1,152 emitted clause checks and right state adjacency; 200 exact signed product-weight recurrence comparisons vs exhaustive parity polynomial and product identity. Separately enumerated 9,840 partial guard assignments, exactly 255 minimal bad full assignments across q=1..8; 510 signed Fourier coefficients compared to explicit parity spectrum. All passed. DPLL prioritizes branching on fixed gadget variables, but does not preassign them; independent count on full emitted formula. No end-to-end external solver benchmark. Reproduction core (normalized literal tuple (index,satisfying bit), G72 gadget string and compiler, independent DPLL):
+```python
+from itertools import combinations,product
+from collections import Counter
+from functools import lru_cache
+from random import Random
+from math import prod
+D='737362511425175275471342317614566635167417725234'
+G=[tuple((i,1-(int(p)>>j&1)) for j,i in enumerate(I)) for I,p in zip((I for I in combinations(range(8),3) if min(I)<4<=max(I)),D)]
+def ev(F,x):return all(any((x>>i&1)==v for i,v in c) for c in F)
+assert [x for x in range(256) if ev(G,x)]==[0]
+def allclauses(q):return [tuple(zip(I,p)) for k in range(1,min(3,q)+1) for I in combinations(range(q),k) for p in product((0,1),repeat=k)]
+def truth(q,F,parity=False):
+ m=q;A=[];blocks=[]
+ if parity:
+  prev=m;m+=1;A.append(((prev,0),))
+  for i in range(q):
+   v=m;m+=1;blocks.append((prev,v))
+   for a,b in product((0,1),repeat=2):A.append(((i,1-a),(prev,1-b),(v,a^b)))
+   prev=v
+  A.append(((prev,0),));return m,A,blocks
+ for C in F:
+  B=[];prev=None
+  for i,s in C:
+   v=m;m+=1;B.append(v);A.append(((i,1-s),(v,1)))
+   if prev is None:A.append(((i,s),(v,0)))
+   else:A.extend([((prev,0),(v,1)),((prev,1),(i,s),(v,0))])
+   prev=v
+  A.append(((prev,1),));blocks.append(tuple(B))
+ return m,A,blocks
+def compile_(q,m,A):
+ z=list(range(m,m+8));right=set(range(q,m))|set(z[4:]);F=[tuple((z[i],v) for i,v in c) for c in G];n=m+8;owner={i:i for i in range(q,m)}
+ for c in A:
+  left=[(i,v) for i,v in c if i<q];rr=[]
+  for i,v in c:
+   if i<q:continue
+   a=n;n+=1;right.add(a);owner[a]=i;rr.append((a,v))
+   F.extend([((i,0),(a,1),(z[0],1)),((i,1),(a,0),(z[1],1))])
+  assert len(left)<=1 and 1<=len(rr)<=2
+  F.append(tuple((left or [(z[0],1)])+rr+([(z[4],1)] if len(rr)==1 else [])))
+ assert len(F)==len({tuple(sorted(i for i,v in c)) for c in F})
+ assert all(len(c)==len({i for i,v in c})==3 and 0<len({i for i,v in c}&right)<3 for c in F)
+ assert all(sum(i not in right for i,v in c)==1 for c in F[48:])
+ return n,F,right,z,owner
+def count(n,F,priority,pins=()):
+ @lru_cache(None)
+ def rec(F,free):
+  while True:
+   if not F:return 1<<free.bit_count()
+   if any(not c for c in F):return 0
+   u={c[0] for c in F if len(c)==1}
+   if not u:break
+   ix={i for i,v in u}
+   if len(ix)!=len(u):return 0
+   free &= ~sum(1<<i for i in ix)
+   F=tuple(sorted({tuple(l for l in c if l[0] not in ix) for c in F if not any(l in u for l in c)}))
+  freq=Counter(i for c in F for i,v in c);i=min(freq,key=lambda i:(priority(i),-freq[i],i))
+  return sum(rec(tuple(sorted({tuple(l for l in c if l[0]!=i) for c in F if (i,v) not in c})),free^(1<<i)) for v in (0,1))
+ return rec(tuple(sorted({tuple(sorted(c)) for c in F+[(p,) for p in pins]})),(1<<n)-1)
+def graphcheck(q,m,F,right,z,owner,blocks,parity):
+ E={tuple(sorted((i,j))) for c in F for i,j in combinations([i for i,v in c],2)}
+ assert all(i in right or j in right for i,j in E if i not in z and j not in z)
+ R=[i for i in right if i not in z];adj={i:set() for i in R}
+ for i,j in E:
+  if i in adj and j in adj:adj[i].add(j);adj[j].add(i)
+ if not parity:
+  lab={i:k for k,B in enumerate(blocks) for i in B}
+  assert all(lab[owner[i]]==lab[owner[j]] for i in adj for j in adj[i])
+  assert max(Counter(lab[owner[i]] for i in R).values(),default=0)<=16
+ else:assert all(abs(owner[i]-owner[j])<=1 for i in adj for j in adj[i])
+ return len(F)
+rng=Random(369);checks=clchecks=0
+for q in range(1,6):
+ C=allclauses(q)
+ Fs=([C[j] for j in range(len(C)) if t>>j&1] for t in range(1<<len(C))) if q<=2 else (rng.sample(C,rng.randrange(min(8,len(C))+1)) for _ in range(20))
+ for F in Fs:
+  m,A,blocks=truth(q,F);n,B,R,z,o=compile_(q,m,A)
+  pri=lambda i:0 if i in z else 1 if i<q else 2
+  assert count(n,B,pri)==sum(ev(F,x) for x in range(1<<q))
+  clchecks+=graphcheck(q,m,B,R,z,o,blocks,False);checks+=1
+assert (checks,clchecks)==(320,37058)
+checks=cn=weighted=0
+for q in range(1,9):
+ m,A,blocks=truth(q,[],True);n,B,R,z,o=compile_(q,m,A)
+ pri=lambda i:0 if i in z else 1 if i<q else 2
+ assert count(n,B,pri)==2**(q-1);cn+=graphcheck(q,m,B,R,z,o,blocks,True)
+ for x in range(1<<q):
+  assert count(n,B,pri,tuple((i,x>>i&1) for i in range(q)))==int(x.bit_count()%2==0);checks+=1
+ for _ in range(25):
+  zt=[rng.randrange(-4,5) for i in range(q)];e,o=1,0
+  for a in zt:e,o=e+a*o,o+a*e
+  assert e==sum(prod(zt[i] for i in range(q) if x>>i&1) for x in range(1<<q) if x.bit_count()%2==0)
+  assert 2*e==prod(1+a for a in zt)+prod(1-a for a in zt);weighted+=1
+assert (checks,cn,weighted)==(510,1152,200)
+n=bad=four=0
+for q in range(1,9):
+ for a in product((-1,0,1),repeat=q):
+  xs=[x for x in range(1<<q) if all(v==-1 or x>>i&1==v for i,v in enumerate(a))]
+  b=not any(x.bit_count()%2==0 for x in xs)
+  assert b==(-1 not in a and sum(a)%2==1);n+=1;bad+=b
+ for h in range(1<<q):
+  s=sum((-1)**((h&x).bit_count()) for x in range(1<<q) if x.bit_count()%2==0)
+  assert s==(2**(q-1) if h in (0,(1<<q)-1) else 0);four+=1
+assert (n,bad,four)==(9840,255,510)
+```
+
+### Active P0 ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G75 | boundedInternalComponentCrossingCompiler | derived and tested; exact parsimonious reduction, left tw<=3 right tw<=7 |
+| G76 | exactGuardHypergraphComponentElimination | derived; local table upper bound, joint global product remains hard |
+| G77 | compatibleGuardPathPairCover | derived; original clause labels, conflict vs neutral preserved |
+| G78 | exponentialPrimeGuardCubeControl / divisionFreeWeightedParityContraction | derived and tested; projected CNF restriction only, cheap two-state shortcut |
+| N4/G12a | unrestrictedSerialCharge | OPEN: actual paid computation after all semantic/signed/shared contractions, no mandatory explicit guard cube expansion |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN; G48 uniform flag / G38 stronger nonuniform slice |
+| N6 | originalClayTransport | conditional #1040/#1129 |
+
+Geometry-forward Aristotle BIDI: the remaining source geometry is the interaction of repeated original guard labels across independently contractible regions. G76 allows eliminating them to the true original factors, not merely hiding them. G78 establishes that exponential projected clause complexity is not sufficient to charge general work; parity has a linear shared weighted transfer even when product weights break the unweighted symmetry. Next investigate actual reusable guard interactions (and shortcuts via nonlocal basis changes), or direct uniform-machine N4/N5, rather than postulate obligatory full stabilizer, prime CNF, separator table or path listing. Preserve zero mode, inhabited neutral fibre, signed residual, actual source and independent time/k-indexed hyperfabric as semantics, not mandatory materialization. No new certification prerequisite; no P!=NP claim.
