@@ -90,6 +90,32 @@ static void freeHook(void*p,size_t n){
 }
 
 struct Triple{Z p,q,t;};
+// Reversible original-source scale receipt. It is NOT proof that an arbitrary
+// supplied normalized triple is authentic; verifying the original ordered
+// leaf product is a separate producer/consumer obligation.
+struct ProjectiveSourceReceipt {
+ unsigned begin=0,end=0;
+ // Full source gauge for this interval:
+ // product_(j in [begin,end), j>=1)(24*leafExtraContent(j)).
+};
+[[maybe_unused]] static Z buildOriginalSourceScale(ProjectiveSourceReceipt receipt){
+ if(receipt.end<receipt.begin) throw runtime_error("invalid source interval");
+ Z scale=1;
+ for(uint64_t j=max(uint64_t(1),uint64_t(receipt.begin));j<receipt.end;++j){
+   Z factor=24*leafExtraContent(static_cast<unsigned>(j));
+   mpz_mul(scale.get_mpz_t(),scale.get_mpz_t(),factor.get_mpz_t());
+ }
+ return scale;
+}
+[[maybe_unused]] static Triple reopenOriginalRawSource(
+    const Triple& normalized,ProjectiveSourceReceipt receipt){
+ const Z scale=buildOriginalSourceScale(receipt);
+ return {normalized.p*scale,normalized.q*scale,normalized.t*scale};
+}
+// Source equivalence: for a genuine original P/Q/T split and its
+// normalized version, reopenOriginalRawSource(normalized,{a,b})=(P,Q,T).
+// Opening is O(number of included leaves) + big-integer multiplications;
+// never charged as constant time and never called by the fast π consumer.
 // Explicit carrier-residency model, not measured GMP heap high-water.
 // mpz allocated limb capacity is read as a count, not a promise of RSS parity.
 static size_t wordBits(const Z& z){return z==0?0:mpz_sizeinbase(z.get_mpz_t(),2);}
