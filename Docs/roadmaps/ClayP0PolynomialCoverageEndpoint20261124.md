@@ -1090,3 +1090,125 @@ assert (checks,maskchecks,hazards,widthchecks)==(1040,262208,24,24)
 | N6 | originalClayTransport | #1040 conditional terminal, #1129 coverage; unconditional endpoint unpaid |
 
 Next Aristotle BIDI action: study unavoidable correlation dependencies of accepting traces across the actual width-three clause-overlap geometry. Reverse from G21a's explicit sufficient threshold, seek a target-specific low-width realization or direct cost obstruction for the necessary widespread negative evidence. Do not assume negative width, local unknowns, phase defects, cube flatness, or branch count charge time. Use exact minterm orbits only for sound cover/transport, no forced symmetric intermediate states. Keep direct uniform N4/N5 in parallel, and distinguish this stronger nonuniform route. No new infrastructure/certification prerequisite and no P!=NP claim.
+
+
+## 16. P0-G22–G24 — same-object clause projectors, compressed CLIQUE projection and transversal-width obstruction (2026-11-24)
+
+P0 remains literal Clay P vs NP; no Monster or Langlands endpoint work. User-provided #1545 character-projector construction motivates extracting components from the original carrier before classifying a realization. Attached #1549/#120 R28–R33 demonstrates positive fixed-type representation support transport and genuine quotient NOT; retain both and do not assume monotone normalization. G20/G21 remains controlling. Previous P0 heads e8afe2cba4e3 / 05642355ac3e, common blob 2fe3215cc3fc71bbeb662b30bc4ce735d7dbe716. Existing producers: G13 original selector, G17 monotone projection, G21 mask cover, #1291 indexed overlaps, #607/#678 Aristotle, #123 JMD lowering, #1546 shared DAG, #1006 FactorsThrough/self-reduction, #1129 machine coverage, #1040 terminal, #1474/#1502 reductions. Reopened DASHI/Mathematics/Complexity/Karp21NativeBinaryAdderWidthBoundExact.agda (blob 4016924f3bfc88bf850410e983a74bea9e996088, actual addCarry/addBits width bound; not a population-counter compiler), DASHI/Core/ConsumerFibreRepairExact.agda (blob 5bab8f89861559c14f3877acd5e11424b21a6a6d, refinementRepairSeparatesWitness and factorizationRepairSeparatesWitness; necessary not sufficient). Existing Karp21CliqueVertexCoverExact and SATDecisionToWitnessSelfReductionExact were located. Reuse rather than claiming native source weld already paid.
+
+### G22 — linear-variable monotone CLIQUE projection
+
+For graph on n vertices use one chosen-bit x_v per vertex. Fixed constraints require sum x_v >= k. Each absent edge {u,v} enables the binary clause (not x_u OR not x_v). Thus satisfying assignment selects a clique of size >=k, and a k-clique supplies an assignment. Construct the fixed threshold circuit by a balanced tree of ripple additions, padding n to next power of two if needed with zero bits; at level j add j-bit operands in O(j) gates, at most O(n/2^j) adders. Total O(n sum j/2^j)=O(n), then O(log n) comparison to the fixed integer k. For n power of two the first bit uses two half-adder gates and each further bit uses at most five full-adder gates (h=a XOR b, sum=h XOR carry, next=(a AND b) OR (h AND carry)); at most 5j-3 per addition. Encode every binary gate by four clauses forbidding its wrong output truth triples, with a distinct fresh output variable. Unit clause requires the threshold output. Unique auxiliary values follow by topological induction; fixed gate clauses width <=3 and contain fresh outputs, so do not overlap the conditional nonedge binary clauses. For n power of two and k power of two, the comparator is OR of sum bits at positions >= log2 k. General k comparison also has O(log n) size. Let M=n+number of auxiliary variables, hence M=Theta(n), and N=N_M,3=Theta(n^3). In absent-clause selectors t_C: fixed clauses t=0, unused clauses t=1, nonedge clauses t=e_uv. This is an exact monotone projection CLIQUE_n,k(e)=G_M,3(t(e)), including arbitrary shared DAGs; no gate charged for projection.
+
+External CKR Theorem 5 verified (https://pmc.ncbi.nlm.nih.gov/articles/PMC9705498/): for fixed delta in (0,1/3) and k=n^(1/3-delta), monotone CLIQUE complexity Omega(n^(delta^2 k/2)). Use rational delta and appropriate powers of n to ensure integral k; for arbitrary desired exponent below 1/9 choose rational delta sufficiently small. Therefore L_M >= exp(Omega(N^(1/9-delta/3) ln N)) along the resulting subsequence. For delta=1/12 choose n=16^j, k=2^j, improving G17's exponent 1/15 to 1/12. This strengthens G18 propagation and R32 fixed-type positive support bounds through their existing polynomial overheads. For each fixed epsilon>0, the lower bound with exponent 1/9-epsilon follows on a suitable subsequence (for epsilon>=1/9 the statement is weaker). This is NOT a new external clique lower bound or unrestricted SAT lower bound.
+
+### G23 — exact original-coordinate mask and transversal
+
+Use G13 clause labels (I_C,p_C), where p_C is its falsifying assignment pattern on I_C, 1<=|I_C|<=3. For minterm P_x=Z_x define D_C(x)={i in I_C : x_i differs from p_C,i}. Thus C in P_x iff D_C(x) empty; every negative literal Q on an accepting formal trace has D_C(x) nonempty. For a partial assignment (T,z) define actual fibre X(T,z)={y:y|T=z} and A(T,z)=union_{y in X(T,z)} P_y, a subset of original selector coordinates. Then P_x subset A(T,x|T) and
+
+    C not in A(T,x|T) iff T intersects D_C(x).
+
+Proof: a clause falsifying pattern extends the specified partial assignment iff they agree on the intersection of scopes. This is exact projection from the original object, not independent synthetic states. Retain literal polarity, actual scope and shared source x. Repeated clauses with identical mismatch sets impose the same hit requirement; no independent charge. The empty mismatch set is the actual positive minterm coordinate, not a negative witness.
+
+For negative set Q of an accepting trace let tau_x(Q) be the minimum |T| hitting all D_C(x), including zero for empty Q. Then tau<=min(m,|Q|). Any such T produces a G21 mask that admits the entire accepting trace: all its positive coordinates equal P_x by G21, and all Q are outside A. Conversely every mask from a fibre containing x that admits the trace must hit every mismatch set. Thus this minimum is exact within the source-coordinate fibre mask class. Define geometric width as minimum tau_x(Q) over accepting traces at P_x. No need to calculate the trace DNF or solve a hitting-set instance as part of the original circuit.
+
+### G24 — distributional transversal-width inequality
+
+For 0<=h<=m let beta_h be fraction of minterms whose geometric width <=h. There are K_h=2^h binom(m,h) partial assignments of size h. For each good x one of these masks works, because a hitting set of size <=h can be extended to h coordinates and still hits every mismatch. With D the dual-rail circuit of G21 (size s), each H_A(t)=D(t AND 1_A,1_(A^c)) is a monotone underapproximation of G. Sample (T,z) uniformly from K_h masks, and independently translate the input by an assignment translation h0 in F2^m inducing the actual clause polarity permutation. For any given minterm, probability of acceptance >=beta_h/K_h. The G21 union bound over 2^m minterms, followed by OR of at most ceil((m ln2+1)K_h/beta_h) masked/translated circuits, yields
+
+    beta_h <= (m ln2+2)(s+1) K_h / L_m.
+
+This also holds for beta_h=0. Shared DAGs remain within each copy; no claim that copies must be independently paid by original C. Since K_h <= (2em/h)^h for h>=1, and G22 gives L_m>=exp(c N^(1/12) ln N) on its delta=1/12 subsequence, polynomial s implies beta_floor(epsilon N^(1/12)) <= exp(-Omega(N^(1/12) ln N)) for sufficiently small fixed epsilon>0. In particular almost every minterm of a putative polynomial circuit has EVERY accepting trace needing a transversal of more than epsilon N^(1/12) original variables. Same result with any fixed exponent 1/9-delta/3 on its G22 subsequence. This is stronger than G21's literal-count necessity because beta_h >= alpha_h at the same threshold, and because G22 strengthens L_m. No claim about efficient trace extraction.
+
+Let nu_x(Q) be maximum number of pairwise disjoint mismatch sets from Q. Then nu<=tau<=3nu: a maximum disjoint family is maximal, its union hits every edge, each edge has size <=3. Thus for almost every minterm of any putative polynomial circuit EVERY accepting trace contains more than h/3 pairwise disjoint nonempty mismatch sets (their full clause scopes may still overlap). This is a true independence property of original variable mismatches, not independence of circuit resources. It does not prove those mismatches require independently paid gates. G21 tautology-padding control persists: append all input tautologies to a correct circuit; for each minterm this forces all outside-P negative literals in every accepting trace, including the opposite unit clauses with singleton mismatch sets on all m variables. Then tau=nu=m, at only O(N) extra gates. Even stripping this explicit padding is not an established general low-transversal realization. Width-two polynomial monotone circuit has tau=0. Positive representation model still inherits G22; quotient NOT escapes. Do not assert that symmetry, minterm identity or exact geometric width makes the required resource inequality automatic.
+
+### Executed local regression (Python integer arithmetic, no CI/kernel)
+
+Balanced adder + fixed gate CNF: all 1080 assignments across n=2,4,8 and all powers-of-two thresholds checked against integer popcount; fixed gate truth clauses and no conditional/fixed overlap checked. 196 graph/threshold instances at n=2,4 compared emitted CNF under uniquely extended chosen-bit assignments against explicit k-clique enumeration. 18,184 fibre-mask coordinate comparisons for m=1..4, every x,T, every clause. 8,038 transversal/matching inequalities for families of up to three distinct nonempty mismatch sets on the same carriers. General results follow from proofs, not finite extrapolation. Reproducer:
+
+```python
+from itertools import combinations,product
+
+def compile_count(n,k):
+    gates=[]; clauses=[]
+    def gate(op,a,b):
+        y=n+len(gates)+1;gates.append((op,a,b,y))
+        for x,z in product((0,1),repeat=2):
+            v={'xor':x^z,'and':x&z,'or':x|z}[op]
+            clauses.append(tuple(-i if bit else i for i,bit in zip((a,b,y),(x,z,1-v))))
+        return y
+    level=[[i+1] for i in range(n)]
+    while len(level)>1:
+        nxt=[]
+        for a,b in zip(level[::2],level[1::2]):
+            assert len(a)==len(b)
+            s=[gate('xor',a[0],b[0])];c=gate('and',a[0],b[0])
+            for u,v in zip(a[1:],b[1:]):
+                h=gate('xor',u,v);s.append(gate('xor',h,c));c=gate('or',gate('and',u,v),gate('and',h,c))
+            nxt.append(s+[c])
+        level=nxt
+    assert k and k&(k-1)==0
+    bits=level[0][k.bit_length()-1:];y=bits[0]
+    for b in bits[1:]:y=gate('or',y,b)
+    clauses.append((y,));return gates,clauses,y
+def evaluate(n,gates,x):
+    a=[None]+[(x>>i)&1 for i in range(n)]
+    for op,u,v,y in gates:
+        assert len(a)==y
+        p,q=a[u],a[v];a.append({'xor':p^q,'and':p&q,'or':p|q}[op])
+    return a
+def sat(c,a):return any(a[abs(i)]==int(i>0) for i in c)
+count=graphchecks=0
+for n in (2,4,8):
+  for k in [1<<i for i in range(n.bit_length())]:
+    g,c,y=compile_count(n,k); assert n+len(g)<=12*n
+    edges=list(combinations(range(n),2)); fixed={tuple(sorted(z)) for z in c}; conditional={tuple(sorted((-i-1,-j-1))) for i,j in edges};assert not fixed&conditional
+    a=[evaluate(n,g,x) for x in range(1<<n)]
+    for x,v in enumerate(a):
+        assert all(sat(z,v) for z in c[:-1]); assert bool(v[y])==(x.bit_count()>=k);count+=1
+    if n<=4:
+        for E in range(1<<len(edges)):
+            formula=c+[(-i-1,-j-1) for h,(i,j) in enumerate(edges) if not E>>h&1]
+            actual=any(all(sat(z,v) for z in formula) for v in a)
+            expected=any(all(E>>edges.index(e)&1 for e in combinations(S,2)) for S in combinations(range(n),k))
+            assert actual==expected;graphchecks+=1
+assert (count,graphchecks)==(1080,196)
+maskchecks=transchecks=0
+for m in range(1,5):
+    C=[(I,p) for w in range(1,min(3,m)+1) for I in combinations(range(m),w) for p in range(1<<w)]
+    def mm(x,I,p):return sum(1<<j for i,j in enumerate(I) if (x>>j&1)!=(p>>i&1))
+    Z=[sum(1<<i for i,(I,p) in enumerate(C) if mm(x,I,p)==0) for x in range(1<<m)]
+    for x in range(1<<m):
+      dif=[mm(x,I,p) for I,p in C]
+      for T in range(1<<m):
+        A=0
+        for y in range(1<<m):
+            if (y^x)&T==0:A|=Z[y]
+        assert A&Z[x]==Z[x]
+        for i,d in enumerate(dif):
+            assert bool(A>>i&1)==(d&T==0);maskchecks+=1
+      D=sorted(set(dif)-{0})
+      for Q in [(d,) for d in D]+list(combinations(D,2))+list(combinations(D,3)):
+        tau=min(T.bit_count() for T in range(1<<m) if all(T&d for d in Q))
+        nu=max(len(S) for l in range(len(Q)+1) for S in combinations(Q,l) if all(not a&b for a,b in combinations(S,2)))
+        assert nu<=tau<=3*nu
+        transchecks+=1
+assert (maskchecks,transchecks)==(18184,8038)
+```
+
+### Active P0-C/D frontier (no new mandatory phase)
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G22a | balancedCountThresholdCNFLinearVariables / cliqueMonotoneProjectionLinearVariables | derived and tested; G17, Karp native adder donor; native source attachment open |
+| G22b | strengthenedSelectorMonotoneLowerBound | external CKR transfer with new projection; restricted model |
+| G23 | originalAssignmentFibreMaskIff / traceTransversalExact | derived and tested; G13/G21, #1291, FactorsThrough |
+| G24a | mintermTransversalOrbitCover | derived by probabilistic cover |
+| G24b | almostEveryMintermDisjointMismatchNecessity | derived conditional on small unrestricted circuits; not a size lower bound |
+| G24c | transversalPaddingNoGo | derived; actual shared-resource overlap unpaid |
+| G12a/G6a/N4 | genuineCorrelationShortcutBound | OPEN: charge the necessary disjoint mismatch information to actual shared gates, or find a same-object low-transversal equivalent realization at controlled cost, or direct uniform lower bound |
+| G12b/G6b | unrestrictedSelectorGoalSeparation | OPEN |
+| G12c/G6c/N5 | unrestrictedSuperpolynomialGrowth | OPEN |
+| N6 | originalClayTransport | #1040 conditional consumer; unconditional endpoint unpaid |
+
+Aristotle BIDI: the explicit sufficient threshold is a correct polynomial-size alternate realization with beta_h>=exp(-o(N^(1/12) ln N)) and h=o(N^(1/12)), which would contradict G24 on the G22 subsequence. Do not assume this exists; generic monotonicization is false. Need an actual resource inequality that survives quotient/negation, sharing, bypass and recomputation. Prioritize proving or disproving such a target-specific transport and keep the direct uniform N4/N5 route active. A large transversal alone is not a resource lower bound; no further finite census or generic certification prerequisite. No P!=NP claim.
