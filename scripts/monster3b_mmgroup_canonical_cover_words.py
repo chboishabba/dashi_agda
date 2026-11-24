@@ -48,6 +48,35 @@ def omega(a,b):
     return (dot(a[6:],b[:6])-dot(b[6:],a[:6]))%3
 def sym_q(v):
     return 2*dot(v[:6],v[6:])%3
+def correction_rows(cols):
+    """Rows of u -> omega(u,v) with v=[a,b]; preserve the signed halves."""
+    if len(cols)!=N or any(len(v)!=N for v in cols):
+        raise ValueError("need 12 symplectic image columns")
+    return [[(-x)%3 for x in v[6:]]+list(v[:6]) for v in cols]
+
+def signed_relator_rephase():
+    """Track z-twists of the fixed ATLAS word in the NONCENTRAL outer cover.
+
+    C z C^-1=z^-1, D z D^-1=z; C'=z^a C and D'=z^b D.
+    The inverse letters c,d contribute +a and -b, transported by the
+    signed prefix multiplier (-1)^(# previous c).
+    """
+    exponents=[]
+    for a in range(3):
+        for b in range(3):
+            prefix=1
+            shift=0
+            for letter in "cdcdcddcdd":
+                shift=(shift+prefix*(a if letter=="c" else -b))%3
+                if letter=="c":
+                    prefix=-prefix
+            if prefix!=1:
+                raise AssertionError("ATLAS relator must preserve centre")
+            if shift!=0:
+                raise AssertionError("source cover relator changes under central twist")
+            exponents.append([a,b,shift])
+    return exponents
+
 def relator(c,d):
     # Exact ATLAS semipresentation lower-case inverses, source gate.
     invc,invd=c**-1,d**-1
@@ -60,11 +89,12 @@ def selftest():
     # Check at least a genuinely mixed signed permutation M.
     cols=[[int(i==j) for i in range(N)] for j in range(N)]
     cols[0],cols[7]=cols[7],cols[0]
-    rows=[[( (-col[6+j] if j<6 else col[j-6]) )%3 for j in range(N)] for col in cols]
+    rows=correction_rows(cols)
     ell=[(2*j+1)%3 for j in range(N)]
     u=rref_solve(rows,[(-x)%3 for x in ell])
     assert all((ell[i]+omega(u,cols[i]))%3==0 for i in range(N))
     assert sym_q([1]*N)==2*6%3
+    assert len(signed_relator_rephase())==9
     return {"pure_F3_linear_affine_section":"PASS",
             "actual_Monster_word_identity":False}
 def full(manifest,root):
@@ -124,7 +154,7 @@ def full(manifest,root):
         att["intertwiner_dimension"]!=1):
         raise ValueError("Hit0 no longer matches original ATLAS GF3 source")
     def normalize(word,cols,ell):
-        matrix=[[(-x)%3 for x in v[6:]] + list(v[:6]) for v in cols]
+        matrix=correction_rows(cols)
         u=rref_solve(matrix,[(-x)%3 for x in ell])
         if any((ell[i]+omega(u,cols[i]))%3 for i in range(N)):
             raise AssertionError("affine E correction not solved")
@@ -155,6 +185,12 @@ def full(manifest,root):
       "inner_E_correction_C_F3":u,"inner_E_correction_D_F3":v,
       "canonical_C_word":str(C),"canonical_D_word":str(D),
       "canonical_C":ca,"canonical_D":da,
+      "ATLAS_R_central_rephasing_invariance":True,
+      "ATLAS_R_central_rephasing_signed_cases_F3":signed_relator_rephase(),
+      "ATLAS_R_word_length":10,
+      "ATLAS_R_c_inverse_count":4,
+      "ATLAS_R_d_inverse_count":6,
+      "ATLAS_R_actual_order_if_R7_equals_nontrivial_z":21 if zclass(rels["ATLAS_R7"]) in (1,2) else None,
       "central_cover_relators":{
           k:{"word":str(w),"central_z_power":zclass(w),
              "belongs_to_ZE":zclass(w) is not None}
