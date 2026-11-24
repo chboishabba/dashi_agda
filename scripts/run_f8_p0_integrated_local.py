@@ -29,6 +29,7 @@ CHECKS={
  "construction-manufactured-moving-wall":"scripts/check_f8_xcix_manufactured_moving_wall_trace_sympy.py",
  "original-full-coupled-constraint":"scripts/ksw668_f8_characteristic_constraint_maxcut.py",
  "original-source-lifted-SBP-energy":"scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py",
+ "original-weighted-SBP4-forward-adjoint-mismatch":"scripts/warp_stage_adjoint.py",
  "same-action-geometric-constraints":"scripts/check_f8_geometric_constraints.py",
  "same-action-Gauss-local-control":"scripts/check_f8_gauss_action.py",
  "original-native-radial-action-bridge":"scripts/check_f8_p0_native_radial_action_bridge.py",
