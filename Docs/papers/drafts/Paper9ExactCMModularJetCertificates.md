@@ -1555,8 +1555,8 @@ homogeneity does not imply
 remainder homogeneity.
 
 The two new untested files
-\`pi_p0_shared_radical_sector.hpp\`
-and \`check_pi_p0_shared_radical_schedule.cpp\`
+`pi_p0_shared_radical_sector.hpp`
+and `check_pi_p0_shared_radical_schedule.cpp`
 preserve the old COMP5u/t
 versions. Separate primitive-work
 counters charge source
