@@ -54,6 +54,23 @@ def inv(A):
 def sigma(A):
     return [[K.from_sympy(conjugate(K.to_sympy(x)))
              for x in row] for row in A]
+def transpose(A): return [list(row) for row in zip(*A)]
+def sym_square(B):
+    # Exact polynomial basis e_i e_j (i<=j) over Q(zeta3).
+    n=len(B); pairs=[(i,j) for i in range(n) for j in range(i,n)]
+    S=[[ZERO for _ in pairs] for _ in pairs]
+    for col,(i,j) in enumerate(pairs):
+        for row,(u,v) in enumerate(pairs):
+            if i==j:
+                z=B[u][i]*B[v][i]
+                S[row][col]=z if u==v else K.from_sympy(Rational(2))*z
+            elif u==v: S[row][col]=B[u][i]*B[u][j]
+            else: S[row][col]=B[u][i]*B[v][j]+B[v][i]*B[u][j]
+    return S
+def block(A,B):
+    n,m=len(A),len(B)
+    return [list(row)+[ZERO]*m for row in A] + [
+        [ZERO]*n+list(row) for row in B]
 def word_value(word,gens):
     if not isinstance(word,list): raise ValueError("word must be list of generator tokens")
     if not gens: raise ValueError("no source generators")
@@ -137,15 +154,26 @@ def run(src,hom,outer):
         # U σ(A_g) = A_{alpha(g)} U; this is a Qζ-linear problem for U.
         twisted=[(sigma(genes[k]),word_value(words[k],genes)) for k in genes]
         U,udim,Uinv=find_weld(twisted)
+        # Derived 78 and 90 *semilinear* maps automatically follow the
+        # source 12 map, but their common outer-square central scalar is
+        # not fixed until the authentic 6.Suz.2 / Monster word is attached.
+        U78=sym_square(transpose(Uinv))
+        U90=block(U,U78)
+        outer_square12=matmul(U,sigma(U))
+        outer_square90=matmul(U90,sigma(U90))
         out["outer_phase_exchange"]={
             "status":"CONDITIONAL_OUTER_SEMILINEAR_INTERTWINER",
-            "U_rows_Qzeta3":[[from_field(x) for x in row] for row in U],
+            "U12_rows_Qzeta3":[[from_field(x) for x in row] for row in U],
+            "derived_U78_rows_Qzeta3":[[from_field(x) for x in row] for row in U78],
+            "derived_U90_rows_Qzeta3":[[from_field(x) for x in row] for row in U90],
             "alpha_source_words":words,
             "source_MM_4D_generator_identified":False,
             "actual_729_Weil_outer_gauge_identified":False,
-            "outer_square_on_source12_matrix":[
-                [from_field(x) for x in row] for row in
-                matmul(U,sigma(U))]}
+            "outer_square_source12":[
+                [from_field(x) for x in row] for row in outer_square12],
+            "outer_square_source90":[
+                [from_field(x) for x in row] for row in outer_square90],
+            "outer_square_central_cover_scalar_attached":False}
     return out
 def selftest():
     # Toy noncommuting GL2 rep with identical target: Hom space = scalars.
