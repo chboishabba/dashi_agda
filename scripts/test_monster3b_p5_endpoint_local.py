@@ -29,6 +29,7 @@ SCRIPTS=[
  "monster3b_original729_weil_source_cocycle_weld.py",
  "monster3b_original729_actual_vacuum_weld.py",
  "check_monster3b_atlas_source729_relator.py",
+ "monster3b_actual_order3_projective_sym2_weld.py",
  "run_monster3b_p5_endpoint.py",
 ]
 def load(filename):
@@ -81,6 +82,10 @@ def main():
     for phase in ("1","2"):
         assert receipt["phases"][phase]["K_R7_exact_scalar_Qzeta3"]==["1","0"]
         assert receipt["phases"][phase]["vacuum"]["D"]["k0_unitary_model_Qzeta3"]==["-1/27","0"]
+    sym2=load("monster3b_actual_order3_projective_sym2_weld.py")
+    result_sym2=sym2.selftest()
+    assert result_sym2["six_mu6_rephasings_plus_minus_gamma_tested"]
+    assert len(result_sym2["checks"])==6
     actual_weld=load("monster3b_original729_actual_vacuum_weld.py")
     assert actual_weld.eval31(["-1/27","0"],5)==(-pow(27,-1,31))%31
     mm31=load("monster3b_actual_mmv31_hom_projector.py")
@@ -148,6 +153,7 @@ def main():
       "existing_729_Weil_source_fast_cocycle":"PASS",
       "original_ATLAS_729_R7_one_both_phases":"PASS",
       "original_ATLAS_729_D_E_vacuum_minus_one_over27":"PASS",
+      "actual_MM_dual_Sym2_gauge_invariant_six_mu6_model_algebra":"PASS",
 
       "actual_Steel_Magma_GModule_executed":False,
       "actual_GAP_CTBLib_executed":False,
