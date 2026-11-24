@@ -214,7 +214,10 @@ def main():
         ".dashi/monster3b-mmgroup/monster3b-canonical-cover-hit0.json"))
     ap.add_argument("--selftest",action="store_true")
     args=ap.parse_args()
-    result=selftest() if args.selftest else full(json.loads(args.manifest.read_text()),args.root)
+    if args.selftest:
+        print(json.dumps(selftest(),indent=2,sort_keys=True))
+        return
+    result=full(json.loads(args.manifest.read_text()),args.root)
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
     print(json.dumps({"output":str(args.out),
