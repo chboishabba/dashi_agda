@@ -295,12 +295,57 @@ FindMN3BDescent := function(mainPos)
   return matches[1];
 end;
 
+# The original main->MN3B quotient kills the NORMAL diagonal C3, whose
+# two nonidentity elements form the ORIGINAL size-two class qKernel3 = 20.
+# For any irreducible main character chi of degree d the K-invariant
+# projector is central, hence has rank either 0 or d. Its character
+# formula (d+2*chi(qKernel3))/3 gives the exact alternatives
+# chi(qKernel3)=d (descends) or chi(qKernel3)=-d/2 (does NOT descend).
+# This is a source-CLASS test, not a guessed a/b or zeta orientation.
+MainClass20Mode := function(mainPos, expectedDegree)
+  local d, value;
+  d := mainIrr[mainPos][1];
+  value := mainIrr[mainPos][qKernel3];
+  if d <> expectedDegree then
+    Error("main-table diagonal C3 classifier received wrong character degree");
+  fi;
+  if value = d then
+    return "K_TRIVIAL";
+  fi;
+  if 2 * value = -d then
+    return "K_NONTRIVIAL_PAIRED";
+  fi;
+  Error("main-table irreducible violates normal diagonal C3 projector dichotomy");
+end;
+
+Class20SelectedDescender := function(support, degree)
+  local selected, rejected;
+  if Length(support) <> 2 then
+    Error("source C3 selector expects exactly two main-table constituents");
+  fi;
+  selected := Filtered(support, i -> MainClass20Mode(i, degree) = "K_TRIVIAL");
+  rejected := Filtered(support, i -> MainClass20Mode(i, degree) = "K_NONTRIVIAL_PAIRED");
+  if Length(selected) <> 1 or Length(rejected) <> 1 then
+    Error("one descended and one non-descended central-C3 constituent required");
+  fi;
+  return selected[1];
+end;
+
 desc12 := List(dec12.support, FindMN3BDescent);
 paid12 := Filtered([1..Length(desc12)], k -> desc12[k] <> fail);
 if Length(paid12) <> 1 then
   Error("expected one degree17496 main constituent to descend to MN3B");
 fi;
 main12DescendingPos := dec12.support[paid12[1]];
+main12Class20Position := Class20SelectedDescender(dec12.support, 17496);
+if main12Class20Position <> main12DescendingPos then
+  Error("source class20 K-invariant row disagrees with full MN3B character descent");
+fi;
+# Keep the two original C3 objects DISTINCT: class20 K is trivial
+# in the selected MN3B representation, but the E-centre z3B is NOT.
+if 2 * mainIrr[main12DescendingPos][mainCentral3] <> -17496 then
+  Error("selected degree17496 failed the distinct E-centre paired-phase screen");
+fi;
 mn3b12Pos := desc12[paid12[1]];
 
 # Use the ACTUAL restricted Monster character to SELECT the 78 family,
@@ -322,10 +367,16 @@ for family in outer78Families do
   if Length(trial78.support) = 2 and
      ForAll(trial78.support, i ->
        trial78.coeffs[i] = 1 and mainIrr[i][1] = 113724) then
+    # Class20 one-class projector first; full pullback and the actual
+    # Monster character remain indispensable same-object selection.
+    trialClass20Position := Class20SelectedDescender(trial78.support, 113724);
     trialDesc78 := List(trial78.support, FindMN3BDescent);
     trialPaid78 := Filtered([1..Length(trialDesc78)],
                            k -> trialDesc78[k] <> fail);
     if Length(trialPaid78) = 1 then
+      if trial78.support[trialPaid78[1]] <> trialClass20Position then
+        Error("78 descent full-row pullback disagrees with class20 invariant projector");
+      fi;
       trialMN3B := trialDesc78[trialPaid78[1]];
       if IsInt(monsterMults[trialMN3B]) and
          monsterMults[trialMN3B] > 0 then
@@ -349,6 +400,13 @@ dec78 := selected78.split;
 desc78 := selected78.descend;
 paid78 := selected78.paid;
 main78DescendingPos := dec78.support[paid78[1]];
+main78Class20Position := Class20SelectedDescender(dec78.support, 113724);
+if main78Class20Position <> main78DescendingPos then
+  Error("selected 78 source-class20 and full-character selectors disagree");
+fi;
+if 2 * mainIrr[main78DescendingPos][mainCentral3] <> -113724 then
+  Error("selected degree113724 failed distinct E-centre paired-phase screen");
+fi;
 mn3b78Pos := desc78[paid78[1]];
 
 # THE DECISIVE full-character comparison, on the ACTUAL selected 78
@@ -429,6 +487,14 @@ if common729C3PairCount > 2 then
   Error("unexpected excess central C3 alignments");
 fi;
 
+# For the same original 729 extension and the same quotient K, both
+# descended 12 and descended 78 MUST have the same Suzuki central C3
+# character, modulo a single simultaneous zeta<->zeta^2 gauge swap.
+# The two conjugate members therefore admit exactly two equal-phase
+# pairings. This does NOT fix an absolute chosen z3B orientation.
+if common729C3PairCount <> 2 then
+  Error("source 12 and selected 78 have no full conjugate-pair C3 descent alignment");
+fi;
 selected78C2Trace := sixIrr[p78[1]][central2Class];
 if not (selected78C2Trace in [-78,78]) then
   Error("selected irreducible 78 is not central C2 scalar +/-1");
@@ -551,6 +617,20 @@ PrintTo(output,
   "  \"outer_78_pair_position\": ", outer78Pos, ",\n",
   "  \"main_12_split_positions\": [", dec12.support[1], ", ", dec12.support[2], "],\n",
   "  \"main_78_split_positions\": [", dec78.support[1], ", ", dec78.support[2], "],\n",
+  "  \"main_12_class20_trace_values\": [",
+        mainIrr[dec12.support[1]][qKernel3], ", ",
+        mainIrr[dec12.support[2]][qKernel3], "],\n",
+  "  \"main_78_class20_trace_values\": [",
+        mainIrr[dec78.support[1]][qKernel3], ", ",
+        mainIrr[dec78.support[2]][qKernel3], "],\n",
+  "  \"main_12_class20_selected_position\": ", main12Class20Position, ",\n",
+  "  \"main_78_class20_selected_position\": ", main78Class20Position, ",\n",
+  "  \"main_12_selected_extraspecial_c3_trace\": ",
+        mainIrr[main12DescendingPos][mainCentral3], ",\n",
+  "  \"main_78_selected_extraspecial_c3_trace\": ",
+        mainIrr[main78DescendingPos][mainCentral3], ",\n",
+  "  \"two_distinct_c3_source_projectors_agree_with_full_character_descent\": true,\n",
+  "  \"selected_12_78_equal_c3_phase_pair_count_exactly_two\": true,\n",
   "  \"main_12_descending_position\": ", main12DescendingPos, ",\n",
   "  \"main_78_descending_position\": ", main78DescendingPos, ",\n",
   "  \"mn3b_12_position\": ", mn3b12Pos, ",\n",

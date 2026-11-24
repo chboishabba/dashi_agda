@@ -1,3 +1,23 @@
+## 24 November 2026 — GAP native class-20 TWO-C3, signed residual and selected 12/78 phase weld
+
+**New exact source-first result:** [main-table class20 double-C3 Fourier/odd-orientation theorem](../physics/Monster3BGAPClass20DoubleC3FourierDescent20261124.md), implemented inside the EXISTING original GAP producer \`scripts/monster_3b_suzuki_main_quotient_match.g\` on this PR. Inspiration from the supplied Langlands S3 descent is confined to the algebraic need to retain **sign under outer inversion**; it is not Monster source evidence or a Langlands claim.
+
+**First C3 = diagonal quotient K**, source main class20 (two nonidentity conjugate elements, normal subgroup order3), distinct from **second C3 = extraspecial \(z_E\)** (original 3B). For any irreducible \(\chi\) of the ORIGINAL main table, the central K-invariant projector gives \((\chi(1)+2\chi(k))/3\in\{0,\chi(1)\}\); hence the one-class **exact** sieve \(\chi(k)=d\) for descent to MN3B, or \(\chi(k)=-d/2\) for exclusion. The two source product pairs therefore have paired class20 values:
+\[
+17496,-8748;\qquad113724,-56862,
+\]
+one descending in each pair. The existing full MN3B pullback/Monster restriction remains the **same-object** truth condition and must agree. For the descending selections, the *different* \(z_E\) source character trace is \(-d/2\), leaving exactly 8748 and 56862 in each nontrivial \(z_E\) phase, with zero \(z_E\)-trivial part. Diagonal K zero-mode and actual 3B zero-mode are NOT interchangeable.
+
+**Signed phase even/odd:** \(P_++P_-=(2-z_E-z_E^2)/3\), \(P_+-P_-=(\zeta^2-\zeta)(z_E-z_E^2)/3\). Outer inversion fixes the even, reverses the odd. The unmarked outer character specifies only the phase **pair**; original \(z_E\) orientation and actual \(H\)-word gauge are still required to attach the marked odd operator in the actual Monster carrier.
+
+**Correct diagonal scalar:** \(s+\epsilon(u_s+k_a)=0\pmod3\); using the *same original 729 extension* in both descended source families requires \(k_{12}=k_{78}\). The enhanced GAP source now demands exactly TWO phase-compatible conjugate \(12/78\) pairings, retaining \(12a/12b\) as simultaneous inversion gauge. The original source matcher still enumerates ALL degree78 outer families and requires the original actual Monster restriction; no 'faithful78' preselection and no synthetic 90D model.
+
+**Phase/deliverables:** P1 one-class K-selector/the distinct z_E signed projectors = **derived mathematically, GAP source-written**; P2 original central-product cover = **source theorem already paid**, chosen MM Hit0→H source class remains OPEN; P3 original \(\rho_W,P_s, \operatorname{Hom}_E\) = **basis-free constructed**, numeric same-object attachment OPEN; P4 source \(12/78\) same-K phase pairing and original one-class C2 ratio = **mathematically derived, selected character runtime and MM word class OPEN**; P5 coherent original complex \(\rho_W,K_s,L_{a,s}\) operator entries OPEN; P6 certification deferred. **M3B-L11K (NEW)**: main class20 central idempotent selects one descended character per pair, checked against full class restriction; **M3B-L11Z (NEW)**: its selected E-centre trace is \(-d/2\) and signed \(P_+-P_-\) anti-equivariance retained; **M3B-L11P (NEW)**: two conjugate selected source 12/78 phase pairings with correct \(u_s\). Mathematical formulas solved; original GAP actual values require source execution. The existing M3B-L04–L07 and L09R–L13R source-specific remaining lemmas continue unchanged.
+
+**Owners/consumers:** existing GAP \`monster_3b_suzuki_main_quotient_match.g\` / primary class20 quotient/fusion and Ibrahim source exact modules → selected original N character rows → actual N-isotypic idempotents / original Hom functor → Paper 10. **Do not rerun 28 quotient searches, build a new group model, reinterpret Langlands as Monster or claim finite matrix quotient = full group identification.**
+
+---
+
 # Monster 3B / Paper 10 — endpoint-first construction, not a certification queue
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
