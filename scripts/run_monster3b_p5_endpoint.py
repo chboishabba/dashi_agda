@@ -202,6 +202,12 @@ def main():
                         "ACTUAL_MM_CONJUGATION_AND_CENTRAL_RELATOR_DATA; COMPLEX_OUTER_OPEN"
                 else:
                     report["lemma_status"]["M3B-L10B_MM_E_canonical_word"]="FAILED"
+        # Independent source outer-2C class candidate, not the inner r/2B fusion.
+        if not args.skip_gap:
+            outer_class_ok=run("outer_C_source_class_fusion",[
+                "gap","-q",SCRIPTS/"monster3b_atlas_outer_C_class_source_fusion.g"])
+            report["lemma_status"]["M3B-L12R_outer_C_source_class_candidates"]=(
+                "SOURCE_FUSION_LOG_AVAILABLE" if outer_class_ok else "SOURCE_FUSION_UNAVAILABLE")
         # Literal class4D via the genuine 196883 Monster character.
         # Independent of Steel/Magma and of the expensive full MMV(31)
         # projection.  Only a UNIQUE original GAP Monster class
