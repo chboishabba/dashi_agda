@@ -309,6 +309,15 @@ def source_calculation(cover):
             Rpow=f3_mul(R,Rpow)
         if not np.array_equal(Rpow,I12):
             raise ValueError("R seven-power multiplication failed original quotient")
+        # R has quotient order seven. Our chosen model K_R may carry
+        # a sixth-root-of-unity scalar gamma=K_R^7. Since gcd(7,6)=1,
+        # multiplying K_R by gamma^-1 uniquely gives (K_R')^7=I
+        # among all mu6 rephasings, with no additional 729 data.
+        if rootsix(product_scalar) is None:
+            raise ValueError("source R7 Weil model scalar is not a mu6 root")
+        canonical_order7_rephase=inv(product_scalar)
+        if mul(power(canonical_order7_rephase,7),product_scalar)!=Q1:
+            raise AssertionError("canonical 729 cyclic order7 gauge failed")
         central_expected=power(ZETA,phase*zr)
         # Genuine W_R^7=ζ^(phase*zr) in the ORIGINAL Monster
         # Wζ sector; the 90D multiplicity relator must compensate the
@@ -318,6 +327,11 @@ def source_calculation(cover):
            "vacuum":vacuum,"pairs":pair,
            "R7_model_729_unitary_scalar_Qzeta3":pack(product_scalar),
            "R7_model_729_mu6":rootsix(product_scalar),
+           "R7_unique_mu6_rephase_to_exact_729_order7_Qzeta3":
+             pack(canonical_order7_rephase),
+           "R7_729_order7_normalized_operator_has_7th_power_I":True,
+           "R7_FORCED_90D_central_scalar_after_canonical_order7_gauge_Qzeta3":
+             pack(central_expected),
            "R7_original_full_Monster_central_scalar_Qzeta3":pack(central_expected),
            "R7_FORCED_90D_multiplicity_scalar_in_this_Weil_gauge_Qzeta3":
              pack(multiplicity_relator),
