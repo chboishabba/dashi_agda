@@ -1258,3 +1258,79 @@ No Agda/Lean kernel, source-verified
 benchmark, new analytic Chudnovsky
 identity/Bishop result or external SOTA
 claim is made.
+
+
+## 24 November — COMP5s: projective \(\mathbf{PQT}\) gauge with precision-indexed exact execution
+
+An exact source-normalizing gauge and a
+precision-sensitive execution scheduler
+have been combined in **UNTESTED**
+native C++ candidate COMP5s on Paper 9
+PR #1546. Original adjacent Chudnovsky
+leaves are normalized by the known
+positive indexed factors \(g_j=24h_j\)
+for \(j\ge1\), with \(j=0\) unscaled.
+For any source interval, define
+\(G_{a,b}=\prod_{a\le j<b,j\ge1}g_j\).
+The exact ordered matrix identity is
+
+\[
+M'_{a,b}=G_{a,b}^{-1}M_{a,b}
+        =M'_{a,m}M'_{m,b}.
+\]
+
+An optional, explicitly costed
+\`ProjectiveSourceReceipt\` opens the
+original raw P/Q/T by multiplying the
+normalized triple by recomputed \(G\).
+This is source-coordinate recovery, NOT
+an independent validation of a
+possibly forged P/Q/T producer.
+
+For output precision \(d\) with root
+bit index \(b\), approximate source
+widths from the original P/Q/T leaf
+products and compare the two
+independent subtree execution schedules
+
+\[
+p_{L\to R}=\max(p_L,s_L+p_R,m),\quad
+p_{R\to L}=\max(p_R,s_R+p_L,m).
+\]
+
+The original final matrix product stays
+left-right and noncommutative;
+only child *evaluation time/order*
+changes. Existing full-precision GMP
+integer merges, signed tail, zero mode,
+strict upper π admission and output
+hash are unmodified. A floating
+\`lgamma\` width estimator is NEVER
+used to decide P/Q/T digits or bounds;
+it is a memory-cost HEURISTIC and
+cannot justify lossy truncation.
+
+The output precision \(b\) controls
+which large source subtrees receive
+a bounded-depth schedule. Planner
+allocation is separately charged
+from GMP heap, as required by
+Paper 9 §10 and
+\`FibreProgramComplexityExact.agda\`.
+The implementation and source-specific
+cost/proof ledger are respectively
+\`scripts/pi_p0_projective_precision_schedule.hpp\`,
+\`scripts/check_pi_p0_precision_projective_schedule.cpp\`,
+and
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+S1 source homogeneity, S2 optional
+raw reopening and S3 correct
+consumer-specific semantics are
+algebraic source constructions;
+formal Agda kernel, actual native
+C++ compile/output check,
+calibrated Pareto and analytic
+Bishop same-real completion remain
+OPEN. User requested testing be
+deferred; no new timings/memory
+claims or external SOTA result.
