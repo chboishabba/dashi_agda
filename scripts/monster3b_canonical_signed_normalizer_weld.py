@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 from monster3b_actual_projective_sym2_intertwiner import inverse, symmetric_square, find_intertwiner
 from monster3b_signed_outer_sym2_join import join
+from monster3b_quadratic12_character_lift import lift_character
 P=31
 
 def readj(p):return json.loads(p.read_text())
@@ -92,9 +93,24 @@ def run(a):
         results[str(n)]["E=CDCinv"]=np.array_equal(e,mul(inverse(c),mul(d,c)))
         if not all(results[str(n)].values()):raise ValueError("literal source relator obstruction "+str(results))
         matrices.update({f"C{n}":c,f"D{n}":d,f"E{n}":e})
+    # Fixed embedding of the canonical Weil model makes these paired
+    # trace lifts free of the earlier independent cubic gauge choices.
+    # Their ordinary interpretation still requires the same integral
+    # Monster lattice and the source-selected quadratic character.
+    c,d,e=(matrices[g+"12"] for g in ("C","D","E"))
+    R=np.eye(24,dtype=np.int64)
+    for x in "cdcdcddcdd":R=mul({"c":power(c,3),"d":power(d,2)}[x],R)
+    chars={}
+    for name,M in (("D",d),("E",e),("C2",power(c,2)),("R",R),("DE",mul(e,d))):
+        if np.any(M[:12,12:]) or np.any(M[12:,:12]):
+            raise ValueError("inner word changes phase "+name)
+        a1=int(np.trace(M[:12,:12]))%P;a2=int(np.trace(M[12:,12:]))%P
+        lift=lift_character(a1,a2)
+        if lift is None:raise ValueError("quadratic trace bound obstruction "+name)
+        chars[name]={"plus":a1,"minus":a2,"conditional_ordinary_character":lift}
     np.savez_compressed(a.outdir/"canonical_signed_normalizer_mod31.npz",Fplus=G[1],Fminus=G[2],**matrices)
     return {"status":"SOURCE_BOUND_MOD31_SIGNED_GENERATOR_WELD","relators":results,
-            "outer_loop":loop,"model_sha256":sha(a.model),
+            "outer_loop":loop,"paired_quadratic_character_lifts":chars,"model_sha256":sha(a.model),
             "outer_receipt_sha256":sha(a.outer/"actual_MM31_outer_phase_result.json"),
             "characteristic_zero_numeric_matrices":False,
             "full_presentation_authenticated":False}
