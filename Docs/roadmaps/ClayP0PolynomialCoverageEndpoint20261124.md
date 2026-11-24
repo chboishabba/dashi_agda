@@ -666,3 +666,150 @@ assert pairs==10795
 | N6 | originalClayTransport | #1040 conditional producer; no unconditional payment |
 
 Highest alpha: use the explicit clause-coordinate overlap lattice, not a generic dimension count, and backsolve necessary triangular lift properties on F_m while requiring the same measure to correctly admit the unit-only shortcut. Try linear completion on arbitrary a already available (not merely coordinate splits), and retain joint rank-lift fibres under serial target shifts. Any potential must survive all such chords; a proof of only the two-gate local criterion does not extend automatically. The existential quadratic lift's witness uniqueness conditional on x does not construct x. Keep direct uniform machine lower bound and behavioural diagonal alternative alive. Endpoint mathematics first; no new Monster/physics task, no exhaustive large flag census, no CI. Native Agda/Lean attachment follows the mathematical endpoint.
+
+
+## 13. P0-G14/G15 — orbit parity, phase-sensitive boundary jets and the 2-SAT shortcut (2026-11-24)
+
+**P0 remains literal Clay P vs NP.** This section combines the attached G13 selector geometry with the labelled relative-line/translation construction from the parallel arithmetic donor [Agda #1549](https://github.com/chboishabba/dashi_agda/pull/1549) (head 0e371f0004be) / [Lean #120](https://github.com/chboishabba/dashi_lean4/pull/120) (head c7746dc0f61a), whose PR metadata was checked. Use the Boolean derivative exponents directly. No Langlands, Monster, physical or additional arithmetic endpoint is required. The characteristic-two cocycle matrix equation C+C^T=B requires B alternating; do not assume this for arbitrary pairings. For the G7 annihilator pairing the diagonal vanishes by Boolean idempotence. Previous P0 roadmap heads 9cd7ebdc7459 / ca3364ab5eb5, common blob 7254ad6c6460bb355e57e7bdbcea4cc18dd6fa61.
+
+### G14a — full algebraic degree, all widths (general proof)
+
+For 1<=w<=m (or truncate w at m), let C_m,w contain all clauses on 1..w distinct variables, all polarities. Define N_m,w=sum_{j=1}^w 2^j binom(m,j), b_m,w=sum_{j=1}^w binom(m,j), and F_m,w(s) as satisfiability of the selected clauses. The actual NP-complete family G13 is w=3, input length N_m,3=Theta(m^3). In complementary coordinates t=1+s, F(1+t)=1+prod_{x in F2^m}(1+prod_{C in Z_x} t_C), as Boolean functions. All products are multilinearized using t_C^2=t_C. The coefficient of the full monomial prod_C t_C equals parity of subsets X of assignments such that union_{x in X} Z_x=C_m,w. The additive group F2^m acts on these subsets by translation and on the clause universe by polarity flips, preserving the cover condition. Every nonsingleton orbit has even size because the group is a 2-group. A subset invariant under the entire transitive translation action is empty or the whole cube. Exactly the whole cube is a cover (each clause is falsifiable). Hence the coefficient is 1. Input complementation preserves algebraic degree, so deg F_m,w=N_m,w for every m>=1,w>=1. Equivalent parity statement: the number of satisfiable selector inputs is odd.
+
+G8b relative-degree edge bound now yields the unconditional unrestricted AND/XOR/NOT lower bound
+
+    MC(F_m,3) >= N_m,3 - 1.
+
+This replaces the weaker 2m-1 unit restriction as the strongest established bound in this roadmap for the actual selector family. It allows arbitrary shared nonlinear computation and all G11 symmetry-breaking paths. It is linear in encoded input length, NOT superpolynomial. This argument also proves full degree for w=1 and w=2, so degree cannot separate these easy families from w=3. Do not infer novelty of known degree or symmetry arguments.
+
+### G14b — exact local boundary isolation and sharp escape
+
+At maximal satisfiable selector s^x=1+1_Zx, let R be removed clauses (subset of C minus Z_x), A added clauses (subset of Z_x). The modified input is compatible with another assignment y iff Z_y minus Z_x is contained in R and A is disjoint from Z_y. This follows by intersecting the selected clause set with Z_y. If y!=x and h=Hamming(x,y), then |Z_y minus Z_x|=b_m,w-b_(m-h),w. Its minimum is
+
+    D_m,w = b_m,w-b_(m-1),w = sum_{j=0}^{w-1} binom(m-1,j).
+
+Thus if |R|<D_m,w no other assignment survives; satisfiability iff A empty. The Hamming ball of radius D_m,w around s^x agrees with the single-flat indicator prod_{C in Z_x}(1+s_C), since for any nonempty A there are at most D_m,w-1 removals. Sharpness: choose y differing by one assignment bit, remove Z_y minus Z_x (exactly D_m,w clauses), and add one C in Z_x minus Z_y. The resulting selector is satisfiable by y but not x at distance D_m,w+1. For w=3 D=1+(m-1)+binom(m-1,2). The separation of witness regions is quadratic in m but does not charge all legal computational chords.
+
+### G15a — exact phase-sensitive local derivative ranks
+
+For distinct selector coordinates T, define the Boolean mixed derivative Delta_T as the sum modulo 2 over toggles of all subsets of T (empty T gives the function). Relative-character phases from the attached arithmetic donor are (-1)^Delta_T, so the following retains signed information, not absolute Walsh magnitudes. For |T|<=D_m,w, G14b implies
+
+    Delta_T F(s^x) = 1[T subset Z_x] = prod_{C in T} q_C(x).
+
+Proof: every vertex of the toggle subcube lies within the radius-D ball. The local flat indicator is 1 exactly for toggles avoiding Z_x; their number is 2^|T minus Z_x|, odd exactly when T subset Z_x. The first-derivative matrix (rows x, columns C) is the clause falsification matrix. Every column has degree <=w in assignment bits. Conversely each monomial of degree 1..w is a column, and the constant is a sum of complementary unit columns. Thus rank=b_m,w+1 over F2.
+
+The cumulative labelled jet matrix J_r, rows indexed by x and columns by T with |T|<=r, has exact rank
+
+    rank J_r = sum_{j=0}^{min(w*r,m)} binom(m,j),   0<=r<=D_m,w.
+
+Each column is a product of <=r degree-w clause indicators, so is in the claimed polynomial space. Conversely any monomial of degree <=wr is partitioned into <=r disjoint variable blocks of size <=w, giving precisely such a product; empty block product supplies the constant. Independence of distinct squarefree Boolean monomials proves equality. For w>=2 and r=ceil(m/w), r<=D_m,w and rank=2^m. This is an exact, exponentially large, phase-sensitive geometric invariant for the actual NP-complete width-three family.
+
+### G15b — decisive same-family negative control: width two
+
+The complete width-two selector function also has full algebraic degree, 2^m maximal flats, exponentially large DNF, and cumulative signed boundary jet rank 2^m at r=ceil(m/2). Yet 2-SAT is decidable in polynomial time. Explicit unrestricted circuit: build the implication graph on 2m literals from selected clauses, with a unit clause giving the edge from its negation to itself; compute reachability by the Boolean Floyd-Warshall recurrence, using O(m^3) bounded-fanin Boolean gates (OR expressed using AND/XOR); reject iff some variable and its negation are mutually reachable. Thus MC(F_m,2)=O(m^3) on N_m,2=2m^2 inputs, with lower bound N_m,2-1. This is a direct counterexample to treating exponential labelled jet rank, full degree, DNF count, or their conjunction as an unrestricted superpolynomial resource bound. Even a phase-sensitive reconstruction of the truth table is not in itself a resource obstruction. The remaining invariant must distinguish the width-three interaction and satisfy a uniform per-gate charge. The derivative order grows with m in this example; no claim about every fixed-order invariant or every weighted jet potential.
+
+### G15c — deterministic section equivalence, not merely uniqueness of lift
+
+For selector F_m, the polynomial-size existential quadratic lift of G13 is exact, but a deterministic triangular circuit deciding F need not explicitly choose a satisfying assignment. The existing SAT decision-to-witness self-reduction resolves this gap with only polynomial overhead: query F on the input, then for each assignment coordinate test the input plus all previously chosen unit clauses and a proposed unit literal (set its selector bit to 1 by Boolean OR). If satisfiable choose that value, otherwise choose the other; induction preserves at least one assignment, and the final assignment is satisfying. Return a default vector on unsatisfiable inputs. At most m+1 decision calls plus polynomial wiring and control. Conversely any total candidate section that returns a satisfying assignment whenever one exists can be checked by O(N_m) clause operations; no assignment passes on unsatisfiable inputs. Hence existence of a polynomial-time decider is equivalent to existence of a polynomial-time verified total section, and the same equivalence holds for polynomial circuit-family size. The section may be the lexicographically first witness, but canonical minimization is unnecessary for the converse. This is a classical constructive reduction on the original selector carrier, reusing #1006 SATDecisionToWitnessSelfReductionExact and BooleanFormulaSATSelfReductionExact, #1040 terminal, #1129 machine costs, #1474/#1502 encoding; native source attachment still separate. A lower bound on one chosen section alone does not imply decision hardness unless every efficient decider would yield that section (lex-first is such a section by the stated algorithm). No lower bound on any section established here.
+
+### Local exact execution receipt, reproducible in Python, no CI/kernel
+
+Newly executed integer bitset/GF(2) tests: cover parity for widths 1,2,3 and m=1..4 (197,436 subsets of assignments); direct selector truth table parity for N<=16 (860 selector inputs, counted across families); width-three incidence rank m=1..8 (8 ranks), pair differences (43,435 pairs), local one-bit boundary (216,116 checks), sharp escape witnesses (8). Cumulative product-span rank for widths 1..3,m=1..8 through ceil(m/w) (71 rank comparisons). Direct mixed derivative checks at every maximal selector for widths 1..3,m=1..4 and orders 0..min(D,2) (46,486). All passed. Example cover counts at m=4: 63,775 / 27,535 / 743 for w=1,2,3, all odd. These are checks of formulas, not asymptotic evidence independent of the proofs. Reproducer:
+
+```python
+from itertools import combinations
+from math import comb
+
+def masks(m,w):
+    C=[(I,p) for j in range(1,min(w,m)+1)
+       for I in combinations(range(m),j) for p in range(1<<j)]
+    Z=[sum(1<<i for i,(I,p) in enumerate(C)
+           if sum((x>>j&1)<<k for k,j in enumerate(I))==p)
+       for x in range(1<<m)]
+    return C,Z
+
+def basis(xs):
+    B={}
+    for x in xs:
+        while x:
+            p=x.bit_length()-1
+            if p not in B:
+                B[p]=x
+                break
+            x^=B[p]
+    return list(B.values())
+
+cover_checks=cube_checks=pairs=boundary_checks=ranks=0
+for m in range(1,5):
+    for w in (1,2,3):
+        C,Z=masks(m,w); N=len(C); full=(1<<N)-1
+        covers=[0]*(1<<len(Z))
+        for S in range(1,len(covers)):
+            lo=S&-S
+            covers[S]=covers[S^lo]|Z[lo.bit_length()-1]
+        assert covers.count(full)%2==1
+        cover_checks+=len(covers)
+        if N<=16:
+            assert sum(any(not s&z for z in Z) for s in range(1<<N))%2==1
+            cube_checks+=1<<N
+for m in range(1,9):
+    C,Z=masks(m,3); N=len(C); full=(1<<N)-1
+    def b(t):
+        return sum(comb(t,j) for j in range(1,min(3,t)+1))
+    D=b(m)-b(m-1)
+    assert len(basis(Z))==b(m)+1; ranks+=1
+    for x,y in combinations(range(1<<m),2):
+        a=(Z[y]&~Z[x]).bit_count()
+        assert a==b(m)-b(m-(x^y).bit_count()) and a>=D
+        pairs+=1
+    for z in Z:
+        s=full^z
+        for i in range(N):
+            assert any(not (s^(1<<i))&y for y in Z)==(not(z>>i&1))
+            boundary_checks+=1
+    remove=Z[1]&~Z[0]; A=Z[0]&~Z[1]; add=A&-A
+    s=((full^Z[0])&~remove)|add
+    assert remove.bit_count()==D and s&Z[0] and not s&Z[1]
+assert (cover_checks,cube_checks,pairs,boundary_checks,ranks)==(197436,860,43435,216116,8)
+jet_checks=filtration_checks=0
+for m in range(1,9):
+    for w in (1,2,3):
+        C,Z=masks(m,w); N=len(C); one=(1<<(1<<m))-1
+        cols=basis([one]+[sum(((z>>i)&1)<<x for x,z in enumerate(Z)) for i in range(N)])
+        Q=[one]
+        for r in range(1,(m+w-1)//w+1):
+            Q=basis(a&b for a in Q for b in cols)
+            assert len(Q)==sum(comb(m,j) for j in range(min(w*r,m)+1))
+            filtration_checks+=1
+        D=sum(comb(m-1,j) for j in range(min(w-1,m-1)+1))
+        if m<=4:
+            full=(1<<N)-1
+            for z in Z:
+                s=full^z
+                for r in range(min(D,2)+1):
+                    for I in combinations(range(N),r):
+                        t=sum(1<<i for i in I); v=0; J=t
+                        while True:
+                            v^=any(not (s^J)&y for y in Z)
+                            if J==0:break
+                            J=(J-1)&t
+                        assert v==int(t&z==t)
+                        jet_checks+=1
+assert (jet_checks,filtration_checks)==(46486,71)
+```
+
+### Active Aristotle frontier (P0-C/D, no extra mandatory phase)
+
+| ID | Exact deliverable | Status / owner |
+|---|---|---|
+| G14a | selectorFullDegreeByTranslationParity | mathematical proof, exact checks; G11 orbit geometry, G13 selector, G8b degree; yields MC>=N-1 |
+| G14b | maximalSelectorIsolationRadiusAndSharpEscape | mathematical proof and checks; G13 overlap; chord source |
+| G15a | signedBoundaryJetRankExact | mathematical proof and checks; labelled relative-line donor #1549/#120, G13 |
+| G15b | widthTwoFullJetPolynomialShortcut | mathematical proof, 2-SAT implication graph; refutes uncharged exponential-rank inference |
+| G15c | selectorDecisionToVerifiedSectionPolynomialIff | classical constructive argument; existing #1006/#1040/#1129/#1474/#1502, source weld remains |
+| G12a/G6a/N4 | serialTargetShiftBound | OPEN: a width-three-sensitive invariant with unit progress for every legal product flag, or a direct uniform lower bound |
+| G12b/G6b | selectorGoalSeparation | OPEN: beyond degree and boundary jet rank, same target and legal chords |
+| G12c/G6c/N5 | selectorSuperpolynomialGrowth | OPEN: superpolynomial in N_m,3, not merely 2^m witness or jet count |
+| N6 | originalClayTransport | #1040 conditional terminal; actual universal SAT failure unpaid |
+
+Highest-alpha next action: back-solve the width-three-specific obstruction from the deterministic section (or decision) on the full original selector carrier, not just its isolated maximal-selector neighbourhood. The new exact jet calculation gives a discriminator and the width-two shortcut disproves the proposed simple charge; use Aristotle #607/#678 collision/reopening, #123 costed lowering, #1006 FactorsThrough, #1291 indexed joint geometry and #1546 shared computation. Test any next target-sensitive measure against width-one and width-two families before spending time on more finite flag census. Direct uniform N4/N5 remains an OR route, and is weaker than unrestricted circuit separation. Do not claim that phase-sensitive data alone evade natural-proofs or other complexity barriers. No unconditional separation or native kernel verification claimed.
