@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-24",
+  "status": "PASS_J31_TWO_NEW_LONG_LEGS_INDEPENDENT_NUMERICAL_SOURCE_MEMBERSHIP",
+  "numerical_only": true,
+  "global_source_69D_Krawczyk": false,
+  "source": "scripts/check_smith_filsinger_j31_two_track_independent_numeric_20261124.py",
+  "source_blob_sha1": "28c380cd4b054d4a99bdb2dbc6d00d9119de3217",
+  "exact_rational_source": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
+  "exact_source_blob": "3bb225902125b6fbb95d1c00bc520c9c001f87f9",
+  "independent_source_solver": "scripts/check_smith_filsinger_j31_source_six_guard_shooting_20261124.py",
+  "relative_tolerance": 2e-12,
+  "absolute_tolerance": 1e-13,
+  "max_step": 0.0008,
+  "results": [
+    {
+      "segment": 1,
+      "original_mode": [
+        0,
+        1,
+        1
+      ],
+      "numeric_source_steps": 130,
+      "terminal_state_members": 9,
+      "total_terminal_states": 9,
+      "source_jacobian_members": 81,
+      "total_jacobian_entries": 81
+    },
+    {
+      "segment": 4,
+      "original_mode": [
+        1,
+        1,
+        1
+      ],
+      "numeric_source_steps": 90,
+      "terminal_state_members": 9,
+      "total_terminal_states": 9,
+      "source_jacobian_members": 81,
+      "total_jacobian_entries": 81
+    }
+  ],
+  "original_rigorous_source_certificate_owned_separately": true,
+  "does_not_prove": "Any original physical guard equality, original 69D Krawczyk, uniqueness or periodic orbit",
+  "executed_locally": true,
+  "new_script_byte_identity_verified": true,
+  "github_ci": false
+}
