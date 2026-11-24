@@ -48,7 +48,7 @@ def main():
         target=(frame.f_code.co_name=='propagate'
                 and local.get('it',-1)==local.get('nt',-2)
                 and local.get('U') is U and local.get('P') is P
-                and local.get('M') is M)
+                and local.get('M') is M and abs(float(b)-1/12)<1e-10)
         if target:
             if captured:raise AssertionError('duplicate original t12 same-state capture')
             if normal_order!=3 or abs(b-1/12)>1e-10 or abs(amp)>1e-14:
