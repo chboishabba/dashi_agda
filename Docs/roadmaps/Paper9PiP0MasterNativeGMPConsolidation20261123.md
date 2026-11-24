@@ -1091,6 +1091,24 @@ runtime/memory figure.
 
 ## 24 November — COMP5v common-root source contraction (TESTING DEFERRED)
 
+
+
+Source review removed an inherited
+`viewEndpoints(edge)` call from
+the new COMP5v wrapper: it had
+materialized \(Q'q_n\) before the
+shared classifier even though the
+new path needs only \(T',Q',V\)
+plus the original indexed \(q_n\).
+The code now omits that unwanted
+allocation. For \(n<2^{20}\),
+\(q_n=(640320n)^3<2^{120}\),
+a source-derived upper bit-width
+for the small parity factor; this
+is an exact conditional width
+fact, NOT a demonstrated
+performance result.
+
 COMP5v is a separately committed **UNTESTED** extension of
 COMP5u's exact signed affine/prime-local projective π
 certificate controller. It preserves the original
