@@ -1,5 +1,6 @@
 // COMP6d UNTESTED: retain signed defect, materialize only selected endpoint.
 #pragma once
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include "pi_p0_tail_budget_sector.hpp"
 #include "pi_p0_defect_source.hpp"
 namespace paper9_defect_sector {
@@ -38,7 +39,7 @@ inline Decision classify(unsigned digits,unsigned rootBits,const Z& root,
  }
  Z ell,x,rho;
  // GMP input/output alias permitted; the two output objects are distinct.
- mpz_fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
+ paper9_gmp::fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
  ++boundary.lowerDyadicDivmods; ++work.lowerRemaindersConstructed;
  mpz_fdiv_qr(x.get_mpz_t(),rho.get_mpz_t(),packed.get_mpz_t(),Nh.get_mpz_t());
  ++boundary.lowerIntegerDivmods; ++work.lowerRemaindersConstructed;

@@ -1,6 +1,7 @@
 // COMP6b UNTESTED: both-parity slack fibre, generalizing COMP5q.
 // Original signed Chudnovsky source, not a new series or stopping policy.
 #pragma once
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include "pi_p0_affine_boundary_sector.hpp"
 namespace paper9_slack_sector {
 using namespace paper9_lazy_lower_sector;
@@ -49,7 +50,7 @@ inline Decision classify(unsigned digits,unsigned rootBits,const Z& root,
  }
  Z ell,x,rho;
  // GMP input/output alias permitted; the two output objects are distinct.
- mpz_fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
+ paper9_gmp::fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
  ++boundary.lowerDyadicDivmods; ++work.lowerRemaindersConstructed;
  mpz_fdiv_qr(x.get_mpz_t(),rho.get_mpz_t(),packed.get_mpz_t(),Nh.get_mpz_t());
  ++boundary.lowerIntegerDivmods; ++work.lowerRemaindersConstructed;

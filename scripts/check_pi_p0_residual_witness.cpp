@@ -2,6 +2,7 @@
 // Compare expression-temporary binary splitting versus GMP alias-safe in-place mul/addmul.
 // Exact decimal-floor admission is conditional on the classical Chudnovsky identity/tail.
 #include <gmpxx.h>
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include <openssl/sha.h>
 #include <algorithm>
 #include <chrono>
@@ -148,7 +149,7 @@ Receipt compute(unsigned digits,bool inplace){
   {
     Z packed=Z(426880)*root*decimal*upperSeriesDenominator;
     Z shifted;
-    mpz_fdiv_qr_2exp(shifted.get_mpz_t(),
+    paper9_gmp::fdiv_qr_2exp(shifted.get_mpz_t(),
                      lowShiftRemainder.get_mpz_t(),
                      packed.get_mpz_t(),k);
     mpz_fdiv_qr(floor.get_mpz_t(),lowerRemainder.get_mpz_t(),

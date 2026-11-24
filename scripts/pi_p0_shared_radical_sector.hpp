@@ -3,6 +3,7 @@
 // Preserve original ordered P/Q/T provenance, indexed positive source scale,
 // signed residual/zero-mode domain, and exact dyadic Euclidean floor semantics.
 #pragma once
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include <gmpxx.h>
 #include <stdexcept>
 #include <utility>
@@ -75,7 +76,7 @@ inline Decision classify(
    ++work.parityQProducts;
  }
  Z lowerShift,ell;
- mpz_fdiv_qr_2exp(lowerShift.get_mpz_t(),ell.get_mpz_t(),
+ paper9_gmp::fdiv_qr_2exp(lowerShift.get_mpz_t(),ell.get_mpz_t(),
                     A.get_mpz_t(),k);
  ++work.lowerDyadicQrs;
  {Z dead;A.swap(dead);}

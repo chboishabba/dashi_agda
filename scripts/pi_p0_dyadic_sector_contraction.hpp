@@ -4,6 +4,7 @@
 // imported. Every calculation below is original-source GMP integer arithmetic.
 // The original Chudnovsky identity/tail and P/Q/T provenance remain EXTERNAL.
 #pragma once
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include <gmpxx.h>
 #include <stdexcept>
 #include <cstdint>
@@ -62,7 +63,7 @@ inline Decision classify(
 
  Z A=H*root*upperD;
  Z lowShift,ell;
- mpz_fdiv_qr_2exp(lowShift.get_mpz_t(),ell.get_mpz_t(),
+ paper9_gmp::fdiv_qr_2exp(lowShift.get_mpz_t(),ell.get_mpz_t(),
                    A.get_mpz_t(),k);
  ++work.dyadicQuotientRemainders;
  Z x,rho;
@@ -73,7 +74,7 @@ inline Decision classify(
 
  Z W=H*(root+1)*lowerD;
  Z upperShift,eta;
- mpz_fdiv_qr_2exp(upperShift.get_mpz_t(),eta.get_mpz_t(),
+ paper9_gmp::fdiv_qr_2exp(upperShift.get_mpz_t(),eta.get_mpz_t(),
                    W.get_mpz_t(),k);
  ++work.dyadicQuotientRemainders;
  { Z empty;W.swap(empty); }
@@ -139,7 +140,7 @@ inline GaugeReopening reopenRawDyadicFibre(
    throw std::invalid_argument("invalid indexed normalized remainder fibre");
  GaugeReopening out;
  Z scaledEll=indexedSourceScale*normEll;
- mpz_fdiv_qr_2exp(out.carry.get_mpz_t(),out.rawEll.get_mpz_t(),
+ paper9_gmp::fdiv_qr_2exp(out.carry.get_mpz_t(),out.rawEll.get_mpz_t(),
                    scaledEll.get_mpz_t(),k);
  out.rawN=indexedSourceScale*normN;
  out.rawRho=indexedSourceScale*normRho+out.carry;

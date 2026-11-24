@@ -2,6 +2,7 @@
 // Reuses COMP6d odd route and original indexed defect producer.
 // No full qY is formed in the even route, including correction fallback.
 #pragma once
+#include "pi_p0_gmp_dyadic_divmod.hpp"
 #include "pi_p0_defect_sector.hpp"
 #include <limits>
 namespace paper9_quotient_sector {
@@ -54,7 +55,7 @@ inline Decision classify(unsigned digits,unsigned rootBits,const Z& root,
  Z packed=base*root;
  ++work.sharedRadicalProducts;
  Z ell,x0,rho;
- mpz_fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
+ paper9_gmp::fdiv_qr_2exp(packed.get_mpz_t(),ell.get_mpz_t(),packed.get_mpz_t(),k);
  ++boundary.lowerDyadicDivmods; ++work.lowerRemaindersConstructed;
  mpz_fdiv_qr(x0.get_mpz_t(),rho.get_mpz_t(),packed.get_mpz_t(),T.get_mpz_t());
  ++boundary.lowerIntegerDivmods; ++work.lowerRemaindersConstructed;
@@ -87,7 +88,7 @@ inline Decision classify(unsigned digits,unsigned rootBits,const Z& root,
  // Only now transport the dyadic residue into the parity chart.
  Z eta=q*ell,carry;
  ++boundary.dyadicCarryProducts;
- mpz_fdiv_qr_2exp(carry.get_mpz_t(),eta.get_mpz_t(),eta.get_mpz_t(),k);
+ paper9_gmp::fdiv_qr_2exp(carry.get_mpz_t(),eta.get_mpz_t(),eta.get_mpz_t(),k);
  F+=carry;
  {Z dead;carry.swap(dead);}
  if(F==0)++boundary.observedFZeros;
