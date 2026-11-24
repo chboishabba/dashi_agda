@@ -3726,7 +3726,7 @@ A proposed signature is admissible only if its forward reconstruction and backwa
 
 ### Exact local regression and source ownership
 
-Committed dependency-free reproducer: [scripts/check_p0_guard_obstruction_geometry_20261124.py](../scripts/check_p0_guard_obstruction_geometry_20261124.py) in both P0 branches.
+Committed dependency-free reproducer: [scripts/check_p0_guard_obstruction_geometry_20261124.py](../../scripts/check_p0_guard_obstruction_geometry_20261124.py) in both P0 branches.
 
 Exact Python-integer results:
 - 300 random crossing formulas; 2,220 left assignments; all guarded-path obstruction covers agreed with independent 2-SAT implication closure; 470 total antichain terms, maximum 9.
