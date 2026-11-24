@@ -325,8 +325,18 @@ Class20SelectedDescender := function(support, degree)
   fi;
   selected := Filtered(support, i -> MainClass20Mode(i, degree) = "K_TRIVIAL");
   rejected := Filtered(support, i -> MainClass20Mode(i, degree) = "K_NONTRIVIAL_PAIRED");
+  # Other degree78 candidate families can have NO K-trivial constituent.
+  # Skipping such families preserves Barraclough-Wilson's ALL-78 selection.
+  # A 2/0 candidate is likewise not a UNIQUE descender; full source
+  # admission is never inferred from degrees or class20 alone.
+  if Length(selected) = 0 and Length(rejected) = 2 then
+    return fail;
+  fi;
+  if Length(selected) = 2 and Length(rejected) = 0 then
+    return fail;
+  fi;
   if Length(selected) <> 1 or Length(rejected) <> 1 then
-    Error("one descended and one non-descended central-C3 constituent required");
+    Error("source class20 K-invariant pair has impossible mixed modes");
   fi;
   return selected[1];
 end;
@@ -370,6 +380,7 @@ for family in outer78Families do
     # Class20 one-class projector first; full pullback and the actual
     # Monster character remain indispensable same-object selection.
     trialClass20Position := Class20SelectedDescender(trial78.support, 113724);
+    if trialClass20Position <> fail then
     trialDesc78 := List(trial78.support, FindMN3BDescent);
     trialPaid78 := Filtered([1..Length(trialDesc78)],
                            k -> trialDesc78[k] <> fail);
@@ -387,6 +398,7 @@ for family in outer78Families do
               descend:=trialDesc78,
               paid:=trialPaid78));
       fi;
+    fi;
     fi;
   fi;
 od;
