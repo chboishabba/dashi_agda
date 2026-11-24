@@ -99,6 +99,7 @@ def main():
         result.update(status="ORIGINAL_ORDINARY_SOURCE_TO_ACTUAL_MM31_SIGNED_OPERATOR_WELD",
             D_relative_to_standard_phase=q,source_sha256=sha(a.source),
             cover_sha256=sha(a.cover),model_sha256=sha(a.model),packet_sha256=sha(packet),
+            transport_sha256=sha(a.outdir/"lindsey_to_actual_MM31_signed_intertwiners.npz"),
             signed_12_generator_equations=3,signed_78_generator_equations=3)
     except Exception as exc:result.update(status="BLOCKED_OR_SOURCE_RESIDUAL",error=repr(exc))
     (a.outdir/"lindsey_actual_MM31_report.json").write_text(json.dumps(result,indent=2)+"\n")
