@@ -66,6 +66,28 @@ so the *same* \(S_s=\operatorname{Hom}_E(H_s,W_s)\) is \(S_{12,s}\oplus S_{78,s}
 
 ---
 
+## 24 November 2026 — MAX-CUT P2/P4 group-cover resolution (corrected endpoint)
+
+**Read first:** [complete source-normalizer central-product, true relator, D Jordan and Suzuki one-class theorem](../physics/Monster3BNormalizerCentralProductRelatorDescent20261124.md). This is a **mathematical correction** to previous references to 24-trit relator solvability: the original published **main** \(E\rtimes6.\mathrm{Suz}.2\) is quotiented by the existing diagonal **class-20** normal \(C_3\) to obtain \(N=MN3B\). The source-injected \(H\cong6.\mathrm{Suz}.2\) and genuine \(E=3^{1+12}\) satisfy
+\[
+N=EH,\quad E\cap H=Z(E)\cong C_3,\quad N/E\simeq2.\mathrm{Suz}:2.
+\]
+Hence for coherent original H-lifts \(h_C,h_D\), **every quotient relator R has value \(R(h_C,h_D)\in Z(E)\)**. All noncentral \(E/Z(E)\) relator residuals vanish **simultaneously by construction**. A literal identity requirement for every full \(2.\mathrm{Suz}:2\) relator in H is the WRONG endpoint: the perfect \(6.\mathrm{Suz}\to2.\mathrm{Suz}\) central-3 cover is nonsplit and source relators can encode the nonzero \(C_3\) multiplier. Remaining work is explicit Hit0-word→source H coordinate alignment, \(E\)-correction and prescribed central-cover scalars, **not existence of a generic 24-trit repair**.
+
+**Exact coprime cyclic solution:** with \(E\) exponent 3 and authentic quotient order \(m\) coprime to 3, any source lift x has exact order-m correction \(x^n\) with \(n\equiv0(3),n\equiv1(m)\). In particular, selected C quotient order4 → \(c^9\) is a genuine order4 lift; 7→15, 56→57 are analogous only for individually selected quotient elements, not simultaneous CD-word identities.
+
+**Exact D primary obstruction:** original ATLAS D has ranks \(\mathrm{rk}(D-I)=6,\mathrm{rk}(D-I)^2=2\), Jordan type \(3^2\,2^2\,1^2\). The *arbitrary-word* class of \(d^3\) lies in the 4-dimensional \(\ker(D-I)/\mathrm{im}(D-I)^2\). The original source central product guarantees it is zero for actual word lifts of a fixed quotient D, since an injected H-lift has cube in \(Z(E)\). Its centre-cube value may remain nontrivial and must NOT be called an invalid full-group lift.
+
+**Exact diagonal condition (correcting overly short prior notation):** if the 729 extension acts on its central Suzuki \(t\) by \(\zeta^{u_s}\), the 12 and 78 multiplicity characters by \(\zeta^{k_{12}}\), \(\zeta^{k_{78}}\), and diagonal kernel by \(\langle z_E t^\epsilon\rangle\), then **descent** demands \(s+\epsilon(u_s+k_a)=0(3)\), not \(s+\epsilon k_a=0\) unless \(u_s=0\) was independently fixed. Hence \(k_{12}=k_{78}\), and an extension twist must act on BOTH multiplicity blocks in tandem; absolute ζ versus ζ² names are gauge orientation.
+
+**One-class faithful78/Sym² discriminator:** for the genuine order2 source \(t_2\) from the centre of \(6.\mathrm{Suz}\) whose quotient acts \(-I_{12}\), the 729 Weil trace is ±1. Original paired-N traces satisfy \(\theta_{17496}(t_2)=-24\sigma\), \(\theta_{113724}(t_2)=156\sigma\varepsilon_{78}\). Therefore the **gauge-independent ratio** \(\theta_{113724}/\theta_{17496}\) is \(+13/2\) for faithful78, \(-13/2\) for Nebe Sym²78. The original GAP full-character producer already owns the source class and corresponding 210-class rows; **numeric sign not claimed here**.
+
+**Exact revised lemmas / phases:** P2 abstract central-product group cover **SOLVED by published source**, selected Hit0→H coordinates OPEN. M3B-L04/L05/L06 should be read as coordinate RELATOR ATTACHMENTS to the central cover rather than an unconditional demand that 2.Suz:2 quotient relators are 1 in Monster; M3B-L04N = source \(N=EH\), \(E\cap H=Z(E)\) and \(R(h_C,h_D)\in Z(E)\) **done abstractly**; M3B-L05N = original D Jordan-type four-dimensional coordinate obstruction plus its source-vanishing **done abstractly**; M3B-L06N = original central-\(C_3\) cover phases + outer twisted-cocycle construction, source-abstract done, selected MM words OPEN; M3B-L07N = one central order2 source-class ratio discriminant **done as theorem**, original selected numerical sign/word attachment OPEN; M3B-L11N = correct 729-central scalar and common diagonal descent **done as theorem**, original orientation gauge choice is not a distinct physical representation. Preserve M3B-L09R/11S actual Hom projectors and P4 source class/constituent consumers, and defer P6 certification.
+
+**No more small tests:** the next large endpoint deliverable is one *source-word-to-H/character/operator identification* using the existing MM words, primary GAP quotient/fusion rows, and original complex Monster action, retaining every pre-existing producer/consumer; not another synthetic 12D representation or abstract 90D carrier.
+
+---
+
 ## Endpoints and exact interpretation
 
 **E0 — source group:** actual Monster normalizer elements realizing the original ATLAS (2.Suz:2) generators on the same (E=3^{1+12}), with an explicit (E)-corrected coherent group lift, relators and source class positions. A matrix conjugacy on (E/Z(E)) is **not** equality of lifts or identification of the group extension.
