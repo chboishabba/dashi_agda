@@ -36,9 +36,7 @@
 #include "pi_p0_projective_precision_schedule.hpp"
 #include "pi_p0_affine_edge_retry.hpp"
 #include "pi_p0_dyadic_sector_contraction.hpp"
-#include "pi_p0_shared_radical_sector.hpp"
 #include "pi_p0_lazy_lower_sector.hpp"
-#include <optional>
 using namespace std;
 using Z=mpz_class;
 using Clock=chrono::steady_clock;
@@ -316,9 +314,10 @@ Receipt compute(unsigned digits,bool inplace){
    // The shared classifier uses T',Q',V and literal original q_n directly.
    if(!paper9_affine_retry::signedConeAdmissible(edge))
       throw runtime_error("invalid positive signed source edge");
-   // Exact source-constrained three-sector contraction. The arithmetic
-   // consumes low quotient remainders and the already needed upper
-   // dyadic bound. It does not construct the huge radical-square slacks.
+   // Source-constrained three-sector contraction with NO lower remainders.
+   // Ordinary admission uses the two lower quotients and upper dyadic
+   // quotient; failure optionally consumes eta and the existing upper W.
+   // Neither branch constructs full radical-square slacks.
    // NOTE: internal GMP temporary allocations are covered by GA hooks;
    // FC.endpointCapacityBytes below is a source-carrier-only proxy.
    auto decision=paper9_lazy_lower_sector::classify(
