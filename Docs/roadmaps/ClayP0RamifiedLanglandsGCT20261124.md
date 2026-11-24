@@ -2053,3 +2053,108 @@ Additional chart checks: for each d=1..4 and 20 seeded random signed vectors v a
 | LGC7/N6 | original conditional consumer | existing |
 
 Next endpoint-first: exploit signed corrected local factor network directly (not full local-factor census), seek actual global shared contraction or unavoidable bound surviving all legal preprocessing and nonlinear shortcuts. In particular global support-pair minimum is now exactly a hard query but the nonzero patch control proves it may be unnecessary even for that actual input; do not make it a mandatory lower-bound premise. R94/G59 strongest generic Hermite collision not realized here at full generic depth in actual bounded-arity tensor subclass. Keep G60–64 source pruning and G56–59 low-order/horizon controls, R85 weighted one-bit support and H05 zero/residual/index boundaries. No claim of a new overall SAT exponent or P!=NP; no unrelated branch or native certification detour.
+
+## 23. R107–R113 — geometry-forward affine separator gluing, exact signed Smith channels and semantic symmetry obstruction (2026-11-24)
+
+Governing user direction: GEOMETRY-FORWARD. Original incidence geometry -> signed/neutral residual -> semantic contraction -> shared separator -> paid resource cost -> literal Clay endpoint. Do not start from an expanded representation and charge its size. Keep source zero mode, inhabited neutral fibre, signs, observed zero, actual history/time/k/Frobenius/version and precision separately. Stay on Langlands.
+
+Read all three current mounted attachments (G60–64, G65–69, R99–106). Live Langlands #1549 73bf0b2a23a3a1918807448ddf8f1a3b6bfb5412 / #120 f3141d51870296488b0960f6c2af87a2a314e18f, shared blob e978a6e333cb9b6125bfe23800a58e97b641e4fb. Live G worker #1548 f10fa7a0852e193e318ed49e906733a8d2e6a89d, blob 61c3a293db787f0d094eba2920b50480b2255d10, inspected actual G70–74 (crossing-only locally-full compiler, 2SAT conditional fibre, canonical projection key, guarded implication shared evaluator, restricted monotone bound). Attachment G65–69 #1548 7dcee418032a / #119 c315cce7c3d8, blob 89d6606ba60c7e5626218d4b48f3f21455362374. Do not duplicate or edit that worker. Actual H05 #1291 d8f05ff5fc68da3c918d50c67f00edecc1e62648, roadmap a40721dde3fa561f82abe80c5312363e18aee158. Reopened current master DASHI/Crypto/ConstraintCouplingSearchExact.agda 6972ab099c268b3711dad9ab378d5e8620067c85; DASHI/Crypto/ObservationSeparatorGeometryExact.agda ccbe9275669def08a2c37cc945c19e61990bece1; DASHI/Codec/IndexedCubeHyperfibreExact.agda ce42b07fbaf430685ce172895cc482f933073577; DASHI/Core/GovernedIndexedResidualCubeExact.agda 42b70ebb7376813076934f2245ce6011b76f10c8; DASHI/Core/QueryFactorisationSufficiency.agda 98c592232292bbb6c5f0df047c8df3fd42be30d3. Source-readback, no native theorem attachment or kernel. Standard finite Fourier orthogonality (https://www.cs.mcgill.ca/~hatami/comp760-W2017/files/lectures-14.pdf) and holographic inverse basis changes (https://pages.cs.wisc.edu/~tdw/files/papers/Advances%20in%20the%20Computational%20Complexity%20of%20Holant%20Problems%20-%20Tyson%20Williams.pdf), orbit/coset linear algebra, Smith theorem credited as classical. New source-specific synthesis: bilateral affine boundary gluing with signed intersection residual, exact invariant factors, polynomial symmetry certificates versus exact global symmetry hardness on the actual crossing promise. JMD/DASHI attribution boundaries preserved.
+
+### R107. Geometry-first source boundary
+
+Partition an actual original factor graph into two regions sharing precisely the boundary variables X=F2^w (assign each factor and each unary weight once). Sum out each region's interior, obtaining boundary messages f,g in an integer or coefficient ring. Z=sum_x f(x)g(x). The R102 corrected two-rail local factors recover the same source contraction by inverse edge basis changes, so the geometry precedes the corrected coefficient expansion. R81 actual rank-two scalar D=3A-4Z with Z the weighted original witness count, not a demand to construct whole Weil matrices.
+
+Assume certified affine support envelopes A=a+U and B=b+V and translation eigenspaces H<=U,J<=V:
+    f(x+h)=(-1)^(p dot h) f(x), g(x+j)=(-1)^(q dot j) g(x).
+Messages vanish off their respective envelopes. Any character on a subspace extends to a linear functional on X, choose extensions p,q; signs and actual source labels retained. Nonnegative nonzero messages over integers cannot have a nontrivial sign eigencharacter, but signed Fourier/weighted messages can. Affine envelopes need not equal actual supports; they are supplied certificates. The following universal pairing theorem is on the indicated spaces, not a claim actual messages realize every vector in them.
+
+### R108. Exact bilateral affine gluing and Smith spectrum
+
+Solve A intersect B by Gaussian elimination. If empty, actual contraction zero. Otherwise C=c+W, W=U intersect V. Let H'=H intersect W, J'=J intersect W, D=H intersect J (already contained in W), S=H'+J'. Put d=dim D, r=dim W-dim S. Represent f on H-cosets in A by coefficients f_i times the source character (-1)^(p dot x), similarly g_j on J-cosets in B with q. Pairing matrix
+    M_ij=sum_(x in (a_i+H) intersect (b_j+J)) (-1)^((p+q) dot x).
+If intersection nonempty it is an affine D-coset, so its entry is zero when (p+q)|D nonzero, else signed 2^d. If characters disagree on D, whole scalar is zero, even if both original supports inhabited. This is signed cancellation, not an empty source.
+
+If compatible, discard rows/cols missing C. Their restrictions to C are distinct H'- and J'-cosets. Each intersects exactly one S-coset in C. Within a fixed S-coset all row/column pairs intersect; outside it none intersect. The signs factor as a row sign times column sign times a block sign: for block anchor z write each row as z+j_i+H', column as z+h_j+J', intersection contains z+j_i+h_j, sign factorizes because combined character is trivial on D. Each block is thus unimodular sign-equivalent to 2^d times an all-ones rectangular matrix. Integer row/column subtraction reduces each such matrix to one entry 2^d. EXACT Smith normal form: 2^r nonzero invariant factors, all 2^d (and zeros); compatible nonempty case. On Q or any odd residue field rank=2^r. Over Z/2^P, minimum linear factor channels =2^r if P>d and zero if P<=d; to recover divided quotient scalar modulo2^h requires h+d digits of this scalar, but direct signed coset factors can compute divided value without ever making a higher-precision scalar. Over odd prime no binary loss. This is exact universal linear interface rank in the specified bilinear model, not a bound on nonlinear evaluation of one input. Formula:
+    Z=2^d sum_(z in C/S) eps_z L_z R_z
+where L_z and R_z are signed sums of source coset coefficients, eps_z is anchor sign (define signs relative to anchor). Unsigned case all signs positive. Given explicit compressed regional tables, assign each relevant coset to a block and compute signs via Gaussian elimination, accumulate signed sums and contract in poly(w)*(#left entries+#right entries+2^r) ring operations, without expanding the full 2^w assignment carrier or matrix. Construction of the tables themselves is a separate cost. Example w=12, U=V=X, H=span first six coordinate axes, J=span axes 3..8 (zero indexed), d=3, dim S=9, r=3: 64 rows and columns -> eight independent channels, each with 2^3 valuation. Source symmetry overlap paid once. Zero mode for f,g is retained; nontrivial sign cancellation is not literal UNSAT.
+
+### R109. Source-certified translation symmetries and actual production cost
+
+For each bounded-width factor f_I, compute its translation stabilizer H_I by finite local table comparisons. It is an F2 subspace. Lift the linear annihilator equations H_I^perp to original regional coordinates and intersect using Gaussian elimination. The resulting H_all preserves every local factor, hence their product; project H_all to boundary to get H_B. Translation of internal coordinates is a bijection, so the regional summed message has H_B symmetry. With local signed characters use consistent sign equations on the same subgroup, multiply them; if nontrivial character on kernel of boundary projection, message identically zero by paired internal summation; otherwise it descends to boundary character. Over characteristic2 sign collapse is observed modularly, not literal equality of original signed integer source. This cert is sufficient, not necessary: global cancellations or constraints can create additional symmetries. The affine support envelope from local affine hull equations is also a sound superset via elimination. Both computed with polynomial overhead for bounded width. For known full-region symmetry subspace of dimension h and boundary image dimension h_B, enumerate full-region orbit representatives (2^(n-h)), sum weights at projected boundary cosets with multiplicity 2^(h-h_B) per represented assignment and signed phase as appropriate; for signed case choose compatible phase and zero kernel check. No free enumeration if quotient exponential. This is one actual producer algorithm; G67–69 separator DP and G73 guarded evaluator remain admissible alternatives. Large original treewidth, number of cosets or universal rank alone not a time lower bound.
+
+### R110. Exact semantic symmetry recognition on the original always-inhabited crossing source is Clay-equivalent
+
+Distinguish cheap certificate from finding ALL legitimate symmetries. For any Boolean formula F(x), use deterministic width<=3 truth graph b=F(x) with unique gate extensions (R78), add a fresh variable c and one clause (not b OR not c). This family always has c=0 witness for every x. Its exact fibres are:
+    #b=0,c=0 = #b=0,c=1 = 2^q-W,
+    #b=1,c=0 = W, #b=1,c=1 = 0.
+The translation flipping c alone preserves the entire solution relation iff W=0. Other gate coordinates unaffected since truth graph independent of c. Use actual G72 locally-full crossing compiler with eight zero gadget coordinates, private occurrence copies, and padded equality clauses. Flip c AND all its copies, no other coordinates; zero block remains fixed. Unique extension is equivariant for the transported flip on the two c-branches when they both exist. Padded equality constraints are preserved SEMANTICALLY on the zero block, not literal syntactic clause equality (their padding z6,z7 differ). Thus even on always-inhabited width-three locally-full crossing instances, with known witness, deciding if this specified original translation is a true symmetry is coNP-complete. Membership: a source assignment with f(x)!=f(x+h) is a polynomial-size certificate of failure. Hardness from above reduction of UNSAT, no extra unbounded-width clauses. Consequently constructing the full actual translation stabilizer in polynomial time iff P=NP (converse: with SAT oracle find membership for specified h; for entire subgroup use existential search for h outside current span with forall x equality, in P=NP the fixed two-level polynomial hierarchy collapses, then at most n basis augmentations). Do not infer arbitrary SAT algorithms must compute full stabilizer. Local G46/G72 seven-pattern relations have trivial translation stabilizer per constrained triple, but globally hidden translation can still occur. This is a specific semantic contraction hardness result, not a universal lower bound. The guarded G73 polynomial representation and other nonlinear/direct algorithms remain legal.
+
+### R111. Weighted rank-two consumer and precision/chronological residual
+
+For original independent unramified weights lambda(x)=prod z_i^x_i (R85), gluing matrix becomes sum_(x in intersection) (-1)^((p+q) dot x) lambda(x), not generally 2^d sign. If weights are character (-1)^(s dot x) times a common scalar, fold s into p+q and R108 applies. Arbitrary Teichmuller product weights need not preserve translations; include them in local certificates or retain actual intersection weight sum. Example one free bit: count W=2 vanishes mod2, polynomial 1+z does not vanish identically. Cannot discard neutral mode at coarse precision then claim weighted zero. R85 genuine weighted rank-two observer and rank-one collision remain unchanged; full weighted contraction still global computation. For two independent regions' weights split once across separator (no double counting). In same-precision invertible rechart transport BOTH messages contravariantly/covariantly for pairing, affine subspaces and sign characters through actual map; for a linear rechart C, f'(x')=f(C^-1 x'), g' likewise, characters use C^-T. R88's actual six-face commuting source-mask cube with joint A00 residual remains original H05 instance, no new physical faces. A new constraint event can shrink stabilizer or change affine envelope, hence old quotient classes split; retain original source/labelled provenance and gains/losses, not an assertion that prior coarse table suffices for every update. Time tau, k chart/refinement, Frobenius j, version, coefficient ring/precision and creation lift/carry R96 remain distinct. At lossy precision, a zero pairing or vanished block may conceal inhabited source; retain signed and valuation residual; no unrestricted lower bound from channel size or loss. No H07/H14 physical/native promotion.
+
+### R112. Actually executed local tests
+
+Python integers and SymPy Smith normal form: 300 seeded affine envelope / subgroup / signed character gluing comparisons, 300 independent Smith forms, 300 arbitrary product-weight comparisons (against exact intersection sums, NOT asserting same rank), 300 bounded-width local symmetry certificate checks on actual summed regional functions. Independently verified G72 eight-variable zero gadget all 256 assignments, 36 compiled deterministic flag/translation instances with full DPLL model counting of 144 b,c fibres and 3,749 emitted crossing clause checks, plus 36 semantic flip checks after proved zero-gadget simplification. The first test incorrectly required syntactic flip equality of padded clauses; corrected to semantic equality. Initial naive DPLL branch order timed out, reran with priority to the eight gadget coordinates, without assuming their values, all pass. No CI/native kernel, no full runtime benchmark.
+
+Reproduce core affine test (actual run used Random(369), w=1..5, 60 cases each; independent random signed coefficients and weights):
+```python
+from random import Random
+from sympy import Matrix, ZZ
+from sympy.matrices.normalforms import smith_normal_form
+rng=Random(369)
+def span(gs):
+ s={0}
+ for g in gs:s|={x^g for x in s}
+ return s
+def chi(h,x):return (-1)**((h&x).bit_count())
+def reps(A,H):return sorted({min(x^h for h in H) for x in A})
+for n in range(1,6):
+ X=set(range(1<<n))
+ for _ in range(60):
+  U=span(rng.randrange(1<<n) for _ in range(rng.randrange(n+1)))
+  V=span(rng.randrange(1<<n) for _ in range(rng.randrange(n+1)))
+  H=span(rng.choices(sorted(U),k=rng.randrange(n+1)))
+  J=span(rng.choices(sorted(V),k=rng.randrange(n+1)))
+  a,b,p,q=[rng.randrange(1<<n) for _ in range(4)]
+  A={a^u for u in U};B={b^v for v in V};C=A&B;D=H&J;W=U&V
+  HH=H&W;JJ=J&W;S={h^j for h in HH for j in JJ}
+  ar,br=reps(A,H),reps(B,J)
+  AA={r:{r^h for h in H} for r in ar};BB={r:{r^j for j in J} for r in br}
+  mat=[[sum(chi(p^q,x) for x in AA[i]&BB[j]) for j in br] for i in ar]
+  incompatible=any(chi(p^q,d)==-1 for d in D)
+  expected=0 if not C or incompatible else len(W)//len(S)
+  snf=smith_normal_form(Matrix(mat),domain=ZZ)
+  assert sorted(abs(int(snf[i,i])) for i in range(min(snf.shape)) if snf[i,i])==[len(D)]*expected
+  f={i:rng.randrange(-3,4) for i in ar};g={j:rng.randrange(-3,4) for j in br}
+  fv={x:chi(p,x)*f[i] for i in ar for x in AA[i]};gv={x:chi(q,x)*g[j] for j in br for x in BB[j]}
+  val=0
+  if C and not incompatible:
+   for z in reps(C,S):
+    block={z^s for s in S}
+    left=[i for i in ar if AA[i]&block];right=[j for j in br if BB[j]&block]
+    i0,j0=left[0],right[0];e=mat[ar.index(i0)][br.index(j0)]
+    lf=sum(f[i]*(mat[ar.index(i)][br.index(j0)]//len(D)) for i in left)
+    rg=sum(g[j]*(mat[ar.index(i0)][br.index(j)]//len(D)) for j in right)
+    val+=e*lf*rg
+  assert val==sum(fv[x]*gv[x] for x in C)
+  weights=[rng.randrange(1,8) for _ in range(n)]
+```
+Additional actual tests used product weight sums over each exact intersection, and five random width<=3 factors on n=2..6 (60 cases each, entries -1..1), enumerate certified local stabilizer intersection and verify projected symmetries of interior-summed function. Compiler reproducer: use actual G72 gadget digit string 737362511425175275471342317614566635167417725234 on crossing triples in lex order, all 256 assignments unique zero. Build standard deterministic AND/OR gate truth graph with b output, append (-b,-c), compile with G72: original variables on L, first occurrence copy on L later on R; equalities padded by Z6,Z7, unit main padded by Z4,Z5, binary by Z0. For q=1,2,3 use empty formula, contradictory units, and ten seeded random normalized clause lists (Random(369), sample up to five from width<=3 pool). Full DPLL on emitted formula with b,c pins, gadget variables branched first but not preassigned; verify four counts R110 and distinct crossing scopes. Check flip exchanges padded equalities after simplifying zero gadget, only final clause changes. No claim independent benchmark or new native code committed; mathematics and reproduction procedure in roadmap.
+
+### R113. Endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R107 | original geometric boundary and actual source messages | derived |
+| R108 | bilateral signed coset gluing, exact Smith spectrum and shared quotient | derived, checked |
+| R109 | polynomial local symmetry certificates and costed orbit producer | derived, checked |
+| R110 | actual globally hidden symmetry recognition coNP-complete on G72 always-inhabited crossing promise | derived, checked |
+| R111 | weighted consumer boundary, source zero/residual and independent indices | derived |
+| R112 | local regressions | executed |
+| R7a'/LGC4d | global source-aware contraction after legitimate symmetry/affine/guarded reductions | OPEN; no universal small quotient or polynomial joint solver |
+| R7b'/LGC5 | unavoidable unrestricted deterministic cost without mandatory full symmetry discovery, boundary materialization or counting | OPEN P0 |
+| R7c/LGC6 | original uniform separation or sufficient central sandwich | OPEN P0 |
+| LGC7/N6 | literal Clay endpoint | existing conditional consumer |
+
+Next: geometry-forward. Reverse-solve a joint weighted support contraction that adapts to actual separator symmetries without computing the full stabilizer; allow G73's shared guarded evaluator, local certificates and arbitrary direct algorithms. Study cost of source-specific surviving coupled residual, not raw graph width or class count. R108 exact rank is restricted; R110 exact symmetry recognition is hard but not obligatory. No proof P!=NP, no certification detour, no unrelated PR edits, no physical TOE promotion.
