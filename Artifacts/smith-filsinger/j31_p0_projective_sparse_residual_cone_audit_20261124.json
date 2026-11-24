@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-24",
+  "status": "J31_EXACT_PROJECTIVE_PRECONDITIONER_ALGEBRA_AND_NUMERICAL_SOURCE_CENTRE_PASS_NOT_ODERIGOR",
+  "source_scope": "Original prescribed-source Filsinger nine-state seven-mode, synthetic wave, finite loss",
+  "source_owner_pr": 1537,
+  "code_path": "scripts/check_smith_filsinger_j31_projective_sparse_preconditioner_20261124.py",
+  "code_git_blob": "4512265447debf1da61c3868fb3ce89aacc13d31",
+  "donors": {
+    "pnp": [
+      "chboishabba/dashi_agda#1548",
+      "chboishabba/dashi_lean4#119"
+    ],
+    "pi": [
+      "chboishabba/dashi_agda#1546",
+      "chboishabba/dashi_agda#1529"
+    ],
+    "langlands": [
+      "chboishabba/dashi_agda#1549",
+      "chboishabba/dashi_lean4#120"
+    ]
+  },
+  "exact_fixture": {
+    "status": "PASS_EXACT_RATIONAL_69D_PROJECTIVE_RESIDUAL_FIXTURE",
+    "match_equations": 54,
+    "quotient_variables": 15,
+    "positive_rational_slacks": 69,
+    "hidden_matching_residual_negative_control": "PASS_REJECTED",
+    "source_ODE_witness": false
+  },
+  "source_numeric": {
+    "provenance": "Longer local J31 source-equation counterpart of committed compact J31; not byte replay of newly committed script",
+    "J69_nonzero_entries": 748,
+    "schur_to_J15_inf": 5.370471597601888e-15,
+    "preconditioner_I_minus_CJ_inf": 3.202215181797723e-11,
+    "predicted_block_gap_inf": 5.460944120593258e-13,
+    "source_interval_certified": false
+  },
+  "current_previous_exact_nominal": {
+    "six_original_roots": 6,
+    "full_J24_boxes": 5,
+    "full_nominal_tau_return_enclosed": true
+  },
+  "required_exact_proof": [
+    "7 validated original ODE smooth charts or further paid source-interval subdivisions",
+    "actual interval F(z0) for 69 equations and DF(B69) for nonzero rational box",
+    "strict rational row slacks for 69 variables with guards/source phase paid",
+    "uniqueness/contraction and full guard chronology"
+  ],
+  "source_interval_DF_certified": false,
+  "strict_original_Krawczyk_inclusion": false,
+  "exact_periodic_orbit_proved": false,
+  "hardware_metered": false,
+  "github_ci_used": false,
+  "formal_kernel": false
+}
