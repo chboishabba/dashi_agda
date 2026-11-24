@@ -145,7 +145,7 @@ def check_pair(atlas_pair,monster_pair,actual_forms=False):
   raise ValueError("original ATLAS source generator semipresentation missing")
  if not source_relations(b,cand):
   return {"status":"REJECTED_TARGET_RELATIONS","intertwiner_dimension":None}
- basis=kernel([(c,b),(d,cand)])
+ basis=kernel([(b,c),(cand,d)])
  invertible=[t for t in basis if rank(t)==N] if len(basis)==1 else []
  out={"status":"ALGEBRAIC_CANDIDATE_ONLY" if invertible else "NO_INVERTIBLE_INTERTWINER_CERTIFIED",
       "intertwiner_dimension":len(basis),"invertible_basis_witness":len(invertible)==1,
