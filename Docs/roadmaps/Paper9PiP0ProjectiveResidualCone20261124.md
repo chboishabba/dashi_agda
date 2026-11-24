@@ -494,3 +494,268 @@ construction and reopening costs independently, and
 only then decide whether this belongs in a fast
 production or independent-certification path.
 No compilation, tests, CI or kernel claims.
+
+
+## 24 November — COMP5p/q/r: source valuation, projective leaf gauge and exact local content (testing deferred)
+
+### Live cross-PR inspiration, mathematically scoped
+
+Inspect original current work, not PR title alone:
+
+- [P vs NP #1548](https://github.com/chboishabba/dashi_agda/pull/1548),
+  G60–G64 actual source-supported multilinear producer, signed
+  coefficient valuations and sparse support matching (inspected
+  24 Nov at head \`7dcee418032a9a6fc7ca32eafe40033253ac925e\`).
+  G61 stresses **content removal before expansion** and warns
+  that apparent bit savings can cost more total generation.
+- [Ramified Langlands/GCT #1549](https://github.com/chboishabba/dashi_agda/pull/1549),
+  R85–R91 weighted source consumer and zero-mode separation,
+  R92–R96 valuation/creation-precision/carry reconciliation
+  (inspected 24 Nov at head \`73bf0b2a23a3a1918807448ddf8f1a3b6bfb5412\`).
+  Its **relative, indexed source** requirement is especially relevant
+  to an exact projective P/Q/T gauge that is mathematically
+  equivalent but not the *literal raw* original integers.
+- Existing #1546 formal owners, signed COMP5k and residual
+  COMP5l remain the actual π owners; no Langlands conjecture,
+  hard SAT instance, Fourier rank, mixed-characteristic ring
+  or P-vs-NP separation is imported as a π theorem.
+
+This is exact **integer common-content** arithmetic, not
+finite-coefficient-precision truncation. There is therefore no
+canonical section/carry defect in these three constructions.
+If any future approximate/modular version is introduced, R96
+requires separately charging its lift defect and signed residual.
+
+### G7 — the original P/Q/T leaf admits a maximal uniform projective 24 gauge
+
+Original source at nonzero index j:
+
+\[
+p_j=-24f_j,\quad
+f_j=(2j-1)(6j-5)(6j-1),\quad
+q_j=640320^3j^3,\quad
+t_j=(A+Bj)p_j .
+\]
+
+Since \(640320=24\cdot26680\), 24 divides
+\(p_j,q_j,t_j\) at every \(j\ge1\). The first source
+leaf \(j=0\) is never scaled:
+\(p_0=q_0=1,t_0=A\).
+Define the normalized positive-index leaf matrix
+\(M'_j=M_j/24\), explicitly by
+
+\[
+p'_j=-f_j,\quad
+q'_j=(640320^3/24)j^3,\quad
+t'_j=(A+Bj)p'_j.
+\]
+
+Let
+\(e(a,b)=\#([a,b)\cap\{1,2,\ldots\})\).
+For any original ordered interval, by bilinearity of
+upper-triangular matrix multiplication,
+
+\[
+\boxed{M'(a,b)=24^{-e(a,b)}M(a,b)}
+\]
+
+with the **same left-right product order** and exact signs.
+For the original terminal \([0,n)\), \(e=n-1\).
+Consequently both present and any future original
+right-multiplied rational observations \(T/Q\),
+and the signed next-term increment
+\(Pp_n(A+Bn)/(Qq_n)\), are scale invariant.
+The output-aligned COMP5m and COMP5j certificate
+quotients and both exact strict inequalities are
+homogeneous in the P/Q/T source triple.
+
+It is the **maximal guaranteed uniform integer
+source-leaf factor** because
+\(|p_1|=120, |p_2|=5544\) and
+\(\gcd(120,5544)=24\). This does *not*
+mean each individual leaf has no further common
+content, or that this normalization minimizes
+actual runtime/total storage.
+
+A source-authenticated raw triple cannot be
+replaced with the normalized triple while
+pretending its P,Q,T values are bytewise equal.
+The source witness must record the scale recipe
+or leaf-gauge index; original raw values may
+be reconstructed by multiplying by \(24^{e(a,b)}\).
+For a homogeneous floor/signed inequality
+consumer, this expensive reopening is
+**not mathematically necessary**. For an
+independent verifier that requires original
+raw P/Q/T coordinates, identity replay/reopening
+remains a separately costed obligation.
+
+### COMP5p — direct 24-normalized leaves, not post-hoc GCD (UNTESTED)
+
+New C++ \`scripts/check_pi_p0_projective24_leaf.cpp\`:
+for each nonzero source leaf constructs \(-f_j\)
+and \((640320^3/24)j^3\) **directly**,
+with the original terminal signed-tail parity,
+dyadic root, one-division upper-bound certificate,
+and original n-retry schedule of COMP5k.
+Its FIBRE receipt declares
+\`source_gauge=projective_leaf_24\` and
+\`source_scale_24_exponent=n-1\`.
+At interval size n, every terminal P/Q/T entry
+can be at most \(24^{n-1}\) times smaller
+in absolute magnitude in the normalized gauge;
+the exact logarithmic reduction is
+\((n-1)\log_2 24\) in each nonzero terminal
+component's positive bit-height, up to integer
+bit-length rounding. This **does not**
+measure memory or GMP multiplication speed.
+No generic GCD is computed; source term factors
+are reduced before multiplication.
+
+### G8 — fixed-prime support gives exact per-leaf local content without GMP GCD
+
+The original scale 24 is uniform but leaves more
+common factors on selected indices.
+The exact prime factorization is
+
+\[
+640320=2^6\cdot3\cdot5\cdot23\cdot29.
+\]
+
+Write \(p'_j=-f_j\),
+\(q'_j=(640320^3/24)j^3\).
+For every prime \(\ell\) outside the fixed set
+\(S=\{2,3,5,23,29\}\), if
+\(\ell\mid q'_j\) then
+\(\ell\mid j\), whereas
+
+\[
+\gcd(j,2j-1)=1,\quad
+\gcd(j,6j-1)=1,\quad
+\gcd(j,6j-5)=\gcd(j,5).
+\]
+
+Therefore \(\ell\nmid f_j\).
+As \(f_j\) is always odd, it also has
+no factor of 2. Thus
+
+\[
+h_j=\gcd(|p'_j|,q'_j)
+=\prod_{\ell\in\{3,5,23,29\}}
+ \ell^{\min(\nu_\ell(f_j),\nu_\ell(q'_j))}.
+\]
+
+The exact exponent is computed from original
+source linear-factor valuations:
+
+\[
+\nu_\ell(f_j)
+=\nu_\ell(2j-1)+\nu_\ell(6j-5)+\nu_\ell(6j-1),
+\quad
+\nu_\ell(q'_j)
+=c_\ell+3\nu_\ell(j),
+\]
+where \(c_3=2\) and
+\(c_5=c_{23}=c_{29}=3\).
+This is exact finite-prime source arithmetic;
+there are no missing large-prime divisors
+of the local \(\gcd\). No generic GMP
+\`mpz_gcd\` need be invoked.
+
+The resulting primitive positive-index leaf is
+\((p'_j/h_j,q'_j/h_j,t'_j/h_j)\), and its
+original-source scale is
+\(g_j=24h_j\).
+Define \(G(a,b)=\prod_{j\in[a,b),j>0}g_j\).
+Then exactly
+
+\[
+\boxed{
+M^{\rm local}(a,b)=G(a,b)^{-1}M(a,b).
+}
+\]
+
+Unlike the uniform 24 gauge, \(G(a,b)\)
+is index-dependent; a source receipt must
+store its deterministic **recipe and original
+index interval**, not merely the exponent n-1.
+No expanded \(G(a,b)\) is necessary for
+the original homogeneous series/π consumer.
+The signed tail residual is scaled by the
+same nonzero positive G, so no sign information
+is lost. Genuine zero or orientation sign
+remains distinct from a zero observed after
+modular reduction.
+
+### COMP5q/r — two independent consumers of this geometry
+
+- **COMP5q**, \`scripts/check_pi_p0_projective24_residual_witness.cpp\`:
+  use guaranteed projective 24 source leaves but
+  terminal COMP5l exact quotient/remainder
+  signed residual witness, instead of the COMP5k
+  upper radical multiplication. Even cutoff and
+  both remainder fibres are preserved.
+- **COMP5r**, \`scripts/check_pi_p0_indexed_prime_content.cpp\`:
+  use the fixed S-supported exact local \(h_j\)
+  valuation recipe to divide the *already
+  24-normalized* source leaf by \(h_j\).
+  Index arithmetic is computed over widened
+  64-bit small linear factors, with two
+  source-justified exact GMP divisions by
+  \(h_j\). No general GMP GCD call is present.
+  The original entire-tree scale recipe
+  \(\prod 24h_j\) is metadata for source
+  reopening and never falsely asserted to
+  equal \(24^{n-1}\).
+
+Potential performance trade-offs are substantial:
+per-leaf \(\nu_\ell\) divisions, extra
+\`mpz_divexact\` work and scale-metadata
+processing must be charged. Source-normalized
+leaves reduce downstream big-integer operand
+widths, but neither overall operation count
+nor speed or peak RSS is proved to improve.
+The fixed-prime formula does NOT imply that a
+universal SAT problem or a Langlands local
+correspondence can be evaluated with this method.
+
+### Cost ledger, future proof obligations and exact boundaries
+
+The relevant three costs are distinct:
+(1) leaf normalization/preprocessing;
+(2) ordered tree multiplication with smaller
+P/Q/T operand bit heights;
+(3) source receipt storage and, only if a
+consumer demands raw coordinates, exact reopening.
+The normalized projective source is sufficient
+for present and all future *homogeneous*
+right-extension observers, but NOT for a
+consumer of literal unscaled integer P/Q/T
+without the stored scalar recipe. Source
+provenance remains an explicit independent
+authenticity obligation.
+
+A future source-typed proof should express
+homogeneity of the actual original
+\(M_LM_R\) monoid and the exact reconstruction
+\(M=G M'\), then factor every
+selected π certificate consumer and
+parity/signed residual through the normalized
+carrier. It should charge lookup/valuation
+preprocessing and optional reopening in the
+existing \`FibreProgramComplexityExact\` and
+\`EfficientRecoverableQuotientExact\` terms.
+Use \`QueryFactorisationSufficiency\` for
+the consumer-relative positive theorem;
+do not make a global all-consumers claim.
+
+**User-directed deferral upheld:** no C++
+compilation, Python or SymPy execution,
+benchmark, CI, Agda/Lean kernel run or
+external SOTA comparison for COMP5p/q/r.
+Only live connected GitHub source read,
+derivation, source writes and readbacks.
+No new empirical timing/RSS claim. Exact
+finite-source algebra is distinguished
+from analytic Chudnovsky–Bishop same-real
+proof, which remains open.
