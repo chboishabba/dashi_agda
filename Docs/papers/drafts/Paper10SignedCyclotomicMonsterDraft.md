@@ -262,6 +262,10 @@ zeta/zeta² phases. Neither Out=1, Monster class 4D nor a
 one-dimensional ATLAS self-intertwiner pays this gate.
 
 
+## 24 November 2026 — canonical endpoint/phase/lemma ownership
+
+The living [Monster 3B endpoint-first roadmap](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md) is the authoritative phase and dependency ledger for **PR #1545**, mathematical endpoints E0–E4, phases P0–P6, and exact remaining lemmas **M3B-L01 through M3B-L13**. Read its 24-Nov top section over the older historical open-state prose below. The existing Ibrahim `IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact` already pays the **character/Clifford** (8748=729\cdot12, 56862=729\cdot78) half-degree decomposition; the still-open problem is **same-object characteristic-zero matrices and full normalizer/phase action** on actual (S_s=Hom_E(H_s,W_s)), not rediscovery of the constituent integers. Other already-paid inputs: authentic `mmgroup` (E/Z(E)) extraction from user-reported local source, 28 powered finite-field quotient hits, (3B) phase-dimension formula (65610=729\cdot90), and explicit symmetric Heisenberg cocycle correction. The simultaneous *full-group* (C,D) lift still requires source residual/kernel membership and coupled affine/central equations; the (S_s) operator and actual source class-to-word weld require original complex action and selected full 210-class character rows. Certification is P6, **after** endpoint solving.
+
 ## 23 November 2026 — ENDPOINT-FIRST 3B completion: cocycle elimination and actual 90D operator extraction
 
 This section consolidates the source-selected 28 candidate quotient intertwiners, genuine user-reported `mmgroup 1.0.8` E/Z(E) extraction and GAP/CTblLib fusion with the **actual endpoint**. The mathematical reductions are documented in [Monster3BEndpointFirstConstruction20261123](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md). No separate small acceptance script is required to continue the derivation; later full-group kernel/identity checks belong after the endpoint construction.
