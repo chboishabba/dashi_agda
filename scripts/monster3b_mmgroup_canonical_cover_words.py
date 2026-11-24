@@ -124,7 +124,7 @@ def full(manifest,root):
         att["intertwiner_dimension"]!=1):
         raise ValueError("Hit0 no longer matches original ATLAS GF3 source")
     def normalize(word,cols,ell):
-        matrix=[[(-v[6:]+v[:6])[j]%3 for j in range(N)] for v in cols]
+        matrix=[[(-x)%3 for x in v[6:]] + list(v[:6]) for v in cols]
         u=rref_solve(matrix,[(-x)%3 for x in ell])
         if any((ell[i]+omega(u,cols[i]))%3 for i in range(N)):
             raise AssertionError("affine E correction not solved")
