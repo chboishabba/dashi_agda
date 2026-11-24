@@ -2447,3 +2447,131 @@ for a,b in product(range(1,5),repeat=2):
 | LGC7/N6 | Original conditional consumer | existing |
 
 Next geometry-forward: extend source-specific weighted gluing to nontrivial shared orientations, or identify global guard interaction factorization that actually pays the original rank-two scalar rather than the whole matrix. R122 is sharp for its linear interface but a large nu is not a resource lower bound on arbitrary algorithms; even the tensor-product control has cheap scalar contraction. Do not require global stabilizer, optimum separator, full Smith spectrum, or entire message production if the actual consumer bypasses it. Preserve original zero mode, inhabited neutral fibre, signs, actual history/time/k/iteration/creation precision and observer labels. No certification detour, no unrelated PR edits or P!=NP claim.
+
+## 26. R128–R134 — exact general shared-orientation weighted rank, cut factorization and local-field convolution (2026-11-24)
+
+Geometry-forward; stay on Langlands. Directly read mounted pasted R121–127 and G79–83. Live Langlands Agda #1549 48577ab92422904cf8f3df25a829a9c591ea6d10 / Lean #120 266ade6fd1f50aa7ad301ae410ce11380c6156ca, shared blob 364a28fec27af403adf73906d6e76ae4465d56ca. Live G worker Agda #1548 7821f6d2b7efd70919b68f21850af115b73123a1 (attachment c146cbe8c546f35c069b2abc5bcd5cf21cd1439b advanced without roadmap change) / Lean #119 5767912968d2854f3059864d0ebaf8f7a8f8baf7, identical roadmap blob 71e8d067fe40c5a4c3192bde6da0685ba1b8a33f. Credit G79–81 least joint linear-overlap geometry and indexed refinement, G82 full-affine nonlinear encoding, G83 large-separator cheap cardinality control; do not turn any into obligatory channel materialization. R58 affine dual, R85 original actual weighted Weil rank-two probe, R87–89 loss atoms, R102 local inverse, R108 original unweighted shared gluing, R114 syndrome trellis, R121–124 transverse rank and shared-orientation obstruction are direct producers. Existing H05 #1291 / GovernedIndexedResidualCubeExact (previously verified blob 42b70ebb7376813076934f2245ce6011b76f10c8), ConstraintCouplingSearchExact, ObservationSeparatorGeometryExact, IndexedCubeHyperfibreExact remain owners. Classical Edmonds–Lawler matroid intersection min–max/augmentation theorem checked at https://www.extremalcombinatorics.com/optimization/notes/sec_matroidIntersection.html and MIT lecture 11 https://ocw.mit.edu/courses/18-997-topics-in-combinatorial-optimization-spring-2004/e987389ab7a39eac57490805adcec8bc_co_lec11.pdf. Classical Fourier/group-algebra and affine-relation block decomposition credited, JMD attribution boundary retained. New theorem is the exact generic weighted rank with shared orientation, closing R124's restricted interface question; NOT unrestricted SAT cost, no physical H07/H14 promotion or other branch edits.
+
+### R128. General shared-orientation exact rank
+
+Use actual original block x=c+A u+B v+G d, all binary, [A B G] full column rank, a=dim u, b=dim v, delta=dim d. This holds for direct complements of the shared translation space in the original R108 regions. Up to separable row/column signs, original weighted pairing is
+    M_z(u,v)=sum_(d in F2^delta) (-1)^(h dot d) prod_i z_i^(c_i xor A_i u xor B_i v xor G_i d).
+Define the two row matroids L=[B G] and R=[A G] on the SAME original coordinate set E. Let nu_* be their maximum common independent set size, equivalently
+    nu_* = min_(I disjoint J=E) [rank([B G]_I)+rank([A G]_J)].
+Then for ANY coefficient field K, over K(z_1,...,z_w),
+    rank M_z = 2^(nu_*-delta).
+This includes arbitrary shared sign h and characteristic two. Full column rank guarantees nu_*>=delta; nu_*<=delta+min(a,b). R122 is delta=0. R124 upper 2^(delta+nu) is refined since rank([B G]_I)<=rank(B_I)+delta and likewise A. The exponent is invariant under separately changing region bases and adding shared-coordinate combinations to chosen complements. Indeed [B G] and [A G] represent actual full right/left symmetry spaces, independent of complement choice. Row-coordinate weight labels cannot be freely changed by arbitrary linear rechart.
+
+### R129. Upper bound: actual joint affine source across a cut, no independent shared charge
+
+For any partition I,J, consider the affine relation of pairs
+    l=(u,x_I), r=(v,x_J), x=c+A u+B v+G d.
+The map (u,v,d)->(l,r) is injective because G full column rank. Its affine dimension is a+b+delta. Left projection dimension is a+rank([B G]_I); right projection dimension b+rank([A G]_J). An arbitrary affine relation between two vector spaces decomposes into disjoint complete bipartite blocks between cosets of its left-only/right-only kernels: for linear relation T<=L0 direct_sum R0, define K_L={l:(l,0) in T}, K_R={r:(0,r) in T}; matching quotient classes P_L(T)/K_L and P_R(T)/K_R are isomorphic by unique partner class. Affine anchor supplies the translated identification. Number of blocks =2^kappa, kappa=dim P_L+dim P_R-dim T. Thus here
+    kappa(I)=rank([B G]_I)+rank([A G]_J)-delta.
+Extend h on shared d to a binary character ell on original x with ell A=ell B=0 and ell G=h, possible by full column rank. Sign (-1)^(h dot d)=(-1)^(ell dot c) (-1)^(ell_I dot x_I) (-1)^(ell_J dot x_J). Each complete bipartite block contributes a separated product after summing the left/right actual projections with original local weights and signs. There is NO multiplicity error: original (u,v,d) corresponds bijectively to admissible pairs (l,r). This proves a factorization of M through 2^kappa channels over ANY commutative ring, no Fourier divisions, and exact weighted scalar
+    Z=(-1)^(ell dot c) sum_k L_k R_k,
+    L_k=sum_(u,x_I in left block k) f(u)(-1)^(ell_I dot x_I)prod_(i in I) z_i^x_i,
+    R_k=sum_(v,x_J in right block k) g(v)(-1)^(ell_J dot x_J)prod_(i in J) z_i^x_i.
+Gaussian elimination gives actual projection and kernel bases and shared quotient labels without expanding entire relation. Given explicit messages, enumerate each projection independently, accumulate keyed sums, cost O(poly(w)*(2^(a+rank([B G]_I))+2^(b+rank([A G]_J))+2^kappa)) ring operations plus message access, bit cost and other quotient blocks. Choose minimizing partition or another cost-effective valid partition; minimizing channels need not minimize total work. May be more costly than other scalar contractions. Does not require enumerating every d for every pair u,v. Matroid intersection gives min kappa=nu_*-delta. This is the exact generalization of R122's upper bound.
+
+### R130. Lower bound: common independent certificate pins actual shared coordinates
+
+Take maximum common independent row set C, |C|=nu_*. Then G_C has full column rank delta: otherwise some row G_i outside its span exists by full G rank; adding i to C preserves independence in BOTH augmented matrices, contradiction to maximality. Put Q=F2^C/im G_C of dimension k=nu_*-delta. Because [A G]_C and [B G]_C have full row rank |C|, the induced maps Abar_C, Bbar_C onto Q are BOTH surjective. Specialize z_i=0 on C and z_i=1 elsewhere (formal polynomial specialization, 0^0=1; not a nonzero unramified character sample). Then weighted summand survives exactly if
+    c_C+A_C u+B_C v+G_C d=0.
+For a given u,v there is exactly one such d iff their quotient syndromes match after the affine offset. Its coefficient is +/-1; the sign separates in u,v by extending h to a form on F2^C. Choose one u,v per quotient syndrome. The resulting 2^k square minor is a signed permutation matrix, determinant unit in EVERY coefficient field. Thus generic polynomial rank >=2^k. Combined with R129 proves R128 exactly. No need to bound cancellations for arbitrary weight samples. A stronger nonzero finite-order realization follows R131. This closes generic D!=0 rank, not a lower bound on global message production or scalar evaluation.
+
+### R131. Common-independent specialization = signed group-algebra convolution, exact odd-prime Smith and binary unit criterion
+
+Keep z_i=1 outside C, arbitrary weights on C; let ell_C be any extension of shared character h, satisfying G_C^T ell_C=h. After separable row/column signs and translation by c_C, duplicate rows/columns reduce by integral unimodular operations to square convolution matrix N on Q. Define
+    F(s)=sum_(x_C projects to s) (-1)^(ell_C dot x_C) prod_(i in C) z_i^x_i,
+    N_(s,t)=F(s+t).
+In group algebra O[Q],
+    F = prod_(i in C) (1+(-1)^ell_i z_i [e_i mod im G_C]).
+This preserves original shared residual as the actual pushforward of weighted named coordinates, NOT independent invented weights. All quotient characters l in Q^* correspond to linear forms l on F2^C annihilating im G_C. Eigenvalues over characteristic not 2:
+    lambda_l = prod_(i in C) (1+(-1)^(ell_i+l_i) z_i).
+Det N=prod_l lambda_l as integer polynomial identity (prove over Q(z), then specializes in every commutative ring). Over odd-prime DVR, Walsh matrix is unimodular (2 unit), so EXACT nonzero Smith valuations are sorted {v_p(lambda_l)} (infinity means zero invariant, omitted from nonzero Smith list), including extra zero rows/columns in original matrix. Mod p^H required linear channels of this specialization are #l with valuation <H. This is not an arbitrary-unspecialized Smith theorem. R123 transverse case delta=0 is recovered (for each i valuation of product pairs combines to v_p(1-z_i^2) after reordering and unit conditions; at odd prime with both factors units no depth).
+
+In binary coefficient ring, Walsh inversion need not be integral; use determinant/group algebra instead. Reduction mod 2 in residue field gives det N = (prod_(i in C)(1+z_i))^(2^k), since all signs equal. Therefore N is invertible over the unramified binary DVR or its finite quotients iff every selected z_i residue differs from 1. This is realizable with genuine nonzero finite-order Teichmuller lifts in F_(2^m) for m>=2, outside-C weights 1. Thus R128 full rank is not merely formal specialization at zero; actual unramified weights can realize unit channels. Over odd prime choose residue not +/-1 on selected coordinates in a suitable unramified extension for sufficient unit condition. This does NOT replace R85 randomized support sampling or give a universal hitting set: forcing these coordinates or others to 1 may hide other original witnesses. The coefficient field prime and residue extension remain independent of actual original W_Q3 ramification and Frobenius. At z=1 all original shared orientations inhabited; with trivial h unweighted matrix entries 2^delta, with nontrivial h signed sum cancels. Modulo binary precision<=delta may report zero even in trivial h case. Keep actual source zero mode, signed character residual and sample/precision separately.
+
+### R132. Indexed hyperfabric, G79–83 and actual cost boundary
+
+The new certificate belongs to the actual source block and weight consumer, retaining history, event time tau, refinement/chart k, Frobenius iteration j, version, creation/requested precision, coefficient ring, sample and original named coordinate/affine anchor data. Rank partition, common independent set, shared subspace basis and quotient syndrome labels are dependent residual data. Invertible region basis change preserves both augmented matroids. If a new event changes original subspaces, use G81 actual shared dependency refinement and recompute/certify new block; do not treat monotone quotient enlargement as automatically independent or rechart as physical time. H05 original six faces, R87–89 gain/loss atoms, R96 carry and R114 coordinate trellis remain independently typed. When the actual original weights and messages factor, use G79–80 regional independence or G83's nonlinear sector aggregation first; large nu_* does NOT imply necessary exponential time. Example R124 A=e1,B=e2,G=(1,1,1): nu_*=2,delta=1,k=1, exact generic rank2 even though transverse nu=0. If shared space occupies entirely separate original coordinates from A,B, it supplies scalar weights only; aug matroids automatically subtract shared dimension once, and rank can stay 1. This resolves the prior shared-orientation rank question without turning it into compulsory linear state expansion. G82's nonlinear code decoding and G83's cardinality transfer remain admissible. No mandatory optimal global separator/stabilizer search or materialization; R7b'/c still open. Actual R85 D_t=3A(z)-4P_t(z) is unchanged; gluing is a valid exact producer for P_t(z) when actual regional hypotheses hold, not a polynomial algorithm for arbitrary SAT.
+
+### R133. Executed exact regression and implemented certificate discovery
+
+Actual local /tmp/langlands_r128.py used exact Python integer bitset Gaussian elimination, BFS augmenting paths, modular elimination, and SymPy rank/determinant/Smith. 324 random full-column-rank arrangements (a,b=1..3,delta=0..2,12 each) with exhaustive reference maximum common independent set, 324 rational pinned-specialization ranks, 972 pinned ranks mod 2/3/5, 324 arbitrary signed integer sample rank upper checks, 1296 cut scalar checks mod 2/8/9/125, 324 exact signed quotient convolution determinants, 648 odd-prime Smith spectra (3,5). TOTAL 4212 comparison groups passed. Actual polynomial augmenting algorithm now implemented (not just exhaustive discovery), test harness still exhaustively validates small cases and computes small affine blocks by enumeration as independent oracle; no integrated production message engine/runtime benchmark, no CI/native kernel. No empirical finite extension arithmetic in this round; binary unit criterion proved by determinant identity, not claimed Teichmuller test. Compact reproduction of ACTUAL augmentation and rank checks:
+```python
+from itertools import product
+from random import Random
+from collections import deque
+from math import prod
+from sympy import Matrix, ZZ
+from sympy.matrices.normalforms import smith_normal_form
+def rank(xs):
+ b={}
+ for x in xs:
+  while x:
+   p=x.bit_length()-1
+   if p in b:x^=b[p]
+   else:b[p]=x;break
+ return len(b)
+def mi(A,B):
+ E=set(range(len(A)));S=set()
+ def ind(M,T):return rank(M[i] for i in T)==len(T)
+ while True:
+  O=E-S
+  Q=deque(i for i in sorted(O) if ind(A,S|{i}));prev={i:None for i in Q};end=None
+  while Q:
+   i=Q.popleft()
+   if i in O:
+    if ind(B,S|{i}):end=i;break
+    N=[j for j in S if ind(B,S-{j}|{i})]
+   else:N=[j for j in O if ind(A,S-{i}|{j})]
+   for j in sorted(N):
+    if j not in prev:prev[j]=i;Q.append(j)
+  if end is None:
+   J=set(prev);I=E-J
+   assert rank(A[i] for i in I)+rank(B[i] for i in J)==len(S)
+   return S,I,J
+  path=set()
+  while end is not None:path.add(end);end=prev[end]
+  S^=path
+  assert ind(A,S) and ind(B,S)
+def bit(x):return x.bit_count()&1
+def mat(A,B,G,c,h,z,a,b,g):
+ return [[sum((-1)**bit(h&d)*prod(z[i]**(bit(A[i]&u)^bit(B[i]&v)^bit(G[i]&d)^(c>>i&1)) for i in range(len(z))) for d in range(1<<g)) for v in range(1<<b)] for u in range(1<<a)]
+rng=Random(369)
+for a,b,g in product(range(1,4),range(1,4),range(3)):
+ for _ in range(12):
+  n=rng.randrange(a+b+g,a+b+g+4)
+  while True:
+   A=[rng.randrange(1<<a) for i in range(n)];B=[rng.randrange(1<<b) for i in range(n)];G=[rng.randrange(1<<g) for i in range(n)]
+   if rank([x|(y<<a)|(z<<(a+b)) for x,y,z in zip(A,B,G)])==a+b+g:break
+  L=[y|(z<<b) for y,z in zip(B,G)];R=[x|(z<<a) for x,z in zip(A,G)]
+  C,I,J=mi(L,R);k=len(C)-g
+  assert rank(G[i] for i in C)==g and 0<=k<=min(a,b)
+  assert len(C)==max(m.bit_count() for m in range(1<<n) if rank(L[i] for i in range(n) if m>>i&1)==rank(R[i] for i in range(n) if m>>i&1)==m.bit_count())
+  c=rng.randrange(1<<n);h=rng.randrange(1<<g)
+  N=mat(A,B,G,c,h,[0 if i in C else 1 for i in range(n)],a,b,g)
+  assert Matrix(N).rank()==2**k
+  z=[rng.randrange(-2,4) for i in range(n)]
+  assert Matrix(mat(A,B,G,c,h,z,a,b,g)).rank()<=2**k
+```
+Full local test additionally: form projection adjacency (u,x_I),(v,x_J) by enumerating all (u,v,d) for the small harness; group left vertices by their identical right-neighborhood sets, confirm each group complete bipartite and 2^k groups, extend sign ell by exhaustive small reference, compare weighted group sums with direct scalar in four rings. For each C enumerate im G_C, canonical coset reps, extend h to ell_C, compute F(s), N(s,t)=F(s+t); enumerate annihilator characters, compare N.det to product lambda_l and Smith valuations at primes 3/5. Modular pinned rank via ordinary elimination. Actual full test interleaves random draws for weights/messages and convolution weights, so compact script's random sequence differs. This is finite exact evidence for the derived theorem, not a substitute for proof.
+
+### R134. Endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R128 | sharp general shared-orientation generic rank 2^(nu_*-delta) | derived; R124 generic rank OPEN closed |
+| R129 | actual affine cut block factorization and costed division-free scalar producer | derived, tested |
+| R130 | actual shared-coordinate pinning, full minor over every characteristic | derived, tested |
+| R131 | signed quotient convolution, odd-prime Smith and binary unit criterion | derived, tested determinant and odd Smith; binary unit algebraic |
+| R132 | indexed geometry and consumer residual, G79–83 admitted | derived |
+| R133 | polynomial augmenting certificate implementation and exact local regression | executed |
+| R7a'/LGC4d | global paid weighted contraction of repeated original guard dependencies after semantic reductions | OPEN |
+| R7b'/LGC5 | unrestricted unavoidable deterministic cost allowing arbitrary nonlinear/shared computation | OPEN P0 |
+| R7c/LGC6 | literal Clay uniform separation or sufficient central-slice route | OPEN P0 |
+| LGC7/N6 | original conditional consumer | existing |
+
+Next geometry-forward: exact weighted gluing rank is now solved in the entire affine shared-orientation class, so do NOT keep measuring larger compulsory linear interfaces. Use the actual cut factorization when cheaper, G79–80 genuine independent regional contraction, G82 decoding and G83 nonlinear sector aggregation. Investigate actual nonlinear composition of the repeated original guard factors, including shared scalar circuit reuse or a direct uniform-machine obstruction, rather than deriving further rank proxies. General global contraction and unrestricted Clay endpoints remain unpaid. Retain actual zero mode, inhabited neutral fibre, signed residual, separate history/time/k/Frob/version/precision/consumer indices. No certification detour, no unrelated PR edits or P!=NP claim.
