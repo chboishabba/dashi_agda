@@ -851,3 +851,78 @@ explicitly deferred.** Full proof,
 newly indexed P/Q/T source contracts,
 cost ledger and references:
 \`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+
+
+## 24 November — COMP5s: exact projective source and output-precision-indexed peak scheduling (UNTESTED)
+
+**P0 endpoint:** pursue fastest *independently certified* pi with
+correct source and cost. At user's explicit direction, testing,
+native compilation, benchmarks, Agda/Lean, CI and external SOTA
+comparison stay **deferred**. COMP5j measured historical results
+are unchanged and NOT reassigned to this candidate.
+
+New connected implementation:
+- \`scripts/pi_p0_projective_precision_schedule.hpp\` —
+  bounded-depth source-width planner with recorded
+  output demand (decimal digits, root working bits),
+  modelled branch peak, modelled P/Q/T widths and
+  separately charged C++ plan heap. It chooses only
+  evaluation order of the two child computations;
+  original matrix merge remains ordered.
+- \`scripts/check_pi_p0_precision_projective_schedule.cpp\` —
+  exact COMP5r normalized leaves, guaranteed factor
+  24 and indexed prime content \(h_j\) computed
+  from original small factors; positive scalar
+  \(\prod 24h_j\) retained as a deterministic
+  interval/source recipe. A callable
+  \`reopenOriginalRawSource\` reconstructs literal
+  original P/Q/T if requested, charging the
+  recomputed big-integer scale. Fast pi consumer
+  DOES NOT call this expensive reopening.
+
+**Source identity, no precision truncation:** the
+original \(2\times2\) upper-triangular Chudnovsky
+\((P,Q,T)\) matrix is unchanged up to the exact
+positive scalar \(G(a,b)\). The original leaf
+order, signed parity, zero mode, next-term
+residual and exact one-floor dyadic certificate
+are retained. Only independent subtree
+*execution* order is allowed to vary.
+The working precision controls which large
+subtrees merit forecast planning, NOT whether
+source P/Q/T limbs may be dropped.
+
+The planner forecasts integer carrier sizes
+from exact original leaf-factor **inequalities**
+on \(|p'_j|\), \(q'_j\) and \(|T/Q|\),
+numerically approximated by \`lgamma\` and
+\`log2\` ONLY for scheduling. It chooses
+between \(p_{L\to R}=\max(p_L,s_L+p_R,m)\)
+and \(p_{R\to L}=\max(p_R,s_R+p_L,m)\)
+at top levels. Unplanned subtree cost and
+GMP merge scratch remain estimated, **not**
+a mathematically certified or empirically
+calibrated optimal memory schedule.
+Actual source values are never
+truncated by this estimator.
+
+Separate \`FIBRE\` coordinates include
+source scale recipe; selected sign and
+original cutoff; scheduling precision,
+plan nodes, right-first decisions,
+predicted peak and C++ plan allocation;
+original GMP allocated peak and final
+decimal certificate. Do not identify
+model peak with actual physical RSS or
+with a kernel execution-cost theorem.
+
+Complete math, producer/consumer source
+coordinates, positivity and original-source
+proof obligations plus S1–S6 roadmap:
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+Any future actual P/Q/T truncation requires
+an independent error/strict-boundary
+admission proof; no such work is claimed.
+Original analytic Chudnovsky identity,
+Bishop same-original-real and independent
+world SOTA comparison remain OPEN.
