@@ -58,3 +58,64 @@ def load(path,identity):
         X=z['X'].copy(); k=int(z['k'])
     if X.ndim!=4 or X.shape[:2]!=(6,3) or k<0 or not np.isfinite(X).all(): raise ValueError('invalid checkpoint')
     return X,k
+
+
+def rhs_transpose(Y,dr,dy,b,v,route):
+    """Euclidean VJP of the homogeneous six-channel RHS on active radial nodes.
+    Uses the original weighted4 transpose; affine prescribed source has zero VJP.
+    """
+    from warp_stage_adjoint import transpose
+    if route not in ('paired','ledger'): raise ValueError('explicit route required')
+    Y=Y.copy();Y[..., -1]=0
+    out=np.zeros_like(Y)
+    out[:3]=transpose(Y[:3],dr,dy,b,v,4)
+    a,c=(1+v)/2,(1-v)/2
+    z=b+dy*np.arange(Y.shape[-2])
+    B=z**-3;B[[0,-1]]*=.5;B=B[None,:,None]
+    # C^T=B C^dagger B^-1 and (C^dagger)^T=B C B^-1.
+    def CT(x):return B*defect(x/B,b,dy,True)
+    def CdT(x):return B*defect(x/B,b,dy)
+    if route=='paired':
+        p=Y[1]+Y[2]
+        q=(1-v)*Y[1]-(1+v)*Y[2]
+        w=-CT(q)
+        n=(1-v*v)*CdT(p)
+    else:
+        w=CT(Y[3]);n=np.zeros_like(w)
+    out[1]+=a*w+n/2
+    out[2]+=c*w-n/2
+    out[1,:,0,:]-=(1+v)*Y[4,:,0,:]/dy
+    out[2,:,0,:]+=(1-v)*Y[4,:,0,:]/dy
+    out[1,:,-1,:]-=(1+v)*Y[5,:,-1,:]/dy
+    out[..., -1]=0
+    return out
+
+def reverse_step(Y,T,dt,coeff,dr,dy,route):
+    """Transpose of actual Shu-Osher step with original stage clocks."""
+    def BT(y,t):
+        v,b,_=coeff(t)
+        return y+dt*rhs_transpose(y,dr,dy,b,v,route)
+    l2=2*BT(Y,T+dt/2)/3
+    l1=BT(l2,T+dt)/4
+    return Y/3+3*l2/4+BT(l1,T)
+
+def receiver_defect_ledger(observations,errors,defects,T0,dt,coeff,dr,dy,route):
+    """Signed endpoint identity for e[n+1]=E[n] e[n]+d[n].
+    All arrays on the same fine carrier; observation/source offsets external.
+    Return per-mode signed terms, never aggregate multipoles before checking.
+    """
+    if len(errors)!=len(observations) or len(defects)+1!=len(errors):
+        raise ValueError('inconsistent indexed ledger')
+    def contract(a,b):return np.sum(a*b,axis=(0,2,3))
+    lam=observations[-1].copy();terms=[]
+    for n in range(len(defects)-1,-1,-1):
+        terms.append(contract(lam,defects[n]))
+        lam=observations[n]+reverse_step(lam,T0+n*dt,dt,coeff,dr,dy,route)
+    terms=np.asarray(terms[::-1])
+    initial=contract(lam,errors[0])
+    actual=sum(contract(o,e) for o,e in zip(observations,errors))
+    predicted=initial+terms.sum(axis=0)
+    bound=abs(initial)+abs(terms).sum(axis=0)
+    if not np.all(np.isfinite([actual,predicted,bound])) or not np.all(abs(actual-predicted)<=1e-9*np.maximum(1.,bound)):
+        raise ValueError('signed endpoint closure failed')
+    return dict(actual=actual,initial=initial,terms=terms,predicted=predicted,absolute_bound=bound)
