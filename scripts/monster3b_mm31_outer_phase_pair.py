@@ -153,6 +153,11 @@ def main():
                     "actual_C2_on_90_mod31.npz","actual_D_12_78_vacuum_sandwich_mod31.npz",
                     "actual_CDCinv_12_78_vacuum_sandwich_mod31.npz"):
                 source_hashes[label+"/"+filename]=hashlib.sha256((folder/filename).read_bytes()).hexdigest()
+            ambient=folder/"ambient_basis_rows_mod31.npz"
+            if not ambient.is_file():ambient=folder/"ambient_basis_rows.npz"
+            source_hashes[label+"/"+ambient.name]=hashlib.sha256(ambient.read_bytes()).hexdigest()
+        record["manifest_sha256"]=hashlib.sha256(a.manifest.read_bytes()).hexdigest()
+        record["cover_sha256"]=hashlib.sha256(a.cover.read_bytes()).hexdigest()
         record["source_packet_sha256"]=source_hashes
         record["canonical_C_word"]=cover["canonical_C_word"]
         record["canonical_D_word"]=cover["canonical_D_word"]
