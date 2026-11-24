@@ -1486,19 +1486,19 @@ Thus source-indexed BIDI recovery
 does NOT mean naive multiplication
 of each Euclidean remainder by
 \(G\). The optional reconstruction
-helper is \`reopenRawDyadicFibre\`;
+helper is `reopenRawDyadicFibre`;
 the fast certificate does not call it.
 
 New files:
-\`scripts/pi_p0_dyadic_sector_contraction.hpp\`
-and \`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`.
+`scripts/pi_p0_dyadic_sector_contraction.hpp`
+and `scripts/check_pi_p0_dyadic_sector_schedule.cpp`.
 The original source identity, signed
 orientation, Chudnovsky analytic/tail
 assumptions, Bishop same-real
 and source-authentication obligations
 remain distinct. Source derivation and
 P0 roadmap S13–S19:
-\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
 No compilation, benchmark, numerical
 test, proof-assistant kernel run or
 new world-record claim this tranche.
