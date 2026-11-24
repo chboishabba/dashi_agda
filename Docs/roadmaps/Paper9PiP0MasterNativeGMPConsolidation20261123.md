@@ -1180,3 +1180,110 @@ links are in
 profiling and SOTA comparison
 are all deferred by user instruction.**
 No new quantitative result.
+
+
+## 24 November — COMP5w: quotient-only common path; lower remainders eliminated (TESTING DEFERRED)
+
+The user-directed next exact geometric cut from COMP5v
+is a **separate UNTESTED candidate**. The original
+measured COMP5j, source-complete COMP5t, dyadic
+COMP5u, and shared-radical COMP5v are unchanged.
+No runtime, latency, memory or world-record
+performance figure is attributed to COMP5w.
+
+New files:
+`scripts/pi_p0_lazy_lower_sector.hpp` and
+`scripts/check_pi_p0_lazy_lower_schedule.cpp`.
+They keep the literal original Chudnovsky
+ordered P/Q/T leaf signs, exact positive
+prime-local projective gauge, original
+affine-edge producer, source scale recipe,
+n/d/b indexing, and source-only suffix
+versus radical-only guard continuation.
+
+Let \(H=426880\,5^d\), \(k=b-d\),
+\(R=\lfloor2^b\sqrt{10005}\rfloor\)
+and signed adjacent rational source
+endpoints \(N_l/D_l,N_h/D_h>0\).
+Preserve COMP5v's *single*
+common product \(Z=H Q'\), \(Y=ZR\).
+Then for even n \(A=qY,W=Y+Z\);
+for odd n \(A=Y,W=q(Y+Z)\).
+The identical conservative π
+floor \(x\) is computed using only
+
+\[
+x=\left\lfloor
+\frac{\lfloor A/2^k\rfloor}{N_h}\right\rfloor.
+\]
+
+The source's actual GMP path uses
+`mpz_fdiv_q_2exp` and
+`mpz_fdiv_q`, not divmod:
+neither \(\rho\) nor \(\ell\)
+is allocated on the ordinary
+path **or** exceptional path.
+The upper witness
+\(u=\lfloor W/2^k\rfloor
+<(x+1)N_l\) remains unchanged.
+Only when it fails does the
+candidate build \(\eta=W\bmod2^k\)
+and the original signed correction
+\(\lfloor(\eta-HD_l)/2^k\rfloor\).
+
+The G12 lower-residue/root crossing
+sector can be checked WITHOUT
+constructing \(\rho,\ell\):
+the opposite-series upper-root
+numerator \(H(R+1)D_h\) is
+\(\boxed{qW}\) for even n or
+\(\boxed{W/q}\) for odd n.
+The odd division is exact by
+original source construction, with
+a fail-closed divisibility guard.
+One late q multiply or exact
+divide and a dyadic shift recover
+the identical COMP5u/v three-way
+sector decision. If the source
+is truly blocked, reconstruct
+the signed affine P and append
+only the real indexed suffix;
+otherwise increase only
+root precision b. The source
+zero mode and invalid signs
+remain rejected states, not
+quotient zero.
+
+The precise S26–S32 ledger
+and both-parity equivalence proof
+are in
+`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md`.
+Actual GMP peak/bit-cost may rise
+or fall: the exceptional q division
+and source replay are real costs,
+and a quotient-only API is not
+guaranteed faster than GMP divmod.
+Structural counters track the
+two quotients, zero lower
+remainders, upper failure-only
+remainder, late parity reopening,
+and root/source retry costs.
+G14 raw-source dyadic carry
+is retained as an OPTIONAL
+consumer; raw remainders are
+not fabricated from a decimal
+hash or normalized observation.
+The integrated candidate is
+not promoted into the original
+six-way benchmark runner.
+
+**Per ongoing explicit user
+deferral**, no exact-source C++
+compilation, benchmark, Python/
+SymPy execution, GitHub CI,
+Agda/Lean formal kernel or
+external SOTA comparison was
+performed in this tranche.
+Analytic Chudnovsky/Bishop
+same-real and exact-source
+acceptance remain OPEN.
