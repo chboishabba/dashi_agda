@@ -1610,7 +1610,7 @@ experimental equivalence certificate.
 ### G16 — failure-only remainder construction and selected cost fibres
 
 Original COMP5u always computes \(\eta\)
-using \`mpz_fdiv_qr_2exp\` on \(W\)
+using `mpz_fdiv_qr_2exp` on \(W\)
 before knowing whether the first strict
 upper comparison succeeds.
 COMP5v first computes the upper
@@ -1661,7 +1661,7 @@ or \(q(Y+Z)\) (odd) and on-demand
 Neither the arithmetic bit cost
 nor actual GMP peak is thereby
 proved lower for all n,b,d.
-The source's \`Counts\` ledger
+The source's `Counts` ledger
 separately records base creation,
 single shared radical product,
 parity \(q\) products, two lower
@@ -1715,12 +1715,12 @@ original signed tail.
 
 ### COMP5v source owners and next gates
 
-- \`scripts/pi_p0_shared_radical_sector.hpp\`:
+- `scripts/pi_p0_shared_radical_sector.hpp`:
   original-source sign-checked
   common-factor and three-sector
   consumer, with lazy \(\eta\)
   on failure and primitive counters.
-- \`scripts/check_pi_p0_shared_radical_schedule.cpp\`:
+- `scripts/check_pi_p0_shared_radical_schedule.cpp`:
   integrated COMP5u-derived independent
   GMP candidate, unchanged full-precision
   original P/Q/T projective leaf
