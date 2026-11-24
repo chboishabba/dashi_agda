@@ -493,3 +493,44 @@ with centered representatives. We checked all **517** integer pairs satisfying t
 **Original source projective cocycle and outer map without Steel matrices:** [the existing MMV original projector](../../scripts/monster3b_actual_mmv31_hom_projector.py) now supports genuine \(MMV(31)\) *and* \(MMV(127)\), marked ζ/ζ⁻¹ independently (31:5/25, 127:19/107), retaining the original 90D source vacuum and 12/78 blocks. It computes exact original source group-word sandwich products for \(D,E\) and checks the correct RIGHT-action cocycle \(E_0D_0=\alpha(D,E)(DE)_0\), \(D_0E_0=\alpha(E,D)(ED)_0\). The new [paired-MM outer C source](../../scripts/monster3b_mm31_outer_phase_pair.py) reconstructs the actual Monster modular 90D ζ/ζ⁻¹ bases from original saved source probes and computes \(C\) between them and \(C^2\)-comparisons up to the observed Weil scalar; 12D/78D paired blocks are extracted only when their actual source action preserves the selected eigenspaces.
 
 **Exact unresolved endpoint:** the same original \(6.\mathrm{Suz}\) source inner word/gauge and coherent 729D Weil scalar need to be solved to turn the modular bounded-character *candidates* into a literal ordinary faithful12 group representation and a full characteristic-zero \(\operatorname{Hom}_E(H_s,W_s)\) intertwiner. The \(\mathbb F_3\) quotient, \(\mathbb F_{31}\) and \(\mathbb F_{127}\) modular Monster actions, exact source 4D class and original complex Monster object remain separately typed; no stage has claimed to identify an original char0 matrix without an original field/basis lift. **The already existing Steel Magma source is useful numerical input, not a mathematical precondition for the new bounded-character theorem or literal class criterion.**
+
+
+## 24 November 2026 — canonical P5 correction: the existing 729 Weil source already pays the kernel and relator-specific gauge
+
+The primary 729-dimensional work was **already present** in the original Schrödinger/Heisenberg and TOE compiler owners, not a missing future producer. [The canonical original 729 source audit and exact relator work](../../physics/Monster3BExisting729WeilSourceReuseAndRelatorWeld20261124.md) now connects those existing contributions to the actual Monster normalizer P5 ledger. The existing \`Monster3BFiniteSchrodingerFullActionLawExact\`, \`FiniteSchrodingerPointProjectorExact\`, \`AtlasSymplecticSimilitudeHeisenbergLiftExact\`, \`Monster3BNormalizerCocycleCancellationExact\`, \`IbrahimMonster3BLinearMultiplicityHomSpaceExact\` and \`scripts/toe_cyclotomic_operator.py\` supply the literal finite-model 729, point projectors, q-corrected \(12D\) symplectic/anti-symplectic conjugation, exact support/cyclotomic Weil phases and inverse-cocycle theorem. No new 729 basis or generic projective representation is invented here.
+
+For source \(M_g\) in the original six-position/six-modulation chart, set \(r_g=\mathrm{rank}(M_g)_{a,b}\), \(\Delta=\zeta_3-\zeta_3^2\), \(\Delta^2=-3\), and let \(K_{g,s}\) denote the previous \`toe_cyclotomic_operator.compile_shape\` **unnormalized** original kernel. Choosing the declared model gauge \(\widetilde K_{g,s}=\Delta^{-r_g}K_{g,s}\), its exact zero-vacuum coefficient is **already determined** by the existing Weil phase/support polynomial:
+\[
+\boxed{\kappa_{g,s}=\langle e_0,\widetilde K_{g,s}e_0\rangle
+=\begin{cases}\Delta^{-r_g}\zeta_3^{q_{g,s}(t_0)}&y_0+B t_0=0,\\0&0\notin\mathrm{supp}(K_{g,s}e_0).\end{cases}}
+\]
+The unique \(t_0\) follows from the already established source rank-\(r_g\) support basis; \(\kappa=0\) is a legitimate geometric obstruction, not an invertible unknown scalar. The original compiler's overall scalar gauge must not be silently equated to the original Monster 729-factor gauge.
+
+The new [source-compatible one-column Weil model compiler](../../scripts/monster3b_original729_weil_source_cocycle_weld.py) imports the previous TOE kernel, consumes authentic corrected MM C/D quotient matrices, and derives \(\kappa_{D,s},\kappa_{CDC^{-1},s},\kappa_{C,s}\), the projective multiplier
+\[
+\widetilde K_{g,\lambda_hs}\widetilde K_{h,s}
+=\alpha_s(g,h)\widetilde K_{gh,s},\qquad
+\alpha_s(g,h)\in\mu_6,
+\]
+and the exact quotient relator seventh-power using only one kernel column and a fast \(\mathbb F_3\) support inverse. The [existing model versus actual source vacuum consumer](../../scripts/monster3b_original729_actual_vacuum_weld.py) additionally tests the genuine \(\mathrm{MMV}(31)\) projected 90D D/E product scalar
+\[
+\boxed{\beta_s(D,E)=
+\frac{\kappa_{D,s}\kappa_{E,s}}
+     {\alpha_s(D,E)\kappa_{DE,s}}}
+\]
+in the **right** MM action convention, preserving zero/nonscalar/orientation counterexamples rather than claiming a fictitious positive weld. If the same source identification holds, this yields genuine modular \(12D/78D\) matrices normalized in the **declared 729 projective gauge**, not automatically honest ordinary characteristic-zero 6Suz operators.
+
+**Exact original ATLAS numerical donor, both marked \(\zeta,\zeta^2\) phases, no Magma:** from the authentic SHA-pinned \(2.\mathrm{Suz}:2\) \(C,D,J,P\) matrices (original \`check_toe_atlas_mirror.py\`), reuse of the earlier 729 kernel gives \(\kappa_C=-1/3\), \(\kappa_D=\kappa_{CDC^{-1}}=\kappa_{DE}=\kappa_{ED}=\kappa_R=-1/27\), \(\alpha(D,CDC^{-1})=\alpha(C,C)=1\), and
+\[
+\boxed{\widetilde K_{R,s}^{\,7}=I_{729},\qquad
+        R=cdcdcddcdd,\quad s=1,2.}
+\]
+The original quotient order7 \(R\) and exact cocycle staircase \((1,-1,1,-1,1,1)\) were calculated locally from those source values. [Original ATLAS 729 replay](../../scripts/check_monster3b_atlas_source729_relator.py) is committed. These scalar values belong to the **ATLAS chosen polarization**; the actual user-local MM B-vacuum can have different coefficients, so the correct MM-chart compiler must be used before dividing its original modular operators.
+
+**Exact full-Monster signed relator:** user-reported authentic corrected MM \(R^7=z_{3B}\neq1\) is *not* the quotient R⁷=1. For an arbitrary source-compatible 729 Weil model \(K_R^7=\gamma_s I\) with \(\gamma_s\in\mu_6\), the cyclic order-seven scalar is uniquely fixed (since \(\gcd(7,6)=1\)) by \(K_R^{\mathrm{ord7}}=\gamma_s^{-1}K_R\). It follows algebraically that any same-actual-\(W_s\simeq H_s\otimes S_s\) identification in this chosen order-seven Weil gauge must satisfy
+\[
+\boxed{(L_{R,s}^{\mathrm{ord7}})^7=\zeta_3^s I_{90}.}
+\]
+This pays the **relator-specific 729 scalar mathematical obstruction** without running Magma or independently constructing a 729 operator. The still-genuine terminal obligations are a globally coherent \(6.\mathrm{Suz}.2\) scalar/outer source-word selection, the original 729-to-actual Monster W_s basis/evaluation identification, the exact ordinary same-Hom 12/78 matrices, and literal corrected MM C→Monster 4D. None follows solely from matching dimension, quotient character class or these finite-model coefficients.
+
+Attribution: original ATLAS/AtlasRep, Barraclough–Wilson, finite Weil theory, original TOE and finite-Heisenberg code, Dietrich–Lee–Pisani–Popiel Monster words and Ibrahim's original phase/multiplicity/Hom sources. Preserve the original signed central \(R^7=z\), diagonal class20 versus extraspecial centre, zero-vacuum, phase and model-chart distinctions; P6 certification remains after endpoint mathematics.
