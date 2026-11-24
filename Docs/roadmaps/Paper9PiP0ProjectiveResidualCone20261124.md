@@ -763,6 +763,17 @@ proof, which remains open.
 
 ## 24 November — COMP5s: output-precision-indexed projective source execution DP (testing deferred)
 
+Additional **source producer work** is explicitly counted in the new
+C++ FIBRE receipt: `leaf_prime_content_calls`,
+`leaf_small_mod_checks`, `leaf_small_div_steps` and
+`leaf_exact_gmp_division_calls`. These are native
+operation counts, not measured time or formal bit complexity.
+Optional reverse opening is *not* invoked on the fast π
+path, and its independent multiplication/work bill remains
+an OPEN consumer-specific cost. The model's reported plan
+object payload excludes malloc overhead; GMP hooks do not
+measure ordinary C++ planner allocations.
+
 **User goal:** combine actual COMP5r source-local
 projective normalization with consumer-specific
 evaluation scheduling, and retain signed residual,
@@ -773,21 +784,21 @@ measured COMP5j or the six-way acceptance runner.
 
 ### Owner and actual source files
 
-- \`scripts/pi_p0_projective_precision_schedule.hpp\`
+- `scripts/pi_p0_projective_precision_schedule.hpp`
   implements a bounded-depth, source-width-based
   binary-tree execution planner. Its precision index
   comes from the current output demand \(d\) and
   the original dyadic square-root working bit index
   \(b\), not from a made-up model clock.
-- \`scripts/check_pi_p0_precision_projective_schedule.cpp\`
+- `scripts/check_pi_p0_precision_projective_schedule.cpp`
   derives directly from the original COMP5r C++ leaf
   producer and GMP certificate. Every original
   positive-index leaf is divided by the **exact**
   source factor \(24h_j\) from the prime support
   \(\{3,5,23,29\}\), and no generic GMP gcd is
   required. A separately callable receipt
-  \`ProjectiveSourceReceipt{begin,end}\` and
-  \`reopenOriginalRawSource\` construct \(G(a,b)\)
+  `ProjectiveSourceReceipt{begin,end}` and
+  `reopenOriginalRawSource` construct \(G(a,b)\)
   only when a consumer actually requests raw P/Q/T.
 
 ### Source-complete, homogeneous geometry
@@ -862,7 +873,7 @@ then \(T=0\) exactly, rather than an
 arbitrary small nonzero positive value.
 
 The implementation evaluates these
-formulae with \`std::lgamma\` in floating
+formulae with `std::lgamma` in floating
 arithmetic and adds slack to estimate
 \((w_P,w_Q,w_T)\) and the P/Q/T carrier
 bytes \(s\). The floating forecasts are
@@ -916,20 +927,20 @@ malloc fragmentation and CPU time.
 No proof of globally optimal memory
 scheduling or speed improvement follows.
 
-The source's \`FIBRE\` receipt separates
-\`schedule_precision_bits\`,
-\`schedule_plan_nodes\`,
-\`schedule_merges\`,
-\`schedule_right_first\`,
-\`schedule_predicted_peak_bytes\`
-and \`schedule_cpp_plan_object_payload_bytes\`
-from actual \`gmp_peak_live_bytes\` and
+The source's `FIBRE` receipt separates
+`schedule_precision_bits`,
+`schedule_plan_nodes`,
+`schedule_merges`,
+`schedule_right_first`,
+`schedule_predicted_peak_bytes`
+and `schedule_cpp_plan_object_payload_bytes`
+from actual `gmp_peak_live_bytes` and
 Linux VmHWM. The C++ plan object's payload-byte estimate is
-\`planNodes*sizeof(Plan)\`: it excludes allocator overhead and
+`planNodes*sizeof(Plan)`: it excludes allocator overhead and
 is **not** total measured C++ heap allocation. Neither
 ordinary C++ planner allocation nor OpenSSL allocation is
 covered by the GMP allocation hooks.
-The normal \`FC\` measured source
+The normal `FC` measured source
 operand-width and explicit carrier
 observations remain separate from
 the heuristic peak forecast.
@@ -963,7 +974,7 @@ never hidden in a coarse observed
   construction supplied; original Agda
   proof instantiation still OPEN).
 - **S2 projective-to-source:** callable
-  \`reopenOriginalRawSource\` reconstructs
+  `reopenOriginalRawSource` reconstructs
   the literal triple with charged
   factor recomputation. This preserves
   algebraic reversibility, not
@@ -1002,13 +1013,13 @@ never hidden in a coarse observed
   user's testing deferral.
 
 This reuse is owned by the existing
-\`FibreProgramComplexityExact.agda\`
+`FibreProgramComplexityExact.agda`
 sum/peak path formalism,
-\`EfficientRecoverableQuotientExact.agda\`
+`EfficientRecoverableQuotientExact.agda`
 construction/reopen separation,
-\`StreamingResidencyComplexityErrorDNABidiExact.agda\`
+`StreamingResidencyComplexityErrorDNABidiExact.agda`
 memory semantics, and
-\`QueryFactorisationSufficiency.agda\`
+`QueryFactorisationSufficiency.agda`
 consumer-specific descent.
 The full indexed hyperfabric identity
 is \emph{not} assumed for an unrelated
