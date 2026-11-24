@@ -755,3 +755,104 @@ Sources: Serre, *Local Fields*, Artin conductor filtration (LMFDB https://www.lm
 | LGC7/N6 / E | Original Clay endpoint via standard cost model | conditional source consumer, no unconditional producer |
 
 Next consolidated mathematical target: determine what extra global constraints of the actual selector norm network force charged progress even with the R33 quotient gates and R31 shared signed contraction. Do not try to prove arbitrary honest representation transport is monotone, or charge every independent mask/character/cocycle term. R32 supplies a precise monotone baseline, R33 a mandatory unrestricted escape. No generic certification programme or other Millennium prerequisite.
+
+## 13. R36–R42 — same-object selector projectors, weight-section gluing and logarithmic quotient escape (2026-11-24)
+
+Stay on Langlands. User supplied Monster #1545 direct source character-idempotent/Hom construction and attachments of R28–35 plus G20–21 (inhabited zero, masked dual rails, negative-evidence orbit covering). Actual live heads: #1545 197b0d5f92dd7418b63918507e2a104bccbb6886; #1548 e8afe2cba4e36e2d1a698105b195d4783b3a2422 / #119 05642355ac3e043aa472f5e072933e3647aa0062; #1549 3289f1851895ed4845d2a2c835f3f2b551b2541f / #120 7e52e18442b4c5de267b50f81eb6a7b27dbc8aed. Keep G20–21 ownership there, no Monster edits. Source donor inspected: Docs/roadmaps/Monster3BEndpointFirstConstruction20261123.md blob 7f97a0f5a473c9171c87870f17a1f8cc4b20808c, M3B-L11S explicitly conditional on R_actual source character/word attachment; E_17496/E_113724 commute with phase projectors, Hom ranks 12/78, actual basis/word matrices remain open. Do not infer source identity from dimension. Additional master donors inspected: DASHI/Moonshine/Monster3BFiniteWeightProjectorExact.agda 11f3d7bce9da7654b013d61ef30df4a62f0b0657 (weightProjectorCoefficientIdempotent and translatedProjectorCoefficient; finite model, original sector attachment separate); DASHI/Core/QueryFactorisationSufficiency.agda 98c592232292bbb6c5f0df047c8df3fd42be30d3 and ConsumerFibreRepairExact.agda 5bab8f89861559c14f3877acd5e11424b21a6a6d (refinementRepairSeparatesWitness, factorizationRepairSeparatesWitness, necessary separation not global sufficiency). Existing R28 source parity and R21 six-face donors retained.
+
+### R36. Actual source-selected projector and Hom construction
+
+Take X=F2^m, D=C^X with named basis |x>. Fixed actual Weil representation P=1+U from R30 (W_F acts on P and trivially on D); W=D tensor P. For each clause C, q_C(x)=1 iff x falsifies C; define Q_C diagonal with entries q_C(x). For absent-selector t (1=absent), let
+    Pi_t=product_C (I-(1-t_C)Q_C).
+These are commuting orthogonal idempotents on the original D, so Pi_t diagonal with entry 1 iff x satisfies selected clauses. W_t=im(Pi_t tensor I_P) is an actual W_F-submodule. If W(t)=number of satisfying x, W_t=1^{W(t)} direct_sum U^{W(t)}. Actual central character idempotents of S3 acting on P commute with Pi_t tensor I_P; Hom_WF(1,W_t) and Hom_WF(U,W_t) have dimension W(t), canonically reconstruct via evaluation, no separate unknown representation matrices. The same holds after restriction and cubic phase projection: each phase space has dimension W(t), including inhabited trivial mode when satisfiable. The norm criterion R17 produces the same clause factor because eta'(u'^p_C)=1 iff p_C=0. This is same-object arithmetic submodule, not new global Langlands theorem. The assignment labels are external multiplicity coordinates, not independent local Galois automorphisms. R36 is a succinct product presentation with exponentially dimensional semantic carrier; computing rank/trace is not a free primitive. Unlike Monster where source character multiplicities supplied, the multiplicity W(t) is precisely the unknown #SAT output. No inference of its value from generic central idempotents.
+
+### R37. Exact same-object Fourier compression and noncommuting source attachment
+
+Use actual assignment translation group X acting regularly on D (separate from W_F). Its Fourier rank-one projectors E_h=v_h v_h^*/|X| where v_h(x)=(-1)^(h dot x), h in X. Then for every h,
+    Tr(Pi_t E_h)=W(t)/|X|,
+    (Pi_t E_h Pi_t)^2=(W(t)/|X|) Pi_t E_h Pi_t.
+For W(t)>0 compressed operator has rank one with sole nonzero eigenvalue W(t)/|X|. For empty fibre it vanishes. Thus a *single* original Fourier mode detects SAT by nonzero compression; no need to examine exponentially many phases individually. For normalized v, p=W(t)/|X|, Pi v has squared norm p. Decompose v=Pi v+(I-Pi)v. The commutator is off-diagonal rank <=2, has operator norm sqrt(p(1-p)), Hilbert-Schmidt norm squared 2p(1-p). Therefore for 0<W(t)<|X| no individual E_h commutes with Pi_t. Centrality in the assignment group algebra does NOT imply centrality in the larger algebra containing arbitrary clause projectors. By contrast actual S3 central idempotents on P commute with Pi_t, exactly as their typed factor requires. Same-object proof requires this distinction; cannot transfer Monster commuting assumption across different acting groups. Off-diagonal Fourier matrix entries are Walsh coefficients of satisfying indicator divided by |X|. Phase-labelled full matrix retains all assignment information, but materializing it is exponentially expensive; even one diagonal is normalized #SAT and requires charged computation. Neither small output rank nor rank of commutator is a complexity separator.
+
+More source covariance: translations h of assignment cube permute clause polarities, hence t -> h.t and Q_C -> Q_(h.C); T_h Pi_t T_h^-1=Pi_(h.t). At a fixed t only its stabilizer H acts on satisfying subspace. H acts freely on assignment labels, so as H-module im Pi_t is W(t)/|H| copies of regular H (including zero if unsat). Across orbit X.t, direct sum of those subspaces is Ind_H^X im Pi_t, hence W(t)/|H| copies of regular X. Unmarked equivariant character on orbit contains no additional dependence beyond count and orbit stabilizer. Keep selector and assignment coordinates; covariance is not fixed-input invariance. R37 gives exact obstruction to unmarked spectral shortcut, not a lower bound.
+
+### R38. Logarithmic number of genuine equivariant quotients suffices for arbitrary circuits
+
+G21 supplies an almost-every-minterm conditional lower bound on distinct negative literal evidence in accepting traces (NOT gate count is different). R33 realizes NOT by quotient of the fixed trivial line. Stronger universal negative control: all N negative input rails can be generated using at most r=ceil(log2(N+1)) genuine bounded-dimension quotient gates and polynomial positive circuit size. This is the known Markov–Fischer inversion phenomenon; explicit elementary weight-chart derivation below, not a new general circuit theorem. Sources: Jukna et al. *On the minimum number of negations leading to super-polynomial savings*, https://eccc.weizmann.ac.il/eccc-reports/2001/TR01-058/index.html ; *On the Complexity of Negation-Limited Boolean Networks*, https://epubs.siam.org/doi/abs/10.1137/S0097539794275136 ; Fischer inverters have stronger size bounds than the simple O(N^3) here.
+
+For t in {0,1}^N let w=sum t_i and monotone thresholds T_k(t)=[w>=k]. Compute all thresholds with fan-in-two AND/OR recurrence T_(j,k)=T_(j-1,k) OR (t_j AND T_(j-1,k-1)), T_(j,0)=1, T_(0,k>0)=0. Cost O(N^2). Compute thresholds T_k^(-i) excluding i, separately O(N^3) all i. Read binary weight bits from most significant j=r-1 to 0. If previous bits encode prefix p (length r-j-1), its indicator A_p is AND of previously computed positive/negative bit rails (empty prefix=1). Then
+    b_j=OR_p (A_p AND T_(p*2^(j+1)+2^j)).
+Thresholds above N are constant 0. Each b_j uses only positive gates and existing rails. One quotient generates 1-b_j; reuse all rails. At the actual prefix exactly one A_p=1, so b_j is correct. Total r quotient gates, O(N log N) extra prefix logic (or share prefixes for O(N)), no other NOTs. Now exact-weight indicators Z_k=[w=k] obtained as AND of chosen weight-bit rails, and
+    1-t_i=OR_(k=0..N) (Z_k AND T_k^(-i)).
+Proof: on actual weight k, sum_(j!=i)t_j=k-t_i, so >=k iff t_i=0. All remaining gates positive, O(N^3) bound. Convert arbitrary Boolean circuit of size s to dual-rail monotone logic on t_i,1-t_i with O(s) gates, then plug this inverter. Realize all positive gates on Boolean-valued trivial Weil lines (AND tensor; OR support of direct sum, saturated to one bit via a charged constant-size Boolean OR operation). More precise model: OR as sum followed by fixed support-to-bit operation on dimensions 0,1,2, which is positive on support, not claimed additive multiplicity map; alternatively ordinary subspace sum inside same marked line, B_a+B_b. Both are explicit constant-cost actual marked subspace operations. Quotients only for r weight bits. Thus any polynomial Boolean circuit admits a polynomial-size honest marked representation circuit with at most logarithmically many nonmonotone quotient gates. No promise for arbitrary implicit rank operations. Theorem forbids any attempted universal proof that superpolynomially many quotients are required, independent of other gate cost. Nor does it give a polynomial SAT circuit: starts with one if available.
+
+### R39. Weight projectors on the actual input and the sharp cross-slice obstruction
+
+Let b=sum_(j=1..3) binom(m,j), N=N_m. All selector minterms P_x=Z_x have weight b (one absent falsified polarity for each variable subset). Consequently G=G_(m,3) is zero on weights <b, and its entire monotone upward closure is determined by values on the weight-b slice. This is the original input selector carrier, not the assignment D of R36. Weight idempotents are diagonal functions of the Hamming-weight operator, not S3 central character idempotents unless an appropriate action is separately specified.
+
+For any dual-rail monotone DAG D(t,u) with D(t,1-t)=G(t), define
+    L_b(t)=D(t,(T_b^(-i)(t))_i).
+L_b is monotone, size O(s+N^3). On weight exactly b it equals G, since T_b^(-i)=1-t_i. On weight <b all these negative rails vanish, so L_b<=G=0. On weight >b it may be unsound: whenever weight >=b+1, every negative rail equals 1, so L_b=D(t,1). Explicit actual selector counterexample: for m>=2 take all clauses absent except contradictory unit pair on one variable. Weight N-2 >= b+1, G=0. Modify a correct dual-rail circuit by OR with t_i AND u_i for some absent coordinate i (on consistent rails this term identically zero). Then L_b accepts this unsat input. This is a counterexample to universal slice-to-global soundness, not proof every circuit has that defect.
+
+There is an exact converse relevant to cost: ANY monotone H that agrees with G on all weight-b inputs and is sound (H<=G) on higher inputs must equal G globally if sound on lower inputs too. Indeed every positive t contains some minterm of weight b, so H(t)=1 by monotonicity. Even lower soundness follows for G if every lower input extends to a weight-b negative input, but do not assume this; require H<=G globally. Hence R32/G17 superpolynomial lower bound applies to sound monotone extension of the weight-b trace, not just exact computation ON that slice. Conditional on polynomial unrestricted SAT, L_b gives a polynomial monotone circuit correct on every minterm and all smaller weights, yet no polynomial globally sound extension. This is a sharp global gluing obstruction, with explicit marked weight projector Z_b isolating the slice; Z_b is not a monotone gate. It does not assert that an arbitrary nonmonotone circuit must pay separately for every slice or overlap. The G21 mask underapproximations are globally sound precisely because their rails correspond to an actual smaller input; the weight-slice shortcut loses that property on larger weights. Next resource question: charge genuine correlations of these inconsistent-rail evaluations, not number of quotient gates or negative literals, preserving arbitrary sharing. The above shows even an O(log N)-bit weight residual can unlock all negative rails, so pure residual cardinality bound cannot suffice.
+
+### R40. Executed local Python/SymPy (no CI/native prover)
+
+Actually ran exact local script, 18,434 coordinate inverter checks across every input n=1..10, 18,434 slice checks at actual weight, 1,032 exact rational selector Fourier projector/commutator comparisons across every selector m=1,2 (4 and 256 inputs respectively). The inverter checks evaluate prefix threshold logic semantically, not a native circuit compiler/size benchmark. Proof and size recurrence above independent. Reproduction:
+```python
+from itertools import product,combinations
+import sympy as S
+checks=slices=comm=0
+for n in range(1,11):
+    r=n.bit_length()
+    for t in product((0,1),repeat=n):
+        w=sum(t); pref=0
+        for j in reversed(range(r)):
+            bit=int(any(pref==p and w>=p*2**(j+1)+2**j
+                        for p in range(2**(r-j-1))))
+            pref=2*pref+bit
+        assert pref==w
+        for i,x in enumerate(t):
+            neg=int(any(pref==k and w-x>=k for k in range(n+1)))
+            assert neg==1-x;checks+=1
+            assert int(w-x>=w)==1-x;slices+=1
+for m in (1,2):
+    X=list(product((0,1),repeat=m));n=len(X)
+    C=[(I,p) for k in range(1,m+1)
+       for I in combinations(range(m),k) for p in product((0,1),repeat=k)]
+    Q=[S.diag(*[int(tuple(x[i] for i in I)==p) for x in X]) for I,p in C]
+    I=S.eye(n);E=[]
+    for h in X:
+        v=S.Matrix([(-1)**sum(a*b for a,b in zip(x,h)) for x in X])
+        E.append(v*v.T/n)
+    for t in product((0,1),repeat=len(C)):
+        P=I
+        for z,q in zip(t,Q):P=P*(I-(1-z)*q)
+        W=sum(all(z or tuple(x[i] for i in inds)!=p
+                  for z,(inds,p) in zip(t,C)) for x in X)
+        assert P*P==P and S.trace(P)==W
+        for e in E:
+            assert S.trace(P*e)==S.Rational(W,n)
+            assert (P*e*P)**2==S.Rational(W,n)*(P*e*P)
+            assert S.trace((P*e-e*P).T*(P*e-e*P))==2*S.Rational(W,n)*(1-S.Rational(W,n))
+            comm+=1
+assert (checks,slices,comm)==(18434,18434,1032)
+```
+No actual local field oracle evaluations or kernel proof. Standard character theory/projector/Hom and Markov–Fischer prior art explicit; new DASHI crosswalk source-specific selector norm module and weight-slice boundary, not priority claims. Retain JMD/Monster/G16–21 attribution.
+
+### R41. P0 proof obligations, not additional certification rounds
+
+| Gate / phase | Deliverable | Source -> consumer / status |
+|---|---|---|
+| R36 / B | Actual selector norm projector on fixed Weil module, central/phase/Hom same-object subspaces | R17/R30, #1545 L11S method, R28 -> derived; unknown multiplicities are W(t), not free |
+| R37 / B-C | Fourier rank-one compression, commutator formula and orbit covariance | R8, #1545 weight projector, original selector translation -> derived; no lower bound from ranks |
+| R38 / C | Polynomial shared inverter with logarithmic genuine quotient gates | R33, G20–21, Markov–Fischer -> derived explicit compiler; no quotient-count superpoly |
+| R39 / C | exact minterm-weight slice monotone transport and global sound-extension obstruction | R32/G17, G21 orbit masks -> derived; conditional cheap slice vs hard globally sound extension |
+| R40 | local exact regression | executed, not native certification |
+| R7a' / LGC4d / C | genuine correlation-dependent arithmetic consumer sensitive to width-three overlap and globally sound across slices | R36–39, R23/R24, G21, FactorsThrough -> open cost-sensitive choice |
+| R7b' / LGC5 / C | universal serial-safe resource bound under all shared Boolean/quotient operations, not just number of negative rails/quotients, rank, coefficient count or dimensions | G12a/N4, R38/39 and #123 charge discipline -> OPEN P0 |
+| R7c / LGC6 / D | same invariant superpolynomial lower bound on selector-SAT or original uniform machine | G12b/c/N5 -> OPEN P0 |
+| LGC7/N6 / E | literal Clay endpoint transport | conditional source consumer, no unconditional inhabitant |
+
+### R42. Next combined mathematical tranche
+
+Target the compatibility of the actual marked slice projector, signed rail correlations and globally sound selector norm descent. R39 isolates the missing global extension: minterm-weight computations are not sufficient unless correct on supersets. Seek a universal resource argument for genuinely consumer-relevant correlation/overlap handling across slices, or a precise counterexample, with actual all-circuit coverage. Do not propose another source character census, local ramification calculation, quotient-count bound, or per-minterm charge as the endpoint. R38 proves quotient count alone is too weak and G21 provides conditional widespread trace-width constraint; they are compatible because a few shared quotient outputs can generate many negative rails. Native weld only after mathematical progress. Continue Langlands, no Monster endpoint prerequisite or changes to #1545/#1548/#119.
