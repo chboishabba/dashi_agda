@@ -423,3 +423,74 @@ than deciding from precision alone.
 - Current mathematical endpoints still open:
   the Bishop same-real analytic source certificate
   and a formal kernel-level execution/cost theorem.
+
+
+### G6 / COMP5o — root-free exact signed-square verifier
+
+New **UNTESTED** verifier interface:
+\`scripts/pi_p0_signed_square_verifier.hpp\`.
+
+This is a *consumer-side* geometric alternative, not an
+unjustified faster π producer. It accepts a candidate
+nonnegative output integer \(x\) and an
+**independently source-authenticated** original P/Q/T
+triple at cutoff \(n\ge2\), derives the source signed
+next-term residual, and orders both positive partial
+sums as in COMP5k. Let
+
+\[
+0 < S_{\rm lo}=N_{\rm lo}/D_{\rm lo}
+\le S \le S_{\rm hi}=N_{\rm hi}/D_{\rm hi},
+\quad F=426880\,10^d.
+\]
+
+To prove the same integer output consumer
+\(x=\lfloor 10^d\pi\rfloor\), it is enough to establish
+
+\[
+x S_{\rm hi}\le F\sqrt{10005}
+\quad\hbox{and}\quad
+F\sqrt{10005}<(x+1)S_{\rm lo}.
+\]
+
+All quantities are nonnegative, so the inequalities
+are EXACTLY equivalent to two entirely integer
+*square-slack receipts*:
+
+\[
+\boxed{
+L=10005(FD_{\rm hi})^2-(xN_{\rm hi})^2\ge0,}
+\qquad
+\boxed{
+U=((x+1)N_{\rm lo})^2-10005(FD_{\rm lo})^2>0 .}
+\]
+
+The new C++ header constructs those integer residuals
+and declares acceptance iff the original signed source
+cone and both slack signs hold. **No integer square-root
+or floating evaluation occurs in the verifier.** The
+original alternating tail and Chudnovsky π identity
+remain external analytic premises, so the signed
+bound alone does not prove the infinite-series source.
+Further, arbitrary caller-supplied P/Q/T integers can
+be forged while still passing sign checks: a verifier
+must separately recompute the exact ordered producer
+or verify an original source-identified P/Q/T receipt.
+The header explicitly documents this trust boundary.
+
+This is a promising **independent verifier separation**
+of candidate construction versus exact receipt checking,
+reusing \`EfficientRecoverableQuotientExact.agda\`.
+It may be SLOWER and use MORE memory than the
+production radical/division certificate, since it
+forms up to four large squares. Do not infer a π SOTA
+speedup from root elimination at the verifier only.
+
+Acceptance continues to be deferred: establish
+caller-source authenticity, compute signed full-size
+slacks, prove equivalence against the original
+\(x\le10^d\pi<x+1\) consumer, measure receipt
+construction and reopening costs independently, and
+only then decide whether this belongs in a fast
+production or independent-certification path.
+No compilation, tests, CI or kernel claims.
