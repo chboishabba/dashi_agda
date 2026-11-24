@@ -320,3 +320,41 @@ e_a=\frac{\chi_a(1)}{|Q|}\sum_{q\in Q}\chi_a(q^{-1})L_s(q),\quad a\in\{12,78\},
 on the correct source phase-preserving quotient/extension \(Q\) give the **genuine** invariant direct sum \(S_s=\operatorname{im}e_{12}\oplus\operatorname{im}e_{78}\) and the constituent operators by restriction. Group/central extension is mandatory: a projective \(L_s\) needs its correct extension, not an idempotent in an incorrectly chosen quotient algebra.
 
 **Endpoint solution vs missing source data:** the actual-Hom operator and constituent-projector construction are mathematically explicit, but the full original characteristic-zero \(\rho_W\) on the selected words, honest compatible \(K_s\) gauge, exact 210-class same-object equality, and the simultaneous full Monster C/D group-extension residuals remain necessary for numerical matrices and the final source-identical Paper 10 action. Reuse the existing 28 candidate quotient witnesses, authentic mmgroup manifest and GAP/CTblLib machinery; do not initiate another certification cycle.
+
+## 24 November 2026 — direct original-normalizer idempotents solve the actual 12+78 Hom subdivision
+
+[Full source-rooted mathematical theorem](../../physics/Monster3BActualNormalizerIdempotentSameObject1278Endpoint20261124.md) · [living phase/lemma and producer/consumer ledger](../../roadmaps/Monster3BEndpointFirstConstruction20261123.md). The existing original Monster normalizer restriction and Ibrahim phase/Clifford occurrence make the **same-object constituent subdivision mathematically constructive without first computing the unknown 90-dimensional class character**. Source assumptions remain explicit.
+
+Let \(N\) be the original full \(3B\)-normalizer source group and \(W=\mathbf1\oplus V_{196883}\) the actual complex Monster weight-two representation restricted to \(N\). Breuer–Magaard–Wilson/An–Wilson/Ibrahim identify the multiplicity-one four-constituent degree multiset
+\[
+143+17496+65520+113724=196883,
+\]
+with the \(17496=2\cdot729\cdot12\) and \(113724=2\cdot729\cdot78\) summands the original *nontrivial-centre paired* character families. **Degree arithmetic alone does not fix characters or a chosen group embedding:** here \(\theta_{17496},\theta_{113724}\) are the actual source irreducible character rows on the same \(N\) as \(\rho_W\).
+
+Define the *actual-normalizer* central idempotent operators
+\[
+E_d=\frac{d}{|N|}\sum_{g\in N}\theta_d(g^{-1})\rho_W(g)\qquad(d=17496,113724)
+\]
+and the phase idempotents \(P_s=3^{-1}\sum_{j=0}^{2}\zeta^{-sj}\rho_W(z)^j\). Since \(E_d\) is central in \(\mathbb C[N]\), \(E_dP_s=P_sE_d\), even when the outer normalizer inverts z. The genuine outer involution exchanges the \(\zeta\) and \(\zeta^2\) sectors within each of the source-paired \(\operatorname{im}E_d\) without producing a central-zero summand. Thus
+\[
+\operatorname{rank}P_sE_{17496}=8748,\quad
+\operatorname{rank}P_sE_{113724}=56862,\qquad s=1,2,
+\]
+and the literal source subspaces \(W_{a,s}:=P_sE_{d_a}W\) sum to the entire actual \(W_s\).
+
+Now apply the ORIGINAL Heisenberg \(H_s\) and the Hom functor:
+\[
+\boxed{
+S_{12,s}=\operatorname{Hom}_E(H_s,W_{12,s}),\
+S_{78,s}=\operatorname{Hom}_E(H_s,W_{78,s}),\
+S_s=S_{12,s}\oplus S_{78,s}.
+}
+\]
+Stone–von Neumann gives dimensions \(12,78,90\) without ever identifying an arbitrary \(Fin90\) basis with actual Monster states. Source inertia extends the \(729\)-module with the authentic \(K_s\); each original operator is already mathematically defined via
+\[
+(L_{a,s}(g)f)(h)=\rho_W(g)f(K_s(g)^{-1}h),
+\]
+and the outer generator takes \(S_{a,s}\to S_{a,-s}\). The earlier one-vacuum-column formula applies blockwise. **These are actual-module operator formulas** defined on the original \(W\), not numerical matrices computed in a specified basis.
+
+This resolves the previous unnecessary order of obligations: the selected \(6.\mathrm{Suz}\) 210-class \(\chi_{S_s}\) comparison is no longer required *to locate the subspaces*, because the genuine \(N\)-projectors already find them. It remains required for exact original class labels, central signs, scalar gauge and matching ATLAS C/D candidate words to actual Monster classes. The full coherent Monster group extension relators and source-labelled complex normalizer matrices are still open mathematical endpoints, not mere certification. Generic characters and abstract finite-field matrices do not supply those selected same-object words.
+
