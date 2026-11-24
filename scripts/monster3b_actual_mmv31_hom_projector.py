@@ -425,7 +425,7 @@ def main():
                                     candidate if is_scalar else None)
 
 
-            status_file.write_text(json.dumps(record,indent=2)+"\n")
+        status_file.write_text(json.dumps(record,indent=2)+"\n")
     print(json.dumps(record,indent=2))
     return 0
 if __name__=="__main__": raise SystemExit(main())
