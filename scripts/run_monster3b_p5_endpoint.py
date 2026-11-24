@@ -235,6 +235,14 @@ def main():
         # authenticated real MM-group quotient; no Steel/Magma, GAP or
         # 729D dense operator materialization is needed.
         cover=out/"mmgroup_canonical_cover_hit0.json"
+        canonical_model=out/"canonical_signed_729_model.json"
+        canonical_paid=False
+        if cover.is_file():
+            canonical_paid=run("canonical_signed_729_global_cochain",[
+                sys.executable,SCRIPTS/"monster3b_global_parity_weil_section.py",
+                "--cover",cover,"--out",canonical_model])
+            report["lemma_status"]["M3B-L10B_global_model_Weil_cochain"]=(
+                "CANONICAL_SIGNED_MODEL_SECTION" if canonical_paid else "MODEL_SOURCE_RESIDUAL")
         weilmodel=out/"source_original729_Weil_model.json"
         if cover.is_file():
             model_paid=run("original729_weil_model",[
@@ -370,6 +378,23 @@ def main():
                                 "--outdir",out/"actual_mod31_outer_phase_pair"]):
                                 report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
                                     "GENUINE_MOD31_OUTER_PROJECTIVE_ACTION; NOT_COMPLEX"
+                                if model_paid and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase1.npz").is_file() and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase2.npz").is_file():
+                                    joined=out/"signed_outer_raw_join"
+                                    raw_ok=run("signed_outer_raw_packet_join",[
+                                        sys.executable,SCRIPTS/"monster3b_signed_outer_sym2_join.py",
+                                        "--inner",iso_dir,"--outer",out/"actual_mod31_outer_phase_pair",
+                                        "--outdir",joined])
+                                    report["lemma_status"]["M3B-L10C_signed_raw_outer_join"]=(
+                                        "CONDITIONAL_RAW_PACKET_MATCH" if raw_ok else "RAW_PACKET_RESIDUAL")
+                                if canonical_paid:
+                                    full_join=out/"canonical_signed_normalizer"
+                                    full_ok=run("canonical_signed_normalizer",[
+                                        sys.executable,SCRIPTS/"monster3b_canonical_signed_normalizer_weld.py",
+                                        "--model",canonical_model,"--plus",plus,"--minus",minus,
+                                        "--outer",out/"actual_mod31_outer_phase_pair","--outdir",full_join])
+                                    report["lemma_status"]["M3B-L10B_L10C_L12R_canonical_signed_mod31"]=(
+                                        "SOURCE_BOUND_MOD31_SIGNED_GENERATOR_WELD" if full_ok else "CANONICAL_SOURCE_RESIDUAL")
+
                             else:
                                 report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
                                     "ACTUAL_MOD31_OUTER_PHASE_SOURCE_FAILED"
