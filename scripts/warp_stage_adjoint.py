@@ -37,7 +37,7 @@ def transpose(y,dr,dy,b,v,order):
     return out
 
 def donor_parity():
-    from ksw668_f8_tt_multipole import stage
+    from ksw668_f8_weighted_normal_stage import matched_stage as stage
     rng=np.random.default_rng(1530); nm,ny,nr=3,7,11; dr,dy,b,v=.008,.012,.4,-.3
     cp=np.zeros((nm,nr));cm=cp.copy()
     for q in range(nm):
