@@ -1312,9 +1312,9 @@ cannot justify lossy truncation.
 
 The output precision \(b\) controls
 which large source subtrees receive
-a bounded-depth schedule. Planner
-allocation is separately charged
-from GMP heap, as required by
+a bounded-depth schedule. Planner object payload is reported separately
+from GMP heap; allocation overhead is still
+uncounted, as required for honest accounting by
 Paper 9 §10 and
 \`FibreProgramComplexityExact.agda\`.
 The implementation and source-specific
