@@ -12,7 +12,7 @@ function run(){
   const a=out.length?out.slice(1).reduce((a,b)=>gate(a,b,"and"),out[0]):0;
   const flag=++n;ops.push(["flag",flag,a,0]);G.push(...(a?[[-a,flag],[a,-flag]]:[[flag]]));
   const C=Z.map(c=>c.slice()),copies=[];let v=6+n;
-  for(const c of G){const L=[];for(const l of c){const x=6+Math.abs(l),u=++v;C.push([-x,u,1],[x,-u,2]);copies.push([u,x]);L.push(l>0?u:-u)}while(L.length<3)L.push(L.length===1?1:2);C.push(L)}
+  for(const c of G){const L=[];for(const l of c){const x=6+Math.abs(l),u=++v;C.push([-x,u,1],[x,-u,2]);copies.push([u,x]);L.push(l>0?u:-u)}for(let pad=1;L.length<3;pad++)L.push(pad);C.push(L)}
   assert(C.every(c=>c.length===3&&new Set(c.map(Math.abs)).size===3),"scope");
   assert(new Set(C.map(c=>c.map(Math.abs).sort((a,b)=>a-b).join())).size===C.length,"distinct scopes");
   function lift(bits){const y=[undefined,...bits];const val=l=>l>0?y[l]:1-y[-l];for(const [op,u,a,b] of ops)y[u]=op==="flag"?(a?val(a):1):op==="or"?(val(a)|val(b)):(val(a)&val(b));const x=[undefined,0,0,0,0,0,0,...y.slice(1)];for(const [u,v] of copies)x[u]=x[v];return x}
