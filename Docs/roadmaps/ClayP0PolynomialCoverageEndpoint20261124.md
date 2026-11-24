@@ -3513,9 +3513,121 @@ assert (zchecks,control)==(240,50)
 Geometry-forward Aristotle BIDI: the real improvement is G85/G86, an actual exact upper-bound algorithm bypassing both compulsory linear channel enumeration and chronological boundary enumeration on nested guard geometry. G84 says even affine conditional fibres and constant full right coefficient rank can retain the hard joint selector. G87 admits source-dependent commutation and explicitly defeats a compulsory interleaving charge. Next investigate actual noncommuting interaction and reusable subword transfer or the direct standard-machine N4 endpoint, without assuming a particular branching program, word, or its optimized form is universally necessary. Do not replace SAT by counting, full global symmetry, optimal normalization or rank computation. Preserve zero mode, inhabited neutral fibre, signed residual and indexed hyperfabric as semantics, not mandatory materialization. No P!=NP claim, no additional certification prerequisite.
 
 
-## 33. P0-GO75–GO79 — geometry-forward: path-pair obstruction antichain, signed ternary contraction, and parity control: obstruction cubes, signed ternary contraction, and the parity anti-control (2026-11-24)
+## 32. P0-GO75–GO79 — GEOMETRY-FORWARD: exact rank-one decision boundary and rank-two guard transfer (2026-11-24)
 
-**Controlling endpoint remains literal Clay P vs NP.** This section continues G70–GO79 and expands the reserved parallel GO75–GO79 route and the Aristotle BIDI route. It does not create a new prerequisite programme. Geometry is the proof-search coordinate system; no count of paths, cubes, antichain members, separator states, or semantic classes is promoted to a lower bound on arbitrary computation.
+Literal Clay P vs NP P0. Inputs: both current pasted files, G84–G88 and Langlands R128–R133 (reported #1549/#120 b9443ceb0f28/dd6c33352dca, blob 30b6833e0b111b8eaa70d96269a459a0520766cb). Use shared-orientation accounting as donor, not a new Langlands endpoint. Initial live P0 reads 41bf8d6ed02d / 43898587b2e0, common blob d13acfbfda00542f3cd762659c2c9fce1f251cb7. Reconciled concurrent appended guard-obstruction section at Agda e193c4f777f9 / Lean e9acb018e2fe: both contents equal except repository-relative reproducer link. Preserve that work and its original IDs; in this section denote its duplicate GO75–GO79 labels as GO75–GO79 (parallel obstruction-cube ledger), distinct from main sections 29–30 GO75–G83. GO78's consumer-complete quotient is not a SAT/UNSAT collision, and GO79's signature is a proof-search instrument, not mandatory state. Reuse G16/G17 median/implication graph, G45–G48 flag, G51 quotient, G53–G59 signed precision, G65–G83 separator/guard geometry, G84–G88 ordered transfer, GO75–GO79 guarded-path residual, section 27 ConstraintCouplingSearchExact / ObservationSeparatorGeometryExact / IndexedCubeHyperfibreExact, #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 sharing, #1474/#1502 Karp/Cook-Levin, #1129 costed machine, #1040 SATDecisionFailure, #607/#678 Aristotle. Classical 2SAT algorithm Aspvall–Plass–Tarjan 1979 DOI 10.1016/0020-0190(79)90002-4; counting control Valiant 1979 DOI 10.1137/0208032 (#monotone-2CNF completeness). No literature novelty claim for elementary matrix factoring or classical reductions. No other programme edits, CI or native kernel.
+
+### GO75 — exact rank-one guard support is bijunctive
+
+Given original guard word F(x)=a^T product_j M_j(x_label_j) b over an effective field (explicit rational or fixed finite field matrices, or integers using fraction field), assume both orientations at every nonconstant position have rank <=1. Arbitrary constant matrices permitted. Factor each nonzero matrix M=u v^T by a nonzero pivot p=M_rc, u=column c, v=row r/p. Zero matrix uses u=0, v arbitrary. For integer decision only, take unscaled row r, giving u v^T=p M; multiplication by nonzero pivot does not change nonvanishing but DOES change weighted scalar, so do not reuse scaled count as original. All factoring and constant bridge products cost polynomial in explicit input length with exact rational/integer bit costs.
+
+Absorb constant runs into bridges B_j. The exact unscaled scalar is
+    (a^T B_0 u_1) prod_j (v_j^T B_j u_(j+1)) (v_m^T B_m b).
+If no guarded positions evaluate constant directly. Field has no zero divisors; support is conjunction of unary endpoint and at-most-binary consecutive overlap nonzero tests. For each zero table entry forbid its assignment by a clause of width <=2. If labels coincide, use only the two consistent orientations, not independent copies. Thus arbitrary interleaving/read count, arbitrary noncommuting rank-one matrices, zero transitions and constant bridges reduce exactly to 2SAT on original guards. Rank-one support is majority-closed by G16; projected support through existential Boolean auxiliaries remains majority-closed. In particular cannot represent OR3 by existential rank-one guard encoding preserving original witness projection. No claim all tractable relations are bijunctive or that arbitrary decision reductions must preserve that projection.
+
+Converse: every 2CNF has an exact width-two rank-one word with 0/1 matrices. For clause (l(x) OR r(y)), set e=(1,0)^T, L=l(x), R=r(y). Use A(x)=e(L,1-L), B(y)=(1,R)^T e^T. Both ranks exactly one; AB=[L+(1-L)R]ee^T. Concatenate clause pairs, endpoints e^T,e. Unit duplicates label, empty clause constant zero, empty formula one. Exact scalar equals Boolean clause product over any nonzero field. This is an exact characterization of rank-one support expressiveness on original guards, not a claim of universal efficient representation. Ring with zero divisors does NOT obey product-nonzero equivalence (2*2=0 mod4); modular nonzero differs from original integer support.
+
+### GO76 — width-two rank-two transfer already captures original SAT
+
+Compress G84 to two LIVE states U,S with dead represented by zero row. Literal false selects I=[[1,0],[0,1]], true selects Y=[[0,1],[0,1]]. Clause boundary constant R=[[0,0],[1,0]]. Start e^T=(1,0), end e. True sets S, false retains state, R resets S to U and sends U to zero. Zero stays zero. Thus F(x) in {0,1} equals original CNF truth over integers and any nonzero field. All displayed matrices nonzero 0/1 rank<=2; only I rank two. Empty formula accepts, empty clause rejects by reset. Reduction linear in source occurrences and clauses. G84 cyclic-implication private copies restrict each guard to at most three reads with unique extension on used variables, unused original bits retained free. Hence exact global nonzero decision NP-complete on this width-two bounded-read transfer subclass, membership by evaluation at supplied x. The fixed-guard trajectory system still full column rank, unique run before terminal equation, and fixed trajectory equations affine in guards as in G84. Retain rejected source indicator 1-F, not interpret zero row as absence of original assignment. This is sharp rank-one vs rank-two threshold for this model, not P!=NP or a lower bound on required rank of all general algorithms.
+
+### GO77 — explicit higher-rank guard strong backdoor
+
+Let K be original labels with any occurrence having any orientation rank>=2, excluding constants. Compute by exact rank tests. Enumerate 2^|K| assignments to original labels K, substitute every occurrence consistently, leave resulting constant bridges of arbitrary rank, and invoke GO75 2SAT. OR branch decisions, reconstruct witness on success. Bound 2^|K| poly(input bit length), including rank tests/bridge products, no interleaving or separator-state enumeration. |K|=O(log N) gives polynomial decision for supplied representation. This is a strong backdoor, not minimum over all charts or a lower bound: G87 commuting rank-two words can be cheap, and 2SAT itself may have rank-two transfer via GO76 and rank-one transfer via GO75. Invertible per-boundary state gauges preserve rank with endpoints transported; blocking factors depending on multiple guards need not yield binary support. All lawful preprocessing costed.
+
+### GO78 — counting hardness already below decision boundary
+
+GO75's 0/1 rank-one encoding of monotone 2CNF preserves original assignments exactly; W=sum_x F(x) #P-hard by Valiant (and #P-complete for Boolean acceptance family under standard counting reductions). Decision remains in P. With actual unary weights w_i(0),w_i(1), retain accepted A=sum_x F(x) prod_i w_i(x_i), rejected R=sum_x (1-F(x)) prod_i w_i(x_i), A+R=prod_i(w_i(0)+w_i(1)). Over any commutative ring, exact signed or modular weighted sums with no division. Fourier signs are weights; zero mode is original integer count; modular cancellation not empty source. Counting hardness is not required computation for decision, as G53–G55 show. No inference from R128 generic rank or #P-hard count to unrestricted lower bound.
+
+### GO79 — indexed transport and remaining endpoint
+
+Keep (history,tau,k,j,version,ring,creation/requested precision,word position,original guard label,consumer) independent. Attach actual matrices, rank certificate, factor pivot/scaling, bridge intervals and original pin correspondence. Distinguish inhabited neutral guard, rejected run, signed residual, exact zero mode and modular zero. Reordering requires G87 swap certificate/actual commutator residual; conditioning K is not deletion of source; K may change with source revision. Keep G58 gain/loss and GO76 signed coefficient/support ledger, no blanket H05/H07/H14 closure. A uniform polynomial-cost transformation of arbitrary SAT into rank-one (or logarithmic-backdoor) decision class would imply P=NP; converse if P=NP by deciding input then outputting fixed yes/no instance, not a witness-preserving transformation. Proving impossibility of arbitrary polynomial-time decision reductions to that class would settle P!=NP, not a free enabling lemma. Witness-preserving rank-one reduction with existential auxiliaries is already ruled out for nonbijunctive relations on original guards, but that restricted result is NOT general decision-reduction impossibility. N4/N5 remain actual unpaid obligations. Keep direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes, #1040/#1129 terminal. GO78 collision boundary retained. No certification prerequisite.
+
+### Actual local execution (Python exact integers)
+
+Executed local /tmp/p0_rank_boundary.py, Random(369): 560 signed 2x2 word cases q=1..7 (80 each), with arbitrary constant matrix bridges, zero matrices, repeated labels, 127 nonempty higher-rank backdoors. 771 conditioned branch decisions compared with implication-graph closure, 20,320 support comparisons (each assignment checked in its own branch), all 560 global decisions compared with exhaustive enumeration. 280 width<=2 formulas (40 per q), 10,160 assignment truth checks, 280 weighted acceptance/rejection identities. 280 width<=3 formulas, 10,160 truth checks, 280 weighted identities, 10,160 intended bounded-read copy extensions. All passed. Reverse extension uniqueness by equality-cycle proof, not enumeration of all independent copy assignments. No finite-field extension tests or asymptotic runtime benchmark. Core exact integer decision reproducer (pivot scaling used only for support):
+
+```python
+from itertools import product
+I=(1,0,0,1); Z=(0,0,0,0); e=(1,0)
+def mm(A,B):
+ a,b,c,d=A; f,g,h,i=B
+ return (a*f+b*h,a*g+b*i,c*f+d*h,c*g+d*i)
+def dot(a,b):return sum(x*y for x,y in zip(a,b))
+def row(a,M):return (a[0]*M[0]+a[1]*M[2],a[0]*M[1]+a[1]*M[3])
+def outer(a,b):return tuple(x*y for x in a for y in b)
+def rank(M):return 2 if M[0]*M[3]!=M[1]*M[2] else int(any(M))
+def fac(M):
+ if M==Z:return (0,0),(1,0)
+ i=next(i for i,x in enumerate(M) if x);r,c=divmod(i,2)
+ return (M[c],M[2+c]),(M[2*r],M[2*r+1])
+def eval_(W,x,a=e,b=e):
+ for i,M in W:a=row(a,M[0 if i is None else x[i]])
+ return dot(a,b)
+def residual(W,pins,a=e,b=e):
+ A=I;last=None;C=[]
+ def forbid(labels,fn):
+  J=sorted(set(labels))
+  for bits in product((0,1),repeat=len(J)):
+   if not fn(dict(zip(J,bits))):C.append(tuple((i,1-v) for i,v in zip(J,bits)))
+ for i,M in W:
+  if i is None or i in pins:A=mm(A,M[0 if i is None else pins[i]]);continue
+  assert all(rank(m)<=1 for m in M)
+  U,V=zip(*(fac(m) for m in M))
+  if last is None:forbid([i],lambda x:dot(row(a,A),U[x[i]]))
+  else:
+   j,V0=last;forbid([j,i],lambda x:dot(row(V0[x[j]],A),U[x[i]]))
+  last=(i,V);A=I
+ if last is None:
+  if not dot(row(a,A),b):C.append(())
+ else:
+  i,V=last;forbid([i],lambda x:dot(row(V[x[i]],A),b))
+ return C
+def cnf(C,x):return all(any(x[i]==v for i,v in c) for c in C)
+def sat2(q,C):
+ if () in C:return False
+ R=[1<<i for i in range(2*q)]
+ for c in C:
+  a,b=c[0],c[-1];i=2*a[0]+a[1];j=2*b[0]+b[1];R[i^1]|=1<<j;R[j^1]|=1<<i
+ for k in range(2*q):
+  for i in range(2*q):
+   if R[i]>>k&1:R[i]|=R[k]
+ return not any(R[2*i]>>(2*i+1)&1 and R[2*i+1]>>(2*i)&1 for i in range(q))
+U=(0,1,0,1); R=(0,0,1,0)
+def rank1_formula(F):
+ W=[]
+ for c in F:
+  (i,s),(j,t)=c[0],c[-1]
+  W.append((i,tuple(outer(e,(int(x==s),int(x!=s))) for x in (0,1))))
+  W.append((j,tuple(outer((1,int(y==t)),e) for y in (0,1))))
+ return W
+def rank2_formula(F):
+ W=[]
+ for c in F:
+  for i,s in c:W.append((i,tuple(U if b==s else I for b in (0,1))))
+  W.append((None,(R,R)))
+ return W
+```
+
+Sampling reproducibility: rng=Random(369), vec() two rng.randrange(-2,3), rank1() outer(vec(),vec()), randomM() four rng.randrange(-2,3). For q=1..7, trial=0..79, draw a,b=vec(),vec(); word length rng.randrange(1,3*q+1); each position label rng.randrange(q), matrices rank1(),rank1(). Insert 3 constant randomM bridges (draw insertion index first). Odd trial choose K by rng.sample(range(q),rng.randrange(min(q,3)+1)); each position with label in K replace pair by randomM(),randomM() if rng.randrange(2). Recompute actual K by rank; iterate all pins and compare residual 2CNF on every consistent assignment to original nonzero, compare sat2 to branch truth. Continue RNG q=1..7, width2 then3, 40 clausesets each, sample 0..min(12,len(all clauses)) from all clauses ordered by width, lexicographic scope/sign bits, draw q vec() weights. Compare weighted sectors and truth; for width3 use G84 copy split with unused original bits retained free. Exact regression counts above.
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| GO75 | rankOneGuardSupportBijunctive / exactBinaryOverlapReduction | derived and tested, converse exact |
+| GO76 | rankTwoWidthTwoBoundedReadSATHardness | derived and tested, copy reverse by proof |
+| GO77 | higherRankGuardStrongBackdoor | derived and tested, paid upper bound |
+| GO78 | rankOneCountingDecisionSeparation / weightedRejectedResidual | derived and tested, classical #2CNF hardness |
+| GO79 | indexedRankBoundaryResourceTransport | derived |
+| GO75–GO79 | parallel guard-obstruction / consumer-signature route | expanded in section 33; separate from G75–G93 |
+| N4 | unrestrictedSerialCharge | OPEN: arbitrary legal preprocessing, sharing and bypass |
+| N5 | unrestrictedSuperpolynomialGrowth | OPEN; direct uniform or stronger central slice |
+| N6 | originalClayTransport | conditional #1040/#1129 |
+
+Geometry-forward Aristotle BIDI: GO75/GO76 establish actual support-composition transition and GO77 a paid shortcut, not obligatory rank. GO78 is decisive count-vs-decision control below that transition. Next examine legitimate reductions of higher-rank dependencies to binary factors and residual costs, or direct uniform endpoint, allowing arbitrary representations. Preserve independent indices, zero mode, inhabited neutral fibre and signed residual as semantics, not compulsory materialization. No P!=NP claim.
+
+## 33. P0-GO75–GO79 — GEOMETRY-FORWARD: path-pair obstruction antichain, signed ternary contraction and parity anti-control (2026-11-24)
+
+**Controlling endpoint remains literal Clay P vs NP.** This section continues G70–G93 and expands the reserved parallel GO75–GO79 route and the Aristotle BIDI route. It does not create a new prerequisite programme. Geometry is the proof-search coordinate system; no count of paths, cubes, antichain members, separator states, or semantic classes is promoted to a lower bound on arbitrary computation.
 
 ### GO75 — exact path-pair obstruction antichain and obstruction CNF (formalizes G77)
 
@@ -3742,115 +3854,3 @@ Existing donors reopened and retained: ConstraintCouplingSearchExact; ResidualCo
 
 **P0 priority:** find a representation-independent obstruction to global selection, or discharge one of the existing direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes. Do not count the antichain. Retain the zero mode, inhabited neutral fibre, signed residual, and indexed hyperfabric.
 
-
-## 32. P0-GO75–GO79 — GEOMETRY-FORWARD: exact rank-one decision boundary and rank-two guard transfer (2026-11-24)
-
-Literal Clay P vs NP P0. Inputs: both current pasted files, G84–G88 and Langlands R128–R133 (reported #1549/#120 b9443ceb0f28/dd6c33352dca, blob 30b6833e0b111b8eaa70d96269a459a0520766cb). Use shared-orientation accounting as donor, not a new Langlands endpoint. Initial live P0 reads 41bf8d6ed02d / 43898587b2e0, common blob d13acfbfda00542f3cd762659c2c9fce1f251cb7. Reconciled concurrent appended guard-obstruction section at Agda e193c4f777f9 / Lean e9acb018e2fe: both contents equal except repository-relative reproducer link. Preserve that work and its original IDs; in this section denote its duplicate GO75–GO79 labels as GO75–GO79 (parallel obstruction-cube ledger), distinct from main sections 29–30 GO75–G83. GO78's consumer-complete quotient is not a SAT/UNSAT collision, and GO79's signature is a proof-search instrument, not mandatory state. Reuse G16/G17 median/implication graph, G45–G48 flag, G51 quotient, G53–G59 signed precision, G65–G83 separator/guard geometry, G84–G88 ordered transfer, GO75–GO79 guarded-path residual, section 27 ConstraintCouplingSearchExact / ObservationSeparatorGeometryExact / IndexedCubeHyperfibreExact, #1291 H05, #1006 FactorsThrough, #123 JMD lowering, #1546 sharing, #1474/#1502 Karp/Cook-Levin, #1129 costed machine, #1040 SATDecisionFailure, #607/#678 Aristotle. Classical 2SAT algorithm Aspvall–Plass–Tarjan 1979 DOI 10.1016/0020-0190(79)90002-4; counting control Valiant 1979 DOI 10.1137/0208032 (#monotone-2CNF completeness). No literature novelty claim for elementary matrix factoring or classical reductions. No other programme edits, CI or native kernel.
-
-### GO75 — exact rank-one guard support is bijunctive
-
-Given original guard word F(x)=a^T product_j M_j(x_label_j) b over an effective field (explicit rational or fixed finite field matrices, or integers using fraction field), assume both orientations at every nonconstant position have rank <=1. Arbitrary constant matrices permitted. Factor each nonzero matrix M=u v^T by a nonzero pivot p=M_rc, u=column c, v=row r/p. Zero matrix uses u=0, v arbitrary. For integer decision only, take unscaled row r, giving u v^T=p M; multiplication by nonzero pivot does not change nonvanishing but DOES change weighted scalar, so do not reuse scaled count as original. All factoring and constant bridge products cost polynomial in explicit input length with exact rational/integer bit costs.
-
-Absorb constant runs into bridges B_j. The exact unscaled scalar is
-    (a^T B_0 u_1) prod_j (v_j^T B_j u_(j+1)) (v_m^T B_m b).
-If no guarded positions evaluate constant directly. Field has no zero divisors; support is conjunction of unary endpoint and at-most-binary consecutive overlap nonzero tests. For each zero table entry forbid its assignment by a clause of width <=2. If labels coincide, use only the two consistent orientations, not independent copies. Thus arbitrary interleaving/read count, arbitrary noncommuting rank-one matrices, zero transitions and constant bridges reduce exactly to 2SAT on original guards. Rank-one support is majority-closed by G16; projected support through existential Boolean auxiliaries remains majority-closed. In particular cannot represent OR3 by existential rank-one guard encoding preserving original witness projection. No claim all tractable relations are bijunctive or that arbitrary decision reductions must preserve that projection.
-
-Converse: every 2CNF has an exact width-two rank-one word with 0/1 matrices. For clause (l(x) OR r(y)), set e=(1,0)^T, L=l(x), R=r(y). Use A(x)=e(L,1-L), B(y)=(1,R)^T e^T. Both ranks exactly one; AB=[L+(1-L)R]ee^T. Concatenate clause pairs, endpoints e^T,e. Unit duplicates label, empty clause constant zero, empty formula one. Exact scalar equals Boolean clause product over any nonzero field. This is an exact characterization of rank-one support expressiveness on original guards, not a claim of universal efficient representation. Ring with zero divisors does NOT obey product-nonzero equivalence (2*2=0 mod4); modular nonzero differs from original integer support.
-
-### GO76 — width-two rank-two transfer already captures original SAT
-
-Compress G84 to two LIVE states U,S with dead represented by zero row. Literal false selects I=[[1,0],[0,1]], true selects Y=[[0,1],[0,1]]. Clause boundary constant R=[[0,0],[1,0]]. Start e^T=(1,0), end e. True sets S, false retains state, R resets S to U and sends U to zero. Zero stays zero. Thus F(x) in {0,1} equals original CNF truth over integers and any nonzero field. All displayed matrices nonzero 0/1 rank<=2; only I rank two. Empty formula accepts, empty clause rejects by reset. Reduction linear in source occurrences and clauses. G84 cyclic-implication private copies restrict each guard to at most three reads with unique extension on used variables, unused original bits retained free. Hence exact global nonzero decision NP-complete on this width-two bounded-read transfer subclass, membership by evaluation at supplied x. The fixed-guard trajectory system still full column rank, unique run before terminal equation, and fixed trajectory equations affine in guards as in G84. Retain rejected source indicator 1-F, not interpret zero row as absence of original assignment. This is sharp rank-one vs rank-two threshold for this model, not P!=NP or a lower bound on required rank of all general algorithms.
-
-### GO77 — explicit higher-rank guard strong backdoor
-
-Let K be original labels with any occurrence having any orientation rank>=2, excluding constants. Compute by exact rank tests. Enumerate 2^|K| assignments to original labels K, substitute every occurrence consistently, leave resulting constant bridges of arbitrary rank, and invoke GO75 2SAT. OR branch decisions, reconstruct witness on success. Bound 2^|K| poly(input bit length), including rank tests/bridge products, no interleaving or separator-state enumeration. |K|=O(log N) gives polynomial decision for supplied representation. This is a strong backdoor, not minimum over all charts or a lower bound: G87 commuting rank-two words can be cheap, and 2SAT itself may have rank-two transfer via GO76 and rank-one transfer via GO75. Invertible per-boundary state gauges preserve rank with endpoints transported; blocking factors depending on multiple guards need not yield binary support. All lawful preprocessing costed.
-
-### GO78 — counting hardness already below decision boundary
-
-GO75's 0/1 rank-one encoding of monotone 2CNF preserves original assignments exactly; W=sum_x F(x) #P-hard by Valiant (and #P-complete for Boolean acceptance family under standard counting reductions). Decision remains in P. With actual unary weights w_i(0),w_i(1), retain accepted A=sum_x F(x) prod_i w_i(x_i), rejected R=sum_x (1-F(x)) prod_i w_i(x_i), A+R=prod_i(w_i(0)+w_i(1)). Over any commutative ring, exact signed or modular weighted sums with no division. Fourier signs are weights; zero mode is original integer count; modular cancellation not empty source. Counting hardness is not required computation for decision, as G53–G55 show. No inference from R128 generic rank or #P-hard count to unrestricted lower bound.
-
-### GO79 — indexed transport and remaining endpoint
-
-Keep (history,tau,k,j,version,ring,creation/requested precision,word position,original guard label,consumer) independent. Attach actual matrices, rank certificate, factor pivot/scaling, bridge intervals and original pin correspondence. Distinguish inhabited neutral guard, rejected run, signed residual, exact zero mode and modular zero. Reordering requires G87 swap certificate/actual commutator residual; conditioning K is not deletion of source; K may change with source revision. Keep G58 gain/loss and GO76 signed coefficient/support ledger, no blanket H05/H07/H14 closure. A uniform polynomial-cost transformation of arbitrary SAT into rank-one (or logarithmic-backdoor) decision class would imply P=NP; converse if P=NP by deciding input then outputting fixed yes/no instance, not a witness-preserving transformation. Proving impossibility of arbitrary polynomial-time decision reductions to that class would settle P!=NP, not a free enabling lemma. Witness-preserving rank-one reduction with existential auxiliaries is already ruled out for nonbijunctive relations on original guards, but that restricted result is NOT general decision-reduction impossibility. N4/N5 remain actual unpaid obligations. Keep direct candidate-failure / observer-collision / resource-closed self-diagonal OR routes, #1040/#1129 terminal. GO78 collision boundary retained. No certification prerequisite.
-
-### Actual local execution (Python exact integers)
-
-Executed local /tmp/p0_rank_boundary.py, Random(369): 560 signed 2x2 word cases q=1..7 (80 each), with arbitrary constant matrix bridges, zero matrices, repeated labels, 127 nonempty higher-rank backdoors. 771 conditioned branch decisions compared with implication-graph closure, 20,320 support comparisons (each assignment checked in its own branch), all 560 global decisions compared with exhaustive enumeration. 280 width<=2 formulas (40 per q), 10,160 assignment truth checks, 280 weighted acceptance/rejection identities. 280 width<=3 formulas, 10,160 truth checks, 280 weighted identities, 10,160 intended bounded-read copy extensions. All passed. Reverse extension uniqueness by equality-cycle proof, not enumeration of all independent copy assignments. No finite-field extension tests or asymptotic runtime benchmark. Core exact integer decision reproducer (pivot scaling used only for support):
-
-```python
-from itertools import product
-I=(1,0,0,1); Z=(0,0,0,0); e=(1,0)
-def mm(A,B):
- a,b,c,d=A; f,g,h,i=B
- return (a*f+b*h,a*g+b*i,c*f+d*h,c*g+d*i)
-def dot(a,b):return sum(x*y for x,y in zip(a,b))
-def row(a,M):return (a[0]*M[0]+a[1]*M[2],a[0]*M[1]+a[1]*M[3])
-def outer(a,b):return tuple(x*y for x in a for y in b)
-def rank(M):return 2 if M[0]*M[3]!=M[1]*M[2] else int(any(M))
-def fac(M):
- if M==Z:return (0,0),(1,0)
- i=next(i for i,x in enumerate(M) if x);r,c=divmod(i,2)
- return (M[c],M[2+c]),(M[2*r],M[2*r+1])
-def eval_(W,x,a=e,b=e):
- for i,M in W:a=row(a,M[0 if i is None else x[i]])
- return dot(a,b)
-def residual(W,pins,a=e,b=e):
- A=I;last=None;C=[]
- def forbid(labels,fn):
-  J=sorted(set(labels))
-  for bits in product((0,1),repeat=len(J)):
-   if not fn(dict(zip(J,bits))):C.append(tuple((i,1-v) for i,v in zip(J,bits)))
- for i,M in W:
-  if i is None or i in pins:A=mm(A,M[0 if i is None else pins[i]]);continue
-  assert all(rank(m)<=1 for m in M)
-  U,V=zip(*(fac(m) for m in M))
-  if last is None:forbid([i],lambda x:dot(row(a,A),U[x[i]]))
-  else:
-   j,V0=last;forbid([j,i],lambda x:dot(row(V0[x[j]],A),U[x[i]]))
-  last=(i,V);A=I
- if last is None:
-  if not dot(row(a,A),b):C.append(())
- else:
-  i,V=last;forbid([i],lambda x:dot(row(V[x[i]],A),b))
- return C
-def cnf(C,x):return all(any(x[i]==v for i,v in c) for c in C)
-def sat2(q,C):
- if () in C:return False
- R=[1<<i for i in range(2*q)]
- for c in C:
-  a,b=c[0],c[-1];i=2*a[0]+a[1];j=2*b[0]+b[1];R[i^1]|=1<<j;R[j^1]|=1<<i
- for k in range(2*q):
-  for i in range(2*q):
-   if R[i]>>k&1:R[i]|=R[k]
- return not any(R[2*i]>>(2*i+1)&1 and R[2*i+1]>>(2*i)&1 for i in range(q))
-U=(0,1,0,1); R=(0,0,1,0)
-def rank1_formula(F):
- W=[]
- for c in F:
-  (i,s),(j,t)=c[0],c[-1]
-  W.append((i,tuple(outer(e,(int(x==s),int(x!=s))) for x in (0,1))))
-  W.append((j,tuple(outer((1,int(y==t)),e) for y in (0,1))))
- return W
-def rank2_formula(F):
- W=[]
- for c in F:
-  for i,s in c:W.append((i,tuple(U if b==s else I for b in (0,1))))
-  W.append((None,(R,R)))
- return W
-```
-
-Sampling reproducibility: rng=Random(369), vec() two rng.randrange(-2,3), rank1() outer(vec(),vec()), randomM() four rng.randrange(-2,3). For q=1..7, trial=0..79, draw a,b=vec(),vec(); word length rng.randrange(1,3*q+1); each position label rng.randrange(q), matrices rank1(),rank1(). Insert 3 constant randomM bridges (draw insertion index first). Odd trial choose K by rng.sample(range(q),rng.randrange(min(q,3)+1)); each position with label in K replace pair by randomM(),randomM() if rng.randrange(2). Recompute actual K by rank; iterate all pins and compare residual 2CNF on every consistent assignment to original nonzero, compare sat2 to branch truth. Continue RNG q=1..7, width2 then3, 40 clausesets each, sample 0..min(12,len(all clauses)) from all clauses ordered by width, lexicographic scope/sign bits, draw q vec() weights. Compare weighted sectors and truth; for width3 use G84 copy split with unused original bits retained free. Exact regression counts above.
-
-| Gate | Deliverable | Status |
-|---|---|---|
-| GO75 | rankOneGuardSupportBijunctive / exactBinaryOverlapReduction | derived and tested, converse exact |
-| GO76 | rankTwoWidthTwoBoundedReadSATHardness | derived and tested, copy reverse by proof |
-| GO77 | higherRankGuardStrongBackdoor | derived and tested, paid upper bound |
-| GO78 | rankOneCountingDecisionSeparation / weightedRejectedResidual | derived and tested, classical #2CNF hardness |
-| GO79 | indexedRankBoundaryResourceTransport | derived |
-| GO75–GO79 | parallel guard-obstruction / consumer-signature route | expanded in section 33; separate from G75–G93 |
-| N4 | unrestrictedSerialCharge | OPEN: arbitrary legal preprocessing, sharing and bypass |
-| N5 | unrestrictedSuperpolynomialGrowth | OPEN; direct uniform or stronger central slice |
-| N6 | originalClayTransport | conditional #1040/#1129 |
-
-Geometry-forward Aristotle BIDI: GO75/GO76 establish actual support-composition transition and GO77 a paid shortcut, not obligatory rank. GO78 is decisive count-vs-decision control below that transition. Next examine legitimate reductions of higher-rank dependencies to binary factors and residual costs, or direct uniform endpoint, allowing arbitrary representations. Preserve independent indices, zero mode, inhabited neutral fibre and signed residual as semantics, not compulsory materialization. No P!=NP claim.
