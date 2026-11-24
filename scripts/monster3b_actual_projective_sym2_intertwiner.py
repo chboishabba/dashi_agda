@@ -255,7 +255,7 @@ def from_source(model,folder,phase,outdir):
         L78=B*pow(k,-1,P)%P
         gamma=eval31(model["phases"][str(phase)]
                      ["order3_model_cubic_scalars"][name]
-                     ["K_g_cube_scalar_Qzeta3"],5 if phase==1 else 25)
+                     ["K_g_cube_scalar_Qzeta3"],5)
         assert scalar_matrix(cubic(L12),pow(gamma,-1,P))
         assert scalar_matrix(cubic(L78),pow(gamma,-1,P))
         target=gamma*symmetric_square(modmul(L12,L12).T)%P
