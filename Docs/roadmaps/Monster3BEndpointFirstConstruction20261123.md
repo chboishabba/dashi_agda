@@ -505,3 +505,8 @@ One unified source-faithful answer will consist of:
 4. Paper 10 finite 729 cyclotomic/signed butterfly transport, original Monster class fusion and actual 90D multiplicity matrices on the SAME W_s carrier.
 
 **Current endpoint status:** (A) individual Heisenberg automorphism/cocycle construction has an explicit mathematical solution and source manifest supplies its linear remainders; (C) characteristic-zero Hom evaluation formula is mathematically complete *conditional on actual W_s operators*; (B) simultaneous lift offsets/kernel membership and (D) actual selected characteristic-zero 90D action are not derivable numerically from only the 28 quotient-hit summary. No false promotion to a Monster group isomorphism, actual complex character selection or novel Weil theorem is made. This is a roadmap for solving the full endpoints BEFORE a later acceptance/replay phase.
+
+
+### P5 signed outer projective packet join (2026-11-24)
+
+Existing producer packets are joined by `scripts/monster3b_signed_outer_sym2_join.py`. For raw outer vacuum blocks A_s (12) and H_s (78), require A_-s A_s=-beta I and H_-s H_s=beta I, beta nonzero. With Q_s=Sym²(A_s^-T), test F_-s H_s F_s^-1=lambda_s Q_s; the signed loop requires lambda_+ lambda_-=beta³, not 1 unless normalized. Relative scaling G_+=F_+, G_-=F_-/lambda_+ fixes forward residual to 1 and reverse to beta³. Preserve both marked phases, zero/singular obstruction, packet hashes and inner D/E equations. This is a conditional modular packet join, not independently authenticated same-source provenance, ordinary Weil normalization or actual characteristic-zero Hom attachment. Original packet execution remains unpaid; L10B/C and L12R remain open. Prior ATLAS/mmgroup/Ibrahim/Nebe/TOE producers unchanged.
