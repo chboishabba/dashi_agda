@@ -63,6 +63,22 @@ All interval endpoints are exact Python fractions; \(s_i>0\) is a sign test rath
 
 **Remaining one maximum cut:** source-pin the seven original smooth ODE branch Taylor/Lohner charts and guard signs across a nonzero rational 69D box, including the first long source segment; construct outward-rational **centre \(F(z_0)\)** and actual full **\([DF(B)]\)**, with explicit source-forcing time enclosure \(\tau=20\pi/11\), no dropped 54 matches, signs \((+,-,+,+,-,-)\) for the six original guards and two actual spark saltations; then pass all 69 strict row inequalities and a uniqueness argument. If the first long segment overwraps, split it further with **paid** matching variables rather than silently using an unvalidated long source chart. No intermediate numerical root/pin/100%-energy claim promoted. Original J29/J30 nominal 6/6 roots, original J24 5/6 state boxes and exact nominal return remain the accepted frontier.
 
+
+## Newer donor heads — G70–G74 / COMP5p–r / R99–R106 and the J31 chart theorem
+
+The donor heads advanced during this source campaign (24 November):
+- [P≠NP Agda #1548](https://github.com/chboishabba/dashi_agda/pull/1548): G65–G69 signed source-variable cover and exact separator contraction; newer **G70–G74** two-sided bijunctive conditional fibres, guarded implication transport, and a locally-full crossing compilation. The critical warning for J31: an efficient individual fibre/guard evaluation **does not** pay global compatibility of the seven coupled charts or the fixed-point inclusion. Never charge all 69 interface coordinates as unavoidable independent computational work merely because the verifier represents them explicitly.
+- [π Agda #1546](https://github.com/chboishabba/dashi_agda/pull/1546): **G7/COMP5p** original P/Q/T projective 24 leaf gauge with a stored scale-reconstruction recipe; **G8/COMP5q/r** fixed-prime local content, no unjustified equality of raw and normalized source coordinates, performance not tested. In J31 this motivates a **different, proven mathematical operation**: exact positive rational coordinate/equation gauge for the 69D shooting verifier, with source reopening. It is **not** a claim the physical circuit has a free scalar symmetry or that π's special prime valuations apply.
+- [Langlands/GCT #1549](https://github.com/chboishabba/dashi_agda/pull/1549): **R99–R106** two-rail signed local inverse, global violated-clause floor, local inverse that avoids some inherited precision, 3-adic Smith modes and nonidentity chart transport. Its own negative controls prove local inverse/good representation does not automatically pay a global support decision. J31 likewise separates exact chart/Schur inversion from strict simultaneous global Krawczyk inclusion and retains every original interface residual.
+
+**New source-implemented exact coordinate chart law:** write \(z=z_0+D w\) for a **positive rational invertible diagonal** chart \(D\), apply independently an invertible positive equation scaling \(E\), and set \(F'(w)=E F(z_0+Dw)\), \(J'=EJD\), \(C'=D^{-1}CE^{-1}\), \(r'_i=r_i/D_{ii}\). The original exact row slack
+\[
+s_i=r_i-\sup|(CF)_i|-\sum_j r_j\sup|(I-C[DF])_{ij}|
+\]
+transports **exactly** to \(s'_i=s_i/D_{ii}\), because the cone keeps all original 69 variables and equations, and both scales are positive. Thus **strict inward acceptance is invariant under this source-recoverable chart**, including the full 54-component signed matching residual, six signed original guards and all seven original mode charts. Omitting equation scaling in the preconditioner or applying a noninvertible quotient does not have this theorem. This is a finite-dimensional unit/conditioning transformation; no electromagnetic gauge-invariance claim.
+
+The committed [source checker](../../scripts/check_smith_filsinger_j31_projective_sparse_preconditioner_20261124.py) now tests this law on a nontrivial exact 69D Fraction fixture with positive nonuniform variable/equation scales \(2,3,5\) and \(3,7\), respectively, and verifies **69/69 exact row-slack identities**, in addition to the original hidden-interface negative control. **Original electrical ODE interval chart oracle remains OPEN**, as does exact periodic existence. The donor PRs can progress independently; this page records the inspected current mathematical features, not a permanently live hash pin.
+
 ## Related sources
 
 - [J31 original 15D/69D shooting geometry](SmithFilsingerJ31SourceSpecific15D69DShootingGeometry20261124.md)
