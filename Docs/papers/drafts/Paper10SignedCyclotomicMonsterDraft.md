@@ -410,3 +410,25 @@ The **original source four-class ambiguity is paid**: stored \(2.\mathrm{Suz}.2\
 Allan Steel's [Ordinary Representations Database](https://magma.maths.usyd.edu.au/~allan/reps/db/) lists an actual faithful degree-12 **characteristic-zero** \(6.\mathrm{Suz}\) representation over a character field of degree two, Schur index one, with linked original Magma file [\`d12.6Suz.nfdeg2.M\`](https://magma.maths.usyd.edu.au/~allan/reps/db/d12.6Suz.nfdeg2.M). This is the correct original-source direction for the **matrix** \(A_g\) in \(V_{12}\oplus\operatorname{Sym}^2(V_{12}^\vee)\), distinct from finite ATLAS or characteristic-3 quotient representations. Because its faithful central \(C_3\) character contains \(\zeta_3\), the degree-two character field is exactly \(\mathbb Q(\zeta_3)\); Schur index one permits the genuine 12D model there, and the dual-symmetric-square 90D inner action remains over that same field.
 
 Only the external listing and linked file have been verified; the \`.M\` matrix bytes and standard-generator words have **not** been retrieved in this session. The **remaining endpoint** is source generator/field alignment to the GAP-selected 12a/b full-class rows and the authentic \(6.\mathrm{Suz}.2\)/Monster-normalizer action, then original 12D Hom intertwiner and outer phase. No unobserved Magma/GAP execution or original complex matrix is claimed.
+
+
+## 24 November 2026 — P5 exact ordinary-field one-source construction (Steel 12 → dual Sym²78 → 90)
+
+The original GAP source result is now much stronger than merely an abstract \(90=12+78\) split. The Monster-selected \(6.\mathrm{Suz}\) family is faithful12 Irr153/154 and nonfaithful **Nebe dual-Sym²78** Irr79/80 (selected central C2 trace \(+66\), same central-C3 phase), and the published source order-four class fuses uniquely to **Monster 4D**, though no particular MM word has been identified as that source element. Using the original full character equality, the *marked phase* inner representation is of genuine \(6.\mathrm{Suz}\) type
+\[
+\boxed{S_s|_{6.\mathrm{Suz}}\cong V_s\oplus\mathrm{Sym}^2(V_s^\vee).}
+\]
+
+**All 210 class-character values from one original 12D row.** The faithful12 character \(\chi_s\) is valued in \(K=\mathbb Q(\zeta_3)\), with nontrivial field automorphism \(\sigma\). For each original \(6.\mathrm{Suz}\) source class \(g\), ordinary symmetric-square theory gives the exact source identity
+\[
+\boxed{\chi_{90,s}(g)=\chi_s(g)+\tfrac12\left(\sigma(\chi_s(g))^2+\sigma(\chi_s(g^2))\right).}
+\]
+The existing source \`PowerMap(six,2)\` and selected 12 full-class row determine this **without** any new 78D matrix, 90D character search or generic test loop. The absolute \(\zeta/\zeta^2\) label is still marked by an actual source central generator, not an unmarked outer table.
+
+**Entire inner generator action over one explicit quadratic field.** Steel's ordinary [faithful \(6.\mathrm{Suz}\) degree12 source](https://magma.maths.usyd.edu.au/~allan/reps/db/) with [original Magma file](https://magma.maths.usyd.edu.au/~allan/reps/db/d12.6Suz.nfdeg2.M) has character-field degree 2 and Schur index 1. Its faithful order-three centre provides \(12\zeta_3^{\pm1}\), identifying its minimal field as **\(K=\mathbb Q(\zeta_3)\)**. For any genuine source matrix \(A_g\in GL_{12}(K)\), the whole selected inner multiplicity operator is obtained **exactly and functorially** in a coherent source basis:
+\[
+L_s(g)\sim\mathrm{diag}\big(A_g,\mathrm{Sym}^2((A_g^{-1})^{\top})\big)\in GL_{90}(K).
+\]
+The explicit \(78\times78\) polynomial-basis entry formula is given in [the complete P5 mathematical max-cut](../../physics/Monster3BSteelOrdinary12Exact90SourceAlignmentMaxCut20261124.md) and is implemented in [\`scripts/monster3b_steel_ordinary12_to90.py\`](../../scripts/monster3b_steel_ordinary12_to90.py). The exact one-involution projections on the actual \(90\)-dimensional Hom carrier remain \(\Pi_{12,s}=(I-J_s)/2\), \(\Pi_{78,s}=(I+J_s)/2\), not operations on the full 65610D original phase sector without the 729 Weil factor.
+
+**Boundary precisely retained:** our web/runtime cannot fetch the raw Steel \`.M\` contents (unsupported content type / DNS inaccessible). The original module variable, generator matrices, number-field embedding and corresponding standard group words are therefore **not claimed discovered**, and the source script's \`--acquire\` records the original attribution/SHA and a local inventory without executing Magma source as Python or claiming license to vendor it. The subsequent \`--matrix-json\` exact-field operator stage requires a genuine source-normalized 12D export and labels original GAP class, Monster MM word and actual Hom intertwiner as unverified until the corresponding original actions and 729 Weil gauge have been attached. **Mathematical construction is solved; same-object source-word realization remains open.** Remaining M3B-L10A original 12D module/generator/field alignment; M3B-L10B actual Monster Hom and source C/D group-word transport; M3B-L12R outer phase/gauge. No new proof/certification stage is added.
