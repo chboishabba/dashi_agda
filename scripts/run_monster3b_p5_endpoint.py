@@ -296,6 +296,20 @@ def main():
                     else:
                         report["lemma_status"]["M3B-L10C_projective_12_to_78_plus"]=\
                             "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
+                if positive and model_paid:
+                    iso_dir=out/"actual_mod31_78_intertwiner_plus"
+                    if run("actual_MM_78_to_dual_Sym2_12_plus_intertwiner",[
+                        sys.executable,
+                        SCRIPTS/"monster3b_actual_projective_sym2_intertwiner.py",
+                        "--model",weilmodel,"--plus",plus,
+                        "--outdir",iso_dir]):
+                        value=json.loads((iso_dir/
+                            "actual_MM_78_dualSym2_intertwiner_report.json").read_text())
+                        report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_plus"]=\
+                            value["status"]
+                    else:
+                        report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_plus"]=\
+                            "ACTUAL_MM_78_SOURCE_OPERATOR_OBSTRUCTION"
                 if args.both_mod31_phases and positive:
                     minus=out/"actual_mmv31_hom_opposite"
                     other=[sys.executable,
@@ -326,6 +340,20 @@ def main():
                             else:
                                 report["lemma_status"]["M3B-L10C_projective_12_to_78_both"]=\
                                     "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
+                        if model_paid:
+                            iso_dir=out/"actual_mod31_78_intertwiner_both"
+                            if run("actual_MM_78_to_dual_Sym2_12_both_intertwiners",[
+                                sys.executable,
+                                SCRIPTS/"monster3b_actual_projective_sym2_intertwiner.py",
+                                "--model",weilmodel,"--plus",plus,
+                                "--minus",minus,"--outdir",iso_dir]):
+                                value=json.loads((iso_dir/
+                                    "actual_MM_78_dualSym2_intertwiner_report.json").read_text())
+                                report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_both"]=\
+                                    value["status"]
+                            else:
+                                report["lemma_status"]["M3B-L10C_same_MM_78_operator_intertwiner_both"]=\
+                                    "ACTUAL_MM_78_SOURCE_OPERATOR_OBSTRUCTION"
                         if run("quadratic12_character_lift",[
                             sys.executable,
                             SCRIPTS/"monster3b_quadratic12_character_lift.py",
