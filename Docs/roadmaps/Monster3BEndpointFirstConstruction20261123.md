@@ -2,6 +2,37 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — L10A/B/C + L12R source implementations COMMITTED for workstation run
+
+**Read first:** [canonical P5 integrated implementation, exact provenance, run commands, residuals and producer→consumer routing](../physics/Monster3BP5WorkstationSourceIntegration20261124.md). **Run orchestration:** [\`scripts/run_monster3b_p5_endpoint.py\`](../../scripts/run_monster3b_p5_endpoint.py) and [local pure-algorithm smoke](../../scripts/test_monster3b_p5_endpoint_local.py). Actual \`mmgroup\` rank/characteristic-31 source: [\`monster3b_actual_mmv31_hom_projector.py\`](../../scripts/monster3b_actual_mmv31_hom_projector.py). This is NOT a new certification plan or alternate research architecture.
+
+**Workstation single command** (after checking out PR #1545 with original GAP result, Magma, mmgroup, SymPy and NumPy available):
+\`\`\`bash
+python3 scripts/test_monster3b_p5_endpoint_local.py
+python3 scripts/run_monster3b_p5_endpoint.py --all --actual-mod31-hom --timeout 900
+\`\`\`
+Use \`--source-file actual/d12.6Suz.nfdeg2.M\` if the original Steel download is already present; \`--module ActualName\` if Steel's original Magma GModule variable is not \`M\`. A fresh timestamped \`build/monster3b-p5-endpoint/run-*/endpoint_summary.json\` and stage logs are written. All source-unavailable outputs are explicitly labelled **source attachment pending**, not counted as passed mathematical endpoints.
+
+**Latest phased status:**
+- **P0–P2 paid**: original authentic 3B E/Z, GF3 Hit0 quotient, actual published \(N=EH\), unique **source** 4D Monster class and source class20 diagonal kernel. New exact full-MM source word producer \`monster3b_mmgroup_canonical_cover_words.py\` solves all **affine E section corrections simultaneously**, returns actual group corrected C/D words, chosen group orders and Z(E) relator residuals; **does not claim Hit0 literally 4D**.
+- **P3 partially realized computationally over actual Monster p=31:** factorized six order-three B idempotents and actual zeta-phase projector build the true 90D B-fixed subspace inside **MMV(31)** on the 196884D original Monster carrier. The new source \`monster3b_actual_mmv31_hom_projector.py\` can compute 12/78 **mod31** central-involution eigenspaces and the projected D vacuum sandwich (unknown Weil scalar). This is a genuinely ORIGINAL *modular* same-object representation datum and cannot be promoted to **characteristic-zero** merely by calling it the 12D Hom.
+- **P4 paid source selection**: actual GAP 6.Suz faithful12 Irr153/154, Nebe nonfaithful dual-Sym²78 Irr79/80, central C2 trace **+66**, two C3 same-phase pairings, source 4D. **No more 78-family search.**
+- **P5 algorithms source-written**: \`monster3b_steel_magma_export.py\` authentic Steel **ordinary complex12** GModule exporter with exact Qζ coefficients/SHA and real standard generator word fingerprints; \`monster3b_gap_ordinary12_class_fingerprint.py\` original 210-class 153/154 candidate map; \`monster3b_steel_ordinary12_to90.py\` exact faithful12→dual Sym²78→90 matrix functor; \`monster3b_ordinary12_hom_outer_weld.py\` strict Qζ **source-to-Hom** intertwiner equations and exact semilinear outer 12/78/90 maps with square residual. The original real complex \(\rho_W\)-based 12D Hom operators and genuine source \(\alpha\)-word map are still needed to *instantiate* the last two numerical steps.
+- **P6 deferred**: kernel/certification only after authentic source endpoints, no extra CI.
+
+**Exactly updated remaining lemma ownership:**
+
+| ID | New implementation | What is still **mathematically/source-specific** open? | Original producers → consumer |
+|---|---|---|---|
+| M3B-L10A | Steel original \`.M\` acquisition + Magma \`Representation(M)\` JSON (exact Qζ) + GAP order/trace/square character matches | Original Steel bytes and actual variable on workstation, identify standard generator class/word correspondence and absolute paired 153/154 phase, not guessed from a class tie | Allan Steel Magma → original GAP 6.Suz 210-class Irr153/154 → L10C/L10B |
+| M3B-L10B | Unique F3 E-affine corrected actual MM Hit0 words and all central-cover group residuals; actual MMV31 90D B-vacuum/eigen12-vs78; exact conditional Qζ Hom intertwiner solver | Provide original **characteristic-zero** Monster Hom12 action or rigorous field-lift/source identification; genuine standard Steel→H/MM word map; p31 alone insufficient | Dietrich et al. original MM words, original mmgroup, Barraclough–Wilson \(N=EH\), Ibrahim Hom → Paper10 |
+| M3B-L10C | Full exact dual Sym²78 and 90 construction, source field, original 210-class trace identity | Numeric values require Steel source 12D matrices, no independent 78D problem | Steel faithful12 + GAP selected Nebe78 → original 90D source module |
+| M3B-L12R | Corrected literal MM C/D central relators, original source class4D known; exact semilinear source outer \(\alpha\) 12/dual78/90 and Uσ(U) cover residual | Original outer standard-source \(\alpha\), actual MM hit-to-class4D map, true paired phase/729 Weil gauges. 4D source class **not** a word identity | GAP 4-class fusion, ATLAS C/D quotient, MM corrected word, original N-cover → actual Monster/W Hom |
+
+**No false promotion:** Steel's ordinary faithful12 representation is *not* the original GF3 symplectic quotient12; the actual 196884D MMV31 source is *not* the characteristic-zero Monster \(W\). The source original 4D fusion class is not automatically the corrected MM word. A canonical \(12\oplus\operatorname{Sym}^2(12^\vee)\) inner representation is equivalent up to a source intertwiner, not an unprovided literal original Monster matrix. The exact last source attachments are described above, rather than pretending all four theorem endpoints have been evaluated without the user's source runtime.
+
+---
+
 ## 24 November 2026 — P5 STEEL ORDINARY 12→90 EXACT-FIELD CONSTRUCTION AND SOURCE ALIGNMENT
 
 [**Canonical mathematical max-cut and owned P5 lemmas**](../physics/Monster3BSteelOrdinary12Exact90SourceAlignmentMaxCut20261124.md) · [**implemented original-source acquisition and exact operator functor**](../../scripts/monster3b_steel_ordinary12_to90.py) · source: [Allan Steel's original Ordinary Representations Database](https://magma.maths.usyd.edu.au/~allan/reps/db/) and [original \`d12.6Suz.nfdeg2.M\`](https://magma.maths.usyd.edu.au/~allan/reps/db/d12.6Suz.nfdeg2.M).
