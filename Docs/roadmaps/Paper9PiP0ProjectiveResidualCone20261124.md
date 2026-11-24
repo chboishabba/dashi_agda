@@ -1529,3 +1529,223 @@ kernel proof or world-record claim was made.
 The historical COMP5j measured baseline is
 unchanged and COMP5u is not inserted into the
 six-way benchmark default.
+
+
+## 24 November — COMP5v: one shared radical product for both adjacent Chudnovsky consumers (NO EXECUTION)
+
+**Motivation and donor boundary.** The user's P-vs-NP G83
+negative control reminds us that the cost of an expanded
+source observation is not the cost of its actual consuming
+arithmetic. The current original π source is NOT a SAT or
+\(\mathbb F_2\) problem. COMP5v is a separate exact
+INTEGER source factorization of COMP5u's same original
+Chudnovsky edge and three-sector certificate. No
+finite-field contraction, unproved compression, or
+P-vs-NP hardness statement is imported.
+
+### G15 — exact common-radical factorization from the signed affine edge
+
+Use the genuinely normalized source edge
+\(E_n=(n,T',Q',V)\) from COMP5t and the literal
+source next-denominator \(q=q_n>0\).
+Let \(H=426880\,5^d>0\), \(R=\lfloor
+2^b\sqrt{10005}\rfloor\), \(k=b-d\ge0\).
+Compute exactly
+
+\[
+Z=HQ',\qquad Y=ZR.
+\]
+
+No extra precision assumption or source-coordinate
+truncation is needed. The original positive source
+series bounds are ordered by the **signed residual**
+\(\delta'=V-T'q\), whose sign is
+\((-1)^n\). The source-defined adjacent endpoint
+denominators are \(Q'\) and \(Q'q\), but the
+following products need not MATERIALIZE \(Q'q\)
+as a separate multi-limb integer:
+
+| Original cutoff | \(N_{\rm lo}/D_{\rm lo}\) | \(N_{\rm hi}/D_{\rm hi}\) | Lower root numerator \(A=HRD_{\rm hi}\) | Upper root numerator \(W=H(R+1)D_{\rm lo}\) |
+|---|---|---|---|---|
+| even \(n\) | \(T'/Q'\) | \(V/(Q'q)\) | \(qY\) | \(Y+Z\) |
+| odd \(n\) | \(V/(Q'q)\) | \(T'/Q'\) | \(Y\) | \(q(Y+Z)\) |
+
+Proof: substitute \(Y=HRQ'\) and
+\(Z=HQ'\). For even \(n\),
+\(HR(Q'q)=qY\) and \(H(R+1)Q'=Y+Z\).
+For odd \(n\), \(HRQ'=Y\) and
+\(H(R+1)(Q'q)=q(Y+Z)\). All products
+are over the EXACT same original
+normalized integer source; the
+\(q\) factor is unchanged (a raw next leaf,
+NOT its prime-local normalized producer).
+The 2×2 matrix product and signed
+orientation are unchanged.
+
+The numerator quotient and two
+Euclidean remainders therefore remain
+*literally identical* to COMP5u's
+normalization-coordinate values:
+
+\[
+A=2^k(xN_{\rm hi}+\rho)+\ell,\quad
+0\le\rho<N_{\rm hi},\quad0\le\ell<2^k
+\]
+
+and
+
+\[
+W=2^k u+\eta,\quad0\le\eta<2^k.
+\]
+
+Thus all three COMP5u decision sectors
+and the G12–G14 positive/signed correction
+arguments carry over **without** changing
+the output floor, adjacent endpoints,
+series cutoff, radical guard or
+source-scale recipe. This is an
+algebraic code transformation, not an
+experimental equivalence certificate.
+
+### G16 — failure-only remainder construction and selected cost fibres
+
+Original COMP5u always computes \(\eta\)
+using \`mpz_fdiv_qr_2exp\` on \(W\)
+before knowing whether the first strict
+upper comparison succeeds.
+COMP5v first computes the upper
+dyadic **quotient only**, admitting if
+
+\[
+u=\lfloor W/2^k\rfloor < (x+1)N_{\rm lo}.
+\]
+
+Only if this fails does it materialize
+\(\eta=W\bmod2^k\), then perform the
+same two signed/unsigned COMP5u
+corrections:
+
+\[
+u+\left\lfloor\frac{\eta-HD_{\rm lo}}{2^k}\right\rfloor,
+\qquad
+\rho+\left\lfloor\frac{\ell+HD_{\rm hi}}{2^k}\right\rfloor .
+\]
+
+Their source-aligned scale products are
+\(HD_{\rm lo}=Z\) and \(HD_{\rm hi}=qZ\)
+for even \(n\), reversed for odd \(n\).
+No second square-root multiplication
+or entire 10005 radicand square is
+needed to classify an ordinary
+failure. A successful first upper
+comparison never creates \(\eta\).
+The lower Euclidean \(\rho,\ell\)
+are still produced unconditionally
+in this variant; a future even
+lazier lower-division strategy must
+charge reconstructing them on failure
+instead of silently treating them
+as available.
+
+Resource hypotheses are NOT
+performance facts. COMP5u forms
+two independently evaluated root
+products \(H R D_{\rm hi}\) and
+\(H (R+1)D_{\rm lo}\), whereas COMP5v
+forms a single shared \(Y=H Q'R\)
+and uses additions and source
+\(q\)-multiplications. COMP5v adds
+potentially costly \(qY\) (even)
+or \(q(Y+Z)\) (odd) and on-demand
+\(qZ\) correction products.
+Neither the arithmetic bit cost
+nor actual GMP peak is thereby
+proved lower for all n,b,d.
+The source's \`Counts\` ledger
+separately records base creation,
+single shared radical product,
+parity \(q\) products, two lower
+divisions, upper quotient, failure-only
+upper remainder, correction products
+and selected sectors. These counts
+are **logical source sites**, not
+complete multiplication-bit-work
+or measured memory. Existing GMP
+allocator hooks remain the
+eventual empirical physical receipt
+boundary, not a claim that the
+current candidate was executed.
+
+### G17 — same projective BIDI and exact carry under shared construction
+
+The source gauge \(G_{0,n}=
+\prod_{1\le j<n}24h_j>0\) remains
+attached to the indexed normalized
+edge. For authentic raw P/Q/T,
+\(Q_{\rm raw}=GQ'\), \(T_{\rm raw}=GT'\),
+\(V_{\rm raw}=GV\) and
+\(\delta_{\rm raw}=G\delta'\).
+Therefore \(Z_{\rm raw}=GZ\),
+\(Y_{\rm raw}=GY\), \(A_{\rm raw}=GA\),
+\(W_{\rm raw}=GW\).
+This DOES NOT mean that the
+nested Euclidean residues scale
+linearly. G14 still applies:
+
+\[
+c=\left\lfloor\frac{G\ell'}{2^k}\right\rfloor,\quad
+\rho_{\rm raw}=G\rho'+c,\quad
+\ell_{\rm raw}=(G\ell')\bmod2^k.
+\]
+
+The exact raw-source scale recipe
+is optional to evaluate in the
+fast floor path; an independently
+authenticated producer and
+scale reconstruction are still
+required if a consumer demands
+literal original integer
+coordinates or raw quotient
+remainders. A zero remainder
+in one gauge is not necessarily
+a zero remainder in another,
+and this is distinct from the
+actual source zero mode and
+original signed tail.
+
+### COMP5v source owners and next gates
+
+- \`scripts/pi_p0_shared_radical_sector.hpp\`:
+  original-source sign-checked
+  common-factor and three-sector
+  consumer, with lazy \(\eta\)
+  on failure and primitive counters.
+- \`scripts/check_pi_p0_shared_radical_schedule.cpp\`:
+  integrated COMP5u-derived independent
+  GMP candidate, unchanged full-precision
+  original P/Q/T projective leaf
+  producer, original source \([n,n')\)
+  suffix extension, signed exact-P
+  reopening, no changed radix/analytic
+  stopping gate, and separate receipt
+  fields. The original COMP5u and
+  COMP5t comparison candidates remain
+  in place, as does measured COMP5j.
+
+| Gate | Exact obligation | Status |
+|---|---|---|
+| S20 | G15 both-parity common-factor identities and preserved ordered source matrix | Derived algebraically; source candidate committed, kernel OPEN |
+| S21 | G16 lazy \(\eta\), signed floor division and identical three-sector classification to COMP5u | Derived; exact-source compilation and negative tests DEFERRED |
+| S22 | G17 original projective raw coordinate and Euclidean dyadic carry reopening | Existing helper retained; formal original-source authentication/kernel OPEN |
+| S23 | Costed comparison of **one large root product plus q products** against **two root products**, including live GMP limb scratch, on-demand remainder and planning | Structural source counters only; optimized dominance OPEN |
+| S24 | Signed odd/even cone, n/d/b separation, source-only suffix and root-only guard retry | Candidate preserved; native acceptance DEFERRED |
+| S25 | Analytic original Chudnovsky π, Bishop same-real, formal cost theorem and external independently certified SOTA | P0 OPEN |
+
+**No testing or benchmarks per explicit user direction.**
+No C++ compilation, independent Python/SymPy
+runtime, GitHub CI, Agda/Lean kernel, measured
+runtime/heap/RSS or world-record comparison
+performed in this tranche. Mathematical
+source identities do not imply a
+speedup until bit-cost and memory
+work are actually established.
