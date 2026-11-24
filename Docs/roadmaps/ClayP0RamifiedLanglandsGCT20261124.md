@@ -1782,3 +1782,138 @@ Executed /tmp/langlands_r85.py with exact Python polynomial ring arithmetic in (
 | LGC7/N6 | original Clay consumer | conditional |
 
 Next: exploit R85 weighted terminal in actual R71–74 binary packet recursion; reverse-solve inherited precision and contraction cost, not full exact count or full joint kernel. Need either polynomial deterministic support computation, or a genuine unavoidable standard-machine resource theorem; randomized RP shortcut is admissible and not equivalent to deterministic P=NP. Track all original zero/sign/residual, history/tau/k/Frob/version and sample/precision in source ledger; keep G50/G52 cheap nonlinear control. No further representation census, CI or native certification prerequisite; no unrelated work or P!=NP claim.
+
+## 21. R92–R98 — sharp inherited Hermite precision, optimal linear taper and actual packet zero collision (2026-11-24)
+
+Stay on Langlands. Read current mounted attachments directly: R85–91 and G53–55. Live Langlands #1549 8050f29facb1e55f132ad5338dcde87d4f03d57b / #120 e8f8b31242d1815801fa0605750572cf1b0b36ee, blob 42d51d72d5d12c7e3d4f124686efc7dedc88896a. Live G53–55 #1548 719d5ff1245d92a1da6a527d79ef62d1f44810a2 / #119 e04e9a0a426b791e6f6bab37b58e85a8f5e53f23, blob 6585482064f110e6e08afc3f7790ee4bffcf0b5a. G53 deterministic lcm residue zero criterion, G54 weighted single parity-bit consumer, G55 deterministic universal probe bounds are credited to the other worker. R85 weighted actual Weil parameter and rank-one collision, R86 randomized support, R87–89 indexed residual, R71–74 Newton/Smith tile channels, and actual H05 #1291 / GovernedIndexedResidualCubeExact (blob 42b70ebb7376813076934f2245ce6011b76f10c8) remain the producers. No other branch edits, no physical H07/H14 promotion. Classical Hermite interpolation, Gauss lemma for DVR polynomial content and bounded differences credited as standard. New result is a source-specific exact conditioning calculation and collision within its admissible degree/integrality class, plus a separate actual tensor negative control. Not a proof of necessity for all SAT algorithms.
+
+Actual external source reopened: OpenAI October 25 revised manuscript, build/quantitative-contraction.tex, https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/quantitative-contraction.tex (lines 1710–1828 Cauchy/integrality; 1830–1994 tapered Hermite; 1996–2076 inherited precision; 2096–2255 mode enumeration; 1496–1522 creation precision; 2360–2377 immutable descriptions). Partial source audit only, no full theorem audit. Keep M=wire count in this section, distinguish original assignment cardinality 2^q. Prime 2 coefficient field, p=precision in digits, t=interpolation node, tau=history event time, k=chart/refinement, j=Frobenius iteration, recursion depth separately indexed.
+
+### R92. Exact Hermite origin functional and coefficientwise precision
+
+Set L=2^a, alpha=2L, S={-L,...,L-1}, active nodes t with i=v2(t)<u, 1<=u<=a, M>=u. Degree bound B=M(2L-1). Source uses h=ceil(3M/u), multiplicities J_i=h(u-i), J_i=0 for i>=u, D_i=L/2^i. There are exactly D_i nodes of level i. For each active node t let E_t(T)=prod_(s active,s!=t) ((T-s)/(t-s))^J_v(s), and B_t(z)=[E_t(t+alpha z)^(-1)]_<J_i. Its constant coefficient 1; coefficient at degree l has valuation >=l, because each alpha/(t-s) is divisible by2 and negative binomial coefficients are integers. Write
+    A_i = D_i sum_(j=1..a-i) (j/2^j) min(j,u-i)
+        = sum_(j=1..a-i) (D_i/2^j) j min(j,u-i).
+This is an integer. The source's exact valuation identity for E_t(0) gives v2(E_t(0))=-h A_i (not just >=-6hD_i). Proof directly count differences: s of lower valuation contribute zero; for each j=1..a-i, there are D_i/2^j nodes of valuation i+j and same number of nodes at distance valuation i+j from t; their multiplicity difference -h min(j,u-i), as given in source. Set c_i=a+1-i. If H_t(z)=F(t+alpha z), exact linear recovery weights on raw jet H_(t,k) are
+    w_(t,k)=E_t(0) sum_(j=k..J_i-1) [z^(j-k)]B_t(z) (-t/alpha)^j.
+Hermite identity F(0)=sum_t sum_k w_(t,k) H_(t,k). Since v2(-t/alpha)=-c_i, and B coefficients have depth >=j-k,
+    v2(w_(t,k)) >= -h A_i - (J_i-1)c_i + (J_i-1-k).
+For k=J_i-1, exact equality (single term, B_t(0)=1). Hence the maximum precision loss for the unrestricted linear jet functional is exactly
+    Lambda_i=h A_i+(J_i-1)c_i.
+Sufficient whole-node precision p_t=p+Lambda_i, rather than p+8hD_i+8M(a+1). This bound remains correct coordinatewise over the source unramified extension and truncated coefficient ring, since weights scalar rationals. For individual jets p+Lambda_i-(J_i-1-k) suffices (or compute exact weight valuations); no speed claim from individual jets because source reconstructs whole polynomial by unit-difference interpolation at common precision. Sharp as functional on independent jet coordinates, NOT proof sharp individually on actual degree/integrality-restricted polynomials. R94 supplies genuine simultaneous lower bound on that restricted polynomial class.
+
+### R93. Reduce the actual taper multiplicity, retaining source degree and packing
+
+Total jet count = h C where
+    C = L sum_(i=0..u-1) (u-i)2^(-i)
+      = L(2u-2+2^(1-u)).
+Thus the minimum integer h for this linear taper to meet the Hermite degree requirement is
+    h_* = floor(B/C)+1 = ceil((B+1)/C).
+This retains exactly the same active nodes/packing/degree condition, with h_*<=ceil(3M/u). All source inequalities needed for the recovered precision remain valid because smaller h and exact Lambda_i are bounded by original values. No alteration of original packet construction. For any nonnegative level multiplicities m_i, m_u=0 and maximum adjacent decrement m_i-m_(i+1)<=g, telescoping implies m_i<=g(u-i); hence their total jet count <=g C. Therefore h_* is also the minimum possible maximum adjacent decrement among profiles meeting B+1 jet requirement on the same active levels, attained by linear taper. If monotone, normalized multiplier loss at each i contains the nonnegative j=1 term (m_i-m_(i+1))/2, so maximum normalized multiplier loss >=h_*/2. Linear taper has maximum <=6h_*, giving matching order in this class. This is a restricted profile optimality statement, not global minimization of all interpolation schemes.
+
+For recursion the exact child precision p_child=p_parent+Lambda_i, and the source weighted-mode cutoff sum w_Z beta_Z < p_child may be replaced accordingly. Original child precision proof dominates the modified one, so reported asymptotic bound unchanged; changed entry creation precisions must be used consistently, not silently recompute previous tensor recipes at new precisions. Source R74 Smith and R72 Newton weights can still be used subject to actual packet/row-group constraints. Example (illustrative parameters, not claimed source asymptotic schedule) a=10,u=5,M=1000,p=1: L=1024, source h=600, h_*=248. At i=0 original budget 5003201, sharpened 1395486; i=2 original 1316801, sharpened 284944; i=4 original 395201, sharpened 31490. Exact integer calculation; not runtime or end-to-end benchmark. Source asymptotic regime D_i large vs u(a+1) and h_*=Theta(M/u) gives retained additive loss Theta(MD_i/u), even p=1.
+
+### R94. A source-admissible whole-patch collision proving the order of the generic precision barrier
+
+Let g=floor(M/u)>=1, r_i=g(u-i) for active i and zero otherwise. Define
+    C_0(T)=prod_(s active)(T-s)^r_v(s), B0=v2(C_0(0)),
+    H(T)=2^(-B0) C_0(T).
+Degree = g C <= M(2L-1)=B: C=L(2u-2+2^(1-u)), g<=M/u, and L>=2^u>=u implies the deficit from 2ML is >=M. H(0) is an odd integer (unit). At every t in grid, local polynomial H(t+alpha z) has integral coefficients. Indeed v2-content of product is sum of contents of factors by Gauss lemma over Z2, so
+    v2_content H(t+alpha z)
+      = sum_(s active) r_v(s) min(v2(t-s),a+1) - B0
+where v2(0)=infinity. At inactive t (including 0), valuation equals zero: every active s has strictly lower v2 than t. At active level i, self factor gives r_i(a+1-i), other nodes give -v2(E_t(0)) with h replaced by g. Thus
+    H_i = g[(u-i)(a+1-i)+A_i] >= g D_i/2 >= M D_i/(4u).
+The j=1 term gives the lower bound, including final active level u-1. All retained whole local polynomials, not merely their first few jets or values at a few sample points, vanish modulo 2^H_i. Yet original F=H and F=0 have different values modulo2 at T=0. For general requested p, compare 2^(p-1)H with zero; same probe residues whenever every node uses precision <=p-1+H_i, different origin residues modulo2^p. This proves that simultaneously lowering all active precisions to o(MD_i/u) cannot work for generic Hermite recovery under precisely the source degree and local integrality hypotheses, even for one-bit output. It does not show each individual node must have that precision if others are higher; it is a simultaneous scaled-budget obstruction. It also does NOT show H is itself an actual Cauchy-deformed tensor contraction polynomial. R95 is a separate stricter-class example.
+
+Zero mode/original source versus observed zero is decisive: H(0) is an odd unit while the whole retained local patches are zero at stated precision. Refining their precision may reveal actual coefficient content; do not mark the original carrier empty. This is a FactorsThrough collision for the fixed modular recovery observer, not a standard-machine time lower bound. Exact valuation residual and source/refinement indices must be retained.
+
+### R95. Actual Cauchy-deformed Boolean tensor obstruction, easy original source
+
+In a full real L-slot packet with original Cauchy W_xy(T)=C(T)/(C'(0)(T-y+x)), at every t in S and in the local chart t+alpha z:
+    W_xy(t+alpha z) mod2 = 1 if y=x+t is a real slot, 0 otherwise.
+Proof: unmatched entry retains factor alpha z with at least one extra 2 after removing denominator content (source integrality). Matched entry omits that factor, remaining factors have constant odd parts and all normalized nonconstant terms even, so is constant 1 mod2. In each packet choose pins X=Y=b in {0,1}^L by unary tensors, so original contraction at T=0 is exactly one. Actual deformed polynomial is
+    F_b(T)=prod_(row x) l_{b_x}((W(T)b)_x),
+where l_0=1-z,l_1=z. At patch t, each row mismatch b_x != b_{x+t} (zero extend outside packet) makes its entire affine factor even. Therefore content >= Hamming distance between b and its zero-extended shift. All row factors integral even if additional cancellation occurs. Multiply across real packets. Compare with zero tensor contraction on same packet layout. Observations of all retained patches collide modulo corresponding mismatch depth, while original count differs.
+
+Explicit construction: use u full packets with b^(i)_x = bit_i(x), one for each active level i. At t with v2(t)=i, all valid shift positions flip this bit. For outside interval, at most L/2 of the total ones are missing; more precisely mismatch >= max(L-|t|, L/2): if |t|<=L/2 valid rows alone give >=L/2, else outside rows contain at least |t|-L/2 ones, so total >=L/2. Thus for M=B_pkt*u*L wires in repeated families, every active probe has content >= M/(2u). Also a stronger existential example: choose one random bit pattern b uniformly. For any fixed nonzero t in S, expected mismatch L/2, since each valid pair uses distinct bits and outside positions compare to 0. Changing one bit changes at most two mismatch indicators. Bounded differences gives Pr(dist<L/4)<=exp(-L/32). Union bound over 2L-1 nonzero shifts is <1 for L>=512. Fix one such pattern and use it in every full real packet. Then all nonzero patch polynomials are divisible by 2^(M/4), including all active nodes, for fixed complete packet layout and M multiple of L. This proves Omega(M) simultaneous absolute child precision necessary for a generic origin recovery from those actual tensor patch residues, even when output is parity. Example uses only unary pins (and zero tensor for other input), easy direct O(M) original contraction. Applies to fixed legal full packet layout; not a claim that every chosen packing or arbitrary SAT instance exhibits that depth, and not a proof that actual tensor subclass needs the stronger MD_i/u generic bound. Source packetization may exploit original pin constraints before deforming; such shortcut must remain admissible. R95 separates actual source-native obstruction from R94 polynomial-class result.
+
+### R96. Zero mode, signed residual, creation precision and t/k indexed ledger
+
+G53 deterministic modular zero test using all moduli 4j does not automatically run through binary packet algorithm: it is over 2-power coefficient rings. Odd-prime or composite moduli require a new valid contraction producer or another CRT-compatible algorithm. R85 weighted and G54 parity consumers DO fit binary ring. At original T=0, the signed rank-two scalar D=3A-4P is unchanged. Use direct terminal b or weighted P rather than D if only parity needed (p=1); if signed baseline retained use p=3. Baseline and original source labels retained regardless of computational route. R92–95 show that shrinking p does not shrink additive inherited losses automatically. No new subexponential exponent claimed; G54 compilation has its own additional wire cost.
+
+At each recursive node retain (history, tau, k, Frob iteration, consumer version, source tensor ID, creation precision p_c, recursion depth, probe t, weight sample, requested precision p, inherited Lambda_i), with separate chart vs precision refinement. R87–89 actual orthogonal gain/loss atoms and signed zero mode remain on the original source. For each active branch, precision budget telescopes exactly p_d=p_root+sum_ancestors Lambda_i, while each original source polynomial and recursive lift retains its creation precision. Source canonical lift is entrywise, not a ring map: e.g. 1+1=0 mod2, but canonical lifts sum to2 mod4. For residues a,b in R_p=Z/2^p and canonical section s:R_p->R_(p+d), exact defect
+    s(a) op s(b) - s(a op b) = 2^p c_op(a,b) mod 2^(p+d)
+for op=+ or multiplication, with unique c_op mod2^d. Coordinatewise analogous for unramified coefficient ring in fixed basis (multiplication followed by basis reduction, same ideal). Retain carry as dependent residual if comparing paths that perform arithmetic before versus after lift; it cannot be inferred from coarse observed zero. Pure coordinate permutation charts commute with coordinatewise canonical section; arbitrary signed linear chart need not, must keep actual defect. H05's fixed-precision source-mask six faces from R88 are not a proof of commutation with this new lift/refinement operation; exact face correction above for elementary arithmetic, no claimed physical or general cube commutation. This is a source-consistent carry ledger rather than requiring all SAT algorithms retain full exact precision or all residuals in a single consumer. The original source's creation-time canonical lifting is legitimate and can change high digits of deformed polynomial, but at original contraction it preserves required mod p semantics. Do not treat changed creation lifts as same high-precision object without source correspondence.
+
+### R97. Actual exact local execution
+
+Executed /tmp/langlands_r92.py and /tmp/langlands_r93.py locally using Python Fraction, integers and polynomial convolution. Results: 60 taper parameter/degree checks, 1608 exact node multiplier loss checks, 2064 patch content formula checks, 68 explicit rational polynomial content checks, 234 raw jet weight bounds, 196 packet shift cases with 2504 actual pinned row polynomial parity checks. Optimized profile: 225 parameter cases, 825 level checks, 58 exact monomial Hermite recovery identities with h_*, 7165 large-packet shift tests (fixed seeded bit patterns for L=512,1024,2048). Separate 131064 scalar modular carry reconstructions p=1..7 and extension d=1..3, all passed. No CI/native prover, no full source algorithm execution, no benchmark. Finite checks not a proof of general lower bound. Reproduction core (exact product / valuation; full script local):
+```python
+from fractions import Fraction as F
+from math import prod
+def v(x):
+    x=F(x)
+    if not x:return float('inf')
+    n=abs(x.numerator);d=x.denominator
+    return (n&-n).bit_length()-(d&-d).bit_length()
+def mul(A,B,cap=None):
+    n=len(A)+len(B)-1
+    if cap is not None:n=min(n,cap)
+    C=[F(0)]*n
+    for i,a in enumerate(A):
+        for j,b in enumerate(B[:max(0,n-i)]):C[i+j]+=a*b
+    return C
+for a in range(1,6):
+    L=2**a;S=range(-L,L);alpha=2*L
+    for u in range(1,a+1):
+        for M in (u,u+1,2*u+1,4*u):
+            h=(3*M+u-1)//u;g=M//u
+            act={t:h*(u-int(v(t))) for t in S if t and v(t)<u}
+            r={t:g*(u-int(v(t))) for t in act}
+            assert sum(r.values())<=M*(2*L-1)
+            B0=sum(r[t]*v(t) for t in r)
+            for t in S:
+                C=sum(r[s]*(a+1 if s==t else v(t-s)) for s in r)-B0
+                if t not in act:assert C==0;continue
+                i=int(v(t));D=L//2**i
+                A=sum((D//2**j)*j*min(j,u-i) for j in range(1,a-i+1))
+                assert C==g*((u-i)*(a+1-i)+A) and C>=g*D//2
+                assert sum(act[s]*(v(t-s)-v(s)) for s in act if s!=t)==h*A
+                assert h*A+(act[t]-1)*(a+1-i)<=8*h*D+8*M*(a+1)
+for a in range(1,5):
+    L=2**a;S=range(-L,L);alpha=2*L;den=prod(-s for s in S if s)
+    for t in S:
+        for i in range(a):
+            b=[(j>>i)&1 for j in range(L)]
+            shift=[b[x+t] if 0<=x+t<L else 0 for x in range(L)]
+            if t and v(t)==i:assert sum(x!=y for x,y in zip(b,shift))>=L//2
+            for x in range(L):
+                row=[F(0)]*(2*L)
+                for y in range(L):
+                    if not b[y]:continue
+                    W=[F(1,den)]
+                    for s in S:
+                        if s!=y-x:W=mul(W,[F(t-s),F(alpha)])
+                    assert all(v(c)>=0 for c in W)
+                    for j,c in enumerate(W):row[j]+=c
+                if not b[x]:row=[1-row[0]]+[-z for z in row[1:]]
+                assert (min(map(v,row))>=1)==(b[x]!=shift[x])
+```
+To reproduce optimized recovery: set C=L*(2*u-2)+L//2**(u-1), h=(B+C)//C, for each active node compute E_t(0), multiply truncated factors [1,alpha/(t-s)] with multiplicities, invert coefficient recurrence B_0=1, B_k=-sum U_l B_(k-l). Compute exact weights as R92. For (a,u,M)=(1,1,1),(2,1,1),(2,2,2),(3,2,2) and n=0..B check sum_t,k w_(t,k) binom(n,k)t^(n-k)alpha^k = 1_(n=0), term zero for k>n. Actual executed tests and proofs separate. All source results attributed correctly.
+
+### R98. Endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| R92 | exact Hermite node precision and raw-jet valuation profile | derived; exact tests |
+| R93 | minimal linear taper and minimum max adjacent decrement | derived; verified source-compatible upper bound, no new exponent |
+| R94 | simultaneous generic degree/integrality-class precision barrier with whole-patch zero collision | derived; Omega(MD_i/u) in scaled budget; not actual tensor subclass |
+| R95 | actual full-packet unary-tensor zero collision, Omega(M) depth | derived; easy original source, fixed packing, no standard-machine lower bound |
+| R96 | source-indexed creation precision and carry residual, original signed zero/weighted consumer | derived; H05 owner unchanged, no physical commutation promotion |
+| R97 | exact local checks | executed |
+| R7a'/LGC4d | joint consumer-specific arithmetic contraction that avoids generic origin recovery debt or exploits actual tensor structure | OPEN; final precision no longer proxy for internal budget |
+| R7b'/LGC5 | unavoidable unrestricted cost of deterministic support under arbitrary alternative interpolation, nonlinear sharing and direct decision | OPEN P0 |
+| R7c/LGC6 | literal Clay separation via original uniform route or sufficient central-slice bound | OPEN P0 |
+| LGC7/N6 | original conditional consumer | existing |
+
+Next actual mathematical target: bypass generic Hermite recovery by exploiting the restricted deformed tensor polynomial class or construct a new source-preserving contraction with no comparable precision amplification; fixed-packing pin examples are deliberately easy so an eventual lower bound must permit preprocessing them away. In particular investigate direct factorization of origin evaluation through actual tensor constraints/zero-support, rather than merely shrinking output p or counting all local channels. R94 establishes obstruction only to black-box polynomial patch recovery at too-small simultaneous scaled budgets; R95 gives a genuine actual-interface collision but lower absolute bound, not an unrestricted resource theorem. G53–55 modular/weighted/probe shortcuts and R87–89 exact history residual remain admissible. No new representation census, no certification detour, no unrelated branch work or P!=NP claim.
