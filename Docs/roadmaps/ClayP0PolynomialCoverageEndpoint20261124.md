@@ -2337,3 +2337,170 @@ Compiler reproduction detail: use gate truth-table encoding for AND/OR/XOR (for 
 | N6 | originalClayTransport | conditional #1040 terminal / #1129 coverage |
 
 Aristotle BIDI: exact count precision and explicit representation dimension cannot be required for decision. G53 gives deterministic low-precision cover; G54 constant final precision uses weights and changes the graph with paid polynomial overhead. Actual reported 2026 tensor/Hermite algorithm's internal valuation losses and mode costs must be analyzed for these modular consumers before claiming speedup. In particular low final precision does not bound intermediate denominators. To settle literal Clay, need a deterministic uniform resource lower bound for SAT itself (or a valid polynomial solver), not merely hardness of parity/counting or a universal linear-observer lower bound. No new certification or representation prerequisite, no P!=NP claim.
+
+
+## 25. P0-G56–G59 — zero mode, signed residual, indexed Fourier horizon and inherited precision (2026-11-24)
+
+P0 remains literal Clay P vs NP. User explicitly requires zero mode, signed residual and indexed hyperfabric. Read both attached pasted files (G53–G55 and Langlands R85–R89, reported #1549/#120 heads 8050f29facb1 / e8f8b31242d1). Both original P0 roadmaps read at 719d5ff1245d / e04e9a0a426b, common blob 6585482064f110e6e08afc3f7790ee4bffcf0b5a. Reopened actual DASHI/Core/GovernedIndexedResidualCubeExact.agda default-branch blob 42b70ebb7376813076934f2245ce6011b76f10c8: Index retains history,time,depth,iteration,version; IndexedCube has per-index vertices, faces, residual types; ExactFaces vs ResidualFaces; six paths. Reuse H05/#1291 but do not close H07/H14 or modify TOE/Monster/Langlands. Other producers G13 original width-three carrier, G14 scope incidence, G16/G17 binary control, G28/G33 signed reduction, G45–G48 locally-full flag, G49–G52 universal conjunction quotient, G53–G55 modular weighted consumers, R57–R60 affine/character/interpolation, R71–R74 tile Smith. #1006 FactorsThrough/self-reduction, #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 standard-machine coverage, #1040 terminal, #607/#678 Aristotle. The elementary Fourier, linear-span and Hermite arguments below are derived here for these specific interfaces; no literature novelty or native kernel claim.
+
+### G56 — low-degree signed source interface determines the original relation
+
+Use q original assignment bits and actual absent-clause selector t. For a current original width<=3 relation b(x) in {0,1}, define unnormalized signed Fourier S(h)=sum_x b(x)(-1)^(h dot x). S(0)=W is integer zero mode; nonzero h retain signs. For an original scope I and pattern p, contextual count M_(I,p)=sum_{x:x|I=p} b(x) is
+
+    2^|I| M_(I,p) = sum_{a subset I} (-1)^(a dot p) S(a).
+
+The RHS is exact integer arithmetic (no division over F2 without precision accounting). In the other direction S(a)=sum_p (-1)^(a dot p) M_(I,p) for any containing scope I, including the count for a=0. Thus low-degree modes |h|<=3 and local counts are equivalent linear observations over Q. On original selector relations, the sign-preserving low-degree integer observations determine the ENTIRE original witness relation: set sigma(t)_(I,p)=[M_(I,p)>0] (G51 canonical witness union). Each witness satisfies these allowed patterns; every nonwitness violates some original allowed-pattern constraint, whose forbidden pattern has count zero, so is still rejected by sigma. For q>=1 include unary scopes and handle empty relation sigma=0. Exactly sum_{j=0}^{min(3,q)} binom(q,j) signed integers, each bounded in magnitude by 2^q, suffice to represent the source relation, O(q^4) bits. One could store canonical Boolean sigma in only N_q=Theta(q^3) bits. No independent reconstruction of all higher Fourier modes is necessary to specify the source. Producing low modes is at least as hard as SAT (S(0) exact count), and obtaining the support of all M is exactly the G51 canonicalization task, not a free operation. On arbitrary masks not defined by width<=3 clauses, or arbitrary weighted/signed distributions, this uniqueness does NOT hold. Retain source identity, exact selector and coefficient field; do not silently replace a signed residual by its support.
+
+Quantitative same-object difference: let b,b' be two actual original width-three relations on the same q source coordinates, with contextual counts M,M'. For every x in V minus V', at least one forbidden pattern C in t' is hit. Such a pattern has M'_C=0. Hence |V minus V'|<=sum_{C forbidden by t'} M_C. Likewise reverse. A coordinate forbidden by both contributes zero; each other term is bounded by |M_C-M'_C|. Therefore
+
+    |V symmetric_difference V'| <= sum_C |M_C-M'_C|.
+
+In particular same zero mode does not imply same relation, but same exact signed low modes does. This is a joint-observer separation guarantee on actual sources, not a claim that arbitrary signed histories are determined by order-three marginals.
+
+### G57 — exact update law and sharp linear future-horizon dimension
+
+If Q is a new original clause filter excluding p on I, write d=|I|<=3. With H_a=(-1)^(a dot x) the character, Q=1-2^-d sum_{a subset I} (-1)^(a dot p)H_a. Multiplication b'=bQ gives
+
+    2^d S'(h) = 2^d S(h) - sum_{a subset I} (-1)^(a dot p) S(h xor a).
+
+Thus computing all modes of order <=r after one event requires at most order r+3 before it. This is exact signed convolution; all coincident frequencies combined before truncation. No free division in characteristic 2: over integers numerator is divisible by 2^d, modular result mod 2^H can be recovered from numerator mod 2^(H+d). For arbitrary sequences of <=ell such events, exact linear closure requires precisely the vector space spanned by characters of weight <=min(q,r+3ell). Upper by multiplying by at most ell clause filters, each Fourier support within a scope of size<=3. Lower: any h of weight <=r+3ell can partition its support into h0 of size<=r and <=ell disjoint nonempty scopes of size<=3. Each scope character is a linear combination of indicators of its full patterns, each indicator equals 1-Q_p. Expand products: H_h is a linear combination of observable kernels H_h0 times products of <=ell clause filters. Characters are linearly independent over Q and any odd-characteristic field. Therefore the exact rank of the future-observation linear family is
+
+    D(q,r,ell)=sum_{j=0}^{min(q,r+3ell)} binom(q,j).
+
+For a linear state with linear decoders, any summary valid on all original width-three sources must have >=D scalar channels: every singleton assignment is an original selector relation, so equalities on those sources enforce equality of observation row vectors. Even if only terminal count r=0 is requested, ell>=ceil(q/3) yields full 2^q linear dimension. On arbitrary signed distributions a linear summary with arbitrary decoder still needs this dimension over Q by kernel inclusion, but DO NOT extend this latter claim to nonlinear decoding only on the Boolean selector family. G56 shows nonlinear low-order source reconstruction is possible there. Actual arbitrary SAT algorithms may retain original input, adaptively recompute and exploit nonlinear sharing. This is a precise lower bound on a specified history-independent linear update/decoder model, not on arbitrary bit or gate complexity. Over characteristic two the character basis collapses; use integer/odd-characteristic formulation, not a spurious binary-rank claim.
+
+### G58 — indexed hyperfabric with actual source labels, zero mode and signed loss retained
+
+Use independent index (history,tau,k,j,version,coefficient ring,precision,consumer), with tau chronological event and k chart/refinement (ell above is future horizon, not k). Represent current mask in source coordinates; for an invertible chart C_k transport all masks and observation kernels simultaneously by permutation/pullback (or diagonal operator conjugation). Mode order always refers to ORIGINAL source scope labels, not arbitrary coordinates after permutation. Keep source selector and labels even when consumer reads only low modes or count. On a monotone event, L_tau=b_tau(1-Q_tau), b_tau=b_(tau+1)+L_tau. Loss masks disjoint over chronological deletions; b_0=b_T+sum L_tau. Apply each signed Fourier mode, the zero mode, or original weighted witness polynomial linearly. On revisions, gain=(1-b)b', loss=b(1-b'), b'-b=gain-loss; retain separate nonnegative masks or exact source descriptions rather than only net response. Equal counts can conceal both nonempty gain and loss; a modular zero can arise by cancellation or by coefficients divisible by p. If any scalar observation vanishes, do not label source empty without a sufficient consumer. G54 random weighted fingerprints remain one-sided tests with possible false negatives, not replacements for the signed source ledger.
+
+For Q,R two commuting actual diagonal clause filters define A_ij=b Q^i(1-Q)^(1-i) R^j(1-R)^(1-j), i,j in {0,1}; disjoint source atoms with sum b. A00=b-bQ-bR+bQR is joint signed correction; first loss Q then R gives (A00+A01,A10), reverse gives (A00+A10,A01). With transported chart as third axis obtain eight vertices and six commuting mask faces by pointwise multiplication and conjugation. All modes and contextual kernels transform accordingly. Intermediate chronological histories are not identical even though endpoints commute; keep the named loss allocation. A noninvertible coarsening may identify distinct source masks and need not preserve multiplication; no exact chart transport asserted for it. Existing governed cube residual witness is not commutation proof. This is a finite source-mask realization, not a universal H05/H07/H14 closure or resource bound. No assumption that materializing the exponential masks or all Fourier coordinates is required for arbitrary decision; the symbolic source and paid algorithms remain admissible.
+
+### G59 — inherited precision obstruction on an explicit clustered Hermite interface
+
+G53/G54 reduce final output precision. For an actual clustered interpolation mechanism, small final precision does NOT in general imply small input precision. The following is a sharp restricted-interface theorem, independent of any claim that the reported SAT algorithm uses these exact nodes or arbitrary integral polynomials.
+
+Fix prime p, spacing a=p^d with d>=1, Q>=1 distinct nodes t_i=u+p^d i, i=0,...,Q-1, p not dividing u. Suppose H(T) has integer coefficients and degree <QJ, and an observer receives Taylor coefficients [z^k]H(t_i+z), 0<=k<J, modulo p^P. Goal H(0) mod p^h, h>=1. Let
+
+    L=J*(d*(Q-1)+v_p((Q-1)!)).
+    F(T)=prod_{i=0}^{Q-2}(T-t_i)^J * (T-t_(Q-1))^(J-1).
+
+F integral degree QJ-1, F(0) unit, all supplied jets zero except the last coefficient at the last node, which equals prod_{i<Q-1}(t_(Q-1)-t_i)^J and has valuation L. Compare 0 with p^(h-1)F. They have identical observed jets whenever P<=L+h-1, but different H(0) mod p^h. Therefore P>=h+L necessary, even for nonlinear reconstruction of those jets; holds for adaptive queries limited to these prescribed jet coordinates with that precision. This is a real integral-polynomial collision, not an arbitrary incompatible jet vector. For J=1 this bound is EXACT: Lagrange coefficient at zero has valuation -d(Q-1)-v_p(i!)-v_p((Q-1-i)!), because numerator products are units. Its most negative value is -L at the endpoints (binomial coefficient integrality). Thus P=h+L suffices to compute the linear combination modulo p^h. For general J, the ordinary Hermite basis L_i(T)=prod_{j!=i}((T-t_j)/(t_i-t_j))^J, inverse series truncated at J-1 gives sufficient P=h+L+(J-1)*(d+floor(log_p(Q-1))) for Q>=2. Indeed v_p(L_i(0))>=-L, each inverse-series coefficient of degree k has valuation >=-k*(d+floor log_p(Q-1)), by binomial integer numerators and the valuation of every node difference. For Q=1 no loss: Taylor translation is integral. Thus even final parity can require inherited precision Omega(QJ) for this generic cluster reconstruction with fixed d. If nodes include one congruent to zero mod p^h, direct evaluation there already determines H(0) mod p^h; if source class excludes F or admits special recurrences, this generic obstruction may disappear. Our collision is for unrestricted integral polynomials in the specified degree range, not proved to arise from actual Cauchy-deformed SAT contractions. No lower bound for the published algorithm, no end-to-end speedup, and no claim that internal precision is always unavoidable. Next inspect actual source deformation image and packet-node geometry before applying the bound. This also separates precision in a chosen observer from standard-machine work.
+
+### Actually executed local regression (Python exact integers/Fraction and odd-field elimination; no CI/kernel)
+
+Local /tmp/p0_indexed.py: 860 original selector source reconstructions (all 260 inputs at q=1,2 plus 150 seeded each q=3..6); 860 signed source difference inequalities; 19,032 individual Fourier update coefficients; 3,440 chart-transported atom comparisons; 60 actual horizon-span ranks by Gaussian elimination over GF(101) for q=1..5, r=0..q, ell=0..2; 192 integral Hermite collision polynomials for p=2,3,5, d=1,2, Q=1..8, J=1..4; 144 exact rational Lagrange reconstructions for J=1. All passed. Reproducer (same executed logic, helper implementations included):
+```python
+from itertools import combinations,product
+from random import Random
+from math import comb,factorial
+from fractions import Fraction
+rng=Random(369)
+def carrier(q):
+ S=[I for j in range(1,min(3,q)+1) for I in combinations(range(q),j)]
+ C=[(I,p) for I in S for p in range(1<<len(I))]
+ def pat(x,I):return sum((x>>i&1)<<j for j,i in enumerate(I))
+ F=[sum(1<<x for x in range(1<<q) if pat(x,I)==p) for I,p in C]
+ return C,F
+def walsh(v,q):
+ a=[v>>x&1 for x in range(1<<q)]
+ for i in range(q):
+  for x in range(1<<q):
+   if not(x>>i&1):a[x],a[x|1<<i]=a[x]+a[x|1<<i],a[x]-a[x|1<<i]
+ return a
+def witness(t,F,q):
+ v=(1<<(1<<q))-1
+ for j,f in enumerate(F):
+  if not(t>>j&1):v&=~f
+ return v
+cnt=diff=updates=faces=0
+for q in range(1,7):
+ C,F=carrier(q);n=len(C);U=(1<<(1<<q))-1
+ ts=range(1<<n) if q<=2 else [rng.getrandbits(n) if j%2 else ((1<<n)-1)^sum(1<<i for i in rng.sample(range(n),rng.randrange(min(n,12)+1))) for j in range(150)]
+ for t in ts:
+  v=witness(t,F,q);s=walsh(v,q);m=[]
+  for (I,p),f in zip(C,F):
+   val=sum((-1)**((p&a).bit_count())*s[sum((a>>j&1)<<i for j,i in enumerate(I))] for a in range(1<<len(I)))
+   assert val==(v&f).bit_count()*(1<<len(I));m.append(val//(1<<len(I)))
+  sig=sum((x>0)<<i for i,x in enumerate(m));assert witness(sig,F,q)==v;cnt+=1
+  u=rng.getrandbits(n);w=witness(u,F,q);mm=[(w&f).bit_count() for f in F]
+  assert (v^w).bit_count()<=sum(abs(a-b) for a,b in zip(m,mm));diff+=1
+  j,l=rng.randrange(n),rng.randrange(n);I,p=C[j];Q=U^F[j];R=U^F[l];ss=walsh(v&Q,q)
+  for h in range(1<<q):
+   a=sum((-1)**((p&z).bit_count())*s[h^sum((z>>j&1)<<i for j,i in enumerate(I))] for z in range(1<<len(I)))
+   assert (1<<len(I))*ss[h]==(1<<len(I))*s[h]-a;updates+=1
+  aa=[v&(Q if i else U^Q)&(R if j else U^R) for i,j in product((0,1),repeat=2)]
+  assert sum(aa)==v and all(not(a&b) for a,b in combinations(aa,2))
+  perm=list(range(1<<q));rng.shuffle(perm)
+  def move(v):return sum((v>>x&1)<<y for x,y in enumerate(perm))
+  for i,j in product((0,1),repeat=2):
+   assert move(aa[2*i+j])==move(v)&(move(Q) if i else U^move(Q))&(move(R) if j else U^move(R));faces+=1
+  assert sum(walsh(a,q)[0] for a in aa)==s[0]
+assert (cnt,diff,updates,faces)==(860,860,19032,3440)
+def basis(rows):
+ piv={}
+ for r in rows:
+  r=[x%101 for x in r]
+  for i in range(len(r)):
+   if not r[i]:continue
+   if i in piv:
+    z=r[i];r=[(a-z*b)%101 for a,b in zip(r,piv[i])]
+   else:
+    z=pow(r[i],-1,101);piv[i]=[a*z%101 for a in r];break
+ return list(piv.values())
+rankchecks=0
+for q in range(1,6):
+ C,F=carrier(q);n=1<<q
+ for r in range(q+1):
+  B=basis([[(-1)**((x&h).bit_count()) for x in range(n)] for h in range(n) if h.bit_count()<=r])
+  for ell in range(3):
+   assert len(B)==sum(comb(q,j) for j in range(min(q,r+3*ell)+1));rankchecks+=1
+   if ell==2 or len(B)==n:continue
+   B=basis(B+[[a*(1-(f>>x&1)) for x,a in enumerate(b)] for b in B for f in F])
+assert rankchecks==60
+def vp(x,p):
+ if not x:return 10**9
+ v=0
+ while x%p==0:x//=p;v+=1
+ return v
+def mul(a,b):
+ c=[0]*(len(a)+len(b)-1)
+ for i,x in enumerate(a):
+  for j,y in enumerate(b):c[i+j]+=x*y
+ return c
+def jet(f,a,k):return sum(f[i]*comb(i,k)*a**(i-k) for i in range(k,len(f)))
+hermite=lagrange=0
+for p,d,Q,J in product((2,3,5),(1,2),range(1,9),range(1,5)):
+ nodes=[1+p**d*i for i in range(Q)];f=[1]
+ for i,a in enumerate(nodes):
+  for _ in range(J-(i==Q-1)):f=mul(f,[-a,1])
+ L=J*(d*(Q-1)+vp(factorial(Q-1),p))
+ assert len(f)==Q*J and f[0]%p!=0
+ vals=[jet(f,a,k) for a in nodes for k in range(J)]
+ assert min(vp(x,p) for x in vals)==L;hermite+=1
+ if J==1:
+  coeff=[]
+  for a in nodes:
+   c=Fraction(1)
+   for b in nodes:
+    if a!=b:c*=Fraction(-b,a-b)
+   coeff.append(c)
+  assert max(vp(c.denominator,p)-vp(c.numerator,p) for c in coeff)==L
+  for _ in range(3):
+   g=[rng.randrange(-100,101) for _ in nodes]
+   assert sum(c*jet(g,a,0) for c,a in zip(coeff,nodes))==g[0];lagrange+=1
+assert (hermite,lagrange)==(192,144)
+```
+
+### Active P0 endpoint ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G56 | lowDegreeSourceRelationDetermination / signedLocalDifferenceBound | derived and tested; original width-three carrier only |
+| G57 | signedClauseFourierUpdate / exactLinearFutureHorizonRank | derived and tested; Q/odd-field linear model, not time |
+| G58 | indexedSourceResidualHyperfabric | derived and chart atoms tested; H05 source labels, zero mode, signed loss/gain preserved |
+| G59 | clusteredHermitePrecisionCollision / simpleNodeSharpPrecision | derived and tested for stated integral-polynomial observer; actual source-image attachment open |
+| N4/G12a | unrestrictedSerialCharge | OPEN: all legitimate nonlinear, signed and shared computation, no imposed linear summary or interpolation representation |
+| N5/G12c | unrestrictedSuperpolynomialGrowth | OPEN: G48 uniform flag / G38 nonuniform central slice |
+| N6 | originalClayTransport | conditional #1040 terminal / #1129 costed coverage |
+
+Aristotle BIDI: G56 shows the full source is determined by small exact low-order interface, but G57 prevents naive closed linear updates; neither implies exponential algorithmic time. G59 is a concrete inherited-precision control on low-final-precision shortcuts; verify the actual deformation polynomial image and nodes before importing it. Prioritize a paid producer for the flag or actual useful contraction factors, and test both source-specific precision reduction and its obstruction; do not impose exact high modes, universal context support, full count or fixed observer as a necessary prerequisite to original SAT decision. Preserve independent indices and signed/zero modes as semantics, not mandatory materialization. Direct uniform endpoint remains P0. No P!=NP claim or extra certification phase.
