@@ -67,6 +67,13 @@ def main():
     ap.add_argument("--skip-gap",action="store_true")
     ap.add_argument("--actual-mod31-hom",action="store_true",
         help="also construct actual mmgroup MMV(31) 90D Hom vacuum and 12/78 C2 sectors")
+    ap.add_argument("--both-mod31-phases",action="store_true",
+        help="construct zeta=5 and 25 source Hom sectors, recover exact Qzeta12 candidate characters")
+    ap.add_argument("--reuse-mod31-plus",type=Path,
+        help="reuse prior authentic zeta=5 rank90 source folder; only build missing phase")
+    ap.add_argument("--actual-mod127-hom",action="store_true",
+        help="independent original Monster MMV(127) 90D B-vacuum source")
+
     ap.add_argument("--timeout",type=int,default=900)
     ap.add_argument("--outdir",type=Path)
     args=ap.parse_args()
@@ -130,6 +137,18 @@ def main():
             report["lemma_status"]["M3B-L10A_original_12_matrix_module"]=\
                 ("PREEXISTING_JSON_NOT_REVALIDATED" if original12 else
                  "MISSING_SOURCE_JSON_WITH_SKIP_MAGMA")
+        if args.actual_mod127_hom and args.manifest.exists():
+            other127=[sys.executable,
+                SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                "--manifest",args.manifest,"--prime",127,
+                "--outdir",out/"actual_mmv127_hom"]
+            if (out/"mmgroup_canonical_cover_hit0.json").is_file():
+                other127.extend(["--cover",
+                    out/"mmgroup_canonical_cover_hit0.json"])
+            ok127=run("actual_mod127_hom",other127)
+            report["lemma_status"]["M3B-L10B_actual_mod127_Hom_vacuum"]=(
+                "SECOND_SPLIT_GOOD_PRIME_SOURCE; NOT_COMPLEX_HOM"
+                if ok127 else "FAILED")
         if original12 is not None:
             report["source12_json"]=str(original12);save()
             if run("derive90",[sys.executable,
@@ -199,23 +218,52 @@ def main():
             report["lemma_status"]["M3B-L12R_literal_MM_4D_class"]=\
                 "BLOCKED_ON_AUTHENTIC_CANONICAL_MONSTER_WORD"
 
-        if args.actual_mod31_hom:
+        if args.actual_mod31_hom or args.both_mod31_phases:
             cover=out/"mmgroup_canonical_cover_hit0.json"
             if not args.manifest.exists():
                 report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=\
                     "MISSING_AUTHENTIC_MANIFEST"
             else:
-                arguments=[sys.executable,
-                    SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
-                    "--manifest",args.manifest,
-                    "--outdir",out/"actual_mmv31_hom"]
-                if cover.exists():
-                    arguments.extend(["--cover",cover])
-                if run("actual_mod31_hom",arguments):
-                    report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=\
-                        "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
+                plus=(args.reuse_mod31_plus.resolve() if args.reuse_mod31_plus
+                      else out/"actual_mmv31_hom")
+                if args.reuse_mod31_plus:
+                    state=json.loads((plus/"mmv31_hom_status.json").read_text())
+                    if (state.get("p"),state.get("zeta_mod_p"),
+                        state.get("number_independent_B_fixed_vectors"))!=(31,5,90):
+                        raise ValueError("reused original mod31+ receipt has wrong phase/rank")
+                    report["stages"]["actual_mod31_hom"]={
+                        "status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE",
+                        "path":str(plus)}
+                    positive=True
                 else:
-                    report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]="FAILED"
+                    arguments=[sys.executable,
+                        SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                        "--manifest",args.manifest,
+                        "--outdir",plus,"--prime",31]
+                    if cover.exists():
+                        arguments.extend(["--cover",cover])
+                    positive=run("actual_mod31_hom",arguments)
+                report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]=(
+                    "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
+                    if positive else "FAILED")
+                if args.both_mod31_phases and positive:
+                    minus=out/"actual_mmv31_hom_opposite"
+                    other=[sys.executable,
+                        SCRIPTS/"monster3b_actual_mmv31_hom_projector.py",
+                        "--manifest",args.manifest,"--outdir",minus,
+                        "--prime",31,"--opposite-phase"]
+                    if cover.exists():other.extend(["--cover",cover])
+                    if run("actual_mod31_hom_opposite",other):
+                        if run("quadratic12_character_lift",[
+                            sys.executable,
+                            SCRIPTS/"monster3b_quadratic12_character_lift.py",
+                            "--plus",plus,"--minus",minus,
+                            "--out",out/"quadratic12_character_candidates.json"]):
+                            report["lemma_status"]["M3B-L10A_mod31_to_ordinary_character"]=\
+                                "EXACT_BOUNDED_CANDIDATES; WEIL_PHASE_COHERENCE_NOT_YET_CLOSED"
+                    else:
+                        report["lemma_status"]["M3B-L10A_mod31_to_ordinary_character"]=\
+                            "OPPOSITE_PHASE_PRODUCER_FAILED"
         if original12 is not None:
             if run("hom_outer",[sys.executable,
                    SCRIPTS/"monster3b_ordinary12_hom_outer_weld.py",
