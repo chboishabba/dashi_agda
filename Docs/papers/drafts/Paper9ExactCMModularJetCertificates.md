@@ -1341,3 +1341,83 @@ Bishop same-real completion remain
 OPEN. User requested testing be
 deferred; no new timings/memory
 claims or external SOTA result.
+
+
+## 24 November — COMP5t: projective affine-edge continuation and independent precision axes
+
+The exact source-normalized Chudnovsky
+\((P'_n,Q'_n,T'_n)\) carrier has a second
+reversible coordinate system at an authentic
+terminal cutoff \(n\ge2\):
+
+\[
+E_n=(T'_n,Q'_n,V_n),\quad
+V_n=T'_nq_n+P'_np_n(A+Bn),\quad
+P'_n=\frac{V_n-T'_nq_n}{p_n(A+Bn)}.
+\]
+
+The last quotient is exact, because
+\(V_n-T'_nq_n\) is the original
+source-derived signed residual.
+This is a **source-indexed isomorphism**
+for the authentic selected consumer,
+and source scale \(G_{0,n}\) must still
+be reopened separately for literal raw
+P/Q/T coordinates. The terminal
+series bounds \(T'_n/Q'_n\) and
+\(V_n/(Q'_nq_n)\) are both available
+without storing the original P during
+guard-bit-only retries.
+
+If a current root-enclosed quotient
+\(x\le F\sqrt{10005}/S_{\mathrm{hi}}\)
+fails the usual exact strict upper check,
+squared comparisons distinguish two
+**independent precision axes**. With
+\(F=42688010^d\):
+
+\[
+D_b=10005(FD_{\rm hi})^2-
+  ((x+1)N_{\rm hi})^2,\quad
+D_n=((x+1)N_{\rm lo})^2-
+ 10005(FD_{\rm lo})^2.
+\]
+
+For \(D_b\ge0\), increase only the
+dyadic radical guard \(b\), retaining
+the current affine edge and cutoff;
+for \(D_b<0,D_n>0\), admit x using
+the exactly equivalent radical-free
+strict upper condition; otherwise
+refine only the series index n.
+For a series refinement \(n\to n'\),
+reopen normalized P by the signed
+nonzero source divisor, construct
+the new true-index suffix
+\(M'_{n,n'}\), and multiply
+\(M'_{0,n}M'_{n,n'}\) in the
+original noncommutative source
+order. Source width, zero mode,
+sign orientation and indexed scale
+are retained. Neither root/series
+refinement requires discarding an
+already computed unrelated index.
+
+New files:
+\`scripts/pi_p0_affine_edge_retry.hpp\`,
+\`scripts/check_pi_p0_affine_retry_schedule.cpp\`,
+and the \`makePlanInterval\` addition to
+\`scripts/pi_p0_projective_precision_schedule.hpp\`.
+The original source and consumer algebra,
+repair proof and distinct cost accounting
+are in the Paper 9 projective residual
+roadmap, S7–S12. Extra full-size square
+slacks and derived next denominators
+may outweigh any avoided recomputation.
+**No compile, test, Agda/Lean proof or
+new performance measurement** was run;
+COMP5j remains the historically
+measured source. Original analytic
+Chudnovsky identity/tail, Bishop
+same-original-real and independent
+SOTA remain separate OPEN obligations.
