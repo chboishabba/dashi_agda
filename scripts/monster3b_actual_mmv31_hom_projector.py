@@ -34,7 +34,7 @@ import numpy as np
 
 PRIME=31
 INV3=pow(3,-1,PRIME)
-ZETA=5  # 5^2+5+1 = 31
+ZETA=5  # standard phase: roots 5/25 mod31, roots 19/107 mod127
 DIM=196884
 
 def row_span_coefficients(array,basis,pivots):
@@ -141,10 +141,21 @@ def main():
       ".dashi/monster3b-mmgroup/mmv31-hom"))
     ap.add_argument("--max-trials",type=int,default=480)
     ap.add_argument("--limit",type=int,default=90)
+    ap.add_argument("--prime",type=int,choices=(31,127),default=31,
+        help="original MMV supported split prime (31 or 127)")
+    ap.add_argument("--opposite-phase",action="store_true",
+        help="use inverse marked E-centre root; NEVER silently merge phases")
     ap.add_argument("--checkpoint-every",type=int,default=10)
     a=ap.parse_args()
     if a.limit<1 or a.limit>90 or a.max_trials<a.limit:
         ap.error("limit must be 1..90 and max-trials>=limit")
+    global PRIME, INV3, ZETA
+    PRIME=a.prime
+    INV3=pow(3,-1,PRIME)
+    ZETA=(5 if PRIME==31 else 19)
+    if a.opposite_phase:ZETA=pow(ZETA,-1,PRIME)
+    if (ZETA*ZETA+ZETA+1)%PRIME!=0:
+        raise ValueError("invalid original 3B phase root in selected characteristic")
     from mmgroup import MM,MMV
     m=json.loads(a.manifest.read_text())
     if m.get("source_blob_sha")!="c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2":
@@ -166,19 +177,21 @@ def main():
         return out
     basis_arrays=[]; basis_mmv=[];pivots=[];probes=[]
     a.outdir.mkdir(parents=True,exist_ok=True)
-    status_file=a.outdir/"mmv31_hom_status.json"
+    status_file=a.outdir/f"mmv{PRIME}_hom_status.json"
     def checkpoint(status,trial):
-        record={"schema":"monster3b-actual-MMV31-B-vacuum-v1",
+        record={"schema":"monster3b-actual-MMV-split-prime-B-vacuum-v2",
                 "status":status,"p":PRIME,"zeta_mod_p":ZETA,
+                "opposite_marked_phase":a.opposite_phase,
                 "source_manifest":str(a.manifest),
-                "actual_Monster_mod31_vectors":True,
+                "actual_Monster_modular_vectors":True,
+                "cross_characteristic_good_for_6Suz":(2690072985600%PRIME!=0),
                 "actual_characteristic_zero_Monster_Hom":False,
                 "number_independent_B_fixed_vectors":len(pivots),
                 "target_dimension_from_original_character":90,
                 "pivots":pivots,"source_E_basis_probe_indices":probes,
                 "last_trial":trial}
         if pivots:
-            np.savez_compressed(a.outdir/"ambient_basis_rows.npz",
+            np.savez_compressed(a.outdir/f"ambient_basis_rows_mod{PRIME}.npz",
                 rows=np.asarray(basis_arrays,dtype=np.int16),
                 pivots=np.array(pivots,dtype=np.int64),
                 source_probes=np.array(probes,dtype=np.int64))
@@ -232,7 +245,7 @@ def main():
                     raise ValueError("D projected action leaves B-fixed 90D space")
                 columns.append(coords)
             D0=np.asarray(columns,dtype=np.int16).T%PRIME
-            np.savez_compressed(a.outdir/"actual_D_vacuum_sandwich_mod31.npz",
+            np.savez_compressed(a.outdir/f"actual_D_vacuum_sandwich_mod{PRIME}.npz",
                                 D0=D0)
             record["D_preserves_original_zeta_sector"]=True
             record["actual_D_vacuum_sandwich_mod31_rank"]=rank31(D0)
@@ -261,7 +274,7 @@ def main():
                 columns.append(coords)
             E0=np.asarray(columns,dtype=np.int16).T%PRIME
             np.savez_compressed(
-                a.outdir/"actual_CDCinv_vacuum_sandwich_mod31.npz",E0=E0)
+                a.outdir/f"actual_CDCinv_vacuum_sandwich_mod{PRIME}.npz",E0=E0)
             record["actual_CDCinv_vacuum_sandwich_mod31_rank"]=rank31(E0)
             record["CDCinv_preserves_original_zeta_sector"]=True
             record["CDCinv_vacuum_Weil_scalar_determined"]=False
@@ -272,7 +285,7 @@ def main():
             # Its exact failure to multiply is the original Weil
             # projective 2-cocycle, not numerical floating-point drift.
             if record.get("actual_D_vacuum_sandwich_mod31_rank")==90:
-                D0=np.load(a.outdir/"actual_D_vacuum_sandwich_mod31.npz")["D0"]
+                D0=np.load(a.outdir/f"actual_D_vacuum_sandwich_mod{PRIME}.npz")["D0"]
                 def projected_word(ww):
                     cols=[]
                     for vec in basis_mmv:
@@ -287,7 +300,7 @@ def main():
                 DE0=projected_word(d*e)
                 ED0=projected_word(e*d)
                 np.savez_compressed(
-                    a.outdir/"actual_inner_pair_vacuum_cocycle_mod31.npz",
+                    a.outdir/f"actual_inner_pair_vacuum_cocycle_mod{PRIME}.npz",
                     D0=D0,E0=E0,DE0=DE0,ED0=ED0)
                 def scalar_ratio(actual,expect):
                     expected=np.asarray(expect,dtype=np.int16)%PRIME
@@ -342,7 +355,7 @@ def main():
             record["C2_induced_mod31_squared_is_scalar"]=central_square
             record["C2_square_scalar_mod31"]=scalar if central_square else None
             record["actual_C2_mod31_matrix_generated"]=True
-            np.savez_compressed(a.outdir/"actual_C2_on_90_mod31.npz",
+            np.savez_compressed(a.outdir/f"actual_C2_on_90_mod{PRIME}.npz",
                                 J=J,square=J2)
             if central_square:
                 roots=[x for x in range(PRIME) if x*x%PRIME==scalar]
@@ -360,11 +373,11 @@ def main():
                         eig_neg=nullspace31((J+r*Id)%PRIME)
                         eig12=eig_r if eig_r.shape[1]==12 else eig_neg
                         eig78=eig_neg if eig_r.shape[1]==12 else eig_r
-                        np.savez_compressed(a.outdir/"actual_C2_12_78_mod31.npz",
+                        np.savez_compressed(a.outdir/f"actual_C2_12_78_mod{PRIME}.npz",
                                            eig12=eig12,eig78=eig78)
                         record["actual_12D_Hom_eigenvectors_mod31"]=True
                         if record.get("actual_D_vacuum_sandwich_mod31_rank")==90:
-                            D0=np.load(a.outdir/"actual_D_vacuum_sandwich_mod31.npz")["D0"]
+                            D0=np.load(a.outdir/f"actual_D_vacuum_sandwich_mod{PRIME}.npz")["D0"]
                             commutes=np.array_equal(
                               matmul31(J,D0),matmul31(D0,J))
                             record["D_vacuum_sandwich_commutes_with_C2"]=commutes
@@ -372,13 +385,13 @@ def main():
                                 D12=coordinates_in_columns(eig12,matmul31(D0,eig12))
                                 D78=coordinates_in_columns(eig78,matmul31(D0,eig78))
                                 np.savez_compressed(
-                                    a.outdir/"actual_D_12_78_vacuum_sandwich_mod31.npz",
+                                    a.outdir/f"actual_D_12_78_vacuum_sandwich_mod{PRIME}.npz",
                                     D12=D12,D78=D78)
                                 record["actual_mod31_D12_sandwich_matrix_extracted"]=True
                                 record["D12_Weil_coefficient_normalized"]=False
                         if record.get("actual_CDCinv_vacuum_sandwich_mod31_rank")==90:
                             E0=np.load(
-                                a.outdir/"actual_CDCinv_vacuum_sandwich_mod31.npz")["E0"]
+                                a.outdir/f"actual_CDCinv_vacuum_sandwich_mod{PRIME}.npz")["E0"]
                             ecomm=np.array_equal(
                                 matmul31(J,E0),matmul31(E0,J))
                             record["CDCinv_vacuum_sandwich_commutes_with_C2"]=bool(ecomm)
@@ -386,7 +399,7 @@ def main():
                                 E12=coordinates_in_columns(eig12,matmul31(E0,eig12))
                                 E78=coordinates_in_columns(eig78,matmul31(E0,eig78))
                                 np.savez_compressed(
-                                    a.outdir/"actual_CDCinv_12_78_vacuum_sandwich_mod31.npz",
+                                    a.outdir/f"actual_CDCinv_12_78_vacuum_sandwich_mod{PRIME}.npz",
                                     E12=E12,E78=E78)
                                 record["actual_mod31_CDCinv12_sandwich_matrix_extracted"]=True
                                 record["CDCinv12_Weil_coefficient_normalized"]=False
