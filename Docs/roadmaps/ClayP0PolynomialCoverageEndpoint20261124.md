@@ -1493,3 +1493,168 @@ assert count==920
 | N6 | originalClayTransport | #1040 conditional terminal / #1129 costed machine coverage |
 
 Aristotle BIDI: prioritize the explicit hardest promise bands between e=O(m^2 log m) and e=O(m^(2+epsilon)), not further local rank census. A new sufficient nonuniform endpoint is lower bounding the actual sandwich S_k rather than the full monotone extension G (G32 makes their polynomial-family complexity equivalent to general circuits). G31 is insufficient for S_k since the monotone projection spans multiple layers. Fixed-weight complemented padding demonstrates exactly where the ordinary monotone argument fails. Need a lower bound surviving that shortcut, or pivot to direct uniform N4/N5; no additional formal certification prerequisite or unrestricted separation claim.
+
+
+## 19. P0-G33–G37 — signed component compression, slice projection obstruction, literature reconciliation (2026-11-24)
+
+Controlling endpoint: literal Clay P vs NP. User attachments: G28–G32 and Langlands R43–R46 (reported #1549/#120 heads 07ced79e5be4 / 1568c2c4738b). Reuse exact source-selected fibre compression, not a new arithmetic programme. Both P0 roadmaps read live at 9cc331b5ae03 / 4f8af7050230, common blob 777a62b796d53f3c753b79ee0bb038e566888a37. Producers/consumers: G13 original scopes, G14 overlap, G16 median closure, G17 2-SAT reachability, G22/G30 CLIQUE projection, G28/G29 ambiguity and G31/G32 padding/slices; existing BalancedTritBitFibre and #1291 signed indexed residuals, ConsumerFibreRepairExact (#1006), #123 JMD lowering, #1546 sharing, #1474/#1502 reductions, #1129 standard machine, #1040 terminal, #607/#678 Aristotle. No native kernel execution or new prerequisite phase.
+
+### G33 — signed component quotient with exact inverse
+
+Compute G28's necessary value domains R_i, reject any empty domain, and let A={i:R_i={0,1}}, a=|A|, f=m-a. Fix every nonambiguous variable to its singleton value. The attachment's singleton-scope compression is a valid weaker choice; G28 uses all unary projections. For any original scope I and pair i,j in I intersect A, inspect the projection of its original allowed-pattern set onto i,j. If exactly two pairs occur, each coordinate has both values (by R_i=R_j={0,1}), so the relation is either equality or disequality. Add a signed graph edge with label epsilon=x_i XOR x_j. This includes every pair in a two-pattern scope and can also detect additional pair correlations in larger pattern sets. All edges are necessary for every original witness. If any signed cycle has nonzero XOR, reject. Otherwise choose a root per connected component, assign orientation eta_i by path XOR with root orientation zero, and write x_i=y_{component(i)} XOR eta_i. Every original witness has unique component-bit coordinates; conversely a component assignment gives one original assignment with the prescribed fixed bits and orientations. For every original scope I substitute these affine expressions (including repeated component labels); enumerate its at most 8 possible residual patterns and intersect masks on identical residual scopes J. Keep empty scope: rejection if its unique empty pattern is forbidden. Result has at most 1+b(c) scopes and 1+N_c forbidden patterns, c number of components. The map between original and residual witnesses is bijective, so exact counting and witness reconstruction are preserved. Indexed work polynomial in N, followed by O((c+1)^3 2^c) enumeration. This is a deterministic upper bound, not independent work charge. In the attached projector notation this is a coordinate isometry onto the parity-consistent subcube and hence preserves the same diagonal satisfying projector, not a free rank oracle.
+
+### G34 — exact component excess bound
+
+Assume nonempty domains and consistent signs. Let n_1,...,n_c be component sizes, sum=a. Put B=b(m)-b(f), e=|t|-b(m). Every scope touching A has at least two available patterns. Every scope touching >=2 distinct components has at least three, since otherwise its two patterns would induce a signed edge across components. This remains true with the stronger pair-projection graph. The number X of crossing scopes is exactly
+
+    X=B-sum_j (b(f+n_j)-b(f)).
+    e >= B+X.
+
+For given a,c>=1, discrete convexity of b (its first differences increase) maximizes sum_j b(f+n_j) at sizes a-c+1,1,...,1, by repeatedly moving a unit from a smaller nonsingleton to a largest component. Thus
+
+    e >= 2B - b(m-c+1)+b(f) -(c-1)(b(f+1)-b(f)).
+
+The bound is sharp for every 1<=c<=a<=m even for the stronger pair-projection graph. Take this unbalanced partition, fixed variables zero, and in each scope with d distinct component labels use the following allowed patterns on those labels: d=0: empty pattern; d=1: 0,1; d=2: 00,01,10; d=3: 000,011,101 (little-endian integer patterns 0,3,5). Expand onto repeated component coordinates and fixed zero variables. Each active variable has both values in every containing scope; cross-component pair projections contain three pairs, within-component projections contain only equality pairs. All-zero assignment satisfies. Each crossing scope contributes exactly one extra unit beyond B, and the component partition is exactly as chosen. This is an explicit sharp witness on the original carrier.
+
+For a simpler bound, number of cross-component pairs X2 = sum_{i<j} n_i n_j >= (c-1)(a-c/2) >= a(c-1)/2. Each pair belongs to m-2 triples, each triple counts at most three pairs. Hence X>=X2(1+(m-2)/3) for m>=2, with m=1 trivial, so
+
+    c <= min(a, 1+6(e-B)/(a(m+1)))   for a>0.
+
+At e=B, all ambiguous variables belong to at most one component (or instance rejected for contradictory signs); huge a can coexist with only one free bit. For a=0 no branch needed. This corrects the impression that raw residual dimension must be exponential in raw ambiguity. Both parameter bounds are upper bounds on possible independent choices, not lower bounds on time.
+
+### G35 — exact binary/ternary residual backdoor
+
+For each merged residual relation on three distinct component variables, test its finite majority closure (G16). Relations on <=2 variables and majority-closed ternary relations are all exactly 2-CNF expressible by excluding absent unary and binary patterns. Empty residual scope must be checked separately. Let bad scopes be the ternary ones that fail majority closure. Greedily take any maximal disjoint family of p bad scopes. Its union T has <=3p variables and intersects every bad scope. Branch on T, restrict each residual mask, and convert all remaining constraints to 2-CNF: originally majority-closed relations stay closed under restriction and projection of fixed coordinates; every bad ternary scope loses at least one variable. Apply G17 implication graph reachability. Decision time poly(N)*2^(3p), also reconstruct one witness by normal 2-SAT methods. This is a strong-backdoor upper bound, not a claim that counting satisfying assignments of arbitrary 2-CNF is polynomial or that p measures unavoidable work. Retain G33 counting route, and distinguish fixed labels versus dynamic input-derived contraction (not free monotone projection). Tests below cover G33/G34; G35 proved directly without claiming extra algorithm tests.
+
+### G36 — exact obstruction to importing ordinary CLIQUE lower bounds into a single slice
+
+Attribution correction: G32 sandwich is the classical slice-function construction of Berkowitz (1982), not new general circuit equivalence. Valiant, Negation is Powerless for Boolean Slice Functions, SIAM J. Comput. 15 (1986) 531–535, https://doi.org/10.1137/0215037 (publisher abstract checked), improves overhead to constant-factor size plus O(N log^2 N); see also Wegener, The complexity of central slice functions, https://doi.org/10.1016/0304-3975(86)90122-2. G32's application to actual selector carrier and fixed-weight padding is retained. Literature even has polynomial-size canonical CLIQUE slice; distinguish slice from the original monotone target.
+
+New explicit discriminator: let S_l be ANY sandwich/slice function, false below weight l and true above l, arbitrary on l. Suppose a monotone projection phi (constants, positive edge inputs with arbitrary repeated wires) maps CLIQUE(n,k) exactly to S_l, for 3<=k<=n/2. Write w(phi(e))=C+sum_edge a_edge e_edge, a_edge>=0 integers. Every positive graph must map to weight>=l; every negative graph to weight<=l. Choose a random k-element vertex subset and put exactly its clique edges, positive distribution P. For negative distribution Q color each vertex independently uniformly in k-1 colors and put every cross-color edge; always no k-clique. Each edge has positive marginal q=k(k-1)/(n(n-1)) and negative marginal 1-r, r=1/(k-1). For this parameter range q<1-r. Hence expected mapped weight on P strictly less than on Q if any a_edge>0, contradicting required inequalities. If all a_edge=0, image is constant, also impossible. Thus no monotone coordinate projection of this CLIQUE family to any slice function, regardless of target dimension, weight, repetition or choice of slice truth table. This closes a tempting G32 proof route negatively; G22/G30 cannot be used by that kind of transfer.
+
+Stronger no-go for preprocessing by small-support monotone functions: permit each output coordinate phi_j to be an arbitrary monotone Boolean function of at most d graph edges, not just a wire. Constants cancel in expected weights. A nonconstant such function vanishes at all-zero and is true at all-one of its support. Thus P(phi_j=1)<=d q by union bound on at least one present supported edge; Q(phi_j=1)>=1-d r by union bound on absence of any supported edge. If d(q+r)<1, each nonconstant coordinate has strictly smaller expected value under P than Q. Therefore the same weight contradiction holds for any such preprocessing, even if the coordinate functions share intermediate computations and even if the target slice length is unrestricted. In the G30 regime k=n^(5/12), q=o(1/k), so d below a constant fraction of k is excluded. This forces some output coordinate to depend on many graph edges in any monotone preprocessing reduction, but does NOT prove large size (e.g. an OR can have large support cheaply). No restriction on nonmonotone reductions: G32 balanced complementary padding is a legal shortcut. This is a self-contained expectation argument, not a literature novelty claim, and does not exclude arbitrary global monotone preprocessing. Exact small-support distribution checks below.
+
+### G37 — current subexponential SAT literature: reported algorithm, not a lower-bound premise
+
+Current web source check found the OpenAI preprint The Exponential Time Hypothesis is False, 17 Oct 2026 revised 25 Oct, https://github.com/openai/math/tree/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026 (Theorem 1.1 and abstract inspected), which reports deterministic exact fixed-width #SAT in polynomial space and time (n+clauses)^O(1) * 2^(n/(log n)^(1/2+o(1))). Anthropic independently reports a subexponential 3SAT algorithm; see current discussion and https://www.cslib.io/complexitylib/abstracts/subexponential-sat.pdf (formal abstracts search result) and https://newruntime.com/analysis/research-anthropic-s-lean-proof-that-eth-is-false-is-public-and-machine-checked-but-no/ (external verification caveat). Do not assume ETH as a valid unconditional or accepted premise, and do not claim this roadmap independently verified either preprint or its Lean boundary. If the stated theorem is accepted, G33's exact residual 3-CNF on c variables and O((c+1)^3) clauses can use that algorithm unchanged. Reported upper bound then poly(N)*2^(c/(log c)^(1/2+o(1))) (small c handled directly); includes exact counts, decision and witness via polynomial self-reduction. In particular for any fixed 0<delta<1/2, c=O(log m*(log log m)^(1/2-delta)) is polynomial-time on the promise, and by G28 so is e=O(m^2 log m*(log log m)^(1/2-delta)). This is an external-theorem-dependent improvement, not claimed kernel-verified or unconditional here. Subexponential is not polynomial and does not settle Clay. A proof of P!=NP must permit the reported faster algorithm if correct. Do not cite ETH to claim a lower bound on the compressed residual. The preprint also reports an E^NP circuit lower bound; that class is not NP and cannot pay N5. Direct uniform route remains active.
+
+### Executed local regression (integer masks and exact rational probabilities; no CI/kernel)
+
+Actually executed 1,260 selector cases (260 exhaustive m=1,2 and 250 each at m=3..6, mixed planted/constrained/random), checking exact witness-set reconstruction, parity contradictions and component excess inequalities. 165 sharp partitions across all 1<=c<=a<=m<=9 checked, using the explicit patterns above; all passed. 800 exact comparisons of positive/negative acceptance probabilities on small support monotone truth tables passed (n,k in (6,3),(8,4),(10,4),(12,5),(15,6),(20,7), 20 seeded supports for each d=1..3 satisfying d(q+r)<1). No asymptotic numerical extrapolation. Reproduction core:
+```python
+from itertools import combinations, product
+from math import comb
+from random import Random
+from fractions import Fraction
+def b(n):return sum(comb(n,j) for j in (1,2,3))
+def scopes(n):return [I for j in range(1,4) for I in combinations(range(n),j)]
+def pattern(x,I):return sum(((x>>i)&1)<<j for j,i in enumerate(I))
+def check(m,S,L):
+ R=[3]*m
+ for I,ps in zip(S,L):
+  for j,i in enumerate(I):R[i]&=sum(1<<v for v in {p>>j&1 for p in ps})
+ brute={x for x in range(1<<m) if all(pattern(x,I) in ps for I,ps in zip(S,L))}
+ if 0 in R:assert not brute;return
+ A={i for i in range(m) if R[i]==3};a=len(A);f=m-a
+ e=sum(len(ps)-1 for ps in L);B=b(m)-b(f);assert e>=B
+ adj={i:[] for i in A}
+ for I,ps in zip(S,L):
+  for j,k in combinations(range(len(I)),2):
+   i,l=I[j],I[k]
+   if i not in A or l not in A:continue
+   q={((p>>j)&1,(p>>k)&1) for p in ps}
+   if len(q)==2:
+    z={u^v for u,v in q};assert len(z)==1
+    h=z.pop();adj[i].append((l,h));adj[l].append((i,h))
+ lab={};eta={};c=0;ok=True
+ for i in sorted(A):
+  if i in lab:continue
+  lab[i]=c;eta[i]=0;Q=[i]
+  for j in Q:
+   for k,h in adj[j]:
+    v=eta[j]^h
+    if k in lab:
+     if eta[k]!=v:ok=False
+    else:lab[k]=c;eta[k]=v;Q.append(k)
+  c+=1
+ if not ok:assert not brute;return
+ X=sum(len({lab[i] for i in I if i in A})>=2 for I in S)
+ assert X==B-sum(b(f+list(lab.values()).count(j))-b(f) for j in range(c))
+ assert e-B>=X
+ if c:
+  assert X>=B-(b(m-c+1)-b(f))-(c-1)*(b(f+1)-b(f))
+  assert 6*(e-B)>=(c-1)*a*(m+1)
+ base=sum((R[i]==2)<<i for i in range(m) if i not in A);res={}
+ for I,ps in zip(S,L):
+  J=tuple(sorted({lab[i] for i in I if i in A}));vals=set()
+  for z in range(1<<len(J)):
+   x=base|sum((((z>>J.index(lab[i]))&1)^eta[i])<<i for i in I if i in A)
+   if pattern(x,I) in ps:vals.add(z)
+  res[J]=res.get(J,set(range(1<<len(J))))&vals
+ got={base|sum((((y>>lab[i])&1)^eta[i])<<i for i in A) for y in range(1<<c) if all(pattern(y,J) in ps for J,ps in res.items())}
+ assert got==brute
+ return a,c,e,X
+rng=Random(369);count=0
+for m in range(1,7):
+ S=scopes(m)
+ if m<=2:
+  for t in range(1<<sum(1<<len(I) for I in S)):
+   L=[];v=0
+   for I in S:L.append({j for j in range(1<<len(I)) if t>>(v+j)&1});v+=1<<len(I)
+   check(m,S,L);count+=1
+ else:
+  for trial in range(250):
+   x=rng.randrange(1<<m);y=rng.randrange(1<<m);L=[]
+   for I in S:
+    ps={p for p in range(1<<len(I)) if rng.random()<(.2 if trial%3==0 else .65)}
+    if trial%3!=0:ps.add(pattern(x,I))
+    if trial%3==2:ps.add(pattern(y,I))
+    L.append(ps)
+   check(m,S,L);count+=1
+assert count==1260
+count=0
+for m in range(1,10):
+ S=scopes(m)
+ for a in range(1,m+1):
+  for c in range(1,a+1):
+   classes={i:max(0,i-(a-c)) for i in range(a)};L=[]
+   for I in S:
+    J=sorted({classes[i] for i in I if i<a});d=len(J)
+    pats=[0] if d==0 else [0,1] if d==1 else [0,1,2] if d==2 else [0,3,5]
+    L.append({sum(((z>>J.index(classes[i]))&1)<<j for j,i in enumerate(I) if i<a) for z in pats})
+   aa,cc,e,X=check(m,S,L);assert (aa,cc)==(a,c)
+   f=m-a;B=b(m)-b(f);assert e-B==X==B-(b(m-c+1)-b(f))-(c-1)*(b(f+1)-b(f));count+=1
+assert count==165
+count=0
+for n,k in ((6,3),(8,4),(10,4),(12,5),(15,6),(20,7)):
+ E=list(combinations(range(n),2));q=Fraction(k*(k-1),n*(n-1));r=Fraction(1,k-1)
+ for d in range(1,4):
+  if d*(q+r)>=1:continue
+  for _ in range(20):
+   es=rng.sample(E,d);V=sorted({i for e in es for i in e});pp=[0]*(1<<d);nn=[0]*(1<<d)
+   for bits in range(1<<len(V)):
+    X={v for j,v in enumerate(V) if bits>>j&1};h=len(X)
+    if 0<=k-h<=n-len(V):pp[sum((u in X and v in X)<<j for j,(u,v) in enumerate(es))]+=comb(n-len(V),k-h)
+   for z in product(range(k-1),repeat=len(V)):
+    c=dict(zip(V,z));nn[sum((c[u]!=c[v])<<j for j,(u,v) in enumerate(es))]+=1
+   for F in range(1<<(1<<d)):
+    if F&1 or not(F>>(2**d-1)&1):continue
+    if not all(not(F>>x&1) or F>>y&1 for x in range(1<<d) for y in range(1<<d) if x&y==x):continue
+    u=Fraction(sum(p for j,p in enumerate(pp) if F>>j&1),comb(n,k));v=Fraction(sum(p for j,p in enumerate(nn) if F>>j&1),(k-1)**len(V));assert u<v;count+=1
+assert count==800
+```
+
+### Active endpoint-first ledger
+
+| Gate | Deliverable | Status |
+|---|---|---|
+| G33 | signedParityComponentResidualBijection | derived and tested; original scopes, #1291 signed residuals |
+| G34 | sharpComponentExcessBudget / sharpPartitionWitness | derived and tested |
+| G35 | nonBijunctiveResidualBackdoorDecision | derived; G16/G17 |
+| G36 | cliqueToAnySliceMonotoneProjectionNoGo / boundedSupportPreprocessingNoGo | derived and exact checks; G32 attribution Berkowitz–Valiant |
+| G37 | reportedSubexponentialSATResidualTransport | external preprint theorem conditional; no independent proof audit |
+| N4/G12a | unrestrictedSerialCharge | OPEN: cannot charge raw c, a, p or e; must allow exact contraction and shared inversion |
+| N5/G12c | actualSliceOrUnrestrictedSuperpoly | OPEN: ordinary monotone CLIQUE projection cannot pay it; general monotone preprocessing not excluded |
+| N6 | originalClayTransport | existing conditional #1040, #1129 coverage |
+
+Highest alpha: rather than attempting another unnegated CLIQUE projection into a sandwich (G36 rules it out even with small-support preprocessing), inspect genuinely global monotone reductions or direct lower-bound methods on the original balanced hard slice. In parallel, audit the reported 2026 #SAT algorithm's actual paid operations (including any field/rank/tensor work) as a necessary shortcut control and potential source of a different uniform-time endpoint. Do not infer lower bounds from ETH or from restricted proof-search complexity. No assertion of P!=NP or extra mandatory kernel phase.
