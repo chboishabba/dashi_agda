@@ -23,6 +23,7 @@ SOURCE_PINS={
  "scripts/run_f8_lxix_native_source_matrix.py":"94e6303eab04823ab7f39244d21a32c98a300a07",
 }
 CHECKS={
+ "six-channel-native-adjoint":"scripts/check_f8_six_channel_native_adjoint.py",
  "h05-refinement-exact":"scripts/check_f8_h05_refinement_exact.py",
  "h05-signed-geometric-receiver-cube":"scripts/check_f8_h05_signed_receiver_cube.py",
  "energy-neutral-normal-fibre":"scripts/check_f8_energy_neutral_normal_fibre.py",
