@@ -60,6 +60,18 @@ Original full [J30 exact return receipt](../../Artifacts/smith-filsinger/j30_nom
 
 The numerical point and tangent tests support the *feasibility* of an exact periodic-orbit theorem but add no nominal **rational proof counts** beyond J29/J30.
 
+## 24 Nov 2026 — J31 source-specific seven-chart geometry and true 69D lift (not interval acceptance)
+
+**Committed implementation and independent numerical results:** [J31 source-owned 15D/69D shooting script](../../scripts/check_smith_filsinger_j31_source_15d_69d_shooting_20261124.py), [numerical machine receipt](../../Artifacts/smith-filsinger/j31_source_15d_69d_shooting_geometry_audit_20261124.json), [source-specific research/proof analysis](../research/SmithFilsingerJ31SourceSpecific15D69DShootingGeometry20261124.md), and [committed earlier exact-J30-receipt arithmetic/SymPy check](../../scripts/check_filsinger_j31_exact_source_reconciliation_20261124.py) with [receipt](../../Artifacts/smith-filsinger/j31_source_receipt_reconciliation_20261124.json). All outputs are on the *original PR #1537 branch*; no separate user-download-only scripts. The longer locally executed J31 numerical prototype is **not claimed byte-identical to the compact committed replay**, and no GitHub CI or Agda proof occurred.
+
+**New concrete original-source geometry:** seven actual switched finite-loss nine-state mode charts; six original signed guards; full analytic **15×15 scheduled-switch shooting Jacobian**, direct two-spark saltation cross-check, 15-coordinate finite differences, rationalized 12-decimal preconditioner, and a **sparse 69×69 actual seven-chart multiple-shooting lift**. The 69D formulation has 9 initial-state unknowns, six nine-state independent event-interface state boxes (54 coordinates), and six time variables; it enforces **54 matching equations + 9 return equations + 6 guards**. **Algebraic elimination of the 54 matches reproduces the 15D scheduled-switch Schur formulation**. One must not call the original 15D time-only system independent seven-chart multiple shooting without these 54 matching constraints.
+
+**Independent local numerical observations, NOT strict interval bounds:** 15D centre residual ≈3.49493e-11, residual after coupled Newton ≈1.68754e-14; Schur hybrid derivative vs independently assembled saltation ≈7.18e-16; vs independent 9D source tangent ≈1.29e-10; maximum 15-coordinate FD error ≈3.55e-9; sampled 12-decimal rational preconditioner centre `||I-CJ||_inf≈3.87e-12`; 69D eliminated Newton correction versus direct 15D ≈2.93e-24; 69D matrix 748 nonzero of 4761, sampled condition ≈8498. This supports the **geometric multi-chart shortcut** rather than an inflated single-trajectory interval bound.
+
+**Actual remaining mathematical acceptance:** seven **rigorously outward-validated** original-source chart maps, full-time off-guard mode signs and event transversality across a nonzero **69D** rational box, full interval `[DF_69(B)]` and exact centre `F(z0)`, a scaled rational 69D Krawczyk inward inclusion (or certified Schur reduction to 15D), and uniform no-extra-event acceptance. **Exact τ-periodic orbit OPEN.** Historical original J24 sixth event numerical box remains 3/9/5-of-6 overall, but this *alternative* full guard admissibility route does not require its preselected box. Original hardware, environmental source/metrology and five-parameter family remain OPEN.
+
+---
+
 ## ONE J31 mathematical maximum cut: augmented 15-variable shooting
 
 Use the original same-source \((9\ \mathrm{states}+6\ \mathrm{crossing\ times})\) scheduled-switch map with seven smooth segments, no state reset and full source phase. Let
@@ -76,7 +88,7 @@ The [J30B original 15D Schur proof](../research/SmithFilsingerJ30BSixGuardAugmen
 
 This already has an [exact SymPy regression](../../scripts/check_smith_filsinger_j30_six_guard_schur_20261123.py); it **does not** provide original-ODE interval \(DF(B)\) or the fixed point.
 
-**J31 actual endpoint deliverable, not individual guard updates:** construct seven independent *high-order, outward-validated, source-preserving smooth charts*, at six original guard events; include joint correlated time/state uncertainty on one nonzero rational **15D** box, actual branch signs and lack of extra crossings; evaluate original \(F(z_0)\) and full \([DF(B)]\) including both spark jumps. Derive an exact rational, preferably *scaled* 15×15 inverse preconditioner \(C\). Establish the strict Krawczyk inequality
+**J31 actual endpoint deliverable, not individual guard updates:** use the new **true 69D interface-state matching lift** to construct seven independently centred *high-order, outward-validated, source-preserving smooth charts* at the original six guard times; include 54 exact matching constraints and joint correlated time/state uncertainty on a nonzero rational **69D** box, actual branch signs and lack of extra crossings; evaluate original \(F(z_0)\) and full \([DF(B)]\) including both spark jumps. Derive an exact rational, preferably *scaled* 15×15 inverse preconditioner \(C\). Establish the strict 69D Krawczyk inequality (or an *interval-certified* reduction into 15D)
 
 \[
 z_0-CF(z_0)+(I-C[DF(B)])(B-z_0)\subset\mathrm{int}(B).
