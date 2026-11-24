@@ -45,6 +45,16 @@ $$
 $$
 No false assertion that the bare Agda rational Time field automatically supplies differentiable real helicity, continuous time or R565 FTC.
 
+**NEW uniform signed LOWER corollary, not the requested upper:** from (N0), Q_C(T)>=0 and H_C>=0,
+$
+4\int_0^T F_C(t)\,dt\ge-Q_C(0)
+  \ge-\frac{32}{\nu}\|u_0\|_{\ell^1(\mathbb Z^3)}^4,
+\qquad
+\boxed{\int_0^T F_C\ge-\frac8\nu\|u_0\|_{\ell^1}^4}.
+\tag{N0L}
+$
+For each true finite Galerkin trajectory with fixed smooth mean-zero initial datum this is uniform in BOTH cutoff C and terminal time T (wherever the trajectory/FTC is valid); it is a CLASSICAL substantive one-sided result. It means the negative time-integrated signed source cannot escape to -infinity under these original smooth hypotheses. **Crucial sign firewall:** R568 explicitly asks for an UPPER bound on 4 int F_C, and R653 separately asks for a physical strict-surplus LOWER relative inequality. N0L proves NEITHER; reversing its inequality would be a fatal error. N0L also requires N2's separately proved initial Gram ceiling; it is not a free consequence of R568's bare rational interface. The source R596 finite identity, original double-mixed laws and standard finite ODE calculus are its ingredients, not an invented new nonlinear estimate.
+
 **Geometric positivity:** for actual positive rates,
 $$
 Q_C(t)=2\sum_{k\ne0}
