@@ -7,6 +7,7 @@
 #include <gmpxx.h>
 #include <stdexcept>
 #include <cstdint>
+#include <utility>
 
 namespace paper9_dyadic_sector {
 using Z=mpz_class;
@@ -116,4 +117,39 @@ inline Decision classify(
  return {std::move(x),Sector::ExtendSeries};
 }
 
+// EXACT SOURCE-GAUGE REOPENING for the intermediate Euclidean fibres.
+// This routine is intentionally NOT called by the fast floor consumer.
+// If the true raw P/Q/T/endpoint numerator and denominator equal the
+// normalized ones times indexed scalar G>0, then the decimal floor is
+// invariant but (rho,ell) are NOT equal to G*(rho',ell').
+// With A'=2^k*(x*N'+rho')+ell', the raw integer A=G*A' has
+//   t=floor(G*ell'/2^k), ell=(G*ell') mod 2^k,
+//   rho=G*rho'+t, N=G*N'.
+// This is the creation-vs-reopening CARRY ledger; omitting t is wrong.
+// G must come from an authenticated original source-scale receipt.
+struct GaugeReopening {
+ Z rawN=0, rawRho=0, rawEll=0, carry=0;
+};
+inline GaugeReopening reopenRawDyadicFibre(
+    const Z& indexedSourceScale,unsigned k,const Z& normN,
+    const Z& normRho,const Z& normEll){
+ if(indexedSourceScale<=0 || normN<=0 || normRho<0 ||
+    normRho>=normN || normEll<0 ||
+    (normEll!=0 && mpz_sizeinbase(normEll.get_mpz_t(),2)>k))
+   throw std::invalid_argument("invalid indexed normalized remainder fibre");
+ GaugeReopening out;
+ Z scaledEll=indexedSourceScale*normEll;
+ mpz_fdiv_qr_2exp(out.carry.get_mpz_t(),out.rawEll.get_mpz_t(),
+                   scaledEll.get_mpz_t(),k);
+ out.rawN=indexedSourceScale*normN;
+ out.rawRho=indexedSourceScale*normRho+out.carry;
+ if(out.rawRho>=out.rawN)
+   throw std::logic_error("raw quotient remainder carry exceeded numerator");
+ return out;
+}
+
+// Additional provenance obligation: reopening a signed residual
+// delta'=V'-T'*q_n requires delta=G*delta'.  The affine edge and all
+// original source index/normalization recipe data must be preserved.
+// A coarse floor/hash does not authenticate the original coefficients.
 } // namespace paper9_dyadic_sector
