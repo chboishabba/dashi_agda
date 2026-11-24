@@ -92,7 +92,7 @@ def original_phase(model,folder,phase):
         L12=A*pow(vac,-1,P)%P
         L78=B*pow(vac,-1,P)%P
         g=model["phases"][str(phase)]["order3_model_cubic_scalars"][name]
-        gamma=eval31(g["K_g_cube_scalar_Qzeta3"],root)
+        gamma=eval31(g["K_g_cube_scalar_Qzeta3"],5) # fixed coefficient-field embedding
         if gamma==0:raise AssertionError("noninvertible projective Weil gamma")
         inverse_gamma=pow(gamma,-1,P)
         cubic12=scalar_matrix(cubic(L12),inverse_gamma)
