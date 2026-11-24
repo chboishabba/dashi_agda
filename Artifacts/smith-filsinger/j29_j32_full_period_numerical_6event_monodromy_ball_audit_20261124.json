@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-24",
+  "source_scope": "independent double precision SciPy DOP853 numerical replay of original nine-state J25 equations and numerical hybrid variational Jacobian, not exact interval proof",
+  "established_by_execution": true,
+  "local_execution_only": true,
+  "github_ci": false,
+  "agda_kernel": false,
+  "source_equation_owner": "J25/J27 original nine-state Filsinger model, independently transcribed; original J18 native executable not byte-executed",
+  "nominal_initial_seed_owner": "J25 exact-rational J23 initial point",
+  "j28b_stage75_checkpoint_git_blob": "74c1a94b30c44a772016c93b39558bc446359832",
+  "locally_executed_script_git_blob_expected": {
+    "independent_full_period_numerical_audit": "69aa771ed0af9fb0b33d4109cbf7d9cc1dd44557",
+    "independent_full_period_monodromy_audit": "481cc5b693e7244d582a136aa06d828fb41d46b7",
+    "independent_full_period_ball_probe": "06cb58ae1141ead5867ba5e8dbc7246cbfa18edb"
+  },
+  "source_period": "20*pi/11",
+  "event_count_numerical": 6,
+  "event_order": [
+    "V ON",
+    "spark OFF",
+    "spark ON",
+    "U ON",
+    "V OFF",
+    "U OFF"
+  ],
+  "events_model_time": [
+    "3.389367008894",
+    "3.491292721190",
+    "3.515340479143",
+    "4.275489023275",
+    "4.323837945006",
+    "4.928751407316"
+  ],
+  "numerical_original_J24_comparison": {
+    "maximum_time_discrepancy_approx": 2.62246402371602e-9,
+    "maximum_state_coordinate_discrepancy_approx": 1.7683309927463142e-8,
+    "J24_state_halfwidth": 0.0001,
+    "all_six_centres_inside_J24_nominal_box_numerically": true,
+    "rigorous_all_nine_state_box_inclusions": false
+  },
+  "nominal_return_defect_infty_approx": 9.255263222485155e-12,
+  "independent_variational_return_defect_infty_approx": 1.9173551635276453e-12,
+  "numerical_monodromy": {
+    "spectral_radius": 0.8881037941543961,
+    "sigma_min_IminusM": 0.11950617607632322,
+    "condition_IminusM": 11.307635055338606,
+    "norm_inverse_IminusM_inf": 11.731499449907552,
+    "j24_prior_rational_preconditioner_inverse_norm": 11.731499450011,
+    "numeric_crosscheck_difference": 1.0344791689931299e-10,
+    "spark_OFF_saltation_det": -2.2679064452198396,
+    "spark_ON_saltation_det": -0.8573931239994139,
+    "centred_fd_eps_1e_minus_4_relative_error": 0.0000025129367292581035,
+    "all_18_fd_perturbed_paths_preserve_6_event_itinerary": true
+  },
+  "newton_probe": {
+    "state_correction_inf": 2.04506103278736e-12,
+    "corrected_numerical_defect_inf": 1.3548856481193639e-11,
+    "note": "corrected numerical defect can grow at near-machine ODE tolerance; not a rigorous improvement"
+  },
+  "sampled_nonzero_ball_probe": {
+    "radius": 1e-7,
+    "sample_count": 18,
+    "max_sampled_derivative_infty_difference": 5.693089720837721e-7,
+    "max_sampled_preconditioned_q": 8.544002451275196e-7,
+    "norm_preconditioned_centre_defect_inf": 2.0450610327873598e-12,
+    "supports_feasibility_of_J24_budget": true,
+    "does_not_establish_uniform_ball_bound": true
+  },
+  "certified_existing_event_roots": 4,
+  "certified_existing_J24_event_state_boxes": 3,
+  "fifth_sixth_event_certified": false,
+  "complete_interval_nominal_return_certified": false,
+  "uniform_nonzero_ball_derivative_certified": false,
+  "banach_krawczyk_certified": false,
+  "exact_periodic_orbit_proved": false,
+  "original_hardware_or_incident_field_metered": false,
+  "required_next_mathematical_producers": [
+    "native source-pinned exact interval flow for the two remaining diode events and post-U-off segment to tau",
+    "all six original J24 event-state box inclusions and absence of extra roots",
+    "rigorous centre return defect and hybrid DP_tau(B) for nonzero radius 1e-7 ball",
+    "proved J24 rational contraction and self-map inequalities; correct source-clock and both spark saltations"
+  ]
+}
