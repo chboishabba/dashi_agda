@@ -23,6 +23,9 @@ SCRIPTS=[
  "monster3b_ordinary12_hom_outer_weld.py",
  "monster3b_steel_ordinary12_to90.py",
  "monster3b_actual_mmv31_hom_projector.py",
+ "monster3b_literal_mm_4d_character_class.py",
+ "monster3b_quadratic12_character_lift.py",
+ "monster3b_mm31_outer_phase_pair.py",
  "run_monster3b_p5_endpoint.py",
 ]
 def load(filename):
@@ -56,6 +59,15 @@ def main():
     homo=load(SCRIPTS[3])
     assert homo.selftest()["toy_GL2_noncommuting_unique_Hom"]=="PASS"
     builder=load(SCRIPTS[4])
+    literal=load("monster3b_literal_mm_4d_character_class.py")
+    gap_src=literal.gap_source(123,456,Path("/tmp/monster3b-class4D.json"))
+    assert "chi[j]=123" in gap_src and "chi[pow2[j]]=456" in gap_src
+    assert '\\\"schema\\\"' in gap_src and "classes[10]" in gap_src
+    lift=load("monster3b_quadratic12_character_lift.py")
+    bounded=lift.exhaustive_proof()
+    assert bounded["exact_bounded_Qzeta3_values"]==517
+    assert bounded["collisions"]==0
+    assert bounded["toy_order3_projective_scalar_candidates"]==3
     mm31=load("monster3b_actual_mmv31_hom_projector.py")
     import numpy as np
     assert mm31.rank31(np.eye(4,dtype=np.int16))==4
@@ -115,6 +127,10 @@ def main():
       "Magma_original_source_export_staging":"PASS",
       "GAP_210_class_fingerprint_staging":"PASS",
       "actual_MMV31_rank_algorithms":"PASS_LOCAL_F31_ONLY",
+      "literal_Monster_4D_GAP_character_script_staging":"PASS",
+      "bounded_Qzeta12_character_lift_517_of_517":"PASS",
+      "Weil_order3_scalar_ambiguity_correctly_retained":"PASS",
+
       "actual_Steel_Magma_GModule_executed":False,
       "actual_GAP_CTBLib_executed":False,
       "actual_Monster_mmgroup_word_executed":False,
