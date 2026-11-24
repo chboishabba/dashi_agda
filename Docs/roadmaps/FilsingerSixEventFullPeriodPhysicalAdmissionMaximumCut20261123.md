@@ -1,5 +1,14 @@
 # Filsinger P0 maximum cut — six-event full-period proof × receiver × physical admission
 
+## J32 maximum-cut superseding status: 5/7 complete original smooth modes (24 Nov)
+
+Original J32 [signed Taylor reference/9×9 PB6 flow](../../scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py) and [source jet](../../scripts/check_smith_filsinger_j32_source_taylor_jets_20261124.py), exact receipts for [event3→4](../../Artifacts/smith-filsinger/j32_event3_to_event4_signed_taylor_128slab_20261124.json) and [event5→6](../../Artifacts/smith-filsinger/j32_event5_to_event6_signed_taylor_128slab_20261124.json), [controlling math/source-boundary note](../research/SmithFilsingerJ32FullEvent5To6SignedTaylorAnd69DIngress20261124.md) are committed to the original PR #1537, not a new lane. New source Git blob a9b773a5e716eea21439d5df40657a1c3d0b4512 matches local test bytes; source original dependencies retain their respective owners.
+
+**New source math:** 128/128 exact full Picard/PB6 for event3 spark ON→event4 U ON **and** 128/128 event5 V OFF→event6 U OFF, on independent actual start/end event-time boxes, with original J24 paid 9D source input, full nonlinear forcing/cap and source-signed guard projection. In event3→4 U OFF strictly negative 127 slabs, final U-ON slope strictly positive through moving terminal-clock extension; other diode/spark modes source-validated; physical terminal guard-zero is conditional. The new fifth full-leg source derivative interval is mathematically valid but quite wide (~10.63 in worst matrix entry), **not enough to declare the global 69D contraction**.
+
+**Only TWO entire original source legs remain**: initial 0→event1 and last event6→τ. The broad derived event6 terminal enclosure from k5 is now a directly grounded source input for final-leg validation; it is **NOT** the unpaid original narrow event6 J24 source admission (still 5/6). Paid complete conditional smooth segments are 5/7; all older 4/7,3/7 rollups below are time-indexed history. Final full 69D F/[DF], 54 signed matches, six original guard zeros, nine return components, 69 inward Krawczyk rows, uniqueness and exact physical orbit OPEN. Original empirical hardware/source-energy work separate and unpaid.
+
+
 ## New J32 original-source maximum-cut: 4/7 full physical mode maps (24 November)
 
 [Exact rational source jet and 7th-order remainder](../../scripts/check_smith_filsinger_j32_source_taylor_jets_20261124.py), [original J32 time-indexed 128-slab signed 9×9 producer](../../scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py), [machine acceptance](../../Artifacts/smith-filsinger/j32_event5_to_event6_signed_taylor_128slab_20261124.json), [full mathematical derivation / physical root firewall](../research/SmithFilsingerJ32FullEvent5To6SignedTaylorAnd69DIngress20261124.md) now committed to original PR #1537 (no merge/rebase).
