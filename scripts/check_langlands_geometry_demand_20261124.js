@@ -38,20 +38,20 @@ function run(){
   let full=0,used=0,skipped=0,ops=0;for(const g of G){if(g.op)full+=h;if(!g.h){g.r=Z;if(g.op)skipped++;continue}if(!g.op){g.r=red(g.v,g.h);continue}const a=G[g.a].r,b=G[g.b].r;g.r=g.op==="+"?add(a,b,g.h):mul(a,b,g.h);used+=g.h;ops++}return {v:red(G[root].r,h),full,used,skipped,ops};
  }
  function brute(n,F,w,pins){let v=Z,s=false;for(let u=0;u<2**n;u++){const x=bits(n,u);if(!F.every(c=>clause(c,x))||[...pins].some(([i,b])=>x[i]!==b))continue;s=true;v=add(v,x.reduce((a,b,i)=>mul(a,w[i][b],H),O),H)}return {v,s}}
- let source=0,paths=0,witnesses=0,precisionChecks=0,full=0,used=0,skipped=0,neutral=0,mixed=0;const large=[];
- function fixture(n,F,w,small){
+ let source=0,paths=0,witnesses=0,precisionChecks=0,probeChecks=0,full=0,used=0,skipped=0,neutral=0,mixed=0;const large=[];
+ function fixture(n,F,w,small,unitControl=false){
   const d=discover(n,F),m=model(n,F,w,d),a=m.root(n).a,wx=m.witness(n);ck(!!wx===a.s&&(!wx||F.every(c=>clause(c,wx))),"original witness");if(wx)witnesses++;if(a.s&&eq(red(a.v,1),Z))neutral++;
   if(small){const b=brute(n,F,w,new Map());ck(eq(a.v,b.v)&&a.s===b.s,"source");source++}
-  const i=rnd(n),j=(i+1+rnd(n-1))%n,bi=rnd(2),bj=rnd(2),p=new Map([[i,bi]]),q=new Map([[j,bj]]),pq=new Map([...p,...q]),mi=model(n,F,w,d,p),mj=model(n,F,w,d,q),mij=model(n,F,w,d,pq),ai=mi.root(n).a,aj=mj.root(n).a,aij=mij.root(n).a;
+  const i=rnd(n),j=(i+1+rnd(n-1))%n,bi=unitControl?1:rnd(2),bj=unitControl?1:rnd(2),p=new Map([[i,bi]]),q=new Map([[j,bj]]),pq=new Map([...p,...q]),mi=model(n,F,w,d,p),mj=model(n,F,w,d,q),mij=model(n,F,w,d,pq),ai=mi.root(n).a,aj=mj.root(n).a,aij=mij.root(n).a;
   const path=m.transported(d.pos[i],d.pos[j],m.pinDelta(i,bi)),path2=mi.transported(d.pos[j],d.pos[i],mi.pinDelta(j,bj)),path3=mj.transported(d.pos[i],d.pos[j],mj.pinDelta(i,bi));
   ck(eq(path.v,sub(ai.v,a.v,H))&&eq(path2.v,sub(aij.v,ai.v,H))&&eq(path3.v,sub(aij.v,aj.v,H)),"bidi path");paths+=3;ck(eq(sub(path2.v,sub(aj.v,a.v,H),H),sub(path3.v,path.v,H)),"mixed");mixed++;
   for(const [pinset,model0,a0] of [[p,mi,ai],[q,mj,aj],[pq,mij,aij]]){const x=model0.witness(d.pos[i]);ck(!!x===a0.s&&(!x||(F.every(c=>clause(c,x))&&[...pinset].every(([i,b])=>x[i]===b))),"pinned witness");if(x)witnesses++;if(small){const b=brute(n,F,w,pinset);ck(eq(a0.v,b.v)&&a0.s===b.s,"pinned source");source++}}
-  let localFull=0,localUsed=0;
-  for(let h=1;h<=H;h++){const v=precision(n,F,w,d,h,pq);ck(eq(v.v,red(aij.v,h)),"actual low precision");precisionChecks++;full+=v.full;used+=v.used;skipped+=v.skipped;localFull+=v.full;localUsed+=v.used}
-  return {n,clauses:F.length,bag:d.peak,fillPairChecks:d.checks,path:path.length,pathEntries:path.entries,inhabited:aij.s,full:localFull,used:localUsed};
+  if(unitControl)ck(!eq(red(aij.v,1),Z),'nonzero unit control');let localFull=0,localUsed=0;
+  for(let h=1;h<=H;h++){const v=precision(n,F,w,d,h,pq);ck(eq(v.v,red(aij.v,h)),"actual low precision");precisionChecks++;if(h<=3){const base=precision(n,F,w,d,h,new Map());const A=w.reduce((a,x)=>mul(a,add(x[0],x[1],H),H),O);const D0=sub(mul([3,0,0],A,H),mul([4,0,0],a.v,H),H),D1=sub(mul([3,0,0],A,H),mul([4,0,0],aij.v,H),H);const delta=red(sub(D1,D0,H),h+2);ck(delta.every(x=>x%4===0)&&eq(delta.map(x=>x/4),sub(base.v,v.v,h)), 'Weil precision residual');probeChecks++}full+=v.full;used+=v.used;skipped+=v.skipped;localFull+=v.full;localUsed+=v.used}
+  return {n,clauses:F.length,bag:d.peak,fillPairChecks:d.checks,path:path.length,pathEntries:path.entries,inhabited:aij.s,nonzeroMod2:!eq(red(aij.v,1),Z),full:localFull,used:localUsed};
  }
  for(let t=0;t<100;t++){const n=2+rnd(7),F=Array.from({length:rnd(12)},()=>Array.from({length:rnd(4)},()=> (rnd(2)?1:-1)*(1+rnd(n))));if(t%3===0)F.splice(0,F.length,...Array.from({length:n-1},(_,i)=>[i+1,-(i+2)]));const w=Array.from({length:n},()=>Array.from({length:2},()=>[rnd(32),rnd(32),rnd(32)].map(x=>x*(2**rnd(3))%32)));fixture(n,F,w,true)}
- for(const n of [31,63,127]){const F=[];for(let i=1;i<n;i+=2){const p=(i-1)>>1;F.push([p+1,i+1,i+2],[-(p+1),-(i+1),i+2],[p+1,-(i+1),-(i+2)])}const w=Array.from({length:n},()=>Array.from({length:2},()=>[rnd(32),rnd(32),rnd(32)].map(x=>x*(2**rnd(2))%32)));large.push(fixture(n,F,w,false))}
- return {source,paths,witnesses,precisionChecks,full,used,skipped,neutral,mixed,large};
+ for(const n of [31,63,127]){const F=[];for(let i=1;i<n;i+=2){const p=(i-1)>>1;F.push([p+1,i+1,i+2],[-(p+1),-(i+1),i+2],[p+1,-(i+1),-(i+2)])}const w=Array.from({length:n},()=>Array.from({length:2},()=>[rnd(32),rnd(32),rnd(32)].map(x=>x*(2**rnd(2))%32)));large.push(fixture(n,F,w,false));const wu=Array.from({length:n},()=>[[2,0,0],[1,1,0]]);large.push(fixture(n,F,wu,false,true))}
+ return {source,paths,witnesses,precisionChecks,probeChecks,full,used,skipped,neutral,mixed,large};
 }
 console.log(JSON.stringify(run(),null,2));
