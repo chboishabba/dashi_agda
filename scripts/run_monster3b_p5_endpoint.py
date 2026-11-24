@@ -284,6 +284,18 @@ def main():
                         "--outdir",out/"source729_actual_mod31_plus"]):
                         report["lemma_status"]["M3B-L10B_original729_MM31_plus_gauge"]=\
                             "MODEL_729_TO_ACTUAL_90_PROJECTIVE_COMPARISON_NOT_CHAR0"
+                if positive and model_paid:
+                    symlog=out/"actual_projective_12_sym2_78_plus.json"
+                    if run("actual_same_word_projective_sym2_plus",[
+                        sys.executable,
+                        SCRIPTS/"monster3b_actual_order3_projective_sym2_weld.py",
+                        "--model",weilmodel,"--plus",plus,"--out",symlog]):
+                        data=json.loads(symlog.read_text())
+                        report["lemma_status"]["M3B-L10C_projective_12_to_78_plus"]=\
+                            data["status"]
+                    else:
+                        report["lemma_status"]["M3B-L10C_projective_12_to_78_plus"]=\
+                            "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
                 if args.both_mod31_phases and positive:
                     minus=out/"actual_mmv31_hom_opposite"
                     other=[sys.executable,
@@ -301,6 +313,19 @@ def main():
                                 report["lemma_status"]["M3B-L10B_original729_MM31_minus_gauge"]=\
                                     "MODEL_729_TO_ACTUAL_OPPOSITE_PHASE_PROJECTIVE_COMPARISON"
 
+                        if model_paid:
+                            symlog=out/"actual_projective_12_sym2_78_both.json"
+                            if run("actual_same_word_projective_sym2_both_phases",[
+                                sys.executable,
+                                SCRIPTS/"monster3b_actual_order3_projective_sym2_weld.py",
+                                "--model",weilmodel,"--plus",plus,"--minus",minus,
+                                "--out",symlog]):
+                                data=json.loads(symlog.read_text())
+                                report["lemma_status"]["M3B-L10C_projective_12_to_78_both"]=\
+                                    data["status"]
+                            else:
+                                report["lemma_status"]["M3B-L10C_projective_12_to_78_both"]=\
+                                    "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
                         if run("quadratic12_character_lift",[
                             sys.executable,
                             SCRIPTS/"monster3b_quadratic12_character_lift.py",
