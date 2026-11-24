@@ -171,7 +171,7 @@ def main():
                         "GENUINE_MM31_MODULAR_PROJECTOR; NOT_COMPLEX_HOM"
                 else:
                     report["lemma_status"]["M3B-L10B_actual_mod31_Hom_vacuum"]="FAILED"
-                if run("hom_outer",[sys.executable,
+        if run("hom_outer",[sys.executable,
                SCRIPTS/"monster3b_ordinary12_hom_outer_weld.py",
                "--source",original12,"--out",out/"hom_outer_weld.json",
                * (["--hom",str(args.hom)] if args.hom else []),
