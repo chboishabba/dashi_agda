@@ -174,6 +174,7 @@ def full(manifest,root):
       "D3":D**3,
       "CD56":(C*D)**56,
       "ATLAS_R7":relator(C,D)**7,
+      "ATLAS_Q7":(C*D*C*D*D)**7,
       "C2_vs_CD28":C**2*((C*D)**28)**-1,
     }
     out={
