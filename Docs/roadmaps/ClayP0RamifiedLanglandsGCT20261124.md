@@ -501,3 +501,117 @@ Counts: 34 finite gate/fibre arithmetic comparisons; one resultant identity; 260
 | N6/LGC7 / E | literal Clay endpoint | conditional consumer; not inhabited |
 
 Attribution: classical Kummer theory, local class field theory and Artin conductor filtration formula (standard authorities already recorded R2/R3; use only explicit theorem boundaries); classical SAT decision-to-search self-reduction; known linear structure MC bound R10; elementary CRT. DASHI crosswalk uses actual binary/ternary owners and local arithmetic; preserve JMD FRACTRAN/MDL attribution. No claims of field isomorphism, new LLC theorem, or P≠NP. Endpoint mathematics next, not repeat certification.
+
+## 11. R21–R27 — constructor correction, zero mediator, six faces and ramified branch descent (24 Nov 2026)
+
+User correction: "unused centre" is only correct for the strict binary embedding's image, NOT the ternary mediator or zero-residual geometry. This section supersedes any reading in R14–R20 that identifies those notions. Stay on Langlands; attached other-worker G14/G15 is a donor. Live #1548 ca442a027f3deca9e8d108adf207c750050dabc3, #1291 d8f05ff5fc68da3c918d50c67f00edecc1e62648, #1549 a715df92ff97af33ae373ff266022ec0848fa1e4, #120 3d59da16938b355ff039d79eaac7d1fe7d6da742. #1291 is divergent source donor, not merged master authority. No unrelated programme edits.
+
+### R21. Inspect actual constructors and six-square owners (not names/cardinalities)
+
+Fetched from #1291 head above: Base369.agda d3bed50a4baafd274a30ef0b1fab8301f7016c4a (tri-low, tri-mid, tri-high; indices 0,1,2; triXor identity tri-low); DASHI/Foundations/SSPTritCarrier.agda 633ac129a3d17154ec2c73305022af60cfb97fa2 (sspNegOne, sspZero, sspPosOne, explicit neutral classifier and toTriTruth/fromTriTruth); DASHI/Algebra/TritTriTruthBridge.agda d428679741681a762d11190016a668cde695a2e5 (toTriTruth neg=low, zer=mid, pos=high, toFrom/fromTo, rotTrit-equivariant-to, reflection not triXor hom at neg); DASHI/Foundations/Base369TriTruthField.agda 83c6d6c8cd4819b92cfb8d1c27eb8652f103d31d (triZero=tri-low, triOne=tri-mid, triNeg fixes low, triAdd=triXor); DASHI/Foundations/Base369MobiusTransport.agda 2d0cc4ab403cd464ac1b052bdd4fb67d8c9491a6 (hex shift +3 flips orientation preserves triadic phase).
+DASHI/Foundations/BalancedTernaryAntipodalResidualCodecExact.agda 2a5069418e25572f04941591dbc83334862c012d: OrientationResidual27 centre27=unit, noncentral classes Orientation2=direct/counter, encode27/decode27 exact. 27=1+2*13, centre included, no fictitious sign on centre; coarse quotient loses information only if residual discarded.
+DASHI/Codec/TriadicMaskSignFactorization.agda db62f5518adc7fd3815c56ead5e20a8071db4b5a: FactorizedTrit inactive | active Sign; inactive decodes zer, not missing observation.
+DASHI/Core/GovernedIndexedResidualCubeExact.agda 42b70ebb7376813076934f2245ce6011b76f10c8: eight typed vertices A B C D E F H I, 12 actual maps, Faces Rxy0/Rxz0/Ryz0/Rxy1/Rxz1/Ryz1, ExactFaces distinct from ResidualFaces, xyz-zyx and five other endpoint comparisons. Residual alone does not imply equality.
+DASHI/Codec/IndexedCubeMaskSignInstanceExact.agda 7a948ba3700bfd43c50fa08de3e4ee8bf2895a95: x partitions WITH suffix, y rotates, z encodes; codecExactFaces uses partitionRotation, partitionCodec, codecRotation, splitCodecRotation; terminalReopen decodes joins to original rotated state. Exact faces have unit extra defect because suffix/sign remain in carriers, not because erased. IndexedCubeMarkedAffine9Exact uses explicit balanced add3/mul3 (zer identity/absorber) and recharted six face witnesses; chart marks material.
+Fetched from master: DASHI/Foundations/Base369Ternary27HypervoxelFabricGeometryExact.agda eabb5876f391abc285d042a789ab4a29fc6b82b0: actual origin=(sspZero,sspZero,sspZero), TritGridStep negToZero/zeroToNeg/zeroToPos/posToZero, noDirectNegToPos/noDirectPosToNeg, six outer Face6; DASHI/Moonshine/Base369PeriodicTernaryTorusPathRestrictionBidiExact.agda a7bb055c139503da711157e897bf17b695130452: pathStepToCyclic, cyclicWrapIsNotPathStep, same nine-coordinate carrier different adjacency. This is the actual mediator, not the raw cyclic code or unrelated Lacan comparison role. The #1291 living roadmap blob a40721dde3fa561f82abe80c5312363e18aee158 explicitly warns against shifted residue path and preserves zero, winding, residual, source and physical time. H07 native ambient overlap and analytic operator faces still open; no import of physical authority.
+
+### R22. Balanced vs field chart — repair the actual commuting operations
+
+For t in {-1,0,+1}, SSP and Trit constructors agree under their bijection; Base369 chart j(t)=t+1 mod3. Therefore balanced zer maps tri-mid, NOT the field triZero=tri-low. The transported BALANCED field operations in raw index coordinates are:
+    j(t+u)=j(t)+j(u)-1 mod3,
+    j(tu)=(j(t)-1)(j(u)-1)+1 mod3,
+    j(-t)=2-j(t) mod3.
+The existing triXor instead adds raw indices and has identity low; the balanced reflection is not raw triNeg (indeed source has reflection-not-xor-hom). Do not reinterpret existing source operations. The correct Langlands character chart rho_bal(t)=eta^t, rho_index(j)=eta^(j-1), commutes with toTriTruth and balanced inversion. It sends the mediator to the trivial representation (an actual one-dimensional line, not the zero vector space), endpoints to inverse nontrivial characters. On raw triXor use eta^j if a homomorphism is desired; that is a DISTINCT choice with different unit and neutral semantics. In the balanced chart tensor composition has translated index j+j'-1. No unital ring map F2->F3 or equivalence of local fields asserted.
+
+For the original P3 path -1->0->+1, each successive relative cubic character is eta, product eta^2. Direct periodic +1 to -1 wrap is allowed only in C3 graph. Integer displacement -2 and +1 have the same cubic phase; likewise +2 and -1. Retaining ordered path/incidence and integer lift/winding distinguishes direct cyclic wrap from actual two-step mediated edge. The involution t->-t preserves P3 and fixes its middle. Cyclic translation does not preserve P3 adjacency; use transported graph if changing chart. The character is a representation of phase, not an intrinsic graph-length lower bound. This is the zero-aware path/periodic distinction from existing source.
+
+### R23. Relative ramified lines with zero residual — exact binary pair and branch mediator
+
+For two binary values a,b, use the INTEGER signed difference d=b-a in {-1,0,+1}, rather than XOR alone or the antipodal endpoint embedding. Map d into the SSP balanced constructor, then cubic local character eta^d. Binary relative character is chi^(d mod2). The support is d!=0, sign of nonzero d determines direction, and d=0 is a real equal-value state. The exact lossless pair codec is:
+    d=-1: (a,b)=(1,0), unique;
+    d= 0: (a,b)=(0,0) OR (1,1), retain a bit;
+    d=+1: (a,b)=(0,1), unique.
+This is a dependent residual on the ZERO fibre of the DIFFERENCE map, distinct from OrientationResidual27 (unit at centre, sign on noncentral antipodal classes) and FactorizedTrit (no sign at zero). The latter codecs remain exact on their carriers. Here the extra bit is common endpoint VALUE, not a fake orientation at zero. Algebraically pair ~= Sigma d Residual(d), Residual(0)=Bool, Residual(+/-1)=unit, 4=1+2+1. Recovery b=a+d with legal a, or piecewise decoding. If both endpoint values are known, cubic relative line over W_K is Hom_C(eta^a,eta^b), and is eta^d. This uses 0/1 exponent for Boolean *value* lines, NOT antipodal exponent e(b); if using eta^{e(b)} relative exponent is 2d=-d mod3, so invert orientation or use the typed chart conversion. Never mix the two.
+
+For actual selector SAT let a,b be truth of whether prefix assignment extended by next bit 0 or 1 admits any full satisfying witness (R17 local norm relation). Then d=-1 = left-only, d=+1 = right-only, d=0 = both viable OR neither viable. Both have trivial relative character and norm residue, different parent truth. Keep the common viability bit r when d=0. Parent OR is |d|+(1-|d|)r (r=0 by convention on nonzero d); equivalently a+b-ab. This gives an exact three-way mediator and dependent reconstruction of the two-branch feasibility state. A polynomial-cost selector decider yields these branch bits by unit self-reduction; a polynomial section yields decider. The character alone cannot provide them. Examples on one-variable selector: no selected clauses -> both viable; contradictory units -> neither; one selected unit -> one branch. These are actual selector instances, not invented hard inputs. Thus the zero residual is critical to arithmetic descent. Cannot independently pay for each branch or count zeros as solved; computing joint feasibility bits is the target. Source-specific zero mediator may be unresolved/neutral in partial assignment chart; it is not a third Boolean witness. The two-branch feasible set must be retained until actual descent resolves it.
+
+### R24. Six genuine commuting squares on signed ramified edge transport
+
+Take actual output f on a 3-dimensional Boolean selector subcube (three distinct flips, all other selectors fixed). Vertices x in {0,1}^3 with output f(x) in {0,1}. Directed edge e_i(x)=f(x+ei)-f(x) for x_i=0. Along edge use transport (anchor a, signed d) -> a+d; edge character eta^d and chi^(d mod2), with admissibility a+d in {0,1}. For each of six oriented square faces (three pairs of axes, two values of remaining axis):
+    e_i(x)+e_j(x+ei)=e_j(x)+e_i(x+ej)=f(x+ei+ej)-f(x).
+This is exact integer equality, hence equality of the relative cubic and quadratic line compositions, compatible with the R22 codec and R23 anchor residual. It gives six source-square witnesses of the shape of GovernedIndexedResidualCubeExact, NOT a native Agda instantiation yet. Six permutations of axis order all recover same final output from same anchor. Conversely, for arbitrary signed edge labels, all six integer face identities imply path independence by adjacent swaps, and uniquely reconstruct all eight vertex values from anchor by sums; to be a Boolean-labelled cube additionally require all recovered values in {0,1}. Conversely these conditions suffice. Merely equal characters modulo3 (or even modulo6) do not imply arbitrary integer lifts glue without bounds. These six faces are binary selector source cube faces (eight vertices); distinguish original P3^3 six OUTER faces (27 sites); no assertion they are identical cell complexes. Codec cube x=partition, y=rotate, z=encode is a THIRD diagram whose actual six proofs are reused as proof shape, not replaced by selector axis flips. For a native weld use these typed distinctions and attach original suffix/anchor to each vertex; no residual-free promotion.
+
+Important admissibility calculation: at a common source vertex, three signed first differences all lie in {0,+1} when f(x)=0 or {0,-1} when f(x)=1. Their union has 2^3+2^3-1=15 possible triples (12 mixed-sign triples inadmissible), not 27. All-zero gradient has two common-source output possibilities. With anchor 16 possible local source stars. On all eight cube vertices there are 256 Boolean labellings and exactly 255 distinct full edge gradients (two constant labellings coincide, all others determine anchor since some nonzero edge specifies endpoints). This is the actual joint source-admissibility restriction; do NOT populate entire F3^3, count 27 as independent computational directions, or erase common-source identity. Original ternary 27 geometry is valid on its own typed carrier, but binary derivative image is a proper governed subset. This is the same reason source-specific overlaps matter in #1291 H07.
+
+### R25. Higher signed residuals and exact prime-power repair, attached to G14/G15
+
+At order r>=1 the signed integer mixed derivative along r distinct Boolean flip axes is an alternating sum of 2^r output values; absolute bound 2^(r-1). First differences are actual trits, higher differences need NOT be trits. Example r=4, f=indicator(Hamming weight=2), signed derivative at 0 is +6. Both binary parity and cubic phase are trivial, although integer residual is nonzero. Thus even the paired 2/3 phase chart cannot replace higher signed residuals. For order r choose coprime powers M=2^a*3^b>2^r; signed CRT reconstruction in [-2^(r-1),2^(r-1)] is unique. This is arithmetic transport of the signed jet with O(r) bits per coordinate, not free computation or a cost bound. For first differences the cubic phase determines d exactly and parity is its support; for higher derivatives carry/residual is essential. The relevant producer is SixWheelCRTExact plus R19, with proper integer signed reconstruction.
+
+Attached other worker G14 full-degree proof (orbit parity) improves R18 lower bound to MC(F_m)>=N_m-1, using known degree bound. Both width-two and width-three have full degree and exponential boundary jet rank yet 2-SAT polynomial. Adopt their result as source donor, not our new proof. On their maximal assignment flat and orders within admitted isolation radius, Boolean mixed derivatives are products of q_C(x); integer signed derivatives are (-1)^r times those products (local restriction of monotone decreasing flat indicator). Thus cubic signed jet line is eta^{(-1)^r product q_C(x)}, and trivial on zero derivative; branch anchor/jet lift distinguishes cases as above. Their exponential rank is explicitly not an unrestricted resource lower bound. Preserve incidence and phase signs, but do not count every nonzero derivative or 27 pattern as a separate paid gate. Width-three-specific universal arithmetic descent obstruction still open.
+
+### R26. Actual local finite execution (no CI or native kernel)
+
+Executed local Python exact integer tests, with SymPy available (no symbolic theorem certification claimed). 9 shifted chart pair comparisons, 8 signed endpoint triples, 1536/1536 integer square identities (256 binary cube labellings x6 faces), 1536/1536 monotone endpoint paths, 255 gradient patterns and 15 common-source patterns exactly, 518 signed CRT reconstruction comparisons at r=1..8, explicit order-four +6 collision. Reproduction:
+```python
+from itertools import product, permutations, combinations
+T=(-1,0,1)
+j=lambda t:(t+1)%3
+bal=lambda r:((r+1)%3)-1
+for a,b in product(T,repeat=2):
+    assert j(bal(a+b))==(j(a)+j(b)-1)%3
+    assert j(-a)==(2-j(a))%3
+    assert j(bal(a*b))==((j(a)-1)*(j(b)-1)+1)%3
+for a,b,c in product(range(2),repeat=3):
+    assert b-a+c-b==c-a and (b-a)%2==(a^b)
+    assert ((b-a)%3==0)==(a==b) and a+(b-a)==b
+vertices=list(product(range(2),repeat=3)); faces=paths=0
+gradients=set(); base_grad=set()
+for f in product(range(2),repeat=8):
+    F=dict(zip(vertices,f))
+    def step(x,i): return tuple(v+(j==i) for j,v in enumerate(x))
+    E={(x,i):F[step(x,i)]-F[x] for x in vertices for i in range(3) if x[i]==0}
+    gradients.add(tuple(E.values()))
+    base_grad.add(tuple(E[((0,0,0),i)] for i in range(3)))
+    for i,j in combinations(range(3),2):
+        k=3-i-j
+        for b in range(2):
+            x=tuple(b if t==k else 0 for t in range(3))
+            assert E[x,i]+E[step(x,i),j]==E[x,j]+E[step(x,j),i]
+            faces+=1
+    for p in permutations(range(3)):
+        x=(0,0,0);y=F[x]
+        for i in p:y+=E[x,i];x=step(x,i)
+        assert y==F[x];paths+=1
+assert (faces,paths,len(gradients),len(base_grad))==(1536,1536,255,15)
+v=list(product(range(2),repeat=4))
+assert sum((-1)**(4-sum(x))*int(sum(x)==2) for x in v)==6
+n=0
+for r in range(1,9):
+    B=2**(r-1);a=b=0
+    while 2**a*3**b<=2*B:
+        if a<=b:a+=1
+        else:b+=1
+    M=2**a*3**b
+    for x in range(-B,B+1):
+        y=(x%(2**a)*3**b*pow(3**b,-1,2**a)+x%(3**b)*2**a*pow(2**a,-1,3**b))%M
+        if y>M//2:y-=M
+        assert y==x;n+=1
+assert n==518
+```
+NOTE: variable j in loop shadows chart function after chart comparisons; no later chart invocation. Actual output matched all counts. No local field evaluation or CI. General proofs above are independent of finite run.
+
+### R27. Corrected phases, deliverables and original consumers
+
+| Gate / phase | Exact deliverable | Status / producers -> consumers |
+|---|---|---|
+| R21 / A | constructor and original six-face source reconciliation | inspected; SSPTritCarrier, TritTriTruthBridge, Base369TriTruthField, codec cube, #1291 -> R22–24 |
+| R22 / A | balanced-index shifted character chart, nonwrapping/periodic distinction | derived; source chart and P3/C3 restriction -> R23 |
+| R23 / B | signed binary difference dependent zero residual, norm/branch feasibility codec | derived; R16 eta, R17 selector norm, FactorsThrough and residual codec (distinct typed fibre) -> R24/R7a' |
+| R24 / B | all six selector face laws plus converse admissibility and anchor reconstruction | derived; H05 exact face shape, R23 -> labelled joint arithmetic data; native instantiation open, no H07 ambient promotion |
+| R25 / C | higher signed jet CRT carry, G14/G15 crosswalk | derived / other-worker results credited; N_m-1 bound still linear; 2SAT negative control |
+| R7a' / LGC4d / C | joint mediator-aware norm descent consumer of actual width-three family that preserves viable/dead zero residuals and overlaps | exact representation/branch gluing supplied; cost-sensitive invariant open |
+| R7b' / LGC5 / C | universal serial-safe bound for THAT consumer under all shared nonlinear extensions or actual machine transitions | OPEN; no independent branch/jet count, retain both parallel and serial chords G13 |
+| R7c / LGC6 / D | strict superpolynomial separation on actual selector SAT | OPEN; must distinguish 2SAT from 3SAT despite same full-degree/jet-rank phenomena |
+| LGC7/N6 / E | Clay endpoint transport via standard cost model | existing conditional consumer, no unconditional theorem |
+
+Next mathematical tranche: investigate mediator-aware joint feasibility across clause overlaps (not repeat constructor tests). Show which *source-specific* relations enforce nonlocal choices even after arbitrary earlier computational sharing, and prove a valid global charge or find a counterexample. The exact signed edge gluing and branch residual transport do not solve witness selection. Stay on arithmetic Langlands/norm descent and coordinate with #1548/#119 on G12; no Monster/RH/YM prerequisite. Attribution: original DASHI constructors, #1291 H05, JMD source boundary as in earlier sections; standard character theory and integer CRT; no priority claim for elementary difference codec/cube facts.
