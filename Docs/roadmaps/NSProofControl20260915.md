@@ -16,6 +16,13 @@
 - By Cauchy–Schwarz, Q_C(0)<=32/nu (sum_{k in Z3}(1+|k|²)^(-s)) ||u0||_{H^s}^4, uniformly C. This pays the selected **initial R596 Gram** CLASSICALLY, not the different R565 initial selfFlux calibration, nonzero-mean Galilean transport or native Agda.
 - The classical Laplace representation Q_C=2 sum_k int_{heat-s >=0} ||sum_a exp(-r_a heat-s)M_a||² d heat-s proves positivity; auxiliary heat s != physical time t. Do not promote real exponential to an inhabited rational Agda field.
 
+**Additional real mathematical payment (one-sided, NOT Clay C1/C2):** From the exact differentiated R596 energy with Q_C(T),H_C>=0 and the newly derived smooth mean-zero initial Q_C(0) ceiling,
+
+    4 int_0^T R568.globalForcingFull >= - Q_C(0) >= -32/nu ||u0Fourier||_ell1^4,
+    hence int_0^T R568.globalForcingFull >= -8/nu ||u0Fourier||_ell1^4.
+
+This classical lower bound holds independently of cutoff C and terminal T for genuine finite Galerkin trajectories with fixed smooth mean-zero datum, constant nu>0 and actual real/algebraic helical projectors. The original R568 requires the OPPOSITE (UPPER) direction; do not count it as C1, or as R653 strict retained-margin C2. It is the strongest unconditional signed one-sided R568 conclusion currently obtained from the endpoint trace/positivity geometry alone.
+
 **C2 remains separately OPEN:** with original R557 J_C=int(selfGram+selfFluxTangent), R648 physical retained surplus S_delta, R652/R653 exact coupling yields the combined BIDI original C1/C2 sandwich
 
     2*S_delta+J_C+Q_C(0) <= Q_C(T)+2 int H_C <= B(u0,nu,T)+Q_C(0).
