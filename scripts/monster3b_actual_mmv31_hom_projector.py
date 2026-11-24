@@ -146,6 +146,7 @@ def main():
     ap.add_argument("--opposite-phase",action="store_true",
         help="use inverse marked E-centre root; NEVER silently merge phases")
     ap.add_argument("--checkpoint-every",type=int,default=10)
+    ap.add_argument("--reuse-basis",type=Path,help="replay saved independent original probes, no new ambient basis search")
     a=ap.parse_args()
     if a.limit<1 or a.limit>90 or a.max_trials<a.limit:
         ap.error("limit must be 1..90 and max-trials>=limit")
@@ -175,6 +176,24 @@ def main():
         for b,bb in zip(B,b2):
             out=INV3*(out+(out*b)+(out*bb))
         return out
+    reuse_rows=reuse_probes=reuse_pivots=None
+    if a.reuse_basis:
+        if a.reuse_basis.resolve()==a.outdir.resolve():
+            raise ValueError("replay must not overwrite original basis packet")
+        old_status=json.loads((a.reuse_basis/f"mmv{PRIME}_hom_status.json").read_text())
+        if (old_status.get("p"),old_status.get("zeta_mod_p"),
+            old_status.get("number_independent_B_fixed_vectors"))!=(PRIME,ZETA,90):
+            raise ValueError("reused source basis phase/rank mismatch")
+        old_ambient=a.reuse_basis/f"ambient_basis_rows_mod{PRIME}.npz"
+        if not old_ambient.is_file():old_ambient=a.reuse_basis/"ambient_basis_rows.npz"
+        with np.load(old_ambient,allow_pickle=False) as f:
+            reuse_rows=np.asarray(f["rows"],dtype=np.int16)%PRIME
+            reuse_probes=[int(x) for x in f["source_probes"]]
+            reuse_pivots=[int(x) for x in f["pivots"]]
+        if (reuse_rows.shape!=(90,DIM) or len(reuse_probes)!=90 or
+            len(set(reuse_probes))!=90 or len(reuse_pivots)!=90 or
+            any(not 0<=x<DIM for x in reuse_probes+reuse_pivots)):
+            raise ValueError("reused source basis dimensions/probes")
     basis_arrays=[]; basis_mmv=[];pivots=[];probes=[]
     a.outdir.mkdir(parents=True,exist_ok=True)
     status_file=a.outdir/f"mmv{PRIME}_hom_status.json"
@@ -189,7 +208,8 @@ def main():
                 "number_independent_B_fixed_vectors":len(pivots),
                 "target_dimension_from_original_character":90,
                 "pivots":pivots,"source_E_basis_probe_indices":probes,
-                "last_trial":trial}
+                "last_trial":trial,
+                "replayed_original_basis":str(a.reuse_basis.resolve()) if a.reuse_basis else None}
         if pivots:
             np.savez_compressed(a.outdir/f"ambient_basis_rows_mod{PRIME}.npz",
                 rows=np.asarray(basis_arrays,dtype=np.int16),
@@ -197,13 +217,15 @@ def main():
                 source_probes=np.array(probes,dtype=np.int64))
         status_file.write_text(json.dumps(record,indent=2)+"\n")
         return record
-    for trial in range(a.max_trials):
-        i=(7919*trial+17)%DIM
+    candidates=reuse_probes if reuse_probes is not None else ((7919*t+17)%DIM for t in range(a.max_trials))
+    for trial,i in enumerate(candidates):
         v=project(V("E",i))
         arr=np.asarray(v["E"],dtype=np.int16)%PRIME
         reduced,coeff=row_span_coefficients(arr,basis_arrays,pivots)
         possible=np.flatnonzero(reduced)
-        if len(possible)==0:continue
+        if len(possible)==0:
+            if reuse_probes is not None:raise ValueError("reused original probe lost rank")
+            continue
         pivot=int(possible[0]);k=pow(int(reduced[pivot]),-1,PRIME)
         reduced=(reduced*k)%PRIME
         # Mirror every ambient F31 elimination in the ACTUAL MMV module.
@@ -214,6 +236,8 @@ def main():
             raise RuntimeError("MMV31 ambient coordinates disagree with linear F31 elimination")
         if v*z!=ZETA*v or any(v*b!=v for b in B):
             raise RuntimeError("original Monster B-vacuum projector condition failed")
+        if reuse_rows is not None and (pivot!=reuse_pivots[trial] or not np.array_equal(reduced,reuse_rows[trial])):
+            raise ValueError("literal MM replay differs from saved original basis")
         basis_arrays.append(reduced);basis_mmv.append(v)
         pivots.append(pivot);probes.append(i)
         if len(pivots)%a.checkpoint_every==0:
