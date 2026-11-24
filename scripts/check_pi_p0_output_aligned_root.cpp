@@ -138,7 +138,14 @@ Receipt compute(unsigned digits,bool inplace){
     Z prefactor;
     mpz_ui_pow_ui(prefactor.get_mpz_t(),10,digits);
     mpz_mul_ui(prefactor.get_mpz_t(),prefactor.get_mpz_t(),426880);
-    Z rad=Z(10005)*prefactor*prefactor;
+    Z rad;
+    // One GMP square in a single destination, followed by a small constant
+    // multiply; don't retain expression-template product temporaries.
+    mpz_mul(rad.get_mpz_t(),prefactor.get_mpz_t(),prefactor.get_mpz_t());
+    mpz_mul_ui(rad.get_mpz_t(),rad.get_mpz_t(),10005);
+    if(static_cast<unsigned long long>(guardBits)*2ULL >
+       static_cast<unsigned long long>(std::numeric_limits<mp_bitcnt_t>::max()))
+      throw overflow_error("output sqrt guard exceeds mp_bitcnt_t");
     mpz_mul_2exp(rad.get_mpz_t(),rad.get_mpz_t(),
                  static_cast<mp_bitcnt_t>(guardBits)*2);
     mpz_sqrt(root.get_mpz_t(),rad.get_mpz_t());
@@ -167,7 +174,11 @@ Receipt compute(unsigned digits,bool inplace){
   // Both widenings are monotone: more terms shrink the alternating-series
   // enclosure, and more guard bits shrink the outward root enclosure.
   // A one-unit OUTPUT-aligned root interval can be insufficient.
-  n+=max(1u,n/16);guardBits+=max(32u,guardBits/2);
+  const unsigned growN=max(1u,n/16),growG=max(32u,guardBits/2);
+  if(n>std::numeric_limits<unsigned>::max()-growN ||
+     guardBits>std::numeric_limits<unsigned>::max()-growG)
+    throw overflow_error("output-aligned refinement index exhausted");
+  n+=growN;guardBits+=growG;
  }
 }
 int main(int argc,char**argv){
