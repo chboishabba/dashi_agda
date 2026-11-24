@@ -1533,6 +1533,45 @@ six-way benchmark default.
 
 ## 24 November — COMP5v: one shared radical product for both adjacent Chudnovsky consumers (NO EXECUTION)
 
+
+
+**Integrated source audit correction:** the first
+COMP5v wrapper inherited a COMP5u
+`viewEndpoints(edge)` call, which
+eagerly produced \(Q'q\) even though
+the classifier did not consume it.
+The integrated source was corrected
+to invoke the signed cone directly
+and pass only the indexed edge.
+Consequently the new fast candidate
+does not construct the full
+adjacent denominator as a separate
+terminal GMP integer; it obtains the
+necessary \(q\) factor from the
+literal original source index.
+
+A source-specific operand-width
+bound supports the motivation while
+remaining distinct from any measured
+speed claim. If \(1\le n<2^{20}\),
+then \(640320<2^{20}\), and hence
+
+\[
+q_n=(640320\,n)^3<2^{120}.
+\]
+
+Thus in this cutoff region the
+parity multiplication uses at most
+a 120-bit positive operand in
+place of one independently
+constructed large root product.
+This alone does **not** prove a
+particular GMP throughput, peak
+memory or latency improvement:
+intermediate shared-product
+liveness and memory scratch must
+still be measured.
+
 **Motivation and donor boundary.** The user's P-vs-NP G83
 negative control reminds us that the cost of an expanded
 source observation is not the cost of its actual consuming
