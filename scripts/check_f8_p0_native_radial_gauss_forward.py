@@ -58,7 +58,16 @@ class NativeGauss:
         f=np.zeros(2*n)
         if forced:f[n]=-b**-3*amp*src
         return L,f
-    def clock_t(self,T):return brentq(lambda t:F(t)-T,1,1.3)
+    def clock_t(self,T):
+        """Invert original monotone bulk clock on all t>=1 (including t=12)."""
+        if T < F(1)-1e-12:
+            raise ValueError("bulk time predates original brane t=1")
+        hi=2.
+        while F(hi)<T:
+            hi*=2.
+            if hi>1e9:
+                raise ValueError("clock outside supported physical domain")
+        return brentq(lambda t:F(t)-T,1.,hi)
     def step(self,y,T,h,ell,mode,forced):
         Lf=[self.stage(self.clock_t(T+h*ci),self.eigs[ell][mode],self.src[ell][mode],forced) for ci in C]
         sz=len(y);Z=np.eye(2*sz)
