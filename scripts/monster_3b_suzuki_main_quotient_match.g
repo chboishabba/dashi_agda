@@ -507,6 +507,19 @@ fi;
 if common729C3PairCount <> 2 then
   Error("source 12 and selected 78 have no full conjugate-pair C3 descent alignment");
 fi;
+# Full selected Sym2 family + nonzero faithful12 C3 forces DUAL Sym2
+# on the same-C3 12/78 pairs: -2k=k mod3, while direct 2k=-k.
+selectedSamePhaseDualSym2 :=
+  selected78IsNebeSym2Family and
+  Set(common729C3MatchedPairs) = Set(selectedDualSym2Pairs);
+if selected78IsNebeSym2Family then
+  if not selectedSamePhaseDualSym2 then
+    Error("same-C3 pairs are not the source full-character dual Sym2 pairs");
+  fi;
+  if ForAny(common729C3MatchedPairs, pair -> pair in selectedDirectSym2Pairs) then
+    Error("direct Sym2 incorrectly paired to faithful12 same C3 scalar");
+  fi;
+fi;
 selected78C2Trace := sixIrr[p78[1]][central2Class];
 if not (selected78C2Trace in [-78,78]) then
   Error("selected irreducible 78 is not central C2 scalar +/-1");
@@ -555,6 +568,16 @@ SixSuzJSONIntArray := function(xs)
   for k in [1..Length(xs)] do
     if k > 1 then Append(result, ","); fi;
     Append(result, String(xs[k]));
+  od;
+  Append(result, "]");
+  return result;
+end;
+SixSuzJSONPairArray := function(pairs)
+  local result, k;
+  result := "[";
+  for k in [1..Length(pairs)] do
+    if k > 1 then Append(result, ","); fi;
+    Append(result, SixSuzJSONIntArray(pairs[k]));
   od;
   Append(result, "]");
   return result;
@@ -619,6 +642,14 @@ PrintTo(output,
   "  \"suzuki_central_involution_class_position\": ", central2Class, ",\n",
   "  \"suzuki_central_order_three_class_position\": ", central3Class, ",\n",
   "  \"common_729_necessary_equal_C3_phase_pair_count\": ", common729C3PairCount, ",\n",
+  "  \"six_suz_same_c3_12_to_78_irr_pairs\": ",
+      SixSuzJSONPairArray(common729C3MatchedPairs), ",\n",
+  "  \"six_suz_direct_sym2_12_to_78_irr_pairs\": ",
+      SixSuzJSONPairArray(selectedDirectSym2Pairs), ",\n",
+  "  \"six_suz_dual_sym2_12_to_78_irr_pairs\": ",
+      SixSuzJSONPairArray(selectedDualSym2Pairs), ",\n",
+  "  \"selected_same_c3_90_is_12_plus_dual_sym2_12\": ",
+      SourceBoolText(selectedSamePhaseDualSym2), ",\n",
   "  \"selected_78_direct_sym2_full_character_pair_count\": ", selectedDirectSym2Count, ",\n",
   "  \"selected_78_dual_sym2_full_character_pair_count\": ", selectedDualSym2Count, ",\n",
   "  \"selected_78_is_nebe_sym2_family_full_character_equal\": ", SourceBoolText(selected78IsNebeSym2Family), ",\n",
