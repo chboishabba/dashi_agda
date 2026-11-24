@@ -86,7 +86,9 @@ def source_replay():
            "K_R7_exact_scalar_Qzeta3":["1","0"],
            "R7_projective_staircase":staircase,
            "conditional_actual_Monster_R7_z_complement_relation":
-              f"L_R,phase{phase}^7 = zeta^{phase*1%3} I90 only after actual 729 source weld"}
+              "If original FULL Monster R^7=z^j then source-matched "+
+              "L_R,s^7=zeta3^(s*j) I90, only when original K_R^7=1",
+           "original_full_MM_R7_central_power_consulted":False}
     return results
 def main():
     p=argparse.ArgumentParser(description=__doc__)
