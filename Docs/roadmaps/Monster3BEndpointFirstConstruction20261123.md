@@ -2,6 +2,40 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — P5 authentic workstation receipt: signed central cover and actual MMV31 12+78
+
+**SOURCE REPORT INTEGRATED:** [actual workstation P5 run, source receipts, corrected mathematics and precise lemma ledger](../physics/Monster3BP5ActualSourceRunRelatorAndMMV31_20261124.md). Original PR branch baseline \`ad2ceb1a\`, run \`build/monster3b-p5-endpoint/run-20261124T071452Z-174442/\`. The original \`mmgroup\` and binary \`MMV(31)\` receipt files remain on the user's workstation, not in the assistant runtime; the following figures are **reported exact output**, not fabricated independent readback.
+
+**High-value paid mathematical endpoint:** actual canonical corrected full-Monster \(C,D\) words obey
+\[
+C^4=D^3=(CD)^{56}=1,\qquad C^2=(CD)^{28},\qquad R(C,D)^7=z_{3B}\neq1.
+\]
+The original ATLAS order-seven **quotient** relator \(R=cdcdcddcdd\), \(c=C^{-1},d=D^{-1}\), therefore lifts to an actual element of **order 21**, not seven. It is an explicit central-cover phase, **not** a failed expected full-group identity. \(C\) inverts \(z_{3B}\), \(D\) preserves it. In the genuine signed action, for all \(a,b\in\mathbb F_3\), **\(R(z^a C,z^b D)=R(C,D)\)**. Do not use a commuting-central scalar formula for \(C\) or claim that the relator can be removed by an arbitrary central rescaling. The generator and affine corrections are now one consistent original-source implementation with both workstation-reported bugs fixed and a nontrivial invertible Hom orientation regression.
+
+**True original Monster modular \(90\)**: \(\mathrm{MMV}(31)\) B-fixed zeta-projector rank **90** (full 196884D ambient MM action); \(C^2\) induced 90D involution splits exact \(+1:78\), \(-1:12\); \(D\) vacuum sandwich commutes with \(C^2\), with original-source 12D and 78D modular action blocks saved. **31 does not divide \(|6.\mathrm{Suz}|=2690072985600\)**, so cross-characteristic 6.Suz modules are semisimple, but that does not turn the mod31 blocks into complex Steel/GAP source operators without an actual group-word/Weil scalar identification.
+
+**P0–P6 updated phases and deliverables:**
+- **P0** actual E/Z(E) 12D, signed Heisenberg and 28 ATLAS quotient witnesses: paid earlier.
+- **P1** original K class20 vs actual E centre, paid source character split and nontrivial phase preservation: retained.
+- **P2** source \(N=EH\), original source class **4D** and NEW full Monster Hit0 corrected \(C,D\) **relations paid**; **literal \(C\in4D\)** still unproved.
+- **P3** original actual Hom and 12/78 character idempotents at formal characteristic zero as earlier; **new actual modular MMV31 90D B-vacuum and C2 split numerically source-observed**, not char0 Hom transport.
+- **P4** authentic original GAP selects faithful12 Irr153/154, Nebe nonfaithful dual Sym²78 Irr79/80, central C2 trace+66, source4D unique, paid; NO new 78-family search.
+- **P5** actual full group corrected words and outer centre inversion paid; original Steel Magma file now **acquired on workstation**, but \`magma\` binary **absent**, so ordinary char0 12D generator entries and original GAP/Monster word alignment still missing. Exact Qζ3 78/90 functor and conditional Hom/outer intertwiners implemented. Next cut: inspect cached Steel source and extract its ordinary12 matrices (Magma-free exact representation only if the literal file permits), align reduction ζ→5/25 with actual MMV31 12D, solve source Weil scalar and group word.
+- **P6** formal kernel/certification deferred until mathematical same-element endpoint completed.
+
+**Exact remaining lemma statuses and producer→consumer:**
+
+| Lemma | Paid in reported workstation execution | Exact remaining source obstruction | Producer → consumer |
+|---|---|---|---|
+| **M3B-L10A** | Steel's original \`d12.6Suz.nfdeg2.M\` **downloaded/cached** | \`magma\` unavailable; export original ordinary12, orient GAP Irr153/154 and source-standard words | Steel original Magma source → ordinary12 \(\mathbb Q(\zeta_3)\) → dual-Sym²90 |
+| **M3B-L10B** | actual MM C/D E-affine correction, true 90D \(\mathrm{MMV}(31)\) B-vacuum and modular 12/78 eigenspaces, D modular block sandwiches | original char0 Hom12 or justified same-group good reduction, source generator map and Weil vacuum scalar | Original MonsterSubgroups/mmgroup + Steel source → actual \(\mathrm{Hom}_E(H_s,W_s)\) |
+| **M3B-L10C** | exact dual-Sym² \(78\) / \(90\) construction implemented | genuine Steel ordinary12 matrix source to instantiate; no independent 78D lemma | GAP selected Nebe dual-Sym² + Steel12 → 90 |
+| **M3B-L12R** | full-group \(C^4=D^3=(CD)^{56}=1\), \(C^2=(CD)^{28}\), \(R^7=z_{3B}\), signed outer z inversion; source class4D selected | **specific MM word→4D source class**, \(6.\mathrm{Suz}.2\) standard outer word/central scalar and compatible complex 729 Weil gauge | actual MM corrected C/D + CTblLib source4D/Steel outer automorphism → Paper10 paired phase |
+
+**Attribution/consumer invariants:** original Barraclough–Wilson & Bray–Wilson normalizer/group cover; Dietrich–Lee–Pisani–Popiel original MM words; Steel ordinary complex12; Nebe symmetric-square78; original GAP/CTblLib class fusion → Ibrahim actual Hom/projectors and Weil-cocycle cancellation → Paper10. Keep zero mode, residual central \(z_{3B}\), marked \(\zeta\)-phase, \(\mathbb F_{31}\) characteristic index and original source-class index distinct. **No step promotes a reduced/quotient observation to a literal original Monster-group identity unless the authentic full group source established it.**
+
+---
+
 ## 24 November 2026 — L10A/B/C + L12R source implementations COMMITTED for workstation run
 
 **Read first:** [canonical P5 integrated implementation, exact provenance, run commands, residuals and producer→consumer routing](../physics/Monster3BP5WorkstationSourceIntegration20261124.md). **Run orchestration:** [\`scripts/run_monster3b_p5_endpoint.py\`](../../scripts/run_monster3b_p5_endpoint.py) and [local pure-algorithm smoke](../../scripts/test_monster3b_p5_endpoint_local.py). Actual \`mmgroup\` rank/characteristic-31 source: [\`monster3b_actual_mmv31_hom_projector.py\`](../../scripts/monster3b_actual_mmv31_hom_projector.py). This is NOT a new certification plan or alternate research architecture.
