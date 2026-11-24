@@ -1,3 +1,32 @@
+## 24 November 2026 — corrected P0 inventory supersedes “31 exact lemmas”
+
+PR #1536 head `13692df9416b6cb8821b765d409b84c24f2bb8fe`, audited against master `e70fa21c8c8bc09919f0aea15e40199163798948`, corrects the earlier count: **31 is a candidate dependency checklist**, not 31 missing same-named Agda theorem declarations or 31 logically necessary independent lemmas (`3 T + 5 R445 + 7 E1 + 4 D1 + 5 D2 + 3 N1 + 4 G1`).
+ The corrected owner-by-owner ledger is [`Docs/physics/YMClayP0All31PurportedlyMissingDoubleCheckExistingOwnersPhysicalInputs20261124.md`](../physics/YMClayP0All31PurportedlyMissingDoubleCheckExistingOwnersPhysicalInputs20261124.md); this section supersedes any earlier wording here that treated the labels as literal absent declarations.
+
+Already-present prior work must be reused, not recreated:
+- CMP119/122/116 same-beta/source-flow and ordered finite history factorization are constructed conditionally.
+- D1.02 finite mixed-log-derivative/covariance identity and two-way R320 transport already exist; only the selected physical-source application is unpaid.
+- D1.03 full-Wilson clustering implication already exists from `OriginalSmallLargePhysicalSource`; its small/large physical records and common decay rate are unpaid.
+- E1 finite varying-cutoff Wilson carriers, cylinder algebra, normalization, and conditional continuum-state laws already exist; `originalWilsonConverges` for nonconstant physical observables is unpaid.
+- OS2 reflected-word transport, same-H identity, and dense-core spectral exclusion are abstract/conditional consumers; the same-source physical premises are unpaid.
+- N1 RG-loss noncollapse and G1 finite index/group-family records exist; physical Wilson charge estimates and per-group continuum constructions are unpaid.
+
+Logic corrections: termwise absolute W3 is a sufficient route, not a Clay requirement if direct full-Gibbs decay proves R320; R445 B1–B5 is an optional comparison route; uniform Cauchy is one E1 convergence method but a valid tight/subsequential construction may suffice; a nonzero fourth cumulant is one interaction witness, not mandatory by itself; open-interval `(0,m)` exclusion must be combined with vacuum uniqueness or explicitly exclude zero-energy nonvacuum states. Mathematically verified status remains `YangMillsClaySolved = false`; `clayYangMillsPromoted` is a distinct governance predicate.
+
+The corrected priority is the existing `OriginalSmallLargePhysicalSource` record and existing E1 `originalWilsonConverges` record in parallel. No endpoint status, promotion flag, or kernel receipt changed by this inventory correction.
+
+### Priority owner inspection: D1.03 and E1.03
+
+Read-only owner inspection at master `e70fa21c8` and PR #1536 `13692df941` found the same core source blobs for both priority records.
+
+- D1 core: `DASHI/Physics/YangMills/YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda:49-128` defines `OriginalSmallLargePhysicalSource`; `:162-208` proves `originalFullWilsonUniformGeometricClustering` from its fields. Already algebraic: `:132-158` combines the full-Gibbs small+large split, CMP116 source, real-order calibration and two envelopes. Unpaid fields include `originalFullCovarianceBelowSmallPlusLarge`, `largeFieldError`, `smallFieldEnvelopeCalibration`, `largeFieldErrorCalibration`, `smallFieldGeometricRate`, `largeFieldGeometricRate`, the fixed positive physical block scale/distance fields, and nonvacuous remote physical pairs. `DASHI/Physics/YangMills/YMClayD1OriginalCovarianceToR320Exact.agda:40-150` already supplies finite mixed-log/covariance and two-way R320 transport; it does not supply the physical bound.
+- E1 core: `DASHI/Physics/YangMills/YMClayE1VariableCutoffCylinderLimitExact.agda:72-121` defines `ActualVariableCutoffCylinderFamily`; `:118-121` is the real condition `originalWilsonConverges`. `:127-249` already transports zero/one/add/scale/positivity from that convergence. `DASHI/Physics/YangMills/YMClayE1OriginalSUNFiniteCylinderLawsExact.agda:406-469` constructs the E1 record from `ActualSelectedOriginalSUNConvergence`; its `originalWilsonCylinderConverges` field at `:412-417` is the ε–N convergence of every selected original finite Wilson expectation. No inhabitant was found. Tightness, projective/UV/IR control, fixed-physical-support full word algebra, noncollapse, same-theory OS axioms and interacting YM identification are not dormant fields; they are additional physical premises.
+- The literal checklist names such as `originalWilsonConvergesFromUniformCauchy`, `D1.03`, `E1.03`, `B1`–`B5`, `T1`–`T3` are roadmap labels. The real source names above are the interfaces to attack.
+
+This inspection narrows where to work; it does not pay either record. No Agda/Lean kernel or endpoint flag was touched.
+
+---
+
 ## 24 November 2026 — source-input, producer/geometry and P0 branch audit (fail-closed progress)
 
 The original physical frontier remains **E1 continuum construction, D1 same-source cutoff-uniform covariance decay, D2 same-OS full-spectrum gap, N1 nontrivial continuum noncollapse and G1 all compact simple groups**. The selected frontend audit ledger is [`Docs/physics/YMClayPhysicalInputsPaymentAudit20261124.md`](../physics/YMClayPhysicalInputsPaymentAudit20261124.md); it records the six current physical-input requests (R320/CMP116 decay, R445 B1–B5, E1/OS2, closure/gap, G1, N1) as **NOT PAID**, with `clayYangMillsPromoted false`.
