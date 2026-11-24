@@ -70,7 +70,7 @@ def generate(data,output):
             'if Length(c153)=0 and Length(c154)=0 then',
             f' Error("original source group-word fingerprint absent in 6.Suz at row {i+1}"); fi;',
             ('Append(out,",");' if i else ''),
-            'Append(out,"{\\"word\\":"'+quoted(word).replace('"','\\"')+'");',
+            'Append(out,'+json.dumps('{"word":'+json.dumps(word))+');',
             'Append(out,",\\"row153_classes\\":"); Append(out,PairList(c153));',
             'Append(out,",\\"row154_classes\\":"); Append(out,PairList(c154));',
             'Append(out,"}");',
