@@ -117,6 +117,7 @@ Receipt compute(unsigned digits,bool inplace){
   const size_t originalTerminalTripleBits=wordBits(s.p)+wordBits(s.q)+wordBits(s.t);
   Z pn=Z(-24)*(2*n-1)*(6*n-5)*(6*n-1),qn=C*Z(n)*n*n;
   // Compute the next-term endpoint using the original ordered P/Q/T first.
+  const bool originalPIsNegative=(s.p<0);
   Z num2=s.t*qn+s.p*pn*(A+B*n),den2=s.q*qn;
   // Then transfer the old terminal P/Q/T payload into the consumer and
   // destroy the now-dead P carrier before large endpoint products allocate.
@@ -128,7 +129,7 @@ Receipt compute(unsigned digits,bool inplace){
   // delta=P(0,n)*p_n*(A+B*n) is strictly positive for even n.
   // Thus S_n=T/Q < S_(n+1)=(T*q_n+delta)/(Q*q_n).
   // NO full-width products num2*den1 or num1*den2 are needed.
-  if((n&1u)!=0 || n<2 || s.p>=0 || pn>=0 || qn<=0)
+  if((n&1u)!=0 || n<2 || !originalPIsNegative || pn>=0 || qn<=0)
     throw runtime_error("source signed next-term cone not certified");
   // Exact dyadic sqrt enclosure: floor(sqrt(10005 * 2^(2*bits))).
   // The radicand is dead immediately after the square-root call.
