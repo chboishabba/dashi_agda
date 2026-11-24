@@ -101,6 +101,24 @@ def krawczyk_row_gate(f,df,c,r):
                 defect=[str(x) for x in defect],
                 cross=[str(x) for x in cross])
 
+
+def rational_chart_transport(f,df,c,r,coordinate_gauge,equation_gauge):
+    """Invertible positive rational chart preserving original source/residuals.
+
+    z=z0+D*w, F'(w)=E*F(z0+D*w), C'=D^-1*C*E^-1.
+    Strict row slack_i' = row slack_i / D_ii, an EXACT identity.
+    An arbitrary lossy quotient is NOT an invertible coordinate chart.
+    """
+    n=len(r)
+    assert len(coordinate_gauge)==len(equation_gauge)==n
+    d=list(map(Q,coordinate_gauge));e=list(map(Q,equation_gauge))
+    assert all(x>0 for x in d+e)
+    ff=[ivscale(e[i],f[i]) for i in range(n)]
+    dd=[[ivscale(e[i]*d[j],df[i][j]) for j in range(n)] for i in range(n)]
+    cc=[[c[i][k]/(d[i]*e[k]) for k in range(n)] for i in range(n)]
+    rr=[r[i]/d[i] for i in range(n)]
+    return ff,dd,cc,rr
+
 def exact_fixture():
     """Exact nontrivial source-shaped 69D Schur; retained signed mismatch."""
     hu=[[Q(0)]*15 for _ in range(54)];hv=eye(54)
@@ -125,9 +143,19 @@ def exact_fixture():
     bad=F[:];bad[0]=iv(Q(1,1000))
     assert not krawczyk_row_gate(bad,DF,c,radius)["all_positive"]
     assert all(x==iv(0) for x in bad[54:])
+    # Paper 9 projective gauge: positive invertible chart must exactly reopen
+    # all source coordinates, including the signed matching residuals.
+    dvec=[Q(2 if i%3==0 else 3 if i%3==1 else 5) for i in range(69)]
+    evec=[Q(3 if i%2==0 else 7) for i in range(69)]
+    gf,gdf,gc,gr=rational_chart_transport(F,DF,c,radius,dvec,evec)
+    chart=krawczyk_row_gate(gf,gdf,gc,gr)
+    assert chart["all_positive"]
+    assert [Q(x) for x in chart["slack"]]==[
+        Q(x)/dvec[i] for i,x in enumerate(paid["slack"])]
+
     return dict(status="PASS_EXACT_RATIONAL_69D_PROJECTIVE_RESIDUAL_FIXTURE",
         matching_variables=54,quotient_variables=15,independent_equations=69,
-        exact_schur_block_identity=True,exact_positive_row_slacks=69,
+        exact_schur_block_identity=True,exact_positive_row_slacks=69,coordinate_chart_slack_equivalence_passed=True,
         deliberately_hidden_matching_residual_rejected=True,
         original_source_interval_verified=False,periodic_orbit_proved=False)
 
