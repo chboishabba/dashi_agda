@@ -186,6 +186,13 @@ def certify(k,N=256, order=6, initial_radius=F('0.0001'), tolerance=F('0.000005'
   assert (endtube[4]-F('0.0018')).a>0,('Spark remains ON near event6')
   startoffslope=s.guard_slope(4,s.f(stube,I(ta-DT0,ta+DT0),mode))
   assert startoffslope.b<0,('Initial V-OFF post-switch slope')
+ elif k==3:
+  slopeend=s.guard_slope(3,fe)
+  assert slopeend.a>0,('Physical U-ON pre-slope over moving event4 clock',slopeend)
+  assert s.guard(4,endtube).a>0,('Physical other diode V ON near event4')
+  assert (endtube[4]-F('0.0018')).a>0,('Spark stays ON near event4')
+  startonslope=s.guard_slope(2,s.f(stube,I(ta-DT0,ta+DT0),mode))
+  assert startonslope.b<0,('Spark ON post-switch negative bank slope')
  numerical_next=list(map(F,s.STATES[k+1]))
  isinside=[q.a<=target<=q.b for q,target in zip(corrected,numerical_next)]
  print('NUM TARGET',isinside,'maxdia',float(max(q.b-q.a for q in corrected)),flush=True)
