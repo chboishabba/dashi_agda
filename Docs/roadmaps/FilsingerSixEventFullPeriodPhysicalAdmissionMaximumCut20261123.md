@@ -1,5 +1,12 @@
 # Filsinger P0 maximum cut — six-event full-period proof × receiver × physical admission
 
+## 24 Nov J31 implementation: costed 15D quotient / 69D original matching and exact signed cone
+
+**Concrete implementation and theorem:** [original J31 69D sparse preconditioner and exact rational Krawczyk row checker](../../scripts/check_smith_filsinger_j31_projective_sparse_preconditioner_20261124.py), [cross-PR derivation](../research/SmithFilsingerJ31P0ProjectiveSparseResidualConeCrossPR20261124.md), [machine receipt](../../Artifacts/smith-filsinger/j31_p0_projective_sparse_residual_cone_audit_20261124.json). P vs NP #1548/#119 donates the source-costed semantic coverage discipline, π #1546/#1529 donates output-aligned exact signed acceptance and fixed-order matrix algebra, and Langlands/GCT #1549/#120 donates source-indexed zero-mode/signed-residual nonforgetfulness and precision lineage. These are algorithmic analogies, not theorems about circuit physics.
+
+On the original 69D matching/return/guard Jacobian, the **54×54 exact unit lower-triangular interface inverse** and **15×15 rational candidate Schur inverse** construct an explicit 69D left preconditioner, with a proved algebraic block-residual identity and no dense 69D inversion. Existing numerical source-shaped Schur match ~5.37e-15; centre `||I-CJ||_inf ~3.20e-11`; a nontrivial 69D Fraction fixture gives all 69 rational strict row slacks and rejects hidden source interface mismatch. These are **numerical source-centre and algebraic fixture checks**; actual seven original-source interval charts, `F(z0)`, `[DF(B69)]`, strict 69D Krawczyk and exact periodic point remain **OPEN**, fail closed. No more root-only slices or local-file handoffs: repository owns the full source/research/receipt/roadmap packet.
+
+
 **23 November 2026 · canonical executable-plan complement to** [the original Sheldrake/Formative/Filsinger/Eskridge/Levin/BH4 roadmap](SheldrakeFormativeFieldsFilsingerEskridgeLevinBH4ExactRemaining20261121.md). **Original work remains on PR #1537**, branch `research/sheldrake-field-filsinger-levin-consolidation-20261121`, base `master`. Preserve the original Smith/Filsinger physical-source attribution and the source/implementation credits already recorded in `Docs/SourceAttributionPolicy.md`. This is a **replacement for piecemeal J29B, J29C, J30, J31 roadmapping**, not a claim that the outstanding proof or hardware measurement has passed.
 
 ## CURRENT ACCEPTANCE — source-reconciled J29/J30 exact result, numerical audit and J31 endpoint
