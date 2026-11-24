@@ -689,3 +689,60 @@ SOTA claim were made. Retain COMP5j as the measured historical
 baseline, and do not inject these untested candidates into
 the six-way default Pareto runner until the testing
 deferral is lifted.
+
+
+## 24 November 2026 — COMP5m/n source-geometric continuation (NO EXECUTION)
+
+User retains instruction to **defer testing**. After inspecting fresh
+PR state (π #1546 still open, 46 ahead/11 behind \`master\` on inspection,
+mergeability reported false), and newer #1550, #1549, #1548 and source
+#1529, two independent **UNTESTED** GMP research candidate sources
+were committed; the existing COMP5j default and six-mode
+benchmarker remain unchanged.
+
+1. **COMP5m — output-aligned radical:**
+   \`scripts/check_pi_p0_output_aligned_root.cpp\`.
+   Instead of dyadically scaling \(\sqrt{10005}\), then multiplying
+   by \(5^d\), construct exactly
+   \(H=\lfloor 2^g426880\,10^d\sqrt{10005}\rfloor\) by GMP
+   integer square-root of
+   \(10005(426880\,10^d)^2 2^{2g}\).
+   The original signed-tail cone orders both adjacent positive
+   series endpoints at *either* cutoff parity. The lower quotient
+   is \(\lfloor HD_{\mathrm{hi}}/(2^gN_{\mathrm{hi}})\rfloor\);
+   the upper witness is
+   \((H+1)D_{\mathrm{lo}}<(x+1)2^gN_{\mathrm{lo}}\).
+   The root/split guard indexes are widened when the strict
+   witness is inconclusive, with explicit unsigned overflow guards.
+   **This is an alternative outward rational enclosure of the
+   SAME infinite-series π target, not identical finite COMP5j
+   endpoints.** Radical squaring and repeated \`10^d\` generation
+   can negate the saved post-root multiplication. No speed or
+   peak-memory benefit claimed.
+
+2. **COMP5n — operand-width-informed execution order:**
+   \`scripts/check_pi_p0_width_scheduled_pqt.cpp\`.
+   The EXACT original interval Q width satisfies
+   \(\log_2 Q[a,b)
+      =3(b-u)\log_2 640320
+      +3\log_2((b-1)!/(u-1)!)\)
+   for \(u=\max(a,1)<b\). A cheap floating lgamma estimate
+   chooses which child tree to *execute first*; the consumer
+   still composes \((P_L,Q_L,T_L)\) and
+   \((P_R,Q_R,T_R)\) in strictly original left-right
+   upper-triangular matrix order.
+   The scheduling heuristic is NOT proven to minimize
+   Gomory/Sethi–Ullman/GMP peak memory, and its lgamma
+   overhead may dominate. No performance gain claimed.
+
+The complete same-source mathematical derivation, cost-path
+boundaries and original-source producer–consumer obligations
+live in
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`,
+now extended through G4/G5. No C++ compile/run, no Python/SymPy,
+no CI, no kernel Agda/Lean and no SOTA check performed in this
+continuation. GitHub source readback only.
+The classical Chudnovsky analytic source and Bishop
+same-real theorem remain open formal obligations. Preserve
+the already measured COMP5j certificate/benchmark receipts
+without confusing the new untested candidates with them.
