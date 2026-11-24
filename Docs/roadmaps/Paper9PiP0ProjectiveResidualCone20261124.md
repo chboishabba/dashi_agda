@@ -266,14 +266,16 @@ source-adjacent series endpoints as
 
 \[
 0<S_{\mathrm{lo}}=\frac{N_\mathrm{lo}}{D_\mathrm{lo}}
-\le S=\frac{13\,591\,409+\cdots}{1}
+\le S=\sum_{j=0}^{\infty}(-1)^j
+\frac{(6j)!\,(13591409+545140134j)}
+{(3j)!\,(j!)^3\,640320^{3j}}
 \le S_{\mathrm{hi}}=\frac{N_\mathrm{hi}}{D_\mathrm{hi}} .
 \]
 
-The middle \(S\) is the ORIGINAL infinite Chudnovsky series;
-the displayed heuristic numerator in this abstract line is
-not a separate normalization or a derivation. The valid
-analytic tail enclosure is still an EXTERNAL premise.
+The middle \(S\) is the original infinite Chudnovsky
+series, with its alternating sign and original positive
+normalization. The infinite-series identity and valid analytic
+tail enclosure are still EXTERNAL mathematical premises.
 The exact output-scaled π interval is
 
 \[
