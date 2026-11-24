@@ -103,9 +103,8 @@ struct Receipt{string hash;double ms;unsigned n;size_t bits;};
 Receipt compute(unsigned digits,bool inplace){
  FC=FibreCost{};
  auto start=Clock::now();unsigned n=digits/14+2,bits=unsigned(ceil(digits*log2(10.0)))+64;
- // Source sign cone: even n guarantees positive exact next-term delta.
- // We require n>=2; rounding up n is a stronger alternating tail truncation.
- if(n&1u)++n;
+ // Original signed tail determines the order for every n>=2:
+ // sign(delta_n)=(-1)^n; do not spend an extra series term to fix parity.
  // 10^digits = 2^digits * 5^digits exactly.
  // Cancel the 2^digits factor from both dyadic denominators before
  // constructing either terminal numerator. The working shift remains positive.
@@ -125,12 +124,13 @@ Receipt compute(unsigned digits,bool inplace){
   {Z dead;s.p.swap(dead);}
   if(num1<=0||num2<=0)throw runtime_error("negative series endpoint");
   // Original source: P(0,n)=product_{j=1}^{n-1} p_j has sign (-1)^(n-1).
-  // Since p_n<0, q_n>0 and A+B*n>0, the exact signed residual
-  // delta=P(0,n)*p_n*(A+B*n) is strictly positive for even n.
-  // Thus S_n=T/Q < S_(n+1)=(T*q_n+delta)/(Q*q_n).
-  // NO full-width products num2*den1 or num1*den2 are needed.
-  if((n&1u)!=0 || n<2 || !originalPIsNegative || pn>=0 || qn<=0)
-    throw runtime_error("source signed next-term cone not certified");
+  // Since p_n<0, q_n>0 and A+B*n>0, delta has sign (-1)^n.
+  // For even n S_n<S_(n+1); for odd n S_(n+1)<S_n.
+  // The ordered endpoints are selected by a GMP allocation-swap ONLY,
+  // without either of the former full-width cross-products.
+  if(n<2 || (originalPIsNegative!=((n&1u)==0)) || pn>=0 || qn<=0)
+    throw runtime_error("source signed next-term orientation not certified");
+  if(n&1u){swap(num1,num2);swap(den1,den2);}
   // Exact dyadic sqrt enclosure: floor(sqrt(10005 * 2^(2*bits))).
   // The radicand is dead immediately after the square-root call.
   Z root;{Z rad=Z(10005)<<(2*bits);mpz_sqrt(root.get_mpz_t(),rad.get_mpz_t());}
@@ -156,7 +156,7 @@ Receipt compute(unsigned digits,bool inplace){
     +capBytes(top)
     +capBytes(root)+capBytes(decimal);
   if(top<(floor+1)*num1){string output=floor.get_str();return {sha(output),chrono::duration<double,milli>(Clock::now()-start).count(),n,originalTerminalTripleBits};}
-  n+=max(1u,n/16);if(n&1u)++n;bits+=max(32u,bits/16);
+  n+=max(1u,n/16);bits+=max(32u,bits/16);
  }
 }
 int main(int argc,char**argv){
