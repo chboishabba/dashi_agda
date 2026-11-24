@@ -1,0 +1,116 @@
+"""D3.5 bounded-memory same-clock original receiver attribution.
+Separate experimental paired/ledger runs; not historical native receipts.
+"""
+import argparse, hashlib, json, math, os, time
+from pathlib import Path
+import numpy as np
+from scipy.optimize import brentq
+from check_f8_d34_signed_refinement import transfer_builder, coefficients
+from ksw668_f8_tt_multipole import F
+from ksw668_f8_fv_source_flux import exact_cell_averages
+from ksw668_f8_signed_route_stage import step, reverse_step
+from warp_native_geometric_receiver import receiver_bank
+from warp_israel_affine import radial_source_at_receiver, offsets
+
+def atomic(path, **arrays):
+    tmp=path.with_suffix('.tmp')
+    with tmp.open('wb') as f:
+        np.savez(f,**arrays);f.flush();os.fsync(f.fileno())
+    os.replace(tmp,path)
+
+def digest(x):return hashlib.sha256(np.ascontiguousarray(x).tobytes()).hexdigest()
+
+def run(a):
+    work=a.work;work.mkdir(parents=True,exist_ok=True)
+    if not 0<a.budget<=90 or a.block<1 or not 0<a.dt<.0015:raise ValueError('budget/grid guard')
+    T0=F(1);span=F(12)-T0;nt=math.ceil(span/a.dt);h=span/nt;end=nt+1
+    # Same physical outer normal boundary: 2.016 is divisible by both spacings.
+    drc,drf,dyc,dyf=.008,.006,.012,.009
+    nc,nf=math.ceil(3.01/drc)+1,math.ceil(3.01/drf)+1
+    mc,mf=169,225
+    S,maps=transfer_builder(drc,nc,dyc,mc,drf,nf,dyf,mf)
+    def coeff(T):
+        t=brentq(lambda t:F(t)-T,.5,25)
+        v=-1/math.sqrt(1+t*t);q=2*(T-T0)/.065-1
+        return v,1/t,-6*math.sqrt(1-v*v)*t*math.exp(1-1/(1-q*q)) if abs(q)<1 else 0.
+    def setup(dr,dy,nr,ny):
+        src=exact_cell_averages(.04,np.arange(nr)*dr,dr);cp,cm=coefficients(nr,dr)
+        def advance(x,n,source=src):return step(x,T0+n*h,h,coeff,dr,dy,source,cp,cm,a.route)
+        return src,advance,np.zeros((6,3,ny,nr))
+    sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
+    sm=np.zeros_like(sf)
+    for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py',Path(__file__).name]
+    ident=json.dumps(dict(route=a.route,h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
+    def read(k):
+        with np.load(work/f'forward-{k:08d}.npz',allow_pickle=False) as z:
+            if z['identity'].item()!=ident or int(z['k'])!=k:raise ValueError('checkpoint identity')
+            c,f=z['c'],z['f']
+            if c.shape!=xc.shape or f.shape!=xf.shape or digest(c)!=z['cd'].item() or digest(f)!=z['fd'].item() or not np.isfinite(c).all() or not np.isfinite(f).all():raise ValueError('checkpoint integrity')
+            return c,f
+    # Split at every observation slot as well as block boundaries.
+    cuts=sorted(set(range(0,end+1,a.block))|{nt-1,nt,end})
+    start=time.monotonic()
+    if not (work/'forward-00000000.npz').exists():write(0,xc,xf)
+    for lo,hi in zip(cuts,cuts[1:]):
+        if (work/f'forward-{hi:08d}.npz').exists():read(hi);continue
+        c,f=read(lo)
+        for n in range(lo,hi):c,f=C(c,n),G(f,n)
+        write(hi,c,f)
+        if time.monotonic()-start>=a.budget:return {'phase':'forward','cursor':hi}
+    # One observer row at a time. Reverse state and cumulative signed sums are atomic.
+    bulk=math.sqrt(span**2-(1-1/12)**2);rxs=(bulk-.012,bulk+.1)
+    vel=np.array([coeff(T0+i*h/2)[0] for i in range(2*end+1)])
+    def readout(o,x):return np.sum(o*x,axis=(0,2,3))
+    results={}
+    for pos,rx in enumerate(rxs):
+        bc=receiver_bank(12,rx,.04,drc,dyc,h,vel,nt,nc,mc)
+        bf=receiver_bank(12,rx,.04,drf,dyf,h,vel,nt,nf,mf)
+        gc=radial_source_at_receiver(sc,coeff(T0+nt*h)[2],rx,.04,drc)
+        gf=radial_source_at_receiver(sf,coeff(T0+nt*h)[2],rx,.04,drf)
+        for ch in range(6):
+            def obs(n):
+                o=np.zeros_like(xf)
+                if nt-1<=n<=end:o[:3]=bf[ch,n-nt+1]
+                return o
+            path=work/f'reverse-{pos}-{ch}.npz'
+            cursor=end;lam=obs(end);signed=np.zeros((2,6,3));absolute=signed.copy()
+            if path.exists():
+                with np.load(path,allow_pickle=False) as z:
+                    if z['identity'].item()!=ident:raise ValueError('reverse identity')
+                    cursor=int(z['cursor']);lam=z['lam'];signed=z['signed'];absolute=z['absolute']
+                    if cursor not in cuts or lam.shape!=xf.shape or signed.shape!=(2,6,3) or absolute.shape!=signed.shape or not all(np.isfinite(x).all() for x in (lam,signed,absolute)):raise ValueError('reverse integrity')
+            for lo,hi in reversed(list(zip(cuts,cuts[1:]))):
+                if hi>cursor:continue
+                c,f=read(lo);ds=[]
+                for n in range(lo,hi):
+                    z=S(c);cn=C(c,n);fn=G(f,n)
+                    aa=G(z,n);bb=G(z,n,sm);cc=S(cn)
+                    ds.append((aa-bb,bb-cc));c,f=cn,fn
+                ce,fe=read(hi)
+                if not np.array_equal(c,ce) or not np.array_equal(f,fe):raise ValueError('block replay mismatch')
+                for n in range(hi-1,lo-1,-1):
+                    for j,d in enumerate(ds[n-lo]):
+                        value=np.sum(lam*d,axis=(2,3))
+                        signed[j]+=value;absolute[j]+=abs(value)
+                    lam=obs(n)+reverse_step(lam,T0+n*h,h,coeff,drf,dyf,a.route)
+                cursor=lo
+                atomic(path,identity=ident,cursor=cursor,lam=lam,signed=signed,absolute=absolute)
+                if time.monotonic()-start>=a.budget:return {'phase':'reverse','probe':pos,'row':ch,'cursor':cursor}
+            c0,f0=read(0);initial=readout(lam,f0-S(c0))
+            mismatch=np.zeros(3);direct=np.zeros(3)
+            for i,n in enumerate((nt-1,nt,end)):
+                c,f=read(n)
+                mismatch+=readout(bf[ch,i],S(c)[:3])-readout(bc[ch,i],c[:3])
+                direct+=readout(bf[ch,i],f[:3])-readout(bc[ch,i],c[:3])
+            off=offsets(gf)[ch]-offsets(gc)[ch];direct+=off
+            pred=initial+signed.sum(axis=(0,1))+mismatch+off
+            bound=abs(initial)+absolute.sum(axis=(0,1))+abs(mismatch)+abs(off)
+            if not np.all(np.isfinite([direct,pred,bound])) or not np.all(abs(pred-direct)<=1e-8*np.maximum(1.,bound)):raise ValueError('endpoint ledger mismatch')
+            results[f'{pos}:{ch}']=dict(initial=initial.tolist(),signed=signed.tolist(),absolute=absolute.tolist(),observer=mismatch.tolist(),offset=off.tolist(),total=direct.tolist(),bound=bound.tolist())
+    return dict(phase='complete_experiment',identity=ident,results=results,physical_causal_null_certified=False)
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75)
+    a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase']=='complete_experiment' else 75)
