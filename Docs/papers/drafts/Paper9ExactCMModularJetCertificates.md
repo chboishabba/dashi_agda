@@ -1421,3 +1421,84 @@ measured source. Original analytic
 Chudnovsky identity/tail, Bishop
 same-original-real and independent
 SOTA remain separate OPEN obligations.
+
+
+## 24 November — COMP5u: three-sector dyadic consumer and carry-exact projective receipt
+
+As a costed alternative to the exact
+square-slack classifier of COMP5t, a
+new **UNTESTED** π certificate decision
+operator has been expressed entirely
+through the Euclidean residuals of
+the original dyadic GMP floor path.
+This is inspired by the user's
+P-vs-NP G83 negative control
+(larger separators can still admit
+small exact consumer contractions),
+not a transport of a theorem over
+\(\mathbb F_2\) to the integers.
+
+For positive original series bounds
+\(N_l/D_l\le S\le N_h/D_h\),
+set \(H=4268805^d\), \(R_b=
+\lfloor2^b\sqrt{10005}\rfloor\),
+\(k=b-d\), \(x=\lfloor
+HR_bD_h/(2^kN_h)\rfloor\). The
+existing lower division carries two
+remainders
+\[
+HR_bD_h=2^k(xN_h+\rho)+\ell .
+\]
+The upper dyadic product has exact
+decomposition \(H(R_b+1)D_l=
+2^ku+\eta\). Exact admission checks
+\(u<(x+1)N_l\); on failure, the
+two remainder tests
+\[
+u+\left\lfloor\frac{\eta-HD_l}{2^k}\right\rfloor
+ \ge(x+1)N_l,\qquad
+\rho+\left\lfloor\frac{\ell+HD_h}{2^k}\right\rfloor<N_h
+\]
+together prove a genuine source
+interval obstruction and require
+only a source-indexed suffix extension.
+All other cases safely refine
+the radical precision, retaining the
+same affine source edge; this policy
+can sometimes over-refine and is not
+a proved minimal-cost scheduler.
+Full integer-square slacks are
+avoided by this branch classifier,
+but big-integer residue, shift and
+operand costs are still charged.
+
+The source normalization has a
+nontrivial **dyadic carry** even
+though the output floor is invariant.
+If raw \(A=GA'\), \(N=GN'\) and
+normalized residuals are
+\((\rho',\ell')\), then the raw
+residuals are
+\(\rho=G\rho'+\lfloor
+G\ell'/2^k\rfloor\) and
+\(\ell=(G\ell')\bmod2^k\).
+Thus source-indexed BIDI recovery
+does NOT mean naive multiplication
+of each Euclidean remainder by
+\(G\). The optional reconstruction
+helper is \`reopenRawDyadicFibre\`;
+the fast certificate does not call it.
+
+New files:
+\`scripts/pi_p0_dyadic_sector_contraction.hpp\`
+and \`scripts/check_pi_p0_dyadic_sector_schedule.cpp\`.
+The original source identity, signed
+orientation, Chudnovsky analytic/tail
+assumptions, Bishop same-real
+and source-authentication obligations
+remain distinct. Source derivation and
+P0 roadmap S13–S19:
+\`Docs/roadmaps/Paper9PiP0ProjectiveResidualCone20261124.md\`.
+No compilation, benchmark, numerical
+test, proof-assistant kernel run or
+new world-record claim this tranche.
