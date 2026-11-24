@@ -222,3 +222,150 @@ assert (gate,rank,hilbert,mask)==(48,8,16,7424)
 Priority R7a/b/c in one mathematical tranche, not new certification infrastructure. Candidate next target is a section-independent but relation-sensitive *labelled* character packet with an explicit universal edge-cost theorem; local/global Langlands equivalence alone does not bound the cost of obtaining the packet. If no such theorem, retain this lane as a mathematically scoped donor; other worker owns general multiplicative-complexity route. No requirement to solve RH, BSD or YM first.
 
 Source attribution: classical local reciprocity and quadratic Hilbert pairing: Kiran Kedlaya, https://kskedlaya.org/cft/sec_localrecip.html ; Romyar Sharifi, https://www.math.ucla.edu/~sharifi/notes/algnum-ch09.html ; John Voight, *Quaternion Algebras*, DOI 10.1007/978-3-030-56694-4, local and global Hilbert symbols (https://link.springer.com/chapter/10.1007/978-3-030-56694-4_12 and _14); Ralf Schmidt, *Some remarks on local newforms for GL(2)*, https://math.unt.edu/~schmidt/papers/gl2.pdf ; LLC parameter/conductor compatibility https://doi.org/10.1017/S1474748024000227 ; LLC twisting https://masaooi.github.io/LLC.pdf. These are standard theorem authorities, not claimed reproofs of LLC. DASHI owns only the gate-encoding, profile no-go and crosswalk synthesis here; preserve JMD attribution and other worker's G1–G5 ownership. P11 arithmetic normalization distinct from unitary automorphic normalization; inverse Euler factor at a ramified twist is 1 in either convention. No source of a universal lower bound is imported by citation.
+
+## 9. R8–R13: Monster-inspired cocycle correction, labelled ramified descent and a universal scoped charge (24 Nov 2026)
+
+Stay on the Langlands owner (#1549/#120); #1545 is a donor, not a new workstream. Live #1545 head e7cca5d6c88fcd363ce33f0d1db41ea24e8af4e7; actual canonical Docs/roadmaps/Monster3BEndpointFirstConstruction20261123.md blob 257b17cea5b60a81f52f8db07a006fb46e8af686 inspected. It distinguishes character-level 12+78 (already supplied by IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact) from actual original complex Hom operators and simultaneous extraspecial lift (open). Actual DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda blob f3dec4ac1e0e9eb6f51f52f667f0ff28413fe35b, compensatedTensorActionIsHonestOnPureTensors, is C3-specific and must not be silently reused as a C2/mu4 theorem. Related indexed owners Monster3BFiniteHeisenbergCocycleExact, Monster3BFiniteHeisenbergAssociativityExact, Monster3BFiniteHeisenbergCentralExtensionExact; exact source paths need inspection before native adapter. The mathematical inspiration is cocycle correction plus actual Hom reconstruction, not 729 or 90 as a complexity invariant. Other PNP worker current #1548 049e4ed2d9f75648624064d785b699eca3204ef3 / #119 b35f249b3b21ad2de0b3c222140ff100e5c6e84b; retain their G1–G6 ownership.
+
+### R8. Actual labelled relative character lines and gluing
+
+Let X=F2^n, W=W_Q2, chi the ramified order-two Weil character of R2. For f:X->F2 define L_f(x)=C with W acting by chi^f(x). This is a family of actual rank-one Weil representations on the discrete labelled base. Pointwise GL1 LLC gives the corresponding family of local characters; P11 twist R tensor L_f is available as in R3. The carrier is compactly *presented* by a given Boolean circuit and fixed character, with no exponential packet materialized by the compiler. The all-x semantic family is a mathematical object, not a polynomial algorithm to evaluate arbitrary f.
+
+For an arrow x->x+h of the translation groupoid define D_f(x,h)=Hom_C(L_f(x),L_f(x+h)) with the conjugation W action. It is a line with character chi^{Delta_h f(x)}, Delta_h f(x)=f(x+h)+f(x). The Hom is over C, NOT Hom_W: the latter is zero when the characters differ. Composition of linear maps gives canonical W-equivariant tensor isomorphisms
+    D_f(x+h,k) tensor D_f(x,h) -> D_f(x,h+k).
+Associativity follows from composition, identity from End of the source line. In character labels Delta_{h+k} f(x)=Delta_h f(x)+Delta_k f(x+h). This is a multiplicative line system on arrows; do not pretend the original L_f has equivariant isomorphisms along every translation. The relative system is a coboundary, has trivial cycle character, and is not a new nontrivial H^1 class. Its labelled edge data, however, recover f up to a constant: if D_f and D_g agree as characters on all coordinate edges, then Delta_ei(f+g)=0 for every i, so f+g is constant by connectedness. One anchored value determines the original function. Arbitrary changes of fibre basis cancel in composition; if using explicit local intertwiners in place of characters, retain section provenance where no equivariant map exists. This is the precise SectionIndependentConsumerExact / P11JacquetLanglandsSectionIndependenceExact donor application, not a claim of a new arithmetic Langlands equivalence on X.
+
+Composition in the circuit presentation: XOR tensor, NOT twist, AND the pointwise R2 Hilbert-symbol cup operation and re-encoding (not an ordinary tensor functor). The derivative of a product obeys the exact Boolean identity
+    Delta_h(ab)=a Delta_h b + b Delta_h a + Delta_h a Delta_h b.
+This preserves all correlations and shared inputs. A derivative family with variable h has circuit construction by two evaluations f(x), f(x+h) and XOR; at most 2m AND for original m, plus polynomial affine work. Relative characters and P11 twists follow pointwise. Thus the R7a label-aware presentation/gluing sublemma is supplied mathematically. The full R7a endpoint still needs a noncircular arithmetic object/invariant on that presentation whose cost bound can be strong enough for SAT; reading the whole labelled packet or finding its minimal circuit is not a paid shortcut.
+
+### R9. Characteristic-two Heisenberg correction: fourth roots, not 1/2
+
+Fix a computational subspace V containing 1 and a functional ell in V^perp. U=V/<1>. R5 supplies the alternating pairing B(u,v)=ell(uv), exactly the exponent of the weighted product of local Hilbert symbols. Important: (-1)^B itself is a *symmetric* cocycle, has trivial commutator, and is a coboundary. It is not the Heisenberg cocycle. Indeed with coordinates u_i, q_0(u)=sum_{i<j} B_ij u_i u_j (mod 2) satisfies q_0(u+v)-q_0(u)-q_0(v)=B(u,v). A nontrivial Heisenberg commutator requires a one-sided cocycle.
+
+Choose an ordered basis and C strictly upper triangular with C+C^t=B. Define H_C=U x Z/4 with law
+    (u,t)(v,s)=(u+v,t+s+2 u^t C v mod 4).
+Bilinearity proves associativity; commutator is (0,2B(u,v)). The central generator acts by i in the chosen complex central character; this is a finite group derived from the arithmetic Hilbert pairing, NOT the actual Galois group of Q2 or a new local LLC construction for H_C.
+
+For an isometry A of B, E=A^t C A-C over F2 is symmetric. Unlike the Monster F3 donor, one cannot divide by 2. Define
+    Q_E(u)=sum_i E_ii u_i + 2 sum_{i<j} E_ij u_i u_j mod 4.
+Coordinates here are Boolean representatives 0,1. Using u_i xor v_i=u_i+v_i-2u_i v_i over Z proves
+    Q_E(u+v)-Q_E(u)-Q_E(v)=2 u^t E v mod 4.
+Consequently (u,t)->(Au,t+Q_E(u)) is an automorphism of H_C, fixing the central generator; adding 2 times a linear functional gives the other lifts. The same formula compares different choices of C with equal alternating part (the symmetric difference). Diagonal terms really matter: over mu2, the diagonal of a polarization vanishes, so if E has nonzero diagonal no mu2-valued correction exists. Passing to mu4 repairs it exactly, with no odd-characteristic formula smuggled in. Individual lifts do not necessarily compose: their defects are additive characters U->Z/4, hence in 2U^*. A simultaneous isometry-group lift would require splitting this group extension; not automatically supplied or needed for the line-system charge.
+
+For rank B=2r and radical dimension d-2r, the complex twisted group algebra with central action i has 2^(d-2r) simple blocks each M_(2^r)(C). Proof: symplectic basis plus radical; for each hyperbolic pair use Pauli shift and sign, anticommuting, spanning M2; distinct pairs commute. Radical generators commute with everything, and may be rescaled by i to square to identity. Their 2^(d-2r) characters give the blocks. This is finite Stone–von Neumann/Morita structure, not evidence of circuit cost. A specific honest source module M in a fixed irreducible central sector has the canonical evaluation H tensor Hom_(H_C)(H,M)->M; by semisimplicity and Schur it is an isomorphism (restrict to the isotypic summand when not all of M is isotypic). If an actual normalizer action T_g and projective factor K_g with cocycle alpha exist on that sector, L_g(phi)=T_g phi K_g^-1 on the Hom factor satisfies L_g L_h=alpha(g,h)^-1 L_(gh). Tensor evaluation gives the genuine action; scalar gauge cancels. This is the exact characteristic-two counterpart of #1545's Hom mechanism, with no invented multiplicity module or source action. Nothing here supplies an honest source action of all computational transformations on one fixed U; V and ell can change with gates.
+
+### R10. Universal Langlands charge from joint translation stabilizers
+
+Use R8 relative characters, not just their unlabelled direct sum. For V containing the affine functions define
+    S(V)={h in X : Delta_h v is constant in x for every v in V}.
+Equivalently all relative character lines for each v along h have one fixed inertia type over all x. S(V) is a subspace: Delta_(h+k) v(x)=Delta_h v(x)+Delta_k v(x+h), and constants add. For any h in S(V), alpha(h)=Delta_h a and beta(h)=Delta_h b are linear functionals on S(V) when a,b in V. For p=ab, the R8 derivative formula shows that every h in ker alpha intersect ker beta (inside S(V)) has Delta_h p=0. Hence for V'=V+span(p),
+    ker alpha intersect ker beta <= S(V') <= S(V).
+Thus codim_X S(V') - codim_X S(V) <= 2 for every legal AND extension, regardless of shared gates, XOR, alternative path or choice of affine coordinates. Initial affine V0 has S(V0)=X. If f is in final V_m, S(V_m)<=S(f), where S(f) is defined with just f. Telescoping:
+    MC(f) >= ceil((n-dim S(f))/2).
+This is a real universal gate-progress bound, expressed in arithmetic relative inertia labels. It is the KNOWN linear-structure dimension lower bound (see NIST/PMC below), not a novel asymptotic lower bound. It is sharp for f(x,y)=x dot y on 2r bits (all nonzero translations give nonconstant derivative, MC=r). The potential codim S(V)/2 is at most n/2, so R7b is paid only for this scoped linear invariant, not the superpolynomial endpoint.
+
+There is an exact nonlinear-core factorization, analogous to the Monster Hom separation but at the function level. For S=S(f), h->Delta_h f is a linear functional on S. Extend it to a linear l on X. Then f+l is constant on S-cosets, hence factors uniquely through X/S. Conversely, any f=l+g(q(x)) for a linear quotient q implies ker q <= S(f). Consequently codim S(f) is exactly the smallest linear quotient dimension in such a factorization (not the least number of nonlinear gates). For a whole V choose the affine correction for each basis function and extend linearly. The quotient is canonical; a splitting/choice of linear l is not, consistent with section independence. This is a concrete FactorsThrough consumer and exact backsolve: arbitrary m nonlinear operations imply a nonlinear core of at most 2m linear dimensions, but once m>=n/2 the bound is exhausted.
+
+### R11. Stronger no-go: even ALL labelled translation-pair Langlands profiles conceal arbitrary MC
+
+The earlier R4 masking defeats bounded-order coordinate restrictions. Now use all translations, not just coordinate axes. For x,y in F2^r and arbitrary g:F2^r->F2, let
+    b_g(x,y)=x dot y + g(y).
+This is the classical Maiorana–McFarland bent family (identity permutation case). For every shift (u,v), compute the sign autocorrelation
+    C_g(u,v)=sum_(x,y) (-1)^[x dot v + u dot y + u dot v + g(y)+g(y+v)].
+If v !=0 the sum over x vanishes. If v=0 and u!=0 the sum over y vanishes. If both zero it is 2^(2r). Thus the autocorrelation profile is identical for every g. The signed Walsh transform is
+    W_b(a,b)=2^r (-1)^[g(a)+b dot a],
+so even the entire labelled absolute Walsh spectrum agrees. Weight alone can differ, so append one extra parity mask z:
+    F_g(x,y,z)=x dot y+g(y)+z.
+Now weight is exactly 2^(2r), independent of g; for each shift (u,v,w), C_F=2(-1)^w C_g(u,v). The labelled absolute Walsh spectrum is also independent of g: 2^(r+1) for mask frequency 1 and 0 for frequency 0. Since both marginals at any shift are balanced, the four joint sign counts (++/--,+-/-+) are (N+C_F)/4 and (N-C_F)/4 respectively, N=2^(2r+1). Therefore *every labelled shift's complete unlabelled pair-character packet*, including both joint output labels, tensor product, local GL1 Artin data and P11-twisted data, agrees with the easy quadratic-plus-affine case g=0. The relative line family from R8 is not the same as this aggregated packet: retaining the actual basepoint x,y,z preserves information; summing over basepoints loses it. No claim about all higher-order correlations or full labelled Weil lines.
+
+Restrict x=z=0 to recover g, so MC(F_g)>=MC(g). Conversely MC(F_g)<=r+MC(g). There exist g with superpolynomial MC by the standard circuit counting bound already in R4; g=0 has MC=r by R10. For F_g every shift with (u,v)!=0 gives balanced (nonconstant) derivative; the z-axis consists of constant derivatives, so S(F_g)=span(e_z) and R10 returns the same r for every g. The easy and arbitrarily hard families share exact pair-packet, all labelled absolute Walsh magnitudes, full translation stabilizer and total conductor. Thus even these joint arithmetic/spectral invariants cannot alone deliver an invariant with a superpolynomial universal separation on the masked hard family. This does not prove the canonical SAT family is hard or disprove every possible Langlands-derived invariant. To transport to SAT use an explicit SAT reduction and resource accounting; no such lower bound is claimed. Phase-sensitive signed Fourier data or all basepoint-labelled arrows recover information but still require a noncircular universal progress theorem.
+
+### R12. Local exact checks (executed in this continuation)
+
+Local Python/SymPy exact integer/GF2 arithmetic, no CI. 21,840/21,840 polarizations over 5 deterministic symmetric matrices at each d=2,4,6 and all pairs of Boolean vectors; 32,768/32,768 complete shifted pair profiles (all 256 g on 3 bits, every shift on 7 bits), independent direct counting against integer Walsh autocorrelation; 7,424/7,424 joint stabilizer gate-step checks on all pairs of elements in the affine space and its 7 distinct one-AND extensions on 3 bits (8 spaces). Total 62,032 finite checks; proofs above are independent. No fresh Agda/Lean kernel run. Reproduction:
+```python
+from itertools import product
+from random import Random
+from collections import Counter
+import sympy as S
+rng=Random(1549)
+c=0
+for d in (2,4,6):
+    for t in range(5):
+        M=S.Matrix(d,d,lambda i,j:rng.randrange(2))
+        E=(M+M.T).applyfunc(lambda v:v%2)
+        for i in range(d): E[i,i]=rng.randrange(2)
+        X=list(product(range(2),repeat=d))
+        def q(x):
+            return (sum(int(E[i,i])*x[i] for i in range(d))
+                    +2*sum(int(E[i,j])*x[i]*x[j] for i in range(d)
+                           for j in range(i+1,d)))%4
+        for x in X:
+            for y in X:
+                z=tuple(a^b for a,b in zip(x,y))
+                assert (q(z)-q(x)-q(y))%4==2*(sum(x[i]*int(E[i,j])*y[j]
+                       for i in range(d) for j in range(d))%2)
+                c+=1
+assert c==21840
+def fwht(a):
+    a=a[:]; h=1
+    while h<len(a):
+        for i in range(0,len(a),2*h):
+            for j in range(i,i+h):
+                a[j],a[j+h]=a[j]+a[j+h],a[j]-a[j+h]
+        h*=2
+    return a
+r=3; N=1<<(2*r+1); m=(1<<r)-1
+ref=None; count=0
+for g in range(256):
+    s=[(-1)**(((x&m)&((x>>r)&m)).bit_count()%2
+              ^ ((g>>((x>>r)&m))&1) ^ (x>>(2*r))) for x in range(N)]
+    W=fwht(s); C=[z//N for z in fwht([v*v for v in W])]
+    assert sum(s)==0
+    if ref is None: ref=C
+    assert C==ref
+    for h in range(N):
+        counts=Counter((s[x],s[x^h]) for x in range(N))
+        assert sum(counts.values())==N
+        assert counts[1,1]==counts[-1,-1]==(N+C[h])//4
+        assert counts[1,-1]==counts[-1,1]==(N-C[h])//4
+        count+=1
+assert count==32768
+n=3; N=1<<n; allmask=(1<<N)-1
+base={sum(((i&1)^(((i>>1)&x).bit_count()%2))<<x
+          for x in range(N)) for i in range(1<<(n+1))}
+def constant_derivative(v,h):
+    return sum((((v>>x)^(v>>(x^h)))&1)<<x
+               for x in range(N)) in (0,allmask)
+def stab(V):
+    return {h for h in range(N) if all(constant_derivative(v,h) for v in V)}
+Vs={frozenset(base)}|{frozenset(base|{u^(a&b) for u in base})
+                      for a in base for b in base}
+count=0
+for V in Vs:
+    old=stab(V)
+    for a in V:
+        for b in V:
+            new={h for h in old if constant_derivative(a&b,h)}
+            assert len(old)<=4*len(new)
+            count+=1
+assert len(Vs)==8 and count==7424
+```
+
+### R13. Revised endpoint roadmap / exact remaining lemmas / ownership
+
+| ID / phase | Mathematical deliverable | Producers -> consumers / boundary |
+|---|---|---|
+| R8 / LGC4d / A | labelled character family, relative Hom lines, gluing, reconstruction up to anchor, polynomial circuit presentation | R2/R3, historical SectionIndependentConsumerExact and P11JacquetLanglandsSectionIndependenceExact -> R9/R10; derived, native weld open |
+| R9 / B | characteristic-two mu4 cocycle polarization and individual lifts, radical/isotypic blocks, reciprocal Hom cocycles | #1545 C3 donor, R5 Hilbert exponent -> actual relative representation; derived mathematical formulas, no simultaneous group lift claim; do not duplicate Monster endpoint |
+| R10 / LGC5-scoped / B-C | joint translation stabilizer codim progress <=2, canonical quotient/factorization | R8, FactorsThrough, ResidualFibreLowerBoundExact, existing G1-G4 -> linear lower bound; derived and known prior art; cannot grow beyond n |
+| R11 / C | all-shift pair-character plus absolute spectral profile collision with arbitrary MC | R4, Maiorana–McFarland -> invariant selection; general theorem supplied |
+| R7a' / LGC4d / C | choose a phase-sensitive or higher relational arithmetic consumer beyond R11, with well-defined same-object transport under admissible section changes; do not merely choose entire truth table as complexity measure | R8/R9, signed multiplicity, P11/JL, #1291 indexed gluing; open as cost-sensitive consumer |
+| R7b' / LGC5 / C | derive universal bounded charge for that specific consumer for all legal AND extensions, arbitrary sharing, joint discharge; bound may not saturate at polynomial in n by construction | R5/R10, #1548/#119 G6, fast pi and #123 charge controls; open |
+| R7c / LGC6 / D | independent superpolynomial SAT goal separation for same consumer, all polynomial budgets | canonical SAT, #1040/#1129/#1474, standard machine compiler; open |
+| LGC7/N6 / E | original standard cost-model endpoint, conditional consumer | DirectSATLowerBoundExact and ClayCore; no unconditional inhabitant; native weld after mathematical endpoint |
+
+Next combined R7a'/b'/c mathematical tranche: use phase-sensitive local pairings or multi-arrow gluing, test actual dependence on signs (not only conductor), and seek a bounded global charging theorem that survives easy quadratic bent packets and arbitrary g. R9 explains exactly how projective gauge can cancel rather than impose computational cost; do not count the number/dimension of complementary Hom modules or the number of cocycle conditions as paid primitives. A full simultaneous lift may carry a genuine cohomological obstruction but requires a specified source group/action and proof of connection to *all* low-cost algorithms; no such source action is inferred from this construction. Do not repeat local tests as a gate to endpoint mathematics; use #1548/#119 for general G6. Remain on Langlands, no RH/BSD/YM/Monster prerequisite.
+
+Prior art and attribution: rank/codimension bound is Theorem 2 in *Boolean Functions with Multiplicative Complexity 3 and 4*, https://pmc.ncbi.nlm.nih.gov/articles/PMC7918276/ and https://www.nist.gov/publications/boolean-functions-multiplicative-complexity-3-and-4 (not a new DASHI lower bound). Maiorana–McFarland/Walsh formulas are classical bent-function theory; see e.g. https://drops.dagstuhl.de/storage/00lipics/lipics-vol362-itcs2026/html/LIPIcs.ITCS.2026.72/LIPIcs.ITCS.2026.72.html for a modern use (its query-complexity bound is not a circuit bound). Local reciprocity is R2 standard authority. R8–R11 arithmetic representation crosswalk, exact mu4 adaptation and profile-based negative-control synthesis are DASHI working mathematics, no priority claim over existing representation or Boolean function theory. Preserve JMD/DASHI split from #123 and Monster source-specific character attribution.
