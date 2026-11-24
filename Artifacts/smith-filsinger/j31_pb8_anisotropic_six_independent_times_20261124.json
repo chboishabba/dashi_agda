@@ -6,7 +6,7 @@
   "source_file_blob": "47493fbefba44c20e7cb82e31521627f13611800",
   "new_executable": "scripts/check_smith_filsinger_j31_pb8_anisotropic_six_time_20261124.py",
   "new_executable_exact_git_blob": "eb685d88e5fbfb8c33f17b676be7ce01baaeca7e",
-  "replay_origin": "Local Python Fraction; new script byte-identical to committed Git blob; imported same source f, fJ, guard, phase and event literals; local source-module copy was an earlier byte version (cd1d8...) retaining unchanged source primitives; not a byte-identical replay against newest dependency blob",
+  "replay_origin": "Exact local new PB8 script Git blob is byte-identical. All original source primitives actually imported lie in the byte-identical prefix of the original source old cd1d8 and new 47493 blobs (compared live on GitHub). Earlier/newer certify_chart metadata differs and is never called.",
   "full_local_fraction_receipt_sha256": "50272cdc814f03b933eb00f469c70f72d0d784cc3c7dcb5907c8208d5908b8e1",
   "full_local_fraction_receipt_bytes": 146113,
   "exact_method": {
@@ -152,5 +152,29 @@
     "measured_100_percent_energy_extraction": false,
     "github_ci": false,
     "proof_assistant_kernel": false
+  },
+  "verified_original_source_dependency": {
+    "original_local_imported_blob": "cd1d800246a700f27f7a1584692fba84ac08e9fb",
+    "current_committed_original_source_blob": "47493fbefba44c20e7cb82e31521627f13611800",
+    "exact_remote_old_vs_new_source_prefix": "byte-identical string comparison, entire 6639-character source prefix through the line before def certify_chart",
+    "unchanged_exact_prefix_includes": [
+      "Fraction outward interval class I",
+      "dual AD class D",
+      "source physical parameters",
+      "original 7 modes",
+      "original J24 centre vectors",
+      "original signed event root time brackets",
+      "rational Taylor trig and source phase",
+      "original f",
+      "original fJ",
+      "original guard",
+      "original guard_slope"
+    ],
+    "changed_later_metadata_and_prior_certify_chart": "not called by either new executable",
+    "current_source_primitives_verified_byte_identical": true,
+    "whole_module_blob_equal": false,
+    "local_new_executable_blob_verified_byte_identical": true,
+    "new_exact_script_local_pass_and_dependency_used_semantically_equal": true,
+    "claim_full_latest_module_rerun": false
   }
 }
