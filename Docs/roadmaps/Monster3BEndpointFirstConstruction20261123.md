@@ -2,6 +2,42 @@
 
 > **CURRENT CANONICAL PHASE/DELIVERABLE/LEMMA/PRODUCER–CONSUMER LEDGER — 24 Nov 2026; PR #1545; branch `research/monster3b-mmgroup-atlas-generator-transport-20261123`; base `master`.** This top-level ledger takes precedence over the historical derivations below when their open-state language differs. **Priority is mathematical endpoint completion, not generic acceptance/certification.** Do not run another search solely to reproduce the authentic manifest, 28 quotient candidates, GF(3) 144-variable intertwiners or existing finite Weil model.
 
+## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
+
+**Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
+
+**L10B NEW exact source-model cubic scalar**: for original literal inner Monster words \(D,E=CDC^{-1}\) of exact order3, compile \(K_{g,s}\) from the PRE-EXISTING 729 TOE Weil kernel, rather than choose its cubic scalar arbitrarily. The original source projective cocycle forces \(\gamma_{g,s}=\alpha_s(g,g)\alpha_s(g,g^2)\), \(K_{g,s}^3=\gamma_{g,s}I_{729}\); hence the genuine original \(90D\) multiplicity projective blocks in the same model gauge must obey \(B_{g,s}^3=\gamma_{g,s}^{-1}I\). The new exact \(\gamma_{D,s},\gamma_{E,s}\) are now computed/serialized by [the existing 729 model consumer](../../scripts/monster3b_original729_weil_source_cocycle_weld.py), not independently searched over three cubic roots. The model must still match the SAME actual Monster E basis/phase/point projector; a failure is retained as a signed residual.
+
+**L10C NEW gauge-INDEPENDENT 78 CHARACTER identity on the SAME literal Monster words**, using the actual source MMV31 C² eigenblocks (12/78), not a synthetic degree90 observer. If the selected faithful12 \(V\) and 78 \(=\mathrm{Sym}^2(V^\vee)\) inhabit a source-compatible projective 729 gauge and \(g=D,E\) has order3, then
+\[
+\boxed{2\operatorname{tr}B_{78,g}
+=\operatorname{tr}B_{12,g}
++\gamma_g\bigl[\operatorname{tr}(B_{12,g}^2)\bigr]^2.}
+\]
+All choices of \(c_g^3=\gamma_g\) CANCEL; this is a stronger diagnostic than previous independent 12/78 cubic-root enumeration. [New original MMV31 character/cube checker](../../scripts/monster3b_actual_order3_projective_sym2_weld.py) uses exact source model \(\gamma\), original \(\kappa=0\) fail-closed branch and genuine 12/78 matrices, checking both \(B_{12}^3=B_{78}^3=\gamma^{-1}I\) and the above field-31 formula. Independently verified locally on **all SIX** \(\mu_6\) model gauges (both \(\gamma=\pm1\)) and a negative mismatched 78 trace. These tests are **finite source-shaped fixtures**, NOT new original Monster execution.
+
+**L10C larger endpoint: construct a SAME-MONSTER \(78\times78\) operator intertwiner**, instead of stopping at characters or opening 6084-variable linear equations. For each literal \(g=D,E\), the exact source projective dual-symmetric-square operator is
+\[
+T_g=\boxed{\gamma_g\,\mathrm{Sym}^2((B_{12,g}^2)^\top)}
+=\gamma_g^{-1}\mathrm{Sym}^2((B_{12,g}^{-1})^\top).
+\]
+The new [finite-field original-source simultaneous operator intertwiner](../../scripts/monster3b_actual_projective_sym2_intertwiner.py) uses a shared simple eigenvalue of \(h(D,E)=aD+bE+cDE\), propagates the SAME source D/E words to construct 78 independent source/target columns, and **verifies an invertible \(F\)** satisfying both \(FB_{78,D}=T_DF\), \(FB_{78,E}=T_EF\) with explicit inverse. This avoids dense Kronecker enumeration. **Independent local NumPy test** with two noncommuting order3 generators, \(\gamma_D=-1\), hidden random \(78D\) conjugacy, all 78 orbit vectors and both generator equalities **PASS**; a wrong original-shaped 78 generator is rejected. The source code is committed and orchestrated in [P5 runner](../../scripts/run_monster3b_p5_endpoint.py) on each marked MMV31 phase, without requiring Magma. **Actual original Monster module has NOT been run through this new operator stage in assistant runtime**, and a bounded search with no simple eigenvalue is an INCONCLUSIVE algorithmic limitation, not a false negative equivalence theorem. If its original operator source returns invertible \(F_s\), **the modular same-object D/E 78-vs-dualSym²12 alignment is genuinely constructed**, still not the full characteristic-zero 6Suz.2 action.
+
+| Owner | Latest mathematical delivery | Remaining exact endpoint |
+|---|---|---|
+| **P0–P2/L01–L07** | Original source groups, E generator chart, actual corrected Monster C,D and source \(R^7=z\), selected GAP 4D fusion, old ATLAS/Weil 729 mathematics already paid | Literal corrected C Monster class4D source character fingerprint/word identity and global group standard-word cover |
+| **P3/L09** | Original 729 Schr point projector and full action; actual user-reported MMV31 B-vacuum rank90/C² selected 12/78 | Establish actual \(W_s\leftrightarrow H_s\otimes S_s\) source-equivalent phase/Heisenberg projector and complex field lifting |
+| **P4/L11** | Original source faithful12, Nebe dual-Sym²78 and common diagonal C3 phase, exactly on selected source characters | Identify the same actual group words in the 6Suz ordinary character coordinates |
+| **P5/L10A** | Bounded two-phase exact ordinary12 character-value inversion; explicit source 729 \(\kappa_{g,s}\) and \(\gamma_{g,s}\) | A globally honest same-Monster characteristic-zero faithful12 operator/word normalization, not independent 78 data |
+| **P5/L10B** | Source-projective 729 \(K^3=\gamma\); actual-source \(B^3=\gamma^{-1}\) equations; old \(\alpha\) inverse-cocycle and signed \(R^7=z\) | Pay same-original full \(\rho_W\)–Weil gauge and exact source-word cochain |
+| **P5/L10C** | New gauge-INDEPENDENT original 12→78 trace law plus CONSTRUCTIVE 78D simultaneous D/E SOURCE operator intertwiner program | Authenticate its actual original MMV output and extend same-object operator intertwiner across full 6Suz standard words/outer, then complex lift |
+| **P5/L12R** | Existing R7 unique model order7 rephase and forced \(\zeta_3^s\) complementary 90D central residual | Source literal C4D, global 6Suz.2 outer phase exchange/central cover and Paper10 complete source transport |
+| **P6** | Deferred as requested | After mathematical endpoint, provenance/formal kernel acceptance — no new CI campaign now |
+
+**Exact source chain**: old Agda Schr/Weyl/point projector + pinned original AtlasRep 12D GF3 → old TOE compiler and exact E/Z(E) normalizer q → genuine corrected mmgroup C,D, R7 and 3B z → genuine original MMV31 marked 90D/12D/78D source rows → [new original 729 D/E cubic \(\gamma\) owner](../../scripts/monster3b_original729_weil_source_cocycle_weld.py) → [same Monster 12→78 character/cubic consumer](../../scripts/monster3b_actual_order3_projective_sym2_weld.py) → [same Monster 78 operator intertwiner consumer](../../scripts/monster3b_actual_projective_sym2_intertwiner.py) → Ibrahim original Hom evaluation and Paper10. This keeps every **source vs model** distinction, prime/phase index, ordinary-vs-modular distinction, zero vacuum, diagonal K class20 vs actual E-centre z, signed R7 residual and original author attribution explicit. No user app run, Magma install or extra 729 construction is a prerequisite for the mathematics or committed implementations.
+
+---
+
 ## 24 November 2026 — P5 CANONICAL 729 SOURCE AUDIT: no missing model; scalar/relator solved in a declared gauge
 
 **Authoritative latest P5 mathematical result; supersedes any historical phrase calling 729 Schr/Weil arithmetic “missing.”** See [full original-source donor and consumer audit, explicit 729 kernel, calculated original ATLAS coefficients and exact R⁷ phase](../physics/Monster3BExisting729WeilSourceReuseAndRelatorWeld20261124.md). **The repository already owns the 729 finite Schrödinger carrier, Weyl operators, both marked phases, exact symplectic-similitude quadratic lifts, Fourier support/cyclotomic kernels, point projectors, Stone–von Neumann conditional transport and inverse-cocycle theorem.** No parallel 729 framework is needed.
