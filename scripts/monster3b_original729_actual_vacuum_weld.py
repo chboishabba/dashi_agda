@@ -45,7 +45,7 @@ def eval31(value,zeta):
 def ratio_if_needed(model,phase,name):
     rec=model["phases"][str(phase)]["vacuum"][name]
     if not rec.get("k0_nonzero"):return None
-    return eval31(rec["k0_unitary_model_Qzeta3"],5 if phase==1 else 25)
+    return eval31(rec["k0_unitary_model_Qzeta3"],5) # phase already encoded by compile_shape
 def predicted(model,phase,word):
     data=model["phases"][str(phase)]
     left,right,prod=(
@@ -55,7 +55,7 @@ def predicted(model,phase,word):
     if None in coeff or any(x==0 for x in coeff):
         return {"status":"ZERO_VACUUM_COEFFICIENT","k0":[str(x) for x in coeff]}
     alpha=eval31(data["pairs"]["D_E" if word=="DE" else "E_D"][
-         "unitary_gauge_multiplier_Qzeta3"],5 if phase==1 else 25)
+         "unitary_gauge_multiplier_Qzeta3"],5)
     if alpha==0:raise AssertionError("unitary model cannot have zero cocycle")
     kleft,kright,kprod=coeff
     beta=kleft*kright*pow(alpha*kprod%P,-1,P)%P
