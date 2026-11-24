@@ -77,12 +77,14 @@ STATES=[
  ['0.08472814436407','-0.32935984299057','1.33978173940005','0.83433116172484','1.23978173940005','8.13119780949747','0.42908731743842','-0.98106986849663','-1.1666415376269']]
 TIMES=['0','3.389367008894','3.491292721190','3.515340479143','4.275489023275','4.323837945006','4.928751407316']
 SIGNS=(1,-1,1,1,-1,-1)
-# Source-owned J26–J29 five certified event brackets (see original receipts).
+# Source-owned J26–J29 first five and J30 sixth certified root brackets.
 # This code checks geometric containment, not the upstream ODE proofs.
 BRACKETS=(('3.389367008','3.389367010'),
  ('3.49129269','3.49129275'),('3.51534025','3.51534095'),
  ('4.275487825','4.27549016875'),
- ('4.32383391875','4.32384016875'))
+ ('4.32383391875','4.32384016875'),
+ ('118763222704486979432589457030223322057/24096899911609601083074179150560000000',
+  '118772079990387566784735834168684442057/24096899911609601083074179150560000000'))
 
 def taylor_point(z,trig,n=36):
  """Rigorous rational sin/cos at rational point, explicit tail bound."""
@@ -141,7 +143,7 @@ def guard_slope(k,fx):
 def certify_chart(k,h):
  mode=MODES[k];tc=F(TIMES[k]);xc=list(map(F,STATES[k]));h=F(h)
  start_radius=F(1,10000);time_radius=(F(0) if k==0 else F(1,5000) if k==6 else F(1,200000));tube_radius=F(1,1000)
- if 1<=k<=5:
+ if 1<=k<=6:
   left,right=map(F,BRACKETS[k-1])
   assert tc-time_radius<left<right<tc+time_radius
  start=[I(a-start_radius,a+start_radius) for a in xc]
@@ -220,6 +222,7 @@ def main():
     all_seven_modes_physically_admissible_conditional_on_event_zero=True,
     input_state_radius='1/10000',input_time_radii=['0']+['1/200000']*5+['1/5000'],
     J29_first_five_original_event_boxes_geometrically_covered=True,
+    J29_J30_all_six_exact_root_time_brackets_geometrically_covered=True,
     actual_source_smooth_chart_seed_proof_for_first_five_requires_J29_receipt=True,
     sixth_full_J24_box_attached=False,
     original_full_seven_chart_69D_interval_certificate=False,
