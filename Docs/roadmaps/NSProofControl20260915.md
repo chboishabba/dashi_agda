@@ -1,5 +1,10 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+A2-transport: signed low-advector multiplier repair pays smooth comparable shells for theta<=2/5; sharp cutoff and remaining nonlinear sectors open. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 A2-time: actual Fourier temporal split, initial term paid, signed nonlinear remainder open; actual finite-mode endpoint sign no-go. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.

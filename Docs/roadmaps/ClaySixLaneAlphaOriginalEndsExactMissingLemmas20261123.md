@@ -1,5 +1,10 @@
 # Active Clay rollup — 24 November 2026
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+Four exact next cuts and attribution ledger. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 Four exact next cuts and attribution ledger. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.

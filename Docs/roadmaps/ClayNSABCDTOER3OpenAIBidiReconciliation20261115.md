@@ -1,5 +1,10 @@
 # Navier–Stokes A/B/C/D × TOE × OpenAI: corrected source-exact maximum cut
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+A2-transport: actual low-advector signed estimate, B/C/D independent. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 A2-time: exact temporal transport, independent B/C/D preserved. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.

@@ -1,5 +1,10 @@
 ## 23 Nov RH CLAY P0 — SymPy in lieu: actual E3 source sign frontier and sharp two-sideband rank
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+P4-cyclotomic: third independently checked arithmetic consequence, exact source Dedekind factorization donor and updated optional Lean pins; local kernel unexecuted. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 P4-abelian: classical Dedekind consequence of Dirichlet GRH, source scope retained; no native receipt. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.

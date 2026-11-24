@@ -1,5 +1,10 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+H3-Clifford: reverse orientation from restricted standard Clifford composition, conditional on actual algebraic correspondence; no new cycle. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 H3-trace: exact orientation trace metric and conditional finite sign monodromy, actual cycle still open. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.

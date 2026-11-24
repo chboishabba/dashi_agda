@@ -1,5 +1,10 @@
 # BSD — universal Clay-rank versus strong-refined scope, S5/S6 fail-closed (2026-11-17)
 
+## 25 November — signed transport/lattice/Clifford continuation
+
+S6-Q5L: selected full Sha finiteness, free lattice index2, absolute regulator ratio1/4 and complete dyadic Selmer layers; conditional low-corank preprint donor. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
+
+
 ## 24 November — temporal/descent/orientation continuation
 
 S6-Q5K: actual selected E/Q(sqrt5) isogeny descent candidate exhaustion, Sha[2^infty]=0; universal S6 open. [Complete derivation, attribution and exact checker](ClayFourTemporalDescentOrientation20261124.md). No native kernel or universal endpoint promotion.
