@@ -10,7 +10,7 @@ from importlib.metadata import version
 import numpy as np
 from monster3b_conway_exact_crt import ConwayNative, reduce_vector, DIM, require
 from mmgroup import MM, MMV
-from mmgroup.mm_crt_space import MMV_CRT
+from mmgroup.mm_crt_space import MMV_CRT, compress_data
 
 def run():
     N=ConwayNative()
@@ -26,7 +26,11 @@ def run():
         for g in words:
             v=N.act(u,g)
             reference=space([("E",j)])*g
-            expected=np.asarray(reference["E"],dtype=object)
+            # The upstream vector_get_item currently returns scaled floats,
+            # despite the older integer-return docstring. Use its exact
+            # expanded CRT integer buffer and original external chart instead.
+            reference.expand()
+            expected=np.asarray(compress_data(reference.data_int),dtype=object)
             require(expected.shape==(DIM,),"native CRT reference external coordinates")
             require(not np.any(v.b) and np.array_equal(v.a*(1<<17),expected*v.d),
                     "actual fixed-point CRT reference discrepancy")
