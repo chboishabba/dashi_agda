@@ -1,0 +1,93 @@
+{
+  "counts": {
+    "source_segments": 3,
+    "source_word_partition": 56,
+    "source_row_length": 3,
+    "source_coordinate": 216,
+    "source_triplet_cover": 1,
+    "H1_index_roundtrip": 216,
+    "H2_shem_reflection": 216,
+    "H2_global_antipode": 216,
+    "H7_54_residual_roundtrip": 216,
+    "H7_54_equivariance": 648,
+    "H7_53_equivariance": 648,
+    "H8_six_faces": 1296,
+    "H8_path_composition": 13824,
+    "H8_payload_recovery": 13824,
+    "H7_fibre_sizes": 1,
+    "H3_field_generator": 1,
+    "H3_signed_action": 27,
+    "H3_sign_equivariance": 27,
+    "H3_field_inverse": 26,
+    "H3_keyshoe_bidi": 13,
+    "H3_unique_axis": 1,
+    "H3_incidence_negative": 1,
+    "H4_shells": 1,
+    "H4_edge_antipodes": 1,
+    "H4_parallel_edges": 1,
+    "H6_marked_reflection": 13,
+    "H6_rotation_not_mark_preserving": 1
+  },
+  "distinctTripletsRaw": 70,
+  "distinctTripletsFinalFold": 69,
+  "firstTriplet": "והו",
+  "lastTriplet": "םום",
+  "shells": [
+    1,
+    6,
+    12,
+    8
+  ],
+  "incidenceLinesPreserved": 0,
+  "incidenceCounterexample": {
+    "line": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "image": [
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        0
+      ]
+    ]
+  },
+  "fiber54": 4,
+  "fiber53": {
+    "zero": 8,
+    "nonzero": 4
+  }
+}
