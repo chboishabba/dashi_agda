@@ -1,0 +1,30 @@
+{
+  "status": "CONDITIONAL_ROBUST_SIGNED_ENDPOINT",
+  "checker_blob": "cd53e2e5fd980f08f1aa01a565401c52556b367d",
+  "donor_blob": "1a3a2df7892833ac4560d462c5d5843222767fff",
+  "execution": "local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0; exact Git blob readback matched; numerical, no CI/kernel",
+  "rows": 128,
+  "feasible_checks": 512,
+  "error_cases": [
+    {
+      "relative": 0,
+      "sign_separated": 32
+    },
+    {
+      "relative": 0.000001,
+      "sign_separated": 32
+    },
+    {
+      "relative": 0.0001,
+      "sign_separated": 32
+    },
+    {
+      "relative": 0.01,
+      "sign_separated": 4
+    }
+  ],
+  "cases_per_error": 32,
+  "survivors_at_1pct": "7.83 Hz center observer; both geometry contrasts, both areas; no six-axis survivors under these particular norm error balls, not equal instrument-noise comparison",
+  "assumptions": "synthetic 1 W trace, original 16-mode shell and SI matched-current relaxation, equal-volume uniform cross-section. Observer operator normalized to norm1; independent assumed error in observer operator, covariance and endpoint matrix. Schur witnesses rechecked numerically, not interval arithmetic or global dual optimum. No raw measured covariance, physical source transfer or regional activation result.",
+  "physical_admission": false
+}
