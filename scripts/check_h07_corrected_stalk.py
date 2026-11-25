@@ -45,7 +45,7 @@ for p,a,b in product(marks,triples,triples):
             counts['directed winding checks']+=1
             if paired:
                 counts['paired winding checks']+=1; counts['paired raw matches']+=raw==expected
-                residuals[(n,tuple(c[i] for i in range(5) if i not in q))]+=1
+                residuals[(n,tuple(r[i] for i in range(5) if i not in q))]+=1
                 for phase4 in range(4):
                     require(interface(corrected,q,phase4)==interface(expected,q,phase4),'five interface fields')
                     require((interface(raw,q,phase4)==interface(expected,q,phase4))==(not any(r)),'wave detects seam discrepancy')
@@ -65,5 +65,5 @@ require(phase_checks==51840,'phase4 checks')
 # Signed balanced radix wave is injective on the 27 q offsets.
 require(len({wave((a,b,0,c,0),q) for a,b,c in triples})==27,'wave injective')
 print('PASS',dict(counts),'five-field checks',phase_checks)
-print('paired correction support',Counter({n:len([x for k,x in residuals if k==n]) for n in F}))
+print('distinct paired corrections by winding',Counter({n:len([x for k,x in residuals if k==n]) for n in F}))
 print('PASS 81 literal offset/winding cases, signed inverse, injective finite wave observer')
