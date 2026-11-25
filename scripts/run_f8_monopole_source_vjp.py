@@ -103,6 +103,5 @@ def run(work,budget):
         contrib=grad[:-1]*delta;result.update(source_total=float(contrib.sum()),fine_pred=float(grad[:-1]@gf),shadow_pred=float(grad[:-1]@(I@gc)),source_cells=[dict(index=int(j),r=j*dr,delta=float(delta[j]),kernel=float(grad[j]),signed=float(contrib[j]),stage_absolute=float(absolute[j]*abs(delta[j]))) for j in np.flatnonzero(delta)],kernel=grad.tolist())
     return result
 
-
 if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('work',type=Path);a.add_argument('--budget',type=float,default=12);a.add_argument('--check',action='store_true');a=a.parse_args();assert 0<a.budget<=75;print(json.dumps(check() if a.check else run(a.work,a.budget)),flush=True)
