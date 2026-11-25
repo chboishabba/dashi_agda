@@ -1,0 +1,233 @@
+{
+  "status": "SOURCE_PACKET_AUDIT_FAIL_CLOSED_NOT_ORIGINAL_PERIODIC_PROOF",
+  "source_head": "c0986769a7eb9e84ec5424c0a73f26850018762a",
+  "method": "Read actual seven compact source receipts and corresponding producer schemas via GitHub connector; exact BigInt comparison on source J30 grid. Not a new interval source integration.",
+  "legs": [
+    {
+      "leg": 0,
+      "compact_receipt": "Artifacts/smith-filsinger/j33_initial_rational_coframe_256slab_20261125.json",
+      "receipt_blob": "c14d91ab14520272337a3c009a8889aa912ae495",
+      "producer": "scripts/check_smith_filsinger_j33_coframe_initial_full_20261125.py",
+      "producer_blob": "137e10b71a25fa855346c5ab3487d34dd38a23f7",
+      "argv": [
+        "--N",
+        "256",
+        "--out",
+        "leg0.json"
+      ],
+      "full_output_fields": {
+        "dx": "full_9x9_source_Dx_independent_event_clock",
+        "state": "full_source_terminal_9D",
+        "start_clock": null,
+        "end_clock": "full_event1_clock_partial_9D"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": null,
+        "end_clock": false
+      },
+      "source_status": "PASS_J33_FULL_ORIGINAL_INITIAL_SOURCE_0_TO_EVENT1_256_SLAB_RATIONAL_COFRAME_CONDITIONAL_NOT_69D",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 1,
+      "compact_receipt": "Artifacts/smith-filsinger/j31_two_track_full_v_on_spark_off_64_slab_receipt_20261124.json",
+      "receipt_blob": "31c1f7291d04e36c4bcf39f7bf4bb3ba275947a3",
+      "producer": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
+      "producer_blob": "d4c8513c3142bb87ed8ebf06a7503409da34bd86",
+      "argv": [
+        "--segment",
+        "1",
+        "--out",
+        "leg1.json"
+      ],
+      "full_output_fields": {
+        "dx": "original_source_DxPhi_interval",
+        "state": "final_state_interval",
+        "start_clock": "original_source_partial_start_clock",
+        "end_clock": "original_source_partial_end_clock"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_SOURCE_J31_ORIGINAL_EVENT1_TO_EVENT2_64_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 2,
+      "compact_receipt": "Artifacts/smith-filsinger/j31_full_spark_off_four_slab_source_20261124.json",
+      "receipt_blob": "0e5237fb549ce7ebf3cb59f56a43703c8cfe929e",
+      "producer": "scripts/check_smith_filsinger_j31_full_spark_off_four_slab_20261124.py",
+      "producer_blob": "f9e8ff2389655e45ca6ca2bc9a2e818167a4f442",
+      "argv": [
+        "--out",
+        "leg2.json"
+      ],
+      "full_output_fields": {
+        "dx": "full_smooth_flow_source_Dx_Phi_9x9_interval",
+        "state": "final_source_state_interval",
+        "start_clock": "full_smooth_flow_source_partial_t0",
+        "end_clock": "full_smooth_flow_source_partial_t1"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_J31_ONE_COMPLETE_ORIGINAL_SOURCE_SPARK_OFF_SMOOTH_MODE_4_SLABS_NOT_PERIODIC",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 3,
+      "compact_receipt": "Artifacts/smith-filsinger/j32_event3_to_event4_signed_taylor_128slab_20261124.json",
+      "receipt_blob": "95535522a3ca40bff3cd29a8dfb3ff0a20d7bca2",
+      "producer": "scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py",
+      "producer_blob": "a9b773a5e716eea21439d5df40657a1c3d0b4512",
+      "argv": [
+        "--k",
+        "3",
+        "--N",
+        "128",
+        "--order",
+        "6",
+        "--out",
+        "leg3.json"
+      ],
+      "full_output_fields": {
+        "dx": "full_9x9_state_derivative_independent_clocks",
+        "state": "terminal_state",
+        "start_clock": "full_9D_partial_start_time",
+        "end_clock": "full_9D_partial_end_time"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_J32_ORIGINAL_SOURCE_EVENT3_SPARK_ON_TO_EVENT4_U_ON_128_SLAB_TAYLOR7_PB6_CONDITIONAL",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 4,
+      "compact_receipt": "Artifacts/smith-filsinger/j31_two_track_full_uv_on_32_slab_receipt_20261124.json",
+      "receipt_blob": "9dbaa786fbbebf094d7966ce9c7bac7f2f5df150",
+      "producer": "scripts/check_smith_filsinger_j31_two_track_full_uv_on_20261124.py",
+      "producer_blob": "d4c8513c3142bb87ed8ebf06a7503409da34bd86",
+      "argv": [
+        "--segment",
+        "4",
+        "--out",
+        "leg4.json"
+      ],
+      "full_output_fields": {
+        "dx": "original_source_DxPhi_interval",
+        "state": "final_state_interval",
+        "start_clock": "original_source_partial_start_clock",
+        "end_clock": "original_source_partial_end_clock"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_SOURCE_J31_ORIGINAL_EVENT4_TO_EVENT5_32_SLAB_CENTRE_RESIDUAL_CONDITIONAL_PHYSICAL_LEG",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 5,
+      "compact_receipt": "Artifacts/smith-filsinger/j32_event5_to_event6_signed_taylor_128slab_20261124.json",
+      "receipt_blob": "d8183d75146c1ced74863d1aedb227a9dadc41ee",
+      "producer": "scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py",
+      "producer_blob": "a9b773a5e716eea21439d5df40657a1c3d0b4512",
+      "argv": [
+        "--k",
+        "5",
+        "--N",
+        "128",
+        "--order",
+        "6",
+        "--out",
+        "leg5.json"
+      ],
+      "full_output_fields": {
+        "dx": "full_9x9_state_derivative_independent_clocks",
+        "state": "terminal_state",
+        "start_clock": "full_9D_partial_start_time",
+        "end_clock": "full_9D_partial_end_time"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_J32_EVENT5_VOFF_TO_EVENT6_UOFF_ORIGINAL_SOURCE_128_PICARD_PB6_TAYLOR7_CONDITIONAL",
+      "full_source_packet_admitted": false
+    },
+    {
+      "leg": 6,
+      "compact_receipt": "Artifacts/smith-filsinger/j32_event6_broad_source_to_exact_tau_128slab_20261124.json",
+      "receipt_blob": "8048b354ec561211561379cf3ae1659d7e244759",
+      "producer": "scripts/check_smith_filsinger_j32_exact_tau_broad_event6_return_20261124.py",
+      "producer_blob": "663ddd37347ea386b41bca68fe1d22e537cd317c",
+      "argv": [
+        "--event6-input",
+        "<exact full output of leg 5>",
+        "--k",
+        "6",
+        "--N",
+        "128",
+        "--order",
+        "6",
+        "--out",
+        "leg6.json"
+      ],
+      "full_output_fields": {
+        "dx": "full_9x9_state_derivative_independent_clocks",
+        "state": "terminal_state",
+        "start_clock": "full_9D_partial_start_time",
+        "end_clock": "full_9D_partial_end_time"
+      },
+      "fields_present_in_compact_receipt": {
+        "dx": false,
+        "state": false,
+        "start_clock": false,
+        "end_clock": false
+      },
+      "source_status": "PASS_J32_EVENT6_SOURCE_BROAD_TO_EXACT_TAU_128_PICARD_PB6_CONDITIONAL_NOT_PERIODIC",
+      "full_source_packet_admitted": false
+    }
+  ],
+  "conditional_legs": 7,
+  "source_packet_admitted": 0,
+  "local_J34_source_rows_previously_paid": 15,
+  "missing_J34_source_rows": 54,
+  "centre_return": {
+    "receipt_blob": "7ddea1ef36e1602e4e113bebd5e5bb351eb31910",
+    "grid_scale": "1000000000000000000000000000000",
+    "max_abs_coordinate_defect_allowed_by_box_numerator": "9020070139120708109281388894",
+    "coordinate_index": 7,
+    "P_norm_box_supremum_lower_bound": "9020070139120708109281388894/2000000000000000000000000000000",
+    "lower_bound_over_target_integer_floor": "45100350",
+    "target": "1/10000000000",
+    "inequality_verified": true,
+    "interpretation": "P>I/4 implies some point of the existing enclosure has norm >= max coordinate defect/2. The enclosure is too wide to certify the required centre residual; this is NOT a lower bound on the actual return defect."
+  },
+  "remaining": [
+    "regenerate original full arrays with byte-pinned dependencies and checkpointing",
+    "separate point-centre integration from full-ball derivatives",
+    "prove uniform signed guard boundary signs and no extra events",
+    "prove same-object moving event state ingress, event six broad source only",
+    "compose signed return and meet J35 budgets; lift fixed point 9D to 69D"
+  ],
+  "original_periodic_orbit": false,
+  "CI": false,
+  "kernel": false
+}
