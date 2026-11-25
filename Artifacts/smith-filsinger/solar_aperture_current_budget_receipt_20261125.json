@@ -1,0 +1,159 @@
+{
+  "status": "CONDITIONAL_L1_L2_AND_COMBINED_CURRENT_BUDGET",
+  "source_head": "6a3d65c350c0738e9cecef158fcf6ee03cf16926",
+  "checker_blobs": [
+    "97d67fa9e4af6f61835f766fbe89994a922c48cc",
+    "a108574f185d3726c9bcb2e8cfe274fc5816ade6"
+  ],
+  "donors": {
+    "finite_aperture": "06d683bd2dfd24d4ad9de0620ef3718001fdbe36",
+    "metric_charge": "1f3ee2625ede999147386b8f94e9078d29c94e65",
+    "layered": "097cc72daff0ccb657972e9316a3f0244fb6591d",
+    "retarded_source_port": "38c78dc82facf0f779277ececcb391db34685291",
+    "reflection_port": "f0f6495275295eeea5401277633a56e8dca7ed3f",
+    "finite_exterior_chain": "efe6ff86293c2e93db16b6dc7b29d65792a1b8d7",
+    "scope": "Pinned finite and metric prefixes executed; other owners inspected. Six-mode shell numerically replayed; OCT369 26 directions generated from original carrier formula, not new exact quadrature test."
+  },
+  "execution": {
+    "local": true,
+    "timeout_each_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "initial_failures": "Prefix split matched nested rows; corrected to newline top-level marker. Log lambda lower bracket -740 caused subnormal division overflow; corrected to -200 and successful rerun. Both committed blobs match locally executed source."
+  },
+  "fixture": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "areas_m2": [
+      1,
+      1000000,
+      10000000000
+    ],
+    "aspect_ratios": [
+      1,
+      1.5,
+      1.618033988749895
+    ],
+    "incident_source_indices": [
+      0,
+      4
+    ],
+    "modal_counts": [
+      6,
+      16
+    ],
+    "current_budgets": [
+      1,
+      1000,
+      1000000,
+      1000000000
+    ],
+    "normalization": "All work and currents normalized; no physical ampere conversion; native off-guard clock unchanged; ideal clamp constrains integrated exterior trace, not conductor pointwise condition."
+  },
+  "active_budget": {
+    "loaded_cases": 288,
+    "optimizations": 1152,
+    "max_energy_residual": 3.700815695562021e-14,
+    "max_dual_gap": 4.683753385137379e-16,
+    "max_reaction_work": 2.046605083501899e-15,
+    "max_clamped_trace": 5.245548047414242e-18,
+    "max_quadrupolar_outgoing_fraction": 0.007242372036924112,
+    "max_clamp_current_norm": 3699255898139.8726,
+    "numerical_ranks": [
+      2,
+      3,
+      4
+    ],
+    "scope": "Budget on active currents only; ideal clamp reaction initially unbounded. Numerical SVD threshold 1e-12; dual gap on retained numerical subspace, not certified interval bound."
+  },
+  "combined_budget": {
+    "fixtures": 144,
+    "budget_cases": 576,
+    "feasible": 250,
+    "positive_terminal_objective": 249,
+    "max_min_constraint_residual": 1.7145158179743188e-10,
+    "max_feasible_clamp_residual": 8.956320659197087e-10,
+    "max_dual_gap": 2.220446049250313e-16,
+    "by_limit": [
+      [
+        1,
+        4,
+        3
+      ],
+      [
+        1000,
+        54,
+        54
+      ],
+      [
+        1000000,
+        90,
+        90
+      ],
+      [
+        1000000000,
+        102,
+        102
+      ]
+    ],
+    "feasible_by_area": [
+      [
+        1,
+        6
+      ],
+      [
+        1000000,
+        96
+      ],
+      [
+        10000000000,
+        148
+      ]
+    ],
+    "scope": "All seven current coordinates included. Ideal algebraic clamp only. Positive maximal terminal work is not proof of realization by passive hardware or native useful load. One feasible case nonpositive."
+  },
+  "selected_square_1m2_7_83_TE_x": {
+    "unclamped_l1": {
+      "useful": 1.2543382873362642e-14,
+      "ideal": 0.015108318854709016,
+      "ideal_current": 1828123833257.8145,
+      "budget_powers": [
+        1.2911729499166376e-7,
+        0.00012882321704474773,
+        0.014869720112962672,
+        0.014870077607827374
+      ]
+    },
+    "unclamped_l1_l2": {
+      "useful": 1.1075845977155762e-14,
+      "ideal": 0.003017284196807823,
+      "ideal_current": 139620720741.20645,
+      "budget_powers": [
+        1.2126362474092387e-7,
+        0.0001199721960334079,
+        0.002969860936101291,
+        0.0029705840841833735
+      ],
+      "quadrupolar_outgoing": 0.005791584590408426
+    },
+    "clamped_l1": {
+      "native_useful": 7.25908974072723e-31,
+      "native_reaction_current": 3699255898139.8726,
+      "minimum_combined_current": 2591335746118.4487,
+      "all_four_combined_budgets_infeasible": true
+    },
+    "clamped_l1_l2": {
+      "native_useful": 3.907207134608439e-30,
+      "native_reaction_current": 167197384786.75574,
+      "minimum_combined_current": 118195444148.61485,
+      "all_four_combined_budgets_infeasible": true
+    },
+    "scope": "Tiny clamped native outputs are near numerical floor; not quantitative physical estimates."
+  },
+  "limits": "Selected normalized sphere with l<=2, no higher angular convergence, local radiating conductor Green tensor, actual current/return/charge calibration, actual measured source, nonlinear guard, full physical Maxwell or active control. Higher outgoing fraction includes sheet scattering even without receiver; not isolated local antenna radiation. No actual source dataset acquired. Classical spherical harmonics, passive port matching, SVD and trust region duality prior art; original native DASHI and OCT369 owners retained; new DASHI specific composition only; user source geometry hypothesis distinct; no new JMD artifact."
+}
