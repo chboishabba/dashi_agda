@@ -28,8 +28,9 @@ module DASHI.Physics.Foundations.TSFVAcousticLocalImpulseThirdDerivativeExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
+open import Relation.Binary.PropositionalEquality using (cong)
 
 data LocalAxis : Set where
   x-axis y-axis z-axis : LocalAxis
@@ -105,3 +106,39 @@ firstNeighborImpulseResponseIsMassIndependent
 -- Source-specific nonpromotion: the chosen local-response graph
 -- and its time derivatives do not inhabit the original physical
 -- TSVF-selected many-body/Born observer or construct a continuum.
+
+
+------------------------------------------------------------------------
+-- AR: the original origin AND one marked neighbour jointly determine
+-- the complete two-parameter selected local impulse family. Neither
+-- a measured physical clock nor spatial calibration is inferred.
+------------------------------------------------------------------------
+open import Data.Product using (_×_; _,_)
+
+sourceImpulseProbePair : ℚ → ℚ → ℚ × ℚ
+sourceImpulseProbePair coupling massSquared =
+  sourceLocalImpulseThirdDerivative coupling massSquared
+    (neighboring-site x-axis plus) ,
+  sourceLocalImpulseThirdDerivative coupling massSquared kicked-site
+
+reopenSourceImpulseProbePair : ℚ × ℚ → ℚ × ℚ
+reopenSourceImpulseProbePair (neighbor , center) =
+  neighbor , (- center - sixNeighborWeights neighbor)
+
+sourceImpulseProbePairReopens :
+  ∀ coupling massSquared →
+  reopenSourceImpulseProbePair (sourceImpulseProbePair coupling massSquared)
+  ≡ (coupling , massSquared)
+sourceImpulseProbePairReopens coupling massSquared
+  rewrite allSixFirstNeighborResponsesReadCoupling coupling massSquared x-axis plus
+        | originalKickedSiteThirdDerivative coupling massSquared =
+  cong (λ m → coupling , m) (Ring.solve-∀ coupling massSquared)
+
+sourceImpulseProbePairRightInverse :
+  (readout : ℚ × ℚ) →
+  let (coupling , massSquared) = reopenSourceImpulseProbePair readout
+  in sourceImpulseProbePair coupling massSquared ≡ readout
+sourceImpulseProbePairRightInverse (neighbor , center)
+  rewrite allSixFirstNeighborResponsesReadCoupling
+    neighbor (- center - sixNeighborWeights neighbor) x-axis plus =
+  cong (λ z → neighbor , z) (Ring.solve-∀ neighbor center)
