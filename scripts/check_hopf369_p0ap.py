@@ -45,6 +45,15 @@ def audit():
         for j in range(i,5):
             D=s.zeros(5); D[i,j]=1; D[j,i]=1
             assert s.trace(Hi*P.T*D*P)==s.trace(P*Hi*P.T*D); count+=1
+            # Inverse KK tangent chart: r=phi^2, fixed embedding.
+            r=phi**2; dr=D[4,4]; dA=(D[:4,4]-conn*dr)/r
+            dg=D[:4,:4]-dr*conn*conn.T-r*(dA*conn.T+conn*dA.T)
+            rebuilt=(dg+dr*conn*conn.T+r*(dA*conn.T+conn*dA.T)).row_join(dr*conn+r*dA).col_join((dr*conn+r*dA).T.row_join(s.Matrix([[dr]])))
+            assert rebuilt==D
+            dh=dg+dr*a*a.T+r*(dA*a.T+a*dA.T)
+            assert dh==P.T*D*P
+            assert -T*s.trace(Hi*dh)/2==-T*s.trace(P*Hi*P.T*D)/2
+    print('PASS inverse KK tangent chart and reduced stress for all 15 ambient directions',flush=True)
     # Gauge compensation: connection shift and graph gradient shift cancel exactly.
     q=s.Matrix(s.symbols('q:4')); assert (conn-q)+(df+q)==a
     print('PASS full brane pullback / chain-rule directions',count,'and gauge compensation',flush=True)
