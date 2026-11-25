@@ -1,0 +1,17 @@
+{
+  "engine": "local Python/SymPy",
+  "irreducible": true,
+  "conics": 13,
+  "nonsingular": 13,
+  "line_conic_intersections": 169,
+  "per_conic": {
+    "external": 3,
+    "tangent": 4,
+    "secant": 6
+  },
+  "retained_quotient_roundtrips": 216,
+  "residual_equivariance": 648,
+  "inverse_equivariance": 648,
+  "native_agda": false,
+  "ci_invoked": false
+}
