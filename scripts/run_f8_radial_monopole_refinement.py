@@ -73,7 +73,7 @@ def run(a):
             arrays=dict(X=X,raw=raw,window=window,shrink=shrink,worst=np.array(worst));sha={n+'_sha':digest(v) for n,v in arrays.items()};tmp=path.with_suffix('.tmp')
             with tmp.open('wb') as f:np.savez(f,identity=ident,k=k,**arrays,**sha);f.flush();os.fsync(f.fileno())
             os.replace(tmp,path)
-            with np.load(path,allow_pickle=False) as z:assert int(z['k'])==k and z['identity'].item()==ident and all(digest(z[n])==sha[n+'_sha'].item() for n in arrays)
+            with np.load(path,allow_pickle=False) as z:assert int(z['k'])==k and z['identity'].item()==ident and all(digest(z[n])==sha[n+'_sha'] for n in arrays)
             if time.monotonic()-start>=a.budget:break
     return dict(dr=dr,dy=dy,nr=nr,ny=ny,initial=initial,cursor=k,end=end,h=h,lambda_upper=lam,safe_dt=safe,physical_t=float(ts[k]),constraint=worst,sha256=digest(X),raw=raw.tolist(),window=window.tolist(),shrink=shrink.tolist(),seconds=time.monotonic()-start)
 
