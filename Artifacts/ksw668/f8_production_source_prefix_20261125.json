@@ -1,0 +1,154 @@
+{
+  "scope": "Production medium/fine enlarged-grid native source-active prefix; not full-clock receiver propagation or production reverse acceptance",
+  "base": "42c4e6c82519f601dc1600f0191f3337bc604304",
+  "ci": "No Actions invocation or rerun; commit messages use [skip ci]",
+  "local": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "numba": "0.65.1",
+    "blas_threads": 1,
+    "numba_threads": 2,
+    "source_recovery": "Connector recovery; direct checkout blocked by DNS. Original F(t) independently reconstructed; unused legacy stage raises.",
+    "blobs": {
+      "weighted4": "982ce42a579907daf314c18d60da7cf0ceb88d0e",
+      "fv_source": "dec4e79e3a4899952a5deceb786324bc0745982c",
+      "signed_forward_prefix": "f93a10fab4a9514670bc70658887f640df31ad05",
+      "prefix_harness": "9b4e89fd0c63aae5594d7245b9891f0c52521771",
+      "sympy_gate": "f2329410bf46ea1ee8550ff4f1fd5f8a5db9bda1",
+      "native_gate": "424cf12b7cf522c50aec473c285224dca0d80c08"
+    }
+  },
+  "clock": {
+    "nt": 4516,
+    "dt": 0.0005999023910881472,
+    "steps_per_run": 110,
+    "elapsed_T": 0.0659892630196962,
+    "pulse": 0.065,
+    "eps": 0.04,
+    "source_active_steps": 109,
+    "source_inactive_steps": 4408,
+    "lookahead_steps": 1
+  },
+  "runs": [
+    {
+      "route": "ledger",
+      "nr": 378,
+      "ny": 337,
+      "dr": 0.008,
+      "dy": 0.012,
+      "initial": 0,
+      "steps": 110,
+      "source_nonzero": [
+        6,
+        6,
+        6
+      ],
+      "constraint_scaled": 5.189551996217157e-16,
+      "max_state": 9639.022527180374,
+      "sha256": "baaafd747a426709fb58d53663a8b2cde11c946f30aafe049d138c1f484cf796",
+      "seconds": 9.897052384999995
+    },
+    {
+      "route": "ledger",
+      "nr": 503,
+      "ny": 449,
+      "dr": 0.006,
+      "dy": 0.009,
+      "initial": 88,
+      "steps": 110,
+      "source_nonzero": [
+        8,
+        8,
+        8
+      ],
+      "constraint_scaled": 5.887737591344951e-16,
+      "max_state": 12357.815716650104,
+      "sha256": "fa7e7119451f1b6f103ba614ee47eb53da4522c5a2d500805522353f8e72a27d",
+      "seconds": 3.801596083999982
+    },
+    {
+      "route": "paired",
+      "nr": 378,
+      "ny": 337,
+      "dr": 0.008,
+      "dy": 0.012,
+      "initial": 96,
+      "steps": 110,
+      "source_nonzero": [
+        6,
+        6,
+        6
+      ],
+      "constraint_scaled": 4.0346485884854e-16,
+      "max_state": 9580.394420387407,
+      "sha256": "b468bbefd2f2f63e88c5a687fb086cd31b1db557fd8d465b57a4e92499e1f84e",
+      "seconds": 2.3543292850000626
+    },
+    {
+      "route": "paired",
+      "nr": 503,
+      "ny": 449,
+      "dr": 0.006,
+      "dy": 0.009,
+      "initial": 56,
+      "steps": 110,
+      "source_nonzero": [
+        8,
+        8,
+        8
+      ],
+      "constraint_scaled": 1.179935769127061e-15,
+      "max_state": 12332.802860220632,
+      "sha256": "f79890aafa7214c7f022dfd0c09a738e30a18b719dae8bf00302697e74c1e1f0",
+      "seconds": 11.139511835000008
+    }
+  ],
+  "source_gate": {
+    "sympy": {
+      "exact_groups": 8,
+      "source_clock_negative_controls": 3
+    },
+    "native": {
+      "checks": 8,
+      "comparison": "Same actual step-110 state, original src vs -src; inactive clock n=110 arrays exactly equal; counterfactual active clock n=50 arrays differ",
+      "rows": [
+        {
+          "route": "ledger",
+          "nr": 378,
+          "ny": 337,
+          "inactive_equal": true,
+          "active_max_difference": 1597.1055331144807
+        },
+        {
+          "route": "paired",
+          "nr": 378,
+          "ny": 337,
+          "inactive_equal": true,
+          "active_max_difference": 1597.092662789842
+        },
+        {
+          "route": "ledger",
+          "nr": 503,
+          "ny": 449,
+          "inactive_equal": true,
+          "active_max_difference": 2971.2914017995126
+        },
+        {
+          "route": "paired",
+          "nr": 503,
+          "ny": 449,
+          "inactive_equal": true,
+          "active_max_difference": 2971.258839843516
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Prefix diagnostic checkpoint uses fresh working directory and lacks production identity authentication; not bitwise uninterrupted-vs-resumed acceptance or a reusable production checkpoint.",
+    "Signed constraint values measured at prefix endpoints, scaled by max of 1 and relevant state/derivative maxima.",
+    "Timing values for last invocation only, not complete total runtime.",
+    "Recovered signed forward prefix, not full original six-channel module; no full checkout or full reverse run.",
+    "No physical causal-null or convergence claim."
+  ]
+}
