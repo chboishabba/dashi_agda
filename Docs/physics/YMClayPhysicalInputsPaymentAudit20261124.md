@@ -1,3 +1,13 @@
+## 25 November 2026 — feee scope repair versus full kernel and physical payment
+
+Verified `master=feee55d0023e773c34d4314aceef34a259e70299` repaired scope/syntax surfaces in eight Agda modules; the attached implementation report records original A2 bridge sanctioned Agda checker PASS, SymPy/finite-TV/unconditional/frontier PASS, but **full E1 source kernel receipt still absent**. Do NOT transfer the A2 checker receipt to E1 or report a complete source/Haar construction. The original SU(N) native E1 code still uses explicit continuous real/trace/measure authorities and does not pay any of P-CONT, P-MATCH or P-SMALL.
+
+The previously failing literature normalization script incorrectly expected `T. Balaban`, DOI `10.1007/BF01215757` for the physical-fluctuation source. The source's bibliography cites **Tadeusz Bałaban, CMP 95 (1984) 17–40, DOI 10.1007/BF01215753** correctly. Fixed the checker to match the authentic citation; this changes only audit metadata. The legacy real/Agda `--safe` trust-boundary audit remains unresolved and must not be conflated with source scope success.
+
+Remaining actual mathematical work: source-inhabit selected trace, positive Haar and clamp with true test algebra; prove good-mass positivity, physically complete original connecting contours; obtain true cutoff- and volume-uniform original Gibbs contour decay, CMP116 normalized same-source good-field comparison and small-field physical-rate inequalities; then same-interacting E1 continuum, same-H dense full-gap D2, nontriviality N1 and group coverage G1. No full Clay endpoint proved. `YangMillsClaySolved=false`, `clayYangMillsPromoted=false`.
+
+---
+
 ## 25 November — source repair implementation receipts (conditional algebra, not physics payment)
 
 **Source-written on `master` through `332f4201711e72da43a3c69a1b5eaf4ef65e035f`:** A2's inconsistent universally selected threshold signatures repaired with fixed ordered `δ_low,δ_high`; original raw trace deficit upper bound corrected to 2 and half-normalized `[0,1]` source function/physical cutoff supplied; finite contour naturality under real gauge-preserving transformations constructed. `YMClayE1OriginalSUNFiniteCylinderLawsExact` now derives the A2 `ContinuousExpectationAlgebra` FROM native original Wilson `fixedCutoffFiniteLaws`, with same-original covariance equality and original plaquette/gauge-equivariant finite contour selection. Current typecheck of NEW commits NOT RUN HERE, only source readback and sampled exact SymPy sanity; earlier 19a Agda 2.9 pass must not be assigned to these modifications.
