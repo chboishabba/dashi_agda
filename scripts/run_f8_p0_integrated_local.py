@@ -23,6 +23,8 @@ SOURCE_PINS={
  "scripts/run_f8_lxix_native_source_matrix.py":"94e6303eab04823ab7f39244d21a32c98a300a07",
 }
 CHECKS={
+ "source-graph-obstruction":"scripts/check_f8_source_graph_obstruction.py",
+ "spectral-source-lift":"scripts/check_f8_spectral_source_lift.py",
  "native-window-ledger":"scripts/check_f8_d4b_native_window.py",
  "signed-weyl-window":"scripts/check_f8_signed_window.py",
  "d34-signed-refinement":"scripts/check_f8_d34_signed_refinement.py",
