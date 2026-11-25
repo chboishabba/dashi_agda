@@ -8,6 +8,7 @@ module DASHI.Wikimedia.ShemSourcePairPredictionObstructionExact where
 -- Source-written, not Agda kernel accepted.
 open import DASHI.Core.Prelude
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Foundations.SSPTritCarrier as S
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as C
 
@@ -54,3 +55,14 @@ refinementMustSeparate observe h same = yodNotHe (h column2 column44 same)
 
 -- Indexing separates the witness but does not supply an independently
 -- predictive operator. A lookup of withheld letters is not prediction.
+
+-- Attach the source witness to the canonical repair constructor.
+sourceCollision : Descent.ConsumerNonDescentWitness visiblePair withheldThird
+sourceCollision =
+  Descent.consumerNonDescentWitness column2 column44 sameVisiblePair yodNotHe
+
+contextRepairMustSeparate : {Context : Set} (context : SourceColumn → Context) →
+  Repair.RefinementRepairs visiblePair context withheldThird →
+  context column2 ≡ context column44 → ⊥
+contextRepairMustSeparate context repaired same =
+  Repair.refinementRepairSeparatesWitness sourceCollision repaired same
