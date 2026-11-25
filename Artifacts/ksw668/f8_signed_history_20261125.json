@@ -1,0 +1,143 @@
+{
+  "predecessor": "ef05487280088bbb98dc6c0eca69e1bb9a1ac67a",
+  "methodological_donor": "User-supplied Hopf369 P0AB report: recursive refinement, signed complement and non-descent; no Maxwell physical model imported.",
+  "blobs": {
+    "signed_history": "d2b68755f0094673383b83ab6d9c23b5cdd6bd10",
+    "ternary_pivots": "0972fe58a72bceadb6f2f6bdf947cfbd901a19ba"
+  },
+  "parameters": {
+    "n": 128,
+    "h_characteristic": 0.0078125,
+    "modes": [
+      1,
+      2
+    ],
+    "causal_pairs_per_mode": 8256,
+    "ordered_pairs_per_mode": 16384
+  },
+  "rows": [
+    {
+      "mode": 1,
+      "seconds": 22.709533082000235,
+      "exact_checks": 8,
+      "diagonal_max": 0.47477676279836156,
+      "old_row_max": 10417.273219088254,
+      "signed_row_max": 10362.060375959509,
+      "old_last": "4652.593241140476153092488458746491013912",
+      "signed_last": "831.2411956318921546819629317426834990020",
+      "direct_last": "931.3313202118269451590611651899713798761",
+      "best_last": "831.2411956318921546819629317426834990020",
+      "finite_inverse_defect": 5.275641035140672e-14,
+      "schur": {
+        "coarse": 43,
+        "complement": 85,
+        "roundtrip": 1.1102230246251565e-16,
+        "recovered_error": 1.5832753912147795e-25,
+        "signed_feedback_norm": 0.5470501506887949,
+        "complement_source_norm": 3.083712304258206e-13,
+        "non_descent_norm": 0.44631070601099787,
+        "finite_residual": 7.754818242684634e-26
+      },
+      "pivots": {
+        "exact_positive_pivots": 43,
+        "min_pivot": "8043324273078810864848433814739257/7788445287802241442795744493830144",
+        "min_pivot_display": 1.0327252713292785,
+        "max_pivot_display": 1.375474984679242,
+        "non_descent_witness": "1931642481602947/18014398509481984",
+        "non_descent_display": 0.10722769792098336
+      },
+      "observer": [
+        {
+          "name": "E4",
+          "reconstruction": [
+            -2.916335937301388e-11,
+            2.4595255023764966e-11
+          ],
+          "old_radius": "88.71892592242740705250540633139303932241",
+          "signed_radius": "19.10136869882638996869207392224892056170",
+          "goal_correction": [
+            -1.0260074523556575e-7,
+            1.0109600812375958e-7
+          ],
+          "goal_remainder": "19.30866753670848446258614606186426375264"
+        },
+        {
+          "name": "SMS",
+          "reconstruction": [
+            -5.836687890358258e-11,
+            5.011319900595995e-11
+          ],
+          "old_radius": "178.8627444431382022296947398728863792930",
+          "signed_radius": "38.51130884780675086404373484588639307084",
+          "goal_correction": [
+            -2.070891856558027e-7,
+            2.0408889261909358e-7
+          ],
+          "goal_remainder": "38.95834130527915612745604034216976677209"
+        }
+      ]
+    },
+    {
+      "mode": 2,
+      "seconds": 22.90453741400006,
+      "exact_checks": 8,
+      "diagonal_max": 0.47525882448476237,
+      "old_row_max": 10376.69747895322,
+      "signed_row_max": 10321.750501626128,
+      "old_last": "9908.684843881114394453761572222119816352",
+      "signed_last": "1743.335088723614139413711567801897426783",
+      "direct_last": "1968.570062315801952452267958541958633960",
+      "best_last": "1743.335088723614139413711567801897426783",
+      "finite_inverse_defect": 3.979065341108706e-14,
+      "schur": {
+        "coarse": 43,
+        "complement": 85,
+        "roundtrip": 1.1102230246251565e-16,
+        "recovered_error": 3.101927297073854e-25,
+        "signed_feedback_norm": 0.5519254053683587,
+        "complement_source_norm": 6.580391597851502e-13,
+        "non_descent_norm": 0.44759291620251135,
+        "finite_residual": 1.2924697071141057e-25
+      },
+      "pivots": {
+        "exact_positive_pivots": 43,
+        "min_pivot": "10724263818621437227736409990514063/10384593717069655257060992658440192",
+        "min_pivot_display": 1.0327090409895816,
+        "max_pivot_display": 1.375199236711135,
+        "non_descent_witness": "8682648086801837/81064793292668928",
+        "non_descent_display": 0.10710750911872183
+      },
+      "observer": [
+        {
+          "name": "E4",
+          "reconstruction": [
+            -5.427379829002595e-11,
+            4.5311392419365105e-11
+          ],
+          "old_radius": "188.1921306686829454370785543048518306146",
+          "signed_radius": "39.94750361391563260459752173265612476258",
+          "goal_correction": [
+            -1.3917298198539637e-7,
+            1.3743685908372064e-7
+          ],
+          "goal_remainder": "40.38677732146326517945979076434910361423"
+        },
+        {
+          "name": "SMS",
+          "reconstruction": [
+            -1.0898949026525925e-10,
+            9.208027006649561e-11
+          ],
+          "old_radius": "379.3797839926413916367328468272966768370",
+          "signed_radius": "80.53143501611663537776510191648510282181",
+          "goal_correction": [
+            -2.813112676027055e-7,
+            2.778587320341186e-7
+          ],
+          "goal_remainder": "81.49383551823904225915828244764083698993"
+        }
+      ]
+    }
+  ],
+  "scope": "Original reduced scalar mode histories, whole-slab conditional enclosure from inherited causal/Green and arithmetic assumptions. Comparator uses same signed residual before preconditioning, differs from predecessor absolute residual. Finite Schur solve numeric; exact rational local pivots reconstructed by same characteristic recurrence on required local rectangles; not native continuum coarsening. Eight unique symbolic checks, 86 exact positive pivots. Goal weighted correction independent and wider than signed direct trace radius, no acceptance promotion. No CI, full TT, omitted tail or physical acceptance. Local recovered script subset, not full checkout."
+}
