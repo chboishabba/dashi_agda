@@ -761,5 +761,8 @@ module _
       (λ config → Variable.periodicSUNGaugeTransform theory n config gamma)
       (λ p config →
         A2.ContinuousClampSource.congruent clampSource
-          (originalSUNRawPlaquetteDeficitGaugeInvariant n p gamma config))
+          (cong
+            (λ raw → Quotient.divide quotient raw (1ℝ +ℝ 1ℝ))
+            (originalSUNRawPlaquetteDeficitGaugeInvariant
+              n p gamma config)))
       contours links
