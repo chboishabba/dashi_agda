@@ -1,0 +1,176 @@
+{
+  "sourceCommit": "d40e791e284305f1a219c57c353ba281a7a51335",
+  "results": [
+    {
+      "book": "exodus",
+      "chapter": 14,
+      "firstVerse": 19,
+      "rowLength": 72,
+      "original": {
+        "additive": 4,
+        "frobenius": 2
+      },
+      "forward": {
+        "additive": 3,
+        "frobenius": 1
+      },
+      "commonInvariant": 1000,
+      "wordMultisetChecks": 3000,
+      "wordMean": {
+        "additive": 2.629,
+        "frobenius": 2.424
+      },
+      "wordAtLeast": {
+        "additive": 271,
+        "frobenius": 697
+      },
+      "letterMean": {
+        "additive": 2.71,
+        "frobenius": 2.382
+      },
+      "letterAtLeast": {
+        "additive": 287,
+        "frobenius": 688
+      }
+    },
+    {
+      "book": "deuteronomy",
+      "chapter": 32,
+      "firstVerse": 6,
+      "rowLength": 51,
+      "original": {
+        "additive": 1,
+        "frobenius": 2
+      },
+      "forward": {
+        "additive": 2,
+        "frobenius": 0
+      },
+      "commonInvariant": 1000,
+      "wordMultisetChecks": 3000,
+      "wordMean": {
+        "additive": 1.88,
+        "frobenius": 1.765
+      },
+      "wordAtLeast": {
+        "additive": 858,
+        "frobenius": 537
+      },
+      "letterMean": {
+        "additive": 1.812,
+        "frobenius": 1.802
+      },
+      "letterAtLeast": {
+        "additive": 844,
+        "frobenius": 545
+      }
+    },
+    {
+      "book": "genesis",
+      "chapter": 36,
+      "firstVerse": 32,
+      "rowLength": 31,
+      "original": {
+        "additive": 3,
+        "frobenius": 2
+      },
+      "forward": {
+        "additive": 5,
+        "frobenius": 1
+      },
+      "commonInvariant": 1000,
+      "wordMultisetChecks": 3000,
+      "wordMean": {
+        "additive": 1.173,
+        "frobenius": 1.085
+      },
+      "wordAtLeast": {
+        "additive": 107,
+        "frobenius": 297
+      },
+      "letterMean": {
+        "additive": 1.219,
+        "frobenius": 1.104
+      },
+      "letterAtLeast": {
+        "additive": 117,
+        "frobenius": 294
+      }
+    },
+    {
+      "book": "exodus",
+      "chapter": 20,
+      "firstVerse": 13,
+      "rowLength": 6,
+      "original": {
+        "additive": 1,
+        "frobenius": 1
+      },
+      "forward": {
+        "additive": 3,
+        "frobenius": 2
+      },
+      "commonInvariant": 1000,
+      "wordMultisetChecks": 3000,
+      "wordMean": {
+        "additive": 0.24,
+        "frobenius": 0.24
+      },
+      "wordAtLeast": {
+        "additive": 240,
+        "frobenius": 240
+      },
+      "letterMean": {
+        "additive": 0.273,
+        "frobenius": 0.222
+      },
+      "letterAtLeast": {
+        "additive": 247,
+        "frobenius": 210
+      }
+    }
+  ],
+  "wholeWordShuffle": {
+    "original": {
+      "blocks": 175,
+      "letters": 15925,
+      "bits": {
+        "trigram": 64310.98696286344,
+        "unigramMix": 61471.9620419574,
+        "positionMix": 61991.03816039913,
+        "geometryMix": 61543.86945951957,
+        "shuffledPeersMix": 61532.65518089037,
+        "rotatedPeersMix": 61539.1230881616
+      },
+      "bitsPerLetter": {
+        "trigram": 4.038366528280279,
+        "unigramMix": 3.860091807972207,
+        "positionMix": 3.8926868546561466,
+        "geometryMix": 3.864607187410962,
+        "shuffledPeersMix": 3.863902994090447,
+        "rotatedPeersMix": 3.864309142113758
+      }
+    },
+    "shuffled": {
+      "blocks": 175,
+      "letters": 15925,
+      "bits": {
+        "trigram": 65900.46222089708,
+        "unigramMix": 62638.543362956196,
+        "positionMix": 63230.990155765176,
+        "geometryMix": 62705.28995838466,
+        "shuffledPeersMix": 62713.70731783541,
+        "rotatedPeersMix": 62721.55500622277
+      },
+      "bitsPerLetter": {
+        "trigram": 4.138176591579095,
+        "unigramMix": 3.9333465220066683,
+        "positionMix": 3.9705488323871383,
+        "geometryMix": 3.937537830981768,
+        "shuffledPeersMix": 3.9380663935846414,
+        "rotatedPeersMix": 3.938559184064224
+      }
+    }
+  },
+  "note": "Written word-slot tokens preserved exactly, not external morphological annotation. Common aligned column permutation preserves column equations by relabelling; it need not preserve horizontal sequence or a fixed erasure mask. Forward weave and independent word/letter shuffle are distinct controls. Exploratory selected windows."
+}
