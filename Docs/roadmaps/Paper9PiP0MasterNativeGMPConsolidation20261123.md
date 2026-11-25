@@ -1507,3 +1507,19 @@ See `Docs/proofs/Paper9ExecutableResidualSymmetricTauJet20261125.md` (7b33bf0697
 ## 25 November — prior Machin / Taylor / infinite-j source-owner recut
 
 See `Docs/proofs/Paper9OriginalMachinTaylorInfiniteJOwnerAudit20261125.md` (1035156abd1e507e4edb52fb19ce63802d6e3847). Do not reconstruct existing analytic machinery. Original Bishop Machin arctan interlacing/π rational windows and Lean faithful eval_machinPi_eq_real_pi, Bishop exponential ratio-half/series and faithful eval_exp_eq_real_exp, original E4/E6 degree-4/6 majorants and original scalar seriesTail/actualJSeries already exist. The older literal Agda CM half-integer checker explicitly leaves actual analytic enclosure open. New Lean `Paper9CMOriginalMachinWindow` (7eb0d74) uses original 90/91, 30/31 prefixes, pinned alternating sum bounds, exact source evaluator and original 128-bit pi/sqrt endpoints. Independent exact Fraction floor/ceil and integer-square checks PASS; closed Lean piRoundOK/sqrtRoundOK still unpaid. `Paper9UniversalMonicSlice` (60223aa, 24e775b) constructs generic slices from original normalized unit pivots and consumes sliceSectorConsumer; `Paper9SeparatedCusp` (4d5c3fe) attaches existing q-unit and exact phase asymptotics, proves intended eventualChartSeparation, separatedImageInfinite and actualSymmetry. No prior actual separated-image theorem located; infinite q-series is not itself infinite image. `Paper9OriginalCMChartWeld` (a780e72, 0cd8bf1) instantiates existing Taylor tail at actual centered j, uses exact rational original Mobius remainder, actual branchVanish and correctionFromTransverse into existing period scalar. `Paper9ActualCMRoot` (3569b6d) now consumes existing cmJReal rather than duplicate proof. Local SymPy toy 7 triangular rows, 820 primitive phase differences and exact Mobius residual PASS. All new Lean source remains UNCOMPILED, no kernel claim. Remaining A4 existing exp/Fourier bounds instantiated at original 180-term dyadic interval and actual quotient binding; A5c actual mixed cubic extraction and literal shifted coefficient reflection; A7 existing positive period consumer; A3c actual Lean decision checks and F1/F5 native acceptance separately. No new analytic foundations, no CI, no new production GMP or full literal original checker rerun.
+
+
+## 25 November — A5 reciprocal Möbius disk max-cut
+
+See [reciprocal disk proof and arithmetic receipts](../proofs/Paper9ReciprocalMobiusDiskPeriod20261125.md).
+Reuse the existing Hecke matrix and CM fixed point, not the engineering Smith observer.
+Linearize the literal forward/inverse degree-41 charts in the original CM disk;
+factor the actual product by the symmetric quadratic
+w²+v²+(81/41)wv. The residual's first symmetric differential replaces the
+mixed cubic extraction. The scalar period consumer is source-written in
+Lean Integration/Paper9MobiusDiskPeriod.lean (0e3271e3fbca831b8dae77acfd1bdd153589c178).
+Remaining: chart 0 inverse binding, divided-difference first-order analytic
+weld, four literal coefficient equations; then consume actualCMWeightedPeriod.
+Exact original coefficient packet shift and independent 128/160/256-bit
+dyadic algorithm replay passed; A4 analytic interval reflection remains unpaid.
+No kernel acceptance, native same-real proof, or performance improvement claimed.
