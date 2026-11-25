@@ -13,7 +13,8 @@ import argparse, hashlib, json
 from pathlib import Path
 import numpy as np
 from monster3b_actual_projective_sym2_intertwiner import inverse
-from monster3b_singer_seed_projector import recipe
+from monster3b_single_residual_frame import source_frame
+from monster3b_lindsey_actual_mod31_join import source_matrices, dual
 
 P=31
 H_ORDER=5380145971200
@@ -85,11 +86,23 @@ def run(a):
                 X=B@inverse(F[j*n:(j+1)*n,j*n:(j+1)*n])%P
                 seed["basis_coordinates"][str(n)]=X.tolist()
         seeds[label]=seed
-    compact=recipe(read(a.source),phase["Q7_central_z_power"])
-    for n,r in compact.items():
-        recorded=canonical.get("source_C13_orbits",{}).get(n,{})
+    T=source_matrices(read(a.source),phase["Q7_central_z_power"])
+    U={g:dual(T[g],g=="C") for g in T}
+    compact={}
+    for n,src in ((12,T),(78,U)):
+        r=source_frame({g:src[g][:n,:n] for g in ("D","E")})
+        recorded=canonical.get("source_C13_orbits",{}).get(str(n),{})
         if recorded:
-            require(r["word_basis"]==recorded["words"],"cyclic source basis receipt mismatch")
+            require(r["words"]==recorded["words"],"cyclic source basis receipt mismatch")
+        compact[str(n)]={"word_basis":r["words"],"selected_residual_index":r["index"],
+            "source_seed":"e0","exact_recipe":r["exact_recipe"],
+            "mod31_certificate":r,
+            "exact_projector":"P_L=p(R_L)/p(0), with p=det(tI-R_A)/t over Q(zeta); do not lift modular polynomial coefficients",
+            "exact_dual_recovery":"U_i=P_L sum_j (H^-1)_ij L(w_j)^-1; H is computed on the exact source, not lifted mod31",
+            "positive_seed":"P_L P_sector P_s P_B lift(ambient_rows)^T lift(basis_coordinates[:,0])",
+            "positive_F":"columns L(w_i)y times B^-1",
+            "negative_F":"L(C)_(plus->minus) F_plus A(C)_(plus->minus)^-1",
+            "vacuum_sector":"(I-L(C^2))/2" if n==12 else "(I+L(C^2))/2"}
     return {"status":"EXACT_CHAR0_CYCLIC_EXPRESSION_FROM_ACTUAL_MOD31",
         "numeric_characteristic_zero_matrices_evaluated":False,
         "conditional_on_authenticated_Conway_lattice_and_full_cover":True,
@@ -111,9 +124,9 @@ def run(a):
         "seed_expression":"X_s = P_zeta^s P_B (lift(ambient_rows_s)^T lift(basis_coordinates_s))",
         "target_operator":"L(g) from original Conway rho(g) by the exact tensor evaluation and canonical 729 Weil inverse; preserve signed phase",
         "compact_seed_projectors":compact,
-        "intertwiner_expression":"Use compact_seed_projectors: apply the sector and good-prime polynomial projector to the lifted positive seed, reconstruct all source orbit columns and derive the negative phase by C; no group enumeration.",
+        "intertwiner_expression":"Use compact_seed_projectors: apply the sector and single-residual exact polynomial projector to the lifted positive seed, reconstruct all source orbit columns and derive the negative phase by C; no group enumeration.",
         "reynolds_existence_expression":"F = (1/|H|) sum_(g in H) L(g) X A(g)^(-1), separately for signed 24 and 156",
-        "compact_proof":"The actual modular isomorphism and integral hypotheses imply the characteristic-zero isomorphism by Reynolds. The source cyclic basis is invertible at the marked prime. R_hi kills e0 in the source; S_A and S_A^2 have rank n-1 modulo 31, hence also in char0, and p(0) is a local unit. Thus p(S_L)/p(0) projects onto the transported seed line. Sector projection and the polynomial preserve the certified modular seed; cyclic reconstruction and outer transport preserve the full certified modular intertwiner. No dense characteristic-zero evaluations are claimed.",
+        "compact_proof":"The actual modular isomorphism and integral hypotheses imply the characteristic-zero isomorphism by Reynolds. The source cyclic basis is invertible at the marked prime. The selected R_A kills e0; R_A and R_A^2 have rank n-1 modulo 31, hence also in char0, and p(0) is a local unit. Thus p(R_L)/p(0) projects onto the transported seed line. The source dual orbit pairing is invertible at 31 and in characteristic zero; its exact inverse supplies recovery without a Hermitian Gram calculation. Sector projection and the polynomial preserve the certified modular seed; cyclic reconstruction and outer transport preserve the full certified modular intertwiner. No dense characteristic-zero evaluations are claimed.",
         "proof":"Reduction of X is the checked inverse modular transport. Every summand reduces to X since X intertwines on the generators and therefore H. |H| is a unit. F reduces to the invertible modular transport, so F is an actual characteristic-zero isomorphism; no entrywise rational lift of MMV operators is asserted."}
 def main():
     p=argparse.ArgumentParser(description=__doc__)
