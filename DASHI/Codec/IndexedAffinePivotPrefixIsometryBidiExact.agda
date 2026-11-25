@@ -96,44 +96,44 @@ prefixForward zero x y eq = refl
 prefixForward (suc (zero))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq)) = refl
+  rewrite slopeInjective {s} {s′} (headEqual (eq)) = refl
 
 prefixForward (suc (suc (zero)))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq))) = refl
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq))) = refl
 
 prefixForward (suc (suc (suc (zero))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq)))) = refl
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq)))) = refl
 
 prefixForward (suc (suc (suc (suc (zero)))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq)))) = refl
 
 prefixForward (suc (suc (suc (suc (suc (zero))))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))) = refl
 
 prefixForward (suc (suc (suc (suc (suc (suc (zero)))))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))) = refl
@@ -141,9 +141,9 @@ prefixForward (suc (suc (suc (suc (suc (suc (zero)))))))
 prefixForward (suc (suc (suc (suc (suc (suc (suc (zero))))))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
@@ -152,9 +152,9 @@ prefixForward (suc (suc (suc (suc (suc (suc (suc (zero))))))))
 prefixForward (suc (suc (suc (suc (suc (suc (suc (suc (zero)))))))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
@@ -164,9 +164,9 @@ prefixForward (suc (suc (suc (suc (suc (suc (suc (suc (zero)))))))))
 prefixForward (suc (suc (suc (suc (suc (suc (suc (suc (suc (k))))))))))
   (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
   (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
-  rewrite slopeInjective (headEqual (eq))
-        | slopeInjective (headEqual (tailEqual (eq)))
-        | slopeInjective (headEqual (tailEqual (tailEqual (eq))))
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (eq))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
         | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
