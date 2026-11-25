@@ -1,0 +1,105 @@
+{
+  "status": "CONDITIONAL_ORIGINAL_FINITE_METRIC_CHARGE_WELD",
+  "source_head": "5475d76b6ec8aae0f5e4e691514639e959c01e0b",
+  "checker_blob": "1f3ee2625ede999147386b8f94e9078d29c94e65",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "CI": false,
+    "kernel": false,
+    "cycles": 6,
+    "steps_per_cycle": 16,
+    "max_step_energy_error": 6.591949208711867e-17,
+    "max_charge_error": 4.3921030007387785e-16,
+    "max_return_error": 4.163336342344337e-17
+  },
+  "donors": {
+    "XCIII_incidence": "588f50aa265c5e998939693268a4e13afc921164",
+    "XCIV_charge": "a35985a7b94e2cf28f98d1237bc864fba02288c0",
+    "XCV_native": "e29d3f093c7562b6605e2c19db5578b0c47f8382",
+    "full_vector": "1661ea45cbeacc638601935ca489c4d75e197f24",
+    "open_boundary": "aa89dc644b37849c3b38128a63d9822f5380f299",
+    "hopf_head": "582368bb814e097220ef39bf357d39739d7a87cc",
+    "hopf_roadmap": "b68b85b00d626632334fcb5a8f6b6412b6667930",
+    "scope": "Source matrices transcribed, not donor executable imports. Attached P0U and live P0V guide metric and same-field endpoint; no physical metric solution imported."
+  },
+  "dc": {
+    "rho_zero_effort": "(0,-px,-py,0,px,py)",
+    "active_charge_rank": 4,
+    "recovery": "d=(Ga Ga^T)^-1 Ga rho on admitted image",
+    "neutral_clamped_static_requires_P_zero": true,
+    "scope": "Original active inverse Hodge N0 and original clamped displacement/effort. Not a claim about all cavity geometries.",
+    "unclamped_comparison": [
+      "-276*px/599 - 12*py/599",
+      "-12*px/599 - 287*py/599",
+      "230*px/599 + 10*py/599",
+      "-240*px/599 + 250*py/599",
+      "-23*px/599 - py/599",
+      "24*px/599 - 25*py/599",
+      "-23*px/599 - py/599"
+    ],
+    "unclamped_scope": "Illustrative positive diagonal completion on inactive edges; not original apparatus or calibrated electrostatics."
+  },
+  "fixture": {
+    "period": 0.4,
+    "dt": 0.025,
+    "source_incident": 0.1,
+    "beta": 10,
+    "source_Y": [
+      0.1,
+      1000
+    ],
+    "shear": [
+      0,
+      0.1,
+      0.25
+    ],
+    "scope": "Original off-guard linear 9-state circuit and 10-state field in flux coordinates; prescribed finite SPD inverse Hodge congruence, not a spatial metric derived from Hopf."
+  },
+  "source_on_rows": [
+    {
+      "shear": 0,
+      "incident": 0.1,
+      "reflected": 0.09976019634190336,
+      "signed_metric_work": 0,
+      "useful": 0.0000036374856477035215,
+      "field_heat": 0.00023604608905445257,
+      "circuit_heat": 1.2008339441783564e-7,
+      "interface": 0.000003757569042120245,
+      "positive_metric_work": 0,
+      "net_after_signed_metric": 0.0000036374856477035215,
+      "net_without_recovery": 0.0000036374856477035215
+    },
+    {
+      "shear": 0.1,
+      "incident": 0.1,
+      "reflected": 0.09975858894660866,
+      "signed_metric_work": 8.084392451969114e-7,
+      "useful": 0.0000036374859083491186,
+      "field_heat": 0.00023846192301961057,
+      "circuit_heat": 1.2008370852420993e-7,
+      "interface": 0.0000037575696168729277,
+      "positive_metric_work": 0.00001511052173347549,
+      "net_after_signed_metric": 0.0000028290466631522075,
+      "net_without_recovery": -0.00001147303582512637
+    },
+    {
+      "shear": 0.25,
+      "incident": 0.1,
+      "reflected": 0.09987447912983477,
+      "signed_metric_work": 0.00012839165254385125,
+      "useful": 0.000003637487646023052,
+      "field_heat": 0.0002501549468133322,
+      "circuit_heat": 1.200882496639918e-7,
+      "interface": 0.0000037575758956862535,
+      "positive_metric_work": 0.00016819519575018976,
+      "net_after_signed_metric": -0.0001247541648978282,
+      "net_without_recovery": -0.0001645577081041667
+    }
+  ],
+  "source_off_rows": "All three exactly zero in computed periodic solution; no parametric stability certificate.",
+  "limits": "Exact symbolic charge and two-time quadratic identity, numerical periodic midpoint closure only. Off-guard branch not guard-certified, no mesh convergence or physical Hodge realization, no physical metric, actual source or same-original terminal admission. Metric shear work charged as external control, not an independent natural gravitational energy channel. No physical extraction, no CI/kernel. Original classical Maxwell/Hodge/charge and discrete product rule prior art; original XCIII-XCV and Hopf owners retained; DASHI specific finite composition only; no new JMD input."
+}
