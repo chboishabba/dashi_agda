@@ -97,7 +97,7 @@ observe k@(frame p v q n ctx) x with findMark (directionOf p x) v | findMark (di
   observation x k (just (payload
     (H.raw v′ (offsetOf p x) n)
     (H.correction (anchorOf p x) v′ n)
-    (H.Shared.normalized (H.restrict {q = q′} H.sameDirection
+    (H.Shared.normalized (H.restrict {p = anchorOf p x} {v = v′} {q = q′} H.sameDirection
       (H.local (H.raw v′ (offsetOf p x) n)
         (H.correction (anchorOf p x) v′ n) n ctx)))))
 ... | _ | _ = observation x k nothing
