@@ -1,0 +1,194 @@
+{
+  "modelCosts": {
+    "trainingLetters": 19971,
+    "countWidth": 15,
+    "headerAssumption": "shared alphabet, fixed algorithm and dimensions; 3-bit model selector; dense fixed-width count tables; dictionary count + 4-bit length + 5-bit glyphs + count; training not transmitted",
+    "unigram": 408,
+    "trigram": 306588,
+    "geoMix": 470613,
+    "jointSoft": 470615,
+    "wordTableBits": 73274
+  },
+  "results": [
+    {
+      "name": "genesis",
+      "result": {
+        "blocks": 338,
+        "letters": 30758,
+        "acc": {
+          "trigram": {
+            "bits": 118535.51466330599,
+            "hits": 7668,
+            "bitsPerLetter": 3.853810867524091,
+            "accuracy": 0.24930099486312504,
+            "withModelBits": 425123.514663306
+          },
+          "geoMix": {
+            "bits": 114636.83074205226,
+            "hits": 7609,
+            "bitsPerLetter": 3.7270573750585947,
+            "accuracy": 0.24738279472007282,
+            "withModelBits": 585249.8307420523
+          },
+          "jointSoft": {
+            "bits": 116454.06689553334,
+            "hits": 7461,
+            "bitsPerLetter": 3.7861391148817654,
+            "accuracy": 0.24257103842902658,
+            "withModelBits": 587069.0668955334
+          },
+          "unigram": {
+            "bits": 130318.20796708713,
+            "hits": 3556,
+            "bitsPerLetter": 4.236888223131775,
+            "accuracy": 0.11561219845243514,
+            "withModelBits": 130726.20796708713
+          }
+        },
+        "hardImpossibleBlocks": 338,
+        "parityClosures": 18252,
+        "parityCorrect": 676,
+        "hardCount": 338,
+        "mapHits": 2372,
+        "hardHits": 2180,
+        "meanObjectiveDecrease": 75.19935518659234,
+        "meanLexicalDecrease": 25.842349913737348
+      }
+    },
+    {
+      "name": "leviticus",
+      "result": {
+        "blocks": 194,
+        "letters": 17654,
+        "acc": {
+          "trigram": {
+            "bits": 72549.5921340816,
+            "hits": 3811,
+            "bitsPerLetter": 4.109527140256123,
+            "accuracy": 0.21587175710887052,
+            "withModelBits": 379137.5921340816
+          },
+          "geoMix": {
+            "bits": 69196.31737043196,
+            "hits": 3781,
+            "bitsPerLetter": 3.9195829483647877,
+            "accuracy": 0.2141724255126317,
+            "withModelBits": 539809.317370432
+          },
+          "jointSoft": {
+            "bits": 70116.92874341382,
+            "hits": 3716,
+            "bitsPerLetter": 3.9717304148302834,
+            "accuracy": 0.2104905403874476,
+            "withModelBits": 540731.9287434139
+          },
+          "unigram": {
+            "bits": 75600.87265176859,
+            "hits": 1547,
+            "bitsPerLetter": 4.282365053345904,
+            "accuracy": 0.08762886597938144,
+            "withModelBits": 76008.87265176859
+          }
+        },
+        "hardImpossibleBlocks": 194,
+        "parityClosures": 10476,
+        "parityCorrect": 397,
+        "hardCount": 194,
+        "mapHits": 1232,
+        "hardHits": 1196,
+        "meanObjectiveDecrease": 77.00314605723503,
+        "meanLexicalDecrease": 26.49635696120967
+      }
+    },
+    {
+      "name": "numbers",
+      "result": {
+        "blocks": 279,
+        "letters": 25389,
+        "acc": {
+          "trigram": {
+            "bits": 100342.37633146462,
+            "hits": 6124,
+            "bitsPerLetter": 3.9521988393187844,
+            "accuracy": 0.24120682185198314,
+            "withModelBits": 406930.3763314646
+          },
+          "geoMix": {
+            "bits": 96615.66220717714,
+            "hits": 6132,
+            "bitsPerLetter": 3.805414242671123,
+            "accuracy": 0.24152191894127378,
+            "withModelBits": 567228.6622071771
+          },
+          "jointSoft": {
+            "bits": 98045.58893533153,
+            "hits": 6022,
+            "bitsPerLetter": 3.8617349614136645,
+            "accuracy": 0.2371893339635275,
+            "withModelBits": 568660.5889353316
+          },
+          "unigram": {
+            "bits": 108879.66646460925,
+            "hits": 2485,
+            "bitsPerLetter": 4.288458248241729,
+            "accuracy": 0.09787703336090432,
+            "withModelBits": 109287.66646460925
+          }
+        },
+        "hardImpossibleBlocks": 279,
+        "parityClosures": 15066,
+        "parityCorrect": 543,
+        "hardCount": 279,
+        "mapHits": 1787,
+        "hardHits": 1743,
+        "meanObjectiveDecrease": 76.96992571744772,
+        "meanLexicalDecrease": 26.205450478209507
+      }
+    },
+    {
+      "name": "deuteronomy",
+      "result": {
+        "blocks": 238,
+        "letters": 21658,
+        "acc": {
+          "trigram": {
+            "bits": 84363.57648524217,
+            "hits": 5621,
+            "bitsPerLetter": 3.895261634741997,
+            "accuracy": 0.25953458306399485,
+            "withModelBits": 390951.57648524217
+          },
+          "geoMix": {
+            "bits": 81331.24624303065,
+            "hits": 5612,
+            "bitsPerLetter": 3.7552519273723632,
+            "accuracy": 0.2591190322282759,
+            "withModelBits": 551944.2462430306
+          },
+          "jointSoft": {
+            "bits": 82572.41282561084,
+            "hits": 5484,
+            "bitsPerLetter": 3.8125594618898715,
+            "accuracy": 0.2532089758980515,
+            "withModelBits": 553187.4128256108
+          },
+          "unigram": {
+            "bits": 91870.35195712824,
+            "hits": 2227,
+            "bitsPerLetter": 4.241866837063821,
+            "accuracy": 0.10282574568288853,
+            "withModelBits": 92278.35195712824
+          }
+        },
+        "hardImpossibleBlocks": 238,
+        "parityClosures": 12852,
+        "parityCorrect": 450,
+        "hardCount": 238,
+        "mapHits": 1629,
+        "hardHits": 1454,
+        "meanObjectiveDecrease": 76.53316528018262,
+        "meanLexicalDecrease": 27.32468737480045
+      }
+    }
+  ]
+}
