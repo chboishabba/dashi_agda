@@ -11,7 +11,8 @@ def audit():
     even=dim-odd
     assert (dim,even,odd)==(98280,43608,54672)
     # Full gravity vs unorbifolded lattice V2: natural inversion mismatch.
-    assert (300+2*even,2*odd)==(87516,109344)
+    assert (300+2*even,24+2*odd)==(87516,109368)
+    assert 87516-109368==-21852 and 98580-98304==276
     assert (300+dim,24+dim)==(98580,98304)
     # Natural parity TIMES flavour exchange. Both copies retained, even/odd
     # each get one full half-carrier (orthogonal BIDI via symmetric/antisymmetric).
