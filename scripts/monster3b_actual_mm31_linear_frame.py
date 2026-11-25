@@ -68,6 +68,8 @@ class ActualFrame31:
             A[i]=A[i]*int(A[i,i])%3
             for j in range(i+1,6): A[j]=(A[j]-A[j,i]*A[i])%3
         self.V,self.C,self.row_span=V,C,row_span_coefficients
+        self.D=MM(c["canonical_D_word"])
+        self.literal_cover=c
         self.F=WeightFrame(lambda v,g:v*g,lambda v,w:v+w,lambda a,v:int(a)*v,
                            GF(P)(5),GF(P).one,z,T,B)
         vp,_=reconstruct(rows,piv,probes,5,V,z,B)
@@ -132,10 +134,89 @@ class ActualFrame31:
                 if np.any(c):v=v+self.F.translate(self.vector(c,s),x)
         return v
 
+    def attach_ordinary(self,model,source):
+        """Build ordinary charts from the SAME replayed vacuum, not another packet."""
+        from monster3b_actual_mmv31_hom_projector import nullspace31, coordinates_in_columns
+        from monster3b_actual_projective_sym2_intertwiner import inverse
+        from monster3b_singer_cyclic_hom import direct_signed_compare
+        from monster3b_lindsey_actual_mod31_join import source_matrices, dual, outer, bd
+        m=json.loads(model.read_text()); data=json.loads(source.read_text())
+        require(m.get("status")=="CANONICAL_MODEL_SIGNED_SECTION" and
+                m.get("source_chart")=="literal corrected MM quotient","canonical literal model required")
+        require(all(m.get(k)==self.literal_cover.get(k) and m.get(k) for k in
+                    ("canonical_C_word","canonical_D_word")) and
+                m.get("original_E_source_blob_sha")==SOURCE,"canonical model source identity")
+        require(len(m.get("quotient_relators_mod31",{}))==10 and
+                all(m["quotient_relators_mod31"].values()),"canonical quotient relators")
+        require(m.get("central_cover_relators")==self.literal_cover.get("central_cover_relators"),
+                "canonical model cover mismatch")
+        I=np.eye(90,dtype=np.int64)
+        eig={n:{s:nullspace31((self.J[s]+(1 if n==12 else -1)*I)%P)
+                for s in (1,2)} for n in (12,78)}
+        words={"C":self.C,"D":self.D,"E":self.C*self.D*self.C**-1}
+        blocks={n:{} for n in eig}
+        traces={}
+        for g,w in words.items():
+            full={}
+            for s in (1,2):
+                t=3-s if g=="C" else s
+                rec=m["generators"][f"{g}:{t if g=='C' else s}"]
+                k=int(rec["normalized_vacuum_mod31"])
+                require(rec.get("zero_affine_vacuum_unit_verified") is True and k%P!=0,"invalid canonical vacuum coefficient")
+                full[s]=np.column_stack([self.coefficients(self.F.hom(v,s,t,w,GF(P)(k)),t)
+                                          for v in self.basis[s]])
+            for n in eig:
+                a={s:coordinates_in_columns(eig[n][3-s if g=="C" else s],full[s]@eig[n][s]%P)
+                   for s in (1,2)}
+                blocks[n][g]=outer(a[1],a[2]) if g=="C" else bd(a[1],a[2])
+        q,F12,F78,_,receipt=direct_signed_compare(blocks[12],blocks[78],data)
+        literal=self.literal_cover["central_cover_relators"].get("ATLAS_Q7",{}).get("central_z_power")
+        require(literal is None or literal==q,"literal D phase mismatch")
+        T=source_matrices(data,q);U={g:dual(T[g],g=="C") for g in T}
+        self.ordinary={}
+        for s in (1,2):
+            i=s-1
+            B=np.column_stack([eig[12][s],eig[78][s]]).astype(np.int64)
+            F=bd(F12[i*12:(i+1)*12,i*12:(i+1)*12],
+                 F78[i*78:(i+1)*78,i*78:(i+1)*78])
+            A=F@inverse(B)%P;Ai=B@inverse(F)%P
+            require(np.array_equal(A@Ai%P,I) and np.array_equal(Ai@A%P,I),"ordinary vacuum roundtrip")
+            self.ordinary[s]=(A,Ai)
+            for n,src in ((12,T),(78,U)):
+                for g in ("D","E"):
+                    a=int(np.trace(blocks[n][g][i*n:(i+1)*n,i*n:(i+1)*n]))%P
+                    b=int(np.trace(src[g][i*n:(i+1)*n,i*n:(i+1)*n]))%P
+                    require(a==b,"actual source trace mismatch")
+                    traces[f"{s}:{n}:{g}"]=a
+        return {"model_sha256":sha(model),"ordinary_source_sha256":sha(source),
+                "D_phase":q,"source_orbits":receipt,"same_action_generator_traces_mod31":traces}
+
+    def recover_ordinary(self,v):
+        zero=self.F.phase(v,0);parts={}
+        for s in (1,2):
+            A,_=self.ordinary[s]
+            a=np.stack([self.coefficients(self.F.recover_weight(v,s,x),s) for x in self.F.points])
+            u=a@A.T%P
+            parts[s]=(u[:,:12],u[:,12:])
+        return zero,parts
+
+    def evaluate_ordinary(self,zero,parts):
+        require(zero==self.F.phase(zero,0) and set(parts)=={1,2},"invalid complete signed coordinates")
+        v=zero
+        for s in (1,2):
+            a,b=(np.asarray(x,dtype=np.int64)%P for x in parts[s])
+            require(a.shape==(729,12) and b.shape==(729,78),"ordinary signed weight shape")
+            _,Ai=self.ordinary[s]
+            for x,c in zip(self.F.points,np.column_stack((a,b))@Ai.T%P):
+                if np.any(c):v=v+self.F.translate(self.vector(c,s),x)
+        return v
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ("manifest","cover","plus","out"):p.add_argument("--"+name,type=Path,required=True)
     p.add_argument("--probe",type=int,default=17)
+    p.add_argument("--model",type=Path,help="actual canonical Weil receipt; enable compact ordinary coordinates")
+    p.add_argument("--source",type=Path,default=Path(__file__).resolve().parents[1]/"Docs/support/reference/Monster3BLindseyOrdinaryCD20261124.json")
     a=p.parse_args()
     result={"status":"BLOCKED","actual_characteristic_zero":False}
     try:
@@ -143,8 +224,11 @@ def main():
         require(0<=a.probe<196884,"invalid original Conway probe")
         v=F.V("E",a.probe)+2*F.V("E",(a.probe+7919)%196884)
         # The probe is a genuine arbitrary original ambient linear combination.
-        zero,parts=F.recover(v)
-        require(F.evaluate(zero,parts)==v,"actual forward/reverse discrepancy")
+        ordinary=F.attach_ordinary(a.model,a.source) if a.model else None
+        zero,parts=F.recover_ordinary(v) if ordinary else F.recover(v)
+        back=F.evaluate_ordinary(zero,parts) if ordinary else F.evaluate(zero,parts)
+        require(back==v,"actual forward/reverse discrepancy")
+        if ordinary:result.update(ordinary_source_attachment=ordinary,ordinary_coordinate_shapes=[[729,12],[729,78]])
         result.update(status="ACTUAL_MM31_LINEAR_FRAME_ROUNDTRIP",**F.provenance,
                       probe=a.probe,phase_weight_counts=[729,729],
                       actual_constituent_ranks=[12,78],centre_trivial_retained=True)
