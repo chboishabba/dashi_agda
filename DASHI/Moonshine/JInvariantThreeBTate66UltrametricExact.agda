@@ -7,7 +7,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat using (_∸_)
 open import Data.Vec using ([]; _∷_)
-open import Data.Integer as Z using (ℤ; +_; -_; _-_; ∣_∣)
+import Data.Integer as Z
+open Z using (ℤ; +_; -_; ∣_∣)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver
 import DASHI.Arithmetic.VpDepth as V
