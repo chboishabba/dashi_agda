@@ -1,0 +1,124 @@
+{
+  "status": "CONDITIONAL_RECIPROCAL_MULTIRATE",
+  "source_head": "b2bdb26ba6af12f048f6b61a966e0da9bbc708c9",
+  "checker_blob": "94e13729392c514657027359f43befc454a6fef0",
+  "donor_blob": "260ac395c6e65cfdf65c880d7a913fe979e39032",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "sympy": "1.14.0",
+    "scipy": "1.17.0",
+    "new_symbolic_identities": 2,
+    "grid_configurations": 12,
+    "counterworld_entries": 48,
+    "unique_counterworld_trajectories": 27,
+    "unique_static_bias_trajectories": 12,
+    "direct_clock_trajectories": 2,
+    "short_averaged_comparisons": 2,
+    "max_grid_mean_work_residual": 3.1061972892638175e-12,
+    "max_active_storage_rate": 0.00001745138279386042,
+    "source_off_B_max_load": 1.4872289445755172e-30
+  },
+  "fixture": {
+    "slow_peak_current": [
+      0.5,
+      1
+    ],
+    "fast_unloaded_amplitude": [
+      0.5,
+      1
+    ],
+    "ratio_quality": [
+      [
+        20,
+        100
+      ],
+      [
+        996.1685823754789,
+        100
+      ],
+      [
+        996.1685823754789,
+        10000
+      ]
+    ],
+    "seed": 0.0001,
+    "periods": 80,
+    "final_window_periods": 20,
+    "normalization": "m Omega²=1; precharged fast oscillator, storage release deducted; no full cold start, cycle restoration or physical units"
+  },
+  "comparison": {
+    "positive_vs_same_load": 0,
+    "positive_vs_static_bias": 0,
+    "positive_vs_best_sampled_static": 0,
+    "best_delta_same_load": -0.00005025436744778705,
+    "best_delta_static_bias": -0.0004380784215316097,
+    "best_delta_sampled_static": -0.02089177922992585,
+    "unit_best_sampled_static": 0.12633153040722347
+  },
+  "selected": [
+    {
+      "ratio": 996.1685823754789,
+      "Q": 10000,
+      "src": 1,
+      "amp": 0.5,
+      "half_control_off": 0.397681096,
+      "half_control_on": 0.397465662,
+      "load": 0.043842094,
+      "pump": 0.000051747,
+      "net": 0.043790347,
+      "static_bias": 0.044228425
+    },
+    {
+      "ratio": 996.1685823754789,
+      "Q": 10000,
+      "src": 0.5,
+      "amp": 0.5,
+      "half_control_off": 0.281744964,
+      "half_control_on": 0.280565502,
+      "load": 0.01094158,
+      "pump": 0.000250477,
+      "net": 0.010691103,
+      "static_bias": 0.011134696
+    },
+    {
+      "ratio": 996.1685823754789,
+      "Q": 10000,
+      "src": 1,
+      "amp": 1,
+      "half_control_on": 3.3e-8,
+      "load": 0.045240841,
+      "pump": 0.049808429,
+      "net": -0.004567588
+    }
+  ],
+  "direct_benchmark": {
+    "ratio": 20,
+    "Q": 100,
+    "periods": 20,
+    "final_window": 10,
+    "comparisons": [
+      {
+        "src": 0.5,
+        "amp": 0.5,
+        "delta_half": 1.6327103657086395e-7,
+        "delta_load": -4.861552133084146e-12,
+        "delta_pump": 4.796759071196144e-8,
+        "delta_net": -4.797245226409452e-8
+      },
+      {
+        "src": 1,
+        "amp": 1,
+        "delta_half": 4.597965562802629e-9,
+        "delta_load": -4.267648734401774e-12,
+        "delta_pump": 2.4216184613123914e-11,
+        "delta_net": -2.848383334752569e-11
+      }
+    ],
+    "scope": "finite horizon, small half-mode amplitudes; not validation of saturated branch or ratio996"
+  },
+  "limits": "Averaged rotating-wave energy exact for surrogate, gradient-conjugate paid work differs from literal carrier work by model correction; no uniform averaging bound. Source fixed injected current at full mode, no upstream access variation, no physical calibrated coefficient or layered time-domain response. Static bias comparator adds c A²/2 to q stiffness; sampled best linear passive over stiffness3/4/5 and optimized conductance, not all possible devices. No repeated restored cycle demonstrated, no HF delivery or cold-start cost paid; no physical extraction. Classical averaging, oscillator and passivity prior art; original halfmode/ADE/octets retained; DASHI specific source-connected comparison, no new JMD artifact."
+}
