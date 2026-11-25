@@ -1,0 +1,120 @@
+{
+  "totals": {
+    "chapters": 187,
+    "verses": 5853,
+    "letters": 304850,
+    "eligibleWindows": 5479,
+    "anomalyCount": 4
+  },
+  "books": [
+    {
+      "name": "genesis",
+      "chapters": 50,
+      "verses": 1533,
+      "letters": 78069,
+      "eligibleWindows": 1433,
+      "equalWindows": [
+        {
+          "c": 36,
+          "start": 32,
+          "lengths": [
+            31,
+            31,
+            31
+          ],
+          "equal": true
+        }
+      ],
+      "exact72": [],
+      "anomalyCount": 1,
+      "conflicts": []
+    },
+    {
+      "name": "exodus",
+      "chapters": 40,
+      "verses": 1213,
+      "letters": 63531,
+      "eligibleWindows": 1133,
+      "equalWindows": [
+        {
+          "c": 14,
+          "start": 19,
+          "lengths": [
+            72,
+            72,
+            72
+          ],
+          "equal": true
+        },
+        {
+          "c": 20,
+          "start": 13,
+          "lengths": [
+            6,
+            6,
+            6
+          ],
+          "equal": true
+        }
+      ],
+      "exact72": [
+        {
+          "c": 14,
+          "start": 19,
+          "lengths": [
+            72,
+            72,
+            72
+          ],
+          "equal": true
+        }
+      ],
+      "anomalyCount": 3,
+      "conflicts": []
+    },
+    {
+      "name": "leviticus",
+      "chapters": 27,
+      "verses": 859,
+      "letters": 44795,
+      "eligibleWindows": 805,
+      "equalWindows": [],
+      "exact72": [],
+      "anomalyCount": 0,
+      "conflicts": []
+    },
+    {
+      "name": "numbers",
+      "chapters": 36,
+      "verses": 1289,
+      "letters": 63545,
+      "eligibleWindows": 1217,
+      "equalWindows": [],
+      "exact72": [],
+      "anomalyCount": 0,
+      "conflicts": []
+    },
+    {
+      "name": "deuteronomy",
+      "chapters": 34,
+      "verses": 959,
+      "letters": 54910,
+      "eligibleWindows": 891,
+      "equalWindows": [
+        {
+          "c": 32,
+          "start": 6,
+          "lengths": [
+            51,
+            51,
+            51
+          ],
+          "equal": true
+        }
+      ],
+      "exact72": [],
+      "anomalyCount": 0,
+      "conflicts": []
+    }
+  ]
+}

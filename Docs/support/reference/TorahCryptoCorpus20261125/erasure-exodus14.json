@@ -1,0 +1,205 @@
+{
+  "alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
+  "trainChapters": [
+    1,
+    13
+  ],
+  "testChapters": [
+    16,
+    40
+  ],
+  "trainBlocks": 85,
+  "testBlocks": 175,
+  "metrics": {
+    "uniform": {
+      "n": 15925,
+      "hits": 1254,
+      "bits": 75721.58347192702,
+      "top3": 2133,
+      "accuracy": 0.07874411302982731,
+      "bitsPerLetter": 4.754887502161822,
+      "top3Rate": 0.1339403453689168
+    },
+    "unigram": {
+      "n": 15925,
+      "hits": 1556,
+      "bits": 68066.0713289196,
+      "top3": 4603,
+      "accuracy": 0.09770800627943485,
+      "bitsPerLetter": 4.274164604641733,
+      "top3Rate": 0.2890423861852433
+    },
+    "position216": {
+      "n": 15925,
+      "hits": 1448,
+      "bits": 71685.01183675986,
+      "top3": 4137,
+      "accuracy": 0.09092621664050235,
+      "bitsPerLetter": 4.5014136161230685,
+      "top3Rate": 0.25978021978021976
+    },
+    "geometry": {
+      "n": 15925,
+      "hits": 1529,
+      "bits": 68503.59817347564,
+      "top3": 4401,
+      "accuracy": 0.09601255886970173,
+      "bitsPerLetter": 4.301638817800668,
+      "top3Rate": 0.2763579277864992
+    },
+    "markovMarginal": {
+      "n": 15925,
+      "hits": 1567,
+      "bits": 68031.9238856922,
+      "top3": 4621,
+      "accuracy": 0.09839874411302983,
+      "bitsPerLetter": 4.272020338191033,
+      "top3Rate": 0.2901726844583987
+    },
+    "hybrid": {
+      "n": 15925,
+      "hits": 1551,
+      "bits": 68145.39506541364,
+      "top3": 4511,
+      "accuracy": 0.09739403453689167,
+      "bitsPerLetter": 4.279145686996147,
+      "top3Rate": 0.283265306122449
+    }
+  },
+  "coverage": 91,
+  "uncovered": 0,
+  "candidates": {
+    "uniform": {
+      "text": "אאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאאא",
+      "meanConfidence": 0.03703703703703708,
+      "continuationHits": 9,
+      "continuationBits": 4.75488750216346
+    },
+    "unigram": {
+      "text": "ייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי",
+      "meanConfidence": 0.11066106610661049,
+      "continuationHits": 15,
+      "continuationBits": 4.030375465860762
+    },
+    "position216": {
+      "text": "יאיהלויההלווווייכליאיוייייאואוויייוהאואיייאוייהיהיייאויהיוהייהומוהויאויווהאהוההאייאויאייהיה",
+      "meanConfidence": 0.13331012684842802,
+      "continuationHits": 15,
+      "continuationBits": 4.2003168203231045
+    },
+    "geometry": {
+      "text": "יאיייויההייויויייייייהוייוייאיייייויאיייייאייייייייייויייוהייהויויויהויויייהייהייייייאייייו",
+      "meanConfidence": 0.11336903464989734,
+      "continuationHits": 18,
+      "continuationBits": 4.02801101399934
+    },
+    "markovMarginal": {
+      "text": "יוייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי",
+      "meanConfidence": 0.11177340856294216,
+      "continuationHits": 15,
+      "continuationBits": 4.0270530099825175
+    },
+    "hybrid": {
+      "text": "ייייייייייייייייייייייייייייאייייייייייייייייייייייייוייייהיייייייויייייייייייייייייייייייו",
+      "meanConfidence": 0.11143096712184469,
+      "continuationHits": 16,
+      "continuationBits": 4.022940560031349
+    }
+  },
+  "actualContinuation": "אזישירמשהובניישראלאתהשירההזאתליהוהויאמרולאמראשירהליהוהכיגאהגאהסוסורכבורמהביםעזיוזמרתיהויהיל",
+  "parity": {
+    "orbits": 54,
+    "orbitSizes": {
+      "1": 0,
+      "2": 0,
+      "4": 54,
+      "8": 0
+    },
+    "train": {
+      "n": 4590,
+      "zero": 165,
+      "constant": 3
+    },
+    "test": {
+      "n": 9450,
+      "zero": 377,
+      "constant": 4
+    },
+    "targetMissingOrbits": 54,
+    "singleMissing": 17,
+    "parityCandidates": [
+      {
+        "position": 143,
+        "glyph": "ל"
+      },
+      {
+        "position": 142,
+        "glyph": "ק"
+      },
+      {
+        "position": 141,
+        "glyph": "א"
+      },
+      {
+        "position": 140,
+        "glyph": "י"
+      },
+      {
+        "position": 139,
+        "glyph": "ט"
+      },
+      {
+        "position": 138,
+        "glyph": "ס"
+      },
+      {
+        "position": 137,
+        "glyph": "ג"
+      },
+      {
+        "position": 136,
+        "glyph": "ס"
+      },
+      {
+        "position": 135,
+        "glyph": "נ"
+      },
+      {
+        "position": 134,
+        "glyph": "ז"
+      },
+      {
+        "position": 133,
+        "glyph": "כ"
+      },
+      {
+        "position": 132,
+        "glyph": "צ"
+      },
+      {
+        "position": 131,
+        "glyph": "פ"
+      },
+      {
+        "position": 130,
+        "glyph": "ץ"
+      },
+      {
+        "position": 129,
+        "glyph": "מ"
+      },
+      {
+        "position": 128,
+        "glyph": "א"
+      },
+      {
+        "position": 127,
+        "glyph": "ל"
+      }
+    ],
+    "unresolvedDimension": 37,
+    "conditionalFreeTrits": 111,
+    "fullyObservedViolations": 0
+  },
+  "qualification": "Chosen ordinal alphabet map and candidate cipher assumptions; no evidence of source intent. Held-out blocks are disjoint chapters but within same book; continuation comparison not a test of a missing manuscript entry."
+}
