@@ -104,3 +104,120 @@ completed source inequality still open. Existing admission route remains
 primary; Lean #113 merged, parser fix #121 open at 5d5c479dc52b,
 pinned local kernel and native Agda all-character correspondence not run.
 External theorem status not newly verified here.
+
+
+## 26 Nov continuation — original post-sixth compiler recovered, sharpened debt and strict BIDI
+
+Audited actual Agda master 41b222417983d85f7e42cce4971351b51b6527cb,
+#1533 entry f05b528f89f5f1d5ea0a994d33517853e3cced4e, portfolio #1551
+aa357f9f72866271b6a0ef9d08cc1e0958f12667; portfolio copy predates the
+local phase continuation and is not a separate governing plan.
+Lean main 9ba8f00cf2941850268bc927c0e1a6112996f4d8 and #116 entry
+fdc7d1eafb6798c4e0ead9d1bba6e797bc3fb5d6 have byte-identical
+EighthRemainder d636892f60c60f51968440f6016a00d46f9e88ce,
+PostSixthAbsorb 1219c304badf9f25326493bf894f33554cc4b2b4,
+FourierTerminal fece9d70499d6e324a849ba4bf7c62870ed3d82b.
+Already source-owned: mixedDegreeSix_referenceIntegral,
+completeJointBeyondSixthRemainder_eq_integral,
+completeJointBeyondSixthRemainder_abs_le_eighth, M8abs<=L²*K(W),
+literalLocalEighthDebtAt_le_G1_expandedWindowN, original negative M6
+witness and terminal cap, literalLocalExactAt_stable/eq_canonical,
+canonicalLocalExactTerm_tsum_eq, canonicalFarExactTerm_summable,
+globalSignedLiteralPairSource_eq_canonicalLocal_add_far,
+literalFarExactAt_eq_base_add_horizontal, and
+exists_canonicalLiteralFarPairSource_linearCutoff_bound_of_horizontalCurvature.
+Thus local finite support and the canonical far representation are NOT
+missing. Original FarPaid/Abel/outer paired compilers already exist.
+
+### Two rigorous local envelope improvements
+
+Let x=alpha²,y=q², L=pi+1 and E_old=x^4/30000+y^4/17000+
+(x³y+x²y²+xy³)/300. On the scalar unit square use the original
+cos/cosh degree-six remainder bounds 1/35840. The truncated cosh
+polynomial is <=1+1/2+1/24+1/720<8/5. Exact mixed polynomial
+tail has coefficients bounded by 1/1440 on each outer mixed term
+and 1/576+2/17280+1/518400<1/500 on the middle term,
+since x,y<=1. Hence the tightened scalar envelope
+x^4/35840+y^4/22400+(x³y+x²y²+xy³)/500
+is coefficientwise <=(375/448)*E_old. This factor is the maximum
+coefficient ratio for THIS scalar majorant, not the optimal analytic
+constant. Native source reuses the original scalar lemmas and original
+finite-source G1 compiler, without a new complex-series dependency.
+
+Sharper mathematical route: P_(2m)=R^m T_m((x-y)/R), R=x+y>0,
+origin separately zero for m>0. Therefore |P8|<=R^4. Using
+C10=66/(65*10!), the original scalar cosh series gives
+|beyond6|<=R^4/8!+C10 R^5<= (997/39312000) R^4
+on the scalar unit square R<=2. This radial polynomial is
+coefficientwise <=(4/5)*E_old (axis limiting ratio about .76084;
+mixed ratios .03043/.04565/.03043). Alternatively retain the
+actual signed M8 and tenth remainder. M10abs<=L² M8abs<=L^4 K(W)
+is same-object; no independent moment norm. Native tenth reference
+integral, support norm and conditional scalar-to-profile compiler
+source-written. The precise remaining native analytic lemma is
+QuarticSignedPoleTenthTaylorBound; its mathematical proof is above,
+not a kernel receipt. No all-order raw polynomial far summation.
+
+### Actual local debt and reverse terminal
+
+For n=original canonical exhaustion index let J4,J6,J8 be literal
+signed guarded sums. D8_literal is original eighth absolute debt;
+D8_G1 is its existing expanded-window upper bound.
+B_k=J4+J6+k D8_literal. For the native scalar route k=375/448,
+B_k >= exact local L0. Under original selected-witness hypotheses,
+B_k <= B_old-(1-k)D8_G1 by existing corrected fourth scalar,
+signed sixth cap, and eighth G1 estimate. For the signed route
+B_signed=J4+J6+J8+C10 M10abs/r^12 * literalLocalPhysicalPhaseAt
+(a²+d²)^5; B_signed>=L0 using the mathematical tenth bound.
+min(B_k,B_signed) is sufficient; native signed candidate conditional
+on the exact scalar lemma. Source-written three existing Lean #116
+modules: EighthRemainder (commits b3bec25b,3572b11d),
+PostSixthAbsorb (29233e4c,2e0d1bf4), FourierTerminal (1a2ca00e).
+No new witness or altered far normalization.
+
+Let F=canonicalLiteralFarPairSource, I=exact original mu integral,
+D=completedSignedResidual, d=target defect, H=L0+F, D=(H-I)/2.
+For any valid local budget B>=L0 the revised cut is exactly
+F < 4d+I-B iff D+(B-L0)/2<2d.
+Far allowance increases by B_old-B, at least (73/448)D8_G1 for
+the native tight route; mathematical radial 4/5 gives at least D8_G1/5
+when the same aggregate compiler is instantiated. However even B=L0
+cannot manufacture a negative global margin: hypothetical off-line
+pair forces D>=2d. Independent strict completed-source inequality
+still required, not a consequence of reduction in local slack.
+
+### Local execution and remaining min-cut
+
+New scripts/check_rh_scaled_local_budget.py, commit 63de2521, Git
+blob 5e8e460a86af0d509c7566dd30aa89d25b96da43 matches executed local
+bytes. Python compile and timeout90 exact SymPy/Fraction PASS:
+2 phase/radial identities, 15 coefficient comparisons, 1089 exact
+rational series interval stress points, 2 terminal identities and
+9 negative controls. The interval grid is synthetic, not actual zeros;
+universal inequalities proved separately by coefficient/series algebra.
+No CI, Lean, Agda executable present or kernel acceptance.
+
+Exact remaining local native gate: prove QuarticSignedPoleTenthTaylorBound
+and instantiate 4/5 native scalar compiler; elaborate all new terms.
+Far representation/summability already owned. Quantitative E2:
+instantiate actual selected-W uniform HorizontalFarCurvatureBound and
+signedOrdinateCurvature envelope (or stronger original Schwartz route);
+retain normalized complete far compensation and mu/prime/pole accounting.
+The absolute shell bound alone is not the strict scale/signed estimate.
+E3: independent F-I<4d-B for every original hypothetical target, or
+equivalently completed residual plus slack; not implied by exact
+explicit-formula rewriting. For prime-port route E0 inhabited actual
+extended selected test, E1 kernel source receipt and E2/E3 signed
+enlarged tails and log/near-double resonance remain separate.
+All-character G1-G3: same-source Dirichlet character/conductor,
+multiplicity/reflection and actual L/zero predicate, with genuine
+per-character profile/explicit formula; zeta-only local proof does
+not construct these. Primary direct admission already on merged Lean
+#113: main RHAdmission.lean blob 43a3f106e09a013fada4d1868f3bf9b0ba7dbf87
+imports original Main and exact five theorem types. #121 parser fix
+still open at 5d5c479dc52b; pinned v4.33.1 local kernel and compatible
+native cross-prover handoff remain distinct. External verification not
+newly established here. No GRH/RH promotion. Classical Taylor,
+Chebyshev and triangle inequalities are background; DASHI contribution
+is original source-specific coefficient budget and terminal weld,
+Paper 9 donor provenance retained.
