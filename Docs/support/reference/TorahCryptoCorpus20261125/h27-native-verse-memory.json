@@ -1,0 +1,604 @@
+{
+  "byBook": {
+    "genesis": {
+      "spans": 1,
+      "glyphs": 31,
+      "locations": [
+        {
+          "chapter": 36,
+          "verses": [
+            32,
+            33,
+            34
+          ],
+          "length": 31
+        }
+      ]
+    },
+    "exodus": {
+      "spans": 2,
+      "glyphs": 78,
+      "locations": [
+        {
+          "chapter": 14,
+          "verses": [
+            19,
+            20,
+            21
+          ],
+          "length": 72
+        },
+        {
+          "chapter": 20,
+          "verses": [
+            13,
+            14,
+            15
+          ],
+          "length": 6
+        }
+      ]
+    },
+    "leviticus": {
+      "spans": 0,
+      "glyphs": 0,
+      "locations": []
+    },
+    "numbers": {
+      "spans": 0,
+      "glyphs": 0,
+      "locations": []
+    },
+    "deuteronomy": {
+      "spans": 1,
+      "glyphs": 51,
+      "locations": [
+        {
+          "chapter": 32,
+          "verses": [
+            6,
+            7,
+            8
+          ],
+          "length": 51
+        }
+      ]
+    }
+  },
+  "trainingSpans": 2,
+  "testSpans": 1,
+  "actualShem": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים",
+  "variants": [
+    {
+      "selector": "a",
+      "kind": "normalized",
+      "trainingReturns": 49,
+      "exodus": {
+        "n": 6,
+        "hits": 1,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 4,
+        "zeroInnov": 9,
+        "exact": false,
+        "output": "אפהףפמדםסצועטפגעעזדדדךטךוווםףקתצתטמגדדפלתחנףכשחהןזנקץגעמסמדזרלףץבצחתצושף"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 1,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 5,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 5,
+        "zeroInnov": 12,
+        "exact": false,
+        "output": "אפהףפמדםסאףגיפגצעעםדדקעךחליםףטמנפכתסףךחצהזדסצפשמוזשםצגעצםומווףחתףשהלשדנר"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 3,
+        "zeroInnov": 8,
+        "exact": false,
+        "output": "ץצמפןרחנעדנתכטמסצחקךכקתךםןקלנסמבךפקףזוץזמעףשכסצףוקעסגפלתסץופןגןתוצםיסכךז"
+      }
+    },
+    {
+      "selector": "a",
+      "kind": "physical",
+      "trainingReturns": 49,
+      "exodus": {
+        "n": 6,
+        "hits": 1,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 1,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 1,
+        "zeroInnov": 9,
+        "exact": false,
+        "output": "אפהףפמדםסאמחפפףתעפעדדממךתםמםףאטלךספההעצמוחןגסשזלמזקמבגהספקקועףמןשוחגסףהד"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 1,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 1,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 1,
+        "zeroInnov": 11,
+        "exact": false,
+        "output": "אפהףפמדםסאםויפזצבצםדדפגךנךיםףדץנצפיאןובךךןטכעזףכרזששגגןקףםשזועםןחיכדזהלצ"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 55,
+        "hitsReturn": 3,
+        "zeroInnov": 17,
+        "exact": false,
+        "output": "ץצמפןרחנרןאךכהץןבןקךךפתיחגקליןמאלנןהפןזהצדיצמטצצוצטהגנקזדטצוחדמףמהפןנטלב"
+      }
+    },
+    {
+      "selector": "a",
+      "kind": "static",
+      "trainingReturns": 49,
+      "exodus": {
+        "n": 6,
+        "hits": 3,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 7,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 3,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 7,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 1,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ץצמפןרחנדרטץכחפבצזקךכעתךסקקלקץמבתנךמרוץץמףףצתוחףוךץסגעךתחץןשעשסגתמםכקחחס"
+      }
+    },
+    {
+      "selector": "a",
+      "kind": "unigram",
+      "trainingReturns": 49,
+      "exodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      }
+    },
+    {
+      "selector": "pair",
+      "kind": "normalized",
+      "trainingReturns": 7,
+      "exodus": {
+        "n": 6,
+        "hits": 2,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 8,
+        "hitsReturn": 0,
+        "zeroInnov": 1,
+        "exact": false,
+        "output": "ויסעממאךהאלליםההיךלפננמחנהישראלוילךמאחרגץםםטסעעמרדהענןמפניהםויעמדפאחריהם"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 2,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 8,
+        "hitsReturn": 0,
+        "zeroInnov": 1,
+        "exact": false,
+        "output": "ויסעממאךהאלליםההדךלפננמחנהישראלוילךמאחררןםםטסעעמרדהענןמפנשיםויעמדחאחריהם"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 2,
+        "n": 72,
+        "returns": 11,
+        "hitsReturn": 1,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ץצמפןרחץדץטלכחפבצלקךכעתכסקקלקץמבתנךמרוץץמףףץתוחסוךץסבזךתחלןשעשסגחנםכעףחן"
+      }
+    },
+    {
+      "selector": "pair",
+      "kind": "physical",
+      "trainingReturns": 7,
+      "exodus": {
+        "n": 6,
+        "hits": 2,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 8,
+        "hitsReturn": 0,
+        "zeroInnov": 1,
+        "exact": false,
+        "output": "ויסעממאךהאלליםההיךלפננמחנהישראלוילךמאחרדדםםטסעעמרדהענןמפנגהםויעמדפאחריהם"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 2,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 4,
+        "n": 72,
+        "returns": 8,
+        "hitsReturn": 0,
+        "zeroInnov": 1,
+        "exact": false,
+        "output": "ויסעממאךהאלליםההדךלפננמחנהישראלוילךמאחרגבםםטסעעמרדהענןמפנויםויעמדחאחריהם"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 2,
+        "n": 72,
+        "returns": 11,
+        "hitsReturn": 1,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ץצמפןרחץדץטלכחפבצאקךכעתכסקקלקץמבתנךמרוץץמףףץתוחסוךץסבזךתחלןשעשסגחנםכעףחן"
+      }
+    },
+    {
+      "selector": "pair",
+      "kind": "static",
+      "trainingReturns": 7,
+      "exodus": {
+        "n": 6,
+        "hits": 3,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 7,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 3,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 7,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 1,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "ץצמפןרחנדרטץכחפבצזקךכעתךסקקלקץמבתנךמרוץץמףףצתוחףוךץסגעךתחץןשעשסגתמםכקחחס"
+      }
+    },
+    {
+      "selector": "pair",
+      "kind": "unigram",
+      "trainingReturns": 7,
+      "exodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      },
+      "oracleExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "oracleShem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      },
+      "shiftExodus": {
+        "n": 6,
+        "hits": 0,
+        "spans": 1,
+        "exact": 0,
+        "returns": 0,
+        "hitsReturn": 0
+      },
+      "shiftShem": {
+        "hits": 12,
+        "n": 72,
+        "returns": 0,
+        "hitsReturn": 0,
+        "zeroInnov": 0,
+        "exact": false,
+        "output": "יייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייי"
+      }
+    }
+  ],
+  "capacity": {
+    "a:normalized": {
+      "edges": 49,
+      "levels": [
+        {
+          "keys": 22,
+          "conflicts": 16,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 25,
+          "conflicts": 14,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 37,
+          "conflicts": 9,
+          "maxSuccessors": 3
+        }
+      ]
+    },
+    "a:physical": {
+      "edges": 49,
+      "levels": [
+        {
+          "keys": 21,
+          "conflicts": 11,
+          "maxSuccessors": 7
+        },
+        {
+          "keys": 22,
+          "conflicts": 10,
+          "maxSuccessors": 7
+        },
+        {
+          "keys": 34,
+          "conflicts": 9,
+          "maxSuccessors": 4
+        }
+      ]
+    },
+    "pair:normalized": {
+      "edges": 7,
+      "levels": [
+        {
+          "keys": 4,
+          "conflicts": 1,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 4,
+          "conflicts": 1,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 5,
+          "conflicts": 1,
+          "maxSuccessors": 3
+        }
+      ]
+    },
+    "pair:physical": {
+      "edges": 7,
+      "levels": [
+        {
+          "keys": 4,
+          "conflicts": 1,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 4,
+          "conflicts": 1,
+          "maxSuccessors": 4
+        },
+        {
+          "keys": 5,
+          "conflicts": 1,
+          "maxSuccessors": 3
+        }
+      ]
+    }
+  },
+  "qualification": "Actual consecutive equal-length verse triples within same chapter, raw WLC normalized glyphs, middle reverse, length>=3 and zero parser conflicts. Other four books train, Exodus test (Shem separately). Previously inspected corpus, not fresh blind validation. Overlapping verse triples possible. Candidate observed-memory keys and update law not creator-attested. Inference stores only own predictions; oracle prior true glyph separately marked; static and unigram baselines; shifted A retrained control; ties lowest field code. No target glyph used in ordinary inference."
+}
