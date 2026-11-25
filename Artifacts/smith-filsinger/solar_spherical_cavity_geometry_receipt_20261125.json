@@ -1,0 +1,64 @@
+{
+  "status": "CONDITIONAL_SPHERICAL_SCALAR_GEOMETRY",
+  "source_head": "210dfa603886804e4702c847ccd6bfc898367bc5",
+  "checker_blob": "6dd0e9fabdff4dff6d03fc7fed5315950cf4e4ed",
+  "local_execution": {
+    "passed": 18,
+    "total": 18,
+    "timeout_seconds": 90,
+    "CI": false,
+    "kernel": false
+  },
+  "checks": [
+    "constant norm",
+    "dipole squared has no dipole",
+    "quadrupole squared has no dipole",
+    "mixed parity dipole projection",
+    "odd background dipole projection",
+    "zero mode mixed dipole projection",
+    "mean square norm",
+    "odd-even orthogonality",
+    "quadratic zero mode retained",
+    "reverse exact target",
+    "minimum norm cost",
+    "reverse null",
+    "reverse minimum orthogonality",
+    "reverse residual norm",
+    "aligned reverse energy",
+    "aligned minimum energy",
+    "equal cap dipole null",
+    "opposed cap dipole nonzero"
+  ],
+  "geometry": {
+    "normalization": "unit sphere probability measure, scalar radial-field surrogate",
+    "dipole_projection": "3 mean(n q²)",
+    "mixed": "(4/5) Q p",
+    "odd_background": "(|p|² b+2(p dot b)p)/5",
+    "zero_mode": "2 c0 p + (4/5) Q p",
+    "reverse": "p=P ez, Qmin=5/(4P)*[[-tz/2,0,tx],[0,-tz/2,ty],[tx,ty,tz]]",
+    "residual": "N=[[r,k,0],[k,-r,0],[0,0,0]], Np=0, Frobenius orthogonal to Qmin",
+    "aligned_minimum_mean_square": "sqrt(15)*|t|/6; equal dipole and quadrupole contributions",
+    "scope": "spatial coefficient of q², not temporal doubled coefficient (factor 1/2 for common cosine), not physical energy; no claim of actual half-mode existence"
+  },
+  "frequency_reference": {
+    "ideal_f1_Hz": 10.591274580059801,
+    "fitted_effective_speed_over_c": 0.7392877921172533,
+    "nondispersive_calibrated_modes_Hz": [
+      7.83,
+      13.561957823264308,
+      19.17950468599228,
+      24.76063407911841,
+      30.325459600804077
+    ],
+    "equal_force_5mHz_velocity_ratio": 0.00012771397185387906,
+    "equal_force_5mHz_load_ratio": 1.631085860669341e-8,
+    "Q_fixture": 5,
+    "scope": "same force amplitude, fixed single damped oscillator, not measured cross-frequency solar transfer"
+  },
+  "sources": [
+    "https://www.mdpi.com/2073-4433/7/9/116",
+    "https://doi.org/10.1029/2011GL049668",
+    "https://angeo.copernicus.org/articles/40/395/2022/index.html"
+  ],
+  "limits": "No vector Maxwell radial boundary, physical source spectrum, actual upstream conversion, calibrated material, autonomous HF response, actual finite collector, original device or solar extraction; direct RF/photons/particles remain separate. Classical spherical harmonics and Schumann theory prior art; user original shared-cavity and half-mode hypothesis; DASHI specific scalar reverse geometry, no new JMD contribution."
+}
