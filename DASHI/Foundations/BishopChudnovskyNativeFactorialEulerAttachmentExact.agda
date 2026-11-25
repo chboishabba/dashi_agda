@@ -9,7 +9,8 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (ℚᵘ; _/_)
 import Data.Rational.Unnormalised as Q
 import Data.Rational.Unnormalised.Properties as QP
-import NonReflectiveQ as QS
+import Data.Nat.Base as N
+import Data.Integer.Base as Z
 open import Data.Product.Base using (_,_)
 import Real as R
 open R using (ℝ; _≃_; _*_; _+_; _⋆)
@@ -29,7 +30,11 @@ jTerm n = ((+ n / 1) Q.* F.factorialTerm n) ⋆
 -- a different power-series definition or arbitrary scalar sequence.
 weightMeaning : (n : Nat) → Raw.weight n Q.≃
   ((+ 13591409 / 1) Q.+ ((+ 545140134 / 1) Q.* (+ n / 1)))
-weightMeaning n = QP.≃-refl
+weightMeaning n = QP.≃-trans
+  (Raw.fracAddEdge (Z.+_ 13591409) (Z._*_ (Z.+_ 545140134) (Z.+_ n))
+    1 1 N.nonZero N.nonZero)
+  (QP.+-cong QP.≃-refl
+    (Raw.fracMulEdge (Z.+_ 545140134) (Z.+_ n) 1 1 N.nonZero N.nonZero))
 
 weightedTerm : (n : Nat) →
   ((F.factorialTerm n Q.* Raw.weight n) ⋆) ≃
