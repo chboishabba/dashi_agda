@@ -1,3 +1,80 @@
+## 25 November 2026 — original continuous A2 source-repair and geometric reverse-solve P0
+
+**Controlling receipt:** GitHub `master` at `19a63b8c9d4de92f6c28fbba4077b2237948a6c5` (after `b61bf6828f9be6706218981d16b7c7cabeefb905`). Latest push adds `DASHI/Physics/YangMills/YMClayOriginalWilsonContinuousA2BridgeExact.agda`, edits `BalabanNormalizedExpectationConvergenceExact.agda` and introduces `scripts/check_ym_clay_original_wilson_continuous_a2_sympy_20261125.py`. Operator reports sanctioned Agda, SymPy and finite-TV regression PASS; **the present GitHub audit read source, did NOT independently run Agda**. These are proof-term/typechecking receipts for *parameterized* mathematics, not a literal original SU(N) source inhabitant or physical rate. Preserve all existing A2 mathematics; do NOT rebuild rational list enumerations or abstract covariance compilers.
+
+### Critical P0-A2 trust/inhabitation correction — repair BEFORE promoting A2
+
+The freshly checked `ContinuousClampSource` has **inconsistent universally quantified thresholds**:
+
+```agda
+clampZeroBelow : ∀ {value threshold} →
+  value ≤ℝ threshold → clamp value ≡ 0ℝ
+clampOneAbove : ∀ {value threshold} →
+  threshold ≤ℝ value → clamp value ≡ 1ℝ
+```
+
+Choose `threshold = value` in both and use `≤ℝ-refl`: any inhabitant forces `0ℝ ≡ 1ℝ`. Hence **no inhabitant exists in a consistent ordinary real carrier with `0 ≠ 1`**. Agda typechecks the conditional implications because a record need not be inhabited; this is NOT physical continuous cutoff construction. **Exact repair:** give fixed selected `δ_low < δ_high` fields and require `clamp(value)=0` only for `value ≤ δ_low`, `clamp(value)=1` only for `δ_high ≤ value`, and verify an actual continuous/Borel measurable `[0,1]` interpolating clamp and its gauge-invariant composition. Do not hide these as arbitrary impossible postulates. For standard SU(2) Wilson *raw* plaquette deficit `1−ReTr(U_p)/N`, `deficitLeOne` is false at `U_p=−I` (deficit=2); use a genuine half-normalized source deficit `(1−ReTr/N)/2` or relax the assumed raw range to `[0,2]`. Prove the source equality between the raw and half-normalized definitions, keeping physical thresholds calibrated.
+
+The `ContinuousWilsonArithmetic` record ALSO supplies as **premises** `centeredProductExpectation`, `covarianceMidpointIdentity`, `meanRestrictionBounds`, `shiftIdentityAlgebra`, `unitShiftAbsoluteBound`, ordered-quotient laws etc; the `ContinuousExpectationAlgebra` and `ContinuousWilsonSourceContract` are passed as parameters, not constructed from `YMClayOriginalVariableWilsonCovarianceSourceExact`. Their exact inhabited same-source producer remains open. Prove the ordinary scalar facts in the existing real/Bishop algebra and integrate with `YMClaySUNVariablePeriodicProductHaarExact`, `YangMillsPhysicalFiniteMeasureCylinderAlgebraExact` and `YMClayOriginalVariableWilsonCovarianceSourceExact`. The current quotient imports `RealAnalysisAxioms`, an explicit axiom boundary: reconcile real scalar/ordered positivity, quotient and compact continuous Haar *measurable test algebra*, not a rational finite-state replacement.
+
+**Existing conditional A2 constructors on master (reuse):** `curvatureCutoff`, `contourProduct`, `badContourCutoff`, `badContourCutoffRange`, `ν`, `νAlgebra`, `μMinusν`, `covarianceMidpointGap`, `covarianceGapBound` and `contourMassBound` in `YMClayOriginalWilsonContinuousA2BridgeExact`. `covarianceGapBound` is `≤ 4 μχ` for **[0,1]** tests provided `0 < goodMass`, `ContinuousWilsonArithmetic`, valid clamp and expectation contracts. It does not by itself instantiate `|F|,|G|≤1` native Wilson traces; a valid affine/half-rescale source dictionary is still needed. `qLessOne` proves only `goodMass>0 ⇒ q<1`, NOT `goodMass>0` from native Wilson geometry. Build one strict positive Haar neighborhood of all-identity links with all selected deficits below the lower threshold, `χ=0`, and positive original Wilson Gibbs density to supply it; prove any chosen `Γ_{X,Y}` is an actual finite native gauge-invariant contour family and NOT a vacuous empty carrier.
+
+### Reverse-solve the actual P0 target from its inequality, not labels
+
+For ONE exact original measure `μ_(G,a,L)`, same original two globally marked closed Wilson functions `F_X,G_Y`, physical separation `R`, selected contours `Γ_(X,Y,a,L)`, `χ=1−∏_{γ∈Γ}(1−∏_{p∈γ} b_p)`, `q=μχ` and its real normalized good-weighted `ν`, the now-written A2 algebra yields **conditional on source inhabitation**:
+
+```text
+|Cov_μ(F_X,G_Y)| ≤ |C_CMP116(J_X,J_Y)|
+                  + |Cov_ν(F_X,G_Y) − C_CMP116(J_X,J_Y)|
+                  + 4 q,
+q ≤ Σ_(γ∈Γ) E_μ[Π_(p∈γ) b_p].
+```
+
+For a cutoff-/volume-uniform physical rate `m>0`, the THREE independent true original-source payments must all be proved on the SAME physical family (with possible marked rescaling constants):
+
+```text
+(P-CONT) sup_(a,L) Σ_(γ∈Γ_XY) E_μ[Π_(p∈γ) b_p]
+         ≤ C_bad e^(−m_bad R);
+(P-MATCH) sup_(a,L) |Cov_ν(F_X,G_Y) − C_CMP116(J_X,J_Y)|
+         ≤ C_match e^(−m_match R);
+(P-SMALL) sup_(a,L) |C_CMP116(J_X,J_Y)|
+         ≤ C_small e^(−m_small R),
+m_bad,m_match,m_small > 0 in PHYSICAL units.
+```
+
+Then `|Cov_μ|≤(C_small+C_match+4C_bad)e^(−min(m_small,m_match,m_bad)R)`. This is a **conditional arithmetic conclusion**, not a proof that P-CONT/P-MATCH/P-SMALL hold. `C(beta)=8+(2/3)log(24)+log(beta)` in the new source-status string grows at high beta, so it does not provide cutoff uniformity. The older physical contour note allows a conditional estimate from true `q(a)=196u(a)≤q_*<1` and a physical separation `n≥ceil(R/a)`, but the original fixed-contour probability `u(a)^{|γ|}`, geometry/path coverage, chessboard positivity, root entropy and beta(a) independence are **not proved**. Do not infer a physical mass from `q<1` for a single cutoff or from pointwise `χ≤Σ`.
+
+### New exact enabling lemma / weld queue — implement, prove, then attach
+
+| Cut | Exact theorem to derive on existing source (not a new record that assumes it) | Reuse; remaining hard physics |
+| --- | --- | --- |
+| **A2-R1** | `originalSUNContinuousFixedThresholdClamp`: actual normalized native curvature + fixed ordered thresholds, true [0,1] continuous cutoff and gauge invariance; contradiction removed | `YMClaySUNVariablePeriodicGibbsGaugeExact`; `YMClayOriginalWilsonContinuousA2BridgeExact` |
+| **A2-R2** | `originalSUNNormalizedExpectationIsA2Source`: construct `ContinuousExpectationAlgebra` from true `Wilson.expectation n` and `PhysicalFiniteMeasureIntegrationLaws`; discharge routine `ContinuousWilsonArithmetic` scalar fields from pre-existing arithmetic, not assume midpoint/covariance bounds | `YMClaySUNVariablePeriodicProductHaarExact`, `YMClayOriginalVariableWilsonCovarianceSourceExact`, `BalabanNormalizedExpectationConvergenceExact` |
+| **A2-R3** | `originalSUNGoodMassStrictPositive`: strict nonzero good mass from literal native identity neighborhood + true continuous full-support Haar and original Gibbs weight | `qLessOne` currently assumes this, does NOT prove it; no universally true statement for arbitrary cutoffs or empty/artificial geometry |
+| **A2-R4** | `originalSUNPhysicalConnectingContourCoverage`: rooted native incidence/spanning geometry `Γ_XY`, finite support, physical `R/a` lower bound on each relevant contour, *and* exhaustive representation of actual connected bad remainder incl. mixed histories | Use 4D six-face native incidence, all time orientations, signed/zero/boundary histories and indexed hyperfabric commuting faces as **transport audit**, not numeric physics |
+| **A5-P1** | `originalSUNChessboardFixedContourProbability`: `E_μ[Π b_p]≤u_G(a)^{|γ|}` (or rigorously justified scale-dependent substitute) for literal original product-Haar Wilson; genuine RP/dissemination and frustrated/large sectors | Existing original high-beta chessboard, Weyl-cap and sparse-contour donors. Worst-case bare one-link TV→1 prohibits a naive global Dobrushin route |
+| **A5-P2** | `originalSUNPhysicalConnectingEntropyMargin`: count physically rooted admissible contours with sufficient `|γ|≥R/a` and prove full `Σγ` physical bound with cutoff-/volume-uniform amplitude and `m_bad>0`; retain long-range RG interactions | Existing P06/Step-V animal and R429 shell counting, `YMClayOriginalWilsonAffineW1W3BadSectorPhysicalRate20261122.md` conditional `q(a)=196u(a)` |
+| **A3-P1** | `originalSUNSelectedEq171StepIsActualWilsonSource`: prove `BalabanCMP119Equation171WeightedStepApproximationExact.sourceStepIsEquation171Mass` on actual `Ω/Λ/S/Q_B/rT/FP` selected T, both original marks `1,F,G,FG`, normalized real partition and E/R/B/V histories | Existing CMP119 (2.18–2.23) factorization and F19 original Haar disintegration; do not equate a candidate F19 fibre T to historical Eq.(1.71) by name |
+| **A3-P2** | `originalSUNGoodToCMP116TwoMarkComparison`: true SAME-joint-source `|Cov_ν−C_CMP116|≤MatchError`, including signed nonzero FP/Jacobian/ghost, mixed bad/good and normalized marked two-jet terms | Exact existing original F19/R445 BIDI and selected Wilson J/R320 owners; not from just `μχ` |
+| **A4-P1** | `originalCMP116SelectedMarkedPhysicalRate`: source-admissible analytic J, literal rooted physical separation, small-field envelope `C_small e^(−m_smallR)`, all `a→0,L→∞` | CMP116 published SMALL-FIELD localization; physical `mixedDerivativeMagnitudeBelowSelectedShell` is **not** supplied by quoting it |
+| **A6-P1** | `originalSUNGoodMatchPhysicalRate`: `MatchError≤C_match e^(−m_matchR)` on actual original Wilson history and interacting spectators | P-MATCH quantitative mixed/signed remainder, cannot set to zero |
+| **A7** | Build `OriginalSmallLargePhysicalSource` from A2-R1–R4 and A5-P1–P2, A3-P1–P2, A4-P1 and A6-P1; call existing `originalFullWilsonUniformGeometricClustering`, then existing R320 source weld | No new generic D1 theorem or status flip |
+
+**Important proof-shape warning:** The event defining `χ` must be shown to control exactly the *connected* bad contribution; simply naming `Γ` does not show every full Gibbs vs CMP116 discrepancy is charged to a connecting bad contour. Local unrelated bad plaquettes can survive `χ=0` and contribute to `P-MATCH`. A large bad-sector probability bound on a different event is irrelevant. Preserve original finite-source original/coarse/target distinction and exact source normalization.
+
+### BIDI and geometry-first execution, not more finite exercises
+
+**Forward:** original periodic 4D SU(N) Haar/Gibbs + genuine `β_G(a)` → actual gauge-invariant cutoff/contour `χ` → normalized good ν → source-specific selected Eq171/CMP119 F19 four-column T with explicit remainder → CMP116 original marked log-Hessian + physical good/bad rates → existing D1/R320 full Gibbs covariance → same E1 cylinder/OS → dense same-H all-sector gap → group-scope N1/G1.
+
+**Reverse:** start at `Spec(H_OS|Ω⊥)⊂[m_G,∞)`, demand a dense SAME-H positive-time word core and physical `e^(−m_G t)`; reverse through exact original two-mark normalization and matched `R=a⋅(native distance)`; identify which full-source connected contours can traverse enough disjoint Euclidean-time slabs; derive the required *source charge per slab versus entropy* and prove it from actual Wilson/RG/Bałaban estimates, including frustrated zero/signed residuals. Geometry selects source words, cuts and orientation; it does **not** supply an analytic decay constant by itself.
+
+**Parallel E1/N1/G1 (unchanged, genuinely OPEN):** `YMClayE1OriginalSUNFiniteCylinderLawsExact.ActualSelectedOriginalSUNConvergence.originalWilsonCylinderConverges` for nonconstant fixed-physical-size all-word cylinders; continuum RP/OS; same-system noncollapse via `YMClayRGLossBudgetToNonGaussianExact`; `BalabanClayDenseCoreSpectralGapExact` on the SAME H; compact simple per-group physical construction. `#1544` original normalized fifth exterior F19 cube coefficient is existing donor ONLY; no full `τ∈[0,1]` W3 or weak-coupling uniformity is inferred. R445 B1–B5 and termwise absolute W3 remain **optional sufficient routes**, not extra mandatory proofs if original full-Gibbs physical covariance is established directly.
+
+**Acceptance:** do not call A2 original-source paid until its actual records are consistently inhabited from true compact SU(N) Haar; use the sanctioned Agda 2.9 check + source/axiom audit (module imports `RealAnalysisAxioms`), local SymPy for exact algebra, source-mark identity and all original unit/cutoff quantifiers. Maintain `YangMillsClaySolved = false`, `clayYangMillsPromoted=false` until *mathematical* Clay endpoints are genuinely established. The promotion flag's governance is distinct.
+
+
+---
+
 ## 24 November 2026 — corrected P0 inventory supersedes “31 exact lemmas”
 
 PR #1536 head `13692df9416b6cb8821b765d409b84c24f2bb8fe`, audited against master `e70fa21c8c8bc09919f0aea15e40199163798948`, corrects the earlier count: **31 is a candidate dependency checklist**, not 31 missing same-named Agda theorem declarations or 31 logically necessary independent lemmas (`3 T + 5 R445 + 7 E1 + 4 D1 + 5 D2 + 3 N1 + 4 G1`).
