@@ -58,6 +58,8 @@ def ratio(K,neg):
 
 def canonical(A,lam,s):
     R=model(A,lam,s)
+    if any(R["origin"]) or R["constant"]!=0:
+        raise ValueError("zero-affine compiler violated exact vacuum support theorem")
     R["scalar"]=[1,0,1]
     n=len(R["origin"])
     N=3**n
@@ -65,6 +67,8 @@ def canonical(A,lam,s):
     scale=eval_fixed(power(DELTA,-R["rank"]))
     for j,y,(a,b) in columns(R):
         K[y,j]=np.asarray((a+Z*b)%P,dtype=np.int64)*scale%P
+    if int(K[0,0])!=scale or not scale:
+        raise ValueError("raw zero-affine vacuum must be Delta^-rank")
     neg=parity_index(n)
     d=ratio(K,neg)
     roots=[tuple(sign*x for x in root) for sign in (1,-1) for root in ROOTS]
@@ -74,8 +78,14 @@ def canonical(A,lam,s):
     if len(lifts)!=1:raise ValueError("determinant ratio not in mu6")
     H=K*pow(d,-1,P)%P
     if ratio(H,neg)!=1:raise AssertionError("canonical determinant ratio")
+    from monster3b_original729_weil_source_cocycle_weld import mul, inv
+    exact=mul(inv(lifts[0]),power(DELTA,-R["rank"]))
+    if not int(H[0,0]) or int(H[0,0])!=eval_fixed(exact):
+        raise ValueError("zero-affine canonical vacuum unit mismatch")
     return H,{"det_ratio_Qzeta3":pack(lifts[0]),"det_ratio_mod31":d,
-              "normalized_vacuum_mod31":int(H[0,0]),"rank":R["rank"]}
+              "normalized_vacuum_mod31":int(H[0,0]),"rank":R["rank"],
+              "normalized_vacuum_Qzeta3":pack(exact),
+              "zero_affine_vacuum_unit_verified":True}
 
 def replay(C,D):
     I=np.eye(729,dtype=np.int64)
