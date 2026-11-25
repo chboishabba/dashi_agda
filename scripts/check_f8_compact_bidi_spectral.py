@@ -60,7 +60,7 @@ def numeric(work):
     shell4=((b[idx]**7-a[idx]**7)/7/ww)/eps**4
     cases=[]
     for name,C in [('nodal',np.stack((np.ones_like(u),u*u))),('shell',np.stack((np.ones_like(u),shell))),('both',np.stack((np.ones_like(u),u*u,shell))),('shell_024',np.stack((np.ones_like(u),shell,shell4)))]:
-        desired=np.zeros(len(C))
+        desired=np.zeros(len(C));
         if name=='shell_024':desired[-1]=eps**3*4.579857566126423
         residual=C@(ww*g[idx])-desired
         correction=C.T@np.linalg.solve((C*ww)@C.T,residual)
