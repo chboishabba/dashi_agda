@@ -128,3 +128,8 @@ The following identifiers refer to historical Langlands markdown sections, not t
 | R416 | Exponential live-state bypass even with delayed reads |
 | R417 | Compulsory individual suffix equivalence is computationally harder than needed |
 | R418 | Execution and controlling cut |
+
+
+## Current continuation — bounded-support spectral recovery
+
+See [Bounded-support spectral syndrome recovery](ClayLanglandsBoundedSupportSpectralRecovery.md) and `scripts/check_langlands_sparse_spectral_syndrome.py` (blob e47ac95fb974defe2dbecfeae6e036ade7b49c74). Deterministic Vandermonde/Hankel locator and trace-coordinate splitting recover every original witness on a promised support of size 1..k from 2k finite-field syndromes, no exact count supplied. The existing marked parity consumer can represent the syndrome bits by parsimonious source lift; polynomial source-derived production remains unpaid. Local exact checks passed; no integrated producer or native kernels. The current direct Clay Section92 charged primal/dual join and signed occupancy threshold are independent donor routes. All seven universal endpoint leaves remain open. No additional mandatory prerequisite; prioritize actual uniform source-derived verified-witness progress or independent separation.
