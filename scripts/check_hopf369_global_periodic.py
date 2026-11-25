@@ -16,7 +16,7 @@ def eq(name,a,b):
     checks.append(name); print(name,flush=True)
 def grad(f):return s.Matrix([s.diff(f,i) for i in X])
 def div(v):return clean(sum(s.diff(v[i],X[i]) for i in range(3)))
-def curl(v):return clean(s.Matrix([s.diff(v[2],y)-s.diff(v[1],z),s.diff(v[0],x)-s.diff(v[2],x),s.diff(v[1],x)-s.diff(v[0],y)]))
+def curl(v):return clean(s.Matrix([s.diff(v[2],y)-s.diff(v[1],z),s.diff(v[0],z)-s.diff(v[2],x),s.diff(v[1],x)-s.diff(v[0],y)]))
 # q=w/|w|. N=Im(dw conjugate(w)), M=Im(conjugate(w)dw).
 N=[a*V.diff(i)-s.diff(a,i)*V+V.cross(V.diff(i)) for i in w]
 M=[a*V.diff(i)-s.diff(a,i)*V-V.cross(V.diff(i)) for i in w]
