@@ -127,11 +127,11 @@ viewFraction : (v : CH.PositiveSum) → Q.ℚᵘ
 viewFraction v = frac (Z.+_ (CH.num v)) (CH.den v) N.nonZero
 
 literalView : (n : Nat) (v : W.View n) →
-  rawSum (suc n) Q.≃ viewFraction (W.value v)
-literalView n v rewrite W.numEq v | sym (W.sourceDen n v) = QP.≃-refl
+  rawSum (suc n) Q.≃ viewFraction (W.View.value v)
+literalView n v rewrite W.View.numEq v | sym (W.sourceDen n v) = QP.≃-refl
 
 literalPositivePrefix : (n : Nat) →
-  viewFraction (W.value (W.sourceView n)) Q.≃ sumPrefix (suc n)
+  viewFraction (W.View.value (W.sourceView n)) Q.≃ sumPrefix (suc n)
 literalPositivePrefix n =
   QP.≃-trans (QP.≃-sym (literalView n (W.sourceView n)))
     (prefixSemantics (suc n))
