@@ -5,7 +5,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (trans; subst)
+open import Relation.Binary.PropositionalEquality using (trans; subst; sym)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
@@ -197,6 +197,96 @@ record Selected3BNormalizerMonsterActionWeld
             state)
 
 open Selected3BNormalizerMonsterActionWeld public
+
+------------------------------------------------------------------------
+-- Full-vector acquisition successor.  The literal MMV carrier is the
+-- full weight-two representation (196884), not a type equality with the
+-- nontrivial 196883 constituent.  The old Cartesian/finite recognition
+-- record is not a prerequisite for this route.
+------------------------------------------------------------------------
+
+record ActualLinearWeightMultiplicityAcquisition {Monster K : Set} : Setω where
+  field
+    fullLiteralSameObjectWeld :
+      LiteralWeld.MonsterGradedVOALiteralActionWeld Monster K
+    fullLiteralVOALinearityReceipt :
+      LiteralVOA.VOAGroupActionLinearReceipt
+        (GVOA.group
+          (Legacy.voaAction
+            (LiteralWeld.gradedAuthority fullLiteralSameObjectWeld)))
+        (LiteralWeld.LiteralVOA fullLiteralSameObjectWeld)
+        (Core.monsterAction
+          (LiteralWeld.literalVOA fullLiteralSameObjectWeld))
+    fullWeightTwoBridge :
+      WeightTwo.WeightTwoLinearActionBridge
+        (LiteralWeld.gradedAuthority fullLiteralSameObjectWeld)
+    actualWeightHom : Hom.ActualLinearWeightHomSpace
+    fullWeightTwoIsLiteralAmbient :
+      LinearRep.linearCarrier
+        (WeightTwo.fullWeightTwoLinearRealisation fullWeightTwoBridge)
+      ≡ LinearZeta.literalAmbient (Hom.literalSource actualWeightHom)
+
+  fullCarrier : Linear.HilbertLift
+  fullCarrier =
+    LinearRep.linearCarrier
+      (WeightTwo.fullWeightTwoLinearRealisation fullWeightTwoBridge)
+
+  sourceNormalizer : Set
+  sourceNormalizer = LinearZeta.literalNormalizer (Hom.literalSource actualWeightHom)
+
+  field
+    actualNormalizerToMonster : sourceNormalizer → Monster
+    normalizerEmbeddingInjective : ∀ g h →
+      actualNormalizerToMonster g ≡ actualNormalizerToMonster h → g ≡ h
+    normalizerEmbeddingIdentity :
+      actualNormalizerToMonster
+        (GR.identity (LinearZeta.literalGroup (Hom.literalSource actualWeightHom)))
+      ≡ GR.identity
+        (GVOA.group
+          (Legacy.voaAction (LiteralWeld.gradedAuthority fullLiteralSameObjectWeld)))
+    normalizerEmbeddingComposition : ∀ g h →
+      actualNormalizerToMonster
+        (GR._∙_ (LinearZeta.literalGroup (Hom.literalSource actualWeightHom)) g h)
+      ≡ GR._∙_
+          (GVOA.group
+            (Legacy.voaAction (LiteralWeld.gradedAuthority fullLiteralSameObjectWeld)))
+          (actualNormalizerToMonster g) (actualNormalizerToMonster h)
+
+    actualNormalizerSameAction : ∀ g (v : Linear.Vector fullCarrier) →
+      subst Linear.Vector fullWeightTwoIsLiteralAmbient
+        (LinearRep.evaluatedEnd
+          (WeightTwo.fullWeightTwoLinearRealisation fullWeightTwoBridge)
+          (GR.action
+            (GR.grade
+              (GVOA.gradedRepresentation
+                (Legacy.voaAction (LiteralWeld.gradedAuthority fullLiteralSameObjectWeld)))
+              2)
+            (actualNormalizerToMonster g))
+          v)
+      ≡ Inertia.act
+          (LinearZeta.literalNormalizerAction (Hom.literalSource actualWeightHom)) g
+          (subst Linear.Vector fullWeightTwoIsLiteralAmbient v)
+
+    -- Preserve the genuine fixed line and the 196883 constituent as a
+    -- split invariant subspace; never identify their full carrier types.
+    constituentRecovery : Linear.Vector fullCarrier →
+      Linear.Vector (WeightTwo.constituentLinearCarrier fullWeightTwoBridge)
+    constituentRecoveryAfterInclusion : ∀ u →
+      constituentRecovery (WeightTwo.constituentInclusion fullWeightTwoBridge u) ≡ u
+
+  chosenPhaseInFull : Linear.Vector (LinearZeta.phaseLinearCarrier
+      (Hom.literalLinearZeta actualWeightHom)) → Linear.Vector fullCarrier
+  chosenPhaseInFull v =
+    subst Linear.Vector (sym fullWeightTwoIsLiteralAmbient)
+      (LinearZeta.includePhase (Hom.literalLinearZeta actualWeightHom) v)
+
+  field
+    chosenPhaseLiesInConstituent : ∀ v →
+      WeightTwo.constituentInclusion fullWeightTwoBridge
+        (constituentRecovery (chosenPhaseInFull v)) ≡ chosenPhaseInFull v
+
+open ActualLinearWeightMultiplicityAcquisition public
+
 
 ------------------------------------------------------------------------
 -- 3. WrongType / non-promotion firewalls.
