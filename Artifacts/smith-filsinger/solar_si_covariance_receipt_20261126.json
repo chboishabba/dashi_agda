@@ -1,0 +1,99 @@
+{
+  "status": "CONDITIONAL_SI_COVARIANCE",
+  "checker_blob": "1a3a2df7892833ac4560d462c5d5843222767fff",
+  "execution": "local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0; exact committed script Git blob match; donor equations transcribed and SI dimensions checked with SymPy, no kernel or complete donor replay",
+  "SI": {
+    "owner": "DASHI/Physics/Units/SI.agda",
+    "blob": "d722796d4105b3623a696136a317e424a48b47b8",
+    "metrology": "DASHI/Physics/Units/SIMetrologyBridge.agda",
+    "metrology_blob": "27b1681590c322b96aa978c8b16ba166927c737d",
+    "both_present_on_master_and_branch": true,
+    "reference_admittance_S": 0.7957747154594768,
+    "angular_power_factor_S": 10,
+    "scope": "reference scale from original assumed mu; not exact SI definition or calibration"
+  },
+  "cases": 96,
+  "optimisations": 288,
+  "source": {
+    "incident_global_modal_W": 1,
+    "states": [
+      "TE_x",
+      "TE_y",
+      "TM_x"
+    ],
+    "persistence": 0.9,
+    "block_seconds_for_switch_budget": 1,
+    "conditional_source_information": "previous state selects subspace; instantaneous within-subspace ideal matching assumed for both fixed and causal",
+    "expected_current_norm_limit_A": 0.001
+  },
+  "grid": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "areas_m2": [
+      1,
+      1000000
+    ],
+    "aspects": [
+      1,
+      1.5,
+      1.618033988749895,
+      2
+    ],
+    "orientations_deg": [
+      0,
+      45,
+      90
+    ]
+  },
+  "max_ledger_W": 9.860294087592773e-16,
+  "max_pair_W": 5.293955920339377e-23,
+  "max_numeric_dual_gap_W": 5.651297944962285e-21,
+  "positive_access_above_1e_12_W": 4,
+  "best_same_geometry_gain": {
+    "f": 0.05,
+    "area": 1000000,
+    "aspect": 1.618033988749895,
+    "angle_deg": 90,
+    "fixed_W": 2.6505809436718446e-8,
+    "causal_W": 3.548523734274204e-8,
+    "full_W": 3.688887982111395e-8,
+    "budget_W": 8.979427906023592e-9,
+    "access_delta_W": -3.2321463283579988e-9,
+    "loss_delta_W": -1.2211574307308126e-8,
+    "switch_budget_J": 8.979427906023594e-8
+  },
+  "best_grid": {
+    "f": 3.915,
+    "area": 1000000,
+    "aspect": 1,
+    "angle_deg": 90,
+    "fixed_W": 3.924072919643929e-8,
+    "causal_W": 4.228984808556015e-8,
+    "full_W": 4.3510040327626636e-8,
+    "budget_W": 3.0491188891208573e-9
+  },
+  "best_1m2": {
+    "f": 3.915,
+    "aspect": 1,
+    "angle_deg": 90,
+    "fixed_W": 3.924095555516781e-11,
+    "causal_W": 4.229004926490146e-11,
+    "full_W": 4.3510238896921226e-11
+  },
+  "loop_diagnostic": {
+    "area_turn_m2": 1,
+    "resistance_ohm": 1,
+    "frequency_Hz": 7.83,
+    "required_B_rms_T_for_1uW": 0.00004065260359946241,
+    "required_B_rms_T_for_1W": 0.04065260359946241,
+    "required_B_rms_T_for_7_3W": 0.10983728651842085
+  },
+  "limitations": "l<=2 original zero-width line limit (not latest distributed shell), assumed upper/lower boundary and material coefficients, synthetic globally normalized source not measured site, expected current constraint not peak or conductor resistance/volume, ideal receiver port work not terminal load, instantaneous ideal matching and no controller overhead yet, no certified dual rounding/continuum convergence, finite grid not global continuous geometry optimum, no proof unrestricted passive realizability. Causal rank-one never beats rank-seven relaxation. No physical extraction.",
+  "physical_admission": false,
+  "CI": false,
+  "kernel": false
+}
