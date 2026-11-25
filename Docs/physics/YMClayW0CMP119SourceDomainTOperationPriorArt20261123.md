@@ -1,3 +1,11 @@
+## 26 November addendum — original CMP122-II / CMP119 readable primary images recovered
+
+The new exact source crosswalk [`YMClayW0PrimaryVisualEquationCrosswalk20261126.md`](YMClayW0PrimaryVisualEquationCrosswalk20261126.md) supersedes every *OCR-only* assertion about literal (1.71) coefficient glyphs or missing primary-page access in this earlier note. CMP122-II printed **378–379** and CMP119 printed **254–258** are now independently inspected at their readable `scispace.com/pdf/` scans (URLs and DOI recorded in the crosswalk). The user-uploaded `balaban1989.pdf` is **CMP122-I**; its **own** (1.71) is on printed p. **192**, not the CMP122-II selected `T′` (1.71). An older normalization transcription in this audit, `(-3d(g_k) log g_k + log c_0)`, was drawn from damaged source text and should **not** be used as an exact Agda factor; the full printed p. 379 formula is the controlling visual authority for its logarithmic tree measure coefficient.
+
+Even with legible source pages, no actual native original Wilson/F19 `sourceStepIsEquation171Mass` witness is constructed. Source p. 378 says reversed Faddeev–Popov produces **equivalent under suitable integration, not pointwise equal**, densities. Require matching constrained measures/FP/gauge, component history and all four source marks before equality of integrated T masses. No new physical P0W/P0X estimate or Clay promotion.
+
+---
+
 # YM W0 — CMP119 source-domain and constrained-T prior-art audit (23 Nov 2026)
 
 ## Finding: most geometrical ingredients already exist
