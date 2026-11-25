@@ -1,0 +1,108 @@
+# Paper 2 — Source-Preserving Dimensional Reduction and Einstein–Israel Geometry
+
+**Subtitle:** Signed Hopf connections, periodic Kaluza–Klein fibres and AdS gravitational spectra  
+**Status:** Revived independent working manuscript, 26 November 2026. Not a submission, native kernel certificate, or terminal GR/QFT/TOE claim.  
+**Suggested classifications:** gr-qc; math.DG, math-ph.  
+**Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
+
+## Abstract
+
+We study source-preserving reductions of noncompact Hopf geometry with a compact fifth direction and distributional gravitational sources. A selected periodic AdS5 pure-tension background admits a direct Hopf deformation preserving the spatial Israel jump. A positive ground-state transform of its linearized Hamiltonian constraint yields a coercive inverse and nonlinear small-data comparison barriers; a finite-box weak discretization retains the full metric and surface source. An AdS3 slicing of the same undeformed metric gives a separated normalizable spin-two tower with a strictly positive lowest mass, distinguishing a geometric slice from an autonomous three-dimensional Einstein theory. Comparisons with the rank-24 Monstrous M-theory and Leech/FLM carriers give exact action and curvature discriminators, not a quantum duality. We separate classical background identities, candidate analytical proofs, executed finite controls, native certification and physical realization.
+
+## 1. Geometry and authority
+
+Use units with speed of light one, \(\kappa=\kappa_5^2\), a periodic proper coordinate \(y\in[0,L]\) with endpoints identified, and a common oriented unit normal across the single brane. The bulk obeys \(G_{AB}+\Lambda_5g_{AB}=\kappa T_{AB}\). Brackets mean plus minus minus, not two independently outward normals. Israel's equation is
+\[
+[K^a{}_b]=-\kappa(S^a{}_b-\tfrac13\operatorname{tr}S\,\delta^a{}_b).
+\]
+In the original noncompact Ricci-flat G3 construction the rational Hopf potential on Euclidean three-space is
+\[
+ A_0=\frac{2(2xz-2y_0,2x+2y_0z,1-x^2-y_0^2+z^2)}{(1+x^2+y_0^2+z^2)^2}\cdot d(x,y_0,z).
+\]
+Here \(y_0\) is a base coordinate, not the circle coordinate. Its oriented helicity integral is \(4\pi^2\). The Ricci-flat G3 branch, sourced periodic AdS comparison, original electromagnetic/RMHD G4 branch and actual DCHoTT finite carrier are distinct; they require independent realization maps. No ordinary electromagnetic field is inferred solely from the metric connection.
+
+For a spatial conformal factor with time symmetry, fixed physical surface density and smooth seed, the scalar constraint in four spatial dimensions includes the surface delta with its conformal scaling. A uniformly positive extended tension is incompatible with the earlier asymptotically product, Lambda=0, time-symmetric conformal seed: averaging over the circle and then spheres gives a positive uniform forcing of the Newton equation and contradicts convergence to one. This is a restricted obstruction, not a general prohibition of extended tension.
+
+## 2. Exact periodic source background
+
+Take \(\Lambda_5=-6c^2\), \(c>0\), and a four-dimensional AdS metric of sectional curvature \(-h_0^2\). Set
+\[
+ g_5=dy^2+b(y)^2g_{\mathrm{AdS}_4},\quad
+ b=\frac{\cosh(c(y-L/2))}{\cosh(cL/2)},\quad
+ h_0=\frac{c}{\cosh(cL/2)}.
+\]
+Then \(b''=c^2b\), \((b')^2=c^2b^2-h_0^2\). The warped Ricci formula gives \(R^A{}_B=-4c^2\delta^A{}_B\) on the smooth bulk. At the seam \(b=1\), \([b'/b]=-2c\tanh(cL/2)\), so the full pure-tension Israel equation holds for \(\kappa T=6c\tanh(cL/2)\). The minimum at \(L/2\) is smooth, not a second brane.
+
+For a general static warped maximally symmetric slice of curvature C and tangential bulk Lorentz-invariant stress with density \(\rho_b\) and transverse pressure \(p_y\), the integrated Einstein difference reads
+\[
+ \sum_iT_i+\int_0^L(\rho_b+p_y)dy=-\frac{3C}{\kappa}\int_0^L e^{-2A}dy .
+\]
+Flat slices with one positive tension require the integral on the left from bulk matter alone to be \(-T\). The flat-circle Casimir potential cannot be substituted without its actual warped/brane-dependent stress tensor. These are classical warped-product and junction identities, not claims of new general relativity theorems.
+
+## 3. Hopf deformation preserving the seam
+
+Use the time-symmetric hyperbolic spatial base \((\mathbb H^3,\gamma)\) of curvature \(-h_0^2\). Pull back the original Hopf one-form through the oriented radial diffeomorphism \(r_{\mathbb R^3}=\sinh(2h_0r_H)/(2h_0)\). Let \(a=\epsilon A_0\), \(S=1+|a|_\gamma^2\), and \(H=\gamma+a\otimes a\). Choose the explicit periodic spatial seed
+\[
+ g_\epsilon=(dy+a)^2+Q,\qquad Q=\gamma+(b^2-1)H/\sqrt S.
+\]
+The eigenvalues of Q relative to gamma are \(1+(b^2-1)/\sqrt S\) on the transverse plane and \(1+(b^2-1)\sqrt S\) in the a direction. Thus for uniformly small epsilon the metric is positive; it is continuous and piecewise smooth at the seam. At epsilon zero it is exactly the background spatial slice. At the seam its induced metric is H, \(g^{yy}=S\), and the common unit conormal is \(dy/\sqrt S\). The tangential derivative jump satisfies \([\partial_y g_{ij}]=2[b']H_{ij}/\sqrt S\). Hence
+\[
+ [K^i{}_j]=\frac{\sqrt S}{2}H^{ik}[\partial_y g_{kj}]= -\kappa T\delta^i{}_j/3.
+\]
+For fixed tension the instantaneous lapse seed \(N_0=N_{\rm base}b^{1/\sqrt S}\), with continuous tangential base lapse, supplies the temporal jump after the conformal correction below. A general rest stress \(S^a{}_b=\operatorname{diag}(-\rho,pI+\pi)\) with trace-free pi requires \([K^i{}_j]_{TF}=-\kappa\pi^i{}_j\) and \([K^t{}_t]=\kappa(2\rho/3+p)\). The isotropic construction does not pay that extra anisotropic source or material evolution. Vanishing initial extrinsic curvature of the time slice and vanishing material momentum satisfy the initial momentum equation; they do not determine future evolution.
+
+## 4. Hamiltonian constraint and small-data comparison
+
+Let physical spatial metric be \(u^2g_\epsilon\) and let the selected tension remain fixed. Smooth and distributional equations become
+\[
+ -\Delta_\epsilon u +\tfrac16R_{\epsilon,reg}u-\tfrac13\Lambda_5u^3=0,
+ \qquad -[\partial_\nu u]+\tfrac{\kappa T}{3}(u-u^2)=0.
+\]
+At zero deformation, the linearization at u=1 is \(\mathcal L=-\Delta_{\bar g}+4c^2-(\kappa T/3)\delta_\Sigma\). The warp itself obeys \(\mathcal Lb=3h_0^2/b\); its normal derivative jump cancels the delta term. For compactly supported smooth test functions (and by form closure),
+\[
+ q[v]=\int b^2|\nabla(v/b)|^2dV+\int (3h_0^2/b^2)|v|^2dV\ge3h_0^2\|v\|_2^2.
+\]
+This is a scalar initial-constraint coercivity estimate, not a tensor/radion dynamical stability theorem.
+
+For the selected radial map, use \(\eta=\mathrm{sech}^2(h_0r_H)\), \(\Delta_{\mathbb H^3}\eta=-6h_0^2\eta^2\), and \(w=(1+(b-1)/\sqrt S)\eta\). Lower and upper barriers \(1-\delta w\), \(1+\delta w-2\delta^2\eta^2\) have exact boundary residuals \(-\kappa T\delta^2\eta^2/3\) and \(\kappa T\delta^2\eta^2(1+4\delta\eta-4\delta^2\eta^2)/3\). At epsilon zero the first variation in direction w is bounded below by a positive multiple of eta. Under the uniform piecewise C2 weighted estimates, smallness, trace and compactness hypotheses recorded in AM, the same strict bulk signs persist for sufficiently small epsilon relative to delta. Shifted monotone iteration on exhausting bounded domains gives a candidate positive weak solution with \(|u-1|\lesssim\delta\eta\). The analytical proof needs independent review of these hypotheses and the exhaustion passage; no explicit certified radius is supplied. The conformal jump equation gives the physical mixed spatial jump exactly when a sufficiently regular solution exists; the lapse \(uN_0\) gives the same initial temporal jump in the adapted rest chart. No full timelike development is inferred.
+
+## 5. AdS3 slicing and tensor spectrum
+
+Rewrite the exact undeformed background with \(f(z)=\cosh(h_0z)\):
+\[
+ ds_5^2=dy^2+b(y)^2(dz^2+f(z)^2ds_{\mathrm{AdS}_3}^2).
+\]
+The local AdS3 slice is part of the same object. The constant-profile Einstein–Hilbert coefficient is proportional to \(\int b^2dy\int_{\mathbb R}f dz\), which diverges. For the standard external TT relative metric amplitude, normalizable self-adjoint boundary and periodic pure-tension matching, use norm \(\int b^2 f |q|^2\) and energy \(\int (b^4f^3|q_y|^2+b^2f^3|q_z|^2)\). Separate the compact operator \(-b^{-2}\partial_y(b^4\partial_y)\) with eigenvalues \(\mu_j^2\ge0\), including constant zero mode. Put \(a_j=(3+\sqrt{9+4\mu_j^2/h_0^2})/2\). The normalizable separated solutions are proportional to
+\[
+ Z_{jn}=\operatorname{sech}^{a_j}(h_0z)C_n^{(a_j-1)}(\tanh(h_0z)),\quad
+ m_{jn}^2=h_0^2(a_j+n)(a_j+n-2).
+\]
+Conjugation to the Gegenbauer differential operator and polynomial density in its weighted L2 space yield the candidate all-index spectral proof under the stated self-adjoint domain. For j=0, ground state \(\operatorname{sech}^3\) has norm squared \(3\pi/(8h_0)\) in z, and ground-state energy gives \(m^2\ell_3^2\ge3\) with equality. The spin-two dimension on the standard normalizable branch begins at 3 rather than 2. Neither this result nor the divergent zero-profile integral rules out all boundary gravity constructions. It specifically rules out autonomous massless EH gravity in this selected normalizable tensor sector; no nonzero-Hopf spectral or quantum equivalence follows.
+
+## 6. Moonshine comparison and residual preservation
+
+At the same bulk Lambda an alternative Einstein product AdS3 x compact hyperbolic surface of genus g>=2 has sectional curvatures \(-2c^2,-4c^2\), finite reduced G3, and Brown–Henneaux c=24 when \(G_5c^3=\pi(g-1)/(16\sqrt2)\). It is NOT the original periodic Hopf background: Weyl-squared differs by \(72c^4\) from local AdS5, and product-brane Israel stress is anisotropic. Equal Ricci tensors and central-charge parameters are insufficient. Parity-even EH also gives two chiral central charges, not a single holomorphic Monster theory.
+
+The separate Paper 10 source supplement handles the exact M2 exterior polarization reduction, Leech quotient and binary/ternary representation transport; it is a comparison, not a premise of the gravitational constraint. The existing Paper 8 closure grammar can consume the positive quadratic form, normalizable weighted Hilbert carrier and explicit non-descent examples. A Ricci contraction forgets Weyl; a horizontal KK observation forgets the compact connection; a character forgets actual representation operators. Their residuals are source-specific, not one identified physical field.
+
+## 7. Executed checks and reproducibility
+
+Prior committed source receipt: #1554 head 7914ec131be930eb8baa237f3489930ec91c2d24. The reported local runs are not fresh executions for this manuscript. See [P0AK–AO roadmap](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md) for exact predecessor hashes, commands, source assumptions and negative controls.
+
+- scripts/check_hopf369_p0ak.py: 25 Ricci components, seam identities, scalar coercivity identity and four 1D FEM controls.
+- scripts/check_hopf369_p0al.py and p0am.py: AdS3 slice, curvature discriminator, Hopf seed and boundary barriers.
+- scripts/check_hopf369_p0an.py: all-index Gegenbauer conjugation and 27 finite polynomial controls.
+- scripts/check_hopf369_p0an_metric.py (as extended at P0AO): actual 4D full metric AD curvature, periodic Q1 volume and nonlinear seam solve, finite Poincare-ball cube with artificial Dirichlet boundary. Six positive-amplitude refinement comparisons at c=1, L=2log2, h0=.8, kT=3.6, epsilon=.025 converged in two Newton steps with maximum discrete weak residual about 2.24e-15. Raw area-weighted seam derivative residual decreased from 1.31e-4 to 3.08e-5; the final relative RMS is about 29%. This is not a certified strong junction trace, full ball exhaustion, continuum rate or error interval. Original signed circle-reflection control at two meshes passed to 2.22e-16.
+
+## 8. Remaining exact endpoints and submission prerequisites
+
+1. Independent review of the explicit seed, normal convention, scalar coercivity, barrier weighted regularity/exhaustion and TT boundary/Israel derivation; literature search to distinguish classical results from source-specific candidate novelty.
+2. Full hyperbolic exhaustion and equilibrated normal flux, trace estimates, rigorous a posteriori norm bound and mesh/normal convergence; no inference of strong trace from Newton residual.
+3. Same-source Lorentzian Einstein–Israel evolution with appropriate gauge, initial/boundary corner compatibility and actual AdS boundary conditions. Import F8 operators only after matching metric, action, tensor domain and source; preserve constraints and energy.
+4. Actual anisotropic source, conserved mechanical and gauge/chemical stress, renormalized warped Casimir source if used, and independent physical calibration.
+5. Separate native proof interfaces and exact-head Agda/Lean acceptance if claiming formal certification. No new kernel result or full dependency replay is claimed.
+6. Neither this continuum comparison nor the historical Paper 2 finite geometry constructs the actual DCHoTT-to-continuum isomorphism, W4 physical matter source, universal action, or quantum Monster duality. Keep promotion flags false.
+
+## References and attribution
+
+Israel (1966), DOI 10.1007/BF02710419; standard KK and Einstein warped-product geometry, Hopf helicity, conformal initial-value and Gegenbauer/Sturm–Liouville theory; Brown–Henneaux (1986), DOI 10.1007/BF01211590; Witten arXiv:0706.3359 (conjectural quantum gravity); Chester–Marrani–Rios, Monstrous M-Theory, DOI 10.3390/sym15020490; FLM, *Vertex Operator Algebras and the Monster* (1988). Existing KSW668/F8, KK radion, source and signed-geometry owners retain their recorded attribution. DASHI contribution is the particular source-compatible Hopf seed, constraint/spectral integration, exact discriminators and executable checks; novelty against literature is not yet certified. Credit JMD only for evidenced upstream geometry/diagrams or explicit donor material, not for classical GR or the Leech construction. Preserve earlier original Hopf/ABHA source genealogy in #1554.
