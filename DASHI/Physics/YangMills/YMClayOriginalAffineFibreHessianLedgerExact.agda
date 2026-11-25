@@ -44,11 +44,63 @@ module DASHI.Physics.YangMills.YMClayOriginalAffineFibreHessianLedgerExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base as ℤ using (ℤ; +_)
+open import Data.Nat.Base using (ℕ)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; 1/_; NonZero)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_; 1/_; NonZero)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+
+rat : (numerator : ℤ) (denominator : ℕ) .{{_ : Data.Nat.Base.NonZero denominator}} → ℚ
+rat numerator denominator = ℚ._/_ numerator denominator
+
+twoℚ : ℚ
+twoℚ = 1ℚ + 1ℚ
+
+affineRadius : ℚ
+affineRadius = rat (+ 9) 100
+
+affinePolydiscConstants :
+    (1ℚ - twoℚ * affineRadius - affineRadius * affineRadius ≡ rat (+ 8119) 10000)
+  × ((1ℚ - affineRadius) * (1ℚ - affineRadius) ≡ rat (+ 8281) 10000)
+  × ((1ℚ + affineRadius) * (1ℚ + affineRadius) ≡ rat (+ 11881) 10000)
+  × ((1ℚ - affineRadius * affineRadius)
+      * (1ℚ - affineRadius * affineRadius) ≡ rat (+ 98386561) 100000000)
+  × ((1ℚ - twoℚ * affineRadius - affineRadius * affineRadius)
+      * (1ℚ - twoℚ * affineRadius - affineRadius * affineRadius)
+      ≡ rat (+ 65918161) 100000000)
+affinePolydiscConstants =
+  let
+    complexFloor :
+      1ℚ - twoℚ * affineRadius - affineRadius * affineRadius ≡ rat (+ 8119) 10000
+    complexFloor = ℚRing.solve-∀
+
+    realLower :
+      (1ℚ - affineRadius) * (1ℚ - affineRadius) ≡ rat (+ 8281) 10000
+    realLower = ℚRing.solve-∀
+
+    realUpper :
+      (1ℚ + affineRadius) * (1ℚ + affineRadius) ≡ rat (+ 11881) 10000
+    realUpper = ℚRing.solve-∀
+
+    realHessianDenominator :
+      (1ℚ - affineRadius * affineRadius)
+        * (1ℚ - affineRadius * affineRadius) ≡ rat (+ 98386561) 100000000
+    realHessianDenominator = ℚRing.solve-∀
+
+    complexHessianDenominator :
+      (1ℚ - twoℚ * affineRadius - affineRadius * affineRadius)
+        * (1ℚ - twoℚ * affineRadius - affineRadius * affineRadius)
+        ≡ rat (+ 65918161) 100000000
+    complexHessianDenominator = ℚRing.solve-∀
+  in
+  complexFloor
+    , realLower
+    , realUpper
+    , realHessianDenominator
+    , complexHessianDenominator
 
 affineMass :
   (k0 kf kg kfg s t : ℚ) →
