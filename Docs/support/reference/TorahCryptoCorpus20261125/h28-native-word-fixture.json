@@ -1,0 +1,856 @@
+[
+  {
+    "book": "genesis",
+    "ch": 36,
+    "v": 32,
+    "sourceBlob": "e62cce00a812b6e327cd6a73e547165cc31eeb07",
+    "rows": [
+      {
+        "verse": 32,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וימלך"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "באדום"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בלע"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בן"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בעור"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ושם"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עירו"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "דנהבה"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 33,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וימת"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בלע"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וימלך"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תחתיו"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "יובב"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בן"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "זרח"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מבצרה"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 34,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וימת"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "יובב"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וימלך"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תחתיו"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "חשם"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מארץ"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "התימני"
+          }
+        ],
+        "holes": []
+      }
+    ]
+  },
+  {
+    "book": "exodus",
+    "ch": 14,
+    "v": 19,
+    "sourceBlob": "6127a572e7fb4bd5a7bd9a9511c8f0aaa0dab5ab",
+    "rows": [
+      {
+        "verse": 19,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויסע"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מלאך"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "האלהים"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ההלך"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "לפני"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מחנה"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ישראל"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "וילך"
+          },
+          {
+            "slot": 8,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מאחריהם"
+          },
+          {
+            "slot": 9,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויסע"
+          },
+          {
+            "slot": 10,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "עמוד"
+          },
+          {
+            "slot": 11,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הענן"
+          },
+          {
+            "slot": 12,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "מפניהם"
+          },
+          {
+            "slot": 13,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויעמד"
+          },
+          {
+            "slot": 14,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "מאחריהם"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 20,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויבא"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בין"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מחנה"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מצרים"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ובין"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "מחנה"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ישראל"
+          },
+          {
+            "slot": 7,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויהי"
+          },
+          {
+            "slot": 8,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הענן"
+          },
+          {
+            "slot": 9,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "והחשך"
+          },
+          {
+            "slot": 10,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויאר"
+          },
+          {
+            "slot": 11,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "את"
+          },
+          {
+            "slot": 12,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הלילה"
+          },
+          {
+            "slot": 13,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ולא"
+          },
+          {
+            "slot": 14,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "קרב"
+          },
+          {
+            "slot": 15,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "זה"
+          },
+          {
+            "slot": 16,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "אל"
+          },
+          {
+            "slot": 17,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "זה"
+          },
+          {
+            "slot": 18,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "כל"
+          },
+          {
+            "slot": 19,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הלילה"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 21,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויט"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "משה"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "את"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ידו"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "על"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "הים"
+          },
+          {
+            "slot": 6,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויולך"
+          },
+          {
+            "slot": 7,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "יהוה"
+          },
+          {
+            "slot": 8,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "את"
+          },
+          {
+            "slot": 9,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הים"
+          },
+          {
+            "slot": 10,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ברוח"
+          },
+          {
+            "slot": 11,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "קדים"
+          },
+          {
+            "slot": 12,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "עזה"
+          },
+          {
+            "slot": 13,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "כל"
+          },
+          {
+            "slot": 14,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הלילה"
+          },
+          {
+            "slot": 15,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "וישם"
+          },
+          {
+            "slot": 16,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "את"
+          },
+          {
+            "slot": 17,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "הים"
+          },
+          {
+            "slot": 18,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "לחרבה"
+          },
+          {
+            "slot": 19,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "ויבקעו"
+          },
+          {
+            "slot": 20,
+            "segment": 1,
+            "tag": "w",
+            "glyphs": "המים"
+          }
+        ],
+        "holes": []
+      }
+    ]
+  },
+  {
+    "book": "exodus",
+    "ch": 20,
+    "v": 13,
+    "sourceBlob": "6127a572e7fb4bd5a7bd9a9511c8f0aaa0dab5ab",
+    "rows": [
+      {
+        "verse": 13,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "לא"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תרצח"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 14,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "לא"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תנאף"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 15,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "לא"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תגנב"
+          }
+        ],
+        "holes": []
+      }
+    ]
+  },
+  {
+    "book": "deuteronomy",
+    "ch": 32,
+    "v": 6,
+    "sourceBlob": "6668d22dc2a3cf891c24cf763f9a3c146821061a",
+    "rows": [
+      {
+        "verse": 6,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ה"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ליהוה"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "תגמלו"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "זאת"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עם"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "נבל"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ולא"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "חכם"
+          },
+          {
+            "slot": 8,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "הלוא"
+          },
+          {
+            "slot": 9,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "הוא"
+          },
+          {
+            "slot": 10,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "אביך"
+          },
+          {
+            "slot": 11,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "קנך"
+          },
+          {
+            "slot": 12,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "הוא"
+          },
+          {
+            "slot": 13,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עשך"
+          },
+          {
+            "slot": 14,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויכננך"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 7,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "זכר"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ימות"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עולם"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בינו"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "שנות"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "דור"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ודור"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "שאל"
+          },
+          {
+            "slot": 8,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "אביך"
+          },
+          {
+            "slot": 9,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויגדך"
+          },
+          {
+            "slot": 10,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "זקניך"
+          },
+          {
+            "slot": 11,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ויאמרו"
+          },
+          {
+            "slot": 12,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "לך"
+          }
+        ],
+        "holes": []
+      },
+      {
+        "verse": 8,
+        "words": [
+          {
+            "slot": 0,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בהנחל"
+          },
+          {
+            "slot": 1,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עליון"
+          },
+          {
+            "slot": 2,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "גוים"
+          },
+          {
+            "slot": 3,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בהפרידו"
+          },
+          {
+            "slot": 4,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בני"
+          },
+          {
+            "slot": 5,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "אדם"
+          },
+          {
+            "slot": 6,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "יצב"
+          },
+          {
+            "slot": 7,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "גבלת"
+          },
+          {
+            "slot": 8,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "עמים"
+          },
+          {
+            "slot": 9,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "למספר"
+          },
+          {
+            "slot": 10,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "בני"
+          },
+          {
+            "slot": 11,
+            "segment": 0,
+            "tag": "w",
+            "glyphs": "ישראל"
+          }
+        ],
+        "holes": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,486 @@
+[
+  {
+    "book": "genesis",
+    "chapter": 36,
+    "verse": 32,
+    "length": 31,
+    "wordCounts": [
+      8,
+      8,
+      7
+    ],
+    "observed": {
+      "ordered": 0,
+      "unordered": 0,
+      "two": 0,
+      "twelve": 10,
+      "degenerate": 1,
+      "allEqual": 0
+    },
+    "wordRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 7,
+        "n": 7,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 7,
+        "n": 7,
+        "min": 0,
+        "max": 0
+      },
+      "two": {
+        "observed": 0,
+        "mean": 1.7142857142857142,
+        "atLeast": 7,
+        "n": 7,
+        "min": 0,
+        "max": 4
+      },
+      "twelve": {
+        "observed": 10,
+        "mean": 13,
+        "atLeast": 7,
+        "n": 7,
+        "min": 10,
+        "max": 16
+      }
+    },
+    "wordShuffle": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0.0185546875,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 1
+      },
+      "two": {
+        "observed": 0,
+        "mean": 1.294189453125,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 5
+      },
+      "twelve": {
+        "observed": 10,
+        "mean": 11.7724609375,
+        "atLeast": 3332,
+        "n": 4096,
+        "min": 4,
+        "max": 20
+      }
+    },
+    "glyphRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.06451612903225806,
+        "atLeast": 31,
+        "n": 31,
+        "min": 0,
+        "max": 1
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0.16129032258064516,
+        "atLeast": 31,
+        "n": 31,
+        "min": 0,
+        "max": 1
+      },
+      "two": {
+        "observed": 0,
+        "mean": 1.5806451612903225,
+        "atLeast": 31,
+        "n": 31,
+        "min": 0,
+        "max": 6
+      },
+      "twelve": {
+        "observed": 10,
+        "mean": 12.193548387096774,
+        "atLeast": 26,
+        "n": 31,
+        "min": 5,
+        "max": 17
+      }
+    }
+  },
+  {
+    "book": "exodus",
+    "chapter": 14,
+    "verse": 19,
+    "length": 72,
+    "wordCounts": [
+      15,
+      20,
+      21
+    ],
+    "observed": {
+      "ordered": 0,
+      "unordered": 1,
+      "two": 5,
+      "twelve": 32,
+      "degenerate": 7,
+      "allEqual": 2
+    },
+    "wordRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 21,
+        "n": 21,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 1,
+        "mean": 0.7142857142857143,
+        "atLeast": 12,
+        "n": 21,
+        "min": 0,
+        "max": 3
+      },
+      "two": {
+        "observed": 5,
+        "mean": 4.523809523809524,
+        "atLeast": 10,
+        "n": 21,
+        "min": 0,
+        "max": 9
+      },
+      "twelve": {
+        "observed": 32,
+        "mean": 27.047619047619047,
+        "atLeast": 3,
+        "n": 21,
+        "min": 19,
+        "max": 34
+      }
+    },
+    "wordShuffle": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.0244140625,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 1
+      },
+      "unordered": {
+        "observed": 1,
+        "mean": 0.799560546875,
+        "atLeast": 2369,
+        "n": 4096,
+        "min": 0,
+        "max": 4
+      },
+      "two": {
+        "observed": 5,
+        "mean": 4.452880859375,
+        "atLeast": 1876,
+        "n": 4096,
+        "min": 0,
+        "max": 13
+      },
+      "twelve": {
+        "observed": 32,
+        "mean": 26.99267578125,
+        "atLeast": 540,
+        "n": 4096,
+        "min": 12,
+        "max": 40
+      }
+    },
+    "glyphRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.027777777777777776,
+        "atLeast": 72,
+        "n": 72,
+        "min": 0,
+        "max": 1
+      },
+      "unordered": {
+        "observed": 1,
+        "mean": 0.8611111111111112,
+        "atLeast": 45,
+        "n": 72,
+        "min": 0,
+        "max": 3
+      },
+      "two": {
+        "observed": 5,
+        "mean": 4.569444444444445,
+        "atLeast": 35,
+        "n": 72,
+        "min": 0,
+        "max": 9
+      },
+      "twelve": {
+        "observed": 32,
+        "mean": 27.125,
+        "atLeast": 11,
+        "n": 72,
+        "min": 19,
+        "max": 35
+      }
+    }
+  },
+  {
+    "book": "exodus",
+    "chapter": 20,
+    "verse": 13,
+    "length": 6,
+    "wordCounts": [
+      2,
+      2,
+      2
+    ],
+    "observed": {
+      "ordered": 0,
+      "unordered": 0,
+      "two": 0,
+      "twelve": 0,
+      "degenerate": 1,
+      "allEqual": 1
+    },
+    "wordRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 2,
+        "n": 2,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 2,
+        "n": 2,
+        "min": 0,
+        "max": 0
+      },
+      "two": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 2,
+        "n": 2,
+        "min": 0,
+        "max": 0
+      },
+      "twelve": {
+        "observed": 0,
+        "mean": 1,
+        "atLeast": 2,
+        "n": 2,
+        "min": 0,
+        "max": 2
+      }
+    },
+    "wordShuffle": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 0
+      },
+      "two": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 0
+      },
+      "twelve": {
+        "observed": 0,
+        "mean": 1.0078125,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 2
+      }
+    },
+    "glyphRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0,
+        "atLeast": 6,
+        "n": 6,
+        "min": 0,
+        "max": 0
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0.16666666666666666,
+        "atLeast": 6,
+        "n": 6,
+        "min": 0,
+        "max": 1
+      },
+      "two": {
+        "observed": 0,
+        "mean": 0.16666666666666666,
+        "atLeast": 6,
+        "n": 6,
+        "min": 0,
+        "max": 1
+      },
+      "twelve": {
+        "observed": 0,
+        "mean": 2,
+        "atLeast": 6,
+        "n": 6,
+        "min": 0,
+        "max": 4
+      }
+    }
+  },
+  {
+    "book": "deuteronomy",
+    "chapter": 32,
+    "verse": 6,
+    "length": 51,
+    "wordCounts": [
+      15,
+      13,
+      12
+    ],
+    "observed": {
+      "ordered": 0,
+      "unordered": 0,
+      "two": 0,
+      "twelve": 17,
+      "degenerate": 5,
+      "allEqual": 0
+    },
+    "wordRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.3333333333333333,
+        "atLeast": 12,
+        "n": 12,
+        "min": 0,
+        "max": 1
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 1,
+        "atLeast": 12,
+        "n": 12,
+        "min": 0,
+        "max": 3
+      },
+      "two": {
+        "observed": 0,
+        "mean": 2.5833333333333335,
+        "atLeast": 12,
+        "n": 12,
+        "min": 0,
+        "max": 6
+      },
+      "twelve": {
+        "observed": 17,
+        "mean": 21.083333333333332,
+        "atLeast": 12,
+        "n": 12,
+        "min": 17,
+        "max": 26
+      }
+    },
+    "wordShuffle": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.274169921875,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 2
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0.755126953125,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 4
+      },
+      "two": {
+        "observed": 0,
+        "mean": 2.7451171875,
+        "atLeast": 4096,
+        "n": 4096,
+        "min": 0,
+        "max": 9
+      },
+      "twelve": {
+        "observed": 17,
+        "mean": 19.96826171875,
+        "atLeast": 3480,
+        "n": 4096,
+        "min": 9,
+        "max": 33
+      }
+    },
+    "glyphRotation": {
+      "ordered": {
+        "observed": 0,
+        "mean": 0.0784313725490196,
+        "atLeast": 51,
+        "n": 51,
+        "min": 0,
+        "max": 1
+      },
+      "unordered": {
+        "observed": 0,
+        "mean": 0.6470588235294118,
+        "atLeast": 51,
+        "n": 51,
+        "min": 0,
+        "max": 3
+      },
+      "two": {
+        "observed": 0,
+        "mean": 2.784313725490196,
+        "atLeast": 51,
+        "n": 51,
+        "min": 0,
+        "max": 7
+      },
+      "twelve": {
+        "observed": 17,
+        "mean": 19.705882352941178,
+        "atLeast": 40,
+        "n": 51,
+        "min": 12,
+        "max": 28
+      }
+    }
+  }
+]
