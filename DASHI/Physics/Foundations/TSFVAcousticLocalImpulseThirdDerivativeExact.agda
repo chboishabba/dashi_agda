@@ -142,3 +142,35 @@ sourceImpulseProbePairRightInverse (neighbor , center)
   rewrite allSixFirstNeighborResponsesReadCoupling
     neighbor (- center - sixNeighborWeights neighbor) x-axis plus =
   cong (λ z → neighbor , z) (Ring.solve-∀ neighbor center)
+
+
+------------------------------------------------------------------------
+-- AT: coordination counts of the original five-site periodic axes.
+-- Coefficients of (1+2z+2z²)^m. This computes the shell polynomial;
+-- the graph counting proof and arbitrary dimension Delannoy formula
+-- are supplied analytically in the source ledger, not asserted here.
+------------------------------------------------------------------------
+import Agda.Builtin.Nat as N
+
+periodFiveShell : N.Nat → N.Nat → N.Nat
+periodFiveShell N.zero N.zero = 1
+periodFiveShell N.zero (N.suc r) = 0
+periodFiveShell (N.suc m) N.zero = periodFiveShell m N.zero
+periodFiveShell (N.suc m) (N.suc N.zero) =
+  N._+_ (periodFiveShell m 1) (N._*_ 2 (periodFiveShell m 0))
+periodFiveShell (N.suc m) (N.suc (N.suc r)) =
+  N._+_ (N._+_ (periodFiveShell m (N.suc (N.suc r)))
+               (N._*_ 2 (periodFiveShell m (N.suc r))))
+        (N._*_ 2 (periodFiveShell m r))
+
+oddResponseOrder : N.Nat → N.Nat
+oddResponseOrder r = N.suc (N._*_ 2 r)
+
+originalTorusMiddleShell : periodFiveShell 3 3 ≡ 32
+originalTorusMiddleShell = refl
+
+originalTorusLastShell : periodFiveShell 3 6 ≡ 8
+originalTorusLastShell = refl
+
+originalTorusLastResponseOrder : oddResponseOrder 6 ≡ 13
+originalTorusLastResponseOrder = refl
