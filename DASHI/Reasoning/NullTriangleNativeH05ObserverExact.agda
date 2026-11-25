@@ -11,6 +11,8 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact as O
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as V
 import DASHI.Reasoning.NullTriangleOrderedUltrametricCubeExact as P
+import DASHI.Reasoning.NullTriangleNineTritObserverWeldExact as W
+import DASHI.Metric.AgreementUltrametric as U
 import DASHI.Core.GovernedIndexedResidualCubeExact as H
 import DASHI.Core.GovernedDiagramCore as G
 
@@ -29,13 +31,13 @@ spectators (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) =
 
 x9 y9 backX9 backY9 : Vec Trit 9 → Vec Trit 9
 x9 (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) =
-  a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ P.next x ∷ y ∷ []
+  W.attach (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ []) (P.stepX (x ∷ y ∷ []))
 y9 (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) =
-  a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ P.next y ∷ []
+  W.attach (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ []) (P.stepY (x ∷ y ∷ []))
 backX9 (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) =
-  a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ P.prev x ∷ y ∷ []
+  W.attach (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ []) (P.undoX (x ∷ y ∷ []))
 backY9 (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) =
-  a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ P.prev y ∷ []
+  W.attach (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ []) (P.undoY (x ∷ y ∷ []))
 
 xy9 : ∀ v → y9 (x9 v) ≡ x9 (y9 v)
 xy9 (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ x ∷ y ∷ []) = refl
@@ -199,3 +201,13 @@ endpointInverse t o
         | inverseYO (xO o) | inverseXO o = refl
 
 -- H05's existing endpoint-path theorems consume exact t directly.
+
+refineDistance : ∀ t o p →
+  U.dNat (refine t o) (refine t p) ≡ V.trialecticDistance o p
+refineDistance t o p = P.prependIsometry t (to o) (to p)
+
+inverseX10 : ∀ v → backX10 (x10 v) ≡ v
+inverseX10 (t ∷ v) = cong (t ∷_) (inverseX9 v)
+
+inverseY10 : ∀ v → backY10 (y10 v) ≡ v
+inverseY10 (t ∷ v) = cong (t ∷_) (inverseY9 v)
