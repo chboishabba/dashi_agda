@@ -54,6 +54,11 @@ def run(a):
         raise ValueError("outer producer not successful")
     for key in ("canonical_C_word","canonical_D_word","original_E_source_blob_sha"):
         if not model.get(key) or model[key]!=outer.get(key):raise ValueError("literal source mismatch "+key)
+    # These are the zero-affine linear canonical kernels, not arbitrary
+    # affine-translated vacuum charts. Reject mismatched older receipts.
+    for rec in model["generators"].values():
+        if not rec.get("zero_affine_vacuum_unit_verified") or not rec.get("normalized_vacuum_mod31"):
+            raise ValueError("canonical zero-affine vacuum unit receipt required")
     A={};H={};D={12:{},78:{}};E={12:{},78:{}};F={}
     for s,label,direction,folder in ((1,"plus","plus_to_minus",a.plus),(2,"minus","minus_to_plus",a.minus)):
         state=readj(folder/"mmv31_hom_status.json")
