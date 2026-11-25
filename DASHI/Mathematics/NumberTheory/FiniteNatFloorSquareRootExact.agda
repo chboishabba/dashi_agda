@@ -177,3 +177,37 @@ floorSquareRootNextSquareAbove target
 ------------------------------------------------------------------------
 -- Exact finite certificate; no Bishop or analytic imports occur here.
 ------------------------------------------------------------------------
+
+-- The strict boundary follows from the same maximality witness.
+-- It is needed for exact correspondence with an independently implemented
+-- integer floor, rather than merely a closed real square-root bracket.
+floorSquareRootNextSquareStrict :
+  (target : Nat) →
+  target < suc (floorSquareRoot target) * suc (floorSquareRoot target)
+floorSquareRootNextSquareStrict target =
+  NatP.≰⇒> (λ nextBelowTarget →
+    NatP.1+n≰n
+      (floorSquareRootUpToMaximal
+        {target = target}
+        {bound = suc target}
+        {candidate = suc (floorSquareRoot target)}
+        (s≤s (floorSquareRootLeTarget target))
+        nextBelowTarget))
+
+-- Independent floor implementations agree when both have this exact
+-- strict sandwich; no runtime scan equivalence assumption is necessary.
+floorSquareRootUnique :
+  (target candidate : Nat) →
+  candidate * candidate ≤ target →
+  target < suc candidate * suc candidate →
+  candidate ≡ floorSquareRoot target
+floorSquareRootUnique target candidate lo hi =
+  NatP.≤-antisym
+    (floorSquareRootUpToMaximal
+      (NatP.≤-step (positiveSquareRootLeTarget lo)) lo)
+    (NatP.≮⇒≥ (λ c<root →
+      strictSelfImpossible target
+        (NatP.<-≤-trans hi
+          (NatP.≤-trans
+            (NatP.*-mono-≤ c<root c<root)
+            (floorSquareRootSquareBelow target)))))
