@@ -56,7 +56,7 @@ machinRadiusSound zero =
     diffZero = solve 1 (λ p′ → p′ ⊖ Κ 0ℚᵘ ⊜ p′)
       RP.≃-refl p
   in RP.≤-respˡ-≃
-    (RP.≃-sym
+    (RP.≃-symm
       (RP.≃-trans (RP.∣-∣-cong diffZero)
         (RP.nonNegx⇒∣x∣≃x (RP.0≤x⇒nonNegx (RP.<⇒≤ positiveP)))))
     MachinWindow.machinPiBelowTwentyTwoSeventhsNonStrict
@@ -164,10 +164,10 @@ nativeMembershipToCross k lo hi =
     pUpper = moveDifference p mr er pm
     mUpper = moveDifference mr p er mp
     lCross = RP.p⋆≤q⋆⇒p≤q (CH.lower w) (m Q.+ e)
-      (RP.≤-respʳ-≃ (RP.≃-sym (RP.⋆-distrib-+ m e))
+      (RP.≤-respʳ-≃ (RP.≃-symm (RP.⋆-distrib-+ m e))
         (RP.≤-trans lo pUpper))
     uCross = RP.p⋆≤q⋆⇒p≤q m (CH.upper w Q.+ e)
-      (RP.≤-respʳ-≃ (RP.≃-sym (RP.⋆-distrib-+ (CH.upper w) e))
+      (RP.≤-respʳ-≃ (RP.≃-symm (RP.⋆-distrib-+ (CH.upper w) e))
         (RP.≤-trans mUpper (RP.+-monoˡ-≤ er hi)))
   in cross lCross uCross
 
