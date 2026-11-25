@@ -211,3 +211,62 @@ floorSquareRootUnique target candidate lo hi =
           (NatP.≤-trans
             (NatP.*-mono-≤ c<root c<root)
             (floorSquareRootSquareBelow target)))))
+
+------------------------------------------------------------------------
+-- Exact radix-two refinement, using the EXISTING strict floor witness.
+-- One comparison per added root bit. This computes a candidate without
+-- calling the bounded-search reference at the enlarged target.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Nat using (_+_)
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
+open import Relation.Binary.PropositionalEquality using (trans)
+open import Data.Product.Base using (_×_; _,_)
+
+doubleFloorBit : Nat → Nat → Nat
+doubleFloorBit target root with (suc (2 * root) * suc (2 * root)) NatP.≤? (4 * target)
+... | yes _ = suc (2 * root)
+... | no _ = 2 * root
+
+doubleSquare : (r : Nat) → (2 * r) * (2 * r) ≡ 4 * (r * r)
+doubleSquare = solve 1 (λ r → (con 2 :* r) :* (con 2 :* r)
+                            := con 4 :* (r :* r)) refl
+
+doubleNext : (r : Nat) → suc (suc (2 * r)) ≡ 2 * suc r
+doubleNext = solve 1 (λ r → con 1 :+ (con 1 :+ con 2 :* r)
+                          := con 2 :* (con 1 :+ r)) refl
+
+doubleFloorSound : (target r : Nat) →
+  r * r ≤ target → target < suc r * suc r →
+  (doubleFloorBit target r * doubleFloorBit target r ≤ 4 * target)
+  × (4 * target < suc (doubleFloorBit target r) * suc (doubleFloorBit target r))
+doubleFloorSound target r lo hi
+  with (suc (2 * r) * suc (2 * r)) NatP.≤? (4 * target)
+... | yes h = h , upper
+  where
+  upper : 4 * target < suc (suc (2 * r)) * suc (suc (2 * r))
+  upper rewrite doubleNext r | doubleSquare (suc r) =
+    NatP.*-monoʳ-< 4 hi
+... | no h =
+  subst (λ x → x ≤ 4 * target) (sym (doubleSquare r))
+    (NatP.*-mono-≤ NatP.≤-refl lo)
+  , NatP.≰⇒> h
+
+doubleFloorCorrect : (target r : Nat) →
+  r * r ≤ target → target < suc r * suc r →
+  doubleFloorBit target r ≡ floorSquareRoot (4 * target)
+doubleFloorCorrect target r lo hi with doubleFloorSound target r lo hi
+... | l , h = floorSquareRootUnique (4 * target) (doubleFloorBit target r) l h
+
+doubleFloorLower : (target r : Nat) → 2 * r ≤ doubleFloorBit target r
+doubleFloorLower target r with (suc (2 * r) * suc (2 * r)) NatP.≤? (4 * target)
+... | yes _ = NatP.≤-step NatP.≤-refl
+... | no _ = NatP.≤-refl
+
+doubleFloorUpper : (target r : Nat) →
+  suc (doubleFloorBit target r) ≤ 2 * suc r
+doubleFloorUpper target r with (suc (2 * r) * suc (2 * r)) NatP.≤? (4 * target)
+... | yes _ = NatP.≤-reflexive (doubleNext r)
+... | no _ = subst (λ x → suc (2 * r) ≤ x) (doubleNext r)
+  (NatP.≤-step NatP.≤-refl)
