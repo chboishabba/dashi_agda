@@ -1,5 +1,10 @@
 # BSD P0 — actual modular-symbol distribution and exact cyclotomic rank four
 
+## 25 November — full actual cyclotomic tower rigidity (current BSD)
+
+[Derivation and exact original symbol norm/Smith replay](ClayBSDRankFourCyclotomicTowerRigidity20261125.md). Actual 234446.a1 L_p=T^4 U_p at p5,11 with unit U_p: every nontrivial primitive cyclotomic character of conductor p^(n+1) gives valuation 4/phi(p^n) and nonzero complex central twisted L-value, doubled symbol field norm valuation4. Artin factorization retains SAME unresolved complex order {2,4} at all layers. Kato char X | L_p and rank>=4 force char X=(T^4), mu0, lambda4, without reverse divisibility. Greenberg arXiv:math/9809206 Prop4.14 applies also anomalous p5 because E(Q)[p^infty]=0; no finite Lambda submodule, X free Z_p^4. Inflation-restriction injectivity from every layer (no p-torsion anywhere in pro-p extension), base MW tensor divisible full corank image equals entire Selmer, hence trivial Gamma action, X=(Lambda/(T))^4, rank4 and Sha[p^infty]=0 at every layer including base, both primes. Supersedes p5 finiteness only. Reg_gamma valuation -2 at5, 0 at11; no computed height matrix. Finite L_p multiplication cokernel R_n/(T^4) ~= Z_p plus (Z/p^n)^3, NOT actual Selmer dual Z_p^4; same ideals not same modules. Actual doubled symbol norms 10000,10109184639631360000,14992384, three finite Smith profiles. Local normal/-O imported 311+70=381/381 each, blob d2507e5753edb1bc192bacde47f813b8112cdc2a. Complex barycentre M1=0 remains genuinely unproved, no new infrastructure, full Sha, mixed-prime extension, native kernel, CI or other-lane promotion.
+
+
 25 November 2026. Parent f39f53112d8caac59e331bf87c58fa7d21ad7708. Existing rank-four crossing, complex jet, barycentre, Selmer and cyclotomic owners reused. This closes the selected cyclotomic order, not complex BSD.
 
 ## Original source and normalization
