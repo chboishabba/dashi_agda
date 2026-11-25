@@ -53,6 +53,14 @@
 
 ---
 
+
+
+### 25 November — complete original-weight execution handoff (latest implementation ledger)
+
+[Full native endpoint consumer, inverse, exact regression and resumable command](../physics/Monster3BActualChar0FullWeightEndpointExecution20261125.md). Use the actual characteristic-zero vacuum basis V_s, marked pivot minor M_s and ordinary map A_s from prior exact receipt. Each c_(s,x)=A_s M_s^-1 pi_s P_B P_s rho(T_x^-1)v is checked by full ambient vacuum recomposition; inverse is P_0 v + sum rho(T_x) V_s A_s^-1 c_(s,x), with all 1458 marked weight rows including zeros retained and the original centre-trivial component stored. Source-written actual consumer checkpoints each weight and reconstruction chunk, verifies vacuum code/input lineage and both ordinary inverse maps. Shared exact codec and checker matching committed blobs executed 99/99 reduced checks (84 coordinate inverses, 14 full-vector inverses, one off-vacuum rejection, 13D signed fixture), prior blocked 44 and cyclic 4/2/1/1 controls reran clean. Strict original MMV31 receipt reader rejects incomplete/malformed echelon or noncanonical residue packets. New single-command runner reuses reported original P5 run, native preflight, canonical model if missing, exact vacuum, then exact full-weight roundtrip; separate output with log/summary, exit 0 only completed receipt, 3 checkpoint pause, 124 timeout, 2 blocked/error. Run `python3 scripts/run_monster3b_actual_char0_endpoint.py --source-run build/monster3b-p5-endpoint/run-20261124T071452Z-174442 --outdir build/monster3b-exact-char0-endpoint --timeout 900 --max-new 1` on existing mmgroup workstation. Native mmgroup absent here, pip acquisition retry failed; original paths from user-reported receipt not observed locally. Integrated CLI and actual original target remain unexecuted; no new native source or kernel acceptance. L08–L12 now have complete concrete execution consumers. Remaining genuine runtime, A–C source authentication, actual original generator/weight receipts and P6. No more abstract discovery required.
+
+---
+
 ## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
 
 **Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
