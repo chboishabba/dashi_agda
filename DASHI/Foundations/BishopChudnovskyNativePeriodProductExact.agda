@@ -13,6 +13,7 @@ import Data.Nat.DivMod as ND
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Product.Base using (_,_)
+open import Data.Sum.Base using (inj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong; subst)
 open import Relation.Nullary.Decidable.Core using (yes; no; from-yes)
 import Data.Integer.Base as Z
@@ -21,6 +22,7 @@ import Data.Rational.Unnormalised.Properties as QP
 import Real as R
 import RealProperties as RP
 import Sequence as S
+import Inverse as Inv
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact as Root
 import DASHI.Foundations.BishopChudnovskyRationalMidpointExact as CH
 import DASHI.Foundations.BishopChudnovskyRationalOverlapExact as O
@@ -142,13 +144,17 @@ cornerCancels sp r v@(CH.positiveSum a b) = Q.*≡*
       := ((k :* r) :* ((s :* t) :* d)))
       refl 426880 r (suc sp) (suc a) (suc b)))
 
+rootAtScale : (n sp : Nat) → CH.rootScale (stage n) ≡ suc sp →
+  rootQ n ≡ (Z.+_ (CH.rootNumerator (stage n)) Q./ suc sp)
+rootAtScale n sp se rewrite se = refl
+
 actualCornerCancels : (n : Nat) →
   (lowerQ n Q.* highQ n) Q.≃ (KQ Q.* rootQ n)
 actualCornerCancels n
   with T.successorWitness (CH.rootScale (stage n))
     (NP.m^n≢0 2 (CH.rootBits (stage n)))
 ... | sp , se
-  rewrite W.windowEq (stage n) sp se | idxStage n | se =
+  rewrite W.windowEq (stage n) sp se | idxStage n | rootAtScale n sp se =
   cornerCancels sp (CH.rootNumerator (stage n)) (W.highV n)
 
 cornerProductsConverge :
@@ -191,3 +197,30 @@ sameRealToPeriod eq = RP.≃-trans (RP.*-congʳ (RP.≃-symm eq)) actualProduct
 
 expandedToPeriod : ((k : Nat) → X.ExpandedCross k) → NativePeriod
 expandedToPeriod e = sameRealToPeriod (C.expandedToSameReal e)
+
+-- Cancel only the positive, already constructed original series.
+-- Apartness is an explicit witness, not classical nonzero inference.
+seriesApart : R._≄0 F.seriesReal
+seriesApart = inj₂ (RP.posx⇒0<x F.seriesPositive)
+
+cancelRight : ∀ {x y : R.ℝ} →
+  R._≃_ (R._*_ x F.seriesReal) (R._*_ y F.seriesReal) →
+  R._≃_ x y
+cancelRight {x} {y} e =
+  RP.≃-trans (RP.≃-symm (cancel x))
+    (RP.≃-trans (RP.*-congʳ e) (cancel y))
+  where
+  inv : R.ℝ
+  inv = Inv._⁻¹ F.seriesReal seriesApart
+
+  cancel : (z : R.ℝ) →
+    R._≃_ (R._*_ (R._*_ z F.seriesReal) inv) z
+  cancel z = RP.≃-trans (RP.*-assoc z F.seriesReal inv)
+    (RP.≃-trans (RP.*-congˡ (Inv.*-inverseʳ F.seriesReal seriesApart))
+      (RP.*-identityʳ z))
+
+periodToSameReal : NativePeriod → R._≃_ C.chudnovskyReal M.bishopMachinPi
+periodToSameReal h = cancelRight (RP.≃-trans actualProduct (RP.≃-symm h))
+
+periodToExpanded : NativePeriod → (k : Nat) → X.ExpandedCross k
+periodToExpanded h = C.sameRealToExpanded (periodToSameReal h)
