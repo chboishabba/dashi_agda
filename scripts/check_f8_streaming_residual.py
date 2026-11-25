@@ -62,8 +62,8 @@ def exact_majorant(A,B,h,dy,k2,box,source_abs,source_dt_abs):
         d=[[Q(0) for j in range(4)] for i in range(4)]
         for i,X in enumerate((A,B)):
             for j in range(2):
-                d[i][j]=Q(float(X[0,cell+j]));d[i+2][j]=h*Q(float(X[1,cell+j]))
-                d[i][j+2]=dy*Q(float(X[2,cell+j]));d[i+2][j+2]=h*dy*Q(float(X[3,cell+j]))
+                d[i][j]=Q(X[0,cell+j]);d[i+2][j]=h*Q(X[1,cell+j])
+                d[i][j+2]=dy*Q(X[2,cell+j]);d[i+2][j+2]=h*dy*Q(X[3,cell+j])
         c=[[sum(int(HH[i,a])*int(HH[j,b])*d[a][b] for a in range(4) for b in range(4)) for j in range(4)] for i in range(4)]
         ct,cy=diff(c,0,h),diff(c,1,dy);ctt,cty,cyy=diff(ct,0,h),diff(ct,1,dy),diff(cy,1,dy)
         z=blo+cell*dy
