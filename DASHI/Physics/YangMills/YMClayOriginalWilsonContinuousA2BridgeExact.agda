@@ -260,6 +260,20 @@ sumℝ : List ℝ → ℝ
 sumℝ [] = 0ℝ
 sumℝ (x ∷ xs) = x +ℝ sumℝ xs
 
+
+-- Geometry-first multiplicative naturality on a finite original contour.
+-- The proof uses no stochastic independence of SU(N) plaquettes.
+productMapPointwiseCongruent :
+  ∀ {A : Set} (f g : A → ℝ) (xs : List A) →
+    (∀ x → f x ≡ g x) →
+    productℝ (map f xs) ≡ productℝ (map g xs)
+productMapPointwiseCongruent f g [] same = refl
+productMapPointwiseCongruent f g (x ∷ xs) same =
+  cong₂ _*ℝ_
+    (same x)
+    (productMapPointwiseCongruent f g xs same)
+
+
 Range01 : ℝ → Set
 Range01 value = (0ℝ ≤ℝ value) × (value ≤ℝ 1ℝ)
 
@@ -386,6 +400,41 @@ module _
   badContourCutoff contours links =
     1ℝ -ℝ productℝ
       (map (λ contour → 1ℝ -ℝ contourProduct contour links) contours)
+
+
+  -- If an original gauge action leaves every source plaquette cutoff
+  -- unchanged, then it leaves every finite ordered contour product and
+  -- its union cutoff unchanged.  No probabilistic premise occurs here.
+  contourProductNaturality :
+    (transform : Configuration → Configuration) →
+    (cutoffNatural : ∀ p links →
+      curvatureCutoff p (transform links) ≡ curvatureCutoff p links) →
+    ∀ contour links →
+      contourProduct contour (transform links) ≡
+        contourProduct contour links
+  contourProductNaturality transform cutoffNatural contour links =
+    productMapPointwiseCongruent
+      (λ p → curvatureCutoff p (transform links))
+      (λ p → curvatureCutoff p links)
+      contour (λ p → cutoffNatural p links)
+
+  badContourCutoffNaturality :
+    (transform : Configuration → Configuration) →
+    (cutoffNatural : ∀ p links →
+      curvatureCutoff p (transform links) ≡ curvatureCutoff p links) →
+    ∀ contours links →
+      badContourCutoff contours (transform links) ≡
+        badContourCutoff contours links
+  badContourCutoffNaturality transform cutoffNatural contours links =
+    cong (λ value → 1ℝ -ℝ value)
+      (productMapPointwiseCongruent
+        (λ contour → 1ℝ -ℝ contourProduct contour (transform links))
+        (λ contour → 1ℝ -ℝ contourProduct contour links)
+        contours
+        (λ contour → cong (λ value → 1ℝ -ℝ value)
+          (contourProductNaturality
+            transform cutoffNatural contour links)))
+
 
   contourFactorRange : ∀ contours links →
     Range01
