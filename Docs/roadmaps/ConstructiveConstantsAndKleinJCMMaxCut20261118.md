@@ -1929,3 +1929,7 @@ in `Docs/roadmaps/Paper9PiP0MasterNativeGMPConsolidation20261123.md`.
 Analytic Chudnovsky premise and same-original-Bishop real identification
 remain separate. Preserve source structure, signs, and all future-consumer
 obligations; no dependency on unrelated Monster work.
+
+## 25 November — literal rational Chudnovsky midpoint and native source-bound limit (UNTESTED)
+
+See `Docs/proofs/Paper9BishopLiteralMidpointReflection20261125.md`. Recovered original qMachinStage convergence and the existing full source-written 4/25^k native Machin remainder; reuse canonical floor-square-root and original split algebra. New `DASHI/Foundations/BishopChudnovskyRationalMidpointExact.agda` computes a fail-closed literal interval/midpoint with original indexed leaves and fixed cutoff/precision. New `DASHI/Foundations/BishopChudnovskySourceBoundLimitExact.agda` binds each certificate to that computed interval and transports its rational error to the original Bishop carrier, using pinned vendor absolute-value/subtraction laws and native reciprocal convergence. The ordinary all-index bound is derived on the previous classical identity premises; the native total-success/finite-sum/analytic reflection producer of StageCertificate remains OPEN. Source-written only, no compiler, test, benchmark, CI or kernel claim. Production GMP scheduler unchanged.
