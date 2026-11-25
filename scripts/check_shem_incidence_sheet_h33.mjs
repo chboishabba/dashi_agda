@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+function audit(source){
+ const R=n=>Array.from({length:n},(_,i)=>i),mod=x=>(x%3+3)%3,d=x=>[x%3,Math.floor(x/3)%3,Math.floor(x/9)],num=a=>a[0]+3*a[1]+9*a[2],all=R(27);
+ const add=(a,b)=>num(d(a).map((x,i)=>mod(x+d(b)[i]))),sub=(a,b)=>num(d(a).map((x,i)=>mod(x-d(b)[i])));
+ const mul=(a,b)=>{const x=d(a),y=d(b),z=[0,0,0,0,0];for(let i=0;i<3;i++)for(let j=0;j<3;j++)z[i+j]+=x[i]*y[j];for(let i=4;i>=3;i--){z[i-3]+=z[i];z[i-2]+=z[i]}return num(z.slice(0,3).map(mod))};
+ const A=all.map(a=>all.map(b=>add(a,b))),D=all.map(a=>all.map(b=>sub(a,b))),M=all.map(a=>all.map(b=>mul(a,b))),I=all.map(x=>x?M[x].indexOf(1):0);
+ const gem=Array(27),gs=[..."אבגדהוזחטיכלמנסעפצקרשתךםןףץ"];for(let i=0;i<27;i++){let t=Math.floor(i/9),u=i%3,v=Math.floor(i%9/3);gem[num([t,mod(t+u),mod(t+v)])]=gs[i]}
+ const ix=new Map(gem.map((x,i)=>[x,i])),ratio=(a,b,c)=>a===b?null:M[D[c][a]][I[D[b][a]]];
+ const orbits=[],left=new Set(all.filter(x=>x!==0&&x!==1));while(left.size){const r=left.values().next().value,s=D[1][r],o=[...new Set([r,I[r],s,I[s],M[r][I[D[r][1]]],M[D[r][1]][I[r]]])].sort((a,b)=>a-b);for(const x of o)left.delete(x);orbits.push(o)}
+ const orbitOf=r=>orbits.findIndex(o=>o.includes(r));const code=(a,b,c)=>a===b?(a===c?"allEqual":"equalAnchors"):c===a?"equalsFirst":c===b?"equalsSecond":"orbit"+orbitOf(ratio(a,b,c));
+ const pairSheets=(a,b)=>{const line=D[0][A[a][b]],conic=I[D[0][A[I[a]][I[b]]]];let span=(x,y)=>{let vals=new Set();for(let u=0;u<3;u++)for(let v=0;v<3;v++)vals.add(A[M[u][x]][M[v][y]]);return vals};const plane=span(a,b),invPlane=span(I[a],I[b]);return {affine:[line],inverseAffine:[conic],lineConic:[...new Set([line,conic])],projective:plane.size===9?[...plane].filter(x=>x!==0):all, inverseProjective:invPlane.size===9?[...invPlane].filter(x=>x!==0).map(x=>I[x]):all,projectiveUnion:[...new Set([...(plane.size===9?[...plane].filter(x=>x!==0):all),...(invPlane.size===9?[...invPlane].filter(x=>x!==0).map(x=>I[x]):all)])]}}
+ const samples=(w,role,shift=0)=>{const r=w.rows.map(s=>[...s].map(c=>ix.get(c)));r[1].reverse();return R(w.n).map(j=>{let t=r.map((x,i)=>x[(j+(i===(role+1)%3?shift:0))%w.n]),p=t.filter((_,i)=>i!==role);return {a:p[0],b:p[1],c:t[role],j,n:w.n}})};
+ const train=source.spans.filter(w=>w.book!=="exodus"),shem=source.spans.find(w=>w.book==="exodus"&&w.ch===14);
+ const models={};
+ function evaluate(xs){const hist={},stats={};for(const x of xs){const k=code(x.a,x.b,x.c);hist[k]=(hist[k]||0)+1;for(const [name,cs] of Object.entries(pairSheets(x.a,x.b))){const s=stats[name]??={truth:0,single:0,correctSingle:0,totalCandidates:0,unconstrained:0};s.truth+=cs.includes(x.c);s.single+=cs.length===1;s.correctSingle+=cs.length===1&&cs[0]===x.c;s.totalCandidates+=cs.length;s.unconstrained+=cs.length===27}}return {n:xs.length,hist,stats}}
+ // Selector uses only relative signed projective incidence of the visible pair,
+ // never the hidden ratio or source coordinate. A modal sheet is not unique truth.
+ function key(x,kind){const a=x.a,b=x.b;if(kind==="global")return "all";if(kind==="axis")return a===b?"equal":a===0?"zeroA":b===0?"zeroB":b===D[0][a]?"opposite":"independent";return key(x,"axis")+":"+x.j%3}
+ function fit(xs,kind){let m=new Map();for(const x of xs){let k=key(x,kind),t=m.get(k)||new Map(),s=code(x.a,x.b,x.c);t.set(s,(t.get(s)||0)+1);m.set(k,t)}return m}
+ function pick(m){return [...m].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))[0][0]}
+ function candidates(x,s){return all.filter(c=>code(x.a,x.b,c)===s)}
+ function select(tr,te,kind){let m=fit(tr,kind),g=fit(tr,"global").get("all"),out={covered:0,single:0,correctSingle:0,empty:0,totalCandidates:0,sheetsCorrect:0};for(const x of te){let s=pick(m.get(key(x,kind))||g),cs=candidates(x,s);out.sheetsCorrect+=s===code(x.a,x.b,x.c);out.covered+=cs.includes(x.c);out.single+=cs.length===1;out.correctSingle+=cs.length===1&&cs[0]===x.c;out.empty+=!cs.length;out.totalCandidates+=cs.length}return out}
+ for(let role=0;role<3;role++){const tr=train.flatMap(w=>samples(w,role)),te=samples(shem,role);models[role]={training:evaluate(tr),shem:evaluate(te),shifted:evaluate(samples(shem,role,1)),selectors:Object.fromEntries(["global","axis","phase"].map(k=>[k,{aligned:select(tr,te,k),shifted:select(train.flatMap(w=>samples(w,role,1)),samples(shem,role,1),k)}]))}}
+ let checks=0;for(const a of all)for(const b of all){let counts={};for(const c of all){const k=code(a,b,c);counts[k]=(counts[k]||0)+1}if(a===b){if(counts.allEqual!==1||counts.equalAnchors!==26)throw Error("diagonal")}else{if(counts.equalsFirst!==1||counts.equalsSecond!==1||orbits.some((o,i)=>counts["orbit"+i]!==o.length))throw Error("partition")}checks++}
+ return {orbits,checks,models,qualification:"Existing gematria chart, full S3 ratio orbit partition includes diagonal/equal-role strata. Ratio sheet selectors are training-only modal candidate rules on visible pair axis type/phase, not source-attested. Projective line is 8 signed nonzero points in a 2D F3 span; dependent pair explicitly unconstrained (27 candidates), not a fabricated line; inversion uses occupied zero separately. Affine inverse line is global zero-extended inversion pullback, not the existing projective quadratic conic itself. All source spans reused, no fresh blind test."}
+}
+console.log(JSON.stringify(audit(JSON.parse(fs.readFileSync('Docs/support/reference/TorahCryptoCorpus20261125/h32-chart-independent.json','utf8'))),null,2));
