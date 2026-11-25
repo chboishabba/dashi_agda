@@ -1,0 +1,110 @@
+module DASHI.Unified.TOEHopfMonsterSourceRealizationsExact where
+
+-- Native consumers of the ORIGINAL source types, not another realization API.
+-- Source-written; kernel acceptance not yet observed.
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.List.Base using (_∷_; [])
+open import Data.Product using (_×_; _,_)
+open import Agda.Primitive using (lzero)
+
+import DASHI.Unified.TOESectorRealizationExact as R
+import DASHI.Core.CoarseFineRelativeFibreExact as CF
+import DASHI.Physics.Foundations.Hopf369PhaseRetainingObserverCubeExact as Hopf
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as H
+import DASHI.Moonshine.MonsterSpecialGravityKKWeightTwoCrosswalkExact as Gravity
+import DASHI.Moonshine.MonsterSpecialGravityKKRefinedCoordinateBidiExact as FLM
+
+open import DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact public
+  using (originalFiveMetricVerticalProbeReadsFibreRadius;
+         originalFourMetricCannotUniquelyLiftFibreRadius;
+         originalFiveMetricMixedVerticalDifferenceReadsConnection;
+         originalFourMetricCannotRecoverUniqueChartConnection)
+
+-- Actual coordinate BIDI, deliberately only shared-carrier grade.
+-- Existing inverse theorems are consumed verbatim.
+gravityFLMCoordinateRealization :
+  R.SectorRealization Gravity.GravityCandidateCoordinate FLM.RefinedFLMWeightTwoCoordinate
+gravityFLMCoordinateRealization = record
+  { sourceSector = R.generalRelativitySector
+  ; targetSector = R.monster3BSector
+  ; realize = FLM.gravityToRefinedFLM
+  ; relationKind = R.equivalenceIsomorphism
+  ; attainedGrade = R.sharedCarrier
+  ; unpaidObligations =
+      R.representationActionAgreement ∷ R.dynamicsEquivariance ∷
+      R.actionHamiltonianAgreement ∷ R.metricVariationCommutes ∷
+      R.stressObservableAgreement ∷ R.scaleCalibrationAgreement ∷
+      R.empiricalSameObjectAttachment ∷ R.heldOutPredictionReceipt ∷
+      R.independentReplicationReceipt ∷ []
+  ; PreservationWitness =
+      ((x : Gravity.GravityCandidateCoordinate) →
+        FLM.refinedFLMToGravity (FLM.gravityToRefinedFLM x) ≡ x) ×
+      ((y : FLM.RefinedFLMWeightTwoCoordinate) →
+        FLM.gravityToRefinedFLM (FLM.refinedFLMToGravity y) ≡ y)
+  ; preservationWitness = FLM.gravityToFLMToGravity , FLM.flmToGravityToFLM
+  ; externalPromotion = false
+  ; externalPromotionIsFalse = refl
+  ; reading = "Literal original gravity/FLM coordinate inverse, not physical group or action equivalence."
+  }
+
+module Spectral (F : C3.RealField lzero)
+  (E : C3.IntegerEmbedding F) (I : C3.ModeInverseSquare F E)
+  (S : H.HelicalModeScalars F) where
+
+  module P = Hopf.Spectral F E I S
+
+  -- The ACTUAL cut datum is reopened from its tag and full original datum.
+  -- No lossy projection of the phase, helicity, mode, coefficient or zero.
+  cutTag : ∀ {n} → P.CutDatum n → Bool
+  cutTag (P.retained _) = true
+  cutTag (P.omitted _) = false
+
+  joinCut : ∀ {n} → Bool → P.Datum n → P.CutDatum n
+  joinCut true a = P.retained a
+  joinCut false a = P.omitted a
+
+  joinCutExact : ∀ {n} (a : P.CutDatum n) →
+    joinCut (cutTag a) (P.reopen a) ≡ a
+  joinCutExact (P.retained a) = refl
+  joinCutExact (P.omitted a) = refl
+
+  cutReopening : (n : Nat) → CF.CoarseFineReopening (P.CutDatum n)
+  cutReopening n =
+    CF.coarseFineReopening Bool (P.Datum n) cutTag P.reopen joinCut joinCutExact
+
+  -- Actual one-step and two-step commutation for the source's indexed
+  -- spectral operation. These are not Einstein time evolution.
+  module At (select : Z3.FourierMode → Bool) where
+    module A = P.At select
+
+    splitRealization : (n : Nat) → R.SectorRealization (P.Datum n) (P.CutDatum n)
+    splitRealization n = record
+      { sourceSector = R.electromagnetismSector
+      ; targetSector = R.hyperfabric369Sector
+      ; realize = A.split
+      ; relationKind = R.restrictionInclusion
+      ; attainedGrade = R.sharedCarrier
+      ; unpaidObligations =
+          R.representationActionAgreement ∷ R.dynamicsEquivariance ∷
+          R.actionHamiltonianAgreement ∷ R.metricVariationCommutes ∷
+          R.stressObservableAgreement ∷ R.scaleCalibrationAgreement ∷
+          R.empiricalSameObjectAttachment ∷ R.heldOutPredictionReceipt ∷
+          R.independentReplicationReceipt ∷ []
+      ; PreservationWitness =
+          ((a : P.Datum n) → P.reopen (A.split a) ≡ a) ×
+          ((a : P.Datum n) → A.split (P.advance a) ≡ P.advanceCut (A.split a))
+      ; preservationWitness = A.reopenSplit , A.splitAdvance
+      ; externalPromotion = false
+      ; externalPromotionIsFalse = refl
+      ; reading = "Original indexed helical coefficient split and exact reopening; advance is spectral order, not physical time."
+      }
+
+    originalCutAdvanceCommutes :
+      ∀ {n} (a : P.Datum n) →
+      R.realize (splitRealization (suc n)) (P.advance a) ≡
+      P.advanceCut (R.realize (splitRealization n) a)
+    originalCutAdvanceCommutes = A.splitAdvance
