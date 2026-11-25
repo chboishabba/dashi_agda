@@ -23,6 +23,7 @@ SOURCE_PINS={
  "scripts/run_f8_lxix_native_source_matrix.py":"94e6303eab04823ab7f39244d21a32c98a300a07",
 }
 CHECKS={
+ "fused-step-parity":"scripts/check_f8_fused_step.py",
  "exact-block-replay":"scripts/f8_exact_block_replay.py",
  "patch-causal":"scripts/check_f8_patch_causal.py",
  "modal-cfl":"scripts/check_f8_modal_cfl.py",
