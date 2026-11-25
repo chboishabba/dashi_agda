@@ -1,0 +1,109 @@
+{
+  "predecessor": "24de04b2341be54c43aa6f2fd52b5518b58606c2",
+  "scope": "Conditional absolute bound on original continuous fixed-window scalar TT yy E4/SMS, all radial modes. Exact rational constants, no proof-kernel, sign, raw final-time, or physical result.",
+  "scripts": {
+    "baseline": {
+      "commit": "2a104070a81b72446080ac82dbb04a98fee6b540",
+      "blob": "2342551b2ff484847ee4f54e3cb74fb1bf6dce9a"
+    },
+    "partition": {
+      "commit": "fb5a144e2693bce32c98caf94c33fe52d144ce2d",
+      "blob": "dae3a3f89067c7aa93ceda86f34a0c28cbb33616"
+    }
+  },
+  "baseline": {
+    "symbolic_checks": 5,
+    "radial_order": 9,
+    "source_coefficient_upper_display": 1.374871537194655e+24,
+    "wall_factor_upper_display": 0.000002307705544981323,
+    "receiver_factor_upper_display": 5.23252352247437e-53,
+    "bound_upper_display": 3.3203487345921615e-34,
+    "decimal_upper": "1e-33",
+    "local_json_sha256": "dbb3914c016664cad4843db39ed9a7655b82e1bd20c23572e8b3d2a701c23723"
+  },
+  "partition": [
+    {
+      "n": 16,
+      "tiles": 164,
+      "empty_tiles": 92,
+      "source_step": "9/320000",
+      "receiver_step": "7/320000",
+      "cutoff_width": "7/1280000",
+      "bound_upper_display": 1.9269610246425783e-163,
+      "decimal_upper": "1e-162",
+      "exact_ceiling_numerator": "192696102464257823639652485744310069458022774789308204492673606217940843714114600148855302006925179861005758449890213568065426482414538651",
+      "largest_tile": [
+        8,
+        4
+      ],
+      "largest_tile_upper_display": 1.613428809902606e-163,
+      "seconds": 0.19715832099996078,
+      "local_json_sha256": "190838ddfa3c8c6aab7401a221a49fbcd425d35d5334f21a5af7e577caad33a0"
+    },
+    {
+      "n": 32,
+      "tiles": 628,
+      "empty_tiles": 396,
+      "source_step": "9/640000",
+      "receiver_step": "7/640000",
+      "cutoff_width": "7/2560000",
+      "bound_upper_display": 2.6507960366830424e-175,
+      "decimal_upper": "1e-174",
+      "exact_ceiling_numerator": "265079603668304213189494915112449955606221375457135613688611447326009002584774476985061923811024001417022541547502351968340600",
+      "largest_tile": [
+        16,
+        8
+      ],
+      "largest_tile_upper_display": 1.6875793394192694e-175,
+      "seconds": 0.8507835799998702,
+      "local_json_sha256": "26bfcba8be1410651920d41630cb0e4ca854011e1ebb85be0d82fb16ce2c01fc"
+    },
+    {
+      "n": 64,
+      "tiles": 2461,
+      "empty_tiles": 1635,
+      "source_step": "9/1280000",
+      "receiver_step": "7/1280000",
+      "cutoff_width": "7/5120000",
+      "bound_upper_display": 6.587429907275314e-181,
+      "decimal_upper": "1e-180",
+      "exact_ceiling_numerator": "658742990727531385226682410531727620859253833399263444726889557610382744216295743102253868142970713670456117537704122734",
+      "largest_tile": [
+        31,
+        16
+      ],
+      "largest_tile_upper_display": 9.509135383444394e-182,
+      "seconds": 3.4572055720000208,
+      "local_json_sha256": "6e75849fde98e228978823ffb40994a465a87a78e99a2df8a567a080bd86bf20"
+    },
+    {
+      "n": 128,
+      "tiles": 9718,
+      "empty_tiles": 6666,
+      "source_step": "9/2560000",
+      "receiver_step": "7/2560000",
+      "cutoff_width": "7/10240000",
+      "bound_upper_display": 2.5625913306690677e-182,
+      "decimal_upper": "1e-181",
+      "exact_ceiling_numerator": "25625913306690676040506148447313974772973827225035760610806855962525604705888543158345301526058010132023028426526837691",
+      "largest_tile": [
+        61,
+        34
+      ],
+      "largest_tile_upper_display": 1.074411706359685e-183,
+      "seconds": 14.883445774999927,
+      "local_json_sha256": "f11f7eb459481ac89f60f330afed835382ca306f3757a0607e9f086c3287db5b"
+    }
+  ],
+  "exact_ceiling_denominator": "1e300",
+  "assumptions": [
+    "Original W0 smooth scalar retarded reference and finite propagation, also for smooth localized sources; common scalar prepotential TT commute and no-contact enlarged box",
+    "Existing physical moving-wall characteristic-lift energy estimate with norm rate <=5/2, homogeneous top/radial conditions and weighted wall trace",
+    "Original continuous E4/SMS source-free integration-by-parts receiver formula, angular sum and multiplier/normalization bounds from prior F8 source owners"
+  ],
+  "limitations": [
+    "Absolute bound loses sign; strict fixed-source nonzero or exact cancellation not established.",
+    "Tiles partition only the source temporal profile and receiver integration after original IBP; localization is exact on causal support and does not alter the original observable. No independent PDE trajectory or direct parametrix sign evaluation.",
+    "No full same-reference tensor curvature authority, raw final-time bound or empirical result. No CI or native kernel. Local recovered helper subset, not full checkout. Nearest-float display is not the exact upper; decimal comparison and integer ceiling are exact."
+  ]
+}
