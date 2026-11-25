@@ -44,6 +44,9 @@ def run():
     from math import factorial
     assert sum((Q(1,factorial(j)) for j in range(6)),Q(0))>Q(27,10)
     assert Q(10,27)**609<Q(1,10**262)
+    # Original 4516-interval modal clock: no integer sample lies in either cap.
+    n=4516;j=4432;gap=(span[0]*Q(n-j,n)-Q(1,20),span[1]*Q(n-j,n)-Q(1,20))
+    assert gap[0]>d and gap[1]<span[0]/n and span[0]/n>s
     # Strictly positive support-overlap witness, not a signal-sign proof.
     sw=Q(1,20000);dw=Q(1,20000);rw=Q(399,10000)
     bwe=bracket(shift(F1,sw),'.999964000','.999966000')
@@ -55,5 +58,5 @@ def run():
     # For nonnegative s,d,delta, each exponent >= a/s,b/d,c/delta;
     # Cauchy gives sum >= (sqrt(a alpha)+sqrt(b beta)+sqrt(c))^2/rho.
     def box(x):return [float(v) for v in x]
-    return dict(scope='exact rational causal cap conditional on original smooth-reference finite propagation; raw bump products only, no propagated-field or sign bound',span=box(span),receiver_end=box(end),receiver_b=box(be),earliest_allowed_offset_upper=float(d),source_elapsed_upper=float(s),source_radius_lower=.0396,early_receiver_squared_gap_upper=float(earlygap),late_source_squared_gap_upper=float(lategap),radial_margin=box(rho),strict_support_witness_squared_gap_lower=float(witness),joint_exponent_lower=float(X),raw_bump_product_upper='1e-262',checks='exact rational inequalities and symbolic characteristic derivative square',notes='Window center span-.15, half-width .10, source duration .065, radius .04; original near receiver r=sqrt(span^2-(11/12)^2)-.012. Both endpoint bumps flat; strict interior overlap remains.')
+    return dict(scope='exact rational causal cap conditional on original smooth-reference finite propagation; raw bump products only, no propagated-field or sign bound',span=box(span),receiver_end=box(end),receiver_b=box(be),earliest_allowed_offset_upper=float(d),source_elapsed_upper=float(s),source_radius_lower=.0396,early_receiver_squared_gap_upper=float(earlygap),late_source_squared_gap_upper=float(lategap),radial_margin=box(rho),strict_support_witness_squared_gap_lower=float(witness),joint_exponent_lower=float(X),integer_time_grid=dict(intervals=n,last_window_node=j,last_node_to_window_end=box(gap),step=box((span[0]/n,span[1]/n)),source_and_receiver_caps_have_no_interior_integer_nodes=True,stage_and_stencil_caveat=True),raw_bump_product_upper='1e-262',checks='exact rational inequalities and symbolic characteristic derivative square',notes='Window center span-.15, half-width .10, source duration .065, radius .04; original near receiver r=sqrt(span^2-(11/12)^2)-.012. Both endpoint bumps flat; strict interior overlap remains.')
 if __name__=='__main__':print(json.dumps(run(),indent=2))
