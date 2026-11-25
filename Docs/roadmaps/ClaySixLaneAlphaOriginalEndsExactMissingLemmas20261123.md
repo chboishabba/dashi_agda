@@ -796,3 +796,15 @@ Actual flag-incidence classes: sigma_empty=1; sigma_1=h (lines meeting a fixed l
 ## Attribution and acceptance rule
 
 Each proposed lemma must state source owner and exact current SHA; original object, time/space/phase/zero/exception coordinates; forward relation AND reverse recovery; classical hypotheses; an independent negative control; exact local test/byte hash if present; Agda/Lean kernel and CI status; the specific original gate (not just an iteration number). Do not count already published theorems twice or turn finite regressions into universal Clay conclusions. Original Clay endpoints newly proved here: **0/6**.
+
+
+## 25 November 2026 — original Hopf heat residual, degree-three norm quotient, primitive Chern detector
+
+[New source-specific mathematical cut](ClayFourHopfNormChernDetector20261125.md), [local checker](../../scripts/check_clay_four_hopf_norm_chern.py) (21/21 normal and optimized Python, byte-identical blob 69a9288b973b5fd877db446a9e191ecc73ad7256). Donor #1554 at c542c3677ec7ab6edf7801c723fbdfc72583a166; P0H original field and P0J complex-source/phase/tail recovery, not MHD-to-NS identification. No donor edits.
+
+- **NS A-M3n:** original positive-helical Hopf B has nonzero projected nonlinearity (curl(B×curl B)(1,0,0)=(-4,0,0)). Exact same-helicity cap 1/sqrt2 (sharp supremum), all-helicity cap1 unchanged. For U=A exp(nu t Delta)B, integrated X0 norm squared = A² pi²(15pi−44)/(4nu); heat-defect upper bound 1/(2sqrt2) times this. All-data evolution, original signed R568/R653 budget and continuum still unpaid.
+- **BSD B-W2n:** all finite-level MW/Selmer/Sha norm/corestriction cokernels for degree-three L/Q killed by3; snake exact sequence ker cor_Sha -> Q_MW -> Q_Sel -> Q_Sha ->0. Actual A_n unlifted quotient is a quotient of Q_Sel, not necessarily equal. Selected rank-at-least-two curve has Q_MW=0 and Q_Sel=Q_Sha at all levels IF exact rank2; exact upper rank and Sha/corestriction computation unpaid. Universal rank equality remains separate.
+- **Hodge H-M2q:** actual conditional mixed target Z=S²×B², dim B=12; required cycle codim3. Generic relative adjoint has no invariants: projected detector kills divisor-times-codim2 classes, including cubic divisor products. Rational K0/Chow Chern character implies equivalent actual vector-bundle producer with nonzero projected c3; no bundle or actual cycle constructed. Parallel internal Pfaffian and direct orientation routes remain. Arbitrary-X detector still open.
+- **RH:** independent MIT report Nov24 reread; external formal checks distinct from compatible local kernel import and original semantic BIDI. No duplicate mathematical proof required for that conditional import route; native admission and official prize status not asserted.
+
+Retain four P0, source indices, signed residual and zero flags; PNP donor only and YM separate. No CI, native kernel, actual Selmer/Sha computation, PDE evolution, or Chow execution. Newly proved original Clay endpoints 0/6.
