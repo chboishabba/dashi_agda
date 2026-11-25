@@ -1,3 +1,13 @@
+## 25 November — source repair implementation receipts (conditional algebra, not physics payment)
+
+**Source-written on `master` through `332f4201711e72da43a3c69a1b5eaf4ef65e035f`:** A2's inconsistent universally selected threshold signatures repaired with fixed ordered `δ_low,δ_high`; original raw trace deficit upper bound corrected to 2 and half-normalized `[0,1]` source function/physical cutoff supplied; finite contour naturality under real gauge-preserving transformations constructed. `YMClayE1OriginalSUNFiniteCylinderLawsExact` now derives the A2 `ContinuousExpectationAlgebra` FROM native original Wilson `fixedCutoffFiniteLaws`, with same-original covariance equality and original plaquette/gauge-equivariant finite contour selection. Current typecheck of NEW commits NOT RUN HERE, only source readback and sampled exact SymPy sanity; earlier 19a Agda 2.9 pass must not be assigned to these modifications.
+
+**Still open (physically decisive):** certified complex SU(N) normalized trace range `−1≤ReTr/N≤1` and identification with `SUNMatrixRealTrace` (cyclicity counterexample exists), real piecewise clamp/compact Haar Borel strict-good source, `ContinuousWilsonArithmetic` real semantics and actual `ActualNativeFiniteIntegration` inhabitant, source-picked nonempty spanning contours and connecting bad-residual completeness, source-native high-beta fixed-contour expectation bound and cutoff-/volume-uniform physical exponent (P-CONT), CMP119/122 normalized marked source and CMP116 same-good-law matching (P-MATCH), small-field same-source physical rate (P-SMALL), plus interacting nontrivial E1/OS, full same-H D2 and G1/N1. The code now pays more **source geometry**, not any of the three original physical decay inequalities.
+
+**Security/soundness:** `RealAnalysisAxioms` remains a trusted/postulated scalar boundary; no new postulate or endpoint promotion introduced by these commits. `YangMillsClaySolved=false`, `clayYangMillsPromoted=false`.
+
+---
+
 # 24 November 2026 — physical-input payment audit
 
 ## 25 November 2026 — A2 kernel-checked conditional transport, source-inhabitation defects
