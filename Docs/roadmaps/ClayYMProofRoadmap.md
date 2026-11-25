@@ -8,6 +8,12 @@
 
 ---
 
+## 26 November 2026 — W1 original affine Hessian algebra kernel-checked
+
+**Verified master source:** `c0f125c40e08e844dc8da71e8a9c0651cdae49cc` adds `DASHI/Physics/YangMills/YMClayOriginalAffineFibreHessianLedgerExact.agda`. The sanctioned wrapper reports PASS for the exact affine determinant `K(W;s,t) KFG − (KF+tKFG)(KG+sKFG) = K0 KFG − KF KG` and the normalized connected-covariance/Hessian algebra `KFG/K − (KF_s/K)(KG_t/K) = (K0 KFG − KF KG)/K²`, with an explicit nonzero-mass premise. `git diff --check`, literature normalization, `check_agda_static.py --self-test`, A2 SymPy, sharp finite-TV, unconditional, and frontier gates also PASS. This is a DASHI algebraic W1 payment only: it does **not** identify the global affine mark with selected CMP122 Eq. (1.71), does not construct a CMP116 bond-valued `J`, does not supply continuous Haar disintegration or `K0>0` source support, and does not pay any physical rooted-shell rate. W0/W3 source proof, P0X, E1 full kernel acceptance, and the legacy `--safe` audit remain OPEN/BLOCKED; all Clay flags remain false.
+
+---
+
 ## 26 November 2026 — finite RG covariance Agda compatibility repaired
 
 **Verified master source:** `7ccf385cdee2e9320b70b56e035bed6d2b792ed7` modifies `BalabanFiniteRGObservableReopeningExact.agda`, `BalabanFiniteRGTotalCovarianceExact.agda`, `BalabanFiniteRGMultiscaleCovarianceTelescopingExact.agda`, and `BalabanFiniteRGGoodBadResidualEnvelopeExact.agda`. The sanctioned wrapper on `DASHI/Physics/YangMills/BalabanFiniteRGGoodBadResidualEnvelopeExact.agda` now reports `EXIT=0`; `git diff --check`, literature normalization, `check_agda_static.py --self-test`, A2 SymPy, sharp finite-TV, unconditional, and frontier gates also PASS. This repairs pre-existing Agda 2.9 parse/scope failures by naming the implicit `Fine`/`Coarse` arguments, replacing malformed quantified ring-solver applications with quantified local lemmas, replacing two ring-solver subgoals with `ℚP.*-comm`/`ℚP.*-assoc`, and correcting the finite absolute-covariance transport to use `sym fineExact`. No new theorem, source identification, physical estimate, proof level, or Clay promotion is introduced; P0W/P0X remain conditional.
