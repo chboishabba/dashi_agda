@@ -30,11 +30,14 @@ digit t = Q.streamToInverseLimit (λ { zero → toSourceTrit t ; (suc _) → E.z
 zero3 : Z3
 zero3 = digit T.zer
 
+dropZeroCoordinate : (v : Q.Residue3Pow zero) → Q.reduce (E.zer E.∷ v) ≡ E.[]
+dropZeroCoordinate E.[] = refl
+
 -- Multiplication by three is the literal low-order zero prepend.
 times3 : Z3 → Z3
 times3 x = Q.triadic-limit-point
   (λ { zero → E.[] ; (suc n) → E.zer E.∷ Q.coordinate x n })
-  (λ { zero → refl ; (suc n) → cong (E.zer E.∷_) (Q.compatible x n) })
+  (λ { zero → dropZeroCoordinate (Q.coordinate x zero) ; (suc n) → cong (λ v → E.zer E.∷ v) (Q.compatible x n) })
 
 record Gaussian : Set where
   constructor gaussian
