@@ -1,0 +1,131 @@
+{
+  "status": "CONDITIONAL_FINITE_RETURN_ANGULAR_REFINEMENT",
+  "source_head": "9b4ef50333f95e7b1a935646722dee7bd0c6278f",
+  "checker_blob": "291933beaaf7995fb56fe5fc9a03de396ab80822",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "cases": 1296,
+    "source_on": 864,
+    "source_off": 432,
+    "max_charge": 2.5451747029450577e-17,
+    "max_ledger": 1.0037137137056118e-15,
+    "max_edge_quadrature_difference": 1.0408340855860843e-17
+  },
+  "donors": {
+    "current_budget": "97d67fa9e4af6f61835f766fbe89994a922c48cc",
+    "finite_aperture": "06d683bd2dfd24d4ad9de0620ef3718001fdbe36",
+    "metric_charge": "1f3ee2625ede999147386b8f94e9078d29c94e65",
+    "outgoing_green": "f6abfe636ad2890beed68639efbd5844e88491d3",
+    "finite_volume": "76741e772aa582b236cb63e42ca7b8a3de819607",
+    "lorentz_green": "5bc3a64a87c8bba8956b91357115d124342f68df",
+    "scope": "Pinned three executable prefixes consumed and byte verified; three Green/finite-volume roadmap sources read, no full donor suite rerun."
+  },
+  "fixture": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "areas_m2": [
+      1,
+      1000000,
+      10000000000
+    ],
+    "aspects": [
+      1,
+      1.5,
+      1.618033988749895
+    ],
+    "modes": [
+      6,
+      16,
+      30,
+      48
+    ],
+    "return_conductance": [
+      0.1,
+      1,
+      10
+    ],
+    "return_mass": [
+      1,
+      1,
+      1
+    ],
+    "source_indices": [
+      -1,
+      0,
+      4
+    ],
+    "scope": "All seven edges use finite imposed Hodge and losses; normalized angular and work scales; native dimensionless omega=f/7.83. No physical conductor properties inferred."
+  },
+  "selected_square_1m2_7_83_TE_x_g1": [
+    {
+      "N": 6,
+      "useful": 1.2543382873365278e-14,
+      "load": 2.7813445238724912e-14,
+      "return_heat": 8.510094134483996e-15,
+      "current": 0.0000015155138231694259,
+      "return_current": 1.3046144425755592e-7,
+      "return_effort": 9.225017146045853e-8
+    },
+    {
+      "N": 16,
+      "useful": 1.1075845977149511e-14,
+      "load": 2.4508849898029485e-14,
+      "return_heat": 7.498764708172043e-15,
+      "current": 0.0000014240634991860615,
+      "return_current": 1.2246440021128723e-7
+    },
+    {
+      "N": 30,
+      "useful": 1.0989487874990599e-14,
+      "load": 2.434902345701451e-14,
+      "return_heat": 7.45000098765112e-15,
+      "current": 0.0000014185247071252588,
+      "return_current": 1.2206556403294207e-7
+    },
+    {
+      "N": 48,
+      "useful": 1.101307016479987e-14,
+      "load": 2.4396114214648997e-14,
+      "return_heat": 7.46438662554684e-15,
+      "current": 0.000001420041976665115,
+      "return_current": 1.221833589261854e-7,
+      "return_effort": 8.639668179708548e-8,
+      "outgoing_above_l2": 0.00012568990023963873,
+      "receiver_scattered": 5.622240272922454e-26,
+      "outgoing_cross": 6.236092787924511e-14
+    }
+  ],
+  "refinement_relative_useful_changes": {
+    "denominator": "earlier order useful >1e-30, paired nonzero-source configurations; max and upper middle median",
+    "six_to_sixteen": {
+      "max": 0.2179044283132202,
+      "median": 0.10835175741747949
+    },
+    "sixteen_to_thirty": {
+      "max": 0.25077422654380965,
+      "median": 0.008228974949800127
+    },
+    "thirty_to_fortyeight": {
+      "max": 0.2723616374754584,
+      "median": 0.002148623776435876
+    }
+  },
+  "maxima": {
+    "current": 0.17852001086062985,
+    "return_current": 0.10999882417452972,
+    "return_effort": 0.011284066179799242,
+    "return_heat": 0.0011828122812405845,
+    "receiver_scattered": 0.000004546535874069091,
+    "absolute_outgoing_cross": 0.0006775076069414812,
+    "outgoing_above_l2": 0.00016559482687317163
+  },
+  "limits": "Finite angular l<=4, no continuum or local near-field convergence; line-current trace lacks conductor width and local boundary singularities; no actual retarded dyadic soil-air-ionosphere Green, calibrated physical return or SI source. The ideal clamp and finite return are different boundaries, not equal-condition hardware comparison. Outgoing receiver-induced difference is in the same truncated upper boundary; not standalone local radiation resistance. Radial loss from flux difference. Native linear off-guard, no physical source data, no active actuation or extraction. Classical vector spherical harmonics, Maxwell, charge and scattering retain prior art; original DASHI owners and user source hypothesis credited distinctly; no new JMD donor."
+}
