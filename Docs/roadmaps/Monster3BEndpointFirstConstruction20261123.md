@@ -29,6 +29,14 @@
 
 ---
 
+
+
+### 25 November — single-residual dual orbit and original trace weld (latest implementation ledger)
+
+[Full derivation, execution receipts and remaining source boundary](../physics/Monster3BSingleResidualDualOrbitTraceWeld20261125.md). Replace the adjoint-square sum with the selected single R_D,i (zero-based i=0 for 12, i=26 for 78), rank R=rank R²=n-1 at prime31 for q=0,1,2. Source p(0) residues 17/22/23 and 15/15/15, degree 11/77; exact p=det(tI-R_A)/t, never lift modular coefficients. With Q_A=v lambda and H_ji=lambda A(w_j)^-1 A(w_i)v, H invertible at31 gives exact nonorthogonal dual U_i=Q_L sum_j (H^-1)_ij L(w_j)^-1 and both inverse laws. Under A–C actual char0 expression follows without target modular prerequisite. Local matching-blob source controls 6/6 cases, 18,684 dual equations, 18 signed generator equations, 3 corrupted controls. Actual ambient-character Fourier trace chi_Ls(g)=sum_(j,b) zeta^-sj chi_W(z^j b g)/(3^7 k_g) on phase-preserving words; C² sign projections give the two constituent traces without division by a possibly zero full Weil trace. 20 exact reduced cyclotomic controls passed; original literal word-class trace oracle/full original BW character receipt still unauthenticated. Canonical cyclic solver now consumes single residual; optional actual MMV31 frame --model composes true ordinary 729x12/729x78 coordinates with original W0 retained, checks same-action generator traces; exact witness writer emits source determinant and dual expression, both actual integrations unexecuted here. Remaining A/B/C source authentication, actual Conway K-linear action and trace/weight laws, actual application of exact source recipe and formal inhabitants/kernels P6. No genuine actual execution or dense characteristic-zero coefficients claimed. No new search prerequisites.
+
+---
+
 ## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
 
 **Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
