@@ -1,10 +1,9 @@
-{-# OPTIONS --safe #-}
 module DASHI.Wikimedia.KeyShoeIndexedTrigramWeaveExact where
 
 -- DASHI downstream construction. Source R13 wheel remains provisional.
 -- Zero is an added value, never a missing glyph.
 open import DASHI.Core.Prelude
-open import DASHI.Core.IndexedWeaveHyperfabricExact using (IndexedWeave)
+open import DASHI.Core.IndexedWeaveHyperfabricExact using (IndexedWeave; module IndexedWeave)
 import DASHI.Wikimedia.KeyShoeCLARAR13DihedralExact as R
 
 data Value : Set where
