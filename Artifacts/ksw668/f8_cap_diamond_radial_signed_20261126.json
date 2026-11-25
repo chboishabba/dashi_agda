@@ -1,0 +1,96 @@
+{
+  "predecessor": "dc28075eae8e56f907500729ea7ef453afc7ec89",
+  "scope": "Original fixed-window causal-diamond geometry, local free transverse Green series and exact signed radial source/receiver derivative identities. Conditional original smooth reference/finite propagation; no signed moving-wall inverse, receiver interval excluding zero, native kernel or physical acceptance.",
+  "scripts": {
+    "diamond": {
+      "commit": "945e692f3477bce149a4fdd8ee504d93db4efff2",
+      "blob": "e9110a8067e13721b5128e3b6792623200dd31d1",
+      "local_json_sha256": "837c72833ba36a051b74f560be3d349941cdea5dd811b2e43a3faed2a41c4423"
+    },
+    "radial": {
+      "commit": "5574cff19c903818c4ecb7232e1c59a7a3016e87",
+      "blob": "f4a1a846f290c032cfa2e038b6ff9d633ce8fd5d",
+      "local_json_sha256": "25b7607bd8dd3bddce4a6d0d55dac2539e6783b2b15190dd71bdf7a5d4af40e2"
+    }
+  },
+  "geometry": {
+    "slack_upper": "361/200000",
+    "z_lower": 0.08709526068881128,
+    "radial_path_lower": 0.03941930960732552,
+    "negative_image_excluded": true,
+    "eta_upper": 0.059618179416039106,
+    "excluded_wall_elapsed": [
+      0.01,
+      2.644
+    ],
+    "emission_collar_upper": 0.01,
+    "receiver_collar_upper": 0.0152,
+    "strict_squared_gap_lower": [
+      0.0000041613179800577955,
+      0.000003751032853696448
+    ]
+  },
+  "series": {
+    "order": 24,
+    "coefficients": [
+      "1",
+      "-15/2",
+      "35/8",
+      "21/16",
+      "99/128"
+    ],
+    "analytic_factor_derivative_tail_upper": [
+      1.1088300741412575e-31,
+      4.447179441743011e-29,
+      1.712677870941759e-26,
+      6.3226191141265534e-24,
+      2.2332792674806937e-21
+    ],
+    "exact_tail_fractions": [
+      "6181934237973/55751862996326557853839295681620903764951040",
+      "681830982129375/15331762323989803409805806312445748535361536",
+      "4172805610631775/243642174715391939839776218921146039402496",
+      "81756080297192925/12930729942995661611608235082407192035328",
+      "3870972671462743275/1733313306503530298266564406605569327104"
+    ],
+    "free_green_factor_bounds": [
+      "17/32",
+      "391/384"
+    ],
+    "scope": "Free retarded analytic factor, NOT full boundary inverse. Transverse dimension raising gives distribution in four spatial dimensions; radial reduction uses integrable two-spatial-dimensional kernel."
+  },
+  "radial": {
+    "axial_tt_coefficients": [
+      "3/r**5",
+      "-3/r**4",
+      "3/r**3",
+      "-2/r**2",
+      "1/r"
+    ],
+    "commutation_orders": 7,
+    "shifted_polynomial_constant_terms": [
+      "1",
+      "4899",
+      "23505000",
+      "105791015000",
+      "463637772000000",
+      "1893357208110000000",
+      "7469536251054500000000"
+    ],
+    "minimum_coefficients": [
+      "1",
+      "2",
+      "4",
+      "8",
+      "16",
+      "32",
+      "64"
+    ],
+    "receiver_p_sign": "negative on interior of original cap, both E4/SMS",
+    "a0_signs": {
+      "E4": "negative",
+      "SMS": "positive"
+    }
+  },
+  "execution": "Both local scripts completed and match committed blobs; existing fixed-window cap script matches its committed blob. Local extracted Fbox helper from prior turn, not full checkout. Values are nearest-decimal displays of exact rational checks; tail fractions retained. No new trajectory or CI. No full proof-kernel acceptance."
+}
