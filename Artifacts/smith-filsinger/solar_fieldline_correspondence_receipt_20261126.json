@@ -1,0 +1,60 @@
+{
+  "status": "ORIGINAL_COORDINATE_AUDIT_AND_CONDITIONAL_FLUX_MAPPING",
+  "checker_blob": "03ee7f79ef947aaf8ef73a745b3992a1d4b5b7c7",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0; committed Git blob matched; no CI/kernel",
+  "hashes": {
+    "PF_fig_PF.nc": "8ff495be1ebdd6609813061880b8faf08ac8365540e8ac2d2d64961c9b3b6880",
+    "Lin25_PF_fig_PF.m": "03c65aac070842225bf705a82f6b7a82649f9a11f409ee1769166a655bd7e1aa"
+  },
+  "source": "Lin et al. DOI 10.1029/2025GL118532, section 2 and Figure 1 / section 3.1, section 3.2; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025GL118532; author projection S_parallel/B constant to 1.02 R_E, no-leakage heating interpretation is a separate assumption",
+  "peak_trace_points": 609,
+  "keogram_points": 615,
+  "sampled_grid_lines": 156,
+  "unique_count_match": 58,
+  "peak_index_0based": 303,
+  "keogram_zero_0based": 307,
+  "peak_equatorial_point_RE": [
+    2.6992620916394854,
+    -7.724596356424573,
+    -0.006108141336636111
+  ],
+  "peak_equatorial_radius_RE": 8.182630507266007,
+  "plot_seed_RE": [
+    2.117820614317343,
+    -7.903814133949056,
+    0
+  ],
+  "plot_seed_displacement_RE": 0.608465703817363,
+  "grid58_seed_RE": [
+    2.122316169840668,
+    -7.92059177557036,
+    0
+  ],
+  "grid58_radius_difference_RE": 0.017369492733992686,
+  "peak_map_azimuth_difference_rad": 1.1102230246251565e-15,
+  "peak_polyline_lengths_RE": [
+    9.667054979603476,
+    9.687951036565027
+  ],
+  "keogram_signed_endpoints_RE": [
+    -9.67534459717585,
+    9.674505309815535
+  ],
+  "max_grid_xy_error_RE": 0,
+  "conditional_chord_checks": [
+    {
+      "order": "stored",
+      "chord_excess_count": 253,
+      "max_chord_excess_RE": 0.005477701392192766,
+      "max_centered_polyline_difference_RE": 0.00667617443105506
+    },
+    {
+      "order": "reversed",
+      "chord_excess_count": 254,
+      "max_chord_excess_RE": 0.005488270190337714,
+      "max_centered_polyline_difference_RE": 0.007481453288983531
+    }
+  ],
+  "limitations": "Authors identify figure panels as the reference line conceptually. Plot code defines equatorial seed but does not establish how original keogram samples were generated or assigned. Chord test rejects direct index match if dsfl is physical arclength; not a proof of error in publication or a rejection of interpolation. No coordinate orientation, magnetic flux weights, base-of-ionosphere transport, actual source covariance or physical extraction admitted. Original raw files not redistributed.",
+  "physical_admission": false
+}
