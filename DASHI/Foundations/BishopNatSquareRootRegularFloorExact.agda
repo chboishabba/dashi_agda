@@ -4,7 +4,7 @@ module DASHI.Foundations.BishopNatSquareRootRegularFloorExact where
 -- REGULARITY OF THE CANONICAL FLOOR-SQUARE-ROOT APPROXIMANTS
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
 open import Data.Nat.Base using (NonZero; z≤n)
 open import Data.Rational.Unnormalised as ℚ using
@@ -85,11 +85,31 @@ floorApproximationRegular radicand leftPrecision rightPrecision =
     (floorApproximationDirectedLeft
       radicand leftPrecision rightPrecision)
 
+-- The vendor seq has a zero coordinate, although its regularity is
+-- required only at positive indices. Reuse the original total floor
+-- approximation instead of assigning the partial fraction function.
+canonicalFloorSequence : Nat → Nat → ℚᵘ
+canonicalFloorSequence = FloorApprox.floorSquareRootApproximation
+
+canonicalFloorSequencePositive : (r p : Nat) → .{{_ : NonZero p}} →
+  canonicalFloorSequence r p ≡ Cross.floorApproximationFraction r p
+canonicalFloorSequencePositive r zero {{nz}} =
+  ⊥-elim (Nat.≢-nonZero⁻¹ zero {{nz}} refl)
+canonicalFloorSequencePositive r (suc p) = refl
+
+canonicalFloorSequenceRegular : (r m n : Nat) →
+  .{{_ : NonZero m}} → .{{_ : NonZero n}} →
+  ℚ.∣ canonicalFloorSequence r m ℚ.- canonicalFloorSequence r n ∣
+    ℚ.≤ (oneOverNat m ℚ.+ oneOverNat n)
+canonicalFloorSequenceRegular r m n
+  rewrite canonicalFloorSequencePositive r m | canonicalFloorSequencePositive r n =
+  floorApproximationRegular r m n
+
 canonicalRegularApproximation :
   (radicand : Nat) → Approx.BishopRegularRationalApproximation
 canonicalRegularApproximation radicand = record
-  { approximation = Cross.floorApproximationFraction radicand
-  ; regular = floorApproximationRegular radicand
+  { approximation = canonicalFloorSequence radicand
+  ; regular = canonicalFloorSequenceRegular radicand
   }
 
 canonicalFloorSquareRootReal :
