@@ -163,19 +163,45 @@ record ContinuousWilsonArithmetic
 
 open ContinuousWilsonArithmetic public
 
+-- The low/high thresholds are SELECTED ONCE, not universally quantified
+-- independently for every value.  The previous signatures let threshold =
+-- value in both fields and thus forced 0ℝ ≡ 1ℝ in every inhabitant.
+-- A true physical instantiation still requires an actual real, continuous
+-- measurable interpolating function on the selected SU(N) test algebra.
 record ContinuousClampSource : Set₁ where
   field
+    lowerThreshold upperThreshold : ℝ
+    lowerThresholdPositive : 0ℝ <ℝ lowerThreshold
+    lowerBelowUpper : lowerThreshold <ℝ upperThreshold
+    upperThresholdAtMostOne : upperThreshold ≤ℝ 1ℝ
     clamp : ℝ → ℝ
     congruent : ∀ {value value'} → value ≡ value' →
       clamp value ≡ clamp value'
     clampNonnegative : ∀ value → 0ℝ ≤ℝ clamp value
     clampLeOne : ∀ value → clamp value ≤ℝ 1ℝ
-    clampZeroBelow : ∀ {value threshold} →
-      value ≤ℝ threshold → clamp value ≡ 0ℝ
-    clampOneAbove : ∀ {value threshold} →
-      threshold ≤ℝ value → clamp value ≡ 1ℝ
+    clampZeroBelow : ∀ {value} →
+      value ≤ℝ lowerThreshold → clamp value ≡ 0ℝ
+    clampOneAbove : ∀ {value} →
+      upperThreshold ≤ℝ value → clamp value ≡ 1ℝ
 
 open ContinuousClampSource public
+
+------------------------------------------------------------------------
+-- Exact source-repair check: a strict lower threshold is explicit and
+-- may never be replaced by a universally quantified comparison cutoff.
+-- This is a field projection, NOT the construction of physical Haar or
+-- CMP116 source estimates.
+------------------------------------------------------------------------
+
+continuousClampFixedThresholds :
+  (cut : ContinuousClampSource) →
+  (0ℝ <ℝ ContinuousClampSource.lowerThreshold cut) ×
+  (ContinuousClampSource.lowerThreshold cut
+     <ℝ ContinuousClampSource.upperThreshold cut)
+continuousClampFixedThresholds cut =
+  ContinuousClampSource.lowerThresholdPositive cut ,
+  ContinuousClampSource.lowerBelowUpper cut
+
 
 record ContinuousExpectationAlgebra (Configuration : Set) : Set₁ where
   field
@@ -197,9 +223,14 @@ record ContinuousWilsonSourceContract : Set₁ where
     Configuration : Set
     PlaquetteIndex : Set
     expectation : ContinuousExpectationAlgebra Configuration
+    -- RAW Wilson plaquette deficit 1 - ReTr(U_p)/N belongs to [0,2],
+    -- NOT [0,1] (for SU(2), U_p=-I gives 2).  The clamp itself supplies
+    -- the [0,1] range used by all contour and covariance proofs below.
+    -- An actual instance must prove the source trace is the genuine
+    -- normalized REAL complex matrix trace: cyclicity alone is insufficient.
     deficit : PlaquetteIndex → Configuration → ℝ
     deficitNonnegative : ∀ p links → 0ℝ ≤ℝ deficit p links
-    deficitLeOne : ∀ p links → deficit p links ≤ℝ 1ℝ
+    deficitLeTwo : ∀ p links → deficit p links ≤ℝ (1ℝ +ℝ 1ℝ)
     gaugeInvariant : (Configuration → ℝ) → Set
     deficitGaugeInvariant : ∀ p → gaugeInvariant (deficit p)
 
