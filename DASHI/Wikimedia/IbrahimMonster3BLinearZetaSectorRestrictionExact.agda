@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+import DASHI.Moonshine.GradedRepresentation as GR
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
@@ -90,6 +92,94 @@ record LinearSingleActionProducer : Set₁ where
     inertiaRestrictionIsLinear : Set
 
 open LinearSingleActionProducer public
+
+------------------------------------------------------------------------
+-- Full-vector successor.  The old SingleActionProducer requires a bijection
+-- of the literal eigenspace with a finite basis.  That cannot be inhabited
+-- by a nonzero K-vector space over Q(zeta).  Retain it for selected basis
+-- recognition only, and put the original action and its linear laws first.
+------------------------------------------------------------------------
+
+record LiteralLinearNormalizerSource : Set₁ where
+  field
+    literalAmbient : Linear.HilbertLift
+    literalNormalizer : Set
+    literalGroup : GR.Group literalNormalizer
+    literalNormalizerAction :
+      Inertia.CentralNormalizerAction
+        (Linear.Vector literalAmbient) literalNormalizer
+    literalCentre : literalNormalizer
+    centreIsSameAction : ∀ v →
+      Inertia.centralAct (Inertia.phaseAction literalNormalizerAction) v
+      ≡ Inertia.act literalNormalizerAction literalCentre v
+    phaseScalar : Inertia.CentralPhase3 → Linear.Scalar literalAmbient
+    phaseScaleIsScalar : ∀ p v →
+      Inertia.phaseScale (Inertia.phaseAction literalNormalizerAction) p v
+      ≡ Linear._·_ literalAmbient (phaseScalar p) v
+    normalizerIdentity : ∀ v →
+      Inertia.act literalNormalizerAction (GR.identity literalGroup) v ≡ v
+    normalizerComposition : ∀ g h v →
+      Inertia.act literalNormalizerAction (GR._∙_ literalGroup g h) v
+      ≡ Inertia.act literalNormalizerAction g
+          (Inertia.act literalNormalizerAction h v)
+    normalizerZero : ∀ g →
+      Inertia.act literalNormalizerAction g (Linear.zero literalAmbient)
+      ≡ Linear.zero literalAmbient
+    normalizerAdd : ∀ g u v →
+      Inertia.act literalNormalizerAction g (Linear._+_ literalAmbient u v)
+      ≡ Linear._+_ literalAmbient
+          (Inertia.act literalNormalizerAction g u)
+          (Inertia.act literalNormalizerAction g v)
+    normalizerScale : ∀ g a v →
+      Inertia.act literalNormalizerAction g (Linear._·_ literalAmbient a v)
+      ≡ Linear._·_ literalAmbient a (Inertia.act literalNormalizerAction g v)
+
+open LiteralLinearNormalizerSource public
+
+-- All three restrictions may be taken on the SAME literal source.  No
+-- Fin 90/729 basis recognition is required to define the full eigenspace.
+record LiteralLinearPhaseRestriction
+    (S : LiteralLinearNormalizerSource) (p : Inertia.CentralPhase3) : Set₁ where
+  field
+    phaseLinearCarrier : Linear.HilbertLift
+    phaseVectorIsEigenspace :
+      Linear.Vector phaseLinearCarrier ≡
+      Inertia.CentralEigenspace
+        (Inertia.phaseAction (literalNormalizerAction S)) p
+    phaseScalarToAmbient :
+      Linear.Scalar phaseLinearCarrier → Linear.Scalar (literalAmbient S)
+
+  includePhase : Linear.Vector phaseLinearCarrier → Linear.Vector (literalAmbient S)
+  includePhase v =
+    Inertia.stateOf (subst (λ X → X) phaseVectorIsEigenspace v)
+
+  restrictInertia : Inertia.CentralInertia (literalNormalizerAction S) →
+    Linear.Vector phaseLinearCarrier → Linear.Vector phaseLinearCarrier
+  restrictInertia g v =
+    subst (λ X → X) (sym phaseVectorIsEigenspace)
+      (Inertia.inertiaActsWithinPhase (literalNormalizerAction S) p g
+        (subst (λ X → X) phaseVectorIsEigenspace v))
+
+  field
+    phaseIncludeZero :
+      includePhase (Linear.zero phaseLinearCarrier) ≡ Linear.zero (literalAmbient S)
+    phaseIncludeAdd : ∀ u v →
+      includePhase (Linear._+_ phaseLinearCarrier u v)
+      ≡ Linear._+_ (literalAmbient S) (includePhase u) (includePhase v)
+    phaseIncludeScale : ∀ a v →
+      includePhase (Linear._·_ phaseLinearCarrier a v)
+      ≡ Linear._·_ (literalAmbient S) (phaseScalarToAmbient a) (includePhase v)
+    phaseRestrictZero : ∀ g →
+      restrictInertia g (Linear.zero phaseLinearCarrier) ≡ Linear.zero phaseLinearCarrier
+    phaseRestrictAdd : ∀ g u v →
+      restrictInertia g (Linear._+_ phaseLinearCarrier u v)
+      ≡ Linear._+_ phaseLinearCarrier (restrictInertia g u) (restrictInertia g v)
+    phaseRestrictScale : ∀ g a v →
+      restrictInertia g (Linear._·_ phaseLinearCarrier a v)
+      ≡ Linear._·_ phaseLinearCarrier a (restrictInertia g v)
+
+open LiteralLinearPhaseRestriction public
+
 
 ------------------------------------------------------------------------
 -- WrongType / non-promotion boundaries.
