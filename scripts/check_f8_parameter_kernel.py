@@ -35,14 +35,14 @@ def sumup(x):
     for a in x:t=U(t+a)
     return t
 
-def run(n,mode,j,h,degree):
+def run(n,mode,j,h,degree,profile=None):
     st=time.monotonic();dt,t,b,lo,hi,span=clock(n);xi=I(lo[j],hi[j+1]);w=I(float(xi.h))-I(float(xi.l));cut=rat(Q(1,13));k=mode*np.pi/3.012;pl,ph=pi_box();K=I(D(float(mode*pl/Q('3.012'))),U(float(mode*ph/Q('3.012'))));K2=K*K
     boxes=[]
     for i in range(n):
         lag=I(max(0,abs(i-j)-1),abs(i-j)+1)*dt;dz=I(lo[i],hi[i+1])-xi;A=lag+dz;B=lag-dz;boxes.append((I(max(0,A.l),A.h),I(max(0,B.l),B.h)))
     na=int(max(a.h for a,b in boxes)/h)+2;nb=int(max(b.h for a,b in boxes)/h)+2
     mid=float((xi.l+xi.h)/2);points=[mid] if degree==0 else [float(xi.l),mid,float(xi.h)]
-    jets=[candidate(x,k,h,na,nb) for x in points];res=np.empty((na,nb));V=np.empty_like(res);ranges=np.empty((3,2,na,nb));cross=0
+    jets=[(candidate if profile is None else profile.candidate)(x,k,h,na,nb) for x in points];res=np.empty((na,nb));V=np.empty_like(res);ranges=np.empty((3,2,na,nb));cross=0
     for start in range(0,na,8):
         stop=min(na,start+8);p=[hermite(*(v[start:stop+1] for v in row),h) for row in jets]
         # Exact source Bernstein polynomial. Midpoint is a proposed literal
@@ -52,7 +52,11 @@ def run(n,mode,j,h,degree):
         z0=I(float(xi.l))+I((np.arange(start,stop)[:,None]-np.arange(nb)[None,:])*h/2)
         zl=(z0-h/2).l;zh=(z0+h/2+w).h
         num=mulz3(mulz3(q,z0,h,w),z0,h,w)+rat(Q(15,4))*elevsrc(elevsrc(elevate(elevate(elevate(elevate(p,0),0),1),1)))
-        den=np.maximum(cut.l,zl);above=U(np.max(num.mag(),axis=(0,1,2))/D(den*den));below=np.max((q+rat(Q(15*13**2,4))*p).mag(),axis=(0,1,2));res[start:stop]=np.maximum(np.where(zh>=cut.l,above,0),np.where(zl<=cut.h,below,0));V[start:stop]=U(K2.h+U(3.75/D(den*den)));cross+=int(np.sum((zh>=cut.l)&(zl<=cut.h)))
+        den=np.maximum(cut.l,zl);above=U(np.max(num.mag(),axis=(0,1,2))/D(den*den));physical=np.where(zh>=cut.l,above,0)
+        if profile is None:
+            below=np.max((q+rat(Q(15*13**2,4))*p).mag(),axis=(0,1,2));res[start:stop]=np.maximum(physical,np.where(zl<=cut.h,below,0));V[start:stop]=U(K2.h+U(3.75/D(den*den)))
+        else:res[start:stop],V[start:stop]=profile.envelope(p,q,z0,h,w,zl,zh,K2,physical)
+        cross+=int(np.sum((zh>=cut.l)&(zl<=cut.h)))
         for m,poly in enumerate((p,diff(p,0,h),diff(p,1,h))):ranges[m,0,start:stop],ranges[m,1,start:stop]=hull(poly)
     F2=prefix(U(U(res*res)*h*h));rows=[]
     for i,(A,B) in enumerate(boxes):
