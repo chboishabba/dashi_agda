@@ -1,0 +1,45 @@
+# Paper 9 — original Eisenstein completion, Euler jets and weight-12 bracket
+
+Parent 29c71a04f91c91354891b01cb3ae614b3b9397f6. No new execution, compiler, CI, kernel or benchmark. All new Agda proofs are source-written, pending elaboration and exact-head verification. This cut reuses the original q/series construction rather than a new model.
+
+## Source owner audit
+
+Actual Agda owners read at parent:
+- BishopMachinEisensteinRouteBExact d884b7318a9f89a0272e36c3e19b4b8462b1112c: literal Round11 Machin q, E4/E6 recurrence, normalized Delta. Canonical receipt is parametrized by the actual Round11.BishopCutset; not an inhabitant of all phase inputs.
+- JInvariantEisensteinBishopSetoidSeriesExact 2c0ef9515e4c1dfd278feaf6f71bc607e2a8350c: original coefficients e4CoefficientReal/e6CoefficientReal, actual terms, componentwise absolute convergence, canonical tails and signed normalized limits.
+- JInvariantBishopUnitDiskEisensteinCompletionExact ad240520b86b33cdfa9a2ca90facfac1a8bc8ddb: literal completion from q, unit radius, norm-square agreement; e4/e6 limit fields instantiated from those terms.
+- JInvariantBishopLatticeEisensteinSameObjectCompilerExact 9f0be2e9e018f4dadbf786f3dcf754d16779c4f7: setoid modularity from lattice reindexing and pointwise same-object. Concrete lattice absolute sum and normalized Fourier binding remain inputs. Check the normalization: raw G_(2k)=2 zeta(2k) E_(2k); the model's weight-4/6 sum must actually be normalized or supply this factor, not identify raw and normalized sums silently.
+- JInvariantBishopNativeProofRelevantKleinExact 6fe718a4754fb06c8b34cbae279b13fda6f5f66e: original E4/E6, normalized Delta, negativeDeltaWitness and jFromNegativeDelta.
+- JInvariantEisensteinAgdaLeanExtractionExact 603998fdd55ae9a07b1b15df949ddc6360baef74: existing extraction compiler, uninhabited concrete source binding. LeanMoonshineEisensteinAnalyticParityExact 7176a7597eba9409e69a79d664eb88f2c5b1ff7e explicitly retains false cross-language proof flags.
+- JInvariantEisensteinBishopMajorantSeriesExact f5ccee66a45e2264f7174963071630bce2e9d50f and BishopPolynomialGeometricSeriesConvergenceExact 85823a60790fb7b31de20c7af04f987e193193a5: arbitrary-degree absolute convergence, not only degrees 4/6. Existing finite divisor kernel retained.
+
+Actual companion branch agent/moonshine-eisenstein-analytic-20260922 read:
+- Integration/MoonshineEisensteinAnalytic.lean 622154f73d0162c44f6846822645c9c7f03843d4: q norm formula, q disk, summable sigma3/5 and exact E4_qExpansion/E6_qExpansion.
+- Integration/MoonshineEisensteinAgdaTarget.lean 9f0310c1e750a1a0b0662c69861293de16b18256: qOfTarget_eq_qParam, original shaped e4/e6TruncatedTarget_eq_sum, e4/e6At_tendsto, e4/e6Limit_eq_mathlib_E4/E6, normalizedDeltaAt_tendsto, actual modular form normalizedDeltaForm, reflection and jTarget_S_invariant.
+- Integration/MoonshineDeltaIdentityPinned.lean fd69089ac52524dd3461608f3a3770301254f2a7: normalizedDeltaCuspForm_qExpansion_coeff_one, eta24_eq_normalizedDelta.
+- Integration/MoonshineDeltaFinalMinCut.lean ffec688273e1dca65fa837a5a5d0d904ff5d9a5e: normalizedDelta_ne_zero_canonical; same-object mincut equivalence.
+- Integration/MoonshineWeight12Eta24ScalarPinned.lean existing exists_smul_eta24; levelOne_nonpos_wt_const as previously audited. No new kernel replay, Mathlib pin stays v4.28.0.
+
+## A4 real slice, literal native construction
+
+New JInvariantBishopEisensteinRealSliceExact writes original complex imaginary-zero closure under addition/subtraction, scaling, product, power and proof-relevant reciprocal. Given actual q.im ≃ 0, each original tail term has imaginary component equivalent to zero. Use existing BishopFiniteSeriesExtensionalityExact and zero-series convergence, not an assumed real limit. Apply to actual Disk completion: E4 real, E6 real (minus unsigned tail), normalized Delta real, jFromNegativeDelta real. The source theorem consumes the actual negativeDeltaWitness and does not assume a new real j. Native elaboration untested. Still need actual q phase/realness and strict Delta negativity from source, plus actual dyadic enclosure. This discharges the intended real-slice *consumer* without general complex square-root calculus.
+
+## A2/A6 all-order original Euler coefficient jets
+
+D=q*d/dq multiplies q^m coefficient by m. With source n=m-1, the dth Euler jet tail is exactly (n+1)^d times the existing source term. Existing majorants 240*m^4*r^m and 504*m^6*r^m therefore become 240*m^(d+4)*r^m and 504*m^(d+6)*r^m. New JInvariantBishopEisensteinEulerJetExact writes actual weighted terms, all-order majorant identity from powAdd, component comparison and canonical convergent limits using existing PolyGeo; E6 sign retained, d=0 retains actual normalized completed forms, positive d drops only the constant mode. These are convergent coefficient jets, NOT yet derivatives of the actual limit. Ordinary analytic identification follows from uniform compact-disk majorants: for any 0<r<R<1, on |q|<=r the ordinary derivative series of fixed order is bounded by a constant times polynomial-geometric series at R (or use m^d r^(m-d) for fixed r>0); all tails uniform, so termwise differentiation and repeated Euler identification hold. Need formal power-series/analytic derivative interpretation on actual Lean target or native Bishop, not just pointwise convergence. This also gives actual q-series source derivatives for A5.
+
+## Stronger A2 reduction: one existing weight-12 rigidity theorem
+
+Let x=E4, y=E6, d=x^3-y^2=1728 Delta, u=3Dx, v=2Dy, e=DDelta/Delta. On actual modularity, Df(g tau)=j_g^(k+2)Df(tau)+k a j_g^(k+1)f(tau), a=c/(2pi i). The signed Rankin-Cohen bracket B=y u-x v transforms at weight12: both anomaly terms are 12 a j_g^11 xy and cancel. This bracket is holomorphic on H; q-series derivative compact convergence gives cusp expansion, B0=0 and B1=3*240-2*(-504)=1728. Thus B is a weight12 cusp form. Apply actual existing exists_smul_eta24, and eta24=Delta with first coefficient 1. Coefficient comparison gives B=1728 Delta=d, avoiding separate weight6/8 Serre-corrected form packaging.
+
+By original definition of e and derivative product law, x^2 u-y v=Dd=e d. Together with y u-x v=d this is a literal two-coordinate linear system, determinant -d. It is invertible at every point of H because actual normalizedDelta_ne_zero_canonical. The signed residuals
+ r_D=x^2u-yv-ed, r_B=yu-xv-d,
+ r_4=u-ex+y, r_6=v-ey+x^2
+satisfy x r_D-y r_B=d r_4 and y r_D-x^2 r_B=d r_6.
+New JInvariantEisensteinRankinCohenResidualExact writes these exact integer ring identities, signed anomaly cancellation and first coefficient. At actual complex source, both left residuals vanish, so r4=r6=0 by apartness. Hence 3DE4=E2E4-E6 and 2DE6=E2E6-E4^2 without a general dimension theorem or division by E4/E6. BIDI: r_D=x^2 r4-y r6, r_B=y r4-x r6; the original two residuals reopen, determinant degeneracy at d=0 remains explicit (cusp d has zero mode 0, so pointwise cancellation there is not valid; coefficient/continuity handles cusp). The scalar e is the original log derivative, no arbitrary E2 model.
+
+Remaining third identity: use weight12 Delta transformation to derive E2 anomaly; F4=12DE2-E2^2+E4 transforms weight4 with zero constant; divide by nonvanishing Delta with simple cusp zero, apply existing nonpositive-weight rigidity at weight -8 and negative constant vanishing. Thus 12DE2=E2^2-E4. Need e q constant 1 and signed coefficients from normalized Delta=q unit; the constant follows directly DDelta/Delta=1+D(unit)/unit, and eta product log derivative gives actual -24 sigma1 if needed. No independent E2 series definition is necessary for the selected hypergeometric/period consumer. Formal remaining: actual derivative slash transformation and chain rule; package the single weight12 cusp bracket and compare coefficient one using existing rigidity; package F4/Delta weight -8; interpret signed residual identities in actual complex field. All of this is a reduction on named analytic premises, not new Lean proof/kernel acceptance.
+
+## Endpoint and attribution
+
+Original source binding, derivative analytic interpretation, Hecke polynomial and actual finite CM certificate reflection, direct Taylor and hypergeometric coefficient equality still required for universal rational overlap. Do not count this as F5 or analytic identity closure. F1 native factorial semantics, F2-F4 intended source proofs unverified; F6-F9 unchanged. Existing Bishop, Murray/Csimma and DASHI owners retained; classical Eisenstein, Rankin-Cohen, Serre, Ramanujan, Chudnovsky and Machin identities attributed to their original mathematical traditions/authors. New work is source-specific real slice/jet convergence implementation and the exact residual reduction via existing rigidity, not authorship of classical bracket or Ramanujan identities.
