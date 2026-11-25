@@ -28,7 +28,9 @@ def run(a):
     # Same physical outer normal boundary: 2.016 is divisible by both spacings.
     drc,drf,dyc,dyf=.008,.006,.012,.009
     nc,nf=math.ceil(3.01/drc)+1,math.ceil(3.01/drf)+1
-    mc,mf=169,225
+    # Enlarged same-object reference box: no outer-boundary causal contact through t12.
+    # This is opt-in and not a historical production geometry or certified CFL.
+    mc,mf=(337,449) if a.enlarged_box else (169,225)
     S,maps=transfer_builder(drc,nc,dyc,mc,drf,nf,dyf,mf)
     def coeff(T):
         t=brentq(lambda t:F(t)-T,.5,25)
@@ -42,7 +44,7 @@ def run(a):
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
     files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py',Path(__file__).name]
-    ident=json.dumps(dict(route=a.route,window=a.window,h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    ident=json.dumps(dict(route=a.route,window=a.window,enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
     def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
     def read(k):
         with np.load(work/f'forward-{k:08d}.npz',allow_pickle=False) as z:
@@ -134,5 +136,5 @@ def run(a):
     return dict(phase='complete_experiment',identity=ident,results=results,physical_causal_null_certified=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75);p.add_argument('--window',action='store_true',help='fixed compact E4/SMS window, separate from instantaneous receiver')
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75);p.add_argument('--window',action='store_true',help='fixed compact E4/SMS window, separate from instantaneous receiver');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
     a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase']=='complete_experiment' else 75)
