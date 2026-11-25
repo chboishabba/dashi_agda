@@ -1,0 +1,62 @@
+{
+  "status": "CONDITIONAL_EDI_BOUNDARY_ALGEBRA",
+  "checker_blob": "02fd028df14eaea14e9a7a13b6e108afdcf38405",
+  "archive_sha256": "26020ec6a1db00359a8703fad30219e6e2e9b20e8b87e968633576525b4fab49",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0, after correcting ndarray Hermitian helper; exact committed checker blob matched; no CI/kernel",
+  "counts": {
+    "all": {
+      "n": 1467,
+      "positive": 1297,
+      "negative": 170,
+      "contractive": 1297,
+      "margin_ohm_quantiles": [
+        -0.007260759338057521,
+        0.00041634453868544686,
+        0.015266809488249294
+      ],
+      "positive_after_assumed_1_scale": 1175,
+      "positive_after_assumed_3_scale": 1024,
+      "max_condition": 73.66192729274
+    },
+    "5mHz": {
+      "n": 39,
+      "positive": 38,
+      "negative": 1,
+      "contractive": 38,
+      "margin_ohm_quantiles": [
+        -0.00012546724320774922,
+        0.0009147050743968163,
+        0.0024284720134035752
+      ],
+      "positive_after_assumed_1_scale": 37,
+      "positive_after_assumed_3_scale": 37,
+      "max_condition": 15.253157067398108
+    },
+    "50mHz": {
+      "n": 39,
+      "positive": 38,
+      "negative": 1,
+      "contractive": 38,
+      "margin_ohm_quantiles": [
+        -0.0003024805333822591,
+        0.0012786716490928197,
+        0.011768089930900762
+      ],
+      "positive_after_assumed_1_scale": 37,
+      "positive_after_assumed_3_scale": 37,
+      "max_condition": 4.1704354553361425
+    }
+  },
+  "max_cayley_error": 6.121095865792263e-14,
+  "max_pair_error_ohm": 0,
+  "donors": {
+    "planar": "1a9ad6f6ba05ac1cc6648831160937fd0cd91a6b",
+    "drude": "f0ccd00d0c7b39371e5755c5f8f3f0ad6da45ffd",
+    "layered": "b5f68b1836b736789698f8370c04bdd7a2e94192",
+    "source": "aa53250f62089b9f79e387d9146c4e4beb5f57e2",
+    "spacetime": "059a4bf221af42b1fbe40bd101e3de3d7f27f1e4",
+    "material": "fb4039927678b370f359b3151c1fc2a2286c33ab",
+    "retarded": "ad498ad7117e481cfe243cb91a7fd1ae74fef4da"
+  },
+  "limits": "Pointwise compatibility in assumed common right-handed frame, not proof of causal/passive physical Earth operator. MT impedance is an observed transfer, not automatically a loaded Dirichlet-to-Neumann boundary for arbitrary horizontal wavenumber. Variance-scale multiples are hypothetical spectral-norm bounds, not confidence levels. No repair, no source/region mapping, no causal cross-frequency fit, no real actuation, no physical extraction. Exact passive missing-link counterexample retains all transmitted plus other-exit work; no identification from source total and fixed terminal alone."
+}
