@@ -125,14 +125,22 @@ finiteRGOneStepGoodBadCovarianceUpper
     second : ∣ coarse ∣ + ∣ fibre ∣
       ≤ coarseBudget + (goodBudget + exceptionalBudget)
     second = ℚP.+-mono-≤ coarseBound fibreAbs
+
+    associativity∀ :
+      ∀ (a b c : ℚ) → a + (b + c) ≡ a + b + c
+    associativity∀ = ℚRing.solve-∀
+
+    associativity :
+      coarseBudget + (goodBudget + exceptionalBudget)
+      ≡ coarseBudget + goodBudget + exceptionalBudget
+    associativity =
+      associativity∀ coarseBudget goodBudget exceptionalBudget
   in
   ℚP.≤-trans first
     (subst
       (λ upper →
         ∣ coarse ∣ + ∣ fibre ∣ ≤ upper)
-      (ℚRing.solve-∀ coarseBudget goodBudget exceptionalBudget :
-        coarseBudget + (goodBudget + exceptionalBudget)
-        ≡ coarseBudget + goodBudget + exceptionalBudget)
+      associativity
       second)
 
 ------------------------------------------------------------------------
@@ -194,6 +202,28 @@ finiteRGGoodBadCovarianceTelescopes (terminal value) =
 finiteRGGoodBadCovarianceTelescopes
     (prepend {fine} {coarse} remainder good exceptional
       fineExact split tail) =
+  let
+    regroup∀ :
+      ∀ (t g e dg de : ℚ) →
+        (t + g + e) + (dg + de) ≡ t + (g + dg) + (e + de)
+    regroup∀ = ℚRing.solve-∀
+
+    regroup :
+      terminalCovariance tail + goodContributionSum tail
+        + exceptionalContributionSum tail + (good + exceptional)
+      ≡ terminalCovariance
+          (prepend remainder good exceptional fineExact split tail)
+        + goodContributionSum
+          (prepend remainder good exceptional fineExact split tail)
+        + exceptionalContributionSum
+          (prepend remainder good exceptional fineExact split tail)
+    regroup =
+      regroup∀
+        (terminalCovariance tail)
+        (goodContributionSum tail)
+        (exceptionalContributionSum tail)
+        good exceptional
+  in
   trans fineExact
     (trans
       (cong (coarse +_) split)
@@ -201,21 +231,22 @@ finiteRGGoodBadCovarianceTelescopes
         (cong
           (λ selected → selected + (good + exceptional))
           (finiteRGGoodBadCovarianceTelescopes tail))
-        (ℚRing.solve-∀
-          (terminalCovariance tail)
-          (goodContributionSum tail)
-          (exceptionalContributionSum tail)
-          good exceptional)))
+        regroup))
 
 finiteRGGoodBadAbsoluteCovarianceUpper :
   ∀ {fine} (chain : GoodBadCovarianceChain fine) →
   ∣ fine ∣ ≤ goodBadAbsoluteEnvelope chain
 finiteRGGoodBadAbsoluteCovarianceUpper (terminal value) =
+  let
+    terminalId∀ : ∀ (a : ℚ) → a + 0ℚ + 0ℚ ≡ a
+    terminalId∀ = ℚRing.solve-∀
+
+    terminalId : ∣ value ∣ + 0ℚ + 0ℚ ≡ ∣ value ∣
+    terminalId = terminalId∀ ∣ value ∣
+  in
   subst
     (λ upper → ∣ value ∣ ≤ upper)
-    (sym
-      (ℚRing.solve-∀ ∣ value ∣ :
-        ∣ value ∣ + 0ℚ + 0ℚ ≡ ∣ value ∣))
+    (sym terminalId)
     ℚP.≤-refl
 finiteRGGoodBadAbsoluteCovarianceUpper
     (prepend {fine} {coarse} remainder good exceptional
@@ -232,7 +263,7 @@ finiteRGGoodBadAbsoluteCovarianceUpper
     first =
       subst
         (λ selected → ∣ selected ∣ ≤ ∣ coarse ∣ + ∣ remainder ∣)
-        (sym (cong ∣_∣ fineExact))
+        (sym fineExact)
         (ℚP.∣p+q∣≤∣p∣+∣q∣ coarse remainder)
 
     second : ∣ coarse ∣ + ∣ remainder ∣
@@ -240,19 +271,28 @@ finiteRGGoodBadAbsoluteCovarianceUpper
     second = ℚP.+-mono-≤
       (finiteRGGoodBadAbsoluteCovarianceUpper tail)
       remainderBound
+
+    envelopeId∀ :
+      ∀ (t g e dg de : ℚ) →
+        (t + g + e) + (dg + de) ≡ t + (g + dg) + (e + de)
+    envelopeId∀ = ℚRing.solve-∀
+
+    envelopeId :
+      goodBadAbsoluteEnvelope tail + (∣ good ∣ + ∣ exceptional ∣)
+      ≡ goodBadAbsoluteEnvelope
+          (prepend remainder good exceptional fineExact split tail)
+    envelopeId =
+      envelopeId∀
+        (∣ terminalCovariance tail ∣)
+        (absoluteGoodContributionSum tail)
+        (absoluteExceptionalContributionSum tail)
+        ∣ good ∣ ∣ exceptional ∣
   in
   ℚP.≤-trans first
     (subst
       (λ upper →
         ∣ coarse ∣ + ∣ remainder ∣ ≤ upper)
-      (ℚRing.solve-∀
-        ∣ terminalCovariance tail ∣
-        (absoluteGoodContributionSum tail)
-        (absoluteExceptionalContributionSum tail)
-        ∣ good ∣ ∣ exceptional ∣ :
-        goodBadAbsoluteEnvelope tail + (∣ good ∣ + ∣ exceptional ∣)
-        ≡ goodBadAbsoluteEnvelope
-            (prepend remainder good exceptional fineExact split tail))
+      envelopeId
       second)
 
 ------------------------------------------------------------------------
@@ -280,11 +320,28 @@ finiteRGBudgetedGoodBadAbsoluteUpper :
     ∣ terminalCovariance chain ∣
       + goodBudget budget + exceptionalBudget budget
 finiteRGBudgetedGoodBadAbsoluteUpper chain budget =
+  let
+    terminalRefl :
+      ∣ terminalCovariance chain ∣ ≤ ∣ terminalCovariance chain ∣
+    terminalRefl = ℚP.≤-refl
+
+    goodStep :
+      ∣ terminalCovariance chain ∣ + absoluteGoodContributionSum chain
+      ≤ ∣ terminalCovariance chain ∣ + goodBudget budget
+    goodStep =
+      ℚP.+-mono-≤ terminalRefl (goodSumBound budget)
+
+    exceptionalStep :
+      (∣ terminalCovariance chain ∣ + absoluteGoodContributionSum chain)
+        + absoluteExceptionalContributionSum chain
+      ≤ (∣ terminalCovariance chain ∣ + goodBudget budget)
+        + exceptionalBudget budget
+    exceptionalStep =
+      ℚP.+-mono-≤ goodStep (exceptionalSumBound budget)
+  in
   ℚP.≤-trans
     (finiteRGGoodBadAbsoluteCovarianceUpper chain)
-    (ℚP.+-mono-≤
-      (ℚP.+-mono-≤ ℚP.≤-refl (goodSumBound budget))
-      (exceptionalSumBound budget))
+    exceptionalStep
 
 ------------------------------------------------------------------------
 -- Physical-distance transfer.  The only remaining input is now a genuinely
