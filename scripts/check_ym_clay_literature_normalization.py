@@ -60,8 +60,11 @@ FILES: dict[Path, tuple[str, ...]] = {
     YM / "BalabanClayT3PhysicalUniformFluctuationCoercivityExact.agda": (
         "E. Eriksson",
         "viXra:2602.0051 v2",
-        "T. Balaban",
-        "DOI: 10.1007/BF01215757",
+        # Match the cited primary author's actual name and DOI:
+        # Tadeusz Bałaban, CMP 95 (1984), 17–40,
+        # https://doi.org/10.1007/BF01215753
+        "Tadeusz Bałaban",
+        "DOI: 10.1007/BF01215753",
         "smallFieldFluctuationCoercive",
         "smallFieldCoercivityArchitecturalCorrectionLevel = machineChecked",
         "physicalSmallFieldUniformFluctuationInputsLevel = conditional",
