@@ -1,0 +1,831 @@
+module DASHI.Physics.YangMills.YMClayOriginalWilsonContinuousA2BridgeExact where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+open import Relation.Binary.PropositionalEquality using (subst; sym; cong)
+open import Data.List.Base using (List; []; _∷_; map)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_;
+   ≤ℝ-refl; ≤ℝ-trans; +-mono-≤; mulOneʳ; mulZeroʳ; oneNonnegative; subSelf)
+import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+
+continuousWilsonA2OriginalOwner : String
+continuousWilsonA2OriginalOwner =
+  "DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact"
+
+continuousWilsonA2HaarOwner : String
+continuousWilsonA2HaarOwner =
+  "DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact"
+
+continuousWilsonA2IntegrationOwner : String
+continuousWilsonA2IntegrationOwner =
+  "DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact"
+
+continuousWilsonA2FiniteRegressionOwner : String
+continuousWilsonA2FiniteRegressionOwner =
+  "DASHI.Physics.YangMills.YMClaySharpFiniteTotalVariationCovarianceExact"
+
+continuousWilsonA2ContourSumStatus : String
+continuousWilsonA2ContourSumStatus =
+  "source contour-product rate remains unpaid; this module proves only the q-to-contour-sum transport"
+
+continuousWilsonA2ContourSumSourceOwner : String
+continuousWilsonA2ContourSumSourceOwner =
+  "Docs/physics/YMClayP0R445TwoMarkJointTVSharpCovarianceAndPhysicalW3RateCut20261124.md"
+
+continuousWilsonA2ContourSumRateStatus : String
+continuousWilsonA2ContourSumRateStatus =
+  "conditional source rate; C(beta)=8+(2/3)log(24)+log(beta) is not cutoff-uniform"
+
+continuousWilsonA2GoodFieldComparisonStatus : String
+continuousWilsonA2GoodFieldComparisonStatus =
+  "source-weighted good measure vs CMP116 good-field measure remains unpaid"
+
+record ContinuousWilsonArithmetic
+    {Converges : (Nat → ℝ) → ℝ → Set}
+    (quotient : Quotient.RealQuotientConvergenceAuthority Converges) : Set₁ where
+  field
+    strictToNonnegative : ∀ {a : ℝ} → 0ℝ <ℝ a → 0ℝ ≤ℝ a
+    strictToNonzero : ∀ {a : ℝ} → 0ℝ <ℝ a → Quotient.Nonzero quotient a
+    positiveAddRight : ∀ {a b : ℝ} → 0ℝ <ℝ b → a <ℝ a +ℝ b
+    twoNonzero : Quotient.Nonzero quotient (1ℝ +ℝ 1ℝ)
+    divideZero : ∀ denominator → Quotient.Nonzero quotient denominator →
+      Quotient.divide quotient 0ℝ denominator ≡ 0ℝ
+    divideSelf : ∀ denominator → Quotient.Nonzero quotient denominator →
+      Quotient.divide quotient denominator denominator ≡ 1ℝ
+    divideAdd : ∀ numeratorLeft numeratorRight denominator →
+      Quotient.Nonzero quotient denominator →
+      Quotient.divide quotient (numeratorLeft +ℝ numeratorRight) denominator
+      ≡ Quotient.divide quotient numeratorLeft denominator
+        +ℝ Quotient.divide quotient numeratorRight denominator
+    divideScale : ∀ scalar numerator denominator →
+      Quotient.Nonzero quotient denominator →
+      Quotient.divide quotient (scalar *ℝ numerator) denominator
+      ≡ scalar *ℝ Quotient.divide quotient numerator denominator
+    divideNonnegative : ∀ numerator denominator → 0ℝ ≤ℝ numerator →
+      Quotient.Nonzero quotient denominator →
+      0ℝ ≤ℝ Quotient.divide quotient numerator denominator
+    goodMassEqOneMinus : ∀ {q m : ℝ} → q +ℝ m ≡ 1ℝ →
+      m ≡ 1ℝ -ℝ q
+    restrictedAddPointwise : ∀ {X : Set} (χ f g : X → ℝ) (x : X) →
+      (1ℝ -ℝ χ x) *ℝ (f x +ℝ g x)
+      ≡ (1ℝ -ℝ χ x) *ℝ f x +ℝ (1ℝ -ℝ χ x) *ℝ g x
+    restrictedScalePointwise : ∀ {X : Set} (χ : X → ℝ) (scalar : ℝ)
+      (f : X → ℝ) (x : X) →
+      (1ℝ -ℝ χ x) *ℝ (scalar *ℝ f x)
+      ≡ scalar *ℝ ((1ℝ -ℝ χ x) *ℝ f x)
+    halfNonnegative : ∀ (x : ℝ) → 0ℝ ≤ℝ x →
+      0ℝ ≤ℝ Quotient.divide quotient x (1ℝ +ℝ 1ℝ)
+    addNonnegative : ∀ {a b : ℝ} → 0ℝ ≤ℝ a → 0ℝ ≤ℝ b → 0ℝ ≤ℝ a +ℝ b
+    productNonnegative : ∀ {a b : ℝ} → 0ℝ ≤ℝ a → 0ℝ ≤ℝ b → 0ℝ ≤ℝ a *ℝ b
+    productLeOne : ∀ {a b : ℝ} →
+      0ℝ ≤ℝ a → a ≤ℝ 1ℝ → 0ℝ ≤ℝ b → b ≤ℝ 1ℝ → a *ℝ b ≤ℝ 1ℝ
+    subNonnegative : ∀ {a b : ℝ} → b ≤ℝ a → 0ℝ ≤ℝ a -ℝ b
+    subPositiveOfLess : ∀ {a b : ℝ} → a <ℝ b → 0ℝ <ℝ b -ℝ a
+    leOfSubNonnegative : ∀ {a b : ℝ} → 0ℝ ≤ℝ a -ℝ b → b ≤ℝ a
+    subLeFromAddLe : ∀ {a b c : ℝ} → a ≤ℝ b +ℝ c → a -ℝ b ≤ℝ c
+    leAddNonnegative : ∀ {a b : ℝ} → 0ℝ ≤ℝ b → a ≤ℝ a +ℝ b
+    oneMinusLeOne : ∀ {a : ℝ} → 0ℝ ≤ℝ a → 1ℝ -ℝ a ≤ℝ 1ℝ
+    addSubCancel : ∀ (a b : ℝ) → a +ℝ (b -ℝ a) ≡ b
+    partitionUnityExpand : ∀ (χ h : ℝ) →
+      χ *ℝ h +ℝ (1ℝ -ℝ χ) *ℝ h ≡ h
+    oneMinusMulLeSum : ∀ {a q s : ℝ} →
+      0ℝ ≤ℝ a → a ≤ℝ 1ℝ → 0ℝ ≤ℝ q → q ≤ℝ 1ℝ →
+      1ℝ -ℝ q ≤ℝ s →
+      1ℝ -ℝ ((1ℝ -ℝ a) *ℝ q) ≤ℝ a +ℝ s
+    absBound : ∀ (a r : ℝ) →
+      0ℝ ≤ℝ r → (0ℝ -ℝ r) ≤ℝ a → a ≤ℝ r → absℝ a ≤ℝ r
+    unitIntervalDifferenceBounds : ∀ {x y : ℝ} →
+      0ℝ ≤ℝ x → x ≤ℝ 1ℝ → 0ℝ ≤ℝ y → y ≤ℝ 1ℝ →
+      ((0ℝ -ℝ 1ℝ) ≤ℝ x -ℝ y) × (x -ℝ y ≤ℝ 1ℝ)
+    negOneOneProductBounds : ∀ {x y : ℝ} →
+      (0ℝ -ℝ 1ℝ) ≤ℝ x → x ≤ℝ 1ℝ →
+      (0ℝ -ℝ 1ℝ) ≤ℝ y → y ≤ℝ 1ℝ →
+      ((0ℝ -ℝ 1ℝ) ≤ℝ x *ℝ y) × (x *ℝ y ≤ℝ 1ℝ)
+    centeredProductExpectation :
+      ∀ {Configuration : Set}
+        (E : (Configuration → ℝ) → ℝ)
+        (addLaw : ∀ f g → E (λ x → f x +ℝ g x) ≡ E f +ℝ E g)
+        (scaleLaw : ∀ scalar f → E (λ x → scalar *ℝ f x) ≡ scalar *ℝ E f)
+        (extLaw : ∀ f g → (∀ x → f x ≡ g x) → E f ≡ E g)
+        (f g : Configuration → ℝ) (a b : ℝ) →
+      E (λ x → (f x -ℝ a) *ℝ (g x -ℝ b))
+      ≡ E (λ x → f x *ℝ g x) -ℝ a *ℝ E g -ℝ b *ℝ E f +ℝ a *ℝ b
+    covarianceMidpointIdentity :
+      ∀ (μF νF μG νG μFG νFG : ℝ) →
+      (μFG -ℝ μG *ℝ μF) -ℝ (νFG -ℝ νG *ℝ νF)
+      ≡
+      let a = Quotient.divide quotient (μF +ℝ νF) (1ℝ +ℝ 1ℝ)
+          b = Quotient.divide quotient (μG +ℝ νG) (1ℝ +ℝ 1ℝ)
+      in
+      (μFG -ℝ a *ℝ μG -ℝ b *ℝ μF +ℝ a *ℝ b)
+        -ℝ (νFG -ℝ a *ℝ νG -ℝ b *ℝ νF +ℝ a *ℝ b)
+    meanRestrictionBounds :
+      ∀ {Configuration : Set}
+        (E : (Configuration → ℝ) → ℝ)
+        (addLaw : ∀ f g → E (λ x → f x +ℝ g x) ≡ E f +ℝ E g)
+        (scaleLaw : ∀ scalar f → E (λ x → scalar *ℝ f x) ≡ scalar *ℝ E f)
+        (positiveLaw : ∀ f → (∀ x → 0ℝ ≤ℝ f x) → 0ℝ ≤ℝ E f)
+        (extLaw : ∀ f g → (∀ x → f x ≡ g x) → E f ≡ E g)
+        (χ h : Configuration → ℝ) (q goodMean m M : ℝ) →
+      (∀ x → 0ℝ ≤ℝ χ x) →
+      (∀ x → χ x ≤ℝ 1ℝ) →
+      (∀ x → m ≤ℝ h x) →
+      (∀ x → h x ≤ℝ M) →
+      goodMean ≡ E (λ x → (1ℝ -ℝ χ x) *ℝ h x) →
+      q ≡ E χ →
+      (m *ℝ q ≤ℝ E (λ x → χ x *ℝ h x)) ×
+      (E (λ x → χ x *ℝ h x) ≤ℝ M *ℝ q) ×
+      (m ≤ℝ Quotient.divide quotient goodMean (1ℝ -ℝ q)) ×
+      (Quotient.divide quotient goodMean (1ℝ -ℝ q) ≤ℝ M)
+    shiftIdentityAlgebra :
+      ∀ (shift χhMean goodNumer goodMass q : ℝ) →
+      shift ≡ χhMean +ℝ goodNumer -ℝ
+        Quotient.divide quotient goodNumer (1ℝ -ℝ q) →
+      q +ℝ goodMass ≡ 1ℝ →
+      shift ≡ χhMean -ℝ q *ℝ
+        Quotient.divide quotient goodNumer (1ℝ -ℝ q)
+    unitShiftAbsoluteBound :
+      ∀ (shift χhMean goodMean q : ℝ) →
+      shift ≡ χhMean -ℝ q *ℝ goodMean →
+      (0ℝ -ℝ 1ℝ) *ℝ q ≤ℝ χhMean →
+      χhMean ≤ℝ 1ℝ *ℝ q →
+      (0ℝ -ℝ 1ℝ) ≤ℝ goodMean →
+      goodMean ≤ℝ 1ℝ →
+      0ℝ ≤ℝ q →
+      absℝ shift ≤ℝ (1ℝ +ℝ 1ℝ +ℝ (1ℝ +ℝ 1ℝ)) *ℝ q
+    halfLeOneOfUnit : ∀ (x : ℝ) → 0ℝ ≤ℝ x → x ≤ℝ 1ℝ +ℝ 1ℝ →
+      Quotient.divide quotient x (1ℝ +ℝ 1ℝ) ≤ℝ 1ℝ
+
+open ContinuousWilsonArithmetic public
+
+record ContinuousClampSource : Set₁ where
+  field
+    clamp : ℝ → ℝ
+    congruent : ∀ {value value'} → value ≡ value' →
+      clamp value ≡ clamp value'
+    clampNonnegative : ∀ value → 0ℝ ≤ℝ clamp value
+    clampLeOne : ∀ value → clamp value ≤ℝ 1ℝ
+    clampZeroBelow : ∀ {value threshold} →
+      value ≤ℝ threshold → clamp value ≡ 0ℝ
+    clampOneAbove : ∀ {value threshold} →
+      threshold ≤ℝ value → clamp value ≡ 1ℝ
+
+open ContinuousClampSource public
+
+record ContinuousExpectationAlgebra (Configuration : Set) : Set₁ where
+  field
+    E : (Configuration → ℝ) → ℝ
+    EZero : E (λ _ → 0ℝ) ≡ 0ℝ
+    EOne : E (λ _ → 1ℝ) ≡ 1ℝ
+    EAdd : ∀ f g → E (λ x → f x +ℝ g x) ≡ E f +ℝ E g
+    EScale : ∀ scalar f → E (λ x → scalar *ℝ f x) ≡ scalar *ℝ E f
+    EPositive : ∀ f → (∀ x → 0ℝ ≤ℝ f x) → 0ℝ ≤ℝ E f
+    EExt : ∀ f g → (∀ x → f x ≡ g x) → E f ≡ E g
+    ECenteredProduct : ∀ f g a b →
+      E (λ x → (f x -ℝ a) *ℝ (g x -ℝ b))
+      ≡ E (λ x → f x *ℝ g x) -ℝ a *ℝ E g -ℝ b *ℝ E f +ℝ a *ℝ b
+
+open ContinuousExpectationAlgebra public
+
+record ContinuousWilsonSourceContract : Set₁ where
+  field
+    Configuration : Set
+    PlaquetteIndex : Set
+    expectation : ContinuousExpectationAlgebra Configuration
+    deficit : PlaquetteIndex → Configuration → ℝ
+    deficitNonnegative : ∀ p links → 0ℝ ≤ℝ deficit p links
+    deficitLeOne : ∀ p links → deficit p links ≤ℝ 1ℝ
+    gaugeInvariant : (Configuration → ℝ) → Set
+    deficitGaugeInvariant : ∀ p → gaugeInvariant (deficit p)
+
+data _∈List_ {A : Set} : A → List A → Set where
+  here∈List : ∀ {x xs} → x ∈List (x ∷ xs)
+  there∈List : ∀ {x y xs} → x ∈List xs → x ∈List (y ∷ xs)
+
+absurdListMembership : ∀ {A : Set} {x : A} → x ∈List [] → Set
+absurdListMembership ()
+
+mapMembership :
+  ∀ {A B : Set} (f : A → B) {x : B} {values : List A} →
+  x ∈List map f values → Σ A (λ value → f value ≡ x × value ∈List values)
+mapMembership f {x} {[]} ()
+mapMembership f {x} {value ∷ values} (here∈List) =
+  value , refl , here∈List
+mapMembership f {x} {value ∷ values} (there∈List membership) =
+  let previous = mapMembership f {x} {values} membership
+  in proj₁ previous , proj₁ (proj₂ previous) ,
+     there∈List (proj₂ (proj₂ previous))
+
+productℝ : List ℝ → ℝ
+productℝ [] = 1ℝ
+productℝ (x ∷ xs) = x *ℝ productℝ xs
+
+sumℝ : List ℝ → ℝ
+sumℝ [] = 0ℝ
+sumℝ (x ∷ xs) = x +ℝ sumℝ xs
+
+Range01 : ℝ → Set
+Range01 value = (0ℝ ≤ℝ value) × (value ≤ℝ 1ℝ)
+
+module _
+    {Converges : (Nat → ℝ) → ℝ → Set}
+    (quotient : Quotient.RealQuotientConvergenceAuthority Converges)
+    (arithmetic : ContinuousWilsonArithmetic quotient)
+    (clampSource : ContinuousClampSource)
+    (source : ContinuousWilsonSourceContract)
+  where
+
+  Configuration : Set
+  Configuration = ContinuousWilsonSourceContract.Configuration source
+
+  PlaquetteIndex : Set
+  PlaquetteIndex = ContinuousWilsonSourceContract.PlaquetteIndex source
+
+  expectationAlgebra : ContinuousExpectationAlgebra Configuration
+  expectationAlgebra = ContinuousWilsonSourceContract.expectation source
+
+  μ : (Configuration → ℝ) → ℝ
+  μ = ContinuousExpectationAlgebra.E expectationAlgebra
+
+  covarianceμ : (Configuration → ℝ) → (Configuration → ℝ) → ℝ
+  covarianceμ left right =
+    μ (λ links → left links *ℝ right links) -ℝ μ right *ℝ μ left
+
+  curvatureCutoff : PlaquetteIndex → Configuration → ℝ
+  curvatureCutoff p links =
+    ContinuousClampSource.clamp clampSource
+      (ContinuousWilsonSourceContract.deficit source p links)
+
+  curvatureCutoffRange : ∀ p links → Range01 (curvatureCutoff p links)
+  curvatureCutoffRange p links =
+    ContinuousClampSource.clampNonnegative clampSource
+      (ContinuousWilsonSourceContract.deficit source p links) ,
+    ContinuousClampSource.clampLeOne clampSource
+      (ContinuousWilsonSourceContract.deficit source p links)
+
+  productRangeNonnegative : ∀ values →
+    (∀ value → value ∈List values → Range01 value) →
+    0ℝ ≤ℝ productℝ values
+  productRangeNonnegative [] memberships = oneNonnegative
+  productRangeNonnegative (value ∷ values) memberships =
+    ContinuousWilsonArithmetic.productNonnegative arithmetic
+      (proj₁ (memberships value here∈List))
+      (productRangeNonnegative values
+        (λ tail tailIn → memberships tail (there∈List tailIn)))
+
+  productRangeLeOne : ∀ values →
+    (∀ value → value ∈List values → Range01 value) →
+    productℝ values ≤ℝ 1ℝ
+  productRangeLeOne [] memberships = ≤ℝ-refl
+  productRangeLeOne (value ∷ values) memberships =
+    ContinuousWilsonArithmetic.productLeOne arithmetic
+      (proj₁ (memberships value here∈List))
+      (proj₂ (memberships value here∈List))
+      (productRangeNonnegative values
+        (λ tail tailIn → memberships tail (there∈List tailIn)))
+      (productRangeLeOne values
+        (λ tail tailIn → memberships tail (there∈List tailIn)))
+
+  productRange : ∀ values →
+    (∀ value → value ∈List values → Range01 value) →
+    Range01 (productℝ values)
+  productRange values memberships =
+    productRangeNonnegative values memberships ,
+    productRangeLeOne values memberships
+
+  contourProduct : List PlaquetteIndex → Configuration → ℝ
+  contourProduct contour links =
+    productℝ (map (λ p → curvatureCutoff p links) contour)
+
+  contourProductRange : ∀ contour links → Range01 (contourProduct contour links)
+  contourProductRange contour links =
+    productRange
+      (map (λ p → curvatureCutoff p links) contour)
+      (λ value membership →
+        let witness = mapMembership (λ p → curvatureCutoff p links) membership
+        in subst Range01 (proj₁ (proj₂ witness))
+             (curvatureCutoffRange (proj₁ witness) links))
+
+  badContourCutoff : List (List PlaquetteIndex) → Configuration → ℝ
+  badContourCutoff contours links =
+    1ℝ -ℝ productℝ
+      (map (λ contour → 1ℝ -ℝ contourProduct contour links) contours)
+
+  contourFactorRange : ∀ contours links →
+    Range01
+      (productℝ
+        (map (λ contour → 1ℝ -ℝ contourProduct contour links) contours))
+  contourFactorRange [] links = oneNonnegative , ≤ℝ-refl
+  contourFactorRange (contour ∷ contours) links =
+    let previous = contourFactorRange contours links
+        current = contourProductRange contour links
+        oneMinusNN = ContinuousWilsonArithmetic.subNonnegative arithmetic (proj₂ current)
+        oneMinus≤1 = ContinuousWilsonArithmetic.oneMinusLeOne arithmetic (proj₁ current)
+    in
+    ContinuousWilsonArithmetic.productNonnegative arithmetic oneMinusNN (proj₁ previous) ,
+    ContinuousWilsonArithmetic.productLeOne arithmetic
+      oneMinusNN oneMinus≤1 (proj₁ previous) (proj₂ previous)
+
+  badContourCutoffRange : ∀ contours links → Range01 (badContourCutoff contours links)
+  badContourCutoffRange contours links =
+    let factors = contourFactorRange contours links
+    in ContinuousWilsonArithmetic.subNonnegative arithmetic (proj₂ factors) ,
+       ContinuousWilsonArithmetic.oneMinusLeOne arithmetic (proj₁ factors)
+
+  oneMinusProductRange : ∀ values →
+    (∀ value → value ∈List values → Range01 value) →
+    Range01 (productℝ (map (λ value → 1ℝ -ℝ value) values))
+  oneMinusProductRange values memberships =
+    productRange
+      (map (λ value → 1ℝ -ℝ value) values)
+      (λ value membership →
+        let witness = mapMembership (λ value → 1ℝ -ℝ value) membership
+            original = proj₁ witness
+            originalRange = memberships original (proj₂ (proj₂ witness))
+            transformedRange =
+              ContinuousWilsonArithmetic.subNonnegative arithmetic
+                (proj₂ originalRange) ,
+              ContinuousWilsonArithmetic.oneMinusLeOne arithmetic
+                (proj₁ originalRange)
+        in subst Range01 (proj₁ (proj₂ witness)) transformedRange)
+
+  unionBoundProduct : ∀ values →
+    (∀ value → value ∈List values → Range01 value) →
+    1ℝ -ℝ productℝ (map (λ value → 1ℝ -ℝ value) values) ≤ℝ sumℝ values
+  unionBoundProduct [] memberships =
+    subst (λ value → value ≤ℝ 0ℝ) (sym (subSelf 1ℝ)) ≤ℝ-refl
+  unionBoundProduct (value ∷ values) memberships =
+    let tailMembership = λ tail tailIn → memberships tail (there∈List tailIn)
+        tailProduct = oneMinusProductRange values tailMembership
+        tailGap = unionBoundProduct values tailMembership
+    in
+    ContinuousWilsonArithmetic.oneMinusMulLeSum arithmetic
+      (proj₁ (memberships value here∈List))
+      (proj₂ (memberships value here∈List))
+      (proj₁ tailProduct) (proj₂ tailProduct) tailGap
+
+  mapOneMinusMap : ∀ {A : Set} (f : A → ℝ) xs →
+    map (λ value → 1ℝ -ℝ value) (map f xs)
+    ≡ map (λ x → 1ℝ -ℝ f x) xs
+  mapOneMinusMap f [] = refl
+  mapOneMinusMap f (x ∷ xs) =
+    cong (λ rest → (1ℝ -ℝ f x) ∷ rest) (mapOneMinusMap f xs)
+
+  mapContourProductApply : ∀ contours links →
+    map (λ f → f links) (map (λ contour → contourProduct contour) contours)
+    ≡ map (λ contour → contourProduct contour links) contours
+  mapContourProductApply [] links = refl
+  mapContourProductApply (contour ∷ contours) links =
+    cong (λ rest → contourProduct contour links ∷ rest)
+      (mapContourProductApply contours links)
+
+  mapMuMapContour : ∀ contours →
+    map μ (map (λ contour → contourProduct contour) contours)
+    ≡ map (λ contour → μ (contourProduct contour)) contours
+  mapMuMapContour [] = refl
+  mapMuMapContour (contour ∷ contours) =
+    cong (λ rest → μ (contourProduct contour) ∷ rest)
+      (mapMuMapContour contours)
+
+  badContourCutoffBelowContourSum :
+    ∀ contours links →
+    badContourCutoff contours links
+    ≤ℝ sumℝ (map (λ contour → contourProduct contour links) contours)
+  badContourCutoffBelowContourSum contours links =
+    subst
+      (λ values → 1ℝ -ℝ productℝ values
+        ≤ℝ sumℝ (map (λ contour → contourProduct contour links) contours))
+      (mapOneMinusMap (λ contour → contourProduct contour links) contours)
+      (unionBoundProduct
+        (map (λ contour → contourProduct contour links) contours)
+        (λ value membership →
+          let witness = mapMembership
+                (λ contour → contourProduct contour links) membership
+          in subst Range01 (proj₁ (proj₂ witness))
+               (contourProductRange (proj₁ witness) links)))
+
+  expectationMono : ∀ f g → (∀ links → f links ≤ℝ g links) → μ f ≤ℝ μ g
+  expectationMono f g pointwise =
+    let differenceNonnegative =
+          ContinuousExpectationAlgebra.EPositive expectationAlgebra
+            (λ links → g links -ℝ f links)
+            (λ links → ContinuousWilsonArithmetic.subNonnegative arithmetic (pointwise links))
+        sumBound = ContinuousWilsonArithmetic.leAddNonnegative arithmetic differenceNonnegative
+        sumEqualsG =
+          ContinuousExpectationAlgebra.EExt expectationAlgebra
+            (λ links → f links +ℝ (g links -ℝ f links)) g
+            (λ links → ContinuousWilsonArithmetic.addSubCancel arithmetic (f links) (g links))
+        sumValue =
+          trans
+            (ContinuousExpectationAlgebra.EAdd expectationAlgebra f
+              (λ links → g links -ℝ f links))
+            (cong (λ tail → μ f +ℝ tail) refl)
+        sumUpper =
+          subst (λ value → μ f +ℝ
+            ContinuousExpectationAlgebra.E expectationAlgebra
+              (λ links → g links -ℝ f links) ≤ℝ value)
+            (trans (sym sumValue) sumEqualsG) ≤ℝ-refl
+    in
+    ≤ℝ-trans sumBound sumUpper
+
+  expectationUnitBounds : ∀ h → (∀ links → 0ℝ ≤ℝ h links) →
+    (∀ links → h links ≤ℝ 1ℝ) →
+    (0ℝ ≤ℝ μ h) × (μ h ≤ℝ 1ℝ)
+  expectationUnitBounds h lower upper =
+    ContinuousExpectationAlgebra.EPositive expectationAlgebra h lower ,
+    ≤ℝ-trans
+      (expectationMono h (λ _ → 1ℝ) upper)
+      (subst (λ value → μ (λ _ → 1ℝ) ≤ℝ value)
+        (ContinuousExpectationAlgebra.EOne expectationAlgebra) ≤ℝ-refl)
+
+  χ : List (List PlaquetteIndex) → Configuration → ℝ
+  χ = badContourCutoff
+
+  q : List (List PlaquetteIndex) → ℝ
+  q contours = μ (χ contours)
+
+  qRange : ∀ contours → Range01 (q contours)
+  qRange contours =
+    expectationUnitBounds (χ contours)
+      (λ links → proj₁ (badContourCutoffRange contours links))
+      (λ links → proj₂ (badContourCutoffRange contours links))
+
+  goodMass : List (List PlaquetteIndex) → ℝ
+  goodMass contours = μ (λ links → 1ℝ -ℝ χ contours links)
+
+  qPlusGoodMass : ∀ contours → q contours +ℝ goodMass contours ≡ 1ℝ
+  qPlusGoodMass contours =
+    trans
+      (sym (ContinuousExpectationAlgebra.EAdd expectationAlgebra
+        (χ contours) (λ links → 1ℝ -ℝ χ contours links)))
+      (trans
+        (ContinuousExpectationAlgebra.EExt expectationAlgebra
+          (λ links → χ contours links +ℝ (1ℝ -ℝ χ contours links))
+          (λ _ → 1ℝ)
+          (λ links → ContinuousWilsonArithmetic.addSubCancel arithmetic (χ contours links) 1ℝ))
+        (ContinuousExpectationAlgebra.EOne expectationAlgebra))
+
+  qLessOne : ∀ contours → 0ℝ <ℝ goodMass contours → q contours <ℝ 1ℝ
+  qLessOne contours strictGood =
+    subst (λ value → q contours <ℝ value)
+      (qPlusGoodMass contours)
+      (ContinuousWilsonArithmetic.positiveAddRight arithmetic strictGood)
+
+  ν : List (List PlaquetteIndex) → (Configuration → ℝ) → ℝ
+  ν contours h =
+    Quotient.divide quotient
+      (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ h links))
+      (1ℝ -ℝ q contours)
+
+  denominatorNonzero : ∀ contours → 0ℝ <ℝ goodMass contours →
+    Quotient.Nonzero quotient (1ℝ -ℝ q contours)
+  denominatorNonzero contours strictGood =
+    ContinuousWilsonArithmetic.strictToNonzero arithmetic
+      (ContinuousWilsonArithmetic.subPositiveOfLess arithmetic
+        (qLessOne contours strictGood))
+
+  νZero : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) →
+    ν contours (λ _ → 0ℝ) ≡ 0ℝ
+  νZero contours strictGood =
+    let nonzero = denominatorNonzero contours strictGood
+        numeratorZero =
+          trans
+            (ContinuousExpectationAlgebra.EExt expectationAlgebra
+              (λ links → (1ℝ -ℝ χ contours links) *ℝ 0ℝ)
+              (λ _ → 0ℝ)
+              (λ links → mulZeroʳ (1ℝ -ℝ χ contours links)))
+            (ContinuousExpectationAlgebra.EZero expectationAlgebra)
+    in trans (cong (λ numerator →
+         Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+         numeratorZero)
+       (ContinuousWilsonArithmetic.divideZero arithmetic (1ℝ -ℝ q contours) nonzero)
+
+  νOne : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) →
+    ν contours (λ _ → 1ℝ) ≡ 1ℝ
+  νOne contours strictGood =
+    let nonzero = denominatorNonzero contours strictGood
+        numeratorGood =
+          trans
+            (ContinuousExpectationAlgebra.EExt expectationAlgebra
+              (λ links → (1ℝ -ℝ χ contours links) *ℝ 1ℝ)
+              (λ links → 1ℝ -ℝ χ contours links)
+              (λ links → mulOneʳ (1ℝ -ℝ χ contours links)))
+            refl
+        numeratorEqualsDenominator =
+          trans numeratorGood
+            (ContinuousWilsonArithmetic.goodMassEqOneMinus arithmetic
+              (qPlusGoodMass contours))
+    in trans (cong (λ numerator →
+         Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+         numeratorEqualsDenominator)
+       (ContinuousWilsonArithmetic.divideSelf arithmetic (1ℝ -ℝ q contours) nonzero)
+
+  νAdd : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) (f g : Configuration → ℝ) →
+    ν contours (λ links → f links +ℝ g links) ≡ ν contours f +ℝ ν contours g
+  νAdd contours strictGood f g =
+    let nonzero = denominatorNonzero contours strictGood
+        numeratorAdd =
+          trans
+            (cong (λ numerator →
+              Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+              (ContinuousExpectationAlgebra.EExt expectationAlgebra
+                (λ links → (1ℝ -ℝ χ contours links) *ℝ (f links +ℝ g links))
+                (λ links → (1ℝ -ℝ χ contours links) *ℝ f links
+                  +ℝ (1ℝ -ℝ χ contours links) *ℝ g links)
+                (ContinuousWilsonArithmetic.restrictedAddPointwise arithmetic (χ contours) f g)))
+            (trans
+              (cong (λ numerator →
+                Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+                (ContinuousExpectationAlgebra.EAdd expectationAlgebra
+                  (λ links → (1ℝ -ℝ χ contours links) *ℝ f links)
+                  (λ links → (1ℝ -ℝ χ contours links) *ℝ g links)))
+              (ContinuousWilsonArithmetic.divideAdd arithmetic
+                (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ f links))
+                (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ g links))
+                (1ℝ -ℝ q contours) nonzero))
+    in numeratorAdd
+
+  νScale : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) (scalar : ℝ)
+    (f : Configuration → ℝ) →
+    ν contours (λ links → scalar *ℝ f links)
+    ≡ scalar *ℝ ν contours f
+  νScale contours strictGood scalar f =
+    let nonzero = denominatorNonzero contours strictGood
+    in trans
+      (cong (λ numerator →
+        Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+        (ContinuousExpectationAlgebra.EExt expectationAlgebra
+          (λ links → (1ℝ -ℝ χ contours links) *ℝ (scalar *ℝ f links))
+          (λ links → scalar *ℝ ((1ℝ -ℝ χ contours links) *ℝ f links))
+          (ContinuousWilsonArithmetic.restrictedScalePointwise arithmetic (χ contours) scalar f)))
+      (trans
+        (cong (λ numerator →
+          Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+          (ContinuousExpectationAlgebra.EScale expectationAlgebra scalar
+            (λ links → (1ℝ -ℝ χ contours links) *ℝ f links)))
+        (ContinuousWilsonArithmetic.divideScale arithmetic scalar
+          (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ f links))
+          (1ℝ -ℝ q contours) nonzero))
+
+  νPositive : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) (f : Configuration → ℝ) →
+    (∀ links → 0ℝ ≤ℝ f links) →
+    0ℝ ≤ℝ ν contours f
+  νPositive contours strictGood f lower =
+    ContinuousWilsonArithmetic.divideNonnegative arithmetic
+      (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ f links))
+      (1ℝ -ℝ q contours)
+      (ContinuousExpectationAlgebra.EPositive expectationAlgebra
+        (λ links → (1ℝ -ℝ χ contours links) *ℝ f links)
+        (λ links → ContinuousWilsonArithmetic.productNonnegative arithmetic
+          (ContinuousWilsonArithmetic.subNonnegative arithmetic
+            (proj₂ (badContourCutoffRange contours links))) (lower links)))
+      (denominatorNonzero contours strictGood)
+
+  νExt : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) (f g : Configuration → ℝ) →
+    (∀ links → f links ≡ g links) →
+    ν contours f ≡ ν contours g
+  νExt contours strictGood f g equal =
+    cong (λ numerator →
+      Quotient.divide quotient numerator (1ℝ -ℝ q contours))
+      (ContinuousExpectationAlgebra.EExt expectationAlgebra
+        (λ links → (1ℝ -ℝ χ contours links) *ℝ f links)
+        (λ links → (1ℝ -ℝ χ contours links) *ℝ g links)
+        (λ links → cong (λ value →
+          (1ℝ -ℝ χ contours links) *ℝ value) (equal links)))
+
+  νAlgebra : ∀ (contours : List (List PlaquetteIndex))
+    (strictGood : 0ℝ <ℝ goodMass contours) →
+    ContinuousExpectationAlgebra Configuration
+  νAlgebra contours strictGood = record
+    { E = ν contours
+    ; EZero = νZero contours strictGood
+    ; EOne = νOne contours strictGood
+    ; EAdd = νAdd contours strictGood
+    ; EScale = νScale contours strictGood
+    ; EPositive = νPositive contours strictGood
+    ; EExt = νExt contours strictGood
+    ; ECenteredProduct = λ f g a b →
+        ContinuousWilsonArithmetic.centeredProductExpectation arithmetic
+          (ν contours)
+          (νAdd contours strictGood)
+          (νScale contours strictGood)
+          (νExt contours strictGood)
+          f g a b
+    }
+
+  restrictedBounds :
+    ∀ contours h m M →
+    (∀ links → m ≤ℝ h links) →
+    (∀ links → h links ≤ℝ M) →
+    (m *ℝ q contours ≤ℝ μ (λ links → χ contours links *ℝ h links)) ×
+    (μ (λ links → χ contours links *ℝ h links) ≤ℝ M *ℝ q contours) ×
+    (m ≤ℝ ν contours h) × (ν contours h ≤ℝ M)
+  restrictedBounds contours h m M lower upper =
+    ContinuousWilsonArithmetic.meanRestrictionBounds arithmetic
+      μ
+      (ContinuousExpectationAlgebra.EAdd expectationAlgebra)
+      (ContinuousExpectationAlgebra.EScale expectationAlgebra)
+      (ContinuousExpectationAlgebra.EPositive expectationAlgebra)
+      (ContinuousExpectationAlgebra.EExt expectationAlgebra)
+      (χ contours) h (q contours)
+      (μ (λ links → (1ℝ -ℝ χ contours links) *ℝ h links)) m M
+      (λ links → proj₁ (badContourCutoffRange contours links))
+      (λ links → proj₂ (badContourCutoffRange contours links))
+      lower upper refl refl
+
+  νUnitBounds : ∀ contours h → (∀ links → 0ℝ ≤ℝ h links) →
+    (∀ links → h links ≤ℝ 1ℝ) →
+    (0ℝ ≤ℝ ν contours h) × (ν contours h ≤ℝ 1ℝ)
+  νUnitBounds contours h lower upper =
+    let bounds = restrictedBounds contours h 0ℝ 1ℝ lower upper
+    in proj₁ (proj₂ (proj₂ bounds)) , proj₂ (proj₂ (proj₂ bounds))
+
+  μMinusν : ∀ contours h →
+    μ h -ℝ ν contours h
+    ≡ μ (λ links → χ contours links *ℝ h links)
+      -ℝ q contours *ℝ ν contours h
+  μMinusν contours h =
+    let
+      chiLink = λ links → χ contours links *ℝ h links
+      goodLink = λ links → (1ℝ -ℝ χ contours links) *ℝ h links
+      μDecomposition =
+        trans
+          (sym (ContinuousExpectationAlgebra.EExt expectationAlgebra
+            (λ links → chiLink links +ℝ goodLink links) h
+            (λ links → ContinuousWilsonArithmetic.partitionUnityExpand arithmetic
+              (χ contours links) (h links))))
+          (ContinuousExpectationAlgebra.EAdd expectationAlgebra chiLink goodLink)
+      shiftEquality =
+        subst
+          (λ value → μ h -ℝ ν contours h
+            ≡ value -ℝ ν contours h)
+          μDecomposition refl
+    in
+    ContinuousWilsonArithmetic.shiftIdentityAlgebra arithmetic
+      (μ h -ℝ ν contours h)
+      (μ chiLink)
+      (μ goodLink)
+      (goodMass contours)
+      (q contours)
+      shiftEquality
+      (qPlusGoodMass contours)
+
+  covarianceν : List (List PlaquetteIndex) →
+    (Configuration → ℝ) → (Configuration → ℝ) → ℝ
+  covarianceν contours left right =
+    ν contours (λ links → left links *ℝ right links)
+    -ℝ ν contours right *ℝ ν contours left
+
+  covarianceMidpointGap : ∀ contours strictGood f g →
+    covarianceμ f g -ℝ covarianceν contours f g
+    ≡
+    let a = Quotient.divide quotient (μ f +ℝ ν contours f) (1ℝ +ℝ 1ℝ)
+        b = Quotient.divide quotient (μ g +ℝ ν contours g) (1ℝ +ℝ 1ℝ)
+    in
+    μ (λ links → (f links -ℝ a) *ℝ (g links -ℝ b))
+      -ℝ ν contours (λ links → (f links -ℝ a) *ℝ (g links -ℝ b))
+  covarianceMidpointGap contours strictGood f g =
+    let a = Quotient.divide quotient (μ f +ℝ ν contours f) (1ℝ +ℝ 1ℝ)
+        b = Quotient.divide quotient (μ g +ℝ ν contours g) (1ℝ +ℝ 1ℝ)
+        algebraic = ContinuousWilsonArithmetic.covarianceMidpointIdentity arithmetic
+          (μ f) (ν contours f) (μ g) (ν contours g)
+          (μ (λ links → f links *ℝ g links))
+          (ν contours (λ links → f links *ℝ g links))
+        μCentered =
+          ContinuousExpectationAlgebra.ECenteredProduct expectationAlgebra
+            f g a b
+        νCentered =
+          ContinuousExpectationAlgebra.ECenteredProduct
+            (νAlgebra contours strictGood) f g a b
+    in trans algebraic
+      (cong₂ _-ℝ_ (sym μCentered) (sym νCentered))
+
+  covarianceGapBound :
+    ∀ contours f g →
+    (∀ links → 0ℝ ≤ℝ f links) →
+    (∀ links → f links ≤ℝ 1ℝ) →
+    (∀ links → 0ℝ ≤ℝ g links) →
+    (∀ links → g links ≤ℝ 1ℝ) →
+    0ℝ <ℝ goodMass contours →
+    absℝ (covarianceμ f g -ℝ covarianceν contours f g)
+      ≤ℝ (1ℝ +ℝ 1ℝ +ℝ (1ℝ +ℝ 1ℝ)) *ℝ q contours
+  covarianceGapBound contours f g fLower fUpper gLower gUpper strictGood =
+    let μfBounds = expectationUnitBounds f fLower fUpper
+        μgBounds = expectationUnitBounds g gLower gUpper
+        νfBounds = νUnitBounds contours f fLower fUpper
+        νgBounds = νUnitBounds contours g gLower gUpper
+        a = Quotient.divide quotient (μ f +ℝ ν contours f) (1ℝ +ℝ 1ℝ)
+        b = Quotient.divide quotient (μ g +ℝ ν contours g) (1ℝ +ℝ 1ℝ)
+        aNN = ContinuousWilsonArithmetic.halfNonnegative arithmetic
+          (μ f +ℝ ν contours f)
+          (ContinuousWilsonArithmetic.addNonnegative arithmetic
+            (proj₁ μfBounds) (proj₁ νfBounds))
+        bNN = ContinuousWilsonArithmetic.halfNonnegative arithmetic
+          (μ g +ℝ ν contours g)
+          (ContinuousWilsonArithmetic.addNonnegative arithmetic
+            (proj₁ μgBounds) (proj₁ νgBounds))
+        a≤1 = ContinuousWilsonArithmetic.halfLeOneOfUnit arithmetic
+          (μ f +ℝ ν contours f)
+          (ContinuousWilsonArithmetic.addNonnegative arithmetic
+            (proj₁ μfBounds) (proj₁ νfBounds))
+          (+-mono-≤ (proj₂ μfBounds) (proj₂ νfBounds))
+        b≤1 = ContinuousWilsonArithmetic.halfLeOneOfUnit arithmetic
+          (μ g +ℝ ν contours g)
+          (ContinuousWilsonArithmetic.addNonnegative arithmetic
+            (proj₁ μgBounds) (proj₁ νgBounds))
+          (+-mono-≤ (proj₂ μgBounds) (proj₂ νgBounds))
+        fDiffBounds = λ links →
+          ContinuousWilsonArithmetic.unitIntervalDifferenceBounds arithmetic
+            (fLower links) (fUpper links) aNN a≤1
+        gDiffBounds = λ links →
+          ContinuousWilsonArithmetic.unitIntervalDifferenceBounds arithmetic
+            (gLower links) (gUpper links) bNN b≤1
+        h = λ links → (f links -ℝ a) *ℝ (g links -ℝ b)
+        hBounds = λ links →
+          ContinuousWilsonArithmetic.negOneOneProductBounds arithmetic
+            (proj₁ (fDiffBounds links)) (proj₂ (fDiffBounds links))
+            (proj₁ (gDiffBounds links)) (proj₂ (gDiffBounds links))
+        hRestricted = restrictedBounds contours h (0ℝ -ℝ 1ℝ) 1ℝ
+          (λ links → proj₁ (hBounds links))
+          (λ links → proj₂ (hBounds links))
+        shiftEquality = μMinusν contours h
+        μCentered =
+          ContinuousExpectationAlgebra.ECenteredProduct expectationAlgebra
+            f g a b
+        νCentered =
+          ContinuousExpectationAlgebra.ECenteredProduct
+            (νAlgebra contours strictGood) f g a b
+        centeredEquality =
+          cong₂ _-ℝ_ (sym μCentered) (sym νCentered)
+        bounded = ContinuousWilsonArithmetic.unitShiftAbsoluteBound arithmetic
+          (μ h -ℝ ν contours h)
+          (μ (λ links → χ contours links *ℝ h links))
+          (ν contours h)
+          (q contours)
+          shiftEquality
+          (proj₁ hRestricted)
+          (proj₁ (proj₂ hRestricted))
+          (proj₁ (proj₂ (proj₂ hRestricted)))
+          (proj₂ (proj₂ (proj₂ hRestricted)))
+          (proj₁ (qRange contours))
+        centeredBound = bounded
+    in subst (λ value → absℝ value
+         ≤ℝ (1ℝ +ℝ 1ℝ +ℝ (1ℝ +ℝ 1ℝ)) *ℝ q contours)
+       (sym (covarianceMidpointGap contours strictGood f g)) centeredBound
+
+  sumExpectation : ∀ functions →
+    μ (λ links → sumℝ (map (λ f → f links) functions))
+    ≡ sumℝ (map (λ f → μ f) functions)
+  sumExpectation [] =
+    trans
+      (ContinuousExpectationAlgebra.EExt expectationAlgebra
+        (λ _ → 0ℝ) (λ _ → sumℝ [])
+        (λ _ → refl))
+      (ContinuousExpectationAlgebra.EZero expectationAlgebra)
+  sumExpectation (f ∷ functions) =
+    trans
+      (ContinuousExpectationAlgebra.EExt expectationAlgebra
+        (λ links → f links +ℝ sumℝ (map (λ g → g links) functions))
+        (λ links → sumℝ (map (λ g → g links) (f ∷ functions)))
+        (λ links → refl))
+      (trans
+        (ContinuousExpectationAlgebra.EAdd expectationAlgebra f
+          (λ links → sumℝ (map (λ g → g links) functions)))
+        (cong (λ tail → μ f +ℝ tail) (sumExpectation functions)))
+
+  contourMassBound : ∀ contours →
+    μ (χ contours)
+    ≤ℝ sumℝ (map (λ contour → μ (contourProduct contour)) contours)
+  contourMassBound contours =
+    let
+      targetSum = λ links → sumℝ
+        (map (λ contour → contourProduct contour links) contours)
+      sourceSum = λ links → sumℝ
+        (map (λ f → f links) (map (λ contour → contourProduct contour) contours))
+      sumBridge =
+        trans
+          (trans
+            (ContinuousExpectationAlgebra.EExt expectationAlgebra
+              targetSum sourceSum
+              (λ links → cong sumℝ
+                (sym (mapContourProductApply contours links))))
+            (sumExpectation (map (λ contour → contourProduct contour) contours)))
+          (cong sumℝ
+            (mapMuMapContour contours))
+    in
+    ≤ℝ-trans
+      (expectationMono (χ contours) targetSum
+        (badContourCutoffBelowContourSum contours))
+      (subst
+        (λ value → μ targetSum ≤ℝ value) sumBridge ≤ℝ-refl)
