@@ -67,4 +67,14 @@ T=s.Matrix([[1,2],[1,-1]])
 req(T.inv()*s.Matrix([N,54])==s.Matrix([65664,65610]))
 req((N+2*54)//3==65664 and (N-54)//3==65610)
 req(N//3==65628)
-print(f'PASS {N} round trips, action and base projection; {len(reps)} regular orbits; {len(singles)} fixed; balanced fibre counts {solutions}; product and 3C permutation no-go')
+# 3C repair on the same base, but in the linear category: regular
+# fibres on moving triples, trace -2 on origins and +1 on poles.
+C=s.Matrix([[0,-1],[1,-1]])
+req(C**3==s.eye(2) and C.trace()==-1 and C.det()==1)
+# 1214 Reg + 2 Std (origin); 1215 Reg + 1 triv (pole).
+origin=s.Matrix([1214,1216]); pole=s.Matrix([1216,1215])
+req(T*origin==s.Matrix([D,-2]) and T*pole==s.Matrix([D,1]))
+# 16 moving base cycles each contribute D regular representations.
+linear=16*D*s.Matrix([1,1])+2*origin+4*pole
+req(linear==s.Matrix([65628,65628]) and T*linear==s.Matrix([N,0]))
+print(f'PASS {N} round trips, action and base projection; {len(reps)} regular orbits; {len(singles)} fixed; balanced fibre counts {solutions}; product and 3C permutation no-go; 3C rational linear fibre repair')
