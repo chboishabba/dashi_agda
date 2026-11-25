@@ -1,0 +1,104 @@
+{
+  "predecessor": "42896653c5c694f02271654e6076976c7d1560d3",
+  "scope": "Signed Gram conditional kernel enclosure and exact original fixed-window causal support geometry. No propagated-field amplitude or sign certificate, no new receiver solve, no physical endpoint promotion.",
+  "scripts": {
+    "gram": {
+      "commit": "a7f9d5aef48763268fc67004eac370711f5f8d57",
+      "blob": "aff83821fdada0c33a44f04cc90721df8c88c37c"
+    },
+    "cap": {
+      "commit": "95f0da501d32f48f1b74024927c222e9fb872f57",
+      "blob": "57e5ff45feade9ddc9873e37ce72bfe7a1bb1c06"
+    }
+  },
+  "gram": {
+    "mode": 1,
+    "source": 127,
+    "n": 128,
+    "h": 0.0078125,
+    "degree": 2,
+    "depth": 1,
+    "all_target_rows": 128,
+    "cells": 108578,
+    "crossing_cells": 1388,
+    "checks": 23,
+    "inherited_branch_checks": 22,
+    "seconds": 45.705874086999984,
+    "old_value_radius": 8.924533032874297,
+    "jensen_value_radius": 3.849989607083779,
+    "gram_value_radius": 3.6438245387273014,
+    "gram_derivative_radius": 35.92139746231975,
+    "gram_peak": 156.34489909574125,
+    "raw_squared_majorant_sum_diagnostic": 235720.54965148764,
+    "cross_fraction_diagnostic": 0.9892593211062904,
+    "bounds": [
+      [
+        -3.6426276439381176,
+        3.6495332096778226
+      ],
+      [
+        -36.048295765690455,
+        36.03612545435305
+      ],
+      [
+        -36.07166683411315,
+        36.01275438593035
+      ]
+    ],
+    "local_json_sha256": "3c8061586604091c820230e0a68dea968ceaab08a5798934f3cb074e5178ddb7"
+  },
+  "recovered_prior_branch": {
+    "mode": 2,
+    "source": 0,
+    "n": 128,
+    "h": 0.0078125,
+    "depth": 1,
+    "all_target_rows": 128,
+    "cells": 108578,
+    "crossing_cells": 693,
+    "checks": 22,
+    "seconds": 40.299460642999975,
+    "old_value_radius": 4.1530625930603895,
+    "new_value_radius": 1.3206092860010044,
+    "new_derivative_radius": 11.042149864272623,
+    "old_peak": 142.74159752757643,
+    "new_peak": 70.74409864472022,
+    "old_squared_sum_diagnostic": 307158.4997595003,
+    "new_squared_sum_diagnostic": 31411.092421687677,
+    "cross_old_fraction_diagnostic": 0.8701140118482084,
+    "cross_new_fraction_diagnostic": 0.42604019932126325,
+    "local_json_sha256": "c88b9134b4aca7efe15c1a0930aa9bb739d56ec4cab6dc5051c30a60976d65ae",
+    "note": "Prior command had timed out; completed 128-row JSON present at current-turn inspection. Corrected branch script blob fc0054cd6202e2114b2b034c32907e4f1fb3c1c7, not invalid ad6baa7."
+  },
+  "causal_cap": {
+    "span": 2.709159198154073,
+    "receiver_end": 2.659159198154073,
+    "receiver_b": [
+      0.087590020348,
+      0.087590020352
+    ],
+    "source_elapsed_upper": 0.00045,
+    "receiver_time_before_end_upper": 0.00035,
+    "source_radius_lower": 0.0396,
+    "early_receiver_squared_gap_upper": -0.0000030067202958061187,
+    "late_source_squared_gap_upper": -0.0000110988311749709,
+    "radial_margin": [
+      0.000360338945505541,
+      0.000360338946966728
+    ],
+    "strict_support_witness_squared_gap_lower": 0.0008361009815888378,
+    "joint_exponent_lower": 612.9533518005541,
+    "raw_bump_product_upper": "1e-262",
+    "integer_grid": {
+      "intervals": 4516,
+      "last_window_node": 4432,
+      "last_node_to_end": 0.0003918008514043674,
+      "step": 0.0005999023910881472,
+      "no_interior_integer_nodes_in_either_cap": true,
+      "stage_and_stencil_caveat": true
+    },
+    "local_json_sha256": "5c10e85c691c9bf7834f3d0e06919e3f1cad871e3bdd95b47b3af3dbb2b081ba",
+    "scope": "Exact rational causal necessary support guards and raw undifferentiated bump-product bound for original continuous E4/SMS fixed window; conditional on original smooth-reference finite propagation. Not an amplitude bound. Strict interior causal overlap not a sign proof. Clock dimensionless. Final-time raw observer separate."
+  },
+  "execution": "Local recovered subset, no full checkout. Local global kernel and Hermite helper files are partial extracted subsets, not full matching remote file blobs; parameter and corrected branch scripts match. Two new executed scripts match repository blobs. Gram tool command timed out before inspection but completed 128-row JSON was subsequently read, process finished. No CI or native proof kernel."
+}
