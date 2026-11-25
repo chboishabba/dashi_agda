@@ -94,22 +94,22 @@ record Mark (L : Direction) : Set where
     pivot : Pivot
     admissible : O.Nonzero (determinant L pivot)
 
+-- Factor the existing formula without changing its coordinates or guard.
+linear2 : Trit → Trit → Trit → Trit → Trit → Trit
+linear2 d a b x y =
+  A.mul3 d (A.add3 (A.mul3 a x) (inv (A.mul3 b y)))
+
+coefficientA coefficientB : {L : Direction} → Mark L → Vec5 → Trit
+coefficientA {direction u v} (mark p nz) x =
+  linear2 (O.reciprocal (determinant (direction u v) p) nz)
+    (at (second p) v) (at (first p) v) (at (first p) x) (at (second p) x)
+coefficientB {direction u v} (mark p nz) x =
+  linear2 (O.reciprocal (determinant (direction u v) p) nz)
+    (at (first p) u) (at (second p) u) (at (second p) x) (at (first p) x)
+
 project : {L : Direction} → Mark L → Vec5 → Vec5
-project {direction u v} (mark p nz) x =
-  sub x (add (scale alpha u) (scale beta v))
-  where
-    d : Trit
-    d = O.reciprocal (determinant (direction u v) p) nz
-
-    alpha : Trit
-    alpha = A.mul3 d
-      (A.add3 (A.mul3 (at (second p) v) (at (first p) x))
-        (inv (A.mul3 (at (first p) v) (at (second p) x))))
-
-    beta : Trit
-    beta = A.mul3 d
-      (A.add3 (A.mul3 (at (first p) u) (at (second p) x))
-        (inv (A.mul3 (at (second p) u) (at (first p) x))))
+project {direction u v} q x =
+  sub x (add (scale (coefficientA q x) u) (scale (coefficientB q x) v))
 
 w : {L : Direction} → Mark L → Vec5
 w p = indicator (Mark.pivot p)
