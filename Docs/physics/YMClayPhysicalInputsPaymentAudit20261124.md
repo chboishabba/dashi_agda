@@ -1,5 +1,21 @@
 # 24 November 2026 — physical-input payment audit
 
+## 25 November 2026 — A2 kernel-checked conditional transport, source-inhabitation defects
+
+**New receipt** `19a63b8c9d4de92f6c28fbba4077b2237948a6c5`: `YMClayOriginalWilsonContinuousA2BridgeExact.agda`, plus normalized-expectation edits and original A2 SymPy checker. Original worker reports sanctioned Agda and SymPy and finite-TV tests PASS; not independently rerun here. **Updated A2 status = conditional source-geometric algebra written and checked, original-SU(N) inhabited source contract UNPAID.** Existing `χ`, `ν`, `μMinusν`, `covarianceGapBound ≤4 μχ`, `contourMassBound μχ≤Σ Eμ∏b_p` must be credited as existing constructors; not the two physical rates.
+
+**Hard blocker 1, mathematical inconsistency:** `ContinuousClampSource.clampZeroBelow` has `∀ {value threshold}, value≤threshold ⇒ clamp(value)=0`; `clampOneAbove` similarly `threshold≤value ⇒ clamp(value)=1`. Choose `threshold=value` and order reflexivity: `0=1` follows. Replace universally quantified independent thresholds with a true ordered fixed pair `δ_low<δ_high` and actual continuous clamp; present record has no ordinary real inhabitant. A checked conditional theorem cannot pay it.
+
+**Hard blocker 2, physical range:** `ContinuousWilsonSourceContract.deficitLeOne` cannot be supplied by unscaled Wilson deficit `1−ReTr(U_p)/N` on SU2, attaining 2 at `−I`. Half-normalize or change bound and prove source scaling.
+
+**Hard blocker 3, source identity and arithmetic:** `ContinuousWilsonArithmetic` records mean-restriction/midpoint/centered-product/shift inequalities as *inputs*, and `ContinuousExpectationAlgebra` is not constructed from original finite varying-cutoff `Wilson.expectation`. Needed: source-owned compact continuous Haar test-algebra/normalization/order semantics, actual `μ` equality to original Wilson finite Gibbs, identity-neighborhood positive good mass (the current `qLessOne` assumes `0<goodMass`), and real geometric `Γ_XY` with correct physical support/distance and nonempty bad-residual completeness. Generic list of possible contours with none selected does not pay original bad-event physics.
+
+**Remaining exact physical input triple:** `(P-CONT)\ sup_(a,L)Σ_γ Eμ[∏b_p]≤C_bad e^(−m_bad R)`; `(P-MATCH)\ sup_(a,L)|Cov_ν(F,G)−C_CMP116(J_F,J_G)|≤C_match e^(−m_matchR)`; `(P-SMALL)\ sup_(a,L)|C_CMP116|≤C_small e^(−m_small R)`. All require same original changing-cutoff source, physical distance, running coupling, and nonzero `m_i`. Feed the existing D1 `OriginalSmallLargePhysicalSource`; compare against physical W3 optional alternative. Do not treat a source status text such as `C(beta)=8+(2/3)log24+log(beta)` as a cutoff-uniform bound, since it grows with beta.
+
+**Terminal unchanged:** actual E1 nonconstant continuum cylinder convergence/OS; full centered dense SAME H spectral gap; N1 noncollapse; each compact simple G. `YangMillsClaySolved=false`, `clayYangMillsPromoted=false`; no false physical completion.
+
+
+
 **Corrective supersession (24 November, PR #1536 head `13692df941`):** the earlier “31 exact remaining lemmas” framing is not defensible. The 31 entries are a candidate dependency checklist (`3 T + 5 R445 + 7 E1 + 4 D1 + 5 D2 + 3 N1 + 4 G1`), not 31 same-named absent Agda declarations and not 31 logically necessary independent proofs. See [`YMClayP0All31PurportedlyMissingDoubleCheckExistingOwnersPhysicalInputs20261124.md`](YMClayP0All31PurportedlyMissingDoubleCheckExistingOwnersPhysicalInputs20261124.md). Existing algebraic consumers are credited; the missing items below are **physical source-specific assumptions or constructions**. In particular D1.02 and D2.04 are already present algebraically, W3 absolute polymer bounds and R445 B1–B5 are optional sufficient routes, and a nonzero fourth cumulant is not mandatory by itself. Verified status remains `YangMillsClaySolved = false` and `clayYangMillsPromoted = false`; this is not an endpoint or kernel receipt.
 
 **Scope.** This ledger answers one question for the current DASHI YM frontier: can any located source or downloaded PDF actually pay the named physical inputs, rather than merely supply an analogue or a compiler? The answer is **no** for all six requested items. The sources improve provenance and delimit the missing mathematics; they do not inhabit the repo's theorem-bearing fields.
