@@ -1,0 +1,734 @@
+{
+  "spans": [
+    {
+      "book": "genesis",
+      "ch": 36,
+      "v": 32,
+      "rows": [
+        "וימלךבאדוםבלעבןבעורושםעירודנהבה",
+        "וימתבלעוימלךתחתיויובבבןזרחמבצרה",
+        "וימתיובבוימלךתחתיוחשםמארץהתימני"
+      ],
+      "n": 31,
+      "distinct": 22,
+      "twoEqual": 9,
+      "allEqual": 0,
+      "roles": [
+        {
+          "role": 0,
+          "max": 2,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        },
+        {
+          "role": 1,
+          "max": 3,
+          "minimumExcludedTwoGate": 1,
+          "witness": [
+            {
+              "pair": [
+                "ו",
+                "ו"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ה",
+                  "columns": [
+                    1
+                  ]
+                },
+                {
+                  "glyph": "ן",
+                  "columns": [
+                    9
+                  ]
+                },
+                {
+                  "glyph": "ח",
+                  "columns": [
+                    18
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": 2,
+          "max": 2,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        }
+      ],
+      "affineLineDistinctOnly": {
+        "constraints": 22,
+        "rank": 18,
+        "nullity": 9,
+        "forcedEqualityClasses": 9,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "י",
+            "ל",
+            "מ",
+            "נ",
+            "ע",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן",
+            "ץ"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 9,
+        "bijectionExcluded": true
+      },
+      "affineLineAll": {
+        "constraints": 31,
+        "rank": 19,
+        "nullity": 8,
+        "forcedEqualityClasses": 8,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "י",
+            "ל",
+            "מ",
+            "נ",
+            "ע",
+            "צ",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן",
+            "ץ"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 8,
+        "bijectionExcluded": true
+      },
+      "linearHypergraph": {
+        "distinctTypes": 21,
+        "components": [
+          9,
+          1,
+          2,
+          1,
+          2,
+          1,
+          1,
+          3,
+          1
+        ],
+        "searchNodes": 60,
+        "maximumCompatibleDistinctOccurrences": 14,
+        "minimumExcludedDistinct": 8,
+        "qualification": "Necessary pair-uniqueness constraint only, not sufficient for embedding in affine F3^3. Repeated glyph triples not constrained here."
+      }
+    },
+    {
+      "book": "exodus",
+      "ch": 14,
+      "v": 19,
+      "rows": [
+        "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם",
+        "ויבאביןמחנהמצריםוביןמחנהישראלויהיהענןוהחשךויאראתהלילהולאקרבזהאלזהכלהלילה",
+        "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+      ],
+      "n": 72,
+      "distinct": 54,
+      "twoEqual": 16,
+      "allEqual": 2,
+      "roles": [
+        {
+          "role": 0,
+          "max": 3,
+          "minimumExcludedTwoGate": 2,
+          "witness": [
+            {
+              "pair": [
+                "ל",
+                "ה"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ל",
+                  "columns": [
+                    6
+                  ]
+                },
+                {
+                  "glyph": "מ",
+                  "columns": [
+                    23
+                  ]
+                },
+                {
+                  "glyph": "י",
+                  "columns": [
+                    44
+                  ]
+                }
+              ]
+            },
+            {
+              "pair": [
+                "י",
+                "י"
+              ],
+              "outputs": [
+                {
+                  "glyph": "י",
+                  "columns": [
+                    22
+                  ]
+                },
+                {
+                  "glyph": "ר",
+                  "columns": [
+                    29
+                  ]
+                },
+                {
+                  "glyph": "ה",
+                  "columns": [
+                    71
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": 1,
+          "max": 3,
+          "minimumExcludedTwoGate": 2,
+          "witness": [
+            {
+              "pair": [
+                "ה",
+                "י"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ז",
+                  "columns": [
+                    9
+                  ]
+                },
+                {
+                  "glyph": "ר",
+                  "columns": [
+                    15
+                  ]
+                },
+                {
+                  "glyph": "י",
+                  "columns": [
+                    71
+                  ]
+                }
+              ]
+            },
+            {
+              "pair": [
+                "מ",
+                "ה"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ל",
+                  "columns": [
+                    23
+                  ]
+                },
+                {
+                  "glyph": "י",
+                  "columns": [
+                    48
+                  ]
+                },
+                {
+                  "glyph": "ב",
+                  "columns": [
+                    55
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": 2,
+          "max": 3,
+          "minimumExcludedTwoGate": 1,
+          "witness": [
+            {
+              "pair": [
+                "י",
+                "י"
+              ],
+              "outputs": [
+                {
+                  "glyph": "י",
+                  "columns": [
+                    22
+                  ]
+                },
+                {
+                  "glyph": "ז",
+                  "columns": [
+                    40
+                  ]
+                },
+                {
+                  "glyph": "ל",
+                  "columns": [
+                    58
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "affineLineDistinctOnly": {
+        "constraints": 54,
+        "rank": 23,
+        "nullity": 4,
+        "forcedEqualityClasses": 4,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "ט",
+            "י",
+            "כ",
+            "ל",
+            "מ",
+            "נ",
+            "ס",
+            "ע",
+            "פ",
+            "צ",
+            "ק",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 4,
+        "bijectionExcluded": true
+      },
+      "affineLineAll": {
+        "constraints": 72,
+        "rank": 23,
+        "nullity": 4,
+        "forcedEqualityClasses": 4,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "ט",
+            "י",
+            "כ",
+            "ל",
+            "מ",
+            "נ",
+            "ס",
+            "ע",
+            "פ",
+            "צ",
+            "ק",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 4,
+        "bijectionExcluded": true
+      },
+      "linearHypergraph": {
+        "distinctTypes": 53,
+        "components": [
+          1,
+          41,
+          2,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "searchNodes": 442245,
+        "maximumCompatibleDistinctOccurrences": 26,
+        "minimumExcludedDistinct": 28,
+        "qualification": "Necessary pair-uniqueness constraint only, not sufficient for embedding in affine F3^3. Repeated glyph triples not constrained here."
+      }
+    },
+    {
+      "book": "exodus",
+      "ch": 20,
+      "v": 13,
+      "rows": [
+        "לאתרצח",
+        "לאתנאף",
+        "לאתגנב"
+      ],
+      "n": 6,
+      "distinct": 3,
+      "twoEqual": 2,
+      "allEqual": 1,
+      "roles": [
+        {
+          "role": 0,
+          "max": 1,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        },
+        {
+          "role": 1,
+          "max": 1,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        },
+        {
+          "role": 2,
+          "max": 1,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        }
+      ],
+      "affineLineDistinctOnly": {
+        "constraints": 3,
+        "rank": 3,
+        "nullity": 24,
+        "forcedEqualityClasses": 27,
+        "nonSingletonClasses": [],
+        "maxPossibleDistinctGlyphImages": 27,
+        "bijectionExcluded": false
+      },
+      "affineLineAll": {
+        "constraints": 6,
+        "rank": 5,
+        "nullity": 22,
+        "forcedEqualityClasses": 25,
+        "nonSingletonClasses": [
+          [
+            "ל",
+            "ף"
+          ],
+          [
+            "נ",
+            "ת"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 25,
+        "bijectionExcluded": true
+      },
+      "linearHypergraph": {
+        "distinctTypes": 3,
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "searchNodes": 6,
+        "maximumCompatibleDistinctOccurrences": 3,
+        "minimumExcludedDistinct": 0,
+        "qualification": "Necessary pair-uniqueness constraint only, not sufficient for embedding in affine F3^3. Repeated glyph triples not constrained here."
+      }
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "v": 6,
+      "rows": [
+        "הליהוהתגמלוזאתעםנבלולאחכםהלואהואאביךקנךהואעשךויכננך",
+        "זכרימותעולםבינושנותדורודורשאלאביךויגדךזקניךויאמרולך",
+        "בהנחלעליוןגויםבהפרידובניאדםיצבגבלתעמיםלמספרבניישראל"
+      ],
+      "n": 51,
+      "distinct": 44,
+      "twoEqual": 7,
+      "allEqual": 0,
+      "roles": [
+        {
+          "role": 0,
+          "max": 3,
+          "minimumExcludedTwoGate": 1,
+          "witness": [
+            {
+              "pair": [
+                "ו",
+                "י"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ג",
+                  "columns": [
+                    8
+                  ]
+                },
+                {
+                  "glyph": "ק",
+                  "columns": [
+                    37
+                  ]
+                },
+                {
+                  "glyph": "ו",
+                  "columns": [
+                    46
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": 1,
+          "max": 2,
+          "minimumExcludedTwoGate": 0,
+          "witness": []
+        },
+        {
+          "role": 2,
+          "max": 3,
+          "minimumExcludedTwoGate": 1,
+          "witness": [
+            {
+              "pair": [
+                "ה",
+                "ר"
+              ],
+              "outputs": [
+                {
+                  "glyph": "ח",
+                  "columns": [
+                    4
+                  ]
+                },
+                {
+                  "glyph": "ד",
+                  "columns": [
+                    26
+                  ]
+                },
+                {
+                  "glyph": "ב",
+                  "columns": [
+                    30
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "affineLineDistinctOnly": {
+        "constraints": 44,
+        "rank": 23,
+        "nullity": 4,
+        "forcedEqualityClasses": 4,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ג",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "י",
+            "כ",
+            "ל",
+            "מ",
+            "נ",
+            "ס",
+            "ע",
+            "פ",
+            "צ",
+            "ק",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 4,
+        "bijectionExcluded": true
+      },
+      "affineLineAll": {
+        "constraints": 51,
+        "rank": 23,
+        "nullity": 4,
+        "forcedEqualityClasses": 4,
+        "nonSingletonClasses": [
+          [
+            "א",
+            "ב",
+            "ג",
+            "ד",
+            "ה",
+            "ו",
+            "ז",
+            "ח",
+            "י",
+            "כ",
+            "ל",
+            "מ",
+            "נ",
+            "ס",
+            "ע",
+            "פ",
+            "צ",
+            "ק",
+            "ר",
+            "ש",
+            "ת",
+            "ך",
+            "ם",
+            "ן"
+          ]
+        ],
+        "maxPossibleDistinctGlyphImages": 4,
+        "bijectionExcluded": true
+      },
+      "linearHypergraph": {
+        "distinctTypes": 42,
+        "components": [
+          14,
+          8,
+          1,
+          6,
+          4,
+          2,
+          3,
+          1,
+          1,
+          1,
+          1
+        ],
+        "searchNodes": 355,
+        "maximumCompatibleDistinctOccurrences": 26,
+        "minimumExcludedDistinct": 18,
+        "qualification": "Necessary pair-uniqueness constraint only, not sufficient for embedding in affine F3^3. Repeated glyph triples not constrained here."
+      }
+    }
+  ],
+  "combinedDistinctLine": {
+    "constraints": 123,
+    "rank": 25,
+    "nullity": 2,
+    "forcedEqualityClasses": 2,
+    "nonSingletonClasses": [
+      [
+        "א",
+        "ב",
+        "ג",
+        "ד",
+        "ה",
+        "ו",
+        "ז",
+        "ח",
+        "ט",
+        "י",
+        "כ",
+        "ל",
+        "מ",
+        "נ",
+        "ס",
+        "ע",
+        "פ",
+        "צ",
+        "ק",
+        "ר",
+        "ש",
+        "ת",
+        "ך",
+        "ם",
+        "ן",
+        "ץ"
+      ]
+    ],
+    "maxPossibleDistinctGlyphImages": 2,
+    "bijectionExcluded": true
+  },
+  "combinedAllLine": {
+    "constraints": 160,
+    "rank": 26,
+    "nullity": 1,
+    "forcedEqualityClasses": 1,
+    "nonSingletonClasses": [
+      [
+        "א",
+        "ב",
+        "ג",
+        "ד",
+        "ה",
+        "ו",
+        "ז",
+        "ח",
+        "ט",
+        "י",
+        "כ",
+        "ל",
+        "מ",
+        "נ",
+        "ס",
+        "ע",
+        "פ",
+        "צ",
+        "ק",
+        "ר",
+        "ש",
+        "ת",
+        "ך",
+        "ם",
+        "ן",
+        "ף",
+        "ץ"
+      ]
+    ],
+    "maxPossibleDistinctGlyphImages": 1,
+    "bijectionExcluded": true
+  },
+  "qualification": "Unknown common glyph bijection into affine GF3^3. Collinearity of 3 distinct points implies their vector sum zero in characteristic3. Linear constraints on each of three coordinates have same kernel; any forced-equal scalar signatures forbid injective vector chart. Distinct-only test exempts every repeated glyph triple; all-line test additionally imposes zero sum on all triples. Two-branch oracle bound applies to arbitrary chart-independent ordered pair-only relation with at most 2 outputs, not time/history-dependent state. Actual native verse fixtures previously disclosed, retrospective obstruction not prediction."
+}
