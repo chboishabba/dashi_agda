@@ -1,0 +1,209 @@
+{
+  "scope": "Reduced scalar modes 1,2 only, E4/SMS original continuous window. Conditional on original smooth retarded/advanced references, exact energy and Green identities and outward IEEE binary64 elementary arithmetic. Recovered literal stage/helper subset, not full checkout. No full TT, high-mode source, omitted-tail or physical acceptance. All numerical samples distinguished from conditional interval bounds. No CI.",
+  "predecessor": "2223c64161b4f85fc7305197c46e6b78d5f8a554",
+  "blobs": {
+    "identities": "a40f01de1dec233191419b74c03dd856362cac77",
+    "primitive": "1677f465bb7ade2c1bd0458c8077004fc1698a78",
+    "energy": "f58d7d58cde5cde6afeb6111cb8de4e3ecf5e128",
+    "interval": "728aad20509d21cc532db89727938a2d617daed0"
+  },
+  "checks": {
+    "symbolic_primitive": 15,
+    "symbolic_energy": 5,
+    "sympy": "1.14.0"
+  },
+  "parameters": {
+    "modes": [
+      1,
+      2
+    ],
+    "rows": [
+      "E4_1",
+      "E4_2",
+      "SMS_1",
+      "SMS_2"
+    ],
+    "ny": 225,
+    "h": 0.0005999023910881472,
+    "dy": 0.018,
+    "steps": 4517,
+    "clock_block": 8
+  },
+  "primitive": {
+    "cursors": [
+      4517,
+      1648,
+      0
+    ],
+    "seconds": [
+      15.007088671999554,
+      6.846802943000512
+    ],
+    "state_sha": "4a54fa2c4c2fca7c324907277ce6859e16c6305b5431483068b31753c90ece31",
+    "wall_sha": "ec298a2e1659b38718d559cd7e87b89ed6d0d7c02bae8d9855986861641705ca",
+    "max_wall": [
+      0.000487409400719854,
+      0.0008211708962839494,
+      0.00047938240756434684,
+      0.0004833619162102655,
+      0.00879718005643492,
+      0.01645675014108594
+    ],
+    "numerical_normalizer": 0.12069003224378744,
+    "comparison": {
+      "primitive": [
+        2.741806630531023e-15,
+        -1.2615769701534901e-14,
+        6.151724459983211e-17,
+        2.254952037817393e-16
+      ],
+      "direct_old": [
+        2.9232636047952336e-15,
+        -1.2713319307358382e-14,
+        4.125570525776774e-16,
+        -4.430871213518552e-16
+      ],
+      "primitive_differentiated": [
+        2.741785148775687e-15,
+        -1.2615731962876907e-14,
+        6.152248367792812e-17,
+        2.2550330937513816e-16
+      ],
+      "source_coeff": [
+        1.3285284957106432e-11,
+        2.6562821761913257e-11,
+        1.3285284957106432e-11,
+        2.6562821761913257e-11
+      ],
+      "scope": "sampled trapezoid, not an enclosure"
+    }
+  },
+  "interval": {
+    "cursors": [
+      4517,
+      3899,
+      3067,
+      2247,
+      1437,
+      641,
+      0
+    ],
+    "seconds": [
+      12.009463458000027,
+      16.004175394999947,
+      16.028339408999273,
+      15.014489635000245,
+      15.003603698000006,
+      13.25084714500008
+    ],
+    "state_sha": "4a54fa2c4c2fca7c324907277ce6859e16c6305b5431483068b31753c90ece31",
+    "memory_sha": "587d6306deae1a5912409ae1ef06ad3aed03dcdf5335f5b17b40d424ca4cdfa5",
+    "modules": {
+      "check_f8_combined_residual.py": "6f0efbc356d53b685875f1e4c73c516700e4eebb5606ea529aee15575f91dcd8",
+      "check_f8_local_dual_weld.py": "4a399ae2965ebd9522228c51620745c9ea12f028760c4c823ae6f51b27f38dbc",
+      "check_f8_sharp_energy.py": "c0522ac18ba74ad5bb452a8ba01a1f88c9261b46b30ac6fc965c54c78126fd21",
+      "check_f8_vector_interval.py": "ce892ff38162a8cca89810e8dc1a12b1bcbb77e6418f3e309ec727fa679c0383",
+      "f8_fused_step.py": "7df9b853646bc7a27f6fe2f723a52327d1d69110f5f7d23e1ab26171ec3f48a8",
+      "ksw668_f8_tt_multipole.py": "a16edc1eac88cc41de29cf959493189985a67c776c20bb2c22cbdffd0dec0807",
+      "run_f8_accumulated_interval.py": "e43edcd84577f19f7b766e3173a8c5612f5ebe748facaa581be4e6413c68eb60",
+      "run_f8_bidirectional_low_dual.py": "b3081af6133c63d18b239621699aa5ea93bfed5bfb449123393657981d92d1a6",
+      "run_f8_common_modal_box.py": "43e91e024f77c20a464acd22e08ff8765e34c1154ec0385e3bb69317f896d033",
+      "run_f8_primitive_adjoint.py": "81da93717bbc52c3ea2a2eb404645ed8e04a7fc058eae655dde8fd333455bf70",
+      "run_f8_primitive_energy.py": "b376ece85ae09f43e9c5b9aa3a6c3600ab9c75c1207e921a9611d3998a726ee5",
+      "run_f8_streaming_residual.py": "031972334f74e55b84d429b3492c06f8119f83cdc2b948bdfdfeb1e4f7b65109"
+    },
+    "ledger_rows": [
+      "coupled norm",
+      "integrated volume residual",
+      "integrated weighted wall discrepancy",
+      "integrated memory0 residual",
+      "integrated memory1 residual",
+      "maximum local gamma",
+      "source wall dissipation upper budget",
+      "source Cauchy Schwarz coefficient",
+      "source remaining radius",
+      "reconstructed source contraction lower",
+      "reconstructed source contraction upper"
+    ],
+    "ledger": [
+      [
+        6.381604355862324,
+        53.1483072715332,
+        13.928295675424074,
+        111.60025208752378
+      ],
+      [
+        0.0538544147208103,
+        0.05891723651694784,
+        0.11333546194934244,
+        0.09716927207386901
+      ],
+      [
+        0.00003683633243337999,
+        0.000043450628938194364,
+        0.000057695325707155774,
+        0.0000616442817941679
+      ],
+      [
+        0.00014259266906257136,
+        0.00026178320101069607,
+        0.0008974105129974432,
+        0.0009820196855568435
+      ],
+      [
+        0.00022301263111032402,
+        0.000955713985944675,
+        0.0004259892486821853,
+        0.001706479058379896
+      ],
+      [
+        4.102823787600699,
+        4.675835407583879,
+        4.102823787600699,
+        4.675835407583879
+      ],
+      [
+        20.365711008200993,
+        1412.8323764258428,
+        97.01430263600798,
+        6229.340984708428
+      ],
+      [
+        1.6022152424612616e-17,
+        6.40508909070346e-17,
+        1.6022152424612616e-17,
+        6.40508909070346e-17
+      ],
+      [
+        1.1869186283753542e-9,
+        1.9210682894068856e-8,
+        2.5905521962821166e-9,
+        4.033859191888384e-8
+      ],
+      [
+        -2.1465042144287797e-13,
+        -1.8938612993292195e-13,
+        -1.1283002284276296e-14,
+        -1.1545715233830188e-14
+      ],
+      [
+        1.189964676497211e-13,
+        3.040936095537911e-13,
+        2.1997304023975714e-14,
+        2.3426843118836403e-14
+      ]
+    ],
+    "radius": [
+      1.925076445391892e-8,
+      3.200315139752594e-7,
+      4.201615230841254e-8,
+      6.719989752217148e-7
+    ],
+    "previous_direct_trace": [
+      2.9858485261622975e-7,
+      3.037623641279329e-7,
+      5.979325694794704e-7,
+      6.078564848448543e-7
+    ]
+  }
+}
