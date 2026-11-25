@@ -1,17 +1,17 @@
 # Paper 9 — Exact CM derivative certificates from modular polynomial slices
 
 **Subtitle:** A constructive derivation and verification of Chudnovsky-type series  
-**Status:** Living working manuscript, 20 November 2026. Independent computational mathematics candidate; not submitted, peer reviewed, or kernel certified.  
+**Status:** Living working manuscript, revised 25 November 2026. Independent computational mathematics candidate; not submitted, peer reviewed, or kernel certified.  
 **Primary classification:** math.NT; secondary math.NA, cs.SC.  
-**Source branch:** PR #1529, baseline 060970700e72e79bc13dfa3829c1e17e61fb036d.
+**Source branch:** [PR #1546](https://github.com/chboishabba/dashi_agda/pull/1546), master-native consolidation of historical PR #1529. Audited parent `1f53737635811b6aee827ada5f36612cc9126b11`; Lean derivative companion `a541a44dc990cba133d031eabc9c01adf287beeb`. Current status below supersedes historical progress entries.
 
 ## Abstract
 
-We investigate exact local derivative extraction from symmetric prime-level modular correspondences using a diagonal and one specialized univariate polynomial. Logarithmic differentiation and cyclic root-of-unity filtering reconstruct these slices using integer series arithmetic without materializing a global bivariate coefficient array. At the degree-41 cyclic self-isogeny of the discriminant -163 CM lattice, the construction supplies a route to the singular modulus and almost-holomorphic correction in the Chudnovsky series. Rational root isolation and alternating-series enclosures connect the resulting modular identity to arbitrary-precision evaluation of the original Machin constant. We separate classical analytic inputs, exact executable certificates, representation size, bit complexity and physical execution costs. The novelty of the combined method relative to existing specialized modular-polynomial and nonholomorphic CM algorithms remains under review.
+We investigate exact local derivative extraction from symmetric prime-level modular correspondences using a diagonal and one specialized univariate polynomial. Logarithmic differentiation and cyclic root-of-unity filtering reconstruct these slices using integer series arithmetic without materializing a global bivariate coefficient array. At the degree-41 cyclic self-isogeny of the discriminant -163 CM lattice, the construction supplies a route to the singular modulus and almost-holomorphic correction in the Chudnovsky series. A real-slice root isolation and a denominator-cleared cubic identity in the original CM parameter eliminate inverse-coordinate and quadratic-field inversion requirements for the scalar correction. Signed alternating brackets and an exact integer width bound reduce constructive certification to a universal rational overlap with the original Machin stages. We separate classical analytic inputs, exact executable certificates, representation size, bit complexity and physical execution costs. Historical source-equivalent native evaluations match decimal hash receipts through ten million digits; exact-head replay and external matched comparisons remain outstanding. The analytic argument uses named classical premises; intended native proof terms are uncompiled and the universal same-real theorem is not yet established. Novelty relative to existing specialized modular-polynomial and nonholomorphic CM algorithms remains under review.
 
 ## 1. Introduction and contribution boundary
 
-The proposed contribution is not the discovery of the Chudnovsky formula, binary splitting, cyclic norms, or a general CM theorem. The candidate contribution is an economical joint reconstruction of two slices sufficient for the local cubic jet, followed by exact root isolation, derivative extraction, and constructive certification. This manuscript requires no physical or unification claims and no result from the Clay-facing papers. The Moonshine/369 representation programme is separate.
+The proposed contribution is not the discovery of the Chudnovsky formula, binary splitting, cyclic norms, or a general CM theorem. The candidate contribution is an economical joint reconstruction of two slices sufficient for the local cubic jet, followed by exact root isolation, derivative extraction, and constructive certification. This manuscript requires no physical or unification claims and no result from the Clay-facing papers. The Moonshine/369 representation programme is separate. The Masser invariant and the higher-level derivative method are credited to Masser and Bruinier–Ono–Sutherland (arXiv:1301.5672); the lower-level cubic two-slice consumer is a candidate specialization, not a claim of a new invariant. See the attribution ledger below.
 
 ## 2. Constructive constant
 
@@ -23,7 +23,7 @@ The alternating arctangent series supplies rational intervals of width 1/((2N+1)
 \[
 (5+i)^4(239-i)=i(5-i)^4(239+i).
 \]
-Together with the elementary angle bounds this identifies the selected classical phase. The native Bishop completion and setoid proof is a separate formal supplement; the computational manuscript uses explicit rational enclosures and their classical limit semantics. No inference of real equality from finitely many matching digits is made.
+Together with the elementary angle bounds this identifies the selected classical phase. The native Bishop completion and setoid proof is a required formal supplement for the P0 independent-certification objective. The original rational Machin stages m_k, their convergence and all-index error 4/25^k are existing source owners; the pinned Bishop order reflection works in both directions. At k=0 use the sharper original 22/7 bound. The companion Lean Machin semantic theorem is an existing donor, not automatic Agda proof import. No inference of real equality from finitely many matching digits is made.
 
 ## 3. Classical modular inputs
 
@@ -34,7 +34,7 @@ E_6=1-504\sum_{n\ge1}\sigma_5(n)q^n,
 \qquad
 \Delta=(E_4^3-E_6^2)/1728=\eta^{24}.
 \]
-Here q=exp(2 pi i tau), j=E4^3/Delta, and J=qj (not j-744 or j/1728). Inputs are classical modular invariance, holomorphy/nonvanishing of Delta on the upper half-plane, the Fourier expansions, and compactness of X(1). The existing canonical Bishop/Mathlib route in Lean PR #13 and native Agda series/reciprocal modules are source donors, not fresh kernel receipts.
+Here q=exp(2 pi i tau), j=E4^3/Delta, and J=qj (not j-744 or j/1728). Inputs are classical modular invariance, holomorphy/nonvanishing of Delta on the upper half-plane, the Fourier expansions, and weight-zero rigidity (equivalently compactness of X(1)). The pinned Mathlib v4.28.0 companion already has original E4/E6 cusp functions, normalized Delta = eta^24, nonvanishing, weight-12 cusp rigidity and nonpositive-weight constancy. Actual Agda divisor-series completion and real-slice/weighted Euler jet proof terms are source owners; source-semantic reflection and new kernel acceptance remain open. Raw lattice G_(2k) is normalized by 2*zeta(2k), not silently equated to E_(2k).
 
 ## 4. Direct cyclic norm
 
@@ -59,7 +59,7 @@ Let Phi_p be the standard symmetric modular polynomial. For p odd,
 \[
 P_p(X)=\Phi_p(X,X),\qquad S_p(X)=\Phi_p(X,K).
 \]
-The invariant correspondence product for P has pole order 2p at the cusp. Its normalized series equals
+The p+1 determinant-p row-lattice charts consist of diag(p,1) and [[1,a],[0,p]] for 0<=a<p. Right multiplication by S,T permutes them up to left SL2Z correction; the adjugate reverses the correspondence. For an r-fold coefficient product the integer pole order is at most p for 1<=r<=p, and p+1 for r=p+1, since the infinity chart has pole p and the others pole 1/p; translation removes fractional exponents. Subtract powers of j through degree zero and apply weight-zero rigidity. Near the cusp the p+1 roots are distinct by leading coefficients and both reversed polynomials are monic, yielding symmetry by equality on infinitely many j-values. This derives the actual correspondence on the named analytic premises. The invariant correspondence product for P has pole order 2p at the cusp. Its normalized series equals
 \[
 q^{2p}P_p(j(q))=(q^{p-1}J(q)-J(q^p))\operatorname{Norm}(J(t^p)-t^{p-1}J(t)).
 \]
@@ -94,7 +94,12 @@ The tracked diagonal checker reports K=-640320^3, multiplicity two and factor S8
 2^80 |a_0| > sum_{i=1}^80 2^(80-i)|a_i|
 excludes other roots in |z|<=1/2. Combine with the dyadic series enclosure, without a general CM class-degree or integrality premise. These are reported repository receipts pending independent reproduction for publication.
 
-The branch h(t)=-41/(t+1) fixes tau. Its slope alpha satisfies 41 alpha^2+81 alpha+41=0. In the quadratic field, derive beta from the cubic jet, then kappa=2 beta/(alpha^2-alpha). The chain rule yields kappa=j''/(j')^2+2/((2tau+1)j'). Ramanujan differentiation gives
+The branch h(t)=-41/(t+1) fixes tau. Its slope alpha satisfies 41 alpha^2+81 alpha+41=0. Rather than invert j, put a=j'(tau), b=j''(tau), gamma=h''(tau). Expand both actual branches in epsilon=t-tau. Their quadratic relation is 41 P2=163 S2; their cubic equation, after the quadratic cancellation, gives the denominator-cleared identity
+\[
+163S_2[(\alpha^2-\alpha)b+a\gamma]
+ =a^2(\alpha^2-\alpha)(41P_3-326S_3).
+\]
+Here a≠0 from the original derivative identity and the selected small-q positivity; S2≠0 from the finite certificate, and alpha is not 0,1,-1. The signed discriminant 82 alpha+81 is ±i sqrt(163); the actual derivative chooses the sign. Thus kappa=(41P3-326S3)/(163S2)=P3/P2-2S3/S2. The chain rule yields kappa=j''/(j')^2+2/((2tau+1)j'). Retain the branch to reopen b; the scalar does not recover it alone. The original q is real negative, and real Fourier coefficients and apartness give real j; complementary-factor dominance on the real half-unit interval suffices. The new forward Laurent/shift replay is source-written and unexecuted, not a new certificate acceptance. Ramanujan differentiation gives
 \[
 s_2=4+3K/(K-1728)-6K\kappa,\qquad
 s_2=(E_4/E_6)(E_2-3/(\pi\Im\tau)).
@@ -103,11 +108,11 @@ The tracked slice checker reports s2=77265280/90856689. Reproduce and review all
 
 ## 8. Hypergeometric transport
 
-The Ramanujan identities follow from D log Delta=E2, the Serre derivative, and classical dimensions of M4, M6, M8 (D=q d/dq). Set z=1728/j, F=sqrt(E4) with cusp branch F(0)=1, theta=z d/dz. Then Dz=z E6/E4 and
+The Ramanujan identities can be derived using two specialized rigidity applications, without general dimension formulas (D=q d/dq). Define E2=DDelta/Delta on the actual normalized discriminant. The weight-12 Rankin–Cohen bracket 3E6 DE4-2E4 DE6 has cancelled derivative anomaly, zero constant and first coefficient 1728, hence equals 1728 Delta by existing weight-12 rigidity. Let x=E4,y=E6,u=3Dx,v=2Dy,d=x^3-y^2,e=E2. Then x^2u-yv=ed and yu-xv=d; determinant -d is nonzero on H, giving u=ex-y and v=ey-x^2. The cusp d=0 is treated separately. The remaining corrected form 12DE2-E2^2+E4 is weight 4 with zero constant. Divide by Delta and apply negative-weight rigidity at -8 to force zero. These are ordinary derivations on the actual derivative transformation and cusp premises. The companion source now writes the bracket cusp packaging and first-coefficient transport from actual cusp functions, conditional on slash covariance; the two actual derivative chain rules, E2 correction and elaboration are unpaid. Set z=1728/j, F=sqrt(E4) with cusp branch F(0)=1, theta=z d/dz. Then Dz=z E6/E4 and
 \[
 [\theta^3-z(\theta+1/6)(\theta+1/2)(\theta+5/6)]F=0.
 \]
-Normalized analytic uniqueness gives the factorial series; continuation to the selected negative real q segment requires E4,E6 positive and no singularity. The period identity is
+Use the original q-coordinate operator L=(E4/E6)D. On |q|<=2^-36 the original divisor bounds give |E4-1|,|E6-1|<1/16 and |z|<=1345/3375<1. The binomial square root and convergent hypergeometric composition both have constant 1. Since U=E4/E6 has U0=1 and z0=0, the coefficient of q^n in L^3 of a difference agreeing through n-1 is n^3 times its nth coefficient, whereas the z-multiplied right side depends only on earlier coefficients. Induction gives equality on the original small disk, without inverse z or analytic continuation. Formal convergent interpretation and original factorial recurrence remain open. The period identity is
 \[
 \theta F+(1-s_2)F/6=1/(2\pi\Im\tau\sqrt{1-z}).
 \]
@@ -115,7 +120,11 @@ With C=640320, B=545140134, A=13591409, verify 144 B^2=163(C^3+1728), (1-s2)/6=A
 
 ## 9. Certified evaluation
 
-Use the existing integer P/Q/B/T merge and alternating tail enclosure for the weighted hypergeometric sum, plus outward dyadic sqrt10005. The absolute consecutive-term ratio is bounded by 42*1728/C^3<1. The two arbitrary-precision algorithms terminate and, conditional on the classical identity argument, enclose the same constant. Previous reported 100, 1000, 3000 and 10000 decimal-place comparisons are regression targets, not independently reproduced performance results for this draft. Distinguish exact acceptance from approximate timings.
+Use the existing integer P/Q/B/T merge and alternating tail enclosure for the weighted hypergeometric sum, plus outward dyadic sqrt10005. The absolute consecutive-term ratio is bounded by 42*1728/C^3<1. For the actual adjacent source sums S_n=T_n/Q_n, delta_n=P_n p_n(A+Bn) alternates and |delta_(n+1)|*2^41<=q_(n+1)|delta_n|; the original paired slack gives 2T_n>A Q_n for n>=1. Let n=1+floor((k+4)/41), s=2^(k+2), R=floor(s sqrt10005), J=Q_n|delta_n|. With ordered positive prefix pairs (t_l,d_l),(t_h,d_h), K_r=426880, the exact reciprocal-corner width is
+\[
+u_k-l_k=\frac{K_r(d_l t_h+RJ)}{s t_l t_h}\le 3/s<2^{-k}.
+\]
+This follows from R<=101s, 8s<=2^(41n), the scaled defect bound and positive lower planes. It is independent of the analytic Chudnovsky identity; intended native totality/width terms are uncompiled. For c_k=(l_k+u_k)/2 and m_k the literal Machin stage, retain both rational crosses l_k<=m_k+e_k and m_k<=u_k+e_k, where e_0=22/7 and e_k=4/25^k for k>=1. The exact combined-radius bound is |c_k-m_k|<=width/2+e_k<=4/(k+1). Universal crossed endpoints, not finite hashes, are the outstanding F5 theorem. Interval production totality differs from decimal-floor termination: exact boundary apartness (e.g. irrationality of pi) and fair refinement are required. Historical exact decimal comparisons and source-equivalent native runs are recorded below, not exact-head replay. Distinguish exact acceptance from approximate timings.
 
 ## 10. Complexity and memory: reuse the existing computational programme
 
@@ -152,13 +161,19 @@ Primary tracked scripts (under scripts/):
 
 Run from a common checkout so imports resolve. Reproduce all receipts from exact pinned bytes, resolve any failures, save receipts and report versions/CPU. No fresh execution is claimed for this manuscript creation.
 
-Extend to D=-7,-11,-19,-43,-67 using appropriate prime cyclic self-isogenies and verify the Taylor hypotheses individually (special elliptic points and exceptional multiplicities require separate treatment). Audit general bit-height bound in p,b, not merely the output slot count. Add explicit standard bit-machine replay only if needed for the chosen complexity claim. Formal Agda supplement optional for computational submission, mandatory before claiming formal verification.
+Extend to D=-7,-11,-19,-43,-67 using appropriate prime cyclic self-isogenies and verify the Taylor hypotheses individually (special elliptic points and exceptional multiplicities require separate treatment). Audit general bit-height bound in p,b, not merely the output slot count. Add explicit standard bit-machine replay only if needed for the chosen complexity claim. Formal Agda supplement may be separated for a narrower computational submission; it is mandatory for the stated P0 original-Bishop independent-certification objective.
 
 Prior-art leads (bibliographic and novelty verification pending): Chudnovsky brothers, Ramanujan, Serre, classical modular correspondences and valence formula; Lorenz Milla arXiv:1809.00533; Andrew Sutherland arXiv:1202.3985; Bruinier/Ono/Sutherland arXiv:1301.5672; Computer-assisted construction of Ramanujan–Sato series for 1/pi (2026), DOI 10.1007/s11139-026-01352-2; Arora and Barak, Computational Complexity: A Modern Approach (2009). Cite original authors for their theorems and algorithms; compare actual methods before asserting originality.
 
 ## 12. Submission gates
 
-Working draft only. Required: independent local reproduction (including previous reported wall times treated as historical), general lemma exposition and validation, additional CM examples, explicit bit-height/time/peak-memory analysis, baseline comparisons, external literature audit and independent mathematical review. Preserve native Bishop/kernel gaps in formal supplement. No Clay or unification promotion. Paper 8 may cite the completed computational example but is not a prerequisite.
+Working draft only. Current integrated gates: A2 actual Euler derivative transport and bracket/E2 rigidity; A3–A5 actual degree-41 Laurent/CM certificates and signed Taylor binding; A6–A7 convergent original-q identity and positive period normalization; F1 actual factorial series and F2–F4 source-written positivity/width/totality; F5 universal rational overlap with the original Bishop real; F6–F8 exact native correspondence, digit termination and kernel acceptance; F9 calibrated external comparison. Historical source-equivalent native hashes through 10M digits and COMP5j's 148,669,512 managed-live peak bytes (166,072 KiB VmHWM, single run) are evidence, not an external record. COMP6 candidates remain unexecuted. Required for publication: independent exact-source reproduction, additional CM examples and literature/novelty audit, whole bit-height/time/peak-memory accounting and mathematical review. No Clay or unification promotion. Paper 8 may cite the completed computational example but is not a prerequisite.
+
+### 12.1 Scope of the secondary 369 donor
+
+The existing signed Tate/eta coefficient 66-12=54 and integer v3 cancellation are distinct from the original word 66 (6→6, two neutral coordinates). The original 13-stage source uses slot3/6/9 = negative/neutral/positive and word/pants/cylinder round trips; fixing 66 leaves an eleven-coordinate suffix, not global zero. No semantic Tate-to-word map or equivariant identification follows from the numeral. The classical level-three Hauptmodul chart and this typed fibre geometry are secondary donors, not new pi proof prerequisites.
+
+**Current controlling register:** `Docs/proofs/Paper9IntegratedFrontier66Cusp20261125.md` and `Docs/proofs/Paper9GeometryFirstEndpointClosure20261125.md`. The following chronological sections are historical evidence, not independent current status declarations.
 
 
 ## 20 November — independent replay and preliminary uniform bit-height lemma
@@ -1835,3 +1850,7 @@ See `Docs/proofs/Paper9EisensteinThreeB54Derivative20261125.md`. Reuse pinned Ma
 ## 25 November — 66/12 original Tate signed ultrametric and Delta derivative (UNTESTED)
 
 See `Docs/proofs/Paper9Tate66UltrametricDeltaDerivative20261125.md`. New `JInvariantThreeBTate66UltrametricExact.agda` reuses actual Tate dimensions and SSP369 prefix carrier, signed VpDepth comparison gives v3(66-12)=3 and gain2 versus unsigned 78 gain0. Y443 actual 66 pairs/12 nodes/78 relations matches signed cardinality only; natural arm swap virtual trace is not Tate trace. Fricke central shell t=27u preserves v3(u+1) and both j-chart valuations on named rational premises. Lean companion c3b77fc94f302d8a2b4bf733c5f1ff4229ae7146 writes literal Delta cusp-function identity, derivative and Ramanujan46 consumer needing actual bracket and disk membership. No new kernel, compiler, tests, CI or benchmark; no analytic localization or F5 proof promotion.
+
+## 25 November — original 66 prefix and actual bracket cusp closure (SOURCE, UNVERIFIED)
+
+See `Docs/proofs/Paper9IntegratedFrontier66Cusp20261125.md`. Original 66 means ordered 6->6 neutral prefix, not integer sixty-six radix expansion. New `TernaryThirteenNeutral66PrefixExact.agda` reuses original word/pants/cylinder and split/join owners for prefix, suffix round trips and nonzero/last-coordinate non-descent witnesses. No Tate-to-word semantic map asserted. The earlier signed valuation chart is a distinct arithmetic observable. Lean companion `a541a44dc990cba133d031eabc9c01adf287beeb` adds actual `Paper9BracketCuspClosure.lean`: intended holo/zero cusp, derivative anomaly cancellation, genuine CuspForm packaging, actual q-disk equality and first coefficient. `ramanujan46FromSlash` consumes actual slash covariance, which reduces to the two original derivative chain rules; E2 correction still open. All terms uncompiled; no native/Lean kernel, tests, CI or benchmark. Manuscript main text reconciled, historical ledger preserved. A2-A7/F5 remain critical; 66 is secondary donor, not a P0 dependency.
