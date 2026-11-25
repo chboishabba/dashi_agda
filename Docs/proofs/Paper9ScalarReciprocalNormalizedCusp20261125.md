@@ -117,3 +117,56 @@ acceptance unchanged. Do not promote kernel, record, or performance claims.
 Original attribution: classical fractional-linear fixed-point geometry,
 Klein, Machin, Chudnovsky, existing DASHI and pinned Mathlib sources.
 New work is the selected scalar finite-product/normalized-cusp weld.
+
+
+## Monster / signed 240, -504 source reuse (25 Nov, continuation)
+
+User explicitly recalls Monster coefficient geometry. Recovered on this same
+branch: JInvariantEisensteinThreeB54CoefficientBridgeExact (blob
+3ec26c200c3bad423c75dcf489f50d4263884742), coefficient tower
+68b8f84ed7ba853b78322781931a276507c1525d, AbelE8RootE4FirstCoefficientExact
+4b58516b08fe5fc58ac6e68e03edd5dff1237e37, Monster196884FibreInterferenceExact
+6dd5b94be3403164f4efd750705a6f408725f02c, JInvariantThreeBTate66UltrametricExact
+aa7c26a6ec11fba00717b09c5d11e86960169c67, original Bishop majorant
+f5ccee66a45e2264f7174963071630bce2e9d50f.
+See Paper9EisensteinThreeB54Derivative20261125.md for original attribution and
+classical X0(3) premise. No new root enumeration or Monster module.
+
+For signed first coefficients a=240,b=-504, the unimodular matrix
+[[1,-1],[3,-2]] sends (a,b) to (744,1728). Reverse a=1728-2*744,
+b=1728-3*744. The original signed E4/E6 second coefficients 2160,-16632
+give numerator N=E4^3=1+720q+179280q^2+..., E6^2=1-1008q+220752q^2+...
+and D=Delta/q=1-24q+... . Thus 744=720+24 from the actual normalized cusp
+division, independently agrees with a-b. The 3B signed Tate residual 66-12=54
+gives 1728=32*54 and oscillator coefficient 324=6*54. The original classical
+level-three coordinate t=q^-1-12+54q+... gives
+j=t+756+196830/t+19131876/t^2+387420489/t^3
+=q^-1+744+196884q+...; 196884=196830+54=196560+324.
+These are cross-chart coefficient checks; not representation isomorphisms.
+The 66->6->6 indexed fibre address is not a valuation of the integer 66.
+No new level-three analytic premise introduced into A4; prime 3 does not
+replace the degree-41 CM self-isogeny.
+
+Lean companion Integration/Paper9SignedEisensteinCuspTail.lean, commits
+e351ecac4d713fbf89b3368f78c2a2980557ebda and
+80940423a18d7fb1d406bbb3628b2276719f7558: source-written signed normalization
+inverse, omitted-index inequality n+3<=3*2^n, termBound using existing
+sigma_le_pow_succ, normTail using geometric sum, e4TwoTailAt/e6TwoTailAt
+using original Paper9OriginalEisensteinCoeff.e4HasSum/e6HasSum and xAtQ/yAtQ,
+and stable normalized cuspRemainder consumer. No compiler available.
+The Fourier tail source attachment is now written (not elaborated), not
+assumed as a new Monster premise. Remaining: elaborate those declarations;
+propagate actual E4/E6 tails through cube/square and bind D=Delta/q to
+original deltaUnitSourceOnDisk, then consume cuspRemainder and the original
+halfUnit/rootOfChecks. Actual exponential semantic finite-prefix comparison,
+scalar Hecke germ and kernel replay still needed.
+
+Fresh local SymPy checks: signed low-order N and E6^2 coefficients, -24
+normalized Delta coefficient, determinant-one matrix, eta ratio signed
+prefix and rational level-three j expansion through q all PASS.
+Fresh Python Fraction: all displayed remainder constants and inequalities
+PASS (Cn=17232484, Cy=18252361, Cd=35484845/1728<24000;
+conservative 500000*r<1/4 at r=2^-36); exact 180-term exponential window
+PASS using the original 128-bit dyadics; endpoint offsets displayed
+approximately -7.499274099153538e-13 and -7.499273976413151e-13.
+No full packet replay, Agda/Lean kernel, CI or performance claim this turn.
