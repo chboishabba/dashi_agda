@@ -5,7 +5,7 @@ module DASHI.Algebra.TriadicFiniteSignedIntegerWeldExact where
 -- numericRepresentative is a radix-label codec, not this carry semantics.
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base as Z using (ℤ; +_; -[1+_])
+open import Data.Integer.Base as Z using (ℤ; +_; -[1+_]; _+_; _*_)
 open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as E
