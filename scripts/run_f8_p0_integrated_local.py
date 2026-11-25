@@ -23,6 +23,8 @@ SOURCE_PINS={
  "scripts/run_f8_lxix_native_source_matrix.py":"94e6303eab04823ab7f39244d21a32c98a300a07",
 }
 CHECKS={
+ "modal-cfl":"scripts/check_f8_modal_cfl.py",
+ "shrinking-injection":"scripts/check_f8_shrinking_injection.py",
  "causal-rk3-weld":"scripts/check_f8_causal_rk3_weld.py",
  "shrinking-jet":"scripts/check_f8_shrinking_jet.py",
  "source-graph-obstruction":"scripts/check_f8_source_graph_obstruction.py",
