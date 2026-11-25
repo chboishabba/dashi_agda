@@ -45,6 +45,14 @@
 
 ---
 
+
+
+### 25 November — native execution max-cut and exact ordinary source replay (latest implementation ledger)
+
+[Bounded original word blocks, normalized outer basis, exact acceptance and native preflight](../physics/Monster3BExactConwayBlockAndOuterGaugeMaxCut20261125.md). Original complete Lindsey blob b0f96b37494cfca56f116b991d350352d3a493f2 independently replayed: 48/48 exact Q(zeta3) 12D signed relators across all three D phases and both conjugate phases; dual Sym² carries the word identities to 78 (wheel nonidentity also previously checked mod31). This cleanly replaces the prior timeout for these source relations. Native CRT now groups integral atoms and up to two t/l atoms, denominator d=1/8/64 and full-dimension adaptive radix 4096/512/64 under 4d²(r-1)² sum weights < M²; full exact norm checks and streamed common-denominator ambient recomposition retained. Normalize negative basis as L(C)v_i, so C+=I, C-=J, D-=E+, E-=J D+ J. Extract only 270 positive D/E/J columns instead of 720 independent signed columns, derive negative under honest signed-action laws; --negative-audit 1 default replays 4 negative columns, 90 replays 360. Basis projections and full ambient residual checks remain. Code/source/runtime checkpoint identity strengthened. Local matching-blob controls: new 44 exact blocked/linearity/signed checks, prior CRT 36/18/36/6 plus full-size and negative control rerun, cyclic control rerun; original source 48/48. New native preflight compares to upstream expanded integer CRT buffer and standard MMV31/127 and inverse, not scaled float getter; unexecuted here (mmgroup 1.0.8 CP313 wheel download failed). Actual source-native backend, marked source packet and integrated actual char0 maps remain unpaid. Run native preflight then original char0 producer on existing workstation with genuine manifest/cover/model/positive packet, fresh checkpoint directory. No further abstract discovery campaign; actual A–C authentication, full-weight inverse and P6 formal/kernel remain distinct.
+
+---
+
 ## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
 
 **Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
