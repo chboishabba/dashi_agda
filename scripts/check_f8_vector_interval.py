@@ -41,7 +41,7 @@ class V:
         # balanced tree of outward-rounded additions, no np.sum error assumption
         l=np.moveaxis(a.l,axis,0);h=np.moveaxis(a.h,axis,0)
         while l.shape[0]>1:
-            n=l.shape[0]//2;ll=down(l[:2*n:2]+l[1:2*n:2]);hh=up(h[:2*n:2]+h[1:2*n:2])
+            n=l.shape[0]//2;ll=down(l[:2*n:2]+l[1:2*n:2]);hh=up(h[:2*n:2]+h[1:2*n:2]);
             if l.shape[0]%2:ll=np.concatenate((ll,l[-1:]));hh=np.concatenate((hh,h[-1:]))
             l,h=ll,hh
         return V(l[0],h[0])
