@@ -28,6 +28,8 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as Native
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as OriginalWilson
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -654,3 +656,71 @@ module _
       cong (λ value →
         E (λ links → f links *ℝ g links) -ℝ value)
         (*-comm (E g) (E f))
+
+
+  ------------------------------------------------------------------------
+  -- Literal native SU(N) plaquette / gauge geometry for A2.  These are
+  -- the same original periodic positive Wilson plaquette holonomies,
+  -- not a synthetic "ContinuousWilsonSourceContract" object.
+  --
+  -- The abstract SUNMatrixRealTrace contains only CYCLICITY, not the
+  -- genuine |Re Tr(U)/N|≤1 theorem. The two physical trace-range proofs
+  -- below therefore remain EXPLICIT INPUTS from a certified complex
+  -- unitary matrix/real trace implementation; do not derive them from
+  -- cyclicity or silently assume them.
+  ------------------------------------------------------------------------
+
+  originalSUNRawPlaquetteDeficit :
+    (n : Nat) → Plaquette.PeriodicPlaquette n →
+    Native.ActualLinks theory traceData exponential beta oneLink
+      bilateral (Quotient.divide quotient) n → ℝ
+  originalSUNRawPlaquetteDeficit n p links =
+    1ℝ -ℝ
+      Trace.matrixWilsonValue traceData
+        (Variable.periodicSUNPositivePlaquette theory n links p)
+
+  originalSUNRawPlaquetteDeficitGaugeInvariant :
+    (n : Nat) (p : Plaquette.PeriodicPlaquette n) →
+    OriginalWilson.originalGaugeInvariant
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient) n
+      (originalSUNRawPlaquetteDeficit n p)
+  originalSUNRawPlaquetteDeficitGaugeInvariant n p gamma links =
+    cong (λ trace → 1ℝ -ℝ trace)
+      (Variable.periodicSUNPositivePlaquetteGaugeTrace
+        theory traceData n links gamma p)
+
+  -- This constructor pays the configuration/plaquette/gauge/expectation
+  -- geometry of A2 from the ACTUAL original Wilson family. Only the
+  -- physical normalized-complex-trace range remains an external source
+  -- theorem; normalized Haar laws are already in the native finite record.
+  originalSUNFixedCutoffA2Source :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat) →
+    (rawDeficitNonnegative :
+      ∀ p links → 0ℝ ≤ℝ originalSUNRawPlaquetteDeficit n p links) →
+    (rawDeficitAtMostTwo :
+      ∀ p links → originalSUNRawPlaquetteDeficit n p links
+        ≤ℝ (1ℝ +ℝ 1ℝ)) →
+    A2.ContinuousWilsonSourceContract
+  originalSUNFixedCutoffA2Source finite arithmetic n lower upper =
+    record
+      { A2.ContinuousWilsonSourceContract.Configuration =
+          Native.ActualLinks theory traceData exponential beta oneLink
+            bilateral (Quotient.divide quotient) n
+      ; A2.ContinuousWilsonSourceContract.PlaquetteIndex =
+          Plaquette.PeriodicPlaquette n
+      ; A2.ContinuousWilsonSourceContract.expectation =
+          originalSUNFixedCutoffA2Expectation finite arithmetic n
+      ; A2.ContinuousWilsonSourceContract.deficit =
+          originalSUNRawPlaquetteDeficit n
+      ; A2.ContinuousWilsonSourceContract.deficitNonnegative = lower
+      ; A2.ContinuousWilsonSourceContract.deficitLeTwo = upper
+      ; A2.ContinuousWilsonSourceContract.gaugeInvariant =
+          OriginalWilson.originalGaugeInvariant
+            theory traceData exponential beta oneLink bilateral
+            (Quotient.divide quotient) n
+      ; A2.ContinuousWilsonSourceContract.deficitGaugeInvariant =
+          originalSUNRawPlaquetteDeficitGaugeInvariant n
+      }
