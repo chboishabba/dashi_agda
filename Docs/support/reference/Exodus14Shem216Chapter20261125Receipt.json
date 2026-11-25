@@ -1,0 +1,866 @@
+{
+  "verses": 31,
+  "segments": 38,
+  "words": 474,
+  "letters": 1853,
+  "distinctRaw": 27,
+  "distinctFolded": 22,
+  "completeBlocks": 8,
+  "lastBlock": 125,
+  "holes": 91,
+  "occupiedToHole": 398,
+  "anomalies": [
+    {
+      "verse": 25,
+      "slot": 16,
+      "segments": [
+        {
+          "id": 29,
+          "value": "."
+        },
+        {
+          "id": 30,
+          "value": null
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "verse_present": 31,
+    "exclusive_word_slot": 474,
+    "unmatched_placeholder": 1,
+    "unique_source": 1,
+    "padded_roundtrip": 1944,
+    "source_roundtrip": 1853,
+    "mask_inverse": 14824,
+    "composition": 118592,
+    "radix_roundtrip": 18530,
+    "window_source_unique": 29,
+    "window_residual_cover": 29,
+    "shem_baseline": 1
+  },
+  "glyphCounts": {
+    "ו": 207,
+    "י": 251,
+    "ד": 43,
+    "ב": 109,
+    "ר": 135,
+    "ה": 168,
+    "א": 133,
+    "ל": 118,
+    "מ": 100,
+    "ש": 66,
+    "נ": 61,
+    "ח": 43,
+    "פ": 34,
+    "ת": 63,
+    "ן": 13,
+    "ג": 6,
+    "ם": 97,
+    "ע": 67,
+    "צ": 33,
+    "כ": 37,
+    "ץ": 1,
+    "ס": 15,
+    "ז": 9,
+    "ק": 18,
+    "ף": 3,
+    "ך": 17,
+    "ט": 6
+  },
+  "verseStats": [
+    {
+      "verse": 1,
+      "words": 5,
+      "letters": 18,
+      "divisibility": [
+        3,
+        6,
+        9,
+        18
+      ]
+    },
+    {
+      "verse": 2,
+      "words": 20,
+      "letters": 71,
+      "divisibility": []
+    },
+    {
+      "verse": 3,
+      "words": 10,
+      "letters": 41,
+      "divisibility": []
+    },
+    {
+      "verse": 4,
+      "words": 17,
+      "letters": 69,
+      "divisibility": [
+        3
+      ]
+    },
+    {
+      "verse": 5,
+      "words": 21,
+      "letters": 80,
+      "divisibility": []
+    },
+    {
+      "verse": 6,
+      "words": 7,
+      "letters": 23,
+      "divisibility": []
+    },
+    {
+      "verse": 7,
+      "words": 11,
+      "letters": 38,
+      "divisibility": []
+    },
+    {
+      "verse": 8,
+      "words": 16,
+      "letters": 62,
+      "divisibility": []
+    },
+    {
+      "verse": 9,
+      "words": 20,
+      "letters": 78,
+      "divisibility": [
+        3,
+        6,
+        13
+      ]
+    },
+    {
+      "verse": 10,
+      "words": 18,
+      "letters": 78,
+      "divisibility": [
+        3,
+        6,
+        13
+      ]
+    },
+    {
+      "verse": 11,
+      "words": 16,
+      "letters": 71,
+      "divisibility": []
+    },
+    {
+      "verse": 12,
+      "words": 21,
+      "letters": 79,
+      "divisibility": []
+    },
+    {
+      "verse": 13,
+      "words": 27,
+      "letters": 97,
+      "divisibility": []
+    },
+    {
+      "verse": 14,
+      "words": 5,
+      "letters": 22,
+      "divisibility": []
+    },
+    {
+      "verse": 15,
+      "words": 12,
+      "letters": 41,
+      "divisibility": []
+    },
+    {
+      "verse": 16,
+      "words": 16,
+      "letters": 57,
+      "divisibility": [
+        3
+      ]
+    },
+    {
+      "verse": 17,
+      "words": 14,
+      "letters": 63,
+      "divisibility": [
+        3,
+        9
+      ]
+    },
+    {
+      "verse": 18,
+      "words": 9,
+      "letters": 42,
+      "divisibility": [
+        3,
+        6
+      ]
+    },
+    {
+      "verse": 19,
+      "words": 15,
+      "letters": 72,
+      "divisibility": [
+        3,
+        6,
+        9,
+        12,
+        18,
+        72
+      ]
+    },
+    {
+      "verse": 20,
+      "words": 20,
+      "letters": 72,
+      "divisibility": [
+        3,
+        6,
+        9,
+        12,
+        18,
+        72
+      ]
+    },
+    {
+      "verse": 21,
+      "words": 21,
+      "letters": 72,
+      "divisibility": [
+        3,
+        6,
+        9,
+        12,
+        18,
+        72
+      ]
+    },
+    {
+      "verse": 22,
+      "words": 11,
+      "letters": 49,
+      "divisibility": []
+    },
+    {
+      "verse": 23,
+      "words": 12,
+      "letters": 49,
+      "divisibility": []
+    },
+    {
+      "verse": 24,
+      "words": 15,
+      "letters": 60,
+      "divisibility": [
+        3,
+        6,
+        12
+      ]
+    },
+    {
+      "verse": 25,
+      "words": 16,
+      "letters": 71,
+      "divisibility": []
+    },
+    {
+      "verse": 26,
+      "words": 17,
+      "letters": 57,
+      "divisibility": [
+        3
+      ]
+    },
+    {
+      "verse": 27,
+      "words": 20,
+      "letters": 76,
+      "divisibility": []
+    },
+    {
+      "verse": 28,
+      "words": 18,
+      "letters": 67,
+      "divisibility": []
+    },
+    {
+      "verse": 29,
+      "words": 11,
+      "letters": 49,
+      "divisibility": []
+    },
+    {
+      "verse": 30,
+      "words": 16,
+      "letters": 58,
+      "divisibility": []
+    },
+    {
+      "verse": 31,
+      "words": 17,
+      "letters": 71,
+      "divisibility": []
+    }
+  ],
+  "windows": [
+    {
+      "verses": [
+        1,
+        2,
+        3
+      ],
+      "lengths": [
+        18,
+        71,
+        41
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 18,
+      "unmatched": 76,
+      "distinctRaw": 18,
+      "distinctFolded": 18
+    },
+    {
+      "verses": [
+        2,
+        3,
+        4
+      ],
+      "lengths": [
+        71,
+        41,
+        69
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 41,
+      "unmatched": 58,
+      "distinctRaw": 40,
+      "distinctFolded": 40
+    },
+    {
+      "verses": [
+        3,
+        4,
+        5
+      ],
+      "lengths": [
+        41,
+        69,
+        80
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 41,
+      "unmatched": 67,
+      "distinctRaw": 41,
+      "distinctFolded": 41
+    },
+    {
+      "verses": [
+        4,
+        5,
+        6
+      ],
+      "lengths": [
+        69,
+        80,
+        23
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 23,
+      "unmatched": 103,
+      "distinctRaw": 23,
+      "distinctFolded": 23
+    },
+    {
+      "verses": [
+        5,
+        6,
+        7
+      ],
+      "lengths": [
+        80,
+        23,
+        38
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 23,
+      "unmatched": 72,
+      "distinctRaw": 23,
+      "distinctFolded": 23
+    },
+    {
+      "verses": [
+        6,
+        7,
+        8
+      ],
+      "lengths": [
+        23,
+        38,
+        62
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 23,
+      "unmatched": 54,
+      "distinctRaw": 23,
+      "distinctFolded": 23
+    },
+    {
+      "verses": [
+        7,
+        8,
+        9
+      ],
+      "lengths": [
+        38,
+        62,
+        78
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 38,
+      "unmatched": 64,
+      "distinctRaw": 37,
+      "distinctFolded": 37
+    },
+    {
+      "verses": [
+        8,
+        9,
+        10
+      ],
+      "lengths": [
+        62,
+        78,
+        78
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 62,
+      "unmatched": 32,
+      "distinctRaw": 62,
+      "distinctFolded": 62
+    },
+    {
+      "verses": [
+        9,
+        10,
+        11
+      ],
+      "lengths": [
+        78,
+        78,
+        71
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 71,
+      "unmatched": 14,
+      "distinctRaw": 71,
+      "distinctFolded": 71
+    },
+    {
+      "verses": [
+        10,
+        11,
+        12
+      ],
+      "lengths": [
+        78,
+        71,
+        79
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 71,
+      "unmatched": 15,
+      "distinctRaw": 70,
+      "distinctFolded": 69
+    },
+    {
+      "verses": [
+        11,
+        12,
+        13
+      ],
+      "lengths": [
+        71,
+        79,
+        97
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 71,
+      "unmatched": 34,
+      "distinctRaw": 70,
+      "distinctFolded": 70
+    },
+    {
+      "verses": [
+        12,
+        13,
+        14
+      ],
+      "lengths": [
+        79,
+        97,
+        22
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 22,
+      "unmatched": 132,
+      "distinctRaw": 22,
+      "distinctFolded": 22
+    },
+    {
+      "verses": [
+        13,
+        14,
+        15
+      ],
+      "lengths": [
+        97,
+        22,
+        41
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 22,
+      "unmatched": 94,
+      "distinctRaw": 22,
+      "distinctFolded": 22
+    },
+    {
+      "verses": [
+        14,
+        15,
+        16
+      ],
+      "lengths": [
+        22,
+        41,
+        57
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 22,
+      "unmatched": 54,
+      "distinctRaw": 22,
+      "distinctFolded": 22
+    },
+    {
+      "verses": [
+        15,
+        16,
+        17
+      ],
+      "lengths": [
+        41,
+        57,
+        63
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 41,
+      "unmatched": 38,
+      "distinctRaw": 41,
+      "distinctFolded": 41
+    },
+    {
+      "verses": [
+        16,
+        17,
+        18
+      ],
+      "lengths": [
+        57,
+        63,
+        42
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 42,
+      "unmatched": 36,
+      "distinctRaw": 42,
+      "distinctFolded": 42
+    },
+    {
+      "verses": [
+        17,
+        18,
+        19
+      ],
+      "lengths": [
+        63,
+        42,
+        72
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 42,
+      "unmatched": 51,
+      "distinctRaw": 41,
+      "distinctFolded": 41
+    },
+    {
+      "verses": [
+        18,
+        19,
+        20
+      ],
+      "lengths": [
+        42,
+        72,
+        72
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 42,
+      "unmatched": 60,
+      "distinctRaw": 42,
+      "distinctFolded": 42
+    },
+    {
+      "verses": [
+        19,
+        20,
+        21
+      ],
+      "lengths": [
+        72,
+        72,
+        72
+      ],
+      "equal": true,
+      "complete72": true,
+      "aligned": 72,
+      "unmatched": 0,
+      "distinctRaw": 70,
+      "distinctFolded": 69
+    },
+    {
+      "verses": [
+        20,
+        21,
+        22
+      ],
+      "lengths": [
+        72,
+        72,
+        49
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 46,
+      "distinctRaw": 48,
+      "distinctFolded": 48
+    },
+    {
+      "verses": [
+        21,
+        22,
+        23
+      ],
+      "lengths": [
+        72,
+        49,
+        49
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 23,
+      "distinctRaw": 49,
+      "distinctFolded": 48
+    },
+    {
+      "verses": [
+        22,
+        23,
+        24
+      ],
+      "lengths": [
+        49,
+        49,
+        60
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 11,
+      "distinctRaw": 49,
+      "distinctFolded": 48
+    },
+    {
+      "verses": [
+        23,
+        24,
+        25
+      ],
+      "lengths": [
+        49,
+        60,
+        71
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 33,
+      "distinctRaw": 49,
+      "distinctFolded": 48
+    },
+    {
+      "verses": [
+        24,
+        25,
+        26
+      ],
+      "lengths": [
+        60,
+        71,
+        57
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 57,
+      "unmatched": 17,
+      "distinctRaw": 57,
+      "distinctFolded": 57
+    },
+    {
+      "verses": [
+        25,
+        26,
+        27
+      ],
+      "lengths": [
+        71,
+        57,
+        76
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 57,
+      "unmatched": 33,
+      "distinctRaw": 56,
+      "distinctFolded": 56
+    },
+    {
+      "verses": [
+        26,
+        27,
+        28
+      ],
+      "lengths": [
+        57,
+        76,
+        67
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 57,
+      "unmatched": 29,
+      "distinctRaw": 57,
+      "distinctFolded": 57
+    },
+    {
+      "verses": [
+        27,
+        28,
+        29
+      ],
+      "lengths": [
+        76,
+        67,
+        49
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 45,
+      "distinctRaw": 49,
+      "distinctFolded": 49
+    },
+    {
+      "verses": [
+        28,
+        29,
+        30
+      ],
+      "lengths": [
+        67,
+        49,
+        58
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 27,
+      "distinctRaw": 49,
+      "distinctFolded": 49
+    },
+    {
+      "verses": [
+        29,
+        30,
+        31
+      ],
+      "lengths": [
+        49,
+        58,
+        71
+      ],
+      "equal": false,
+      "complete72": false,
+      "aligned": 49,
+      "unmatched": 31,
+      "distinctRaw": 48,
+      "distinctFolded": 47
+    }
+  ],
+  "equalWindows": [
+    [
+      19,
+      20,
+      21
+    ]
+  ],
+  "complete72Windows": [
+    [
+      19,
+      20,
+      21
+    ]
+  ],
+  "control": {
+    "kind": "exploratory conditional marginal-preserving Monte Carlo",
+    "seed": "0x36914",
+    "trials": 4096,
+    "observed": 69,
+    "mean": 70.673583984375,
+    "le": 588,
+    "ge": 3930,
+    "hist": {
+      "65": 3,
+      "66": 6,
+      "67": 22,
+      "68": 135,
+      "69": 422,
+      "70": 975,
+      "71": 1510,
+      "72": 1023
+    }
+  }
+}
