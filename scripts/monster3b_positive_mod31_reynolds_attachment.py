@@ -105,10 +105,11 @@ def run(a):
         pos[g]=np.column_stack(cols)
     J=pos["J"];I=eye(90)
     require(np.array_equal(mm(J,J),I) and all(np.array_equal(mm(J,pos[g]),mm(pos[g],J)) for g in ("D","E")),"actual positive parity laws")
-    blocks={}
+    blocks={}; eig={}
     for n,sgn in ((12,-1),(78,1)):
         Q=nullspace31((J-sgn*I)%P)
         require(Q.shape==(90,n),"actual signed constituent dimension")
+        eig[n]=Q.astype(np.int64)
         M=coordinates_in_columns(Q,mm(pos["D"],Q)).astype(np.int64)
         N=coordinates_in_columns(Q,mm(pos["E"],Q)).astype(np.int64)
         # Negative basis defined by L(C) of the positive basis. Its signed
@@ -121,17 +122,40 @@ def run(a):
         Fi=inverse(F)
         for g in ("C","D","E"):
             require(np.array_equal(mm(F,blocks[n][g]),mm(src[g],F)) and np.array_equal(mm(Fi,src[g]),mm(blocks[n][g],Fi)),"signed source map inverse")
+    # Preserve the actual positive 90D chart, not just the 12/78 block
+    # matrices. X maps ordinary positive coordinates into the original
+    # echelon vacuum basis. Its first columns give literal seed recipes.
+    X={n:mm(eig[n],inverse(F[:n,:n])) for n,F in ((12,F12),(78,F78))}
+    X90=np.column_stack((X[12],X[78]));Y90=inverse(X90)
+    require(np.array_equal(mm(X90,Y90),I) and np.array_equal(mm(Y90,X90),I),"full positive vacuum coordinate inverse")
+    for n,src,sgn in ((12,A12,-1),(78,A78,1)):
+        for g in ("D","E"):
+            require(np.array_equal(mm(pos[g],X[n]),mm(X[n],src[g][:n,:n])),"ambient positive seed transport")
+        require(np.array_equal(mm(J,X[n]),sgn*X[n]%P),"ambient positive seed sign")
+    generation=None
+    if a.generation:
+        r=read(a.generation);g=r.get("literal_attachment",{})
+        require(r.get("order_lower_bound")==H_ORDER//3 and g.get("status")=="LITERAL_COVER_GENERATION_ATTACHED" and g.get("manifest_sha256")==sha(a.manifest) and g.get("cover_sha256")==sha(a.cover),"literal generation receipt mismatch")
+        generation={"path":str(a.generation),"sha256":sha(a.generation),"status":g["status"]}
     require(H_ORDER%31!=0,"not a good prime")
     a.outdir.mkdir(parents=True,exist_ok=True)
     packet=a.outdir/"positive_reynolds_mod31.npz"
     np.savez_compressed(packet,actual_to_source12=F12,actual_to_source78=F78,
                         source_to_actual12=inverse(F12),source_to_actual78=inverse(F78),
+                        positive_eig12=eig[12],positive_eig78=eig[78],
+                        positive_ordinary_to_vacuum=X90,positive_vacuum_to_ordinary=Y90,
+                        positive_seed12=X[12][:,0],positive_seed78=X[78][:,0],
+                        positive_D=pos["D"],positive_E=pos["E"],positive_J=J,
                         **{g+str(n):M for n,ops in blocks.items() for g,M in ops.items()})
     return {"status":"ACTUAL_POSITIVE_MOD31_SIGNED_REYNOLDS_PREMISE",
             "mmgroup_version":version("mmgroup"),"source_phase":q,"pairing_F3":pairing,
             "source_hashes":{str(p):sha(p) for p in (a.manifest,a.cover,a.model,a.source,ambient,a.plus/"mmv31_hom_status.json")},
             "direct_positive_columns":270,"signed_negative_derived_not_measured":True,
             "orbit_receipts":orbit,"packet_sha256":sha(packet),"cover_order":H_ORDER,"prime":31,
+            "literal_generation_receipt":generation,
+            "positive_echelon_seed_coordinates":{str(n):X[n][:,0].tolist() for n in (12,78)},
+            "seed_expression":"y_n = Q_L P_n P_B P_+ sum_i lift(seed_n[i]) lift(original_echelon_row_i); Q_L is the exact single-residual projector from the source recipe, never a lift of its modular coefficients",
+            "coordinate_expression":"F_+=[L(w_i)y_n] B^-1; F_-=L(C) F_+ A(C)^-1; inverse by source dual orbit recovery",
             "char0_existence_conditional_on_original_honest_action_and_integral_lattices":True,
             "actual_char0_numeric_matrices":False,"full_cover_authentication_and_kernel_acceptance_separate":True}
 
@@ -139,6 +163,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for n in ("manifest","cover","model","plus","outdir"):p.add_argument("--"+n,type=Path,required=True)
     p.add_argument("--source",type=Path,default=Path(__file__).resolve().parents[1]/"Docs/support/reference/Monster3BLindseyOrdinaryCD20261124.json")
+    p.add_argument("--generation",type=Path,help="optional independently replayed literal generation receipt")
     a=p.parse_args();a.outdir.mkdir(parents=True,exist_ok=True)
     try:r=run(a)
     except Exception as e:r={"status":"BLOCKED_OR_SOURCE_RESIDUAL","error":repr(e)}
