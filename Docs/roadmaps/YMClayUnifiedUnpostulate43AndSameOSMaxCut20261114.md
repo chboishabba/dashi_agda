@@ -1,5 +1,17 @@
 # DASHI Yang–Mills: reconciled maximum cut, exact lemmas and trust boundary
 
+## 25 November 2026 — P0 continuous A2 reality check and source reverse-solve
+
+**Current authoritative master** `19a63b8c9d4de92f6c28fbba4077b2237948a6c5`. New `YMClayOriginalWilsonContinuousA2BridgeExact` provides checked **conditional** `ν`, `μMinusν`, `covarianceGapBound : ≤4 μχ` and `contourMassBound : μχ≤Σ_γ Eμ∏_p b_p`; the local Agda/SymPy passes are reported by the original implementer, not rerun by this audit. They do NOT supply the actual compact SU(N) Haar source, physical contour measure, CMP116 comparison, any ultraviolet rate or same-H endpoint.
+
+**Urgent source flaw:** `ContinuousClampSource.clampZeroBelow` and `clampOneAbove` quantify their thresholds universally and hence, at `threshold=value`, force simultaneously `clamp value=0ℝ` and `clamp value=1ℝ`; no consistent real inhabitant. Fix by selecting two fixed ordered thresholds and constructing the real continuous clamp. `ContinuousWilsonSourceContract.deficitLeOne` is false for the unscaled SU2 Wilson plaquette deficit (value 2 at `U_p=-I`); half-normalize and prove the source trace scaling. `ContinuousWilsonArithmetic` still has conditional midpoint/mean-bound/order fields; `ContinuousExpectationAlgebra` is an input, not a literal native Wilson instance; `qLessOne` only consumes `0<goodMass`. Physical strict good-mass proof needs original all-identity Haar neighborhood. Validate the actual continuous integrable test algebra and named compact-Haar facts rather than assuming an unconstrained all-functions integral.
+
+**Precise next P0 math:** (R1) repair and source-inhabit A2 cutoff/integration/positive good mass; (R2) prove actual connecting contour family and that it captures original **connected** bad remainders, with physical time/scale and signed/zero modes; (R3) derive source fixed-contour product expectation bound and entropy-correct physical `sup_(a,L) μχ≤C_bad e^(−m_bad R)`; (R4) identify literal historical CMP119/122 Eq.(1.71) T including `sourceStepIsEquation171Mass` and original F19 1/F/G/FG; (R5) prove actual good-conditioned original marked covariance versus CMP116 response difference `≤C_match e^(−m_match R)` and small-field `≤C_small e^(−m_small R)`; (R6) feed existing `OriginalSmallLargePhysicalSource.originalFullCovarianceBelowSmallPlusLarge` and `originalFullWilsonUniformGeometricClustering`. **No new D1/R320 compiler is necessary.**
+
+This is a chosen GOOD/BAD sufficient route, not the only possible solution; direct original full-Gibbs decay could bypass R445/absolute W3. E1 real original nontrivial continuum, all-word OS, D2 same-H dense spectral rate, N1 noncollapse, G1 per-group estimates remain OPEN. See top of `Docs/roadmaps/ClayYMProofRoadmap.md` for full forward/reverse geometric lemma owners and exact source receipts. Clay flags remain false; no source physical payment or Agda global trust certification claimed.
+
+
+
 **14 November 2026.** Source-only handoff. Four physical research packages (Round87), six analytic families (Round84), seven named duties (Round83), 43 residual source/semantic slots (Round518), and five C-sector source packages (Round527) are **different projections of one research dependency graph**, not additive completion counters.
 
 ## Acceptance and latest concrete changes
