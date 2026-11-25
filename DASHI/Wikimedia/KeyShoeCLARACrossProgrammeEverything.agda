@@ -24,3 +24,5 @@ import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact
 import DASHI.Wikimedia.ShemSourcePairPredictionObstructionExact
 
 import DASHI.Wikimedia.ShemCandidateGateBidiExact
+
+import DASHI.Wikimedia.ShemNonlocalHolonomyExact
