@@ -62,6 +62,19 @@ for omega in (.5,1.,2.):
     # Exact zero-mode charge relation for all independent port columns.
     assert np.max(abs(s*(G.T@(M@e))-G.T@B))<1e-10
     rows.append(dict(omega=omega,min_hermitian_eigenvalue=float(lam),max_work_error=float(np.max(abs(work-loss))),max_port_error=float(max(err)),max_residual_bound=float(max(bound))))
+# Exact gradient-pole rank: disjoint vertex trace supports, connected port graph.
+assert zero(Q[0]@Q[0].T-diags(np.full(6,27,dtype=np.int64),dtype=np.int64))
+assert np.linalg.matrix_rank(Gp)==5 and np.linalg.matrix_rank(Dp)==2
+# Contractible cubical exterior: ker curl is the gradient space. Remove one gauge vertex.
+Gr=G[:,1:]; J=T@Gr; Lg=Gr.T@M@Gr
+Rdc=J@splu(Lg.tocsc()).solve(J.T.toarray())
+assert np.linalg.matrix_rank(Rdc,tol=1e-10)==5
+assert np.max(abs(Rdc@Dp.T))<1e-10
+poles=[]
+for sigma in (.01,.001):
+    zd=T@splu((sigma*M+C.T@N@C/sigma).tocsc()).solve(B)
+    poles.append(float(np.linalg.norm(sigma*zd-Rdc,2)))
+assert poles[1]<poles[0]
 # Zero initial data and no input cannot create a field; gradient mode retained.
 assert zero(C@G)
-print(json.dumps(dict(status='CONDITIONAL_DISTRIBUTED_SEVEN_EDGE_PORT',fine_edges=M.shape[0],fine_faces=N.shape[0],translated_copies=27,port_rank=7,rows=rows,physical_admission=False),indent=2))
+print(json.dumps(dict(status='CONDITIONAL_DISTRIBUTED_SEVEN_EDGE_PORT',fine_edges=M.shape[0],fine_faces=N.shape[0],translated_copies=27,port_rank=7,dc_pole_rank=5,dc_cycle_nullity=2,dc_residue_errors=poles,rows=rows,physical_admission=False),indent=2))
