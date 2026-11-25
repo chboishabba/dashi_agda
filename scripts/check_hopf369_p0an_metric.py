@@ -45,8 +45,8 @@ def sample(pts,eps):
 def assemble(rows,cols,data,n):
     return coo_matrix((data.ravel(),(rows.ravel(),cols.ravel())),shape=(n,n)).tocsr()
 
-def run(N,M,eps):
-    B=.36; ds=np.array([2*B/N]*3+[L/M]); vol=np.prod(ds)/16
+def run(N,M,eps,B=.36):
+    ds=np.array([2*B/N]*3+[L/M]); vol=np.prod(ds)/16
     cells=np.array(list(product(range(N),range(N),range(N),range(M))))
     offs=np.array(list(product((0,1),repeat=4))); xi=np.array(list(product((-1/np.sqrt(3),1/np.sqrt(3)),repeat=4)))
     nshape=(N+1,N+1,N+1,M); n=np.prod(nshape)
@@ -85,7 +85,14 @@ def run(N,M,eps):
     else:raise AssertionError('Newton nonconvergence')
     assert np.min(u)>0 and err<2e-11
     if eps==0:assert np.max(abs(u-1))<1e-10
-    print(dict(N=N,M=M,eps=eps,iterations=it,weak_residual=err,umin=u.min(),umax=u.max(),max_correction=np.max(abs(u-1)),R_min=R.min(),R_max=R.max()),flush=True)
+    # One-sided Q1 derivative jump in the physical seed normal. Tangential
+    # derivatives coincide on the periodic seam, so cancel in the jump.
+    U=u.reshape(nshape); jdy=((U[:,:,:,1]-2*U[:,:,:,0]+U[:,:,:,-1])/ds[3]).ravel()
+    face3=np.ravel_multi_index(np.unravel_index(fids,nshape)[:3],nshape[:3])
+    jump=(jdy[face3]@fP.T)*np.sqrt(np.linalg.inv(np.asarray(fm))[:,3,3]).reshape(-1,8)
+    f=u[fids]@fP.T; target=kt/3*(f-f*f)
+    rms=lambda a:np.sqrt(np.sum(fw*a*a)/np.sum(fw))
+    print(dict(B=B,trace_rms=rms(jump-target),trace_target_rms=rms(target),center=float(U[N//2,N//2,N//2,0]),N=N,M=M,eps=eps,iterations=it,weak_residual=err,umin=u.min(),umax=u.max(),max_correction=np.max(abs(u-1)),R_min=R.min(),R_max=R.max()),flush=True)
     return u.reshape(nshape)
 
 if __name__=='__main__':
