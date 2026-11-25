@@ -263,6 +263,46 @@ sumℝ (x ∷ xs) = x +ℝ sumℝ xs
 Range01 : ℝ → Set
 Range01 value = (0ℝ ≤ℝ value) × (value ≤ℝ 1ℝ)
 
+
+------------------------------------------------------------------------
+-- Concrete soft curvature cut: divide the TRUE raw Wilson deficit by
+-- two. This does not assume an arbitrary clamp, and the unit range is
+-- a theorem from the physical [0,2] deficit bound.  It is a legitimate
+-- continuous polynomial source observation once genuine matrix trace,
+-- scalar division and compact Haar semantics are supplied; it is NOT
+-- an indicator of a high-curvature event or a CMP116 source match.
+------------------------------------------------------------------------
+
+halfNormalizedDeficit :
+  ∀ {Converges : (Nat → ℝ) → ℝ → Set}
+    (quotient : Quotient.RealQuotientConvergenceAuthority Converges)
+    (source : ContinuousWilsonSourceContract) →
+    ContinuousWilsonSourceContract.PlaquetteIndex source →
+    ContinuousWilsonSourceContract.Configuration source → ℝ
+halfNormalizedDeficit quotient source p links =
+  Quotient.divide quotient
+    (ContinuousWilsonSourceContract.deficit source p links)
+    (1ℝ +ℝ 1ℝ)
+
+halfNormalizedDeficitRange :
+  ∀ {Converges : (Nat → ℝ) → ℝ → Set}
+    (quotient : Quotient.RealQuotientConvergenceAuthority Converges)
+    (arithmetic : ContinuousWilsonArithmetic quotient)
+    (source : ContinuousWilsonSourceContract)
+    (p : ContinuousWilsonSourceContract.PlaquetteIndex source)
+    (links : ContinuousWilsonSourceContract.Configuration source) →
+    Range01 (halfNormalizedDeficit quotient source p links)
+halfNormalizedDeficitRange quotient arithmetic source p links =
+  ContinuousWilsonArithmetic.halfNonnegative arithmetic
+    (ContinuousWilsonSourceContract.deficit source p links)
+    (ContinuousWilsonSourceContract.deficitNonnegative source p links) ,
+  ContinuousWilsonArithmetic.halfLeOneOfUnit arithmetic
+    (ContinuousWilsonSourceContract.deficit source p links)
+    (ContinuousWilsonSourceContract.deficitNonnegative source p links)
+    (ContinuousWilsonSourceContract.deficitLeTwo source p links)
+
+
+
 module _
     {Converges : (Nat → ℝ) → ℝ → Set}
     (quotient : Quotient.RealQuotientConvergenceAuthority Converges)
