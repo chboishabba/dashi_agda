@@ -70,24 +70,19 @@ def orbit(ops):
         "initial_wheel_rank":initial,"max_macro_word_length":max(map(len,words))}
 
 def solve(source,target):
-    n=len(source["D"])
-    B,words,receipt=orbit(source);Binv=inverse(B)
-    G,_=wheel(target,n);ops={**target,"G":G}
-    Wt=np.stack([word(ops,w) for w in words])
-    # Unknown only the image y of the first source vector, not n*n
-    # entries of an intertwiner.  Generator closure is exhaustive.
-    rows=[]
-    for g in ("D","E"):
-        M=mm(Binv,mm(source[g],B))
-        for i in range(n):
-            rows.append((mm(target[g],Wt[i])-np.tensordot(M[:,i],Wt,axes=1))%P)
-    y=singleton_nullspace(np.concatenate(rows,axis=0))
-    require(y is not None,"cyclic Hom seed nullity not one")
-    F=mm(np.column_stack([T@y%P for T in Wt]),Binv)
+    # Local import: the single-residual compiler reuses our source orbit.
+    from monster3b_single_residual_frame import source_frame, target_frame
+    n=len(source["D"]); B,words,receipt=orbit(source)
+    rec=source_frame(source)
+    require(rec["words"]==words,"source orbit discrepancy")
+    Q,Ts,Us,T,Ti=target_frame(target,rec)
+    F=mm(T,inverse(B))
     inverse(F)
     require(all(eq(mm(F,source[g]),mm(target[g],F)) for g in ("D","E")),
             "source cyclic Hom generator equation")
-    receipt.update(seed_unknowns=n,seed_nullity=1,words=words)
+    receipt.update(seed_unknowns=n,seed_nullity=1,words=words,
+                   single_residual_index=rec["index"],single_residual_p0_mod31=rec["p0"],
+                   dual_pairing_rank=n,source_polynomial_degree=n-1)
     return F,receipt
 
 def direct_signed_compare(A,H,data):
