@@ -1,0 +1,191 @@
+{
+  "status": "PUBLISHED_SUMMARY_AND_CONDITIONAL_SPECTRAL_ADMISSION",
+  "source_head": "20c4140d425ed7daf4bdc4e48c357100a509d2a2",
+  "checker_blob": "3fd8dc6a93bafcdbebae9b570713f9c9f2e6e164",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "observation_fixtures": 4,
+    "endpoint_witnesses": 8
+  },
+  "donors": [
+    "291933beaaf7995fb56fe5fc9a03de396ab80822",
+    "97d67fa9e4af6f61835f766fbe89994a922c48cc",
+    "06d683bd2dfd24d4ad9de0620ef3718001fdbe36",
+    "1f3ee2625ede999147386b8f94e9078d29c94e65"
+  ],
+  "sources": {
+    "Hazendonk": {
+      "doi": "10.1029/2024JA032633",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024JA032633",
+      "scope": "Published Table 1 and sections 5.1,6; multi-instrument derived dissipation, not measured ground deliverable work",
+      "event": "2017-12-18 03:15–05:30 UTC",
+      "frequency_mHz": [
+        3.3,
+        4.4
+      ],
+      "dominant_ground_mHz": 3.9,
+      "region_magnetic_degrees": [
+        68,
+        72,
+        83,
+        157
+      ],
+      "duration_s": 8100,
+      "joule_J": 12400000000000,
+      "friction_J": 7300000000000,
+      "ionization_J": 8700000000000,
+      "mean_dissipation_W": [
+        1530864197.5308642,
+        901234567.9012346,
+        1074074074.074074
+      ],
+      "mean_EM_W": 2432098765.432099,
+      "mean_total_W": 3506172839.5061727,
+      "driver": "likely Kelvin–Helmholtz, not complete causal attribution",
+      "raw_data": [
+        "https://madrigal.eiscat.se",
+        "https://portal.eiscat.se/",
+        "https://space.fmi.fi/image/",
+        "https://supermag.jhuapl.edu/",
+        "https://omniweb.gsfc.nasa.gov/ftpbrowser/dscovr_merged.html"
+      ]
+    },
+    "Lin": {
+      "doi": "10.1029/2025GL118532",
+      "dataset": "10.5281/zenodo.16424673",
+      "url": "https://zenodo.org/records/16424673",
+      "scope": "published model and diagnostic metadata only, no NetCDF replay"
+    },
+    "AusLAMP": {
+      "doi": "10.26186/150000",
+      "version": "1.0.1",
+      "authors": "P. Maher; Janelle Kerr; D. Brown; Adrian Hitchman; Wenping Jiang; R. Hassan",
+      "license": "CC-BY-4.0",
+      "url": "https://ausmt.auscope.org.au/surveys/auslamp-qld-phase-3",
+      "station_metadata": "https://ausmt.auscope.org.au/data/products/auslamp-qld-phase-3/OCCF35/station.json",
+      "station": "OCCF35",
+      "coords": [
+        -25.001103,
+        139.499542
+      ],
+      "periods": 38,
+      "period_range_s": [
+        10,
+        50200.047188
+      ],
+      "survey_period_range_s": [
+        5.3,
+        64000
+      ],
+      "sites": 41,
+      "sample_Hz": 1,
+      "EDI_bundle": "https://ausmt.auscope.org.au/data/bundles/auslamp-qld-phase-3-edi.zip",
+      "bundle_declared_sha256": "26020ec6a1db00359a8703fad30219e6e2e9b20e8b87e968633576525b4fab49",
+      "station_declared_sha256": "871c8c4f15f0c78ae2e6d3c759d3f3e9908ad3dc53709cf812d20a41e92e5474",
+      "frame": "source EMEAS electric azimuths absent; sign convention '+' library default not source asserted; magnetic azimuths 0,90; frame served declared-zero, not derotated",
+      "scope": "metadata only, not local Brisbane field, raw time series on request"
+    },
+    "Portishead": {
+      "doi": "10.3390/atmos13010038",
+      "scope": "detector sensitivity scales, not joint measured autospectra",
+      "E_ASD_V_m_sqrtHz": [
+        0.0001,
+        0.0002
+      ],
+      "B_ASD_T_sqrtHz": [
+        5e-13,
+        1e-12
+      ],
+      "conditional_cross_bound_W_m2_Hz": 1.5915494309189532e-10
+    }
+  },
+  "acquisition": {
+    "status": "BLOCKED_RAW_DATA",
+    "container_curl": "DNS failure for ausmt.auscope.org.au, zenodo.org, spdf.gsfc.nasa.gov",
+    "web": "ZIP unsupported, station EDI/XML and INTERMAGNET HAPI endpoint unavailable; station JSON and published studies readable",
+    "hashes": "declared only, no binary checksum verified"
+  },
+  "coverage": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83,
+      7800
+    ],
+    "AusLAMP": [
+      true,
+      true,
+      false,
+      false,
+      false
+    ],
+    "minute_Nyquist": [
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "second_Nyquist": [
+      true,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "rows": [
+    {
+      "f": 0.005,
+      "source": 0,
+      "rank": 2,
+      "nullity": 46,
+      "min_incident_norm_sq": 0.13556449872323917,
+      "lower": 4.139656998139066e-16,
+      "upper": 4.139666661427198e-16,
+      "actual": 4.139661837444908e-16,
+      "unseen_output_radius": 1.18736024912149e-14
+    },
+    {
+      "f": 0.005,
+      "source": 4,
+      "rank": 2,
+      "nullity": 46,
+      "min_incident_norm_sq": 0.015036559864217185,
+      "lower": 2.311001001784454e-18,
+      "upper": 2.3110780725978452e-18,
+      "actual": 2.3110397423161783e-18,
+      "unseen_output_radius": 1.2674366562355803e-14
+    },
+    {
+      "f": 7.83,
+      "source": 0,
+      "rank": 2,
+      "nullity": 46,
+      "min_incident_norm_sq": 0.0954386747727528,
+      "lower": 1.1013058735477314e-14,
+      "upper": 1.1013081577913751e-14,
+      "actual": 1.1013070164799873e-14,
+      "unseen_output_radius": 5.4416202507954207e-14
+    },
+    {
+      "f": 7.83,
+      "source": 4,
+      "rank": 2,
+      "nullity": 46,
+      "min_incident_norm_sq": 0.09385832643749403,
+      "lower": 1.1017833775419816e-14,
+      "upper": 1.1017856642757223e-14,
+      "actual": 1.101784526518849e-14,
+      "unseen_output_radius": 5.4463716714306427e-14
+    }
+  ],
+  "limits": "Source event totals are dissipation sinks, not ground source cap or device energy. Cross PSD bound conditional on assumed co-located matching ASD scales, no measured flux. Finite 48-mode observer inverse synthetic unit incident norm, assumed normalized port and point tangent observer, no actual observations or physical calibration. No angular convergence, kernel or physical extraction claim. Classical Cauchy-Schwarz, SVD, spectral covariance and original scientific authors retain attribution; DASHI source-specific inverse and original donor; user original hypothesis separate from Filsinger/Smith; no new JMD donor."
+}
