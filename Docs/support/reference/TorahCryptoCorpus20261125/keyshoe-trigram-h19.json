@@ -1,0 +1,1294 @@
+{
+  "geometry": {
+    "template": [
+      2,
+      6,
+      13
+    ],
+    "ratios": [
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        2,
+        1,
+        1
+      ]
+    ],
+    "facts": {
+      "ordered": {
+        "triples": 52,
+        "roles": [
+          {
+            "pairs": 52,
+            "histogram": {
+              "1": 52
+            }
+          },
+          {
+            "pairs": 52,
+            "histogram": {
+              "1": 52
+            }
+          },
+          {
+            "pairs": 52,
+            "histogram": {
+              "1": 52
+            }
+          }
+        ]
+      },
+      "unordered": {
+        "triples": 312,
+        "roles": [
+          {
+            "pairs": 156,
+            "histogram": {
+              "2": 156
+            }
+          },
+          {
+            "pairs": 156,
+            "histogram": {
+              "2": 156
+            }
+          },
+          {
+            "pairs": 156,
+            "histogram": {
+              "2": 156
+            }
+          }
+        ]
+      },
+      "affine": {
+        "triples": 1404,
+        "roles": [
+          {
+            "pairs": 702,
+            "histogram": {
+              "2": 702
+            }
+          },
+          {
+            "pairs": 702,
+            "histogram": {
+              "2": 702
+            }
+          },
+          {
+            "pairs": 702,
+            "histogram": {
+              "2": 702
+            }
+          }
+        ]
+      }
+    }
+  },
+  "charts": {
+    "gematria": {
+      "alphabet": "אצךבעםגפתדלףהיץוכןזסרחמשטנק",
+      "train": {
+        "n": 4505,
+        "models": {
+          "unigram": {
+            "bits": 18992.275666416586,
+            "hits": 496,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.2158214575841475
+          },
+          "pair": {
+            "bits": 15891.417086013536,
+            "hits": 1000,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 3.527506567372594
+          },
+          "ordered": {
+            "bits": 19020.028082142926,
+            "hits": 463,
+            "eligible": 338,
+            "relationHits": 10,
+            "eligibleBaselineMass": 6.7541197585250465,
+            "bitsPerLetter": 4.221981816235943
+          },
+          "unordered": {
+            "bits": 19041.7560263021,
+            "hits": 494,
+            "eligible": 789,
+            "relationHits": 52,
+            "eligibleBaselineMass": 42.436939141785025,
+            "bitsPerLetter": 4.226804889301243
+          },
+          "affine": {
+            "bits": 19272.483881972894,
+            "hits": 447,
+            "eligible": 4205,
+            "relationHits": 320,
+            "eligibleBaselineMass": 299.33801055093295,
+            "bitsPerLetter": 4.278020839505637
+          }
+        }
+      },
+      "shem": {
+        "n": 53,
+        "models": {
+          "unigram": {
+            "bits": 218.12596878315998,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.115584316663396
+          },
+          "pair": {
+            "bits": 230.5197639984005,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.349429509403783
+          },
+          "ordered": {
+            "bits": 218.73398115694016,
+            "hits": 7,
+            "eligible": 4,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.03801598955783978,
+            "bitsPerLetter": 4.127056248244154
+          },
+          "unordered": {
+            "bits": 218.96047934820484,
+            "hits": 8,
+            "eligible": 11,
+            "relationHits": 1,
+            "eligibleBaselineMass": 0.6051014303584055,
+            "bitsPerLetter": 4.1313297990227325
+          },
+          "affine": {
+            "bits": 221.14576861199373,
+            "hits": 7,
+            "eligible": 48,
+            "relationHits": 4,
+            "eligibleBaselineMass": 3.1877413389895035,
+            "bitsPerLetter": 4.17256167192441
+          }
+        }
+      },
+      "shemShift": {
+        "n": 53,
+        "models": {
+          "unigram": {
+            "bits": 217.66957165005752,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.106973050001085
+          },
+          "pair": {
+            "bits": 241.8874620626037,
+            "hits": 4,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.5639143785396925
+          },
+          "ordered": {
+            "bits": 218.2775840238377,
+            "hits": 8,
+            "eligible": 4,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.03801598955783978,
+            "bitsPerLetter": 4.118444981581844
+          },
+          "unordered": {
+            "bits": 219.34160567795303,
+            "hits": 8,
+            "eligible": 11,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.6051014303584055,
+            "bitsPerLetter": 4.13852086184817
+          },
+          "affine": {
+            "bits": 224.31812403151687,
+            "hits": 5,
+            "eligible": 48,
+            "relationHits": 1,
+            "eligibleBaselineMass": 3.1877413389895035,
+            "bitsPerLetter": 4.232417434556922
+          }
+        }
+      },
+      "books": {
+        "exodus": {
+          "aligned": {
+            "n": 9275,
+            "models": {
+              "unigram": {
+                "bits": 39609.991048086056,
+                "hits": 910,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.27061898092572
+              },
+              "pair": {
+                "bits": 42063.24713096635,
+                "hits": 802,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.535120984470765
+              },
+              "ordered": {
+                "bits": 39674.72557017373,
+                "hits": 868,
+                "eligible": 616,
+                "relationHits": 17,
+                "eligibleBaselineMass": 14.965355958013808,
+                "bitsPerLetter": 4.277598444223583
+              },
+              "unordered": {
+                "bits": 39751.680208935766,
+                "hits": 893,
+                "eligible": 1685,
+                "relationHits": 87,
+                "eligibleBaselineMass": 98.11121988361322,
+                "bitsPerLetter": 4.285895440316525
+              },
+              "affine": {
+                "bits": 40219.180062405976,
+                "hits": 839,
+                "eligible": 8650,
+                "relationHits": 606,
+                "eligibleBaselineMass": 613.0222439767249,
+                "bitsPerLetter": 4.3362997371866285
+              }
+            }
+          },
+          "shifted": {
+            "n": 9275,
+            "models": {
+              "unigram": {
+                "bits": 39615.25345138195,
+                "hits": 905,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.271186355944145
+              },
+              "pair": {
+                "bits": 42225.83442653568,
+                "hits": 866,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.55265061202541
+              },
+              "ordered": {
+                "bits": 39662.56206639875,
+                "hits": 869,
+                "eligible": 616,
+                "relationHits": 22,
+                "eligibleBaselineMass": 14.965355958013808,
+                "bitsPerLetter": 4.276287015245148
+              },
+              "unordered": {
+                "bits": 39733.34886301539,
+                "hits": 878,
+                "eligible": 1685,
+                "relationHits": 100,
+                "eligibleBaselineMass": 98.11121988361322,
+                "bitsPerLetter": 4.283919014880365
+              },
+              "affine": {
+                "bits": 40244.48333057253,
+                "hits": 831,
+                "eligible": 8650,
+                "relationHits": 622,
+                "eligibleBaselineMass": 613.0222439767249,
+                "bitsPerLetter": 4.339027852352833
+              }
+            }
+          }
+        },
+        "genesis": {
+          "aligned": {
+            "n": 17914,
+            "models": {
+              "unigram": {
+                "bits": 75856.17791683356,
+                "hits": 2084,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.234463431775905
+              },
+              "pair": {
+                "bits": 80760.65995705489,
+                "hits": 1656,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.508242712797526
+              },
+              "ordered": {
+                "bits": 75970.32312529751,
+                "hits": 1971,
+                "eligible": 1235,
+                "relationHits": 35,
+                "eligibleBaselineMass": 26.030021210637877,
+                "bitsPerLetter": 4.24083527549947
+              },
+              "unordered": {
+                "bits": 76128.13445417323,
+                "hits": 2064,
+                "eligible": 3033,
+                "relationHits": 145,
+                "eligibleBaselineMass": 164.88926959264836,
+                "bitsPerLetter": 4.2496446608336065
+              },
+              "affine": {
+                "bits": 77059.78106299369,
+                "hits": 1825,
+                "eligible": 16714,
+                "relationHits": 1135,
+                "eligibleBaselineMass": 1167.268069831933,
+                "bitsPerLetter": 4.301651281846248
+              }
+            }
+          },
+          "shifted": {
+            "n": 17914,
+            "models": {
+              "unigram": {
+                "bits": 75904.17504084442,
+                "hits": 2077,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.237142739803752
+              },
+              "pair": {
+                "bits": 81116.207860622,
+                "hits": 1684,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.528090200994864
+              },
+              "ordered": {
+                "bits": 76027.88483693883,
+                "hits": 1972,
+                "eligible": 1235,
+                "relationHits": 27,
+                "eligibleBaselineMass": 26.030021210637877,
+                "bitsPerLetter": 4.244048500443164
+              },
+              "unordered": {
+                "bits": 76146.63777911424,
+                "hits": 2050,
+                "eligible": 3033,
+                "relationHits": 158,
+                "eligibleBaselineMass": 164.88926959264836,
+                "bitsPerLetter": 4.250677558284819
+              },
+              "affine": {
+                "bits": 77002.51419505346,
+                "hits": 1802,
+                "eligible": 16714,
+                "relationHits": 1210,
+                "eligibleBaselineMass": 1167.268069831933,
+                "bitsPerLetter": 4.298454515744862
+              }
+            }
+          }
+        },
+        "leviticus": {
+          "aligned": {
+            "n": 10282,
+            "models": {
+              "unigram": {
+                "bits": 43949.3967283742,
+                "hits": 949,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.274401549151352
+              },
+              "pair": {
+                "bits": 46844.89460280394,
+                "hits": 936,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.556009978876088
+              },
+              "ordered": {
+                "bits": 44027.53278959656,
+                "hits": 898,
+                "eligible": 686,
+                "relationHits": 13,
+                "eligibleBaselineMass": 14.965301571762646,
+                "bitsPerLetter": 4.282000854852807
+              },
+              "unordered": {
+                "bits": 44100.352877743826,
+                "hits": 936,
+                "eligible": 1759,
+                "relationHits": 89,
+                "eligibleBaselineMass": 99.03040191439605,
+                "bitsPerLetter": 4.289083143137894
+              },
+              "affine": {
+                "bits": 44677.529910068275,
+                "hits": 896,
+                "eligible": 9573,
+                "relationHits": 634,
+                "eligibleBaselineMass": 677.4789797139301,
+                "bitsPerLetter": 4.345217847701641
+              }
+            }
+          },
+          "shifted": {
+            "n": 10282,
+            "models": {
+              "unigram": {
+                "bits": 43938.225078281146,
+                "hits": 944,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.2733150241471645
+              },
+              "pair": {
+                "bits": 46799.49227154343,
+                "hits": 908,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.551594268774891
+              },
+              "ordered": {
+                "bits": 44015.67722094649,
+                "hits": 903,
+                "eligible": 686,
+                "relationHits": 10,
+                "eligibleBaselineMass": 14.965301571762646,
+                "bitsPerLetter": 4.280847813746984
+              },
+              "unordered": {
+                "bits": 44087.981763844204,
+                "hits": 933,
+                "eligible": 1759,
+                "relationHits": 91,
+                "eligibleBaselineMass": 99.03040191439605,
+                "bitsPerLetter": 4.2878799614709395
+              },
+              "affine": {
+                "bits": 44587.313436491735,
+                "hits": 887,
+                "eligible": 9573,
+                "relationHits": 673,
+                "eligibleBaselineMass": 677.4789797139301,
+                "bitsPerLetter": 4.336443633193127
+              }
+            }
+          }
+        },
+        "numbers": {
+          "aligned": {
+            "n": 14787,
+            "models": {
+              "unigram": {
+                "bits": 63467.530845970905,
+                "hits": 1482,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.29211678136004
+              },
+              "pair": {
+                "bits": 67570.47349203363,
+                "hits": 1305,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.569586359101483
+              },
+              "ordered": {
+                "bits": 63572.39929327808,
+                "hits": 1380,
+                "eligible": 1042,
+                "relationHits": 23,
+                "eligibleBaselineMass": 23.378582694294824,
+                "bitsPerLetter": 4.299208716661803
+              },
+              "unordered": {
+                "bits": 63677.629855995154,
+                "hits": 1459,
+                "eligible": 2601,
+                "relationHits": 141,
+                "eligibleBaselineMass": 146.82868330885984,
+                "bitsPerLetter": 4.3063251407313965
+              },
+              "affine": {
+                "bits": 64378.06788624947,
+                "hits": 1385,
+                "eligible": 13820,
+                "relationHits": 995,
+                "eligibleBaselineMass": 982.4355250992462,
+                "bitsPerLetter": 4.353693642134948
+              }
+            }
+          },
+          "shifted": {
+            "n": 14787,
+            "models": {
+              "unigram": {
+                "bits": 63460.569706368355,
+                "hits": 1478,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.291646020583509
+              },
+              "pair": {
+                "bits": 67724.38603665069,
+                "hits": 1276,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.579994998082822
+              },
+              "ordered": {
+                "bits": 63568.83468600858,
+                "hits": 1396,
+                "eligible": 1042,
+                "relationHits": 23,
+                "eligibleBaselineMass": 23.378582694294824,
+                "bitsPerLetter": 4.298967653074226
+              },
+              "unordered": {
+                "bits": 63674.90786978995,
+                "hits": 1470,
+                "eligible": 2601,
+                "relationHits": 141,
+                "eligibleBaselineMass": 146.82868330885984,
+                "bitsPerLetter": 4.306141061052949
+              },
+              "affine": {
+                "bits": 64372.90351141268,
+                "hits": 1363,
+                "eligible": 13820,
+                "relationHits": 1004,
+                "eligibleBaselineMass": 982.4355250992462,
+                "bitsPerLetter": 4.353344391114674
+              }
+            }
+          }
+        },
+        "deuteronomy": {
+          "aligned": {
+            "n": 12614,
+            "models": {
+              "unigram": {
+                "bits": 53557.878973924875,
+                "hits": 1279,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.245907640235046
+              },
+              "pair": {
+                "bits": 57103.57831716961,
+                "hits": 1180,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.527000025144253
+              },
+              "ordered": {
+                "bits": 53635.83527787192,
+                "hits": 1213,
+                "eligible": 876,
+                "relationHits": 21,
+                "eligibleBaselineMass": 17.41485832381573,
+                "bitsPerLetter": 4.252087781661006
+              },
+              "unordered": {
+                "bits": 53708.333448787336,
+                "hits": 1268,
+                "eligible": 2219,
+                "relationHits": 131,
+                "eligibleBaselineMass": 123.8371131777887,
+                "bitsPerLetter": 4.257835218708367
+              },
+              "affine": {
+                "bits": 54326.080697939215,
+                "hits": 1165,
+                "eligible": 11788,
+                "relationHits": 846,
+                "eligibleBaselineMass": 829.97269810191,
+                "bitsPerLetter": 4.306808363559475
+              }
+            }
+          },
+          "shifted": {
+            "n": 12614,
+            "models": {
+              "unigram": {
+                "bits": 53554.90221684163,
+                "hits": 1280,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.245671651882165
+              },
+              "pair": {
+                "bits": 57102.07128496953,
+                "hits": 1122,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.526880552161846
+              },
+              "ordered": {
+                "bits": 53642.835019012164,
+                "hits": 1218,
+                "eligible": 876,
+                "relationHits": 21,
+                "eligibleBaselineMass": 17.41485832381573,
+                "bitsPerLetter": 4.2526427000960965
+              },
+              "unordered": {
+                "bits": 53719.6944864489,
+                "hits": 1253,
+                "eligible": 2219,
+                "relationHits": 128,
+                "eligibleBaselineMass": 123.8371131777887,
+                "bitsPerLetter": 4.25873588762081
+              },
+              "affine": {
+                "bits": 54427.32179696357,
+                "hits": 1132,
+                "eligible": 11788,
+                "relationHits": 801,
+                "eligibleBaselineMass": 829.97269810191,
+                "bitsPerLetter": 4.314834453540794
+              }
+            }
+          }
+        }
+      }
+    },
+    "ordinal": {
+      "alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
+      "train": {
+        "n": 4505,
+        "models": {
+          "unigram": {
+            "bits": 18992.275666416586,
+            "hits": 496,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.2158214575841475
+          },
+          "pair": {
+            "bits": 15891.41708601354,
+            "hits": 1000,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 3.527506567372595
+          },
+          "ordered": {
+            "bits": 19024.260402144933,
+            "hits": 461,
+            "eligible": 339,
+            "relationHits": 11,
+            "eligibleBaselineMass": 9.328873660738548,
+            "bitsPerLetter": 4.222921287934502
+          },
+          "unordered": {
+            "bits": 19048.758072482815,
+            "hits": 492,
+            "eligible": 791,
+            "relationHits": 60,
+            "eligibleBaselineMass": 54.53967477021829,
+            "bitsPerLetter": 4.228359172582201
+          },
+          "affine": {
+            "bits": 19255.954239713872,
+            "hits": 440,
+            "eligible": 4205,
+            "relationHits": 319,
+            "eligibleBaselineMass": 288.0635775276001,
+            "bitsPerLetter": 4.274351662533601
+          }
+        }
+      },
+      "shem": {
+        "n": 53,
+        "models": {
+          "unigram": {
+            "bits": 218.12596878315998,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.115584316663396
+          },
+          "pair": {
+            "bits": 230.5197639984005,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.349429509403783
+          },
+          "ordered": {
+            "bits": 218.8859842503852,
+            "hits": 6,
+            "eligible": 5,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.07510741284603253,
+            "bitsPerLetter": 4.129924231139343
+          },
+          "unordered": {
+            "bits": 218.9984036137074,
+            "hits": 7,
+            "eligible": 10,
+            "relationHits": 1,
+            "eligibleBaselineMass": 0.5586555718714309,
+            "bitsPerLetter": 4.132045351202026
+          },
+          "affine": {
+            "bits": 224.3648733166879,
+            "hits": 5,
+            "eligible": 48,
+            "relationHits": 1,
+            "eligibleBaselineMass": 3.0676564964376998,
+            "bitsPerLetter": 4.233299496541281
+          }
+        }
+      },
+      "shemShift": {
+        "n": 53,
+        "models": {
+          "unigram": {
+            "bits": 217.66957165005752,
+            "hits": 8,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.106973050001085
+          },
+          "pair": {
+            "bits": 241.8874620626037,
+            "hits": 4,
+            "eligible": 0,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0,
+            "bitsPerLetter": 4.5639143785396925
+          },
+          "ordered": {
+            "bits": 218.42958711728275,
+            "hits": 8,
+            "eligible": 5,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.07510741284603253,
+            "bitsPerLetter": 4.121312964477033
+          },
+          "unordered": {
+            "bits": 219.18960258450798,
+            "hits": 8,
+            "eligible": 10,
+            "relationHits": 0,
+            "eligibleBaselineMass": 0.5586555718714309,
+            "bitsPerLetter": 4.135652878952981
+          },
+          "affine": {
+            "bits": 224.2768297833277,
+            "hits": 6,
+            "eligible": 48,
+            "relationHits": 1,
+            "eligibleBaselineMass": 3.0676564964376998,
+            "bitsPerLetter": 4.231638297798636
+          }
+        }
+      },
+      "books": {
+        "exodus": {
+          "aligned": {
+            "n": 9275,
+            "models": {
+              "unigram": {
+                "bits": 39609.991048086056,
+                "hits": 910,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.27061898092572
+              },
+              "pair": {
+                "bits": 42063.24713096635,
+                "hits": 802,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.535120984470765
+              },
+              "ordered": {
+                "bits": 39672.4615828404,
+                "hits": 863,
+                "eligible": 683,
+                "relationHits": 22,
+                "eligibleBaselineMass": 18.320389405558217,
+                "bitsPerLetter": 4.277354348554221
+              },
+              "unordered": {
+                "bits": 39730.65099345339,
+                "hits": 896,
+                "eligible": 1738,
+                "relationHits": 122,
+                "eligibleBaselineMass": 118.35149834121917,
+                "bitsPerLetter": 4.2836281394558915
+              },
+              "affine": {
+                "bits": 40210.08982935048,
+                "hits": 868,
+                "eligible": 8650,
+                "relationHits": 615,
+                "eligibleBaselineMass": 597.9601348779016,
+                "bitsPerLetter": 4.335319658150995
+              }
+            }
+          },
+          "shifted": {
+            "n": 9275,
+            "models": {
+              "unigram": {
+                "bits": 39615.25345138195,
+                "hits": 905,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.271186355944145
+              },
+              "pair": {
+                "bits": 42225.83442653568,
+                "hits": 866,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.55265061202541
+              },
+              "ordered": {
+                "bits": 39686.060655737325,
+                "hits": 870,
+                "eligible": 683,
+                "relationHits": 21,
+                "eligibleBaselineMass": 18.320389405558217,
+                "bitsPerLetter": 4.278820555874645
+              },
+              "unordered": {
+                "bits": 39750.400726894775,
+                "hits": 882,
+                "eligible": 1738,
+                "relationHits": 110,
+                "eligibleBaselineMass": 118.35149834121917,
+                "bitsPerLetter": 4.285757490770326
+              },
+              "affine": {
+                "bits": 40290.404333164406,
+                "hits": 798,
+                "eligible": 8650,
+                "relationHits": 558,
+                "eligibleBaselineMass": 597.9601348779016,
+                "bitsPerLetter": 4.343978903845219
+              }
+            }
+          }
+        },
+        "genesis": {
+          "aligned": {
+            "n": 17914,
+            "models": {
+              "unigram": {
+                "bits": 75856.17791683356,
+                "hits": 2084,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.234463431775905
+              },
+              "pair": {
+                "bits": 80760.65995705486,
+                "hits": 1656,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.508242712797525
+              },
+              "ordered": {
+                "bits": 75982.8303121876,
+                "hits": 1979,
+                "eligible": 1288,
+                "relationHits": 38,
+                "eligibleBaselineMass": 35.717898515255136,
+                "bitsPerLetter": 4.241533454961907
+              },
+              "unordered": {
+                "bits": 76111.38083500435,
+                "hits": 2037,
+                "eligible": 3102,
+                "relationHits": 183,
+                "eligibleBaselineMass": 210.8879099363644,
+                "bitsPerLetter": 4.248709435916286
+              },
+              "affine": {
+                "bits": 77102.2761041345,
+                "hits": 1860,
+                "eligible": 16714,
+                "relationHits": 1119,
+                "eligibleBaselineMass": 1143.9588296078732,
+                "bitsPerLetter": 4.304023451163029
+              }
+            }
+          },
+          "shifted": {
+            "n": 17914,
+            "models": {
+              "unigram": {
+                "bits": 75904.17504084442,
+                "hits": 2077,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.237142739803752
+              },
+              "pair": {
+                "bits": 81116.20786062197,
+                "hits": 1684,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.528090200994863
+              },
+              "ordered": {
+                "bits": 76037.99994967588,
+                "hits": 1971,
+                "eligible": 1288,
+                "relationHits": 38,
+                "eligibleBaselineMass": 35.717898515255136,
+                "bitsPerLetter": 4.244613148915702
+              },
+              "unordered": {
+                "bits": 76139.01848583059,
+                "hits": 2014,
+                "eligible": 3102,
+                "relationHits": 209,
+                "eligibleBaselineMass": 210.8879099363644,
+                "bitsPerLetter": 4.250252232099508
+              },
+              "affine": {
+                "bits": 77087.54654451362,
+                "hits": 1836,
+                "eligible": 16714,
+                "relationHits": 1167,
+                "eligibleBaselineMass": 1143.9588296078732,
+                "bitsPerLetter": 4.3032012138279345
+              }
+            }
+          }
+        },
+        "leviticus": {
+          "aligned": {
+            "n": 10282,
+            "models": {
+              "unigram": {
+                "bits": 43949.3967283742,
+                "hits": 949,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.274401549151352
+              },
+              "pair": {
+                "bits": 46844.89460280394,
+                "hits": 936,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.556009978876088
+              },
+              "ordered": {
+                "bits": 44014.89045519254,
+                "hits": 908,
+                "eligible": 721,
+                "relationHits": 19,
+                "eligibleBaselineMass": 19.97422091695212,
+                "bitsPerLetter": 4.280771295000247
+              },
+              "unordered": {
+                "bits": 44082.10742471241,
+                "hits": 934,
+                "eligible": 1852,
+                "relationHits": 119,
+                "eligibleBaselineMass": 125.8510904443355,
+                "bitsPerLetter": 4.2873086388555155
+              },
+              "affine": {
+                "bits": 44655.938645993774,
+                "hits": 878,
+                "eligible": 9573,
+                "relationHits": 627,
+                "eligibleBaselineMass": 659.5521292217343,
+                "bitsPerLetter": 4.343117938727269
+              }
+            }
+          },
+          "shifted": {
+            "n": 10282,
+            "models": {
+              "unigram": {
+                "bits": 43938.225078281146,
+                "hits": 944,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.2733150241471645
+              },
+              "pair": {
+                "bits": 46799.49227154342,
+                "hits": 908,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.55159426877489
+              },
+              "ordered": {
+                "bits": 44017.09841114134,
+                "hits": 912,
+                "eligible": 721,
+                "relationHits": 15,
+                "eligibleBaselineMass": 19.97422091695212,
+                "bitsPerLetter": 4.280986034929133
+              },
+              "unordered": {
+                "bits": 44083.045087855244,
+                "hits": 930,
+                "eligible": 1852,
+                "relationHits": 114,
+                "eligibleBaselineMass": 125.8510904443355,
+                "bitsPerLetter": 4.28739983348135
+              },
+              "affine": {
+                "bits": 44578.48743344889,
+                "hits": 907,
+                "eligible": 9573,
+                "relationHits": 675,
+                "eligibleBaselineMass": 659.5521292217343,
+                "bitsPerLetter": 4.335585239588494
+              }
+            }
+          }
+        },
+        "numbers": {
+          "aligned": {
+            "n": 14787,
+            "models": {
+              "unigram": {
+                "bits": 63467.530845970905,
+                "hits": 1482,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.29211678136004
+              },
+              "pair": {
+                "bits": 67570.4734920336,
+                "hits": 1305,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.569586359101481
+              },
+              "ordered": {
+                "bits": 63569.48288653229,
+                "hits": 1383,
+                "eligible": 1125,
+                "relationHits": 29,
+                "eligibleBaselineMass": 27.647794637515435,
+                "bitsPerLetter": 4.29901148891136
+              },
+              "unordered": {
+                "bits": 63635.130955364504,
+                "hits": 1455,
+                "eligible": 2738,
+                "relationHits": 201,
+                "eligibleBaselineMass": 179.0093544351963,
+                "bitsPerLetter": 4.303451068868905
+              },
+              "affine": {
+                "bits": 64361.29751193901,
+                "hits": 1367,
+                "eligible": 13820,
+                "relationHits": 1005,
+                "eligibleBaselineMass": 957.3291999782514,
+                "bitsPerLetter": 4.352559512540679
+              }
+            }
+          },
+          "shifted": {
+            "n": 14787,
+            "models": {
+              "unigram": {
+                "bits": 63460.569706368355,
+                "hits": 1478,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.291646020583509
+              },
+              "pair": {
+                "bits": 67724.38603665069,
+                "hits": 1276,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.579994998082822
+              },
+              "ordered": {
+                "bits": 63566.687572650386,
+                "hits": 1385,
+                "eligible": 1125,
+                "relationHits": 32,
+                "eligibleBaselineMass": 27.647794637515435,
+                "bitsPerLetter": 4.298822450304347
+              },
+              "unordered": {
+                "bits": 63668.08816984146,
+                "hits": 1423,
+                "eligible": 2738,
+                "relationHits": 160,
+                "eligibleBaselineMass": 179.0093544351963,
+                "bitsPerLetter": 4.305679865411609
+              },
+              "affine": {
+                "bits": 64434.99209597535,
+                "hits": 1424,
+                "eligible": 13820,
+                "relationHits": 973,
+                "eligibleBaselineMass": 957.3291999782514,
+                "bitsPerLetter": 4.357543253937604
+              }
+            }
+          }
+        },
+        "deuteronomy": {
+          "aligned": {
+            "n": 12614,
+            "models": {
+              "unigram": {
+                "bits": 53557.878973924875,
+                "hits": 1279,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.245907640235046
+              },
+              "pair": {
+                "bits": 57103.57831716961,
+                "hits": 1180,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.527000025144253
+              },
+              "ordered": {
+                "bits": 53651.741925031194,
+                "hits": 1191,
+                "eligible": 962,
+                "relationHits": 25,
+                "eligibleBaselineMass": 27.29482786751496,
+                "bitsPerLetter": 4.253348812829491
+              },
+              "unordered": {
+                "bits": 53697.937030872046,
+                "hits": 1248,
+                "eligible": 2360,
+                "relationHits": 177,
+                "eligibleBaselineMass": 163.41654429760038,
+                "bitsPerLetter": 4.257011021949584
+              },
+              "affine": {
+                "bits": 54401.115495656675,
+                "hits": 1181,
+                "eligible": 11788,
+                "relationHits": 824,
+                "eligibleBaselineMass": 817.8233534562494,
+                "bitsPerLetter": 4.312756896754136
+              }
+            }
+          },
+          "shifted": {
+            "n": 12614,
+            "models": {
+              "unigram": {
+                "bits": 53554.90221684163,
+                "hits": 1280,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.245671651882165
+              },
+              "pair": {
+                "bits": 57102.07128496953,
+                "hits": 1122,
+                "eligible": 0,
+                "relationHits": 0,
+                "eligibleBaselineMass": 0,
+                "bitsPerLetter": 4.526880552161846
+              },
+              "ordered": {
+                "bits": 53639.02455795011,
+                "hits": 1215,
+                "eligible": 962,
+                "relationHits": 31,
+                "eligibleBaselineMass": 27.29482786751496,
+                "bitsPerLetter": 4.252340618198043
+              },
+              "unordered": {
+                "bits": 53719.87957905324,
+                "hits": 1254,
+                "eligible": 2360,
+                "relationHits": 159,
+                "eligibleBaselineMass": 163.41654429760038,
+                "bitsPerLetter": 4.258750561206059
+              },
+              "affine": {
+                "bits": 54354.36010087743,
+                "hits": 1189,
+                "eligible": 11788,
+                "relationHits": 852,
+                "eligibleBaselineMass": 817.8233534562494,
+                "bitsPerLetter": 4.309050269611339
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
