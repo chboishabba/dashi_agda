@@ -86,3 +86,21 @@ weightedLimit h j hh hj =
     (S.xₙ+yₙ→x₀+y₀
       (Norm.A * h , S.xₙyₙ→x₀y₀ (Norm.A , Series.constantSequenceConverges Norm.A) (h , hh))
       (Norm.B * j , S.xₙyₙ→x₀y₀ (Norm.B , Series.constantSequenceConverges Norm.B) (j , hj)))
+
+-- End-to-end conditional native consumer on the actual CM streams.
+-- Once the two original factorial Euler limits are identified at
+-- the CM real slice, no additional weighted-series lemma is needed.
+import DASHI.Foundations.BishopChudnovskyNativePeriodProductExact as End
+import DASHI.Foundations.BishopMachinArctanConstructionExact as M
+
+periodFromEulerCMRealSlice : (x y e h j : ℝ) → R.Positive x →
+  S._ConvergesTo_ (S.SeriesOf hTerm) h →
+  S._ConvergesTo_ (S.SeriesOf jTerm) j →
+  Norm.sq h ≃ x →
+  Norm.sq y ≃ (Norm.t * Norm.cube x) →
+  (Norm.six * y * j) ≃ (h * (R._-_ (e * x) y)) →
+  ((M.bishopMachinPi * Norm.r) * (R._-_ (Norm.B * x * e) (Norm.D * y))) ≃
+    (Norm.six * Norm.B * x) →
+  End.NativePeriod
+periodFromEulerCMRealSlice x y e h j px hh hj hf hy he hc =
+  Norm.periodFromCMRealSlice x y e h j px (weightedLimit h j hh hj) hf hy he hc
