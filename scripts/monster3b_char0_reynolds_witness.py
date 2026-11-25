@@ -13,6 +13,7 @@ import argparse, hashlib, json
 from pathlib import Path
 import numpy as np
 from monster3b_actual_projective_sym2_intertwiner import inverse
+from monster3b_singer_seed_projector import recipe
 
 P=31
 H_ORDER=5380145971200
@@ -82,7 +83,12 @@ def run(a):
                 X=B@inverse(F[j*n:(j+1)*n,j*n:(j+1)*n])%P
                 seed["basis_coordinates"][str(n)]=X.tolist()
         seeds[label]=seed
-    return {"status":"EXACT_CHAR0_REYNOLDS_EXPRESSION_FROM_ACTUAL_MOD31",
+    compact=recipe(read(a.source),phase["Q7_central_z_power"])
+    for n,r in compact.items():
+        recorded=canonical.get("source_C13_orbits",{}).get(n,{})
+        if recorded:
+            require(r["word_basis"]==recorded["words"],"cyclic source basis receipt mismatch")
+    return {"status":"EXACT_CHAR0_CYCLIC_EXPRESSION_FROM_ACTUAL_MOD31",
         "numeric_characteristic_zero_matrices_evaluated":False,
         "conditional_on_authenticated_Conway_lattice_and_full_cover":True,
         "field":"Q(zeta), zeta^2+zeta+1=0",
@@ -100,7 +106,10 @@ def run(a):
         "seeds":seeds,
         "seed_expression":"X_s = P_zeta^s P_B (lift(ambient_rows_s)^T lift(basis_coordinates_s))",
         "target_operator":"L(g) from original Conway rho(g) by the exact tensor evaluation and canonical 729 Weil inverse; preserve signed phase",
-        "intertwiner_expression":"F = (1/|H|) sum_(g in H) L(g) X A(g)^(-1), separately for signed 24 and 156",
+        "compact_seed_projectors":compact,
+        "intertwiner_expression":"Use compact_seed_projectors: apply the sector and good-prime polynomial projector to the lifted positive seed, reconstruct all source orbit columns and derive the negative phase by C; no group enumeration.",
+        "reynolds_existence_expression":"F = (1/|H|) sum_(g in H) L(g) X A(g)^(-1), separately for signed 24 and 156",
+        "compact_proof":"The actual modular isomorphism and integral hypotheses imply the characteristic-zero isomorphism by Reynolds. The source cyclic basis is invertible at the marked prime. R_hi kills e0 in the source; S_A and S_A^2 have rank n-1 modulo 31, hence also in char0, and p(0) is a local unit. Thus p(S_L)/p(0) projects onto the transported seed line. Sector projection and the polynomial preserve the certified modular seed; cyclic reconstruction and outer transport preserve the full certified modular intertwiner. No dense characteristic-zero evaluations are claimed.",
         "proof":"Reduction of X is the checked inverse modular transport. Every summand reduces to X since X intertwines on the generators and therefore H. |H| is a unit. F reduces to the invertible modular transport, so F is an actual characteristic-zero isomorphism; no entrywise rational lift of MMV operators is asserted."}
 def main():
     p=argparse.ArgumentParser(description=__doc__)
