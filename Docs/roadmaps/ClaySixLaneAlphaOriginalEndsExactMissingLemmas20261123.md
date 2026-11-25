@@ -1,5 +1,10 @@
 # Active Clay rollup — 24 November 2026
 
+## 25 November — actual rank-four cyclotomic vanishing / complex comparison (current BSD)
+
+[Source-pinned derivation and exact controls](ClayBSDRankFourCyclotomicJetComparison20261125.md). For actual 234446.a1, good ordinary p=5,11 with traces -4,-6 and #E=10,18; Frobenius at3 discriminant -3 nonsquare, inertia transvection at117223 (vDelta=1), determinant surjective imply GL2(F_p) image, hence full p-adic image. Stein–Wuthrich Thms 6.1,7.3,7.5 (Schneider/Perrin-Riou, Kato, Skinner–Urban) apply: actual four independent points force ord_T L_p>=4, equality of cyclotomic characteristic and analytic orders under main conjecture, not complex order. Euler multiplier v=2 at5 and 0 at11; preserve anomalous valuation, not exceptional zero. For integral scaled original finite level polynomial Q_m=p^c P_m, w_m=(1+T)^(p^m)-1, Q_m(0)=0 and coefficients j=1..3 divisible by p^m; actual binomial moment congruences, not evaluated. Reciprocal group-algebra R_m=X^(p^m)+X^(-p^m)-2 has eventual zero finite-character evaluations and p-adic jet limit zero but complex log-coordinate second derivative 2p^(2m); no naive cross-topology transport. Actual complex rank still {2,4}, arithmetic-to-Archimedean M1=0 remains. Reuse existing barycentre/Gram, Selmer, complex-order terminal; no new generic interfaces. Local normal/-O 481/481, blob e8fdee8ad89fe4b5030af9ded9849af45a172574; no actual modular-symbol values, regulator, native kernels or CI. No other-lane promotion.
+
+
 ## 25 November — existing barycentre / weighted Gram owners (controlling reuse)
 
 User correction: repo already has barycentre. Source bodies reread at #1551 parent 33d6a43ae8e3398acdeb168f24e1d2bcd30a5887:
