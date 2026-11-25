@@ -11,6 +11,8 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Foundations.SSPTritCarrier as S
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as C
+import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact as Field
+import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact as Laws
 
 Point : Set
 Point = C.Ternary27Point
@@ -66,3 +68,34 @@ contextRepairMustSeparate : {Context : Set} (context : SourceColumn → Context)
   context column2 ≡ context column44 → ⊥
 contextRepairMustSeparate context repaired same =
   Repair.refinementRepairSeparatesWitness sourceCollision repaired same
+
+
+-- H32: chart-independent affine F3-line obstruction.
+-- Actual source columns 4 and 23 (one-based): ayin-lamed-mem,
+-- mem-lamed-he. Reorder each unordered incidence triple to lamed,mem,third.
+-- These original glyph identifiers use the existing gematria point chart;
+-- the tested candidate chart may be ANY injective map on these identifiers.
+mem ayin : Point
+mem = C.ternary27Point S.sspPosOne S.sspPosOne S.sspNegOne
+ayin = C.ternary27Point S.sspPosOne S.sspPosOne S.sspZero
+
+ayinNotHe : ayin ≡ he → ⊥
+ayinNotHe ()
+
+affineSharedPairForcesThird : (a b c d : Point) →
+  Field.add (Field.add a b) c ≡ Field.add (Field.add a b) d →
+  c ≡ d
+affineSharedPairForcesThird a b c d same =
+  trans (sym (Laws.subAdd (Field.add a b) c))
+    (trans (cong (λ v → Field.sub v (Field.add a b)) same)
+      (Laws.subAdd (Field.add a b) d))
+
+sourceLineChartObstruction : (chart : Point → Point) →
+  (∀ {x y} → chart x ≡ chart y → x ≡ y) →
+  Field.add (Field.add (chart lamed) (chart mem)) (chart ayin) ≡ C.origin →
+  Field.add (Field.add (chart lamed) (chart mem)) (chart he) ≡ C.origin →
+  ⊥
+sourceLineChartObstruction chart injective line4 line23 =
+  ayinNotHe (injective
+    (affineSharedPairForcesThird (chart lamed) (chart mem)
+      (chart ayin) (chart he) (trans line4 (sym line23))))
