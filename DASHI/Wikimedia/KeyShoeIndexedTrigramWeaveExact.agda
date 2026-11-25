@@ -121,3 +121,31 @@ noObservationDescent : {Address Glyph : Set} →
   ((x : Address) → observe (move x) ≡ actor (observe x)) → ⊥
 noObservationDescent observe move p q same different actor square =
   different (trans (square p) (trans (cong actor same) (sym (square q))))
+
+
+-- The relation is indexed by the recovered canonical payload.
+-- This preserves any chosen predicate, but does not recognize source intent.
+transportPreservesCanonicalPredicate :
+  (P : Triple → Set) (m n : Mask) (x : Triple) →
+  P (decode m x) → P (decode n (encode n (decode m x)))
+transportPreservesCanonicalPredicate P m n x p =
+  subst P (sym (canonicalResidualTransport m n x)) p
+
+-- Minimality of the orbit-observation signature, pointwise (no funext).
+-- Any equivariant refinement that still exposes the original glyph
+-- must distinguish every pair distinguished by any translated observation.
+signatureMinimal :
+  {Index Address Glyph Refined : Set} →
+  (move : Index → Address → Address) (observe : Address → Glyph) →
+  (refine : Address → Refined) (readGlyph : Refined → Glyph) →
+  (act : Index → Refined → Refined) →
+  ((x : Address) → readGlyph (refine x) ≡ observe x) →
+  ((m : Index) (x : Address) → refine (move m x) ≡ act m (refine x)) →
+  (p q : Address) → refine p ≡ refine q →
+  (m : Index) → observe (move m p) ≡ observe (move m q)
+signatureMinimal move observe refine readGlyph act readLaw actLaw p q same m =
+  trans (sym (readLaw (move m p)))
+    (trans (cong readGlyph (actLaw m p))
+      (trans (cong (λ x → readGlyph (act m x)) same)
+        (trans (cong readGlyph (sym (actLaw m q)))
+          (readLaw (move m q)))))
