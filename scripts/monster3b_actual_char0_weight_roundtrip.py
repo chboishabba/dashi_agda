@@ -8,7 +8,8 @@ checkpoints keep native execution resumable; the zero phase is retained.
 import argparse, json
 from pathlib import Path
 import numpy as np
-from monster3b_actual_char0_vacuum import Checkpoint, Paused, atomic, scalar, coords, sha
+from monster3b_actual_char0_vacuum import Checkpoint, Paused, atomic, scalar, sha
+from monster3b_exact_weight_codec import OrdinaryCodec, coords
 from monster3b_conway_exact_crt import ConwayNative, add, scale, linear_combination, require, DIM
 from monster3b_char0_orbit_weld import K,Z,mat,col,columns,eye,serialize
 from monster3b_linear_weight_frame import WeightFrame
@@ -18,29 +19,6 @@ DONE="ACTUAL_CHAR0_FULL_WEIGHT_ROUNDTRIP"
 
 def read(p):return json.loads(p.read_text())
 def matrix(a):return mat([[scalar(x) for x in row] for row in a])
-
-class OrdinaryCodec:
-    """Linear exact vacuum coordinate change; original ambient carrier unchanged."""
-    def __init__(self,frame,pivots,minor_inverse,ordinary,reverse,basis,dimension):
-        self.frame,self.pivots,self.minor_inverse=frame,pivots,minor_inverse
-        self.ordinary,self.reverse,self.basis,self.dimension=ordinary,reverse,basis,dimension
-        for s in (1,2):
-            n=len(pivots[s]);I=eye(n)
-            require(ordinary[s]*reverse[s]==I and reverse[s]*ordinary[s]==I,"ordinary maps are not inverses")
-    def combine(self,s,x):
-        nz=[(c,i) for i,c in enumerate(x) if c]
-        return linear_combination((c for c,i in nz),(self.basis(s,i) for c,i in nz),self.dimension)
-    def encode_vacuum(self,s,u):
-        c=self.minor_inverse[s]*col(coords(u,self.pivots[s]))
-        require(self.combine(s,c.transpose().to_list()[0])==u,"exact vacuum closure discrepancy")
-        return (self.ordinary[s]*c).transpose().to_list()[0]
-    def decode_vacuum(self,s,x):
-        c=self.reverse[s]*col(x)
-        return self.combine(s,c.transpose().to_list()[0])
-    def encode(self,v,s,x):
-        return self.encode_vacuum(s,self.frame.recover_weight(v,s,x))
-    def decode(self,s,x,c):
-        return self.frame.translate(self.decode_vacuum(s,c),x)
 
 def run(a):
     from mmgroup import MM
@@ -80,7 +58,8 @@ def run(a):
                   "vacuum_receipt_sha256":sha(a.vacuum/"actual_char0_result.json"),
                   "source_identity":identity,"probe_indices":probes,
                   "probe_coefficients":list(range(1,len(probes)+1)),
-                  "chunk_size":a.chunk_size,"consumer_sha256":sha(Path(__file__))}
+                  "chunk_size":a.chunk_size,"consumer_sha256":sha(Path(__file__)),
+                  "codec_sha256":sha(scripts/"monster3b_exact_weight_codec.py")}
     ck=Checkpoint(a.outdir,run_identity,a.max_new)
     zero=ck.vector("phase-zero",lambda:F.phase(v,0))
     require(F.phase(zero,0)==zero,"zero phase recovery discrepancy")
