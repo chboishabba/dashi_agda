@@ -1,0 +1,305 @@
+{
+  "scope": "F8 endpoint-first geometric welds, exact local SymPy and actual finite receiver diagnostics; no CI or continuum promotion",
+  "base": "106f94529548b2a4358c662cdb7daba7245e78ef",
+  "ci": "No invocation/rerun; all commits [skip ci]",
+  "scripts": {
+    "bidi": {
+      "commit": "68449a869658002399a2c5e91f4ba570ccbd9244",
+      "blob": "59b89cbe13c5ba81717bcb32cbad483a9ed9fcbe"
+    },
+    "near": {
+      "commit": "03697a9edd26ef2623b751fdfbbf6cd45504531d",
+      "blob": "45d258775ac55b334efb7052d86b01c2b9a0f2f5"
+    },
+    "common": {
+      "commit": "7e6edd75216410041e1956a60320ad3f8a5ac28e",
+      "blob": "3f4e6f712a11a8ec9733c9fe6322174e7c06cdec"
+    },
+    "smooth": {
+      "commit": "c98df8f42c50bba59aa80548d6456526055b69a0",
+      "blob": "209b7f9bb688d8dca985aecd81ea4de755842664"
+    }
+  },
+  "compact_range": {
+    "basis_inverse_checks": 48,
+    "dimensions": [
+      3,
+      7,
+      11
+    ],
+    "input_support_lengths": [
+      1,
+      2,
+      5,
+      8
+    ],
+    "shell_moment_negative_controls": 12
+  },
+  "modal": {
+    "gradient_sha256": "7a4ae45d9fc4c6cee2e884b63c8c634b68aedee70b26be9051ab540cddff9f9a",
+    "finite_response": 0.000005594583482222263,
+    "modal_response": 0.000005594583482220142,
+    "modal_absolute": 0.021253807733004382,
+    "columns": [
+      "modes",
+      "omega_last",
+      "source_energy_fraction",
+      "signed_low",
+      "signed_tail",
+      "absolute_tail",
+      "cauchy_tail"
+    ],
+    "rows": [
+      [
+        8,
+        8.343329418693445,
+        5.524009458756345e-9,
+        5.964320424995756e-9,
+        0.000005588619161795268,
+        0.02125378703601509,
+        0.07057880259571245
+      ],
+      [
+        16,
+        16.681431086306112,
+        5.627110087023571e-7,
+        -6.821778503834337e-7,
+        0.000006276761332603689,
+        0.02125229852987604,
+        0.07054042715161982
+      ],
+      [
+        32,
+        33.32106117023185,
+        0.00005611969604733272,
+        -0.00003671314588968992,
+        0.00004230772937191031,
+        0.02119389344321941,
+        0.06985039318916766
+      ],
+      [
+        64,
+        66.30836399921492,
+        0.0037197073126278633,
+        -0.0004171855384885797,
+        0.0004227801219708001,
+        0.019895334977959096,
+        0.06436738290171516
+      ],
+      [
+        128,
+        129.96701476825976,
+        0.031305306003416716,
+        -0.00008940580915922532,
+        0.00009500039264144557,
+        0.014118633630272642,
+        0.043395804051564325
+      ],
+      [
+        256,
+        239.37142203010407,
+        0.19150455189284027,
+        0.00003766609118042176,
+        -0.00003207150769820141,
+        0.006640614650662408,
+        0.014027054371383508
+      ],
+      [
+        502,
+        420.54177964663234,
+        1,
+        0.000005594583482220142,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "minimal_moment_corrections": [
+    {
+      "name": "nodal",
+      "relative_change": 0.25509087329980534,
+      "far_e4": -1.9625329517972156e-8,
+      "nodal_m2": 2.367380798385042e-20,
+      "shell_m2": 6.30970304998253e-8
+    },
+    {
+      "name": "shell",
+      "relative_change": 0.25507407309278357,
+      "far_e4": -1.9208269303757865e-8,
+      "nodal_m2": -6.319979156467387e-8,
+      "shell_m2": 9.253405259177809e-19
+    },
+    {
+      "name": "both",
+      "relative_change": 0.25994335200874263,
+      "far_e4": -4.705560071492442e-8,
+      "nodal_m2": 4.6216983962746754e-17,
+      "shell_m2": -3.567639241558112e-17
+    },
+    {
+      "name": "shell_024",
+      "relative_change": 0.37272339068344823,
+      "far_e4": -6.207357316074539e-7,
+      "nodal_m2": 2.4494694986044984e-8,
+      "shell_m2": 1.887882999123536e-18
+    }
+  ],
+  "smooth_moment_lift": {
+    "basis": "exact in definition P_h(f u^(2j)); actual 96-point Gauss quadrature, not interval-certified",
+    "columns": [
+      "dr",
+      "nodal02_relative",
+      "shell02_relative",
+      "shell024_relative"
+    ],
+    "rows": [
+      [
+        0.008,
+        0.0708412100851352,
+        0.07082555194709617,
+        6.043656882706021
+      ],
+      [
+        0.006,
+        0.6927576261881101,
+        0.6925213115135217,
+        2.594750135275858
+      ],
+      [
+        0.004,
+        0.12750827586812216,
+        0.12749920834317247,
+        0.7021201377514733
+      ],
+      [
+        0.003,
+        0.10111973294403451,
+        0.10111746014739395,
+        0.48037195024401314
+      ],
+      [
+        0.002,
+        0.007189262077656826,
+        0.00718923240056633,
+        0.0500624512262738
+      ],
+      [
+        0.001,
+        0.0012546524422721904,
+        0.0012546522401900532,
+        0.006270956467025314
+      ],
+      [
+        0.0005,
+        0.000008704554126738228,
+        0.000008704562743221622,
+        0.000046236083950176925
+      ],
+      [
+        0.00025,
+        3.781369242010833e-9,
+        3.780835183809856e-9,
+        2.0448755895945746e-8
+      ],
+      [
+        0.000125,
+        3.650365247268095e-14,
+        4.720785666871556e-15,
+        3.276952513358566e-13
+      ]
+    ],
+    "fine_far_e4": {
+      "nodal02": 0.0000011653054432937163,
+      "shell02": 0.0000011668163662469618,
+      "shell024": -5.24603460363387e-7
+    }
+  },
+  "common": {
+    "generic_dimension_intertwiner": 1,
+    "source_primitive_identities": 3,
+    "bulk_intertwiners": 3,
+    "even_origin_polynomials": 27,
+    "bessel_phase_identities": 3,
+    "angular_gram": "4/5",
+    "tail_squared_exponents": {
+      "p4": -4,
+      "p5": -8
+    }
+  },
+  "near": {
+    "te": 1.005,
+    "tr": 12,
+    "emission_elapsed": [
+      0.007044675904879344,
+      0.007044675907701335
+    ],
+    "receiver_radius": [
+      2.537365760961,
+      2.537365760963
+    ],
+    "emitter_x": [
+      -0.006301163593,
+      -0.006301163588
+    ],
+    "photon_dark_margin_lower": 0.01245911117299969,
+    "chord_slope": [
+      -0.3373992977656396,
+      -0.33739929776544825
+    ],
+    "emission_transverse_gap_lower": 0.3679419316559501,
+    "receiver_transverse_gap_lower": 0.25435381791170625,
+    "strict_convexity": true,
+    "principal_e4_positive": true,
+    "principal_sms_positive": true,
+    "fixed_original_bump_nonzero_proved": false
+  },
+  "radial003": {
+    "runner_blob": "450831b0f65e50bcf8f4707d03cb2b5676dde0c7",
+    "grid": [
+      1005,
+      449
+    ],
+    "dr": 0.003,
+    "dy": 0.009,
+    "dt": 0.0005999023910881472,
+    "safe_dt": 0.0006077062881936186,
+    "lambda_upper": 797410.7567777778,
+    "end": 4517,
+    "complete": false,
+    "physical_t": 1.6301015926952018,
+    "chunks": [
+      [
+        0,
+        285,
+        4.2977510707477e-14,
+        "b0c5b4a86336c1c60373fbf74e538a6628d79140b91a12c2cd09e72ac4d5c9e6"
+      ],
+      [
+        285,
+        511,
+        1.533919763246271e-13,
+        "ec9968fc2dd2ec5cdd9f860792f0bcdb1bef65dc5df6c1722276c8e6406b611d"
+      ],
+      [
+        511,
+        811,
+        4.731184706868997e-13,
+        "201a12e82a91e8f4450e95db1df079f3b6fa99dd595d289c53fb6cf725c57049"
+      ],
+      [
+        811,
+        1041,
+        9.038368951643009e-13,
+        "63ce5becf0661e1828425ee4ebd187f7f3e95711fac02d65041c25926648e1a7"
+      ]
+    ]
+  },
+  "limitations": [
+    "Local recovered source subset, not full checkout. Four new scripts match executed bytes; first bidi upload lacked a semicolon, corrected.",
+    "Spectral contraction floating eigensolve and source-adjoint arithmetic, not certified numerical enclosure. Moment corrections change discrete source, only adjoint contraction, not forward trajectories or full TT preservation.",
+    "Near lens exact rational geometry and principal symbol identities; existential FIO argument conditional on prior external theorem application, not fixed-bump response proof.",
+    "Common prepotential continuum factorization and analytic tail conditional on smooth retarded reference, no new spectral propagation or evaluated jet-norm bound.",
+    "dr=.003 is a partial original-ledger monopole run only; no receiver values before observer support. No full transport reverse budgets, kernel acceptance or empirical result."
+  ]
+}
