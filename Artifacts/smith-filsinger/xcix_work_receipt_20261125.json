@@ -1,0 +1,53 @@
+{
+  "status": "EXACT_RESTORED_WORK_CHANNELS",
+  "checker_blob": "20bb6a0a03a81b43e10d79862d04e16712fd844e",
+  "source_center_blob": "bd45db7d88d17f6369248efe2c82bf2b98e6ffa7",
+  "intervals": {
+    "ohmic": [
+      "334079537/31250000000",
+      "12018262187/1000000000000"
+    ],
+    "material_relaxation": [
+      "142292429/1000000000000",
+      "7125823/50000000000"
+    ],
+    "boundary_heat": [
+      "3833525893/250000000000",
+      "15334104341/1000000000000"
+    ],
+    "copper": [
+      "8750451/1000000000000",
+      "8750459/1000000000000"
+    ],
+    "field_internal": [
+      "31445430921/1000000000000",
+      "7861360439/250000000000"
+    ],
+    "hf_coil": [
+      "2749496453/250000000000",
+      "2749496469/250000000000"
+    ],
+    "hf_useful": [
+      "118177727987/500000000000",
+      "236355456253/1000000000000"
+    ],
+    "reflected": [
+      "693697482671/1000000000000",
+      "347512717827/500000000000"
+    ],
+    "signed_interface_work": [
+      "278807623159/1000000000000",
+      "278807634343/1000000000000"
+    ]
+  },
+  "bank_bleed": 0,
+  "diodes": 0,
+  "spark_heat": 0,
+  "delay_storage_change": 0,
+  "controller_work": 0,
+  "scope": "Exact outward interval fractions of prescribed incident work on restored XCVIII periodic solution. Reflection from conservation, signed circuit interface from restored circuit storage; neither independent measurement nor a separate source. All 11 dissipative coordinate reconstructions plus scalar useful certificate. 384 finite harmonics plus analytic tail. Locally executed exact Fraction/SymPy chain.",
+  "physical": false,
+  "original_J36": false,
+  "CI": false,
+  "kernel": false
+}
