@@ -1,0 +1,902 @@
+{
+  "frobeniusAction": [
+    [
+      0
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      1
+    ],
+    [
+      4
+    ]
+  ],
+  "frobeniusOrbits": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3,
+      4,
+      5
+    ],
+    [
+      6,
+      7,
+      8
+    ],
+    [
+      9,
+      13,
+      16
+    ],
+    [
+      10,
+      14,
+      17
+    ],
+    [
+      11,
+      12,
+      15
+    ],
+    [
+      18,
+      23,
+      26
+    ],
+    [
+      19,
+      21,
+      24
+    ],
+    [
+      20,
+      22,
+      25
+    ]
+  ],
+  "linearStabilizerOrder": 432,
+  "linearStabilizerOrbits": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
+  ],
+  "semilinearFixed": [
+    0,
+    1,
+    2
+  ],
+  "results": [
+    {
+      "kind": "semilinear",
+      "role": 0,
+      "trainingFrames": 82,
+      "trainingKeys": 19,
+      "conflictingKeys": 9,
+      "maxSuccessors": 9,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 7,
+        "coarseCorrect": 6,
+        "rawModeCorrect": 5,
+        "uniqueMode": 49,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 8,
+        "by": {
+          "f": 65,
+          "global": 7
+        },
+        "output": "דףזמדלשםקשחהנההםחשלליללדהתץהאםרעקצקדחמשיזגלןררםםווץמאיהנוזפלטמלפוכוטהבבם"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 2,
+        "coarseCorrect": 2,
+        "rawModeCorrect": 0,
+        "uniqueMode": 4,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 1,
+        "by": {
+          "f": 5,
+          "global": 1
+        },
+        "output": "לףתכקב"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 8,
+        "coarseCorrect": 5,
+        "rawModeCorrect": 5,
+        "uniqueMode": 23,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 5,
+        "by": {
+          "f": 65,
+          "global": 3,
+          "g": 4
+        },
+        "output": "ויטהקהאטנלוהלציםאיטלךיזוהקרךאדךיהחאציםזהיכלהררעפוייעאתוקםלירימנאבכעמההמת"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 7,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 10,
+        "uniqueMode": 59,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 8,
+        "by": {
+          "f": 72
+        },
+        "output": "הלימללככהזאאזזבםאלווהייההארהוםבשויהדננםהנהילהאליויחחאןיושירצמנהנמןייהאאם"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 830,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1213,
+        "uniqueMode": 10882,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 43,
+        "degenerate": 798,
+        "by": {
+          "f": 12545,
+          "g": 55
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 772,
+        "coarseCorrect": 800,
+        "rawModeCorrect": 1213,
+        "uniqueMode": 12089,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 52,
+        "degenerate": 786,
+        "by": {
+          "f": 12571,
+          "g": 29
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1595,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2830,
+        "uniqueMode": 20972,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 111,
+        "degenerate": 1642,
+        "by": {
+          "f": 24241,
+          "g": 95
+        }
+      }
+    },
+    {
+      "kind": "semilinear",
+      "role": 1,
+      "trainingFrames": 82,
+      "trainingKeys": 18,
+      "conflictingKeys": 10,
+      "maxSuccessors": 9,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 6,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 6,
+        "uniqueMode": 38,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 2,
+        "degenerate": 7,
+        "by": {
+          "g": 7,
+          "global": 3,
+          "f": 62
+        },
+        "output": "מיסדטליתץמץהיההפץטדפניפאנטזעעאקעחונתכחוםהלץץסמםממנעעץתףץרכהםנץץאקזאחשיוק"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 1,
+        "coarseCorrect": 1,
+        "rawModeCorrect": 0,
+        "uniqueMode": 1,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 3,
+        "by": {
+          "global": 2,
+          "g": 1,
+          "f": 3
+        },
+        "output": "לאארצח"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 1,
+        "coarseCorrect": 4,
+        "rawModeCorrect": 6,
+        "uniqueMode": 26,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 3,
+        "by": {
+          "f": 67,
+          "g": 3,
+          "global": 2
+        },
+        "output": "םקףעלטךהאזץמאקףטךטפעידםאלקשעגלזעףתץתקרמתרןץסצפנדופטנץמפסחןבעזץסדץיץאץםזק"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 6,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 10,
+        "uniqueMode": 66,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 7,
+        "by": {
+          "f": 72
+        },
+        "output": "ניסעמלהךהאללהםהשלךופפפימנניישרלליילךאחחריכווסעפמןוההעןהמםנההבוימממאחררים"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 789,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1244,
+        "uniqueMode": 10863,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 55,
+        "degenerate": 832,
+        "by": {
+          "f": 12566,
+          "g": 34
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 792,
+        "coarseCorrect": 818,
+        "rawModeCorrect": 1244,
+        "uniqueMode": 11731,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 53,
+        "degenerate": 882,
+        "by": {
+          "f": 12573,
+          "g": 27
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1598,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2864,
+        "uniqueMode": 20968,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 93,
+        "degenerate": 1653,
+        "by": {
+          "f": 24276,
+          "g": 60
+        }
+      }
+    },
+    {
+      "kind": "semilinear",
+      "role": 2,
+      "trainingFrames": 82,
+      "trainingKeys": 19,
+      "conflictingKeys": 11,
+      "maxSuccessors": 12,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 5,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 12,
+        "uniqueMode": 22,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 7,
+        "by": {
+          "f": 63,
+          "g": 5,
+          "global": 4
+        },
+        "output": "וסזבמתאךתארבתגרזרצץפנימננהףכךאלובןממרחפיסםוסזרחקואחמקןעפדיהגמיעמוסקחםיהם"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 3,
+        "coarseCorrect": 3,
+        "rawModeCorrect": 0,
+        "uniqueMode": 3,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 1,
+        "by": {
+          "f": 4,
+          "global": 1,
+          "g": 1
+        },
+        "output": "לאתרגא"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 3,
+        "coarseCorrect": 6,
+        "rawModeCorrect": 12,
+        "uniqueMode": 40,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 6,
+        "by": {
+          "f": 64,
+          "global": 4,
+          "g": 4
+        },
+        "output": "סשקנעליםןפטיכףהצךאקפחמתונרגטגבלןםתכוישלדיחםשףרחמדעעועטץיעשםגזץלשחיקאץשנד"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 8,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 12,
+        "uniqueMode": 64,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 7,
+        "by": {
+          "f": 72
+        },
+        "output": "ויועמבאךההאההיהקאךופנימחננייראאווילממחחיטהויסעעמודהעננןפםיההוועממממחריךה"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 766,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1205,
+        "uniqueMode": 10660,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 61,
+        "degenerate": 832,
+        "by": {
+          "f": 12570,
+          "g": 30
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 820,
+        "coarseCorrect": 882,
+        "rawModeCorrect": 1205,
+        "uniqueMode": 10791,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 45,
+        "degenerate": 818,
+        "by": {
+          "f": 12560,
+          "g": 40
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1514,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2804,
+        "uniqueMode": 20526,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 100,
+        "degenerate": 1653,
+        "by": {
+          "f": 24274,
+          "g": 62
+        }
+      }
+    },
+    {
+      "kind": "affine3",
+      "role": 0,
+      "trainingFrames": 82,
+      "trainingKeys": 12,
+      "conflictingKeys": 5,
+      "maxSuccessors": 21,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 5,
+        "coarseCorrect": 6,
+        "rawModeCorrect": 5,
+        "uniqueMode": 37,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 8,
+        "by": {
+          "f": 68,
+          "g": 4
+        },
+        "output": "ויטמשלארחדועפהיםתיפלתוהמתהתההדברוהקדפםהזוכלמאילהםישלןוהיגבחציבליףקץוהממן"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 1,
+        "coarseCorrect": 2,
+        "rawModeCorrect": 0,
+        "uniqueMode": 4,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 1,
+        "by": {
+          "f": 6
+        },
+        "output": "םלתםנב"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 4,
+        "coarseCorrect": 5,
+        "rawModeCorrect": 5,
+        "uniqueMode": 20,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 5,
+        "by": {
+          "f": 67,
+          "g": 5
+        },
+        "output": "ויימשהכתזדועלהיקוןהלתלגההורהוםברוהקדיחעזיוגמרשששהימםאתהיהלחרבםויבקעואבום"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 7,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 10,
+        "uniqueMode": 65,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 3,
+        "degenerate": 8,
+        "by": {
+          "f": 72
+        },
+        "output": "הלילההככהלאההברקקלוההיםלההראהיךשחהוןןעהיהריואמשיינחחאןבוםםררצבהחחןןבאבמי"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 791,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1213,
+        "uniqueMode": 11309,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 44,
+        "degenerate": 798,
+        "by": {
+          "f": 12567,
+          "g": 33
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 808,
+        "coarseCorrect": 800,
+        "rawModeCorrect": 1213,
+        "uniqueMode": 12035,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 57,
+        "degenerate": 786,
+        "by": {
+          "f": 12569,
+          "g": 31
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1593,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2830,
+        "uniqueMode": 21923,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 100,
+        "degenerate": 1642,
+        "by": {
+          "f": 24275,
+          "g": 61
+        }
+      }
+    },
+    {
+      "kind": "affine3",
+      "role": 1,
+      "trainingFrames": 82,
+      "trainingKeys": 13,
+      "conflictingKeys": 9,
+      "maxSuccessors": 21,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 5,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 6,
+        "uniqueMode": 17,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 7,
+        "by": {
+          "f": 71,
+          "g": 1
+        },
+        "output": "קחרעזללכהאלהיםההלךלפננחחנקישראלוילךמבטרייץומסעהמיכהתנןמפניהםהיעמדמההרידה"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 0,
+        "coarseCorrect": 1,
+        "rawModeCorrect": 0,
+        "uniqueMode": 2,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 3,
+        "by": {
+          "g": 2,
+          "f": 4
+        },
+        "output": "אלחאגח"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 2,
+        "coarseCorrect": 6,
+        "rawModeCorrect": 6,
+        "uniqueMode": 23,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 3,
+        "by": {
+          "f": 69,
+          "g": 3
+        },
+        "output": "לקףעהטקסקףומטםףטמכקעטגקתנמףפקטזגץכזכםםמגקןחתנהטדסצץדמררצטןיעשהךןץיץןץרנפ"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 4,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 10,
+        "uniqueMode": 70,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 7,
+        "by": {
+          "f": 72
+        },
+        "output": "טטעטלשךהתידועלםהםויפלמההואאתהיםביוחקחרםעםוכסהסילויינםאתהיםלחיבהמיבחעוהמם"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 772,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1244,
+        "uniqueMode": 11926,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 48,
+        "degenerate": 832,
+        "by": {
+          "f": 12558,
+          "g": 42
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 763,
+        "coarseCorrect": 818,
+        "rawModeCorrect": 1244,
+        "uniqueMode": 12199,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 61,
+        "degenerate": 882,
+        "by": {
+          "f": 12544,
+          "g": 56
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1531,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2864,
+        "uniqueMode": 22966,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 101,
+        "degenerate": 1653,
+        "by": {
+          "f": 24269,
+          "g": 67
+        }
+      }
+    },
+    {
+      "kind": "affine3",
+      "role": 2,
+      "trainingFrames": 82,
+      "trainingKeys": 9,
+      "conflictingKeys": 7,
+      "maxSuccessors": 23,
+      "nativeShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 2,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 12,
+        "uniqueMode": 7,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 7,
+        "by": {
+          "f": 65,
+          "g": 7
+        },
+        "output": "דכספממשךגאללתםהבלפפפננפחנהישכאלוילךחץלררלחםכסעחףומהינדמקננפםויעמעמקחרשןם"
+      },
+      "nativeOtherExodus": {
+        "n": 6,
+        "frames": 6,
+        "correct": 1,
+        "coarseCorrect": 3,
+        "rawModeCorrect": 0,
+        "uniqueMode": 1,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 1,
+        "by": {
+          "f": 5,
+          "g": 1
+        },
+        "output": "דלתבצח"
+      },
+      "nativeShift": {
+        "n": 72,
+        "frames": 72,
+        "correct": 1,
+        "coarseCorrect": 3,
+        "rawModeCorrect": 12,
+        "uniqueMode": 19,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 0,
+        "degenerate": 6,
+        "by": {
+          "f": 70,
+          "g": 2
+        },
+        "output": "ץצסגמאחכתזעיכחהבצאהךכמתךחקישמץאבתנמשרכץםםףכצתעחףכאץסהוךתחבןשעקסגחקםכחחרי"
+      },
+      "syntheticShem": {
+        "n": 72,
+        "frames": 72,
+        "correct": 5,
+        "coarseCorrect": 7,
+        "rawModeCorrect": 12,
+        "uniqueMode": 67,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 1,
+        "degenerate": 7,
+        "by": {
+          "f": 72
+        },
+        "output": "ססיסעמךאאהלהםיםההלךלפיחמחנההשראלוילךחאחייוםסיסעממודנעמןנפיםהםויעמןחאחהיה"
+      },
+      "syntheticTest": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 858,
+        "coarseCorrect": 832,
+        "rawModeCorrect": 1205,
+        "uniqueMode": 11924,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 65,
+        "degenerate": 832,
+        "by": {
+          "f": 12564,
+          "g": 36
+        }
+      },
+      "syntheticShift": {
+        "n": 12600,
+        "frames": 12600,
+        "correct": 829,
+        "coarseCorrect": 882,
+        "rawModeCorrect": 1205,
+        "uniqueMode": 11655,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 46,
+        "degenerate": 818,
+        "by": {
+          "f": 12557,
+          "g": 43
+        }
+      },
+      "cross": {
+        "n": 24336,
+        "frames": 24336,
+        "correct": 1635,
+        "coarseCorrect": 1653,
+        "rawModeCorrect": 2804,
+        "uniqueMode": 23028,
+        "exactSpans": 0,
+        "sheetCorrect": 0,
+        "conditionalOrientationCorrect": 0,
+        "degenerateCorrect": 123,
+        "degenerate": 1653,
+        "by": {
+          "f": 24280,
+          "g": 56
+        }
+      }
+    }
+  ],
+  "qualification": "Visible-only deterministic frames, first nonzero difference then first non-F3 anchor (semilinear), or first three linearly independent differences (affine3). Full visible rows used; no hidden value in frame. Mode labels learned from separate training, not proof of uniqueness. Native 82 glyphs per role and synthetic 85 training blocks compared separately; 175 synthetic test and 338 Genesis blocks previously inspected. No fresh blind validation. Candidate frame choices not source-attested. Shift retrains on shifted first visible row."
+}
