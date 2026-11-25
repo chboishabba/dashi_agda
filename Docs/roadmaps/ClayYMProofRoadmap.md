@@ -1,3 +1,51 @@
+## 25 November 2026 — P0V Hopf-inspired BIDI maximum cut on the ORIGINAL Wilson fibre (after ea0f19)
+
+**Verified source head:** `ea0f19a1bbd6e89e70ee026d4f86908c44b18aea`. New source `YMClayOriginalWilsonContinuousA2BridgeExact.covarianceSignedGapBound` is reported sanctioned Agda PASS. **Constant correction:** source definition `signedCovarianceConstant = fourℝ -ℝ (0ℝ -ℝ fourℝ)` is **8**, hence the checked record-parameterized theorem is `|Cov_μ(F,G)-Cov_ν(F,G)| ≤ 8 μχ` for signed `|F|,|G|≤1`, **not sharp 4 μχ**. The existing earlier unsigned `covarianceGapBound` remains its distinct [0,1] conditional theorem. One future refinement may prove a centered-product *oscillation* bound `osc((F-a)(G-b)) ≤ 4` for `a,b∈[-1,1]`, yielding sharp 4q without changing the original source. **Do not relabel 8 as 4 or block physical P0 solely to optimize this factor.** As `q→0`, the sharp 4 cannot be improved universally: under `(1-q)δ_(1,1)+q δ_(-1,-1)` versus `δ_(1,1)`, covariance difference is `4q(1-q)`.
+
+### Hopf369 P0U methodological donor; DO NOT transplant Hopf physics
+
+Reuse its *steelman → reverse solve → native source geometry → BIDI recoverability → retained zero/signed residual* approach. The gravitational Hopf/Kaluza–Klein, curved-curl and actual-evolution theorems concern different equations and cannot supply lattice Wilson weak-coupling estimates. Likewise H05's six governed cube faces are **not** the six orientation planes of 4D Wilson plaquettes. Use a typed source-specific commuting diagram with nonzero defects instead of identifying carriers by analogy.
+
+### A nontrivial original-source BIDI split already exists: reuse all owners
+
+- `YMClaySUNWeightedHaarPairFibreDisintegrationExact.actualWeightedPairDisintegration` proves the original noncommutative Haar change of coordinates `(U,V) ↔ (W=UV,V)`, `U=WV⁻¹`, with an arbitrary nonfactorizing fine Gibbs weight and pointwise spectator dependence. Full 64-pair/896-spectator assembly and Borel/measure semantics must still be separately paid.
+- `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact`, `YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact.originalPhysicalF19FG` and `.originalPhysicalF19NormalizedFG` preserve **all four original unique global mark coefficients** `K0,KF,KG,KFG` (not just coarse-only observables; fine Wilson marks are NOT functions of coarse W). The exact finite original side-four geometry has 1024 fine positive links, 64 noncommutative paired blocks, 896 spectators and 1536 plaquettes. Do not replace by a bare coarse Wilson measure.
+- `BalabanFiniteRGTotalCovarianceExact.finiteRGTotalCovariance` and `BalabanFiniteRGMultiscaleCovarianceTelescopingExact.finiteRGMultiscaleCovarianceTelescopes` **already prove the finite rational total-covariance identity and signed residual telescoping**. `BalabanFiniteRGGoodBadResidualEnvelopeExact.finiteRGClusteringFromGoodBadEnvelope` and `BalabanFiniteRGExceptionalCovarianceMassExact.exceptionalCovarianceBelowTwiceMass` already compile good/fibre and exceptional/bad envelopes. They are **NOT** continuous original Wilson instances or physical-rate proofs; do not rebuild these covariance compilers.
+- `YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact` already composes original marked W1/W3 into existing OS/same-H consumer CONDITIONALLY. It is not a same-H endpoint witness.
+
+The actual original affine two-source fibre density at each full interacting coarse configuration `W` has the form
+```text
+K(W;s,t) = K0(W) + s KF(W) + t KG(W) + st KFG(W),
+K0(W)>0 for the strict-positive original Wilson source where proved.
+A(W)=KF(W)/K0(W), B(W)=KG(W)/K0(W),
+R_fibre(W)=KFG(W)/K0(W) - A(W) B(W).
+```
+At `s=t=0`, **exactly**
+```text
+∂s∂t log K(W;s,t) = R_fibre(W)
+∂s∂t[-log K(W;s,t)] = -R_fibre(W)
+Cov_original(F,G)
+   = Cov_(K0 dH / ∫K0 dH)(A,B)
+     + E_(K0 dH / ∫K0 dH)[R_fibre].
+```
+This is the *intrinsic signed mixed-Hessian defect* of fibre integration versus coarse two-mark factorization; it is not assumed zero and can have either sign. The identity is **already algebraically represented by the existing finite rational total-covariance owner**; in this specific continuous F19 four-column form, its algebra was independently verified with exact SymPy for three arbitrary symbolic coarse cells and their four moments (`0` residual). Symbolic acceptance is not a SU(N) Haar/Agda kernel receipt.
+
+**Zero-mass boundary:** if using the A2 good tilt `w_good=(1-χ)w`, selected fibre normalizers `K0_good(W)` may vanish; all ratio statements require `K0_good>0` or an a.e. conditional-law construction on the positive support. Preserve the zero-mass sector explicitly. Do not infer pointwise strict goodness for every W from the globally positive good mass.
+
+### Reverse-solved exact *physical* theorem payments, not new wrappers
+
+**P0V source realisation (parallel bounded cut):** source-construct the actual complex SU(N) normalized trace-range theorem, fixed continuous clamp, selected compact product Haar/Borel positivity and physical nonempty connecting geometry; `ActualNativeFiniteIntegration`, `ContinuousWilsonArithmetic` and genuine `goodMass>0`; get the full E1 Agda kernel receipt. The old `RealAnalysisAxioms/--safe` trust audit remains a separate blocked certification lane.
+
+**P0W source-dependent marked BIDI (highest physical research bite):** demonstrate that the SAME original fine Gibbs weight/marks `K0,KF,KG,KFG`, all 896 spectators, all 1536 plaquettes and original `β(a)` are the genuine selected CMP119/122 Eq.(1.71) T/rT/domain/E/R/B/V/FP-Jacobian/ghost input. Pay existing `BalabanCMP119Equation171WeightedStepApproximationExact.sourceStepIsEquation171Mass`, plus the first-score coarse covariance AND inherited mixed fibre Hessian, not just one of them. In an explicit comparison to CMP116, decompose good-source P-MATCH into (i) signed fibre covariance, (ii) coarse transported-mark mismatch and (iii) induced coarse-law/effective-action discrepancy; prove true source bounds on each, or show a direct full-source W1/W3 absolute route that avoids them. No cheap coarse-only F,G substitution.
+
+**P0X actual weak-coupling multiscale rate:** source-inhabit existing `ym4ConditionalFibreCovarianceContractsOneStep`, `goodRegionConditionalFibreContractionLevel` and `exceptionalLargeFieldSuppressionLevel` on physically selected, connected, correctly oriented original 4D histories. Prove signed absolute good/fibre remainder and exceptional bad contribution budgets with one cutoff-/volume-independent positive physical rate. Original finite small-beta Dobrushin `q_fibre≤36 tanh β` or `q_coarse<1` DOES NOT apply to the UV `β(a)→∞` trajectory; use actual Bałaban CMP119/122 renormalized small/large domains and R429/P06/Step-V rooted entropy. If a selected contour event is too small to cover the true source residual, retain its unmatched contribution as a separate signed P-MATCH term.
+
+**P0Y continuum and complete gap (parallel):** pay `ActualSelectedOriginalSUNConvergence.originalWilsonCylinderConverges` for nonconstant fixed-physical-support original words; source OS Gram positivity/continuity, original N1 noncollapse and all-word same-H dense D2 with explicit nonvacuum zero-mode exclusion and G1 group scope. Existing D1/R320 and dense-core gap compilers are consumers, not substitute inhabitants.
+
+**Priority:** attempt **P0W/P0X in parallel with P0V/P0Y**. There is no need for another covariance identity, finite toy block or separate H05 cube. The only potential sharp-constant refinement is the oscillation-4 proof for signed A2; it is an enabling algebraic optimization, NOT a nonperturbative source rate. No Clay promotion or new physical theorem is asserted.
+
+---
+
 ## 25 November 2026 — feee55d E1 scope repairs and corrected Balaban literature audit
 
 **Latest verified code:** `feee55d0023e773c34d4314aceef34a259e70299` on `master` changed eight Agda files to repair record-field scope/literal syntax, a reserved binder, ambiguity in Boolean Poincaré names, `refl` import and a misapplied `--safe` pragma. The implementation handoff reports the original A2 bridge sanctioned Agda check, exact SymPy algebra, finite-TV regression, unconditional gate and frontier checks PASS; **full `YMClayE1OriginalSUNFiniteCylinderLawsExact.agda` Agda kernel receipt remains MISSING** (large memory/elaboration load is not a mathematical counterexample and is not success). None of these syntax repairs pays a new physical YM input. Preserve the exact native A2/E1 same-source constructors rather than reconstruct them.
