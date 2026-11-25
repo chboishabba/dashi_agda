@@ -1,4 +1,15 @@
 {
+  "completion": {
+    "text": "אשלאמץפצכזנסגסטיאקלראלתהבמאלמלראריאהוראתליוםליללאיהמאיהאיאאוולכמהאואאיבמומואמבייואאייוייייו",
+    "allOrbitEquationsSatisfied": true,
+    "continuationHits": 10,
+    "testValidBlocks": 175,
+    "testHits": 1103,
+    "testLetters": 15925,
+    "testAccuracy": 0.06926216640502354,
+    "exactHeldoutSuffixes": 0,
+    "qualifier": "MAP under invented parity constraints; not original text. No fully observed target orbits, so observed-prefix parity is vacuous. Most true heldout orbit sums are nonzero."
+  },
   "alphabet": "אבגדהוזחטיךכלםמןנסעףפץצקרשת",
   "trainChapters": [
     1,

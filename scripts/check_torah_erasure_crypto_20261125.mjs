@@ -41,7 +41,37 @@ function assay(book){
  const targetOrbits=orbits.map(o=>({positions:o,observed:o.filter(i=>i<125),missing:o.filter(i=>i>=125)}));
  const singles=targetOrbits.filter(o=>o.missing.length===1),parityCandidates=singles.map(o=>{const d=sum(o.observed.map(i=>actual[i])).map(x=>(3-x)%3);return {position:o.missing[0],glyph:alphabet[d[0]+3*d[1]+9*d[2]]}});
  const unresolvedDimension=targetOrbits.reduce((s,o)=>s+Math.max(0,o.missing.length-1),0);
- return {alphabet:alphabet.join(""),trainChapters:[1,13],testChapters:[16,40],trainBlocks:trainBlocks.length,testBlocks:testBlocks.length,metrics,coverage,uncovered:91-coverage,candidates,actualContinuation:continuation.map(i=>alphabet[i]).join(""),parity:{orbits:orbits.length,orbitSizes:Object.fromEntries([1,2,4,8].map(n=>[n,orbits.filter(o=>o.length===n).length])),train:parityStats(trainBlocks),test:parityStats(testBlocks),targetMissingOrbits:targetOrbits.filter(o=>o.missing.length).length,singleMissing:singles.length,parityCandidates,unresolvedDimension,conditionalFreeTrits:3*unresolvedDimension,fullyObservedViolations:targetOrbits.filter(o=>!o.missing.length&&!sum(o.observed.map(i=>actual[i])).every(x=>x===0)).length},qualification:"Chosen ordinal alphabet map and candidate cipher assumptions; no evidence of source intent. Held-out blocks are disjoint chapters but within same book; continuation comparison not a test of a missing manuscript entry."};
+
+ function constrained(prefix){
+   const p=predict(prefix).geometry;
+   const filled=prefix.concat(range(91).map(()=>-1));
+   for(const o of orbits){
+     const missing=o.filter(j=>j>=125);
+     const known=sum(o.filter(j=>j<125).map(j=>prefix[j]));
+     if(!missing.length){if(known.some(x=>x!==0))return null;continue}
+     if(missing.length>2)throw Error("unexpected shape");
+     let best=-Infinity,bestVals=null;
+     for(const i of range(missing.length===2?K:1)){
+       const d=missing.length===2?digits(i):[0,0,0];
+       const z=known.map((v,k)=>(6-v-d[k])%3),last=z[0]+3*z[1]+9*z[2];
+       const vals=missing.length===2?[i,last]:[last];
+       const score=vals.reduce((s,x,k)=>s+Math.log2(p[missing[k]-125].p[x]),0);
+       if(score>best){best=score;bestVals=vals}
+     }
+     for(let k=0;k<missing.length;k++)filled[missing[k]]=bestVals[k];
+   }
+   if(orbits.some(o=>sum(o.map(j=>filled[j])).some(x=>x!==0)))throw Error("parity");
+   return filled.slice(125);
+ }
+ const completed=constrained(actual);
+ let parityHits=0,validBlocks=0,allCorrect=0;
+ for(const b of testBlocks){
+    const z=constrained(b.slice(0,125));
+    if(z){validBlocks++;const hits=z.filter((x,i)=>x===b[125+i]).length;parityHits+=hits;allCorrect+=hits===91}
+ }
+ const completion={text:completed.map(i=>alphabet[i]).join(""),allOrbitEquationsSatisfied:true,continuationHits:completed.filter((x,i)=>x===continuation[i]).length,testValidBlocks:validBlocks,testHits:parityHits,testLetters:91*validBlocks,testAccuracy:parityHits/(91*validBlocks),exactHeldoutSuffixes:allCorrect,qualifier:"MAP under invented parity constraints; not original text. No fully observed target orbits, so observed-prefix parity is vacuous. Most true heldout orbit sums are nonzero."};
+
+ return {completion,alphabet:alphabet.join(""),trainChapters:[1,13],testChapters:[16,40],trainBlocks:trainBlocks.length,testBlocks:testBlocks.length,metrics,coverage,uncovered:91-coverage,candidates,actualContinuation:continuation.map(i=>alphabet[i]).join(""),parity:{orbits:orbits.length,orbitSizes:Object.fromEntries([1,2,4,8].map(n=>[n,orbits.filter(o=>o.length===n).length])),train:parityStats(trainBlocks),test:parityStats(testBlocks),targetMissingOrbits:targetOrbits.filter(o=>o.missing.length).length,singleMissing:singles.length,parityCandidates,unresolvedDimension,conditionalFreeTrits:3*unresolvedDimension,fullyObservedViolations:targetOrbits.filter(o=>!o.missing.length&&!sum(o.observed.map(i=>actual[i])).every(x=>x===0)).length},qualification:"Chosen ordinal alphabet map and candidate cipher assumptions; no evidence of source intent. Held-out blocks are disjoint chapters but within same book; continuation comparison not a test of a missing manuscript entry."};
 }
 const book=JSON.parse(fs.readFileSync(process.argv[2] || 'Docs/support/reference/TorahCryptoCorpus20261125/exodus.normalized.json','utf8'));
 console.log(JSON.stringify(assay(book),null,2));
