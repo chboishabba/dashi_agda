@@ -341,10 +341,12 @@ module _
   covarianceμ left right =
     μ (λ links → left links *ℝ right links) -ℝ μ right *ℝ μ left
 
+  -- Apply the physically selected threshold on the normalized
+  -- curvature in [0,1], NOT on the raw Wilson [0,2] deficit.
   curvatureCutoff : PlaquetteIndex → Configuration → ℝ
   curvatureCutoff p links =
     ContinuousClampSource.clamp clampSource
-      (ContinuousWilsonSourceContract.deficit source p links)
+      (halfNormalizedDeficit quotient source p links)
 
   curvatureCutoffRange : ∀ p links → Range01 (curvatureCutoff p links)
   curvatureCutoffRange p links =
