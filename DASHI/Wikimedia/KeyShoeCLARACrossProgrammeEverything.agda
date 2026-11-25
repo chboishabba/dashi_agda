@@ -12,3 +12,5 @@ import DASHI.Wikimedia.KeyShoeCLARAR13DihedralExact
 import DASHI.Wikimedia.KeyShoeCLARAOperatorBoundaryExact
 import DASHI.Wikimedia.KeyShoeCLARALanguageWorldCorrespondenceExact
 import DASHI.Wikimedia.ShemZeta54ZeroGluingExact
+
+import DASHI.Wikimedia.KeyShoeIndexedTrigramWeaveExact
