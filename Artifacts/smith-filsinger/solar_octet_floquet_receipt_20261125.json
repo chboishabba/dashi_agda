@@ -1,0 +1,112 @@
+{
+  "status": "CONDITIONAL_OCTET_PAID_FLOQUET",
+  "source_head": "0d333afc13af494942bb52a8f2aeb517dc3b3325",
+  "checker_blob": "f7969c9f2888011f4c5e2b53bd20515a7c92ccba",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "cutoffs": [
+      5,
+      8
+    ],
+    "configurations": 27,
+    "source_off": 27,
+    "active_solves": 54,
+    "static_grid_entries": 81,
+    "max_energy_residual": 4.787836793695988e-16,
+    "max_cutoff_difference": 2.5890747878953846e-16,
+    "max_omitted_boundary_coupling_residual": 3.308218651626182e-14,
+    "max_DC_polarization_norm": 0.024256735510140254
+  },
+  "donors": {
+    "layered": "097cc72daff0ccb657972e9316a3f0244fb6591d",
+    "OCT369": "1f493bdedf3ca058470db4fe0154c13d4df905b4",
+    "principal_octet": "ab79605b4d07516a9686da8e64455af2060470e9",
+    "punctured_nine": "9309133f93a1622f5aa23e862c290be90d45dc8a",
+    "colour_metric": "d0483e6cde61de9b99f802d7d50017618d0cdbdc",
+    "scope": "layered setup and original OCT369 preflight executed unchanged from byte-verified donor; principal octet and punctured-nine owners inspected, not executed"
+  },
+  "octet": {
+    "chart": "T=Q+i[p]_cross, traceless Hermitian, rank8, exact inverse",
+    "map": "K8=[[-Q/5,-[p]_cross/2],[[p]_cross/2,-Q/5]]",
+    "frobenius_squared": "|p|²+2 tr(Q²)/25",
+    "rank": 8,
+    "prior_K_recovered": true,
+    "scope": "constitutive coordinates, not eight physical Maxwell channels or SU3 gauge field"
+  },
+  "fixtures": {
+    "directions": [
+      "dipole",
+      "quadrupole",
+      "mixed"
+    ],
+    "amplitude": [
+      0.25,
+      0.5,
+      1
+    ],
+    "source_frequency_Hz": [
+      0.005,
+      0.05,
+      7.83
+    ],
+    "modulation_frequency_Hz": 7.83,
+    "source": "single TE x modal source at unit incident work; not separate calibrated solar/lightning or combined cross terms",
+    "stiffness": "4I+mK(1+cos tau), tau=2pi*7.83*t; K normalized Frobenius norm1",
+    "comparison": "static mK for m=0,.25,...,2 across all three directions, matched at same source; active load fixed to static mean per-frequency ideal match; equal operator norm budget only, no equal physical resources"
+  },
+  "results": {
+    "positive_vs_sampled_static": 0,
+    "max_gross_improvement": 0.0000018543446676511088,
+    "best_delta": -0.000004114674021893361,
+    "worst_delta": -0.0019872534389001884,
+    "best_by_direction": [
+      [
+        "dipole",
+        -0.000005630581382420896
+      ],
+      [
+        "quadrupole",
+        -0.000005586765713161412
+      ],
+      [
+        "mixed",
+        -0.000004114674021893361
+      ]
+    ],
+    "best_by_frequency": [
+      [
+        ".005",
+        -0.000004114674021893361
+      ],
+      [
+        ".05",
+        -0.000004157707632346241
+      ],
+      [
+        "7.83",
+        -0.00009142218053424453
+      ]
+    ],
+    "best": {
+      "direction": "mixed",
+      "frequency": 0.005,
+      "m": 0.25,
+      "load": 0.2960806698150983,
+      "pump": 0.000004161081105622222,
+      "net": 0.29607650873399266,
+      "passive": 0.29608062340801455,
+      "reflected": 0.5069027557414238,
+      "sheet": 0.18823746403769792,
+      "ground": 0.008773794162904955,
+      "radial": 0.000006884048500919704,
+      "material": 0.000002593275479502362
+    },
+    "max_individual_ULF_sideband_load": 9.324016410760827e-7,
+    "max_individual_sideband_load": 0.0000053995775189679654
+  },
+  "limitations": "Finite harmonic-balance solve, not Floquet stability or rigorous infinite tail proof. Radial heat from signed flux difference, not independent volume quadrature this tranche. DC polarization retained with prescribed E_DC=0, no actual electrostatic charge solve. Source-off homogeneous periodic solution zero, not proof against seeded parametric instability; controller standby and HF delivery not charged. Prescribed 7.83 Hz modulation could represent q² half-mode shape but no autonomous half-mode/HF production. No calibrated source or physical extraction. No all-passive optimum or all-active no-go. Attribution classical principal SU2 decomposition, Hermitian chart, harmonic balance and Lorentz work; original DASHI octet and OCT369 owners, user geometry and HF hypothesis; new DASHI application only, no new JMD contribution."
+}
