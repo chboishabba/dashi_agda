@@ -1,5 +1,15 @@
 # YM Clay P0 — double-check of all 31 purported remaining “lemmas”: existing producers versus unpaid physical assumptions
 
+## 25 November 2026 — A2 direct math now written conditionally; corrected original-source payment
+
+**Current master** `19a63b8c9d4de92f6c28fbba4077b2237948a6c5` replaces the older 24-Nov-only A2 status. `YMClayOriginalWilsonContinuousA2BridgeExact` already implements a conditional continuous-valued contour cutoff and normalized good-source expectation `ν`, with source-parameterized `covarianceGapBound≤4 μχ` and `contourMassBound: μχ≤Σγ Eμ∏_p b_p`. Author reports sanctioned Agda, exact SymPy and finite regression PASS, but **these are implications from record parameters**, not an original continuous SU(N) physical instantiation.
+
+**Corrected A2 mathematical impossibility:** `ContinuousClampSource.clampZeroBelow : ∀{value threshold}, value≤threshold→clamp value=0` and `clampOneAbove : ∀{value threshold}, threshold≤value→clamp value=1`. Setting `threshold=value` and reflexive ≤ forces 0=1; this record cannot be inhabited consistently. Use fixed separated `δ_low<δ_high` in the source and prove true continuous clamp, measurable under actual compact Haar. `deficitLeOne` requires normalized `(1−ReTr/N)/2` or a range repair (SU2 at −I has raw deficit 2). `ContinuousWilsonArithmetic` still assumes several substantive algebraic inequalities including `meanRestrictionBounds`; `ContinuousExpectationAlgebra` must be sourced from `YMClayOriginalVariableWilsonCovarianceSourceExact` rather than supplied arbitrary. Prove `0<goodMass` from identity-neighborhood full-support Haar; `qLessOne` has this as an explicit premise. The contour list must be physically rooted, gauge-invariant, connecting, and proven complete for its actual bad residual.
+
+**Still-unpaid physical A2→D1 chain:** source genuine fixed-contour probability and entropy-cutset physical `sup_(a,L)μχ≤C_bad e^(−m_bad R)`, selected historical CMP119/122 one-step `sourceStepIsEquation171Mass`, actual normalized good-to-CMP116 joint marked response `|Cov_ν−C_CMP116|≤C_match e^(−m_matchR)`, physically calibrated small-field `C_CMP116≤C_small e^(−m_smallR)`; use existing `OriginalSmallLargePhysicalSource` / R320 compiler, then actual E1/N1/G1/same-H D2. NONE of these physical estimates became paid from `19a63b8c9d`. This is an exact correction of provenance, not a new 31-lemma claim.
+
+
+
 **24 November 2026 — corrective evidence-based audit, not Clay closure.** GitHub live base `master=e70fa21c8c8bc09919f0aea15e40199163798948`; PR #1536 final head `13692df9416b6cb8821b765d409b84c24f2bb8fe`; W3 PR #1544 inspected at `c87b36b2a818da39f238acb180bada9b1d4bada1`. No Agda/Lean/CI/kernel in this audit; no endpoint flags modified. This file is the master-local copy of the corrected owner audit after PR #1536 readback.
 
 ## The correction: 31 is an accounting convention, NOT 31 unproved Agda lemmas
