@@ -105,3 +105,19 @@ print('PASS D',sorted(D),'52 flags; 169 incidence comparisons; inverse B^T/3-J/1
 print('PASS 676 paired action checks; D13 vs antipode; real incidence carry',Counter(dot(P[i],L[j])//3 for i,j in E))
 print('PASS 26 transported Y443 witnesses, 1716 induced pair comparisons; original JMD paths')
 print('PASS 26 FRACTRAN forward/inverse/13-step/polarity cases, retained origin')
+# Spokes as selected, reversible FRACTRAN macros, with explicit command history.
+def advance(n,k):
+    for _ in range(abs(k)):
+        n=step(n,forward if k>=0 else backward)
+    return n
+def short(k): return (k+6)%13-6
+for i,d in product(range(13),D):
+    p=code((0,i)); j=(i-d)%13
+    l=step(advance(p,short(-d)),(F(7,5),))
+    require(l==code((1,j)),'spoke macro')
+    require(step(advance(l,short(d)),(F(5,7),))==p,'inverse spoke macro')
+    require((i,j) in E,'spoke incidence')
+for i in range(13):
+    routes=Counter((i-d+e)%13 for d,e in product(D,repeat=2))
+    require(routes==Counter({j:4 if j==i else 1 for j in range(13)}),'two-step path fibres')
+print('PASS 52 spoke macros and inverses; 208 two-step routes = 156 moving + 52 returning')
