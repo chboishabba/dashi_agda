@@ -220,7 +220,8 @@
           "eta": 0.9896001978510464,
           "delay_return_storage": 0.0002514462870198472,
           "receiver_storage": 0.00010597531570693515,
-          "residual": 2.2150250383878856e-16
+          "residual": 2.2150250383878856e-16,
+          "external_reflected": 0.009749922853227025
         },
         {
           "cycles": 100,
@@ -308,5 +309,6 @@
   "physical_trace_realization": false,
   "original_source_interval_packet": false,
   "continuous_efficiency_interval_certified": false,
-  "CI": false
+  "CI": false,
+  "receipt_scope": "Selected local outputs and best-candidate rational P; executable emits full rows and all three Lyapunov witnesses."
 }
