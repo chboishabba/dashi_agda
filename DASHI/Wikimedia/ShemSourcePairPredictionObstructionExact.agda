@@ -99,3 +99,54 @@ sourceLineChartObstruction chart injective line4 line23 =
   ayinNotHe (injective
     (affineSharedPairForcesThird (chart lamed) (chart mem)
       (chart ayin) (chart he) (trans line4 (sym line23))))
+
+
+-- H34: a selector equivariant under Frobenius on a normalized visible pair
+-- must return a Frobenius-fixed point. This is a conditional obstruction,
+-- not a requirement that the original creator law be equivariant.
+frobeniusPairFixed : (select : Point → Point → Point) →
+  ((a b : Point) →
+    select (Laws.cube a) (Laws.cube b) ≡ Laws.cube (select a b)) →
+  Laws.cube (select C.origin Field.one) ≡ select C.origin Field.one
+frobeniusPairFixed select equivariant = sym (equivariant C.origin Field.one)
+
+-- Exact closed finite field arithmetic on the existing signed point carrier.
+-- Fixed points of x -> x^3 are precisely the prime subfield.
+frobeniusFixedBase : (x : Point) → Laws.cube x ≡ x →
+  (x ≡ C.origin) ⊎ ((x ≡ Field.one) ⊎ (x ≡ Field.negative Field.one))
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspZero S.sspZero) eq = inj₁ refl
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspZero S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspZero S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspPosOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspPosOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspPosOne S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspNegOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspNegOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspZero S.sspNegOne S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspZero S.sspZero) eq = inj₂ (inj₁ refl)
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspZero S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspZero S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspPosOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspPosOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspPosOne S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspNegOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspNegOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspPosOne S.sspNegOne S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspZero S.sspZero) eq = inj₂ (inj₂ refl)
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspZero S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspZero S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspPosOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspPosOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspPosOne S.sspNegOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspNegOne S.sspZero) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspNegOne S.sspPosOne) ()
+frobeniusFixedBase (C.ternary27Point S.sspNegOne S.sspNegOne S.sspNegOne) ()
+
+frobeniusPairSelectorBase : (select : Point → Point → Point) →
+  ((a b : Point) →
+    select (Laws.cube a) (Laws.cube b) ≡ Laws.cube (select a b)) →
+  let x = select C.origin Field.one in
+  (x ≡ C.origin) ⊎ ((x ≡ Field.one) ⊎ (x ≡ Field.negative Field.one))
+frobeniusPairSelectorBase select equivariant =
+  frobeniusFixedBase (select C.origin Field.one)
+    (frobeniusPairFixed select equivariant)
