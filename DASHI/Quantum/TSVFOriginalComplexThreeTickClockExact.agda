@@ -7,7 +7,7 @@ module DASHI.Quantum.TSVFOriginalComplexThreeTickClockExact where
 -- spacetime clock, continuum generator or original empirical observer.
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong)
-open import Data.Rational.Base using (ℚ; _+_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Quantum.TSVF as Q
 import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as O
@@ -30,19 +30,19 @@ swapPair (E.pointerRecord (C.complex a b) (C.complex c d))
                (Ring.solve-∀ a b c d e f g h)
 
 frame : Clock → E.ComplexPointerRecord → E.ComplexPointerRecord
-frame early = swap
+frame early v = swap v
 frame middle v = v
-frame late = swap
+frame late v = swap v
 
 frameTwice : ∀ t v → frame t (frame t v) ≡ v
-frameTwice early = swapTwice
+frameTwice early v = swapTwice v
 frameTwice middle v = refl
-frameTwice late = swapTwice
+frameTwice late v = swapTwice v
 
 framePair : ∀ t u v → E.hermitianPair (frame t u) (frame t v) ≡ E.hermitianPair u v
-framePair early = swapPair
+framePair early u v = swapPair u v
 framePair middle u v = refl
-framePair late = swapPair
+framePair late u v = swapPair u v
 
 evolve : Clock → Clock → E.ComplexPointerRecord → E.ComplexPointerRecord
 evolve from to v = frame to (frame from v)
@@ -103,7 +103,7 @@ clockMeasurement = record
       O.fraction
         (C.complexNormSq (Q.transitionAmplitude ensemble O.rightProjector)
          + C.complexNormSq (Q.transitionAmplitude ensemble O.wrongProjector))
-        (O.denominator (Q.QuantumSurface.normSquared O.finiteComplexQuantum C.oneC))
+        1ℚ
   }
 
 originalTotalReopens : ∀ original →
