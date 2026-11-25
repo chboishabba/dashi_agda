@@ -1,5 +1,10 @@
 # Four-Clay P0 controlling endpoint reverse-solve and constructor/gap matrix
 
+## 25 November — Hecke-translated modular-symbol analytic-source recovery (current BSD cut)
+
+[Derivation and exact execution](ClayBSDHeckeTranslatedSymbolJet20261125.md). Existing Hecke prime-power, E32 Sturm, Mellin, complex-order and Selmer machinery reused. For actual plus symbol lambda and nonzero rational lift D=D_m(lambda) of an admissible Kurihara contraction, retain H_l=D_m(T_l lambda)=a_l D, with actual good/bad cusp paths. At precision p^K and anchor valuation v<K, division only after factoring p^v gives a_l mod p^(K-v). For weight-two Sturm bound B, prime-only recovery requires p^(K-v)>2 floor(2 sqrt B); original recurrences recover all n<=B, Sturm identifies the same whole newform and complex jet. For selected N=8840664, B=3369600, p=5 unit-anchor sufficient precision K=6 rather than all-n linear bound K=11. Not actual symbol evaluations or a rank proof. Correct Kim reference: arXiv:2203.12159v5 Theorem 1.8; Corollary 1.12 gives parity, not equality. k=ord(delta)=r+d, exact remaining k=a+d with divisible Sha corank d. Full same-source recovery is paid classically; the universal vanishing-order comparison is not. No new generic interfaces. Local normal/-O 15570/15570 finite exact controls, blob ec4d8522c833e934a7414e1cd635248040242f94. No CI/native kernels or donor edits. Hodge/RH/NS frontier unchanged.
+
+
 ## 25 November — existing complex order / Selmer / literal BSD terminal reconciliation (controlling)
 
 User correction: BOTH complex jet and Selmer already exist. Do not create replacements. On Lean main actual source reread:
