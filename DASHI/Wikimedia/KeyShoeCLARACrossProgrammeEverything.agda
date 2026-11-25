@@ -20,3 +20,5 @@ import DASHI.Wikimedia.ShemIndexedAddressProductWeaveExact
 import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact
 
 import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact
+
+import DASHI.Wikimedia.ShemSourcePairPredictionObstructionExact
