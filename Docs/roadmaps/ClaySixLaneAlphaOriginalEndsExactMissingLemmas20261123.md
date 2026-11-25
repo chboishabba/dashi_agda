@@ -1,5 +1,10 @@
 # Active Clay rollup — 24 November 2026
 
+## 25 November — signed incidence / wheel donor, two additional NS sectors
+
+[Full source-derived mathematical ledger, attribution and local checker](ClayFourSignedIncidenceWheel20261125.md). NS: low-advected sector paid by exact incompressibility; far-high/high subinputs P >= C max(R,R^(7/4)) paid by reversed dyadic energy sum on comparable original shell. Remaining middle band, other original masks, sharp-cutoff and continuum open. RH: genuine Dedekind local Euler log derivative and residue-degree inverse, not global positivity or native admission. BSD: actual split prime 11 norm-one, totally positive non-Selmer necessary-condition counterexample, inert 2 norm-square collision; universal comparison open. Hodge: one nonzero algebraic restriction suffices via adjoint and F-orbit; actual producer open. Local normal and optimized exact checker passed; no CI request, kernel, universal closure or donor edits. Preserve P0 RH/BSD/NS/Hodge, zero, signed residual, indexed hyperfabric and original endpoint quantifiers. Checker blob 2d7e84099059beda04950aa94f4d7d86613fb4dd.
+
+
 ## 25 November — signed transport/lattice/Clifford continuation
 
 Four exact next cuts and attribution ledger. [Complete derivation, original attribution and exact checker](ClayFourSignedTransportLatticeClifford20261125.md). No universal or native kernel promotion.
