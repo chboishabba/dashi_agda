@@ -433,3 +433,23 @@ mathematical-physics readership.
 | Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`. | The analytic content of those lanes remains in Papers 1 and 3 and in their cited external inputs. | Any analytic YM or NS proof narrative inside Paper 8. |
 | Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`. | External DHR authority may be cited by downstream illustrations. | Full DHR reconstruction, internal compact-group construction, or exact `G_DHR ~= G_SM`. |
 | Sections 6-8 and the blocker table freeze the architecture-level scope boundary for GR, empirical, and prediction consumers. | Any GR or empirical authority belongs to the downstream consumer lane that invokes it. | Continuum GR, empirical validation, terminal unification, or automatic promotion from closure grammar to observational adequacy. |
+
+
+## Bounded realization case study — signed Hopf, KK and Moonshine geometry (26 November 2026)
+
+Source custody: [Paper 2 revived draft](https://github.com/chboishabba/dashi_agda/blob/db4e6fdad79e91043fb5449f77e326cdc6c16c1b/Docs/papers/drafts/Paper2SourcePreservingEinsteinIsraelGeometry.md), [Hopf #1554 P0AK–AO](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md), [Paper 10 binary supplement](https://github.com/chboishabba/dashi_agda/blob/ab583022e81b604556348648c221e5c39cd7d607/Docs/papers/drafts/Paper10SignedCyclotomicMonsterDraft.md). The selected examples instantiate parts of the existing realization grammar; they are not new universal axioms or proofs of UCT.1–UCT.4.
+
+For an actual reduction R:X→Y, retain the dependent residual over R(x) and, when supplied, a reconstruction B(R(x),r(x))=x. The most general carrier is a dependent fibre, not a presumed product or vector-space direct sum. The zero mode and null class have different roles: a null direction is quotiented only after proving the relevant norm and consumer descend, while a hidden nonzero physical mode may be indispensable for a downstream observable. Existing TOE realization and H05/H07 indexed hyperfabric interfaces own this structure; no new closure API is required.
+
+Concrete bounded consumers:
+
+| Source | Exact attained relation | Missing or refuted stronger claim |
+|---|---|---|
+| Periodic KK/Hopf metric | Explicit connection and common-normal spatial Israel seam; signed fibre-reflection equality | Horizontal geometry alone does not recover all radion/fibre data; full evolution and actual matter stress remain |
+| AdS constraint quadratic form | Positive ground-state energy, selected Hilbert form closure | Not dynamical radion stability, universal Hilbert construction or UCT overlap PDE |
+| AdS3 tensor reduction | Exact separated normalizable tower, positive selected mass gap | Constant massless profile nonnormalizable; boundary gravity requires new actual domain/action |
+| Einstein metric comparison | Equal Ricci, different Weyl squared (72c^4 residual) | Ricci-only physical equivalence fails |
+| Leech mod-two extension | Actual quadratic form and cocycle BIDI to binary Weyl model | Canonical FLM lifts, oscillator fields and mixed modes remain |
+| Gravity/FLM rank24 | Selected exchange-dressed C2 parity representation with retained odd sector | Natural inversion and selected 3-cycle character comparisons refuted; full Monster dynamics/action missing |
+
+These examples test the consumer discipline: a finite coordinate bijection does not imply group equivariance; character match does not identify a physical Hamiltonian; curvature contraction does not imply same metric; a weak solver residual does not certify continuum trace. Where a selected positive quadratic form exists, JvN/closure can consume that form under its original assumptions, not unrelated data or a different background. Preserve full source, domain, action and calibration before applying higher consumers. The prior numerical results are reported cross-PR receipts; no fresh executable or kernel run here. No change to the paper's central U-1a theorem statement, UCT proof frontier, live status or unification promotion.
