@@ -14,6 +14,7 @@ from warp_israel_affine import radial_source_at_receiver, offsets
 from check_f8_signed_window import window_rows
 from check_f8_modal_cfl import envelope
 from f8_exact_block_replay import reverse_leaves
+from check_f8_source_inactive_replay import active as source_active
 from check_f8_patch_causal import exterior
 from check_f8_shrinking_injection import build as build_patch, read as read_patch, inject as inject_patch
 
@@ -45,6 +46,11 @@ def run(a):
         t=brentq(lambda t:F(t)-T,.5,25)
         v=-1/math.sqrt(1+t*t);q=2*(T-T0)/.065-1
         return v,1/t,-6*math.sqrt(1-v*v)*t*math.exp(1-1/(1-q*q)) if abs(q)<1 else 0.
+    # All three actual Shu-Osher clocks; never discard small nonzero forcing.
+    source_steps=[]
+    for n in range(end):
+        T=T0+n*h
+        source_steps.append(source_active((coeff(T)[2],coeff(T+h)[2],coeff(T+h/2)[2])))
     def setup(dr,dy,nr,ny):
         src=exact_cell_averages(.04,np.arange(nr)*dr,dr);cp,cm=coefficients(nr,dr)
         def advance(x,n,source=src):return step(x,T0+n*h,h,coeff,dr,dy,source,cp,cm,a.route)
@@ -52,7 +58,7 @@ def run(a):
     sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','check_f8_source_inactive_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
     forward_ident=json.dumps(dict(route=a.route,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
     ident=json.dumps(dict(forward_identity=json.loads(forward_ident),window=a.window,shrink=a.shrink),sort_keys=True)
     consumer_key=hashlib.sha256(ident.encode()).hexdigest()[:24]
@@ -133,7 +139,7 @@ def run(a):
                     if a.shrink is not None:
                         oc=read_patch(pc,ch,n,c0n);of=read_patch(pf,ch,n,f0n);oz=read_patch(pf,ch,n,z)
                         mismatch+=oz-oc;direct+=of-oc;coarse_obs+=oc;fine_obs+=of
-                    aa=G(z,n);bb=G(z,n,sm);cc=S(cn)
+                    aa=G(z,n);bb=G(z,n,sm) if source_steps[n] else aa;cc=S(cn)
                     for j,d in enumerate((aa-bb,bb-cc)):
                         value=np.sum(lam*d,axis=(2,3))
                         signed[j]+=value;absolute[j]+=abs(value)
@@ -165,7 +171,7 @@ def run(a):
             obs_scale=np.maximum(1.,np.maximum(abs(coarse_obs),abs(fine_obs))+bound)
             if not np.all(abs(fine_obs-coarse_obs-direct)<=1e-8*obs_scale):raise ValueError('independent receiver totals disagree')
             results[f'{pos}:{ch}']=dict(coarse=coarse_obs.tolist(),fine=fine_obs.tolist(),initial=initial.tolist(),signed=signed.tolist(),absolute=absolute.tolist(),observer=mismatch.tolist(),offset=off.tolist(),total=direct.tolist(),bound=bound.tolist())
-    return dict(phase='complete_experiment',identity=ident,forward_identity=forward_ident,consumer_key=consumer_key,results=results,far_patch_support_certificate=patch_certificate,physical_causal_null_certified=False)
+    return dict(phase='complete_experiment',identity=ident,forward_identity=forward_ident,consumer_key=consumer_key,results=results,far_patch_support_certificate=patch_certificate,source_active_steps=sum(source_steps),source_inactive_steps=end-sum(source_steps),physical_causal_null_certified=False)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
