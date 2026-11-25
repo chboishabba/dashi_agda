@@ -24,7 +24,7 @@ open import Data.Rational.Unnormalised as ℚ using
 import Data.Rational.Unnormalised.Properties as ℚP
 import NonReflectiveQ as ℚSolver
 import Real as BishopReal
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
 import DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact as Canonical
@@ -63,7 +63,9 @@ canonicalApproximationBelowScale radicand precision scale K≤scale =
     absIsA : ℚ.∣ a ∣ ≡ a
     absIsA = ℚP.0≤p⇒∣p∣≡p aNN
     absBelowK : ℚ.∣ a ∣ ℚ.< (+ BishopReal.K x / 1)
-    absBelowK = BishopReal.canonical-strict-upper-bound x precision
+    absBelowK = subst (λ q → ℚ.∣ q ∣ ℚ.< (+ BishopReal.K x / 1))
+      (Regular.canonicalFloorSequencePositive radicand precision)
+      (BishopReal.canonical-strict-upper-bound x precision)
     aBelowK : a ℚ.≤ (+ BishopReal.K x / 1)
     aBelowK =
       ℚP.<⇒≤
@@ -208,11 +210,12 @@ canonicalFloorSquareRootSquaresToNat radicand =
   let x = Regular.canonicalFloorSquareRootReal radicand in
   rewrite NatP.⊔-idem (BishopReal.K x) in
   BishopReal.*≃* λ {(suc precision-1) →
-    squareErrorAtVendorProductPrecision
-      radicand
-      (BishopReal.K x)
-      (suc precision-1)
-      NatP.≤-refl}
+    let p = Reciprocal.productPrecision (BishopReal.K x) (suc precision-1)
+    in subst (λ a → ℚ.∣ (a ℚ.* a) ℚ.- Approximation.natAsRational radicand ∣
+      ℚ.≤ (+ 2 / suc precision-1))
+      (sym (Regular.canonicalFloorSequencePositive radicand p))
+      (squareErrorAtVendorProductPrecision radicand (BishopReal.K x)
+        (suc precision-1) NatP.≤-refl)}
 
 bishopNatSquareRootSemanticSquareLevel : ProofLevel
 bishopNatSquareRootSemanticSquareLevel = machineChecked

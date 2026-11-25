@@ -5,6 +5,7 @@ module DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Integer.Base as ℤ using (+_; +≤+)
 open import Data.Nat.Base using (NonZero; z≤n)
@@ -88,10 +89,18 @@ canonicalNatSquareRootApproximation :
   Approximation.BishopNatSquareRootApproximation radicand
 canonicalNatSquareRootApproximation radicand = record
   { regularApproximation = Regular.canonicalRegularApproximation radicand
-  ; approximationNonnegative = canonicalApproximationNonnegative radicand
-  ; approximationSquareBelowRadicand = canonicalApproximationSquareBelow radicand
+  ; approximationNonnegative = λ n → subst (0ℚᵘ ℚ.≤_)
+      (sym (Regular.canonicalFloorSequencePositive radicand n))
+      (canonicalApproximationNonnegative radicand n)
+  ; approximationSquareBelowRadicand = λ n →
+      subst (λ a → (a ℚ.* a) ℚ.≤ Approximation.natAsRational radicand)
+        (sym (Regular.canonicalFloorSequencePositive radicand n))
+        (canonicalApproximationSquareBelow radicand n)
   ; radicandBelowOneOverNUpperSquare =
-      radicandBelowCanonicalUpperSquare radicand
+      λ n → subst (λ a → Approximation.natAsRational radicand ℚ.≤
+        ((a ℚ.+ (+ 1 / n)) ℚ.* (a ℚ.+ (+ 1 / n))))
+        (sym (Regular.canonicalFloorSequencePositive radicand n))
+        (radicandBelowCanonicalUpperSquare radicand n)
   }
 
 canonicalNatSquareRootCandidate : Nat → BishopReal.ℝ
