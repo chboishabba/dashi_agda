@@ -9,6 +9,9 @@ open import Data.Product using (_×_)
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Geometry.HilbertLorentzForcing as Linear
+import DASHI.Moonshine.Monster3BActualLinearWeightFrameExact as Frame
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
+import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as Zeta
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 import DASHI.Moonshine.Monster3BModelStoneVonNeumannRecognitionExact as FiniteModel
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as WrongType
@@ -24,7 +27,7 @@ import DASHI.Wikimedia.IbrahimMonster3BSuzukiNinetyPermutationCharacterNoGoExact
 --
 -- together with a proof-bearing evaluation isomorphism
 --
---   H_zeta x S_zeta  <->  W_zeta
+--   H_zeta tensor S_zeta  <->  W_zeta
 --
 -- at the LINEAR representation level.
 --
@@ -91,6 +94,9 @@ serreAttribution = Snowball.canonicalSourceRoleSnowballReceipt serre
 -- 2. Proof-bearing same-object contract.
 ------------------------------------------------------------------------
 
+-- Historical pure-pair API retained for existing consumers. It cannot be
+-- inhabited as an evaluation equivalence of arbitrary linear tensors.
+-- Use ActualLinearWeightHomSpace below for the full-vector endpoint.
 record ActualLinearMultiplicityHomSpace : Set₁ where
   field
     HeisenbergCarrier : Set
@@ -146,6 +152,55 @@ record ActualLinearMultiplicityHomSpace : Set₁ where
     evaluationIsLinearIntertwiner : Set
 
 open ActualLinearMultiplicityHomSpace public
+
+------------------------------------------------------------------------
+-- Full linear successor. The phase frame is on the SAME existing literal
+-- zeta restriction and the SAME multiplicity linear carrier. The two
+-- coordinate inverses are derived by Frame, not fields asserting an inverse
+-- for Cartesian pairs. Actual representation and character inputs remain
+-- proof-bearing source obligations.
+------------------------------------------------------------------------
+
+record ActualLinearWeightHomSpace : Set₁ where
+  field
+    literalLinearZeta : Zeta.LinearSingleActionProducer
+    weightFrame : Frame.ActualLinearWeightFrame
+    frameIsLiteralZeta : Frame.sector weightFrame ≡ Zeta.zetaLinearCarrier literalLinearZeta
+    multiplicityRepresentation : WrongType.LinearMultiplicityRepresentation
+    vacuumIsMultiplicityCarrier :
+      Frame.vacuum weightFrame ≡ WrongType.linearCarrier multiplicityRepresentation
+
+    HeisenbergVector : Set
+    EquivariantHom : Set
+    HeisenbergBasis : H.X6 → HeisenbergVector
+    vacuumPosition : H.X6
+    E : Set
+    actHeisenberg : E → HeisenbergVector → HeisenbergVector
+    actSector : E → Linear.Vector (Frame.sector weightFrame) →
+      Linear.Vector (Frame.sector weightFrame)
+    evalHom : EquivariantHom → HeisenbergVector → Linear.Vector (Frame.sector weightFrame)
+    evalHomEquivariant : ∀ f g h →
+      actSector g (evalHom f h) ≡ evalHom f (actHeisenberg g h)
+    homToVacuum : EquivariantHom → Linear.Vector (Frame.vacuum weightFrame)
+    vacuumToHom : Linear.Vector (Frame.vacuum weightFrame) → EquivariantHom
+    vacuumAfterHom : ∀ f → vacuumToHom (homToVacuum f) ≡ f
+    homAfterVacuum : ∀ u → homToVacuum (vacuumToHom u) ≡ u
+    evalHomOnBasis : ∀ f x → evalHom f (HeisenbergBasis x) ≡
+      Frame.includeWeight weightFrame x (homToVacuum f)
+
+    -- Explicit witness of equality of source and actual character functions.
+    -- The trace functional itself must be attached to the actual linear
+    -- action by the representation-layer source (Lean #47), not guessed
+    -- from the dimension of this record.
+    traceOfMultiplicityAction :
+      Linear.Group (WrongType.linearAction multiplicityRepresentation) →
+      Linear.Scalar (WrongType.linearCarrier multiplicityRepresentation)
+    selectedSourceCharacter :
+      Linear.Group (WrongType.linearAction multiplicityRepresentation) →
+      Linear.Scalar (WrongType.linearCarrier multiplicityRepresentation)
+    sameCharacter : ∀ g → traceOfMultiplicityAction g ≡ selectedSourceCharacter g
+
+open ActualLinearWeightHomSpace public
 
 ------------------------------------------------------------------------
 -- 3. Existing finite-model theorem is retained as a donor, not promoted.
@@ -241,7 +296,7 @@ currentLinearMultiplicityHomFrontier : LinearMultiplicityHomFrontier
 currentLinearMultiplicityHomFrontier = linear-multiplicity-hom-frontier
   true true true true true
   false false false false
-  "construct the actual representation-layer objects H_zeta and W_zeta as linear carriers and define S_zeta = Hom_E(H_zeta,W_zeta) on those same objects. Supply the evaluation map and constructive inverse, then instantiate the existing projective-cocycle cancellation owner with this exact S_zeta. The source-paid chi_12+chi_78 character and generic mathlib isotypic compiler apply only after that same-object linear weld. Do not reuse the finite X6 x Fin90 basis evaluation as the linear Hom evaluation."
+  "construct the actual representation-layer objects H_zeta and W_zeta as linear carriers and define S_zeta = Hom_E(H_zeta,W_zeta) on those same objects. Use ActualLinearWeightHomSpace and Frame.evaluate/Frame.recover for the full linear finite-copy map (not the historical Cartesian pair inverse), then instantiate the existing projective-cocycle cancellation owner with this exact S_zeta. The source-paid chi_12+chi_78 character and generic mathlib isotypic compiler apply only after that same-object linear weld. Do not reuse the finite X6 x Fin90 basis evaluation as the linear Hom evaluation."
 
 characterFrontier : Character.PhaseCharacterWeldFrontier
 characterFrontier = Character.currentPhaseCharacterWeldFrontier
