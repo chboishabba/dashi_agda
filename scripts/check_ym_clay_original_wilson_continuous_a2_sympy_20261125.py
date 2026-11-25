@@ -1,4 +1,4 @@
-from sympy import symbols, simplify
+from sympy import Abs, symbols, simplify
 
 SOURCE_OWNERS = {
     "original_wilson": "YMClayOriginalVariableWilsonCovarianceSourceExact",
@@ -96,6 +96,24 @@ require(
 
 q_nonnegative_proxy = q
 zero("2q implies 4q algebra", (4 * q_nonnegative_proxy - 2 * q_nonnegative_proxy) - 2 * q)
+
+center_a, center_b = symbols("centerA centerB", real=True)
+oscillation_lower = center_a * center_b - 1 - Abs(center_a - center_b)
+oscillation_upper = center_a * center_b + 1 + Abs(center_a + center_b)
+zero(
+    "signed centered product oscillation identity",
+    (oscillation_upper - oscillation_lower)
+    - (2 + Abs(center_a + center_b) + Abs(center_a - center_b)),
+)
+extremal_widths = [
+    simplify((oscillation_upper - oscillation_lower).subs({center_a: ca, center_b: cb}))
+    for ca in (-1, 1)
+    for cb in (-1, 1)
+]
+require(
+    "signed centered product oscillation sharp at extremal centers",
+    extremal_widths == [4, 4, 4, 4],
+)
 
 m, M, mean_good = symbols("m M meanGood")
 zero(

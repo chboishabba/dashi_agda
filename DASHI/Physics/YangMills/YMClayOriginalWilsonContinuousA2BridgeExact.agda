@@ -54,6 +54,15 @@ fourℝ = twoℝ +ℝ twoℝ
 RangeNegOneOne : ℝ → Set
 RangeNegOneOne value = ((0ℝ -ℝ 1ℝ) ≤ℝ value) × (value ≤ℝ 1ℝ)
 
+record CenteredProductOscillation (a b : ℝ) : Set where
+  field
+    lower upper : ℝ
+    lowerBound : ∀ x y → RangeNegOneOne x → RangeNegOneOne y →
+      lower ≤ℝ (x -ℝ a) *ℝ (y -ℝ b)
+    upperBound : ∀ x y → RangeNegOneOne x → RangeNegOneOne y →
+      (x -ℝ a) *ℝ (y -ℝ b) ≤ℝ upper
+    width : upper -ℝ lower ≡ fourℝ
+
 record ContinuousWilsonArithmetic
     {Converges : (Nat → ℝ) → ℝ → Set}
     (quotient : Quotient.RealQuotientConvergenceAuthority Converges) : Set₁ where
@@ -125,6 +134,9 @@ record ContinuousWilsonArithmetic
       (0ℝ -ℝ twoℝ) ≤ℝ x → x ≤ℝ twoℝ →
       (0ℝ -ℝ twoℝ) ≤ℝ y → y ≤ℝ twoℝ →
       ((0ℝ -ℝ fourℝ) ≤ℝ x *ℝ y) × (x *ℝ y ≤ℝ fourℝ)
+    centeredProductOscillation : ∀ a b →
+      RangeNegOneOne a → RangeNegOneOne b →
+      CenteredProductOscillation a b
     shiftAbsoluteBoundOfInterval :
       ∀ (shift χhMean goodNumer q lower upper : ℝ) →
       shift ≡ χhMean -ℝ q *ℝ goodNumer →
@@ -607,6 +619,9 @@ module _
   signedCovarianceConstant : ℝ
   signedCovarianceConstant = fourℝ -ℝ (0ℝ -ℝ fourℝ)
 
+  sharpSignedCovarianceConstant : ℝ
+  sharpSignedCovarianceConstant = fourℝ
+
   expectationMonoFor :
     (Ealg : ContinuousExpectationAlgebra Configuration) →
     ∀ f g → (∀ links → f links ≤ℝ g links) →
@@ -1058,6 +1073,60 @@ module _
     in subst (λ value → absℝ value
          ≤ℝ signedCovarianceConstant *ℝ q contours)
        (sym (covarianceMidpointGap contours strictGood f g)) bounded
+
+  covarianceSharpSignedGapBound :
+    ∀ contours f g →
+    (∀ links → RangeNegOneOne (f links)) →
+    (∀ links → RangeNegOneOne (g links)) →
+    0ℝ <ℝ goodMass contours →
+    absℝ (covarianceμ f g -ℝ covarianceν contours f g)
+      ≤ℝ sharpSignedCovarianceConstant *ℝ q contours
+  covarianceSharpSignedGapBound contours f g fRange gRange strictGood =
+    let a = Quotient.divide quotient (μ f +ℝ ν contours f) twoℝ
+        b = Quotient.divide quotient (μ g +ℝ ν contours g) twoℝ
+        νfBounds =
+          expectationSignedBoundsFor (νAlgebra contours strictGood) f fRange
+        νgBounds =
+          expectationSignedBoundsFor (νAlgebra contours strictGood) g gRange
+        aRange = ContinuousWilsonArithmetic.signedMidpointBounds arithmetic
+          (μ f) (ν contours f)
+          (expectationSignedBoundsFor expectationAlgebra f fRange) νfBounds
+        bRange = ContinuousWilsonArithmetic.signedMidpointBounds arithmetic
+          (μ g) (ν contours g)
+          (expectationSignedBoundsFor expectationAlgebra g gRange) νgBounds
+        oscillation =
+          ContinuousWilsonArithmetic.centeredProductOscillation arithmetic
+            a b aRange bRange
+        lower = CenteredProductOscillation.lower oscillation
+        upper = CenteredProductOscillation.upper oscillation
+        h = λ links → (f links -ℝ a) *ℝ (g links -ℝ b)
+        hRestricted = restrictedBounds contours h lower upper
+          (λ links → CenteredProductOscillation.lowerBound oscillation
+            (f links) (g links) (fRange links) (gRange links))
+          (λ links → CenteredProductOscillation.upperBound oscillation
+            (f links) (g links) (fRange links) (gRange links))
+        shiftEquality = μMinusν contours h
+        bounded = ContinuousWilsonArithmetic.shiftAbsoluteBoundOfInterval
+          arithmetic
+          (μ h -ℝ ν contours h)
+          (μ (λ links → χ contours links *ℝ h links))
+          (ν contours h)
+          (q contours)
+          lower
+          upper
+          shiftEquality
+          (proj₁ hRestricted)
+          (proj₁ (proj₂ hRestricted))
+          (proj₁ (proj₂ (proj₂ hRestricted)))
+          (proj₂ (proj₂ (proj₂ hRestricted)))
+          (proj₁ (qRange contours))
+        boundedSharp =
+          subst
+            (λ width → absℝ (μ h -ℝ ν contours h) ≤ℝ width *ℝ q contours)
+            (CenteredProductOscillation.width oscillation) bounded
+    in subst (λ value → absℝ value
+         ≤ℝ sharpSignedCovarianceConstant *ℝ q contours)
+       (sym (covarianceMidpointGap contours strictGood f g)) boundedSharp
 
   sumExpectation : ∀ functions →
     μ (λ links → sumℝ (map (λ f → f links) functions))
