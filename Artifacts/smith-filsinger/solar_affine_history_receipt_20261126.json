@@ -1,0 +1,40 @@
+{
+  "status": "AFFINE_WORK_QUOTIENT_AND_OBSERVED_COMPONENT_RESIDUAL",
+  "checker_blob": "db08759e0147448f90dd7f47d481cc7a5f6be406",
+  "donor_blob": "8a024a71503131fdfd9aaf4f422bcdd8307d7927",
+  "data_sha256": "8ff495be1ebdd6609813061880b8faf08ac8365540e8ac2d2d64961c9b3b6880",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0, SymPy 1.14.0; full original donor executed; committed checker Git blob matches local; no CI/kernel",
+  "ranks": [
+    3,
+    6,
+    10
+  ],
+  "storage_ranks": [
+    4,
+    7,
+    11
+  ],
+  "word_step_checks": 160,
+  "adjoint": {
+    "goal_error": "10",
+    "initial": "-3",
+    "residual_terms": [
+      "3",
+      "10",
+      "0"
+    ]
+  },
+  "keogram": {
+    "samples": [
+      61,
+      615
+    ],
+    "max_identity_error_W_m2": 6.400392707690307e-20,
+    "max_omitted_product_W_m2": 2.1215079002297157e-7,
+    "max_bound_W_m2": 4.339093856652602e-7,
+    "strict_sign_certificates": 615,
+    "sign_reversals": 0
+  },
+  "limitations": "Affine transitions, signed work and storage are synthetic rational fixtures, not geospace plant, actuator or paid physical energy. Original Lin GAMERA figure excerpt: trapezoid-weighted time average of paired component product with constant and 200s harmonic projection, no orientation, complete vector flux, continuum/time aliasing error or actual ground transfer. Floating point residual bounds within recorded samples, not interval-certified or source-attributed measurements. No physical extraction or intervention.",
+  "physical_admission": false
+}
