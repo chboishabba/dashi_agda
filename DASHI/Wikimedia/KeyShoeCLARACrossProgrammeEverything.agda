@@ -18,3 +18,5 @@ import DASHI.Wikimedia.KeyShoeIndexedTrigramWeaveExact
 import DASHI.Wikimedia.ShemIndexedAddressProductWeaveExact
 
 import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact
+
+import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact
