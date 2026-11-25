@@ -1,0 +1,384 @@
+{
+  "trainBlocks": 1134,
+  "trainByBook": {
+    "exodus": 85,
+    "genesis": 338,
+    "leviticus": 194,
+    "numbers": 279,
+    "deuteronomy": 238
+  },
+  "predictorRank": 433,
+  "predictorColumns": 433,
+  "outputTritCoordinates": 216,
+  "inconsistentTritCoordinates": 216,
+  "inconsistentGlyphColumns": 72,
+  "indexedPairOnly": {
+    "testBlocks": 175,
+    "letters": 12600,
+    "oracleMaxCorrect": 9629,
+    "columnsWithCollision": 72,
+    "positions": [
+      {
+        "column": 0,
+        "ceiling": 133,
+        "collisions": 32
+      },
+      {
+        "column": 1,
+        "ceiling": 130,
+        "collisions": 33
+      },
+      {
+        "column": 2,
+        "ceiling": 136,
+        "collisions": 35
+      },
+      {
+        "column": 3,
+        "ceiling": 133,
+        "collisions": 30
+      },
+      {
+        "column": 4,
+        "ceiling": 130,
+        "collisions": 32
+      },
+      {
+        "column": 5,
+        "ceiling": 143,
+        "collisions": 28
+      },
+      {
+        "column": 6,
+        "ceiling": 123,
+        "collisions": 40
+      },
+      {
+        "column": 7,
+        "ceiling": 132,
+        "collisions": 32
+      },
+      {
+        "column": 8,
+        "ceiling": 127,
+        "collisions": 33
+      },
+      {
+        "column": 9,
+        "ceiling": 133,
+        "collisions": 35
+      },
+      {
+        "column": 10,
+        "ceiling": 129,
+        "collisions": 33
+      },
+      {
+        "column": 11,
+        "ceiling": 141,
+        "collisions": 27
+      },
+      {
+        "column": 12,
+        "ceiling": 132,
+        "collisions": 29
+      },
+      {
+        "column": 13,
+        "ceiling": 136,
+        "collisions": 33
+      },
+      {
+        "column": 14,
+        "ceiling": 125,
+        "collisions": 38
+      },
+      {
+        "column": 15,
+        "ceiling": 139,
+        "collisions": 30
+      },
+      {
+        "column": 16,
+        "ceiling": 135,
+        "collisions": 29
+      },
+      {
+        "column": 17,
+        "ceiling": 132,
+        "collisions": 35
+      },
+      {
+        "column": 18,
+        "ceiling": 136,
+        "collisions": 31
+      },
+      {
+        "column": 19,
+        "ceiling": 143,
+        "collisions": 27
+      },
+      {
+        "column": 20,
+        "ceiling": 132,
+        "collisions": 30
+      },
+      {
+        "column": 21,
+        "ceiling": 131,
+        "collisions": 33
+      },
+      {
+        "column": 22,
+        "ceiling": 127,
+        "collisions": 38
+      },
+      {
+        "column": 23,
+        "ceiling": 135,
+        "collisions": 32
+      },
+      {
+        "column": 24,
+        "ceiling": 135,
+        "collisions": 32
+      },
+      {
+        "column": 25,
+        "ceiling": 140,
+        "collisions": 27
+      },
+      {
+        "column": 26,
+        "ceiling": 130,
+        "collisions": 34
+      },
+      {
+        "column": 27,
+        "ceiling": 132,
+        "collisions": 30
+      },
+      {
+        "column": 28,
+        "ceiling": 139,
+        "collisions": 29
+      },
+      {
+        "column": 29,
+        "ceiling": 131,
+        "collisions": 32
+      },
+      {
+        "column": 30,
+        "ceiling": 136,
+        "collisions": 31
+      },
+      {
+        "column": 31,
+        "ceiling": 134,
+        "collisions": 33
+      },
+      {
+        "column": 32,
+        "ceiling": 136,
+        "collisions": 25
+      },
+      {
+        "column": 33,
+        "ceiling": 134,
+        "collisions": 33
+      },
+      {
+        "column": 34,
+        "ceiling": 138,
+        "collisions": 30
+      },
+      {
+        "column": 35,
+        "ceiling": 134,
+        "collisions": 31
+      },
+      {
+        "column": 36,
+        "ceiling": 127,
+        "collisions": 30
+      },
+      {
+        "column": 37,
+        "ceiling": 125,
+        "collisions": 31
+      },
+      {
+        "column": 38,
+        "ceiling": 128,
+        "collisions": 36
+      },
+      {
+        "column": 39,
+        "ceiling": 141,
+        "collisions": 25
+      },
+      {
+        "column": 40,
+        "ceiling": 135,
+        "collisions": 33
+      },
+      {
+        "column": 41,
+        "ceiling": 132,
+        "collisions": 33
+      },
+      {
+        "column": 42,
+        "ceiling": 141,
+        "collisions": 26
+      },
+      {
+        "column": 43,
+        "ceiling": 139,
+        "collisions": 29
+      },
+      {
+        "column": 44,
+        "ceiling": 140,
+        "collisions": 26
+      },
+      {
+        "column": 45,
+        "ceiling": 134,
+        "collisions": 33
+      },
+      {
+        "column": 46,
+        "ceiling": 140,
+        "collisions": 30
+      },
+      {
+        "column": 47,
+        "ceiling": 136,
+        "collisions": 31
+      },
+      {
+        "column": 48,
+        "ceiling": 129,
+        "collisions": 36
+      },
+      {
+        "column": 49,
+        "ceiling": 134,
+        "collisions": 33
+      },
+      {
+        "column": 50,
+        "ceiling": 139,
+        "collisions": 25
+      },
+      {
+        "column": 51,
+        "ceiling": 142,
+        "collisions": 26
+      },
+      {
+        "column": 52,
+        "ceiling": 133,
+        "collisions": 32
+      },
+      {
+        "column": 53,
+        "ceiling": 125,
+        "collisions": 35
+      },
+      {
+        "column": 54,
+        "ceiling": 129,
+        "collisions": 36
+      },
+      {
+        "column": 55,
+        "ceiling": 141,
+        "collisions": 27
+      },
+      {
+        "column": 56,
+        "ceiling": 137,
+        "collisions": 33
+      },
+      {
+        "column": 57,
+        "ceiling": 141,
+        "collisions": 32
+      },
+      {
+        "column": 58,
+        "ceiling": 132,
+        "collisions": 31
+      },
+      {
+        "column": 59,
+        "ceiling": 133,
+        "collisions": 33
+      },
+      {
+        "column": 60,
+        "ceiling": 124,
+        "collisions": 36
+      },
+      {
+        "column": 61,
+        "ceiling": 132,
+        "collisions": 32
+      },
+      {
+        "column": 62,
+        "ceiling": 132,
+        "collisions": 28
+      },
+      {
+        "column": 63,
+        "ceiling": 126,
+        "collisions": 40
+      },
+      {
+        "column": 64,
+        "ceiling": 133,
+        "collisions": 29
+      },
+      {
+        "column": 65,
+        "ceiling": 136,
+        "collisions": 33
+      },
+      {
+        "column": 66,
+        "ceiling": 134,
+        "collisions": 34
+      },
+      {
+        "column": 67,
+        "ceiling": 139,
+        "collisions": 26
+      },
+      {
+        "column": 68,
+        "ceiling": 134,
+        "collisions": 29
+      },
+      {
+        "column": 69,
+        "ceiling": 132,
+        "collisions": 30
+      },
+      {
+        "column": 70,
+        "ceiling": 130,
+        "collisions": 35
+      },
+      {
+        "column": 71,
+        "ceiling": 132,
+        "collisions": 30
+      }
+    ]
+  },
+  "qualification": "fixed affine GF3 map from all 432 input trit coordinates to all 216 output trit coordinates; allows arbitrary cross-coordinate mixing including Frobenius, but not nonlinear or block-dependent actions. Indexed pair ceiling only adds column, not chapter or surrounding text. Existing exploratory corpus and synthetic chapter blocks; not fresh blind validation."
+}
