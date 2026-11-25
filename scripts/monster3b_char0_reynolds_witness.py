@@ -32,6 +32,8 @@ def run(a):
     require(phase.get("status")=="LITERAL_MM_STANDARD_D_PHASE_RECOVERED"
             and phase.get("cover_sha256")==sha(a.cover)
             and phase.get("manifest_sha256")==sha(a.manifest),"literal phase receipt not attached")
+    require(phase.get("raw_wheel_has_order13") is True and phase.get("literal_wheel_13_defect_z_power")==0,
+            "literal cyclic source word has a retained central order defect or is unexecuted")
     require(join.get("status")=="ORIGINAL_ORDINARY_SOURCE_TO_ACTUAL_MM31_SIGNED_OPERATOR_WELD"
             and join.get("cover_sha256")==sha(a.cover)
             and join.get("model_sha256")==sha(a.model)
@@ -100,6 +102,8 @@ def run(a):
         "actual_C":phase["canonical_C_word"],"actual_D":phase["canonical_D_word"],
         "actual_standard_D":phase["standard_D_word"],"actual_Q7":phase["Q7_word"],
         "actual_D_phase":phase["Q7_central_z_power"],
+        "actual_order13_word":phase["literal_wheel_word"],
+        "actual_order13_defect_word":phase["literal_wheel_13_defect_word"],
         "center_word":manifest["center_word"],
         "modulation_words":manifest["modulation_words"],
         "translation_words":manifest["translation_words"],
