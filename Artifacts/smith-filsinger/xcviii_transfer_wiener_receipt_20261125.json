@@ -1,0 +1,54 @@
+{
+  "status": "EXACT_NEARBY_DIPLEXER_WIENER_CERTIFICATE",
+  "source_head": "217d2a7cd023981e129eae15375b92ef283ef863",
+  "checker_blob": "9e6934afe640c9ffa43d880543de5341624767c8",
+  "mean_x": "9200240000/27917520759",
+  "radius": "13/100",
+  "map_upper": "113119159943/1000000000000",
+  "contraction_upper": "204562363421/1000000000000",
+  "guard_upper": [
+    "25909312183/500000000000",
+    "-106851993/4000000000"
+  ],
+  "tail_dominance": "214741005991/1000000000000",
+  "first_harmonic_lower": "43991181183/1000000000000",
+  "eta_lower": "233946226029/1000000000000",
+  "eta_upper": "261047694099/1000000000000",
+  "eta_lower_float": 0.23394622602947468,
+  "eta_upper_float": 0.26104769409818135,
+  "finite_harmonics": 384,
+  "parameters": {
+    "ell": [
+      "-36/25",
+      "-6589440/126517"
+    ],
+    "g": [
+      "8.54917",
+      ".433176"
+    ],
+    "ac_transformer": "122.84358",
+    "LC": [
+      ".011714616",
+      ".00019666765",
+      "22.168081",
+      ".000064578004",
+      ".14792652",
+      "16.682019"
+    ],
+    "Y": [
+      [
+        "209/45",
+        "-20/9"
+      ],
+      [
+        "-20/9",
+        "36"
+      ]
+    ]
+  },
+  "proof_scope": "Exact local rational computation and analytical Wiener/Banach argument; existence and local uniqueness in specified Fourier ball, no global attraction or hardware claim. Source circuit and topology transcribed from inspected donors, not full original dependency replay.",
+  "physical_admission": false,
+  "original_J36": false,
+  "CI": false,
+  "kernel": false
+}
