@@ -45,6 +45,15 @@ continuousWilsonA2GoodFieldComparisonStatus : String
 continuousWilsonA2GoodFieldComparisonStatus =
   "source-weighted good measure vs CMP116 good-field measure remains unpaid"
 
+twoℝ : ℝ
+twoℝ = 1ℝ +ℝ 1ℝ
+
+fourℝ : ℝ
+fourℝ = twoℝ +ℝ twoℝ
+
+RangeNegOneOne : ℝ → Set
+RangeNegOneOne value = ((0ℝ -ℝ 1ℝ) ≤ℝ value) × (value ≤ℝ 1ℝ)
+
 record ContinuousWilsonArithmetic
     {Converges : (Nat → ℝ) → ℝ → Set}
     (quotient : Quotient.RealQuotientConvergenceAuthority Converges) : Set₁ where
@@ -106,6 +115,25 @@ record ContinuousWilsonArithmetic
       (0ℝ -ℝ 1ℝ) ≤ℝ x → x ≤ℝ 1ℝ →
       (0ℝ -ℝ 1ℝ) ≤ℝ y → y ≤ℝ 1ℝ →
       ((0ℝ -ℝ 1ℝ) ≤ℝ x *ℝ y) × (x *ℝ y ≤ℝ 1ℝ)
+    signedMidpointBounds : ∀ x y →
+      RangeNegOneOne x → RangeNegOneOne y →
+      RangeNegOneOne (Quotient.divide quotient (x +ℝ y) twoℝ)
+    signedDifferenceBounds : ∀ {x y : ℝ} →
+      RangeNegOneOne x → RangeNegOneOne y →
+      ((0ℝ -ℝ twoℝ) ≤ℝ x -ℝ y) × (x -ℝ y ≤ℝ twoℝ)
+    signedProductBounds : ∀ {x y : ℝ} →
+      (0ℝ -ℝ twoℝ) ≤ℝ x → x ≤ℝ twoℝ →
+      (0ℝ -ℝ twoℝ) ≤ℝ y → y ≤ℝ twoℝ →
+      ((0ℝ -ℝ fourℝ) ≤ℝ x *ℝ y) × (x *ℝ y ≤ℝ fourℝ)
+    shiftAbsoluteBoundOfInterval :
+      ∀ (shift χhMean goodNumer q lower upper : ℝ) →
+      shift ≡ χhMean -ℝ q *ℝ goodNumer →
+      lower *ℝ q ≤ℝ χhMean →
+      χhMean ≤ℝ upper *ℝ q →
+      lower ≤ℝ goodNumer →
+      goodNumer ≤ℝ upper →
+      0ℝ ≤ℝ q →
+      absℝ shift ≤ℝ (upper -ℝ lower) *ℝ q
     centeredProductExpectation :
       ∀ {Configuration : Set}
         (E : (Configuration → ℝ) → ℝ)
@@ -576,6 +604,79 @@ module _
       (λ links → proj₁ (badContourCutoffRange contours links))
       (λ links → proj₂ (badContourCutoffRange contours links))
 
+  signedCovarianceConstant : ℝ
+  signedCovarianceConstant = fourℝ -ℝ (0ℝ -ℝ fourℝ)
+
+  expectationMonoFor :
+    (Ealg : ContinuousExpectationAlgebra Configuration) →
+    ∀ f g → (∀ links → f links ≤ℝ g links) →
+    ContinuousExpectationAlgebra.E Ealg f ≤ℝ
+      ContinuousExpectationAlgebra.E Ealg g
+  expectationMonoFor Ealg f g pointwise =
+    let differenceNonnegative =
+          ContinuousExpectationAlgebra.EPositive Ealg
+            (λ links → g links -ℝ f links)
+            (λ links → ContinuousWilsonArithmetic.subNonnegative arithmetic
+              (pointwise links))
+        sumBound = ContinuousWilsonArithmetic.leAddNonnegative arithmetic
+          differenceNonnegative
+        sumEqualsG =
+          ContinuousExpectationAlgebra.EExt Ealg
+            (λ links → f links +ℝ (g links -ℝ f links)) g
+            (λ links → ContinuousWilsonArithmetic.addSubCancel arithmetic
+              (f links) (g links))
+        sumValue =
+          trans
+            (ContinuousExpectationAlgebra.EAdd Ealg f
+              (λ links → g links -ℝ f links))
+            refl
+        sumUpper =
+          subst
+            (λ value → ContinuousExpectationAlgebra.E Ealg f +ℝ
+              ContinuousExpectationAlgebra.E Ealg
+                (λ links → g links -ℝ f links) ≤ℝ value)
+            (trans (sym sumValue) sumEqualsG) ≤ℝ-refl
+    in ≤ℝ-trans sumBound sumUpper
+
+  expectationMinusOneFor :
+    (Ealg : ContinuousExpectationAlgebra Configuration) →
+    ContinuousExpectationAlgebra.E Ealg (λ _ → 0ℝ -ℝ 1ℝ) ≡ (0ℝ -ℝ 1ℝ)
+  expectationMinusOneFor Ealg =
+    let minusOne = 0ℝ -ℝ 1ℝ
+        scaled =
+          trans
+            (ContinuousExpectationAlgebra.EScale Ealg minusOne (λ _ → 1ℝ))
+            (trans
+              (cong (λ value → minusOne *ℝ value)
+                (ContinuousExpectationAlgebra.EOne Ealg))
+              (mulOneʳ minusOne))
+        sameFunction =
+          ContinuousExpectationAlgebra.EExt Ealg
+            (λ _ → minusOne *ℝ 1ℝ) (λ _ → minusOne)
+            (λ _ → mulOneʳ minusOne)
+    in trans (sym sameFunction) scaled
+
+  expectationSignedBoundsFor :
+    (Ealg : ContinuousExpectationAlgebra Configuration) →
+    ∀ f → (∀ links → RangeNegOneOne (f links)) →
+    RangeNegOneOne (ContinuousExpectationAlgebra.E Ealg f)
+  expectationSignedBoundsFor Ealg f fRange =
+    let lowerBase =
+          expectationMonoFor Ealg (λ _ → 0ℝ -ℝ 1ℝ) f
+            (λ links → proj₁ (fRange links))
+        lower =
+          subst
+            (λ value → value ≤ℝ ContinuousExpectationAlgebra.E Ealg f)
+            (expectationMinusOneFor Ealg) lowerBase
+        upperBase =
+          expectationMonoFor Ealg f (λ _ → 1ℝ)
+            (λ links → proj₂ (fRange links))
+        upper =
+          subst
+            (λ value → ContinuousExpectationAlgebra.E Ealg f ≤ℝ value)
+            (ContinuousExpectationAlgebra.EOne Ealg) upperBase
+    in lower , upper
+
   goodMass : List (List PlaquetteIndex) → ℝ
   goodMass contours = μ (λ links → 1ℝ -ℝ χ contours links)
 
@@ -904,6 +1005,59 @@ module _
     in subst (λ value → absℝ value
          ≤ℝ (1ℝ +ℝ 1ℝ +ℝ (1ℝ +ℝ 1ℝ)) *ℝ q contours)
        (sym (covarianceMidpointGap contours strictGood f g)) centeredBound
+
+  covarianceSignedGapBound :
+    ∀ contours f g →
+    (∀ links → RangeNegOneOne (f links)) →
+    (∀ links → RangeNegOneOne (g links)) →
+    0ℝ <ℝ goodMass contours →
+    absℝ (covarianceμ f g -ℝ covarianceν contours f g)
+      ≤ℝ signedCovarianceConstant *ℝ q contours
+  covarianceSignedGapBound contours f g fRange gRange strictGood =
+    let μfBounds = expectationSignedBoundsFor expectationAlgebra f fRange
+        μgBounds = expectationSignedBoundsFor expectationAlgebra g gRange
+        νfBounds =
+          expectationSignedBoundsFor (νAlgebra contours strictGood) f fRange
+        νgBounds =
+          expectationSignedBoundsFor (νAlgebra contours strictGood) g gRange
+        a = Quotient.divide quotient (μ f +ℝ ν contours f) twoℝ
+        b = Quotient.divide quotient (μ g +ℝ ν contours g) twoℝ
+        aRange = ContinuousWilsonArithmetic.signedMidpointBounds arithmetic
+          (μ f) (ν contours f) μfBounds νfBounds
+        bRange = ContinuousWilsonArithmetic.signedMidpointBounds arithmetic
+          (μ g) (ν contours g) μgBounds νgBounds
+        fDiffBounds = λ links →
+          ContinuousWilsonArithmetic.signedDifferenceBounds arithmetic
+            (fRange links) aRange
+        gDiffBounds = λ links →
+          ContinuousWilsonArithmetic.signedDifferenceBounds arithmetic
+            (gRange links) bRange
+        h = λ links → (f links -ℝ a) *ℝ (g links -ℝ b)
+        hBounds = λ links →
+          ContinuousWilsonArithmetic.signedProductBounds arithmetic
+            (proj₁ (fDiffBounds links)) (proj₂ (fDiffBounds links))
+            (proj₁ (gDiffBounds links)) (proj₂ (gDiffBounds links))
+        hRestricted = restrictedBounds contours h (0ℝ -ℝ fourℝ) fourℝ
+          (λ links → proj₁ (hBounds links))
+          (λ links → proj₂ (hBounds links))
+        shiftEquality = μMinusν contours h
+        bounded = ContinuousWilsonArithmetic.shiftAbsoluteBoundOfInterval
+          arithmetic
+          (μ h -ℝ ν contours h)
+          (μ (λ links → χ contours links *ℝ h links))
+          (ν contours h)
+          (q contours)
+          (0ℝ -ℝ fourℝ)
+          fourℝ
+          shiftEquality
+          (proj₁ hRestricted)
+          (proj₁ (proj₂ hRestricted))
+          (proj₁ (proj₂ (proj₂ hRestricted)))
+          (proj₂ (proj₂ (proj₂ hRestricted)))
+          (proj₁ (qRange contours))
+    in subst (λ value → absℝ value
+         ≤ℝ signedCovarianceConstant *ℝ q contours)
+       (sym (covarianceMidpointGap contours strictGood f g)) bounded
 
   sumExpectation : ∀ functions →
     μ (λ links → sumℝ (map (λ f → f links) functions))
