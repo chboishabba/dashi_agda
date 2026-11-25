@@ -108,3 +108,27 @@ module _
 -- * commutator microcausality, nonzero propagation with distances;
 -- * an independently reconstructed rank-four Lorentzian principal
 --   symbol and cutoff/volume-uniform physical bounds.
+
+
+------------------------------------------------------------------------
+-- AT: denominator-free conditional-response and selection residual.
+-- Scalars are the supplied real joint weights and their derivatives,
+-- not arbitrary complex weak amplitudes or a physical instrument.
+-- No division at zero success, no derivative calculus claimed here.
+------------------------------------------------------------------------
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; 1ℚ)
+import Data.Rational.Tactic.RingSolver as Ring
+
+conditionalResponseNumerator : (a b da db : ℚ) →
+  da * (a + b) - a * (da + db) ≡ da * b - a * db
+conditionalResponseNumerator a b da db = Ring.solve-∀ a b da db
+
+conditionalResponseReconstruct : (a b da db : ℚ) →
+  (da * b - a * db) + a * (da + db) ≡ da * (a + b)
+conditionalResponseReconstruct a b da db = Ring.solve-∀ a b da db
+
+binarySelectionCovariance : (p x y a b : ℚ) →
+  (p * x * a + (1ℚ - p) * y * b) -
+    (p * x + (1ℚ - p) * y) * (p * a + (1ℚ - p) * b)
+  ≡ p * (1ℚ - p) * (x - y) * (a - b)
+binarySelectionCovariance p x y a b = Ring.solve-∀ p x y a b
