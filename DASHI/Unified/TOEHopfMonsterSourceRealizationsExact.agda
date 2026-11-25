@@ -116,7 +116,7 @@ module Spectral (F : C3.RealField lzero)
 -- This is a finite rational bilinear statement, not the determinant,
 -- Lorentzian integral or common QFT action variation theorem.
 ------------------------------------------------------------------------
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as KK
 
@@ -149,3 +149,48 @@ kkGraphMetricGaugeExact :
   ≡ KK.KK5Bilinear g A r v (df v) w (df w)
 kkGraphMetricGaugeExact g A df dLambda r v w =
   KK.KK5GaugeShiftPreservesBilinear g A dLambda r v w (df v) (df w)
+
+
+------------------------------------------------------------------------
+-- AQ: same original KK quadratic, signed fibre-null endpoints.
+-- Positive-radius/causal and real square-root existence are separate
+-- physical hypotheses. The rational algebra is exact for supplied p.
+------------------------------------------------------------------------
+
+kkGraphNullPositive :
+  ∀ {V : Set} (g : V → V → ℚ) (A : V → ℚ)
+    (r p : ℚ) (v : V) →
+  KK.KK5Bilinear g A r v (p - A v) v (p - A v)
+  ≡ g v v + r * (p * p)
+kkGraphNullPositive g A r p v =
+  Ring.solve-∀ (g v v) (A v) r p
+
+kkGraphNullNegative :
+  ∀ {V : Set} (g : V → V → ℚ) (A : V → ℚ)
+    (r p : ℚ) (v : V) →
+  KK.KK5Bilinear g A r v ((0ℚ - p) - A v)
+    v ((0ℚ - p) - A v)
+  ≡ g v v + r * (p * p)
+kkGraphNullNegative g A r p v =
+  Ring.solve-∀ (g v v) (A v) r p
+
+-- Retain both signed endpoints: their sum and difference recover
+-- connection and radius-normalized interval width without dividing.
+kkSignedEndpointSum :
+  (a p : ℚ) →
+  (p - a) + ((0ℚ - p) - a) ≡ (0ℚ - a) + (0ℚ - a)
+kkSignedEndpointSum a p = Ring.solve-∀ a p
+
+kkSignedEndpointDifference :
+  (a p : ℚ) →
+  (p - a) - ((0ℚ - p) - a) ≡ p + p
+kkSignedEndpointDifference a p = Ring.solve-∀ a p
+
+open import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact public
+  using (kkActualFiveBilinearIsInvertibleShearPullback; kkShearLeftInverse; kkShearRightInverse)
+
+open import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact public
+  using (sameMetricKKObservedProbeEqualsTSFV; sameMetricKKDirectionFromTSFV)
+
+open import DASHI.Physics.Foundations.TSFVKKFourMetricVerticalProbeFullReconstructionExact public
+  using (originalKKFullFiveMetricRecoveredFromThreeProbeFamilies)
