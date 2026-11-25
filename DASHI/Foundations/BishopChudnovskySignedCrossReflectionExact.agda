@@ -43,7 +43,7 @@ toCross k (lo , hi) = O.cross (toOrder lo) (toOrder hi)
 fromCross : (k : Nat) →
   O.Cross (O.window k) (Stage.qMachinStage k) (O.machinRadius k) →
   SignedCross k
-fromCross k c = fromOrder (O.lowerCross c) , fromOrder (O.upperCross c)
+fromCross k c = fromOrder (O.Cross.lowerCross c) , fromOrder (O.Cross.upperCross c)
 
 -- Same original endpoint, but its unresolved premise is now literally
 -- the two signed integer comparisons at each index. A finite receipt,
