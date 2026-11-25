@@ -1,0 +1,173 @@
+{
+  "scope": "Full-clock reduced first two scalar modes; conditional on original smooth reference and energy estimate, and IEEE binary64 elementary outward-rounded arithmetic. Recovered literal stage/helper subset, not full checkout. No CI, kernel or omitted-tail/TT endpoint claim. Decimal endpoints are round-trip binary64 displays; trace displays nearest rational conversion, not outward decimal rounding.",
+  "predecessor": "c254ae5da49e629d60e730ce6abc7b6c31c9ac27",
+  "blobs": {
+    "vector": "63e3981d1cd6fe23322dcbe2b074261e4340d871",
+    "driver": "847915c2b2d94a0c12b986bb743e570aba74931c",
+    "trace": "605c7af6b91968d700dd169dd000547379191449"
+  },
+  "checks": 72,
+  "cursors": [
+    0,
+    1045,
+    2555,
+    4097,
+    4517
+  ],
+  "seconds": [
+    12.006906788999913,
+    18.004161249999925,
+    18.290643696999723,
+    11.004253922999851
+  ],
+  "state_sha": "d475ce5f23ba3107f372a32766ae1d578c7a480ae127a459768366cb24b6fa34",
+  "identity": {
+    "block": 16,
+    "dy": 0.018,
+    "end": 4517,
+    "h": 0.0005999023910881472,
+    "modules": {
+      "check_f8_combined_residual.py": "6f0efbc356d53b685875f1e4c73c516700e4eebb5606ea529aee15575f91dcd8",
+      "check_f8_local_dual_weld.py": "4a399ae2965ebd9522228c51620745c9ea12f028760c4c823ae6f51b27f38dbc",
+      "check_f8_streaming_residual.py": "23451ee60cfb5b94a3e0037f01f6b67a9c5b606c2d4762bcd8be8a6d3ead1e91",
+      "check_f8_vector_interval.py": "ce892ff38162a8cca89810e8dc1a12b1bcbb77e6418f3e309ec727fa679c0383",
+      "f8_fused_step.py": "7df9b853646bc7a27f6fe2f723a52327d1d69110f5f7d23e1ab26171ec3f48a8",
+      "ksw668_f8_tt_multipole.py": "a16edc1eac88cc41de29cf959493189985a67c776c20bb2c22cbdffd0dec0807",
+      "run_f8_accumulated_interval.py": "e43edcd84577f19f7b766e3173a8c5612f5ebe748facaa581be4e6413c68eb60",
+      "run_f8_common_modal_box.py": "43e91e024f77c20a464acd22e08ff8765e34c1154ec0385e3bb69317f896d033",
+      "run_f8_streaming_residual.py": "031972334f74e55b84d429b3492c06f8119f83cdc2b948bdfdfeb1e4f7b65109"
+    },
+    "order": [
+      0,
+      0
+    ],
+    "source": "4b9e80666aa16bd4ff08314a24e746fd9f53b0eefb2ed5d73b12ddabedff29c4"
+  },
+  "rows": [
+    "energy norm",
+    "volume residual L1 norm",
+    "wall L1",
+    "wall time derivative L1",
+    "E4 volume pairing",
+    "E4 wall pairing",
+    "E4 dual radius",
+    "E4 continuous reconstructed observation",
+    "SMS total pairing",
+    "SMS dual radius",
+    "SMS continuous reconstructed observation"
+  ],
+  "ledger": [
+    [
+      [
+        0,
+        0
+      ],
+      [
+        -2.2317e-320,
+        -2.2317e-320
+      ],
+      [
+        -2.2317e-320,
+        -2.2317e-320
+      ],
+      [
+        -2.2317e-320,
+        -2.2317e-320
+      ],
+      [
+        -4.90219824389142e-10,
+        -1.7505980713246079e-10
+      ],
+      [
+        -1.1351469449180655e-13,
+        -6.312370674736109e-14
+      ],
+      [
+        -7.6999783161e-313,
+        -6.846063981e-314
+      ],
+      [
+        -2.8220822072195012e-11,
+        -2.912736881603564e-12
+      ],
+      [
+        -9.836831199917726e-10,
+        -3.5136447095661124e-10
+      ],
+      [
+        -1.54171135511e-312,
+        -1.37073535945e-313
+      ],
+      [
+        -5.6626300913001557e-11,
+        -5.9228568366649885e-12
+      ]
+    ],
+    [
+      [
+        0.0000012236406542328213,
+        0.000002447153643660506
+      ],
+      [
+        2.392988487488342e-9,
+        4.589302976958733e-9
+      ],
+      [
+        2.1268197623334942e-12,
+        4.240227944592306e-12
+      ],
+      [
+        4.912616195804676e-10,
+        9.822134290710681e-10
+      ],
+      [
+        4.908345630977789e-10,
+        1.730737690330929e-10
+      ],
+      [
+        4.724913609480974e-13,
+        1.768149736096247e-14
+      ],
+      [
+        67.36896787648439,
+        11.981240041983694
+      ],
+      [
+        6.082768701620261e-12,
+        1.3399354670294643e-11
+      ],
+      [
+        9.85728970075154e-10,
+        3.4727469003818326e-10
+      ],
+      [
+        134.88870920033574,
+        23.98924660015113
+      ],
+      [
+        1.2415416395381425e-11,
+        2.6908869735567168e-11
+      ]
+    ]
+  ],
+  "trace": {
+    "local_radii": [
+      [
+        0.000004520060965444318,
+        0.000004597758127298407
+      ],
+      [
+        0.00000906320320898095,
+        0.000009213278507682389
+      ]
+    ],
+    "global_radii": [
+      0.0007008100052311408,
+      0.0007157564357600542
+    ],
+    "max_trace": [
+      0.18197465009336655,
+      0.09260000932197418
+    ]
+  }
+}
