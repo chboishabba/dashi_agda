@@ -37,6 +37,14 @@
 
 ---
 
+
+
+### 25 November — original Conway characteristic-zero backend and actual vacuum attachment (latest implementation ledger)
+
+[Source-native exact rational action, actual probe/column producer and evidence boundary](../physics/Monster3BActualConwayExactCRTAttachment20261125.md). Reuse Seysen's upstream mmgroup fixed-point CRT source, not a new group model. Under the original atom denominator-divides-8 and invariant weighted norm contract, signed radix128 limbs reconstructed from 7/31/127/255 give exact original rational atom action at arbitrary precision (limb bound 451132 < CRT half modulus 3513772). K-vector (a+zeta b)/d, exact sums/scalings, original native word action. Local matching-blob controls: 36 exact SymPy atom equations, 18 K-linearity, 36 good-prime reductions, 6 roundtrips, full 196884-coordinate limb test and corrupted residue rejection. Exact K-cyclic orbit solver source-written, 2D control 4 generator equations and 2 inverses; complete ordinary Lindsey JSON independently matched original Git blob b0f96b37494cfca56f116b991d350352d3a493f2; q=0 exact ordinary block checks printed true but command timed out, not complete acceptance. Actual char0 producer uses original direct positive MMV31 probe indices, EXACTLY reprojects the original Conway unit coordinates, verifies reduction against paid rows, derives opposite phase by literal C, checks marked pivots and full ambient reconstruction for each normalized C/D/E/C² column; exact sign split, single-residual nullspace and both signed source maps/inverses. This is not entrywise modular row lifting; no dense polynomial evaluation on ambient W needed. Per-vector/column checkpoints, --max-new bounds new units rather than walltime. Exact original runtime/packets unavailable, so actual native backend and integrated char0 output remain unexecuted. L08–L12 now have a concrete exact action producer; remaining actual runtime/source A–C and true full trace attachment, full-weight execution and formal P6. Successful actual generator weld under authenticated generation would imply all word-character equality, no need to enumerate traces separately. No new discovery programme or false flags.
+
+---
+
 ## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
 
 **Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
