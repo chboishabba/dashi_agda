@@ -1,0 +1,155 @@
+{
+  "status": "CONDITIONAL_RECIPROCAL_HALF_MODE",
+  "source_head": "ae4f9477a4b51622d89d132498f85a31badbef28",
+  "checker_blob": "260ac395c6e65cfdf65c880d7a913fe979e39032",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "exact_checks": [
+      "native linear energy identity",
+      "reciprocal nonlinear energy identity",
+      "zero half-mode invariant"
+    ],
+    "fast_only_monodromies": 9,
+    "slow_only_monodromies": 12,
+    "nonlinear_slow_runs": 6,
+    "periods_per_run": 240,
+    "mean_work_window_periods": 20,
+    "max_mean_work_residual": 3.58092564357712e-11,
+    "max_monodromy_determinant_error": 1.2432055385147578e-11
+  },
+  "donors": {
+    "octet": "f7969c9f2888011f4c5e2b53bd20515a7c92ccba",
+    "shared_cavity": "c446d6ec45a9b29fb378164468ca6e89e13b18ce",
+    "paid_actuator": "0626d7525d12b58075792a506bbf38897e898a65",
+    "LXXXIV": "b40208923744dcc2eab613473f28a57584d334da",
+    "scope": "Inspected; original A/B/M transcribed exactly, donor executable not run this tranche."
+  },
+  "fixture": {
+    "G": 0.3333333333333333,
+    "q_frequency_ratio": 0.5,
+    "cubic": 0.5,
+    "octet": 0.2,
+    "damping": 0.03,
+    "quartic": 1,
+    "fast_c": 0.25,
+    "fast_ratios": [
+      20,
+      100,
+      996.1685823754789
+    ],
+    "fast_amplitudes": [
+      0.25,
+      1,
+      2
+    ],
+    "slow_peak_current": [
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1,
+      2
+    ],
+    "seed": [
+      0,
+      0.0001
+    ]
+  },
+  "fast_only": {
+    "unstable": 0,
+    "rate_approx": -0.015
+  },
+  "slow_only": {
+    "octet_only_rates": [
+      -0.015000000001192218,
+      -0.015000000001192082,
+      -0.01500000000119115,
+      -0.015000000001187615,
+      -0.015000000001169928,
+      -0.015000000001087022
+    ],
+    "cubic_octet_rates": [
+      -0.00864454914317086,
+      -0.002286480000557847,
+      0.016729498083109057,
+      0.04804966170315707,
+      0.10802030681204153,
+      0.21114732608160436
+    ],
+    "threshold_bracket": [
+      0.1,
+      0.25
+    ]
+  },
+  "branches": [
+    {
+      "amp": 0.1,
+      "seed": 0,
+      "half": 0,
+      "load": 0.0004524084094380324
+    },
+    {
+      "amp": 0.1,
+      "seed": 0.0001,
+      "half": 0.0000036274560158752864,
+      "load": 0.0004524084094395132
+    },
+    {
+      "amp": 0.5,
+      "seed": 0,
+      "half": 0,
+      "load": 0.011310210236318848
+    },
+    {
+      "amp": 0.5,
+      "seed": 0.0001,
+      "half": 0.2819421692992079,
+      "natural": 0.02172789461440728,
+      "load": 0.010937064158766026,
+      "native_heat": 0.010491325166076723,
+      "half_heat": 0.0002995052797605464,
+      "storage_change": 9.003178467070546e-14,
+      "period2_return": 2.6868284355010805e-11
+    },
+    {
+      "amp": 1,
+      "seed": 0,
+      "half": 0,
+      "natural": 0.08675596560581854,
+      "load": 0.04524084094544943
+    },
+    {
+      "amp": 1,
+      "seed": 0.0001,
+      "half": 0.3977030742712681,
+      "natural": 0.08641796472085161,
+      "load": 0.04384051416928804,
+      "native_heat": 0.04197222779423944,
+      "half_heat": 0.0006052227219502463,
+      "storage_change": 4.669871498244096e-14,
+      "period2_return": 1.3752278123062753e-11
+    }
+  ],
+  "static_reference": [
+    {
+      "stiffness": 3,
+      "G": 2.0528095523671803,
+      "load": 0.10089555998351595
+    },
+    {
+      "stiffness": 4,
+      "G": 1.8354716697356654,
+      "load": 0.1167485903891323
+    },
+    {
+      "stiffness": 5,
+      "G": 1.7181109248634627,
+      "load": 0.12633153040722347
+    }
+  ],
+  "limits": "Selected scalar eigenchannel, assumed cubic overlap and positive octet coefficient. Fast-only linearized numerical monodromy, no HF work trajectory executed (symbolic ledger only), slow runs HF off. No simultaneous multirate nonlinear branch, global stability proof, actual upstream source or layered time-domain solve. Passive comparison optimized conductance at three chosen stiffnesses, not all hardware. No physical extraction. Classical parametric resonance, Floquet and Lorentz ADE prior art; original DASHI and octet owners retained, user shared cavity and half-mode hypothesis distinct from Filsinger documented claims, new DASHI application only; no new JMD artifact."
+}
