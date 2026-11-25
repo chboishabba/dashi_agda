@@ -1,5 +1,10 @@
 # Four-Clay P0 controlling endpoint reverse-solve and constructor/gap matrix
 
+## 25 November — selected rank-two analytic closure (current status supersedes previous selected analytic debt)
+
+[Proof, exact Mellin certificate and Hodge donor applicability](ClayFourSelectedRankTwoMellinHodgeDonor20261125.md). **B-W2p retired:** original E:y²=x³−66x+289 has rank E(Q)=ord L(E,s)|s=1=2. Tate minimal conductor 8840664 (III at2, II at3, nonsplit I1 at7, split I1 at1949); exact Fricke fixed point 79<F(1)<80 forces sign+1; existing independent algebraic rank2 plus Kolyvagin excludes central nonzero; exact signed second Mellin moment 8571≤J≤8694 gives Λ''(1)>0. Checker 20000 coefficients, 896 dyadic midpoint intervals, rigorous rational quadrature and both tails; 2272/2272 PASS normal/-O, executed and committed blob 054e9c876fa01cdb8e981c1ba6ce5423c71a87fa. Prior Sel2 and Sha[2^infinity] unchanged. Universal rank equality remains M; odd Sha/refined BSD/3-primary norm residual separate, not mandatory. **Hodge H-M2s:** read actual public rank4 curve-product donor #106 and rank3 triangle donor #25; distinct from original conditional rank6 cubic RM. Generic SO6 dimension15 cannot factor through entire 2×3 tensor representation (image dimension12). No actual rank6 coupled cycle or arbitrary-X detector produced; do not repeat pure tensor factorization. Existing half-spin/Pfaffian/direct alternatives retained. RH/NS admission unchanged. No CI, native kernels, donor edits or new universal Clay proof.
+
+
 ## 25 November — controlling outstanding-step reconciliation (supersedes earlier live-status entries)
 
 [Full verified source-owner reconciliation and remaining lemma matrix](ClayFourOutstandingSourceReconciliation20261125.md). **Read this first; historical entries below are provenance, not a current task queue.**
