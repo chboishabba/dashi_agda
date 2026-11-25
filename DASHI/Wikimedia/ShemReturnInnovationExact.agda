@@ -47,3 +47,40 @@ freeInnovationCannotIdentify : (previous left right : Point) →
 freeInnovationCannotIdentify previous left right distinct unique =
   distinct (unique left right (freeInnovationAdmits previous left)
     (freeInnovationAdmits previous right))
+
+
+-- H31: pull a genuine source admissibility predicate back along the
+-- temporal update. The admissible innovations and admissible outputs
+-- are inverse charts, not two independent sources of constraints.
+AdmissibleOutput : (Point → Set) → Set
+AdmissibleOutput allowed = Σ Point allowed
+
+AdmissibleInnovation : Point → (Point → Set) → Set
+AdmissibleInnovation previous allowed =
+  Σ Point (λ delta → allowed (update previous delta))
+
+innovationToOutput : (previous : Point) (allowed : Point → Set) →
+  AdmissibleInnovation previous allowed → AdmissibleOutput allowed
+innovationToOutput previous allowed (delta , evidence) =
+  update previous delta , evidence
+
+outputToInnovation : (previous : Point) (allowed : Point → Set) →
+  AdmissibleOutput allowed → AdmissibleInnovation previous allowed
+outputToInnovation previous allowed (current , evidence) =
+  innovation previous current ,
+  subst allowed (sym (updateFromInnovation previous current)) evidence
+
+-- Value-coordinate inverse laws; no proof-irrelevance premise required.
+outputRoundTripValue : (previous : Point) (allowed : Point → Set) →
+  (x : AdmissibleOutput allowed) →
+  fst (innovationToOutput previous allowed
+       (outputToInnovation previous allowed x)) ≡ fst x
+outputRoundTripValue previous allowed (current , evidence) =
+  updateFromInnovation previous current
+
+innovationRoundTripValue : (previous : Point) (allowed : Point → Set) →
+  (x : AdmissibleInnovation previous allowed) →
+  fst (outputToInnovation previous allowed
+       (innovationToOutput previous allowed x)) ≡ fst x
+innovationRoundTripValue previous allowed (delta , evidence) =
+  innovationFromUpdate previous delta
