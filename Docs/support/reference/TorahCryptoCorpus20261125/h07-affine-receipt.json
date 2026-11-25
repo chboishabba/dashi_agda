@@ -1,0 +1,242 @@
+{
+  "geometry": {
+    "markedStates": 196830,
+    "phaseSquares": 196830,
+    "rotationBasisCovariance": 29160,
+    "canonicalSeams": 6080,
+    "zeroSeams": 426,
+    "cocycle": 49410,
+    "canonicalDirections": 1210
+  },
+  "training": {
+    "blocks": 85,
+    "triples": 6120,
+    "canonicalDirections": 1076
+  },
+  "results": {
+    "exodus": {
+      "blocks": 175,
+      "letters": 9275,
+      "scores": {
+        "unigram": {
+          "bits": 39609.991048086056,
+          "hits": 910,
+          "bitsPerLetter": 4.27061898092572
+        },
+        "pair": {
+          "bits": 42063.24713096635,
+          "hits": 802,
+          "bitsPerLetter": 4.535120984470765
+        },
+        "h07": {
+          "bits": 42308.55027787558,
+          "hits": 709,
+          "bitsPerLetter": 4.561568763113271
+        },
+        "h07Phase": {
+          "bits": 41401.43939959044,
+          "hits": 826,
+          "bitsPerLetter": 4.46376705116878
+        },
+        "uncorrectedPhase": {
+          "bits": 41423.20625382835,
+          "hits": 825,
+          "bitsPerLetter": 4.466113881814377
+        },
+        "relabelControl": {
+          "bits": 42282.94125422878,
+          "hits": 689,
+          "bitsPerLetter": 4.558807682396634
+        }
+      }
+    },
+    "genesis": {
+      "blocks": 338,
+      "letters": 17914,
+      "scores": {
+        "unigram": {
+          "bits": 75856.17791683356,
+          "hits": 2084,
+          "bitsPerLetter": 4.234463431775905
+        },
+        "pair": {
+          "bits": 80760.65995705486,
+          "hits": 1656,
+          "bitsPerLetter": 4.508242712797525
+        },
+        "h07": {
+          "bits": 81309.42547273551,
+          "hits": 1418,
+          "bitsPerLetter": 4.538876045145446
+        },
+        "h07Phase": {
+          "bits": 79695.32617218778,
+          "hits": 1762,
+          "bitsPerLetter": 4.448773371228524
+        },
+        "uncorrectedPhase": {
+          "bits": 79586.66463177111,
+          "hits": 1736,
+          "bitsPerLetter": 4.442707638258966
+        },
+        "relabelControl": {
+          "bits": 81101.30608747009,
+          "hits": 1434,
+          "bitsPerLetter": 4.527258350310935
+        }
+      }
+    },
+    "leviticus": {
+      "blocks": 194,
+      "letters": 10282,
+      "scores": {
+        "unigram": {
+          "bits": 43949.3967283742,
+          "hits": 949,
+          "bitsPerLetter": 4.274401549151352
+        },
+        "pair": {
+          "bits": 46844.89460280394,
+          "hits": 936,
+          "bitsPerLetter": 4.556009978876088
+        },
+        "h07": {
+          "bits": 46998.82859526403,
+          "hits": 767,
+          "bitsPerLetter": 4.570981189969269
+        },
+        "h07Phase": {
+          "bits": 45896.15844938459,
+          "hits": 908,
+          "bitsPerLetter": 4.4637384214534706
+        },
+        "uncorrectedPhase": {
+          "bits": 45849.20029667975,
+          "hits": 945,
+          "bitsPerLetter": 4.459171396292526
+        },
+        "relabelControl": {
+          "bits": 46893.39126866533,
+          "hits": 755,
+          "bitsPerLetter": 4.5607266357387015
+        }
+      }
+    },
+    "numbers": {
+      "blocks": 279,
+      "letters": 14787,
+      "scores": {
+        "unigram": {
+          "bits": 63467.530845970905,
+          "hits": 1482,
+          "bitsPerLetter": 4.29211678136004
+        },
+        "pair": {
+          "bits": 67570.4734920336,
+          "hits": 1305,
+          "bitsPerLetter": 4.569586359101481
+        },
+        "h07": {
+          "bits": 67840.95031170371,
+          "hits": 1131,
+          "bitsPerLetter": 4.587877886772415
+        },
+        "h07Phase": {
+          "bits": 66275.69112684693,
+          "hits": 1327,
+          "bitsPerLetter": 4.482024151406433
+        },
+        "uncorrectedPhase": {
+          "bits": 66318.50718346797,
+          "hits": 1297,
+          "bitsPerLetter": 4.4849196715674555
+        },
+        "relabelControl": {
+          "bits": 67795.61884526718,
+          "hits": 1157,
+          "bitsPerLetter": 4.58481225706818
+        }
+      }
+    },
+    "deuteronomy": {
+      "blocks": 238,
+      "letters": 12614,
+      "scores": {
+        "unigram": {
+          "bits": 53557.878973924875,
+          "hits": 1279,
+          "bitsPerLetter": 4.245907640235046
+        },
+        "pair": {
+          "bits": 57103.57831716961,
+          "hits": 1180,
+          "bitsPerLetter": 4.527000025144253
+        },
+        "h07": {
+          "bits": 57335.37438979796,
+          "hits": 969,
+          "bitsPerLetter": 4.545376120960675
+        },
+        "h07Phase": {
+          "bits": 56233.46808098641,
+          "hits": 1175,
+          "bitsPerLetter": 4.458020301330776
+        },
+        "uncorrectedPhase": {
+          "bits": 56139.0741556671,
+          "hits": 1187,
+          "bitsPerLetter": 4.450537034696932
+        },
+        "relabelControl": {
+          "bits": 57388.454451759186,
+          "hits": 968,
+          "bitsPerLetter": 4.549584148704549
+        }
+      }
+    }
+  },
+  "shem": {
+    "blocks": 1,
+    "letters": 53,
+    "scores": {
+      "unigram": {
+        "bits": 218.12596878315998,
+        "hits": 8,
+        "bitsPerLetter": 4.115584316663396
+      },
+      "pair": {
+        "bits": 230.5197639984005,
+        "hits": 8,
+        "bitsPerLetter": 4.349429509403783
+      },
+      "h07": {
+        "bits": 235.7301746587198,
+        "hits": 3,
+        "bitsPerLetter": 4.447739144504147
+      },
+      "h07Phase": {
+        "bits": 231.2820603827098,
+        "hits": 5,
+        "bitsPerLetter": 4.363812460051128
+      },
+      "uncorrectedPhase": {
+        "bits": 236.58732671897872,
+        "hits": 7,
+        "bitsPerLetter": 4.463911824886391
+      },
+      "relabelControl": {
+        "bits": 230.98079169611074,
+        "hits": 6,
+        "bitsPerLetter": 4.358128145209637
+      }
+    }
+  },
+  "completion": {
+    "text": "יייייייייייייייייייייייייהיהיייהייאיאיהאוייוהייליוולייאראאאראיואהואיהיארויראארריהאהיריורייא",
+    "length": 91,
+    "knownB": 53,
+    "unobservedB": 19,
+    "qualification": "synthetic pointwise marginal MAP, not joint optimum or restored text"
+  },
+  "notes": "Actual donor pack/chart/projection and phase convention transcribed. Alphabet ordinal and cyclic column mark are chosen adapters, not source semantics. 53 third-row glyphs with both observed inputs (raw prefix 125); no teacher forcing. Scores matched on same symbols; comparison to earlier whole-suffix score invalid. Pair smoothing uses shared training unigram, phase pooling averages counts under corrected action then adds original prior; not strict phase-invariant probability. Relabel control is a second fixed chart labeling, not morphology permutation. No model cost included; heldout books already used in prior experiments, exploratory."
+}
