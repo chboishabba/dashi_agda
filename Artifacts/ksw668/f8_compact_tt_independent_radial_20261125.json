@@ -1,0 +1,621 @@
+{
+  "scope": "Original compact TT prior-art reuse; source-only UV/IR projection audits; full-clock independent radial refinement of ledger monopole",
+  "base": "6691b150ddbc27fae180a47c40b0786316c76764",
+  "ci": "Local only; [skip ci]",
+  "prior_owners": {
+    "ref": "f3edee86d2ef7ea01120a912cdc9be79c592d013",
+    "compact_local": "bd79463dc53aed9c7ab8d1169b646f050da54983",
+    "conservative_shell_doc": "bd76a9e9745f7de113c7e0cb676981f33da04461",
+    "uvir_doc": "a937bfd6a57f74e240a53e097b2bf73b7ac6b5fb",
+    "uvir_script": "62c2e6ccae4e20227e74cd66acfe0c48185c93f7",
+    "original_multipole_refinement": "ba4151d9a2abed1a9b92b19fd1ea64be82acdfa0"
+  },
+  "local": {
+    "numpy": "2.3.5",
+    "numba": "0.65.1",
+    "sympy": "1.14.0",
+    "blas_threads": 1,
+    "numba_threads": 4,
+    "source_recovery": "Previously recovered byte-matched original FV, fused kernel, receiver operators; reconstructed F clock, not full checkout."
+  },
+  "projection": {
+    "checker_commit": "994022b5f4d3ed309fed9d1e3e9a73f2f31ffa17",
+    "blob": "86b99ebd9558e4f78f4a1d88f93a58a1957c038c",
+    "exact_bilaplacian_identity": true,
+    "continuous_squared_norm": 155.98434966101823,
+    "quad_error_estimate": 1.180436627855386e-9,
+    "gauss_crosscheck": [
+      155.98434966101723,
+      155.98434966101829
+    ],
+    "rows": [
+      {
+        "dr": 0.008,
+        "cells": 6,
+        "captured_squared_norm": 0.0006003988362006545,
+        "relative_projection_error": 0.9996997555085223,
+        "weighted_moment": 8.685928189034235e-20
+      },
+      {
+        "dr": 0.006,
+        "cells": 8,
+        "captured_squared_norm": 0.028610947130223628,
+        "relative_projection_error": 0.9855907126539781,
+        "weighted_moment": 4.2697398758410375e-18
+      },
+      {
+        "dr": 0.004,
+        "cells": 11,
+        "captured_squared_norm": 0.2845291624983746,
+        "relative_projection_error": 0.8458550924961233,
+        "weighted_moment": 3.583921372458321e-17
+      },
+      {
+        "dr": 0.003,
+        "cells": 14,
+        "captured_squared_norm": 0.5934995023385494,
+        "relative_projection_error": 0.637573915449378,
+        "weighted_moment": 3.642919299551295e-17
+      },
+      {
+        "dr": 0.002,
+        "cells": 21,
+        "captured_squared_norm": 0.6051359112090604,
+        "relative_projection_error": 0.6283821200439583,
+        "weighted_moment": -1.8049069957756895e-16
+      },
+      {
+        "dr": 0.001,
+        "cells": 41,
+        "captured_squared_norm": 0.8533565573090337,
+        "relative_projection_error": 0.3829405210877615,
+        "weighted_moment": -1.3326006954636202e-16
+      },
+      {
+        "dr": 0.0005,
+        "cells": 81,
+        "captured_squared_norm": 0.941824155184291,
+        "relative_projection_error": 0.24119669321056006,
+        "weighted_moment": -1.302126809136352e-16
+      },
+      {
+        "dr": 0.00025,
+        "cells": 161,
+        "captured_squared_norm": 0.9849643558114837,
+        "relative_projection_error": 0.12261991758485376,
+        "weighted_moment": 4.9873299934333204e-17
+      },
+      {
+        "dr": 0.000125,
+        "cells": 321,
+        "captured_squared_norm": 0.9962005055716974,
+        "relative_projection_error": 0.061640039165323623,
+        "weighted_moment": 7.134050294954619e-17
+      }
+    ]
+  },
+  "ir": {
+    "checker_commit": "a3f0002a8e3eab065ef5d4c9161c96e1194fab75",
+    "blob": "c917e190547df14b63d49a9448372cfdd2691e01",
+    "continuum_moments": [
+      0,
+      0,
+      4.579857566126423
+    ],
+    "exact_polynomials": 4,
+    "rows": [
+      {
+        "dr": 0.008,
+        "shell_moments": [
+          6.819553891074712e-15,
+          0.228156685821294,
+          1.0909739182264113
+        ],
+        "nodal_moments": [
+          6.819553891074712e-15,
+          0.22795352431201604,
+          1.0803341522203327
+        ],
+        "relative_quartic_moment_error": 0.7617886795660457
+      },
+      {
+        "dr": 0.006,
+        "shell_moments": [
+          9.165431522620264e-14,
+          -14.981403926055139,
+          -20.8424671185938
+        ],
+        "nodal_moments": [
+          9.165431522620264e-14,
+          -14.98112469405082,
+          -20.449211099489222
+        ],
+        "relative_quartic_moment_error": 5.550898541637848
+      },
+      {
+        "dr": 0.004,
+        "shell_moments": [
+          5.314201114819477e-13,
+          8.525651538064972,
+          21.614638038936814
+        ],
+        "nodal_moments": [
+          5.314201114819477e-13,
+          8.52563822891934,
+          21.515172227910945
+        ],
+        "relative_quartic_moment_error": 3.7195000558102858
+      },
+      {
+        "dr": 0.003,
+        "shell_moments": [
+          5.684341886080801e-13,
+          9.692874069073497,
+          22.170682214709984
+        ],
+        "nodal_moments": [
+          5.684341886080801e-13,
+          9.692867211724632,
+          22.10707276444907
+        ],
+        "relative_quartic_moment_error": 3.840910856854797
+      },
+      {
+        "dr": 0.002,
+        "shell_moments": [
+          -3.105130218107825e-12,
+          -0.6921151747444545,
+          3.012425014426925
+        ],
+        "nodal_moments": [
+          -3.105130218107825e-12,
+          -0.692114843324163,
+          3.0144436829170833
+        ],
+        "relative_quartic_moment_error": 0.34224482509948656
+      },
+      {
+        "dr": 0.001,
+        "shell_moments": [
+          -1.970925509686202e-12,
+          -0.14297411700327103,
+          4.315875902415616
+        ],
+        "nodal_moments": [
+          -1.970925509686202e-12,
+          -0.14297409871536662,
+          4.315980154365404
+        ],
+        "relative_quartic_moment_error": 0.057639710383849
+      },
+      {
+        "dr": 0.0005,
+        "shell_moments": [
+          -1.7106316363131617e-12,
+          -0.0010412359825124895,
+          4.577868795639002
+        ],
+        "nodal_moments": [
+          -1.7106316363131617e-12,
+          -0.0010412349328916548,
+          4.577868985447516
+        ],
+        "relative_quartic_moment_error": 0.0004342428686275682
+      },
+      {
+        "dr": 0.00025,
+        "shell_moments": [
+          8.100187187665142e-13,
+          4.624102167838373e-7,
+          4.579858458455341
+        ],
+        "nodal_moments": [
+          8.100187187665142e-13,
+          4.62475810536489e-7,
+          4.579858458434273
+        ],
+        "relative_quartic_moment_error": 1.948377008297029e-7
+      },
+      {
+        "dr": 0.000125,
+        "shell_moments": [
+          1.5267787034645153e-12,
+          8.313350008393172e-13,
+          4.5798575661354155
+        ],
+        "nodal_moments": [
+          1.5267787034645153e-12,
+          5.32018873400375e-12,
+          4.579857566135579
+        ],
+        "relative_quartic_moment_error": 1.9635559336989935e-12
+      }
+    ]
+  },
+  "radial": {
+    "runner_commit": "4aa94536edb5142c4d2e58636b3a0509eb3f073a",
+    "blob": "450831b0f65e50bcf8f4707d03cb2b5676dde0c7",
+    "route": "ledger",
+    "ell": 0,
+    "dr": 0.004,
+    "dy": 0.009,
+    "grid": [
+      754,
+      449
+    ],
+    "domain": [
+      3.012,
+      4.032
+    ],
+    "nt": 4516,
+    "end": 4517,
+    "h": 0.0005999023910881472,
+    "lambda_upper": 448543.5506875,
+    "safe_dt": 0.0007155726427199916,
+    "original_step_parity_at_chunk_starts": 13,
+    "max_scaled_constraint": 6.160578703311053e-12,
+    "final_sha256": "7a0c26a00f5bb53ab4e0be19e52ae3a8d88326b5efe10a074885866e00f4fe08",
+    "chunks": [
+      [
+        0,
+        345,
+        5.2133712101640697e-14,
+        "4dc9585dbb43347fdf09c844d00cc2dfb9e402db53abf6e7838e5d677d0999c2",
+        12.446249427999646
+      ],
+      [
+        345,
+        750,
+        2.511925204380843e-13,
+        "d9f52900ff4abee88d28d1eeb4c4196ede3f191173e50c2750f331c81d1873be",
+        15.205180539000139
+      ],
+      [
+        750,
+        1190,
+        5.851474558252758e-13,
+        "8e88771783440dba8ea7b9fdef54ec5058d634cd3a0899ef82e00e700323e153",
+        15.197026125000775
+      ],
+      [
+        1190,
+        1358,
+        8.175957060736597e-13,
+        "0d7ad43a412e439abb9060e9af0e657e9e76d5fb674f49e0bfa2f6b0be27ea4d",
+        15.285709402000066
+      ],
+      [
+        1358,
+        1532,
+        1.0685185834709318e-12,
+        "1eccc0cff3e49ce20029f035dc3a14c3c78cb7c3cb413c3cba6dd896bc345cfd",
+        15.18678427300074
+      ],
+      [
+        1532,
+        2002,
+        1.6659913765020548e-12,
+        "44b1e7419bbdeff1a2718f82d79e4bc950fb12a78d0beeba3f77e72151e1e7fd",
+        15.187400104000517
+      ],
+      [
+        2002,
+        2424,
+        2.182704420381594e-12,
+        "a8319bcb556d02bc31fcae01b9d92226d5d68a0f43368d3b41731bc81435b38b",
+        15.263065391000055
+      ],
+      [
+        2424,
+        2749,
+        2.5550751659990064e-12,
+        "1847bfe4feee3f5a101458c20eaf22ecb6c365960cba586b066c112a04728c6c",
+        15.171960015999503
+      ],
+      [
+        2749,
+        2933,
+        3.236582583914244e-12,
+        "844c2788c72a78d1209c73f67c27cafd998d8af23d1d4968c730331d0d6f3b2a",
+        13.222774580999612
+      ],
+      [
+        2933,
+        3372,
+        4.157842508386196e-12,
+        "8c821b15d5d8f75cdd4bf5003fd2b5116207b6a258c85db84e934f4d8cc7ec21",
+        15.148163539999587
+      ],
+      [
+        3372,
+        3811,
+        4.8599078432746815e-12,
+        "4f9aadca65cddf1ab6a63a9fa90737d9867ffaae4758507cd79e28f5c3d02b90",
+        15.168478424000568
+      ],
+      [
+        3811,
+        4209,
+        5.6269263156820475e-12,
+        "8be6724643ef51285027d53ffb2837609fe7d0515733e0479e8655b0c6e4157a",
+        15.445676591999472
+      ],
+      [
+        4209,
+        4517,
+        6.160578703311053e-12,
+        "7a0c26a00f5bb53ab4e0be19e52ae3a8d88326b5efe10a074885866e00f4fe08",
+        11.397537619999639
+      ]
+    ],
+    "chunk_columns": [
+      "start",
+      "end",
+      "cumulative_max_scaled_constraint",
+      "endpoint_sha256",
+      "seconds"
+    ],
+    "rx": [
+      2.5373657609619378,
+      2.649365760961938
+    ],
+    "delta": 0.06,
+    "physical_t": 12.00717612182339,
+    "raw": [
+      [
+        0.00018152313681148342,
+        0.00018513745682135563,
+        -0.00004924250906097362,
+        -0.000019927820436317287,
+        -0.00007260495158880226,
+        0.015286799361996728
+      ],
+      [
+        -0.0000019891277214504752,
+        -0.000001995460549520892,
+        -2.2730498798251578e-7,
+        -7.718475866616331e-8,
+        -3.4581820165316817e-7,
+        0.0000773446215993857
+      ]
+    ],
+    "window": [
+      [
+        -0.000003936397211080935,
+        -1.7330158118735338e-7
+      ],
+      [
+        -3.2851576591268427e-12,
+        -5.100665741314329e-14
+      ]
+    ],
+    "shrink": [
+      [
+        0.00006228128363566957,
+        0.00006271491332341277,
+        0.00001334781232723496,
+        0.000004936496808910156,
+        -0.00022132423603295854,
+        0.0043201202942567485
+      ],
+      [
+        -3.5806959306665576e-7,
+        -3.5926243027528727e-7,
+        -2.4255122012272227e-8,
+        -1.7900689281962703e-8,
+        2.48541103499036e-7,
+        -0.000006072223344099538
+      ]
+    ]
+  },
+  "comparison": {
+    "previous_receipt_blob": "be5e550df2dd3c2ccc5ef69abcd59ac6ead18437",
+    "previous_dr": 0.006,
+    "dy": 0.009,
+    "h": 0.0005999023910881472,
+    "observer_order": [
+      "E4",
+      "legacy4",
+      "direct",
+      "SMS",
+      "F",
+      "R"
+    ],
+    "window_order": [
+      "E4",
+      "SMS"
+    ],
+    "raw": [
+      [
+        {
+          "previous": -0.0006988946536812621,
+          "refined": 0.00018152313681148342,
+          "difference": 0.0008804177904927456,
+          "abs_ratio": 0.2597288959864742
+        },
+        {
+          "previous": -0.0007018882709816298,
+          "refined": 0.00018513745682135563,
+          "difference": 0.0008870257278029855,
+          "abs_ratio": 0.26377055220260426
+        },
+        {
+          "previous": -0.0000231849341254752,
+          "refined": -0.00004924250906097362,
+          "difference": -0.00002605757493549842,
+          "abs_ratio": 2.1239011849020875
+        },
+        {
+          "previous": -0.000025857671841432103,
+          "refined": -0.000019927820436317287,
+          "difference": 0.0000059298514051148166,
+          "abs_ratio": 0.7706734217419631
+        },
+        {
+          "previous": 0.000007914989799710827,
+          "refined": -0.00007260495158880226,
+          "difference": -0.00008051994138851309,
+          "abs_ratio": 9.173094776629386
+        },
+        {
+          "previous": -0.001440551699808612,
+          "refined": 0.015286799361996728,
+          "difference": 0.01672735106180534,
+          "abs_ratio": 10.611767258355039
+        }
+      ],
+      [
+        {
+          "previous": 0.000005594583482223066,
+          "refined": -0.0000019891277214504752,
+          "difference": -0.000007583711203673541,
+          "abs_ratio": 0.355545274777109
+        },
+        {
+          "previous": 0.000005619948265729443,
+          "refined": -0.000001995460549520892,
+          "difference": -0.000007615408815250335,
+          "abs_ratio": 0.35506742325178514
+        },
+        {
+          "previous": 5.940199681806003e-7,
+          "refined": -2.2730498798251578e-7,
+          "difference": -8.213249561631161e-7,
+          "abs_ratio": 0.3826554664125501
+        },
+        {
+          "previous": 1.551493634650855e-7,
+          "refined": -7.718475866616331e-8,
+          "difference": -2.323341221312488e-7,
+          "abs_ratio": 0.49748678913228556
+        },
+        {
+          "previous": 0.0000010361907701893871,
+          "refined": -3.4581820165316817e-7,
+          "difference": -0.0000013820089718425552,
+          "abs_ratio": 0.3337398977120421
+        },
+        {
+          "previous": -0.0002270244928101947,
+          "refined": 0.0000773446215993857,
+          "difference": 0.0003043691144095804,
+          "abs_ratio": 0.34068844573545715
+        }
+      ]
+    ],
+    "window": [
+      [
+        {
+          "previous": 0.000006038637304049732,
+          "refined": -0.000003936397211080935,
+          "difference": -0.000009975034515130668,
+          "abs_ratio": 0.6518684618533129
+        },
+        {
+          "previous": 2.461135473594364e-7,
+          "refined": -1.7330158118735338e-7,
+          "difference": -4.1941512854678977e-7,
+          "abs_ratio": 0.7041529531661871
+        }
+      ],
+      [
+        {
+          "previous": 2.819888211603114e-10,
+          "refined": -3.2851576591268427e-12,
+          "difference": -2.8527397881943825e-10,
+          "abs_ratio": 0.011649957064288096
+        },
+        {
+          "previous": -1.0643330475404089e-12,
+          "refined": -5.100665741314329e-14,
+          "difference": 1.0133263901272656e-12,
+          "abs_ratio": 0.04792358701161795
+        }
+      ]
+    ],
+    "shrink": [
+      [
+        {
+          "previous": -0.00009924239132002412,
+          "refined": 0.00006228128363566957,
+          "difference": 0.0001615236749556937,
+          "abs_ratio": 0.6275673410048421
+        },
+        {
+          "previous": -0.00009914640954321216,
+          "refined": 0.00006271491332341277,
+          "difference": 0.00016186132286662494,
+          "abs_ratio": 0.6325485069237832
+        },
+        {
+          "previous": -0.000012806635439752661,
+          "refined": 0.00001334781232723496,
+          "difference": 0.00002615444776698762,
+          "abs_ratio": 1.0422575382916304
+        },
+        {
+          "previous": -0.00000798624477069173,
+          "refined": 0.000004936496808910156,
+          "difference": 0.000012922741579601886,
+          "abs_ratio": 0.6181249073439782
+        },
+        {
+          "previous": 0.00010960333565027015,
+          "refined": -0.00022132423603295854,
+          "difference": -0.0003309275716832287,
+          "abs_ratio": 2.019320258091187
+        },
+        {
+          "previous": -0.0018960558305817468,
+          "refined": 0.0043201202942567485,
+          "difference": 0.006216176124838496,
+          "abs_ratio": 2.2784773657910966
+        }
+      ],
+      [
+        {
+          "previous": 0.0000011008483485383824,
+          "refined": -3.5806959306665576e-7,
+          "difference": -0.000001458917941605038,
+          "abs_ratio": 0.3252669575623851
+        },
+        {
+          "previous": 0.0000011059953711414413,
+          "refined": -3.5926243027528727e-7,
+          "difference": -0.0000014652578014167287,
+          "abs_ratio": 0.3248317666144578
+        },
+        {
+          "previous": 8.3039530237012e-8,
+          "refined": -2.4255122012272227e-8,
+          "difference": -1.0729465224928424e-7,
+          "abs_ratio": 0.2920912719886913
+        },
+        {
+          "previous": 5.0272146426569864e-8,
+          "refined": -1.7900689281962703e-8,
+          "difference": -6.817283570853257e-8,
+          "abs_ratio": 0.3560756911008244
+        },
+        {
+          "previous": -0.0000011357833438968188,
+          "refined": 2.48541103499036e-7,
+          "difference": 0.0000013843244473958548,
+          "abs_ratio": 0.2188279171679902
+        },
+        {
+          "previous": 0.000026246224637978147,
+          "refined": -0.000006072223344099538,
+          "difference": -0.00003231844798207769,
+          "abs_ratio": 0.2313560684576731
+        }
+      ]
+    ]
+  },
+  "limitations": [
+    "Projection squared norm and IR moment quadratures numerical, not interval bounds. Piecewise-constant physical shell projection distinct from FV spectral cutoff.",
+    "One independent radial pair, ledger ell=0 only. Neither raw nor near receiver convergence proved; near raw E4 changes sign. Existing four all-mode trajectories unchanged.",
+    "Actual new original emitter, no moment-enriched substitute. Previous fine-grid checkpoint is not used to seed new grid; zero initial state.",
+    "No complete reverse transport ledger, kernel, CI or physical acceptance. Local binary checkpoints not committed."
+  ]
+}
