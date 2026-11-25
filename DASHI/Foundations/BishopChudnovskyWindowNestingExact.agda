@@ -203,3 +203,21 @@ windowUpperAnti : ∀ {k j} → k ≤′ j →
 windowUpperAnti ≤′-refl = QP.≤-refl
 windowUpperAnti (≤′-step {n = j} le) with windowNests j
 ... | l , u = QP.≤-trans u (windowUpperAnti le)
+
+-- The sorted positive views really are ordered, including equality.
+lowHigh : (n : Nat) → ViewLe (lowV n) (highV n)
+lowHigh n with (CH.num (v n) * CH.den (v (suc n))) NP.≤?
+                (CH.num (v (suc n)) * CH.den (v n))
+... | yes h = h
+... | no h = NP.≰⇒≥ h
+
+candidateOrdered : (k sp : Nat) →
+  CH.lower (candidate k sp) Q.≤ CH.upper (candidate k sp)
+candidateOrdered k sp =
+  cornerMono sp sp (CH.rootNumerator k) (suc (CH.rootNumerator k))
+    (highV (idx k)) (lowV (idx k))
+    (NP.*-mono-≤ (NP.≤-step NP.≤-refl) NP.≤-refl) (lowHigh (idx k))
+
+windowOrdered : (k : Nat) → CH.lower (O.window k) Q.≤ CH.upper (O.window k)
+windowOrdered k with T.successorWitness (CH.rootScale k) (NP.m^n≢0 2 (CH.rootBits k))
+... | sp , se rewrite windowEq k sp se = candidateOrdered k sp
