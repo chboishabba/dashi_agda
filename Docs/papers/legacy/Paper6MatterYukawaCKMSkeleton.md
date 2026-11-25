@@ -610,3 +610,8 @@ Not acceptable:
 
 The final manuscript should keep this distinction visible in the abstract,
 the theorem statements, the alpha diagnostic section, and the blocker map.
+
+
+## 25 November — Paper 9 ramified CM diagnostic donor (not physical calibration)
+
+Paper 9 PR #1546 now supplies exact finite integer two-slice checks for the original elliptic anchors: i, j=1728, e=2, prime 5, reciprocal trace -14/25 in W=w²; rho, j=0, e=3, prime 7, reciprocal trace -286/343 in W=w³. Conditional signed disk jet ratios are 23/46656 and -23/55296 respectively. See the current Paper 9 manuscript and original elliptic special-value owners. Distinguish the stabilizer ramification from the Hecke prime and from the selected physical carrier's depth. These numbers do not identify the 0.98976 correction, alpha2, p=29 Hecke character, degree-23 Faltings route, or physical CKM. Future target: derive the actual Kronecker/eta normalization observable in the same geometry, or prove non-identifiability with a concrete collision. No physical promotion; original classical and repository attribution retained.
