@@ -29,6 +29,7 @@ Only uses mmgroup MMV(31), numpy and exact finite-field row reduction.
 from __future__ import annotations
 import argparse
 import json
+import hashlib
 from pathlib import Path
 import numpy as np
 
@@ -147,7 +148,10 @@ def main():
         help="use inverse marked E-centre root; NEVER silently merge phases")
     ap.add_argument("--checkpoint-every",type=int,default=10)
     ap.add_argument("--reuse-basis",type=Path,help="replay saved independent original probes, no new ambient basis search")
+    ap.add_argument("--derive-from-plus",type=Path,help="derive opposite phase using literal C and the original positive vacuum")
     a=ap.parse_args()
+    if a.derive_from_plus and (a.prime!=31 or not a.opposite_phase or not a.cover or a.reuse_basis or a.limit!=90):
+        ap.error("derived opposite phase requires mod31, --opposite-phase, --cover, full rank and no --reuse-basis")
     if a.limit<1 or a.limit>90 or a.max_trials<a.limit:
         ap.error("limit must be 1..90 and max-trials>=limit")
     global PRIME, INV3, ZETA
@@ -176,11 +180,33 @@ def main():
         for b,bb in zip(B,b2):
             out=INV3*(out+(out*b)+(out*bb))
         return out
+    derived=None; lineage=None
+    if a.derive_from_plus:
+        from monster3b_mm31_outer_phase_pair import open_original, reconstruct
+        folder=a.derive_from_plus.resolve()
+        state,rows,piv,indices=open_original(folder,5)
+        cv=json.loads(a.cover.read_text())
+        if cv.get("actual_mmgroup_used") is not True or cv.get("original_source_blob_sha")!=m["source_blob_sha"]:
+            raise ValueError("wrong literal cover")
+        if any(state.get(k)!=cv.get(k) or not cv.get(k) for k in ("canonical_C_word","canonical_D_word")):
+            raise ValueError("positive phase literal source words mismatch")
+        if state.get("original_E_source_blob_sha")!=m["source_blob_sha"] or state.get("derived_from_plus"):
+            raise ValueError("positive vacuum must be original direct source")
+        C=MM(cv["canonical_C_word"])
+        if C*z*C**-1!=z**-1 or C.order()!=4:
+            raise ValueError("literal outer centre action")
+        derived,_=reconstruct(rows,piv,indices,5,V,z,B)
+        ambient=folder/"ambient_basis_rows_mod31.npz"
+        if not ambient.is_file():ambient=folder/"ambient_basis_rows.npz"
+        lineage={"source_plus_folder":str(folder),"source_plus_ambient_sha256":hashlib.sha256(ambient.read_bytes()).hexdigest(),
+                 "source_plus_status_sha256":hashlib.sha256((folder/"mmv31_hom_status.json").read_bytes()).hexdigest(),
+                 "C_word":cv["canonical_C_word"],"seed":"project_minus(positive_basis[index] * C)"}
     reuse_rows=reuse_probes=reuse_pivots=None
     if a.reuse_basis:
         if a.reuse_basis.resolve()==a.outdir.resolve():
             raise ValueError("replay must not overwrite original basis packet")
         old_status=json.loads((a.reuse_basis/f"mmv{PRIME}_hom_status.json").read_text())
+        if old_status.get("derived_from_plus"):raise ValueError("replay derived basis with --derive-from-plus")
         if (old_status.get("p"),old_status.get("zeta_mod_p"),
             old_status.get("number_independent_B_fixed_vectors"))!=(PRIME,ZETA,90):
             raise ValueError("reused source basis phase/rank mismatch")
@@ -209,7 +235,8 @@ def main():
                 "target_dimension_from_original_character":90,
                 "pivots":pivots,"source_E_basis_probe_indices":probes,
                 "last_trial":trial,
-                "replayed_original_basis":str(a.reuse_basis.resolve()) if a.reuse_basis else None}
+                "replayed_original_basis":str(a.reuse_basis.resolve()) if a.reuse_basis else None,
+                "derived_from_plus":lineage}
         if pivots:
             np.savez_compressed(a.outdir/f"ambient_basis_rows_mod{PRIME}.npz",
                 rows=np.asarray(basis_arrays,dtype=np.int16),
@@ -217,13 +244,14 @@ def main():
                 source_probes=np.array(probes,dtype=np.int64))
         status_file.write_text(json.dumps(record,indent=2)+"\n")
         return record
-    candidates=reuse_probes if reuse_probes is not None else ((7919*t+17)%DIM for t in range(a.max_trials))
+    candidates=(range(90) if derived is not None else reuse_probes if reuse_probes is not None else ((7919*t+17)%DIM for t in range(a.max_trials)))
     for trial,i in enumerate(candidates):
-        v=project(V("E",i))
+        v=project(derived[i]*C) if derived is not None else project(V("E",i))
         arr=np.asarray(v["E"],dtype=np.int16)%PRIME
         reduced,coeff=row_span_coefficients(arr,basis_arrays,pivots)
         possible=np.flatnonzero(reduced)
         if len(possible)==0:
+            if derived is not None:raise ValueError("literal C vacuum transport lost rank; canonical source discrepancy")
             if reuse_probes is not None:raise ValueError("reused original probe lost rank")
             continue
         pivot=int(possible[0]);k=pow(int(reduced[pivot]),-1,PRIME)
