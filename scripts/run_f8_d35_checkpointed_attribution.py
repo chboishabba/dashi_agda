@@ -12,6 +12,8 @@ from ksw668_f8_signed_route_stage import step, reverse_step
 from warp_native_geometric_receiver import receiver_bank
 from warp_israel_affine import radial_source_at_receiver, offsets
 from check_f8_signed_window import window_rows
+from check_f8_modal_cfl import envelope
+from check_f8_shrinking_injection import build as build_patch, read as read_patch, inject as inject_patch
 
 def atomic(path, **arrays):
     tmp=path.with_suffix('.tmp')
@@ -23,6 +25,7 @@ def digest(x):return hashlib.sha256(np.ascontiguousarray(x).tobytes()).hexdigest
 
 def run(a):
     work=a.work;work.mkdir(parents=True,exist_ok=True)
+    if a.window and a.shrink is not None:raise ValueError('distinct observation consumers')
     if not 0<a.budget<=90 or a.block<1 or not 0<a.dt<.0015:raise ValueError('budget/grid guard')
     T0=F(1);span=F(12)-T0;nt=math.ceil(span/a.dt);h=span/nt;end=nt+1
     # Same physical outer normal boundary: 2.016 is divisible by both spacings.
@@ -31,6 +34,9 @@ def run(a):
     # Enlarged same-object reference box: no outer-boundary causal contact through t12.
     # This is opt-in and not a historical production geometry or certified CFL.
     mc,mf=(337,449) if a.enlarged_box else (169,225)
+    caps=[envelope(dr,dy,nr-1,a.route)[2] for dr,dy,nr in ((drc,dyc,nc),(drf,dyf,nf))]
+    if h>float(min(caps)) and not a.allow_uncertified_cfl:raise ValueError('step exceeds sufficient shifted-generator CFL; select smaller dt')
+    if T0+end*h>F(13):raise ValueError('clock exceeds CFL envelope')
     S,maps=transfer_builder(drc,nc,dyc,mc,drf,nf,dyf,mf)
     def coeff(T):
         t=brentq(lambda t:F(t)-T,.5,25)
@@ -43,8 +49,8 @@ def run(a):
     sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py',Path(__file__).name]
-    ident=json.dumps(dict(route=a.route,window=a.window,enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py',Path(__file__).name]
+    ident=json.dumps(dict(route=a.route,window=a.window,shrink=a.shrink,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
     def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
     def read(k):
         with np.load(work/f'forward-{k:08d}.npz',allow_pickle=False) as z:
@@ -74,6 +80,11 @@ def run(a):
             jf,wf,*_=window_rows(ts,h,rx,.04,drf,nf,span-.15,.10)
             # The original SMS row is source-free at both exterior probe radii.
             if np.any(sc[:,ic]) or np.any(sf[:,jf]):raise ValueError('window source-free receiver required')
+        elif a.shrink is not None:
+            Tgrid=np.arange(end+1)*h;ts=np.array([1/coeff(T0+n*h)[1] for n in range(end+1)])
+            pc=build_patch(Tgrid,ts,dyc,mc,drc,nc,rx,a.shrink)
+            pf=build_patch(Tgrid,ts,dyf,mf,drf,nf,rx,a.shrink)
+            if np.any(sc[:,pc[2]]) or np.any(sf[:,pf[2]]):raise ValueError('source-free patch required')
         else:
             bc=receiver_bank(12,rx,.04,drc,dyc,h,vel,nt,nc,mc)
             bf=receiver_bank(12,rx,.04,drf,dyf,h,vel,nt,nf,mf)
@@ -82,6 +93,7 @@ def run(a):
         for ch in range(2 if a.window else 6):
             def obs(n):
                 o=np.zeros_like(xf)
+                if a.shrink is not None:return inject_patch(pf,ch,n,xf)
                 if a.window:o[0,:,0,:][:,jf]=wf[ch,n]
                 elif nt-1<=n<=end:o[:3]=bf[ch,n-nt+1]
                 return o
@@ -105,6 +117,9 @@ def run(a):
                         of=np.sum(wf[ch,n]*f[0,:,0,:][:,jf],axis=1)
                         oz=np.sum(wf[ch,n]*z[0,:,0,:][:,jf],axis=1)
                         mismatch+=oz-oc;direct+=of-oc
+                    if a.shrink is not None:
+                        oc=read_patch(pc,ch,n,c);of=read_patch(pf,ch,n,f);oz=read_patch(pf,ch,n,z)
+                        mismatch+=oz-oc;direct+=of-oc
                     aa=G(z,n);bb=G(z,n,sm);cc=S(cn)
                     ds.append((aa-bb,bb-cc));c,f=cn,fn
                 ce,fe=read(hi)
@@ -122,6 +137,9 @@ def run(a):
             if a.window:
                 if np.any(wc[ch,end]) or np.any(wf[ch,end]):raise ValueError('terminal window support')
                 off=np.zeros(3)
+            elif a.shrink is not None:
+                if np.any(obs(end)):raise ValueError('terminal patch support')
+                off=np.zeros(3)
             else:
                 mismatch=np.zeros(3);direct=np.zeros(3)
                 for i,n in enumerate((nt-1,nt,end)):
@@ -136,5 +154,5 @@ def run(a):
     return dict(phase='complete_experiment',identity=ident,results=results,physical_causal_null_certified=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0012);p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75);p.add_argument('--window',action='store_true',help='fixed compact E4/SMS window, separate from instantaneous receiver');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=2);p.add_argument('--budget',type=float,default=75);g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
     a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase']=='complete_experiment' else 75)
