@@ -1,0 +1,71 @@
+{
+  "status": "CONDITIONAL_OPTIMISATION_RESET",
+  "checker_blob": "1f6d672abf6124ecdad0dc092901a1305d7a4947",
+  "execution": "local OPENBLAS_NUM_THREADS=1 timeout 90 python, exit0; committed checker blob exact match",
+  "donors": {
+    "paid_actuator": "0626d7525d12b58075792a506bbf38897e898a65",
+    "phase_access": "0542a681a96bbd1f3606ffaaa69f057c5b08873d"
+  },
+  "scope": "Donor equations transcribed; no complete donor suite replay. Exact symbolic work identity and Bellman certificate; numerical signed harmonic truncation and source scaling checks. No physical source or hardware resource admission.",
+  "servo": {
+    "frequencies": [
+      20,
+      1000,
+      2000,
+      1560000
+    ],
+    "qualities": [
+      100,
+      10000,
+      1000000,
+      100000000
+    ],
+    "configurations": 16,
+    "source_amplitude_checks": 48,
+    "cutoffs": [
+      8,
+      16
+    ],
+    "detuned_unit_load": 0.21917808219178078,
+    "optimal_static_unit_net": 0.25,
+    "positive_vs_optimal": 0,
+    "optimal_threshold": "none for any source amplitude or finite Q; fixed source force and damping, admissible static resonance",
+    "selected_Q1e8": [
+      {
+        "Omega": 20,
+        "delta_vs_optimal": -0.0000441245339394547,
+        "source_rms_break_even_absolute": 0.0007746648032851454,
+        "source_rms_break_even_detuned": 0.00220762768673439
+      },
+      {
+        "Omega": 1000,
+        "delta_vs_optimal": -0.000007517578129723201,
+        "source_rms_break_even_absolute": 0.005477225767610434,
+        "source_rms_break_even_detuned": 0.015599149723926979
+      },
+      {
+        "Omega": 2000,
+        "delta_vs_optimal": -0.000015004394531559218,
+        "source_rms_break_even_absolute": 0.007745966760494624,
+        "source_rms_break_even_detuned": 0.022060524383039987
+      },
+      {
+        "Omega": 1560000,
+        "delta_vs_optimal": -0.01170000000000726,
+        "source_rms_break_even_absolute": 0.21633307652784248,
+        "source_rms_break_even_detuned": 0.6161168720300467
+      }
+    ]
+  },
+  "C3": {
+    "bellman_states": 225,
+    "domain": "1/3 <= p < 1; c>=0; perfect previous-state observation, symmetric Markov, one hard selected channel, no transition losses except declared cost",
+    "optimal_gain": "max(1/3,p-(1-p)c)",
+    "critical_cost": "(p-1/3)/(1-p)",
+    "bias_match_minus_mismatch": "min(c,critical_cost)",
+    "upper_bound_unrestricted_three_channels": 1
+  },
+  "physical_admission": false,
+  "CI": false,
+  "kernel": false
+}
