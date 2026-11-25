@@ -260,3 +260,28 @@ jmdThreeCResidualSource =
   siblingReceipt 1477 "e727acd514363109e7991d1eba84d8a93351d562"
     "DASHI.Moonshine.JMDDASHIThreeCResidualWeldExact"
     "Abstract C3 and S3 tensor characters; not a selected Monster action. TOE ledger records the classical Th 54-factor involution obstruction and unpaid full restriction."
+
+
+------------------------------------------------------------------------
+-- Source-owned Hopf/Monster native handoff (26 Nov 2026).
+-- No local import: #1217 does not carry the newer physical donor graph.
+-- These are source-written proof adapters, not kernel acceptance or a
+-- change to any primitive paid flag.
+------------------------------------------------------------------------
+
+hopfSpectralAndFLMSourceReceipt : PrimitiveSourceReceipt
+hopfSpectralAndFLMSourceReceipt =
+  siblingReceipt 1554 "7b7c0710445e5a39984053453d3486ba3a1645ba"
+    "DASHI.Unified.TOEHopfMonsterSourceRealizationsExact"
+    "Consumes original Hopf Spectral.At reopenSplit/splitAdvance and CoarseFineReopening; original gravityToFLMToGravity/flmToGravityToFLM provide the coordinate-only SectorRealization. Source-written, kernel unrun. Physical time, actual Monster action, universal action and metric variation remain unpaid."
+
+hopfMonsterLeanAlgebraSourceReceipt : PrimitiveSourceReceipt
+hopfMonsterLeanAlgebraSourceReceipt = record
+  { repository = "chboishabba/dashi_lean4"
+  ; pullRequest = 122
+  ; headCommit = "32cfae14fd21261a8cfbecc7760cf2231afe809d"
+  ; moduleName = "Integration.DASHITOE.HopfMonsterSourceCut"
+  ; ownerClaim = "Native source rational junction/barrier identities, rank24 parity, restricted triadic character obstruction and selected tower positivity. Reuses K27 and Witten controls. Kernel unrun; not a local Agda theorem."
+  ; authority = dashiSiblingFormalSource
+  ; localAgdaTheorem = false
+  }
