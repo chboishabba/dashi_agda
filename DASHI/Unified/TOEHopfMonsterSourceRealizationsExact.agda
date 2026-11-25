@@ -108,3 +108,44 @@ module Spectral (F : C3.RealField lzero)
       R.realize (splitRealization (suc n)) (P.advance a) ≡
       P.advanceCut (R.realize (splitRealization n) a)
     originalCutAdvanceCommutes = A.splitAdvance
+
+
+------------------------------------------------------------------------
+-- AP: literal KK graph metric, not a new metric or stress interface.
+-- The polynomial path keeps the connection AND graph-coordinate tangent.
+-- This is a finite rational bilinear statement, not the determinant,
+-- Lorentzian integral or common QFT action variation theorem.
+------------------------------------------------------------------------
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+import Data.Rational.Tactic.RingSolver as Ring
+import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as KK
+
+kkGraphMetricPathExact :
+  ∀ {V : Set}
+    (g dg : V → V → ℚ)
+    (A dA df ddf : V → ℚ)
+    (r dr t : ℚ) (v w : V) →
+  KK.KK5Bilinear
+    (λ x y → g x y + t * dg x y)
+    (λ x → A x + t * dA x) (r + t * dr)
+    v (df v + t * ddf v) w (df w + t * ddf w)
+  ≡
+  g v w + t * dg v w +
+    (r + t * dr) *
+      (((A v + df v) + t * (dA v + ddf v)) *
+       ((A w + df w) + t * (dA w + ddf w)))
+kkGraphMetricPathExact g dg A dA df ddf r dr t v w =
+  Ring.solve-∀
+    (g v w) (dg v w) (A v) (df v) (dA v) (ddf v)
+    (A w) (df w) (dA w) (ddf w) r dr t
+
+-- Consume the actual gauge transport at every graph tangent.
+-- The original owner uses A -> A+dLambda, df -> df-dLambda.
+kkGraphMetricGaugeExact :
+  ∀ {V : Set} (g : V → V → ℚ)
+    (A df dLambda : V → ℚ) (r : ℚ) (v w : V) →
+  KK.KK5Bilinear g (λ x → A x + dLambda x) r
+    v (df v - dLambda v) w (df w - dLambda w)
+  ≡ KK.KK5Bilinear g A r v (df v) w (df w)
+kkGraphMetricGaugeExact g A df dLambda r v w =
+  KK.KK5GaugeShiftPreservesBilinear g A dLambda r v w (df v) (df w)
