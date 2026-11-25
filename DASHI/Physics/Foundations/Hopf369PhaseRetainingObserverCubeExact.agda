@@ -17,6 +17,12 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as H
 import DASHI.Physics.Plasma.MHDMagneticVectorPotentialHelicalObserverExact as V
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
+import DASHI.Biology.Physical.BiologicalSourcePhysicalTissueSimulationExact as Physical
+import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact as Agreement
+import DASHI.Biology.Physical.BiologicalAllNeighbourTissueDynamicsExact as Tissue
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Voxel
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 module Spectral (F : C3.RealField lzero)
   (E : C3.IntegerEmbedding F) (I : C3.ModeInverseSquare F E)
@@ -237,3 +243,61 @@ actualSignedOrderResidual = refl
 notAllCausalFacesExact : Q.ExactFaces causalCube causalFaces → ⊥
 notAllCausalFacesExact p = actualFineOrderDiffers
   (cong Bio.observe (G.commutes (Q.pxy0 p) Bio.withoutMemory))
+
+
+-- The physical donor already requires actual one-step PNP and tissue
+-- simulation of the same specimen. Compare TWO chronological histories
+-- without demanding that their endpoints coincide.
+physicalFineOutcome :
+  (model : Physical.SourcePhysicalTissueSimulation) →
+  List Bio.Intervention → Physical.PhysicalState model →
+  Voxel.Ternary27Point → Bool
+physicalFineOutcome model actions state p =
+  Bio.observe
+    (Physical.tissueReadout model (Physical.physicalTrace model actions state) p)
+
+physicalCoarseOutcome :
+  (model : Physical.SourcePhysicalTissueSimulation) →
+  List Bio.Intervention → Physical.PhysicalState model →
+  Voxel.Ternary27Point → Bool
+physicalCoarseOutcome model actions state p =
+  Bio.coarseObserve
+    (Tissue.fullCoarseRun actions
+      (Bio.spatialProject (Physical.tissueReadout model state)) p)
+
+physicalOutcomeCommutes :
+  (model : Physical.SourcePhysicalTissueSimulation) →
+  (actions : List Bio.Intervention) (state : Physical.PhysicalState model)
+  (p : Voxel.Ternary27Point) →
+  physicalFineOutcome model actions state p ≡
+  physicalCoarseOutcome model actions state p
+physicalOutcomeCommutes model actions state p =
+  cong Bio.coarseObserve
+    (Agreement.atEveryVoxel
+      (Physical.physicalHistoryProjectsToAll54Bonds model actions state) p)
+
+physicalOrderResidualTransport :
+  (model : Physical.SourcePhysicalTissueSimulation) →
+  (first second : List Bio.Intervention)
+  (state : Physical.PhysicalState model) (p : Voxel.Ternary27Point) →
+  change (physicalFineOutcome model first state p)
+         (physicalFineOutcome model second state p) ≡
+  change (physicalCoarseOutcome model first state p)
+         (physicalCoarseOutcome model second state p)
+physicalOrderResidualTransport model first second state p =
+  cong₂ change (physicalOutcomeCommutes model first state p)
+               (physicalOutcomeCommutes model second state p)
+
+-- Selected chronology comparison on the actual all-neighbour tissue
+-- consumer; the physical history theorem is conditional on its source.
+restoreSignalResidualTransport :
+  (model : Physical.SourcePhysicalTissueSimulation) →
+  (state : Physical.PhysicalState model) (p : Voxel.Ternary27Point) →
+  change (physicalFineOutcome model (Bio.signal ∷ Bio.restoreMemory ∷ []) state p)
+         (physicalFineOutcome model (Bio.restoreMemory ∷ Bio.signal ∷ []) state p) ≡
+  change (physicalCoarseOutcome model (Bio.signal ∷ Bio.restoreMemory ∷ []) state p)
+         (physicalCoarseOutcome model (Bio.restoreMemory ∷ Bio.signal ∷ []) state p)
+restoreSignalResidualTransport model state p =
+  physicalOrderResidualTransport model
+    (Bio.signal ∷ Bio.restoreMemory ∷ [])
+    (Bio.restoreMemory ∷ Bio.signal ∷ []) state p
