@@ -369,3 +369,75 @@ rightAfterLeft : (s : RatioSheet) (b c : Point) →
   completeRight s (completeLeft s b c) b ≡ c
 rightAfterLeft direct = law2 (λ b c → completeRight direct (completeLeft direct b c) b) (λ b c → c) refl
 rightAfterLeft reflected = law2 (λ b c → completeRight reflected (completeLeft reflected b c) b) (λ b c → c) refl
+
+
+-- Full proper incidence, excluding the zero normal as well as zero point.
+inverseNonzero : (x : Point) → Nonzero x → Nonzero (inverse x)
+inverseNonzero x nz h = nz (trans (sym (inverseInvolutive x)) (cong inverse h))
+
+QuadraticConic : Point → Point → Set
+QuadraticConic n x = Nonzero n × (Nonzero x × (dot n (quadratic x) ≡ S.sspZero))
+
+quadraticConicForward : (n x : Point) → ProperConic n x → QuadraticConic n x
+quadraticConicForward n x (nn , (nx , q)) =
+  nn , ((λ h → nx (cong inverse h)) , quadraticForward n x q)
+
+quadraticConicBackward : (n x : Point) → QuadraticConic n x → ProperConic n x
+quadraticConicBackward n x (nn , (nx , q)) =
+  nn , (inverseNonzero x nx , quadraticBackward n x q)
+
+frameQuadratic : Frame → Point → Point → Set
+frameQuadratic f n x = QuadraticConic n (frameDecode f x)
+
+frameQuadraticForward : (f g : Frame) (n x : Point) →
+  frameQuadratic f n x → frameQuadratic g n (frameTransport f g x)
+frameQuadraticForward f g n x = subst (QuadraticConic n) (sym (frameCovariance f g x))
+
+frameQuadraticBackward : (f g : Frame) (n x : Point) →
+  frameQuadratic g n (frameTransport f g x) → frameQuadratic f n x
+frameQuadraticBackward f g n x = subst (QuadraticConic n) (frameCovariance f g x)
+
+-- Inverse laws yield sound and complete equations for each role.
+-- Admissibility is explicit; no default letter for repeated anchors.
+middleFromRelation : (s : RatioSheet) (a b c : Point) →
+  c ≡ completeRight s a b → b ≡ completeMiddle s a c
+middleFromRelation s a b .(completeRight s a b) refl = sym (middleAfterRight s a b)
+
+leftFromRelation : (s : RatioSheet) (a b c : Point) →
+  c ≡ completeRight s a b → a ≡ completeLeft s b c
+leftFromRelation s a b .(completeRight s a b) refl = sym (leftAfterRight s a b)
+
+middleToRelation : (s : RatioSheet) (a b c : Point) →
+  b ≡ completeMiddle s a c → c ≡ completeRight s a b
+middleToRelation s a .(completeMiddle s a c) c refl = sym (rightAfterMiddle s a c)
+
+leftToRelation : (s : RatioSheet) (a b c : Point) →
+  a ≡ completeLeft s b c → c ≡ completeRight s a b
+leftToRelation s .(completeLeft s b c) b c refl = sym (rightAfterLeft s b c)
+
+-- Distinct anchors imply distinct remaining pairs.
+rightDiagonal : (s : RatioSheet) (a : Point) → completeRight s a a ≡ a
+rightDiagonal direct a = eqPSound (completeRight direct a a) a
+  (atP (λ x → eqP (completeRight direct x x) x) refl a)
+rightDiagonal reflected a = eqPSound (completeRight reflected a a) a
+  (atP (λ x → eqP (completeRight reflected x x) x) refl a)
+
+middleDiagonal : (s : RatioSheet) (a : Point) → completeMiddle s a a ≡ a
+middleDiagonal s a =
+  trans (cong (completeMiddle s a) (sym (rightDiagonal s a))) (middleAfterRight s a a)
+
+leftDiagonal : (s : RatioSheet) (a : Point) → completeLeft s a a ≡ a
+leftDiagonal s a =
+  trans (cong (completeLeft s a) (sym (rightDiagonal s a))) (leftAfterRight s a a)
+
+rightDistinctLeft : (s : RatioSheet) (a b : Point) → (a ≡ b → ⊥) →
+  (a ≡ completeRight s a b → ⊥)
+rightDistinctLeft s a b ab ac = ab
+  (trans (sym (middleDiagonal s a))
+    (trans (cong (completeMiddle s a) ac) (middleAfterRight s a b)))
+
+rightDistinctMiddle : (s : RatioSheet) (a b : Point) → (a ≡ b → ⊥) →
+  (b ≡ completeRight s a b → ⊥)
+rightDistinctMiddle s a b ab bc = ab
+  (trans (sym (leftAfterRight s a b))
+    (trans (cong (completeLeft s b) (sym bc)) (leftDiagonal s b)))
