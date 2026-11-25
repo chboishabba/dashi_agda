@@ -115,11 +115,11 @@ twoStepSource :
         (Z._*_ (CH.sourceP (suc n)) (E.a (suc n)))))
 twoStepSource n
   rewrite E.prefixTStep (suc n) | E.prefixTStep n | E.sourceDeltaStep n =
-  zsolve 7
-    (λ t q r p u a v →
+  zsolve 8
+    (λ t q r p u a v b →
       (((t ⊗ q) ⊕ (p ⊗ u ⊗ a)) ⊗ r)
-        ⊕ (p ⊗ u ⊗ v)
-      ⊜ (t ⊗ q ⊗ r) ⊕ ((p ⊗ u) ⊗ ((a ⊗ r) ⊕ v)))
+        ⊕ (p ⊗ u ⊗ v ⊗ b)
+      ⊜ (t ⊗ q ⊗ r) ⊕ ((p ⊗ u) ⊗ ((a ⊗ r) ⊕ (v ⊗ b))))
     refl (E.T n) (CH.sourceQ n) (CH.sourceQ (suc n))
       (E.P n) (CH.sourceP n) (E.a n)
-      (Z._*_ (CH.sourceP (suc n)) (E.a (suc n)))
+      (CH.sourceP (suc n)) (E.a (suc n))
