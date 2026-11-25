@@ -45,12 +45,27 @@ def run(manifest,cover):
             "central_rephase_commutes_E":all(u*MM(w)==MM(w)*u for w in
                          m["translation_words"]+m["modulation_words"])}
     require(all(checks.values()),"standard cover relation failure "+str(checks))
+    # Literal source wheel, retain any central order defect. The word
+    # itself must be executed, not inferred from an ordinary source matrix.
+    e=C*D*C**-1
+    letters={"D":D,"E":e,"d":D**-1,"e":e**-1}
+    w=I
+    for letter in "DEdeDeDEDEdedEd":w=w*letters[letter]
+    g=w**3
+    defect=g**13
+    k=next((j for j in range(3) if defect==z**j),None)
+    require(k is not None and g*z==z*g,"literal wheel has noncentral order defect")
+    g13=defect**-1*g
+    require(g13**13==I and g13!=I and defect*g13==g,"literal order13 correction")
     return {"status":"LITERAL_MM_STANDARD_D_PHASE_RECOVERED",
             "actual_mmgroup_used":True,"manifest_sha256":digest(manifest),
             "cover_sha256":digest(cover),"original_source_blob_sha":SOURCE,
             "canonical_C_word":str(C),"canonical_D_word":str(D),
             "standard_D_word":str(d),"Q7_word":str(u),"Q7_central_z_power":q,
             "standard_Q_word":str(Q(d)),"checks":checks,
+            "literal_wheel_word":str(g),"literal_wheel_13_defect_word":str(defect),
+            "literal_wheel_13_defect_z_power":k,"literal_order13_word":str(g13),
+            "raw_wheel_has_order13":k==0,
             "characteristic_zero_numeric_Hom_extracted":False}
 def main():
     p=argparse.ArgumentParser(description=__doc__)
