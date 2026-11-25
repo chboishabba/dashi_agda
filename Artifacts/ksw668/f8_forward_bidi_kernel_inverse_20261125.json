@@ -1,0 +1,250 @@
+{
+  "scope": "Original reduced scalar modes 1,2. Numerical boundary forward/reverse/finite transpose comparisons; conditional endpoint characteristic residual enclosure and finite averaged operator inverse, no global continuum Volterra or TT/tail certificate. No CI.",
+  "predecessor": "ed3680663fe74b582d054ff6ebe985e62082ae89",
+  "blobs": {
+    "global": "2b24c33249e40a0cd35c06ff9f043c7dd07f79d0",
+    "forward": "58d8817bc16c839bbf84604a807fa444825bdec6",
+    "hermite": "5a7733370d7ae99f7b02d3e41a758999156abd2f",
+    "plain_hermite_pre_flag": "5aa533743f35c1785e950473b3674c7f5a596283",
+    "averaged": "f1fad6c56c92b616579d5b78e4dde553bc2ec493"
+  },
+  "forward": {
+    "checks": 7,
+    "rows": [
+      "E4_1",
+      "E4_2",
+      "SMS_1",
+      "SMS_2"
+    ],
+    "n128": [
+      2.3888778742220375e-15,
+      -1.2812147024341376e-14,
+      -2.9664556085117635e-15,
+      1.12299869133006e-15
+    ],
+    "n256": [
+      2.6717024364693563e-15,
+      -1.2645391974930955e-14,
+      -6.020485013927202e-16,
+      -5.508455801659735e-17
+    ],
+    "n512": [
+      2.763255176341722e-15,
+      -1.2600055332031305e-14,
+      -4.624653180727259e-17,
+      -3.329759976648784e-16
+    ],
+    "n512_transpose": [
+      2.763255176341529e-15,
+      -1.2600055332031478e-14,
+      -4.6246531806882485e-17,
+      -3.3297599766488654e-16
+    ],
+    "n512_nodal_source": [
+      2.7655908188496853e-15,
+      -1.2611135392459066e-14,
+      -4.639281572646634e-17,
+      -3.335455655977627e-16
+    ],
+    "n512_max_abs_transpose_discrepancy": 3.901040435834344e-28,
+    "n512_mode2_isolated_seconds": 16.80307273400001,
+    "scope": "128/256 complete; 512 timed out after completed mode1, mode2 completed in isolated rerun using same executed module; shared numerical auxiliary kernel, not independent error bound."
+  },
+  "reverse": {
+    "n512": [
+      2.713100301972765e-15,
+      -1.2564877007313431e-14,
+      2.5861877831991835e-17,
+      -3.71040043914813e-16
+    ],
+    "n256": [
+      2.6968458168862986e-15,
+      -1.2614022640696846e-14,
+      5.0902400784258584e-17,
+      -2.6970066455585953e-16
+    ],
+    "scope": "recovered previous execution logs and already committed global-kernel receipt, not new reverse run"
+  },
+  "hermite": {
+    "h": 0.00390625,
+    "cells_each": 426411,
+    "rows": [
+      "mode1 source 1/12 target 1",
+      "mode2 source 1/12 target 1",
+      "mode1 source 1 target 1/12",
+      "mode2 source 1 target 1/12"
+    ],
+    "plain": {
+      "max_residual": [
+        54.7433400425704,
+        55.54375006201784,
+        62.65181010841304,
+        64.0836488655636
+      ],
+      "old_max_residual": [
+        270.7556146126046,
+        273.1928774142273,
+        285.5753347910415,
+        289.0689116660602
+      ],
+      "value_error": [
+        3.0157382561316597,
+        3.0508949902304243,
+        3.3969642962073996,
+        3.4686146065514833
+      ],
+      "derivative_error": [
+        473.15589127908765,
+        486.52592463517414,
+        862.5189164828321,
+        886.8970469521632
+      ]
+    },
+    "richardson": {
+      "max_residual": [
+        54.08225854361317,
+        54.0822585436859,
+        44.776439895991196,
+        44.501490699861286
+      ],
+      "value_error": [
+        0.922562772529764,
+        0.9223118091892352,
+        0.7177506214250532,
+        0.7190226338418495
+      ],
+      "derivative_error": [
+        143.6547813732236,
+        146.50718556961118,
+        181.71642925856852,
+        183.6017243431486
+      ],
+      "bounds": [
+        [
+          [
+            -0.9179529728887297,
+            0.9272565597773996
+          ],
+          [
+            -143.6819263240598,
+            143.6389714918686
+          ],
+          [
+            -143.63901163809916,
+            143.68188617782923
+          ]
+        ],
+        [
+          [
+            -0.9180119650480763,
+            0.9267740993285326
+          ],
+          [
+            -146.55414094197891,
+            146.4710476848576
+          ],
+          [
+            -146.47144378816344,
+            146.5537448386731
+          ]
+        ],
+        [
+          [
+            -0.7131797997976769,
+            0.7224300451370456
+          ],
+          [
+            -181.75061050160235,
+            181.6949103540791
+          ],
+          [
+            -181.72568941132508,
+            181.71983144435634
+          ]
+        ],
+        [
+          [
+            -0.7148017433264793,
+            0.7234297653101177
+          ],
+          [
+            -183.65558282544964,
+            183.56016217153507
+          ],
+          [
+            -183.59945940464615,
+            183.61628559233856
+          ]
+        ]
+      ]
+    },
+    "scope": "whole characteristic endpoint rectangles, not whole wall slab-pair matrix; derivatives K_t and K_z target, K_xi via reciprocal endpoint. Plain run predates optional rich flag; unchanged arithmetic path. Richardson not assumed rigorous by convergence; actual residual enclosed."
+  },
+  "averaged": {
+    "n128": {
+      "strict_inverse_upper": [
+        27.15215918610232,
+        21.79428145967595
+      ],
+      "strict_defect": [
+        6.378998937432595e-12,
+        5.088017985065381e-12
+      ],
+      "strict_threshold": [
+        0.03682948354662874,
+        0.04588359574277373
+      ],
+      "diagonal_delta_lower": 0.17575358356361556,
+      "analytic_diagonal_inverse_upper": [
+        309.4800796669402,
+        160.07111434589646
+      ],
+      "analytic_diagonal_defect": [
+        4.480624013051311e-11,
+        2.308788455867118e-11
+      ],
+      "analytic_diagonal_threshold": [
+        0.0032312257418189608,
+        0.006247223329995113
+      ],
+      "diagonal_error_upper": 0.09803607727254947,
+      "remaining_offdiag_budget": [
+        -0.09480485153073052,
+        -0.09178885394255437
+      ]
+    },
+    "n256": {
+      "strict_inverse_upper": [
+        47.236883242361344,
+        36.79422466849097
+      ],
+      "strict_defect": [
+        2.238092873225278e-11,
+        1.7347435116850492e-11
+      ],
+      "strict_threshold": [
+        0.021169897998333947,
+        0.027178178342112422
+      ],
+      "diagonal_delta_lower": 0.14529748581963284,
+      "analytic_diagonal_inverse_upper": [
+        299.49281011315423,
+        149.3189863324356
+      ],
+      "analytic_diagonal_defect": [
+        1.1130391387047558e-10,
+        5.533382668000883e-11
+      ],
+      "analytic_diagonal_threshold": [
+        0.003338978320121209,
+        0.006697071983690371
+      ],
+      "diagonal_error_upper": 0.021436002274579792,
+      "remaining_offdiag_budget": [
+        -0.018097023954458585,
+        -0.014738930290889423
+      ]
+    },
+    "scope": "actual whole-cell averaged strict-lower kernel with optional exact constant diagonal blocks, not previous collocation matrix. Global perturbation sufficient test not satisfied; no whole offdiagonal error upper. Conventional IEEE binary64 BLAS and correctly rounded scalar operations assumed."
+  }
+}
