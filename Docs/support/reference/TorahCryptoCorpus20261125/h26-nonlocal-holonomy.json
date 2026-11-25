@@ -1,0 +1,979 @@
+{
+  "results": [
+    {
+      "kind": "normalized",
+      "selector": "repeatA",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 6,
+        "chordPass": 5,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 55
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 196,
+        "chords": 4479,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 351,
+        "chords": 9295,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "repeatA",
+      "twist": true,
+      "shem": {
+        "solutions": 3,
+        "treePass": 6,
+        "chordPass": 1,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 55
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 187,
+        "chords": 4479,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 386,
+        "chords": 9295,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "repeatPair",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 6,
+        "chordPass": 2,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 8
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 65,
+        "chords": 832,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 99,
+        "chords": 1678,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "repeatPair",
+      "twist": true,
+      "shem": {
+        "solutions": 3,
+        "treePass": 6,
+        "chordPass": 1,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 8
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 38,
+        "chords": 832,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 62,
+        "chords": 1678,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "13",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 6,
+        "chordPass": 2,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 59
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 171,
+        "chords": 5015,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 419,
+        "chords": 10325,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "13",
+      "twist": true,
+      "shem": {
+        "solutions": 3,
+        "treePass": 6,
+        "chordPass": 4,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 59
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 203,
+        "chords": 5015,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 427,
+        "chords": 10325,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "27",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 6,
+        "chordPass": 2,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 45
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 164,
+        "chords": 3825,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 279,
+        "chords": 7875,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "normalized",
+      "selector": "27",
+      "twist": true,
+      "shem": {
+        "solutions": 3,
+        "treePass": 6,
+        "chordPass": 2,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 45
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 155,
+        "chords": 3825,
+        "treePass": 249
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 291,
+        "chords": 7875,
+        "treePass": 561
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "repeatA",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 0,
+        "chordPass": 3,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 55
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 303,
+        "chords": 4479,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 601,
+        "chords": 9295,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "repeatA",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 0,
+        "chordPass": 2,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 55
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 162,
+        "chords": 4479,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 394,
+        "chords": 9295,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "repeatPair",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 0,
+        "chordPass": 2,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 8
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 70,
+        "chords": 832,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 104,
+        "chords": 1678,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "repeatPair",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 0,
+        "chordPass": 2,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 8
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 38,
+        "chords": 832,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 62,
+        "chords": 1678,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "13",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 0,
+        "chordPass": 6,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 59
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 332,
+        "chords": 5015,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 713,
+        "chords": 10325,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "13",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 0,
+        "chordPass": 1,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 59
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 216,
+        "chords": 5015,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 416,
+        "chords": 10325,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "27",
+      "twist": false,
+      "shem": {
+        "solutions": 27,
+        "treePass": 0,
+        "chordPass": 10,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "27": 45
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 266,
+        "chords": 3825,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 0,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 534,
+        "chords": 7875,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "physical",
+      "selector": "27",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 0,
+        "chordPass": 3,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "3": 45
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 163,
+        "chords": 3825,
+        "treePass": 137
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 299,
+        "chords": 7875,
+        "treePass": 307
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "repeatA",
+      "twist": false,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 5,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 50,
+          "27": 5
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 196,
+        "chords": 4479,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 351,
+        "chords": 9295,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "repeatA",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 1,
+        "chords": 55,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 23,
+          "2": 27,
+          "3": 5
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 187,
+        "chords": 4479,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 386,
+        "chords": 9295,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "repeatPair",
+      "twist": false,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 2,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 7,
+          "27": 1
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 65,
+        "chords": 832,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 99,
+        "chords": 1678,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "repeatPair",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 1,
+        "chords": 8,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 3,
+          "2": 4,
+          "3": 1
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 38,
+        "chords": 832,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 62,
+        "chords": 1678,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "13",
+      "twist": false,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 2,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 58,
+          "27": 1
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 211,
+        "chords": 5015,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 426,
+        "chords": 10325,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "13",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 3,
+        "chords": 59,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 32,
+          "2": 26,
+          "3": 1
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 198,
+        "chords": 5015,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 396,
+        "chords": 10325,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "27",
+      "twist": false,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 2,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 42,
+          "27": 3
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 166,
+        "chords": 3825,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 288,
+        "chords": 7875,
+        "treePass": 466
+      }
+    },
+    {
+      "kind": "drift",
+      "selector": "27",
+      "twist": true,
+      "shem": {
+        "solutions": 0,
+        "treePass": 2,
+        "chordPass": 1,
+        "chords": 45,
+        "truth": false,
+        "singleton": 0,
+        "correct": 0,
+        "output": null,
+        "fixedHistogram": {
+          "0": 17,
+          "2": 25,
+          "3": 3
+        }
+      },
+      "train": {
+        "n": 85,
+        "zero": 85,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 143,
+        "chords": 3825,
+        "treePass": 227
+      },
+      "test": {
+        "n": 175,
+        "zero": 175,
+        "one": 0,
+        "truth": 0,
+        "correct": 0,
+        "chordPass": 298,
+        "chords": 7875,
+        "treePass": 466
+      }
+    }
+  ],
+  "oracle": [
+    {
+      "kind": "normalized",
+      "twist": false,
+      "none": 23,
+      "unique": 18,
+      "multi": 30,
+      "choices": 114
+    },
+    {
+      "kind": "normalized",
+      "twist": true,
+      "none": 20,
+      "unique": 23,
+      "multi": 28,
+      "choices": 112
+    },
+    {
+      "kind": "physical",
+      "twist": false,
+      "none": 18,
+      "unique": 15,
+      "multi": 38,
+      "choices": 205
+    },
+    {
+      "kind": "physical",
+      "twist": true,
+      "none": 23,
+      "unique": 12,
+      "multi": 36,
+      "choices": 102
+    },
+    {
+      "kind": "drift",
+      "twist": false,
+      "none": 25,
+      "unique": 23,
+      "multi": 23,
+      "choices": 89
+    },
+    {
+      "kind": "drift",
+      "twist": true,
+      "none": 32,
+      "unique": 19,
+      "multi": 20,
+      "choices": 76
+    }
+  ],
+  "qualification": "Candidate mandatory permutation constraints on connected tree plus nonlocal chords. F selector nearest repeated visible A/pair or fixed lag13/27; no actual creator gate or recurrence supplied. A physical chart change represents same raw glyph; normalized transport represents same residual. Drift omits scale ratio intentionally as H25 comparator. All C hidden during graph construction and solve; truth only for scoring and separate hindsight oracle. Synthetic chapter blocks and actual Shem regression, not fresh blind holdout. Does not cover general nondeterministic graph or time-evolving return revisits."
+}
