@@ -11,6 +11,11 @@
       "commit": "5574cff19c903818c4ecb7232e1c59a7a3016e87",
       "blob": "f4a1a846f290c032cfa2e038b6ff9d633ce8fd5d",
       "local_json_sha256": "25b7607bd8dd3bddce4a6d0d55dac2539e6783b2b15190dd71bdf7a5d4af40e2"
+    },
+    "direct": {
+      "commit": "807f796f63cbff86fe7f81098e2ce8bb8c443270",
+      "blob": "56f32e7339834383c91bc6a0f188042eea585c9b",
+      "local_json_sha256": "91570f6a35ec146c8f47e1e91166ca41b75f4cb9b013834802c014cd85729c4b"
     }
   },
   "geometry": {
@@ -92,5 +97,28 @@
       "SMS": "positive"
     }
   },
-  "execution": "Both local scripts completed and match committed blobs; existing fixed-window cap script matches its committed blob. Local extracted Fbox helper from prior turn, not full checkout. Values are nearest-decimal displays of exact rational checks; tail fractions retained. No new trajectory or CI. No full proof-kernel acceptance."
+  "execution": "All three local scripts completed and match committed blobs; existing fixed-window cap script matches its committed blob. Local extracted Fbox helper from prior turn, not full checkout. Values are nearest-decimal displays of exact rational checks; tail fractions retained. No new trajectory or CI. No full proof-kernel acceptance.",
+  "direct": {
+    "scope": "Original E4 direct free single-layer term in inherited boundary trace decomposition, not full Neumann transport.",
+    "tile": {
+      "s": [
+        0.000103,
+        0.000104
+      ],
+      "d": [
+        0.000158,
+        0.000159
+      ],
+      "delta": [
+        0.000103,
+        0.000104
+      ]
+    },
+    "q_lower": 0.000041319171599235034,
+    "exponent_sum_upper": 669.1483605040378,
+    "prefactor_lower": 15.775660562227104,
+    "direct_sign": "negative",
+    "direct_magnitude_strict_lower": "1e-293",
+    "full_receiver_sign_proved": false
+  }
 }
