@@ -9,7 +9,9 @@ def split(p,i):
     q=axis(p,i); l=[q[0]];r=[q[-1]]
     while len(q.l)>1:
         q=(q[:-1]+q[1:])*.5;l.append(q[0]);r.append(q[-1])
-    return axis(stack(l),i),axis(stack(r[::-1]),i)
+    def restore(a):
+        return I(np.moveaxis(a.l,0,i),np.moveaxis(a.h,0,i))
+    return restore(stack(l)),restore(stack(r[::-1]))
 
 def stats(p,den):
     a=U(p.mag()/den);peak=np.max(a,axis=(0,1,2));s=U(a*a);m=s.shape[0]*s.shape[1];q=np.zeros(s.shape[2:])
@@ -56,6 +58,13 @@ def symbolic():
         for ctrl,v in ((l,t/2),(r[::-1],(1+t)/2)):
             assert S.expand(sum(a*S.binomial(n,i)*t**i*(1-t)**(n-i) for i,a in enumerate(ctrl))-B(v))==0;checks+=1
         for i in range(n+1):assert S.integrate(S.binomial(n,i)*t**i*(1-t)**(n-i),(t,0,1))==S.Rational(1,n+1);checks+=1
+    # Unequal tensor degrees catch source-axis restoration errors.
+    x=np.arange(4*5*3,dtype=float).reshape(4,5,3);p=I(x)
+    for i in range(3):
+        a,b=split(p,i);assert a.l.shape==b.l.shape==x.shape
+        u=np.take(x,0,axis=i);v=np.take(x,-1,axis=i)
+        assert np.all(np.take(a.l,0,axis=i)<=u) and np.all(np.take(a.h,0,axis=i)>=u)
+        assert np.all(np.take(b.l,-1,axis=i)<=v) and np.all(np.take(b.h,-1,axis=i)>=v);checks+=1
     return checks
 
 def run(n,mode,j,h,depth):
