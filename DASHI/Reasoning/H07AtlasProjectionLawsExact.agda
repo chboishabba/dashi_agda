@@ -657,6 +657,8 @@ projectU {H.direction u v} (H.mark p nz)
   rewrite InverseColumns.au proof | InverseColumns.bu proof
         | scaleOne u | scaleZero v | addRight u = subSelf u
   where
+    proof : InverseColumns (H.at (H.first p) u) (H.at (H.first p) v)
+      (H.at (H.second p) u) (H.at (H.second p) v) nz
     proof = inverseColumns (H.at (H.first p) u) (H.at (H.first p) v)
       (H.at (H.second p) u) (H.at (H.second p) v) nz
 
@@ -665,6 +667,8 @@ projectV {H.direction u v} (H.mark p nz)
   rewrite InverseColumns.av proof | InverseColumns.bv proof
         | scaleZero u | scaleOne v | addLeft v = subSelf v
   where
+    proof : InverseColumns (H.at (H.first p) u) (H.at (H.first p) v)
+      (H.at (H.second p) u) (H.at (H.second p) v) nz
     proof = inverseColumns (H.at (H.first p) u) (H.at (H.first p) v)
       (H.at (H.second p) u) (H.at (H.second p) v) nz
 
