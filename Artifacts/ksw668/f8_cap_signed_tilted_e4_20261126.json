@@ -1,0 +1,184 @@
+{
+  "predecessor": "3e47c3eb3dd8c2d169ef930d732378283bab01b0",
+  "scope": "Original fixed-window scalar TT yy E4 conditional strict nonvanishing, under inherited smooth-reference finite propagation, layer identity and stated full-line Fourier attachment. Not full tensor authority, SMS sign, production convergence, kernel verification or physical claim.",
+  "scripts": {
+    "signedPaths": {
+      "commit": "01a306a9e79f089b7e63ec06e2922be73aaaab3f",
+      "blob": "b111389fc3738f8ba48e63810f8ae76be39dd63e",
+      "local_json_sha256": "92b98448bc1715570146e37742b8b3d51c0d078d94b5900cc0c3d84a34a05805"
+    },
+    "tiltedRemainder": {
+      "commit": "9efec8a5ac7ba18ff378e1de1f4eee655908bed0",
+      "blob": "61d60af67a00da0e067fbf9d6f925a6de2038f6b",
+      "local_json_sha256": "9090ef372429a30d189eab33e327f76cc508fa026fbeb75470c7f6f86a0202c1"
+    }
+  },
+  "signedPaths": {
+    "checks": 73,
+    "source_X_lower": 55.65279528860131,
+    "certified_derivative_orders": [
+      0,
+      17
+    ],
+    "log_slope_lower": 10000,
+    "cross_radial_separation_lower": 2.4763,
+    "cross_gain_over_N_lower": 3361.842072757032,
+    "self_order": 5,
+    "selected_direct": 6,
+    "selected_cross": 21,
+    "selected_total": 27,
+    "residual_noncommutative_checks": 7,
+    "negative_control": {
+      "source_elapsed": 1e-7,
+      "receiver_before_end": 1e-7,
+      "depth": 0.000358,
+      "q_lower": 0.00001076538164753866,
+      "X": 56.11704556662012,
+      "signed_order18_negative": true,
+      "actual_Drr_payload_signed_order12_negative": true,
+      "upper_relative_to_abs_last": -0.333316785681143
+    }
+  },
+  "delay": {
+    "direction": [
+      "-354000/1031329",
+      "968671/1031329"
+    ],
+    "available_budget_upper": "361/1000000",
+    "actual_support_upper_display": 0.00036036470678729667,
+    "time_weights": [
+      ".8",
+      "1.03"
+    ],
+    "self_time_weights": [
+      ".09",
+      ".035"
+    ],
+    "support_delay_lower": [
+      0.09472724822927175,
+      0.03585231126080888
+    ],
+    "raw_exponent_base_lower": 644.3581440443213,
+    "raw_exponent_self_time_rates": [
+      160643.3046093876,
+      62472.39623698406
+    ]
+  },
+  "remainder": {
+    "tilt": 1780000,
+    "bands": [
+      {
+        "m": [
+          0,
+          0.5
+        ],
+        "rho_E": 0.0000041671839305785434,
+        "rho_R": 0.0000381610361449733,
+        "upper": 1.4289465626438939e-282
+      },
+      {
+        "m": [
+          0.5,
+          1
+        ],
+        "rho_E": 0.000005282611685183476,
+        "rho_R": 0.00003917340583162463,
+        "upper": 1.108523225021671e-281
+      },
+      {
+        "m": [
+          1,
+          1.5
+        ],
+        "rho_E": 0.000007141657942858363,
+        "rho_R": 0.00004086068864271019,
+        "upper": 1.0317553341779152e-280
+      },
+      {
+        "m": [
+          1.5,
+          2
+        ],
+        "rho_E": 0.000009744322703603206,
+        "rho_R": 0.000043222884578229974,
+        "upper": 8.571565662976208e-280
+      },
+      {
+        "m": [
+          2,
+          2.5
+        ],
+        "rho_E": 0.000013090605967418003,
+        "rho_R": 0.000046259993638183965,
+        "upper": 6.12805569526922e-279
+      },
+      {
+        "m": [
+          2.5,
+          3
+        ],
+        "rho_E": 0.000017180507734302754,
+        "rho_R": 0.00004997201582257219,
+        "upper": 1.6292292e-293
+      },
+      {
+        "m": [
+          3,
+          4
+        ],
+        "upper": 1e-300
+      },
+      {
+        "m": [
+          4,
+          5
+        ],
+        "upper": 1e-300
+      },
+      {
+        "m": [
+          5,
+          6
+        ],
+        "upper": 1e-300
+      },
+      {
+        "m": [
+          6,
+          7
+        ],
+        "upper": 1e-300
+      },
+      {
+        "m": [
+          7,
+          8
+        ],
+        "upper": 1e-300
+      }
+    ],
+    "tail_upper": "1e-300",
+    "total_upper_display": 7.10090197379751e-279,
+    "exact_upper_numerator": "7100901973797509969638",
+    "exact_upper_denominator": "1e300",
+    "source_width": 0.000024523905457686905,
+    "radial_width": 0.000021594466488187695,
+    "receiver_width": 0.0000259165454694911,
+    "source_exponent_lower": 304.2367499169027,
+    "radial_exponent_lower": 377.35924528226417,
+    "receiver_exponent_lower": 602.5057676072487,
+    "receiver_p_prefactor": 6101.939721817852,
+    "receiver_a0_prefactor": 3.1488602745431686e-8,
+    "tail_start_sqrt": 3773
+  },
+  "comparison": {
+    "prior_direct_lower_receipt": "3912bb9a0074baadb66c86d02ac7f04091aec44e",
+    "prior_direct_lower_numerator": "4536110765573153915383864911903",
+    "denominator": "1e300",
+    "difference_numerator": "4536110758472251941586354942265",
+    "difference_display": 4.536110758472252e-270,
+    "strict_conclusion": "J_E4 < -4.536e-270",
+    "conditional": true
+  },
+  "execution": "Both new scripts completed locally, exact rational/SymPy checks and integer-grid sums; executed script bytes match committed blobs. Initial tilted script syntax error corrected before execution. Exact prior direct lower JSON and new upper JSON compared locally as integer numerators. Recovered exact rational Fbox function, not full repository checkout. No CI, native proof kernel, full signed waveform or physical promotion."
+}
