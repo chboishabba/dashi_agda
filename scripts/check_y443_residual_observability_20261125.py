@@ -75,3 +75,10 @@ require((U*Q[3]*v)[0]==48 and (U*Q[3]*(-v))[0]==-48,'signed future witness')
 # For every ring, fixed Gram radical is hidden from all reflection words.
 require(all(q-I==-I[:,i]*A[i,:] for i,q in enumerate(Q)),'radical factorization')
 print('PASS exact integral stabilizations and signed 0/+48/-48 consumer collision')
+# Single retained source coordinate closes the integral and modular observer.
+W=observe(U.col_join(V),2)[0]
+require(hnf_rows(W.col_join(I[1,:]))==I,'one b1 coordinate completes integral row lattice')
+for p,coords in [(5,[0,1,2,3,4,4,3,2,1,0,0,0]),(7,[2,3,4,5,6,3,4,5,6,5,1,4])]:
+    v=s.Matrix(coords)
+    require(all(int(x)%p==0 for x in A*v) and int(v[1])%p!=0,'retained radical witness')
+print('PASS one retained b1 coordinate gives integral recovery and separates both bad-prime radicals')
