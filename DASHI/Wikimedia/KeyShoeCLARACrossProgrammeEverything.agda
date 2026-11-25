@@ -16,3 +16,5 @@ import DASHI.Wikimedia.ShemZeta54ZeroGluingExact
 import DASHI.Wikimedia.KeyShoeIndexedTrigramWeaveExact
 
 import DASHI.Wikimedia.ShemIndexedAddressProductWeaveExact
+
+import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact
