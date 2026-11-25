@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-25",
+  "pr": 1537,
+  "status": "PASS_J33_FULL_ORIGINAL_INITIAL_SOURCE_0_TO_EVENT1_256_SLAB_RATIONAL_COFRAME_CONDITIONAL_NOT_69D",
+  "source_owner": "Original Smith/Filsinger J25-J33 nine-state synthetic finite-loss prescribed-source diode/spark mode",
+  "executable": "scripts/check_smith_filsinger_j33_coframe_initial_full_20261125.py",
+  "exact_executable_git_blob_sha1": "137e10b71a25fa855346c5ab3487d34dd38a23f7",
+  "exact_executable_local_sha256": "c27c09214fcb8ee6d171acefafd0cf92fd79cdd3b9b16b2a3bb2a4d4391e2b8c",
+  "git_code_bytes": 13590,
+  "dependencies": [
+    {
+      "path": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py",
+      "blob": "47493fbefba44c20e7cb82e31521627f13611800"
+    },
+    {
+      "path": "scripts/check_smith_filsinger_j32_source_taylor_jets_20261124.py",
+      "blob": "22cff0bcc48f9cec68ec2c173237b0b224745197"
+    }
+  ],
+  "execution": {
+    "source_exact_code_blob_matches_local_byte_for_byte": true,
+    "local_original_source_math_equivalent_via_exact_phase_memoization": true,
+    "local_dependency_byte_identical_to_current_full_j31_or_j32_module": false,
+    "original_source_functionality_verified_on_input_equations": true,
+    "method": "Python Fraction outward 10^-30 rational grid; separate SciPy/DOP853 numerical source-9D tangent is only proposal of rational frame; all proof inequalities exactly checked independently",
+    "whole_256_step_checkpoint_proof_run": true,
+    "full_rational_result_size_bytes": 49898,
+    "full_rational_result_sha256": "1736f652288fd77bfc165fc86eadb268fc94418c9024e19591a70bc08a4beb3b",
+    "regenerable_directly_from_committed_executable": true,
+    "candidate_frame_file_size_bytes": 1199527,
+    "candidate_frame_file_sha256": "9af91888ba56606539ffcf81dfd64fc17984797f689d5226af6e7c9a048fe1ff",
+    "frame_file_generated_by_committed_source": true,
+    "candidate_frame_file_not_committed": true,
+    "original_J31_full_module_exact_checkout_replay": false,
+    "github_ci": false,
+    "formal_kernel": false
+  },
+  "exact_original_source": {
+    "mode": [
+      0,
+      0,
+      1
+    ],
+    "source_start_clock": "0",
+    "source_start_clock_fixed": true,
+    "physical_source_end_nominal": "3.389367008894",
+    "end_clock_halfwidth": "1/200000",
+    "original_J29_event1_rational_crossing_bracket": [
+      "3.389367008",
+      "3.389367010"
+    ],
+    "original_J29_event1_root_bracket_contained": true,
+    "initial_original_J23_state_halfwidth": "1/10000",
+    "physical_V_diode_off_255_whole_source_slabs": 255,
+    "final_source_V_ON_one_sided_slope_strict_positive": true,
+    "final_and_endclock_source_V_slope_lower": "56609851261508503670917920933/125000000000000000000000000000",
+    "final_and_endclock_source_V_slope_upper": "456944175649576642260776636219/1000000000000000000000000000000",
+    "original_U_diode_OFF_all_source_slabs": true,
+    "original_spark_ON_all_source_slabs": true,
+    "physical_V_ON_guard_zero_at_event1_exists_not_proved": true,
+    "nonzero_original_source_state_and_event_time_uncertainty": true,
+    "complete_smooth_mode_duration_certified": true,
+    "original_source_9x9_full_DxPhi_fixed_clock": true,
+    "original_source_9x9_full_DxPhi_independent_event_time": true,
+    "original_source_9D_partial_end_event_time": true,
+    "original_J24_event1_numerical_state_centre_in_broad_flow_interval": 9,
+    "J24_exact_guard_and_state_matching_equations_not_proved": true
+  },
+  "verified_exact_inequalities": {
+    "strict_Picard_fulltime_slabs": 256,
+    "ordered_noncommuting_source_PB6_9x9_slabs": 256,
+    "source_Taylor6_with_source_Lagrange7_verified": 256,
+    "rational_inverse_frame_verified_per_source_slab": 256,
+    "numerical_candidate_invertibility_not_relied_on": true,
+    "max_source_Picard_q_strictly_less_than": "0.365417",
+    "max_coframe_D_component_radius_strictly_less_than": "2.423429",
+    "max_source_reference_R_radius_strictly_less_than": "0.000000494",
+    "max_original_input_image_radius_strictly_less_than": "0.001181",
+    "max_frame_inverse_residual_strictly_less_than": "0.000000000055",
+    "max_terminal_state_coordinate_interval_diameter_strictly_less_than": "0.001199",
+    "max_independent_clock_tangent_entry_interval_diameter_strictly_less_than": "1.884"
+  },
+  "source_geometry": {
+    "coframe": "original 9D state x_j in rational p_j + Q_j ( signed R_j + (I+D_j)*original_labelled_delta0 )",
+    "frame_proposal": "original-source full numerical variational integration supplies candidates Q_j and B_j rounded to rational 12 decimals; the numerical integration itself is NEVER used as a proof or an assumption about exact matrices",
+    "exact_inverse": "E_j=I-Q_j B_j; exact rational ||E_j||_inf<1e-7; Q_j^-1=B_j(I-E_j)^-1; elementwise interval radius bounded by ||E_j||/(1-||E_j||) times rational row sum |B_j|",
+    "exact_time_order": "K_j= [Q_(j+1)^-1] * [source Peano-Baker 6 slab matrix] * Q_j; D_next=K_j(I+D_j)-I; R_next=K_jR_j + [Q_(j+1)^-1] * signed source Taylor7 recenter error",
+    "original_signed_guards": "compute original V and U diode differences against p_j+Q_j( R_j +(I+D_j)*delta0 ) retaining original signed +/- bank-voltage row before interval projection",
+    "original_last_slab_guard_zero_is_a_required_global_equation": true,
+    "original_physical_time_and_refinement_index_not_identified": true
+  },
+  "exact_negative_control": {
+    "direct_unframed_original_source_signed_PB6_segment_over_same_256_slabs_failed_at_slab_138_with_q_at_least_one": true,
+    "numerical_proposed_final_9x9_fundamental_row_sum_approx": 1.744,
+    "original_source_physical_mode_falsified_by_negative_control": false,
+    "observed_failure": "interval dependency wrapping, not an original diode-state counterexample",
+    "source_of_control": "local j33_initial.py unframed experiment, not separately committed as exact-source regression"
+  },
+  "status_boundary": {
+    "all_seven_complete_original_conditional_smooth_modes_paid": true,
+    "number_of_seven_complete_original_conditional_smooth_modes": 7,
+    "one_original_69D_box_with_all_real_source_segment_state_clock_correlations_not_constructed": true,
+    "original_six_named_zero_guard_equations_not_jointly_solved": true,
+    "original_54_signed_interface_state_matching_equations_not_jointly_solved": true,
+    "original_9_periodic_return_equations_not_jointly_solved": true,
+    "full_69D_F_of_nonzero_ball_not_proved": true,
+    "full_69D_interval_DF_of_nonzero_ball_not_proved": true,
+    "strict_69D_Krawczyk_rows_proved": 0,
+    "exact_periodic_orbit": false,
+    "actual_hardware_source_energy_or_100_percent_extraction": false,
+    "original_J24_sixth_narrow_state_box_still_unpaid": true,
+    "no_rebase_or_merge": true
+  }
+}
