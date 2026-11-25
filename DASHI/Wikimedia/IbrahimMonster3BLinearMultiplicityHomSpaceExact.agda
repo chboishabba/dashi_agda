@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
@@ -161,37 +163,78 @@ open ActualLinearMultiplicityHomSpace public
 -- proof-bearing source obligations.
 ------------------------------------------------------------------------
 
+-- A Hom is an actual map with the linear and intertwining equations, not
+-- an arbitrary Set identified by a dimension or basis label.
+record EquivariantLinearMap
+    (H W : Linear.HilbertLift) (E : Set)
+    (scalarMap : Linear.Scalar H → Linear.Scalar W)
+    (actH : E → Linear.Vector H → Linear.Vector H)
+    (actW : E → Linear.Vector W → Linear.Vector W) : Set where
+  field
+    applyHom : Linear.Vector H → Linear.Vector W
+    homZero : applyHom (Linear.zero H) ≡ Linear.zero W
+    homAdd : ∀ u v →
+      applyHom (Linear._+_ H u v) ≡ Linear._+_ W (applyHom u) (applyHom v)
+    homScale : ∀ a v →
+      applyHom (Linear._·_ H a v) ≡ Linear._·_ W (scalarMap a) (applyHom v)
+    homEquivariance : ∀ g v →
+      actW g (applyHom v) ≡ applyHom (actH g v)
+
+open EquivariantLinearMap public
+
 record ActualLinearWeightHomSpace : Set₁ where
   field
-    literalLinearZeta : Zeta.LinearSingleActionProducer
+    literalSource : Zeta.LiteralLinearNormalizerSource
+    literalLinearZeta : Zeta.LiteralLinearPhaseRestriction literalSource Inertia.phaseZeta
     weightFrame : Frame.ActualLinearWeightFrame
-    frameIsLiteralZeta : Frame.sector weightFrame ≡ Zeta.zetaLinearCarrier literalLinearZeta
+    frameIsLiteralZeta : Frame.sector weightFrame ≡ Zeta.phaseLinearCarrier literalLinearZeta
     multiplicityRepresentation : WrongType.LinearMultiplicityRepresentation
     vacuumIsMultiplicityCarrier :
       Frame.vacuum weightFrame ≡ WrongType.linearCarrier multiplicityRepresentation
 
-    HeisenbergVector : Set
-    EquivariantHom : Set
-    HeisenbergBasis : H.X6 → HeisenbergVector
+    heisenbergCarrier : Linear.HilbertLift
+    heisenbergScalarToSector :
+      Linear.Scalar heisenbergCarrier → Linear.Scalar (Frame.sector weightFrame)
+    HeisenbergBasis : H.X6 → Linear.Vector heisenbergCarrier
     vacuumPosition : H.X6
     E : Set
-    actHeisenberg : E → HeisenbergVector → HeisenbergVector
-    actSector : E → Linear.Vector (Frame.sector weightFrame) →
-      Linear.Vector (Frame.sector weightFrame)
-    evalHom : EquivariantHom → HeisenbergVector → Linear.Vector (Frame.sector weightFrame)
-    evalHomEquivariant : ∀ f g h →
-      actSector g (evalHom f h) ≡ evalHom f (actHeisenberg g h)
-    homToVacuum : EquivariantHom → Linear.Vector (Frame.vacuum weightFrame)
+    actHeisenberg : E → Linear.Vector heisenbergCarrier → Linear.Vector heisenbergCarrier
+    extraspecialToInertia : E →
+      Inertia.CentralInertia (Zeta.literalNormalizerAction literalSource)
+
+  -- Derive the target E action from the SAME literal phase restriction.
+  actSector : E → Linear.Vector (Frame.sector weightFrame) →
+    Linear.Vector (Frame.sector weightFrame)
+  actSector g w =
+    subst Linear.Vector (sym frameIsLiteralZeta)
+      (Zeta.restrictInertia literalLinearZeta (extraspecialToInertia g)
+        (subst Linear.Vector frameIsLiteralZeta w))
+
+  EquivariantHom : Set
+  EquivariantHom =
+    EquivariantLinearMap heisenbergCarrier (Frame.sector weightFrame) E
+      heisenbergScalarToSector actHeisenberg actSector
+
+  evalHom : EquivariantHom → Linear.Vector heisenbergCarrier →
+    Linear.Vector (Frame.sector weightFrame)
+  evalHom = applyHom
+
+  homToVacuum : EquivariantHom → Linear.Vector (Frame.vacuum weightFrame)
+  homToVacuum f =
+    Frame.recoverWeight weightFrame vacuumPosition
+      (evalHom f (HeisenbergBasis vacuumPosition))
+
+  field
+    -- Lean MonsterVacuumHomEquivalence derives this constructor and its
+    -- inverse from separating Weyl laws. Agda still needs actual inhabitants.
     vacuumToHom : Linear.Vector (Frame.vacuum weightFrame) → EquivariantHom
     vacuumAfterHom : ∀ f → vacuumToHom (homToVacuum f) ≡ f
     homAfterVacuum : ∀ u → homToVacuum (vacuumToHom u) ≡ u
     evalHomOnBasis : ∀ f x → evalHom f (HeisenbergBasis x) ≡
       Frame.includeWeight weightFrame x (homToVacuum f)
 
-    -- Explicit witness of equality of source and actual character functions.
-    -- The trace functional itself must be attached to the actual linear
-    -- action by the representation-layer source (Lean #47), not guessed
-    -- from the dimension of this record.
+    -- Equality of functions alone is not trace authentication. The source
+    -- compiler must prove that this trace is the trace of the actual action.
     traceOfMultiplicityAction :
       Linear.Group (WrongType.linearAction multiplicityRepresentation) →
       Linear.Scalar (WrongType.linearCarrier multiplicityRepresentation)
