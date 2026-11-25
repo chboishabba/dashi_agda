@@ -1,3 +1,13 @@
+## 25 November — IMPLEMENTED A2 corrections, strict remaining physical cut
+
+**Original source commits through `332f4201711e72da43a3c69a1b5eaf4ef65e035f`:** `ContinuousClampSource` now uses fixed ordered `lowerThreshold/upperThreshold` (old ∀threshold contradiction REMOVED). `ContinuousWilsonSourceContract` now uses true raw `[0,2]` `deficitLeTwo`, with explicit `halfNormalizedDeficitRange` and `curvatureCutoff` applying clamp to the half-normalized `[0,1]` deficit. Generic finite list `contourProductNaturality`/`badContourCutoffNaturality` are source-written. `YMClayE1OriginalSUNFiniteCylinderLawsExact` now constructs `originalSUNFixedCutoffA2Expectation` from the SAME original normalized Wilson source, proves `originalSUNFixedCutoffA2CovarianceIsOriginal`, constructs the literal plaquette/gauge `originalSUNFixedCutoffA2Source` with EXPLICIT physical complex-trace bound inputs and proves `originalSUNFixedCutoffA2ContourGaugeInvariant`.
+
+**Unpaid despite implementation:** real continuous two-threshold clamp inhabitant, genuine normalized complex SU(N) `|ReTr/N|≤1` (cyclic trace not sufficient), actual compact Borel Haar/measurable test algebra and scalar authority, `0<goodMass` on a nonempty physical contour family, physical connecting/spanning coverage and `sup_{a,L}Σγ Eμ∏b_p ≤ C_bad e^(−m_badR)`, authentic CMP119/122 Eq.(1.71) source, CMP116 good-law comparison and small-field physical rate. E1/N1/G1 and same-H D2 all still OPEN. Do not replace true source proofs with an abstract conclusion record.
+
+**Acceptance:** exact-head sanctioned Agda 2.9 typecheck and transitive trust review NOT performed in this tool runtime (Agda unavailable); no claim of accepted new proof. Earlier `19a63b8c9d` Agda/SymPy PASS applies only to that earlier head. The full matrix/measure and physical weak-coupling estimates remain explicit inputs. Full cut, original owners, forward/BIDI/reverse-solve dependencies and three physical inequalities at the TOP of `ClayYMProofRoadmap.md`.
+
+---
+
 # DASHI Yang–Mills: reconciled maximum cut, exact lemmas and trust boundary
 
 ## 25 November 2026 — P0 continuous A2 reality check and source reverse-solve
