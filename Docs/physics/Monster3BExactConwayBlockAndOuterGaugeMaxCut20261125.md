@@ -1,0 +1,37 @@
+# Monster 3B — original action execution max-cut: bounded word blocks and outer gauge
+
+25 November 2026. Controlling predecessors: Monster3BActualConwayExactCRTAttachment20261125.md, Monster3BSingleResidualDualOrbitTraceWeld20261125.md, Monster3BIntrinsicGeometricClosure20261125.md. Starting head 8547510747b75ece2a208d16fb519758f84bae3d. This cut reduces the actual execution requirement, not the source or kernel standards.
+
+## Source-only exact acceptance
+
+The complete original Lindsey compact JSON is Git blob b0f96b37494cfca56f116b991d350352d3a493f2. Run scripts/check_monster3b_exact_ordinary_source.py with that file. Executed locally under python -O; clean exit, 48/48 exact Q(zeta3) checks (three D central phases, two source phases, eight word identities/nonidentity each). Checks C2=-I, D3=I, CD56=I, CD28=C2, R7=zeta^s, Q7=zeta^(sq), raw wheel G^13=I and G!=I. The dual Sym² functor carries the word identities to 78D, with C²=+I and the same marked centre since -2=1 mod3. This is a mathematical functor consequence, not a new dense 78D execution. The nonidentity/order13 statement for 78 is independently covered by the earlier marked-prime source wheel check. This replaces the previous timed-out exact source run for these 12D relations. Script blob 91664e213da3e2f6fba22c6484113cde230f79ff matches local execution. No actual Monster target action inferred.
+
+## 1. Word-block CRT
+
+The original native atom contract is tags 1..4 integral and tags 5/6 (t/l) denominator dividing 8, with the original weighted norm invariant and the native modular actions reductions of the same rational action. Partition the original word, in literal order, into blocks containing at most two fractional atoms. For a block with f=0,1,2 such atoms, d=8^f. With M=7*31*127*255=7027545 choose the largest power-of-two radix <=4096 with 4*d²*(r-1)²*sum_j w_j < M². At full DIM the weights sum to 197160, and r=4096,512,64 for d=1,8,64 respectively. Each signed radix limb has its entire exact d-scaled image inside the centered CRT interval by the source metric bound. Apply the full original mm_op_word block at the four moduli and reconstruct once, then combine the integer limbs and divide by d. Preserve source atom order and all signs. The original single-atom path remains a regression comparator. No native package execution here; the source contract is still subject to the genuine preflight.
+
+Full ambient recomposition now uses streaming exact common-denominator accumulation instead of re-normalizing every vector add/scale. Only nonzero coefficients load their original basis vector; full ambient residual is still checked exactly. No arbitrary approximate numeric tolerance.
+
+## 2. Reduce the independent actual operator extraction
+
+Let v_i be the original exact positive vacuum projections of the saved genuine direct probes. Choose the negative basis w_i=L(C)v_i, including the exact canonical nonzero vacuum coefficient, in the right-action source phase convention (left Weil phase index 2 for right positive-to-negative). Previously the negative basis omitted this normalization and all C,D,E,J columns were measured separately in both phases (720 columns).
+
+Set J=L(C²)|positive, M=L(D)|positive, N=L(E)|positive. In these chosen bases C_+=I, C_-=J. As literal E=C D C^-1, the coefficient-column equation on phase s is E_s=C_s^-1 D_(3-s) C_s. Thus D_-=N and E_-=J^-1 M J. Verify J²=I and J commutes with M,N; then E_-=J M J=M. Both phase marks and parity retained. This relies on the authenticated honest signed Weil/Hom action and cover identities, not independent negative measurement. Independently extract J,M,N on positive: 270 full ambient columns. Negative basis construction already evaluates C_+ on all positive basis vectors. Default --negative-audit 1 independently evaluates one negative column for each C,D,E,J and rejects any exact discrepancy; --negative-audit 90 replays all 360 negative columns if desired. It is a diagnostic, not a claim that all negative columns were independently measured. Derived full signed generator maps still enter the exact ordinary 12/78 intertwiner check. This reduces direct operator extraction from 720 to 270 plus chosen audit columns, without omitting the original basis projection or source assumptions.
+
+The checkpoint identity now pins the original Lindsey blob, literal input hashes, actual distribution version and a larger list of code dependencies. Changed code/input requires a new checkpoint directory. Existing modular residue and exact ambient residual gates preserved. No actual completed checkpoint from the new source path is claimed.
+
+## 3. Native preflight and executed controls
+
+scripts/check_monster3b_native_exact_preflight.py explicitly requires genuine mmgroup, checks representative external coordinates across the A diagonal/offdiagonal and other coordinate families, six atom kinds and two block words. It compares our exact native action against Seysen's original MMV_CRT(17) expanded integer data (compress_data), independently compares the ordinary native MMV(31/127) action, and checks the inverse. Upstream vector_get_item actually scales to floats, despite the older docstring; do not use that getter as an integer oracle. The preflight is source-written and NOT executed here.
+
+Local clean executions using matching source blobs:
+- Existing CRT checker 36 exact SymPy equations, 18 K-linearity, 36 marked reductions, six roundtrips, full-size 196884-coordinate limb check, corrupted residue rejected.
+- New check_monster3b_exact_blocks.py: 44 checks (blocked vs atom action and two marked reductions across 12 reduced word/input cases; 3 streaming sums; 4 outer identities; 1 bad parity rejection). Blob e0355d80bd0b907770cc0f3d5bac8dfe1b810f8e.
+- Exact 2D cyclic orbit control re-run: 4 generator equations, two inverse identities, one coordinate closure and one rejected negative control.
+- Backend blob a01fa14cc25f80e2656805f3ccec4a9d63cc386a and signed solver blob 3ef705f05f37907d8b11b2df9b6d69149e3f0f92 match locally executed code. Tests are reduced or full-size arithmetic controls, not actual MM operations.
+- Exact original 12D source relators 48/48 as above.
+- Runtime: mmgroup absent, compatible PyPI 1.0.8 CPython 3.13 x86_64 wheel located but download failed (public package hosts unavailable here). Neither original workstation packet nor formal kernels made available. Actual adapter, preflight and integrated native char0 run remain unexecuted. No CI acceptance.
+
+## 4. Next action, not a new search
+
+On the existing original mmgroup workstation with checked-out branch, first run python3 scripts/check_monster3b_native_exact_preflight.py. Then invoke scripts/monster3b_actual_char0_vacuum.py with original --manifest, --cover, --model, --plus, a fresh --outdir and --max-new 1 (external 90s timeout if desired; checkpoint unit may exceed it). Resume with same input/code identity, then use the exact signed result and existing weight inverse. The optional --negative-audit 90 performs complete negative replay. Actual source authentication A–C and whole 729-weight inverse execution remain separate, as do Agda/Lean actual inhabitants and P6. No further abstract source search required. Preserve Conway/Seysen original rational and CRT machinery, Lindsey/Nebe source, ATLAS, Barraclough–Wilson/CTblLib, Dietrich–Lee–Pisani–Popiel, Ibrahim, classical Singer and DASHI prior donors. DASHI new bounded native word-block and normalized outer-coordinate execution reduction. No new theorem or completion flags promoted.
