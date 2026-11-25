@@ -49,12 +49,22 @@ def open_original(path,zeta):
     # Old original source pre-generalization saved filename without mod31.
     if not original.is_file():original=f/"ambient_basis_rows.npz"
     if not original.is_file():raise ValueError("genuine original Monster ambient-basis archive absent")
-    with np.load(original) as v:
-        rows=np.asarray(v["rows"],dtype=np.int16)%P
+    with np.load(original,allow_pickle=False) as v:
+        raw=np.asarray(v["rows"])
+        if raw.dtype.kind not in ("i","u") or np.any(raw<0) or np.any(raw>=P):
+            raise ValueError("original ambient rows must be canonical F31 integers")
+        rows=np.asarray(raw,dtype=np.int16)
         pivots=[int(x) for x in v["pivots"]]
         probes=[int(x) for x in v["source_probes"]]
     if rows.shape!=(90,DIM) or len(pivots)!=90 or len(probes)!=90:
         raise ValueError("original 90 Monster source vector row shape mismatch")
+    if len(set(pivots))!=90 or len(set(probes))!=90 or any(not 0<=i<DIM for i in pivots+probes):
+        raise ValueError("invalid original pivot/probe indices")
+    if result.get("status")!="COMPLETE_RANK90" or result.get("actual_Monster_modular_vectors") is not True:
+        raise ValueError("original completed modular basis receipt required")
+    for i,p in enumerate(pivots):
+        if rows[i,p]!=1 or np.any(rows[i,pivots[:i]]):
+            raise ValueError("original saved rows are not a normalized ordered echelon basis")
     if pivots!=[int(x) for x in result["pivots"]]:
         raise ValueError("source basis pivots disagree with original source ledger")
     return result,rows,pivots,probes
