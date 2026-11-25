@@ -1,5 +1,9 @@
 # Active Clay rollup — 24 November 2026
 
+## 25 November — symmetry-first native 369 correction (controlling proof-finding route)
+
+[Native 369 geometry and four-Clay transport ledger](ClayFour369SymmetryTransportProofFinding20261125.md). User explicitly clarifies: variants efficiently connect original problems to worked geometry for proof finding, not arbitrary 3/6/9/27 labels. Actual latest #1291/#1552/#1545 sources, #1549 R268–274 and #1548 compare inspected. Distinguish T³ 27 support strata, P3³ vs C3³, antipodal 13 directions, H05 eight vertices/twelve arrows/six faces, independent indexed nine-coordinate routes A/B/C, transported metric/graph, actual Singer primal-dual and signed FRACTRAN history, ramified carry cocycle, linear weight frame. Recover actual BSD zero-aware isogeny/twist/sign/Frobenius H05 cube previously missed; dedicated Hodge variant still archaeology gap. Per-lane exact transport/consumer gates and symmetry-based proof-finding, negative controls and universal scope retained. No new kernel/test or theorem closure; do not relabel numerical patterns.
+
 ## 25 November — mandatory original ↔ 369 variant archaeology and transport
 
 User explicitly reminds us all Clay programmes have 369 variants. Treat those pre-existing variants as a parallel source of endpoint mathematics, not optional decoration or newly invented analogues. Before new producer work, search actual Base369/TOE roots, canonical and historical lane owners, and #1291 indexed hyperfabric; recover original variant statement, hypotheses, constructor, proof level, forward map and reverse residual/consumer. If exact variant owner not yet located, mark archaeology gap rather than manufacture an endpoint or infer equivalence from labels. Four-P0 scope unchanged. P vs NP and YM variant donors remain independent, Poincare established; do not expand P0 or edit donor branches.
