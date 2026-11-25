@@ -1,0 +1,97 @@
+{
+  "scope": "D3.5f physical-only adjoint restriction and receipt-anchored production-grid diagnostic continuation, not complete D3.5 forward/reverse acceptance",
+  "base": "54aeec985085ff8da85c988d0887a2f16a133097",
+  "ci": "local only; no CI invocation; skip-ci commit messages",
+  "donor_blobs": {
+    "weighted_stage": "982ce42a579907daf314c18d60da7cf0ceb88d0e",
+    "fv_source": "dec4e79e3a4899952a5deceb786324bc0745982c",
+    "signed_stage": "8ce8026051bcb3d6f0c53745cbd942c091c59389",
+    "transpose": "9b9adec4987e28f564c053fcca511616510ae224"
+  },
+  "physical_reverse": {
+    "module_blob": "546f71ebef6f001cae03ab0628f51fef3f11e7e2",
+    "checker_blob": "ae262c82b0ce5f037a81effdd989f62e0ebc4cba",
+    "stage": 18,
+    "rk": 18,
+    "contraction": 18,
+    "exact_restriction_max": 0,
+    "native_vjp_scaled_error": 7.06884176671975e-17,
+    "history_negative_control": true
+  },
+  "postsource": {
+    "anchor_receipt": "Artifacts/ksw668/f8_production_source_prefix_20261125.json",
+    "checker_blob": "1dd3e5c813e4e37e57626b800817d2217f624c04",
+    "dt": 0.0005999023910881472,
+    "nt": 4516,
+    "target": 200,
+    "physical_t": 1.0904998996650532,
+    "additional_steps": 360,
+    "full_clock": false,
+    "runs": [
+      {
+        "route": "ledger",
+        "grid": "medium",
+        "nr": 378,
+        "ny": 337,
+        "cursors": [
+          110,
+          192,
+          200
+        ],
+        "max_scaled_constraint": 5.189551996217157e-16,
+        "sha256": "72431a0df628ab96bdd7dc4b04bf13a150c6dadc9ceee9dfc8a2cfef38cb1235",
+        "max_state": 14785.878233974601
+      },
+      {
+        "route": "paired",
+        "grid": "medium",
+        "nr": 378,
+        "ny": 337,
+        "cursors": [
+          110,
+          167,
+          200
+        ],
+        "max_scaled_constraint": 6.484470732185932e-16,
+        "sha256": "ba9a4b581e204ff325832524ab5cdf44acd8680b4ea61447917a467a1785143d",
+        "max_state": 14927.166778697198
+      },
+      {
+        "route": "ledger",
+        "grid": "fine",
+        "nr": 503,
+        "ny": 449,
+        "cursors": [
+          110,
+          154,
+          176,
+          200
+        ],
+        "max_scaled_constraint": 1.298023468722264e-15,
+        "sha256": "ef331e84476834a17e648998042034d24300817f5e03dcccc611c0134500d5ec",
+        "max_state": 13394.611161418225
+      },
+      {
+        "route": "paired",
+        "grid": "fine",
+        "nr": 503,
+        "ny": 449,
+        "cursors": [
+          110,
+          165,
+          192,
+          200
+        ],
+        "max_scaled_constraint": 1.3993834340444193e-15,
+        "sha256": "2b3f7e756bcb51418f60e4cf17e0fe05399f839e3439d37f76e945641e7486e0",
+        "max_state": 13312.45249739634
+      }
+    ]
+  },
+  "limitations": [
+    "Clock F recovered as exact formula, legacy stage stub raises; not full checkout.",
+    "Diagnostic continuation verifies committed step110 state hashes, and subsequent local code/source/grid/cursor identity and array digests. It does not replace D3.5 production anchors or prove uninterrupted-vs-resumed full trajectory equivalence.",
+    "Compact adjoint tests used projected random states, original weighted4 native stage and full signed transpose; not actual production receiver reverse execution.",
+    "No t12 medium/fine endpoint, convergence, CI, kernel or physical claim."
+  ]
+}
