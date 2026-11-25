@@ -1,5 +1,10 @@
 # BSD P0 — terminal reverse-solve: exact remaining mathematical cut after cyclotomic tower rigidity
 
+## 25 November — actual Mellin-parametrized distribution and determinant (current BSD A2/A4)
+
+[Original-source analytic derivation and executed reflection/Hecke controls](ClayBSDRankFourMellinDistributionDeterminant20261125.md). Additive Mellin A_s and B_n=p^(nz)A_(1+z)^+/Omega give exact all-complex-parameter Hecke refinement sum children B=a_p B_n−B_(n−1). Actual stabilized D_n=alpha^-n B_n−alpha^(-n−1)B_(n−1) is compatible on cylinders; z=0 algebraic specialization recovers original p-adic symbols under ordinary embedding; no p-adic holomorphic comparison for other z assumed. Total mass C_p(z)L(E,1+z)/Omega with C_p=(1−alpha^-1 p^z)(1−alpha^-1 p^-z), unit near0. Completed family has actual Fricke J(a)=−(Na)^-1, centered address reflection jointly z->−z and k->−k, shifts h=1,16,9 on computed levels. A4 actual finite group-ring multiplication determinant = analytic unit times original Lambda, all nontrivial characters units at center; central kernel EXACTLY dimension1, cannot inject MW dimension4. Need DIFFERENT original operator/derived geometry, not more Schur machinery. Complex/rational inverse limit group ring has compatible Reynolds e and augmentation I=(1−e)R=I²; integral p-adic augmentation retains jets, so no naive field replacement. Actual complex second derivative still unknown, selected order {2,4}; original arithmetic annihilation remains. Local normal/-O 311+1611=1922/1922 each, blob cb31cbca84a9a5a3a5efde7f9dcbcccc893666d7; no complex derivative computation, native kernel, CI, donor edits, other-lane promotion.
+
+
 25 November 2026. Parent #1551 3857c3bc90a312516f0df83040f24f87444d4b7b. Scope BSD selected 234446.a1 and universal Clay rank, not RH/NS/Hodge or full refined BSD. User asks all remaining reasoning steps, steelman, BIDI, reverse-solve, geometry, existing constructors. This is a dependency/solution-route audit, not a claim to enumerate the unknown proof of an open theorem. No new generic types, finite fixture repetitions, kernel or execution claim.
 
 ## Terminal and established owners
