@@ -77,6 +77,7 @@ def main():
     ap.add_argument("--reuse-mod31-plus",type=Path,
         help="reuse prior authentic zeta=5 rank90 source folder; only build missing phase")
     ap.add_argument("--reuse-mod31-minus",type=Path,help="reuse complete original opposite-phase packet")
+    ap.add_argument("--independent-minus",action="store_true",help="use independent opposite phase search instead of literal C transport")
     ap.add_argument("--actual-mod127-hom",action="store_true",
         help="independent original Monster MMV(127) 90D B-vacuum source")
 
@@ -328,7 +329,14 @@ def main():
                                 for k in ("canonical_C_word","canonical_D_word"))):
                             report["stages"][name]={"status":"REUSED_PREVIOUS_AUTHENTIC_SOURCE","path":str(reuse)}
                             return reuse,True
-                        arguments.extend(["--reuse-basis",reuse])
+                        if not state.get("derived_from_plus"):
+                            arguments.extend(["--reuse-basis",reuse])
+                        elif root==25 and canonical_paid:
+                            arguments.extend(["--derive-from-plus",plus])
+                        else:
+                            raise ValueError("derived packet requires canonical C transport")
+                    elif root==25 and canonical_paid and not args.independent_minus:
+                        arguments.extend(["--derive-from-plus",plus])
                     return dest,run(name,arguments)
                 plus,positive=original_phase("actual_mod31_hom",args.reuse_mod31_plus,
                     out/"actual_mmv31_hom",5)
