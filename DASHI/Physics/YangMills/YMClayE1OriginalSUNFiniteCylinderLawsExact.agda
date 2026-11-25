@@ -20,7 +20,7 @@ open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_; *-comm)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.YMClayOriginalWilsonContinuousA2BridgeExact as A2
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -577,3 +578,79 @@ module _
     ; SelectedNativeCylinderAlgebra.gaugeInvariantSelection =
         originPolynomialGaugeInvariant
     }
+
+
+  ------------------------------------------------------------------------
+  -- A2 source-first finite-cutoff *real SU(N) Wilson* expectation adapter.
+  --
+  -- Unlike a new abstract ContinuousExpectationAlgebra parameter, this
+  -- value is constructed from the existing native Wilson finite measure,
+  -- its integration/partition laws, and the ORIGINAL Wilson extensionality
+  -- proof.  No finite enumeration of continuous SU(N) is used.
+  --
+  -- This does NOT construct the genuine complex trace range/normalized
+  -- physical deficit, the selected continuous clamp, true compact Borel
+  -- Haar semantics or the P-CONT/P-MATCH/P-SMALL physical rates.
+  ------------------------------------------------------------------------
+
+  originalSUNFixedCutoffA2Expectation :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat) →
+    A2.ContinuousExpectationAlgebra
+      (Native.ActualLinks theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient) n)
+  originalSUNFixedCutoffA2Expectation finite arithmetic n =
+    let
+      family = fixedCutoffFiniteLaws finite n
+      E = Limit.finiteExpectation family zero
+      addLaw = Limit.finiteExpectationAdd family zero
+      scaleLaw = Limit.finiteExpectationScale family zero
+      extLaw =
+        OriginalWilson.originalWilsonExpectationExtensional
+          theory traceData exponential beta oneLink bilateral
+          (Quotient.divide quotient) n
+    in record
+      { A2.ContinuousExpectationAlgebra.E = E
+      ; A2.ContinuousExpectationAlgebra.EZero =
+          Limit.finiteExpectationZero family zero
+      ; A2.ContinuousExpectationAlgebra.EOne =
+          Limit.finiteExpectationOne family zero
+      ; A2.ContinuousExpectationAlgebra.EAdd = addLaw
+      ; A2.ContinuousExpectationAlgebra.EScale = scaleLaw
+      ; A2.ContinuousExpectationAlgebra.EPositive =
+          Limit.finiteExpectationPositive family zero
+      ; A2.ContinuousExpectationAlgebra.EExt = extLaw
+      ; A2.ContinuousExpectationAlgebra.ECenteredProduct =
+          A2.ContinuousWilsonArithmetic.centeredProductExpectation
+            arithmetic E addLaw scaleLaw extLaw
+      }
+
+  -- Important signed-order check: the new A2 pair covariance writes
+  -- E(g)E(f); the native original Wilson definition writes E(f)E(g).
+  -- Equality uses precisely the sourced real scalar commutativity, not
+  -- any equality between physical effective and bare coarse laws.
+  originalSUNFixedCutoffA2CovarianceIsOriginal :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat)
+    (f g : Native.ActualLinks theory traceData exponential beta oneLink
+       bilateral (Quotient.divide quotient) n → ℝ) →
+    let
+      source = originalSUNFixedCutoffA2Expectation finite arithmetic n
+      E = A2.ContinuousExpectationAlgebra.E source
+    in
+      (E (λ links → f links *ℝ g links) -ℝ
+        E g *ℝ E f)
+      ≡
+      OriginalWilson.originalWilsonConnectedCovariance
+        theory traceData exponential beta oneLink bilateral
+        (Quotient.divide quotient) n f g
+  originalSUNFixedCutoffA2CovarianceIsOriginal finite arithmetic n f g =
+    let
+      source = originalSUNFixedCutoffA2Expectation finite arithmetic n
+      E = A2.ContinuousExpectationAlgebra.E source
+    in
+      cong (λ value →
+        E (λ links → f links *ℝ g links) -ℝ value)
+        (*-comm (E g) (E f))
