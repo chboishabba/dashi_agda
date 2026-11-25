@@ -7,9 +7,9 @@ genuine modular packet when supplied, not a numeric characteristic-zero lift.
 import argparse, hashlib, json
 from pathlib import Path
 import numpy as np
-from monster3b_actual_projective_sym2_intertwiner import inverse, symmetric_square, find_intertwiner
-from monster3b_signed_outer_sym2_join import join
+from monster3b_actual_projective_sym2_intertwiner import inverse, symmetric_square
 from monster3b_quadratic12_character_lift import lift_character
+from monster3b_singer_cyclic_hom import direct_signed_compare
 P=31
 
 def readj(p):return json.loads(p.read_text())
@@ -74,15 +74,22 @@ def run(a):
             # the left C kernel has source phase -s for this right map.
             k=model["generators"][f"C:{3-s}"]["normalized_vacuum_mod31"]
             outer_ops[s]=norm(block(a.outer/f"actual_MM31_C_{direction}_eig{n}.npz","matrix"),k)
-        target={g:symmetric_square(inverse(M[12][s]).T) for g,M in (("D",D),("E",E))}
-        F[s],status=find_intertwiner({"D":D[78][s],"E":E[78][s]},target)
-        if F[s] is None:raise ValueError("inner operator attachment unresolved: "+str(status))
-    G,loop=join(A,H,F)
-    if loop["beta"]!={1:1,2:1}:raise ValueError("ordinary outer square still projective")
-    # Build ordinary normalization with one common relative gauge.
+    # Source-first: construct both positive-phase transports in 12 and
+    # 78 seed variables, then derive the negative phase through literal C.
+    # This checks against the ordinary source, not merely actual-vs-actual.
+    data=readj(a.source)
+    directA={g:signed_matrix(M[12] if g!="C" else A,12,g=="C")
+        for g,M in (("C",D),("D",D),("E",E))}
+    directH={g:signed_matrix(M[78] if g!="C" else H,78,g=="C")
+        for g,M in (("C",D),("D",D),("E",E))}
+    q,transport12,transport78,G,orbit_receipts=direct_signed_compare(directA,directH,data)
+    loop={"beta":{1:1,2:1},"method":"source_indexed_positive_C13_seed_then_outer"}
     for s,t in ((1,2),(2,1)):
         if not np.array_equal(mul(G[t],H[s]),mul(symmetric_square(inverse(A[s]).T),G[s])):
-            raise ValueError("normalized outer square fails")
+            raise ValueError("ordinary outer covariance fails")
+        for name,ops in (("D",D),("E",E)):
+            if not np.array_equal(mul(G[s],ops[78][s]),mul(symmetric_square(inverse(ops[12][s]).T),G[s])):
+                raise ValueError("ordinary inner symmetric square covariance fails "+name)
     results={}
     matrices={}
     zr=model["central_cover_relators"]["ATLAS_R7"]["central_z_power"]
@@ -108,9 +115,12 @@ def run(a):
         lift=lift_character(a1,a2)
         if lift is None:raise ValueError("quadratic trace bound obstruction "+name)
         chars[name]={"plus":a1,"minus":a2,"conditional_ordinary_character":lift}
-    np.savez_compressed(a.outdir/"canonical_signed_normalizer_mod31.npz",Fplus=G[1],Fminus=G[2],**matrices)
+    np.savez_compressed(a.outdir/"canonical_signed_normalizer_mod31.npz",Fplus=G[1],Fminus=G[2],
+        source_transport12=transport12,source_transport78=transport78,**matrices)
     return {"status":"SOURCE_BOUND_MOD31_SIGNED_GENERATOR_WELD","relators":results,
             "outer_loop":loop,"paired_quadratic_character_lifts":chars,"model_sha256":sha(a.model),
+            "ordinary_source_sha256":sha(a.source),"ordinary_source_D_phase":q,
+            "source_C13_orbits":orbit_receipts,
             "outer_receipt_sha256":sha(a.outer/"actual_MM31_outer_phase_result.json"),
             "operator_packet_sha256":sha(a.outdir/"canonical_signed_normalizer_mod31.npz"),
             "characteristic_zero_numeric_matrices":False,
@@ -119,6 +129,7 @@ def run(a):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ("model","plus","minus","outer","outdir"):p.add_argument("--"+name,type=Path,required=True)
+    p.add_argument("--source",type=Path,default=Path(__file__).resolve().parents[1]/"Docs/support/reference/Monster3BLindseyOrdinaryCD20261124.json")
     a=p.parse_args();a.outdir.mkdir(parents=True,exist_ok=True)
     try:r=run(a)
     except Exception as exc:r={"status":"BLOCKED_OR_RESIDUAL","error":repr(exc)}
