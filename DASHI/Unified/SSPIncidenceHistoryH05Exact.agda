@@ -284,3 +284,141 @@ exampleMove = refl
 -- This Agda chart retains full source + trace, not the minimal codec theorem.
 -- No kernel receipt, generic FRACTRAN compilation, analytic J, Monster group
 -- action, physical interpretation, H07 closure or ESD modifications.
+
+
+-- Independent finite geometry-to-exponent-execution agreement.
+-- This is a source-written proof using the same command step as runTrace.
+runEnd : List Command → FC.EV5 → Maybe FC.EV5
+runEnd [] v = just v
+runEnd (c ∷ cs) v with step c v
+... | nothing = nothing
+... | just w = runEnd cs w
+
+continue : List Command → Maybe FC.EV5 → Maybe FC.EV5
+continue cs nothing = nothing
+continue cs (just v) = runEnd cs v
+
+runEndAppend : (cs ds : List Command) (v : FC.EV5) →
+  runEnd (cs ++ ds) v ≡ continue ds (runEnd cs v)
+runEndAppend [] ds v = refl
+runEndAppend (c ∷ cs) ds v with step c v
+... | nothing = refl
+... | just w = runEndAppend cs ds w
+
+at : Bool → Wheel → FC.EV5
+at b i = initial (route b i d0 d0)
+
+legEnd : (b : Bool) (i : Wheel) (d : Spoke) →
+  runEnd (macro b d) (at b i) ≡ just (at (other b) (out b i d))
+legEnd false w0 d0 = refl
+legEnd false w0 d6 = refl
+legEnd false w0 d10 = refl
+legEnd false w0 d11 = refl
+legEnd false w1 d0 = refl
+legEnd false w1 d6 = refl
+legEnd false w1 d10 = refl
+legEnd false w1 d11 = refl
+legEnd false w2 d0 = refl
+legEnd false w2 d6 = refl
+legEnd false w2 d10 = refl
+legEnd false w2 d11 = refl
+legEnd false w3 d0 = refl
+legEnd false w3 d6 = refl
+legEnd false w3 d10 = refl
+legEnd false w3 d11 = refl
+legEnd false w4 d0 = refl
+legEnd false w4 d6 = refl
+legEnd false w4 d10 = refl
+legEnd false w4 d11 = refl
+legEnd false w5 d0 = refl
+legEnd false w5 d6 = refl
+legEnd false w5 d10 = refl
+legEnd false w5 d11 = refl
+legEnd false w6 d0 = refl
+legEnd false w6 d6 = refl
+legEnd false w6 d10 = refl
+legEnd false w6 d11 = refl
+legEnd false w7 d0 = refl
+legEnd false w7 d6 = refl
+legEnd false w7 d10 = refl
+legEnd false w7 d11 = refl
+legEnd false w8 d0 = refl
+legEnd false w8 d6 = refl
+legEnd false w8 d10 = refl
+legEnd false w8 d11 = refl
+legEnd false w9 d0 = refl
+legEnd false w9 d6 = refl
+legEnd false w9 d10 = refl
+legEnd false w9 d11 = refl
+legEnd false w10 d0 = refl
+legEnd false w10 d6 = refl
+legEnd false w10 d10 = refl
+legEnd false w10 d11 = refl
+legEnd false w11 d0 = refl
+legEnd false w11 d6 = refl
+legEnd false w11 d10 = refl
+legEnd false w11 d11 = refl
+legEnd false w12 d0 = refl
+legEnd false w12 d6 = refl
+legEnd false w12 d10 = refl
+legEnd false w12 d11 = refl
+legEnd true w0 d0 = refl
+legEnd true w0 d6 = refl
+legEnd true w0 d10 = refl
+legEnd true w0 d11 = refl
+legEnd true w1 d0 = refl
+legEnd true w1 d6 = refl
+legEnd true w1 d10 = refl
+legEnd true w1 d11 = refl
+legEnd true w2 d0 = refl
+legEnd true w2 d6 = refl
+legEnd true w2 d10 = refl
+legEnd true w2 d11 = refl
+legEnd true w3 d0 = refl
+legEnd true w3 d6 = refl
+legEnd true w3 d10 = refl
+legEnd true w3 d11 = refl
+legEnd true w4 d0 = refl
+legEnd true w4 d6 = refl
+legEnd true w4 d10 = refl
+legEnd true w4 d11 = refl
+legEnd true w5 d0 = refl
+legEnd true w5 d6 = refl
+legEnd true w5 d10 = refl
+legEnd true w5 d11 = refl
+legEnd true w6 d0 = refl
+legEnd true w6 d6 = refl
+legEnd true w6 d10 = refl
+legEnd true w6 d11 = refl
+legEnd true w7 d0 = refl
+legEnd true w7 d6 = refl
+legEnd true w7 d10 = refl
+legEnd true w7 d11 = refl
+legEnd true w8 d0 = refl
+legEnd true w8 d6 = refl
+legEnd true w8 d10 = refl
+legEnd true w8 d11 = refl
+legEnd true w9 d0 = refl
+legEnd true w9 d6 = refl
+legEnd true w9 d10 = refl
+legEnd true w9 d11 = refl
+legEnd true w10 d0 = refl
+legEnd true w10 d6 = refl
+legEnd true w10 d10 = refl
+legEnd true w10 d11 = refl
+legEnd true w11 d0 = refl
+legEnd true w11 d6 = refl
+legEnd true w11 d10 = refl
+legEnd true w11 d11 = refl
+legEnd true w12 d0 = refl
+legEnd true w12 d6 = refl
+legEnd true w12 d10 = refl
+legEnd true w12 d11 = refl
+
+routeEndAgreement : (b : Bool) (i : Wheel) (d e : Spoke) →
+  runEnd (commands (route b i d e)) (initial (route b i d e))
+  ≡ just (at (other (other b)) (out (other b) (out b i d) e))
+routeEndAgreement b i d e
+  rewrite runEndAppend (macro b d) (macro (other b) e) (at b i)
+        | legEnd b i d
+        | legEnd (other b) (out b i d) e = refl
