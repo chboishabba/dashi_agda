@@ -72,6 +72,13 @@ def coordinates(B,Y):
     return X
 
 
+def signed_from_positive(D,E,J):
+    """Negative basis is L(C) applied to the positive basis; right-action words."""
+    I=eye(J.shape[0]);require(J*J==I,'positive parity square')
+    require(J*D==D*J and J*E==E*J,'positive parity not central')
+    return {'C':{1:I,2:J},'D':{1:D,2:E},'E':{1:E,2:J*D*J}}
+
+
 def signed_weld(actual,ordinary,orbits):
     """actual C,D,E are 90D phase maps; source ordinary is 12/78.
     C is indexed by source phase. Return actual->ordinary & inverse.
