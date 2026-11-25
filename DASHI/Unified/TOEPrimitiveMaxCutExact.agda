@@ -285,3 +285,23 @@ hopfMonsterLeanAlgebraSourceReceipt = record
   ; authority = dashiSiblingFormalSource
   ; localAgdaTheorem = false
   }
+
+
+-- P0AP pays selected classical restricted action and surface variation,
+-- not the literal recovered-QFT action. No primitive flags are changed.
+hopfSelectedActionVariationSourceReceipt : PrimitiveSourceReceipt
+hopfSelectedActionVariationSourceReceipt =
+  siblingReceipt 1554 "fcff38380da21f163876f6204758e2db38a18559"
+    "DASHI.Unified.TOEHopfMonsterSourceRealizationsExact"
+    "Original KK graph metric path and gauge equality source terms; selected periodic EH reduced action and complete brane metric-tangent BIDI in AP source ledger/checker. Same real action integral, physical stress readout, pinned selected QFT and universal action remain uninhabited."
+
+hopfSelectedActionLeanSourceReceipt : PrimitiveSourceReceipt
+hopfSelectedActionLeanSourceReceipt = record
+  { repository = "chboishabba/dashi_lean4"
+  ; pullRequest = 122
+  ; headCommit = "db9bdfce84ab338a109599d76047a8b53a4abb31"
+  ; moduleName = "Integration.DASHITOE.HopfMonsterSourceCut"
+  ; ownerClaim = "Exact source-written rational KK graph path and periodic warp lapse/EL/seam/reduced-potential algebra. No native kernel acceptance or continuum action promotion."
+  ; authority = dashiSiblingFormalSource
+  ; localAgdaTheorem = false
+  }
