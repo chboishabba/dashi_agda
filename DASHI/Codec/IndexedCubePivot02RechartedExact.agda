@@ -237,3 +237,17 @@ selectedPivotInvolution = record { onRaw = twice }
 -- This supplies the formerly conditional restricted rechart source.
 -- Kernel verification is still pending; the full ten-chart ambient
 -- atlas and the prefix isometry have distinct acceptance obligations.
+
+
+-- Consume the original six-face owner using the already supplied
+-- concrete involution. No additional cube or proof input is introduced.
+selectedPivot02Exact :
+  Q.ExactFaces (pivot02Cube selectedPivotInvolution)
+    (pivot02Faces selectedPivotInvolution)
+selectedPivot02Exact = pivot02Exact selectedPivotInvolution
+
+selectedPivot02Terminal :
+  (x : Q.A (pivot02Cube selectedPivotInvolution)) →
+  Q.xyz (pivot02Cube selectedPivotInvolution) x ≡
+  Q.zyx (pivot02Cube selectedPivotInvolution) x
+selectedPivot02Terminal = pivot02Terminal selectedPivotInvolution
