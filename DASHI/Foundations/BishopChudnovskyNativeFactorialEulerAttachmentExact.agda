@@ -53,7 +53,7 @@ weightedTerm n =
               ⊜ Κ (+ 13591409 / 1) ⊗ h ⊕ Κ (+ 545140134 / 1) ⊗ (n ⊗ h))
               P.≃-refl (hTerm n) ((+ n / 1) ⋆))
           (P.+-cong P.≃-refl (P.*-congˡ
-            (P.≃-symm (P.⋆-distrib-* (+ n / 1) (F.factorialTerm n)))))))
+            (P.≃-symm (P.⋆-distrib-* (+ n / 1) (F.factorialTerm n))))))))
 
 weightedPrefix : (n : Nat) →
   (F.factorialPrefix n ⋆) ≃
