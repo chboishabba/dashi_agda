@@ -1,0 +1,187 @@
+{
+  "predecessor": "0a706525bdda4f74ce15fbd38f171be4cdba7aee",
+  "scripts": {
+    "weak": {
+      "commit": "000f6bef7e95684b2873d915c5e42f76f5e7af8a",
+      "blob": "92c25671431e1fb2b92d34dfec602aa57ebb0aea"
+    },
+    "pairing": {
+      "commit": "0f0b34cfc6b2e87f3b43a6f217abbefffc2057fa",
+      "blob": "446833952de28fcca5f98034abb8993bb8682ccb"
+    },
+    "direct": {
+      "commit": "b852d8bbad084caad05504a6fcf996a528387211",
+      "blob": "563ebe2ca8e109da6e23b44e9212dc09e4bde505"
+    }
+  },
+  "weak": {
+    "checks": 53,
+    "A_lower": "17/32",
+    "A_upper": "1",
+    "A_prime_lower": "-15/2",
+    "A_prime_upper": "-2483/360",
+    "B0_lower": "14461/11520",
+    "S1_upper": "-2371/720",
+    "cross_scaled_regular_upper": -13.735277777777778,
+    "radial_shifted_minima": [
+      "1",
+      "2",
+      "4",
+      "8",
+      "16",
+      "32",
+      "64",
+      "128",
+      "256"
+    ],
+    "direct_logdrive_lower": 78158.76923076923,
+    "eta_shift_upper": 66.18392456070815,
+    "direct_growth_coefficient_lower": 36691.12056579469,
+    "first_wall_correction_E4": "nonpositive under original smooth-reference layer identity, with original causal support; not full inverse positivity",
+    "collars": [
+      {
+        "name": "E",
+        "h": "1/100",
+        "b_min": "99/100",
+        "a_max": "13/50",
+        "rho": [
+          "81/2200",
+          "28/275",
+          "199/550",
+          "49/88"
+        ],
+        "inverse_upper": [
+          1.0382255781028786,
+          1.1133603238866396,
+          1.566951566951567,
+          2.2564102564102564
+        ]
+      },
+      {
+        "name": "R",
+        "h": "19/1250",
+        "b_min": "87/1000",
+        "a_max": "9/100",
+        "rho": [
+          "6534233/22656250",
+          "4162216/11328125",
+          "7742614/11328125",
+          "834233/906250"
+        ],
+        "inverse_upper": [
+          1.4052987290610102,
+          1.5808357320753026,
+          3.1594171653635983,
+          12.58383437243984
+        ]
+      }
+    ],
+    "band_k_max": [
+      1000,
+      2000,
+      4000,
+      5000
+    ],
+    "scope": "Mode-wise local collar self inverse, no cross-collar Fourier projection or omitted high-frequency admission"
+  },
+  "manufactured_pairing": [
+    {
+      "collar": "E",
+      "n": 64,
+      "time": 0.007801309151191709,
+      "radial": 0.007801309151191705,
+      "diff": 3.469446951953614e-18
+    },
+    {
+      "collar": "R",
+      "n": 64,
+      "time": 0.13367217362379072,
+      "radial": 0.13367217362379072,
+      "diff": 0
+    },
+    {
+      "collar": "E",
+      "n": 128,
+      "time": 0.007801309151191724,
+      "radial": 0.0078013091511917355,
+      "diff": 1.1275702593849246e-17
+    },
+    {
+      "collar": "R",
+      "n": 128,
+      "time": 0.13367217362379225,
+      "radial": 0.13367217362379225,
+      "diff": 0
+    }
+  ],
+  "direct_scaled": {
+    "scale": 650,
+    "source_causal_limit": 0.0004468697233333259,
+    "receiver_causal_limit": 0.0003489095617325585,
+    "normalization": 0.12069003224378744,
+    "rows": [
+      {
+        "n": 48,
+        "E4": {
+          "temporal": -6055499505289157,
+          "spatial": -5560321469683444,
+          "total": -11615820974972600,
+          "unscaled": -5.937951866819415e-267
+        },
+        "SMS": {
+          "temporal": -12111012100044770,
+          "spatial": 11120642939366888,
+          "total": -990369160677882,
+          "unscaled": -5.062719560811309e-268
+        }
+      },
+      {
+        "n": 80,
+        "E4": {
+          "temporal": -5749116096859618,
+          "spatial": -5349217619238666,
+          "total": -11098333716098284,
+          "unscaled": -5.673414866678945e-267
+        },
+        "SMS": {
+          "temporal": -11498244649021530,
+          "spatial": 10698435238477332,
+          "total": -799809410544198,
+          "unscaled": -4.0885872747809454e-268
+        }
+      },
+      {
+        "n": 112,
+        "E4": {
+          "temporal": -5749290858791396,
+          "spatial": -5349361170218575,
+          "total": -11098652029009972,
+          "unscaled": -5.673577586709863e-267
+        },
+        "SMS": {
+          "temporal": -11498594173130044,
+          "spatial": 10698722340437150,
+          "total": -799871832692894,
+          "unscaled": -4.0889063738056107e-268
+        }
+      },
+      {
+        "n": 144,
+        "E4": {
+          "temporal": -5749290884182602,
+          "spatial": -5349361193927774,
+          "total": -11098652078110376,
+          "unscaled": -5.673577611809754e-267
+        },
+        "SMS": {
+          "temporal": -11498594223912516,
+          "spatial": 10698722387855548,
+          "total": -799871836056968,
+          "unscaled": -4.0889063910025955e-268
+        }
+      }
+    ],
+    "scope": "Actual direct single layer only, float quadrature diagnostic; no interval accuracy inferred from refinement. Prior rigorous conditional direct sign and lower magnitude remain independent."
+  },
+  "execution": "53 exact rational/SymPy checks, four manufactured weak-form comparisons and four scaled direct quadratures completed locally. All three executed scripts byte-match committed blobs. Initial manufactured time form used subtractive N and failed 128-node tolerance; stable velocity and acceleration integrals corrected before committed execution. No CI or native proof kernel. No signed complete two-collar solve."
+}
