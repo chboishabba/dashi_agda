@@ -83,16 +83,33 @@ def main():
             raise ValueError("actual corrected source R7 required")
         if not cover.get("ATLAS_GF3_intertwiner",{}).get("form_transport_passed"):
             raise ValueError("original quotient chart unverified")
-        for key in ("canonical_C_word","canonical_D_word","original_source_blob_sha"):
+        for key in ("canonical_C_word","canonical_D_word"):
             if not cover.get(key) or cover[key]!=model.get(key):
                 raise ValueError("literal cover/model mismatch "+key)
+        if not cover.get("original_source_blob_sha") or cover["original_source_blob_sha"]!=model.get("original_E_source_blob_sha"):
+            raise ValueError("literal cover/model E source mismatch")
         with np.load(packet,allow_pickle=False) as f:
             A={g:np.asarray(f[g+"12"],dtype=np.int64)%P for g in ("C","D","E")}
             H={g:np.asarray(f[g+"78"],dtype=np.int64)%P for g in ("C","D","E")}
             G=tuple(np.asarray(f[k],dtype=np.int64)%P for k in ("Fplus","Fminus"))
+            cached=tuple(np.asarray(f[k],dtype=np.int64)%P for k in ("source_transport12","source_transport78")) if all(k in f for k in ("source_transport12","source_transport78")) else None
         if not all(x.shape==(24,24) for x in A.values()) or not all(x.shape==(156,156) for x in H.values()):
             raise ValueError("original source signed dimensions")
-        q,F,J=compare(A,H,G,data)
+        if cached is None:
+            q,F,J=compare(A,H,G,data)
+        else:
+            if report.get("ordinary_source_sha256")!=sha(a.source):raise ValueError("ordinary source hash mismatch")
+            q=report.get("ordinary_source_D_phase")
+            if q not in (0,1,2):raise ValueError("missing standard phase")
+            F,J=cached
+            T=source_matrices(data,q);U={g:dual(T[g],g=="C") for g in T}
+            inv(F);inv(J)
+            if not all(np.array_equal(mm(F,A[g]),mm(T[g],F)) and np.array_equal(mm(J,H[g]),mm(U[g],J)) for g in T):
+                raise ValueError("cached cyclic source transport equation")
+            z=np.diag([5]*12+[25]*12)
+            C,D=A["C"],A["D"]
+            if not np.array_equal(power(mm(D,mm(D,mm(C,mm(D,C)))),7),power(z,q)):
+                raise ValueError("cached cyclic source phase mismatch")
         explicit=cover["central_cover_relators"].get("ATLAS_Q7",{}).get("central_z_power")
         if explicit is not None and q!=explicit:raise ValueError("literal Q7 contradicts normalized source packet")
         np.savez_compressed(a.outdir/"lindsey_to_actual_MM31_signed_intertwiners.npz",transport12=F,transport78=J)
