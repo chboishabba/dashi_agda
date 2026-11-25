@@ -17,6 +17,10 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as H
 import DASHI.Physics.Plasma.MHDMagneticVectorPotentialHelicalObserverExact as V
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
+import DASHI.Algebra.Trit as T
+import DASHI.Codec.BalancedTritBitFibre as Codec
+import DASHI.Cognition.PNF.MemoryFibre as Memory
+import DASHI.Biology.BH4OneMoleculeSpatialFutureMinimalityExact as BH4
 import DASHI.Biology.Physical.BiologicalSourcePhysicalTissueSimulationExact as Physical
 import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact as Agreement
 import DASHI.Biology.Physical.BiologicalAllNeighbourTissueDynamicsExact as Tissue
@@ -167,8 +171,14 @@ causalCube = record
   ; z00 = Bio.project ; z10 = Bio.project ; z01 = Bio.project ; z11 = Bio.project
   }
 
-data SignedChange : Set where
-  negative unchanged positive : SignedChange
+-- Reuse the original balanced-trit carrier and its zero/sign codec.
+SignedChange : Set
+SignedChange = T.Trit
+
+negative unchanged positive : SignedChange
+negative = T.neg
+unchanged = T.zer
+positive = T.pos
 
 change : Bool → Bool → SignedChange
 change false false = unchanged
@@ -301,3 +311,57 @@ restoreSignalResidualTransport model state p =
   physicalOrderResidualTransport model
     (Bio.signal ∷ Bio.restoreMemory ∷ [])
     (Bio.restoreMemory ∷ Bio.signal ∷ []) state p
+
+
+-- Original support/sign roundtrip, including the actual zero fibre.
+encodedChange : Bool → Bool → Codec.TritFibre
+encodedChange a b = Codec.encodeFibre (change a b)
+
+decodeChange : (a b : Bool) →
+  Codec.decodeFibre (encodedChange a b) ≡ change a b
+decodeChange a b = Codec.decode-encode (change a b)
+
+reverseChange : (a b : Bool) → change b a ≡ T.inv (change a b)
+reverseChange false false = refl
+reverseChange false true = refl
+reverseChange true false = refl
+reverseChange true true = refl
+
+-- Existing PNF learning operations: zero action weight is not erased memory.
+reinforceThenExtinguish : (m : Memory.MemoryFibre) →
+  Memory.actionWeight (Memory.extinguishActionDominance (Memory.reinforce m)) ≡ zero
+reinforceThenExtinguish m = refl
+
+extinguishThenReinforce : (m : Memory.MemoryFibre) →
+  Memory.actionWeight (Memory.reinforce (Memory.extinguishActionDominance m)) ≡ suc zero
+extinguishThenReinforce m = refl
+
+learningLeftRetainsEvent : (m : Memory.MemoryFibre) →
+  Memory.rememberedEvent (Memory.extinguishActionDominance (Memory.reinforce m))
+    ≡ Memory.rememberedEvent m
+learningLeftRetainsEvent m = refl
+
+learningRightRetainsEvent : (m : Memory.MemoryFibre) →
+  Memory.rememberedEvent (Memory.reinforce (Memory.extinguishActionDominance m))
+    ≡ Memory.rememberedEvent m
+learningRightRetainsEvent m = refl
+
+-- BH4: reuse the original three future-distinct located-redox states.
+-- This is the existing selected event law, not a calibrated reaction rate.
+bh4Left bh4Right : BH4.LocatedRedoxState → Bool
+bh4Left a = BH4.readout
+  (BH4.step BH4.oxidizeAtTarget (BH4.step BH4.deliverToTarget a))
+bh4Right a = BH4.readout
+  (BH4.step BH4.deliverToTarget (BH4.step BH4.oxidizeAtTarget a))
+
+bh4SourceOrderResidual : change (bh4Left BH4.sourceReduced)
+  (bh4Right BH4.sourceReduced) ≡ T.neg
+bh4SourceOrderResidual = refl
+
+bh4TargetReducedOrderResidual : change (bh4Left BH4.targetReduced)
+  (bh4Right BH4.targetReduced) ≡ T.zer
+bh4TargetReducedOrderResidual = refl
+
+bh4TargetOxidizedOrderResidual : change (bh4Left BH4.targetOxidized)
+  (bh4Right BH4.targetOxidized) ≡ T.zer
+bh4TargetOxidizedOrderResidual = refl
