@@ -8,7 +8,8 @@ from scipy.optimize import brentq
 from check_f8_d34_signed_refinement import transfer_builder, coefficients
 from ksw668_f8_tt_multipole import F
 from ksw668_f8_fv_source_flux import exact_cell_averages
-from ksw668_f8_signed_route_stage import step, reverse_step
+from ksw668_f8_signed_route_stage import step
+from f8_physical_reverse import reverse_physical, physical_observation, signed_contribution
 from warp_native_geometric_receiver import receiver_bank
 from warp_israel_affine import radial_source_at_receiver, offsets
 from check_f8_signed_window import window_rows
@@ -58,9 +59,9 @@ def run(a):
     sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','check_f8_source_inactive_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','f8_physical_reverse.py','check_f8_source_inactive_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
     forward_ident=json.dumps(dict(route=a.route,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
-    ident=json.dumps(dict(forward_identity=json.loads(forward_ident),window=a.window,shrink=a.shrink),sort_keys=True)
+    ident=json.dumps(dict(forward_identity=json.loads(forward_ident),window=a.window,shrink=a.shrink,reverse_carrier='physical3'),sort_keys=True)
     consumer_key=hashlib.sha256(ident.encode()).hexdigest()[:24]
     def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=forward_ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
     def read(k):
@@ -85,6 +86,8 @@ def run(a):
         write(hi,c,f)
         if time.monotonic()-start>=a.budget:return {'phase':'forward','cursor':hi}
     del c,f
+    if a.forward_only:
+        return dict(phase='forward_complete',cursor=end,forward_identity=forward_ident,physical_causal_null_certified=False)
     # One observer row at a time. Reverse state and cumulative signed sums are atomic.
     bulk=math.sqrt(span**2-(1-1/12)**2);rxs=(bulk-.012,bulk+.1)
     vel=np.array([coeff(T0+i*h/2)[0] for i in range(2*end+1)])
@@ -109,10 +112,11 @@ def run(a):
         gf=radial_source_at_receiver(sf,coeff(T0+nt*h)[2],rx,.04,drf)
         for ch in range(2 if a.window else 6):
             def obs(n):
-                o=np.zeros_like(xf)
-                if a.shrink is not None:return inject_patch(pf,ch,n,xf)
+                if a.shrink is not None:return physical_observation(inject_patch(pf,ch,n,xf))
+                o=np.zeros_like(xf[:3])
                 if a.window:o[0,:,0,:][:,jf]=wf[ch,n]
-                elif nt-1<=n<=end:o[:3,:,:3,:]=bf[ch,n-nt+1]
+                elif nt-1<=n<=end:o[:,:,:3,:]=bf[ch,n-nt+1]
+                if np.any(o[..., -1]):raise ValueError('observer outside active radial carrier')
                 return o
             path=work/f'reverse-{consumer_key}-{pos}-{ch}.npz'
             cursor=end;lam=obs(end);signed=np.zeros((2,6,3));absolute=signed.copy()
@@ -123,7 +127,7 @@ def run(a):
                     cursor=int(z['cursor']);lam=z['lam'];signed=z['signed'];absolute=z['absolute'];mismatch=z['mismatch'];direct=z['direct'];coarse_obs=z['coarse_obs'];fine_obs=z['fine_obs']
                     if any(digest(z[k])!=z[k+'_sha'].item() for k in ('lam','signed','absolute','mismatch','direct','coarse_obs','fine_obs')):raise ValueError('reverse digest mismatch')
                     if any(x.shape!=(3,) for x in (mismatch,direct,coarse_obs,fine_obs)) or not np.isfinite([mismatch,direct,coarse_obs,fine_obs]).all():raise ValueError('reverse observation integrity')
-                    if cursor not in cuts or lam.shape!=xf.shape or signed.shape!=(2,6,3) or absolute.shape!=signed.shape or not all(np.isfinite(x).all() for x in (lam,signed,absolute)):raise ValueError('reverse integrity')
+                    if cursor not in cuts or lam.shape!=xf[:3].shape or signed.shape!=(2,6,3) or absolute.shape!=signed.shape or not all(np.isfinite(x).all() for x in (lam,signed,absolute)):raise ValueError('reverse integrity')
             for lo,hi in reversed(list(zip(cuts,cuts[1:]))):
                 if hi>cursor:continue
                 c,f=read(lo);ce,fe=read(hi)
@@ -141,15 +145,15 @@ def run(a):
                         mismatch+=oz-oc;direct+=of-oc;coarse_obs+=oc;fine_obs+=of
                     aa=G(z,n);bb=G(z,n,sm) if source_steps[n] else aa;cc=S(cn)
                     for j,d in enumerate((aa-bb,bb-cc)):
-                        value=np.sum(lam*d,axis=(2,3))
+                        value=signed_contribution(lam,d)
                         signed[j]+=value;absolute[j]+=abs(value)
-                    lam=obs(n)+reverse_step(lam,T0+n*h,h,coeff,drf,dyf,a.route)
+                    lam=obs(n)+reverse_physical(lam,T0+n*h,h,coeff,drf,dyf,a.route)
                 del c,f,ce,fe,c0n,f0n,cn,fn,z,aa,bb,cc,d
                 cursor=lo
                 arrays=dict(lam=lam,signed=signed,absolute=absolute,mismatch=mismatch,direct=direct,coarse_obs=coarse_obs,fine_obs=fine_obs)
                 atomic(path,identity=ident,cursor=cursor,**arrays,**{k+'_sha':digest(v) for k,v in arrays.items()})
                 if time.monotonic()-start>=a.budget:return {'phase':'reverse','probe':pos,'row':ch,'cursor':cursor}
-            c0,f0=read(0);initial=readout(lam,f0-S(c0))
+            c0,f0=read(0);initial=readout(lam,(f0-S(c0))[:3])
             if a.window:
                 if np.any(wc[ch,end]) or np.any(wf[ch,end]):raise ValueError('terminal window support')
                 off=np.zeros(3)
@@ -167,6 +171,7 @@ def run(a):
                 coarse_obs+=offsets(gc)[ch];fine_obs+=offsets(gf)[ch]
             pred=initial+signed.sum(axis=(0,1))+mismatch+off
             bound=abs(initial)+absolute.sum(axis=(0,1))+abs(mismatch)+abs(off)
+            if np.any(signed[:,3:]) or np.any(absolute[:,3:]):raise ValueError('physical-only ledger has nonzero history contribution')
             if not np.all(np.isfinite([direct,pred,bound])) or not np.all(abs(pred-direct)<=1e-8*np.maximum(1.,bound)):raise ValueError('endpoint ledger mismatch')
             obs_scale=np.maximum(1.,np.maximum(abs(coarse_obs),abs(fine_obs))+bound)
             if not np.all(abs(fine_obs-coarse_obs-direct)<=1e-8*obs_scale):raise ValueError('independent receiver totals disagree')
@@ -174,5 +179,5 @@ def run(a):
     return dict(phase='complete_experiment',identity=ident,forward_identity=forward_ident,consumer_key=consumer_key,results=results,far_patch_support_certificate=patch_certificate,source_active_steps=sum(source_steps),source_inactive_steps=end-sum(source_steps),physical_causal_null_certified=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
-    a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase']=='complete_experiment' else 75)
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);p.add_argument('--forward-only',action='store_true',help='complete shared forward anchors without starting receiver reverse');g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
+    a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase'] in ('complete_experiment','forward_complete') else 75)
