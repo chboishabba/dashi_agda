@@ -9,6 +9,7 @@ from check_f8_d34_signed_refinement import transfer_builder, coefficients
 from ksw668_f8_tt_multipole import F
 from ksw668_f8_fv_source_flux import exact_cell_averages
 from ksw668_f8_signed_route_stage import step
+from f8_fused_step import step_into
 from f8_physical_reverse import reverse_physical, physical_observation, signed_contribution
 from warp_native_geometric_receiver import receiver_bank
 from warp_israel_affine import radial_source_at_receiver, offsets
@@ -54,13 +55,20 @@ def run(a):
         source_steps.append(source_active((coeff(T)[2],coeff(T+h)[2],coeff(T+h/2)[2])))
     def setup(dr,dy,nr,ny):
         src=exact_cell_averages(.04,np.arange(nr)*dr,dr);cp,cm=coefficients(nr,dr)
-        def advance(x,n,source=src):return step(x,T0+n*h,h,coeff,dr,dy,source,cp,cm,a.route)
-        return src,advance,np.zeros((6,3,ny,nr))
+        initial=np.zeros((6,3,ny,nr))
+        if a.fused:
+            scratch1,scratch2=np.empty_like(initial),np.empty_like(initial)
+            def advance(x,n,source=src):
+                # Returned state must own its storage: recursive replay retains ancestors.
+                return step_into(x,np.empty_like(x),scratch1,scratch2,T0+n*h,h,coeff,dr,dy,source,cp,cm,a.route)
+        else:
+            def advance(x,n,source=src):return step(x,T0+n*h,h,coeff,dr,dy,source,cp,cm,a.route)
+        return src,advance,initial
     sc,C,xc=setup(drc,dyc,nc,mc);sf,G,xf=setup(drf,dyf,nf,mf)
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
-    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','f8_physical_reverse.py','check_f8_source_inactive_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
-    forward_ident=json.dumps(dict(route=a.route,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','f8_physical_reverse.py','f8_fused_step.py','check_f8_source_inactive_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
+    forward_ident=json.dumps(dict(route=a.route,fused=a.fused,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
     ident=json.dumps(dict(forward_identity=json.loads(forward_ident),window=a.window,shrink=a.shrink,reverse_carrier='physical3'),sort_keys=True)
     consumer_key=hashlib.sha256(ident.encode()).hexdigest()[:24]
     def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=forward_ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
@@ -179,5 +187,5 @@ def run(a):
     return dict(phase='complete_experiment',identity=ident,forward_identity=forward_ident,consumer_key=consumer_key,results=results,far_patch_support_certificate=patch_certificate,source_active_steps=sum(source_steps),source_inactive_steps=end-sum(source_steps),physical_causal_null_certified=False)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);p.add_argument('--forward-only',action='store_true',help='complete shared forward anchors without starting receiver reverse');g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
+    p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);p.add_argument('--fused',action='store_true',help='opt-in tested full-carrier fused step; separate checkpoint identity');p.add_argument('--forward-only',action='store_true',help='complete shared forward anchors without starting receiver reverse');g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
     a=p.parse_args();r=run(a);print(json.dumps(r));raise SystemExit(0 if r['phase'] in ('complete_experiment','forward_complete') else 75)
