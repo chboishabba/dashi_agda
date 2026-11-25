@@ -2,6 +2,22 @@
 
 Date: 2026-11-24. Shared Agda/Lean roadmap, independently based on their default branches. Priority: solve the literal Clay P vs NP endpoint (P0). Endpoint mathematics before additional certification; no other programme is a prerequisite. This document records research obligations, not a separation proof. Proposed lemma identifiers below are not existing declarations unless explicitly marked.
 
+## Controlling P0 directive — literal Clay solution, 2026-11-25
+
+User explicitly confirmed: the objective is to win the Clay Millennium Prize by solving P vs NP, NOT to formalise everything encountered. These three parallel mathematical routes supersede older phase labels and serial infrastructure priorities wherever they conflict. P vs NP is the exclusive scope of these branches.
+
+| Controlling route | Mathematical exit criterion |
+|---|---|
+| P0-S — separation | Unconditionally prove that for every fixed c there exists an original satisfiable F with J(F) > c log2(|F|+2), or equivalently the Section47 unrestricted kappa obstruction up to the Section49 BIDI constants. |
+| P0-C — construction | Give a uniform deterministic polynomial-time isolating seed/portfolio constructor AND a uniform polynomial-time promised singleton witness producer, with all source compilation, verification and decoding costs paid; alternatively give a direct uniform polynomial SAT algorithm. |
+| P0-R — reverse endpoint | Prove existence of a total computable full-code deadline B(e) bounding the first genuine gain of every incomplete valid clocked candidate, with the G128 standard-machine coverage and totality proof. No polynomial-time deadline finder is required. |
+
+Any one completed route suffices for the corresponding literal Clay conclusion. None is established as of this directive. In particular an RP algorithm, nonuniform advice, finite tests, a restricted affine/query/representation lower bound, and partial counterexample enumeration do not pay these exits. Do not presume P!=NP while attempting P0-S/P0-R or presume P=NP while attempting P0-C.
+
+Work geometry-forward from original sources, steelman both possible outcomes, BIDI and reverse-solve from the endpoint. Preserve zero mode, inhabited neutral fibres, signed residual, independent source/time/refinement/precision/resource indices and original attribution. Take substantial theorem-level cuts rather than incremental formalisation gates. Permit arbitrary ordinary computation, sharing, nonlinear charts, recomputation and source re-access in unrestricted claims. Use existing standard-machine fallback rather than make exotic compilers compulsory.
+
+Use FRACTRAN, earth/wheel/spoke, Langlands, prime residues and the indexed hyperfabric only when they supply a concrete mathematical lever on one of the three exits. Reuse existing owners; no new generic infrastructure or unrelated programme work. Local exact computation (SymPy where useful, no GitHub CI) is a falsification/validation aid, not proof of an asymptotic universal claim. Agda/Lean formalisation is downstream of the decisive mathematical argument except where a specific proof obligation requires it. Record actual proofs, failed hypotheses and exact remaining lemmas; do not count commits, passing finite checks or added declarations as progress toward separation by themselves. Prepare a self-contained standard-model mathematical argument for independent expert scrutiny once an endpoint is genuinely paid; no claim of solvedness or prize eligibility before that.
+
 ## 1. Exact endpoint and scope
 
 Use a fixed deterministic finite machine D on canonical binary encodings of Boolean formulas (invalid inputs handled consistently). Let T_D(n) be its worst-case runtime over length <= n, infinity if it does not halt. The target is SAT not in P: for every D and c,k >= 1, if D halts within c(n+1)^k on all inputs then some valid formula phi is decided incorrectly. Equivalently, every total correct SAT decider has no polynomial worst-case bound. Quantify over D before choosing n or phi. Do not take the per-length minimum over unrestricted machine descriptions (hardcoded finite tables invalidate that formulation). An explicit NP language with superpolynomial unrestricted bounded-fanin Boolean circuit complexity would suffice but is stronger; restricted circuits do not suffice.
