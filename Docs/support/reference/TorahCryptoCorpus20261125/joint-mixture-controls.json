@@ -1,0 +1,118 @@
+{
+  "results": [
+    {
+      "name": "exodus",
+      "blocks": 175,
+      "letters": 15925,
+      "bits": {
+        "trigram": 64310.98696286344,
+        "unigramMix": 61471.9620419574,
+        "positionMix": 61991.03816039913,
+        "geometryMix": 61543.86945951957,
+        "shuffledPeersMix": 61532.65518089037,
+        "rotatedPeersMix": 61539.1230881616
+      },
+      "bitsPerLetter": {
+        "trigram": 4.038366528280279,
+        "unigramMix": 3.860091807972207,
+        "positionMix": 3.8926868546561466,
+        "geometryMix": 3.864607187410962,
+        "shuffledPeersMix": 3.863902994090447,
+        "rotatedPeersMix": 3.864309142113758
+      }
+    },
+    {
+      "name": "genesis",
+      "blocks": 338,
+      "letters": 30758,
+      "bits": {
+        "trigram": 118535.51466330742,
+        "unigramMix": 114552.89067715373,
+        "positionMix": 115356.15840885612,
+        "geometryMix": 114636.83074205174,
+        "shuffledPeersMix": 114660.56775681676,
+        "rotatedPeersMix": 114656.79090894759
+      },
+      "bitsPerLetter": {
+        "trigram": 3.8538108675241376,
+        "unigramMix": 3.7243283268467953,
+        "positionMix": 3.750444060369859,
+        "geometryMix": 3.727057375058578,
+        "shuffledPeersMix": 3.727829109721593,
+        "rotatedPeersMix": 3.727706317346628
+      }
+    },
+    {
+      "name": "leviticus",
+      "blocks": 194,
+      "letters": 17654,
+      "bits": {
+        "trigram": 72549.59213408253,
+        "unigramMix": 69090.23132752819,
+        "positionMix": 69815.89111554854,
+        "geometryMix": 69196.31737043166,
+        "shuffledPeersMix": 69192.98267713583,
+        "rotatedPeersMix": 69183.78246203208
+      },
+      "bitsPerLetter": {
+        "trigram": 4.1095271402561755,
+        "unigramMix": 3.9135737695439103,
+        "positionMix": 3.9546783230740084,
+        "geometryMix": 3.9195829483647704,
+        "shuffledPeersMix": 3.9193940567087253,
+        "rotatedPeersMix": 3.918872916168125
+      }
+    },
+    {
+      "name": "numbers",
+      "blocks": 279,
+      "letters": 25389,
+      "bits": {
+        "trigram": 100342.37633146459,
+        "unigramMix": 96497.9804202123,
+        "positionMix": 97326.60284298226,
+        "geometryMix": 96615.66220717736,
+        "shuffledPeersMix": 96603.98637672479,
+        "rotatedPeersMix": 96604.03940782584
+      },
+      "bitsPerLetter": {
+        "trigram": 3.9521988393187835,
+        "unigramMix": 3.8007790941042305,
+        "positionMix": 3.8334161582962016,
+        "geometryMix": 3.8054142426711315,
+        "shuffledPeersMix": 3.8049543651472995,
+        "rotatedPeersMix": 3.8049564538904974
+      }
+    },
+    {
+      "name": "deuteronomy",
+      "blocks": 238,
+      "letters": 21658,
+      "bits": {
+        "trigram": 84363.57648524252,
+        "unigramMix": 81214.31394753297,
+        "positionMix": 81943.34700857243,
+        "geometryMix": 81331.24624303072,
+        "shuffledPeersMix": 81319.71511280534,
+        "rotatedPeersMix": 81329.88628866963
+      },
+      "bitsPerLetter": {
+        "trigram": 3.8952616347420133,
+        "unigramMix": 3.749852892581631,
+        "positionMix": 3.783514036779593,
+        "geometryMix": 3.755251927372367,
+        "shuffledPeersMix": 3.7547195083943734,
+        "rotatedPeersMix": 3.755189135131112
+      }
+    }
+  ],
+  "totals": {
+    "trigram": 440102.04657696054,
+    "unigramMix": 422827.3784143846,
+    "positionMix": 426433.0375363585,
+    "geometryMix": 423323.92602221103,
+    "shuffledPeersMix": 423309.9071043731,
+    "rotatedPeersMix": 423313.6221556368
+  },
+  "letters": 111384
+}
