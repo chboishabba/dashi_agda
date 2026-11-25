@@ -126,6 +126,8 @@ gives L^3F=h(3b/2+23a/36+5/72)F. Because (1-z)h=z, the displayed hypergeometric 
 \]
 With C=640320, B=545140134, A=13591409, verify 144 B^2=163(C^3+1728), (1-s2)/6=A/B. These yield the classical Chudnovsky identity on the stated analytic inputs.
 
+The original degree-82 diagonal and degree-42 fixed slice, their signed cubic correction, the independent forward Laurent substitution, strict complementary-factor dominance, and the original dyadic half-unit enclosure have now been replayed locally from four Git-blob-matched committed Python sources. This is finite certificate acceptance, not analytic or kernel reflection. The actual upper-half-plane fixed-point chart has source-written derivative and orientation lemmas, with signed residual 82 alpha+81=-i sqrt(163), and intended selected-disk specialization. See `Docs/proofs/Paper9LiteralPrefixCMReplay20261125.md` for exact outputs, hashes and reproduction.
+
 ## 9. Certified evaluation
 
 Use the existing integer P/Q/B/T merge and alternating tail enclosure for the weighted hypergeometric sum, plus outward dyadic sqrt10005. The absolute consecutive-term ratio is bounded by 42*1728/C^3<1. For the actual adjacent source sums S_n=T_n/Q_n, delta_n=P_n p_n(A+Bn) alternates and |delta_(n+1)|*2^41<=q_(n+1)|delta_n|; the original paired slack gives 2T_n>A Q_n for n>=1. Let n=1+floor((k+4)/41), s=2^(k+2), R=floor(s sqrt10005), J=Q_n|delta_n|. With ordered positive prefix pairs (t_l,d_l),(t_h,d_h), K_r=426880, the exact reciprocal-corner width is
@@ -133,6 +135,8 @@ Use the existing integer P/Q/B/T merge and alternating tail enclosure for the we
 u_k-l_k=\frac{K_r(d_l t_h+RJ)}{s t_l t_h}\le 3/s<2^{-k}.
 \]
 This follows from R<=101s, 8s<=2^(41n), the scaled defect bound and positive lower planes. It is independent of the analytic Chudnovsky identity; intended native totality/width terms are uncompiled. For c_k=(l_k+u_k)/2 and m_k the literal Machin stage, retain both rational crosses l_k<=m_k+e_k and m_k<=u_k+e_k, where e_0=22/7 and e_k=4/25^k for k>=1. The exact combined-radius bound is |c_k-m_k|<=width/2+e_k<=4/(k+1). Universal crossed endpoints, not finite hashes, are the outstanding F5 theorem. Interval production totality differs from decimal-floor termination: exact boundary apartness (e.g. irrationality of pi) and fair refinement are required. Historical exact decimal comparisons and source-equivalent native runs are recorded below, not exact-head replay. Distinguish exact acceptance from approximate timings.
+
+For the original signed raw binary-split prefix, B_split=1, U_n=P_n/Q_n and S_n=T_n/Q_n satisfy U_(n+1)=U_n p_n/q_n and S_(n+1)=S_n+(A+Bn)U_(n+1). The new native rational semantics source retains the literal positiveView, while the Lean target consumes the all-index factorial recurrence and convergent weighted hypergeometric jet. Agda factorial/source reflection and kernel acceptance remain unpaid; no finite prefix test proves the infinite same-real claim.
 
 ## 10. Complexity and memory: reuse the existing computational programme
 
@@ -1882,3 +1886,7 @@ See `Docs/proofs/Paper9OrderedCuspActualSeriesODE20261125.md`. Latest #1552 orde
 ## 25 November — actual selected CM domain and signed certificate consumers (SOURCE, UNVERIFIED)
 
 See `Docs/proofs/Paper9SelectedCMDomainCertificateConsumer20261125.md`. Lean companion `85eff0dd4590c0f6c37f9dc26c02ef68dff95dd0`, `979f2ba17ceb7bb701efc79377b6ff6dfdbf6156`: original Eisenstein shifted series, actual selected GoodZ disk and first-jet equality, degree-80 complementary-factor isolation, signed cubic elimination and positive scalar normalization. Local exact arithmetic checked the domain/period constants and SymPy expanded the three tangent linear combinations identically to zero. Actual Hecke/Laurent/CM coefficient and dyadic certificate reflection, Taylor source, CM point and positive branch binding, F1/A1 and original all-index Bishop rational overlap remain open. No actual packet execution, compiler, kernel, CI or performance claim.
+
+## 25 November — literal F1 prefix and original CM163 exact replay (FINITE PASS; SOURCE UNVERIFIED)
+
+See `Docs/proofs/Paper9LiteralPrefixCMReplay20261125.md`. Exact original Python CM polynomial, signed correction, forward Laurent, complement dominance and 128/160/256-bit dyadic replay passed. Native rational prefix source, Lean all-index factorial target and actual CM-point/jet specialization written, uncompiled. Original CM analytic/finite reflection, actual positive branch, original Machin and native factorial source binding and universal rational crossed inequalities remain open. No compiler, kernel, CI or performance promotion.
