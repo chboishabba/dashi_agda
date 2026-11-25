@@ -53,11 +53,13 @@ def run(a):
     sm=np.zeros_like(sf)
     for q,I in enumerate(maps):sm[q,:-1]=I@sc[q,:-1]
     files=['ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py','ksw668_f8_signed_route_stage.py','ksw668_f8_weighted_normal_stage.py','warp_stage_adjoint.py','warp_native_geometric_receiver.py','warp_israel_affine.py','check_f8_d34_signed_refinement.py','check_f8_lvii_radial_fibre.py','check_f8_signed_window.py','check_f8_modal_cfl.py','check_f8_shrinking_jet.py','check_f8_shrinking_injection.py','f8_exact_block_replay.py','check_f8_patch_causal.py','check_f8_causal_rk3_weld.py',Path(__file__).name]
-    ident=json.dumps(dict(route=a.route,window=a.window,shrink=a.shrink,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
-    def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
+    forward_ident=json.dumps(dict(route=a.route,allow_uncertified_cfl=a.allow_uncertified_cfl,cfl_cap=float(min(caps)),enlarged_box=a.enlarged_box,grid=[nc,nf,mc,mf],h=h,nt=nt,block=a.block,sc=digest(sc),sf=digest(sf),sm=digest(sm),files={f:hashlib.sha256(Path(__file__).with_name(f).read_bytes()).hexdigest() for f in files}),sort_keys=True)
+    ident=json.dumps(dict(forward_identity=json.loads(forward_ident),window=a.window,shrink=a.shrink),sort_keys=True)
+    consumer_key=hashlib.sha256(ident.encode()).hexdigest()[:24]
+    def write(k,c,f):atomic(work/f'forward-{k:08d}.npz',identity=forward_ident,k=k,c=c,f=f,cd=digest(c),fd=digest(f))
     def read(k):
         with np.load(work/f'forward-{k:08d}.npz',allow_pickle=False) as z:
-            if z['identity'].item()!=ident or int(z['k'])!=k:raise ValueError('checkpoint identity')
+            if z['identity'].item()!=forward_ident or int(z['k'])!=k:raise ValueError('checkpoint identity')
             c,f=z['c'],z['f']
             if c.shape!=xc.shape or f.shape!=xf.shape or digest(c)!=z['cd'].item() or digest(f)!=z['fd'].item() or not np.isfinite(c).all() or not np.isfinite(f).all():raise ValueError('checkpoint integrity')
             return c,f
@@ -106,7 +108,7 @@ def run(a):
                 if a.window:o[0,:,0,:][:,jf]=wf[ch,n]
                 elif nt-1<=n<=end:o[:3,:,:3,:]=bf[ch,n-nt+1]
                 return o
-            path=work/f'reverse-{pos}-{ch}.npz'
+            path=work/f'reverse-{consumer_key}-{pos}-{ch}.npz'
             cursor=end;lam=obs(end);signed=np.zeros((2,6,3));absolute=signed.copy()
             mismatch=np.zeros(3);direct=np.zeros(3);coarse_obs=np.zeros(3);fine_obs=np.zeros(3)
             if path.exists():
@@ -163,7 +165,7 @@ def run(a):
             obs_scale=np.maximum(1.,np.maximum(abs(coarse_obs),abs(fine_obs))+bound)
             if not np.all(abs(fine_obs-coarse_obs-direct)<=1e-8*obs_scale):raise ValueError('independent receiver totals disagree')
             results[f'{pos}:{ch}']=dict(coarse=coarse_obs.tolist(),fine=fine_obs.tolist(),initial=initial.tolist(),signed=signed.tolist(),absolute=absolute.tolist(),observer=mismatch.tolist(),offset=off.tolist(),total=direct.tolist(),bound=bound.tolist())
-    return dict(phase='complete_experiment',identity=ident,results=results,far_patch_support_certificate=patch_certificate,physical_causal_null_certified=False)
+    return dict(phase='complete_experiment',identity=ident,forward_identity=forward_ident,consumer_key=consumer_key,results=results,far_patch_support_certificate=patch_certificate,physical_causal_null_certified=False)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('work',type=Path);p.add_argument('--route',choices=['paired','ledger'],required=True);p.add_argument('--dt',type=float,default=.0006);p.add_argument('--allow-uncertified-cfl',action='store_true',help='diagnostic override of sufficient CFL envelope');p.add_argument('--block',type=int,default=32,help='anchor stride; recursive replay uses logarithmic block storage');p.add_argument('--budget',type=float,default=75);g=p.add_mutually_exclusive_group();g.add_argument('--window',action='store_true',help='fixed compact E4/SMS window');g.add_argument('--shrink',type=float,help='independent seven-jet patch width in bulk coordinate units');p.add_argument('--enlarged-box',action='store_true',help='normal extent 4.032; causal reference compatible, not certified production CFL')
