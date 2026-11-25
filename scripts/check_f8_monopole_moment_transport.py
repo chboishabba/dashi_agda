@@ -10,7 +10,7 @@ from ksw668_f8_fv_source_flux import primitives,exact_cell_averages
 from run_f8_monopole_shadow import maps
 
 
-def check():
+def check(kernel=None):
     eps=.04;I,_,wc,wf=maps();gc=exact_cell_averages(eps,np.arange(378)*.008,.008)[0,:-1];gf=exact_cell_averages(eps,np.arange(503)*.006,.006)[0,:-1]
     mapped=I@gc;P=primitives()[0]
     p=lambda u:0. if u<=0 or u>=1 else float(P(u))
@@ -42,8 +42,17 @@ def check():
     norm=lambda a:float(np.sqrt(wf@(a*a)))
     base=norm(mapped-gf)/norm(gf)
     rows=[dict(degree=d,relative=norm(r-gf)/norm(gf),weighted_moment=float(wf@r),max_abs=float(np.max(abs(r-gf)))) for d,r in enumerate(result)]
+    if kernel is not None:
+        k=np.asarray(kernel,float);assert k.shape==(len(gf)+1,) and k[-1]==0
+        for row,r in zip(rows,result):
+            row.update(far_e4_pred=float(k[:-1]@r),far_e4_discrepancy=float(k[:-1]@(gf-r)))
+        baseline_prediction=dict(fine=float(k[:-1]@gf),mapped=float(k[:-1]@mapped),oracle=float(k[:-1]@oracle))
+    else:baseline_prediction=None
     assert norm(oracle-gf)/norm(gf)<1e-12
     assert max(abs(wf@r-wc@gc) for r in result)<1e-8
-    return dict(base_relative=base,rows=rows,oracle_relative=norm(oracle-gf)/norm(gf),exact_gram_checks=checks,max_moment_residual=max_moment,max_quad_estimate=max_quad,source_cells=6,coarse_moment=float(wc@gc),fine_moment=float(wf@gf),fine_outer_cells=gf[5:7].tolist(),reconstructed_outer_cells=result[:,5:7].tolist())
+    return dict(baseline_prediction=baseline_prediction,base_relative=base,rows=rows,oracle_relative=norm(oracle-gf)/norm(gf),exact_gram_checks=checks,max_moment_residual=max_moment,max_quad_estimate=max_quad,source_cells=6,coarse_moment=float(wc@gc),fine_moment=float(wf@gf),fine_outer_cells=gf[5:7].tolist(),reconstructed_outer_cells=result[:,5:7].tolist())
 
-if __name__=='__main__':print(json.dumps(check(),indent=2))
+if __name__=='__main__':
+    import sys
+    kernel=json.load(open(sys.argv[1]))['kernel'] if len(sys.argv)>1 else None
+    print(json.dumps(check(kernel),indent=2))
