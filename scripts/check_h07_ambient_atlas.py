@@ -60,8 +60,8 @@ for key,(v,w) in dirs.items():
                 else:
                     require(rr==charts[r],'directed transition'); pair_count+=1
             # Actual cyclic permutation of the last three ambient coordinates.
-            rot=lambda x:(x[0],x[1],x[4],x[2],x[3])
-            perm=(0,1,3,4,2); r=tuple(sorted(perm[i] for i in p))
+            rot=lambda x:(x[0],x[1],x[3],x[4],x[2])
+            perm=(0,1,4,2,3); r=tuple(sorted(perm[i] for i in p))
             rr=chart(*(rot(x) for x in rep),r)
             require(rr is not None and points(*rr)==frozenset(map(rot,ambient)),'rotation covariance'); rotate_count+=1
             if p==(0,1) and all(rep[1][i] for i in (2,3,4)): stable+=1
