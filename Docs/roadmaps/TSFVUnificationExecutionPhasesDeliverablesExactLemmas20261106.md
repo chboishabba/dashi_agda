@@ -192,3 +192,7 @@ For every row claimed complete, record:
 
 **Current terminal verdict:** real parent→child integration accomplished for pinned #1444 SHA, native source proofs and chosen control examples added, exact 186-ID ledger accounted for. **Agda kernel verification remains without a recorded run; original S01–S10 physical producer construction is NOT COMPLETE.** A valid completion must construct the real original physical objects, not merely add more interface records or close a chosen free model.
 
+
+## AQ cross-PR physical cone donor (26 Nov 2026)
+
+[Hopf #1554 AQ](https://github.com/chboishabba/dashi_agda/blob/06c9ea82a186c9156f2f92c41d4fe653de3278c8/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md) consumes original same-arrow, inverse shear and full-metric probe theorem. Adds exact pointwise positive KK cone projection, two signed null roots, dual characteristic quadratic, finite null-probe conformal tomography in dimensions 4/5/6, and negative controls for raw coordinate signs and two-time nonconvexity. Original 5,0 fitted DASHIfine diagnostics reopened, not a new empirical 5,1 result. 5,1 requires two independent positive fibres over 3,1; original periodic Hopf uses one. Use existing physical same-metric and observed access records; actual signal response, principal frame, clock calibration, selected observer-to-metric and OS weld remain, not paid by finite access or cone algebra. No promotion or independent theorem duplication, no native run.
