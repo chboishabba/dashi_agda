@@ -7,8 +7,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Unit using (tt)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Bool.Base using (T)
-open import Data.Product using (_,_)
+open import Data.Bool.Base using (T; not)
+open import Data.Product using (_,_; proj₂)
 open import Data.Bool.Properties using (T-∧)
 open import Function.Bundles using (Equivalence)
 open import Data.Nat.Base using (z≤n)
@@ -34,15 +34,14 @@ originInside : ∀ n → T (S.insideSquare? n K.origin)
 originInside n = Equivalence.from T-∧
   (Radius.positiveInCutoff n 0 z≤n , Radius.positiveInCutoff n 0 z≤n)
 
-falseImpossible : T false → L.⊥
-falseImpossible ()
+oppositeTruth : (b : Bool) → T b → T (not b) → L.⊥
+oppositeTruth true positive ()
+oppositeTruth false () negative
 
 falseOrigin : ∀ n → T (S.onSuccessorSquareShell? n K.origin) → L.⊥
-falseOrigin n proof with S.insideSquare? n K.origin | originInside n
-... | false | ()
-... | true | inside with S.insideSquare? (suc n) K.origin
-...   | false = falseImpossible proof
-...   | true = falseImpossible proof
+falseOrigin n proof =
+  oppositeTruth (S.insideSquare? n K.origin) (originInside n)
+    (proj₂ (Equivalence.to T-∧ proof))
 
 nonzero : ∀ n p → T (S.onSuccessorSquareShell? n p) → K.NonzeroLatticePoint
 nonzero n p onShell = K.nonzero-lattice-point p
