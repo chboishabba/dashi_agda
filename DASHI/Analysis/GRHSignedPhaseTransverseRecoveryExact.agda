@@ -188,3 +188,50 @@ physical6 = sixth 1ℚ (- (+ 15 / 1))
 
 physical8 : Eighth
 physical8 = eighth 1ℚ (+ 16 / 1) (- (+ 28 / 1))
+
+-- A declared linear consumer (e.g. a finite weighted evaluation) needs no
+-- transverse coordinate exactly when its mixed coefficient is zero.
+linear6 : ℚ → ℚ → Sixth → ℚ
+linear6 p q (sixth a c) = p * a + q * c
+
+linear8 : ℚ → ℚ → ℚ → Eighth → ℚ
+linear8 p r q (eighth a b c) = p * a + r * b + q * c
+
+old6LinearSuffices : (p q : ℚ) → q ≡ 0ℚ →
+  Consumer.FactorsThrough old6 (linear6 p q)
+old6LinearSuffices p .0ℚ refl = Factorized.factorizedRefinement
+  (λ a → p * a)
+  (λ { (sixth a c) → solve 3 (λ p a c →
+       (p :* a :+ con 0ℚ :* c) := (p :* a)) refl p a c })
+
+old8LinearSuffices : (p r q : ℚ) → q ≡ 0ℚ →
+  Consumer.FactorsThrough oldObserve8 (linear8 p r q)
+old8LinearSuffices p r .0ℚ refl = Factorized.factorizedRefinement
+  (λ { (old8 a b) → p * a + r * b })
+  (λ { (eighth a b c) → solve 5 (λ p r a b c →
+       (p :* a :+ r :* b :+ con 0ℚ :* c) := (p :* a :+ r :* b))
+       refl p r a b c })
+
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl e = e
+
+old6LinearRequires : (p q : ℚ) →
+  Consumer.FactorsThrough old6 (linear6 p q) → q ≡ 0ℚ
+old6LinearRequires p q factor =
+  trans (sym (solve 2 (λ p q →
+          (p :* con 0ℚ :+ q :* con 1ℚ) := q) refl p q))
+    (trans (sym (Consumer.factorsThroughImpliesFibreConstant factor
+      (sixth 0ℚ 0ℚ) (sixth 0ℚ 1ℚ) refl))
+      (solve 2 (λ p q → (p :* con 0ℚ :+ q :* con 0ℚ) := con 0ℚ)
+        refl p q))
+
+old8LinearRequires : (p r q : ℚ) →
+  Consumer.FactorsThrough oldObserve8 (linear8 p r q) → q ≡ 0ℚ
+old8LinearRequires p r q factor =
+  trans (sym (solve 3 (λ p r q →
+          (p :* con 0ℚ :+ r :* con 0ℚ :+ q :* con 1ℚ) := q) refl p r q))
+    (trans (sym (Consumer.factorsThroughImpliesFibreConstant factor
+      (eighth 0ℚ 0ℚ 0ℚ) (eighth 0ℚ 0ℚ 1ℚ) refl))
+      (solve 3 (λ p r q →
+        (p :* con 0ℚ :+ r :* con 0ℚ :+ q :* con 0ℚ) := con 0ℚ)
+        refl p r q))
