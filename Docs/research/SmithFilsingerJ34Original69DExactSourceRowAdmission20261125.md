@@ -14,11 +14,11 @@ The original Smith/Filsinger-attributed J23–J33 **synthetic, externally prescr
 
 Commands on a checked-out PR #1537 branch:
 
-\`\`\`sh
+```sh
 python scripts/check_smith_filsinger_j33_coframe_initial_full_20261125.py --N 256 --frames j33_frames.json --out j33_full.json
 python scripts/check_smith_filsinger_j34_69d_exact_rows_20261125.py --j33 j33_full.json --out j34_exact_rows.json
 python scripts/test_smith_filsinger_j34_exact_rows_20261125.py --j33 j33_full.json --out j34_negative_tests.json
-\`\`\`
+```
 
 **Validation boundaries**: Only the new J34 source and test files are byte-identical to the locally executed files at their cited Git blobs. The J31/J32 original source primitives loaded in local J34 were a source-equivalent copy of their mathematical functions; this is **not** a claim of running the entire latest upstream dependency byte-for-byte. The full J33 receipt digest and original source identities are checked at J34 ingress.
 
