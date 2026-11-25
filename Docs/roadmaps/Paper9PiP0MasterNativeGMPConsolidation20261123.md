@@ -1523,3 +1523,11 @@ weld, four literal coefficient equations; then consume actualCMWeightedPeriod.
 Exact original coefficient packet shift and independent 128/160/256-bit
 dyadic algorithm replay passed; A4 analytic interval reflection remains unpaid.
 No kernel acceptance, native same-real proof, or performance improvement claimed.
+
+
+## 25 November — scalar reciprocal and normalized cusp replacement cut
+
+See [scalar reciprocal proof and normalized cusp window](../proofs/Paper9ScalarReciprocalNormalizedCusp20261125.md). This supersedes the previous bivariate residual construction as the critical path, retaining it as an independent proof route.
+A5 uses the original chart-0 and chart-1 factors and the 40-index finite polynomial difference, with scalar derivative comparison only. Lean Paper9ScalarReciprocal (32057f677a9185175cbf32b172131ce263b54cc0) contains source-written reverse binding, finite product difference, algebra, scalar germ and existing literal-prefix endpoint consumers. Actual germ and coefficient instantiation plus kernel replay remain.
+A4 uses j=1/q+744+O(q), explicit error <=500000|q|, and exact rational positive exponential window with original Machin/sqrt dyadics. Lean Paper9CMNormalizedCuspWindow (4e0df23da0f7718d29ed673f11cd74ec581f7508) contains the finite predicate and root consumer. Actual exp/Fourier semantic binding remains.
+Local SymPy 11+1 exact identities, 164 product-difference cases, Fraction exponential and Fourier constants, and original packet BigInt shift/ratio/dominance passed. No full residual replay or native kernel acceptance this turn. F1/F5 and production performance objectives unchanged.
