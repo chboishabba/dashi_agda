@@ -1,4 +1,4 @@
-## 25 November — 0a12f1c4 signed conditional sharp gap receipt and unpaid physical frontier
+## 25 November — 0a12f1c1 signed conditional sharp gap receipt and unpaid physical frontier
 
 **Verified `master` `0a12f1c1f793d117e1c947220dd1fe1264f6f02a`.** Added `YMClayOriginalWilsonContinuousA2BridgeExact.covarianceSharpSignedGapBound`: conditional signed `[-1,1]` covariance difference `≤4 μχ`, preserved the existing 8q bound. The theorem explicitly consumes `ContinuousWilsonArithmetic.centeredProductOscillation`, a width-four centered-product certificate; the real ordered-algebra inhabitant of this authority is NOT constructed in this commit. Reported sanctioned Agda, SymPy oscillation and sharpness, finite regression, frontier/literature/unconditional/static PASS; NOT independently rerun in this roadmap update. No original SU(N) trace/continuous clamp/Haar good-mass, physical P-CONT/P-MATCH/P-SMALL, E1 full kernel or Clay endpoint payment.
 
