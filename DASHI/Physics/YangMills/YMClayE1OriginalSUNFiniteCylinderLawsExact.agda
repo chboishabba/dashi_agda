@@ -100,12 +100,9 @@ module _
         oneLink bilateral (Quotient.divide quotient) n)
       limitLaws quotient division
   fixedCutoffFiniteLaws source n = record
-    { Limit.FinitePhysicalNormalizedFamily.finiteMeasure =
-        λ _ → nativeMeasure n
-    ; Limit.FinitePhysicalNormalizedFamily.integrationLaws =
-        λ _ → integrals source n
-    ; Limit.FinitePhysicalNormalizedFamily.partitionNonzero =
-        λ _ → nonzero source n
+    { finiteMeasure = λ _ → nativeMeasure n
+    ; integrationLaws = λ _ → integrals source n
+    ; partitionNonzero = λ _ → nonzero source n
     }
 
   -- Notice: finiteExpectation (fixedCutoffFiniteLaws source n) zero
@@ -230,25 +227,25 @@ module _
     PhysicalRealSequentialConvergenceLaws →
     E1.SelectedScalarConvergence ℝ
   realSelectedScalarLaws topology = record
-    { E1.SelectedScalarConvergence.zero = 0ℝ
-    ; E1.SelectedScalarConvergence.one = 1ℝ
-    ; E1.SelectedScalarConvergence.add = _+ℝ_
-    ; E1.SelectedScalarConvergence.multiply = _*ℝ_
-    ; E1.SelectedScalarConvergence.Nonnegative =
+    { zero = 0ℝ
+    ; one = 1ℝ
+    ; add = _+ℝ_
+    ; multiply = _*ℝ_
+    ; Nonnegative =
         λ value → 0ℝ ≤ℝ value
-    ; E1.SelectedScalarConvergence.Converges =
+    ; Converges =
         PhysicalRealConverges
-    ; E1.SelectedScalarConvergence.convergenceUnique =
+    ; convergenceUnique =
         convergenceUnique topology
-    ; E1.SelectedScalarConvergence.constantConverges =
+    ; constantConverges =
         constantConverges topology
-    ; E1.SelectedScalarConvergence.addConverges =
+    ; addConverges =
         addConverges topology
-    ; E1.SelectedScalarConvergence.multiplyConstantConverges =
+    ; multiplyConstantConverges =
         multiplyConstantConverges topology
-    ; E1.SelectedScalarConvergence.nonnegativeClosed =
+    ; nonnegativeClosed =
         nonnegativeClosed topology
-    ; E1.SelectedScalarConvergence.convergenceCongruent =
+    ; convergenceCongruent =
         convergenceCongruent topology
     }
 
@@ -314,12 +311,12 @@ module _
         bilateral (Quotient.divide quotient))
       (Observable selection) ℝ
   selectedRealization selection = record
-    { E1.CylinderRealization.realization =
+    { realization =
         λ n observable → selectedSection selection observable n
-    ; E1.CylinderRealization.zeroObservable = zeroObservable selection
-    ; E1.CylinderRealization.oneObservable = oneObservable selection
-    ; E1.CylinderRealization.addObservable = addObservable selection
-    ; E1.CylinderRealization.scalarObservable = scalarObservable selection
+    ; zeroObservable = zeroObservable selection
+    ; oneObservable = oneObservable selection
+    ; addObservable = addObservable selection
+    ; scalarObservable = scalarObservable selection
     }
 
   nativeExpectationExtensional :
@@ -442,33 +439,33 @@ module _
       (selectedRealization selection)
       (realSelectedScalarLaws topology)
   nativeSUNAsDependentE1Source finite selection topology selected = record
-    { E1.ActualVariableCutoffCylinderFamily.finitePhysicalMeasure =
+    { finitePhysicalMeasure =
         nativeMeasure
-    ; E1.ActualVariableCutoffCylinderFamily.originalNormalizedExpectation =
+    ; originalNormalizedExpectation =
         λ n → Physical.normalizedExpectation
-    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectation =
+    ; finiteExpectation =
         λ n observable →
           nativeExpectation n (selectedSection selection observable)
-    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectationIsOriginalWilson =
+    ; finiteExpectationIsOriginalWilson =
         λ n observable → refl
-    ; E1.ActualVariableCutoffCylinderFamily.finiteZero =
+    ; finiteZero =
         nativeSelectedExpectationZero finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteOne =
+    ; finiteOne =
         nativeSelectedExpectationOne finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteAdd =
+    ; finiteAdd =
         nativeSelectedExpectationAdd finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteScale =
+    ; finiteScale =
         nativeSelectedExpectationScale finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.PositiveCylinder =
+    ; PositiveCylinder =
         Nonnegative selection
-    ; E1.ActualVariableCutoffCylinderFamily.finitePositive =
+    ; finitePositive =
         λ n observable positive →
           nativeExpectationPositive finite n
             (selectedSection selection observable)
             (nonnegativeMeaning selection observable positive n)
-    ; E1.ActualVariableCutoffCylinderFamily.continuumExpectation =
+    ; continuumExpectation =
         continuumExpectation selected
-    ; E1.ActualVariableCutoffCylinderFamily.originalWilsonConverges =
+    ; originalWilsonConverges =
         originalWilsonCylinderConverges selected
     }
 
@@ -558,27 +555,27 @@ module _
   originWilsonPolynomialSelectedAlgebra :
     SelectedNativeCylinderAlgebra
   originWilsonPolynomialSelectedAlgebra = record
-    { SelectedNativeCylinderAlgebra.Observable = OriginWilsonPolynomial
-    ; SelectedNativeCylinderAlgebra.selectedSection =
+    { Observable = OriginWilsonPolynomial
+    ; selectedSection =
         evalOriginWilsonPolynomial
-    ; SelectedNativeCylinderAlgebra.zeroObservable = zeroP
-    ; SelectedNativeCylinderAlgebra.oneObservable = oneP
-    ; SelectedNativeCylinderAlgebra.addObservable = addP
-    ; SelectedNativeCylinderAlgebra.scalarObservable = scaleP
-    ; SelectedNativeCylinderAlgebra.zeroMeaning =
+    ; zeroObservable = zeroP
+    ; oneObservable = oneP
+    ; addObservable = addP
+    ; scalarObservable = scaleP
+    ; zeroMeaning =
         λ n links → refl
-    ; SelectedNativeCylinderAlgebra.oneMeaning =
+    ; oneMeaning =
         λ n links → refl
-    ; SelectedNativeCylinderAlgebra.addMeaning =
+    ; addMeaning =
         λ n left right links → refl
-    ; SelectedNativeCylinderAlgebra.scalarMeaning =
+    ; scalarMeaning =
         λ n scalar expr links → refl
-    ; SelectedNativeCylinderAlgebra.Nonnegative =
+    ; Nonnegative =
         λ expr → ∀ n links →
           0ℝ ≤ℝ evalOriginWilsonPolynomial expr n links
-    ; SelectedNativeCylinderAlgebra.nonnegativeMeaning =
+    ; nonnegativeMeaning =
         λ expr positive n links → positive n links
-    ; SelectedNativeCylinderAlgebra.gaugeInvariantSelection =
+    ; gaugeInvariantSelection =
         originPolynomialGaugeInvariant
     }
 
@@ -614,17 +611,17 @@ module _
           theory traceData exponential beta oneLink bilateral
           (Quotient.divide quotient) n
     in record
-      { A2.ContinuousExpectationAlgebra.E = E
-      ; A2.ContinuousExpectationAlgebra.EZero =
+      { E = E
+      ; EZero =
           Limit.finiteExpectationZero family zero
-      ; A2.ContinuousExpectationAlgebra.EOne =
+      ; EOne =
           Limit.finiteExpectationOne family zero
-      ; A2.ContinuousExpectationAlgebra.EAdd = addLaw
-      ; A2.ContinuousExpectationAlgebra.EScale = scaleLaw
-      ; A2.ContinuousExpectationAlgebra.EPositive =
+      ; EAdd = addLaw
+      ; EScale = scaleLaw
+      ; EPositive =
           Limit.finiteExpectationPositive family zero
-      ; A2.ContinuousExpectationAlgebra.EExt = extLaw
-      ; A2.ContinuousExpectationAlgebra.ECenteredProduct =
+      ; EExt = extLaw
+      ; ECenteredProduct =
           A2.ContinuousWilsonArithmetic.centeredProductExpectation
             arithmetic E addLaw scaleLaw extLaw
       }
@@ -707,22 +704,22 @@ module _
     A2.ContinuousWilsonSourceContract
   originalSUNFixedCutoffA2Source finite arithmetic n lower upper =
     record
-      { A2.ContinuousWilsonSourceContract.Configuration =
+      { Configuration =
           Native.ActualLinks theory traceData exponential beta oneLink
             bilateral (Quotient.divide quotient) n
-      ; A2.ContinuousWilsonSourceContract.PlaquetteIndex =
+      ; PlaquetteIndex =
           Plaquette.PeriodicPlaquette n
-      ; A2.ContinuousWilsonSourceContract.expectation =
+      ; expectation =
           originalSUNFixedCutoffA2Expectation finite arithmetic n
-      ; A2.ContinuousWilsonSourceContract.deficit =
+      ; deficit =
           originalSUNRawPlaquetteDeficit n
-      ; A2.ContinuousWilsonSourceContract.deficitNonnegative = lower
-      ; A2.ContinuousWilsonSourceContract.deficitLeTwo = upper
-      ; A2.ContinuousWilsonSourceContract.gaugeInvariant =
+      ; deficitNonnegative = lower
+      ; deficitLeTwo = upper
+      ; gaugeInvariant =
           OriginalWilson.originalGaugeInvariant
             theory traceData exponential beta oneLink bilateral
             (Quotient.divide quotient) n
-      ; A2.ContinuousWilsonSourceContract.deficitGaugeInvariant =
+      ; deficitGaugeInvariant =
           originalSUNRawPlaquetteDeficitGaugeInvariant n
       }
 

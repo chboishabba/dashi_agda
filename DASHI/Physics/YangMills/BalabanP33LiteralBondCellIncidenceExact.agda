@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact where
 -- The five physical mechanisms may reuse this same exact incidence theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP

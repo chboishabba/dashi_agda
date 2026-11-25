@@ -95,7 +95,7 @@ sunTraceClass :
   Gauge.ClassFunction
     (SUN.sunMatrixGroup theory) (matrixWilsonValue traceData)
 sunTraceClass traceData = record
-  { Gauge.ClassFunction.conjugationInvariant =
+  { conjugationInvariant =
       sunTraceConjugationInvariant traceData
   }
 
@@ -148,17 +148,17 @@ sunSideFourWilsonC3 :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
     (traceData : SUNMatrixRealTrace theory)
-    (field : Gauge.GaugeField {G = SUN.SUNMatrixElement theory}
+    (gaugeField : Gauge.GaugeField {G = SUN.SUNMatrixElement theory}
       Spatial.ForwardBond4) {start}
     (loop : Gauge.Path Spatial.ForwardBond4 start start) →
   Gauge.loopObservable (SUN.sunMatrixGroup theory)
     (matrixWilsonValue traceData)
-    (Spatial.pullbackGaugeField field) loop
+    (Spatial.pullbackGaugeField gaugeField) loop
   ≡ Gauge.loopObservable (SUN.sunMatrixGroup theory)
-    (matrixWilsonValue traceData) field (Spatial.rotatePath loop)
-sunSideFourWilsonC3 theory traceData field loop =
+    (matrixWilsonValue traceData) gaugeField (Spatial.rotatePath loop)
+sunSideFourWilsonC3 theory traceData gaugeField loop =
   Spatial.wilsonC3Naturality
-    (SUN.sunMatrixGroup theory) (matrixWilsonValue traceData) field loop
+    (SUN.sunMatrixGroup theory) (matrixWilsonValue traceData) gaugeField loop
 
 ------------------------------------------------------------------------
 -- Reuse the older canonical SUNWilsonClassFunction theorem owner instead
@@ -174,9 +174,9 @@ asCanonicalSUNTraceAuthority :
   OriginalSUNTrace.SUNWilsonTraceAuthority
     {Scalar = Scalar} theory
 asCanonicalSUNTraceAuthority traceData = record
-  { OriginalSUNTrace.SUNWilsonTraceAuthority.normalizedRealTrace =
+  { normalizedRealTrace =
       matrixWilsonValue traceData
-  ; OriginalSUNTrace.SUNWilsonTraceAuthority.traceConjugationInvariant =
+  ; traceConjugationInvariant =
       sunTraceConjugationInvariant traceData
   }
 

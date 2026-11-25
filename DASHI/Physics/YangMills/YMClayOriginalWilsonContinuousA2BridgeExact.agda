@@ -350,10 +350,9 @@ module _
 
   curvatureCutoffRange : ∀ p links → Range01 (curvatureCutoff p links)
   curvatureCutoffRange p links =
-    ContinuousClampSource.clampNonnegative clampSource
-      (ContinuousWilsonSourceContract.deficit source p links) ,
-    ContinuousClampSource.clampLeOne clampSource
-      (ContinuousWilsonSourceContract.deficit source p links)
+    let half = halfNormalizedDeficit quotient source p links
+    in ContinuousClampSource.clampNonnegative clampSource half ,
+       ContinuousClampSource.clampLeOne clampSource half
 
   productRangeNonnegative : ∀ values →
     (∀ value → value ∈List values → Range01 value) →

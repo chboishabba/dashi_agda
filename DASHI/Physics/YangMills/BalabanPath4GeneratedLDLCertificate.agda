@@ -10,8 +10,7 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
-  (sq; sqDiff)
+import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact as Bool4
 open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
 
 ------------------------------------------------------------------------
@@ -55,15 +54,15 @@ lastCoordinate coordinate =
 
 path4NormSq : Path4Coordinates → ℚ
 path4NormSq coordinate =
-  sq (y0 coordinate)
-  + (sq (y1 coordinate)
-  + (sq (y2 coordinate) + sq (lastCoordinate coordinate)))
+  Bool4.sq (y0 coordinate)
+  + (Bool4.sq (y1 coordinate)
+  + (Bool4.sq (y2 coordinate) + Bool4.sq (lastCoordinate coordinate)))
 
 path4Energy : Path4Coordinates → ℚ
 path4Energy coordinate =
-  sqDiff (y1 coordinate) (y0 coordinate)
-  + (sqDiff (y2 coordinate) (y1 coordinate)
-  + sqDiff (lastCoordinate coordinate) (y2 coordinate))
+  Bool4.sqDiff (y1 coordinate) (y0 coordinate)
+  + (Bool4.sqDiff (y2 coordinate) (y1 coordinate)
+  + Bool4.sqDiff (lastCoordinate coordinate) (y2 coordinate))
 
 oneSixteenth : ℚ
 oneSixteenth = + 1 / 16

@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -239,9 +240,11 @@ smallImpliesNotLarge :
     scale configuration plaquette →
   SmallPlaquette dataSet scale configuration plaquette →
   LargePlaquette dataSet scale configuration plaquette → Empty
-smallImpliesNotLarge dataSet scale configuration plaquette small large
-  with ℚP.<⇒≱ small large
-... | ()
+smallImpliesNotLarge dataSet scale configuration plaquette small large =
+  eliminate (ℚP.<⇒≢ small (ℚP.≤-antisym (ℚP.<⇒≤ small) large))
+  where
+  eliminate : ⊥ → Empty
+  eliminate ()
 
 goodBlockOwnedPlaquetteSmall :
   ∀ {Scale Configuration Gauge Block Plaquette}
