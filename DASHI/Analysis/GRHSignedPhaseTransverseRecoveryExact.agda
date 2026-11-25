@@ -142,24 +142,24 @@ slice8Exact a b c = solve 3 (λ a b c →
      :+ c :* con 1ℚ :* con two :* (con 1ℚ :- con two) :* (con 1ℚ :- con two))
   := (con nine :* a :+ con four :* b :+ con two :* c)) refl a b c
 
-sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
-sym refl = refl
+phaseSym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+phaseSym refl = refl
 
-cong : {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-cong f refl = refl
+phaseCong : {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+phaseCong f refl = refl
 
 -- Every declared coefficient-chart consumer descends after transverse repair.
 sixthFactors : {Outcome : Set} (consumer : Sixth → Outcome) →
   Consumer.FactorsThrough observe6 consumer
 sixthFactors consumer = Factorized.factorizedRefinement
   (λ o → consumer (recover6 o))
-  (λ f → sym (cong consumer (recoverObserve6 f)))
+  (λ f → phaseSym (phaseCong consumer (recoverObserve6 f)))
 
 eighthFactors : {Outcome : Set} (consumer : Eighth → Outcome) →
   Consumer.FactorsThrough observe8 consumer
 eighthFactors consumer = Factorized.factorizedRefinement
   (λ o → consumer (recover8 o))
-  (λ f → sym (cong consumer (recoverObserve8 f)))
+  (λ f → phaseSym (phaseCong consumer (recoverObserve8 f)))
 
 -- Exact lost-mode witnesses on the old observations.
 old6 : Sixth → ℚ
@@ -199,28 +199,28 @@ linear8 p r q (eighth a b c) = p * a + r * b + q * c
 
 old6LinearSuffices : (p q : ℚ) → q ≡ 0ℚ →
   Consumer.FactorsThrough old6 (linear6 p q)
-old6LinearSuffices p .0ℚ refl = Factorized.factorizedRefinement
+old6LinearSuffices p q qZero rewrite qZero = Factorized.factorizedRefinement
   (λ a → p * a)
   (λ { (sixth a c) → solve 3 (λ p a c →
        (p :* a :+ con 0ℚ :* c) := (p :* a)) refl p a c })
 
 old8LinearSuffices : (p r q : ℚ) → q ≡ 0ℚ →
   Consumer.FactorsThrough oldObserve8 (linear8 p r q)
-old8LinearSuffices p r .0ℚ refl = Factorized.factorizedRefinement
+old8LinearSuffices p r q qZero rewrite qZero = Factorized.factorizedRefinement
   (λ { (old8 a b) → p * a + r * b })
   (λ { (eighth a b c) → solve 5 (λ p r a b c →
        (p :* a :+ r :* b :+ con 0ℚ :* c) := (p :* a :+ r :* b))
        refl p r a b c })
 
-trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-trans refl e = e
+phaseTrans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+phaseTrans refl e = e
 
 old6LinearRequires : (p q : ℚ) →
   Consumer.FactorsThrough old6 (linear6 p q) → q ≡ 0ℚ
 old6LinearRequires p q factor =
-  trans (sym (solve 2 (λ p q →
+  phaseTrans (phaseSym (solve 2 (λ p q →
           (p :* con 0ℚ :+ q :* con 1ℚ) := q) refl p q))
-    (trans (sym (Consumer.factorsThroughImpliesFibreConstant factor
+    (phaseTrans (phaseSym (Consumer.factorsThroughImpliesFibreConstant factor
       (sixth 0ℚ 0ℚ) (sixth 0ℚ 1ℚ) refl))
       (solve 2 (λ p q → (p :* con 0ℚ :+ q :* con 0ℚ) := con 0ℚ)
         refl p q))
@@ -228,9 +228,9 @@ old6LinearRequires p q factor =
 old8LinearRequires : (p r q : ℚ) →
   Consumer.FactorsThrough oldObserve8 (linear8 p r q) → q ≡ 0ℚ
 old8LinearRequires p r q factor =
-  trans (sym (solve 3 (λ p r q →
+  phaseTrans (phaseSym (solve 3 (λ p r q →
           (p :* con 0ℚ :+ r :* con 0ℚ :+ q :* con 1ℚ) := q) refl p r q))
-    (trans (sym (Consumer.factorsThroughImpliesFibreConstant factor
+    (phaseTrans (phaseSym (Consumer.factorsThroughImpliesFibreConstant factor
       (eighth 0ℚ 0ℚ 0ℚ) (eighth 0ℚ 0ℚ 1ℚ) refl))
       (solve 3 (λ p r q →
         (p :* con 0ℚ :+ r :* con 0ℚ :+ q :* con 0ℚ) := con 0ℚ)
