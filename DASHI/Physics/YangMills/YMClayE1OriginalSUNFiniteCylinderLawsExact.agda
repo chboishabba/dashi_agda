@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.List.Base using (List)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -724,3 +725,41 @@ module _
       ; A2.ContinuousWilsonSourceContract.deficitGaugeInvariant =
           originalSUNRawPlaquetteDeficitGaugeInvariant n
       }
+
+
+  ------------------------------------------------------------------------
+  -- Native gauge-invariant A2 CONTOUR geometry, not just a syntactic
+  -- arbitrary list: for every finite original periodic plaquette list,
+  -- its A2 soft union cutoff is invariant under the original on-site
+  -- SU(N) gauge transform. The "connecting" property and physical rate
+  -- still demand a source-selected geometric contour family.
+  ------------------------------------------------------------------------
+
+  originalSUNFixedCutoffA2ContourGaugeInvariant :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (clampSource : A2.ContinuousClampSource)
+    (n : Nat)
+    (rawDeficitNonnegative :
+      ∀ p links → 0ℝ ≤ℝ originalSUNRawPlaquetteDeficit n p links)
+    (rawDeficitAtMostTwo :
+      ∀ p links → originalSUNRawPlaquetteDeficit n p links
+        ≤ℝ (1ℝ +ℝ 1ℝ))
+    (contours : List (List (Plaquette.PeriodicPlaquette n))) →
+    OriginalWilson.originalGaugeInvariant
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient) n
+      (A2.badContourCutoff quotient arithmetic clampSource
+        (originalSUNFixedCutoffA2Source
+          finite arithmetic n rawDeficitNonnegative rawDeficitAtMostTwo)
+        contours)
+  originalSUNFixedCutoffA2ContourGaugeInvariant
+      finite arithmetic clampSource n lower upper contours gamma links =
+    A2.badContourCutoffNaturality
+      quotient arithmetic clampSource
+      (originalSUNFixedCutoffA2Source finite arithmetic n lower upper)
+      (λ config → Variable.periodicSUNGaugeTransform theory n config gamma)
+      (λ p config →
+        A2.ContinuousClampSource.congruent clampSource
+          (originalSUNRawPlaquetteDeficitGaugeInvariant n p gamma config))
+      contours links
