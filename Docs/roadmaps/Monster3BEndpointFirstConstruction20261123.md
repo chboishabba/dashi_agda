@@ -21,6 +21,14 @@
 
 ---
 
+
+
+### 25 November — full linear weight-frame weld (latest implementation ledger)
+
+[Exact source formulas, owner links, executed controls and remaining gaps](../physics/Monster3BActualLinearWeightFrameWeld20261125.md). Under previous A–C, R_x=P_B P_s rho(T_x^-1), I_x=rho(T_x)|S_s, orthogonality R_x I_y=delta_xy id and resolution sum I_x R_x=id yield full linear inverse Phi=sum I_x u_x and Psi_x=R_x w. Signed transport R_y^t rho(g) I_x^s follows by composition, not a pure-tensor-pair bijection. New Agda ActualLinearWeightFrame derives pointwise inverse, add/scale and signed roundtrip; Ibrahim Hom owner now exposes ActualLinearWeightHomSpace tied to the literal zeta carrier and same multiplicity carrier. Existing basis/vector correction and proof-relevant hardening retained; historical Cartesian contract not valid for full vectors. Lean #47 MonsterWeightFrame derives actual linear finite-copy equivalence and cross-sector transport (source-written, no kernels run). Python WeightFrame executes exact phase/weight inverse with zero sector retained; original MMV31 consumer streams two 729-weight charts with signed 12/78 projection and derives negative vacuum from original positive packet. Source-bound adapter unexecuted here. Local matching-blob Q(zeta3) reduced controls: 75 roundtrips, 1332 vacuum-range/same-weight inverse checks, 8 signed covariance equations, 18 coordinate-linearity checks and zero-coefficient rejection. No actual Monster execution. Remaining: authenticate original A/B source data; inhabit actual Conway K-linear action and weight-resolution laws, attach exact trace functional and existing character/cover weld, instantiate E4 seed-line operators on same actual vacuum, then P6. Numerical MMV31 roundtrip independent of characteristic-zero existence. Keep all source/fixture/formal/kernel boundaries explicit. No all-hit/character search or alternative canonical vacuum search.
+
+---
+
 ## 24 November 2026 — CURRENT P5 ENDPOINT: SAME-MONSTER 12→78 PROJECTIVE OPERATOR INTERTWINER, NO CUBIC ROOT GUESS
 
 **Latest actual implemented mathematical delivery** [source derivation/producer/consumer and exact phase/lemma status](../physics/Monster3BProjectiveDualSym2SameMonsterOperator20261124.md). Retain all P0–P6, canonical L01–L13 and old source owners; the latest entries below refine rather than erase older source receipts. Original GAP/CTblLib faithful12 plus Nebe dual-Sym²78 and actual Monster 90D B-vacuum C² splitting \(12+78\) remain prior paid sources, not discoveries made by this code. Original literal class4D word and full char0 6Suz action remain open.
