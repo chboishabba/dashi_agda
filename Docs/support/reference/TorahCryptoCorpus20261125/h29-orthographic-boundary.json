@@ -1,0 +1,908 @@
+{
+  "corpus": {
+    "genesis": {
+      "words": 20612,
+      "glyphs": 78069,
+      "holes": 1,
+      "conflicts": 0,
+      "endCounts": {
+        "final": 5227,
+        "medial": 0,
+        "other": 15385
+      },
+      "internalCounts": {
+        "final": 0,
+        "medial": 9736,
+        "other": 47721
+      },
+      "exceptions": []
+    },
+    "exodus": {
+      "words": 16713,
+      "glyphs": 63531,
+      "holes": 3,
+      "conflicts": 0,
+      "endCounts": {
+        "final": 3888,
+        "medial": 0,
+        "other": 12825
+      },
+      "internalCounts": {
+        "final": 0,
+        "medial": 8552,
+        "other": 38266
+      },
+      "exceptions": []
+    },
+    "leviticus": {
+      "words": 11950,
+      "glyphs": 44795,
+      "holes": 0,
+      "conflicts": 0,
+      "endCounts": {
+        "final": 2561,
+        "medial": 0,
+        "other": 9389
+      },
+      "internalCounts": {
+        "final": 0,
+        "medial": 5836,
+        "other": 27009
+      },
+      "exceptions": []
+    },
+    "numbers": {
+      "words": 16413,
+      "glyphs": 63545,
+      "holes": 0,
+      "conflicts": 0,
+      "endCounts": {
+        "final": 4122,
+        "medial": 0,
+        "other": 12291
+      },
+      "internalCounts": {
+        "final": 0,
+        "medial": 8877,
+        "other": 38255
+      },
+      "exceptions": []
+    },
+    "deuteronomy": {
+      "words": 14294,
+      "glyphs": 54910,
+      "holes": 0,
+      "conflicts": 0,
+      "endCounts": {
+        "final": 4308,
+        "medial": 0,
+        "other": 9986
+      },
+      "internalCounts": {
+        "final": 0,
+        "medial": 6844,
+        "other": 33772
+      },
+      "exceptions": []
+    }
+  },
+  "spans": [
+    {
+      "book": "genesis",
+      "ch": 36,
+      "v": 32,
+      "n": 31,
+      "roles": [
+        {
+          "role": 0,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 26,
+              "conflicts": 4,
+              "ceiling": 27
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 31,
+              "conflicts": 0,
+              "ceiling": 31
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 27,
+              "conflicts": 3,
+              "ceiling": 28
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 30,
+              "conflicts": 0,
+              "ceiling": 31
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 29,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 2,
+              "emptyAfter": 3,
+              "singleBefore": 0,
+              "singleAfter": 11,
+              "correctSingleAfter": 0,
+              "totalBefore": 58,
+              "totalAfter": 45
+            },
+            "twelve": {
+              "eligible": 29,
+              "truth": 10,
+              "truthAfter": 10,
+              "emptyBefore": 2,
+              "emptyAfter": 2,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 348,
+              "totalAfter": 275
+            }
+          }
+        },
+        {
+          "role": 1,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 28,
+              "conflicts": 1,
+              "ceiling": 29
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 31,
+              "conflicts": 0,
+              "ceiling": 31
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 25,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 6,
+              "emptyAfter": 7,
+              "singleBefore": 0,
+              "singleAfter": 6,
+              "correctSingleAfter": 0,
+              "totalBefore": 50,
+              "totalAfter": 42
+            },
+            "twelve": {
+              "eligible": 25,
+              "truth": 10,
+              "truthAfter": 10,
+              "emptyBefore": 6,
+              "emptyAfter": 6,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 300,
+              "totalAfter": 241
+            }
+          }
+        },
+        {
+          "role": 2,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 28,
+              "conflicts": 2,
+              "ceiling": 29
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 28,
+              "conflicts": 2,
+              "ceiling": 29
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 31,
+              "conflicts": 0,
+              "ceiling": 31
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 29,
+              "conflicts": 1,
+              "ceiling": 30
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 30,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 2,
+              "singleBefore": 0,
+              "singleAfter": 9,
+              "correctSingleAfter": 0,
+              "totalBefore": 60,
+              "totalAfter": 49
+            },
+            "twelve": {
+              "eligible": 30,
+              "truth": 10,
+              "truthAfter": 10,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 360,
+              "totalAfter": 298
+            }
+          }
+        }
+      ],
+      "wordCounts": [
+        8,
+        8,
+        7
+      ]
+    },
+    {
+      "book": "exodus",
+      "ch": 14,
+      "v": 19,
+      "n": 72,
+      "roles": [
+        {
+          "role": 0,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 56,
+              "conflicts": 12,
+              "ceiling": 58
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 64,
+              "conflicts": 6,
+              "ceiling": 65
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 72,
+              "conflicts": 0,
+              "ceiling": 72
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 63,
+              "conflicts": 6,
+              "ceiling": 65
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 70,
+              "conflicts": 1,
+              "ceiling": 71
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 64,
+              "truth": 5,
+              "truthAfter": 5,
+              "emptyBefore": 8,
+              "emptyAfter": 9,
+              "singleBefore": 0,
+              "singleAfter": 16,
+              "correctSingleAfter": 0,
+              "totalBefore": 128,
+              "totalAfter": 110
+            },
+            "twelve": {
+              "eligible": 64,
+              "truth": 32,
+              "truthAfter": 32,
+              "emptyBefore": 8,
+              "emptyAfter": 8,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 768,
+              "totalAfter": 638
+            }
+          }
+        },
+        {
+          "role": 1,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 61,
+              "conflicts": 7,
+              "ceiling": 63
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 67,
+              "conflicts": 3,
+              "ceiling": 68
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 72,
+              "conflicts": 0,
+              "ceiling": 72
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 62,
+              "conflicts": 7,
+              "ceiling": 63
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 68,
+              "conflicts": 2,
+              "ceiling": 69
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 65,
+              "truth": 5,
+              "truthAfter": 5,
+              "emptyBefore": 7,
+              "emptyAfter": 9,
+              "singleBefore": 0,
+              "singleAfter": 16,
+              "correctSingleAfter": 1,
+              "totalBefore": 130,
+              "totalAfter": 110
+            },
+            "twelve": {
+              "eligible": 65,
+              "truth": 32,
+              "truthAfter": 32,
+              "emptyBefore": 7,
+              "emptyAfter": 7,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 780,
+              "totalAfter": 640
+            }
+          }
+        },
+        {
+          "role": 2,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 64,
+              "conflicts": 5,
+              "ceiling": 66
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 69,
+              "conflicts": 2,
+              "ceiling": 70
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 72,
+              "conflicts": 0,
+              "ceiling": 72
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 66,
+              "conflicts": 4,
+              "ceiling": 67
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 69,
+              "conflicts": 2,
+              "ceiling": 70
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 65,
+              "truth": 5,
+              "truthAfter": 5,
+              "emptyBefore": 7,
+              "emptyAfter": 9,
+              "singleBefore": 0,
+              "singleAfter": 24,
+              "correctSingleAfter": 0,
+              "totalBefore": 130,
+              "totalAfter": 102
+            },
+            "twelve": {
+              "eligible": 65,
+              "truth": 32,
+              "truthAfter": 32,
+              "emptyBefore": 7,
+              "emptyAfter": 7,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 780,
+              "totalAfter": 631
+            }
+          }
+        }
+      ],
+      "wordCounts": [
+        15,
+        20,
+        21
+      ]
+    },
+    {
+      "book": "exodus",
+      "ch": 20,
+      "v": 13,
+      "n": 6,
+      "roles": [
+        {
+          "role": 0,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 5,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 10,
+              "totalAfter": 10
+            },
+            "twelve": {
+              "eligible": 5,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 60,
+              "totalAfter": 48
+            }
+          }
+        },
+        {
+          "role": 1,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 3,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 3,
+              "emptyAfter": 3,
+              "singleBefore": 0,
+              "singleAfter": 1,
+              "correctSingleAfter": 0,
+              "totalBefore": 6,
+              "totalAfter": 5
+            },
+            "twelve": {
+              "eligible": 3,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 3,
+              "emptyAfter": 3,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 36,
+              "totalAfter": 31
+            }
+          }
+        },
+        {
+          "role": 2,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 6,
+              "conflicts": 0,
+              "ceiling": 6
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 5,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 3,
+              "correctSingleAfter": 0,
+              "totalBefore": 10,
+              "totalAfter": 7
+            },
+            "twelve": {
+              "eligible": 5,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 60,
+              "totalAfter": 50
+            }
+          }
+        }
+      ],
+      "wordCounts": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "v": 6,
+      "n": 51,
+      "roles": [
+        {
+          "role": 0,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 46,
+              "conflicts": 4,
+              "ceiling": 46
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 49,
+              "conflicts": 2,
+              "ceiling": 49
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 51,
+              "conflicts": 0,
+              "ceiling": 51
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 48,
+              "conflicts": 2,
+              "ceiling": 48
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 51,
+              "conflicts": 0,
+              "ceiling": 51
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 50,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 20,
+              "correctSingleAfter": 0,
+              "totalBefore": 100,
+              "totalAfter": 80
+            },
+            "twelve": {
+              "eligible": 50,
+              "truth": 17,
+              "truthAfter": 17,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 600,
+              "totalAfter": 491
+            }
+          }
+        },
+        {
+          "role": 1,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 46,
+              "conflicts": 5,
+              "ceiling": 46
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 50,
+              "conflicts": 1,
+              "ceiling": 50
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 51,
+              "conflicts": 0,
+              "ceiling": 51
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 46,
+              "conflicts": 5,
+              "ceiling": 46
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 50,
+              "conflicts": 1,
+              "ceiling": 50
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 50,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 19,
+              "correctSingleAfter": 0,
+              "totalBefore": 100,
+              "totalAfter": 81
+            },
+            "twelve": {
+              "eligible": 50,
+              "truth": 17,
+              "truthAfter": 17,
+              "emptyBefore": 1,
+              "emptyAfter": 1,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 600,
+              "totalAfter": 486
+            }
+          }
+        },
+        {
+          "role": 2,
+          "orthographyViolations": 0,
+          "oracle": [
+            {
+              "k": "pair",
+              "keys": 47,
+              "conflicts": 3,
+              "ceiling": 47
+            },
+            {
+              "k": "pairBoundary",
+              "keys": 48,
+              "conflicts": 3,
+              "ceiling": 48
+            },
+            {
+              "k": "pairAllWordOffsets",
+              "keys": 51,
+              "conflicts": 0,
+              "ceiling": 51
+            },
+            {
+              "k": "pairTargetBoundary",
+              "keys": 50,
+              "conflicts": 1,
+              "ceiling": 50
+            },
+            {
+              "k": "pairAllBoundary",
+              "keys": 51,
+              "conflicts": 0,
+              "ceiling": 51
+            }
+          ],
+          "relations": {
+            "two": {
+              "eligible": 46,
+              "truth": 0,
+              "truthAfter": 0,
+              "emptyBefore": 5,
+              "emptyAfter": 10,
+              "singleBefore": 0,
+              "singleAfter": 14,
+              "correctSingleAfter": 0,
+              "totalBefore": 92,
+              "totalAfter": 68
+            },
+            "twelve": {
+              "eligible": 46,
+              "truth": 17,
+              "truthAfter": 17,
+              "emptyBefore": 5,
+              "emptyAfter": 5,
+              "singleBefore": 0,
+              "singleAfter": 0,
+              "correctSingleAfter": 0,
+              "totalBefore": 552,
+              "totalAfter": 450
+            }
+          }
+        }
+      ],
+      "wordCounts": [
+        15,
+        13,
+        12
+      ]
+    }
+  ],
+  "geometry": {
+    "ratio2": [
+      22,
+      14
+    ],
+    "ratio12": [
+      22,
+      9,
+      15,
+      4,
+      19,
+      6,
+      14,
+      23,
+      26,
+      10,
+      17,
+      18
+    ]
+  },
+  "notes": "Word-end flag is extra observed metadata only in a separate mask, not inferred from original two visible rows. Orthography convention tested against pinned written XML token boundaries; maqqef/tokenization is source specific. Oracle ceilings use true target labels for retrospective collision diagnostic only; not trained predictive accuracy. No target glyphs supplied to relation generation; truth used for scores. Existing fixtures exploratory."
+}
