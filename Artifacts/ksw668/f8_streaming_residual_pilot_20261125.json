@@ -1,0 +1,109 @@
+{
+  "scope": "Reduced two-mode E4 diagnostic on locally recovered literal stage/helper subset; no full checkout, no CI, no continuum certificate or source quadrature enclosure.",
+  "source": {
+    "predecessor": "bd3cb39bcfb81558feb56b1548eb48c2e3cf3bf8",
+    "consumer_blob": "b30e752dd4c85d87443320c3f0cce471dd3e924d",
+    "driver_blob": "0ec10f03ebfd2e84a22d53c3ee2137c793d2e411",
+    "local_subset_sha256": {
+      "stage": "43e91e024f77c20a464acd22e08ff8765e34c1154ec0385e3bb69317f896d033",
+      "weights_combine": "7df9b853646bc7a27f6fe2f723a52327d1d69110f5f7d23e1ab26171ec3f48a8",
+      "clock": "a16edc1eac88cc41de29cf959493189985a67c776c20bb2c22cbdffd0dec0807"
+    }
+  },
+  "manufactured": {
+    "checks": 38,
+    "sampled_norm": [
+      0.14318152515026536,
+      0.5106724847382991
+    ],
+    "hull_majorant": [
+      1.115677131313248,
+      1.7435385732371225
+    ]
+  },
+  "pilot": {
+    "n": 2,
+    "ny": 225,
+    "dt": 0.0005999023910881472,
+    "receiver": 0,
+    "cursors": [
+      0,
+      2198,
+      4517
+    ],
+    "checkpoint_sha": "213789845814a6a4c5e2c52d16dce2a5841608b1f4269a9e86793d326244124e",
+    "final_state_sha": "d475ce5f23ba3107f372a32766ae1d578c7a480ae127a459768366cb24b6fa34",
+    "seconds": [
+      18.005750140000146,
+      17.072712807000016
+    ],
+    "rows": [
+      "signed weighted volume residual",
+      "sampled L1_t L2_w volume residual",
+      "FP Bernstein majorant",
+      "signed wall discrepancy",
+      "sampled absolute wall discrepancy",
+      "sampled absolute wall time derivative",
+      "signed dual volume",
+      "signed dual wall",
+      "sampled dual residual norm"
+    ],
+    "ledger": [
+      [
+        -1.2253723191112038e-11,
+        -6.007664841515489e-13
+      ],
+      [
+        5.992283998480323e-10,
+        1.0973912436493567e-9
+      ],
+      [
+        8.072017434005078e-8,
+        1.615687166801624e-7
+      ],
+      [
+        1.6621067747314242e-14,
+        1.805366142123229e-14
+      ],
+      [
+        1.166132120917919e-12,
+        2.3140296768894916e-12
+      ],
+      [
+        1.3390596802533882e-10,
+        2.6771365390271405e-10
+      ],
+      [
+        -2.455493923688516e-14,
+        6.715624999377868e-15
+      ],
+      [
+        2.6534007423479368e-14,
+        -7.457019204257442e-15
+      ],
+      [
+        67.97345472115634,
+        67.95434901393591
+      ]
+    ],
+    "exact_sample": {
+      "slab": 111,
+      "mode": 1,
+      "rows": [
+        "L1_t L2_w residual",
+        "L1_t wall absolute",
+        "L1_t wall derivative absolute"
+      ],
+      "rational": [
+        "1271450786985001250915/2535301200456458802993406410752",
+        "148135180210699494342747379940695570240065537546160276949337/5021681388309344611068631538566133132881884355571227610316800000000000",
+        "218503598788214771262113456800265355071099916250055951625503485590620757227/8891385753927437593366929374047621781983543526132547452909895480878940815360000000"
+      ],
+      "approx": [
+        5.01498909382478e-10,
+        2.9499119668476684e-11,
+        2.4574751881808633e-8
+      ]
+    }
+  }
+}
