@@ -1,0 +1,111 @@
+{
+  "status": "CONDITIONAL_SI_SIGNED_COVARIANCE_FIBRE",
+  "checker_blob": "317f59e915db79e199d4903bf3527ea94f1aa567",
+  "donor_blob": "1a3a2df7892833ac4560d462c5d5843222767fff",
+  "execution": "actual local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0, SymPy 1.14.0 NumPy 2.3.5 SciPy 1.17.0; donor hash verified by script, committed checker readback matches local Git blob; no CI/kernel",
+  "inspected_sources": {
+    "spectral": "3fd8dc6a93bafcdbebae9b570713f9c9f2e6e164",
+    "uncertainty": "be0fb24a8b0f0314f07767bb2731b14f099d7bf6",
+    "iar": "c6ca519ea15f2888dd3cb7172b67f49137352ff4"
+  },
+  "acquisition": {
+    "GAMERA": "curl -IL --max-time 8 https://zenodo.org/records/16424673/files/PF_fig_JH.nc",
+    "AusLAMP": "curl -IL --max-time 5 https://ausmt.auscope.org.au/data/bundles/auslamp-qld-phase-3-edi.zip",
+    "result": "both DNS failures, no binary replay"
+  },
+  "fixture": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "areas_m2": [
+      1,
+      1000000
+    ],
+    "aspects": [
+      1,
+      1.5,
+      1.618033988749895
+    ],
+    "angle_deg": 90,
+    "source_trace_cap_W": 1,
+    "source_modes": [
+      "TE_x",
+      "TE_y",
+      "TM_x"
+    ],
+    "uniform_cross_section_equal_volume": true,
+    "assumed_rho_ohm_m": 1.68e-8,
+    "mode_count": 16,
+    "observer_ranks": {
+      "center_E": 2,
+      "center_E_H": 2,
+      "six_axes_E": 12,
+      "OCT26_E": 16
+    }
+  },
+  "results": {
+    "cases": 96,
+    "signed_contrasts": 64,
+    "sign_separated": 64,
+    "positive": 32,
+    "negative": 32,
+    "max_dual_gap_W": 7.07343674212267e-24,
+    "max_observer_condition": 2615.8939716685773,
+    "max_relative_gross_interval_width": {
+      "center_E": 9.518099219745216e-8,
+      "six_axes_E": 2.134039437078776e-9,
+      "OCT26_E": 0
+    },
+    "selected_center_E_1km2_pW": [
+      {
+        "f": 0.005,
+        "square": 28.934750072974776,
+        "ratio32": [
+          0.3672085490191071,
+          0.3672090921871969
+        ],
+        "phi": [
+          0.4367124201053024,
+          0.43671306607631816
+        ]
+      },
+      {
+        "f": 0.05,
+        "square": 28.916650768268102,
+        "ratio32": [
+          0.36985676769997133,
+          0.3698573234373381
+        ],
+        "phi_truth": 0.4398621576624229
+      },
+      {
+        "f": 3.915,
+        "square": 33.596969898922104,
+        "ratio32": [
+          -1.0784696781495156,
+          -1.0784691128712747
+        ],
+        "phi": [
+          -1.2825984362279723,
+          -1.2825977637393398
+        ]
+      },
+      {
+        "f": 7.83,
+        "square": 30.35752860968458,
+        "ratio32": [
+          -1.635707487726216,
+          -1.6357069698382465
+        ],
+        "phi": [
+          -1.9453081574485749,
+          -1.9453075412276246
+        ]
+      }
+    ]
+  },
+  "limits": "Exact-observation synthetic covariance and assumed trace cap, 16-mode fixed shell and ideal current-matched uniform cross-section receivers; no source-specific measurements, current density or terminal load guarantee, no regional state activation or actual source backaction. Numerical SVD and secular dual gaps, not interval-certified; full-rank/zero-radius branches use numerical tolerance. Frame comparison is abstract angular quadrature not sensor site prescription; local H redundant only in assumed boundary. No full donor suite replay. Signed contrasts not active net gain. No physical admission."
+}
