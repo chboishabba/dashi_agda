@@ -71,6 +71,7 @@ def main():
     ap.add_argument("--actual-mod31-hom",action="store_true",
         help="also construct actual mmgroup MMV(31) 90D Hom vacuum and 12/78 C2 sectors")
     ap.add_argument("--require-char0-expression",action="store_true",help="fail unless exact source-bound characteristic-zero expression is produced")
+    ap.add_argument("--legacy-projective-diagnostics",action="store_true",help="also run independent raw projective 78D searches; not required by the direct canonical source join")
     ap.add_argument("--both-mod31-phases",action="store_true",
         help="construct zeta=5 and 25 source Hom sectors, recover exact Qzeta12 candidate characters")
     ap.add_argument("--reuse-mod31-plus",type=Path,
@@ -354,7 +355,8 @@ def main():
                     else:
                         report["lemma_status"]["M3B-L10C_projective_12_to_78_plus"]=\
                             "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
-                if positive and model_paid:
+                legacy_search=args.legacy_projective_diagnostics or not (canonical_paid and args.both_mod31_phases)
+                if positive and model_paid and legacy_search:
                     iso_dir=out/"actual_mod31_78_intertwiner_plus"
                     if run("actual_MM_78_to_dual_Sym2_12_plus_intertwiner",[
                         sys.executable,
@@ -394,7 +396,7 @@ def main():
                             else:
                                 report["lemma_status"]["M3B-L10C_projective_12_to_78_both"]=\
                                     "ORIGINAL_SOURCE_CUBIC_OR_DUAL_SYM2_OBSTRUCTION"
-                        if model_paid:
+                        if model_paid and legacy_search:
                             iso_dir=out/"actual_mod31_78_intertwiner_both"
                             if run("actual_MM_78_to_dual_Sym2_12_both_intertwiners",[
                                 sys.executable,
@@ -424,7 +426,7 @@ def main():
                                 "--outdir",out/"actual_mod31_outer_phase_pair"]):
                                 report["lemma_status"]["M3B-L12R_actual_MM31_outer_phase_pair"]=\
                                     "GENUINE_MOD31_OUTER_PROJECTIVE_ACTION; NOT_COMPLEX"
-                                if model_paid and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase1.npz").is_file() and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase2.npz").is_file():
+                                if model_paid and legacy_search and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase1.npz").is_file() and (iso_dir/"actual_MM_projective_Sym2_78_intertwiner_phase2.npz").is_file():
                                     joined=out/"signed_outer_raw_join"
                                     raw_ok=run("signed_outer_raw_packet_join",[
                                         sys.executable,SCRIPTS/"monster3b_signed_outer_sym2_join.py",
