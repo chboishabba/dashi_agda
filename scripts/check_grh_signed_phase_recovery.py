@@ -6,6 +6,38 @@ from math import comb
 import sympy as s
 
 
+def recover_projective(m, samples):
+    """Recover H exactly from (ratio y/x at x=1, phase value) pairs."""
+    if not isinstance(m, int) or m < 1 or len(samples) != m//2+1:
+        raise ValueError('wrong homogeneous degree or number of samples')
+    u = s.Symbol('u')
+    points = []
+    for t, value in samples:
+        t, value = s.sympify(t), s.sympify(value)
+        if t.is_Rational is not True or value.is_Rational is not True or t < 0:
+            raise ValueError('nonnegative exact rational ratio and rational value required')
+        scale = (1-t)**(m%2)*(1+t)**(m-m%2)
+        if scale == 0:
+            raise ValueError('antisymmetric diagonal is not an observation')
+        points.append((t/(1+t)**2, value/scale))
+    if len({v for v,_ in points}) != len(points):
+        raise ValueError('aliased projective ratios')
+    return s.Poly(s.interpolate(points, u), u, domain=s.QQ)
+
+
+def weighted_mixed(m, points):
+    """Exact obstruction for the old sixth/eighth slices; points=(w,x,y)."""
+    if m not in (3,4):
+        raise ValueError('selected sixth/eighth mixed fibre only')
+    total = s.S.Zero
+    for point in points:
+        w,x,y = map(s.sympify, point)
+        if not all(v.is_Rational is True for v in (w,x,y)):
+            raise ValueError('exact rational weighted points required')
+        total += w*x*y*(x-y)**(1 if m==3 else 2)
+    return total
+
+
 def check():
     x, y, A, B, C = s.symbols('x y A B C')
     f6 = A*(x**3-y**3)+C*x*y*(x-y)
@@ -40,6 +72,8 @@ def check():
         assert M.rank()==k+1
         p=sum((-1)**j*comb(2*m,2*j)*x**(m-j)*y**j for j in range(m+1))
         coef=M.inv()*s.Matrix([obs(p,t) for t in ratios])
+        h=recover_projective(m, [(t, obs(p,t)) for t in ratios])
+        assert [h.nth(j) for j in range(k+1)]==list(coef)
         assert s.expand(sum(c*g for c,g in zip(coef,basis))-p)==0
         # Drop any one scalar sample: a nonzero invisible polynomial remains.
         for i in range(k+1):
@@ -53,6 +87,17 @@ def check():
         swapped=residual.xreplace({x:y,y:x})
         expected=-1 if f==f6 else 1
         assert s.expand(swapped-expected*residual)==0
+    same=[(1,1,2),(1,2,1)]
+    opposite=[(1,1,2),(-1,2,1)]
+    assert weighted_mixed(3,same)==0 and weighted_mixed(4,same)==4
+    assert weighted_mixed(3,opposite)==-4 and weighted_mixed(4,opposite)==0
+    for m,samples in [(3,[(0,0),(1,0)]), (4,[(0,0),(2,0),(s.Rational(1,2),0)]), (4,[(0,0)])]:
+        try:
+            recover_projective(m,samples)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('invalid observation accepted')
     print('PASS: sixth/eighth inverse and physical phases; signed lost-mode controls; 32 all-order projective recovery layers and 288 deletion tests; weighted parity controls')
 
 if __name__=='__main__':
