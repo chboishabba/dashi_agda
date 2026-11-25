@@ -1,0 +1,154 @@
+{
+  "sourceCommit": "d40e791e284305f1a219c57c353ba281a7a51335",
+  "sourceBlob": "06bbddcb6cc50192c0f71743cde971bbd20f5771",
+  "policy": "w plus ketiv k, exclude qere q; collisions explicit and excluded from window tests",
+  "chapters": 27,
+  "verses": 859,
+  "letters": 44795,
+  "sourceRoundtrips": 44795,
+  "ketiv": 5,
+  "qere": 5,
+  "anomalyCount": 0,
+  "conflicts": [],
+  "eligibleWindows": 805,
+  "equalWindows": [],
+  "exact72": [],
+  "chapterCounts": [
+    {
+      "c": 1,
+      "verses": 17,
+      "letters": 951
+    },
+    {
+      "c": 2,
+      "verses": 16,
+      "letters": 804
+    },
+    {
+      "c": 3,
+      "verses": 17,
+      "letters": 932
+    },
+    {
+      "c": 4,
+      "verses": 35,
+      "letters": 1984
+    },
+    {
+      "c": 5,
+      "verses": 26,
+      "letters": 1551
+    },
+    {
+      "c": 6,
+      "verses": 23,
+      "letters": 1153
+    },
+    {
+      "c": 7,
+      "verses": 38,
+      "letters": 1864
+    },
+    {
+      "c": 8,
+      "verses": 36,
+      "letters": 2079
+    },
+    {
+      "c": 9,
+      "verses": 24,
+      "letters": 1235
+    },
+    {
+      "c": 10,
+      "verses": 20,
+      "letters": 1256
+    },
+    {
+      "c": 11,
+      "verses": 47,
+      "letters": 2178
+    },
+    {
+      "c": 12,
+      "verses": 8,
+      "letters": 427
+    },
+    {
+      "c": 13,
+      "verses": 59,
+      "letters": 3240
+    },
+    {
+      "c": 14,
+      "verses": 57,
+      "letters": 3040
+    },
+    {
+      "c": 15,
+      "verses": 33,
+      "letters": 1658
+    },
+    {
+      "c": 16,
+      "verses": 34,
+      "letters": 2062
+    },
+    {
+      "c": 17,
+      "verses": 16,
+      "letters": 981
+    },
+    {
+      "c": 18,
+      "verses": 30,
+      "letters": 1253
+    },
+    {
+      "c": 19,
+      "verses": 37,
+      "letters": 1647
+    },
+    {
+      "c": 20,
+      "verses": 27,
+      "letters": 1584
+    },
+    {
+      "c": 21,
+      "verses": 24,
+      "letters": 1072
+    },
+    {
+      "c": 22,
+      "verses": 33,
+      "letters": 1606
+    },
+    {
+      "c": 23,
+      "verses": 44,
+      "letters": 2393
+    },
+    {
+      "c": 24,
+      "verses": 23,
+      "letters": 1037
+    },
+    {
+      "c": 25,
+      "verses": 55,
+      "letters": 2707
+    },
+    {
+      "c": 26,
+      "verses": 46,
+      "letters": 2408
+    },
+    {
+      "c": 27,
+      "verses": 34,
+      "letters": 1693
+    }
+  ],
+  "anomalies": []
+}

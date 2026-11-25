@@ -1,0 +1,199 @@
+{
+  "sourceCommit": "d40e791e284305f1a219c57c353ba281a7a51335",
+  "sourceBlob": "699ae4a942385f5616e78de1af85bb855c5e686f",
+  "policy": "w plus ketiv k, exclude qere q; collisions explicit and excluded from window tests",
+  "chapters": 36,
+  "verses": 1289,
+  "letters": 63545,
+  "sourceRoundtrips": 63545,
+  "ketiv": 9,
+  "qere": 9,
+  "anomalyCount": 0,
+  "conflicts": [],
+  "eligibleWindows": 1217,
+  "equalWindows": [],
+  "exact72": [],
+  "chapterCounts": [
+    {
+      "c": 1,
+      "verses": 54,
+      "letters": 2415
+    },
+    {
+      "c": 2,
+      "verses": 34,
+      "letters": 1470
+    },
+    {
+      "c": 3,
+      "verses": 51,
+      "letters": 2404
+    },
+    {
+      "c": 4,
+      "verses": 49,
+      "letters": 2571
+    },
+    {
+      "c": 5,
+      "verses": 31,
+      "letters": 1732
+    },
+    {
+      "c": 6,
+      "verses": 27,
+      "letters": 1319
+    },
+    {
+      "c": 7,
+      "verses": 89,
+      "letters": 4115
+    },
+    {
+      "c": 8,
+      "verses": 26,
+      "letters": 1368
+    },
+    {
+      "c": 9,
+      "verses": 23,
+      "letters": 1340
+    },
+    {
+      "c": 10,
+      "verses": 36,
+      "letters": 1559
+    },
+    {
+      "c": 11,
+      "verses": 35,
+      "letters": 2068
+    },
+    {
+      "c": 12,
+      "verses": 16,
+      "letters": 723
+    },
+    {
+      "c": 13,
+      "verses": 33,
+      "letters": 1470
+    },
+    {
+      "c": 14,
+      "verses": 45,
+      "letters": 2387
+    },
+    {
+      "c": 15,
+      "verses": 41,
+      "letters": 1963
+    },
+    {
+      "c": 16,
+      "verses": 35,
+      "letters": 1871
+    },
+    {
+      "c": 17,
+      "verses": 28,
+      "letters": 1468
+    },
+    {
+      "c": 18,
+      "verses": 32,
+      "letters": 1986
+    },
+    {
+      "c": 19,
+      "verses": 22,
+      "letters": 1268
+    },
+    {
+      "c": 20,
+      "verses": 29,
+      "letters": 1560
+    },
+    {
+      "c": 21,
+      "verses": 35,
+      "letters": 1805
+    },
+    {
+      "c": 22,
+      "verses": 41,
+      "letters": 2362
+    },
+    {
+      "c": 23,
+      "verses": 30,
+      "letters": 1410
+    },
+    {
+      "c": 24,
+      "verses": 25,
+      "letters": 1164
+    },
+    {
+      "c": 25,
+      "verses": 19,
+      "letters": 892
+    },
+    {
+      "c": 26,
+      "verses": 65,
+      "letters": 2923
+    },
+    {
+      "c": 27,
+      "verses": 23,
+      "letters": 1199
+    },
+    {
+      "c": 28,
+      "verses": 31,
+      "letters": 1425
+    },
+    {
+      "c": 29,
+      "verses": 39,
+      "letters": 1843
+    },
+    {
+      "c": 30,
+      "verses": 17,
+      "letters": 935
+    },
+    {
+      "c": 31,
+      "verses": 54,
+      "letters": 2597
+    },
+    {
+      "c": 32,
+      "verses": 42,
+      "letters": 2157
+    },
+    {
+      "c": 33,
+      "verses": 56,
+      "letters": 1977
+    },
+    {
+      "c": 34,
+      "verses": 29,
+      "letters": 1171
+    },
+    {
+      "c": 35,
+      "verses": 34,
+      "letters": 1772
+    },
+    {
+      "c": 36,
+      "verses": 13,
+      "letters": 856
+    }
+  ],
+  "anomalies": []
+}
