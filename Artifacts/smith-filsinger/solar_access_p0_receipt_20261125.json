@@ -1,0 +1,143 @@
+{
+  "status": "SOURCE_LOADED_NORMALIZED_MODEL_AND_SI_SCALE_DIAGNOSTIC",
+  "source_head": "dc1f37003dd3578b379c1019486801746a67ddb4",
+  "checker_blob": "9d1d838475ea8d524b4e89be683069e4f6ad8fc0",
+  "executed_byte_match": true,
+  "world_configurations": 36,
+  "worlds": 144,
+  "scope": "Exact rational steady-state resonant-mode ledgers for rounded aperture coupling values, floating geometry quadrature and illustrative SI scale. No physical source calibration, HF actuator construction, integrated Maxwell-ADE or actual Filsinger port weld. Source-off worlds ideal zero-feedthrough controls.",
+  "normalization": {
+    "incident_when_on": 0.5,
+    "source_external_damping": 1,
+    "source_internal_damping": 0.25,
+    "receiver_damping": 1,
+    "useful_fraction": 0.9,
+    "off_coupling": 0.1,
+    "on_coupling": 1,
+    "units": "normalized incident source energy rate; no common physical magnitude asserted across source channels"
+  },
+  "long_wave_selected": {
+    "off": {
+      "incident": 0.5,
+      "reflection": 0.172461577223482,
+      "natural_net": 0.327538422776518,
+      "useful": 0.011337868480725623,
+      "heat": 0.3162005542957924
+    },
+    "controlled_direct": {
+      "incident": 0.5,
+      "reflection": 0.006172839506172839,
+      "natural_net": 0.49382716049382713,
+      "useful": 0.35555555555555557,
+      "heat": 0.1382716049382716,
+      "delta_natural": 0.16628873771730915,
+      "incremental_control_cost_ceiling": 0.3442176870748299,
+      "actual_control_cost": null
+    },
+    "upconversion": [
+      {
+        "source": "solar_ULF_fixture",
+        "f_Hz": 1,
+        "ratio": 7800,
+        "natural_net": 0.4933824105254914,
+        "pump_conversion": 3053.8804918161172,
+        "useful": 2748.848382802099,
+        "net_useful": -305.0321090140183
+      },
+      {
+        "source": "lightning_Schumann_fixture",
+        "f_Hz": 7.8,
+        "ratio": 1000,
+        "natural_net": 0.4933824105254914,
+        "pump_conversion": 391.1817683452111,
+        "useful": 352.41953167828336,
+        "net_useful": -38.76223666692771
+      },
+      {
+        "source": "half_Schumann_hypothesis",
+        "f_Hz": 3.9,
+        "ratio": 2000,
+        "natural_net": 0.4933824105254914,
+        "pump_conversion": 782.755110032109,
+        "useful": 704.8355391964915,
+        "net_useful": -77.9195708356175
+      }
+    ]
+  },
+  "geometry": {
+    "equal_area_long_wave": "all three rectangle aspect ratios give identical uniform-field flux",
+    "finite_phase_gradient_k1_theta0_direct_incremental_budget": [
+      0.3412019617897182,
+      0.3392031978608335,
+      0.33868364135259205
+    ],
+    "aspect_order": [
+      1,
+      1.5,
+      1.618033988749895
+    ],
+    "hopf_quadrature_order": [
+      32,
+      48,
+      64
+    ],
+    "hopf_k": [
+      0,
+      0.01,
+      0.1,
+      1,
+      2
+    ],
+    "hopf_magnitudes": [
+      [
+        0,
+        0.0010388141257963402,
+        0.010371367712897983,
+        0.08800017572357084,
+        0.10280965002979249
+      ],
+      [
+        0,
+        0.001037646091923721,
+        0.0103597111173762,
+        0.08790558536894558,
+        0.10271709756012827
+      ],
+      [
+        0,
+        0.0010377213171432846,
+        0.010360463308369545,
+        0.08791302227344108,
+        0.1027309776996341
+      ]
+    ],
+    "hopf_dc_analytic": "compact solenoidal field volume integral zero; quadrature residual in z not exact zero",
+    "ranking_across_families": false
+  },
+  "si": {
+    "upstream_proton_kinetic_flux_W_m2": 0.00022051167939272462,
+    "illustrative_loop_open_emf_rms_V": 4.900884539600077e-11,
+    "illustrative_loop_available_W": 6.004667317622764e-22,
+    "assumptions": "NOAA typical 5/cm^3, 375 km/s, protons only; separate 7.8 Hz 1 pT RMS assumed band, 1 m^2-turn, 1 ohm series resistance and matched compensated load; no implication from upstream flux to local loop."
+  },
+  "donor": {
+    "hopf_head": "2a148f8c7b84b007f5b3dbe963538fcf1e7d382b",
+    "hopf_p0f_blob": "e746a4a1d32920595e82cc630aa57bbe56e0f5b1",
+    "hopf_p0e_blob": "103d0137548ec34a8c560f4df81dbd9caa812def",
+    "ade_terminal_blob": "b40208923744dcc2eab613473f28a57584d334da",
+    "sun_earth_blob": "bfc0eaa69abb0f3a5778eacf5f1f6b0f12ad9364"
+  },
+  "references": [
+    "https://www.spaceweather.gov/content/space-weather-glossary",
+    "https://doi.org/10.3390/atmos13010038",
+    "https://doi.org/10.1029/2025GL118532"
+  ],
+  "limits": [
+    "selected results only; full 36 rows and 144 worlds regenerable from exact local byte-matched checker",
+    "no physical antenna or solar ground calibration",
+    "no actual same-frequency HF-controlled admittance law established",
+    "upconversion inequality applies to selected action-preserving conversion class only",
+    "no source cross-correlation or simultaneous two-channel physical run",
+    "no CI or formal kernel"
+  ]
+}
