@@ -28,6 +28,17 @@ Reading the actual CMP119 source extract at pp. 254–258 yields:
 
 Thus **the source itself confirms that the scalar path reconstruction is mathematically appropriate only AFTER all conditioned domain and field histories have been fixed**. S_j is summed INSIDE T, not independently overcounted in the outer (2.18) list. This prevents a subtle double-count/normalization error when adapting a generic path toy model.
 
+## Primary-source Eq. (1.71) recheck from original CMP122-II PDF (25 Nov 2026)
+
+Original journal PDF checked locally: T. Bałaban, *Large Field Renormalization. II. Localization, Exponentiation, and Bounds for the R Operation*, Commun. Math. Phys. 122 (1989), 355--392, DOI [`10.1007/BF01238433`](https://doi.org/10.1007/BF01238433). The in-repo text extract at `Docs/support/reference/balaban-source-extracts/cmp122-rg-lattice-gauge-ii.txt` truncates the displayed Eq. (1.71) formula; OCR of printed pp. 378--379 confirms the following structural ingredients:
+
+- Eq. (1.71) defines `T_k(X)` for one component `X` by localized constrained integrations over fluctuation/gauge variables, with a sum over admissible domain histories and Euclidean symmetries `r`;
+- the exponential density contains the Wilson/action and quadratic forms, `V(X~, U_k)`, `E_k(X)`, a `(-3d(g_k) log g_k + log c_0) |(B_0 \ T_0) ∩ X|` factor, and `-E(A \ X)`;
+- p. 379 states `T = T_0 ∩ X`, `rT` is the axial tree in the transformed coordinate system, and the symmetry sum uses only the `2^d` coordinate reflections and `d!` permutations;
+- pp. 379--380 then derive the analyticity/comparison bounds (1.73)--(1.75) and the small-factor bound (1.89).
+
+This is a source-fidelity confirmation of `BalabanCMP122Equation171TOperationSemanticsExact`: the T-operation mass is the **result** of the localized integral, not a pre-existing global action exponential. It does **not** raise `literalCMP122Equation171FiniteRealizationLevel` or `literalCMP119StepIsEquation171OperationLevel`; the unpaid leaf remains one original Wilson/F19 four-mark instance whose conditional finite mass equals this literal localized T on selected CMP119 `Ω/Λ/S` histories with all gauge/FP/Jacobian/R and `E/R/B/V` factors. The original CMP119 journal PDF (DOI [`10.1007/BF01217741`](https://doi.org/10.1007/BF01217741), printed pp. 243--285) was located locally as well; its Eqs. (2.18)--(2.23) conclusion above is unchanged.
+
 ## Max-cut rather than another construction
 
 Reuse the existing Omega ownership, cubical geometry, collars, P3 integration, source Eq171 T, CMP119 ordered scalar expression, beta history and exact F19 four-mark producers. The remaining source attachment is a **single compatibility/witness** demonstrating that:

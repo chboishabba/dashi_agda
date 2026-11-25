@@ -5,11 +5,15 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsExact 
 --
 -- Primary source:
 -- T. Bałaban, "Large Field Renormalization. II. Localization,
--- Exponentiation, and Bounds for the R Operation", CMP 122 (1989), 355--392.
+-- Exponentiation, and Bounds for the R Operation", CMP 122 (1989), 355--392,
+-- DOI 10.1007/BF01238433 (https://doi.org/10.1007/BF01238433).
 --
--- Equation (1.71), pp. 378--379, defines the new T-operation on a component X
--- as a composition of localized integrations.  The integrand is an exponential
--- density containing the Wilson/action/quadratic/localized remainder terms.
+-- Equations (1.71)--(1.72), printed pp. 378--379 of the original journal PDF,
+-- define the new T-operation on a component X as a composition of localized
+-- integrations.  The integrand is an exponential density containing the
+-- Wilson/action/quadratic/localized remainder terms.  Page 379 states that
+-- T = T_0 ∩ X, that rT is the axial tree transformed by a Euclidean symmetry r,
+-- and that only 2^d reflections and d! coordinate permutations are summed.
 --
 -- Crucially, this is NOT the assertion
 --
