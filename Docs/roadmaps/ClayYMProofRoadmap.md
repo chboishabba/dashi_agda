@@ -8,6 +8,12 @@
 
 ---
 
+## 26 November 2026 — W1 affine polydisc constants kernel-checked
+
+**Verified master source:** `e80259c0034ba10622ee21e221957aac774df0eb` extends `YMClayOriginalAffineFibreHessianLedgerExact.agda` with kernel-checked `affineRadius = 9/100` constants: complex zero-free floor `8119/10000`, real lower/upper density `8281/10000`/`11881/10000`, and real/complex Hessian denominators `98386561/100000000`/`65918161/100000000`. The sanctioned Agda wrapper, `git diff --check`, literature normalization, static self-test, A2 SymPy, sharp finite-TV, unconditional, and frontier gates PASS. These are rational DASHI algebra checks only; no source-selected CMP122 Eq. (1.71) identity, CMP116 `J`, continuous Haar disintegration, `K0>0` support, or physical shell rate is newly proved. W0/W3, P0X, E1 full kernel acceptance, and legacy `--safe` remain OPEN/BLOCKED; all Clay flags remain false.
+
+---
+
 ## 26 November 2026 — W1 original affine Hessian algebra kernel-checked
 
 **Verified master source:** `c0f125c40e08e844dc8da71e8a9c0651cdae49cc` adds `DASHI/Physics/YangMills/YMClayOriginalAffineFibreHessianLedgerExact.agda`. The sanctioned wrapper reports PASS for the exact affine determinant `K(W;s,t) KFG − (KF+tKFG)(KG+sKFG) = K0 KFG − KF KG` and the normalized connected-covariance/Hessian algebra `KFG/K − (KF_s/K)(KG_t/K) = (K0 KFG − KF KG)/K²`, with an explicit nonzero-mass premise. `git diff --check`, literature normalization, `check_agda_static.py --self-test`, A2 SymPy, sharp finite-TV, unconditional, and frontier gates also PASS. This is a DASHI algebraic W1 payment only: it does **not** identify the global affine mark with selected CMP122 Eq. (1.71), does not construct a CMP116 bond-valued `J`, does not supply continuous Haar disintegration or `K0>0` source support, and does not pay any physical rooted-shell rate. W0/W3 source proof, P0X, E1 full kernel acceptance, and the legacy `--safe` audit remain OPEN/BLOCKED; all Clay flags remain false.
