@@ -73,7 +73,7 @@ def source_exact(j33_path,state_radius=F(1,10**6),clock_radius=F(1,200000)):
   ('event4_to_event5',36,45,'Artifacts/smith-filsinger/j31_two_track_full_uv_on_32_slab_receipt_20261124.json'),
   ('event5_to_event6',45,54,'Artifacts/smith-filsinger/j32_event5_to_event6_signed_taylor_128slab_20261124.json'),
   ('event6_to_exact_tau_return',54,63,'Artifacts/smith-filsinger/j32_event6_broad_source_to_exact_tau_128slab_20261124.json')]
- # Real source-certified original first leg: h0 = original y1 - source Î¦0(x0,t1).
+ # Real source-certified original first leg: h0 = original y1 - source Φ0(x0,t1).
  end=[iv(v) for v in d['full_source_terminal_9D']]
  dx=[[iv(z) for z in row] for row in d['full_9x9_source_Dx_independent_event_clock']]
  dt=[iv(z) for z in d['full_event1_clock_partial_9D']]
