@@ -160,3 +160,80 @@ pivot02Terminal laws = Q.xyz-zyx (pivot02Exact laws)
 
 -- The selected nonzero/pivot-source-involution is not imported
 -- from unmerged branches or equated with analytic j/Monster objects.
+
+
+-- The finite arithmetic obligations above are discharged componentwise
+-- against the original add3/mul3 tables, without a postulate.
+leadValue : M.Sign → Trit → Trit
+leadValue s a = A.mul3 (inv a) (S.rawSlope s)
+
+leadTwice : (s : M.Sign) (a : Trit) →
+  leadValue s (leadValue s a) ≡ a
+leadTwice M.negative neg = refl
+leadTwice M.negative zer = refl
+leadTwice M.negative pos = refl
+leadTwice M.positive neg = refl
+leadTwice M.positive zer = refl
+leadTwice M.positive pos = refl
+
+signTwice : (s t : M.Sign) →
+  multiplySign (multiplySign t s) s ≡ t
+signTwice M.negative M.negative = refl
+signTwice M.negative M.positive = refl
+signTwice M.positive M.negative = refl
+signTwice M.positive M.positive = refl
+
+tailTwice : (s t : M.Sign) (a x : Trit) →
+  A.add3 (A.add3 x (A.mul3 (S.rawSlope t) (leadValue s a)))
+    (A.mul3 (S.rawSlope (multiplySign t s)) a) ≡ x
+tailTwice M.negative M.negative neg neg = refl
+tailTwice M.negative M.negative neg zer = refl
+tailTwice M.negative M.negative neg pos = refl
+tailTwice M.negative M.negative zer neg = refl
+tailTwice M.negative M.negative zer zer = refl
+tailTwice M.negative M.negative zer pos = refl
+tailTwice M.negative M.negative pos neg = refl
+tailTwice M.negative M.negative pos zer = refl
+tailTwice M.negative M.negative pos pos = refl
+tailTwice M.negative M.positive neg neg = refl
+tailTwice M.negative M.positive neg zer = refl
+tailTwice M.negative M.positive neg pos = refl
+tailTwice M.negative M.positive zer neg = refl
+tailTwice M.negative M.positive zer zer = refl
+tailTwice M.negative M.positive zer pos = refl
+tailTwice M.negative M.positive pos neg = refl
+tailTwice M.negative M.positive pos zer = refl
+tailTwice M.negative M.positive pos pos = refl
+tailTwice M.positive M.negative neg neg = refl
+tailTwice M.positive M.negative neg zer = refl
+tailTwice M.positive M.negative neg pos = refl
+tailTwice M.positive M.negative zer neg = refl
+tailTwice M.positive M.negative zer zer = refl
+tailTwice M.positive M.negative zer pos = refl
+tailTwice M.positive M.negative pos neg = refl
+tailTwice M.positive M.negative pos zer = refl
+tailTwice M.positive M.negative pos pos = refl
+tailTwice M.positive M.positive neg neg = refl
+tailTwice M.positive M.positive neg zer = refl
+tailTwice M.positive M.positive neg pos = refl
+tailTwice M.positive M.positive zer neg = refl
+tailTwice M.positive M.positive zer zer = refl
+tailTwice M.positive M.positive zer pos = refl
+tailTwice M.positive M.positive pos neg = refl
+tailTwice M.positive M.positive pos zer = refl
+tailTwice M.positive M.positive pos pos = refl
+
+selectedPivotInvolution : SourcePivotInvolution
+selectedPivotInvolution = record { onRaw = twice }
+  where
+  twice : (x : S.StableBlocks Trit) → pivotRaw (pivotRaw x) ≡ x
+  twice (S.stableBlocks (M.triple a0 a1 a2)
+      (M.triple s t u) (M.triple b0 b1 b2))
+    rewrite leadTwice s a0 | leadTwice s b0
+          | signTwice s t | signTwice s u
+          | tailTwice s t a0 a1 | tailTwice s u a0 a2
+          | tailTwice s t b0 b1 | tailTwice s u b0 b2 = refl
+
+-- This supplies the formerly conditional restricted rechart source.
+-- Kernel verification is still pending; the full ten-chart ambient
+-- atlas and the prefix isometry have distinct acceptance obligations.
