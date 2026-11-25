@@ -99,7 +99,12 @@ def step(n0,d0,b0,q0,dt,m,scale0,scale1,permeability=1.,source=None,mu=1.,tol=1e
     split=float(abs(.5*d@(K1*d)-.5*Q@phi-.5*et@(et/K1)))
     values=[closure,field_closure,gauss,prop,exchange,charge_defect,source_charge_defect,split,Dt,Dr,Bc,delta,numerical,We,Wb,Wv,Ws,transfer]
     if not np.all(np.isfinite(values)) or min(Dt,Dr,Bc)<-1e-9 or max(abs(closure),abs(field_closure),gauss,prop,exchange,charge_defect,source_charge_defect,split)>1e-8: raise RuntimeError('unpaid coupled ledger')
-    return n,d,b,q1,dict(residual=float(err),minimum=float(np.min(n/V1[:,None])),closure=float(closure),field_closure=float(field_closure),gauss=gauss,propagation=prop,exchange=exchange,charge_defect=charge_defect,source_charge_defect=source_charge_defect,split=split,delta=float(delta),source_work=Ws,electric_metric_work=We,magnetic_metric_work=Wb,volume_work=Wv,transport_loss=Dt,reaction_loss=Dr,chemical_remainder=Bc,numerical_work=numerical,transfer=transfer,face_amount=face_amount.tolist(),face_charge=face_charge.tolist())
+    return n,d,b,q1,dict(residual=float(err),minimum=float(np.min(n/V1[:,None])),closure=float(closure),field_closure=float(field_closure),gauss=gauss,propagation=prop,exchange=exchange,charge_defect=charge_defect,source_charge_defect=source_charge_defect,split=split,delta=float(delta),source_work=Ws,electric_metric_work=We,magnetic_metric_work=Wb,volume_work=Wv,transport_loss=Dt,reaction_loss=Dr,chemical_remainder=Bc,numerical_work=numerical,transfer=transfer,face_amount=face_amount.tolist(),face_charge=face_charge.tolist(),
+        edge_forward_amount=(dt*conductance[:,None]*m.D*a).tolist(),
+        edge_backward_amount=(dt*conductance[:,None]*m.D*y).tolist(),
+        edge_signed_amount=(dt*J).tolist(),edge_charge_current=j.tolist(),
+        midpoint_voltage=v.tolist(),source_current=s.tolist(),source_charge=q1.tolist(),
+        amount_residual=rn.tolist(),displacement_residual=rd.tolist(),gauss_residual=g1.tolist())
 
 def assay():
     import sympy as sp
