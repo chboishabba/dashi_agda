@@ -1,7 +1,6 @@
 """Finite exact controls for Hecke-symbol recovery, not actual modular symbols."""
 from fractions import Fraction as Q
 from math import isqrt
-from itertools import product
 from sympy import factorint, primerange
 
 checks = 0
@@ -69,5 +68,16 @@ for N in (11, 32, 37, 389, 8840664):
     while 5**k <= 4*B:
         k+=1
     check(5**(k-1)<=4*B<5**k)
-    print(f'N={N} index={index} Sturm={B} p=5 precision={k}')
+    # Prime-only coefficients: Hasse gives |a_l| <= floor(2 sqrt(B)).
+    # Recurrences supply composite coefficients (including bad primes).
+    H = isqrt(4*B)
+    kp=1
+    while 5**kp <= 2*H:
+        kp+=1
+    check(5**(kp-1)<=2*H<5**kp)
+    for a in (-H, -H+1, -1, 0, 1, H-1, H):
+        x=a % 5**kp
+        x=x-5**kp if 2*x>5**kp else x
+        check(x==a)
+    print(f'N={N} index={index} Sturm={B} p=5 all-n precision={k} prime-only precision={kp}')
 print(f'{checks}/{checks} exact controls PASS')
