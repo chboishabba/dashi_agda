@@ -8,6 +8,7 @@ open import Data.Nat.Base using (_≤_; _^_)
 import Data.Nat.Base as N
 import Data.Nat.Properties as NP
 open import Data.Empty using (⊥-elim)
+open import Relation.Nullary.Decidable.Core using (from-yes)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Sum.Base using (inj₁; inj₂)
 import Data.Integer.Base as Z
@@ -52,7 +53,7 @@ edgeDifference n = QP.≃-trans
     QP.≃-refl (s n) (edge n))
 
 absFrac : (a : Z.ℤ) (d : Nat) (nz : N.NonZero d) →
-  Q.∣ P.frac a d nz ∣ Q.≃ P.frac (Z.+_ Z.∣ a ∣) d nz
+  Q.∣ P.frac a d nz ∣ Q.≃ P.frac (Z.+_ (Z.∣ a ∣)) d nz
 absFrac a zero nz = ⊥-elim (N.≢-nonZero⁻¹ zero {{nz}} refl)
 absFrac (Z.+_ a) (suc d) nz = QP.≃-refl
 absFrac (Z.-[1+_] a) (suc d) nz = QP.≃-refl
@@ -62,7 +63,7 @@ edgeMagnitude : (n : Nat) →
   P.frac (Z.+_ (D.H n)) (G.qProduct (suc n)) (G.qProductNonZero (suc n))
 edgeMagnitude n = QP.≃-trans (QP.∣-∣-cong (edgeDifference n))
   (QP.≃-trans (absFrac (E.delta n) (G.qProduct (suc n)) (G.qProductNonZero (suc n)))
-    (subst (λ h → P.frac (Z.+_ Z.∣ E.delta n ∣)
+    (subst (λ h → P.frac (Z.+_ (Z.∣ E.delta n ∣))
       (G.qProduct (suc n)) (G.qProductNonZero (suc n)) Q.≃
       P.frac (Z.+_ h) (G.qProduct (suc n)) (G.qProductNonZero (suc n)))
       (D.hIsOriginalDefectMagnitude n) QP.≃-refl))
@@ -80,9 +81,9 @@ edgeBound n = QP.≤-respˡ-≃ (QP.≃-sym (edgeMagnitude n))
 -- The positive series gap is tiny: A/M^n <= 1/n for every n>=1.
 positiveBudget : (n : Nat) → CH.A * suc n ≤ D.M ^ suc n
 positiveBudget n = NP.*-mono-≤
-  (NP.m≤m+n CH.A 2199009664143)
+  (from-yes (CH.A NP.≤? D.M))
   (NP.≤-trans (B.dyadicDenominator n)
-    (NP.^-monoˡ-≤ (NP.m≤m+n 2 2199023255550)))
+    (NP.^-monoˡ-≤ n (from-yes (2 NP.≤? D.M))))
 
 budgetInv : (n : Nat) → edgeBudget (suc n) Q.≤ (Z.+_ 1 Q./ suc n)
 budgetInv n = A.fracOrder (Z.+_ CH.A) (Z.+_ 1)
@@ -99,11 +100,11 @@ widthEq : (n : Nat) → (hi n Q.- lo n) Q.≃ Q.∣ s (suc n) Q.- s n ∣
 widthEq n with QP.≤-total (s n) (s (suc n))
 ... | inj₁ h =
   QP.≃-trans
-    (QP.+-cong (QP.p≤q⇒p⊔q≃q h) (QP.neg-cong (QP.p≤q⇒p⊓q≃p h)))
+    (QP.+-cong (QP.p≤q⇒p⊔q≃q h) (QP.-‿cong (QP.p≤q⇒p⊓q≃p h)))
     (QP.≃-sym (QP.0≤p⇒∣p∣≃p (QP.p≤q⇒0≤q-p h)))
 ... | inj₂ h =
   QP.≃-trans
-    (QP.+-cong (QP.p≥q⇒p⊔q≃p h) (QP.neg-cong (QP.p≥q⇒p⊓q≃q h)))
+    (QP.+-cong (QP.p≥q⇒p⊔q≃p h) (QP.-‿cong (QP.p≥q⇒p⊓q≃q h)))
     (QP.≃-trans
       (QP.≃-sym (QP.0≤p⇒∣p∣≃p (QP.p≤q⇒0≤q-p h)))
       (QP.≃-trans
@@ -142,7 +143,7 @@ seriesReal : R.ℝ
 seriesReal = Regular.realizeRegularApproximation seriesRegular
 
 seriesPositive : R.Positive seriesReal
-seriesPositive = R.pos* (zero , Q.*<* (Z.+<+ (NP.m≤m+n 2 13591407)))
+seriesPositive = R.pos* (zero , Q.*<* (Z.+<+ (from-yes (2 NP.≤? CH.A))))
 
 -- The actual sequence is the original prefix including n=0. The
 -- vendor's 1/n approximation lemma gives convergence at positive n.
