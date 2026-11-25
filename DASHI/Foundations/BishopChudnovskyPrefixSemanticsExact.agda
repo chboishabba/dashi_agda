@@ -4,7 +4,7 @@ module DASHI.Foundations.BishopChudnovskyPrefixSemanticsExact where
 -- Original raw prefix, signed product and rational sum. No new pi carrier.
 -- The factorial identification is a separate source bridge; this module
 -- proves intended rational prefix semantics from the actual merge edges.
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥-elim)
 import Data.Nat.Base as N
