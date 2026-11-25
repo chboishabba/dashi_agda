@@ -6,7 +6,7 @@ Conditional on original atom denominator <= 8 and invariant diagonal norm
 """
 from dataclasses import dataclass
 from functools import reduce
-from math import gcd, prod
+from math import gcd, prod, lcm
 from fractions import Fraction
 import numpy as np
 
@@ -30,28 +30,56 @@ def centered_crt(residues):
     return np.where(a>M//2,a-M,a)
 
 
-def integer_atom(a, atom, residue_action, weights):
-    """Return 8*rho(atom)a, in the original external coordinates."""
+def integer_block(a, block, residue_action, weights, denominator):
+    """Return denominator*rho(block)a, certified by the original norm bound."""
     a=np.asarray(a,dtype=object)
     require(a.ndim==1 and len(a)==len(weights),'wrong vector shape')
     require(all(isinstance(x,(int,np.integer)) for x in a),'noninteger limb input')
     require(all(w in (1,2) for w in weights),'invalid norm weights')
+    require(isinstance(denominator,int) and denominator>0,'invalid denominator bound')
+    weight_sum=sum(int(w) for w in weights)
+    # Choose the largest power of two (up to 4096) for which even the
+    # worst possible signed limb lies strictly inside the centered CRT range.
+    radix=4096
+    while radix>=2 and 4*denominator**2*(radix-1)**2*weight_sum>=M*M:
+        radix//=2
+    require(radix>=2,'CRT modulus too small for block')
     signs=np.array([1 if x>=0 else -1 for x in a],dtype=np.int64)
-    work=np.abs(a); out=np.zeros(len(a),dtype=object); radix_power=1
-    # The conservative bound also covers every possible limb of full DIM.
-    require(4*64*(RADIX-1)**2*sum(int(w) for w in weights)<M*M,'CRT modulus too small')
+    work=np.abs(a);out=np.zeros(len(a),dtype=object);radix_power=1
     while np.any(work):
-        limb=np.asarray(work%RADIX,dtype=np.int64)*signs
-        work=work//RADIX
+        limb=np.asarray(work%radix,dtype=np.int64)*signs
+        work=work//radix
         if np.any(limb):
-            residues=[(8*np.asarray(residue_action(limb,atom,p),dtype=np.int64))%p for p in MODULI]
-            require(all(r.shape==limb.shape for r in residues),'wrong native residue shape')
+            residues=[]
+            for p in MODULI:
+                r=np.asarray(residue_action(limb,block,p),dtype=np.int64)
+                require(r.shape==limb.shape,'wrong native residue shape')
+                residues.append((denominator*(r%p))%p)
             b=centered_crt(residues)
-            require(norm2(b,weights)==64*norm2(limb,weights),'native norm discrepancy')
+            require(norm2(b,weights)==denominator**2*norm2(limb,weights),'native norm discrepancy')
             out+=b.astype(object)*radix_power
-        radix_power*=RADIX
-    require(norm2(out,weights)==64*norm2(a,weights),'recombined norm discrepancy')
+        radix_power*=radix
+    require(norm2(out,weights)==denominator**2*norm2(a,weights),'recombined norm discrepancy')
     return out
+
+
+def integer_atom(a,atom,residue_action,weights):
+    return integer_block(a,atom,residue_action,weights,8)
+
+
+def atom_blocks(atoms,max_fractional=2):
+    """Original atom tags 1..4 integral, t/l (5/6) cost three dyadic bits."""
+    require(1<=max_fractional<=2,'unsupported block denominator bound')
+    chunk=[];cost=0
+    for atom in atoms:
+        tag=(int(atom)>>28)&7
+        require(1<=tag<=6,'unknown native atom tag')
+        extra=int(tag>=5)
+        if cost+extra>max_fractional:
+            yield tuple(chunk),8**cost
+            chunk=[];cost=0
+        chunk.append(int(atom));cost+=extra
+    if chunk:yield tuple(chunk),8**cost
 
 
 @dataclass(frozen=True, eq=False)
@@ -88,6 +116,31 @@ def scale(c,v):
     return normalize(A*v.a-B*v.b,B*v.a+(A-B)*v.b,v.d*d)
 
 
+def linear_combination(coefficients,vectors,dimension):
+    """Accumulate exact common-denominator numerators; normalize only once."""
+    den=1;A=np.zeros(dimension,dtype=object);B=A.copy()
+    for c,v in zip(coefficients,vectors,strict=True):
+        if not c:continue
+        require(v.a.shape==v.b.shape==(dimension,),'wrong summand shape')
+        cf=[Fraction(int(x.numerator),int(x.denominator)) for x in c.to_list()]
+        require(len(cf)<=2,'wrong cyclotomic field')
+        b,a=([Fraction(0)]*(2-len(cf))+cf)
+        d=lcm(a.denominator,b.denominator)*v.d
+        next_den=lcm(den,d)
+        if next_den!=den:
+            A*=next_den//den;B*=next_den//den;den=next_den
+        x=int(a*(den//v.d));y=int(b*(den//v.d))
+        A+=x*v.a-y*v.b;B+=y*v.a+(x-y)*v.b
+    return normalize(A,B,den)
+
+
+def block_action(v,blocks,residue_action,weights):
+    for atoms,d in blocks:
+        v=normalize(integer_block(v.a,atoms,residue_action,weights,d),
+                    integer_block(v.b,atoms,residue_action,weights,d),d*v.d)
+    return v
+
+
 def action(v,atoms,residue_action,weights):
     for atom in atoms:
         v=normalize(integer_atom(v.a,atom,residue_action,weights),
@@ -110,18 +163,18 @@ class ConwayNative:
         require(self.indices.shape==(DIM,) and not np.any(self.indices&255),'original external index chart')
         self.weights=np.ones(DIM,dtype=np.int64);self.weights[24:300]=2
 
-    def residue(self,limb,atom,p):
+    def residue_block(self,limb,atoms,p):
         v=self.MMV(p)(); val=np.asarray(limb%p,dtype=np.uint32)
         v.space.setitems_sparse(v,self.indices|val)
         require(np.array_equal(np.asarray(v['E'],dtype=np.int64)%p,val),'original external coordinate write mismatch')
-        a=np.array([atom],dtype=np.uint32)
-        self.op(p,v.data,a,1,1,self.work(p))
+        a=np.asarray(atoms,dtype=np.uint32)
+        status=self.op(p,v.data,a,len(a),1,self.work(p))
+        require(status is None or status>=0,'native word action failure')
         return np.asarray(v['E'],dtype=np.int64)%p
 
     def act(self,v,g):
         atoms=tuple(int(a) for a in g.mmdata)
-        require(all(1<=((a>>28)&7)<=6 for a in atoms),'unknown native atom tag')
-        return action(v,atoms,self.residue,self.weights)
+        return block_action(v,atom_blocks(atoms),self.residue_block,self.weights)
 
     def unit(self,j):
         require(0<=j<DIM,'invalid original unit coordinate')
