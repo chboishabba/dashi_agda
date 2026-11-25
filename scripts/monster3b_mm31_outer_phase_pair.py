@@ -59,7 +59,7 @@ def open_original(path,zeta):
         raise ValueError("source basis pivots disagree with original source ledger")
     return result,rows,pivots,probes
 
-def reconstruct(rows,pivots,probes,zeta,V,z,B):
+def reconstruct(rows,pivots,probes,zeta,V,z,B,seed_vectors=None):
     inv=pow(3,-1,P)
     weights=[pow(zeta,-k,P) for k in range(3)]
     b2=[b**2 for b in B]
@@ -70,7 +70,9 @@ def reconstruct(rows,pivots,probes,zeta,V,z,B):
         return t
     basis=[];normalized=[]
     for j,idx in enumerate(probes):
-        w=project(V("E",idx))
+        if seed_vectors is not None and not 0<=idx<len(seed_vectors):
+            raise ValueError("invalid derived positive basis index")
+        w=project(seed_vectors[idx] if seed_vectors is not None else V("E",idx))
         arr=np.asarray(w["E"],dtype=np.int16)%P
         residual,coeff=row_span_coefficients(arr,normalized,pivots[:j])
         if not np.any(residual):
@@ -82,7 +84,7 @@ def reconstruct(rows,pivots,probes,zeta,V,z,B):
         for c,v in zip(coeff,basis):
             if c:w=w-c*v
         w=fac*w
-        if not np.array_equal(reduced,rows[j]):
+        if not np.array_equal(np.asarray(w["E"],dtype=np.int16)%P,reduced) or not np.array_equal(reduced,rows[j]):
             raise ValueError("original MMV31 saved true Monster vector reconstruction disagrees")
         if w*z!=zeta*w or any(w*b!=w for b in B):
             raise ValueError("source Monster reconstructed vector not in marked vacuum")
@@ -138,8 +140,7 @@ def main():
         cover=json.loads(a.cover.read_text())
         plus,Rp,Pp,sp=open_original(a.plus,5)
         minus,Rm,Pm,sm=open_original(a.minus,25)
-        if (plus.get("source_manifest")!=minus.get("source_manifest")
-            or manifest.get("source_blob_sha")!=
+        if (manifest.get("source_blob_sha")!=
              "c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2"):
             raise ValueError("not the same authenticated original Monster 3B E")
         source_hashes={}
@@ -171,7 +172,20 @@ def main():
             raise ValueError("canonical original Monster C does not invert 3B centre")
         V=MMV(P)
         Bp,proj_p=reconstruct(Rp,Pp,sp,5,V,z,B)
-        Bm,proj_m=reconstruct(Rm,Pm,sm,25,V,z,B)
+        if plus.get("derived_from_plus"):
+            raise ValueError("positive source must be direct original probe basis")
+        lineage=minus.get("derived_from_plus")
+        seed_vectors=None
+        if lineage:
+            ambient=a.plus/"ambient_basis_rows_mod31.npz"
+            if not ambient.is_file():ambient=a.plus/"ambient_basis_rows.npz"
+            if (lineage.get("source_plus_ambient_sha256")!=hashlib.sha256(ambient.read_bytes()).hexdigest() or
+                lineage.get("source_plus_status_sha256")!=hashlib.sha256((a.plus/"mmv31_hom_status.json").read_bytes()).hexdigest() or
+                lineage.get("C_word")!=cover["canonical_C_word"] or sm!=list(range(90))):
+                raise ValueError("derived minus basis original positive lineage mismatch")
+            seed_vectors=[v*C for v in Bp]
+        Bm,proj_m=reconstruct(Rm,Pm,sm,25,V,z,B,seed_vectors=seed_vectors)
+        record["minus_derived_from_original_plus"]=bool(lineage)
         Upm=source_action(Bp,proj_m,Rm,Pm,C)
         Ump=source_action(Bm,proj_p,Rp,Pp,C)
         if rank31(Upm)!=90 or rank31(Ump)!=90:
