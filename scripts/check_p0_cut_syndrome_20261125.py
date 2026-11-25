@@ -102,6 +102,7 @@ def calc(n,clauses,rows,target,order,paired=False,j=None,pins=None):
 
 def mat(rows,x):return tuple(sum(a*b for a,b in zip(row,x))%3 for row in rows)
 def toeplitz(n,k,a):return [[a[n-1+i-j] for j in range(n)] for i in range(k)]
+
 def ref(n,clauses):return [x for x in product(range(2),repeat=n) if all(any(x[i]==b for i,b in cl) for cl in clauses)]
 
 rng=Random(369);checks=coef=trans=back=nodes=entries=joins=peak=0
