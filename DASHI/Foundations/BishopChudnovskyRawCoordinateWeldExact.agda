@@ -296,4 +296,29 @@ rootUnique : (k r : Nat) →
   suc (Root.scaledSquareTarget 10005 (CH.rootScale k)) N.≤ suc r * suc r →
   CH.rootNumerator k ≡ r
 rootUnique k r lo hi =
-  Floor.floorSquareRootUnique (Root.scaledSquareTarget 10005 (CH.rootScale k)) r lo hi
+  sym (Floor.floorSquareRootUnique (Root.scaledSquareTarget 10005 (CH.rootScale k)) r lo hi)
+
+-- The literal integer sorting coordinates are exactly those used by
+-- CH.orderedInterval; neither rational comparison nor tie is changed.
+sortLeft : (n j : Nat) →
+  CH.num (rawView n) * CH.den (rawView j) ≡ rawT n * G.qProduct (suc j)
+sortLeft n j rewrite rawViewNum n | rawViewDen j = refl
+
+sortRight : (n j : Nat) →
+  CH.num (rawView j) * CH.den (rawView n) ≡ rawT j * G.qProduct (suc n)
+sortRight n j = sortLeft j n
+
+radiusNumZero : Q.↥ (rawRadius zero) ≡ Z.+_ 22
+radiusNumZero = refl
+
+radiusDenZero : Q.↧ₙ (rawRadius zero) ≡ 7
+radiusDenZero = refl
+
+radiusNumSuc : (n : Nat) → Q.↥ (rawRadius (suc n)) ≡ Z.+_ 4
+radiusNumSuc n = fracNum (Z.+_ 4) (25 ^ suc n) (NP.m^n≢0 25 (suc n))
+
+radiusDenSuc : (n : Nat) → Q.↧ₙ (rawRadius (suc n)) ≡ 25 ^ suc n
+radiusDenSuc n = fracDen (Z.+_ 4) (25 ^ suc n) (NP.m^n≢0 25 (suc n))
+
+-- A proof of the native RawCross family is still needed. This module
+-- establishes coordinate/consumer transport, not that family.
