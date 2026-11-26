@@ -155,6 +155,7 @@ def replay_span(F,proof,p,B,pairs=True):
 def character_relation_span(F,shifts,queries,p,B,max_pivots=4096):
     """Retain a replayed proof span and explicit proportionality certificates."""
     proof,empty=eliminate(F,shifts,p,B,max_pivots=max_pivots)
+    if empty:proof=compact(proof,B) # preserve compact contradiction replay
     basis=replay_span(F,proof,p,B)
     if basis is None:raise AssertionError('invalid character proof')
     if empty:
@@ -399,6 +400,13 @@ def test_constructive_character_quotient():
     B=Budget(10000000);P,w=demand_character_close(len(V),F,(),B,quotient_cap=64)
     assert len(P)==9 and w is not None and all((lift(u,V,w)&r).bit_count()==1 for r in R)
     assert B.stats['character_module_dimension']==4
+    Q,w0=demand_character_close(len(V),F,(),Budget(10000000),quotient_cap=1)
+    assert Q==P and w0 is None
+    # A non-sign proportionality is itself an exact contradiction over F5.
+    A=(((4,0),(6,1),(3,1),(1,0)),)
+    proof,rel,zero=character_relations(A,(0,),range(8),5,Budget(1000000))
+    assert zero is None and any(c not in (1,4) for s,t,c in rel)
+    assert verify_relations(A,proof,rel,zero,5,Budget(1000000)) and relation_pins(rel,zero,5) is None
     try:demand_character_close(len(V),F,(),Budget(0),quotient_cap=64);assert False
     except Exhausted:pass
     print(dict(constructive_full=full,constructive_bounded=bounded,constructive_transport=transported,module_control='PASS'))
