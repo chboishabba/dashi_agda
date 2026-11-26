@@ -131,7 +131,7 @@ xyz-zxy = Q.xyz-zxy exact
 xyz-zyx : (x : Q.A cube) → Q.xyz cube x ≡ Q.zyx cube x
 xyz-zyx = Q.xyz-zyx exact
 
-terminalReopen : (k : Frame) (x : C.Blocks _) →
+terminalReopen : (k : Frame) (x : Q.A I.codecCube) →
   O.reopenFactSplit (proj₂ (Q.xyz cube (k , x))) ≡ C.rotate x
 terminalReopen k x = I.terminalReopen x
 
