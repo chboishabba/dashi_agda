@@ -189,7 +189,7 @@ potentialDropBelowStart :
 potentialDropBelowStart P nonnegative n m =
   RP.≤-respʳ-≃
     (RP.≃-trans
-      (RP.+-congˡ (P n) (RP.≃-symm RP.0≃-0))
+      (RP.+-congʳ (P n) (RP.≃-symm RP.0≃-0))
       (RP.+-identityʳ (P n)))
     (RP.+-monoʳ-≤ (P n) (RP.neg-mono-≤ (nonnegative m)))
 
@@ -292,7 +292,7 @@ coordinatePrefixStep term coord addLaw P bound n =
     (RP.∣-∣-cong
       (RP.≃-symm
         (RP.≃-trans
-          (RP.+-congʳ (R.-_ a)
+          (RP.+-congˡ (R.-_ a)
             (addLaw (Eta.originalEtaPrefix term n) (Eta.originalEtaBlock term n)))
           (solve 2 (λ x y → (x ⊕ y) ⊖ x ⊜ y) RP.≃-refl a b))))
     (bound n)
