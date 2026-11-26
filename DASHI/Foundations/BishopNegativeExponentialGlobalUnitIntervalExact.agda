@@ -128,5 +128,5 @@ negativeExpBelowOne {x} xPositive =
   BishopP.<-respʳ-≃
     inverseOneIsOne
     (BishopP.<-respˡ-≃
-      (negativeExpIsInversePositiveExp xPositive)
+      (BishopP.≃-symm (negativeExpIsInversePositiveExp xPositive))
       inverseOrder)
