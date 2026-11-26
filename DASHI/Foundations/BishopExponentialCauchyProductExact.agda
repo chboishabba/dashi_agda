@@ -400,6 +400,6 @@ bishopExpStrictOrderFromPositiveValue {x} {y} expXPositive xBelowY =
   BishopP.<-respʳ-≃ productIsY
     (BishopP.<-respˡ-≃
       (BishopP.≃-symm (BishopP.*-identityʳ (Exp.bishopExp x)))
-      (BishopP.*-monoˡ-<-pos
+      (BishopP.*-monoʳ-<-pos
         (BishopP.0<x⇒posx expXPositive)
         (Positive.bishopExpStrictlyAboveOneOnPositive dPositive)))
