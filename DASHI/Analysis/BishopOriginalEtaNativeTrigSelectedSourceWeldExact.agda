@@ -32,6 +32,7 @@ import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
 import DASHI.Analysis.BishopOriginalNativeComplexExpAdditionFromTrigExact as Native
+import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Log
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
@@ -110,3 +111,23 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
   originalRound11FiniteEtaZetaFromNativeFactorial s logLaw n =
     Existing.originalRound11EtaZetaFiniteFromTwoLaws
       s logLaw (Native.originalBishopAnalyticExpAddFromFactorial T) n
+
+
+  -- Both original analytic inputs now have literal source producers.
+  -- All finite cutoffs on the SAME Round11 term family; not uniform
+  -- continuation, zero exclusion, or kernel-verified discharge.
+  originalRound11FiniteEtaZetaFromOriginalSources :
+    (s : Analytic.BishopComplex) →
+    (n : Nat) →
+    Eta._≈C_
+      (Analytic._+C_
+        (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+        (Analytic._+C_
+          (Analytic._*C_ (Selected.sourceTerms s (suc zero))
+            (Dirichlet.dirichletPartial (Selected.sourceTerms) s n))
+          (Analytic._*C_ (Selected.sourceTerms s (suc zero))
+            (Dirichlet.dirichletPartial (Selected.sourceTerms) s n))))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s (Eta.twice n))
+  originalRound11FiniteEtaZetaFromOriginalSources s n =
+    originalRound11FiniteEtaZetaFromNativeFactorial
+      s Log.canonicalNatLogDyadic n
