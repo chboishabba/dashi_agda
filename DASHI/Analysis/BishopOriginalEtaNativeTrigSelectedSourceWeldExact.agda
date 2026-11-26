@@ -23,6 +23,7 @@ module DASHI.Analysis.BishopOriginalEtaNativeTrigSelectedSourceWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Product.Base using (proj₁; proj₂)
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as Analytic
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
@@ -33,6 +34,7 @@ import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
 import DASHI.Analysis.BishopOriginalNativeComplexExpAdditionFromTrigExact as Native
 import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Log
+import DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact as Signed
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
@@ -129,5 +131,8 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
             (Dirichlet.dirichletPartial (Selected.sourceTerms) s n))))
       (Dirichlet.dirichletPartial Selected.sourceTerms s (Eta.twice n))
   originalRound11FiniteEtaZetaFromOriginalSources s n =
-    originalRound11FiniteEtaZetaFromNativeFactorial
-      s Log.canonicalNatLogDyadic n
+    originalRound11FiniteEtaZetaFromNativeTrigAddition
+      s Log.canonicalNatLogDyadic
+      (λ x y → proj₂ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
+      (λ x y → proj₁ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
+      n
