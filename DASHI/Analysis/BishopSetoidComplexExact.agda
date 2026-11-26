@@ -318,10 +318,16 @@ imaginaryExpIsTrigCoordinates T y =
       (BishopP.*-cong ExpOrder.bishopExpZero BishopP.≃-refl)
       (BishopP.*-identityˡ (Elementary.bishopSin (dataSet T) y)))
 
-imaginaryExponentialProductGivesAddition :
-  (T : BishopSetoidComplexTranscendentals) → ∀ x y →
-  expC T (pureImaginary (BishopReal._+_ x y))
-    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+-- The legacy grouped signed-factorial rectangle consumes these exact
+-- names. Restore them on the same configured native phase.
+imaginaryExponentialIsPhase :
+  (T : BishopSetoidComplexTranscendentals) → ∀ y →
+  expC T (pureImaginary y) ≈C imaginaryTrigCoordinates T y
+imaginaryExponentialIsPhase = imaginaryExpIsTrigCoordinates
+
+BishopSineAdditionAt :
+  BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopReal.ℝ → Set
+BishopSineAdditionAt T x y =
   let sx = Elementary.bishopSin (dataSet T) x
       sy = Elementary.bishopSin (dataSet T) y
       cx = Elementary.bishopCos (dataSet T) x
@@ -330,10 +336,24 @@ imaginaryExponentialProductGivesAddition :
   BishopReal._≃_
     (Elementary.bishopSin (dataSet T) (BishopReal._+_ x y))
     (BishopReal._+_ (BishopReal._*_ sx cy) (BishopReal._*_ cx sy))
-  ×
+
+BishopCosineAdditionAt :
+  BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopReal.ℝ → Set
+BishopCosineAdditionAt T x y =
+  let sx = Elementary.bishopSin (dataSet T) x
+      sy = Elementary.bishopSin (dataSet T) y
+      cx = Elementary.bishopCos (dataSet T) x
+      cy = Elementary.bishopCos (dataSet T) y
+  in
   BishopReal._≃_
     (Elementary.bishopCos (dataSet T) (BishopReal._+_ x y))
     (BishopReal._-_ (BishopReal._*_ cx cy) (BishopReal._*_ sx sy))
+
+imaginaryExponentialProductGivesAddition :
+  (T : BishopSetoidComplexTranscendentals) → ∀ x y →
+  expC T (pureImaginary (BishopReal._+_ x y))
+    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+  BishopSineAdditionAt T x y × BishopCosineAdditionAt T x y
 imaginaryExponentialProductGivesAddition T x y product =
   let
     coordinates = ≈C-trans
