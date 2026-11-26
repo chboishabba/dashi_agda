@@ -550,3 +550,68 @@ module CompleteOriginalFromNativeDecay
 
   open Completed public using
     (originalEtaValue; originalEtaConverges; originalEtaLimitError)
+
+
+-- Actual one-cutoff uniform result over a chosen compact domain.
+-- The same C, delta and power-to-zero witness serve all s; no
+-- point-specific selection of a convergence modulus.
+module CompleteOriginalOnCompact
+  (inputs : Round11.BishopCutset)
+  (Region : BC.BishopComplex → Set)
+  (C δ : R.ℝ)
+  (Cnonnegative : R.NonNegative C)
+  (δPositive : R._<_ R.0ℝ δ)
+  (realBound : ∀ s → Region s → ∀ n → R._≤_
+    (R.∣ BC.re (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (originalEtaDecayPotential C δ n)
+             (originalEtaDecayPotential C δ (suc n))))
+  (imagBound : ∀ s → Region s → ∀ n → R._≤_
+    (R.∣ BC.im (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (originalEtaDecayPotential C δ n)
+             (originalEtaDecayPotential C δ (suc n)))) where
+
+  module Decay = NativeDecay C δ Cnonnegative δPositive
+
+  module At (s : BC.BishopComplex) (inside : Region s) =
+    CompleteOriginalRound11 inputs s (originalEtaDecayPotential C δ)
+      (realBound s inside) (imagBound s inside)
+      Decay.potentialNonnegative Decay.potentialModulus
+
+  value : (s : BC.BishopComplex) → Region s → BC.BishopComplex
+  value s inside = At.originalEtaValue s inside
+
+  partial : BC.BishopComplex → Nat → BC.BishopComplex
+  partial s n = Eta.originalEtaPrefix
+    (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n
+
+  uniformCutoff :
+    (k : Nat) → .{{_ : NonZero k}} →
+    Σ Nat (λ N → ∀ s (inside : Region s) n → N ≤ n →
+      R._≤_ (R.∣ R._-_ (BC.re (value s inside))
+                        (BC.re (partial s n)) ∣) (R._⋆ (+ 1 / k))
+      ×
+      R._≤_ (R.∣ R._-_ (BC.im (value s inside))
+                        (BC.im (partial s n)) ∣) (R._⋆ (+ 1 / k)))
+  uniformCutoff k =
+    let receipt = Decay.potentialModulus k in
+    suc (proj₁ receipt) ,
+    (λ s inside n past →
+      let error = At.originalEtaLimitError s inside n
+          small = proj₂ receipt n past
+      in RP.≤-trans (proj₁ error) small ,
+         RP.≤-trans (proj₂ error) small)
+
+  -- Any other limit on this literal original source equals the
+  -- constructed value, irrespective of its chosen compact bound.
+  originalLimitUnique :
+    ∀ s (inside : Region s) (other : BC.BishopComplex) →
+    Seq._ConvergesTo_ (λ n → BC.re (partial s n)) (BC.re other) →
+    Seq._ConvergesTo_ (λ n → BC.im (partial s n)) (BC.im other) →
+    Eta._≈C_ (value s inside) other
+  originalLimitUnique s inside other realConverges imagConverges =
+    Seq.uniqueness-of-limits
+      (proj₁ (At.originalEtaConverges s inside)) realConverges ,
+    Seq.uniqueness-of-limits
+      (proj₂ (At.originalEtaConverges s inside)) imagConverges
