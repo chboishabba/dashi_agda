@@ -32,6 +32,7 @@ import DASHI.Foundations.BishopChudnovskyNativeEulerLimitsExact as E
 import DASHI.Foundations.BishopChudnovskySignedPeriodNormalizationExact as Norm
 import DASHI.Foundations.BishopChudnovskyWidthSourceExact as Width
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NR
+import DASHI.Foundations.BishopNatEmbeddingPowerExact as NPow
 import DASHI.Moonshine.JInvariantBishopPolynomialGeometricRatioExact as NAdd
 import DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact as Poly
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidSeriesExact as Maj
@@ -106,7 +107,7 @@ leafMagnitudeShape n =
 
 negativeEmbedding : (n : Nat) →
   ((Z.-_ (+ n) / 1) ⋆) ≃ R.- (NR.natReal n)
-negativeEmbedding n = P.⋆-distrib-- (+ n / 1)
+negativeEmbedding n = P.⋆-distrib-neg (+ n / 1)
 
 sourcePShape : (n : Nat) →
   ((CH.sourceP (suc n) / 1) ⋆) ≃
@@ -133,16 +134,7 @@ jetOne n = P.≃-trans
 -- Build the degree-three jet from the actual source, not from
 -- numerical estimates or a new normalization.
 powThree : (n : Nat) → NR.natReal (n Nat.^ 3) ≃ R.pow (NR.natReal n) 3
-powThree n =
-  P.≃-trans (NR.natRealMul n _)
-    (P.≃-trans
-      (P.*-congˡ (P.≃-trans (NR.natRealMul n _)
-        (P.≃-trans
-          (P.*-congˡ (NR.natRealMul n 1))
-          (let open P.ℝ-Solver in solve 1 (λ x →
-            x ⊗ (x ⊗ Κ Q.1ℚᵘ) ⊜ (Κ Q.1ℚᵘ ⊗ x) ⊗ x)
-            P.≃-refl (NR.natReal n)))))
-      (P.*-comm (NR.natReal n) (R.pow (NR.natReal n) 2)))
+powThree n = NPow.natRealPowNat n 3
 
 qShape : (n : Nat) → NR.natReal (G.qNat (suc n)) ≃
   (((+ 262537412640768000 / 1) ⋆) * R.pow (NR.natReal (suc n)) 3)
