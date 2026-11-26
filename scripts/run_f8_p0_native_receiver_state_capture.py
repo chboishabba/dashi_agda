@@ -28,11 +28,12 @@ def atomic_npz(path,**arrays):
         finally:
             if os.path.exists(tmp):os.unlink(tmp)
 
-def main():
+def main(driver_main=None,driver_name='run_f8_lxix_native_source_matrix.main',default_work='.local-f8-lxix-instrumented'):
     import argparse
+    if driver_main is None:driver_main=original_driver.main
     parser=argparse.ArgumentParser()
     parser.add_argument('label',choices=('A0','A1','C0','C1'))
-    parser.add_argument('--work',type=Path,default=Path('.local-f8-lxix-instrumented'))
+    parser.add_argument('--work',type=Path,default=Path(default_work))
     parser.add_argument('--budget',type=float,default=12.)
     args=parser.parse_args()
     args.work.mkdir(parents=True,exist_ok=True)
@@ -64,7 +65,7 @@ def main():
     saved_argv=sys.argv[:]
     try:
         sys.argv=[saved_argv[0],args.label,'--work',str(args.work),'--budget',str(args.budget)]
-        status=original_driver.main()
+        status=driver_main()
     finally:
         sys.argv=saved_argv
         original.stage=unmodified_stage
@@ -91,7 +92,7 @@ def main():
         original_checkpoint_identity_sha256=hashlib.sha256(original_identity.encode()).hexdigest(),
         original_checkpoint_wall_sha256=checkpoint_wall_sha,
         original_solver_sha256=solver_blob_sha,
-        original_driver='run_f8_lxix_native_source_matrix.main',
+        original_driver=driver_name,
         classification='instrumented same-time original U,P,M,Ut copy, no numerical state modification'),sort_keys=True)
     atomic_npz(sidecar,metadata=metadata,
         U=captured['U'],P=captured['P'],M=captured['M'],Ut=captured['Ut'],
