@@ -56,7 +56,12 @@ def uv():
         coeff=np.array([.6,.8]); state=np.kron(np.kron(coeff,coeff),coeff)
         assert abs(np.vdot(state,state)-1)<1e-14 and abs(state[0]-.6**3)<1e-14
         err=np.linalg.norm(Fa-F)*np.sqrt(dp)
-        print('smeared packet window',B,'gram error',np.max(abs(gram-np.eye(3))),'packet error',err,'branch energy',.64*sum(energy))
+        # Coherent record superposition retains off-diagonal energy.
+        H=Fa.conj().T@(omega[:,None]*Fa)*dp
+        gamma=np.full((3,3),(.6*.8)**2); np.fill_diagonal(gamma,.64)
+        full=float(np.real(np.trace(H@gamma)))
+        assert np.linalg.eigvalsh(gamma).min()>0 and full>=0
+        print('smeared packet window',B,'gram error',np.max(abs(gram-np.eye(3))),'packet error',err,'diagonal energy',.64*sum(energy),'full energy',full)
     print('PASS selected flat-packet UV scaling and smeared finite Gram/energy controls')
 
 
