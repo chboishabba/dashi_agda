@@ -140,3 +140,30 @@ radiusSmall = P.<-respʳ-≃ thresholdInverse
     (Inv.x<y∧posx,y⇒y⁻¹<x⁻¹ expLower thresholdNZ
       (Neg.expNonzero exponentPositive) (P.0<x⇒posx thresholdPositive)
       (P.0<x⇒posx (Neg.expPositive exponentPositive))))
+
+-- The existing cubic certificate actually suffices for the stronger
+-- absolutely-convergent composition disk, without a new exp series.
+expLower7000 : ((+ 7000 / 1) ⋆) < Exp.bishopExp exponent
+expLower7000 = P.<-≤-trans
+  (ratLt (+ 7000 / 1) (+ 7776 / 1)
+    (from-yes ((+ 7000 / 1) QP.<? (+ 7776 / 1))))
+  (P.≤-trans cubicLower cubicBelowExp)
+
+threshold7000Positive : R.0ℝ < ((+ 7000 / 1) ⋆)
+threshold7000Positive = ratLt Q.0ℚᵘ (+ 7000 / 1) (QP.positive⁻¹ (+ 7000 / 1))
+
+threshold7000NZ : R._≄0 ((+ 7000 / 1) ⋆)
+threshold7000NZ = inj₂ threshold7000Positive
+
+threshold7000Inverse : Inv._⁻¹ ((+ 7000 / 1) ⋆) threshold7000NZ ≃ ((+ 1 / 7000) ⋆)
+threshold7000Inverse = P.≃-symm (Inv.⁻¹-unique ((+ 1 / 7000) ⋆)
+  ((+ 7000 / 1) ⋆) threshold7000NZ
+  (let open P.ℝ-Solver in solve 0
+    (Κ (+ 7000 / 1) ⊗ Κ (+ 1 / 7000) ⊜ Κ Q.1ℚᵘ) P.≃-refl))
+
+radiusCompositionSmall : CM.radius < ((+ 1 / 7000) ⋆)
+radiusCompositionSmall = P.<-respʳ-≃ threshold7000Inverse
+  (P.<-respˡ-≃ (P.≃-symm (Neg.negativeExpIsInversePositiveExp exponentPositive))
+    (Inv.x<y∧posx,y⇒y⁻¹<x⁻¹ expLower7000 threshold7000NZ
+      (Neg.expNonzero exponentPositive) (P.0<x⇒posx threshold7000Positive)
+      (P.0<x⇒posx (Neg.expPositive exponentPositive))))
