@@ -51,3 +51,19 @@ for n in range(0,25):
         assert lhs==rhs
 print(f'25 actual box-filter grades (zero retained), {npoints} points, 100 signed boundary balances PASS')
 print('SymPy',__version__)
+
+# Finite original composition with zero constant term; retain signed q.
+comp_checks=0
+for N in range(1,17):
+    inner=[F(0)]+[F(rng.randrange(-3,4),11) for _ in range(N-1)]
+    outer=[F(rng.randrange(-7,8),13) for _ in range(N)]
+    powers=[[F(1)]+[F(0)]*(N-1)]
+    for k in range(1,N): powers.append(conv(inner,powers[-1]))
+    assert all(powers[k][n]==0 for k in range(N) for n in range(k))
+    comp=[sum(outer[k]*powers[k][n] for k in range(n+1)) for n in range(N)]
+    for q in (F(0),F(-1,7),F(1,11)):
+        for count in range(N+1):
+            left=sum(q**n*comp[n] for n in range(count))
+            right=sum(outer[k]*sum(q**n*powers[k][n] for n in range(count)) for k in range(count))
+            assert left==right; comp_checks+=1
+print(f'{comp_checks} weighted original finite composition prefix exchanges PASS')
