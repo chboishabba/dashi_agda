@@ -307,6 +307,13 @@ def main():
             s,Y=rado_root(n,blocks,Budget(100000));assert (s=='SAT')==bool(truth)
             if truth:assert any(Y==[value(U,z) for U,T in blocks] for z in truth)
             C['rado',s]+=1
+    # Planted original source that defeats this particular capped portfolio.
+    S=[(2,10,15),(7,9,12),(3,4,14),(0,6,16),(1,5,13),(8,11,17),(9,15,16),(0,8,14),(2,6,17),(5,10,13),(1,3,12),(4,7,11),(3,11,12),(1,2,6),(0,7,14),(4,9,15),(10,13,17),(5,8,16),(0,1,14),(4,9,16),(7,12,15),(2,5,17),(3,6,11),(8,10,13),(0,1,9),(4,11,17),(3,6,16),(2,10,12),(5,14,15),(7,8,13)]
+    R=tuple(sum(1<<j for j,T in enumerate(S) if i in T) for i in range(18));P=canon((r,1) for r in R)
+    assert len(chart(30,P)[1])==12 and all((63&r).bit_count()==1 for r in R)
+    y,done=descent(30,R,P,181773997,Budget(2000000),8,50000,5,True)
+    # Improving the producer is allowed; a false empty admission is not.
+    assert not done or (y is not None and all((y&r).bit_count()==1 for r in R))
     R=(7,7,7);P=canon(((7,1),))
     v,done=discover(3,R,P,7,Budget(100000),probe_cap=0);assert v is None and not done
     try:discover(3,R,P,7,Budget(0));assert False
