@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -124,7 +124,7 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
             from check_pnp_normal_boundary_join import join_exact_one_demand
             u,V=chart(n,P)
             F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(a)) for a in R)
-            z,_=join_exact_one_demand(len(V),F,B,core_trials=core_trials,core_cover=core_cover)
+            z,_=join_exact_one_demand(len(V),F,B,core_trials=core_trials,core_cover=core_cover,core_pairs=core_pairs,hull_rows=hull_rows)
             y=None if z is None else lift(u,V,z)
             if y is not None:assert satisfies(y,P,()) and cover(R,y)
             return y,B.stats,True
