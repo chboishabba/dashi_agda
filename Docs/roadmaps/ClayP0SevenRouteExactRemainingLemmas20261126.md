@@ -1133,3 +1133,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## Signed character-ideal exclusion — 26 November 2026
 
 See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#signed-character-ideal-exclusion-and-indexed-certificate-transport--26-november-2026). Original 30-column parity-capacity/pair-hull obstruction now excluded by replayed F3 character-ideal constant certificate, compact 154-row dependency chain. Affine certificate transport and optional root demand attachment supplied; candidate/sourceBacked, not leafClosed. Fixed shift cap completeness not established or mandatory. All thirteen universal targets remain leafOpen; seven alternative routes retained.
+
+
+## Constructive projective character refinement — 26 November 2026
+
+See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#projective-character-consequences-and-constructive-original-recovery--26-november-2026). Replayed projective character relations produce original signed affine constraints, including nonconstant XOR relations. Source-facing K refinement and verified witness admission attached; 20/20 pair-closure-stalled original planted sources recovered and all 58 actual covers retained on those sources. Full character span recovers exact affine hull, not necessarily nonlinear support, with exponential worst-case dictionary. Candidate/sourceBacked, not native leafClosed. All thirteen universal targets remain leafOpen; prioritize genuine residuals surviving both bounded disjunction and character refinement. No universal polynomial clock or unrestricted separation established.
