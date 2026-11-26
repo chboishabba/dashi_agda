@@ -22,7 +22,7 @@ module DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
 import Data.Nat.Properties as NatP
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; s≤s)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
@@ -164,6 +164,9 @@ canonicalNatLogProduct :
       (Terms.sourceCanonicalNatLogCandidate j))
 canonicalNatLogProduct i j k indices =
   ExpProduct.bishopExpInjective
+    {x = Terms.sourceCanonicalNatLogCandidate k}
+    {y = R._+_ (Terms.sourceCanonicalNatLogCandidate i)
+      (Terms.sourceCanonicalNatLogCandidate j)}
     (RP.≃-trans (canonicalNatLogExpInverse k)
       (RP.≃-trans
         (RP.≃-refl₂ (cong NatReal.natReal indices))
@@ -224,7 +227,7 @@ canonicalNatLogMonotone {i} {j} indices =
         {x = Terms.sourceCanonicalNatLogCandidate j}
         {y = Terms.sourceCanonicalNatLogCandidate i}
         (canonicalNatLogExpPositive j) reverseOrder
-      weak = RP.≤-respˡ-≃ (RP.≃-symm (canonicalNatLogExpInverse i))
+      weak = RP.≤-respˡ-≃ (canonicalNatLogExpInverse i)
         (RP.≤-respʳ-≃ (RP.≃-symm (canonicalNatLogExpInverse j))
           (NatMono.natRealMonotone (s≤s indices)))
     in RP.<-irrefl RP.≃-refl (RP.<-≤-trans strict weak))
