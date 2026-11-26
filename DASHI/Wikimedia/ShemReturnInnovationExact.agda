@@ -186,3 +186,16 @@ encodeDecodeInnovationFibre : (previous : Point) (fibre : PointFibre) →
 encodeDecodeInnovationFibre previous fibre
   rewrite innovationFromUpdate previous (decodePointFibre fibre) =
   encodeDecodePointFibre fibre
+
+
+-- H45: two fixed endpoint observations do not constrain an intermediate
+-- point when both signed innovation fibres are free. Reuse the exact
+-- existing inverse, rather than identifying the two residuals.
+twoBoundaryFibre : (left middle right : Point) →
+  (Σ PointFibre (λ f → decodeInnovationFibre left f ≡ middle)) ×
+  (Σ PointFibre (λ f → decodeInnovationFibre middle f ≡ right))
+twoBoundaryFibre left middle right =
+  (encodeInnovationFibre left middle ,
+    decodeEncodeInnovationFibre left middle) ,
+  (encodeInnovationFibre middle right ,
+    decodeEncodeInnovationFibre middle right)
