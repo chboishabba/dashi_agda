@@ -125,6 +125,99 @@ def affine_onehot_close(n,row_bits,B,required=(),pairs=True):
     assert all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in row_bits)
     return H1,x
 
+def affine_union_hull(n,carriers,B):
+    """Exact affine hull of a union of canonical affine fibres; None is empty."""
+    origin=None;D=()
+    for P in carriers:
+        if P is None:continue
+        u,V=chart(n,P);B.pay('disjunctive_hull',1+n*(1+len(D)+len(V)))
+        if origin is None:origin=u
+        D=span(D+tuple(V)+(u^origin,))
+    if origin is None:return None
+    return canon((a,(a&origin).bit_count()%2) for a in orth(n,D))
+
+
+def disjunctive_hull(n,row_bits,B,required=(),depth=1,rounds=1):
+    """Sound one-hot branch closure, then affine hull of all surviving fibres.
+
+    A witness is original, but returned pins must preserve ALL solutions.
+    Fixed depth is polynomial in explicit source size; no universal depth bound.
+    Exhausted propagates to the caller, never as an empty proof.
+    """
+    assert depth>=0 and rounds>=0
+    P=canon(required)
+    if P is None:return None,None
+    if not depth or not rounds:return P,None
+    F=tuple(sorted(row_bits,key=len))
+    for _ in range(min(rounds,n+1)):
+        changed=False
+        for G in F:
+            B.pay('disjunctive_row',1+len(G))
+            S=[];implied=False
+            for j in range(len(G)):
+                B.pay('disjunctive_branch',1+len(G)+len(P))
+                H=canon(P+tuple((a,b^int(i==j)) for i,(a,b) in enumerate(G)))
+                if H is None:continue
+                if H==P:
+                    implied=True;break
+                Q,w=affine_onehot_close(n,F,B,H)
+                if Q is not None and w is None and depth>1:
+                    Q,w=disjunctive_hull(n,F,B,Q,depth-1,rounds)
+                if w is not None:
+                    # A successful branch is sufficient for a witness, not
+                    # for replacing the global carrier by that branch.
+                    return P,w
+                if Q is None:
+                    B.pay('disjunctive_empty');continue
+                S.append(Q)
+            if implied:continue
+            Q=affine_union_hull(n,S,B)
+            if Q is None:return None,None
+            assert canon(Q+P)==Q
+            if Q!=P:
+                B.pay('disjunctive_rank',len(Q)-len(P));P=Q;changed=True
+        if not changed:break
+    return P,None
+
+
+def affine_disjunctive_close(n,row_bits,B,required=(),depth=1,rounds=1):
+    """Reuse affine closure before one-hot disjunction; identical fail-closed contract."""
+    P,w=affine_onehot_close(n,row_bits,B,required)
+    if P is None or w is not None:return P,w
+    return disjunctive_hull(n,row_bits,B,P,depth,rounds)
+
+
+def certified_row_conflict_floor(n,R,P,groups,B,scale=1,depth=1):
+    """Exact lower bound on original X3C parity weight via charged row conflicts.
+
+    groups contains (row mask, nonnegative integer charge); per-row sum <= scale.
+    Each accepted group is proved empty on P. No failed probe is charged.
+    The bound also uses original integer row-incidence congruences.
+    P is a consistent canonical retained carrier implying all row parities.
+    """
+    from math import gcd
+    assert scale>0 and depth>=0 and len(R)%3==0 and P is not None
+    assert canon(P+tuple((r,1) for r in R))==P
+    assert all(sum((r>>j)&1 for r in R)==3 for j in range(n))
+    used=[0]*len(R);total=0;accepted=[]
+    for mask,w in groups:
+        assert 0<mask<1<<len(R) and w>=0
+        I=tuple(bits(mask))
+        for i in I:
+            used[i]+=w;assert used[i]<=scale
+        if not w:continue
+        B.pay('row_conflict_group',1+len(I)*n)
+        F=tuple(tuple((1<<j,0) for j in bits(R[i])) for i in I)
+        Q,x=affine_disjunctive_close(n,F,B,P,depth)
+        if Q is not None:continue
+        g=0
+        for j in range(n):g=gcd(g,sum((R[i]>>j)&1 for i in I))
+        assert g>0
+        r=next(r for r in range(2,2*g+1,2) if (r+len(I))%g==0)
+        total+=w*r;accepted.append((mask,w,r))
+    return len(R)//3+2*((total+6*scale-1)//(6*scale)),tuple(accepted)
+
+
 def weight_chart(n,u,V,B):
     M={}
     for i in range(n):
@@ -204,7 +297,62 @@ def test_affine_onehot_close():
     assert affine_onehot_close(5,F,Budget(20000000))==(None,None)
     print('affine_onehot_close',checks,'collective control PASS')
 
+def test_disjunctive_hull():
+    rng=Random(3691126);checks=0
+    for n in range(9):
+        for _ in range(130):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(9)))
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            valid=lambda x:all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in F)
+            truth=[x for x in range(1<<n) if satisfies(x,H,()) and valid(x)]
+            for depth in (1,2):
+                Q,y=affine_disjunctive_close(n,F,Budget(20000000),H,depth,2)
+                if Q is None:assert not truth
+                else:
+                    assert canon(Q+H)==Q and all(satisfies(x,Q,()) for x in truth)
+                    if y is not None:assert y in truth
+                checks+=1
+    for n in range(9):
+        for _ in range(75):
+            S=[canon((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(n+1))) for i in range(rng.randrange(7))]
+            Q=affine_union_hull(n,S,Budget(10000000))
+            T=[x for x in range(1<<n) if any(H is not None and satisfies(x,H,()) for H in S)]
+            if not T:assert Q is None
+            else:
+                assert Q is not None and all(satisfies(x,Q,()) for x in T)
+                assert len(Q)==n-len(span(x^T[0] for x in T))
+            t=rng.randrange(1<<n)
+            shift=lambda H:None if H is None else canon((a,b^((a&t).bit_count()%2)) for a,b in H)
+            assert affine_union_hull(n,[shift(H) for H in S],Budget(10000000))==shift(Q)
+    # Both earlier regular 30-column controls survive ordinary pair hull.
+    controls=[
+      [(5,13,17),(5,14,16),(3,10,17),(0,2,16),(3,4,16),(1,10,12),(0,7,15),(6,7,10),(1,12,13),(4,5,13),(1,3,12),(0,4,6),(8,10,17),(3,7,9),(1,14,15),(9,12,15),(2,13,16),(2,12,17),(2,5,15),(6,7,8),(6,7,14),(8,11,17),(4,11,15),(5,8,11),(2,3,9),(6,9,13),(9,10,11),(0,1,16),(0,4,14),(8,11,14)],
+      [(0,8,17),(2,9,14),(0,6,7),(4,13,15),(5,13,16),(3,4,13),(8,16,17),(2,6,16),(4,5,11),(10,15,16),(1,10,14),(4,14,16),(1,9,15),(6,11,17),(5,12,17),(1,7,12),(6,8,13),(5,8,12),(0,8,9),(0,12,14),(0,5,14),(2,10,11),(3,4,11),(9,10,15),(2,10,17),(2,3,7),(1,3,12),(11,13,15),(1,6,7),(3,7,9)]
+    ]
+    for S in controls:
+        R=incidence(18,S);P=canon((r,1) for r in R);u,V=chart(30,P)
+        F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(r)) for r in R)
+        assert len(V)==12 and affine_onehot_close(len(V),F,Budget(10000000))==((),None)
+        B=Budget(100000000)
+        assert affine_disjunctive_close(len(V),F,B)==(None,None)
+        assert B.stats['disjunctive_empty']==5
+        x=min((u^v for v in V),key=int.bit_count)
+        assert x.bit_count()==8 and satisfies(x,P,())
+    # Four independent conflicting row groups; the integer congruence pays six
+    # residual units per component, so the combined attained lower bound is exact.
+    S=[tuple(6*i+v for v in T) for i in range(4) for T in ((0,1,2),(0,1,3),(0,2,4),(1,2,5))]
+    R=incidence(24,S);P=canon((r,1) for r in R)
+    b,C=certified_row_conflict_floor(16,R,P,[(((1<<6)-1)<<(6*i),1) for i in range(4)],Budget(10000000))
+    assert b==16 and len(C)==4 and all(r==6 for I,w,r in C)
+    assert chart(16,P)[0].bit_count()==16
+    for cap in (0,1):
+        try:affine_disjunctive_close(2,(((1,0),(2,0)),),Budget(cap));assert False
+        except Exhausted:pass
+    print('disjunctive_hull',checks,'affine union, conflict packing and stalled controls PASS')
+
 def main():
+    test_disjunctive_hull()
     test_affine_onehot_close()
     rng=Random(369);tests=checks=verified=empty=unknown=modchecks=modgain=0
     for m in (3,6,9,12):
