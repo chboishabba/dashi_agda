@@ -344,12 +344,94 @@ def extend_character_span(F,basis,p,B,degree=1,max_pivots=256):
     return out
 
 
-def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256):
+def verify_onehot_exclusion(F,e,j,certificate,p,B):
+    """Replay a parent combination of shifted original generators as 2*x_ej."""
+    if p not in PRIMES or not (0<=e<len(F) and 0<=j<len(F[e])):return False
+    G=tuple(generators(F,p,True,B));A={}
+    for k,t,c in certificate:
+        if not (0<=k<len(G) and t>=0 and 0<c<p):return False
+        B.pay('character_lift_replay',1+len(G[k]));add(A,{s^t:w for s,w in G[k].items()},c,p)
+    s,b=F[e][j];target={0:1};add(target,{s:1},-(-1)**b,p)
+    return A==target
+
+
+def lift_onehot_exclusion(n,F,e,j,proof,p,B):
+    """Lift a verified child constant proof to a sparse parent proof of 2*x_ej.
+
+    The child must be the actual one-hot restriction of row e to choice j.
+    A different restriction, invalid proof, or inconsistent chart is rejected.
+    No exponential product of all branch indicator equations is formed.
+    """
+    assert p in PRIMES and 0<=e<len(F) and 0<=j<len(F[e])
+    row=F[e];H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(row))
+    if H is None:return None
+    a,V=chart(n,H);R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+    if not verify(R,proof,p,B=B):return None
+    # Flatten the terminal proof DAG by reverse accumulation. Each proof row
+    # contributes just one shifted generator; merge equal terms.
+    coeff={len(proof)-1:1};C={};maps={};G=tuple(generators(F,p,True,B))
+    for i in range(len(proof)-1,-1,-1):
+        w=coeff.get(i,0)
+        if not w:continue
+        k,t,ops,c=proof[i];w=w*c%p;B.pay('character_lift_dag',1+len(ops))
+        for h,v in ops:coeff[h]=(coeff.get(h,0)+w*v)%p
+        if t not in maps:
+            if t>>len(V):return None
+            Q=canon((v,(t>>l)&1) for l,v in enumerate(V))
+            if Q is None:return None
+            B.pay('character_lift_map',1+n*len(V));maps[t]=chart(n,Q)[0]
+        s=maps[t];add(C,{(k,s):w},(-1)**((s&a).bit_count()%2),p)
+    f={};out={};s0,b0=row[j];eps=(-1)**b0
+    for (k,s),w in C.items():
+        B.pay('character_lift_expand',1+len(G[k]))
+        add(f,{t^s:v for t,v in G[k].items()},w,p)
+        add(out,{(k,s):w},1,p);add(out,{(k,s^s0):w},-eps,p)
+    h={0:1};add(h,f,-1,p)
+    # h restricts to zero. In each alias class use one representative and
+    # write h as differences of characters with the same restricted sign.
+    reps={};image={};normals=tuple(s for s,b in row)
+    eq=tuple(value(normals,1<<l) for l in range(n))
+    delta=tuple((-1)**(b^int(i==j)) for i,(s,b) in enumerate(row))
+    base=sum(1+len(G)*(len(G)-1)//2 for G in F[:e])+1
+    pair_id={pair:base+i for i,pair in enumerate(combinations(range(len(row)),2))}
+    for s,w in h.items():
+        q=value(V,s);sgn=(-1)**((s&a).bit_count()%2);add(image,{q:w},sgn,p)
+        t=reps.setdefault(q,s)
+        if s==t:continue
+        Q=canon((v,((s^t)>>l)&1) for l,v in enumerate(eq));assert Q is not None
+        choice=chart(len(row),Q)[0];I=[i for i in range(len(row)) if choice>>i&1]
+        suffix=1
+        for i in I:suffix*=delta[i]
+        prefix=t
+        for i in I:
+            suffix*=delta[i]
+            if i!=j:
+                k=pair_id[tuple(sorted((i,j)))];c=-(-1)**row[i][1]*suffix*w
+                # (2*x_j)*(chi_si-delta_i) = -eps_i*(4*x_j*x_i).
+                add(out,{(k,prefix):c},1,p)
+            prefix^=row[i][0];B.pay('character_lift_telescope')
+    assert not image
+    certificate=tuple((k,t,c) for (k,t),c in sorted(out.items()))
+    assert verify_onehot_exclusion(F,e,j,certificate,p,B)
+    return certificate
+
+
+def transport_onehot_exclusion(certificate,V,a,p,B):
+    """Pull a flat proof to the actual rechart, keeping original generator IDs."""
+    C={}
+    for k,t,c in certificate:
+        B.pay('character_lift_transport',1+len(V))
+        add(C,{(k,value(V,t)):c},(-1)**((t&a).bit_count()%2),p)
+    return tuple((k,t,c) for (k,t),c in sorted(C.items()))
+
+
+def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,certificates=None):
     """Bounded original-row partition with child-local character strengthening.
 
-    Returns (witness, decisive); (None,True) only after all branches are
-    proved empty, (None,False) on incomplete search. Nodes share one clock.
-    No local branch is ever promoted to a global affine constraint.
+    Return (witness, decisive). Only checked root-child exclusions may be
+    exported as (row, occurrence). Optional certificates request a standalone
+    replayable proof when a local character refutation can be independently
+    reproduced under the same cap. UNKNOWN is never learned as exclusion.
     """
     assert nodes>=0 and max_pivots>=0 and degree in (-1,0,1,2)
     original=F;left=nodes
@@ -362,32 +444,41 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256):
         left-=1;B.pay('character_adaptive_node')
         if 0 in K:return None,True
         if valid(J,0):return u,True
-        # Root has already paid for its span; only strengthen surviving children.
         if degree>=0 and len(V)<n:K=extend_character_span(J,K,p,B,degree,max_pivots)
         if 0 in K:
             B.pay('character_adaptive_local_empty');return None,True
-        bad=[G for G in J if sum(b for s,b in G)!=1]
-        G=min(bad,key=len);candidates=[];d=len(V)
+        e=min((i for i,G in enumerate(J) if sum(b for s,b in G)!=1),key=lambda i:len(J[i]))
+        G=J[e];candidates=[];d=len(V)
+        def record(j,R=None):
+            if d!=n:return
+            if learned is not None:
+                learned.append((e,j));B.pay('character_adaptive_learned')
+            if certificates is not None and R is not None and degree>=0:
+                proof,empty=eliminate(R,source_shifts(R,degree,B),p,B,max_pivots=max_pivots)
+                if empty:
+                    C=lift_onehot_exclusion(n,J,e,j,compact(proof,B),p,B)
+                    assert C is not None
+                    certificates.append((e,j,C));B.pay('character_adaptive_lifted',1+len(C))
         for j in range(len(G)):
             B.pay('character_adaptive_pattern',1+len(G))
             H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(G))
-            if H is None:continue
+            if H is None:record(j);continue
             a,W=chart(d,H);assert len(W)<d
             if valid(J,a):return lift(u,V,a),True
             B.pay('character_adaptive_score',1+sum(map(len,J)))
             score=sum(abs(sum(b^((s&a).bit_count()%2) for s,b in A)-1) for A in J)
             candidates.append(((score,len(W),j),a,W))
-        for _,a,W in sorted(candidates):
+        for (_,_,j),a,W in sorted(candidates):
             if not left:return None,False
             Q=restrict_character_span(K,W,a,p,B)
             if 0 in Q:
-                B.pay('character_adaptive_projected_empty');continue
+                B.pay('character_adaptive_projected_empty');record(j);continue
             B.pay('character_adaptive_image',1+sum(map(len,J))*(1+len(W)))
             R=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in A) for A in J)
             x,done=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W))
             if x is not None:return x,True
             if not done:return None,False
-            B.pay('character_adaptive_backtrack')
+            B.pay('character_adaptive_backtrack');record(j,R)
         return None,True
     x,done=visit(F,basis,0,tuple(1<<i for i in range(n)))
     if x is not None:assert done and valid(original,x)
@@ -477,8 +568,14 @@ def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,p
         if 0 in K:return None,None
         y=restriction_reopen(len(W),J,K,p,B,path_steps) if path_steps else None
         if y is None and adaptive_nodes:
-            y,done=adaptive_reopen(len(W),J,K,p,B,adaptive_nodes,adaptive_degree,min(max_pivots,256))
+            learned=[]
+            y,done=adaptive_reopen(len(W),J,K,p,B,adaptive_nodes,adaptive_degree,min(max_pivots,256),learned)
             if done and y is None:return None,None
+            # Root child exclusions apply throughout the refined parent.
+            # Stable row/occurrence IDs recover the actual original equations.
+            D=canon(C+tuple(F[e][j] for e,j in learned))
+            if D is None:return None,None
+            B.pay('character_adaptive_rank',len(D)-len(C));C=D
         if y is not None:z=lift(a,W,y)
     if z is None and quotient_cap:z=quotient_reopen(len(V),R,basis,p,B,quotient_cap)
     if z is not None:
@@ -803,7 +900,68 @@ def test_character_adaptive():
     print('adaptive_demand',checks,empty,verified,unknown)
 
 
+def test_character_parent_learning():
+    from random import Random
+    from collections import Counter
+    from check_pnp_affine_normal_components import Exhausted
+    rng=Random(369261129);certified=0
+    for n in range(1,8):
+        for _ in range(100):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(1,7))) for j in range(rng.randrange(1,6)))
+            valid=lambda x:all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+            T=[x for x in range(1<<n) if valid(x)]
+            e=rng.randrange(len(F));j=rng.randrange(len(F[e]));row=F[e]
+            H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(row))
+            if H is None:continue
+            a,V=chart(n,H);R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+            for p in (3,5,7):
+                B=Budget(10000000);proof,empty=eliminate(R,range(1<<len(V)),p,B)
+                assert empty==(not any(all((s&x).bit_count()%2==b for s,b in H) for x in T))
+                if not empty:continue
+                C=lift_onehot_exclusion(n,F,e,j,compact(proof,B),p,B);assert C is not None
+                assert all((row[j][1]^((row[j][0]&x).bit_count()%2))==0 for x in T)
+                if C:
+                    k,t,c=C[0];G=tuple(generators(F,p))
+                    if G[k]:assert not verify_onehot_exclusion(F,e,j,((k,t,-c%p),)+C[1:],p,B)
+                certified+=1
+    assert certified==798
+    rng=Random(36929);stats=Counter()
+    for n in range(8):
+        for _ in range(100):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(7)))
+            T=[x for x in range(1<<n) if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)]
+            for p in (3,5,7):
+                B=Budget(10000000);proof,_=eliminate(F,(0,),p,B,max_pivots=8);K=replay_span(F,proof,p,B)
+                for cap in (1,4,128):
+                    for degree in (-1,0):
+                        B=Budget(10000000);L=[];C=[]
+                        y,done=adaptive_reopen(n,F,K,p,B,cap,degree,32,L,C)
+                        assert y is None or y in T;assert not done or bool(T)==(y is not None)
+                        assert all(all(not (F[e][j][1]^((F[e][j][0]&x).bit_count()%2)) for e,j in L) for x in T)
+                        if cap==128:assert done
+                        for e,j,P in C:
+                            assert (e,j) in L and verify_onehot_exclusion(F,e,j,P,p,B)
+                            a=rng.randrange(1<<n);V=tuple(1<<i for i in range(n) if rng.randrange(2))
+                            R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+                            assert verify_onehot_exclusion(R,e,j,transport_onehot_exclusion(P,V,a,p,B),p,B)
+                            stats['transport']+=1
+                        stats['comparisons']+=1;stats['pins']+=len(L);stats['unknown']+=not done
+                        stats['lifted']+=len(C);stats['inhabited_pins']+=len(L) if T else 0
+    assert stats['comparisons']==14400
+    F=(((16,1),(9,0),(14,1),(13,1),(3,0)),((27,1),(25,1)))
+    B=Budget(10000000);proof,_=eliminate(F,(0,),3,B,max_pivots=8);K=replay_span(F,proof,3,B)
+    assert restriction_reopen(5,F,K,3,B,5) is None
+    L=[];C=[]
+    assert adaptive_reopen(5,F,K,3,B,0,0,32,L,C)==(None,False) and not L and not C
+    x,done=adaptive_reopen(5,F,K,3,B,4,0,32,L,C)
+    assert x in (15,19) and done and (1,0) in L and C
+    try:adaptive_reopen(1,(((1,0),),),{},3,Budget(0),1);assert False
+    except Exhausted:pass
+    print('character_parent_learning',certified,dict(stats))
+
+
 def main():
+    test_character_parent_learning()
     test_character_adaptive()
     test_character_section()
     test_character_restriction_path()
