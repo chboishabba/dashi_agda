@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False,exchange_rank=-1,exchange_probe_cap=1000000,exchange_small=5,exchange_rado=False,exchange_tagged=False,exchange_history=None):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -147,6 +147,11 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
             if cover(R,y):return y,B.stats,True
             character_degree=-1 # same source/demand already observed
         x=chart(n,P)[0]
+        if exchange_rank>=0:
+            from check_pnp_rooted_exchange import descent
+            y,done=descent(n,R,P,x,B,exchange_rank,exchange_probe_cap,exchange_small,exchange_rado,exchange_tagged,exchange_history,refinement)
+            if y is not None:assert satisfies(y,P,()) and cover(R,y)
+            return y,B.stats,done
         if indexed:
             from check_pnp_factorized_frontier import indexed_descent
             y,done=indexed_descent(n,P,x,k,B,width=width,history=history,k=refinement)
