@@ -124,18 +124,20 @@ def cube_tail_upper(R,s,homogeneous_norm_squared):
         raise ValueError('invalid tail norm bound')
     return sqrt_bounds(Q(26)*homogeneous_norm_squared/((2*s-1)*R**(2*s-1)))[1]
 
-def validate_tight(path,initial,nu,budget=None,*,initial_tail=Q(0)):
+def _validate_bernstein(path,initial,nu,budget,initial_tail,polarized):
     """Critical-norm bound with Bernstein enclosure and retained dissipation.
 
-    Charge every seam. Keep error below budget q<nu and reserve delta=min(nu/8,(nu-q)/2)
-    for H; the scalar estimate uses beta=nu-q-delta.
+    Charge every seam. Reserve positive dissipation for H.
+    The symmetric option uses q<2*nu and beta=nu-q/2-delta;
+    the original estimate uses q<nu and beta=nu-q-delta.
     initial_tail is a caller-certified bound for the unrepresented datum.
     No assertion of existence when validation fails.
     """
     if type(nu) not in (Q,int) or nu<=0: raise ValueError('positive exact viscosity required')
-    q=Q(nu,8) if budget is None else budget
-    if type(q) not in (Q,int) or not 0<q<nu: raise ValueError('invalid strict budget')
-    delta=min(Q(nu,8),Q(nu-q,2)); beta=nu-q-delta
+    q=Q(nu,4 if polarized else 8) if budget is None else budget
+    if type(q) not in (Q,int) or not 0<q<(2*nu if polarized else nu): raise ValueError('invalid strict budget')
+    available=nu-(Q(q,2) if polarized else q)
+    delta=min(Q(nu,8),Q(available,2)); beta=available-delta
     if type(initial_tail) not in (Q,int) or not 0<=initial_tail<q: raise ValueError('invalid initial tail bound')
     check(initial); last=initial; error=Q(initial_tail); peak=error
     for dt,poly in path:
@@ -145,10 +147,27 @@ def validate_tight(path,initial,nu,budget=None,*,initial_tail=Q(0)):
         v0=max(norm(u) for u in bernstein(poly))
         rb=bernstein(residual(dt,poly,nu))
         c=dt*sum((norm(u,True) for u in rb),Q(0))/len(rb)
-        error=up(exp_upper(dt*growth(v0,beta))*(error+jump+c))
+        error=up(exp_upper(dt*(polarized_growth(v0,beta) if polarized else growth(v0,beta)))*(error+jump+c))
         if error>=q: raise ValueError('strict error budget exceeded')
         peak=max(peak,error); last=eval_end(poly)
     return peak,up(norm(last,True)+error)
+
+def polarized_growth(v,beta):
+    """Symmetric projected interaction has mixed coefficient V0, not 2 V0."""
+    return growth(Q(v,2),beta)
+
+def validate_tight(path,initial,nu,budget=None,*,initial_tail=Q(0)):
+    """Original Bernstein estimate; preserve its exact legacy bounds."""
+    return _validate_bernstein(path,initial,nu,budget,initial_tail,False)
+
+def validate_polarized(path,initial,nu,budget=None,*,initial_tail=Q(0)):
+    """Use the paired Leray bound E' + (nu-E/2)H <= V0 G + c.
+
+    Strict q<2 nu with positive reserved dissipation. Terminal critical
+    bound <2 nu suffices for smooth global small-critical-norm continuation.
+    This is not a universal regularity guarantee.
+    """
+    return _validate_bernstein(path,initial,nu,budget,initial_tail,True)
 
 if __name__=='__main__':
     u=fixture(); path=build(u,2,Q(1,32),4)
