@@ -8,6 +8,9 @@ open import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact
   using (Point; add; sub)
 open import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact
   using (subAdd; addSub)
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
+import DASHI.Codec.TriadicMaskSignFactorization as Codec
+import DASHI.Codec.TriadicMaskSignSSPBridge as Bridge
 
 innovation : Point → Point → Point
 innovation previous current = sub current previous
@@ -134,3 +137,52 @@ completeAfterCube : (a b c d e f g h : Point) →
 completeAfterCube a b c d e f g h
   rewrite addSub (mixedCorner a b c d) (mixedCorner e f g h) =
   completeAfterMixed e f g h
+
+
+-- H43: actual existing DASHI mask/sign fibre, applied to the native
+-- innovation point. No new trit carrier, no identification of absence
+-- with occupied zero, no entropy optimality claim.
+PointFibre : Set
+PointFibre = Codec.FactorizedTrit × (Codec.FactorizedTrit × Codec.FactorizedTrit)
+
+encodePointFibre : Point → PointFibre
+encodePointFibre (Cube.ternary27Point x y z) =
+  Bridge.encodeSSPTrit x , (Bridge.encodeSSPTrit y , Bridge.encodeSSPTrit z)
+
+decodePointFibre : PointFibre → Point
+decodePointFibre (x , (y , z)) =
+  Cube.ternary27Point (Bridge.decodeSSPTrit x)
+    (Bridge.decodeSSPTrit y) (Bridge.decodeSSPTrit z)
+
+decodeEncodePointFibre : (p : Point) →
+  decodePointFibre (encodePointFibre p) ≡ p
+decodeEncodePointFibre (Cube.ternary27Point x y z)
+  rewrite Bridge.decodeSSP-encodeSSP x
+        | Bridge.decodeSSP-encodeSSP y
+        | Bridge.decodeSSP-encodeSSP z = refl
+
+encodeDecodePointFibre : (p : PointFibre) →
+  encodePointFibre (decodePointFibre p) ≡ p
+encodeDecodePointFibre (x , (y , z))
+  rewrite Bridge.encodeSSP-decodeSSP x
+        | Bridge.encodeSSP-decodeSSP y
+        | Bridge.encodeSSP-decodeSSP z = refl
+
+encodeInnovationFibre : Point → Point → PointFibre
+encodeInnovationFibre previous current =
+  encodePointFibre (innovation previous current)
+
+decodeInnovationFibre : Point → PointFibre → Point
+decodeInnovationFibre previous fibre = update previous (decodePointFibre fibre)
+
+decodeEncodeInnovationFibre : (previous current : Point) →
+  decodeInnovationFibre previous (encodeInnovationFibre previous current) ≡ current
+decodeEncodeInnovationFibre previous current
+  rewrite decodeEncodePointFibre (innovation previous current) =
+  updateFromInnovation previous current
+
+encodeDecodeInnovationFibre : (previous : Point) (fibre : PointFibre) →
+  encodeInnovationFibre previous (decodeInnovationFibre previous fibre) ≡ fibre
+encodeDecodeInnovationFibre previous fibre
+  rewrite innovationFromUpdate previous (decodePointFibre fibre) =
+  encodeDecodePointFibre fibre
