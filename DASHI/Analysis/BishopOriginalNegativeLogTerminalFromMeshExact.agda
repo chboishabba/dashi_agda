@@ -227,7 +227,7 @@ canonicalNatLogMonotone {i} {j} indices =
         {x = Terms.sourceCanonicalNatLogCandidate j}
         {y = Terms.sourceCanonicalNatLogCandidate i}
         (canonicalNatLogExpPositive j) reverseOrder
-      weak = RP.≤-respˡ-≃ (canonicalNatLogExpInverse i)
+      weak = RP.≤-respˡ-≃ (RP.≃-symm (canonicalNatLogExpInverse i))
         (RP.≤-respʳ-≃ (RP.≃-symm (canonicalNatLogExpInverse j))
           (NatMono.natRealMonotone (s≤s indices)))
     in RP.<-irrefl RP.≃-refl (RP.<-≤-trans strict weak))
