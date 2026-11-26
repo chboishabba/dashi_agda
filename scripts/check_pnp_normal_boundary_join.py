@@ -236,9 +236,15 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
     root,_,space=tree(n,F,B);memo={};empty={};maps={};width=0
     assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
     if character_degree>=0:
-        from check_pnp_character_ideal import demand_exclusion
-        if demand_exclusion(n,row_bits,H,B,degree=character_degree):
+        from check_pnp_character_ideal import demand_refinement
+        Q=demand_refinement(n,row_bits,H,B,degree=character_degree)
+        if Q is None:
             B.pay('character_root_empty');return None,0
+        B.pay('character_root_rank',len(Q)-len(H));H=Q
+        x=chart(n,H)[0]
+        B.pay('character_root_witness_check',1+sum(map(len,row_bits)))
+        if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in row_bits):
+            B.pay('character_root_witness');return x,0
     def structure(A,C):
         key=(A[0],C[0])
         if key not in maps:
@@ -532,6 +538,10 @@ def test_character_root():
     assert y is None and B.stats['character_root_empty']==1
     B=Budget(1000000);y,w=join_exact_one_demand(2,F[:1],B,character_degree=1)
     assert y is not None and sum(b^((s&y).bit_count()%2) for s,b in F[0])==1
+    F=(((47,1),(29,1),(74,0),(21,0)),((68,0),(107,1),(84,0)),((33,0),(48,1),(99,0)))
+    H=((100,1),(22,1),(9,0));B=Budget(1000000)
+    y,w=join_exact_one_demand(7,F,B,H,character_degree=1)
+    assert y==89 and B.stats['character_root_rank']==2 and B.stats['character_root_witness']==1
     print('character_root controls PASS')
 
 
