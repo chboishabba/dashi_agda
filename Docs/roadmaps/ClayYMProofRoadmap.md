@@ -1,3 +1,11 @@
+## 26 November 2026 — W0a nested-Ω ownership fragment kernel-checked
+
+**New receipt:** `DASHI/Physics/YangMills/BalabanCMP119Section2NestedOmegaOwnershipExact.agda` adds the source-calibrated `Section2NestedOmegaCarrier` fragment and kernel-checked `relativeOwnedBlockInAllEarlierOmega` / `ownedBlockInAllEarlierOmega`. CMP119 printed p. 254 Eq. (2.1) is cited as descending `Ω₁ ⊃ Λ₁ ⊃ Ω₂ ⊃ Λ₂ ⊃ ⋯` with DOI `10.1007/BF01217741`; the proof transports a relative-domain witness at `m` into all earlier `Ω_i` using only `nestedDomains`, `relativeDomainElimination`, `ownerInRelativeDomain`, and Nat subtraction-witness transport. The sanctioned local wrapper accepts the module, and notebook cell `VaWjy-e4DaDx` reports `W0A_CHECK_RC=0` under Agda 2.8.0 with the 50 GiB Colab RSS guard. `git diff --check`, literature normalization, Agda static self-test, sharp finite-TV, unconditional, and frontier gates PASS.
+
+**Boundary:** this is a minimal structural fragment, not an import of the full `P10SourceFaithfulActivityContract` carrier, not an inhabited original `Ω/Λ/S/B` dictionary, not CMP122-II Eq. (1.71) measure/Jacobian transport, and not `sourceStepIsEquation171Mass`. W0/W3 source proof and P0X remain OPEN; E1 full kernel acceptance and the legacy `--safe` audit remain BLOCKED; `YangMillsClaySolved=false` and `clayYangMillsPromoted=false` are unchanged.
+
+---
+
 ## 26 November 2026 — P0 proof-geometry visualization added
 
 **Diagram:** [editable SVG](../diagrams/YMP0RemainingProofGeometry.svg) and [PNG](../diagrams/YMP0RemainingProofGeometry.png). It visualizes the verified `534595d1b8` source state, the P0W/P0V source-identification frontier, the P0W/P0X signed-residual and uniform-rooted-rate frontier, and the parallel P0Y continuum/OS/N1/D2/G1 endpoints. The W1 box now states both signed Hessian directions: `∂s∂t log K = (K₀K_FG − K_FK_G)/K²` and `∂s∂t(−log K) = −(K₀K_FG − K_FK_G)/K²`. This is non-authoritative navigation only; no proof, Agda receipt, physical level or Clay flag changed.
