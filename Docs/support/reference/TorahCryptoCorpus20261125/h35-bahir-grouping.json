@@ -1,0 +1,290 @@
+{
+  "roundtrips": 72,
+  "witnesses": [
+    {
+      "column": 1,
+      "triple": "והו"
+    },
+    {
+      "column": 37,
+      "triple": "אני"
+    }
+  ],
+  "fibreSizes": {
+    "groups": [
+      24,
+      24,
+      24
+    ],
+    "directionWithinGroup": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "sameDirection": [
+      18,
+      18,
+      18,
+      18
+    ],
+    "sameSlot": [
+      12,
+      12,
+      12,
+      12,
+      12,
+      12
+    ]
+  },
+  "actual": {
+    "groups": {
+      "sums": [
+        [
+          10,
+          11,
+          17
+        ],
+        [
+          22,
+          6,
+          9
+        ],
+        [
+          16,
+          18,
+          6
+        ]
+      ],
+      "zero": 0,
+      "copiesA": 0,
+      "copiesB": 0
+    },
+    "directionWithinGroup": {
+      "sums": [
+        [
+          17,
+          1,
+          7
+        ],
+        [
+          6,
+          5,
+          1
+        ],
+        [
+          12,
+          11,
+          20
+        ],
+        [
+          23,
+          6,
+          19
+        ],
+        [
+          24,
+          17,
+          2
+        ],
+        [
+          3,
+          12,
+          19
+        ],
+        [
+          5,
+          4,
+          20
+        ],
+        [
+          2,
+          12,
+          1
+        ],
+        [
+          7,
+          8,
+          13
+        ],
+        [
+          6,
+          15,
+          12
+        ],
+        [
+          10,
+          17,
+          24
+        ],
+        [
+          5,
+          2,
+          23
+        ]
+      ],
+      "zero": 1,
+      "copiesA": 0,
+      "copiesB": 0
+    },
+    "sameDirection": {
+      "sums": [
+        [
+          0,
+          14,
+          10
+        ],
+        [
+          6,
+          23,
+          5
+        ],
+        [
+          24,
+          20,
+          7
+        ],
+        [
+          24,
+          11,
+          13
+        ]
+      ],
+      "zero": 0,
+      "copiesA": 0,
+      "copiesB": 0
+    },
+    "sameSlot": {
+      "sums": [
+        [
+          20,
+          2,
+          19
+        ],
+        [
+          12,
+          15,
+          16
+        ],
+        [
+          23,
+          3,
+          15
+        ],
+        [
+          14,
+          19,
+          19
+        ],
+        [
+          25,
+          13,
+          13
+        ],
+        [
+          23,
+          22,
+          16
+        ]
+      ],
+      "zero": 0,
+      "copiesA": 0,
+      "copiesB": 2
+    }
+  },
+  "control": {
+    "groups": {
+      "zero": {
+        "actual": 0,
+        "mean": 0.125,
+        "max": 1,
+        "atLeast": 72
+      },
+      "copiesA": {
+        "actual": 0,
+        "mean": 0.09722222222222222,
+        "max": 1,
+        "atLeast": 72
+      },
+      "copiesB": {
+        "actual": 0,
+        "mean": 0.16666666666666666,
+        "max": 1,
+        "atLeast": 72
+      }
+    },
+    "directionWithinGroup": {
+      "zero": {
+        "actual": 1,
+        "mean": 0.3888888888888889,
+        "max": 2,
+        "atLeast": 26
+      },
+      "copiesA": {
+        "actual": 0,
+        "mean": 0.5555555555555556,
+        "max": 3,
+        "atLeast": 72
+      },
+      "copiesB": {
+        "actual": 0,
+        "mean": 0.4722222222222222,
+        "max": 2,
+        "atLeast": 72
+      }
+    },
+    "sameDirection": {
+      "zero": {
+        "actual": 0,
+        "mean": 0.25,
+        "max": 1,
+        "atLeast": 72
+      },
+      "copiesA": {
+        "actual": 0,
+        "mean": 0.041666666666666664,
+        "max": 1,
+        "atLeast": 72
+      },
+      "copiesB": {
+        "actual": 0,
+        "mean": 0.08333333333333333,
+        "max": 1,
+        "atLeast": 72
+      }
+    },
+    "sameSlot": {
+      "zero": {
+        "actual": 0,
+        "mean": 0.16666666666666666,
+        "max": 1,
+        "atLeast": 72
+      },
+      "copiesA": {
+        "actual": 0,
+        "mean": 0,
+        "max": 0,
+        "atLeast": 72
+      },
+      "copiesB": {
+        "actual": 2,
+        "mean": 0.6666666666666666,
+        "max": 2,
+        "atLeast": 12
+      }
+    }
+  },
+  "allRank": 17,
+  "withAnchors": 19,
+  "remainingWithOracleSums": "5308930362839928667688049530226627139643793175493798707037516219525092562313843",
+  "remainingWithOracleSumsAndNamedAnchors": "7282483350946404208076885500996745047522350034970917293604274649554310785067",
+  "qualification": "Bahir attests grouping cardinalities, not specific numerical coordinate assignments or conservation laws. Consecutive lexicographic grouping, field chart and all tested equations are DASHI candidate assumptions. Named triples 1 and 37 from Rabbeinu Bahya commentary are disclosed target-side anchors, not predictions; oracle marginal sums use actual withheld row and measure residual only. Exact affine solution count for consistent oracle GF3 sums on unrestricted 27-state glyphs, not orthographic/linguistic count. All 72 C shifts are descriptive controls, no fresh blind validation."
+}
