@@ -145,7 +145,6 @@ def capture(checkpoint,sidecar,production):
         outputs[label]=out
     return dict(source_identity=verified['source_sha256'],label=verified['source_label'],receivers=outputs,scope='original same-clock captured receiver only; no numerical continuum acceptance')
 
-
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--checkpoint');p.add_argument('--sidecar');p.add_argument('--production-json');a=p.parse_args()
     if any((a.checkpoint,a.sidecar,a.production_json)):
