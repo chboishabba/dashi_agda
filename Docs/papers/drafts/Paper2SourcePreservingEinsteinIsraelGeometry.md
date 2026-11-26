@@ -160,3 +160,60 @@ The [original TSFV source owner](https://github.com/chboishabba/dashi_agda/blob/
 ## AY — actual strong spatial junction and second-normal-jet compatibility (26 Nov 2026)
 
 [AY canonical Hopf roadmap](https://github.com/chboishabba/dashi_agda/blob/cdabe0574ef5b3f6ba615219c2e8be74eb2b9a8c/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Reopened actual AM/AO source and master F8 nonlinear curvature; use original geometry not F8 model substitution. Exact reciprocal w=1/u-1, f=1+(b-1)/sqrt(S), w=f z smooth periodic gives strong nonlinear spatial seam by construction; bulk F(u)(1+w)^3=(1+w)Delta w-2|grad w|²+(Rreg/6)(1+w)²+2. Original nonzero eps=.025 six finite-box spectral resolutions (sine B=.36/poly B=.48), 24/135/448 coefficients, wall <=1.031e-18, independent test RMS bulk at finest .00510747/.00206002, not a solved continuum constraint. Ground-state test phi=u² f has exact linearized seam; conditional coercivity and reciprocal barrier criterion derived, sampled min>=1.8718 not uniform certified. Fixed-wall zero-shift time-symmetric gauge: spatial k±=M±jH/2, lapse [nN]=jN, ell=mean(nN)/N, mean timelike trace tr M+ell=0. J2=[partial_n k_ab] covariant, [ddot H]=2N²(J2+j(tr M+ell)H), scalar curvature jump=-2tr J2; hence five trace-free components remain beyond scalar constraint. Actual full metric AD on 27 seam points gives first jump 8.873e-16, TF second jet max .1840874. Two-sided collar second-jet correction delta D±=∓J2^TF/2+(R±-2Lambda)H/6 pays both scalar seam values and J2 locally, actual sampled algebra residual <=7.238e-16. No re-integrated corrected metric or coupled bulk solution yet. Next AZ: construct actual smooth tensor collar, re-solve coupled scalar/second-jet constraint, validate full-ball bounds, lapse/mean trace, then full evolution with existing F8. Three local/fetched checker blobs 0083391a63d2abe9328208c2dc23c547c0fbc776,486312bc0490057352c99578875a4bc3a96c9d30,3dc8f9d3becca61ec8864ced729abad5b8421d92. No native kernel, CI, full continuum or physical promotion; TSFV/OS, literal QFT/stress and independent Monster obligations retained; no YM edits.
+
+
+## AZ–BC — intrinsic evolution and two-sided analytic Einstein–Israel development (26 November 2026)
+
+Source custody: [canonical BC roadmap](https://github.com/chboishabba/dashi_agda/blob/f3ea6694bad964b4a67a1a4de4aa6b891d7416ac/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md), [BB wall checker](https://github.com/chboishabba/dashi_agda/blob/c50a7986e2bcb79a616172864a5b999a39fb2432/scripts/check_hopf369_p0bb.py), [BC normal checker](https://github.com/chboishabba/dashi_agda/blob/c71d659a35aa18056f42423069984e6fbfe8d4c6/scripts/check_hopf369_p0bc.py). These are selected geometry results; the classical Einstein, Israel, Gauss–Codazzi, Bianchi, Cauchy–Kowalevski and symmetric-hyperbolic existence machinery is prior art, not claimed as new.
+
+### Intrinsic local evolution
+
+For a timelike four-dimensional wall with induced metric \(h=-dt^2+H\), let \(H=e^{2p}H_0\), and prescribe the trace-free spatial endomorphism \(Q\) from the original Hopf seed, self-adjoint with respect to \(H_0\). Write the trace-free mean extrinsic tensor as \(M_{tt}=\sigma,\ M_{ti}=B_i,\ M_{ij}=H_{ik}(Q^k{}_j+\sigma\delta^k_j/3)\). In a common oriented spacelike normal, \(K_\pm=M\pm jh/2\), where the constant jump is \(j=-\kappa T/3\). The intrinsic constraints for the selected vacuum \(\Lambda=-6\) are
+
+\[
+ R_h+12-3j^2+\operatorname{tr}((h^{-1}M)^2)=0,\qquad
+ \nabla^a M_{ab}=0.
+\]
+
+With \(v=p_t,\ P_i=\partial_i p\), the principal blocks of the intrinsic system are \(v_t=(2/3)H^{ij}\partial_iP_j,\ (P_i)_t=\partial_i v,\ \sigma_t=H^{ij}\partial_i B_j,\ (B_i)_t=(1/3)\partial_i\sigma\). Lower-order terms and source data are specified in BA/BB. The positive symmetrizer is \(v^2+(2/3)|P|_H^2+\sigma^2+3|B|_H^2\), augmented by \(p^2\). The derivative compatibility condition propagates; the characteristic speeds in an orthonormal wall frame are \(0,\pm\sqrt{2/3},\pm1/\sqrt3\). Standard local symmetric-hyperbolic existence/uniqueness therefore applies to smooth compatible data on compact local domains with positive \(H\). This does not make the spacelike-normal Einstein problem a smooth well-posed Cauchy problem. The ansatz selects a class of brane geometries, not a universal brane dynamics law.
+
+BB actually evolves the original nonzero Hopf wall on a \(31^3\) seed lattice, rather than a replacement metric. Independent temporal differences reduce Gauss/Codazzi residuals from \(6.246\,10^{-5},9.959\,10^{-5}\) to \(1.561\,10^{-5},2.489\,10^{-5}\) when the time step is halved. An independently translated chart on the same lattice spacing agrees on 125 interior overlap points to \(6.939\,10^{-18}\) in maximum state component. These are time-refinement and finite overlap checks, not spatial convergence or an analytic global atlas.
+
+### Local analytic normal development and retained third jet
+
+Let \(g_5=dn^2+h(n,x)\), \(K=h_n/2\), \(\tau=\operatorname{tr}(h^{-1}K)\), \(E=\operatorname{Ric}(g_5)+4g_5\). The tangential equations give
+
+\[
+ D=K_n=\operatorname{Ric}(h)+4h-\tau K+2Kh^{-1}K,\qquad F=D_n.
+\]
+
+The signed cubic normal metric is \(h(n)=h_0+2nK+n^2D+n^3F/3\). On the wall \([D]=0\) follows from the trace-free mean and pure-tension jump. However, with \(u=\tau_n\) (common to both sides), differentiating the normal equation gives
+
+\[
+ [F]=j(8-u-j^2)h-12jMh^{-1}M.
+\]
+
+Indeed, constant scaling invariance of intrinsic Ricci gives \([d\operatorname{Ric}_h(2K)]=0\), and the terms linear in \(D\) cancel. Writing \(q=\operatorname{tr}((h^{-1}M)^2)\), the normal scalar constraint gives \(u=4-j^2-q\); hence \([F]=j(4+q)h-12jMh^{-1}M\). Equality of third-normal jets is not generally required by Israel matching. A local symbolic matrix check verifies all 16 entries of the unspecialized jump formula. This is a derived identity within the selected source geometry, not a new junction law.
+
+For exact analytic nondegenerate wall data satisfying the intrinsic constraints, the tangential normal equation has the local analytic Cauchy–Kowalevski route on both sides. To see the remaining equations, set \(e=E_{nn},f_a=E_{na}\). With \(E_{ab}=0\), contracted Bianchi gives
+
+\[
+ e_n=-2\nabla^a f_a-2\tau e,\qquad
+ (f_a)_n=\tfrac12\partial_a e-\tau f_a.
+\]
+
+The initial Gauss and Codazzi equations set \(e=f=0\); analytic uniqueness for this homogeneous normal system propagates them. Thus the conditional continuum claim is local analytic two-sided development with the original common wall and signed Israel jump. It does not imply uniform normal radius, stability of sideways integration, global periodic closure or matter/action identification.
+
+### Numerical normal-development audit
+
+BC takes the BB evolving source with \(\epsilon=\pm0.025\) and a zero comparator, seed lattice \(43^3\), spatial step .015, time step .006, and independently differentiates the tangential metric to reconstruct Ricci. It estimates \(F\) by a directional difference with step \(10^{-5}\). On the central \(3^3\) comparison core at \(t=.006\) the mixed wall component reaches .00163734. The one-sided \(D\) jump is at most \(1.78\,10^{-15}\) while the nonzero \(F\) jump has maximum coordinate component 30.1243. At the three normal distances, the nonzero signed cases report:
+
+| \(|n|\) | Quadratic tangential residual | Cubic tangential residual | Cubic normal residual | Cubic mixed residual |
+|---:|---:|---:|---:|---:|
+| .020 | .291331 | .00780671 | .00584387 | .000119016 |
+| .010 | .148941 | .00197585 | .00243826 | .000106149 |
+| .005 | .0752976 | .000497002 | .00158087 | .000102472 |
+
+All 18 selected side/amplitude/distance comparisons improve the tangential residual and preserve Lorentz signature on the comparison core. These are coordinate maxima, not invariant norms. The tangential residual is second order in normal distance in this experiment; the independent normal/mixed wall residuals (.00127626 and .000100352) expose a finite tangential discretization floor. The wall tangential residual is zero up to roundoff by construction, not independent continuum evidence. The original BB committed script is used, with its local AN metric/connection subset as in BB. BC local and committed blobs differ by a blank line only (verified Git hash after insertion). No native kernel certification or independent reproduction has been performed.
+
+**Claim boundary and submission cut.** Include the intrinsic reduction, analytic conditional proposition and finite reproducibility table in the working draft now. Before strengthening the manuscript's headline claim: independently refine the tangential mesh and constraint residual; establish actual analytic overlap matching and controlled normal remainder/radius on exhaustion; solve the global periodic seam and physical AdS boundary conditions; distinguish the resulting spacetime from the time-symmetric AY spatial collar; and attach actual F8 causal propagation and same-source matter/action only when proved. The selected pure-tension vacuum geometry does not solve TSFV/OS, universal sourced Einstein–Israel/QFT or Monster realization. No terminal TOE or Clay promotion.
