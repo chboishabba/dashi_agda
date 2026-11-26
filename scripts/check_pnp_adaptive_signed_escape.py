@@ -57,7 +57,7 @@ def lower(M):
     return M.get((),0)+sum(w for P,w in M.items() if P and w<0)
 
 
-def certificate(n,F,V,B,width=256):
+def certificate(n,F,V,B,width=256,envelope=None,admissible_envelope=None):
     k=len(V);assert k;U=coordinates(n,V);d=len(U);H=set();E=[]
     B.pay('chart',n+1)
     for G in F:
@@ -71,6 +71,8 @@ def certificate(n,F,V,B,width=256):
     order=sorted(R,key=lambda i:(len(E[i]),-sum(i in (a,b) for a,b,_ in T),i))
     while True:
         B.pay('checkpoint');L=masked(Q,E,R,T,B);M=marginal(L,d,k,B);a=lower(M)
+        if a<=0 and envelope is not None:a=max(a,envelope(M,d,B))
+        if a<=0 and admissible_envelope is not None:a=max(a,admissible_envelope(M,d,tuple(sorted(H)),B))
         if a>0:return tuple(sorted(H)),(tuple(U),tuple(V),tuple(E),L,a,stages)
         if not R:return None
         i=order[stages];P=dict(Q);intersect(Q,E[i],-1,B,P)
@@ -94,7 +96,7 @@ def reopen(receipt,y,B):
     return lift(lift(0,U,y),V,z)
 
 
-def adaptive(n,required,F,cap,width=256):
+def adaptive(n,required,F,cap,width=256,envelope=None,admissible_envelope=None):
     B=Budget(cap)
     try:
         B.pay('input',n+len(required)+sum(len(G)+1 for G in F)+1)
@@ -105,7 +107,7 @@ def adaptive(n,required,F,cap,width=256):
         M,R=transversal(H,B);G=tuple(H[j] for j in R);k=d;history=[]
         while k and G and () not in G:
             for W in blocks(k,G,B):
-                B.pay('candidate');q=certificate(k,G,W,B,width)
+                B.pay('candidate');q=certificate(k,G,W,B,width,envelope,admissible_envelope)
                 if q is not None:
                     G,r=q;history.append(r);k-=len(W);B.pay('dimensions',len(W));break
             else:break
@@ -117,8 +119,8 @@ def adaptive(n,required,F,cap,width=256):
     except (Exhausted,RecursionError):return None,B.stats,False
 
 
-def portfolio(n,required,F,cap,width=256):
-    x,s,done=adaptive(n,required,F,cap//2,width)
+def portfolio(n,required,F,cap,width=256,envelope=None,admissible_envelope=None):
+    x,s,done=adaptive(n,required,F,cap//2,width,envelope,admissible_envelope)
     if done:return x,done,'adaptive',s
     try:y,t,done=previous(n,required,F,cap-cap//2)
     except RecursionError:return None,False,'unknown',s
