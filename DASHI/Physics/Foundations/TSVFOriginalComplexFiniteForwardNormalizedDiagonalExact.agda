@@ -357,3 +357,150 @@ module _
     trans (cong (λ ket → C._*c_ (C.complex ½ 0ℚ) (Env.hermitianPair awForward ket))
                 (matrixIdentityActs awForward))
           (C.complexExt (solve []) (solve []))
+
+
+------------------------------------------------------------------------
+-- AX: inhabit the repaired ORIGINAL Hilbert compiler on the selected
+-- linear matrix restriction of the actual pointer. The pairing is
+-- normalized by the original norm²=2. This is a forward-only Hilbert
+-- view; the original ABL QuantumSurface and certificate are unchanged.
+------------------------------------------------------------------------
+import DASHI.Physics.Foundations.TSVFOriginalForwardPositiveFunctionalExact as Forward
+import DASHI.Physics.Foundations.TSVFOriginalForwardCyclicCrossGramExact as Cyclic
+import DASHI.Physics.Foundations.TSVFOriginalForwardCyclicActionQuotientExact as Quotient
+
+matrixAdd : Matrix2C → Matrix2C → Matrix2C
+matrixAdd (matrix2 a b c d) (matrix2 e f g h) =
+  matrix2 (C._+c_ a e) (C._+c_ b f) (C._+c_ c g) (C._+c_ d h)
+
+matrixScale : C.RationalComplex → Matrix2C → Matrix2C
+matrixScale z (matrix2 a b c d) =
+  matrix2 (C._*c_ z a) (C._*c_ z b) (C._*c_ z c) (C._*c_ z d)
+
+pointerScale : C.RationalComplex → Env.ComplexPointerRecord → Env.ComplexPointerRecord
+pointerScale z (Env.pointerRecord a b) =
+  Env.pointerRecord (C._*c_ z a) (C._*c_ z b)
+
+normalizedPair : Env.ComplexPointerRecord → Env.ComplexPointerRecord → C.RationalComplex
+normalizedPair u v = C._*c_ (C.complex ½ 0ℚ) (Env.hermitianPair u v)
+
+matrixAddActs : ∀ a b ket →
+  matrixAction (matrixAdd a b) ket ≡ Original.pointerAdd (matrixAction a ket) (matrixAction b ket)
+matrixAddActs (matrix2 (C.complex a0 a1) (C.complex a2 a3) (C.complex a4 a5) (C.complex a6 a7)) (matrix2 (C.complex b0 b1) (C.complex b2 b3) (C.complex b4 b5) (C.complex b6 b7)) (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+    (C.complexExt (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+
+matrixScaleActs : ∀ z a ket →
+  matrixAction (matrixScale z a) ket ≡ pointerScale z (matrixAction a ket)
+matrixScaleActs (C.complex z0 z1) (matrix2 (C.complex a0 a1) (C.complex a2 a3) (C.complex a4 a5) (C.complex a6 a7)) (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt (solve (z0 ∷ z1 ∷ a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (z0 ∷ z1 ∷ a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+    (C.complexExt (solve (z0 ∷ z1 ∷ a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (z0 ∷ z1 ∷ a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+
+normalizedPairRightAdd : ∀ u v w →
+  normalizedPair u (Original.pointerAdd v w) ≡ C._+c_ (normalizedPair u v) (normalizedPair u w)
+normalizedPairRightAdd (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) (Env.pointerRecord (C.complex v0 v1) (C.complex v2 v3)) (Env.pointerRecord (C.complex w0 w1) (C.complex w2 w3)) =
+  C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ w0 ∷ w1 ∷ w2 ∷ w3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ w0 ∷ w1 ∷ w2 ∷ w3 ∷ []))
+
+normalizedPairRightScale : ∀ u z v →
+  normalizedPair u (pointerScale z v) ≡ C._*c_ z (normalizedPair u v)
+normalizedPairRightScale (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) (C.complex z0 z1) (Env.pointerRecord (C.complex v0 v1) (C.complex v2 v3)) =
+  C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ z0 ∷ z1 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ z0 ∷ z1 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ []))
+
+RealNonnegativeComplex : C.RationalComplex → Set
+RealNonnegativeComplex z = (C.im z ≡ 0ℚ) × (0ℚ ≤ C.re z)
+
+normalizedSelfPairNonnegative : ∀ u → RealNonnegativeComplex (normalizedPair u u)
+normalizedSelfPairNonnegative (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ []) ,
+  subst (λ value → 0ℚ ≤ value) (sym (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ []))) halfTimes
+  where
+  sumSquares : ℚ
+  sumSquares = (u0 * u0 + u1 * u1) + (u2 * u2 + u3 * u3)
+
+  sumNNProof : 0ℚ ≤ sumSquares
+  sumNNProof = Order.addNonnegative
+    (Order.addNonnegative (Order.squareNonnegative u0) (Order.squareNonnegative u1))
+    (Order.addNonnegative (Order.squareNonnegative u2) (Order.squareNonnegative u3))
+
+  instance
+    halfNN : NonNegative ½
+    halfNN = nonNegative (ℚP.0≤∣p∣ ½)
+    sumNN : NonNegative sumSquares
+    sumNN = nonNegative sumNNProof
+    productNN : NonNegative (½ * sumSquares)
+    productNN = ℚP.nonNeg*nonNeg⇒nonNeg ½ sumSquares
+
+  halfTimes : 0ℚ ≤ ½ * sumSquares
+  halfTimes = ℚP.nonNegative⁻¹ (½ * sumSquares)
+
+matrixHilbertQuantum : Q.QuantumSurface
+matrixHilbertQuantum = record
+  { Scalar = C.RationalComplex
+  ; Weight = Q.QuantumSurface.Weight Original.finiteComplexQuantum
+  ; Ket = Env.ComplexPointerRecord
+  ; Bra = Env.ComplexPointerRecord
+  ; Operator = Matrix2C
+  ; Time = Q.QuantumSurface.Time Original.finiteComplexQuantum
+  ; evolveKet = Q.QuantumSurface.evolveKet Original.finiteComplexQuantum
+  ; evolveBra = Q.QuantumSurface.evolveBra Original.finiteComplexQuantum
+  ; apply = matrixAction
+  ; pair = normalizedPair
+  ; normSquared = Q.QuantumSurface.normSquared Original.finiteComplexQuantum
+  ; divideWeight = Q.QuantumSurface.divideWeight Original.finiteComplexQuantum
+  ; Positive = Q.QuantumSurface.Positive Original.finiteComplexQuantum
+  }
+
+module _
+  (rightGammas wrongGammas : List C.RationalComplex)
+  (right wrong : Env.ComplexPointerRecord)
+  (k : Nat)
+  where
+
+  private
+    original = originalSelectedEnsemble rightGammas wrongGammas right wrong k
+
+  matrixHilbertEnsemble : Q.TSVFEnsemble matrixHilbertQuantum
+  matrixHilbertEnsemble = Q.prePostSelected
+    (Q.initialTime original) (Q.middleTime original) (Q.finalTime original)
+    (Q.initialKet original) (Q.finalBra original)
+
+  matrixForwardReopens : Q.forwardState matrixHilbertEnsemble ≡ Q.forwardState original
+  matrixForwardReopens = refl
+
+  matrixHilbertLaws : Forward.OriginalPhysicalInnerProductLaws matrixHilbertEnsemble
+  matrixHilbertLaws = record
+    { braOfKet = λ ket → ket
+    ; operatorAdjoint = matrixAdjoint
+    ; operatorCompose = matrixProduct
+    ; selectedComposition = matrixProductActs
+    ; adjointLaw = λ a u v →
+        cong (C._*c_ (C.complex ½ 0ℚ)) (sym (matrixAdjointPair a u v))
+    ; oneScalar = C.oneC
+    ; operatorIdentity = matrixIdentity
+    ; identityActs = matrixIdentityActs
+    ; originalSelectedNormIsOne = C.complexExt (solve []) (solve [])
+    ; operatorAdd = matrixAdd
+    ; ketAdd = Original.pointerAdd
+    ; scalarAdd = C._+c_
+    ; addActs = matrixAddActs
+    ; pairRightAdditive = normalizedPairRightAdd
+    ; operatorScale = matrixScale
+    ; ketScale = pointerScale
+    ; scaleActs = matrixScaleActs
+    ; scalarMultiply = C._*c_
+    ; pairRightHomogeneous = normalizedPairRightScale
+    ; HilbertNonnegative = RealNonnegativeComplex
+    ; scalarSelfPairNonnegative = normalizedSelfPairNonnegative
+    }
+
+  matrixOriginalNormalizedFunctional :
+    ∀ a → Forward.originalForwardFunctional matrixHilbertEnsemble matrixHilbertLaws a
+      ≡ originalNormalizedMatrixState rightGammas wrongGammas right wrong k a
+  matrixOriginalNormalizedFunctional a = refl
+
+  matrixOriginalCyclicNonnegative : ∀ a →
+    RealNonnegativeComplex (Cyclic.originalObserverCrossGram matrixHilbertEnsemble matrixHilbertLaws a a)
+  matrixOriginalCyclicNonnegative =
+    Cyclic.originalAllCyclicDiagonalsNonnegative matrixHilbertEnsemble matrixHilbertLaws
