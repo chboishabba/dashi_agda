@@ -1,0 +1,39 @@
+{
+  "predecessor": "8474c8e5ff070084668c68de52000d6c3e58b2dc",
+  "scope": "Source-level sufficient uniform CFL for original mode3 in exact arithmetic; affine forcing and smooth compatible finite-domain field-energy convergence. Not the historical CFL guard, high-Sobolev Weyl trace, full production, native kernel, or physical authority.",
+  "scripts": [
+    {
+      "path": "scripts/check_f8_mode3_uniform_cfl.py",
+      "commit": "f29c7dd0097b723a477f2d29aea237f5255e49ae",
+      "blob": "d774f56786abb8aecfd2a38caae364a2adfccd2c",
+      "sha256": "802518fde73bd81cd067b1854a0a39d9e2c46fe9af6bf1344c4f2ad661e85fb6",
+      "local_output_sha256": "307df4b21ca5539a585d7a09cb91bae860a68c74f00af8cef716d2da155daf4c",
+      "exact_checks": 36,
+      "matrix_regressions": 12,
+      "max_sample_mu": 6.187471172616559,
+      "max_sample_one_step_gain": 1.005014592326571,
+      "max_sample_operator_norm": 911.5070631834312
+    },
+    {
+      "path": "scripts/check_f8_mode3_forced_convergence.py",
+      "commit": "0bf249c2b3ad02781961117b499949ef8e415894",
+      "blob": "82a4e46ee7e228772a992ba9d7f21615f6f5b469",
+      "sha256": "70fbe6d6af5cbc7ed47e5d1346aae3b5734468c430e0dc99b870480d981ca709",
+      "local_output_sha256": "408659da2750f7a97b1c97ce351da71df236d01a1b08c480e84e057e85f49a00",
+      "exact_checks": 16,
+      "noncommuting_stage_lift_checks": 3,
+      "sms_arithmetic_margin": "2522475013/100000000000"
+    }
+  ],
+  "bounds": {
+    "clock": "1<=t<=12",
+    "dy_max": ".03",
+    "frozen_log_norm": 140,
+    "frozen_operator_norm": "7/dr+10/dy+140",
+    "fixed_metric_generator_derivative": "10/dr+10/dy+700",
+    "sufficient_CFL": "dt*(7/dr+10/dy+280)<=1",
+    "one_step_norm_growth": "exp(569*dt)",
+    "forced_field_energy_error": "O(dr+dy+dt), conditional on smooth compatible finite-domain reference and exact stage clocks"
+  },
+  "execution": "Local SymPy/Fraction and NumPy small matrix checks; no GitHub CI. Both local script Git hashes verified against branch blobs; extra blank line on first CFL upload corrected. No actual full source-on production run."
+}
