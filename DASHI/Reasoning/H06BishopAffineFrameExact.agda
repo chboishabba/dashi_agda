@@ -204,7 +204,7 @@ normLeadingOne (frame3 x y z) =
 
 leadingOneApart : (f : Frame3) →
   B._≄0 (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f))
-leadingOneApart f = inj₂ (BP.<-respʳ-≃ (BP.≃-sym (normLeadingOne f)) (normPositive f))
+leadingOneApart f = inj₂ (BP.<-respʳ-≃ (BP.≃-symm (normLeadingOne f)) (normPositive f))
 
 frameRotation : Frame3 → Matrix3
 frameRotation f = rotation B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f) (leadingOneApart f)
@@ -413,7 +413,7 @@ skewZ (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) = B._-_ d b
 leadingNormPositive : (f : Frame3) →
   B._<_ B.0ℝ (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f))
 leadingNormPositive f =
-  BP.<-respʳ-≃ (BP.≃-sym (normLeadingOne f)) (normPositive f)
+  BP.<-respʳ-≃ (BP.≃-symm (normLeadingOne f)) (normPositive f)
 
 leadingInv : Frame3 → B.ℝ
 leadingInv f = Inv._⁻¹
@@ -431,7 +431,7 @@ traceFactor (frame3 x y z) =
       r = frameRotation (frame3 x y z)
       open BP.ℝ-Solver
   in BP.≃-trans
-    (BP.+-cong (BP.≃-sym (Inv.*-inverseˡ n (leadingOneApart (frame3 x y z)))) BP.≃-refl)
+    (BP.+-cong (BP.≃-symm (Inv.*-inverseˡ n (leadingOneApart (frame3 x y z)))) BP.≃-refl)
     (solve 4 (λ x y z i →
       (i ⊗ (Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z))))
       ⊕ (i ⊗ ((Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z)))
@@ -444,7 +444,7 @@ traceFactor (frame3 x y z) =
       BP.≃-refl x y z i)
 
 tracePositive : (f : Frame3) → B._<_ B.0ℝ (traceDenominator (frameRotation f))
-tracePositive f = BP.<-respʳ-≃ (BP.≃-sym (traceFactor f))
+tracePositive f = BP.<-respʳ-≃ (BP.≃-symm (traceFactor f))
   (BP.posx⇒0<x (BP.posx,y⇒posx*y (BP.0<x⇒posx fourPositive) (leadingInvPositive f)))
 
 -- The inverse is a real operation on a supplied matrix with a nonzero
@@ -494,8 +494,8 @@ recoverCoordinate f v k eq =
       nz = inj₂ (tracePositive f)
       i = Inv._⁻¹ d nz
   in BP.≃-trans (BP.*-congˡ eq)
-    (BP.≃-trans (BP.*-congˡ (BP.*-congʳ (BP.≃-sym (traceFactor f))))
-      (BP.≃-trans (BP.≃-sym (BP.*-assoc i d v))
+    (BP.≃-trans (BP.*-congˡ (BP.*-congʳ (BP.≃-symm (traceFactor f))))
+      (BP.≃-trans (BP.≃-symm (BP.*-assoc i d v))
         (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ d nz)) (BP.*-identityˡ v))))
 
 frameReopens : (f : Frame3) →
