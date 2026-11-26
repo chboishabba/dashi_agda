@@ -459,6 +459,7 @@ module _
   where
 
   private
+    original : Q.TSVFEnsemble Original.finiteComplexQuantum
     original = originalSelectedEnsemble rightGammas wrongGammas right wrong k
 
   matrixHilbertEnsemble : Q.TSVFEnsemble matrixHilbertQuantum
@@ -504,3 +505,21 @@ module _
     RealNonnegativeComplex (Cyclic.originalObserverCrossGram matrixHilbertEnsemble matrixHilbertLaws a a)
   matrixOriginalCyclicNonnegative =
     Cyclic.originalAllCyclicDiagonalsNonnegative matrixHilbertEnsemble matrixHilbertLaws
+
+
+  -- Consume the original quotient theorem rather than prove a second
+  -- abstract kernel congruence. The selected matrix action is now an
+  -- actual source-written input of that theorem.
+  matrixCyclicLeftKernel :
+    ∀ left a b →
+    matrixAction a (Q.forwardState matrixHilbertEnsemble)
+      ≡ matrixAction b (Q.forwardState matrixHilbertEnsemble) →
+    matrixAction (matrixProduct left a) (Q.forwardState matrixHilbertEnsemble)
+      ≡ matrixAction (matrixProduct left b) (Q.forwardState matrixHilbertEnsemble)
+  matrixCyclicLeftKernel =
+    Quotient.originalLeftActionPreservesCyclicKernel matrixHilbertEnsemble matrixHilbertLaws
+
+  matrixCyclicImageSection : ∀ ket →
+    Cyclic.originalCyclicVector matrixHilbertEnsemble matrixHilbertLaws (matrixCyclicSection ket)
+      ≡ ket
+  matrixCyclicImageSection = matrixCyclicSectionReopens
