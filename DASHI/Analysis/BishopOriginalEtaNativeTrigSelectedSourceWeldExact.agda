@@ -22,9 +22,15 @@ module DASHI.Analysis.BishopOriginalEtaNativeTrigSelectedSourceWeldExact where
 -- acceptance and original nonzero divisor arguments remain OPEN.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Product.Base using (proj₁; proj₂)
 
+import Real as R
+import RealProperties as RP
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
+import Relation.Binary.PropositionalEquality as Eq
+import Data.Nat.Properties as NatP
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as Analytic
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
@@ -136,3 +142,95 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
       (λ x y → proj₂ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
       (λ x y → proj₁ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
       n
+
+
+  -- Every positive-integer scale, including b=1 and the original b=2.
+  -- Same literal Dirichlet terms; the index is b*(j+1)-1.
+  originalRound11AllProductScale :
+    (s : Analytic.BishopComplex) (i j : Nat) →
+    Eta._≈C_
+      (Selected.sourceTerms s (j + i * suc j))
+      (Analytic._*C_ (Selected.sourceTerms s i)
+                     (Selected.sourceTerms s j))
+  originalRound11AllProductScale s i j =
+    let
+      logLaw = Log.canonicalNatLogAllProducts i j
+      negReal = R.-_ (Analytic.re s)
+      negImag = R.-_ (Analytic.im s)
+      realLaw = RP.≃-trans (RP.*-congˡ logLaw)
+        (RP.*-distribˡ-+ negReal (L i) (L j))
+      imagLaw = RP.≃-trans (RP.*-congˡ logLaw)
+        (RP.*-distribˡ-+ negImag (L i) (L j))
+      addLaw = Native.originalBishopAnalyticExpAddFromNativeRealExpAndTrig T
+        (λ x y → proj₂ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
+        (λ x y → proj₁ (Signed.originalSineCosineAdditionFromNativeFactorials inputs x y))
+    in
+    Eta.≈C-trans
+      (ExpBridge.bishopAnalyticExpCongruent T realLaw imagLaw)
+      (addLaw (Terms.bishopNegativeSLn L s i)
+              (Terms.bishopNegativeSLn L s j))
+
+  -- Retain the signed residual at each base and actual cutoff.
+  -- b = suc i; source coefficient b^(-s) is at zero-based i.
+  baseScale : Analytic.BishopComplex → Nat → Analytic.BishopComplex
+  baseScale s i =
+    Analytic._*C_ (Analytic.bishop-complex (NatReal.natReal (suc i)) R.0ℝ)
+                  (Selected.sourceTerms s i)
+
+  baseResidual : Analytic.BishopComplex → Nat → Nat → Analytic.BishopComplex
+  baseResidual s i n =
+    Analytic._+C_ (Dirichlet.dirichletPartial Selected.sourceTerms s (suc i * n))
+      (Analytic.negC (Analytic._*C_ (baseScale s i)
+        (Dirichlet.dirichletPartial Selected.sourceTerms s n)))
+
+  -- Exact signed diamond algebra, before any limit or division.
+  residualDiamondAlgebra :
+    (a b c d p q : Analytic.BishopComplex) →
+    Eta._≈C_
+      (Analytic._+C_ (Analytic._+C_ a (Analytic.negC (Analytic._*C_ p b)))
+        (Analytic._*C_ p (Analytic._+C_ b (Analytic.negC (Analytic._*C_ q d)))))
+      (Analytic._+C_ (Analytic._+C_ a (Analytic.negC (Analytic._*C_ q c)))
+        (Analytic._*C_ q (Analytic._+C_ c (Analytic.negC (Analytic._*C_ p d)))))
+  residualDiamondAlgebra
+    (Analytic.bishop-complex ar ai) (Analytic.bishop-complex br bi)
+    (Analytic.bishop-complex cr ci) (Analytic.bishop-complex dr di)
+    (Analytic.bishop-complex pr pi) (Analytic.bishop-complex qr qi) =
+    (let open RP.ℝ-Solver in
+     solve 12
+       (λ ar ai br bi cr ci dr di pr pi qr qi →
+         ((ar ⊕ (⊝ ((pr ⊗ br) ⊖ (pi ⊗ bi)))) ⊕ ((pr ⊗ (br ⊕ (⊝ ((qr ⊗ dr) ⊖ (qi ⊗ di))))) ⊖ (pi ⊗ (bi ⊕ (⊝ ((qr ⊗ di) ⊕ (qi ⊗ dr)))))))
+         ⊜
+         ((ar ⊕ (⊝ ((qr ⊗ cr) ⊖ (qi ⊗ ci)))) ⊕ ((qr ⊗ (cr ⊕ (⊝ ((pr ⊗ dr) ⊖ (pi ⊗ di))))) ⊖ (qi ⊗ (ci ⊕ (⊝ ((pr ⊗ di) ⊕ (pi ⊗ dr))))))))
+       RP.≃-refl ar ai br bi cr ci dr di pr pi qr qi)
+    ,
+    (let open RP.ℝ-Solver in
+     solve 12
+       (λ ar ai br bi cr ci dr di pr pi qr qi →
+         ((ai ⊕ (⊝ ((pr ⊗ bi) ⊕ (pi ⊗ br)))) ⊕ ((pr ⊗ (bi ⊕ (⊝ ((qr ⊗ di) ⊕ (qi ⊗ dr))))) ⊕ (pi ⊗ (br ⊕ (⊝ ((qr ⊗ dr) ⊖ (qi ⊗ di)))))))
+         ⊜
+         ((ai ⊕ (⊝ ((qr ⊗ ci) ⊕ (qi ⊗ cr)))) ⊕ ((qr ⊗ (ci ⊕ (⊝ ((pr ⊗ di) ⊕ (pi ⊗ dr))))) ⊕ (qi ⊗ (cr ⊕ (⊝ ((pr ⊗ dr) ⊖ (pi ⊗ di))))))))
+       RP.≃-refl ar ai br bi cr ci dr di pr pi qr qi)
+
+  sameProductCutoff : (b c n : Nat) → b * (c * n) Eq.≡ c * (b * n)
+  sameProductCutoff b c n =
+    Eq.trans (Eq.sym (NatP.*-assoc b c n))
+      (Eq.trans (Eq.cong (λ m → m * n) (NatP.*-comm b c))
+        (NatP.*-assoc c b n))
+
+  -- The two orders of base refinement have exactly equal signed endpoints.
+  -- No cancellation of a divisor or promotion to an analytic limit.
+  originalRound11BaseResidualDiamond :
+    (s : Analytic.BishopComplex) (i j n : Nat) →
+    Eta._≈C_
+      (Analytic._+C_ (baseResidual s i (suc j * n))
+        (Analytic._*C_ (baseScale s i) (baseResidual s j n)))
+      (Analytic._+C_ (baseResidual s j (suc i * n))
+        (Analytic._*C_ (baseScale s j) (baseResidual s i n)))
+  originalRound11BaseResidualDiamond s i j n
+    rewrite sameProductCutoff (suc i) (suc j) n =
+    residualDiamondAlgebra
+      (Dirichlet.dirichletPartial Selected.sourceTerms s (suc j * (suc i * n)))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s (suc j * n))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s (suc i * n))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s n)
+      (baseScale s i) (baseScale s j)
