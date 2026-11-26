@@ -123,6 +123,18 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
                 if y is not None:assert satisfies(y,P,()) and cover(R,y)
                 return y,B.stats,True
             refinement=int(Q!=P);P=Q
+        # Reuse the character pass before gain descent; actual rank refinement
+        # changes K, not the subsequent incumbent time.
+        if character_degree>=0:
+            from check_pnp_character_ideal import demand_refinement
+            F=tuple(tuple((1<<j,0) for j in bits(a)) for a in R)
+            Q=demand_refinement(n,F,P,B,degree=character_degree)
+            if Q is None:return None,B.stats,True
+            B.pay('character_source_rank',len(Q)-len(P))
+            refinement+=int(Q!=P);P=Q
+            y=chart(n,P)[0];B.pay('character_source_witness_check',1+sum(a.bit_count() for a in R))
+            if cover(R,y):return y,B.stats,True
+            character_degree=-1 # same source/demand already observed
         x=chart(n,P)[0]
         if indexed:
             from check_pnp_factorized_frontier import indexed_descent
