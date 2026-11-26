@@ -1173,3 +1173,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## Live-pivot dependency reuse — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#live-pivot-dependency-reuse-in-proof-carrying-character-transport--26-november-2026). Active proof row indices, transitive dependency slicing and signed affine projection preserve the inherited span; local extension avoids repeated full proof replay and every terminal certificate remains independently replayed. Scoped sourceBacked; paired 6300 small and240 larger decisions agree, observed event reductions7.69% and21.22%. Mixed-only inhabited parent fixture verified. No universal proof size/resource theorem or unrestricted lower bound; all thirteen principal targets remain leafOpen.
+
+
+## Rooted monotone exchange, canonical counts and contraction-version amortization — 27 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#rooted-monotone-exchange-canonical-counts-and-contraction-version-amortization--27-november-2026). Exact original signed movement encoding, row-root contraction, optional Rado/collective tag and source integration now implemented (sourceBacked). At most m(m+1)/2 root probes per fixed incumbent with retries only after certified component contraction; shared bounded work, not universal productive success. Nine planted 18/30 sources remain UNKNOWN at tested caps; universal failedProbeAmortization and uniformAffordableExchangeDiscovery still leafOpen, all thirteen universal targets retained. No native admission or Clay endpoint claim.
