@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -126,12 +126,23 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
         # Reuse the character pass before gain descent; actual rank refinement
         # changes K, not the subsequent incumbent time.
         if character_degree>=0:
-            from check_pnp_character_ideal import demand_refinement
+            from check_pnp_character_ideal import demand_character_close
             F=tuple(tuple((1<<j,0) for j in bits(a)) for a in R)
-            Q=demand_refinement(n,F,P,B,degree=character_degree)
+            Q,y=demand_character_close(n,F,P,B,degree=character_degree,quotient_cap=character_quotient_cap)
             if Q is None:return None,B.stats,True
             B.pay('character_source_rank',len(Q)-len(P))
-            refinement+=int(Q!=P);P=Q
+            if y is not None:
+                assert satisfies(y,Q,()) and cover(R,y)
+                return y,B.stats,True
+            if Q!=P:
+                # Global algebraic pins are a real K refinement; feed them
+                # through the existing exact-one closure before gain descent.
+                Q,y=close(n,R,B,required=Q)
+                if Q is None or y is not None:
+                    if y is not None:assert satisfies(y,P,()) and cover(R,y)
+                    return y,B.stats,True
+                refinement+=1
+            P=Q
             y=chart(n,P)[0];B.pay('character_source_witness_check',1+sum(a.bit_count() for a in R))
             if cover(R,y):return y,B.stats,True
             character_degree=-1 # same source/demand already observed
@@ -195,6 +206,11 @@ def test_character_source():
 
 def main():
     test_character_source()
+    S=[(6,9,17),(2,9,13),(2,14,16),(0,5,15),(3,6,13),(1,13,15),(10,13,17),(0,4,8),(6,12,17),(3,8,12),(0,5,16),(4,7,9),(7,11,14),(10,12,17),(0,5,17),(1,3,4),(5,9,16),(6,10,16),(7,10,11),(1,2,13),(1,7,12),(4,7,15),(8,11,14),(1,8,14),(3,4,15),(5,10,11),(2,11,15),(2,9,12),(6,8,14),(0,3,16)]
+    y,B,done=solve(18,S,20000000,indexed=True,demand=True,character_degree=1,character_quotient_cap=64)
+    assert done and y is not None and cover(incidence(18,S),y)
+    assert B['character_module_dimension']==4
+    assert not solve(18,S,0,character_degree=1,character_quotient_cap=64)[2]
     rng=Random(369);fixtures=verified=empty=unknown=trades=compares=0
     for m in (3,6,9,12):
         for _ in range(70):
