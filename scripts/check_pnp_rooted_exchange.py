@@ -121,7 +121,7 @@ def rado_root(d,blocks,B):
     return 'SAT',[value(U,z) for U,T in blocks]
 
 
-def discover(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
+def discover(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False,tagged=False):
     """Return (movement, decisive). Decisive None excludes every positive root.
 
     The bounded producer does not promise success on every inhabited source.
@@ -140,11 +140,50 @@ def discover(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
     # Root-local exclusions can be reused globally on this fixed carrier:
     # no positive surplus at row e means every feasible trade has zero there.
     versions={ids[0]:0 for ids,rels in comps};pending=set(range(len(roots)));seen={}
+    def reopen(ids,Y,Q):
+        selected=dict(zip(ids,Y));rows=[]
+        Q.pay('exchange_reopen',1+d*(1+L)+sum(len(S) for U,S in blocks))
+        for j,(U,S) in enumerate(blocks):
+            p=selected[j] if j in selected else value(U,z0);assert p in S
+            rows.extend((a,p>>k&1) for k,a in enumerate(U))
+        z=D.lift(rows);assert z is not None;v=lift(0,V,z&((1<<len(V))-1))
+        Q.pay('exchange_verify',1+n+sum(r.bit_count() for r in R))
+        q=surplus(R,x,v);assert all(a>=0 and a%2==0 for a in q) and any(q)
+        assert satisfies(x^v,P,()) and pairing_receipt(R,x,v) is not None
+        return v,q
+    if tagged:
+        # A positive local label may emit one optional tag. An odd XOR of
+        # tags proves at least one positive row; no root loop needed if exact.
+        # Tags are auxiliary witness choices, never counted as original trades.
+        positive={i:set(T) for i,T in roots}
+        for ids,rels in comps:
+            E=[e for e,(i,T) in enumerate(roots) if i in ids and T]
+            if not E:continue
+            Q=ProbeBudget(B,probe_cap);B.pay('exchange_tag_probe')
+            try:
+                Q.pay('exchange_tag_choices',1+sum(len(blocks[j][1])*(1+len(blocks[j][0]))*(1+len(rels)) for j in ids))
+                C=D.choices(blocks,ranges,ids,rels);tag=1<<len(rels);M=[]
+                for j,O in zip(ids,C):
+                    Q.pay('exchange_tag_options',1+2*len(O))
+                    A=[(p<<1,t) for p,t in O]
+                    A.extend(((p<<1)|1,t^tag) for p,t in O if p in positive.get(j,()))
+                    M.append(A)
+                status,Y,_=collective(M+[[(0,tag)]],len(rels)+1,rank_cap,B=Q)
+                if status=='SAT':
+                    assert any(p&1 for p in Y[:-1]);v,q=reopen(ids,[p>>1 for p in Y[:-1]],Q)
+                    B.pay('exchange_tag_witness');return v,True
+                if status=='UNSAT':
+                    for e in E:pending.remove(e)
+                    B.pay('exchange_tag_empty',len(E))
+                else:B.pay('exchange_tag_unknown')
+            except ProbeExhausted:B.pay('exchange_tag_unknown')
     while pending:
         e=next((e for e in sorted(pending) if seen.get(e,-1)!=versions[owners[roots[e][0]][0][0]]),None)
         B.pay('exchange_schedule',1+len(pending))
         if e is None:break
-        i,T=roots[e];ids,rels=owners[i];key=ids[0];seen[e]=versions[key]
+        i,T=roots[e];ids,rels=owners[i];key=ids[0]
+        if e in seen:B.pay('exchange_retry')
+        seen[e]=versions[key]
         B.pay('exchange_root')
         if not T:
             pending.remove(e);B.pay('exchange_root_empty');continue
@@ -163,16 +202,7 @@ def discover(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
                 T0=[p for p in S if p not in bad];assert len(T0)<len(S) and value(U,z0) in T0
                 blocks[i]=(U,T0);versions[key]+=1;pending.remove(e)
                 B.pay('exchange_root_empty');continue
-            # Complete independent components with their original zero receipts.
-            selected=dict(zip(ids,Y));rows=[]
-            Q.pay('exchange_reopen',1+d*(1+L)+sum(len(S) for U,S in blocks))
-            for j,(U,S) in enumerate(blocks):
-                p=selected[j] if j in selected else value(U,z0);assert p in S
-                rows.extend((a,p>>k&1) for k,a in enumerate(U))
-            z=D.lift(rows);assert z is not None;v=lift(0,V,z&((1<<len(V))-1))
-            Q.pay('exchange_verify',1+n+sum(r.bit_count() for r in R))
-            q=surplus(R,x,v);assert all(a>=0 and a%2==0 for a in q) and q[e]>0
-            assert satisfies(x^v,P,()) and pairing_receipt(R,x,v) is not None
+            v,q=reopen(ids,Y,Q);assert q[e]>0
             B.pay('exchange_root_witness');return v,True
         except ProbeExhausted:
             B.pay('exchange_root_unknown')
@@ -180,9 +210,9 @@ def discover(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
 
 
 
-def descent(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
+def descent(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False,tagged=False,history=None,k_index=0):
     """Monotone source descent. UNKNOWN never proves no cover."""
-    k=len(R)//3
+    k=len(R)//3;t=0
     assert len(R)%3==0 and all(sum((r>>j)&1 for r in R)==3 for j in range(n))
     while x.bit_count()>k:
         B.pay('exchange_descent')
@@ -190,11 +220,12 @@ def descent(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False):
         H=canon(tuple((a,0) for a,b in P)+tuple((1<<j,0) for j in range(n) if not (x>>j&1)))
         _,V=chart(n,H);B.pay('exchange_removal_kernel',1+n*(1+len(P)))
         if V:v,done=V[0],True
-        else:v,done=discover(n,R,P,x,B,rank_cap,probe_cap,small,rado)
+        else:v,done=discover(n,R,P,x,B,rank_cap,probe_cap,small,rado,tagged)
         if v is None:return None,done
         y=x^v;q=surplus(R,x,v)
         assert all(t>=0 and t%2==0 for t in q) and any(q)
         assert satisfies(y,P,()) and y.bit_count()<=x.bit_count()-2
-        x=y
+        if history is not None:history.append((k_index,t,x,v,q,B.left))
+        x=y;t+=1
     assert all((x&r).bit_count()==1 for r in R)
     return x,True
