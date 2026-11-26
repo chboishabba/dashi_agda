@@ -220,7 +220,7 @@ def pair_exclusion_core(n,G,J,H,B):
     K=canon(out);assert K is not None and canon(H+K)==H
     return K
 
-def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0, character_degree=-1):
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0, character_degree=-1,character_quotient_cap=0):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
@@ -236,14 +236,14 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
     root,_,space=tree(n,F,B);memo={};empty={};maps={};width=0
     assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
     if character_degree>=0:
-        from check_pnp_character_ideal import demand_refinement
-        Q=demand_refinement(n,row_bits,H,B,degree=character_degree)
+        from check_pnp_character_ideal import demand_character_close
+        Q,x=demand_character_close(n,row_bits,H,B,degree=character_degree,quotient_cap=character_quotient_cap)
         if Q is None:
             B.pay('character_root_empty');return None,0
         B.pay('character_root_rank',len(Q)-len(H));H=Q
-        x=chart(n,H)[0]
+        if x is None:x=chart(n,H)[0]
         B.pay('character_root_witness_check',1+sum(map(len,row_bits)))
-        if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in row_bits):
+        if satisfies(x,H,()) and all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in row_bits):
             B.pay('character_root_witness');return x,0
     def structure(A,C):
         key=(A[0],C[0])
@@ -542,6 +542,12 @@ def test_character_root():
     H=((100,1),(22,1),(9,0));B=Budget(1000000)
     y,w=join_exact_one_demand(7,F,B,H,character_degree=1)
     assert y==89 and B.stats['character_root_rank']==2 and B.stats['character_root_witness']==1
+    S=[(6,9,17),(2,9,13),(2,14,16),(0,5,15),(3,6,13),(1,13,15),(10,13,17),(0,4,8),(6,12,17),(3,8,12),(0,5,16),(4,7,9),(7,11,14),(10,12,17),(0,5,17),(1,3,4),(5,9,16),(6,10,16),(7,10,11),(1,2,13),(1,7,12),(4,7,15),(8,11,14),(1,8,14),(3,4,15),(5,10,11),(2,11,15),(2,9,12),(6,8,14),(0,3,16)]
+    R=tuple(sum(1<<j for j,s in enumerate(S) if i in s) for i in range(18));u,V=chart(30,canon((r,1) for r in R))
+    F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(r)) for r in R)
+    B=Budget(10000000);y,w=join_exact_one_demand(len(V),F,B,character_degree=1,character_quotient_cap=64)
+    assert y is not None and all((lift(u,V,y)&r).bit_count()==1 for r in R)
+    assert B.stats['character_module_dimension']==4 and B.stats['character_root_witness']==1
     print('character_root controls PASS')
 
 
