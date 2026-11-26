@@ -172,13 +172,61 @@ def cached_empty_cover(n,H,empty,B,limit):
     return () in simplify(G,B)
 
 
-def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0):
+def pair_exclusion_core(n,G,J,H,B):
+    """Weaken a failed two-row demand using counted compatible pairs.
+
+    Return None when the two rows and H are compatible. No Cartesian
+    product of local one-hot patterns is constructed.
+    """
+    from collections import Counter
+    U=span(a for a,b in G);V=span(a for a,b in J);I=intersection(n,U,V)
+    D=intersection(n,span(a for a,b in H),span(U+V))
+    E=U+V;eq=tuple(value(E,1<<j) for j in range(n));L=[];R=[]
+    for s in D:
+        B.pay('pair_core_map',1+n*(1+len(E)))
+        K=canon((a,(s>>j)&1) for j,a in enumerate(eq));assert K is not None
+        p=chart(len(E),K)[0]
+        L.append(lift(0,U,p&((1<<len(U))-1)));R.append(lift(0,V,p>>len(U)))
+    q=value(D,chart(n,H)[0])
+    def patterns(G,W,shift):
+        out=set()
+        for j in range(len(G)):
+            B.pay('pair_core_pattern',1+len(G)+len(I)+len(D))
+            K=canon((a,b^int(i==j)) for i,(a,b) in enumerate(G))
+            if K is not None:
+                x=chart(n,K)[0];out.add((value(I,x),value(W,x)^shift))
+        return sorted(out)
+    A=patterns(G,L,0);C=patterns(J,R,q)
+    if set(A).intersection(C):return None
+    # Equal group keys identify the compatible pairs still undetected.
+    def matches(mask,p=None):
+        B.pay('pair_core_count',1+len(A)+len(C))
+        def key(g,v):return (g,v&mask,0 if p is None else (v&p).bit_count()%2)
+        T=Counter(key(g,v) for g,v in C)
+        return sum(T[key(g,v)] for g,v in A)
+    total=matches(0);out=[];full=(1<<len(D))-1
+    while total:
+        p=0
+        for j in range(len(D)):
+            rest=full^((1<<(j+1))-1)
+            # Twice expected detections = total + equal suffix pairs
+            # - 2 * equal suffix and equal fixed-prefix parity pairs.
+            if matches(rest,p|(1<<j))<matches(rest,p):p|=1<<j
+        assert p
+        out.append((lift(0,D,p),(p&q).bit_count()%2))
+        A=[((g,(v&p).bit_count()%2),v) for g,v in A]
+        C=[((g,(v&p).bit_count()%2),v) for g,v in C]
+        nxt=matches(0);assert 2*nxt<=total;total=nxt
+    K=canon(out);assert K is not None and canon(H+K)==H
+    return K
+
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
     Budget exhaustion propagates (not an empty fibre).
     """
-    assert core_trials>=0 and core_cover>=0
+    assert min(core_trials,core_cover,core_pairs,hull_rows)>=0
     H=canon(required)
     if H is None:return None,0
     if not row_bits:
@@ -207,6 +255,15 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
                 B.pay('demand_core_hit');return None
         if cached_empty_cover(n,H,empty.get(mask,()),B,core_cover):
             B.pay('demand_collective_hit');memo[key]=None;remember_empty(mask,H);return None
+        if A is not None and hull_rows>=mask.bit_count():
+            from check_pnp_exact_cover_pair_hull import affine_onehot_close
+            B.pay('demand_hull_probe')
+            Q,w=affine_onehot_close(n,tuple(row_bits[i] for i in bits(mask)),B,H)
+            if Q is None:
+                B.pay('demand_hull_empty');memo[key]=None;remember_empty(mask,H);return None
+            if w is not None:
+                B.pay('demand_hull_witness');out=rows(space(mask),value(space(mask),w));memo[key]=out;return out
+            B.pay('demand_hull_rank',len(Q)-len(H));H=Q
         if A is None:
             G=row_bits[mask.bit_length()-1]
             for j in range(len(G)):
@@ -264,6 +321,14 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
                         E0=onehot_exclusion_core(n,row_bits[i],K,B)
                         if E0 is not None and len(E0)<len(E):E=E0
                         if not E:break
+                    if E==K and E and core_pairs:
+                        for j,(i,k) in enumerate(combinations(bits(C[0]),2)):
+                            if j>=core_pairs:break
+                            B.pay('core_pair')
+                            E0=pair_exclusion_core(n,row_bits[i],row_bits[k],K,B)
+                            if E0 is not None and len(E0)<len(E):
+                                E=E0;B.pay('core_pair_gain')
+                            if not E:break
                     for row in E[:core_trials]:
                         if row not in E:continue
                         C0=tuple(q for q in E if q!=row)
@@ -427,7 +492,38 @@ def test_cached_empty_cover():
     print('cached_empty_cover',checks,proved,collective,'controls PASS')
 
 
+def test_pair_exclusion_core():
+    rng=Random(369202611);checks=0
+    for n in range(9):
+        for _ in range(200):
+            G,J=[tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(1,9))) for k in range(2)]
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            valid=lambda x,G:sum(b^((a&x).bit_count()%2) for a,b in G)==1
+            truth=any(satisfies(x,H,()) and valid(x,G) and valid(x,J) for x in range(1<<n))
+            K=pair_exclusion_core(n,G,J,H,Budget(10000000))
+            assert (K is None)==truth
+            if K is not None:
+                assert canon(H+K)==H and len(K)<=(len(G)*len(J)).bit_length()
+                assert not any(satisfies(x,K,()) and valid(x,G) and valid(x,J) for x in range(1<<n))
+            checks+=1
+    print('pair_exclusion_core',checks,'PASS')
+
+def test_collective_demand():
+    rng=Random(261111)
+    for n in range(8):
+        for _ in range(35):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(9)))
+            valid=lambda x:all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in F)
+            truth=any(valid(x) for x in range(1<<n))
+            for p,h in ((2,0),(0,6),(2,6)):
+                x,_=join_exact_one_demand(n,F,Budget(20000000),core_pairs=p,hull_rows=h)
+                assert (x is not None)==truth and (x is None or valid(x))
+    print('collective_demand 840 comparisons PASS')
+
 def main():
+    test_pair_exclusion_core()
+    test_collective_demand()
     test_cached_empty_cover()
     test_onehot_exclusion_core()
     test_exact_one_demand()
