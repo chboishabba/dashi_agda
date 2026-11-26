@@ -339,3 +339,16 @@ stageZeroNum = refl
 
 stageZeroDen : Q.↧ₙ (rawStage zero) ≡ 1
 stageZeroDen = refl
+
+-- Match the literal Lean floor target 10005*s^2, without a
+-- definitional assumption about grouping of Nat products.
+rootTargetShape : (k : Nat) →
+  Root.scaledSquareTarget 10005 (CH.rootScale k) ≡
+  10005 * (CH.rootScale k * CH.rootScale k)
+rootTargetShape k = NP.*-assoc 10005 (CH.rootScale k) (CH.rootScale k)
+
+rootStrict : (k : Nat) →
+  suc (Root.scaledSquareTarget 10005 (CH.rootScale k)) N.≤
+    suc (CH.rootNumerator k) * suc (CH.rootNumerator k)
+rootStrict k = Floor.floorSquareRootNextSquareStrict
+  (Root.scaledSquareTarget 10005 (CH.rootScale k))
