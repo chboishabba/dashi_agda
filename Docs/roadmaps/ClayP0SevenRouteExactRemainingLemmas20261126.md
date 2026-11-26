@@ -1143,3 +1143,8 @@ See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndp
 ## Constructive character quotient and certified proportionality transport — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#constructive-character-quotient-and-certified-proportionality-transport--26-november-2026). Reuse existing character pins; new replayable proportionalities and optional finite character module reopen original witnesses (sourceBacked). The four-witness residual now recovers from a dimension-four quotient; capped failure UNKNOWN. No universal affordable quotient completeness, no unrestricted lower bound. All thirteen principal universal obligations remain leafOpen.
+
+
+## One-path character-span restriction and noncompulsory quotient closure — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#one-path-character-span-restriction-and-noncompulsory-quotient-closure--26-november-2026). Exact full ideal restriction and optional replay-span one-path recovery implemented (sourceBacked); capped greedy failure UNKNOWN, explicit inhabited negative control retained; compulsory full quotient dimension exponential even on connected easy star (scoped leafBlocked). All thirteen universal endpoint obligations remain leafOpen; no arbitrary-computation lower bound or native admission.
