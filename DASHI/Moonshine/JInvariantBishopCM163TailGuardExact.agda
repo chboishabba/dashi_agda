@@ -16,7 +16,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
 import Data.Rational.Unnormalised as Q
 import Data.Rational.Unnormalised.Properties as QP
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 import Real as R
 open R using (ℝ; _≃_; _*_; _+_; _-_; _⋆; _≤_; _<_)
 import RealProperties as P
@@ -242,3 +242,126 @@ tail4Bounds = Four.limitBounds tail4 (C.realConverges (Disk.e4Converges Actual.c
 
 tail6Bounds : (t6 zero - Six.gap zero ≤ tail6) × (tail6 ≤ t6 zero + Six.gap zero)
 tail6Bounds = Six.limitBounds tail6 (C.realConverges (Disk.e6Converges Actual.completion))
+
+
+-- Bind the first signed term to the actual q-power constructor. The
+-- coefficient at n=0 is exactly sigma_3(1)=sigma_5(1)=1.
+first4 : t4 zero ≃ R.- (((+ 240 / 1) ⋆) * CM.radius)
+first4 = let open P.ℝ-Solver in solve 1
+  (λ r → Κ (+ 240 / 1) ⊗ ((⊝ r) ⊗ Κ Q.1ℚᵘ ⊖ Κ Q.0ℚᵘ ⊗ Κ Q.0ℚᵘ)
+    ⊜ ⊝ (Κ (+ 240 / 1) ⊗ r)) P.≃-refl CM.radius
+
+first6 : t6 zero ≃ R.- (((+ 504 / 1) ⋆) * CM.radius)
+first6 = let open P.ℝ-Solver in solve 1
+  (λ r → Κ (+ 504 / 1) ⊗ ((⊝ r) ⊗ Κ Q.1ℚᵘ ⊖ Κ Q.0ℚᵘ ⊗ Κ Q.0ℚᵘ)
+    ⊜ ⊝ (Κ (+ 504 / 1) ⊗ r)) P.≃-refl CM.radius
+
+gap4 : Four.gap zero ≃ ((+ 16 / 1) ⋆) * CM.radius
+gap4 = P.≃-trans (P.*-congˡ (majorantZero Maj.e4Scale 4))
+  (let open P.ℝ-Solver in solve 1 (λ r →
+    Κ (+ 1 / 15) ⊗ (Κ (+ 240 / 1) ⊗ r) ⊜ Κ (+ 16 / 1) ⊗ r)
+    P.≃-refl CM.radius)
+
+gap6 : Six.gap zero ≃ ((+ 168 / 5) ⋆) * CM.radius
+gap6 = P.≃-trans (P.*-congˡ (majorantZero Maj.e6Scale 6))
+  (let open P.ℝ-Solver in solve 1 (λ r →
+    Κ (+ 1 / 15) ⊗ (Κ (+ 504 / 1) ⊗ r) ⊜ Κ (+ 168 / 5) ⊗ r)
+    P.≃-refl CM.radius)
+
+X Y : ℝ
+X = CM.Selected.X
+Y = CM.Selected.Y
+
+xLowerRadius : R.1ℝ - (((+ 256 / 1) ⋆) * CM.radius) ≤ X
+xLowerRadius = P.≤-respˡ-≃
+  (P.≃-trans (P.+-cong P.≃-refl (P.+-cong first4 (P.-‿cong gap4)))
+    (let open P.ℝ-Solver in solve 1 (λ r →
+      Κ Q.1ℚᵘ ⊕ ((⊝ (Κ (+ 240 / 1) ⊗ r)) ⊖ Κ (+ 16 / 1) ⊗ r)
+        ⊜ Κ Q.1ℚᵘ ⊖ Κ (+ 256 / 1) ⊗ r) P.≃-refl CM.radius))
+  (P.+-monoʳ-≤ R.1ℝ (proj₁ tail4Bounds))
+
+xUpperRadius : X ≤ R.1ℝ - (((+ 224 / 1) ⋆) * CM.radius)
+xUpperRadius = P.≤-respʳ-≃
+  (P.≃-trans (P.+-cong P.≃-refl (P.+-cong first4 gap4))
+    (let open P.ℝ-Solver in solve 1 (λ r →
+      Κ Q.1ℚᵘ ⊕ ((⊝ (Κ (+ 240 / 1) ⊗ r)) ⊕ Κ (+ 16 / 1) ⊗ r)
+        ⊜ Κ Q.1ℚᵘ ⊖ Κ (+ 224 / 1) ⊗ r) P.≃-refl CM.radius))
+  (P.+-monoʳ-≤ R.1ℝ (proj₂ tail4Bounds))
+
+yLowerRadius : R.1ℝ + (((+ 2352 / 5) ⋆) * CM.radius) ≤ Y
+yLowerRadius = P.≤-respˡ-≃
+  (P.≃-trans (P.+-cong P.≃-refl (P.-‿cong (P.+-cong first6 gap6)))
+    (let open P.ℝ-Solver in solve 1 (λ r →
+      Κ Q.1ℚᵘ ⊖ ((⊝ (Κ (+ 504 / 1) ⊗ r)) ⊕ Κ (+ 168 / 5) ⊗ r)
+        ⊜ Κ Q.1ℚᵘ ⊕ Κ (+ 2352 / 5) ⊗ r) P.≃-refl CM.radius))
+  (P.+-monoʳ-≤ R.1ℝ (P.neg-mono-≤ (proj₂ tail6Bounds)))
+
+xLower : ((+ 3 / 4) ⋆) ≤ X
+xLower = P.≤-trans
+  (P.≤-respˡ-≃
+    (let open P.ℝ-Solver in solve 0
+      (Κ Q.1ℚᵘ ⊖ (Κ (+ 256 / 1) ⊗ Κ (+ 1 / 1024)) ⊜ Κ (+ 3 / 4))
+      P.≃-refl)
+    (P.+-monoʳ-≤ R.1ℝ (P.neg-mono-≤
+      (P.*-monoˡ-≤-nonNeg (P.<⇒≤ G.radiusSmall)
+        (G.ratNN (+ 256 / 1) (QP.nonNegative⁻¹ (+ 256 / 1)))))))
+  xLowerRadius
+
+xPositive : R.Positive X
+xPositive = P.0<x⇒posx
+  (P.<-≤-trans (G.ratLt Q.0ℚᵘ (+ 3 / 4) (QP.positive⁻¹ (+ 3 / 4))) xLower)
+
+positiveScale : (p : Q.ℚᵘ) → Q.0ℚᵘ Q.< p →
+  R.0ℝ < (p ⋆) * CM.radius
+positiveScale p hp = P.posx⇒0<x (P.posx,y⇒posx*y
+  (P.0<x⇒posx (G.ratLt Q.0ℚᵘ p hp)) (P.0<x⇒posx G.radiusPositive))
+
+xBelowOne : X < R.1ℝ
+xBelowOne = P.≤-<-trans xUpperRadius
+  (P.<-respʳ-≃ (P.+-identityʳ R.1ℝ)
+    (P.+-monoʳ-< R.1ℝ (P.neg-mono-<
+      (positiveScale (+ 224 / 1) (QP.positive⁻¹ (+ 224 / 1))))))
+
+oneBelowY : R.1ℝ < Y
+oneBelowY = P.<-≤-trans
+  (P.<-respˡ-≃ (P.+-identityʳ R.1ℝ)
+    (P.+-monoʳ-< R.1ℝ
+      (positiveScale (+ 2352 / 5) (QP.positive⁻¹ (+ 2352 / 5)))))
+  yLowerRadius
+
+xNN : R.NonNegative X
+xNN = P.pos⇒nonNeg xPositive
+
+yPositive : R.Positive Y
+yPositive = P.0<x⇒posx (P.<-trans
+  (G.ratLt Q.0ℚᵘ Q.1ℚᵘ (QP.positive⁻¹ Q.1ℚᵘ)) oneBelowY)
+
+xSquareBelowOne : X * X ≤ R.1ℝ
+xSquareBelowOne = P.≤-trans
+  (P.≤-respʳ-≃ (P.*-identityˡ X) (P.*-monoʳ-≤-nonNeg (P.<⇒≤ xBelowOne) xNN))
+  (P.<⇒≤ xBelowOne)
+
+xCubeBelowOne : (X * X) * X ≤ R.1ℝ
+xCubeBelowOne = P.≤-trans
+  (P.≤-respʳ-≃ (P.*-identityˡ X) (P.*-monoʳ-≤-nonNeg xSquareBelowOne xNN))
+  (P.<⇒≤ xBelowOne)
+
+oneBelowYSquare : R.1ℝ < Y * Y
+oneBelowYSquare = P.<-trans oneBelowY
+  (P.<-respˡ-≃ (P.*-identityˡ Y) (P.*-monoˡ-<-pos yPositive oneBelowY))
+
+-- Guard the literal normalized discriminant (not a substituted j).
+negativeDelta : CM.Selected.d < R.0ℝ
+negativeDelta =
+  let
+    h = P.≤-<-trans xCubeBelowOne oneBelowYSquare
+    diff = P.<-respʳ-≃
+      (let open P.ℝ-Solver in solve 1 (λ y → y ⊖ y ⊜ Κ Q.0ℚᵘ)
+        P.≃-refl (Y * Y))
+      (P.+-monoˡ-< (R.- (Y * Y)) h)
+    scaled = P.*-monoʳ-<-pos
+      (P.posp⇒posp⋆ (+ 1 / 1728) (QP.positive⁻¹ (+ 1 / 1728))) diff
+  in P.<-respˡ-≃ (P.≃-symm CM.Selected.deltaRe)
+    (P.<-respʳ-≃ (P.*-zeroʳ ((+ 1 / 1728) ⋆)) scaled)
+
+module Root = CM.Selected.AtNegativeDelta negativeDelta
