@@ -1,0 +1,140 @@
+{
+  "status": "CONDITIONAL_LOCAL_RETARDED_CURRENT",
+  "fixtures": {
+    "symbolic_identities": 2,
+    "independent_driven_fixtures": 27,
+    "max_state_integral_error": 1.9539925233402755e-14,
+    "max_loss_error": 1.0658141036401503e-14,
+    "empty_chart_guard": true
+  },
+  "periodic": {
+    "weighted_variance_identity": 1,
+    "periodic_fixtures": 4,
+    "max_return_error": 2.7755575615628914e-16,
+    "max_mean_current_error": 6.938893903907228e-17
+  },
+  "replay": {
+    "rows": 3087,
+    "records": 208,
+    "packet_sha256": "d771b81b3498e4cf9424325afe9e27f1c3f8125d0ba6c608c175cb62bd955fb6",
+    "species_history_slots": 18522,
+    "retarded_tensor_checks": 24696,
+    "max_retarded_tensor_relative_error": 2.1783026001988606e-16,
+    "histories": {
+      "history": {
+        "exact_log10_free_memory": [
+          [
+            -24631899.266490057,
+            -2185207.6398210553,
+            -3466898.4042859334
+          ],
+          [
+            -71963.31434544726,
+            -3256.2510965403562,
+            -5351.249709784809
+          ],
+          [
+            -1015.44356630694,
+            -34.68567112375116,
+            -67.65589483717788
+          ]
+        ],
+        "midpoint_perp_free_memory": [
+          [
+            0.9999999990644213,
+            0.9996977817683816,
+            0.9998486607339957
+          ],
+          [
+            0.9999999999977245,
+            0.9999766066270123,
+            0.9999869695676888
+          ],
+          [
+            0.9999999999999681,
+            0.999999205031931,
+            0.9999994989274931
+          ]
+        ],
+        "midpoint_parallel_free_memory": [
+          [
+            0.9982907043681375,
+            0.9511400905732549,
+            0.9746487995056148
+          ],
+          [
+            0.9999758605203759,
+            0.999466652105127,
+            0.999675422359775
+          ],
+          [
+            0.9999999294744653,
+            0.9999992050287554,
+            0.9999994989246036
+          ]
+        ],
+        "active_species_rows": 7817,
+        "active_perp_midpoint_above_half": 7817,
+        "active_exact_below_1e_30": 7817
+      },
+      "daily": {
+        "exact_log10_free_memory": [
+          [
+            -24500038.42704954,
+            -2173273.0666056573,
+            -3447986.0608797106
+          ],
+          [
+            -72041.98961877832,
+            -3275.1038804040377,
+            -5409.069586260298
+          ],
+          [
+            -992.7447925748252,
+            -33.745887336306524,
+            -67.18860607652415
+          ]
+        ],
+        "midpoint_perp_free_memory": [
+          [
+            0.9999999990696496,
+            0.9996972658448018,
+            0.9998480092181787
+          ],
+          [
+            0.9999999999977207,
+            0.9999775290150817,
+            0.9999869423641179
+          ],
+          [
+            0.999999999999969,
+            0.9999992006663847,
+            0.9999994961791229
+          ]
+        ],
+        "midpoint_parallel_free_memory": [
+          [
+            0.998251656066746,
+            0.9498135429653363,
+            0.9744747351608665
+          ],
+          [
+            0.9999758868821861,
+            0.9994697214510022,
+            0.9996788913530346
+          ],
+          [
+            0.9999999290948922,
+            0.9999992006631564,
+            0.9999994961761853
+          ]
+        ],
+        "active_species_rows": 7817,
+        "active_perp_midpoint_above_half": 7817,
+        "active_exact_below_1e_30": 7817
+      }
+    }
+  },
+  "physical_admission": false,
+  "scope": "Frozen local coefficients, analytic prescribed-field step, no measured E or propagation; midpoint comparison uses radar integration duration only as a diagnostic, not actual solver step. Zero populations excluded from active counts. No physical extraction."
+}
