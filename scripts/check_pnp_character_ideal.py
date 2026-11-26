@@ -31,8 +31,8 @@ def generators(F,p,pairs=True,B=None):
                 yield A
 
 
-def exclude(F,shifts,p,B,pairs=True,max_pivots=4096):
-    """Return a replayable constant contradiction, or None (inconclusive)."""
+def eliminate(F,shifts,p,B,pairs=True,max_pivots=4096):
+    """Return the source proof rows and whether constant one was derived."""
     assert p in PRIMES and max_pivots>=0
     G=tuple(generators(F,p,pairs,B));basis={};proof=[]
     for t in shifts:
@@ -45,27 +45,38 @@ def exclude(F,shifts,p,B,pairs=True,max_pivots=4096):
             if not A:continue
             s=max(A);c=pow(A[s],-1,p);A={u:w*c%p for u,w in A.items()}
             B.pay('character_pivot',1+len(A)+len(ops))
-            if s==0:return tuple(proof+[(j,t,tuple(ops),c)])
-            if len(basis)>=max_pivots:return None
+            if s==0:return tuple(proof+[(j,t,tuple(ops),c)]),True
+            if len(basis)>=max_pivots:return tuple(proof),False
             basis[s]=(len(proof),A);proof.append((j,t,tuple(ops),c))
-    return None
+    return tuple(proof),False
 
 
-def verify(F,proof,p,pairs=True,B=None):
+def exclude(F,shifts,p,B,pairs=True,max_pivots=4096):
+    """Return a replayable constant contradiction, or None (inconclusive)."""
+    proof,empty=eliminate(F,shifts,p,B,pairs,max_pivots)
+    return proof if empty else None
+
+
+def replay(F,proof,p,pairs=True,B=None):
     """Replay source combinations; never trust producer pivot decisions."""
-    if p not in PRIMES or not proof:return False
+    if p not in PRIMES or proof is None:return None
     G=tuple(generators(F,p,pairs,B));rows=[]
     for j,t,ops,c in proof:
-        if not (0<=j<len(G) and t>=0 and 0<c<p):return False
+        if not (0<=j<len(G) and t>=0 and 0<c<p):return None
         if B is not None:B.pay('character_verify_source',1+len(G[j]))
         A={s^t:w for s,w in G[j].items()}
         for k,w in ops:
-            if not (0<=k<len(rows) and 0<=w<p):return False
+            if not (0<=k<len(rows) and 0<=w<p):return None
             if B is not None:B.pay('character_verify_reduce',1+len(rows[k]))
             add(A,rows[k],w,p)
         if B is not None:B.pay('character_verify_row',1+len(A))
         rows.append({s:w*c%p for s,w in A.items()})
-    return rows[-1]=={0:1}
+    return rows
+
+
+def verify(F,proof,p,pairs=True,B=None):
+    rows=replay(F,proof,p,pairs,B)
+    return bool(rows) and rows[-1]=={0:1}
 
 
 def source_shifts(F,degree=1,B=None):
@@ -115,7 +126,129 @@ def demand_exclusion(n,F,H,B,degree=1,p=3,max_pivots=4096):
     return True
 
 
+def character_consequences(F,shifts,probes,p,B,max_pivots=4096):
+    """Sound affine equations from projectively equal character normal forms.
+
+    Each reduced form differs from its original character by a replayed
+    source combination. None means contradiction, not failure to refine.
+    With a capped row space, the resulting affine hull may be too large.
+    """
+    proof,empty=eliminate(F,shifts,p,B,max_pivots=max_pivots)
+    if empty:
+        if not verify(F,compact(proof,B),p,B=B):raise AssertionError('invalid character contradiction')
+        return None
+    # Reconstruct every used row independently of the producer's pivots.
+    R=replay(F,proof,p,B=B)
+    if R is None:raise AssertionError('invalid character proof')
+    basis={}
+    for A in R:
+        s=max(A);assert A[s]==1 and s not in basis;basis[s]=A
+    order=sorted(basis,reverse=True);groups={};pins=[]
+    for s in sorted(set(probes)|{0}):
+        A={s:1};B.pay('character_normal_scan',1+len(order))
+        for t in order:
+            if t in A:
+                B.pay('character_normal_reduce',1+len(basis[t]));add(A,basis[t],-A[t],p)
+        if not A:return None # A character cannot vanish at any original point.
+        c=A[min(A)];inv=pow(c,-1,p)
+        B.pay('character_projective_key',1+len(A))
+        key=tuple(sorted((t,w*inv%p) for t,w in A.items()))
+        if key in groups:
+            t,b=groups[key];ratio=c*pow(b,-1,p)%p
+            if ratio not in (1,p-1):return None # characters take only +/-1
+            pins.append((s^t,int(ratio!=1)))
+        else:groups[key]=(s,c)
+    B.pay('character_pin_canon',1+len(pins))
+    return canon(pins)
+
+
+def demand_refinement(n,F,H,B,degree=1,p=3,max_pivots=4096):
+    """Lift all discovered relations back into the original row-normal span."""
+    B.pay('character_demand',1+len(H));P=canon(H)
+    if P is None:return None
+    u,V=chart(n,P);B.pay('character_pullback',1+sum(len(G) for G in F)*(1+len(V)))
+    R=tuple(tuple((value(V,s),b^((s&u).bit_count()%2)) for s,b in G) for G in F)
+    # Representative for every projected source character, plus zero.
+    reps={0:0}
+    for G in F:
+        for s,b in G:reps.setdefault(value(V,s),s)
+    # Keep every relation in the original span, including combinations created
+    # by Gaussian canonicalization of projective equalities.
+    freq=tuple(reps);equations=tuple((value(freq,1<<j),1<<j) for j in range(len(V)))
+    # Solve each lifted normal as a linear combination of source frequencies.
+    Q=character_consequences(R,source_shifts(R,degree,B),freq,p,B,max_pivots)
+    if Q is None:return None
+    pins=[]
+    for s,b in Q:
+        B.pay('character_reopen',1+len(freq)*max(1,len(V)))
+        C=canon((v,(s&j).bit_count()%2) for v,j in equations);assert C is not None
+        a=lift(0,[reps[t] for t in freq],chart(len(freq),C)[0])
+        pins.append((a,b^((a&u).bit_count()%2)))
+    return canon(P+tuple(pins))
+
+
+def test_character_consequences():
+    from random import Random
+    from check_pnp_affine_normal_components import satisfies, Exhausted
+    def valid(F,x):return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+    # Two different normals forced equal without either individual normal fixed.
+    F=(((1,0),(2,1)),)
+    P=character_consequences(F,(0,),range(4),3,Budget(10000))
+    assert P==((3,0),),P
+    assert demand_refinement(2,F,(),Budget(10000),degree=0)==((3,0),)
+    # Full character image recovers exactly every affine equation true on solutions.
+    rng=Random(36927);full=bounded=empty=rank=transport=0
+    for n in range(6):
+     for _ in range(60):
+      F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(6))) for i in range(rng.randrange(6)))
+      T=[x for x in range(1<<n) if valid(F,x)]
+      for p in (3,5,7):
+       P=character_consequences(F,range(1<<n),range(1<<n),p,Budget(5000000))
+       assert (P is None)==(not T)
+       if T:
+        Q=canon((s,(s&T[0]).bit_count()%2) for s in range(1<<n) if len({(s&x).bit_count()%2 for x in T})==1)
+        assert P==Q,(F,P,Q);rank+=len(P)
+       else:empty+=1
+       full+=1
+      H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+      if H is None:continue
+      T=[x for x in T if satisfies(x,H,())]
+      P=demand_refinement(n,F,H,Budget(5000000),degree=1)
+      assert (P is not None or not T) and (P is None or all(satisfies(x,P,()) for x in T))
+      assert P is None or canon(P+H)==P
+      bounded+=1
+      a=rng.randrange(1<<n);shift=lambda G:tuple((s,b^((s&a).bit_count()%2)) for s,b in G)
+      Q=demand_refinement(n,tuple(shift(G) for G in F),shift(H),Budget(5000000),degree=1)
+      assert (Q is None or all(satisfies(x^a,Q,()) for x in T)) and (Q is not None or not T)
+      transport+=1
+    try:demand_refinement(2,(((1,0),(2,1)),),(),Budget(0));assert False
+    except Exhausted:pass
+    # Full pair-hull closure is inconclusive on this inhabited affine source.
+    F=(((47,1),(29,1),(74,0),(21,0)),((68,0),(107,1),(84,0)),((33,0),(48,1),(99,0)))
+    from check_pnp_normal_boundary_join import orth,span
+    P=();T=list(range(128))
+    while True:
+        rows=[]
+        for A,C in combinations(F,2):
+            S=[z for z in T if valid((A,C),z)];assert S
+            rows.extend((s,(s&S[0]).bit_count()%2) for s in orth(7,span(z^S[0] for z in S)))
+        Q=canon(P+tuple(rows));assert Q is not None
+        if Q==P:break
+        P=Q;T=[z for z in T if satisfies(z,P,())]
+    assert len(P)==3 and not valid(F,chart(7,P)[0])
+    Q=demand_refinement(7,F,P,Budget(1000000));assert len(Q)==5
+    assert [z for z in range(128) if valid(F,z)]==[57,89,109]
+    assert all(satisfies(z,Q,()) for z in (57,89,109)) and valid(F,chart(7,Q)[0])
+    # A truncated elimination is still safe; an absent relation is not exclusion.
+    for cap in (0,1,2,4):
+        Q=demand_refinement(7,F,P,Budget(1000000),max_pivots=cap)
+        assert Q is not None and all(satisfies(z,Q,()) for z in (57,89,109))
+    assert not verify(F,None,3)
+    print('character_consequences',dict(full=full,empty=empty,rank=rank,bounded=bounded,transport=transport), 'pair_hull_rank_3_to_5 PASS')
+
+
 def main():
+    test_character_consequences()
     from random import Random
     from check_pnp_affine_normal_components import Exhausted
     rng=Random(3692611);full=bounded=exclusions=translated=transported=0
