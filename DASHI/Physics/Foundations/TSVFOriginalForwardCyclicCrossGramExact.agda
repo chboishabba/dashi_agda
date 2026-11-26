@@ -138,13 +138,13 @@ module _
   originalCyclicRepresentationAction a b =
     selectedComposition a b originalForwardKet
 
-  -- The positive norm is exactly the same previously selected
-  -- forward-state Weight, not postselected ABL normalization.
-  originalAllCyclicDiagonalsWeightPositive :
+  -- AX: the actual physical scalar cone, including zero, is distinct
+  -- from the original ABL denominator certificate.
+  originalAllCyclicDiagonalsNonnegative :
     ∀ a →
-    Positive (normSquared (originalObserverCrossGram a a))
-  originalAllCyclicDiagonalsWeightPositive a =
-    Forward.originalPositiveQuadraticHasPositiveWeight E laws a
+    HilbertNonnegative (originalObserverCrossGram a a)
+  originalAllCyclicDiagonalsNonnegative a =
+    Forward.originalPositiveQuadraticIsNonnegative E laws a
 
 -- Full HIL02 needs a faithful scalar positivity order, star-algebra,
 -- null-ideal proof, nonzero completed complex Hilbert, and a dense
