@@ -1,0 +1,72 @@
+{
+  "created_at_utc": "2026-11-23T07:35:31Z",
+  "last_updated_utc": "2026-11-23T08:08:45Z",
+  "provenance_hashes": {
+    "atlas_m1": "ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2",
+    "atlas_m2": "433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f",
+    "script_extract": "f41ababafe03284d976ac68d394ebac6309dd54d074cdb9f11efeb37fd32d03d",
+    "script_gate": "0843d5cc5af2696a9ef6fa955cb3590af70fa5f1e6736e75f854004a2427878d",
+    "script_pipeline": "b0cedfac5b6c4cbc657c8c7b277aec8508cf3ccb428f2569ed03ba460902ae57",
+    "script_search": "dae6a4eff698f54e0abf9baf04ecbd8c72ba5b05bab0fc9d19bb8795fc781375",
+    "script_weyl": "d513bf3110b3f0a9fd7e4520ee7da2f206a76febb6d8f40c201a964bf7c48aef"
+  },
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "schema": "monster3b-mmgroup-atlas-pipeline-receipt-v1",
+  "stages": {
+    "extract": {
+      "actual_MMV7_nonzero_zeta_samples": 8,
+      "duration_seconds": 132.4613,
+      "manifest_path": "/home/c/Documents/code/dashi_agda/.dashi/monster3b-mmgroup/monster3b-authentic-manifest.json",
+      "mmgroup_version": "1.0.8",
+      "normalizer_generators": [
+        "g3b",
+        "h3b"
+      ],
+      "rank_commutator_form": 12,
+      "source_receipt_path": "/home/c/Documents/code/dashi_agda/.dashi/monster3b-mmgroup/monster3b-source-receipt.json",
+      "stage": "extract",
+      "status": "PASS"
+    },
+    "powered_search": {
+      "candidate_count": 28,
+      "distinct_C_candidates": 20,
+      "distinct_D_candidates": 64,
+      "duration_seconds": 22.1436,
+      "pairs_tested": 1280,
+      "relation_passing_pairs": 56,
+      "search_path": ".dashi/monster3b-mmgroup/monster3b-powered-search.json",
+      "stage": "powered_search",
+      "status": "CANDIDATES"
+    },
+    "search": {
+      "C_square_negative_I_candidate_count": 0,
+      "D_cube_identity_candidate_count": 0,
+      "candidate_count": 0,
+      "depth": 4,
+      "duration_seconds": 0.5365,
+      "max_pairs": 100,
+      "max_states": 20000,
+      "relation_filtered_pairs_tested": 0,
+      "search_path": "/home/c/Documents/code/dashi_agda/.dashi/monster3b-mmgroup/monster3b-bounded-search.json",
+      "stage": "search",
+      "status": "NO_HITS"
+    },
+    "selftest": {
+      "basis_selftest": {
+        "full_D4_or_Monster_action_tested": false,
+        "matrix_rank": 12,
+        "status": "local_pure_F3_symplectic_selftest"
+      },
+      "duration_seconds": 0.6314,
+      "gate_selftest": {
+        "independent_Monster_generator_words_proven": false,
+        "negative_trivial_target": true,
+        "negative_wrong_generator": true,
+        "same_source_nullity": 1,
+        "status": "PASS_GF3_SAME_SOURCE_FIXTURE"
+      },
+      "stage": "selftest",
+      "status": "PASS"
+    }
+  }
+}

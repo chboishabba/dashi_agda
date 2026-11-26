@@ -72,9 +72,11 @@ def atom_blocks(atoms,max_fractional=2):
     require(1<=max_fractional<=2,'unsupported block denominator bound')
     chunk=[];cost=0
     for atom in atoms:
-        tag=(int(atom)>>28)&7
-        require(1<=tag<=6,'unknown native atom tag')
-        extra=int(tag>=5)
+        a=int(atom)&0xffffffff
+        t=a&0x7fffffff
+        require(t<0x70000000,'unknown native atom tag')
+        tag=(a&0x70000000)>>28
+        extra=int(5<=tag<=6)
         if cost+extra>max_fractional:
             yield tuple(chunk),8**cost
             chunk=[];cost=0

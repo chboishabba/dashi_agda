@@ -1,0 +1,38 @@
+{
+  "status": "verified_actual_MM_word_relations",
+  "source_url": "https://github.com/melissa-maths/MonsterSubgroups/blob/main/subgroups.py",
+  "manifest_sha256": "6dc596ead2ab8553019a01a4b8f0c3835e40576d6d3993c06ae14206212add55",
+  "central_class": "Monster 3B",
+  "number_of_weyl_generators": 12,
+  "central_weyl_relations_checked": 36,
+  "translation_relations_checked": 36,
+  "modulation_relations_checked": 36,
+  "normalizer_lifts": [
+    {
+      "name": "g3b",
+      "central_image": -1,
+      "all_twelve_generator_images_verified": true
+    },
+    {
+      "name": "h3b",
+      "central_image": 1,
+      "all_twelve_generator_images_verified": true
+    }
+  ],
+  "actual_Wzeta_basis_intertwiner_constructed": false,
+  "source_character_12_plus_78_transported": false,
+  "actual_MMV7_nonzero_zeta_samples": 8,
+  "actual_MMV7_phase_transport_checked": true,
+  "characteristic_zero_12_78_inferred_from_F7": false,
+  "source_blob_sha": "c8fb3a305a6b7d08e9c33a265cfb3e6e84848be2",
+  "rank_commutator_form": 12,
+  "normalizer_generators": [
+    "g3b",
+    "h3b"
+  ],
+  "characteristic_7_vector_action_available": true,
+  "observed_actual_mmgroup_execution": true,
+  "Wzeta_to_JFine_intertwiner": false,
+  "actual_Hom_12_78_character": false,
+  "mmgroup_version": "1.0.8"
+}

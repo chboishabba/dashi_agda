@@ -1,0 +1,12 @@
+{
+  "C_square_negative_I_candidate_count": 0,
+  "D_cube_identity_candidate_count": 0,
+  "actual_Monster_element_words_rechecked_in_mmgroup": false,
+  "candidate_intertwiners": [],
+  "enumerated_distinct_quotient_matrices": 161,
+  "original_ATLAS_quotient_isomorphism_proved": false,
+  "relation_filtered_pairs_tested": 0,
+  "schema": "monster3b-atlas-mmgroup-bounded-quotient-search-v1",
+  "search_exhaustive_only_bounded_word_depth": true,
+  "selected_Hom_and_VOA_promoted": false
+}

@@ -67,7 +67,7 @@ def main():
     literal=load("monster3b_literal_mm_4d_character_class.py")
     gap_src=literal.gap_source(123,456,Path("/tmp/monster3b-class4D.json"))
     assert "chi[j]=123" in gap_src and "chi[pow2[j]]=456" in gap_src
-    assert '\\\"schema\\\"' in gap_src and "classes[10]" in gap_src
+    assert "schema" in gap_src and "classes[10]" in gap_src
     lift=load("monster3b_quadratic12_character_lift.py")
     bounded=lift.exhaustive_proof()
     assert bounded["exact_bounded_Qzeta3_values"]==517

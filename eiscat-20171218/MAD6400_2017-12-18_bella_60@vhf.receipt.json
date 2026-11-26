@@ -1,0 +1,163 @@
+{
+  "status": "STRUCTURAL_AUDIT_ONLY",
+  "sha256": "d62180251bf74884910831c522ada43d9bec084d3f9ca6323f67c575ee05708d",
+  "table_rows": 55931,
+  "context_rows": 8112,
+  "first_start_utc": "2017-12-18T02:30:00+00:00",
+  "last_end_utc": "2017-12-18T06:00:00+00:00",
+  "record_interval_seconds": [
+    39.59999990463257,
+    54.0,
+    57.59999990463257,
+    61.200000047683716
+  ],
+  "instrument_codes": [
+    74
+  ],
+  "raw_fields": [
+    "azm",
+    "chisq",
+    "co",
+    "day",
+    "dco",
+    "ddc",
+    "dne",
+    "dpm",
+    "dpo+",
+    "dti",
+    "dtr",
+    "dvo",
+    "dwn",
+    "elm",
+    "gdalt",
+    "gfit",
+    "hour",
+    "hsa",
+    "kindat",
+    "kinst",
+    "min",
+    "month",
+    "ne",
+    "pm",
+    "po+",
+    "power",
+    "range",
+    "recno",
+    "sec",
+    "systmp",
+    "tfreq",
+    "ti",
+    "tr",
+    "ut1_unix",
+    "ut2_unix",
+    "vo",
+    "year"
+  ],
+  "raw_field_counts": {
+    "gdalt": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "range": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "azm": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "elm": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "ne": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "dne": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "ti": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "dti": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "vo": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 2630
+    },
+    "dvo": {
+      "finite": 8112,
+      "nonfinite": 0,
+      "negative": 0
+    }
+  },
+  "parameter_metadata": {
+    "fields": [
+      "mnemonic",
+      "description",
+      "isError",
+      "units",
+      "category"
+    ],
+    "records": [
+      "(b'YEAR', b'Year (universal time)', 0, b'y', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'MONTH', b'Month (universal time)', 0, b'm', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'DAY', b'Day (universal time)', 0, b'd', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'HOUR', b'Hour (universal time)', 0, b'h', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'MIN', b'Minute (universal time)', 0, b'm', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'SEC', b'Second (universal time)', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'RECNO', b'Logical Record Number', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'KINDAT', b'Kind of data', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'KINST', b'Instrument Code', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'UT1_UNIX', b'Unix seconds (1/1/1970) at start', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'UT2_UNIX', b'Unix seconds (1/1/1970) at end', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'AZM', b'Mean azimuth angle (0=geog N;90=east)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'ELM', b'Elevation angle (0=horizontal;90=vert)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'HSA', b'Half scattering angle (bistatic system)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'TFREQ', b'Transmitted frequency', 0, b'Hz', b'Data Quality Parameter')",
+      "(b'POWER', b'Peak power', 0, b'kW', b'Data Quality Parameter')",
+      "(b'SYSTMP', b'System temperature', 0, b'K', b'Data Quality Parameter')",
+      "(b'RANGE', b'Range', 0, b'km', b'Geographic Coordinate')",
+      "(b'GDALT', b'Geodetic altitude (height)', 0, b'km', b'Geographic Coordinate')",
+      "(b'NE', b'Electron density (Ne)', 0, b'm-3', b'I. S. Radar Basic Parameter')",
+      "(b'TI', b'Ion temperature (Ti)', 0, b'K', b'I. S. Radar Basic Parameter')",
+      "(b'TR', b'Temperature ratio (Te/Ti)', 0, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'CO', b'Ion-neutral collision frequency', 0, b's-1', b'I. S. Radar Basic Parameter')",
+      "(b'VO', b'Line of sight ion velocity (pos = away)', 0, b'ms-1', b'I. S. Radar Basic Parameter')",
+      "(b'PM', b'Comp - (ions with mol wt 28 to 32)/Ne', 0, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'PO+', b'Composition - [O+]/Ne', 0, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'DNE', b'Error in Electron density (Ne)', 1, b'm-3', b'I. S. Radar Basic Parameter')",
+      "(b'DTI', b'Error in Ion temperature (Ti)', 1, b'K', b'I. S. Radar Basic Parameter')",
+      "(b'DTR', b'Error in Temperature ratio (Te/Ti)', 1, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'DCO', b'Error in Ion-neutral collision frequency', 1, b's-1', b'I. S. Radar Basic Parameter')",
+      "(b'DVO', b'Error in Line of sight ion velocity (pos = away)', 1, b'ms-1', b'I. S. Radar Basic Parameter')",
+      "(b'DPM', b'Error in Comp - (ions with mol wt 28 to 32)/Ne', 1, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'DPO+', b'Error in Composition - [O+]/Ne', 1, b'N/A', b'I. S. Radar Basic Parameter')",
+      "(b'DWN', b'Error in Wideband noise', 1, b'K', b'I. S. Radar Basic Parameter')",
+      "(b'DDC', b'Error in DC spike', 1, b'K', b'I. S. Radar Basic Parameter')",
+      "(b'GFIT', b'Goodness of fit', 0, b'N/A', b'Data Quality Parameter')",
+      "(b'CHISQ', b'Reduced-chi square of fit', 0, b'N/A', b'Data Quality Parameter')"
+    ]
+  },
+  "physical_admission": false,
+  "conductance_replayed": false,
+  "experiment_id": 20009586,
+  "experiment_name": "2017-12-18_bella@vhf",
+  "remote_file": "/opt/madrigal/experiments/2017/eis/18dec17/MAD6400_2017-12-18_bella_60@vhf.hdf5",
+  "catalogue_url": "https://madrigal.eiscat.se/madrigal/",
+  "local_file": "/home/c/Documents/code/dashi_agda/eiscat-20171218/MAD6400_2017-12-18_bella_60@vhf.hdf5"
+}

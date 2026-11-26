@@ -1,0 +1,18 @@
+{
+  "status": "DOWNLOADED_UNADMITTED_NO_CONTEXT_OVERLAP",
+  "sha256": "344c31d5db5d661d59ec2deb4a0d6867773c1dc064bb3dc236aaf3e2f50ae5ad",
+  "experiment_id": 20009586,
+  "experiment_name": "2017-12-18_bella@vhf",
+  "kindat": 6302,
+  "kindat_description": "GUISDAP pp resolution 2",
+  "instrument_code": 74,
+  "remote_file": "/opt/madrigal/experiments/2017/eis/18dec17/MAD6302_2017-12-18_bella_60@vhf.hdf5",
+  "catalogue_url": "https://madrigal.eiscat.se/madrigal/",
+  "local_file": "/home/c/Documents/code/dashi_agda/eiscat-20171218/MAD6302_2017-12-18_bella_60@vhf.hdf5",
+  "table_rows": 2341,
+  "context_rows_utc_0230_0600": 0,
+  "coverage_observed": "2017-12-18T00:01:58+00:00/2017-12-18T13:01:58+00:00",
+  "physical_admission": false,
+  "conductance_replayed": false,
+  "note": "Madrigal response Content-Length was 80770 bytes and matched the downloaded HDF5. The source product contains no records overlapping the requested 02:30-06:00 UTC analysis window; it is retained unmodified and excluded from context admission."
+}

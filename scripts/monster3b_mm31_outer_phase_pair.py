@@ -60,7 +60,7 @@ def open_original(path,zeta):
         raise ValueError("original 90 Monster source vector row shape mismatch")
     if len(set(pivots))!=90 or len(set(probes))!=90 or any(not 0<=i<DIM for i in pivots+probes):
         raise ValueError("invalid original pivot/probe indices")
-    if result.get("status")!="COMPLETE_RANK90" or result.get("actual_Monster_modular_vectors") is not True:
+    if result.get("status")!="COMPLETE_RANK90" or (result.get("actual_Monster_modular_vectors") is not True and result.get("actual_Monster_mod31_vectors") is not True):
         raise ValueError("original completed modular basis receipt required")
     for i,p in enumerate(pivots):
         if rows[i,p]!=1 or np.any(rows[i,pivots[:i]]):

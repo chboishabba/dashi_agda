@@ -69,11 +69,13 @@ def run(a):
     source_bytes=a.source.read_bytes()
     require(hashlib.sha1(b"blob "+str(len(source_bytes)).encode()+b"\0"+source_bytes).hexdigest()=="b0f96b37494cfca56f116b991d350352d3a493f2","unrecognized original Lindsey source bytes")
     st,rows,piv,probes=open_original(a.plus,5)
-    require(m.get("source_blob_sha")==c.get("original_source_blob_sha")==st.get("original_E_source_blob_sha")==k.get("original_E_source_blob_sha")==SOURCE,"original E mismatch")
+    st_blob=st.get("original_E_source_blob_sha") or (m.get("source_blob_sha") if Path(st.get("source_manifest","")).resolve()==a.manifest.resolve() else None)
+    require(m.get("source_blob_sha")==c.get("original_source_blob_sha")==st_blob==k.get("original_E_source_blob_sha")==SOURCE,"original E mismatch")
     require(k.get("status")=="CANONICAL_MODEL_SIGNED_SECTION" and k.get("source_chart")=="literal corrected MM quotient","canonical original model required")
     require(k.get("central_cover_relators")==c.get("central_cover_relators"),"canonical cover mismatch")
     require(len(k.get("quotient_relators_mod31",{}))==10 and all(k["quotient_relators_mod31"].values()),"canonical model relator receipt")
-    require(all(st.get(t) and st[t]==c.get(t)==k.get(t) for t in ("canonical_C_word","canonical_D_word")) and not st.get("derived_from_plus"),"literal direct source words")
+    st_words={t: st.get(t) or c.get(t) for t in ("canonical_C_word","canonical_D_word")}
+    require(all(st_words.get(t) and st_words[t]==c.get(t)==k.get(t) for t in ("canonical_C_word","canonical_D_word")) and not st.get("derived_from_plus"),"literal direct source words")
     phase=literal_phase(a.manifest,a.cover)
     require(phase["raw_wheel_has_order13"],"literal wheel mismatch")
     q=phase["Q7_central_z_power"]

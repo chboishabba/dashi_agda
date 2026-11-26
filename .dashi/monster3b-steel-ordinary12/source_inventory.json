@@ -1,0 +1,20 @@
+{
+  "source": {
+    "url": "https://magma.maths.usyd.edu.au/~allan/reps/db/d12.6Suz.nfdeg2.M",
+    "sha256": "724d167c1025e809eeb1f9af6b4339aabf9aad062b1ecbd3e6fdb99f9a56e82e",
+    "length": 6182,
+    "file": "/home/c/Documents/code/dashi_agda/.dashi/monster3b-steel-ordinary12/d12.6Suz.nfdeg2.M"
+  },
+  "original_author": "Allan Steel (2012; updated 2024)",
+  "source_executed": false,
+  "source_republication_permission_assumed": false,
+  "source_generator_GAP_class_verified": false,
+  "Magma_module_variable_definitions": [
+    "G",
+    "M"
+  ],
+  "Magma_constructs": [
+    "GModule(",
+    "Matrix("
+  ]
+}

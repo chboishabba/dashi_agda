@@ -1,0 +1,97 @@
+{
+  "status": "STRUCTURAL_AUDIT_ONLY",
+  "sha256": "eed18b6fd8f54b780446a370a6373fbbb250db5278b43cb67e7f1fab90090eb8",
+  "table_rows": 301844,
+  "context_rows": 44096,
+  "first_start_utc": "2017-12-18T02:30:00+00:00",
+  "last_end_utc": "2017-12-18T06:00:00+00:00",
+  "record_interval_seconds": [
+    40.0,
+    54.0,
+    57.0,
+    61.0,
+    62.0
+  ],
+  "instrument_codes": [
+    74
+  ],
+  "raw_fields": [
+    "azm",
+    "day",
+    "dpop",
+    "elm",
+    "hour",
+    "hsa",
+    "kindat",
+    "kinst",
+    "min",
+    "month",
+    "pop",
+    "power",
+    "range",
+    "recno",
+    "rgate",
+    "sec",
+    "systmp",
+    "tfreq",
+    "ut1_unix",
+    "ut2_unix",
+    "year"
+  ],
+  "raw_field_counts": {
+    "range": {
+      "finite": 44096,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "azm": {
+      "finite": 44096,
+      "nonfinite": 0,
+      "negative": 0
+    },
+    "elm": {
+      "finite": 44096,
+      "nonfinite": 0,
+      "negative": 0
+    }
+  },
+  "parameter_metadata": {
+    "fields": [
+      "mnemonic",
+      "description",
+      "isError",
+      "units",
+      "category"
+    ],
+    "records": [
+      "(b'YEAR', b'Year (universal time)', 0, b'y', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'MONTH', b'Month (universal time)', 0, b'm', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'DAY', b'Day (universal time)', 0, b'd', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'HOUR', b'Hour (universal time)', 0, b'h', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'MIN', b'Minute (universal time)', 0, b'm', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'SEC', b'Second (universal time)', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'RECNO', b'Logical Record Number', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'KINDAT', b'Kind of data', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'KINST', b'Instrument Code', 0, b'N/A', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'UT1_UNIX', b'Unix seconds (1/1/1970) at start', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'UT2_UNIX', b'Unix seconds (1/1/1970) at end', 0, b's', b'Madrigal Hdf5 Prolog Parameters')",
+      "(b'AZM', b'Mean azimuth angle (0=geog N;90=east)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'ELM', b'Elevation angle (0=horizontal;90=vert)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'HSA', b'Half scattering angle (bistatic system)', 0, b'deg', b'Geographic Coordinate')",
+      "(b'TFREQ', b'Transmitted frequency', 0, b'Hz', b'Data Quality Parameter')",
+      "(b'POWER', b'Peak power', 0, b'kW', b'Data Quality Parameter')",
+      "(b'SYSTMP', b'System temperature', 0, b'K', b'Data Quality Parameter')",
+      "(b'RANGE', b'Range', 0, b'km', b'Geographic Coordinate')",
+      "(b'POP', b'Uncorrected electron density (Te/Ti=1)', 0, b'm-3', b'I. S. Radar Basic Parameter')",
+      "(b'DPOP', b'Error in Uncorrected electron density (Te/Ti=1)', 1, b'm-3', b'I. S. Radar Basic Parameter')",
+      "(b'RGATE', b'Width of range gate', 0, b'km', b'Geographic Coordinate')"
+    ]
+  },
+  "physical_admission": false,
+  "conductance_replayed": false,
+  "experiment_id": 20009586,
+  "experiment_name": "2017-12-18_bella@vhf",
+  "remote_file": "/opt/madrigal/experiments/2017/eis/18dec17/MAD6301_2017-12-18_bella_60@vhf.hdf5",
+  "catalogue_url": "https://madrigal.eiscat.se/madrigal/",
+  "local_file": "/home/c/Documents/code/dashi_agda/eiscat-20171218/MAD6301_2017-12-18_bella_60@vhf.hdf5"
+}

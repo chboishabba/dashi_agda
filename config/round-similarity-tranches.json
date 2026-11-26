@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "purpose": "Track bounded similarity comparisons for numbered Agda proof families without treating similarity as proof equivalence.",
+  "status": "candidate-tranches-identified",
+  "generated_report": ".dashi/round-stranded/ym-similarity-bidi.json",
+  "analyzer": "scripts/round_similarity_bidi.py",
+  "authority": {
+    "similarity_is_discovery_evidence": true,
+    "similarity_proves_theorem_equivalence": false,
+    "kernel_validation_required_before_rename_or_promotion": true,
+    "sympy_role": "optional secondary normalization for extracted algebraic expressions only"
+  },
+  "observed_inputs": {
+    "repository_intelligence_sqlite": {
+      "expected_path": ".dashi/repository.sqlite3",
+      "available_in_current_checkout": false,
+      "available_in_master_worktree": false,
+      "note": "Do not launch a full cold rebuild until a bounded selected-proof scope is defined."
+    },
+    "precomputed_round_packages": {
+      "source_worktree": "/tmp/opencode/dashi-master-push/.dashi/round-stranded",
+      "source_is_read_only_evidence": true,
+      "ym_file": "ym-packages.jsonl",
+      "ns_file": "ns-packages.jsonl",
+      "ym_packages": 1209,
+      "ym_families": 9,
+      "ym_declarations": 1431,
+      "ns_packages": 30885,
+      "ns_families": 1643,
+      "ns_declarations": 30948
+    }
+  },
+  "comparison_pipeline": [
+    {
+      "stage": 1,
+      "name": "package-selection",
+      "method": "Choose a small number of semantic families and canonical-owner neighborhoods from the precomputed JSONL."
+    },
+    {
+      "stage": 2,
+      "name": "exact-hash-grouping",
+      "method": "Group selected declarations by signature_sha256 and body_sha256."
+    },
+    {
+      "stage": 2.5,
+      "name": "symbol-presence-bidi",
+      "method": "Compare exact and normalized declaration-name presence first, then signature-hash and body-hash presence; use import/dependency presence as the final structural discriminator.",
+      "interpretation": "A missing normalized symbol name is a difference signal, not evidence that two bodies are unrelated."
+    },
+    {
+      "stage": 3,
+      "name": "structural-similarity",
+      "method": "Run tools/agda_preflight discovery similarity only within the selected proof set."
+    },
+    {
+      "stage": 4,
+      "name": "optional-expression-normalization",
+      "method": "Use SymPy only on explicitly extracted numeric/algebraic expressions; retain source spans and never infer Agda equivalence."
+    },
+    {
+      "stage": 5,
+      "name": "manual-owner-review",
+      "method": "Check imports, declarations, provenance, canonical owners, and residual status before proposing a rename tranche."
+    },
+    {
+      "stage": 6,
+      "name": "formal-validation",
+      "method": "Use the sanctioned Agda entrypoint after any actual rename or alias change."
+    }
+  ],
+  "candidate_tranches": {
+    "ym": [
+      {
+        "priority": 1,
+        "families": [
+          "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontier",
+          "DASHI.Physics.YangMills.BalabanClayHighestAlpha",
+          "DASHI.Physics.YangMills.YangMillsClayCriticalPath",
+          "DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontier",
+          "DASHI.Physics.YangMills.BalabanPreferredSourceSemanticsFrontier",
+          "DASHI.Physics.YangMills.BalabanPreferredSourceFrontier",
+          "DASHI.Physics.YangMills.BalabanPreferredRowCFrontier",
+          "DASHI.Physics.YangMills.BalabanCMP116R409SelectedTermReplay",
+          "DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudget"
+        ],
+        "evidence": "After excluding empty body hashes, the largest YM body-hash groups are 111, 98, and 64 packages.",
+        "next_action": "Inspect the largest body-hash groups and partition by canonical owner before naming."
+      }
+    ],
+    "ns": [
+      {
+        "priority": 1,
+        "families": [
+          "DASHI.Physics.Closure.NSTriadKNClayFrontier",
+          "DASHI.Papers.NavierStokes.TheoremInterface",
+          "DASHI.Physics.Closure.NSTriadKNHighestAlpha",
+          "DASHI.Physics.Closure.NSTriadKNBPhaseDiscoveryFrontier"
+        ],
+        "evidence": "These are the largest NS package families; the broadest body-hash groups are too cross-family to rename without owner and source review.",
+        "next_action": "Start with one five-module sample per family, then expand only when hash and import evidence agree."
+      }
+    ]
+  },
+  "first_pass_results": {
+    "source": "/tmp/opencode/dashi-master-push/.dashi/round-stranded/ym-packages.jsonl",
+    "empty_hashes_excluded": true,
+    "ym_body_hash_groups": [
+      {
+        "rank": 1,
+        "body_sha256": "6929adae851d8522fccccc1cd3059119748cc66eeb8168ce7e5e7c79b98d7d63",
+        "package_count": 111,
+        "module_count": 27,
+        "family_count": 4,
+        "family_counts": {
+          "DASHI.Physics.YangMills.BalabanClayHighestAlpha": 106,
+          "DASHI.Physics.YangMills.BalabanCMP116R409SelectedTermReplay": 2,
+          "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontier": 2,
+          "DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudget": 1
+        },
+        "declarations": 121,
+        "selected_canonical_owner_count": 0,
+        "archive_status": {
+          "SUPERSEDED": 111
+        },
+        "disposition": "historical-superseded-exact; prioritize canonical-owner/source-location reconciliation, not direct rename"
+      },
+      {
+        "rank": 2,
+        "body_sha256": "67f1ea66a6cca438e95b5459e616f2245dd97328cb8a1c9887b199f272a585a5",
+        "package_count": 98,
+        "module_count": 37,
+        "family_count": 5,
+        "family_counts": {
+          "DASHI.Physics.YangMills.BalabanClayHighestAlpha": 76,
+          "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontier": 9,
+          "DASHI.Physics.YangMills.YangMillsClayCriticalPath": 8,
+          "DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudget": 3,
+          "DASHI.Physics.YangMills.BalabanCMP116R409SelectedTermReplay": 2
+        },
+        "declarations": 99,
+        "selected_canonical_owner_count": 0,
+        "archive_status": {
+          "SUPERSEDED": 98
+        },
+        "disposition": "historical-superseded-exact; prioritize canonical-owner/source-location reconciliation, not direct rename"
+      },
+      {
+        "rank": 3,
+        "body_sha256": "f58405087f2e34fd51223ae7a717b5feb7693bbf89de7ff12fdcee43b9d59d8a",
+        "package_count": 64,
+        "module_count": 31,
+        "family_count": 7,
+        "family_counts": {
+          "DASHI.Physics.YangMills.YangMillsClayCriticalPath": 30,
+          "DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontier": 12,
+          "DASHI.Physics.YangMills.BalabanPreferredSourceSemanticsFrontier": 10,
+          "DASHI.Physics.YangMills.BalabanClayHighestAlpha": 7,
+          "DASHI.Physics.YangMills.BalabanPreferredRowCFrontier": 2,
+          "DASHI.Physics.YangMills.BalabanPreferredSourceFrontier": 2,
+          "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontier": 1
+        },
+        "declarations": 88,
+        "selected_canonical_owner_count": 0,
+        "archive_status": {
+          "UNRESOLVED": 63,
+          "SUPERSEDED": 1
+        },
+        "top_residuals": [
+          "round27HarmonicCrossPollinationRootStable",
+          "liveSU2HardProducerCountExact",
+          "singletonRemainsEulerLagrangeOpen",
+          "pairRemainsFiniteYoungClosed",
+          "round62AndRound63CountsAgree",
+          "round217ClayPromotionIsFalse"
+        ],
+        "disposition": "mixed-unresolved-frontier; do not rename until residuals and canonical owners are reconciled"
+      }
+    ],
+    "next_bounded_operation": "Compare imports and source locations for groups 1-2, then separately route group 3 residuals; no rename tranche is safe from body hashes alone."
+  },
+  "symbol_presence_bidi": {
+    "normalization": "Replace RoundNNN and literalRoundNNN with placeholders; preserve the remaining semantic stem.",
+    "current_sample": {
+      "group_1_group_2_normalized_symbol_intersection": 0,
+      "group_1_group_3_normalized_symbol_intersection": 0,
+      "group_2_group_3_normalized_symbol_intersection": 0,
+      "group_1_group_2_signature_hash_intersection": 1,
+      "group_1_group_3_signature_hash_intersection": 0,
+      "group_2_group_3_signature_hash_intersection": 0,
+      "interpretation": "Name presence is not sufficient; groups 1 and 2 retain one shared signature surface despite disjoint normalized names."
+    },
+    "decision": "Use a layered presence/difference vector rather than an all-pairs name-similarity matrix."
+  },
+  "wall_time_notes": {
+    "filename_family_scan": "approximately 1.16 seconds for 28063 Agda paths",
+    "bounded_five_file_similarity_samples": {
+      "TheoremInterfaceRound#Exact": "approximately 356 ms for 10 pairs",
+      "NSTriadKNClayFrontierRound#Exact": "approximately 1395 ms for 10 pairs",
+      "NSTriadKNClayFrontierRound#Validation": "approximately 27 ms for 10 pairs"
+    },
+    "cold_preflight": "one YM target exceeded 90 seconds; avoid full-corpus cold benchmarking until scope is bounded"
+  }
+}
