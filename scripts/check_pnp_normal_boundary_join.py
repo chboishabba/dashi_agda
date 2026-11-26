@@ -162,13 +162,23 @@ def onehot_exclusion_core(n,G,H,B):
     E=canon(out);assert E is not None and canon(H+E)==H
     return E
 
-def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0):
+def cached_empty_cover(n,H,empty,B,limit):
+    """Sound collective coverage of a demand by completed empty fibres only."""
+    if limit<=0 or not empty:return False
+    F=tuple(empty[-limit:]);B.pay('demand_cover_input',1+len(H)+sum(1+len(E) for E in F))
+    q=restrict(n,H,F,B)
+    if q is None:return True
+    _,_,G=q
+    return () in simplify(G,B)
+
+
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
     Budget exhaustion propagates (not an empty fibre).
     """
-    assert core_trials>=0
+    assert core_trials>=0 and core_cover>=0
     H=canon(required)
     if H is None:return None,0
     if not row_bits:
@@ -195,6 +205,8 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0):
             B.pay('demand_subsumption',1+len(E)+len(H))
             if canon(H+E)==H:
                 B.pay('demand_core_hit');return None
+        if cached_empty_cover(n,H,empty.get(mask,()),B,core_cover):
+            B.pay('demand_collective_hit');memo[key]=None;remember_empty(mask,H);return None
         if A is None:
             G=row_bits[mask.bit_length()-1]
             for j in range(len(G)):
@@ -385,7 +397,38 @@ def test_onehot_exclusion_core():
         assert all(canon(E+tuple((a,b^int(i==j)) for i,(a,b) in enumerate(G))) is None for j in range(n))
     print('onehot_exclusion_core',checks,cores,'controls PASS')
 
+def test_cached_empty_cover():
+    rng=Random(2611369);checks=collective=proved=0
+    for n in range(9):
+        for _ in range(140):
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(n+1)))
+            if H is None:continue
+            F=tuple(G for _ in range(rng.randrange(9)) if (G:=canon((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(n+1)))) is not None)
+            T=[x for x in range(1<<n) if satisfies(x,H,())]
+            want=all(any(satisfies(x,E,()) for E in F) for x in T)
+            B=Budget(10000000);got=cached_empty_cover(n,H,F,B,8)
+            assert not got or want
+            checks+=1;proved+=got
+            collective+=got and not any(canon(H+E)==H for E in F)
+    for n in (3,8,16,32,64,128):
+        H=canon(((2,0),(4,0)));F=[canon(((1,0),(2,0))),canon(((1,1),(4,0)))]
+        assert not any(canon(H+E)==H for E in F)
+        B=Budget(1000000);assert cached_empty_cover(n,H,F,B,2)
+        assert not cached_empty_cover(n,H,F,B,1)
+        a=rng.randrange(1<<n)
+        shift=lambda E:canon((s,b^((s&a).bit_count()%2)) for s,b in E)
+        assert cached_empty_cover(n,shift(H),[shift(E) for E in F],B,2)
+    H=canon(((4,0),(8,0),(16,0),(32,0)))
+    F=[canon(((1,q&1),(2,q>>1),(1<<(q+2),0))) for q in range(4)]
+    assert cached_empty_cover(6,H,F,Budget(10000),4)
+    assert not cached_empty_cover(6,H,F,Budget(10000),3)
+    try:cached_empty_cover(6,H,F,Budget(0),4);assert False
+    except Exhausted:pass
+    print('cached_empty_cover',checks,proved,collective,'controls PASS')
+
+
 def main():
+    test_cached_empty_cover()
     test_onehot_exclusion_core()
     test_exact_one_demand()
     test_exact_one()
