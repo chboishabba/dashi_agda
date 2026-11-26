@@ -425,63 +425,182 @@ def transport_onehot_exclusion(certificate,V,a,p,B):
     return tuple((k,t,c) for (k,t),c in sorted(C.items()))
 
 
-def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,certificates=None):
-    """Bounded original-row partition with child-local character strengthening.
+def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
+    """Replay inherited DAG, then append local generators with exact provenance.
 
-    Return (witness, decisive). Only checked root-child exclusions may be
-    exported as (row, occurrence). Optional certificates request a standalone
-    replayable proof when a local character refutation can be independently
-    reproduced under the same cap. UNKNOWN is never learned as exclusion.
+    Rechart may merge pivots. Retain inherited rows and append their normalized
+    reductions with original generator IDs. Cap applies to new independent rows.
+    Return (proof, echelon basis); a constant pivot has a terminal replay proof.
+    """
+    assert p in PRIMES and max_pivots>=0
+    rows=replay(F,seed,p,B=B)
+    if rows is None:raise ValueError('invalid inherited character proof')
+    out=list(seed);basis={}
+    def reduce(A):
+        ops=[]
+        # Reduce lower pivots too, not only the leading term.
+        for s in sorted(basis,reverse=True):
+            w=A.get(s,0)
+            if w:
+                k,D=basis[s];B.pay('character_provenance_reduce',1+len(D))
+                add(A,D,-w,p);ops.append((k,-w%p))
+        return ops
+    def admit(A,j,t,ops,c,existing=None):
+        s=max(A);q=pow(A[s],-1,p)
+        A={v:w*q%p for v,w in A.items()}
+        entry=(j,t,tuple(ops),c*q%p)
+        # Existing raw rows can be referenced without a duplicate if already
+        # normalized. A constant must be terminal for the existing verifier.
+        k=existing
+        if k is None or out[k]!=entry or (s==0 and k!=len(out)-1):
+            B.pay('character_provenance_row',1+len(A)+len(ops));k=len(out);out.append(entry)
+        basis[s]=(k,A)
+        return s==0
+    def finish():
+        D={s:A for s,(i,A) in basis.items()}
+        proof=tuple(out)
+        if 0 in D:
+            proof=compact(proof,B)
+            if not verify(F,proof,p,B=B):raise AssertionError('invalid mixed contradiction')
+        return proof,D
+    for i,A in enumerate(rows):
+        A=dict(A);j,t,ops,c=seed[i]
+        extra=reduce(A)
+        if not A:continue
+        # A=c*(generator+old dependencies)+extra dependencies.
+        # Move extra coefficients inside the inherited scale c.
+        inv=pow(c,-1,p)
+        if admit(A,j,t,tuple(ops)+tuple((k,w*inv%p) for k,w in extra),c,i):return finish()
+    G=tuple(generators(F,p,B=B))
+    for t in shifts:
+        for j,g in enumerate(G):
+            B.pay('character_local_generator',1+len(g));A={s^t:w for s,w in g.items()};ops=reduce(A)
+            if not A:continue
+            if max(A)!=0 and len(basis)>=max_pivots:return finish()
+            if admit(A,j,t,ops,1):return finish()
+    return finish()
+
+
+def inconsistent_onehot_proof(n,F,e,j,p,B):
+    """An impossible affine row choice gives a proof of 2*x_j directly."""
+    row=F[e];m=len(row)
+    if canon((s,b^int(i==j)) for i,(s,b) in enumerate(row)) is not None:return None
+    normals=tuple(s for s,b in row);rhs=sum((b^int(i==j))<<i for i,(s,b) in enumerate(row))
+    D=canon(tuple((value(normals,1<<l),0) for l in range(n))+((rhs,1),))
+    assert D is not None
+    choice=chart(m,D)[0];I=[i for i in range(m) if choice>>i&1]
+    delta=tuple((-1)**(b^int(i==j)) for i,(s,b) in enumerate(row))
+    base=sum(1+len(G)*(len(G)-1)//2 for G in F[:e])+1
+    pair_id={pair:base+i for i,pair in enumerate(combinations(range(m),2))}
+    suffix=-1;prefix=0;C={};half=pow(2,-1,p)
+    for i in I:
+        suffix*=delta[i]
+        if i!=j:add(C,{(pair_id[tuple(sorted((i,j)))],prefix):-(-1)**row[i][1]*suffix},half,p)
+        prefix^=row[i][0];B.pay('character_inconsistent_telescope')
+    assert prefix==0 and suffix==1
+    result=tuple((k,t,c) for (k,t),c in sorted(C.items()))
+    if not verify_onehot_exclusion(F,e,j,result,p,B):raise AssertionError('invalid inconsistent choice proof')
+    return result
+
+
+def join_onehot_proofs(F,e,certificates,p,B):
+    """All original row choices excluded: sum their proofs and row equation."""
+    if not 0<=e<len(F) or len(certificates)!=len(F[e]):raise ValueError('incomplete onehot proof family')
+    C={};half=pow(2,-1,p)
+    for j,P in enumerate(certificates):
+        if not verify_onehot_exclusion(F,e,j,P,p,B):raise ValueError('invalid onehot proof')
+        for k,t,c in P:
+            B.pay('character_join_proof_term');add(C,{(k,t):c},half,p)
+    g=sum(1+len(G)*(len(G)-1)//2 for G in F[:e])
+    add(C,{(g,0):1},-half,p)
+    terms=sorted(C.items());assert terms
+    rows=[]
+    for (k,t),c in terms[:-1]:rows.append((k,t,(),c))
+    (k,t),c=terms[-1];inv=pow(c,-1,p)
+    rows.append((k,t,tuple((i,inv) for i in range(len(rows))),c))
+    B.pay('character_join_proof_rows',1+2*len(rows))
+    proof=tuple(rows)
+    if not verify(F,proof,p,B=B):raise AssertionError('invalid joined contradiction')
+    return proof
+
+
+def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,certificates=None,source_proof=None,refutations=None):
+    """Bounded original-row partition; optional proof-carrying mode.
+
+    A supplied source DAG is replayed, then transported and extended, so every
+    completed empty node has an original-generator contradiction. Refutations
+    receives the root contradiction only; certificates receives root bit zeros.
+    Without source_proof retain the previous lightweight search behavior.
     """
     assert nodes>=0 and max_pivots>=0 and degree in (-1,0,1,2)
     original=F;left=nodes
+    if source_proof is not None:
+        source_proof,basis=extend_character_proof(F,source_proof,(),p,B,max_pivots)
     def valid(J,x):
         B.pay('character_adaptive_verify',1+sum(map(len,J)))
         return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in J)
-    def visit(J,K,u,V):
+    def visit(J,K,u,V,proof):
         nonlocal left
-        if not left:return None,False
+        if not left:return None,False,None
         left-=1;B.pay('character_adaptive_node')
-        if 0 in K:return None,True
-        if valid(J,0):return u,True
-        if degree>=0 and len(V)<n:K=extend_character_span(J,K,p,B,degree,max_pivots)
+        if 0 in K:return None,True,proof
+        if valid(J,0):return u,True,None
+        if degree>=0 and len(V)<n:
+            if proof is None:K=extend_character_span(J,K,p,B,degree,max_pivots)
+            else:proof,K=extend_character_proof(J,proof,source_shifts(J,degree,B),p,B,max_pivots)
         if 0 in K:
-            B.pay('character_adaptive_local_empty');return None,True
+            B.pay('character_adaptive_local_empty');return None,True,proof
         e=min((i for i,G in enumerate(J) if sum(b for s,b in G)!=1),key=lambda i:len(J[i]))
-        G=J[e];candidates=[];d=len(V)
-        def record(j,R=None):
+        G=J[e];candidates=[];d=len(V);paid={}
+        def record(j,R=None,child=None,inconsistent=False):
+            C=None
+            if proof is not None:
+                if inconsistent:C=inconsistent_onehot_proof(d,J,e,j,p,B)
+                else:C=lift_onehot_exclusion(d,J,e,j,child,p,B)
+                if C is None:raise AssertionError('missing child proof')
+                paid[j]=C
             if d!=n:return
             if learned is not None:
                 learned.append((e,j));B.pay('character_adaptive_learned')
-            if certificates is not None and R is not None and degree>=0:
-                proof,empty=eliminate(R,source_shifts(R,degree,B),p,B,max_pivots=max_pivots)
-                if empty:
-                    C=lift_onehot_exclusion(n,J,e,j,compact(proof,B),p,B)
-                    assert C is not None
+            if certificates is not None:
+                if proof is None and R is not None and degree>=0:
+                    P,empty=eliminate(R,source_shifts(R,degree,B),p,B,max_pivots=max_pivots)
+                    if empty:C=lift_onehot_exclusion(n,J,e,j,compact(P,B),p,B)
+                if C is not None:
                     certificates.append((e,j,C));B.pay('character_adaptive_lifted',1+len(C))
         for j in range(len(G)):
             B.pay('character_adaptive_pattern',1+len(G))
             H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(G))
-            if H is None:record(j);continue
+            if H is None:record(j,inconsistent=True);continue
             a,W=chart(d,H);assert len(W)<d
-            if valid(J,a):return lift(u,V,a),True
+            if valid(J,a):return lift(u,V,a),True,None
             B.pay('character_adaptive_score',1+sum(map(len,J)))
             score=sum(abs(sum(b^((s&a).bit_count()%2) for s,b in A)-1) for A in J)
             candidates.append(((score,len(W),j),a,W))
         for (_,_,j),a,W in sorted(candidates):
-            if not left:return None,False
-            Q=restrict_character_span(K,W,a,p,B)
-            if 0 in Q:
-                B.pay('character_adaptive_projected_empty');record(j);continue
+            if not left:return None,False,None
+            P=None
+            if proof is None:
+                Q=restrict_character_span(K,W,a,p,B)
+                if 0 in Q:
+                    B.pay('character_adaptive_projected_empty');record(j);continue
             B.pay('character_adaptive_image',1+sum(map(len,J))*(1+len(W)))
             R=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in A) for A in J)
-            x,done=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W))
-            if x is not None:return x,True
-            if not done:return None,False
-            B.pay('character_adaptive_backtrack');record(j,R)
-        return None,True
-    x,done=visit(F,basis,0,tuple(1<<i for i in range(n)))
+            if proof is not None:
+                P,Q=extend_character_proof(R,transport_proof(proof,W,a,p,B),(),p,B,max_pivots)
+                if 0 in Q:
+                    B.pay('character_adaptive_projected_empty');record(j,R,P);continue
+            x,done,child=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W),P)
+            if x is not None:return x,True,None
+            if not done:return None,False,None
+            B.pay('character_adaptive_backtrack');record(j,R,child)
+        P=join_onehot_proofs(J,e,[paid[j] for j in range(len(G))],p,B) if proof is not None else None
+        return None,True,P
+    x,done,P=visit(F,basis,0,tuple(1<<i for i in range(n)),source_proof)
     if x is not None:assert done and valid(original,x)
+    if done and x is None and source_proof is not None:
+        if not verify(original,P,p,B=B):raise AssertionError('missing root refutation')
+        if refutations is not None:refutations.append(P)
     return x,done
 
 
@@ -530,7 +649,7 @@ def restriction_reopen(n,F,basis,p,B,steps):
     return None
 
 
-def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0,section_cap=0,adaptive_nodes=0,adaptive_degree=0):
+def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0,section_cap=0,adaptive_nodes=0,adaptive_degree=0,adaptive_provenance=False):
     """Sound original affine refinement and optional original witness.
 
     Share one replayed elimination span across both consumers. None carrier
@@ -569,7 +688,8 @@ def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,p
         y=restriction_reopen(len(W),J,K,p,B,path_steps) if path_steps else None
         if y is None and adaptive_nodes:
             learned=[]
-            y,done=adaptive_reopen(len(W),J,K,p,B,adaptive_nodes,adaptive_degree,min(max_pivots,256),learned)
+            inherited=transport_proof(proof,W,a,p,B) if adaptive_provenance else None
+            y,done=adaptive_reopen(len(W),J,K,p,B,adaptive_nodes,adaptive_degree,min(max_pivots,256),learned,source_proof=inherited)
             if done and y is None:return None,None
             # Root child exclusions apply throughout the refined parent.
             # Stable row/occurrence IDs recover the actual original equations.
@@ -960,7 +1080,70 @@ def test_character_parent_learning():
     print('character_parent_learning',certified,dict(stats))
 
 
+def test_mixed_character_provenance():
+    from random import Random
+    from collections import Counter
+    from check_pnp_affine_normal_components import Exhausted
+    def transform(F,V,a):return tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+    def valid(F,x):return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+    rng=Random(369261131);stats=Counter()
+    for n in range(1,9):
+        for _ in range(150):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(1,7))) for i in range(rng.randrange(1,7)))
+            e=rng.randrange(len(F));j=rng.randrange(len(F[e]));H=canon((s,b^int(k==j)) for k,(s,b) in enumerate(F[e]))
+            if H is None:continue
+            a,V=chart(n,H);R=transform(F,V,a)
+            for p in (3,5,7):
+                B=Budget(50000000);seed,empty=eliminate(F,source_shifts(F,1,B),p,B,max_pivots=8)
+                if empty:continue
+                inherited=transport_proof(seed,V,a,p,B);A=replay_span(R,inherited,p,B)
+                P,D=extend_character_proof(R,inherited,(),p,B,8)
+                assert (0 in A)==(0 in D)
+                if 0 not in D:
+                    assert len(A)==len(D) and all(not quotient_normal(v,D,p,B) for v in A.values())
+                    assert all(not quotient_normal(v,A,p,B) for v in D.values())
+                for cap in (4,8,16):
+                    S=source_shifts(R,0,B);Q,K=extend_character_proof(R,P,S,p,B,cap)
+                    assert all(sum(w*(-1)**((s&y).bit_count()%2) for s,w in v.items())%p==0 for v in K.values() for y in range(1<<len(V)) if valid(R,y))
+                    if 0 in K:
+                        assert verify(R,Q,p,B=B) and not any(valid(R,y) for y in range(1<<len(V)))
+                        stats['constant']+=1
+                        _,local=eliminate(R,S,p,B,max_pivots=cap)
+                        stats['mixed']+=0 not in D and not local
+                    else:
+                        L=replay_span(R,Q,p,B);assert len(L)==len(K) and all(not quotient_normal(v,K,p,B) for v in L.values())
+                    stats['checks']+=1
+    assert (stats['checks'],stats['constant'],stats['mixed'])==(6030,2231,46)
+    print('mixed_character_provenance',dict(stats))
+    rng=Random(369261132);stats=Counter()
+    for n in range(8):
+        for _ in range(90):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(1,7)))
+            T=[x for x in range(1<<n) if valid(F,x)]
+            for p in (3,5,7):
+                B=Budget(10000000);seed,_=eliminate(F,(0,),p,B,max_pivots=8);K=replay_span(F,seed,p,B)
+                for cap,degree in ((0,-1),(4,0),(128,-1),(128,0)):
+                    B=Budget(10000000);L=[];C=[];P=[]
+                    y,done=adaptive_reopen(n,F,K,p,B,cap,degree,32,L,C,seed,P)
+                    assert y is None or y in T;assert not done or (y is not None)==bool(T)
+                    if cap==128:assert done
+                    assert len(C)==len(L) and all(verify_onehot_exclusion(F,e,j,c,p,B) for e,j,c in C)
+                    assert len(P)==int(done and y is None)
+                    assert all(verify(F,q,p,B=B) for q in P)
+                    assert all(all(not (F[e][j][1]^((F[e][j][0]&x).bit_count()%2)) for e,j in L) for x in T)
+                    stats['checks']+=1;stats['empty']+=done and y is None;stats['witness']+=y is not None
+                    stats['unknown']+=not done;stats['pins']+=len(C)
+                    stats['joins']+=bool(B.stats['character_join_proof_rows'])
+                    stats['inconsistent']+=bool(B.stats['character_inconsistent_telescope'])
+                    if P:stats['proof_rows']+=len(P[0])
+    assert (stats['checks'],stats['empty'],stats['witness'],stats['unknown'],stats['pins'])==(8640,4914,1557,2169,2364)
+    try:adaptive_reopen(1,(((1,0),),),{},3,Budget(0),1,source_proof=());assert False
+    except Exhausted:pass
+    print('proof_carrying_adaptive',dict(stats))
+
+
 def main():
+    test_mixed_character_provenance()
     test_character_parent_learning()
     test_character_adaptive()
     test_character_section()
