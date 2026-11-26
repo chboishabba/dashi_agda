@@ -6,7 +6,6 @@ module DASHI.Foundations.BishopChudnovskyNativeHyperODEExact where
 -- no claim of the composed E4 identity yet.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥-elim)
 open import Data.Product.Base using (_,_; proj₂)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NP
@@ -14,8 +13,6 @@ open import Relation.Nullary.Decidable.Core using (from-yes)
 open import Relation.Binary.PropositionalEquality using (sym; cong; trans)
 open import Data.Integer.Base using (+_)
 import Data.Integer.Base as Z
-open import Data.Integer.Solver using (module +-*-Solver)
-open +-*-Solver using () renaming (solve to zsolve; _:+_ to _⊞_; _:*_ to _⊠_; con to zcon; _:=_ to _≐_)
 open import Data.Rational.Unnormalised using (_/_)
 import Data.Rational.Unnormalised as Q
 import Data.Rational.Unnormalised.Properties as QP
@@ -56,10 +53,19 @@ termStep n = QP.≃-trans (QP.≃-sym (F.productFactorial (suc n)))
 -- zero or negative numerator. No field inversion of a signed value.
 clearFraction : (a : Z.ℤ) (d : Nat) (nd : Nat.NonZero d) →
   ((+ d / 1) Q.* Raw.frac a d nd) Q.≃ (a / 1)
-clearFraction a zero nd = ⊥-elim (Nat.≢-nonZero⁻¹ zero {{nd}} refl)
-clearFraction a (suc d) nd = Q.*≡*
-  (zsolve 2 (λ d′ a′ → (d′ ⊠ a′) ⊠ zcon (+ 1)
-    ≐ a′ ⊠ (zcon (+ 1) ⊠ d′)) refl (+ (suc d)) a)
+clearFraction a d nd =
+  QP.≃-trans
+    (QP.≃-sym (Raw.fracMulEdge (+ d) a 1 d Nat.nonZero nd))
+    (QP.≃-trans sameDen
+      (QP.*-cancelˡ-/ d {q = a} {r = 1}
+        {{Nat.nonZero}} {{Raw.prodNZ d 1 nd Nat.nonZero}}))
+  where
+  sameDen :
+    Raw.frac (Z._*_ (+ d) a) (Nat._*_ 1 d)
+      (Raw.prodNZ 1 d Nat.nonZero nd) Q.≃
+    Raw.frac (Z._*_ (+ d) a) (Nat._*_ d 1)
+      (Raw.prodNZ d 1 nd Nat.nonZero)
+  sameDen rewrite NP.*-identityˡ d | NP.*-identityʳ d = QP.≃-refl
 
 leafCleared : (n : Nat) →
   (NR.natReal (G.qNat (suc n)) * (Raw.leafRatio (suc n) ⋆)) ≃
