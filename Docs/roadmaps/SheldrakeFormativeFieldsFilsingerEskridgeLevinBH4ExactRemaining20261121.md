@@ -1,5 +1,14 @@
 # Formative fields × source work × Filsinger/Eskridge × Levin/BH4 — exact remaining phase roadmap
 
+## SOLAR P0 — 27 November: signed dynamic vector sideband and spherical projection
+
+Conditional implementation [solar_earth_thermal_vector.py](../../scripts/solar_earth_thermal_vector.py), commit e9c9d1ea0f406d801ef21d068f4d664f116ad44e. Existing collision tensor and layered shell source bodies inspected. Retain exp(-i omega t) convention of collision tensor; conjugate the layered shell's opposite convention before physical composition. Linearized current equation at fixed B: delta j(omega+lambda)=A(omega+lambda)^-1 [delta D(lambda) E(omega)-delta nu(lambda) j(omega)]. This is impressed mixing current at prescribed background field, not yet the self-consistent finite-source field perturbation. Sum species only after their individual resolvents. Existing OCT369 punctured27 weights and tangent TE/TM frame reused as a standalone projection helper, not yet connected to radial propagator. Zero frequency and both signed sidebands retained; no spontaneous subharmonic claim. Least-squares inverse retains unreachable residual, not a paid heating optimization.
+
+Local Python/SymPy fixtures passed: 12 signed frequency pairs, conjugate reality and zero-field checks, DC-modulation derivative agreement max absolute error 1.795499801024585e-11, exact symbolic derivative identity, spherical identity Gram and unreachable target residual. Synthetic parameters; no original EISCAT replay, physical admission or Agda kernel. Local source and committed content supplied identically; no independent Git blob comparison in this round.
+
+Next maximum cut: use actual rates derivatives and independently constrained thermal response on original indexed rows; assemble induced current into shell source RHS with declared altitude integration, field backaction, convention conversion and matched receiver. Compare square, 3:2, golden and unrestricted geometry with equivalent physical aperture and cost, not abstract labels. S3 and MR34–39 conditional dynamic constitutive identity advanced; S4/S7/S8 open.
+
+
 ## SOLAR P0 — 27 November: thermal actuator / finite natural generator weld
 
 Conditional source-written small-signal identities in [checker](../../scripts/check_solar_earth_thermal_source_backaction.py), commit 685f47229a03d40bc235fd665ff4d51aac43acb2. Not executed in this turn; no kernel or physical admission. Reuse incident port, population transport, collision tensor, spatial endpoint. Source basis: DOI 10.1029/2010JA016194 (thermal conductivity and vector propagation), 10.1029/2012JA017585 (electron energy balance), 10.1029/2012JA018140 (conversion efficiency and natural-current dependence). These authors retain scientific discovery credit. DASHI contribution is conditional finite-generator closure and reverse endpoint identities, not discovery of electrojet modulation.
