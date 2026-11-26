@@ -33,7 +33,6 @@ def rotation(q):
                      [2*(x*y+w*z),n-2*(x*x+z*z),2*(y*z-w*x)],
                      [2*(x*z-w*y),2*(y*z+w*x),n-2*(x*x+y*y)]])/n
 
-
 D=[s.eye(3),s.diag(1,-1,-1),s.diag(-1,1,-1),s.diag(-1,-1,1)]
 
 
