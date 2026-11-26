@@ -110,7 +110,7 @@ decode k r nz = H.recoverFrame (flipMatrix k r) nz
 encodePositive : (k : Mark) (f : H.Frame3) →
   B._<_ B.0ℝ (H.traceDenominator (flipMatrix k (encode k f)))
 encodePositive k f =
-  BP.<-respʳ-≃ (BP.≃-sym (traceCong (flipTwice k (H.frameRotation f))))
+  BP.<-respʳ-≃ (BP.≃-symm (traceCong (flipTwice k (H.frameRotation f))))
     (H.tracePositive f)
 
 reopens : (k : Mark) (f : H.Frame3) →
