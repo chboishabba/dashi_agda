@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+function audit(books){
+const R=n=>Array.from({length:n},(_,i)=>i),V=R(27),mod=x=>(x%3+3)%3,d=x=>[x%3,Math.floor(x/3)%3,Math.floor(x/9)],num=a=>a[0]+3*a[1]+9*a[2],A=V.map(a=>V.map(b=>num(d(a).map((x,i)=>mod(x+d(b)[i]))))),D=V.map(a=>V.map(b=>num(d(a).map((x,i)=>mod(x-d(b)[i]))))),L=x=>{let [a,b,c]=d(x);return num([mod(b-a),mod(c-a),a])},aff=x=>A[L(x)][num([1,2,2])];
+const glyphs=[..."אבגדהוזחטיכלמנסעפצקרשתךםןףץ"],ix=new Map(glyphs.map((g,i)=>[g,i])),enc=s=>[...s].map(g=>ix.get(g)),str=s=>s.map(x=>glyphs[x]).join("");
+const old=V.map(i=>{let t=Math.floor(i/9),u=i%3,v=Math.floor(i%9/3);return num([t,mod(t+u),mod(t+v)])}),ayak=V.map(i=>num([(i%9+1)%3,mod(Math.floor(i%9/3)-1),mod(Math.floor(i/9)-1)]));
+for(const x of V)if(aff(old[x])!==ayak[x])throw Error("chart affine");let deltaChecks=0;for(const x of V)for(const y of V){if(L(D[old[x]][old[y]])!==D[ayak[x]][ayak[y]])throw Error("residual transport");deltaChecks++}
+let supportChanged=V.filter(x=>d(x).filter(Boolean).length!==d(L(x)).filter(Boolean).length).length;
+const chapters=Object.entries(books).flatMap(([book,b])=>b.chapters.map(ch=>({book,ch:ch.c,s:enc(ch.verses.map(v=>v.letters).join(""))}))),ex=chapters.filter(w=>w.book==="exodus"),deut=chapters.filter(w=>w.book==="deuteronomy"),train=ex.filter(w=>w.ch<=13),prior=chapters.filter(w=>w.book!=="deuteronomy");
+const n=91,k=8,tests=[{name:"original",left:ex.find(w=>w.ch===14).s.slice(-k),right:ex.find(w=>w.ch===15).s.slice(n,n+k),truth:ex.find(w=>w.ch===15).s.slice(0,n),rows:train},...deut.filter(w=>w.ch%3===1&&w.s.length>=955).map(w=>({name:"deut"+w.ch,left:w.s.slice(432-k,432),right:w.s.slice(432+n,432+n+k),truth:w.s.slice(432,432+n),rows:prior}))];
+function search(t,chart,shift){const inv=Array(27);chart.forEach((v,i)=>inv[v]=i);const obs=t.left.concat(t.right).map(v=>chart[v]),counts=new Uint8Array(27),bests={literal:null,translated:null};
+for(const w of t.rows){const s=w.s.map(v=>chart[v]);for(let j=k;j+n+k+shift<=s.length;j++){counts.fill(0);let a=0,b=0;for(let z=0;z<k;z++){let dl=D[obs[z]][s[j-k+z]],dr=D[obs[k+z]][s[j+n+shift+z]];counts[dl]++;counts[dr]++;a+=dl===0;b+=dr===0}let score=a+b;if(!bests.literal||score>bests.literal.score)bests.literal={score,offset:j,book:w.book,ch:w.ch,shift,delta:0,pred:w.s.slice(j,j+n)};
+let max=-1,delta=0;for(let v=0;v<27;v++)if(counts[v]>max){max=counts[v];delta=v}if(!bests.translated||max>bests.translated.score)bests.translated={score:max,offset:j,book:w.book,ch:w.ch,shift,delta,pred:s.slice(j,j+n).map(v=>inv[A[v][delta]])}
+}}
+for(const b of Object.values(bests)){b.hits=b.pred.filter((v,i)=>v===t.truth[i]).length;b.text=str(b.pred);delete b.pred}return bests}
+const results=tests.map(t=>({name:t.name,old:search(t,old,0),ayak:search(t,ayak,0),shift:search(t,old,1)}));
+return{affineChecks:27,deltaChecks,supportChanged,results,qualification:"Ayak = L(old)+b exact affine chart relation, L(a,b,c)=(b-a,c-a,a), b=(1,-1,-1). Difference transport exact, support grading not invariant under L. Donor retrieval uses all training-only within-chapter 91-glyph spans, fixed8+8 visible flanks, max exact literal or max single translation agreement, deterministic first tie. Shift control displaces donor right flank by1. Target used only for scoring, corpus reused. No claim exact historical correspondence, no independent external source witness."}}
+
+const base='Docs/support/reference/TorahCryptoCorpus20261125/';const names=['genesis','exodus','leviticus','numbers','deuteronomy'];console.log(JSON.stringify(audit(Object.fromEntries(names.map(n=>[n,JSON.parse(fs.readFileSync(base+n+'.normalized.json','utf8'))])))),null,2));
