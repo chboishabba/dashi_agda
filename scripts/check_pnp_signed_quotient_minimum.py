@@ -6,10 +6,10 @@ from check_pnp_adaptive_signed_escape import (add, lower, certificate, reopen,
     point, portfolio)
 
 
-def minimum(M,n,B,width=6):
+def minimum(M,n,B,width=6,with_witness=False):
     """(lower bound, exact flag). Over-width cuts safely relax correlations."""
     const=M.get((),0);F=tuple(sorted(A for A,w in M.items() if A and w))
-    if not F:return const,True
+    if not F:return (const,True,0) if with_witness else (const,True)
     root,boundary,space=tree(n,F,B)
     def run(node):
         mask,A,C=node;D=boundary(mask);T={}
@@ -39,6 +39,10 @@ def minimum(M,n,B,width=6):
         assert len(T)==1<<len(D)
         return T,min(c for c,H in T.values())
     T,a=run(root)
+    if with_witness:
+        x=None if T is None else chart(n,T[0][1])[0]
+        if x is not None:assert point(M,x)==const+a
+        return const+a,T is not None,x
     return const+a,T is not None
 
 
