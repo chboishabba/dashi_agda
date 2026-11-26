@@ -1,0 +1,62 @@
+{
+  "status": "CONDITIONAL_INCIDENT_PORT_AND_RECOVERY",
+  "physical_admission": false,
+  "port_quadrature_fixtures": 18,
+  "max_quadrature_error": 3.3306690738754696e-16,
+  "gross_sign_fixtures": 5,
+  "endpoint_rank": 15,
+  "comparison_fixtures": 40,
+  "cases": {
+    "on": {
+      "incident": 0.3499628695278337,
+      "baseline_ideal_net": 0.05802388205981553,
+      "optimized_ideal_net": 0.14453282007553836,
+      "efficiency_box_worst_schedule_net": 0.03152810302433493,
+      "no_recovery_schedule_net": -0.03454998335164574,
+      "ledger_order": [
+        "incident",
+        "outgoing",
+        "material",
+        "load",
+        "gross_controller_in",
+        "gross_controller_out"
+      ],
+      "ledger": [
+        0.3499628695278337,
+        0.18577750441019636,
+        0.019652545042099227,
+        0.019303277998799773,
+        0.05385326135044551,
+        0.1790828034271841
+      ],
+      "kkt_residual": 2.987068457062093e-17,
+      "endpoint_residual": 6.00207684948407e-16
+    },
+    "off": {
+      "incident": 0.0,
+      "baseline_ideal_net": -0.07616470303939134,
+      "optimized_ideal_net": -0.05184638584996264,
+      "efficiency_box_worst_schedule_net": -0.12495840156262754,
+      "no_recovery_schedule_net": -0.11456189952705886,
+      "ledger_order": [
+        "incident",
+        "outgoing",
+        "material",
+        "load",
+        "gross_controller_in",
+        "gross_controller_out"
+      ],
+      "ledger": [
+        0.0,
+        0.03531373985748408,
+        0.016532645992478574,
+        0.012455135969408284,
+        0.12701703549646715,
+        0.06271551367709623
+      ],
+      "kkt_residual": 1.710600743526031e-17,
+      "endpoint_residual": 2.1623832785086193e-16
+    }
+  },
+  "scope": "Synthetic matched real-admittance ports, fixed incident trace, fixed material and full numerical return. Efficiency box is a trial cost model, not measured hardware or robust physical source uncertainty. Ideal net optimized; nonideal values evaluate that schedule, not a global nonideal optimum."
+}
