@@ -22,6 +22,7 @@ module DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
@@ -38,6 +39,9 @@ import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpProduct
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Foundations.BishopNatEmbeddingMonotoneExact as NatMono
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as PosExp
+import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegExp
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Gap
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
@@ -200,3 +204,27 @@ canonicalNatLogDyadic :
 canonicalNatLogDyadic k =
   canonicalNatLogProduct (suc zero) k (suc (k + k))
     (dyadicNatLogIndices k)
+
+
+canonicalNatLogExpPositive :
+  ∀ n → R._<_ R.0ℝ (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
+canonicalNatLogExpPositive zero =
+  RP.<-respʳ-≃ (RP.≃-symm PosExp.bishopExpZero) NegExp.onePositive
+canonicalNatLogExpPositive (suc n) =
+  NegExp.expPositive (Terms.sourceCanonicalNatLogSuccessorPositive n)
+
+canonicalNatLogMonotone :
+  ∀ {i j} → i ≤ j →
+  R._≤_ (Terms.sourceCanonicalNatLogCandidate i)
+         (Terms.sourceCanonicalNatLogCandidate j)
+canonicalNatLogMonotone {i} {j} indices =
+  RP.≮⇒≥ (λ reverseOrder →
+    let
+      strict = ExpProduct.bishopExpStrictOrderFromPositiveValue
+        {x = Terms.sourceCanonicalNatLogCandidate j}
+        {y = Terms.sourceCanonicalNatLogCandidate i}
+        (canonicalNatLogExpPositive j) reverseOrder
+      weak = RP.≤-respˡ-≃ (RP.≃-symm (canonicalNatLogExpInverse i))
+        (RP.≤-respʳ-≃ (RP.≃-symm (canonicalNatLogExpInverse j))
+          (NatMono.natRealMonotone (s≤s indices)))
+    in RP.<-irrefl RP.≃-refl (RP.<-≤-trans strict weak))
