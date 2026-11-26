@@ -130,6 +130,73 @@ def join_exact_one(n, row_bits, B):
     T=run(root)
     return (chart(n,T[0])[0] if 0 in T else None),width
 
+def join_exact_one_demand(n, row_bits, B, required=()):
+    """Find one original exact-one receipt, with affine demand in the row span.
+
+    No dense/full boundary table is required. Memoize only completed queries.
+    Budget exhaustion propagates (not an empty fibre).
+    """
+    H=canon(required)
+    if H is None:return None,0
+    if not row_bits:
+        assert not H
+        return 0,0
+    F=tuple(tuple((a,0) for a,b in G) for G in row_bits)
+    root,_,space=tree(n,F,B);memo={};maps={};width=0
+    assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
+    def structure(A,C):
+        key=(A[0],C[0])
+        if key not in maps:
+            U,V=space(A[0]),space(C[0]);I=intersection(n,U,V)
+            E=U+V;eq=tuple(value(E,1<<j) for j in range(n))
+            maps[key]=(U,V,I,eq)
+        return maps[key]
+    def ask(node,H):
+        nonlocal width
+        key=(node[0],H);B.pay('demand_query',1+len(H))
+        if key in memo:B.pay('demand_cache');return memo[key]
+        mask,A,C=node;out=None
+        if A is None:
+            G=row_bits[mask.bit_length()-1]
+            for j in range(len(G)):
+                B.pay('demand_leaf',1+len(G)+len(H))
+                K=canon(H+tuple((a,b^int(i==j)) for i,(a,b) in enumerate(G)))
+                if K is not None:
+                    out=rows(space(mask),value(space(mask),chart(n,K)[0]));break
+        else:
+            # Enumerate only the left projection needed for this demand.
+            if A[0].bit_count()>C[0].bit_count():A,C=C,A
+            U,V,I,eq=structure(A,C);L=[];R=[]
+            for s,b in H:
+                B.pay('demand_map',1+n*(1+len(U)+len(V)))
+                K=canon((a,s>>j&1) for j,a in enumerate(eq));assert K is not None
+                p=chart(len(U)+len(V),K)[0]
+                L.append(lift(0,U,p&((1<<len(U))-1)))
+                R.append((lift(0,V,p>>len(U)),b))
+            P=span(I+tuple(L));width=max(width,len(P))
+            todo=[(0,0)]
+            while todo:
+                q,p=todo.pop();B.pay('demand_prefix',1+q)
+                X=ask(A,canon(rows(P[:q],p)))
+                if X is None:continue
+                x=chart(n,canon(X))[0];v=value(P,x)
+                assert v&((1<<q)-1)==p
+                K=canon(rows(I,value(I,x))+tuple((r,b^((l&x).bit_count()%2)) for l,(r,b) in zip(L,R)))
+                Y=None if K is None else ask(C,K)
+                if Y is not None:
+                    out=canon(X+Y);assert out is not None
+                    z=chart(n,out)[0]
+                    assert all((s&z).bit_count()%2==b for s,b in H)
+                    break
+                # Disjoint first-difference cubes exclude the entire failed
+                # projected label, not just the particular left witness.
+                for j in range(len(P)-1,q-1,-1):
+                    B.pay('demand_split');todo.append((j+1,(v^(1<<j))&((1<<(j+1))-1)))
+        memo[key]=out
+        return out
+    ans=ask(root,H)
+    return (None if ans is None else chart(n,canon(ans))[0]),width
+
 def solve(n,required,F,cap):
     B=Budget(cap)
     try:
@@ -172,7 +239,38 @@ def test_exact_one():
         assert lift(u,V,x).bit_count()==1 and w==n-1
     print('exact_one_sparse',checks,'controls PASS')
 
+def test_exact_one_demand():
+    rng=Random(3692026);checks=0
+    for n in range(9):
+        for _ in range(90):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(8)))
+            S=span(a for G in F for a,b in G)
+            H=tuple((lift(0,S,rng.randrange(1<<len(S))),rng.randrange(2)) for _ in range(rng.randrange(5)))
+            valid=lambda x:all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in F) and all((a&x).bit_count()%2==b for a,b in H)
+            truth=any(valid(x) for x in range(1<<n));x,w=join_exact_one_demand(n,F,Budget(1000000),H)
+            assert (x is not None)==truth and (x is None or valid(x));checks+=1
+    for _ in range(400):
+        m=rng.choice((3,6,9,12));n=rng.randrange(1,13)
+        S=[tuple(rng.sample(range(m),3)) for i in range(n)]
+        R=[sum(1<<j for j,s in enumerate(S) if i in s) for i in range(m)]
+        valid=lambda x:all((x&r).bit_count()==1 for r in R)
+        truth=any(valid(x) for x in range(1<<n));P=canon((r,1) for r in R)
+        if P is None:x=None
+        else:
+            u,V=chart(n,P);F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(r)) for r in R)
+            z,w=join_exact_one_demand(len(V),F,Budget(1000000));x=None if z is None else lift(u,V,z)
+        assert (x is not None)==truth and (x is None or valid(x));checks+=1
+    try:join_exact_one_demand(1,(((1,0),),),Budget(0));assert False
+    except Exhausted:pass
+    for n in (8,16,32,64):
+        u,V=chart(n,canon((((1<<n)-1,1),)))
+        F=tuple((value(V,1<<j),u>>j&1) for j in range(n))
+        x,w=join_exact_one_demand(len(V),(F,F,F),Budget(10000000))
+        assert lift(u,V,x).bit_count()==1 and w==n-1
+    print('exact_one_demand',checks,'controls PASS')
+
 def main():
+    test_exact_one_demand()
     test_exact_one()
     rng=Random(369);fixtures=verified=empty=0
     for n in range(8):
