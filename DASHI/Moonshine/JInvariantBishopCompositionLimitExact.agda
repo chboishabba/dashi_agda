@@ -109,6 +109,20 @@ module At (q : ℝ) (c b : Series) (b0 : b zero ≃ R.0ℝ)
       P.≤-respˡ-≃ (P.≃-symm (P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ _)))
         (coeffBound k))
 
+  -- Bound the norm of the constructed original composition by the
+  -- actual convergent outer majorant, including the zero coefficient.
+  positivePrefixBound : (N : Nat) → T.diagonal positiveRow N ≤ S.SeriesOf m N
+  positivePrefixBound N = S.∑₀-mono-≤
+    (λ k → P.≤-trans P.x≤∣x∣ (positiveBound k N)) N
+
+  compositionNormBound : (hm : S._isConvergent (S.SeriesOf m)) →
+    proj₁ (compositionAbsolute hm) ≤ proj₁ hm
+  compositionNormBound hm =
+    S.xₙ≤yₙ⇒limxₙ≤limyₙ
+      (λ N → P.≤-trans (S.∑₀-mono-≤ coeffBound N)
+        (P.≤-respˡ-≃ (P.≃-symm (majorantExchange N)) (positivePrefixBound N)))
+      (compositionAbsolute hm) hm
+
   module Signed (v : ℝ) (hv : S._ConvergesTo_ (S.SeriesOf (weighted q b)) v) where
 
     l : Series
