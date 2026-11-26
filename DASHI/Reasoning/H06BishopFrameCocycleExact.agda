@@ -59,13 +59,13 @@ flipCong F.scalar {H.matrix3 (H.vec3 a d g) (H.vec3 b e h) (H.vec3 c f j)}
   (F.e00 eq) (F.e10 eq) (F.e20 eq) (F.e01 eq) (F.e11 eq) (F.e21 eq) (F.e02 eq) (F.e12 eq) (F.e22 eq)
 flipCong F.axisX {H.matrix3 (H.vec3 a d g) (H.vec3 b e h) (H.vec3 c f j)}
   {H.matrix3 (H.vec3 a′ d′ g′) (H.vec3 b′ e′ h′) (H.vec3 c′ f′ j′)} eq = F.eq9
-  (F.e00 eq) (BP.neg-cong (F.e10 eq)) (BP.neg-cong (F.e20 eq)) (F.e01 eq) (BP.neg-cong (F.e11 eq)) (BP.neg-cong (F.e21 eq)) (F.e02 eq) (BP.neg-cong (F.e12 eq)) (BP.neg-cong (F.e22 eq))
+  (F.e00 eq) (BP.-‿cong (F.e10 eq)) (BP.-‿cong (F.e20 eq)) (F.e01 eq) (BP.-‿cong (F.e11 eq)) (BP.-‿cong (F.e21 eq)) (F.e02 eq) (BP.-‿cong (F.e12 eq)) (BP.-‿cong (F.e22 eq))
 flipCong F.axisY {H.matrix3 (H.vec3 a d g) (H.vec3 b e h) (H.vec3 c f j)}
   {H.matrix3 (H.vec3 a′ d′ g′) (H.vec3 b′ e′ h′) (H.vec3 c′ f′ j′)} eq = F.eq9
-  (BP.neg-cong (F.e00 eq)) (F.e10 eq) (BP.neg-cong (F.e20 eq)) (BP.neg-cong (F.e01 eq)) (F.e11 eq) (BP.neg-cong (F.e21 eq)) (BP.neg-cong (F.e02 eq)) (F.e12 eq) (BP.neg-cong (F.e22 eq))
+  (BP.-‿cong (F.e00 eq)) (F.e10 eq) (BP.-‿cong (F.e20 eq)) (BP.-‿cong (F.e01 eq)) (F.e11 eq) (BP.-‿cong (F.e21 eq)) (BP.-‿cong (F.e02 eq)) (F.e12 eq) (BP.-‿cong (F.e22 eq))
 flipCong F.axisZ {H.matrix3 (H.vec3 a d g) (H.vec3 b e h) (H.vec3 c f j)}
   {H.matrix3 (H.vec3 a′ d′ g′) (H.vec3 b′ e′ h′) (H.vec3 c′ f′ j′)} eq = F.eq9
-  (BP.neg-cong (F.e00 eq)) (BP.neg-cong (F.e10 eq)) (F.e20 eq) (BP.neg-cong (F.e01 eq)) (BP.neg-cong (F.e11 eq)) (F.e21 eq) (BP.neg-cong (F.e02 eq)) (BP.neg-cong (F.e12 eq)) (F.e22 eq)
+  (BP.-‿cong (F.e00 eq)) (BP.-‿cong (F.e10 eq)) (F.e20 eq) (BP.-‿cong (F.e01 eq)) (BP.-‿cong (F.e11 eq)) (F.e21 eq) (BP.-‿cong (F.e02 eq)) (BP.-‿cong (F.e12 eq)) (F.e22 eq)
 
 encodeCong : (k : F.Mark) {f g : H.Frame3} → F.FrameEq f g →
   F.MatrixEq (F.encode k f) (F.encode k g)
