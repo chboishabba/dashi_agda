@@ -69,7 +69,7 @@ class Grid:
         electric={i for sl,_,_ in self.local for i in range(sl.start,sl.start+3)}
         if ctrl.shape!=(self.size,) or not np.isfinite(ctrl).all() or any(ctrl[i]!=0 for i in range(self.size) if i not in electric): raise ValueError('controller electric drive only')
         work=np.zeros((3,self.n)); transfers=np.zeros((len(self.faces),self.n)); loss=np.zeros(self.n); load=loss.copy()
-        kicks=(leftv,rightv,ctrl)
+        kicks=(leftv,rightv,ctrl); material_inputs=[]
         def kick(i):
             delta=h/2*kicks[i]
             for cell,(sl,_,_) in enumerate(self.local): work[i,cell]+=delta[sl]@(z[sl]+delta[sl]/2)
@@ -82,10 +82,10 @@ class Grid:
         for i in range(3): kick(i)
         for q in self.edges: edge(q)
         for cell,((sl,_,_), (T,Q)) in enumerate(zip(self.local,local_maps)):
-            v=z[sl].copy(); load[cell]=v@Q[0]@v; loss[cell]=sum(v@q@v for q in Q[1:]); z[sl]=T@v
+            v=z[sl].copy(); material_inputs.append(v); load[cell]=v@Q[0]@v; loss[cell]=sum(v@q@v for q in Q[1:]); z[sl]=T@v
         for q in reversed(self.edges): edge(q)
         for i in reversed(range(3)): kick(i)
-        return z,dict(exterior_inward=work[:2].sum(axis=1),controller=work[2].sum(),cell_source_work=work.sum(axis=0),face_to_cell=transfers,material_loss=loss,load=load)
+        return z,dict(exterior_inward=work[:2].sum(axis=1),controller=work[2].sum(),cell_source_work=work.sum(axis=0),face_to_cell=transfers,material_loss=loss,load=load,material_inputs=tuple(material_inputs))
 
 
 def verify_step(grid,z,h,p,left=(0,0),right=(0,0),controller=None):
