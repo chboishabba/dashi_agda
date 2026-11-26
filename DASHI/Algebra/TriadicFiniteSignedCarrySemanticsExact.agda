@@ -16,6 +16,7 @@ import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as A
 import DASHI.Algebra.TriadicFiniteSignedIntegerWeldExact as W
 import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as P
+import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 
 digit : E.Trit → ℤ
 digit t = P.digitInteger (W.toTrit t)
@@ -23,6 +24,10 @@ digit t = P.digitInteger (W.toTrit t)
 modulus : Nat → ℤ
 modulus zero = + 1
 modulus (suc n) = (+ 3) * modulus n
+
+modulusMatchesPow3 : ∀ n → modulus n ≡ + (BT.pow3 n)
+modulusMatchesPow3 zero = refl
+modulusMatchesPow3 (suc n) rewrite modulusMatchesPow3 n = sym (ZP.pos-* 3 (BT.pow3 n))
 
 -- A constructive certificate of congruence, not a Boolean check.
 Congruent : Nat → ℤ → ℤ → Set
