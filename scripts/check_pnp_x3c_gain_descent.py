@@ -1,0 +1,186 @@
+"""Exact original X3C gain descent: integer image, capacity, quotient and component witnesses."""
+from itertools import combinations
+from random import Random
+from sympy import Matrix, ones
+from sympy.matrices.normalforms import hermite_normal_form
+from check_pnp_affine_normal_components import (bits, canon, chart, lift, split,
+    reopen, satisfies, Budget, Exhausted)
+from check_pnp_normal_boundary_join import value
+from check_pnp_exact_cover_pair_hull import incidence, cover, close, row_capacity
+from check_pnp_adaptive_signed_escape import add, point
+from check_pnp_partial_quotient import positive_point
+from check_pnp_signed_moment_filter import moment_point
+from check_pnp_signed_quotient_minimum import minimum
+
+
+def integer_image(A,b,B):
+    """Exact mod2 image of integer solutions, not binary feasibility."""
+    m,n=A.shape;B.pay('hnf_input',1+m*(n+1));H=hermite_normal_form(A)
+    r=H.cols
+    if not r:return () if not any(b) else None
+    I=list(H.T.rref()[1]);D=H[I,:].inv()*A[I,:];c=H[I,:].inv()*b[I,:]
+    B.pay('lattice_coordinates',1+r*(n+1))
+    assert H*D==A and all(a.q==1 for a in D)
+    if H*c!=b or any(a.q!=1 for a in c):return None
+    P=canon((sum((int(D[i,j])&1)<<j for j in range(n)),int(c[i])&1) for i in range(r))
+    assert P is not None and len(P)==r
+    return P
+
+
+def capacity(n,R,k,B):
+    J=row_capacity(n,R,B)
+    if len(J)<k:return None
+    if len(J)>k:return ()
+    # Tight hitting cover: each selected column meets exactly one hitting row.
+    B.pay('capacity_slack',1+n*len(J))
+    return tuple((1<<i,0) for i in range(n) if sum((R[j]>>i)&1 for j in J)>1)
+
+
+def quotient(n,P,x,B):
+    """Return removal-only trade or independent-incumbent addition kernel lifts."""
+    S=tuple(bits(x));U=tuple(bits(((1<<n)-1)^x));A=[a for a,b in P];E={}
+    def reduce(a):
+        z=0
+        for k in sorted(E,reverse=True):
+            if a>>k&1:v,c=E[k];a^=v;z^=c
+        return a,z
+    for i in S:
+        B.pay('incumbent_column');a,z=reduce(value(A,1<<i))
+        if not a:return z^(1<<i),None,None,None
+        E[a.bit_length()-1]=(a,z^(1<<i))
+    Q=[];R=[]
+    for i in U:
+        B.pay('addition_column');a,z=reduce(value(A,1<<i));Q.append(a);R.append(z)
+    H=canon((value(Q,1<<j),0) for j in range(len(A)))
+    _,K=chart(len(U),H)
+    V=tuple(lift(0,R,t)^lift(0,[1<<i for i in U],t) for t in K)
+    assert all(satisfies(x^v,P,()) for v in V)
+    return None,U,K,V
+
+
+def gain_chart(n,x,V,B):
+    M={}
+    for i in range(n):
+        B.pay('gain_term',1+len(V));a=value(V,1<<i)
+        if a:add(M,((a,1),),1 if x>>i&1 else -1)
+    return M
+
+
+def component_gain(d,M,B,width=4):
+    """Positive component trade or exact absence (all zero points feasible)."""
+    if not M:return None,True
+    basis,parts=split(d,tuple(sorted(M)),B);complete=True
+    for I,F in parts:
+        normals=[basis[i] for i in I]
+        N={A:M[((lift(0,normals,A[0][0]),1),)] for A in F}
+        assert point(N,0)==0
+        y=None
+        for j in range(len(I)):
+            B.pay('basis_probe',1+len(N))
+            if point(N,1<<j)>0:y=1<<j;break
+        if y is None:
+            q=positive_point(len(I),N,(),B)
+            if q is not None:y=q[0]
+        if y is None:
+            q=moment_point(len(I),N,(),B,width=256,degree=2)
+            if q is not None:y=q[0]
+        if y is None:
+            a,exact,t=minimum({A:-w for A,w in N.items()},len(I),B,width,with_witness=True)
+            if exact and a<0:y=t
+            elif a>=0:continue
+            else:complete=False;continue
+        z=sum(((y>>j)&1)<<i for j,i in enumerate(I));v=reopen(d,basis,z)
+        assert point(M,v)==point(N,y)>0
+        B.pay('gain_admit');return v,False
+    return None,complete
+
+
+def improve(n,P,x,B,width=4):
+    v,U,K,V=quotient(n,P,x,B)
+    if v is not None:return v,False
+    M=gain_chart(n,x,V,B);y,done=component_gain(len(V),M,B,width)
+    return (None if y is None else lift(0,V,y)),done
+
+
+def solve(m,sets,cap,width=4):
+    R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
+    try:
+        B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
+        if pins is None:return None,B.stats,True
+        A=Matrix(m,n,lambda i,j:(R[i]>>j)&1);b=ones(m,1)
+        D=integer_image(A,b,B)
+        if D is None:return None,B.stats,True
+        P,x=close(n,R,B,required=D+pins)
+        if P is None or x is not None:return x,B.stats,True
+        x=chart(n,P)[0]
+        while x.bit_count()>k:
+            B.pay('descent');v,exact=improve(n,P,x,B,width)
+            if v is None:return None,B.stats,exact
+            y=x^v;assert satisfies(y,P,()) and y.bit_count()<=x.bit_count()-2
+            x=y
+        assert cover(R,x);return x,B.stats,True
+    except (Exhausted,RecursionError):return None,B.stats,False
+
+
+def main():
+    rng=Random(369);fixtures=verified=empty=unknown=trades=compares=0
+    for m in (3,6,9,12):
+        for _ in range(70):
+            n=rng.randrange(1,12);S=[tuple(rng.sample(range(m),3)) for j in range(n)];R=incidence(m,S)
+            T=[x for x in range(1<<n) if cover(R,x)]
+            P=canon((a,1) for a in R)
+            if P is not None:
+                u,W=chart(n,P);Y=[lift(u,W,j) for j in range(1<<len(W))]
+                for x in Y[:8]:
+                    B=Budget(1000000);v,U,K,V=quotient(n,P,x,B)
+                    if v is None:
+                        assert {lift(0,V,j)^x for j in range(1<<len(V))}==set(Y);compares+=1
+                    v,done=improve(n,P,x,B,width=n)
+                    want=any(y.bit_count()<x.bit_count() for y in Y)
+                    assert (v is not None)==want and (v is not None or done)
+                    if v is not None:assert x^v in Y and (x^v).bit_count()<x.bit_count();trades+=1
+            x,_,done=solve(m,S,2000000);fixtures+=1
+            if x is not None:assert done and x in T;verified+=1
+            elif done:assert not T;empty+=1
+            else:unknown+=1
+    # Tight hitting cover forces a genuine original column to zero.
+    S=[(0,1,2),(3,4,5),(3,4,2),(2,1,4),(5,0,2),(4,3,0)]
+    R=incidence(6,S);P=capacity(len(S),R,2,Budget(10000));assert P==((4,0),)
+    assert all(satisfies(x,P,()) for x in range(64) if cover(R,x))
+    # The old global single-normal probe can miss a positive component.
+    for d in (8,16,32,64,128):
+        A=[((1<<d)-1)^(1<<i) for i in range(d)]
+        M={((A[0],1),):2,((A[1],1),):2,((A[0]^A[1],1),):-3}
+        M.update({((a,1),):-10 for a in A[2:]})
+        B=Budget(1000000);assert positive_point(d,M,(),B) is None
+        C=Budget(1000000);y,done=component_gain(d,M,C)
+        assert y is not None and point(M,y)==4
+        print('dense_component',d,'global_probe',sum(B.stats.values()),'component',sum(C.stats.values()))
+    # Independent integer-image comparison using 2L membership.
+    image_checks=0
+    for _ in range(160):
+        m=rng.randrange(1,5);n=rng.randrange(1,7)
+        A=Matrix(m,n,lambda i,j:rng.randrange(-3,4));b=Matrix(m,1,lambda i,j:rng.randrange(-3,4))
+        H=hermite_normal_form(2*A);I=list(H.T.rref()[1]);D=H[I,:].inv() if H.cols else None
+        P=integer_image(A,b,Budget(1000000))
+        for x in range(1<<n):
+            q=b-A*Matrix([x>>i&1 for i in range(n)])
+            if D is None:want=not any(q)
+            else:
+                t=D*q[I,:];want=H*t==q and all(a.q==1 for a in t)
+            assert (P is not None and satisfies(x,P,()))==want;image_checks+=1
+    assert integer_image(Matrix([[3]]),Matrix([1]),Budget(1000)) is None
+    print('integer_image',160,image_checks)
+    # Basis trap from direct roadmap, original incumbent, not pre-solved cover.
+    S=[(2,3,4),(3,4,5),(3,6,7),(3,5,8),(1,5,7),(1,4,7),(3,5,7),(0,1,2),(2,3,7),(0,4,7),(6,7,8),(3,5,6)]
+    R=incidence(9,S);P=canon((a,1) for a in R);x=2840;B=Budget(1000000)
+    v,done=improve(12,P,x,B);assert v is not None and cover(R,x^v)
+    print('basis_trap',x^v,sum(B.stats.values()))
+    # Exact all-parity-capacity counterexample from current direct roadmap.
+    S=[(5,13,17),(5,14,16),(3,10,17),(0,2,16),(3,4,16),(1,10,12),(0,7,15),(6,7,10),(1,12,13),(4,5,13),(1,3,12),(0,4,6),(8,10,17),(3,7,9),(1,14,15),(9,12,15),(2,13,16),(2,12,17),(2,5,15),(6,7,8),(6,7,14),(8,11,17),(4,11,15),(5,8,11),(2,3,9),(6,9,13),(9,10,11),(0,1,16),(0,4,14),(8,11,14)]
+    x,B,done=solve(18,S,10000000,width=12);assert x is None and done
+    print('all_parity_barrier',sum(B.values()),'descent',B['descent'])
+    assert not solve(3,[(0,1,2)],0)[2]
+    print(dict(fixtures=fixtures,verified=verified,empty=empty,unknown=unknown,quotient_comparisons=compares,trades=trades))
+
+if __name__=='__main__':main()
