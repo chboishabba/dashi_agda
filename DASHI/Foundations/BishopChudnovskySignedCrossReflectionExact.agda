@@ -10,6 +10,7 @@ import Data.Integer.Properties as ZP
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 import Data.Rational.Unnormalised as Q
+import Data.Rational.Unnormalised.Properties as QP
 import Real as R
 import Sequence as S
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Stage
@@ -107,3 +108,39 @@ literalConvergenceFromExpandedCross :
   S._ConvergesTo_ (λ k → R._⋆ (CH.midpoint (O.window k))) M.bishopMachinPi
 literalConvergenceFromExpandedCross c =
   literalConvergenceFromSignedCross (λ k → expandedToCross k (c k))
+
+-- BIDI transport of signed raw crosses through rational setoid equality.
+-- In particular, independently grouped positive denominators need not
+-- be definitionally equal. This transports a proof, not a Boolean receipt.
+expandedTransport : ∀ {p q e p′ q′ e′ : Q.ℚᵘ} →
+  p Q.≃ p′ → q Q.≃ q′ → e Q.≃ e′ →
+  ExpandedLeAdd p q e → ExpandedLeAdd p′ q′ e′
+expandedTransport {p} {q} {e} {p′} {q′} {e′} hp hq he h =
+  signedToExpanded p′ q′ e′
+    (fromOrder (QP.≤-respˡ-≃ hp
+      (QP.≤-respʳ-≃ (QP.+-cong hq he)
+        (toOrder (expandedToSigned p q e h)))))
+
+expandedTransportBack : ∀ {p q e p′ q′ e′ : Q.ℚᵘ} →
+  p Q.≃ p′ → q Q.≃ q′ → e Q.≃ e′ →
+  ExpandedLeAdd p′ q′ e′ → ExpandedLeAdd p q e
+expandedTransportBack hp hq he =
+  expandedTransport (QP.≃-sym hp) (QP.≃-sym hq) (QP.≃-sym he)
+
+-- Exact interface for a differently represented raw evaluator. The four
+-- equalities must be established on its actual coordinates at every k.
+expandedCrossFromEquivalentCoordinates : (k : Nat) →
+  (l u m e : Q.ℚᵘ) →
+  l Q.≃ CH.lower (O.window k) → u Q.≃ CH.upper (O.window k) →
+  m Q.≃ Stage.qMachinStage k → e Q.≃ O.machinRadius k →
+  ExpandedLeAdd l m e × ExpandedLeAdd m u e → ExpandedCross k
+expandedCrossFromEquivalentCoordinates k l u m e hl hu hm he (lo , hi) =
+  expandedTransport hl hm he lo , expandedTransport hm hu he hi
+
+expandedCrossToEquivalentCoordinates : (k : Nat) →
+  (l u m e : Q.ℚᵘ) →
+  l Q.≃ CH.lower (O.window k) → u Q.≃ CH.upper (O.window k) →
+  m Q.≃ Stage.qMachinStage k → e Q.≃ O.machinRadius k →
+  ExpandedCross k → ExpandedLeAdd l m e × ExpandedLeAdd m u e
+expandedCrossToEquivalentCoordinates k l u m e hl hu hm he (lo , hi) =
+  expandedTransportBack hl hm he lo , expandedTransportBack hm hu he hi
