@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; _++_; [])
 open import Data.Nat.Base using (ℕ; suc) renaming (_+_ to _+ℕ_; _≤_ to _≤ℕ_)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 infixl 20 _+ℝ_ _-ℝ_
 infixl 30 _*ℝ_
@@ -53,6 +54,124 @@ postulate
     b ≤ℝ c →
     a ≤ℝ c
 
+  ≤ℝ-antisym :
+    ∀ {a b : ℝ} →
+    a ≤ℝ b →
+    b ≤ℝ a →
+    a ≡ b
+
+  ≤ℝ-total :
+    ∀ (a b : ℝ) →
+    a ≤ℝ b ⊎ b ≤ℝ a
+
+  addRightCancelLe :
+    ∀ {a b c : ℝ} →
+    a +ℝ c ≤ℝ b +ℝ c →
+    a ≤ℝ b
+
+  addSubCancel :
+    ∀ a b →
+    (a +ℝ b) -ℝ b ≡ a
+
+  subAddCancel :
+    ∀ a b →
+    (a -ℝ b) +ℝ b ≡ a
+
+  addSubAssoc :
+    ∀ a b c →
+    a +ℝ (b -ℝ c) ≡ (a +ℝ b) -ℝ c
+
+  subSubComm :
+    ∀ a b c →
+    (a -ℝ b) -ℝ c ≡ (a -ℝ c) -ℝ b
+
+  predSucc :
+    ∀ a →
+    (0ℝ -ℝ 1ℝ) +ℝ (a +ℝ 1ℝ) ≡ a
+
+  addThreeSubTwoPlus :
+    ∀ p a b →
+    (p +ℝ (1ℝ +ℝ 1ℝ +ℝ 1ℝ)) -ℝ ((1ℝ +ℝ 1ℝ) +ℝ a +ℝ b)
+      ≡ 1ℝ +ℝ p -ℝ (a +ℝ b)
+
+  addThreeSubTwoMinus :
+    ∀ p a b →
+    (p +ℝ (1ℝ +ℝ 1ℝ +ℝ 1ℝ)) -ℝ ((1ℝ +ℝ 1ℝ) -ℝ a -ℝ b)
+      ≡ 1ℝ +ℝ p +ℝ (a +ℝ b)
+
+  negOneMinusPlus :
+    ∀ p d →
+    -ℝ (1ℝ -ℝ p +ℝ d) ≡ p -ℝ 1ℝ -ℝ d
+
+  lowerPlusFourEq :
+    ∀ p d →
+    (p -ℝ 1ℝ -ℝ d) +ℝ ((1ℝ +ℝ 1ℝ) +ℝ (1ℝ +ℝ 1ℝ))
+      ≡ p +ℝ (1ℝ +ℝ 1ℝ +ℝ 1ℝ) -ℝ d
+
+  negℝ-involutive :
+    ∀ a →
+    -ℝ (-ℝ a) ≡ a
+
+  negEqSubZero :
+    ∀ a →
+    -ℝ a ≡ 0ℝ -ℝ a
+
+  subEqAddNeg :
+    ∀ a b →
+    a -ℝ b ≡ a +ℝ (-ℝ b)
+
+  negℝ-add :
+    ∀ a b →
+    -ℝ (a +ℝ b) ≡ (-ℝ a) +ℝ (-ℝ b)
+
+  negℝ-sub :
+    ∀ a b →
+    -ℝ (a -ℝ b) ≡ b -ℝ a
+
+  negℝ-mulʳ :
+    ∀ a b →
+    a *ℝ (-ℝ b) ≡ -ℝ (a *ℝ b)
+
+  negℝ-mulˡ :
+    ∀ a b →
+    (-ℝ a) *ℝ b ≡ -ℝ (a *ℝ b)
+
+  negℝ-mul-neg :
+    ∀ a b →
+    (-ℝ a) *ℝ (-ℝ b) ≡ a *ℝ b
+
+  negℝ-order :
+    ∀ {a b : ℝ} →
+    a ≤ℝ b →
+    -ℝ b ≤ℝ -ℝ a
+
+  subRightMono :
+    ∀ {a b : ℝ} (c : ℝ) →
+    a ≤ℝ b →
+    a -ℝ c ≤ℝ b -ℝ c
+
+  subLeftMono :
+    ∀ a {b c : ℝ} →
+    b ≤ℝ c →
+    a -ℝ c ≤ℝ a -ℝ b
+
+  addNonnegative :
+    ∀ {a b : ℝ} →
+    0ℝ ≤ℝ a →
+    0ℝ ≤ℝ b →
+    0ℝ ≤ℝ a +ℝ b
+
+  subNonnegative :
+    ∀ {a b : ℝ} →
+    b ≤ℝ a →
+    0ℝ ≤ℝ a -ℝ b
+
+  mulNonnegative :
+    ∀ {a b : ℝ} →
+    0ℝ ≤ℝ a →
+    0ℝ ≤ℝ b →
+    0ℝ ≤ℝ a *ℝ b
+
   +-mono-≤ :
     ∀ {a b c d : ℝ} →
     a ≤ℝ b →
@@ -80,6 +199,32 @@ postulate
   absMul :
     ∀ a b →
     absℝ (a *ℝ b) ≡ absℝ a *ℝ absℝ b
+
+  absNeg :
+    ∀ a →
+    absℝ (-ℝ a) ≡ absℝ a
+
+  absNonnegative :
+    ∀ a →
+    0ℝ ≤ℝ absℝ a
+
+  leAbs :
+    ∀ a →
+    a ≤ℝ absℝ a
+
+  negLeAbs :
+    ∀ a →
+    -ℝ a ≤ℝ absℝ a
+
+  absOfNonnegative :
+    ∀ {a : ℝ} →
+    0ℝ ≤ℝ a →
+    absℝ a ≡ a
+
+  absOfNonpositive :
+    ∀ {a : ℝ} →
+    a ≤ℝ 0ℝ →
+    absℝ a ≡ -ℝ a
 
   mulMonotoneNonnegative :
     ∀ {a b c d} →
@@ -127,6 +272,26 @@ postulate
   subMulDistributes :
     ∀ a b c →
     (a -ℝ b) *ℝ c ≡ (a *ℝ c) -ℝ (b *ℝ c)
+
+  oneMinusMulOneMinus :
+    ∀ a b →
+    (1ℝ -ℝ a) *ℝ (1ℝ -ℝ b)
+      ≡ 1ℝ +ℝ (a *ℝ b) -ℝ (a +ℝ b)
+
+  onePlusMulOnePlus :
+    ∀ a b →
+    (1ℝ +ℝ a) *ℝ (1ℝ +ℝ b)
+      ≡ 1ℝ +ℝ (a *ℝ b) +ℝ (a +ℝ b)
+
+  oneMinusMulOnePlus :
+    ∀ a b →
+    (1ℝ -ℝ a) *ℝ (1ℝ +ℝ b)
+      ≡ 1ℝ -ℝ (a *ℝ b) -ℝ (a -ℝ b)
+
+  onePlusMulOneMinus :
+    ∀ a b →
+    (1ℝ +ℝ a) *ℝ (1ℝ -ℝ b)
+      ≡ 1ℝ -ℝ (a *ℝ b) +ℝ (a -ℝ b)
 
   mulSubDistributes :
     ∀ a b c →

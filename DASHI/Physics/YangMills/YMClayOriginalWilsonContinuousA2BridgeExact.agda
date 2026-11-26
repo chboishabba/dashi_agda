@@ -3,14 +3,29 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonContinuousA2BridgeExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst; sym; cong)
 open import Data.List.Base using (List; []; _∷_; map)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_;
-   ≤ℝ-refl; ≤ℝ-trans; +-mono-≤; mulOneʳ; mulZeroʳ; oneNonnegative; subSelf)
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; -ℝ_; absℝ; _≤ℝ_; _<ℝ_;
+   ≤ℝ-refl; ≤ℝ-trans; ≤ℝ-antisym; ≤ℝ-total; +-mono-≤; addRightCancelLe;
+   negℝ-involutive; negEqSubZero; subEqAddNeg; negℝ-add; negℝ-sub;
+      negℝ-mulʳ; negℝ-mulˡ; negℝ-mul-neg; negℝ-order;
+ subRightMono; subLeftMono;
+    mulNonnegative;
+    mulOneʳ; mulZeroʳ; oneNonnegative; subSelf;
+    +-identityˡ; +-identityʳ; +-assoc; +-comm; subAddCancel;
+    addSubAssoc; subSubComm; predSucc; addThreeSubTwoPlus; addThreeSubTwoMinus;
+    negOneMinusPlus; lowerPlusFourEq;
+    oneMinusMulOneMinus; onePlusMulOnePlus;
+    oneMinusMulOnePlus; onePlusMulOneMinus;
+    absZero; absAddSubadditive; absSubadditive; absMul; absNeg;
+    absNonnegative; leAbs; negLeAbs; absOfNonnegative; absOfNonpositive;
+    mulMonotoneNonnegative)
+
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 
 continuousWilsonA2OriginalOwner : String
@@ -54,6 +69,425 @@ fourℝ = twoℝ +ℝ twoℝ
 RangeNegOneOne : ℝ → Set
 RangeNegOneOne value = ((0ℝ -ℝ 1ℝ) ≤ℝ value) × (value ≤ℝ 1ℝ)
 
+minusOneℝ : ℝ
+minusOneℝ = 0ℝ -ℝ 1ℝ
+
+threeℝ : ℝ
+threeℝ = twoℝ +ℝ 1ℝ
+
+negZeroℝ : -ℝ 0ℝ ≡ 0ℝ
+negZeroℝ = trans (negEqSubZero 0ℝ) (subSelf 0ℝ)
+
+negMinusOneℝ : -ℝ minusOneℝ ≡ 1ℝ
+negMinusOneℝ =
+  trans (cong (λ t → -ℝ t) (sym (negEqSubZero 1ℝ))) (negℝ-involutive 1ℝ)
+
+negNonnegativeOfNonpositive : ∀ {a : ℝ} → a ≤ℝ 0ℝ → 0ℝ ≤ℝ -ℝ a
+negNonnegativeOfNonpositive {a} ha =
+  subst (λ t → t ≤ℝ -ℝ a) negZeroℝ (negℝ-order ha)
+
+nonpositiveOfNegativeNonnegative : ∀ {a : ℝ} → 0ℝ ≤ℝ -ℝ a → a ≤ℝ 0ℝ
+nonpositiveOfNegativeNonnegative {a} ha =
+  subst (λ t → t ≤ℝ 0ℝ) (negℝ-involutive a)
+    (subst (λ t → -ℝ (-ℝ a) ≤ℝ t) negZeroℝ (negℝ-order ha))
+
+addLeftMono : ∀ {a b : ℝ} (c : ℝ) → a ≤ℝ b → c +ℝ a ≤ℝ c +ℝ b
+addLeftMono c h = +-mono-≤ ≤ℝ-refl h
+
+addRightMono : ∀ {a b : ℝ} (c : ℝ) → a ≤ℝ b → a +ℝ c ≤ℝ b +ℝ c
+addRightMono c h = +-mono-≤ h ≤ℝ-refl
+
+addNegSelf : ∀ (a : ℝ) → a +ℝ (-ℝ a) ≡ 0ℝ
+addNegSelf a = trans (sym (subEqAddNeg a a)) (subSelf a)
+
+addNonpos : ∀ {a b : ℝ} → a ≤ℝ 0ℝ → b ≤ℝ 0ℝ → a +ℝ b ≤ℝ 0ℝ
+addNonpos {a} {b} ha hb =
+  let hna = negNonnegativeOfNonpositive ha
+      hnb = negNonnegativeOfNonpositive hb
+      hsum = DASHI.Foundations.RealAnalysisAxioms.addNonnegative hna hnb
+      hneg =
+        subst (λ t → 0ℝ ≤ℝ t) (sym (negℝ-add a b)) hsum
+  in nonpositiveOfNegativeNonnegative hneg
+
+subNonpos : ∀ {a b : ℝ} → a ≤ℝ b → a -ℝ b ≤ℝ 0ℝ
+subNonpos {a} {b} hab =
+  let hneg = negℝ-order hab
+      hsum = addLeftMono a hneg
+      hsum' =
+        subst (λ t → t ≤ℝ a +ℝ (-ℝ a)) (sym (subEqAddNeg a b)) hsum
+  in subst (λ t → a -ℝ b ≤ℝ t) (addNegSelf a) hsum'
+
+negAbsLe : ∀ (x : ℝ) → -ℝ (absℝ x) ≤ℝ x
+negAbsLe x =
+  let h = negℝ-order (leAbs (-ℝ x))
+      h' =
+        subst (λ t → -ℝ t ≤ℝ -ℝ (-ℝ x)) (absNeg x) h
+  in subst (λ t → -ℝ (absℝ x) ≤ℝ t) (negℝ-involutive x) h'
+
+absOneℝ : absℝ 1ℝ ≡ 1ℝ
+absOneℝ = absOfNonnegative oneNonnegative
+
+negOneLeOfRange : ∀ {x : ℝ} → RangeNegOneOne x → -ℝ 1ℝ ≤ℝ x
+negOneLeOfRange {x} hx =
+  subst (λ t → t ≤ℝ x) (sym (negEqSubZero 1ℝ)) (proj₁ hx)
+
+twiceLeTwo : ∀ {x : ℝ} → x ≤ℝ 1ℝ → x +ℝ x ≤ℝ twoℝ
+twiceLeTwo {x} hx = +-mono-≤ hx hx
+
+leTwoMinusSelf : ∀ {x : ℝ} → x ≤ℝ 1ℝ → x ≤ℝ twoℝ -ℝ x
+leTwoMinusSelf {x} hx =
+  let hxx = twiceLeTwo hx
+      hsub = subRightMono x hxx
+  in subst (λ t → t ≤ℝ twoℝ -ℝ x) (DASHI.Foundations.RealAnalysisAxioms.addSubCancel x x) hsub
+
+negLeOneOfLower : ∀ {x : ℝ} → -ℝ 1ℝ ≤ℝ x → -ℝ x ≤ℝ 1ℝ
+negLeOneOfLower {x} hx =
+  subst (λ t → -ℝ x ≤ℝ t) (negℝ-involutive 1ℝ) (negℝ-order hx)
+
+subMinusOneEqAddOne : ∀ (x : ℝ) → x -ℝ minusOneℝ ≡ x +ℝ 1ℝ
+subMinusOneEqAddOne x =
+  let h0 = sym (negEqSubZero 1ℝ)
+      h1 = cong (λ t → x -ℝ t) h0
+      h2 = subEqAddNeg x (-ℝ 1ℝ)
+      h3 =
+        cong (λ t → x +ℝ t) (negℝ-involutive 1ℝ)
+  in trans h1 (trans h2 h3)
+
+oneLeTwoPlusOfLower : ∀ {x : ℝ} → -ℝ 1ℝ ≤ℝ x → 1ℝ ≤ℝ twoℝ +ℝ x
+oneLeTwoPlusOfLower {x} hx =
+  let hx' = subst (λ t → t ≤ℝ x) (negEqSubZero 1ℝ) hx
+      h0' = DASHI.Foundations.RealAnalysisAxioms.subNonnegative hx'
+      h0'' =
+        subst (λ t → 0ℝ ≤ℝ t) (subMinusOneEqAddOne x) h0'
+      h0 = subst (λ t → 0ℝ ≤ℝ t) (+-comm x 1ℝ) h0''
+      h1 = addLeftMono 1ℝ h0
+      h1' =
+        subst (λ t → t ≤ℝ 1ℝ +ℝ (1ℝ +ℝ x)) (+-identityʳ 1ℝ) h1
+      h2 = sym (+-assoc 1ℝ 1ℝ x)
+  in subst (λ t → 1ℝ ≤ℝ t) h2 h1'
+
+absLeOneOfRange : ∀ {x : ℝ} → RangeNegOneOne x → absℝ x ≤ℝ 1ℝ
+absLeOneOfRange {x} hx with ≤ℝ-total 0ℝ x
+... | inj₁ h0 =
+  subst (λ t → t ≤ℝ 1ℝ) (sym (absOfNonnegative h0)) (proj₂ hx)
+... | inj₂ h0 =
+  let hneg =
+        subst (λ t → -ℝ x ≤ℝ t) negMinusOneℝ (negℝ-order (proj₁ hx))
+  in subst (λ t → t ≤ℝ 1ℝ) (sym (absOfNonpositive h0)) hneg
+
+absSubSym : ∀ (a b : ℝ) → absℝ (a -ℝ b) ≡ absℝ (b -ℝ a)
+absSubSym a b =
+  trans (sym (absNeg (a -ℝ b))) (cong absℝ (negℝ-sub a b))
+
+absSubLeTwo : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  absℝ (a -ℝ b) ≤ℝ twoℝ
+absSubLeTwo {a} {b} ha hb =
+  let htri = absSubadditive a b
+      hsum =
+        +-mono-≤ (absLeOneOfRange ha) (absLeOneOfRange hb)
+  in ≤ℝ-trans htri hsum
+
+absDiffEqOfLe : ∀ {a b : ℝ} → b ≤ℝ a → absℝ (a -ℝ b) ≡ a -ℝ b
+absDiffEqOfLe hba = absOfNonnegative (DASHI.Foundations.RealAnalysisAxioms.subNonnegative hba)
+
+absDiffEqOfGe : ∀ {a b : ℝ} → a ≤ℝ b → absℝ (a -ℝ b) ≡ b -ℝ a
+absDiffEqOfGe {a} {b} hab =
+  trans (absSubSym a b) (absOfNonnegative (DASHI.Foundations.RealAnalysisAxioms.subNonnegative hab))
+
+productAbsLeOne : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  absℝ (a *ℝ b) ≤ℝ 1ℝ
+productAbsLeOne {a} {b} ha hb =
+  let hprod =
+        mulMonotoneNonnegative (absNonnegative a) (absLeOneOfRange ha)
+          (absNonnegative b) (absLeOneOfRange hb)
+      hprod' =
+        subst (λ t → t ≤ℝ 1ℝ *ℝ 1ℝ) (sym (absMul a b)) hprod
+  in subst (λ t → absℝ (a *ℝ b) ≤ℝ t) (mulOneʳ 1ℝ) hprod'
+
+productLeOneRange : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  a *ℝ b ≤ℝ 1ℝ
+productLeOneRange {a} {b} ha hb =
+  ≤ℝ-trans (leAbs (a *ℝ b)) (productAbsLeOne ha hb)
+
+negOneLeProduct : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  -ℝ 1ℝ ≤ℝ a *ℝ b
+negOneLeProduct {a} {b} ha hb =
+  let hneg =
+        negℝ-order (productAbsLeOne ha hb)
+  in ≤ℝ-trans hneg (negAbsLe (a *ℝ b))
+
+absDiffLeTwoMinusSum : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  absℝ (a -ℝ b) ≤ℝ twoℝ -ℝ a -ℝ b
+absDiffLeTwoMinusSum {a} {b} ha hb with ≤ℝ-total a b
+... | inj₁ hab =
+  let hb2 = leTwoMinusSelf (proj₂ hb)
+      h = subRightMono a hb2
+      h' =
+        subst (λ t → b -ℝ a ≤ℝ t) (subSubComm twoℝ b a) h
+      habs = absDiffEqOfGe hab
+  in subst (λ t → t ≤ℝ twoℝ -ℝ a -ℝ b) (sym habs) h'
+... | inj₂ hba =
+  let ha2 = leTwoMinusSelf (proj₂ ha)
+      h = subRightMono b ha2
+      habs = absDiffEqOfLe hba
+  in subst (λ t → t ≤ℝ twoℝ -ℝ a -ℝ b) (sym habs) h
+
+absDiffLeTwoPlusSum : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  absℝ (a -ℝ b) ≤ℝ twoℝ +ℝ a +ℝ b
+absDiffLeTwoPlusSum {a} {b} ha hb with ≤ℝ-total a b
+... | inj₁ hab =
+  let hnegA = negLeOneOfLower (negOneLeOfRange ha)
+      h1 = addLeftMono b hnegA
+      h1' =
+        subst (λ t → t ≤ℝ b +ℝ 1ℝ) (sym (subEqAddNeg b a)) h1
+      hone = oneLeTwoPlusOfLower (negOneLeOfRange ha)
+      h2 = addLeftMono b hone
+      h2' =
+        subst (λ t → b +ℝ 1ℝ ≤ℝ t) (+-comm b (twoℝ +ℝ a)) h2
+      h = ≤ℝ-trans h1' h2'
+      habs = absDiffEqOfGe hab
+  in subst (λ t → t ≤ℝ twoℝ +ℝ a +ℝ b) (sym habs) h
+... | inj₂ hba =
+  let hnegB = negLeOneOfLower (negOneLeOfRange hb)
+      h1 = addLeftMono a hnegB
+      h1' =
+        subst (λ t → t ≤ℝ a +ℝ 1ℝ) (sym (subEqAddNeg a b)) h1
+      hone = oneLeTwoPlusOfLower (negOneLeOfRange hb)
+      h2 = addLeftMono a hone
+      hrew =
+        trans (sym (+-assoc a twoℝ b))
+          (cong (λ t → t +ℝ b) (+-comm a twoℝ))
+      h2' =
+        subst (λ t → a +ℝ 1ℝ ≤ℝ t) hrew h2
+      h = ≤ℝ-trans h1' h2'
+      habs = absDiffEqOfLe hba
+  in subst (λ t → t ≤ℝ twoℝ +ℝ a +ℝ b) (sym habs) h
+
+lowerNonpos : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b) ≤ℝ 0ℝ
+lowerNonpos {a} {b} ha hb =
+  let hp1 = subNonpos (productLeOneRange ha hb)
+      hpAbs =
+        ≤ℝ-trans hp1 (absNonnegative (a -ℝ b))
+  in subNonpos hpAbs
+
+zeroLeUpper : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  0ℝ ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b)
+zeroLeUpper {a} {b} ha hb =
+  let hd2 = absSubLeTwo ha hb
+      hbase = DASHI.Foundations.RealAnalysisAxioms.subNonnegative hd2
+      hnegOne =
+        subst (λ t → t ≤ℝ a *ℝ b) (negEqSubZero 1ℝ) (negOneLeProduct ha hb)
+      hmono =
+        addRightMono (threeℝ -ℝ absℝ (a -ℝ b)) hnegOne
+      hleftEq =
+        trans (addSubAssoc minusOneℝ threeℝ (absℝ (a -ℝ b)))
+          (cong (λ t → t -ℝ absℝ (a -ℝ b)) (predSucc twoℝ))
+      hleft =
+        subst (λ t → 0ℝ ≤ℝ t) (sym hleftEq) hbase
+      hright =
+        subst (λ t → minusOneℝ +ℝ (threeℝ -ℝ absℝ (a -ℝ b)) ≤ℝ t)
+          (addSubAssoc (a *ℝ b) threeℝ (absℝ (a -ℝ b))) hmono
+  in ≤ℝ-trans hleft hright
+
+mixedRightCornerLe : ∀ {a b : ℝ} →
+  (1ℝ -ℝ a) *ℝ (1ℝ +ℝ b)
+    ≤ℝ 1ℝ -ℝ a *ℝ b +ℝ absℝ (a -ℝ b)
+mixedRightCornerLe {a} {b} =
+  let h =
+        addLeftMono (1ℝ -ℝ a *ℝ b) (negLeAbs (a -ℝ b))
+      h' =
+        subst (λ t → t ≤ℝ 1ℝ -ℝ a *ℝ b +ℝ absℝ (a -ℝ b))
+          (sym (subEqAddNeg (1ℝ -ℝ a *ℝ b) (a -ℝ b))) h
+  in subst (λ t → t ≤ℝ 1ℝ -ℝ a *ℝ b +ℝ absℝ (a -ℝ b))
+       (sym (oneMinusMulOnePlus a b)) h'
+
+mixedLeftCornerLe : ∀ {a b : ℝ} →
+  (1ℝ +ℝ a) *ℝ (1ℝ -ℝ b)
+    ≤ℝ 1ℝ -ℝ a *ℝ b +ℝ absℝ (a -ℝ b)
+mixedLeftCornerLe {a} {b} =
+  let h =
+        addLeftMono (1ℝ -ℝ a *ℝ b) (leAbs (a -ℝ b))
+  in subst (λ t → t ≤ℝ 1ℝ -ℝ a *ℝ b +ℝ absℝ (a -ℝ b))
+       (sym (onePlusMulOneMinus a b)) h
+
+sameLeftCornerLe : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  (1ℝ -ℝ a) *ℝ (1ℝ -ℝ b)
+    ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b)
+sameLeftCornerLe {a} {b} ha hb =
+  let hd = absDiffLeTwoPlusSum ha hb
+      hbase =
+        subLeftMono (a *ℝ b +ℝ threeℝ) hd
+      hleft =
+        subst (λ t → t ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b))
+          (addThreeSubTwoPlus (a *ℝ b) a b) hbase
+      hleft' = hleft
+  in subst (λ t → t ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b))
+       (sym (oneMinusMulOneMinus a b)) hleft'
+
+sameRightCornerLe : ∀ {a b : ℝ} → RangeNegOneOne a → RangeNegOneOne b →
+  (1ℝ +ℝ a) *ℝ (1ℝ +ℝ b)
+    ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b)
+sameRightCornerLe {a} {b} ha hb =
+  let hd = absDiffLeTwoMinusSum ha hb
+      hbase =
+        subLeftMono (a *ℝ b +ℝ threeℝ) hd
+      hleft =
+        subst (λ t → t ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b))
+          (addThreeSubTwoMinus (a *ℝ b) a b) hbase
+  in subst (λ t → t ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b))
+       (sym (onePlusMulOnePlus a b)) hleft
+
+lowerVsMixedRight : ∀ {a b : ℝ} →
+  a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b)
+    ≤ℝ -ℝ ((1ℝ -ℝ a) *ℝ (1ℝ +ℝ b))
+lowerVsMixedRight {a} {b} =
+  let h =
+        negℝ-order (mixedRightCornerLe {a} {b})
+  in subst (λ t → t ≤ℝ -ℝ ((1ℝ -ℝ a) *ℝ (1ℝ +ℝ b)))
+       (negOneMinusPlus (a *ℝ b) (absℝ (a -ℝ b))) h
+
+lowerVsMixedLeft : ∀ {a b : ℝ} →
+  a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b)
+    ≤ℝ -ℝ ((1ℝ +ℝ a) *ℝ (1ℝ -ℝ b))
+lowerVsMixedLeft {a} {b} =
+  let h =
+        negℝ-order (mixedLeftCornerLe {a} {b})
+  in subst (λ t → t ≤ℝ -ℝ ((1ℝ +ℝ a) *ℝ (1ℝ -ℝ b)))
+       (negOneMinusPlus (a *ℝ b) (absℝ (a -ℝ b))) h
+
+negOnePlusEqMinusOneMinus : ∀ (a : ℝ) → -ℝ (1ℝ +ℝ a) ≡ minusOneℝ -ℝ a
+negOnePlusEqMinusOneMinus a =
+  let h1 = negℝ-add 1ℝ a
+      h2 =
+        cong (λ t → t +ℝ (-ℝ a)) (negEqSubZero 1ℝ)
+      h3 =
+        sym (subEqAddNeg minusOneℝ a)
+  in trans h1 (trans h2 h3)
+
+uUpperBound : ∀ {x a : ℝ} → RangeNegOneOne x → x -ℝ a ≤ℝ 1ℝ -ℝ a
+uUpperBound {x} {a} hx = subRightMono a (proj₂ hx)
+
+uLowerBound : ∀ {x a : ℝ} → RangeNegOneOne x → -ℝ (1ℝ +ℝ a) ≤ℝ x -ℝ a
+uLowerBound {x} {a} hx =
+  let h = subRightMono a (proj₁ hx)
+  in subst (λ t → t ≤ℝ x -ℝ a) (sym (negOnePlusEqMinusOneMinus a)) h
+
+negUBound : ∀ {x a : ℝ} → RangeNegOneOne x → -ℝ (x -ℝ a) ≤ℝ 1ℝ +ℝ a
+negUBound {x} {a} hx =
+  subst (λ t → -ℝ (x -ℝ a) ≤ℝ t) (negℝ-involutive (1ℝ +ℝ a))
+    (negℝ-order (uLowerBound {x} {a} hx))
+
+uvUpperSame : ∀ {u v β δ : ℝ} →
+  0ℝ ≤ℝ u → u ≤ℝ β → 0ℝ ≤ℝ v → v ≤ℝ δ → u *ℝ v ≤ℝ β *ℝ δ
+uvUpperSame = mulMonotoneNonnegative
+
+uvLowerMixedRight : ∀ {u v β γ : ℝ} →
+  0ℝ ≤ℝ u → u ≤ℝ β → v ≤ℝ 0ℝ → -ℝ v ≤ℝ γ →
+  -ℝ (β *ℝ γ) ≤ℝ u *ℝ v
+uvLowerMixedRight {u} {v} {β} {γ} hu huβ hv hnvγ =
+  let hnv = negNonnegativeOfNonpositive hv
+      hprod = mulMonotoneNonnegative hu huβ hnv hnvγ
+      hneg = negℝ-order hprod
+      huv =
+        trans (sym (negℝ-mulʳ u (-ℝ v)))
+          (cong (λ t → u *ℝ t) (negℝ-involutive v))
+  in subst (λ t → -ℝ (β *ℝ γ) ≤ℝ t) huv hneg
+
+uvLowerMixedLeft : ∀ {u v α δ : ℝ} →
+  u ≤ℝ 0ℝ → -ℝ u ≤ℝ α → 0ℝ ≤ℝ v → v ≤ℝ δ →
+  -ℝ (α *ℝ δ) ≤ℝ u *ℝ v
+uvLowerMixedLeft {u} {v} {α} {δ} hu hnuα hv hvδ =
+  let hnu = negNonnegativeOfNonpositive hu
+      hprod = mulMonotoneNonnegative hnu hnuα hv hvδ
+      hneg = negℝ-order hprod
+      huv =
+        trans (sym (negℝ-mulˡ (-ℝ u) v))
+          (cong (λ t → t *ℝ v) (negℝ-involutive u))
+  in subst (λ t → -ℝ (α *ℝ δ) ≤ℝ t) huv hneg
+
+uvUpperMixedBothNeg : ∀ {u v α γ : ℝ} →
+  u ≤ℝ 0ℝ → -ℝ u ≤ℝ α → v ≤ℝ 0ℝ → -ℝ v ≤ℝ γ →
+  u *ℝ v ≤ℝ α *ℝ γ
+uvUpperMixedBothNeg {u} {v} {α} {γ} hu hnuα hv hnvγ =
+  let hnu = negNonnegativeOfNonpositive hu
+      hnv = negNonnegativeOfNonpositive hv
+      hprod =
+        mulMonotoneNonnegative hnu hnuα hnv hnvγ
+  in subst (λ t → t ≤ℝ α *ℝ γ) (negℝ-mul-neg u v) hprod
+
+lowerPlusFourIsUpper : ∀ (p d : ℝ) →
+  (p -ℝ 1ℝ -ℝ d) +ℝ fourℝ ≡ p +ℝ threeℝ -ℝ d
+lowerPlusFourIsUpper = lowerPlusFourEq
+
+upperMinusLowerEqFour : ∀ (l : ℝ) → (l +ℝ fourℝ) -ℝ l ≡ fourℝ
+upperMinusLowerEqFour l =
+  trans (cong (λ t → t -ℝ l) (+-comm l fourℝ)) (DASHI.Foundations.RealAnalysisAxioms.addSubCancel fourℝ l)
+
+lowerBoundConstructed :
+  ∀ a b → RangeNegOneOne a → RangeNegOneOne b →
+  ∀ x y → RangeNegOneOne x → RangeNegOneOne y →
+  a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b) ≤ℝ (x -ℝ a) *ℝ (y -ℝ b)
+lowerBoundConstructed a b ha hb x y hx hy
+  with ≤ℝ-total 0ℝ (x -ℝ a) | ≤ℝ-total 0ℝ (y -ℝ b)
+... | inj₁ hu | inj₁ hv =
+  ≤ℝ-trans (lowerNonpos ha hb) (mulNonnegative hu hv)
+... | inj₁ hu | inj₂ hv =
+  let hcorner =
+        uvLowerMixedRight hu (uUpperBound hx) hv (negUBound {y} {b} hy)
+  in ≤ℝ-trans (lowerVsMixedRight {a} {b}) hcorner
+... | inj₂ hu | inj₁ hv =
+  let hcorner =
+        uvLowerMixedLeft hu (negUBound {x} {a} hx) hv (uUpperBound {y} {b} hy)
+  in ≤ℝ-trans (lowerVsMixedLeft {a} {b}) hcorner
+... | inj₂ hu | inj₂ hv =
+  let hprod =
+        mulNonnegative (negNonnegativeOfNonpositive hu)
+          (negNonnegativeOfNonpositive hv)
+      hnonneg =
+        subst (λ t → 0ℝ ≤ℝ t) (negℝ-mul-neg (x -ℝ a) (y -ℝ b)) hprod
+  in ≤ℝ-trans (lowerNonpos ha hb) hnonneg
+
+upperTargetConstructed :
+  ∀ a b → RangeNegOneOne a → RangeNegOneOne b →
+  ∀ x y → RangeNegOneOne x → RangeNegOneOne y →
+  (x -ℝ a) *ℝ (y -ℝ b) ≤ℝ a *ℝ b +ℝ threeℝ -ℝ absℝ (a -ℝ b)
+upperTargetConstructed a b ha hb x y hx hy
+  with ≤ℝ-total 0ℝ (x -ℝ a) | ≤ℝ-total 0ℝ (y -ℝ b)
+... | inj₁ hu | inj₁ hv =
+  let hcorner =
+        uvUpperSame hu (uUpperBound hx) hv (uUpperBound {y} {b} hy)
+  in ≤ℝ-trans hcorner (sameLeftCornerLe ha hb)
+... | inj₁ hu | inj₂ hv =
+  let hw =
+        mulNonnegative hu (negNonnegativeOfNonpositive hv)
+      hneg =
+        subst (λ t → -ℝ ((x -ℝ a) *ℝ (-ℝ (y -ℝ b))) ≤ℝ t)
+          negZeroℝ (negℝ-order hw)
+      huv =
+        trans (sym (negℝ-mulʳ (x -ℝ a) (-ℝ (y -ℝ b))))
+          (cong (λ t → (x -ℝ a) *ℝ t) (negℝ-involutive (y -ℝ b)))
+      hnonpos =
+        subst (λ t → t ≤ℝ 0ℝ) huv hneg
+  in ≤ℝ-trans hnonpos (zeroLeUpper ha hb)
+... | inj₂ hu | inj₁ hv =
+  let hw =
+        mulNonnegative (negNonnegativeOfNonpositive hu) hv
+      hneg =
+        subst (λ t → -ℝ ((-ℝ (x -ℝ a)) *ℝ (y -ℝ b)) ≤ℝ t)
+          negZeroℝ (negℝ-order hw)
+      huv =
+        trans (sym (negℝ-mulˡ (-ℝ (x -ℝ a)) (y -ℝ b)))
+          (cong (λ t → t *ℝ (y -ℝ b)) (negℝ-involutive (x -ℝ a)))
+      hnonpos =
+        subst (λ t → t ≤ℝ 0ℝ) huv hneg
+  in ≤ℝ-trans hnonpos (zeroLeUpper ha hb)
+... | inj₂ hu | inj₂ hv =
+  let hcorner =
+        uvUpperMixedBothNeg hu (negUBound {x} {a} hx) hv
+          (negUBound {y} {b} hy)
+  in ≤ℝ-trans hcorner (sameRightCornerLe ha hb)
+
 record CenteredProductOscillation (a b : ℝ) : Set where
   field
     lower upper : ℝ
@@ -62,6 +496,22 @@ record CenteredProductOscillation (a b : ℝ) : Set where
     upperBound : ∀ x y → RangeNegOneOne x → RangeNegOneOne y →
       (x -ℝ a) *ℝ (y -ℝ b) ≤ℝ upper
     width : upper -ℝ lower ≡ fourℝ
+
+constructCenteredProductOscillation :
+  ∀ a b → RangeNegOneOne a → RangeNegOneOne b → CenteredProductOscillation a b
+constructCenteredProductOscillation a b ha hb =
+  record
+    { lower = a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b)
+    ; upper = (a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b)) +ℝ fourℝ
+    ; lowerBound = lowerBoundConstructed a b ha hb
+    ; upperBound = λ x y hx hy →
+        subst (λ t → (x -ℝ a) *ℝ (y -ℝ b) ≤ℝ t)
+          (sym (lowerPlusFourIsUpper (a *ℝ b) (absℝ (a -ℝ b))))
+          (upperTargetConstructed a b ha hb x y hx hy)
+    ; width = upperMinusLowerEqFour (a *ℝ b -ℝ 1ℝ -ℝ absℝ (a -ℝ b))
+    }
+
+open CenteredProductOscillation public
 
 record ContinuousWilsonArithmetic
     {Converges : (Nat → ℝ) → ℝ → Set}
