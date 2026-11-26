@@ -1,0 +1,115 @@
+{
+  "status": "SOURCE_BACKED_MODEL_REPLAY_CONDITIONAL",
+  "manifest_sha256": "c1e8e7907273e72ae90e0bf17fd755727388bad13a6bb2cfd74ff5f1ff0b6dfc",
+  "verified_model_artifacts": 9,
+  "rows": 3087,
+  "records": 208,
+  "forcing": {
+    "f107a": 71.32839506172839,
+    "f107": 71,
+    "ap": 16,
+    "first": [
+      16,
+      27,
+      22,
+      39,
+      22,
+      13.875,
+      2.625
+    ],
+    "last": [
+      16,
+      22,
+      27,
+      22,
+      39,
+      16.25,
+      2.5
+    ]
+  },
+  "igrf": {
+    "magnitude_nT": [
+      49846.427294645335,
+      51189.82112426869,
+      51946.66878639581
+    ],
+    "max_component_difference_nT": 0.010908746713539585
+  },
+  "msis": {
+    "two_sources_max_difference": 0,
+    "max_daily_history_relative_difference": 0.30967037281673176,
+    "local_temperature_K": [
+      182.2497429861617,
+      387.89607945921705,
+      806.7500963827778
+    ]
+  },
+  "iri": {
+    "original_index_values": 853,
+    "retained_index_values": 746,
+    "bounded_index_sha256": "9767d01c22b45119db797447a04112d631fb80ac39a92b4ea2536db316e75c88",
+    "compiler_warning_count": 33,
+    "cluster_unavailable_rows": 3087,
+    "positive_model_density_rows": 3087,
+    "available_ion_sum_over_model_ne": [
+      0.9980240044747218,
+      0.9999986681981701,
+      1.000000209138131
+    ],
+    "iri_ne_over_observed_ne": [
+      0.000052627640267296236,
+      0.010011556696082636,
+      1.0313360424663052
+    ],
+    "iri_Oplus_fraction": [
+      2.440344750177085e-19,
+      0.000036378400261288465,
+      0.13267356159639257
+    ],
+    "first10_fresh_exact_match": true,
+    "first10_reverse_max_relative_difference": 0
+  },
+  "tensor": {
+    "evaluations": 24696,
+    "frequencies_Hz": [
+      0,
+      3.915,
+      7.83,
+      7800
+    ],
+    "max_inverse_relative_error": 3.0187597461655036e-13,
+    "max_flux_relative_residual": 1.1619354908758948e-10,
+    "history_median_P_real_S_m": [
+      0.000021475945094864978,
+      0.000021929444503761177,
+      0.000023735485931493217,
+      1.0134348829086794e-7
+    ],
+    "history_median_H_real_S_m": [
+      0.00008735509520286722,
+      0.00008841084221687868,
+      0.00009035050315200684,
+      0.00027536152233593916
+    ],
+    "packet_sha256": "d771b81b3498e4cf9424325afe9e27f1c3f8125d0ba6c608c175cb62bd955fb6"
+  },
+  "executed_git_blobs": {
+    "inputs": "045cc122c7e78523e2508484ffc779469f965eed",
+    "model": "bce9c2f6bfe5e34f8ab8eda5bd119aefd181689b",
+    "tensor": "010a4185121bb67d999942c0d7558d2f54efd03f",
+    "iri": "88e19026b4cc29449d5058c627537c483160f775"
+  },
+  "verification": {
+    "repeat_output_exact": true,
+    "packet_lines": 3087,
+    "local_timeout_s": 90,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "ci": false,
+    "kernel": false
+  },
+  "physical_admission": false,
+  "scope": "Model-backed conditional coefficients, no measured source flux or propagation; IRI legacy warnings and unavailable cluster channel remain, alternative two-ion collision law not original frictional-heating reproduction."
+}
