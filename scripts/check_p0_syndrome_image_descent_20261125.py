@@ -13,28 +13,36 @@ def rem(x,H):
     return x
 
 
-def contract(C,r,cap):
+def contract(C,r,cap,B=None):
+    def pay(tag,n=1):
+        if B is not None:B.pay(tag,n)
+    pay('syndrome_input',1+sum(map(len,C)))
     # C lists (original local option, full dependency syndrome) pairs.
     if any(not O for O in C):return 'UNSAT',None,(0,r,0,0,0)
     H=();c=0;left=list(range(len(C)));ledger=[];rounds=0
     while True:
         for i in left:
             O=C[i];t0=O[0][1]
+            pay('syndrome_absorb_probe',1+len(O)*(1+r)+r*r)
             V={rem(t^t0,H) for p,t in O};K=D.basis(V)
             if len(V)!=1<<len(K):continue
+            pay('syndrome_absorb',1+(len(H)+len(O))*(1+r)+r*r)
             ledger.append((i,H,c));H=D.basis(H+tuple(t^t0 for p,t in O));c^=t0
             left.remove(i);rounds+=1;break
         else:break
     base=0;opts=[]
     for i in left:
         t0=C[i][0][1];base^=t0
+        pay('syndrome_project',1+len(C[i])*(1+r))
         opts.append([(p,rem(t^t0,H),t) for p,t in C[i]])
+    pay('syndrome_rank',1+sum(map(len,opts))*(1+r)+r*r)
     target=rem(c^base,H);K=D.basis(v for O in opts for p,v,t in O);w=len(K)
     stats=(rounds,r-len(H),w,len(left),0)
     if rem(target,K):return 'UNSAT',None,stats
     if w>cap:return 'UNKNOWN',None,stats
     M={0:()};work=0
     for O in opts:
+        pay('syndrome_dp',1+len(M)*len(O)*(1+len(C)))
         N={}
         for s,ps in M.items():
             for p,v,t in O:
@@ -45,8 +53,10 @@ def contract(C,r,cap):
     result=[None]*len(C);s=0
     for i,(p,t) in zip(left,M[target]):result[i]=(p,t);s^=t
     for i,H0,c0 in reversed(ledger):
+        pay('syndrome_reverse',1+len(C[i])*(1+r))
         p,t=next((p,t) for p,t in C[i] if not rem(s^t^c0,H0))
         result[i]=(p,t);s^=t
+    pay('syndrome_verify',1+sum(map(len,C)))
     assert s==0 and all(pair in O for pair,O in zip(result,C))
     return 'SAT',[p for p,t in result],stats
 
