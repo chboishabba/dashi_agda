@@ -1,3 +1,9 @@
+## 26 November 2026 — P0 proof-geometry visualization added
+
+**Diagram:** [editable SVG](../diagrams/YMP0RemainingProofGeometry.svg) and [PNG](../diagrams/YMP0RemainingProofGeometry.png). It visualizes the verified `534595d1b8` source state, the P0W/P0V source-identification frontier, the P0W/P0X signed-residual and uniform-rooted-rate frontier, and the parallel P0Y continuum/OS/N1/D2/G1 endpoints. The W1 box now states both signed Hessian directions: `∂s∂t log K = (K₀K_FG − K_FK_G)/K²` and `∂s∂t(−log K) = −(K₀K_FG − K_FK_G)/K²`. This is non-authoritative navigation only; no proof, Agda receipt, physical level or Clay flag changed.
+
+---
+
 ## 26 November 2026 — PR/master lemma reconciliation; no mechanical next payment remains
 
 **Verified basis:** `7adbe8a872d420a3457fcb247cdf114da573525c`, clean `master` worktree. PR refs `origin/pr/1444`, `origin/pr/1536` and `origin/pr/1544` were fetched and diffed against `master`. The named donor files present in those PRs are byte-identical on current master where comparable; #1444 is based on an older research branch, while #1536/#1544 are stale relative to master and would delete current owners including `YMClayOriginalAffineFibreHessianLedgerExact.agda`, `YMClayOriginalWilsonContinuousA2BridgeExact.agda`, `YMClayG1CompactSimpleFiniteScopeValidatorExact.agda`, `YMClayOS2SquareFactorizationToCylinderExact.agda`, `YMClayR445ExteriorKernelTVChainFiniteExact.agda`, `YMClayR445WeightedExteriorInfluenceFiniteExact.agda`, `YMClaySharpFiniteTotalVariationCovarianceExact.agda` and `YMFiniteExteriorFactorCancellationSourceOnlyExact.agda`. Do not merge or cherry-pick these PRs wholesale into current master.
