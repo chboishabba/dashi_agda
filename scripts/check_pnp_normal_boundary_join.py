@@ -220,7 +220,7 @@ def pair_exclusion_core(n,G,J,H,B):
     K=canon(out);assert K is not None and canon(H+K)==H
     return K
 
-def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0, character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0):
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0, character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
@@ -237,7 +237,7 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
     assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
     if character_degree>=0:
         from check_pnp_character_ideal import demand_character_close
-        Q,x=demand_character_close(n,row_bits,H,B,degree=character_degree,quotient_cap=character_quotient_cap,path_steps=character_path_steps,section_cap=character_section_cap,adaptive_nodes=character_adaptive_nodes,adaptive_degree=character_adaptive_degree)
+        Q,x=demand_character_close(n,row_bits,H,B,degree=character_degree,quotient_cap=character_quotient_cap,path_steps=character_path_steps,section_cap=character_section_cap,adaptive_nodes=character_adaptive_nodes,adaptive_degree=character_adaptive_degree,adaptive_provenance=character_adaptive_provenance)
         if Q is None:
             B.pay('character_root_empty');return None,0
         B.pay('character_root_rank',len(Q)-len(H));H=Q
