@@ -1,0 +1,25 @@
+{
+  "status": "RADAR_MODEL_INPUT_GEOMETRY_ONLY",
+  "rows": 3087,
+  "records": 208,
+  "midpoint_first": "2017-12-18T02:30:28.800000+00:00",
+  "midpoint_last": "2017-12-18T05:59:29.400000+00:00",
+  "hour_bins": [
+    "2017-12-18T02",
+    "2017-12-18T03",
+    "2017-12-18T04",
+    "2017-12-18T05"
+  ],
+  "height_difference_m": [
+    5.3487884449054945,
+    20.039682846515916,
+    25.47601102013175
+  ],
+  "synthetic_gfz_tests": "PASS",
+  "physical_admission": false,
+  "checker_commit": "615a473bc72b5321fec9da8f4cff0149cbe9644d",
+  "executed_blob": "045cc122c7e78523e2508484ffc779469f965eed",
+  "execution": "OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/solar_inputs.py /mnt/data exit 0; exact Git blob match; no CI",
+  "source_sha256": "d62180251bf74884910831c522ada43d9bec084d3f9ca6323f67c575ee05708d",
+  "scope": "Rounded site and straight WGS84 ray, original row keys preserved. GFZ synthetic fixtures only, real parser input pending. No magnetic, neutral or conductivity model evaluation."
+}
