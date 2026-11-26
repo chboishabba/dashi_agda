@@ -1735,3 +1735,22 @@ Direct CM norm budget suffices: a=1/25,b=2/25, T=(1+a)^3-1=1951/15625, disc norm
 ### 2026-11-26 — Literal CM evaluation and positive factor charts
 
 [Max-cut ledger](../proofs/Paper9LiteralCMBudgetAndFactorChartsMaxCut20261126.md). Starting 4bb6a57a verified; targeted master and #1552/#1529/#1551/#1533/#1353 rechecked. Source-written uncompiled: original real-slice coefficient/head/jet and tail norm binding 974545d3; actual weighted norm arithmetic and inner/disc witnesses 5edf8d19; literal geometric inverse and root-to-Z evaluation 5e06f585; actual factorial coefficient band and hyper/jet majorants 640e3117. AtRoot.rawFromArithmeticAndCM now has only original CMRoot (module parameter), literal RamanujanX/Y/E, SignedJet and index k as inputs, not external H4 convergence/norm/evaluation premises. H2/H3/H4 conditional path source-written, kernel/type/termination audit outstanding. H1 positive product grade/strict complement, original factor-pair coordinate completeness, reverse interior and equality-stratum forward charts 6dc1f5ed. Remaining H1 actual reverse equality-stratum list maps, proof-free grade/strata permutations, sigma/boundary folds and literal Ramanujan equations. C0–C3 original phase/lattice Fourier/degree41 root and jet still open. Local timeout 90s checker b781110d, blob 158bea928d9ceb95b829e6a285b2ea4c6296b9e8 matches local: 5 signed radii x 25 degrees, 256 coefficient steps, 4 conditional root-to-Z, 80 grades/51926 points PASS. Five new files lexical balance/no explicit holes only; no Agda/Lean/lake or CI. PR reports nonmergeable.
+
+
+### 2026-11-27 — Terminal-first disposition (controls earlier open-lane inventories)
+
+Reconciled Agda HEAD c8d9f7a8ad1d with the Lean companion research/paper9-original-eisenstein-derivative-20261125, Integration/Paper9NativeFiniteAcceptance.lean (blob 0ac6f767061978b961280af35d41110eb6b272b0). PR #1546 nonmergeable at inspection. The eight predicate specifications already passed the exact independent replay recorded in [the eight-predicate ledger](../proofs/Paper9EightFinitePredicateReplay20261126.md); do not reopen their arithmetic as unwritten. The actual eight Lean by-decide declarations and universalRawCross composition exist, but elaboration, kernel reduction and axiom audit remain unverified. No new acceptance claimed in this entry.
+
+| Lane | Disposition | Completion gate |
+|---|---|---|
+| Lean terminal | Source-written | Check entire import closure, eight named decisions, universalRawCross and axioms |
+| H1 | Lean donor reported; native finite grouping incomplete | Literal all-index Ramanujan equations via existing grade/equality strata folds |
+| H2–H4 | Conditional native source-written | Typecheck and inhabit existing producer inputs |
+| C0 | Existing Cayley/phase machinery | Actual analytic attachment where required |
+| C1 | Existing lattice convergence/reindex machinery | Exact same-object normalization/Fourier attachment if on terminal dependency path |
+| C2–C3 | Lean root producer and signed disk jet source-written per companion reconciliation | Verify closure and attach same original root/germ/jet in native route |
+| Native cross | Existing RawCross/ExpandedCross/NativePeriod transport | Inhabit all-index source witness constructively; no cross-kernel assumption |
+| Production | Existing GMP implementation and historical independent replay | Exact committed-source build, certified enclosure and matched performance gates |
+| Integration | Open | Manuscript synchronized, merge conflicts reconciled, audit recorded |
+
+P0 execution: (A) terminal Lean acceptance first; repair only demonstrated failures using verified reflection/chunked integer reductions, never an externally asserted Boolean. (B) reverse-solve the native rawFromArithmeticAndCM/periodFromRaw inputs using existing donors, preserving zero mode, signed residual, branch and coefficient indices. (C) attach accepted endpoint to existing GMP certificate path and run exact-source harness. Keep local bounded execution (90 seconds per attempt), checkpoint raw receipts; no GitHub CI. Distinguish source-written, replayed, kernel-accepted and production-accepted. No generic CM/jet/Cayley/Fourier/hypergeometric rebuild absent a demonstrated terminal dependency. This entry updates disposition only, not a claim of new mathematical or kernel closure.
