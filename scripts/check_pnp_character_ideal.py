@@ -425,7 +425,7 @@ def transport_onehot_exclusion(certificate,V,a,p,B):
     return tuple((k,t,c) for (k,t),c in sorted(C.items()))
 
 
-def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
+def extend_character_proof(F,seed,shifts,p,B,max_pivots=256,indices=None):
     """Replay inherited DAG, then append local generators with exact provenance.
 
     Rechart may merge pivots. Retain inherited rows and append their normalized
@@ -435,7 +435,13 @@ def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
     assert p in PRIMES and max_pivots>=0
     rows=replay(F,seed,p,B=B)
     if rows is None:raise ValueError('invalid inherited character proof')
-    out=list(seed);basis={}
+    return _extend_character_rows(F,seed,enumerate(rows),shifts,p,B,max_pivots,indices)
+
+
+def _extend_character_rows(F,seed,rows,shifts,p,B,max_pivots,indices=None,retained=None):
+    """Internal trusted rows from replay or exact pullback of live pivots."""
+    assert p in PRIMES and max_pivots>=0
+    out=list(seed);basis={} if retained is None else dict(retained)
     def reduce(A):
         ops=[]
         # Reduce lower pivots too, not only the leading term.
@@ -462,8 +468,11 @@ def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
         if 0 in D:
             proof=compact(proof,B)
             if not verify(F,proof,p,B=B):raise AssertionError('invalid mixed contradiction')
+        if indices is not None:
+            indices.clear()
+            if 0 not in D:indices.update((s,i) for s,(i,A) in basis.items())
         return proof,D
-    for i,A in enumerate(rows):
+    for i,A in rows:
         A=dict(A);j,t,ops,c=seed[i]
         extra=reduce(A)
         if not A:continue
@@ -471,6 +480,7 @@ def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
         # Move extra coefficients inside the inherited scale c.
         inv=pow(c,-1,p)
         if admit(A,j,t,tuple(ops)+tuple((k,w*inv%p) for k,w in extra),c,i):return finish()
+    if not shifts:return finish()
     G=tuple(generators(F,p,B=B))
     for t in shifts:
         for j,g in enumerate(G):
@@ -479,6 +489,41 @@ def extend_character_proof(F,seed,shifts,p,B,max_pivots=256):
             if max(A)!=0 and len(basis)>=max_pivots:return finish()
             if admit(A,j,t,ops,1):return finish()
     return finish()
+
+
+def compact_character_basis(proof,indices,B):
+    """Keep the dependency closure of every live pivot, not every old row."""
+    active=set(indices.values());todo=list(active)
+    while todo:
+        i=todo.pop();ops=proof[i][2];B.pay('character_live_slice',1+len(ops))
+        for k,w in ops:
+            if k not in active:active.add(k);todo.append(k)
+    remap={i:j for j,i in enumerate(sorted(active))}
+    P=tuple((g,t,tuple((remap[k],w) for k,w in ops),c)
+            for i in sorted(active) for g,t,ops,c in (proof[i],))
+    B.pay('character_live_retained',len(P))
+    return P,{s:remap[i] for s,i in indices.items()}
+
+
+def project_character_proof(F,proof,basis,indices,V,a,p,B,max_pivots,out_indices):
+    """Transport active pivots with source DAG dependencies, not stale rows."""
+    seed,ids=compact_character_basis(proof,indices,B)
+    seed=transport_proof(seed,V,a,p,B);rows=[];freq={}
+    for s,C in basis.items():
+        A={}
+        for t,w in C.items():
+            if t not in freq:
+                B.pay('character_live_map',1+len(V));freq[t]=(value(V,t),(-1)**((t&a).bit_count()%2))
+            v,c=freq[t];B.pay('character_live_term');add(A,{v:w},c,p)
+        rows.append((ids[s],A))
+    return _extend_character_rows(F,seed,rows,(),p,B,max_pivots,out_indices)
+
+
+def extend_live_character_proof(F,proof,basis,indices,shifts,p,B,max_pivots):
+    """Extend already normalized verified pivots without replaying their DAG."""
+    retained={s:(indices[s],A) for s,A in basis.items()}
+    B.pay('character_live_seed',len(retained))
+    return _extend_character_rows(F,proof,(),shifts,p,B,max_pivots,indices,retained)
 
 
 def inconsistent_onehot_proof(n,F,e,j,p,B):
@@ -524,7 +569,7 @@ def join_onehot_proofs(F,e,certificates,p,B):
     return proof
 
 
-def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,certificates=None,source_proof=None,refutations=None):
+def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,certificates=None,source_proof=None,refutations=None,reuse_pivots=True):
     """Bounded original-row partition; optional proof-carrying mode.
 
     A supplied source DAG is replayed, then transported and extended, so every
@@ -534,12 +579,13 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,
     """
     assert nodes>=0 and max_pivots>=0 and degree in (-1,0,1,2)
     original=F;left=nodes
+    indices={} if source_proof is not None and reuse_pivots else None
     if source_proof is not None:
-        source_proof,basis=extend_character_proof(F,source_proof,(),p,B,max_pivots)
+        source_proof,basis=extend_character_proof(F,source_proof,(),p,B,max_pivots,indices)
     def valid(J,x):
         B.pay('character_adaptive_verify',1+sum(map(len,J)))
         return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in J)
-    def visit(J,K,u,V,proof):
+    def visit(J,K,u,V,proof,ids):
         nonlocal left
         if not left:return None,False,None
         left-=1;B.pay('character_adaptive_node')
@@ -547,7 +593,8 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,
         if valid(J,0):return u,True,None
         if degree>=0 and len(V)<n:
             if proof is None:K=extend_character_span(J,K,p,B,degree,max_pivots)
-            else:proof,K=extend_character_proof(J,proof,source_shifts(J,degree,B),p,B,max_pivots)
+            elif ids is None:proof,K=extend_character_proof(J,proof,source_shifts(J,degree,B),p,B,max_pivots)
+            else:proof,K=extend_live_character_proof(J,proof,K,ids,source_shifts(J,degree,B),p,B,max_pivots)
         if 0 in K:
             B.pay('character_adaptive_local_empty');return None,True,proof
         e=min((i for i,G in enumerate(J) if sum(b for s,b in G)!=1),key=lambda i:len(J[i]))
@@ -581,7 +628,7 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,
             candidates.append(((score,len(W),j),a,W))
         for (_,_,j),a,W in sorted(candidates):
             if not left:return None,False,None
-            P=None
+            P=None;child_ids={} if ids is not None else None
             if proof is None:
                 Q=restrict_character_span(K,W,a,p,B)
                 if 0 in Q:
@@ -589,16 +636,17 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,
             B.pay('character_adaptive_image',1+sum(map(len,J))*(1+len(W)))
             R=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in A) for A in J)
             if proof is not None:
-                P,Q=extend_character_proof(R,transport_proof(proof,W,a,p,B),(),p,B,max_pivots)
+                if ids is None:P,Q=extend_character_proof(R,transport_proof(proof,W,a,p,B),(),p,B,max_pivots)
+                else:P,Q=project_character_proof(R,proof,K,ids,W,a,p,B,max_pivots,child_ids)
                 if 0 in Q:
                     B.pay('character_adaptive_projected_empty');record(j,R,P);continue
-            x,done,child=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W),P)
+            x,done,child=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W),P,child_ids)
             if x is not None:return x,True,None
             if not done:return None,False,None
             B.pay('character_adaptive_backtrack');record(j,R,child)
         P=join_onehot_proofs(J,e,[paid[j] for j in range(len(G))],p,B) if proof is not None else None
         return None,True,P
-    x,done,P=visit(F,basis,0,tuple(1<<i for i in range(n)),source_proof)
+    x,done,P=visit(F,basis,0,tuple(1<<i for i in range(n)),source_proof,indices)
     if x is not None:assert done and valid(original,x)
     if done and x is None and source_proof is not None:
         if not verify(original,P,p,B=B):raise AssertionError('missing root refutation')
@@ -1176,7 +1224,86 @@ def test_mixed_character_provenance():
     print('proof_carrying_transport',dict(stats))
 
 
+def test_live_character_provenance():
+    from random import Random
+    from collections import Counter
+    from check_pnp_affine_normal_components import Exhausted
+    def valid(F,x):return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+    def pull(F,V,a):return tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+    def check_live(F,P,K,ids,p,B):
+        if 0 in K:assert verify(F,P,p,B=B);return
+        R=replay(F,P,p,B=B);assert R is not None
+        assert set(K)==set(ids) and all(R[ids[s]]==A for s,A in K.items())
+    rng=Random(369303);stats=Counter();cost=Counter()
+    for n in range(1,8):
+      for _ in range(100):
+        F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(1,7)))
+        T=[x for x in range(1<<n) if valid(F,x)]
+        for p in (3,5,7):
+            B=Budget(10000000);seed,_=eliminate(F,(0,),p,B,max_pivots=8);K=replay_span(F,seed,p,B)
+            ids={};P,Q=extend_character_proof(F,seed,(),p,B,8,ids);check_live(F,P,Q,ids,p,B)
+            if 0 not in Q:
+                a=rng.randrange(1<<n);V=tuple(rng.randrange(1<<n) for _ in range(rng.randrange(n+1)));R=pull(F,V,a)
+                J={};D,S=project_character_proof(R,P,Q,ids,V,a,p,B,16,J);check_live(R,D,S,J,p,B)
+                E,U=extend_character_proof(R,transport_proof(P,V,a,p,B),(),p,B,16)
+                assert (0 in U)==(0 in S)
+                if 0 not in S:
+                    assert len(U)==len(S) and all(not quotient_normal(A,U,p,B) for A in S.values())
+                    D,S=extend_live_character_proof(R,D,S,J,source_shifts(R,1),p,B,16);check_live(R,D,S,J,p,B)
+                    E,U=extend_character_proof(R,E,source_shifts(R,1),p,B,16)
+                    assert (0 in U)==(0 in S)
+                    if 0 not in S:assert len(U)==len(S) and all(not quotient_normal(A,U,p,B) for A in S.values())
+                stats['transport']+=1
+            for cap,degree in ((4,0),(128,-1),(128,0)):
+                results=[]
+                for opt in (False,True):
+                    D=Budget(10000000);L=[];C=[];P=[]
+                    x,done=adaptive_reopen(n,F,K,p,D,cap,degree,32,L,C,seed,P,opt)
+                    assert x is None or x in T;assert not done or bool(T)==(x is not None)
+                    assert len(C)==len(L) and all(verify_onehot_exclusion(F,e,j,c,p,B) for e,j,c in C)
+                    assert len(P)==int(done and x is None) and all(verify(F,q,p,B=B) for q in P)
+                    results.append((x,done,L));cost[str(opt)]+=sum(D.stats.values())
+                    if opt:stats['pins']+=len(C);stats['empty']+=done and x is None;stats['witness']+=x is not None;stats['unknown']+=not done
+                assert results[0]==results[1],(F,results)
+                stats['checks']+=1
+    assert stats['checks']==6300 and stats['transport']==1041 and cost['True']<cost['False']
+    print('live_character',dict(stats),dict(cost))
+    n=9;F=(((104,1),(204,0),(37,1),(217,1)),((152,0),(342,1),(215,0),(93,1),(494,1)),((330,0),(38,1),(434,0),(215,0)))
+    e,j,p,t=0,1,7,342;B=Budget(1000000);seed,empty=eliminate(F,(t,),p,B,max_pivots=32);assert not empty
+    I={};P,K=extend_character_proof(F,seed,(),p,B,32,I)
+    H=canon((s,b^int(k==j)) for k,(s,b) in enumerate(F[e]));a,V=chart(n,H);R=pull(F,V,a);J={}
+    P,K=project_character_proof(R,P,K,I,V,a,p,B,32,J);assert 0 not in K
+    _,empty=eliminate(R,(0,),p,B,max_pivots=32);assert not empty
+    P,K=extend_live_character_proof(R,P,K,J,(0,),p,B,32);assert 0 in K and verify(R,P,p,B=B)
+    C=lift_onehot_exclusion(n,F,e,j,P,p,B);assert C is not None and verify_onehot_exclusion(F,e,j,C,p,B)
+    assert [x for x in range(1<<n) if valid(F,x)]==[31,105,164,210]
+    print('live_mixed',len(P),len(C))
+    rng=Random(369304);stats=Counter();cost=Counter()
+    for i in range(240):
+        n=rng.choice((8,10,12));target=rng.randrange(1<<n);F=[]
+        for _ in range(rng.randrange(4,9)):
+            G=rng.sample(range(1,1<<n),rng.randrange(3,7));j=rng.randrange(len(G))
+            F.append(tuple((a,((a&target).bit_count()%2)^int(k==j) if i<120 else rng.randrange(2)) for k,a in enumerate(G)))
+        F=tuple(F);T=[x for x in range(1<<n) if valid(F,x)]
+        B=Budget(20000000);seed,_=eliminate(F,source_shifts(F,1),3,B,max_pivots=32);K=replay_span(F,seed,3,B)
+        res=[];costs=[]
+        for opt in (False,True):
+            D=Budget(20000000);L=[];C=[];P=[]
+            x,done=adaptive_reopen(n,F,K,3,D,16,1,64,L,C,seed,P,opt)
+            assert x is None or x in T;assert not done or bool(T)==(x is not None)
+            assert len(C)==len(L) and all(verify_onehot_exclusion(F,e,j,q,3,B) for e,j,q in C)
+            assert len(P)==int(done and x is None) and all(verify(F,q,3,B=B) for q in P)
+            res.append((x,done,L));costs.append(sum(D.stats.values()));cost[str(opt)]+=costs[-1]
+            if opt:stats['empty']+=done and x is None;stats['witness']+=x is not None;stats['unknown']+=not done
+        assert res[0]==res[1];stats['cheaper']+=costs[1]<costs[0];stats['equal']+=costs[1]==costs[0];stats['costlier']+=costs[1]>costs[0]
+    assert stats['empty']==94 and stats['witness']==146 and stats['unknown']==0 and cost['True']<cost['False']
+    print('live_holdout',dict(stats),dict(cost))
+    try:adaptive_reopen(1,(((1,0),),),{},3,Budget(0),1,source_proof=());assert False
+    except Exhausted:pass
+
+
 def main():
+    test_live_character_provenance()
     test_mixed_character_provenance()
     test_character_parent_learning()
     test_character_adaptive()
