@@ -102,6 +102,19 @@ def check():
     a,b=sq(Q(145));c,d=sq(Q(2));lo=log((12+a)/(1+d))[0]-b/12+c;hi=log((12+b)/(1+c))[1]-a/12+d
     margins={'top_no_return_min_Y_2.01':2*Q('2.01')-Q(11,12)-hi,'radial_no_hit_R_3.01':Q('3.01')-Q('.04')-hi,'large_top_no_hit_Y_4.032':Q('4.032')-Q(11,12)-hi,'far_source_margin':Q('.1')-Q('.04')}
     for val in margins.values():assert val>0;n+=1
-    return dict(exact_checks=n,clock_span=[float(lo),float(hi)],causal_margin_lower={k:float(v) for k,v in margins.items()},scope='Exact source chart, time-graph, on-shell jet, temporal SBP and causal-current identities; conditional analytical trace theorem; not native kernel, actual independent stencil, or full production')
+    # Extend the previous conservative fully discrete proof to t<=13,
+    # so the original t=12 three-slot lookahead is covered.
+    assert 1+13*Q('.03')<Q('1.2')**2;n+=1
+    assert Q(3,2)*13*Q('1.2')<24;n+=1
+    assert 39**2*2<56**2;n+=1
+    assert 2*48+56==152;n+=1
+    assert 2*152<400;n+=1
+    assert Q(3,2)*13**2*3+48<900;n+=1
+    assert max(Q(10,7),Q(900,400))<=Q(5,2);n+=1
+    assert 4*152+5+Q(7,2)<617;n+=1
+    a13,b13=sq(Q(170));hi13=log((13+b13)/(1+c))[1]-a13/13+d
+    margins13={'top_no_return_min_Y_2.01':2*Q('2.01')-Q(12,13)-hi13,'radial_no_hit_R_3.01':Q('3.01')-Q('.04')-hi13,'large_top_no_hit_Y_4.032':Q('4.032')-Q(12,13)-hi13}
+    for val in margins13.values():assert val>0;n+=1
+    return dict(exact_checks=n,clock_span=[float(lo),float(hi)],causal_margin_lower={k:float(v) for k,v in margins.items()},extended_clock_upper=float(hi13),extended_causal_margin_lower={k:float(v) for k,v in margins13.items()},extended_CFL='dt*(7/dr+10/dy+400)<=1',extended_growth=617,scope='Exact source chart, time-graph, on-shell jet, temporal SBP and causal-current identities; conditional analytical trace theorem; not native kernel, actual independent stencil, or full production')
 
 if __name__=='__main__':print(json.dumps(check(),indent=2))
