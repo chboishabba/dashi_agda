@@ -1128,3 +1128,8 @@ See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndp
 ## Disjunctive affine closure and congruence-charged original residual — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#disjunctive-affine-closure-and-congruence-charged-original-residual--26-november-2026). Both former 30-column stalled controls now have exact minimum8 by five certified empty original onehot branches and an attaining parity assignment. New bounded disjunctive hull and original row conflict floor implemented in both branches (sourceBacked; no native leafClosed claim). Fixed-depth completeness remains unproved, full-depth cost may be exponential, all thirteen universal principal lemmas remain leafOpen; selected certificates are not arbitrary-computation lower bounds.
+
+
+## Signed character-ideal exclusion — 26 November 2026
+
+See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#signed-character-ideal-exclusion-and-indexed-certificate-transport--26-november-2026). Original 30-column parity-capacity/pair-hull obstruction now excluded by replayed F3 character-ideal constant certificate, compact 154-row dependency chain. Affine certificate transport and optional root demand attachment supplied; candidate/sourceBacked, not leafClosed. Fixed shift cap completeness not established or mandatory. All thirteen universal targets remain leafOpen; seven alternative routes retained.
