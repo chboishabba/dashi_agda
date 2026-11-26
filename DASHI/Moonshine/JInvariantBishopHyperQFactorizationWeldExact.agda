@@ -77,7 +77,8 @@ factorizationFromRamanujan hx hy he f n =
   P.≃-trans
     (P.+-cong (P.+-cong (P.+-cong
       (mulCong reflS (symS (dRepeat3 f)) n)
-      (mulCong reflS (symS (dRepeat2 f)) n)) P.≃-refl) P.≃-refl)
+      (mulCong reflS (symS (dRepeat2 f)) n)) P.≃-refl)
+      (mulCong (λ k → P.*-congʳ (P.≃-symm (P.⋆-distrib-neg (+ 5 / 1)))) reflS n))
     (P.≃-trans (factorRaw hx hy he f n)
       (P.+-cong (P.+-cong (mulCong reflS (dRepeat2 (T.defect f)) n)
         P.≃-refl) P.≃-refl))
