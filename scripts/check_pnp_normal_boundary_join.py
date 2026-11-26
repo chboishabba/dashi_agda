@@ -77,6 +77,59 @@ def join(n,F,B):
     T=run(root)
     return (chart(n,T[0])[0] if 0 in T else None),width
 
+def join_exact_one(n, row_bits, B):
+    """Exact sparse boundary join of original one-hot rows on an affine chart.
+
+    row_bits[e][j] = (normal, offset), with original bit offset XOR dot(normal,z).
+    A completed empty table is exact; Budget.Exhausted is not emptiness.
+    """
+    from collections import defaultdict
+    if not row_bits:return 0,0
+    F=tuple(tuple((a,0) for a,b in G) for G in row_bits)
+    root,boundary,space=tree(n,F,B);width=0
+    def coordinates(A,C):
+        # A may have dependent generators; C lies in its span.
+        eq=tuple(value(A,1<<j) for j in range(n));out=[]
+        for s in C:
+            B.pay('onehot_label_map',1+n*(1+len(A)))
+            H=canon((a,(s>>j)&1) for j,a in enumerate(eq))
+            assert H is not None
+            out.append(chart(len(A),H)[0])
+        return tuple(out)
+    def run(node):
+        nonlocal width
+        mask,A,C=node;D=boundary(mask);width=max(width,len(D));T={}
+        if A is None:
+            G=row_bits[mask.bit_length()-1]
+            for j in range(len(G)):
+                B.pay('onehot_candidate',1+len(G))
+                H=canon((a,b^int(i==j)) for i,(a,b) in enumerate(G))
+                if H is None:continue
+                x=chart(n,H)[0];p=value(D,x)
+                if p not in T:T[p]=rows(space(mask),value(space(mask),x))
+        else:
+            L=run(A)
+            if not L:return T
+            R=run(C)
+            if not R:return T
+            E,J=boundary(A[0]),boundary(C[0]);I=intersection(n,space(A[0]),space(C[0]))
+            P,Q=coordinates(E,I),coordinates(J,I);Z=coordinates(E+J,D)
+            buckets=defaultdict(list)
+            for r,H in R.items():
+                B.pay('onehot_hash',1+len(Q));buckets[value(Q,r)].append((r,H))
+            for l,H in L.items():
+                B.pay('onehot_hash',1+len(P))
+                for r,K in buckets[value(P,l)]:
+                    B.pay('onehot_match',1+len(Z));p=value(Z,l|(r<<len(E)))
+                    if p in T:continue
+                    M=canon(H+K);assert M is not None
+                    assert value(D,chart(n,M)[0])==p
+                    T[p]=M
+                    if not D:return T # one receipt suffices for a zero boundary
+        B.pay('onehot_retained',len(T));return T
+    T=run(root)
+    return (chart(n,T[0])[0] if 0 in T else None),width
+
 def solve(n,required,F,cap):
     B=Budget(cap)
     try:
@@ -91,7 +144,36 @@ def solve(n,required,F,cap):
         return x,w,B.stats,True
     except Exhausted:return None,None,B.stats,False
 
+def test_exact_one():
+    rng=Random(3692611);checks=0
+    for n in range(8):
+        for _ in range(70):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(7)))
+            valid=lambda x:all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in F)
+            truth=any(valid(x) for x in range(1<<n));x,w=join_exact_one(n,F,Budget(1000000))
+            assert (x is not None)==truth and (x is None or valid(x));checks+=1
+    for _ in range(400):
+        m=rng.choice((3,6,9,12));n=rng.randrange(1,13)
+        S=[tuple(rng.sample(range(m),3)) for i in range(n)]
+        R=[sum(1<<j for j,s in enumerate(S) if i in s) for i in range(m)]
+        valid=lambda x:all((x&r).bit_count()==1 for r in R)
+        truth=any(valid(x) for x in range(1<<n));P=canon((r,1) for r in R)
+        if P is None:x=None
+        else:
+            u,V=chart(n,P);F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(r)) for r in R)
+            z,w=join_exact_one(len(V),F,Budget(1000000));x=None if z is None else lift(u,V,z)
+        assert (x is not None)==truth and (x is None or valid(x));checks+=1
+    try:join_exact_one(1,(((1,0),),),Budget(0));assert False
+    except Exhausted:pass
+    for n in (8,16,32,64):
+        u,V=chart(n,canon((((1<<n)-1,1),)))
+        F=tuple((value(V,1<<j),u>>j&1) for j in range(n))
+        x,w=join_exact_one(len(V),(F,F,F),Budget(10000000))
+        assert lift(u,V,x).bit_count()==1 and w==n-1
+    print('exact_one_sparse',checks,'controls PASS')
+
 def main():
+    test_exact_one()
     rng=Random(369);fixtures=verified=empty=0
     for n in range(8):
         for _ in range(40):
