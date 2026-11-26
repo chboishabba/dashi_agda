@@ -1,6 +1,67 @@
 # Four-Clay P0 controlling endpoint reverse-solve and constructor/gap matrix
 
 
+## 26 November — signed multi-base refinement diamond, compact convergence and effective divisor selection
+
+Parent ccd57a96c8f0885fc436ccdf0ce4815b71bb784a. Newest-head review at end of round: #1554 4325b354ef22007fdff5ed09b280d3d00ef26f93, #1548 cc11f3a86645cf791572e765638e8ce3cf627988, #1547 4dc83fe5181a1e6e3fba72919e228ddb759da889, #1291 859fe570b65c401da7344f3cff6a2852b0cafc88; Lean #121 352727809b91c57857f9f98aa369991388ffbadc, #122 64db5f277b5cdbf979527797699b91fc8b4289ca, #116 7f8f4b7cde59cc3937ffeef8af3968b08cc96871. #1551 head immediately before roadmap write 5dc2c9bf6b4576e620cdcd49d80b4954b62e9b38 reported nonmergeable; this is not a resolved conflict. No merge/rebase or changes to donor branches, CI, external admission, publication or kernel promotion.
+
+### Donor inspiration, not transport by analogy
+
+Read actual latest Hopf369PhaseRetainingObserverCubeExact (blob 24f13d3db8741af777e4bf586334ed6dd259df4e) on #1554: signed helicity eigenvalue, original complex coefficient and zeroDatum retained through cut/reopen and indexed advancement. Read actual #1548 scripts/check_p0_budgeted_residual_20261125.py blob 1ff1a0d9a7f8bf17b301eb88896467a530888071: budgeted states with omitted contributions explicitly charged, no inference from discarded state. Read actual #1547 scripts/check_f8_d34_signed_refinement.py blob e78da5f3e32f08b5f01105e7c9b8733d87aac7ff: matched physical boundaries/clocks and source+transport signed defect equal total, reverse ledger retains both pieces. These motivate retaining literal finite residual, original phases and independent base/cutoff addresses rather than quotienting through an uncertain denominator. These are structural donors, not a proof that their physical or complexity theorems imply RH. Lean #116 and #121 remain separate frozen aperture/admission owners; no changes or claim of native solver execution. #1554 and #1547 also reported nonmergeable at final query. Four-P0 architecture unchanged; keep YM and PNP separate. Only RH endpoint advanced in this round; NS/BSD/Hodge unresolved rows remain in the preceding controlling matrix.
+
+### R-W2m — literal positive-integer scaling and two-base signed refinement
+
+For positive integer n use ell_n=L(n-1) and a_n(s)=exp(-s ell_n). Let S_N=sum_(n=1..N) a_n. For b>=1 retain base B_b=b a_b, signed residual D_b(N)=S_(bN)-B_b S_N. Zero cutoff N=0 and b=1 retain the actual zero residual. Previous canonical Nat-log all-product law plus original grouped Round11 signed factorial exp-add owner gives a_(bn)=a_b a_n for all positive integer b,n. In the actual zero-based source, product index is j+i*suc j, b=suc i. Therefore the literal finite multiple subsequence prefix equals a_b S_N; the signed residual equals sum_(n=1..bN) (1-b*1_(b|n)) a_n. For b=2 it is the original alternating eta. No replacement analytic function or complex carrier.
+
+On the original source and SAME common terminal cutoff bcN, both refinement orders give
+
+    D_b(cN)+B_b D_c(N) = S_(bcN)-B_b B_c S_N
+                      = D_c(bN)+B_c D_b(N).
+
+This retains both signed residuals before taking limits or dividing. Actual [existing native eta owner](../../DASHI/Analysis/BishopOriginalEtaNativeTrigSelectedSourceWeldExact.agda) extended, no parallel theorem owner: 81a2e655c3da633288368422445185781654fd05 supplies originalRound11AllProductScale, baseScale, baseResidual, residualDiamondAlgebra, sameProductCutoff and originalRound11BaseResidualDiamond; 640421da99d303b3070de64ceae559cd4b65f062 supplies baseMultiplePrefix, originalRound11BaseMultiplePrefixScale and originalRound11BaseMultipleNativeScale by existing prefix induction/distribution and literal SeriesOf transport. Final source blob efc302bb1a69cb00083e201e92fe43364b6fc603 exact remote readback. Reuses canonical log terminal and grouped signed factorial theorem; no new assumption in these finite signatures beyond existing configured inputs. Native proof terms are source-written, not kernel accepted. The additional periodic-weight reindexing is mathematical at this stage, not a new elaborated native proof. Existing dyadic endpoint retained.
+
+### R-W2n — derivative-free sharp uniform tail and overlap gluing
+
+Classical analysis on literal Dirichlet terms; no new classical analytic result or RH claim. For fixed s with sigma=Re(s)>0 and h>=0, split h into m equal pieces. Native exponential product gives a geometric sum and hence, for h>0,
+
+    |1-exp(-s h)| <= |1-exp(-s h/m)|/(1-exp(-sigma h/m)) * (1-exp(-sigma h)).
+
+The absolute factorial-series estimate bounds numerator by |s|h/m * exp(|s|h/m). The first-order factorial expansion of the real denominator gives its ratio to sigma h/m tending to 1. Passing m->infinity gives the exact contractive variation comparison
+
+    |1-exp(-s h)| <= (|s|/sigma) (1-exp(-sigma h)).
+
+For h=0 both sides zero. Applying h=ell_(n+1)-ell_n>=0 (the original monotonicity) and |a_n|=n^(-sigma) (original unit phase) gives
+
+    |a_(n+1)-a_n| <= (|s|/sigma) [n^(-sigma)-(n+1)^(-sigma)].
+
+No continuous real-variable FTC, pointwise increment bound, independent complex logarithm, phase periodicity or derivative-integral producer needed for this estimate. For b>=2, periodic signed weights w_b(n)=1-b*1_(b|n) have zero complete-period sum, and every contiguous partial sum has absolute value <=b-1 (prefix values in [0,b-1]). Finite Abel summation for any 1<=N<=M yields endpoint plus variations. Since |s|/sigma>=1, telescoping yields the sharper all-raw-cutoff inequality on each compact sigma>=delta>0, |s|<=R:
+
+    |sum_(n=N..M) w_b(n) a_n(s)| <= (b-1) (R/delta) N^(-delta).
+
+In particular N>=2^K and q=2/(2+delta), with ell_2>=1/2 and exp(x)>=1+x for x>=0, gives <=(b-1)(R/delta)q^K. This replaces the previous dyadic-shell geometric factor, including its extra endpoint term, without discarding any signed terms. All bases converge compact-uniformly; their limits F_b are holomorphic for Re(s)>0 by the classical locally uniform limit theorem. On Re(s)>1, F_b=(1-b^(1-s))*zeta from the original convergent Dirichlet series. Taking limits in the same common-cutoff diamond, without division, gives
+
+    (1-B_c) F_b = (1-B_b) F_c.
+
+Thus all admissible nonzero-divisor quotient charts agree on overlap by actual source finite identity, rather than a separately selected zeta. This proof is mathematical/classical; native periodic-weight prefix, real/complex norm, subdivision-limit, Abel/SeriesOf completion and holomorphy transports remain unpaid. Do not mark the Bishop analytic construction closed just because this classical argument exists.
+
+### R-W2o — effective adjacent charts without a pi period or irrational-log-ratio premise
+
+For s!=1 let w=1-s, choose integer b>=max(2,2|w|), h=ell_(b+1)-ell_b=log(1+1/b). Elementary original real log bounds give 1/(b+1)<=h<=1/b; e.g. use the positive log series at 1/(b+1), its first term and geometric envelope. Set A=exp(w ell_b), C=exp(w ell_(b+1)). Then |wh|<=1/2, and the absolute factorial tail implies |exp(z)-1-z|<=|z|^2 for |z|<=1/2, hence |exp(wh)-1|>=|w|h/2. Let d=max(|1-A|,|1-C|). If d>=1/2, the bound below already holds. Otherwise |A|>=1/2 and
+
+    2d >= |C-A| = |A| |exp(wh)-1| >= |w|h/4.
+
+Therefore
+
+    max(|1-b^(1-s)|, |1-(b+1)^(1-s)|) >= |1-s|/[8(b+1)] > 0.
+
+No transcendence, pi-period identification or reliance on fixed dyadic divisor. This gives an effective local chart choice even where the dyadic factor is zero. For rational sigma,tau choose b=max(2,ceil(2*(|1-sigma|+|tau|))) and lower gap=max(|1-sigma|,|tau|)/(8*(b+1)). At s=1 the actual harmonic residual F_b(1)=lim(H_(bN)-H_N)=ell_b (classical elementary harmonic/integral squeeze). The divisor 1-b^(1-s) has a simple zero with derivative ell_b>0, so the glued meromorphic continuation on Re(s)>0 has a simple pole at 1 of residue 1. This is the ordinary known continuation of zeta, with an explicit original-source chart construction; it does not exclude zeros in the critical strip, identify all external configured realizations or prove RH. For a native proof still attach the literal local factorial lower bound, strict apartness, numerator value/limit and quotient holomorphy on the original carrier. No universal Clay endpoint promotion.
+
+### Implementation / verification
+
+New [exact rational selector](../../scripts/bishop_eta_multibase.py) commit 35dc1ba9c1c235971e7764927baf90349c7771de blob f7706890aa0007d5ee1d87480e7eea6637cf62d9; [tests](../../scripts/test_bishop_eta_multibase.py) commit 5dc2c9bf6b4576e620cdcd49d80b4954b62e9b38 blob ae4660505d8d60d5a01831714a5febd76e34e3bb. Actual rational log enclosure uses dyadic range reduction and atanh series with exact positive remainder, then Gaussian rational Taylor expansion with absolute l1 tail and log-input perturbation controlled by exp(radius)<=3^ceil(radius). Selected base returns strict positive lower bound using a component of the actual divisor, never a floating estimate. Reject true pole, invalid exact data, insufficient term/cutoff budget; computational resource caps can reject valid points. Rational tail bound and binary search for the smallest allowed dyadic exponent attaining that bound are implemented; not an entire certified zeta-value evaluator, not a native kernel certificate. All finite arithmetic uses Fraction, SymPy symbolic diamond test. Seven unittest methods normal 24.547s and -O 23.372s, each clean exit 0 after separate local execution; exact local git blob hashes match committed remote readback. Cases: 750 original integer-s finite base pairs/cutoffs each checked for periodic residual and diamond, 19 nested log enclosures, 36 exact real divisor controls, 6 positive adjacent selectors incl. nonreal and near pole, 36 cutoff minimization checks, 360 integer-s signed raw tails, 6 rejection checks; symbolic polynomial identity. First selector regression initially failed because the independent fixed 64-term enclosure was too wide (not a counterexample to selector); improved independent enclosure to 128 and reran both modes. Tests validate finite algebra and rational enclosures, not arbitrary complex holomorphy, native Bishop elaboration, or RH. No CI/native Lean or Agda kernel/worker execution. No new source in Lean. Classical provenance: standard Dirichlet/Abel summation, power-series exponential, analytic continuation and harmonic bounds; original Bishop/Bridges, Murray/Csimma and existing DASHI owners retained; cross-lane donors credited for actual structural inspiration only. Next cut: original Bishop periodic-weight/Abel completion and actual selected Weil zero exclusion, NS original physical signed uniform budget, BSD arithmetic-complex comparison and Hodge actual cycle witness. Preserve literal endpoints; no new generic quotient carrier.
+
+
+
 ## 26 November — original Nat-log multiplication, recovered grouped factorial owner, finite eta source closure
 
 Parent 7735f28991a9b7cd3284f5d2e8f8424751840f35; at initial API read #1551 mergeable, as were #1291 859fe570b65c, #1533 f2398bfa5266, #1552 fe44b21d43dc, #1553 37a665f0513e, Lean #121 352727809b91, #116 7f8f4b7cde59 and #122 64db5f277b5c. No merge/rebase, publication or donor-branch edit. External admission held; no native kernel, CI, Codex-native workers or ITIR proof search available. Existing architecture and governance, K/time/history/sign/zero-mode and attribution boundaries retained. This round focuses on RH source implementation; no speculative promotion of NS/BSD/Hodge.
