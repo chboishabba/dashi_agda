@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -124,7 +124,7 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False):
             from check_pnp_normal_boundary_join import join_exact_one_demand
             u,V=chart(n,P)
             F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(a)) for a in R)
-            z,_=join_exact_one_demand(len(V),F,B)
+            z,_=join_exact_one_demand(len(V),F,B,core_trials=core_trials,core_cover=core_cover)
             y=None if z is None else lift(u,V,z)
             if y is not None:assert satisfies(y,P,()) and cover(R,y)
             return y,B.stats,True
@@ -155,6 +155,8 @@ def main():
                     assert (v is not None)==want and (v is not None or done)
                     if v is not None:assert x^v in Y and (x^v).bit_count()<x.bit_count();trades+=1
             y,_,finished=solve(m,S,2000000,demand=True)
+            assert finished and (y is not None)==bool(T) and (y is None or y in T)
+            y,_,finished=solve(m,S,2000000,demand=True,core_cover=8)
             assert finished and (y is not None)==bool(T) and (y is None or y in T)
             x,_,done=solve(m,S,2000000);fixtures+=1
             if x is not None:assert done and x in T;verified+=1
