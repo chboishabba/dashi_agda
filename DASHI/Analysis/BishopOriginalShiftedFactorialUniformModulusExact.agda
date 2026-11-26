@@ -130,7 +130,7 @@ originalShiftedFactorialAbsoluteBelowExpBall
           RP.≃-refl e)
   in
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong splitQ)
+    (RP.∣-∣-cong (RP.≃-symm splitQ))
     (RP.≤-respʳ-≃ target upper)
 
 
