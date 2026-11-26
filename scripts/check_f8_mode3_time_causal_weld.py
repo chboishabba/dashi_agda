@@ -7,6 +7,30 @@ from math import isqrt
 import sympy as S
 
 
+
+def signed_wall_jet(U,P,M,W,Pt,Mt,h,v,bulk_force0):
+    """Original mode3 lower wall, normal index first, arbitrary radial fibre.
+
+    W,Pt,Mt are the SAME native stage RHS. Exact identities require interior
+    Q1=0 and Qdot1=0; keep raw and correction channels separately. Corrected
+    expressions avoid subtracting amplified raw stencil terms in floating point.
+    This is a receiver diagnostic, not a stage projection or solver change.
+    """
+    a,c=1+v,1-v
+    N0,N1=(P[0]-M[0])/2,(P[1]-M[1])/2
+    Nt0,Nt1=(Pt[0]-Mt[0])/2,(Pt[1]-Mt[1])/2
+    q=N0-(U[1]-U[0])/h
+    qt=Nt0-(W[1]-W[0])/h
+    d1=(-3*U[0]+4*U[1]-U[2])/(2*h)
+    dt1=(-3*W[0]+4*W[1]-W[2])/(2*h)
+    d2=(U[2]-2*U[1]+U[0])/h**2
+    yy=(Pt[0]-bulk_force0)/(2*a)+(Mt[0]-bulk_force0)/(2*c)
+    return dict(Q=q,Qdot=qt,interior_Q1=N1-(U[2]-U[0])/(2*h),
+                interior_Qdot1=Nt1-(W[2]-W[0])/(2*h),
+                raw=(d1,dt1,d2),corrected=(N0,Nt0,yy),
+                raw_minus_corrected=(-2*q-(N1-N0),-2*qt-(Nt1-Nt0),yy+2*q/h+2*qt/c))
+
+
 def check():
     n=0
     def eq(a,b=0):
@@ -70,6 +94,18 @@ def check():
     # semidiscrete time differentiation (not a raw time-difference claim).
     W0,W1,W2,N0t,N1t,Q0t=S.symbols('W0 W1 W2 N0t N1t Q0t')
     eq(((-3*W0+4*W1-W2)/(2*h)+2*Q0t+N1t-2*N0t).subs({W1:W0+h*(N0t-Q0t),W2:W0+2*h*N1t}))
+    # Executable same-stage rational receiver, nonzero signed SAT history.
+    hh=Q(1,10);vv=Q(-3,5);aa,cc=1+vv,1-vv
+    PP=[Q(3),Q(5),Q(-2)];MM=[Q(1),Q(-3),Q(4)]
+    UU=[Q(2),Q(7,3),Q(2)+hh*(PP[1]-MM[1])]
+    WW=[(aa*p+cc*m)/2 for p,m in zip(PP,MM)]
+    FF=[Q(7,4),Q(-5,7)];sat=Q(11,3)
+    pp=[aa*(PP[1]-PP[0])/hh+FF[0],aa*(PP[2]-PP[0])/(2*hh)+FF[1]]
+    mm=[-cc*(MM[1]-MM[0])/hh+FF[0]+sat,-cc*(MM[2]-MM[0])/(2*hh)+FF[1]]
+    j=signed_wall_jet(UU,PP,MM,WW,pp,mm,hh,vv,FF[0])
+    eq(j['interior_Q1']);eq(j['interior_Qdot1']);eq(j['Qdot'],-sat/2)
+    assert j['Q']!=0;n+=1
+    for raw,corrected,delta in zip(j['raw'],j['corrected'],j['raw_minus_corrected']):eq(raw-corrected,delta)
     # Countermodel: frozen pure outgoing transport, left one-sided
     # closure and centered interior. Exact discrete exponential state.
     x=S.symbols('x',positive=True);lplus=x+S.sqrt(1+x*x);lminus=x-S.sqrt(1+x*x)
