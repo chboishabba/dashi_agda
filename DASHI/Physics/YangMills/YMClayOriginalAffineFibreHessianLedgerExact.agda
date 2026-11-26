@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.YMClayOriginalAffineFibreHessianLedgerExact where
 -- Generation of Effective Actions in a Small Field Approximation and a
 -- Coupling Constant Renormalization in Four Dimensions",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
--- DOI: 10.1007/BF01217741.
+-- DOI: 10.1007/BF01215223.
 --
 -- Tadeusz Bałaban,
 -- "Large Field Renormalization. I",
@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.YMClayOriginalAffineFibreHessianLedgerExact where
 --
 -- Tadeusz Bałaban,
 -- "Large Field Renormalization. II",
--- Communications in Mathematical Physics 122 (1989), 203--221.
+-- Communications in Mathematical Physics 122 (1989), 355--392.
 -- DOI: 10.1007/BF01238433.
 --
 -- DASHI CONTRIBUTION
