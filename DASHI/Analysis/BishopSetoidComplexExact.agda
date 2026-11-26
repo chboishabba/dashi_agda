@@ -23,10 +23,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
+open import Data.Product.Base using (_×_; _,_)
+
 import Real as BishopReal
 import RealProperties as BishopP
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpOrder
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
@@ -289,3 +292,60 @@ bishopSetoidComplexExponentialLevel = machineChecked
 
 bishopSetoidComplexConfiguredTrigIdentificationLevel : ProofLevel
 bishopSetoidComplexConfiguredTrigIdentificationLevel = conditional
+
+
+-- Same-carrier imaginary-axis constructor and projection. This restores
+-- the existing Round11 consumer API without adding an analytic premise
+-- beyond the actual imaginary exponential product supplied by its producer.
+pureImaginary : BishopReal.ℝ → BishopComplex
+pureImaginary y = complex BishopReal.0ℝ y
+
+imaginaryTrigCoordinates :
+  BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopComplex
+imaginaryTrigCoordinates T y =
+  complex (Elementary.bishopCos (dataSet T) y)
+          (Elementary.bishopSin (dataSet T) y)
+
+imaginaryExpIsTrigCoordinates :
+  (T : BishopSetoidComplexTranscendentals) → ∀ y →
+  expC T (pureImaginary y) ≈C imaginaryTrigCoordinates T y
+imaginaryExpIsTrigCoordinates T y =
+  complex-equivalent
+    (BishopP.≃-trans
+      (BishopP.*-cong ExpOrder.bishopExpZero BishopP.≃-refl)
+      (BishopP.*-identityˡ (Elementary.bishopCos (dataSet T) y)))
+    (BishopP.≃-trans
+      (BishopP.*-cong ExpOrder.bishopExpZero BishopP.≃-refl)
+      (BishopP.*-identityˡ (Elementary.bishopSin (dataSet T) y)))
+
+imaginaryExponentialProductGivesAddition :
+  (T : BishopSetoidComplexTranscendentals) → ∀ x y →
+  expC T (pureImaginary (BishopReal._+_ x y))
+    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+  let sx = Elementary.bishopSin (dataSet T) x
+      sy = Elementary.bishopSin (dataSet T) y
+      cx = Elementary.bishopCos (dataSet T) x
+      cy = Elementary.bishopCos (dataSet T) y
+  in
+  BishopReal._≃_
+    (Elementary.bishopSin (dataSet T) (BishopReal._+_ x y))
+    (BishopReal._+_ (BishopReal._*_ sx cy) (BishopReal._*_ cx sy))
+  ×
+  BishopReal._≃_
+    (Elementary.bishopCos (dataSet T) (BishopReal._+_ x y))
+    (BishopReal._-_ (BishopReal._*_ cx cy) (BishopReal._*_ sx sy))
+imaginaryExponentialProductGivesAddition T x y product =
+  let
+    coordinates = ≈C-trans
+      (≈C-sym (imaginaryExpIsTrigCoordinates T (BishopReal._+_ x y)))
+      (≈C-trans product
+        (mulCongruent (imaginaryExpIsTrigCoordinates T x)
+          (imaginaryExpIsTrigCoordinates T y)))
+    sx = Elementary.bishopSin (dataSet T) x
+    sy = Elementary.bishopSin (dataSet T) y
+    cx = Elementary.bishopCos (dataSet T) x
+    cy = Elementary.bishopCos (dataSet T) y
+  in
+  BishopP.≃-trans (imEquivalent coordinates)
+    (BishopP.+-comm (BishopReal._*_ cx sy) (BishopReal._*_ sx cy))
+  , reEquivalent coordinates
