@@ -155,3 +155,152 @@ numeratorDeterminant w x y z =
 -- arbitrary Bishop components. Normalized SO3 matrix and its full
 -- projective inverse / setoid chart transport are separate source welds.
 -- Do not coerce B._≃_ to Agda propositional equality for Chart.
+
+
+-- Actual normalized matrix on the original Bishop reals. A nonzero ray
+-- is admitted only with constructive apartness of its norm square.
+record Vec3 : Set where
+  constructor vec3
+  field v0 v1 v2 : B.ℝ
+open Vec3 public
+
+record Matrix3 : Set where
+  constructor matrix3
+  field col0 col1 col2 : Vec3
+open Matrix3 public
+
+column0 column1 column2 : Matrix3 → Vec3
+column0 = col0
+column1 = col1
+column2 = col2
+
+dot3 : Vec3 → Vec3 → B.ℝ
+dot3 (vec3 a b c) (vec3 d e f) =
+  B._+_ (B._*_ a d) (B._+_ (B._*_ b e) (B._*_ c f))
+
+scale3 : B.ℝ → Vec3 → Vec3
+scale3 i (vec3 a b c) = vec3 (B._*_ i a) (B._*_ i b) (B._*_ i c)
+
+scaleMatrix : B.ℝ → Matrix3 → Matrix3
+scaleMatrix i (matrix3 a b c) = matrix3 (scale3 i a) (scale3 i b) (scale3 i c)
+
+norm4 : B.ℝ → B.ℝ → B.ℝ → B.ℝ → B.ℝ
+norm4 w x y z = (B._+_ (B._*_ w w) (B._+_ (B._*_ x x) (B._+_ (B._*_ y y) (B._*_ z z))))
+
+numerator : B.ℝ → B.ℝ → B.ℝ → B.ℝ → Matrix3
+numerator w x y z = matrix3
+  (vec3 (B._-_ (B._+_ (B._*_ w w) (B._+_ (B._*_ x x) (B._+_ (B._*_ y y) (B._*_ z z)))) (B._+_ (B._+_ (B._*_ y y) (B._*_ z z)) (B._+_ (B._*_ y y) (B._*_ z z)))) (B._+_ (B._+_ (B._*_ x y) (B._*_ w z)) (B._+_ (B._*_ x y) (B._*_ w z))) (B._+_ (B._-_ (B._*_ x z) (B._*_ w y)) (B._-_ (B._*_ x z) (B._*_ w y))))
+  (vec3 (B._+_ (B._-_ (B._*_ x y) (B._*_ w z)) (B._-_ (B._*_ x y) (B._*_ w z))) (B._-_ (B._+_ (B._*_ w w) (B._+_ (B._*_ x x) (B._+_ (B._*_ y y) (B._*_ z z)))) (B._+_ (B._+_ (B._*_ x x) (B._*_ z z)) (B._+_ (B._*_ x x) (B._*_ z z)))) (B._+_ (B._+_ (B._*_ y z) (B._*_ w x)) (B._+_ (B._*_ y z) (B._*_ w x))))
+  (vec3 (B._+_ (B._+_ (B._*_ x z) (B._*_ w y)) (B._+_ (B._*_ x z) (B._*_ w y))) (B._+_ (B._-_ (B._*_ y z) (B._*_ w x)) (B._-_ (B._*_ y z) (B._*_ w x))) (B._-_ (B._+_ (B._*_ w w) (B._+_ (B._*_ x x) (B._+_ (B._*_ y y) (B._*_ z z)))) (B._+_ (B._+_ (B._*_ x x) (B._*_ y y)) (B._+_ (B._*_ x x) (B._*_ y y)))))
+
+rotation : (w x y z : B.ℝ) → B._≄0 (norm4 w x y z) → Matrix3
+rotation w x y z nz =
+  scaleMatrix (Inv._⁻¹ (norm4 w x y z) nz) (numerator w x y z)
+
+normLeadingOne : (f : Frame3) →
+  B._≃_ (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f)) (norm f)
+normLeadingOne (frame3 x y z) =
+  BP.+-cong (BP.*-identityˡ B.1ℝ) BP.≃-refl
+
+leadingOneApart : (f : Frame3) →
+  B._≄0 (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f))
+leadingOneApart f = inj₂ (BP.<-respʳ-≃ (BP.≃-sym (normLeadingOne f)) (normPositive f))
+
+frameRotation : Frame3 → Matrix3
+frameRotation f = rotation B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f) (leadingOneApart f)
+
+gramScaleScalar : (i a b c d e f : B.ℝ) → B._≃_ (B._+_ (B._*_ (B._*_ i a) (B._*_ i d)) (B._+_ (B._*_ (B._*_ i b) (B._*_ i e)) (B._*_ (B._*_ i c) (B._*_ i f)))) (B._*_ (B._*_ i i) (B._+_ (B._*_ a d) (B._+_ (B._*_ b e) (B._*_ c f))))
+gramScaleScalar i a b c d e f =
+  let open BP.ℝ-Solver in
+  solve 7 (λ i a b c d e f → (((i ⊗ a) ⊗ (i ⊗ d)) ⊕ (((i ⊗ b) ⊗ (i ⊗ e)) ⊕ ((i ⊗ c) ⊗ (i ⊗ f)))) ⊜ ((i ⊗ i) ⊗ ((a ⊗ d) ⊕ ((b ⊗ e) ⊕ (c ⊗ f)))))
+    BP.≃-refl i a b c d e f
+
+dotScale : (i : B.ℝ) (u v : Vec3) →
+  B._≃_ (dot3 (scale3 i u) (scale3 i v)) (B._*_ (B._*_ i i) (dot3 u v))
+dotScale i (vec3 a b c) (vec3 d e f) = gramScaleScalar i a b c d e f
+
+rotationGram00 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column0 (rotation w x y z nz)) (column0 (rotation w x y z nz))) B.1ℝ
+rotationGram00 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column0 (numerator w x y z)) (column0 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram00 w x y z))
+      (Rec.inverseSquareCancelsSquare (norm4 w x y z) nz))
+
+rotationGram01 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column0 (rotation w x y z nz)) (column1 (rotation w x y z nz))) B.0ℝ
+rotationGram01 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column0 (numerator w x y z)) (column1 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram01 w x y z))
+      (BP.*-zeroʳ (Rec.inverseSquare (norm4 w x y z) nz)))
+
+rotationGram02 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column0 (rotation w x y z nz)) (column2 (rotation w x y z nz))) B.0ℝ
+rotationGram02 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column0 (numerator w x y z)) (column2 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram02 w x y z))
+      (BP.*-zeroʳ (Rec.inverseSquare (norm4 w x y z) nz)))
+
+rotationGram11 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column1 (rotation w x y z nz)) (column1 (rotation w x y z nz))) B.1ℝ
+rotationGram11 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column1 (numerator w x y z)) (column1 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram11 w x y z))
+      (Rec.inverseSquareCancelsSquare (norm4 w x y z) nz))
+
+rotationGram12 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column1 (rotation w x y z nz)) (column2 (rotation w x y z nz))) B.0ℝ
+rotationGram12 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column1 (numerator w x y z)) (column2 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram12 w x y z))
+      (BP.*-zeroʳ (Rec.inverseSquare (norm4 w x y z) nz)))
+
+rotationGram22 : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (dot3 (column2 (rotation w x y z nz)) (column2 (rotation w x y z nz))) B.1ℝ
+rotationGram22 w x y z nz =
+  BP.≃-trans (dotScale (Inv._⁻¹ (norm4 w x y z) nz)
+    (column2 (numerator w x y z)) (column2 (numerator w x y z)))
+    (BP.≃-trans (BP.*-congˡ (numeratorGram22 w x y z))
+      (Rec.inverseSquareCancelsSquare (norm4 w x y z) nz))
+
+-- determinant is defined on columns of the SAME matrix above.
+det3 : Matrix3 → B.ℝ
+det3 (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) =
+  (B._+_ (B._-_ (B._*_ a (B._-_ (B._*_ e j) (B._*_ f h))) (B._*_ b (B._-_ (B._*_ d j) (B._*_ f g)))) (B._*_ c (B._-_ (B._*_ d h) (B._*_ e g))))
+
+detScaleScalar : (i a b c d e f g h j : B.ℝ) → B._≃_ (B._+_ (B._-_ (B._*_ (B._*_ i a) (B._-_ (B._*_ (B._*_ i e) (B._*_ i j)) (B._*_ (B._*_ i f) (B._*_ i h)))) (B._*_ (B._*_ i b) (B._-_ (B._*_ (B._*_ i d) (B._*_ i j)) (B._*_ (B._*_ i f) (B._*_ i g))))) (B._*_ (B._*_ i c) (B._-_ (B._*_ (B._*_ i d) (B._*_ i h)) (B._*_ (B._*_ i e) (B._*_ i g))))) (B._*_ (B._*_ i (B._*_ i i)) (B._+_ (B._-_ (B._*_ a (B._-_ (B._*_ e j) (B._*_ f h))) (B._*_ b (B._-_ (B._*_ d j) (B._*_ f g)))) (B._*_ c (B._-_ (B._*_ d h) (B._*_ e g)))))
+detScaleScalar i a b c d e f g h j =
+  let open BP.ℝ-Solver in
+  solve 10 (λ i a b c d e f g h j → ((((i ⊗ a) ⊗ (((i ⊗ e) ⊗ (i ⊗ j)) ⊖ ((i ⊗ f) ⊗ (i ⊗ h)))) ⊖ ((i ⊗ b) ⊗ (((i ⊗ d) ⊗ (i ⊗ j)) ⊖ ((i ⊗ f) ⊗ (i ⊗ g))))) ⊕ ((i ⊗ c) ⊗ (((i ⊗ d) ⊗ (i ⊗ h)) ⊖ ((i ⊗ e) ⊗ (i ⊗ g))))) ⊜ ((i ⊗ (i ⊗ i)) ⊗ (((a ⊗ ((e ⊗ j) ⊖ (f ⊗ h))) ⊖ (b ⊗ ((d ⊗ j) ⊖ (f ⊗ g)))) ⊕ (c ⊗ ((d ⊗ h) ⊖ (e ⊗ g))))))
+    BP.≃-refl i a b c d e f g h j
+
+detScale : (i : B.ℝ) (r : Matrix3) →
+  B._≃_ (det3 (scaleMatrix i r)) (B._*_ (B._*_ i (B._*_ i i)) (det3 r))
+detScale i (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) =
+  detScaleScalar i a b c d e f g h j
+
+cubeCancelRearrange : (i n : B.ℝ) → B._≃_ (B._*_ (B._*_ i (B._*_ i i)) (B._*_ n (B._*_ n n))) (B._*_ (B._*_ i n) (B._*_ (B._*_ i i) (B._*_ n n)))
+cubeCancelRearrange i n =
+  let open BP.ℝ-Solver in
+  solve 2 (λ i n → ((i ⊗ (i ⊗ i)) ⊗ (n ⊗ (n ⊗ n))) ⊜ ((i ⊗ n) ⊗ ((i ⊗ i) ⊗ (n ⊗ n))))
+    BP.≃-refl i n
+
+rotationDetOne : (w x y z : B.ℝ) (nz : B._≄0 (norm4 w x y z)) →
+  B._≃_ (det3 (rotation w x y z nz)) B.1ℝ
+rotationDetOne w x y z nz =
+  let n = norm4 w x y z
+      i = Inv._⁻¹ n nz
+  in BP.≃-trans (detScale i (numerator w x y z))
+    (BP.≃-trans (BP.*-congˡ (numeratorDeterminant w x y z))
+      (BP.≃-trans (cubeCancelRearrange i n)
+        (BP.≃-trans (BP.*-cong (Inv.*-inverseˡ n nz)
+          (Rec.inverseSquareCancelsSquare n nz))
+          (BP.*-identityˡ B.1ℝ))))
+
+-- All six upper triangular Gram entries and the determinant now refer
+-- to the actual normalized matrix; the reverse entries follow by dot
+-- symmetry. Projective inverse and setoid transport remain to attach.
