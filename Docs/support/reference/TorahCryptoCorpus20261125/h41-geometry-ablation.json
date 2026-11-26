@@ -1,4 +1,420 @@
 {
+  "pairs": {
+    "exodus": {
+      "deltas": [
+        {
+          "chapter": 16,
+          "blocks": 9,
+          "delta": 6
+        },
+        {
+          "chapter": 17,
+          "blocks": 4,
+          "delta": 5
+        },
+        {
+          "chapter": 18,
+          "blocks": 6,
+          "delta": 1
+        },
+        {
+          "chapter": 19,
+          "blocks": 6,
+          "delta": -1
+        },
+        {
+          "chapter": 20,
+          "blocks": 5,
+          "delta": -12
+        },
+        {
+          "chapter": 21,
+          "blocks": 7,
+          "delta": -4
+        },
+        {
+          "chapter": 22,
+          "blocks": 5,
+          "delta": 17
+        },
+        {
+          "chapter": 23,
+          "blocks": 6,
+          "delta": 11
+        },
+        {
+          "chapter": 24,
+          "blocks": 4,
+          "delta": 2
+        },
+        {
+          "chapter": 25,
+          "blocks": 8,
+          "delta": -31
+        },
+        {
+          "chapter": 26,
+          "blocks": 9,
+          "delta": -24
+        },
+        {
+          "chapter": 27,
+          "blocks": 5,
+          "delta": 6
+        },
+        {
+          "chapter": 28,
+          "blocks": 10,
+          "delta": 42
+        },
+        {
+          "chapter": 29,
+          "blocks": 11,
+          "delta": 44
+        },
+        {
+          "chapter": 30,
+          "blocks": 8,
+          "delta": -47
+        },
+        {
+          "chapter": 31,
+          "blocks": 4,
+          "delta": -12
+        },
+        {
+          "chapter": 32,
+          "blocks": 9,
+          "delta": -28
+        },
+        {
+          "chapter": 33,
+          "blocks": 5,
+          "delta": -19
+        },
+        {
+          "chapter": 34,
+          "blocks": 9,
+          "delta": 14
+        },
+        {
+          "chapter": 35,
+          "blocks": 7,
+          "delta": 30
+        },
+        {
+          "chapter": 36,
+          "blocks": 9,
+          "delta": -1
+        },
+        {
+          "chapter": 37,
+          "blocks": 6,
+          "delta": 51
+        },
+        {
+          "chapter": 38,
+          "blocks": 7,
+          "delta": -11
+        },
+        {
+          "chapter": 39,
+          "blocks": 9,
+          "delta": 40
+        },
+        {
+          "chapter": 40,
+          "blocks": 7,
+          "delta": 28
+        }
+      ],
+      "observed": 107,
+      "positive": 14,
+      "negative": 11,
+      "ties": 0,
+      "signFlipTwoSided": 0.4060421116875191,
+      "qualification": "Exploratory chapter-cluster sign-flip, symmetric/exchangeable chapter differences assumption, reused corpus; not confirmatory significance."
+    },
+    "genesis": {
+      "deltas": [
+        {
+          "chapter": 1,
+          "blocks": 7,
+          "delta": -7
+        },
+        {
+          "chapter": 2,
+          "blocks": 5,
+          "delta": -13
+        },
+        {
+          "chapter": 3,
+          "blocks": 6,
+          "delta": 33
+        },
+        {
+          "chapter": 4,
+          "blocks": 5,
+          "delta": -14
+        },
+        {
+          "chapter": 5,
+          "blocks": 6,
+          "delta": 6
+        },
+        {
+          "chapter": 6,
+          "blocks": 5,
+          "delta": -11
+        },
+        {
+          "chapter": 7,
+          "blocks": 5,
+          "delta": 13
+        },
+        {
+          "chapter": 8,
+          "blocks": 5,
+          "delta": -51
+        },
+        {
+          "chapter": 9,
+          "blocks": 5,
+          "delta": 6
+        },
+        {
+          "chapter": 10,
+          "blocks": 5,
+          "delta": 5
+        },
+        {
+          "chapter": 11,
+          "blocks": 6,
+          "delta": -9
+        },
+        {
+          "chapter": 12,
+          "blocks": 4,
+          "delta": 14
+        },
+        {
+          "chapter": 13,
+          "blocks": 4,
+          "delta": -12
+        },
+        {
+          "chapter": 14,
+          "blocks": 5,
+          "delta": 7
+        },
+        {
+          "chapter": 15,
+          "blocks": 4,
+          "delta": 3
+        },
+        {
+          "chapter": 16,
+          "blocks": 3,
+          "delta": 17
+        },
+        {
+          "chapter": 17,
+          "blocks": 6,
+          "delta": 22
+        },
+        {
+          "chapter": 18,
+          "blocks": 7,
+          "delta": -20
+        },
+        {
+          "chapter": 19,
+          "blocks": 9,
+          "delta": 3
+        },
+        {
+          "chapter": 20,
+          "blocks": 4,
+          "delta": 12
+        },
+        {
+          "chapter": 21,
+          "blocks": 7,
+          "delta": 17
+        },
+        {
+          "chapter": 22,
+          "blocks": 6,
+          "delta": 22
+        },
+        {
+          "chapter": 23,
+          "blocks": 4,
+          "delta": 24
+        },
+        {
+          "chapter": 24,
+          "blocks": 16,
+          "delta": 36
+        },
+        {
+          "chapter": 25,
+          "blocks": 7,
+          "delta": 12
+        },
+        {
+          "chapter": 26,
+          "blocks": 8,
+          "delta": 28
+        },
+        {
+          "chapter": 27,
+          "blocks": 10,
+          "delta": 54
+        },
+        {
+          "chapter": 28,
+          "blocks": 5,
+          "delta": 22
+        },
+        {
+          "chapter": 29,
+          "blocks": 7,
+          "delta": -1
+        },
+        {
+          "chapter": 30,
+          "blocks": 9,
+          "delta": 22
+        },
+        {
+          "chapter": 31,
+          "blocks": 13,
+          "delta": 24
+        },
+        {
+          "chapter": 32,
+          "blocks": 8,
+          "delta": 18
+        },
+        {
+          "chapter": 33,
+          "blocks": 4,
+          "delta": 2
+        },
+        {
+          "chapter": 34,
+          "blocks": 7,
+          "delta": -7
+        },
+        {
+          "chapter": 35,
+          "blocks": 6,
+          "delta": 27
+        },
+        {
+          "chapter": 36,
+          "blocks": 8,
+          "delta": 10
+        },
+        {
+          "chapter": 37,
+          "blocks": 9,
+          "delta": 7
+        },
+        {
+          "chapter": 38,
+          "blocks": 7,
+          "delta": -19
+        },
+        {
+          "chapter": 39,
+          "blocks": 6,
+          "delta": -49
+        },
+        {
+          "chapter": 40,
+          "blocks": 5,
+          "delta": -61
+        },
+        {
+          "chapter": 41,
+          "blocks": 13,
+          "delta": -11
+        },
+        {
+          "chapter": 42,
+          "blocks": 9,
+          "delta": 38
+        },
+        {
+          "chapter": 43,
+          "blocks": 9,
+          "delta": 55
+        },
+        {
+          "chapter": 44,
+          "blocks": 8,
+          "delta": -14
+        },
+        {
+          "chapter": 45,
+          "blocks": 7,
+          "delta": 21
+        },
+        {
+          "chapter": 46,
+          "blocks": 7,
+          "delta": 61
+        },
+        {
+          "chapter": 47,
+          "blocks": 9,
+          "delta": 45
+        },
+        {
+          "chapter": 48,
+          "blocks": 6,
+          "delta": 9
+        },
+        {
+          "chapter": 49,
+          "blocks": 6,
+          "delta": 20
+        },
+        {
+          "chapter": 50,
+          "blocks": 6,
+          "delta": 14
+        }
+      ],
+      "observed": 430,
+      "positive": 35,
+      "negative": 15,
+      "ties": 0,
+      "signFlipTwoSided": 0.018004272200183094,
+      "qualification": "Exploratory chapter-cluster sign-flip, symmetric/exchangeable chapter differences assumption, reused corpus; not confirmatory significance."
+    }
+  },
+  "vocabAudit": {
+    "completeWords": 24,
+    "missing": [
+      "ישיר",
+      "השירה",
+      "אשירה",
+      "גאה",
+      "גאה",
+      "סוס",
+      "ורכבו",
+      "רמה",
+      "בים",
+      "עזי",
+      "וזמרת",
+      "יה"
+    ],
+    "finalFragment": "ל",
+    "qualification": "Manually segmented known target, checked glyph concatenation against actual fixture. Final fragment excluded. Exact training surface-form membership, not lexeme or root analysis."
+  },
   "candidates": [
     {
       "labels": [
