@@ -106,4 +106,18 @@ class ExactControls(unittest.TestCase):
         self.assertEqual(4*2*Q(15,8)*32,480)
         print('prime amplitude bounds',P,'correction amplitude bounds',C,flush=True)
 
+    def test_gram_correction_derivative_budget(self):
+        P=polynomial_constants(Q(5,4));C=polynomial_constants(Q(21,32))
+        lam=Q(53248,7)
+        def B(j):return Q(3,32) if j==0 else 4*lam**(j-1)
+        def Sm(m):return sum(comb(m,j)*B(m-j)*(P[j] if j<=8 else 3) for j in range(m+1))
+        def second(r):
+            coeff=min(6*Sm(m)/Q(r)**m for m in (4,8,16,24,32,48))
+            D=[sum(comb(j,i)*C[i]*(18*r)**(j-i) for i in range(j+1)) for j in range(3)]
+            return 3*coeff*(Q(5,4)*D[2]+8*D[1]+480*D[0])
+        for r,target in ((17505,Q(1)),(19348,Q(1,100))):
+            self.assertLessEqual(second(r),target)
+            self.assertGreater(second(r-1),target)
+            self.assertLess(second(2*r),second(r))
+
 if __name__=='__main__':unittest.main()
