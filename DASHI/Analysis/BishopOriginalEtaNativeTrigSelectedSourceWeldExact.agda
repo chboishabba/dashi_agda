@@ -40,6 +40,9 @@ import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
 import DASHI.Analysis.BishopOriginalNativeComplexExpAdditionFromTrigExact as Native
 import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Log
+import DASHI.Analysis.BishopOriginalEtaEvenSourceScaleFiniteWeldExact as Scale
+import DASHI.Analysis.BishopOriginalEtaZetaEvenCutoffSeriesWeldExact as SeriesWeld
+import DASHI.Analysis.BishopOriginalXiPolynomialReflectionSameCarrierExact as Xi
 import DASHI.Foundations.BishopSignedFactorialDegreeBinomialExact as Signed
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
@@ -234,3 +237,41 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
       (Dirichlet.dirichletPartial Selected.sourceTerms s (suc i * n))
       (Dirichlet.dirichletPartial Selected.sourceTerms s n)
       (baseScale s i) (baseScale s j)
+
+
+  -- Original subsequence at multiples of each positive integer.
+  -- Accumulate on the existing prefix owner and transport to SeriesOf.
+  baseMultiplePrefix :
+    (s : Analytic.BishopComplex) (i n : Nat) → Analytic.BishopComplex
+  baseMultiplePrefix s i n =
+    Eta.originalBishopPrefix
+      (λ j → Selected.sourceTerms s (j + i * suc j)) n
+
+  originalRound11BaseMultiplePrefixScale :
+    (s : Analytic.BishopComplex) (i n : Nat) →
+    Eta._≈C_ (baseMultiplePrefix s i n)
+      (Analytic._*C_ (Selected.sourceTerms s i)
+        (Eta.originalBishopPrefix (Selected.sourceTerms s) n))
+  originalRound11BaseMultiplePrefixScale s i zero =
+    Scale.originalZeroIsScaleTimesZero (Selected.sourceTerms s i)
+  originalRound11BaseMultiplePrefixScale s i (suc n) =
+    Eta.≈C-trans
+      (Scale.complexAddBothCongruent
+        (originalRound11BaseMultiplePrefixScale s i n)
+        (originalRound11AllProductScale s i n))
+      (Scale.originalScaleDistributesOverPair
+        (Selected.sourceTerms s i)
+        (Eta.originalBishopPrefix (Selected.sourceTerms s) n)
+        (Selected.sourceTerms s n))
+
+  originalRound11BaseMultipleNativeScale :
+    (s : Analytic.BishopComplex) (i n : Nat) →
+    Eta._≈C_ (baseMultiplePrefix s i n)
+      (Analytic._*C_ (Selected.sourceTerms s i)
+        (Dirichlet.dirichletPartial Selected.sourceTerms s n))
+  originalRound11BaseMultipleNativeScale s i n =
+    Eta.≈C-trans
+      (originalRound11BaseMultiplePrefixScale s i n)
+      (Xi.complexMultiplyCongruent (Xi.complexRefl (Selected.sourceTerms s i))
+        (SeriesWeld.originalBishopPrefixIsNativeSeries
+          (Selected.sourceTerms s) n))
