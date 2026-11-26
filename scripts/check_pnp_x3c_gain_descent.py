@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -128,7 +128,7 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
         if character_degree>=0:
             from check_pnp_character_ideal import demand_character_close
             F=tuple(tuple((1<<j,0) for j in bits(a)) for a in R)
-            Q,y=demand_character_close(n,F,P,B,degree=character_degree,quotient_cap=character_quotient_cap,path_steps=character_path_steps,section_cap=character_section_cap)
+            Q,y=demand_character_close(n,F,P,B,degree=character_degree,quotient_cap=character_quotient_cap,path_steps=character_path_steps,section_cap=character_section_cap,adaptive_nodes=character_adaptive_nodes,adaptive_degree=character_adaptive_degree)
             if Q is None:return None,B.stats,True
             B.pay('character_source_rank',len(Q)-len(P))
             if y is not None:
@@ -215,6 +215,8 @@ def main():
     assert B['character_path_verify']>0 and not B['character_module_dimension']
     y,B,done=solve(18,S,20000000,indexed=True,demand=True,character_degree=1,character_section_cap=2,character_path_steps=30)
     assert done and y is not None and cover(incidence(18,S),y)
+    y,B,done=solve(18,S,20000000,indexed=True,demand=True,character_degree=1,character_adaptive_nodes=16)
+    assert done and y is not None and cover(incidence(18,S),y) and B['character_adaptive_verify']>0
     assert not solve(18,S,0,character_degree=1,character_quotient_cap=64)[2]
     rng=Random(369);fixtures=verified=empty=unknown=trades=compares=0
     for m in (3,6,9,12):
