@@ -130,19 +130,52 @@ def join_exact_one(n, row_bits, B):
     T=run(root)
     return (chart(n,T[0])[0] if 0 in T else None),width
 
-def join_exact_one_demand(n, row_bits, B, required=()):
+def onehot_exclusion_core(n,G,H,B):
+    """Certified weaker empty demand for a single exact-one row, or None.
+
+    H is a consistent canonical demand. Return a conjunction entailed by H,
+    inconsistent with every original one-hot pattern, not just a rank test.
+    """
+    D=intersection(n,span(a for a,b in H),span(a for a,b in G))
+    target=value(D,chart(n,H)[0]);diff=set()
+    for j in range(len(G)):
+        B.pay('core_pattern',1+len(G)+len(D))
+        Q=canon((a,b^int(i==j)) for i,(a,b) in enumerate(G))
+        if Q is None:continue
+        v=value(D,chart(n,Q)[0])^target
+        if not v:return None
+        diff.add(v)
+    out=[];full=(1<<len(D))-1
+    while diff:
+        p=0
+        # Conditional expectation: choose a parity detecting >= half the
+        # nonzero differences, without enumerating the dual space.
+        for j in range(len(D)):
+            rest=full^((1<<(j+1))-1)
+            def score(q):
+                B.pay('core_parity',len(diff))
+                return sum(1 if v&rest else 2*((v&q).bit_count()%2) for v in diff)
+            if score(p|(1<<j))>score(p):p|=1<<j
+        nxt={v for v in diff if not (v&p).bit_count()%2}
+        assert 2*len(nxt)<=len(diff) and p
+        out.append((lift(0,D,p),(p&target).bit_count()%2));diff=nxt
+    E=canon(out);assert E is not None and canon(H+E)==H
+    return E
+
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
     Budget exhaustion propagates (not an empty fibre).
     """
+    assert core_trials>=0
     H=canon(required)
     if H is None:return None,0
     if not row_bits:
         assert not H
         return 0,0
     F=tuple(tuple((a,0) for a,b in G) for G in row_bits)
-    root,_,space=tree(n,F,B);memo={};maps={};width=0
+    root,_,space=tree(n,F,B);memo={};empty={};maps={};width=0
     assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
     def structure(A,C):
         key=(A[0],C[0])
@@ -151,11 +184,17 @@ def join_exact_one_demand(n, row_bits, B, required=()):
             E=U+V;eq=tuple(value(E,1<<j) for j in range(n))
             maps[key]=(U,V,I,eq)
         return maps[key]
-    def ask(node,H):
+    def remember_empty(mask,H):
+        empty.setdefault(mask,[]).append(H)
+    def ask(node,H,learn=True):
         nonlocal width
         key=(node[0],H);B.pay('demand_query',1+len(H))
         if key in memo:B.pay('demand_cache');return memo[key]
         mask,A,C=node;out=None
+        for E in empty.get(mask,()):
+            B.pay('demand_subsumption',1+len(E)+len(H))
+            if canon(H+E)==H:
+                B.pay('demand_core_hit');return None
         if A is None:
             G=row_bits[mask.bit_length()-1]
             for j in range(len(G)):
@@ -180,33 +219,67 @@ def join_exact_one_demand(n, row_bits, B, required=()):
             B.pay('demand_linear_projection',1+len(B0)*(n+len(relations)))
             pins=canon((lift(0,A0,v),(v&rhs).bit_count()%2) for v in relations)
             if pins is None:
-                memo[key]=None;return None
+                memo[key]=None;remember_empty(mask,H);return None
             # Fixed pins plus independent free normals determine the entire
             # right demand; never branch on a pinned observation coordinate.
             basis=span(a for a,b in pins);P=[]
             for s in span(A0):
                 C0=span(basis+(s,))
                 if len(C0)>len(basis):P.append(s);basis=C0
-            width=max(width,len(P));todo=[(0,0)]
+            width=max(width,len(P));todo=[pins]
+            # B0 may be dependent: select a coefficient representation for
+            # each right demand normal. All choices agree on the left pins.
+            eq0=tuple(value(B0,1<<j) for j in range(n));pull={}
             while todo:
-                q,p=todo.pop();B.pay('demand_prefix',1+q)
-                X=ask(A,canon(pins+rows(P[:q],p)))
+                Hleft=todo.pop();B.pay('demand_prefix',1+len(Hleft))
+                X=ask(A,Hleft,learn)
                 if X is None:continue
-                x=chart(n,canon(X))[0];v=value(P,x)
-                assert v&((1<<q)-1)==p
+                x=chart(n,canon(X))[0]
                 K=canon(rows(I,value(I,x))+tuple((r,b^((l&x).bit_count()%2)) for l,(r,b) in zip(L,R)))
                 assert K is not None
-                Y=ask(C,K)
+                Y=ask(C,K,learn)
                 if Y is not None:
                     out=canon(X+Y);assert out is not None
                     z=chart(n,out)[0]
                     assert all((s&z).bit_count()%2==b for s,b in H)
                     break
-                # Disjoint first-difference cubes exclude the entire failed
-                # projected label, not just the particular left witness.
-                for j in range(len(P)-1,q-1,-1):
-                    B.pay('demand_split');todo.append((j+1,(v^(1<<j))&((1<<(j+1))-1)))
+                # Compress a completed empty demand using original row
+                # conflicts, optionally followed by bounded deletion probes.
+                E=K
+                if learn:
+                    for i in bits(C[0]):
+                        B.pay('core_row')
+                        E0=onehot_exclusion_core(n,row_bits[i],K,B)
+                        if E0 is not None and len(E0)<len(E):E=E0
+                        if not E:break
+                    for row in E[:core_trials]:
+                        if row not in E:continue
+                        C0=tuple(q for q in E if q!=row)
+                        B.pay('demand_core_probe',1+len(C0))
+                        if ask(C,C0,False) is None:
+                            E=C0;B.pay('demand_core_drop')
+                if E!=K:remember_empty(C[0],E)
+                F0=[]
+                for s,b in E:
+                    if s not in pull:
+                        B.pay('demand_core_map',1+n*(1+len(B0)))
+                        Q=canon((a,s>>j&1) for j,a in enumerate(eq0));assert Q is not None
+                        v=chart(len(B0),Q)[0]
+                        pull[s]=(lift(0,A0,v),(v&rhs).bit_count()%2)
+                    l,c=pull[s];F0.append((l,b^c))
+                F0=canon(F0);assert F0 is not None and satisfies(x,F0,())
+                # Exact disjoint affine subtraction Hleft \ F0. A row
+                # already implied by Hleft contributes no sibling.
+                Q=Hleft;children=[]
+                for l,b in F0:
+                    B.pay('demand_split')
+                    other=canon(Q+((l,b^1),))
+                    if other is not None:children.append(other)
+                    Q=canon(Q+((l,b),));assert Q is not None
+                B.pay('demand_excluded_dimension',len(Q)-len(Hleft))
+                todo.extend(reversed(children))
         memo[key]=out
+        if out is None:remember_empty(mask,H)
         return out
     ans=ask(root,H)
     return (None if ans is None else chart(n,canon(ans))[0]),width
@@ -283,7 +356,37 @@ def test_exact_one_demand():
         assert lift(u,V,x).bit_count()==1 and w==n-1
     print('exact_one_demand',checks,'controls PASS')
 
+def test_onehot_exclusion_core():
+    rng=Random(2611369);checks=cores=0
+    for n in range(9):
+        for _ in range(100):
+            G=tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(9)))
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            E=onehot_exclusion_core(n,G,H,Budget(10000000))
+            valid=lambda x:sum(b^((a&x).bit_count()%2) for a,b in G)==1
+            truth=any(valid(x) and satisfies(x,H,()) for x in range(1<<n))
+            assert (E is None)==truth;checks+=1
+            if E is not None:
+                assert canon(H+E)==H and len(E)<=len(G).bit_length()
+                assert not any(valid(x) and satisfies(x,E,()) for x in range(1<<n))
+                cores+=1
+    for d in range(1,8):
+        n=(1<<d)-1;G=tuple((1<<i,0) for i in range(n))
+        H=canon((sum(((j>>i)&1)<<(j-1) for j in range(1,n+1)),0) for i in range(d))
+        assert len(onehot_exclusion_core(n,G,H,Budget(100000000)))==d
+    for n in (8,16,32,64,128):
+        u,V=chart(n,canon((((1<<n)-1,1),)))
+        G=tuple((value(V,1<<j),u>>j&1) for j in range(n))
+        x=chart(len(V),canon((a,b^int(j<3)) for j,(a,b) in enumerate(G)))[0]
+        H=canon(rows(tuple(1<<i for i in range(len(V))),x))
+        E=onehot_exclusion_core(len(V),G,H,Budget(100000000))
+        assert E is not None and canon(H+E)==H and len(E)==2
+        assert all(canon(E+tuple((a,b^int(i==j)) for i,(a,b) in enumerate(G))) is None for j in range(n))
+    print('onehot_exclusion_core',checks,cores,'controls PASS')
+
 def main():
+    test_onehot_exclusion_core()
     test_exact_one_demand()
     test_exact_one()
     rng=Random(369);fixtures=verified=empty=0
