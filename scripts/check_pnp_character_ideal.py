@@ -126,65 +126,175 @@ def demand_exclusion(n,F,H,B,degree=1,p=3,max_pivots=4096):
     return True
 
 
-def character_consequences(F,shifts,probes,p,B,max_pivots=4096):
-    """Sound affine equations from projectively equal character normal forms.
+def quotient_normal(A,basis,p,B):
+    """Reduce every pivot column, including those below free columns."""
+    A=dict(A);R={}
+    while A:
+        s=max(A);w=A[s]
+        if s in basis:
+            C=basis[s];B.pay('character_normal',1+len(C));add(A,C,-w,p)
+        else:
+            B.pay('character_free');R[s]=A.pop(s)
+    return R
 
-    Each reduced form differs from its original character by a replayed
-    source combination. None means contradiction, not failure to refine.
-    With a capped row space, the resulting affine hull may be too large.
-    """
-    proof,empty=eliminate(F,shifts,p,B,max_pivots=max_pivots)
-    if empty:
-        if not verify(F,compact(proof,B),p,B=B):raise AssertionError('invalid character contradiction')
-        return None
-    # Reconstruct every used row independently of the producer's pivots.
-    R=replay(F,proof,p,B=B)
-    if R is None:raise AssertionError('invalid character proof')
+
+def replay_span(F,proof,p,B,pairs=True):
+    """Rebuild a span from replayed source combinations; rechart can merge pivots."""
+    R=replay(F,proof,p,pairs,B)
+    if R is None:return None
     basis={}
     for A in R:
-        s=max(A);assert A[s]==1 and s not in basis;basis[s]=A
-    order=sorted(basis,reverse=True);groups={};pins=[]
-    for s in sorted(set(probes)|{0}):
-        A={s:1};B.pay('character_normal_scan',1+len(order))
-        for t in order:
-            if t in A:
-                B.pay('character_normal_reduce',1+len(basis[t]));add(A,basis[t],-A[t],p)
-        if not A:return None # A character cannot vanish at any original point.
+        C=dict(A)
+        while C and max(C) in basis:
+            s=max(C);D=basis[s];B.pay('character_replay_pivot',1+len(D));add(C,D,-C[s],p)
+        if C:
+            s=max(C);c=pow(C[s],-1,p);basis[s]={t:w*c%p for t,w in C.items()}
+    return basis
+
+
+def character_relation_span(F,shifts,queries,p,B,max_pivots=4096):
+    """Retain a replayed proof span and explicit proportionality certificates."""
+    proof,empty=eliminate(F,shifts,p,B,max_pivots=max_pivots)
+    basis=replay_span(F,proof,p,B)
+    if basis is None:raise AssertionError('invalid character proof')
+    if empty:
+        assert not quotient_normal({0:1},basis,p,B)
+        return proof,(),0,basis
+    groups={};relations=[]
+    for s in sorted(set(queries)|{0}):
+        B.pay('character_query');A=quotient_normal({s:1},basis,p,B)
+        if not A:return proof,(),s,basis
         c=A[min(A)];inv=pow(c,-1,p)
         B.pay('character_projective_key',1+len(A))
         key=tuple(sorted((t,w*inv%p) for t,w in A.items()))
         if key in groups:
-            t,b=groups[key];ratio=c*pow(b,-1,p)%p
-            if ratio not in (1,p-1):return None # characters take only +/-1
-            pins.append((s^t,int(ratio!=1)))
+            t,d=groups[key];ratio=c*pow(d,-1,p)%p
+            relations.append((s,t,ratio))
+            if ratio not in (1,p-1):break
         else:groups[key]=(s,c)
-    B.pay('character_pin_canon',1+len(pins))
-    return canon(pins)
+    return proof,tuple(relations),None,basis
 
 
-def demand_refinement(n,F,H,B,degree=1,p=3,max_pivots=4096):
-    """Lift all discovered relations back into the original row-normal span."""
+def character_relations(F,shifts,queries,p,B,max_pivots=4096):
+    proof,relations,zero,_=character_relation_span(F,shifts,queries,p,B,max_pivots)
+    return proof,relations,zero
+
+
+def span_accepts_relations(basis,relations,zero,p,B):
+    if zero is not None:
+        return not relations and zero>=0 and not quotient_normal({zero:1},basis,p,B)
+    for s,t,c in relations:
+        if min(s,t)<0 or not 0<c<p:return False
+        A={s:1};add(A,{t:1},-c,p)
+        if quotient_normal(A,basis,p,B):return False
+    return True
+
+
+def verify_relations(F,proof,relations,zero,p,B):
+    """Replay from original generators; verify the claimed proportionalities."""
+    basis=replay_span(F,proof,p,B)
+    return basis is not None and span_accepts_relations(basis,relations,zero,p,B)
+
+
+def relation_pins(relations,zero,p):
+    if zero is not None or any(c not in (1,p-1) for s,t,c in relations):return None
+    return canon((s^t,int(c!=1)) for s,t,c in relations)
+
+
+def transport_relations(relations,zero,V,a,p):
+    return (tuple((value(V,s),value(V,t),c*(-1)**(((s^t)&a).bit_count()%2)%p)
+                  for s,t,c in relations),None if zero is None else value(V,zero))
+
+
+def character_consequences(F,shifts,probes,p,B,max_pivots=4096):
+    """Verified affine consequences; None is a certified contradiction."""
+    proof,relations,zero,basis=character_relation_span(F,shifts,probes,p,B,max_pivots)
+    if not span_accepts_relations(basis,relations,zero,p,B):raise AssertionError('invalid character consequence')
+    return relation_pins(relations,zero,p)
+
+
+def quotient_reopen(n,F,basis,p,B,cap=64):
+    """Attempt an original witness using a capped finite character module.
+
+    Full ideal closure makes its multiplication maps commuting involutions.
+    Partial spans need not have that property: check the eigensection and
+    independently verify the original row assignment. Failure is UNKNOWN.
+    """
+    if cap<1 or 0 in basis:return None
+    S=tuple(s for s,b in canon((s,0) for G in F for s,b in G))
+    Q=[0];seen={0};M={};i=0
+    while i<len(Q):
+        t=Q[i];i+=1
+        for s in S:
+            B.pay('character_module_edge');A=quotient_normal({s^t:1},basis,p,B)
+            M[s,t]=A
+            for a in A:
+                if a not in seen:
+                    if len(Q)>=cap:return None
+                    Q.append(a);seen.add(a)
+    B.pay('character_module_dimension',len(Q))
+    def act(s,v):
+        out={}
+        for t,w in v.items():
+            A=M[s,t];B.pay('character_module_act',1+len(A));add(out,A,w,p)
+        return out
+    def eigen(s,v,b):
+        A=act(s,v);add(A,v,-(-1)**b,p);return not A
+    v={0:1};pins=[]
+    for s in S:
+        w=act(s,v);u=dict(v);add(u,w,1,p);b=0
+        if not u:
+            b=1;u=dict(v);add(u,w,-1,p)
+        if not u or not eigen(s,u,b):return None
+        pins.append((s,b));v=u
+    if not all(eigen(s,v,b) for s,b in pins):return None
+    P=canon(pins);assert P is not None
+    x=chart(n,P)[0]
+    B.pay('character_module_verify',1+sum(map(len,F)))
+    if not all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return None
+    return x
+
+
+def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0):
+    """Sound original affine refinement and optional original witness.
+
+    Share one replayed elimination span across both consumers. None carrier
+    certifies empty; a carrier without witness is not a feasibility decision.
+    """
     B.pay('character_demand',1+len(H));P=canon(H)
-    if P is None:return None
+    if P is None:return None,None
     u,V=chart(n,P);B.pay('character_pullback',1+sum(len(G) for G in F)*(1+len(V)))
     R=tuple(tuple((value(V,s),b^((s&u).bit_count()%2)) for s,b in G) for G in F)
-    # Representative for every projected source character, plus zero.
     reps={0:0}
     for G in F:
         for s,b in G:reps.setdefault(value(V,s),s)
-    # Keep every relation in the original span, including combinations created
-    # by Gaussian canonicalization of projective equalities.
-    freq=tuple(reps);equations=tuple((value(freq,1<<j),1<<j) for j in range(len(V)))
-    # Solve each lifted normal as a linear combination of source frequencies.
-    Q=character_consequences(R,source_shifts(R,degree,B),freq,p,B,max_pivots)
-    if Q is None:return None
+    freq=tuple(reps);eq=tuple(value(freq,1<<j) for j in range(len(V)))
+    proof,rel,zero,basis=character_relation_span(R,source_shifts(R,degree,B),freq,p,B,max_pivots)
+    if not span_accepts_relations(basis,rel,zero,p,B):raise AssertionError('invalid character consequence')
+    Q=relation_pins(rel,zero,p)
+    if Q is None:return None,None
     pins=[]
     for s,b in Q:
         B.pay('character_reopen',1+len(freq)*max(1,len(V)))
-        C=canon((v,(s&j).bit_count()%2) for v,j in equations);assert C is not None
+        C=canon((v,(s>>j)&1) for j,v in enumerate(eq));assert C is not None
         a=lift(0,[reps[t] for t in freq],chart(len(freq),C)[0])
         pins.append((a,b^((a&u).bit_count()%2)))
-    return canon(P+tuple(pins))
+    C=canon(P+tuple(pins));assert C is not None
+    if not quotient_cap:return C,None
+    x=chart(n,C)[0]
+    B.pay('character_pin_verify',1+sum(map(len,F)))
+    if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return C,x
+    z=quotient_reopen(len(V),R,basis,p,B,quotient_cap)
+    if z is not None:
+        x=lift(u,V,z)
+        assert all((s&x).bit_count()%2==b for s,b in C)
+        assert all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+        return C,x
+    return C,None
+
+
+def demand_refinement(n,F,H,B,degree=1,p=3,max_pivots=4096):
+    return demand_character_close(n,F,H,B,degree,p,max_pivots)[0]
 
 
 def test_character_consequences():
@@ -247,7 +357,55 @@ def test_character_consequences():
     print('character_consequences',dict(full=full,empty=empty,rank=rank,bounded=bounded,transport=transport), 'pair_hull_rank_3_to_5 PASS')
 
 
+def test_constructive_character_quotient():
+    from random import Random
+    from check_pnp_affine_normal_components import Exhausted
+    rng=Random(369261127);full=bounded=transported=0
+    for n in range(7):
+        for _ in range(60):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(7)))
+            valid=lambda x:all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+            truth=[x for x in range(1<<n) if valid(x)]
+            for p in (3,5,7):
+                B=Budget(10000000)
+                proof,rel,zero=character_relations(F,range(1<<n),range(1<<n),p,B)
+                assert verify_relations(F,proof,rel,zero,p,B) and (relation_pins(rel,zero,p) is not None)==bool(truth)
+                basis=replay_span(F,proof,p,B);x=quotient_reopen(n,F,basis,p,B,1<<n)
+                assert (x is not None)==bool(truth) and (x is None or valid(x))
+                if truth:
+                    P=relation_pins(rel,zero,p)
+                    assert P==canon((s,(s&truth[0]).bit_count()%2) for s in range(1<<n) if all((s&(x^truth[0])).bit_count()%2==0 for x in truth))
+                    if rel:
+                        s,t,c=rel[0];assert not verify_relations(F,proof,((s,t,-c%p),),None,p,B)
+                a=rng.randrange(1<<n);V=tuple(rng.randrange(1<<n) for i in range(rng.randrange(n+1)))
+                R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+                r,z=transport_relations(rel,zero,V,a,p)
+                assert verify_relations(R,transport_proof(proof,V,a,p,B),r,z,p,B)
+                full+=1;transported+=1
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            T=[x for x in truth if all((s&x).bit_count()%2==b for s,b in H)]
+            for degree in (0,1):
+                P,w=demand_character_close(n,F,H,Budget(10000000),degree=degree,max_pivots=32,quotient_cap=8)
+                if P is None:assert not T and w is None
+                else:
+                    assert canon(P+H)==P and all(all((s&x).bit_count()%2==b for s,b in P) for x in T)
+                    assert w is None or w in T
+                bounded+=1
+    S=[(6,9,17),(2,9,13),(2,14,16),(0,5,15),(3,6,13),(1,13,15),(10,13,17),(0,4,8),(6,12,17),(3,8,12),(0,5,16),(4,7,9),(7,11,14),(10,12,17),(0,5,17),(1,3,4),(5,9,16),(6,10,16),(7,10,11),(1,2,13),(1,7,12),(4,7,15),(8,11,14),(1,8,14),(3,4,15),(5,10,11),(2,11,15),(2,9,12),(6,8,14),(0,3,16)]
+    R=tuple(sum(1<<j for j,s in enumerate(S) if i in s) for i in range(18))
+    u,V=chart(30,canon((r,1) for r in R))
+    F=tuple(tuple((value(V,1<<j),u>>j&1) for j in range(30) if r>>j&1) for r in R)
+    B=Budget(10000000);P,w=demand_character_close(len(V),F,(),B,quotient_cap=64)
+    assert len(P)==9 and w is not None and all((lift(u,V,w)&r).bit_count()==1 for r in R)
+    assert B.stats['character_module_dimension']==4
+    try:demand_character_close(len(V),F,(),Budget(0),quotient_cap=64);assert False
+    except Exhausted:pass
+    print(dict(constructive_full=full,constructive_bounded=bounded,constructive_transport=transported,module_control='PASS'))
+
+
 def main():
+    test_constructive_character_quotient()
     test_character_consequences()
     from random import Random
     from check_pnp_affine_normal_components import Exhausted
