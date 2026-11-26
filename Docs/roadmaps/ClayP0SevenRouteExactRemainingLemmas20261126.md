@@ -1163,3 +1163,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## Sparse parent exclusion lift and scoped adaptive learning — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#sparse-parent-exclusion-lift-and-scoped-adaptive-learning--26-november-2026). Existing adaptive engine now exports certified root-child exclusions and supports independently replayable sparse parent bit-zero certificates and affine transport (sourceBacked). No compulsory complete quotient, no universal affordable local certificate discovery, no arbitrary-computation lower bound. All thirteen principal universal obligations remain leafOpen; native admission waiting.
+
+
+## Proof-carrying mixed character refinement and recursive one-hot gluing — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#proof-carrying-mixed-character-refinement-and-recursive-one-hot-gluing--26-november-2026). Mixed inherited/local character contradictions now retain original-generator proof provenance; inconsistent onehot choices and complete sibling families compose into replayable parent refutations (sourceBacked, optional). No uniform polynomial proof size/discovery or unrestricted lower bound. All thirteen principal universal obligations remain leafOpen; native admission waiting.
