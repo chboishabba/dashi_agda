@@ -216,3 +216,8 @@ isometry is mathematically impossible in the proposed form.
 
 Neither new source module has been kernel-checked here; Agda, Lean
 and Lake executables are not present. No CI used.
+
+
+## AW metric/action handoff (26 Nov 2026)
+
+[Canonical AW schedule and receipt](https://github.com/chboishabba/dashi_agda/blob/94cc953a6e128b523a02402c0a35c131f8ed3dc6/Docs/roadmaps/TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md) covers all AV-A–J obligations; AW3 consumes existing SameMetricTSFVKK and actual selected horizontal bilinear weld. Selected four-dimensional scalar densitized inverse H=v g^-1, v=sqrt(-det H), g=v H^-1 now has analytical differential BIDI for all symmetric directions including shift/mixed components, fixed physical mass V=v M and stress action variation; independent dV carries explicit residual, variable M Ward requires compensating stress. Ten exact rational/radical mixed tangent and stress checks passed local SymPy, not a physical measurement or native kernel theorem. Cone/signature alone cannot recover density, actual selected observer metric equality and actual YM source remain. AW1/AW2 original complex and OS predicates/clock still unpaid; no changes to original YM scope, no paid flags.
