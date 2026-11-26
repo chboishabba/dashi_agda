@@ -1,0 +1,181 @@
+{
+  "tested": 7020,
+  "accepted": 5,
+  "domainSizes": [
+    1,
+    1,
+    4,
+    5,
+    4,
+    21,
+    1,
+    6,
+    5,
+    6,
+    4,
+    21,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    1,
+    3,
+    4,
+    1,
+    5,
+    6,
+    6,
+    1,
+    4,
+    5,
+    1,
+    5,
+    6,
+    5,
+    6,
+    3,
+    6,
+    6,
+    1,
+    6,
+    5,
+    21,
+    1,
+    5,
+    21,
+    5,
+    5,
+    5,
+    4,
+    4,
+    1,
+    4,
+    5,
+    5,
+    6,
+    4,
+    5,
+    6,
+    1,
+    21,
+    5,
+    6,
+    5,
+    1,
+    5,
+    6,
+    4,
+    5,
+    6,
+    6,
+    4,
+    6,
+    1,
+    1
+  ],
+  "disjointCount": 3,
+  "lowerBound": 8,
+  "witnesses": [
+    {
+      "columns": [
+        10,
+        12,
+        16,
+        18
+      ],
+      "delta": 22,
+      "original": "דעםי",
+      "alternate": "עדלת",
+      "output": "ויטמשהאתיעודלהילותולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+    },
+    {
+      "columns": [
+        25,
+        27,
+        31,
+        33
+      ],
+      "delta": 6,
+      "original": "התבו",
+      "alternate": "דךגה",
+      "output": "ויטמשהאתידועלהיםויולךיהודאךהיםגרהחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+    },
+    {
+      "columns": [
+        58,
+        60,
+        64,
+        66
+      ],
+      "delta": 10,
+      "original": "לריק",
+      "alternate": "רלבג",
+      "output": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםרחלבהובבגעוהמים"
+    },
+    {
+      "columns": [
+        59,
+        60,
+        65,
+        66
+      ],
+      "delta": 10,
+      "original": "חרבק",
+      "alternate": "עלשג",
+      "output": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלעלבהוישגעוהמים"
+    },
+    {
+      "columns": [
+        59,
+        60,
+        65,
+        66
+      ],
+      "delta": 16,
+      "original": "חרבק",
+      "alternate": "ציקב",
+      "output": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלציבהויקבעוהמים"
+    }
+  ],
+  "disjoint": [
+    {
+      "columns": [
+        10,
+        12,
+        16,
+        18
+      ],
+      "delta": 22,
+      "original": "דעםי",
+      "alternate": "עדלת",
+      "output": "ויטמשהאתיעודלהילותולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+    },
+    {
+      "columns": [
+        25,
+        27,
+        31,
+        33
+      ],
+      "delta": 6,
+      "original": "התבו",
+      "alternate": "דךגה",
+      "output": "ויטמשהאתידועלהיםויולךיהודאךהיםגרהחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+    },
+    {
+      "columns": [
+        58,
+        60,
+        64,
+        66
+      ],
+      "delta": 10,
+      "original": "לריק",
+      "alternate": "רלבג",
+      "output": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםרחלבהובבגעוהמים"
+    }
+  ],
+  "qualification": "Strong oracle mask: true per-column H33 sheet, true word boundary, two named target anchors, all true H35 marginal sums. Every alternate string is distinct and orthographically permitted, not necessarily grammatical or genuine Torah. All target-dependent constraints explicitly oracle. Rectangles are candidate DASHI perturbations, not source law. Counts certify residual nonuniqueness under these exact combined constraints."
+}
