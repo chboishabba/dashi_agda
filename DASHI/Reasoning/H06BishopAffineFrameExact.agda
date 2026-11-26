@@ -304,3 +304,87 @@ rotationDetOne w x y z nz =
 -- All six upper triangular Gram entries and the determinant now refer
 -- to the actual normalized matrix; the reverse entries follow by dot
 -- symmetry. Projective inverse and setoid transport remain to attach.
+
+
+-- The reverse coordinate reconstruction is an explicit source theorem.
+-- This handles negative determinants too, using the SAME apartness.
+firstBackward : (p : Pivot2) (u v : B.ℝ) →
+  B._≃_ (firstCoordinate p
+    (B._+_ (B._*_ (a p) u) (B._*_ (b p) v))
+    (B._+_ (B._*_ (c p) u) (B._*_ (d p) v))) u
+firstBackward (pivot2 a b c d nz) u v =
+  let i = Inv._⁻¹ (det2 a b c d) nz
+      open BP.ℝ-Solver
+  in BP.≃-trans
+    (solve 7 (λ a b c d u v i →
+      (i ⊗ (d ⊗ (a ⊗ u ⊕ b ⊗ v) ⊖ b ⊗ (c ⊗ u ⊕ d ⊗ v)))
+      ⊜ ((i ⊗ (a ⊗ d ⊖ b ⊗ c)) ⊗ u))
+      BP.≃-refl a b c d u v i)
+    (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ (det2 a b c d) nz))
+      (BP.*-identityˡ u))
+
+secondBackward : (p : Pivot2) (u v : B.ℝ) →
+  B._≃_ (secondCoordinate p
+    (B._+_ (B._*_ (a p) u) (B._*_ (b p) v))
+    (B._+_ (B._*_ (c p) u) (B._*_ (d p) v))) v
+secondBackward (pivot2 a b c d nz) u v =
+  let i = Inv._⁻¹ (det2 a b c d) nz
+      open BP.ℝ-Solver
+  in BP.≃-trans
+    (solve 7 (λ a b c d u v i →
+      (i ⊗ (a ⊗ (c ⊗ u ⊕ d ⊗ v) ⊖ c ⊗ (a ⊗ u ⊕ b ⊗ v)))
+      ⊜ ((i ⊗ (a ⊗ d ⊖ b ⊗ c)) ⊗ v))
+      BP.≃-refl a b c d u v i)
+    (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ (det2 a b c d) nz))
+      (BP.*-identityˡ v))
+
+-- Literal graph evaluation of the ORIGINAL AGr(2,4) chart.
+-- Does not turn the coordinate list into physical spacetime coordinates.
+record Point4 : Set where
+  constructor point4
+  field coord0 coord1 coord2 coord3 : B.ℝ
+
+graphPoint : Affine6 → B.ℝ → B.ℝ → Point4
+graphPoint (affine6 a b c d e f) u v = point4 u v
+  (B._+_ e (B._+_ (B._*_ a u) (B._*_ b v)))
+  (B._+_ f (B._+_ (B._*_ c u) (B._*_ d v)))
+
+-- On any admissible pivot the two selected coordinate values minus the
+-- corresponding origin components recover the original parameters.
+recoverFirst : (p : Pivot2) (ou ov u v : B.ℝ) →
+  B._≃_
+    (firstCoordinate p
+      (B._-_ (B._+_ ou (B._+_ (B._*_ (a p) u) (B._*_ (b p) v))) ou)
+      (B._-_ (B._+_ ov (B._+_ (B._*_ (c p) u) (B._*_ (d p) v))) ov))
+    u
+recoverFirst (pivot2 a b c d nz) ou ov u v =
+  let i = Inv._⁻¹ (det2 a b c d) nz
+      open BP.ℝ-Solver
+  in BP.≃-trans
+    (solve 9 (λ a b c d ou ov u v i →
+      i ⊗ (d ⊗ ((ou ⊕ (a ⊗ u ⊕ b ⊗ v)) ⊖ ou)
+        ⊖ b ⊗ ((ov ⊕ (c ⊗ u ⊕ d ⊗ v)) ⊖ ov))
+      ⊜ ((i ⊗ (a ⊗ d ⊖ b ⊗ c)) ⊗ u))
+      BP.≃-refl a b c d ou ov u v i)
+    (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ (det2 a b c d) nz))
+      (BP.*-identityˡ u))
+
+recoverSecond : (p : Pivot2) (ou ov u v : B.ℝ) →
+  B._≃_
+    (secondCoordinate p
+      (B._-_ (B._+_ ou (B._+_ (B._*_ (a p) u) (B._*_ (b p) v))) ou)
+      (B._-_ (B._+_ ov (B._+_ (B._*_ (c p) u) (B._*_ (d p) v))) ov))
+    v
+recoverSecond (pivot2 a b c d nz) ou ov u v =
+  let i = Inv._⁻¹ (det2 a b c d) nz
+      open BP.ℝ-Solver
+  in BP.≃-trans
+    (solve 9 (λ a b c d ou ov u v i →
+      i ⊗ (a ⊗ ((ov ⊕ (c ⊗ u ⊕ d ⊗ v)) ⊖ ov)
+        ⊖ c ⊗ ((ou ⊕ (a ⊗ u ⊕ b ⊗ v)) ⊖ ou))
+      ⊜ ((i ⊗ (a ⊗ d ⊖ b ⊗ c)) ⊗ v))
+      BP.≃-refl a b c d ou ov u v i)
+    (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ (det2 a b c d) nz))
+      (BP.*-identityˡ v))
+
+-- Source-specific point transport, not yet all-chart setoid equivalence.
