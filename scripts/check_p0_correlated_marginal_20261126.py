@@ -137,7 +137,12 @@ def portfolio(n,rows,f,cap):
     from check_pnp_adaptive_signed_escape import adaptive
     from check_pnp_grouped_quotient_floor import conditioned
     from check_pnp_partial_quotient import solve as partial, conflict_floor
-    share=cap//15;F=cnf_flats(f)
+    from check_pnp_signed_moment_filter import solve as moment
+    share=cap//16;F=cnf_flats(f)
+    x,_,done=moment(n,rows,F,share)
+    if done:
+        if x is not None:assert valid(x,n,rows,f)
+        return x,True,'signed-moment'
     x,_,done=partial(n,rows,F,share)
     if done:
         if x is not None:assert valid(x,n,rows,f)
