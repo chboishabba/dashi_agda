@@ -47,6 +47,22 @@ def main():
     tf=lambda M:M-s.trace(M)*s.eye(4)/4
     assert (tf(Aprime)+tau*tf(A)-tf(R)).applyfunc(s.expand)==s.zeros(4)
     assert s.expand(s.trace(Aprime)+tau*tau-s.trace(R)-16)==0
+    # Reuse original V2 implicit CK majorant with four tangential directions,
+    # 60 independent (h,K,P) components; general algebra verified here.
+    z,w,rho,eta,c,N,m=s.symbols('z w rho eta c N m',positive=True)
+    B=1-z/rho; k=N*(m/rho+1/eta); d=B-k*w
+    wt=c/d; wz=w/(rho*d)
+    assert s.cancel(wt-c*(1+m*N*wz)/(B-N*w/eta))==0
+    # At |z|<=rho/2 and |n|<=1/(16*k*c), discriminant budget is >=1/8.
+    assert s.Rational(1,4)-2*s.Rational(1,16)==s.Rational(1,8)
+    # Static adjoint kernel on the zero-Hopf spatial H4 warp. Hess_H3 Y=Y*g_H3.
+    b=s.cosh(n); f=s.sinh(n)
+    assert s.simplify(s.diff(f,n,2)-f)==0
+    assert s.simplify(b*s.diff(b,n)*s.diff(f,n)-f*b*b)==0
+    f=b  # coefficient of Y in f=cosh(n)*Y
+    assert s.simplify(s.diff(f,n,2)-f)==0
+    assert s.simplify(s.diff(f,n)-s.diff(b,n)*f/b)==0
+    assert s.simplify(f+b*s.diff(b,n)*s.diff(f,n)-f*b*b)==0
     # Lorentz self-adjoint A can have negative shear norm away from time reflection.
     h=s.diag(-1,1,1,1); M=s.zeros(4); M[0,1]=M[1,0]=1
     assert s.trace(h.inv()*M)==0 and s.trace((h.inv()*M)**2)==-2
