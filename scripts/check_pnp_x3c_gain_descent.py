@@ -160,7 +160,41 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
     except (Exhausted,RecursionError):return None,B.stats,False
 
 
+def test_character_source():
+    from check_pnp_character_ideal import demand_refinement
+    rng=Random(3627);stalled=improved=witness=rank_gain=source_points=source_covers=events=0
+    for trial in range(36):
+        m=18;S=[]
+        for _ in range(5):
+            a=list(range(m));rng.shuffle(a);S.extend(tuple(a[j:j+3]) for j in range(0,m,3))
+        for _ in range(20):
+            i,j=rng.sample(range(6,len(S)),2);a,b=rng.choice(S[i]),rng.choice(S[j])
+            if a not in S[j] and b not in S[i]:
+                S[i]=tuple(b if t==a else t for t in S[i])
+                S[j]=tuple(a if t==b else t for t in S[j])
+        planted=set(map(frozenset,S[:6]));rng.shuffle(S);n=len(S);R=incidence(m,S);seed=0
+        for T in planted:seed|=1<<next(j for j,s in enumerate(S) if frozenset(s)==T)
+        assert cover(R,seed)
+        P,x=close(n,R,Budget(5000000));assert P is not None
+        if x is not None:continue
+        stalled+=1
+        F=tuple(tuple((1<<j,0) for j in bits(r)) for r in R);B=Budget(5000000)
+        Q=demand_refinement(n,F,P,B,degree=1);assert Q is not None and satisfies(seed,Q,())
+        u,V=chart(n,canon((r,1) for r in R))
+        for z in range(1<<len(V)):
+            a=lift(u,V,z);source_points+=1
+            if cover(R,a):assert satisfies(a,Q,());source_covers+=1
+        events+=sum(B.stats.values());rank_gain+=len(Q)-len(P)
+        improved+=len(Q)>len(P);witness+=cover(R,chart(n,Q)[0])
+        if trial==0:
+            y,stats,done=solve(m,S,5000000,indexed=True,demand=True,character_degree=1)
+            assert done and y is not None and cover(R,y) and stats['character_source_rank']>0
+    assert stalled==improved==witness==20
+    print('character_source',36,stalled,improved,witness,rank_gain,source_points,source_covers,events)
+
+
 def main():
+    test_character_source()
     rng=Random(369);fixtures=verified=empty=unknown=trades=compares=0
     for m in (3,6,9,12):
         for _ in range(70):
