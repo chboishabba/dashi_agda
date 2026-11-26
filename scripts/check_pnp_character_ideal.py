@@ -256,7 +256,71 @@ def quotient_reopen(n,F,basis,p,B,cap=64):
     return x
 
 
-def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0):
+def restrict_character_span(basis,V,a,p,B):
+    """Linear image of the replayed consequence span under an affine embedding."""
+    out={};freq={}
+    for C in basis.values():
+        A={}
+        for s,w in C.items():
+            if s not in freq:
+                B.pay('character_restrict_map',1+len(V))
+                freq[s]=(value(V,s),(-1)**((s&a).bit_count()%2))
+            t,c=freq[s];B.pay('character_restrict_term');add(A,{t:w},c,p)
+        while A and max(A) in out:
+            s=max(A);D=out[s];B.pay('character_restrict_reduce',1+len(D));add(A,D,-A[s],p)
+        if A:
+            s=max(A);c=pow(A[s],-1,p);out[s]={t:w*c%p for t,w in A.items()}
+            B.pay('character_restrict_pivot',1+len(A))
+            if s==0:return out
+    return out
+
+
+def restriction_reopen(n,F,basis,p,B,steps):
+    """One-path original-row restriction, sharing the replayed proof span.
+
+    Empty projected spans are not feasibility evidence. A constant in the
+    projected span excludes that child; failure of greedy discovery is UNKNOWN.
+    Returns only an independently verified witness, or None.
+    """
+    assert steps>=0
+    original=F;origin=0;V0=tuple(1<<i for i in range(n))
+    if 0 in basis:return None
+    for step in range(min(steps,n)+1):
+        B.pay('character_path_verify',1+sum(map(len,F)))
+        bad=[G for G in F if sum(b for s,b in G)!=1]
+        if not bad:
+            assert all(sum(b^((s&origin).bit_count()%2) for s,b in G)==1 for G in original)
+            return origin
+        if step==min(steps,n):return None
+        G=min(bad,key=len);candidates=[];best=None
+        for j in range(len(G)):
+            B.pay('character_path_branch',1+len(G))
+            H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(G))
+            if H is None:continue
+            a,V=chart(len(V0),H);assert len(V)<len(V0)
+            B.pay('character_path_score',1+sum(map(len,F)))
+            # Check original row residual at the branch origin before mapping.
+            score=sum(abs(sum(b^((s&a).bit_count()%2) for s,b in J)-1) for J in F)
+            if not score:
+                x=lift(origin,V0,a)
+                assert all(sum(b^((s&x).bit_count()%2) for s,b in J)==1 for J in original)
+                return x
+            candidates.append(((score,len(V),j),a,V))
+        for key,a,V in sorted(candidates):
+            Q=restrict_character_span(basis,V,a,p,B)
+            if 0 in Q:
+                B.pay('character_path_excluded');continue
+            B.pay('character_path_image',1+sum(map(len,F))*(1+len(V)))
+            R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in J) for J in F)
+            best=(key,a,V,R,Q);break
+        if best is None:return None
+        _,a,V,F,basis=best
+        origin=lift(origin,V0,a);V0=tuple(lift(0,V0,v) for v in V)
+        B.pay('character_path_step')
+    return None
+
+
+def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0):
     """Sound original affine refinement and optional original witness.
 
     Share one replayed elimination span across both consumers. None carrier
@@ -281,11 +345,20 @@ def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0):
         a=lift(0,[reps[t] for t in freq],chart(len(freq),C)[0])
         pins.append((a,b^((a&u).bit_count()%2)))
     C=canon(P+tuple(pins));assert C is not None
-    if not quotient_cap:return C,None
+    if not quotient_cap and not path_steps:return C,None
     x=chart(n,C)[0]
     B.pay('character_pin_verify',1+sum(map(len,F)))
     if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return C,x
-    z=quotient_reopen(len(V),R,basis,p,B,quotient_cap)
+    z=None
+    if path_steps:
+        a,W=chart(len(V),Q)
+        B.pay('character_path_pins',1+sum(map(len,R))*(1+len(W)))
+        J=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in G) for G in R)
+        K=restrict_character_span(basis,W,a,p,B) if Q else basis
+        if 0 in K:return None,None
+        y=restriction_reopen(len(W),J,K,p,B,path_steps)
+        if y is not None:z=lift(a,W,y)
+    if z is None and quotient_cap:z=quotient_reopen(len(V),R,basis,p,B,quotient_cap)
     if z is not None:
         x=lift(u,V,z)
         assert all((s&x).bit_count()%2==b for s,b in C)
@@ -412,7 +485,44 @@ def test_constructive_character_quotient():
     print(dict(constructive_full=full,constructive_bounded=bounded,constructive_transport=transported,module_control='PASS'))
 
 
+def test_character_restriction_path():
+    from random import Random
+    from check_pnp_affine_normal_components import Exhausted
+    rng=Random(261136928);full=partial=transport=0
+    for n in range(7):
+        for _ in range(100):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(7)))
+            valid=lambda x:all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+            T=[x for x in range(1<<n) if valid(x)]
+            for p in (3,5,7):
+                B=Budget(10000000);proof,_=eliminate(F,range(1<<n),p,B);basis=replay_span(F,proof,p,B)
+                x=restriction_reopen(n,F,basis,p,B,n)
+                assert (x is not None)==bool(T) and (x is None or x in T);full+=1
+                if T:
+                    a=rng.randrange(1<<n);V=tuple(1<<i for i in range(n) if rng.randrange(2))
+                    Q=restrict_character_span(basis,V,a,p,B)
+                    assert (0 in Q)==(not any(valid(lift(a,V,y)) for y in range(1<<len(V))))
+                    if 0 not in Q:
+                        R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+                        pp,_=eliminate(R,range(1<<len(V)),p,B);K=replay_span(R,pp,p,B)
+                        assert len(K)==len(Q) and all(not quotient_normal(A,K,p,B) for A in Q.values())
+                    transport+=1
+                proof,_=eliminate(F,(0,),p,B,max_pivots=8);basis=replay_span(F,proof,p,B)
+                x=restriction_reopen(n,F,basis,p,B,n)
+                assert x is None or x in T;partial+=1
+    for r in (4,8,16,32,64):
+        n=2*r+1;F=tuple(((1,0),(1<<(2*i+1),0),(1<<(2*i+2),0)) for i in range(r))
+        B=Budget(10000000);proof,_=eliminate(F,(0,),3,B);basis=replay_span(F,proof,3,B)
+        assert quotient_reopen(n,F,basis,3,B,8) is None
+        assert restriction_reopen(n,F,basis,3,B,n)==1
+        assert restriction_reopen(n,F,basis,3,B,0) is None
+    try:restriction_reopen(1,(((1,0),),),{},3,Budget(0),1);assert False
+    except Exhausted:pass
+    print(dict(restriction_full=full,restriction_partial=partial,restriction_transport=transport,star_controls='PASS'))
+
+
 def main():
+    test_character_restriction_path()
     test_constructive_character_quotient()
     test_character_consequences()
     from random import Random
