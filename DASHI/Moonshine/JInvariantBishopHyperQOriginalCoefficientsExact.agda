@@ -21,10 +21,11 @@ import DASHI.Foundations.BishopCubicTranslationIteratedExact as NR
 import DASHI.Foundations.BishopChudnovskyPrefixSemanticsExact as Raw
 import DASHI.Foundations.BishopChudnovskyNativeFactorialEulerAttachmentExact as A
 import DASHI.Foundations.BishopChudnovskyNativeHyperODEExact as Hyper
+import DASHI.Foundations.BishopChudnovskyFactorialSourceExact as Factorial
 open import DASHI.Moonshine.JInvariantBishopHyperQCoefficientUniquenessExact
   using (Series; _⊕s_; _⊖s_; _⊗s_; scale; D; X; Y; X3; disc;
          sub0; right0; mul0; convPrefix; Solution; allCoefficientsUnique;
-         squareEuler; disc0)
+         squareEuler; disc0; x30)
 
 zeroSeries unitSeries : Series
 zeroSeries n = R.0ℝ
@@ -191,3 +192,62 @@ formalHyperSquareJet :
   ((D 1 hyperCandidate ⊗s hyperCandidate) ⊕s
     (hyperCandidate ⊗s D 1 hyperCandidate)) n ≃ D 1 X n
 formalHyperSquareJet hr hh hs = squareEuler hyperCandidate (formalHyperSquare hr hh hs)
+
+-- The other two actual inner series also retain zero cusp modes.
+rootInnerZero : (X ⊖s unitSeries) zero ≃ R.0ℝ
+rootInnerZero = let open P.ℝ-Solver in solve 0
+  (Κ Q.1ℚᵘ ⊖ Κ Q.1ℚᵘ ⊜ Κ Q.0ℚᵘ) P.≃-refl
+
+inverseInnerZero : minusX3Tail zero ≃ R.0ℝ
+inverseInnerZero = right0
+  (P.≃-trans (P.+-cong x30 P.≃-refl) rootInnerZero)
+
+rootPowerBelow : (k n : Nat) → n < k → power (X ⊖s unitSeries) k n ≃ R.0ℝ
+rootPowerBelow = powerBelow (X ⊖s unitSeries) rootInnerZero
+
+inversePowerBelow : (k n : Nat) → n < k → power minusX3Tail k n ≃ R.0ℝ
+inversePowerBelow = powerBelow minusX3Tail inverseInnerZero
+
+hyperJetCoeffAtCM : (n : Nat) →
+  (hyperJetCoeff n * R.pow Hyper.z n) ≃ A.jTerm n
+hyperJetCoeffAtCM n =
+  P.≃-trans (P.*-assoc (NR.natReal n) (hyperCoeff n) (R.pow Hyper.z n))
+    (P.≃-trans (P.*-congˡ (hyperCoeffAtCM n))
+      (P.≃-symm (P.⋆-distrib-* (+ n / 1)
+        (Factorial.factorialTerm n))))
+
+-- Recover the unweighted hypergeometric recurrence from the actual
+-- signed CM factorial leaf, by cancelling only the fixed z0 factor.
+weightedCoeff : Nat → Series
+weightedCoeff d n = R.pow (NR.natReal n) d * hyperCoeff n
+
+weightedAtInv : (d n : Nat) →
+  weightedCoeff d n ≃ R.pow invZ n * Hyper.jetTerm d n
+weightedAtInv d n = let open P.ℝ-Solver in solve 3 (λ n i h →
+  n ⊗ (i ⊗ h) ⊜ i ⊗ (n ⊗ h))
+  P.≃-refl (R.pow (NR.natReal n) d) (R.pow invZ n) (A.hTerm n)
+
+unweightedODE : (n : Nat) →
+  weightedCoeff 3 (suc n) ≃
+    (weightedCoeff 3 n + ((+ 3 / 2) ⋆) * weightedCoeff 2 n +
+      ((+ 23 / 36) ⋆) * weightedCoeff 1 n + ((+ 5 / 72) ⋆) * weightedCoeff zero n)
+unweightedODE n =
+  P.≃-trans (weightedAtInv 3 (suc n))
+    (P.≃-trans (P.*-congˡ (Hyper.coefficientODE n))
+      (P.≃-trans
+        (let open P.ℝ-Solver in solve 2 (λ i h →
+          (i ⊗ Κ ((Z.-_ (+ 262537412640768000)) / 1728)) ⊗ (Κ Hyper.zQ ⊗ h)
+          ⊜ i ⊗ h)
+          P.≃-refl (R.pow invZ n) (Hyper.rhsTerm n))
+        (P.≃-trans
+          (let open P.ℝ-Solver in solve 5 (λ i a b c d →
+            i ⊗ (a ⊕ Κ (+ 3 / 2) ⊗ b ⊕ Κ (+ 23 / 36) ⊗ c ⊕ Κ (+ 5 / 72) ⊗ d)
+            ⊜ i ⊗ a ⊕ Κ (+ 3 / 2) ⊗ (i ⊗ b) ⊕
+              Κ (+ 23 / 36) ⊗ (i ⊗ c) ⊕ Κ (+ 5 / 72) ⊗ (i ⊗ d))
+            P.≃-refl (R.pow invZ n) (Hyper.jetTerm 3 n)
+              (Hyper.jetTerm 2 n) (Hyper.jetTerm 1 n) (Hyper.jetTerm zero n))
+          (P.+-cong (P.+-cong (P.+-cong
+            (P.≃-symm (weightedAtInv 3 n))
+            (P.*-congˡ (P.≃-symm (weightedAtInv 2 n))))
+            (P.*-congˡ (P.≃-symm (weightedAtInv 1 n))))
+            (P.*-congˡ (P.≃-symm (weightedAtInv zero n)))))))
