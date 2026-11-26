@@ -143,6 +143,5 @@ def regressions():
                 rows.append(dict(d=d,b=b,dr=dr,dy=dy,dt=dt,mu=float(mu),norm=float(norm),gain=float(gain),bound=float(np.exp(569*dt))))
     return rows
 
-
 if __name__=='__main__':
     print(json.dumps(dict(exact_checks=exact(),matrix_regressions=regressions(),CFL='dt*(7/dr+10/dy+280)<=1',growth_exponent=569,scope='conditional source-level mode3 homogeneous stability; finite matrix regressions not production, no native kernel or Weyl trace'),indent=2))
