@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+function audit(books){
+const R=n=>Array.from({length:n},(_,i)=>i),d=x=>[x%3,Math.floor(x/3)%3,Math.floor(x/9)],num=a=>a[0]+3*a[1]+9*a[2],mod=x=>(x%3+3)%3,mask=x=>d(x).reduce((s,v,i)=>s+(v?1<<i:0),0),g=[..."אבגדהוזחטיכלמנסעפצקרשתךםןףץ"],gem=Array(27);
+for(let i=0;i<27;i++){let t=Math.floor(i/9),u=i%3,v=Math.floor(i%9/3);gem[num([t,mod(t+u),mod(t+v)])]=g[i]}
+const ix=new Map(gem.map((x,i)=>[x,i])),enc=s=>[...s].map(x=>ix.get(x)),str=s=>s.map(x=>gem[x]).join("");
+const cs=Object.entries(books).flatMap(([b,o])=>o.chapters.map(c=>({b,ch:c.c,s:enc(c.verses.map(v=>v.letters).join(""))}))),frames=[],tail=[];
+for(const c of cs){let n=Math.floor(c.s.length/216);for(let j=0;j<n;j++)frames.push(...c.s.slice(j*216,j*216+216));tail.push(...c.s.slice(n*216))}
+function codec(xs,K){let ct=R(K).map(()=>1);for(const x of xs)ct[x]++;let ns=ct.map((w,i)=>({w,i,ls:[i]})),l=ct.map(()=>0);while(ns.length>1){ns.sort((a,b)=>a.w-b.w||a.i-b.i);let a=ns.shift(),b=ns.shift();for(const k of a.ls.concat(b.ls))l[k]++;ns.push({w:a.w+b.w,i:Math.min(a.i,b.i),ls:a.ls.concat(b.ls)})}let order=R(K).sort((a,b)=>l[a]-l[b]||a-b),codes=R(K),v=0,last=0;for(const i of order){v*=2**(l[i]-last);codes[i]=v.toString(2).padStart(l[i],"0");v++;last=l[i]}let stream=xs.map(x=>codes[x]).join(""),map=new Map(codes.map((x,i)=>[x,i])),out=[],p=0;for(let i=0;i<xs.length;i++){let a="";while(p<stream.length&&!map.has(a))a+=stream[p++];if(!map.has(a))throw Error("prefix");out.push(map.get(a))}if(p!==stream.length||out.some((x,i)=>x!==xs[i]))throw Error("roundtrip");return{bits:stream.length,header:K*5,decoded:out}}
+const b=R(8).map(()=>[]);let prev=0;for(const x of frames){b[prev].push(x);prev=mask(x)}const z=b.map(s=>codec(s,27)),t=codec(tail,27),pos=R(8).map(()=>0);prev=0;let out=[];for(let i=0;i<frames.length;i++){let k=prev,x=z[k].decoded[pos[k]++];out.push(x);prev=mask(x)}if(out.some((x,i)=>x!==frames[i]))throw Error("context");
+const payload=z.reduce((s,x)=>s+x.bits,0)+t.bits,header=8*(135+32)+135+5*8+cs.length*24+32+96;
+const e=cs.find(c=>c.b==="exodus"&&c.ch===14).s,pre=e.slice(1728),previous=e.slice(1512,1728),truth=cs.find(c=>c.b==="exodus"&&c.ch===15).s.slice(0,91);
+const pred=previous.slice(125),res=truth.map((x,i)=>num(d(x).map((a,k)=>mod(a-d(pred[i])[k])))),restore=res.map((x,i)=>num(d(x).map((a,k)=>mod(a+d(pred[i])[k]))));if(str(restore)!==str(truth))throw Error("temporal");
+let r=codec(res,27),literal=codec(truth,27);
+return{directSameMaskContext:{payload,header,total:payload+header,verified:out.length+t.decoded.length},previousFrame:{hits:pred.filter((x,i)=>x===truth[i]).length,exactPatch:91,rawPointPatchBits:r.bits,rawPointPatchModelBits:r.header,literalBits:literal.bits,literalModelBits:literal.header,prediction:str(pred)},qualification:"Direct baseline uses the same previous support-mask information and frame/tail split as H43 contextual mask/sign; model fitted on stream, code lengths and conservative same header charges. Previous full physical frame zero-innovation prediction, target-derived exact patch; not blind, no genre inference."}}
+
+const base='Docs/support/reference/TorahCryptoCorpus20261125/';const names=['genesis','exodus','leviticus','numbers','deuteronomy'];console.log(JSON.stringify(audit(Object.fromEntries(names.map(n=>[n,JSON.parse(fs.readFileSync(base+n+'.normalized.json','utf8'))])))),null,2));
