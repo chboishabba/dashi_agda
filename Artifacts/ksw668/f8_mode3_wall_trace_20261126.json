@@ -2,12 +2,12 @@
   "predecessor": "dc0375ffaa78da13637f3deedd79332df7ebf3b7",
   "script": {
     "path": "scripts/check_f8_mode3_wall_trace.py",
-    "commit": "ff342c41f36f15236e1a323669533226665ccd4d",
-    "blob": "d8af6775e4de889e98f55817a0b2516a1c6d564e",
-    "sha256": "411f13a89d3c83bd9c460d593167d60b09f5092d9ab0ea395249dd982254d999",
-    "local_output_sha256": "fe1c861479b417f490e396828db62eca0c5ee7df90066aca9a2ac99b76f43d2d"
+    "commit": "cfeb0ae80a02cc59183d29faeb30ca764c32838f",
+    "blob": "0e1533f7bde9d9117eb7d4e6edf4acc76e8ccf60",
+    "sha256": "c6f4aaf1e9ccf0679d035fdc24a2871559f0412f939756b9c2f347c450bc628e",
+    "local_output_sha256": "a10a4e2a67e1cca6e40330bb4cf60183516b80b6538adfadfd945b5ac809a8ca"
   },
-  "exact_checks": 115,
+  "exact_checks": 120,
   "source_diagnostic_cases": 18,
   "source_diagnostic_dimensionless_grid": [
     64,
@@ -27,5 +27,12 @@
     "SMS_absolute_difference": 3.581423352327917e-14,
     "scope": "numerical quadrature regression of equivalent continuum fixed-window functional, not original source-on production"
   },
-  "scope": "Exact local algebra plus analytical conditional trace argument; no native kernel, full production, original instantaneous temporal or normal curvature convergence. Source quadrature diagnostics not interval certificates. Standard exact FV cell averages, not alternative weak-source mode."
+  "scope": "Exact local algebra plus analytical conditional trace argument; no native kernel, full production, original instantaneous temporal or normal curvature convergence. Source quadrature diagnostics not interval certificates. Standard exact FV cell averages, not alternative weak-source mode.",
+  "zero_displacement_rate_lift": {
+    "checks": 5,
+    "P": "G chi/(1+v)",
+    "M": "-G chi/(1-v)",
+    "U": "0",
+    "scope": "Analysis lift only. Cancels source SAT and Udot forcing, so K^(3/2) source regularity suffices; no K^2 source assumption."
+  }
 }
