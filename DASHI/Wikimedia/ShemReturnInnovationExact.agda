@@ -84,3 +84,24 @@ innovationRoundTripValue : (previous : Point) (allowed : Point → Set) →
        (innovationToOutput previous allowed x)) ≡ fst x
 innovationRoundTripValue previous allowed (delta , evidence) =
   innovationFromUpdate previous delta
+
+
+-- H36: a supplied mixed difference determines the fourth corner, with
+-- the same signed innovation inverse. This is a conditional local
+-- reconstruction law; neither a source interaction nor global uniqueness
+-- is inferred from a coordinate chart.
+mixedCorner : Point → Point → Point → Point → Point
+mixedCorner a b c d = sub (sub d b) (sub c a)
+
+completeMixedCorner : Point → Point → Point → Point → Point
+completeMixedCorner a b c m = add b (add (sub c a) m)
+
+mixedAfterComplete : (a b c m : Point) →
+  mixedCorner a b c (completeMixedCorner a b c m) ≡ m
+mixedAfterComplete a b c m
+  rewrite subAdd b (add (sub c a) m) = subAdd (sub c a) m
+
+completeAfterMixed : (a b c d : Point) →
+  completeMixedCorner a b c (mixedCorner a b c d) ≡ d
+completeAfterMixed a b c d
+  rewrite addSub (sub c a) (sub d b) = addSub b d
