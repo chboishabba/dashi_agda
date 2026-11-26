@@ -132,3 +132,31 @@ originalShiftedFactorialAbsoluteBelowExpBall
   RP.≤-respˡ-≃
     (RP.∣-∣-cong splitQ)
     (RP.≤-respʳ-≃ target upper)
+
+
+-- Actual real exponential increment bound from the shifted factorial
+-- quotient (no derivative/FTC assumption). Used as the scalar model for
+-- the two Cartesian complex factorial-coordinate bounds.
+originalExpIncrementAbsBelowExpBall :
+  (radius : R.ℝ) →
+  R.NonNegative radius →
+  (u : R.ℝ) →
+  R._≤_ (R.∣ u ∣) radius →
+  R._≤_ (R.∣ R._-_ (Exp.bishopExp u) R.1ℝ ∣)
+    (R._*_ (R.∣ u ∣) (Exp.bishopExp radius))
+originalExpIncrementAbsBelowExpBall radius nn u inside =
+  let
+    q = Origin.originalExpOriginQuotient u
+    factor = RP.≃-trans
+      (RP.+-congˡ (R.-_ R.1ℝ)
+        (Origin.originalExpOriginFiniteFactorLimit u))
+      (let open RP.ℝ-Solver in
+       solve 2 (λ x y → (Κ 1ℚᵘ ⊕ x ⊗ y) ⊖ Κ 1ℚᵘ ⊜ x ⊗ y)
+         RP.≃-refl u q)
+  in
+  RP.≤-respˡ-≃
+    (RP.≃-symm (RP.≃-trans (RP.∣-∣-cong factor)
+      (RP.∣x*y∣≃∣x∣*∣y∣ u q)))
+    (RP.*-monoˡ-≤-nonNeg
+      (originalShiftedFactorialAbsoluteBelowExpBall radius nn u inside)
+      (RP.nonNeg∣x∣ u))
