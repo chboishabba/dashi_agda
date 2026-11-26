@@ -53,6 +53,7 @@ def rows(j):
 
 
 def q(x):return Q(float(x))
+
 def receiver(U,P,M,W,Pt,Mt,force,prev,nextW,dr,h,dt,r,eps):
     dr,h,dt,r,eps=map(q,(dr,h,dt,r,eps));j=int(r/dr);u=r/dr-j;ids=range(j-1,j+3)
     w=[-u*(u-1)*(u-2)/6,(u+1)*(u-1)*(u-2)/2,-(u+1)*u*(u-2)/2,(u+1)*u*(u-1)/6]
