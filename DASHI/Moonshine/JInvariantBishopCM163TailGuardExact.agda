@@ -151,7 +151,7 @@ module Telescope (t m : Nat → ℝ)
   lowerTerm n = P.≤-respʳ-≃
     (let open P.ℝ-Solver in solve 1 (λ x → ⊝ (⊝ x) ⊜ x) P.≃-refl (t n))
     (P.neg-mono-≤ (P.≤-trans (P.x≤∣x∣ (R.- (t n)))
-      (P.≤-respˡ-≃ (P.≃-symm (P.∣-x∣≃∣x∣ (t n))) (bound n))))
+      (P.≤-respˡ-≃ (P.≃-symm (P.∣-x∣≃∣x∣ {x = t n})) (bound n))))
 
   pay : (n : Nat) → m (suc n) + gap (suc n) ≤ gap n
   pay n = let open P.ℝ-Solver in
@@ -367,3 +367,89 @@ negativeDelta =
     (P.<-respʳ-≃ (P.*-zeroʳ ((+ 1 / 1728) ⋆)) scaled)
 
 module Root = CM.Selected.AtNegativeDelta negativeDelta
+
+-- Same original absolute streams used by the disk completion.
+-- Their L1 budgets are needed for the formal composition evaluation.
+abs4 abs6 : Nat → ℝ
+abs4 n = R.∣ t4 n ∣
+abs6 n = R.∣ t6 n ∣
+
+absAbs : (x : ℝ) → R.∣ R.∣ x ∣ ∣ ≃ R.∣ x ∣
+absAbs x = P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ x)
+
+module AbsFour = Telescope abs4 (majorant Maj.e4Scale 4)
+  (majorantNN Maj.e4ScaleNonnegative 4)
+  (λ n → majorantStep Maj.e4ScaleNonnegative 4 n (from-yes (16 NP.≤? 64)))
+  (λ n → P.≤-respˡ-≃ (P.≃-symm (absAbs (t4 n)))
+    (E.e4RealTermBound CM.q unit envelope n))
+
+module AbsSix = Telescope abs6 (majorant Maj.e6Scale 6)
+  (majorantNN Maj.e6ScaleNonnegative 6)
+  (λ n → majorantStep Maj.e6ScaleNonnegative 6 n NP.≤-refl)
+  (λ n → P.≤-respˡ-≃ (P.≃-symm (absAbs (t6 n)))
+    (E.e6RealTermBound CM.q unit envelope n))
+
+abs4Cauchy : S._isConvergent (S.SeriesOf abs4)
+abs4Cauchy = C.realAbsolute (Disk.e4AbsoluteConvergence Actual.completion)
+
+abs6Cauchy : S._isConvergent (S.SeriesOf abs6)
+abs6Cauchy = C.realAbsolute (Disk.e6AbsoluteConvergence Actual.completion)
+
+l1X l1Y : ℝ
+l1X = S.lim abs4Cauchy
+l1Y = S.lim abs6Cauchy
+
+absFirstBound : (t m : Nat → ℝ) → R.∣ t zero ∣ ≤ m zero →
+  R.∣ t zero ∣ + fifteenth * m zero ≤ m zero + fifteenth * m zero
+absFirstBound t m h = P.+-monoˡ-≤ (fifteenth * m zero) h
+
+l1XRadius : l1X ≤ ((+ 256 / 1) ⋆) * CM.radius
+l1XRadius = P.≤-trans (proj₂ (AbsFour.limitBounds l1X (proj₂ abs4Cauchy)))
+  (P.≤-respʳ-≃
+    (P.≃-trans (P.+-cong (majorantZero Maj.e4Scale 4) gap4)
+      (let open P.ℝ-Solver in solve 1 (λ r →
+        Κ (+ 240 / 1) ⊗ r ⊕ Κ (+ 16 / 1) ⊗ r ⊜ Κ (+ 256 / 1) ⊗ r)
+        P.≃-refl CM.radius))
+    (absFirstBound t4 (majorant Maj.e4Scale 4)
+      (E.e4RealTermBound CM.q unit envelope zero)))
+
+l1YRadius : l1Y ≤ ((+ 2688 / 5) ⋆) * CM.radius
+l1YRadius = P.≤-trans (proj₂ (AbsSix.limitBounds l1Y (proj₂ abs6Cauchy)))
+  (P.≤-respʳ-≃
+    (P.≃-trans (P.+-cong (majorantZero Maj.e6Scale 6) gap6)
+      (let open P.ℝ-Solver in solve 1 (λ r →
+        Κ (+ 504 / 1) ⊗ r ⊕ Κ (+ 168 / 5) ⊗ r ⊜ Κ (+ 2688 / 5) ⊗ r)
+        P.≃-refl CM.radius))
+    (absFirstBound t6 (majorant Maj.e6Scale 6)
+      (E.e6RealTermBound CM.q unit envelope zero)))
+
+l1XSmall : l1X < ((+ 1 / 25) ⋆)
+l1XSmall = P.≤-<-trans l1XRadius
+  (P.<-trans
+    (P.<-respʳ-≃ (let open P.ℝ-Solver in solve 0
+      (Κ (+ 256 / 1) ⊗ Κ (+ 1 / 7000) ⊜ Κ (+ 32 / 875)) P.≃-refl)
+      (P.*-monoʳ-<-pos
+        (P.posp⇒posp⋆ (+ 256 / 1) (QP.positive⁻¹ (+ 256 / 1))) G.radiusCompositionSmall))
+    (G.ratLt (+ 32 / 875) (+ 1 / 25) (from-yes ((+ 32 / 875) QP.<? (+ 1 / 25)))))
+
+l1YSmall : l1Y < ((+ 2 / 25) ⋆)
+l1YSmall = P.≤-<-trans l1YRadius
+  (P.<-trans
+    (P.<-respʳ-≃ (let open P.ℝ-Solver in solve 0
+      (Κ (+ 2688 / 5) ⊗ Κ (+ 1 / 7000) ⊜ Κ (+ 48 / 625)) P.≃-refl)
+      (P.*-monoʳ-<-pos
+        (P.posp⇒posp⋆ (+ 2688 / 5) (QP.positive⁻¹ (+ 2688 / 5))) G.radiusCompositionSmall))
+    (G.ratLt (+ 48 / 625) (+ 2 / 25) (from-yes ((+ 48 / 625) QP.<? (+ 2 / 25)))))
+
+-- Exact scalar budget for the yet-unattached weighted Cauchy algebra:
+-- ((1+1/25)^3+(1+2/25)^2-2)/(1-1/25)^3 = 1517/4608 < 1/3.
+-- The algebra's norm-submultiplicativity and composition evaluation
+-- must still be proved; the scalar budget is not itself that weld.
+compositionBudget : (+ 1517 / 4608) Q.< (+ 1 / 3)
+compositionBudget = from-yes ((+ 1517 / 4608) QP.<? (+ 1 / 3))
+
+compositionBudgetCleared :
+  ((((+ 26 / 25) Q.* (+ 26 / 25)) Q.* (+ 26 / 25)) Q.+ ((+ 27 / 25) Q.* (+ 27 / 25))
+    Q.- (+ 2 / 1)) Q.≃
+  ((+ 1517 / 4608) Q.* (((+ 24 / 25) Q.* (+ 24 / 25)) Q.* (+ 24 / 25)))
+compositionBudgetCleared = Q.*≡* refl
