@@ -15,6 +15,7 @@ from scipy.special import lpmv, gammaln
 from scipy.constants import elementary_charge as e, electron_mass as me, atomic_mass as u
 from pyproj import Transformer
 from solar_earth_model_inputs import radar, parse_gfz, forcing
+from solar_earth_collision_tensor import tensor_replay
 
 D=C.c_double
 class AP(C.Structure):
@@ -89,5 +90,6 @@ def main(root):
     # Actual main-field values constrain detuning; ion masses are conditional species priors.
     frequencies=[0,3.915,7.83,7800]; masses=[me,16*u,28*u,32*u]; gyro=np.array([e*mag/m/(2*np.pi) for m in masses]); quant=lambda z:np.quantile(z,[0,.5,1],axis=0).tolist()
     out=dict(status='SOURCE_BACKED_MODEL_REPLAY_CONDITIONAL',source_hashes=hashes,rows=len(rows),records=len(set(r['utc'] for r in rows)),forcing_first=a[0],forcing_last=a[-1],igrf_NED_nT=quant(b[:,:3]),igrf_magnitude_nT=quant(b[:,3]),harmonic_max_component_error_nT=float(err),msis_order=['He','O','N2','O2','Ar','rho','H','N','anomalous_O','Texo','Tlocal'],msis_storm_SI=quant(storm),msis_daily_SI=quant(daily),msis_two_sources_max_absolute_difference=float(np.max(np.abs(storm-other))),max_daily_storm_relative_difference=float(np.max(np.abs(daily-storm)/np.maximum(storm,1e-100))),dc_quasineutral_transverse_cap_S_m=quant(cap),gyro_frequency_Hz_species_order=['electron','O+','28u+','32u+'],gyro_frequency_Hz=quant(gyro.T),frequencies_Hz=frequencies,min_absolute_detuning_Hz={str(f):np.min(np.abs(gyro-f),axis=1).tolist() for f in frequencies},physical_admission=False)
+    out["conditional_tensor"]=tensor_replay(root,rows,b[:,:3]*1e-9,storm,daily,sys.argv[2] if len(sys.argv)>2 else None)
     print(json.dumps(out,indent=2))
 if __name__=='__main__': main(pathlib.Path(sys.argv[1]))
