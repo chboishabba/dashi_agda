@@ -1,0 +1,166 @@
+{
+  "status": "CONDITIONAL_DRIFT_FIBRE_AND_MEMORY",
+  "rows": 3087,
+  "records": 208,
+  "packet_sha256": "d771b81b3498e4cf9424325afe9e27f1c3f8125d0ba6c608c175cb62bd955fb6",
+  "beam_B_parallel_cosine": [
+    -0.38343469662552276,
+    -0.35916056033138777,
+    -0.3451794385453715
+  ],
+  "perp_projection_squared": [
+    0.8529778334236935,
+    0.8710036919024436,
+    0.8808511552055023
+  ],
+  "perp_minimum_multiplier": [
+    1.1352655827155047,
+    1.1481007592698063,
+    1.1723634083035746
+  ],
+  "unconstrained_pointwise_nullity": 2,
+  "perp_constraint_pointwise_nullity": 1,
+  "unrestricted_wind_lower_bound_W_m3": 0,
+  "histories": {
+    "history": {
+      "conditional_electric_min_squared_over_BVO_squared": [
+        1.1639018380527464,
+        1.8211634301350477,
+        286202.3490301903
+      ],
+      "paper_style_joule_proxy_W_m3": [
+        9.46268511388516e-19,
+        1.0210993475935176e-10,
+        1.9528377658559867e-8
+      ],
+      "conditional_steady_joule_min_W_m3": [
+        1.105010593477654e-18,
+        1.6592440806189417e-9,
+        0.00006717743764659211
+      ],
+      "zero_wind_los_min_W_m3": [
+        9.459573023218367e-19,
+        1.316153015485904e-9,
+        0.0000019913938671641003
+      ],
+      "zero_wind_perp_min_W_m3": [
+        1.1041169903568808e-18,
+        1.5131919833149697e-9,
+        0.000002265016846926973
+      ],
+      "ion_drag_kg_m3_s": [
+        1.7718169853698395e-15,
+        6.196423013695346e-13,
+        6.789438825980724e-10
+      ],
+      "frozen_e_fold_s": [
+        [
+          0.0000010790407197445136,
+          0.000012100309436334352,
+          0.000007626900052409631
+        ],
+        [
+          0.00035995684522476565,
+          0.008065087374064271,
+          0.004913892855302789
+        ],
+        [
+          0.026174593246823287,
+          0.5172769400068278,
+          0.2684306366049956
+        ]
+      ],
+      "frozen_log10_memory_over_integration": [
+        [
+          -24631899.266490057,
+          -2185207.6398210553,
+          -3466898.4042859334
+        ],
+        [
+          -71963.31434544726,
+          -3256.2510965403562,
+          -5351.249709784809
+        ],
+        [
+          -1015.44356630694,
+          -34.68567112375116,
+          -67.65589483717788
+        ]
+      ]
+    },
+    "daily": {
+      "conditional_electric_min_squared_over_BVO_squared": [
+        1.1638496958522466,
+        1.829809481712987,
+        283049.6961144512
+      ],
+      "paper_style_joule_proxy_W_m3": [
+        9.339263146754498e-19,
+        1.0100643654049706e-10,
+        1.9560563964724865e-8
+      ],
+      "conditional_steady_joule_min_W_m3": [
+        1.0905844349192881e-18,
+        1.6733864389263738e-9,
+        0.00006604245238391097
+      ],
+      "zero_wind_los_min_W_m3": [
+        9.336292984427766e-19,
+        1.318877492310773e-9,
+        0.0000019843821488771764
+      ],
+      "zero_wind_perp_min_W_m3": [
+        1.0897278012183791e-18,
+        1.5141087529225828e-9,
+        0.000002257041699314208
+      ],
+      "ion_drag_kg_m3_s": [
+        1.734914132574813e-15,
+        6.233071445193999e-13,
+        6.749513807495495e-10
+      ],
+      "frozen_e_fold_s": [
+        [
+          0.000001084848188802967,
+          0.00001216751141925366,
+          0.000007669210693072415
+        ],
+        [
+          0.0003594156693437454,
+          0.008013780396907309,
+          0.004864254835608258
+        ],
+        [
+          0.026773066463790577,
+          0.532372578408335,
+          0.2727839685838739
+        ]
+      ],
+      "frozen_log10_memory_over_integration": [
+        [
+          -24500038.42704954,
+          -2173273.0666056573,
+          -3447986.0608797106
+        ],
+        [
+          -72041.98961877832,
+          -3275.1038804040377,
+          -5409.069586260298
+        ],
+        [
+          -992.7447925748252,
+          -33.745887336306524,
+          -67.18860607652415
+        ]
+      ]
+    }
+  },
+  "symbolic_identities": 5,
+  "matrix_exponential_fixtures": 27,
+  "executed_blob": "b71c0e106796f0470ef5bc10317e08e87a2b2947",
+  "checker_commit": "5ef3d02e6fc96fd34c28749a2973b4b5a5c05616",
+  "local_stdout_sha256": "746d9b2a307b5e34c136dec400f117e45ccb429ba093acb8130947967abcbc96",
+  "local_repeat_byte_identical": true,
+  "physical_admission": false,
+  "scope": "Recorded numerical replay summary, not measured heating. Zero-wind common drift proxy and separate-species density-weighted pressureless steady observer are distinct conditional models. Frozen-rate memory diagnostic, not measured history. No actual wind, E field, spatial heating integral or extraction."
+}
