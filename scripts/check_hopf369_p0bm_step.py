@@ -39,7 +39,7 @@ def run(c,cs):
     # Ridge is applied after column normalization, to suppress basis cancellation.
     def rms(x):return float(np.sqrt(np.mean(x*x)))
     base=np.array([rms(residual(T,t,pt)),rms(residual(Q,z,pz))]);print('base weighted test bulk,seam RMS',base,'max',np.max(abs(residual(T,t,pt))),np.max(abs(residual(Q,z,pz))),flush=True)
-    best=None; caps=np.array([398e-6,2749e-6,2325e-6])
+    best=None; caps=np.array([398e-6,2749e-6,2325e-6]);
     for ridge in (.02,.1,.5):
         d=lstsq(np.vstack([rows,ridge*np.eye(252)]),np.r_[rhs,np.zeros(252)],cond=1e-12,lapack_driver='gelsy')[0]/scale
         ds=P@d
