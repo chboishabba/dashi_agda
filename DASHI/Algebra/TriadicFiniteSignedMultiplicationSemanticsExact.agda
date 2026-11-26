@@ -125,5 +125,14 @@ multiplySound {suc n} (a E.∷ xs) (b E.∷ ys)
       (trans (cong (λ z → W.signedValue (M.scaleTrit a (b E.∷ ys)) + z)
         (sym (zeroPrepend (M.multiply xs (Q.reduce (b E.∷ ys)))))) ho))
 
+oneResidue : (n : Nat) → Q.Residue3Pow n
+oneResidue zero = E.[]
+oneResidue (suc n) = E.pos E.∷ A.zeroResidue n
+
+oneSound : ∀ n → Congruent n (+ 1) (W.signedValue (oneResidue n))
+oneSound zero = (+ 1) , refl
+oneSound (suc n) rewrite W.signedCons E.pos (A.zeroResidue n) | zeroSound n =
+  (+ 0) , sym (trans (cong ((+ 1) +_) (ZP.*-zeroʳ ((+ 3) * modulus n))) (ZP.+-identityʳ (+ 1)))
+
 -- Congruences are source-written all-depth statements. Kernel acceptance,
 -- modulus/cast bridge and residue isomorphism are still distinct.
