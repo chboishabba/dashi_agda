@@ -42,15 +42,15 @@ rotationCong {H.frame3 x y z} {H.frame3 a b c} (ex , (ey , ez)) =
         (H.leadingOneApart f) (H.leadingOneApart g)
         (normCong {f} {g} (ex , (ey , ez)))
   in F.eq9
-    (BP.*-cong iEq (BP.--cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))))
+    (BP.*-cong iEq (BP.-cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))))
     (BP.*-cong iEq (BP.+-cong (BP.+-cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez)) (BP.+-cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez))))
-    (BP.*-cong iEq (BP.+-cong (BP.--cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey)) (BP.--cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey))))
-    (BP.*-cong iEq (BP.+-cong (BP.--cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez)) (BP.--cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez))))
-    (BP.*-cong iEq (BP.--cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ez ez)) (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ez ez)))))
+    (BP.*-cong iEq (BP.+-cong (BP.-cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey)) (BP.-cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey))))
+    (BP.*-cong iEq (BP.+-cong (BP.-cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez)) (BP.-cong (BP.*-cong ex ey) (BP.*-cong BP.≃-refl ez))))
+    (BP.*-cong iEq (BP.-cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ez ez)) (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ez ez)))))
     (BP.*-cong iEq (BP.+-cong (BP.+-cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex)) (BP.+-cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex))))
     (BP.*-cong iEq (BP.+-cong (BP.+-cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey)) (BP.+-cong (BP.*-cong ex ez) (BP.*-cong BP.≃-refl ey))))
-    (BP.*-cong iEq (BP.+-cong (BP.--cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex)) (BP.--cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex))))
-    (BP.*-cong iEq (BP.--cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ey ey)) (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ey ey)))))
+    (BP.*-cong iEq (BP.+-cong (BP.-cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex)) (BP.-cong (BP.*-cong ey ez) (BP.*-cong BP.≃-refl ex))))
+    (BP.*-cong iEq (BP.-cong (BP.+-cong (BP.*-cong BP.≃-refl BP.≃-refl) (BP.+-cong (BP.*-cong ex ex) (BP.+-cong (BP.*-cong ey ey) (BP.*-cong ez ez)))) (BP.+-cong (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ey ey)) (BP.+-cong (BP.*-cong ex ex) (BP.*-cong ey ey)))))
 
 flipCong : (k : F.Mark) {r s : H.Matrix3} → F.MatrixEq r s →
   F.MatrixEq (F.flipMatrix k r) (F.flipMatrix k s)
