@@ -220,7 +220,7 @@ def pair_exclusion_core(n,G,J,H,B):
     K=canon(out);assert K is not None and canon(H+K)==H
     return K
 
-def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0):
+def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover=0, core_pairs=0, hull_rows=0, character_degree=-1):
     """Find one original exact-one receipt, with affine demand in the row span.
 
     No dense/full boundary table is required. Memoize only completed queries.
@@ -235,6 +235,10 @@ def join_exact_one_demand(n, row_bits, B, required=(), core_trials=0, core_cover
     F=tuple(tuple((a,0) for a,b in G) for G in row_bits)
     root,_,space=tree(n,F,B);memo={};empty={};maps={};width=0
     assert span(space(root[0])+tuple(a for a,b in H))==space(root[0])
+    if character_degree>=0:
+        from check_pnp_character_ideal import demand_exclusion
+        if demand_exclusion(n,row_bits,H,B,degree=character_degree):
+            B.pay('character_root_empty');return None,0
     def structure(A,C):
         key=(A[0],C[0])
         if key not in maps:
@@ -521,7 +525,18 @@ def test_collective_demand():
                 assert (x is not None)==truth and (x is None or valid(x))
     print('collective_demand 840 comparisons PASS')
 
+def test_character_root():
+    F=(((1,0),(2,0),(3,1)),((1,0),(2,1),(3,0)),
+       ((1,1),(2,0),(3,0)),((1,1),(2,1),(3,1)))
+    B=Budget(1000000);y,w=join_exact_one_demand(2,F,B,character_degree=1)
+    assert y is None and B.stats['character_root_empty']==1
+    B=Budget(1000000);y,w=join_exact_one_demand(2,F[:1],B,character_degree=1)
+    assert y is not None and sum(b^((s&y).bit_count()%2) for s,b in F[0])==1
+    print('character_root controls PASS')
+
+
 def main():
+    test_character_root()
     test_pair_exclusion_core()
     test_collective_demand()
     test_cached_empty_cover()
