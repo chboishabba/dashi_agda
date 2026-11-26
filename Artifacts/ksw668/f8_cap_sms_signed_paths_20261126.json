@@ -1,0 +1,32 @@
+{
+  "predecessor": "e04a691d81cdcff3af147f9a7759823ca1119b36",
+  "scope": "Conditional original fixed-window linear SMS/E5 nonvanishing: exact local sufficient inequalities; analytic common-clock path differentiation and inherited smooth-reference, causal layer, signed source cone and tilted full-frequency complement remain premises. No independent full prior proof replay, native kernel or physical claim.",
+  "script": {
+    "commit": "bd547ebd6bdc5b5102772253761da3fee9872014",
+    "blob": "9aa0df06151cd3c146613e4f2b8646ad72138e54",
+    "sha256": "5ca173066bd9a604cfb40547c5fca4fbd77304a4f27473ad8270b167e5483ccb",
+    "local_output_sha256": "f6ec218d9459852f9fe2122abb4e8fa5ce27587b97d5cdacfafce482a370d329"
+  },
+  "checks": 58,
+  "long_angle_lower": 0.9998542179865121,
+  "transport_speed": [
+    "41/40",
+    "27/25"
+  ],
+  "main_bracket_lower": "470423099/10000000000",
+  "adverse_bracket_upper": "2181755977/100000000000",
+  "cross_margin_lower": "2522475013/100000000000",
+  "direct_sms_to_e4_lower": "940846198/21814304101",
+  "selected_terms": 27,
+  "source_max_derivative": 17,
+  "direct_magnitude_lower": "1.8144e-271",
+  "complement_upper": "2.8408e-278",
+  "strict_full_sms_upper": "-1.814e-271",
+  "inherited_e4_receipt": {
+    "path": "Artifacts/ksw668/f8_cap_signed_tilted_e4_20261126.json",
+    "direct_lower_numerator": "4536110765573153915383864911903",
+    "remainder_upper_numerator": "7100901973797509969638",
+    "denominator": "1e300"
+  },
+  "execution": "Executed locally twice, exact Fraction/SymPy checks, local git hash-object equals fetched remote blob. No CI."
+}
