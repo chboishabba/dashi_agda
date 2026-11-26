@@ -174,3 +174,45 @@ originalTorusLastShell = refl
 
 originalTorusLastResponseOrder : oddResponseOrder 6 ≡ 13
 originalTorusLastResponseOrder = refl
+
+
+------------------------------------------------------------------------
+-- AU: axis-dependent symmetric selected stencil. Reuse the original
+-- LocalObservationSite and preserve both orientations. This is a local
+-- coefficient inverse, not a proof of a physical C³ wave solution.
+------------------------------------------------------------------------
+axisCoupling : ℚ → ℚ → ℚ → LocalAxis → ℚ
+axisCoupling kx ky kz x-axis = kx
+axisCoupling kx ky kz y-axis = ky
+axisCoupling kx ky kz z-axis = kz
+
+anisotropicNeighborSum : ℚ → ℚ → ℚ → ℚ
+anisotropicNeighborSum kx ky kz = (kx + kx) + (ky + ky) + (kz + kz)
+
+anisotropicImpulse : ℚ → ℚ → ℚ → ℚ → LocalObservationSite → ℚ
+anisotropicImpulse kx ky kz m kicked-site =
+  - (m + anisotropicNeighborSum kx ky kz)
+anisotropicImpulse kx ky kz m (neighboring-site ax orientation) =
+  axisCoupling kx ky kz ax
+anisotropicImpulse kx ky kz m outside-nearest-ball = 0ℚ
+
+anisotropicUniformIsOriginal : ∀ k m site →
+  anisotropicImpulse k k k m site ≡ sourceLocalImpulseThirdDerivative k m site
+anisotropicUniformIsOriginal k m kicked-site = refl
+anisotropicUniformIsOriginal k m (neighboring-site x-axis orientation) =
+  Ring.solve-∀ k
+anisotropicUniformIsOriginal k m (neighboring-site y-axis orientation) =
+  Ring.solve-∀ k
+anisotropicUniformIsOriginal k m (neighboring-site z-axis orientation) =
+  Ring.solve-∀ k
+anisotropicUniformIsOriginal k m outside-nearest-ball = Ring.solve-∀
+
+anisotropicMassReopens : ∀ kx ky kz m →
+  - anisotropicImpulse kx ky kz m kicked-site -
+    anisotropicNeighborSum kx ky kz ≡ m
+anisotropicMassReopens kx ky kz m = Ring.solve-∀ kx ky kz m
+
+anisotropicMassRightInverse : ∀ kx ky kz center →
+  anisotropicImpulse kx ky kz
+    (- center - anisotropicNeighborSum kx ky kz) kicked-site ≡ center
+anisotropicMassRightInverse kx ky kz center = Ring.solve-∀ kx ky kz center
