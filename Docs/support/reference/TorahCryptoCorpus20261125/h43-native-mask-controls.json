@@ -1,0 +1,18 @@
+{
+  "directSameMaskContext": {
+    "payload": 1266993,
+    "header": 6127,
+    "total": 1273120,
+    "verified": 304850
+  },
+  "previousFrame": {
+    "hits": 6,
+    "exactPatch": 91,
+    "rawPointPatchBits": 414,
+    "rawPointPatchModelBits": 135,
+    "literalBits": 347,
+    "literalModelBits": 135,
+    "prediction": "לכלחילפרעההבאיםאחריהםביםלאנשארבהםעדאחדובניישראלהלכוביבשהבתוךהיםוהמיםלהםחמהמימינםומשמאלםויוש"
+  },
+  "qualification": "Direct baseline uses the same previous support-mask information and frame/tail split as H43 contextual mask/sign; model fitted on stream, code lengths and conservative same header charges. Previous full physical frame zero-innovation prediction, target-derived exact patch; not blind, no genre inference."
+}
