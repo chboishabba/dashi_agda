@@ -320,6 +320,80 @@ def restrict_character_span(basis,V,a,p,B):
     return out
 
 
+def extend_character_span(F,basis,p,B,degree=1,max_pivots=256):
+    """Add locally shifted original equations to an already verified span.
+
+    All new rows are explicit linear combinations of shifted original generators
+    and retained rows. A rank cap only stops discovery; it proves nothing.
+    """
+    assert max_pivots>=0
+    out=dict(basis)
+    if 0 in out:return out
+    G=tuple(generators(F,p,B=B))
+    for t in source_shifts(F,degree,B):
+        for g in G:
+            B.pay('character_local_generator',1+len(g))
+            A={s^t:w for s,w in g.items()}
+            A=quotient_normal(A,out,p,B)
+            if not A:continue
+            s=max(A)
+            if s!=0 and len(out)>=max_pivots:return out
+            c=pow(A[s],-1,p);out[s]={v:w*c%p for v,w in A.items()}
+            B.pay('character_local_pivot',1+len(A))
+            if s==0:return out
+    return out
+
+
+def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256):
+    """Bounded original-row partition with child-local character strengthening.
+
+    Returns (witness, decisive); (None,True) only after all branches are
+    proved empty, (None,False) on incomplete search. Nodes share one clock.
+    No local branch is ever promoted to a global affine constraint.
+    """
+    assert nodes>=0 and max_pivots>=0 and degree in (-1,0,1,2)
+    original=F;left=nodes
+    def valid(J,x):
+        B.pay('character_adaptive_verify',1+sum(map(len,J)))
+        return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in J)
+    def visit(J,K,u,V):
+        nonlocal left
+        if not left:return None,False
+        left-=1;B.pay('character_adaptive_node')
+        if 0 in K:return None,True
+        if valid(J,0):return u,True
+        # Root has already paid for its span; only strengthen surviving children.
+        if degree>=0 and len(V)<n:K=extend_character_span(J,K,p,B,degree,max_pivots)
+        if 0 in K:
+            B.pay('character_adaptive_local_empty');return None,True
+        bad=[G for G in J if sum(b for s,b in G)!=1]
+        G=min(bad,key=len);candidates=[];d=len(V)
+        for j in range(len(G)):
+            B.pay('character_adaptive_pattern',1+len(G))
+            H=canon((s,b^int(i==j)) for i,(s,b) in enumerate(G))
+            if H is None:continue
+            a,W=chart(d,H);assert len(W)<d
+            if valid(J,a):return lift(u,V,a),True
+            B.pay('character_adaptive_score',1+sum(map(len,J)))
+            score=sum(abs(sum(b^((s&a).bit_count()%2) for s,b in A)-1) for A in J)
+            candidates.append(((score,len(W),j),a,W))
+        for _,a,W in sorted(candidates):
+            if not left:return None,False
+            Q=restrict_character_span(K,W,a,p,B)
+            if 0 in Q:
+                B.pay('character_adaptive_projected_empty');continue
+            B.pay('character_adaptive_image',1+sum(map(len,J))*(1+len(W)))
+            R=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in A) for A in J)
+            x,done=visit(R,Q,lift(u,V,a),tuple(lift(0,V,w) for w in W))
+            if x is not None:return x,True
+            if not done:return None,False
+            B.pay('character_adaptive_backtrack')
+        return None,True
+    x,done=visit(F,basis,0,tuple(1<<i for i in range(n)))
+    if x is not None:assert done and valid(original,x)
+    return x,done
+
+
 def restriction_reopen(n,F,basis,p,B,steps):
     """One-path original-row restriction, sharing the replayed proof span.
 
@@ -365,7 +439,7 @@ def restriction_reopen(n,F,basis,p,B,steps):
     return None
 
 
-def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0,section_cap=0):
+def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0,section_cap=0,adaptive_nodes=0,adaptive_degree=0):
     """Sound original affine refinement and optional original witness.
 
     Share one replayed elimination span across both consumers. None carrier
@@ -390,18 +464,21 @@ def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,p
         a=lift(0,[reps[t] for t in freq],chart(len(freq),C)[0])
         pins.append((a,b^((a&u).bit_count()%2)))
     C=canon(P+tuple(pins));assert C is not None
-    if not quotient_cap and not path_steps and not section_cap:return C,None
+    if not quotient_cap and not path_steps and not section_cap and not adaptive_nodes:return C,None
     x=chart(n,C)[0]
     B.pay('character_pin_verify',1+sum(map(len,F)))
     if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return C,x
     z=lazy_section(len(V),R,basis,p,B,section_cap) if section_cap else None
-    if z is None and path_steps:
+    if z is None and (path_steps or adaptive_nodes):
         a,W=chart(len(V),Q)
         B.pay('character_path_pins',1+sum(map(len,R))*(1+len(W)))
         J=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in G) for G in R)
         K=restrict_character_span(basis,W,a,p,B) if Q else basis
         if 0 in K:return None,None
-        y=restriction_reopen(len(W),J,K,p,B,path_steps)
+        y=restriction_reopen(len(W),J,K,p,B,path_steps) if path_steps else None
+        if y is None and adaptive_nodes:
+            y,done=adaptive_reopen(len(W),J,K,p,B,adaptive_nodes,adaptive_degree,min(max_pivots,256))
+            if done and y is None:return None,None
         if y is not None:z=lift(a,W,y)
     if z is None and quotient_cap:z=quotient_reopen(len(V),R,basis,p,B,quotient_cap)
     if z is not None:
@@ -639,7 +716,95 @@ def test_character_section():
         print('section_holdout',seed,dict(stats),dict(cost))
 
 
+def test_character_adaptive():
+    from random import Random
+    from collections import Counter
+    from check_pnp_affine_normal_components import Exhausted, satisfies
+    def valid(F,x):return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+    F=(((16,1),(9,0),(14,1),(13,1),(3,0)),((27,1),(25,1)))
+    B=Budget(1000000);proof,_=eliminate(F,(0,),3,B,max_pivots=8);K=replay_span(F,proof,3,B)
+    assert restriction_reopen(5,F,K,3,B,5) is None
+    for degree in (-1,0,1):
+        C=Budget(1000000);x,done=adaptive_reopen(5,F,K,3,C,16,degree,64)
+        assert done and x in (15,19)
+        assert C.stats['character_adaptive_backtrack']>0
+        if degree>=0:assert C.stats['character_adaptive_local_empty']>0
+    assert adaptive_reopen(5,F,K,3,B,0)==(None,False)
+    rng=Random(36929);count=Counter()
+    for n in range(7):
+        for _ in range(60):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(7)))
+            T=[x for x in range(1<<n) if valid(F,x)]
+            for p in (3,5,7):
+                B=Budget(10000000);proof,_=eliminate(F,(0,),p,B,max_pivots=8);K=replay_span(F,proof,p,B)
+                D=extend_character_span(F,K,p,B,1,64)
+                assert all(sum(w*(-1)**((s&x).bit_count()%2) for s,w in A.items())%p==0 for A in D.values() for x in T)
+                for cap in (1,4,128):
+                    x,done=adaptive_reopen(n,F,K,p,B,cap,1,32)
+                    assert x is None or x in T
+                    assert not done or (x is not None)==bool(T)
+                    if cap==128:assert done
+                    count['checks']+=1;count['unknown']+=not done;count['witness']+=x is not None;count['empty']+=done and x is None
+                a=rng.randrange(1<<n);V=tuple(1<<i for i in range(n) if rng.randrange(2))
+                R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+                D=restrict_character_span(K,V,a,p,B);x,done=adaptive_reopen(len(V),R,D,p,B,128,1,32)
+                U=[y for y in range(1<<len(V)) if valid(F,lift(a,V,y))]
+                assert done and (x is not None)==bool(U) and (x is None or x in U)
+                count['transport']+=1
+    print('adaptive',dict(count))
+    for seed in (3692819,3692820):
+        rng=Random(seed);stats=Counter();cost=Counter()
+        for _ in range(240):
+            n=rng.choice((6,8,10));target=rng.randrange(1<<n);F=[]
+            for i in range(rng.randrange(3,8)):
+                G=rng.sample(range(1,1<<n),rng.randrange(3,7));j=rng.randrange(len(G))
+                F.append(tuple((a,((a&target).bit_count()%2)^int(k==j)) for k,a in enumerate(G)))
+            F=tuple(F);B=Budget(5000000);proof,empty=eliminate(F,(0,),3,B,max_pivots=64);assert not empty;K=replay_span(F,proof,3,B)
+            y=lazy_section(n,F,K,3,Budget(5000000),4);w=restriction_reopen(n,F,K,3,Budget(5000000),n)
+            stats['base']+=y is not None or w is not None
+            if y is not None or w is not None:continue
+            stats['stalled']+=1
+            for degree in (-1,0,1):
+                D=Budget(5000000);x,done=adaptive_reopen(n,F,K,3,D,16,degree,64)
+                assert x is None or valid(F,x);assert not done or x is not None
+                stats['recover'+str(degree)]+=x is not None;cost[str(degree)]+=sum(D.stats.values())
+        assert stats['stalled']==stats['recover-1']==stats['recover0']==stats['recover1']
+        print('adaptive_holdout',seed,dict(stats),dict(cost))
+    rng=Random(36930);stats=Counter()
+    for n in (5,6,7,8):
+        for _ in range(100):
+            F=tuple(tuple((rng.randrange(1,1<<n),rng.randrange(2)) for j in range(rng.randrange(3,7))) for i in range(rng.randrange(3,8)))
+            T=[x for x in range(1<<n) if valid(F,x)]
+            B=Budget(10000000);proof,_=eliminate(F,(0,),3,B,max_pivots=8);K=replay_span(F,proof,3,B)
+            for degree in (-1,0,1):
+                C=Budget(10000000);x,done=adaptive_reopen(n,F,K,3,C,4,degree,64)
+                assert x is None or x in T;assert not done or bool(T)==(x is not None)
+                stats['done'+str(degree)]+=done;stats['cost'+str(degree)]+=sum(C.stats.values())
+    assert stats['done-1']==151 and stats['done0']==335 and stats['done1']==338
+    print('adaptive_four_node',dict(stats))
+    rng=Random(3692821);checks=empty=verified=unknown=0
+    for n in range(7):
+        for _ in range(80):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(6))) for i in range(rng.randrange(6)))
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            T=[x for x in range(1<<n) if valid(F,x) and satisfies(x,H,())]
+            for degree in (0,1):
+                P,x=demand_character_close(n,F,H,Budget(5000000),degree=degree,max_pivots=24,section_cap=4,path_steps=n,adaptive_nodes=16)
+                if P is None:assert not T and x is None;empty+=1
+                else:
+                    assert canon(P+H)==P and all(satisfies(y,P,()) for y in T)
+                    assert x is None or x in T
+                    verified+=x is not None;unknown+=x is None
+                checks+=1
+    assert (checks,empty,verified,unknown)==(990,680,310,0)
+    try:adaptive_reopen(1,(((1,0),),),{},3,Budget(0));assert False
+    except Exhausted:pass
+    print('adaptive_demand',checks,empty,verified,unknown)
+
+
 def main():
+    test_character_adaptive()
     test_character_section()
     test_character_restriction_path()
     test_constructive_character_quotient()
