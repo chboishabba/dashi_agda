@@ -51,6 +51,5 @@ def run_projection(c):
         pos=np.asarray(Rbatch(*B,trial(Z,q,qs,m)));minus=np.asarray(Rbatch(*Bn,trial(R,qn,qsn,m)));zero=np.asarray(Rbatch(*Bz,trial(Z,qz,qz,m)))
         a=np.max(abs(pos-minus));b=np.max(abs(zero));print('projection signed/zero',m,a,b,flush=True);assert max(a,b)<1e-8
 
-
 if __name__=='__main__':
     c=np.array(json.loads(Path(sys.argv[1]).read_text().split('COEFFICIENTS ')[-1]));assert len(c)==252;run_projection(c)
