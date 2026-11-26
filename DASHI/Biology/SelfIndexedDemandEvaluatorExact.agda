@@ -89,9 +89,7 @@ and false b = false
 
 d0 d1 d2 d3 d4 d5 d6 d7 d8 : Digit
 d0 = fzero
-d1 = fsuc d0'
-  where d0' : Fin 8
-        d0' = fzero
+d1 = fsuc fzero
 d2 = fsuc (fsuc fzero)
 d3 = fsuc (fsuc (fsuc fzero))
 d4 = fsuc (fsuc (fsuc (fsuc fzero)))
