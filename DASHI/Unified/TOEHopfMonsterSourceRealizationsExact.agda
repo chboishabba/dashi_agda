@@ -194,3 +194,19 @@ open import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact pu
 
 open import DASHI.Physics.Foundations.TSFVKKFourMetricVerticalProbeFullReconstructionExact public
   using (originalKKFullFiveMetricRecoveredFromThreeProbeFamilies)
+
+
+------------------------------------------------------------------------
+-- BK: exact finite indicial polynomial, source AK5/BJ/BK.
+-- The matching-trace domain and Sturm-Liouville integration by parts
+-- are analytic obligations, not inferred from this ring identity.
+-- Source-written; no kernel acceptance claimed.
+------------------------------------------------------------------------
+
+open import Data.Rational.Base using (1ℚ)
+
+normalFirstIndicialFactorization :
+  (p : ℚ) →
+  p * (p - (1ℚ + 1ℚ)) - (1ℚ + 1ℚ + 1ℚ)
+  ≡ (p + 1ℚ) * (p - (1ℚ + 1ℚ + 1ℚ))
+normalFirstIndicialFactorization p = Ring.solve-∀ p
