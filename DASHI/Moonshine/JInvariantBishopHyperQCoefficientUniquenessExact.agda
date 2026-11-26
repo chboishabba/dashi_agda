@@ -6,6 +6,11 @@ module DASHI.Moonshine.JInvariantBishopHyperQCoefficientUniquenessExact where
 -- z, a derivative, or invoking a classical analytic identity theorem.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Fin.Base using (Fin; toℕ)
+import Data.Fin.Properties as FP
+import Data.Nat.Base as Nat
+import DASHI.Moonshine.JInvariantBishopPolynomialGeometricRatioExact as NAdd
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NP
@@ -244,3 +249,50 @@ prefixUnique f g hf hg h0 (suc n) k hk with k NP.≟ suc n
 allCoefficientsUnique : (f g : Series) → Solution f → Solution g →
   f zero ≃ g zero → (n : Nat) → f n ≃ g n
 allCoefficientsUnique f g hf hg h0 n = prefixUnique f g hf hg h0 n n NP.≤-refl
+
+-- Exact formal Euler Leibniz rule on the existing Cauchy coefficient.
+-- It uses i+(n-i)=n on the literal Fin(suc n) row, not analytic
+-- differentiation or interchange of a derivative and a limit.
+D1Meaning : (f : Series) (n : Nat) →
+  D 1 f n ≃ NR.natReal n * f n
+D1Meaning f n = P.*-congʳ (P.*-identityˡ (NR.natReal n))
+
+indexSplit : (n : Nat) (i : Fin (suc n)) →
+  NR.natReal n ≃ (NR.natReal (toℕ i) + NR.natReal (n Nat.∸ toℕ i))
+indexSplit n i =
+  P.≃-trans
+    (P.≃-refl₂ (sym (trans (NP.+-comm (toℕ i) (n Nat.∸ toℕ i))
+      (NP.m∸n+n≡m (FP.toℕ≤pred[n] i)))))
+    (NAdd.natRealAdd (toℕ i) (n Nat.∸ toℕ i))
+
+rowEuler : (f g : Series) (n : Nat) (i : Fin (suc n)) →
+  NR.natReal n * (f (toℕ i) * g (n Nat.∸ toℕ i)) ≃
+  (D 1 f (toℕ i) * g (n Nat.∸ toℕ i) +
+    f (toℕ i) * D 1 g (n Nat.∸ toℕ i))
+rowEuler f g n i =
+  P.≃-trans (P.*-congʳ (indexSplit n i))
+    (P.≃-trans
+      (let open P.ℝ-Solver in solve 4 (λ a b x y →
+        (a ⊕ b) ⊗ (x ⊗ y) ⊜ (a ⊗ x) ⊗ y ⊕ x ⊗ (b ⊗ y))
+        P.≃-refl (NR.natReal (toℕ i)) (NR.natReal (n Nat.∸ toℕ i))
+          (f (toℕ i)) (g (n Nat.∸ toℕ i)))
+      (P.+-cong (P.*-congʳ (P.≃-symm (D1Meaning f (toℕ i))))
+        (P.*-congˡ (P.≃-symm (D1Meaning g (n Nat.∸ toℕ i))))))
+
+eulerLeibniz : (f g : Series) (n : Nat) →
+  D 1 (f ⊗s g) n ≃ ((D 1 f ⊗s g) ⊕s (f ⊗s D 1 g)) n
+eulerLeibniz f g n =
+  P.≃-trans (D1Meaning (f ⊗s g) n)
+    (P.≃-trans
+      (P.≃-symm (C.BishopSum.*-distribˡ-sum (NR.natReal n)
+        (λ i → f (toℕ i) * g (n Nat.∸ toℕ i))))
+      (P.≃-trans (C.BishopSum.sum-cong-≋ (rowEuler f g n))
+        (C.BishopSum.∑-distrib-+
+          (λ i → D 1 f (toℕ i) * g (n Nat.∸ toℕ i))
+          (λ i → f (toℕ i) * D 1 g (n Nat.∸ toℕ i)))))
+
+-- Differentiation of the coefficient square needs no derivative
+-- theorem about evaluated analytic functions.
+squareEuler : (f : Series) → ((n : Nat) → (f ⊗s f) n ≃ X n) →
+  (n : Nat) → ((D 1 f ⊗s f) ⊕s (f ⊗s D 1 f)) n ≃ D 1 X n
+squareEuler f h n = P.≃-trans (P.≃-symm (eulerLeibniz f f n)) (P.*-congˡ (h n))
