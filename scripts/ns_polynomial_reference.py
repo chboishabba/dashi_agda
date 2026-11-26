@@ -5,7 +5,7 @@ DASHI: piecewise polynomial residual and same-data refinement certificate.
 No universal regularity claim. See controlling four-P0 roadmap.
 """
 from fractions import Fraction as Q
-from math import isqrt
+from math import isqrt, comb
 
 ZERO=(0,)*6
 SCALE=10**10
@@ -100,6 +100,53 @@ def validate(path,initial,nu):
         c=dt*sum((norm(u,True)/ (j+1) for j,u in enumerate(residual(dt,poly,nu))),Q(0))
         error=up(exp_upper(Q(2,nu)*dt*v0*v0)*(error+jump+c))
         if error>=nu/2: raise ValueError('strict error budget exceeded')
+        peak=max(peak,error); last=eval_end(poly)
+    return peak,up(norm(last,True)+error)
+
+def bernstein(poly):
+    """Convert power coefficients on [0,1] to Bernstein coefficients."""
+    d=len(poly)-1
+    if d<0: raise ValueError('empty polynomial')
+    return [lin(*((Q(comb(i,j),comb(d,j)),poly[j]) for j in range(i+1))) for i in range(d+1)]
+
+def growth(v,beta):
+    # max(0, sup_{x>=1} (2*v*x-beta*x*x)), with positive beta.
+    if v<0 or beta<=0: raise ValueError('invalid growth parameters')
+    return max(Q(0), 2*v-beta if v<=beta else v*v/beta)
+
+def cube_tail_upper(R,s,homogeneous_norm_squared):
+    """Upper critical norm of modes |k|_infty>R from an H^s bound.
+
+    Caller must supply a certified bound on the squared homogeneous norm
+    of that tail (or entire datum). R and s are positive integers.
+    """
+    if type(R) is not int or R<1 or type(s) is not int or s<1 or type(homogeneous_norm_squared) not in (Q,int) or homogeneous_norm_squared<0:
+        raise ValueError('invalid tail norm bound')
+    return sqrt_bounds(Q(26)*homogeneous_norm_squared/((2*s-1)*R**(2*s-1)))[1]
+
+def validate_tight(path,initial,nu,budget=None,*,initial_tail=Q(0)):
+    """Critical-norm bound with Bernstein enclosure and retained dissipation.
+
+    Charge every seam. Keep error below budget q<nu and reserve delta=min(nu/8,(nu-q)/2)
+    for H; the scalar estimate uses beta=nu-q-delta.
+    initial_tail is a caller-certified bound for the unrepresented datum.
+    No assertion of existence when validation fails.
+    """
+    if type(nu) not in (Q,int) or nu<=0: raise ValueError('positive exact viscosity required')
+    q=Q(nu,8) if budget is None else budget
+    if type(q) not in (Q,int) or not 0<q<nu: raise ValueError('invalid strict budget')
+    delta=min(Q(nu,8),Q(nu-q,2)); beta=nu-q-delta
+    if type(initial_tail) not in (Q,int) or not 0<=initial_tail<q: raise ValueError('invalid initial tail bound')
+    check(initial); last=initial; error=Q(initial_tail); peak=error
+    for dt,poly in path:
+        if type(dt) not in (Q,int) or dt<=0 or not poly: raise ValueError('invalid interval')
+        for u in poly: check(u)
+        jump=norm(lin((1,last),(-1,poly[0])),True)
+        v0=max(norm(u) for u in bernstein(poly))
+        rb=bernstein(residual(dt,poly,nu))
+        c=dt*sum((norm(u,True) for u in rb),Q(0))/len(rb)
+        error=up(exp_upper(dt*growth(v0,beta))*(error+jump+c))
+        if error>=q: raise ValueError('strict error budget exceeded')
         peak=max(peak,error); last=eval_end(poly)
     return peak,up(norm(last,True)+error)
 
