@@ -96,7 +96,7 @@ def positive_point(n,M,H,B,width=256):
     return None
 
 
-def block_witness(n,F,V,B,width=256,promotions=4):
+def block_witness(n,F,V,B,width=256,promotions=4,point_solver=positive_point):
     U=coordinates(n,V);d=len(U);k=len(V);H=set();E=[]
     B.pay('block_chart',n+1)
     for G in F:
@@ -109,7 +109,7 @@ def block_witness(n,F,V,B,width=256,promotions=4):
     order=sorted(R,key=lambda i:(len(E[i]),-sum(i in (a,b) for a,b,_ in T),i))
     for stage in range(min(promotions,len(E))+1):
         B.pay('checkpoint');L=masked(Q,E,R,T,B);M=marginal(L,d,k,B)
-        q=positive_point(d,M,H,B,width)
+        q=point_solver(d,M,H,B,width)
         if q is not None:
             y,c,P=q;x=reopen((tuple(U),tuple(V),tuple(E),L,c,stage),y,B)
             assert satisfies(x,(),F);return x,stage,P,c
@@ -120,7 +120,7 @@ def block_witness(n,F,V,B,width=256,promotions=4):
     return None
 
 
-def solve(n,required,F,cap):
+def solve(n,required,F,cap,point_solver=positive_point):
     B=Budget(cap)
     try:
         B.pay('input',n+len(required)+sum(len(G)+1 for G in F)+1)
@@ -133,7 +133,7 @@ def solve(n,required,F,cap):
         W=list(blocks(d,H,B));W.sort(key=lambda A:(len(A),A));share=B.left//len(W)
         for A in W:
             local=Budget(share)
-            try:q=block_witness(d,H,A,local)
+            try:q=block_witness(d,H,A,local,point_solver=point_solver)
             except Exhausted:q=None
             B.pay('block_work',min(share,share-local.left))
             if q is not None:
