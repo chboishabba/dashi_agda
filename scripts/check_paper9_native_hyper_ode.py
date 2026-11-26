@@ -87,3 +87,30 @@ for n in range(1,N+1):
 print(f'{N+1} degrees: three independent coefficient constructions, square, cleared jet, 3 Ramanujan equations, bracket and ODE PASS',flush=True)
 print(f'{N} single-coefficient perturbations rejected at first changed degree PASS',flush=True)
 print('SymPy',__version__)
+
+# Replay the actual finite-composition definitions (as opposed to the
+# independent recursive inverse and square root above).
+def compose(outer,inner):
+    result=zero[:]; p=one[:]
+    for k in range(N+1):
+        assert all(v==0 for v in p[:k])
+        result=add(result,scale(outer[k],p))
+        p=mul(inner,p)
+    return result
+half=[Q(1)]
+for k in range(N): half.append(Q(1-2*k,2*(k+1))*half[-1])
+root2=compose(half,sub(X,one))
+inv3=compose([Q(1)]*(N+1),sub(one,x3))
+z2=mul(d,inv3)
+assert mul(x3,inv3)==one and root2==F and z2==z
+src=[Q((-1)**k*factorial(6*k),factorial(3*k)*factorial(k)**3*C**k) for k in range(N+1)]
+outer=[v/z0**k for k,v in enumerate(src)]
+assert compose(outer,z2)==h and compose(D(outer),z2)==j
+for k in range(N):
+    assert (k+1)**3*outer[k+1]==(k**3+Q(3,2)*k*k+Q(23,36)*k+Q(5,72))*outer[k]
+assert D(mul(h,h))==add(mul(D(h),h),mul(h,D(h)))
+assert mul(X,D(h))==mul(Y,j)
+print(f'{N+1} degrees: literal finite compositions, zero-mode support, Leibniz and composed Euler-flow PASS',flush=True)
+assert Q(256,7000)<Q(1,25) and Q(2688,35000)<Q(2,25)
+assert ((1+Q(1,25))**3+(1+Q(2,25))**2-2)/(1-Q(1,25))**3==Q(1517,4608)<Q(1,3)
+print('3 exact absolute composition budget inequalities/identity PASS',flush=True)
