@@ -269,3 +269,28 @@ prefix4 d (suc n) = trans
   (cong (λ v → v +z ((+ 30) *z weight4 d (d +z ((- (+ 1)) *z (+ (suc n)))))) (prefix4 d n))
   (trans (cong (λ u → anti4 d (+ n) +z ((+ 30) *z weight4 d (d +z ((- (+ 1)) *z u)))) (sym (nextInteger n)))
     (trans (sym (anti4Step d (+ n))) (cong (anti4 d) (nextInteger n))))
+
+previousInteger : (n : Nat) → (+ n) ≡ ((+ (suc n)) +z (- (+ 1)))
+previousInteger n = trans
+  (zsolve 1 (λ t → t ⊜ (t ⊕ zcon (+ 1)) ⊕ zcon (- (+ 1))) refl (+ n))
+  (cong (λ t → t +z (- (+ 1))) (nextInteger n))
+
+boundaryClosed1 : (n : Nat) →
+  scaledBoundaryPrefix weight1 (+ 6) (+ (suc n)) n ≡ boundary1 (+ (suc n))
+boundaryClosed1 n = trans (prefix1 (+ (suc n)) n)
+  (trans (cong (anti1 (+ (suc n))) (previousInteger n)) (anti1AtEnd (+ (suc n))))
+
+boundaryClosed2 : (n : Nat) →
+  scaledBoundaryPrefix weight2 (+ 30) (+ (suc n)) n ≡ boundary2 (+ (suc n))
+boundaryClosed2 n = trans (prefix2 (+ (suc n)) n)
+  (trans (cong (anti2 (+ (suc n))) (previousInteger n)) (anti2AtEnd (+ (suc n))))
+
+boundaryClosed3 : (n : Nat) →
+  scaledBoundaryPrefix weight3 (+ 420) (+ (suc n)) n ≡ boundary3 (+ (suc n))
+boundaryClosed3 n = trans (prefix3 (+ (suc n)) n)
+  (trans (cong (anti3 (+ (suc n))) (previousInteger n)) (anti3AtEnd (+ (suc n))))
+
+boundaryClosed4 : (n : Nat) →
+  scaledBoundaryPrefix weight4 (+ 30) (+ (suc n)) n ≡ boundary4 (+ (suc n))
+boundaryClosed4 n = trans (prefix4 (+ (suc n)) n)
+  (trans (cong (anti4 (+ (suc n))) (previousInteger n)) (anti4AtEnd (+ (suc n))))
