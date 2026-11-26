@@ -92,6 +92,39 @@ def close(n,R,B,pairs=True,required=()):
     return None,None
 
 
+def affine_onehot_close(n,row_bits,B,required=(),pairs=True):
+    """Transport existing one-hot pair hull to a demanded affine row family.
+
+    Returns (sound retained demand, original attaining point), or (None,None)
+    for certified emptiness. A nonempty retained demand without a point is
+    inconclusive; no original solution is lost. Share identical affine bits
+    across rows, preserving within-row multiplicity.
+    """
+    H=canon(required)
+    if H is None:return None,None
+    u,V=chart(n,H);S=[];offset=0;R=[];index={}
+    for G in row_bits:
+        copies={};row=0
+        for a,b in G:
+            k=copies.get((a,b),0);copies[a,b]=k+1;key=(a,b,k)
+            if key not in index:
+                index[key]=len(S);offset|=b<<len(S);S.append(a)
+            row|=1<<index[key]
+        R.append(row)
+    m=len(S);B.pay('affine_hull_image',1+m*(1+len(V)))
+    o=offset^value(S,u);W=span(value(S,v) for v in V)
+    N=orth(m,W);P=tuple((a,(a&o).bit_count()%2) for a in N)
+    Q,w=close(m,tuple(R),B,pairs=pairs,required=P)
+    if Q is None:return None,None
+    B.pay('affine_hull_reopen',1+m*(1+len(Q)))
+    H1=canon(H+tuple((lift(0,S,a),b^((a&offset).bit_count()%2)) for a,b in Q))
+    assert H1 is not None
+    if w is None:return H1,None
+    K=canon(H1+tuple((a,((w^offset)>>j)&1) for j,a in enumerate(S)))
+    assert K is not None;x=chart(n,K)[0]
+    assert all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in row_bits)
+    return H1,x
+
 def weight_chart(n,u,V,B):
     M={}
     for i in range(n):
@@ -149,7 +182,30 @@ def solve(m,sets,cap,width=4):
     except (Exhausted,RecursionError):return None,B.stats,False
 
 
+def test_affine_onehot_close():
+    rng=Random(26113692026);checks=0
+    for n in range(9):
+        for _ in range(160):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(7))) for j in range(rng.randrange(8)))
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            valid=lambda x:all(sum(b^((a&x).bit_count()%2) for a,b in G)==1 for G in F)
+            truth=[x for x in range(1<<n) if satisfies(x,H,()) and valid(x)]
+            P,w=affine_onehot_close(n,F,Budget(20000000),H)
+            if P is None:assert not truth
+            else:
+                assert canon(P+H)==P and all(satisfies(x,P,()) for x in truth)
+                if w is not None:assert w in truth
+            checks+=1
+    # Every row pair is feasible, but the collective closure excludes all.
+    F=(((15,0),(26,0),(28,1)),((29,1),(18,0)),((31,1),(13,1),(15,0),(25,0),(8,1),(13,1)),((16,0),(15,1)),((29,1),(4,1)),((7,1),(26,1),(6,1),(10,1)))
+    valid=lambda x,G:sum(b^((a&x).bit_count()%2) for a,b in G)==1
+    assert all(any(valid(x,G) and valid(x,J) for x in range(32)) for G,J in combinations(F,2))
+    assert affine_onehot_close(5,F,Budget(20000000))==(None,None)
+    print('affine_onehot_close',checks,'collective control PASS')
+
 def main():
+    test_affine_onehot_close()
     rng=Random(369);tests=checks=verified=empty=unknown=modchecks=modgain=0
     for m in (3,6,9,12):
         for _ in range(100):
