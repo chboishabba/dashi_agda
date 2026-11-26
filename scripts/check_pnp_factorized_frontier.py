@@ -157,6 +157,19 @@ def main():
                 assert k==0 and t==j and g>=2 and g%2==0 and r>=g and U>=g
                 if j:assert left<H[j-1][-1] and r==H[j-1][5]-H[j-1][4]
                 improvements+=1
+    # Actual two-time source under narrow boundary and one-frequency cap.
+    S=[(2,3,0),(1,3,7),(8,6,5),(4,2,0),(5,3,4),(2,3,6),(8,0,4),
+       (8,0,6),(4,5,6),(0,5,3),(8,5,3),(4,3,6),(3,8,1),(0,5,2)]
+    R=[sum(1<<j for j,s in enumerate(S) if i in s) for i in range(9)]
+    P=canon((a,1) for a in R);x,V=chart(14,P);H=[]
+    y,done=indexed_descent(14,P,x,3,Budget(10000000),0,1,2,H,k=7)
+    assert done and y==14 and all((y&a).bit_count()==1 for a in R)
+    assert len(H)==2 and [h[1] for h in H]==[0,1] and all(h[0]==7 for h in H)
+    assert H[1][5]==H[0][5]-H[0][4] and H[1][6]<=H[0][6]-H[0][4]
+    print('two_time',x,y,[(h[0],h[1],h[4],h[5],h[6]) for h in H])
+    try:indexed_descent(14,P,x,3,Budget(0),0,1,2)
+    except Exhausted:pass
+    else:raise AssertionError('zero cap must not admit')
     print(dict(ritz=ritz_checks,intervals=intervals,seams=seams,fixtures=fixtures,verified=verified,empty=empty,unknown=unknown,improvements=improvements,controls='PASS'))
 
 if __name__=='__main__':main()
