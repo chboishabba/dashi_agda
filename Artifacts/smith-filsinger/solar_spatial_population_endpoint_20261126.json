@@ -1,0 +1,107 @@
+{
+  "status": "CONDITIONAL_FINITE_GRID_INTEGRATION",
+  "physical_admission": false,
+  "executed_blobs": {
+    "spatial": "2e1cae248a466b10217d0921b2c834f5a3d4ff66",
+    "population": "d870ef5004b08954e3f8f1124e8901c952a615f2",
+    "endpoint": "f3dd37eab4fb3c60925c96d42a3f9fcd2cf59607",
+    "coupled_cell_donor": "f83152205ead0c27a1ac02b06f91862b22fbabc9"
+  },
+  "stdout_sha256": {
+    "spatial": "96859f3c8b0d8d7019fb3c82adac1b729f50d80a1f0f4ca8fe4db1bdd064dbf0",
+    "population": "ad4ea2b95a94e7186e66db7c90302c2ade665fbdf894371fe7386b2fca27c003",
+    "endpoint": "b1e01114133cc706ccc05d4b8c8d5dfd5e3eb995becdb799eeb64237207b3607"
+  },
+  "spatial": {
+    "temporal_errors": [
+      0.0017577552909822628,
+      0.00043941641336942163,
+      0.00010985281077897074,
+      0.000027463123588627733
+    ],
+    "temporal_orders": [
+      2.0000735727444314,
+      2.000016975112436,
+      2.000004155602876
+    ],
+    "vacuum_dispersion_errors": [
+      0.16025038933814972,
+      0.04029500266348229,
+      0.0100883260877076,
+      0.0025229932700803204
+    ],
+    "vacuum_spatial_orders": [
+      1.9916550282636967,
+      1.997914114431442,
+      1.9994785510193493
+    ],
+    "max_cell_face_global_ledger_residual": 2.3662712414496134e-16,
+    "negative_boundary_control": true,
+    "cone_reached": 15,
+    "cone_total": 38,
+    "symbolic_rotation": true,
+    "packet_sha256": "d771b81b3498e4cf9424325afe9e27f1c3f8125d0ba6c608c175cb62bd955fb6",
+    "model_rows": 9,
+    "uniform_trial_grids": 18,
+    "model_steps": 72,
+    "max_model_ledger_residual": 4.092863201132779e-17
+  },
+  "population": {
+    "event_fixtures": 54,
+    "charge_creation_rejected": true,
+    "max_local_residual": 1.3322676295501878e-15,
+    "combined_sequence_residual": -2.445960101127298e-16,
+    "sequence_state_dimensions": [
+      8,
+      20,
+      20
+    ],
+    "density_return_without_state_return": true,
+    "full_state_difference": 0.896389591409963
+  },
+  "endpoint": {
+    "state_dimension": 14,
+    "steps": 18,
+    "control_coordinates": 108,
+    "endpoint_rank": 15,
+    "receiver_only_rank": 1,
+    "null_dimension": 93,
+    "receiver_only_restoration_rejected": true,
+    "trial_null_radius": 2,
+    "comparison_fixtures": 40,
+    "source_on": {
+      "endpoint_residual": 1.0515947289212717e-15,
+      "base_net": 0.03980292039815493,
+      "optimized": {
+        "left_inward": 0.16698200955078868,
+        "right_inward": 0,
+        "controller": -0.11823408129731885,
+        "material_loss": 0.026659904074923864,
+        "load": 0.022088024178545756,
+        "stored_final": 5.412457228471134e-31,
+        "net_load_less_controller": 0.1403221054758646,
+        "balance_residual": -2.0816681711721685e-16,
+        "kkt_residual": 9.944911469243422e-17,
+        "objective_replay_error": 1.1102230246251565e-16
+      }
+    },
+    "source_off": {
+      "endpoint_residual": 2.6404229502619987e-16,
+      "base_net": -0.011832988644231738,
+      "optimized": {
+        "left_inward": 0,
+        "right_inward": 0,
+        "controller": 0.019512552367729946,
+        "material_loss": 0.009568767269900363,
+        "load": 0.009943785097829548,
+        "stored_final": 4.7410531864991845e-32,
+        "net_load_less_controller": -0.009568767269900398,
+        "balance_residual": -3.469446951953614e-17,
+        "kkt_residual": 3.800520612478697e-18,
+        "objective_replay_error": 5.724587470723463e-17
+      }
+    }
+  },
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90; repeated output matches and final spatial/population regression identical after adding material stage input trace. No CI or native kernel.",
+  "scope": "Finite 1D staggered model; hypothetical uniform grids with source-backed material coefficients, not radar mesh. Synthetic dimensionless endpoint, prescribed boundary source and drive bound, ideal signed controller recovery assumption. No measured source, ground, thermal chemistry, full 3D retarded field or physical extraction."
+}
