@@ -3,7 +3,8 @@ module DASHI.Foundations.BishopChudnovskyRawCoordinateWeldExact where
 -- SOURCE-WRITTEN, UNCOMPILED. Mirror the literal raw rational expressions
 -- in Integration/Paper9LiteralCross.lean, on the ORIGINAL Agda owners.
 -- This is native coordinate correspondence, not imported Lean evidence.
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _^_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat.Base using (_^_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (just)
 open import Data.Product.Base using (_×_; _,_; Σ; proj₁; proj₂)
@@ -42,7 +43,7 @@ sign (suc n) = Z._*_ (sign n) (Z.-_ (Z.+_ 1))
 
 signCorrect : (n : Nat) → S.qSign n ≡ Q.mkℚᵘ (sign n) 0
 signCorrect zero = refl
-signCorrect (suc n) rewrite signCorrect n = refl
+signCorrect (suc n) = cong (λ q → q Q.* S.qMinusOne) (signCorrect n)
 
 omittedDen : (d n : Nat) → Nat
 omittedDen d n = I.oddExponent n * (d ^ I.oddExponent n)
@@ -80,10 +81,10 @@ weighted c d n nz = F.frac (Z._*_ c (sign n)) (omittedDen d n) (omittedNZ d n nz
 weightedCorrect : (c : Z.ℤ) (d n : Nat) (nz : N.NonZero d) →
   (F.frac c 1 N.nonZero Q.* S.qAtanTerm (F.frac (Z.+_ 1) d nz) n)
     Q.≃ weighted c d n nz
-weightedCorrect c d n nz rewrite signCorrect n =
+weightedCorrect c d n nz =
   QP.≃-trans
     (QP.*-cong QP.≃-refl
-      (QP.*-cong QP.≃-refl (unsignedCorrect d n nz)))
+      (QP.*-cong (QP.≃-reflexive (signCorrect n)) (unsignedCorrect d n nz)))
     (QP.≃-trans
       (QP.*-cong QP.≃-refl
         (scaleFraction (sign n) (Z.+_ 1) (omittedDen d n) (omittedNZ d n nz)))
@@ -322,3 +323,19 @@ radiusDenSuc n = fracDen (Z.+_ 4) (25 ^ suc n) (NP.m^n≢0 25 (suc n))
 
 -- A proof of the native RawCross family is still needed. This module
 -- establishes coordinate/consumer transport, not that family.
+
+-- The Lean raw pair denominator is Nat; retain that projection too.
+sumDenNat : (p q : Q.ℚᵘ) →
+  Q.↧ₙ (p Q.+ q) ≡ Q.↧ₙ p * Q.↧ₙ q
+sumDenNat (Q.mkℚᵘ a b) (Q.mkℚᵘ c d) =
+  fracDen _ _ (F.prodNZ (suc b) (suc d) N.nonZero N.nonZero)
+
+stageDenNatStep : (n : Nat) →
+  Q.↧ₙ (rawStage (suc n)) ≡ Q.↧ₙ (rawStage n) * Q.↧ₙ (rawTerm n)
+stageDenNatStep n = sumDenNat (rawStage n) (rawTerm n)
+
+stageZeroNum : Q.↥ (rawStage zero) ≡ Z.+_ 0
+stageZeroNum = refl
+
+stageZeroDen : Q.↧ₙ (rawStage zero) ≡ 1
+stageZeroDen = refl
