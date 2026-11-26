@@ -565,7 +565,9 @@ def adaptive_reopen(n,F,basis,p,B,nodes=32,degree=0,max_pivots=256,learned=None,
             if certificates is not None:
                 if proof is None and R is not None and degree>=0:
                     P,empty=eliminate(R,source_shifts(R,degree,B),p,B,max_pivots=max_pivots)
-                    if empty:C=lift_onehot_exclusion(n,J,e,j,compact(P,B),p,B)
+                    if empty:
+                        C=lift_onehot_exclusion(n,J,e,j,compact(P,B),p,B)
+                        if C is None:raise AssertionError('invalid standalone child lift')
                 if C is not None:
                     certificates.append((e,j,C));B.pay('character_adaptive_lifted',1+len(C))
         for j in range(len(G)):
@@ -1140,6 +1142,38 @@ def test_mixed_character_provenance():
     try:adaptive_reopen(1,(((1,0),),),{},3,Budget(0),1,source_proof=());assert False
     except Exhausted:pass
     print('proof_carrying_adaptive',dict(stats))
+    # Full proof mode must preserve the lightweight demand outcomes and pins.
+    rng=Random(369261134);stats=Counter()
+    for n in range(9):
+        for _ in range(120):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(7)))
+            H=canon((rng.randrange(1<<n),rng.randrange(2)) for i in range(rng.randrange(n+1)))
+            if H is None:continue
+            T=[x for x in range(1<<n) if valid(F,x) and all((s&x).bit_count()%2==b for s,b in H)]
+            for degree in (-1,0):
+                results=[]
+                for mode in (False,True):
+                    B=Budget(10000000);P,y=demand_character_close(n,F,H,B,degree=0,max_pivots=8,adaptive_nodes=4,adaptive_degree=degree,adaptive_provenance=mode)
+                    assert P is not None or not T
+                    assert P is None or (canon(P+H)==P and all(all((s&x).bit_count()%2==b for s,b in P) for x in T))
+                    assert y is None or y in T
+                    results.append((P,y));stats['checks']+=1
+                assert results[0]==results[1]
+    assert stats['checks']==3832
+    rng=Random(369261135);stats=Counter()
+    for n in range(1,8):
+        for _ in range(100):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(1,6)))
+            for p in (3,5,7):
+                B=Budget(10000000);seed,_=eliminate(F,(0,),p,B,max_pivots=4);K=replay_span(F,seed,p,B);P=[]
+                x,done=adaptive_reopen(n,F,K,p,B,128,0,8,source_proof=seed,refutations=P)
+                if not P:continue
+                q=P[0];a=rng.randrange(1<<n);V=tuple(rng.randrange(1<<n) for _ in range(rng.randrange(n+1)));R=transform(F,V,a)
+                assert verify(R,transport_proof(q,V,a,p,B),p,B=B)
+                j,t,ops,c=q[-1];assert not verify(F,q[:-1]+((j,t,ops,-c%p),),p,B=B)
+                stats['transport']+=1;stats['joined']+=bool(B.stats['character_join_proof_rows'])
+    assert (stats['transport'],stats['joined'])==(1521,596)
+    print('proof_carrying_transport',dict(stats))
 
 
 def main():
