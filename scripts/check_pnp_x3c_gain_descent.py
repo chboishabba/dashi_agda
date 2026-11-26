@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4):
+def solve(m,sets,cap,width=4,indexed=False,history=None):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -113,6 +113,11 @@ def solve(m,sets,cap,width=4):
         P,x=close(n,R,B,required=D+pins)
         if P is None or x is not None:return x,B.stats,True
         x=chart(n,P)[0]
+        if indexed:
+            from check_pnp_factorized_frontier import indexed_descent
+            x,done=indexed_descent(n,P,x,k,B,width=width,history=history)
+            if x is not None:assert cover(R,x)
+            return x,B.stats,done
         while x.bit_count()>k:
             B.pay('descent');v,exact=improve(n,P,x,B,width)
             if v is None:return None,B.stats,exact
