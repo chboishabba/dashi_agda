@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -112,10 +112,21 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
         if D is None:return None,B.stats,True
         P,x=close(n,R,B,required=D+pins)
         if P is None or x is not None:return x,B.stats,True
+        # Original absolute-coordinate lookahead; K refinement is independent
+        # of subsequent incumbent time. Keep the existing default unchanged.
+        refinement=0
+        if lookahead_depth:
+            from check_pnp_exact_cover_pair_hull import disjunctive_hull
+            F=tuple(tuple((1<<j,0) for j in bits(a)) for a in R)
+            Q,y=disjunctive_hull(n,F,B,P,lookahead_depth,lookahead_rounds)
+            if Q is None or y is not None:
+                if y is not None:assert satisfies(y,P,()) and cover(R,y)
+                return y,B.stats,True
+            refinement=int(Q!=P);P=Q
         x=chart(n,P)[0]
         if indexed:
             from check_pnp_factorized_frontier import indexed_descent
-            y,done=indexed_descent(n,P,x,k,B,width=width,history=history)
+            y,done=indexed_descent(n,P,x,k,B,width=width,history=history,k=refinement)
             if y is not None:assert cover(R,y)
             if done or not demand:return y,B.stats,done
             # Inconclusive indexed observation: reopen the same retained
@@ -157,6 +168,8 @@ def main():
             y,_,finished=solve(m,S,2000000,demand=True)
             assert finished and (y is not None)==bool(T) and (y is None or y in T)
             y,_,finished=solve(m,S,2000000,demand=True,core_cover=8)
+            assert finished and (y is not None)==bool(T) and (y is None or y in T)
+            y,_,finished=solve(m,S,2000000,demand=True,lookahead_depth=1)
             assert finished and (y is not None)==bool(T) and (y is None or y in T)
             x,_,done=solve(m,S,2000000);fixtures+=1
             if x is not None:assert done and x in T;verified+=1
