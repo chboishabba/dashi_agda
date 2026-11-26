@@ -1148,3 +1148,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## One-path character-span restriction and noncompulsory quotient closure — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#one-path-character-span-restriction-and-noncompulsory-quotient-closure--26-november-2026). Exact full ideal restriction and optional replay-span one-path recovery implemented (sourceBacked); capped greedy failure UNKNOWN, explicit inhabited negative control retained; compulsory full quotient dimension exponential even on connected easy star (scoped leafBlocked). All thirteen universal endpoint obligations remain leafOpen; no arbitrary-computation lower bound or native admission.
+
+
+## Sparse row-projector sections — 26 November 2026
+
+See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#sparse-row-projector-sections-without-module-closure--26-november-2026). Single evolving sparse section reuses replayed character span and original one-hot row constraints without complete module closure; conditional zero is sound even in incomplete span, nonzero not feasibility. Existing restriction/module paths preserved. Previous four-cover original source recovered with retained support2; two 240-source finite holdouts show complementary coverage/cost. Candidate/sourceBacked, no native leafClosed status. No new hard residual surviving disjunctive closure established, no uniform polynomial cap theorem. All thirteen universal endpoints remain leafOpen; seven alternatives retained.
