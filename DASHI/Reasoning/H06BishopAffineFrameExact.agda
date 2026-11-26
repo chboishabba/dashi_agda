@@ -388,3 +388,124 @@ recoverSecond (pivot2 a b c d nz) ou ov u v =
       (BP.*-identityˡ v))
 
 -- Source-specific point transport, not yet all-chart setoid equivalence.
+
+
+-- Reverse-solve the selected w=1 frame from its actual matrix. The trace
+-- denominator is strictly positive on this chart, not at every SO3 point.
+traceDenominator : Matrix3 → B.ℝ
+traceDenominator (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) =
+  B._+_ B.1ℝ (B._+_ a (B._+_ e j))
+
+four : B.ℝ
+four = B._+_ (B._+_ B.1ℝ B.1ℝ) (B._+_ B.1ℝ B.1ℝ)
+
+fourPositive : B._<_ B.0ℝ four
+fourPositive =
+  let one = BP.0<x⇒posx onePositive
+      two = BP.posx,y⇒posx+y one one
+  in BP.posx⇒0<x (BP.posx,y⇒posx+y two two)
+
+skewX skewY skewZ : Matrix3 → B.ℝ
+skewX (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) = B._-_ h f
+skewY (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) = B._-_ c g
+skewZ (matrix3 (vec3 a d g) (vec3 b e h) (vec3 c f j)) = B._-_ d b
+
+leadingNormPositive : (f : Frame3) →
+  B._<_ B.0ℝ (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f))
+leadingNormPositive f =
+  BP.<-respʳ-≃ (BP.≃-sym (normLeadingOne f)) (normPositive f)
+
+leadingInv : Frame3 → B.ℝ
+leadingInv f = Inv._⁻¹
+  (norm4 B.1ℝ (Frame3.x f) (Frame3.y f) (Frame3.z f))
+  (leadingOneApart f)
+
+leadingInvPositive : (f : Frame3) → B.Positive (leadingInv f)
+leadingInvPositive f = Rec.inversePositive (leadingOneApart f) (leadingNormPositive f)
+
+traceFactor : (f : Frame3) →
+  B._≃_ (traceDenominator (frameRotation f)) (B._*_ four (leadingInv f))
+traceFactor (frame3 x y z) =
+  let n = norm4 B.1ℝ x y z
+      i = leadingInv (frame3 x y z)
+      r = frameRotation (frame3 x y z)
+      open BP.ℝ-Solver
+  in BP.≃-trans
+    (BP.+-cong (BP.≃-sym (Inv.*-inverseˡ n (leadingOneApart (frame3 x y z)))) BP.≃-refl)
+    (solve 4 (λ x y z i →
+      (i ⊗ (Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z))))
+      ⊕ (i ⊗ ((Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z)))
+                  ⊖ ((y ⊗ y ⊕ z ⊗ z) ⊕ (y ⊗ y ⊕ z ⊗ z)))
+      ⊕ (i ⊗ ((Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z)))
+                  ⊖ ((x ⊗ x ⊕ z ⊗ z) ⊕ (x ⊗ x ⊕ z ⊗ z)))
+      ⊕ i ⊗ ((Κ 1ℚᵘ ⊗ Κ 1ℚᵘ ⊕ (x ⊗ x ⊕ (y ⊗ y ⊕ z ⊗ z)))
+                  ⊖ ((x ⊗ x ⊕ y ⊗ y) ⊕ (x ⊗ x ⊕ y ⊗ y)))))
+      ⊜ (((Κ 1ℚᵘ ⊕ Κ 1ℚᵘ) ⊕ (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ)) ⊗ i))
+      BP.≃-refl x y z i)
+
+tracePositive : (f : Frame3) → B._<_ B.0ℝ (traceDenominator (frameRotation f))
+tracePositive f = BP.<-respʳ-≃ (BP.≃-sym (traceFactor f))
+  (BP.posx⇒0<x (BP.posx,y⇒posx*y (BP.0<x⇒posx fourPositive) (leadingInvPositive f)))
+
+-- The inverse is a real operation on a supplied matrix with a nonzero
+-- trace denominator, not a return of the stored three input coordinates.
+recoverFrame : (r : Matrix3) → B._≄0 (traceDenominator r) → Frame3
+recoverFrame r nz =
+  let i = Inv._⁻¹ (traceDenominator r) nz
+  in frame3 (B._*_ i (skewX r)) (B._*_ i (skewY r)) (B._*_ i (skewZ r))
+
+-- Selected chart inverse: skew entries are 4 i times the original
+-- coordinates. Use the genuine inverse cancellation for each.
+skewXFactor : (f : Frame3) →
+  B._≃_ (skewX (frameRotation f)) (B._*_ (B._*_ four (leadingInv f)) (Frame3.x f))
+skewXFactor (frame3 x y z) =
+  let open BP.ℝ-Solver in
+  solve 4 (λ x y z i →
+    i ⊗ ((y ⊗ z ⊕ Κ 1ℚᵘ ⊗ x) ⊕ (y ⊗ z ⊕ Κ 1ℚᵘ ⊗ x))
+    ⊖ i ⊗ ((y ⊗ z ⊖ Κ 1ℚᵘ ⊗ x) ⊕ (y ⊗ z ⊖ Κ 1ℚᵘ ⊗ x))
+    ⊜ ((((Κ 1ℚᵘ ⊕ Κ 1ℚᵘ) ⊕ (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ)) ⊗ i) ⊗ x))
+    BP.≃-refl x y z (leadingInv (frame3 x y z))
+
+skewYFactor : (f : Frame3) →
+  B._≃_ (skewY (frameRotation f)) (B._*_ (B._*_ four (leadingInv f)) (Frame3.y f))
+skewYFactor (frame3 x y z) =
+  let open BP.ℝ-Solver in
+  solve 4 (λ x y z i →
+    i ⊗ ((x ⊗ z ⊕ Κ 1ℚᵘ ⊗ y) ⊕ (x ⊗ z ⊕ Κ 1ℚᵘ ⊗ y))
+    ⊖ i ⊗ ((x ⊗ z ⊖ Κ 1ℚᵘ ⊗ y) ⊕ (x ⊗ z ⊖ Κ 1ℚᵘ ⊗ y))
+    ⊜ ((((Κ 1ℚᵘ ⊕ Κ 1ℚᵘ) ⊕ (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ)) ⊗ i) ⊗ y))
+    BP.≃-refl x y z (leadingInv (frame3 x y z))
+
+skewZFactor : (f : Frame3) →
+  B._≃_ (skewZ (frameRotation f)) (B._*_ (B._*_ four (leadingInv f)) (Frame3.z f))
+skewZFactor (frame3 x y z) =
+  let open BP.ℝ-Solver in
+  solve 4 (λ x y z i →
+    i ⊗ ((x ⊗ y ⊕ Κ 1ℚᵘ ⊗ z) ⊕ (x ⊗ y ⊕ Κ 1ℚᵘ ⊗ z))
+    ⊖ i ⊗ ((x ⊗ y ⊖ Κ 1ℚᵘ ⊗ z) ⊕ (x ⊗ y ⊖ Κ 1ℚᵘ ⊗ z))
+    ⊜ ((((Κ 1ℚᵘ ⊕ Κ 1ℚᵘ) ⊕ (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ)) ⊗ i) ⊗ z))
+    BP.≃-refl x y z (leadingInv (frame3 x y z))
+
+recoverCoordinate : (f : Frame3) (v k : B.ℝ) →
+  B._≃_ k (B._*_ (B._*_ four (leadingInv f)) v) →
+  B._≃_ (B._*_ (Inv._⁻¹ (traceDenominator (frameRotation f)) (inj₂ (tracePositive f))) k) v
+recoverCoordinate f v k eq =
+  let d = traceDenominator (frameRotation f)
+      nz = inj₂ (tracePositive f)
+      i = Inv._⁻¹ d nz
+  in BP.≃-trans (BP.*-congˡ eq)
+    (BP.≃-trans (BP.*-congˡ (BP.*-congʳ (BP.≃-sym (traceFactor f))))
+      (BP.≃-trans (BP.≃-sym (BP.*-assoc i d v))
+        (BP.≃-trans (BP.*-congʳ (Inv.*-inverseˡ d nz)) (BP.*-identityˡ v))))
+
+frameReopens : (f : Frame3) →
+  let g = recoverFrame (frameRotation f) (inj₂ (tracePositive f))
+  in B._≃_ (Frame3.x g) (Frame3.x f) ×
+    (B._≃_ (Frame3.y g) (Frame3.y f) × B._≃_ (Frame3.z g) (Frame3.z f))
+frameReopens f =
+  recoverCoordinate f (Frame3.x f) (skewX (frameRotation f)) (skewXFactor f) ,
+  (recoverCoordinate f (Frame3.y f) (skewY (frameRotation f)) (skewYFactor f) ,
+   recoverCoordinate f (Frame3.z f) (skewZ (frameRotation f)) (skewZFactor f))
+
+-- Source-written selected inverse. The other projective charts and the
+-- setoid chart transport on the original cube remain separate.
