@@ -148,6 +148,5 @@ def layer():
     assert S.cancel((1-v)/(2*(1-v)))==S.Rational(1,2)
     return 3
 
-
 if __name__=='__main__':
     print(json.dumps(dict(bulk_checks=geometry(5),brane_checks=geometry(4),wall_checks=wall(),layer_checks=layer(),scope='symbolic same-reference continuum TT curvature and layer jump identities; no discrete convergence or proof kernel'),indent=2))
