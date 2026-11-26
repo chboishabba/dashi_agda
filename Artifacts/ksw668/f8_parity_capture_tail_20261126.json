@@ -1,0 +1,24 @@
+{
+  "predecessor": "49c4799d1a4a79e913d33b49825123c0d471ea4b",
+  "script": {
+    "path": "scripts/check_f8_parity_capture_tail.py",
+    "commit": "558c37132b2c7b5fe4f99ee14a634237d4f45423",
+    "blob": "3b5c583799c73949f689bbe9c6be75d249897ab3",
+    "sha256": "13106ccf231c6c799bab9fe0553e1bcca4a419f941466f73ad1484f044f0fb4b",
+    "local_output_sha256": "5be2f7df9879fe6d70a888894e5d7a5b7aad972d14c310724daf372afb11e97e"
+  },
+  "exact_checks": 9,
+  "manufactured": {
+    "parity_remainders": [
+      0,
+      0,
+      4.547473508864641e-13
+    ],
+    "raw_direct_gap": [
+      11.290441023162092,
+      4.622143028470983,
+      73.2264676194112
+    ]
+  },
+  "scope": "Local standalone exact algebra and manufactured off-shell packet, actual checkpoint capture mode not executed, no production or native kernel. Radial tail argument analytical with unevaluated source-dependent constants; no computed actual alternating contraction or joint raw limit."
+}
