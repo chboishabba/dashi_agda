@@ -1,0 +1,109 @@
+{
+  "status": "EXACT_COMMITTED_BYTE_REPLAY_AND_CONDITIONAL_POPULATION_ENERGY",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python; both exits 0; no CI or Agda kernel. Original radar checker reconstructed from connector text by changing local ne variable to nne in three lines; git hash-object matches remote; diff against original local receipt empty.",
+  "radar": {
+    "checker_commit": "0e97fd17cb80ebe424b9946ab15013fa64e8500e",
+    "executed_blob": "864c7594e99ea40059eb94ed07a4c570ba099dbc",
+    "previous_local_blob": "d44f2c9aadd46a6d3d30726c23505bf51089f12f",
+    "products": {
+      "6300": {
+        "sha256": "a6a52500c3937f9beed9aa5ce941c45d08fae652fbef3174cf964a1c45b95b25",
+        "total": 275508,
+        "context": 39936
+      },
+      "6301": {
+        "sha256": "eed18b6fd8f54b780446a370a6373fbbb250db5278b43cb67e7f1fab90090eb8",
+        "total": 301844,
+        "context": 44096
+      },
+      "6302": {
+        "sha256": "344c31d5db5d661d59ec2deb4a0d6867773c1dc064bb3dc236aaf3e2f50ae5ad",
+        "total": 2341,
+        "context": 0
+      },
+      "6400": {
+        "sha256": "d62180251bf74884910831c522ada43d9bec084d3f9ca6323f67c575ee05708d",
+        "total": 55931,
+        "context": 8112
+      }
+    },
+    "quality_accepted": 7452,
+    "region_rows": 3087,
+    "records": 208,
+    "beam_ENU": [
+      -0.008312934912806305,
+      0.8659855051403202,
+      0.49999999999999994
+    ],
+    "pointwise_rank": 1,
+    "pointwise_nullity": 2,
+    "independent_row_nullity": 6174,
+    "los_velocity_m_s": [
+      -199.20098876953125,
+      30.447412490844727,
+      376.0437316894531
+    ],
+    "los_error_reported_m_s": [
+      0.6528036594390869,
+      11.023276329040527,
+      94.98504638671875
+    ],
+    "beam_interval_s": [
+      39.59999990463257,
+      61.200000047683716,
+      61.200000047683716
+    ],
+    "electron_D_S_m_s": [
+      324.75351694502416,
+      2476.7478219607406,
+      10288.65305275757
+    ],
+    "electron_positive_frequency_two_circular_weight_rad_s": [
+      1020.2432630619363,
+      7780.932762266383,
+      32322.756845877382
+    ],
+    "electron_plasma_frequency_Hz": [
+      963879.3986876961,
+      2661868.8953810832,
+      5425315.860737057
+    ],
+    "ion_weight_fraction_under_reported_priors": [
+      0.000017143122157584685,
+      0.00002502279851331111
+    ],
+    "boxcar": {
+      "0.005": {
+        "max_abs_sinc": 0.9367481834486686,
+        "envelope": 1
+      },
+      "0.05": {
+        "max_abs_sinc": 0.09537707681490445,
+        "envelope": 0.1607625691668517
+      },
+      "3.915": {
+        "max_abs_sinc": 0.0014458680941811647,
+        "envelope": 0.002053161802897212
+      },
+      "7.83": {
+        "max_abs_sinc": 0.0004033843387824447,
+        "envelope": 0.001026580901448606
+      },
+      "7800.0": {
+        "max_abs_sinc": 2.4082663324708803e-9,
+        "envelope": 0.0000010305292895311004
+      }
+    }
+  },
+  "population": {
+    "checker_commit": "fdb292061b069d47067d0f3e54f45d2c0d5f38a1",
+    "executed_blob": "c6ce17300e15e6662575e0fac44ef51a23348f22",
+    "sympy": "1.14.0",
+    "symbolic_identities": 5,
+    "exact_event_fixtures": 225,
+    "equal_density_turnover_negative_control": true,
+    "zero_density_chart": true
+  },
+  "physical_admission": false,
+  "scope": "Pointwise local cold-fluid mean kinetic energy, stationary neutrals, no spatial advection or pressure, removal at mean velocity, birth mixing into cold mean. Lost mean kinetic energy requires thermal/chemical/outflow accounting, not automatically irreversible heat. Radar LOS and boxcar results conditional; no source flux, fitted material history or actual extraction. No raw data redistribution."
+}
