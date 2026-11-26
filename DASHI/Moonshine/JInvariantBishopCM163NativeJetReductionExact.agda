@@ -195,3 +195,113 @@ periodFromThree hj hs hflow hjet =
 rawFromThree : CMRoot → HyperSquare → ClearedHyperJet → SignedJet →
   (k : Nat) → Raw.RawCross k
 rawFromThree hj hs hflow hjet = Raw.rawFromPeriod (periodFromThree hj hs hflow hjet)
+
+-- Reverse signed correction on the same cubic. Cancellation is of
+-- the actual positive integer B, not a chosen complex sign.
+import Data.Rational.Unnormalised.Properties as QP
+
+bPositive : R.Positive N.B
+bPositive = P.posp⇒posp⋆ (+ 545140134 / 1) (QP.positive⁻¹ (+ 545140134 / 1))
+
+signedFromCorrection : Cubic → Jet.Correction → SignedJet
+signedFromCorrection hy hc = N.cancelLeft N.B bPositive
+  (P.≃-trans
+    (let open P.ℝ-Solver in solve 2 (λ p z →
+      Κ (+ 545140134 / 1) ⊗ (p ⊗ z) ⊜ p ⊗ (Κ (+ 545140134 / 1) ⊗ z))
+      P.≃-refl p (Y * U - three * N.cube X - c * N.sq Y))
+    (P.≃-trans
+      (P.≃-refl)
+      (P.≃-trans (P.*-congˡ (jetScaled hy))
+        (P.≃-trans
+          (let open P.ℝ-Solver in solve 3 (λ p y v →
+            p ⊗ (y ⊗ v) ⊜ y ⊗ (p ⊗ v)) P.≃-refl p Y Jet.V)
+          (P.≃-trans (P.*-congˡ hc)
+            (let open P.ℝ-Solver in solve 2 (λ x y →
+              y ⊗ (Κ (+ 6 / 1) ⊗ Κ (+ 545140134 / 1) ⊗ x)
+              ⊜ Κ (+ 545140134 / 1) ⊗ (Κ (+ 6 / 1) ⊗ x ⊗ y))
+              P.≃-refl X Y))))))
+
+-- The three signed derivative relations needed from the actual
+-- reciprocal Mobius chart. a=Dj, b=D²j, p=pi_M*sqrt(163).
+-- Values must be constructed from the original j, not freely chosen.
+FirstQJet : ℝ → Set
+FirstQJet a = (X * a) ≃ R.- (K * Y)
+
+SecondQJet : ℝ → Set
+SecondQJet b =
+  (N.six * N.sq X * b) ≃
+    (K * (three * N.cube X + three * N.sq Y - Y * U))
+
+DiskJet : ℝ → ℝ → Set
+DiskJet a b = (p * κ * N.sq a) ≃ (p * b - a)
+
+-- Exact polynomial transport from the three actual jet identities.
+-- Clearing X² and the signed K leaves the terminal signed relation.
+-- In particular no local inverse of j or square-root sign choice.
+diskJetCleared : (a b : ℝ) → FirstQJet a → SecondQJet b → DiskJet a b →
+  (N.six * p * κ * N.sq (K * Y)) ≃
+    (p * (K * (three * N.cube X + three * N.sq Y - Y * U)) +
+      N.six * X * (K * Y))
+diskJetCleared a b h1 h2 h3 =
+  P.≃-trans
+    (P.*-congˡ
+      (P.≃-symm (P.≃-trans (P.*-cong h1 h1)
+        (let open P.ℝ-Solver in solve 1 (λ q → (⊝ q) ⊗ (⊝ q) ⊜ q ⊗ q)
+          P.≃-refl (K * Y)))))
+    (P.≃-trans
+      (let open P.ℝ-Solver in solve 4 (λ p k x a →
+        Κ (+ 6 / 1) ⊗ p ⊗ k ⊗ ((x ⊗ a) ⊗ (x ⊗ a))
+        ⊜ (Κ (+ 6 / 1) ⊗ (x ⊗ x)) ⊗ (p ⊗ k ⊗ (a ⊗ a)))
+        P.≃-refl p κ X a)
+      (P.≃-trans (P.*-congˡ h3)
+        (P.≃-trans
+          (let open P.ℝ-Solver in solve 4 (λ p x a b →
+            (Κ (+ 6 / 1) ⊗ (x ⊗ x)) ⊗ (p ⊗ b ⊖ a)
+            ⊜ p ⊗ (Κ (+ 6 / 1) ⊗ (x ⊗ x) ⊗ b)
+              ⊖ (Κ (+ 6 / 1) ⊗ x ⊗ (x ⊗ a)))
+            P.≃-refl p X a b)
+          (P.≃-trans
+            (P.+-cong (P.*-congˡ h2)
+              (P.-‿cong (P.*-congˡ h1)))
+            (let open P.ℝ-Solver in solve 4 (λ p k f x →
+              p ⊗ f ⊖ (Κ (+ 6 / 1) ⊗ x ⊗ (⊝ k))
+              ⊜ p ⊗ f ⊕ Κ (+ 6 / 1) ⊗ x ⊗ k)
+              P.≃-refl p (K * Y)
+                (K * (three * N.cube X + three * N.sq Y - Y * U)) X)))))
+
+-- Interpret the original negative integer K as a rational constant
+-- in the ring solver. Multiplication by its exact reciprocal is
+-- justified by the scalar normal form, no real inverse is assumed.
+signedFromDiskJet : (a b : ℝ) → FirstQJet a → SecondQJet b → DiskJet a b → SignedJet
+signedFromDiskJet a b h1 h2 h3 =
+  let
+    v = three * N.cube X + three * N.sq Y - Y * U
+    ik = ((Z.-_ (+ 1)) / 262537412640768000) ⋆
+    open P.ℝ-Solver
+    lhs : (ik * (N.six * p * κ * N.sq (K * Y))) ≃
+      (N.six * p * κ * K * N.sq Y)
+    lhs = solve 3 (λ p k y →
+      Κ ((Z.-_ (+ 1)) / 262537412640768000) ⊗
+        (Κ (+ 6 / 1) ⊗ p ⊗ k ⊗ ((Κ Slice.negCQ ⊗ y) ⊗ (Κ Slice.negCQ ⊗ y)))
+      ⊜ Κ (+ 6 / 1) ⊗ p ⊗ k ⊗ Κ Slice.negCQ ⊗ (y ⊗ y))
+      P.≃-refl p κ Y
+    rhs : (ik * (p * (K * v) + N.six * X * (K * Y))) ≃
+      (p * v + N.six * X * Y)
+    rhs = solve 4 (λ p v x y →
+      Κ ((Z.-_ (+ 1)) / 262537412640768000) ⊗
+        (p ⊗ (Κ Slice.negCQ ⊗ v) ⊕ Κ (+ 6 / 1) ⊗ x ⊗ (Κ Slice.negCQ ⊗ y))
+      ⊜ p ⊗ v ⊕ Κ (+ 6 / 1) ⊗ x ⊗ y) P.≃-refl p v X Y
+    reduced : (N.six * p * κ * K * N.sq Y) ≃ (p * v + N.six * X * Y)
+    reduced = P.≃-trans (P.≃-symm lhs)
+      (P.≃-trans (P.*-congˡ (diskJetCleared a b h1 h2 h3)) rhs)
+  in P.≃-trans
+    (solve 5 (λ p k x y u →
+      p ⊗ (y ⊗ u ⊖ Κ (+ 3 / 1) ⊗ (x ⊗ x ⊗ x)
+        ⊖ (Κ (+ 3 / 1) ⊖ Κ (+ 6 / 1) ⊗ Κ Slice.negCQ ⊗ k) ⊗ (y ⊗ y))
+      ⊜ Κ (+ 6 / 1) ⊗ p ⊗ k ⊗ Κ Slice.negCQ ⊗ (y ⊗ y)
+        ⊖ p ⊗ (Κ (+ 3 / 1) ⊗ (x ⊗ x ⊗ x) ⊕ Κ (+ 3 / 1) ⊗ (y ⊗ y) ⊖ y ⊗ u))
+      P.≃-refl p κ X Y U)
+    (P.≃-trans (P.+-cong reduced P.≃-refl)
+      (solve 4 (λ p v x y →
+        (p ⊗ v ⊕ Κ (+ 6 / 1) ⊗ x ⊗ y) ⊖ p ⊗ v
+        ⊜ Κ (+ 6 / 1) ⊗ x ⊗ y) P.≃-refl p v X Y))
