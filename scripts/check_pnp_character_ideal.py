@@ -256,6 +256,51 @@ def quotient_reopen(n,F,basis,p,B,cap=64):
     return x
 
 
+def section_project(q,s,b,basis,p,B):
+    """One original signed bit projector, reduced only modulo verified rows."""
+    B.pay('character_section_product',1+2*len(q))
+    A=dict(q);add(A,{t^s:w for t,w in q.items()},-(-1)**b,p)
+    return quotient_normal(A,basis,p,B)
+
+
+def lazy_section(n,F,basis,p,B,cap=64):
+    """Select a verified original one-hot section without closing a module.
+
+    A zero reduced projector excludes its prefix on the actual solution set.
+    Nonzero does not prove inhabitation for an incomplete span. All failures
+    return None; the selected branch is never exported as a global pin.
+    cap bounds retained section support, not all elimination intermediates.
+    """
+    if cap<1 or 0 in basis:return None
+    q={0:1};H=()
+    for G in F:
+        candidates=[]
+        for j,(s,b) in enumerate(G):
+            B.pay('character_section_pattern',1+len(H)+len(G))
+            P=canon(H+tuple((t,c^int(i==j)) for i,(t,c) in enumerate(G)))
+            if P is not None:candidates.append((j,P))
+        if not candidates:return None
+        if len(candidates)==1:
+            H=candidates[0][1];continue
+        best=None
+        for j,P in candidates:
+            s,b=G[j];A=section_project(q,s,b,basis,p,B)
+            if not A:
+                B.pay('character_section_zero');continue
+            if len(A)>cap:continue
+            key=(len(A),-len(P),j)
+            if best is None or key<best[0]:best=(key,P,A)
+            if len(A)==1:break
+        if best is None:return None
+        _,H,q=best
+        c=pow(q[min(q)],-1,p);q={s:w*c%p for s,w in q.items()}
+        B.pay('character_section_retained',len(q))
+    x=chart(n,H)[0]
+    B.pay('character_section_verify',1+sum(map(len,F)))
+    if not all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return None
+    return x
+
+
 def restrict_character_span(basis,V,a,p,B):
     """Linear image of the replayed consequence span under an affine embedding."""
     out={};freq={}
@@ -320,7 +365,7 @@ def restriction_reopen(n,F,basis,p,B,steps):
     return None
 
 
-def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0):
+def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,path_steps=0,section_cap=0):
     """Sound original affine refinement and optional original witness.
 
     Share one replayed elimination span across both consumers. None carrier
@@ -345,12 +390,12 @@ def demand_character_close(n,F,H,B,degree=1,p=3,max_pivots=4096,quotient_cap=0,p
         a=lift(0,[reps[t] for t in freq],chart(len(freq),C)[0])
         pins.append((a,b^((a&u).bit_count()%2)))
     C=canon(P+tuple(pins));assert C is not None
-    if not quotient_cap and not path_steps:return C,None
+    if not quotient_cap and not path_steps and not section_cap:return C,None
     x=chart(n,C)[0]
     B.pay('character_pin_verify',1+sum(map(len,F)))
     if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F):return C,x
-    z=None
-    if path_steps:
+    z=lazy_section(len(V),R,basis,p,B,section_cap) if section_cap else None
+    if z is None and path_steps:
         a,W=chart(len(V),Q)
         B.pay('character_path_pins',1+sum(map(len,R))*(1+len(W)))
         J=tuple(tuple((value(W,s),b^((s&a).bit_count()%2)) for s,b in G) for G in R)
@@ -475,6 +520,11 @@ def test_constructive_character_quotient():
     assert B.stats['character_module_dimension']==4
     Q,w0=demand_character_close(len(V),F,(),Budget(10000000),quotient_cap=1)
     assert Q==P and w0 is None
+    B=Budget(10000000);Q,w0=demand_character_close(len(V),F,(),B,section_cap=2)
+    assert Q==P and w0 is not None and lift(u,V,w0)==25429250
+    assert B.stats['character_section_verify']>0 and not B.stats['character_module_edge']
+    Q,w0=demand_character_close(len(V),F,(),Budget(10000000),section_cap=1,path_steps=30)
+    assert Q==P and w0 is not None and all((lift(u,V,w0)&r).bit_count()==1 for r in R)
     # A non-sign proportionality is itself an exact contradiction over F5.
     A=(((4,0),(6,1),(3,1),(1,0)),)
     proof,rel,zero=character_relations(A,(0,),range(8),5,Budget(1000000))
@@ -528,7 +578,69 @@ def test_character_restriction_path():
     print(dict(restriction_full=full,restriction_partial=partial,restriction_transport=transport,star_controls='PASS'))
 
 
+def test_character_section():
+    from random import Random
+    from check_pnp_affine_normal_components import Exhausted
+    def valid(F,x):return all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)
+    def ev(A,x,p):return sum(w*(-1)**((s&x).bit_count()%2) for s,w in A.items())%p
+    rng=Random(36928);full=partial=got=zero=transport=products=0
+    for n in range(7):
+        for _ in range(60):
+            F=tuple(tuple((rng.randrange(1<<n),rng.randrange(2)) for j in range(rng.randrange(7))) for i in range(rng.randrange(7)))
+            T=[x for x in range(1<<n) if valid(F,x)]
+            for p in (3,5,7):
+                B=Budget(10000000);proof,_=eliminate(F,range(1<<n),p,B);basis=replay_span(F,proof,p,B)
+                w=lazy_section(n,F,basis,p,B,1<<n)
+                assert (w is not None)==bool(T) and (w is None or w in T);full+=1
+                proof,_=eliminate(F,source_shifts(F,0),p,B,max_pivots=8);basis=replay_span(F,proof,p,B)
+                w=lazy_section(n,F,basis,p,B,4);assert w is None or w in T;partial+=1;got+=w is not None
+                if 0 not in basis:
+                    q={rng.randrange(1<<n):1};s=rng.randrange(1<<n);b=rng.randrange(2)
+                    A=section_project(q,s,b,basis,p,B)
+                    for x in T:
+                        assert ev(A,x,p)==(1-(-1)**(b+(s&x).bit_count()%2))*ev(q,x,p)%p;products+=1
+                    if not A:assert all((b^((s&x).bit_count()%2))==0 for x in T);zero+=1
+                a=rng.randrange(1<<n);V=tuple(rng.randrange(1<<n) for i in range(rng.randrange(n+1)))
+                R=tuple(tuple((value(V,s),b^((s&a).bit_count()%2)) for s,b in G) for G in F)
+                C=replay_span(R,transport_proof(proof,V,a,p,B),p,B)
+                z=lazy_section(len(V),R,C,p,B,4);assert z is None or valid(F,lift(a,V,z));transport+=1
+    for n in (8,16,32,64,128):
+        F=(tuple((1<<j,0) for j in range(n)),)
+        B=Budget(10000000);proof,empty=eliminate(F,(0,),3,B);assert not empty;basis=replay_span(F,proof,3,B)
+        assert quotient_reopen(n,F,basis,3,B,4) is None
+        D=Budget(10000000);x=lazy_section(n,F,basis,3,D,4);assert x is not None and valid(F,x)
+        assert D.stats['character_section_retained']==2
+    F=(((1,0),(2,0)),((2,0),))
+    assert valid(F,2) and lazy_section(2,F,{},3,Budget(10000),4) is None
+    try:lazy_section(2,F,{},3,Budget(0),4);assert False
+    except Exhausted:pass
+    print(dict(section_full=full,section_partial=partial,section_verified=got,section_products=products,section_zero=zero,section_transport=transport))
+    from collections import Counter
+    for seed in (3692819,3692820):
+        rng=Random(seed);stats=Counter();cost=Counter()
+        for _ in range(240):
+            n=rng.choice((6,8,10));target=rng.randrange(1<<n);F=[]
+            for i in range(rng.randrange(3,8)):
+                G=rng.sample(range(1,1<<n),rng.randrange(3,7));j=rng.randrange(len(G))
+                F.append(tuple((a,((a&target).bit_count()%2)^int(k==j)) for k,a in enumerate(G)))
+            F=tuple(F);assert valid(F,target);B=Budget(5000000)
+            proof,empty=eliminate(F,source_shifts(F,0),3,B,max_pivots=64);assert not empty;basis=replay_span(F,proof,3,B)
+            M=Budget(5000000);x=quotient_reopen(n,F,basis,3,M,4)
+            P=Budget(5000000);w=restriction_reopen(n,F,basis,3,P,n)
+            L=Budget(5000000);y=lazy_section(n,F,basis,3,L,4)
+            for z in (x,w,y):assert z is None or valid(F,z)
+            stats['module']+=x is not None;stats['path']+=w is not None;stats['lazy']+=y is not None
+            stats['union']+=w is not None or y is not None or x is not None
+            stats['only_lazy']+=x is None and w is None and y is not None
+            stats['only_path']+=x is None and y is None and w is not None
+            for key,K in [('module',M),('path',P),('lazy',L)]:cost[key]+=sum(K.stats.values())
+            cost['hybrid']+=sum(L.stats.values())+(sum(P.stats.values()) if y is None else 0)
+        assert stats['only_lazy']>0 and cost['hybrid']<cost['path']
+        print('section_holdout',seed,dict(stats),dict(cost))
+
+
 def main():
+    test_character_section()
     test_character_restriction_path()
     test_constructive_character_quotient()
     test_character_consequences()
