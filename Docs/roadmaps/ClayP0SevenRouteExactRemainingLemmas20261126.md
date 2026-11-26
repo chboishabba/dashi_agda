@@ -1158,3 +1158,8 @@ See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndp
 ## Bounded sibling reopening and child-local strengthening — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#bounded-sibling-reopening-and-child-local-character-strengthening--26-november-2026). Existing sparse section and restriction path retained; spurious child now handled by bounded sibling reopening and optional locally shifted character generators. Exact all-child exhaustion proves parent empty; caps never prove empty. Previous34 held-out inhabited failures recovered and prior990-demand campaign now fully decisive. Scoped sourceBacked, not native leafClosed. No universal node, rank or shift cap sufficiency or unrestricted separation; all thirteen universal targets remain leafOpen.
+
+
+## Sparse parent exclusion lift and scoped adaptive learning — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#sparse-parent-exclusion-lift-and-scoped-adaptive-learning--26-november-2026). Existing adaptive engine now exports certified root-child exclusions and supports independently replayable sparse parent bit-zero certificates and affine transport (sourceBacked). No compulsory complete quotient, no universal affordable local certificate discovery, no arbitrary-computation lower bound. All thirteen principal universal obligations remain leafOpen; native admission waiting.
