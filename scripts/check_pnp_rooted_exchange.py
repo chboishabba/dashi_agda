@@ -229,3 +229,89 @@ def descent(n,R,P,x,B,rank_cap=8,probe_cap=1000000,small=5,rado=False,tagged=Fal
         x=y;t+=1
     assert all((x&r).bit_count()==1 for r in R)
     return x,True
+
+def main():
+    from sympy import Matrix
+    from collections import Counter
+    rng=Random(36927);C=Counter()
+    for m in (3,6,9):
+        for _ in range(80):
+            n=rng.randrange(3,9);S=[rng.sample(range(m),3) for j in range(n)]
+            R=tuple(sum(1<<j for j,T in enumerate(S) if i in T) for i in range(m))
+            P=canon((r,1) for r in R)
+            if P is None:continue
+            u,V=chart(n,P);x=lift(u,V,rng.randrange(1<<len(V)))
+            P=canon(P+tuple((a,(a&x).bit_count()%2) for a in (rng.randrange(1<<n) for j in range(rng.randrange(3)))))
+            _,V=chart(n,tuple((a,0) for a,b in P));A=Matrix(m,n,lambda i,j:R[i]>>j&1);X=Matrix([x>>j&1 for j in range(n)])
+            T=[];D0,_,F,roots,z0=factors(n,R,P,x,Budget(10**8),0)
+            for y in range(1<<len(V)):
+                v=lift(0,V,y);q=surplus(R,x,v)
+                assert tuple(A*(X-Matrix([(x^v)>>j&1 for j in range(n)])))==q
+                valid=all(t>=0 and t%2==0 for t in q);assert (pairing_receipt(R,x,v) is not None)==valid
+                z=y;d=len(V)
+                for r in R:
+                    J=list(bits(r));N=tuple(value(V,1<<j) for j in J)
+                    if not canon((a,0) for a in N):continue
+                    count=0;width=len(J).bit_length()
+                    for j in J:
+                        count+=(v>>j&1) if x>>j&1 else 1-(v>>j&1);z|=count<<d;d+=width
+                assert d==D0 and all(value(U,z) in L for U,L in F)==valid
+                if valid:
+                    assert tuple(value(F[i][0],z) in L for i,L in roots)==tuple(t>0 for t in q)
+                    if any(q):T.append(v)
+                C['point_checks']+=1
+            for mode in (False,True):
+                B=Budget(10**8);v,done=discover(n,R,P,x,B,rank_cap=6,probe_cap=50000,small=5,tagged=mode)
+                assert v is None or v in T;assert not done or bool(T)==(v is not None)
+                C[mode,'decisions']+=1;C[mode,'unknown']+=not done
+                C[mode,'witness']+=v is not None;C[mode,'empty']+=done and v is None
+                assert B.stats['exchange_root']<=m*(m+1)//2
+            if T:
+                v=T[0];d,F,H,E=pairing_onehot(n,R,P,x,Budget(10**8));z=v;off=n
+                for r,pairs in zip(R,pairing_receipt(R,x,v)):
+                    pairset={tuple(sorted(p)) for p in pairs}
+                    for j,k in combinations(bits(r),2):
+                        if not ((x>>j&1) or (x>>k&1)):continue
+                        z|=int((j,k) in pairset)<<off;off+=1
+                assert off==d and satisfies(z,H,()) and any(satisfies(z,(e,),()) for e in E)
+                assert all(sum(b^((a&z).bit_count()%2) for a,b in G)==1 for G in F)
+                C['pair_receipts']+=1
+    assert C['point_checks']==2229 and C['pair_receipts']==57
+    # Independently exhaust auxiliary assignments in a tiny prefix chain.
+    P=canon(((7,1),));d,V,F,roots,z0=factors(3,(7,),P,7,Budget(1000000),0)
+    for y in range(1<<len(V)):
+        assert sum(all(value(U,z) in L for U,L in F) for z in range(y,1<<d,1<<len(V)))==1
+        C['unique_aux']+=1
+    # Original addition-required basis trap and actual independent time index.
+    S=[(2,3,4),(3,4,5),(3,6,7),(3,5,8),(1,5,7),(1,4,7),(3,5,7),(0,1,2),(2,3,7),(0,4,7),(6,7,8),(3,5,6)]
+    R=tuple(sum(1<<j for j,T in enumerate(S) if i in T) for i in range(9));P=canon((r,1) for r in R)
+    for mode in (False,True):
+        H=[];y,done=descent(12,R,P,2840,Budget(10000000),8,300000,5,True,mode,H,7)
+        assert done and y==1154 and H[0][:4]==(7,0,2840,3994)
+    # Forced long-support trade on retained carrier: all movement bits tied.
+    for r in (4,16,64):
+        n=3*r;R=tuple(7<<(3*i) for i in range(r) for _ in range(3))
+        x=(1<<n)-1;v=sum(3<<(3*i) for i in range(r))
+        P=canon(tuple((a,1) for a in R)+tuple((1<<j,1) for j in range(2,n,3))+tuple(((1<<j)|1,0) for j in range(1,n) if j%3!=2))
+        assert len(chart(n,P)[1])==1
+        H=[];y,done=descent(n,R,P,x,Budget(10000000),history=H,k_index=7)
+        assert done and y==x^v and H[0][:4]==(7,0,x,v)
+    rng=Random(27369)
+    for n in range(1,6):
+        for _ in range(25):
+            blocks=[]
+            for i in range(rng.randrange(1,5)):
+                U=tuple(a for a,b in canon((rng.randrange(1<<n),0) for j in range(rng.randrange(1,4))))
+                T=[p for p in range(1<<len(U)) if rng.randrange(2)];blocks.append((U,T))
+            truth=[z for z in range(1<<n) if all(value(U,z) in T for U,T in blocks)]
+            s,Y=rado_root(n,blocks,Budget(100000));assert (s=='SAT')==bool(truth)
+            if truth:assert any(Y==[value(U,z) for U,T in blocks] for z in truth)
+            C['rado',s]+=1
+    R=(7,7,7);P=canon(((7,1),))
+    v,done=discover(3,R,P,7,Budget(100000),probe_cap=0);assert v is None and not done
+    try:discover(3,R,P,7,Budget(0));assert False
+    except Exhausted:pass
+    print('rooted_exchange',dict(C),'controls PASS')
+
+
+if __name__=='__main__':main()
