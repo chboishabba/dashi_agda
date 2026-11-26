@@ -25,6 +25,7 @@ module DASHI.Foundations.BishopExponentialCauchyProductExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (toℕ)
+open import Relation.Nullary using (¬_)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans; sym)
@@ -329,3 +330,43 @@ bishopExpTimesNegativeIsOne value =
       (ExpCong.bishopExpCongruent
         (BishopP.+-inverseʳ value))
       Positive.bishopExpZero)
+
+
+------------------------------------------------------------------------
+-- Native exponential injectivity by located order and cancellation.
+-- No classical trichotomy or logarithm premise. Source-written only.
+------------------------------------------------------------------------
+
+bishopExpEqualityExcludesStrictOrder :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  ¬ BishopReal._<_ x y
+bishopExpEqualityExcludesStrictOrder {x} {y} equal xBelowY =
+  let
+    difference = BishopReal._+_ y (BishopReal.-_ x)
+    positive : BishopReal._<_ BishopReal.0ℝ difference
+    positive =
+      BishopP.<-respˡ-≃
+        (BishopP.≃-symm (BishopP.+-inverseʳ x))
+        (BishopP.+-monoˡ-< (BishopReal.-_ x) xBelowY)
+    differenceExpOne :
+      BishopReal._≃_ (Exp.bishopExp difference) BishopReal.1ℝ
+    differenceExpOne =
+      BishopP.≃-trans
+        (bishopExpAdd y (BishopReal.-_ x))
+        (BishopP.≃-trans
+          (BishopP.*-cong (BishopP.≃-symm equal) BishopP.≃-refl)
+          (bishopExpTimesNegativeIsOne x))
+  in
+  BishopP.<-irrefl (BishopP.≃-symm differenceExpOne)
+    (Positive.bishopExpStrictlyAboveOneOnPositive positive)
+
+bishopExpInjective :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  BishopReal._≃_ x y
+bishopExpInjective equal =
+  BishopP.≤-antisym
+    (BishopP.≮⇒≥
+      (bishopExpEqualityExcludesStrictOrder (BishopP.≃-symm equal)))
+    (BishopP.≮⇒≥ (bishopExpEqualityExcludesStrictOrder equal))
