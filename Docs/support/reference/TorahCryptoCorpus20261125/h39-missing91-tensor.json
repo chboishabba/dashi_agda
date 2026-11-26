@@ -1,0 +1,166 @@
+{
+  "prefix": "עיהוהביוםההואאתישראלמידמצריםויראישראלאתמצריםמתעלשפתהיםויראישראלאתהידהגדלהאשרעשהיהוהבמצריםוייראוהעםאתיהוהויאמינוביהוהובמשהעבדו",
+  "truth": "אזישירמשהובניישראלאתהשירההזאתליהוהויאמרולאמראשירהליהוהכיגאהגאהסוסורכבורמהביםעזיוזמרתיהויהיל",
+  "train": 85,
+  "test": 175,
+  "results": {
+    "unigram": {
+      "teacher": {
+        "hits": 1556,
+        "bits": 68066.0713289196,
+        "n": 15925
+      },
+      "free": {
+        "hits": 1556,
+        "exact": 0
+      },
+      "candidates": []
+    },
+    "language": {
+      "teacher": {
+        "hits": 3568,
+        "bits": 64310.98696286344,
+        "n": 15925
+      },
+      "free": {
+        "hits": 1351,
+        "exact": 0
+      },
+      "candidates": []
+    },
+    "tensor": {
+      "teacher": {
+        "hits": 567,
+        "bits": 78441.28151849503,
+        "n": 15925
+      },
+      "free": {
+        "hits": 603,
+        "exact": 0
+      },
+      "candidates": []
+    },
+    "joint": {
+      "teacher": {
+        "hits": 3564,
+        "bits": 62091.00724315644,
+        "n": 15925
+      },
+      "free": {
+        "hits": 1343,
+        "exact": 0
+      },
+      "candidates": []
+    },
+    "shift": {
+      "teacher": {
+        "hits": 3557,
+        "bits": 62087.387040765956,
+        "n": 15925
+      },
+      "free": {
+        "hits": 1346,
+        "exact": 0
+      },
+      "candidates": []
+    }
+  },
+  "patch": {
+    "coordinates": [
+      5,
+      13,
+      7,
+      18,
+      26,
+      18,
+      15,
+      18,
+      20,
+      19,
+      17,
+      26,
+      19,
+      14,
+      5,
+      19,
+      0,
+      1,
+      12,
+      8,
+      6,
+      24,
+      24,
+      1,
+      3,
+      3,
+      6,
+      10,
+      3,
+      7,
+      24,
+      21,
+      2,
+      21,
+      17,
+      9,
+      25,
+      26,
+      22,
+      26,
+      6,
+      12,
+      21,
+      1,
+      14,
+      8,
+      13,
+      10,
+      6,
+      7,
+      24,
+      11,
+      1,
+      13,
+      11,
+      0,
+      8,
+      18,
+      0,
+      13,
+      17,
+      16,
+      12,
+      0,
+      21,
+      20,
+      4,
+      8,
+      26,
+      26,
+      11,
+      16,
+      4,
+      20,
+      3,
+      10,
+      24,
+      20,
+      11,
+      26,
+      11,
+      8,
+      19,
+      23,
+      5,
+      1,
+      16,
+      3,
+      7,
+      4,
+      26
+    ],
+    "restored": "אזישירמשהובניישראלאתהשירההזאתליהוהויאמרולאמראשירהליהוהכיגאהגאהסוסורכבורמהביםעזיוזמרתיהויהיל",
+    "exact": 91
+  },
+  "qualification": "Original H20 synthetic 125/91 mask, crossing chapter14/15. B physical scan uses visible A reversed; C uses reconstructed B reversed. Same causal anchored 3x4x6 chart in each role, predicted residual distribution learned only Exodus1-13; no hidden target read in generation. Teacher-forced and free greedy regression on 175 reused chapter blocks; 64-wide character beam on actual continuation. Joint fixed .8 language + .2 geometry mixture, shifted control retrained. Exact patch extracted from known target is BIDI, not independent recovery. Character beam can produce nonwords; not fresh blind. No real manuscript lacuna."
+}
