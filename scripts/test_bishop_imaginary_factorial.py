@@ -1,4 +1,4 @@
-"""Finite exact controls for original imaginary-axis factorial convolution.
+"""Finite exact controls for original factorial convolution and Nat-log/eta.
 Not a check of Agda elaboration or of the analytic limit.
 """
 import unittest
@@ -44,5 +44,45 @@ class ImaginaryFactorialTests(unittest.TestCase):
                 bound=2*sum(abs(x)**j*abs(y)**k/(factorial(j)*factorial(k)) for j in range(2*N) for k in range(2*N-j) if j+k>=N)
                 self.assertLessEqual(abs(wing[0]),bound)
                 self.assertLessEqual(abs(wing[1]),bound)
+
+class NatLogEtaTests(unittest.TestCase):
+    def test_positive_natural_product_indices(self):
+        for i,j in product(range(64),repeat=2):
+            k=j+i*(j+1)
+            self.assertEqual(k+1,(i+1)*(j+1))
+        for k in range(128):
+            self.assertEqual(2*k+2,2*(k+1))
+
+    def test_original_log_product_enclosures(self):
+        def partial(x,N):
+            return sum((x**j/j for j in range(1,N+1)),Q(0))
+        for m,n in product(range(1,13),repeat=2):
+            x,y,z=Q(m-1,m),Q(n-1,n),Q(m*n-1,m*n)
+            self.assertEqual(z,x+y-x*y)
+            for N in (1,3,8,16,32):
+                residual=partial(x,N)+partial(y,N)-partial(z,N)
+                self.assertGreaterEqual(residual,0)
+                self.assertLessEqual(residual,min(m-1,n-1)*z**N)
+
+    def test_dyadic_shell_address_and_variation(self):
+        # Exact telescoping on actual positive integer ratios; no float logs.
+        for k in range(10):
+            a=2**k; b=2*a; ratio=Q(1)
+            for n in range(a,b):
+                ratio*=Q(n+1,n)
+            self.assertEqual(ratio,2)
+
+    def test_rational_eta_tail_for_integer_parameters(self):
+        # Test genuine original integer-s eta terms, not an approximation.
+        # q is the rational upper bound 1/(1+delta/2).
+        for sigma in (1,2,3,4):
+            q=Q(2,2+sigma)
+            C=1+Q(sigma)/(1-q)
+            for k in range(8):
+                for N in (2**k,2**k+1,2**k+5):
+                    for M in (N,N+1,N+17):
+                        tail=sum((Q((-1)**(n-1),n**sigma) for n in range(N,M+1)),Q(0))
+                        self.assertLessEqual(abs(tail),C*q**k)
+
 
 if __name__=='__main__': unittest.main()
