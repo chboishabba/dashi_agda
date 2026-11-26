@@ -43,6 +43,15 @@ import RealProperties as RP
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
+import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
+import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Log
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as Pos
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpProduct
+import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as Neg
+import DASHI.Analysis.BishopGeometricMajorantSeriesConvergenceExact as Geo
+
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 
@@ -345,3 +354,192 @@ module CompleteOriginalRound11
     ×
     R._≤_ (R.∣ R._-_ (BC.im originalEtaValue) (BC.im (prefix n)) ∣) (P n)
   originalEtaLimitError n = RealLimit.limitError n , ImagLimit.limitError n
+
+
+------------------------------------------------------------------------
+-- Construct the COMMON decay modulus on the original Nat-log.
+-- Only the actual adjacent-coordinate inequalities remain analytic
+-- inputs of the selected eta completion below.
+------------------------------------------------------------------------
+
+originalDecay : R.ℝ → Nat → R.ℝ
+originalDecay δ n =
+  Exp.bishopExp (R._*_ (R.-_ δ) (Terms.sourceCanonicalNatLogCandidate n))
+
+originalDecayZero : ∀ δ → R._≃_ (originalDecay δ zero) R.1ℝ
+originalDecayZero δ =
+  RP.≃-trans
+    (ExpCong.bishopExpCongruent (RP.*-zeroʳ (R.-_ δ)))
+    Pos.bishopExpZero
+
+originalDecayPositive :
+  ∀ δ → R._<_ R.0ℝ δ → ∀ n →
+  R._<_ R.0ℝ (originalDecay δ n)
+originalDecayPositive δ δPositive zero =
+  RP.<-respʳ-≃ (RP.≃-symm (originalDecayZero δ)) Neg.onePositive
+originalDecayPositive δ δPositive (suc n) =
+  let
+    L = Terms.sourceCanonicalNatLogCandidate (suc n)
+    productPositive =
+      RP.posx⇒0<x
+        (RP.posx,y⇒posx*y (RP.0<x⇒posx δPositive)
+          (RP.0<x⇒posx (Terms.sourceCanonicalNatLogSuccessorPositive n)))
+  in
+  RP.<-respʳ-≃
+    (ExpCong.bishopExpCongruent (RP.neg-distribˡ-* δ L))
+    (Neg.negativeExpPositive productPositive)
+
+originalDecayRatioBelowOne :
+  ∀ δ → R._<_ R.0ℝ δ →
+  R._<_ (originalDecay δ (suc zero)) R.1ℝ
+originalDecayRatioBelowOne δ δPositive =
+  let
+    L = Terms.sourceCanonicalNatLogCandidate (suc zero)
+    productPositive =
+      RP.posx⇒0<x
+        (RP.posx,y⇒posx*y (RP.0<x⇒posx δPositive)
+          (RP.0<x⇒posx (Terms.sourceCanonicalNatLogSuccessorPositive zero)))
+  in
+  RP.<-respˡ-≃
+    (ExpCong.bishopExpCongruent (RP.neg-distribˡ-* δ L))
+    (Neg.negativeExpBelowOne productPositive)
+
+originalDecayDecreasing :
+  ∀ δ → R._<_ R.0ℝ δ → ∀ {i j} → i ≤ j →
+  R._≤_ (originalDecay δ j) (originalDecay δ i)
+originalDecayDecreasing δ δPositive {i} {j} indices =
+  let
+    Li = Terms.sourceCanonicalNatLogCandidate i
+    Lj = Terms.sourceCanonicalNatLogCandidate j
+    productOrder = RP.*-monoˡ-≤-nonNeg
+      (Log.canonicalNatLogMonotone indices)
+      (RP.pos⇒nonNeg (RP.0<x⇒posx δPositive))
+    exponentOrder =
+      RP.≤-respˡ-≃ (RP.neg-distribˡ-* δ Lj)
+        (RP.≤-respʳ-≃ (RP.neg-distribˡ-* δ Li)
+          (RP.neg-mono-≤ productOrder))
+  in
+  ExpProduct.bishopExpWeakOrderFromNonnegativeValue
+    (RP.pos⇒nonNeg (RP.0<x⇒posx (originalDecayPositive δ δPositive j)))
+    exponentOrder
+
+-- Zero-based index of the positive integer 2^k.
+dyadicIndex : Nat → Nat
+dyadicIndex zero = zero
+dyadicIndex (suc k) = suc (dyadicIndex k + dyadicIndex k)
+
+originalDecayDyadicStep :
+  ∀ δ n →
+  R._≃_
+    (originalDecay δ (suc (n + n)))
+    (R._*_ (originalDecay δ (suc zero)) (originalDecay δ n))
+originalDecayDyadicStep δ n =
+  let
+    L = Terms.sourceCanonicalNatLogCandidate
+    x = R.-_ δ
+  in
+  RP.≃-trans
+    (ExpCong.bishopExpCongruent
+      (RP.≃-trans (RP.*-congˡ (Log.canonicalNatLogDyadic n))
+        (RP.*-distribˡ-+ x (L (suc zero)) (L n))))
+    (ExpProduct.bishopExpAdd
+      (R._*_ x (L (suc zero))) (R._*_ x (L n)))
+
+originalDecayAtDyadicIndex :
+  ∀ δ k →
+  R._≃_ (originalDecay δ (dyadicIndex k))
+    (R.pow (originalDecay δ (suc zero)) k)
+originalDecayAtDyadicIndex δ zero = originalDecayZero δ
+originalDecayAtDyadicIndex δ (suc k) =
+  RP.≃-trans (originalDecayDyadicStep δ (dyadicIndex k))
+    (RP.≃-trans
+      (RP.*-cong RP.≃-refl (originalDecayAtDyadicIndex δ k))
+      (RP.*-comm (originalDecay δ (suc zero))
+        (R.pow (originalDecay δ (suc zero)) k)))
+
+originalEtaDecayPotential : R.ℝ → R.ℝ → Nat → R.ℝ
+originalEtaDecayPotential C δ n =
+  R._*_ C (originalDecay δ (Eta.twice n))
+
+module NativeDecay
+  (C δ : R.ℝ)
+  (Cnonnegative : R.NonNegative C)
+  (δPositive : R._<_ R.0ℝ δ) where
+
+  private
+    q = originalDecay δ (suc zero)
+    qPositive = originalDecayPositive δ δPositive (suc zero)
+    qBelowOne = originalDecayRatioBelowOne δ δPositive
+    P = originalEtaDecayPotential C δ
+    scaled = Geo.scaledGeometricTerm C q
+
+  potentialNonnegative : ∀ n → R._≤_ R.0ℝ (P n)
+  potentialNonnegative n =
+    RP.nonNegx⇒0≤x
+      (RP.nonNegx,y⇒nonNegx*y Cnonnegative
+        (RP.pos⇒nonNeg (RP.0<x⇒posx
+          (originalDecayPositive δ δPositive (Eta.twice n)))))
+
+  scaledConvergesZero : Seq._ConvergesTo_ scaled R.0ℝ
+  scaledConvergesZero =
+    Seq.∑xₙisConvergent⇒xₙ→0 scaled
+      (Geo.scaledGeometricSeriesConvergent
+        q C qPositive qBelowOne Cnonnegative)
+
+  potentialAtLeastDyadicIndex :
+    ∀ k n → dyadicIndex k ≤ Eta.twice n →
+    R._≤_ (P n) (scaled k)
+  potentialAtLeastDyadicIndex k n indices =
+    RP.≤-respʳ-≃ (RP.*-cong RP.≃-refl (originalDecayAtDyadicIndex δ k))
+      (RP.*-monoˡ-≤-nonNeg
+        (originalDecayDecreasing δ δPositive indices)
+        Cnonnegative)
+
+  -- Construct one cutoff for both coordinates, independent of s.
+  potentialModulus : DecayModulus P
+  potentialModulus k =
+    let
+      receipt = Seq.convergence-getter (R.0ℝ , scaledConvergesZero) k
+      K = suc (proj₁ receipt)
+      index = dyadicIndex K
+      magnitudeEq =
+        RP.≃-trans
+          (RP.∣-∣-cong (RP.≃-trans
+            (RP.+-congʳ (scaled K) (RP.≃-symm RP.0≃-0))
+            (RP.+-identityʳ (scaled K))))
+          (RP.nonNegx⇒∣x∣≃x
+            (Geo.scaledGeometricTermNonnegative Cnonnegative qPositive K))
+      small =
+        RP.≤-respˡ-≃ magnitudeEq (proj₂ receipt K NatP.≤-refl)
+    in
+    index , (λ n past →
+      RP.≤-trans
+        (potentialAtLeastDyadicIndex K n
+          (NatP.≤-trans (NatP.n≤1+n index)
+            (NatP.≤-trans past (NatP.m≤m+n n n))))
+        small)
+
+module CompleteOriginalFromNativeDecay
+  (inputs : Round11.BishopCutset)
+  (s : BC.BishopComplex)
+  (C δ : R.ℝ)
+  (Cnonnegative : R.NonNegative C)
+  (δPositive : R._<_ R.0ℝ δ)
+  (realBound : ∀ n → R._≤_
+    (R.∣ BC.re (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (originalEtaDecayPotential C δ n)
+             (originalEtaDecayPotential C δ (suc n)))))
+  (imagBound : ∀ n → R._≤_
+    (R.∣ BC.im (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (originalEtaDecayPotential C δ n)
+             (originalEtaDecayPotential C δ (suc n))))) where
+
+  module Decay = NativeDecay C δ Cnonnegative δPositive
+  module Completed = CompleteOriginalRound11 inputs s
+    (originalEtaDecayPotential C δ) realBound imagBound
+    Decay.potentialNonnegative Decay.potentialModulus
+
+  open Completed public using
+    (originalEtaValue; originalEtaConverges; originalEtaLimitError)
