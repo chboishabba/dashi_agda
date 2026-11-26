@@ -19,7 +19,9 @@ module DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact where
 -- The original LOG gap predicate is the existing exact public API.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
+import Data.Nat.Properties as NatP
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
@@ -32,6 +34,10 @@ import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
 import DASHI.Analysis.BishopOriginalNegativeLogExpFiniteStageLimitExact as Finite
 import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NativeLog
+import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpProduct
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Gap
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
@@ -128,3 +134,69 @@ originalBishopNegativeLogExponentialGap x positive belowOne =
         { ratioNonnegative = RP.<⇒≤ positive
         ; ratioBelowOne = belowOne
         })
+
+
+------------------------------------------------------------------------
+-- Canonical Nat-log multiplicativity, directly from the actual mesh
+-- terminal, native exponential injectivity and literal Nat embedding.
+-- Source-written; no extra logarithm authority or kernel claim.
+------------------------------------------------------------------------
+
+canonicalNatLogExpInverse :
+  ∀ n →
+  R._≃_
+    (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
+    (NatReal.natReal (suc n))
+canonicalNatLogExpInverse =
+  NativeLog.sourceCanonicalNatLogAllIndicesExpInverse
+    originalBishopNegativeLogExponentialGap
+
+canonicalNatLogProduct :
+  ∀ i j k →
+  suc k ≡ (suc i * suc j) →
+  R._≃_
+    (Terms.sourceCanonicalNatLogCandidate k)
+    (R._+_ (Terms.sourceCanonicalNatLogCandidate i)
+      (Terms.sourceCanonicalNatLogCandidate j))
+canonicalNatLogProduct i j k indices =
+  ExpProduct.bishopExpInjective
+    (RP.≃-trans (canonicalNatLogExpInverse k)
+      (RP.≃-trans
+        (RP.≃-refl₂ (cong NatReal.natReal indices))
+        (RP.≃-trans (NatReal.natRealMul (suc i) (suc j))
+          (RP.≃-trans
+            (RP.*-cong
+              (RP.≃-symm (canonicalNatLogExpInverse i))
+              (RP.≃-symm (canonicalNatLogExpInverse j)))
+            (RP.≃-symm
+              (ExpProduct.bishopExpAdd
+                (Terms.sourceCanonicalNatLogCandidate i)
+                (Terms.sourceCanonicalNatLogCandidate j)))))))
+
+canonicalNatLogAllProducts :
+  ∀ i j →
+  R._≃_
+    (Terms.sourceCanonicalNatLogCandidate (j + i * suc j))
+    (R._+_ (Terms.sourceCanonicalNatLogCandidate i)
+      (Terms.sourceCanonicalNatLogCandidate j))
+canonicalNatLogAllProducts i j =
+  canonicalNatLogProduct i j (j + i * suc j)
+    refl
+
+dyadicNatLogIndices :
+  ∀ k → suc (suc (k + k)) ≡ (suc (suc zero) * suc k)
+dyadicNatLogIndices k =
+  sym (trans
+    (cong (λ n → suc k + n)
+      (NatP.+-identityʳ (suc k)))
+    (cong suc (NatP.+-suc k k)))
+
+canonicalNatLogDyadic :
+  ∀ k →
+  R._≃_
+    (Terms.sourceCanonicalNatLogCandidate (suc (k + k)))
+    (R._+_ (Terms.sourceCanonicalNatLogCandidate (suc zero))
+      (Terms.sourceCanonicalNatLogCandidate k))
+canonicalNatLogDyadic k =
+  canonicalNatLogProduct (suc zero) k (suc (k + k))
+    (dyadicNatLogIndices k)
