@@ -365,8 +365,41 @@ bishopExpInjective :
   ∀ {x y : BishopReal.ℝ} →
   BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
   BishopReal._≃_ x y
-bishopExpInjective equal =
+bishopExpInjective {x} {y} equal =
   BishopP.≤-antisym
     (BishopP.≮⇒≥
-      (bishopExpEqualityExcludesStrictOrder (BishopP.≃-symm equal)))
-    (BishopP.≮⇒≥ (bishopExpEqualityExcludesStrictOrder equal))
+      (bishopExpEqualityExcludesStrictOrder {x = y} {y = x}
+        (BishopP.≃-symm equal)))
+    (BishopP.≮⇒≥ (bishopExpEqualityExcludesStrictOrder {x = x} {y = y} equal))
+
+
+-- Strict order from a positive exponential value; no need to assume
+-- global exponential positivity or use a classical real logarithm.
+bishopExpStrictOrderFromPositiveValue :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._<_ BishopReal.0ℝ (Exp.bishopExp x) →
+  BishopReal._<_ x y →
+  BishopReal._<_ (Exp.bishopExp x) (Exp.bishopExp y)
+bishopExpStrictOrderFromPositiveValue {x} {y} expXPositive xBelowY =
+  let
+    d = BishopReal._+_ y (BishopReal.-_ x)
+    dPositive =
+      BishopP.<-respˡ-≃
+        (BishopP.≃-symm (BishopP.+-inverseʳ x))
+        (BishopP.+-monoˡ-< (BishopReal.-_ x) xBelowY)
+    sumIsY : BishopReal._≃_ (BishopReal._+_ x d) y
+    sumIsY =
+      let open BishopP.ℝ-Solver in
+      solve 2 (λ a b → a ⊕ (b ⊖ a) ⊜ b)
+        BishopP.≃-refl x y
+    productIsY =
+      BishopP.≃-trans
+        (BishopP.≃-symm (bishopExpAdd x d))
+        (ExpCong.bishopExpCongruent sumIsY)
+  in
+  BishopP.<-respʳ-≃ productIsY
+    (BishopP.<-respˡ-≃
+      (BishopP.*-identityʳ (Exp.bishopExp x))
+      (BishopP.*-monoˡ-<-pos
+        (BishopP.0<x⇒posx expXPositive)
+        (Positive.bishopExpStrictlyAboveOneOnPositive dPositive)))
