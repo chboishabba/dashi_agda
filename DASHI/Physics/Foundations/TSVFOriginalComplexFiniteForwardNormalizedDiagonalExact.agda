@@ -256,3 +256,104 @@ module _
 -- observer reconstruction must normalize or divide by Z, build the
 -- complete noncommutative star algebra and its positive GNS null
 -- ideal, then match the actual independent YM OS (not this subalgebra).
+
+
+------------------------------------------------------------------------
+-- AW1: full rational-complex LINEAR matrix action on the original
+-- pointer carrier. Reuses the original quantum apply/pair; does not
+-- claim every function Operator is linear, or identify the ABL
+-- denominator predicate with nonnegative Hilbert squared norm.
+------------------------------------------------------------------------
+record Matrix2C : Set where
+  constructor matrix2
+  field
+    aa ab ba bb : C.RationalComplex
+
+matrixAction : Matrix2C → Q.QuantumSurface.Operator Original.finiteComplexQuantum
+matrixAction (matrix2 a b c d) (Env.pointerRecord x y) =
+  Env.pointerRecord (C._+c_ (C._*c_ a x) (C._*c_ b y))
+                    (C._+c_ (C._*c_ c x) (C._*c_ d y))
+
+matrixProduct : Matrix2C → Matrix2C → Matrix2C
+matrixProduct (matrix2 a b c d) (matrix2 e f g h) =
+  matrix2 (C._+c_ (C._*c_ a e) (C._*c_ b g))
+          (C._+c_ (C._*c_ a f) (C._*c_ b h))
+          (C._+c_ (C._*c_ c e) (C._*c_ d g))
+          (C._+c_ (C._*c_ c f) (C._*c_ d h))
+
+matrixAdjoint : Matrix2C → Matrix2C
+matrixAdjoint (matrix2 a b c d) =
+  matrix2 (C.conjugateC a) (C.conjugateC c)
+          (C.conjugateC b) (C.conjugateC d)
+
+matrixIdentity : Matrix2C
+matrixIdentity = matrix2 C.oneC C.zeroC C.zeroC C.oneC
+
+matrixIdentityActs : ∀ ket → matrixAction matrixIdentity ket ≡ ket
+matrixIdentityActs (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+    (C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+
+matrixProductActs : ∀ a b ket →
+  matrixAction (matrixProduct a b) ket ≡ matrixAction a (matrixAction b ket)
+matrixProductActs (matrix2 (C.complex a0 a1) (C.complex a2 a3) (C.complex a4 a5) (C.complex a6 a7)) (matrix2 (C.complex b0 b1) (C.complex b2 b3) (C.complex b4 b5) (C.complex b6 b7)) (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+    (C.complexExt (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+
+matrixAdjointPair : ∀ a left right →
+  Env.hermitianPair (matrixAction a left) right
+  ≡ Env.hermitianPair left (matrixAction (matrixAdjoint a) right)
+matrixAdjointPair (matrix2 (C.complex a0 a1) (C.complex a2 a3) (C.complex a4 a5) (C.complex a6 a7)) (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) (Env.pointerRecord (C.complex v0 v1) (C.complex v2 v3)) =
+  C.complexExt (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ []))
+               (solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ u0 ∷ u1 ∷ u2 ∷ u3 ∷ v0 ∷ v1 ∷ v2 ∷ v3 ∷ []))
+
+-- An explicit cyclic section (not an inverse on the whole matrix
+-- algebra). The second column is zero, so the original (1,1) reopens.
+matrixCyclicSection : Env.ComplexPointerRecord → Matrix2C
+matrixCyclicSection (Env.pointerRecord x y) = matrix2 x C.zeroC y C.zeroC
+
+matrixCyclicSectionReopens : ∀ ket →
+  matrixAction (matrixCyclicSection ket) (Env.pointerRecord C.oneC C.oneC) ≡ ket
+matrixCyclicSectionReopens (Env.pointerRecord (C.complex u0 u1) (C.complex u2 u3)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+    (C.complexExt (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])) (solve (u0 ∷ u1 ∷ u2 ∷ u3 ∷ [])))
+
+module _
+  (rightGammas wrongGammas : List C.RationalComplex)
+  (right wrong : Env.ComplexPointerRecord)
+  (k : Nat)
+  where
+
+  awForward : Env.ComplexPointerRecord
+  awForward = originalComplexForwardKet rightGammas wrongGammas right wrong k
+
+  originalMatrixForwardPair : Matrix2C → C.RationalComplex
+  originalMatrixForwardPair a = Q.QuantumSurface.pair Original.finiteComplexQuantum
+    awForward (Q.QuantumSurface.apply Original.finiteComplexQuantum (matrixAction a) awForward)
+
+  originalMatrixCyclicGram : ∀ a b →
+    originalMatrixForwardPair (matrixProduct (matrixAdjoint a) b)
+    ≡ Env.hermitianPair (matrixAction a awForward) (matrixAction b awForward)
+  originalMatrixCyclicGram a b =
+    trans (cong (Env.hermitianPair awForward)
+                (matrixProductActs (matrixAdjoint a) b awForward))
+          (sym (matrixAdjointPair a awForward (matrixAction b awForward)))
+
+  originalMatrixCyclicSectionReopens : ∀ ket →
+    matrixAction (matrixCyclicSection ket) awForward ≡ ket
+  originalMatrixCyclicSectionReopens = matrixCyclicSectionReopens
+
+  -- Exact normalization by the original norm²=2. This is the forward
+  -- state, NOT a weak value and NOT an ABL denominator.
+  originalNormalizedMatrixState : Matrix2C → C.RationalComplex
+  originalNormalizedMatrixState a =
+    C._*c_ (C.complex ½ 0ℚ) (originalMatrixForwardPair a)
+
+  originalNormalizedMatrixUnit : originalNormalizedMatrixState matrixIdentity ≡ C.oneC
+  originalNormalizedMatrixUnit =
+    trans (cong (λ ket → C._*c_ (C.complex ½ 0ℚ) (Env.hermitianPair awForward ket))
+                (matrixIdentityActs awForward))
+          (C.complexExt (solve []) (solve []))
