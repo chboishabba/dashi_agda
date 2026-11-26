@@ -1138,3 +1138,8 @@ See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndp
 ## Constructive projective character refinement — 26 November 2026
 
 See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#projective-character-consequences-and-constructive-original-recovery--26-november-2026). Replayed projective character relations produce original signed affine constraints, including nonconstant XOR relations. Source-facing K refinement and verified witness admission attached; 20/20 pair-closure-stalled original planted sources recovered and all 58 actual covers retained on those sources. Full character span recovers exact affine hull, not necessarily nonlinear support, with exponential worst-case dictionary. Candidate/sourceBacked, not native leafClosed. All thirteen universal targets remain leafOpen; prioritize genuine residuals surviving both bounded disjunction and character refinement. No universal polynomial clock or unrestricted separation established.
+
+
+## Constructive character quotient and certified proportionality transport — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#constructive-character-quotient-and-certified-proportionality-transport--26-november-2026). Reuse existing character pins; new replayable proportionalities and optional finite character module reopen original witnesses (sourceBacked). The four-witness residual now recovers from a dimension-four quotient; capped failure UNKNOWN. No universal affordable quotient completeness, no unrestricted lower bound. All thirteen principal universal obligations remain leafOpen.
