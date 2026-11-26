@@ -1168,3 +1168,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## Proof-carrying mixed character refinement and recursive one-hot gluing — 26 November 2026
 
 See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#proof-carrying-mixed-character-refinement-and-recursive-one-hot-gluing--26-november-2026). Mixed inherited/local character contradictions now retain original-generator proof provenance; inconsistent onehot choices and complete sibling families compose into replayable parent refutations (sourceBacked, optional). No uniform polynomial proof size/discovery or unrestricted lower bound. All thirteen principal universal obligations remain leafOpen; native admission waiting.
+
+
+## Live-pivot dependency reuse — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#live-pivot-dependency-reuse-in-proof-carrying-character-transport--26-november-2026). Active proof row indices, transitive dependency slicing and signed affine projection preserve the inherited span; local extension avoids repeated full proof replay and every terminal certificate remains independently replayed. Scoped sourceBacked; paired 6300 small and240 larger decisions agree, observed event reductions7.69% and21.22%. Mixed-only inhabited parent fixture verified. No universal proof size/resource theorem or unrestricted lower bound; all thirteen principal targets remain leafOpen.
