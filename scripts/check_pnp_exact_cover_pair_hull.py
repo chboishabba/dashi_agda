@@ -100,10 +100,22 @@ def weight_chart(n,u,V,B):
     return M
 
 
+def row_capacity(n,R,B):
+    """A row hitting set bounds the number of pairwise disjoint selected columns."""
+    U=(1<<n)-1;J=[]
+    while U:
+        B.pay('capacity_scan',1+len(R));i=max(range(len(R)),key=lambda i:(R[i]&U).bit_count())
+        if not R[i]&U:raise AssertionError('uncovered source column')
+        U&=~R[i];J.append(i)
+    return tuple(J)
+
+
 def solve(m,sets,cap,width=4):
     R=incidence(m,sets);n=len(sets);B=Budget(cap)
     try:
-        B.pay('input',1+m+3*n);D=modular_rows(n,R,max(1,m.bit_length()),B)
+        B.pay('input',1+m+3*n)
+        if len(row_capacity(n,R,B))<m//3:return None,B.stats,True
+        D=modular_rows(n,R,max(1,m.bit_length()),B)
         if D is None:return None,B.stats,True
         P,x=close(n,R,B,required=D)
         if P is None or x is not None:return x,B.stats,True
@@ -196,6 +208,16 @@ def main():
         assert modular_rows(n,R,e,B) is None
         y,C,done=solve(3*q,S,1000000);assert done and y is None
         print('latin',q,'parity_pair_rank',len(P),'first_reject_depth',e,'charged',sum(C.values()))
+    # Space barrier survives every modular depth and even the pair-hull closure.
+    S=[T for T in combinations(range(12),3) if min(T)<3];R=incidence(12,S);n=len(S)
+    pos=((0,3,4),(1,5,6),(2,7,8),(2,9,10),(0,1,11));neg=(0,1,2)
+    assert all(sum(i in T for T in pos)-int(i in neg)==1 for i in range(12))
+    assert all(T in S for T in pos+(neg,))
+    B=Budget(10000000);D=modular_rows(n,R,5,B);P,x=close(n,R,B,required=D)
+    assert D is not None and P is not None and x is None and len(P)==13
+    J=row_capacity(n,R,B);assert len(J)==3
+    y,C,done=solve(12,S,1000000);assert done and y is None and C['capacity_scan']>0
+    print('space_barrier',n,'pair_rank',len(P),'capacity',len(J),'charged',sum(C.values()))
     # Modular feasibility is not exact cover: nonnegative/integer bounds still matter.
     A=[[2,0],[0,1]];assert mod_image(A,[2,0],2,3,Budget(1000))==((2,0),(1,1))
     assert solve(6,[(0,1,2)],0)[2] is False
