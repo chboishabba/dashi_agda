@@ -28,6 +28,8 @@ import DASHI.Foundations.BishopChudnovskyPrefixSemanticsExact as F
 import DASHI.Foundations.BishopChudnovskyRationalOverlapExact as O
 import DASHI.Foundations.BishopChudnovskySignedCrossReflectionExact as X
 import DASHI.Foundations.BishopChudnovskyNativePeriodProductExact as P
+import DASHI.Mathematics.NumberTheory.FiniteNatFloorSquareRootExact as Floor
+import DASHI.Foundations.BishopNatSquareRootFloorApproximationExact as Root
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as S
 import DASHI.Analysis.BishopMachinCrossEnvelopeBishopOrderExact as R
 import DASHI.Foundations.BishopMachinArctanConstructionExact as M
@@ -35,8 +37,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExac
 
 -- The actual signed integer recurrence, retaining zero and negative terms.
 sign : Nat → Z.ℤ
-sign zero = Z.+ 1
-sign (suc n) = Z._*_ (sign n) (Z.-_ (Z.+ 1))
+sign zero = Z.+_ 1
+sign (suc n) = Z._*_ (sign n) (Z.-_ (Z.+_ 1))
 
 signCorrect : (n : Nat) → S.qSign n ≡ Q.mkℚᵘ (sign n) 0
 signCorrect zero = refl
@@ -60,15 +62,15 @@ scaleFraction s t d nz =
       (QP.≃-reflexive (cong (λ v → F.frac v d nz) (ZP.*-comm t s))))
 
 unsignedAtan : (d n : Nat) (nz : N.NonZero d) → Q.ℚᵘ
-unsignedAtan d n nz = F.frac (Z.+ 1) (omittedDen d n) (omittedNZ d n nz)
+unsignedAtan d n nz = F.frac (Z.+_ 1) (omittedDen d n) (omittedNZ d n nz)
 
 unsignedCorrect : (d n : Nat) (nz : N.NonZero d) →
-  (M.inverseOddRational n Q.* S.qPow (F.frac (Z.+ 1) d nz) (I.oddExponent n))
+  (M.inverseOddRational n Q.* S.qPow (F.frac (Z.+_ 1) d nz) (I.oddExponent n))
     Q.≃ unsignedAtan d n nz
 unsignedCorrect d n nz =
   QP.≃-trans
     (QP.*-cong QP.≃-refl (R.rationalReciprocalPower d {{nz}} (I.oddExponent n)))
-    (QP.≃-sym (F.fracMulEdge (Z.+ 1) (Z.+ 1)
+    (QP.≃-sym (F.fracMulEdge (Z.+_ 1) (Z.+_ 1)
       (I.oddExponent n) (d ^ I.oddExponent n)
       (M.oddExponentNonZero n) (NP.m^n≢0 d (I.oddExponent n) {{nz}})))
 
@@ -76,7 +78,7 @@ weighted : (c : Z.ℤ) (d n : Nat) (nz : N.NonZero d) → Q.ℚᵘ
 weighted c d n nz = F.frac (Z._*_ c (sign n)) (omittedDen d n) (omittedNZ d n nz)
 
 weightedCorrect : (c : Z.ℤ) (d n : Nat) (nz : N.NonZero d) →
-  (F.frac c 1 N.nonZero Q.* S.qAtanTerm (F.frac (Z.+ 1) d nz) n)
+  (F.frac c 1 N.nonZero Q.* S.qAtanTerm (F.frac (Z.+_ 1) d nz) n)
     Q.≃ weighted c d n nz
 weightedCorrect c d n nz rewrite signCorrect n =
   QP.≃-trans
@@ -84,20 +86,20 @@ weightedCorrect c d n nz rewrite signCorrect n =
       (QP.*-cong QP.≃-refl (unsignedCorrect d n nz)))
     (QP.≃-trans
       (QP.*-cong QP.≃-refl
-        (scaleFraction (sign n) (Z.+ 1) (omittedDen d n) (omittedNZ d n nz)))
+        (scaleFraction (sign n) (Z.+_ 1) (omittedDen d n) (omittedNZ d n nz)))
       (QP.≃-trans
-        (scaleFraction c (Z._*_ (sign n) (Z.+ 1)) (omittedDen d n) (omittedNZ d n nz))
+        (scaleFraction c (Z._*_ (sign n) (Z.+_ 1)) (omittedDen d n) (omittedNZ d n nz))
         (QP.≃-reflexive (cong
           (λ v → F.frac (Z._*_ c v) (omittedDen d n) (omittedNZ d n nz))
           (ZP.*-identityʳ (sign n))))))
 
 rawTerm : Nat → Q.ℚᵘ
-rawTerm n = weighted (Z.+ 16) 5 n N.nonZero Q.- weighted (Z.+ 4) 239 n N.nonZero
+rawTerm n = weighted (Z.+_ 16) 5 n N.nonZero Q.- weighted (Z.+_ 4) 239 n N.nonZero
 
 termCorrect : (n : Nat) → rawTerm n Q.≃ S.qMachinTerm n
 termCorrect n = QP.≃-sym (QP.+-cong
-  (weightedCorrect (Z.+ 16) 5 n N.nonZero)
-  (QP.-‿cong (weightedCorrect (Z.+ 4) 239 n N.nonZero)))
+  (weightedCorrect (Z.+_ 16) 5 n N.nonZero)
+  (QP.-‿cong (weightedCorrect (Z.+_ 4) 239 n N.nonZero)))
 
 -- Actual raw (ad+cb,bd) recurrence. The unnormalised rational owner
 -- already implements this exact recurrence; no normalized Rat is used.
@@ -121,8 +123,8 @@ stageDenStep n = X.sumDen (rawStage n) (rawTerm n)
 
 -- Literal zero mode and geometric radius.
 rawRadius : Nat → Q.ℚᵘ
-rawRadius zero = F.frac (Z.+ 22) 7 N.nonZero
-rawRadius (suc n) = F.frac (Z.+ 4) (25 ^ suc n) (NP.m^n≢0 25 (suc n))
+rawRadius zero = F.frac (Z.+_ 22) 7 N.nonZero
+rawRadius (suc n) = F.frac (Z.+_ 4) (25 ^ suc n) (NP.m^n≢0 25 (suc n))
 
 radiusCorrect : (n : Nat) → rawRadius n Q.≃ O.machinRadius n
 radiusCorrect zero = QP.≃-refl
@@ -198,3 +200,100 @@ periodFromRaw h = P.expandedToPeriod (λ k → toExpanded k (h k))
 
 rawFromPeriod : P.NativePeriod → (k : Nat) → RawCross k
 rawFromPeriod h k = fromExpanded k (P.periodToExpanded h k)
+
+-- Source-shaped denominator exponent in the Lean literal term.
+oddIndex : (n : Nat) → I.oddExponent n ≡ 2 * n + 1
+oddIndex zero = refl
+oddIndex (suc n) rewrite NP.*-suc 2 n | oddIndex n = refl
+
+-- These projections are valid even for a signed numerator of zero.
+fracNum : (z : Z.ℤ) (d : Nat) (nz : N.NonZero d) →
+  Q.↥ (F.frac z d nz) ≡ z
+fracNum z zero nz = ⊥-elim (N.≢-nonZero⁻¹ zero {{nz}} refl)
+fracNum z (suc d) nz = refl
+
+fracDen : (z : Z.ℤ) (d : Nat) (nz : N.NonZero d) →
+  Q.↧ₙ (F.frac z d nz) ≡ d
+fracDen z zero nz = ⊥-elim (N.≢-nonZero⁻¹ zero {{nz}} refl)
+fracDen z (suc d) nz = refl
+
+differenceNum : (x y : Z.ℤ) (a b : Nat)
+  (ha : N.NonZero a) (hb : N.NonZero b) →
+  Q.↥ (F.frac x a ha Q.- F.frac y b hb) ≡
+  Z._+_ (Z._*_ x (Z.+_ b)) (Z._*_ (Z.-_ y) (Z.+_ a))
+differenceNum x y zero b ha hb = ⊥-elim (N.≢-nonZero⁻¹ zero {{ha}} refl)
+differenceNum x y (suc a) zero ha hb = ⊥-elim (N.≢-nonZero⁻¹ zero {{hb}} refl)
+differenceNum x y (suc a) (suc b) ha hb =
+  fracNum _ _ (F.prodNZ (suc a) (suc b) ha hb)
+
+differenceDen : (x y : Z.ℤ) (a b : Nat)
+  (ha : N.NonZero a) (hb : N.NonZero b) →
+  Q.↧ₙ (F.frac x a ha Q.- F.frac y b hb) ≡ a * b
+differenceDen x y zero b ha hb = ⊥-elim (N.≢-nonZero⁻¹ zero {{ha}} refl)
+differenceDen x y (suc a) zero ha hb = ⊥-elim (N.≢-nonZero⁻¹ zero {{hb}} refl)
+differenceDen x y (suc a) (suc b) ha hb =
+  fracDen _ _ (F.prodNZ (suc a) (suc b) ha hb)
+
+-- Exactly the numerator of Lean rawTerm, before any gcd reduction.
+signedDifference : (s a b : Z.ℤ) →
+  Z._+_ (Z._*_ (Z._*_ (Z.+_ 16) s) b)
+        (Z._*_ (Z.-_ (Z._*_ (Z.+_ 4) s)) a)
+  ≡ Z._*_ s (Z._-_ (Z._*_ (Z.+_ 16) b) (Z._*_ (Z.+_ 4) a))
+signedDifference s a b
+  rewrite sym (ZP.-1*i≡-i (Z._*_ (Z.+_ 4) s))
+        | sym (ZP.-1*i≡-i (Z._*_ (Z.+_ 4) a)) =
+  solve 3 (λ s′ a′ b′ →
+    (con (Z.+_ 16) :* s′ :* b′) :+
+    (con (Z.-_ (Z.+_ 1)) :* (con (Z.+_ 4) :* s′) :* a′)
+    := s′ :* ((con (Z.+_ 16) :* b′) :+
+        (con (Z.-_ (Z.+_ 1)) :* (con (Z.+_ 4) :* a′))))
+    refl s a b
+
+rawTermNum : (n : Nat) →
+  Q.↥ (rawTerm n) ≡
+  Z._*_ (sign n)
+    (Z._-_ (Z._*_ (Z.+_ 16) (Z.+_ (omittedDen 239 n)))
+           (Z._*_ (Z.+_ 4) (Z.+_ (omittedDen 5 n))))
+rawTermNum n =
+  trans (differenceNum (Z._*_ (Z.+_ 16) (sign n))
+    (Z._*_ (Z.+_ 4) (sign n)) (omittedDen 5 n) (omittedDen 239 n)
+    (omittedNZ 5 n N.nonZero) (omittedNZ 239 n N.nonZero))
+    (signedDifference (sign n) (Z.+_ (omittedDen 5 n)) (Z.+_ (omittedDen 239 n)))
+
+rawTermDen : (n : Nat) →
+  Q.↧ₙ (rawTerm n) ≡ omittedDen 5 n * omittedDen 239 n
+rawTermDen n = differenceDen (Z._*_ (Z.+_ 16) (sign n))
+  (Z._*_ (Z.+_ 4) (sign n)) (omittedDen 5 n) (omittedDen 239 n)
+  (omittedNZ 5 n N.nonZero) (omittedNZ 239 n N.nonZero)
+
+rawViewNum : (n : Nat) → CH.num (rawView n) ≡ rawT n
+rawViewNum n = trans (cong CH.num (rawViewCorrect n))
+  (sym (rawTCorrect n (W.sourceView n)))
+
+rawViewDen : (n : Nat) → CH.den (rawView n) ≡ G.qProduct (suc n)
+rawViewDen n = trans (cong CH.den (rawViewCorrect n))
+  (W.sourceDen n (W.sourceView n))
+
+-- Raw corner projections, with all denominator factors retained.
+-- sp is the predecessor of the positive scale, as in intervalAt.
+cornerNum : (sp r n : Nat) →
+  Q.↥ (CH.endpoint sp r (rawView n)) ≡
+  Z.+_ (426880 * r * G.qProduct (suc n))
+cornerNum sp r n =
+  trans (fracNum _ _ (NP.m*n≢0 (suc sp) (CH.num (rawView n))))
+    (cong (λ q → Z.+_ (426880 * r * q)) (rawViewDen n))
+
+cornerDen : (sp r n : Nat) →
+  Q.↧ₙ (CH.endpoint sp r (rawView n)) ≡ suc sp * rawT n
+cornerDen sp r n =
+  trans (fracDen _ _ (NP.m*n≢0 (suc sp) (CH.num (rawView n))))
+    (cong (suc sp *_) (rawViewNum n))
+
+-- The strict square specification uniquely determines the same
+-- root as Lean Nat.sqrt; no value of a foreign proof is imported.
+rootUnique : (k r : Nat) →
+  r * r N.≤ Root.scaledSquareTarget 10005 (CH.rootScale k) →
+  suc (Root.scaledSquareTarget 10005 (CH.rootScale k)) N.≤ suc r * suc r →
+  CH.rootNumerator k ≡ r
+rootUnique k r lo hi =
+  Floor.floorSquareRootUnique (Root.scaledSquareTarget 10005 (CH.rootScale k)) r lo hi
