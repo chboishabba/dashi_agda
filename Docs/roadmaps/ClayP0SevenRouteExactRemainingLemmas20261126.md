@@ -1153,3 +1153,8 @@ See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261
 ## Sparse row-projector sections — 26 November 2026
 
 See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#sparse-row-projector-sections-without-module-closure--26-november-2026). Single evolving sparse section reuses replayed character span and original one-hot row constraints without complete module closure; conditional zero is sound even in incomplete span, nonzero not feasibility. Existing restriction/module paths preserved. Previous four-cover original source recovered with retained support2; two 240-source finite holdouts show complementary coverage/cost. Candidate/sourceBacked, no native leafClosed status. No new hard residual surviving disjunctive closure established, no uniform polynomial cap theorem. All thirteen universal endpoints remain leafOpen; seven alternatives retained.
+
+
+## Bounded sibling reopening and child-local strengthening — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#bounded-sibling-reopening-and-child-local-character-strengthening--26-november-2026). Existing sparse section and restriction path retained; spurious child now handled by bounded sibling reopening and optional locally shifted character generators. Exact all-child exhaustion proves parent empty; caps never prove empty. Previous34 held-out inhabited failures recovered and prior990-demand campaign now fully decisive. Scoped sourceBacked, not native leafClosed. No universal node, rank or shift cap sufficiency or unrestricted separation; all thirteen universal targets remain leafOpen.
