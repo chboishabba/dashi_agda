@@ -4,14 +4,16 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Empty using (⊥-elim)
 open import Relation.Binary.PropositionalEquality using (subst; sym; cong)
 open import Data.List.Base using (List; []; _∷_; map)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; -ℝ_; absℝ; _≤ℝ_; _<ℝ_;
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; _/ℝ_; -ℝ_; absℝ; _≤ℝ_; _<ℝ_;
    ≤ℝ-refl; ≤ℝ-trans; ≤ℝ-antisym; ≤ℝ-total; +-mono-≤; addRightCancelLe;
+   zeroLtOne; subPositiveOfLt; notLeOfLt;
    negℝ-involutive; negEqSubZero; subEqAddNeg; negℝ-add; negℝ-sub;
       negℝ-mulʳ; negℝ-mulˡ; negℝ-mul-neg; negℝ-order;
  subRightMono; subLeftMono;
@@ -24,7 +26,9 @@ open import DASHI.Foundations.RealAnalysisAxioms using
     oneMinusMulOnePlus; onePlusMulOneMinus;
     absZero; absAddSubadditive; absSubadditive; absMul; absNeg;
     absNonnegative; leAbs; negLeAbs; absOfNonnegative; absOfNonpositive;
-    mulMonotoneNonnegative)
+    mulMonotoneNonnegative;
+    divℝ-nonnegative; divℝ-nonpositive; divℝ-le-one; divℝ-one-le;
+    divℝ-positive; divℝ-lt-one)
 
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 
@@ -675,6 +679,169 @@ record ContinuousClampSource : Set₁ where
       upperThreshold ≤ℝ value → clamp value ≡ 1ℝ
 
 open ContinuousClampSource public
+
+halfℝ : ℝ
+halfℝ = 1ℝ /ℝ twoℝ
+
+oneLtTwoℝ : 1ℝ <ℝ twoℝ
+oneLtTwoℝ = DASHI.Foundations.RealAnalysisAxioms.positiveAddRight zeroLtOne
+
+twoPositiveℝ : 0ℝ <ℝ twoℝ
+twoPositiveℝ = DASHI.Foundations.RealAnalysisAxioms.addPositive zeroLtOne zeroLtOne
+
+halfPositiveℝ : 0ℝ <ℝ halfℝ
+halfPositiveℝ = divℝ-positive zeroLtOne twoPositiveℝ
+
+halfLtOneℝ : halfℝ <ℝ 1ℝ
+halfLtOneℝ = divℝ-lt-one oneLtTwoℝ twoPositiveℝ
+
+clampHalfOneDenominatorPositive : 0ℝ <ℝ 1ℝ -ℝ halfℝ
+clampHalfOneDenominatorPositive =
+  subPositiveOfLt halfℝ 1ℝ halfLtOneℝ
+
+clampHalfOne : ℝ → ℝ
+clampHalfOne value with ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ _ | _ = 0ℝ
+... | inj₂ _ | inj₁ _ = 1ℝ
+... | inj₂ _ | inj₂ _ =
+  (value -ℝ halfℝ) /ℝ (1ℝ -ℝ halfℝ)
+
+clampHalfOneNonnegative : ∀ value → 0ℝ ≤ℝ clampHalfOne value
+clampHalfOneNonnegative value with ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ _ | _ = ≤ℝ-refl
+... | inj₂ _ | inj₁ _ =
+  DASHI.Foundations.RealAnalysisAxioms.strictToNonnegative zeroLtOne
+... | inj₂ halfLeValue | inj₂ _ =
+  divℝ-nonnegative
+    (DASHI.Foundations.RealAnalysisAxioms.subNonnegative halfLeValue)
+    clampHalfOneDenominatorPositive
+
+clampHalfOneLeOne : ∀ value → clampHalfOne value ≤ℝ 1ℝ
+clampHalfOneLeOne value with ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ _ | _ =
+  DASHI.Foundations.RealAnalysisAxioms.strictToNonnegative zeroLtOne
+... | inj₂ _ | inj₁ _ = ≤ℝ-refl
+... | inj₂ _ | inj₂ valueLeOne =
+  divℝ-le-one (subRightMono halfℝ valueLeOne)
+    clampHalfOneDenominatorPositive
+
+clampHalfOneZeroBelow : ∀ {value} → value ≤ℝ halfℝ → clampHalfOne value ≡ 0ℝ
+clampHalfOneZeroBelow {value} valueLeHalf with
+  ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ _ | _ = refl
+... | inj₂ halfLeValue | inj₁ oneLeValue =
+  ⊥-elim (notLeOfLt halfLtOneℝ (≤ℝ-trans oneLeValue valueLeHalf))
+... | inj₂ halfLeValue | inj₂ valueLeOne =
+  let valueEqHalf = ≤ℝ-antisym valueLeHalf halfLeValue
+      numeratorZero =
+        subst (λ t → t -ℝ halfℝ ≡ 0ℝ) (sym valueEqHalf) (subSelf halfℝ)
+      hnonneg =
+        divℝ-nonnegative
+          (DASHI.Foundations.RealAnalysisAxioms.subNonnegative halfLeValue)
+          clampHalfOneDenominatorPositive
+      hnonpos =
+        subst (λ t → t /ℝ (1ℝ -ℝ halfℝ) ≤ℝ 0ℝ) (sym numeratorZero)
+          (divℝ-nonpositive ≤ℝ-refl clampHalfOneDenominatorPositive)
+  in ≤ℝ-antisym hnonpos hnonneg
+
+clampHalfOneOneAbove : ∀ {value} → 1ℝ ≤ℝ value → clampHalfOne value ≡ 1ℝ
+clampHalfOneOneAbove {value} oneLeValue with
+  ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ valueLeHalf | _ =
+  ⊥-elim (notLeOfLt halfLtOneℝ (≤ℝ-trans oneLeValue valueLeHalf))
+... | inj₂ _ | inj₁ _ = refl
+... | inj₂ halfLeValue | inj₂ valueLeOne =
+  let valueEqOne = ≤ℝ-antisym valueLeOne oneLeValue
+      numeratorEqDen =
+        cong (λ t → t -ℝ halfℝ) valueEqOne
+      hle =
+        divℝ-le-one (subRightMono halfℝ valueLeOne)
+          clampHalfOneDenominatorPositive
+      hge =
+        subst (λ t → 1ℝ ≤ℝ t /ℝ (1ℝ -ℝ halfℝ)) (sym numeratorEqDen)
+          (divℝ-one-le ≤ℝ-refl clampHalfOneDenominatorPositive)
+  in ≤ℝ-antisym hle hge
+
+minReal : ℝ → ℝ → ℝ
+minReal a b with ≤ℝ-total a b
+... | inj₁ _ = a
+... | inj₂ _ = b
+
+maxReal : ℝ → ℝ → ℝ
+maxReal a b with ≤ℝ-total a b
+... | inj₁ _ = b
+... | inj₂ _ = a
+
+minRealEqLeftOfLe : ∀ {a b : ℝ} → a ≤ℝ b → minReal a b ≡ a
+minRealEqLeftOfLe {a} {b} hab with ≤ℝ-total a b
+... | inj₁ _ = refl
+... | inj₂ hba = ≤ℝ-antisym hba hab
+
+minRealEqRightOfLe : ∀ {a b : ℝ} → b ≤ℝ a → minReal a b ≡ b
+minRealEqRightOfLe {a} {b} hba with ≤ℝ-total a b
+... | inj₁ hab = ≤ℝ-antisym hab hba
+... | inj₂ _ = refl
+
+maxRealEqLeftOfGe : ∀ {a b : ℝ} → b ≤ℝ a → maxReal a b ≡ a
+maxRealEqLeftOfGe {a} {b} hba with ≤ℝ-total a b
+... | inj₁ hab = ≤ℝ-antisym hba hab
+... | inj₂ _ = refl
+
+maxRealEqRightOfLe : ∀ {a b : ℝ} → a ≤ℝ b → maxReal a b ≡ b
+maxRealEqRightOfLe {a} {b} hab with ≤ℝ-total a b
+... | inj₁ _ = refl
+... | inj₂ hba = ≤ℝ-antisym hab hba
+
+clampHalfOneFormula : ∀ value →
+  clampHalfOne value ≡
+  maxReal 0ℝ (minReal 1ℝ ((value -ℝ halfℝ) /ℝ (1ℝ -ℝ halfℝ)))
+clampHalfOneFormula value with ≤ℝ-total value halfℝ | ≤ℝ-total 1ℝ value
+... | inj₁ valueLeHalf | _ =
+  let tNonpos =
+        divℝ-nonpositive (subNonpos valueLeHalf)
+          clampHalfOneDenominatorPositive
+      tLeOne =
+        ≤ℝ-trans tNonpos
+          (DASHI.Foundations.RealAnalysisAxioms.strictToNonnegative zeroLtOne)
+      minEq = minRealEqRightOfLe tLeOne
+      maxEq = maxRealEqLeftOfGe tNonpos
+  in sym (trans (cong (λ z → maxReal 0ℝ z) minEq) maxEq)
+... | inj₂ _ | inj₁ oneLeValue =
+  let tGeOne =
+        divℝ-one-le (subRightMono halfℝ oneLeValue)
+          clampHalfOneDenominatorPositive
+      minEq = minRealEqLeftOfLe tGeOne
+      maxEq =
+        maxRealEqRightOfLe
+          (DASHI.Foundations.RealAnalysisAxioms.strictToNonnegative zeroLtOne)
+  in sym (trans (cong (λ z → maxReal 0ℝ z) minEq) maxEq)
+... | inj₂ halfLeValue | inj₂ valueLeOne =
+  let tNonneg =
+        divℝ-nonnegative
+          (DASHI.Foundations.RealAnalysisAxioms.subNonnegative halfLeValue)
+          clampHalfOneDenominatorPositive
+      tLeOne =
+        divℝ-le-one (subRightMono halfℝ valueLeOne)
+          clampHalfOneDenominatorPositive
+      minEq = minRealEqRightOfLe tLeOne
+      maxEq = maxRealEqRightOfLe tNonneg
+  in sym (trans (cong (λ z → maxReal 0ℝ z) minEq) maxEq)
+
+constructContinuousClampSource : ContinuousClampSource
+constructContinuousClampSource =
+  record
+    { lowerThreshold = halfℝ
+    ; upperThreshold = 1ℝ
+    ; lowerThresholdPositive = halfPositiveℝ
+    ; lowerBelowUpper = halfLtOneℝ
+    ; upperThresholdAtMostOne = ≤ℝ-refl
+    ; clamp = clampHalfOne
+    ; congruent = λ { refl → refl }
+    ; clampNonnegative = clampHalfOneNonnegative
+    ; clampLeOne = clampHalfOneLeOne
+    ; clampZeroBelow = clampHalfOneZeroBelow
+    ; clampOneAbove = clampHalfOneOneAbove
+    }
 
 ------------------------------------------------------------------------
 -- Exact source-repair check: a strict lower threshold is explicit and

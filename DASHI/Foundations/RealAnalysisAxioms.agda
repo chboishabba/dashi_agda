@@ -6,9 +6,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; _++_; [])
 open import Data.Nat.Base using (ℕ; suc) renaming (_+_ to _+ℕ_; _≤_ to _≤ℕ_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Relation.Nullary using (¬_)
 
 infixl 20 _+ℝ_ _-ℝ_
-infixl 30 _*ℝ_
+infixl 30 _*ℝ_ _/ℝ_
 infix  15 _≤ℝ_ _<ℝ_
 
 ------------------------------------------------------------------------
@@ -26,7 +27,7 @@ postulate
   0ℝ 1ℝ :
     ℝ
 
-  _+ℝ_ _-ℝ_ _*ℝ_ :
+  _+ℝ_ _-ℝ_ _*ℝ_ _/ℝ_ :
     ℝ →
     ℝ →
     ℝ
@@ -43,6 +44,35 @@ postulate
     ℝ →
     ℝ →
     Set
+
+  zeroLtOne :
+    0ℝ <ℝ 1ℝ
+
+  strictToNonnegative :
+    ∀ {a b : ℝ} →
+    a <ℝ b →
+    a ≤ℝ b
+
+  positiveAddRight :
+    ∀ {a b : ℝ} →
+    0ℝ <ℝ b →
+    a <ℝ a +ℝ b
+
+  addPositive :
+    ∀ {a b : ℝ} →
+    0ℝ <ℝ a →
+    0ℝ <ℝ b →
+    0ℝ <ℝ a +ℝ b
+
+  subPositiveOfLt :
+    ∀ a b →
+    a <ℝ b →
+    0ℝ <ℝ b -ℝ a
+
+  notLeOfLt :
+    ∀ {a b : ℝ} →
+    a <ℝ b →
+    ¬ b ≤ℝ a
 
   ≤ℝ-refl :
     ∀ {a : ℝ} →
@@ -233,6 +263,42 @@ postulate
     0ℝ ≤ℝ c →
     c ≤ℝ d →
     a *ℝ c ≤ℝ b *ℝ d
+
+  divℝ-nonnegative :
+    ∀ {a b : ℝ} →
+    0ℝ ≤ℝ a →
+    0ℝ <ℝ b →
+    0ℝ ≤ℝ a /ℝ b
+
+  divℝ-nonpositive :
+    ∀ {a b : ℝ} →
+    a ≤ℝ 0ℝ →
+    0ℝ <ℝ b →
+    a /ℝ b ≤ℝ 0ℝ
+
+  divℝ-le-one :
+    ∀ {a b : ℝ} →
+    a ≤ℝ b →
+    0ℝ <ℝ b →
+    a /ℝ b ≤ℝ 1ℝ
+
+  divℝ-one-le :
+    ∀ {a b : ℝ} →
+    b ≤ℝ a →
+    0ℝ <ℝ b →
+    1ℝ ≤ℝ a /ℝ b
+
+  divℝ-positive :
+    ∀ {a b : ℝ} →
+    0ℝ <ℝ a →
+    0ℝ <ℝ b →
+    0ℝ <ℝ a /ℝ b
+
+  divℝ-lt-one :
+    ∀ {a b : ℝ} →
+    a <ℝ b →
+    0ℝ <ℝ b →
+    a /ℝ b <ℝ 1ℝ
 
   +-comm :
     ∀ a b →
