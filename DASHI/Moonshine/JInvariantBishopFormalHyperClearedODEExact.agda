@@ -96,3 +96,49 @@ hyperSquare : RamanujanX → RamanujanY → RamanujanE →
 hyperSquare hx hy he =
   T.hyperSquareFromFactor (F.factorizationFromRamanujan hx hy he H.hyperCandidate)
     (hyperSolution hx hy)
+
+-- The jet is another readout of the same signed defect.
+-- It is not a separately assumed analytic derivative identity.
+jetIsHyper : C 1 ≈s H.hyperJetCandidate
+jetIsHyper =
+  composeOuterCong (H.weightedCoeff 1) H.hyperJetCoeff H.Zcoord
+    (U.D1Meaning H.hyperCoeff)
+
+hyperDFlow : RamanujanX → RamanujanY →
+  (X ⊗s δ H.hyperCandidate) ≈s (Y ⊗s H.hyperJetCandidate)
+hyperDFlow hx hy =
+  transS (mulCong reflS (dCong (symS fIsHyper)))
+    (transS (actualChain hx hy zero) (mulCong reflS jetIsHyper))
+
+hyperFirst : RamanujanX → RamanujanY → RamanujanE →
+  scale ((+ 2 / 1) ⋆) (Y ⊗s H.hyperJetCandidate) ≈s
+    (δ X ⊗s H.hyperCandidate)
+hyperFirst hx hy he =
+  transS (F.scaleCong (+ 2 / 1) (symS (hyperDFlow hx hy)))
+    (λ n →
+      let a = scale ((+ 2 / 1) ⋆) (X ⊗s δ H.hyperCandidate) n
+          b = (δ X ⊗s H.hyperCandidate) n
+          h = T.defectFromODE H.hyperCandidate
+            (F.factorizationFromRamanujan hx hy he H.hyperCandidate)
+            (hyperSolution hx hy) n
+          open P.ℝ-Solver
+      in P.≃-trans (solve 2 (λ a b → a ⊜ (a ⊖ b) ⊕ b) P.≃-refl a b)
+        (P.≃-trans (P.+-cong h P.≃-refl) (P.+-identityˡ b)))
+
+hyperClearedJet : RamanujanX → RamanujanY → RamanujanE →
+  scale ((+ 6 / 1) ⋆) (H.hyperCandidate ⊗s Y ⊗s H.hyperJetCandidate) ≈s
+  scale ((+ 3 / 1) ⋆) (X ⊗s δ X)
+hyperClearedJet hx hy he =
+  let f = H.hyperCandidate
+      j = H.hyperJetCandidate
+      open G.Solver
+  in transS (scaleIsProduct (+ 6 / 1) (f ⊗s Y ⊗s j))
+    (transS (solve 3 (λ f y j → Κ (+ 6 / 1) ⊗ ((f ⊗ y) ⊗ j)
+      ⊜ Κ (+ 3 / 1) ⊗ (f ⊗ (Κ (+ 2 / 1) ⊗ (y ⊗ j)))) reflS f Y j)
+      (transS (mulCong reflS (mulCong reflS
+        (transS (symS (scaleIsProduct (+ 2 / 1) (Y ⊗s j)))
+          (hyperFirst hx hy he))))
+        (transS (solve 2 (λ f dx → Κ (+ 3 / 1) ⊗ (f ⊗ (dx ⊗ f))
+          ⊜ Κ (+ 3 / 1) ⊗ ((f ⊗ f) ⊗ dx)) reflS f (δ X))
+          (transS (mulCong reflS (mulCong (hyperSquare hx hy he) reflS))
+            (symS (scaleIsProduct (+ 3 / 1) (X ⊗s δ X)))))))
