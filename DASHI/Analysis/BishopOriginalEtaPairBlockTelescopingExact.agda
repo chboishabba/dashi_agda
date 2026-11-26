@@ -50,7 +50,6 @@ import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as Pos
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpProduct
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as Neg
-import DASHI.Analysis.BishopGeometricMajorantSeriesConvergenceExact as Geo
 
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
@@ -471,7 +470,7 @@ module NativeDecay
     qPositive = originalDecayPositive δ δPositive (suc zero)
     qBelowOne = originalDecayRatioBelowOne δ δPositive
     P = originalEtaDecayPotential C δ
-    scaled = Geo.scaledGeometricTerm C q
+    scaled = λ n → R._*_ C (R.pow q n)
 
   potentialNonnegative : ∀ n → R._≤_ R.0ℝ (P n)
   potentialNonnegative n =
@@ -482,9 +481,15 @@ module NativeDecay
 
   scaledConvergesZero : Seq._ConvergesTo_ scaled R.0ℝ
   scaledConvergesZero =
-    Seq.∑xₙisConvergent⇒xₙ→0 scaled
-      (Geo.scaledGeometricSeriesConvergent
-        q C qPositive qBelowOne Cnonnegative)
+    Seq.xₙ→x∧x≃y⇒xₙ→y
+      (Seq.xₙyₙ→x₀y₀
+        (C , Seq.xₙ≃c⇒xₙ→c (λ n → RP.≃-refl))
+        (R.0ℝ , Seq.∣r∣<1⇒rⁿ→0
+          (RP.<-respˡ-≃
+            (RP.≃-symm (RP.nonNegx⇒∣x∣≃x
+              (RP.pos⇒nonNeg (RP.0<x⇒posx qPositive))))
+            qBelowOne)))
+      (RP.*-zeroʳ C)
 
   potentialAtLeastDyadicIndex :
     ∀ k n → dyadicIndex k ≤ Eta.twice n →
@@ -508,7 +513,9 @@ module NativeDecay
             (RP.+-congʳ (scaled K) (RP.≃-symm RP.0≃-0))
             (RP.+-identityʳ (scaled K))))
           (RP.nonNegx⇒∣x∣≃x
-            (Geo.scaledGeometricTermNonnegative Cnonnegative qPositive K))
+            (RP.nonNegx,y⇒nonNegx*y Cnonnegative
+              (Seq.nonNegx⇒nonNegxⁿ K
+                (RP.pos⇒nonNeg (RP.0<x⇒posx qPositive)))))
       small =
         RP.≤-respˡ-≃ magnitudeEq (proj₂ receipt K NatP.≤-refl)
     in
@@ -529,12 +536,12 @@ module CompleteOriginalFromNativeDecay
     (R.∣ BC.re (Eta.originalEtaBlock
       (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
     (R._-_ (originalEtaDecayPotential C δ n)
-             (originalEtaDecayPotential C δ (suc n)))))
+             (originalEtaDecayPotential C δ (suc n))))
   (imagBound : ∀ n → R._≤_
     (R.∣ BC.im (Eta.originalEtaBlock
       (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
     (R._-_ (originalEtaDecayPotential C δ n)
-             (originalEtaDecayPotential C δ (suc n))))) where
+             (originalEtaDecayPotential C δ (suc n)))) where
 
   module Decay = NativeDecay C δ Cnonnegative δPositive
   module Completed = CompleteOriginalRound11 inputs s
