@@ -130,3 +130,35 @@ negativeExpBelowOne {x} xPositive =
     (BishopP.<-respˡ-≃
       (BishopP.≃-symm (negativeExpIsInversePositiveExp xPositive))
       inverseOrder)
+
+
+------------------------------------------------------------------------
+-- Original positive-real denominator payment for eta adjacent variation.
+-- From the literal two-term exponential lower bound and exact reciprocal
+-- product, x exp(-x) <= 1-exp(-x). No division by x, FTC or approximation.
+-- Source-written, native kernel acceptance pending.
+------------------------------------------------------------------------
+
+negativeExpDropLower :
+  ∀ {x} → BishopReal._<_ BishopReal.0ℝ x →
+  BishopReal._≤_
+    (BishopReal._*_ x (Exp.bishopExp (BishopReal.- x)))
+    (BishopReal._-_ BishopReal.1ℝ (Exp.bishopExp (BishopReal.- x)))
+negativeExpDropLower {x} positive =
+  let
+    y = Exp.bishopExp (BishopReal.- x)
+    nn = BishopP.pos⇒nonNeg (BishopP.0<x⇒posx positive)
+    ynn = BishopP.pos⇒nonNeg (BishopP.0<x⇒posx (negativeExpPositive positive))
+    twoTerms = BishopP.≤-respˡ-≃
+      (Positive.expFirstTwoTerms x)
+      (Positive.secondPartialSumBelowExp nn)
+    productBound = BishopP.≤-respʳ-≃
+      (Product.bishopExpTimesNegativeIsOne x)
+      (BishopP.*-monoʳ-≤-nonNeg twoTerms ynn)
+    subtractY = BishopP.+-monoˡ-≤ (BishopReal.- y) productBound
+    open BishopP.ℝ-Solver
+  in
+  BishopP.≤-respˡ-≃
+    (solve 2 (λ a b → ((Κ 1ℚᵘ ⊕ a) ⊗ b) ⊖ b ⊜ a ⊗ b)
+      BishopP.≃-refl x y)
+    subtractY
