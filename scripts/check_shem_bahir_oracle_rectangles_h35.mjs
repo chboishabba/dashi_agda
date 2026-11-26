@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+function audit(fixture){
+ const w=fixture.find(x=>x.book==="exodus"&&x.ch===14),rows=w.rows.map(r=>r.words.flatMap(w=>[...w.glyphs].map((g,i)=>({g,end:i===w.glyphs.length-1}))));rows[1].reverse();
+ const V=Array.from({length:27},(_,i)=>i),R=n=>Array.from({length:n},(_,i)=>i),mod=x=>(x%3+3)%3,d=x=>[x%3,Math.floor(x/3)%3,Math.floor(x/9)],num=a=>a[0]+3*a[1]+9*a[2],add=(a,b)=>num(d(a).map((x,i)=>mod(x+d(b)[i]))),sub=(a,b)=>num(d(a).map((x,i)=>mod(x-d(b)[i])));
+ const mul=(a,b)=>{const x=d(a),y=d(b),z=[0,0,0,0,0];for(let i=0;i<3;i++)for(let j=0;j<3;j++)z[i+j]+=x[i]*y[j];for(let i=4;i>=3;i--){z[i-3]+=z[i];z[i-2]+=z[i]}return num(z.slice(0,3).map(mod))};
+ const M=V.map(a=>V.map(b=>mul(a,b))),I=V.map(a=>a?M[a].indexOf(1):0),gem=Array(27),gs=[..."אבגדהוזחטיכלמנסעפצקרשתךםןףץ"];for(let i=0;i<27;i++){let t=Math.floor(i/9),u=i%3,v=Math.floor(i%9/3);gem[num([t,mod(t+u),mod(t+v)])]=gs[i]}
+ const ix=new Map(gem.map((x,i)=>[x,i])),vals=rows.map(row=>row.map(x=>ix.get(x.g))),a=vals[0],b=vals[1],c=vals[2],final=new Set([..."ךםןףץ"]),medial=new Set([..."כמנפצ"]),orbits=[],pending=new Set(V.filter(x=>x>1));
+ while(pending.size){const r=pending.values().next().value,s=sub(1,r),o=[...new Set([r,I[r],s,I[s],M[r][I[sub(r,1)]],M[sub(r,1)][I[r]]])];o.forEach(x=>pending.delete(x));orbits.push(o)}
+ const sheet=(a,b,c)=>a===b?(a===c?"allEqual":"equalAnchors"):c===a?"first":c===b?"second":"orbit"+orbits.findIndex(o=>o.includes(M[sub(c,a)][I[sub(b,a)]]));
+ const domains=R(72).map(j=>V.filter(x=>(j!==0&&j!==36||x===c[j])&&(rows[2][j].end?!medial.has(gem[x]):!final.has(gem[x]))&&sheet(a[j],b[j],x)===sheet(a[j],b[j],c[j])));
+ if(domains.some((xs,j)=>!xs.includes(c[j])))throw Error("truth not in domains");
+ const groups=R(3).map(g=>R(72).filter(j=>Math.floor(j/24)===g)),dir=R(12).map(g=>R(72).filter(j=>Math.floor(j/6)===g)),slot=R(6).map(k=>R(72).filter(j=>j%6===k)),sameDir=R(4).map(h=>R(72).filter(j=>Math.floor(j%24/6)===h)),all=groups.concat(dir,slot,sameDir),sum=(v,js)=>js.reduce((s,j)=>add(s,v[j]),0),baseline=all.map(js=>sum(c,js));
+ let witness=[],tested=0,accepted=0;for(let g=0;g<3;g++)for(let h=0;h<4;h++)for(let h2=h+1;h2<4;h2++)for(let k=0;k<6;k++)for(let k2=k+1;k2<6;k2++)for(let delta=1;delta<27;delta++){tested++;const j=[24*g+6*h+k,24*g+6*h+k2,24*g+6*h2+k,24*g+6*h2+k2],v=c.slice();j.forEach((p,i)=>v[p]=i===0||i===3?add(c[p],delta):sub(c[p],delta));if(j.some(p=>!domains[p].includes(v[p])))continue;if(all.some((js,i)=>sum(v,js)!==baseline[i]))throw Error("marginal");accepted++;witness.push({columns:j.map(x=>x+1),delta,original:j.map(p=>gem[c[p]]).join(""),alternate:j.map(p=>gem[v[p]]).join(""),output:v.map(x=>gem[x]).join("")})}
+ // greedily disjoint rectangles certify independent binary choices, not a maximum packing.
+ let chosen=[],used=new Set();for(const w of witness)if(w.columns.every(j=>!used.has(j))){chosen.push(w);w.columns.forEach(j=>used.add(j))}
+ return {tested,accepted,domainSizes:domains.map(x=>x.length),disjointCount:chosen.length,lowerBound:2**chosen.length,witnesses:witness.slice(0,20),disjoint:chosen,qualification:"Strong oracle mask: true per-column H33 sheet, true word boundary, two named target anchors, all true H35 marginal sums. Every alternate string is distinct and orthographically permitted, not necessarily grammatical or genuine Torah. All target-dependent constraints explicitly oracle. Rectangles are candidate DASHI perturbations, not source law. Counts certify residual nonuniqueness under these exact combined constraints."}
+}
+console.log(JSON.stringify(audit(JSON.parse(fs.readFileSync('Docs/support/reference/TorahCryptoCorpus20261125/h28-native-word-fixture.json','utf8'))),null,2));
