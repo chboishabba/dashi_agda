@@ -1123,3 +1123,8 @@ Remaining exact cut: single-row core producer supplied, bounded deletion supplie
 ## Collective affine closure and counted two-row exclusion — 26 November 2026
 
 See [controlling roadmap and explicit verification](ClayP0PolynomialCoverageEndpoint20261124.md#collective-affine-closure-and-counted-two-row-exclusion--26-november-2026). Existing onehot/pair hull now attaches to demanded affine row families; counted two-row exclusion and optional collective closure are implemented and locally verified (candidate/sourceBacked, not native leafClosed). Known 30-column control still inconclusive under closure. All thirteen universal endpoint lemmas remain leafOpen; no compulsory complete support, exact optimizer or universal small cores. Independent separation remains unrestricted, not paid by scoped event-count improvements.
+
+
+## Disjunctive affine closure and congruence-charged original residual — 26 November 2026
+
+See [controlling roadmap and verification](ClayP0PolynomialCoverageEndpoint20261124.md#disjunctive-affine-closure-and-congruence-charged-original-residual--26-november-2026). Both former 30-column stalled controls now have exact minimum8 by five certified empty original onehot branches and an attaining parity assignment. New bounded disjunctive hull and original row conflict floor implemented in both branches (sourceBacked; no native leafClosed claim). Fixed-depth completeness remains unproved, full-depth cost may be exponential, all thirteen universal principal lemmas remain leafOpen; selected certificates are not arbitrary-computation lower bounds.
