@@ -146,7 +146,7 @@ def main():
     fixtures=verified=completed_empty=unknown=0
     for n in range(1,7):
         for _ in range(30):
-            F=tuple(A for _ in range(rng.randrange(10)) if (A:=canon((rng.randrange(1<<n),rng.randrange(2)) for _ in range(rng.randrange(1,n+1)))) is not None)
+            F=tuple(A for _ in range(rng.randrange(10)) if (A:=canon((rng.randrange(1<<n),rng.randrange(2)) for _ in range(rng.randrange(1,n+2)))) is not None)
             P=tuple((rng.randrange(1<<n),rng.randrange(2)) for _ in range(rng.randrange(n+1)))
             S=[x for x in range(1<<n) if satisfies(x,P,F)]
             x,_,done=solve(n,P,F,2000000);fixtures+=1
