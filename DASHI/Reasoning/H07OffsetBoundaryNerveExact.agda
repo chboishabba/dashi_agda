@@ -157,10 +157,25 @@ module At (p : H.Pivot) (u v : M.Triple Trit)
       (sym (matchesGlobal (N.edgeSecondFace e) pt (N.onSecondFace m)))
 
     -- The literal original three incident edges at every corner.
+    cornerXY : (c : K.Corner3) →
+      restriction (N.edgeFirstFace (N.incidentXYEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onFirstFace (N.cornerOnIncidentXYEdge c))
+      ≡ restriction (N.edgeSecondFace (N.incidentXYEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onSecondFace (N.cornerOnIncidentXYEdge c))
     cornerXY c = edgeAgreement (N.incidentXYEdge (N.cornerIncidentEdges c))
       (K.cornerPoint c) (N.cornerOnIncidentXYEdge c)
+    cornerXZ : (c : K.Corner3) →
+      restriction (N.edgeFirstFace (N.incidentXZEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onFirstFace (N.cornerOnIncidentXZEdge c))
+      ≡ restriction (N.edgeSecondFace (N.incidentXZEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onSecondFace (N.cornerOnIncidentXZEdge c))
     cornerXZ c = edgeAgreement (N.incidentXZEdge (N.cornerIncidentEdges c))
       (K.cornerPoint c) (N.cornerOnIncidentXZEdge c)
+    cornerYZ : (c : K.Corner3) →
+      restriction (N.edgeFirstFace (N.incidentYZEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onFirstFace (N.cornerOnIncidentYZEdge c))
+      ≡ restriction (N.edgeSecondFace (N.incidentYZEdge (N.cornerIncidentEdges c))) (K.cornerPoint c)
+        (N.onSecondFace (N.cornerOnIncidentYZEdge c))
     cornerYZ c = edgeAgreement (N.incidentYZEdge (N.cornerIncidentEdges c))
       (K.cornerPoint c) (N.cornerOnIncidentYZEdge c)
 
