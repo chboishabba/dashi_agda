@@ -14,7 +14,10 @@ from check_p0_signed_horn_closure_20261125 import sat
 def xsum(xs):return reduce(xor,xs,0)
 
 
-def collective(C,r,cap,arity=3):
+def collective(C,r,cap,arity=3,B=None):
+    def pay(tag,n=1):
+        if B is not None:B.pay(tag,n)
+    pay('collective_input',1+sum(map(len,C)))
     if any(not O for O in C):return 'UNSAT',None,(0,0,0,r,0,0)
     H=();c=0;left=list(range(len(C)));ledger=[];hist=[0,0,0];work=0
     while True:
@@ -22,32 +25,42 @@ def collective(C,r,cap,arity=3):
         for size in range(1,arity+1):
             for ids in combinations(left,size):
                 # Actual projected support, not its affine envelope.
+                pay('collective_probe',1+size)
                 base=xsum(C[i][0][1] for i in ids)
                 V={0}
                 for i in ids:
+                    pay('collective_project',1+len(C[i])*(1+r))
                     T={S.rem(t^C[i][0][1],H) for p,t in C[i]}
+                    pay('collective_product',len(V)*len(T))
                     work+=len(V)*len(T)
                     V={v^t for v in V for t in T}
+                pay('collective_rank',1+len(V)*(1+r)+r*r)
                 K=D.basis(V)
                 if len(V)==1<<len(K):
                     chosen=(ids,base,K);break
             if chosen is not None:break
         if chosen is None:break
         ids,base,K=chosen
+        pay('collective_absorb',1+len(left)+(len(H)+len(K))*(1+r)+r*r)
         ledger.append((ids,H,c));hist[len(ids)-1]+=1
         H=D.basis(H+K);c^=base
         left=[i for i in left if i not in ids]
     # Invoke actual Section82 for remaining projected choices plus target offset.
+    pay('collective_remaining',1+sum(len(C[i])*(1+r) for i in left))
     E=[[(p,S.rem(t,H)) for p,t in C[i]] for i in left]+[[(0,S.rem(c,H))]]
-    status,P,st=S.contract(E,r,cap)
+    status,P,st=S.contract(E,r,cap,B=B)
     stats=(*hist,r-len(H),st[2],work)
     if status!='SAT':return status,None,stats
     result=[None]*len(C);s=0
     for i,p in zip(left,P):
+        pay('collective_lookup',1+len(C[i]))
         t=next(t for q,t in C[i] if q==p)
         result[i]=p;s^=t
     for ids,H0,c0 in reversed(ledger):
-        opts=next(ps for ps in product(*(C[i] for i in ids)) if not S.rem(s^xsum(t for p,t in ps)^c0,H0))
+        for ps in product(*(C[i] for i in ids)):
+            pay('collective_reverse',1+len(ids)+r)
+            if not S.rem(s^xsum(t for p,t in ps)^c0,H0):opts=ps;break
+        else:raise AssertionError('missing saturated preimage')
         for i,(p,t) in zip(ids,opts):result[i]=p;s^=t
     assert s==0
     return 'SAT',result,stats
