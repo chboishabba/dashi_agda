@@ -3,7 +3,7 @@ module DASHI.Moonshine.JInvariantBishopCM163TailGuardExact where
 -- SOURCE-WRITTEN, UNCOMPILED. All-index tail bounds for the literal
 -- negative-real selected q-series. Keep the first signed term separate.
 -- Classical Eisenstein coefficients; original Bishop convergence owners.
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (s≤s; z≤n)
 import Data.Nat.Base as Nat
@@ -34,7 +34,7 @@ import DASHI.Moonshine.JInvariantBishopCM163SelectedDiskExact as CM
 import DASHI.Moonshine.JInvariantBishopCM163RadiusGuardExact as G
 
 -- Polynomial coefficient growth (n+2)^d <= 2^d*(n+1)^d.
-baseStep : (n : Nat) → suc (suc n) Nat.≤ 2 * suc n
+baseStep : (n : Nat) → suc (suc n) Nat.≤ Nat._*_ 2 (suc n)
 baseStep n = subst₂ Nat._≤_
   (solve 1 (λ n → (con 1 :+ n) :+ con 1 := con 1 :+ (con 1 :+ n)) refl n)
   (solve 1 (λ n → (con 1 :+ n) :+ (con 1 :+ n) := con 2 :* (con 1 :+ n)) refl n)
@@ -44,16 +44,16 @@ powMono : (a b d : Nat) → a Nat.≤ b → Pow.powNat a d Nat.≤ Pow.powNat b 
 powMono a b zero h = NP.≤-refl
 powMono a b (suc d) h = NP.*-mono-≤ h (powMono a b d h)
 
-powMul : (a b d : Nat) → Pow.powNat (a * b) d ≡ Pow.powNat a d * Pow.powNat b d
+powMul : (a b d : Nat) → Pow.powNat (Nat._*_ a b) d ≡ Nat._*_ (Pow.powNat a d) (Pow.powNat b d)
 powMul a b zero = refl
 powMul a b (suc d) rewrite powMul a b d =
   solve 4 (λ a b x y → (a :* b) :* (x :* y) := (a :* x) :* (b :* y))
     refl a b (Pow.powNat a d) (Pow.powNat b d)
 
 coeffStep : (d n : Nat) → Pow.powNat 2 d Nat.≤ 64 →
-  Pow.powNat (suc (suc n)) d Nat.≤ 64 * Pow.powNat (suc n) d
+  Pow.powNat (suc (suc n)) d Nat.≤ Nat._*_ 64 (Pow.powNat (suc n) d)
 coeffStep d n hd = NP.≤-trans
-  (powMono (suc (suc n)) (2 * suc n) d (baseStep n))
+  (powMono (suc (suc n)) (Nat._*_ 2 (suc n)) d (baseStep n))
   (NP.≤-trans (NP.≤-reflexive (powMul 2 (suc n) d))
     (NP.*-mono-≤ hd NP.≤-refl))
 
@@ -197,7 +197,8 @@ module Telescope (t m : Nat → ℝ)
 
   partialLower : (n : Nat) → t zero - gap zero ≤ partial n
   partialLower n = P.≤-trans (lowerInvariant n)
-    (P.≤-respʳ-≃ (P.+-identityʳ (partial n))
+    (P.≤-respʳ-≃ (let open P.ℝ-Solver in solve 1
+      (λ p → p ⊖ Κ Q.0ℚᵘ ⊜ p) P.≃-refl (partial n))
       (P.+-monoʳ-≤ (partial n) (P.neg-mono-≤ (P.nonNegx⇒0≤x (gapNN n)))))
 
   partialConverges : (v : ℝ) → S._ConvergesTo_ (S.SeriesOf t) v → S._isConvergent partial
@@ -318,7 +319,8 @@ positiveScale p hp = P.posx⇒0<x (P.posx,y⇒posx*y
 
 xBelowOne : X < R.1ℝ
 xBelowOne = P.≤-<-trans xUpperRadius
-  (P.<-respʳ-≃ (P.+-identityʳ R.1ℝ)
+  (P.<-respʳ-≃ (let open P.ℝ-Solver in solve 0
+      (Κ Q.1ℚᵘ ⊖ Κ Q.0ℚᵘ ⊜ Κ Q.1ℚᵘ) P.≃-refl)
     (P.+-monoʳ-< R.1ℝ (P.neg-mono-<
       (positiveScale (+ 224 / 1) (QP.positive⁻¹ (+ 224 / 1))))))
 
