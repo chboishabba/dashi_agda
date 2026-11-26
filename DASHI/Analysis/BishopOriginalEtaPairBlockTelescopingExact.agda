@@ -29,6 +29,14 @@ module DASHI.Analysis.BishopOriginalEtaPairBlockTelescopingExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Base using (_≤_; _∸_; NonZero)
+open import Data.Product.Base using (Σ; _×_; _,_; proj₁; proj₂)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_)
+import Relation.Binary.PropositionalEquality as Eq
+import Sequence as Seq
+
 open import Data.Rational.Unnormalised using (0ℚᵘ)
 import Real as R
 import RealProperties as RP
@@ -115,3 +123,225 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
   actualOriginalRound11ShiftedEtaTailExact s n m =
     originalBishopEtaPrefixShiftedPairsExact
       (Selected.sourceTerms s) n m
+
+
+------------------------------------------------------------------------
+-- Direct native completion on the literal pair-prefix sequence.
+-- Uses the pinned Sequence.cauchy* and fast-cauchy⇒convergent API,
+-- not an additional limit authority or a new analytic function.
+-- Source-written only. The adjacent coordinate estimates and common
+-- decay modulus are explicit remaining source obligations.
+------------------------------------------------------------------------
+
+forwardPotentialBound :
+  (f P : Nat → R.ℝ) →
+  (∀ n → R._≤_ (R.∣ R._-_ (f (suc n)) (f n) ∣)
+                  (R._-_ (P n) (P (suc n)))) →
+  ∀ n m →
+  R._≤_ (R.∣ R._-_ (f (n + m)) (f n) ∣)
+         (R._-_ (P n) (P (n + m)))
+forwardPotentialBound f P step n zero
+  rewrite NatP.+-identityʳ n =
+  RP.≤-reflexive
+    (RP.≃-trans (RP.∣-∣-cong (RP.+-inverseʳ (f n)))
+      (RP.≃-trans
+        (RP.nonNegx⇒∣x∣≃x (RP.0≤x⇒nonNegx RP.≤-refl))
+        (RP.≃-symm (RP.+-inverseʳ (P n)))))
+forwardPotentialBound f P step n (suc m)
+  rewrite NatP.+-suc n m =
+  let
+    a = f (suc (n + m))
+    b = f (n + m)
+    c = f n
+    x = P n
+    y = P (n + m)
+    z = P (suc (n + m))
+    open RP.ℝ-Solver
+  in
+  RP.≤-respʳ-≃
+    (solve 3 (λ x y z → (y ⊖ z) ⊕ (x ⊖ y) ⊜ x ⊖ z)
+      RP.≃-refl x y z)
+    (RP.≤-respˡ-≃
+      (RP.∣-∣-cong
+        (solve 3 (λ a b c → (a ⊖ b) ⊕ (b ⊖ c) ⊜ a ⊖ c)
+          RP.≃-refl a b c))
+      (RP.≤-trans
+        (RP.∣x+y∣≤∣x∣+∣y∣ (R._-_ a b) (R._-_ b c))
+        (RP.+-mono-≤ (step (n + m))
+          (forwardPotentialBound f P step n m))))
+
+orderedPotentialBound :
+  (f P : Nat → R.ℝ) →
+  (∀ n → R._≤_ (R.∣ R._-_ (f (suc n)) (f n) ∣)
+                  (R._-_ (P n) (P (suc n)))) →
+  ∀ n m → n ≤ m →
+  R._≤_ (R.∣ R._-_ (f m) (f n) ∣) (R._-_ (P n) (P m))
+orderedPotentialBound f P step n m n≤m =
+  Eq.subst
+    (λ j → R._≤_ (R.∣ R._-_ (f j) (f n) ∣) (R._-_ (P n) (P j)))
+    (Eq.trans (NatP.+-comm n (m ∸ n)) (NatP.m∸n+n≡m n≤m))
+    (forwardPotentialBound f P step n (m ∸ n))
+
+potentialDropBelowStart :
+  (P : Nat → R.ℝ) →
+  (∀ n → R._≤_ R.0ℝ (P n)) →
+  ∀ n m → R._≤_ (R._-_ (P n) (P m)) (P n)
+potentialDropBelowStart P nonnegative n m =
+  RP.≤-respʳ-≃
+    (RP.≃-trans
+      (RP.+-congˡ (P n) (RP.≃-symm RP.0≃-0))
+      (RP.+-identityʳ (P n)))
+    (RP.+-monoʳ-≤ (P n) (RP.neg-mono-≤ (nonnegative m)))
+
+-- N-1 matches the actual vendor Cauchy constructor exactly.
+DecayModulus : (Nat → R.ℝ) → Set
+DecayModulus P =
+  (k : Nat) → .{{_ : NonZero k}} →
+  Σ Nat (λ N-1 → ∀ n → suc N-1 ≤ n →
+    R._≤_ (P n) (R._⋆ (+ 1 / k)))
+
+module CompleteScalar
+  (f P : Nat → R.ℝ)
+  (step : ∀ n → R._≤_ (R.∣ R._-_ (f (suc n)) (f n) ∣)
+                         (R._-_ (P n) (P (suc n))))
+  (nonnegative : ∀ n → R._≤_ R.0ℝ (P n))
+  (modulus : DecayModulus P) where
+
+  orderedBound :
+    ∀ n m → n ≤ m →
+    R._≤_ (R.∣ R._-_ (f m) (f n) ∣) (P n)
+  orderedBound n m n≤m =
+    RP.≤-trans (orderedPotentialBound f P step n m n≤m)
+      (potentialDropBelowStart P nonnegative n m)
+
+  bothOrders :
+    ∀ m n → (k : Nat) → .{{_ : NonZero k}} →
+    suc (proj₁ (modulus k)) ≤ m →
+    suc (proj₁ (modulus k)) ≤ n →
+    R._≤_ (R.∣ R._-_ (f m) (f n) ∣) (R._⋆ (+ 1 / k))
+  bothOrders m n k mPast nPast with NatP.≤-total n m
+  ... | inj₁ n≤m =
+    RP.≤-trans (orderedBound n m n≤m) (proj₂ (modulus k) n nPast)
+  ... | inj₂ m≤n =
+    RP.≤-respˡ-≃ (RP.∣x-y∣≃∣y-x∣ (f n) (f m))
+      (RP.≤-trans (orderedBound m n m≤n) (proj₂ (modulus k) m mPast))
+
+  cauchy : Seq._isCauchy f
+  cauchy = Seq.cauchy* (λ k →
+    proj₁ (modulus k) , (λ m n → bothOrders m n k))
+
+  convergent : Seq._isConvergent f
+  convergent = Seq.fast-cauchy⇒convergent cauchy
+
+  value : R.ℝ
+  value = Seq.lim convergent
+
+  converges : Seq._ConvergesTo_ f value
+  converges = proj₂ convergent
+
+  -- The same potential controls the actual completed limit for every
+  -- cutoff, not merely the sampled dyadic cutoffs.
+  limitError : ∀ n → R._≤_ (R.∣ R._-_ value (f n) ∣) (P n)
+  limitError n =
+    let
+      shifted : Nat → R.ℝ
+      shifted j = f (j + n)
+      shiftedConverges : Seq._ConvergesTo_ shifted value
+      shiftedConverges = Seq.xₙ⊆yₙ∧yₙ→y⇒xₙ→y
+        (Seq.subseq* ((λ j → j + n) ,
+          (λ j → RP.≃-refl) ,
+          (λ j → NatP.n<1+n (j + n))))
+        convergent
+      differenceConverges : Seq._ConvergesTo_
+        (λ j → R._-_ (shifted j) (f n)) (R._-_ value (f n))
+      differenceConverges = Seq.xₙ+yₙ→x₀+y₀
+        (value , shiftedConverges)
+        (R.-_ (f n) , Seq.xₙ≃c⇒xₙ→c (λ j → RP.≃-refl))
+      absoluteConvergent : Seq._isConvergent
+        (λ j → R.∣ R._-_ (shifted j) (f n) ∣)
+      absoluteConvergent =
+        R.∣ R._-_ value (f n) ∣ ,
+        Seq.∣xₙ∣→∣x₀∣ (R._-_ value (f n) , differenceConverges)
+    in
+    Seq.xₙ≤y⇒limxₙ≤y
+      (λ j → orderedBound n (j + n) (NatP.m≤n+m n j))
+      absoluteConvergent
+
+-- Actual eta prefix step has no analytic input beyond the literal
+-- coordinate bound on the original paired term.
+coordinatePrefixStep :
+  (term : Nat → BC.BishopComplex) →
+  (coord : BC.BishopComplex → R.ℝ) →
+  ((x y : BC.BishopComplex) →
+    R._≃_ (coord (BC._+C_ x y)) (R._+_ (coord x) (coord y))) →
+  (P : Nat → R.ℝ) →
+  (∀ n → R._≤_ (R.∣ coord (Eta.originalEtaBlock term n) ∣)
+                 (R._-_ (P n) (P (suc n)))) →
+  ∀ n →
+  R._≤_
+    (R.∣ R._-_ (coord (Eta.originalEtaPrefix term (suc n)))
+                 (coord (Eta.originalEtaPrefix term n)) ∣)
+    (R._-_ (P n) (P (suc n)))
+coordinatePrefixStep term coord addLaw P bound n =
+  let
+    a = coord (Eta.originalEtaPrefix term n)
+    b = coord (Eta.originalEtaBlock term n)
+    open RP.ℝ-Solver
+  in
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (RP.≃-symm
+        (RP.≃-trans
+          (RP.+-congʳ (R.-_ a)
+            (addLaw (Eta.originalEtaPrefix term n) (Eta.originalEtaBlock term n)))
+          (solve 2 (λ x y → (x ⊕ y) ⊖ x ⊜ y) RP.≃-refl a b))))
+    (bound n)
+
+module CompleteOriginalRound11
+  (inputs : Round11.BishopCutset)
+  (s : BC.BishopComplex)
+  (P : Nat → R.ℝ)
+  (realBound : ∀ n → R._≤_
+    (R.∣ BC.re (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (P n) (P (suc n))))
+  (imagBound : ∀ n → R._≤_
+    (R.∣ BC.im (Eta.originalEtaBlock
+      (Eta.OriginalRound11DirichletEta.sourceTerms inputs s) n) ∣)
+    (R._-_ (P n) (P (suc n))))
+  (nonnegative : ∀ n → R._≤_ R.0ℝ (P n))
+  (modulus : DecayModulus P) where
+
+  private
+    term = Eta.OriginalRound11DirichletEta.sourceTerms inputs s
+    prefix = Eta.originalEtaPrefix term
+
+  module RealLimit = CompleteScalar
+    (λ n → BC.re (prefix n)) P
+    (coordinatePrefixStep term BC.re
+      (λ { (BC.bishop-complex a b) (BC.bishop-complex c d) → RP.≃-refl })
+      P realBound)
+    nonnegative modulus
+
+  module ImagLimit = CompleteScalar
+    (λ n → BC.im (prefix n)) P
+    (coordinatePrefixStep term BC.im
+      (λ { (BC.bishop-complex a b) (BC.bishop-complex c d) → RP.≃-refl })
+      P imagBound)
+    nonnegative modulus
+
+  originalEtaValue : BC.BishopComplex
+  originalEtaValue = BC.bishop-complex RealLimit.value ImagLimit.value
+
+  originalEtaConverges :
+    Seq._ConvergesTo_ (λ n → BC.re (prefix n)) (BC.re originalEtaValue)
+    ×
+    Seq._ConvergesTo_ (λ n → BC.im (prefix n)) (BC.im originalEtaValue)
+  originalEtaConverges = RealLimit.converges , ImagLimit.converges
+
+  originalEtaLimitError :
+    ∀ n →
+    R._≤_ (R.∣ R._-_ (BC.re originalEtaValue) (BC.re (prefix n)) ∣) (P n)
+    ×
+    R._≤_ (R.∣ R._-_ (BC.im originalEtaValue) (BC.im (prefix n)) ∣) (P n)
+  originalEtaLimitError n = RealLimit.limitError n , ImagLimit.limitError n
