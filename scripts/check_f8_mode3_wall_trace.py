@@ -15,6 +15,14 @@ def exact():
         count+=1
     v,dp,dm,F,sp,sm=S.symbols('v dp dm F sp sm')
     check(S.expand(((1+v)*dp+F+sp-((v-1)*dm+F+sm))/2-((1+v)*dp+(1-v)*dm)/2-(sp-sm)/2)==0)
+    # Energy lift with ZERO displacement-rate forcing. The common P=M
+    # lift would cost K^2(source) at the K^(3/2) energy level.
+    G,c=S.symbols('G c');P=G*c/(1+v);M=-G*c/(1-v)
+    check(S.cancel(((1+v)*P+(1-v)*M)/2)==0)
+    check(S.cancel((1+v)*P-(1-v)*M-2*G*c)==0)
+    check(S.cancel((P-M)/2-G*c/(1-v*v))==0)
+    check(S.cancel((1+v)*S.diff(P,c)-G)==0)
+    check(S.cancel((v-1)*S.diff(M,c)-G)==0)
     # Interior Q is preserved by every affine RK stage, independently of v.
     q=S.symbols('q');check(S.expand(S.Rational(3,4)*q+q/4-q)==0)
     check(S.expand(q/3+2*q/3-q)==0)
