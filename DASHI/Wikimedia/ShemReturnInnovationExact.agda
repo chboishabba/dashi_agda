@@ -105,3 +105,32 @@ completeAfterMixed : (a b c d : Point) →
   completeMixedCorner a b c (mixedCorner a b c d) ≡ d
 completeAfterMixed a b c d
   rewrite addSub (sub c a) (sub d b) = addSub b d
+
+
+-- H37: the signed three-axis interaction is the difference between
+-- two mixed faces. Given the lower face and three upper corners,
+-- the fourth upper corner is recoverable from the retained cube residual.
+-- This is a local BIDI coordinate law, not a Torah prediction theorem.
+cubeInteraction : Point → Point → Point → Point →
+  Point → Point → Point → Point → Point
+cubeInteraction a b c d e f g h =
+  sub (mixedCorner e f g h) (mixedCorner a b c d)
+
+completeCubeCorner : Point → Point → Point → Point →
+  Point → Point → Point → Point → Point
+completeCubeCorner a b c d e f g r =
+  completeMixedCorner e f g (add (mixedCorner a b c d) r)
+
+cubeAfterComplete : (a b c d e f g r : Point) →
+  cubeInteraction a b c d e f g
+    (completeCubeCorner a b c d e f g r) ≡ r
+cubeAfterComplete a b c d e f g r
+  rewrite mixedAfterComplete e f g (add (mixedCorner a b c d) r) =
+  subAdd (mixedCorner a b c d) r
+
+completeAfterCube : (a b c d e f g h : Point) →
+  completeCubeCorner a b c d e f g
+    (cubeInteraction a b c d e f g h) ≡ h
+completeAfterCube a b c d e f g h
+  rewrite addSub (mixedCorner a b c d) (mixedCorner e f g h) =
+  completeAfterMixed e f g h
