@@ -1,0 +1,31 @@
+{
+  "predecessor": "dc0375ffaa78da13637f3deedd79332df7ebf3b7",
+  "script": {
+    "path": "scripts/check_f8_mode3_wall_trace.py",
+    "commit": "ff342c41f36f15236e1a323669533226665ccd4d",
+    "blob": "d8af6775e4de889e98f55817a0b2516a1c6d564e",
+    "sha256": "411f13a89d3c83bd9c460d593167d60b09f5092d9ab0ea395249dd982254d999",
+    "local_output_sha256": "fe1c861479b417f490e396828db62eca0c5ee7df90066aca9a2ac99b76f43d2d"
+  },
+  "exact_checks": 115,
+  "source_diagnostic_cases": 18,
+  "source_diagnostic_dimensionless_grid": [
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048
+  ],
+  "origin_obstruction": {
+    "unit_K2_quadratic_cell_average": "-373248/41405",
+    "original_d3_quadratic_coefficient": "-56",
+    "weighted_norm_lower_scaling": "h^(-1/2)"
+  },
+  "manufactured_weak_readout": {
+    "E4_absolute_difference": 1.9522577998642987e-14,
+    "SMS_absolute_difference": 3.581423352327917e-14,
+    "scope": "numerical quadrature regression of equivalent continuum fixed-window functional, not original source-on production"
+  },
+  "scope": "Exact local algebra plus analytical conditional trace argument; no native kernel, full production, original instantaneous temporal or normal curvature convergence. Source quadrature diagnostics not interval certificates. Standard exact FV cell averages, not alternative weak-source mode."
+}
