@@ -136,7 +136,16 @@ def solve(n,required,F,cap,width=256,quotient_cap=20000):
 def portfolio(n,rows,f,cap):
     from check_pnp_adaptive_signed_escape import adaptive
     from check_pnp_grouped_quotient_floor import conditioned
-    share=cap//13;F=cnf_flats(f)
+    from check_pnp_partial_quotient import solve as partial, conflict_floor
+    share=cap//15;F=cnf_flats(f)
+    x,_,done=partial(n,rows,F,share)
+    if done:
+        if x is not None:assert valid(x,n,rows,f)
+        return x,True,'partial-quotient'
+    x,_,done=adaptive(n,rows,F,share,admissible_envelope=conflict_floor)
+    if done:
+        if x is not None:assert valid(x,n,rows,f)
+        return x,True,'collective-conflict'
     x,_,done=adaptive(n,rows,F,share,admissible_envelope=conditioned)
     if done:
         if x is not None:assert valid(x,n,rows,f)
