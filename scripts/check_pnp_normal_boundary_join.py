@@ -173,16 +173,30 @@ def join_exact_one_demand(n, row_bits, B, required=()):
                 p=chart(len(U)+len(V),K)[0]
                 L.append(lift(0,U,p&((1<<len(U))-1)))
                 R.append((lift(0,V,p>>len(U)),b))
-            P=span(I+tuple(L));width=max(width,len(P))
-            todo=[(0,0)]
+            # Linear consistency of the right demand pulls back to left pins.
+            A0=I+tuple(L);B0=I+tuple(r for r,b in R)
+            rhs=sum(b<< (len(I)+j) for j,(r,b) in enumerate(R))
+            relations=chart(len(B0),canon((value(B0,1<<j),0) for j in range(n)))[1]
+            B.pay('demand_linear_projection',1+len(B0)*(n+len(relations)))
+            pins=canon((lift(0,A0,v),(v&rhs).bit_count()%2) for v in relations)
+            if pins is None:
+                memo[key]=None;return None
+            # Fixed pins plus independent free normals determine the entire
+            # right demand; never branch on a pinned observation coordinate.
+            basis=span(a for a,b in pins);P=[]
+            for s in span(A0):
+                C0=span(basis+(s,))
+                if len(C0)>len(basis):P.append(s);basis=C0
+            width=max(width,len(P));todo=[(0,0)]
             while todo:
                 q,p=todo.pop();B.pay('demand_prefix',1+q)
-                X=ask(A,canon(rows(P[:q],p)))
+                X=ask(A,canon(pins+rows(P[:q],p)))
                 if X is None:continue
                 x=chart(n,canon(X))[0];v=value(P,x)
                 assert v&((1<<q)-1)==p
                 K=canon(rows(I,value(I,x))+tuple((r,b^((l&x).bit_count()%2)) for l,(r,b) in zip(L,R)))
-                Y=None if K is None else ask(C,K)
+                assert K is not None
+                Y=ask(C,K)
                 if Y is not None:
                     out=canon(X+Y);assert out is not None
                     z=chart(n,out)[0]
