@@ -89,3 +89,24 @@ module OriginalRound11 (inputs : Round11.BishopCutset) where
           (Selected.sourceTerms s) n m))
   originalRound11EtaAllShiftedPairTailFromSelectedTerms s n m =
     OriginalShiftedTail.actualOriginalRound11ShiftedEtaTailExact s n m
+
+
+  -- Both trig inputs now come from the original factorial product.
+  -- Only the literal dyadic Nat-log identity remains an argument.
+  -- Source-written, not pinned kernel accepted.
+  originalRound11FiniteEtaZetaFromNativeFactorial :
+    (s : Analytic.BishopComplex) →
+    Dyadic.OriginalDyadicNatLogLaw L →
+    (n : Nat) →
+    Eta._≈C_
+      (Analytic._+C_
+        (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+        (Analytic._+C_
+          (Analytic._*C_ (Selected.sourceTerms s (suc zero))
+            (Dirichlet.dirichletPartial (Selected.sourceTerms) s n))
+          (Analytic._*C_ (Selected.sourceTerms s (suc zero))
+            (Dirichlet.dirichletPartial (Selected.sourceTerms) s n))))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s (Eta.twice n))
+  originalRound11FiniteEtaZetaFromNativeFactorial s logLaw n =
+    Existing.originalRound11EtaZetaFiniteFromTwoLaws
+      s logLaw (Native.originalBishopAnalyticExpAddFromFactorial T) n
