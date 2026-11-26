@@ -516,6 +516,13 @@ def test_character_restriction_path():
         assert quotient_reopen(n,F,basis,3,B,8) is None
         assert restriction_reopen(n,F,basis,3,B,n)==1
         assert restriction_reopen(n,F,basis,3,B,0) is None
+    # Inhabited control: a capped span can leave a spurious child alive.
+    F=(((16,1),(9,0),(14,1),(13,1),(3,0)),((27,1),(25,1)))
+    B=Budget(10000000);proof,_=eliminate(F,(0,),3,B,max_pivots=8);basis=replay_span(F,proof,3,B)
+    assert [x for x in range(32) if all(sum(b^((s&x).bit_count()%2) for s,b in G)==1 for G in F)]==[15,19]
+    assert restriction_reopen(5,F,basis,3,B,5) is None
+    proof,_=eliminate(F,range(32),3,B);basis=replay_span(F,proof,3,B)
+    assert restriction_reopen(5,F,basis,3,B,5) in (15,19)
     try:restriction_reopen(1,(((1,0),),),{},3,Budget(0),1);assert False
     except Exhausted:pass
     print(dict(restriction_full=full,restriction_partial=partial,restriction_transport=transport,star_controls='PASS'))
