@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+function audit(books,receipt){
+const R=n=>Array.from({length:n},(_,i)=>i),V=R(27),mod=x=>(x%3+3)%3,d=x=>[x%3,Math.floor(x/3)%3,Math.floor(x/9)],num=a=>a[0]+3*a[1]+9*a[2];
+const A=V.map(a=>V.map(b=>num(d(a).map((x,i)=>mod(x+d(b)[i]))))),D=V.map(a=>V.map(b=>num(d(a).map((x,i)=>mod(x-d(b)[i])))));
+const gs=[..."אבגדהוזחטיכלמנסעפצקרשתךםןףץ"],gem=Array(27);for(let i=0;i<27;i++){let t=Math.floor(i/9),u=i%3,v=Math.floor(i%9/3);gem[num([t,mod(t+u),mod(t+v)])]=gs[i]}
+const ix=new Map(gem.map((g,i)=>[g,i])),enc=s=>[...s].map(g=>{if(!ix.has(g))throw Error("glyph");return ix.get(g)}),J=(g,h,k)=>24*g+6*h+k,coords=R(3).flatMap(g=>R(4).flatMap(h=>R(6).map(k=>[g,h,k])));
+function transform(x,inv){let z=x.slice();for(const axis of inv?[2,1,0]:[0,1,2]){const next=z.slice();for(const p of coords)if(p[axis]!==0){let q=p.slice();q[axis]=0;next[J(...p)]=(inv?A:D)[z[J(...p)]][z[J(...q)]]}z=next}return z}
+function canonical(l){let order=V.slice().sort((a,b)=>l[a]-l[b]||a-b),next=0n,last=0,c=Array(27);for(const i of order){next<<=BigInt(l[i]-last);c[i]=next.toString(2).padStart(l[i],"0");next++;last=l[i]}return c}
+const raw=receipt.variants.find(x=>x.p==="zero"&&x.chart==="raw").lengths[0],variants=[{name:"literalHuffman",p:"zero",tensor:false,ls:raw},{name:"copyBRaw",p:"copyB",tensor:false,ls:receipt.variants.find(x=>x.p==="copyB"&&x.chart==="raw").lengths[0]},{name:"minusSumTensor",p:"minusSum",tensor:true,ls:receipt.variants.find(x=>x.p==="minusSum"&&x.chart==="tensor"&&x.kind==="pooled").lengths[0]}];
+const bits=(v,n)=>v.toString(2).padStart(n,"0");let output=[];
+for(const cfg of variants){const code=canonical(raw),res=canonical(cfg.ls),encode=(a,c)=>a.map(x=>c[x]).join(""),rawMap=new Map(code.map((s,i)=>[s,i])),resMap=new Map(res.map((s,i)=>[s,i])),summary=[];let header=bits(variants.indexOf(cfg),2)+raw.map(x=>bits(x,5)).join("")+(cfg.name==="literalHuffman"?"":cfg.ls.map(x=>bits(x,5)).join(""));const body=[];
+for(const [name,book] of Object.entries(books)){let glyphs=0,blocks=0,tail=0,payload=0,meta=0;const parts=[bits(book.chapters.length,8)];meta+=8;for(const ch of book.chapters){const s=enc(ch.verses.map(v=>v.letters).join(""));if(s.length>=65536||ch.c>=256)throw Error("length");parts.push(bits(ch.c,8),bits(s.length,16));meta+=24;glyphs+=s.length;let j=0;
+if(cfg.name==="literalHuffman"){parts.push(encode(s,code));continue}
+for(;j+216<=s.length;j+=216){blocks++;let a=s.slice(j,j+72),b=s.slice(j+72,j+144).reverse(),c=s.slice(j+144,j+216),g=a.map((x,k)=>cfg.p==="copyB"?b[k]:D[0][A[x][b[k]]]),r=c.map((x,k)=>D[x][g[k]]);parts.push(encode(a,code),encode(b,code),encode(cfg.tensor?transform(r,false):r,res))}
+tail+=s.length-j;parts.push(encode(s.slice(j),code))}
+let stream=parts.join("");payload=stream.length-meta;body.push(stream);summary.push({name,glyphs,blocks,tail,payload,meta,total:stream.length})}
+const stream=header+body.join("");let cursor=0;const take=n=>{let v=parseInt(stream.slice(cursor,cursor+n),2);cursor+=n;return v};const readTable=()=>canonical(R(27).map(()=>take(5)));const mode=take(2);if(mode!==variants.indexOf(cfg))throw Error("mode");const rc=readTable(),zc=mode===0?rc:readTable(),rm=new Map(rc.map((s,i)=>[s,i])),zm=new Map(zc.map((s,i)=>[s,i]));
+function read(n,m){const out=[];for(let k=0;k<n;k++){let s="";while(cursor<stream.length&&!m.has(s))s+=stream[cursor++];if(!m.has(s))throw Error("prefix");out.push(m.get(s))}return out}
+let verified=0,chapters=0;for(const book of Object.values(books)){const n=take(8);if(n!==book.chapters.length)throw Error("chapter count");for(const ch of book.chapters){if(take(8)!==ch.c)throw Error("chapter number");let len=take(16),orig=enc(ch.verses.map(v=>v.letters).join("")),out=[];if(len!==orig.length)throw Error("length");if(mode===0)out=read(len,rm);else{for(let j=0;j+216<=len;j+=216){let a=read(72,rm),b=read(72,rm),z=read(72,zm),r=mode===2?transform(z,true):z,g=a.map((x,k)=>mode===1?b[k]:D[0][A[x][b[k]]]);out.push(...a,...b.slice().reverse());
+out.push(...r.map((x,k)=>A[g[k]][x]))}out.push(...read(len%216,rm))}
+if(out.length!==orig.length||out.some((v,i)=>v!==orig[i]))throw Error("whole source mismatch");verified+=len;chapters++}}
+if(cursor!==stream.length)throw Error("trailing");output.push({variant:cfg.name,headerBits:header.length,totalBits:stream.length,bytesIfPacked:Math.ceil(stream.length/8),verifiedGlyphs:verified,chapters,summary})}
+return {output,qualification:"Whole normalized written consonantal glyph streams by chapter, including all chapter tails, not source XML/vowels/word or verse boundaries. Book order fixed by protocol. Actual prefix streams encoded and decoded with transmitted mode and canonical Huffman length tables, chapter count/number/length header; final byte padding cost reported. Shared alphabet chart, field arithmetic and decoder code not transmitted. Code tables trained Ex1-13 from H37; whole-book results include training and reused regression data, not blind. Raw base27 theoretical per glyph comparison excludes metadata."}
+}
+const base='Docs/support/reference/TorahCryptoCorpus20261125/';const names=['genesis','exodus','leviticus','numbers','deuteronomy'];
+console.log(JSON.stringify(audit(Object.fromEntries(names.map(n=>[n,JSON.parse(fs.readFileSync(base+n+'.normalized.json','utf8'))])),JSON.parse(fs.readFileSync(base+'h37-signed-residual-codec.json','utf8'))),null,2));
