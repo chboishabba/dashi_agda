@@ -120,8 +120,9 @@ def block_witness(n,F,V,B,width=256,promotions=4,point_solver=positive_point):
     return None
 
 
-def solve(n,required,F,cap,point_solver=positive_point):
-    B=Budget(cap)
+def solve(n,required,F,cap,point_solver=positive_point,budget=None):
+    B=Budget(cap) if budget is None else budget
+    from check_pnp_demand_strata import Allowance,ProbeLimit
     try:
         B.pay('input',n+len(required)+sum(len(G)+1 for G in F)+1)
         q=restrict(n,required,F,B)
@@ -130,12 +131,14 @@ def solve(n,required,F,cap,point_solver=positive_point):
         if () in H:return None,B.stats,True
         if not H:return u,B.stats,True
         # Allocate independent caps to source-derived blocks, smaller blocks first.
-        W=list(blocks(d,H,B));W.sort(key=lambda A:(len(A),A));share=B.left//len(W)
+        W=list(blocks(d,H,B));W.sort(key=lambda A:(len(A),A))
+        if not W:return None,B.stats,False
+        share=B.left//len(W)
         for A in W:
-            local=Budget(share)
+            local=Budget(share) if budget is None else Allowance(B,share)
             try:q=block_witness(d,H,A,local,point_solver=point_solver)
-            except Exhausted:q=None
-            B.pay('block_work',min(share,share-local.left))
+            except (Exhausted,ProbeLimit):q=None
+            if budget is None:B.pay('block_work',min(share,share-local.left))
             if q is not None:
                 x=lift(u,V,q[0]);assert satisfies(x,required,F);return x,B.stats,True
         return None,B.stats,False

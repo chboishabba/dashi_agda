@@ -128,13 +128,8 @@ def mass_interval(n,R,H,caps,B):
     assert H==canon(H) and len(R)==len(caps)
     assert canon(H+tuple((r,1) for r in R))==H
     if any(c<1 for c in caps): return 0,0,(),()
-    E=[]
-    for r,c in zip(R,caps):
-        J=list(bits(r)); k=c+1
-        if k>len(J): continue
-        B.pay('capacity_forest_events',comb(len(J),k)*(1+k))
-        E.extend(tuple((1<<j,1) for j in T) for T in combinations(J,k))
-    E=tuple(sorted(set(E))); m=len(E)
+    from check_pnp_capacity_geometry import violation_flats
+    E=violation_flats(n,R,H,caps,B); m=len(E)
     B.pay('capacity_forest_pairs',1+(1+m*m)*(1+n+len(H))**3)
     events=[list(e) for e in E]; pins=list(H); edges=tuple(forest(events,pins))
     size=1<<(n-len(H))

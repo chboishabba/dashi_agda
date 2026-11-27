@@ -136,18 +136,21 @@ class Ledger:
             else:ans=bounded_fold(self.n,self.R,Q,caps,B,leaf_cap,seam_cap)
             if ans is None:
                 if character_degree>=0:
-                    from check_pnp_capacity_character import (mass_interval,reopen_positive,
-                        discover_certificate)
+                    from check_pnp_capacity_character import discover_certificate
+                    from check_pnp_capacity_signed import observe
                     # Use the same local allowance and original scope; never treat
                     # an incomplete positive mass observation as an exact count.
                     # A forest refusal must not starve the character consumer.
                     # Reserve disjoint portions of the current allowance.
                     try:
                         A=Allowance(B,max(0,B.left//2))
-                        I=mass_interval(self.n,self.R,Q,caps,A)
-                        w=reopen_positive(self.n,self.R,Q,caps,I,A)
-                        if w is not None:
-                            total+=I[0];y=w if y is None else y;unknown=True;continue
+                        I,=observe(self.n,self.R,Q,caps,A)
+                        if I.upper==0:
+                            self._record(Q,caps,'signed_capacity_upper_zero',B);continue
+                        if I.witness is not None:
+                            total+=I.lower;y=I.witness if y is None else y
+                            unknown|=I.lower!=I.upper
+                            continue
                     except ProbeLimit:pass
                     try:
                         A=Allowance(B,max(0,B.left//2))
@@ -278,15 +281,20 @@ def solve_cover(n,R,P,B,leaf_cap=8,seam_cap=8,nodes=32,probe_cap=1000000,
             L._record(H,caps,'singleton_verify',B);continue
         order=(1,0)
         if character_degree>=0:
-            from check_pnp_capacity_character import signed_interval,preferred_child,reopen_positive
+            from check_pnp_capacity_signed import observe_ledger,select
             try:
                 A=Allowance(B,probe_cap)
-                Q,I,D=signed_interval(n,R,H,caps,a,A)
-                b=preferred_child(I,D)
+                I=observe_ledger(L,H,caps,a,A,cell_cap,leaf_cap,seam_cap)
+                for v in I:
+                    if v.witness is not None:return v.witness,True
+                # A positive lower bound is a real inhabited-child receipt.
+                # Only such a receipt permits dropping other pending demands.
+                b=select(I)
                 if b is not None:
-                    y=reopen_positive(n,R,Q[b],caps,I[b],A)
-                    if y is not None:return y,True
-                    order=(1-b,b)
+                    B.pay('demand_inhabited_rank_contraction')
+                    pending.clear();unresolved=True;order=(b,)
+                else:
+                    order=tuple(b for b in (1,0) if I[b].upper>0)
             except ProbeLimit:pass
         for b in order:
             Q=canon(H+((a,b),));assert Q is not None and len(Q)==len(H)+1;pending.append(Q)

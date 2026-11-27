@@ -1295,3 +1295,30 @@ no genuine combined survivor is asserted yet. Local mixed-defect replay
 on transcribed donor functions additionally passed 1000/1000 independent
 finite quotient-space comparisons (123 created-dependency cases, 113
 removed-dependency cases).
+
+
+### Uniform sufficient observation — executable capacity attachment (2026-11-27)
+
+P0.1–P0.4 implementation: shared parity-aware violation flats now feed both
+the original mass consumer and collective contraction. The existing grouped
+admissible floor and partial-quotient conflict floor are complementary
+callbacks to adaptive signed absorption; the existing witness-only block
+solver runs on the same parent allowance. Paired signed mass uses one
+original chart, masked-forest lower polynomial and exact promoted-event
+upper polynomial, with integer disjoint-cell folds and optional exact
+separator refinement. Positive integral reopens through the existing
+positive-point donor. A positive child lower bound authorizes dropping
+other pending branches, with an unresolved guard preventing a false
+negative result. A zero upper bound is an exact exclusion, not a refusal.
+Conditional normalized contrast is computed from original mass bounds;
+no unconditional relative-accuracy claim is made.
+
+P0.5 acceptance: `timeout 90s python scripts/check_pnp_capacity_sufficient_campaign.py /tmp/pnp-capacity-sufficient.json`
+and the existing capacity-resistant campaign. These are committed for
+operator execution; no local acceptance, CI, native kernels or new
+counterfamily are claimed. P0.6–P0.8 remain the universal productive
+transformation, actual machine-bit bound including discovery/reopening,
+and endpoint attachment conditional on those premises. Logical event
+allowances are not yet a polynomial machine-bit proof. The guarded
+quotient floor and witness-only bypass are alternatives, not compulsory
+representations. The supplied 30-column case remains a required regression.
