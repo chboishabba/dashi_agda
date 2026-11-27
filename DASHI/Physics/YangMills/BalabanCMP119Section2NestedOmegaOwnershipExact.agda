@@ -14,12 +14,23 @@ module DASHI.Physics.YangMills.BalabanCMP119Section2NestedOmegaOwnershipExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-open import Data.Nat.Base renaming (ℕ to Nat) using (zero; suc; _≤_; _+_; z≤n; s≤s)
-open import Data.Product using (Σ; _,_; _×_; proj₁)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Nat.Base renaming (ℕ to Nat) using (zero; suc; _≤_; _<_; _+_; z≤n; s≤s)
+open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 import Data.Nat.Base as N
 import Data.Nat.Properties as NP
+
+infix 2 _↔_
+
+private
+  _↔_ : Set → Set → Set
+  A ↔ B = (A → B) × (B → A)
+
+  leRefl : ∀ n → n ≤ n
+  leRefl zero = z≤n
+  leRefl (suc n) = s≤s (leRefl n)
 
 record Section2NestedOmegaCarrier : Set₁ where
   field
@@ -91,3 +102,78 @@ ownedBlockInAllEarlierOmega :
 ownedBlockInAllEarlierOmega carrier {B} {i} ileOwner =
   relativeOwnedBlockInAllEarlierOmega carrier {B} {ownerIndex carrier B} {i}
     ileOwner (ownerInRelativeDomain carrier B)
+
+private
+  ownerLeImpliesILeOwner :
+    ∀ {i owner : Nat} →
+    owner ≤ i →
+    (owner < i → i ≤ owner) →
+    i ≤ owner
+  ownerLeImpliesILeOwner {i} {owner} ownerLeI impossible
+    with NP.m≤n⇒m<n∨m≡n ownerLeI
+  ... | inj₁ ownerLtI = impossible ownerLtI
+  ... | inj₂ ownerEqI =
+    subst (λ n → n ≤ owner) ownerEqI (leRefl owner)
+
+  omegaMembershipImpliesLeOwner :
+    (carrier : Section2NestedOmegaCarrier) →
+    {B : Block carrier} {i : Nat} →
+    inOmega carrier i B → i ≤ ownerIndex carrier B
+  omegaMembershipImpliesLeOwner carrier {B} {i} omega
+    with NP.≤-total i (ownerIndex carrier B)
+  ... | inj₁ iLeOwner = iLeOwner
+  ... | inj₂ ownerLeI =
+    ownerLeImpliesILeOwner ownerLeI (λ ownerLtI →
+      ⊥-elim
+        ((proj₂
+            (relativeDomainElimination carrier
+              (ownerIndex carrier B) B
+              (ownerInRelativeDomain carrier B)))
+          (weakenWithinOmega carrier {B}
+            {suc (ownerIndex carrier B)} {i} ownerLtI omega)))
+
+  leAndNotLtImpliesEq :
+    ∀ {i owner : Nat} → i ≤ owner → (i < owner → ⊥) → i ≡ owner
+  leAndNotLtImpliesEq {i} {owner} iLeOwner notLt
+    with NP.m≤n⇒m<n∨m≡n iLeOwner
+  ... | inj₁ iLt = ⊥-elim (notLt iLt)
+  ... | inj₂ eq = eq
+
+  relativeMembershipImpliesEqOwner :
+    (carrier : Section2NestedOmegaCarrier) →
+    {B : Block carrier} {i : Nat} →
+    inRelativeDomain carrier i B → i ≡ ownerIndex carrier B
+  relativeMembershipImpliesEqOwner carrier {B} {i} relativeAt =
+    let
+      relativeData = relativeDomainElimination carrier i B relativeAt
+      iOmega = proj₁ relativeData
+      notSuccI = proj₂ relativeData
+      iLeOwner = omegaMembershipImpliesLeOwner carrier {B} {i} iOmega
+      ownerOmega =
+        proj₁
+          (relativeDomainElimination carrier
+            (ownerIndex carrier B) B
+            (ownerInRelativeDomain carrier B))
+    in
+    leAndNotLtImpliesEq iLeOwner (λ iLtOwner →
+      notSuccI
+        (weakenWithinOmega carrier {B}
+          {suc i} {ownerIndex carrier B} iLtOwner ownerOmega))
+
+ownedBlockInOmegaIff :
+  (carrier : Section2NestedOmegaCarrier) →
+  {B : Block carrier} {i : Nat} →
+  (inOmega carrier i B ↔ i ≤ terminalOwner carrier B)
+ownedBlockInOmegaIff carrier {B} {i} =
+  omegaMembershipImpliesLeOwner carrier ,
+  ownedBlockInAllEarlierOmega carrier
+
+relativeDomainIffTerminalOwner :
+  (carrier : Section2NestedOmegaCarrier) →
+  {B : Block carrier} {i : Nat} →
+  (inRelativeDomain carrier i B ↔ i ≡ terminalOwner carrier B)
+relativeDomainIffTerminalOwner carrier {B} {i} =
+  relativeMembershipImpliesEqOwner carrier ,
+  λ eq →
+    subst (λ n → inRelativeDomain carrier n B) (sym eq)
+      (ownerInRelativeDomain carrier B)
