@@ -1846,3 +1846,31 @@ Source-written; no kernel or CI invocation. The half-unit witness is now constru
 - C0: original Machin/Cayley finite phase and recurrence donors are present. Analytic exp(2i atan) identification at both original Machin inputs remains open. Not solved by the sharp radius enclosure.
 
 Remaining implementation in dependency order: (1) original atan/exp analytic identification; (2) unconditional shell rearrangement, normalized Fourier equality and degree-41 Hecke product/pole removal; (3) derive diagonal vanishing and original ray analytic coefficient vanishing from that product and the existing geometry/quotient jets. Feed both into allRawFromDiagonalAndRay. Lean production chain is unchanged this pass. Native source elaboration/axiom audit and acceptance remain deferred. Do not mark unconditional RawCross or GMP acceptance. Classical identities retain original attribution; DASHI contributes constructive enclosure, native geometry and proof transport.
+
+
+### 2026-11-27 — Native S/T summation transport, normalization and actual atan quadratic remainder
+
+SOURCE-WRITTEN, UNCOMPILED. Continues C0/C1 on the actual Bishop carrier. No new postulate, generic infinite-sum model, or synthetic atan. Kernel and CI deferred at operator direction.
+
+| Commit | Implemented source |
+|---|---|
+| 382d5cb2a45b / 81a66f119edf | JInvariantBishopSquareShellReindexExact: signed rotation and inverse, square/shell permutations, guarded finite summand fold and four actual S limit transports |
+| 86c8a66e7351 / 78eda8602cdf | JInvariantBishopSquareExhaustionExact: origin omission, exact square/shell partition and prefix identity, membership-based remainder and absolute-tail sandwich |
+| 0ac6e41dc519 | JInvariantBishopShearExhaustionExact: T and inverse, Q_n subset T(Q_2n) subset Q_4n, cofinal absolute-tail limit transport |
+| 7d0104dc8d78 / 74e1b7c7cfc0 | JInvariantBishopLatticeGeneratorSummandExact: integer embedding, actual upper-half-plane generator actions, denominator laws, reciprocal uniqueness and summand transformation |
+| 51ad849c0090 | JInvariantBishopLatticeGeneratorModularityExact: finite sum transport and actual G4/G6 global S/T laws |
+| 5d6d3db7bc4e | JInvariantBishopLatticeNormalizedGeneratorsExact: explicit 45/pi_M^4 and 945/(2*pi_M^6) normalized lattice values and S/T laws |
+| 5584f431b98e / acfa73186b57 / 1938e51aca72 | BishopOriginalMachinAtanSecondOrderExact: actual signed finite atan quotient and increment, odd slice bound, exact half-radius potential, original-limit quadratic remainder |
+| 989c47263039 | scripts/check_paper9_lattice_generators_atan_potential.py: local exact finite/symbolic replay |
+
+C1: S preserves the actual finite square and shell membership; T is not falsely treated as a finite shell permutation. The cofinal shear uses actual absolute convergence of all four real/imaginary weight-4/6 components. Zero padding is solely a finite sum representation of the omitted origin, not a reciprocal at zero. The normalized E4/E6 lattice values use the original Machin real and its positive inverse. Generator modularity is written on the convergent source only; Fourier identification remains genuinely unpaid. Do not instantiate the old total sum over arbitrary (possibly divergent) lattice functions.
+
+C0: for x,x+h in [0,1/2], the actual signed finite atan has a second-order increment factor. At radius r=1/2, the unweighted power first and second quotient recursions Q_n,T_n and p_n=r^n satisfy B_n=2T_n+4Q_n+8p_n=T_n+B_(n+1), with B_0=8 and nonnegative B_n. The reciprocal-weighted odd slice is bounded by this budget. Pass the finite remainder inequality to the original atan limits and original derivative geometric limit to obtain |A(x+h)-A(x)-h d(x)| <= 8|h|^2. The actual d(x) cancellation (1+x^2)d(x)=1 is already supplied by BishopOriginalLogAtanDerivativeLimitValuesExact. This is the source-written uniform quadratic increment, not yet the Cayley identity.
+
+Local execution: 164 finite square/shell/reindex batches (radii 0..40), 2 symbolic denominator identities, 400 exact rational potential iterations including odd-slice bounds; 566 checks passed. The committed replay repeats that diagnostic, not an Agda kernel proof.
+
+Remaining native maximum cut:
+1. Use the original atan quadratic increment and native complex exponential small-increment factor to derive normalized Cayley endpoint identity at the two original Machin arguments, then feed the existing phase consumer.
+2. Prove actual Fourier row evaluation and axis normalization (including the required even zeta evaluations) on the concrete normalized lattice limits, then degree-41 Hecke product/pole removal and literal packet identification. Generator laws are now source-written; do not reimplement generic S/T geometry.
+3. Derive original diagonal zero and actual reciprocal-ray analytic quotient jet / cross coefficient vanishing; feed the two existing terminal witnesses to allRawFromDiagonalAndRay.
+4. Native and Lean elaboration/kernel/axiom acceptance and actual GMP trace/floor acceptance remain deferred. No unconditional native RawCross claim. Preserve classical authorship and original donor provenance.
