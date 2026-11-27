@@ -106,3 +106,116 @@ partialBound x h r xn yn xr yr zero =
 partialBound x h r xn yn xr yr (suc n) =
   P.≤-trans (P.∣x+y∣≤∣x∣+∣y∣ (secondPartial x h n) (secondTerm x h n))
     (P.+-mono-≤ (partialBound x h r xn yn xr yr n) (termBound x h r xn yn xr yr n))
+
+-- A finite potential pays every power second quotient on [0,1/2].
+-- B_n = 2 T_n + 4 Q_n + 8 (1/2)^n.
+-- B_n = T_n + B_(n+1), exactly. The odd slice consumes at
+-- most the same budget, with no exchange of infinite sums.
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
+import Data.Rational.Unnormalised as Rat
+import Data.Rational.Unnormalised.Properties as RatP
+
+half : ℝ
+half = Half.bishopHalf
+
+two four eight : ℝ
+two = (+ 2 / 1) ⋆
+four = (+ 4 / 1) ⋆
+eight = (+ 8 / 1) ⋆
+
+halfNN : R.NonNegative half
+halfNN = P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 1 / 2) (RatP.nonNegative⁻¹ (+ 1 / 2)))
+
+halfPlusZeroNN : R.NonNegative (half + R.0ℝ)
+halfPlusZeroNN = P.nonNeg-cong (P.≃-symm (P.+-identityʳ half)) halfNN
+
+qHalf tHalf pHalf : Nat → ℝ
+qHalf = Q.powerDifferenceQuotient half R.0ℝ
+tHalf = T.sourcePowerSecondQuotient half R.0ℝ
+pHalf = R.pow half
+
+qNN : ∀ n → R.NonNegative (qHalf n)
+qNN = Pos.originalPowerZeroStepQuotientNonnegative half halfNN
+
+tNN : ∀ n → R.NonNegative (tHalf n)
+tNN = Pos.originalPowerSecondQuotientNonnegative half R.0ℝ halfNN halfPlusZeroNN
+
+budget : Nat → ℝ
+budget n = (two * tHalf n + four * qHalf n) + eight * pHalf n
+
+budgetNN : ∀ n → R.NonNegative (budget n)
+budgetNN n = P.nonNegx,y⇒nonNegx+y
+  (P.nonNegx,y⇒nonNegx+y
+    (P.nonNegx,y⇒nonNegx*y
+      (P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 2 / 1) (RatP.nonNegative⁻¹ (+ 2 / 1)))) (tNN n))
+    (P.nonNegx,y⇒nonNegx*y
+      (P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 4 / 1) (RatP.nonNegative⁻¹ (+ 4 / 1)))) (qNN n)))
+  (P.nonNegx,y⇒nonNegx*y
+    (P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 8 / 1) (RatP.nonNegative⁻¹ (+ 8 / 1))))
+    (Seq.nonNegx⇒nonNegxⁿ halfNN n))
+
+budgetStep : ∀ n → (tHalf n + budget (suc n)) ≃ budget n
+budgetStep n =
+  let q = qHalf n
+      t = tHalf n
+      p = pHalf n
+      qStep = P.+-cong (P.*-congˡ (P.+-identityʳ half)) P.≃-refl
+      tStep = P.+-cong (P.*-congˡ (P.+-identityʳ half)) P.≃-refl
+      open P.ℝ-Solver
+  in P.≃-trans
+    (P.+-cong P.≃-refl
+      (P.+-cong (P.+-cong (P.*-congˡ tStep) (P.*-congˡ qStep)) P.≃-refl))
+    (solve 3 (λ t q p →
+      t ⊕ ((Κ (+ 2 / 1) ⊗ (t ⊗ Κ (+ 1 / 2) ⊕ q) ⊕
+      Κ (+ 4 / 1) ⊗ (q ⊗ Κ (+ 1 / 2) ⊕ p)) ⊕
+      Κ (+ 8 / 1) ⊗ (p ⊗ Κ (+ 1 / 2))) ⊜
+      (Κ (+ 2 / 1) ⊗ t ⊕ Κ (+ 4 / 1) ⊗ q) ⊕ Κ (+ 8 / 1) ⊗ p)
+      P.≃-refl t q p)
+
+budgetZero : budget zero ≃ eight
+budgetZero = let open P.ℝ-Solver in
+  solve 0 ((Κ (+ 2 / 1) ⊗ Κ 0ℚᵘ ⊕ Κ (+ 4 / 1) ⊗ Κ 0ℚᵘ) ⊕
+    Κ (+ 8 / 1) ⊗ Κ 1ℚᵘ ⊜ Κ (+ 8 / 1)) P.≃-refl
+
+coefficientBelowOne : ∀ n → coefficient n ≤ R.1ℝ
+coefficientBelowOne zero = P.≤-refl
+coefficientBelowOne (suc n) = P.≤-trans (A.embeddedInverseOddStep n) (coefficientBelowOne n)
+
+oddTermBelow : ∀ n → majorantTerm half n ≤ tHalf (E.oddExponent n)
+oddTermBelow n = P.≤-respʳ-≃ (P.*-identityˡ (tHalf (E.oddExponent n)))
+  (P.*-monoʳ-≤-nonNeg (coefficientBelowOne n) (tNN (E.oddExponent n)))
+
+budgetPair : ∀ k → (tHalf k + budget (suc (suc k))) ≤ budget k
+budgetPair k = P.≤-respʳ-≃ (budgetStep k)
+  (P.+-monoˡ-≤ (tHalf k)
+    (P.≤-respʳ-≃ (budgetStep (suc k))
+      (P.≤-respʳ-≃ (P.+-comm (budget (suc (suc k))) (tHalf (suc k)))
+        (Seq.0≤x⇒y≤y+x (budget (suc (suc k))) (P.nonNegx⇒0≤x (tNN (suc k)))))))
+
+oddBudget : ∀ n → (majorant half n + budget (E.oddExponent n)) ≤ eight
+oddBudget zero = P.≤-respˡ-≃ (P.≃-symm (P.+-identityˡ (budget 1)))
+  (P.≤-reflexive (P.≃-trans
+    (P.≃-symm (P.+-identityˡ (budget 1)))
+    (P.≃-trans (budgetStep zero) budgetZero)))
+oddBudget (suc n) =
+  let k = E.oddExponent n
+      s = majorant half n
+      t = majorantTerm half n
+      b = budget (suc (suc k))
+      open P.ℝ-Solver
+  in P.≤-respˡ-≃ (P.≃-symm
+    (solve 3 (λ s t b → (s ⊕ t) ⊕ b ⊜ s ⊕ (t ⊕ b)) P.≃-refl s t b))
+    (P.≤-trans
+      (P.+-monoˡ-≤ s
+        (P.≤-trans (P.+-mono-≤ (oddTermBelow n) P.≤-refl) (budgetPair k)))
+      (oddBudget n))
+
+majorantBelowEight : ∀ n → majorant half n ≤ eight
+majorantBelowEight n = P.≤-trans
+  (Seq.0≤x⇒y≤y+x (majorant half n) (P.nonNegx⇒0≤x (budgetNN (E.oddExponent n))))
+  (oddBudget n)
+
+uniformSecondBound : ∀ x h → R.NonNegative x → R.NonNegative (x + h) →
+  x ≤ half → (x + h) ≤ half → ∀ n → ∣ secondPartial x h n ∣ ≤ eight
+uniformSecondBound x h xn yn xr yr n =
+  P.≤-trans (partialBound x h half xn yn xr yr n) (majorantBelowEight n)
