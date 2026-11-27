@@ -57,3 +57,17 @@ def recover(n,R,H,caps,B,width=8):
     B.pay('ledger_component_verify',1+n+sum(r.bit_count() for r in R))
     assert satisfies(x,H,()) and all((r&x).bit_count()<=c for r,c in zip(R,caps))
     return status,x,widths
+
+
+def screen(n,R,H,caps,B):
+    """Compose the new observer with the existing bounded component reopening."""
+    from check_pnp_signed_capacity_rank2 import screen as contract
+    from check_pnp_affine_normal_components import Exhausted
+    from check_pnp_demand_strata import ProbeLimit
+    Q,y,reason=contract(n,R,H,caps,B)
+    if Q is None or y is not None:return Q,y,reason
+    try:status,x,widths=recover(n,R,Q,caps,B)
+    except (ProbeLimit,Exhausted):return Q,None,'component_refused'
+    if status=='empty':return None,None,'component_empty'
+    if status=='witness':return Q,x,'component_witness'
+    return Q,None,'component_width_refused'
