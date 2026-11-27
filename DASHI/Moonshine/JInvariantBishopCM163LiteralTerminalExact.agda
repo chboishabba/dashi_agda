@@ -36,3 +36,45 @@ module AtOriginalCM (c : OriginalCMCut) where
 
   allRaw : (k : Nat) → Raw.RawCross k
   allRaw = Actual.rawFromCM signed
+
+
+-- The original quotient's first and second coefficient jets are now
+-- constructed internally from its actual evaluated E4/E6 jets, rather
+-- than being supplied as arbitrary numbers satisfying the scalar equations.
+import DASHI.Moonshine.JInvariantBishopCM163QuotientJetExact as QJ
+import DASHI.Foundations.BishopChudnovskyNativePeriodProductExact as Period
+
+OriginalRayResidual : Set
+OriginalRayResidual =
+  Jet.literalResidual (Jet.A J.p QJ.a) (Jet.diskB J.p QJ.a QJ.b)
+    (L.s2 ⋆) (L.s3 ⋆) (L.p2 ⋆) (L.p3 ⋆) ≃ R.0ℝ
+
+cutFromOriginalQuotient :
+  ∣ Iso.offset ∣ R.≤ Iso.half →
+  L.descending Guard.Root.j R.0ℝ Packet.diagonal ≃ R.0ℝ →
+  OriginalRayResidual → OriginalCMCut
+cutFromOriginalQuotient enclosure diagonal cross =
+  let root = L.rootFromLiteralDiagonal enclosure diagonal in
+  record
+    { enclosure = enclosure
+    ; diagonalZero = diagonal
+    ; a = QJ.a
+    ; b = QJ.b
+    ; first = QJ.first root
+    ; second = QJ.second root
+    ; cross = cross
+    }
+
+allRawFromOriginalQuotient :
+  ∣ Iso.offset ∣ R.≤ Iso.half →
+  L.descending Guard.Root.j R.0ℝ Packet.diagonal ≃ R.0ℝ →
+  OriginalRayResidual → (k : Nat) → Raw.RawCross k
+allRawFromOriginalQuotient enclosure diagonal cross =
+  AtOriginalCM.allRaw (cutFromOriginalQuotient enclosure diagonal cross)
+
+periodFromOriginalQuotient :
+  ∣ Iso.offset ∣ R.≤ Iso.half →
+  L.descending Guard.Root.j R.0ℝ Packet.diagonal ≃ R.0ℝ →
+  OriginalRayResidual → Period.NativePeriod
+periodFromOriginalQuotient enclosure diagonal cross =
+  Raw.periodFromRaw (allRawFromOriginalQuotient enclosure diagonal cross)
