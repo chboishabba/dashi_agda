@@ -44,7 +44,10 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False,signe
             B.pay('row_partition_node',1+n+len(P)+len(I));steps+=1
             if trace is not None:trace('enter',P,I,None)
             if signed_screen:
-                from check_pnp_signed_capacity_square import screen
+                if signed_screen=='cube':
+                    from check_pnp_signed_capacity_cube import screen
+                else:
+                    from check_pnp_signed_capacity_square import screen
                 try:Q,y,reason=screen(n,R,P,caps,Allowance(B,B.left//4))
                 except ProbeLimit:Q,y,reason=P,None,'refused'
                 if trace is not None:trace('signed',Q,I,reason)
@@ -114,7 +117,10 @@ def recover_cell(n,R,H,caps,B,signed_screen=False):
     volume=1<<(n-len(H));best=Bound(0,volume)
     if any(c<1 for c in caps):return Bound(0,0)
     if signed_screen:
-        from check_pnp_signed_capacity_square import screen
+        if signed_screen=='cube':
+            from check_pnp_signed_capacity_cube import screen
+        else:
+            from check_pnp_signed_capacity_square import screen
         try:Q,y,reason=screen(n,R,H,caps,Allowance(B,B.left//4))
         except ProbeLimit:Q,y,reason=H,None,'refused'
         if Q is None:return Bound(0,0)
