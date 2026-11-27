@@ -177,3 +177,46 @@ relativeDomainIffTerminalOwner carrier {B} {i} =
   λ eq →
     subst (λ n → inRelativeDomain carrier n B) (sym eq)
       (ownerInRelativeDomain carrier B)
+
+private
+  omegaExitImpliesEqOwner :
+    (carrier : Section2NestedOmegaCarrier) →
+    {B : Block carrier} {j : Nat} →
+    inOmega carrier j B →
+    (inOmega carrier (suc j) B → ⊥) →
+    j ≡ ownerIndex carrier B
+  omegaExitImpliesEqOwner carrier {B} {j} omega notSucc =
+    leAndNotLtImpliesEq
+      (omegaMembershipImpliesLeOwner carrier {B} {j} omega)
+      (λ jLtOwner →
+        notSucc
+          (weakenWithinOmega carrier {B}
+            {suc j} {ownerIndex carrier B} jLtOwner
+            (proj₁
+              (relativeDomainElimination carrier
+                (ownerIndex carrier B) B
+                (ownerInRelativeDomain carrier B)))))
+
+relativeDomainIffOmegaExit :
+  (carrier : Section2NestedOmegaCarrier) →
+  {B : Block carrier} {j : Nat} →
+  (inRelativeDomain carrier j B ↔
+    (inOmega carrier j B × (inOmega carrier (suc j) B → ⊥)))
+relativeDomainIffOmegaExit carrier {B} {j} =
+  relativeDomainElimination carrier j B ,
+  λ exit →
+    subst (λ n → inRelativeDomain carrier n B)
+      (sym (omegaExitImpliesEqOwner carrier {B} {j}
+        (proj₁ exit) (proj₂ exit)))
+      (ownerInRelativeDomain carrier B)
+
+relativeDomainUnique :
+  (carrier : Section2NestedOmegaCarrier) →
+  {B : Block carrier} {i j : Nat} →
+  inRelativeDomain carrier i B →
+  inRelativeDomain carrier j B →
+  i ≡ j
+relativeDomainUnique carrier {B} {i} {j} relativeI relativeJ =
+  trans
+    (relativeMembershipImpliesEqOwner carrier {B} {i} relativeI)
+    (sym (relativeMembershipImpliesEqOwner carrier {B} {j} relativeJ))
