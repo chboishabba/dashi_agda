@@ -1,0 +1,69 @@
+{
+  "key": "dd7e80e138951ecd063e20e98d0a1225e1346c032ce6258eb965e7dddad6d217",
+  "cases": [
+    {
+      "n": 30,
+      "m": 18,
+      "rank": 12,
+      "leaf": 4,
+      "seam": 12,
+      "planted_cover": 38162432,
+      "cap": 4,
+      "status": "WIDTH_REFUSAL",
+      "tree_cost": 29060,
+      "refusal_cost": 29038,
+      "lookahead": "SAT",
+      "lookahead_rank": 12,
+      "lookahead_cover": 536872116,
+      "lookahead_cost": 64053
+    },
+    {
+      "n": 40,
+      "m": 24,
+      "rank": 16,
+      "leaf": 4,
+      "seam": 15,
+      "planted_cover": 755968770113,
+      "cap": 4,
+      "status": "WIDTH_REFUSAL",
+      "tree_cost": 69709,
+      "refusal_cost": 69679,
+      "lookahead": "SAT",
+      "lookahead_rank": 16,
+      "lookahead_cover": 755968770113,
+      "lookahead_cost": 175927
+    },
+    {
+      "n": 50,
+      "m": 30,
+      "rank": 20,
+      "leaf": 4,
+      "seam": 18,
+      "planted_cover": 22540835684372,
+      "cap": 4,
+      "status": "WIDTH_REFUSAL",
+      "tree_cost": 136998,
+      "refusal_cost": 136960,
+      "lookahead": "SAT",
+      "lookahead_rank": 20,
+      "lookahead_cover": 387372764135945,
+      "lookahead_cost": 402719
+    },
+    {
+      "n": 60,
+      "m": 36,
+      "rank": 24,
+      "leaf": 4,
+      "seam": 23,
+      "planted_cover": 72484209129734403,
+      "cap": 4,
+      "status": "WIDTH_REFUSAL",
+      "tree_cost": 237623,
+      "refusal_cost": 237577,
+      "lookahead": "SAT",
+      "lookahead_rank": 24,
+      "lookahead_cover": 1179578409091136,
+      "lookahead_cost": 3843633
+    }
+  ]
+}
