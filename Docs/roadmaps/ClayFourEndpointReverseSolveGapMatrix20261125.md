@@ -830,3 +830,52 @@ Steelman: construct actual cycles via incidence/family/diagonal/abelian geometry
 ## 5 execution ordering and acceptance
 
 Parallel four major cuts: (RH) original external admission and literal BIDI, independent E3 only optional; (BSD) actual all-rank comparison with torsion/Sha retained, attack both inequalities; (NS) actual C/D ingress and unforced certificate audit in parallel with independent positive A/B source bounds, prioritise terminal Q/H/strict margin or genuinely sufficient weaker continuation not infinite normal-form iteration; (Hodge) actual cubic orientation detector and general primitive induction/detection. Reuse named constructors, no new generic frameworks. Exact source ownership pinned above; prior mathematical derivations are retained as prior claims, not rerun. This tranche is a roadmap audit plus elementary reverse/detection and even-trace derivations; no new numerical test, kernel, external certificate, universal proof or prize assertion. No donor branches/ESD changed. Source boundary: reread seven core Agda files and controlling roadmap, not a line-by-line proof audit of the full repo or actual external kernel export. 
+
+
+## 27 November — external NS proof-first implementation and selected BSD correction
+
+NS: OpenAI forced C/D and Alpöge–Buckmaster unforced are independent proof
+routes. Do not put reconstruction of the independent DASHI similarity profile,
+physical R568/R653 or unrestricted positive A/B on the external admission
+critical path. Lean main ExternalClayNS/LeanDojoExactTerminal.lean and
+SubmissionAudit.lean already supply the OpenAI literal C/D source bodies.
+Retain their exact pinned proof/axiom and statement review.
+
+Lean #123 now has original Alpöge–Buckmaster source-local admission at
+48654ab51fc58bc16d77a9c509208242481d135c:
+proofs/alpoge-ns-lean433/UnforcedAdmission.lean consumes the original profile
+and original seven dependent objects / fifteen conditions, yielding both
+original unforced conclusions and refutations of the original positive
+claims; ClayDifferentialTransport.lean reuses exact Mathlib-only donor bodies
+from existing Gap.lean; ClayUnforcedTransport.lean source-writes same-velocity
+and pressure coordinate, momentum, divergence, zero force and periodic
+transport into the existing canonical literal Clay D, including pressure
+erratum. No new canonical Clay spec. The source-local runner pins original
+upstream ad53419de079eb8f95f60313473374624a348546, Lean 4.33.1 and Mathlib
+0df444a360eaa60ab8c11dca51a86af692955474 and rebuilds Solution (not Challenge),
+canonical ClaySpec and adapters. Eight declaration axiom audit; 10/10 parser
+controls normal/-O, byte-identical committed parser. No native kernel run.
+
+Upstream README still explicitly says no Appendix B data or external
+interval verifier distributed; patched Lean package not rebuilt on release.
+Thus source theorem from actual CellSystemCondition remains conditional;
+do not promote it to an unconditional proof. The real certificate
+inhabitant and independent verification remain, then existing local D
+transport. Direct AB canonical C transport (compact support and energy)
+is optional to D, not a second necessary endpoint. Independent DASHI
+similarity mathematics optional. Preserve authorship of original analytic
+proofs (OpenAI and Alpöge–Buckmaster), DASHI for source transport only.
+
+BSD: retire the selected rank-two analytic certificate. The exact existing
+ClayFourSelectedRankTwoMellinHodgeDonor20261125.md establishes arithmetic rank
+2 and analytic rank 2 for y²=x³−66x+289; 2272/2272 normal/-O original
+Mellin certificate previously executed; second derivative positive by exact
+rational enclosures, central vanishing by low-rank theorem, Fricke sign +.
+No further selected rank-two rerun. Rank-four curve 234446.a1 still has
+unpaid actual second derivative vanishing, not another quotient/tower
+construction; universal analytic/arithmetic rank comparison open.
+
+RH existing original admission and BIDI remain; Hodge actual primitive
+cycle/orientation detector remains. These are unchanged in this NS
+implementation tranche. No proof-kernel acceptance, universal BSD/Hodge
+theorem, official prize recognition, or CI claim.
