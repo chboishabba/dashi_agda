@@ -11,9 +11,10 @@ def admissible_floor(M,n,H,B):
     from check_pnp_partial_quotient import conflict_floor
     best=lower(M)
     if best>0:return best
+    pool=Allowance(B,B.left//2)  # reserve the remainder for absorption/reopening
     for i,producer in enumerate((conditioned,conflict_floor)):
         try:
-            A=Allowance(B,B.left//(2-i))
+            A=Allowance(pool,pool.left//(2-i))
             best=max(best,producer(M,n,H,A))
             if best>0:return best
         except ProbeLimit:pass

@@ -629,3 +629,14 @@ and endpoint attachment conditional on those premises. Logical event
 allowances are not yet a polynomial machine-bit proof. The guarded
 quotient floor and witness-only bypass are alternatives, not compulsory
 representations. The supplied 30-column case remains a required regression.
+
+
+Acceptance handoff follow-up: reserve part of the admissible-floor clock
+for adaptive absorption/reopening and part of each paired cell clock for
+exact separator refinement. The earlier character scope campaign now
+accepts exact SAT counts as well as partial positive observations. The
+resistant campaign records the paired original mass interval, normalized
+contrast and per-donor charge vectors on baseline survivors. Use fresh
+checkpoint names because the source fingerprints have changed.
+No execution or proof-kernel acceptance performed in this implementation
+handoff; operator confirmation remains required.

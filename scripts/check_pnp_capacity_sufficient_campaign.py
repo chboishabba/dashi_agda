@@ -14,7 +14,7 @@ from check_pnp_adaptive_signed_escape import certificate,reopen,point
 from check_pnp_partial_quotient import block_witness
 HERE=Path(__file__).parent
 out=Path(sys.argv[1]) if len(sys.argv)>1 else HERE/'capacity-sufficient-checkpoint.json'
-files=sorted(HERE.glob('check_pnp_*.py'))+[HERE/'check_p0_signed_conflict_20261126.py']
+files=sorted(HERE.glob('check_pnp_*.py'))+[HERE/'check_p0_signed_conflict_20261126.py',HERE/'check_p0_affine_forest_20261125.py']
 key=hashlib.sha256(b''.join(p.name.encode()+b'\0'+p.read_bytes() for p in files)).hexdigest()
 state=json.loads(out.read_text()) if out.exists() else dict(key=key,cases=[])
 assert state['key']==key
@@ -84,7 +84,8 @@ if 'original_30' not in seen:
     S=[(2,10,15),(7,9,12),(3,4,14),(0,6,16),(1,5,13),(8,11,17),(9,15,16),(0,8,14),(2,6,17),(5,10,13),(1,3,12),(4,7,11),(3,11,12),(1,2,6),(0,7,14),(4,9,15),(10,13,17),(5,8,16),(0,1,14),(4,9,16),(7,12,15),(2,5,17),(3,6,11),(8,10,13),(0,1,9),(4,11,17),(3,6,16),(2,10,12),(5,14,15),(7,8,13)]
     n=30;R=tuple(sum(1<<j for j,T in enumerate(S) if i in T) for i in range(18))
     H=canon((r,1) for r in R);u,V=chart(n,H);A=Matrix(18,n,lambda i,j:R[i]>>j&1)
-    T=[x for z in range(1<<len(V)) if all((r&(x:=lift(u,V,z))).bit_count()==1 for r in R)]
+    X=[lift(u,V,z) for z in range(1<<len(V))]
+    T=[x for x in X if all((r&x).bit_count()==1 for r in R)]
     assert len(T)==7
     B=Budget(100_000_000);a=8
     I=observe(n,R,H,(1,)*18,Allowance(B,10_000_000),a)

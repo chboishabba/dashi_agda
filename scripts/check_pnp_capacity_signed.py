@@ -141,7 +141,7 @@ def observe_ledger(L,H,caps,normal,B,cell_cap=128,leaf_cap=8,seam_cap=8):
     out=[Bound(0,0),Bound(0,0)]
     for j,Q in enumerate(cells):
         A=Allowance(B,B.left//(len(cells)-j))
-        I=observe(L.n,L.R,Q,caps,A,normal)
+        I=observe(L.n,L.R,Q,caps,Allowance(A,A.left//2),normal)
         for b,v in enumerate(I):
             P=canon(Q+((normal,b),))
             if P is not None and v.lower!=v.upper and v.witness is None:

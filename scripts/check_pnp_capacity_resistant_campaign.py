@@ -12,12 +12,13 @@ from check_pnp_affine_normal_components import Budget,Exhausted,canon,chart,bits
 from check_pnp_normal_boundary_join import tree,value
 from check_pnp_exact_cover_pair_hull import affine_disjunctive_close
 from check_pnp_character_ideal import demand_character_close
-from check_pnp_demand_strata import bounded_fold,solve_cover,Ledger,ProbeLimit
+from check_pnp_demand_strata import bounded_fold,solve_cover,Ledger,ProbeLimit,Allowance,choose_normal
+from check_pnp_capacity_signed import observe_ledger,relative
 from check_pnp_capacity_contraction import contract
 HERE=Path(__file__).parent
 out=Path(sys.argv[1]) if len(sys.argv)>1 else HERE/'capacity-resistant-checkpoint.json'
 # Fingerprint all direct Python donors, not just the outer script.
-files=sorted(HERE.glob('check_pnp_*.py'))+[HERE/'check_p0_affine_forest_20261125.py']
+files=sorted(HERE.glob('check_pnp_*.py'))+[HERE/'check_p0_affine_forest_20261125.py',HERE/'check_p0_signed_conflict_20261126.py']
 key=hashlib.sha256(b''.join(p.name.encode()+b'\0'+p.read_bytes() for p in files)).hexdigest()
 state=json.loads(out.read_text()) if out.exists() else dict(key=key,cases=[])
 assert state['key']==key
@@ -62,7 +63,7 @@ for m in (18,24,30,36,42):
                 ('character',lambda B:demand_character_close(n,F,P,B,degree=1,max_pivots=256,section_cap=8,path_steps=8,adaptive_nodes=8,adaptive_provenance=True)),
                 ('separator',lambda B:bounded_fold(n,R,P,(1,)*m,B,8,8))):
                 z,stats,status=run(fn)
-                entry=dict(status=status,charged=sum(stats.values()))
+                entry=dict(status=status,charged=sum(stats.values()),charges=stats)
                 if z is not None:
                     Q,y=z
                     if lane!='separator':
@@ -74,6 +75,22 @@ for m in (18,24,30,36,42):
             # Run new producers on a genuine baseline refusal, not only easy cases.
             survived=found is None
             if survived:
+                def signed(B):
+                    a=choose_normal(n,R,P,Allowance(B,B.left//4))
+                    if a is None:return None
+                    I=observe_ledger(Ledger(n,R,P),P,(1,)*m,a,B)
+                    return a,I
+                z,stats,status=run(signed)
+                entry=dict(status=status,charged=sum(stats.values()),charges=stats)
+                if z is not None:
+                    a,I=z;D=relative(I);entry['normal']=a
+                    entry['bounds']=[[v.lower,v.upper] for v in I]
+                    entry['relative']=None if D is None else list(map(str,D))
+                    assert sum(v.upper for v in I)>0
+                    for v in I:
+                        if v.witness is not None:
+                            check(v.witness);entry['witness']=v.witness;found=v.witness
+                observations['paired_signed']=entry
                 for lane,fn in (
                     ('collective',lambda B:contract(n,R,P,(1,)*m,B)),
                     ('demand_portfolio',lambda B:solve_cover(n,R,P,B,leaf_cap=8,seam_cap=8,nodes=12,probe_cap=1_000_000,donor_depth=1,character_degree=1))):

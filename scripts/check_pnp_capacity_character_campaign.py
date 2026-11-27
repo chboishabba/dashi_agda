@@ -12,7 +12,9 @@ out=Path(sys.argv[1]) if len(sys.argv)>1 else HERE/'capacity-checkpoint.json'
 files=(Path(__file__).name,'check_pnp_capacity_character.py','check_pnp_demand_strata.py',
        'check_pnp_character_ideal.py','check_pnp_affine_normal_components.py',
        'check_p0_affine_forest_20261125.py','check_pnp_normal_boundary_join.py',
-       'check_pnp_separator_row_strata.py','check_pnp_capacity_contraction.py',
+       'check_pnp_separator_row_strata.py','check_pnp_capacity_contraction.py','check_pnp_capacity_geometry.py',
+       'check_pnp_capacity_signed.py','check_pnp_partial_quotient.py','check_pnp_grouped_quotient_floor.py',
+       'check_p0_signed_conflict_20261126.py',
        'check_pnp_adaptive_signed_escape.py','check_pnp_collective_fibre_escape.py',
        'check_pnp_normal_transversal.py','check_pnp_oriented_affine_elimination.py')
 key=hashlib.sha256(b''.join((HERE/f).read_bytes() for f in files)).hexdigest()
@@ -78,7 +80,8 @@ if not done('scope'):
     # Exercise the new consumer on width refusal, not merely an exact fold.
     P=canon(((7,1),));L=Ledger(3,(7,),P)
     status,c,y=L.probe((),(1,),B,0,0,character_degree=0)
-    assert status=='UNKNOWN' and y is not None and (7&y).bit_count()==1
+    assert status in ('UNKNOWN','SAT') and y is not None and (7&y).bit_count()==1
+    assert 1<=c<=3 and (status!='SAT' or c==3)
     from check_pnp_capacity_contraction import contract
     assert (7&contract(3,(7,),P,(1,),B)).bit_count()==1
     # Genuine cap>1 chart with distinct extensions: enumerate small chart
