@@ -54,6 +54,23 @@ def fourth():
     print('PASS exact fourth jump, 8 independent rational noncommuting series, signed reflection and fourth repair',flush=True)
 
 
+def fourth_trace():
+    # Independent spatial scalar constraint differentiated twice.
+    j,m,q3,t,b,d,c=s.symbols('j m q3 t b d c');q=q3+m*m
+    # m=tr M, q3=tr M², t=tr M³, b=tr D, d=tr MD, c=tr mean F (spatial mixed tensors).
+    # R_H'' jump from degree -1 scalar scaling and mean first constraint.
+    rhdd=-16*j*(c-5*d+6*t+m*(b-2*q3))
+    ac=j*((4+q)*m-12*t+c);a2b=2*j*d;a4=4*j*t+j**3*m
+    tp2=-8*j*m*(b-2*q3-3*j*j/2)
+    ttpp=m*j*(12+15*q3+3*m*m-6*b+6*j*j)+3*j*(c-6*d+8*t+6*j*j*m)
+    spatial=s.expand((rhdd+14*ac-76*a2b+72*a4-2*(tp2+ttpp))/2)
+    B0=4+q+j*j-b
+    target=j*((40+6*j*j-2*q)*m-24*d-4*c+3*(2*(d-m*B0)-4*(t-m**3)))
+    assert z(spatial-target)
+    assert z(spatial-j*(6*b*m-4*c-18*d+4*m**3-8*m*q3+16*m-12*t))
+    print('PASS spatial twice-differentiated scalar trace equals full spacetime fourth jump trace',flush=True)
+
+
 def flatten():
     # Arbitrary Lorentz tangential block, nonzero shift, lapse lambda>0.
     h=s.Matrix([[-3,1,0,0],[1,4,1,0],[0,1,5,1],[0,0,1,2]])
@@ -129,4 +146,4 @@ def moving_symbol():
     print('PASS graph mean curvature and leading moving-interface normal-mode cancellation (not full symbol)',flush=True)
 
 
-if __name__=='__main__':fourth();flatten();energy();adS_scalar();moving_symbol()
+if __name__=='__main__':fourth();fourth_trace();flatten();energy();adS_scalar();moving_symbol()
