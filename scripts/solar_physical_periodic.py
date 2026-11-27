@@ -11,6 +11,7 @@ from scipy.constants import epsilon_0, mu_0, elementary_charge as e, electron_ma
 from scipy.linalg import solve
 from scipy.optimize import brentq
 from scipy.optimize import minimize
+from scipy.optimize import differential_evolution
 from solar_earth_model_inputs import radar
 from solar_earth_collision_tensor import rates, composition
 from solar_earth_coupled_cell import generator
@@ -213,6 +214,35 @@ def reverse_activation(material,cfg,geo,target_J):
     a=min(feasible); out=run(a)
     return dict(status='FEASIBLE_RAY_WITNESS',amplitude_W=a,paid_J=out['paid_J'],target_residual_J=out['load_J']+out['ground_J']-target_J,amplitudes_W=amps.tolist(),signed_residual_J=vals)
 
+def unrestricted(material,cfg,active):
+    """Optimize positive area allocations on fixed independently supplied sites.
+    The incident budget is the certified universal energy upper bound.
+    Differential evolution supplies a feasible lower bound, not a certificate
+    of global optimality. Keep the exact resource simplex and source fixed.
+    """
+    source=np.asarray(cfg['incident_sqrt_W'],float)
+    n=len(material[0]); N=len(source); area=float(sum(cfg['areas_m2']))
+    shape=np.asarray(cfg['heating_shape'],float)
+    if n<1 or area<=0: raise ValueError('positive area and sites')
+    floor=float(cfg.get('minimum_area_fraction',1e-8))
+    if not 0<floor<1/n: raise ValueError('invalid area floor')
+    def unpack(v):
+        w=np.exp(v[:n]-np.max(v[:n])); w/=w.sum()
+        a=area*(floor+(1-n*floor)*w)
+        return a,float(v[-1]) if active else 0.
+    def run(v):
+        a,h=unpack(v)
+        return solve_model(material,cfg,h*shape,source,cfg['normals'],a)
+    bounds=[(-8.,8.)]*n+([(0.,cfg['max_heating_W'])] if active else [])
+    opt=differential_evolution(lambda v:-run(v)['net_J'],bounds,seed=369,
+        maxiter=int(cfg.get('geometry_maxiter',12)),popsize=5,polish=True)
+    a,h=unpack(opt.x); w=run(opt.x)
+    assert np.isclose(a.sum(),area) and w['net_J']<=w['incident_J']+1e-8*max(w['incident_J'],1e-20)
+    return dict(areas_m2=a.tolist(),amplitude_W=h,net_J=w['net_J'],
+        universal_upper_J=w['incident_J'],gap_J=w['incident_J']-w['net_J'],
+        optimizer_success=bool(opt.success),evaluations=int(opt.nfev),
+        domain='fixed sites, positive area simplex, bounded logit chart; not all possible shapes')
+
 def compare(material,cfg):
     source=np.asarray(cfg['incident_sqrt_W'],float); N=len(source); n=len(material[0]); zero=np.zeros((N,n))
     # Explicit oriented surface samples for every aspect ratio, same resource area.
@@ -229,7 +259,11 @@ def compare(material,cfg):
         trim=lambda a:{k:v for k,v in a.items() if not isinstance(v,np.ndarray)}
         rows.append(dict(geometry=name,amplitude_W=float(result.x[0]),optimizer_success=bool(result.success),passive=trim(base),active=trim(active),source_off=trim(off)))
     inverse={name:reverse_activation(material,cfg,geo,cfg['target_useful_J']) for name,geo in cfg['geometries'].items()} if 'target_useful_J' in cfg else {}
-    return dict(rows=rows,inverse=inverse,best_tested_passive_J=best,unrestricted_passive_upper_J=rows[0]['passive']['incident_J'],physical_admission=False,scope='Explicit input geometry, fixed populations, SI periodic Galerkin model; independently supplied static port and skew curl; no measured actuator, source or global optimum inferred.')
+    free={}
+    if cfg.get('optimize_unrestricted',False):
+        free={label:unrestricted(material,cfg,active) for label,active in [('passive',False),('active',True)]}
+        best=max(best,free['passive']['net_J'])
+    return dict(rows=rows,inverse=inverse,unrestricted=free,best_tested_passive_J=best,unrestricted_passive_upper_J=rows[0]['passive']['incident_J'],physical_admission=False,scope='Explicit input geometry, prescribed positive population cycles or fixed populations, SI periodic Galerkin model; independently supplied static port and skew curl; no measured actuator, source or global optimum inferred.')
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('root',type=Path); p.add_argument('packet',type=Path); p.add_argument('config',type=Path); a=p.parse_args()
