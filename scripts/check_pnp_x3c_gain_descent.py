@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False,exchange_rank=-1,exchange_probe_cap=1000000,exchange_small=5,exchange_rado=False,exchange_tagged=False,exchange_history=None,exchange_strata_rank=-1):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False,exchange_rank=-1,exchange_probe_cap=1000000,exchange_small=5,exchange_rado=False,exchange_tagged=False,exchange_history=None,exchange_strata_rank=-1,exchange_seam_rank=-1,exchange_seam_leaf=8):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -147,6 +147,13 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
             if cover(R,y):return y,B.stats,True
             character_degree=-1 # same source/demand already observed
         x=chart(n,P)[0]
+        if exchange_seam_rank>=0:
+            from check_pnp_separator_row_strata import descent as seam_descent
+            result=seam_descent(n,R,P,x,B,exchange_seam_leaf,exchange_seam_rank,exchange_history,refinement)
+            if result is not None:
+                y,done=result
+                if y is not None:assert satisfies(y,P,()) and cover(R,y)
+                return y,B.stats,done
         if exchange_strata_rank>=0:
             from check_pnp_shared_row_strata import descent as strata_descent
             result=strata_descent(n,R,P,x,B,exchange_strata_rank,exchange_history,refinement)
