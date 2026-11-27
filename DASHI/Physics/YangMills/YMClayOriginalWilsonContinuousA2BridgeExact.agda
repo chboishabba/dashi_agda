@@ -632,6 +632,7 @@ record ContinuousWilsonArithmetic
       (∀ x → h x ≤ℝ M) →
       goodMean ≡ E (λ x → (1ℝ -ℝ χ x) *ℝ h x) →
       q ≡ E χ →
+      0ℝ <ℝ 1ℝ -ℝ q →
       (m *ℝ q ≤ℝ E (λ x → χ x *ℝ h x)) ×
       (E (λ x → χ x *ℝ h x) ≤ℝ M *ℝ q) ×
       (m ≤ℝ Quotient.divide quotient goodMean (1ℝ -ℝ q)) ×
@@ -1480,12 +1481,13 @@ module _
 
   restrictedBounds :
     ∀ contours h m M →
+    0ℝ <ℝ goodMass contours →
     (∀ links → m ≤ℝ h links) →
     (∀ links → h links ≤ℝ M) →
     (m *ℝ q contours ≤ℝ μ (λ links → χ contours links *ℝ h links)) ×
     (μ (λ links → χ contours links *ℝ h links) ≤ℝ M *ℝ q contours) ×
     (m ≤ℝ ν contours h) × (ν contours h ≤ℝ M)
-  restrictedBounds contours h m M lower upper =
+  restrictedBounds contours h m M strictGood lower upper =
     ContinuousWilsonArithmetic.meanRestrictionBounds arithmetic
       μ
       (ContinuousExpectationAlgebra.EAdd expectationAlgebra)
@@ -1497,12 +1499,15 @@ module _
       (λ links → proj₁ (badContourCutoffRange contours links))
       (λ links → proj₂ (badContourCutoffRange contours links))
       lower upper refl refl
+      (ContinuousWilsonArithmetic.subPositiveOfLess arithmetic
+        (qLessOne contours strictGood))
 
   νUnitBounds : ∀ contours h → (∀ links → 0ℝ ≤ℝ h links) →
     (∀ links → h links ≤ℝ 1ℝ) →
+    0ℝ <ℝ goodMass contours →
     (0ℝ ≤ℝ ν contours h) × (ν contours h ≤ℝ 1ℝ)
-  νUnitBounds contours h lower upper =
-    let bounds = restrictedBounds contours h 0ℝ 1ℝ lower upper
+  νUnitBounds contours h lower upper strictGood =
+    let bounds = restrictedBounds contours h 0ℝ 1ℝ strictGood lower upper
     in proj₁ (proj₂ (proj₂ bounds)) , proj₂ (proj₂ (proj₂ bounds))
 
   μMinusν : ∀ contours h →
@@ -1577,8 +1582,8 @@ module _
   covarianceGapBound contours f g fLower fUpper gLower gUpper strictGood =
     let μfBounds = expectationUnitBounds f fLower fUpper
         μgBounds = expectationUnitBounds g gLower gUpper
-        νfBounds = νUnitBounds contours f fLower fUpper
-        νgBounds = νUnitBounds contours g gLower gUpper
+        νfBounds = νUnitBounds contours f fLower fUpper strictGood
+        νgBounds = νUnitBounds contours g gLower gUpper strictGood
         a = Quotient.divide quotient (μ f +ℝ ν contours f) (1ℝ +ℝ 1ℝ)
         b = Quotient.divide quotient (μ g +ℝ ν contours g) (1ℝ +ℝ 1ℝ)
         aNN = ContinuousWilsonArithmetic.halfNonnegative arithmetic
@@ -1610,7 +1615,7 @@ module _
           ContinuousWilsonArithmetic.negOneOneProductBounds arithmetic
             (proj₁ (fDiffBounds links)) (proj₂ (fDiffBounds links))
             (proj₁ (gDiffBounds links)) (proj₂ (gDiffBounds links))
-        hRestricted = restrictedBounds contours h (0ℝ -ℝ 1ℝ) 1ℝ
+        hRestricted = restrictedBounds contours h (0ℝ -ℝ 1ℝ) 1ℝ strictGood
           (λ links → proj₁ (hBounds links))
           (λ links → proj₂ (hBounds links))
         shiftEquality = μMinusν contours h
@@ -1669,7 +1674,7 @@ module _
           ContinuousWilsonArithmetic.signedProductBounds arithmetic
             (proj₁ (fDiffBounds links)) (proj₂ (fDiffBounds links))
             (proj₁ (gDiffBounds links)) (proj₂ (gDiffBounds links))
-        hRestricted = restrictedBounds contours h (0ℝ -ℝ fourℝ) fourℝ
+        hRestricted = restrictedBounds contours h (0ℝ -ℝ fourℝ) fourℝ strictGood
           (λ links → proj₁ (hBounds links))
           (λ links → proj₂ (hBounds links))
         shiftEquality = μMinusν contours h
@@ -1717,7 +1722,7 @@ module _
         lower = CenteredProductOscillation.lower oscillation
         upper = CenteredProductOscillation.upper oscillation
         h = λ links → (f links -ℝ a) *ℝ (g links -ℝ b)
-        hRestricted = restrictedBounds contours h lower upper
+        hRestricted = restrictedBounds contours h lower upper strictGood
           (λ links → CenteredProductOscillation.lowerBound oscillation
             (f links) (g links) (fRange links) (gRange links))
           (λ links → CenteredProductOscillation.upperBound oscillation
