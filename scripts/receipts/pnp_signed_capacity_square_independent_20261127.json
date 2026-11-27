@@ -1,0 +1,124 @@
+{
+  "status": "local transcribed donor replay plus independent JavaScript receipt reconstruction; full repository campaign and native kernels not run",
+  "source_heads": {
+    "agda": "c8c917cd37dc08f42cf42261f4960f726c36f63d",
+    "lean": "af144494fd74b6b95e99be2f4abd7db7dcacb8f7"
+  },
+  "small": {
+    "observations": 243,
+    "origin": 223,
+    "floor": 14,
+    "one_round_forced_normals": 6,
+    "unknown": 0,
+    "square_checks": 68,
+    "composition_checks": 68,
+    "point_checks": 248
+  },
+  "pin_coset": {
+    "checks": 1800,
+    "pointwise": 102200
+  },
+  "large": {
+    "name": "24_9_2",
+    "n": 72,
+    "m": 24,
+    "dimension": 48,
+    "baseline": {
+      "steps": 16,
+      "charged": 171888,
+      "witness": "2314859004838281353",
+      "upper": "8796109799425",
+      "square_checks": 696
+    },
+    "initial_signed_screen": {
+      "steps": 16,
+      "charged": 18650044,
+      "witness": "2314859004838281353",
+      "square_checks": 960
+    },
+    "optimized_signed_screen": {
+      "steps": 16,
+      "charged": 489250,
+      "witness": "2314859004838281353",
+      "upper": "8796109799425",
+      "square_checks": 864,
+      "empty_by_floor": 6,
+      "empty_by_pin_conflict": 3,
+      "nonempty_hull_closures": 7
+    },
+    "baseline_hull_dimensions": [
+      48,
+      28,
+      15,
+      null,
+      null,
+      null,
+      15,
+      null,
+      null,
+      13,
+      null,
+      null,
+      15,
+      null,
+      null,
+      0
+    ],
+    "baseline_entry_dimensions": [
+      48,
+      40,
+      24,
+      13,
+      13,
+      13,
+      24,
+      14,
+      14,
+      24,
+      12,
+      12,
+      24,
+      13,
+      13,
+      13
+    ],
+    "optimized_signed_dimensions": [
+      48,
+      28,
+      15,
+      null,
+      null,
+      null,
+      15,
+      null,
+      null,
+      13,
+      null,
+      null,
+      15,
+      null,
+      null,
+      8
+    ],
+    "last_entry": {
+      "dimension": 13,
+      "constant_twice": 108,
+      "modes": 90,
+      "violated": 6
+    },
+    "last_signed": {
+      "dimension": 8,
+      "constant_twice": 87,
+      "modes": 67,
+      "violated": 5
+    },
+    "terminal": {
+      "dimension": 0,
+      "constant_twice": 48,
+      "modes": 0,
+      "all_safe": 24
+    },
+    "original_matrix_check": "SymPy exact integer row weights all 1",
+    "cost_note": "logical charges; revised signed kernel uses direct coset folding and revised operation accounting, not a wall-time or bit-complexity benchmark"
+  }
+}
