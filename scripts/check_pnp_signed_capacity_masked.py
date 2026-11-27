@@ -56,8 +56,9 @@ def fold(n, factors, B, width=6, audit=None):
     if T is None:return False,None,None,peak
     if not T:return True,None,None,peak
     c,H=T[0];x=chart(n,canon(H))[0]
-    assert all(f(x) is not None for _,f in factors)
-    assert sum(f(x) for _,f in factors)==c
+    B.pay('masked_root_verify',1+sum(1+len(A) for A,_ in factors))
+    costs=[f(x) for _,f in factors]
+    assert all(k is not None for k in costs) and sum(costs)==c
     return True,c,x,peak
 
 
@@ -96,11 +97,10 @@ def screen(n,R,H,caps,B,width=6,audit=None):
     Return the same triple as implication.screen. Refusal retains the refined
     carrier. Budget exhaustion is handled by the existing outer consumer.
     """
-    obs=[]
-    K,y,why=implication(n,R,H,caps,B,audit=obs)
-    if audit is not None:audit.extend(obs)
+    F0=[]
+    K,y,why=implication(n,R,H,caps,B,audit=audit,retained=F0)
     if K is None or y is not None or why!='imp_stalled':return K,y,why
-    F0=obs[-1]['retained_original_flats']
+    F0=tuple(F0)
     B.pay('masked_scope',1+(n+1)*(1+len(K)+sum(1+len(G) for G in F0)))
     u,V,F=restrict(n,K,F0,B)
     d=len(V)
