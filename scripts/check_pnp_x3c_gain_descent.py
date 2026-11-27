@@ -148,14 +148,9 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
             character_degree=-1 # same source/demand already observed
         x=chart(n,P)[0]
         if exchange_demand_nodes>0:
-            from check_pnp_demand_strata import solve_cover
-            y,done=solve_cover(n,R,P,B,leaf_cap=exchange_demand_leaf,seam_cap=exchange_demand_seam,nodes=exchange_demand_nodes,probe_cap=exchange_demand_probe_cap,donor_depth=exchange_demand_depth,character_degree=exchange_demand_character)
-            if y is not None:
-                assert satisfies(y,P,()) and cover(R,y)
-                if exchange_history is not None and y!=x:
-                    q=tuple((r&x).bit_count()-(r&y).bit_count() for r in R)
-                    assert all(a>=0 and a%2==0 for a in q)
-                    exchange_history.append((refinement,0,x,x^y,q,B.left))
+            from check_pnp_demand_exchange import descent as demand_descent
+            y,done=demand_descent(n,R,P,x,B,leaf_cap=exchange_demand_leaf,seam_cap=exchange_demand_seam,nodes=exchange_demand_nodes,probe_cap=exchange_demand_probe_cap,donor_depth=exchange_demand_depth,character_degree=exchange_demand_character,history=exchange_history,k_index=refinement)
+            if y is not None:assert satisfies(y,P,()) and cover(R,y)
             if done:return y,B.stats,True
         if exchange_seam_rank>=0:
             from check_pnp_separator_row_strata import descent as seam_descent
