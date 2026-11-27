@@ -152,8 +152,9 @@ point1 q =
   let a = + S.a q
       b = + S.b q
       d = ((+ 2) * (zpow a 1 * zpow b 1))
-  in trans (cong ((+ 6) *_) (deltaFrom (S.weight1 (a + b) b) (S.weight1 a b) d
-       (trans (S.difference1 a b) (cong (S.weight1 a b +_) (solve 2 (λ a b → (con (+ 2) :* (a :* b)) := (con (+ 2) :* ((a :* con (+ 1)) :* (b :* con (+ 1))))) refl a b)))))
+  in trans (cong ((+ 6) *_) (deltaFrom (B.Gplus S.weight1 q) (S.weight1 a b) d
+       (trans (cong (λ z → S.weight1 z b) (Z.pos-+ (S.a q) (S.b q)))
+         (trans (S.difference1 a b) (cong (S.weight1 a b +_) (solve 2 (λ a b → (con (+ 2) :* (a :* b)) := (con (+ 2) :* ((a :* con (+ 1)) :* (b :* con (+ 1))))) refl a b))))))
     (trans (solve 2 (λ a b → (con (+ 6) :* (con (+ 2) :* ((a :* con (+ 1)) :* (b :* con (+ 1))))) := ((con (+ 12) :* ((a :* con (+ 1)) :* (b :* con (+ 1)))) :+ con (+ 0))) refl a b)
       (polyCong monomials1 (λ k l → zpow a k * zpow b l) (λ k l → V.weight k l q)
         (λ k l → trans (cong (_* zpow b l) (sym (powEmbed (S.a q) k)))
@@ -184,8 +185,9 @@ point2 q =
   let a = + S.a q
       b = + S.b q
       d = (((+ 4) * (zpow a 3 * zpow b 1)) + ((+ 4) * (zpow a 1 * zpow b 3)))
-  in trans (cong ((+ 30) *_) (deltaFrom (S.weight2 (a + b) b) (S.weight2 a b) d
-       (trans (S.difference2 a b) (cong (S.weight2 a b +_) (solve 2 (λ a b → ((con (+ 4) :* ((a :* (a :* a)) :* b)) :+ (con (+ 4) :* (a :* (b :* (b :* b))))) := ((con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* con (+ 1)))) :+ (con (+ 4) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* con (+ 1)))))))) refl a b)))))
+  in trans (cong ((+ 30) *_) (deltaFrom (B.Gplus S.weight2 q) (S.weight2 a b) d
+       (trans (cong (λ z → S.weight2 z b) (Z.pos-+ (S.a q) (S.b q)))
+         (trans (S.difference2 a b) (cong (S.weight2 a b +_) (solve 2 (λ a b → ((con (+ 4) :* ((a :* (a :* a)) :* b)) :+ (con (+ 4) :* (a :* (b :* (b :* b))))) := ((con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* con (+ 1)))) :+ (con (+ 4) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* con (+ 1)))))))) refl a b))))))
     (trans (solve 2 (λ a b → (con (+ 30) :* ((con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* con (+ 1)))) :+ (con (+ 4) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* con (+ 1)))))))) := ((con (+ 120) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* con (+ 1)))) :+ ((con (+ 120) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* con (+ 1)))))) :+ con (+ 0)))) refl a b)
       (polyCong monomials2 (λ k l → zpow a k * zpow b l) (λ k l → V.weight k l q)
         (λ k l → trans (cong (_* zpow b l) (sym (powEmbed (S.a q) k)))
@@ -216,8 +218,9 @@ point3 q =
   let a = + S.a q
       b = + S.b q
       d = ((((+ 6) * (zpow a 5 * zpow b 1)) + ((+ 14) * (zpow a 3 * zpow b 3))) + ((+ 6) * (zpow a 1 * zpow b 5)))
-  in trans (cong ((+ 420) *_) (deltaFrom (S.weight3 (a + b) b) (S.weight3 a b) d
-       (trans (S.difference3 a b) (cong (S.weight3 a b +_) (solve 2 (λ a b → (((con (+ 6) :* ((a :* (a :* (a :* (a :* a)))) :* b)) :+ (con (+ 14) :* ((a :* (a :* a)) :* (b :* (b :* b))))) :+ (con (+ 6) :* (a :* (b :* (b :* (b :* (b :* b))))))) := (((con (+ 6) :* ((a :* (a :* (a :* (a :* (a :* con (+ 1)))))) :* (b :* con (+ 1)))) :+ (con (+ 14) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) :+ (con (+ 6) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* (b :* (b :* con (+ 1)))))))))) refl a b)))))
+  in trans (cong ((+ 420) *_) (deltaFrom (B.Gplus S.weight3 q) (S.weight3 a b) d
+       (trans (cong (λ z → S.weight3 z b) (Z.pos-+ (S.a q) (S.b q)))
+         (trans (S.difference3 a b) (cong (S.weight3 a b +_) (solve 2 (λ a b → (((con (+ 6) :* ((a :* (a :* (a :* (a :* a)))) :* b)) :+ (con (+ 14) :* ((a :* (a :* a)) :* (b :* (b :* b))))) :+ (con (+ 6) :* (a :* (b :* (b :* (b :* (b :* b))))))) := (((con (+ 6) :* ((a :* (a :* (a :* (a :* (a :* con (+ 1)))))) :* (b :* con (+ 1)))) :+ (con (+ 14) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) :+ (con (+ 6) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* (b :* (b :* con (+ 1)))))))))) refl a b))))))
     (trans (solve 2 (λ a b → (con (+ 420) :* (((con (+ 6) :* ((a :* (a :* (a :* (a :* (a :* con (+ 1)))))) :* (b :* con (+ 1)))) :+ (con (+ 14) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) :+ (con (+ 6) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* (b :* (b :* con (+ 1)))))))))) := ((con (+ 2520) :* ((a :* (a :* (a :* (a :* (a :* con (+ 1)))))) :* (b :* con (+ 1)))) :+ ((con (+ 5880) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1)))))) :+ ((con (+ 2520) :* ((a :* con (+ 1)) :* (b :* (b :* (b :* (b :* (b :* con (+ 1)))))))) :+ con (+ 0))))) refl a b)
       (polyCong monomials3 (λ k l → zpow a k * zpow b l) (λ k l → V.weight k l q)
         (λ k l → trans (cong (_* zpow b l) (sym (powEmbed (S.a q) k)))
@@ -248,8 +251,9 @@ point4 q =
   let a = + S.a q
       b = + S.b q
       d = ((+ 4) * (zpow a 3 * zpow b 3))
-  in trans (cong ((+ 30) *_) (deltaFrom (S.weight4 (a + b) b) (S.weight4 a b) d
-       (trans (S.difference4 a b) (cong (S.weight4 a b +_) (solve 2 (λ a b → (con (+ 4) :* ((a :* (a :* a)) :* (b :* (b :* b)))) := (con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) refl a b)))))
+  in trans (cong ((+ 30) *_) (deltaFrom (B.Gplus S.weight4 q) (S.weight4 a b) d
+       (trans (cong (λ z → S.weight4 z b) (Z.pos-+ (S.a q) (S.b q)))
+         (trans (S.difference4 a b) (cong (S.weight4 a b +_) (solve 2 (λ a b → (con (+ 4) :* ((a :* (a :* a)) :* (b :* (b :* b)))) := (con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) refl a b))))))
     (trans (solve 2 (λ a b → (con (+ 30) :* (con (+ 4) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1))))))) := ((con (+ 120) :* ((a :* (a :* (a :* con (+ 1)))) :* (b :* (b :* (b :* con (+ 1)))))) :+ con (+ 0))) refl a b)
       (polyCong monomials4 (λ k l → zpow a k * zpow b l) (λ k l → V.weight k l q)
         (λ k l → trans (cong (_* zpow b l) (sym (powEmbed (S.a q) k)))
