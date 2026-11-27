@@ -1,0 +1,119 @@
+{
+  "scope": "Actual local Python tests with manually transcribed donor and collector logic; original coordinate witness verification with SymPy. Local donor observe/portfolio transcription omitted logical charge accounting; this is correctness evidence, not a work-unit comparison or full checkout test. Optional audit instrumentation added afterward and not executed in this replay.",
+  "seed": 3692713,
+  "screen_seed": 3692714,
+  "counts": {
+    "flat_sources": 840,
+    "flat_empty_truth": 105,
+    "flat_cert_empty": 105,
+    "flat_forced": 308,
+    "flat_stall": 427,
+    "flat_refutations": 1243,
+    "flat_flat_conflict": 478,
+    "flat_parity_conflict": 765,
+    "capacity_sources": 500,
+    "capacity_empty_truth": 175,
+    "capacity_unique": 72,
+    "capacity_receipts": 2579,
+    "capacity_collector_empty": 9,
+    "capacity_gain": 16,
+    "capacity_rank2_stall": 138,
+    "capacity_observer_empty": 164,
+    "capacity_conditioned_floor": 11,
+    "capacity_rank2_stall_gain": 2,
+    "capacity_parity_conflict": 12,
+    "capacity_flat_conflict": 4
+  },
+  "example": {
+    "M": [
+      {
+        "0": 10,
+        "12": 2,
+        "14": 2,
+        "16": -2,
+        "22": -2
+      },
+      {
+        "0": 10,
+        "11": 2,
+        "15": 2,
+        "17": -2,
+        "24": 2
+      },
+      {
+        "0": 6,
+        "4": 2,
+        "16": 2
+      }
+    ],
+    "caps": [
+      3,
+      9,
+      3
+    ],
+    "truth": [
+      4,
+      5,
+      6,
+      7,
+      14,
+      15,
+      20,
+      21
+    ],
+    "base": [],
+    "result": [
+      [
+        4,
+        1
+      ]
+    ],
+    "trace": [
+      [
+        [
+          [
+            4,
+            0
+          ]
+        ],
+        "parity_conflict"
+      ]
+    ]
+  },
+  "chains": [
+    {
+      "dimension": 4,
+      "rank": 1,
+      "refutations": 1
+    },
+    {
+      "dimension": 8,
+      "rank": 1,
+      "refutations": 1
+    },
+    {
+      "dimension": 16,
+      "rank": 1,
+      "refutations": 1
+    },
+    {
+      "dimension": 32,
+      "rank": 1,
+      "refutations": 1
+    },
+    {
+      "dimension": 64,
+      "rank": 1,
+      "refutations": 1
+    }
+  ],
+  "screen": {
+    "origin": 210,
+    "truth_empty": 138,
+    "imp_stalled": 52,
+    "stalled_empty": 0,
+    "rank2_empty": 131,
+    "imp_empty": 7
+  },
+  "limitations": "Chain controls use explicit forbidden flats plus signed final row, not an end-to-end rank-two discovery campaign at dimension 64. Small fixtures have dimensions 2–8; remaining 2 of 175 no-instances in first-round capacity campaign not certified at that round. 52 inhabited end-to-end stalls are not solved by this observer. Native Agda/Lean rule sources unrun."
+}
