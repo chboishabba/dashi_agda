@@ -108,7 +108,6 @@ def adS_scalar():
     assert s.simplify((3+s.sqrt(9+4*lam/h**2))/2*((3+s.sqrt(9+4*lam/h**2))/2-3)-lam/h**2)==0
     print('PASS AK scalar radial indicial equation, distinct from gravitational tensor modes',flush=True)
 
-
 def moving_symbol():
     # Local principal model, not all lower-order terms of the real moving wall.
     j,L,f=s.symbols('j L f',real=True,nonzero=True)
