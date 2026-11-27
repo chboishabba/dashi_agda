@@ -19,6 +19,7 @@ import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
 import DASHI.Analysis.BishopOriginalExpOriginDerivativeClosedExact as Orig
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopComplexConstantMultiplicationConvergenceExact as Mul
+import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as Ext
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
@@ -230,3 +231,55 @@ module AtDirection (z : BishopComplex) (M : R.ℝ)
         (Lim.convTransport (λ n → complexSym (partialFactor h z n))
           (Lim.addConv (Lim.constantC (A.oneC +C w))
             (scaleConv (R._*_ h h) remainderConv)))
+
+    slope : BishopComplex
+    slope = z +C scaleC h remainder
+
+    incrementFactor : (T : Cartesian.BishopSetoidComplexTranscendentals) →
+      A._-C_ (Weld.originalBishopExpOnSeries T (scaleC h z)) A.oneC ≈C scaleC h slope
+    incrementFactor T =
+      complexTrans (A.subCCongruent (expansion T) (C.≈C-refl _))
+        ((let open P.ℝ-Solver in solve 3
+          (λ h x r → (Κ 1ℚᵘ ⊕ h ⊗ x ⊕ (h ⊗ h) ⊗ r) ⊖ Κ 1ℚᵘ ⊜ h ⊗ (x ⊕ h ⊗ r))
+          P.≃-refl h (C.re z) (C.re remainder)) ,
+         (let open P.ℝ-Solver in solve 3
+          (λ h y r → (Κ 0ℚᵘ ⊕ h ⊗ y ⊕ (h ⊗ h) ⊗ r) ⊖ Κ 0ℚᵘ ⊜ h ⊗ (y ⊕ h ⊗ r))
+          P.≃-refl h (C.im z) (C.im remainder)))
+
+  -- An actual directional divided difference on every bounded null sequence.
+  -- No apartness of the step is necessary; the zero step is admitted.
+  module Along (h : Nat → R.ℝ)
+    (small : ∀ n → R._≤_ (R.∣ h n ∣) R.1ℝ)
+    (null : Seq._ConvergesTo_ h R.0ℝ) where
+    slopeSeq : Nat → BishopComplex
+    slopeSeq n = AtStep.slope (h n) (small n)
+
+    errorSeq : Nat → R.ℝ
+    errorSeq n = R._*_ budget (h n)
+
+    errorNull : Seq._ConvergesTo_ errorSeq R.0ℝ
+    errorNull = Seq.xₙ→x∧x≃y⇒xₙ→y
+      (Mul.originalBishopMultiplyConstantConverges budget h R.0ℝ null)
+      (let open P.ℝ-Solver in solve 1 (λ b → b ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl budget)
+
+    differenceBound : ∀ n x r →
+      R._≤_ (R.∣ r ∣) budget →
+      R._≤_ (R.∣ R._-_ (R._+_ x (R._*_ (h n) r)) x ∣)
+             (R.∣ errorSeq n ∣)
+    differenceBound n x r b =
+      P.≤-respˡ-≃
+        (P.≃-trans (P.∣-∣-cong
+          (let open P.ℝ-Solver in solve 3 (λ h x r → (x ⊕ h ⊗ r) ⊖ x ⊜ h ⊗ r)
+            P.≃-refl (h n) x r))
+          (P.∣x*y∣≃∣x∣*∣y∣ (h n) r))
+        (P.≤-respʳ-≃
+          (P.≃-trans (P.*-comm (R.∣ h n ∣) (R.∣ budget ∣))
+            (P.≃-symm (P.∣x*y∣≃∣x∣*∣y∣ budget (h n))))
+          (P.*-monoˡ-≤-nonNeg (P.≤-trans b P.x≤∣x∣) (P.nonNeg∣x∣ (h n))))
+
+    slopeConverges : Lim.Conv slopeSeq z
+    slopeConverges = original-bishop-pointwise-complex-converges
+      (Vanish.vanishingDifferenceConvergence (Power.constantConverges (C.re z)) errorNull
+        (λ n → differenceBound n (C.re z) _ (AtStep.remainderRealBound (h n) (small n))))
+      (Vanish.vanishingDifferenceConvergence (Power.constantConverges (C.im z)) errorNull
+        (λ n → differenceBound n (C.im z) _ (AtStep.remainderImagBound (h n) (small n))))
