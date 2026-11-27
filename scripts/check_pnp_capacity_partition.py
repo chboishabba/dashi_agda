@@ -44,7 +44,9 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False,signe
             B.pay('row_partition_node',1+n+len(P)+len(I));steps+=1
             if trace is not None:trace('enter',P,I,None)
             if signed_screen:
-                if signed_screen=='cube':
+                if signed_screen=='rank2':
+                    from check_pnp_signed_capacity_rank2 import screen
+                elif signed_screen=='cube':
                     from check_pnp_signed_capacity_cube import screen
                 else:
                     from check_pnp_signed_capacity_square import screen
@@ -117,7 +119,9 @@ def recover_cell(n,R,H,caps,B,signed_screen=False):
     volume=1<<(n-len(H));best=Bound(0,volume)
     if any(c<1 for c in caps):return Bound(0,0)
     if signed_screen:
-        if signed_screen=='cube':
+        if signed_screen=='rank2':
+            from check_pnp_signed_capacity_rank2 import screen
+        elif signed_screen=='cube':
             from check_pnp_signed_capacity_cube import screen
         else:
             from check_pnp_signed_capacity_square import screen
