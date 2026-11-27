@@ -879,3 +879,146 @@ RH existing original admission and BIDI remain; Hodge actual primitive
 cycle/orientation detector remains. These are unchanged in this NS
 implementation tranche. No proof-kernel acceptance, universal BSD/Hodge
 theorem, official prize recognition, or CI claim.
+
+
+## 27 November — actual signed moment progression, rank-six orientation support, external admissions
+
+Native Lean #124 head d93d80ce00a7be9a91c8f9c226580342d67e6874 supplies
+Synthesis/MillenniumBSDSignedMellinMomentProgressionExact.lean and
+Synthesis/MillenniumHodgeRankSixEvenSignOrientationExact.lean. These are
+source-written theorem bodies, not kernel receipts. No added axioms.
+Reuse existing actual crossing and orientation source owners, not new
+generic carriers.
+
+### BSD: unbounded-degree sign progression on the actual 234446.a1 measure
+
+Reuse ClayBSDRankFourTwoCrossingMartingale20261125.md and the existing exact
+Mellin interval certificate scripts/check_clay_bsd_234446_mellin_interval.py.
+The pushforward mu of the original F(t)dt by x=log(t)^2 has two crossings
+0<a<b, sign positive/negative/positive, M_j=int x^j dmu, M_0=0. The existing
+interval certificate proves M_2>0 (Lambda fourth derivative), not M_1=0.
+Let h_n=sum_(k=0..n) a^k b^(n-k). For j>=1 define
+D_j=h_(j-1)x^(j+1)-h_j x^j+(ab)^j.
+Exact all-degree factorization:
+D_j=(x-a)(x-b)Q_j,
+Q_1=1, Q_(j+1)=ab Q_j + h_j x^j.
+Indeed h_(j+1)=(a+b)h_j-ab h_(j-1), so
+D_(j+1)-ab D_j=h_j x^j(x-a)(x-b).
+Q_j>0 for x>=0 and a,b>0 by induction. The integrand D_j dmu has strictly
+positive integral: signs agree outside the actual two roots, there is
+positive density on nonempty intervals, and all polynomial moments
+integrable by original cusp decay. Thus
+h_(j-1) M_(j+1) > h_j M_j,
+and M_j>=0 implies M_(j+1)>0. In particular every M_j for j>=2 is positive
+on this actual source, using the previously certified M_2>0. No rank
+assumption needed for the progression beyond actual M_0=0 and signs.
+
+The Fricke-completed function Lambda(1+z)=2 sum_j M_j z^(2j)/(2j)!;
+expansion and termwise integration follow exponential cusp decay,
+locally uniform for complex z since |cosh(z log t)|<=t^|z|. Hence
+G(z)=Lambda(1+z)/z^2, analytically extended with G(0)=M_1, has strictly
+positive coefficients at every positive even degree. On real z>0
+it is strictly increasing, unbounded (M_2 z^2/12 alone). If M_1<0,
+there is exactly one positive noncentral real zero and its negative
+by reflection, both simple; if M_1>=0 there are none. In the negative
+case the positive zero is <=1/2 by the absolutely convergent nonzero
+Euler product for s>3/2. Exact rank4 remains equivalent to M_1=0,
+while M_1!=0 gives rank2. This is stronger actual global real-axis
+geometry, not arithmetic annihilation. Dirichlet GRH does NOT imply
+GRH for the elliptic modular L-function; even its GRH would at most
+exclude M_1<0, not force equality. No further p-adic jet reconstruction
+as substitute for the still-unpaid analytic/arithmetic comparison.
+Contemporary Zagier BSD Dichotomy https://people.mpim-bonn.mpg.de/zagier/files/preprints/BSD_Dichotomy.pdf
+also identifies actual conductor234446 exact second derivative as open.
+
+### Hodge: direct original sixth-power producer must escape ALL decomposable cycles
+
+Reuse the actual cubic RM K3 S, T rank18 over Q, rank6 over F, actual
+algebraic relative projector, generic independent SO6 factors from
+ClayFourTeichmullerSeparatorAdaptiveOrientation20261126.md and prior
+H-M2 orientation sources. Assumptions remain those of the selected
+original candidate, not a new generic group claim. Over a splitting
+field at an embedding sigma choose an orthogonal basis of T_sigma;
+the orientation functional pairs with six distinct basis slots.
+Any SO6-invariant multilinear tensor component on a nonempty proper
+subset of those distinct indices vanishes: choose one used index
+and one unused index, flip both signs. This matrix preserves the
+quadratic form and has determinant+1. Invariance negates the
+coefficient, hence it is zero in characteristic zero. Full six
+support survives every two-axis sign flip (determinant parity).
+The native rational coefficient proof is #124; the same elementary
+argument holds over the splitting field.
+
+Let Z=S^6 and P project to wedge_F^6 T in H^12(Z,Q), via the actual
+degree-(2,2,2,2,2,2) Kunneth component and field/alternating projection.
+For a product of positive-codimension algebraic cycles of total
+codimension6, with >=2 factors, each contributing Kunneth term assigns
+each of six slots to exactly one factor (K3 has only H^0,H^2,H^4);
+all other degrees in that slot must be zero. For a factor of codimension
+c in 1..5 the term has exactly c distinct H^2 slots. Projection to
+T_sigma in those slots preserves the invariant tensor, because the
+Hodge group acts compatibly with Kunneth and the actual T/F projectors.
+For evaluation on any six-distinct basis tuple, every proper-support
+factor vanishes by the sign flip. All permutation terms in orientation
+pairing therefore vanish. This kills EVERY lower-codimension product,
+not merely divisor products; no claim all cycles are decomposable.
+By linearity it kills the degree-six portion of the subring generated
+by lower positive codimension cycle classes.
+
+Direct positive producer recut: rational Chern character
+K0(Z)_Q -> CH*(Z)_Q is an isomorphism for smooth projective Z.
+Thus an algebraic orientation detector exists iff an actual algebraic
+vector bundle V on Z has P(ch6(V)) !=0 (virtual sums/differences and
+linearity). Newton gives P(ch6(V))=-P(c6(V))/120 since all other terms
+are decomposable in lower Chern classes, killed by the proved result.
+Hence one actual V with P(c6(V))!=0 suffices, via the existing
+field-orbit and residual consumer. This excludes the entire K0
+subalgebra generated by bundles pulled back from proper subproducts:
+their degree-six single terms miss a slot, while mixed positive-degree
+products are killed by the theorem. No such V is constructed; a
+genuine new coupled geometric cycle (or alternate prior spin/Pfaffian
+route) and universal primitive detection remain open. Distinguish
+cohomology orientation projection from actual algebraic representative.
+Classical Kunneth, orthogonal invariant geometry, Newton/Chern character
+credited; DASHI selected six-support obstruction/composition only.
+
+### RH and NS: use the actual external proofs
+
+RH #121 commit 539cc737f0195281d5fdee604ce9b5575a069cd9 updates the existing
+licensed pin with completed MIT and Waterloo independent checks:
+https://math.mit.edu/~drew/shortgrh/ last updated Nov26 20:46 UTC,
+https://mrubinst.github.io/grh-lean-compact-check/ Nov26 05:36 UTC.
+Original source 72fead102f663d5c7a407964a13dc0cf9d977207, compact 794/794
+modules, two MIT paranoid comparator passes, readable 803/803 modules
+and one paranoid comparator pass. All five theorem statements and
+standard three axioms checked. Existing GRH_P0_SOURCE=compact runner
+already rebuilds original literal target and fresh-replays adapter.
+Use compact on local workstation; no root-version/Agda proof transfer
+or local kernel acceptance inferred. Schoenfeld explicit prime bound
+and converse also independently checked in MIT report, optional donor,
+not an independent DASHI result or prerequisite.
+
+NS #123 a4b2e134937ead8f29f3a35a7fdd2f4a0c3958ea repairs original
+axiom-audit format using existing RH info-prefix handling; rejects
+malformed and duplicate axiom lists. Local normal/-O 14/14 parser
+controls PASS, exact matching blob a1663c266e85a297dd6d59895f43ad3de0855cea.
+Original upstream certificate still not released per current
+https://math.observer/problems/navier-stokes-existence-and-smoothness/ ;
+OpenAI official kernel and most independent checkers accept the forced
+construction but written-proof correspondence is under review. Keep
+both source routes and no independent similarity reconstruction
+prerequisite; source-local NS adapters remain untested in native kernel.
+No original certificate or validation data manufactured.
+
+### Acceptance
+
+scripts/check_clay_four_signed_moment_orientation.py committed exact
+blob ba8fe131faf56fa1bb34c309b3004b07c003ba57. Local SymPy normal and -O
+145/145 PASS each (degree0..8 symbolic factorization and positive
+coefficients, 3 signed moment shape controls, all 62 proper nonempty
+six-axis masks and 15 full-support double flips). Exact source readback
+matched local git hash-object. Shape controls not actual Mellin values
+or algebraic cycles; actual continuous derivations above rely on
+existing source certificates and stated hypotheses. No new native
+Agda/Lean kernels available, no CI triggered, no universal BSD or
+Hodge theorem, no external admission locally completed. Four P0 only.
