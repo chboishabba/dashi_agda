@@ -131,8 +131,8 @@ def reduce_blocks(n,F,B):
     return n,F,history
 
 
-def solve(n,required,F,cap):
-    B=Budget(cap)
+def solve(n,required,F,cap,budget=None):
+    B=Budget(cap) if budget is None else budget
     try:
         B.pay('input',n+len(required)+sum(len(G)+1 for G in F)+1)
         q=restrict(n,required,F,B)

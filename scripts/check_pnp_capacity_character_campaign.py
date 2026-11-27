@@ -12,7 +12,9 @@ out=Path(sys.argv[1]) if len(sys.argv)>1 else HERE/'capacity-checkpoint.json'
 files=(Path(__file__).name,'check_pnp_capacity_character.py','check_pnp_demand_strata.py',
        'check_pnp_character_ideal.py','check_pnp_affine_normal_components.py',
        'check_p0_affine_forest_20261125.py','check_pnp_normal_boundary_join.py',
-       'check_pnp_separator_row_strata.py')
+       'check_pnp_separator_row_strata.py','check_pnp_capacity_contraction.py',
+       'check_pnp_adaptive_signed_escape.py','check_pnp_collective_fibre_escape.py',
+       'check_pnp_normal_transversal.py','check_pnp_oriented_affine_elimination.py')
 key=hashlib.sha256(b''.join((HERE/f).read_bytes() for f in files)).hexdigest()
 state=json.loads(out.read_text()) if out.exists() else dict(key=key,cases=[])
 assert state['key']==key
@@ -27,7 +29,7 @@ for seed in range(36):
     R=tuple(rng.randrange(1,1<<n) for _ in range(m));P=canon((r,1) for r in R)
     if P is None:continue
     A=Matrix(m,n,lambda i,j:R[i]>>j&1);u,V=chart(n,P)
-    X=[lift(u,V,z) for z in range(1<<len(V))];B=Budget(300_000_000)
+    X=[lift(u,V,z) for z in range(1<<len(V))];B=Budget(10_000_000_000)
     counts=dict(extensions=0,intervals=0,proofs=0,witnesses=0,refusals=0)
     for t in range(6):
         caps=tuple(rng.randrange(1,1+r.bit_count()) for r in R)
@@ -59,21 +61,26 @@ for seed in range(36):
 if not done('scope'):
     assert conditioned_cut_defect((1,),(2,),(3,))==(1,0,1)
     assert conditioned_cut_defect((1,),(1,),(1,))==(0,1,0)
-    n=4;R=(7,7,7);P=canon(((7,1),));H=canon(P+((1,1),(2,1)))
-    B=Budget(100_000_000);caps=(1,1,1)
+    n=6;R=(7,56);P=canon((r,1) for r in R);H=canon(P+((1,1),(2,1)))
+    B=Budget(100_000_000);caps=(1,1)
     children=[discover_certificate(n,R,canon(H+((8,b),)),caps,B,0) for b in (0,1)]
     assert all(children)
     cert=Certificate('siblings',normal=8,children=tuple(children))
     assert verify_certificate(n,R,H,caps,cert,B)
-    assert not verify_certificate(n,R,H,(3,3,3),cert,B)
+    assert not verify_certificate(n,R,H,(3,3),cert,B)
+    L=Ledger(n,R,P)
+    for b,child in enumerate(children):L.record_character(H+((8,b),),caps,child,B)
+    assert L.join_character_siblings(H,caps,8,B)
     L=Ledger(n,R,P)
     status,c,y=L.probe(H,caps,B,0,0,character_degree=0)
     assert (status,c,y)==('EMPTY',0,None)
-    assert L.probe(H,(3,3,3),B,8,8)[0]=='SAT'
+    assert L.probe(H,(3,3),B,8,8)[0]=='SAT'
     # Exercise the new consumer on width refusal, not merely an exact fold.
-    P=canon(((7,1),));L=Ledger(4,(7,),P)
+    P=canon(((7,1),));L=Ledger(3,(7,),P)
     status,c,y=L.probe((),(1,),B,0,0,character_degree=0)
     assert status=='UNKNOWN' and y is not None and (7&y).bit_count()==1
+    from check_pnp_capacity_contraction import contract
+    assert (7&contract(3,(7,),P,(1,),B)).bit_count()==1
     # Genuine cap>1 chart with distinct extensions: enumerate small chart
     # directly to verify that no additional one-hot extension is admitted.
     R=(15,);P=canon(((15,1),));C=capacity_chart(4,R,P,(3,),B)

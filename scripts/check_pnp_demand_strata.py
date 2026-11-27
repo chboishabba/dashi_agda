@@ -102,6 +102,25 @@ class Ledger:
     def _record(self,H,caps,why,B):
         # Only called after a sound exact consumer or replayed donor returns empty.
         B.pay('demand_cache_record',1+len(H)+len(caps));self.empty.append((H,caps,why))
+    def record_character(self,H,caps,cert,B):
+        from check_pnp_capacity_character import verify_certificate
+        H,caps=self._demand(H,caps)
+        if H is None or not verify_certificate(self.n,self.R,H,caps,cert,B):
+            raise AssertionError('invalid capacity certificate')
+        self._record(H,caps,cert,B)
+    def join_character_siblings(self,H,caps,a,B):
+        from check_pnp_capacity_character import Certificate
+        H,caps=self._demand(H,caps)
+        if H is None:return False
+        Q=tuple(canon(H+((a,b),)) for b in (0,1))
+        if any(q is None or len(q)!=len(H)+1 for q in Q):return False
+        children={}
+        for q,C,why in self.empty:
+            B.pay('demand_sibling_scope',1+len(C)+len(q))
+            if q in Q and C==caps and isinstance(why,Certificate):children[q]=why
+        if len(children)!=2:return False
+        self.record_character(H,caps,Certificate('siblings',normal=a,children=tuple(children[q] for q in Q)),B)
+        return True
     def probe(self,H,caps,B,leaf_cap=8,seam_cap=8,cell_cap=128,character_degree=-1):
         H,caps=self._demand(H,caps)
         if H is None:return 'EMPTY',0,None
@@ -110,11 +129,15 @@ class Ledger:
         # Partial completion can learn exact empty cells, never promote UNKNOWN.
         total=0;y=None;unknown=False
         for Q in cells:
-            ans=bounded_fold(self.n,self.R,Q,caps,B,leaf_cap,seam_cap)
+            if character_degree>=0:
+                try:
+                    ans=bounded_fold(self.n,self.R,Q,caps,Allowance(B,max(0,B.left//3)),leaf_cap,seam_cap)
+                except ProbeLimit:ans=None
+            else:ans=bounded_fold(self.n,self.R,Q,caps,B,leaf_cap,seam_cap)
             if ans is None:
                 if character_degree>=0:
                     from check_pnp_capacity_character import (mass_interval,reopen_positive,
-                        discover_certificate,verify_certificate)
+                        discover_certificate)
                     # Use the same local allowance and original scope; never treat
                     # an incomplete positive mass observation as an exact count.
                     # A forest refusal must not starve the character consumer.
@@ -127,12 +150,16 @@ class Ledger:
                             total+=I[0];y=w if y is None else y;unknown=True;continue
                     except ProbeLimit:pass
                     try:
-                        A=Allowance(B,max(0,B.left))
+                        A=Allowance(B,max(0,B.left//2))
                         cert=discover_certificate(self.n,self.R,Q,caps,A,character_degree)
                         if cert is not None:
-                            if not verify_certificate(self.n,self.R,Q,caps,cert,A):
-                                raise AssertionError('invalid capacity certificate')
-                            self._record(Q,caps,cert,A);continue
+                            self.record_character(Q,caps,cert,A);continue
+                    except ProbeLimit:pass
+                    try:
+                        from check_pnp_capacity_contraction import contract
+                        w=contract(self.n,self.R,Q,caps,Allowance(B,max(0,B.left)))
+                        if w is not None:
+                            total+=1;y=w if y is None else y;unknown=True;continue
                     except ProbeLimit:pass
                 unknown=True;continue
             c,w=ans

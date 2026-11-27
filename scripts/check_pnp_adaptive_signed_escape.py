@@ -96,8 +96,8 @@ def reopen(receipt,y,B):
     return lift(lift(0,U,y),V,z)
 
 
-def adaptive(n,required,F,cap,width=256,envelope=None,admissible_envelope=None):
-    B=Budget(cap)
+def adaptive(n,required,F,cap,width=256,envelope=None,admissible_envelope=None,budget=None):
+    B=Budget(cap) if budget is None else budget
     try:
         B.pay('input',n+len(required)+sum(len(G)+1 for G in F)+1)
         q=restrict(n,required,F,B)

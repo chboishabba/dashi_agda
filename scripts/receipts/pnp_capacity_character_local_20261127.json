@@ -1,0 +1,723 @@
+{
+  "key": "59969716866bef01b062bdf5ef521e90b029923f1f7f5665f27485048e766734",
+  "sympy": "1.14.0",
+  "adapter_git_blob": "91b6de176dc4f076d37bbe4dfb5e771e675af5c0",
+  "scope": "adapter against transcribed inspected donor definitions, not full source integration",
+  "cases": [
+    {
+      "name": "case_0",
+      "extensions": 12,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_1",
+      "extensions": 5,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_2",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_3",
+      "extensions": 6,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_4",
+      "extensions": 7,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_5",
+      "extensions": 12,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 4,
+      "character_proofs": 4,
+      "refusals": 0
+    },
+    {
+      "name": "case_6",
+      "extensions": 6,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_7",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_8",
+      "extensions": 8,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_9",
+      "extensions": 5,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_10",
+      "extensions": 5,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_11",
+      "extensions": 5,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_12",
+      "extensions": 28,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 3,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 4
+    },
+    {
+      "name": "case_13",
+      "extensions": 8,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_14",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_15",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_16",
+      "extensions": 5,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_17",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_18",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_19",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_20",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 5,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 4
+    },
+    {
+      "name": "case_21",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_22",
+      "extensions": 20,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 2
+    },
+    {
+      "name": "case_23",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 3,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 2
+    },
+    {
+      "name": "case_24",
+      "extensions": 10,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_25",
+      "extensions": 6,
+      "intervals": 3,
+      "signed_intervals": 3,
+      "witnesses": 3,
+      "safe_choices": 3,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_26",
+      "extensions": 12,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_27",
+      "extensions": 6,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_28",
+      "extensions": 11,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_29",
+      "extensions": 36,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_30",
+      "extensions": 3,
+      "intervals": 3,
+      "signed_intervals": 3,
+      "witnesses": 3,
+      "safe_choices": 3,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_31",
+      "extensions": 8,
+      "intervals": 3,
+      "signed_intervals": 3,
+      "witnesses": 3,
+      "safe_choices": 3,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_32",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_34",
+      "extensions": 6,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_36",
+      "extensions": 3,
+      "intervals": 2,
+      "signed_intervals": 2,
+      "witnesses": 2,
+      "safe_choices": 2,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_37",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 3,
+      "safe_choices": 4,
+      "proofs": 4,
+      "character_proofs": 4,
+      "refusals": 0
+    },
+    {
+      "name": "case_38",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 4
+    },
+    {
+      "name": "case_39",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_40",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_41",
+      "extensions": 3,
+      "intervals": 3,
+      "signed_intervals": 3,
+      "witnesses": 2,
+      "safe_choices": 2,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_42",
+      "extensions": 5,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_43",
+      "extensions": 12,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_44",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 2
+    },
+    {
+      "name": "case_45",
+      "extensions": 20,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_46",
+      "extensions": 14,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_47",
+      "extensions": 12,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_48",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 1,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_49",
+      "extensions": 2,
+      "intervals": 1,
+      "signed_intervals": 1,
+      "witnesses": 1,
+      "safe_choices": 1,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_50",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_51",
+      "extensions": 4,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_52",
+      "extensions": 96,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 2
+    },
+    {
+      "name": "case_53",
+      "extensions": 32,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_54",
+      "extensions": 16,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_55",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 2,
+      "character_proofs": 2,
+      "refusals": 0
+    },
+    {
+      "name": "case_56",
+      "extensions": 24,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_57",
+      "extensions": 12,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_58",
+      "extensions": 5,
+      "intervals": 3,
+      "signed_intervals": 3,
+      "witnesses": 3,
+      "safe_choices": 3,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_59",
+      "extensions": 12,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 6,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_60",
+      "extensions": 64,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 2,
+      "safe_choices": 6,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_61",
+      "extensions": 14,
+      "intervals": 5,
+      "signed_intervals": 5,
+      "witnesses": 5,
+      "safe_choices": 5,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_62",
+      "extensions": 8,
+      "intervals": 4,
+      "signed_intervals": 4,
+      "witnesses": 4,
+      "safe_choices": 4,
+      "proofs": 0,
+      "character_proofs": 0,
+      "refusals": 0
+    },
+    {
+      "name": "case_63",
+      "extensions": 48,
+      "intervals": 6,
+      "signed_intervals": 6,
+      "witnesses": 4,
+      "safe_choices": 5,
+      "proofs": 1,
+      "character_proofs": 1,
+      "refusals": 6
+    },
+    {
+      "name": "scope",
+      "sibling": "PASS",
+      "capacity_transport": "PASS",
+      "unique_extension_charts": 7,
+      "aux_affine_points": 27216
+    }
+  ],
+  "original_conditioned_control": {
+    "rank": 12,
+    "actual_masses": [
+      6,
+      1
+    ],
+    "forest_intervals": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1024
+      ]
+    ],
+    "signed_interval": [
+      -1024,
+      1536
+    ],
+    "charged": 6241251082,
+    "positive_witnesses": [
+      null,
+      null
+    ]
+  }
+}

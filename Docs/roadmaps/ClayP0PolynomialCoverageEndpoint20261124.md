@@ -563,3 +563,28 @@ at the existing split continuation; only a positive certificate permits
 reopening, both branches otherwise remain. All-cut scoring records removed
 and newly created dependencies separately using the exact mixed-defect identity.
 The scope campaign includes a forced width refusal and mixed-dependency controls.
+
+
+Capacity-contraction follow-up: the demand ledger now exposes scope-checked
+character recording and complementary sibling joining; the shared allowance
+reserves budget for separator, forest, character replay, and the original
+forbidden-flat adaptive/collective donors. Their optional budget argument
+preserves old standalone callers. Constructive contraction results are
+verified in original coordinates; an empty/unknown result is not promoted
+to a replayable character certificate. The new integration campaign has
+not been executed against full source checkout.
+
+Local adapter receipt (exact blob 91b6de176dc4f076d37bbe4dfb5e771e675af5c0;
+inspected/transcribed donor routines; SymPy 1.14.0; timeout 90s; atomic
+checkpoints and successful resume): 62 small sources plus scope controls,
+1764 original extension comparisons, 322 interval and 322 signed-interval
+comparisons, 280 positive forest witnesses, 302 safe choices (some with
+oracle-supplied parent habitation), 33 replayed character contradictions,
+26 bounded proof refusals, 7 exhaustive auxiliary chart comparisons
+over 27216 affine points. The original 30-column conditioned fixture
+has masses 6 and 1; the forest alone gives [0,1536], [0,1024] and signed
+interval [-1024,1536] at 6241251082 logical charges. Thus this scoped
+interval is inadequate on that fixture; it is not a relative approximation
+theorem. Per-source receipt: scripts/receipts/pnp_capacity_character_local_20261127.json.
+W6 source attachment now present; full native integration and uniform
+productive choice remain open. No CI or merges invoked.
