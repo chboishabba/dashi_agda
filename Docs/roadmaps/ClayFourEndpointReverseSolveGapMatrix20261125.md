@@ -1207,3 +1207,179 @@ derivative. Lean/Lake/Agda absent in this runtime; no CI requested.
 The mathematical arguments above and the original external hypotheses
 are separate from finite controls. RH #121 and NS #123 admission paths
 unchanged this tranche; no new kernel acceptance claimed.
+
+
+## 27 November — signed fibre component resolution and central BSD zero disk
+
+Continued actual Dickson Q0 and original rank-four Mellin source; this tranche
+does not claim either universal conjecture. Lean #124 46ca1e990e8b1c388d2838b92952c87357873110.
+
+### Hodge H-M2: the second signed product candidate has zero orientation
+
+This corrects the previous open componentwise question for the explicit
+second candidate, not the existence of algebraic orientation on a generic RM
+K3. Write K=C(z1,...,z5), y_i=z_i for i<=5, y6=(prod z_i)^-1,
+alpha_i=z_(i+1) for i<=4, alpha5=a, alpha6=b, and
+D_i=Q0Discriminant(alpha_i,y_i). The actual cleared discriminant is
+yD(a,y)=-8a^7+y(9a^4-42a^3-5a^2+30a+25)-8y^2.
+
+1. Original four fixed discriminants D1,...,D4 have independent square
+classes in K. The numerator yD has constant nonzero leading coefficients
+in either variable (degree seven in a and two in y), hence no univariate
+irreducible factor. Its specialization y=1 is squarefree and preserves
+degree; the resultant with the a derivative is consequently nonzero over
+C(y), and there are no repeated irreducible factors in the two-variable
+polynomial. The four adjacent variable supports {z_i,z_(i+1)} are distinct,
+so no such factor is shared. Each has a unique odd divisor valuation.
+Localizing away from z_i=0 does not change this test. Adjoin these four
+square roots and the five seventh roots v_i^7=z_i; the latter are
+independent by coordinate valuations and remain so after the degree 16
+extension by the norm. The resulting constant field K' is a field of
+degree 16*7^5 over K. All d1,...,d4,v1,...,v6 are retained.
+
+2. Set C=D1*...*D4. On the signed fibre prod d_i=k, where k is
+any nonzero element of K, the remaining base relation is
+D(a,y5) D(b,y6)=k^2/C.
+Over an algebraic closure of K, f(a)=D(a,y5) and g(b)=D(b,y6)
+are degree-seven squarefree polynomials, since y5 and y6 are
+transcendental and the specialization y=1 is squarefree. At a simple
+root of g, the equation f(a)=k^2/(C*g(b)) has a pole of order one.
+Writing w=1/a gives
+g(b) * w^7 f(1/w) - (k^2/C)w^7=0.
+In the DVR at that root the leading coefficient is a unit, the lower
+coefficients divisible by the uniformizer, and the constant coefficient
+has valuation exactly one (leading coefficient of f is -8/y5).
+Eisenstein, followed by Gauss's lemma and reciprocal reversal, proves
+geometric irreducibility. No numerical factorization inference is used.
+It holds also for the opposite sign. The earlier finite critical-value
+test (specialization all z_i=1, f(1)=1, gcd of critical-value polynomial
+and reciprocal equal 1) is an independent check for k=1, but the simple
+pole proof is stronger and does not require disjoint finite branch loci.
+
+3. Over the function field of this geometrically integral curve f(a)
+is not a square: above a simple root of f and b=infinity, the map
+g(b)^-1 has ramification index seven, so f has valuation seven.
+This can be seen on the normalization by base changing the unramified
+local parameter f at its simple root along the reciprocal polynomial
+map at infinity. Odd valuation rules out a square even after extending
+constants to an algebraic closure of K. Thus adjoining d5^2=f produces
+one integral quadratic cover over K'; d6=k/(d1...d5) is forced.
+The rotation extension is retained at exact degree 7^5 because the
+remaining curve and quadratic cover are geometrically integral over K.
+Each signed fibre is irreducible over the base function field; there
+is no selected split component with a hidden orientation pairing.
+
+4. Work on the original affine open U of S where alpha and d are
+nonzero, with finite cover defined by v^2-xv+alpha=0, v^7=y.
+The source sevenfold in this finite cover of U^6 has
+alpha_i=y_(i+1) for i<=4 and prod v_i=1. Its generic model is the
+constant cover K' with a,b independent followed by the two independent
+quadratic extensions d5,d6. Those are independent by simple root
+valuations in the distinct variables. On the base torus with D1,...,D4
+inverted this is finite etale over the open product in a,b with the
+discriminants and alpha variables inverted. The generic component is
+integral and there are no vertical components (flatness over the
+integral base). For k=1 both fibre divisors are integral and reduced:
+on the base the equation g(b)f(a)=1/C is monic after dividing by a
+unit in the coefficient ring over the b-coordinate, hence finite
+free before open restriction, and the d5 cover is finite etale;
+generic irreducibility and flatness exclude extra vertical components.
+Generic multiplicity one also follows from the nonzero a derivative
+and the relation (prod d_i)^2=prod D_i. The identical generic argument
+works for k in K^*; at base divisors where k has a zero or pole,
+(prod d_i-k)/(prod d_i+k) has valuation zero because prod d_i
+is a unit on this open. At remaining base divisors the product is
+nonconstant in a,b on each generic vertical component, so there
+is no extra vertical divisor of the ratio. Base codimension >=2
+cannot give a divisor by flatness.
+
+5. Consequently the signed difference of the two fibre cycles is
+the principal divisor of (prod d_i-k)/(prod d_i+k) on the sevenfold
+(open, or its normalization). Its proper finite pushforward to U^6
+is rationally zero there. Odd root sign flips exchange the two
+fibres, even flips preserve them, so the six-slot odd projector
+of the positive image cycle is proportional to this difference.
+Generic mapping degrees are the same by the involution, so division
+by the common positive degree is allowed over Q. On closing in S^6,
+Chow localization leaves only a cycle supported on the complement
+of U^6. Every irreducible such component maps into a proper closed
+subset of at least one K3 factor. Pullback of T in that slot
+vanishes: on a resolution, the projection factors through a point
+or the normalization of a curve; restriction of T to the latter
+is zero by orthogonality to the divisor class. Thus every boundary
+component has zero T^{tensor 6} pairing. The actual W-projected
+class of the second candidate is zero, despite the nonzero free
+cycle chain. The same conclusion applies to base-dependent k as
+above, not arbitrary relations involving a and b.
+
+This eliminates both original coupled product candidates on Q0.
+No inference that W itself is nonalgebraic. A new candidate must
+escape the single irreducible principal-fibre pair mechanism
+(e.g. a genuinely different incidence or an actual algebraic
+half-spin correspondence); another base-dependent product sign
+does not suffice. The Lean extension in
+Synthesis/MillenniumHodgeDicksonCoupledCharacterExact.lean contains
+the actual cleared discriminant, reciprocal degree-seven
+Eisenstein proof under the local ring hypotheses, and odd valuation
+parity proof. The geometric DVR, field and Chow arguments above
+are written mathematics, not a native Chow proof. Prior special CM
+Pfaffian construction remains unchanged.
+
+### BSD: original central residual is a two-zero coalescence problem
+
+Reuse the actual B-M7s interval receipt (no new quadrature run):
+|M1|<=13*10^-12, M2>=8270793387711404*10^-12. Exact M0=0 from
+the prior modular-symbol source. For z=s-1 let G(z)=Lambda(1+z)/z^2
+with its analytic extension at zero. Fricke sign + yields
+G(z)=M1+(M2/12)z^2+sum_{j>=3}2*M_j*z^(2j-2)/(2j)!.
+Here M_j=int_1^infty F(t)(log t)^(2j)dt and F(t)=sum a_n exp(-cnt),
+c=2pi/sqrt(N)>1/80 because N=234446<485^2 and pi>3.14.
+Using |a_n|<=2n, the absolute Fourier majorant is
+2*exp(-ct)/(1-exp(-ct))^2 <=2/(ct)^2 by sinh(u)>=u.
+Therefore |M_j| <= (2/c^2)*(2j)! using the log moment of t^-2
+on [1,infty). This bound justifies absolute summation on |z|<1
+and the uniform tail estimate
+|G(z)-M1-M2*z^2/12| <=25600*r^4/(1-r^2) for |z|<=r<1.
+
+At r=7/50000000=1.4*10^-7 the strict rational inequality
+13*10^-12 +25600*r^4/(1-r^2)
+ < (8270793387711404*10^-12)*r^2/12
+holds with margin >5*10^-13. Rouché applied to (M2/12)z^2
+gives exactly two zeros of G in the disk, counted with multiplicity,
+and none on its boundary. Including the paid central factor z^2,
+Lambda has exactly four zeros there counted with multiplicity.
+If M1=0, both residual zeros are at the centre (analytic rank four).
+Otherwise they are two simple nonzero zeros, opposite by evenness
+and conjugation invariant, hence real or purely imaginary. If M1<0,
+G(0)<0<G(r), giving the real pair. If M1>0, G(i r)<0<G(0)
+using the same strict bound and real coefficients on imaginary axis,
+giving the imaginary pair. At each residual zero z,
+|z^2+12*M1/M2|<2*10^-26 by the tail estimate.
+This is not proof of coalescence. BSD remains exactly M1=0 or
+equivalently coalescence of those two zeros; a tiny complex disk
+does not identify zero with nonzero. Dirichlet GRH cannot be
+substituted for this elliptic L-function statement; even elliptic
+GRH does not exclude the imaginary alternative. Universal
+arithmetic/analytic comparison remains unpaid.
+
+Native arithmetic consumer extended in
+Synthesis/MillenniumBSDSignedMellinMomentProgressionExact.lean
+(commit 7f8cd12c29410f5d38d39a40c01727b13ccc4155).
+No native complex Rouché or arithmetic rank theorem claimed.
+
+### Acceptance
+
+Actual local SymPy normal and -O 40/40 component guards each;
+scripts/check_clay_dickson_signed_components.py exact blob
+0032663049cf947b0d6aa5cb6aeb470acaa49070. Actual local Python
+Fraction normal and -O 7/7 disk guards each;
+scripts/check_clay_bsd_central_zero_disk.py exact blob
+8d0c887a3cf74561daeea1f03e4defede82e523b. Both local git hashes
+matched remote readback. These are algebra and exact rational
+comparisons, not native kernel or Chow computations. No Lean or
+Agda executable in runtime, no CI requested. Existing external
+RH/NS admission routes unchanged. Original source credit:
+Dickson Q0 family and rStation paper 140; classical Eisenstein,
+Kummer, ramification, Chow localization, Rouché, Mellin and Hasse
+retain attribution. DASHI contributions are these specific component
+resolution and signed zero-disk deductions only.
