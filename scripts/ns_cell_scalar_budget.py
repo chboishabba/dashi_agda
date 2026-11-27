@@ -26,7 +26,8 @@ def terms(weight,period_over_twist,form,actuator_over_multiplier,coercive,sup_fa
 
 def choose_sup(*args):
     """For exact supplied scalars, feasible iff both cap margins positive.
-    With outward upper bounds this is sufficient only for underlying values.
+    For interval inputs, enclose the complete expressions separately;
+    coercive occurs both directly and reciprocally.
     """
     cap,second,a,b=terms(*args)
     m2=cap*cap-second
@@ -53,7 +54,7 @@ class BudgetTests(unittest.TestCase):
                     self.assertLessEqual(a+b*U,U*U)
     def test_strict_failure(self):
         # second equality at cap, so strict first makes it impossible.
-        with self.assertRaises(ValueError):choose_sup(1,1,0,0,1,1,Q(1,2),0)
+        with self.assertRaises(ValueError):choose_sup(1,Q(3,2),0,0,1,1,Q(1,8),0)
         # Small second holds but defect makes third fail.
         args=(1,1,0,0,1,1,Q(1,100),100)
         cap,s,a,b=terms(*args)
