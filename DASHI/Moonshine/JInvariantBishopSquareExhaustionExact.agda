@@ -153,13 +153,14 @@ absPrefixConverges f respect v h = Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
 subsetDecomp : ∀ {X : Set} {ps qs : List X} → Unique ps → Unique qs →
   (∀ {p} → p ∈ ps → p ∈ qs) → Σ (List X) (λ rs → qs Perm.↭ (ps ++ rs))
 subsetDecomp {ps = []} {qs} up uq incl = qs , Perm.refl
-subsetDecomp {ps = p ∷ ps} {qs} (AP._∷_ fresh rest) uq incl
-  with subsetDecomp rest (W.removeAtUnique uq (incl (Any.here refl))) tail
-  where
-  tail : ∀ {q} → q ∈ ps → q ∈ W.removeAt (incl (Any.here refl))
-  tail h = W.otherMemberSurvivesRemoval (incl (Any.here refl)) (incl (Any.there h))
-    (λ eq → All.lookup fresh h (sym eq))
-... | rs , perm = rs , Perm.trans (W.removeAtPermutation (incl (Any.here refl))) (Perm.prep p perm)
+subsetDecomp {ps = p ∷ ps} {qs} (AP._∷_ fresh rest) uq incl =
+  let selected = incl (Any.here refl)
+      tail : ∀ {q} → q ∈ ps → q ∈ W.removeAt selected
+      tail h = W.otherMemberSurvivesRemoval selected (incl (Any.there h))
+        (λ eq → All.lookup fresh h (sym eq))
+      rec = subsetDecomp rest (W.removeAtUnique uq selected) tail
+  in proj₁ rec , Perm.trans (W.removeAtPermutation selected) (Perm.prep p (proj₂ rec))
+
 
 sumNN : ∀ {X : Set} (f : X → ℝ) → (∀ p → R.NonNegative (f p)) → ∀ ps → R.NonNegative (sum f ps)
 sumNN f h [] = P.nonNeg0
