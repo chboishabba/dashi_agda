@@ -3,10 +3,10 @@ module DASHI.Analysis.BishopOriginalMachinCayleyEndpointExact where
 -- Original K05 endpoint: the normalized actual phase has O(h^2)
 -- increments, hence is constant on the existing clipped equal mesh.
 -- No derivative-of-limit, mean-value theorem or ODE uniqueness axiom.
-open import Agda.Builtin.Nat as N using (Nat; zero; suc)
+open import Agda.Builtin.Nat as N using (Nat; zero; suc; _+_)
 import Data.Nat.Properties as NP
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as Q using (_/_)
+open import Data.Rational.Unnormalised as Q using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 import Data.Rational.Unnormalised.Properties as QP
 import ExtraProperties as Extra
