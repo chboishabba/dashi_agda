@@ -53,6 +53,26 @@ for i,(aa,yy) in enumerate(zip(alphas,ys)):
     ck((z[5] in dd.free_symbols)==(i==4))
     if i==4:
         ck(s.Poly(s.cancel(yy*dd),z[5]).degree()==7)
+# Second actual incidence: free alpha_6=z6, solve alpha_5 from
+# product D_i=1. Four alpha_i=y_{i+1} constraints remain. The
+# other five discriminants form a nonzero coefficient C; the
+# remaining equation is a genuine degree-seven polynomial.
+C = s.symbols('C', nonzero=True)
+ck(s.Poly(s.cancel(y*(C*D-1)),a).degree()==7)
+ck(s.Poly(s.cancel(y*(C*D-1)),a).LC()==-8*C)
+D6=s.cancel(D.subs({a:z[5],y:ys[5]}, simultaneous=True))
+ck(s.Poly(s.cancel(ys[5]*D6),z[5]).degree()==7)
+# d_i^2=D_i, d_6=(product d_1..d_5)^-1; selecting product d_i=1
+# gives a visible algebraic sign condition, not an unsigned quotient.
+ds=s.symbols('d1:6', nonzero=True)
+full=list(ds)+[1/s.prod(ds)]
+ck(s.prod(full)==1)
+for signs in product((-1,1),repeat=6):
+    ck((s.prod(signs[i]*full[i] for i in range(6))==1)==(s.prod(signs)==1))
+# y_2..y_5 are fixed by the base alpha_1..alpha_4. Flipping both
+# remaining quadratic y-roots would require (alpha_1 alpha_6)^7
+# = (y_1 y_6)^2, not an identity of the six independent parameters.
+ck(s.cancel((z[1]*z[5])**7-(ys[0]*ys[5])**2)!=0)
 # All quadratic sign flips with odd parity kill a product of six T slots;
 # exactly half the sign subgroup survives the necessary character filter.
 ck(sum(s.prod(e)==1 for e in product((-1,1),repeat=6))==32)
