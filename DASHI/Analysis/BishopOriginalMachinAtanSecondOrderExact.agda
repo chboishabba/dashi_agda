@@ -152,7 +152,7 @@ budgetNN n = P.nonNegx,y⇒nonNegx+y
       (P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 4 / 1) (RatP.nonNegative⁻¹ (+ 4 / 1)))) (qNN n)))
   (P.nonNegx,y⇒nonNegx*y
     (P.0≤x⇒nonNegx (P.p≤q⇒p⋆≤q⋆ Rat.0ℚᵘ (+ 8 / 1) (RatP.nonNegative⁻¹ (+ 8 / 1))))
-    (Seq.nonNegx⇒nonNegxⁿ halfNN n))
+    (Seq.nonNegx⇒nonNegxⁿ n halfNN))
 
 budgetStep : ∀ n → (tHalf n + budget (suc n)) ≃ budget n
 budgetStep n =
@@ -187,26 +187,23 @@ oddTermBelow n = P.≤-respʳ-≃ (P.*-identityˡ (tHalf (E.oddExponent n)))
 
 budgetPair : ∀ k → (tHalf k + budget (suc (suc k))) ≤ budget k
 budgetPair k = P.≤-respʳ-≃ (budgetStep k)
-  (P.+-monoˡ-≤ (tHalf k)
+  (P.+-mono-≤ P.≤-refl
     (P.≤-respʳ-≃ (budgetStep (suc k))
       (P.≤-respʳ-≃ (P.+-comm (budget (suc (suc k))) (tHalf (suc k)))
         (Seq.0≤x⇒y≤y+x (budget (suc (suc k))) (P.nonNegx⇒0≤x (tNN (suc k)))))))
 
 oddBudget : ∀ n → (majorant half n + budget (E.oddExponent n)) ≤ eight
-oddBudget zero = P.≤-respˡ-≃ (P.≃-symm (P.+-identityˡ (budget 1)))
-  (P.≤-reflexive (P.≃-trans
-    (P.≃-symm (P.+-identityˡ (budget 1)))
-    (P.≃-trans (budgetStep zero) budgetZero)))
+oddBudget zero = P.≤-reflexive (P.≃-trans (budgetStep zero) budgetZero)
 oddBudget (suc n) =
   let k = E.oddExponent n
       s = majorant half n
       t = majorantTerm half n
       b = budget (suc (suc k))
       open P.ℝ-Solver
-  in P.≤-respˡ-≃ (P.≃-symm
-    (solve 3 (λ s t b → (s ⊕ t) ⊕ b ⊜ s ⊕ (t ⊕ b)) P.≃-refl s t b))
+  in P.≤-respˡ-≃
+    (solve 3 (λ s t b → (s ⊕ t) ⊕ b ⊜ s ⊕ (t ⊕ b)) P.≃-refl s t b)
     (P.≤-trans
-      (P.+-monoˡ-≤ s
+      (P.+-mono-≤ P.≤-refl
         (P.≤-trans (P.+-mono-≤ (oddTermBelow n) P.≤-refl) (budgetPair k)))
       (oddBudget n))
 
@@ -219,3 +216,58 @@ uniformSecondBound : ∀ x h → R.NonNegative x → R.NonNegative (x + h) →
   x ≤ half → (x + h) ≤ half → ∀ n → ∣ secondPartial x h n ∣ ≤ eight
 uniformSecondBound x h xn yn xr yr n =
   P.≤-trans (partialBound x h half xn yn xr yr n) (majorantBelowEight n)
+
+-- Take the actual source partials to their actual limits, not a
+-- derivative-of-limit axiom.  The remainder survives at h=0.
+import DASHI.Analysis.BishopOriginalLogAtanDerivativeLimitValuesExact as Limit
+open import Data.Product.Base using (_,_; proj₁)
+
+derivativeValue : (x : ℝ) → ∣ x ∣ ≤ half → ℝ
+derivativeValue x inside = proj₁ (Seq.geometric-series-isConvergent
+  (Limit.nativeNegativeSquareInsideUnit x inside))
+
+finiteRemainder : ∀ x h n → ℝ
+finiteRemainder x h n =
+  (D.sourceAtanFinitePartial (x + h) n - D.sourceAtanFinitePartial x n)
+  - h * D.sourceAtanDerivativeFinitePartial x n
+
+finiteRemainderFactor : ∀ x h n → finiteRemainder x h n ≃
+  (h * h) * secondPartial x h n
+finiteRemainderFactor x h n =
+  P.≃-trans (P.+-cong (increment x h n) P.≃-refl)
+    (let open P.ℝ-Solver in solve 3
+      (λ h d s → h ⊗ (d ⊕ h ⊗ s) ⊖ h ⊗ d ⊜ (h ⊗ h) ⊗ s)
+      P.≃-refl h (D.sourceAtanDerivativeFinitePartial x n) (secondPartial x h n))
+
+finiteRemainderBound : ∀ x h → R.NonNegative x → R.NonNegative (x + h) →
+  x ≤ half → (x + h) ≤ half → ∀ n →
+  ∣ finiteRemainder x h n ∣ ≤ (∣ h ∣ * ∣ h ∣) * eight
+finiteRemainderBound x h xn yn xr yr n =
+  P.≤-respˡ-≃
+    (P.≃-trans (P.∣-∣-cong (finiteRemainderFactor x h n))
+      (P.≃-trans (P.∣x*y∣≃∣x∣*∣y∣ (h * h) (secondPartial x h n))
+        (P.*-congʳ (P.∣x*y∣≃∣x∣*∣y∣ h h))))
+    (P.*-monoˡ-≤-nonNeg (uniformSecondBound x h xn yn xr yr n)
+      (P.nonNegx,y⇒nonNegx*y (P.nonNeg∣x∣ h) (P.nonNeg∣x∣ h)))
+
+actualRemainderBound : ∀ x h → (xn : R.NonNegative x) →
+  (yn : R.NonNegative (x + h)) → (xr : x ≤ half) → (yr : (x + h) ≤ half) →
+  let xi = P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x xn) xr
+      yi = P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x yn) yr
+  in ∣ (A.bishopAtanHalfBall (x + h) yi - A.bishopAtanHalfBall x xi)
+       - h * derivativeValue x xi ∣ ≤ (∣ h ∣ * ∣ h ∣) * eight
+actualRemainderBound x h xn yn xr yr =
+  let xi = P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x xn) xr
+      yi = P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x yn) yr
+      a = A.bishopAtanHalfBall x xi
+      b = A.bishopAtanHalfBall (x + h) yi
+      d = derivativeValue x xi
+      diff = Seq.xₙ+yₙ→x₀+y₀
+        (b , A.bishopAtanHalfBallConverges (x + h) yi)
+        (R.- a , Seq.-xₙ→-x₀ (a , A.bishopAtanHalfBallConverges x xi))
+      product = Seq.xₙyₙ→x₀y₀ (h , Q.constantConverges h)
+        (d , Limit.originalAtanFiniteDerivativeSeriesConverges x xi)
+      remainder = Seq.xₙ+yₙ→x₀+y₀ ((b - a) , diff)
+        (R.- (h * d) , Seq.-xₙ→-x₀ ((h * d) , product))
+  in Seq.xₙ≤y⇒limxₙ≤y (finiteRemainderBound x h xn yn xr yr)
+    (∣ (b - a) - h * d ∣ , Seq.∣xₙ∣→∣x₀∣ (((b - a) - h * d) , remainder))
