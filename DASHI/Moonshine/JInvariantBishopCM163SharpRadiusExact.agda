@@ -8,8 +8,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc) renaming (_+_ to _+N_)
 open import Data.Nat.Base using (s≤s; z≤n)
 import Data.Nat.Properties as NP
 import Data.Nat.Base as Nat
-import Data.Integer.Base as Z
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+import ExtraProperties as Extra
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as Neg
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
@@ -55,7 +54,7 @@ errorBand l u x y e hl hu h =
        (solve 2 (λ x y → y ⊖ (y ⊖ x) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y (P.neg-mono-≤ (P.≤-trans
          (P.x≤∣x∣ (y - x))
-         (P.≤-respˡ-≃ (P.≃-trans (P.∣-∣-cong (solve 2 (λ x y → x ⊖ y ⊜ ⊝ (y ⊖ x)) P.≃-refl x y)) (P.∣-x∣≃∣x∣ {x = y - x})) h))))) ,
+         (P.≤-respˡ-≃ (P.∣x-y∣≃∣y-x∣ x y) h))))) ,
      P.≤-trans (P.≤-respˡ-≃
        (solve 2 (λ x y → y ⊕ (x ⊖ y) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y hi)) hu
@@ -163,9 +162,7 @@ module ExpTail (x : ℝ) (xNN : R.NonNegative x) (x1 : x ≤ R.1ℝ) where
         (P.≤-trans (P.≤-respʳ-≃ (P.*-identityˡ recip)
           (P.*-monoʳ-≤-nonNeg x1 recipNN))
           (rat≤ (+ 1 / suc j) (+ 1 / 16)
-            (Q.*≤* (Z.+≤+ (NP.≤-trans
-              (NP.≤-reflexive (NP.*-identityˡ 16))
-              (NP.≤-trans le (NP.≤-reflexive (sym (NP.*-identityʳ (suc j))))))))))
+            (Extra.q≤r⇒+p/r≤+p/q 1 16 (suc j) le)))
         (EP.expTermNonnegative xNN j))
 
   budget : Nat → ℝ
