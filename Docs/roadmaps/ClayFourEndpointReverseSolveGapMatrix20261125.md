@@ -1,5 +1,10 @@
 # Four-Clay P0 controlling endpoint reverse-solve and constructor/gap matrix
 
+## 27 November — executable independent NS369 reconstruction
+
+Committed scripts/ns369_similarity_reconstruct.py at 084faab64477650d41aa8bace45a760f3000bb1b (blob 62c601ee46e9aec292320a3fdbd0f265a5a3cd1c; exact remote readback). Independent rational potential basis, original H19 lattice via ns_cell_signed_node, reflection and real-part conjugation, explicit pressure basis, analytic spatial derivatives and coefficient Jacobian, dealiased time/azimuth collocation, seed-residual forced-to-unforced continuation, sampled mass/stiffness/stretch matrices, SVD adjoint directions, residual pairings, shifted holdout grid and atomic checkpoints. Run from root: python scripts/ns369_similarity_reconstruct.py --level 2 --seconds 90 --out Artifacts/ns369_similarity_candidate.json. Requires numpy scipy sympy. This is a fixed-period floating point candidate generator; not original spline discretization, rigorous interval quadrature, global adjoint or actual actuator cancellation, nor all fifteen source conditions. Every certificate field remains unpaid in receipt. A collapse to zero is not acceptance. No local execution or CI this turn; remote readback only. No claim source certificate recovered. Next implementation cuts: genuine original cell basis/continuum enclosures, phase-bordered frequency solve, global adjoint and actuator proof, actual fifteen-field witness assembly. Preserve previous exact conditional producers and tests.
+
+
 
 ## 27 November — actual source-shaped unforced profile attempt; exact rejected family and pressure-compatible tail
 
