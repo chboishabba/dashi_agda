@@ -30,10 +30,12 @@ def check():
     flux=divB*w*w+2*w*B.dot(dw)+w*divC.dot(d)+w*s.trace(C*Hess)+dw.dot(C*d)
     assert s.expand(Et-flux-(-At*w*w/2+w*Bt.dot(d)+(d.T*Ct*d)[0]/2+u*w-w*F))==0
     # Both faces share u,w,d,A,B,C. Signed outward flux cancels.
-    phi=B[3]*w*w+w*(C*d)[3]
-    assert phi-phi==0
-    # Inhomogeneous flux with common w,d_t, discontinuous conormal.
-    r=s.Symbol('r'); assert s.expand(w*(phi/w+r)-phi-w*r)==0
+    # Independent signed traces. Jump of conormal is the only remaining work.
+    bp,bm,cp,cm,dp,dm=s.symbols('bp bm cp cm dp dm')
+    tp,tm=s.symbols('tp tm')
+    fp=w*(bp*w+tp+cp*dp); fm=w*(bm*w+tm+cm*dm)
+    assert s.expand((fp-fm).subs({bp:bm,tp:tm,cp:cm,dp:dm}))==0
+    r=s.Symbol('r'); assert s.expand((fp-fm).subs(tp,r-(bp-bm)*w-cp*dp+cm*dm+tm)-w*r)==0
     # Differentiation in tangential directions commutes with fixed cut.
     # One derivative of divergence-form equation: operator commutator
     # -div((D a) grad u). No derivative of characteristic function.
