@@ -53,7 +53,7 @@ intNeg a = P.≃-trans (intRead (Z.- a))
   (P.≃-trans (P.⋆-distrib-neg (a / 1)) (P.-‿cong (P.≃-symm (intRead a))))
 
 negC : C.BishopComplex → C.BishopComplex
-negC z = C.complex (R.- C.re z) (R.- C.im z)
+negC z = C.complex (R.- (C.re z)) (R.- (C.im z))
 
 minusOneC : C.BishopComplex
 minusOneC = C.complex (R.- R.1ℝ) R.0ℝ
