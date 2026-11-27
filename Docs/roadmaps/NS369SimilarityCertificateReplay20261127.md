@@ -118,3 +118,23 @@ and parameter-box nontriviality. The base density alone is not full
 coercivity. No kernel test, no simulation, no claim of completed original
 certificate. Native source code search on Lean default branch returned no
 matches; not an exhaustive inventory of all existing donors.
+
+## Radial Hardy and signed seam continuation
+
+Lean #123 commit af6fbe134638a1be1dbaaca198d17235e8b6c081 adds
+NavierStokesRadialHardyExact: classical radial square completion with
+variable weight derivative, oriented endpoint flux, seam cancellation,
+integrated negative velocity absorption, and interior/exterior mixed debt.
+The exact coefficient is w+2r w', not w alone; the original physical
+weight and carrier must be instantiated before claiming the Hardy leaf.
+Local SymPy: 8/8 symbolic identities (two universal polynomial identities,
+six rational radial test functions). No kernel run.
+
+Existing ns369_similarity_reconstruct.py owns the smooth potential basis
+and signed Fourier candidate; ns369_similarity_certificate.py owns compact
+interval replay and sampled adjoint; ns_cell_signed_node.py owns rational
+LDL with constraint-kernel negative columns. Reuse these, not a new sampled
+certificate. Remaining: actual nonzero seed, full weighted integration by
+parts and trace closure, global tail and harmonic estimates, original
+cell enclosures, adjoint/actuator and fifteen-field admission. All remain
+open or conditional; finite checks are not native acceptance.
