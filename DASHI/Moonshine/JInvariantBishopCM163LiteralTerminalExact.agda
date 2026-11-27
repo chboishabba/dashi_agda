@@ -78,3 +78,17 @@ periodFromOriginalQuotient :
   OriginalRayResidual → Period.NativePeriod
 periodFromOriginalQuotient enclosure diagonal cross =
   Raw.periodFromRaw (allRawFromOriginalQuotient enclosure diagonal cross)
+
+-- The half-unit guard now comes from the original Machin and E4/E6
+-- series. Only the two original Hecke identities are external here.
+import DASHI.Moonshine.JInvariantBishopCM163SharpRootEnclosureExact as Sharp
+
+allRawFromDiagonalAndRay :
+  L.descending Guard.Root.j R.0ℝ Packet.diagonal ≃ R.0ℝ →
+  OriginalRayResidual → (k : Nat) → Raw.RawCross k
+allRawFromDiagonalAndRay = allRawFromOriginalQuotient Sharp.enclosure
+
+periodFromDiagonalAndRay :
+  L.descending Guard.Root.j R.0ℝ Packet.diagonal ≃ R.0ℝ →
+  OriginalRayResidual → Period.NativePeriod
+periodFromDiagonalAndRay = periodFromOriginalQuotient Sharp.enclosure
