@@ -29,6 +29,20 @@ def pull(M,t,T):
     return Q
 
 
+def pin_pull(M,a,b):
+    """Fold quotient cosets modulo a, retaining the pivot slot as zero.
+    Equivalent to pull along the canonical pin chart, up to zero-slot deletion.
+    No dense chart construction for a single signed orientation.
+    """
+    p=1<<(a.bit_length()-1);Q={}
+    for k,c in M.items():
+        if k&p:
+            k^=a
+            if b:c=-c
+        add(Q,k,c)
+    return Q
+
+
 def bounds(M):
     """Independent signed envelope intersected with odd integer weights."""
     C=M.get(0,0);S=sum(abs(c) for a,c in M.items() if a)
@@ -51,7 +65,7 @@ def screen(n,R,H,caps,B):
     assert len(R)==len(caps)
     while True:
         d=n-len(H)
-        B.pay('signed_square_chart',1+(n+1)**2*(1+len(H)))
+        B.pay('signed_square_chart',1+n+(1+d)*(1+len(H)))
         u,V=chart(n,H)
         B.pay('signed_square_origin',1+n+sum(r.bit_count() for r in R))
         if all((r&u).bit_count()<=c for r,c in zip(R,caps)):
@@ -67,16 +81,15 @@ def screen(n,R,H,caps,B):
             if bounds(m)[1]<=c:continue
             for a in sorted(m):
                 if not a:continue
-                B.pay('signed_square_orientations',2*(1+d)*(1+d+len(m)))
+                B.pay('signed_square_orientations',2*(1+len(m)))
                 bad=[]
                 for b in (0,1):
-                    t,T=chart(d,((a,b),))
-                    if bounds(pull(m,t,T))[0]>c:bad.append(b)
+                    if bounds(pin_pull(m,a,b))[0]>c:bad.append(b)
                 if len(bad)==2:return None,None,'both_orientations'
                 if bad:
                     p=sum(1<<free[j] for j in bits(a))
                     pins.append((p,bad[0]^1))
-        B.pay('signed_square_pin_join',1+(n+1)*(1+len(H)+len(pins))**2)
+        B.pay('signed_square_pin_join',1+(1+len(H)+len(pins))**2)
         K=canon(H+tuple(pins))
         if K is None:return None,None,'pin_conflict'
         if K==H:return H,None,'stalled'
