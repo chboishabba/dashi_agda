@@ -210,7 +210,7 @@ module At (tau : U.BishopUpperHalfPlanePoint) where
     Seq._isConvergent (Seq.SeriesOf (λ n → F.shellAbsolute n f))
   absoluteConverges f k h = Seq.proposition-3-5 (scaledBasel k)
     (0 , λ n _ → P.≤-respˡ-≃
-      (P.≃-symm (P.nonNegx⇒∣x∣≃x (shellAbsNN n f (S.squarePoints (suc n))))) (h n))
+      (P.nonNegx⇒∣x∣≃x (shellAbsNN n f (S.squarePoints (suc n)))) (h n))
 
   real4Absolute = absoluteConverges (λ i → C.re (E.summand 4 tau i)) budget4
     (λ n → P.≤-trans (F.real4Abs tau n) (cover4 n))
