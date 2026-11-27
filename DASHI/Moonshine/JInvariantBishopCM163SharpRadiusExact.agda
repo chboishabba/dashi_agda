@@ -26,6 +26,7 @@ import DASHI.Analysis.BishopMachinGeometricBishopRateExact as MR
 import DASHI.Foundations.BishopMachinArctanConstructionExact as M
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact as SQ
 import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflect
+import DASHI.Foundations.BishopSquareNonnegativeExact as Sq
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as E
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as EP
 import DASHI.Foundations.BishopExponentialNonnegativeMonotoneExact as EM
@@ -253,7 +254,7 @@ iterBand (suc n) l u x h b = squareBand (qIter n l) (qIter n u) (iter square n x
   where
   nonneg : (j : Nat) (q : Q.ℚᵘ) → Q.0ℚᵘ Q.≤ q → Q.0ℚᵘ Q.≤ qIter j q
   nonneg zero q h = h
-  nonneg (suc j) q h = QP.*-nonNegative (nonneg j q h) (nonneg j q h)
+  nonneg (suc j) q h = Sq.rationalSquareNonnegative (qIter j q)
 
 exponentRecover : iter double 6 small ≃ G.exponent
 exponentRecover = let open P.ℝ-Solver in solve 1 (λ x →
