@@ -369,7 +369,7 @@ enclosure =
       h = Iso.half
       open P.ℝ-Solver
       aNN = P.0≤x⇒nonNegx (P.≤-respˡ-≃ (P.+-inverseʳ h)
-        (P.+-monoˡ-≤ h (P.neg-mono-≤ offsetUpper)))
+        (P.+-monoʳ-≤ h (P.neg-mono-≤ offsetUpper)))
       bNN = P.0≤x⇒nonNegx
         (P.≤-respˡ-≃ (solve 1 (λ h → h ⊕ (⊝ h) ⊜ Κ Q.0ℚᵘ) P.≃-refl h)
           (P.+-monoʳ-≤ h offsetLower))
