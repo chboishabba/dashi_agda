@@ -56,15 +56,18 @@ def detector():
     # Fourier response of second derivative filter, with boundary terms zero.
     omega=s.symbols('omega',real=True); phase=s.exp(-s.I*omega*tau)
     assert s.diff(phase,tau,2)==-omega**2*phase
-    # Proper window Jacobian dT/dt=b/beta, t=c*tau/ell.
+    # Proper window Jacobian dT/dt=b*beta, t=c*tau/ell.
     B=s.sqrt(1+1/t**2); W=s.Function('W'); T=s.Function('T')(t)
-    jac=1/(t*B)
+    jac=B/t
     wp=c/ell*W(T)*jac
     assert s.simplify(wp*ell/c-W(T)*jac)==0
+    # Original clock F(t)=asinh(t)-sqrt(1+t²)/t.
+    assert s.simplify(s.diff(s.asinh(t)-s.sqrt(1+t*t)/t,t)-jac)==0
+    assert s.simplify((-1/t**2)/jac+1/(t*B))==0
     # Necessary ideal dimensionless readout accuracy at the NEC-constrained ceiling.
     U=Q(25625913306690676040506148447313974772973827225035760610806855962525604705888543158345301526058010132023028426526837691,10**300)
     assert Q(3,2)*U/(72*Q('1.414'))<Q('3.776e-184')
-    return 5
+    return 7
 
 
 def reachability():
