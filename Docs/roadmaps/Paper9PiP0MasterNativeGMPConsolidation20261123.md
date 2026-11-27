@@ -1790,3 +1790,28 @@ Next shared producer: actual normalized degree-41 Hecke diagonal/slice polynomia
 ### 2026-11-27 — Signed interior cancellation
 
 Source-written, uncompiled: `FiniteDivisorConvolutionInteriorFoldExact` (0513d86bf3cd) distributes the two observations over the original omega list, cancels their common integer baseline and transports both equality folds through the existing xy/ab permutations. The double diagonal is retained in both observations. No new postulate or finite-check premise. Remaining: regroup keys into the existing boundaryClosed1..4, interior factor-pair power readout and Ramanujan equations; native analytic attachments and GMP certification remain open. No CI or kernel run, per user direction.
+
+
+### 2026-11-27 — Consolidated native H1→H4 and direct GMP terminal cut
+
+**Source-written, uncompiled, not promoted to acceptance.** Supersedes the earlier H1 unwritten inventory. Original arithmetic owners, signed strata (including their intersection), all-index zero mode, and original Cauchy ring retained.
+
+| Commit | Source attachment |
+|---|---|
+| 75ca943c62cd | ClosedBoundaryExact: both equality-stratum boundary folds and four antidifferences |
+| 64aa3b851893 | GradeFibreExact: bidirectional factor-key product permutation |
+| e2cc973f003f | SigmaFoldExact: partition by positive grade, actual sigma-power readout |
+| e1718439518c / 213b5ce5d446 | RamanujanIntegerExact: four signed identities, convolution exchange, sigma7 elimination |
+| 8d9fde04451a | IntegerRowExact: literal integer Cauchy row and denominator-one reflection |
+| c0cd8ef52de1 | JInvariantBishopLiteralRamanujanExact: all three literal coefficient identities |
+| 9bd330ee8f53 | HyperMajorantsExact.AtRoot.rawFromCM consumes those three proofs internally |
+| 09f93447ae48 | LiteralTerminalExact.AtOriginalCM.allRaw: original diagonal isolation and signed disk packet composed with rawFromCM |
+| 0c38b7a0e29d | LiteralRealSliceEvaluationExact: all positive-degree original E4/E6 jet evaluations and absolute witnesses |
+| 33278fcf0050 | LiteralBracketExact: original signed Rankin-Cohen bracket and differentiated bracket evaluation |
+| 717696081267 / e3b19803ff02 | Original GMP receipt adapter and independent integer replay/Lean theorem generator |
+
+Lean companion branch research/paper9-original-eisenstein-derivative-20261125 commit 1ca5f2d7666c, Integration/Paper9GMPWindowAcceptance.lean: raw segment join/append, rational observation equivalence, cross-GCD cancellation, actualPrefixLimit from eight existing decision proofs, arbitrary-scale gmpWindow, strict floorFromWindow/floorFromRaw. This is the direct production proof candidate, independently of the native Agda port; no cross-kernel postulate. Receipt adapter includes original check_pi_gmp_quotient_residual.cpp without editing it. Replay independently checks the original unreduced prefix ratios, adjacent step, sqrt bracket, reciprocal corners, strict floor residual and digest. Optional --emit-lean generates a theorem using floorFromRaw and kernel by-decide, without running the kernel.
+
+Local acceptance (deferred at user direction): compile adapter with g++ -O3 -std=c++17 scripts/paper9_gmp_certificate_receipt.cpp -lgmpxx -lgmp -lcrypto -o /tmp/paper9_receipt; /tmp/paper9_receipt 100 plain > /tmp/paper9.json; python scripts/check_paper9_gmp_certificate_receipt.py /tmp/paper9.json --emit-lean /tmp/Paper9Receipt.lean; repeat cross mode; typecheck companion endpoint and emitted theorem from the Lean project, print axioms. Larger GMP receipts and timings are separate from feasible kernel reduction. No CI or kernel execution in this cut.
+
+Native residual cut: original normalized lattice/Fourier/phase and degree-41 Hecke diagonal identity; actual half-unit analytic enclosure; identify actual j quotient Euler jets and original reciprocal-ray disk germ coefficient residual. The bracket and differentiated bracket evaluations are now source-written, not yet kernel-accepted. OriginalCMCut still explicitly requires first and second jet identities, enclosure, diagonal, cross; do not claim unconditional native RawCross. H1 literal source and H2–H4 consumer composition now written; all elaboration/termination/axiom audits and possible repairs remain. Production receipt-to-theorem source is written; runtime acceptance and actual compiler correctness are not established. No new external mathematical premise asserted. Classical CM/Hecke/Ramanujan/Chudnovsky authors retain attribution; DASHI contribution is the signed native fold and certificate transport.
