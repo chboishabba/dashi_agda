@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 from scipy.constants import epsilon_0, mu_0, elementary_charge as e, electron_mass as me, atomic_mass as u
 from scipy.linalg import solve
+from scipy.optimize import brentq
 from scipy.optimize import minimize
 from solar_earth_model_inputs import radar
 from solar_earth_collision_tensor import rates, composition
@@ -131,6 +132,42 @@ def solve_model(material, cfg, heat, source, normals=None, areas=None):
     # apertures on this model, not a claim of attainment.
     return dict(net_J=float(useful+ground-paid),load_J=float(useful),ground_J=float(ground),collision_J=float(material_loss-useful),shell_other_J=float(shell_work-ground),incident_J=incoming,outgoing_J=outgoing,absorbed_J=float(absorbed),paid_J=float(paid),cooling_J=float(cool),balance_J=float(err),passive_upper_J=incoming,history=x,thermal=th,dc=sh[0].real)
 
+def static_shell(radii, conductivity, ground_S):
+    """DC l=1 electroquasistatic conduction through conducting layers.
+    Potential V=u(r)Y_1m; current flux q=-sigma*r^2*u'.
+    Insulating layers require a distinct open-circuit electrostatic chart.
+    Returns normalized harmonic potential admittance and ground transfer.
+    Not interchangeable with an inductive TE DC magnetic termination.
+    """
+    radii=np.asarray(radii,float); conductivity=np.asarray(conductivity,float)
+    if len(radii)!=len(conductivity)+1 or np.any(np.diff(radii)<=0) or np.any(conductivity<=0) or ground_S<=0:
+        raise ValueError('positive conducting layers and ground required')
+    M=np.eye(2)
+    for a,b,s in zip(radii[:-1],radii[1:],conductivity):
+        def chart(r): return np.array([[r,r**-2],[-s*r*r,2*s/r]])
+        M=chart(b)@np.linalg.solve(chart(a),M)
+    v,q=M@np.array([1.,-ground_S])
+    Y=-q/v; G=np.sqrt(ground_S)/v
+    assert Y>=G*G-1e-10*max(Y,1.)
+    return float(Y),float(G)
+
+def reverse_activation(material,cfg,geo,target_J):
+    """Feasible minimum along a declared amplitude ray, not global monotonicity.
+    Bracket every sampled crossing; retain failed probes and signed residual."""
+    source=np.asarray(cfg['incident_sqrt_W'],float); shape=np.asarray(cfg['heating_shape'],float)
+    def run(a): return solve_model(material,cfg,a*shape,source,geo['normals'],geo['areas_m2'])
+    amps=np.linspace(0,cfg['max_heating_W'],33)
+    vals=[]
+    for a in amps:
+        v=run(a); vals.append(v['load_J']+v['ground_J']-target_J)
+    feasible=[float(a) for a,v in zip(amps,vals) if v>=0]
+    for i in range(len(amps)-1):
+        if vals[i]*vals[i+1]<0:
+            feasible.append(brentq(lambda a:run(a)['load_J']+run(a)['ground_J']-target_J,amps[i],amps[i+1]))
+    if not feasible: return dict(status='NO_SAMPLED_WITNESS',amplitudes_W=amps.tolist(),signed_residual_J=vals)
+    a=min(feasible); out=run(a)
+    return dict(status='FEASIBLE_RAY_WITNESS',amplitude_W=a,paid_J=out['paid_J'],target_residual_J=out['load_J']+out['ground_J']-target_J,amplitudes_W=amps.tolist(),signed_residual_J=vals)
+
 def compare(material,cfg):
     source=np.asarray(cfg['incident_sqrt_W'],float); N=len(source); n=len(material[0]); zero=np.zeros((N,n))
     # Explicit oriented surface samples for every aspect ratio, same resource area.
@@ -146,7 +183,8 @@ def compare(material,cfg):
         active=run(float(result.x[0]),source); off=run(float(result.x[0]),source*0)
         trim=lambda a:{k:v for k,v in a.items() if not isinstance(v,np.ndarray)}
         rows.append(dict(geometry=name,amplitude_W=float(result.x[0]),optimizer_success=bool(result.success),passive=trim(base),active=trim(active),source_off=trim(off)))
-    return dict(rows=rows,best_tested_passive_J=best,unrestricted_passive_upper_J=rows[0]['passive']['incident_J'],physical_admission=False,scope='Explicit input geometry, fixed populations, SI periodic Galerkin model; independently supplied static port and skew curl; no measured actuator, source or global optimum inferred.')
+    inverse={name:reverse_activation(material,cfg,geo,cfg['target_useful_J']) for name,geo in cfg['geometries'].items()} if 'target_useful_J' in cfg else {}
+    return dict(rows=rows,inverse=inverse,best_tested_passive_J=best,unrestricted_passive_upper_J=rows[0]['passive']['incident_J'],physical_admission=False,scope='Explicit input geometry, fixed populations, SI periodic Galerkin model; independently supplied static port and skew curl; no measured actuator, source or global optimum inferred.')
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('root',type=Path); p.add_argument('packet',type=Path); p.add_argument('config',type=Path); a=p.parse_args()
