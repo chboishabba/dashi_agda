@@ -1022,3 +1022,188 @@ or algebraic cycles; actual continuous derivations above rely on
 existing source certificates and stated hypotheses. No new native
 Agda/Lean kernels available, no CI triggered, no universal BSD or
 Hodge theorem, no external admission locally completed. Four P0 only.
+
+
+## 27 November — actual two-prime BSD axes and two coupled Dickson sixfolds
+
+Continue Lean #124 on its existing branch, not a parallel proof framework.
+New source-written owners:
+Synthesis/MillenniumBSDMixedPrimeAxisExact.lean (commit 464124e2914f7c0a8cb2988fb2f7a9b457fb62bb)
+and Synthesis/MillenniumHodgeDicksonCoupledCharacterExact.lean
+(commit 1f843f6f91b7ac273198818be22c7dca68e458d8).
+Native algebraic identities and character constraints; no kernel replay here.
+
+### BSD: the actual mixed-prime distribution has surviving axes
+
+Use the original modular symbols of 234446.a1, ordinary roots alpha_5 and
+alpha_11, and good-prime Hecke distribution relation. Local polynomials
+are X^2+4X+5 and X^2+6X+11. For distinct p,l in {5,11}, n,m>=1 and
+a coprime to both, define D_{n,m}(a) by applying both ordinary
+stabilizations to the same symbol:
+
+ alpha_p^{-n} alpha_l^{-m} [
+ lambda(a/(p^n l^m))
+ - alpha_p^{-1} lambda(a/(p^{n-1} l^m))
+ - alpha_l^{-1} lambda(a/(p^n l^{m-1}))
+ + (alpha_p alpha_l)^{-1} lambda(a/(p^{n-1} l^{m-1})) ].
+
+The Hecke relations commute at the two primes. Each marginal refines
+compatibly by the same ordinary-root identity alpha_q(a_q-alpha_q)=q.
+Project to the two principal-unit factors, retaining the original
+tame sums and both conductor indices. This is a compatible algebraic
+finite-character distribution, not a measure on a common completion.
+
+For a fixed p-unit address r=a0/p^n, put
+B(r)=alpha_p^{-n}(lambda(r)-alpha_p^{-1}lambda(pr)).
+At l-level one the sum of B((r+b)/l), b=0,...,l-1, is
+a_l B(r)-B(lr). The excluded l-nonunit lift contributes B(l^{-1}r)
+(the inverse on the p^n residue address). The lower-level stabilization
+subtracts (l-1) alpha_l^{-1} B(r). Weighting by a p-character chi
+and summing yields
+
+ D_{n,m}(chi,1) =
+ (1-alpha_l^{-1}chi(l))(1-alpha_l^{-1}chi(l)^{-1}) D_n^{(p)}(chi).
+
+This identity for m=1 persists for all m by refinement. Exact factor
+identity: alpha(a_l-u-u^{-1})-(l-1)=(alpha-u)(alpha-u^{-1}),
+where alpha^2-a_l alpha+l=0. Both roots have complex modulus sqrt(l)>1;
+u is a root of unity, so both factors are nonzero. The corresponding
+identity holds with p and l interchanged. Earlier actual one-prime
+T^4*unit results give nonzero D_n(chi) for every nontrivial wild
+character in the respective principal-unit group. Hence both axes of
+the mixed distribution survive away from their common trivial point.
+That common point is zero by the actual central L-value.
+
+In the finite group algebra in characteristic zero, evaluation on an
+axis annihilates the augmentation ideal in the *other* variable.
+Consequently the mixed element belongs to I_p+I_l but neither I_p nor
+I_l when both principal-unit groups are nontrivial. In particular,
+neither separate fourth-order divisibility nor their product holds
+on this full mixed carrier. This is an exact obstruction to combining
+the two separate ordinary T^4*unit results as a joint annihilator or
+a CRT proof of the real second derivative. It does not disprove a
+same-source archimedean comparison. Do not infer vanishing of a
+mixed nontrivial twist, or a two-prime analytic rank equality.
+Remaining BSD producer: actual M1=0, not more independent ordinary
+factorization. Kezuka–Zagier's rank-defect formula remains conjectural
+and cannot be used to discharge this step.
+
+### Hodge: actual conductor-seven sixfolds with two independent signed tests
+
+Use the degree-seven Dickson surface from rStation paper 140, with
+its actual chart t=1 and Q(alpha,s)=A s^2+B(alpha)s+C(alpha).
+For the general source A is a nonzero constant, deg B<=2,
+deg C<=3. Keep the actual Q0 in the checker. The Dickson identity is
+p_7(v+alpha/v,alpha)=v^7+(alpha/v)^7. Set y=v^7; the original
+quadratic equation is Q(alpha,s)=y+alpha^7/y. Put
+D(alpha,y)=B(alpha)^2-4A(C(alpha)-y-alpha^7/y), and d=2As+B(alpha).
+Then d^2=D. The quadratic root partner is s'=-B/A-s, and d'=-d.
+Its discriminant has degree seven in alpha with leading coefficient
+4A/y. The birational involution of the projective K3 resolution is
+an automorphism (smooth minimal K3); on the affine residue holomorphic
+two-form dx wedge d alpha /(-Q_s) it acts by minus one.
+The +1 rational eigenspace in H^2 has type (1,1), hence algebraic
+by Lefschetz (1,1), so the involution acts by -1 on T. This is
+separate from the dihedral reflection v -> alpha/v; never conflate
+the two signs.
+
+First actual candidate. Take independent z1,...,z6, y1..y5=z1..z5,
+y6=(z1...z5)^{-1}, and alpha=(z2,z3,z4,z5,z6,z1).
+Adjoin roots of the six original quadratics in s (extension of
+2-power degree) and then v_i^7=y_i, with v6=(v1...v5)^{-1}.
+The five Kummer classes are independent by the coordinate
+valuations over C(z1,...,z6); they remain independent after the
+2-power extension by the norm and coprimality with seven.
+The rotation subgroup is the sum-zero hyperplane over F7.
+Its annihilator is the diagonal line; at each relative embedding
+j=1,2,3 the only sign vectors of six characters +/-j surviving
+this rotation subgroup are the all-plus and all-minus ones.
+All six pairs (alpha_i,y_i) are algebraically independent and
+all six surface maps dominant. Since the alpha coordinates
+recover the z parameters, the resulting image closure is an
+actual sixfold in S^6, with its selected irreducible field/component.
+
+But this candidate fails exactly: only the fifth discriminant
+involves z6. Its degree seven in that variable gives odd infinity
+valuation, so it remains nonsquare even over the field adjoining
+all the other quadratic roots and the five Kummer roots, which
+are defined over C(z1,...,z5). The fifth quadratic involution
+therefore stabilizes the candidate's field and image. The original
+orientation W has sign -1 in that slot, forcing the pairing with
+the invariant cycle to vanish. Passing the rotation and dominance
+tests alone is insufficient.
+
+Second actual candidate, fixing the independent quadratic sign.
+Again y1..y5=z1..z5, y6=(z1...z5)^{-1}. Set alpha1..4=z2..z5,
+alpha6=z6, and solve alpha5 from product_i D(alpha_i,y_i)=1.
+The other five discriminants are nonzero functions, so after
+clearing the fixed y5 denominator the equation is degree seven in
+alpha5 with nonzero leading term. Choose any root over
+C(z1,...,z6). This gives a finite field extension, hence a
+six-dimensional source. As D6 varies nontrivially with z6, the
+equation makes alpha5 transcendental over C(z1,...,z5); every
+(alpha_i,y_i) pair is again algebraically independent. Choose
+d1,...,d5 with d_i^2=D_i and put d6=(d1...d5)^{-1}; then d6^2=D6.
+Set s_i=(d_i-B(alpha_i))/(2A). Choose v1..v5 with v_i^7=y_i,
+v6=(v1...v5)^{-1}, and x_i=v_i+alpha_i/v_i. All six equations
+of the original surfaces hold. The field of the source is finite
+over the field of its six images: the y_i satisfy quadratics
+over alpha_i,x_i, the v_i satisfy quadratics over alpha_i,x_i,
+and the z variables are among the y_i and alpha6. Thus the
+image closure Z+ of this chosen field has dimension six and
+dominates each K3 factor. This is an actual algebraic cycle
+candidate, not a tensor-only specification.
+
+The rotation subgroup is contained in the sum-zero hyperplane
+because product v_i=1; exact rank five for this second candidate
+is not asserted (the new degree-seven field extension may reduce
+it). At each embedding the diagonal +/-j rotation characters
+remain allowed. The four y_2,...,y_5 are recovered from the base
+alpha_1,...,alpha_4. The remaining y_1,y_6 have fixed product;
+reflecting only one changes it, and reflecting both would require
+(alpha1 alpha6)^7=(y1 y6)^2, which is not an identity of the six
+independent parameters. Thus the selected y tuple is recoverable
+generically from the base image, with no dihedral reflection
+ambiguity. Independently the product d_i=1 is visible on the
+actual surface coordinates. Any odd subset of s-root involutions
+changes this product to -1, and cannot stabilize Z+.
+
+Apply the actual sign projector to the chosen integral cycle:
+C = (1/64) sum_{I subset {1,...,6}} (-1)^|I| (iota_I)_* Z+.
+As an element of the free rational algebraic cycle group this is
+nonzero: even and odd translates lie generically on the disjoint
+product d_i=+1 and -1 loci, respectively, and any coinciding
+translates carry the same sign. The projector is the identity on W,
+so the projected cohomology of C equals that of Z+. Nonzero chain
+does NOT establish nonzero Chow class or nonzero orientation class.
+Indeed there is an exact warning: before imposing product d_i=1,
+on a seven-dimensional irreducible source component with nonconstant
+f=product d_i, the complete signed fibre difference f=1 minus f=-1
+on a proper normal model is principal, the divisor of (f-1)/(f+1).
+After proper pushforward it cannot by itself pay the orientation.
+The second candidate must be attacked componentwise, not by a total
+complete-intersection or total fibre calculation. The actual remaining
+step is factorization/monodromy of the individual components and an
+actual nonzero alternating cup-product on one such component, or a
+different coupled cycle. Neither candidate is promoted to H-M2 closure.
+Universal Hodge primitive detection remains separate.
+
+Attribution: actual Dickson family/equations from the author of rStation
+paper 140 (https://rstation.ai/problems/hodge_conjecture/papers/140);
+standard Dickson, Kummer, K3 residue, Lefschetz (1,1), and finite
+character theory retain classical attribution. DASHI contributes
+the above mixed-prime axis calculation, two selected sixfold source
+constructions and the exact independent sign tests; no priority claim
+for classical identities. No JMD attribution without an evidenced donor.
+
+### Actual execution and next cut
+
+scripts/check_clay_bsd_hodge_coupled_source.py exact remote blob
+8d162cb72d72b156dbb6e501f1de18f52be2e2fc, identical to local git
+hash-object. Executed SymPy normal and -O 372/372 each. These are
+source polynomial, character, discriminant, and Euler-factor algebra
+controls, not a Chow computation or proof of the complex central
+derivative. Lean/Lake/Agda absent in this runtime; no CI requested.
+The mathematical arguments above and the original external hypotheses
+are separate from finite controls. RH #121 and NS #123 admission paths
+unchanged this tranche; no new kernel acceptance claimed.
