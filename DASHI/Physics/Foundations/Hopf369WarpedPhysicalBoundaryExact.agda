@@ -416,3 +416,107 @@ module At {r : Level} (F : C.RealField r)
     last (metricRows a j q p px m mx) ≡ meanForce j q p px m mx
   forceRetained D j q p px m mx = refl
   forceRetained E j q p px m mx = refl
+
+  -- BR33 exact forced flat reference inverse on the homogeneous value
+  -- continuity subspace. Reciprocal certificates are explicit; no
+  -- uncontrolled division through q=0, z0=0 or normal transfer zeros.
+  record Reciprocal (a : S) : Set r where
+    constructor reciprocal
+    field
+      inv : S
+      leftLaw : inv * a ≡ U
+      rightLaw : a * inv ≡ U
+  open Reciprocal public
+
+  record MetricTracePair : Set r where
+    constructor metricPair
+    field
+      plus minus : Tensor
+
+  record GaugeTracePair : Set r where
+    constructor gaugePair
+    field
+      plusC minusC : Cov
+
+  commonMetricPair : (Wall → Wall → S) → Vec → S → S → MetricTracePair
+  commonMetricPair h b a p = metricPair (mk (a + p)) (mk (a - p))
+    where
+    mk : S → Tensor
+    mk nn = tab entry
+      where
+      entry : Axis → Axis → S
+      entry (wall i) (wall j) = h i j
+      entry (wall i) normal = half * b i
+      entry normal (wall i) = half * b i
+      entry normal normal = nn
+
+  flatMetricD : (T Cn : S) → (q : Vec) → Reciprocal T →
+    Reciprocal (dot q q) → (Wall → Wall → S) → Vec → S → S → MetricTracePair
+  flatMetricD T Cn q Ti qi Rhs g rn f = commonMetricPair h b a p
+    where
+    h : Wall → Wall → S
+    h i j = neg (half * inv Ti * Rhs i j)
+    p : S
+    p = inv qi * (T * f - dot q g)
+    b : Vec
+    b i = neg (inv Ti * (g i + q i * p))
+    a : S
+    a = trace4 h + inv Ti * (dot q b - Cn * p - two * rn)
+
+  flatMetricE : (T Cn : S) → (q : Vec) → Reciprocal T →
+    Reciprocal Cn → Reciprocal (q t) →
+    (Wall → Wall → S) → Vec → S → S → S → MetricTracePair
+  flatMetricE T Cn q Ti Ci zi Rhs g rp rm f = commonMetricPair h b a p
+    where
+    h : Wall → Wall → S
+    h i j = neg (half * inv Ti * Rhs i j)
+    p : S
+    p = neg (inv Ci * (rp + rm + f))
+    spatial : Wall → S
+    spatial i = neg (inv Ti * (g i + q i * p))
+    b : Vec
+    b t = inv zi * (q x * spatial x + q y * spatial y + q z * spatial z + f)
+    b x = spatial x
+    b y = spatial y
+    b z = spatial z
+    a : S
+    a = trace4 h + inv Ti * (rm - rp)
+
+  flatMetricNormalPlus : S → S → Tensor → Tensor → Tensor
+  flatMetricNormalPlus T Cn p m =
+    mulT (neg half) (addT (mulT T (addT p m)) (mulT Cn (subT p m)))
+
+  flatMetricNormalMinus : S → S → Tensor → Tensor → Tensor
+  flatMetricNormalMinus T Cn p m =
+    mulT half (subT (mulT T (addT p m)) (mulT Cn (subT p m)))
+
+  flatGaugeD : (T j : S) → Vec → Reciprocal (T + j) →
+    Reciprocal (T + two * j) → Vec → S → GaugeTracePair
+  flatGaugeD T j q Ti Ni gt gn = gaugePair cp cm
+    where
+    ns : S
+    ns = neg (inv Ni * gn)
+    cs : Vec
+    cs a = inv Ti * (neg (q a * ns) - gt a)
+    cp cm : Cov
+    cp normal = O
+    cp (wall a) = half * cs a
+    cm normal = ns
+    cm (wall a) = half * cs a
+
+  flatGaugeE : (T j : S) → (q : Vec) → Reciprocal (T + j) →
+    Reciprocal (q t) → Vec → S → GaugeTracePair
+  flatGaugeE T j q Ti zi gt gn = gaugePair cp cm
+    where
+    cj : Vec
+    cj t = inv zi * gn
+    cj x = O
+    cj y = O
+    cj z = O
+    cs : Vec
+    cs a = neg (inv Ti * gt a)
+    cp cm : Cov
+    cp normal = O
+    cp (wall a) = half * (cs a + cj a)
+    cm normal = O
+    cm (wall a) = half * (cs a - cj a)
