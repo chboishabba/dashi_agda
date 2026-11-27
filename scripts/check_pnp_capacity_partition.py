@@ -28,7 +28,7 @@ def row_cells(n,H,r,c,B,fanout=128):
     return tuple(out)
 
 
-def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False):
+def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False,signed_screen=False,trace=None):
     """Witness-only or exact empty/unknown, with monotone candidate upper bound.
 
     Every live cell is disjoint in original coordinates; only verified empty
@@ -42,12 +42,27 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False):
         P,I=pending[-1]
         try:
             B.pay('row_partition_node',1+n+len(P)+len(I));steps+=1
+            if trace is not None:trace('enter',P,I,None)
+            if signed_screen:
+                from check_pnp_signed_capacity_square import screen
+                try:Q,y,reason=screen(n,R,P,caps,Allowance(B,B.left//4))
+                except ProbeLimit:Q,y,reason=P,None,'refused'
+                if trace is not None:trace('signed',Q,I,reason)
+                if Q is None:
+                    upper-=1<<(n-len(P));pending.pop();continue
+                assert canon(P+Q)==Q
+                upper+=(1<<(n-len(Q)))-(1<<(n-len(P)))
+                P=Q;pending[-1]=(P,I)
+                if y is not None:
+                    assert satisfies(y,H,()) and all((r&y).bit_count()<=c for r,c in zip(R,caps))
+                    return Bound(1,upper,y,steps)
             # Reuse original one-hot affine hull, not auxiliary duplicated columns.
             if closure and all(c==1 for c in caps):
                 from check_pnp_exact_cover_pair_hull import close
                 try:
                     Q,y=close(n,R,Allowance(B,B.left//4),pairs=False,required=P)
                 except ProbeLimit:Q,y=P,None
+                if trace is not None:trace('hull',Q,I,None)
                 if Q is None:
                     upper-=1<<(n-len(P));pending.pop();continue
                 assert canon(P+Q)==Q
@@ -70,6 +85,7 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False):
                 candidates.append((size,-d,i))
             if not candidates:raise AssertionError('violated row lost from demand')
             _,_,i=min(candidates)
+            if trace is not None:trace('split',P,I,i)
             cells=row_cells(n,P,R[i],caps[i],B,fanout)
             if cells is None:break
             J=tuple(j for j in I if j!=i)
@@ -80,11 +96,11 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False):
         except ProbeLimit:break
     assert upper>=0
     if recovery and pending:
-        return recover_frontier(n,R,H,caps,pending,upper,steps,B)
+        return recover_frontier(n,R,H,caps,pending,upper,steps,B,signed_screen=signed_screen)
     return Bound(0,upper,None,steps)
 
 
-def recover_cell(n,R,H,caps,B):
+def recover_cell(n,R,H,caps,B,signed_screen=False):
     """Reuse the normal-component, signed, and character owners on ONE cell.
 
     A completed component solve is decisive, but a cap refusal is not.
@@ -97,6 +113,14 @@ def recover_cell(n,R,H,caps,B):
     from check_pnp_capacity_contraction import contract
     volume=1<<(n-len(H));best=Bound(0,volume)
     if any(c<1 for c in caps):return Bound(0,0)
+    if signed_screen:
+        from check_pnp_signed_capacity_square import screen
+        try:Q,y,reason=screen(n,R,H,caps,Allowance(B,B.left//4))
+        except ProbeLimit:Q,y,reason=H,None,'refused'
+        if Q is None:return Bound(0,0)
+        assert canon(H+Q)==Q
+        H=Q;volume=1<<(n-len(H));best=Bound(0,volume)
+        if y is not None:return Bound(1,volume,y)
     def normal(A):
         F=violation_flats(n,R,H,caps,A)
         y=solve(n,H,F,A)
@@ -130,7 +154,7 @@ def recover_cell(n,R,H,caps,B):
     return best
 
 
-def recover_frontier(n,R,H,caps,pending,upper,steps,B):
+def recover_frontier(n,R,H,caps,pending,upper,steps,B,signed_screen=False):
     """Demand-local recovery on the retained disjoint frontier, no restart.
 
     Only completed empty cells or sound upper bounds pay candidate volume.
@@ -143,7 +167,7 @@ def recover_frontier(n,R,H,caps,pending,upper,steps,B):
         try:
             A=Allowance(B,B.left//(len(pending)-i))
             A.pay('partition_recovery_cell',1+len(P))
-            v=recover_cell(n,R,P,caps,A)
+            v=recover_cell(n,R,P,caps,A,signed_screen=signed_screen)
             B.pay('partition_recovery_commit')
         except ProbeLimit:continue
         upper-= (1<<(n-len(P)))-v.upper
