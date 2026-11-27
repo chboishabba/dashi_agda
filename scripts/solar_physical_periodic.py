@@ -81,6 +81,47 @@ def aperture(normals,areas,volumes,frames):
         out[:,3*i:3*i+3]=a[i]/((R+H)*np.sqrt(4*np.pi*epsilon_0*v[i]))*B.T@F[i]
     return out
 
+def reaction_schedule(D, vol, cfg, N, dt):
+    """Prescribed reversible population cycle, with zero-drift births.
+    Continuous limit of PopulationGrid.event: mean-velocity removal and
+    zero-velocity birth give normalized-current damping (birth+death)/(2n).
+    Chemical work and reservoir return are independently specified.
+    """
+    mass=np.array([me,30.5*u,16*u]); charge=e*np.array([-1,1,1])
+    base=D*mass/charge**2
+    if 'reaction' not in cfg:
+        return np.broadcast_to(D,(N,*D.shape)),np.zeros((N,*D.shape)),0.,0.
+    q=cfg['reaction']; pop=np.asarray(q['density_m3'],float)
+    birth=np.asarray(q['birth_m3_s'],float); death=np.asarray(q['death_m3_s'],float)
+    assert pop.shape==(N,*D.shape) and birth.shape==death.shape==pop.shape
+    assert np.all(pop>0) and np.all(birth>=0) and np.all(death>=0)
+    assert np.allclose(pop@charge,0,atol=1e-12*np.max(pop)*e)
+    assert np.allclose((birth-death)@charge,0,atol=1e-12*max(1.,np.max(birth+death))*e)
+    # Periodic spectral derivative on the same clock as the field.
+    F=np.fft.fft(np.eye(N),axis=0)/np.sqrt(N)
+    deriv=(F.conj().T@(2j*np.pi*np.fft.fftfreq(N,dt)[:,None]*F)).real
+    residual=np.einsum('ij,jks->iks',deriv,pop)-birth+death
+    assert np.linalg.norm(residual)<=1e-8*max(1.,np.linalg.norm(birth+death))
+    assert np.allclose(pop[0],base,rtol=1e-8,atol=0)
+    assert np.allclose(birth.sum(axis=0),death.sum(axis=0),rtol=1e-8,atol=1e-12)
+    energy=np.asarray(q['formation_J_per_particle'],float)
+    assert energy.shape==(3,) and np.all(energy>=0)
+    cost=dt*np.einsum('tis,i,s->',birth,vol,energy)
+    release=dt*np.einsum('tis,i,s->',death,vol,energy)
+    eta=float(q['chemical_input_efficiency']); rec=float(q['chemical_recovery_efficiency'])
+    assert 0<eta<=1 and 0<=rec<=1
+    # No independent chemical reservoir is silently admitted.
+    return pop*charge**2/mass,(birth+death)/(2*pop),float(cost/eta-rec*release),float(np.linalg.norm(residual))
+
+def dc_port(cfg):
+    if 'static_shell' not in cfg:
+        return cfg['dc_admittance_S'],cfg['dc_ground_transfer_sqrt_S']
+    q=cfg['static_shell']
+    Y,G=static_shell(q['radii_m'],q['conductivity_S_m'],q['ground_S'])
+    # l=1 poloidal normalized tangent field coefficient equals sqrt(2)
+    # times the normalized scalar potential coefficient (up to sign).
+    return np.r_[np.zeros(3),np.full(3,Y/2)],np.r_[np.zeros(3),np.full(3,G/np.sqrt(2))]
+
 def solve_model(material, cfg, heat, source, normals=None, areas=None):
     rr,neutral,D,gyro,b=material; n=len(rr); N=len(source)
     if N<3 or N%2!=1: raise ValueError('odd temporal grid required')
@@ -88,8 +129,9 @@ def solve_model(material, cfg, heat, source, normals=None, areas=None):
     if period<=0: raise ValueError('period')
     vol=np.array(cfg['volumes_m3']); Cth=np.array(cfg['heat_capacity_J_K']); kth=np.array(cfg['cooling_W_K'])
     th,mid,cool=thermal_si(heat,dt,Cth,kth)
+    Dt,turnover,chemical_paid,pop_residual=reaction_schedule(D,vol,cfg,N,dt)
     load=np.asarray(cfg['load_S_m'],float); eta=float(cfg['heater_efficiency'])
-    if not 0<eta<=1 or np.any(load<0): raise ValueError('load or efficiency')
+    if not 0<eta<=1 or np.any(load<0) or float(cfg['auxiliary_J'])<0: raise ValueError('load or efficiency')
     # Physical mesh supplied independently as an energy-normalized skew curl
     # operator on full state, including explicit magnetic degrees of freedom.
     # Existing local material generator is the owner of all species couplings.
@@ -98,6 +140,7 @@ def solve_model(material, cfg, heat, source, normals=None, areas=None):
         A,_,_=generator(D[i],np.ones(3),gyro[i],b[i],epsilon_0,load[i])
         slices.append(slice(offset,offset+len(A))); offset+=len(A)
     K=np.asarray(cfg['curl_s_inv'],float); d=len(K)
+    assert np.all(D>0), 'fixed positive species chart required for this population weld'
     assert K.shape==(d,d) and d>=offset and np.allclose(K+K.T,0,atol=1e-12)
     E=np.array([j for sl in slices for j in range(sl.start,sl.start+3)])
     C=np.zeros((6,d)); C[:,E]=aperture(cfg['normals'] if normals is None else normals,cfg['areas_m2'] if areas is None else areas,vol,cfg['ned_to_cartesian'])
@@ -105,12 +148,13 @@ def solve_model(material, cfg, heat, source, normals=None, areas=None):
         tr=[dict(r,te=r['te']+mid[t,i]) for i,r in enumerate(rr)]
         nu=rates(tr,neutral); A=K.copy()
         for i,sl in enumerate(slices):
-            a,_,_=generator(D[i],nu[i],gyro[i],b[i],epsilon_0,load[i]); A[sl,sl]+=a
+            a,_,_=generator(Dt[t,i],nu[i]+turnover[t,i],gyro[i],b[i],epsilon_0,load[i]); A[sl,sl]+=a
         blocks.append(A)
     A=np.array(blocks)
     f=np.fft.fftfreq(N,dt); F=np.fft.fft(np.eye(N),axis=0)/np.sqrt(N)
     derivative=(F.conj().T@((2j*np.pi*f)[:,None]*F)).real
-    Y,G=map(np.array,zip(*(shell(z,cfg['ground_admittance_normalized'],cfg['shell_sigma_S_m'],cfg['dc_admittance_S'],cfg['dc_ground_transfer_sqrt_S']) for z in f)))
+    dy,dg=dc_port(cfg)
+    Y,G=map(np.array,zip(*(shell(z,cfg['ground_admittance_normalized'],cfg['shell_sigma_S_m'],dy,dg) for z in f)))
     assert np.all(Y.real>=abs(G)**2-1e-10)
     # Natural port c maps energy-normalized state to sqrt(W).
     c=np.asarray(cfg['source_port_sqrt_inv_s'],float); assert c.shape==(d,)
@@ -122,15 +166,16 @@ def solve_model(material, cfg, heat, source, normals=None, areas=None):
     x=solve(M,rhs.ravel()).reshape(N,d)
     sh=F@(x@C.T); incoming=dt*float(inc@inc); outgoing=dt*float(np.sum((x@c-inc)**2))
     material_loss=-dt*np.einsum('ti,tij,tj->',x,A,x)
+    turnover_loss=dt*sum(np.sum(turnover[:,i,:]*np.sum(x[:,sl.start+3:sl.stop].reshape(N,3,3)**2,axis=2)) for i,sl in enumerate(slices))
     useful=dt*sum(load[i]/epsilon_0*np.sum(x[:,sl.start:sl.start+3]**2) for i,sl in enumerate(slices))
     shell_work=dt*np.sum(Y.real*abs(sh)**2); ground=dt*np.sum(abs(G*sh)**2)
-    absorbed=dt*np.sum(heat); paid=absorbed/eta+float(cfg['auxiliary_J'])
+    absorbed=dt*np.sum(heat); paid=absorbed/eta+float(cfg['auxiliary_J'])+chemical_paid
     err=incoming-outgoing-material_loss-shell_work
     assert abs(err)<1e-7*max(incoming,1e-20) and abs(absorbed-cool)<1e-8*max(absorbed,1e-20)
     assert ground<=shell_work+1e-8*max(shell_work,1e-20)
     # Source budget is a universal upper bound for all equal-resource passive
     # apertures on this model, not a claim of attainment.
-    return dict(net_J=float(useful+ground-paid),load_J=float(useful),ground_J=float(ground),collision_J=float(material_loss-useful),shell_other_J=float(shell_work-ground),incident_J=incoming,outgoing_J=outgoing,absorbed_J=float(absorbed),paid_J=float(paid),cooling_J=float(cool),balance_J=float(err),passive_upper_J=incoming,history=x,thermal=th,dc=sh[0].real)
+    return dict(net_J=float(useful+ground-paid),load_J=float(useful),ground_J=float(ground),collision_J=float(material_loss-useful-turnover_loss),population_mixing_removal_J=float(turnover_loss),chemical_paid_J=chemical_paid,population_residual=pop_residual,shell_other_J=float(shell_work-ground),incident_J=incoming,outgoing_J=outgoing,absorbed_J=float(absorbed),paid_J=float(paid),cooling_J=float(cool),balance_J=float(err),passive_upper_J=incoming,history=x,thermal=th,dc=sh[0].real)
 
 def static_shell(radii, conductivity, ground_S):
     """DC l=1 electroquasistatic conduction through conducting layers.
