@@ -50,12 +50,12 @@ errorBand : (l u : Q.ℚᵘ) (x y e : ℝ) →
   (l ⋆) ≤ y - e → y + e ≤ (u ⋆) → ∣ x - y ∣ ≤ e → Band l x u
 errorBand l u x y e hl hu h =
   let open P.ℝ-Solver
-      hi = P.≤-trans (P.x≤∣x∣ {x = x - y}) h
+      hi = P.≤-trans (P.x≤∣x∣ (x - y)) h
   in P.≤-trans hl (P.≤-respʳ-≃
        (solve 2 (λ x y → y ⊖ (y ⊖ x) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y (P.neg-mono-≤ (P.≤-trans
-         (P.x≤∣x∣ {x = y - x})
-         (P.≤-respˡ-≃ (P.∣x-y∣≃∣y-x∣ x y) h))))) ,
+         (P.x≤∣x∣ (y - x))
+         (P.≤-respˡ-≃ (P.≃-trans (P.∣-∣-cong (solve 2 (λ x y → x ⊖ y ⊜ ⊝ (y ⊖ x)) P.≃-refl x y)) (P.∣-x∣≃∣x∣ {x = y - x})) h))))) ,
      P.≤-trans (P.≤-respˡ-≃
        (solve 2 (λ x y → y ⊕ (x ⊖ y) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y hi)) hu
