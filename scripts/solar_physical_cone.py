@@ -25,7 +25,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -36,6 +36,17 @@ def timed_step(x,H,force,dt,mesh):
     d=len(x); assert H.shape==(d,d) and force.shape==(d,) and dt>0
     xyz,site,faces=validate_mesh(mesh,d)
     groups=[np.flatnonzero(site==i) for i in range(len(xyz))]
+    forms={} if loss_forms is None else {k:np.asarray(v,float) for k,v in loss_forms.items()}
+    for a in forms.values():
+        assert a.shape==(d,d) and np.allclose(a,a.T)
+        if np.any(a[site[:,None]!=site[None,:]]!=0): raise ValueError('loss form must be site-local')
+    if forms and not np.allclose(sum(forms.values()),-(H+H.T)/2,rtol=1e-10,atol=1e-12): raise ValueError('loss partition mismatch')
+    channel={k:0. for k in forms}; incoming=outgoing=0.
+    if source_port is not None:
+        source_port=np.asarray(source_port,float); assert source_port.shape==(d,)
+        assert len(np.unique(site[source_port!=0]))==1
+        assert np.allclose(force,2*incident*source_port)
+        assert 'source' in forms and np.allclose(forms['source'],np.outer(source_port,source_port))
     pieces=[]; accounted=np.zeros_like(H)
     for ix in groups:
         if not len(ix): continue
@@ -77,10 +88,16 @@ def timed_step(x,H,force,dt,mesh):
         mid=(old+y)/2; w=dt*float(mid@b); q=-dt*float(mid@a@mid)
         assert q>=-1e-10*max(1.,abs(w),float(old@old))
         assert abs((y@y-old@old)/2-w+q)<1e-9*max(1.,abs(w),float(old@old))
+        if fid is None:
+            for name,F in forms.items(): channel[name]+=dt*float(mid@F[np.ix_(ix,ix)]@mid)
+            if source_port is not None and np.any(source_port[ix]!=0):
+                incoming+=dt*incident**2; outgoing+=dt*(mid@source_port[ix]-incident)**2
         x[ix]=y; work+=w; loss+=q
         assert np.all(x[arrival>t1]==0)
         receipts.append(dict(face_id=fid,coordinates=ix.tolist(),start_s=t0,end_s=t1,distance_m=distance,source_roots=roots.tolist(),work_J=w,loss_J=q))
-    return x,dict(work_J=work,loss_J=loss,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
+    if forms: assert abs(sum(channel.values())-loss)<1e-9*max(1.,abs(loss))
+    if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
+    return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
                   physical_front_admitted=False,stage_speed_bound_m_s=speed,
                   approximation='serial local midpoint product; first order consistent at fixed mesh, admissible time intervals only')
 
