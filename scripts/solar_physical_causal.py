@@ -74,9 +74,9 @@ class Shell:
         self.Rg=np.asarray(cfg['R_ground_s_inv'],float); self.Ro=np.asarray(cfg['R_other_s_inv'],float)
         self.Dg=np.asarray(cfg['D_ground_S'],float); self.Do=np.asarray(cfg['D_other_S'],float)
         self.R=self.Rg+self.Ro; self.D=self.Dg+self.Do
-        m=len(self.J); assert self.J.shape==(m,m) and self.B.shape==(m,6)
+        m=len(self.J); p=self.B.shape[1]; assert self.J.shape==(m,m) and self.B.shape==(m,p)
         assert np.allclose(self.J+self.J.T,0)
-        for a,d in ((self.Rg,m),(self.Ro,m),(self.Dg,6),(self.Do,6)):
+        for a,d in ((self.Rg,m),(self.Ro,m),(self.Dg,p),(self.Do,p)):
             assert a.shape==(d,d) and np.allclose(a,a.T)
             assert np.min(np.linalg.eigvalsh(a))>=-1e-14
     def admittance(self,f):
@@ -126,7 +126,11 @@ def advance(material,cfg,state,incident,heating,dt,sh):
             ix=np.arange(12*i+3+3*j,12*i+6+3*j)
             assert np.all(K[ix,:]==0) and np.all(K[:,ix]==0)
     E=np.concatenate([np.arange(12*i,12*i+3) for i in range(n)])
-    C=np.zeros((6,d)); C[:,E]=aperture(cfg['normals'],cfg['areas_m2'],vol,cfg['ned_to_cartesian'])
+    if 'local_shell_port' in cfg:
+        C=np.asarray(cfg['local_shell_port'],float)
+        assert C.shape==(sh.B.shape[1],d)
+    else:
+        C=np.zeros((6,d)); C[:,E]=aperture(cfg['normals'],cfg['areas_m2'],vol,cfg['ned_to_cartesian'])
     c=np.asarray(cfg['source_port_sqrt_inv_s'],float)
     H=np.block([[A-C.T@sh.D@C-np.outer(c,c),-C.T@sh.B.T],[sh.B@C,sh.J-sh.R]])
     v=np.r_[x,z]; force=np.r_[2*incident*c,np.zeros(len(z))]
@@ -165,7 +169,10 @@ def advance(material,cfg,state,incident,heating,dt,sh):
     return (x,z,pop,pool,newtheta),ledger
 
 def cycle(material,cfg):
-    if 'radial_cells' in cfg:
+    if cfg.get('local_angular_shell',False):
+        from solar_physical_angular_local import local_shell
+        spec,C=local_shell(cfg); cfg=dict(cfg,local_shell_port=C); sh=Shell(spec)
+    elif 'radial_cells' in cfg:
         from solar_physical_radial_ladder import build
         spec,radii=build(int(cfg['radial_cells']),cfg['shell_sigma_S_m'],cfg['ground_admittance_normalized'])
         sh=Shell(spec)
@@ -193,7 +200,7 @@ def cycle(material,cfg):
     original_population_residual=float(np.linalg.norm(state[2]-D*MASS/CHARGE**2)/max(np.linalg.norm(D*MASS/CHARGE**2),1e-30))
     original_restored=restored and original_population_residual<=cfg.get('return_rtol',1e-8)
     net=ledger['load_J']+ledger['ground_J']-ledger['paid_J']-cfg['auxiliary_J']
-    return dict(restored=bool(restored),original_population_restored=bool(original_restored),original_population_residual=original_population_residual,return_residuals=residual,cycles=cycle_index+1,ledger=ledger,net_J=float(net),admissible_cycle_net_J=float(net) if original_restored else None,radial_audit=sh.audit_radial(cfg,cfg.get('audit_frequencies_Hz',[0.,3.915,7.83])),physical_admission=False)
+    return dict(restored=bool(restored),original_population_restored=bool(original_restored),original_population_residual=original_population_residual,return_residuals=residual,cycles=cycle_index+1,ledger=ledger,net_J=float(net),admissible_cycle_net_J=float(net) if original_restored else None,radial_audit=({'status':'LOCAL_PATCH_PORTS_REQUIRE_SEPARATE_HARMONIC_OBSERVATION_AUDIT'} if cfg.get('local_angular_shell',False) else sh.audit_radial(cfg,cfg.get('audit_frequencies_Hz',[0.,3.915,7.83]))),physical_admission=False)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('root',type=Path); p.add_argument('packet',type=Path); p.add_argument('config',type=Path); a=p.parse_args()
