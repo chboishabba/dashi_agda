@@ -12,16 +12,29 @@ def optimize(material,cfg,design):
     A geometry layout is a support mask on actual edge IDs, not a ratio label.
     """
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
-    layouts=design['layouts']; n=len(vol); steps=len(cfg['incident_sqrt_W'])
+    cfg=dict(cfg,fixed_horizon=True)
+    if 'layout_geometry' in design:
+        from solar_spherical_layouts import layouts as generate
+        layouts=generate(cfg['radii_m'],cfg['angular_level'],**design['layout_geometry'])
+    else: layouts=design['layouts']
+    n=len(vol); steps=len(cfg['incident_sqrt_W'])
     budget=float(design['load_budget_s_inv']); heater=float(design['heating_budget_J'])
     dt=cfg['period_s']/steps
     assert budget>0 and heater>=0 and len(layouts)>0
+    # Identical resource ceiling also applies to terminal receiver loading.
+    if 'terminal_load_rate_s_inv' in cfg:
+        terminal=np.asarray(cfg['terminal_load_rate_s_inv'],float)
+        assert terminal.shape==(ne,) and np.all(terminal>=0) and terminal.sum()<=budget
+    eligible=set(e for layout in layouts for e in layout['receiver_edges'])
+    if 'terminal_load_rate_s_inv' in cfg:
+        assert set(np.flatnonzero(terminal))<=eligible
     # Each candidate specifies a finite set of eligible receiver edge IDs.
     results={}; evaluations=0
     def run(layout,active):
         nonlocal evaluations
         ids=np.asarray(layout['receiver_edges'],int)
-        assert len(ids)>0 and len(set(ids))==len(ids) and np.all((ids>=0)&(ids<ne))
+        if not len(ids): return dict(status='UNRESOLVED_MESH_LAYOUT',rejected=0)
+        assert len(set(ids))==len(ids) and np.all((ids>=0)&(ids<ne))
         heat_cells=np.asarray(design['heater_cells'],int)
         assert len(set(heat_cells))==len(heat_cells) and np.all((heat_cells>=0)&(heat_cells<n))
         count=len(ids); hc=steps*len(heat_cells) if active else 0
@@ -32,7 +45,7 @@ def optimize(material,cfg,design):
             allocation[ids]=budget*raw/max(1.,raw.sum())
             heat=np.zeros((steps,n))
             if hc:
-                raw=np.asarray(z[count:]); heat[:,heat_cells]=(heater/dt*raw/max(1.,raw.sum())).reshape(steps,-1)
+                raw=np.asarray(z[count:]); heat[:,heat_cells]=(heater/(dt*cfg['max_cycles'])*raw/max(1.,raw.sum())).reshape(steps,-1)
             cc['load_rate_s_inv']=allocation
             cc['heating_W']=heat
             return cc
@@ -66,10 +79,14 @@ def optimize(material,cfg,design):
     # Energy ceiling for the same fixed campaign length. Natural source on
     # during preparation is not free headroom: include it in the campaign.
     ceiling=cfg['max_cycles']*dt*float(np.sum(np.asarray(cfg['incident_sqrt_W'])**2))
-    result=dict(layouts=results,evaluations=evaluations,universal_passive_upper_J=ceiling,
+    # Uniform bound for source-edge scattering: when source edge is eligible,
+    # load at that site is <= budget. This does not bound remote receiver
+    # extraction by itself. Use only the universal incident cap unless a
+    # separately checked full-state domination certificate is supplied.
+    result=dict(layouts=results,layout_geometry=layouts,evaluations=evaluations,universal_passive_upper_J=ceiling,
         best_active=None if a is None else a[0],best_passive=None if p is None else p[0],
         sampled_advantage_J=None if a is None or p is None else a[0]-p[0],
-        certified_advantage_lower_J=None if a is None else a[0]-ceiling,
+        candidate_advantage_lower_J=None if a is None else a[0]-ceiling,
         global_optimum_certified=False,physical_admission=False)
     if a:
         cc=dict(cfg,load_rate_s_inv=a[2]['load'],heating_W=a[2]['heating'])
