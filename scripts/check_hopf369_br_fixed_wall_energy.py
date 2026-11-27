@@ -57,7 +57,9 @@ def check():
     # n(log lambda)=-q_y, H_n=q H_y.
     qp,qm,Hyp,Hym,j=s.symbols('qp qm Hyp Hym j')
     Wp=-qp-q*Hyp; Wm=-qm-q*Hym
-    assert s.expand((Wp-Wm).subs({qp:qm-j,Hyp:Hym+j/q}))==0
+    assert s.expand((Wp-Wm).subs({qp:qm-j,Hyp:Hym-3*j/q}))==4*j
+    # Only the mean wall law is imposed; one-sided curvature need not vanish.
+    assert s.expand(((Wp+Wm)/2).subs(Hyp,-(qp+qm)/q-Hym))==0
     print('PASS variable principal symmetrizer, exact energy identity, tangential commutator, cusp-free inverse')
     print('NOTE physical mean wall law is an additional constraint; not inferred from reduced metric energy')
 
