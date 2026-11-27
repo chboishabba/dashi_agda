@@ -144,3 +144,79 @@ abPair (quad a b x y) (pa , pb , px , py) e pr with x + y | abGrade (quad a b x 
 ... | suc k | gr | positive =
   let p , m , d , k′ = productPair (grade (quad a b x y)) a k pr pa gr
   in p , m , d , cong suc k′
+
+
+-- Reverse equality-stratum charts. The split index is strictly interior,
+-- so both sides of each split are positive; the double diagonal remains.
+-- Proof fields are never used as coordinate identity.
+splitPositive : (d t : Nat) → t < d → zero < d ∸ t
+splitPositive zero t ()
+splitPositive (suc d) zero h = s≤s z≤n
+splitPositive (suc d) (suc t) (s≤s h) = splitPositive d t h
+
+splitSum : (d t : Nat) → t < d → t + (d ∸ t) ≡ d
+splitSum zero t ()
+splitSum (suc d) zero h = refl
+splitSum (suc d) (suc t) (s≤s h) = cong suc (splitSum d t h)
+
+fromXY : ∀ {n} → F.PositiveFactorPair n → Nat → Quad
+fromXY p t = quad t (F.divisor p ∸ t)
+  (suc (F.predecessor p)) (suc (F.predecessor p))
+
+fromXYPositive : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  zero < t → t < F.divisor p → Positive (fromXY p t)
+fromXYPositive p t ht hs = ht , splitPositive (F.divisor p) t hs ,
+  s≤s z≤n , s≤s z≤n
+
+fromXYGrade : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  t < F.divisor p → grade (fromXY p t) ≡ n
+fromXYGrade p t hs =
+  trans (xyGrade (fromXY p t) refl)
+    (trans (cong (λ d → d * suc (F.predecessor p)) (splitSum (F.divisor p) t hs))
+      (trans (N.*-comm (F.divisor p) (suc (F.predecessor p))) (sym (F.productExact p))))
+
+fromXYOmega : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  zero < t → t < F.divisor p → fromXY p t ∈ G.omega n
+fromXYOmega p t ht hs = G.omegaWrite (fromXYPositive p t ht hs) (fromXYGrade p t hs)
+
+fromAB : ∀ {n} → F.PositiveFactorPair n → Nat → Quad
+fromAB p t = quad (F.divisor p) (F.divisor p) t (suc (F.predecessor p) ∸ t)
+
+fromABPositive : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  zero < t → t < suc (F.predecessor p) → Positive (fromAB p t)
+fromABPositive p t ht hs = F.divisorPositive p , F.divisorPositive p , ht ,
+  splitPositive (suc (F.predecessor p)) t hs
+
+fromABGrade : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  t < suc (F.predecessor p) → grade (fromAB p t) ≡ n
+fromABGrade p t hs =
+  trans (abGrade (fromAB p t) refl)
+    (trans (cong (λ k → k * F.divisor p) (splitSum (suc (F.predecessor p)) t hs))
+      (sym (F.productExact p)))
+
+fromABOmega : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  zero < t → t < suc (F.predecessor p) → fromAB p t ∈ G.omega n
+fromABOmega p t ht hs = G.omegaWrite (fromABPositive p t ht hs) (fromABGrade p t hs)
+
+recoverXY : (q : Quad) → x q ≡ y q →
+  (p : F.PositiveFactorPair (grade q)) →
+  F.divisor p ≡ a q + b q → suc (F.predecessor p) ≡ x q →
+  fromXY p (a q) ≡ q
+recoverXY q e p d k = quadCoordinates refl
+  (trans (cong (λ z → z ∸ a q) d) (xySplitComplement q)) k (trans k e)
+
+recoverAB : (q : Quad) → a q ≡ b q →
+  (p : F.PositiveFactorPair (grade q)) →
+  F.divisor p ≡ a q → suc (F.predecessor p) ≡ x q + y q →
+  fromAB p (x q) ≡ q
+recoverAB q e p d k = quadCoordinates d (trans d e) refl
+  (trans (cong (λ z → z ∸ x q) k) (abSplitComplement q))
+
+-- Coordinate readbacks of the reverse charts, not proof-record equality.
+xyReadDivisor : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  t < F.divisor p → a (fromXY p t) + b (fromXY p t) ≡ F.divisor p
+xyReadDivisor p t = splitSum (F.divisor p) t
+
+abReadQuotient : ∀ {n} (p : F.PositiveFactorPair n) (t : Nat) →
+  t < suc (F.predecessor p) → x (fromAB p t) + y (fromAB p t) ≡ suc (F.predecessor p)
+abReadQuotient p t = splitSum (suc (F.predecessor p)) t
