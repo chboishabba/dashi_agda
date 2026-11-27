@@ -61,6 +61,24 @@ def exact():
     print('independent nonparallel full Ricci cross-mode parity and azimuth controls PASS',flush=True)
 
 
+def exact_so2():
+    """Independent rational circle moments for the controller three-sector split."""
+    x,y=s.symbols('x y',real=True); p=s.Matrix([3*x/5,3*y/5,s.Rational(4,5)]);q=s.Matrix([-x,-y,0]); I3=s.eye(3)
+    def E(Q,n):
+        P=I3-n*n.T;return P*Q*P-P*s.trace(P*Q)/2
+    def avg(f):
+        return s.factor(sum(c*s.factorial2(i-1)*s.factorial2(j-1)/s.factorial2(i+j) for (i,j),c in s.Poly(s.expand(f),x,y).terms() if i%2==0 and j%2==0))
+    def cross(i,j):
+        A=s.zeros(3);A[i,j]=A[j,i]=1;return A
+    basis=[s.diag(-1,-1,2),cross(0,2),cross(1,2),s.diag(1,-1,0),cross(0,1)]
+    M=s.Matrix(5,5,lambda i,j:avg(s.trace(E(basis[i],p)*E(basis[j],q))))
+    assert M==s.diag(*M.diagonal()) and M[1,1]==M[2,2] and M[3,3]==M[4,4]
+    Q=s.Matrix([[3,2,4],[2,-5,1],[4,1,2]])
+    n=s.Matrix([0,0,1]); z=(n.T*Q*n)[0]; m0=3*z*z/2; m1=2*((Q*n).dot(Q*n)-z*z);m2=s.trace(Q*Q)-m0-m1
+    assert avg(s.trace(E(Q,p)*E(Q,q)))==M[0,0]*m0/6+M[1,1]*m1/2+M[3,3]*m2/2
+    print('exact circle-moment controller SO(2) block and arbitrary STF reconstruction PASS',flush=True)
+
+
 def tri(k,p,q):
     """Triangle aligned along e3. Exact azimuth trapezoid for degree <=10."""
     c=(k*k+p*p-q*q)/(2*k*p); rho=p*np.sqrt(max(0.,1-c*c)); z=p*c
@@ -133,5 +151,5 @@ def run(cutoff=80.,nodes=6,histories=8,modes=12,final=1.12,quad=80,kout=30.):
     return result
 
 if __name__=='__main__':
-    exact()
+    exact();exact_so2()
     for n,h in ((4,6),(6,8)):run(nodes=n,histories=h)
