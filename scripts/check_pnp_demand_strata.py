@@ -159,6 +159,16 @@ class Ledger:
                             self.record_character(Q,caps,cert,A);continue
                     except ProbeLimit:pass
                     try:
+                        from check_pnp_capacity_partition import partition
+                        v=partition(self.n,self.R,Q,caps,Allowance(B,max(0,B.left//2)))
+                        if v.upper==0:
+                            self._record(Q,caps,'disjoint_row_partition_empty',B);continue
+                        if v.witness is not None:
+                            total+=v.lower;y=v.witness if y is None else y
+                            unknown|=v.lower!=v.upper
+                            continue
+                    except ProbeLimit:pass
+                    try:
                         from check_pnp_capacity_contraction import contract
                         w=contract(self.n,self.R,Q,caps,Allowance(B,max(0,B.left)))
                         if w is not None:

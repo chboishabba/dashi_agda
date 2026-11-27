@@ -640,3 +640,7 @@ contrast and per-donor charge vectors on baseline survivors. Use fresh
 checkpoint names because the source fingerprints have changed.
 No execution or proof-kernel acceptance performed in this implementation
 handoff; operator confirmation remains required.
+
+
+### Disjoint nonlinear row continuation — local acceptance 2026-11-27
+Retain original disjoint row-capacity cells rather than their affine hull; transactionally charge expansion and preserve parent on refusal. `check_pnp_capacity_partition.py` is attached to the capacity ledger. Local Python/SymPy: 1944 checks, 1026 certified empty, 243 bounded refusals, 16/16 sparse covers; regular campaign partial 23/60. Exact 72-column survivor 24_9_2 solved in 16 steps / 171888 logical units, independently verified. Four sparse 1M-cap survivors solve at larger old cap as well. Receipts in scripts/receipts/pnp_capacity_*_local_20261127.json; replay and final regression receipts separate. Universal discovery and machine-bit cost open; native kernels and CI not run.

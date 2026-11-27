@@ -1,0 +1,335 @@
+{
+  "key": "c9c345cb7ece6f904bfdf589bdb369e12a6d4df4c4df56ae234e71d05da57f3e",
+  "cases": [
+    {
+      "name": "guarded",
+      "charged": 63
+    },
+    {
+      "name": "small_5",
+      "checks": 7,
+      "witnesses": 2,
+      "exact": 14,
+      "relative_choices": 1,
+      "charged": 833
+    },
+    {
+      "name": "small_6",
+      "checks": 8,
+      "witnesses": 8,
+      "exact": 16,
+      "relative_choices": 3,
+      "charged": 10463
+    },
+    {
+      "name": "small_8",
+      "checks": 5,
+      "witnesses": 7,
+      "exact": 10,
+      "relative_choices": 3,
+      "charged": 1175
+    },
+    {
+      "name": "small_11",
+      "checks": 8,
+      "witnesses": 13,
+      "exact": 16,
+      "relative_choices": 5,
+      "charged": 4030
+    },
+    {
+      "name": "small_13",
+      "checks": 8,
+      "witnesses": 7,
+      "exact": 15,
+      "relative_choices": 3,
+      "charged": 31869
+    },
+    {
+      "name": "small_14",
+      "checks": 8,
+      "witnesses": 4,
+      "exact": 16,
+      "relative_choices": 2,
+      "charged": 1299
+    },
+    {
+      "name": "small_16",
+      "checks": 7,
+      "witnesses": 5,
+      "exact": 14,
+      "relative_choices": 2,
+      "charged": 2162
+    },
+    {
+      "name": "small_17",
+      "checks": 8,
+      "witnesses": 16,
+      "exact": 4,
+      "relative_choices": 7,
+      "charged": 57246
+    },
+    {
+      "name": "small_18",
+      "checks": 4,
+      "witnesses": 4,
+      "exact": 8,
+      "relative_choices": 2,
+      "charged": 452
+    },
+    {
+      "name": "small_19",
+      "checks": 8,
+      "witnesses": 6,
+      "exact": 16,
+      "relative_choices": 2,
+      "charged": 2035
+    },
+    {
+      "name": "small_22",
+      "checks": 8,
+      "witnesses": 2,
+      "exact": 16,
+      "relative_choices": 1,
+      "charged": 569
+    },
+    {
+      "name": "small_23",
+      "checks": 7,
+      "witnesses": 8,
+      "exact": 14,
+      "relative_choices": 3,
+      "charged": 1882
+    },
+    {
+      "name": "small_25",
+      "checks": 8,
+      "witnesses": 14,
+      "exact": 15,
+      "relative_choices": 6,
+      "charged": 4572
+    },
+    {
+      "name": "small_28",
+      "checks": 8,
+      "witnesses": 5,
+      "exact": 16,
+      "relative_choices": 2,
+      "charged": 1751
+    },
+    {
+      "name": "small_30",
+      "checks": 8,
+      "witnesses": 3,
+      "exact": 16,
+      "relative_choices": 1,
+      "charged": 664
+    },
+    {
+      "name": "small_34",
+      "checks": 7,
+      "witnesses": 12,
+      "exact": 14,
+      "relative_choices": 4,
+      "charged": 1334
+    },
+    {
+      "name": "small_35",
+      "checks": 8,
+      "witnesses": 2,
+      "exact": 15,
+      "relative_choices": 1,
+      "charged": 1893
+    },
+    {
+      "name": "small_36",
+      "checks": 7,
+      "witnesses": 2,
+      "exact": 14,
+      "relative_choices": 1,
+      "charged": 849
+    },
+    {
+      "name": "small_40",
+      "checks": 8,
+      "witnesses": 8,
+      "exact": 16,
+      "relative_choices": 3,
+      "charged": 9802
+    },
+    {
+      "name": "small_42",
+      "checks": 7,
+      "witnesses": 0,
+      "exact": 14,
+      "relative_choices": 0,
+      "charged": 1140
+    },
+    {
+      "name": "small_45",
+      "checks": 8,
+      "witnesses": 5,
+      "exact": 15,
+      "relative_choices": 2,
+      "charged": 1861
+    },
+    {
+      "name": "small_50",
+      "checks": 8,
+      "witnesses": 15,
+      "exact": 14,
+      "relative_choices": 6,
+      "charged": 24359
+    },
+    {
+      "name": "small_51",
+      "checks": 3,
+      "witnesses": 0,
+      "exact": 6,
+      "relative_choices": 0,
+      "charged": 90
+    },
+    {
+      "name": "small_53",
+      "checks": 7,
+      "witnesses": 4,
+      "exact": 14,
+      "relative_choices": 2,
+      "charged": 542
+    },
+    {
+      "name": "small_54",
+      "checks": 8,
+      "witnesses": 10,
+      "exact": 16,
+      "relative_choices": 4,
+      "charged": 3443
+    },
+    {
+      "name": "small_55",
+      "checks": 8,
+      "witnesses": 9,
+      "exact": 16,
+      "relative_choices": 4,
+      "charged": 7323
+    },
+    {
+      "name": "small_56",
+      "checks": 8,
+      "witnesses": 8,
+      "exact": 15,
+      "relative_choices": 4,
+      "charged": 14313
+    },
+    {
+      "name": "small_59",
+      "checks": 8,
+      "witnesses": 12,
+      "exact": 15,
+      "relative_choices": 5,
+      "charged": 7805
+    },
+    {
+      "name": "small_60",
+      "checks": 8,
+      "witnesses": 11,
+      "exact": 8,
+      "relative_choices": 5,
+      "charged": 38490
+    },
+    {
+      "name": "small_62",
+      "checks": 6,
+      "witnesses": 6,
+      "exact": 12,
+      "relative_choices": 3,
+      "charged": 719
+    },
+    {
+      "name": "small_64",
+      "checks": 8,
+      "witnesses": 4,
+      "exact": 16,
+      "relative_choices": 2,
+      "charged": 559
+    },
+    {
+      "name": "small_65",
+      "checks": 5,
+      "witnesses": 0,
+      "exact": 10,
+      "relative_choices": 0,
+      "charged": 150
+    },
+    {
+      "name": "small_70",
+      "checks": 2,
+      "witnesses": 0,
+      "exact": 4,
+      "relative_choices": 0,
+      "charged": 60
+    },
+    {
+      "name": "small_71",
+      "checks": 8,
+      "witnesses": 13,
+      "exact": 16,
+      "relative_choices": 6,
+      "charged": 3696
+    },
+    {
+      "name": "small_74",
+      "checks": 6,
+      "witnesses": 0,
+      "exact": 12,
+      "relative_choices": 0,
+      "charged": 265
+    },
+    {
+      "name": "small_79",
+      "checks": 8,
+      "witnesses": 5,
+      "exact": 16,
+      "relative_choices": 2,
+      "charged": 2372
+    },
+    {
+      "name": "original_30",
+      "truth": [
+        6,
+        1
+      ],
+      "signed": [
+        {
+          "lower": 0,
+          "upper": 1536,
+          "witness": null,
+          "stage": 0
+        },
+        {
+          "lower": 0,
+          "upper": 1024,
+          "witness": null,
+          "stage": 0
+        }
+      ],
+      "combined": [
+        {
+          "lower": 6,
+          "upper": 6,
+          "witness": 1056964608,
+          "stage": 0
+        },
+        {
+          "lower": 1,
+          "upper": 1,
+          "witness": 63,
+          "stage": 0
+        }
+      ],
+      "witness": 1056964608,
+      "decisive": true,
+      "charged": 5410809
+    }
+  ]
+}
