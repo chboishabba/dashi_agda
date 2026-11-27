@@ -1,0 +1,803 @@
+{
+  "scope": "Local Python replay using transcribed repository donors; compact per-source observations from all 60 regular planted fixtures. The same witness, steps and upper bound were returned by all three lanes. All witnesses independently checked using exact SymPy integer incidence; not full repository checkout or native kernel acceptance.",
+  "seed": 3692711,
+  "lane_cap": 20000000,
+  "faces": {
+    "pin_floors": 180720,
+    "signed_faces": 2880,
+    "group_faces": 2880,
+    "contradictions": 148,
+    "conditioned_faces": 2584,
+    "original_faces": 1292,
+    "point_checks": 22945
+  },
+  "costs": {
+    "baseline": 10328331,
+    "square": 33106420,
+    "cube": 33473555
+  },
+  "cube_cheaper_than_square": 31,
+  "cube_cheaper_than_baseline": 0,
+  "cases": [
+    {
+      "name": "18_5_0",
+      "n": 30,
+      "dimension": 13,
+      "steps": 2,
+      "charged": {
+        "baseline": 5394,
+        "square": 13091,
+        "cube": 12066
+      },
+      "witness": "303038672",
+      "upper": "2064"
+    },
+    {
+      "name": "18_5_1",
+      "n": 30,
+      "dimension": 12,
+      "steps": 2,
+      "charged": {
+        "baseline": 6827,
+        "square": 16618,
+        "cube": 15014
+      },
+      "witness": "570500104",
+      "upper": "1025"
+    },
+    {
+      "name": "18_5_2",
+      "n": 30,
+      "dimension": 12,
+      "steps": 2,
+      "charged": {
+        "baseline": 6177,
+        "square": 15821,
+        "cube": 14503
+      },
+      "witness": "8519858",
+      "upper": "1025"
+    },
+    {
+      "name": "18_5_3",
+      "n": 30,
+      "dimension": 12,
+      "steps": 2,
+      "charged": {
+        "baseline": 5454,
+        "square": 13047,
+        "cube": 12181
+      },
+      "witness": "103284784",
+      "upper": "1032"
+    },
+    {
+      "name": "18_7_0",
+      "n": 42,
+      "dimension": 24,
+      "steps": 3,
+      "charged": {
+        "baseline": 19172,
+        "square": 43562,
+        "cube": 43670
+      },
+      "witness": "2199568516164",
+      "upper": "1573889"
+    },
+    {
+      "name": "18_7_1",
+      "n": 42,
+      "dimension": 24,
+      "steps": 4,
+      "charged": {
+        "baseline": 20066,
+        "square": 47908,
+        "cube": 48569
+      },
+      "witness": "165057",
+      "upper": "1573136"
+    },
+    {
+      "name": "18_7_2",
+      "n": 42,
+      "dimension": 24,
+      "steps": 4,
+      "charged": {
+        "baseline": 19319,
+        "square": 46682,
+        "cube": 48149
+      },
+      "witness": "19463667780",
+      "upper": "1572868"
+    },
+    {
+      "name": "18_7_3",
+      "n": 42,
+      "dimension": 24,
+      "steps": 3,
+      "charged": {
+        "baseline": 20117,
+        "square": 45692,
+        "cube": 44643
+      },
+      "witness": "34896612612",
+      "upper": "1572993"
+    },
+    {
+      "name": "18_9_0",
+      "n": 54,
+      "dimension": 36,
+      "steps": 4,
+      "charged": {
+        "baseline": 35903,
+        "square": 82309,
+        "cube": 94652
+      },
+      "witness": "9921374486530",
+      "upper": "2147500064"
+    },
+    {
+      "name": "18_9_1",
+      "n": 54,
+      "dimension": 36,
+      "steps": 1,
+      "charged": {
+        "baseline": 164,
+        "square": 3102,
+        "cube": 3102
+      },
+      "witness": "9108491763449856",
+      "upper": "68719476736"
+    },
+    {
+      "name": "18_9_2",
+      "n": 54,
+      "dimension": 36,
+      "steps": 7,
+      "charged": {
+        "baseline": 46451,
+        "square": 121961,
+        "cube": 124449
+      },
+      "witness": "9015996958376008",
+      "upper": "2147500033"
+    },
+    {
+      "name": "18_9_3",
+      "n": 54,
+      "dimension": 36,
+      "steps": 4,
+      "charged": {
+        "baseline": 39366,
+        "square": 88897,
+        "cube": 90028
+      },
+      "witness": "281474977247280",
+      "upper": "2147532865"
+    },
+    {
+      "name": "24_5_0",
+      "n": 40,
+      "dimension": 16,
+      "steps": 2,
+      "charged": {
+        "baseline": 11227,
+        "square": 27358,
+        "cube": 24975
+      },
+      "witness": "481037386132",
+      "upper": "16386"
+    },
+    {
+      "name": "24_5_1",
+      "n": 40,
+      "dimension": 16,
+      "steps": 4,
+      "charged": {
+        "baseline": 15401,
+        "square": 45041,
+        "cube": 43221
+      },
+      "witness": "9672728610",
+      "upper": "16385"
+    },
+    {
+      "name": "24_5_2",
+      "n": 40,
+      "dimension": 16,
+      "steps": 2,
+      "charged": {
+        "baseline": 15681,
+        "square": 43470,
+        "cube": 41033
+      },
+      "witness": "68806116608",
+      "upper": "16386"
+    },
+    {
+      "name": "24_5_3",
+      "n": 40,
+      "dimension": 16,
+      "steps": 3,
+      "charged": {
+        "baseline": 15337,
+        "square": 39154,
+        "cube": 36086
+      },
+      "witness": "2216952610",
+      "upper": "16393"
+    },
+    {
+      "name": "24_7_0",
+      "n": 56,
+      "dimension": 32,
+      "steps": 7,
+      "charged": {
+        "baseline": 55024,
+        "square": 135606,
+        "cube": 136658
+      },
+      "witness": "577243738824708",
+      "upper": "402915842"
+    },
+    {
+      "name": "24_7_1",
+      "n": 56,
+      "dimension": 32,
+      "steps": 4,
+      "charged": {
+        "baseline": 29902,
+        "square": 70411,
+        "cube": 72295
+      },
+      "witness": "9026724177641472",
+      "upper": "402718720"
+    },
+    {
+      "name": "24_7_2",
+      "n": 56,
+      "dimension": 32,
+      "steps": 4,
+      "charged": {
+        "baseline": 36830,
+        "square": 87301,
+        "cube": 86049
+      },
+      "witness": "4504699541922944",
+      "upper": "402677826"
+    },
+    {
+      "name": "24_7_3",
+      "n": 56,
+      "dimension": 32,
+      "steps": 5,
+      "charged": {
+        "baseline": 42981,
+        "square": 106078,
+        "cube": 108597
+      },
+      "witness": "9165821020471301",
+      "upper": "402686212"
+    },
+    {
+      "name": "24_9_0",
+      "n": 72,
+      "dimension": 48,
+      "steps": 8,
+      "charged": {
+        "baseline": 103670,
+        "square": 266311,
+        "cube": 281496
+      },
+      "witness": "17867600848930",
+      "upper": "8796227256385"
+    },
+    {
+      "name": "24_9_1",
+      "n": 72,
+      "dimension": 48,
+      "steps": 8,
+      "charged": {
+        "baseline": 86105,
+        "square": 228763,
+        "cube": 240685
+      },
+      "witness": "1180609638448815472784",
+      "upper": "8796118188048"
+    },
+    {
+      "name": "24_9_2",
+      "n": 72,
+      "dimension": 48,
+      "steps": 16,
+      "charged": {
+        "baseline": 171888,
+        "square": 489250,
+        "cube": 513113
+      },
+      "witness": "2314859004838281353",
+      "upper": "8796109799425"
+    },
+    {
+      "name": "24_9_3",
+      "n": 72,
+      "dimension": 48,
+      "steps": 4,
+      "charged": {
+        "baseline": 72550,
+        "square": 161971,
+        "cube": 167234
+      },
+      "witness": "74363577922068972553",
+      "upper": "8796361465858"
+    },
+    {
+      "name": "30_5_0",
+      "n": 50,
+      "dimension": 20,
+      "steps": 4,
+      "charged": {
+        "baseline": 27751,
+        "square": 74716,
+        "cube": 69684
+      },
+      "witness": "105598280581696",
+      "upper": "262148"
+    },
+    {
+      "name": "30_5_1",
+      "n": 50,
+      "dimension": 20,
+      "steps": 5,
+      "charged": {
+        "baseline": 32057,
+        "square": 93400,
+        "cube": 86674
+      },
+      "witness": "178395761893712",
+      "upper": "262145"
+    },
+    {
+      "name": "30_5_2",
+      "n": 50,
+      "dimension": 20,
+      "steps": 3,
+      "charged": {
+        "baseline": 21524,
+        "square": 55741,
+        "cube": 52714
+      },
+      "witness": "27281666867214",
+      "upper": "263169"
+    },
+    {
+      "name": "30_5_3",
+      "n": 50,
+      "dimension": 20,
+      "steps": 6,
+      "charged": {
+        "baseline": 37463,
+        "square": 106407,
+        "cube": 99150
+      },
+      "witness": "12646799691784",
+      "upper": "264200"
+    },
+    {
+      "name": "30_7_0",
+      "n": 70,
+      "dimension": 40,
+      "steps": 9,
+      "charged": {
+        "baseline": 112642,
+        "square": 308913,
+        "cube": 314799
+      },
+      "witness": "590296092555245389848",
+      "upper": "103087603713"
+    },
+    {
+      "name": "30_7_1",
+      "n": 70,
+      "dimension": 40,
+      "steps": 10,
+      "charged": {
+        "baseline": 100677,
+        "square": 292408,
+        "cube": 290272
+      },
+      "witness": "295222214607698485258",
+      "upper": "103083413761"
+    },
+    {
+      "name": "30_7_2",
+      "n": 70,
+      "dimension": 40,
+      "steps": 10,
+      "charged": {
+        "baseline": 98000,
+        "square": 275708,
+        "cube": 271073
+      },
+      "witness": "78993709227439030368",
+      "upper": "103104381440"
+    },
+    {
+      "name": "30_7_3",
+      "n": 70,
+      "dimension": 40,
+      "steps": 15,
+      "charged": {
+        "baseline": 147268,
+        "square": 432490,
+        "cube": 432292
+      },
+      "witness": "2630665141200425088",
+      "upper": "103096000772"
+    },
+    {
+      "name": "30_9_0",
+      "n": 90,
+      "dimension": 60,
+      "steps": 31,
+      "charged": {
+        "baseline": 405012,
+        "square": 1326361,
+        "cube": 1368627
+      },
+      "witness": "1208926995194870489030664",
+      "upper": "36028900114956672"
+    },
+    {
+      "name": "30_9_1",
+      "n": 90,
+      "dimension": 60,
+      "steps": 7,
+      "charged": {
+        "baseline": 136815,
+        "square": 351245,
+        "cube": 360217
+      },
+      "witness": "9029485874118666",
+      "upper": "36029003185782786"
+    },
+    {
+      "name": "30_9_2",
+      "n": 90,
+      "dimension": 60,
+      "steps": 12,
+      "charged": {
+        "baseline": 178940,
+        "square": 526176,
+        "cube": 535998
+      },
+      "witness": "619046020228273820802292289",
+      "upper": "36028865746829329"
+    },
+    {
+      "name": "30_9_3",
+      "n": 90,
+      "dimension": 60,
+      "steps": 4,
+      "charged": {
+        "baseline": 111665,
+        "square": 229506,
+        "cube": 227580
+      },
+      "witness": "1285083238692482155806776",
+      "upper": "36029484616646656"
+    },
+    {
+      "name": "36_5_0",
+      "n": 60,
+      "dimension": 24,
+      "steps": 4,
+      "charged": {
+        "baseline": 36056,
+        "square": 98173,
+        "cube": 92795
+      },
+      "witness": "76561539451069056",
+      "upper": "4202564"
+    },
+    {
+      "name": "36_5_1",
+      "n": 60,
+      "dimension": 24,
+      "steps": 5,
+      "charged": {
+        "baseline": 50636,
+        "square": 151069,
+        "cube": 142251
+      },
+      "witness": "955176739414977848",
+      "upper": "4198401"
+    },
+    {
+      "name": "36_5_2",
+      "n": 60,
+      "dimension": 24,
+      "steps": 7,
+      "charged": {
+        "baseline": 54952,
+        "square": 172305,
+        "cube": 162781
+      },
+      "witness": "463262289722476613",
+      "upper": "4194305"
+    },
+    {
+      "name": "36_5_3",
+      "n": 60,
+      "dimension": 24,
+      "steps": 9,
+      "charged": {
+        "baseline": 67403,
+        "square": 211822,
+        "cube": 201688
+      },
+      "witness": "93450792048007245",
+      "upper": "4210689"
+    },
+    {
+      "name": "36_7_0",
+      "n": 84,
+      "dimension": 48,
+      "steps": 7,
+      "charged": {
+        "baseline": 117516,
+        "square": 304351,
+        "cube": 297293
+      },
+      "witness": "304592638233465464291363",
+      "upper": "26391504519170"
+    },
+    {
+      "name": "36_7_1",
+      "n": 84,
+      "dimension": 48,
+      "steps": 21,
+      "charged": {
+        "baseline": 276773,
+        "square": 866608,
+        "cube": 866480
+      },
+      "witness": "1511530825589379251045465",
+      "upper": "26390426554369"
+    },
+    {
+      "name": "36_7_2",
+      "n": 84,
+      "dimension": 48,
+      "steps": 7,
+      "charged": {
+        "baseline": 120374,
+        "square": 310911,
+        "cube": 308319
+      },
+      "witness": "4627815303560660960935943",
+      "upper": "26392580342305"
+    },
+    {
+      "name": "36_7_3",
+      "n": 84,
+      "dimension": 48,
+      "steps": 34,
+      "charged": {
+        "baseline": 418879,
+        "square": 1364288,
+        "cube": 1377749
+      },
+      "witness": "10035042289370930450496",
+      "upper": "26389354913793"
+    },
+    {
+      "name": "36_9_0",
+      "n": 108,
+      "dimension": 72,
+      "steps": 9,
+      "charged": {
+        "baseline": 246979,
+        "square": 674633,
+        "cube": 698869
+      },
+      "witness": "5072459462677873450982251430156",
+      "upper": "147574515565408026625"
+    },
+    {
+      "name": "36_9_1",
+      "n": 108,
+      "dimension": 72,
+      "steps": 37,
+      "charged": {
+        "baseline": 592647,
+        "square": 2068769,
+        "cube": 2123321
+      },
+      "witness": "42313658074125045992556544",
+      "upper": "147576204423849967617"
+    },
+    {
+      "name": "36_9_2",
+      "n": 108,
+      "dimension": 72,
+      "steps": 8,
+      "charged": {
+        "baseline": 229983,
+        "square": 579630,
+        "cube": 581003
+      },
+      "witness": "81129638414903018557867607466498",
+      "upper": "147574515565433225360"
+    },
+    {
+      "name": "36_9_3",
+      "n": 108,
+      "dimension": 72,
+      "steps": 19,
+      "charged": {
+        "baseline": 373143,
+        "square": 1152961,
+        "cube": 1205584
+      },
+      "witness": "396141568224322667832097636632",
+      "upper": "147574656285716512770"
+    },
+    {
+      "name": "42_5_0",
+      "n": 70,
+      "dimension": 28,
+      "steps": 5,
+      "charged": {
+        "baseline": 56197,
+        "square": 164547,
+        "cube": 156541
+      },
+      "witness": "9511603050976929283",
+      "upper": "67240449"
+    },
+    {
+      "name": "42_5_1",
+      "n": 70,
+      "dimension": 28,
+      "steps": 3,
+      "charged": {
+        "baseline": 48434,
+        "square": 130249,
+        "cube": 122993
+      },
+      "witness": "295742397929533767686",
+      "upper": "67141633"
+    },
+    {
+      "name": "42_5_2",
+      "n": 70,
+      "dimension": 28,
+      "steps": 7,
+      "charged": {
+        "baseline": 71703,
+        "square": 217861,
+        "cube": 207473
+      },
+      "witness": "609036502827411193862",
+      "upper": "67633154"
+    },
+    {
+      "name": "42_5_3",
+      "n": 70,
+      "dimension": 28,
+      "steps": 11,
+      "charged": {
+        "baseline": 132402,
+        "square": 398876,
+        "cube": 376237
+      },
+      "witness": "297313515102797848",
+      "upper": "67108872"
+    },
+    {
+      "name": "42_7_0",
+      "n": 98,
+      "dimension": 56,
+      "steps": 23,
+      "charged": {
+        "baseline": 423971,
+        "square": 1352088,
+        "cube": 1335704
+      },
+      "witness": "40272950703522468407037952",
+      "upper": "6757599002234884"
+    },
+    {
+      "name": "42_7_1",
+      "n": 98,
+      "dimension": 56,
+      "steps": 37,
+      "charged": {
+        "baseline": 544402,
+        "square": 1894162,
+        "cube": 1897020
+      },
+      "witness": "309650449445667989390099713",
+      "upper": "6755811757916418"
+    },
+    {
+      "name": "42_7_2",
+      "n": 98,
+      "dimension": 56,
+      "steps": 40,
+      "charged": {
+        "baseline": 601414,
+        "square": 2056925,
+        "cube": 2061061
+      },
+      "witness": "79228389507214772185642076194",
+      "upper": "6755674855833616"
+    },
+    {
+      "name": "42_7_3",
+      "n": 98,
+      "dimension": 56,
+      "steps": 13,
+      "charged": {
+        "baseline": 244313,
+        "square": 706570,
+        "cube": 698199
+      },
+      "witness": "1355330190520162487661363864",
+      "upper": "6757055153045568"
+    },
+    {
+      "name": "42_9_0",
+      "n": 126,
+      "dimension": 84,
+      "steps": 21,
+      "charged": {
+        "baseline": 584165,
+        "square": 1837816,
+        "cube": 1858142
+      },
+      "witness": "21418224544478497108147670981025864",
+      "upper": "604465792181479242465281"
+    },
+    {
+      "name": "42_9_1",
+      "n": 126,
+      "dimension": 84,
+      "steps": 71,
+      "charged": {
+        "baseline": 1329398,
+        "square": 5253085,
+        "cube": 5342876
+      },
+      "witness": "334903150015790519652801475189473552",
+      "upper": "604465792181444848656385"
+    },
+    {
+      "name": "42_9_2",
+      "n": 126,
+      "dimension": 84,
+      "steps": 26,
+      "charged": {
+        "baseline": 596862,
+        "square": 2071034,
+        "cube": 2118141
+      },
+      "witness": "650344371998395390492569356992640",
+      "upper": "604463630488816673883136"
+    },
+    {
+      "name": "42_9_3",
+      "n": 126,
+      "dimension": 84,
+      "steps": 33,
+      "charged": {
+        "baseline": 818909,
+        "square": 2755212,
+        "cube": 2829487
+      },
+      "witness": "821566334711982979442064859611654",
+      "upper": "604465215685542600114180"
+    }
+  ]
+}
