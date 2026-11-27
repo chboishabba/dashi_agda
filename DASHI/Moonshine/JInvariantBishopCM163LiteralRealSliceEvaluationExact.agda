@@ -181,3 +181,68 @@ dxEval = S.xₙ→x∧x≃y⇒xₙ→y
 
 uEval : Eval (scale ((+ 3 / 1) ⋆) dx) End.U
 uEval = V.scaleEval ((+ 3 / 1) ⋆) dx (C.re (Jet.e4EulerJet 1)) dxEval
+
+-- The complete positive-degree real-slice jet family, including the
+-- genuine zero coefficient and the sign of the original E6 tail.
+xJet yJet : Nat → ℝ
+xJet d = C.re (Jet.e4EulerJet (suc d))
+yJet d = C.re (Jet.e6EulerJet (suc d))
+
+positiveD0 : (d : Nat) (f : Series) → U.D (suc d) f zero ≃ R.0ℝ
+positiveD0 d f = P.≃-trans
+  (P.*-congʳ (P.*-zeroʳ (R.pow R.0ℝ d))) (P.*-zeroˡ (f zero))
+
+xJetTail : (d n : Nat) → W.weighted q (U.D (suc d) U.X) (suc n) ≃
+  C.re (J.e4JetTerm CM.q (suc d) n)
+xJetTail d n = P.≃-trans
+  (let open P.ℝ-Solver in
+    solve 3 (λ q m x → q ⊗ (m ⊗ x) ⊜ m ⊗ (q ⊗ x)) P.≃-refl
+      (R.pow q (suc n)) (J.indexPower (suc d) n) (U.X (suc n)))
+  (P.*-congˡ (xTail n))
+
+yJetTail : (d n : Nat) → W.weighted q (U.D (suc d) U.Y) (suc n) ≃
+  R.- C.re (J.e6UnsignedJetTerm CM.q (suc d) n)
+yJetTail d n = P.≃-trans
+  (let open P.ℝ-Solver in
+    solve 3 (λ q m y → q ⊗ (m ⊗ y) ⊜ m ⊗ (q ⊗ y)) P.≃-refl
+      (R.pow q (suc n)) (J.indexPower (suc d) n) (U.Y (suc n)))
+  (P.≃-trans (P.*-congˡ (yTail n))
+    (let open P.ℝ-Solver in
+      solve 2 (λ m y → m ⊗ (⊝ y) ⊜ ⊝ (m ⊗ y)) P.≃-refl
+        (J.indexPower (suc d) n) (Guard.t6 n)))
+
+yJetSign : (d : Nat) → R.- C.re (Jet.e6UnsignedTailJet (suc d)) ≃ yJet d
+yJetSign d = P.≃-symm (P.+-identityˡ (R.- C.re (Jet.e6UnsignedTailJet (suc d))))
+
+xJetAbs : (d : Nat) → Abs (U.D (suc d) U.X)
+xJetAbs d =
+  let a = C.realAbsolute (Jet.e4JetAbsolute (suc d)) in
+  ∣ W.weighted q (U.D (suc d) U.X) zero ∣ + proj₁ a ,
+  prependLimit (λ n → ∣ W.weighted q (U.D (suc d) U.X) n ∣) (proj₁ a)
+    (transport _ _ (proj₁ a) (λ n → P.∣-∣-cong (xJetTail d n)) (proj₂ a))
+
+yJetAbs : (d : Nat) → Abs (U.D (suc d) U.Y)
+yJetAbs d =
+  let a = C.realAbsolute (Jet.e6UnsignedJetAbsolute (suc d)) in
+  ∣ W.weighted q (U.D (suc d) U.Y) zero ∣ + proj₁ a ,
+  prependLimit (λ n → ∣ W.weighted q (U.D (suc d) U.Y) n ∣) (proj₁ a)
+    (transport _ _ (proj₁ a)
+      (λ n → P.≃-trans (P.∣-∣-cong (yJetTail d n)) P.∣-x∣≃∣x∣) (proj₂ a))
+
+xJetEval : (d : Nat) → Eval (U.D (suc d) U.X) (xJet d)
+xJetEval d = S.xₙ→x∧x≃y⇒xₙ→y
+  (prependLimit (W.weighted q (U.D (suc d) U.X)) (xJet d)
+    (transport _ _ (xJet d) (xJetTail d)
+      (C.realConverges (Jet.e4JetConverges (suc d)))))
+  (P.≃-trans (P.+-cong (U.right0 (positiveD0 d U.X)) P.≃-refl)
+    (P.+-identityˡ (xJet d)))
+
+yJetEval : (d : Nat) → Eval (U.D (suc d) U.Y) (yJet d)
+yJetEval d =
+  let l = C.re (Jet.e6UnsignedTailJet (suc d)) in
+  S.xₙ→x∧x≃y⇒xₙ→y
+    (prependLimit (W.weighted q (U.D (suc d) U.Y)) (R.- l)
+      (transport _ _ (R.- l) (yJetTail d)
+        (negLimit _ l (C.realConverges (Jet.e6UnsignedJetConverges (suc d))))))
+    (P.≃-trans (P.+-cong (U.right0 (positiveD0 d U.Y)) P.≃-refl)
+      (P.≃-trans (P.+-identityˡ (R.- l)) (yJetSign d)))
