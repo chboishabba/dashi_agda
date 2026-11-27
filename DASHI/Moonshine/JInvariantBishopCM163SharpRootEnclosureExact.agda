@@ -199,7 +199,7 @@ budget4 : Four.budget zero ≤ (eps ⋆)
 budget4 =
   P.≤-respˡ-≃
     (let open P.ℝ-Solver in solve 1 (λ r →
-      Κ (+ 16 / 15) ⊗ (Κ (+ 240 / 1) ⊗ (Κ (+ 81 / 1) ⊗ (Κ Q.1ℚᵘ ⊗ r ⊗ r ⊗ r)))
+      Κ (+ 16 / 15) ⊗ (Κ (+ 240 / 1) ⊗ (((((Κ Q.1ℚᵘ ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ (Κ Q.1ℚᵘ ⊗ r ⊗ r ⊗ r)))
       ⊜ Κ (+ 20736 / 1) ⊗ (r ⊗ r ⊗ r)) P.≃-refl r)
     (proj₂ (widen (from-yes (Q.0ℚᵘ QP.≤? ((+ 20736 / 1) Q.* r3L)))
       (from-yes (((+ 20736 / 1) Q.* r3U) QP.≤? eps))
@@ -210,7 +210,7 @@ budget6 : Six.budget zero ≤ (eps ⋆)
 budget6 =
   P.≤-respˡ-≃
     (let open P.ℝ-Solver in solve 1 (λ r →
-      Κ (+ 16 / 15) ⊗ (Κ (+ 504 / 1) ⊗ (Κ (+ 729 / 1) ⊗ (Κ Q.1ℚᵘ ⊗ r ⊗ r ⊗ r)))
+      Κ (+ 16 / 15) ⊗ (Κ (+ 504 / 1) ⊗ (((((((Κ Q.1ℚᵘ ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ Κ (+ 3 / 1)) ⊗ (Κ Q.1ℚᵘ ⊗ r ⊗ r ⊗ r)))
       ⊜ Κ (+ 1959552 / 5) ⊗ (r ⊗ r ⊗ r)) P.≃-refl r)
     (proj₂ (widen (from-yes (Q.0ℚᵘ QP.≤? ((+ 1959552 / 5) Q.* r3L)))
       (from-yes (((+ 1959552 / 5) Q.* r3U) QP.≤? eps))
