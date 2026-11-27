@@ -6,6 +6,20 @@ import numpy as np
 from scipy.optimize import differential_evolution
 from solar_spherical_cycle import cycle,four_worlds,geometry
 
+def first_incident_reflection_bound(dt,incident,port,load_budget,source_eligible):
+    """Uniform first-stage scattering loss for the actual serial midpoint scheme.
+    Initial electric cochain is zero. All site-local stages precede off-site
+    exchange; the source edge has exactly one electric coordinate. Its load
+    rate lies in [0,budget] (or is zero if not eligible). No later reflection
+    or continuum bound is inferred from this discrete identity.
+    """
+    assert dt>0 and port>0 and load_budget>=0
+    k=port**2; cap=load_budget if source_eligible else 0.
+    rate=float(np.clip(k-2/dt,0.,cap))
+    ratio=(1+dt*(rate-k)/2)/(1+dt*(rate+k)/2)
+    return dict(minimizing_load_rate_s_inv=rate,reflection_lower_J=dt*incident**2*ratio**2,
+                scope='first source stage, zero initial electric cochain, fixed discrete clock')
+
 def optimize(material,cfg,design):
     """Finite geometry family: explicitly enumerated source/receiver layouts.
     Receiver allocation and heating are bounded by shared resource budgets.
@@ -83,10 +97,13 @@ def optimize(material,cfg,design):
     # load at that site is <= budget. This does not bound remote receiver
     # extraction by itself. Use only the universal incident cap unless a
     # separately checked full-state domination certificate is supplied.
+    reflection=first_incident_reflection_bound(dt,float(cfg['incident_sqrt_W'][0]),float(cfg['source_coupling_sqrt_inv_s']),budget,int(cfg['source_edge']) in eligible)
+    tighter=max(0.,ceiling-reflection['reflection_lower_J'])
     result=dict(layouts=results,layout_geometry=layouts,evaluations=evaluations,universal_passive_upper_J=ceiling,
+        discrete_passive_upper_candidate_J=tighter,first_stage_reflection=reflection,
         best_active=None if a is None else a[0],best_passive=None if p is None else p[0],
         sampled_advantage_J=None if a is None or p is None else a[0]-p[0],
-        candidate_advantage_lower_J=None if a is None else a[0]-ceiling,
+        candidate_advantage_lower_J=None if a is None else a[0]-tighter,
         global_optimum_certified=False,physical_admission=False)
     if a:
         cc=dict(cfg,load_rate_s_inv=a[2]['load'],heating_W=a[2]['heating'])
@@ -96,7 +113,7 @@ def optimize(material,cfg,design):
 def reverse_target(material,cfg,design,target_J):
     """Return witnessed target residual and honest upper ceiling gap."""
     out=optimize(material,cfg,design)
-    a=out['best_active']; p=out['best_passive']; upper=out['universal_passive_upper_J']
+    a=out['best_active']; p=out['best_passive']; upper=out['discrete_passive_upper_candidate_J']
     out.update(target_J=float(target_J),sampled_target_residual_J=None if a is None or p is None else a-p-target_J,
         candidate_target_residual_J=None if a is None else a-upper-target_J)
     return out
