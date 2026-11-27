@@ -88,3 +88,33 @@ its inverse residual and quadratic norm, actual actuator/gauge coupling
 and zero residual pairing, pressure recovery, smoothness and original
 fifteen-field inhabitants. These are explicit analytic obligations, not
 acceptance or simulation tasks. External C/D unchanged. No kernel run.
+
+## Original physical formula specialization
+
+Lean #123:
+- 73f4f24 NavierStokesPhysicalCoefficientExact: literal harmonic lattice
+  labelTime/labelAzimuth/labelFlip; inverse parity, injectivity, zero,
+  additive and reflected transport. Original Coercive.baseDensity five
+  channels: signed difference, lower bound conditional on the negative
+  velocity channel estimate, exact simultaneous weight interval feasibility.
+- a5a1317 NavierStokesOriginalCertificateBudgetExact: original
+  IsExtendedCertificate small_first/second/third reduced to strict cap
+  and two endpoint margins; constructive scalar witness; transfer and size
+  denominator BIDI. Source constants and profile bounds not manufactured.
+- e09fa25 NavierStokesPhysicalStretchExact: weighted Young inequality,
+  three signed stretching contractions and exterior strain radius bound.
+- Agda 03d8d625 NSPhysicalCoefficientResidualExact: rational exact
+  density difference, margin decomposition and Young square.
+
+Source read: upstream Challenge.lean at ad53419 contains three sorry
+challenge endpoints; do NOT import these as proof authority. ExtendedStatement
+contains actual ExtendedCertificateData and IsExtendedCertificate.
+CertCell/StatementDefs defines original 15-field CellSystemCondition;
+not identical to generic Lax-Milgram or scalar budget theorem. Need actual
+profile shape and pressure coefficients, original weighted Hardy/derivative
+and harmonic block estimates, far-field mean/wave majorants with original
+radial measure, exact signed tree cell data, actuator and adjoint field links,
+and parameter-box nontriviality. The base density alone is not full
+coercivity. No kernel test, no simulation, no claim of completed original
+certificate. Native source code search on Lean default branch returned no
+matches; not an exhaustive inventory of all existing donors.
