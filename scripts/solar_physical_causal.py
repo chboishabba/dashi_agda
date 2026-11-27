@@ -84,6 +84,8 @@ class Shell:
     def audit_radial(self,cfg,frequencies):
         dy,dg=dc_port(cfg); out=[]
         for f in frequencies:
+            if f==0 and np.linalg.matrix_rank(self.J-self.R)<len(self.J):
+                out.append(dict(f_Hz=0.,status='STATIC_NULLSPACE_REQUIRES_SEPARATE_CONSTRAINT')); continue
             y,g=shell(f,cfg['ground_admittance_normalized'],cfg['shell_sigma_S_m'],dy,dg)
             z=self.admittance(f)
             T=solve(2j*np.pi*f*np.eye(len(self.J))-self.J+self.R,self.B)
@@ -163,7 +165,13 @@ def advance(material,cfg,state,incident,heating,dt,sh):
     return (x,z,pop,pool,newtheta),ledger
 
 def cycle(material,cfg):
-    sh=Shell(cfg['causal_shell']); D=material[2]; n=len(D)
+    if 'radial_cells' in cfg:
+        from solar_physical_radial_ladder import build
+        spec,radii=build(int(cfg['radial_cells']),cfg['shell_sigma_S_m'],cfg['ground_admittance_normalized'])
+        sh=Shell(spec)
+    else:
+        sh=Shell(cfg['causal_shell'])
+    D=material[2]; n=len(D)
     pop=D*MASS/CHARGE**2; pool=np.asarray(cfg['kinetics']['initial_neutral_m3'],float)
     assert pool.shape==(n,2) and np.all(pool>=0)
     src=np.asarray(cfg['incident_sqrt_W'],float); heat=np.asarray(cfg['heating_W'],float)
