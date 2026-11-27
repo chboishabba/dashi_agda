@@ -76,6 +76,17 @@ def exact():
     assert trfree(k*V.T+V*k.T).applyfunc(s.cancel)==s.zeros(3)
     assert trfree(g).applyfunc(s.cancel)==s.zeros(3)
     assert (P*P-P).applyfunc(s.cancel)==s.zeros(3)
+    # Independent full 15-component donor connection algebra: no discarded
+    # scalar/vector contribution to spatial TT, even for a general p.
+    E=s.diag(-1,1,1,1,1); p=s.Matrix(5,5,lambda i,j:s.Symbol(f'p{min(i,j)}{max(i,j)}'))
+    def lift(a,X):
+        L=s.zeros(5);L[a,4]=-E[a,a];L[4,a]=1
+        return L*X+X*L.T
+    V0=sum((E[a,a]*lift(a,lift(a,p)) for a in range(4)),s.zeros(5))+2*(p-E*s.trace(E*p))
+    B0=sum((k[a-1]*lift(a,p) for a in range(1,4)),s.zeros(5))
+    assert V0[1:4,1:4]==2*(p[0,0]-s.trace(p[1:4,1:4]))*s.eye(3)
+    assert lift(0,p)[1:4,1:4]==s.zeros(3)
+    assert trfree(B0[1:4,1:4]).applyfunc(s.cancel)==s.zeros(3)
     # Scalar principal GN divergence identity with actual geometry.
     t,n=s.symbols('t n',positive=True); a=s.sinh(s.asinh(t)-n); N=s.cosh(s.asinh(t)-n)/s.sqrt(1+t*t)
     U=s.Function('U')(t,n)
@@ -88,7 +99,7 @@ def exact():
     for k0 in ([0,0,0],[1,2,3]):
         X=np.array(H,float);P0=tt_project(X,k0);assert np.allclose(tt_project(P0,k0),P0) and abs(np.trace(P0))<1e-12
         assert np.linalg.norm(P0@np.array(k0))<1e-12
-    print('9 grouped exact/projection checks PASS')
+    print('12 grouped exact/projection checks PASS')
 
 
 def diagnostic():
