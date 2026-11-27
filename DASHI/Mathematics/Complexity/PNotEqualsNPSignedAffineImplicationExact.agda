@@ -40,7 +40,7 @@ module Rules (State Normal : Set)
   Holds l z = eval (normal l) z ≡ bit l
 
   opposite : Literal → Literal
-  opposite (literal a b) = literal a (flip b)
+  opposite l = literal (normal l) (flip (bit l))
 
   Entails : (State → Set) → Literal → Set
   Entails S l = ∀ z → S z → Holds l z
