@@ -535,3 +535,23 @@ See [exact remaining lemmas](ClayP0SevenRouteExactRemainingLemmas20261126.md).
 - Scoped amortization: with fixed caps and disjoint cells, a completed empty probe removes its entire unresolved demanded cell. Global delta can be exponentially small and repeated subtraction can generate exponentially many cells; explicit cell cap/refusal is necessary. A bounded schedule of L nodes and bounded per-node donor/seam/split allowances uses O(L*b) charged probe work plus charged bookkeeping. Rooted fallback probes each positive original row at most once per incumbent, so at most m*floor((|x0|-m/3)/2) root probes plus a terminal failed round if above target (same bound because each improvement decreases weight by >=2). Each has a shared parent clock. No polynomial bound on sufficient L, cell count or per-probe affordability on arbitrary inputs. Direct cover attempted once (time independent) then rooted fallback with same ledger. Already-exact incumbent is returned without recording a zero-surplus pseudo-improvement.
 - Local acceptance with SymPy 1.14.0: 57 consistent small sources, 684 capacity and 684 rooted count comparisons, 421 empty capacity observations, 133 fully reused empty demands (excluding inconsistent affine demands), 276 strict movements, 114 cover comparisons; 1 scope/refusal/new-dependency control, original 30-column fixture normal bit mask 8, cover masses (6,1), independently recovered cover 1056964608, 4 previously used wide shuffled regular sources rank 12/16/20/24 all recovered using disjunctive donor. Total 63 checkpoint entries, runtime 5.84s. Separate wrapper campaign 36 consistent sources, 72 comparisons, 33 rooted probes, 47 strict steps, runtime 0.90s. Both resume replays passed under timeout 90s, atomic per-source checkpoints. The first wrapper replay caught and corrected zero-mode history for already exact covers. CSV per-source receipts in scripts/receipts/pnp_demand_strata_local_20261127.csv and pnp_demand_exchange_local_20261127.csv. Local checkpoint fingerprints 6a513dd5f7a27ba190178b277cebf135a49878be54ad57f7a3e6a3605ceb34c5 and 8b7aff6e6c244eda5c6219c8054b66631ffc7caa9f807bdca7141b6d84c44824; local donor definitions transcribed, use fresh checkpoint for repository replay. New implementation and campaign blob hashes match local executed versions. Full checkout unavailable (DNS); no native kernel/CI/merge. Character option attached by inspected interface but not locally exercised; existing signed-contrast producer not integrated (exact conditional masses and direct witness suffice on tested cases). No genuine wide residual surviving both disjunctive AND character closure established by this campaign.
 - Remaining P0: universal `conditionalExclusionCoverage`, `productiveRootedRefinementDichotomy`, `failedProbeAmortization`, `uniformAffordableExchangeDiscovery` remain leafOpen. Scoped exact coverage and resource scheduling, fixed-cut quotient scoring, original capacity monotone reuse and shared direct/rooted portfolio are implemented/tested. Next mathematical maximum cut: recover an actual jointly resistant source and prove an affordable sufficient observation (or a scoped obstruction) without demanding full proof coverage. Factorized nonlinear exclusion discovery and relative signed-contrast interval producer remain outstanding, not claimed by affine indicator evaluation. No unrestricted separation or P=NP assertion.
+
+
+### Capacity–character and signed-interval adapter (2026-11-27)
+
+W1–W3/W7 executable attachment: `scripts/check_pnp_capacity_character.py`
+reuses the original odd-parity capacity scope, unique count-transition
+one-hot chart, character exclusion/compact/replay, and affine-forest
+mass/score owners. A leaf proof is a factored demand-projector exclusion;
+complementary certified siblings compose without Fourier expansion.
+The forest bounds apply to original binary mass, with a budgeted subset
+event construction and exact signed interval. Positive lower mass reopens
+through the fixed forest and verifies original rows. Rooted and direct
+capacity probes share the existing ledger and clock when character degree
+is enabled; partial witness observations remain UNKNOWN as counts.
+Defaults are unchanged. No universal affordability, native kernel
+acceptance, or genuinely resistant high-width family is claimed.
+Replay: `timeout 90s python scripts/check_pnp_capacity_character_campaign.py /tmp/pnp-capacity-checkpoint.json`.
+The campaign is supplied for local execution; no CI invoked. W4/W8/W9
+universal discovery and W10 universal producer remain open; W6 portfolio
+extension remains a separate integration cut.

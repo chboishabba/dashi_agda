@@ -1228,3 +1228,23 @@ New exact mathematical welds (derived, not native admission):
 5. On X3C parity carrier, |x|-m/3 is even, every exact cover y satisfies Ay=1<=Ax and y xor x is a legal strict movement whenever x above target. Universal polynomial-clock verified root success on inhabited above-target inputs alone is sufficient: m original roots, at most floor((n-m/3)/2) rounds; reject on cap only in theorem-backed algorithm, otherwise UNKNOWN. Thus uniform affordable constructive discovery can bypass universal empty-region coverage and amortization; requiring all three as serial milestones overstrengthens the endpoint. Reverse implication uses polynomial-time SAT/X3C search under P=NP. No claim that this hypothesis has been proved.
 
 Local exact regression this audit (timeout 90s, inspected/transcribed affine helpers): 900 random quotient seam defect comparisons, 2300 local transition unique-extension comparisons, one SymPy symbolic factorized projector identity modulo chi_i^2=1. Not a full encoding/character integration campaign; no CI/native kernels, no full checkout (DNS), no universal bound. Proposed next welds: capacity encoding -> proof-returning character demand -> replayable capacity ledger; original count interval consumer -> inhabited branch -> existing reopening; reuse joint packet support/conditional floors before seam enumeration. For a universal theorem need a uniform polynomial sufficient observation or verified trade on arbitrary inhabited originals, or an unrestricted machine counterexample producer. Four universal labels remain leafOpen except scoped scheduling/transport; thirteen targets on seven alternative routes unchanged. No need to finish all alternatives to close Clay.
+
+
+### Capacity–character and signed-interval adapter (2026-11-27)
+
+W1–W3/W7 executable attachment: `scripts/check_pnp_capacity_character.py`
+reuses the original odd-parity capacity scope, unique count-transition
+one-hot chart, character exclusion/compact/replay, and affine-forest
+mass/score owners. A leaf proof is a factored demand-projector exclusion;
+complementary certified siblings compose without Fourier expansion.
+The forest bounds apply to original binary mass, with a budgeted subset
+event construction and exact signed interval. Positive lower mass reopens
+through the fixed forest and verifies original rows. Rooted and direct
+capacity probes share the existing ledger and clock when character degree
+is enabled; partial witness observations remain UNKNOWN as counts.
+Defaults are unchanged. No universal affordability, native kernel
+acceptance, or genuinely resistant high-width family is claimed.
+Replay: `timeout 90s python scripts/check_pnp_capacity_character_campaign.py /tmp/pnp-capacity-checkpoint.json`.
+The campaign is supplied for local execution; no CI invoked. W4/W8/W9
+universal discovery and W10 universal producer remain open; W6 portfolio
+extension remains a separate integration cut.

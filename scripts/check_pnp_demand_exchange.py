@@ -24,7 +24,7 @@ def descent(n,R,P,x,B,leaf_cap=8,seam_cap=8,nodes=32,probe_cap=1000000,
         for e,r in enumerate(R):
             if (r&x).bit_count()==1:continue
             B.pay('demand_exchange_root')
-            try:status,c,v=rooted_probe(L,x,e,(),Allowance(B,probe_cap),leaf_cap,seam_cap,cell_cap)
+            try:status,c,v=rooted_probe(L,x,e,(),Allowance(B,probe_cap),leaf_cap,seam_cap,cell_cap,character_degree)
             except ProbeLimit:unknown=True;continue
             if v is not None:break
             unknown|=status=='UNKNOWN'
