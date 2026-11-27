@@ -51,3 +51,40 @@ No new universal NS proof claimed. Source written, not kernel checked.
 Alpoge–Buckmaster retain original similarity/certificate authorship;
 classical vector identities and ordered field arithmetic classical;
 DASHI signed residual/R853/R854 specialization and composition only.
+
+## Native analytic continuation — same day
+
+Lean #123 now contains source-written theorem bodies:
+- NavierStokesQuadraticInverseExact (0bc669a): complete closed-ball contraction
+  gives actual nonzero root; injective preconditioner, exact quadratic
+  expansion, ball invariance and contraction bounds are explicit.
+- NavierStokesCoerciveAdjointExact (f7fd072): signed perturbation coercivity,
+  primal/transpose weak existence and uniqueness by Mathlib Lax-Milgram;
+  homogeneous coercive adjoint is zero; actuator pairing BIDI.
+- NavierStokesBorderedActuatorExact (ce58ef3): actual rank-one Schur complement
+  solution with gauge, and multiplier cancellation iff residual pairing zero.
+- NavierStokesCoerciveNonlinearRootExact (0b94cb5): same-space inverse
+  composition, explicit radius 2*e and half contraction from 8*b*e <= 1.
+- Agda NSQuadraticCorrectionBudgetExact (bd3e912): exact rational slack
+  factorization and actuator balance, no added postulates.
+
+Original source ad53419: Breakdown/CertCell/StatementDefs.lean defines
+CellLayerData, IsCellMesh, CellVecField, CellMatField, ModelErrors,
+SignedTree and PassesRealNodeEnclosure/PassesComplexNodeEnclosure.
+Breakdown/Cert/ExtendedCoerciveDefs.lean defines weighted derivative,
+transport, weak second derivative, harmonic and split lower bound predicates.
+These are the actual target owners; a generic Hilbert form is not yet their
+instantiation. No assumption that original similarity operator is coercive
+on the full ungauged space; the weak adjoint may require a different
+bordered realization or dual space. No assumption that period-dependent
+residual is quadratic in all parameters; exact expansion must be proved
+on the selected fixed-period chart or an appropriate remainder bound used.
+
+Remaining: construct actual weighted carrier and bounded physical form,
+prove positive diagonal gap (including exterior and full harmonic tails),
+identify original projected residual with Riesz representative and exact
+quadratic expansion on that carrier, construct a nonzero seed and bound
+its inverse residual and quadratic norm, actual actuator/gauge coupling
+and zero residual pairing, pressure recovery, smoothness and original
+fifteen-field inhabitants. These are explicit analytic obligations, not
+acceptance or simulation tasks. External C/D unchanged. No kernel run.
