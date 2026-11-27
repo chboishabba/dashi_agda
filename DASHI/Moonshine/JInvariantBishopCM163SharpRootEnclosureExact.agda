@@ -88,13 +88,13 @@ module Tail2 (t m : Nat → ℝ)
       (P.*-monoˡ-≤-nonNeg (step (n +N 2)) (nn (+ 16 / 15) (QP.nonNegative⁻¹ (+ 16 / 15)))))
 
   termU : (n : Nat) → t n ≤ m n
-  termU n = P.≤-trans (P.x≤∣x∣ {x = t n}) (bound n)
+  termU n = P.≤-trans (P.x≤∣x∣ (t n)) (bound n)
 
   termL : (n : Nat) → R.- m n ≤ t n
   termL n = P.≤-respʳ-≃
     (let open P.ℝ-Solver in solve 1 (λ x → ⊝ (⊝ x) ⊜ x) P.≃-refl (t n))
-    (P.neg-mono-≤ (P.≤-trans (P.x≤∣x∣ {x = R.- t n})
-      (P.≤-respˡ-≃ (P.≃-symm P.∣-x∣≃∣x∣) (bound n))))
+    (P.neg-mono-≤ (P.≤-trans (P.x≤∣x∣ (R.- t n))
+      (P.≤-respˡ-≃ (P.≃-symm (P.∣-x∣≃∣x∣ {x = t n})) (bound n))))
 
   upperInvariant : (n : Nat) → ps (n +N 2) + budget n ≤ ps 2 + budget zero
   upperInvariant zero = P.≤-refl
