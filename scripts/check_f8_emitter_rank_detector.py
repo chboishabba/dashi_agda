@@ -14,8 +14,9 @@ assert ((I-e*H)*c*I).diff(e)==-c*H
 # Israel with Z2 normal convention of original reference.
 kap,ell,g=s.symbols('kap ell g',positive=True); pi=-b*beta*g/(kap*ell)
 assert s.simplify(b*beta*g/(2*ell)+kap*pi/2)==0
-# Detector proper-clock pullback: dt/dT=beta/b; normalized window.
-assert s.simplify((b/beta)*(beta/b))==1
+# Original clock F(t), physical pullback dT/dt=b*beta, not b/beta.
+t=s.symbols('t',positive=True)
+assert s.simplify(s.diff(s.asinh(t)-s.sqrt(1+t*t)/t,t)-(b*beta).subs(b,1/t))==0
 # Fourier TT removes constant-frame displacement strains.
 k=s.Matrix(s.symbols('kx ky kz',real=True)); q=(k.T*k)[0]; P=q*s.eye(3)-k*k.T
 w=s.Matrix(s.symbols('w:3')); A=k*w.T+w*k.T
