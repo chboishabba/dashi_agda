@@ -59,7 +59,7 @@ def galerkin(k,F,g,initial,final,modes=24,quad=160):
         q=y[:modes]; P=y[modes:]; qd=np.linalg.solve(M,P-D@q)
         f=-phi.T@(wt*L*N*a**3*F(t,n))-t**3*g(t)*np.ones(modes)
         return np.r_[qd,D.T@qd+(G-V)@q+f]
-    sol=solve_ivp(rhs,(initial,final),np.zeros(2*modes),rtol=2e-9,atol=2e-11,method='DOP853',dense_output=True)
+    sol=solve_ivp(rhs,(initial,final),np.zeros(2*modes,dtype=complex),rtol=2e-9,atol=2e-11,method='DOP853',dense_output=True)
     if not sol.success:raise RuntimeError(sol.message)
     def field(t,n):return np.cos(np.asarray(n)[...,None]/domain(t)*freq)@sol.sol(t)[:modes]
     return field,sol
@@ -102,17 +102,18 @@ def diagnostic():
         ddp=(-20*q*a**4-10*(1+q)*a**4+80*q*q*(1+q)*a**3)/d**2
         return p*mask,dp*mask,ddp*mask
     for k in (0.,3.):
+        phase=1. if k==0 else 1.+.4j
         def F(t,n):
             a,N=geometry(t,n); beta=np.sqrt(1+t*t); q=np.arcsinh(t)-n
             Nt=N*(np.tanh(q)-t/beta)/beta; Nn=-a/beta; an=-np.cosh(q)
             p,dp,ddp=profiles(n); z=t-1; f=z**4; ft=4*z**3; ftt=12*z*z
-            return (-ftt/N**2+(Nt/N**3-3/(a*N))*ft)*p+f*(ddp+(Nn/N+3*an/a)*dp-k*k*p/a**2)
-        def g(t):return (t-1)**4/d
+            return phase*((-ftt/N**2+(Nt/N**3-3/(a*N))*ft)*p+f*(ddp+(Nn/N+3*an/a)*dp-k*k*p/a**2))
+        def g(t):return phase*(t-1)**4/d
         errs=[]
         for modes in (12,24,48):
             field,sol=galerkin(k,F,g,1.,1.2,modes,quad=240)
             n=np.linspace(0,np.arcsinh(1.2)-np.arcsinh(.25),500)
-            target=.2**4*profiles(n)[0]; err=np.linalg.norm(field(1.2,n)-target)/np.linalg.norm(target)
+            target=phase*.2**4*profiles(n)[0]; err=np.linalg.norm(field(1.2,n)-target)/np.linalg.norm(target)
             errs.append(err)
         assert errs[2]<errs[1]<errs[0] and errs[2]<.01
         print('manufactured k=',k,'relative L2 sampled errors',errs)
