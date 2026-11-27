@@ -1281,3 +1281,17 @@ interval is inadequate on that fixture; it is not a relative approximation
 theorem. Per-source receipt: scripts/receipts/pnp_capacity_character_local_20261127.json.
 W6 source attachment now present; full native integration and uniform
 productive choice remain open. No CI or merges invoked.
+
+
+P0-F: the new `scripts/check_pnp_capacity_resistant_campaign.py` discovers
+bounded high-rank/high-seam-width survivors against the actual disjunctive,
+character, separator, collective and shared demand consumers on independent
+regular planted sources; no planted assignment is supplied to the solver.
+Every recovered assignment is checked against the original incidence matrix.
+Run with `timeout 90s python scripts/check_pnp_capacity_resistant_campaign.py /tmp/pnp-capacity-resistant.json`.
+The checkpoint records widths, charged work, per-lane status and original
+witnesses. This campaign is implemented but not run against full checkout;
+no genuine combined survivor is asserted yet. Local mixed-defect replay
+on transcribed donor functions additionally passed 1000/1000 independent
+finite quotient-space comparisons (123 created-dependency cases, 113
+removed-dependency cases).
