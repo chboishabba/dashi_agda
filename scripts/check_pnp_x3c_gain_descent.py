@@ -149,9 +149,14 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
         x=chart(n,P)[0]
         if exchange_demand_nodes>0:
             from check_pnp_demand_exchange import descent as demand_descent
-            y,done=demand_descent(n,R,P,x,B,leaf_cap=exchange_demand_leaf,seam_cap=exchange_demand_seam,nodes=exchange_demand_nodes,probe_cap=exchange_demand_probe_cap,donor_depth=exchange_demand_depth,character_degree=exchange_demand_character,history=exchange_history,k_index=refinement)
+            # Commit this attempted incumbent trajectory only on a decisive result.
+            # UNKNOWN falls back from the original x, not its partial trajectory.
+            demand_history=[] if exchange_history is not None else None
+            y,done=demand_descent(n,R,P,x,B,leaf_cap=exchange_demand_leaf,seam_cap=exchange_demand_seam,nodes=exchange_demand_nodes,probe_cap=exchange_demand_probe_cap,donor_depth=exchange_demand_depth,character_degree=exchange_demand_character,history=demand_history,k_index=refinement)
             if y is not None:assert satisfies(y,P,()) and cover(R,y)
-            if done:return y,B.stats,True
+            if done:
+                if exchange_history is not None:exchange_history.extend(demand_history)
+                return y,B.stats,True
         if exchange_seam_rank>=0:
             from check_pnp_separator_row_strata import descent as seam_descent
             result=seam_descent(n,R,P,x,B,exchange_seam_leaf,exchange_seam_rank,exchange_history,refinement)
