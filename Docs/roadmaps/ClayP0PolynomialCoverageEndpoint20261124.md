@@ -555,3 +555,11 @@ Replay: `timeout 90s python scripts/check_pnp_capacity_character_campaign.py /tm
 The campaign is supplied for local execution; no CI invoked. W4/W8/W9
 universal discovery and W10 universal producer remain open; W6 portfolio
 extension remains a separate integration cut.
+
+
+Follow-up: bounded forest refusal now leaves a reserved budget for replayed
+character exclusion. The original binary signed-interval consumer is attached
+at the existing split continuation; only a positive certificate permits
+reopening, both branches otherwise remain. All-cut scoring records removed
+and newly created dependencies separately using the exact mixed-defect identity.
+The scope campaign includes a forced width refusal and mixed-dependency controls.

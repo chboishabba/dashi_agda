@@ -21,6 +21,7 @@ def capacity_chart(n, R, H, caps, B):
     essential. H is the original absolute demand including source parity.
     """
     assert len(R)==len(caps) and H==canon(H)
+    assert canon(H+tuple((r,1) for r in R))==H
     if any(c<1 for c in caps): return None  # original odd parity
     equations=list(H); F=[]; paths=[]; N=n
     for r,c in zip(R,caps):
@@ -125,6 +126,7 @@ def mass_interval(n,R,H,caps,B):
     may refuse; no additive estimate of auxiliary mass is substituted.
     """
     assert H==canon(H) and len(R)==len(caps)
+    assert canon(H+tuple((r,1) for r in R))==H
     if any(c<1 for c in caps): return 0,0,(),()
     E=[]
     for r,c in zip(R,caps):

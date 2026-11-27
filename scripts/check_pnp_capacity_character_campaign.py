@@ -4,7 +4,7 @@ from pathlib import Path
 from random import Random
 from sympy import Matrix
 from check_pnp_affine_normal_components import canon,chart,lift,satisfies,Budget
-from check_pnp_demand_strata import Ledger,Allowance,ProbeLimit
+from check_pnp_demand_strata import Ledger,Allowance,ProbeLimit,conditioned_cut_defect
 from check_pnp_capacity_character import (capacity_chart,extend_original,discover_certificate,
     verify_certificate,Certificate,mass_interval,reopen_positive,signed_interval,preferred_child)
 HERE=Path(__file__).parent
@@ -57,6 +57,8 @@ for seed in range(36):
         except ProbeLimit:counts['refusals']+=1
     save(dict(name=name,**counts,charged=sum(B.stats.values())))
 if not done('scope'):
+    assert conditioned_cut_defect((1,),(2,),(3,))==(1,0,1)
+    assert conditioned_cut_defect((1,),(1,),(1,))==(0,1,0)
     n=4;R=(7,7,7);P=canon(((7,1),));H=canon(P+((1,1),(2,1)))
     B=Budget(100_000_000);caps=(1,1,1)
     children=[discover_certificate(n,R,canon(H+((8,b),)),caps,B,0) for b in (0,1)]
@@ -68,5 +70,18 @@ if not done('scope'):
     status,c,y=L.probe(H,caps,B,0,0,character_degree=0)
     assert (status,c,y)==('EMPTY',0,None)
     assert L.probe(H,(3,3,3),B,8,8)[0]=='SAT'
+    # Exercise the new consumer on width refusal, not merely an exact fold.
+    P=canon(((7,1),));L=Ledger(4,(7,),P)
+    status,c,y=L.probe((),(1,),B,0,0,character_degree=0)
+    assert status=='UNKNOWN' and y is not None and (7&y).bit_count()==1
+    # Genuine cap>1 chart with distinct extensions: enumerate small chart
+    # directly to verify that no additional one-hot extension is admitted.
+    R=(15,);P=canon(((15,1),));C=capacity_chart(4,R,P,(3,),B)
+    # cap 3 is automatically satisfied by odd parity, but chart remains bijective.
+    N,Q,F,_=C;u,V=chart(N,Q)
+    if len(V)<=18:
+        X=[lift(u,V,z) for z in range(1<<len(V))]
+        X=[x for x in X if all(sum(((s&x).bit_count()%2)^b for s,b in G)==1 for G in F)]
+        assert sorted(x&15 for x in X)==[x for x in range(16) if x.bit_count()%2]
     save(dict(name='scope',status='PASS',charged=sum(B.stats.values())))
 print('capacity weld',len(state['cases']),{k:sum(c.get(k,0) for c in state['cases']) for k in ('extensions','intervals','proofs','witnesses','refusals')})

@@ -117,15 +117,23 @@ class Ledger:
                         discover_certificate,verify_certificate)
                     # Use the same local allowance and original scope; never treat
                     # an incomplete positive mass observation as an exact count.
-                    I=mass_interval(self.n,self.R,Q,caps,B)
-                    w=reopen_positive(self.n,self.R,Q,caps,I,B)
-                    if w is not None:
-                        total+=I[0];y=w if y is None else y;unknown=True;continue
-                    cert=discover_certificate(self.n,self.R,Q,caps,B,character_degree)
-                    if cert is not None:
-                        if not verify_certificate(self.n,self.R,Q,caps,cert,B):
-                            raise AssertionError('invalid capacity certificate')
-                        self._record(Q,caps,cert,B);continue
+                    # A forest refusal must not starve the character consumer.
+                    # Reserve disjoint portions of the current allowance.
+                    try:
+                        A=Allowance(B,max(0,B.left//2))
+                        I=mass_interval(self.n,self.R,Q,caps,A)
+                        w=reopen_positive(self.n,self.R,Q,caps,I,A)
+                        if w is not None:
+                            total+=I[0];y=w if y is None else y;unknown=True;continue
+                    except ProbeLimit:pass
+                    try:
+                        A=Allowance(B,max(0,B.left))
+                        cert=discover_certificate(self.n,self.R,Q,caps,A,character_degree)
+                        if cert is not None:
+                            if not verify_certificate(self.n,self.R,Q,caps,cert,A):
+                                raise AssertionError('invalid capacity certificate')
+                            self._record(Q,caps,cert,A);continue
+                    except ProbeLimit:pass
                 unknown=True;continue
             c,w=ans
             if c==0:self._record(Q,caps,'exact_separator_fold',B)
@@ -141,6 +149,24 @@ class Ledger:
 def conditioned_cut_rank(U,V,L):
     """Dimension of the new seam after quotienting by demand-normal span L."""
     return len(span(U+L))+len(span(V+L))-len(span(U+V+L))-len(span(L))
+
+
+def conditioned_cut_defect(U,V,L):
+    """Removed and introduced shared normal dimensions, separately."""
+    L=span(L);U=span(U);V=span(V)
+    shared=len(U)+len(V)-len(span(U+V))
+    iu=len(U)+len(L)-len(span(U+L))
+    iv=len(V)+len(L)-len(span(V+L))
+    iuv=len(span(U+V))+len(L)-len(span(U+V+L))
+    # dim(U intersect V intersect L) from explicit normal intersection.
+    from check_pnp_normal_boundary_join import intersection
+    n=max((a.bit_length() for a in U+V+L),default=0)
+    removed=len(intersection(n,intersection(n,U,V),L))
+    created=iuv-iu-iv+removed
+    assert created>=0
+    new=shared-removed+created
+    assert new==conditioned_cut_rank(U,V,L)
+    return new,removed,created
 
 
 def choose_normal(n,R,H,B):
@@ -160,11 +186,12 @@ def choose_normal(n,R,H,B):
         if mask!=full:cuts.append((space(mask),space(full^mask)))
         if A is not None:todo.extend((A,C))
     def score(s):
-        w=[]
+        w=[];created=0
         for U,W in cuts:
             B.pay('demand_cut_score',1+d*(1+len(U)+len(W))**2)
-            w.append(conditioned_cut_rank(U,W,(s,)))
-        return max(w,default=0),sum(w),s
+            rank,removed,added=conditioned_cut_defect(U,W,(s,))
+            w.append(rank);created+=added
+        return max(w,default=0),sum(w),created,s
     s=min(best or (1,),key=score)
     piv={a.bit_length()-1 for a,b in H};free=[i for i in range(n) if i not in piv]
     return sum(1<<free[i] for i in bits(s))
@@ -222,7 +249,19 @@ def solve_cover(n,R,P,B,leaf_cap=8,seam_cap=8,nodes=32,probe_cap=1000000,
             y=chart(n,H)[0];B.pay('demand_terminal_verify',1+sum(r.bit_count() for r in R))
             if all((r&y).bit_count()==1 for r in R):return y,True
             L._record(H,caps,'singleton_verify',B);continue
-        for b in (1,0):
+        order=(1,0)
+        if character_degree>=0:
+            from check_pnp_capacity_character import signed_interval,preferred_child,reopen_positive
+            try:
+                A=Allowance(B,probe_cap)
+                Q,I,D=signed_interval(n,R,H,caps,a,A)
+                b=preferred_child(I,D)
+                if b is not None:
+                    y=reopen_positive(n,R,Q[b],caps,I[b],A)
+                    if y is not None:return y,True
+                    order=(1-b,b)
+            except ProbeLimit:pass
+        for b in order:
             Q=canon(H+((a,b),));assert Q is not None and len(Q)==len(H)+1;pending.append(Q)
         B.pay('demand_split_children',2)
     return None,not pending and not unresolved
