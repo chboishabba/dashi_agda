@@ -102,7 +102,7 @@ def improve(n,P,x,B,width=4):
     return (None if y is None else lift(0,V,y)),done
 
 
-def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False,exchange_rank=-1,exchange_probe_cap=1000000,exchange_small=5,exchange_rado=False,exchange_tagged=False,exchange_history=None,exchange_strata_rank=-1,exchange_seam_rank=-1,exchange_seam_leaf=8):
+def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials=0,core_cover=0,core_pairs=0,hull_rows=0,lookahead_depth=0,lookahead_rounds=1,character_degree=-1,character_quotient_cap=0,character_path_steps=0,character_section_cap=0,character_adaptive_nodes=0,character_adaptive_degree=0,character_adaptive_provenance=False,exchange_rank=-1,exchange_probe_cap=1000000,exchange_small=5,exchange_rado=False,exchange_tagged=False,exchange_history=None,exchange_strata_rank=-1,exchange_seam_rank=-1,exchange_seam_leaf=8,exchange_demand_nodes=0,exchange_demand_probe_cap=1000000,exchange_demand_leaf=8,exchange_demand_seam=8,exchange_demand_depth=1,exchange_demand_character=-1):
     R=incidence(m,sets);n=len(sets);B=Budget(cap);k=m//3
     try:
         B.pay('input',1+m+3*n);pins=capacity(n,R,k,B)
@@ -147,6 +147,16 @@ def solve(m,sets,cap,width=4,indexed=False,history=None,demand=False,core_trials
             if cover(R,y):return y,B.stats,True
             character_degree=-1 # same source/demand already observed
         x=chart(n,P)[0]
+        if exchange_demand_nodes>0:
+            from check_pnp_demand_strata import solve_cover
+            y,done=solve_cover(n,R,P,B,leaf_cap=exchange_demand_leaf,seam_cap=exchange_demand_seam,nodes=exchange_demand_nodes,probe_cap=exchange_demand_probe_cap,donor_depth=exchange_demand_depth,character_degree=exchange_demand_character)
+            if y is not None:
+                assert satisfies(y,P,()) and cover(R,y)
+                if exchange_history is not None and y!=x:
+                    q=tuple((r&x).bit_count()-(r&y).bit_count() for r in R)
+                    assert all(a>=0 and a%2==0 for a in q)
+                    exchange_history.append((refinement,0,x,x^y,q,B.left))
+            if done:return y,B.stats,True
         if exchange_seam_rank>=0:
             from check_pnp_separator_row_strata import descent as seam_descent
             result=seam_descent(n,R,P,x,B,exchange_seam_leaf,exchange_seam_rank,exchange_history,refinement)
