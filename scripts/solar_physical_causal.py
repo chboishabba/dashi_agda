@@ -45,13 +45,15 @@ def reaction(n,neutral,temperature,power,dt,q):
     alpha=np.asarray(q['recombination_m3_s'],float)
     k=np.asarray(q['ionization_s_inv'],float)
     activation=np.asarray(q['heater_ionization_per_J'],float)
+    threshold=np.asarray(q.get('activation_temperature_K',[0.,0.]),float)
+    assert threshold.shape==(2,) and np.all(threshold>=0) and temperature>0
     assert alpha.shape==k.shape==activation.shape==(2,)
     assert np.all(alpha>=0) and np.all(k>=0) and np.all(activation>=0)
     neutral=np.asarray(neutral,float)
     # First recombine, then ionize available neutral precursor; both pairwise.
     r=n[1:]*(-np.expm1(-dt*alpha*n[0]))
     pool=neutral+r
-    c=pool*(-np.expm1(-dt*(k+activation*power)))
+    c=pool*(-np.expm1(-dt*(k*np.exp(-threshold/temperature)+activation*power)))
     return np.r_[r.sum(),r],np.r_[c.sum(),c],pool-c
 
 def local_padded(D,nu,gyro,b,load):
@@ -148,6 +150,8 @@ def cycle(material,cfg):
     assert pool.shape==(n,2) and np.all(pool>=0)
     src=np.asarray(cfg['incident_sqrt_W'],float); heat=np.asarray(cfg['heating_W'],float)
     assert heat.shape==(len(src),n) and len(src)>0
+    assert int(cfg.get('max_cycles',1))>=1 and cfg['auxiliary_J']>=0
+    assert np.allclose(pop@CHARGE,0,atol=1e-12*max(np.max(pop),1.)*e)
     dt=cfg['period_s']/len(src); assert dt>0
     state=(np.zeros(len(cfg['curl_s_inv'])),np.zeros(len(sh.J)),pop,pool,np.zeros(n))
     start=tuple(a.copy() for a in state); hist=[]; ledger={}
@@ -159,8 +163,11 @@ def cycle(material,cfg):
         residual=[float(np.linalg.norm(a-b)/max(np.linalg.norm(a),np.linalg.norm(b),1e-30)) for a,b in zip(state,start)]
         if max(residual)<=cfg.get('return_rtol',1e-8): break
     restored=max(residual)<=cfg.get('return_rtol',1e-8)
+    # A periodic orbit reached after transient may not restore original material.
+    original_population_residual=float(np.linalg.norm(state[2]-D*MASS/CHARGE**2)/max(np.linalg.norm(D*MASS/CHARGE**2),1e-30))
+    original_restored=restored and original_population_residual<=cfg.get('return_rtol',1e-8)
     net=ledger['load_J']+ledger['ground_J']-ledger['paid_J']-cfg['auxiliary_J']
-    return dict(restored=bool(restored),return_residuals=residual,cycles=cycle_index+1,ledger=ledger,net_J=float(net),admissible_cycle_net_J=float(net) if restored else None,radial_audit=sh.audit_radial(cfg,cfg.get('audit_frequencies_Hz',[0.,3.915,7.83])),physical_admission=False)
+    return dict(restored=bool(restored),original_population_restored=bool(original_restored),original_population_residual=original_population_residual,return_residuals=residual,cycles=cycle_index+1,ledger=ledger,net_J=float(net),admissible_cycle_net_J=float(net) if original_restored else None,radial_audit=sh.audit_radial(cfg,cfg.get('audit_frequencies_Hz',[0.,3.915,7.83])),physical_admission=False)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('root',type=Path); p.add_argument('packet',type=Path); p.add_argument('config',type=Path); a=p.parse_args()
