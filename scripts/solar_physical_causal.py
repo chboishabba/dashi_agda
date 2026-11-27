@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 from scipy.constants import epsilon_0, elementary_charge as e, electron_mass as me, atomic_mass as u
 from scipy.linalg import solve
+from solar_physical_cone import timed_step
 from solar_physical_periodic import original, aperture, shell, dc_port
 from solar_earth_collision_tensor import rates
 from solar_earth_coupled_cell import generator
@@ -127,12 +128,29 @@ def advance(material,cfg,state,incident,heating,dt,sh):
     c=np.asarray(cfg['source_port_sqrt_inv_s'],float)
     H=np.block([[A-C.T@sh.D@C-np.outer(c,c),-C.T@sh.B.T],[sh.B@C,sh.J-sh.R]])
     v=np.r_[x,z]; force=np.r_[2*incident*c,np.zeros(len(z))]
-    I=np.eye(len(v)); nxt=solve(I-dt*H/2,(I+dt*H/2)@v+dt*force)
-    xm=(v[:d]+nxt[:d])/2; zm=(v[d:]+nxt[d:])/2; port=C@xm
-    natural=dt*incident**2; outgoing=dt*(xm@c-incident)**2
-    material=-dt*xm@A@xm; useful=dt*sum(load[i]/epsilon_0*np.sum(xm[12*i:12*i+3]**2) for i in range(n))
-    ground=dt*(zm@sh.Rg@zm+port@sh.Dg@port)
-    other=dt*(zm@sh.Ro@zm+port@sh.Do@port)
+    if 'indexed_mesh' in cfg:
+        L=np.zeros_like(A)
+        for i in range(n): L[12*i:12*i+3,12*i:12*i+3]=np.eye(3)*load[i]/epsilon_0
+        def form(top,bottom):
+            F=np.zeros_like(H); F[:d,:d]=top; F[d:,d:]=bottom; return F
+        null=np.zeros_like(sh.J)
+        forms={'load':form(L,null),'collision':form(-(A+A.T)/2-L,null),
+               'ground':form(C.T@sh.Dg@C,sh.Rg),'shell_other':form(C.T@sh.Do@C,sh.Ro),
+               'source':form(np.outer(c,c),null)}
+        nxt,receipt=timed_step(v,H,force,dt,cfg['indexed_mesh'],forms,np.r_[c,np.zeros(len(z))],incident)
+        channels=receipt['loss_channels_J']; natural=receipt['incident_J']; outgoing=receipt['outgoing_J']
+        useful=channels['load']; material=useful+channels['collision']
+        ground=channels['ground']; other=channels['shell_other']
+        ledger['local_stage_count']=len(receipt['events'])
+    else:
+        if cfg.get('require_indexed_cone',True):
+            raise ValueError('indexed mesh required; dense midpoint only by explicit diagnostic opt-out')
+        I=np.eye(len(v)); nxt=solve(I-dt*H/2,(I+dt*H/2)@v+dt*force)
+        xm=(v[:d]+nxt[:d])/2; zm=(v[d:]+nxt[d:])/2; port=C@xm
+        natural=dt*incident**2; outgoing=dt*(xm@c-incident)**2
+        material=-dt*xm@A@xm; useful=dt*sum(load[i]/epsilon_0*np.sum(xm[12*i:12*i+3]**2) for i in range(n))
+        ground=dt*(zm@sh.Rg@zm+port@sh.Dg@port)
+        other=dt*(zm@sh.Ro@zm+port@sh.Do@port)
     x,z=nxt[:d],nxt[d:]
     after=.5*(x@x+z@z)+capacity@newtheta+np.einsum('is,i,s->',pop,vol,chem)
     absorbed=dt*heating.sum(); r=after-before+outgoing+material+ground+other+bath+ledger['removed_kinetic_J']+ledger['mixing_J']+ledger['recombination_J']-natural-absorbed-ledger['birth_kinetic_J']-ledger['formation_J']
