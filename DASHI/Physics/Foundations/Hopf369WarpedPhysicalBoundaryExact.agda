@@ -27,7 +27,15 @@ sameWall y y = true
 sameWall z z = true
 sameWall _ _ = false
 
-module At {r : Level} (F : C.RealField r) where
+-- RealField's inverse operation alone has no inverse law. Require the
+-- exact nonzero rational denominator laws, rather than assume them.
+module At {r : Level} (F : C.RealField r)
+  (halfLaw : C.multiply F
+    (C.inverse F (C.add F (C.one F) (C.one F)))
+    (C.add F (C.one F) (C.one F)) ≡ C.one F)
+  (thirdLaw : C.multiply F
+    (C.inverse F (C.add F (C.add F (C.one F) (C.one F)) (C.one F)))
+    (C.add F (C.add F (C.one F) (C.one F)) (C.one F)) ≡ C.one F) where
   S : Set r
   S = C.Complex F
 
@@ -246,6 +254,31 @@ module At {r : Level} (F : C.RealField r) where
     entry normal normal =
       a * (h44 p - quarter * tr p) + c * quarter * tr p
 
+  -- BR15 actual matrix potential on the optical normal interval.
+  -- E and Ei are the same spectral map with mutually reciprocal
+  -- factors supplied by the positive warp profile, not independent matrices.
+  metricPotential : S → S → S → Vec → S → S → S → S → S → S → Tensor → Tensor
+  metricPotential b bk h2 q a e c ai ei ci u =
+    spectral a e c (addT
+      (mulT bk (sumT (λ i → mulT (q i) (J i p))))
+      (addT (mulT (b * b) (Vb p)) (mulT h2 (Vh p))))
+    where
+    p : Tensor
+    p = spectral ai ei ci u
+
+  -- Actual BS4/5 coupled covector potential for orthonormal components.
+  -- u=b^(3/2) C; proper normal to optical coordinate and Ric=-4.
+  -- Sum eta L²=diag(-1,-1,-1,-1,-4); retain every component.
+  gaugePotential : S → S → S → Vec → Cov → Cov
+  gaugePotential b bk h2 q u i =
+    two * bk * sum4 (λ a → sign a * q a * L a u i)
+    + (bk * bk * (neg (diagS i) - three * three * quarter)
+       - h2 * tangCount i - (four + three * half) * b * b) * u i
+    where
+    diagS : Axis → S
+    diagS (wall _) = U
+    diagS normal = four
+
   -- At b=1, u=p, p_x=u_x-k R p/2. These are not independent jets.
   opticalDerivative : S → Tensor → Tensor → Tensor
   opticalDerivative k p ux = subT ux (mulT (k * half) (R p))
@@ -327,6 +360,15 @@ module At {r : Level} (F : C.RealField r) where
   gaugeCodazzi j q p px m mx a =
     px (wall a) - mx (wall a) + q a * (p normal - m normal)
     - half * j * (p (wall a) + m (wall a))
+
+  -- General mean-extrinsic correction to the coordinate Codazzi jump.
+  -- M is symmetric covariant wall mean; the reference frame conversion
+  -- above applies only at AK. For a general frame use coordinate jets.
+  coordinateCodazzi : S → (Wall → Wall → S) → Vec → Cov → Cov → Cov → Cov → Vec
+  coordinateCodazzi j M q p dp m dm a =
+    dp (wall a) - dm (wall a) + q a * (p normal - m normal)
+    - two * sum4 (λ b → M a b * sign b * (p (wall b) - m (wall b)))
+    - j * (p (wall a) + m (wall a))
 
   gaugeGauss : S → Vec → Cov → Cov → Cov → Cov → S
   gaugeGauss j q p px m mx =
