@@ -44,7 +44,9 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False,signe
             B.pay('row_partition_node',1+n+len(P)+len(I));steps+=1
             if trace is not None:trace('enter',P,I,None)
             if signed_screen:
-                if signed_screen=='implication':
+                if signed_screen=='masked':
+                    from check_pnp_signed_capacity_masked import screen
+                elif signed_screen=='implication':
                     from check_pnp_signed_capacity_implication import screen
                 elif signed_screen=='rank2-components':
                     from check_pnp_signed_capacity_components import screen
@@ -123,7 +125,9 @@ def recover_cell(n,R,H,caps,B,signed_screen=False):
     volume=1<<(n-len(H));best=Bound(0,volume)
     if any(c<1 for c in caps):return Bound(0,0)
     if signed_screen:
-        if signed_screen=='implication':
+        if signed_screen=='masked':
+            from check_pnp_signed_capacity_masked import screen
+        elif signed_screen=='implication':
             from check_pnp_signed_capacity_implication import screen
         elif signed_screen=='rank2-components':
             from check_pnp_signed_capacity_components import screen
