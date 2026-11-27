@@ -72,8 +72,8 @@ factorTerm h z n =
   in complexTrans (A.scaleCCongruent (scalePower h z (suc (suc n))) a)
     (complexTrans (scaleNest a (R.pow h (suc (suc n))) w)
       (complexTrans (P.*-congʳ eq , P.*-congʳ eq)
-        (complexSym (complexTrans (scaleNest (R._*_ h h) p (scaleC a w))
-          (scaleNest (R._*_ (R._*_ h h) p) a w)))))
+        (complexSym (complexTrans (A.scaleCCongruent (scaleNest p a w) (R._*_ h h))
+          (scaleNest (R._*_ h h) (R._*_ p a) w)))))
 
 partial : (Nat → BishopComplex) → Nat → BishopComplex
 partial t n = C.complex (Seq.SeriesOf (C.realTerms t) n)
