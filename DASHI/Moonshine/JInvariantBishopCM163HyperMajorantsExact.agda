@@ -28,6 +28,7 @@ import DASHI.Moonshine.JInvariantBishopHyperQFactorizationWeldExact as F
 import DASHI.Moonshine.JInvariantBishopWeightedCauchyEvaluationExact as W
 import DASHI.Moonshine.JInvariantBishopWeightedPowerLimitExact as Power
 import DASHI.Foundations.BishopChudnovskyRawCoordinateWeldExact as Raw
+import DASHI.Moonshine.JInvariantBishopLiteralRamanujanExact as Literal
 
 cancelOrder : (v : ℝ) → R.Positive v → {x y : ℝ} →
   v * x ≤ v * y → x ≤ y
@@ -190,3 +191,7 @@ module AtRoot (root : End.CMRoot) where
   rawFromArithmeticAndCM hx hy he jet =
     Consumer.actualRaw hx hy he Slice.xAbs Slice.yAbs uAbs
       Slice.xEval Slice.yEval Slice.uEval root jet
+
+  -- The arithmetic producer is now internal; only the CM root and signed jet remain.
+  rawFromCM : End.SignedJet → (k : Nat) → Raw.RawCross k
+  rawFromCM = rawFromArithmeticAndCM Literal.ramanujanX Literal.ramanujanY Literal.ramanujanE
