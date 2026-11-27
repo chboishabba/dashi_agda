@@ -98,5 +98,5 @@ def reverse_target(material,cfg,design,target_J):
     out=optimize(material,cfg,design)
     a=out['best_active']; p=out['best_passive']; upper=out['universal_passive_upper_J']
     out.update(target_J=float(target_J),sampled_target_residual_J=None if a is None or p is None else a-p-target_J,
-        certified_target_residual_J=None if a is None else a-upper-target_J)
+        candidate_target_residual_J=None if a is None else a-upper-target_J)
     return out
