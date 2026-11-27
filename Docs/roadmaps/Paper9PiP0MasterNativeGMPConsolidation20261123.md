@@ -1874,3 +1874,24 @@ Remaining native maximum cut:
 2. Prove actual Fourier row evaluation and axis normalization (including the required even zeta evaluations) on the concrete normalized lattice limits, then degree-41 Hecke product/pole removal and literal packet identification. Generator laws are now source-written; do not reimplement generic S/T geometry.
 3. Derive original diagonal zero and actual reciprocal-ray analytic quotient jet / cross coefficient vanishing; feed the two existing terminal witnesses to allRawFromDiagonalAndRay.
 4. Native and Lean elaboration/kernel/axiom acceptance and actual GMP trace/floor acceptance remain deferred. No unconditional native RawCross claim. Preserve classical authorship and original donor provenance.
+
+
+### 2026-11-27 — Original Machin analytic endpoint and finite Lambert fibre
+
+SOURCE-WRITTEN, UNCOMPILED. No CI, native kernel, Lean kernel or production GMP replay invoked.
+
+- 72f89361d553 / b03590932bf8: restore missing original imaginary-axis and addition helpers in BishopSetoidComplexExact; the actual configured native product and parity consumers are reused.
+- ed7767ae40da: recover BishopNatRealReciprocalSquareBaselExact from original donor 8e75c14b4a4d0572f594977a6ed106802ad16329, including reciprocal order and power lemmas needed by the existing mesh.
+- 266c34d07e9d: BishopOriginalMachinAtanSmallPhaseExact: actual atan increment, nonnegative half-ball angle and original sine/cosine Taylor errors, no derivative interchange.
+- 8ff8e2f0f6fd: BishopOriginalMachinCayleyConservedPhaseExact: for y=x+h, D=1+x^2 and N=1-x^2+2ix, normalize the actual phase by conjugate(N)/D. The exact first-order cancellation residual is 2h^2(1-iy); component increment bound 204h^2.
+- f9678835ecbf / 346a4e525d2b: BishopOriginalMachinCayleyEndpointExact: clipped equal mesh with 16+n cells, fixed endpoint difference bounded by 204*x*h tending to zero; invert the unit Cayley factor and instantiate both original atan values. Also derive original quarter equality and first sine zero using existing consumers. No ODE uniqueness or mean-value premise. Configured Round11 source input retained.
+- 4a62d817cd05: attach both actual endpoint proofs to JInvariantBishopCM163OriginalPhaseExact.qFromOriginalAtans. The selected CM phase no longer has caller-supplied atan/Cayley evaluations at source level.
+- 40d0545a6d8f: JInvariantBishopLambertDegreeFibreExact: actual positive factor-pair scan, product degree readout and weighted complex fold; match the original 240 sigma3 and 504 sigma5 tail terms. This is finite regrouping, not infinite row evaluation.
+
+Current residual cut:
+1. C0: source implementation connected; elaboration and kernel verification outstanding.
+2. C1: establish actual horizontal lattice row evaluation and axis even-zeta values on the original Machin carrier; transport absolutely convergent rows to the degree fibres, identify original normalized E4/E6, then actual degree-41 Hecke product and coefficient/pole removal.
+3. C2/C3: derive original diagonal zero and original analytic ray residual; existing allRawFromDiagonalAndRay internally constructs enclosure and consumes these two witnesses. No unconditional native RawCross claimed.
+4. All native and Lean source acceptance and GMP trace/floor acceptance deferred. Lean terminal unchanged this round.
+
+Classical Machin, Cayley, Eisenstein and Lambert identities retain their source attribution; DASHI contribution here is the constructive finite mesh conservation, source-specific evaluation and degree-fibre transport.
