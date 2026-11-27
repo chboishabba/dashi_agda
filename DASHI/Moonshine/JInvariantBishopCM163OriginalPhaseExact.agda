@@ -12,6 +12,7 @@ import RealProperties as P
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Series
 import DASHI.Analysis.BishopMachinTwoPointCayleyCompositionExact as Two
+import DASHI.Analysis.BishopOriginalMachinCayleyEndpointExact as Closed
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as Half
 import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
 import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as Bridge
@@ -85,3 +86,9 @@ module AtOriginal (inputs : Cut.BishopCutset) where
         (P.≃-trans (P.*-congˡ sineNeg) (P.*-zeroʳ CM.radius))
     in Weld.originalExpEquivalenceToSeries
       (C.≈C-trans (C.expCongruent T exponentCoordinates) phase)
+
+  -- The original configured Round11 series supplies both analytic values.
+  qFromOriginalAtans :
+    Series._≈C_ (QAt.originalRound11MachinQAtForSeries inputs CM.tau) CM.q
+  qFromOriginalAtans = qFromTwoOriginalAtans
+    (Closed.originalFive inputs) (Closed.original239 inputs)
