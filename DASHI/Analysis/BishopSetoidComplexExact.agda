@@ -333,3 +333,21 @@ imaginaryExponentialProductGivesAddition T x y product =
          (BishopReal._*_ (Elementary.bishopCos (dataSet T) x) (Elementary.bishopSin (dataSet T) y))
          (BishopReal._*_ (Elementary.bishopSin (dataSet T) x) (Elementary.bishopCos (dataSet T) y)))
      , reEquivalent h
+
+
+imaginaryExponentialIsPhase : ∀ T y → trigPair T y ≈C expC T (pureImaginary y)
+imaginaryExponentialIsPhase T y = ≈C-sym (expImaginaryIsTrigPair T y)
+
+BishopSineAdditionAt : BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopReal.ℝ → Set
+BishopSineAdditionAt T x y =
+  BishopReal._≃_ (Elementary.bishopSin (dataSet T) (BishopReal._+_ x y))
+    (BishopReal._+_
+      (BishopReal._*_ (Elementary.bishopSin (dataSet T) x) (Elementary.bishopCos (dataSet T) y))
+      (BishopReal._*_ (Elementary.bishopCos (dataSet T) x) (Elementary.bishopSin (dataSet T) y)))
+
+BishopCosineAdditionAt : BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopReal.ℝ → Set
+BishopCosineAdditionAt T x y =
+  BishopReal._≃_ (Elementary.bishopCos (dataSet T) (BishopReal._+_ x y))
+    (BishopReal._-_
+      (BishopReal._*_ (Elementary.bishopCos (dataSet T) x) (Elementary.bishopCos (dataSet T) y))
+      (BishopReal._*_ (Elementary.bishopSin (dataSet T) x) (Elementary.bishopSin (dataSet T) y)))
