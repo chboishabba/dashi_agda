@@ -12,11 +12,13 @@ import Data.Integer.Base as Z
 open import Data.Rational.Unnormalised using (_/_)
 import Data.Rational.Unnormalised as Q
 import Data.Rational.Unnormalised.Properties as QP
-open import Data.Sum.Base using (inj₁)
+open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Nullary.Decidable.Core using (from-yes)
 import Real as R
 open R using (ℝ; _≃_; _*_; _+_; _-_; _⋆; ∣_∣)
 import RealProperties as P
+import Inverse as Inv
+import DASHI.Foundations.BishopChudnovskySignedPeriodNormalizationExact as N
 import DASHI.Moonshine.JInvariantBishopCM163LiteralPacketExact as Packet
 import DASHI.Moonshine.JInvariantBishopCM163RealSlicePeriodExact as Slice
 import DASHI.Moonshine.JInvariantBishopCM163NativeJetReductionExact as J
@@ -238,3 +240,58 @@ signedJetFromPacket : (a b : ℝ) →
 signedJetFromPacket a b ha h1 h2 =
   Jet.signedJetFromLiteral a b (s2 ⋆) (s3 ⋆) (p2 ⋆) (p3 ⋆)
     ha sliceApart h1 h2 quadratic jet
+
+
+-- Apartness of the actual first q jet follows from its signed equation
+-- and the existing E4/E6 tail guards. No independent nonzero hypothesis.
+xNZ : R._≄0 J.X
+xNZ = inj₂ (P.posx⇒0<x Guard.xPositive)
+
+xInv : ℝ
+xInv = Inv._⁻¹ J.X xNZ
+
+xInvPositive : R.Positive xInv
+xInvPositive = Inv.posx⇒posx⁻¹ xNZ Guard.xPositive
+
+minusKPositive : R.Positive (R.- J.K)
+minusKPositive = P.0<x⇒posx
+  (P.<-respʳ-≃ (P.⋆-distrib-neg Kq)
+    (P.p<q⇒p⋆<q⋆ Q.0ℚᵘ (Q.-_ Kq)
+      (from-yes (Q.0ℚᵘ QP.<? (Q.-_ Kq)))))
+
+firstPositive : (a : ℝ) → J.FirstQJet a → R.0ℝ R.< a
+firstPositive a h =
+  let
+    v = R.- (J.K * J.Y)
+    vPositive : R.Positive v
+    vPositive = P.0<x⇒posx
+      (P.<-respʳ-≃
+        (let open P.ℝ-Solver in solve 2 (λ k y → (⊝ k) ⊗ y ⊜ ⊝ (k ⊗ y))
+          P.≃-refl J.K J.Y)
+        (P.posx⇒0<x (P.posx,y⇒posx*y minusKPositive Guard.yPositive)))
+    eq : (xInv * v) ≃ a
+    eq = P.≃-trans (P.*-congˡ (P.≃-symm h))
+      (P.≃-trans (P.≃-symm (P.*-assoc xInv J.X a))
+        (P.≃-trans (P.*-congʳ (P.≃-trans (P.*-comm xInv J.X)
+          (Inv.*-inverseʳ J.X xNZ))) (P.*-identityˡ a)))
+  in P.<-respʳ-≃ eq (P.posx⇒0<x (P.posx,y⇒posx*y xInvPositive vPositive))
+
+diskApart : (a : ℝ) → J.FirstQJet a → R._≄0 (Jet.A J.p a)
+diskApart a h =
+  let
+    v = ((+ 2 / 1) ⋆) * J.p * a
+    vp = P.posx,y⇒posx*y
+      (P.posx,y⇒posx*y (P.posp⇒posp⋆ (+ 2 / 1) (QP.positive⁻¹ (+ 2 / 1))) Jet.pPositive)
+      (P.0<x⇒posx (firstPositive a h))
+  in inj₁ (P.<-respʳ-≃ (P.≃-symm P.0≃-0)
+    (P.<-respˡ-≃
+      (let open P.ℝ-Solver in solve 2 (λ p a →
+        ⊝ (Κ (+ 2 / 1) ⊗ p ⊗ a) ⊜ Κ ((Z.- (+ 2)) / 1) ⊗ p ⊗ a)
+        P.≃-refl J.p a)
+      (P.neg-mono-< (P.posx⇒0<x vp))))
+
+signedJetFromActualFirst : (a b : ℝ) → J.FirstQJet a → J.SecondQJet b →
+  Jet.literalResidual (Jet.A J.p a) (Jet.diskB J.p a b)
+    (s2 ⋆) (s3 ⋆) (p2 ⋆) (p3 ⋆) ≃ R.0ℝ →
+  J.SignedJet
+signedJetFromActualFirst a b h1 h2 = signedJetFromPacket a b (diskApart a h1) h1 h2
