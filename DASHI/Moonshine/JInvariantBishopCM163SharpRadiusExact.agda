@@ -54,7 +54,7 @@ errorBand l u x y e hl hu h =
        (solve 2 (λ x y → y ⊖ (y ⊖ x) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y (P.neg-mono-≤ (P.≤-trans
          (P.x≤∣x∣ {x = y - x})
-         (P.≤-respˡ-≃ (P.∣x-y∣≃∣y-x∣ x y) h)))))) ,
+         (P.≤-respˡ-≃ (P.∣x-y∣≃∣y-x∣ x y) h))))) ,
      P.≤-trans (P.≤-respˡ-≃
        (solve 2 (λ x y → y ⊕ (x ⊖ y) ⊜ x) P.≃-refl x y)
        (P.+-monoʳ-≤ y hi)) hu
