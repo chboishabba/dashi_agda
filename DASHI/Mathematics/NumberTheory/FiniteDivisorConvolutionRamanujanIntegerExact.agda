@@ -259,3 +259,124 @@ identity4 : (n : Nat) (pn : zero < suc n) →
   poly2 monomials4 (λ k l → conv k l (suc n)) ≡ lin (terms4 (+ (suc n))) (λ k → sigma k (suc n))
 identity4 n pn = trans (sym (scaledPoly S.weight4 (+ 30) monomials4 point4 (suc n)))
   (netBoundary S.weight4 S.weight4ShearSymmetry (+ 30) S.boundary4 S.boundaryClosed4 n pn (terms4 (+ (suc n))) boundaryPoint4)
+
+
+-- Exchange the two positive factors on the same source grade.
+open import Data.List.Base using (map)
+open import Data.List.Membership.Propositional using (_∈_)
+import Data.List.Membership.Propositional.Properties as M
+import Data.List.Relation.Binary.Permutation.Propositional as Perm
+import Data.Nat.Properties as NP
+import Agda.Builtin.Nat as Nat
+open import Relation.Binary.PropositionalEquality using (subst)
+
+swapQ : S.Quad → S.Quad
+swapQ (S.quad a b x y) = S.quad b a y x
+
+swapTwice : (q : S.Quad) → swapQ (swapQ q) ≡ q
+swapTwice (S.quad a b x y) = refl
+
+swapMember : ∀ {n q} → q ∈ G.omega n → swapQ q ∈ G.omega n
+swapMember {q = S.quad a b x y} m =
+  let (pa , pb , px , py) , e = G.omegaRead m
+  in G.omegaWrite (pb , pa , py , px) (trans (NP.+-comm (b Nat.* y) (a Nat.* x)) e)
+
+swapPermutation : (n : Nat) → map swapQ (G.omega n) Perm.↭ G.omega n
+swapPermutation n = W.uniqueMembershipEquivalenceToPermutation
+  (G.mapUniqueOn swapQ (G.omega n) (G.omegaUnique n)
+    (λ {a} {b} _ _ e → trans (sym (swapTwice a)) (trans (cong swapQ e) (swapTwice b))))
+  (G.omegaUnique n)
+  (λ m → let q , h , e = M.∈-map⁻ m in subst (λ z → z ∈ G.omega n) (sym e) (swapMember h))
+  (λ {q} m → subst (λ z → z ∈ map swapQ (G.omega n)) (swapTwice q) (M.∈-map⁺ (swapMember m)))
+
+convSym : (k l n : Nat) → conv k l n ≡ conv l k n
+convSym k l n =
+  let o = G.omega n
+      f = V.weight k l
+      g = V.weight l k
+  in trans (sym (V.omegaPower k l n))
+      (trans (sym (B.foldPerm f (swapPermutation n)))
+        (trans (B.foldMap f swapQ o)
+          (trans (B.foldCongOn (λ q → f (swapQ q)) g o
+            (λ {q} _ → Z.*-comm (+ Pow.powNat (S.b q) k) (+ Pow.powNat (S.a q) l)))
+            (V.omegaPower l k n))))
+
+-- Denominator-cleared classical Ramanujan divisor identities, using
+-- the same sigma and convolution coordinates. The last identity
+-- retains a factor 10 to avoid a separate integer cancellation.
+open import Data.Nat.Base using (s≤s; z≤n)
+
+c11 : (n : Nat) → (+ 12) * conv 1 1 (suc n) ≡
+  (+ 5) * sigma 3 (suc n) + ((+ 1) + (- (+ 6)) * (+ (suc n))) * sigma 1 (suc n)
+c11 n =
+  let a = conv 1 1 (suc n)
+      s = sigma 3 (suc n)
+      t = sigma 1 (suc n)
+      m = + (suc n)
+  in trans (sym (Z.+-identityʳ ((+ 12) * a)))
+      (trans (identity1 n (s≤s z≤n))
+        (solve 3 (λ s t m → con (+ 5) :* s :+
+          ((con (+ 1) :+ con (- (+ 6)) :* m) :* t :+ con (+ 0))
+          := con (+ 5) :* s :+ (con (+ 1) :+ con (- (+ 6)) :* m) :* t)
+          refl s t m))
+
+c13 : (n : Nat) → (+ 240) * conv 1 3 (suc n) ≡
+  (+ 21) * sigma 5 (suc n) + ((+ 10) + (- (+ 30)) * (+ (suc n))) * sigma 3 (suc n) + (- (+ 1)) * sigma 1 (suc n)
+c13 n =
+  let m = suc n
+      a = conv 1 3 m
+      s = sigma 5 m
+      t = sigma 3 m
+      u = sigma 1 m
+  in trans (solve 1 (λ a → con (+ 240) :* a := con (+ 120) :* a :+ (con (+ 120) :* a :+ con (+ 0))) refl a)
+      (trans (cong (λ v → (+ 120) * v + ((+ 120) * a + (+ 0))) (convSym 1 3 m))
+        (trans (identity2 n (s≤s z≤n))
+          (solve 4 (λ m s t u → con (+ 21) :* s :+
+            ((con (+ 10) :+ con (- (+ 30)) :* m) :* t :+ (con (- (+ 1)) :* u :+ con (+ 0)))
+            := (con (+ 21) :* s :+ (con (+ 10) :+ con (- (+ 30)) :* m) :* t) :+ con (- (+ 1)) :* u)
+            refl (+ m) s t u)))
+
+c33 : (n : Nat) → (+ 120) * conv 3 3 (suc n) ≡
+  sigma 7 (suc n) + (- (+ 1)) * sigma 3 (suc n)
+c33 n = trans (sym (Z.+-identityʳ ((+ 120) * conv 3 3 (suc n))))
+  (trans (identity4 n (s≤s z≤n))
+    (solve 2 (λ a b → con (+ 1) :* a :+ (con (- (+ 1)) :* b :+ con (+ 0))
+      := a :+ con (- (+ 1)) :* b) refl (sigma 7 (suc n)) (sigma 3 (suc n))))
+
+sigma7 : (n : Nat) → sigma 7 (suc n) ≡
+  (+ 120) * conv 3 3 (suc n) + sigma 3 (suc n)
+sigma7 n =
+  let a = sigma 7 (suc n)
+      b = sigma 3 (suc n)
+      c = conv 3 3 (suc n)
+  in trans (solve 2 (λ a b → a := (a :+ con (- (+ 1)) :* b) :+ b) refl a b)
+      (cong (_+ b) (sym (c33 n)))
+
+c15Scaled : (n : Nat) →
+  (+ 5040) * conv 1 5 (suc n) + (- (+ 24000)) * conv 3 3 (suc n) ≡
+  ((+ 210) + (- (+ 420)) * (+ (suc n))) * sigma 5 (suc n) +
+  (+ 10) * sigma 1 (suc n) + (+ 200) * sigma 3 (suc n)
+c15Scaled n =
+  let m = suc n
+      a = conv 1 5 m
+      b = conv 3 3 m
+      s = sigma 5 m
+      t = sigma 3 m
+      u = sigma 1 m
+      v = sigma 7 m
+      h = trans (solve 2 (λ a b → con (+ 5040) :* a :+ con (+ 5880) :* b
+        := con (+ 2520) :* a :+ (con (+ 5880) :* b :+ (con (+ 2520) :* a :+ con (+ 0)))) refl a b)
+        (trans (cong (λ q → (+ 2520) * q + ((+ 5880) * b + ((+ 2520) * a + (+ 0)))) (convSym 1 5 m))
+          (identity3 n (s≤s z≤n)))
+  in trans (solve 2 (λ a b → con (+ 5040) :* a :+ con (- (+ 24000)) :* b
+      := (con (+ 5040) :* a :+ con (+ 5880) :* b) :+ con (- (+ 29880)) :* b) refl a b)
+    (trans (cong (_+ ((- (+ 29880)) * b)) h)
+      (trans (cong (λ v → (+ 249) * v + (((+ 210) + (- (+ 420)) * (+ m)) * s +
+         ((- (+ 49)) * t + ((+ 10) * u + (+ 0)))) + (- (+ 29880)) * b) (sigma7 n))
+        (solve 5 (λ m b s t u →
+          (con (+ 249) :* (con (+ 120) :* b :+ t) :+
+            ((con (+ 210) :+ con (- (+ 420)) :* m) :* s :+
+              (con (- (+ 49)) :* t :+ (con (+ 10) :* u :+ con (+ 0))))) :+
+              con (- (+ 29880)) :* b
+          := ((con (+ 210) :+ con (- (+ 420)) :* m) :* s :+ con (+ 10) :* u) :+ con (+ 200) :* t)
+          refl (+ m) b s t u)))
