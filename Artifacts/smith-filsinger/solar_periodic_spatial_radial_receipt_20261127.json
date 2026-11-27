@@ -34,9 +34,10 @@
     "max_signed_shared_time_residual": 0.08962279028590941,
     "max_thermal_residual": 0.00016857540016657763,
     "local_output_sha256": "01347f52e944b17444bc4602cf8c2bb62d135f9d20ac083157863a8056f68499",
-    "local_driver_blob": "181f086efb57e0cb1469367d243b6f147b809dba",
+    "local_driver_blob": "49d0f41113bb3ce3349a79798a6cc30708b1c807",
     "remote_driver_blob": "49d0f41113bb3ce3349a79798a6cc30708b1c807",
-    "donors": "reconstructed required function bodies from connector, not full byte-identical repository modules"
+    "donors": "reconstructed required function bodies from connector, not full byte-identical repository modules",
+    "exact_driver_rerun": true
   },
   "radial": {
     "cases": 20,
@@ -44,7 +45,8 @@
     "max_angular_residual": 3.1705745533253295e-19,
     "script_blob": "f1cb2d6659d4312c0692781704384c95c24233dd",
     "local_output_sha256": "e251537004946e2e8dab2186a1169effc9ad903fc8396980112a1e5d96a5dc32",
-    "scope": "one-way impressed sheet, arbitrary clock and scaling, selected tangent TM embedding, DC/Nyquist retained not propagated, no reciprocal feedback"
+    "scope": "one-way impressed sheet, arbitrary clock and scaling, selected tangent TM embedding, DC/Nyquist retained not propagated, no reciprocal feedback",
+    "exact_driver_rerun": true
   },
   "original_atmosphere": {
     "status": "BLOCKED_MISSING_RAW_INPUTS",
@@ -53,7 +55,18 @@
     "prior_rows": 3087,
     "prior_tensor_evaluations": 24696,
     "new_rows": 0,
-    "search": "container, library search and extension listing, connected Drive filename query empty; direct container GitHub DNS failed"
+    "search": "container, library search and extension listing, connected Drive filename query empty; direct container GitHub DNS failed",
+    "new_checker": {
+      "commit": "05250b916d7e4d65ad4f6c71e9ce37eb36e54d90",
+      "blob": "b108930696a28e255671e443d0ce20019ce9913d",
+      "self_test": {
+        "symbolic_derivative": true,
+        "signed_frequency_pairs": 49,
+        "max_finite_difference_relative_error": 2.6768125604853048e-8,
+        "original_rows": 0
+      },
+      "scope": "Source-law per-kelvin electron collision Jacobian, checksum-gated rowwise replay implemented but not executed on original observations."
+    }
   },
-  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90, integrated and radial exit 0; no CI or kernel"
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90, integrated and radial exit 0; no CI or kernel Exact-driver rerun produced byte-identical stdout for both suites. Original donor function extracts are not full repository blobs."
 }
