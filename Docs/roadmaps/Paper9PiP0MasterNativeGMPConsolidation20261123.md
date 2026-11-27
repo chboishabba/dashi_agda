@@ -1895,3 +1895,24 @@ Current residual cut:
 4. All native and Lean source acceptance and GMP trace/floor acceptance deferred. Lean terminal unchanged this round.
 
 Classical Machin, Cayley, Eisenstein and Lambert identities retain their source attribution; DASHI contribution here is the constructive finite mesh conservation, source-specific evaluation and degree-fibre transport.
+
+
+### 2026-11-27 — C1 original Fourier row rational evaluation and signed dyadic refinement
+
+SOURCE-WRITTEN, UNCOMPILED. No Agda or Lean kernel, CI or production GMP replay invoked.
+
+| Commit | Implemented source |
+|---|---|
+| 127701b365c4 | JInvariantBishopDyadicFourierRowExact: guarded rational X(q)=q/(1-q)^2, X(q)+X(-q)=4X(q²), X(q)X(-q)=-X(q²), weighted P4/P6 dyadic identities |
+| 549dd46611e4 | JInvariantBishopFourierRowFiniteTailExact: exact polynomial B3/B5 coefficient recurrences and all-cutoff cleared partial sum telescopes |
+| 3c0bf97b38be | JInvariantBishopFourierRowLimitExact: actual original disk absolute convergence, polynomial-tail vanishing, guarded denominator cancellation and cleared row limits |
+| 90184b387ddd | JInvariantBishopFourierRowRationalExact: match those actual Fourier limits to P4(X), P6(X) on the original complex carrier |
+| 236995c3ebcc | JInvariantBishopOriginalDyadicRowTransportExact: original exponential product, actual q at positive-height points, both signed half-sheet maps and arbitrary-depth refinement |
+| 900d13df9c90 / 5b5441284e68 / 368193010659 | JInvariantBishopComplexOriginQuadraticRemainderExact: literal factorial-series directional quadratic remainder with component budget M² exp(M), exact native exp increment factor, slope convergence on bounded null sequences |
+| 09c66082522f | scripts/check_paper9_dyadic_fourier_rows.py |
+
+Local SymPy replay: 53 exact assertions passed, including recurrence, finite telescope, rational row, two-sheet identities, repeated dyadic identity checks, q=-1 algebra and finite origin expansion. This is not kernel validation; the generated large ring-solver expressions also need elaboration/performance review.
+
+The selected constructive row route is dyadic rather than an imported cotangent partial fraction authority. Write F4(q)=X+6X² and F6(q)=X+30X²+120X³. For N=2^m the actual row splits into N scaled half-sheet descendants with weights N^(-k). The origin directional factor now tends to the literal direction. To complete the row bridge, still prove the centered integer-residue enumeration, guarded reciprocal limit at each fixed nonpole lattice point, and uniform summable tail domination. The latter uses |1-r exp(i theta)|²=(1-r)²+4r sin²(theta/2), the original signed two-ball cubic sine lower bound and eventual lower bound on r for fixed height. Use existing absolute shell/Basel convergence for cofinal passage, not a formal exchange. At z=1/2 separately admit real-axis nonpole guards; q=-1 gives P4=1/8 and P6=-1/4, yielding the required even-zeta constants only AFTER the row bridge. No even-zeta proof is claimed yet.
+
+Remaining C1: these lattice-row limit steps, axis normalization, infinite row/degree-fibre rearrangement, normalized E4/E6 equality, actual degree-41 Hecke product/pole removal and coefficient reflection. C2/C3: derive original diagonal zero and original analytic ray residual; feed existing terminal (which constructs sharp enclosure). C0 and Lean/GMP source acceptance remain deferred. No unconditional native RawCross claim. Classical dyadic distribution, Fourier and Eulerian polynomial identities retain their mathematical provenance; DASHI contribution is source-specific constructive proof transport. No new unrelated framework.
