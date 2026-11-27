@@ -60,10 +60,23 @@ def cycle(material,cfg):
         return [float(np.linalg.norm(u-v)/max(np.linalg.norm(u),np.linalg.norm(v),1e-30)) for u,v in zip(a,b)]
     assert int(cfg['max_cycles'])>=1 and cfg['auxiliary_J']>=0
     assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
-    campaign={}; preparation={}; trace=[]
+    campaign={}; preparation={}; trace=[]; history=[]
+    initial_energy=energy()
+    tail=int(cfg.get('restoration_steps',0)); assert tail>=0
+    horizon=int(cfg['max_cycles'])
+    # All worlds use identical source-off terminal slots; no external reset.
+    terminal_load=np.asarray(cfg.get('terminal_load_rate_s_inv',load[:ne]),float)
+    assert terminal_load.shape==(ne,) and np.all(terminal_load>=0)
+    terminal_L=np.diag(np.r_[terminal_load,np.zeros(size-ne)])
+    atol=np.asarray(cfg.get('return_atol',[1e-10,1e-10,1e-10,1e-10]),float)
+    assert atol.shape==(4,) and np.all(atol>=0)
     for iteration in range(int(cfg['max_cycles'])):
         initial=(x.copy(),pop.copy(),pool.copy(),theta.copy()); total={}
-        for inc,p in zip(src,heat):
+        steps=list(zip(src,heat))
+        if iteration==horizon-1: steps += [(0.,np.zeros(n)) for _ in range(tail)]
+        for step,(inc,p) in enumerate(steps):
+            terminal=step>=len(src)
+            current_L=terminal_L if terminal else L
             before=energy(); costs=np.zeros(5)
             for i in range(n):
                 r,a,pool[i]=reaction(pop[i],pool[i],rows[i]['te']+theta[i],p[i],dt,q)
@@ -75,18 +88,19 @@ def cycle(material,cfg):
             absorbed=dt*p.sum(); bath=absorbed-cap@(theta1-theta); theta=theta1
             nu=rates([dict(r,te=r['te']+mid[i]) for i,r in enumerate(rows)],neutral)
             model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),vol,pop*CHARGE**2/MASS,nu,gyro,axis)
-            A=model['generator']-L-S
-            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=L,source=S),port,inc)
+            A=model['generator']-current_L-S
+            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc)
             channels=w['loss_channels_J']; useful=channels['load']; collision=channels['collision']
             paid=absorbed/cfg['heater_efficiency']+(costs[0]+costs[3])/q['chemical_input_efficiency']-q['chemical_recovery_efficiency']*costs[4]
             balance=energy()-before+w['outgoing_J']+useful+collision+bath+costs[1]+costs[2]+costs[4]-w['incident_J']-absorbed-costs[0]-costs[3]
             assert abs(balance)<=1e-8*max(abs(before),abs(energy()),w['incident_J'],absorbed,costs[3],1e-30)
+            if cfg.get('retain_history',False): history.append(np.r_[x,pop.ravel(),pool.ravel(),theta].tolist())
             for k,v in dict(useful_J=useful,paid_J=paid,incident_J=w['incident_J'],outgoing_J=w['outgoing_J'],collision_J=collision,balance_abs_J=abs(balance)).items():
                 total[k]=total.get(k,0.)+float(v)
         end=(x,pop,pool,theta); ret=residual(end,initial)
         for key,value in total.items(): campaign[key]=campaign.get(key,0.)+value
         trace.append(dict(cycle=iteration+1,return_residual=ret,ledger=dict(total)))
-        if max(ret)<=cfg['return_rtol']:break
+        if not cfg.get('fixed_horizon',True) and tail==0 and max(ret)<=cfg['return_rtol']:break
         if iteration+1<int(cfg['max_cycles']):
             for key,value in total.items(): preparation[key]=preparation.get(key,0.)+value
     # Periodic orbit and original reservoir return are separate obligations.
@@ -96,10 +110,15 @@ def cycle(material,cfg):
     # Preparation is charged gross (no credit for its useful output); auxiliary per cycle.
     prep_paid=max(0.,preparation.get('paid_J',0.))+iteration*cfg['auxiliary_J']
     campaign_net=campaign['useful_J']-campaign['paid_J']-(iteration+1)*cfg['auxiliary_J']
-    full_restored=max(orig)<=cfg['return_rtol']
+    full_restored=all(np.linalg.norm(a-b)<=tol+cfg['return_rtol']*np.linalg.norm(b) for a,b,tol in zip(end,original,atol))
+    # No credit for depletion even inside accepted restoration tolerances.
+    depletion=max(0.,float(initial_energy-energy()))
+    corrected_net=campaign_net-depletion-campaign['balance_abs_J']
+    assert corrected_net<=campaign['incident_J']+1e-8*max(1.,campaign['incident_J'])
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
-                strict_campaign_net_J=campaign_net if full_restored else None,
+                strict_campaign_net_J=corrected_net if full_restored else None,
+                terminal_depletion_J=depletion,history=history,elapsed_s=((iteration+1)*len(src)+tail)*dt,
                 preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
                 cycle_trace=trace,net_J=net,periodic_return=ret,original_return=orig,
                 restored=bool(restored),original_material_restored=bool(material_restored),
@@ -113,6 +132,6 @@ def four_worlds(material,cfg):
             if not source:cc['incident_sqrt_W']=np.zeros_like(cfg['incident_sqrt_W'])
             if not active:cc['heating_W']=np.zeros_like(cfg['heating_W'])
             worlds['%s_%s'%('source' if source else 'off','active' if active else 'passive')]=cycle(material,cc)
-    a=worlds['source_active']['conditional_net_J']; p=worlds['source_passive']['conditional_net_J']
+    a=worlds['source_active']['strict_campaign_net_J']; p=worlds['source_passive']['strict_campaign_net_J']
     return dict(worlds=worlds,selected_passive_advantage_J=None if a is None or p is None else a-p,
                 strongest_passive_certified=False,physical_admission=False)
