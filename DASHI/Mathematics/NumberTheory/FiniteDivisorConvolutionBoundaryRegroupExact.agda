@@ -69,10 +69,85 @@ xyRegroup f n pn = trans (E.xyFold f n pn)
 
 abRegroup : (f : S.Quad → ℤ) (n : Nat) (pn : zero < n) →
   B.foldZ f (B.eq S.a S.b (G.omega n)) ≡
-  B.foldZ (λ ((d , k)) → B.foldZ (λ t → f (E.abQuad ((d , k) , t)))
+  B.foldZ (λ (d , k) → B.foldZ (λ t → f (E.abQuad ((d , k) , t)))
     (filter (λ t → t N.<? k) (H.oneTo n)))
     (map E.factorKey (P.positiveFactorPairs n pn))
 abRegroup f n pn = trans (E.abFold f n pn)
   (regroup (λ ((d , k) , t) → t N.<? k) (λ z → f (E.abQuad z))
     (map E.factorKey (P.positiveFactorPairs n pn)) (H.oneTo n))
 
+
+
+-- Strict prefix transport by induction on the original upper bound.
+open import Data.Empty using (⊥-elim)
+open import Data.List.Membership.Propositional using (_∈_)
+import Data.List.Relation.Unary.Any as Any
+import Data.List.Properties as LP
+import DASHI.Mathematics.NumberTheory.FiniteOneToEnumerationExact as One
+open import Data.Nat.Base using (z≤n)
+
+keepAll : (d : Nat) (xs : List Nat) →
+  (∀ {t} → t ∈ xs → t < d) → filter (λ t → t N.<? d) xs ≡ xs
+keepAll d [] h = refl
+keepAll d (t ∷ ts) h with t N.<? d
+... | yes _ = cong (t ∷_) (keepAll d ts (λ m → h (Any.there m)))
+... | no bad = ⊥-elim (bad (h (Any.here refl)))
+
+dropLast : (d t : Nat) → d ≤ t →
+  filter (λ u → u N.<? d) (t ∷ []) ≡ []
+dropLast d t h with t N.<? d
+... | yes lt = ⊥-elim (N.<-irrefl refl (N.<-≤-trans lt h))
+... | no _ = refl
+
+strictPrefix : (d n : Nat) → d ≤ suc n →
+  filter (λ t → t N.<? d) (H.oneTo (suc n)) ≡ H.oneTo (d ∸ 1)
+strictPrefix zero zero h = refl
+strictPrefix (suc zero) zero h = refl
+strictPrefix (suc (suc d)) zero (s≤s ())
+strictPrefix d (suc n) h with d N.≤? suc n
+... | yes le =
+  trans (filterAppend (λ t → t N.<? d) (H.oneTo (suc n)) (suc (suc n) ∷ []))
+    (trans (cong (λ xs → xs ++ filter (λ t → t N.<? d) (suc (suc n) ∷ []))
+      (strictPrefix d n le))
+      (trans (cong (H.oneTo (d ∸ 1) ++_) (dropLast d (suc (suc n)) h))
+        (LP.++-identityʳ (H.oneTo (d ∸ 1)))))
+... | no ne with N.≤-antisym h (N.≰⇒> ne)
+...   | refl =
+  trans (filterAppend (λ t → t N.<? suc (suc n)) (H.oneTo (suc n)) (suc (suc n) ∷ []))
+    (trans (cong (λ xs → xs ++ filter (λ t → t N.<? suc (suc n)) (suc (suc n) ∷ []))
+      (keepAll (suc (suc n)) (H.oneTo (suc n)) (λ m → s≤s (One.oneToUpperBound m))))
+      (trans (cong (H.oneTo (suc n) ++_) (dropLast (suc (suc n)) (suc (suc n)) N.≤-refl))
+        (LP.++-identityʳ (H.oneTo (suc n)))))
+
+foldAscending : (f : Nat → ℤ) (n : Nat) →
+  B.foldZ f (H.oneTo (suc n)) ≡ B.foldZ f (H.oneTo n) + f (suc n)
+foldAscending f n = trans (foldAppend f (H.oneTo n) (suc n ∷ []))
+  (cong (B.foldZ f (H.oneTo n) +_) (Z.+-identityʳ (f (suc n))))
+
+prefixObservation : (f : B.Weight) (m d : ℤ) (n : Nat) →
+  B.foldZ (λ t → m * f d (d + ((- (+ 1)) * (+ t)))) (H.oneTo n)
+  ≡ S.scaledBoundaryPrefix f m d n
+prefixObservation f m d zero = refl
+prefixObservation f m d (suc n) =
+  trans (foldAscending (λ t → m * f d (d + ((- (+ 1)) * (+ t)))) n)
+    (cong (_+ (m * f d (d + ((- (+ 1)) * (+ (suc n)))))) (prefixObservation f m d n))
+
+closedPrefix1 : (n : Nat) →
+  B.foldZ (λ t → (+ 6) * S.weight1 (+ (suc n)) ((+ (suc n)) + ((- (+ 1)) * (+ t)))) (H.oneTo n)
+  ≡ S.boundary1 (+ (suc n))
+closedPrefix1 n = trans (prefixObservation S.weight1 (+ 6) (+ (suc n)) n) (S.boundaryClosed1 n)
+
+closedPrefix2 : (n : Nat) →
+  B.foldZ (λ t → (+ 30) * S.weight2 (+ (suc n)) ((+ (suc n)) + ((- (+ 1)) * (+ t)))) (H.oneTo n)
+  ≡ S.boundary2 (+ (suc n))
+closedPrefix2 n = trans (prefixObservation S.weight2 (+ 30) (+ (suc n)) n) (S.boundaryClosed2 n)
+
+closedPrefix3 : (n : Nat) →
+  B.foldZ (λ t → (+ 420) * S.weight3 (+ (suc n)) ((+ (suc n)) + ((- (+ 1)) * (+ t)))) (H.oneTo n)
+  ≡ S.boundary3 (+ (suc n))
+closedPrefix3 n = trans (prefixObservation S.weight3 (+ 420) (+ (suc n)) n) (S.boundaryClosed3 n)
+
+closedPrefix4 : (n : Nat) →
+  B.foldZ (λ t → (+ 30) * S.weight4 (+ (suc n)) ((+ (suc n)) + ((- (+ 1)) * (+ t)))) (H.oneTo n)
+  ≡ S.boundary4 (+ (suc n))
+closedPrefix4 n = trans (prefixObservation S.weight4 (+ 30) (+ (suc n)) n) (S.boundaryClosed4 n)
