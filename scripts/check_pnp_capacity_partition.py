@@ -28,7 +28,7 @@ def row_cells(n,H,r,c,B,fanout=128):
     return tuple(out)
 
 
-def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True):
+def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True,recovery=False):
     """Witness-only or exact empty/unknown, with monotone candidate upper bound.
 
     Every live cell is disjoint in original coordinates; only verified empty
@@ -79,4 +79,77 @@ def partition(n,R,H,caps,B,nodes=32,fanout=128,closure=True):
             pending.pop();pending.extend((Q,J) for Q in reversed(cells))
         except ProbeLimit:break
     assert upper>=0
+    if recovery and pending:
+        return recover_frontier(n,R,H,caps,pending,upper,steps,B)
     return Bound(0,upper,None,steps)
+
+
+def recover_cell(n,R,H,caps,B):
+    """Reuse the normal-component, signed, and character owners on ONE cell.
+
+    A completed component solve is decisive, but a cap refusal is not.
+    No normal form is expanded without a precharged capacity representation.
+    """
+    from check_pnp_affine_normal_components import solve,Exhausted
+    from check_pnp_capacity_geometry import violation_flats
+    from check_pnp_capacity_signed import observe
+    from check_pnp_capacity_character import discover_certificate,verify_certificate
+    from check_pnp_capacity_contraction import contract
+    volume=1<<(n-len(H));best=Bound(0,volume)
+    if any(c<1 for c in caps):return Bound(0,0)
+    def normal(A):
+        F=violation_flats(n,R,H,caps,A)
+        y=solve(n,H,F,A)
+        return Bound(0,0) if y is None else Bound(1,volume,y)
+    def signed(A):return observe(n,R,H,caps,A)[0]
+    def character(A):
+        c=discover_certificate(n,R,H,caps,Allowance(A,A.left//2),0)
+        if c is not None and verify_certificate(n,R,H,caps,c,A):return Bound(0,0)
+        return Bound(0,volume)
+    def collective(A):
+        y=contract(n,R,H,caps,A)
+        return Bound(0,volume) if y is None else Bound(1,volume,y)
+    lanes=[('normal',normal),('signed',signed),('character',character),('collective',collective)]
+    if n-len(H)>12:lanes=[lanes[i] for i in (1,3,2,0)]
+    for i,(name,f) in enumerate(lanes):
+        try:
+            A=Allowance(B,B.left//(len(lanes)-i))
+            A.pay('partition_recovery_'+name)
+            v=f(A)
+            lo=max(v.lower,best.lower);hi=min(v.upper,best.upper)
+            assert 0<=lo<=hi
+            best=Bound(lo,hi,v.witness)
+            if best.witness is not None:
+                B.pay('partition_recovery_original_verify',1+n+sum(r.bit_count() for r in R))
+                assert satisfies(best.witness,H,()) and all((r&best.witness).bit_count()<=c for r,c in zip(R,caps))
+                return best
+            if hi==0:return best
+        except (ProbeLimit,Exhausted,RecursionError):
+            # Even a witness whose verification cannot be charged is not paid.
+            best=Bound(best.lower,best.upper)
+    return best
+
+
+def recover_frontier(n,R,H,caps,pending,upper,steps,B):
+    """Demand-local recovery on the retained disjoint frontier, no restart.
+
+    Only completed empty cells or sound upper bounds pay candidate volume.
+    Any unprocessed cell retains its original volume. The sum is over
+    disjoint original scopes, not over representations or proof branches.
+    """
+    lower=0
+    for i,(P,I) in enumerate(reversed(pending)):
+        if not B.left:break
+        try:
+            A=Allowance(B,B.left//(len(pending)-i))
+            A.pay('partition_recovery_cell',1+len(P))
+            v=recover_cell(n,R,P,caps,A)
+            B.pay('partition_recovery_commit')
+        except ProbeLimit:continue
+        upper-= (1<<(n-len(P)))-v.upper
+        lower+=v.lower
+        assert 0<=lower<=upper
+        if v.witness is not None:
+            assert satisfies(v.witness,H,())
+            return Bound(lower,upper,v.witness,steps)
+    return Bound(lower,upper,None,steps)

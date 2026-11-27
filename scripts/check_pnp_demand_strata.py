@@ -160,7 +160,7 @@ class Ledger:
                     except ProbeLimit:pass
                     try:
                         from check_pnp_capacity_partition import partition
-                        v=partition(self.n,self.R,Q,caps,Allowance(B,max(0,B.left//2)))
+                        v=partition(self.n,self.R,Q,caps,Allowance(B,max(0,B.left//2)),recovery=True)
                         if v.upper==0:
                             self._record(Q,caps,'disjoint_row_partition_empty',B);continue
                         if v.witness is not None:
