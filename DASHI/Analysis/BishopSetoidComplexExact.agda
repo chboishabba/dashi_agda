@@ -289,3 +289,47 @@ bishopSetoidComplexExponentialLevel = machineChecked
 
 bishopSetoidComplexConfiguredTrigIdentificationLevel : ProofLevel
 bishopSetoidComplexConfiguredTrigIdentificationLevel = conditional
+
+
+------------------------------------------------------------------------
+-- Original imaginary-axis projections used by K05 and Dirichlet consumers.
+-- Restore the missing source helpers without an extra product assumption:
+-- the caller supplies the actual signed-factorial product theorem.
+------------------------------------------------------------------------
+open import Data.Product.Base using (_×_; _,_)
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpZero
+
+pureImaginary : BishopReal.ℝ → BishopComplex
+pureImaginary y = complex BishopReal.0ℝ y
+
+trigPair : BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopComplex
+trigPair T y = complex (Elementary.bishopCos (dataSet T) y)
+  (Elementary.bishopSin (dataSet T) y)
+
+expImaginaryIsTrigPair : ∀ T y → expC T (pureImaginary y) ≈C trigPair T y
+expImaginaryIsTrigPair T y = complex-equivalent
+  (BishopP.≃-trans (BishopP.*-cong ExpZero.bishopExpZero BishopP.≃-refl)
+    (BishopP.*-identityˡ (Elementary.bishopCos (dataSet T) y)))
+  (BishopP.≃-trans (BishopP.*-cong ExpZero.bishopExpZero BishopP.≃-refl)
+    (BishopP.*-identityˡ (Elementary.bishopSin (dataSet T) y)))
+
+imaginaryExponentialProductGivesAddition :
+  (T : BishopSetoidComplexTranscendentals) (x y : BishopReal.ℝ) →
+  expC T (pureImaginary (BishopReal._+_ x y)) ≈C
+    (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+  let cx = Elementary.bishopCos (dataSet T) x
+      cy = Elementary.bishopCos (dataSet T) y
+      sx = Elementary.bishopSin (dataSet T) x
+      sy = Elementary.bishopSin (dataSet T) y
+  in BishopReal._≃_ (Elementary.bishopSin (dataSet T) (BishopReal._+_ x y))
+       (BishopReal._+_ (BishopReal._*_ sx cy) (BishopReal._*_ cx sy))
+     × BishopReal._≃_ (Elementary.bishopCos (dataSet T) (BishopReal._+_ x y))
+       (BishopReal._-_ (BishopReal._*_ cx cy) (BishopReal._*_ sx sy))
+imaginaryExponentialProductGivesAddition T x y product =
+  let h = ≈C-trans (≈C-sym (expImaginaryIsTrigPair T (BishopReal._+_ x y)))
+        (≈C-trans product (mulCongruent (expImaginaryIsTrigPair T x) (expImaginaryIsTrigPair T y)))
+  in BishopP.≃-trans (imEquivalent h)
+       (BishopP.+-comm
+         (BishopReal._*_ (Elementary.bishopCos (dataSet T) x) (Elementary.bishopSin (dataSet T) y))
+         (BishopReal._*_ (Elementary.bishopSin (dataSet T) x) (Elementary.bishopCos (dataSet T) y)))
+     , reEquivalent h
