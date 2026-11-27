@@ -96,6 +96,42 @@ def flatten():
     print('PASS nonlinear lapse/shift/shape jump flattening with nonzero shift, inverse, linear symmetrizer, periodic cusp',flush=True)
 
 
+def conformal_gauge():
+    # Allow the prescribed harmonic source itself to jump: [H_cov]=-3j n_cov.
+    h=s.diag(-2,3,4,5); beta=s.Matrix(s.symbols('beta:4')); a=s.symbols('a',positive=True);j=s.symbols('j',real=True)
+    g=h.row_join(h*beta).col_join((beta.T*h).row_join(s.Matrix([[a*a+(beta.T*h*beta)[0]]])))
+    n=s.Matrix([0,0,0,0,a]);I=g.inv();J=2*j*g
+    assert z(J*I*n-s.trace(I*J)*n/2+3*j*n)
+    dy=a*J;db=h.inv()*(dy[:4,4]-dy[:4,:4]*beta);assert z(db)
+    da=s.simplify((dy[4,4]-(beta.T*dy[:4,:4]*beta)[0]-2*(beta.T*h*db)[0])/(2*a))
+    assert da==j*a*a and s.simplify(-da/a**2)==-j
+    assert z(dy[:4,:4]/a**2-2*h*da/a**3)
+    H=h/a**2;bar=H.row_join(H*beta).col_join((beta.T*H).row_join(s.Matrix([[1+(beta.T*H*beta)[0]]])))
+    assert z(g-a*a*bar);assert all(s.simplify(v)==0 for v in a*a*I-bar.inv())
+    # The fixed scalar profile carries the jump; principal metric depends only on H,beta.
+    y,L=s.symbols('y L',positive=True);p=-j*y*(L-y)/(2*L)
+    assert s.diff(p,y).subs(y,0)-s.diff(p,y).subs(y,L)==-j
+    # Piecewise second coordinate jets can adjust mixed and normal derivative jumps.
+    a0=s.Matrix(s.symbols('a:5'));normal=s.eye(5)[:,4];g0=s.diag(-1,1,1,1,1)
+    adjust=g0*a0*normal.T+normal*a0.T*g0
+    assert adjust[:4,:4]==s.zeros(4) and adjust[:4,4]==g0[:4,:4]*a0[:4,0] and adjust[4,4]==2*a0[4]
+    print('PASS pure-conformal source jump, exact cusp-free principal metric, inverse and gauge-jet rank five',flush=True)
+
+
+def derivative_gauge_barrier():
+    # Attempt H_n=(1/2)partial_n p_nn, H_a=0 to impose C_n=-mean curvature.
+    # Principal q=p_nn solves tangential wave; mixed field has forcing 1/2 d_a d_n q.
+    # The explicit resonant sequence exposes derivative loss for this attempted gauge.
+    n=s.symbols('n',positive=True);w=n*n;wn=s.sqrt(n**4+n*n);r=s.symbols('r',real=True)
+    p=n/2*(s.cos(w*r)-s.cos(wn*r))
+    assert s.simplify(s.diff(p,r,2)+wn**2*p-n**3*s.cos(w*r)/2)==0
+    assert p.subs(r,0)==0 and s.diff(p,r).subs(r,0)==0
+    assert s.limit(wn-w,n,s.oo)==s.Rational(1,2)
+    # At r=2pi and integer n: p/n -> (1-cos(pi))/2 = 1.
+    # No instability claim for original harmonic gauge or physical shell.
+    print('PASS derivative-source gauge counterexample: mixed amplitude grows like n at fixed time',flush=True)
+
+
 def energy():
     # Frozen common metric, component Euclidean norm. Boundary flux is -Ct^T R C.
     j=s.symbols('j',real=True); C=s.Matrix(s.symbols('C:5')); V=s.Matrix(s.symbols('V:5'));R=s.diag(2*j,2*j,2*j,2*j,4*j)
@@ -146,4 +182,4 @@ def moving_symbol():
     print('PASS graph mean curvature and leading moving-interface normal-mode cancellation (not full symbol)',flush=True)
 
 
-if __name__=='__main__':fourth();fourth_trace();flatten();energy();adS_scalar();moving_symbol()
+if __name__=='__main__':fourth();fourth_trace();flatten();conformal_gauge();derivative_gauge_barrier();energy();adS_scalar();moving_symbol()
