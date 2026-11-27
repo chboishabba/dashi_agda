@@ -107,7 +107,7 @@ def deduce(F,P,B,base=(),audit=None):
         assert len(K)>len(H);H=K
 
 
-def screen(n,R,H,caps,B,audit=None):
+def screen(n,R,H,caps,B,audit=None,retained=None):
     """Preserve all paid nonlinear receipts in original free-slot coordinates.
     The enclosing partition consumer handles resource refusal transactionally.
     """
@@ -141,7 +141,9 @@ def screen(n,R,H,caps,B,audit=None):
         K,_,_=deduce(F,P,B,Q,None if entry is None else entry['proof'])
         if entry is not None:entry['derived']=K
         if K is None:return None,None,'imp_empty'
-        if not K:return H,None,'imp_stalled'
+        if not K:
+            if retained is not None:retained.extend(sorted(original_F))
+            return H,None,'imp_stalled'
         B.pay('imp_source_join',1+(1+len(H)+len(K))**2)
         J=canon(H+reopen(K))
         if J is None:return None,None,'imp_conflict'
