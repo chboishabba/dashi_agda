@@ -58,6 +58,9 @@ def cycle(material,cfg):
     original=(x.copy(),pop.copy(),pool.copy(),theta.copy())
     def residual(a,b):
         return [float(np.linalg.norm(u-v)/max(np.linalg.norm(u),np.linalg.norm(v),1e-30)) for u,v in zip(a,b)]
+    assert int(cfg['max_cycles'])>=1 and cfg['auxiliary_J']>=0
+    assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
+    campaign={}; preparation={}; trace=[]
     for iteration in range(int(cfg['max_cycles'])):
         initial=(x.copy(),pop.copy(),pool.copy(),theta.copy()); total={}
         for inc,p in zip(src,heat):
@@ -81,12 +84,24 @@ def cycle(material,cfg):
             for k,v in dict(useful_J=useful,paid_J=paid,incident_J=w['incident_J'],outgoing_J=w['outgoing_J'],collision_J=collision,balance_abs_J=abs(balance)).items():
                 total[k]=total.get(k,0.)+float(v)
         end=(x,pop,pool,theta); ret=residual(end,initial)
+        for key,value in total.items(): campaign[key]=campaign.get(key,0.)+value
+        trace.append(dict(cycle=iteration+1,return_residual=ret,ledger=dict(total)))
         if max(ret)<=cfg['return_rtol']:break
+        if iteration+1<int(cfg['max_cycles']):
+            for key,value in total.items(): preparation[key]=preparation.get(key,0.)+value
     # Periodic orbit and original reservoir return are separate obligations.
     orig=residual(end,original); restored=max(ret)<=cfg['return_rtol']
     material_restored=max(orig[1:])<=cfg['return_rtol']
     net=total['useful_J']-total['paid_J']-cfg['auxiliary_J']
-    return dict(ledger=total,net_J=net,periodic_return=ret,original_return=orig,
+    # Preparation is charged gross (no credit for its useful output); auxiliary per cycle.
+    prep_paid=max(0.,preparation.get('paid_J',0.))+iteration*cfg['auxiliary_J']
+    campaign_net=campaign['useful_J']-campaign['paid_J']-(iteration+1)*cfg['auxiliary_J']
+    full_restored=max(orig)<=cfg['return_rtol']
+    return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
+                campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
+                strict_campaign_net_J=campaign_net if full_restored else None,
+                preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
+                cycle_trace=trace,net_J=net,periodic_return=ret,original_return=orig,
                 restored=bool(restored),original_material_restored=bool(material_restored),
                 physical_admission=False,conditional_net_J=net if restored and material_restored else None)
 
