@@ -39,6 +39,7 @@ def main():
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--export-trace',action='store_true')
     p.add_argument('--knots',type=int,default=4)
     p.add_argument('--exact-null',action='store_true');x=p.parse_args()
     work=Path(x.work);work.mkdir(parents=True,exist_ok=True);src=sources()
@@ -87,10 +88,14 @@ def main():
             if x.start is None or x.stop is None:raise ValueError("column bounds required")
             path=work/f'{prefix}_{x.start:04d}_{x.stop:04d}.npz'
             tmp=path.with_name(path.stem+'.tmp.npz')
-            block(m,a,x.delay,x.knots,x.start,x.stop,x.tol,tmp);os.replace(tmp,path)
+            block(m,a,x.delay,x.knots,x.start,x.stop,x.tol,tmp,export=x.export_trace);os.replace(tmp,path)
+            if x.export_trace:
+                trace=path.with_name(path.stem+'_trace.npz')
+                os.replace(tmp.with_name(tmp.stem+'_trace.npz'),trace)
+                json_atomic(trace.with_suffix('.json'),dict(sha=sha(trace),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots,block=sha(path)))
             json_atomic(path.with_suffix('.json'),dict(sha=sha(path),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots))
         else:
-            paths=sorted(p for p in work.glob(prefix+'_*.npz') if not p.name.endswith('_leaf.npz'))
+            paths=sorted(p for p in work.glob(prefix+'_*.npz') if not p.name.endswith(('_leaf.npz','_trace.npz')))
             if not paths:raise ValueError("no history blocks")
             for path in paths:
                 meta=json.loads(path.with_suffix('.json').read_text())
