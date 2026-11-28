@@ -222,3 +222,17 @@ The previous cut gave an original-source-backed 189-marked INITIAL hyperfabric i
 **Independent local exact Python check this tranche:** all 189×12×12 = 27216 group compositions and 21 marked orbits passed. For original x=R, y=J, z=N, selected xy0/xy1 task faces are intrinsically noncommuting, and the four remaining task faces commute. This is signed TASK action algebra, not an observed learned GPU result.
 
 **The true terminal source boundary:** original native recurrent histories need not be canonical initial seeds. We now have exact source byte residuals retaining every learned history and all six-face differences. The next original source-owned task is actual consumer/successor factorization through a smaller selected chart on authenticated source states, using the already existing source audit/refine/finite-quotient compiler, or replayed counterexample. Genuine original Stage13 semantic source interpretation and five typed pants fields remain separately supplied prerequisites, not inferred from the nine model inputs. No new generic sheaf/pants or hyperfabric invention. Original Leech-LILA attribution: Anatolii Kornienko. New tests/code source-written, no Agda kernel or original checkpoint execution claimed.
+
+
+### Unified source-free acceptance entrypoint extended
+
+LeechTransformer PR #5 scripts/check_x369_pants_e8_full_weld.py at 42966418 now calls the exact marked-original-source seed fixture receipt, full source signed 9×9 P3^9 group/grid matrix certificate, original-source one/two-step reversible learned-vs-known-task defect fixture and six-face source/task commutator attribution fixture, in addition to existing full 369 native+stage13 chosen chart BIDI, wave24 plus three retained centres, original typed pants five-field source gate and three-incidence history/provenance reopening. It refuses if any constituent fails. This is a source-FREE concrete finite acceptance bundle, NOT execution of the original learned checkpoint and NOT Agda kernel checking.
+
+Run in a supported actual LeechTransformer checkout (local, no CI):
+  python -m unittest tests.test_x369_original_marked_seed_fabric tests.test_x369_original_marked_fabric_signed_graph tests.test_x369_original_source_signed_defect_transport tests.test_x369_original_source_face_defect_attribution tests.test_x369_indexed_source_fibre_audit tests.test_x369_indexed_fibre_acceptance_stage
+  python -m scripts.check_x369_pants_e8_full_weld
+
+For ACTUAL original gfx803 checkpoint source, only with source SHA/header/authenticated local files:
+  python -m scripts.x369_source_acceptance --checkpoint "$DONOR" --sha256 "$DONOR_SHA" --source-head "$(git rev-parse HEAD)" --output runs/x369-signed-residual-native.json --fibre-budget 1000 --marked-seed-budget 189 --signed-defect-seeds 4 --signed-defect-depth 2 --face-seeds 4 --source-face-attribution --only-stages admission indexed_fibre
+
+Critical: authentic source job may reach budget/time limits, and a bounded positive never proves full float recurrent closure. Source-free committed Python suites were NOT run from a checked-out repo here. The separate original true Leech lattice, original learned semantic/pants input interpretations and physical dynamical nine DOF remain unclaimed. Kernel defer remains explicit.
