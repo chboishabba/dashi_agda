@@ -7,6 +7,13 @@ A/B/C/D nomenclature correction: `2026-09-15 09:32 AEST (UTC+10)`
 Clay max-cut reconciliation: `2026-09-23 AEST (UTC+10)`  
 Status: live analytic manuscript draft; conditional; non-promoting
 
+
+## Current proof state — 28 November 2026 (P0)
+
+The original finite-cutoff Galerkin RHS now has a source-written Picard–Lindelöf local trajectory, full reflected-field equivariance F_N(Ru)=R F_N(u), local reality by ODE uniqueness, longitudinal heat preservation and mean-zero support. Lean #123 `NavierStokesActualPhysicalLocalEnergyFlowExact.lean` ([38eb54564b6e](https://github.com/chboishabba/dashi_lean4/commit/38eb54564b6e69ac28eb0d319fb7c6dcccae85df)) composes these on the SAME finite curve, initial data and positive existence interval with the actual finite energy FTC E_N(t)+2ν∫D_N=E_N(0). The interval FTC no longer requires continuity beyond the interval. Source-written, not yet elaborated. This advances the trajectory/invariant cut, not the signed critical-time estimate: finite maximal continuation, cutoff-independent critical budget, whole-space measure realization and continuum continuation remain P0. R734/W2 and R820–825 are still refuted, not viable universal routes.
+
+Forced C/D use the existing original direct source terms and fail-closed pinned admission; unforced breakdown instead needs the independent Alpöge–Buckmaster physical certificate (absent from the inspected upstream release) and full coercivity. No new native admission or Clay result. See the [current endpoint roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Abstract
 
 This manuscript records the current proof-critical **periodic** Navier–Stokes
