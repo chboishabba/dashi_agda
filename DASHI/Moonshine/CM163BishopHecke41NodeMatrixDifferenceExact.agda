@@ -27,7 +27,7 @@ module At (inputs : Round11.BishopCutset) where
   module N = Nodes.At inputs
   module M = Mat.At inputs
 
-  difference p (n : Nat) : BishopComplex
+  difference : ∀ p → Nat → BishopComplex
   difference p n = M.H.G.product p (Poly.realC (I.embed (Nodes.node n))) -C
     Mat.matrix Nodes.candidate (M.H.G.j p) (Poly.realC (I.embed (Nodes.node n)))
 
