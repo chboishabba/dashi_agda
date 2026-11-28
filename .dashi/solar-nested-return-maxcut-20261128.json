@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-28",
+  "scope": "local actual nested original mesh/Hodge and indexed cone, original reaction/event source-copy for material tail and controlled terminal tests; no complete spherical dependency graph",
+  "executed_blobs": {
+    "scripts/solar_nested_cochain_refinement.py": "531d938a4d92b52b7445cfff2fa6c347850edb9d",
+    "scripts/check_solar_nested_cochain_refinement.py": "88849486975a1834156f20a4cd462ef1a7302eee",
+    "scripts/solar_spherical_whitney.py": "3faf4f27b043936085465693f9d2a2d36b675a2d",
+    "scripts/solar_asymptotic_return.py": "f60c0adf681dee6e80659ba82f7fb9647affe3b9",
+    "scripts/solar_frozen_tail_certificate.py": "4096c4893e9a5e3b9e9ac843384d474c153e7259",
+    "scripts/check_solar_asymptotic_return.py": "f897c0f3292d5656d6141ad5d612d26c535e3a19",
+    "scripts/solar_physical_cone.py": "3adff771e09da6a8f2271a490966bab20cf387c3",
+    "scripts/solar_controlled_terminal_return.py": "c229c93c8289de33122ffe74b2529b568ff56f2a",
+    "scripts/check_solar_controlled_terminal_return.py": "ddc83cc1b048bf66ad7b85244703bcba25651f12",
+    "scripts/solar_support_transition.py": "379ee558988ae0374f4d1b7af0083e28ae561b7d"
+  },
+  "refinement": {
+    "status": "PASS",
+    "coarse": [
+      12,
+      42,
+      56,
+      24
+    ],
+    "fine": [
+      134,
+      756,
+      1200,
+      576
+    ],
+    "exact_incidence_squares": 6,
+    "exact_reopen_degrees": 4,
+    "consistent_hodge_defect": [
+      1.004666854870234e-15,
+      1.10383650136126e-15
+    ],
+    "diagonal_hodge_defect": [
+      0.7641485437693067,
+      0.7469009318162305
+    ],
+    "reconstruction_error": 4.440892098500626e-16,
+    "galerkin_relative_defect": 1.7996122480264144e-15,
+    "full_operator_defect": 2.1524328018709356,
+    "magnetic_lift_defect": 2.1950679297292112e-15,
+    "material_volume_error": 5.551115123125783e-16
+  },
+  "asymptotic": {
+    "status": "PASS",
+    "reaction_steps": 64,
+    "cells": 2,
+    "max_bound_ratio": 0.9637400716917714,
+    "terminal_electron_upper": [
+      0.5555555555555556,
+      0.5737704918032787
+    ],
+    "stable": {
+      "reachable_rank": 2,
+      "block_steps": 2,
+      "rho_squared": "31/32"
+    },
+    "invariant": {
+      "reachable_rank": 3,
+      "invariant_value": "1",
+      "exact_zero_return_obstructed": true
+    },
+    "tail_work_upper": 12.5
+  },
+  "controlled": {
+    "status": "PASS",
+    "gross_paid_J": 4.575,
+    "net_paid_J": 4.525,
+    "balance_J": 4.996003610813204e-16,
+    "remaining_field_norm": 0.44235790609209097,
+    "invalid_cases_rejected": 5
+  },
+  "dependency_note": "local solar_physical_causal.py contains exact source-copy event and reaction bodies and constants, not the complete native module; full original module imports unavailable locally",
+  "no_ci": true,
+  "no_kernel": true,
+  "physical_admission": false,
+  "pending": [
+    "full native spherical source graph and all 24-cell campaign fixtures",
+    "nested material-generator full assembly and actual time evolution",
+    "uniform changing-tail invariant subspace and perturbation bound",
+    "controlled four-world replay with duration/physical actuator model and matching global passive comparator",
+    "finite tolerance remainder enclosure",
+    "physical source/receiver admission"
+  ]
+}
