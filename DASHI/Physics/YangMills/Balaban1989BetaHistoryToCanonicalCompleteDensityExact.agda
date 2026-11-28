@@ -30,6 +30,8 @@ module DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as N
+import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -166,3 +168,75 @@ balabanBetaHistorySameStateCouplingLevel = machineChecked
 
 balabanBetaHistoryToCanonicalCompleteDensityLevel : ProofLevel
 balabanBetaHistoryToCanonicalCompleteDensityLevel = machineChecked
+
+-- Canonical Section 2 coordinates on the corrected finite functional or
+-- abstract density. Every coordinate uses exactly the same selected index.
+module _
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {split : Split.FiniteLatticeBetaSplit trajectory}
+    (h : History.BetaSplitInverseSquareTerminalHistoryData trajectory split)
+    (coverage : ∀ k → k N.≤ History.terminalScale h → History.ActiveScale h k)
+    {D : Set}
+    (density : Nat → D)
+    (form bounds : Nat → D → Set)
+    (parameters : RG.YM4RGRegionParameters)
+    (gammaCap : History.gamma h ≤ RG.couplingCap parameters)
+    (small large covariance decay spacing : Nat → ℚ)
+    (smallBound : ∀ k → bounds k (density k) → small k ≤ RG.smallFieldCap parameters)
+    (largeBound : ∀ k → bounds k (density k) → large k ≤ RG.largeFieldCap parameters)
+    (covarianceBound : ∀ k → bounds k (density k) → covariance k ≤ RG.covarianceCap parameters)
+    (decayBound : ∀ k → bounds k (density k) → 0ℚ ≤ decay k)
+    (spacingBound : ∀ k → 0ℚ ≤ spacing k)
+  where
+
+  finiteCoordinates :
+    Canonical.Section2CanonicalYM4Coordinates
+      {flow = Beta.finiteBetaDrivenCompleteDensityFlow h coverage density form bounds}
+      parameters
+  finiteCoordinates = record
+    { Canonical.Section2CanonicalYM4Coordinates.couplingCoordinate =
+        λ k → History.couplingAt h (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.smallFieldCoordinate =
+        λ k → small (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.largeFieldCoordinate =
+        λ k → large (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.covarianceCoordinate =
+        λ k → covariance (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.latticeDecayCoordinate =
+        λ k → decay (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.inverseSpacingCoordinate =
+        λ k → spacing (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.section2FormCouplingBound =
+        λ k _ → ℚP.≤-trans
+          (History.smallCouplingAtEveryActiveScale h
+            (Beta.selectedFiniteScale h k)
+            (coverage (Beta.selectedFiniteScale h k)
+              (Beta.finiteScaleIndexWithinTerminal k (History.terminalScale h))))
+          gammaCap
+    ; Canonical.Section2CanonicalYM4Coordinates.section2SmallFieldBound =
+        λ k → smallBound (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.section2LargeFieldBound =
+        λ k → largeBound (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.section2CovarianceBound =
+        λ k → covarianceBound (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.section2DecayNonnegative =
+        λ k → decayBound (Beta.selectedFiniteScale h k)
+    ; Canonical.Section2CanonicalYM4Coordinates.sourceInverseSpacingNonnegative =
+        λ k → spacingBound (Beta.selectedFiniteScale h k)
+    }
+
+  finiteCanonicalStateAgrees : ∀ k →
+    k N.≤ History.terminalScale h →
+    Canonical.canonicalYM4State finiteCoordinates k ≡
+      RG.rgState (History.couplingAt h k)
+        (small k) (large k) (covariance k) (decay k) (spacing k)
+  finiteCanonicalStateAgrees k physical
+    rewrite Beta.finiteScaleIndexKeepsActive physical = refl
+
+  finiteCanonicalInvariantRegion :
+    Source.Balaban1989Theorem1Witness
+      (Beta.finiteBetaDrivenCompleteDensityFlow h coverage density form bounds) →
+    ∀ k → RG.InYM4RGInvariantRegion parameters
+      (Canonical.canonicalYM4State finiteCoordinates k)
+  finiteCanonicalInvariantRegion =
+    Canonical.sourceTheoremGivesCanonicalYM4InvariantRegion finiteCoordinates

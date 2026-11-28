@@ -1,0 +1,740 @@
+# Yang–Mills E1/D2/N1/G1 — executable maximum-cut roadmap
+**Date:** 2026-11-09. **Owner:** PR #1444 on `research/ym-voyager2026-completeness-crosswalk-20261101`.
+**Rule:** This is a phase/deliverable/theorem inventory, not a claim to have solved 4D Yang–Mills. An artifact is DONE only with an Agda 2.9 kernel receipt on the exact source; physics gates additionally require proof of independently selected ORIGINAL Wilson/E1 identities and nonvacuous physical conditions.
+
+## Selected canonical route and reused producers
+Use the **same** group-indexed original Wilson measure family throughout:
+- `YMClayE1OriginalSUNDependentCylinderExact.agda`: `ActualLinks n`, `actualOriginalWilsonMeasureAt n`, `actualOriginalWilsonCylinderExpectation`, `nativeSUNSelectedFiniteExpectationIsLiteralWilson`. This pays the *finite source* identity only.
+- `YMClayE1VariableCutoffCylinderLimitExact.agda`: `ActualVariableCutoffCylinderFamily`, especially its field `originalWilsonConverges`; conditional positivity/linearity/normalisation transport already exists.
+- `YangMillsClayCriticalPathRound562Exact.agda`: existing A3/T1/T5/B1/B2/G1/H6 maximal-cut scheduler. Do not reopen R499 all-observable, Prokhorov, printed-J or finite-Mosco detours merely to create work.
+- `YMClayDirectSourceOSMassGapFrontierExact.agda`: direct H1/H2/H3 → OS mass-gap route, using original Wilson tests and same reconstructed OS Hamiltonian; its `physicalDirectSourceOSRouteLevel` is conditional.
+- `YangMillsClayMinimalH6NontrivialityRound550Exact.agda`: `Goal1MinimalH6Bridge`; only the actual same-family Ward/gap-to-interacting physical witnesses are unpaid, not another OPE compiler.
+- `YangMillsDirectSourceOSCompactSimpleH5Exact.agda`: `LiteralCompactSimpleDirectSourceContinuation.continueLiteralDirectSource`, not automatic SU(N) relabelling.
+- `YangMillsClayTopDownFiveTheoremClosureExact.agda`: full official Clay endpoint requires *all* construction/OS/field/nontriviality facts on the same `LiteralYangMillsConstruction`.
+
+## Phase 0 — source, acceptance and no-go regression (P0, first)
+**Deliverable D0:** One native regression root importing the exact E1 changing-carrier, Round562 critical path, direct H1/H2/H3, H6, H5 modules; check `agda --safe` where dependencies permit; store exact command, source SHA, Agda version, exit status, holes/postulates and transitive import failures. DO NOT label source-written code kernel-checked.
+**Exact leaves:** `originalWilsonConverges`, `a3ProjectiveConsistencyLevel`, `a3ContinuityAtEmptyLevel`, `w3ConnectingWeightTailLevel`, `h3TransferCoordinateOfOSHamiltonianLevel`, `literalRound550MinimalWardKernelLevel`, `continueLiteralDirectSource`.
+**Negative controls:** arbitrary cutoff-parity cylinder sections have no limit; an unrenormalised fixed-support plaquette variance may collapse; a finite Markov/heat-bath generator is not the OS Hamiltonian; SU(N) covers neither B/C/D nor exceptional types.
+
+## Phase 1 — E1: original interacting continuum existence (P0/P1)
+**Selected obligation:** For a *defined nonempty gauge-invariant, local, continuum-labelled original Wilson cylinder algebra* \(\mathcal A\), for each cylinder \(F\) prove existence of \(L(F)\) with
+\[
+\lim_{n\to\infty}\mathbb E_{\mu^{\mathrm{Wilson}}_{G,n}}[F_n]=L(F)
+\]
+with same selected bare-coupling trajectory, lattice spacing, volume/thermodynamic scaling and actual group. NOT the full type of arbitrary sections \(n\mapsto F_n\).
+
+**Exact existing terminal field:** `ActualVariableCutoffCylinderFamily.originalWilsonConverges`.
+**Proposed exact source-native leaves to implement (not extant theorems):**
+1. `originalWilsonAdmissibleLocalCylinderIsNonempty`: the selected original local/gauge-invariant cylinder class contains a nonconstant test; no parity-varying arbitrary sections.
+2. `originalWilsonCylinderProjectiveComparison`: same-observable comparison across two actual lattice cutoffs/volumes using the selected refinement maps and RG history, not a fictitious common configuration carrier.
+3. `originalWilsonCylinderUniformCauchy`: a *uniform in finite volume* modulus for the exact source expectations of each admissible cylinder as physical lattice spacing tends to zero.
+4. `originalWilsonCylinderLimitInRealCompletion`: construct real limits via the pinned Bishop/real completion, independent of arbitrary extraction choices.
+5. `originalWilsonConvergesFromNativeModulus`: inhabit the existing `originalWilsonConverges` for each selected \(F\); prove actual-Wilson source identity via `nativeSUNSelectedFiniteExpectationIsLiteralWilson`.
+6. `originalWilsonLimitOsterwalderSchraderAndInteracting`: prove projective/OS positivity, Euclidean covariance/locality, nontrivial interaction and the continuum axiom requirements, not just positivity of a functional.
+**Completion criterion E1:** a kernel-accepted inhabitant of the selected original-family convergence with OS/QFT axioms and genuine interaction; one subsequence on a constant cylinder, a conditional input record or a free/zero theory does NOT close E1.
+
+## Phase 2 — D2: same-E1 OS Hamiltonian and physical mass gap (P0/P1, dependent on E1)
+**Exact owner:** `YMClayDirectSourceOSMassGapFrontierExact.directSourceOSBuildsPhysicalMassGap`; `YangMillsClayCriticalPathRound562Exact` B1/B2; selected R333/R331/R316 OS source.
+**Proposed source-native leaves:**
+1. `sameE1WilsonReflectionPositiveGram`: actual E1 reflection-positive Wilson cylinder Gram, not a different selected measure or fine-positive-weight surrogate.
+2. `sameE1OSNullQuotientAndCompletion`: physical Hilbert space by null quotient and dense completion with noncollapsed tests.
+3. `sameE1PhysicalTimeTranslationSemigroup`: actual Euclidean physical-time transfer on that completion, with correct scale and one reconstructed self-adjoint nonnegative \(H\).
+4. `originalWilsonTwoMarkClusterActivityUniform`: original sparse frustrated/mixed activity estimate; source-specific `BalabanLiteralTwoWilsonCMP116ConnectingTailExact.chargeSumBelowPhysicalRootedShell`, not counting-only P06.
+5. `sameE1SelectedWilsonPhysicalTimeDecay`: a strictly positive rate for the same E1 observable subspace from the original source, cutoff-uniform in *physical units*, not only integer lattice shells.
+6. `sameE1OSSpectrumAbovePositiveMass`: establish \(\inf\sigma(H|\mathcal H_{\mathrm{vac}}^\perp)>0\), including density/spectral transfer, excluding vacuum and spectral pollution.
+**Completion criterion D2:** mass gap for the **same E1** OS Hamiltonian with common physical-time decay and a nontrivial complement; an arbitrary Markov mixing estimate, formal half-rate translator, or different OS carrier fails.
+
+## Phase 3 — N1: continuum observable and interacting noncollapse (P0/P1, dependent on E1)
+**Existing owners:** `YangMillsClayMinimalH6NontrivialityRound550Exact.Goal1MinimalH6Bridge` and R549 minimal Gaussian Ward contradiction; finite SU(2) original-plaquette fluctuation work.
+**Proposed source-native leaves:**
+1. `originalWilsonRenormalizedLocalTestDefined`: construct one nonconstant gauge-invariant local observable family \(O_{n,f}\) with fixed physical smearing/renormalization and exact original Wilson provenance.
+2. `originalWilsonRenormalizedTestUniformMomentBound`: finite expectation/tightness/moment control for that same observable under the E1 family.
+3. `originalWilsonRenormalizedVariancePositiveLimit`: prove \(\liminf_n\mathrm{Var}_{\mu_{G,n}}(O_{n,f})>0\) with a **cutoff-independent** positive constant; fixed-\(\beta\) finite plaquette variance does not suffice.
+4. `sameE1ObservableLimitAndVarianceIdentity`: identify E1 continuum test and variance with the actual original Wilson limits.
+5. `sameE1MinimalWardKernel`: instantiate R549's same-family Ward kernel or another valid non-Gaussianity witness; avoid replacing nontrivial interaction by mere nonzero variance of a free field.
+6. `sameE1InteractingWitnessPreserved`: instantiate the two relevant `Goal1MinimalH6Bridge` physical fields, yielding original continuum interacting nontriviality.
+**Completion criterion N1:** nonzero surviving same-E1 observable AND a non-Gaussian/interacting witness when required, with actual local QFT sourcing. No tautological witness or arbitrary continuum observable.
+
+## Phase 4 — G1: every compact simple G, not only SU(N) (P1/P2, dependent on E1/D2/N1)
+**Existing owner:** `YangMillsDirectSourceOSCompactSimpleH5Exact.LiteralCompactSimpleDirectSourceContinuation.continueLiteralDirectSource` (currently conditional); `YangMillsCompactSimpleGroupPromotionExact` firewall; `CompactSimpleClassificationAdjointCasimirExact`.
+**Proposed source-native leaves:**
+1. `compactSimpleLiteralGroupRoundtrip`: reuse existing classified↔literal group roundtrip without changing group universe.
+2. `compactSimpleOriginalWilsonHaarAndRG`: construct actual original Yang–Mills Wilson and RG/Gibbs data for each classified A/B/C/D/G2/F4/E6/E7/E8 and required isogenies, not just \(C_A>0\).
+3. `compactSimplePerGroupUniformInCutoffPhysicalBounds`: for each G, cutoff-independent-in-physical-units required estimates; constants **may depend on G**.
+4. `compactSimplePerGroupE1D2N1`: derive completed same-G E1 continuum, same-H gap and interacting nontriviality from source data.
+5. `continueLiteralDirectSourceFromNativeGroupData`: inhabit existing `continueLiteralDirectSource` for every classified G, retaining exact type correspondence.
+6. `clayEveryCompactSimpleGroup`: quantified final `Top.LiteralYangMillsConstruction` evidence, no SU(N) promotion shortcut.
+**Completion criterion G1:** explicit quantified physical source and terminal proof for every compact simple group, not an inhabited abstract record whose fields restate the goals.
+
+## Execution order and hard stops
+Priority ordering:
+- **P0 E1.01/E1.02:** select admissible original local cylinders and actual projective/refinement comparisons; they unlock the meaning of all downstream same-E1 claims.
+- **P0 B1/D2.04:** source-specific sparse frustrated/mixed activity + CMP116 connecting sum. Generic animal-count/P06 and KP finite compilers already exist.
+- **P0 N1.01/N1.02:** choose actual renormalized Wilson test and source moments *before* making noncollapse claims.
+- **P1 E1.03→E1.06, D2.01→D2.06, N1.03→N1.06:** develop original analytic inequalities, explicit constants, and kernel receipts.
+- **P1/P2 G1.02→G1.06:** group-by-group reuse after fixed-G physics, with quantified parametric continuation.
+- Gate status is determined by proof evidence, not whether the roadmap line or conditional compiler exists.
+
+**Precise critical dependency:** G1 requires a functorial parametric continuation of the completed same-source E1/D2/N1 theory; E1 is not automatically proved by existence of finite Wilson Gibbs measures, D2 not by positivity of finite weights, N1 not by finite positive variance.
+
+
+## 2026-11-09 execution update — preferred Round578 and actual original-source E1 unit base case
+
+**Correction of canonical path:** `YangMillsClayCriticalPathRound578Exact.agda` is newer and narrower than Round562. It imports `YangMillsClayPreferredA3FiniteProjectionRound566Exact`, `YangMillsWilsonPathFiniteFactorizationRound568Exact`, `YangMillsPreferredWilsonWEXTSourceRound576Exact`, `YangMillsPreferredSameHamiltonianTransferRound577Exact`, `YangMillsActualGroupSourceFirstCompleteRound571Exact`, and `YangMillsSameFamilyWardKernelSourceRound563Exact`. For all follow-on implementation, **use Round578 as the shortest preferred critical route**; Round562 remains historical comparison, not the canonical remaining cut.
+
+**Repaid finite E1 source leaf:** `YMClayE1OriginalSUNDependentCylinderExact.agda` now contains:
+- `originalWilsonUnitCylinderExpectationIsOne`: transports **the existing actual original Wilson** R445 `originalWilsonExpectationOfUnitIsOne` for every changing-cutoff link carrier. Inputs are actual selected one-link Haar ordered laws, strict positivity, strict-to-weak order and scalar self-division cancellation. Not an arbitrary finite-state normalisation assertion.
+- `originalWilsonUnitCylinderConverges`: uses `SelectedScalarConvergence.convergenceCongruent` and `constantConverges` to show the literal original Wilson *unit cylinder* converges to `1ℝ` on every cutoff. It does not assume an E1 all-observable limit.
+
+This is the source-level **normalisation/convergence base case**. It does not establish the nonconstant gauge-invariant Wilson finite-projection factorization on the independently selected continuum projective configuration system, projective event consistency, continuity at empty, or the actual continuum convergence of interacting Wilson products. Avoid counting this as E1 closure.
+
+**Revised highest-alpha E1 exact leaves:** construct the original selected Wilson path-to-projective-coordinate identification (R568 remaining `literalRound568PathProjectionBelongsToSelectedProjectiveSystemLevel`), prove A3 event consistency and continuity at empty (R566), and recover nonconstant selected expectations with an original-source uniform/Cauchy or projective representation theorem. Reuse R568 finite-path word factorization; do not rewrite it. B1 remains the R576 actual two-source mixed-log cluster expansion and connected-weight tail; B2 remains the R577 physical transfer coordinate of *the reconstructed* Hamiltonian; G1 remains R571, H6 R563.
+
+**Verification honesty:** source written and repository readback only; no Agda kernel receipt. The E1 constant-cylinder proof is a nontrivial finite integration/same-source consumer but not a Clay continuum construction.
+
+
+## 2026-11-09 E1/A3 source-native arbitrary-word finite-support proof
+
+New module `YMClayE1A3OriginalAllWordPathSupportExtensionalExact.agda`, imported into `YMClayOriginalWilsonPhysicalRegression.agda`, reuses actual original signed Wilson path support rather than assuming independent finite coordinates.
+
+The module defines `appendSource` with constructive `appendSourceLeft`/`appendSourceRight` membership transports, and `originalWordActualFlatPositiveBondSupport` (the recursively flattened **actual** positive-link lookup list for a sequence of original source plaquettes). It then supplies:
+
+- `originalPlaquetteTraceSourceExtensional`: original SU(N) one-plaquette *real trace* equality whenever actual underlying positive-link fields agree on the signed path lookup support, via existing `originalWilsonPlaquetteHolonomyExtensional`;
+- `originalWordRealSourceExtensional`: induction over the original all-length source plaquette word. If two actual cutoff-n link configurations agree on **every positive bond genuinely read by the full word**, their actual real Wilson word values agree. This includes negative-step predecessor links, not just geometric endpoint adjacency.
+
+This discharges the *all-word finite support/locality* proof obligation in the actual changing-cutoff SU(N) source. It **does not** identify that support with an independently selected continuum projective coordinate. The still-open R568/R566 producer is `literalRound568PathProjectionBelongsToSelectedProjectiveSystemLevel` plus A3 positive event semantics, Boolean algebra, projective consistency, continuity-at-empty, and the finite-to-continuum expectation/measure comparison. In particular, finite path dependence cannot itself prove equality of independently selected cutoff Gibbs marginals.
+
+Physical B1: source-first KP cluster bidegree (1,1) germ, original marked log-jet equality, pointwise source Wilson localization and `localizedLiteralShellChargeSum` remain to be instantiated (R578/B1Source); the generic P06 polymer-animal counting is already available. B2: R577 transfer of actual reconstructed H. H6: R563 non-Gaussian Ward kernel on the same E1 system. G1: R571 actual group data and physical five-block bounds, not classification alone.
+
+**Acceptance:** code committed and source read back. Agda command missing from environment; kernel acceptance unresolved. Do not claim original interacting continuum E1 or any Clay terminal gate from this finite locality lemma.
+
+**Additional finite A3 size theorem:** `YMClayE1A3OriginalAllWordPathSupportExtensionalExact.originalWordActualLookupSlotsExactlyFourPerPlaquette` gives exactly four native signed-path positive-link lookup slots per original plaquette for all finite source words and every periodic side length. It composes `sourceLookupSlotsAppend` with the existing original four-slot path theorem; read-slot count is not confused with number of distinct positive-link variables. Source-written only, kernel receipt pending.
+
+
+## 2026-11-09 E1/A3 concrete finite-list projection and extension consistency
+
+`YMClayE1A3OriginalFiniteCoordinateProjectionExact.agda` now supplies a concrete, source-paid finite projective coordinate `originalWilsonWordFiniteValues`: a **List (SUNMatrixElement theory)** of the actual original positive-link values read by the signed path of each selected original plaquette word. It does not use a full link field disguised as a finite coordinate. The following declarations are source-written:
+
+1. `consHeadInjective` / `consTailInjective`: constructive list equality destructors.
+2. `sameOriginalFiniteBondValuesImpliesPointwiseAgreement`: if the actual sampled group-value lists agree, the original link fields agree at each bond on the selected finite list; repeated bonds are allowed.
+3. `originalWilsonWordFactorsThroughActualFiniteValues`: use the existing all-word actual signed-path extensional theorem to prove equality of real Wilson-word observables whenever those actual sampled value lists agree.
+4. `originalFiniteValuesAppend`: restriction to a concatenation of source support lists equals concatenation of the actual sampled coordinate lists.
+5. `originalWilsonWordFiniteCoordinateCons`: prepending an original plaquette to a Wilson word prepends precisely its four signed-path positive-link values to the earlier word projection.
+
+This completes the *finite source-link-value projection factorization and word-extension algebra* proof contract at the source-written level (Agda kernel receipt outstanding). It **does not** discharge R568's external selected-projective-system identification: that requires an actual continuum projective configuration carrier and compatible refinement projections, not just the finite source list. Nor does finite-coordinate concatenation prove measure/projective consistency of original Gibbs distributions at different cutoffs. Keep R566 A3 projective event consistency and continuity-at-empty, R576 original mixed-log and connecting polymer bound, R577 reconstructed OS physical-time transfer, R563 Ward noncollapse, and R571 all-group physical source open.
+
+Implementation also imported to `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`. Verification state: committed/readback only; no Agda 2.9 compiler available.
+
+
+## 2026-11-09: original signed-link positive-value DIRECT evaluator (E1/A3)
+
+New source file: `DASHI/Physics/YangMills/YMClayE1A3OriginalSignedPathValueEvaluatorExact.agda`; imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+This strengthens previous E1/A3 finite-support extensionality and equality-under-projection results: it constructs a *direct computational evaluator* on the actually sampled finite positive-link values, with no full original field hidden inside the coordinate.
+
+- `SignedPositiveLinkValues`: indexed by the actual signed-axis path, but stores values of underlying **positive** bonds only.
+- `orientSample`: positive direction uses the sampled group element; negative direction applies the actual source inverse to the sampled predecessor-positive-link group element.
+- `sampleOriginalSignedPath`: recursively reads exactly the same source bonds as the original nonabelian path evaluation; `evaluateOriginalSignedPath`: independently computes the ordered group product from those sampled values.
+- `sampledOriginalSignedPathComputesHolonomy`: direct induction, ordered nonabelian multiplication preserved, proves equality with the actual `Bond.pathHolonomy`.
+- `OriginalWordPositiveLinkValues`, `sampleOriginalWilsonWord`, `evaluateOriginalWilsonWord`: finite dependent tuple of all original plaquette-path positive-link samples and their real Wilson trace word evaluator.
+- `originalWilsonWordDirectFiniteEvaluation`: original SU(N) signed Wilson word equals the finite tuple evaluator at every cutoff, by induction and the existing original `periodicSUNPositivePlaquette` trace semantics. The two sides are actual original Wilson functions, not newly invented continuum coordinates.
+
+**Critical independence:** none of this invokes a generalized measure/projective authority or new source-specific physical hypothesis. The proof is finite lattice algebra only. It is the necessary R568 selected finite-coordinate *evaluation* ingredient, not the R568 assertion that this coordinate is a coordinate of the independently defined CONTINUUM projective system.
+
+**Exact next E1/R566 consumer:** produce the selected continuum projective coordinate family and its refinement/forgetting maps from the existing repository original-lattice projection owner; identify each finite sampled original Wilson word with a compatible member of that family, then prove consistency of the **original cutoff-dependent interacting Gibbs expectations**. The finite evaluator is now available to phrase this identity without hidden full-field witnesses. It does not assert projective consistency of distinct Wilson Gibbs measures: an interacting RG/coarse-graining estimate is still needed.
+
+**B1/B2/H6/G1:** unchanged mathematical original-source obligations in R576/R577/R563/R571. No source-dependent analytic bound is manufactured from this algebraic improvement.
+
+**Verification:** GitHub source commits and readback; no Agda 2.9 binary available in working container. These declarations are **not** kernel-accepted until their regression and transitive imports typecheck.
+
+
+## Same-cutoff original Wilson *finite* projective prefix seam (2026-11-09)
+
+The direct source-value evaluator `YMClayE1A3OriginalSignedPathValueEvaluatorExact.agda` has been extended with actual dependent finite-coordinate inverse-system maps:
+- `appendPlaquetteWords`: original plaquette-word concatenation;
+- `forgetOriginalWordSuffix`: take the actual sampled values on a longer word `prefix ++ suffix` and forget precisely the suffix, returning the correctly indexed prefix sample;
+- `sampleOriginalWordPrefixCommuting`: proves the commuting diagram
+  `forgetOriginalWordSuffix prefix suffix (sampleOriginalWilsonWord realization (prefix ++ suffix)) ≡ sampleOriginalWilsonWord realization prefix`
+  for **every** actual finite Wilson link realization, arbitrary original plaquette words and every periodic side length.
+
+This pays a concrete *same-lattice word-index* projective naturality lemma; no additional abstract projective axioms, fake measure, or complete-field-as-coordinate trick.
+
+**Do not promote as R566 probability consistency:** the group-valued sample forgetting diagram is not equality of `μ_n` original Wilson Gibbs marginals at distinct lattice cutoffs. The remaining P0 E1 cut is a selected common continuum projective carrier with physical-scale refinement maps and source-selected original expectation comparisons plus continuity-at-empty. The existing R538/R539/R534 and `YangMillsLiteralProjectiveCylinderSourceExact` compilers consume those source facts. This pass produced GitHub code only; no Agda binary or kernel acceptance available. 
+
+
+## 2026-11-09 E1/A3 normalized original Gibbs expectation weld
+
+New: `DASHI/Physics/YangMills/YMClayE1A3OriginalFiniteValueExpectationWeldExact.agda`, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+This is the first source-written *measure-level* E1/A3 finite-coordinate result, not another abstract cylinder record. It reuses `YMClayOriginalVariableWilsonCovarianceSourceExact.originalWilsonExpectationExtensional`, itself proved from the genuine source one-link product Haar integral congruence, and `YMClayE1A3OriginalSignedPathValueEvaluatorExact.originalWilsonWordDirectFiniteEvaluation`:
+
+- `directFiniteWilsonWord`: real-valued Wilson word evaluated entirely through the sampled source positive-link group values and original signed group inverse/holonomy operations;
+- `originalDirectFiniteValueExpectationIsOriginalWilson`: for **every** cutoff, original word and finite-value evaluator have equal expectations under the **same actual normalized Wilson Gibbs/Haar measure**;
+- `originalDirectFiniteValueExpectationIsOriginalE1Cylinder`: the expectation is precisely the actually selected E1 original cutoff-dependent plaquette-word cylinder expectation, not an alternative probability law;
+- `originalPrefixFromExtendedFiniteSample` and `originalPrefixFromExtendedSampleEqualsDirect`: evaluate a selected word prefix by forgetting the suffix from a longer actual original sampled-value word; the evaluation is pointwise equal to direct prefix evaluation, via the native prefix commuting proof;
+- `originalPrefixFromExtendedSampleExpectationIsWilson`: apply the actual source Wilson expectation extensionality to establish equality of normalized Gibbs expectations of those two fixed-cutoff representations.
+
+**Sharp maximal cut after this:** the normalized *same-cutoff*, same-Gibbs, same-word finite-coordinate and prefix naturality calculation is now source-written. It does NOT imply a change-of-cutoff consistency theorem `E_{mu_upper}[f∘pi_{upper→lower}] = E_{mu_lower}[f]`. The actual Wilson RG blocking/pushforward and its physical scaling must discharge that statement, or one must prove convergence via the alternative marginal compactness/subsequence route with a selected continuum-limit identification. R566 A3 event consistency/continuity-at-empty, R576 B1 actual connecting activities, R577 B2 physical transfer, R563 H6 noncollapse and R571 G1 group physics remain live.
+
+**Verification:** committed and read back from GitHub; no Agda 2.9 typecheck has been run. Neither same-cutoff source-written lemma nor roadmap is a Clay terminal proof.
+
+ 
+## 2026-11-10 E1/A3 actual one-step original Wilson RG pushforward
+
+The repository already contained the **genuine interacting** R445 4-to-2 periodic SU(N) two-link holonomy block in `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact.agda` and the full marked partition/fine-to-effective-functional equality in `YMClayOriginalWilsonNativeMarkedPushforwardExact.agda`. These use the *same* `Constructed.actualPeriodicProductMeasure` at cutoff 3 as the original E1 cutoff family, not an invented auxiliary rational measure.
+
+New `YMClayE1A3OriginalR445CrossCutoffSourceExact.agda` directly defines:
+- `originalFineBlockPullbackCylinder`: a cylinder on the genuine cutoff-dependent original SU(N) links whose n=3 section is `f ∘ actualBlockedLinkMap` for a side-two coarse test `f`;
+- `originalBareCoarseCylinder`: the same coarse test on the independently selected original bare Wilson n=1 family, with no demand that its measure match R445;
+- `originalR445EffectiveCoarseExpectation`, `originalE1FineBlockedExpectation`, `originalE1BareCoarseExpectation`: three *source-selected* expectations; the first and second coincide by definition, whereas the third is genuinely different;
+- `originalE1FineBlockedIsR445EffectiveCoarse`: exact `E_{mu_Wilson,3}[f ∘ B] = (B_* mu_Wilson,3)(f)` on the same true 1024-link Wilson Gibbs density, normalized Haar and beta(3), for every coarse test;
+- `originalE1BlockedCoarseWordIsR445`: instantiate this source identity for **all original side-two Wilson plaquette words** (not merely the unit test);
+- `originalE1CoarseIsBareWilson`: definitional identification with the separate original n=1 normalized Wilson expectation at beta(1);
+- `originalR445UnitEqualsOriginalBareCoarseUnit`: the only unconditional cross-measure consistency presently established: the constant unit test, derived using the original product-Haar ordered/strict normalization and division cancellation at both levels.
+
+This is a substantial upgrade over **fixed-cutoff** prefix projection: it reaches an **actual physical RG block between two differently sized original Wilson lattices**, preserving the full interacting fine Gibbs weight and the exact effective coarse functional. However, the equality of the effective coarse functional to a **bare** coarse Wilson Gibbs state at beta(1) for arbitrary nonconstant observables remains mathematically unproved and is not generally true at finite cutoff without extra effective operators/couplings. The correct continuum target is controlled mismatch for a *renormalized* selected physical cylinder family and its observables, not a spurious exact bare-action equality.
+
+The narrowest next high-alpha leaf is therefore a genuine original RG effective-action/marginal comparison estimate, uniform in continuum physical scaling, or an independently sourced finite-marginal compactness/diagonal subsequence plus selected-measure uniqueness argument. The R566 projective event consistency/continuity at empty requires that producer. D2/B1 R576 physical activity, D2/B2 R577 same-H transfer, N1/H6 R563 and G1 R571 stay independent analytic fronts.
+
+**Verification:** commit and readback of source only; Agda 2.9 kernel receipt remains outstanding, and the transitive `RealAnalysisAxioms`/one-link Haar physical authorities are not discharged by this bridge.
+
+
+## 2026-11-10 E1/D1 original R445 three-moment maximum cut
+
+New `YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda`, imported by `YMClayOriginalWilsonPhysicalRegression.agda`.
+
+**Recovered rather than reimplemented:** `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance` already proves that the selected original fine Wilson two-source formal J11 germ equals the R445 original blocked effective coarse covariance. It uses the actual original side-four Gibbs and native ordered two-link SU(N) map, not a second auxiliary coarse theory.
+
+**New source-native outputs:**
+- `sourceEffectiveExpectation`, `sourceBareExpectation` and `sourceCoarseProduct`: original R445 effective coarse vs independent original bare side-two Wilson expectations, selected from the actual E1/R445 owners.
+- `sourceEffectiveCovarianceIsActualR445`: definitional identity of R445's true pushed-forward connected covariance with the new selected source expression.
+- `sourceBareCovarianceIsOriginalWilson`: definitional identity of independently selected original side-two bare Wilson covariance.
+- `originalThreeRGEqualMomentsImplyCovariance`: proof by `cong₂` on the **actual** original real product and subtraction, showing that source moment comparisons on `F`, `G`, `FG` suffice for covariance comparison; no new separate physical covariance premise.
+- `originalThreeRGEqualMomentsWeldFineJetToBareCoarseCovariance`: transitive composition with R445/R320's original same-fine-source mixed-log theorem. This gives a complete formal proof that **three real RG moment equalities** imply the original Wilson fine mixed J11 source equals the bare coarse Wilson covariance. The three equalities are explicitly unpaid original RG physical hypotheses—not silently deduced from a naive bare-Wilson closure.
+- `coarseOriginalWordTest` and `originalThreeRGWordMomentMatchesWeldFineJet`: specialize the cut to **arbitrary original side-two SU(N) Wilson plaquette-word pairs** rather than unrelated arbitrary independent source test families.
+
+This replaces a possible wrong proof strategy (assume (B_*\mu^W_3=\mu^W_1)) with the exact three-source-moment requirement. The *future quantitative RG theorem* should estimate each of these three **errors** in the physical scale/volume, use ordinary real inequalities to turn the three source estimates into connected covariance control, and propagate through admissible iterated blocking. An exact finite-cutoff equality of effective and bare Wilson moments is not generally expected in interacting lattice gauge theory.
+
+**Verification:** module created and imported; exact source paths/commit readback; no Agda compiler/kernel receipt. The conditional three-moment theorem is a verified-by-source-inspection proof candidate, NOT physical E1 convergence or D1 decay.
+
+
+### Unconditional same-E1 two-source identity (2026-11-10)
+
+Added `sourceE1FineBlockedCovariance`, `sourceE1FineBlockedCovarianceIsR445`, and `originalFineMixedJ11IsSameE1BlockedCovariance` in `YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda`. Unlike the three-moment *bare* coarse comparison, these declarations require **no RG matching hypotheses**. The already-established source-first original side-four mixed J11 coefficient equals the connected covariance of the **same original cutoff-3 E1 physical Wilson state** with native two-link blocked original coarse observables. The construction uses `Same.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance` and `Cross.originalE1FineBlockedIsR445EffectiveCoarse` with real-product/subtraction congruence.
+
+This pays the finite *E1-selected covariance source identity*, not the analytic source-J differentiation, physical decay, UV continuum convergence, or a comparison to the independent bare cutoff-1 Wilson measure. The latter still requires actual quantitative moment discrepancies on F, G, and FG or a continuum RG alternative. This prevents inadvertent reuse of a bare-closure assumption in B1/D2.
+
+**All source-written; Agda typecheck and transitive physical authority receipts pending.**
+
+
+## 2026-11-11 Quantitative three-moment original RG residual (source-written)
+
+New `YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact.agda`, imported by `YMClayOriginalWilsonPhysicalRegression.agda`, reuses the CMP116 `BalabanDecoupledActivityHessian.productHeadTelescope`, the existing marked-product `absNonnegative`, and the real-analysis absolute-value/monotonicity axioms. It proves the independent two-factor difference majorant and `threeMomentCovarianceErrorBound` for the **explicit rearranged moment residual**
+`(E_eff(FG)-E_bare(FG)) - (E_eff(F)E_eff(G)-E_bare(F)E_bare(G))`.
+The concrete same-source `originalR445ThreeMomentResidualBound` instantiates this on the actual R445 effective coarse and independent original bare side-two Wilson expectations.
+
+**Quantitative inequality:** given |Δ(FG)|≤ε_FG, |Δ(F)|≤ε_F, |Δ(G)|≤ε_G, |E_eff(G)|≤M_eff,G, |E_bare(F)|≤M_bare,F, then the absolute explicit three-moment residual is ≤ ε_FG + ε_F M_eff,G + M_bare,F ε_G.
+
+**Important precise distinction:** the subtraction-interchange identity `(a-b)-(c-d) = (a-c)-(b-d)`, needed to rewrite the difference of *connected covariances* into that residual, is not provided as a named theorem in `RealAnalysisAxioms`. Do not treat the current module as a kernel-proven covariance difference bound until that scalar lemma is derived and accepted. The **physical** Wilson RG error bounds ε_F, ε_G, ε_FG and majorants also remain unpaid; the same original Wilson source selection is preserved.
+
+Next true high-alpha target: source-specific CMP109/CMP119 effective-action bounds for the three original coarse Wilson moments with cutoff/volume-uniform physical scaling, then transport via the scalar subtraction-interchange lemma to the same E1 source mixed-J11/CMP116 covariance. The R576 polymer and R577/H6/G1 cuts are unchanged. Agda 2.9 acceptance remains unverified.
+
+
+### Quantitative downstream covariance and original mixed-J transport
+
+The same module now also source-writes `originalR445CovarianceErrorFromThreeSourceMoments` and `originalMixedJ11MinusBareCovarianceQuantitativeBound`, transporting the three-moment estimate to (1) the genuine difference of original R445 effective and bare coarse covariances, and (2) the already proved original fine Wilson formal mixed J11 coefficient. **Both signatures explicitly request the scalar-ring subtraction-interchange equality** `(a-b)-(c-d) ≡ (a-c)-(b-d)` at the selected six source moments. They do **not** request equality of effective and bare coarse Wilson probability laws.
+
+The next standalone P0 mathematics leaf is therefore to discharge the pure ordered-real scalar interchange once from a coherent selected real ring (or extend `RealAnalysisAxioms` with an independently verified ring theorem, not a Yang–Mills postulate), then supply three nontrivial original Wilson RG physical source moment errors at all relevant scales and volumes. Together those will yield honest quantitative same-source covariance comparison.
+
+**Acceptance limit:** committed source terms and current GitHub readback only. This is a conditional quantitative transport theorem, not a computed physical error bound, E1 continuum existence or D2 mass gap. No kernel/Agda receipt available in the execution environment.
+
+
+### 2026-11-11: pure scalar interchange discharged from repository axioms
+
+**Correction to the immediately preceding note:** `YMClayOriginalRealSubtractionInterchangeExact.agda` now proves `subtractionInterchange`:
+`(a-b)-(c-d) ≡ (a-c)-(b-d)`.
+The derivation uses only the existing `subAddCancelMiddle`, `+-comm`, `subAddDistributes`, `subSelf` and `+-identityʳ` laws of `DASHI.Foundations.RealAnalysisAxioms`. There is no new postulate, and the theorem respects the transitive axiomatic nature of the selected real carrier.
+
+The quantitative E1/D1 original Wilson module was then updated to **eliminate the scalarInterchange argument entirely** from:
+- `originalR445CovarianceErrorFromThreeSourceMoments`: actual connected covariance difference of native effective R445 pushed-forward vs original bare coarse Wilson sources;
+- `originalMixedJ11MinusBareCovarianceQuantitativeBound`: actual original fine Wilson two-source formal J11 vs original bare coarse covariance.
+
+Given original selected-source bounds `|Δ(FG)| ≤ ε_FG`, `|Δ(F)| ≤ ε_F`, `|Δ(G)| ≤ ε_G`, `|E_eff(G)| ≤ M_eff,G`, `|E_bare(F)| ≤ M_bare,F`, with nonnegative error and majorant inputs where needed, their proof-contract bound is
+`|Cov_eff(F,G) − Cov_bare(F,G)| ≤ ε_FG + ε_F M_eff,G + M_bare,F ε_G`.
+The original finite J11 bound has the same RHS. This is a materially stronger **physical-error-conditional theorem** with no independent covariance, real-scalar interchange or bare-action closure input.
+
+**Unpaid physical highest-alpha leaves (unchanged):** actual nonconstant Wilson RG moment errors on F,G,FG uniformly in physical cutoff/volume, plus the two moment majorants, and iterative renormalized cutoff comparison/compactness. The generic error transport is not source-dependent and cannot prove these inequalities itself.
+
+**Trust/verification:** the new scalar lemma uses a transitive postulated real-ring surface, and the existing marked-factor `absNonnegative` authority; no new postulate. Both new modules are committed and imported by the original Wilson physical regression. No Agda 2.9 executable is installed locally: GitHub readback is NOT kernel acceptance.
+
+
+## 2026-11-11 — original Wilson *physical numerator* moment-majorant leaf
+
+New theorem module `DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteNumeratorOrderExact.agda`, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`, directly consumes the selected n-dependent original SU(N) Wilson Gibbs density, native one-link product Haar and `YMClayOriginalWilsonFiniteTwoSourceJetExact.originalWilsonFiniteIntegrationLaws`. It does **not** create another source measure or independent integration-law record.
+
+Completed source-written declarations:
+- `originalWilsonNumeratorCongruent`: same original density, product Haar, denominator-independent numerator integral respects equality of original observables.
+- `originalWilsonNumeratorPositive`: for every cutoff n and original pointwise nonnegative test F, the **actual** weighted Wilson insertion numerator is nonnegative.
+- `originalWilsonNumeratorAdd`: actual original weighted Wilson numerator is additive, from already-proved selected product-Haar laws.
+- `originalWilsonNumeratorMonotoneFromSlack`: if F+S=G pointwise with S≥0, original numerator(F)≤original numerator(G), derived from the existing ordered-real addition monotonicity and native integration positivity; no new order axiom.
+- `originalWilsonNumeratorBelowItsPartition`: if original test F has a pointwise nonnegative complement S satisfying F+S=1, its actual weighted insertion numerator is at most the **same cutoff's Wilson partition** Z_n. This is a genuinely selected source majorant, not a rational T5 proxy, and it applies at every periodic cutoff.
+
+**What is paid:** the source-dependent finite numerator positivity/order and partition majorant; if the relevant original Wilson F or G is shown to admit the complement, no new Haar positivity/linearity estimate is needed. **Still unpaid:** a concrete certified uniform [0,1] Wilson test complement for each selected renormalized nonconstant F,G, conversion to normalized moment bounds using the pinned positive-division order, and most importantly actual original RG effective-versus-bare moment errors ε_F, ε_G, ε_FG uniform in physical scaling. The conditional quantitative covariance bound and source mixed J11 transport from the preceding round remain available; no E1 continuum convergence or D2 gap follows.
+
+**Verification:** source-written on PR #1444 and imported in its original physical regression; no local Agda 2.9 compiler. Do not mark as kernel accepted.
+
+
+### 2026-11-11 independent exact-rational regression
+
+Added `scripts/check_ym_original_three_moment_rg.py`. The same six-moment algebra was run locally under Python `fractions.Fraction` exhaustively on the sixfold grid `{-2,-1,0,1,2}^6`: **15,625/15,625** exact-rational covariance-rearrangement and three-error-bound cases passed, including 125 exact matching-moment cases. An explicit *algebraic* negative control confirms that different moment triples can have different covariances; it is **not** represented as a physical SU(N) Wilson counterexample. This is supplementary algebra regression, not Agda kernel checking or physical RG validation.
+
+
+## 2026-11-11 P0 original Wilson normalized source majorants and bounded RG cut
+
+A source review found two defects in the earlier `YMClayOriginalWilsonFiniteNumeratorOrderExact.agda`: missing real multiplication import, and the wrong equality orientation in its `lowerNum+0=lowerNum` substitution. Both were repaired before extending the proof.
+
+The same original all-cutoff numerator module now includes:
+- `originalWilsonPartitionStrictlyPositive` directly from the original `Family.physicalFinitePartitionPositive`;
+- `originalWilsonNormalizedBelowOne`: if the selected original test F has a certified nonnegative complement to 1, then **the original Wilson normalized expectation** at arbitrary cutoff n satisfies E_W,n[F]≤1;
+- `originalWilsonNormalizedNonnegative`: pointwise nonnegative original Wilson F gives 0≤E_W,n[F].
+
+These use only the previously sourced product-Haar integration laws and **explicit standard scalar ordered-division premises**: monotonicity of numerator under division by a positive denominator, division of zero, and self-division. They do **not** silently infer quotient order from the currently minimal `RealAnalysisAxioms`.
+
+New `YMClayE1D1OriginalR445BoundedMomentMajorantsExact.agda` uses these directly on the actual physical R445 3→1 block:
+- `originalEffectiveMomentAtMostOne` applies original n=3 Wilson source normalization to F∘B using the native ordered SU(N) blocked-link map;
+- `originalBareMomentAtMostOne` applies the independent original n=1 Wilson source to F;
+- `originalEffectiveMomentAbsoluteAtMostOne` and `originalBareMomentAbsoluteAtMostOne` turn certified [0,1] source moments into |E|≤1, using an explicit standard abs(x)=x for nonnegative real x;
+- `originalR445CovarianceBoundForNativeUnitBoundedTests` invokes the previously source-written quantitative R445 covariance theorem with **both one-point majorants set to the actual scalar unit 1**, not additional physical source assumptions. This applies to any original coarse tests with explicit [0,1] certificates and still requires only the three source RG errors on F,G,FG. The RHS is ε_FG+ε_F·1+1·ε_G, with simplification to a three-error sum available from basic ring identities.
+
+**Precise unpaid P0:** actual cutoff/volume-uniform physical source RG moment discrepancy estimates ε_F, ε_G, ε_FG on a concrete chosen renormalized interacting Wilson cylinder family; certifying bounded/coarse complements on the selected (possibly rescaled/shifted) observable class; identifying physical blocking with the E1 limit. R576 mixed-log shell activity, R577 same-OS transfer, R563 H6 noncollapse and R571 G1 physical group continuation remain unpaid.
+
+**Verification:** source-written/committed and imported into original physical regression, not Agda-kernel-accepted. No CI-based acceptance inferred.
+
+
+## 2026-11-11 original RG finite-source continuation
+
+The bounded-moment module constructs an explicit product-complement test: given F+Fc=1 and G+Gc=1 with nonnegative summands, the complementary test Fc+F*Gc satisfies FG+(Fc+F*Gc)=1. Source-written proofs establish pointwise positivity and unit completion, and reuse actual R445 and bare Wilson normalized moments to show both product expectations have magnitude at most one. This extends the certified bounded test class to all three RG moment inputs F, G, FG.
+
+New `YMClayE1A3OriginalR445WeightedCrossNumeratorExact.agda` defines the actual original Wilson effective fine-block numerator N_eff(F), independent bare coarse numerator N_bare(F), and their respective source partition functions Z_fine, Z_bare. It constructs X(F)=N_eff(F)*Z_bare-N_bare(F)*Z_fine and proves its literal interacting Haar/Gibbs expansion plus unit-test cancellation X(1)=0. Nonconstant physical RG errors remain unresolved: no matching of effective and bare Wilson actions is asserted.
+
+Agda kernel verification has not been performed. Remaining highest-alpha physical target: a uniform nonconstant original Wilson weighted cross-numerator bound, followed by positive-denominator normalization and existing three-moment covariance transport. R576/R577/R563/R571 physical gates remain open.
+
+
+## 2026-11-11 P0.01–04 original bare centering admission
+
+New `YMClayE1D1CrossNumeratorCenteringAlgebraExact.agda` is imported into the original Wilson physical regression root. Source-written targets `originalRealSubtractionAsAddition`, `originalWilsonCrossNumeratorSubtractionCenteringClosed`, `originalBareExpectationMultiplyPartition`, and `originalBareCenteredNumeratorZero` now compose the actual n=1 Wilson bare partition and normalized expectation with the existing n=3-to-n=1 original cross-numerator shift identity. Critically this is **conditional algebra**: `OriginalRealCenteringLaws` (subtraction-via-negation and centered additive cancellation) and `OriginalRealPositiveDivisionLaws` (positive denominator quotient reconstruction) must be instantiated by an actual coherent real field backend; the minimal `RealAnalysisAxioms` does not make those implications available. The existing Wilson partition strict positivity is reused as an actual source theorem, not an extra assumed positive constant. No new postulate was inserted.
+
+Next exact tasks: first instantiate the selected scalar-field law interfaces with an actual real carrier; then P0.05 `originalWilsonCrossNumeratorIsFineCenteredInsertion`, P0.06 source-native SU(N) plaquette trace range/affine boundedness, P0.07 literal plaquette one-sided formula, and kernel check. Physical P0.09 remains the uniform nonconstant RG cross-numerator estimate; finite cancellation alone is not that estimate.
+
+
+## 2026-11-11 P0.05 and P0.07 original-source centered fine insertion
+
+At PR #1444, `YMClayE1D1CrossNumeratorCenteringAlgebraExact.agda` now source-writes:
+- `originalWilsonCrossNumeratorIsFineCenteredInsertion` (P0.05), composing the previously written genuine original R445 scalar-shift identity and the original bare n=1 Wilson centered-numerator cancellation, then using only `mulZeroˡ`, the **explicit** selected scalar `subtractionZeroRight` and `*-comm`: `X(F) = Z_b * N_f(F - E_b(F))` on the actual same-source fine and bare Wilson measures;
+- `originalPlaquetteCrossNumeratorIsCenteredFineInsertion` (P0.07), instantiating P0.05 at the literal `Center.originalCoarsePlaquetteTrace p`, defined from `Words.originalWordObservable ... 1 (p :: [])`.
+
+The selected `OriginalRealCenteringLaws` now additionally requests the standard `x - 0 = x` law. This is **not** a new postulate, and is not internally supplied by the existing minimal `RealAnalysisAxioms`. Thus P0.05/07 are source-written **conditional theorems** under the explicit real-field and positive-division authorities; no unconditional real-field instance has been constructed or Agda-kernel accepted.
+
+**P0.06 precise gate:** `YMClaySUNMatrixWilsonTraceGaugeExact.SUNMatrixRealTrace` provides `normalizedRealTrace` and `traceCyclic` only. `SUNMatrixCarrier.CertifiedSUNMatrixTheory` provides abstract matrix product/dagger/SU(N) group laws, but not finite complex inner-product inequalities or a trace norm estimate. Therefore `|Tr_norm U| <= 1` for *arbitrary selected abstract matrix SU(N)* is not derivable from the currently exposed trace signature. A physical source proof must instantiate an actual concrete finite matrix and normalized trace and prove its bound; the rational SU(2) quaternion trace inequality is not itself such an SU(N) source proof. Pointwise [0,1] test normalization for the selected real Wilson plaquette must then be constructed from these bounds and coherent scalar division. The centered **identity** needs none of those inequalities; the physical contraction bound does.
+
+**Next highest-alpha gate:** (a) instantiate the scalar ordered field compatibility laws with a real backend; (b) typecheck full original-Wilson regression on Agda 2.9; (c) prove concrete matrix SU(N) trace bound; (d) original nonconstant scale-uniform Wilson RG blocked-to-coarse effective-action/polymer fluctuation bound `abs X(F_p) <= epsilon_p * Z_f Z_b`. Full E1/D1/D2/N1/G1 remain OPEN. No RG rate inferred from centering.
+
+
+### P0.06 falsifiability / source-admission negative control
+
+Added `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact.agda` and imported it in `YMClayOriginalWilsonPhysicalRegression.agda`. `constantCyclicRealTrace` constructs a legal cyclic real trace assigning an arbitrary real scalar k to every SU(N) matrix. `constantCyclicWilsonValue` proves the evaluated Wilson value is k. `universalCyclicTraceBoundForcesAllScalarsBounded` proves any bound claimed for **all** such trace records would force `absℝ k <= 1ℝ` for every k (when the selected SUN carrier is inhabited). This is a precise negative control on the current trace signature, not a proof of a real-order contradiction. P0.06 needs an actual finite complex matrix trace with verified normalization/inner-product inequalities and a source-bound on the same original plaquette holonomy; trace cyclicity by itself cannot pay that gate.
+
+
+## 2026-11-11 P0.06 original matrix trace range → all-cutoff Wilson words; word-concatenation RG weld
+
+New Agda source modules, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`:
+
+1. `YMClayE1D1OriginalSUNTraceToAllWordsBoundExact.agda` derives `originalPlaquetteTraceBoundAtEveryCutoff` from a **single selected original SU(N) matrix trace magnitude estimate**, then proves `originalSingletonWordIsPlaquetteTrace` using the original Wilson signed-plaquette evaluator and `mulOneʳ`, and `originalAllLengthWilsonWordMagnitudeBound` by actual original word recursion and the selected real `absMul`/nonnegative-product comparison. Precise *unpaid* mathematical owners are `traceRange : ∀ U → |matrixWilsonValue traceData U| ≤ 1` for a **concrete** normalized matrix SU(N) trace, `absNonnegative` and `absOne` in a coherent real carrier. This does not infer trace range from cyclicity or create a false bounded SU(N) trace instance.
+
+2. `YMClayE1D1OriginalWilsonWordConcatenationR445Exact.agda` proves `originalWilsonWordAppendIsProduct` at **every original cutoff** by list induction and the selected real multiplication group laws:
+`W_{left++right}(U) ≡ W_left(U)*W_right(U)`.
+It then proves `originalR445WordProductCrossNumeratorIsConcatenation` at the actual 4→2 R445 fine-blocked-versus-bare original Gibbs/Haar source using `Center.crossNumeratorCongruent`. Thus the third nonconstant original RG discrepancy on `FG` is literally the cross numerator of the original **concatenated plaquette word**; the three source inputs for pairwise covariance comparison can be handled by a single all-word effective-versus-bare producer applied to `left`, `right`, `left++right`.
+
+**Important nonclaim:** Wilson expectation is *not* multiplicative. `E(FG)` is the expectation of an actual word-product insertion, not `E(F)E(G)`. These exact finite identities do not establish a nonconstant RG error rate, source matrix norm, or any terminal Clay gate. Agda 2.9 acceptance is still outstanding; the source-written modules and imports are not kernel receipts.
+
+**Next highest-alpha original physical producer:** for each admissible original coarse Wilson word, give a truly derived cutoff/volume-uniform estimate on its exact weighted cross numerator `X(W_word)` relative to the actual positive partition product `Z_f Z_b`, in the correct UV scaling regime. Together with the existing word-concatenation identity, the same quantitative covariance route then applies to a pair of original Wilson words without a separate non-Wilson polynomial error premise.
+
+
+### P0.08 local deterministic Agda acceptance command (2026-11-11)
+
+Added `scripts/check_ym_original_rg_p0_kernel.sh`, a local fail-closed Nix/Agda 2.9 focused runner invoking the existing project-owned `scripts/run_agda29_parallel_check.sh`. It lists the original scalar subtraction lemma, same-source R445/R320 three-moment modules, numerator order, quantitative covariance, bounded test majorants, weighted cross numerator, centering and bare-centered insertion, trace cyclicity negative control, new all-cutoff trace-to-word and word-concatenation lemmas, and the entire original Wilson physical regression root. It refuses to claim acceptance if Nix is missing, any source is absent, or the checker exits unsuccessfully. Invocation:
+
+```bash
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+This is a **ready-to-run local verification harness**, NOT a kernel pass receipt. The script was not run in the assistant's environment, where `nix` and `agda` binaries are absent. Any compiler errors in upstream and new sources must be addressed from actual Agda diagnostics.
+
+The actual physical P0.09 target is still a uniform nonconstant original Wilson cross-numerator estimate on Wilson words `w` (especially `u`, `v`, `u++v`), divided by the correct original fine/bare partition product only under legitimate scalar division laws. The project-owned original SU(N) matrix trace bound, real arithmetic field-law carrier, all-scale RG effective action, E1 continuum, R576 connecting clusters, R577 OS Hamiltonian, R563 nontriviality and R571 all-group coverage are not closed.
+
+
+## 2026-11-12 source audit of pasted “all gates CLOSED” argument
+
+See `Docs/physics/YMClayAllGatesClosedClaimSourceAudit20261112.md`. The supplied write-up presents standard heuristic strategies for P0, UV RG, connected polymers, OS reconstruction, nontriviality, and compact group coverage, but does **not** contain checked original SU(N) source proofs of its defining high-alpha analytic estimates. None of the five terminal Clay gates can be promoted from its final table. The independent `RealAnalysisAxioms` real carrier is not definitionally the existing Bishop setoid real carrier and its subtraction/division compatibility laws still require an actual semantic weld.
+
+### New source-written exact Agda declarations
+
+- `YMClayE1D1OriginalCrossNumeratorNormalizedMomentFactorExact.agda`: true original fine/bare positive partitions; `originalFineMomentTimesPartition`, `originalBareMomentTimesPartition`, `originalCrossNumeratorIsMomentDefectTimesPartitionProduct`, and `originalWordPairCrossNumeratorIsNormalizedDefect`. Under the explicitly selected coherent positive division law, prove on the actual original Wilson source
+`X(F) = (E_f(F)-E_b(F)) Z_f Z_b`
+and for the third original covariance test `F_u F_v` use the genuine concatenated word `W_{u++v}`. This pays **exact normalization algebra**, not a physical moment estimate.
+- `YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact.agda`: finite normalized two-point Dirac source with `X(1)=0`, certified `F in {0,1}`, but `X(F)=1`. Demonstrates why nonconstant RG error cannot be inferred from unit cancellation or boundedness.
+- `YMClayRealSubtractionLawIndependenceExact.agda`: finite Nat countermodel for **the named subtraction-interaction fragment**, showing it does not determine `x-0=x`; not a full real axioms model.
+- `YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda`: finite transfer mode counterexample to identifying selected observed decay with an operator-wide spectral gap without a dense/separating same-OS observable family.
+
+All modules are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and listed in `scripts/check_ym_original_rg_p0_kernel.sh` for **local** Agda 2.9 verification. Source-written is not kernel-accepted.
+
+### Independent numerical algebra regression
+
+`scripts/check_ym_original_cross_factorization_exact.py` uses Python `fractions.Fraction` to test 400 exact rational numerator/positive-partition combinations, with unit cancellation and a nonconstant negative control. Local execution produced `PASS 400 exact rational original-form factorization cases; unit and nonconstant negative controls`. This is finite algebra regression, not an Agda receipt, proof of the source-selected real field, or physical Yang–Mills validation.
+
+### Remaining maximum-cut, in order
+
+1. Run `bash scripts/check_ym_original_rg_p0_kernel.sh` in the actual Nix/Agda environment and repair the first compiler errors. No CI inference.
+2. Realize `OriginalRealCenteringLaws`, `OriginalRealPositiveDivisionLaws` and real absolute-value compatibility on the SAME selected real carrier, with explicit Bishop `_≃_` versus postulated `_≡_` authority weld.
+3. Prove concrete all-N finite-matrix SU(N) normalized trace range (cyclicity alone is inadequate), then apply existing all-word bound.
+4. Supply the original nonconstant physically UV-uniform Wilson weighted cross-numerator estimate, for all relevant original words, including `u`, `v`, `u++v`—a true effective blocked action/polymer-weight producer rather than a free error record.
+5. Complete E1 continuum limit, R576/D1 physical connected clustering, R577/D2 full same-OS spectral gap, R563/N1 continuum nontriviality, R571/G1 group-indexed physical construction. All OPEN.
+
+
+## 2026-11-12 P0 real carrier: concrete Bishop proofs and faithful original-source weld
+
+**Attached proposal audited:** the supplied `P0RealCarrierInstancesExact.agda` direction is valid, but it is wrong to directly claim P0.01 and P0.03 discharged on the independently postulated `DASHI.Foundations.RealAnalysisAxioms.ℝ` merely by constructing Bishop setoid real laws. The following is the actual source-written progress.
+
+**New concrete module** `YMClayP0BishopRealCarrierInstancesExact.agda`: proves, using the pinned imported constructive Bishop `RealProperties.ℝ-Solver` and `Inverse`, with `Bishop._≃_` rather than propositional `_≡_`:
+- `bishopSubtractionAsNegationTimesUnit`, the actual Bishop `x-c ≃ x+(-c)*1` law;
+- `bishopSubtractionZeroRight`, actual Bishop `x-0 ≃ x`;
+- `bishopCenteredScalarCancellation`, actual Bishop centered `n+(-q)*z ≃ 0` under `n ≃ q*z`;
+- `bishopPositiveDenominatorApartFromZero`, positive denominator supplies the imported Bishop inverse's required constructive apartness;
+- `bishopPositiveQuotientTimesDenominator`, the genuine Bishop inverse law `(n*(1/z))*z ≃ n` for `z>0`;
+- `bishopPositiveQuotientCenteredCancellation`, the same native centered normalizer without assuming `divide`.
+
+This pays the P0 scalar arithmetic **on the concrete Bishop backend**. It does NOT by itself inhabit `OriginalRealCenteringLaws` or `OriginalRealPositiveDivisionLaws` for the original Wilson model's separate postulated carrier.
+
+**New explicit same-source weld** `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` defines `OriginalWilsonToBishopScalarWeld divide` containing a faithful source-to-Bishop interpretation, reflection of setoid equality to selected source propositional equality, preservation of the selected zero/one/add/sub/mul/neg/strict positivity, and preservation of the **specific** original normalized `divide` function on positive denominators. The module derives:
+- `weldDerivesOriginalSubtractionAsNegation`;
+- `weldDerivesOriginalSubtractionZeroRight`;
+- `weldDerivesOriginalCenteredCancellation`;
+- `weldDerivesOriginalPositiveDivision`;
+- `weldSuppliesOriginalRealCenteringLaws` and `weldSuppliesOriginalPositiveDivisionLaws`.
+
+These are constructed algebraic transports, not merely opaque names for the missing laws. **The actual interpretation record is still UNINHABITED**; a proof identifying the original Wilson real carrier with a concrete Bishop quotient/representation remains the decisive P0 scalar owner. Do not claim P0.01-05 fully closed at the original Wilson source.
+
+**P0.06 concrete subcase:** repaired a missing `Data.Rational.Tactic.RingSolver as ℚRing` import in the existing `BalabanSU2RationalWilsonTraceBoundExact.agda`. The existing rational SU(2) quaternion `normalizedTraceLowerBound` / `normalizedTraceUpperBound`, together with `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact.literalWilsonPathPointwiseUnitBounded`, are genuine **concrete rational SU(2)** trace/path bounds. They do not establish the original parameterized full SU(N) `SUNMatrixRealTrace` norm theorem; that requires its concrete finite complex matrix representation and equality-preserving identification with `matrixWilsonValue` at every original cutoff.
+
+**Local verification:** both new P0 modules and the rational SU(2) trace source are imported or explicitly named in `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_original_rg_p0_kernel.sh`. They have source readback and simple structural syntax checks but **no Agda 2.9 kernel acceptance receipt**. Run locally:
+```bash
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+**Further original physical P0.09 / E1 / D1 / D2 status:** UNPAID. The attached write-up proposes an exponential fine propagator and positive `m_eff`, but does not construct gauge-covariant original Wilson coarse/fine coordinates, derive the alleged propagator estimate uniformly in UV cutoff or show a true original physical connecting-polymer source bound. Avoid assuming a positive microscopic `m_eff` in a proof seeking a mass gap. For D2, density of local cylinder observables plus state-dependent correlation constants `C(F)` is insufficient to infer an **operator-wide norm estimate** at the same exponent: the prefactor must be controlled by the OS Hilbert norm uniformly, or a valid spectral-measure/cyclic-vector argument must establish the same spectral support conclusion. Original R576/R577/N1/G1 remain open.
+
+
+### 2026-11-12 P0.06 signed Wilson tests and D2 spectral-support precision
+
+**Signed observables:** `YMClayE1D1OriginalSUNTraceToAllWordsBoundExact.originalAllLengthWilsonWordMagnitudeBound` yields `absℝ(W_word) ≤ 1ℝ` only after a genuine matrix normalized-trace range witness. But `YMClayOriginalWilsonFiniteNumeratorOrderExact.originalWilsonNormalizedBelowOne` requires a pointwise **nonnegative complement** `F+S=1`; an arbitrary signed Wilson trace need not be nonnegative. The existing `YangMillsPhysicalFiniteMeasureCylinderAlgebraExact.PhysicalFiniteMeasureIntegrationLaws` gives positivity and linearity, but no native absolute-integral Jensen/triangle inequality. One exact further source lemma is therefore
+`originalWilsonNormalizedAbsoluteMomentBoundForSignedWords`:
+`|E_{W,n}(W_word)| ≤ 1`,
+derived from a proved original signed-weight integral inequality `|N_n(F)| ≤ N_n(abs F)` (or a certified affine shift to a [0,1]-valued test) together with the concrete trace bound and coherent scalar order/division laws. This is OPEN; do not infer that signed trace norms already satisfy the nonnegative-complement entry conditions.
+
+**D2 spectral lemma correction:** If the SAME reconstructed OS Hamiltonian is positive self-adjoint, the local-observable cyclic/core family is dense in the vacuum-orthogonal sector, and **every vector in that core** has a bound `<ψ,e^{-tH}ψ> ≤ C_ψ e^{-m t}` for a common `m>0` and all `t≥0`, then a spectral-measure argument can establish `spec(H)∩(0,m)=∅` even when `C_ψ` depends on `ψ`. What fails without further argument is the **direct** passage `ε→0` to the operator norm estimate `<ψ,e^{-tH}ψ> ≤ e^{-m t}||ψ||²`; that requires uniform norm-controlled prefactors or an independent spectral-support theorem. The exact unpaid R577 owner is the common positive self-adjoint OS semigroup, the dense/separating all-word family, the common physical connected-decay exponent with suitable reflected-time identification, and the spectral-measure support transport. A single decaying plaquette remains insufficient, as the existing finite negative control shows.
+
+
+### Local kernel acceptance split: smallest P0 witness first
+
+Added `scripts/check_ym_p0_real_carrier_local.sh`. This is deliberately separate from the full R445 physical regression checker:
+
+```bash
+bash scripts/check_ym_p0_real_carrier_local.sh
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+The first command invokes the existing project-owned Nix Agda 2.9 checker separately on `YMClayP0BishopRealCarrierInstancesExact.agda`, `YMClayP0BishopToOriginalWilsonRealWeldExact.agda`, and `BalabanSU2RationalWilsonTraceBoundExact.agda`. It fails on the first compiler error, allowing kernel diagnostics to be attributed to the correct source owner. The second command then checks the wider original R445/E1-D1 proof regression. Neither command has run in the assistant's container, which has no `nix` or `agda` executable.
+
+The first check, even if accepted, establishes **concrete Bishop setoid arithmetic and a conditional faithful-weld theorem**; it does not conjure an inhabitant of the original Wilson `OriginalWilsonToBishopScalarWeld` record or establish arbitrary-SU(N) real trace range. Keep the "source-written / locally kernel-accepted / physically verified" receipt columns distinct.
+
+
+## 2026-11-12 maximum cut: P0.06 signed original Wilson integration closed as conditional source transport
+
+The user-supplied proposed resolution (2026-11-12) asserts the eight gates P0, P0.06, P0.09, D1, E1, D2, N1, G1 are all closed. The attachment gives candidate standard arguments and source names, but not kernel-accepted selected original-Wilson physical estimates. **All physical Clay terminal gates remain OPEN.** Do not import its all-closed status table as a proof receipt.
+
+### Source code newly implemented
+
+- Repaired `YMClayP0BishopToOriginalWilsonRealWeldExact.weldDerivesOriginalSubtractionZeroRight`: the equality transport for Bishop subtraction must use `RealProperties.-‿cong`, **not** addition congruence. Original-source scalar weld remains uninhabited.
+- New `YMClayE1D1OriginalSignedWilsonWordMomentBoundExact.agda` proves for **the actual original n-dependent SU(N) finite Gibbs/Haar source**, using the original normalized trace and explicit standard scalar ordered-real laws:
+  - `originalWordNumeratorUpper`: `N_n(W) ≤ Z_n` via positive slack `1-W`.
+  - `originalNegWordNumeratorUpper`: `N_n(-W) ≤ Z_n` via positive slack `1+W`.
+  - `originalNegWordNumeratorIsNegation`: `N_n(-W) = -N_n(W)` via actual original Haar numerator scale and congruence.
+  - `originalWordNumeratorAbsoluteBelowPartition`: `|N_n(W)| ≤ Z_n`.
+  - `originalWordNormalizedAbsoluteBelowOne`: `|E_n(W)| ≤ 1` using the actual positive partition and selected division order.
+  - `originalBoundedTestNumeratorUpper`, `originalBoundedTestNegativeNumeratorUpper`, `originalBoundedTestNegativeNumeratorIsNegation`, `originalBoundedTestNumeratorAbsoluteAtMostPartition`, `originalBoundedTestNormalizedAbsoluteAtMostOne`: same **true original source** estimate for any certified signed `|F|≤1` test, not merely words.
+  - `originalR445FineBlockedWordAbsoluteMomentAtMostOne` and `originalR445BareWordAbsoluteMomentAtMostOne`: apply the generic theorem to the **native n=3 → n=1 SU(N) blocked fine Wilson measure** and the independent original n=1 bare measure, respectively. The selected n=3 fine insertion is literally `W_word(actualBlockedLinkMap U)` and retains the original interacting Wilson density/partition, not an invented effective density.
+- The new source is imported into `YMClayOriginalWilsonPhysicalRegression.agda` and listed in `scripts/check_ym_original_rg_p0_kernel.sh`.
+- New `scripts/check_ym_original_signed_wilson_moment_exact.py` exact-rational finite-measure regression. An equivalent local check passed **7,875** configurations of nonnegative weights and signed test values, and a sharp two-Dirac difference of 2. This is a **numerical algebra regression, not an Agda kernel or physical RG receipt**.
+
+### Exact unpaid source authorities
+
+The theorem is **source-written, conditional**, not unconditionally closed. The concrete all-N complex matrix representation with `|Tr_norm U|≤1` (not cyclicity alone), coherent selected real `abs` and negation order laws, positivity/quotient absolute monotonicity, and the still-uninhabited original Wilson ↔ Bishop scalar interpretation must be supplied as genuine carriers. P0.08 Agda 2.9 kernel acceptance remains outstanding; the code has been read back and structurally inspected but **not compiled**.
+
+**P0.09 remains the immediate physical max-cut:** using the selected original fine-blocked versus bare Wilson measures, derive `|X(W)| ≤ ε_W(a,L,β) Z_f Z_b` with a genuine UV-uniform `ε_W→0`, for all selected words, their products/concatenations and admissible scaling regimes. The source now gives the sharp no-decay envelope `|E_fW-E_bW|≤2` at most; that cannot substitute for an `o(1)` estimate. A Taylor/Green-function sketch asserting a positive massive fine propagator does not prove the original Wilson bound and can be circular with D2.
+
+**Other advertised closures remain unpaid:** D1 actual R576 connecting-polymer physical activity estimates, E1 source-admitted continuum cylinders with projective consistency and positivity, D2 same-OS self-adjoint H and dense-core common-exponent spectral support theorem, N1 nonzero same-limit interacting four-point witness, G1 all-group physical estimates. In particular, a formal `g_{ren}>0` does not prove a four-point cumulant survives or is nonzero, and `h^∨>0` does not prove nonperturbative RG contraction.
+
+
+## 2026-11-12 original SU(N) Haar fiber max-cut: constructed two-link effective density
+
+**Attachment attribution / admission:** the supplied `Pasted text.txt` proposes an identity-valued Bishop scalar map, a local exponential gauge-fiber chart, a Combes–Thomas propagator estimate, polymer activity bounds and global OS/N1/G1 closure. The identities are **not** closure receipts for the actual original R445 source. In particular the required `OriginalWilsonToBishopScalarWeld` record is NOT the proposed identity-map record: its actual fields include `map : RealAnalysisAxioms.ℝ → Real.ℝ` and `reflectsEquality : map(a)≃map(b) → a≡b`. Since the source real carrier is independently postulated and Bishop equality is a setoid, `map=id` and `refl` do not typecheck as a solution. Original scalar weld remains OPEN.
+
+### New source-written exact SU(N) Haar results
+
+1. `YMClaySUNOneLinkHaarConvolutionSourceExact.agda`: on the SAME `SUN.CertifiedSUNMatrixTheory` and `OneLinkProductHaar`/bilateral Haar source, prove `oneLinkConstantIntegral`, `leftOrderedTwoLinkHaarConvolution`, `rightOrderedTwoLinkHaarConvolution`, `twoLinkMultiplicationHaarFubini` and `twoLinkHaarBothOrdersSameSource`. In particular `∫_U∫_V F(UV) = ∫_W F(W)`. Source fields are existing one-link invariance, Haar Fubini/normalization and scalar linearity, not independently stipulated Haar convolution.
+2. `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda`: construct actual native group inverse cancellation `nativeInverseLeftProductCancellation`; define `effectiveOneLinkDensity(g,W) := ∫_U g(U,U⁻¹W)`; prove `weightedFiberChangeOfVariables`, `weightedFiberScalarFactor`, `nativeTwoLinkWeightedPushforwardIsEffectiveDensity`, `nativeTwoLinkEffectiveDensityPreservesPartition`. This is an exact all-test identity for an **arbitrary original two-link weight** (including correlated/interacting weights), not a product-weight assumption:
+`∫_U∫_V g(U,V)F(UV) = ∫_W [∫_U g(U,U⁻¹W)]F(W)`.
+The proof uses the repository's native SU(N) matrix group, the SAME Haar source, left invariance, Fubini, and its existing scalar scale law. It constructs a *local* effective density and exactly transports its partition. It does not claim the full 1024-bond original fine Wilson measure's pushforward has been disintegrated; that requires an explicit block-link coordinate partition and integration of all other fine links.
+3. `scripts/check_ym_two_link_haar_fiber_exact.py`: independently tested 512 exact-rational correlated weights and signed insertions over the noncommutative 8-element dihedral group, plus pure-Haar unit/indicator cases. Local result `PASS 512 ...`. This is a finite-group regression only: it does **not** construct SU(N) Haar, provide an Agda acceptance receipt or establish any cutoff-uniform Wilson RG rate.
+
+These sources are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`, and named in `scripts/check_ym_original_rg_p0_kernel.sh` for local Nix/Agda 2.9 compilation. No Agda kernel run is available in this execution environment.
+
+### Narrowest physical continuation from this exact result
+
+**P0.09.A (new exact native owner):** prove an explicit original `4^4×4` positive-bond coordinate codec grouping all selected (2^4×4) coarse bond holonomies into disjoint two-link product pairs, with remaining original fine bonds integrated out exactly. Need source-proved injection/disjointness, periodic orientation, and Fubini/one-link Haar consistency. Weld those coordinates to the existing `YMClaySUNNativeBlockedPositiveHolonomyExact.nativeSUNBlockLinks` (not a second blocking map).
+
+**P0.09.B:** apply the constructed local weighted fiber identity to the **actual** original original Wilson Gibbs density, yielding a selected full-block effective coarse density (or sufficient finite cylinder family) with exact partition transport, including every discarded/interior fine link.
+
+**P0.09.C:** derive and bound the *difference* between that true effective density and the independently selected bare/renormalized coarse Wilson density; quantify its norm/connected-polymer residual with a genuine volume- and UV-uniform estimate (and appropriate relevant/marginal operator counterterms). This is NOT provided by a local coordinate identity. The attachment's claimed `g_0²(a)(a/L)²` rate and massive `K_V^{-1}` estimate have no same-source constructive proof; do not assume a positive mass in order to prove D2.
+
+**D1/E1/D2/N1/G1:** remain OPEN. The attachment's `64^n` tree counting and abstract positivity of group Casimir are at most supporting lemmas; the actual Wilson polymer activity bound, projectively consistent interacting continuum Schwinger family, full same-H OS spectral support, surviving four-point non-Gaussian witness, and group-indexed constructions are still unpaid.
+
+
+### 2026-11-12 exact two-link positivity/normalization source completion
+
+The constructed `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda` now additionally provides:
+- `nativeEffectiveFiberDensityPreservesPositivity`: from `g(U,V)≥0` and the **existing** `OneLinkOrderedHaarAlgebra.onePositive`, derive `ρ_g(W)≥0` for every coarse SU(N) link, no independent coarse positivity assumption.
+- `nativeEffectiveFiberUnitWeightIsUnit`: for literal fine unit weight `g≡1`, prove `ρ_g(W)=1` using the original normalized one-link Haar integral.
+- `nativeUnitWeightBlockedNumeratorIsHaar`: for every one-link observable F, the actual native two-link unit-weight pushforward equals original coarse Haar integration `∫_U∫_V F(UV)=∫_W F(W)`.
+
+These are exact **finite two-link** Haar identities derived from the existing group/Haar authority; they do not prove the positivity/normalization or effective density of the full original `n=3` interacting Wilson block. The highest alpha physical leaf remains explicit original side-four bond-fiber disintegration and full interacting coarse effective-density residual control, not re-stating a local change of variables.
+
+**Verification:** source committed and read back, all named external imports/fields checked against current repository, balanced Agda parentheses/no newly declared postulates or holes. Nix/Agda not available to this runtime; NO Agda kernel acceptance. Independent noncommutative D4 exact rational regression passed 512/512 and must not be promoted into SU(N) or physical receipts.
+
+
+### 2026-11-12 R443→R445 all-n paired Haar cutoff theorem
+
+**New source:** `YMClaySUNFinitePairedHaarBlockPushforwardExact.agda`. From the genuinely existing `OneLinkProductHaar`, bilateral invariance, finite Fubini and source group multiplication, it constructs `PairVector n`, the literal native `blockPairs` map, the finite iterated `pairedIntegral` and its pointwise congruence. It then proves:
+
+- `finiteNativePairedBlockPreservesProductHaar`: for **every** finite `n` and every coarse `Vec Link n → ℝ` test, independent two-link Haar pairs push forward to the original `Haar.productIntegral` on `n` links, by a genuine inductive invocation of the already-proved local native SU(N) Haar convolution (not an n-link pushforward axiom).
+- `unusedHaarIntegralOfConstant`: any number of source-Haar unused fine links integrates out exactly, using induction and original normalization.
+- `finiteNativePairedBlockWithUnusedLinks`: combines the pair and residue integrals without a new discarded-link measure.
+- `sideFourSideTwoCandidatePairHaarWithInterior`: specializes to **64 coarse link pair products, 896 unused fine links**, reflecting the cardinalities of the original 4×4^4=1024 fine bonds and 4×2^4=64 coarse bonds. This is a precise candidate-coordinate theorem; it is **not** yet the original selected periodic-bond codec identity.
+
+The full source/Agda regression imports this module. `scripts/check_ym_finite_paired_haar_exact.py` independently passed 12 exact rational dihedral D4 checks for `n=0,1,2,3` and `m=0,1,2`; D4 is not SU(N) and an exact arithmetic test is not a kernel receipt.
+
+**Exact next source-based native R445 lemmas (still unpaid):**
+1. `originalR445NativeCoarseBondPairIndicesInjective`: original side-two periodic bond indices → disjoint ordered fine-bond pairs, preserving orientations and periodic wrap.
+2. `originalR445SelectedBondEnumerationPermutation64Pairs896Residual`: an explicit bijection/permutation from the actual original 1024-bond `Codec.decodeOriginalBonds 4` order to the 64 selected pairs and the 896 otherwise unused fine bonds, proving disjointness/completeness.
+3. `originalR445NativeBlockAgreesPairedCodec`: the actual source `SUNBlock.nativeSUNBlockLinks {m=1} {l=1}` agrees with `blockPairs` after the codec, for every original gauge configuration; do not replace original periodic holonomy by a new group product map.
+4. `originalR445PureHaarBlockedIsOriginalCoarseHaar`: combine this module, the already present `productHaarPermutationInvariant` and original `SUNPeriodicLinks` vector encode/decode proof with 1–3.
+5. `originalR445FullInteractingCoarseDensitySource`: transport the actual coupled original Wilson Gibbs density through this complete codec and all fiber integrals, preserving original partition and positivity.
+6. `originalR445PhysicalEffectiveBareResidualUVUniform`: prove a genuinely sourced ultraviolet-uniform bound on the resulting effective-versus-bare density/moment residual, including all relevant and marginal counterterm directions. This is the decisive nonconstant P0.09 physical estimate.
+
+P0.01–08 outstanding scalar/carrier and Agda obligations also remain. E1 continuum, D1 original connecting polymer, D2 same-H full OS gap, N1 interaction witness and G1 all compact simple physical group extension remain **OPEN**. Neither the attachment's assumed massive propagator nor a local Haar identity supplies them.
+
+
+## 2026-11-12 latest P0.A-E canonical finite source-weld landing
+
+See [`YMClayR445P0MaxCutSourceWeldLedger20261112.md`](YMClayR445P0MaxCutSourceWeldLedger20261112.md) for exact declarations and full fail-closed status. This round registered the original native parity P0.A/C modules in both `YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_original_rg_p0_kernel.sh`, and added:
+
+- `YMClayR445CanonicalBondPermutationCodecExact.agda`: canonical side-four original-bond reorder into 128 selected paired positive fine bonds and 896 canonical residual fine bonds, with list completeness, distinctness, source finite enumeration and inverse Vec reordering. The exact 1024-bond permutation was independently checked (all 1024 distinct; 20 roundtrips; SHA-256 `49b954c21ccd1649208074eb5096e5b6b63102313da773fe17e1268b67727ada`). Agda acceptance pending.
+- `YMClayR445FlatPairedHaarIntegrationExact.agda`: all-n finite SU(N) flat `2n+m`-link integration equivalence to source n pair/m residual Haar, and literal 1024-to-64 pure-Haar theorem on flat coordinates. Agda acceptance pending.
+- `YMClayR445OriginalPureHaarBlockWeldExact.agda`: conditional original 1024-bond to native 64-bond pure-Haar theorem. Its **two exact uninhabited finite welds** are the original canonical `LinkPermutation 1024` word and the literal native coarse bond output vector order.
+- `YMClayR445OriginalFullWilsonFiberDensityExact.agda`: constructive **candidate** effective coarse density using the exact original side-four interacting SU(N) Gibbs weight and all 64 relative + 896 interior Haar fiber links; source-written strict positivity and native pair recomposition. Equality with the actual original n=3 weighted pushforward still requires the **weighted full-lattice** P0.E measure/Fubini transport theorem; do not silently promote a definition to that equality.
+- `scripts/check_ym_r445_p0_maxcut_local.sh`: focused Nix/Agda 2.9 fail-closed local acceptance runner; not executed in this assistant runtime.
+- `scripts/check_ym_e1_harmonic_regrouping_countermodel.py`: independent exact rational falsification of the uploaded E1 claim that an `O(1/k)` step budget becomes a geometric Cauchy rate under dyadic grouping: 131071 adjacent checks; bounded rational non-Cauchy witness with alternating values at powers of two.
+
+**Highest-alpha still open:** P0.B kernel acceptance; P0.D explicit finite permutation word/native ordering; P0.E actual original weighted pushforward partition equality; uninhabited same-carrier Bishop real and arbitrary SU(N) trace authority; P0.F genuinely derived original UV-nonconstant RG residual; E1, D1, D2, N1, G1 physical producers. The attachment's `g0²(a_k)∼1/k` error is NOT summable and is not a continuum-existence certificate. No terminal Clay gate closed or local Agda receipt claimed.
+
+
+### 12 Nov latest original R445 source reconciliation: M.01/M.02/F18/F19 are preferred
+
+IMPORTANT correction to earlier subordinate P0.B–E descriptions: the authoritative original Wilson regression already imported `YMClayNativeClosedThreeEqualitiesCandidateExact` (literal original 1024-bond Bool/`refl` candidate), `YMClayNative1024ClosedReindexHaarConsequencesExact` (constructed original pair/spectator `LinkPermutation` word and every-vector equality), `YMClayNative1024WeightedWilsonReindexExact` (arbitrary-weight exact reindex of the **actual n=3 original interacting Wilson Gibbs density**), `YMClayNativePairsSpectatorsFubiniExact` (flat ↔ nested original 64-pair/896-spectator Haar), `YMClaySUNWeightedDisjointPairFibreReparamExact` (F18/F19 all-pair, arbitrary coupled spectator/fiber source), `YMClayOriginalWilsonF19ConcreteWeightExact` (same original physical weight and two marks), and `YMClayOriginalWilsonPhysicalF19PartitionExact`. Their full source path **already represents** stronger P0.D/E proof candidates than an uninhabited separate `OriginalR445PermutationAndNativeBlockWeld` record would suggest.
+
+This round added the direct composed `YMClayOriginalWilsonPhysicalF19PartitionExact.originalFinePhysicalPartitionEqualsActualEffectivePartition`, identifying the original canonical 1024-link interacting Wilson partition with the actual F19 coarse-effective Haar density, consuming original source-weighted sort and Fubini. Also repaired the `Torus.Empty` versus `Data.Empty.⊥` contradiction seam in the parallel P0.B codec; added arbitrary signed kernel-valued source `nativeTwoLinkKernelChangeOfVariables`, first-pair actual Wilson Gibbs marked/partition transport, and a typed finite Haar adjacent-swap schedule compiler. The newer finite helpers are **auxiliary**, not replacements for already-written original M.01/F19 theorems.
+
+The local max-cut runner now first checks the original selected 1024-label Boolean/source sort, original weighted reindex, F18/F19 and direct partition equality; only then the auxiliary P0.A–E modules and the full physical regression. It supports locally pinned `AGDA_BIN`, Agda on PATH or Nix (no CI/Docker), and first executes three supplementary exact Python controls. The latter were executed independently here: 256 arbitrary signed D4 kernels, 32 fully coupled two-interior-link signed densities, and 41,792 verified original adjacent swaps with 12 vector actions; none is SU(N) Agda acceptance.
+
+**Exact open boundary after source reconciliation:** local pinned Agda 2.9 acceptance and transitive source authority for the actual M.01→M.02→F18/F19→original partition/mark closure; native coarse Wilson observable-identification across the canonical sorted pair target and the original reflected/physical family; selected original/Bishop scalar field weld; original arbitrary-SU(N) trace carrier. P0.F is still the **genuinely new physical estimate** (uniform original effective-minus-renormalized-bare Wilson RG contraction). E1/D1/D2/N1/G1 terminal Clay producer proofs remain OPEN. The separate Bałaban T4 PR #1498 has source-written four-orbit/refined-interval folds but not a constructed literal physical Wilson/ghost/Haar scalar integrand or certified physical quadratures.
+
+
+### 13 November: constructed *original physical* F19 strict positivity (source-written)
+
+**New original-source proof in `YMClayOriginalWilsonPhysicalF19PartitionExact.agda`**, not an independent effective-density oracle. The module now constructs five declarations, with the **same** side-four SU(N) interacting Wilson/Gibbs weight, the actual native M.01/M.02 1024-bond sorter and the original 64-pair/896-spectator F19 effective density:
+
+1. `originalSortedWilsonPhysicalWeightPointwisePositive`: pointwise `exp(-S_Wilson)>0` from the existing `StrictPositiveRealExponential.expPositive`.
+2. `originalPhysical896SpectatorMarginalStrictlyPositive`: integrates **all 896 physically coupled spectator bonds** with the existing source `OneLinkStrictlyPositiveIntegration`, retaining Wilson interactions.
+3. `originalFullInteractingEffectiveDensityStrictlyPositive`: strict positivity of the exact original coarse effective density at every native 64-block configuration via F18/F19 original pair-fibre integration.
+4. `originalFullInteractingEffectivePartitionStrictlyPositive`: strict positivity of the same effective coarse partition.
+5. `originalCanonicalFineWilsonPartitionStrictlyPositiveFromF19`: strict positivity of the original UNSORTED 1024-bond Wilson partition by transporting the previously source-written same-source F19 partition equality.
+
+**Status:** source-written, GitHub readback verified, **local pinned Agda 2.9 kernel OPEN**. These are genuinely original physical finite-object instantiations, though they use the already explicit `OneLinkStrictlyPositiveIntegration` and independently postulated `RealAnalysisAxioms.ℝ` rather than constructing Borel Haar or the scalar carrier. The proof does not supply P0.F effective-vs-bare Wilson contraction, a physical UV/IR uniform bound, continuum E1, decay D1, spectrum D2, N1, G1, or #1498 original Wilson/ghost/Haar perturbative beta integrals.
+
+**Trust/runner repair:** `check_ym_r445_p0_maxcut_local.sh` and `check_ym_original_rg_p0_kernel.sh` now explicitly set `AGDA_BIN` from PATH before calling the original shared runner, preventing an unwanted implicit Nix build; Nix remains a supported fallback. The latter now targets the ORIGINAL M.01/M.02/F18/F19 source before dependent quantitative RG modules. `check_ym_bishop_partition_maxcut_local.sh` separately runs `--safe` on the constructed Bishop-only root, then ordinary typechecking of the original Wilson real-socket modules with their transitive legacy postulate boundary disclosed. Removed misleading `--safe` annotations in `YMClayFiniteProductHaarOrderedAlgebraExact.agda` and `CMP119AntigravityRealGibbsDensityPositiveExact.agda`, both of which import explicitly postulated `RealAnalysisAxioms`. **No local Agda 2.9 receipt obtained in this assistant runtime.**
+
+**Exact next mathematical producer:** prove source-dependent all-volume, UV/IR-uniform smallness of `X(F)` (equivalently three genuine normalized moment differences) for actual nonconstant Wilson tests `F,G,FG` with a scale summability sufficient to compare the effective Gibbs law against the distinct bare coarse Wilson law. The exact F19 partition identity and its strictly positive normalizer do not imply this.
+
+
+### 13 November P0.E strengthened: actual physical two-source normalizer equals original canonical Z
+
+The same **`YMClayOriginalWilsonPhysicalF19PartitionExact.agda`** now also contains a nested original `OriginalPhysicalF19TwoMarked` module with five exact source-written consumers of the previously implemented `F19Physical.physicalWeight` and `actualF19WilsonTwoMarkTheorem`:
+
+- `originalPhysicalTwoMarkedAtZeroIsOne`: pointwise exact `(1+0·F)(1+0·G)=1` on the actual 64-block test carrier, using existing real ring laws.
+- `originalPhysicalF19EffectiveMarkedZeroIsPartition`: the actual source F19 effective two-marked numerator at `s=t=0` is the previously constructed physical 64-block effective partition, using original finite-Haar extensionality.
+- `originalPhysicalF19FineMarkedZeroIsCanonicalPartition`: exact **same original canonical unsorted 1024-link** Wilson Gibbs partition equality `Z_aff(0,0) = Z_original fine`, combining the source F19 two-mark theorem with original M.01/M.02/F19 partition transport.
+- `originalPhysicalF19FineMarkedNormalizerStrictlyPositive`: the same original source two-marked denominator is strictly positive under the already explicit original strict Haar and exp-positive hypotheses.
+- `originalPhysicalF19TwoMarksNormalizeByCanonicalPartition`: the *entire* physical fine/effective two-source generating expression is identical when both are normalized by the original canonical Wilson fine partition, without a second `Z` oracle or physical RG moment identification.
+
+**Scope:** the tests are actual native original F19 coarse-block functions, and the interacting fine weight is the same original SU(N) Wilson Gibbs density. This advances the finite native physical **normalizer and two-source source-identification**, not the distinct remaining marked physical Wilson word/loop observable identification into that carrier, the missing positive division semantic interpretation, or the cutoff-uniform `P0.F` original effective-minus-bare physical moment errors.
+
+**Verification:** all five new declarations are only **SOURCE-WRITTEN / pinned Agda 2.9 kernel OPEN**; in particular `RealAnalysisAxioms` remains an explicitly postulated scalar boundary. No CI result or finite Python witness is used as kernel authority.
+
+
+## 2026-11-13 P0.F generated-multiword interaction cut
+
+Source-written negative control (NOT original SU(N), NOT a Clay theorem):
+`YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact.agda` starts from an actual shared-interior finite Z₂-character weight `(1+t*x*z)(1+t*y*z)` and integrates the same interior `z` once. At `t=1/2` it derives `rho_eff=1+xy/4`, exactly normalized positive fine/effective/bare partitions, two vanishing single moments, induced pair moment/covariance `1/4`, and non-factorizability of the 2×2 effective coefficient matrix (determinant `1`). The proof source is wired to `YMClayOriginalWilsonPhysicalRegression` and `check_ym_original_rg_p0_kernel.sh`. An independent exact rational regression ran 4096 signed arbitrary-observable controls plus eight couplings; `check_ym_r445_p0_maxcut_local.sh` runs it. **Source-written, Agda kernel OPEN.**
+
+This demonstrates why neither F19 exact weighted disintegration nor equality of canonical fine/effective partitions can substitute for the nonconstant (FG) error. The existing `YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact` already handles algebraic error propagation; the highest-alpha P0.F input is a true Wilson-specific *uniform* estimate on all three physical moment differences, in the correct renormalized effective-operator basis. Do not assume the bare plaquette-only family is closed under blocking. Explicitly include generated relevant/marginal operators and physical running couplings, all-volume/test-support constants, correct cutoff geometry, and a summable RG scale dependence. The original scalar/`SUNMatrixRealTrace` authority and actual E1/D1/D2/N1/G1 proof remain separate open gates.
+
+
+## 2026-11-13 additional maximum cut: direct canonical MARKED physical F19 pushforward
+
+### Source-written exact proof producers on PR #1444
+
+- `YMClayOriginalWilsonCanonicalMarkedReindexExact.agda`:
+  `inverseProgramTwice` and `forwardAfterInverse` prove both directions for the **actual original** adjacent-swap permutation (not a chosen inverse map);
+  `originalWeightedMarkedReindexExact` transports the entire original
+  interacting Wilson density times **any sorted-carrier marked observable**;
+  `originalCanonicalMarkedNormalizedIsSorted` transports its numerator and
+  the original canonical Wilson partition as a **same-Z normalized equality**.
+- `YMClayOriginalWilsonPairSpectatorDecoderExact.agda`:
+  `splitJoinedOriginalExactly`, `joinedSplitOriginalExactly` and
+  `sourceSideFourSplitJoin` establish the actual two-sided vector
+  isomorphism for 64 ordered original pairs and 896 retained spectators
+  (2×64+896=1,024), with no factorization assumption.
+- `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda`:
+  `sourceSortedBlockIsOriginalPairs` identifies source sorted-pair
+  readout with the **same** 64 non-Abelian block holonomies;
+  `originalFineCanonicalBlockedNumeratorEqualsPhysicalEffective`
+  composes original native marked reindex, count transport, exact source
+  Fubini and existing actual F19 weighted disintegration to identify the
+  **original unsorted 1,024-link Wilson** marked numerator with its
+  genuine physical 64-block effective-density numerator **for arbitrary
+  coarse observables**;
+  `originalCanonicalBlockedNormalizedEqualsPhysicalEffective`
+  composes that with `originalFinePhysicalPartitionEqualsActualEffectivePartition`
+  to identify normalized marked expectations using exactly the same
+  original Wilson partition, no synthetic coarse partition.
+- `YMClayOriginalWilsonEffectiveBetaFiniteDifferenceExact.agda`:
+  original partition equality parameterized by the physical Wilson
+  coupling `beta` yields `originalCouplingFirstFiniteDifferenceExact`
+  and `originalCouplingSecondFiniteDifferenceExact` for *all*
+  coupling arguments, no differentiation-under-Haar premise. These are
+  **finite Wilson coupling differences**, not Bałaban's physical mixed
+  external-momentum tensor two-jet / continuum beta function.
+- `YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda`:
+  an explicit positive two-point finite Haar model has
+  `Z_bare=Z_eff=1`, with a persistent density discrepancy `1/2`
+  and a persistent **normalized marked moment discrepancy `1/4`**
+  for bounded nonconstant F=G=FG, at every cutoff. Thus neither
+  the original P0.E source partition equality NOR even same-Z
+  normalized observational transport establishes effective-vs-*bare*
+  RG closeness P0.F. The model is a logical countercontrol, not a
+  surrogate of the genuine 1,024-bond Wilson law.
+- No duplicate trace authority was retained: existing
+  `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact` already
+  proves the accurate original RealAnalysisAxioms scalar trace obstruction.
+  Cyclicity alone cannot yield the arbitrary SU(N) unitary trace bound.
+
+### Verification
+
+**All new Agda declarations are SOURCE-WRITTEN and pushed, NOT
+kernel-accepted in this session.** The Agda/Nix executable is unavailable
+here; no CI was run. Both fail-closed pinned local referees now explicitly
+include the new original source theorem roots:
+`scripts/check_ym_r445_p0_maxcut_local.sh` and
+`scripts/check_ym_original_rg_p0_kernel.sh`.
+The independent `scripts/check_ym_original_marked_maxcut_exact.py` uses
+exact Fraction arithmetic on a noncommutative S3 five-link example
+(2 ordered pairs + a spectator), four marked two-source conditions,
+strictly positive fully coupled weights and 7,776 configurations
+per side; the independent Python execution produced equal sums
+and common positive normalizer. This is **NOT** SU(N) physical integration
+nor Agda typechecking.
+
+### Remaining maximum-cut mathematical gates after this source lift
+
+1. **Kernel admission:** Agda 2.9 first-error check, repair, acceptance for
+   M.01/M.02/F18/F19 and every new canonical 64-pair marked consumer.
+   Source code and Python arithmetic alone are not receipts.
+2. **Original scalar:** inhabit the already-written
+   `OriginalWilsonToBishopScalarWeld` on the *actual*
+   `RealAnalysisAxioms.ℝ` Wilson partition/expectation carrier, with
+   faithful operations/order/division/reflectsEquality. Existing
+   `YMClayP0BishopRealCarrierInstancesExact` proves Bishop algebra but
+   does NOT identify the postulated source real with that carrier.
+3. **Arbitrary SU(N) trace:** prove the source original
+   matrix normalized-real-trace unitary magnitude ≤1 from a
+   genuine finite complex matrix entry/norm and `Tr(I)=N`
+   authority, then transport it to original plaquette words.
+   Source cyclicity alone is mathematically insufficient.
+4. **P0.F:** genuine *same original interacting source* all-volume,
+   UV/IR-uniform polymer/RG physical estimate bounding the actual
+   normalized F,G,FG covariance/cross numerators; source-bare Wilson
+   effective interaction comparison requires a true scale-summable rate,
+   not partition equality or a generic F19 change of variables.
+5. **E1/D1/D2/N1/G1:** interacting cutoff-continuum consistency,
+   original rooted-shell covariance decay, same E1 OS Hamiltonian with
+   positive full spectrum gap, nontrivial interacting witness, and all
+   required compact simple groups all remain OPEN.
+6. **Separate PR #1498:** the perturbative Bałaban mixed-momentum
+   Wilson/ghost/Haar scalar, physical Fourier sine/shifted denominator,
+   Ward/tensor-to-beta weld, real four integral/Hessian/error certificates
+   remain OPEN; original finite Haar blocking does not replace them.
+
+
+### 13 November: attachment seven-gate "constructively closed" claim rejected on original source
+
+**Controlling exact audit:** `Docs/physics/YMClaySevenGateAttachmentClaimAudit20261113.md`.
+
+The latest #1444 source has already paid even MORE P0.E than an earlier inventory: `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` proves full same-source **original canonical 1024-link blocked observable -> original F19 effective-density normalized moment** for arbitrary selected 64-block tests, with original spectator-weighted source and same original Z. Do NOT re-open this as a merely missing independent source carrier. The remaining source-specific marking issue is the selected Wilson **word/loop family and physical derivative/OS identification**, which is distinct from arbitrary 64-block tests.
+
+**Constructive trace audit added:** `YMClaySUNTraceCyclicityDoesNotImplyRangeExact` explicitly constructs the actual source `SUNMatrixRealTrace` record on the certified SUN theory with `Scalar=Nat` and constant two, then proves that an alleged universal unit-range theorem contradicts the native identity element. It complements existing `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact` (real constant trace => allegedly every real is bounded). It is not a physical trace range certificate and does not establish `|Re Tr(U)/N|≤1` for the **genuine** matrix trace: original `CertifiedSUNMatrixTheory` has no indexed entries/diagonal sum to instantiate Cauchy–Schwarz.
+
+**Strong E1 blocker:** strengthened existing `scripts/check_ym_e1_harmonic_regrouping_countermodel.py`; exact finite 131071 step differences `≤2/k`, all dyadic harmonic blocks `≥1/2`, and **convergent `4^j` subsequence identically zero with intermediate `2·4^j` values one**. The latter refutes even a sparse-convergence inference, not the actual Wilson family. One-loop `g0²(a_k)∼1/k` does NOT imply `Σ ε(k)<∞`; the attachment's asserted geometric grouped E1 Cauchy rate has no physical producer.
+
+**All claimed E1/D1/D2/N1/G1 closures still OPEN.** The specific source RG P0.F errors require actual nonconstant tests, UV/volume-uniform physical small/large-field bounds and summable/cancellation scale control, which neither F19 Haar equality nor a perturbative beta coefficient supplies. D1's original activity `m1≥log64+2` is a missing **input**, not a result of rewriting its geometric tail. D2 needs the actual E1 continuum same-H OS core and a common nonvacuum physical-time exponent. N1's four-point coefficient/remainder is unproved for physical nonabelian gauge invariants. G1's dual Coxeter positivity does not build measures/gaps for all groups. The Bałaban #1498 physical Wilson+FP/Haar Ward/one-loop quadrature source remains a parallel 12-gate P0, not a consequence of F19.
+
+**Exact-head verification remains OPEN.** The P0 local referee now includes the source-specific Nat cyclicity negative control and the exact 131071-step sparse-subsequence regression. No Agda 2.9 local receipt, transitive trust audit, positive normalized Borel Haar construction or genuine P0.F physical estimate was established this round.
+
+
+### 13 November / full Killing-Casimir-reuse, real E1/R445 and N1 witness correction
+
+**Controlling researched source audit**: `Docs/physics/YMClayKillingCasimirGeometricFullReuseAndOriginalE1Weld20261113.md` (31,762 exact #1444 GitHub tree paths reviewed; relevant native definitions fetched). Unlike older gate lists, it explicitly credits:
+- `CompactSimpleClassificationAdjointCasimirExact.classificationStrictCasimirCarrier` and `BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo`, `classificationGroupUniversalCoefficientAtLeastElevenTwelfths`: genuine **all-family** (C_A\ge2), (b_G\ge11/12) rational theorems, NOT to be reproved. `YangMillsCompactSimpleCasimirDynkinTraceExact` pays the finite representation trace/Casimir balance algebra.
+- `CompactSimpleBiInvariantRicciReserveExact` and `CompactLieHeatDoobRicciReserveDebtExact`: actual Killing-metric positive Ricci reserve recorded at standard-imported Riemannian boundary; same-metric **physical** heat/Doob and uniform cumulative negative Hessian debt still open. The unrelated `YMKillingBoundarySelfAdjointnessTheoremBoundary` is a different *YM-A boundary flux* lane.
+- `BalabanP33PhysicalCombesThomasPromotionExact`/`...SchurExact`: real physical 3072-coordinate SU2 finite CT Schur/tilt algebra with source-dependent stencil, coercivity and bound premises, not continuum mass gap.
+- `BalabanContinuumScaleLocalObservableCauchyExact`, `BalabanClayT2UrsellCauchyExact`, `BalabanSharedMarkedAnalyticShellExact`: **the geometric Cauchy/tail proofs and three differentiated mark grades are already present**. The original physical Wilson step-increment/shell activity is still the analytic leaf.
+- `YangMillsActualGroupQuantitativeConstructorRound569Exact` / `YangMillsActualGroupFiveBlockConstructorRound570Exact` / `YangMillsActualGroupSourceFirstCompleteRound571Exact`: actual compact-group operations and five-block *alignment* compilers are already written; remaining group-specific **real physical source estimates** include local quantitative group data and each charge-relative test.
+- `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` remains a PAID same-original 1024-link blocked-observable source equality.
+
+**New original source-positive weld (kernel still pending):** `YMClayE1OriginalR445ThreeMomentCutoffTransportExact`. Its seven proof declarations plus native three-field record identify ACTUAL E1 original n=3 blocked versus n=1 bare Wilson F,G,FG expectation discrepancies with the existing original R445 effective-versus-bare residual. The final `originalE1CovarianceErrorFromThreePhysicalCutoffMoments` invokes original R445 quantitative error telescope on precisely those original E1 physical inputs. Source rewritten rather than arbitrary abstract cutoffs/independent measures; no physical error smallness asserted.
+
+**New N1 source-validity control (kernel still pending):** `YMClayN1GaussianNonlinearFourthCumulantNoGoExact`. Exact rational Gaussian Wick inputs show `κ4(X)=0` but `κ4(X²)=48`: nonzero connected FOURTH cumulant of a **nonlinear Wilson-loop-like observable** cannot by itself distinguish a Gaussian underlying field. N1 needs an actual continuum gauge-invariant generating-functional/non-free witness or an appropriate correctly null Gaussian comparison.
+
+**Independent exact regression:** `scripts/check_ym_source_killing_geometric_n1_20261113.py` (270 finite (4^{-k}) tail identities, 4101 Lie family Casimir sample values, Gaussian 0/48) PASS. The new modules and this script are included in original local-only R445 and original RG kernel-focused referees. No pinned Agda 2.9 available in this execution container; source-written is not kernel accepted.
+
+**Attached proposed physical geometric estimate NOT proved:** a Wilson loop's formal `a_k²/R²=4^-k` cannot be accepted as its actual interacting source scale-step RG bound. The exact `Σ_{k=n}∞4^-k=(4/3)4^-n` also corrects the attachment's `(1/3)4^-n`. Physical `P0.F` scale-local numerator/Haar/covariance estimate, E1/D1, original same-H D2, N1 and all-group G1 remain OPEN. Existing `BalabanClayHighestAlphaRound83SevenAnalyticLemmaExact` is the precise seven physical L1–L7 source cut, with no missing plain Cauchy or (C_A>0) sublemma.

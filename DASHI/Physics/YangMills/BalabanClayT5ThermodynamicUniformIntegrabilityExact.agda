@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact where
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -321,6 +321,13 @@ record UniformIntegrabilityWitness
 
 open UniformIntegrabilityWitness public
 
+-- Natural power of the radius, shared by every polynomial moment consumer.
+scalarNatPower : ∀ {Scalar : Set} → Scalar → (Scalar → Scalar → Scalar) →
+  Scalar → Nat → Scalar
+scalarNatPower one multiply x zero = one
+scalarNatPower one multiply x (suc n) =
+  multiply x (scalarNatPower one multiply x n)
+
 record ExponentialMomentProducer
     {Measure Observable Scalar : Set}
     (operations : Gram.PhysicalOSOperations Measure Observable Scalar)
@@ -353,7 +360,8 @@ record ExponentialMomentProducer
         (Gram.expectation operations (measureSequence cutoff)
           (powerObservable degree (absoluteObservable observable)))
         (multiply (factorial degree)
-          (divide (exponentialMomentBound observable) lambda))
+          (divide (exponentialMomentBound observable)
+            (scalarNatPower one multiply lambda degree)))
 
     reflectedProductYoungBound : ∀ left right → Set
 
@@ -384,7 +392,7 @@ uniformEvenMomentBound :
       (powerObservable dataSet degree (absoluteObservable dataSet observable)))
     (multiply dataSet (factorial dataSet degree)
       (divide dataSet (exponentialMomentBound dataSet observable)
-        (lambda dataSet)))
+        (scalarNatPower (one dataSet) (multiply dataSet) (lambda dataSet) degree)))
 uniformEvenMomentBound = singleScaleInsertionMomentBound
 
 uniformExponentialMomentBound = exponentialMomentUniformBound
@@ -545,7 +553,8 @@ physicalMeasureConvergenceDataFromProducer dataSet = record
           (multiply (moments dataSet) (factorial (moments dataSet) degree)
             (divide (moments dataSet)
               (exponentialMomentBound (moments dataSet) observable)
-              (lambda (moments dataSet))))
+              (scalarNatPower (one (moments dataSet)) (multiply (moments dataSet))
+                (lambda (moments dataSet)) degree))))
   ; uniformIntegrabilityOfReflectedProducts =
       physicalReflectedProductUniformlyIntegrable dataSet
   ; weakConvergencePlusUniformIntegrability =

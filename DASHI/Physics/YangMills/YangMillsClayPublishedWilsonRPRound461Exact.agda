@@ -47,15 +47,16 @@ record PublishedWilsonRPApplication
     (algebra : OS2.CylinderOSAlgebra (Configuration → ℝ))
     : Set₂ where
   field
+    -- Each cutoff has its own literal Wilson measure and RP authority.
     published :
-      Published.WilsonReflectionPositivityData
+      ∀ cutoff → Published.WilsonReflectionPositivityData
         (Configuration → ℝ) ℝ
 
     -- The source theorem's scalar positivity is literally the real order used
     -- by the CMP119 finite expectation.
     publishedNonnegativeIsRealNonnegative :
-      ∀ value →
-      Published.Nonnegative published value →
+      ∀ cutoff value →
+      Published.Nonnegative (published cutoff) value →
       0ℝ ≤ℝ value
 
     -- Each finite reflected Gram family is represented by the one
@@ -68,12 +69,12 @@ record PublishedWilsonRPApplication
 
     publishedObservableGaugeInvariant :
       ∀ cutoff testFamily →
-      Published.GaugeInvariant published
+      Published.GaugeInvariant (published cutoff)
         (publishedObservable cutoff testFamily)
 
     publishedObservablePositiveTime :
       ∀ cutoff testFamily →
-      Published.PositiveTimeObservable published
+      Published.PositiveTimeObservable (published cutoff)
         (publishedObservable cutoff testFamily)
 
     reflectedGramIsPublishedExpectation :
@@ -84,7 +85,7 @@ record PublishedWilsonRPApplication
           Limit.finiteExpectation family cutoff observable)
         testFamily
       ≡
-      Published.reflectedProductExpectation published
+      Published.reflectedProductExpectation (published cutoff)
         (publishedObservable cutoff testFamily)
 
 open PublishedWilsonRPApplication public
@@ -108,9 +109,9 @@ finiteReflectionPositiveFromPublishedWilson :
       testFamily
 finiteReflectionPositiveFromPublishedWilson application cutoff testFamily
   rewrite reflectedGramIsPublishedExpectation application cutoff testFamily =
-  publishedNonnegativeIsRealNonnegative application _
+  publishedNonnegativeIsRealNonnegative application cutoff _
     (Published.wilsonPositivityAtAnySeparationParity
-      (published application)
+      (published application cutoff)
       Published.evenSitePlane
       (publishedObservable application cutoff testFamily)
       (publishedObservableGaugeInvariant application cutoff testFamily)

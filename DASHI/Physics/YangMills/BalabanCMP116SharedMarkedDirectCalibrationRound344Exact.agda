@@ -360,3 +360,106 @@ round344SelectedDistanceTimeLevel = conditional
 
 round344HessianConstantAtMostOneLevel : ProofLevel
 round344HessianConstantAtMostOneLevel = conditional
+
+------------------------------------------------------------------------
+-- Natural-prefactor variant: construct the existing R342 source directly
+-- from the same shared shell, without requiring C_H <= 1. The selected
+-- spectrum must use the actual shell amplitude, not a substituted one.
+------------------------------------------------------------------------
+
+module _
+    {Measure TestObservable SpectralObservable Energy : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests}
+    (control : Shared.SharedMarkedAnalyticShellControl
+      (R318.Scale base) (R318.Volume base) (R318.Root base))
+    (rootAt : Nat → R318.SourceDirection base →
+      R318.SourceDirection base → R318.Root base)
+    (distanceAt : R318.SourceDirection base →
+      R318.SourceDirection base → Nat)
+  where
+
+  naturalSharedEnvelope : Nat → R318.Root base → Nat → ℚ
+  naturalSharedEnvelope cutoff root depth =
+    Shared.markedAnalyticShell control Shared.hessianMark
+      (R318.scaleOf base cutoff) (R318.volumeOf base cutoff) root depth
+
+  naturalPrefactorR342 :
+    (localization : ∀ cutoff observable time →
+      let
+        index = R281.indexFor spectrumSource observable time
+        left = R278.left tests index
+        right = R278.right tests index
+        leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
+        rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
+      in
+      Common.SourceCoordinateInside
+        (R114.canonicalCMP116CommonDomain
+          {R318.Scale base} {R318.Volume base} demands)
+        (R318.scaleOf base cutoff) (R318.volumeOf base cutoff) →
+      R278.magnitude extension
+        (Cumulant.literalMixedSecondLogDerivative (R318.meaning base)
+          leftJ rightJ cutoff)
+      ≤ naturalSharedEnvelope cutoff (rootAt cutoff leftJ rightJ)
+          (distanceAt leftJ rightJ)) →
+    (distanceTime : ∀ observable time →
+      let
+        index = R281.indexFor spectrumSource observable time
+        leftJ = Cumulant.sourceDirectionOf (R318.meaning base)
+          (R278.left tests index)
+        rightJ = Cumulant.sourceDirectionOf (R318.meaning base)
+          (R278.right tests index)
+      in distanceAt leftJ rightJ ≡ time) →
+    (envelopeMeaning : ∀ observable time →
+      R281.clusteringEnvelope spectrumSource observable time ≡
+        Geometric.markedBaseEnergy control Shared.hessianMark
+          * Geo.halfPower time) →
+    (upperClosed : (sequence : Nat → ℚ) (target upper : ℚ) →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) → target ≤ upper) →
+    R342.LiteralTrajectoryCMP116Source base demands tests spectrumSource
+  naturalPrefactorR342 localization distanceTime envelopeMeaning upperClosed =
+    record
+    { R342.LiteralTrajectoryCMP116Source.sourceRoot = rootAt
+    ; R342.LiteralTrajectoryCMP116Source.sourceDistance = distanceAt
+    ; R342.LiteralTrajectoryCMP116Source.sourceEnvelope = naturalSharedEnvelope
+    ; R342.LiteralTrajectoryCMP116Source.SourceEnvelopeHasPositiveExponentialTreeDecay =
+        ∀ cutoff root depth →
+          naturalSharedEnvelope cutoff root depth ≤
+          Geometric.markedBaseEnergy control Shared.hessianMark
+            * Geo.halfPower depth
+    ; R342.LiteralTrajectoryCMP116Source.sourceEnvelopeHasPositiveExponentialTreeDecay =
+        λ cutoff root depth →
+          Geometric.markedAnalyticShellGeometricHalf control Shared.hessianMark
+            (R318.scaleOf base cutoff) (R318.volumeOf base cutoff) root depth
+    ; R342.LiteralTrajectoryCMP116Source.literalSelectedDifferentiatedLocalization =
+        localization
+    ; R342.LiteralTrajectoryCMP116Source.sourceEnvelopeBelowSpectrumEnvelope =
+        λ cutoff observable time →
+          let
+            index = R281.indexFor spectrumSource observable time
+            leftJ = Cumulant.sourceDirectionOf (R318.meaning base)
+              (R278.left tests index)
+            rightJ = Cumulant.sourceDirectionOf (R318.meaning base)
+              (R278.right tests index)
+            root = rootAt cutoff leftJ rightJ
+            depth = distanceAt leftJ rightJ
+            bound = Geometric.markedAnalyticShellGeometricHalf
+              control Shared.hessianMark (R318.scaleOf base cutoff)
+              (R318.volumeOf base cutoff) root depth
+          in
+          subst (λ upper → naturalSharedEnvelope cutoff root depth ≤ upper)
+            (sym (envelopeMeaning observable time))
+            (subst (λ d → naturalSharedEnvelope cutoff root depth ≤
+              Geometric.markedBaseEnergy control Shared.hessianMark
+                * Geo.halfPower d)
+              (distanceTime observable time) bound)
+    ; R342.LiteralTrajectoryCMP116Source.rationalUpperClosedUnderSelectedLimit =
+        upperClosed
+    }

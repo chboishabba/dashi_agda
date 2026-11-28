@@ -37,7 +37,7 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact wher
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _<_; _/_; NonNegative; Positive; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -231,3 +231,64 @@ rationalQuaternionScalarPartBoundLevel = machineChecked
 
 rationalQuaternionFiniteTriangleSquaredLevel : ProofLevel
 rationalQuaternionFiniteTriangleSquaredLevel = machineChecked
+
+------------------------------------------------------------------------
+-- Weighted square triangle for literal quaternion chord bounds.
+-- For positive rational radii a,b:
+-- ab N(u+v) <= (a+b)(b N(u)+a N(v)).
+-- The difference is N(bu-av), so no square-root authority or rounded
+-- operator norm is required.
+------------------------------------------------------------------------
+
+scaleQuaternion : ℚ → Q.RationalQuaternion → Q.RationalQuaternion
+scaleQuaternion a (Q.quat x y z w) =
+  Q.quat (a * x) (a * y) (a * z) (a * w)
+
+weightedDifferenceQuaternion : ℚ → ℚ →
+  Q.RationalQuaternion → Q.RationalQuaternion → Q.RationalQuaternion
+weightedDifferenceQuaternion a b u v =
+  scaleQuaternion b u Q.+q Q.negQ (scaleQuaternion a v)
+
+weightedNormGapExact : ∀ a b u v →
+  normSq (weightedDifferenceQuaternion a b u v)
+  ≡ (a + b) * (b * normSq u + a * normSq v)
+      - (a * b) * normSq (u Q.+q v)
+weightedNormGapExact a b (Q.quat x y z w) (Q.quat p q r t) =
+  ℚRing.solve-∀ a b x y z w p q r t
+
+weightedNormAddBound : ∀ a b u v →
+  (a * b) * normSq (u Q.+q v)
+  ≤ (a + b) * (b * normSq u + a * normSq v)
+weightedNormAddBound a b u v =
+  nonnegativeDifferenceImpliesBelow
+    (subst (λ gap → 0ℚ ≤ gap)
+      (weightedNormGapExact a b u v)
+      (normSqNonnegative (weightedDifferenceQuaternion a b u v)))
+
+radiusTriangleSquared :
+  ∀ a b u v →
+  0ℚ < a → 0ℚ < b →
+  normSq u ≤ a * a → normSq v ≤ b * b →
+  normSq (u Q.+q v) ≤ (a + b) * (a + b)
+radiusTriangleSquared a b u v ap bp ub vb =
+  let
+    instance
+      aPositive : Positive a
+      aPositive = positive ap
+      bPositive : Positive b
+      bPositive = positive bp
+      abPositive : Positive (a * b)
+      abPositive = positive (ℚP.positive⁻¹ (a * b))
+    an = ℚP.<⇒≤ ap
+    bn = ℚP.<⇒≤ bp
+    inner = ℚP.+-mono-≤
+      (scaleNonnegative b bn ub)
+      (scaleNonnegative a an vb)
+    lifted = scaleNonnegative (a + b) (FiniteL2.addNonnegative an bn) inner
+    combined = ℚP.≤-trans (weightedNormAddBound a b u v) lifted
+    rhs : (a + b) * (b * (a * a) + a * (b * b))
+      ≡ (a * b) * ((a + b) * (a + b))
+    rhs = ℚRing.solve-∀ a b
+  in ℚP.*-cancelˡ-≤-pos (a * b)
+       (subst (λ upper → (a * b) * normSq (u Q.+q v) ≤ upper)
+         rhs combined)
