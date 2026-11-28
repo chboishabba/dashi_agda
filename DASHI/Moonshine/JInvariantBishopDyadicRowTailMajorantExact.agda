@@ -4,7 +4,8 @@ module DASHI.Moonshine.JInvariantBishopDyadicRowTailMajorantExact where
 -- An integer-tail cell supplies u >= 0, theta = +/-u, u <= 2,
 -- and h*j <= 2*u/3. The lower bound is then rho0*h²*j².
 -- These are geometric range inputs, not analytic domination assumptions.
-open import Data.Integer.Base using (+_)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Integer.Base using (ℤ; +_)
 open import Data.Rational.Unnormalised as Q using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
@@ -13,6 +14,17 @@ open R using (ℝ; _≃_; _≤_; _<_; _+_; _-_; _*_; _⋆; ∣_∣)
 import RealProperties as P
 import Data.Rational.Unnormalised.Properties as QP
 import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflect
+import DASHI.Foundations.BishopInverseSquareProductExact as InvProduct
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as InvSq
+import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as BaselRead
+import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as N
+import DASHI.Foundations.BishopNatRealPositiveExact as NP
+import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as One
+import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneLatticeDenominatorExact as U
+import DASHI.Moonshine.JInvariantBishopLatticeEisensteinKernelExact as K
+import DASHI.Moonshine.JInvariantBishopCenteredDyadicRowExact as Chart
+import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact as Pi
 import DASHI.Analysis.BishopComplexCommutativeSemiringLawsExact as Laws
 import Inverse as I
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
@@ -362,3 +374,81 @@ module TailCell (q : BishopComplex) (nz : Rec.BishopComplexNonzero (Row.gapMinus
           (P.+-mono-≤ (P.+-mono-≤ P.≤-refl (P.*-monoˡ-≤-nonNeg b2Upper thirtyNN))
             (P.*-monoˡ-≤-nonNeg b3Upper oneTwentyNN))
     in P.≤-trans r le , P.≤-trans i le
+
+-- Pay the inverse-square majorant using the actual lower gap, not a
+-- caller-supplied abstract tail function. The same b is used at both
+-- weights and is independent of the dyadic depth.
+module CrossFromGap (q : BishopComplex) (nz : Rec.BishopComplexNonzero (Row.gapMinus q))
+  (h rho0 J : ℝ) (hp : R._<_ R.0ℝ h) (hOne : h ≤ R.1ℝ)
+  (rp : R._<_ R.0ℝ rho0) (jp : R._<_ R.0ℝ J) (jOne : R.1ℝ ≤ J)
+  (qNorm : Norm.normSqC q ≤ R.1ℝ)
+  (lower : (rho0 * square (h * J)) ≤ Norm.normSqC (Row.gapMinus q)) where
+  a = rho0 * square J
+  ap = Leaf.positiveProduct rp (Leaf.positiveProduct jp jp)
+  b = Cross.positiveInverse ap
+  B = Cross.positiveInverse rp
+  bn = Cross.positiveInverseNonnegative ap
+  Bn = Cross.positiveInverseNonnegative rp
+  law = I.*-inverseʳ a (Cross.positiveNonzero ap)
+
+  bB : b ≤ B
+  bB = P.≤-respʳ-≃ (P.*-identityˡ B)
+    (Cross.positiveCrossReciprocalUpper rp ap
+      (P.≤-respʳ-≃ (P.≃-symm (P.*-identityˡ a))
+        (P.≤-respˡ-≃ (P.≃-symm (P.*-identityʳ rho0))
+          (P.*-monoˡ-≤-nonNeg
+            (P.≤-respˡ-≃ (P.≃-symm (P.*-identityˡ R.1ℝ))
+              (squareMono (P.pos⇒nonNeg (P.0<x⇒posx One.onePositive)) jOne))
+            (P.pos⇒nonNeg (P.0<x⇒posx rp))))))
+
+  cross : square h ≤ b * Norm.normSqC (Row.gapMinus q)
+  cross =
+    let raw = P.*-monoʳ-≤-nonNeg lower bn
+        left = P.≃-trans
+          (let open P.ℝ-Solver in solve 4
+            (λ r h J b → (r ⊗ ((h ⊗ J) ⊗ (h ⊗ J))) ⊗ b
+              ⊜ (h ⊗ h) ⊗ ((r ⊗ (J ⊗ J)) ⊗ b))
+            P.≃-refl rho0 h J b)
+          (P.≃-trans (P.*-congˡ law) (P.*-identityʳ (square h)))
+    in P.≤-respʳ-≃ (P.*-comm (Norm.normSqC (Row.gapMinus q)) b)
+      (P.≤-respˡ-≃ (P.≃-symm left) raw)
+
+  jInv = Cross.positiveInverse (Leaf.positiveProduct jp jp)
+  jInvRead : jInv ≃ InvSq.inverseSquare J (Cross.positiveNonzero jp)
+  jInvRead = P.≃-symm (I.⁻¹-unique (InvSq.inverseSquare J (Cross.positiveNonzero jp))
+    (square J) (Cross.positiveNonzero (Leaf.positiveProduct jp jp))
+    (InvSq.inverseSquareCancelsSquare J (Cross.positiveNonzero jp)))
+
+  bFactor : b ≃ B * InvSq.inverseSquare J (Cross.positiveNonzero jp)
+  bFactor = P.≃-trans (InvProduct.inverseProduct rp (Leaf.positiveProduct jp jp))
+    (P.*-congˡ jInvRead)
+
+  module Paid = TailCell q nz h b B hp hOne bn Bn bB qNorm cross
+
+-- Literal reciprocal-square integer weight. The existing Basel owner
+-- supplies convergence for this very factor, not a synthetic power law.
+module NaturalTail (q : BishopComplex) (nz : Rec.BishopComplexNonzero (Row.gapMinus q))
+  (h rho0 : ℝ) (k : Nat) (hp : R._<_ R.0ℝ h) (hOne : h ≤ R.1ℝ)
+  (rp : R._<_ R.0ℝ rho0)
+  (jOne : R.1ℝ ≤ N.natReal (suc k))
+  (qNorm : Norm.normSqC q ≤ R.1ℝ)
+  (lower : (rho0 * square (h * N.natReal (suc k))) ≤
+    Norm.normSqC (Row.gapMinus q)) where
+  module Crossed = CrossFromGap q nz h rho0 (N.natReal (suc k))
+    hp hOne rp (NP.natRealSuccessorStrictlyPositive k) jOne qNorm lower
+  B = Crossed.B
+  bRead : Crossed.b ≃ B * Basel.baselTerm k
+  bRead = P.≃-trans Crossed.bFactor (P.*-congˡ (BaselRead.natRealSuccessorInverseSquareIsBaselTerm k))
+
+  majorant4 : Box (scaleC (S.fourthR h) (Row.P4 (Row.X q nz)))
+    (((R.1ℝ + ((+ 6 / 1) ⋆) * B) * B) * Basel.baselTerm k)
+  majorant4 = boxBudget
+    (P.≃-trans (P.*-congˡ bRead) (P.≃-symm (P.*-assoc (R.1ℝ + ((+ 6 / 1) ⋆) * B) B (Basel.baselTerm k))))
+    Crossed.Paid.tail4Linear
+
+  majorant6 : Box (scaleC (S.sixthR h) (Row.P6 (Row.X q nz)))
+    ((((R.1ℝ + ((+ 30 / 1) ⋆) * B) + ((+ 120 / 1) ⋆) * square B) * B) * Basel.baselTerm k)
+  majorant6 = boxBudget
+    (P.≃-trans (P.*-congˡ bRead)
+      (P.≃-symm (P.*-assoc ((R.1ℝ + ((+ 30 / 1) ⋆) * B) + ((+ 120 / 1) ⋆) * square B) B (Basel.baselTerm k))))
+    Crossed.Paid.tail6Linear
