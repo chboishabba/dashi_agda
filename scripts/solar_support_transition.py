@@ -5,7 +5,7 @@ its gyro and collision blocks switch support. This constructor is a finite
 state event with its own original energy ledger, not a zero-density JVP.
 """
 import numpy as np
-from solar_physical_causal import event, MASS, CHARGE
+from solar_population_event import event, MASS, CHARGE
 
 
 def support_transition(z, population, removed, created, birth, volume):
