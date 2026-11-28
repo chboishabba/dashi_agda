@@ -6,6 +6,8 @@ from itertools import product
 from functools import lru_cache
 from math import isqrt
 from check_pnp_signed_component_histogram import rref,component_bounds,convolve,energy
+from check_pnp_signed_boundary_energy import separator
+from check_p0_budgeted_residual_20261125 import cap as source_cap
 
 ZERO=(0,0,0)
 def dot(a,b):return sum(x*y for x,y in zip(a,b))%3
@@ -114,17 +116,60 @@ def syndrome_fold(F,cols,target,offset,R,local_width=6,boundary_width=3,work_cap
                     if C:T[s]=(H,0,0) if done else (ZERO,C,min(C,ceilroot(E)))
                 return T
             L=run(A);Q=run(B)
-            for s,x in L.items():
-                for t,y in Q.items():
-                    pay(1);stats['pairs']+=1;u=plus(s,t)
-                    if u in admissible:T[u]=add_receipt(T.get(u,(ZERO,0,0)),mul_receipt(x,y))
+            # Additive compatibility determines one label from the other two.
+            # Probe the smaller of child-pair and parent/child products.
+            if len(Q)<len(L):L,Q=Q,L
+            if len(admissible)<len(Q):
+                for u in sorted(admissible):
+                    for s,x in L.items():
+                        pay(1);stats['pairs']+=1;y=Q.get(minus(u,s))
+                        if y is not None:T[u]=add_receipt(T.get(u,(ZERO,0,0)),mul_receipt(x,y))
+            else:
+                for s,x in L.items():
+                    for t,y in Q.items():
+                        pay(1);stats['pairs']+=1;u=plus(s,t)
+                        if u in admissible:T[u]=add_receipt(T.get(u,(ZERO,0,0)),mul_receipt(x,y))
             return T
         h,mass,e=run(nodes[0]).get(target,(ZERO,0,0))
         return (tuple(h[(d-offset)%3] for d in range(3)),mass,e),stats
-    except Refusal as e:return None,dict(stats,reason=str(e))
+    except (Refusal,RecursionError) as e:return None,dict(stats,reason=str(e))
+
+def conditioned_fold(F,cols,target,offset,R,local_width=6,boundary_width=3,work_cap=16384):
+    """First try the intrinsic fold. If it refuses or retains uncertainty,
+    condition a clause-only separator and reuse the same affine fold.
+    One shared work cap, including completed and refused subattempts.
+    """
+    R=tuple(sorted(R));base,stats=syndrome_fold(F,cols,target,offset,R,local_width,boundary_width,work_cap)
+    if base is not None and base[2]==0:return base,stats
+    # Leave affine rows out of the *clause* cut. They remain in every
+    # conditioned syndrome target, so this does not relax the source.
+    split=separator(F,cols,(),R,boundary_width)
+    if split is None:return base,stats
+    _,S,_,_=split
+    if not S:return base,stats
+    I=tuple(v for v in R if v not in S);out=(ZERO,0,0);work=stats['work'];completed=refused=0
+    for bits in product(range(2),repeat=len(S)):
+        charge=1+len(R)+sum(len(c)+1 for c in F)
+        if work+charge>work_cap:return base,dict(stats,work=work,conditioned_refusal=True)
+        work+=charge;pins=dict(zip(S,bits));t=tuple((a-sum(cols[v][j]*pins[v] for v in S))%3 for j,a in enumerate(target));o=(offset+sum(cols[v][-1]*pins[v] for v in S))%3
+        G=tuple(tuple(l for l in c if abs(l)-1 not in pins) for c in F if not any(abs(l)-1 in pins and pins[abs(l)-1]==int(l>0) for l in c))
+        q,sub=syndrome_fold(G,cols,t,o,I,local_width,boundary_width,work_cap-work);work+=sub['work']
+        if q is None:
+            # A refusal is not emptiness. Retain the entire conditional
+            # source mass as an omitted-character bound, using donor cap.
+            charge=1+len(I)+sum(len(c)+1 for c in G)
+            if work+charge>work_cap:return base,dict(stats,work=work,conditioned_refusal=True)
+            work+=charge;C=source_cap(G,I,[v[:-1] for v in cols],t);q=(ZERO,C,C);refused+=1
+        else:completed+=1
+        out=add_receipt(out,q)
+    record=dict(stats,work=work,clause_boundary=S,conditioned_completed=completed,conditioned_refused=refused)
+    # Both receipts are sound. Prefer smaller absolute character error;
+    # retain the earlier certificate when it is strictly better.
+    if base is not None and base[2]<out[2]:return base,record
+    return out,record
 
 def syndrome_contrast(F,cols,target,offset,R,w,local_width=6,boundary_width=3,work_cap=4096):
-    q,stats=syndrome_fold(F,cols,target,offset,R,local_width,boundary_width,work_cap)
+    q,stats=conditioned_fold(F,cols,target,offset,R,local_width,boundary_width,work_cap)
     if q is None:return None
     H,C,E=q;head=tuple(w*(3*h-sum(H)) for h in H);radius=abs(w)*2*E
     return tuple(x-radius for x in head),tuple(x+radius for x in head),dict(stats,omitted_mass=C,amplitude=E,head=H)
