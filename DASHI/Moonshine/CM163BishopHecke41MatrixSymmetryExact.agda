@@ -277,3 +277,79 @@ module At (inputs : Round11.BishopCutset) where
 
     allRaw : Terminal.OriginalRayResidual → (k : Nat) → Raw.RawCross k
     allRaw = SR.allRaw (hd Fixed.p)
+
+
+  -- DIRECT ORIGINAL PERIOD ROUTE, independent of the full integer
+  -- matrix. Lean Paper9UniversalMonicSlice/SeparatedCusp already
+  -- construct the corresponding two-point symmetry on their carrier.
+  -- Native Bishop transfer of that theorem is still explicit.
+  TwoPointSymmetry : Set
+  TwoPointSymmetry = ∀ p q →
+    H.G.product p (H.G.j q) ≈C H.G.product q (H.G.j p)
+
+  module ImageClosure (sym : TwoPointSymmetry)
+    (hd : ∀ p → H.R.d p ≈C A.zeroC)
+    (hs : ∀ p → H.R.s p ≈C A.zeroC) where
+
+    module RY = Ray.At inputs
+    root : CM.CMRoot
+    root = SR.rootFromResidual (hd Fixed.p)
+
+    -- Only the actual j-image is needed. No inverse j, no arbitrary
+    -- real specialization, no 43x43 integer matrix correctness premise.
+    reverseAt : ∀ p →
+      H.G.product Fixed.p (H.G.j p) ≈C Poly.poly (H.G.j p) Packet.slice
+    reverseAt p = complexTrans (sym Fixed.p p)
+      (complexTrans (H.G.Hk.valueCong p (H.G.allGuards p) (H.G.allGuards p)
+        (selectedK root)) (Cross.zeroDifference _ _ (hs p)))
+
+    complementAt : ∀ p → Rec.BishopComplexNonzero (H.x p) →
+      Cross.rest (H.c Fixed.p) (H.x p) ≈C Shift.sComplement (H.x p)
+    complementAt p nz =
+      Cancel.cancelLeft (powC (H.x p) 2) _ _ (Cancel.nonzeroPower nz 2)
+        (complexTrans (complexSym (splitSelected root (H.G.j p)))
+          (complexTrans (reverseAt p) (Shift.sliceFactor (H.G.j p))))
+
+    -- Use an actual j-image null sequence instead of an independent
+    -- real parameter. The eventual apartness of its central first
+    -- quotient is the remaining local analytic witness, not a global
+    -- inverse-j theorem. All 40 other chart factors may collide.
+    centerSlope : (q : Nat → U.BishopUpperHalfPlanePoint) →
+      (∀ n → Rec.BishopComplexNonzero (H.x (q n))) →
+      Lim.Conv (λ n → H.x (q n)) A.zeroC →
+      Cross.slope (H.c Fixed.p) A.zeroC ≈C realC (Literal.s3 ⋆)
+    centerSlope q nz cv = Slope.centerSlopeFromReverseSlice
+      (λ n → H.x (q n)) nz cv (λ n → complementAt (q n) (nz n))
+
+    slopeAlong : (q : Nat → U.BishopUpperHalfPlanePoint) →
+      (∀ n → Rec.BishopComplexNonzero (H.x (q n))) →
+      Lim.Conv (λ n → H.x (q n)) A.zeroC →
+      (p : Nat → U.BishopUpperHalfPlanePoint) →
+      (∀ i → Lim.Conv (λ n → H.chart (p n) i) (H.chart Fixed.p i)) →
+      Lim.Conv (λ n → H.x (p n)) A.zeroC →
+      Lim.Conv (λ n → Cross.slope (H.c (p n)) (H.x (p n))) (realC (Literal.s3 ⋆))
+    slopeAlong q nz cv p charts hx =
+      Lim.limitTransport (centerSlope q nz cv) (Slope.actualSlopeLimit p charts hx)
+
+    ray :
+      (q : Nat → U.BishopUpperHalfPlanePoint) →
+      (∀ n → Rec.BishopComplexNonzero (H.x (q n))) →
+      Lim.Conv (λ n → H.x (q n)) A.zeroC →
+      (w : Nat → BishopComplex) (p : Nat → U.BishopUpperHalfPlanePoint) →
+      (X Xp Xm : Nat → BishopComplex) →
+      (cv : Lim.Conv w A.zeroC) → (nz : ∀ n → Rec.BishopComplexNonzero (w n)) →
+      (∀ n → H.x (p n) ≈C (w n *C X n)) →
+      (∀ n → H.xp (p n) ≈C (w n *C Xp n)) →
+      (∀ n → H.xm (p n) ≈C (w n *C Xm n)) →
+      Jet.Jet w X (realC RY.a) (realC RY.b) →
+      Jet.Jet w Xp (Geo.p0 RY.a) (Geo.p1 RY.b) →
+      Jet.Jet w Xm (Geo.m0 RY.a) (Geo.m1 RY.b) →
+      (∀ i → Lim.Conv (λ n → H.chart (p n) i) (H.chart Fixed.p i)) →
+      Lim.Conv (λ n → H.x (p n)) A.zeroC →
+      Terminal.OriginalRayResidual
+    ray q qnz qcv w p X Xp Xm cv nz hx hp hm jx jp jm charts xc =
+      RY.rayFromActual w p X Xp Xm cv nz hx hp hm jx jp jm
+        (slopeAlong q qnz qcv p charts xc) (λ n → hd (p n)) (λ n → hs (p n))
+
+    allRaw : Terminal.OriginalRayResidual → (k : Nat) → Raw.RawCross k
+    allRaw = SR.allRaw (hd Fixed.p)
