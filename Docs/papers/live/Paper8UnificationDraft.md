@@ -5,6 +5,11 @@ Date: `2026-06-09`
 Version: `draft 1`
 Status: live closure-architecture manuscript; non-promoting
 
+
+## Current proof state — 28 November 2026 (P0)
+
+Current same-object examples: (i) NS local original Galerkin flow with conjugate-reality uniqueness and finite energy FTC, not a uniform critical bound; (ii) YM signed path derivative recursion and conditional quantitative nonflat Path13 inverse budget, not same-H_OS; (iii) original BSD split-cubic torsion translation gives (+,−,−) tangent-root signs, with actual continuous H1/point-group arithmetic character and analytic rank still distinct; (iv) Hodge generic Dickson projection is injective on fixed seventh-power addresses away from y²=a⁷, and five free deck coordinates determine the sixth, not a Chow pairing; (v) connected PNP cubic characters admit affine orthogonality and nonlinear square elimination when no quartic spill occurs. The local extracted phase core passed 284/284 controls including a 256-variable connected chain with one quadratic leaf; exact quartic escape is retained. Newer PNP source #1548 also has fixed-program compressed exact-extent stack simulation, actual constructive witness search and restricted same-input multiple-cut bounds; ordinary integer FRACTRAN time and unrestricted complexity not identified. RH pinned admission remains kernel-blocked. The [live endpoint roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) carries actual source revisions and exact remaining cuts. No U-1a/UCT or physical terminal claim is promoted.
+
 ## Abstract
 
 This paper is the canonical home for the DASHI closure grammar. Its core claim
