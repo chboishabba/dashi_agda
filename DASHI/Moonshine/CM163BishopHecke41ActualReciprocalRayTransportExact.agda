@@ -174,6 +174,87 @@ reverseDisk n =
     (Gen.tauNZ p) (diskNZ n) (reverseClear p) (Ray.diskRead n)
     (Geo.reverseDiskCleared (C.re z) (C.im z))
 
+
+-- Recover the actual value convergence from its cleared quotient.
+-- Neither the perturbation nor the limiting displacement is inverted.
+quotientCV : (D N v : Nat → BishopComplex) (d a c : BishopComplex) →
+  (dn : ∀ n → Rec.BishopComplexNonzero (D n)) →
+  (dz : Rec.BishopComplexNonzero d) →
+  Lim.Conv D d → Lim.Conv N a →
+  (∀ n → (D n *C v n) ≈C N n) → (d *C c) ≈C a →
+  Lim.Conv v c
+quotientCV D N v d a c dn dz dc nc clear center =
+  let point : ∀ n → Cancel.quot (N n) (D n) (dn n) ≈C v n
+      point n = Cancel.cancelLeft (D n) _ _ (dn n)
+        (complexTrans (Cancel.clearQuot (N n) (D n) (dn n)) (complexSym (clear n)))
+      last : Cancel.quot a d dz ≈C c
+      last = Cancel.cancelLeft d _ _ dz
+        (complexTrans (Cancel.clearQuot a d dz) (complexSym center))
+      iv = Conv.inverseLimit dz dc (λ n → Rec.multiplyReciprocal (D n) (dn n))
+  in Lim.convTransport point (Lim.limitTransport last (Conv.mulConv nc iv))
+
+forwardCV : Lim.Conv (λ n → U.tau (forward (Ray.ray n))) Geo.tau
+forwardCV = quotientCV (λ n → Geo.fDen (U.tau (Ray.ray n)))
+  (λ n → Geo.fNum (U.tau (Ray.ray n))) (λ n → U.tau (forward (Ray.ray n)))
+  (Geo.fDen Geo.tau) (Geo.fNum Geo.tau) Geo.tau
+  (λ n → fDenNZ (Ray.ray n)) (fDenNZ Fixed.p)
+  (Lim.addConv Ray.tauCV (Lim.constantC A.oneC)) (Lim.constantC (Geo.fNum Geo.tau))
+  (λ n → forwardClear (Ray.ray n))
+  (complexTrans (L.complexMultiplyCommutative (Geo.fDen Geo.tau) Geo.tau)
+    (complexSym Geo.forwardFixed))
+
+reverseCV : Lim.Conv (λ n → U.tau (reverse (Ray.ray n))) Geo.tau
+reverseCV = quotientCV (λ n → U.tau (Ray.ray n))
+  (λ n → Geo.gNum (U.tau (Ray.ray n))) (λ n → U.tau (reverse (Ray.ray n)))
+  Geo.tau (Geo.gNum Geo.tau) Geo.tau (λ n → Gen.tauNZ (Ray.ray n))
+  (Gen.tauNZ Fixed.p) Ray.tauCV
+  (Lim.subConv (Lim.constantC (Geo.fNum Geo.tau)) Ray.tauCV)
+  (λ n → reverseClear (Ray.ray n)) (complexSym Geo.reverseFixed)
+
+subtractSameRight : ∀ a b t → ((a -C t) -C (b -C t)) ≈C (a -C b)
+subtractSameRight a b t = complexTrans (J.subStep a t b t)
+  (complexTrans (A.subCCongruent (C.≈C-refl _) (J.sameSub t)) (J.subZero _))
+
+-- A cleared disk rotation is already a two-jet certificate:
+-- v-tau = k*w*(v-bar), and the same denominator supplies its
+-- own derivative. In particular the second coefficient is k^2*d.
+module Rotated (k : BishopComplex) (v : Nat → BishopComplex)
+  (cv : Lim.Conv v Geo.tau)
+  (eq : ∀ n → (v n -C Geo.tau) ≈C ((k *C Ray.w n) *C (v n -C Geo.tauBar))) where
+
+  Q : Nat → BishopComplex
+  Q n = k *C (v n -C Geo.tauBar)
+
+  QCV : Lim.Conv Q (k *C Ray.d)
+  QCV = Lim.mulConst k (Lim.limitTransport Ray.dRead
+    (Lim.subConv cv (Lim.constantC Geo.tauBar)))
+
+  first : J.Jet Ray.w v Geo.tau (k *C Ray.d)
+  first = record
+    { J.quotient = Q
+    ; J.factor = λ n → complexTrans (eq n)
+        (complexTrans (A.mulCCongruent (L.complexMultiplyCommutative k (Ray.w n)) (C.≈C-refl _))
+          (L.complexMultiplyAssociative (Ray.w n) k (v n -C Geo.tauBar)))
+    ; J.limit = QCV }
+
+  second : J.Jet Ray.w Q (k *C Ray.d) ((k *C k) *C Ray.d)
+  second = record
+    { J.quotient = λ n → k *C Q n
+    ; J.factor = λ n → complexTrans
+        (A.subCCongruent (C.≈C-refl _) (A.mulCCongruent (C.≈C-refl _) (complexSym Ray.dRead)))
+        (complexTrans (complexSym (Alg.mulSub k (v n -C Geo.tauBar) (Geo.tau -C Geo.tauBar)))
+          (complexTrans (A.mulCCongruent (C.≈C-refl _) (subtractSameRight (v n) Geo.tau Geo.tauBar))
+            (complexTrans (A.mulCCongruent (C.≈C-refl _) (J.factor first n))
+              (swapMiddle k (Ray.w n) (Q n)))))
+    ; J.limit = Lim.limitTransport (complexSym (L.complexMultiplyAssociative k k Ray.d))
+        (Lim.mulConst k QCV) }
+
+  jet : J2.Jet2 Ray.w v Geo.tau (k *C Ray.d) ((k *C k) *C Ray.d)
+  jet = record { J2.first = first ; J2.second = second }
+
+module Plus = Rotated Geo.alpha (λ n → U.tau (forward (Ray.ray n))) forwardCV forwardDisk
+module Minus = Rotated Geo.beta (λ n → U.tau (reverse (Ray.ray n))) reverseCV reverseDisk
+
 -- The actual branch chart is the modular word, not just a free
 -- complex coordinate satisfying the cleared relation.
 module At (inputs : Round11.BishopCutset) where
