@@ -27,9 +27,30 @@ module DASHI.Physics.Closure.NSTriadKNStrictMarginProductionToPhysicalCriticalGa
 --
 -- Hence C5 need not remain an independent mathematical theorem when C2 is
 -- proved in strict-margin form.  No Navier--Stokes estimate is introduced here.
+--
+-- 2026-11-28 PHYSICAL REAL COUNTERCONTROL / UNRESTRICTED SCOPE FAILS:
+-- The source strict-margin inequality is NOT achievable for all smooth
+-- real-divergence-free Galerkin initial data, even at cutoff N=1. Every
+-- nonzero retained cube mode has the same literal dyadic weight one, so
+-- unforced nonlinear production is exactly zero. The original 316-incidence
+-- R406 physical-real witness B has R406(ν=1)<-69/2 and dissipation D=108.
+-- Scaling velocity by 2 gives R406<-1104, D=432, production=0, hence
+-- P'-(2ν-δ)D'-R406 >240 for ANY δ>=0. Continuity of the actual finite
+-- Galerkin ODE carries strict failure to a short integrated interval.
+-- Original exact-script owner: scripts/check_ns_r645_c2_original_physical_counterexample_20261128.py
+-- Native strict conditional compiler below is STILL VALID as a conditional
+-- statement. Its premise, however, must NOT be declared an unrestricted
+-- physical producer. The real sqrt(2)/sqrt(3) helical field is not yet
+-- admitted by the native rational carrier, so this comment is NOT a
+-- kernel-certified internal false-positive witness.
+--
+-- For unrestricted periodic B, repair the PDE estimate rather than weaken
+-- the original source quantifiers, and do not re-use this record to claim
+-- an all-initial-data, positive-retained-margin continuation theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using ([]; _∷_)
@@ -50,6 +71,14 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact a
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact as R639
 import DASHI.Physics.Closure.NSTriadKNOneCancellationPaysRemainderAndCriticalRound414Exact as R414
+
+r645OriginalPhysicalRealCountercontrolPath : String
+r645OriginalPhysicalRealCountercontrolPath =
+  "scripts/check_ns_r645_c2_original_physical_counterexample_20261128.py"
+
+-- Scope metadata, NOT a proof of an incompatible real-field theorem.
+r645NativeCompilerIsUnconditionalPhysicalProducer : Bool
+r645NativeCompilerIsUnconditionalPhysicalProducer = false
 
 F : C3.RealField _
 F = Rational.rationalRealField
