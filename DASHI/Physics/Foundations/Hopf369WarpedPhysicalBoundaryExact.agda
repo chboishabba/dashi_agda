@@ -1018,3 +1018,66 @@ module At {r : Level} (F : C.RealField r)
       (gaugeTimeRows E j q dj dq c cx d dx ct cxt dt dxt)
       (metricTimeMeanForce j q dj dq p px m mx pt pxt mt mxt)
       (coordinateCodazziTime j dj M Mt q dq c cx d dx ct cxt dt dxt)
+
+  ------------------------------------------------------------------------
+  -- BR40c: EXPLICIT PHYSICAL TRACE AND CONSTRAINT DERIVATIVE SOLVERS.
+  -- Reuse the actual BR34 Israel, mean-force, Gauss and Codazzi owners.
+  -- Unlike a guessed positive wall Hessian, these are exact signed
+  -- reconstructions. They do NOT discard the normal-constant modes.
+  ------------------------------------------------------------------------
+
+  israelTrace : S → Vec → Tensor → Tensor → Tensor → Tensor → S
+  israelTrace j q p px m mx = trace4 (israel j q p px m mx)
+
+  betaSum betaJump : Tensor → Tensor → Vec
+  betaSum p m a = beta p a + beta m a
+  betaJump p m a = beta p a - beta m a
+
+  -- trace J = [trace H_x] - 2 div[beta] - 4 j (l+ + l-).
+  -- F = {trace H_x} - div{beta} - 2 j (l+ - l-).
+  -- These solve BOTH one-sided normal trace derivatives at the actual
+  -- interface without division by q, s or a characteristic root.
+  normalTraceMean : S → Vec → Tensor → Tensor → Tensor → Tensor → S
+  normalTraceMean j q p px m mx =
+    meanForce j q p px m mx
+    + dot q (betaSum p m)
+    + two * j * (scale p - scale m)
+
+  normalTraceJump : S → Vec → Tensor → Tensor → Tensor → Tensor → S
+  normalTraceJump j q p px m mx =
+    israelTrace j q p px m mx
+    + two * dot q (betaJump p m)
+    + four * j * (scale p + scale m)
+
+  normalTracePlus normalTraceMinus :
+    S → Vec → Tensor → Tensor → Tensor → Tensor → S
+  normalTracePlus j q p px m mx =
+    normalTraceMean j q p px m mx
+    + half * normalTraceJump j q p px m mx
+  normalTraceMinus j q p px m mx =
+    normalTraceMean j q p px m mx
+    - half * normalTraceJump j q p px m mx
+
+  -- Unrestricted, nonzero mean extrinsic curvature is retained.
+  -- Coordinate Codazzi solves tangent derivative jumps, while Gauss
+  -- solves the normal derivative jump. No inverse Fourier factor.
+  coordinateTangentDerivativeJump : S → (Wall → Wall → S) → Vec →
+    Cov → Cov → Cov → Cov → Vec
+  coordinateTangentDerivativeJump j M q p px m mx a =
+    coordinateCodazzi j M q p px m mx a
+    - q a * (p normal - m normal)
+    + two * sum4 (λ b → M a b * sign b *
+                           (p (wall b) - m (wall b)))
+    + j * (p (wall a) + m (wall a))
+
+  normalGaugeDerivativeJump : S → Vec →
+    Cov → Cov → Cov → Cov → S
+  normalGaugeDerivativeJump j q p px m mx =
+    gaugeGauss j q p px m mx
+    + dot q (λ a → p (wall a) - m (wall a))
+    + two * j * (p normal + m normal)
+
+  -- To turn these pointwise reconstructions into a physical wave energy
+  -- estimate requires positivity/control of the remaining trace and
+  -- normal energy work, and compatible differentiability of the source
+  -- background. The indefinite Israel Hessian is deliberately retained.
