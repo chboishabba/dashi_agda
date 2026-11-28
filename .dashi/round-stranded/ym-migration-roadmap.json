@@ -11,10 +11,18 @@
     {
       "action": "Moved the R330 order-closure compatibility adapter into the existing Route-S canonical file and inlined the zero-fresh-B status coordinate into the direct-source frontier; removed nonhistorical R330 imports.",
       "id": "r330-route-s-and-direct-source-rewire",
-      "next_action": "adjudicate or replace that unsafe postulated dependency, then rerun the affected cone before deleting R330",
+      "next_action": "repair or adjudicate the P2 safe-import boundary, then rerun the affected cone before deleting R330",
       "status": "rewired-verification-blocked",
       "target": "YMClayRouteSSelectedLimitClosureExact, BalabanCanonicalBOSIndexedCompletionRound333Exact, YMClayDirectSourceOSMassGapFrontierExact",
-      "verification": "Colab sanctioned check reached the dependency cone but was blocked by a pre-existing unsafe dependency: BalabanBoolean4BlockPoincareExact contains the postulate walshSpectralIdentityRaw"
+      "verification": "walshSpectralIdentityRaw is now a constructive finite rational-ring certificate and the Boolean block module checks; the downstream cone reaches a separate pre-existing unsafe import at BalabanClayP2LargeFieldStepVExact"
+    },
+    {
+      "action": "Replace walshSpectralIdentityRaw with the finite 16-variable rational-ring certificate and mark the module safe.",
+      "id": "walsh-spectral-identity",
+      "next_action": "retain the proof receipt and continue safe-boundary repair at BalabanClayP2LargeFieldStepVExact",
+      "status": "constructively-verified",
+      "target": "BalabanBoolean4BlockPoincareExact",
+      "verification": "sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import"
     }
   ],
   "current_snapshot": {
@@ -73,7 +81,7 @@
       "command": "DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh <target>",
       "id": "verify-affected-cones",
       "scope": "each repaired consumer cone",
-      "status": "not-started"
+      "status": "blocked-on-existing-unsafe-p2"
     },
     {
       "action": "rescan implicit, instance, module, and operator dependencies; remove only verified unused imports",

@@ -36,10 +36,16 @@ unsafe-import boundary in the shared Ursell/introspection dependency chain.
 The R330 import rewiring has also been applied: its order-closure compatibility
 adapter now lives in `YMClayRouteSSelectedLimitClosureExact`, and the direct
 source frontier carries the existing zero-fresh-B status coordinate directly.
-The R330 deletion gate remains closed because the Colab check reaches a
-pre-existing unsafe dependency: `BalabanBoolean4BlockPoincareExact` contains
-the postulated `walshSpectralIdentityRaw`, which cannot be imported into the
-safe affected cone.
+The former Walsh blocker is now paid constructively: `walshSpectralIdentityRaw`
+is a finite 16-variable rational-ring certificate, and
+`BalabanBoolean4BlockPoincareExact` is marked safe. The downstream R330 cone
+now reaches a separate pre-existing unsafe import at
+`BalabanClayP2LargeFieldStepVExact`; the R330 deletion gate therefore remains
+closed pending that boundary repair and a fresh affected-cone check.
+
+The constructive Walsh receipt is deliberately local: it establishes the
+finite Boolean-block identity and does not promote any continuum or physical
+Yang--Mills claim.
 
 The R78 ledger recipient suggestion is therefore not authoritative: the proof
 route traces both R78 declarations to the Route-S literal closure, even though
