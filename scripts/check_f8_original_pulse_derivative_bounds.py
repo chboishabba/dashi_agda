@@ -19,14 +19,14 @@ def source_shape_bounds(order=6):
     On |s|<1, X=(1-s^2)^-1>=1, and
     d/ds = partial_s + 2s X^2 partial_X;
     f'/f=-2s X^2. Polynomial recurrence is exact.
-    exp(1-X)X^m <=3 max(1,m^m) since exp(1-X)<=3exp(-X).
+    exp(1-X)X^m <= m^m/2^(m-1) (m>=1) since exp(1)>2,\n    with bound 1 when m=0.
     Smooth flat extension makes the same bounds global.
     """
     poly=s.Integer(1)
     bounds=[]
     for j in range(order+1):
         terms=s.Poly(s.expand(poly),S,X).terms()
-        cap=sum(3*abs(int(coeff))*max(1,degree[1]**degree[1])
+        cap=sum(abs(int(coeff))*(F(1) if degree[1]==0 else F(degree[1]**degree[1],2**(degree[1]-1)))
                 for degree,coeff in terms)
         bounds.append(F(cap))
         poly=s.expand(s.diff(poly,S)+2*S*X**2*s.diff(poly,X)-2*S*X**2*poly)
@@ -37,14 +37,14 @@ def clock_jet_bounds(order=6):
     """Bounds for |s^(j)(t)| on t>=1, where s=2(F(t)-F(1))/.065-1.
 
     F'=sqrt(1+t^2)/t^2. Bounds on derivatives of g=sqrt(1+t^2)
-    are obtained from g^2=1+t^2, g>=1, g<=13 (1<=t<=12).
+    are obtained from g^2=1+t^2, g>7/5, g<8/5 on\n    the active slab 1<=t<=6/5. The pulse vanishes beyond that slab.
     For r>=1, |(t^-2)^(r)|<=(r+1)! on t>=1.
     """
-    G=[F(13), F(1)]
+    G=[F(8,5), F(1)]
     for n in range(2,order):
         source=F(2) if n==2 else F(0)
-        G.append((source+sum(comb(n,j)*G[j]*G[n-j]
-                             for j in range(1,n)))/2)
+        G.append(F(5,14)*(source+sum(comb(n,j)*G[j]*G[n-j]
+                             for j in range(1,n))))
     out=[F(0)]
     for n in range(1,order+1):
         r=n-1
@@ -94,7 +94,7 @@ def exact():
     y=s.symbols('y',positive=True)
     shape=source_shape_bounds(order)
     for n in range(order+1):
-        if n==0: assert shape[0]==3
+        if n==0: assert shape[0]==1
         poly=s.expand(s.diff(poly,S)+2*S*X**2*s.diff(poly,X)-2*S*X**2*poly)
     # First two chain-rule Bell terms are exact, independent of envelopes.
     x1,x2,x3=s.symbols('x1 x2 x3')
@@ -105,7 +105,7 @@ def exact():
     Fprime=s.sqrt(1+t*t)/t**2
     assert s.simplify(s.diff(s.asinh(t)-s.sqrt(1+t*t)/t,t)-Fprime)==0
     jets=clock_jet_bounds(order)
-    assert jets[1]==F(400) # 2/.065 * bound g0=13 =>400
+    assert jets[1]==F(640,13) # (2/.065)*(8/5) on source's active slab
     bounds=bump_bounds(order)
     assert len(bounds)==7 and all(v>=0 for v in bounds)
     kbound=fourier_source_bounds(40,order)
@@ -116,7 +116,7 @@ def exact():
     E1=h**4*M5/18
     E2=h**4*M6/54
     assert E1>0 and E2>0
-    # Physical t interval of a stencil must stay within [1,12].
+    # The original positive pulse has duration F(t)-F(1)<13/200.\n    # On [1,6/5], F'(t)=sqrt(1+t²)/t² > (7/5)*(25/36),\n    # so F(6/5)-F(1)>7/36>13/200. All higher bump jets vanish\n    # on [6/5,12], including the smooth flat transition.\n    assert F(7,36)>PULSE\n    assert F(61,25)<F(64,25) and F(2)>F(49,25)\n    # Physical t interval of a stencil must stay within [1,12].
     assert F(1035,1000)-2*h>1
     print('PASS original clock pulse global C6, source Fourier K<=40 and certified Pi timejet bounds')
     print('source bounds by derivative order (decimal magnitudes):',
