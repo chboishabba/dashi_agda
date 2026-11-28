@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-28",
+  "scope": "Four-phase discrete midpoint unit-mass reciprocal oscillator chain, onsite stiffness=1, intrinsic damping=1, designated load damping=1, h=2, fixed source force [1,0,-1,0], both reciprocal bond stiffnesses in [0,1]. No physical parameter admission.",
+  "executed_blob": "bfb5035c8c30c07b9acb3b7127efa7945aae311e",
+  "runtime": {
+    "sympy": "1.14.0",
+    "timeout_seconds": 90,
+    "OPENBLAS_NUM_THREADS": 1
+  },
+  "status": "PASS",
+  "results": {
+    "passive_global_stationary_work": "4/53",
+    "unrestricted_source_work_ceiling": "1",
+    "all_schedule_velocity_outer_ceiling": "5/6",
+    "velocity_center": [
+      "1/6",
+      "1/12",
+      "7/12"
+    ],
+    "binary_count": 256,
+    "binary_periodic_and_reverse_reopen": 256,
+    "binary_best_no_recovery": "4/53",
+    "binary_best_ideal": "13948/38475",
+    "binary_ideal_beats_passive": 42,
+    "ideal_optimum_schedule": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "ideal_optimum_receiver": "25652/731025",
+    "ideal_optimum_buy": "648/9025",
+    "ideal_optimum_recover": "291848/731025",
+    "ideal_optimum_recovery_threshold": "543301/1933493",
+    "least_recovery_threshold": "74159/285935",
+    "least_recovery_schedule": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "least_recovery_receiver": "196/31329",
+    "least_recovery_buy": "70/3481",
+    "least_recovery_recover": "10790/31329",
+    "least_recovery_ideal": "3452/10443"
+  },
+  "limitations": [
+    "Original local-package source not recovered; reconstructed documented Hamiltonian, not direct replay.",
+    "256 schedules exhaust binary endpoints only, not continuous intermediate controls.",
+    "Passive comparator optimized over both stationary coupling strengths with fixed damping/load, not all possible passive networks.",
+    "Recovery threshold counts exported system-wide modulation-port work, zero overhead, not increased designated receiver alone.",
+    "Exact periodic algebra does not establish stability of switched monodromy or physical actuator realization.",
+    "No original HF/LF interaction, SI clock, continuum or measured source admission."
+  ]
+}
