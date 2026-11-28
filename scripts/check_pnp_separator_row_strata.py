@@ -25,8 +25,9 @@ def build(n,R,P,B,leaf_cap=8,seam_cap=8,hard_flats=()):
         if len(D)>seam_cap:return None
         if A is None:
             e=mask.bit_length()-1;U=space(mask);width[0]=max(width[0],len(U))
+            normals=F[e] if e<m else G[e-m]
             if len(U)>leaf_cap:return None
-            B.pay('seam_leaf_labels',(1<<len(U))*(1+d*(1+len(U)+len(D))+len(F[e])))
+            B.pay('seam_leaf_labels',(1<<len(U))*(1+d*(1+len(U)+len(D))+len(normals)))
             T=[]
             for p in range(1<<len(U)):
                 z=representative(d,U,p)
@@ -89,6 +90,11 @@ def observe(n,R,P,x,G,B):
         tables.append(T)
     assert 0 in tables[top] # the incumbent itself is always admissible
     a,c,p,h,g,s=tables[top][0]
+    # Every functional on the observed span has equally many original lifts.
+    B.pay('seam_kernel_mass',1+len(V)*sum(r.bit_count() for r in R))
+    rank=len(span(value(V,1<<j) for r in R for j in bits(r)))
+    multiplicity=1<<(len(V)-rank)
+    a*=multiplicity;c*=multiplicity;p=tuple(t*multiplicity for t in p)
     if s is None:return ('COVER' if c else 'EMPTY'),None,p,c,a
     H=canon(g if g is not None else s);assert H is not None
     B.pay('seam_reopen',1+n*(1+len(P))+len(V)*(1+len(H))+sum(r.bit_count() for r in R))
