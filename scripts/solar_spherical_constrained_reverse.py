@@ -91,7 +91,7 @@ def reverse_constrained(material,cfg,design):
                 options=dict(maxiter=int(design.get('maxiter',30)),ftol=1e-9))
             for z in (opt.x,np.asarray(seed,float)):
                 e=evaluate(z)
-                if not e['ok'] or np.any(e['restoration_ratio']>1.):continue
+                if not e['ok'] or np.any(e['restoration_squared_ratio']>1.):continue
                 original_replay=cycle(material,e['config'])
                 if original_replay['strict_campaign_net_J'] is None:continue
                 candidates.append((float(original_replay['strict_campaign_net_J']),
