@@ -33,6 +33,7 @@ import DASHI.Moonshine.CM163BishopHecke41MatrixSymmetryExact as Matrix
 import DASHI.Moonshine.CM163BishopHecke41ReciprocalRayCoordinateExact as Ray
 import DASHI.Moonshine.CM163BishopHecke41ReciprocalPhaseJetExact as PJ
 import DASHI.Moonshine.CM163BishopHecke41ReciprocalRayDomainsExact as Domains
+import DASHI.Moonshine.CM163BishopHecke41SelectedEulerReadbackExact as Euler
 import DASHI.Moonshine.CM163BishopHecke41SequentialJetExact as J
 import DASHI.Moonshine.CM163BishopHecke41SecondJetCalculusExact as J2
 import DASHI.Moonshine.CM163BishopHecke41ComplexPacketShiftExact as Shift
@@ -177,3 +178,20 @@ module At (inputs : Round11.BishopCutset) where
 
     period : Period.NativePeriod
     period = Terminal.periodFromDiagonalAndRay (M.SR.diagonalFromResidual (hd Fixed.p)) originalRay
+
+
+  -- The two source Euler equalities are constructed, not premises of
+  -- the canonical direct endpoint. Keep Direct as a diagnostic seam.
+  module SourceEuler = Euler.At inputs
+
+  originalEulerRead : EulerRead
+  originalEulerRead = SourceEuler.eulerRead
+
+  originalSecondEulerRead : SecondEulerRead
+  originalSecondEulerRead = SourceEuler.secondEulerRead
+
+  module Original (sym : M.TwoPointSymmetry)
+    (hd : ∀ p → H.R.d p ≈C A.zeroC)
+    (hs : ∀ p → H.R.s p ≈C A.zeroC) where
+    module Closed = Direct sym hd hs originalEulerRead originalSecondEulerRead
+    open Closed public using (originalRay; allRaw; period)
