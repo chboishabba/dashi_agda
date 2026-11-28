@@ -586,3 +586,137 @@ module At {r : Level} (F : C.RealField r)
     S → GaugeTracePair
   gaugeEFromD base response row ri target =
     updateGaugePair base response (rowCorrection (row response) ri target (row base))
+
+  ------------------------------------------------------------------------
+  -- BR39 physical localizer: original optical jets, no new generic solver.
+  -- These are algebraic SOURCE-SPECIFIC operators. The cutoff is required
+  -- to have matching value and normal first jet on the Israel wall.
+  -- Quantitative Sobolev estimates / glancing localisation are separate.
+  ------------------------------------------------------------------------
+
+  record ScalarJet : Set r where
+    constructor scalarJet
+    field
+      value : S
+      first : Axis → S
+      second : Axis → Axis → S
+  open ScalarJet public
+
+  record TensorJet : Set r where
+    constructor tensorJet
+    field
+      fieldValue : Tensor
+      fieldFirst : Axis → Tensor
+      fieldSecond : Axis → Axis → Tensor
+  open TensorJet public
+
+  record CovJet : Set r where
+    constructor covJet
+    field
+      covValue : Cov
+      covFirst : Axis → Cov
+      covSecond : Axis → Axis → Cov
+  open CovJet public
+
+  -- Full five-coordinate nondivergence-form principal tensor:
+  -- L u = a^ij ∂i∂j u + b^i ∂i u + V u.
+  -- Keep every first/second cutoff derivative (including time/normal).
+  -- The value potential commutes with scalar multiplication.
+  record PrincipalJet : Set r where
+    constructor principalJet
+    field
+      principal : Axis → Axis → S
+      drift : Axis → S
+  open PrincipalJet public
+
+  localTensor : ScalarJet → TensorJet → TensorJet
+  localTensor chi u = tensorJet
+    (mulT (value chi) (fieldValue u))
+    (λ i → addT (mulT (first chi i) (fieldValue u))
+                (mulT (value chi) (fieldFirst u i)))
+    (λ i j → addT (addT
+      (mulT (second chi i j) (fieldValue u))
+      (mulT (first chi i) (fieldFirst u j)))
+      (addT (mulT (first chi j) (fieldFirst u i))
+            (mulT (value chi) (fieldSecond u i j))))
+
+  localCov : ScalarJet → CovJet → CovJet
+  localCov chi u = covJet
+    (λ a → value chi * covValue u a)
+    (λ i a → first chi i * covValue u a + value chi * covFirst u i a)
+    (λ i j a → second chi i j * covValue u a
+      + first chi i * covFirst u j a
+      + first chi j * covFirst u i a
+      + value chi * covSecond u i j a)
+
+  -- Nondivergence-form principal commutator, without asserting symmetry:
+  -- [L,chi]u = a^ij(chi_ij u + chi_i u_j + chi_j u_i)
+  --             + b^i chi_i u.
+  -- This works even for a non-symmetric coefficient presentation.
+  tensorCutoffResidual : PrincipalJet → ScalarJet → TensorJet → Tensor
+  tensorCutoffResidual p chi u =
+    addT (sumT (λ i → sumT (λ j →
+      addT (mulT (principal p (wall i) (wall j) * second chi (wall i) (wall j))
+                    (fieldValue u))
+        (addT (mulT (principal p (wall i) (wall j) * first chi (wall i))
+                    (fieldFirst u (wall j)))
+              (mulT (principal p (wall i) (wall j) * first chi (wall j))
+                    (fieldFirst u (wall i)))))))
+      (sumT (λ i → mulT (drift p (wall i) * first chi (wall i))
+                                      (fieldValue u)))
+
+  -- Include the actual normal direction: no silent loss of mixed or
+  -- normal/time jets in a physical 5D localization.
+  fullTensorCutoffResidual : PrincipalJet → ScalarJet → TensorJet → Tensor
+  fullTensorCutoffResidual p chi u =
+    addT (tensorCutoffResidual p chi u)
+      (addT
+        (sumT (λ i → addT
+          (mulT (principal p (wall i) normal * second chi (wall i) normal)
+                (fieldValue u))
+          (addT
+            (mulT (principal p (wall i) normal * first chi (wall i))
+                  (fieldFirst u normal))
+            (mulT (principal p (wall i) normal * first chi normal)
+                  (fieldFirst u (wall i))))))
+        (addT
+          (sumT (λ i → addT
+            (mulT (principal p normal (wall i) * second chi normal (wall i))
+                  (fieldValue u))
+            (addT
+              (mulT (principal p normal (wall i) * first chi normal)
+                    (fieldFirst u (wall i)))
+              (mulT (principal p normal (wall i) * first chi (wall i))
+                    (fieldFirst u normal)))))
+          (addT
+            (mulT (principal p normal normal * second chi normal normal)
+                  (fieldValue u))
+            (addT
+              (mulT (two * principal p normal normal * first chi normal)
+                    (fieldFirst u normal))
+              (mulT (drift p normal * first chi normal) (fieldValue u))))))
+
+  -- Same physical cutoff on both faces: transform the NORMAL optical jet
+  -- before the existing actual Israel/gauge rows.
+  -- Every BR34 boundary condition is still imposed by attachMetric/attachGauge.
+  localizedMetricRows : Allocation → S → Vec → ScalarJet →
+    Tensor → Tensor → Tensor → Tensor → List S
+  localizedMetricRows a j q chi p ux m vx =
+    attachMetric a j q
+      (mulT (value chi) p)
+      (addT (mulT (value chi) ux) (mulT (first chi normal) p))
+      (mulT (value chi) m)
+      (addT (mulT (value chi) vx) (mulT (first chi normal) m))
+
+  localizedGaugeRows : Allocation → S → Vec → ScalarJet →
+    Cov → Cov → Cov → Cov → List S
+  localizedGaugeRows a j q chi p ux m vx =
+    attachGauge a j q
+      (λ i → value chi * p i)
+      (λ i → value chi * ux i + first chi normal * p i)
+      (λ i → value chi * m i)
+      (λ i → value chi * vx i + first chi normal * m i)
+
+  -- The boundary collar owner must supply value=1, d_normal=0 for an
+  -- exact no-new-boundary-defect weld. No proof of existence of such a
+  -- cutoff in the relevant weighted global function space is claimed.
