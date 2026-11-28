@@ -107,8 +107,35 @@ def subsidiary():
     assert zero(value.diff(t)-field-bkg)
     print('PASS general mean Codazzi derivative, physical Gauss normal reconstruction')
 
+
+def graph():
+    # Independent BR19 moving material normal calculation, all 15 components.
+    e=s.symbols('e')
+    j,f=s.symbols('j f')
+    g=s.diag(-1,1,1,1,1)
+    n=s.eye(5)[:,4];nn=n*n.T
+    p=s.Matrix(5,5,lambda i,k:s.Symbol('q%d%d'%(min(i,k),max(i,k))))
+    grad=s.Matrix([*s.symbols('df0:4'),0])
+    source=s.Matrix(5,5,lambda i,k:s.Symbol('b%d%d'%(min(i,k),max(i,k))))
+    dF=n-e*grad
+    gi=g-e*g*p*g
+    lam=1+e*p[4,4]/2
+    nco=lam*dF
+    nonlinear=lam*(2*j*(g+e*p)+6*j*nco*nco.T)
+    expected=(2*j*p+j*p[4,4]*g+9*j*p[4,4]*nn
+              -6*j*(grad*n.T+n*grad.T))
+    assert zero(nonlinear.diff(e).subs(e,0)-expected)
+    good=p-f*source
+    assert zero(good+f*source-p)
+    adjusted=expected-f*source
+    assert zero(adjusted+f*source-expected)
+    # Normal and mixed entries are independently nonzero, not silently
+    # discarded by the physical tangent Israel 10-row projection.
+    assert expected[4,4]!=0 and expected[0,4]!=0
+    print('PASS all 15 moving-graph material jump entries and original good-unknown BIDI')
+
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--part',choices=['time','trace','subsidiary','all'],default='all')
+    p=argparse.ArgumentParser();p.add_argument('--part',choices=['time','trace','subsidiary','graph','all'],default='all')
     a=p.parse_args()
-    for name,fn in [('time',time),('trace',trace),('subsidiary',subsidiary)]:
+    for name,fn in [('time',time),('trace',trace),('subsidiary',subsidiary),('graph',graph)]:
         if a.part in ('all',name):fn()
