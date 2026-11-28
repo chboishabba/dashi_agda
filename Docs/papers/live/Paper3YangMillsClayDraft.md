@@ -1138,3 +1138,8 @@ Source references: [#1536](https://github.com/chboishabba/dashi_agda/pull/1536),
 ## Section 17 CMP102 source-state update
 
 Lean #15 2f1f58f30b6f writes actual unit quaternion left/right tangent norm isometries, scalar orthogonality and two-point adjoint defect, and populates the prior chord-ball BondBound with left multiplication. The selected Path13 tangent identification, actual left-trivialized differential, nonflat H(s(Y0)) and CMP102 enclosure remain open. No wider mass-gap claim; 768 independent exact controls, native elaboration pending.
+
+
+## Section 18 — actual signed bond curve
+
+Lean #15 711fa9bdf761 consumes the one-parameter quaternion exponential derivative for q exp(tH) and exp(-tH)q*. At zero the actual signed velocities are qH and -Hq*, with unit bond norm isometry. Full noncommuting derivative, chosen Path13 identification and CMP102 enclosure remain open. Eight symbolic first-order coordinate controls, native kernel pending.
