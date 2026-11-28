@@ -1206,7 +1206,7 @@ module At {r : Level} (F : C.RealField r)
   ------------------------------------------------------------------------
 
   record PhysicalWallWorkSources : Set r where
-    constructor physicalWallWorkSources
+    constructor mkPhysicalWallWorkSources
     field
       israelPower : S
       longitudinalPower : S
@@ -1215,10 +1215,10 @@ module At {r : Level} (F : C.RealField r)
       unallocatedPower : S
   open PhysicalWallWorkSources public
 
-  physicalWallWorkSources : S → Vec → (Wall → Wall → S) →
+  assemblePhysicalWallWorkSources : S → Vec → (Wall → Wall → S) →
     Tensor → Tensor → Tensor → Tensor → PhysicalWallWorkSources
-  physicalWallWorkSources j q velocity p px m mx =
-    physicalWallWorkSources
+  assemblePhysicalWallWorkSources j q velocity p px m mx =
+    mkPhysicalWallWorkSources
       (israelWallWork j q velocity p px m mx)
       (longitudinalWallWork q velocity p m)
       (scaleWallWork j velocity p m)
@@ -1244,7 +1244,7 @@ module At {r : Level} (F : C.RealField r)
   open NormalHolonomyMoments public
 
   record NormalHolonomyResponse : Set r where
-    constructor normalHolonomyResponse
+    constructor mkNormalHolonomyResponse
     field
       scalarConstant : S
       vectorConstant : Cov
@@ -1252,12 +1252,12 @@ module At {r : Level} (F : C.RealField r)
       vectorZeroMode : Cov
   open NormalHolonomyResponse public
 
-  normalHolonomyResponse : (m : NormalHolonomyMoments) →
+  solveNormalHolonomy : (m : NormalHolonomyMoments) →
     Reciprocal (scalarWarpIntegral m) →
     Reciprocal (vectorWarpIntegral m) →
     NormalHolonomyResponse
-  normalHolonomyResponse m i2 i4 =
-    normalHolonomyResponse
+  solveNormalHolonomy m i2 i4 =
+    mkNormalHolonomyResponse
       (neg (half * inv i2 * scalarSourceIntegral m))
       (λ k → inv i4 * vectorSourceIntegral m k)
       (scalarSourceIntegral m)
