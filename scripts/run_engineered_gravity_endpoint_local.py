@@ -74,6 +74,7 @@ CORE=(
     "check_tov_mass_flux_surface_closure.py",
     "check_tov_wall_frame_stress_inverse.py",
     "check_tov_moving_constraint_family.py",
+    "check_tov_original_material_flux_weld.py",
     "check_tov_mass_flux_surface_closure.py",
     "check_tov_wall_frame_stress_inverse.py",
     "check_tov_constrained_mass_hessian.py",
