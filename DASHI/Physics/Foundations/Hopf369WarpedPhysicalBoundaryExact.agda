@@ -861,11 +861,14 @@ module At {r : Level} (F : C.RealField r)
       gaugeFirstCoefficient : Axis → Cov → Cov
   open GaugeVariableCoefficients public
 
+  sum5T : (Axis → Tensor) → Tensor
+  sum5T f = addT (sumT (λ i → f (wall i))) (f normal)
+
   metricVariableCutoffResidual : ChartConnection → MetricVariableCoefficients →
     ScalarJet → TensorJet → Tensor
   metricVariableCutoffResidual g c chi u =
     addT
-      (sum5 (λ i → sum5 (λ j →
+      (sum5T (λ i → sum5T (λ j →
         addT
           (mulT (metricSecondCoefficient c i j * covariantScalarHessian g chi i j)
                 (fieldValue u))
@@ -874,7 +877,7 @@ module At {r : Level} (F : C.RealField r)
                   (fieldFirst u j))
             (mulT (metricSecondCoefficient c i j * first chi j)
                   (fieldFirst u i)))))
-      (sum5 (λ i →
+      (sum5T (λ i →
         metricFirstCoefficient c i (mulT (first chi i) (fieldValue u))))
 
   gaugeVariableCutoffResidual : ChartConnection → GaugeVariableCoefficients →
