@@ -15,7 +15,6 @@ open import Data.Rational using (ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact as R275
 import DASHI.Physics.YangMills.BalabanUrsellToSubgapClusteringUpperBidiExact as Bridge
 
 record CanonicalBUrsellProducer
@@ -29,12 +28,24 @@ record CanonicalBUrsellProducer
 
 open CanonicalBUrsellProducer public
 
+-- This is the small payment record needed by the canonical Ursell route.
+-- It used to live in historical R275; keeping it here removes the live
+-- consumer's dependency on that Round without changing the underlying route.
+record CanonicalBUrsellPayment
+    {Observable Energy Bound : Set}
+    (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound) : Set₁ where
+  field
+    subgapClusteringUpper : Gap.SubgapModeClusteringUpper spectrum
+    candidatePositive : Gap.PositiveEnergy spectrum (Gap.gapCandidate spectrum)
+
+open CanonicalBUrsellPayment public
+
 ursellDonorBuildsCanonicalBPayment :
   ∀ {UrsellObservable Observable Energy Bound}
     {ursell : Ursell.InfiniteUrsellLimit UrsellObservable ℚ}
     {spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound} →
   CanonicalBUrsellProducer ursell spectrum →
-  R275.CanonicalBPayment275 spectrum
+  CanonicalBUrsellPayment spectrum
 ursellDonorBuildsCanonicalBPayment producer = record
   { subgapClusteringUpper =
       Bridge.ursellProducesSubgapModeClusteringUpper (adapter producer)
@@ -48,7 +59,10 @@ ursellDonorBuildsPositiveTransferGapCore :
   CanonicalBUrsellProducer ursell spectrum →
   Gap.PositiveTransferGapCore spectrum
 ursellDonorBuildsPositiveTransferGapCore producer =
-  R275.compileCanonicalBPaymentCore (ursellDonorBuildsCanonicalBPayment producer)
+  Gap.positiveTransferGapCoreFromModeTests
+    _
+    (subgapClusteringUpper (ursellDonorBuildsCanonicalBPayment producer))
+    (candidatePositive (ursellDonorBuildsCanonicalBPayment producer))
 
 ------------------------------------------------------------------------
 -- Classification: the bridge/compiler is closed structurally; the producer
