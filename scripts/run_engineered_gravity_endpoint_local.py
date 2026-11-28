@@ -70,6 +70,7 @@ CORE=(
     "check_tov_moving_mass_constraint_weld.py",
     "check_tov_spherical_source_israel_abi.py",
     "check_tov_moving_timelike_israel_abi.py",
+    "check_tov_dynamic_flux_israel_abi.py",
     "check_tov_constrained_mass_hessian.py",
     "check_tov_causal_constitutive_repair.py",
     "check_tov_radial_dynamics.py",
