@@ -12,6 +12,8 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
+import DASHI.Reasoning.TypedHyperfabricCore as Fabric
+open import Data.List.Base using (_++_)
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
 import DASHI.Reasoning.TypedHyperfabricPantsSignatureCompletenessExact as Complete
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as Future
@@ -58,6 +60,165 @@ module ThreeSourceLegs
 
   associationCoherence : leftAssociate ≡ rightAssociate
   associationCoherence = ac
+
+  -- Actual nonvacuous THREE-INCIDENCE source typed hyperfabric:
+  -- before: three distinct heterogeneous edge stalks;
+  -- after: one signature edge incident at all three original vertices.
+  -- This strengthens the existing original binary pants seam rather
+  -- than merely counting three proposed edges in a receipt.
+  data Side : Set where
+    sideA sideB sideC : Side
+
+  data BeforeEdge : Set where
+    legA legB legC : BeforeEdge
+
+  data AfterEdge : Set where
+    commonWaist : AfterEdge
+
+  data BeforeIncidence : Side → BeforeEdge → Set where
+    aIncidence : BeforeIncidence sideA legA
+    bIncidence : BeforeIncidence sideB legB
+    cIncidence : BeforeIncidence sideC legC
+
+  data AfterIncidence : Side → AfterEdge → Set where
+    aMerged : AfterIncidence sideA commonWaist
+    bMerged : AfterIncidence sideB commonWaist
+    cMerged : AfterIncidence sideC commonWaist
+
+  SourceStalk : Side → Set
+  SourceStalk sideA = A
+  SourceStalk sideB = B
+  SourceStalk sideC = C
+
+  EdgeStalk : BeforeEdge → Set
+  EdgeStalk legA = A
+  EdgeStalk legB = B
+  EdgeStalk legC = C
+
+  originalVertices : (s : Side) → SourceStalk s
+  originalVertices sideA = a
+  originalVertices sideB = b
+  originalVertices sideC = c
+
+  originalEdges : (e : BeforeEdge) → EdgeStalk e
+  originalEdges legA = a
+  originalEdges legB = b
+  originalEdges legC = c
+
+  beforeFabric : Fabric.TypedHyperfabric Side BeforeEdge
+  beforeFabric = record
+    { vertexStalk = SourceStalk
+    ; edgeStalk = EdgeStalk
+    ; incidence = BeforeIncidence
+    ; restrict = λ
+        { aIncidence value → value
+        ; bIncidence value → value
+        ; cIncidence value → value
+        }
+    ; edgeProvenance = λ
+        { legA → sourceA
+        ; legB → sourceB
+        ; legC → sourceC
+        }
+    ; edgeSalience = λ _ → 1
+    ; fabricLabel = "three heterogeneous source pants legs"
+    }
+
+  beforeSection : Fabric.GlobalSection beforeFabric
+  beforeSection = record
+    { vertexValue = originalVertices
+    ; edgeValue = originalEdges
+    ; compatible = λ
+        { aIncidence → refl
+        ; bIncidence → refl
+        ; cIncidence → refl
+        }
+    ; sectionReceipt = "real three-leg original source values"
+    }
+
+  afterFabric : Fabric.TypedHyperfabric Side AfterEdge
+  afterFabric = record
+    { vertexStalk = SourceStalk
+    ; edgeStalk = λ _ → Seam.SeamSignature
+    ; incidence = AfterIncidence
+    ; restrict = λ
+        { aMerged value → Seam.boundarySignature (toA value)
+        ; bMerged value → Seam.boundarySignature (toB value)
+        ; cMerged value → Seam.boundarySignature (toC value)
+        }
+    ; edgeProvenance = λ _ → sourceA ++ sourceB ++ sourceC
+    ; edgeSalience = λ _ → 1
+    ; fabricLabel = "source-licensed trivalent merged signature waist"
+    }
+
+  afterSection : Fabric.GlobalSection afterFabric
+  afterSection = record
+    { vertexValue = originalVertices
+    ; edgeValue = λ _ → Seam.boundarySignature (toA a)
+    ; compatible = λ
+        { aMerged → refl
+        ; bMerged → sym ab
+        ; cMerged → sym ac
+        }
+    ; sectionReceipt = "three source incidences restrict to matched waist"
+    }
+
+  mergeEdge : BeforeEdge → AfterEdge
+  mergeEdge legA = commonWaist
+  mergeEdge legB = commonWaist
+  mergeEdge legC = commonWaist
+
+  mergeIncidence : {side : Side} {edge : BeforeEdge} →
+    BeforeIncidence side edge → AfterIncidence side (mergeEdge edge)
+  mergeIncidence aIncidence = aMerged
+  mergeIncidence bIncidence = bMerged
+  mergeIncidence cIncidence = cMerged
+
+  everySourceIncidencePreserved :
+    {side : Side} {edge : BeforeEdge} →
+    (incident : BeforeIncidence side edge) →
+    Seam.boundarySignature
+      (interpretBefore edge
+        (Fabric.restrict beforeFabric incident
+          (Fabric.vertexValue beforeSection side)))
+    ≡
+    Fabric.restrict afterFabric (mergeIncidence incident)
+      (Fabric.vertexValue afterSection side)
+  everySourceIncidencePreserved aIncidence = refl
+  everySourceIncidencePreserved bIncidence = refl
+  everySourceIncidencePreserved cIncidence = refl
+
+  interpretBefore : (edge : BeforeEdge) →
+    EdgeStalk edge → Pants.BranchChannel
+  interpretBefore legA = toA
+  interpretBefore legB = toB
+  interpretBefore legC = toC
+
+  sourceEdgeValuesPreserved :
+    (edge : BeforeEdge) →
+    Seam.boundarySignature
+      (interpretBefore edge (Fabric.edgeValue beforeSection edge))
+    ≡
+    Fabric.edgeValue afterSection (mergeEdge edge)
+  sourceEdgeValuesPreserved legA = refl
+  sourceEdgeValuesPreserved legB = sym ab
+  sourceEdgeValuesPreserved legC = sym ac
+
+  allThreeOriginalProvenancesRetained :
+    Fabric.edgeProvenance afterFabric commonWaist ≡
+      sourceA ++ sourceB ++ sourceC
+  allThreeOriginalProvenancesRetained = refl
+
+  allThreeOriginalEdgesIdentify :
+    (mergeEdge legA ≡ mergeEdge legB) ×
+    (mergeEdge legB ≡ mergeEdge legC)
+  allThreeOriginalEdgesIdentify = refl , refl
+
+  allThreeMergedIncidences :
+    AfterIncidence sideA commonWaist ×
+    (AfterIncidence sideB commonWaist ×
+     AfterIncidence sideC commonWaist)
+  allThreeMergedIncidences = aMerged , (bMerged , cMerged)
 
   record OriginalLegs : Set where
     constructor retainedOriginalLegs
