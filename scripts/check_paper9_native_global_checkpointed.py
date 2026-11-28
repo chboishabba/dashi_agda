@@ -14,7 +14,6 @@ import shutil
 import signal
 import subprocess
 import tempfile
-import time
 
 ROOT = Path(__file__).resolve().parents[1]
 MOON = "DASHI/Moonshine/"
@@ -151,7 +150,6 @@ def main():
     args = ap.parse_args()
     if not 0 < args.budget <= 85:
         ap.error("budget must be in (0,85], use external timeout 90s")
-    start = time.monotonic()
     env = os.environ.copy()
     audit_roots = list(args.include)
     for key in ("AGDA_STDLIB_SRC_29", "AGDA_STDLIB_SRC"):
