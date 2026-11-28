@@ -1,0 +1,68 @@
+{
+  "scope": "Local recovered source scripts /tmp/pnp_next, each changed executable blob verified against connector. No native kernels/CI. Git checkout DNS failure rechecked.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_clause_syndrome_fold.py",
+      "blob": "801c02b98252fd2679be0a8dff751cf8d389ab0d",
+      "seconds": 0.963,
+      "baseline": 1296,
+      "independent": 288,
+      "data_operations": 536194,
+      "cap4096": {
+        "WITNESS": 183,
+        "EMPTY": 249,
+        "UNKNOWN": 0
+      },
+      "transitions": {
+        "WITNESS->WITNESS": 172,
+        "EMPTY->EMPTY": 249,
+        "UNKNOWN->WITNESS": 11
+      },
+      "data_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_rref_certificate.py",
+      "blob": "d2eb1f7a4996bc6b690755fd4ef1b849f11555f1",
+      "seconds": 0.876,
+      "matrices": 784,
+      "operations": 4280,
+      "tamper_refusal": 1,
+      "budget_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_certified_pins.py",
+      "blob": "fd30fe4b41333fd40a470972afaf4d63f4f42332",
+      "seconds": 0.717,
+      "cases": 168,
+      "row_receipts": 259,
+      "pin_blob": "e4fc1c920f160ecf8b9fb39961376815869aa7bb"
+    },
+    {
+      "file": "scripts/check_pnp_rope_reopening_campaign.py",
+      "blob": "f43c8a6b973524a347a9744592582d6457086b09",
+      "seconds": 0.858,
+      "descriptors": 512,
+      "source_steps": 1440
+    }
+  ],
+  "extra": {
+    "pin_baseline_rerun": "1296 PASS",
+    "fold_rerun": "1296 + 288 PASS",
+    "sparse_clause_control": {
+      "n": 128,
+      "clauses": 3,
+      "rows": 0,
+      "peak_keys": 2,
+      "logical_reserved": 5244,
+      "count": "143556623544770914273611162510277214208",
+      "expected": "27*2^122"
+    }
+  },
+  "limits": [
+    "logical cap is not physical time; fold selection, masks, address/control and all storage operations not fully charged",
+    "clause fold state bound exponential in clauses and affine rank; no universal polynomial bound",
+    "certificates paid optionally, row receipt path not native proof of all CNF substitutions",
+    "native restriction, row algebra, rope proof bodies unelaborated; executable rope test original Python semantics only",
+    "cross-kernel actual artifact acceptance and all universal endpoints open"
+  ]
+}
