@@ -29,7 +29,7 @@ def main():
     assert nonconservative==12*s.pi*r*r
     # Commuting pullback of an *interior-minus-exterior* mass jump along
     # R(tau). Exterior vacuum Schwarzschild M is constant.
-    R,v,FF,NN=s.symbols('R v F N',positive=True)
+    R,FF,NN=s.symbols('R F N',positive=True);v=s.symbols('v',real=True)
     rh,flux,pressure=s.symbols('rho_wall j_wall p_wall',real=True)
     ut=s.sqrt(FF+v*v)/(NN*s.sqrt(FF))
     mass_rate=s.factor(4*s.pi*R*R*(rh*v-s.sqrt(FF+v*v)*flux))
