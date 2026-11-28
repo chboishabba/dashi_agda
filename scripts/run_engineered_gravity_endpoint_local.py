@@ -28,6 +28,7 @@ CORE=(
     "check_engineered_gravity_action_contrast.py",
     "check_engineered_gravity_reciprocal_action_shell.py",
     "check_engineered_gravity_smooth_order.py",
+    "check_engineered_gravity_axisymmetric_order.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
