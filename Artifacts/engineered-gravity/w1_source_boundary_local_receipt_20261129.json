@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-29",
+  "scope": "W1 source-equivalent local SymPy Python under 90s, not byte-identical committed source replay; isolated mathematical models only",
+  "tests": [
+    {
+      "name": "tov_spherical_source_israel_abi",
+      "result": "PASS",
+      "source_equivalent_sha256": "1bf482d6fdb0318cd0cf8d45e932eb1c349c11a0c573fa9d0731892a61feda11",
+      "stdout_sha256": "30d04f51545cf472a93daeaeac5e7ec65bf35bd6339e77c4351693a28a689462",
+      "original_physical_source": "exact background TOV stress/mass + polar-areal spherical Einstein equations",
+      "limit": "not moving dynamical normal/GHY/Einstein"
+    },
+    {
+      "name": "reciprocal_controller_ward",
+      "result": "PASS",
+      "source_equivalent_sha256": "0dd981cfbfd38e57919c13dc288ff4fde40c77f2955d97907c2a60220f7b3ae9",
+      "stdout_sha256": "a7c6abb668ed4f472dc19219a366e86e843a4d985e341198137317432ae3ee5b",
+      "first_draft": "FAIL: fixed-flux controller sign",
+      "corrected": "PASS",
+      "limit": "no apparatus/Einstein source"
+    },
+    {
+      "name": "maxwell_source_work",
+      "result": "PASS",
+      "source_equivalent_sha256": "e77097309a992610c16587c7ea3c9eb9576b46bb247023f9491f4bae42c4f4da",
+      "stdout_sha256": "5241d107377d2240a275f7bcd0dbfbf65d727bb5337c709686314c87bff9fd62",
+      "first_draft": "FAIL: SymPy unevaluated generic integral",
+      "corrected": "PASS with exact polynomial endpoint fixture and general differential Ward",
+      "limit": "J is mathematically independent, no physical original apparatus current"
+    },
+    {
+      "name": "w1_dependency_negative_controls",
+      "result": "PASS source-equivalent",
+      "stdout_sha256": "22b0b53ec2fd27f6c3523b3ab613d69020aba856639d6d1df97ef253498dfb0c",
+      "lane_count": 12,
+      "unpaid": 36,
+      "malformed_claims_rejected": 6,
+      "limit": "locally adapted manifest/checker, not literal committed-source"
+    },
+    {
+      "name": "w1_inventory",
+      "result": "INVENTORY_ONLY",
+      "stdout_sha256": "f53f5cc2a1b555da4842110da422d81315c923fe869011f81519ec41fb319093",
+      "lane_count": 12,
+      "unpaid": 36,
+      "limit": "not physical acceptance"
+    }
+  ],
+  "full_checkout_replay": false,
+  "github_ci": false,
+  "original_native_f8": false,
+  "physical_endpoints_paid": 0
+}
