@@ -46,5 +46,4 @@ def main():
     print('PASS exact higher axial ADM kinetic coefficients, dipole regression, 8 angular checks, weighted projection')
     print('OPEN polar inverse, spatial Hessian, moving junction and master symplectic normalization')
 
-
 if __name__=='__main__':main()
