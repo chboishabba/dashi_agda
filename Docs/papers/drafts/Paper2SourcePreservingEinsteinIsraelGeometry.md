@@ -828,3 +828,7 @@ The original Weyl exterior symbol admits a linear contraction symbol K with K C=
 ### BR220 intrinsic normal constraint propagation
 
 The full exterior equation factors to a forced normal wave ODE. Its residual obeys the scalar normal wave operator in every source coordinate, with forcing CKf minus the normal wave operator applied to f. Differential source compatibility and two vanishing initial residuals therefore give exact propagation on the flat collar. The explicit 200-by-70 initial-jet matrix has rank 60 in both tested damped samples, with ten homogeneous freedoms; incompatible source refusal and nonzero manufactured data passed locally. This does not establish finite periodic boundary solvability or a frequency-uniform estimate. See roadmap section 55.
+
+### BR221 finite physical transmission
+
+Both normal branches give the finite interval boundary pencil with factors 1-z and 1+z in the jump and mean rows, respectively, where z=exp(-lambda L). The original signed energy cancellation proves injectivity for positive damping and yields a gamma^-1 combined energy bound for existing compatible forced solutions with homogeneous jump. The BR217 regularized inverse persists in the high-frequency glancing regime by exponentially small finite-endpoint perturbation. Twelve numerical finite-mode boundary solves passed with exact carrier identity assertions. Full intrinsic particular-solution bounds and geometric source admissibility remain open. See roadmap section 56.

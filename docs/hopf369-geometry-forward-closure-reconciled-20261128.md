@@ -5899,3 +5899,68 @@ SymPy 1.14.0, exit zero; local blob
 Committed driver switches to original BR27 donor import, unrun.
 Other lanes unchanged. Terminal stage 41. No CI/native/PDE
 theorem acceptance.
+
+
+## 56. BR221 — finite periodic physical transmission and signed energy
+
+Use BR220 intrinsic particular field for a sufficiently smooth
+source satisfying differential and initial-jet compatibility.
+For fixed damped glancing frequencies, the two physical normal
+branches span ten homogeneous freedoms. Set z=exp(-lambda L),
+W_h=N(a+b) exp(-lambda y)+F N(a-b) exp(-lambda(L-y)).
+The exact endpoint algebra using RF=-R gives the jump and
+mean rows T_L=[(1-z)(I-F)N,(1-z)(I+F)N,-jJ;
+0,(1+z)RN,tau I-ikB1]. For prescribed full source and
+boundary data subtract the particular field's jump and mean
+contribution before solving T_L v=g. This is a finite
+source-range test, not surjectivity onto arbitrary 44 rows.
+
+For S=G A_n, c=-3j>0, Re tau=gamma>0, projected bulk
+forcing d and original wall forcing f_w, jump source f_J,
+integrated signed energy gives
+gamma (int ||W||_G² + c||m||_H²)
+= Re int <W,G d> - Re <mean(W), S f_J>
++ c Re <m,H f_w>.
+This follows from S J=3 R^T H and both positive Gram
+symmetries, so no unaccounted mean work. In particular
+homogeneous boundary jump f_J=0 gives gamma^-1 combined
+energy norm bound for any existing compatible forced solution.
+For the homogeneous correction, zero sources imply zero
+W,m, proving T_L injectivity whenever both five-polarization
+branches are independent and gamma>0. Thus a smooth compatible
+particular field plus corrected data in im T_L gives a unique
+solution in this flat finite-mode class. The image condition
+does not claim that geometric boundary sources automatically
+satisfy it. The arbitrary-source intrinsic particular norm
+is still unpaid.
+
+On compact positive damping intervals in the high-frequency
+glancing regime, the BR217 selective row weights are bounded
+and column regularization costs at most O(1/|u|).
+Finite endpoint changes are O(exp(-Re lambda L)) before
+column scaling, hence O(exp(-Re lambda L)/|u|) after it.
+This tends to zero uniformly at fixed L>0, since
+Re lambda>=sqrt(gamma k) and |u| comparable to k^-1/2.
+Thus the BR217 regularized selected-row inverse persists by
+a Neumann perturbation for sufficiently high k; the five
+singular coordinates remain purely bulk. The quarter-order
+homogeneous bulk L2 upper bound and loss-free shape estimate
+extend to the finite interval using the triangle inequality
+for both decays. This is an analytic transfer conditional
+on BR217, not a new certified uniform numerical constant.
+
+Local independent BR27/175 reconstruction ran with exact
+SymPy checks for S symmetry, S J=3R^T H, reflection Gram
+isometry, normal anticommutation, RF=-R and wall symmetry.
+Twelve numerical complex finite-interval solves in NumPy,
+both signs, gamma=0.5,2 and k=2,100,10000, rank19 each,
+manufactured compatible boundary sources, recovered amplitudes,
+direct endpoint residuals and analytic integral energy checked.
+Max relative energy residual 3.683652549081481e-12;
+max relative boundary residual 4.968161942657906e-15.
+Local command exit zero, original donor-import entry unrun.
+No actual arbitrary interior forcing solve in this test.
+Terminal stage 42. Remaining: source-specific admissibility
+and bounded intrinsic particular operator, frequency coverage,
+curved constraint/energy and iteration. No CI/native/PDE
+acceptance. Other six lanes unchanged.

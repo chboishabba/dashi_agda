@@ -219,6 +219,8 @@ PARTS["terminal"].append(("BR219.exterior_source_inverse","check_hopf369_br219_e
 
 PARTS["terminal"].append(("BR220.normal_constraint_propagation","check_hopf369_br220_normal_constraint_propagation.py",()))
 
+PARTS["terminal"].append(("BR221.finite_physical_transmission","check_hopf369_br221_finite_physical_transmission.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
