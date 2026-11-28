@@ -33,6 +33,7 @@ def normal_fold(F,cols,target,offset,R,leaf_width=6,boundary_width=3,work_cap=16
         obs=tuple(sum(cols[v][-1]*z[i] for i,v in enumerate(R))%3 for z in V)
         o=(offset+sum(cols[v][-1]*u[i] for i,v in enumerate(R)))%3
         factors.append(((obs,),(o,),2))
+        factors.sort(key=lambda f:next((j for j in range(d) if any(a[j] for a in f[0])),d))
         m=len(factors);stats['factors']=m;full=(1<<m)-1
         @lru_cache(None)
         def U(mask):
@@ -55,7 +56,7 @@ def normal_fold(F,cols,target,offset,R,leaf_width=6,boundary_width=3,work_cap=16
             for i,j in choices:
                 pay(1);mask=nodes[i][0]|nodes[j][0];key=(len(D(mask)),mask.bit_count(),mask,i,j)
                 if best is None or key<best:best=key
-            _,_,mask,i,j=best;A,B=nodes[i],nodes[j];nodes.pop(j);nodes.pop(i);nodes.append((mask,A,B))
+            _,_,mask,i,j=best;A,B=nodes[i],nodes[j];nodes.pop(j);nodes[i]=(mask,A,B)
         def insert(T,k,h):T[k]=tuple(a+b for a,b in zip(T.get(k,ZERO),h))
         def run(node):
             mask,A,B=node;S=D(mask);stats['width']=max(stats['width'],len(S));T={}
