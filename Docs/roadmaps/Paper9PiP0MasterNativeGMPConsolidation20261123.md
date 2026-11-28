@@ -2087,3 +2087,25 @@ Remaining:
 - C1c Hecke41 product/pole removal, C2 original diagonal zero, C3 original ray residual, H1 final coefficient grouping and RawCross/GMP acceptance remain. No change to these downstream lanes or Lean branch in this cut.
 
 Classical Jacobi and Hadamard identities retain historical attribution; the DASHI contribution is the explicit integral signed source-specific permutation and attachment. All committed proofs remain uncompiled. No postulates, holes or termination overrides intentionally introduced by these new modules; transitive axioms audit and native acceptance still required.
+
+
+### 2026-11-28 — original Bishop lattice/Fourier same-object cut
+
+SOURCE-WRITTEN, KERNEL PENDING. Supersedes the missing-producer inventory for C1b and the lattice route of GTheta3. No new local axiom, desired Fourier identity argument, or infinite-interchange argument is introduced by the intended terminal. Native Agda acceptance and pinned API/elaboration repairs remain required.
+
+| Commit | Native construction |
+|---|---|
+| db664c1322a3 | JInvariantBishopSymmetricRowChartExact: literal signed-coordinate decoder permutation, centered interval plus endpoint, positive pair readout, reflection permutation. |
+| 7fd3a86a3c94 | JInvariantBishopRowEndpointNullExact: exposed endpoint dominated by the existing absolute shell, with eventual-null and centered-to-symmetric limit transport. |
+| b8140e8c06c1 | JInvariantBishopEvenLatticeReflectionExact: actual simultaneous lattice negation and even reciprocal-power equality, including puncture. |
+| 8a0043ae06cf | JInvariantBishopAxisRowExact: actual zero-horizontal row, zero at origin and twice the original even zeta limit. |
+| c80cedba1f57 | JInvariantBishopAllLatticeRowsExact: positive, negative and zero rows consumed by the existing rectangle limit; actual G4Rows/G6Rows with axis plus twice positive row prefix. |
+| fe89a202da83 | JInvariantBishopLambertDegreeChartExact: literal positive factor-pair keys, unique triangle and rectangle lists, exact cofinal inclusions. |
+| d91bbe085c6a | JInvariantBishopLambertCofinalRegroupExact: finite majorized difference, sandwich, modulus-level cofinal limit, row-limit attachment. |
+| adee37060c4c | JInvariantBishopLambertSeriesRegroupExact: actual complex pair term, positive degree majorant, exact divisor-fibre readout, q^(md) via existing phase power, actual individual row convergence and degree-to-row compiler. |
+| 2a27e7a1ed9a | JInvariantBishopLatticeFourierSameObjectExact: instantiate weight 4/6 degree and majorant convergence from original series; attach positive-row values, original zeta and Machin pi inverse normalization; intended same4/same6, qE4S/T and qE6S/T terminals. |
+| a5ba294dcb08 | scripts/check_paper9_signed_rows_lambert_cofinal.py: independent local exact rational/SymPy replay: 195 signed chart, 4 symbolic reflection, 2178 inclusion, 544 fibre/tail and 2 normalization checks PASS. Not Agda execution. |
+
+The decisive cofinal geometry is triangle(n) ⊆ rectangle(n,max(n,m)) ⊆ triangle(n*max(n,m)); for any retained positive pair degree is m*d. Both real and imaginary signed differences are bounded by the positive degree-majorant tail, independently of the vertical cutoff. The actual E4/E6 degree budgets are supplied by the pre-existing polynomial-geometric majorants, not a newly assumed absolute double-series interchange. The weight-six minus sign is retained separately from the unsigned positive majorant. Normalization uses 2*zeta(4)=pi^4/45 and 2*zeta(6)=2*pi^6/945 on the original Machin object.
+
+Current next cut: use the native qE4S/T and qE6S/T source terminals in the original j/modular transport, then degree-41 Hecke product, pole removal, diagonal and ray residual. GTheta3 direct native analytic theta-to-Eisenstein equality is not asserted; the alternative original lattice/Fourier route is now source-written. Existing Lean theta modular uniqueness is untouched. C2/C3/H1/RawCross/GMP and kernel acceptance remain outstanding. Static delimiter scan of all nine new Agda modules passed; no explicit holes, postulates or termination overrides found in these new files. This is not a typecheck or a transitive axiom audit. Agda and Lean unavailable in local runtime; no CI invoked.
