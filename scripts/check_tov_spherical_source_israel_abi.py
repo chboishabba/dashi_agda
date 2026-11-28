@@ -9,7 +9,7 @@ def eq(z):
     assert s.simplify(s.factor(z))==0, s.factor(z)
 
 def main():
-    r,mi,me,pr=s.symbols('r mi me p_r',positive=True)
+    r,mi,me=s.symbols('r mi me',positive=True);pr=s.symbols('p_r',real=True)
     fi=1-2*mi/r; fe=1-2*me/r
     ni=(mi+4*s.pi*r**3*pr)/(r*r*fi)
     ne=me/(r*r*fe)
