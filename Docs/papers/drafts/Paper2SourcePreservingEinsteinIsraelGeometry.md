@@ -1,9 +1,14 @@
 # Paper 2 — Source-Preserving Dimensional Reduction and Einstein–Israel Geometry
 
 **Subtitle:** Signed Hopf connections, periodic Kaluza–Klein fibres and AdS gravitational spectra  
-**Status:** Revived independent working manuscript, 26 November 2026. Not a submission, native kernel certificate, or terminal GR/QFT/TOE claim.  
+**Status:** Revived independent working manuscript, 28 November 2026. Not a submission, native kernel certificate, or terminal GR/QFT/TOE claim.  
 **Suggested classifications:** gr-qc; math.DG, math-ph.  
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
+
+
+## Current proof state — 28 November 2026 (BR89–91)
+
+The latest original full warped reference uses BR37 rest-frame rank-one replacement in the positive adapted Hermitian endpoint norm, with E-sector factor max(1,|ξ|/|s|). This is a frequency-dependent norm conditional on the BR35/37 rest inverse and nonzero response, not uniform physical Sobolev coercivity. BR90 retains the full Einstein defect D=Ric+4g across the physical Israel jump: [D_na]=0 and [D_nn]=tr_h[D_ab]+6j tr_h M. The exact defect-to-Weyl rank is 9, projected zero-speed rank 6 and normal-symbol rank 8. BR91 retains all 75 first jets with five contracted Bianchi constraints; the compatible Cotton map has rank 25 and projected zero-speed rank 9 even on wave-compatible gauge Hessians. Contracted Bianchi alone therefore cannot remove this source. The proper route is reduced metric W1–W3, homogeneous gauge-wave IBVP on that same metric, then D=0 and vanishing Cotton/jump source; independent Weyl evolution needs its own geometric curvature comparison. These ranks were independently checked by a local SymPy transcription reported in the owner roadmap; the committed BR89–91 checker and full warped interval acceptance remain pending. BN spatial initial-data existence under its stated assumptions is not physical-time evolution. See [BR89–91 source cut](https://github.com/chboishabba/dashi_agda/commit/9d7044b487b3902860d515c74b0fb5b84ecc81e1).
 
 ## Abstract
 
