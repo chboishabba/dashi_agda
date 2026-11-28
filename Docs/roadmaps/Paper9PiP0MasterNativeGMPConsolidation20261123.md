@@ -2695,3 +2695,24 @@ Production: original in-place GMP and binary-split quotient receipts through 10M
 - **Negative controls**: no phase substitution of classical \`Real.pi\`, no positive-\(i\pi_M\) literal argument, no finite packet→universal cusp inference, no uninhabited cutset, no hidden \`postulate\` or \`sorry\`, no uncompiled proof promoted as kernel checked.
 
 **Prior-art attribution:** Machin 1706, classical modular form/Hecke and Chudnovsky theory, Bishop–Bridges constructive analysis, Murray's Agda work and pinned viktorcsimma/bishop, Mathlib original analytic operators. DASHI contributions are source-native signed coordinate transports, exact reproducible finite certificates and proof-assistant-specific composition. Existing \`ProofLevel=machineChecked\` constants are module-declared and are not an external execution receipt for newly written modules.
+
+
+### 2026-11-28 — P0 SAME-SOURCE PHASE × HECKE CUSP COARSE WELD IMPLEMENTED
+
+New implementation \`DASHI/Moonshine/CM163BishopOriginalPhaseHeckeCuspWeldExact.agda\` (commit \`88fc9a083300d972d044b264911129a7c2a4fc01\`) threads the SAME \`Round11.BishopCutset\` through:
+- \`CM163BishopSelectedTauExponentExact.FromOriginalBishopEndpoint.actualOriginalCMQ\`, which now consumes \`BishopOriginalMachinCayleyEndpointExact.originalFive/original239\` directly, with **no fresh arctangent/exponential/Cayley proof obligations**, at \`2π_M iτ = -π_M√163 - iπ_M\`;
+- \`JInvariantBishopCM163TailGuardExact.negativeDelta/xPositive/yPositive\` on the selected original negative-real q;
+- \`CM163BishopHecke41CuspLimitExact.At.diagonalZeroAlong/sliceZeroAlong\` on ONE original selected cusp path, retaining \`UnitGate\`, \`DiagonalGate\`, \`SliceGate\`, reference-disk inclusion and cusp phase null convergence as exact typed obligations;
+- \`CM163BishopHecke41CuspResidualExact.At.dS/dT/sS/sT\`, the existing original S/T invariance of BOTH residuals.
+
+The source module does **not** pretend that two original cusp limits imply global Hecke identities. New exact negative control \`scripts/check_paper9_modular_cusp_rigidity_negative.py\` (commit \`8ddbe5a1f530986da5c1b2dddea91bd5ca1eb8af\`) expands \`1/j = q -744q²+356652q³-140361152q⁴+…\` from original E4/E6/Delta integer series through degree 80. It is a genuinely nonzero, modular-invariant MEROMORPHIC function with zero cusp limit; poles at elliptic j zeros defeat the naive conclusion. Formal arithmetic locally PASS. Therefore the true global proof must establish pole-free holomorphic modular residual, constructive bounded compactification/rigidity, THEN all-point d=s=0, selected exact root and reciprocal signed two-jet; finite packet and cusp-local bounds cannot substitute. The local negative control was executed from equivalent code but committed bytes were not executed byte-identically.
+
+Exactly matched source-owner audit saved in \`Docs/support/reference/Paper9WholeClosureSourceOwnerAudit20261128.json\` (commit \`b8fd859e0e59aff64581c103b3f12725c18e2ff0\`). It records false-open items, original and companion precise constructors, original geometry/phase/Hecke/factorial source producers, attribution and runtime evidence. Searches did NOT identify a standalone original Bishop pole-free modular rigidity theorem; this is negative search evidence, not a mathematical absence proof.
+
+**Priority correction**: STOP spending P0 on speculative infinite atan derivative/ODE uniqueness; original clipped-mesh endpoint and actual remainder are already source-written for the relevant positive values. Keep sharp 8/9 line as optional, kernel-checkable improvement. Allocate next proof blocks in parallel:
+(1) Hecke pole-free global rigidity and actual selected j integer root;
+(2) SAME-Bishop hypergeometric H/J₁ → E4 square and Euler chain at original q;
+(3) actual signed reciprocal Hecke jet residual from original product;
+(4) precise Round11 cutset construction and native Agda/Lean typecheck;
+(5) original trace serialization and strict decimal floor production acceptance.
+Recompute provenance against master/PR heads; avoid wholesale rebase. Source-written does not mean typechecked; no native compilers and no GitHub CI here.
