@@ -157,6 +157,9 @@ def actual():
     binary=actual_binary()
     # Reuse the original 3B source-word producer; its normal order is
     # A^old_a B^old_b, so choose old_a=b, old_b=a for c=a dot b'.
+    import sys
+    # Existing source producer imports its companion by script-local name.
+    sys.path.insert(0,str(Path(__file__).resolve().parent))
     from scripts.monster_3b_mmgroup_source_symplectic_basis import run
     manifest,receipt=run()
     from mmgroup import MM
