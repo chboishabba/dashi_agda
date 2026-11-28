@@ -1,0 +1,6 @@
+Actual bounded local executions in /tmp/hopf230, OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br294_parity.py [--n 9]. Both explicit EXIT:0. Local git blob 1ec75ab4c81160ce1bd7980a75464fdcd67ef830 equals remote source commit 979a5dafe75e5272b53bb54308ddf8c642996392.
+BR294 7 rank 372 parity projection 3.9168713020015726e-05 lift max 2.350122781200943e-05 linear residual 6.299892248498584e-17 lift Gram [[1.1111111111111114, 0.0, 0.0], [0.0, 1.1111111111111112, 0.0], [0.0, 0.0, 1.1111111111111112]]
+BR294 even interior 4 rank 192 of 192
+BR294 9 rank 1026 parity projection 6.7968278028077735e-06 lift max 4.078096681684666e-06 linear residual 1.4460546475525415e-16 lift Gram [[1.4814814814814814, 0.0, 0.0], [0.0, 1.4814814814814805, 0.0], [0.0, 0.0, 1.4814814814814805]]
+BR294 even interior 6 rank 648 of 648
+Kernel basis is exact by centered difference of alternating-support tensor product; completeness tested numerically at these sizes with rank tolerance 1e-10. Boundary lift changes outer tracefree conformal K correction. Linear test only; no nonlinear fixed-boundary or continuum acceptance. Even-grid rank comparison only, not nonlinear evolved run.
