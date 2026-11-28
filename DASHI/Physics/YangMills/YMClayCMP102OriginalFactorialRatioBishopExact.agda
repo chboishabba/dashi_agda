@@ -23,6 +23,7 @@ import Data.Rational.Unnormalised as Q
   using (_/_; _*_; _≤_; *≤*)
 import Real as R
 import RealProperties as P
+import Sequence as Seq
 
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as E
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFactorialNatGrowthExact as Growth
@@ -83,7 +84,7 @@ originalBRatioBishop n =
 -- all data come from original factorial Nat proof and Bishop order.
 originalAllAMassBelowSixElevenths :
   ∀ count →
-  R._≤_ (R.∑₀
+  R._≤_ (Seq.SeriesOf
     (λ n → R._⋆
       (E.inverseFactorialRational (E.evenExponent (suc n))))
     count)
@@ -94,7 +95,7 @@ originalAllAMassBelowSixElevenths =
 
 originalAllBMassBelowTenFiftySevenths :
   ∀ count →
-  R._≤_ (R.∑₀
+  R._≤_ (Seq.SeriesOf
     (λ n → R._⋆
       (E.inverseFactorialRational (E.oddExponent (suc n))))
     count)
