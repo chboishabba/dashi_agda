@@ -3031,3 +3031,116 @@ module At {r : Level} (F : C.RealField r)
   -- nonlinear graph harmonic-gauge derivative remain separate
   -- evidence obligations. BR70 constructs the same-source data
   -- that must enter BR68/69 instead of pretending C_n=c_perp.
+
+  ------------------------------------------------------------------------
+  -- BR71: ONE COMPLETE ORIGINAL D/E 30+10 physical reference row map.
+  -- Physically calculated sources replace ONLY their owned slots:
+  -- metric 14:24 Israel (BR66), metric 29 mean force (BR68);
+  -- gauge 5:9 coordinate Codazzi (BR68), gauge 9 Gauss unchanged.
+  -- Original 14 value/shift and 5 D/E gauge/metric allocation rows
+  -- are preserved, not normalized to an unverified common allocation.
+  ------------------------------------------------------------------------
+
+  originalBR71MetricPrefix : OriginalBR66MeanSource → List S
+  originalBR71MetricPrefix d =
+    pack10 (λ a b → H (originalPlusMetric d) a b
+                      - H (originalMinusMetric d) a b) ++
+    (pack4 (λ a → beta (originalPlusMetric d) a
+                   - beta (originalMinusMetric d) a) ++
+      pack10 (λ a b →
+        israel (originalReferenceIsraelJump d) (originalTangentialJet d)
+          (originalPlusMetric d) (originalPlusNormal d)
+          (originalMinusMetric d) (originalMinusNormal d) a b
+          + originalBR66MeanShapePayment d a b))
+
+  originalBR71MetricRows : Allocation →
+    OriginalBR66MeanSource → List S
+  originalBR71MetricRows a d =
+    originalBR71MetricPrefix d ++
+      originalBR71MetricSuffix a d
+
+  originalBR71MetricSuffix : Allocation →
+    OriginalBR66MeanSource → List S
+  originalBR71MetricSuffix D d =
+    pack4 (tangentJump (originalReferenceIsraelJump d)
+      (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d)
+      (originalMinusMetric d) (originalMinusNormal d)) ++
+      (gaugeNorm (originalTangentialJet d)
+        (originalPlusMetric d) (originalPlusNormal d) ∷
+        originalBR68PhysicalMeanForce (originalMeanExtrinsic d)
+          (originalReferenceIsraelJump d) (originalTangentialJet d)
+          (originalPlusMetric d) (originalPlusNormal d)
+          (originalMinusMetric d) (originalMinusNormal d) ∷ [])
+  originalBR71MetricSuffix E d =
+    tangentJump (originalReferenceIsraelJump d) (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d)
+      (originalMinusMetric d) (originalMinusNormal d) x ∷
+    tangentJump (originalReferenceIsraelJump d) (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d)
+      (originalMinusMetric d) (originalMinusNormal d) y ∷
+    tangentJump (originalReferenceIsraelJump d) (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d)
+      (originalMinusMetric d) (originalMinusNormal d) z ∷
+    gaugeNorm (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d) ∷
+    gaugeNorm (originalTangentialJet d)
+      (originalMinusMetric d) (originalMinusNormal d) ∷
+    originalBR68PhysicalMeanForce (originalMeanExtrinsic d)
+      (originalReferenceIsraelJump d) (originalTangentialJet d)
+      (originalPlusMetric d) (originalPlusNormal d)
+      (originalMinusMetric d) (originalMinusNormal d) ∷ []
+
+  originalBR71GaugeRows : Allocation →
+    S → (Wall → Wall → S) → Vec →
+    Cov → Cov → Cov → Cov → List S
+  originalBR71GaugeRows a j meanTensor q cp cx cm cmx =
+    gaugePrefix a cp cm ++
+      (pack4 (originalBR68PhysicalGaugeCodazzi j meanTensor q
+        cp cx cm cmx) ++
+        (gaugeGauss j q cp cx cm cmx ∷ []))
+
+  record OriginalBR71UnifiedPhysicalBoundary : Set r where
+    constructor originalBR71UnifiedPhysicalBoundary
+    field
+      originalMeanIsraelSource : OriginalBR66MeanSource
+      actualMeanExtrinsicTensor : Wall → Wall → S
+      plusGaugeValue plusGaugeNormal : Cov
+      minusGaugeValue minusGaugeNormal : Cov
+      physicalMetricD physicalMetricE : List S
+      physicalGaugeD physicalGaugeE : List S
+      originalNonlinearGraphUnpaid : List S
+      originalHarmonicConnectionUnpaid : Cov
+  open OriginalBR71UnifiedPhysicalBoundary public
+
+  assembleOriginalBR71UnifiedBoundary :
+    OriginalBR66MeanSource → (Wall → Wall → S) →
+    Cov → Cov → Cov → Cov →
+    List S → Cov → OriginalBR71UnifiedPhysicalBoundary
+  assembleOriginalBR71UnifiedBoundary d M cp cx cm cmx graphDebt connectionDebt =
+    originalBR71UnifiedPhysicalBoundary
+      d M cp cx cm cmx
+      (originalBR71MetricRows D d)
+      (originalBR71MetricRows E d)
+      (originalBR71GaugeRows D (originalReferenceIsraelJump d)
+        M (originalTangentialJet d) cp cx cm cmx)
+      (originalBR71GaugeRows E (originalReferenceIsraelJump d)
+        M (originalTangentialJet d) cp cx cm cmx)
+      graphDebt connectionDebt
+
+  originalBR71MetricCount : (a : Allocation)
+      (d : OriginalBR66MeanSource) →
+      length (originalBR71MetricRows a d) ≡ 30
+  originalBR71MetricCount D d = refl
+  originalBR71MetricCount E d = refl
+
+  originalBR71GaugeCount : (a : Allocation) (j : S)
+    (M : Wall → Wall → S) (q : Vec) (p px m mx : Cov) →
+    length (originalBR71GaugeRows a j M q p px m mx) ≡ 10
+  originalBR71GaugeCount D j M q p px m mx = refl
+  originalBR71GaugeCount E j M q p px m mx = refl
+
+  -- Native source now owns ALL 40 physical reference boundary rows
+  -- per allocation. The nonlinear graph, full harmonic connection,
+  -- and rank-nine BR29 source factor remain present as UNPAID fields;
+  -- this assembly alone cannot certify physical IBVP solvability.
