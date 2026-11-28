@@ -11,6 +11,11 @@ Status: live analytic manuscript draft; conditional; non-promoting
 
 
 
+
+## Current proof state — 28 November 2026, Section 16
+
+The original Fourier pressure split uses the same ordered advective cell, with pressureCell = −(k·u)(k·v)/|k|² and zero longitudinal work against a transverse output. The integrated half-weight limit theorem gives strong weighted modal error convergence from the original unweighted error and a uniform squared-radius moment; its actual trajectory attachment remains pending. Lean #123 (`ad808cfed463`, `578de5f4742c`). This is not a supremum-in-time critical estimate, a smooth global solution or a full physical pressure reconstruction. Forced C/D source replay now rejects untracked/deleted local proof inputs (`a66aa599c155`); native pin still unavailable. Unforced profile/certificate absent as recorded in Section 15. [Section 16](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Current proof state — 28 November 2026, Section 15
 
 The whole-space A route now has the actual signed advective involution on Cartesian frequencies, transported through Lebesgue translation/reflection and Fubini (Lean #123, `7b924eacace0`), conditional on integrability of the two actual weighted folds. For both A and B, the quarter-weight difference has the exact physical radial numerator |p|²+2p·q and division-free zero seam (`922c41261367`). The time-uniform signed critical bound, localization and physical PDE continuation remain open. The local Gaussian-polynomial Fourier fixture has nonzero exact normalized signed transfer, not a nonlinear trajectory.
