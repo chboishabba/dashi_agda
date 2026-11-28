@@ -26,6 +26,35 @@ def material_jvp(model,volumes,D,nu,dD,dnu):
     assert np.allclose(dA,-dA.T,atol=1e-13,rtol=0)
     return dict(d_generator=dA-dloss,d_exchange=dA,d_loss=dloss)
 
+def amplitude_exchange_jvp(model,volumes,amplitude,d_amplitude):
+    """Reciprocal operator derivative in q=sqrt(D) coordinates, including q=0.
+
+    Only the off-diagonal Whitney exchange is differentiated here.
+    The native loss and gyro blocks switch support at q=0; their full
+    generator derivative is NOT licensed by this smooth exchange chart.
+    The timed propagator also needs an explicit new-support stage.
+    """
+    q,dq=[np.asarray(v,float) for v in (amplitude,d_amplitude)]
+    vol=np.asarray(volumes,float);n=len(vol)
+    if q.shape!=(n,3) or dq.shape!=q.shape or np.any(q<0) or np.any(vol<=0):
+        raise ValueError('invalid population amplitude support chart')
+    if np.any((q==0)&(dq<0)):
+        raise ValueError('amplitude would cross negative half-line')
+    me=np.asarray(model['energy_masses'][0],float)
+    W=np.asarray(model['material_map'],float)
+    ne=len(me);N=model['generator'].shape[0];nf=N-ne-9*n
+    if nf<0 or W.shape!=(ne,3*n): raise ValueError('material map mismatch')
+    out=np.zeros((N,N))
+    for o in range(n):
+        base=W[:,3*o:3*o+3]/np.sqrt(me*vol[o])[:,None]
+        for j in range(3):
+            sl=slice(ne+nf+9*o+3*j,ne+nf+9*o+3*j+3)
+            dc=base*dq[o,j]
+            out[:ne,sl]=-dc;out[sl,:ne]=dc.T
+    assert np.array_equal(out,-out.T)
+    return dict(d_exchange=out,full_generator_jvp_admitted=False,
+                zero_support_stage_weld_required=bool(np.any((q==0)&(dq!=0))))
+
 def fixtures():
     rng=np.random.default_rng(369);ne,nf,n=5,3,2;N=ne+nf+9*n
     W=rng.normal(size=(ne,3*n));me=1+rng.random(ne);vol=np.array([2.,3.])
