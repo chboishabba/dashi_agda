@@ -47,7 +47,7 @@ class ContinuationAllowance:
         self.left-=cap;self.charges[name]=self.charges.get(name,0)+cap
         return True
 
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None,phase_degree=3,phase_leaf_cap=64,patch_budget=16384,patch_width=24,trellis_budget=0):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None,phase_degree=3,phase_leaf_cap=64,patch_budget=16384,patch_width=24,trellis_budget=0,trellis_ordered=False):
     if ledger is not None:ledger.baseline_cells+=1
     def take(name,cap):return bool(cap) and (ledger is None or ledger.reserve(name,cap))
     # Unit propagation keeps both target and observable offset on original indices.
@@ -178,7 +178,16 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # Target-conditioned crossing-rank fold: opt-in so historical
     # shared allowance comparisons retain their exact reservation policy.
     if any(a!=b for a,b in zip(lo,hi)) and take('target_trellis',trellis_budget):
-        cert=target_trellis_contrast(F,cols,target,offset,remaining,w,trellis_budget)
+        if trellis_ordered:
+            from check_pnp_residual_geometry_bridge import ordered_trellis
+            result,stats=ordered_trellis(F,cols,target,offset,remaining,trellis_budget)
+            cert=None
+            if result is not None:
+                H,_=result
+                a=tuple(w*(3*h-sum(H)) for h in H)
+                cert=a,a,stats
+        else:
+            cert=target_trellis_contrast(F,cols,target,offset,remaining,w,trellis_budget)
         if cert is not None:
             a,b,_=cert
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
