@@ -183,7 +183,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                 roots2=ix[b2!=0]; arrival2[roots2]=np.minimum(arrival2[roots2],t0)
                 if ((np.any(arrival2[ix]<=t0) and (fid is None or np.any(ap)))
                         or (tangent_reached and np.any(da))
-                        or (primal_reached and np.any(a2))):
+                        or (primal_reached and (np.any(a2) or np.any(da)))):
                     arrival2[ix]=np.minimum(arrival2[ix],t1)
                 if fid is None: midpoint2[ix]=(old2+y2)/2
                 x2[ix]=y2
