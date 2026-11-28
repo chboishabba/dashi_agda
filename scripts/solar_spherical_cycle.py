@@ -170,6 +170,22 @@ def cycle(material,cfg,shadow=None):
             tail_receipt['changing_operator_envelope']=tail_envelope(model,pop,theta,vol,rows,neutral,MASS,CHARGE,
                 q['recombination_m3_s'],cap,cool,dt,cfg['asymptotic_tail_probe_steps'])
             tail_receipt['changing_operator_envelope']['requires_fixed_terminal_atlas']=True
+            if cfg.get('certify_tail_observability',False):
+                from solar_changing_tail import right_limit_reference
+                from solar_tail_observability import reference_observability
+                if not cfg.get('common_stage_atlas',False) or not np.array_equal(analytic_pop_support,pop>0):
+                    tail_receipt['reference_observability']=dict(status='FIXED_ATLAS_OR_ANALYTIC_SUPPORT_NOT_ADMITTED')
+                else:
+                    ref=right_limit_reference(material,cfg,pop)
+                    if np.any(x[~ref['occupied']]!=0):
+                        raise ValueError('tail current outside analytic occupied support')
+                    obs=reference_observability(ref['generator'],ref['dt'],ref['receipt'],ref['occupied'],ne+nf)
+                    tail_receipt['reference_observability']=obs
+                    tail_receipt['conditional_full_return_on_same_reference']=bool(
+                        obs['strict_occupied_block_contraction'] and tail_receipt['population']['asymptotic_population_return']
+                        and tail_receipt['population']['asymptotic_pool_return'])
+                    tail_receipt['requires_same_exact_limiting_generator']=True
+                    tail_receipt['asymptotic_full_return_admitted']=False
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
                 asymptotic_tail=tail_receipt,
                 analytic_return_geometry=dict(thermal=thermal_geometry,population=support_geometry,
