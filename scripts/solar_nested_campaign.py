@@ -8,7 +8,6 @@ from solar_spherical_material_weld import assembly_mesh,construct
 from solar_spherical_cycle import cycle,geometry
 from solar_nested_cochain_refinement import nested_cochains,metric_pullback,material_cell_maps
 from solar_evolution_residual import field_maps,coefficient_reopen
-from solar_spherical_reverse_jvp import campaign_jvp
 from solar_earth_collision_tensor import rates
 
 def nested_problem(material,cfg,fine_ports):
@@ -76,6 +75,7 @@ def compare_nested(material,cfg,fine_ports,dheating=None,dload=None,fine_dload=N
         result['material_reopen'][name]=material_reopen(fh[:,offf:offf+nf*width],ch[:,offc:offc+nc*width],width)
         offc+=nc*width;offf+=nf*width
     if dheating is not None:
+        from solar_spherical_reverse_jvp import campaign_jvp
         if dload is None or fine_dload is None:
             raise ValueError('independent load direction required on each mesh')
         cc['retain_jet_history']=True;fc['retain_jet_history']=True
