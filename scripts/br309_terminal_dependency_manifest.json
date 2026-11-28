@@ -80,14 +80,31 @@
       "owner": "scripts/check_hopf369_br302_boundary.py",
       "status": "executed_finite"
     },
+    "G4.maxwellSAT": {
+      "deps": [
+        "G4.sbp"
+      ],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br311_maxwell_sbp_sat.py",
+      "status": "executed_finite"
+    },
     "G4.propagation": {
       "deps": [
-        "G4.history"
+        "G4.history",
+        "G4.maxwellSAT"
       ],
       "lane": "g4",
       "owner": "BR305 sourced subsidiary and BR297 independent temporal jets",
       "status": "held",
       "unpaid": "Original source-compatible causal boundary, Hamiltonian constraint propagation and uniform energy estimate"
+    },
+    "G4.sbp": {
+      "deps": [
+        "G4.history"
+      ],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br310_sbp_source_boundary.py",
+      "status": "executed_finite"
     },
     "H.cube": {
       "deps": [],
