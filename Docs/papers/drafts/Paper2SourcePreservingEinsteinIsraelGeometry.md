@@ -490,3 +490,30 @@ control, not a canonical FLM or Monster class identification.
 Four local stages passed; no native kernel, full PDE or
 physical calibration acceptance. See
 [BR150–153 dependency and proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Atomic and periodic-table source handoff (BR154–156)
+
+The original atomic programme (#886) already supplies the typed
+369-to-orbital, fermion, interacting-energy and periodic-table
+construction, with H/He physical benchmark receipts. The actual
+n=2 shell has eight spin-orbitals (2s and 2p, including spin);
+three such carriers fit the punctured-nine 24D address chart,
+but their orbital-only C3 action has trace 2 per shell, not
+the free-lane character. A selected combined finite KK lane
+and orbital rotation \(G=K\otimes B\) is conjugate by
+\(J=\operatorname{diag}(I,B,B^2)\) to \(K\otimes I\),
+with an exact selected-mode Hamiltonian intertwiner including
+s/p splitting. The independent physical matter action and
+detector coupling remain unpaid. On the original projected
+hydrogenic 2p² Coulomb source, retaining all spin-orbitals gives
+15 antisymmetric states and energies \(21/128,237/1280,111/512\)
+with multiplicities 9,5,1 respectively in atomic units.
+The physical magnetic rotation commutes with this interaction,
+whereas the bare cyclic magnetic label shift has rank-two
+commutator on the full projected carrier; the previous
+common-spin scalar block hid this residual. This finite
+interacting operator is not a full atomic spectrum or
+a quantum gravity equivalence. The original atomic clock,
+crystal and matter source owners are now explicitly linked
+in [the canonical roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

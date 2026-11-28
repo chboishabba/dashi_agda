@@ -3538,3 +3538,147 @@ record the exact residual or non-descent. The periodic and
 G3/G4 classical lanes continue independently per section 0.
 This scope audit is targeted master-source inspection, not
 an exhaustive sibling reconciliation or new Monster proof.
+
+
+## 25. BR154–156 — original atomic/quantum/periodic-table source integration
+
+The user requests the existing atomic and quantum constructions, not
+a new cardinality-derived atomic theory. These are first-class physical
+realizations/consumers of the 369 programme, independent of periodic
+W6. Canonical historical owner #886 (closed, head be528d4cdeb01930f143d486af3c998744084576)
+and later master atomic/quantum sources retain attribution and authority.
+The following are reopened master source blobs, not new kernel receipts.
+
+| Original file | Source and consumer |
+|---|---|
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369GenerativeExact.agda (89e16b5edf96d0a73bbc28f658e008bd6a99d0e9) | AtomicIndex, Neutral, ElementEquivalent, IsotopeEquivalent, nineSheetLiftRoundTrip; physical representation, fermions, interacting energy, ground state, valence and recurrence; no numerical cardinality promotion |
+| DASHI/Physics/Foundations/AtomicFermionShellExact.agda (0cc11d58f609cd454b62fb55090490b1c80854ed) | OrbitalLabel, SpinState, secondShellCapacityIsEight, thirdShellCapacityIsEighteen, pSubshellCapacityIsSix; actual angular labels supplied |
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPeriodPartitionExact.agda (5cca20726c8234e84281ad59e9087cd6ffa69705) | selectorPrefixThroughNextBoundary, periodCapacity; 2,8,8,18,18,32,32 and closures from same stream |
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda (cdbc46307bb7e12241a69a04425a22ee9e7ca605) | repairExecutionRegression, sameObjectPromotionBoundaryRegression; radial identity, H/NIST reduced mass, He HF-limit and remaining correlation |
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369MagneticC3PhysicalRealizationExact.agda (832e16b47c4550c0dfa5afd28d461a12c82cd627) | magneticSector, rotationPhaseIsExistingPositiveCharacter, sectorAdditionIsExistingC3Addition; rotation versus bare charge shift |
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369AnalyticQuantumExecutionExact.agda (fb2c27b995580bf16790d286a6fea970ce5de554) | spatialRotationEqualsChargeTransportIsFalse, lithiumBerylliumCompleteBasisRecoveryPaidIsFalse; hydrogenic/E1 and minimal basis Li/Be existing execution boundary |
+| scripts/atomic_369_p2_coulomb_exact.py (28093e07e4c8e661a27ea4eb76ef412372aea3b3), scripts/atomic_369_manybody_c3_hamiltonian.py (762a66e0f7c8d5bc0484e083cc433f4cf718fac6) | original exact F0,F2, common-spin wedge2 matrix, restricted hydrogenic charge symmetry; BR156 retains the full spin carrier |
+| scripts/check_atomic369_kk_selected_mode_commuting.py (ba122f8a401b1cededb41c121c5060247a1cfa0c), scripts/check_atomic369_kk_u1_dirichlet_weld.py (3bf7e01622b1fe96fb0dadd5d69e90ccd740e898) | MG06 radial/circle selected mode isometry and operator intertwining, gauge and holonomy controls; BR155 same finite circle on actual eight spin-orbital labels, no 5D electron claim |
+| DASHI/Algebra/Quantum/Atomic369AFQMCSameEnergySourceExact.agda (4b42cb3c714f90b02551f3e295b6a80baa657804) | atomicSourceEnergyBoundOnRun on the original AtomicIndex and interacting energy; empirical/source witnesses required, not supplied by a finite Coulomb projection |
+| DASHI/Physics/Chemistry/AtomicPeriodicTable369ChemistryHyperfibreBridgeExact.agda (0b4e514b17121543119647d583f98840971999ed) | ChemistryHyperfibreSystem, ChemistryFibre; time-indexed atomic to molecular/reaction/industrial lineage with independent conditions |
+| docs/crystallography_369_atomic_quantum_crosspollination.md (74d0f102827567e97b9d5d81c111ee2ad4eb2efb) | species, site stabilizer, reciprocal Bloch action and scattering authority; element label not unique crystal |
+| Docs/papers/R2P2369AtomicQuantumDiamondArchitecture.md (c727098fbf80f6b63557194ba4e5b92c3797528b) | #1407, #1085, #1117, #1292 source handoff: actual clocks, proper time, signed comb and empirical uncertainty; no clock spectrum from 369 label |
+
+Section 24's WaveBlock24 and retained centre machinery remains the
+coordinate owner. These master paths are inspected, not all imported
+or rebuilt on this PR. Historical source chronology and original
+scientific prior art remain under #886, DLMF/NIST, Madelung, Pauli,
+Schrodinger, Hartree, Slater, Pekeris, and respective owners. No
+JMD attribution without documented contribution.
+
+### BR154 — physical shell characters and periodic-table distinction
+
+At principal n the source spin-orbital set is (l,m,s),
+0<=l<n, -l<=m<=l, s=±1 (twice spin). Its dimension is
+2 n². The orbital-only C3 rotates with omega^m; the spin
+spectator supplies a factor two. For n=2 the multiplicities
+(4,2,2) give trace2; n=3 gives (6,6,6) and trace0.
+In general each l contributes orbital trace 1,0,-1 repeating
+with l mod3; the shell sum is 1 for n mod3!=0, zero otherwise.
+Physical spin rotation by 2pi/3 has order six, not three.
+For the separately chosen order-three lift (minus the physical
+spin rotation), its two spin eigenvalues are omega and omega²;
+the product orbital/spin multiplicities for n=2 are (2,3,3),
+trace -1. This is not the literal physical spin rotation.
+The checker enumerates n=1..9 and source period partitions
+2,8,8,18,18,32,32. Filled shell determinant phases are neutral.
+A principal n=3 shell of 18 states is not periodic-table period
+3 (3s+3p, eight states). Retain principal, orbital, spin, charge
+and filling order. No ground-state exception or nuclear stability
+derivation. The 8 in n=2 is 2+6, not a claim that atomic orbitals
+are the eight geometric points or E8 roots.
+
+### BR155 — selected atomic/KK 24D action and energy weld
+
+Choose a marked address BIDI between the four orbital labels
+(2s and three 2p magnetic labels) times two spins and the
+four antipodal pairs of P=F3² minus zero. Spin flip is paired
+with address antipode by convention, not physical inversion
+or physical time reversal. An actual physical spin flip
+operator and physical parity must be kept separately.
+Use a real Cartesian p basis for orbital-only rotation B:
+two s modes fixed, two independent p triplets cyclically
+permuted by a spatial 120-degree rotation about (1,1,1).
+This is the same orbital representation up to basis choice;
+the magnetic label chart above does not identify the Cartesian
+basis pointwise. B³=I, tr B=2. Independent lane cycle K
+on C3 is free on 3×8. A diagonal lane/atomic action G=K⊗B
+has an explicit orthogonal conjugacy to F=K⊗I8:
+ J=diag(I8,B,B²), J F J^T=G, J^T J=I.
+By contrast I3⊗B has trace6 and cannot be conjugate to
+the free rank24 actor (trace0). This distinguishes an atomic
+rotation from combined lane transport even on the same set.
+For h=diag(Es,Es,Ep,...,Ep), [h,B]=0; let
+ H=I3⊗h+c(2I3-K-K^T)⊗I8
+ be the selected finite separable circle/atomic Hamiltonian
+ from MG06's circle mechanism, c the supplied scale. Then
+ J H J^T=I3⊗h+c(2I24-G-G^T).
+ W=(1,1,1)^T⊗I8/sqrt3, W'=J W are isometries,
+ H'W'=W'h, G W'=W'. This is a same-operator intertwiner
+ with exact s/p splitting retained, not just dimension.
+ The circle twist B has holonomy B³=I in this selected
+ construction; nontrivial holonomy, full atom, electron
+ mass/charge and a physical 5D Dirac/QED action remain
+ separate. It does not supply a Leech lattice metric or
+ Monster symmetry. Keep original 3 sheet centres as side
+ state when reopening full 27 (not physical atomic states).
+ The actual Leech actor must separately transport its Gram
+ and cocycle through a marked source chart. No canonical
+ identification of a free rank24 character with 3B or 3C.
+
+### BR156 — interacting quantum residual when spin is retained
+
+Consume exact F0=93/512, F2=45/512 from the original Z=1
+hydrogenic 2p radial donor (no new radial integration).
+Using its same Gaunt multipole formula, assemble all
+15×15 antisymmetric spin-orbital Coulomb entries on
+wedge²(C³⊗C²) with direct minus exchange including spin
+Kronecker deltas. Exact eigenvalues and multiplicities:
+ 21/128 (9), 237/1280 (5), 111/512 (1).
+ These agree with the conventional ^3P, ^1D, ^1S term
+ dimensions of the selected 2p² configuration. Both
+ common-spin 3×3 blocks recover the previous 21/128 I3.
+ Physical magnetic spatial rotation remains a symmetry:
+ nonzero entries preserve total m (in particular m mod3).
+ The bare cyclic m-label charge transport K of the original
+ three-state construction has wedge² order3, but its
+ commutator with this full Coulomb matrix has rank2.
+ The earlier common-spin scalar sector therefore hides a
+ real interaction residual. Rotational symmetry is not
+ generic cyclic label-shift symmetry when opposite spin
+ is admitted. A future equivariant repair must use the
+ physical rotation or transport the actual Hamiltonian and
+ interaction tensor, not discard opposite-spin states.
+ This is a projected finite Coulomb calculation, not an
+ interacting many-shell/ground-state spectrum or prediction
+ of actual p² atom term energies.
+
+### Parallel continuation and acceptance
+
+Atomic P0: use BR156 as the full selected p² interaction donor,
+then original multi-orbital same-source SCF/neutral/cation
+energy and correlation/AFQMC, with physical spin/orbital action.
+Use original MG06 and #1241 physical matter action to relate
+the G3 metric/frame to actual detector matter; don't treat
+graviphoton as independent Maxwell. Reuse #1407 and metrology
+owners for measured clocks and actual optical readouts. Crystal,
+reaction and quantum material lanes require species, symmetry,
+Bloch/operator and energy/evidence preservation, not atomic
+number alone. Quantum/Monster: original puncture/centre/Leech
+Gram and action, BR155 operator-level example, original #1545
+marked action, retain actual 54 residual independently. The
+G3 finite-time constants, G4 Newton quadrupole and periodic
+W0–W7 remain active; no new PDE step in this atomic tranche.
+
+Three independent local SymPy stages exit zero, 90s cap per
+stage; initial lane test needed symbolic simplification before
+matrix equality (no changed mathematical assertion). Checker
+Git blob 90e375e0ca64f1fb7fcc97f6aa8af5ee14c0e871. Local source
+bytes matched uploaded blob. No native kernel, CI, complete
+atomic benchmark replay, material calibration, or nonlinear
+continuum acceptance. No sibling edits or exhaustive branch audit.
