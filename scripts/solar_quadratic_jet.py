@@ -39,7 +39,7 @@ def amplitude2(n,nu,nuu):
     out[higher]=np.sqrt(nuu[higher])
     return out
 
-def event_state2(z,z1,z2,n,r,a,n_u,r_u,a_u,n_uu,r_uu,a_uu,b,signed_mass):
+def event_state2(z,z1,z2,n,r,a,n_u,r_u,a_u,n_uu,r_uu,a_uu,b,signed_mass,return_kinetic=False):
     """Second s coefficient of original normalized-current event.
     signed_mass = sign(charge)*sqrt(volume*mass). Bounded velocity path;
     zero coefficients cannot be replaced by an arbitrary nonzero velocity.
@@ -48,7 +48,7 @@ def event_state2(z,z1,z2,n,r,a,n_u,r_u,a_u,n_uu,r_uu,a_uu,b,signed_mass):
     N=np.stack([n,n_u,n_uu]); R=np.stack([r,r_u,r_uu]); A=np.stack([a,a_u,a_uu])
     F=N-R; M=F+A
     for p in (N,R,A,F,M): amplitude2(*p)
-    out=np.zeros_like(z)
+    out=np.zeros_like(z); kinetic=np.zeros(3)
     for j in range(3):
         n0,n1,n2=N[:,j]; m0,m1,m2=M[:,j]
         w=signed_mass[j]
@@ -66,6 +66,17 @@ def event_state2(z,z1,z2,n,r,a,n_u,r_u,a_u,n_uu,r_uu,a_uu,b,signed_mass):
         elif np.any(z[j]!=0) or np.any(z1[j]!=0) or np.any(z2[j]!=0):
             raise ValueError('uninhabited current jet')
         f0,f1,f2=F[:,j]; a0,a1,a2=A[:,j]
+        r0,r1,_=R[:,j]
+        kinetic[0]+=.5*w*w*a1*(b[j]@b[j])
+        kinetic[1]+=.5*w*w*(r0*(v[1]@v[1]+2*v[0]@v[2])+r1*(v[0]@v[0]))
+        if m0>0:
+            g0=f0*a0/m0; g2=(f1*a0+f0*a1)/m0-g0*m1/m0
+        elif m1>0:
+            g0=0.;g2=f1*a1/m1
+        else:
+            g0=g2=0.
+        dv=v[0]-b[j]
+        kinetic[2]+=.5*w*w*(g0*(v[1]@v[1]+2*dv@v[2])+g2*(dv@dv))
         if m0>0:
             p0=f0*v[0]+a0*b[j]
             p2=f0*v[2]+f1*v[0]+a1*b[j]
@@ -74,7 +85,7 @@ def event_state2(z,z1,z2,n,r,a,n_u,r_u,a_u,n_uu,r_uu,a_uu,b,signed_mass):
             out[j]=w*f1*v[1]/np.sqrt(m1)
         elif m2>0:
             out[j]=w*(f2*v[0]+a2*b[j])/np.sqrt(m2)
-    return out.ravel()
+    return (out.ravel(),kinetic) if return_kinetic else out.ravel()
 
 def cayley2(P,A1,A2,x2,y1,x1,mid0,h,b2):
     """Second coefficient on a compatible right-limit stage."""
