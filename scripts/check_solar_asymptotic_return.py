@@ -1,7 +1,7 @@
 """Original birth-free reaction tail and exact frozen indexed field return."""
 import numpy as np
 import sympy as S
-from solar_physical_causal import reaction
+from solar_population_event import reaction
 from solar_physical_cone import timed_step
 from solar_asymptotic_return import recombination_tail_geometry,source_off_tail_receipt
 from solar_frozen_tail_certificate import tail_stage_matrix,reachable_tail_certificate
