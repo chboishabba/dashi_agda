@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python in /tmp/pnp33, timeout 90 per campaign. Two final primary executable blobs matched GitHub readback; copied prior selected dependencies from /tmp/pnp32. No full checkout parity. Git DNS failed; agda, lake and lean --version all command not found. No CI.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_prime_power_incidence.py",
+      "blob": "87a00c2cba38c51fd3fd6321a499ee91fe79de01",
+      "seconds": 2.16,
+      "enumerated_modular_systems": 1152,
+      "verified_contradictions": 559,
+      "moduli": [
+        2,
+        4,
+        8,
+        3,
+        9,
+        5
+      ],
+      "latin": [
+        {
+          "order": 2,
+          "columns": 4,
+          "modulus": 2,
+          "logical_used": 369
+        },
+        {
+          "order": 4,
+          "columns": 16,
+          "modulus": 4,
+          "logical_used": 11018
+        },
+        {
+          "order": 8,
+          "columns": 64,
+          "modulus": 8,
+          "logical_used": 186136
+        },
+        {
+          "order": 16,
+          "columns": 256,
+          "modulus": 16,
+          "logical_used": 3308257
+        },
+        {
+          "order": 32,
+          "columns": 1024,
+          "modulus": 32,
+          "logical_used": 59916491
+        }
+      ],
+      "odd_order_controls": 4,
+      "cnf_source_extraction": 1,
+      "missing_exclusion": 1,
+      "tamper": 1,
+      "refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_certified_residual.py",
+      "blob": "0b543670aac4c3612665019d99c77cf6c99e08f3",
+      "seconds": 3.53,
+      "tseitin": {
+        "vertices": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "WITNESS": 4,
+        "EMPTY": 4
+      },
+      "guarded_tseitin": 8,
+      "guarded_modular": 1,
+      "mixed": 96,
+      "threshold_density": {
+        "ratio": 4.26,
+        "logical_cap": 200000,
+        "cohort": 64,
+        "prior_vs_diagnostic": {
+          "WITNESS->WITNESS": 20,
+          "EMPTY->EMPTY": 2,
+          "WITNESS->UNKNOWN": 16,
+          "EMPTY->UNKNOWN": 2,
+          "UNKNOWN->UNKNOWN": 24
+        },
+        "prior_default_unchanged": true
+      },
+      "zero_cap_controls": 2
+    }
+  ],
+  "limits": [
+    "Native proof bodies written, no kernel acceptance.",
+    "Prime-power linear relaxation inconsistent implies original exact-one source empty; consistency is not Boolean feasibility.",
+    "Complete local XOR pattern recognition bounded arity <=4. Tseitin cycle plus matching graph not asserted expander or lower-bound family.",
+    "Random/planted threshold-density diagnostics not known-hard instances; larger unplanted unknown truth not enumerated; planted witnesses known to test only. No solver lower bound.",
+    "Selected chart score not minimum width or global irreducibility; declared reservation not physical bit clock; prior exact completion may require replay of producer rather than independent short proof.",
+    "No universal Clay endpoint established."
+  ]
+}
