@@ -720,3 +720,8 @@ Lean #123 d04a2fff44d8 writes the literal zero-mode force, mean constancy on the
 ## Section 18 — original modal divergence and integrated tail
 
 Lean #123 b30b86c379b5 / dc4e9aa8dd8f: actual longitudinal heat identity gives initial-to-later divergence preservation; existing energy FTC and pointwise tail inequality supply 2νR²∫tail≤initial energy under original trajectory premises. Finite ODE existence, conjugate reality, physical continuum and critical-time estimate remain open. Native kernel pending; three independent symbolic integrating-factor controls, integrated bound not separately executed.
+
+
+## Section 19 — actual signed reality covariance
+
+Lean #123 62ef5713d71a writes signed conjugation of the actual ordered force using the original negated input pair carrier; 7999cc7057da imports the divergence/reality chain into AB. Conditional fixed-point consequence; actual reflected trajectory, ODE uniqueness/existence and critical continuation remain open. 128 independent ordered-cell exact controls, not full finite-force or native replay.
