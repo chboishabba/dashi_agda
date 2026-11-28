@@ -4,8 +4,9 @@ module DASHI.Moonshine.CM163BishopHecke41QuantitativeRigidityExact where
 -- Geometry is isolated as a constructive S/T orbit cover, not as an
 -- analytic vanishing hypothesis. All remaining analytic estimates
 -- are assembled on the actual ordinary residual coefficient streams.
-open import Agda.Builtin.Nat using (zero)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
+open import Data.Rational.Unnormalised using (1ℚᵘ)
 import Real as R
 import RealProperties as P
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
@@ -35,8 +36,31 @@ open Proj using (Point; Func)
 open Contract using (Box; boxCong)
 open Comp using (complexTrans; complexSym)
 
--- Undirected generator edges are enough: backward T needs no new
--- invariance theorem. Every cover witness must carry an actual word.
+-- Compact finite T-runs keep the witness independent of the numeric
+-- size of the real part. Their semantics are still proved by induction
+-- from the one-step T invariance and the coordinate-setoid transport.
+minusT : Point → Point
+minusT p = U.bishop-upper-half-plane-point
+  (C.complex (R._-_ (C.re (U.tau p)) R.1ℝ) (C.im (U.tau p)))
+  (U.imaginaryPositive p)
+
+minusTUndo : ∀ p → U.tau (Gen.actT (minusT p)) ≈C U.tau p
+minusTUndo p =
+  (let open P.ℝ-Solver in solve 1
+    (λ x → (x ⊖ Κ 1ℚᵘ) ⊕ Κ 1ℚᵘ ⊜ x)
+    P.≃-refl (C.re (U.tau p))) , P.≃-refl
+
+minusTHeight : ∀ p → R._≃_ (C.im (U.tau (minusT p))) (C.im (U.tau p))
+minusTHeight p = P.≃-refl
+
+forwardPowerPoint : Nat → Point → Point
+forwardPowerPoint zero p = p
+forwardPowerPoint (suc n) p = Gen.actT (forwardPowerPoint n p)
+
+minusPowerPoint : Nat → Point → Point
+minusPowerPoint zero p = p
+minusPowerPoint (suc n) p = minusPowerPoint n (minusT p)
+
 data Orbit : Point → Point → Set where
   stay : ∀ p → Orbit p p
   stepS : ∀ {p v} → Orbit p v → Orbit p (Gen.actS v)
@@ -44,6 +68,33 @@ data Orbit : Point → Point → Set where
   same : ∀ {p v w} → Orbit p v → U.tau v ≈C U.tau w → Orbit p w
   backS : ∀ {p v} → Orbit p (Gen.actS v) → Orbit p v
   backT : ∀ {p v} → Orbit p (Gen.actT v) → Orbit p v
+  tRun : ∀ {p v} → Orbit p v → (n : Nat) → Orbit p (forwardPowerPoint n v)
+  minusRun : ∀ {p v} → Orbit p v → (n : Nat) → Orbit p (minusPowerPoint n v)
+
+forwardPowerRead : ∀ (F : Func) →
+  (∀ p → F (Gen.actT p) ≈C F p) →
+  ∀ n p → F p ≈C F (forwardPowerPoint n p)
+forwardPowerRead F ht zero p = C.≈C-refl _
+forwardPowerRead F ht (suc n) p =
+  complexTrans (forwardPowerRead F ht n p)
+    (complexSym (ht (forwardPowerPoint n p)))
+
+minusTReadInvariant : ∀ (F : Func) →
+  (∀ p → F (Gen.actT p) ≈C F p) →
+  (∀ p v → U.tau p ≈C U.tau v → F p ≈C F v) →
+  ∀ p → F (minusT p) ≈C F p
+minusTReadInvariant F ht hc p =
+  complexTrans (complexSym (ht (minusT p)))
+    (hc (Gen.actT (minusT p)) p (minusTUndo p))
+
+minusPowerRead : ∀ (F : Func) →
+  (∀ p → F (Gen.actT p) ≈C F p) →
+  (∀ p v → U.tau p ≈C U.tau v → F p ≈C F v) →
+  ∀ n p → F p ≈C F (minusPowerPoint n p)
+minusPowerRead F ht hc zero p = C.≈C-refl _
+minusPowerRead F ht hc (suc n) p =
+  complexTrans (minusTReadInvariant F ht hc p)
+    (minusPowerRead F ht hc n (minusT p))
 
 orbitRead : ∀ (F : Func) →
   (∀ p → F (Gen.actS p) ≈C F p) →
@@ -56,6 +107,10 @@ orbitRead F hs ht hc (stepT {v = v} w) = complexTrans (orbitRead F hs ht hc w) (
 orbitRead F hs ht hc (same {v = v} {w = w} o e) = complexTrans (orbitRead F hs ht hc o) (hc v w e)
 orbitRead F hs ht hc (backS {v = v} w) = complexTrans (orbitRead F hs ht hc w) (hs v)
 orbitRead F hs ht hc (backT {v = v} w) = complexTrans (orbitRead F hs ht hc w) (ht v)
+orbitRead F hs ht hc (tRun {v = v} w n) =
+  complexTrans (orbitRead F hs ht hc w) (forwardPowerRead F ht n v)
+orbitRead F hs ht hc (minusRun {v = v} w n) =
+  complexTrans (orbitRead F hs ht hc w) (minusPowerRead F ht hc n v)
 
 module At (inputs : Round11.BishopCutset) where
   module H = Circle.At inputs
