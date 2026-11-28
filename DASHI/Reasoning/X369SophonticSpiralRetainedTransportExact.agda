@@ -12,6 +12,7 @@ open import Data.Empty using (⊥)
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face
 import DASHI.Cognition.PNF.X369WholeSourceIndexedTransportExact as Whole
+import DASHI.Reasoning.SemanticInterventionEquivarianceExact as Semantic
 
 record ReasoningContext (Evidence Indices : Set) : Set where
   constructor context
@@ -83,13 +84,26 @@ module RetainedReasoner
     (ReasoningContext Evidence Indices) U O
     encode decode decodeEncode step observe governedReasoningStep
 
-  fullReasoningAndNeuralReopen = Transport.exactJointReopen
-  originalNeuralStepSquare = Transport.sourceStepSquare
-  originalReadoutSquare = Transport.sourceObserveSquare
-  allWordRetainedEndpoint = Transport.everyPacketEndpoint
-  allWordOriginalReadout = Transport.everyOriginalReadout
-  independentReasoningStateReopens = Transport.independentContextReopens
+  open Transport public
 
 -- Real source semantic action, time/refinement/authority transitions and
 -- E8/Leech action on the actual source are separate supplied operations.
 -- Kernel intentionally deferred.
+
+-- The actual independently labelled semantic intervention need not be
+-- a rotation, reflection, negation or Weyl action. Consume the existing
+-- sophontic representation and decoder squares when they are supplied.
+module GovernedSophonticAction
+  {X Y Z : Set}
+  (model : X → Y)
+  (intervention : Semantic.SemanticIntervention X Y)
+  (witness : Semantic.RepresentationEquivariance {X} {Y} {Z} model intervention)
+  where
+
+  sourceModelCommutes : Semantic.ModelEquivariance model intervention
+  sourceModelCommutes =
+    Semantic.representationEquivarianceImpliesModelEquivariance witness
+
+  actualPairedCorrectness : (x : X) → Semantic.PairCorrect model intervention x
+  actualPairedCorrectness =
+    Semantic.modelEquivarianceYieldsPairCorrect sourceModelCommutes
