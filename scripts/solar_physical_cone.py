@@ -61,7 +61,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             raise ValueError('second coefficient shape mismatch')
         if not all(np.isfinite(a).all() for a in (x2,H2,f2)):
             raise ValueError('nonfinite second coefficient')
-        midpoint2=np.zeros(d)
+        midpoint2=np.zeros(d); total_w2=total_q2=total_balance2=0.
     forms={} if loss_forms is None else {k:np.asarray(v,float) for k,v in loss_forms.items()}
     for a in forms.values():
         assert a.shape==(d,d) and np.allclose(a,a.T)
@@ -185,7 +185,17 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                         or (tangent_reached and np.any(da))
                         or (primal_reached and (np.any(a2) or np.any(da)))):
                     arrival2[ix]=np.minimum(arrival2[ix],t1)
-                if fid is None: midpoint2[ix]=(old2+y2)/2
+                m1=(old_dx+dy)/2; m2=(old2+y2)/2
+                w2=dt*float(m2@b+m1@db+mid@b2)
+                q2=-dt*float(m2@ap@mid+mid@ap@m2+m1@ap@m1
+                             +m1@da@mid+mid@da@m1+mid@a2@mid)
+                terms=np.array([float(y@y2),-float(old@old2),
+                    float(dy@dy)/2,-float(old_dx@old_dx)/2,-w2,q2])
+                residual2=abs(terms.sum())
+                if residual2>1e-9*max(1e-30,np.sum(abs(terms))):
+                    raise ArithmeticError('second coefficient stage energy mismatch')
+                total_w2+=w2;total_q2+=q2;total_balance2+=residual2
+                if fid is None: midpoint2[ix]=m2
                 x2[ix]=y2
             if fid is None: tangent_mid[ix]=(old_dx+dy)/2
             dx[ix]=dy
@@ -213,6 +223,9 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                   right_limit_used=right_limit is not None,
                   directional_arrival_s=None if jvp is None or fixed_pairs is None else [
                       float(a) if np.isfinite(a) else None for a in tangent_arrival],
+                  coefficient2_work_J=None if jet2 is None else total_w2,
+                  coefficient2_loss_J=None if jet2 is None else total_q2,
+                  coefficient2_balance_abs_J=None if jet2 is None else total_balance2,
                   state_coefficient2=None if jet2 is None else x2.tolist(),
                   local_midpoint_coefficient2=None if jet2 is None else midpoint2.tolist(),
                   coefficient2_arrival_s=None if jet2 is None else [float(a) if np.isfinite(a) else None for a in arrival2],
