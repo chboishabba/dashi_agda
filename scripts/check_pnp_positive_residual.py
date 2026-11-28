@@ -32,7 +32,7 @@ def project_lift(C,R,rows,t,n,B,width=4):
     assert accepts(C,w) and tuple(sum(r[i]*w[i] for i in R)%3 for r in rows)==tuple(t)
     return w
 
-def binary_lift(C,R,cols,t,lo,hi,B):
+def binary_lift(C,R,cols,t,lo,hi,B,data_clock=None):
     # Binary observation labels give contrast2=-mass; retain inherited
     # positive parent bounds, one certified child observation per bit.
     lower=(lo[0]+1)//2;upper=hi[0]//2;z={}
@@ -41,7 +41,7 @@ def binary_lift(C,R,cols,t,lo,hi,B):
         if not reserve:return None
         B.pay(reserve)
         A=tuple(c[:-1]+(int(k==i),) for k,c in enumerate(cols))
-        q=prefix_portfolio(C,A,t,0,R,1,work_cap=reserve)
+        q=prefix_portfolio(C,A,t,0,R,1,work_cap=reserve,data_clock=data_clock)
         if q is None:return None
         L,U,_,_=child_bounds(q[0],q[1],lower,upper)
         if max(L)<=0:return None
@@ -50,7 +50,7 @@ def binary_lift(C,R,cols,t,lo,hi,B):
         lower,upper=L[b],U[b]
     return z
 
-def recover(C,R,rows,cols,t,n,lo,hi,B):
+def recover(C,R,rows,cols,t,n,lo,hi,B,data_clock=None):
     from check_pnp_live_signed_orbit_join import Budget
     # Reserve local projection separately. Failed work is never refunded.
     if not R:return {}
@@ -70,4 +70,4 @@ def recover(C,R,rows,cols,t,n,lo,hi,B):
             z=dict(zip(R,bits))
             if accepts(C,z) and tuple(sum(r[i]*z[i] for i in R)%3 for r in rows)==tuple(t):return z
     except Refused:pass
-    return binary_lift(C,R,cols,t,lo,hi,B)
+    return binary_lift(C,R,cols,t,lo,hi,B,data_clock)
