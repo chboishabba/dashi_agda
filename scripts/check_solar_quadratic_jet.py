@@ -53,6 +53,17 @@ def run():
     zz=np.array([0.,1.,0.]); zz0,rec=timed_step(zz,P,f,h,mesh,jvp=(f,np.zeros_like(P),f),atlas_pairs=pairs,right_limit=P,jet2=(f,A2,f))
     assert rec['state_coefficient2'][2]!=0 and rec['arrival_s'][2] is None and rec['directional_arrival_s'][2] is None
     assert rec['coefficient2_arrival_s'][2] is not None
+    seed=np.full((3,3),np.inf); seed[0,0]=0.
+    y=z.copy();y1=f.copy();y2=f.copy()
+    for step in range(2):
+        y,rec=timed_step(y,H,f,h,mesh,jvp=(y1,A1,f),atlas_pairs=pairs,right_limit=P,jet2=(y2,A2,f),reach_seed=seed,clock_start=step*h)
+        y1=np.array(rec['state_jvp']);y2=np.array(rec['state_coefficient2'])
+        seed=np.array([[np.inf if a is None else a for a in rec[k]] for k in ('arrival_s','directional_arrival_s','coefficient2_arrival_s')])
+    assert np.allclose(y2,x2) and seed[1,1]==.2 and rec['clock_end_s']==.5
+    for bad in (np.full((3,3),np.inf),np.full((3,3),1.)):
+        try: timed_step(z,H,f,h,mesh,jvp=(f,A1,f),atlas_pairs=pairs,right_limit=P,jet2=(f,A2,f),reach_seed=bad,clock_start=0.)
+        except ValueError: pass
+        else: raise AssertionError('unlicensed reach seed')
     errs=[]
     for eps in (.01,.001,.0001):
         y=z.copy(); w=0.
