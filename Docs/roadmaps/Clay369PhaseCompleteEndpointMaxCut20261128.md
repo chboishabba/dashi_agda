@@ -2456,3 +2456,294 @@ admission/axiom audit, not statement equivalence alone; PNP
 unrestricted SAT sharing-stable machine internal work and
 full bit/control ABI (or a genuine polynomial algorithm).
 No source wrote or claimed those endpoints in this tranche.
+
+
+## Section 35 — original six-Clay big-cut: source-integrity repair, bidirectional physical and arithmetic bounds, RH admission (2026-11-28)
+
+### Live owner branches, original/default verification and acceptance
+
+Heads at intake: YM Agda PR #1536
+`1fc6bddac76928ba666713fa4dad97a4cd72fec3`;
+all-Clay Agda PR #1551
+`210e7e553741ddcb0c7d3fcfb25a8633e89f66b1`;
+NS Lean PR #123
+`5eb50fb0b7f6781d108174cc8540b22882039e30`;
+BSD/Hodge Lean PR #124
+`e6474bdf84c0184038aff6039e761b2c4bcc3328`;
+PNP Lean PR #119
+`9741d41b72cca49433eb352d7fc295499eb6bca3`;
+RH Lean PR #121
+`3eb36764e36c526b7129550b737ffc507b3cb95f`.
+
+Explicit matching original owners against repository default branches:
+- YM `BalabanCMP109BishopRootFreeSeriesExact.agda` is
+  byte-identical on master and PR #1536
+  (Git blob `04596d835cf338af6fd86cd362074fd070d5e71a`).
+- YM `BishopFiniteCauchyWingAbsoluteBoundExact.agda` is
+  byte-identical on master and PR #1536
+  (Git blob `4c7c624fd4085447387ecd5d2629493c506debbc`).
+- NS `NavierStokesActualFractionalSignedFTCExact.lean`,
+  Hodge `MillenniumHodgeDicksonAffineSaturationExact.lean`,
+  PNP `PNPActualEventDemandExact.lean` are on their active
+  PR owner branches and were NOT found at the Lean default
+  branch by direct lookup. No unsupported assertion that
+  main already has those theorem constructors. No rebase/merge.
+
+All newly written Agda and Lean proof bodies remain
+**SOURCE-WRITTEN / PENDING NATIVE ELABORATION**. Neither
+Agda/Lean/Lake nor GitHub CI was executed. A grep-style audit
+of the new source files found no explicit newly declared
+`axiom`, `postulate` or `sorry`; that is NOT a trust proof:
+unresolved identifiers, bad congruence directions,
+dependencies with axioms, and genuine open premises require
+kernel audit.
+
+### YM CMP102 — source repair plus original signed three-wing Bishop receiver
+
+Agda owner #1536:
+1. Actual `YMClayCMP102OriginalFactorialRatioBishopExact.agda`
+   had a concrete source interface defect in the final original
+   finite prefix theorem: it referred to `R.∑₀`, absent
+   from the donor's original source. Fixed to the *actual*
+   `Sequence.SeriesOf` used in the original CMP109 limit,
+   commit `e7ff1d8533d6027cf7f96554d7c7dc10d4ddd1b2`.
+   This is an actual file correction, not a kernel verification
+   of the Nat/rational/real order bridge.
+2. NEW
+   `DASHI/Physics/YangMills/YMClayCMP102OriginalThreeWingOrderWeldExact.agda`
+   first commit `801b08796431a71a8d0f5dff4b938c2f8245207f`;
+   product/projection/original-G owner repair
+   `24db0e80769189c12813191694faaa0c79ec5873`.
+   The source now makes the THREE original SAME-PREFIX
+   positive source leaves exact, rather than a single
+   opaque bound:
+   - `|X * originalAWing(X,c)| <= quarter^c`,
+     where the real A triangle cutoff is c-1.
+   - `|originalOmittedLinearB(X,c-1)| <= quarter^c`,
+     retaining the last original B coefficient.
+   - `|X² * originalBWing(X,c)| <= quarter^c`,
+     where the real B cutoff is c-2 with c=1 exception.
+   The native `originalPositiveTailFromThreeActualWings`
+   theorem uses the existing original Bishop
+   `originalSignedCauchyTailTriangleBound`, sum-order
+   and real-solver arithmetic to obtain the exact ORIGINAL
+   `OriginalPositiveTailOrder X` with
+   `3*quarter^c`; original `Rate.originalGeometricRate`
+   is proven nonnegative from the real quarter and 3.
+   `originalGZeroFromThreeActualWings` consumes the
+   original represented CMP109 G limit under the THREE
+   genuine component bounds and the separate original
+   zero-count order. **These three component bounds and the
+   original count-zero order are still explicit
+   mathematical/native proof inputs.** No scalar zero
+   theorem is presented unconditionally.
+3. New pinned-native source root
+   `YMClayCMP102Section35ThreeWingOrderAcceptanceExact.agda`
+   commit `4ed50d3c3623192a705f5802c0135756deb7e852`.
+   It names the exact original three-wing source obligation
+   and same-G represented limit, not an abstract substitute.
+
+The original 23 November all-degree rational bound and
+Section30 improved `267004/393129` coefficient bound remain
+mathematically derived. Scalar original Bishop kernel
+completion requires a genuinely native all-count factor
+`|X|^c`/shifted Cauchy positive-tail proof for those
+three actual source terms, the count-zero order `1<=3`,
+and full Agda 2.9 source/import safety verification.
+**This has not solved interacting 4D Wilson F19,
+physical CMP116 absolute rooted shells, OS, or same-H
+mass gap.**
+
+### NS — ONE original Galerkin flow, dual space-time compactness receipt
+
+Lean NS #123 new
+`Synthesis/NavierStokesOriginalSameFlowDualSpacetimeCompactnessExact.lean`
+commit `667436c5c1304c2fc91821e5688ea8507a457040`;
+native root
+`Synthesis/ClayNSSection35SameFlowDualSpacetimeAcceptanceExact.lean`
+commit `b776a66273e55e2d75a1e106df32bbde376e91db`.
+
+It consumes the ALREADY existing original single-flow owner
+`actual_original_one_flow_tail_energy_and_quarter_L4`
+and the distinct original integrated high-shell theorem
+`original_physical_integrated_shell_R_inverse_sq`.
+The SAME ONE original Galerkin X_N maintains
+reality, transversality, its true physical ODE,
+original energy ceiling and integrated dissipation,
+pointwise high-shell `R² E_shell<=D`, the quarter
+time-integrated `2ν∫ E_(1/4)^4 <= E0^4`, and a
+true `∫_0^T E_shell <= E0/(2νR²)` on EACH R>0
+for that same original trajectory. The last integral
+**explicitly requires interval integrability** of the
+physical finite shell; original finite ODE supplies
+dissipation integrability but shell integrability is
+not yet discharged in this new theorem. Do not infer
+continuum strong regularity from finite-dimensional
+or time-integrated compactness. Still unpaid original
+cutoff-uniform SIGNED critical nonlinear transfer
+and physical forced/unforced continuum admission.
+
+### BSD — actual two-crossing signed moment geometric floor
+
+Lean BSD/Hodge #124 new
+`Synthesis/MillenniumBSDOriginalTwoCrossingMellinGeometricFloorExact.lean`
+commit `6f31139551c5cd402cfa3e50e5f45baf0557ce7b`.
+Consumes original `h(a,b,n)` Cauchy-type two-crossing
+recurrence, actual signed positivity at EVERY degree,
+zeroth moment zero and nonnegative first moment.
+Source-written unconditional CONSEQUENCE of those
+stated original Mellin source premises, at every n:
+   m_(n+2) > a * m_(n+1),  a>0;
+and exact inverse obstruction when
+   m_(n+2) <= a*m_(n+1).
+It is a meaningful selected-original-crossing
+necessary spectral/analytic source condition,
+not proof of the missing actual complex
+L''/Mellin identification, rank equality or Sha.
+Native check paired with Hodge in
+`Synthesis/ClayHodgeBSDSection35InverseGeometryAcceptanceExact.lean`
+commit `4aa6880b34f06e232629f203c7c54972af3518e1`.
+Original analytic-rank and universal arithmetic closure remain open.
+
+### Hodge — actual affine denominator saturation/gluing compatibility
+
+Lean BSD/Hodge #124 new
+`Synthesis/MillenniumHodgeDicksonOriginalDenominatorSaturationGlueExact.lean`
+commit `86ea015182f2fe7e858f442f215ea251e337aa0f`.
+Consumes ALREADY existing
+`MillenniumHodgeDicksonAffineSaturationExact`
+and its original quotient `originalFoldIdeal`,
+`actualAffineClosureIdeal`, original chart denominator
+and actual lift `D`.
+Source-writes the exact saturation property
+   D*p ∈ actualAffineClosureIdeal
+      ↔ p ∈ actualAffineClosureIdeal
+on the SAME source quotient/real punctured chart,
+and provides an original denominator lift witness
+via already-paid `actual_affine_closure_saturation`.
+This is a finite algebraic compatibility fact for
+the original affine punctured closure. It does not
+assert the ORIGINAL global projective closure,
+branch monodromy gluing, existence of proper
+algebraic Chow cycles or primitive nonzero pairing.
+Existing affine finite/properness, coupled 5+5
+fibre and nonzero Jacobians are NOT reclassified
+as missing. Native root shares BSD #124 Section35.
+
+### PNP — original actual same-run event time inverse
+
+Lean PNP #119 new
+`Welds/PNPOriginalActualEventTimeInverseExact.lean`
+commit `b2422927b5095078b46e4dd00b1e1cb23051125f`,
+namespace fix `8403a3104bfd6ce00d5de8177584ca62fdc40532`.
+Consumes the already existing *original*
+`PNPActualEventDemand.actual_event_capacity` and
+`ReachableDivergentSet` including actual finite
+overlapping windows and true per-slot capacity.
+Source-native reversal:
+  actual weighted original event mass W > B*C
+    ⇒ actual execution T > B,
+and nonzero actual mass requires BOTH T>0 and C>0.
+It never assumes disjoint counterfeit events,
+does not infer any SAT lower bound from quotient
+dimension or input-coordinate count, and adds
+no independent oracle or fictitious clocks.
+Acceptance
+`Welds/PNPSection35OriginalActualEventTimeAcceptanceExact.lean`
+commit `6e587bb7cb43b29c18ac899065ce040426b626e8`.
+Still genuinely unpaid: produce a universal
+SAT sharing-stable, unavoidable ACTUAL internal
+event mass W for all legitimate algorithms and
+pay the full time/bit/branch R1 ABI, or produce an
+actual costed polynomial SAT decision algorithm.
+A time conversion given W is not itself a lower
+bound on all SAT solvers.
+
+### RH — genuinely pinned *native* external proof admission, not equiv
+
+Lean RH #121 already owns
+`AlpogeRHBoundaryExact` and
+`AlpogeRHUniversalXiZetaBidiExact` including the
+exact original xi/zeta subtype and universal BIDI,
+and the Clay↔Mathlib statement equivalence. These
+do not inhabit RH and need no repeat proofs.
+
+NEW `scripts/check_alpoge_rh_original_native_admission.py`,
+first commit `67431207968ebe3d3a713f31e3cc4c3ae8d30b6c`,
+source/probe fix `fa75a314fe9d072ec57ddf2068f725c749c18c8d`,
+full tree pin enhancement
+`4bc9c6d0c87f2f3f63d4d1b7838b6ba2d8dc3d29`.
+It REQUIRES user-supplied actual original external
+source checkout, 64-hex Main SHA, strict complete
+SHA256 manifest of ALL original non-.lake .lean
+sources and Lean/Lake config/lockfiles, native
+Lean v4.33.1, original Main actual elaboration,
+and re-elaborates the exact same pinned Main
+plus `example : RiemannHypothesis := riemannHypothesis`;
+also parses the native `#print axioms` output,
+fails CLOSED on unrecognized axioms, missing
+witness/compiler, source pin mismatches, or
+incomplete manifest. It does NOT fetch, modify or
+admit a missing external proof magically.
+No native source/pin was provided in this turn, so
+the admission checker has NOT been run and
+the RH theorem remains UNPROVEN.
+
+### Executed exact finite-model controls and limitations
+
+New local source
+`/mnt/data/section35_all_clay_exact.py` executed:
+  NS quarter weighted interpolation 625/625,
+  BSD original two-crossing moment admissible sample 300/300,
+  Hodge illustrative affine saturation ideal 300/300,
+  PNP actual overlapping event slot capacity 1254/1254,
+  TOTAL **2479/2479 PASS**.
+The same byte-identical script was committed to
+`scripts/check_clay_section35_all_programme_exact.py`
+on all-Clay #1551 at commit
+`3851e3bfaacacc454a780256729fa7951bdfc4b1`;
+both GitHub-fetched and local `git hash-object` report
+`9005b310297e79313fd2c90e001ca24797e43c0b`.
+These are finite arithmetic/symbolic models of
+the claims, NOT execution of the selected original
+PDE, actual elliptic-curve complex L-jet, actual
+Hodge Chow cohomology, original unrestricted SAT
+machine or RH proof, and are NOT native Lean/Agda
+kernel checks.
+
+### Next decisive coarse-to-fine all-Clay cut
+
+A. YM: actually construct original three signed
+c-1/c-2/omitted-B Bishop monomial-order bounds
+from original factorial mass, discharge c=0,
+run pinned Agda 2.9 and --safe graph; *separately*
+4D interacting Wilson F19/CMP116/OS/same-H gap.
+
+B. NS: pay shell continuity/integrability on the
+ONE original finite ODE and derive true
+cutoff-uniform signed nonlinear transfer budget
+and original PDE physical continuum admission.
+
+C. BSD: selected original complex L-jet integral
+to genuine signed Mellin moments and full
+analytic rank/Selmer/Sha comparison; do not
+substitute strict positivity diagnostics for L''.
+
+D. Hodge: homogenize original saturated affine
+ideal, reconcile ORIGINAL fold/branch gluing,
+construct proper global algebraic cycle and
+nonzero primitive cohomological pairing.
+
+E. RH: acquire licensed pinned original external
+proof and full dependency manifest, execute
+pinned native witness plus axiom audit;
+no declaration that RH is solved without this.
+
+F. PNP: construct actual original SAT sharing-
+stable universal unavoidable internal workload
+or genuine polynomial algorithm, not a
+packing/count/partial-observer proxy.
+
+Every newly source-written file requires native
+elaboration and axiom checking. No Millennium
+problem is claimed closed; all six remain open.
