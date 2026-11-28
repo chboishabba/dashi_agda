@@ -158,3 +158,8 @@ Consolidated remaining endpoint cuts (not independent new theories):
 - C/W5/receiver: original moving-domain long clock t=12, weighted exterior energy and holonomy, continuum causal-null (historical negative result preserved), same-clock signed receiver and native replay. Original short collar [1,6/5] does not establish this endpoint.
 
 No source replacement, no CI, no physical detection claim, no native proof promotion. Master/cross-PR signature reconciliation still incomplete. Run integrated local checker with 90s cap; preserve existing prior-art attribution.
+
+
+## 28 Nov — restore original engineering endpoint
+
+See [EngineeredGravityShieldingEndpointBidiMaxCut20261128.md](EngineeredGravityShieldingEndpointBidiMaxCut20261128.md) for the cross-programme 1g, shielding, repulsion, focusing and metric-control max-cut, with master and PR owner reconciliation. F8 remains the original source-owned TT/retarded propagation candidate; the receiver-first weak/adjoint route and strong geometry route run in parallel. A signed TT/Weyl receiver is not a static 1g device: require the actual induced scalar/vector metric sector, reference congruence, acceleration/tidal and energy-budget weld. Preserve original causal-null negative acceptance. Common endpoint checker: scripts/check_engineered_gravity_endpoint_bidi.py. No native/physical promotion.
