@@ -442,3 +442,142 @@ identification. Do not relabel local quaternion algebra as full YM gap.
   bodies NOT elaborated. No CI. No new universal Clay solution claimed.
 - No wholesale default-branch merge of diverged donor PR histories.
   Original object type/sign/zero/phase and attribution remain mandatory.
+
+
+## Section 24 — original-source consumer closures and six-lane exact replay, 28 Nov 2026
+
+This section supersedes stale Section 23 construction targets while
+retaining their original finite, local, native and universal scopes.
+Steelman -> inverse geometry -> same-object BIDI -> actual consumer ->
+independent negative controls -> native acceptance. Do NOT promote a
+finite costed model, syntactic compiler or donor PR to the universal
+physical/semantic endpoint.
+
+### Exact implementation (existing PR owners, not duplicate models)
+
+**NS Lean #123:** existing
+Synthesis/NavierStokesOriginalMeanAndTailExact.lean
+periodic_tail_energy_le already gives R² E_{>=R}(t) <= D_N(t)
+for actual outputModes, realHermitian and massSq. Existing
+actual_global_forward_finite_flow already gives real transverse
+global trajectory with original integrated energy identity. New
+Synthesis/NavierStokesOriginalGlobalTailSourceWeldExact.lean
+(374b04055f16d90926aac4717f8f682055dd280e) composes these
+on ONE actual trajectory for every physical time with the Section23
+global energy/dissipation ceiling. Section24 native acceptance
+Synthesis/ClayNSSection24OriginalTailAcceptanceExact.lean
+(9cc630a55a81a49d3c0610f4b04812983d5bf14f).
+Genuine endpoint debt is N-independent first critical spectral
+moment or signed fractional N2e int E_(1/4)T_(1/4), independent valid
+R653 physical strict margin/replacement, A Euclidean physical
+exterior/measure, original fifteen-field unforced profile, and C/D
+source/axiom/semantic review. The cutoff-uniform integrated
+unweighted high-frequency energy tail from energy dissipation does
+NOT imply uniform H1 or critical shell; no R645/R726 zero-defect
+physical universal shortcut.
+
+**BSD Lean #124:** general number-field geometric doubling and original
+all-place Selmer/Sha exact sequence already source-written. New
+Synthesis/MillenniumBSDNumberFieldSelmerCosetBidiExact.lean at
+f76b359b553945b5d9ee80d38abbd8514495e0e8, corrected public
+source dependency at de4be8e3363afc60830da1ba535f4f7feda4ec70,
+identifies equal actual number-field Selmer rational Kummer values iff
+P-R=2S with S in E(K), and identifies the actual Selmer-to-point-Sha
+kernel with the global rational Kummer image. The original
+numberFieldSelmerQuotientEquivShaTwo remains its quotient recipient.
+Native acceptance root
+Synthesis/ClayBSDHodgeSection24OriginalBidiAcceptanceExact.lean
+(7af608b8a5e490b041604cbcfd30b0fae5efe60b).
+Remaining: literal selected rank-four complex L''(E,1)=0 or another
+valid analytic comparison, universal arithmetic/analytic rank and
+Sha finiteness; 2-Selmer exactness is NOT these endpoint payments.
+
+**Hodge Lean #124:** new
+Synthesis/MillenniumHodgeDicksonGeneratedChartKernelBidiExact.lean
+(07a6b7a044566ab0da922111ffccc25b5e57e325)
+proves original affine-coordinate polynomial evaluation equality iff
+original projective lifted polynomial equality, including the
+coordinate relation kernel and difference ideal. Consumes Section23
+originalCoordinateEval_eq_cone_lift; retains nilpotent relations.
+Actual D_+(h) coordinate-generated ring B and full source A must be
+identified with the true denominators / Proj scheme before claiming
+global projective cycle. Need proper pushforward, multiplicity,
+primitive class, generic non-scalar orientation correspondence and
+arbitrary-X producer. F5[e,d]/(e,d)^2 with coordinate e is a strict
+B!=A negative control, not a counterexample to conjecture.
+
+**PNP Lean #119:** New
+Welds/PNPOriginalAnchoredPackedResidualPaymentExact.lean
+(e8b6185fa8fd7c5fd69957e5dab571f1c61c4ac0)
+composes original anchored legal F3 displacement + true retained
+linear state equality + actual observable Boolean terminal mismatch
+with the existing PNPFutureResidualCharge.packed_future_reads.
+The conclusion sum_j weight_j <= C * length(actual read trace).
+There is NO charge to alternative counterfactual executions; all
+alternative witnesses must use the SAME original anchor and all
+differences must have actual per-address weighted capacity <=C.
+Native root Welds/PNPSection24OriginalPackedResidualAcceptanceExact.lean
+(0578eda0ce3b81eec862938eeaa879da7f1013ea).
+Missing: original SAT decision source producing superpolynomial
+sharing-stable mandatory demand on arbitrary candidate code, or an
+actual polynomial algorithm; C1a signed/control/graph/branch address
+bit clock and universal progress; R1 actual same-target normalized
+machine and physical horizon. Input-only families have <=nC capacity
+and cannot alone prove a superlinear input-read lower bound.
+
+**RH Lean #121:** source-original xi/zeta BIDI and Clay iff Mathlib
+are ALREADY written; new native inspection-only root
+MillenniumExternal/AlpogeRHSection24OriginalAdmissionAcceptanceExact.lean
+(3eb36764e36c526b7129550b737ffc507b3cb95f).
+No new RH proof or external admission claim: actual trusted original
+external pinned module, same-statement elaboration, full transitive
+axiom/sorry scan, mathematical independent audit still required.
+
+**YM restricted CMP102:** Agda #1536 current original CMP102
+YMClayCMP102OriginalGFiniteLimitTransportExact.agda already writes
+convergence of the finite original CMP109/Bishop G_N polynomial and
+the reduction of G(X)=0 to G_N -> 0 on the original quarter radius.
+No new scalar series needed. Existing master
+Docs/support/reference/YMCMPWorkStatus.md and #1536 F19 Wilson
+two-adjacent-pair mixed derivatives must retain their nonfactorizing
+shared plaquette. A local Neumann inverse for K_X (r<=1) is a
+separate source-type algebraic control, NOT CMP102 full-gauge source,
+original rooted-shell majorant or Clay mass gap. Remaining same-source
+original G_N geometric-zero certificate, selected physical T/Wilson
+normalization and nonflat/nontrivial interacting continuum measure,
+cluster/OS/transfer same-H gap. No false promotion.
+
+### Execution receipt and reproducible bytes
+scripts/check_clay_section24_original_consumers.py committed at
+793709bede46e076e887c635c466ff84e8307533,
+exact git blob 4f0dbea802ee86752509e78809543e99e508b309.
+Matching committed bytes independently executed locally with Python
+and rational arithmetic: 160340/160340 PASS:
+NS 832; BSD 127020; Hodge 31250; PNP 906; RH 231; YM 101.
+Includes nonreduced Hodge coordinate relation equivalence and
+strict full-ring counterexample, rational double-coset parity over
+Z/n, signed original-anchor residual, actual finite shell weighted
+energy, original RH signed coordinate, YM Neumann analytic majorant.
+This is finite proof algebra and negative-control acceptance only,
+not native elaboration, Clay proof, physical PDE/curve witness,
+counterexample to a Clay theorem or independent original manuscript
+review. Lean/Agda toolchains unavailable locally, native roots
+SOURCE-WRITTEN/PENDING_KERNEL. No GitHub CI.
+
+### Remaining mathematical maximum-cut (coarse -> fine)
+1. NS B: original signed 1/4 derivative source trace or other valid
+   all-data critical continuation; NS A physical Euclidean source
+   measure/exterior; unforced actual certificate; independent forced
+   C/D proof/axiom fidelity.
+2. BSD: actual general complex order/rank and Sha-finiteness endpoint;
+   selected rank-four original complex L'' cancellation.
+3. Hodge: full localized affine chart generation + actual Chow-cycle
+   class and generic primitive orientation producer for arbitrary X.
+4. RH: original proof admission and exact source/axiom semantics, not
+   a new standalone xi/zeta algebraic equivalence.
+5. PNP: universal SAT original computation with sharing-cost-respecting
+   lower bound or actual costed polynomial decision algorithm, complete
+   actual bit clock and arbitrary time-horizon resource matching.
+6. YM: selected original CMP102 physical-source analytic and measure
+   enclosure with nontrivial continuum/OS/mass gap; no extrapolation
+   from finite source-type analytic identities.
