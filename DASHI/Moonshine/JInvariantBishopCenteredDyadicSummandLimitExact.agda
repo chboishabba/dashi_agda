@@ -190,12 +190,12 @@ module At (inputs : Round11.BishopCutset) where
 
     actualLimit4 : Lim.Conv
       (λ n → scaleC (weight ((+ 1 / 16) ⋆) n) (Rows.row4 (scaledPoint p j n)))
-      (Row.scale 6 (Rat.square (S.square Limit.V)))
+      (Row.scale 6 (Rat.square (Rat.square Limit.V)))
     actualLimit4 = Lim.convTransport (λ n → complexSym (row4Read n)) Limit.limit4
 
     actualLimit6 : Lim.Conv
       (λ n → scaleC (weight ((+ 1 / 64) ⋆) n) (Rows.row6 (scaledPoint p j n)))
-      (Row.scale 120 (Rat.cube (S.square Limit.V)))
+      (Row.scale 120 (Rat.cube (Rat.square Limit.V)))
     actualLimit6 = Lim.convTransport (λ n → complexSym (row6Read n)) Limit.limit6
 
   -- The actual finite tree summand is the corresponding fixed-integer
