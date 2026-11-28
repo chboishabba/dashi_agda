@@ -110,11 +110,14 @@ def finish_residual(D,P,j,F,rows,target,B):
     n=len(P[1]);B.pay(1+n*(1+len(rows))+len(D))
     cols=tuple(tuple(row[i] for row in rows)+(0,) for i in range(n))
     positive=False;unknown=False
+    # Budget both polarities plus the initial query for every retained fibre.
+    remaining=sum(f>=j for f in P[1]); overhead=len(D)*(1+n+sum(1+len(c) for c in F))
+    per_query=max(0,(B.left-overhead)//max(1,len(D)*(1+2*remaining)))
     for (key,s),(mass,w) in D.items():
         B.pay(1+n+sum(1+len(c) for c in F))
         C,R,t=residual(P,j,key,s,rows,target)
         def query(C):
-            reserve=min(B.left,max(32,B.cap//max(1,2*len(D)*(len(R)+1))))
+            reserve=min(B.left,per_query)
             if not reserve:return None
             B.pay(reserve)
             return prefix_portfolio(C,cols,t,0,R,1,work_cap=reserve)
