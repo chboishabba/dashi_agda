@@ -59,7 +59,35 @@ def main():
             elif best==phi(x):assert status=='MINIMUM'
             else:assert status=='IMPROVED' and phi(t['end'])==best
             folds+=1
-    print('aggregate fold cases',folds)
+    # Hard nonlinear leaves, free coordinates and atomic semantics.
+    from check_pnp_separator_row_strata import build, minimum_excess
+    hard_cases=0
+    for n in range(2,8):
+        for _ in range(60):
+            x=rng.randrange(1,1<<n)
+            R=tuple(r for r in range(1,1<<n) if (r&x).bit_count()%2)
+            R=tuple(rng.sample(R,min(4,len(R))))
+            H=canon(tuple((r,1) for r in R))
+            caps=tuple(rng.randrange(n+1) for r in R)
+            F=[]
+            for k in range(3):
+                a,b=rng.sample(range(n),2)
+                F.append(((1<<a,rng.randrange(2)),(1<<b,rng.randrange(2))))
+            F=tuple(F)
+            phi=lambda z:sum(max(0,(r&z).bit_count()-c) for r,c in zip(R,caps))
+            truth=[phi(z) for z in range(1<<n) if satisfies(z,H,F)]
+            B=Budget(10000000)
+            G=build(n,R,H,B,hard_flats=F)
+            assert G is not None
+            v,y=minimum_excess(n,R,H,caps,G,B,hard_flats=F)
+            assert (v is None)==(not truth)
+            if truth:assert v==min(truth) and satisfies(y,H,F)
+            hard_cases+=1
+    F=(((1,0),(2,1)),)
+    assert trace(2,(3,),(),(0,),3,0,Budget(100000),F) is None
+    t=trace(2,(3,),(),(0,),3,0,Budget(100000),F,atomic_basis_block=True)
+    assert t is not None and len(t['macros'])==1 and len(t['macros'][0]['units'])==2
+    print('aggregate fold cases',folds,'hard cases',hard_cases)
     print(dict(receipts=receipts,units=units,nonimprovement=refusals,controls='PASS'))
 
 if __name__=='__main__':main()
