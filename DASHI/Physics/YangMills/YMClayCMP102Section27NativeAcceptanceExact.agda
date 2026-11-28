@@ -13,6 +13,8 @@ import DASHI.Physics.YangMills.YMClayCMP102OriginalGPrefixSignedSquaresBIDIExact
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGeometricSqueezeReceiverExact as Rate
 import DASHI.Physics.YangMills.YMClayCMP102OriginalAbsoluteRateReceiverExact as Abs
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteCauchyWingBoundsExact as Wing
+import DASHI.Physics.YangMills.YMClayCMP102OriginalSignedTriangleZeroExact as Triangle
+import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailGeometryExact as Tail
 
 open import Agda.Builtin.Nat using (Nat)
 import Real as R
@@ -46,3 +48,17 @@ originalFiniteASquareWingAbsoluteBound =
   Wing.originalASquareCauchyWingFiniteBound
 originalFiniteBSquareWingAbsoluteBound =
   Wing.originalBSquareCauchyWingFiniteBound
+
+-- Section 30: all-degree original signed Cauchy source vanishing,
+-- its literal Bishop polynomial triangle, and the original physical
+-- A/B square rectangles used by the finite wing bound.
+originalSignedPolynomialTriangleZero :
+  ∀ X count →
+  R._≃_ (Triangle.originalSignedTriangle X count) R.0ℝ
+originalSignedPolynomialTriangleZero =
+  Triangle.originalSignedTriangleZero
+
+originalActualASquareTailRectangle =
+  Tail.originalASquareIsTailRectangle
+originalActualBSquareTailRectangle =
+  Tail.originalBSquareIsTailRectangle
