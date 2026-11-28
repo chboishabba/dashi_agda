@@ -108,7 +108,41 @@ def global_ideal(d,c,lo,hi):
     return dict(upper=net,witness=w,quadrature=xy,feasible_sectors=count,total_sectors=16,physical_admission=False)
 
 
+def global_receiver(d,c,lo,hi):
+    """Receiver-only upper with nonnegative controller cost, same full fibre.
+    A convex squared radius attains its maximum at a bounded polygon vertex.
+    Reject unbounded charts rather than manufacture a finite maximum.
+    """
+    lo,hi=map(S.Rational,(lo,hi));assert 0<lo<=hi
+    q,r=S.symbols('q r',real=True);z=chart(d,c,q,r);opts=[];count=0
+    k=(z[-2].T*z[-2])[0];factor=2*c['h']*k*c['load']
+    for signs in product((-1,1),repeat=4):
+        rows=project(z,lo,hi,signs,q,r)
+        if rows is None or nearest(rows,(F(0),F(0))) is None:continue
+        # A nonzero 2D recession cone contained in a half-plane has a
+        # boundary ray tangent to at least one nonzero constraint normal.
+        rays=[(sg*b,-sg*a) for a,b,_ in rows for sg in (-1,1)]
+        if not rows or any(all(a*x+b*y>=0 for a,b,_ in rows) for x,y in rays):
+            return dict(status='UNBOUNDED_RECEIVER_CHART',physical_admission=False)
+        vertices=set()
+        for (a,b,c0),(d0,e,f) in combinations(rows,2):
+            det=a*e-b*d0
+            if not det:continue
+            xy=(F(b*f-c0*e,det),F(c0*d0-a*f,det))
+            if all(aa*xy[0]+bb*xy[1]+cc>=0 for aa,bb,cc in rows):vertices.add(xy)
+        assert vertices;count+=1
+        xy=max(vertices,key=lambda x:x[0]**2+x[1]**2)
+        opts.append((factor*S.Rational(xy[0]**2+xy[1]**2),signs,xy,len(vertices)))
+    assert opts;upper,signs,xy,nv=max(opts,key=lambda x:x[0]);w=reopen(d,c,z,lo,hi,signs,q,r,xy)
+    return dict(status='BOUNDED_RECEIVER_CHART',upper=upper,witness=w,quadrature=xy,
+        feasible_sectors=count,winning_polygon_vertices=nv,physical_admission=False)
+
+
 def run():
     d,c=fixture();r=global_ideal(d,c,1,2);P=static_optimum(d,c,1,2,2*c['h']*(d[1]*d[1].T)[0])['useful']
-    print(dict(status='GLOBAL_QUADRATURE_PASS',ideal_upper=str(r['upper']),ideal_upper_float=float(r['upper']),gross_witness=float(r['witness']['gross']),passive=float(P),gain_upper=float(r['upper']-P),gain_witness=float(r['witness']['gross']-P),sectors=r['feasible_sectors'],quadrature=list(map(str,r['quadrature'])),eps=list(map(str,r['witness']['eps'])),physical_admission=False))
+    receiver=global_receiver(d,c,1,2);assert receiver['status']=='BOUNDED_RECEIVER_CHART'
+    assert receiver['upper']==P==receiver['witness']['gross']
+    assert r['upper']>P>r['witness']['gross']
+    recovery=S.factor((P-r['witness']['gross'])/(r['upper']-r['witness']['gross']));assert 0<recovery<1
+    print(dict(status='GLOBAL_QUADRATURE_PASS',ideal_upper=str(r['upper']),ideal_upper_float=float(r['upper']),gross_witness=float(r['witness']['gross']),passive=float(P),gain_upper=float(r['upper']-P),gain_witness=float(r['witness']['gross']-P),sectors=r['feasible_sectors'],quadrature=list(map(str,r['quadrature'])),eps=list(map(str,r['witness']['eps'])),receiver_upper=str(receiver['upper']),receiver_witness_eps=list(map(str,receiver['witness']['eps'])),receiver_polygon_vertices=receiver['winning_polygon_vertices'],recovery_threshold=str(recovery),physical_admission=False))
 if __name__=='__main__':run()
