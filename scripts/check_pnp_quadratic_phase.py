@@ -1,7 +1,7 @@
 """Exact structured character contraction on affine F3 supports.
 
 Each local character table is derived from original Boolean lifts. An affine
-support and quadratic phase are accepted only after checking EVERY local
+support and degree-two/three phase are accepted only after checking EVERY local
 entry. Nonconforming tables can be retained as disjoint singleton pieces,
 subject to a total branch/work cap; refusal is not emptiness. No Fourier
 coefficient oracle, no universal bound on nonlinear component size.
@@ -61,7 +61,7 @@ def pull_cubic(P,forms,pay):
 def cubic_interpolation(D,d,pay):
     # Coefficient functionals on values at 0,1,2. Use only variables
     # occurring in each reduced monomial; check all table entries later.
-    L={1:(0,2,1),2:(1,2,2)}
+    L={1:(0,2,1),2:(2,2,2)}
     P={}
     for k in range(4):
         for m in combinations_with_replacement(range(d),k):
@@ -136,7 +136,7 @@ def gauss(P,n,pay):
 
 def recognize(T,r,pay,degree_cap=2):
     """T is a sparse complete local table; absent entries are exactly zero.
-    Return (amplitude, offset, support directions, quadratic) or None.
+    Return (amplitude, offset, support directions, reduced polynomial) or None.
     Empty tables are handled by the caller.
     """
     u=min(T);c=T[u];V=span((tuple((a-b)%3 for a,b in zip(s,u)) for s in T),r);d=len(V)
