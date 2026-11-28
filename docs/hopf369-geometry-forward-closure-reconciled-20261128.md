@@ -5437,3 +5437,25 @@ Gram is Lorentz invariant. BR139/150 trace estimate and actual
 Hamilton flow, W0-W7 remain. Other lanes unchanged.
 Terminal stage 28 registered; full donor entry and runner unrun.
 No CI/native/PDE acceptance.
+
+
+## 43. BR208 — joint observer/normal Bel flux covariance
+
+Original BR27 Bel contraction B(W)(n,T,T,T), with BR207 moving
+normal and BR204 observer motion. For a common infinitesimal Lorentz
+frame change, covariant curvature components transform by the
+bivector-square action while contravariant arguments transform
+by -K^T. Differentiate the quadratic curvature dependence by
+exact polarization and retain all four argument derivatives.
+Their sum is zero by tensor covariance. The two normal-changing
+boost samples retain nonzero observer and normal terms (explicit
+nonzero control in seed 1). This is not zero work for independent
+physical changes of W,T,n, nor a moving-interface PDE estimate.
+Independent reconstruction local SymPy 1.14.0, two rational Weyl
+samples x ten generators, all 20 passed, exit 0 under 90s cap.
+Committed donor-import entry point unrun. Terminal stage 29.
+Next true analytical cut: actual covariant divergence of the Bel
+current, metric/observer deformation bounds and wall shape current
+on the same field, differentiated source compatibility and
+derivative-balanced trace. No new W0-W7 closure or other lane
+implementation. No native kernel/CI/continuum acceptance.
