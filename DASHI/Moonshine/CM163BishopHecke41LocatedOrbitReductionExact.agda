@@ -21,10 +21,9 @@ import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NR
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneLatticeDenominatorExact as U
 import DASHI.Moonshine.JInvariantBishopLatticeGeneratorSummandExact as Gen
-import DASHI.Moonshine.CM163BishopHecke41ActualReciprocalRayTransportExact as Ray
 import DASHI.Moonshine.CM163BishopHecke41QuantitativeRigidityExact as Rig
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
-open Rig using (Orbit; stay; stepS; stepT; backS; backT; same)
+open Rig using (Orbit; stay; stepS; stepT; backS; backT; same; tRun; minusRun; forwardPowerPoint; minusPowerPoint; minusT; minusTHeight)
 open C using (_≈C_)
 
 Point = U.BishopUpperHalfPlanePoint
@@ -57,9 +56,8 @@ join a (stepT b) = stepT (join a b)
 join a (backS b) = backS (join a b)
 join a (backT b) = backT (join a b)
 join a (same b e) = same (join a b) e
-
-minusEdge : ∀ p → Orbit p (Ray.minusT p)
-minusEdge p = backT (same (stay p) (Comp.complexSym (Ray.undoT p)))
+join a (tRun b n) = tRun (join a b) n
+join a (minusRun b n) = minusRun (join a b) n
 
 -- An explicit left and right bracket; no decidability of |x|.
 record Centered (p : Point) : Set where
@@ -71,12 +69,7 @@ record Centered (p : Point) : Set where
     upper : x point ≤ twoThird
 
 plusN : Nat → Point → Point
-plusN zero p = p
-plusN (suc n) p = Gen.actT (plusN n p)
-
-plusWord : ∀ n p → Orbit p (plusN n p)
-plusWord zero p = stay p
-plusWord (suc n) p = stepT (plusWord n p)
+plusN = forwardPowerPoint
 
 plusY : ∀ n p → y (plusN n p) ≃ y p
 plusY zero p = P.≃-refl
@@ -92,18 +85,34 @@ negAbsBelow : ∀ a → R.- ∣ a ∣ ≤ a
 negAbsBelow a = P.≤-respˡ-≃ (P.-‿cong P.∣-x∣≃∣x∣)
   (P.≤-respʳ-≃ (P.neg-involutive a) (P.neg-mono-≤ (P.x≤∣x∣ {x = R.- a})))
 
+-- Keep the bounded integer recentering count separate from the
+-- actual point. This lets the orbit word store one indexed T-run
+-- instead of materialising up to 2*n individual inverse-T constructors.
+record LeftCentered (p : Point) : Set where
+  field
+    leftPoint : Point
+    leftCount : Nat
+    leftPointRead : U.tau leftPoint ≈C U.tau (minusPowerPoint leftCount p)
+    leftHeight : y leftPoint ≃ y p
+    leftLower : R.- twoThird ≤ x leftPoint
+    leftUpper : x leftPoint ≤ twoThird
+
 -- Start with a nonnegative translate and walk left until centered.
 -- At each left step the upper budget loses exactly one unit.
 leftFuel : ∀ n p → R.- twoThird ≤ x p →
-  x p ≤ (NR.natReal n + twoThird) → Centered p
+  x p ≤ (NR.natReal n + twoThird) → LeftCentered p
 leftFuel zero p lo hi = record
-  { point = p ; word = stay p ; height = P.≃-refl ; lower = lo
-  ; upper = P.≤-respʳ-≃ (P.+-identityˡ twoThird) hi }
+  { leftPoint = p ; leftCount = zero
+  ; leftPointRead = C.≈C-refl _
+  ; leftHeight = P.≃-refl ; leftLower = lo
+  ; leftUpper = P.≤-respʳ-≃ (P.+-identityˡ twoThird) hi }
 leftFuel (suc n) p lo hi with P.fast-corollary-2-17 (x p) third twoThird thirdTwoThird
 ... | inj₁ h = record
-  { point = p ; word = stay p ; height = P.≃-refl ; lower = lo ; upper = P.<⇒≤ h }
+  { leftPoint = p ; leftCount = zero
+  ; leftPointRead = C.≈C-refl _
+  ; leftHeight = P.≃-refl ; leftLower = lo ; leftUpper = P.<⇒≤ h }
 ... | inj₂ h =
-  let v = Ray.minusT p
+  let v = minusT p
       -- commute the translation explicitly on each side
       low' : R.- twoThird ≤ x v
       low' = P.≤-respʳ-≃ (P.+-comm (R.- R.1ℝ) (x p))
@@ -120,8 +129,14 @@ leftFuel (suc n) p lo hi with P.fast-corollary-2-17 (x p) third twoThird thirdTw
               P.≃-refl (NR.natReal n)))
           (P.+-monoʳ-≤ (R.- R.1ℝ) hi))
       c = leftFuel n v low' up
-  in record { point = Centered.point c ; word = join (minusEdge p) (Centered.word c)
-            ; height = Centered.height c ; lower = Centered.lower c ; upper = Centered.upper c }
+  in record
+    { leftPoint = LeftCentered.leftPoint c
+    ; leftCount = suc (LeftCentered.leftCount c)
+    ; leftPointRead = LeftCentered.leftPointRead c
+    ; leftHeight = P.≃-trans (LeftCentered.leftHeight c) (minusTHeight p)
+    ; leftLower = LeftCentered.leftLower c
+    ; leftUpper = LeftCentered.leftUpper c
+    }
 
 center : ∀ p → Centered p
 center p =
@@ -147,9 +162,14 @@ center p =
       low = P.≤-trans (P.≤-respʳ-≃ (let open P.ℝ-Solver in solve 0
              (⊝ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl) (P.neg-mono-≤ (P.nonNegx⇒0≤x twoThirdNN))) v0
       c = leftFuel (2 * n) v low vHi
-  in record { point = Centered.point c ; word = join (plusWord n p) (Centered.word c)
-            ; height = P.≃-trans (Centered.height c) (plusY n p)
-            ; lower = Centered.lower c ; upper = Centered.upper c }
+  in record
+    { point = LeftCentered.leftPoint c
+    ; word = same (minusRun (tRun (stay p) n) (LeftCentered.leftCount c))
+        (Comp.complexSym (LeftCentered.leftPointRead c))
+    ; height = P.≃-trans (LeftCentered.leftHeight c) (plusY n p)
+    ; lower = LeftCentered.leftLower c
+    ; upper = LeftCentered.leftUpper c
+    }
 
 -- Square bound via (b-a)(b+a) >= 0, valid without a sign split.
 squareBracket : ∀ a b → R.- b ≤ a → a ≤ b → (a * a) ≤ (b * b)
