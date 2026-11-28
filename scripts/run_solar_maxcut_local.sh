@@ -8,6 +8,7 @@ RECEIPTS="${RECEIPTS:-./solar_maxcut_receipts}"
 mkdir -p "$RECEIPTS"
 # Invalidate cached checkpoints when sibling Python dependencies change.
 # Conservative scope: all Python files in this script directory and this runner.
+runtime_hash="$($PYTHON -c 'import sys,platform,numpy,scipy,sympy; print(sys.version,platform.platform(),numpy.__version__,scipy.__version__,sympy.__version__)' | sha256sum | cut -d ' ' -f1)"
 source_hash="$(find . -maxdepth 1 -type f \( -name '*.py' -o -name 'run_solar_maxcut_local.sh' \) -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d ' ' -f1)"
 for entry in \
   check_solar_native_contract_sympy.py \
@@ -30,6 +31,8 @@ for entry in \
   check_solar_asymptotic_return.py \
   check_solar_controlled_terminal_return.py \
   check_solar_nested_cochain_refinement.py \
+  check_solar_evolution_tail.py \
+  check_solar_sparse_cone.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
@@ -38,12 +41,16 @@ for entry in \
   check_solar_spherical_reverse_integration.py \
   check_solar_spherical_reverse_atlas.py \
   check_solar_spherical_quadratic_path.py \
-  check_solar_spherical_two_jet.py; do
+  check_solar_spherical_two_jet.py \
+  check_solar_sparse_spherical_parity.py \
+  check_solar_nested_campaign.py \
+  check_solar_nested_campaign_jet.py \
+  check_solar_matched_passive.py; do
   if [[ ! -f "$entry" ]]; then
     echo "MISSING_SOURCE: $entry" >&2
     exit 2
   fi
-  hash="$(printf '%s\n' "$source_hash" "$(sha256sum "$entry")" | sha256sum | cut -d ' ' -f1)"
+  hash="$(printf '%s\n' "$source_hash" "$runtime_hash" "$(sha256sum "$entry")" | sha256sum | cut -d ' ' -f1)"
   status="$RECEIPTS/$entry.$hash.status"
   log="$RECEIPTS/$entry.$hash.log"
   if [[ -f "$status" ]] && [[ $(cat "$status") == PASS ]]; then
