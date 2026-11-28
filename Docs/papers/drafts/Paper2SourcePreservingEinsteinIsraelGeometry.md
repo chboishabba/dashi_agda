@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR142)
+## Current proof state — 28 November 2026 (BR145)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -356,3 +356,44 @@ The earlier rank-twelve subsidiary work obstruction applied to the selected elev
 ### Nonzero mean subsidiary work and local compatible current (BR136–139)
 
 In the original BR29 constraint graph, the quadratic mean-shape term in the differentiated full Israel Weyl jump is not zero: six selected residual entries remain nonzero polynomials. Its active and signed normal-work projections vanish identically, as does the corresponding raw wall magnetic exchange. Thus the earlier reference extrinsic work cancellation extends to arbitrary trace-free mean shape under the stated matched-frame, full-jump and vacuum-source hypotheses. The BR133 compatible wall skew correction gives a local symmetric flux current with positive mass and exact flux-relative speeds \(0,\pm1/3,\pm1/2\); rotational covariance gives its bound in every spatial direction. This yields positive time mass on tilted timelike slices, without claiming a free-jet symmetrizer or physical propagation speeds. For independent metric-compatible connection and coframe, the exterior derivative differs from the alternating frame derivative by \(\sum_a T^a\wedge\iota_{e_a}F\), for both \(R\) and \(*R\); torsion cannot be dropped off shell. The Cartan spatial identity gives the normal derivative of the wall curvature-defect pullback from the exterior Bianchi residual, connection work and one tangential derivative of the mixed defect. Its explicit trace budget does not close a same-order combined energy, and bulk \(L^2\) alone cannot control that trace. The actual intrinsic/frame and surface-defect evolution, nonlinear tame estimate, exterior/holonomy and development remain necessary. See [BR136–139 roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md) and [local checks](../../../scripts/check_hopf369_br136_139_F_variable_subsidiary.py). Classical differential geometry and trace identities retain prior attribution.
+
+
+### Parallel physical readout and Cartan trace quotient (BR143–145)
+
+The noncompact G3 branch has an initial tidal observation independent
+of the periodic wall theorem. At the original radial centre with
+\(p=\psi(0)\) and the signed oriented horizontal/fibre orthonormal
+frame, the actual time-symmetric vacuum electric curvature is
+\[
+T_5=p^{-2}
+\begin{pmatrix}
+-208\epsilon^2/9&0&0&0\\
+0&-208\epsilon^2/9&0&0\\
+0&0&80\epsilon^2/9&16\epsilon\\
+0&0&16\epsilon&112\epsilon^2/3
+\end{pmatrix}.
+\]
+Its trace vanishes. The longitudinal/fibre block has negative
+determinant for \(0<\epsilon^2<27/35\), including the original
+\(\epsilon=1/4\). Relative geodesic acceleration is \(-T_5\)
+in the stated curvature convention. The same radial solution at
+opposite field amplitude gives the same diagonal blocks and spectrum
+but opposite oriented mixed component. Thus the signed amplitude
+is recovered by \(p^2T_{z5}/16\) on this two-state fibre, whereas
+the coarse diagonal/spectral observer is insufficient. Fibre reflection
+relates the unoriented metrics; no absolute measurable sign or
+four-dimensional detector prediction follows. This is a local
+dimensionless initial observation under the P0T/U analytic assumptions,
+not a calibrated trajectory or quantum equivalence.
+
+For the periodic branch BR143 independently reconstructs the BR29
+residual graph and finds the 30-row electric trace has rank 23,
+with rank four on the kernel of the rank-22 normal-work form.
+Its nine-slot spatial restriction has rank three and annihilates
+that kernel, so factors through the normal-work matrix. This is
+not a bound by the indefinite scalar flux or a proof of trace
+regularity. The full curved/torsionful surface estimate and W6
+remain open. The native TOE adapter now consumes the existing
+consumer non-descent witness at rational sign-fibre scope.
+Three local exact stages PASS; no native kernel, PDE or physical
+calibration acceptance. See [parallel dependency register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

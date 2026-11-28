@@ -2718,3 +2718,200 @@ Three local independent SymPy stages exit 0, 90s cap each,
  CI or nonlinear acceptance. Classical Cartan block and spatial
  Hodge formulas are prior mathematics; source-specific signed
  jump and mean commutator are the attachment.
+
+
+## 21. BR143–145 — parallel endpoint execution and exact dependency register
+
+This is one tranche across the three independent deliverables of section 0,
+not a return to serial Einstein–Israel gating. The classical Bianchi,
+geodesic-deviation, Ricci and KK geometry are prior mathematics; new
+source-specific attachment is to the actual signed Hopf data and BR29
+normal-work graph. JMD attribution only where documented.
+
+### 21.1 Live owners, pinned paths, exact consumers
+
+Live PR metadata refreshed at parent d419828e22ec:
+#1217 09166d57a3cb13b6e298d53bc56b55bbb4601402,
+#1291 c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04,
+#1545 ab583022e81b604556348648c221e5c39cd7d607,
+#1547 0d927ff78e621b8f2cb33d327fbc9eea9eec3f2c,
+#1460 fa0209cfd47cd1a4c3cca75e0c4cd44ff2aa61a3,
+#1527 d19a9525968ec2fee92a6e3f73027df05396d497.
+#1504, #1508 and #1512 are closed, retained as historical
+source donors; do not infer merge merely from state. #1460 is
+based on research/ym-voyager2026-completeness-crosswalk-20261101,
+not master. The #1217 and #1291 changed-file queries were capped
+at 100 entries; exact-path fetches below establish the selected
+source owners, not exhaustive branch reconciliation.
+
+| Owner and actual file | Existing lemma / construction | Consumer and remaining cut |
+|---|---|---|
+| #1554 scripts/check_hopf369_p0t.py (blob 4b1e5ecda118ced5893c60920ffe44d01202acb1), P0T/U | Original nonzero Hopf scalar constraint, mixed/vertical seed Ricci, primitive recovery and local analytical argument | BR144 central tidal data from same spatial source; quantitative continuation, worldline and receiver calibration remain |
+| #1554 scripts/check_hopf369_p0v.py (210139cc2ce38a04c29ea8406b7a09a876a3d864) | Actual KK Maxwell acceleration, signed helicity second derivative density, metric recovery, radial tail | No generic reduction reimplementation; full central Ricci and tidal sign observation BR144/145; keep G4 distinct |
+| #1554 DASHI/Physics/Foundations/TSFVKKFourMetricVerticalProbeFullReconstructionExact.agda (563eecb22a99e52660d990b37b9900c090365d54) | originalKKFullFiveMetricRecoveredFromThreeProbeFamilies, originalKKVerticalProbeReadsSelectedRadion, originalKKUnitFibreMixedProbeReadsConnection | Mixed metric probes motivate oriented curvature probe; metric reconstruction alone not curvature reconstruction |
+| #1554 DASHI/Physics/Foundations/TSFVKKSameMetricTransportExact.agda (a705122c79ac585eac36d765376155c0c482cf5b) | sameMetricKKSignatureFromTSFV, sameMetricKKReversedCountExcluded, globalStrictReversalRankImpossible | Reuse same metric and observer; no identification of fibre sign with clock direction |
+| master search: Docs/physics/KKTOEPhysicalModelForkPareto20261024.md, Docs/physics/KKLightElectronBIDIChiralityRadionMaxCut20261024.md, Docs/physics/LARES2KKThreeBodyEccentricMaxCut20261023.md, docs/kk-dipole-hopf-rotation-video-claims-roadmap-20261118.md | Candidate geodesic, source, radion and calibration owners (path discovery in this pass, not full audit) | Reopen exact source before any proper-time/light trajectory or physical charge inference |
+| #1554 scripts/check_hopf369_br_curvature_constraints.py (72e9118f4891fbd9be8c1e38fe7292bf17be274a), scripts/check_hopf369_br132_135_F_bianchi_cartan.py (0de643a765e455367c6635dad2f6aec808ac01c0) | 35-dimensional residual graph, full cyclic work and exterior compatibility | BR143 exact electric trace quotient using same packing; need trace estimate not just linear factorization |
+| #1547 scripts/check_f8_gauss_israel_energy_weld.py (941ca8e2ee66b1b0c95b7d6379614f804131b607), check_f8_material_full_ward.py, check_f8_constraint_detector_closure.py, check_f8_characteristic_to_ward_weld.py, check_f8_ward_codazzi_defect.py | F8 Gauss/Israel exact source and candidate characteristic/Ward owners; first file reopened, others listed | Reuse characteristic trace estimates only after actual BR143 source/domain match; F8 finite TT is not Hopf continuum |
+| #1291 Docs/roadmaps/IndexedResidualCube369NineDOFMaxCut20261120.md (3da5e97aec36b019c7d0742bf53f2323aa6e3fc3), #1554 DASHI/Core/GovernedIndexedResidualCubeExact.agda (42b70ebb7376813076934f2245ce6011b76f10c8) | IndexedCube.residualAt, ResidualFaces, ExactFaces, xyz-zyx, independent history/time/depth/iteration/version | Attach BR145 oriented signed residual; do not claim commuting physical-time faces from spectral order |
+| #1554 DASHI/Physics/Foundations/Hopf369PhaseRetainingObserverCubeExact.agda (24f13d3db8741af777e4bf586334ed6dd259df4e) | reopenSplit, splitAdvance, exactFaces, actualFineOrderDiffers, notAllCausalFacesExact, reverseChange | Consumer retains sign, zero and chronology; physical tidal observation is a new source-specific residual, not generic topology equivalence |
+| #1554 DASHI/Core/ConsumerDescentMinimalObserverExact.agda (d0961074290dd887af3c96add0957a0fa14140be), ConsumerFibreRepairExact.agda (5bab8f89861559c14f3877acd5e11424b21a6a6d) | ConsumerNonDescentWitness, nonDescentWitnessBlocksFactorization, canonicalConsumerObserverIsLeast, factorizationRepairSeparatesWitness | BR145 native witness for a specified signed amplitude fibre, with nonzero-distinct hypothesis; do not claim universal minimality |
+| #1217 DASHI/Unified/TOESectorRealizationExact.agda (a61b846f37b723a8f442bfdaade3c84457f62027; same blob on #1554) | composeGrade, composeRealizations, promoteWithExplicitWitness | Shared-carrier grade does not upgrade to physical dynamics or calibration |
+| #1554 DASHI/Unified/TOEHopfMonsterSourceRealizationsExact.agda (parent 531a025130b64415e50b04d73d01c8976fb846b6), DASHI/Moonshine/MonsterSpecialGravityKKRefinedCoordinateBidiExact.agda (5f88d39feb707ab0320de7a2ee14536222f8eefb) | gravityFLMCoordinateRealization, splitRealization, kkGraphMetricPathExact, gravityToFLMToGravity, flmToGravityToFLM | Native BR145 witness appended to original adapter; independent representation/action and dynamical preservation remain |
+| #1545 Docs/roadmaps/Monster3BEndpointFirstConstruction20261123.md (84858fdc182f66ab730d0fe7ee01ab2ebb2668db), Docs/physics/Monster3BDirectCyclotomicCharacterMaxCut20261125.md, scripts/monster3b_actual_projective_sym2_intertwiner.py, scripts/monster3b_atlas_mmgroup_cross_source_intertwiner_gate.py | First file reopened: actual marked Weyl frame and source character transport; other paths listed | Source marked words/projector/norm and original cover receipts; no import of physical gravity from finite group characters; no need to wait for W6 |
+
+Do not assume files discovered by master search already live in every
+sibling branch. Actual selected source files are pinned above. No
+sibling edits, branch merges, exhaustive proof replay or CI.
+
+### 21.2 BR143 — reverse-solve the exact electric trace quotient
+
+Use the BR29/132 embedding X (100 by 35), orthogonal complement Q,
+actual Maxwell matrices M_i, spatial residual maps D_i, and same
+selected independent coordinates c. r=Lc, C_full=E_c c. Normal work
+on this graph is represented by
+ S_c=-L^T M_n L-L^T D_n^T E_c-E_c^T D_n L.
+BR143 independently reconstructs the original order, constraints and
+factors and checks L Dr=Rj, E_c Dr=Dj. In the reference flat-principal
+frame graph the magnetic entries of r (up to the residual sign) give
+C_{0ij,ab} for tangential spatial pairs i<j in 1..3 and second bivector
+ab in 0..4. Let T be these 30 rows of L and T_sp the nine rows with
+second pair also spatial in 1..3. The latter is exactly the restricted
+spatial electric source for the BR141 double-dual curvature block.
+Exact ranks:
+ rank S_c=22, dim ker S_c=13,
+ rank T=23, rank T restricted to ker S_c=4,
+ rank T_sp=3, T_sp restricted to ker S_c=0.
+If Z is a basis of ker S_c and J spans image(T Z), take
+ P_perp=I-J(J^T J)^-1 J^T.
+The exact solve U S_c=P_perp T yields the BIDI split of the trace
+into its rank19 flux-factorable component and rank4 blind component.
+The restricted spatial trace is wholly flux-factorable:
+ T_sp=U_sp S_c.
+The initial attempted negative assertion that T_sp saw the flux
+kernel failed; the exact rank computation reverses that hypothesis.
+This is a factorization through the NORMAL WORK MATRIX, not through
+the scalar signed quadratic work c^T S_c c. An indefinite energy
+flux does not bound ||S_c c||, and cancellation of net wall work
+does not give the individual trace. The four remaining directions
+are an algebraic kernel of the selected map, not independently
+constructed PDE solutions. Need actual active characteristic/trace
+estimate, compatible boundary evolution for blind directions,
+and BR138 torsion/frame corrections; do not claim W2/W4b closed.
+At arbitrary curved independent connection, E need not have the
+restricted algebraic curvature symmetries of BR141, so the full
+T trace and off-shell corrections remain in the budget.
+
+### 21.3 BR144 — actual G3 central tidal tensor, not a new gravitational ansatz
+
+Consume P0T1/V4 original h=psi²(delta+(dw+eps A0)²) with
+time-symmetric K_init=0, original positive radial psi,
+-Delta psi=(eps²/12)|B0|² psi. At x=0 put p=psi(0)>0.
+Since |B0(0)|²=64, radial smoothness gives psi_i(0)=0 and
+psi_ij(0)=-(16/9) eps² p delta_ij.
+Using the exact original signed horizontal frame
+ e_i=partial_i-eps A_i partial_w, U=partial_w,
+and dividing each by p, the central physical orthonormal
+spatial Ricci tensor is independently computed from the
+coordinate metric and all first/second jets:
+ T5=p^-2 [
+   -208 eps²/9, 0, 0, 0;
+   0, -208 eps²/9, 0, 0;
+   0, 0, 80 eps²/9, 16 eps;
+   0, 0, 16 eps, 112 eps²/3 ].
+Here the sign convention is R_{i0j0}=Ric(h)_ij on a
+time-symmetric vacuum slice, g_tt=-1. This follows from
+the vacuum spatial Ricci contraction and Gauss, or
+h_tt=-2 Ric(h) in proper normal time. T5 is the actual
+electric curvature/tidal tensor at the initial event of
+the admitted local G3 development, not a Weyl model or
+an external source. Relative geodesic acceleration is
+-T5 applied to the separation vector. The trace is zero,
+as required by the actual Hamiltonian constraint.
+The longitudinal/fibre subdeterminant before scaling
+is (8960/27) eps^4-256 eps². It is negative when
+0<eps²<27/35, in particular original eps=1/4.
+Two transverse electric eigenvalues are negative and
+the longitudinal/fibre block has opposite signs; no
+isotropic attractive/repulsive interpretation follows.
+Physical relative accelerations are opposite in sign
+to these tidal eigenvalues. The mixed component 16 eps/p²
+is linear in the signed field amplitude, while all the
+diagonal entries are quadratic. At eps=0 the flat
+control has zero tensor. The scalar solution depends
+only on eps², and for eps=1/4 the previous contraction
+bound is 1<=p<=18/17. These are dimensionless source
+units and an initial local observable, not calibrated
+4D detector output, antigravity or long-time stability.
+The check uses independent coordinate Christoffel/Ricci
+first/second jets; verifies the Taylor jet of the original
+rational A0, not merely the target polynomial. The
+analytic local-development and radial constraint hypotheses
+are inherited from P0T/U, not re-proved by the checker.
+
+### 21.4 BR145 — concrete TOE non-descent and signed repair
+
+At fixed |eps|>0 and fixed oriented fibre frame, compare
+the original two states eps and -eps. Their scalar psi
+is the same by the P0T radial uniqueness argument.
+Their entire horizontal 3x3 tidal block, vertical
+diagonal and characteristic polynomial are equal.
+T5(-eps)=R T5(eps) R, R=diag(1,1,1,-1).
+The oriented mixed probe differs by 32 eps/p²:
+ eps=p² T5_{z5}/16.
+Thus the coarse observation of diagonal blocks and
+spectrum is not sufficient for this signed consumer.
+One normalized mixed probe recovers the signed amplitude
+on this two-point fibre; no claim of arbitrary metric,
+full state or dynamical history reconstruction.
+The fibre reflection is a 5D isometry relating the
+unoriented data, not a measurable absolute sign without
+a marked fibre orientation. The result is a non-descent
+of the source-indexed observer, not physical inequivalence
+modulo all diffeomorphisms. It attaches to the actual
+ConsumerNonDescentWitness and factorization blocker in
+the existing TOE adapter, with supplied distinctness for
+the signed rational values. The native rational polynomial
+identity and witness are source-written, not kernel-run.
+This is a shared-carrier/observer result, not a new
+Monster intertwiner or a physical gauge charge calibration.
+For the quantum lane, keep the same native grades and
+marked-action obligations of #1545 and #1217.
+
+### 21.5 Next max-cut, simultaneous lanes
+
+Periodic: W0/W1 actual BN data/corners and source identity;
+W2/W3 use BR143's T_sp factorization to reverse-solve a
+joint characteristic trace estimate, retaining T kernel rank4
+and full torsion/Cartan correction; W4a/b conditional given-
+metric uniqueness is not generation; W5 exterior/holonomy
+weighted bounds; W6 actual nonlinear development; W7 acceptance.
+Do not relist generic Bianchi/Gauss/Ricci or reprove BR29.
+
+Classical: consume BR144 now. Use actual G3 normal-time
+metric jets to construct finite-time error-controlled
+worldline/geodesic deviation and light transport with
+marked horizontal/vertical probe and physical units;
+compare G4 actual stress-generated tidal tensor using its
+own initial data and constitutive law, not the G3 tensor.
+Quantitative common time and tail/relative norm are P0T/U/V
+obligations; no empirical claim until calibration.
+Material: reuse original current/charge/energy owners from
+P0O–AG; physical stress/observable attachment remains,
+not gated by periodic W6.
+
+TOE/quantum: consume BR145 through existing fibre/descent
+framework and #1291 source-indexed residual paths, not
+a new generic codec; actual source action/metric variation,
+marked Monster/FLM intertwiner and quantum/observable
+agreement still separate. #1545 own candidate ordinary
+gauge and source character gates; do not promote a
+representation count or a signed tidal readout to a
+universal symmetry theorem.
+
+Local three final stages PASS, SymPy 1.14.0, checker blob
+868f191706034be40683d5321b1ef7a65cdfe5f6. BR143 first
+attempt failed on the intentionally tested opposite
+spatial-kernel expectation, corrected to measured exact
+rank and replayed. Native adapter unrun. No integrated
+runner, PDE existence, calibration, kernel or CI acceptance.

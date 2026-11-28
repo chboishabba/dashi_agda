@@ -210,3 +210,45 @@ normalFirstIndicialFactorization :
   p * (p - (1ℚ + 1ℚ)) - (1ℚ + 1ℚ + 1ℚ)
   ≡ (p + 1ℚ) * (p - (1ℚ + 1ℚ + 1ℚ))
 normalFirstIndicialFactorization p = Ring.solve-∀ p
+
+
+------------------------------------------------------------------------
+-- BR145: source-indexed G3 tidal observation.
+-- BR144 supplies the actual central Ricci jet at analytic scope.
+-- The native witness below pays only the rational sign-fibre descent.
+------------------------------------------------------------------------
+
+import DASHI.Core.ConsumerDescentMinimalObserverExact as CD
+open import DASHI.Core.Prelude using (⊥)
+
+centralTidalEvenReadout : ℚ → ℚ
+centralTidalEvenReadout e = e * e
+
+centralTidalEvenSignCollision :
+  (e : ℚ) → centralTidalEvenReadout e ≡ centralTidalEvenReadout (0ℚ - e)
+centralTidalEvenSignCollision e = Ring.solve-∀ e
+
+centralTidalSignedAmplitude : ℚ → ℚ
+centralTidalSignedAmplitude e = e
+
+-- Distinctness is the nonzero signed-source hypothesis.
+-- No absolute sign is claimed without a marked fibre orientation.
+centralTidalSignNonDescent :
+  (e : ℚ) → (e ≡ 0ℚ - e → ⊥) →
+  CD.ConsumerNonDescentWitness centralTidalEvenReadout centralTidalSignedAmplitude
+centralTidalSignNonDescent e distinct =
+  CD.consumerNonDescentWitness e (0ℚ - e)
+    (centralTidalEvenSignCollision e) distinct
+
+centralTidalSignBlocksFactorization :
+  (e : ℚ) → (e ≡ 0ℚ - e → ⊥) →
+  CD.FactorsThrough centralTidalEvenReadout centralTidalSignedAmplitude → ⊥
+centralTidalSignBlocksFactorization e distinct =
+  CD.nonDescentWitnessBlocksFactorization (centralTidalSignNonDescent e distinct)
+
+-- If the observed, radius-cleared mixed probe is k*e, the sign
+-- reversal is exact. BR144 supplies k=16; calibration and division
+-- by the physical radius require the actual source and units.
+centralTidalMixedSignTransport :
+  (k e : ℚ) → k * (0ℚ - e) ≡ 0ℚ - (k * e)
+centralTidalMixedSignTransport k e = Ring.solve-∀ k e
