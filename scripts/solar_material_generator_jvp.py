@@ -2,6 +2,8 @@
 Consumes the Whitney edge-current map and diagonal Hodge; no topology changes.
 """
 import numpy as np
+from scipy.sparse import issparse,lil_matrix
+from solar_matrix_storage import close,block
 
 def material_jvp(model,volumes,D,nu,dD,dnu):
     D,nu,dD,dnu=[np.asarray(v,float) for v in (D,nu,dD,dnu)]
@@ -14,7 +16,8 @@ def material_jvp(model,volumes,D,nu,dD,dnu):
     W=np.asarray(model['material_map'],float)
     ne=len(me); N=model['generator'].shape[0]; nf=N-ne-9*n
     assert nf>=0 and W.shape==(ne,3*n)
-    dA=np.zeros((N,N)); dloss=np.zeros((N,N))
+    sparse=issparse(model['generator'])
+    dA=lil_matrix((N,N)) if sparse else np.zeros((N,N)); dloss=dA.copy()
     for o in range(n):
         base=W[:,3*o:3*o+3]/np.sqrt(me)[:,None]
         for j in range(3):
@@ -23,7 +26,8 @@ def material_jvp(model,volumes,D,nu,dD,dnu):
                 dc=base*dD[o,j]/(2*np.sqrt(D[o,j]*vol[o]))
                 dA[:ne,sl]=-dc;dA[sl,:ne]=dc.T
                 dloss[sl,sl]=np.eye(3)*dnu[o,j]
-    assert np.allclose(dA,-dA.T,atol=1e-13,rtol=0)
+    if sparse:dA=dA.tocsr();dloss=dloss.tocsr()
+    assert close(dA,-dA.T,atol=1e-13,rtol=0)
     return dict(d_generator=dA-dloss,d_exchange=dA,d_loss=dloss)
 
 def amplitude_exchange_jvp(model,volumes,amplitude,d_amplitude):
@@ -44,14 +48,15 @@ def amplitude_exchange_jvp(model,volumes,amplitude,d_amplitude):
     W=np.asarray(model['material_map'],float)
     ne=len(me);N=model['generator'].shape[0];nf=N-ne-9*n
     if nf<0 or W.shape!=(ne,3*n): raise ValueError('material map mismatch')
-    out=np.zeros((N,N))
+    sparse=issparse(model['generator']);out=lil_matrix((N,N)) if sparse else np.zeros((N,N))
     for o in range(n):
         base=W[:,3*o:3*o+3]/np.sqrt(me*vol[o])[:,None]
         for j in range(3):
             sl=slice(ne+nf+9*o+3*j,ne+nf+9*o+3*j+3)
             dc=base*dq[o,j]
             out[:ne,sl]=-dc;out[sl,:ne]=dc.T
-    assert np.array_equal(out,-out.T)
+    if sparse:out=out.tocsr()
+    assert close(out,-out.T,rtol=0,atol=0)
     return dict(d_exchange=out,full_generator_jvp_admitted=False,
                 zero_support_stage_weld_required=bool(np.any((q==0)&(dq!=0))))
 
@@ -73,21 +78,23 @@ def amplitude_material_boundary_jvp(model,volumes,q,dq,nu,dnu,gyro,axis,right_su
     if np.any(((q>0)|(dq>0))&~active):
         raise ValueError('right support contradicts amplitude path')
     ex=amplitude_exchange_jvp(model,volumes,q,dq)['d_exchange']
-    H=np.asarray(model['generator'],float); P=H.copy(); dloss=np.zeros_like(H)
-    base_loss=np.asarray(model['loss'],float); plus_loss=base_loss.copy()
-    N=len(H); offset=N-9*n
+    H=model['generator']; sparse=issparse(H)
+    P=H.tolil() if sparse else H.copy(); dloss=lil_matrix(H.shape) if sparse else np.zeros_like(H)
+    base_loss=model['loss']; plus_loss=base_loss.tolil() if sparse else base_loss.copy()
+    N=H.shape[0]; offset=N-9*n
     for o in range(n):
         b=axis[o]; cross=np.array([[0,-b[2],b[1]],[b[2],0,-b[0]],[-b[1],b[0],0]])
         for j in range(3):
             sl=slice(offset+9*o+3*j,offset+9*o+3*j+3)
             block=-gyro[o,j]*cross-nu[o,j]*np.eye(3)
             expected=block if q[o,j]>0 else np.zeros((3,3))
-            if not np.array_equal(H[sl,sl],expected):
+            if not close(block(H,np.arange(sl.start,sl.stop)),expected,rtol=0,atol=0):
                 raise ValueError('base generator does not match stated amplitude support')
             if active[o,j]:
                 P[sl,sl]=block
                 plus_loss[sl,sl]=nu[o,j]*np.eye(3)
                 dloss[sl,sl]=dnu[o,j]*np.eye(3)
+    if sparse:P=P.tocsr();plus_loss=plus_loss.tocsr();dloss=dloss.tocsr()
     return dict(right_limit=P,right_loss=plus_loss,d_right_generator=ex-dloss,
                 d_right_loss=dloss,right_support=active,
                 full_generator_jvp_admitted=False)
