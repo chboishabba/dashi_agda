@@ -3254,3 +3254,61 @@ Canonical `scripts/check_clay_section36_native_campaign.py` expanded on #1551 at
 6. **PNP #119:** extend the actual causal one-coordinate read into a universal sharing-stable unavoidable INTERNAL computational-event budget with faithful unrestricted algorithm semantics and exact time/bit/control ABI, OR construct a truly polynomial full SAT solver. The one-event dependency itself is not such a bound.
 
 All new source is COMMITTED, mathematical boundaries explicitly separated, Agda/Lean kernels unrun, no universal Millennium solution claimed.
+
+
+## Section 42 — original indexed YM, global even Hodge deck, BSD crossing orientation, NS diagonal precision and PNP finite-block ABI (2026-11-29 AEST)
+
+### Committed owner heads and nonpromotion boundary
+
+All generated source, native acceptance roots, exact regression and this roadmap are committed to the existing original owners:
+- YM Agda #1536: `e1b68c6b51adef1a11a916a5ba818617cd748a16`, `agent/ym-p0-cmp119-r445-master-weld-20261121`.
+- NS Lean #123: `87b0c2b2ca60e54dc87b3f424699a13711b6d216`, `research/ns-native-proof-weld-20261127`.
+- BSD/Hodge Lean #124: `50a8e97d000beadad35e84fdabfc5b1f73e68b30`, `research/clay-bsd-hodge-moment-orientation-20261127`.
+- PNP Lean #119: `cf6c4be9ae410c672a18b5236e52da93df8386f7`, `research/clay-p0-polynomial-coverage-endpoint-20261124`.
+- RH Lean #121: `aa6b0323d25acb7de3f85187e801939de40039d8`, `fix/alpoge-original-admission-axiom-log-20261126`. **No new RH proof source**: the existing exact pinned external witness/axiom admission is NOT a theorem.
+- All-Clay canonical Agda #1551: `e7d3e29e81a13dff4515a70598942c0d949c483a` before this roadmap append.
+
+**SOURCE_WRITTEN/PENDING_KERNEL** applies to every newly written Agda and Lean theorem. No native Lean/Lake, Agda 2.9, original RH theorem admission or CI execution occurred. Existing theorem *names* in source are not evidence of accepted formal proofs. No Clay Millennium problem is declared solved.
+
+### YM #1536 — reusable literal original shifted cell-degree constructor
+
+New `DASHI/Foundations/FiniteCauchyOriginalShiftedDegreeFilterExact.agda`, commit `a71fe18dbacee3592f9b8d1191cc297763f7b681`, and native root `DASHI/Physics/YangMills/YMClayCMP102Section42OriginalShiftedDegreeAcceptanceExact.agda`, commit `e1b68c6b51adef1a11a916a5ba818617cd748a16`. The source consumes actual Nat `s≤s` and standard Nat order rather than recreating any infinite series. For the ORIGINAL A triangle cutoff count c=suc n, filtered i+j≥n implies suc(i+j)≥c after the real original single X factor. For B c=suc(suc n), i+j≥n implies suc(suc(i+j))≥c after the original X². The B exceptional c=1 is paid separately (degree 2≥1). These are the exact integer indices needed for the future Bishop-positive filtered Cauchy bound.
+
+Original shared real-order remainder is **not** proved here: convert original `Row.trianglePartial`/rectangle to the filtered positive Fin sum, use the already-owned `BishopFiniteCauchyShiftedWingAbsoluteExact` and original factorial A/B nonnegative masses, apply (u^m≤q^c) for m≥c, and conclude `OriginalOuterTwoWings X`. The previous original signed last-B and count-zero source terms remain paid at the SOURCE level, but Agda kernel is still outstanding. Physical interacting 4D SU(N) Wilson F19/CMP116/OS/same-H mass gap remains a completely separate universal obligation.
+
+### NS #123 — one radius for all cutoffs at EVERY precision
+
+New `Synthesis/NavierStokesOriginalAllCutoffDiagonalShellPrecisionExact.lean`, commit `f1557c3da59f2da01b9339df0feb208209057bb5`, native root `Synthesis/ClayNSSection42DiagonalShellPrecisionAcceptanceExact.lean`, commit `87b0c2b2ca60e54dc87b3f424699a13711b6d216`. Fixes `epsilon_j=1/(j+1)>0`, constructs source `R_j=1+Emax/(2ν epsilon_j)`, and for each j consumes the ALREADY existing true original one-radius/all-cutoff physical Galerkin theorem. It chooses R_j BEFORE varying N and x₀ and preserves the actual finite ODE `SolvesOn finiteForce X_N` and all T≥0 original L1_t high-shell bounds. This is a useful explicit diagonal spatial-tightness modulus, NOT a cutoff-uniform signed nonlinear quarter-transfer theorem, global smooth PDE limit, or solution of Navier–Stokes.
+
+### BSD #124 — original signed two-crossing SOURCE orientation, not another new moment
+
+New `Synthesis/MillenniumBSDOriginalSignedCrossingSwapSourceExact.lean`, commit `c21c0f8605a20d4c617a2de9bd0701931f69aae5`, native root `Synthesis/ClayBSDSection42OriginalCrossingSwapAcceptanceExact.lean`, commit `50a8e97d000beadad35e84fdabfc5b1f73e68b30`. Proves across all n the original complete homogeneous `h(a,b,n)=h(b,a,n)`, ORIGINAL recurrence-defined `quotient(a,b,x,n)=quotient(b,a,x,n)`, exact original `signedPolynomial(a,b,x,n)=signedPolynomial(b,a,x,n)`, and the same signed-source strict positivity condition. The original asymmetrical h recurrence no longer creates an arbitrary orientation choice in the selected signed Mellin source. **Still absent**: genuine selected COMPLEX L''/Mellin equality, analytic and arithmetic rank comparison and Sha finiteness. Those are not consequences of crossing symmetry.
+
+### Hodge #124 — WHOLE 32-point local original even-sign deck, not just the central -1 action
+
+New `Synthesis/MillenniumHodgeDicksonOriginalWholeEvenDeckOnActualRootExact.lean`, initial commit `0653b1e96084a54bc2fc77a98b3fbcb57c740672`, corrected pointwise congruence `dc795ddb47dcd247f20c9a32b13223b8984c28e9`; native root `Synthesis/ClayHodgeSection42WholeEvenDeckAcceptanceExact.lean`, commit `0971f550e77494735dcb2fe9571deeb7bef15c3b`. It reuses the true source `ActualRootFibre(a,y,delta) ≃ SignedFibre D delta` and punctured `EvenDeck F ≃ SignedFibre D delta` for the SAME original source δ≠0 and base root. Thus every original coupled root has a unique even-sign vector relative to that root; equivalence injectivity and surjectivity prove an actual faithful/transitive local deck orbit. A new definition transports arbitrary even-sign derivative multiplication through the actual root equivalence. This is a genuine original 32-sheet local signed-fibre action at characteristic zero, not the existence of a proper global projective variety or Chow cycle; branch-overlap, algebraic transition descent, primitive nonzero pairing and global monodromy remain unresolved.
+
+### PNP #119 — broaden original single-bit actual read to block observations
+
+New `Welds/PNPOriginalAnchoredCausalFiniteBlockReadExact.lean`, commit `2e627f4b81cc474e5da01e7e90fcd0b78ea6f3c4`, native root `Welds/PNPSection42OriginalFiniteBlockReadAcceptanceExact.lean`, commit `cf6c4be9ae410c672a18b5236e52da93df8386f7`. The SAME anchored legally reopened original F3 input pair has an actual Fin k paired-observation split. Under the explicit machine ABI
+`observe(j,u)=probe(j,fun i:Fin b=>u(address j i))`,
+the proof converts real observation divergence into `exists j:Fin k, i:Fin b` with differing ORIGINAL input bits at the actually addressed block coordinate. When b=0 the witness type is uninhabited and the purported Boolean terminal split is refuted. This allows real finite-block reads WITHOUT silently charging exponentially many independent internal events. It does NOT prove unrestricted SAT lower bound; arbitrary algorithms with other communication interfaces and sharing remain outside that stated ABI. Full original R1/time/bit/control universal work or actual polynomial SAT algorithm remains open.
+
+### Exact source-model regression and native acceptance
+
+Committed `scripts/check_clay_section42_original_whole_geometry.py`, commit `be3831b261321bd6b2bbdf03f585824a5362d8ed`; independent local execution **192543/192543 exact checks PASS**:
+`YM:180281`, `NS:1440`, `BSD:1960`, `Hodge:1056`, `PNP:7806`.
+The committed Git blob `131cc24a5487a29d90693cdb0f6bd47671a0c30b` was checked against the EXACT local executed script blob: **byte-identical**, not merely equivalent models. Hodge regression confirms exactly 32 sign-even roots at source δ=1 (six a_i=0, y_i=3), uniqueness of all 32 choices; PNP checks empty/small block negative controls; YM covers all shifted finite degrees c=1..80. No acceptance of the original universal PDE, analytic BSD L-function, global Hodge Chow class, unrestricted PNP algorithms or Agda theorem follows from finite tests.
+
+Canonical native campaign `scripts/check_clay_section36_native_campaign.py` expanded at `7c62223395f93c6efb682c6a57d86c223aba0d91` to **29 Agda/Lean selected original proof roots + 1 exact externally pinned RH native admission**, total 30 mandatory checks. Fail-closed test source `scripts/test_clay_section37_native_campaign_fail_closed.py` updated at `e7d3e29e81a13dff4515a70598942c0d949c483a`. The selected-root campaign has NOT been executed; the exact pinned RH source/proof witness remains unavailable. Do NOT report `all_selected_roots_passed=true` or any native proof PASS without an actual native receipt.
+
+### True remaining coarse-to-fine universal endpoints
+
+- YM: paid original integer cell-degree indices → still need Bishop positive finite filtered sum/order and source Agda acceptance; separately interacting 4D Wilson/OS/same-H positive mass-gap theorem.
+- NS: diagonal uniform space-time Fourier-shell tightness → still need cutoff-uniform SIGNED nonlinear quarter transfer, actual continuum strong smoothness.
+- BSD: complete original two-crossing orientation geometry → actual selected complex L-derivative ↔ original Mellin moment, rank/Sha bridge.
+- Hodge: all original 32 signed root sheets on punctured actual coupled fibre → **original projective branch/overlap gluing**, algebraic proper Chow cycle and nonzero primitive class pairing.
+- RH: source statement equivalences/pinned audit gate are not proof; genuine original RH witness and native axiom admission open.
+- PNP: finite causal actual block read under a specified ABI → general sharing-stable unavoidable internal SAT machine work or polynomial algorithm open.
+
+All source, checkers and roadmap remain committed; no Millennium endpoint promoted beyond native evidence.
