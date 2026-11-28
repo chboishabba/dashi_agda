@@ -43,3 +43,6 @@ See [System V option-cone source atlas](RelationalFederationSystemVOptionCone202
 
 ## OODA / proof-experiment-action lineage
 See [OODA source and weld crosswalk](RelationalFederationOODA20261129.md). Boyd historical OODA (exact briefing locator pending), Beer VSM, #697 DASHI history-indexed proof/experiment/action and Base369 observer, dashiTRADE original architecture, SLR production and JMD technical precedents remain independently attributed. No sector-to-authority, model score-to-physical outcome or immediate-to-long-horizon promotion.
+
+## LES, proof-search, experiment design and ZKP lineage
+See [LES proof-search source and roadmap crosswalk](RelationalFederationLESProofSearch20261129.md). Original LES, proof/experiment/OODA, PrintingPress and introspective ZKP frame owners retained; #195/#224/#640/#647/#643/#777/#697/#1278/#1249/#1442 source coordinates. JMD/zkperf/zkSEC/Casey implementation context remains separately attributed, no external source copied or runtime verification claimed. Cryptographic zero knowledge and formal audit metadata remain distinct. Local synthetic extension is new DASHI work, not source ecological data.
