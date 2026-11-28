@@ -65,7 +65,16 @@ class History:
         sol=solve_ivp(rhs,(1,end),np.zeros(6*N),rtol=1e-9,atol=1e-12,dense_output=True,method='DOP853')
         assert sol.success
         self.ctrl=lambda t:sol.sol(t).reshape(2,N,3)/scale
+    def known_ward(self,t,k,Qrot=None,muS=0.):
+        """Complete source-owned T, effective Israel C and all four Ward rows.
+        Use this rather than legacy wall() when coupling scalar/vector sectors.
+        muS is the actual shear coefficient times controller S; supply it explicitly.
+        """
+        from check_f8_full_band_ward_attachment import assemble
+        return assemble(self,t,k,muS=muS,Qrot=Qrot)
+
     def wall(self,t,k,Q=Q):
+        """Legacy projected diagnostic; not a complete four-component Ward source."""
         """Actual coefficient-level known stress/Ward and elastic/charge split."""
         K=self.K;b=1/t;w=b**4/12;clock=b*b/(3*np.sqrt(1+b*b))-w
         h=CubicSpline(self.kh,self.h(t)); ht=CubicSpline(self.kh,self.ht(t))
