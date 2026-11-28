@@ -60,7 +60,7 @@ def cycle(material,cfg):
         return [float(np.linalg.norm(u-v)/max(np.linalg.norm(u),np.linalg.norm(v),1e-30)) for u,v in zip(a,b)]
     assert int(cfg['max_cycles'])>=1 and cfg['auxiliary_J']>=0
     assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
-    campaign={}; preparation={}; trace=[]; history=[]
+    campaign={}; preparation={}; trace=[]; history=[]; sensitivity=[]
     initial_energy=energy()
     tail=int(cfg.get('restoration_steps',0)); assert tail>=0
     horizon=int(cfg['max_cycles'])
@@ -89,7 +89,9 @@ def cycle(material,cfg):
             nu=rates([dict(r,te=r['te']+mid[i]) for i,r in enumerate(rows)],neutral)
             model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),vol,pop*CHARGE**2/MASS,nu,gyro,axis)
             A=model['generator']-current_L-S
-            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc)
+            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=cfg.get('retain_sensitivity',False))
+            if cfg.get('retain_sensitivity',False):
+                sensitivity.append(dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude']))
             channels=w['loss_channels_J']; useful=channels['load']; collision=channels['collision']
             paid=absorbed/cfg['heater_efficiency']+(costs[0]+costs[3])/q['chemical_input_efficiency']-q['chemical_recovery_efficiency']*costs[4]
             balance=energy()-before+w['outgoing_J']+useful+collision+bath+costs[1]+costs[2]+costs[4]-w['incident_J']-absorbed-costs[0]-costs[3]
@@ -118,7 +120,7 @@ def cycle(material,cfg):
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
                 strict_campaign_net_J=corrected_net if full_restored else None,
-                terminal_depletion_J=depletion,history=history,elapsed_s=((iteration+1)*len(src)+tail)*dt,
+                terminal_depletion_J=depletion,history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
                 preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
                 cycle_trace=trace,net_J=net,periodic_return=ret,original_return=orig,
                 restored=bool(restored),original_material_restored=bool(material_restored),
