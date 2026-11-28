@@ -93,6 +93,9 @@ def main():
         p.add_argument('--'+n,type=Path,required=True);p.add_argument('--'+n+'-sha256',required=True)
     p.add_argument('--output',type=Path,required=True);a=p.parse_args()
     data={n:read_pinned(getattr(a,n),getattr(a,n+'_sha256')) for n in ('witness','trace_source','all_rows','selected','binding')}
+    if data['witness'].get('status')=='actual_cyclotomic_word_factor':
+        data['witness']=data['witness']['trace_witness']
+        require(data['witness'] is not None,'phase-closed actual word required')
     j=check(data['all_rows'],data['selected'],audit_fn=audit,selected_validate_fn=validate)
     r=compare(data['witness'],data['trace_source'],data['all_rows'],data['selected'],j,data['binding'])
     r['input_sha256']={n:getattr(a,n+'_sha256') for n in data}
