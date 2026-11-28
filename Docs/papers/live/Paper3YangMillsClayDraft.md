@@ -82,6 +82,11 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 
 
+
+## Current proof state — 28 November 2026, Section 15
+
+The immediate CMP102 task has an actual quaternion principal-angle word estimate and continuous commutator operator. For unit links with principal angles at most e, a word of length at most 74 in the stated angle ball has principal-vector norm at most 74e and hence ||ad_X||≤148e. The nonzero-imaginary principal vector exponentiates to the same unit quaternion; identity is separate. Lean #15 (`c8ecbb886441`) feeds that actual radius to the previous dexp-series two-sided inverse bound. Source angle versus chord-ball identification, actual differential equality/restriction to the Lie carrier and selected H(s(Y0)) are still unpaid. The exact rational quaternion fixtures do not replay the nonflat selected source word. [Section 15](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Current proof state — 28 November 2026, cross-Clay P0 (Section 14)
 
 The immediate YM target remains the actual nonflat Path13 CMP102 selected-operator enclosure, not an assertion of mass gap. Lean #15 (`7071c042ed1d`) supplies the exponential-differential series estimate D(A)=1+Σ A^(n+1)/(n+2)! and a two-sided inverse J in a complete normed real algebra. For ||A||≤148e≤1/2, ||D−1||≤148e, ||J||≤2 and ||J−1||≤296e. These are the quantitative bounds needed by the existing 13^4-offset row budget, conditional on identifying this series and its commutator radius with the actual SU(2) principal differential. That identification, nonflat selected H(s(Y0)), and the final CMP102 enclosure are not yet established. No native kernel or nonflat numerical acceptance was performed here. See [P0 roadmap, Section 14](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
