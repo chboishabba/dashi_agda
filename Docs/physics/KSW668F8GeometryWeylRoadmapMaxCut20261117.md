@@ -3149,3 +3149,38 @@ Status correction by actual source bodies:
 - W5 no native F8-specific Agda/Lean proof file is added among the 254 F8 PR changes ending in .agda/.lean (checked PR changed filenames). Existing general native theorem owners and abstract certificates do not constitute instantiated F8 continuum evidence, and independent physical calibration remains separate.
 
 Corrected minimum critical weld sequence: (1) LITERAL existing current-HEAD check_f8_w1w2_integrated_receipt.py replay and blob parity, fix failures; (2) actual source-aligned first-order e, full R5/Ric_nn wall history, and original constitutive A2/Pi/muS into Gauss/Israel/Codazzi/Bianchi common residual, including zero/low-k divided-difference M'(k), radial-entry anchors; (3) instantiate BR83 first-jet ADM principal current on actual F8 chart with original lower-order connection/source and BR43/44 differentiated material/wall symmetrizer, construct real physical Schur highGap/crossBudget incl finite k; (4) independently certify original history convergence and original receiver H,H_t,J, nonlinear remainder on SAME actual window; (5) native F8-specific theorem instantiation and independent physical authority. W1-W5 entire original physical endpoints remain unproven/uncertified. Prior tests' claimed local PASS status is not changed by this source-only audit; no tests executed in this audit; no CI or kernel. All work stays in repo.
+
+
+### 28 November — BR83 → original F8 GN current → scalar Israel reciprocal energy weld (implemented)
+
+The latest max-cut consolidates the F8 W2 positive principal current with actual Gaussian-normal wall-source work, consuming (not duplicating) Hopf #1554 BR83 and the earlier F8 scalar_master_flux_weld / scalar_density_momentum_schur. Source names:
+- scripts/check_f8_actual_gn_current.py commit b1ea3a74421cfcecd6735770075de335322dd584 blob b425df57cbc09512a52025ee3b59223bb3c38d56.
+- scripts/check_f8_gn_current_budget.py commit bd1599837f90213cdb9cd803d429cfa45e62b1c4 blob e4839dd79b7b0f18c4034d5b67d47f95378b43b4.
+- scripts/check_f8_full_gn_fourier_current.py commit c5b1d02ce74221b41e55281b5c2ec4de71530ade blob a3b0025b1db5899e97f453593c810bb21c0f0a82.
+- scripts/check_f8_current_israel_reciprocal_weld.py commit a54e0113c274301312fa7f0cea6807b1000750fc blob 011023f65649b64d507294598de77349991ee134.
+- single local acceptance scripts/check_f8_w1w2_source_current_maxcut.py commit 4e608d14b25b0278efaea418aa2de650bb33ea9b blob eb5282dc8cdfd10d1002e5c724ea6e0f856f9ba3; defaults to exact donor checks, --history executes original old full-band integrated harness separately (90s cap). The aggregated runner was committed but NOT executed against full PR checkout; no CI.
+
+Geometric specialization: GN F8 principal five-dimensional chart g=diag(-N²,a²,a²,a²,1), a=sinh(asinh(t)-n), N=cosh(asinh(t)-n)/sqrt(1+t²), n=0: a=t, N=1, a_t=1, N_n=-1/sqrt(1+t^-2), with a,n smooth and >0 on original collar. X=N^-1∂t and mode k under the original three translational spatial directions. For real representative u (complex/Hermitian modes by pairing), p=u_t,q=u_n, the exact scalar-principal density, current and densitized wave are
+
+E=(p²/N²+q²+k²u²/a²)/2,
+J^t=-a³ E,
+J^n=a³p q,
+DBox=-∂t(a³p/N)+∂n(Na³ q)-Na k²u.
+
+Direct full-five-dimensional divergence identity (including all 3 spectator spatial warp factors, not merely a 2D normal flat reduction) is
+∂t J^t+∂n J^n - (DBox)(p/N)
+= (3 a² a_t/2)(p²/N²-q²) -(a_t k²u²)/2 -(a³ N_n/N)p q + a³ q(∂n p-∂t q).
+The last term is the off-shell mixed-jet integrability defect; it is exactly zero only for genuine scalar histories. On the original F8 wall this simplifies to (3t²/2)(p²-q²) -(k²u²)/2 +(t³/B)p q, where B=sqrt(1+t^-2). The source term is not assumed nonpositive. Two explicit sum-of-squares certificates on physical sign N_n=-ν<0 prove
+|deformation| <= a³(3a_t/a+ν) E for a_t>=0;
+the wall outward conormal flux Jn=t³p q is sign-indefinite although E>0. Hence BR83 principal positivity + this bound do NOT establish Israel boundary dissipation, wall trace, or coupled Einstein/gauge source estimates. Existing BR43/44/56 and reciprocal wall work must pay those independently. The subfamily u(t,n,k) covers any tangential Fourier orientation by SO(3); it is not the arbitrary moving-shear ADM chart nor a universal Agda proof (BR83 remains full 5D donor).
+
+Exact boundary cancellation (same F8 variables and temporal source): Zn=(k²f/t²-j)/3, modal master boundary flux -t³Z_t Zn, correction C=(t k²f/3-t³j/3)Z. The product identity flux+C_t=((t k²f/3-t³j/3)_t)Z is exact. On Israel-compatible k≠0 data f=-3t²/k²[A+M/(ik)], M=3P+jm, Q=A+M/(ik)+j/3, this becomes C=-t³Z Q and flux+C_t=(-t³Q)_t Z. Thus the high-k f_t work is eliminated into ACTUAL material/geometric Q and its time derivative, not silently bounded. At k=0 the original correction is simply -t³jZ/3; extending the k≠0 Q formula across zero requires the preexisting M(0)=0 AND actual M'(k) regularity. Same-window receiver acceptance still needs both Z and Q histories and source time jets. This exact chain is a concrete W2 weld beyond the earlier bare abstract positive energy.
+
+Local execution (OPENBLAS_NUM_THREADS=1, each command bounded to 20 seconds) PASS for the four new modules and the source-equivalent prior density-momentum Schur script. Source hashes of all four new local files equal committed Git blob SHA verified by GitHub connector. We derived and fixed two false identities during implementation before committing: correct GN deformation has +3a² a_t p²/(2N²) minus normal part, and the actual normal-lapse coupling is N_n (not N_n/N) in the energy majorant; also the off-shell jet defect is a³q(p_n-q_t), not a³p(...). Record these signs to avoid regression. Not a joint physical system or full F8 kernel proof.
+
+Remaining exact P0 welds (nonduplicate):
+W1: run literal original check_f8_w1w2_integrated_receipt.py, reconcile first-order normal e and source-linked Q5/Rnn with Gauss/Codazzi/Ward plus reciprocal source time-jets; preserve zero k and radial entry.
+W2: instantiate true material + constrained Einstein/gauge trace and higher energy, pay signed boundary and negative metric fibres, derive real physical Schur highGap>crossBudget on low/mid modes and uniform high band, not just principal scalar E.
+W3: certify independent normal/time/radial/Fourier error enclosure for original full source (existing negative Bianchi and cutoff controls remain failing); original coupled bulk and wall solution not yet established.
+W4: feed same-chart certified real Z,H,Ht,J,Q to signed directional inverse and actual nonlinear original receiver window.
+W5: native F8-specific proof instantiation and independent physical calibration. No detached chat files, no GitHub CI.
