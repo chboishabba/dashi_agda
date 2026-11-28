@@ -124,3 +124,19 @@ scoreCannotDetermineMandate :
 scoreCannotDetermineMandate =
   NF.witnessRulesOutEveryFlatFactorisation
     (NF.nonFactorabilityWitness authorised unapproved refl (λ ()))
+
+-- Specialization that consumes the actual comparison record rather than
+-- an arbitrary boolean or scalar. Completeness of declared scenario and
+-- coordinate domains is a separate evidence obligation.
+RobustGovernedSelection :
+  ∀ {State ScopeID : Set} {ts : Base.TransitionSystem State}
+    {e : Scope.ScopedExtension State ScopeID}
+    (c : Scope.ScopedStepContract ts e) (s : State)
+    (Scenario Coordinate : Set)
+    (M R B : CandidatePath c s → Set)
+    (NoWorse StrictBetter : Scenario → Coordinate →
+      CandidatePath c s → CandidatePath c s → Set) →
+    CandidatePath c s → CandidatePath c s → Set
+RobustGovernedSelection c s Scenario Coordinate M R B NoWorse StrictBetter =
+  GovernedSelection c s M R B
+    (Comparison Scenario Coordinate NoWorse StrictBetter)
