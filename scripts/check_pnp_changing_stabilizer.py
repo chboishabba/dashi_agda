@@ -103,7 +103,7 @@ def residual(P,j,key,s,rows,target):
     t=tuple((v-u)%3 for v,u in zip(target,s))
     return tuple(C),R,t
 
-def finish_residual(D,P,j,F,rows,target,B):
+def finish_residual(D,P,j,F,rows,target,B,data_clock=None):
     """Use certified prefix enclosures on each real remaining fibre.
     A positive bound without lift is not promoted to WITNESS.
     """
@@ -120,7 +120,7 @@ def finish_residual(D,P,j,F,rows,target,B):
             reserve=min(B.left,per_query)
             if not reserve:return None
             B.pay(reserve)
-            return prefix_portfolio(C,cols,t,0,R,1,work_cap=reserve)
+            return prefix_portfolio(C,cols,t,0,R,1,work_cap=reserve,data_clock=data_clock)
         q=query(C)
         if q is None:unknown=True;continue
         lo,hi,_=q
@@ -130,7 +130,7 @@ def finish_residual(D,P,j,F,rows,target,B):
         from check_pnp_positive_residual import recover
         # Limit recovery to this fibre's fair share of remaining allowance.
         cap=min(B.left,2*len(R)*per_query);B.pay(cap)
-        z=recover(C,R,rows,cols,t,n,lo,hi,Budget(cap))
+        z=recover(C,R,rows,cols,t,n,lo,hi,Budget(cap),data_clock)
         if z is None:continue
         if len(z)==len(R):
             x=tuple((w|z)[i] for i in range(n))
@@ -138,7 +138,7 @@ def finish_residual(D,P,j,F,rows,target,B):
             return dict(status="WITNESS",witness=x,cut=j)
     return dict(status="POSITIVE_NO_LIFT" if positive else "UNKNOWN" if unknown else "EMPTY",cut=j)
 
-def solve(F,n,bags,rows,target,generators,cap,force_cut=None):
+def solve(F,n,bags,rows,target,generators,cap,force_cut=None,data_clock=None):
     B=Budget(cap)
     try:
         # Reserve a separate fallback portion up front. A failed advance
@@ -155,7 +155,7 @@ def solve(F,n,bags,rows,target,generators,cap,force_cut=None):
             x=None if w is None else tuple(w[i] for i in range(n))
             if x is not None:assert accepts(F,x) and tuple(sum(a*b for a,b in zip(row,x))%3 for row in rows)==tuple(t%3 for t in target)
             return dict(status="WITNESS" if k else "EMPTY",count=k,witness=x,trace=trace,reserved=B.used)
-        result=finish_residual(D,P,j,F,rows,target,B)
+        result=finish_residual(D,P,j,F,rows,target,B,data_clock)
         return dict(result,trace=trace,reserved=B.used)
     except Refused:return dict(status="UNKNOWN",reserved=B.used)
 
