@@ -52,7 +52,7 @@ eventualLess : ∀ {f : Nat → R.ℝ} {a b} →
 eventualLess {f} {a} {b} cv lt = record
   { cutoff = suc (proj₁ receipt)
   ; after = λ n past →
-      let raw = P.≤-<-trans (P.x≤∣x∣ (f n -R a)) (proj₂ receipt n past)
+      let raw = P.≤-<-trans (P.x≤∣x∣ {x = f n -R a}) (proj₂ receipt n past)
       in P.<-respʳ-≃
         (P.≃-symm (let open P.ℝ-Solver in solve 2 (λ x y → x ⊕ (y ⊖ x) ⊜ y) P.≃-refl a b))
         (P.<-respˡ-≃
