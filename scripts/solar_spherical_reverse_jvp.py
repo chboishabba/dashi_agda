@@ -70,7 +70,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
         reference_work=np.asarray(shadow['useful_coefficients_J'],float)
         if reference.shape!=(horizon*len(src)+tail,3,P.shape[1]) or P.shape[0]!=len(x) or reference_work.shape!=(len(reference),3):
             raise ValueError('unaligned coarse/fine coefficient clock')
-        def lift(v):return np.asarray((P@v.T).T)
+        def lift_shadow(v):return np.asarray((P@v.T).T)
     for cycle_index in range(horizon):
         for index in range(len(src)+(tail if cycle_index==horizon-1 else 0)):
             terminal=index>=len(src)
@@ -82,7 +82,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
             before2=energy2() if quadratic_second_order else 0.
             event_kinetic2=np.zeros(3)
             if shadow is not None:
-                sx=np.zeros((3,len(x))) if shadow_index==0 else lift(reference[shadow_index-1])
+                sx=np.zeros((3,len(x))) if shadow_index==0 else lift_shadow(reference[shadow_index-1])
                 event_c1=event_c2=0.
             formed=removed_energy=birth_energy=0.
             dformed=dremoved_energy=dbirth_energy=0.
@@ -219,7 +219,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 work_coeff=np.array([dt*float(cur_load@em**2),2*dt*float((cur_load*em)@dem),useful_step2])
                 if shadow is not None:
                     sj=np.stack([sy,sr['state_jvp'],sr['state_coefficient2']])
-                    jres=residual_coefficients(np.stack([x,dx,x2]),sj,lift(reference[shadow_index]),sr['jet_endpoint_error_bound_candidate'])
+                    jres=residual_coefficients(np.stack([x,dx,x2]),sj,lift_shadow(reference[shadow_index]),sr['jet_endpoint_error_bound_candidate'])
                     jet_radius=np.asarray(jres['error_bound_candidate'])
                     sm=np.array([sr[k][:ne] for k in ('local_midpoint','local_midpoint_jvp','local_midpoint_coefficient2')])
                     sw=np.array([dt*float(cur_load@sm[0]**2),2*dt*float((cur_load*sm[0])@sm[1]),dt*work2(*sm,cur_load,cur_dload)])
