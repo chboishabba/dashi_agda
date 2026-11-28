@@ -8,6 +8,7 @@ coefficient oracle, no universal bound on nonlinear component size.
 """
 from itertools import product, combinations_with_replacement
 from check_pnp_f3_syndrome_boundary import blocks, span, chart
+from pnp_phase_separator_exact import choose_separator, restrict_axis, phase_key
 from check_pnp_f3_normal_fold import normal_fold
 from check_pnp_dual_syndrome_fourier import Z, ONE, OMEGA, add, mul, phase, contrast
 
@@ -171,10 +172,24 @@ def quadratic_axis_reduce(P,n,pay):
     return None
 
 
-def conditional_gauss(P,n,pay,budget):
-    """Branch only on a coordinate hitting actual degree-three terms.
-    Quadratic residuals go to the existing exact Gauss compiler.
-    All leaves share the explicit cap; refusal is not a zero character."""
+def conditional_gauss(P,n,pay,budget,memo=None):
+    """Exact bounded character contraction with source-keyed sharing.
+    Memo stores only fully evaluated residuals, never a refusal.
+    The constant phase is removed before lookup and restored exactly.
+    All new leaves share the original cap; lookup still costs work."""
+    if memo is None:memo={}
+    constant=P.get((),0)%3
+    key=phase_key(P,n,pay)
+    if key in memo:return phase(memo[key],constant)
+    Q=dict(key[1])
+    z=_conditional_gauss_core(Q,n,pay,budget,memo)
+    # Cache only after successful complete evaluation, including exact zero.
+    pay(1+len(key[1]))
+    memo[key]=z
+    return phase(z,constant)
+
+
+def _conditional_gauss_core(P,n,pay,budget,memo):
     pay(1+len(P))
     hard=[m for m in P if len(m)>2]
     if not hard:
@@ -185,27 +200,23 @@ def conditional_gauss(P,n,pay,budget):
     if len(pieces)>1 or free:
         z=phase((3**free,0),constant)
         for k,Q in pieces:
-            z=mul(z,conditional_gauss(Q,k,pay,budget))
-            if z==Z:break # exact zero factor, not an unvisited refusal
+            z=mul(z,conditional_gauss(Q,k,pay,budget,memo))
+            if z==Z:break
         return z
     reduced=affine_axis_reduce(P,n,pay)
     if reduced is not None:
         factor,k,Q=reduced
         if factor==0:return Z
-        return mul((factor,0),conditional_gauss(Q,k,pay,budget))
+        return mul((factor,0),conditional_gauss(Q,k,pay,budget,memo))
     square=quadratic_axis_reduce(P,n,pay)
     if square is not None:
         factor,k,Q=square
-        return mul(factor,conditional_gauss(Q,k,pay,budget))
-    hits={i:sum(i in m for m in hard) for i in set().union(*map(set,hard))}
-    j=min(hits,key=lambda i:(-hits[i],i))
+        return mul(factor,conditional_gauss(Q,k,pay,budget,memo))
+    j=choose_separator(P,n,pay)
     z=Z
     for v in range(3):
-        pay(1+len(P));Q={}
-        for m,a in P.items():
-            coeff=a*pow(v,m.count(j),3)%3
-            put(Q,tuple(i-(i>j) for i in m if i!=j),coeff)
-        z=add(z,conditional_gauss(Q,n-1,pay,budget))
+        Q=restrict_axis(P,n,j,v,pay)
+        z=add(z,conditional_gauss(Q,n-1,pay,budget,memo))
     return z
 
 
