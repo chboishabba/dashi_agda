@@ -126,7 +126,7 @@ shiftRight a b hb n = P.≃-trans (Ring.rowComm a b (suc n))
 
 shiftEuler : ∀ f → Row.shift (δ f) ≈s (δ (Row.shift f) ⊕s Row.shift f)
 shiftEuler f n =
-  P.≃-trans (P.*-congʳ (P.*-congˡ (NR.natRealAdd n 1)))
+  P.≃-trans (P.*-congʳ (P.*-congˡ (NR.natRealSuccessor n)))
     (let open P.ℝ-Solver in solve 2
       (λ n x → (Κ 1ℚᵘ ⊗ (n ⊕ Κ 1ℚᵘ)) ⊗ x ⊜ (Κ 1ℚᵘ ⊗ n) ⊗ x ⊕ x)
       P.≃-refl (NR.natReal n) (f (suc n)))
@@ -185,3 +185,55 @@ inverseFlow =
        (λ d e → d ⊜ (d ⊕ e) ⊖ e) reflS (δ reciprocal) (Eplus ⊗s reciprocal))
        (transS (subCong az reflS) (let open G.Solver in solve 1
          (λ e → Κ 0ℚᵘ ⊖ e ⊜ ⊝ e) reflS (Eplus ⊗s reciprocal)))
+
+-- Literal recurrence in the native head/tail Cauchy order, with the
+-- actual degree n+1 (not n) at the normalization shift.
+unitRecurrence : ∀ n → R._≃_ (R._*_ (NR.natReal (suc n)) (unit (suc n)))
+  ((Row.shift Eplus ⊗s unit) n)
+unitRecurrence n = P.≃-trans
+  (P.≃-symm (Ram.dPositive unit n))
+  (P.≃-trans (unitFlow (suc n)) (U.zeroHead Eplus unit Eplus0 n))
+
+inverseRecurrence : ∀ n → R._≃_ (R._*_ (NR.natReal (suc n)) (reciprocal (suc n)))
+  (R.- ((Row.shift Eplus ⊗s reciprocal) n))
+inverseRecurrence n = P.≃-trans
+  (P.≃-symm (Ram.dPositive reciprocal n))
+  (P.≃-trans (inverseFlow (suc n)) (P.-‿cong (U.zeroHead Eplus reciprocal Eplus0 n)))
+
+-- Both normalized solutions are unique from the coefficient equation
+-- and constant term. No independent analytic ODE uniqueness assumption.
+solveUnique : (a f g : Series) → R._≃_ (a zero) R.0ℝ →
+  δ f ≈s (a ⊗s f) → δ g ≈s (a ⊗s g) →
+  R._≃_ (f zero) (g zero) → f ≈s g
+solveUnique a f g a0 hf hg h0 n =
+  let z = f ⊖s g
+      az : R._≃_ (neg a zero) R.0ℝ
+      az = P.≃-trans (P.-‿cong a0) (P.≃-symm P.0≃-0)
+      hz : R._≃_ (z zero) R.0ℝ
+      hz = P.≃-trans (P.+-cong h0 P.≃-refl) (P.+-inverseʳ (g zero))
+      flow : δ z ≈s (a ⊗s z)
+      flow = transS (dSub f g)
+        (transS (subCong hf hg) (let open G.Solver in solve 3
+          (λ a f g → a ⊗ f ⊖ a ⊗ g ⊜ a ⊗ (f ⊖ g)) reflS a f g))
+      residual : ∀ k → R._≃_ (Unique.operator 1 unitSeries zeroSeries (neg a) z k) R.0ℝ
+      residual = transS
+        (let open G.Solver in solve 3
+          (λ a z d → (Κ 1ℚᵘ ⊗ d ⊕ Κ 0ℚᵘ ⊗ d) ⊕ (⊝ a) ⊗ z ⊜ d ⊖ a ⊗ z)
+          reflS a z (δ z))
+        (transS (subCong flow reflS) (let open G.Solver in solve 1
+          (λ u → u ⊖ u ⊜ Κ 0ℚᵘ) reflS (a ⊗s z)))
+      eq = Unique.allZero 1 unitSeries zeroSeries (neg a) z
+        (Unique.positiveNat zero) P.≃-refl az residual hz n
+  in P.≃-trans (let open P.ℝ-Solver in solve 2
+       (λ f g → f ⊜ (f ⊖ g) ⊕ g) P.≃-refl (f n) (g n))
+       (P.≃-trans (P.+-cong eq P.≃-refl) (P.+-identityˡ (g n)))
+
+-- Original normalized j-series J=q*j, expressed on the same
+-- normalized discriminant unit; suitable for Hecke coefficient reflection.
+Junit : Series
+Junit = X3 ⊗s reciprocal
+
+jRelation : (unit ⊗s Junit) ≈s X3
+jRelation = transS (let open G.Solver in solve 3
+  (λ u x v → u ⊗ (x ⊗ v) ⊜ x ⊗ (u ⊗ v)) reflS unit X3 reciprocal)
+  (transS (mulCong reflS unitInverse) (Ring.rowUnitRight X3))
