@@ -13,7 +13,7 @@ def main():
         root=Path(tmp)
         blocked=audit(original,root)
         assert all("MISSING" in x["owners"].values() for x in blocked.values())
-        owner=original["lanes"]["A_shielding"]["owner"][0]
+        owner=original["w1_source_boundary_welds"]["reciprocal_controller_ward"]["source_owner"]
         p=root/owner;p.parent.mkdir(parents=True);p.write_text("print('PASS symbolically')\n")
         accepted=audit(original,root)["A_shielding"]
         assert len(accepted["owners"][owner])==64 and accepted["status"]=="OPEN"
