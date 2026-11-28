@@ -62,8 +62,7 @@ module Radix {Literal : Set}
 
   reverseAppend : (xs ys : List Literal) →
     reverse (xs W.++ ys) ≡ reverse ys W.++ reverse xs
-  reverseAppend [] ys =
-    F.cong (λ zs → reverse ys W.++ zs) (appendRightIdentity [])
+  reverseAppend [] ys = F.sym (appendRightIdentity (reverse ys))
   reverseAppend (x ∷ xs) ys =
     trans (F.cong (λ zs → zs W.++ (x ∷ [])) (reverseAppend xs ys))
       (W.appendAssoc (reverse ys) (reverse xs) (x ∷ []))
