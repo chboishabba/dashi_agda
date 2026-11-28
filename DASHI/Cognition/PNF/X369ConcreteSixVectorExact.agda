@@ -107,7 +107,12 @@ module Carrier {Value : Set}
 
   composeLaw : (a b : Code) (z : State) →
     apply (then a b) z ≡ apply b (apply a z)
-  composeLaw a b z = tabulateExt (at a b z)
+  composeLaw a b z =
+    sixCong (at a b z zero) (at a b z (suc zero))
+      (at a b z (suc (suc zero)))
+      (at a b z (suc (suc (suc zero))))
+      (at a b z (suc (suc (suc (suc zero)))))
+      (at a b z (suc (suc (suc (suc (suc zero))))))
     where
       at : (a b : Code) (z : State) (i : Fin 6) →
         lookup (apply (then a b) z) i ≡
