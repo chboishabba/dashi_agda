@@ -252,3 +252,33 @@ centralTidalSignBlocksFactorization e distinct =
 centralTidalMixedSignTransport :
   (k e : ℚ) → k * (0ℚ - e) ≡ 0ℚ - (k * e)
 centralTidalMixedSignTransport k e = Ring.solve-∀ k e
+
+
+------------------------------------------------------------------------
+-- BR149: actual central optical and marked mixed readout, cleared
+-- of constants. r is the supplied inverse squared fibre radius.
+-- Rational ring identities only; nonzero division, physical source
+-- and orientation remain explicit in the analytical owner.
+------------------------------------------------------------------------
+
+centralJointOptical : ℚ → ℚ → ℚ
+centralJointOptical r e = r * (e * e)
+
+centralJointMixed : ℚ → ℚ → ℚ
+centralJointMixed r e = r * e
+
+centralJointAmplitudeCross :
+  (r e : ℚ) → centralJointOptical r e ≡ e * centralJointMixed r e
+centralJointAmplitudeCross r e = Ring.solve-∀ r e
+
+centralJointRadiusCross :
+  (r e : ℚ) →
+  centralJointMixed r e * centralJointMixed r e
+  ≡ r * centralJointOptical r e
+centralJointRadiusCross r e = Ring.solve-∀ r e
+
+centralJointZeroOptical : (r : ℚ) → centralJointOptical r 0ℚ ≡ 0ℚ
+centralJointZeroOptical r = Ring.solve-∀ r
+
+centralJointZeroMixed : (r : ℚ) → centralJointMixed r 0ℚ ≡ 0ℚ
+centralJointZeroMixed r = Ring.solve-∀ r

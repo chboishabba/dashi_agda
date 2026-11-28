@@ -89,6 +89,7 @@ PARTS={
     *[(f"BR78.{part}","check_hopf369_br78_tension_bianchi_ward.py",("--part",part)) for part in ("vacuum","matter","symbol","negative")],
   ],
   "heavy":[
+    *[(f"BR{k}.{part}","check_hopf369_br146_149_parallel.py",("--part",part)) for k,part in ((146,"normal"),(147,"optical"),(148,"rmhd"),(149,"observer"))],
     *[(f"BR{k}.{part}","check_hopf369_br143_145_parallel.py",("--part",part)) for k,part in ((143,"trace"),(144,"tides"),(145,"quotient"))],
     *[(f"BR{k}.{part}","check_hopf369_br140_142_F_surface_cartan.py",("--part",part)) for k,part in ((140,"jump"),(141,"shear"),(142,"transport"))],
     *[(f"BR{k}.{part}","check_hopf369_br136_139_F_variable_subsidiary.py",("--part",part)) for k,part in ((136,"mean"),(137,"current"),(138,"torsion"),(139,"trace"))],
@@ -234,10 +235,10 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="closure":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145"}]
+               if p[0].split(".")[0] in {"BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145","BR146","BR147","BR148","BR149"}]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145","BR146","BR147","BR148","BR149"}]
     else:
         plans=PARTS[args.part]
     outcome={}

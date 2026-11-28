@@ -47,6 +47,7 @@ def trace():
         assert J.cols+ (R*T).rank()==T.rank()
     assert (C*Z).rank()==4 and (Ct*Z).rank()==0 and Ct.rank()==3
     print('PASS BR143 normal-work kernel split, spatial Cartan trace factors through flux; full trace has four blind directions')
+    return P,X,P0,M,D,L,E,Sc,C,Ct,Z
 
 def tides():
     x,y,z,w=s.symbols('x y z w',real=True);v=(x,y,z,w);e,p=s.symbols('e p',real=True,nonzero=True);r2=x*x+y*y+z*z

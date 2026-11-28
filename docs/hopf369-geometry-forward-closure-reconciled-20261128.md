@@ -2915,3 +2915,254 @@ attempt failed on the intentionally tested opposite
 spatial-kernel expectation, corrected to measured exact
 rank and replayed. Native adapter unrun. No integrated
 runner, PDE existence, calibration, kernel or CI acceptance.
+
+
+## 22. BR146–149 — full normal-symbol trace, actual G3 light and G4 tidal comparison
+
+Keep section 0's parallel lanes. No new generic carrier or assumption
+that periodic W6 is required for G3/G4 observations. All four exact
+local stages pass on the byte-matched checker. Classical geodesic,
+Jacobi, optical and ADM identities remain prior mathematics; the
+source-specific application and signed readout are the attachment.
+
+### 22.1 Reopened owners and exact handoffs
+
+- #1554 P0H, scripts/check_hopf369_p0h.py (blob
+  f5c21339b60254296d234aba71ee5b65ad575d61), G4 actual CMC
+  constraint, Fourier York Y, stiff-fluid primitive and same-source stress.
+  P0T and P0V exact sources in section 21 remain the G3 producers.
+- #1554 BR132 scripts/check_hopf369_br132_135_F_bianchi_cartan.py
+  bulk() and BR143 original independent graph reconstruction.
+  BR143 checker now returns its actual matrices after unchanged
+  assertions (new blob 2354d838727e6d84c1e8da05abad27a9b78efc6d);
+  its trace stage is replayed as BR146's dependency.
+- #1547 refreshed HEAD 27cf0800bf66aa8622fad59c6eaca1eed8ce6aaa.
+  Reopened scripts/check_f8_characteristic_lift_energy_inequality.py
+  (62b4e1ed36aec42d24d16cba07a1dc0278454734, constants/exact:
+  lifted finite-band first-order energy, not full Hopf trace),
+  scripts/check_f8_constraint_detector_closure.py
+  (37b742d87c07db81404984b9d2591952ff01a75e, constraints/detector:
+  same-source tidal displacement and time-window integration by parts),
+  scripts/check_f8_ward_codazzi_defect.py
+  (92da90231c229bb451ddb78e1b112335fff5983e, exact:
+  off-shell second-order antisymmetric mixed Weyl correction).
+  Reuse methods only after matching domain/source. F8 scalar TT
+  finite-band estimate is not the 35-coordinate subsidiary estimate.
+- #1554 DASHI/Physics/Foundations/GRQFTFiniteComovingRiemannDeviationExact.agda
+  (d9416d7a59ce0d63dc7759506c744dc67d2aeeae) has
+  deviationFromRiemann and principalDeviationAcceleration, a finite
+  FLRW orientation theorem, not full Hopf curvature.
+  DASHI/Physics/Gravity/RelativityOpticalKernelBridge.agda
+  (d86b77c304adbc7fd8bdd0f36977549de85497e3) has
+  tidalStretchBridge and weakLensingBridge as authority boundaries,
+  not an actual null ray construction. BR147 supplies the original
+  G3 metric's local optical producer, retaining the limitations.
+- #1241 closed HEAD 219f7962b36f30342bb27935cfeaa2ecd82dd97d;
+  reopened on #1554 Docs/physics/KKLightElectronBIDIChiralityRadionMaxCut20261024.md
+  (38098c42b0f313bdfbb58bb77e84182dd65076ae) and
+  Docs/physics/KKTOEPhysicalModelForkPareto20261024.md
+  (9e7e398ac0a13cf387528b338ab9e102d9ac8733). The independent
+  physical Maxwell photon is distinguished from the graviphoton.
+  The smooth-circle vectorlike model and distinct chiral orbifold
+  candidate are not identified with G3. No QED/SM prediction here.
+- #1217, #1291, #1545 metadata unchanged from section 21; existing
+  consumer/descent, indexed cube and marked Monster action owners
+  retained. Native adapter appended polynomial joint-readout identities,
+  not a new representation/action equivalence. No sibling edits or
+  exhaustive master reconciliation.
+
+### BR146 — the four apparent blind channels are normal-active
+
+Use BR143's actual graph B=[L;E_c], u=Bc. On the extended residual
+space use the symmetric BR132 normal matrix
+ U_n=[-Q M_n Q, -Q D_n^T; -D_n Q,0].
+The old normal-work matrix is S_c=B^T U_n B. Its rank22
+kernel must not be confused with the actual normal symbol.
+Define A=U_n B (150x35). Exact:
+ rank A=26, rank S_c=22,
+ rank A|ker S_c=4, dim ker A=9,
+ rank [A;T]=26, T|ker A=0.
+The old rank-four full electric trace kernel image equals the
+rank-four normal action image on ker S_c in the sense that the
+combined restricted map has the same rank four (both have the same
+kernel there). In particular the whole 30-row electric trace T
+of rank23 factors through A. Select 26 independent rows Ar
+of A, solve the rational V Ar=T. This is an actual explicit
+matrix identity, not a scalar flux inequality. Also
+ A^T A=B^T U_n² B is positive semidefinite, exact kernel9.
+Thus no extra wall degrees of freedom are needed merely to observe
+these four directions in the reference principal graph. The rank9
+here refers to subsidiary normal action, not the nine Weyl zero
+modes; do not identify them without a map.
+
+An analytic trace consequence on a GIVEN regular material chart:
+use BR128/137 scaled extended equation
+ C^a partial_a u-U_n partial_y u=f
+where U_n is constant, C^a bounded and f includes actual lower work.
+Then v=U_n u satisfies
+ partial_y v=C^a partial_a u-f.
+BR139's one-sided collar inequality gives (coordinate measures)
+ ||T c|wall||² <= ||V||² [ d^-1 ||v||²+
+      2 ||v|| (sum_a ||C^a||_infty ||partial_a u||+||f||) ],
+using independent-row selection of v and exact graph u=Bc.
+Same estimate after integrating in physical time, or by Cauchy
+in spacetime. In constant reference time mass one can alternatively
+multiply the equation by chi(y) U_n u, chi=1 at wall, zero
+at outer collar, to get positive squared normal-symbol trace:
+ for u_t=sum_i U_i partial_i u+U_n partial_y u+F,
+ (1/2) int_wall ||U_n u||² =
+ -(d/dt)(1/2 int chi u^T U_n u)
+ -(1/2) int chi' ||U_n u||²
+ + int chi (U_n u)^T(sum_i U_i partial_i u+F).
+This is a local normal-characteristic multiplier, not the old
+indefinite scalar work. On integration in t its endpoints cost
+ordinary L² energy; tangential bulk work costs one spatial jet.
+For tilted variable time mass the unsymmetrized time product can
+cost a time jet; use the direct normal derivative estimate above.
+At order s-1 the trace is paid by tangential E_s with actual
+bounded coefficients/source derivatives. At top order s this
+does NOT close a same-order energy if the surface defect needs
+a trace of order s; the half-product bound exhibits the derivative
+cost, no free estimate. For the curved off-shell graph u=Bc+g(T,R)
+from BR138, the correction must be derived and its trace paid
+separately. The old four blind directions are algebraically resolved,
+not an unconditional W2/W4b trace theorem. Need derivative-balanced
+combined bulk/surface Cartan estimate and actual generation.
+
+### BR147 — G3 physical light screen and signed Jacobi transport
+
+Use original P0V4 Jordan/base metric g4 at the central initial event,
+time symmetric, lapse1 shift0, phi=p=psi(0)>0. The zero-fibre-momentum
+null lift follows from the original circle Killing vector:
+ q=phi²(w_dot+A_mu x_dot^mu) is constant,
+ g5(V,V)=g4(x_dot,x_dot)+q²/phi².
+For a 5D null geodesic with q=0, the base projection is null and
+is an affinely parametrized g4 geodesic (Routh reduction eliminates
+q-dependent force terms). For q!=0 the projection is timelike,
+not an ordinary 4D light ray. This is a geometric null observer,
+not identification of graviphoton with physical Maxwell photon.
+
+At the initial centre, grad log psi=0 and
+ Hess_flat log psi=-(16/9) eps² I. P0V4 gives the actual base
+ acceleration in Gaussian time, F0i=0, phi_t=0:
+ gamma_ddot=F F^T+4 Hess log psi+2 Delta log psi I.
+Hence the physical Jordan electric tensor is the BR144 horizontal
+ block, diag(-208,-208,80) eps²/(9p²). The conformal spatial
+ sectional curvature is 32 eps²/(9p²) in every plane; check by
+ independent Christoffel derivative. The time-spatial magnetic
+ Riemann block vanishes initially by time symmetry.
+For k=e0+n, unit n making angle theta with the original z direction,
+ choose orthonormal screen v1=e_y,v2=(cos theta,0,-sin theta)
+ in an azimuthal chart. The actual initial optical screen
+ O_AB=R4(v_A,k,v_B,k) is
+ O=(eps²/p²) diag(-176/9, -176/9+32 sin² theta).
+Its trace is
+ Ric4(k,k)=-(eps²/p²)(64/9+32 cos² theta).
+An independent calculation from the reduced Einstein equation
+ uses radion Hessian time component -112 eps²/(3p²),
+ spatial component -16 eps²/(9p²), and magnetic contribution
+ 32 eps² sin² theta/p², yielding the same trace.
+Thus Jordan geometric null Ricci is negative for any nonzero
+ eps at this event. The screen is initially trace-defocusing
+ in the optical tidal sign convention (Jacobi acceleration -O),
+ not evidence of negative matter, negative gravitational mass,
+ global lensing, or violation of 5D vacuum Ricci=0.
+The scalar/radion effective stress in Jordan frame is not
+ ordinary Maxwell-only stress; a 4D conformal metric change
+ changes affine parametrization and measured optical scalars.
+Physical clock/detector coupling must be established.
+
+For 5D timelike normal geodesic at the centre and parallel
+ propagated frame, choose Jacobi map J(0)=I,J'(0)=0. Actual
+ J''(0)=-T5 of BR144. Time-reflection symmetry of the admitted
+ local analytic vacuum solution implies even electric tidal
+ history in this normal parallel frame and
+ J(t)=I-t² T5/2+O(t⁴).
+In particular J_5z=-8 eps t²/p²+O(t⁴), the signed transverse
+ displacement in the compact-fibre direction from initially
+ horizontal separation. The formula is a local Taylor coefficient,
+ not an explicit uniform remainder interval or detector sensitivity.
+A finite-time certified signal needs actual derivative bounds,
+ marked frame, units and receiver/worldline coupling.
+
+### BR148 — G4 actual stress and exact tidal trace comparison
+
+Retain P0H original CMC source (not the G3 metric):
+ rho=K0-p0+b², Sf=rho-b²/2,
+ C=K0-2p0, j²=K0 psi^-8 b²,
+ Delta=(K0+b²)²-4K0 psi^-8 b²,
+ p_fluid=(sqrt Delta-C)/2, e_fluid=p_fluid+C.
+In the aligned orthonormal frame E=0 and j parallel b, total
+ stress eigenvalues are
+ S_perp=p_fluid+b²/2,
+ S_parallel=p_fluid-b²/2+j²/(Sf+p_fluid).
+Since psi>=1 and b²<K0 by the original smallness assumption,
+ sqrt Delta>=K0-b² and Sf+p_fluid>=K0.
+Therefore S_parallel-S_perp<=0, strict for psi>1 and b²>0.
+The positive Newton source gives psi>1 at finite points for
+ nonzero eps. This is genuine magnetic-plus-fluid anisotropy,
+ not an assumed flat aligned cancellation. At psi=1 the
+ flat comparison has equality, not the actual curved field.
+
+In actual spatial orthonormal frame the electric spacetime
+ Riemann tensor (normal observers) is exactly
+ T4=Ric(gamma)+Ktrace K-K²
+        -kappa (S+(rho-tr S)I/2).
+The Hamiltonian R_gamma+Ktrace²-tr K²=2 kappa rho then gives
+ tr T4=kappa/2 (rho+tr S)
+      =kappa/2 (K0+2b²+2p_fluid)>0.
+This is the exact local timelike convergence trace for the
+ original G4 constitutive data, with the cosmological background
+ retained. The anisotropic stress contribution to T4 has
+ longitudinal-minus-transverse difference
+ kappa(b²-j²/(Sf+p_fluid))>=0. The total tracefree curvature
+ is not determined by stress alone: actual Ric(gamma), York K
+ and their conformal jets remain. No false complete diagonal
+ tidal tensor, no subtraction of the background from the
+ physical Ricci trace. This is distinct from G3 5D vacuum
+ trace zero and G3 Jordan null trace negative, which are
+ different dimensions, metrics and observers. No assertion
+ that a specific observed body accelerates in a prescribed direction.
+
+### BR149 — paired physical observer BIDI, retaining the zero fibre
+
+On G3 use transverse central null trace O_eq=Ric4(k,k)
+ at theta=pi/2, and marked mixed component M=T5_z5.
+Set q=-9 O_eq/64=eps²/p² and m=M/16=eps/p².
+For eps!=0 exact inverse
+ eps=q/m, p²=q/m², p>0,
+ with forward identity m²=(1/p²)q. This is a two-parameter
+ algebraic chart inverse (p actually constrained by eps in
+ the admitted original radial solution). At eps=0, q=m=0;
+ these observations alone cannot recover p on the wider chart.
+The actual G3 zero solution p=1 follows from the source boundary
+ condition, not division by zero. The optical observable alone
+ forgets sign, and the mixed readout requires marked orientation
+ plus central normalization; neither implies full metric or global
+ evolution equivalence. Native rational cross-multiplied identities
+ are appended to the existing TOE adapter; the nonzero inverse
+ is checked locally in SymPy, not native-kernel certified.
+Preserve original BR145 non-descent and all unpaid physical grades.
+
+### Updated parallel cut
+
+Periodic: BR146 removes algebraic blind-trace obstruction relative
+ to full extended normal symbol. Next close derivative-balanced
+ Cartan surface energy using actual exterior/frame corrections,
+ nonzero seam, compatible corners and weighted exterior. W0/W1,
+ W5/W6/W7 remain as earlier. Classical: BR147 supplies actual
+ local zero-momentum light screen and Jacobi coefficient; BR148
+ full G4 tensor source/trace/anisotropy. Evaluate actual G4
+ conformal Hessian and York jet bounds, finite-time Jacobi/optical
+ remainder and receiver calibration; no free global stability.
+TOE: BR149 exact selected joint readout and zero retention; next
+ source-indexed time/action preservation rather than shared
+ character or dimension. Material branch remains independently
+ actionable with original P0O–AG; quantum #1545 marked action
+ closure remains separate. No new quantum action proof in this
+ tranche. No full repo/Agda/CI/continuum or empirical acceptance.
+
+Local SymPy four stages PASS, 90s per stage; new checker
+78525b79716b4f4376c9a80ed9180ca09eccbf2c, BR143 dependency
+2354d838727e6d84c1e8da05abad27a9b78efc6d. Local exact source
+bytes verified; trace, optical, rmhd, observer stages run.

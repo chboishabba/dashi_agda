@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR145)
+## Current proof state — 28 November 2026 (BR149)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -397,3 +397,48 @@ remain open. The native TOE adapter now consumes the existing
 consumer non-descent witness at rational sign-fibre scope.
 Three local exact stages PASS; no native kernel, PDE or physical
 calibration acceptance. See [parallel dependency register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Actual central light screen, matter tidal trace and joint signed readout (BR146–149)
+
+On the original G3 circle-invariant local vacuum development, a
+five-dimensional null geodesic with zero conserved fibre momentum
+projects to a null geodesic of the Jordan/base metric. Nonzero
+fibre momentum instead gives a timelike projection. At the initial
+centre with \(p=\psi(0)\), the optical tidal screen of the zero-momentum
+null direction at angle \(\theta\) from the original axis is
+\(\epsilon^2 p^{-2}\operatorname{diag}(-176/9,-176/9+32\sin^2\theta)\).
+Its trace is \(-\epsilon^2p^{-2}(64/9+32\cos^2\theta)\), independently
+recovered from the reduced radion and connection equations. This
+is a local Jordan-frame geometric optical result, not physical
+Maxwell photon identification, negative matter or global lensing.
+For an initially comoving normal Jacobi field in the marked
+five-dimensional frame the leading mixed map is
+\(J_{5z}=-8\epsilon t^2/p^2+O(t^4)\) under the time-reflection
+and analytic development assumptions. A certified finite-time
+remainder and actual detector coupling remain necessary.
+
+For the separate G4 Einstein–ideal-RMHD initial source with
+\(\rho=K_0-p_0+b^2\), actual aligned total stress has
+\(S_\parallel-S_\perp=j^2/(S_f+p_{\rm fluid})-b^2\le0\),
+strict for nonzero magnetic field and \(\psi>1\) in the admitted
+smallness range. The actual electric curvature is
+\(\mathrm{Ric}(\gamma)+K_{\rm tr}K-K^2
+-\kappa(S+(\rho-\operatorname{tr}S)I/2)\), with trace
+\(\kappa(K_0+2b^2+2p_{\rm fluid})/2>0\). Its tracefree spatial
+curvature and extrinsic data are retained; a stress formula
+does not independently determine the full tidal matrix.
+
+The paired G3 readout \(q=-9\,\mathrm{Ric}_4(k,k)|_{\theta=\pi/2}/64\)
+and \(m=T_{z5}/16\) gives \(\epsilon=q/m,\ p^2=q/m^2\)
+off zero. At zero both observations vanish and the source
+boundary condition, not division, selects the original radius.
+This is a selected marked observer BIDI, not a full dynamical
+or quantum equivalence. BR146 shows that the full periodic
+electric trace factors through the extended normal action of
+rank 26, whose kernel dimension is nine, rather than only the
+compressed normal-work rank22. The apparent four blind directions
+are normal-active. The one-sided trace bound still requires a
+tangential jet at top order and actual off-shell graph conversion.
+Four local exact stages passed, no native or nonlinear acceptance.
+See [BR146–149 register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
