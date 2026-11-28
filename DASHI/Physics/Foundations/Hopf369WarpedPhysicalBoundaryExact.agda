@@ -720,3 +720,44 @@ module At {r : Level} (F : C.RealField r)
   -- The boundary collar owner must supply value=1, d_normal=0 for an
   -- exact no-new-boundary-defect weld. No proof of existence of such a
   -- cutoff in the relevant weighted global function space is claimed.
+
+  -- The covector subsidiary gets the IDENTICAL five-direction product
+  -- commutator, rather than being silently replaced by a scalar wave.
+  covCutoffResidual : PrincipalJet → ScalarJet → CovJet → Cov
+  covCutoffResidual p chi u k =
+    sum5 (λ i → sum5 (λ j →
+      principal p i j *
+        (second chi i j * covValue u k
+        + first chi i * covFirst u j k
+        + first chi j * covFirst u i k)))
+      + sum5 (λ i → drift p i * first chi i * covValue u k)
+
+  -- Abstract source ledger is an actual finite carrier, not an
+  -- assertion that analytic norms or subsidiary constraints close.
+  record LocalizationDefects : Set r where
+    constructor localizationDefects
+    field
+      metricBulk : Tensor
+      gaugeBulk : Cov
+      metricWallD metricWallE : List S
+      gaugeWallD gaugeWallE : List S
+  open LocalizationDefects public
+
+  localizedDefects : PrincipalJet → PrincipalJet → ScalarJet →
+    TensorJet → CovJet → S → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Cov → Cov → Cov → Cov → LocalizationDefects
+  localizedDefects mp gp chi tu cu j q p px m mx c cx d dx =
+    localizationDefects
+      (fullTensorCutoffResidual mp chi tu)
+      (covCutoffResidual gp chi cu)
+      (localizedMetricRows D j q chi p px m mx)
+      (localizedMetricRows E j q chi p px m mx)
+      (localizedGaugeRows D j q chi c cx d dx)
+      (localizedGaugeRows E j q chi c cx d dx)
+
+  -- To promote the ledger one must prove: actual principal coefficients
+  -- and first-order drift reproduce BR14/BS4 in the same coordinates;
+  -- estimates on derivatives of chi and all fields, trace lift,
+  -- source compatibility and boundary collar. Neither finite signed
+  -- ledgers nor this constructor supplies PDE existence.
