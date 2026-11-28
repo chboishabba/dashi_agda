@@ -131,3 +131,7 @@ Tests/test_x369_indexed_source_fibre_audit.py has synthetic cases for same seman
 6. Separate physical resource, original language quality, backend floating error, and later kernel acceptance; no GPU training or source-acceptance claims from finite SymPy/codec checks.
 
 Actual code owners remain PR #1550 and PR #5. TOE #1291 is source donor only and 99744 behind master in last comparison: no raw merge.
+
+
+### Independent negative source replay added (LeechTransformer #5)
+The source consumer audit at 460fa9d independently reexecutes all discovered original BYTE-state observation/transition nonfactorization witnesses from their preserved original seed IDs and chronological control words, checks same chart and the originally different output or successor chart. 3f9d807 regression rejects forged and stale witnesses. A replayed finite negative is decisive for that chart/source contract; no amount of unseen float states can rescue universal equality once a genuine counterexample is authenticated. A finite positive remains limited to the explored closed graph and cannot certify unrestricted native history. Checkpoint/source-head provenance remains externally admitted by x369_source_acceptance.py. Agda kernel deferred; new Python tests written but not run here.
