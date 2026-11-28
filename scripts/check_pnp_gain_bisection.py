@@ -1,6 +1,9 @@
 """Localize an original verified 0->1 pin gain without monotonicity.
 The missed original witness is a premise, not produced universally.
-Candidate is a fixed deterministic clocked producer on each pinned CNF.
+Legacy fixture adapter supplies the fully pinned override at the last path
+position. It is not a fixed source-defined candidate when the root or an
+earlier prefix already contains all pins. Use check_pnp_fixed_code_gain.py
+for same-input candidate semantics and independently replayable gains.
 """
 from check_p0_signed_contrast_20261125 import ContinuationAllowance
 from check_pnp_endpoint_portfolio import cnf_solver
