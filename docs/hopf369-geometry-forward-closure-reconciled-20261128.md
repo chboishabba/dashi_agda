@@ -5193,3 +5193,81 @@ profile/continuation, native indexed residual, Monster marked
 action, actual material current/stress/receiver.
 No new source implementation in the latter five tracks.
 No integrated checker, native kernel or CI execution.
+
+
+## 36. Controlling endpoint-first completion cut (supersedes piecemeal priorities)
+
+Source audit reopened P0H f5c21339b60254296d234aba71ee5b65ad575d61,
+P0U 4dd262dfd2625c95a9d21466c8b23ce4a3b0f4d2,
+P0V 210139cc2ce38a04c29ea8406b7a09a876a3d864,
+BR150–153 35e6b4b3e54df3ee8758c4c485eec80abfe2c6e7,
+BR140–142 10382931d6aae05435b0bc328abab90b13d428d3,
+P0BN f7d3cebe94a2b88deccc9935af4a90336514388f,
+P0AG 0c635181c353393fc891606898a636221c8d50b9,
+TOEHopfMonsterSourceRealizationsExact d596c35fe3e0e4c1ba35a79a07ade714775753fc.
+Master atomic donors recovered in section 34. This is a targeted
+source reconciliation, not exhaustive master/sibling replay.
+
+Endpoint reverse-solve, then forward-compose on the same source:
+
+1. Periodic: endpoint is actual nonzero BN Einstein–Israel solution.
+   W0/W1 require original BN high-order compatible corners and moving
+   nonlinear D/E source equality. W2/W3/W4 require actual positive
+   coupled bulk/surface tame estimate including null/glancing modes,
+   not just spatial exterior inverse. W5 global weighted exterior
+   and moment/holonomy reconstruction; W6 actual linear solvability
+   and loss-compatible nonlinear iteration; W7 native/local receipts.
+   BR191 surface Cartan work identity from BR142 gives
+   d||E||²/2 <= ||E||||C||+2||sym Omega||||E||².
+   The missing lemma is source C trace control in the actual curved
+   coupled energy, not connection commutator differentiation.
+2. Atomic: endpoint full selected n=2 interacting operator with
+   calibrated radial and baseline parameters. BR187 already writes
+   all selected Coulomb channels. Run, check marked basis and compare
+   with original p-p spectrum. Beyond-shell CI/SCF and empirical
+   calibration are independent stronger grades, not prerequisites
+   for selected finite operator closure.
+3. G3: endpoint actual time-dependent source geometry and observables
+   on quantitative analytic slab. BR189 bounds original radial
+   conformal solution on complex disk via Volterra contraction:
+   k=8 eps² R²/[9(1-R²)^4], eps=1/4,R=1/2 yields 32/729;
+   normalized |f|>=665/697. Need actual multidimensional coefficient
+   bounds, nondegenerate metric/gauge, majorant application BR188,
+   time-dependent spinor/geodesic histories with remainder bounds.
+4. G4: endpoint original nonlinear CMC/RMHD solution and finite
+   relative energy history. P0H Fourier-York and primitive inverse,
+   BR152 actual York gradients already exist. BR190 discriminant
+   Delta=(2S-C)^2-4j² gives enthalpy sqrt Delta and
+   1-v²=sqrt Delta/(S+p) on admitted branch. Need quantitative
+   preservation of primitive/metric margins and actual coupled
+   profile evolution with weighted energy and continuation.
+5. Hyperfabric: endpoint source-indexed marked observer transport.
+   Existing TOE native spectral split/reopen and advance commute
+   already supplied, plus GovernedIndexedResidualCubeExact six faces.
+   Attach actual signed tidal/radial/atomic observables at independent
+   physical time/history/refinement indices; prove each actual face
+   or retain its residual. Do not equate spectral advance with time.
+6. Monster: endpoint marked action and vertex transport, not another
+   dimension match. BR153 actual Golay/Leech integral order-three
+   action, corrected cocycle lift and ground trace already exist.
+   Consume #1545 actual marked generators and source character
+   transport; exact source-to-target action equivariance or explicit
+   obstruction. Preserve existing natural-action refusal and
+   sharedCarrier grade of native FLM coordinate inverse.
+7. Material: endpoint common current/stress/receiver history.
+   P0U curved metric variation and storage law, P0AG exact 54-patch
+   gauge/charge map and actual initial-metric signed shift comparator
+   already exist. Need source-identical dynamical metric and
+   constitutive history, continuum/refinement/exterior convergence,
+   receiver calibration. Do not substitute generic incidence test.
+
+Implementation BR189–191 in scripts/check_hopf369_br189_191_endpoint_bounds.py
+at a09afa2fadea9d29373ef5b49caf5ecb68398956. Written, unrun.
+Runner integrated BR178–188 at 1f4711874a9beb309224b7a7a02e7259f73c2037
+and BR189–191 at 4f1e12e686d811c306d2cb3abdb54742937b7a9e.
+Use --part terminal --seconds 90 --output /tmp/hopf369-acceptance;
+closure/frontier/all include new stages. 13 terminal stages.
+No local execution or native kernel in this tranche. No actual
+curved PDE solver, native marked cube, Monster intertwiner or
+material receiver evolution newly implemented. Those are explicit
+remaining endpoint welds, not assumed theorems. No sibling edits.
