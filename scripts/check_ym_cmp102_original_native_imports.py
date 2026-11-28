@@ -8,7 +8,7 @@ Agda executable if the user explicitly requests it.
 
 Example (in a populated checkout):
  python scripts/check_ym_cmp102_original_native_imports.py \
-   --repo-root . --vendor-root vendor/bishop
+   --repo-root . --include-root vendor/bishop --include-root vendor/stdlib
  python scripts/check_ym_cmp102_original_native_imports.py \
    --repo-root . --typecheck --agda agda
 """
@@ -31,8 +31,8 @@ IMPORT = re.compile(
 )
 SAFE = re.compile(r"\{-#\s*OPTIONS\b[^#]*--safe\b[^#]*#-\}", re.MULTILINE)
 
-def scan(repo: Path, vendor: Path | None, entry: str) -> dict:
-    roots = [repo] + ([vendor] if vendor is not None else [])
+def scan(repo: Path, includes: list[Path], entry: str) -> dict:
+    roots = [repo] + includes
     todo = deque([entry])
     seen: set[str] = set()
     edges: list[tuple[str, str]] = []
@@ -69,14 +69,14 @@ def scan(repo: Path, vendor: Path | None, entry: str) -> dict:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=Path("."))
-    parser.add_argument("--vendor-root", type=Path)
+    parser.add_argument("--include-root", type=Path, action="append", default=[])
     parser.add_argument("--entry", default=ENTRY)
     parser.add_argument("--typecheck", action="store_true")
     parser.add_argument("--agda", default="agda")
     args = parser.parse_args(argv)
     root = args.repo_root.resolve()
-    vendor = args.vendor_root.resolve() if args.vendor_root else None
-    result = scan(root, vendor, args.entry)
+    includes = [p.resolve() for p in args.include_root]
+    result = scan(root, includes, args.entry)
     print(f"original CMP102 import graph: resolved={result['resolved']} "
           f"visited={result['visited']}")
     for source, target in result["unsafe_edges"]:
@@ -95,8 +95,8 @@ def main(argv=None) -> int:
         return 2
     source = result["resolved_paths"][args.entry][0]
     cmd = [executable, "-i", str(root)]
-    if vendor is not None:
-        cmd += ["-i", str(vendor)]
+    for include in includes:
+        cmd += ["-i", str(include)]
     cmd += [str(source)]
     print("Native Agda invocation:", " ".join(cmd))
     return subprocess.call(cmd)
