@@ -168,3 +168,74 @@ reopen (inj₂ x) = inj₂ (fromEven (fromOdd x))
 
 -- The chart-to-bounded-enumeration permutation and exact Cauchy
 -- coefficient counting remain separate; no all-index count is assumed.
+
+
+-- Coverage on the raw integer coordinates with explicit parity witnesses.
+-- This eliminates any appeal to division rounding in the chart inversion.
+total : Quad → ℤ
+total (quad a b c d) = ((a + b) + c) + d
+
+integerChart : Quad → ℤ → Quad
+integerChart (quad a b c d) k = quad k b c d
+
+integerChartRead : ∀ x k → total x ≡ (+ 2) * k + (+ 1) →
+  integerOdd (integerChart x k) ≡ x
+integerChartRead (quad a b c d) k h = quadCong
+  (trans (cong (λ t → ((t - b) - c) - d) (sym h))
+    (solve 4 (λ a b c d → (((a :+ b :+ c :+ d) :- b) :- c) :- d := a)
+      refl a b c d)) refl refl refl
+
+fourthRead : ∀ a b c d → (((a + b) + c) + d) - a - b - c ≡ d
+fourthRead a b c d = solve 4
+  (λ a b c d → (((a :+ b :+ c :+ d) :- a) :- b) :- c := d)
+  refl a b c d
+
+halfEvenChartRead : ∀ x j u v w →
+  total x ≡ (+ 4) * j →
+  a x ≡ (+ 2) * u + (+ 1) →
+  b x ≡ (+ 2) * v + (+ 1) →
+  c x ≡ (+ 2) * w + (+ 1) →
+  halfEven (quad j u v w) ≡ x
+halfEvenChartRead (quad a b c d) j u v w h ha hb hc = quadCong
+  (sym ha) (sym hb) (sym hc)
+  (trans (cong (λ t → t - ((+ 2) * u + (+ 1)) - ((+ 2) * v + (+ 1)) - ((+ 2) * w + (+ 1)))
+    (trans (solve 1 (λ j → con (+ 4) :* j :+ con (+ 0) := con (+ 4) :* j) refl j) (sym h)))
+    (trans (cong (λ t → (((a + b) + c) + d) - t - ((+ 2) * v + (+ 1)) - ((+ 2) * w + (+ 1))) (sym ha))
+      (trans (cong (λ t → (((a + b) + c) + d) - a - t - ((+ 2) * w + (+ 1))) (sym hb))
+        (trans (cong (λ t → (((a + b) + c) + d) - a - b - t) (sym hc))
+          (fourthRead a b c d)))))
+
+halfOddChartRead : ∀ x j u v w →
+  total x ≡ (+ 4) * j + (+ 2) →
+  a x ≡ (+ 2) * u + (+ 1) →
+  b x ≡ (+ 2) * v + (+ 1) →
+  c x ≡ (+ 2) * w + (+ 1) →
+  halfOdd (quad j u v w) ≡ x
+halfOddChartRead (quad a b c d) j u v w h ha hb hc = quadCong
+  (sym ha) (sym hb) (sym hc)
+  (trans (cong (λ t → t - ((+ 2) * u + (+ 1)) - ((+ 2) * v + (+ 1)) - ((+ 2) * w + (+ 1))) (sym h))
+    (trans (cong (λ t → (((a + b) + c) + d) - t - ((+ 2) * v + (+ 1)) - ((+ 2) * w + (+ 1))) (sym ha))
+      (trans (cong (λ t → (((a + b) + c) + d) - a - t - ((+ 2) * w + (+ 1))) (sym hb))
+        (trans (cong (λ t → (((a + b) + c) + d) - a - b - t) (sym hc))
+          (fourthRead a b c d)))))
+
+-- Witness that the fourth raw coordinate of either half chart is odd.
+halfEvenFourth : ∀ j u v w →
+  d (halfEven (quad j u v w)) ≡
+    (+ 2) * ((+ 2) * j - u - v - w - (+ 2)) + (+ 1)
+halfEvenFourth j u v w = solve 4
+  (λ j u v w →
+    con (+ 4) :* j :+ con (+ 0) :- (con (+ 2) :* u :+ con (+ 1))
+      :- (con (+ 2) :* v :+ con (+ 1)) :- (con (+ 2) :* w :+ con (+ 1))
+    := con (+ 2) :* (con (+ 2) :* j :- u :- v :- w :- con (+ 2)) :+ con (+ 1))
+  refl j u v w
+
+halfOddFourth : ∀ j u v w →
+  d (halfOdd (quad j u v w)) ≡
+    (+ 2) * ((+ 2) * j - u - v - w - (+ 1)) + (+ 1)
+halfOddFourth j u v w = solve 4
+  (λ j u v w →
+    con (+ 4) :* j :+ con (+ 2) :- (con (+ 2) :* u :+ con (+ 1))
+      :- (con (+ 2) :* v :+ con (+ 1)) :- (con (+ 2) :* w :+ con (+ 1))
+    := con (+ 2) :* (con (+ 2) :* j :- u :- v :- w :- con (+ 1)) :+ con (+ 1))
+  refl j u v w
