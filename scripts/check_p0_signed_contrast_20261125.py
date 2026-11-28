@@ -7,6 +7,7 @@ from check_p0_budgeted_residual_20261125 import cap as source_cap, pair_source
 from check_pnp_signed_component_histogram import component_bounds
 from check_pnp_signed_boundary_energy import boundary_contrast
 from check_pnp_f3_syndrome_boundary import syndrome_contrast
+from check_pnp_f3_normal_fold import normal_contrast
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -25,7 +26,7 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384):
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -102,6 +103,14 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             a,b,_=cert
             lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
             assert all(x<=y for x,y in zip(lo,hi))
+    # Collective factor-normal join after the prior source certificates.
+    # The same original affine chart supplies every coordinate guard.
+    if E is not None and boundary_width is not None and normal_budget and any(a!=b for a,b in zip(lo,hi)):
+        cert=normal_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width,normal_budget)
+        if cert is not None:
+            a,b,_=cert
+            assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
+            lo,hi=list(a),list(b)
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
 def sector(F,n,rows,target,obs,w,order=None,offset=0):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
