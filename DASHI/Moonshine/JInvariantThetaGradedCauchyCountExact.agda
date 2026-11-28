@@ -131,3 +131,41 @@ pairMap g h (x ∷ xs) ys =
     map f (xs ++ ys) ≡ map f xs ++ map f ys
   mapAppend f [] ys = refl
   mapAppend f (x ∷ xs) ys = cong (f x ∷_) (mapAppend f xs ys)
+
+
+-- Locality at a fixed output degree. Bounded coordinate lists may be
+-- larger than a coefficient's own cutoff without changing that output.
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as NP
+
+rowCongThrough : ∀ f g u v n →
+  (∀ i → i ≤ n → f i ≡ u i) →
+  (∀ i → i ≤ n → g i ≡ v i) →
+  rowZ f g n ≡ rowZ u v n
+rowCongThrough f g u v zero hf hg =
+  trans (rowZero f g)
+    (trans (cong₂ _*_ (hf zero z≤n) (hg zero z≤n))
+      (sym (rowZero u v)))
+rowCongThrough f g u v (suc n) hf hg =
+  trans (rowHead f g n)
+    (trans (cong₂ _+_ (cong₂ _*_ (hf zero z≤n) (hg (suc n) NP.≤-refl))
+      (rowCongThrough (T.shift f) g (T.shift u) v n
+        (λ i hi → hf (suc i) (s≤s hi))
+        (λ i hi → hg i (NP.≤-step hi))))
+      (sym (rowHead u v n)))
+
+fourCongThrough : ∀ f g n →
+  (∀ i → i ≤ n → f i ≡ g i) →
+  rowZ (rowZ f f) (rowZ f f) n ≡ rowZ (rowZ g g) (rowZ g g) n
+fourCongThrough f g n h =
+  rowCongThrough (rowZ f f) (rowZ f f) (rowZ g g) (rowZ g g) n
+    (λ i hi → rowCongThrough f f g g i
+      (λ j hj → h j (NP.≤-trans hj hi)) (λ j hj → h j (NP.≤-trans hj hi)))
+    (λ i hi → rowCongThrough f f g g i
+      (λ j hj → h j (NP.≤-trans hj hi)) (λ j hj → h j (NP.≤-trans hj hi)))
+
+fourCountThrough : ∀ xs f n →
+  (∀ i → i ≤ n → hist xs i ≡ f i) →
+  hist (fourGrades xs) n ≡ rowZ (rowZ f f) (rowZ f f) n
+fourCountThrough xs f n h =
+  trans (fourCount xs n) (fourCongThrough (hist xs) f n h)
