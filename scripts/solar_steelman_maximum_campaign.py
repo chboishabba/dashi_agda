@@ -35,10 +35,11 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--knots',type=int,default=4)
     p.add_argument('--exact-null',action='store_true');x=p.parse_args()
     work=Path(x.work);work.mkdir(parents=True,exist_ok=True);src=sources()
     seven=work/'seven.pkl';metric=work/'metric.pkl';med=work/'mediator.pkl'
@@ -63,6 +64,25 @@ def main():
     elif x.stage in ('span','span-full'):
         from solar_steelman_constitutive_span import local_inverse
         local_inverse(a,x.stage=='span-full')
+    elif x.stage=='reciprocal':
+        from solar_steelman_reciprocal_port_inverse import construct
+        construct(a)
+    elif x.stage in ('history-block','history-assemble'):
+        from solar_steelman_history_section import block,assemble
+        prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
+        if x.stage=='history-block':
+            if x.start is None or x.stop is None:raise ValueError("column bounds required")
+            path=work/f'{prefix}_{x.start:04d}_{x.stop:04d}.npz'
+            tmp=path.with_name(path.stem+'.tmp.npz')
+            block(m,a,x.delay,x.knots,x.start,x.stop,x.tol,tmp);os.replace(tmp,path)
+            json_atomic(path.with_suffix('.json'),dict(sha=sha(path),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots))
+        else:
+            paths=sorted(work.glob(prefix+'_*.npz'))
+            if not paths:raise ValueError("no history blocks")
+            for path in paths:
+                meta=json.loads(path.with_suffix('.json').read_text())
+                if meta!=dict(sha=sha(path),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots):raise ValueError("history provenance mismatch")
+            assemble(paths)
     elif x.stage=='preflight':
         from solar_steelman_reservoir_return import preflight
         preflight(m,a)
