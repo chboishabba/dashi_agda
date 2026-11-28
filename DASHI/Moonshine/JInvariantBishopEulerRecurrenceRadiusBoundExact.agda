@@ -54,14 +54,14 @@ rowUniform : ∀ a f C n →
 rowUniform a f C zero h =
   P.≤-respˡ-≃ (P.≃-symm (Row.cauchyCoefficientZero (Abs.abs a) (Abs.abs f)))
     (P.≤-respʳ-≃ (P.*-congʳ (P.≃-symm (P.+-identityˡ ∣ a zero ∣)))
-      (P.*-monoˡ-≤-nonNeg (P.nonNeg∣x∣ (a zero)) (h zero z≤n)))
+      (P.*-monoˡ-≤-nonNeg (h zero z≤n) (P.nonNeg∣x∣ (a zero))))
 rowUniform a f C (suc n) h =
   P.≤-respˡ-≃ (P.≃-symm (Row.cauchyCoefficientSuccessor (Abs.abs a) (Abs.abs f) n))
     (P.≤-respʳ-≃
       (P.≃-trans (P.≃-symm (P.*-distribʳ-+ C ∣ a zero ∣ (mass (Row.shift a) (suc n))))
         (P.*-congʳ (P.≃-symm (massHead a (suc n)))))
       (P.+-mono-≤
-        (P.*-monoˡ-≤-nonNeg (P.nonNeg∣x∣ (a zero)) (h (suc n) NP.≤-refl))
+        (P.*-monoˡ-≤-nonNeg (h (suc n) NP.≤-refl) (P.nonNeg∣x∣ (a zero)))
         (rowUniform (Row.shift a) f C n (λ k hk → h k (NP.≤-step hk)))))
   where
   massHead : ∀ a n → mass a (suc n) ≃ (∣ a zero ∣ + mass (Row.shift a) n)
@@ -102,7 +102,7 @@ module Uniform
   prefix (suc n) k hk with k NP.≟ suc n
   ... | yes refl with suc n NP.≤? M
   ...   | yes h = initial (suc n) h
-  ...   | no h = step n (NP.≤-pred (NP.<⇒≤ (NP.≰⇒> h))) (prefix n)
+  ...   | no h = step n (NP.≤-pred (NP.≰⇒> h)) (prefix n)
   prefix (suc n) k hk | no h = prefix n k (NP.≤-pred (NP.≤∧≢⇒< hk h))
 
   all : ∀ n → R._≤_ ∣ f n ∣ C
