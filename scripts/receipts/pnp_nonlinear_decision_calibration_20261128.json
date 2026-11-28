@@ -1,0 +1,944 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python /tmp/pnp38, 90s external campaign timeouts, recovered prior source copies not full checkout. Z3 native SAT tactic 4.13.3.0 via libz3.so.4; no Minisat/Kissat binaries or Python-SAT, pip install failed; no native Agda/Lean/Lake, GitHub DNS blocked. No CI. Three tested executable blobs match connector. Native gate source written but not executed on real checkout.",
+  "blobs": {
+    "observation": "4717c816aaee44fa5b3170e8e79cc45e8e4c7761",
+    "cdcl": "b7d6ea2a41519411dff824e89c2aaf0906c08ecf",
+    "campaign": "90c0f91a5e107a085389cbbc7ba6720943659cc8"
+  },
+  "runs": {
+    "observation": {
+      "seconds": 1.496,
+      "small_independent": 336,
+      "gadget_controls": 24,
+      "WITNESS": 12,
+      "EMPTY": 12,
+      "negative_controls": "tampered covector/block polynomial, deleted source clause, overlapping x=0 and xy=1 yields UNKNOWN, zero cap and unsupported width refusals pass"
+    },
+    "decision": {
+      "seconds": 7.242,
+      "raw_sha256": "6af2f9359648f3ba7783710f5dc416c585069f693c3402541445568d374ef806",
+      "threshold": 64,
+      "gadgets": 24,
+      "cdcl_completed": 88,
+      "prior_completed": 41,
+      "lift_completed": 24
+    }
+  },
+  "protocol": "Same CNFs, decision not count. Prior cap 200000; lift cap 1000000; Python signal wall limit 1s each; Z3 internal solve timeout 1000ms, parsing and model audit outside solve timer, context creation outside timer, full campaign external timeout. Not identical end-to-end hard wallclock budget. All returned SAT witnesses independently evaluated on original clauses; UNSAT from Z3 trusted solver result, not proof checked. Missing sat conflicts stats rendered 0 in campaign summary (raw stats retain omission). Seeded thresholds from Section37; random truth tables in observation self-test drawn after small test RNG, comparison campaign draws directly from seed, hence different random gadget sets.",
+  "threshold_rows": [
+    {
+      "n": 12,
+      "m": 51,
+      "prior": 16,
+      "cdcl": 16,
+      "lift": 0,
+      "sat": 14,
+      "unsat": 2,
+      "prior_median_ms": 1.313,
+      "cdcl_median_ms": 2.438,
+      "parse_median_ms": 0.323,
+      "conflicts_median": 2,
+      "conflicts_max": 8,
+      "min_fill_width": [
+        9,
+        10
+      ],
+      "cases": [
+        [
+          23.256,
+          6,
+          9,
+          "W",
+          1.325,
+          "W"
+        ],
+        [
+          2.744,
+          2,
+          9,
+          "W",
+          1.08,
+          "W"
+        ],
+        [
+          2.446,
+          1,
+          9,
+          "W",
+          0.89,
+          "W"
+        ],
+        [
+          2.546,
+          7,
+          10,
+          "E",
+          1.876,
+          "E"
+        ],
+        [
+          2.511,
+          2,
+          10,
+          "W",
+          1.39,
+          "W"
+        ],
+        [
+          2.34,
+          8,
+          9,
+          "E",
+          1.6,
+          "E"
+        ],
+        [
+          2.411,
+          3,
+          10,
+          "W",
+          1.514,
+          "W"
+        ],
+        [
+          2.418,
+          4,
+          10,
+          "W",
+          1.74,
+          "W"
+        ],
+        [
+          2.305,
+          4,
+          10,
+          "W",
+          0.83,
+          "W"
+        ],
+        [
+          2.367,
+          1,
+          10,
+          "W",
+          1.661,
+          "W"
+        ],
+        [
+          2.43,
+          2,
+          9,
+          "W",
+          1.502,
+          "W"
+        ],
+        [
+          2.542,
+          4,
+          9,
+          "W",
+          1.056,
+          "W"
+        ],
+        [
+          2.277,
+          1,
+          9,
+          "W",
+          1.107,
+          "W"
+        ],
+        [
+          2.55,
+          0,
+          10,
+          "W",
+          1.3,
+          "W"
+        ],
+        [
+          2.424,
+          0,
+          10,
+          "W",
+          1.255,
+          "W"
+        ],
+        [
+          2.542,
+          0,
+          9,
+          "W",
+          1.264,
+          "W"
+        ]
+      ]
+    },
+    {
+      "n": 20,
+      "m": 85,
+      "prior": 16,
+      "cdcl": 16,
+      "lift": 0,
+      "sat": 14,
+      "unsat": 2,
+      "prior_median_ms": 3.267,
+      "cdcl_median_ms": 2.197,
+      "parse_median_ms": 0.401,
+      "conflicts_median": 4,
+      "conflicts_max": 20,
+      "min_fill_width": [
+        13,
+        15
+      ],
+      "cases": [
+        [
+          2.378,
+          8,
+          14,
+          "W",
+          1.909,
+          "W"
+        ],
+        [
+          2.228,
+          3,
+          13,
+          "W",
+          3.901,
+          "W"
+        ],
+        [
+          2.275,
+          11,
+          14,
+          "E",
+          3.657,
+          "E"
+        ],
+        [
+          8.212,
+          3,
+          15,
+          "W",
+          4.874,
+          "W"
+        ],
+        [
+          2.292,
+          9,
+          13,
+          "W",
+          2.799,
+          "W"
+        ],
+        [
+          2.377,
+          20,
+          15,
+          "W",
+          5.231,
+          "W"
+        ],
+        [
+          2.089,
+          12,
+          14,
+          "E",
+          3.318,
+          "E"
+        ],
+        [
+          2.173,
+          0,
+          15,
+          "W",
+          2.059,
+          "W"
+        ],
+        [
+          2.163,
+          5,
+          15,
+          "W",
+          2.318,
+          "W"
+        ],
+        [
+          2.601,
+          6,
+          15,
+          "W",
+          3.089,
+          "W"
+        ],
+        [
+          2.207,
+          2,
+          15,
+          "W",
+          3.215,
+          "W"
+        ],
+        [
+          2.102,
+          7,
+          15,
+          "W",
+          3.619,
+          "W"
+        ],
+        [
+          2.135,
+          0,
+          14,
+          "W",
+          3.668,
+          "W"
+        ],
+        [
+          2.102,
+          2,
+          15,
+          "W",
+          3.45,
+          "W"
+        ],
+        [
+          2.091,
+          0,
+          14,
+          "W",
+          2.881,
+          "W"
+        ],
+        [
+          2.187,
+          0,
+          15,
+          "W",
+          2.583,
+          "W"
+        ]
+      ]
+    },
+    {
+      "n": 32,
+      "m": 136,
+      "prior": 6,
+      "cdcl": 16,
+      "lift": 0,
+      "sat": 14,
+      "unsat": 2,
+      "prior_median_ms": 106.268,
+      "cdcl_median_ms": 2.527,
+      "parse_median_ms": 0.557,
+      "conflicts_median": 5.5,
+      "conflicts_max": 56,
+      "min_fill_width": [
+        21,
+        23
+      ],
+      "cases": [
+        [
+          3.609,
+          17,
+          21,
+          "W",
+          108.179,
+          "U"
+        ],
+        [
+          2.536,
+          33,
+          23,
+          "E",
+          108.863,
+          "U"
+        ],
+        [
+          2.396,
+          3,
+          22,
+          "W",
+          104.104,
+          "U"
+        ],
+        [
+          2.344,
+          14,
+          22,
+          "W",
+          2.911,
+          "W"
+        ],
+        [
+          2.517,
+          56,
+          23,
+          "E",
+          107.808,
+          "U"
+        ],
+        [
+          2.938,
+          1,
+          22,
+          "W",
+          111.787,
+          "U"
+        ],
+        [
+          2.551,
+          19,
+          23,
+          "W",
+          6.522,
+          "W"
+        ],
+        [
+          2.423,
+          16,
+          22,
+          "W",
+          107.909,
+          "U"
+        ],
+        [
+          2.153,
+          3,
+          23,
+          "W",
+          2.718,
+          "W"
+        ],
+        [
+          2.296,
+          6,
+          21,
+          "W",
+          6.046,
+          "W"
+        ],
+        [
+          2.603,
+          3,
+          21,
+          "W",
+          2.743,
+          "W"
+        ],
+        [
+          2.865,
+          3,
+          22,
+          "W",
+          112.44,
+          "U"
+        ],
+        [
+          2.396,
+          5,
+          22,
+          "W",
+          108.732,
+          "U"
+        ],
+        [
+          2.699,
+          15,
+          22,
+          "W",
+          105.164,
+          "U"
+        ],
+        [
+          2.8,
+          4,
+          22,
+          "W",
+          107.373,
+          "U"
+        ],
+        [
+          2.482,
+          3,
+          23,
+          "W",
+          3.908,
+          "W"
+        ]
+      ]
+    },
+    {
+      "n": 48,
+      "m": 204,
+      "prior": 2,
+      "cdcl": 16,
+      "lift": 0,
+      "sat": 13,
+      "unsat": 3,
+      "prior_median_ms": 37.287,
+      "cdcl_median_ms": 2.625,
+      "parse_median_ms": 0.735,
+      "conflicts_median": 26.5,
+      "conflicts_max": 76,
+      "min_fill_width": [
+        30,
+        34
+      ],
+      "cases": [
+        [
+          2.765,
+          4,
+          33,
+          "W",
+          39.96,
+          "U"
+        ],
+        [
+          2.604,
+          66,
+          33,
+          "E",
+          37.203,
+          "U"
+        ],
+        [
+          2.557,
+          69,
+          30,
+          "E",
+          37.214,
+          "U"
+        ],
+        [
+          2.555,
+          47,
+          33,
+          "W",
+          37.35,
+          "U"
+        ],
+        [
+          2.615,
+          38,
+          33,
+          "W",
+          37.225,
+          "U"
+        ],
+        [
+          2.879,
+          76,
+          33,
+          "E",
+          37.482,
+          "U"
+        ],
+        [
+          2.493,
+          69,
+          33,
+          "W",
+          38.427,
+          "U"
+        ],
+        [
+          2.782,
+          9,
+          32,
+          "W",
+          36.804,
+          "U"
+        ],
+        [
+          2.275,
+          19,
+          33,
+          "W",
+          37.351,
+          "U"
+        ],
+        [
+          2.887,
+          52,
+          34,
+          "W",
+          37.156,
+          "U"
+        ],
+        [
+          2.554,
+          8,
+          33,
+          "W",
+          5.342,
+          "W"
+        ],
+        [
+          2.658,
+          5,
+          33,
+          "W",
+          37.382,
+          "U"
+        ],
+        [
+          2.307,
+          8,
+          33,
+          "W",
+          35.914,
+          "U"
+        ],
+        [
+          2.636,
+          15,
+          33,
+          "W",
+          44.716,
+          "U"
+        ],
+        [
+          2.692,
+          34,
+          32,
+          "W",
+          38.282,
+          "U"
+        ],
+        [
+          2.71,
+          9,
+          32,
+          "W",
+          5.242,
+          "W"
+        ]
+      ]
+    }
+  ],
+  "threshold_case_columns": [
+    "cdcl_solve_ms",
+    "conflicts_or_zero_if_absent",
+    "min_fill_width",
+    "cdcl_status",
+    "prior_wall_ms",
+    "prior_status"
+  ],
+  "graph_rows": [
+    {
+      "v": 6,
+      "gap": 3,
+      "expansion": "5/3",
+      "mask": 7,
+      "rows": [
+        [
+          "and",
+          false,
+          18,
+          168,
+          0.81,
+          21.917,
+          0,
+          6801,
+          11
+        ],
+        [
+          "and",
+          true,
+          18,
+          176,
+          1.918,
+          2.953,
+          571,
+          8874,
+          11
+        ],
+        [
+          "majority",
+          false,
+          27,
+          1536,
+          7.751,
+          2.642,
+          0,
+          70200,
+          17
+        ],
+        [
+          "majority",
+          true,
+          27,
+          1536,
+          20.948,
+          236.023,
+          23954,
+          127652,
+          17
+        ],
+        [
+          "random",
+          false,
+          27,
+          1528,
+          8.362,
+          24.676,
+          1,
+          73001,
+          17
+        ],
+        [
+          "random",
+          true,
+          27,
+          1536,
+          21.646,
+          98.526,
+          13446,
+          134394,
+          17
+        ]
+      ]
+    },
+    {
+      "v": 8,
+      "gap": 1.2679491924311224,
+      "expansion": "1",
+      "mask": 22,
+      "rows": [
+        [
+          "and",
+          false,
+          24,
+          224,
+          1.128,
+          2.823,
+          0,
+          10171,
+          9
+        ],
+        [
+          "and",
+          true,
+          24,
+          232,
+          2.386,
+          4.941,
+          846,
+          12346,
+          9
+        ],
+        [
+          "majority",
+          false,
+          36,
+          2048,
+          10.248,
+          3.51,
+          0,
+          98831,
+          14
+        ],
+        [
+          "majority",
+          true,
+          36,
+          2048,
+          26.522,
+          112.355,
+          17873,
+          174882,
+          14
+        ],
+        [
+          "random",
+          false,
+          36,
+          2024,
+          10.421,
+          3.872,
+          12,
+          105641,
+          14
+        ],
+        [
+          "random",
+          true,
+          36,
+          2024,
+          29.064,
+          64.669,
+          10824,
+          191362,
+          14
+        ]
+      ]
+    },
+    {
+      "v": 12,
+      "gap": 0.6283262579697855,
+      "expansion": "3/5",
+      "mask": 1558,
+      "rows": [
+        [
+          "and",
+          false,
+          36,
+          336,
+          1.483,
+          3.416,
+          0,
+          19863,
+          9
+        ],
+        [
+          "and",
+          true,
+          36,
+          344,
+          3.847,
+          6.656,
+          1161,
+          20766,
+          9
+        ],
+        [
+          "majority",
+          false,
+          54,
+          3072,
+          15.845,
+          5.13,
+          0,
+          170421,
+          14
+        ],
+        [
+          "majority",
+          true,
+          54,
+          3072,
+          43.541,
+          402.968,
+          41211,
+          282194,
+          14
+        ],
+        [
+          "random",
+          false,
+          54,
+          3064,
+          16.344,
+          5.799,
+          317,
+          184679,
+          14
+        ],
+        [
+          "random",
+          true,
+          54,
+          3064,
+          74.874,
+          62.256,
+          9312,
+          295910,
+          14
+        ]
+      ]
+    },
+    {
+      "v": 16,
+      "gap": 0.24683945168174004,
+      "expansion": "1/3",
+      "mask": 47424,
+      "rows": [
+        [
+          "and",
+          false,
+          48,
+          448,
+          2.015,
+          2.839,
+          0,
+          34931,
+          9
+        ],
+        [
+          "and",
+          true,
+          48,
+          456,
+          4.932,
+          7.511,
+          1250,
+          31874,
+          9
+        ],
+        [
+          "majority",
+          false,
+          72,
+          4096,
+          20.889,
+          5.269,
+          0,
+          268315,
+          14
+        ],
+        [
+          "majority",
+          true,
+          72,
+          4096,
+          53.727,
+          424.162,
+          50698,
+          413122,
+          14
+        ],
+        [
+          "random",
+          false,
+          72,
+          4104,
+          20.791,
+          4.888,
+          5,
+          288105,
+          14
+        ],
+        [
+          "random",
+          true,
+          72,
+          4104,
+          58.532,
+          65.806,
+          9407,
+          413010,
+          14
+        ]
+      ]
+    }
+  ],
+  "graph_case_columns": [
+    "gadget",
+    "odd",
+    "n",
+    "clauses",
+    "lift_wall_ms",
+    "cdcl_solve_ms",
+    "conflicts_or_zero_if_absent",
+    "lift_logical_used",
+    "min_fill_width"
+  ],
+  "limits": [
+    "Both lift and CDCL completed all 24 gadgets; prior only even AND at v6. Graph h enumerated over all nonempty subsets <=v/2; gap floating numerical. No uniform expander theorem; min-fill selected width is upper bound, not optimum.",
+    "Truth table lift is bounded arity polynomial normalization + linear inconsistency; consistent lifted monomial vector does not imply original realizability. Native receiver only, no native checker or actual kernel receipt. No universal endpoint."
+  ]
+}
