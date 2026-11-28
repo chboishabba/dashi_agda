@@ -19,3 +19,8 @@ import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact
 import DASHI.Biology.Agriculture.BNFSevenGenerationPlanningExact
 import DASHI.Biology.Agriculture.BNFSevenGenerationRobustnessExact
 import DASHI.Core.IntergenerationalPlanningHorizonExact
+
+import DASHI.Governance.RelationalFederationEducationFormationExact
+import DASHI.Education.DigitalESDJointHyperfabricConsumerExact
+import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapBrownExtensionExact
+import DASHI.JohnAnthonyBrownReceptionAdaptiveEverything
