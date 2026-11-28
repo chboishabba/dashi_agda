@@ -2376,3 +2376,83 @@ shifted* Cauchy wing tail with those coefficient masses
 via native |X|^c power extraction. Only then consume the
 original Bishop zero receiver. Do not fabricate native
 acceptance or claim the Clay programmes solved.
+
+
+### Section 34B — original A/B factorial ratios source-written to the native Bishop order (28 Nov 2026)
+
+After Section34's generic finite ratio-bank, additional original CMP102
+source was committed on master-compatible Agda #1536:
+
+* `DASHI/Physics/YangMills/YMClayCMP102OriginalFactorialNatGrowthExact.agda`
+  commit 1cce38a701389c8def9a4daf655412324559d98d.
+  Proves source Nat factorial predecessor/successor denominator
+  growth for **ALL n**:
+    12 * (2n+2)! <= (2n+4)!,
+    20 * (2n+3)! <= (2n+5)!.
+  The proof consumes the literal original `E.evenExponent`,
+  `E.oddExponent`, `E.factorial` and Nat multiplication
+  monotonicity / associativity. It proves minimum two-factor
+  denominator products (4*3 and 5*4), with the actual odd
+  exponent nonzero endpoint shown, not inferred from a finite run.
+* `DASHI/Physics/YangMills/YMClayCMP102OriginalFactorialRatioBishopExact.agda`
+  commit 891191ce1fdb03d5aae1a43bbc70d468e8eae412.
+  Transports the SAME original factorial Nat denominator inequalities
+  into the original unnormalised-rational `Q.*≤*` and
+  Bishop real `P.p≤q⇒p⋆≤q⋆`, with real multiplication
+  `P.⋆-distrib-*` equality. Thus the previous
+  `Mass.OriginalARatio` and `OriginalBRatio` inputs
+  have now **source-written proof producers**, not independent
+  declarations. On that source graph the original literal
+  `Seq.SeriesOf aCoefficient` and `bCoefficient` have
+  unconditional source-written bounds 6/11 and 10/57 for all counts,
+  derived from the new finite budget invariant.
+* `YMClayCMP102Section34FactorialMassAcceptanceExact.agda`
+  expanded commit 1fc6bddac76928ba666713fa4dad97a4cd72fec3.
+  This entrypoint now checks the new factorial Nat growth,
+  source-rational Bishop step, and actual no-premise A/B
+  mass ceiling theorems in addition to the shifted original
+  Cauchy wing order. It has NOT actually been compiled.
+
+**Native status:** These are complete new proof bodies in the branch,
+not compiler-elaborated theorems. A failure at the rational
+cross-product definitional equality or Bishop semiring congruence
+would require proof-term repair; no native compiler/toolchain is
+installed, so no such elaboration or pinned `--safe` acceptance
+is claimed. They are not yet kernel-verified.
+
+**Exactly one mathematical scalar source weld remains conceptually:**
+Combine actual shifted A/B positive Cauchy wings (at the
+correct `c-1` and `c-2` triangle cuts), the last original
+B coefficient, the now source-written finite coefficient masses,
+and actual Bishop `|X|^c` monomial factorization/order to prove
+`OriginalPositiveTailOrder X`:
+  all n: |originalSignedCauchyTail(X,n)|
+       <= |3 * bishopQuarter^(suc n)|
+for all original signed `|X| <= bishopQuarter`.
+Also pay `OriginalZeroCountOrder` from G_0=1<=3 and run
+the already-written original absolute-rate receiver and native
+compile. This is scalar original CMP102 ONLY and cannot
+substitute interacting 4D physical connected Wilson CMP116,
+F19 shared plaquette, OS, nontriviality or same-H mass gap.
+
+**Execution parity improvement:** `/mnt/data/check_clay_section34_factorial_ratio_mass.py`
+was run locally, 4,110/4,110 exact Fraction assertions PASS;
+its Git blob SHA was computed as
+`bf26a44fb6a6ca53fa45ba930fe1f008875ff12b`,
+exactly matching the GitHub-fetched blob SHA for committed
+`scripts/check_ym_cmp102_section34_factorial_ratio_mass.py`
+(commit 53c1ae9cf49da9d05af45463f34ad12f4528d4dd).
+Unlike prior tranches, the committed script IS byte-identical
+to the executed local source. This verifies arithmetic only,
+not the Agda kernel or original interacting Yang–Mills physics.
+
+The other five true Clay proof frontiers are unchanged:
+NS original one-flow signed nonlinear cutoff-uniform transfer
+and continuum admission; BSD actual selected complex L-jet
+Mellin/Sha/analytic-rank equality; Hodge global proper primitive
+algebraic cycle and pairing beyond the already-paid affine proper
+and five+five fibres; RH trusted pinned external RH proof
+admission/axiom audit, not statement equivalence alone; PNP
+unrestricted SAT sharing-stable machine internal work and
+full bit/control ABI (or a genuine polynomial algorithm).
+No source wrote or claimed those endpoints in this tranche.
