@@ -2863,3 +2863,171 @@ module At {r : Level} (F : C.RealField r)
   -- nonlinear moving-wall source at nonzero mean. The kernel must
   -- verify all-order product proofs and actual source ownership before
   -- treating it as a proof of an evolving Einstein–Israel boundary.
+
+  ------------------------------------------------------------------------
+  -- BR68: actual BR34 nonzero-MEAN coordinate Codazzi and metric force.
+  -- Reuse exact reference gaugeCodazzi, gaugeGauss, meanForce and
+  -- distinct D/E prefixes. The general coordinate Codazzi differs
+  -- from the reference parallel-frame form by the original mean M
+  -- and HALF-jump terms; do not double count them.
+  ------------------------------------------------------------------------
+
+  originalBR68GaugeCorrection : S → (Wall → Wall → S) →
+    Cov → Cov → Vec
+  originalBR68GaugeCorrection j M p m a =
+    neg (two * sum4 (λ b →
+      M a b * sign b * (p (wall b) - m (wall b))))
+      - half * j * (p (wall a) + m (wall a))
+
+  originalBR68PhysicalGaugeCodazzi : S → (Wall → Wall → S) →
+    Vec → Cov → Cov → Cov → Cov → Vec
+  originalBR68PhysicalGaugeCodazzi j M q p px m mx a =
+    gaugeCodazzi j q p px m mx a
+      + originalBR68GaugeCorrection j M p m a
+
+  originalBR68MeanForceCorrection : S → Tensor → Tensor → S
+  originalBR68MeanForceCorrection mean p m =
+    neg (four * mean * (scale p + scale m))
+
+  originalBR68PhysicalMeanForce : S → S → Vec →
+    Tensor → Tensor → Tensor → Tensor → S
+  originalBR68PhysicalMeanForce mean j q p px m mx =
+    meanForce j q p px m mx
+      + originalBR68MeanForceCorrection mean p m
+
+  -- The source correction ONLY changes the four gauge-Codazzi rows
+  -- and the final metric mean-force row. The original BR34 normal
+  -- Gauss row and the D/E-prefix allocations are retained as owned.
+  record OriginalBR68BoundaryPayments : Set r where
+    constructor originalBR68BoundaryPayments
+    field
+      originalGaugeD originalGaugeE : List S
+      physicalGaugeCodazziFour : Vec
+      physicalGaugeGauss : S
+      originalMetricD originalMetricE : List S
+      physicalMeanForce : S
+      gaugeMeanResidual : Vec
+      metricMeanResidual : S
+  open OriginalBR68BoundaryPayments public
+
+  assembleOriginalBR68BoundaryPayments :
+    S → S → (Wall → Wall → S) → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Cov → Cov → Cov → Cov → OriginalBR68BoundaryPayments
+  assembleOriginalBR68BoundaryPayments mean j M q
+    p px m mx c cx d dx =
+    originalBR68BoundaryPayments
+      (gaugeRows D j q c cx d dx)
+      (gaugeRows E j q c cx d dx)
+      (originalBR68PhysicalGaugeCodazzi j M q c cx d dx)
+      (gaugeGauss j q c cx d dx)
+      (metricRows D j q p px m mx)
+      (metricRows E j q p px m mx)
+      (originalBR68PhysicalMeanForce mean j q p px m mx)
+      (originalBR68GaugeCorrection j M c d)
+      (originalBR68MeanForceCorrection mean p m)
+
+  ------------------------------------------------------------------------
+  -- BR69: all-order PHYSICAL coordinate Codazzi/mean force derivatives,
+  -- using the ORIGINAL BR52 divided Taylor jet product. Every
+  -- nonzero mean M, Israel jump j, metric ell and covector channel
+  -- retains its independent time jets through order eight.
+  ------------------------------------------------------------------------
+
+  record OriginalBR69SourceTower : Set r where
+    constructor originalBR69SourceTower
+    field
+      coordinateMeanTensor : Wall → Wall → DividedJet
+      coordinateMeanScalar : DividedJet
+      coordinateIsraelJump : DividedJet
+      plusGaugeValue minusGaugeValue : Wall → DividedJet
+      plusScaleValue minusScaleValue : DividedJet
+  open OriginalBR69SourceTower public
+
+  originalBR69CodazziCorrection : OriginalBR69SourceTower →
+    Nat → Vec
+  originalBR69CodazziCorrection d n a =
+    neg (two * sum4 (λ b →
+      sign b * jetProduct
+        (coordinateMeanTensor d a b)
+        (λ k → plusGaugeValue d b k - minusGaugeValue d b k) n))
+    - half * jetProduct
+        (coordinateIsraelJump d)
+        (λ k → plusGaugeValue d a k + minusGaugeValue d a k) n
+
+  originalBR69MeanForceCorrection : OriginalBR69SourceTower →
+    DividedJet
+  originalBR69MeanForceCorrection d =
+    jetScale (neg four)
+      (jetProduct (coordinateMeanScalar d)
+        (jetSum (plusScaleValue d) (minusScaleValue d)))
+
+  record OriginalBR69NonlinearSourceDebt : Set r where
+    constructor originalBR69NonlinearSourceDebt
+    field
+      originalPhysicalSources : OriginalBR69SourceTower
+      graphShapeHessianDebt : Nat → Wall → Wall → S
+      movingUnitNormalDebt : Nat → Cov
+      curvedConnectionDebt : Nat → Cov
+      originalPhysicalGaussDebt : Nat → S
+      originalIsraelMeanDebt : Nat → S
+  open OriginalBR69NonlinearSourceDebt public
+
+  ------------------------------------------------------------------------
+  -- BR70: actual moving material GAUGE tangent/normal frame.
+  -- c_a=e_a^mu C_mu=C_a+f_a C_n.
+  -- c_perp=n^mu C_mu, n^mu=g^{mu nu}F_nu/sqrt(z), z>0.
+  -- C_n != c_perp on a general shifted/tilted ADM graph. The
+  -- physical plus/minus gauge frame and its inverse are real
+  -- geometric data, not postulated identities of coordinate traces.
+  ------------------------------------------------------------------------
+
+  materialGaugeTangent : MaterialGraphGradient → Cov → Vec
+  materialGaugeTangent f c a =
+    c (wall a)
+      + (neg (materialDefiningCovector f (wall a))) * c normal
+
+  record OriginalBR70UnitNormal : Set r where
+    constructor originalBR70UnitNormal
+    field
+      sourceADM : ADMPhysicalPoint
+      sourceGraph : MaterialGraphGradient
+      sourceNormalSquared : S
+      sourceNormalLength : S
+      sourceNormalReciprocal : S
+      originalContravariantNormal : Cov
+      retainedSourceNormalResidual : S
+  open OriginalBR70UnitNormal public
+
+  materialGaugeNormal : OriginalBR70UnitNormal → Cov → S
+  materialGaugeNormal n c =
+    sum5 (λ a → originalContravariantNormal n a * c a)
+
+  record OriginalBR70GaugePhysicalPair : Set r where
+    constructor originalBR70GaugePhysicalPair
+    field
+      plusPhysicalNormal minusPhysicalNormal : OriginalBR70UnitNormal
+      plusOriginalCovector minusOriginalCovector : Cov
+      plusPhysicalTangent minusPhysicalTangent : Vec
+      plusPhysicalNormalValue minusPhysicalNormalValue : S
+      physicalTangentialJump : Vec
+      physicalNormalJump : S
+  open OriginalBR70GaugePhysicalPair public
+
+  assembleOriginalBR70GaugePhysicalPair :
+    OriginalBR70UnitNormal → OriginalBR70UnitNormal →
+    Cov → Cov → OriginalBR70GaugePhysicalPair
+  assembleOriginalBR70GaugePhysicalPair np nm cp cm =
+    originalBR70GaugePhysicalPair np nm cp cm
+      (materialGaugeTangent (sourceGraph np) cp)
+      (materialGaugeTangent (sourceGraph nm) cm)
+      (materialGaugeNormal np cp)
+      (materialGaugeNormal nm cm)
+      (λ a → materialGaugeTangent (sourceGraph np) cp a
+        - materialGaugeTangent (sourceGraph nm) cm a)
+      (materialGaugeNormal np cp - materialGaugeNormal nm cm)
+
+  -- The positive normal-length law, inverse frame and actual
+  -- nonlinear graph harmonic-gauge derivative remain separate
+  -- evidence obligations. BR70 constructs the same-source data
+  -- that must enter BR68/69 instead of pretending C_n=c_perp.
