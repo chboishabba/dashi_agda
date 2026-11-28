@@ -265,6 +265,8 @@ PARTS["terminal"] += [("BR292.geometry7","check_hopf369_br292_geometry_inverse.p
 
 PARTS["terminal"] += [("BR293.cmc7","check_hopf369_br293_cmc_york.py",()),("BR293.cmc9","check_hopf369_br293_cmc_york.py",("--n","9"))]
 
+PARTS["terminal"] += [("BR294.parity7","check_hopf369_br294_parity.py",()),("BR294.parity9","check_hopf369_br294_parity.py",("--n","9"))]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
