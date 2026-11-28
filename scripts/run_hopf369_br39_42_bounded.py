@@ -229,6 +229,10 @@ PARTS["terminal"].append(("BR224.composed_energy","check_hopf369_br224_composed_
 
 PARTS["terminal"] += [(f"BR225229.{p}","check_hopf369_br225_229_endpoint_welds.py",("--part",p)) for p in ("periodic","g3","g4","material","atomic")]
 
+PARTS["terminal"] += [(f"BR230233.{p}","check_hopf369_br230_233_dynamic_cut.py",("--part",p)) for p in ("periodic","g4","material")]
+
+PARTS["terminal"] += [(f"BR237239.{p}","check_hopf369_br237_239_geometry.py",("--part",p)) for p in ("wall","material","scaling")]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
