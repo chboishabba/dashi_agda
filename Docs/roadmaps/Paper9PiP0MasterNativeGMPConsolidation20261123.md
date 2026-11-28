@@ -2800,3 +2800,45 @@ Geometry-forward construction: (1) actual original column reflection at nodes -2
 
 ### Newton zero-based index audit and exact regression (28 Nov 2026)
 The first inspection of FullIntegerMatrixExact.nextE incorrectly assumed divPositive numerator d divides by d; commit d70545c8 was consequently WRONG and immediately reversed by d316d8ef. Actual owner CM163BishopHecke41IntegerPrefixCertificateExact.divPositive (+ n) d = + (n / suc d); the correct nextE numerator k divides by k+1 via this API. The canonical code at d316d8ef is restored and explicitly documents the API. Do not re-introduce the extra successor. New scripts/check_paper9_newton_gate_indexing.py commit 66631e4b audits this source contract and checks elementary Newton polynomials for degrees 1,2,3,5,7,41, plus off-by-one negative control. Independent equivalent local exact arithmetic: 19/19 PASS. Committed script itself not run against a fresh checkout; Agda checker/compiler not run. This is not a claim that all 41 Hecke q-series Newton gates pass. Next prioritize whether FullIntegerMatrix candidate matches its four gates; if not, repair candidate's Laurent indexing using original cyclic norm source before considering analytical promotion.
+
+## P0 all-node coarse closure implementation — 28 November 2026
+
+This is a **whole-proof backsolve**, not solvedness promotion. Current branch PR #1546 head 6b1d83fafb843e06ce159c2f64a4fe2cdcb2eba1; base master (a compare against PR base reported 75 new master commits, zero file-path hits by targeted Paper9/Hecke/CM163 filter). GitHub search for "CM163 Hecke" found only PR #1546. This is not an exhaustive historical PR content audit.
+
+### Concrete newly implemented G2 owner
+- `DASHI/Moonshine/CM163BishopHecke41AllIntegerNodesExact.agda` (commits abfb4fc3 and 6b1d83fa): instantiate the SAME `FullIntegerMatrixExact.originalMatrix` at each of 43 integral targets Y=0..42; construct a `Dec` of their dependent `Through 42` reflection gate; extract each witness by existing `IntegerPrefixCertificateExact.throughAt`; attach existing `IntegerSpecializationReflectionExact.For.zeroPrefix` and `poleRemoved`; factor the exact global `NodeZero` obligation; consume its witness in `IntegerSpecializationExact.For.actualIdentity`. All source-written, uncompiled, not assumed true. Node-zero still requires a sound global rigidity result and is NOT obtained just from finite prefix/vanishing cusp limit. This implementation does not make a 43-node equality proof into an analytic identity.
+- Exact certificate boundary: `Cert.UnitGate` (already `NativeFiniteAcceptanceExact.At.unitChecked`), `FullIntegerMatrixExact.originalNewtonCheck`, `originalColumnCheck`, `originalSymmetryCheck`, `originalPacketCheck` and `AllIntegerNodesExact.At.nodes?`. These are independent decisions. Existing generator `divPositive numerator k` divides by `suc k`, as documented by d316d8ef.
+- Avoid independent 43 arbitrary external Gate assumptions: use the single `NodeGates` object. Preserve the `For` module's original degree-42 column, exact original product and ramified phase. Do not replace `NodeZero` with `poleRemoved`.
+
+### Existing constructors verified by source inspection
+| Geometry region | Owner | Existing precise constructor / source boundary |
+|---|---|---|
+| Exact CM carrier and cusp | `BishopConcreteElementaryCutsetExact`, `CM163BishopOriginalPhaseHeckeCuspWeldExact` | `concreteCutset`, `ConcreteOriginal`, `ActualCuspRay`, `diagonalCuspZero`, `sliceCuspZero` (ray prerequisite remains) |
+| Prefix and source gate | `CM163BishopHecke41NativeFiniteAcceptanceExact` | `unitChecked`, `diagonalChecked`, `sliceChecked` |
+| Matrix arithmetic | `CM163Hecke41FullIntegerMatrixExact` | `candidate`, `originalNewtonCheck`, `originalColumnCheck`, `originalSymmetryCheck`, `originalPacketCheck` |
+| Arbitrary Y | `CM163BishopHecke41IntegerSpecializationReflectionExact` | `At.For.gate?`, `zeroPrefix`, `poleRemoved` |
+| Original analytic Y residual | `CM163BishopHecke41ArbitrarySliceResidualExact` | `At.For.residual`, `invariantS`, `invariantT`, `poleRemoved` |
+| Finite 43 Y node unification | `CM163BishopHecke41AllIntegerNodesExact` | `NodeGates`, `nodes?`, `nodeAt`, `NodeZero`, `nodeIdentity` |
+| Polynomial fibre | `CM163BishopHecke41SignedParameterProductExact` | `foldPositive`, `foldNegative`, even/odd signed parameter fibre |
+| Original 2-variable reverse readback | `CM163BishopHecke41MatrixSymmetryExact` | `symmetric`, `fixedSlice`, `selected0`, `selected1`, `originalCenterSlope`, `Closure` |
+| Analytic reciprocal map | `JInvariantBishopCM163ReciprocalGeometryExact` | `forwardDiskCleared`, `reverseDiskCleared`, `p0,m0,p1,m1` |
+| Jet transport | `CM163BishopHecke41ActualJLogPhaseJetExact`, `SecondJetCalculusExact` | `actualLogJet`, `compose`, `actualPhase2` |
+| Actual ray terminal | `CM163BishopHecke41SignedRayExtractionExact` | `rayFromActual`, exact signed `literalResidual` |
+| Native period | `JInvariantBishopCM163LiteralTerminalExact` | `OriginalRayResidual`, `allRawFromDiagonalAndRay` |
+
+### Exact remaining maximal welds (topological ordering, proof terms required)
+**G finite**: verify all four original matrix gates and `nodes?` using actual integer witnesses. If any is no, resolve `FullIntegerMatrixExact.coeff` signs, negative e41 mode, `candidate` orientation, and `MatrixSymmetryExact.expo/sliceCoefficient` *first*. Do not convert Boolean or hash receipts into proofs.
+
+**G analytic**: for each node y, `NodeZero`: start from `For.poleRemoved` and exact S/T invariance; show the residual is an actual pole-free holomorphic weight-zero modular function on the compactified quotient, with normalized cusp constant zero, or directly prove global equality via unique analytic (j)-polynomial. This is the critical still-unwritten mathematical theorem in Bishop Agda. A generic invariant function with cusp zero is insufficient (e.g. 1/j). Reuse source `Paper9HeckePoleRemoval` Lean companion where valid, but do not conflate Lean and Agda proofs.
+
+**G polynomial**: explicit degree-42 `Y` bound for product from `SignedParameterProductExact.foldPositive`; degree-42 bound for matrix from `MatrixSymmetryExact.matrix`; constructive uniqueness across 43 distinct integer nodes, using integral apartness (Vandermonde product or forward differences); transport `nodeIdentity` to `FullIdentity` for all real Y. Exactly *this* interpolation is valid, not extrapolating in tau. Once FullIdentity exists, use same source to derive diagonal `d=0` and slice `s=0` by certified specializations/diagonal transport, not independent assumptions.
+
+**R disk**: explicit original `tau(w)=tau_*+d w/(1-w)` and proof UpperHalfPlane membership/denominator apartness for a dyadic real w_n→0, w_n≠0; original reciprocal chart words become alpha*w and beta*w by `forwardDiskCleared`/`reverseDiskCleared`, not an assumed rotated-j identity. Build the actual exponent increment and prove its Inside/bounds for `ActualJLogPhaseJetExact.At.Around.actualLogJet`. Reuse one central j two-jet and reparametrize alpha/beta, rather than prove three independent Taylor series. Carry exact normalized branch identities, all chart convergence via original uniform series continuity, and the actual forty-factor slope from G. Then `SignedRayExtractionExact.rayFromActual` produces `OriginalRayResidual`.
+
+**T terminal**: reuse `MatrixSymmetryExact.At.Closure.ray` and `allRaw`; canonical Chudnovsky raw and GMP same-real/scale budget owners, with independent local (not GitHub CI) verification. Do not treat source-written unexecuted Agda as kernel-proved.
+
+### Fail-closed acceptance order
+1. Local Python preflight scripts: `check_paper9_newton_gate_indexing.py`, `check_paper9_hecke41_nodes.py`, original `check_cm163_source_bound_jet.py`, and original pinned source scripts, with reproducible logs.
+2. Agda smallest imports: `FullIntegerMatrixExact` → `IntegerSpecializationReflectionExact` → `AllIntegerNodesExact` → `MatrixSymmetryExact`; check finite gate reduction in isolated entrypoints, checkpoint if huge.
+3. Agda global analytic/polynomial uniqueness producers independently, then disk-geometry/jet proof cone independently, then combined closure.
+4. Native GMP original same-real and performance acceptance. No GitHub CI use. Keep no generated standalone chat files.
