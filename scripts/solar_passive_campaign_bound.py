@@ -62,6 +62,17 @@ def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_t
     return dict(reflection_lower_exact=str(lower),parameter_error_exact=str(error),
                 scope='conditional rational trace enclosure; coefficient and midpoint rounding premises required')
 
+def rational_restoration_exclusion(field,center_error,parameter_error,atol):
+    """Exact triangle-inequality exclusion on the binary frozen-event chart."""
+    from fractions import Fraction as F
+    q=lambda v:F(v) if isinstance(v,(str,F,int)) else F(float(v))
+    e,p,t=map(q,(center_error,parameter_error,atol))
+    if min(e,p,t)<0: raise ValueError('negative error/return allowance')
+    norm2=sum((q(v)**2 for v in field),F(0))
+    threshold=(e+p+t)**2
+    return dict(excluded=norm2>threshold,center_norm2=str(norm2),
+                squared_return_radius=str(threshold))
+
 def bound_layout(material,cfg,ids,budget,max_boxes=8):
     from solar_spherical_cycle import cycle,geometry
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
@@ -72,7 +83,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
     ceiling=float(incident-cfg['max_cycles']*cfg['auxiliary_J'])
     port=float(cfg['source_coupling_sqrt_inv_s']); edge=int(cfg['source_edge'])
     seq=0; queue=[]; replay_count=0; failed=0; best=None
-    rational_candidates=[]
+    rational_candidates=[]; restoration_exclusions=[]
     from fractions import Fraction as F
     exact_ceiling=None
     if cfg.get('retain_stage_residuals',False):
@@ -101,7 +112,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
             center_feasible=bool(mid.sum()<=budget)
         if np.any(mid<lo) or np.any(mid>hi):
             raise ArithmeticError('invalid box center')
-        cc=dict(cfg,fixed_horizon=True,retain_sensitivity=True,retain_history=False,
+        cc=dict(cfg,fixed_horizon=True,retain_sensitivity=True,retain_history=exact_ceiling is not None,
                 heating_W=np.zeros_like(cfg['heating_W']),load_rate_s_inv=mid)
         upper=parent_upper
         try:
@@ -111,6 +122,12 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 rational_candidates.append(rational)
                 rational_upper=exact_ceiling-F(rational['reflection_lower_exact'])
                 upper=min(upper,rational_upper)
+                field=np.asarray(out['history'][-1])[:ne+nf+9*len(vol)]
+                ex=rational_restoration_exclusion(field,out['exact_frozen_population_solve_error'],
+                    rational['parameter_error_exact'],cfg.get('return_atol',[1e-10]*4)[0])
+                if ex['excluded']:
+                    restoration_exclusions.append(dict(lo=lo.tolist(),hi=hi.tolist(),**ex))
+                    return
             else:
                 en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 upper=min(upper,ceiling-en['reflection_lower_J'])
@@ -133,6 +150,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
         h=hi.copy(); h[j]=m
         l=lo.copy(); l[j]=m
         box(lo,h,-neg);box(l,hi,-neg)
+    no_restored_chart=bool(exact_ceiling is not None and not queue)
     upper=max((-item[0] for item in queue),default=exact_ceiling if exact_ceiling is not None else ceiling)
     if best is not None and best>upper+1e-8*max(1.,abs(upper)):
         raise ArithmeticError('candidate enclosure violated by replay')
@@ -142,6 +160,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
                 gap_J=None if best is None else float(upper-best),
                 rational_trace_candidates=rational_candidates,
+                restoration_exclusions=restoration_exclusions,
+                no_restored_passive_on_binary_chart=no_restored_chart,
                 outward_rounding_certified=False,physical_admission=False)
 
 def fixtures():
