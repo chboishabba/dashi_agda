@@ -183,6 +183,8 @@ PARTS["terminal"] += [(f"BR192196.{p}","check_hopf369_br192_196_source_endpoint.
 
 PARTS["terminal"] += [(f"BR197201.{p}","check_hopf369_br197_201_terminal_welds.py",("--part",p)) for p in ("cartan","marked","analytic","primitive","receiver")]
 
+PARTS["terminal"].append(("BR202.projector","check_hopf369_br202_physical_projector.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

@@ -5305,3 +5305,24 @@ remain source-specific; no new Monster class equivalence.
 F8 #1547 latest donor edba26d4b8a8c6351140c10f55a69ba6955c2086
 still requires actual normal/PDE residual enclosure.
 No sibling edits or local/kernel/CI acceptance.
+
+
+## 38. BR202 — actual physical projector and local partial replay
+
+Independent local SymPy 1.14 reconstruction of original BR27/143
+axial carrier passed all six BR197 covectors, null eigen-equations
+and BR181 left inverse; spatial relative Gram trace K=69.
+Five BR187 radial values independently evaluated exactly.
+Actual physical projector F=N(N^T G N)^-1 N^T G,
+N=ker(D_x X), equals (4/3) A_x²(A_x²-I/4).
+It commutes with A_x, has rank 10, G-self-adjoint, and
+A_x² F=F; complement rank 25 obeys (A_x³-A_x/4)(I-F)=0.
+Axial independent replay PASS; combined quotient inverse attempt
+TIMEOUT 90s. Do not promote quotient inverse.
+New original-consuming BR202 checker tests all four axes;
+registered as terminal stage 24, committed-unrun.
+Receipt Artifacts/hopf369/br202_independent_local_receipt_20261128.txt.
+No byte-identical repository replay because checkout DNS blocked.
+Remaining analytic weld: variable projector derivative and
+boundary source transport on actual metric, not flat rank alone.
+Other lanes remain as section 37. No new native/continuum acceptance.

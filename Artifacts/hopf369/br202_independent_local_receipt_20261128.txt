@@ -1,0 +1,19 @@
+Local independent reconstruction, SymPy 1.14.0, 2026-11-28.
+Not byte-identical repository replay. Direct git checkout blocked by DNS.
+Exact reconstructed BR27/143 algebraic carrier, axial direction:
+tau 0 kernel 0
+coercivity trace 69
+tau 1/2 kernel 0
+tau -1/2 kernel 0
+tau 1 kernel 5
+tau -1 kernel 5
+tau 2 kernel 0
+Both null kernels satisfy actual characteristic eigen-equations.
+Radial integrals: 77/512, 83/512, 45/512, 93/512, 45/512.
+Independent physical projector: rank 10, complement rank 25;
+idempotence, G-self-adjointness, commutation, A²F=F,
+(A³-A/4)(I-F)=0, F=4/3 A²(A²-I/4): PASS axial.
+Combined follow-on attempt including quotient inverse TIMEOUT at 90s.
+Split projector-only independent replay exit zero.
+No full committed runner, all-axis BR202, quotient inverse, native kernel,
+PDE or empirical acceptance.
