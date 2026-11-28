@@ -104,7 +104,7 @@ def main():
         import bridge_macro_common as bridge
         from sympy import prime
         # Repeated bit swaps across two RREF moves must not loop or reorder.
-        H=((7,1),);t=trace(3,(7,),H,(1,),7,1,Budget(100000))
+        H=((7,1),);t=trace(3,(7,),H,(1,),7,4,Budget(100000))
         assert t is not None
         L=sum(len(m['units']) for m in t['macros'])
         p=tuple(int(prime(i)) for i in range(1,3*3+L+2))
