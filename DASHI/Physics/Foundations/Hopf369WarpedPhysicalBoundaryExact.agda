@@ -2248,3 +2248,52 @@ module At {r : Level} (F : C.RealField r)
   -- time-derivative and mixed-tangential jets of BR52 with the physical
   -- field, the curvature Bianchi source of BR55 with BR29's actual
   -- rank-nine projected wall graph, and preserve BR31's weighted domain.
+
+  ------------------------------------------------------------------------
+  -- BR52/58: native kernel-targeted low-order SPLIT identities.
+  -- These use definitional reduction of the exact divided-Taylor
+  -- recurrence, not an unchecked commutative-ring rewrite or postulate.
+  -- Higher-order coefficients are constructed by the same recursion;
+  -- analytic derivative/normal trace identities are separate.
+  ------------------------------------------------------------------------
+
+  jetProductAtZero : (f g : DividedJet) →
+    jetProduct f g zero ≡ f zero * g zero
+  jetProductAtZero f g = refl
+
+  jetProductAtOne : (f g : DividedJet) →
+    jetProduct f g (suc zero) ≡
+      f (suc zero) * g zero + f zero * g (suc zero)
+  jetProductAtOne f g = refl
+
+  jetProductAtTwo : (f g : DividedJet) →
+    jetProduct f g (suc (suc zero)) ≡
+      f (suc (suc zero)) * g zero
+        + (f (suc zero) * g (suc zero)
+           + f zero * g (suc (suc zero)))
+  jetProductAtTwo f g = refl
+
+  -- Keep order-zero source ownership explicit. By reduction, the
+  -- stored normal BR34 jet and the source ADM normal derivative are
+  -- *identical* whenever the source supplies this indexed witness.
+  originalPlusMetricNormalOwnership :
+    (t : OriginalPhysicalReferenceTower) →
+    PhysicalReferenceJetCompatibility t →
+    plusMetricNormalTaylor t zero ≡
+      spatialMetricTaylor (plusMaterialTower (sourceMaterialTower t))
+        spaceNormal zero
+  originalPlusMetricNormalOwnership t compat =
+    plusMetricNormalOwnership compat
+
+  originalMinusGaugeNormalOwnership :
+    (t : OriginalPhysicalReferenceTower) →
+    PhysicalReferenceJetCompatibility t →
+    minusGaugeNormalTaylor t zero ≡
+      spatialGaugeTaylor (minusMaterialTower (sourceMaterialTower t))
+        spaceNormal zero
+  originalMinusGaugeNormalOwnership t compat =
+    minusGaugeNormalOwnership compat
+
+  -- These are actual source-level Agda proof bodies. They do NOT
+  -- discharge the pending variable-Bianchi kernel acceptance, the
+  -- positive weighted physical energy norms, or nonlinear existence.
