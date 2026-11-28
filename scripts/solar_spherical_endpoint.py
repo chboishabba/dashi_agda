@@ -25,8 +25,10 @@ def optimize(material,cfg,design):
     Receiver allocation and heating are bounded by shared resource budgets.
     A geometry layout is a support mask on actual edge IDs, not a ratio label.
     """
-    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
     cfg=dict(cfg,fixed_horizon=True)
+    if cfg.get('nested_depth',0) and 'layout_geometry' in design:
+        raise ValueError('nested receiver layouts require explicit fine edge IDs')
     if 'layout_geometry' in design:
         from solar_spherical_layouts import layouts as generate
         layouts=generate(cfg['radii_m'],cfg['angular_level'],**design['layout_geometry'])
