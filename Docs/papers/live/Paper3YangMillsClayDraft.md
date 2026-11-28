@@ -80,6 +80,11 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 > **28 November source-cut update.** The immediate DASHI proof-search priority is the literal CMP102 selected propagator weld, not a new claim that a finite pivot or inverse derivative proves the mass gap. The newer master narrative and older #1536 manuscript are divergent; preserve the original factorial A/B endpoint and Bishop Cauchy owner from #1536 without replacing the source-native Route S/strong-route distinction. See the final dated section and the consolidated roadmap. Native acceptance and the selected physical source remain separate.
 
+
+## Current proof state — 28 November 2026 (P0 CMP102)
+
+Lean #15 [0f1fc0d21803](https://github.com/chboishabba/dashi_lean4/commit/0f1fc0d218035a7bfde0df320f249571cfb1ddb9) constructs the ordered signed path derivative recursion matching the Path13 deposit convention, including negative links after their adjoint factor. Given each elementary adjoint norm ≤1, defect ≤2e and tangent-map norm ≤1, a word of length L has adjoint defect ≤2Le and derivative defect ≤2L²e. Actual offset paths have length ≤24, coarse paths 13, M/P length ≤37, relative word ≤74. [858caa5eb9c9](https://github.com/chboishabba/dashi_lean4/commit/858caa5eb9c9c5683d5f3d38e0eba019bab2d38a) retains the literal Eq119/120 row D avg[J(M−Ad_R P)]+Ad_expY rc+avg[Ad_C plus−minus], divided by 13. Under the stated nonflat log/exp operator estimates, the per-block difference is bounded by (61874/13)e; a four-block row sum ≤20000e yields a sufficient e≤1/1142440000 for the prior selected inverse enclosure. This is a conditional source-shaped analytic bound, not a measured physical ball or actual H(s(Y0)) identification. The principal logarithm/dexp estimates and identification on the original common CMP102 source ball remain P0; no finite-jet-to-uniform-limit promotion. The existing Route S and strong F1/F3/F4 distinctions and all continuum payments remain unchanged.
+
 ## Abstract
 
 We develop source-native reductions of the four-dimensional Yang–Mills
