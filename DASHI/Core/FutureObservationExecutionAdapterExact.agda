@@ -35,7 +35,7 @@ module ExecutionAdapter
     R.Executes fine word s t →
     R.Executes coarse word (q s) (q t)
   projectExecution R.executesNil = R.executesNil
-  projectExecution (R.executesCons {actions = restWord} {target = t} e rest)
+  projectExecution (R.executesCons {target = t} {actions = restWord} e rest)
     with forwardEdge e
   ... | e′ , edgeEq =
     R.executesCons e′
@@ -52,9 +52,9 @@ module ExecutionAdapter
     Σ State (λ t → R.Executes fine word s t × (q t ≡ target))
   liftExecution {s = s} refl R.executesNil =
     s , (R.executesNil , refl)
-  liftExecution refl (R.executesCons e′ rest)
-    with backwardEdge e′
-  ... | e , edgeEq with liftExecution edgeEq rest
+  liftExecution {s = s} refl (R.executesCons e′ rest)
+    with backwardEdge {s = s} e′
+  ... | e , edgeEq with liftExecution {s = D.after e} edgeEq rest
   ... | t , (run , endEq) =
     t , (R.executesCons e run , endEq)
 
@@ -72,8 +72,8 @@ module ExecutionAdapter
     ∀ {s word o} →
     F.FutureObservation coarse observe (q s) word o →
     F.FutureObservation fine sourceObservation s word o
-  backwardFuture (F.futureObservation target run seen)
-    with liftExecution refl run
+  backwardFuture {s = s} (F.futureObservation target run seen)
+    with liftExecution {s = s} refl run
   ... | t , (fineRun , endEq) =
     F.futureObservation t fineRun (trans (cong observe endEq) seen)
 
