@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-28",
+  "canonical_agda_source": "scripts/check_paper9_original_jet_derivation.py",
+  "lean_companion_source": "Integration/Paper9OriginalRamanujanTwoJetWeld.lean",
+  "lean_companion_branch": "research/paper9-original-eisenstein-derivative-20261125",
+  "lean_commit": "ffd1846d6cce86068e9cc42b11cb98abf8e6b372",
+  "execution": "local equivalent reference script (not byte-verified against committed copy)",
+  "sympy": "1.14.0",
+  "formal_q_degree": 256,
+  "ramanujan_coefficients": 771,
+  "discriminant_coefficients": 257,
+  "first_j_jet_coefficients": 257,
+  "second_j_jet_coefficients": 257,
+  "cleared_ring_identities": 2,
+  "reg_j_first_coefficients": [
+    1,
+    744
+  ],
+  "disk_period_regression": 17,
+  "native_kernel_checked": false,
+  "universal_analytic_derivative_proved": false,
+  "precise_remaining_input": "Same selected Bishop q-series must supply D E4, D E6, D Delta and product-rule derivatives on original j with proof of Delta apartness; the cleared first and second jets are polynomial consequences."
+}
