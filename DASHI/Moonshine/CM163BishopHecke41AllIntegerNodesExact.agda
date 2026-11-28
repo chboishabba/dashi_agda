@@ -32,7 +32,7 @@ import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 node : Nat → ℤ
 node n = + n
 
-candidate : Matrix.Coefficient
+candidate : MatrixEval.Coefficient
 candidate = Matrix.originalMatrix
 
 module At (inputs : Round11.BishopCutset) where
