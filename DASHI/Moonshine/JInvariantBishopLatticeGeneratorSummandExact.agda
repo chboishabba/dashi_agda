@@ -65,6 +65,23 @@ actT : U.BishopUpperHalfPlanePoint → U.BishopUpperHalfPlanePoint
 actT p = U.bishop-upper-half-plane-point
   (C.complex (C.re (U.tau p) + R.1ℝ) (C.im (U.tau p))) (U.imaginaryPositive p)
 
+-- Canonical inverse translation, shared by modular-ray transport and
+-- the compressed finite orbit-word consumer.
+actMinusT : U.BishopUpperHalfPlanePoint → U.BishopUpperHalfPlanePoint
+actMinusT p = U.bishop-upper-half-plane-point
+  (C.complex (C.re (U.tau p) - R.1ℝ) (C.im (U.tau p)))
+  (U.imaginaryPositive p)
+
+actTAfterMinusT : ∀ p → U.tau (actT (actMinusT p)) ≈C U.tau p
+actTAfterMinusT p =
+  (let open P.ℝ-Solver in solve 1
+    (λ x → (x ⊖ Κ Q.1ℚᵘ) ⊕ Κ Q.1ℚᵘ ⊜ x)
+    P.≃-refl (C.re (U.tau p))) , P.≃-refl
+
+actMinusTHeight : ∀ p →
+  R._≃_ (C.im (U.tau (actMinusT p))) (C.im (U.tau p))
+actMinusTHeight p = P.≃-refl
+
 actS : U.BishopUpperHalfPlanePoint → U.BishopUpperHalfPlanePoint
 actS p = U.bishop-upper-half-plane-point (negC (Rec.reciprocalC (U.tau p) (tauNZ p))) positive
   where
