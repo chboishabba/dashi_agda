@@ -31,6 +31,37 @@ def reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_terminal=F
         per_step.append(dict(reflection_lower_J=dt*r*r,state_error_radius=float(error)))
     return dict(reflection_lower_J=float(lower),final_error_radius=float(error),steps=per_step)
 
+def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_terminal=False):
+    """Exact rational enclosure conditional on common binary operator history.
+
+    Midpoint errors must include accumulated center solve defects. A separate
+    material coefficient enclosure is required for continuum or uncertain inputs.
+    """
+    from fractions import Fraction as F
+    def q(x): return F(x) if isinstance(x,(str,F,int)) else F(float(x))
+    center,lo,hi=([q(v) for v in a] for a in (center,lo,hi))
+    h,p=q(dt),q(port)
+    assert h>0 and p>0 and len(center)==len(lo)==len(hi)
+    assert all(0<=l<=m<=u for l,m,u in zip(lo,center,hi))
+    radius=[max(m-l,u-m) for l,m,u in zip(lo,center,hi)]
+    error=F(0); lower=F(0)
+    for step in trace:
+        mid=list(map(q,step['edge_midpoint']))
+        eps=list(map(q,step['midpoint_error']))
+        assert len(mid)==len(eps)==len(radius) and all(e>=0 for e in eps)
+        delta=[F(0)]*len(radius) if fixed_terminal and step['terminal'] else radius
+        perturb=[h*d*(abs(m)+e) for d,m,e in zip(delta,mid,eps)]
+        # Reconstruct the signed reference from the input port and midpoint,
+        # rather than trusting the rounded reflected amplitude.
+        # Floating midpoint averaging itself needs an additional error bound.
+        inc=q(step['incident'])
+        r=p*mid[source_edge]-inc
+        allowance=p*(error+perturb[source_edge]/2+eps[source_edge])
+        lower+=h*max(F(0),abs(r)-allowance)**2
+        error+=sum(perturb)
+    return dict(reflection_lower_exact=str(lower),parameter_error_exact=str(error),
+                scope='conditional rational trace enclosure; coefficient and midpoint rounding premises required')
+
 def bound_layout(material,cfg,ids,budget,max_boxes=8):
     from solar_spherical_cycle import cycle,geometry
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
@@ -41,6 +72,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
     ceiling=float(incident-cfg['max_cycles']*cfg['auxiliary_J'])
     port=float(cfg['source_coupling_sqrt_inv_s']); edge=int(cfg['source_edge'])
     seq=0; queue=[]; replay_count=0; failed=0; best=None
+    rational_candidates=[]
     def box(lo,hi,parent_upper):
         nonlocal seq,replay_count,failed,best
         if lo.sum()>budget: return
@@ -56,6 +88,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
             replay_count+=1; out=cycle(material,cc)
             en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
             upper=min(upper,ceiling-en['reflection_lower_J'])
+            if cfg.get('retain_stage_residuals',False):
+                rational_candidates.append(rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg))
             score=out['strict_campaign_net_J']
             if score is not None and np.isfinite(score):best=score if best is None else max(best,score)
         except (ValueError,AssertionError,np.linalg.LinAlgError,FloatingPointError):
@@ -79,6 +113,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
     return dict(upper_candidate_J=float(upper),best_center_net_J=best,
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
                 gap_J=None if best is None else float(upper-best),
+                rational_trace_candidates=rational_candidates,
                 outward_rounding_certified=False,physical_admission=False)
 
 def fixtures():
