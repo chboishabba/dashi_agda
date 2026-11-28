@@ -13,7 +13,7 @@ open import Data.Nat.DivMod using
    m*n/n≡m; +-distrib-/-∣ʳ)
 open import Data.Nat.Divisibility using (divides)
 import Data.Nat.Properties as N
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 import DASHI.Cognition.PNF.X369OrderedBlockCompositionExact as W
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
 
@@ -62,7 +62,7 @@ module Radix {Literal : Set}
 
   reverseAppend : (xs ys : List Literal) →
     reverse (xs W.++ ys) ≡ reverse ys W.++ reverse xs
-  reverseAppend [] ys = F.sym (appendRightIdentity (reverse ys))
+  reverseAppend [] ys = sym (appendRightIdentity (reverse ys))
   reverseAppend (x ∷ xs) ys =
     trans (F.cong (λ zs → zs W.++ (x ∷ [])) (reverseAppend xs ys))
       (W.appendAssoc (reverse ys) (reverse xs) (x ∷ []))
