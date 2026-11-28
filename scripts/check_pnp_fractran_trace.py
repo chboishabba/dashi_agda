@@ -108,3 +108,72 @@ def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,atomic_basis_blo
         if receipt is None:return 'UNKNOWN',None,lower
         return 'IMPROVED',receipt,lower
     except (ProbeLimit,Exhausted,RecursionError):return 'UNKNOWN',None,lower
+
+
+def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
+                     atomic_basis_block=False):
+    """Shared-clock sufficient-observation portfolio. No width or progress oracle.
+    Return status, receipt, certified lower bound on the original hard carrier.
+    A verified zero endpoint is useful even if its trace refuses; use
+    productive_trace only when the caller actually requires a trace.
+    """
+    from check_pnp_demand_strata import Allowance, ProbeLimit
+    from check_pnp_affine_normal_components import Exhausted
+    from check_pnp_capacity_geometry import violation_flats
+    from check_pnp_partial_quotient import solve as partial
+    from check_pnp_collective_fibre_escape import solve as collective
+    R,H,caps,flats=tuple(R),tuple(H),tuple(caps),tuple(flats)
+    if n<0 or x<0 or x>>n or len(R)!=len(caps) or any(r<0 or r>>n for r in R) or any(c<0 for c in caps):
+        raise ValueError('invalid source')
+    Q=canon(H)
+    if Q is None or not satisfies(x,H,flats):raise ValueError('invalid incumbent')
+    w=tuple((r&x).bit_count() for r in R)
+    phi=sum(max(0,a-c) for a,c in zip(w,caps))
+    if phi==0:return 'SAT',None,0
+    lower=0
+    try:
+        status,t,lower=improve_trace(n,R,Q,caps,x,Allowance(B,max(0,B.left//3)),
+                                     flats,leaf_cap,seam_cap,atomic_basis_block)
+        if status!='UNKNOWN':return status,t,lower
+        # Cheap source-derived legal chart moves; retain all residual components.
+        A=Allowance(B,max(0,B.left//4))
+        try:
+            A.pay('productive_chart',1+n*(1+len(Q)))
+            _,V=chart(n,Q)
+            for v in V:
+                A.pay('productive_basis_probe',1+n*(1+len(R)+sum(map(len,flats))))
+                y=x^v
+                if satisfies(y,Q,flats) and sum(max(0,(r&y).bit_count()-c) for r,c in zip(R,caps))<phi:
+                    t=trace(n,R,Q,caps,x,y,A,flats,atomic_basis_block)
+                    if t is not None:return 'IMPROVED',t,lower
+        except (ProbeLimit,Exhausted):pass
+        if canon(Q+tuple((r,1) for r in R))!=Q:return 'UNKNOWN',None,lower
+        # Zero target permits arbitrary compensating changes. Additional
+        # demands enforce rowwise nonincreasing excess with one strict repair.
+        ceiling=tuple(max(a,c) for a,c in zip(w,caps))
+        demands=[caps]
+        for i,(a,c) in enumerate(zip(w,caps)):
+            if a>c:
+                q=list(ceiling);q[i]=a-1
+                demands.append(tuple(q))
+        demands=tuple(dict.fromkeys(demands))
+        for j,C in enumerate(demands):
+            try:
+                A=Allowance(B,max(0,B.left//(2*(len(demands)-j))))
+                A.pay('productive_demand',1+len(R))
+                F=violation_flats(n,R,Q,C,A)+flats
+                for k,producer in enumerate((partial,collective)):
+                    try:
+                        S=Allowance(A,max(0,A.left//(2-k)))
+                        y,_,done=producer(n,Q,F,S.left,budget=S)
+                        if y is None:
+                            if done and j==0:lower=max(lower,1)
+                            continue
+                        if not done or not satisfies(y,Q,F) or any((r&y).bit_count()>c for r,c in zip(R,C)):
+                            raise AssertionError('invalid producer witness')
+                        t=trace(n,R,Q,caps,x,y,B,flats,atomic_basis_block)
+                        if t is not None:return 'IMPROVED',t,lower
+                    except (ProbeLimit,Exhausted,RecursionError):continue
+            except (ProbeLimit,Exhausted,RecursionError):continue
+    except (ProbeLimit,Exhausted,RecursionError):pass
+    return 'UNKNOWN',None,lower
