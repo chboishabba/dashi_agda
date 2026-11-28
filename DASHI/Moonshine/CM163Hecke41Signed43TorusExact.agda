@@ -11,7 +11,7 @@ module DASHI.Moonshine.CM163Hecke41Signed43TorusExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Fin using (Fin; toℕ) renaming (zero to fz; suc to fs)
-open import Data.Nat.DivMod using (_%_)
+open import DASHI.Foundations.Base369Nat using (_%_)
 open import Data.Product.Base using (_,_; _×_)
 open import Data.Nat.Properties using (_≟_)
 open import Relation.Nullary using (yes; no)
