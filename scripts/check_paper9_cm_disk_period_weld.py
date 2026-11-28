@@ -38,7 +38,7 @@ def main():
     check(N.subs(w,0)-A*A)
     check(M.subs(w,0)-(2-tr)*A*A)
     check(s.diff(N,w).subs(w,0)-tr*A*B)
-    check(s.diff(M,w).subs(w,0)-(2-tr)*(1+tr)*A*B)
+    check(s.diff(M,w).subs(w,0)-(2-tr)*(2+tr)*A*B)
     cm(s.diff(N,w).subs(w,0).subs(beta,alpha)+s.Rational(81,41)*A*B)
     cm(s.diff(M,w).subs(w,0).subs(beta,alpha)-s.Rational(163,1681)*A*B)
     p=P2+P3*w*X
