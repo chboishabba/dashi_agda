@@ -183,3 +183,54 @@ New `scripts/check_engineered_gravity_reciprocal_interface_traction.py` commit `
 
 
 **W1 signed-domain correction:** The TOV source/Israel checker now treats radial pressure p_r as REAL, including the original negative radial tension, rather than assuming p_r>0. Exact SymPy source-equivalent replay still PASS. The manifest checker Git blob is deliberately re-pinned at `5f577ec1fc071edc37b1195c91a49ad09954d755`, commit `d9004d64d9c880359ec49a8ea2ce7ec15a1bd312`. The time-independent spherical mass/traction identity is valid algebraically for either pressure sign in its nondegenerate domain. No unsupported energy-condition claim was introduced.
+
+
+## W2 source-to-boundary normal and reverse observable cut — 29 November
+
+### Reconciled actual heads and owners
+At this cut #1547 started at 207f7e5f0f6e5675f80c26cb2bfe4a57dd9b736a; #1554 donor 151a121e6c79cb838c9869101772ea3ba7fb1f0b; #1537 d9f568df8bffbb848e085186c416a881d6748433; #1555 be212eec07c0475117c8985f08fdd7a21e4907e7. TOV original pressure/source/mass, reciprocal G(X) and independent Maxwell work source were reopened on #1547. No exhaustive latest master / remote donor compilation claimed.
+
+### New exact moving **timelike** normal and Israel weld: source to geometry
+Committed \`scripts/check_tov_moving_timelike_israel_abi.py\` at 2f189c073678457a0af76beaa23dfbfde378005d. In each **static polar-areal** geometry \`ds²=-N(r)²dt²+dr²/f(r)+r²dΩ²\`, with the same radius \`r=R(τ)\`, wall proper velocity \`v=dR/dτ\` and acceleration \`a=d²R/dτ²\`, future timelike shell:
+\[
+U^t = {\sqrt{f+v^2}\over N\sqrt f},\quad
+n_t=-Nv/\sqrt f,\quad n_r=\sqrt{f+v^2}/f.
+\]
+Directly derived (rather than prescribed) the exact principal curvatures for the same oriented unit normal:
+\[
+K^\theta{}_\theta = {\sqrt{f+v^2}\over R},\qquad
+K^\tau{}_\tau =
+{a+(f+v^2)(N'/N)-(f'/2f)v^2\over\sqrt{f+v^2}}.
+\]
+The original spherical Einstein source identities are \`f=1-2m/r\`, \`f'=2m/r²-8πrρ\`, \`N'/N=(m+4πr³ p_r)/(r²f)\`; the exterior is Schwarzschild with the **same enclosed mass at the wall** and vacuum \`ρ=p_r=0\`. Their temporal Israel jump reduces *exactly* to
+\[
+\boxed{
+[K^\tau{}_\tau] =
+{4\pi R\big[(f+v^2)p_r+v^2\rho\big]\over
+ f\sqrt{f+v^2}}.}
+\]
+The angular jump is zero when the same wall mass and proper velocity are used. **Reverse solve:** zero surface stress/Israel temporal jump requires
+\[
+\boxed{p_r=-{v^2\over f+v^2}\rho.}
+\]
+For the original TOV level surface \`R=1\`, both \`ρ(1)=0\` and \`p_r(1)=0\`; hence the moving wall has zero jump for any common \`v,a\` when comparing the original static field continuations evaluated there. Off the matter level set, pressure or density alone generally leaves a nonzero jump; this is now an independently executed negative control. No proof of an actual dynamical Einstein–matter spacetime, no \`g_tr\`/time-jet terms, no full GHY/corner, no nonlinear free-boundary existence, and no physical nonzero-v trajectory is asserted. The earlier stationary source/traction construction is strictly subsumed only within this static-background moving-worldtube geometry.
+
+Local exact Python/SymPy exit0 under 90s; locally executed Git blob \`16ce2ab9c3f903974a9bf4bdff181a04bacc484c\` independently verified against committed GitHub blob of same SHA. Thus this W2 script **was** literally executed byte-for-byte, unlike the older W0/W1 claims. This does **not** imply a full aggregate/native run.
+
+### Three separate source-specific forward/reverse boundary packets and rank obstructions
+Committed \`scripts/check_engineered_gravity_boundary_packet_w2.py\` at 905f25de5fd2c83799234d3e7f624870e999080a; local Git blob \`ffc4b7dc9d5ee0b21f763b4aff816180342bef4c\` equals committed blob, local Python/SymPy exit0 under 90s. The immutable typed boundary records explicitly distinguish **original Einstein TOV** (4D polar-areal, wall proper clock), **original static reciprocal comparator** (4D flat radial and signed material sheet), and **mathematical Maxwell J** (1+1 dynamic sector in 4D Minkowski, coordinate clock). Never conflate their metrics, normal types, sources or receivers.
+
+1. **TOV two-way mass and stress observer:** knowing the moving angular extrinsic curvature \`Kθ\` and common wall velocity gives \`f=(R Kθ)²-v²\`, \`m=R(1-f)/2\`. Temporal \`Kτ\` then fixes exactly ONE linear combination of \`p_r,ρ\`, not both. The source invisibility direction at fixed \`m,v\` is \`δp_r=-v² δρ/(f+v²)\`; at \`v=0\`, surface density is not identified by \`Kτ\` at all. If the *same stationary material source* can be independently sampled at two unequal squared velocities \`u1,u2\`, the coefficient matrix for \`(p_r,ρ)\` has determinant \`f(u2-u1)\`, admitting a unique inverse; physical repeatability of the same source and observer under these controls is unproven. The source-specific negative-control proves a single velocity is insufficient.
+2. **Reciprocal controller:** the signed interface stress jump of the original \`G(X)\` action fixes controller support \`-[Trr]\` and admits zero-support balanced signed flux \`q2=-q1(Xplus+Xminus)/2\` when \`q1(Xplus-Xminus)≠0\`. Source equivalence is required; the zero-force family is not evidence of free energy or shielding.
+3. **Maxwell:** the exact one-polarization sourced Ward identifies \`J=-measured_balance/E\` only where \`E≠0\`. At \`E=0\`, source work measurement loses rank and **cannot** determine \`J\` from energy balance alone. This is a mathematical source identifiability no-go, not an assertion of an actual apparatus current.
+
+### Acceptance and DAG
+Added both new literal-source W2 checkers to \`scripts/run_engineered_gravity_endpoint_local.py\` at 6f28cf6de36d9483e29592206bd36900657f5546. Added **two** source/checker blob-pinned mathematical packet entries (\`moving_tov_timelike\`, \`three_source_reverse\`) to \`Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json\` at 20800685abd50d579e72190eacdf1018e87c9de0. Updated fail-closed DAG at dc648f474e4e5f2ea11240fad49aa52f3a1e4205 to require the same source custody and \`physical_paid=false\` for W2 entries as for W1. Updated tests at c2fcc1acd55fedbebb7530449c235118d82d7442 to reject **nine** malformed claims including forged W2 blob and false physical completion. The W2 two-checker local run is **literal committed-byte verified**, but the current manifest/DAG/test FULL repo replay is not; no CI, no native F8, no source-to-physical receiver acceptance.
+
+### Next coarse welds
+**W2.1:** extend the exact moving shell formula to the **time-dependent** polar-areal Einstein/matter metric with nonzero \`N_t,f_t\`, and compare to original \`check_tov_causal_tube_and_junction.py\` normal-acceleration jet, including proper embedding and dynamic Israel constraints. Then attach the actual second variation \`EH+GHY+corners\` and original graph domain.
+**W2.2:** attach real controller/material dynamics and shell support action to the reciprocal traction, and actual Maxwell/MHD \`J,T_{\mu\nu}\` to the Poynting work; do not freely choose an unrelated source.
+**W2.3:** compute source-identical receiver packets for F8 original same-clock native sidecar, G3 reduced-to-full Einstein and G4 York/RMHD before any 1g/shielding/shortcut reverse-target claims.
+**W3:** solve same-action coupled evolution with signed physical work, native forward source and independent neutral observer; certify or return a precise obstruction.
+
+No physical lane is promoted. The earlier 36 physical obligations remain OPEN.
