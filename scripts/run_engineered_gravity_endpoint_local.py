@@ -44,6 +44,7 @@ CORE=(
     "check_engineered_gravity_g3_domain.py",
     "check_engineered_gravity_g3_harmonic.py",
     "check_engineered_gravity_g3_harmonic_receiver.py",
+    "check_engineered_gravity_nonlinear_shell.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
