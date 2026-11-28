@@ -517,3 +517,43 @@ interacting operator is not a full atomic spectrum or
 a quantum gravity equivalence. The original atomic clock,
 crystal and matter source owners are now explicitly linked
 in [the canonical roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Atomic angular action, matter coupling and leading G4 anisotropy (BR157–160)
+
+On the original 15-dimensional spin-orbital \(2p^2\) projection,
+the actual angular projectors \(P=S^2/2\), \(D=(L^2-2P)/6\)
+and \(Z=I-P-D\) have ranks 9, 5 and 1 and exactly reconstruct
+the selected Coulomb operator. For the supplied spin-orbit
+coefficient \(\zeta\), the sum of one-particle \(l\cdot s\) operators
+preserves total \(J\), with \(J=0,1,2\) blocks of dimensions
+2,3,10; it does not preserve total \(L^2\). The reduced
+polynomial equations are verified in the executable checker.
+Averaging the cyclic magnetic-label action erases the original
+term splitting, but the signed orbit residuals have a common
+three-dimensional invariant support. This is an exact
+source-specific BIDI operator decomposition, not a symmetry
+of the fixed interacting Hamiltonian.
+
+A selected local bulk zero-mode Dirac and independent Maxwell
+Coulomb model gives \(m_E\propto f^{-1/2}\), \(\alpha\propto f^{-1}\),
+and hence \(\Delta E_E\propto f^{-5/2}\),
+\(\Delta E_J\propto f^{-2}\), where \(f=\phi/\phi_{\rm ref}\).
+The proper-time phase is frame invariant for the same chosen
+matter action. An independently chosen Jordan-minimal brane
+clock has different radion response. The initial G3 radion
+contribution to the bulk-model gap ratio has second normal-time
+derivative \(224\epsilon^2/(3p^2)\); curvature, Pauli, gradient,
+nuclear and detector corrections are not included. No measured
+clock signal or full physical matter action is claimed.
+
+The original G4 York source yields a leading central log-Hessian
+difference \(H_z-H_x=(a^2/20)I_Y+O(\epsilon^4)\), with
+\(a^2=\kappa^2K_0\epsilon^2\) and \(I_Y=\int_0^\infty V_2(r)dr/r\).
+Here \(V_2=-2A^2+6C^2-2D^2\) is the actual angular norm coefficient
+of BR152. The reproducible truncated high-precision quadrature
+is approximately 1.11300325163; an outward interval certificate
+and the actual nonlinear finite-amplitude quadrupole remain
+open. The corresponding leading tidal difference is
+\(-a^2 I_Y/10+O(\epsilon^4)\), not a certified finite-amplitude
+sign. See [BR157–160 in the roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

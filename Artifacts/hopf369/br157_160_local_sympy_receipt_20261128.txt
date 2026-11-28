@@ -1,0 +1,17 @@
+Local SymPy stages: OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf157/check_hopf369_br157_160_parallel.py --part <ls|residual|frames|quadrupole>
+Final four stages PASS (ls initial failed symbolic charpoly sorting; corrected exact reduced polynomial check and reran).
+Checker blob 1c0421acc55c50fae16f5dc5c6df7d5aa4dabd85 SHA256 b6afbb273ae3057a983e01b9e1d82cfb59c6be7bdb3fc30d5a092c4670a190e3
+BR156 dependency blob 1f53a9dc5498007a15c97b2a68c349b45ab1e00a SHA256 98327a8e51ba556287541ceb1aa98e1d5f9baef3dcbbe402ede5a45dfbc2aba9
+BR156 replay (twice): eigenvalues {237/1280:5,21/128:9,111/512:1}, cyclic charge commutator rank 2
+J 0 reduced polynomial: (65536*x**2 + 65536*x*z - 24960*x - 131072*z**2 - 14208*z + 2331)/65536
+J 1 reduced polynomial: (128*x + 64*z - 21)/128
+J 2 reduced polynomial: (163840*x**2 - 81920*x*z - 57216*x - 81920*z**2 + 15168*z + 4977)/163840
+PASS BR157 exact LS projectors, physical angular generators and spin-orbit J blocks
+residual ranks 3 3 norm squared 2187/3276800 average spectrum {21/128:9,237/1280:3,501/2560:3}
+PASS BR158 exact C3 average, signed orbit residual and invariant support projector
+PASS BR159 selected bulk/brane clock phase and radion powers, central leading atomic drift
+far coefficient 0
+leading York integral (truncated, 40 digits): 1.113003251629516920746511
+leading York integral (truncated, 70 digits): 1.113003251629516920746511
+PASS BR160 near/far leading terms and reproducible leading York quadrupole quadrature (not interval certified)
+Scope: local selected algebra and non-certified quadrature; no native kernel, CI, full PDE or physical clock execution.

@@ -94,6 +94,7 @@ def coulomb():
     comm=V*W-W*V;assert comm!=s.zeros(15)
     print('BR156 projected Coulomb eigenvalues:',eig,'cyclic charge commutator rank:',comm.rank())
     print('PASS BR156 full 2p^2 antisymmetric spin-orbital Coulomb, physical rotation retained, bare charge shift obstructed')
+    return V,W,modes,pairs
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--part',choices=['chars','lane','coulomb'],required=True)

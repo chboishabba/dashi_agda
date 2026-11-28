@@ -3682,3 +3682,239 @@ Git blob 90e375e0ca64f1fb7fcc97f6aa8af5ee14c0e871. Local source
 bytes matched uploaded blob. No native kernel, CI, complete
 atomic benchmark replay, material calibration, or nonlinear
 continuum acceptance. No sibling edits or exhaustive branch audit.
+
+
+## 26. BR157–160 — actual atomic angular operators, signed interaction residual, detector frame and G4 leading quadrupole
+
+Keep section 0 and 24/25's parallel source-specific programme. Reopened
+actual branch owners before implementation:
+- AtomicPeriodicTable369ManyBodyHamiltonianTerminalMaxCutExact.agda
+  (DASHI/Physics/Chemistry, d30f98d2cb0dc4080656fe3f3c62db55e7362bc4):
+  canonicalAtomic369ManyBodyTerminalStatus, firstLiveLeaf,
+  interactionNoLongerFirstLeaf. The previously paid common-spin
+  interaction is not an open generic Coulomb problem. The remaining
+  actual Hilbert/domain action, full continuum and explicit CI
+  projection/atomic generator must be distinguished.
+- AtomicPeriodicTable369P2CoulombExecutionExact.agda (same directory,
+  fb96b93867bc8cd04f9ea331c86d586405978f7d): slaterF0, slaterF2,
+  coulombMatrixIsC3Invariant, common-spin scope. BR156 extended this
+  to all spin-orbitals; BR157–158 consume exactly that operator.
+- Docs/physics/KKLightElectronBIDIChiralityRadionMaxCut20261024.md
+  (38098c42b0f313bdfbb58bb77e84182dd65076ae), and
+  KKTOEPhysicalModelForkPareto20261024.md
+  (9e7e398ac0a13cf387528b338ab9e102d9ac8733):
+  #1241 selected smooth S1 independent Maxwell and vectorlike Dirac,
+  observed mass INPUT; distinct geometric graviphoton, chiral
+  orbifold/brane alternatives. BR159 is an additional local
+  leading-order matter-model discriminator, not the same-action
+  nonlinear matter backreaction.
+- scripts/check_hopf369_p0h.py (f5c21339b60254296d234aba71ee5b65ad575d61),
+  P0H actual positive CMC source and York operator; BR152 radial
+  formula and BR148 stress/curvature. Reuse original alpha=sqrt(K0)*eps,
+  a=kappa*s*alpha, fixed positive K0,p0 and background.
+- Existing BR156 checker blob 90e375e0ca64f1fb7fcc97f6aa8af5ee14c0e871
+  exact local file verified before patching. Add only return V,W,modes,pairs
+  after unchanged assertions (new blob 1f53a9dc5498007a15c97b2a68c349b45ab1e00a)
+  for BR157/158 consumption, no duplicate Coulomb assembly.
+Classical angular momentum, spin-orbit, representation, conformal
+and Newton potential mathematics retain prior attribution. New
+attachment is to the selected original DASHI operators. No JMD
+contribution inferred from matching numbers.
+
+### BR157 — exact LS and J angular reduction of the actual 15-state operator
+
+For the six 2p spin-orbitals, lift one-particle operators by the
+actual exterior differential dGamma(A)(u wedge v)=Au wedge v+u wedge Av.
+Construct Lz,L±,Sz,S± on the original spin-orbital basis, including
+the sqrt(2) orbital ladder coefficients and spin half. Their lifts
+satisfy the angular commutators and commute with the original
+spin-independent Coulomb V. With I the 15D identity, the exact
+orthogonal projectors are
+ P=S²/2, D=(L²-2P)/6, Z=I-P-D.
+Ranks 9,5,1 and mutual annihilation verified, and
+ V=(21/128)P+(237/1280)D+(111/512)Z.
+Thus term identification uses actual angular operators, not just
+matching multiplicities. This is the selected Z=1 2p² Coulomb
+projection; actual physical rotational symmetry (SO3 orbital and
+SU2 spin separately) is not the artificial cyclic magnetic shift.
+
+Continuum domain argument for the terminal owner's firstLiveLeaf:
+for fixed nucleus at origin and N electrons in R³, the orbital
+rotation acts by (U_R f)(x_1,...)=f(R^-1 x_1,...); global spin
+rotation acts by the tensor product of its SU2 matrices. They
+are unitary on the antisymmetric Hilbert space since they commute
+with particle permutation. On the Sobolev kinetic domain H² the
+chain rule and orthogonal R give invariant domain and Laplacian
+covariance; central |x_i|^-1 and pair |x_i-x_j|^-1 multiplication
+are invariant and infinitesimally kinetic-bounded by the standard
+Hardy/relative-bound estimates. Equivalently the Coulomb quadratic
+form on H¹ is invariant, so the associated self-adjoint Hamiltonian
+intertwines by uniqueness of the form operator. A finite CI
+projection onto exterior powers of complete rotational subshells
+commutes with U_R; its compressed Hamiltonian therefore intertwines.
+This is a written classical domain argument for the fixed-nucleus
+nonrelativistic Coulomb source, not a kernel proof, a relativistic
+domain proof or a new general atomic theory. Incomplete subshells,
+external fields and configuration-dependent truncations need their
+own invariant-domain check.
+
+Add the genuine one-particle spin-orbit sum
+ O=dGamma(l dot s), NOT L_total dot S_total.
+For the selected finite H=V+zeta O (zeta a supplied common radial
+coefficient), [H,J²]=[H,Jz]=0 with J=L+S, while
+ rank[O,L²]=12. The latter measures actual LS mixing.
+J² spectral projectors:
+ J0=(J²-2I)(J²-6I)/12,
+ J1=-J²(J²-6I)/8,
+ J2p=J²(J²-2I)/24.
+Ranks 2,3,10. On each block the exact reduced polynomial is
+ J=0: x²+(zeta-195/512)x-2zeta²-(111/512)zeta+2331/65536;
+ J=1: x+zeta/2-21/128;
+ J=2: x²-(zeta/2+447/1280)x-zeta²/2
+       +(237/2560)zeta+4977/163840.
+The code checks the compressed operator satisfies the reduced
+polynomial, using exact basis columns and invariant-block identity.
+These are the two reduced quadratic blocks and one scalar block,
+with rotational multiplicities 1,3,5; not an empirical fine-structure
+prediction, zeta not derived from the radial Dirac/Breit action.
+No actual atom's correlation or relativistic correction paid.
+Initial SymPy general symbolic charpoly call raised a sorting
+TypeError in the J=2 block; replaced with exact trace/trace-square
+reduced polynomial and explicit annihilation checks. Final stage PASS.
+
+### BR158 — actual signed interaction residual and minimal invariant support
+
+Use original cyclic magnetic-label shift W=wedge²K. Define
+ V_k=W^k V W^-k, A=(V_0+V_1+V_2)/3, R_k=V_k-A.
+Then A is W-invariant and sum R_k=0, V_k=A+R_k exactly.
+For the original Coulomb values,
+ rank R_0=3, rank [R_0 R_1 R_2]=3,
+ ||R_0||_F²=2187/3276800.
+The common invariant support E=span range R_k has dimension 3.
+The orthogonal projector Q_E constructed from independent actual
+columns obeys W Q_E=Q_E W and Q_E R_k Q_E=R_k for all k.
+Minimality in the sense of an invariant linear support containing
+all residual ranges follows by definition; not a universal
+minimal observer claim. The averaged spectrum is
+ 21/128 multiplicity9, 237/1280 multiplicity3,
+ 501/2560 multiplicity3.
+It differs from the original; therefore orbit averaging alone
+erases the physical term splitting. This is a source-specific
+small residual BIDI within the original operator. It does not
+repair W into a physical rotation on a fixed V; it transports
+the indexed family V_k, precisely as the prior #1291 indexed
+graph metric/action distinction. Next consumer: use the existing
+ConsumerFibreRepairExact, exterior Hodge and indexed history
+owners rather than inventing another quotient; native source
+not changed here.
+
+### BR159 — same-phase matter/frame discriminator on G3
+
+Do not select a physical detector metric by the sign of its
+optical curvature. Use #1241's independent bulk Maxwell field
+and a periodic zero-mode Dirac carrier, with supplied 5D mass m
+and reference coordinate/circle normalization L. Let f=phi/phi_ref
+be dimensionless and g_E=f g_J (constant reference normalization
+absorbed). In a locally constant-radius leading zero-mode
+approximation, the 5D measure reduces to f sqrt(-g_J), Maxwell
+kinetic factor to f, and the canonical Jordan Dirac normalization
+is chi_J=f^(1/2) psi_5. Under Weyl rescaling chi_E=f^(-3/4)chi_J,
+so psi_5=f^(1/4)chi_E. Einstein mass m_E=m f^-1/2 and locally
+canonically normalized charge e_4=e_5/sqrt(L f), alpha proportional
+to f^-1. For an idealized hydrogenic leading Coulomb gap with
+fixed nuclear charge and infinite-mass or same-scaling nucleus,
+Delta E_E scales as f^-5/2 and Delta E_J as f^-2. The actual
+clock phase integral is frame consistent:
+ Delta E_E d tau_E = Delta E_J d tau_J, d tau_E=sqrt(f)d tau_J.
+This is conditional on this SAME chosen bulk matter coupling.
+A different, independently specified 4D brane/observer matter
+action minimally coupled to g_J with fixed masses/charge instead
+has Delta E_J constant and Delta E_E=f^-1/2 Delta E_J,
+with the same frame-invariant phase equality but different
+radion response. Do not equate these actions.
+
+At the G3 initial centre, choose phi_ref=p=psi(0) and normal
+Jordan time. P0V/BR151 gives f_t(0)=0,
+ f_tt(0)=-112 eps²/(3p²).
+Thus the leading local scalar-Coulomb gap ratio in the selected
+bulk model has second normal-time derivative
+ (Delta E_J/Delta E_J(0))_tt=224 eps²/(3p²).
+This is the radion contribution to a simplified local gap
+formula, NOT the full clock signal in the actual Hopf field:
+the geometric graviphoton spin connection/Pauli term, gradients,
+curvature, nuclear mass, correlation, detector support and
+external transfer calibration are all retained as unpaid.
+The zero-mode Maxwell field is independent, not the graviphoton.
+Backreaction would change the vacuum source; a test-matter
+approximation must be justified before applying it. No actual
+G3 clock worldline/phase measurement or finite-time precision claim.
+The checker verifies the conformal powers and local Taylor
+coefficient, not a full 5D Dirac spin connection.
+
+### BR160 — actual G4 leading quadrupole from original York source
+
+For P0H with fixed kappa,K0,p0 and eps small,
+ a²=kappa² K0 eps². Use BR152 radial A,C,D (the earlier
+ B coefficient eliminated by 2A+B+3C=0).
+The exact angular coefficient simplifies to
+ V2=-2A²+6C²-2D².
+With V2~(96/25)r² near zero and decay from the explicit atan
+formulas (r^4 V2 tends to zero), the leading quadrupole is
+ I_Y=int_0^infty V2(r) dr/r.
+The independent radial magnetic norm |B|² is isotropic, so
+only the original York angular term contributes at order eps².
+Since the contraction solution psi=1+O(eps²) uniformly, its
+Newton-gradient bound is O(eps²) by splitting the gradient
+kernel into local integrable singularity and exterior L1 source.
+The difference f_source-f_source_at_psi1 has uniform value
+and first spatial derivative O(eps^4) and integrable weighted
+far bound O(eps^4) from explicit source derivatives. In the
+central Hessian difference angular subtraction cancels the
+constant near zero, leaving an integrable O(eps^4 r) source
+difference there. Thus at fixed parameters
+ Hz-Hx = (a²/20) I_Y + O(eps^4).
+Here the 1/20 follows from angular integral
+ int_-1^1 P2(mu)mu² dmu=4/15 and the original 1/8 York
+ source coefficient, with 1/p=1+O(eps²).
+Local 40- and 70-digit mpmath calculations on [1e-6,1e6]
+give the same truncated result 1.113003251629516920746511
+(agreement check at 1e-10 on float outputs).
+The approximate leading coefficient is 0.05565016258 a².
+The near/far analytic identities and convergence argument
+are separate from this numeric quadrature: no outward interval
+bound or certified nonlinear finite-amplitude quadrupole is
+claimed. This is the original source's leading anisotropy,
+not a radial average of its nonlinear psi. At psi=1 the stress
+difference vanishes; its actual O(eps^4) correction follows
+from b²=O(eps²), psi^-8=1+O(eps²), and primitive smoothness.
+Consequently central tidal difference has leading
+ -a² I_Y/10+O(eps^4), with the sign suggested by the
+ numerical integral but not interval-certified here.
+Next compute the full original nonlinear Newton iterate
+and rigorously bound the quadrupole near/far errors and
+fixed-point remainder; actual finite-amplitude sign remains open.
+
+### Parallel next cut and acceptance
+
+Atomic: explicit J-sector reduced blocks and small interaction
+residual now available for original terminal/CI and indexed
+consumer owners; native source and actual multi-orbital neutral/
+cation SCF, spin-orbit radial coefficients and AFQMC remain.
+Physical matter: choose actual bulk/brane/detector action
+consistent with G3 (or use independent external test matter),
+derive full spin connection and same-source clock phase and
+quantitative remainder. G4: certify original quadrupole and
+nonlinear contraction; BR160 is only the leading coefficient.
+Periodic: W0/W1, derivative-balanced curved Cartan surface
+and torsion graph, W5/W6/W7 remain independent; no new
+periodic PDE proof in this tranche. Quantum: consume original
+marked #1545 Leech/FLM action with source Gram/cocycle, no new
+Monster action proof here. Material/receiver branch remains
+independent. Do not reopen prior generic Coulomb, cube or
+metric-frame identities.
+Four local final stages passed, with exact source blob parity;
+BR157 initially failed at symbolic charpoly sorting, corrected
+and rerun. BR156 dependency replayed twice. No integrated
+runner, native kernel, CI, full continuum, measured clock or
+exhaustive master reconciliation. Numerical quadrature is
+not an interval certificate.
