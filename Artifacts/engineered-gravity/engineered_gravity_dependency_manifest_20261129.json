@@ -466,6 +466,19 @@
       "physical_paid": false,
       "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
       "checker_git_blob_sha1": "23f2f03c33300c59a15d648698201220f76c6f5d"
+    },
+    "original_material_flux_weld": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_original_material_flux_weld.py",
+      "scope": "Original repaired covariant a,d,V matter stress/j compared to constructed moving radial Einstein mass profile at first velocity order; strict bulk obstruction to uniform label scaling and smooth reverse material velocity; material Euler/Einstein evolution still open.",
+      "source_equation": "j_action=(rho+p_r)*r*Sdot/(N*sqrt(f)); j_mass=rho*r*Sdot/(N*sqrt(f)); mismatch=p_r*r*Sdot/(N*sqrt(f)); Y_t_required=-(lambda+2)*r*Sdot/(lambda+1+r^2)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af"
     }
   }
 }
