@@ -2297,3 +2297,134 @@ module At {r : Level} (F : C.RealField r)
   -- These are actual source-level Agda proof bodies. They do NOT
   -- discharge the pending variable-Bianchi kernel acceptance, the
   -- positive weighted physical energy norms, or nonlinear existence.
+
+  ------------------------------------------------------------------------
+  -- BR59–61: the ACTUAL nonlinear unit-normal moving Israel wall,
+  -- not simply its Gaussian-reference derivative/conormal columns.
+  --
+  -- At original Gaussian g0=dn²+b²eta, b(0)=1, k=b'(0):
+  -- delta h_ab = p_ab + 2k phi eta_ab.
+  -- delta K_ab = -phi_ab + (k²+b''(0))phi eta_ab
+  --              + 1/2 p_ab,n -1/2(∂a p_nb+∂b p_na)
+  --              -1/2 k p_nn eta_ab.
+  -- All ten original symmetric wall rows and both material sides stay.
+  -- Their distinct p_nn normalisation and graph Hessians cannot be
+  -- projected away by the linear BR34 reference normal derivative.
+  ------------------------------------------------------------------------
+
+  record OriginalMovingShapeData : Set r where
+    constructor originalMovingShapeData
+    field
+      sourceReferenceWarpK : S
+      sourceReferenceWarpSecond : S
+      sourceGraphDisplacement : S
+      sourceGraphHessian : Wall → Wall → S
+      sourceMetricPerturbation : Tensor
+      sourceMetricNormalDerivative : Tensor
+      sourceMixedTangentDerivative : Wall → Wall → S
+  open OriginalMovingShapeData public
+
+  originalInducedVariation : OriginalMovingShapeData →
+    Wall → Wall → S
+  originalInducedVariation d a b =
+    H (sourceMetricPerturbation d) a b
+      + two * sourceReferenceWarpK d
+        * sourceGraphDisplacement d * eta a b
+
+  originalExtrinsicVariation : OriginalMovingShapeData →
+    Wall → Wall → S
+  originalExtrinsicVariation d a b =
+    neg (sourceGraphHessian d a b)
+      + (sourceReferenceWarpK d * sourceReferenceWarpK d
+         + sourceReferenceWarpSecond d)
+          * sourceGraphDisplacement d * eta a b
+      + half * H (sourceMetricNormalDerivative d) a b
+      - half * (sourceMixedTangentDerivative d a b
+                 + sourceMixedTangentDerivative d b a)
+      - half * sourceReferenceWarpK d
+          * h44 (sourceMetricPerturbation d) * eta a b
+
+  record TwoFaceMovingIsraelSource : Set r where
+    constructor twoFaceMovingIsraelSource
+    field
+      plusMovingShape : OriginalMovingShapeData
+      minusMovingShape : OriginalMovingShapeData
+      originalIsraelJump : S
+      derivativeIsraelJump : S
+  open TwoFaceMovingIsraelSource public
+
+  originalShapeJump : TwoFaceMovingIsraelSource → Wall → Wall → S
+  originalShapeJump d a b =
+    originalExtrinsicVariation (plusMovingShape d) a b
+      - originalExtrinsicVariation (minusMovingShape d) a b
+
+  -- Full non-linear Israel trace-reversed jump:
+  -- I_ab=[K_ab]-h_ab tr_h[K]+3j h_ab.
+  -- Its first variation contains both delta h and 3 delta j.
+  -- Source matching is required below; an unmatched two-chart pair
+  -- must NOT be treated as a single Israel hypersurface.
+  originalIsraelShapeFrechet : TwoFaceMovingIsraelSource →
+    Wall → Wall → S
+  originalIsraelShapeFrechet d a b =
+    originalShapeJump d a b
+      - eta a b * trace4 (originalShapeJump d)
+      - originalIsraelJump d *
+          (originalInducedVariation (plusMovingShape d) a b
+            - eta a b *
+                trace4 (originalInducedVariation (plusMovingShape d)))
+      + three * derivativeIsraelJump d * eta a b
+
+  record OriginalTwoFaceShapeCompatibility
+      (d : TwoFaceMovingIsraelSource) : Set r where
+    constructor originalTwoFaceShapeCompatibility
+    field
+      inducedWallMatched :
+        (a b : Wall) →
+          originalInducedVariation (plusMovingShape d) a b ≡
+          originalInducedVariation (minusMovingShape d) a b
+      originalWarpJump :
+          sourceReferenceWarpK (plusMovingShape d) ≡
+          sourceReferenceWarpK (minusMovingShape d) + originalIsraelJump d
+      sameGraphDisplacement :
+          sourceGraphDisplacement (plusMovingShape d) ≡
+          sourceGraphDisplacement (minusMovingShape d)
+      sameGraphHessian :
+        (a b : Wall) →
+          sourceGraphHessian (plusMovingShape d) a b ≡
+          sourceGraphHessian (minusMovingShape d) a b
+  open OriginalTwoFaceShapeCompatibility public
+
+  -- The actual nonlinear boundary source is now split into its
+  -- original BR61 full 10-row geometric Israel variation, BR58 30/10
+  -- reference D/E linearized derivative rows and the independent
+  -- BR19/31 graph/corner/covariant connection compatibility.
+  record FullMovingJunctionWeld : Set r where
+    constructor fullMovingJunctionWeld
+    field
+      originalTwoFaceShape : TwoFaceMovingIsraelSource
+      originalPhysicalReference : OriginalPhysicalReferenceTower
+      nonlinearShapeIsraelRows : List S
+      opticalReferenceMetricD opticalReferenceMetricE : List S
+      opticalReferenceGaugeD opticalReferenceGaugeE : List S
+      materialMetricD materialMetricE : List S
+      materialGaugeD materialGaugeE : List S
+      geometricWallSourceRemainder : List S
+  open FullMovingJunctionWeld public
+
+  assembleFullMovingJunction : TwoFaceMovingIsraelSource →
+    OriginalPhysicalReferenceTower → FullMovingJunctionWeld
+  assembleFullMovingJunction shape t =
+    fullMovingJunctionWeld
+      shape t (pack10 (originalIsraelShapeFrechet shape))
+      (metricReferenceAt D t zero) (metricReferenceAt E t zero)
+      (gaugeReferenceAt D t zero) (gaugeReferenceAt E t zero)
+      (metricMaterialCorrectionAt D t zero)
+      (metricMaterialCorrectionAt E t zero)
+      (gaugeMaterialCorrectionAt D t zero)
+      (gaugeMaterialCorrectionAt E t zero)
+      (pack10 (originalIsraelShapeFrechet shape))
+
+  -- The nonzero full-shape source is deliberate: until the actual
+  -- BR34 reference Israel block is shown to equal this BR61 Fréchet
+  -- after physical graph, gauge, coordinate, density and normal
+  -- transport, it cannot be labelled a solved boundary condition.
