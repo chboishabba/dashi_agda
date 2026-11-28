@@ -49,3 +49,24 @@ machinImaginaryPhase inputs product sameObject =
     (C.expImaginaryIsTrigPair
       (Route.machinTranscendentals inputs) M.bishopMachinPi)
     (C.complex-equivalent (proj₂ endpoints) (proj₁ endpoints))
+
+-- Original Round11 product and quarter-Cayley assembly already exist.
+-- The ONLY remaining phase hypotheses are the two actual original
+-- Bishop exp(2i atan_B x) rational-Cayley evaluations.
+import DASHI.Analysis.BishopMachinTwoPointCayleyCompositionExact as TwoPoint
+import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
+
+machinImaginaryPhaseFromTwoOriginalAtans :
+  (inputs : Round11.BishopCutset) →
+  TwoPoint.OriginalAtanFiveCayleyEvaluation inputs →
+  TwoPoint.OriginalAtan239CayleyEvaluation inputs →
+  C._≈C_
+    (C.expC (Route.machinTranscendentals inputs)
+      (C.pureImaginary M.bishopMachinPi))
+    selectedMinusOne
+machinImaginaryPhaseFromTwoOriginalAtans inputs five twoHundredThirtyNine =
+  machinImaginaryPhase
+    inputs
+    (Native.originalNativeImaginaryExpProduct inputs)
+    (TwoPoint.nativeCombinedCayleyFromTwoOriginalAtanValues
+      inputs five twoHundredThirtyNine)
