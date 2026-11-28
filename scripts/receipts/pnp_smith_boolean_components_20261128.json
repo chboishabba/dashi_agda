@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python timeout 90 per campaign in /tmp/pnp34; SymPy 1.14.0. Three final executable blobs matched GitHub readback; prior dependencies from recovered /tmp/pnp33 sources, not complete checkout parity. Native agda/lean/lake unavailable; git DNS failed; no CI.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_smith_certificate.py",
+      "blob": "a8bb932062b5d2646d02fdb8fb08dbec522489b1",
+      "seconds": 1.37,
+      "independent_HNF": 400,
+      "INTEGER": 172,
+      "EMPTY": 228,
+      "large_torsion": 4,
+      "tamper": 4,
+      "admission_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_boolean_fibre.py",
+      "blob": "25dbcb30faf45029a35cdc8f07d57f2ee72f9a22",
+      "seconds": 2.62,
+      "independent_mixed": 288,
+      "WITNESS": 111,
+      "EMPTY": 177,
+      "independent_pairs": [
+        {
+          "free": 8,
+          "points": 16,
+          "used": 5668
+        },
+        {
+          "free": 16,
+          "points": 32,
+          "used": 36548
+        },
+        {
+          "free": 32,
+          "points": 64,
+          "used": 259972
+        },
+        {
+          "free": 64,
+          "points": 128,
+          "used": 1955588
+        }
+      ],
+      "connected_width_refusal": 1,
+      "zero_cap": 1
+    },
+    {
+      "file": "scripts/check_pnp_integer_fibre_portfolio.py",
+      "blob": "29d1976dd8fcfb806f2b350a6aa2daf03b7005e6",
+      "seconds": 2.84,
+      "original_cnf": 192,
+      "guarded": 192,
+      "offline_smith_latin": 3,
+      "component_controls": [
+        {
+          "width": 2,
+          "n": 8,
+          "points": 16,
+          "used": 1488
+        },
+        {
+          "width": 4,
+          "n": 16,
+          "points": 64,
+          "used": 14448
+        },
+        {
+          "width": 8,
+          "n": 32,
+          "points": 1024,
+          "used": 537024
+        },
+        {
+          "width": 12,
+          "n": 48,
+          "points": 16384,
+          "used": 15742704
+        }
+      ],
+      "guarded_refusal": 1
+    }
+  ],
+  "section33_replay": {
+    "scope": "Temporary copy with additional per-size output; same seeded original fixture source and cap; no solver changes.",
+    "cap": 200000,
+    "results": [
+      {
+        "n": 12,
+        "prior": 16,
+        "diagnostic": 16
+      },
+      {
+        "n": 20,
+        "prior": 16,
+        "diagnostic": 6
+      },
+      {
+        "n": 32,
+        "prior": 6,
+        "diagnostic": 0
+      },
+      {
+        "n": 48,
+        "prior": 2,
+        "diagnostic": 0
+      }
+    ]
+  },
+  "limits": [
+    "SymPy Smith backend coefficient growth and runtime not metered; size admission not cost proof.",
+    "Integer particular and kernel do not imply Boolean solution.",
+    "Boolean chart logical arithmetic count not a physical bit ledger; component separation only when all original pulled-back factors supported in one component.",
+    "New opt-in CNF producer; default unchanged. No unrestricted lower bound or universal SAT progress.",
+    "Native bodies source-written, not elaborated; exact rectangular matrix receipt serialization and actual factor support attachment remain."
+  ]
+}
