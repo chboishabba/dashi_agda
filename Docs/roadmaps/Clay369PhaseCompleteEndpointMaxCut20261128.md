@@ -1020,3 +1020,44 @@ source: finish the ONE original Bishop finite-prefix bracket,
 run Agda native acceptance, then retain the separate physically
 interacting Wilson F19/CMP116/mass-gap frontier. Main branch and
 active divergent PR provenance must be preserved.
+
+
+### Section 27 final acceptance root and updated source debt
+After the controlling section commit, added Agda #1536
+DASHI/Physics/YangMills/YMClayCMP102Section27NativeAcceptanceExact.agda
+at d85aa53efd930a082fddf5833f1ce07e44761c6e, which imports
+the original G finite coefficient owner, the new original Bishop
+signed-square identity, the original geometric rate/squeeze and
+asserts source-level theorem signatures. Run this root with native
+Agda 2.9 and source owner/vendor include paths; it has NOT been run.
+All new Agda owner blobs were fetched from branch #1536, no explicit
+postulate found (not a transitive proof audit). Local agda, lean, lake
+executables absent. The Section27 exact rational check was independently
+extended to original COUNT=0..79, and the compiled-equivalent local
+control set is 11367/11367 PASS (YM3800, Hodge64, BSD60, NS9,
+PNP7203, RH231). Exact committed blob of regression
+scripts/check_clay_section27_original_welds.py is
+1e97318da7f978a63caad7be30b9d57842a61290.
+The local checks were equivalent separately authored code, NOT
+byte-identical execution of that blob.
+
+The final scalar CMP102 original Bishop finite signed-order inequality
+`-3*(1/4)^count <= G_count(X) <= 3*(1/4)^count`
+has an unbounded-degree mathematical proof in the Section26 original
+coefficient document, but it has NOT yet been encoded as an Agda
+theorem consuming finite Cauchy rows, coefficient support,
+rational factorial ratios and the native setoid triangle order.
+No unproved assumption was silently installed to claim that step.
+The squeeze receiver's two finite bracket hypotheses are therefore
+a precise remaining original mathematical/native weld. Its
+geometric-limit premise is discharged by Section27 source-written
+native code, pending kernel.
+
+The next aggregate owner move is to write that original Bishop
+finite polynomial coefficient/majorant lemma directly, not another
+synthetic polynomial; simultaneously pursue NS original signed
+transfer estimate, BSD complex L'' actual comparison, Hodge proper
+cycle/primitive pairing, RH pinned admission, PNP internal events
+on original SAT machine and original YM interacting Wilson
+CMP116/OS/mass-gap physics. No generic finite scaffold is a substitute
+for the original universal endpoint.
