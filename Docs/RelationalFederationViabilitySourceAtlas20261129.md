@@ -28,3 +28,6 @@ Canonical eight planes artifact/history/projection/situated access/contract-reso
 
 ## Repository coordinates
 PRs #1090, #1193, #1180, #1125, #1201, #352, #1441, #1443, #1001, #1011, #785, #625, #711, #1496, #1430, #1450, #1451, #697, #724, #756, #777, #784, #1088, #1439, #1291, #1438, #1442, #573, #598, #267, #274, #561, #819, #962, #963, #982, #991. Resolve each at https://github.com/chboishabba/dashi_agda/pull/NUMBER; status and actual owner audit per roadmap. Earlier references not all verified in this cut. No fabricated commit dates, citations or external source claims.
+
+## Education and formation source extension
+See [Education formation source and weld atlas](RelationalFederationEducationFormationWeld20261129.md) for Alice Brown and coauthor DOI coordinates, John Anthony Brown working-manuscript provenance and H1–H5 hypothesis boundaries, Digital ESD original source registry, source-preserving cross-pollination and PR coordinates. The two Brown source families are independent; DASHI synthesis does not transfer authorship or evidence. No private manuscripts reproduced.
