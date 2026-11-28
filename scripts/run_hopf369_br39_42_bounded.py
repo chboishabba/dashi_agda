@@ -32,6 +32,7 @@ PARTS={
     ("BR43.trace.warp","check_hopf369_br43_two_sided_trace.py",("--sector","warp")),
     ("BR43.trace.loss","check_hopf369_br43_two_sided_trace.py",("--sector","loss")),
     ("BR43.charge","check_hopf369_br43_trace_energy_weld.py",()),
+    ("BR44.two_level","check_hopf369_br44_two_level_energy.py",()),
   ],
   "heavy":[
     ("BR43.trace.metric","check_hopf369_br43_two_sided_trace.py",("--sector","metric")),
