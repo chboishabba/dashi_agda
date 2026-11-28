@@ -7,8 +7,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Data.List.Base as List using ()
-open import Data.Product using (_×_)
+import Data.List.Base as List
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as Q
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -97,3 +97,41 @@ dualDirectionalTailSquared :
   (modes : List.List (H.Hist × H.Hist)) →
   CS.square (H.projectionSum modes) ≤ H.leftEnergy4 modes * H.rightEnergy4 modes
 dualDirectionalTailSquared = H.boundaryTailSquared
+
+-- The nonconstant characters themselves vanish, not merely their
+-- energies. This avoids relying on a floating square-root decision.
+axisMidA : H.ca (axis tri-mid) ≡ 0ℚ
+axisMidA = refl
+axisMidB : H.cb (axis tri-mid) ≡ 0ℚ
+axisMidB = refl
+axisHighA : H.ca (axis tri-high) ≡ 0ℚ
+axisHighA = refl
+axisHighB : H.cb (axis tri-high) ≡ 0ℚ
+axisHighB = refl
+
+open import Data.Product using (proj₁; proj₂)
+
+zeroCharacterLeft : ∀ h k → H.ca h ≡ 0ℚ → H.cb h ≡ 0ℚ →
+  (H.ca (H.conv h k) ≡ 0ℚ) × (H.cb (H.conv h k) ≡ 0ℚ)
+zeroCharacterLeft h k a b
+  rewrite H.characterA h k | H.characterB h k | a | b =
+  solve (H.ca k List.∷ H.cb k List.∷ List.[]) ,
+  solve (H.ca k List.∷ H.cb k List.∷ List.[])
+
+zeroCharacterRight : ∀ h k → H.ca k ≡ 0ℚ → H.cb k ≡ 0ℚ →
+  (H.ca (H.conv h k) ≡ 0ℚ) × (H.cb (H.conv h k) ≡ 0ℚ)
+zeroCharacterRight h k a b
+  rewrite H.characterA h k | H.characterB h k | a | b =
+  solve (H.ca h List.∷ H.cb h List.∷ List.[]) ,
+  solve (H.ca h List.∷ H.cb h List.∷ List.[])
+
+orthVanishing : ∀ {n} (v : Vec TriTruth n) → allZero v ≡ false →
+  (H.ca (orthHistogram v) ≡ 0ℚ) × (H.cb (orthHistogram v) ≡ 0ℚ)
+orthVanishing [] ()
+orthVanishing (tri-low ∷ as) h =
+  zeroCharacterRight (axis tri-low) (orthHistogram as)
+    (proj₁ (orthVanishing as h)) (proj₂ (orthVanishing as h))
+orthVanishing (tri-mid ∷ as) h =
+  zeroCharacterLeft (axis tri-mid) (orthHistogram as) axisMidA axisMidB
+orthVanishing (tri-high ∷ as) h =
+  zeroCharacterLeft (axis tri-high) (orthHistogram as) axisHighA axisHighB
