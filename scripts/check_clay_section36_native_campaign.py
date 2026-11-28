@@ -17,7 +17,7 @@ Usage:
     --agda-include /checkout/bishop \\
     --rh-source-root /checkout/pinned_external_rh \\
     --rh-manifest /checkout/sha256_manifest.json \\
-    --rh-main-sha256 <64-hex-pin> \\
+    --rh-main-sha256 <64-hex-pin> \\\n    --rh-source-head <40-hex-external-original-commit> \\
     --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection36Native.json
 
 Return 0 ONLY when every SELECTED source entrypoint completes native
@@ -102,6 +102,8 @@ def main() -> int:
     p.add_argument("--rh-source-root", type=Path, required=True)
     p.add_argument("--rh-manifest", type=Path, required=True)
     p.add_argument("--rh-main-sha256", required=True)
+    p.add_argument("--rh-source-head", required=True,
+                   help="immutable 40-hex external original RH Git HEAD pin")
     p.add_argument("--report", type=Path, required=True)
     p.add_argument("--require-head", action="append", default=[],
         metavar="OWNER=COMMIT_SHA",
@@ -167,6 +169,7 @@ def main() -> int:
           "--external-root", str(args.rh_source_root.resolve()),
           "--tree-manifest", str(args.rh_manifest.resolve()),
           "--main-sha256", args.rh_main_sha256,
+          "--expected-git-head", args.rh_source_head,
           "--lake", args.lake]
         r = call(command, rhroot, args.timeout)
         report["checks"].append({"owner": "RH",
@@ -177,7 +180,7 @@ def main() -> int:
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
-    print("ALL-CLAY SECTION36 NATIVE",
+    print("ALL-CLAY SECTION37 SELECTED ROOTS",
           "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
     return 0 if report["all_selected_roots_passed"] else 2
