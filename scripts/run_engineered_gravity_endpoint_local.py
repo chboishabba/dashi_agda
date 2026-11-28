@@ -14,6 +14,8 @@ CORE=(
     "check_engineered_gravity_same_action_geometry.py",
     "check_engineered_gravity_derivative_action.py",
     "check_engineered_gravity_finite_interface.py",
+    "check_engineered_gravity_l3_action_boundary.py",
+    "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
     "check_kk_radion_reduced_action.py",
