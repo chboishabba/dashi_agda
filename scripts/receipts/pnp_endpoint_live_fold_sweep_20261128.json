@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python under timeout 90; primary changed executable source Git blobs matched committed readback. Previous local dependencies recovered in /tmp/pnp_next including selected original function extracts. No kernel or CI run.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_endpoint_live_fold.py",
+      "blob": "093f927b6adfb016f22fd2c4fa695fa74fd13d73",
+      "seconds": 1.24,
+      "mixed_exact_clipped": 720,
+      "guarded": 360,
+      "x3c": 6,
+      "singleton": 6,
+      "empty": 6,
+      "refusal": 1,
+      "metered_data_operations": 294847
+    },
+    {
+      "file": "scripts/check_pnp_sweep_affine_ledger.py",
+      "blob": "9279b6de99fba1b198f5165fc5e36b3685208269",
+      "seconds": 1.41,
+      "finite_actual_emitter": 936,
+      "huge_modular": 26,
+      "horizon": "10^60+1",
+      "finite_moduli": [
+        3,
+        5,
+        43
+      ],
+      "huge_reference_moduli": [
+        3,
+        5,
+        43,
+        65537
+      ],
+      "nonblank_materialization_refusal": true
+    },
+    {
+      "file": "scripts/check_pnp_endpoint_portfolio.py",
+      "blob": "dfb744bc4e42064b3a0ea40689f7c6575a526ef7",
+      "seconds": 0.72,
+      "typed_cnf": 5,
+      "singleton": 5,
+      "guarded": 10,
+      "hard": {
+        "SAT": 2,
+        "IMPROVED": 5,
+        "MINIMUM": 7
+      },
+      "refusal": 2,
+      "root_reservations": {
+        "original_cnf": 5000000,
+        "singleton": 5000000,
+        "relative": 10000000,
+        "hard_affine": 42000000
+      },
+      "typed_dispatch_blob": "b1a9c701b6cbf418daacb02e7914f216744a6782"
+    }
+  ],
+  "limits": [
+    "Logical allowance separate from explicit metered data operations; no native physical clock proof.",
+    "All tests scoped; exact-cover controls connected low-width cycle family, not arbitrary X3C.",
+    "Huge modular checks test residues, not exact giant raw count materialization.",
+    "Native proof bodies written but not run, no cross-kernel acceptance.",
+    "No universal producer or Clay endpoint established."
+  ]
+}
