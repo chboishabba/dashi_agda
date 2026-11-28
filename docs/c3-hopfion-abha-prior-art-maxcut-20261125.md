@@ -2463,3 +2463,19 @@ This replaces any implication that the lowest BR4 energy alone controls its phys
 **Constructed source:** native BR34 `PhysicalTraceCurrency`, `PhysicalTraceEnergyPayment`, and `traceEnergyBudget` retain both 15/5 endpoint velocities, normal time derivatives, actual weighted bulk masses and unpaid higher-energy residual. `scripts/check_hopf369_br43_two_sided_trace.py` records the analytic argument, all 15/5 polynomial positive Gram stress controls, physical two-ended b²/b⁴ weights, constant-mode negative control and unchanged BR37 derivative losses. `scripts/check_hopf369_br43_trace_energy_weld.py` explicitly charges independent D (and retains a fail-closed negative control when trace is unpaid). The bounded runner now includes BR43 small fast sectors and splits full metric/gauge polynomial controls into its heavy section. All newly written checkers are **COMMITTED_UNRUN** and native Agda **CONSTRUCTED_PENDING_KERNEL**.
 
 Remaining **actual same-object weld**, narrower than a generic “trace theorem”: establish differentiated BR4 energy in the weighted variable Einstein–Israel chart at order s+1 normal derivative (and s+4 tangential metric/s+2 gauge, possibly anisotropic), control the differentiated BR33/34 D/E boundary commutators and BR19 moving-wall graph jets by those energies, and prove physical BR29 subsidiary forcing has no unallocated zero-speed component on that same solution. Then BS13/BR31 weighted quotient coercivity and a genuine tame local construction/restart. BR43 gives the otherwise missing precise 1D trace step, but does NOT certify these coupled PDE hypotheses.
+
+
+## BR44 — coupled differentiated BR4 energy, exact source-ledger closure
+
+BR43 made the genuine +1 normal derivative cost explicit. To prevent that higher-energy term D from being silently absorbed by the lower metric energy E, new `scripts/check_hopf369_br44_two_level_energy.py` implements the **conditional two-level** continuous majorant with independent source and coefficient inputs:
+```
+  E' <= a E+b D+f,    D' <= c E+d D+g,    E,D,f,g >=0.
+```
+Here BR43 fixes `b=epsilon*(2L c_n/m)` and supplies the trace contribution to `a` from the original physical H¹ normal trace; c,d MUST come from the differentiated BR4 Einstein-Israel physical energy (not a guessed zero). For any lambda>0 define H=E+lambda D. Then *algebraically*
+```
+ H' <= K_lambda H+f+lambda*g,
+ K_lambda=max(a+lambda*c, d+b/lambda).
+```
+The underlying proof is `H' <= (a+lambda c)E+(b+lambda d)D+f+lambda g`; compare each positive coefficient with K_lambda and lambda K_lambda. It yields a conditional integral Gronwall/finite-slab Duhamel inequality once the independent actual PDE source estimates are supplied. This is a substantially more explicit analytical endpoint than a single unproved “tame bound”: the minimal required additional theorem is a high-order BR4 energy bound supplying real c,d and physical forcing g on the **same** D/E wall, alongside BR29 Bianchi source cancellation and BR31 domain control. None is supplied by BR44's arithmetic.
+
+The new checker retains the positive normal derivative budget, tests 16 exact rational coupled steps and the coefficient comparison, and is registered in the <=90s checkpointed runner as `BR44.two_level`. Source is COMMITTED_UNRUN; high-order PDE estimate/Agda kernel acceptance still unpaid. No CI, no declaration that the physical Einstein–Israel nonlinear theorem is solved. Continuing priority: derive the actual differentiated BR4 energy matrices with BR40b background/source time jets and BR40d signed normal work; pay normal derivative higher-energy and tangential BR37 losses simultaneously; attach BR29 actual variable constraint forcing; only then physical local solution and reflecting-domain continuation.
