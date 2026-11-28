@@ -26,3 +26,13 @@ originalFiniteGFactorization = Algebra.originalGPrefixSignedSquares
 originalFiniteRateZero :
   Seq._ConvergesTo_ Rate.originalGeometricRate R.0ℝ
 originalFiniteRateZero = Rate.originalGeometricRateZero
+
+-- Section 30: direct ONE-absolute-bound receiver on the same original
+-- Bishop represented finite source (no independent lower/upper brackets).
+import DASHI.Physics.YangMills.YMClayCMP102OriginalAbsoluteRateReceiverExact as Abs
+
+originalFiniteAbsoluteErrorConverges :
+  ∀ X → Abs.originalAbsoluteRateBound X →
+  Seq._ConvergesTo_ (Original.originalGPrefix X) R.0ℝ
+originalFiniteAbsoluteErrorConverges =
+  Abs.originalGPrefixZeroFromAbsoluteRate
