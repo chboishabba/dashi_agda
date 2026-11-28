@@ -76,3 +76,8 @@ Live Paper 1 NS 43ad73121c0d, Paper 3 YM dd5a7ba7ff43 and Paper 8 cross-programm
 ## Section 18 synchronization
 
 Live Paper 1 NS f749e0fc2f7f, Paper 3 YM e641599d7676 and Paper 8 cross-programme 7b4a8b5c7f5e track [Section 18](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (6b4b13d80e6e). NS divergence preservation and integrated tail, Hodge affine saturation, BSD cyclic sign differences, PNP source-derived cluster planner, YM signed actual exponential curve source-written; 6475 independent scoped exact controls, no native kernel. RH/forced NS admission and unforced profile remain blocked. Other papers unchanged in this tranche; no theorem or prize claim promoted.
+
+
+## Section 19 synchronization
+
+Papers 1, 3 and 8 now reflect Section 19 (roadmap 703761273f04): actual NS reality covariance/AB import, BSD actual reverse-half doubling, Hodge full-coordinate cone kernel, YM ordered signed word velocity, and PNP paid exterior coverage. 2827 exact local controls; native replay not executed. Other papers unchanged, no new prize claim.
