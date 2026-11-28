@@ -8,6 +8,7 @@ module DASHI.Cognition.PNF.X369FullNativeE8LeechPriorWeldExact where
 -- scripts/check_x369_full_native_e8_leech_chart.py.
 -- Kernel checking deliberately deferred.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_*_)
 open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as H
@@ -63,13 +64,11 @@ module ChosenWaveChart
     actPacket : Wave8 × Centre → Wave8 × Centre
     actPacket (w , c) = (act w , c)
 
-    data NativeActionClosure : Set where
-      nativeActionClosure :
-        ((x : Native) → Native) →
-        ((x : Native) →
-          nativeEncode (nativeActionClosure.action x)
-            ≡ actPacket (nativeEncode x)) →
-        NativeActionClosure
+    record NativeActionClosure : Set where
+      field
+        action : Native → Native
+        closed : (x : Native) →
+          nativeEncode (action x) ≡ actPacket (nativeEncode x)
 
     -- A concrete witness of nonclosure is a proof about THIS chart,
     -- not a disproof of the E8 lattice or of the 369 fabric.
