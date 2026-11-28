@@ -19,12 +19,14 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalFactorialMassBudgetExact wher
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product using (_×_)
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
+open import Data.Integer.Base as Z using (+_; +≤+)
+open import Data.Nat.Base using (z≤n)
+open import Data.Rational.Unnormalised as Q using (0ℚᵘ; 1ℚᵘ; _/_; *≤*)
 import Real as R
 import RealProperties as P
 import Sequence as Seq
 import DASHI.Foundations.BishopFiniteRatioBudgetExact as Budget
+import DASHI.Physics.YangMills.YMClayCMP102OriginalFactorialSingletonExact as Singleton
 import DASHI.Physics.YangMills.BalabanCMP109BishopRootFreeSeriesExact as CMP109
 import DASHI.Physics.YangMills.YMClayCMP102OriginalEndpointCauchyShiftExact as Original
 
@@ -123,3 +125,33 @@ originalBAllFiniteMassBelowTenFiftySevenths ratio initial hbudget count =
     (Budget.finiteRatioAllPrefixesBounded
       Original.bCoefficient ratioB budgetB
       hbudget CMP109.bNN ratio originalBFixedBudget count)
+
+-- These are genuine nonnegative rational EMBEDDING proofs, not
+-- positivity fields assumed from outside the source.
+originalBudgetANonnegative : R.NonNegative budgetA
+originalBudgetANonnegative = P.0≤x⇒nonNegx
+  (P.p≤q⇒p⋆≤q⋆ 0ℚᵘ (+ 12 / 11)
+    (Q.*≤* (Z.+≤+ z≤n)))
+
+originalBudgetBNonnegative : R.NonNegative budgetB
+originalBudgetBNonnegative = P.0≤x⇒nonNegx
+  (P.p≤q⇒p⋆≤q⋆ 0ℚᵘ (+ 20 / 19)
+    (Q.*≤* (Z.+≤+ z≤n)))
+
+-- After the ACTUAL original factorial-ratio certificate, no
+-- independent positive-budget or singleton data remain at all.
+originalAAllFiniteMassFromFactorialRatio :
+  OriginalARatio → ∀ count →
+  R._≤_ (Seq.SeriesOf Original.aCoefficient count)
+    (R._⋆ (+ 6 / 11))
+originalAAllFiniteMassFromFactorialRatio hratio =
+  originalAAllFiniteMassBelowSixElevenths
+    hratio Singleton.originalASingleton originalBudgetANonnegative
+
+originalBAllFiniteMassFromFactorialRatio :
+  OriginalBRatio → ∀ count →
+  R._≤_ (Seq.SeriesOf Original.bCoefficient count)
+    (R._⋆ (+ 10 / 57))
+originalBAllFiniteMassFromFactorialRatio hratio =
+  originalBAllFiniteMassBelowTenFiftySevenths
+    hratio Singleton.originalBSingleton originalBudgetBNonnegative
