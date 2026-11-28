@@ -52,7 +52,7 @@ def reference(modulations,phase,weight):
 
 
 def run(a):
-    from mmgroup import MM
+    from mmgroup import MM,MMV
     from importlib.metadata import version
     require(0<a.seconds<=90 and bool(a.resume)==bool(a.resume_sha256),'bounded source')
     deadline=monotonic()+a.seconds
@@ -97,11 +97,21 @@ def run(a):
         source_owners={p:digest((ROOT/p).read_bytes()) for p in OWNERS})
     contract=json.loads(canon(contract))
     cursor=0;v=CV.reopen(seed['vector'])
+    for r in (left,right):
+        require(all(digest((ROOT/p).read_bytes())==s for p,s in r['source_owners'].items()),
+                'lifted seed source owners changed')
+    start_mod=v.residue().copy()
     if a.resume:
         r=read_pinned(a.resume,a.resume_sha256)
         require(r['contract']==contract and r['status']=='bounded_incomplete','actual resume scope')
         cursor=r['cursor'];require(0<=cursor<=len(plan),'actual source cursor')
         v=CV.reopen(r['vector'])
+        mv=MMV(7)('V',start_mod.astype(np.uint8))
+        for kind,g,k in plan[:cursor]:
+            if kind=='action':mv=mv*g
+            else:mv=mv+pow(2,(-k)%3,7)*(mv*g)+pow(2,(-2*k)%3,7)*(mv*(g**2))
+        require(np.array_equal(v.residue(),np.asarray(mv['E'],dtype=np.int64)%7),
+                'actual resumed source stage reduction')
     while cursor<len(plan):
         if monotonic()>=deadline:break
         kind,g,k=plan[cursor]
