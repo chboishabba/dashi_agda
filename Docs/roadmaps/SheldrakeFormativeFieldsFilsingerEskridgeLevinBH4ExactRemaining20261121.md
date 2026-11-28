@@ -1,5 +1,16 @@
 # Formative fields × source work × Filsinger/Eskridge × Levin/BH4 — exact remaining phase roadmap
 
+## 2026-11-28 — actual resumable 90-second local gate; three exact passes, native missing
+
+[Local 90-second content-hash checkpoint runner](../../scripts/run_solar_maxcut_local.sh), commit 26a2286266ee76aa2c81a7a242c629530074c03d. Bash syntax checked and local source-equivalent script run twice. The 2nd execution RESUMED the first PASS via sha256 and executed remaining tests (without CI/Agda/Lean):
+- check_solar_native_contract_sympy.py PASS, SHA256 bd5eca2068b92e9ea1ff195236a7e68ee2e689551d0f725ab9f1640d594e0275.
+- check_solar_indexed_stage_tangent_sympy.py PASS, SHA256 9f2fb376f9c5699850876e356ee237088e16fc15e03080f524422f2b772ed71f.
+- check_passive_global_exact_sympy.py PASS, SHA256 95dfd6ac5dbc597ee80837cb9bc31bbfa6b289d0bda97a1c9f0bac3f419981c6.
+- Native check_solar_spherical_reverse_integration.py: MISSING_SOURCE in local runtime, runner exits 2. No native receipt, not PASS.
+
+Local roots in /mnt/data/solar_maxcut contain only partial source graph; connector exposes PR files but raw.githubusercontent.com fails DNS in sandbox. The committed scripts and locally tested variants may differ in comments/source; content-hash receipts attach to local bytes ONLY. Do not report a full native test pass, and do not mark globally physical active/passive endpoint proven. Next P0 is to materialize the native dependency modules or obtain a checkout in the same runtime, rerun the committed gate, repair failures and then execute bounded inverse under original state restoration. No user-provided data replacement needed for synthetic fixture; historical unavailable attachments are separate.
+
+
 ## 2026-11-28 — staged indexed tangent executed locally; native fixture remains gated
 
 [12-stage exact indexed Cayley check](../../scripts/check_solar_indexed_stage_tangent_sympy.py), commit 2e17207906a9cedd702e726e914980e0b7b17f52. Equivalent local checker executed with SymPy 1.14 exit0: two dissipative on-site stages and two signed skew offsite exchange stages per incident slot, three consecutive slots [1/2,-1/3,0] including source-off terminal. For each of 12 stages, differentiating exact original midpoint flow matches the propagated JVP; exact stage energy ledger PASS, full source reflection derivative PASS, source receiver useful-work derivative PASS, all three terminal state derivatives and original-state squared restoration JVP PASS, local dissipativity and offsite skew negative-property guards PASS. This covers memory and serial split order, unlike prior two-stage dense surrogate. The locally executed script was a source-equivalent variant; committed file has not had an exact byte-parity execution receipt. No CI, Agda or Lean.
