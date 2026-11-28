@@ -9,6 +9,7 @@ from solar_spherical_whitney import shell_mesh
 from solar_physical_causal import reaction,MASS,CHARGE
 from solar_support_transition import support_transition
 from solar_restoration_geometry import thermal_return_geometry,analytic_support_return_obstruction
+from solar_asymptotic_return import source_off_tail_receipt
 from solar_population_amplitude_event import right_reaction_support
 from solar_earth_collision_tensor import rates
 from solar_physical_cone import timed_step
@@ -152,7 +153,15 @@ def cycle(material,cfg):
     assert corrected_net<=campaign['incident_J']+1e-8*max(1.,campaign['incident_J'])
     thermal_geometry=thermal_return_geometry(heat,dt,cap,cool,iteration+1,tail,atol[3])
     support_geometry=analytic_support_return_obstruction(pop0>0,analytic_pop_support)
+    tail_receipt=None
+    if 'asymptotic_tail_probe_steps' in cfg:
+        tail_receipt=source_off_tail_receipt(x,pop,pool,theta,pop0,pool0,vol,chem,cap,cool,q,dt,cfg['asymptotic_tail_probe_steps'])
+        tail_receipt['prefix_campaign_net_J']=campaign_net
+        if 'work' in tail_receipt:
+            tail_receipt['conditional_limit_net_interval_J']=[campaign_net,campaign_net+tail_receipt['work']['additional_net_upper_J']]
+            tail_receipt['interval_is_rounding_certified']=False
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
+                asymptotic_tail=tail_receipt,
                 analytic_return_geometry=dict(thermal=thermal_geometry,population=support_geometry,
                     exact_original_return_obstructed=thermal_geometry['exact_zero_return_obstructed'] or support_geometry['exact_zero_population_return_obstructed'],
                     current_strict_gate_is_tolerance_based=True),
