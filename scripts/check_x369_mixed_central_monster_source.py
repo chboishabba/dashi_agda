@@ -60,6 +60,17 @@ def mixed_mul(x,y):
     return add(a,e,6),add(b,f,6),add(c,g,2),add(d,h,2),(z+w+dot(a,f)+3*dot(c,h))%6
 
 
+def mixed_right_action(position,phase,element):
+    """External tensor Schrödinger action; exact phase, no complex float."""
+    x,r=position;a,b,c,d,z=element
+    decode(element)
+    require(len(x)==len(r)==6 and all(type(k) is int and 0<=k<6 for k in x)
+            and all(type(k) is int and k in (0,1) for k in r)
+            and type(phase) is int and 0<=phase<6,'mixed position or phase')
+    return (tuple((i+j)%6 for i,j in zip(x,a)),
+            tuple((i+j)%2 for i,j in zip(r,c))), (phase+z+dot(x,b)+3*dot(r,d))%6
+
+
 def certificate():
     # Each matched pair has 6^3 states. Check both projections and
     # multiplication for every pair of elements of that one-pair group.
@@ -84,10 +95,24 @@ def certificate():
                     w=encode((k,1),zero3)
                     require(decode(mixed_mul(v,w))==(central_mul((x,s),(k,1)),mul3(y,zero3)),
                             'full mixed law')
+    # Exact tensor action with one shared six-state position and all
+    # additional binary positions retained. The phase composition
+    # follows from the same dot-product cocycle checked above.
+    action_checks=0
+    for x in (0,1,4096,0xffffff,0x123456):
+        for y in (0,1,4096,0xffffff,0xabcdef):
+            g=encode((x,1),((1,2,0,1,2,0),(0,1,2,0,1,2),2))
+            h=encode((y,0),((2,1,1,0,2,1),(1,2,0,2,0,1),1))
+            for p in (((0,)*6,(0,)*6),((0,1,2,3,4,5),(1,0,1,0,1,0))):
+                q,t=mixed_right_action(p,0,g)
+                require(mixed_right_action(q,t,h)==mixed_right_action(p,0,mixed_mul(g,h)),
+                        'mixed right action law')
+                action_checks+=1
     leech_cols,_=leech_binary()
     return dict(status='mixed_central_CRT_exact',binary_order=2**25,ternary_order=3**13,
                 product_order=2**25*3**13,shared_mod6_pairs=6,retained_binary_pairs=6,
                 one_pair_exhaustive_products=n,centre_order=6,
+                external_tensor_dimension=6**6*2**6,external_right_action_checks=action_checks,
                 binary_lattice_hyperbolic_frame=list(leech_cols),
                 literal_binary_ternary_isomorphism=False,
                 direct_product_embedded_in_monster=False,
@@ -171,6 +196,19 @@ def actual():
         for g,k in zip(A,b):w=w*g**k
         for g,k in zip(B,a):w=w*g**k
         return w*z**t
+    def comm_exp(g,h):
+        for t in range(3):
+            if g*h==z**t*h*g:return t
+        raise ValueError('actual 3B source commutator outside centre')
+    def from_source(w):
+        a=tuple(comm_exp(w,g) for g in A)
+        b=tuple((-comm_exp(w,g))%3 for g in B)
+        base=to_source((a,b,0))
+        for t in range(3):
+            if w==base*z**t:return a,b,t
+        raise ValueError('actual 3B source inverse')
+    for x in [((0,)*6,(0,)*6,0),((1,2,0,1,2,0),(2,0,1,2,0,1),2)]:
+        require(from_source(to_source(x))==x,'actual 3B inverse')
     for i in range(6):
         for j in range(6):
             a=tuple(int(k==i) for k in range(6));b=tuple(int(k==j) for k in range(6))
