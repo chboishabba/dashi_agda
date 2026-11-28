@@ -1,7 +1,7 @@
 """Witness-to-trace adapter; no endpoint search or unrestricted contraction claim."""
 from check_pnp_affine_normal_components import bits, canon, chart, satisfies
 
-def trace(n,R,H,caps,x,y,B,flats=()):
+def trace(n,R,H,caps,x,y,B,flats=(),atomic_basis_block=False):
     """Return signed macro receipt, or None on nonimprovement/prefix refusal.
     Budget exceptions propagate; caller must retain original state.
     Hard nonlinear flats are checked at macro boundaries, not microstates.
@@ -24,8 +24,14 @@ def trace(n,R,H,caps,x,y,B,flats=()):
     initial=residual(x);target=residual(y)
     if potential(target)>=potential(initial):return None
     state=x;rr=initial;out=[]
-    for j,v in zip(free,V):
-        if not ((x^y)>>j&1):continue
+    active=tuple(v for j,v in zip(free,V) if ((x^y)>>j&1))
+    if atomic_basis_block:
+        # Only caller-authorized endpoint semantics: internal units remain
+        # visible but are not required to be source-admissible checkpoints.
+        block=0
+        for v in active:block^=v
+        active=(block,) if block else ()
+    for v in active:
         B.pay('trace_macro',1+n*(1+len(H)+len(R)+sum(map(len,flats))))
         nxt=state^v
         if not satisfies(nxt,H,flats):return None
@@ -51,7 +57,8 @@ def trace(n,R,H,caps,x,y,B,flats=()):
     if state!=y or rr!=target:raise AssertionError('endpoint')
     return dict(start=x,end=y,demand=H,hard_flats=flats,rows=R,caps=caps,
                 initial=initial,final=target,macros=out,
-                decrease=potential(initial)-potential(target))
+                decrease=potential(initial)-potential(target),
+                atomic_basis_block=atomic_basis_block)
 
 def recover_trace(n,R,H,caps,x,B,signed_screen=False,flats=()):
     """Existing consumer owns discovery; receipt is optional and transactional."""
@@ -72,9 +79,9 @@ def recover_trace(n,R,H,caps,x,B,signed_screen=False,flats=()):
     except (ProbeLimit,Exhausted,RecursionError):return None
 
 
-def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8):
+def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,atomic_basis_block=False):
     """Find a strict aggregate improvement by the existing separator fold.
-    Return (status, receipt, lower). A lower bound is for the affine carrier,
+    Return (status, receipt, lower). A lower bound is for the hard-feasible carrier,
     not a claim that hard nonlinear prefixes are reachable.
     """
     from check_pnp_separator_row_strata import build, minimum_excess
@@ -88,19 +95,16 @@ def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8):
     phi=sum(max(0,(r&x).bit_count()-c) for r,c in zip(R,caps))
     if phi==0:return 'SAT',None,0
     if not R or canon(Q+tuple((r,1) for r in R))!=Q:return 'UNKNOWN',None,0
-    # Existing builder requires every original column to occur.
-    union=0
-    for r in R:union|=r
-    if union!=(1<<n)-1:return 'UNKNOWN',None,0
     lower=0
     try:
         A=Allowance(B,max(0,B.left//2))
-        G=build(n,R,Q,A,leaf_cap,seam_cap)
+        G=build(n,R,Q,A,leaf_cap,seam_cap,hard_flats=flats)
         if G is None:return 'UNKNOWN',None,0
-        lower,y=minimum_excess(n,R,Q,caps,G,A)
+        lower,y=minimum_excess(n,R,Q,caps,G,A,hard_flats=flats)
+        if lower is None:raise AssertionError('incumbent is a hard-feasible point')
         if lower>=phi:return 'MINIMUM',None,lower
         if not satisfies(y,H,flats):return 'UNKNOWN',None,lower
-        receipt=trace(n,R,H,caps,x,y,B,flats)
+        receipt=trace(n,R,H,caps,x,y,B,flats,atomic_basis_block=atomic_basis_block)
         if receipt is None:return 'UNKNOWN',None,lower
         return 'IMPROVED',receipt,lower
     except (ProbeLimit,Exhausted,RecursionError):return 'UNKNOWN',None,lower
