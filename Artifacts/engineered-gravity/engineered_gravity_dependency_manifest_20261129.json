@@ -286,5 +286,73 @@
       "G3_vacuum",
       "G4_Einstein_RMHD"
     ]
+  },
+  "w1_source_boundary_welds": {
+    "tov_mass_traction_israel": {
+      "lanes": [
+        "D_active_stress_TOV"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_spherical_source_israel_abi.py",
+      "scope": "exact static/polar-areal spherical Einstein mass+radial traction to Israel K; dynamic velocity, GHY and metric open",
+      "source_equation": "m_prime=4pi*r^2*rho; nu_prime=(m+4pi*r^3*p_r)/(r^2*(1-2m/r))",
+      "physical_paid": false
+    },
+    "reciprocal_controller_ward": {
+      "lanes": [
+        "A_shielding",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+      "checker": "scripts/check_engineered_gravity_reciprocal_controller_ward.py",
+      "scope": "signed static radial G(X) flux, geometric dilution, nonzero controller work; physical action embedding and Einstein open",
+      "source_equation": "r^2 G(X) u_prime=q; T_rr_prime+4*T_rr/r=-(1/2)u_prime^T G_X u_prime X_prime",
+      "physical_paid": false
+    },
+    "maxwell_source_work": {
+      "lanes": [
+        "E_coherent_OCT369",
+        "F_EM_GW",
+        "H_lift",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_kk_same_action_stress.py",
+      "checker": "scripts/check_engineered_gravity_maxwell_source_work_abi.py",
+      "scope": "independent Maxwell 1-polarization source J, signed Poynting flux and J dot E; material constitutive J and Einstein open; KK source file is donor not same-source identification",
+      "source_equation": "partial_t((E^2+B^2)/2)+partial_x(E B)=-J E",
+      "physical_paid": false
+    },
+    "f8_israel_current": {
+      "lanes": [
+        "J_F8"
+      ],
+      "source_owner": "scripts/check_f8_full_pair_source.py",
+      "checker": "scripts/check_f8_current_israel_reciprocal_weld.py",
+      "scope": "original F8 master/Israel flux donor, same-clock native sidecar and full moving trace unpaid",
+      "source_equation": "original GN Israel source and reciprocal master flux",
+      "physical_paid": false
+    },
+    "g3_harmonic_receiver": {
+      "lanes": [
+        "B_bulk",
+        "G3_vacuum"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_g3_harmonic.py",
+      "checker": "scripts/check_engineered_gravity_g3_harmonic_receiver.py",
+      "scope": "harmonic reduced Einstein comparator, not physical constraint propagation/causal domain",
+      "source_equation": "reduced Ricci=0 plus independent subsidiary constraints",
+      "physical_paid": false
+    },
+    "g4_curved_frame": {
+      "lanes": [
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_f8_material_momentum_frame_weld.py",
+      "checker": "scripts/check_hopf369_br268_273_endpoint.py",
+      "external_checker_pr": 1554,
+      "scope": "external donor curved primitive stress; not in #1547 checkout nor a coupled Einstein-RMHD solution",
+      "source_equation": "ADM frame transformed RMHD stress",
+      "physical_paid": false
+    }
   }
 }
