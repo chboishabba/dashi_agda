@@ -97,7 +97,7 @@ halfBound M a b ha hb =
       finish = let open P.ℝ-Solver in solve 1
         (λ m → Κ (+ 1 / 2) ⊗ (m ⊕ m) ⊜ m) P.≃-refl M
   in P.≤-respˡ-≃ (P.≃-symm eq)
-    (P.≤-respʳ-≃ finish (P.*-monoʳ-≤-nonNeg triangle halfNN))
+    (P.≤-respʳ-≃ finish (P.*-monoˡ-≤-nonNeg triangle halfNN))
 
 pairBox : ∀ M f p → Box M (f (left p)) → Box M (f (right p)) →
   Box M (pair f p)
@@ -152,7 +152,7 @@ module At (inputs : Round11.BishopCutset) where
         nn = P.0≤x⇒nonNegx (P.≤-trans (P.0≤∣x∣ (C.re z)) (proj₁ b))
         eq = let open P.ℝ-Solver in solve 0
           (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ ⊜ Κ (+ 2 / 1)) P.≃-refl
-        le = P.*-monoˡ-≤-nonNeg
+        le = P.*-monoʳ-≤-nonNeg
           (P.≤-respʳ-≃ eq (P.+-mono-≤ (proj₁ u) (proj₂ u))) nn
     in P.≤-trans (proj₁ raw) le , P.≤-trans (proj₂ raw) le
 
