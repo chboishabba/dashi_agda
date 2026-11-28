@@ -3102,3 +3102,84 @@ Additionally a separately executed independent Python Lean native-axiom-regex au
 6. PNP: unavoidable original unrestricted SAT internal sharing-stable computational-work lower bound under full time/bit/control R1 semantics, OR a genuine polynomial SAT decision algorithm. One paired observation difference cannot imply superpolynomial time.
 
 All source code is WRITTEN AND COMMITTED. Native proof bodies have NOT been compiled, and the universal Clay claims all remain open until real kernel/analytic acceptance.
+
+
+## Section 40 — original six-Clay coarse-to-fine source cut, all-six signed geometry, bounded actual observation and full native log integrity (2026-11-29 AEST)
+
+### Live original owner heads and all-files-committed rule
+
+- YM Agda PR #1536, owner `agent/ym-p0-cmp119-r445-master-weld-20261121`: `bb1c34eb2f89db777edc13d1d24947c2cf28be31`, unchanged in this cut.
+- NS Lean PR #123, owner `research/ns-native-proof-weld-20261127`: `4051705b306d6050128b9e3881383993f1b217ae`, unchanged; Section39 fixed-one-radius/all-cutoff finite high-shell source is retained.
+- BSD/Hodge Lean PR #124, owner `research/clay-bsd-hodge-moment-orientation-20261127`: `cb982db32f1e6aa4d39b4d3f21700ba7e49cacea`.
+- PNP Lean PR #119, owner `research/clay-p0-polynomial-coverage-endpoint-20261124`: `7bcc51b322a4b7eb3bfadb0114d473f1b7a50b37`.
+- RH Lean PR #121, owner `fix/alpoge-original-admission-axiom-log-20261126`: `aa6b0323d25acb7de3f85187e801939de40039d8`, unchanged; genuine original RH external proof/admission is STILL MISSING.
+- Canonical all-Clay Agda PR #1551, owner `research/clay-four-p0-rollup-20261124`: `ebca988240e9708408c86514c0c5e8677875d519` before this roadmap.
+- All theorem sources, acceptance roots, runner repairs, regression and this roadmap are **committed in the owner's PR**. Any native receipt generated in a future local run must itself be committed after that run. No source was left as an uncommitted final artifact.
+
+### BSD — actual original signed two-crossing strict monotonicity at positive scale
+
+NEW `Synthesis/MillenniumBSDOriginalTwoCrossingMonotoneMomentNoGoExact.lean`, commit `10062fa1774988e4750f807ddb3875badf9e6b06`; root `Synthesis/ClayBSDSection40MonotoneMellinAcceptanceExact.lean`, commit `03cf7581696ea857207f0889fe9237df41eae74e`.
+
+The same original h(a,b,n), original integrated signed source, m_0=0, m_1>=0, and positive source crossing nodes a,b from the existing moment-progression owner yield:
+  if max(a,b)>=1, for ALL n>=0, m_(n+2)>m_(n+1).
+The proof composes the source-written strict symmetric two-crossing growth
+  m_(n+2)>max(a,b)*m_(n+1)
+with original nonnegative m_(n+1) and max(a,b)>=1. The no-go theorem rejects an alleged same-source non-increasing moment at any n. It does NOT show the selected original COMPLEX L-derivative equals these moments, nor establish rank equality or Sha finiteness. Native Lean unrun.
+
+### Hodge — simultaneous original six-address Q0 signed partner
+
+NEW `Synthesis/MillenniumHodgeDicksonOriginalAllSixQ0PartnerExact.lean`, commit `de682406360deedc97f1309452c21c60767a7360`; root `Synthesis/ClayHodgeSection40AllSixQ0PartnerAcceptanceExact.lean`, commit `cb982db32f1e6aa4d39b4d3f21700ba7e49cacea`.
+
+The original Q0/dField owner is `MillenniumHodgeDicksonGenericSignedFibreExact`, with the ACTUAL field polynomial
+  Q0Field(a,s)=-3a³-3a²s-a²+3as+3a-2s²+s+3
+and dField(a,s)=-3a²+3a+1-4s; Section39 paid the exact first-jet partner s+dField(a,s)/2. Section40 maps that SAME partner simultaneously over the six `Address` coordinates, proving:
+  for each i, Q0(a_i,partner_i)=Q0(a_i,s_i);
+  dField(a_i,partner_i)=-dField(a_i,s_i);
+  dField(a_i,partner_i)^2=dField(a_i,s_i)^2;
+  partner(partner(s))=s as full original Address→F functions;
+  partner(s)=s iff every original six signed Jacobian vanishes.
+This is a source-level local algebraic involution and branch/fold candidate. Do not infer a lift to the original coupled signed-product `ActualRootFibre` without proving its full sixfold derivative product constraint, nor global projective Chow existence/nonzero primitive cohomology. The sixfold product/monodromy/interface remains a meaningful NEXT precise Hodge weld. Native Lean unrun.
+
+### PNP — true original source pair, Fin k bounded event receipt
+
+NEW `Welds/PNPOriginalAnchoredFinClockObservationReceiptExact.lean`, commit `4508b450f50b6db2ac3fbd1429d7fb56a82bde7e`; root `Welds/PNPSection40OriginalFinClockAcceptanceExact.lean`, commit `7bcc51b322a4b7eb3bfadb0114d473f1b7a50b37`.
+
+Consumes the SAME original legally reopened Boolean pair x,y, original true F3 residual kernel, deterministic machine transition, and faithful terminal consumer from Section39. It upgrades
+  exists natural j<k: observe(j,x) != observe(j,y)
+to a real type-theoretic finite clock witness
+  exists j:Fin k, observe(j.val,x) != observe(j.val,y).
+This prevents assigning a physical event outside the actual terminal execution. `Fin 0` is empty, so a claimed faithful visible split at k=0 is impossible under original retained-initial-state fidelity. This is a typed one-event necessity, NOT a universal SAT sharing-stable internal-work lower bound. Native Lean unrun.
+
+### Native acceptance campaign — full stdout before receipt truncation, real tests
+
+Canonical owner `scripts/check_clay_section36_native_campaign.py`, commit `7acbba274bb9fad8ac2c3730cfb370824550ee00`, now retains subprocess stdout/stderr in temporary `_stdout_full/_stderr_full` fields. The native `#print axioms` declarations are ALL parsed against the COMPLETE compiler transcript; only AFTER auditing are those full fields removed and 5KB diagnostic tails serialized to deterministic JSON. This fixes a serious loophole: long build output could previously truncate a real or duplicate axiom report, creating false acceptance or false failure.
+
+Expanded root set at `ab1ca044a2e662efc31985753587ddab0332a5ed`: 22 original Agda/Lean source entrypoints (YM 6, NS 3, BSD/Hodge 8, PNP 5) plus one pinned original external RH proof admission = 23 required checks. They require immutable owner HEAD and clean tree. `all_selected_roots_passed` is selected native-source acceptance ONLY, not completed Clay solutions.
+
+The Python fail-closed suite `scripts/test_clay_section37_native_campaign_fail_closed.py` was corrected at `8fe38485c4fd1f8589f0bc7b7de152b8bf8d94ca` and `c74d39ca9a4fc2cbaf18228cb168af40aa25ab21`:
+- Previously its string fixtures contained DOUBLE escaped `\\\\n` (a literal slash and n) instead of newline escapes. This is an actual source defect; previous descriptions of their passes must NOT be treated as executed native evidence.
+- It now audits 22 Agda/Lean roots plus RH and includes subprocess stdout >7000 characters, a valid axiom report after a long line, and a malicious duplicate axiom declaration separated by >7000 bytes. The parser accepts/rejects by complete source, not by truncation.
+- The actual corrected test suite has NOT been run from this repo checkout in the container: the environment has no external GitHub DNS connection, and no Agda/Lean compiler is installed. A committed source file without an actual invocation is not an execution receipt.
+
+### Byte-identical original finite exact verification
+
+New canonical `scripts/check_clay_section40_original_geometry.py`, commit `ebca988240e9708408c86514c0c5e8677875d519`, was written into the local runtime and ACTUALLY executed:
+  SECTION40 ORIGINAL EXACT PASS
+  BSD 456, Hodge 21870, PNP 1616, TOTAL 23942.
+It checks selected exact all-index finite n samples of the same original two-crossing h and positive moments; signed Q0 partner invariance on all six original addresses for 3^6 exact rational a-profiles; and exhaustive 1-bit deterministic two-source observation differences on finite k<=3. All assertions passed. The local script `git hash-object` was `65e906f849cbef9912a8979b59e9f3da73b94ec5`. The GitHub fetched script SHA was EXACTLY `65e906f849cbef9912a8979b59e9f3da73b94ec5`: byte-identical committed source and executed source VERIFIED. These finite exact tests are NOT actual BSD selected L-function, Hodge global projective cycle, unrestricted SAT execution lower bound or native Lean kernel proofs.
+
+### Source accuracy / no-promotion owner chart
+
+YM #1536: Section39 original last-B signed Bishop positive wing paid; remaining TWO shifted Cauchy A(c-1) and B(c-2) positive all-count Bishop order leaves, native Agda 2.9 --safe acceptance; then physically distinct original SU(N) Wilson/CMP116/F19, OS positivity, interacting nontriviality and SAME-H mass gap.
+
+NS #123: Section39 source has ONE radius chosen before ALL Galerkin cutoffs and genuine finite physical ODE high-shell L1_t tightness. Remaining true cutoff-uniform SIGNED nonlinear transfer, pressure/source closure and actual smooth continuum PDE admission; no native acceptance.
+
+BSD #124: Section40 necessary monotone moment criteria under actual signed-source assumptions, but original selected complex L''/Mellin equality, analytic rank, Selmer/Sha comparison and finiteness open.
+
+Hodge #124: six-coordinate Q0 sign/fold source and two-lift saturation, but original coupled signed-product global deck, projective homogenization/branch gluing, proper Chow cycle and NONZERO primitive class pairing open.
+
+RH #121: existing xi/zeta statement BIDI and strict exact external native source/axiom admission checker; NO valid original external proof witness supplied. No RH proof.
+
+PNP #119: actual original paired legal finite-clock external observation NECESSITY, but no general algorithm sharing-stable unavoidable huge internal-event mass, legitimate full machine bit/control R1 cost, or polynomial SAT algorithm. No P vs NP proof.
+
+All new theorem files are SOURCE_WRITTEN and read back from GitHub; native Agda/Lean execution and complete trusted axiom checks have NOT run. All six universal Millennium problems remain open.
