@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local finite replay of new Python modules, not full branch or native kernel acceptance. All five new tested script Git blobs byte matched. Existing RREF and stack donors imported from prior local copies; signed observer integration not run from full checkout.",
+  "blobs": {
+    "intrinsic": "d8547ae343de34d8d067faa603cdcad464205fbf",
+    "campaign": "80c7aac80cfd13d57a69b60c0dcac8b128ffd3fc",
+    "observer": "5630c170f773e26c2fa0966a29815413a51ebe98",
+    "emitted": "84afda507a5a723e3290c9caf42ef3a5fbef2942",
+    "epoch": "31ecd0a3cef45afe0a1244d9c61fedd5ec778631",
+    "signed_integration_unrun": "b3c20aaa00073d0f119156159b1c5712ec73f956"
+  },
+  "C1a": {
+    "seed": 3692840,
+    "fixtures": 512,
+    "completed": 482,
+    "refused": 30,
+    "keys": 3789,
+    "reopen": 48078,
+    "golay": {
+      "ambient": 96,
+      "rank": 6,
+      "keys": 729,
+      "boolean_interior": 24,
+      "mass": 16777215,
+      "peak": 730,
+      "probes": 6594,
+      "work": 6220777
+    },
+    "observer": {
+      "seed": 3692841,
+      "fixtures": 512,
+      "contrasts": 1536,
+      "large": {
+        "rank": 1,
+        "peak": 4,
+        "probes": 180,
+        "work": 11340,
+        "hist": [
+          5592405,
+          5592405,
+          5592405
+        ]
+      },
+      "integration": "shared allowance source written; full branch replay pending"
+    }
+  },
+  "S1": {
+    "seed": 3692843,
+    "fixtures": 128,
+    "runs": 4578,
+    "epoch_runs": 18312,
+    "persistent": 524880,
+    "separated": 302904,
+    "demand": 10980,
+    "reads": 50358,
+    "parity_fibres": [
+      32768,
+      32768
+    ],
+    "future_reads": 0,
+    "scope": "Only genuinely separated end-state obligations charged during their own actual epoch. Not a universal lower bound."
+  },
+  "R1": {
+    "seed": 3692842,
+    "fixtures": 256,
+    "phase_lists": 16682,
+    "edges": 26068,
+    "noncontiguous": 7156,
+    "priority": 50046,
+    "scope": "Independent normalized phase specification compared with original Python sparse compiler and stable grouping; native emitter not executed. Native interior and endpoint widths written, not kernel checked."
+  },
+  "execution": {
+    "timeout_per_campaign": 90,
+    "full_checkout": false,
+    "dns_failure": true,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "universal_P0_closed": false
+  }
+}
