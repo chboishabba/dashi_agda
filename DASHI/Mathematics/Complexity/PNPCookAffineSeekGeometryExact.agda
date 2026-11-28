@@ -137,3 +137,51 @@ fullQueryCannotFit : ∀ {presentation}
   V.queryCharge generator query ≤ Q.steps query → ⊥
 fullQueryCannotFit generator query fit = sucNotLeSelf (Q.steps query)
   (N.≤-trans (fullQueryChargeStrict generator query) fit)
+
+
+-- Exact direct seek through the actual unary variable-index token run.
+-- Proof recursion is on the specification; the executable function uses
+-- comparisons and subtraction instead of constructing the token list.
+import Agda.Builtin.Nat as Nat
+open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
+import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact as Tokens
+
+lookup : ∀ {A : Set} → Nat → List A → Maybe A
+lookup zero [] = nothing
+lookup zero (x ∷ xs) = just x
+lookup (suc i) [] = nothing
+lookup (suc i) (x ∷ xs) = lookup i xs
+
+if_then_else_ : ∀ {A : Set} → Bool → A → A → A
+if true then x else y = x
+if false then x else y = y
+
+natSeek : Nat → Nat → List Prefix.CookSyntaxToken → Maybe Prefix.CookSyntaxToken
+natSeek n i rest =
+  if Nat._<_ i n then just Prefix.natSuccToken
+  else if Nat._<_ n i then lookup (Nat._-_ i (suc n)) rest
+  else just Prefix.natZeroToken
+
+natSeekExact : ∀ n i rest →
+  natSeek n i rest ≡ lookup i (Prefix.encodeNatInto n rest)
+natSeekExact zero zero rest = refl
+natSeekExact zero (suc i) rest = refl
+natSeekExact (suc n) zero rest = refl
+natSeekExact (suc n) (suc i) rest = natSeekExact n i rest
+
+literalSeek : ∀ {n} → CNF.Literal n → Nat →
+  List Prefix.CookSyntaxToken → Maybe Prefix.CookSyntaxToken
+literalSeek (CNF.positive i) zero rest = just Prefix.formulaVariableToken
+literalSeek (CNF.positive i) (suc k) rest = natSeek (Fin.toℕ i) k rest
+literalSeek (CNF.negative i) zero rest = just Prefix.formulaNegateToken
+literalSeek (CNF.negative i) (suc zero) rest = just Prefix.formulaVariableToken
+literalSeek (CNF.negative i) (suc (suc k)) rest = natSeek (Fin.toℕ i) k rest
+
+literalSeekExact : ∀ {n} (l : CNF.Literal n) k rest →
+  literalSeek l k rest ≡ lookup k (Tokens.literalTokensInto l rest)
+literalSeekExact (CNF.positive i) zero rest = refl
+literalSeekExact (CNF.positive i) (suc k) rest = natSeekExact (Fin.toℕ i) k rest
+literalSeekExact (CNF.negative i) zero rest = refl
+literalSeekExact (CNF.negative i) (suc zero) rest = refl
+literalSeekExact (CNF.negative i) (suc (suc k)) rest = natSeekExact (Fin.toℕ i) k rest
