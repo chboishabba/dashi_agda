@@ -49,6 +49,7 @@ CORE=(
     "check_engineered_gravity_shell_compliance.py",
     "check_engineered_gravity_same_endpoint_active.py",
     "check_engineered_gravity_exact_tov.py",
+    "check_engineered_gravity_tov_material.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
