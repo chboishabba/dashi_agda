@@ -493,6 +493,19 @@
       "physical_paid": false,
       "scope": "Original repaired material action first time jets: radial mass flux and density time derivative exactly match the prescribed scaled Einstein mass profile, but scaled radial-pressure profile is incompatible; original action pressure demands lapse-gradient correction. Full material Euler acceleration and angular Einstein evolution open.",
       "source_equation": "Y_t=-r*(lambda+2)/(lambda+1+r^2)*Sdot; rho_t=alpha*(-3+5r^2)*Sdot/(8pi); delta(nu_r)_t=4pi*r*(p_action,t-p_scaled,t)/f0"
+    },
+    "original_euler_frozen_surface": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_original_euler_boundary_obstruction.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "76648b5dd7bbb3900753041aaa4dc9511f474a7c",
+      "physical_paid": false,
+      "scope": "Restricted EXACT frozen undeformed Y=r, f=f0,N=N0 slice with nonzero reverse-solved Y_t and bounded Y_tt, N_t, f_t: nonlinear material Euler residual persists at wall. O(v^2) corrected initial spatial and metric geometry explicitly untested.",
+      "source_equation": "ELwall=-225*lambda*(lambda+2)*Sdot^2/[8pi(2lambda^2+4lambda-15)^2] !=0; bounded acceleration coefficient d(1)=0"
     }
   }
 }
