@@ -6,6 +6,14 @@ module DASHI.Moonshine.CM163BishopHecke41MatrixSymmetryExact where
 -- symmetry or generic-distinctness assumption is used.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_∸_)
+import Data.Nat.Properties as NP
+import DASHI.Analysis.BishopComplexReciprocalExact as Rec
+import DASHI.Moonshine.JInvariantBishopHomogeneousKleinTransportExact as Cancel
+import DASHI.Moonshine.CM163BishopHecke41AnalyticChartsExact as Chart
+import DASHI.Moonshine.CM163BishopHecke41ProductExact as Prod
+import DASHI.Moonshine.CM163BishopHecke41RestSlopeLimitExact as Rest
+import DASHI.Moonshine.JInvariantBishopFourierRowLimitExact as Lim
+import DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact as Power
 open import Data.Fin.Base as Fin using (Fin; toℕ)
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Product.Base using (_,_)
@@ -73,6 +81,11 @@ matrix c x y = sumC (λ i → sumC (term c x y i))
 
 Symmetric : Coefficient → Set
 Symmetric c = ∀ i j → c (expo i) (expo j) ≡ c (expo j) (expo i)
+
+fromSymmetryGate : ∀ c → M.SymmetryGate c → Symmetric c
+fromSymmetryGate c gate i j = Cert.throughAt 42
+  (Cert.throughAt 42 gate (expo i) (NP.m∸n≤m 42 (toℕ i)))
+  (expo j) (NP.m∸n≤m 42 (toℕ j))
 
 swapTerm : ∀ c x y → Symmetric c → ∀ i j → term c x y i j ≈C term c y x j i
 swapTerm c x y eq i j =
@@ -157,3 +170,56 @@ module At (inputs : Round11.BishopCutset) where
     complexTrans (full Fixed.p y)
       (complexTrans (matrixCong c (complexTrans SR.selectedSame (hj , P.≃-refl)) (C.≈C-refl _))
         (complexTrans (symmetric c sym Shift.K (realC y)) (fixedSlice c gate (realC y))))
+
+
+  module Selected = Fixed.At inputs
+
+  selectedK : CM.CMRoot → H.G.j Fixed.p ≈C Shift.K
+  selectedK hj = complexTrans SR.selectedSame (hj , P.≃-refl)
+
+  selected0 : CM.CMRoot → H.chart Fixed.p Fin.zero ≈C Shift.K
+  selected0 hj =
+    complexTrans (Cancel.quotCong (C.≈C-refl _) (C.≈C-refl _)
+      (H.G.globalGuard (Chart.chartPoint Fin.zero Fixed.p)) Selected.guard0)
+      (complexTrans Selected.j0
+        (complexTrans (Cancel.quotCong (C.≈C-refl _) (C.≈C-refl _) Selected.guard (H.G.globalGuard Fixed.p))
+          (selectedK hj)))
+
+  selected1 : CM.CMRoot → H.chart Fixed.p (Fin.suc Fin.zero) ≈C Shift.K
+  selected1 hj =
+    complexTrans (Cancel.quotCong (C.≈C-refl _) (C.≈C-refl _)
+      (H.G.globalGuard (Chart.chartPoint (Fin.suc Fin.zero) Fixed.p)) Selected.guard1)
+      (complexTrans Selected.j1
+        (complexTrans (Cancel.quotCong (C.≈C-refl _) (C.≈C-refl _) Selected.guard (H.G.globalGuard Fixed.p))
+          (selectedK hj)))
+
+  splitSelected : CM.CMRoot → ∀ y →
+    H.G.product Fixed.p y ≈C (powC (A._-C_ y Shift.K) 2 *C Cross.rest (H.c Fixed.p) (A._-C_ y Shift.K))
+  splitSelected hj y =
+    let x = A._-C_ y Shift.K
+    in complexTrans (A.mulCCongruent (A.subCCongruent (C.≈C-refl _) (selected0 hj))
+      (A.mulCCongruent (A.subCCongruent (C.≈C-refl _) (selected1 hj)) (H.tailAt Fixed.p y)))
+      (complexTrans (complexSym (L.complexMultiplyAssociative x x _))
+        (A.mulCCongruent (Power.powTwo x) (C.≈C-refl _)))
+
+  -- Cancel only the test coordinate squared; the two fixed charts
+  -- themselves may coincide, and no remaining branch is divided out.
+  reverseComplement : ∀ c → Symmetric c → SliceGate c → FullIdentity c →
+    (hj : CM.CMRoot) → ∀ y →
+    Rec.BishopComplexNonzero (A._-C_ (realC y) Shift.K) →
+    Cross.rest (H.c Fixed.p) (A._-C_ (realC y) Shift.K) ≈C Shift.sComplement (A._-C_ (realC y) Shift.K)
+  reverseComplement c sym gate full hj y nz =
+    Cancel.cancelLeft (powC (A._-C_ (realC y) Shift.K) 2) _ _ (Cancel.nonzeroPower nz 2)
+      (complexTrans (complexSym (splitSelected hj (realC y)))
+        (complexTrans (reverseSlice c sym gate full hj y) (Shift.sliceFactor (realC y))))
+
+  module Slope = Rest.At inputs
+
+  originalCenterSlope : ∀ c → Symmetric c → SliceGate c → FullIdentity c →
+    (hj : CM.CMRoot) → (y : Nat → R.ℝ) →
+    (∀ n → Rec.BishopComplexNonzero (A._-C_ (realC (y n)) Shift.K)) →
+    Lim.Conv (λ n → A._-C_ (realC (y n)) Shift.K) A.zeroC →
+    Cross.slope (H.c Fixed.p) A.zeroC ≈C realC (Literal.s3 ⋆)
+  originalCenterSlope c sym gate full hj y nz cv =
+    Slope.centerSlopeFromReverseSlice (λ n → A._-C_ (realC (y n)) Shift.K) nz cv
+      (λ n → reverseComplement c sym gate full hj (y n) (nz n))
