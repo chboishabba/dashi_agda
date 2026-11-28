@@ -17,6 +17,7 @@ CORE=(
     "check_engineered_gravity_l3_action_boundary.py",
     "check_engineered_gravity_l3_source_geometry.py",
     "check_engineered_gravity_finite_source_families.py",
+    "check_engineered_gravity_finite_admissibility.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
