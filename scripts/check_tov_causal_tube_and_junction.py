@@ -32,11 +32,23 @@ def main():
     assert s.simplify(kk-(df+phi*fp)*nu/(2*s.sqrt(f))-s.sqrt(f)*(dnu+phi*nup)-acc/s.sqrt(f))==0
     # Matched background f,f',nu',nu''; same wall acceleration;
     # delta f and delta nu' zero on each face => zero jump.
-    assert s.simplify(kt.subs(df,0)-kt.subs(df,0))==0
     # Independently compare faces with arbitrary perturbations:
     df2,dnu2=s.symbols('df2 dnu2',real=True)
     assert s.simplify(kk-kk.subs({df:df2,dnu:dnu2})-(df-df2)*nu/(2*s.sqrt(f))-s.sqrt(f)*(dnu-dnu2))==0
-    print('PASS spherical time-dependent linear Israel jump identity')
+    assert s.simplify(kt-kt.subs(df,df2)-(df-df2)/(2*r*s.sqrt(f)))==0
+    # Independent normal acceleration calculation with local metric jets.
+    N,f=s.symbols('N f',positive=True)
+    Nr,fr,Nt,ft,dN,df,dNr,vel,acc=s.symbols('Nr fr Nt ft dN df dNr vel acc',real=True)
+    Nw=N+eps*dN; fw=f+eps*df; Nrw=Nr+eps*dNr
+    rd=eps*vel; rdd=eps*acc
+    Ud=s.sqrt(1+rd**2/fw)/Nw
+    nr=s.sqrt(1+rd**2/fw)/s.sqrt(fw)
+    ar=rdd+fw*Nw*Nrw*Ud**2-eps*ft/fw*Ud*rd-fr/(2*fw)*rd**2
+    # n_t a^t is second order around a static wall in this chart.
+    actual=s.diff(nr*ar,eps).subs(eps,0)
+    expected=acc/s.sqrt(f)+df*Nr/(2*N*s.sqrt(f))+s.sqrt(f)*(dNr/N-Nr*dN/N**2)
+    assert s.simplify(actual-expected)==0
+    print('PASS spherical time-dependent linear Israel jump and independent normal acceleration')
     # Graph domain flux integral: for Lv continuous at endpoint, w~t,
     # V(t)v(t) continuous and p/t->a>0. J(0)=0 implies
     # v_t(0)=V(0)v(0)/a. Check leading model with a nonzero forcing.
