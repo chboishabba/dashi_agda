@@ -61,3 +61,8 @@ The live manuscript family has been advanced alongside the actual proof sources:
 ## Section 15 synchronization
 
 Live Paper 1 NS 93dbf3273b08, Paper 3 YM 853b8f79e506, Paper 8 cross-programme 92abbe2e417a follow the actual [Section 15 proof ledger](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (320b0e31e554). All six programmes retained. 5347 algebraic/CNF checks and 52 parser fixtures in each mode, native proofs pending. The unforced original upstream data/verifier remain unavailable. No new proof-state claims in independent Papers 2, 9, 10 or historical 4–7 in this tranche; retain prior reconciliation rather than overwrite parallel work.
+
+
+## Section 16 synchronization
+
+Live Paper 1 NS e36eae0859d86, Paper 3 YM 48c0366a4922 and Paper 8 cross-programme 3f9aa65fccf9 track the [Section 16 ledger](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (06b4dbcc5756). RSA/Shor exact coset geometry attached to actual BSD geometric doubling and Kummer fibres, with the split Mathlib root translation source; finite-field controls do not prove rational rank. All six unresolved Clay programmes retained. 14022 exact local algebraic/normal-fold controls; native kernel absent. RH/forced C/D admission still pending, unforced profile data unavailable. Independent Papers 2, 9, 10 and historical 4–7 unchanged; no duplication or promoted terminal claims.
