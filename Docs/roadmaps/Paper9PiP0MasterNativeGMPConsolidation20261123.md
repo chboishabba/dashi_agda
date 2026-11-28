@@ -3000,3 +3000,29 @@ The remaining geometry and integer-node rigidity consumers from the preceding se
 4. Attribution: classical modular Hecke, Eisenstein and Fourier theory, standard modular reduction and polynomial unisolvence, original Machin/Chudnovsky identities; DASHI native constructive transport and signed dyadic projection/contraction implementation. No novelty claim for classical mathematical identities.
 
 No Agda/Lean executables were present in the assistant environment; neither the new proof modules nor the full terminal cone were kernel-run. The remaining work is verification and any repairs those executions expose, not a claim that every source-written theorem is correct.
+
+
+## 29 Nov — native verification preparation and pinned API reconciliation
+
+Re-opened the original source and the actual pinned Murray/Bishop dependency at `viktorcsimma/bishop@240e38c7f6938f20f865b1f956c5f084da48bd54`. In particular, the nonnegative multiplication monotonicity superscripts and strict-positive multiplication monotonicity superscripts have DIFFERENT orientations in that API: `*-monoˡ-≤-nonNeg` keeps the left factor fixed, `*-monoʳ-≤-nonNeg` keeps the right factor fixed; `*-monoʳ-<-pos` keeps the left factor fixed, `*-monoˡ-<-pos` keeps the right factor fixed. Do not blindly reuse one notation for the other.
+
+Source repairs committed across dyadic projection, contraction, circle bounds, Fourier coefficient readback, quantitative rigidity, finite-fuel orbit reduction and actual radius cover. Fixed the actual scalar argument of `scaleCCongruent` (it takes a real, not reflexivity); replaced the unsupported limit-order invocation with the pinned `Sequence.xₙ≤yₙ⇒limxₙ≤limyₙ`; made ambiguous real multiplication congruences explicit and reconciled the geometric-series bound and nonnegative order transports. These are source-level corrections, not elaboration receipts.
+
+Targeted readback of 14 staged module blobs: parenthesis counts balanced and no explicit postulate, interaction hole, primTrustMe or termination/positivity/universe bypass token detected by the limited scan. This is NOT a transitive authority audit. The earlier slope seam is already owned by `RestSlopeLimitExact.actualSlopeLimit` and the actual `FourierRowLimitExact.limitTransport`; no replacement needed there.
+
+Independent local exact rational algorithm replay reproduced 12,480 cases for each of the two located policies, 6,291 and 8,444 inversions, maximum depths 2 and 3, both radius inequalities PASS. This rerun was equivalent to the committed Python diagnostic, not execution of Agda.
+
+### Local replay command
+
+In the pinned local Agda environment, from a clean committed checkout (initialise pinned dependencies and register the repository library first):
+
+```sh
+timeout 90s python3 -u scripts/check_paper9_native_global_checkpointed.py \
+  --checkpoint /tmp/paper9-native-strict.json
+```
+
+Repeat on unchanged source to resume. The runner records stdout/stderr and SHA-256 for every stage, preserves successful receipts atomically, binds checkpoints to the committed head, submodule pins, executable hash/version, options and resolved source hashes, and stops on a failure or timeout. It defaults to `agda -l dashi-agda --safe`. `--include /path/to/stdlib/src` and other include roots can be supplied for the lexical audit and checker. The separate `--diagnostic-unsafe` lane (use a different checkpoint) is for locating ordinary elaboration errors, not proof promotion. `--audit-only` writes a lexical dependency/authority report without asserting any kernel result. The lexical scan is conservative and is not a substitute for safe kernel validation, especially for unresolved library imports.
+
+The new runner itself is source-written and has not been exercised against a local Agda checkout in the assistant environment (no Agda/Lean executable, GitHub git remote unavailable). The connector was used to read and commit sources. Existing finite-node arithmetic receipts remain diagnostics only. Do not treat a timeout or an ordinary diagnostic success as theorem acceptance. Exact native gate reduction cost and remaining elaboration defects are still unknown until local replay.
+
+Acceptance order remains: staged geometric/analytic cone, finite certificates, concrete terminal module, then the original GMP same-real attachment and backend acceptance. No CI invoked; no theorem promoted.
