@@ -68,6 +68,37 @@ def boundary():
         assert normal[29]!=0
     print('BR39 boundary: 2 allocations x (30 metric + 10 gauge) signed rows PASS')
 
+
+def optical_matrices():
+    # This is the actual BR14/15 five-direction optical operator, not a
+    # componentwise scalar proxy: metric J_a mixes fifteen channels and
+    # subsidiary L_a mixes five channels. Projectors retain trace mixing.
+    R,J,Vb,Vh,Q,Lm,Sm=operators()
+    b=S.Integer(4); bk=S.Rational(2,3)
+    eigen=(-5,1,3)
+    E=sum((b**S.Rational(v,2)*q for v,q in zip(eigen,Q)),S.zeros(15))
+    Ei=sum((b**S.Rational(-v,2)*q for v,q in zip(eigen,Q)),S.zeros(15))
+    assert E*Ei==S.eye(15)
+    X=S.symbols('t x y z n');t,x,y,z,n=X
+    chi=1+n*n*(t+x)+t*y+z*x
+    def one_case(N,firsts):
+        U=S.Matrix([S.Integer(k+1)*t*x+S.Integer(k+2)*n*y+z*z+(k+1)*t for k in range(N)])
+        mass=S.diag(*[k+2 for k in range(N)])
+        def derivatives(U):
+            normal=S.diff(U,n,2)
+            tangent=sum(((-1 if i==0 else 1)*S.diff(U,X[i],2) for i in range(4)),S.zeros(N,1))
+            linear=sum((firsts[i]*S.diff(U,X[i]) for i in range(4)),S.zeros(N,1))
+            return normal+tangent+linear+mass*U
+        second=sum((S.diff(chi,X[i],2)*((-1 if i==0 else 1) if i<4 else 1)*U
+              +2*S.diff(chi,X[i])*((-1 if i==0 else 1) if i<4 else 1)*S.diff(U,X[i])
+                  for i in range(5)),S.zeros(N,1))
+        first=sum((firsts[i]*S.diff(chi,X[i])*U for i in range(4)),S.zeros(N,1))
+        assert (derivatives(chi*U)-chi*derivatives(U)-second-first).applyfunc(S.expand)==S.zeros(N,1)
+    one_case(15,[bk*E*J[i]*Ei for i in range(4)])
+    one_case(5,[2*bk*(-1 if i==0 else 1)*Lm[i] for i in range(4)])
+    print('BR39 optical: exact BR15 15-component and BS4 5-component matrix commutators PASS')
+
 if __name__=='__main__':
     scalar_bulk()
     boundary()
+    optical_matrices()
