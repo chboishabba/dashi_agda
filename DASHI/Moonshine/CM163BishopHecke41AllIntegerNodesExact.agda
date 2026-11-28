@@ -15,16 +15,12 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
 open import Data.Integer.Base as Z using (ℤ; +_)
 open import Relation.Nullary using (Dec)
-open import Relation.Nullary.Decidable.Core using (from-yes)
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
 import DASHI.Moonshine.CM163BishopHecke41IntegerPrefixCertificateExact as Cert
 import DASHI.Moonshine.CM163Hecke41FullIntegerMatrixExact as Matrix
 import DASHI.Moonshine.CM163BishopHecke41MatrixSymmetryExact as MatrixEval
 import DASHI.Moonshine.CM163BishopHecke41IntegerSpecializationReflectionExact as Reflect
-import DASHI.Moonshine.CM163BishopHecke41NativeFiniteAcceptanceExact as Native
-import DASHI.Moonshine.CM163BishopHecke41ArbitrarySliceSeriesExact as Series
-import DASHI.Moonshine.CM163BishopHecke41ArbitrarySliceResidualExact as Residual
 import DASHI.Moonshine.CM163BishopHecke41IntegerSpecializationExact as Special
 import DASHI.Moonshine.CM163BishopHecke41ConvergentSeriesExact as Eval
 import DASHI.Moonshine.CM163BishopHecke41PolynomialEvaluationExact as Poly
@@ -41,7 +37,6 @@ candidate = Matrix.originalMatrix
 
 module At (inputs : Round11.BishopCutset) where
   module R = Reflect.At inputs
-  module N = Native.At inputs
   module S = Special.At inputs
 
   module For (n : Nat) where
@@ -55,7 +50,7 @@ module At (inputs : Round11.BishopCutset) where
 
     -- This is the actual arbitrary-target original ramified series,
     -- with its 43-column integer candidate specialized at node n.
-    zeroPrefix : N.B.UnitGate → Gate → F.S.S.PrefixGate
+    zeroPrefix : R.L.W.UnitGate → Gate → F.S.S.PrefixGate
     zeroPrefix hu hn = F.zeroPrefix hu hn
 
     poleRemoved : N.B.UnitGate → Gate → ∀ p →
@@ -72,17 +67,13 @@ module At (inputs : Round11.BishopCutset) where
   nodeAt : NodeGates → ∀ n → n ≤ 42 → For.Gate n
   nodeAt gates n bound = Cert.throughAt 42 gates n bound
 
-  -- The two exact finite antecedents can be accepted independently.
-  -- Running this requires reduction of the concrete arithmetic gates;
-  -- from-yes is intentionally isolated to native acceptance.
-  nativeUnit : N.B.UnitGate
-  nativeUnit = N.unitChecked
-
-  nodePole : NodeGates → ∀ n → n ≤ 42 → ∀ p →
+  -- Unit certificate is an explicit input, never evaluated by this
+  -- ordinary analytic module. Only the isolated acceptance target may
+  -- force from-yes for all concrete finite decisions.
+  nodePole : R.L.W.UnitGate → NodeGates → ∀ n → n ≤ 42 → ∀ p →
     C._≈C_ (For.F.S.S.residual n p)
       (A._*C_ (R.A0.A0.t p) (Eval.value (For.F.S.S.tail n p)))
-  nodePole gates n hn = For.poleRemoved n nativeUnit (nodeAt gates n hn)
-
+  nodePole unit gates n hn = For.poleRemoved n unit (nodeAt gates n hn)
 
   -- Explicitly isolate GLOBAL analytic rigidity as one node-indexed
   -- obligation. It cannot be replaced by a finite cusp prefix.
