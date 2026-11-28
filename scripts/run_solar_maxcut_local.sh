@@ -13,6 +13,7 @@ for entry in \
   check_two_load_bernstein_sympy.py \
   check_four_world_source_off_sympy.py \
   check_solar_four_world_interaction_sympy.py \
+  check_solar_zero_population_stratified_sympy.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
