@@ -1875,3 +1875,98 @@ module At {r : Level} (F : C.RealField r)
   --                         (|u_t|²+sum_i|u_i|²).
   -- It is pointwise and is independent of BR37 frequency/glancing
   -- tame losses; full high-order physical graph/source control remains.
+
+  ------------------------------------------------------------------------
+  -- BR52: DIVIDED TAYLOR JET ALGEBRA, all orders, same moving ADM wall.
+  --
+  -- The coefficients are u^(n)/n!, not raw derivatives: multiplying
+  -- divided jets is ordinary Cauchy convolution. This prevents the
+  -- combinatorial factor loss that would arise by multiplying BR47's
+  -- raw derivative rows without their binomial coefficients.
+  --
+  -- Original ADM and graph coefficient series must be supplied from
+  -- the ACTUAL physical source and its derivatives; this finite complex
+  -- ring module cannot invent them.
+  ------------------------------------------------------------------------
+
+  DividedJet : Set r
+  DividedJet = Nat → S
+
+  splitConvolution : Nat → Nat → DividedJet → DividedJet → S
+  splitConvolution zero j f g = f zero * g j
+  splitConvolution (suc i) j f g =
+    f (suc i) * g j + splitConvolution i (suc j) f g
+
+  jetProduct : DividedJet → DividedJet → DividedJet
+  jetProduct f g n = splitConvolution n zero f g
+
+  jetSum : DividedJet → DividedJet → DividedJet
+  jetSum f g n = f n + g n
+
+  jetNeg : DividedJet → DividedJet
+  jetNeg f n = neg (f n)
+
+  jetScale : S → DividedJet → DividedJet
+  jetScale a f n = a * f n
+
+  record OriginalMaterialJetTower : Set r where
+    constructor originalMaterialJetTower
+    field
+      admDensityTaylor : DividedJet
+      graphTimeCoefficientTaylor : DividedJet
+      graphSpaceCoefficientTaylor : BR4Space → DividedJet
+      timeMetricTaylor : Nat → Tensor
+      spatialMetricTaylor : BR4Space → Nat → Tensor
+      timeGaugeTaylor : Nat → Cov
+      spatialGaugeTaylor : BR4Space → Nat → Cov
+      originalSourceADM : ADMPhysicalPoint
+      originalSourceGraph : MaterialGraphGradient
+  open OriginalMaterialJetTower public
+
+  -- Coefficients below are the actual BR51 k_t,k_i, independently
+  -- supplied by differentiating the source ADM/graph tensors. At order
+  -- zero they must match BR51's primitive exact coefficient; higher
+  -- identification is a separate source-jet compatibility proof.
+  metricConormalDefectJet : OriginalMaterialJetTower → Nat → Tensor
+  metricConormalDefectJet p n =
+    tab (λ i j →
+      splitConvolution n zero (admDensityTaylor p)
+        (jetSum
+          (jetProduct
+            (graphTimeCoefficientTaylor p)
+            (λ k → get (timeMetricTaylor p k) i j))
+          (λ k → sumBR4Space (λ a →
+            jetProduct (graphSpaceCoefficientTaylor p a)
+              (λ l → get (spatialMetricTaylor p a l) i j) k))))
+
+  gaugeConormalDefectJet : OriginalMaterialJetTower → Nat → Cov
+  gaugeConormalDefectJet p n a =
+    splitConvolution n zero (admDensityTaylor p)
+      (jetSum
+        (jetProduct (graphTimeCoefficientTaylor p)
+          (λ k → timeGaugeTaylor p k a))
+        (λ k → sumBR4Space (λ i →
+          jetProduct (graphSpaceCoefficientTaylor p i)
+            (λ l → spatialGaugeTaylor p i l a) k)))
+
+  record TwoFaceMaterialJetTower : Set r where
+    constructor twoFaceMaterialJetTower
+    field
+      plusMaterialTower minusMaterialTower : OriginalMaterialJetTower
+  open TwoFaceMaterialJetTower public
+
+  signedMetricDefectJet : TwoFaceMaterialJetTower → Nat → Tensor
+  signedMetricDefectJet p n =
+    subT
+      (metricConormalDefectJet (plusMaterialTower p) n)
+      (metricConormalDefectJet (minusMaterialTower p) n)
+
+  signedGaugeDefectJet : TwoFaceMaterialJetTower → Nat → Cov
+  signedGaugeDefectJet p n a =
+    gaugeConormalDefectJet (plusMaterialTower p) n a
+      - gaugeConormalDefectJet (minusMaterialTower p) n a
+
+  -- The resulting derivative-order n wall source is n! times this
+  -- divided coefficient. The ORIGINAL physical BR47 row, normal
+  -- value continuity, BR19 material good unknown, and original
+  -- BR29 Bianchi constraint are NOT replaced by this product algebra.
