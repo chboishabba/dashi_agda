@@ -419,3 +419,78 @@ valid unrestricted B critical continuation or another faithful
 C/D physical endpoint. NO source-WRITTEN bool or finite checker
 promotes one of these endpoints. Work forward in large blocks,
 not serial recomputation of already-owned geometry.
+
+
+## 9. Completed execution pass, byte-identical acceptance and original A geometry
+
+On 28 November the original source no-go was executed **against exact Git blobs**;
+later script changes added fail-closed Python -O guards and the same final source
+was rerun. The separate stages are:
+- R726 physical signed defect source: blob
+  `682ad3452a90322111bb8179bbbc68c7a4966aa4`,
+  PASS exact SymPy in under the 90s per-stage limit.
+- R645 stronger physical strict-margin source: blob
+  `4a35e38940c756adf5e0b36212605bdc97db694b`,
+  PASS exact SymPy under separate 90s limit. Original initial
+  critical production P=0, D=108; amplified P=0,D=432,
+  R406 amplified<-1104, margin-zero violation >240. Independent
+  inverted velocity has same energy/D and reversed R406 sign.
+- Both script hashes match source bytes read from GitHub connector;
+  Python -O is deliberately REFUSED because it drops assert-gates.
+  These PASS receipts are not kernel acceptance.
+
+Pinned, fail-closed, stage-checkpointed local runner committed:
+`scripts/check_ns_original_physical_maxcut_local_20261128.sh`.
+It checks each current Git SHA and runs each physical source at a hard
+90-second shell limit. Use `r726` and `r645` independently as checkpoints;
+`all` runs them in order and does not claim a native Agda/Lean pass.
+When source scripts evolve, update the SHA manifest after inspecting the
+exact difference, not by deleting the hash verification.
+
+**Actual Euclidean A geometry now source-written in native Lean #123:**
+`Synthesis/NavierStokesEuclideanOriginalMidpointLerayWeldExact.lean`.
+Rather than a new scalar record, it uses the SAME three Cartesian
+physical coordinates and complex divergence-free Fourier velocity.
+It proves both the exact physical midpoint identity
+  |eta|²+|xi-eta|² = |xi|²/2 +2|eta-xi/2|²
+and, from original eta·u_eta=0, the phase-preserving complex identity
+  xi·u_eta = -2(eta-xi/2)·u_eta.
+It also proves nonnegativity of the centered input rate at ν≥0 and
+zero divergence-form interaction at the exact midpoint. This is
+a **second-language proof representation of existing original R290/R541
+geometry**, not a new PDE/continuum existence result. The original
+Bishop Fourier/measure and signed exterior remain unpaid. A local
+independent SymPy exact test of these 3-vector equations passed
+512/512 input/output/compex-phase fixtures. Lean source PENDING_KERNEL.
+
+**Native R596 attribution repair:** Lean #123
+`Synthesis/NavierStokesFractionalR568EndpointWeldExact.lean`
+renames the supplied physical trace hypothesis to
+`hRealTimeTrace` throughout; R596/R597 only provide source finite
+Gram/forcing algebra, so an actual Q'(t), real time heat and FTC
+remain proof-bearing and cannot be claimed just from the filename.
+
+### Active branch receipts and next max-cut order
+
+1. **Mathematical validity first:** keep the two failed universal
+   R645/R726 physics shortcuts excluded in all future budgets; do not
+   construct arbitrary-time positive strict-margin certificates over
+   the full C=1 physical source, since explicit counterstates exist.
+2. **Positive A and B:** implement actual SAME Euclidean/periodic
+   PDE and continuation analytic inequalities on their original
+   physical spaces (or a completely different valid conditional
+   criterion with an independently proved ALL-data hypothesis).
+3. **Unforced negative A/B:** original Alpöge–Buckmaster seven data
+   objects/fifteen conditions require a real nonzero source profile
+   and the missing interval certificate; no available public bytes
+   currently satisfy them. The rigorous checker also remains absent
+   upstream in the inspected revision.
+4. **Forced C/D:** compatible nested source build, true statement/
+   pressure/force/solution comparison and independent scientific
+   review. Treat valid acceptance of ONE Clay option as terminal,
+   never a conjunction of all four.
+5. Run exact-head Agda/Lean kernel checks locally when toolchains
+   exist; repair actual compile errors without `sorry`,
+   `postulate`, opaque synthetic physical inputs or status Boolean
+   promotions. Keep all changes on the corresponding active PR
+   branches with attribution and native tests together.
