@@ -38,7 +38,7 @@ def cuts(pieces,initial,delay,T):
         pts.add(j*delay);j+=1
     return sorted(pts)
 
-def certify(m,a,path,degree=8):
+def certify(m,a,path,degree=8,block_path=None):
     with np.load(path,allow_pickle=False) as f:
         d,n,start,stop=map(lambda k:int(f[k]),('d','n','start','stop'))
         delay=q(f['delay']);grid=list(map(q,f['grid']));past=f['past']
@@ -83,6 +83,23 @@ def certify(m,a,path,degree=8):
         jump=0 if prev is None else bernstein_bound(X.subs(s,0)-prev,s)
         slabs.append((lo,hi,mu,b,c,rho,jump));prev=X.subs(s,1)
     result=replay(delay,T,slabs,initial_state_error,(initial_error,initial_error))
+    if block_path is not None:
+        with np.load(block_path,allow_pickle=False) as f:
+            assert int(f['start'])==start and int(f['stop'])==stop
+            assert q(f['delay'])==delay and int(f['knots'])==len(initial)
+            stored=S.Matrix([[q(v) for v in row] for row in f['M']])
+        assert stored.shape==(d+n*len(initial),k)
+        state_read=bernstein_bound(prev-stored[:d,:],s)
+        history_read=S.Integer(0)
+        for j,t in enumerate(grid[:-1]):
+            t=T+t
+            piece=next(p for p in reversed(pieces) if p[0]<=t<=p[1])
+            X=restrict(piece,piece[0],piece[1]).subs(s,(t-piece[0])/(piece[1]-piece[0]))
+            R,er=coeff(t,t+delay)[3]
+            H=R.subs(s,0)*X
+            history_read=max(history_read,bernstein_bound(H-stored[d+j*n:d+(j+1)*n,:],s)+er*bernstein_bound(X,s))
+        result['state_matrix_error']=S.Rational(result['endpoint'])+state_read
+        result['history_matrix_error']=r*S.Rational(result['last_window'])+history_read
     result['start']=start;result['stop']=stop;result['T']=T;result['delay']=delay
     return result
 
