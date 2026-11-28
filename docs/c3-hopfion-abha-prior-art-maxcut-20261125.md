@@ -2433,3 +2433,33 @@ The independent-jet negative control deliberately sets P0 u_1!=0: a moving proje
 **Execution support added but not invoked:** `scripts/run_hopf369_br39_42_bounded.py` builds independent local `--part fast|heavy|all` sections; each original source script has its own <=90s subprocess, bounded output, source/version SHA-256 identity, atomic JSON checkpoint/receipt, cached PASS only for identical source, retained FAIL/TIMEOUT, OPENBLAS/MKL/OMP threads capped to 1, no GitHub CI. Heavy stages split all 25 ordered tensor / five covector curved Gaussian normal checks and the actual 35D projected BR29 normal fibre; fast runs BR39, BR40 exact physical rows, BR41 and BR42. The native Agda kernel must be executed independently. **All BR42 and modified BR40e source/checkers remain COMMITTED_UNRUN, native kernel UNRUN.** As the user directs, do not substitute an unrun source artifact for a tested theorem.
 
 Next source-specific max-cut, with no generic replacements: supply the actual BR4/BR37 `c_E,c_data` in weighted spaces under variable coefficients including commutator and glancing losses; pay BR29 original projected Bianchi source forcing in the physical moving gauge/Israel graph; prove BS13/BR31 quantitative curvature quotient with exterior reflecting trace; construct the continuous local iteration and tame restart. BR42 is useful only to the extent that the actual physical estimates and true source coercivity can inhabit those payments. Preserve full original tensors, all holonomy/zero modes, source indices and signed wall energy.
+
+
+## BR43 — exact two-ended normal trace inequality and **separate higher-energy charge**
+
+The BR42 continuation source previously left the physical trace hypothesis wholly open. The normal fibre is only one dimensional, and BR31/BS11 already supply the actual smooth positive Gaussian reference warp and **two endpoint** geometry. A direct fundamental-theorem-of-calculus argument yields the following unconditional mathematical inequality, including nonzero constant mode and zero/glancing tangential frequency:
+
+For any Hilbert-valued `v in H¹([0,L];C^N)`, any weight `w(n)>=m>0`, and `L>0`:
+```
+ ||v(0)||²+||v(L)||² <= (4/(L*m)) int_0^L w||v||² dn
+                         +(2*L/m) int_0^L w||partial_n v||² dn.    (BR43.1)
+```
+Proof with explicit constants: `v(0)=v(x)-int_0^x v'(y)dy`, so `||v(0)||² <= 2||v(x)||²+2x int_0^x ||v'||²dy`. Integrate `dx/L`. Tonelli gives kernel `(L²-y²)/L <= L`, hence `||v(0)||² <= (2/L)int||v||²+L int||v'||²`. Repeat from the opposite endpoint and add; replace unweighted integrals using `w>=m`. This is a genuine continuum H¹ trace proof, not an interpolation from finite polynomial samples. No inversion of a Fourier frequency, no declaration of a positive Lorentzian boundary quadratic, no assumption that a zero mode vanishes.
+
+For the physical reference `b(n)=4/5 cosh(n-log2)`, `L=2log2` and 0.8<=b<=1. In the BS11 b² scalar weight `m=16/25`; for b⁴ vector weight `m=256/625`. Endpoint b=1 on both faces. For N=15 symmetric metric coordinates or N=5 gauge coordinates, BR43.1 applies with the positive Hermitian component norm; the 15 stored independent coefficients need the corresponding fixed 15-to-25 symmetric tensor embedding Gram if using full tensor Frobenius energy. The source-independent inequality holds for *any* finite-dimensional Hilbert Gram, but changing the Gram without transforming its positive factors is not allowed. BR43.1 does NOT by itself establish the physical weighted energy equivalence or full variable exterior domain.
+
+**Crucial corrected payment:** apply BR43.1 to wall velocity `v=partial_t H`. Its right side requires `partial_n partial_t H` in addition to `partial_t H`. BR4's lower-order energy has only the latter; BR4's *existing differentiated tangential hierarchy* is the source owner to attempt payment. We therefore introduce an INDEPENDENT higher-energy currency `D_k`, not a hidden replacement by the original `E_k`. If actual field-energy equivalences bound the normal weighted masses by `c_v E_k` and `c_n D_k`, BR43 implies
+```
+ ||V_wall||² <= [4 c_v/(L m)] E_k + [2L c_n/m] D_k.
+```
+Combine with BR41a's exact signed physical wall-work budget to get the **corrected** conditional BR42 one-slab energy:
+```
+ E_(k+1) <= (1+h[a+eps*4c_v/(Lm)])E_k
+             +h eps*(2L c_n/m)D_k
+             +h bulk_k² +(h/eps)P_k.
+```
+This replaces any implication that the lowest BR4 energy alone controls its physical velocity boundary trace; it does not solve the still-required closed high-order energy inequality for D. BR37's tangential loss Q⁴ metric and Q² gauge is distinct from the +1 normal trace derivative. The estimate is frequency-free but is NOT a uniform Kreiss estimate, and the physical domain/variable Jacobian have independent m/L bounds to pay.
+
+**Constructed source:** native BR34 `PhysicalTraceCurrency`, `PhysicalTraceEnergyPayment`, and `traceEnergyBudget` retain both 15/5 endpoint velocities, normal time derivatives, actual weighted bulk masses and unpaid higher-energy residual. `scripts/check_hopf369_br43_two_sided_trace.py` records the analytic argument, all 15/5 polynomial positive Gram stress controls, physical two-ended b²/b⁴ weights, constant-mode negative control and unchanged BR37 derivative losses. `scripts/check_hopf369_br43_trace_energy_weld.py` explicitly charges independent D (and retains a fail-closed negative control when trace is unpaid). The bounded runner now includes BR43 small fast sectors and splits full metric/gauge polynomial controls into its heavy section. All newly written checkers are **COMMITTED_UNRUN** and native Agda **CONSTRUCTED_PENDING_KERNEL**.
+
+Remaining **actual same-object weld**, narrower than a generic “trace theorem”: establish differentiated BR4 energy in the weighted variable Einstein–Israel chart at order s+1 normal derivative (and s+4 tangential metric/s+2 gauge, possibly anisotropic), control the differentiated BR33/34 D/E boundary commutators and BR19 moving-wall graph jets by those energies, and prove physical BR29 subsidiary forcing has no unallocated zero-speed component on that same solution. Then BS13/BR31 weighted quotient coercivity and a genuine tame local construction/restart. BR43 gives the otherwise missing precise 1D trace step, but does NOT certify these coupled PDE hypotheses.
