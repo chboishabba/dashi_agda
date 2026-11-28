@@ -71,3 +71,8 @@ Live Paper 1 NS e36eae0859d86, Paper 3 YM 48c0366a4922 and Paper 8 cross-program
 ## Section 17/17a synchronization
 
 Live Paper 1 NS 43ad73121c0d, Paper 3 YM dd5a7ba7ff43 and Paper 8 cross-programme 95d637e1fef2 track [Section 17/17a](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (ba318f0100d6). Hodge now has source-written actual punctured finite/proper projection; BSD actual split sign-row difference, NS mean and force tangency, PNP same-run epoch attachment and CMP102 quaternion tangent source advance. 4503 independent exact controls, no native kernel. Original RH/NS C/D admission and unforced profile remain blocked by toolchain/source inputs. Papers 2, 9, 10 and historical 4–7 unchanged in this tranche; no promotion or duplicate ownership.
+
+
+## Section 18 synchronization
+
+Live Paper 1 NS f749e0fc2f7f, Paper 3 YM e641599d7676 and Paper 8 cross-programme 7b4a8b5c7f5e track [Section 18](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (6b4b13d80e6e). NS divergence preservation and integrated tail, Hodge affine saturation, BSD cyclic sign differences, PNP source-derived cluster planner, YM signed actual exponential curve source-written; 6475 independent scoped exact controls, no native kernel. RH/forced NS admission and unforced profile remain blocked. Other papers unchanged in this tranche; no theorem or prize claim promoted.
