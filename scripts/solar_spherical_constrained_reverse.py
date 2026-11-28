@@ -44,11 +44,16 @@ def reverse_constrained(material,cfg,design):
             load_rate_s_inv=(z[1]*template_l).tolist(),
             retain_sensitivity=False,retain_history=False)
         try:
-            base=campaign_jvp(material,cc,np.zeros_like(template_h),np.zeros_like(template_l))
+            # Both directional runs contain the identical primal trajectory.
+            # Reuse the first instead of recomputing a third zero-JVP campaign.
+            heater_j=campaign_jvp(material,cc,template_h,np.zeros_like(template_l))
+            load_j=campaign_jvp(material,cc,np.zeros_like(template_h),template_l)
+            base=heater_j
             grads=[];rest_grads=[]
-            for dh,dl in ((template_h,np.zeros_like(template_l)),
-                          (np.zeros_like(template_h),template_l)):
-                j=campaign_jvp(material,cc,dh,dl)
+            for j in (heater_j,load_j):
+                if not np.isclose(j['campaign_net_J'],base['campaign_net_J'],
+                                  rtol=1e-11,atol=1e-12):
+                    raise ArithmeticError('primal mismatch between JVP directions')
                 grads.append(j['dcampaign_net_J'])
                 rest_grads.append([2*float(np.sum((v-u)*dv))
                     for v,u,dv in zip(base['endpoint'],original,j['endpoint_jvp'])])
@@ -61,7 +66,7 @@ def reverse_constrained(material,cfg,design):
             out=dict(ok=True,net=float(base['campaign_net_J']),
                 gradient=np.asarray(grads,float),restoration_squared_ratio=res,
                 restoration_squared_jacobian=jac,config=cc)
-        except (AssertionError,ValueError,FloatingPointError,np.linalg.LinAlgError) as ex:
+        except (AssertionError,ValueError,ArithmeticError,FloatingPointError,np.linalg.LinAlgError) as ex:
             out=dict(ok=False,error=type(ex).__name__+': '+str(ex))
         memo[key]=out
         return out
