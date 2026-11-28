@@ -28,3 +28,5 @@ import DASHI.JohnAnthonyBrownReceptionAdaptiveEverything
 import DASHI.Governance.RelationalFederationScopedViabilityExact
 import DASHI.Governance.ITIRPluralViabilityTSFVExact
 import DASHI.Governance.CybersynPhysicalFinanceCutExact
+
+import DASHI.Governance.RelationalFederationCircularReproductionExact
