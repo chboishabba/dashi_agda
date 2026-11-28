@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Moonshine.CM163BishopOriginalQPhaseFromCayleyExact where
 
 -- SOURCE-WRITTEN / NOT NATIVE-CHECKED.
