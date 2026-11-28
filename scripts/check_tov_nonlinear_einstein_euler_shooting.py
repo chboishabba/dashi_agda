@@ -88,15 +88,34 @@ def run(lam=.1,speed=.02,n=240):
     assert abs(spatial[-1])<1e-12
     assert np.isfinite(acceleration[4:-4]).all()
     assert np.max(np.abs(acceleration[4:-4]))<.1
+    # Independent 2+2 angular Einstein Gtheta=8*pi*p_t versus time
+    # derivative of momentum f_t=-16*pi*r*d*f*Y_t*Y_r.
+    # The two N_t coefficients agree exactly (separate symbolic checker),
+    # so this difference is gauge-jet independent at the instant.
+    uprime=-(lam+2)*speed*(lam+1-radii**2)/(lam+1+radii**2)**2
+    nuprime=np.gradient(nu,radii,edge_order=2)
+    tangential=-d*(ff*Yr**2-U**2/nn**2)-V
+    with np.errstate(invalid="ignore"):
+        ftt_momentum=-16*np.pi*radii*(
+            2*Y*dx*U*ff*U*Yr + d*ft*U*Yr +
+            d*ff*acceleration*Yr + d*ff*U*uprime)
+        ftt_angular=2*nn**2*ff*(
+            8*np.pi*tangential-ff*(nuprime+nu**2)
+            -nu*fr/2-ff*nu/radii-fr/(2*radii)
+            +3*ft**2/(4*nn**2*ff**2))
+    angular_mismatch=float(np.max(np.abs(
+        ftt_momentum[5:-5]-ftt_angular[5:-5])))
+    assert angular_mismatch<1e-4
     print("W3.2",dict(lambda_=lam,speed=speed,n=n,k=float(k),
             ADM_mass=float(m),central_lapse=float(Nc),
             wall_Euler=float(wall_el),wall_lapse_match=float(wall_clock),
             mass_simpson_error=float(mass_err),
+            angular_vs_momentum_ftt_max_error=angular_mismatch,
             acceleration_r50=float(acceleration[n//2]),
             acceleration_r90=float(acceleration[int(n*.9)]),
             acceleration_max_interior=float(np.max(np.abs(acceleration[4:-4])))),
           flush=True)
-    return k,m
+    return k,m,angular_mismatch
 
 
 if __name__=="__main__":
@@ -106,10 +125,12 @@ if __name__=="__main__":
     arg.add_argument("--speed",type=float,default=.02)
     cfg=arg.parse_args()
     data=[run(cfg.lam,cfg.speed,n) for n in cfg.n]
-    if len(data)>1:assert abs(data[0][0]-data[-1][0])<5e-7
+    if len(data)>1:
+        assert abs(data[0][0]-data[-1][0])<5e-7
+        assert data[-1][2]<data[0][2]*.2
     # Signed flux reverses under velocity reversal, mass/gradient do not.
     if cfg.speed!=0 and cfg.n==[120,240,480]:
         forward=run(cfg.lam,-cfg.speed,240)
         assert np.allclose(data[1],forward,rtol=1e-7,atol=1e-10)
     print("PASS nonlinear original-action radial Einstein/wall and conditional Euler bulk initial jets")
-    print("OPEN Nt Einstein gauge compatibility, full bulk evolution, angular Einstein, Israel/GHY")
+    print("OPEN full Nt radial evolution, time-continuation, continuum York/Israel/GHY")
