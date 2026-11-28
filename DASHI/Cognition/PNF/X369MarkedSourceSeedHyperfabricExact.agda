@@ -11,6 +11,7 @@ open import Data.Empty using (⊥)
 import DASHI.Foundations.SSPTritCarrier as T
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as H
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
+import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact as Nine
 
 data Mean7 : Set where
   zeroMean xNeg xPos yNeg yPos zNeg zPos : Mean7
@@ -42,9 +43,12 @@ toFullFabric s =
 
 -- The actual original nine-slot input packet has exactly the same chart,
 -- but the learned history is a separate E x 2 x width real tensor.
-toNineTrits : SourceSeed →
-  H.TernaryHyperformalPoint
-toNineTrits = toFullFabric
+toNineTrits : SourceSeed → Nine.NineTrits
+toNineTrits s = H.fabricToNineTrits (toFullFabric s)
+
+flatNineReopens : (s : SourceSeed) →
+  H.nineTritsToFabric (toNineTrits s) ≡ toFullFabric s
+flatNineReopens s = H.fabricNineRoundTrip (toFullFabric s)
 
 sourceInteraction : SourceSeed → H.Ternary27Point
 sourceInteraction s = H.projectInteractionVoxel (toFullFabric s)
