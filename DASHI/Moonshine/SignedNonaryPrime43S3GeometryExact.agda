@@ -494,3 +494,369 @@ nonabelianAtSeed :
   reflect (rotate (one (hex neg positiveSign))) ≡
   rotate (reflect (one (hex neg positiveSign))) → ⊥
 nonabelianAtSeed ()
+
+
+-- Diagonal value action on both word letters, corresponding to the
+-- global gauge of the native jFine sheet. Relative chart uses the
+-- final letter as the anchor, exactly analogous to centre-relative
+-- shells. This is not the spatial cube graph action.
+diagonal : G.TriPermutation → Word42 → Word42
+diagonal g (one h) = one (actHex g h)
+diagonal g (two k h) = two (actHex g k) (actHex g h)
+
+relative : Word42 → Word42
+relative (one h) = one h
+relative (two k h) = two (actHex (G.inversePermutation (asGroup h)) k) h
+
+restore : Word42 → Word42
+restore (one h) = one h
+restore (two k h) = two (actHex (asGroup h) k) h
+
+relativeRestore : ∀ w → relative (restore w) ≡ w
+relativeRestore (one h) = refl
+relativeRestore (two k h) = cong (λ j → two j h)
+  (trans (actHexComposition (G.inversePermutation (asGroup h)) (asGroup h) k)
+    (trans (cong (λ g → actHex g k) (Laws.compositionInverseLeft (asGroup h))) (actHexIdentity k)))
+
+restoreRelative : ∀ w → restore (relative w) ≡ w
+restoreRelative (one h) = refl
+restoreRelative (two k h) = cong (λ j → two j h)
+  (trans (actHexComposition (asGroup h) (G.inversePermutation (asGroup h)) k)
+    (trans (cong (λ g → actHex g k) (Laws.compositionInverseRight (asGroup h))) (actHexIdentity k)))
+
+relativeEquivariant : ∀ g w → relative (diagonal g w) ≡ act g (relative w)
+relativeEquivariant g (one h) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permIdentity (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permRotate2 (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowMid (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapLowHigh (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+relativeEquivariant G.permSwapMidHigh (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+
+-- Concrete original projective row transport. M^28=[[31,17],[33,31]],
+-- M^21=[[0,11],[31,0]] mod41. Reflection is D M^21 where D=diag(1,-1).
+-- Multiply D by -1 if desired: same projective matrix. Use +41 multiples
+-- to represent negative coefficients in natural cross products.
+rotateRow : ∀ w →
+  ((31 * Torus.rowX (chart w) + 33 * Torus.rowY (chart w)) * Torus.rowY (chart (rotate w))) % 41
+  ≡ ((17 * Torus.rowX (chart w) + 31 * Torus.rowY (chart w)) * Torus.rowX (chart (rotate w))) % 41
+rotateRow (one (hex neg positiveSign)) = refl
+rotateRow (one (hex neg negativeSign)) = refl
+rotateRow (one (hex zer positiveSign)) = refl
+rotateRow (one (hex zer negativeSign)) = refl
+rotateRow (one (hex pos positiveSign)) = refl
+rotateRow (one (hex pos negativeSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+rotateRow (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+
+reflectRow : ∀ w →
+  (10 * Torus.rowY (chart w) * Torus.rowY (chart (reflect w))) % 41
+  ≡ (11 * Torus.rowX (chart w) * Torus.rowX (chart (reflect w))) % 41
+reflectRow (one (hex neg positiveSign)) = refl
+reflectRow (one (hex neg negativeSign)) = refl
+reflectRow (one (hex zer positiveSign)) = refl
+reflectRow (one (hex zer negativeSign)) = refl
+reflectRow (one (hex pos positiveSign)) = refl
+reflectRow (one (hex pos negativeSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex neg positiveSign) (hex pos negativeSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex neg negativeSign) (hex pos negativeSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex zer positiveSign) (hex pos negativeSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex zer negativeSign) (hex pos negativeSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex pos positiveSign) (hex pos negativeSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex neg positiveSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex neg negativeSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex zer positiveSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex zer negativeSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex pos positiveSign)) = refl
+reflectRow (two (hex pos negativeSign) (hex pos negativeSign)) = refl
+
+-- The 43-point full arithmetic carrier keeps zero separate from all units.
+open import Data.Fin as Fin
+pointedEncode : Word43 → Fin 43
+pointedEncode empty = Fin.zero
+pointedEncode (live w) = Fin.suc (encode w)
+
+pointedDecode : Fin 43 → Word43
+pointedDecode Fin.zero = empty
+pointedDecode (Fin.suc e) = live (decode e)
+
+pointedEncodeDecode : ∀ e → pointedEncode (pointedDecode e) ≡ e
+pointedEncodeDecode Fin.zero = refl
+pointedEncodeDecode (Fin.suc e) = cong Fin.suc (encodeDecode e)
+
+pointedDecodeEncode : ∀ w → pointedDecode (pointedEncode w) ≡ w
+pointedDecodeEncode empty = refl
+pointedDecodeEncode (live w) = cong live (decodeEncode w)
+
+residue : Word43 → Nat
+residue empty = 0
+residue (live w) = Torus.unitLabel (encode w)
