@@ -8,6 +8,11 @@ comparison is false on physical states. Finite Galerkin ODE continuity then
 extends the strict positive sign to some short physical-time interval.
 No cutoff-uniform estimate, native Agda field extension or Clay theorem.
 """
+# Fail closed: Python -O strips all assert statements used by this exact
+# finite physical source checker. Never print PASS in optimized mode.
+if not __debug__:
+    raise RuntimeError("NS exact physical regression requires asserts: refuse python -O")
+
 from collections import defaultdict
 from itertools import product
 from sympy import Matrix, I, S, sqrt, simplify, expand, re, conjugate
