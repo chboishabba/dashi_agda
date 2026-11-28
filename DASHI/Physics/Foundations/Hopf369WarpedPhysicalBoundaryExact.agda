@@ -1267,3 +1267,99 @@ module At {r : Level} (F : C.RealField r)
   -- fixing): they are retained in NormalHolonomyResponse for subsequent
   -- physical quotient detection. The actual BS13 curvature kernel and
   -- BR31 weighted exterior must supply the global analytic inequality.
+
+  ------------------------------------------------------------------------
+  -- BR42: ORIGINAL-PHYSICAL ENERGY/RESTART SOURCE, not a new PDE solver.
+  --
+  -- The BR4 first-order wave symmetrizer supplies the actual bulk energy
+  -- identity, BR40d/41a supplies signed wall work, and BS11/13 supplies
+  -- explicit scalar/vector normal-holonomy moments. These constructors
+  -- keep all of those independent and include the unallocated residual.
+  -- A complex ring alone cannot certify a positive Sobolev estimate.
+  ------------------------------------------------------------------------
+
+  record PhysicalSlabSource : Set r where
+    constructor physicalSlabSource
+    field
+      initialEnergy : S
+      slabDuration : S
+      bulkGrowth : S
+      bulkSourcePayment : S
+      physicalWallSource : PhysicalWallWorkSources
+      traceSourcePayment : S
+      boundaryLocalizationError : S
+      subsidiarySourcePayment : S
+      normalHolonomySource : NormalHolonomyMoments
+  open PhysicalSlabSource public
+
+  -- This is the *exact signed* BR4 budget, prior to replacing the wall
+  -- work with the real Hilbert-space estimate from BR41a.
+  physicalSignedEnergyIncrement : PhysicalSlabSource → S
+  physicalSignedEnergyIncrement d =
+    slabDuration d *
+      (bulkGrowth d * initialEnergy d
+        + bulkSourcePayment d
+        + two * physicalPower (physicalWallSource d)
+        + traceSourcePayment d
+        + boundaryLocalizationError d
+        + subsidiarySourcePayment d)
+
+  physicalSignedEnergyNext : PhysicalSlabSource → S
+  physicalSignedEnergyNext d =
+    initialEnergy d + physicalSignedEnergyIncrement d
+
+  -- Keep the original four tangential + one scalar normal holonomy
+  -- channels. The time source is NOT presumed zero at a restart.
+  record PhysicalHolonomyAdvance : Set r where
+    constructor physicalHolonomyAdvance
+    field
+      scalarBefore scalarTimeSource : S
+      vectorBefore vectorTimeSource : Vec
+  open PhysicalHolonomyAdvance public
+
+  advanceScalarHolonomy : S → PhysicalHolonomyAdvance → S
+  advanceScalarHolonomy dt d =
+    scalarBefore d + dt * scalarTimeSource d
+
+  advanceVectorHolonomy : S → PhysicalHolonomyAdvance → Vec
+  advanceVectorHolonomy dt d a =
+    vectorBefore d a + dt * vectorTimeSource d a
+
+  record PhysicalSlabOutput : Set r where
+    constructor physicalSlabOutput
+    field
+      signedEnergyAfter : S
+      scalarHolonomyAfter : S
+      vectorHolonomyAfter : Vec
+      unpaidWallResidual : S
+      unpaidLocalizationResidual : S
+  open PhysicalSlabOutput public
+
+  assemblePhysicalSlab : PhysicalSlabSource →
+    PhysicalHolonomyAdvance → PhysicalSlabOutput
+  assemblePhysicalSlab d h =
+    physicalSlabOutput
+      (physicalSignedEnergyNext d)
+      (advanceScalarHolonomy (slabDuration d) h)
+      (advanceVectorHolonomy (slabDuration d) h)
+      (unallocatedPower (physicalWallSource d))
+      (boundaryLocalizationError d)
+
+  -- Physical *admission* is intentionally dependent on evidence for
+  -- trace estimates, original Einstein-Israel source compatibility,
+  -- positive quotient coercivity, Bianchi graph preservation, and
+  -- nondegenerate reflecting-domain geometry. None can be constructed
+  -- by setting a Boolean flag or by finite arithmetic above.
+  record PhysicalAnalyticPayments (TraceEstimate
+      BianchiCompatibility WeightedQuotient ReflectingDomain : Set r)
+      : Set r where
+    constructor physicalAnalyticPayments
+    field
+      tracePaid : TraceEstimate
+      bianchiPaid : BianchiCompatibility
+      quotientPaid : WeightedQuotient
+      domainPaid : ReflectingDomain
+
+  -- The payment record is deliberately PARAMETRIC in the actual
+  -- physical propositions; there is no postulate or default inhabitant.
+  -- Source ledger != accepted physical continuum theorem.
