@@ -107,10 +107,11 @@ def optimize(material,cfg,design):
         for layout in layouts:
             if layout['receiver_edges']:
                 campaign_bounds[layout['id']]=bound_layout(material,cfg,layout['receiver_edges'],budget,int(design['passive_bound_boxes']))
-        if campaign_bounds:
+        if campaign_bounds and all(v['upper_candidate_J'] is not None for v in campaign_bounds.values()):
             tighter=min(tighter,max(v['upper_candidate_J'] for v in campaign_bounds.values()))
     result=dict(layouts=results,layout_geometry=layouts,evaluations=evaluations,universal_passive_upper_J=ceiling,
         full_campaign_passive_bounds=campaign_bounds,
+        unresolved_passive_layouts=[k for k,v in campaign_bounds.items() if v['upper_candidate_J'] is None and not v.get('no_restored_passive_on_binary_chart',False)],
         discrete_passive_upper_candidate_J=tighter,first_stage_reflection=reflection,
         best_active=None if a is None else a[0],best_passive=None if p is None else p[0],
         sampled_advantage_J=None if a is None or p is None else a[0]-p[0],
