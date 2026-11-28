@@ -257,6 +257,8 @@ PARTS["terminal"] += [("BR279.nodal","check_hopf369_br279_nodal_adjoint.py",())]
 
 PARTS["terminal"] += [("BR280.york32","check_hopf369_br280_g4_york.py",()),("BR280.york64","check_hopf369_br280_g4_york.py",("--R","64","--nr","2001","--lmax","6")),("BR281.analytic","check_hopf369_br281_uniform_analytic.py",()),("BR282.corner","check_hopf369_br282_corner_hierarchy.py",())]
 
+PARTS["terminal"] += [("BR283284.g4","check_hopf369_br283_284_g4_coupled.py",()),("BR283284.g4fine","check_hopf369_br283_284_g4_coupled.py",("--n","9","--steps","4","--dt",".001")),("BR285.work","check_hopf369_br285_work.py",())]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
