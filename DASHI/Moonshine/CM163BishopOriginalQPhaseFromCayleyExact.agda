@@ -76,13 +76,13 @@ module At (inputs : Round11.BishopCutset)
   -- exp(-p)*0=0. The two endpoint signs are NOT squared away.
   realPhase :
     (Exp.bishopExp (R.- Scale.fullDiskScale) *
-      Product.cosB inputs Machin.bishopMachinPi)
+      Product.cosB inputs (R.- Machin.bishopMachinPi))
       ≃ (R.- CM.radius)
   realPhase =
     P.≃-trans
       (P.*-congˡ (P.≃-trans
         (Parity.bishopCosNeg (Round11.round11ParityInputs inputs)
-          (R.- Machin.bishopMachinPi))
+          Machin.bishopMachinPi)
         (proj₂ endpoints)))
       (P.≃-trans
         (let open P.ℝ-Solver in
@@ -92,7 +92,7 @@ module At (inputs : Round11.BishopCutset)
 
   imaginaryPhase :
     (Exp.bishopExp (R.- Scale.fullDiskScale) *
-      Product.sinB inputs Machin.bishopMachinPi)
+      Product.sinB inputs (R.- Machin.bishopMachinPi))
       ≃ R.0ℝ
   imaginaryPhase =
     P.≃-trans
@@ -112,7 +112,7 @@ module At (inputs : Round11.BishopCutset)
   originalComplexQ =
     Setoid.expC (Route.machinTranscendentals inputs)
       (Setoid.complex (R.- Scale.fullDiskScale)
-        Machin.bishopMachinPi)
+        (R.- Machin.bishopMachinPi))
 
   -- This is the requested actual same-source selected-q phase.
   originalPhaseSelected :
