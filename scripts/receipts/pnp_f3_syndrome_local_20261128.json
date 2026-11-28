@@ -1,0 +1,113 @@
+{
+  "scope": "Local Python reference using exact committed intrinsic core blob 9e86193a08582b4b7e784e85cccfcbc626f909a3; imported donor function bodies and continuation integration transcribed, not full checkout",
+  "core_sha256": "3b9ec5dccae7f9e422fd46883431e78dcec9b83887697ca450ba2170cc69c92c",
+  "fold": {
+    "seed_base": 3692815,
+    "fixtures": 512,
+    "original_points": 36604,
+    "local_widths": [
+      0,
+      2,
+      6,
+      10
+    ],
+    "boundary_width": 4,
+    "work_cap": 20000,
+    "direct_initial": {
+      "attempts": 2048,
+      "accepted": 1856,
+      "exact": 1805,
+      "partial": 51,
+      "refusals": 192,
+      "max_work": 506
+    },
+    "conditioned_final": {
+      "attempts": 2048,
+      "accepted": 1864,
+      "exact": 1817,
+      "partial": 47,
+      "refusals": 184,
+      "max_work": 596
+    }
+  },
+  "dense": {
+    "bits": 128,
+    "blocks": 64,
+    "clauses": 64,
+    "boundary_rank": 1,
+    "hist": [
+      "381520424476946449302046182756",
+      "381520424476945213955253614862",
+      "381520424476945213955253614862"
+    ],
+    "omitted_mass": 0,
+    "amplitude": 0,
+    "work": 4641,
+    "leaf_labels": 192,
+    "pair_probes": 401,
+    "width_zero_refused": true,
+    "work_one_refused": true
+  },
+  "continuation": {
+    "seed_base": 3692814,
+    "fixtures": 256,
+    "queries": 512,
+    "positive_parents": 163,
+    "bound_checks": 4608,
+    "previous": {
+      "cert_0": 461,
+      "cert_4": 494,
+      "cert_32": 511,
+      "splits_32": 323
+    },
+    "new": {
+      "cert_0": 503,
+      "cert_4": 512,
+      "cert_32": 512,
+      "splits_4": 11,
+      "splits_32": 11,
+      "completed_fold_attempts": 77,
+      "exact_fold_attempts": 74,
+      "refused_fold_attempts": 10,
+      "completed_fold_logical_work": 102548
+    },
+    "outlier": {
+      "i": 227,
+      "type": "translation",
+      "delta": [
+        "-134/3",
+        "64/3",
+        "70/3"
+      ],
+      "previous_split_32": "UNKNOWN",
+      "direct_intrinsic_splits": 4,
+      "conditioned_intrinsic_splits": 0,
+      "conditioned_lo": [
+        "-658/9",
+        "8/9",
+        "20/9"
+      ],
+      "conditioned_hi": [
+        "-224/9",
+        "442/9",
+        "454/9"
+      ],
+      "choices": [
+        1,
+        2
+      ],
+      "completed_fold_logical_work": 13354,
+      "exact_chart_probe": 0
+    }
+  },
+  "execution": {
+    "timeout_per_batch_seconds": 90,
+    "direct_batches": 8,
+    "conditioned_batches": 8,
+    "continuation_batches": 16,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false
+  }
+}
