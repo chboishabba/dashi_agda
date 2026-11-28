@@ -9,6 +9,7 @@ module DASHI.Analysis.AlpogeRHOriginalClayEndpointBidiExact where
 -- Steelman/BIDI/reverse solve: reuse both original endpoint definitions
 -- rather than inventing a third critical-line proposition.
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Analysis.RiemannAnalyticSubstrate
 import DASHI.Analysis.RiemannZetaProgramBoundary as Clay
 import DASHI.Analysis.AlpogeGRHGeometricTransportExact as External
@@ -123,3 +124,72 @@ originalClayWitnessToSameOriginalRH :
   RiemannHypothesisFor analytic
 originalClayWitnessToSameOriginalRH analytic strip weld witness refl =
   originalClayWitnessToAnalyticRH analytic witness weld
+
+
+-- Canonical same-object strip on the original analytic carrier. The only
+-- extra semantic datum is the ACTUAL real half and its critical-line law.
+-- No rational approximation or coercion of arbitrary real coordinates.
+analyticOwnedStrip :
+  (analytic : AnalyticSubstrate) →
+  (half : C.Real (A.carrier analytic)) →
+  ((s : C.Complex (A.carrier analytic)) →
+    Z.criticalLine (A.completed analytic) s →
+    C.realPart (A.carrier analytic) s ≡ half) →
+  Clay.CriticalStripWitness
+analyticOwnedStrip analytic half lineMeansHalf =
+  record
+    { Complex = C.Complex (A.carrier analytic)
+    ; zeta = C.apply (A.carrier analytic) (Z.zeta (A.completed analytic))
+    ; zero = C.zeroC (A.carrier analytic)
+    ; Real = C.Real (A.carrier analytic)
+    ; realPart = C.realPart (A.carrier analytic)
+    ; oneHalf = half
+    ; nontrivialZero = Z.nontrivialZero (A.completed analytic)
+    ; criticalLine = Z.criticalLine (A.completed analytic)
+    ; criticalLineMeansHalf = lineMeansHalf
+    }
+
+analyticOwnedStripWeld :
+  (analytic : AnalyticSubstrate) →
+  (half : C.Real (A.carrier analytic)) →
+  (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
+    Z.criticalLine (A.completed analytic) s →
+    C.realPart (A.carrier analytic) s ≡ half) →
+  OriginalRHClayEndpointWeld analytic (analyticOwnedStrip analytic half lineMeansHalf)
+analyticOwnedStripWeld analytic half lineMeansHalf =
+  record
+    { toStrip = λ s → s
+    ; fromStrip = λ s → s
+    ; analyticZeroToStrip = λ s z → z
+    ; stripZeroToAnalytic = λ s z → z
+    ; stripLineToAnalytic = λ s h → h
+    ; analyticLineToStrip = λ s h → h
+    }
+
+-- Ingress still requires the actual external transport, not a receipt string.
+externalToOwnedClayWitness :
+  (analytic : AnalyticSubstrate) →
+  (half : C.Real (A.carrier analytic)) →
+  (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
+    Z.criticalLine (A.completed analytic) s →
+    C.realPart (A.carrier analytic) s ≡ half) →
+  External.ExternalRHGeometricTransport analytic →
+  Clay.RiemannHypothesisWitness
+externalToOwnedClayWitness analytic half lineMeansHalf ext =
+  alpogeExternalToOriginalClayWitness analytic
+    (analyticOwnedStrip analytic half lineMeansHalf) ext
+    (analyticOwnedStripWeld analytic half lineMeansHalf)
+
+ownedClayWitnessRecoversAnalytic :
+  (analytic : AnalyticSubstrate) →
+  (half : C.Real (A.carrier analytic)) →
+  (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
+    Z.criticalLine (A.completed analytic) s →
+    C.realPart (A.carrier analytic) s ≡ half) →
+  (witness : Clay.RiemannHypothesisWitness) →
+  W.strip witness ≡ analyticOwnedStrip analytic half lineMeansHalf →
+  RiemannHypothesisFor analytic
+ownedClayWitnessRecoversAnalytic analytic half lineMeansHalf witness same =
+  originalClayWitnessToSameOriginalRH analytic
+    (analyticOwnedStrip analytic half lineMeansHalf)
+    (analyticOwnedStripWeld analytic half lineMeansHalf) witness same
