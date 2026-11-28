@@ -42,7 +42,7 @@ def reopen_mass(n,R,H,caps,u,V,P,L,B):
     return y
 
 
-def observe(n,R,H,caps,B,normal=None,promotions=8,terms=256):
+def observe(n,R,H,caps,B,normal=None,promotions=8,terms=256,marked_budget=0):
     """One bound (whole demand) or two bounds (complementary normal fibres).
     A positive lower integral can reopen a witness, even without a positive
     minimum. All sums are integer counts on original points.
@@ -52,6 +52,20 @@ def observe(n,R,H,caps,B,normal=None,promotions=8,terms=256):
     absolute=[H] if normal is None else [canon(H+((normal,b),)) for b in (0,1)]
     bounds=[Bound(0,0 if h is None else 1<<(n-len(h))) for h in absolute]
     if any(c<1 for c in caps):return tuple(Bound(0,0) for h in absolute)
+    # Optional exact-one producer on the SAME original odd-parity source.
+    # Reserve the entire attempt, including refusals; old path remains default.
+    if marked_budget>0 and marked_budget<=B.left and all(c==1 for c in caps):
+        try:
+            B.pay('capacity_marked_reservation',marked_budget)
+        except ProbeLimit:
+            pass
+        else:
+            from check_pnp_normal_mass import count
+            O=tuple(tuple((1<<i,0) for i in range(n) if r>>i&1) for r in R)
+            q=count(n,H,(),O,marked_budget,marks=() if normal is None else (normal,))
+            if q['status'] in ('EMPTY','WITNESS'):
+                channels=((q['count'],q['witness']),) if normal is None else q['marginals'][0]
+                return tuple(Bound(m,m,x) for m,x in channels)
     try:
         B.pay('capacity_signed_chart',1+n*(1+len(H))**2)
         u,V,E=restrict(n,H,violation_flats(n,R,H,caps,B),B)
