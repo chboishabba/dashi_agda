@@ -105,6 +105,46 @@ class NativeCampaignFailClosed(unittest.TestCase):
         self.assertIn("Clay37NativeAcceptanceV1",
                       inspect.getsource(campaign))
 
+    def test_lean_native_axioms_allowlisted(self):
+        runner = load_runner()
+        source = "#check A.proof\\n#print axioms A.proof\\n"
+        ok, explanation = runner.lean_axioms_trusted(
+            "A.proof depends on axioms: [propext, Classical.choice]\\n",
+            source)
+        self.assertTrue(ok, explanation)
+
+    def test_lean_native_axioms_missing_is_failure(self):
+        runner = load_runner()
+        ok, reason = runner.lean_axioms_trusted(
+            "compilation succeeded", "#print axioms A.proof\\n")
+        self.assertFalse(ok)
+        self.assertIn("missing", reason)
+
+    def test_lean_native_axioms_unsafe_is_failure(self):
+        runner = load_runner()
+        ok, reason = runner.lean_axioms_trusted(
+            "A.proof depends on axioms: [propext, sorryAx]\\n",
+            "#print axioms A.proof\\n")
+        self.assertFalse(ok)
+        self.assertIn("nontrusted", reason)
+
+    def test_lean_native_axioms_duplicate_is_failure(self):
+        runner = load_runner()
+        line = "A.proof depends on axioms: [propext]\\n"
+        ok, reason = runner.lean_axioms_trusted(
+            line + line, "#print axioms A.proof\\n")
+        self.assertFalse(ok)
+        self.assertIn("ambiguous", reason)
+
+    def test_lean_native_axioms_all_declared_consumers_must_pass(self):
+        runner = load_runner()
+        source = "#print axioms A.first\\n#print axioms A.second\\n"
+        ok, reason = runner.lean_axioms_trusted(
+            "A.first depends on axioms: [propext]\\n",
+            source)
+        self.assertFalse(ok)
+        self.assertIn("A.second", reason)
+
     def test_wrong_branch_fails_closed(self):
         campaign = load_runner()
         with tempfile.TemporaryDirectory() as tmp:
