@@ -3,6 +3,9 @@
 Run on the PR checkout; no CI, no physical or native proof promotion.
 """
 import argparse
+import hashlib
+import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -72,6 +75,7 @@ CORE=(
     "check_tov_global_york_axial_shear.py",
     "check_tov_axial_spatial_action.py",
     "check_tov_conformal_mass_second_variation.py",
+    "check_tov_conformal_monopole_inverse.py",
 )
 DONORS=(
     "check_kk_radion_reduced_action.py",
@@ -92,18 +96,52 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument("--donors",action="store_true")
     p.add_argument("--timeout",type=int,default=90)
+    p.add_argument("--work",type=Path,default=Path(".local-engineered-gravity"))
+    p.add_argument("--resume",action="store_true")
+    p.add_argument("--only",action="append",default=[])
     args=p.parse_args()
     if args.timeout<=0: raise ValueError("positive timeout required")
     root=Path(__file__).resolve().parent
+    work=args.work.resolve(); work.mkdir(parents=True,exist_ok=True)
+    ledger=work/"ledger.json"
+    names=CORE+(DONORS if args.donors else ())
+    if args.only:
+        unknown=set(args.only)-set(names)
+        if unknown: raise SystemExit("unknown checks: "+str(sorted(unknown)))
+        names=tuple(n for n in names if n in args.only)
+    # Pin all tracked checkout bytes via git status + tree identity;
+    # refuse resume across dirty or changed checkouts.
+    repo=root.parent
+    def git(*cmd):
+        return subprocess.check_output(["git",*cmd],cwd=repo,text=True).strip()
+    identity={"head":git("rev-parse","HEAD"),"dirty":git("status","--porcelain","--untracked-files=no"),"python":sys.version,"timeout":args.timeout}
+    if args.resume and identity["dirty"]: raise SystemExit("resume requires clean tracked checkout")
+    old=json.loads(ledger.read_text()) if args.resume and ledger.exists() else {}
+    if old and old.get("identity")!=identity: raise SystemExit("stale ledger identity; use new work directory")
+    records=old.get("checks",{})
+    def save():
+        temp=ledger.with_suffix(".tmp")
+        temp.write_text(json.dumps({"identity":identity,"checks":records,"scope":"symbolic/finite only; physical/native open"},indent=2,sort_keys=True))
+        temp.replace(ledger)
     failures=[]
-    for name in CORE+(DONORS if args.donors else ()):
-        try:
-            result=subprocess.run([sys.executable,str(root/name)],cwd=root,
-                                  capture_output=True,text=True,timeout=args.timeout)
-            print(name,result.returncode,result.stdout,result.stderr,flush=True)
-            if result.returncode: failures.append(name)
-        except subprocess.TimeoutExpired:
-            failures.append(name); print(name,"TIMEOUT",flush=True)
+    for name in names:
+        path=root/name; digest=hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
+        log=work/(name+".log")
+        prev=records.get(name,{})
+        if args.resume and digest and prev.get("sha256")==digest and prev.get("status")=="PASS" and log.is_file() and hashlib.sha256(log.read_bytes()).hexdigest()==prev.get("log_sha256"):
+            print(name,"RESUMED PASS",flush=True);continue
+        rec={"sha256":digest,"status":"BLOCKED" if digest is None else "RUNNING"}
+        records[name]=rec;save()
+        if digest is not None:
+            with log.open("w") as out:
+                try:
+                    result=subprocess.run([sys.executable,str(path)],cwd=root,stdout=out,stderr=subprocess.STDOUT,timeout=args.timeout,env={**os.environ,"OPENBLAS_NUM_THREADS":"1","PYTHONDONTWRITEBYTECODE":"1"})
+                    rec.update(status="PASS" if result.returncode==0 else "FAIL",exit_code=result.returncode)
+                except subprocess.TimeoutExpired: rec.update(status="TIMEOUT")
+                except OSError as exc: rec.update(status="BLOCKED",reason=str(exc))
+            rec["log_sha256"]=hashlib.sha256(log.read_bytes()).hexdigest()
+        save();print(name,rec["status"],flush=True)
+        if rec["status"]!="PASS":failures.append(name)
     if failures: raise SystemExit("FAIL: "+", ".join(failures))
     print("PASS selected symbolic diagnostics; NOT physical or native certification")
 if __name__=="__main__": main()
