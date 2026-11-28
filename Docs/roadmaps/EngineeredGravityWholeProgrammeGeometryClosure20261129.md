@@ -96,3 +96,16 @@ Run locally on a full literal checkout, no CI:
 `python scripts/check_tov_second_order_junction_inverse.py`;
 `python scripts/run_engineered_gravity_endpoint_local.py --timeout 90 --resume`.
 Original F8 native run remains separately hash-pinned and must use actual instrumented same-time sidecar. The manifest's `INVENTORY_ONLY` is **not PASS of the 12 lanes**. Missing source returns BLOCKED. Local repository clone unavailable here (DNS), so literal committed-source replay and aggregate/native acceptance remain OPEN. No source/boundary assertion promoted by unexecuted code.
+
+
+## W1 partial implementation — Einstein mass constraint pays the wall source (same cut)
+New `scripts/check_tov_moving_mass_constraint_weld.py` (original covariant source, no fabricated interior matter): for (m'(r)=4\pi r^2\rho(r)), original (\rho=(2+\lambda)\lambda(1-r^2)/(8\pi)), (m_0(1)=M), (m_0'(1)=0), (m_0''(1)=-\lambda(\lambda+2)). The moving material level-set density (\rho(1+\varepsilon\phi+\varepsilon^2\psi/2;\varepsilon)=0) requires
+[
+\rho_1(1)=\frac{\lambda(\lambda+2)}{4\pi}\phi,\quad
+\rho_2(1)=-2\phi\rho_1'(1)+\frac{\lambda(\lambda+2)}{4\pi}(\phi^2+\psi).
+]
+Hence the **actual first Einstein mass constraint** pays (m_1'(1)=\lambda(\lambda+2)\phi=-\phi m_0''(1)), not a free junction assumption. Exact same moved-face mass continuity then forces
+[
+m_1(1)=0,\qquad m_2(1)=-\lambda(\lambda+2)\phi^2.
+]
+For (f=1-2m/r), (f_2(1)=2\lambda(\lambda+2)\phi^2), precisely the necessary metric second-value correction found in `check_tov_second_order_junction_inverse.py`. This is an **actual spherical Einstein source-to-geometric-junction weld**, not simply a prescribed surface metric. The second derivative of the density and the second Einstein mass constraint are retained; physical second lapse derivative, dynamic metric and material evolution, full nonspherical polar/axial extension, common embedding/normal and GHY/corner remain OPEN. Source-equivalent local SymPy execution exited zero under 90s, then file committed as `4ae76b832e07d4240c4f12eb7dcc881820c61423`, integrated runner `44b392e44a26afb8478913661bafc1aa664b8c1c`. Literal committed source replay remains unexecuted. This narrows **D S1/S2** but does not close the physical D receiver or the other 11 lanes.
