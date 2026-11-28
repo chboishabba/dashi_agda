@@ -2020,3 +2020,203 @@ Hodge actual relative coefficient and dense selected CM
 orbit advanced; generic algebraic orientation and universal
 detector open. No native kernels or CI run; no universal
 Clay problem newly solved.
+
+
+## 28 November — Bishop semantic equality, closed-time NS, actual Kummer H1 exactness, signed CM orbit arithmetic
+
+All four P0 continued; PNP and YM untouched. Native Lean/Lake/Elan/Agda
+executables checked and absent in this runtime. No CI. Source-written
+proofs require actual compatible local build, not finite-fixture promotion.
+
+### RH — repair the remaining equality mismatch using existing Bishop donor
+
+The previous canonical strip removed the rational-real restriction, but
+still used Agda propositional record equality on real representations.
+Re-read RiemannBishopSetoidCriticalLineRefinementExact,
+RiemannBishopComplexAnalyticCarrierExact,
+RiemannAnalyticLocatedHeightCarrierRealizationExact and the existing
+G2 Bishop terminal. They explicitly distinguish mathematical Bishop
+equality (_≃_) from identity of Cauchy-sequence records. Modify the
+existing CriticalStripWitness to accept realEq : Real -> Real -> Set
+and use realEq(realPart s,oneHalf). Canonical analyticOwnedStrip and its
+identity weld now accept this relation. The new bishopOwnedStrip uses
+the actual existing real carrier identity, casts the existing bishopHalf
+back into that carrier, and pulls back Bishop._≃_ along that identity.
+The cast-inverse roundtrip and already-owned
+BishopCriticalLineHalfCharacterization supply both directions of the
+critical line equivalence, without requiring equality of real records.
+externalToBishopOwnedClayWitness joins the existing external transport.
+This retains the actual analytic zeta, zero and critical predicates;
+it does not instantiate the external theorem ingress or the same-object
+Bishop characterization. Agda commits 31c4175a7d643dae65191208b3650d21421231e2
+and c31845d0adb356875282089c8d6a03439db82074.
+Targeted default-branch searches for strip consumers checked; no
+all-branch typecheck. Lean #121 79dc0beedbbcb5ae4ece22f3fe3bc5febec6c8e1
+unchanged this tranche. MIT short proof report and compact-axioms.log
+and compact-standalone-con-leche-compare.log independently inspected:
+all five original named theorem targets have only the three standard
+axioms and comparator justification; exit status zero, source
+72fead10 and Lean 4.35.0/Mathlib 56a00585. Source
+https://math.mit.edu/~drew/shortgrh/ (all checks finished, Nov27 17:27 UTC).
+Direct raw-log download to container failed, no new byte-level local
+log receipt or kernel acceptance. Original theorem credit remains
+Alpoge/Claude and licensed rewrite authors, independent checkers;
+DASHI for the specific setoid interface repair and donor composition.
+
+### NS — exact positive/closed-time semantic equivalence
+
+Lean #123 2d62913c3bb6788aed1a05b1ea80ef189b16b6af.
+Re-read actual upstream Breakdown/Defs.lean at ad53419d, frozen
+ExternalClayNS/ClaySpec.lean, actual differential donor and prior
+sameVelocityEnergy_iff. Original IsSmoothSolution demands momentum
+and divergence only for t>0, while ClaySpec demands them at t>=0.
+New closedTime_eq_of_positive uses the actual pinned Mathlib
+Set.EqOn.of_subset_closure and closure_Ioi 0. The exact half-space
+derivative is smooth on that half-space by fderivWithin
+uniqueDiffOn_nonnegativeTime, same as the prior spatial derivative
+donor. At fixed x, the momentum lhs and rhs and divergence are
+continuous on [0,infty); coordinate transport gives the original
+positive-time equalities. Density then proves the exact closed-time
+equations, including t=0. The inverse coordinate swap transports
+smoothness and the actual initial velocity is unchanged.
+sameSolutionR3_iff combines this with previous bidirectional energy
+equivalence. This is a source-written same-velocity/same-pressure
+whole-space zero-force solution equivalence, not an equivalence of
+periodic solutions with arbitrary versus periodic pressure. The
+existing unforced C/D negative theorem consumers remain. Auditor now
+requires sixteen exact declarations; new parser version not exercised
+locally this round. No actual native kernel.
+The original certificate and verifier are still absent according to
+https://math.observer/problems/navier-stokes-existence-and-smoothness/
+(last reviewed Nov25); OpenAI forced C/D is an independent route with
+official-kernel acceptance reported but written-proof correspondence
+under review. No certificate witness or new unconditional endpoint
+claimed. Original Alpoge–Buckmaster and OpenAI source credit preserved.
+
+### BSD — source-level exactness at the original H1 maps
+
+Lean #124 includes the new
+Synthesis/MillenniumBSDOriginalKummerH1Exact.lean, commit
+66fce350c64dceb9ef0719f49183fea63fe058a8, and extended
+MillenniumBSDOriginalHomogeneousH1Exact.lean. Re-read the actual
+EllipticKummerTopRepMapsExact, selected generic-trivial restriction
+naturality donor, original cohomological coefficient objects and
+current Mathlib ContCohomology.Functoriality. No new H1 definition.
+For phi:H->G and equivariant f:res_phi X->Y,
+the actual cochain map sends H(x,y) to f(H(phi x,phi y)); the normalized
+crossed cocycle is f(c(phi h)). Source constructs mappedKernel and
+uses the existing ContinuousCohomology.pi_map square to show the
+actual class projection is natural. All classes are represented by
+continuous crossed cocycles. The actual quotient class equality
+criterion is [c]=[d] iff c-d=delta Q for a genuine coefficient point Q.
+The forward implication uses the actual homology projection kernel
+and normalization of the incoming differential; reverse builds
+the homogeneous zero-cochain orbit q+c-d. Signed differences are
+retained, not assumed zero when E[2] action is nontrivial.
+
+The existing literal twoTorsionInclusionTopRep and
+geometricDoublingTopRep now feed originalInclusionH1 and
+originalDoublingH1. A class in kernel of inclusion has a literal
+representative c whose image is delta Q; doubling implies 2Q is
+fixed and c is its Kummer cocycle. Conversely a class equal to a
+Kummer class differs from its chosen half representative by an
+E[2] coboundary; replacing half Q by Q+T preserves 2Q and gives the
+required representative exactly. This gives
+ker(i_*)=im(Kummer from fixed geometric points).
+At point H1, if doubling kills [c], then 2c=delta P;
+choose geometric half Q of P and take d=c-delta Q in literal E[2].
+The prior Krull continuity proof supplies continuous d; class equality
+gives [i(d)]=[c]. Conversely doubling an included E[2] class is zero.
+Thus ker([2]_*)=im(i_*) under actual doubling onto, instantiated
+for selected CM curve by existing cmSelectedGeometricDoubling_onto.
+These are source-written standard Kummer exactness assertions,
+not a proof of BSD. Remaining: rational fixed-point descent and
+quotient connecting hom, completion-coefficient morphisms and
+whole-local-point Kummer image identification, then Selmer/Sha
+quotient. The original rank-four complex vanishing and arbitrary
+rank comparison are unpaid. Previous root v4.28.0 versus continuous
+cohomology API mismatch persists: source references current API,
+not claimed to build at root pin. No pin silently changed.
+
+Actual scripts/check_bsd_h1_naturality.py blob
+a3a5bfb4e428d50ff87814260661150a3186fc9e matches local git hash;
+546/546 normal and optimized exact controls. Five finite cyclic
+models with nontrivial coefficient action and simultaneous group/
+coefficient maps, including noninjective and zero maps. Check
+equivariance, cocycle/boundary preservation, homogeneous evaluation
+naturality, class equality iff signed coboundary and well-defined
+quotient maps. Finite regression does not compute actual elliptic
+H1 or test Lean source elaboration.
+
+### Hodge — actual CM orbit denominator growth with invariant orientation
+
+Previous roadmap already established bounded-degree orientation
+spread criterion and excluded uniformly bounded-degree skew S^2
+seed families dominating generic RM. Do not duplicate that argument.
+Use the literal prior cubic CM Q=diag(theta,theta*pi,-1,-pi,-1,-pi),
+pi=2-theta, A=Q^-1(D*S0+E)/D, D=130001. On the first two-plane set
+g_n=(n^2+pi)^-1 [[n^2-pi,-2n*pi],[2n,n^2-pi]], identity elsewhere.
+This is the exact Cayley transform of the skew rotation with
+parameter 1/n. Its determinant is +1 and g_n^t Q g_n=Q, as follows
+from (n^2-pi)^2+4n^2*pi=(n^2+pi)^2. At every real embedding pi>0,
+so g_n->I as n->infty. The orbit periods remain full-rank CM and
+can be kept in any marked open neighborhood of the seed. This
+is one particular sequence, not a dense sequence by itself.
+
+At the prime over 29 with theta=3 mod29 the defining cubic has a
+simple root; pi=-1 mod29. Hensel lift n^2+pi=0 near n=1.
+For every k>=1 choose an integer n_k equal to the lift mod29^k,
+but not its unique lift mod29^(k+1), and add a multiple of
+29^(k+1) to ensure n_k->infty. Then v_29(n_k^2+pi)=k for the
+selected embedding F->Q_29. On the actual conjugated skew operator
+A_n=g_n A g_n^-1, the (1,3) entry (one-based indices) equals
+[-4(n^2-pi)+10n]/[D*theta*(n^2+pi)].
+Its numerator reduces to 2 mod29, and D*theta is a unit.
+Thus its valuation is exactly -k. No bounded common denominator
+for this fixed normalized skew-operator orbit, even arbitrarily
+near the original real period. In contrast, the full skew form
+M_n=D Q A_n=(g_n^-1)^t M g_n^-1 has
+pf(M_n)=det(g_n^-1)pf(M)=pf(M), so the relative triple wedge and
+all three rational F-orientation coordinates are unchanged.
+This is a concrete simultaneous real/adic geometric example
+of increasing factorwise arithmetic complexity with conserved
+signed determinant. It does NOT show cycle degrees are unbounded
+for arbitrary rational cycle representations (coefficients may
+vary); it does not give a uniformly bounded-degree effective
+orientation cycle or a generic algebraic spread. The positive
+remaining target is a direct coupled determinant cycle whose
+geometry realizes the invariant, rather than unbounded normalized
+pairwise isometries. Existing generic mixed half-spin route and
+universal detector remain open.
+
+Native rational identity/actual residue extension in
+MillenniumHodgeCubicCMExplicitSeed.lean commit
+f38318990c96cc5c907d0dc0b83568523dcaaf27. Actual exact checker
+scripts/check_hodge_cubic_cm_cayley_denominators.py blob
+d00bc4a297220d1a0be6851feb0793a6bcdb29f8 matches local git hash.
+65/65 normal and optimized. Hensel levels1..8 exact valuations,
+three field-level rotations, inverse, determinant, skew relation,
+same actual Pfaffian and off-block entry. First local run caught
+a residue normalization error (raw numerator residue 2, not
+after division by theta residue 20); corrected and reran both
+modes. General Hensel and determinant arguments above are written
+mathematics, not finite-to-infinite inference. Original paper141
+reported form and paper140 family retained as hypotheses; classical
+Cayley/Pfaffian/Hensel credit; DASHI specific normalized orbit
+and exact arithmetic calculation. No JMD contribution inferred.
+Rechecked recent rStation paper156 (quadratic rank7 source)
+and paper141: Saller transport below determinant threshold
+does not by itself pay the rank6 determinant class on the
+original generic cubic family. No additional universal claim.
+
+### Disposition
+
+Actual source changes all four lanes; 611/611 local exact finite
+controls per mode this tranche (BSD 546, Hodge 65). No CI, no native
+Lean/Agda receipt. RH own Bishop characterization/actual external
+proof ingress and compatible replay remain; NS actual certificate
+or independent forced route acceptance remains; BSD actual
+cohomological quotient source maps advanced but local completion
+and rank comparison remain; Hodge direct generic cycle producer
+and universal primitive detector remain. No universal Clay
+endpoint newly solved.
