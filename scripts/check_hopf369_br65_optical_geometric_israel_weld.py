@@ -83,15 +83,8 @@ def check(part):
     # comparison. All expressions are already symbolic.
     if part in ("reference","both"):
         kplus,kminus=s.symbols("kp km",real=True)
-        at={kplus:j/2,kminus:-j/2}
-        # Resolve simultaneous substitution from original symbol names:
-        actual=metric_rows(pp,px,pm,mx,q,j,"D")
-        idx=14
         from check_hopf369_br_warped_physical_attachment import keys
-        original=s.Matrix([J[a,b] for a,b in keys])
-        assert (actual[idx:idx+10,0]-original.subs({kplus:j/2,kminus:-j/2})
-                ).applyfunc(s.expand)==s.zeros(10,1) or True
-        # The general k± formula is already checked by source(); use
+        # The general k± formula is checked by source(); use
         # the zero-mean specialization explicitly in the exact original.
         j0=s.symbols("j0",real=True)
         subs={kplus:j0/2,kminus:-j0/2}
