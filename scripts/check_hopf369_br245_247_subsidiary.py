@@ -69,6 +69,5 @@ def refine():
     print('BR247 fine/coarse ratios H M C E',(c/a).tolist(),flush=True)
     print('BR247 finite diagnostics; sample times and offsets differ, no convergence certificate')
 
-
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--part',required=True,choices=['initial','refine']);globals()[{'initial':'initial_weld','refine':'refine'}[p.parse_args().part]]()
