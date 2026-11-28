@@ -56,9 +56,9 @@ transportQuery : ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
   Q.QuotientStep X K Bool observe reduced →
   (f : Cook.BooleanFormula) → (x : X) →
   observe x ≡ Direct.decide candidate f → GuardedQuery candidate
-transportQuery q f x e = record
+transportQuery {reduced = reduced} q f x e = record
   { formula = f
-  ; returned = _ 
+  ; returned = reduced (Q.contract q x)
   ; originalDecision = trans (Q.closed q x) e
   }
 
