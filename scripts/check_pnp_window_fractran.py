@@ -87,3 +87,26 @@ def fractions(W,primes):
 
 def dense_rules(W):
     return tuple((tuple(int(i in den) for i in range(W.lanes)),tuple(int(i in num)-int(i in den) for i in range(W.lanes))) for num,den in W.program)
+
+
+def compile_static_bits(states,symbols,width,count,bits):
+    """Parse the existing ConcreteTapeProgramCode fixed-width layout.
+    Source codec may encode duplicate enumeration entries as multiple true
+    bits; choose first true exactly as decodeAgainst. An all-zero field
+    refuses rather than supplying an unverified fallback. Canonical input
+    uses genuine coverage. This parser needs the original presentation sizes.
+    """
+    bits=tuple(bits)
+    if min(states,symbols,width)<1 or count<0 or len(bits)!=symbols+2*states+count*(2*states+2*symbols+3) or any(b not in (0,1) for b in bits):raise ValueError('static code size/bits')
+    i=0
+    def read(n):
+        nonlocal i
+        field=bits[i:i+n];i+=n
+        if not any(field):raise ValueError('uninhabited field')
+        return field.index(1)
+    blank=read(symbols);initial=read(states);accept=read(states);rules=[]
+    for _ in range(count):
+        q=read(states);a=read(symbols);p=read(states);b=read(symbols);d=read(3)-1
+        rules.append((q,a,p,b,d))
+    assert i==len(bits)
+    return compile_window(states,symbols,width,rules),blank,initial,accept
