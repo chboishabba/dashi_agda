@@ -6,8 +6,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as N
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong; subst)
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact as V
+import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.StandardMachineSimulationExact as Tools
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
@@ -22,7 +23,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as B
 
 module Count {SourceState SourceSymbol : Set}
     {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
-    {description targetPresentation}
+    {description : Description.GuardedCookFormulaDescription} {targetPresentation : Presented.FinitePresentedStandardTM}
     (generator : V.UniversalGuardedCookBitGenerator targetPresentation) where
 
   Sim : ∀ {n x y} → Run.StandardExactRun sourceMachine n x y →
@@ -61,8 +62,9 @@ module Count {SourceState SourceSymbol : Set}
 
   sourceBelowZeroPlusCost : ∀ {n x y a b} {run : Run.StandardExactRun sourceMachine n x y}
     (s : Sim run a b) → n ≤ zeros s + V.virtualRunTargetSteps s
-  sourceBelowZeroPlusCost s rewrite sym (partition s) =
-    N.+-mono-≤ N.≤-refl (positiveBelowCost s)
+  sourceBelowZeroPlusCost s =
+    subst (λ k → k ≤ zeros s + V.virtualRunTargetSteps s) (partition s)
+      (N.+-mono-≤ N.≤-refl (positiveBelowCost s))
 
   -- Zero target execution cannot change the complete target configuration.
   zeroRunSame : ∀ {a b} →
@@ -93,7 +95,7 @@ module Padded {cost : PR.PolynomialCostModel Cook.BooleanFormula}
   (fixed : Fixed.FixedStandardOppositeMachine code)
   {SourceState SourceSymbol : Set}
   {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
-  {description targetPresentation}
+  {description : Description.GuardedCookFormulaDescription} {targetPresentation : Presented.FinitePresentedStandardTM}
   (generator : V.UniversalGuardedCookBitGenerator targetPresentation) where
 
   module C = Count {sourceMachine = sourceMachine} {description} generator
