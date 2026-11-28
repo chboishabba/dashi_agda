@@ -3380,3 +3380,156 @@ module At {r : Level} (F : C.RealField r)
   -- The Ward obstruction and shift-robust energy are added to the
   -- actual physical payment list; neither a placeholder record
   -- nor an algebraic test is accepted as a solved PDE.
+
+  ------------------------------------------------------------------------
+  -- BR79–81 RECONCILED ORIGINAL SPATIAL→SPACETIME BRIDGE.
+  --
+  -- The original P0BL/BM/BN owner is the complete FOUR-SPATIAL
+  -- Riemannian scalar constraint on H3×S1. It is not the hyperbolic
+  -- Einstein–Israel evolution. For Ric_g5=-4g5, Λ=-6, and initial
+  -- K_ij=0, the 5D vacuum Hamiltonian is R(h)+12=0; momentum=0.
+  --
+  -- Nonzero K requires R+12=|K|²-(tr K)² and four independently
+  -- proved momentum equations; never infer this from BN alone.
+  ------------------------------------------------------------------------
+
+  twelve : S
+  twelve = four * three
+
+  record OriginalP0BNTimeSymmetricInput : Set r where
+    constructor originalP0BNTimeSymmetricInput
+    field
+      originalBNSpatialScalar : S
+      originalBNActualSpatialMetric : BR4Space → BR4Space → S
+      originalBNSpatialIsraelJump : Wall → Wall → S
+      originalBNSourceSeamNormal : BR4Space → S
+      originalBNScalarEquation : originalBNSpatialScalar + twelve ≡ O
+  open OriginalP0BNTimeSymmetricInput public
+
+  original5DTimeSymmetricHamiltonian :
+    OriginalP0BNTimeSymmetricInput → S
+  original5DTimeSymmetricHamiltonian d =
+    originalBNSpatialScalar d + twelve
+
+  originalP0BNPaysVacuumHamiltonian :
+    (d : OriginalP0BNTimeSymmetricInput) →
+    original5DTimeSymmetricHamiltonian d ≡ O
+  originalP0BNPaysVacuumHamiltonian d =
+    originalBNScalarEquation d
+
+  -- This is a REAL same-equation geometric weld: no second scalar
+  -- existence proof is demanded. Actual inhabited BN inputs
+  -- require its source-specific classical PDE/interval certificates.
+  -- The three-plus-one initial time/wall corners and regular
+  -- physical gauge are separate proof obligations.
+  record OriginalP0BNCauchyCornerPayment : Set r where
+    constructor originalP0BNCauchyCornerPayment
+    field
+      originalBNTimeSymmetric : OriginalP0BNTimeSymmetricInput
+      originalPhysicalTimeLapse : S
+      originalPhysicalTimeShift : BR4Space → S
+      originalPhysicalWallPair : OriginalBR71UnifiedPhysicalBoundary
+      originalFourthNormalCorner : Tensor
+      originalGaugeInitialZero : Cov
+      originalTimeCornerResidual : Tensor
+      originalBianchiCornerResidual : Cov
+      originalExteriorCornerResidual : S
+  open OriginalP0BNCauchyCornerPayment public
+
+  ------------------------------------------------------------------------
+  -- BR80: NONFROZEN ADM physical normal-frame multiplier current.
+  -- The 5D stress divergence is the exact classical identity
+  --   div_g(T(.,X)) = (box_g u) X(u) + T:Lie_X g/2.
+  -- BR73 gives positive normal energy; BR76–77 give moving-wall
+  -- flux and geometric tilt. The lapse/shift/metric deformation
+  -- term T:Lie_X g/2 is necessarily retained.
+  --
+  -- This source owns each exact payment separately: 15 metric and
+  -- five gauge channels share only the scalar principal part;
+  -- their original Einstein connections and curved Bianchi
+  -- lower-order terms are NOT declared zero.
+  ------------------------------------------------------------------------
+
+  record OriginalADMVariableEnergyCurrent : Set r where
+    constructor originalADMVariableEnergyCurrent
+    field
+      originalVariableADM : ADMPhysicalPoint
+      originalMaterialWall : MaterialGraphGradient
+      originalFieldNormalTime : S
+      originalFieldSpatialJet : BR4Space → S
+      originalScalarWaveForcing : S
+      originalPositiveSliceEnergy : S
+      originalADMDeformationWork : S
+      originalEnergyCurrentDivergence : S
+      originalMovingWallFlux : S
+      originalGeometryAndConnectionResidual : S
+  open OriginalADMVariableEnergyCurrent public
+
+  originalADMCurrentResidual : OriginalADMVariableEnergyCurrent → S
+  originalADMCurrentResidual d =
+    originalEnergyCurrentDivergence d
+      - originalScalarWaveForcing d * originalFieldNormalTime d
+      - originalADMDeformationWork d
+      - originalGeometryAndConnectionResidual d
+
+  record OriginalADMPhysicalCurrentCertificate
+      (d : OriginalADMVariableEnergyCurrent) : Set r where
+    constructor originalADMPhysicalCurrentCertificate
+    field
+      actualVariableEnergyCurrentWeld :
+        originalADMCurrentResidual d ≡ O
+  open OriginalADMPhysicalCurrentCertificate public
+
+  ------------------------------------------------------------------------
+  -- BR81: SOURCE-SPECIFIC P0AK reference, already an exact
+  -- static AdS5 warped Einstein/pure-tension reference.
+  --
+  -- b=4/5 cosh(n-log2), L=2log2, h0=4/5.
+  -- Spatial h=dn²+b² gamma_H3 has Ric_h=-3h and scalar -12.
+  -- N=b/(h0 z_H3) obeys Hess_h N=N h and Delta_h N=4N.
+  -- Thus -N²dt²+h solves Ric_g=-4g, and the wall time
+  -- lapse jump [∂n log N]=[b'/b]=-6/5 matches the
+  -- three physical spatial Israel directions.
+  --
+  -- P0BN's NONZERO scalar h need not have a static lapse:
+  --     Hess_h N=N(Ric_h+4h)
+  -- is overdetermined and not implied by R(h)=-12.
+  -- The intended nonzero route is actual hyperbolic evolution
+  -- with compatible initial wall corners, not a fictitious
+  -- static-lapse inverse.
+  ------------------------------------------------------------------------
+
+  record OriginalP0AKReferenceStaticWeld : Set r where
+    constructor originalP0AKReferenceStaticWeld
+    field
+      referenceSpatialScalar : S
+      referencePhysicalLapse : S
+      referenceSpatialRicciTrace : S
+      referenceLapseHessianTrace : S
+      referenceIsraelJump : S
+      referenceTimeLapseJump : S
+      referenceVacuumHamiltonian : S
+      referenceStaticLapseResidual : S
+      referenceWallTensionResidual : S
+  open OriginalP0AKReferenceStaticWeld public
+
+  record OriginalP0AKStaticSourceCertificate
+      (d : OriginalP0AKReferenceStaticWeld) : Set r where
+    constructor originalP0AKStaticSourceCertificate
+    field
+      sourceReferenceVacuum : referenceVacuumHamiltonian d ≡ O
+      sourceReferenceLapse : referenceStaticLapseResidual d ≡ O
+      sourceReferenceTension : referenceWallTensionResidual d ≡ O
+      sourceReferenceTimeWallMatch :
+        referenceTimeLapseJump d ≡ referenceIsraelJump d
+  open OriginalP0AKStaticSourceCertificate public
+
+  -- Reconciled theorem endpoint:
+  -- (1) original BN classical spatial solution + existing BO/BQ
+  -- higher corners; (2) BR71/72 physical wall source;
+  -- (3) BR80 variable normal-frame current with a genuine high
+  -- order positive boundary/Kreiss estimate; (4) BR29/55 same
+  -- nonlinear Bianchi uniqueness; (5) BS13/BR57 weighted
+  -- quotient and BR31 exterior; (6) construct an actual physical
+  -- 5D solution and continuation. None may be silently inferred
+  -- from the scalar Hamiltonian or the reference static lapse.
