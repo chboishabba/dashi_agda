@@ -3166,3 +3166,275 @@ Local SymPy four stages PASS, 90s per stage; new checker
 78525b79716b4f4376c9a80ed9180ca09eccbf2c, BR143 dependency
 2354d838727e6d84c1e8da05abad27a9b78efc6d. Local exact source
 bytes verified; trace, optical, rmhd, observer stages run.
+
+
+## 23. BR150–153 — mixed-order trace, frame discrimination, explicit G4 York geometry and literal Leech C3 action
+
+Parallel priorities from section 0 remain controlling. This tranche
+reopens P0H/P0V and the actual P0AO source, not a new generic geometry.
+Refreshed sibling metadata: #1217 09166d57a3cb13b6e298d53bc56b55bbb4601402, #1291 c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04, #1545 ab583022e81b604556348648c221e5c39cd7d607, #1547 fa5f402855404ef5420aaabd91bdcc17306cc3bd.
+No sibling modifications or merge. The attempted fetch of
+Docs/physics/Monster3BLiteralWeylSourceAttachment20261125.md on #1554
+returned 404; the owner is #1545, not assumed imported. Section 21/22
+already pins the actual #1545 and F8 donor paths. Reopened P0AO
+scripts/check_hopf369_p0ao.py blob 18862adb7f3b5346420b551abc3d7049b8f263d6,
+functions lattice, minimal, mod2, lift, action; P0AP
+scripts/check_hopf369_p0ap.py blob e2ca853bc00665a872c2a263b03774b720d6d2be,
+audit; and MonsterSpecialGravityKKRefinedCoordinateBidiExact.agda
+blob 5f88d39feb707ab0320de7a2ee14536222f8eefb, actual
+gravityToFLMToGravity and flmToGravityToFLM. P0AO already supplies
+the literal Leech mod2 central extension and selected binary chart.
+BR153 uses these definitions and independently reconstructs the same
+lattice basis for a new actual selected order-three actor, not a
+new abstract binary representation. Classical mathematical/physical
+identities retain their prior attribution.
+
+### BR150 — half-order trace budget on the actual extended normal graph
+
+Use BR146's rank26 A=U_n B and full electric T=V A_red.
+On a given regular compact material chart set v=U_n u.
+BR146 implies v_y=C^a partial_a u-f. With smooth bounded
+coefficients in the relevant multiplier spaces, use spacetime
+tangential H^s norms on a localized extendible chart
+(or flat periodic tangential variables and a time extension).
+For s>=1, v in L²_y H^s and v_y in L²_y H^{s-1}.
+Apply the one-sided trace identity to each tangential Fourier
+frequency with weight w=<xi>, multiply by w^(2s-1), integrate:
+ ||v(0)||_{H^{s-1/2}}²
+ <= d^-1 ||v||_{L²_y H^{s-1/2}}²
+    +2 ||v||_{L²_y H^s} ||v_y||_{L²_y H^{s-1}}.
+The cross term uses w^(2s-1)=w^s w^(s-1), not a full derivative
+loss in both factors. Thus the full electric trace is bounded
+at order s-1/2 from order s bulk and order s-1 forcing under
+the exact reference graph relation and the actual derivative
+equation. For v(y)=exp(-w y) at a single tangential frequency,
+the combined squared mixed norm on the half-line is w^(2s-1),
+equal to the squared trace at order s-1/2. A larger trace
+exponent cannot follow from these two abstract norms alone.
+This is not a constrained IBVP counterexample or a claim that
+an improved physical boundary estimate is impossible.
+The local check replays BR143 graph reconstruction then checks
+the frequency-weight and boundary-layer identities. The
+variable off-shell correction u=Bc+g(Torsion,R), the wall
+energy at top order, and derivative-balanced propagation still
+need their actual source estimates. Do not claim that a
+half-order mixed space by itself closes the coupled problem.
+
+### BR151 — same G3 geometry, Jordan versus Einstein physical optics
+
+P0V4 circle-invariant vacuum reduction has Jordan metric g_J.
+For positive radius phi, use 4D Einstein metric g_E=phi g_J
+(up to a fixed normalization if a dimensional radius is used).
+The classical reduced EH action is proportional to
+ int sqrt(-g_E) [ R_E - (3/2)|d log phi|_E²
+                  - phi³ F_E²/4 ],
+ after the total divergence is handled with matched boundary
+terms. This is the circle-invariant vacuum theory only, not
+the non-cylinder periodic wall metric or independent QED.
+It implies R_E(k,k)=(3/2)(k log phi)²
+ +(phi³/2)|i_k F|_E²>=0 for null k.
+
+At the original central event, d phi=0 (radial and time
+symmetry), phi=p, Hess_J log phi(k_J,k_J)=-352 eps²/(9p²)
+from P0V4's radion and spatial jets. Under g_E=phi g_J,
+normalized k_E and screen vectors each scale p^-1/2.
+The conformal Riemann identity gives, at d phi=0,
+ O_E=p^-1 (O_J-(Hess_J log phi(k_J,k_J)/2)I).
+Consume actual BR147 O_J, giving
+ O_E=(eps²/p³) diag(0,32 sin² theta),
+ Ric_E(k_E,k_E)=32 eps² sin² theta/p³>=0.
+Independent Einstein-frame null Ricci equation with physical
+F_E xy=8 eps/p³ gives the same answer. The negative Jordan
+trace is NOT frame-independent. The normalized null paths
+are conformally related but affine parameters, local clocks
+and optical observables are not identical. For actual 5D
+zero-momentum null lift the Jordan projection is natural,
+whereas a detector matter action must specify which metric
+it couples to. No ordinary photon identification or gravity
+manipulation claim. The two observations are compatible
+descriptions; do not select a physical frame by desirable
+sign.
+
+For the transverse Einstein screen define q_E=Ric_E/32,
+m=T5_z5/16. Then q_E=eps²/p³, m=eps/p².
+Off zero p=q_E/m² and eps=m (q_E/m²)². Both readings
+vanish at eps=0, retain original radius boundary condition.
+Native adapter adds only polynomial cross-multiplied
+identities for r=1/p, q_E=r³ eps², m=r² eps. BR149
+Jordan observer is retained; frame index is mandatory.
+
+Quantitative conditional normal Jacobi estimate: let the actual
+parallel-frame tidal T(t) be even, ||T||<=K and ||T''||<=M2
+on a symmetric admitted interval. J''=-T J, J(0)=I,J'(0)=0.
+Successive integration or scalar Volterra comparison gives
+ ||J(t)||<=cosh(sqrt(K)|t|),
+ ||J(t)-I||<=cosh(sqrt(K)|t|)-1.
+Then
+ ||J(t)-I+t² T(0)/2||
+ <= t^4 [M2+K² cosh(sqrt(K)|t|)]/24.
+Indeed ||T(s)-T(0)||<=M2 s²/2 and
+cosh(sqrt(K)s)-1<=K s² cosh(sqrt(K)|t|)/2.
+In particular the sign of BR147 J_5z is certified for nonzero
+eps and t satisfying
+ t²[M2+K² cosh(sqrt(K)|t|)] < 192 |eps|/p².
+This is an explicit reverse-solved criterion, not numerical
+lifespan: K,M2 and the admitted interval still need evaluation
+from actual P0U/V analytic bounds. For the original eps=1/4,
+the positive radial Newton/Neumann series gives
+ 19/18 <= p <= 18/17
+using q0=8eps²/9=1/18, first iterate 1+q0 and inverse
+1/(1-q0); exact central source integral verified.
+This pays central normalization bounds without an arbitrary
+radius. The finite-time bound is conditional, not an executed
+trajectory. All quantities are dimensionless source units.
+
+### BR152 — actual original G4 York source in radial-angular geometry
+
+Consume the original P0H Fourier Y, with a=kappa s alpha
+(s is the alignment sign), Bhat=4pi² exp(-q) q
+ (z_hat-n n_z+i n cross z_hat). Define the real vector
+potential V=(-Delta)^-1 B. Separate poloidal and toroidal:
+ V=curl curl(z_hat F(r))+curl(z_hat G(r)),
+ -Delta F=2/(1+r²), -Delta G=4/(1+r²)².
+These radial source functions follow directly from the
+inverse Fourier sine transforms. Regular derivatives:
+ F'=-2(r-atan r)/r²,
+ G'=-2(atan r-r/(1+r²))/r².
+Only derivatives of F,G occur; additive constants are irrelevant.
+Write V=v(r) z_hat+b(r) z x+c(r) z_hat cross x where
+ v=-F''-F'/r, b=(F''-F'/r)/r², c=-G'/r.
+Then original Y=-a (grad V+grad V^T), no arbitrary TT
+addition. Set n=x/r, mu=n·z_hat, h=z_hat cross n,
+ A=v'+br, B=2b' r², C=2br, D=c'r.
+The literal tensor is
+ Y=-a [ A(n z_hat^T+z_hat n^T)+B mu nn^T+C mu I
+          +D(n h^T+h n^T)].
+Trace 2A+B+3C=0. The two polar/toroidal parts are Frobenius
+orthogonal, so
+ |Y|²=a²[U(r)+V2(r)mu²],
+ U=2(A²+D²),
+ V2=2A²+B²+3C²+4AB+4AC+2BC-2D².
+This is the actual source angular dependence, not an assumed
+radial Y². The central limits A/r=-12/5, B/r=0,
+ C/r=8/5, D/r=0 give Y(0)=0 and
+ partial_l Y_ij(0)=a [
+  (12/5)(delta_li z_j+delta_lj z_i)-(8/5)delta_ij z_l].
+Independent angular Fourier second/fourth moments recover
+all 27 derivatives. The divergence equals 8a z_hat, exactly
+the original momentum source at centre. The axial and central
+inversion symmetries of |Y|² and |B|² transfer to the unique
+original positive contraction solution psi, hence grad psi(0)=0
+and Hess log psi(0)=diag(Hx,Hx,Hz). Unlike G3, psi need not
+be radial. At centre p=psi(0), the actual conformal equation
+sets
+ 2 Hx+Hz=-16 kappa eps² p^-4,
+ K=(Ktrace/3)I.
+Let f=2pi G_N eps² |B|² psi^-3+|Y|² psi^-7/8.
+Newton Hessian difference has the exact convergent quadrature
+ Hz-Hx=(3/(2p)) int_0^infty dr/r int_-1^1
+       [mu²-(1-mu²)/2] f(r,mu) dmu.
+The constant isotropic Hessian contact term cancels in the
+difference. Smooth axial/even f gives f(r,mu)-f(0)=O(r²)
+at the origin; far decay follows from original fields and
+bounded psi (or explicit V radial formulas). This is a
+two-dimensional quadrature of the SAME nonlinear solution,
+not a replacement by radial averaging or a claimed evaluated
+number. Actual central electric tensor is axisymmetric, with
+trace from BR148 and difference
+ T_zz-T_xx=-2(Hz-Hx)/p^4-kappa(S_parallel-S_perp).
+Thus the full central diagonal matrix is determined by the
+single explicit quadrupole integral plus the already-paid
+trace and primitive readouts. The exact remaining mathematical
+and numerical cut is evaluating/bounding this quadrupole on
+the P0H contraction solution, not deriving a new York
+tensor or assuming the stress alone controls the tide.
+Native full continuum proof, actual numerical quadrature,
+and weighted continuation not performed.
+
+### BR153 — actual fixed-free Golay/Leech C3 actor and source-specific negative control
+
+Consume P0AO's literal Golay code on 23 cyclic positions and
+parity coordinate infinity. Choose the genuine projective-line
+permutation x -> -1/(x+1) mod 23 with -1->infinity,
+infinity->0. It has order3, eight 3-cycles and no fixed
+coordinates. Verify all 4096 original code words are preserved.
+Using exactly P0AO's HNF generating lattice (even Golay rows,
+4D24, 8e0 and odd glue), its integral lattice-coordinate
+matrix A=B^-1 P B satisfies A³=I, A^T G A=G and characteristic
+polynomial (lambda³-1)^8. This is a literal Leech isometry,
+not the arbitrary three-E8 block permutation of AN3.
+Reducing mod2 gives fixed dimension8 (rank(A-I)=16).
+
+With the actual P0AO cocycle U=triu(G,1)+diag(Gii/2) mod2,
+D=A^T U A+U is symmetric zero diagonal. The quadratic
+f(x)=x^T triu(D,1)x corrects the cocycle difference.
+The cube of the lift has linear phase character
+ chi(x)=f(x)+f(Ax)+f(A²x); chi is A-invariant.
+Rephase f3=f+chi. Because 3 is odd, f3's orbit sum is zero.
+Exact all-index polar/diagonal matrix identities plus 4672
+basis/random controls verify the cocycle and cube. This
+constructs a genuine order-three automorphism of the chosen
+extraspecial plus-type extension, not a canonical FLM lift.
+
+In P0AO's real irreducible 4096-dimensional Weyl representation,
+the automorphism fixes the central sign. By real irreducibility
+and uniqueness of the central-minus representation an orthogonal
+intertwiner U_A exists; its cube is scalar ±I by the scalar
+commutant, normalize by a real sign to make U_A³=I.
+This is an analytical finite representation argument, not
+an executed 4096x4096 matrix. Conjugation on End has the
+Weyl basis indexed by all mod2 x, with phase f3(x).
+At every A-fixed x the cube condition gives f3(x)=0.
+Consequently tr Ad(U_A)=2^8=256=(tr U_A)^2.
+Since U_A is real with order3, trace is integer and
+tr U_A≡4096 mod3, so the sign is +16, not -16.
+Ground complex eigenmultiplicities are (1376,1360,1360).
+For the selected rank24 oscillator action P its eigen-
+multiplicities are (8,8,8). On the product 98304 ground/
+oscillator carrier the multiplicities are therefore
+(32768,32768,32768), character zero.
+
+The selected norm-four antipodal-pair sector has no fixed
+pair: supports of size2 and8 cannot be unions of three-
+cycles; odd norm-four vectors have a unique distinguished
+coordinate. An order-three action on an antipodal pair
+cannot swap its two elements. Thus the trace of any
+order-three signed pair permutation on this sector is
+zero. The symmetric-square rank24 sector also has trace
+(tr P²+(tr P)^2)/2=0. The selected weight-two direct-sum
+character is 0, not the actual V2 3B character 54.
+This excludes THIS literal selected action as the desired
+3B actor (under the chosen tensor/pair realization);
+it does not identify a Monster class, prove an actual VOA
+automorphism or refute another geometric lift. Canonical
+FLM central quotient, lift, mixed vertex operators and
+marked Conway/Monster class fusion are still the precise
+remaining obligations. The actual #1545 marked ternary
+Weyl action must be consulted; do not conflate the binary
+mod2 actor with the ternary normalizer. The #1545 exact
+marked Weyl source document must be fetched on its own
+branch, not assumed available on #1554.
+
+### Next simultaneous cut and acceptance
+
+Periodic: derivative-balanced variable Cartan surface energy,
+W0/W1 corner/source weld, W5 exterior and W6 generation still
+open; BR150 identifies sharp abstract half-order trace budget.
+Classical: quantitative G3 analytic constants and material
+detector metric/action selection; G4 evaluate actual quadrupole
+integral with bounded contraction/derivative errors, preserve
+alignment sign and cosmological background.
+TOE: frame-indexed readout and exact Leech order-three negative
+control; use marked actual source actors, not force 3B character.
+Material P0O–AG same-source continuum/receiver and empirical
+calibration remain independent; no new material numerical
+or interaction-action proof this tranche.
+
+Four local stages exit zero (SymPy 1.14.0, NumPy for integer
+Leech matrices, 90s cap each); exact checker blob
+35e6b4b3e54df3ee8758c4c485eec80abfe2c6e7,
+BR143 dependency blob 2354d838727e6d84c1e8da05abad27a9b78efc6d.
+Tests check the algebra/matrix identities; analytical estimates
+and character proof separately derived. No full integrated
+runner, native kernel, CI, exhaustive master reconciliation,
+full PDE solution or empirical calibration.

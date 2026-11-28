@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR149)
+## Current proof state — 28 November 2026 (BR153)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -442,3 +442,51 @@ are normal-active. The one-sided trace bound still requires a
 tangential jet at top order and actual off-shell graph conversion.
 Four local exact stages passed, no native or nonlinear acceptance.
 See [BR146–149 register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Frame-indexed optics, actual York source and literal Leech order-three control (BR150–153)
+
+The original G3 Jordan optical screen is not invariant under
+the Einstein-frame metric choice. For \(g_E=\phi g_J\) at the
+time-symmetric central event, the actual radion Hessian cancels
+the common negative Jordan contribution, giving
+\(\mathcal O_E=\epsilon^2p^{-3}\operatorname{diag}(0,32\sin^2\theta)\).
+This is independently consistent with the Einstein-frame vacuum
+circle reduction null Ricci equation. Physical detector coupling,
+affine normalization and metric choice must therefore be specified;
+no negative-mass or gravity-manipulation conclusion follows.
+The normalized transverse Einstein trace \(q_E=\epsilon^2/p^3\)
+and oriented mixed five-dimensional probe \(m=\epsilon/p^2\)
+recover \(p=q_E/m^2,\epsilon=mp^2\) off zero. Conditional on
+actual uniform tidal bounds \(K=\sup\|T\|\), \(M_2=\sup\|T''\|\)
+and reflection symmetry, the normal Jacobi error is bounded by
+\(t^4(M_2+K^2\cosh(\sqrt K |t|))/24\); actual constants and
+lifespan remain unpaid. The original \(\epsilon=1/4\) central
+radial normalization satisfies \(19/18\le p\le18/17\).
+
+For the independent G4 matter source, the original Fourier
+York tensor has an explicit regular radial-angular inverse
+Laplacian expression. Its central value is zero and its
+gradient is
+\(\partial_lY_{ij}=a[12(\delta_{li}z_j+\delta_{lj}z_i)/5
+-8\delta_{ij}z_l/5]\), \(a=\kappa s\alpha\), independently
+recovered from angular Fourier moments. The actual conformal
+Hessian is axial, not assumed radial. Its trace is fixed by
+the central Hamiltonian; its single remaining anisotropy is
+an explicit convergent Newton quadrupole integral on the
+same nonlinear contraction solution. The full electric
+tidal difference is \(-2(H_z-H_x)/p^4-\kappa(S_\parallel-S_\perp)\).
+The integral is not yet evaluated numerically.
+
+The extended periodic normal trace has a half-order mixed
+tangential Sobolev budget, not an unconditional same-order
+surface estimate. The literal P0AO Leech code admits the
+fixed-free order-three projective-line permutation tested in
+BR153. The corrected selected central-extension lift has
+ground character \(16\), and selected weight-two tensor/pair
+character zero, excluding this actor as the target 3B
+character \(54\). This is a source-specific finite negative
+control, not a canonical FLM or Monster class identification.
+Four local stages passed; no native kernel, full PDE or
+physical calibration acceptance. See
+[BR150–153 dependency and proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

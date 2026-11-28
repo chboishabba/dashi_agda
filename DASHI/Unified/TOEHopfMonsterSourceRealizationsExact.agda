@@ -282,3 +282,28 @@ centralJointZeroOptical r = Ring.solve-∀ r
 
 centralJointZeroMixed : (r : ℚ) → centralJointMixed r 0ℚ ≡ 0ℚ
 centralJointZeroMixed r = Ring.solve-∀ r
+
+
+------------------------------------------------------------------------
+-- BR151: distinct Einstein-frame optical and five-dimensional mixed
+-- readout. r=1/p, so the Einstein optical weight is r³, not the
+-- Jordan r². These are polynomial identities, not metric selection.
+------------------------------------------------------------------------
+centralEinsteinOptical : ℚ → ℚ → ℚ
+centralEinsteinOptical r e = (r * (r * r)) * (e * e)
+
+centralFibreMixed : ℚ → ℚ → ℚ
+centralFibreMixed r e = (r * r) * e
+
+centralEinsteinRadiusCross :
+  (r e : ℚ) →
+  centralFibreMixed r e * centralFibreMixed r e
+  ≡ r * centralEinsteinOptical r e
+centralEinsteinRadiusCross r e = Ring.solve-∀ r e
+
+centralEinsteinAmplitudeCross :
+  (r e : ℚ) →
+  centralEinsteinOptical r e * centralEinsteinOptical r e
+  ≡ e * (centralFibreMixed r e *
+          (centralFibreMixed r e * centralFibreMixed r e))
+centralEinsteinAmplitudeCross r e = Ring.solve-∀ r e
