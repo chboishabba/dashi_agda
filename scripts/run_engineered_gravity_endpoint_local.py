@@ -18,6 +18,7 @@ CORE=(
     "check_engineered_gravity_l3_source_geometry.py",
     "check_engineered_gravity_finite_source_families.py",
     "check_engineered_gravity_finite_admissibility.py",
+    "check_engineered_gravity_shell_dynamics.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
@@ -31,6 +32,8 @@ DONORS=(
     "check_kk_rectified_leggett_rqu_ghz.py",
     "check_kk_source_matching_gate.py",
     "check_kk_same_action_stress.py",
+    "check_kk_casimir_bidi_consumer.py",
+    "check_kk_jordan_sourced_sphere.py",
     "check_sc_coherent_braking_same_source_dynamics.py",
 )
 def main():
