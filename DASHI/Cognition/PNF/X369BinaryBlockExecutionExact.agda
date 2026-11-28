@@ -4,6 +4,8 @@ module DASHI.Cognition.PNF.X369BinaryBlockExecutionExact where
 -- Binary syntax represents a repetition count without unary expansion.
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as N
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
 
 data Count : Set where
@@ -109,3 +111,47 @@ module Collapsed {State Code : Set}
   correct : (b : Count) (z : State) →
     apply (compile b) z ≡ E.repeat (value b) z
   correct b z = E.trans (sound b z) (sym (E.correct b z))
+
+
+-- Exact charged count for the SHARED collapsed schedule. Its operator
+-- executions do not expand the Tree; each digit makes one square and
+-- every set digit up to one additional composition.
+ones : Count → Nat
+ones end = zero
+ones (even b) = ones b
+ones (odd b) = suc (ones b)
+
+compositionsExact : (b : Count) →
+  compositions b ≡ digits b + ones b
+compositionsExact end = refl
+compositionsExact (even b) =
+  F.cong suc (compositionsExact b)
+compositionsExact (odd b)
+  rewrite N.+-suc (digits b) (ones b) =
+  F.cong (λ n → suc (suc n)) (compositionsExact b)
+
+weaken : ∀ {m n} → m ≤ n → m ≤ suc n
+weaken z≤n = z≤n
+weaken (s≤s p) = s≤s (weaken p)
+
+onesAtMostDigits : (b : Count) → ones b ≤ digits b
+onesAtMostDigits end = z≤n
+onesAtMostDigits (even b) = weaken (onesAtMostDigits b)
+onesAtMostDigits (odd b) = s≤s (onesAtMostDigits b)
+
+plusMonoRight : (m : Nat) {n k : Nat} →
+  n ≤ k → m + n ≤ m + k
+plusMonoRight zero p = p
+plusMonoRight (suc m) p = s≤s (plusMonoRight m p)
+
+transportBound : ∀ {m n k} → m ≡ n → n ≤ k → m ≤ k
+transportBound refl p = p
+
+twiceDigitsBound : (b : Count) →
+  compositions b ≤ digits b + digits b
+twiceDigitsBound b =
+  transportBound (compositionsExact b)
+    (plusMonoRight (digits b) (onesAtMostDigits b))
+
+-- This bound charges abstract fixed-size compositions, not the cost of
+-- arbitrary-precision chronological value payloads or GPU kernels.
