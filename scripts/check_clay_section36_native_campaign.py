@@ -80,7 +80,8 @@ def call(cmd: list[str], cwd: Path, seconds: int) -> dict:
                            text=True, timeout=seconds, check=False)
         return {"command": cmd, "exit": p.returncode,
                 "stdout_tail": p.stdout[-5000:],
-                "stderr_tail": p.stderr[-5000:]}
+                "stderr_tail": p.stderr[-5000:],
+                "_stdout_full": p.stdout, "_stderr_full": p.stderr}
     except (OSError, subprocess.TimeoutExpired) as exc:
         return {"command": cmd, "exit": None, "error": str(exc)}
 
@@ -198,8 +199,10 @@ def main() -> int:
             audit = "Agda --safe"
             if owner != "YM" and result["exit"] == 0:
                 trusted, audit = lean_axioms_trusted(
-                    result["stdout_tail"] + "\n" + result["stderr_tail"],
+                    result.get("_stdout_full", "") + "\n" + result.get("_stderr_full", ""),
                     (root / path).read_text(encoding="utf8"))
+            result.pop("_stdout_full", None)
+            result.pop("_stderr_full", None)
             report["checks"].append({"owner": owner, "path": path,
                      "status": "PASS" if result["exit"] == 0 and trusted else "FAIL",
                      "axiom_audit": audit,
@@ -221,6 +224,8 @@ def main() -> int:
           "--expected-git-head", args.rh_source_head,
           "--lake", args.lake]
         r = call(command, rhroot, args.timeout)
+        r.pop("_stdout_full", None)
+        r.pop("_stderr_full", None)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
     report["all_selected_roots_passed"] = (len(report["checks"]) == 20
