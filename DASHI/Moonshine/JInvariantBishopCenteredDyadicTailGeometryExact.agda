@@ -7,7 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Product.Base using (Σ; _,_; proj₁; proj₂; _×_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Data.Nat.Base as Nat using () renaming (_≤_ to _≤N_; _<_ to _<N_)
+open import Data.Nat.Base as Nat using (s≤s; z≤n) renaming (_≤_ to _≤N_; _<_ to _<N_)
 import Data.Nat.Properties as NP
 open import Data.Rational.Unnormalised as Q using (_/_; 0ℚᵘ; 1ℚᵘ)
 import Data.Rational.Unnormalised.Properties as QP
@@ -27,6 +27,10 @@ import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as N
 import DASHI.Foundations.BishopNatEmbeddingMonotoneExact as Mono
+import DASHI.Foundations.BishopNatRealPositiveExact as NatPos
+import DASHI.Moonshine.JInvariantBishopDyadicScaledRowLimitExact as Scaled
+import DASHI.Analysis.BishopComplexAlgebraExact as A
+import DASHI.Analysis.BishopPositiveCrossReciprocalUpperExact as Cross
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as One
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Codec
@@ -222,3 +226,72 @@ module At (inputs : Round11.BishopCutset) (p : U.BishopUpperHalfPlanePoint) wher
       P.≤-respʳ-≃ (P.≃-symm (D.normCong (D.gapCong phaseRead)))
         (T.gapLower rho rho0 t u (h m) J rho0NN radialFloor un inside sign
           (P.nonNegx,y⇒nonNegx*y (Leaf.hNN m) Jn) dist)
+
+  depth = proj₁ (smallShift x)
+  cutoff = proj₁ (largeIndex x)
+  B = Cross.positiveInverse rho0Positive
+  C4 = (R.1ℝ + ((+ 6 / 1) ⋆) * B) * B
+  C6 = ((R.1ℝ + ((+ 30 / 1) ⋆) * B) + ((+ 120 / 1) ⋆) * Tail.square B) * B
+
+  J : Nat → ℝ
+  J k = N.natReal (suc k)
+
+  jNN : ∀ k → R.NonNegative (J k)
+  jNN k = posNN (NatPos.natRealSuccessorStrictlyPositive k)
+
+  jOne : ∀ k → R.1ℝ ≤ J k
+  jOne k = Mono.natRealMonotone (Nat.s≤s Nat.z≤n)
+
+  module Paid (n k : Nat) (j : ℤ)
+    (lower : rho0 * Tail.square (h (suc n) * J k) ≤
+      Norm.normSqC (Row.gapMinus (Rows.q (Leaf.scaledPoint p j (suc n))))) where
+    module Q = Cell (suc n) j
+    module M = Tail.NaturalTail Q.q (Rows.gapNZ Q.point) (h (suc n)) rho0 k
+      (Leaf.hPositive (suc n)) (hOne (suc n)) rho0Positive (jOne k) Q.normOne lower
+
+    four : Tail.Box (A.scaleC (weight ((+ 1 / 16) ⋆) (suc n)) (Rows.row4 Q.point))
+      (C4 * Basel.baselTerm k)
+    four = Tail.boxCong (Leaf.scaleCong (Leaf.weight4 (suc n)) (C.≈C-refl _)) M.majorant4
+
+    six : Tail.Box (A.scaleC (weight ((+ 1 / 64) ⋆) (suc n)) (Rows.row6 Q.point))
+      (C6 * Basel.baselTerm k)
+    six = Tail.boxCong (Leaf.scaleCong (Leaf.weight6 (suc n)) (C.≈C-refl _)) M.majorant6
+
+  module Positive (n k : Nat)
+    (pastDepth : depth ≤N suc n) (pastIndex : cutoff ≤N suc k)
+    (inside : Addr.InRange n (+ suc k)) where
+    module Q = Cell (suc n) (+ suc k)
+    module Ang = Angle x (J k) (h (suc n)) (jNN k) (Leaf.hNN (suc n))
+      (proj₂ (largeIndex x) (suc k) pastIndex)
+      (rangeBound n (suc k) (NP.<⇒≤ inside))
+      (proj₂ (smallShift x) (suc n) pastDepth)
+
+    -- commutation of the original real shift is the only chart change.
+    gap : rho0 * Tail.square (h (suc n) * J k) ≤ Norm.normSqC (Row.gapMinus Q.q)
+    gap = Q.gapFromAngle Ang.u (J k) Ang.un Ang.inside
+      (inj₁ (P.*-congˡ (P.*-congˡ (P.+-comm x (J k))))) (jNN k) Ang.distance
+
+    module Result = Paid n k (+ suc k) gap
+    open Result public using (four; six)
+
+  module Negative (n k : Nat)
+    (pastDepth : depth ≤N suc n) (pastIndex : cutoff ≤N suc k)
+    (inside : Addr.InRange n (-[1+ k ])) where
+    module Q = Cell (suc n) (-[1+ k ])
+    absNeg : ∣ R.- x ∣ ≃ ∣ x ∣
+    absNeg = P.∣-x∣≃∣x∣
+    module Ang = Angle (R.- x) (J k) (h (suc n)) (jNN k) (Leaf.hNN (suc n))
+      (P.≤-respˡ-≃ (P.*-congˡ absNeg) (proj₂ (largeIndex x) (suc k) pastIndex))
+      (rangeBound n (suc k) inside)
+      (P.≤-respˡ-≃ (P.*-congˡ absNeg) (proj₂ (smallShift x) (suc n) pastDepth))
+
+    phase : Q.t ≃ R.- Ang.u
+    phase = let open P.ℝ-Solver in solve 4
+      (λ pi h x J → pi ⊗ (h ⊗ (x ⊕ (⊝ J)))
+        ⊜ ⊝ (pi ⊗ (h ⊗ (J ⊕ (⊝ x))))) P.≃-refl D.pi (h (suc n)) x (J k)
+
+    gap : rho0 * Tail.square (h (suc n) * J k) ≤ Norm.normSqC (Row.gapMinus Q.q)
+    gap = Q.gapFromAngle Ang.u (J k) Ang.un Ang.inside (inj₂ phase) (jNN k) Ang.distance
+
+    module Result = Paid n k (-[1+ k ]) gap
+    open Result public using (four; six)
