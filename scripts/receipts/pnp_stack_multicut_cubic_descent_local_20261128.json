@@ -1,0 +1,204 @@
+{
+  "scope": "Local Python exact new stack core/campaign, multicut campaign, forced-chart/cubic campaign, constructive descent core/campaign Git blobs match fetched source. Shared live consumer and donor imports locally transcribed; phase core local hash differs from fetched identifier (all inspected functions match except independent_phase_pieces reported section length/hash despite visually matching source). Not full checkout or exact-head kernel.",
+  "blobs": {
+    "stack": "a4feb63286560c6dcc65a76f2a44e12b49b22594",
+    "stack_campaign": "d9f805c0a84308a066f6a20033090a3a2ae5defb",
+    "multicut": "860b8b6b9e777ddc0d6859f1009e2da62dfc95f4",
+    "forced_chart_cubic": "27af6fe2191ed926f8327aecfd94b2655f5db95f",
+    "descent": "16dd3b63b387575574ea22d00ca7d57372fd6bb0",
+    "descent_campaign": "b2e61b794ab8ecc4df1df8db7c3ba008bd10e9b8",
+    "phase_repo": "ab23780bf0bfb5f08528899b951386145cef5e52",
+    "phase_local": "d12313a028ee1125d2cbb28955c6b3c76399efcc",
+    "live_consumer": "376ad5366e150b80c2bbe009a0aade9845311d73"
+  },
+  "stack": {
+    "seed_base": 3692827,
+    "tables": 256,
+    "static_bits": 256,
+    "one_step": 1024,
+    "halt": 414,
+    "raw": 15109,
+    "literal": 6491,
+    "jumps": 1112,
+    "guard_checks": 2224,
+    "multi_step": 634,
+    "integer": 16,
+    "huge": {
+      "word_length_per_side": 128,
+      "program_fractions": 58,
+      "lanes": 42,
+      "raw": "86461353570082943257819734317025136881640218343356168133377718",
+      "literal": 10,
+      "jumps": 8,
+      "checks": 16,
+      "max_bits": 204
+    }
+  },
+  "multicut": {
+    "cut_injectivity": 1792,
+    "pairs": 21844,
+    "crossings": 497318,
+    "diagonal": 254,
+    "simultaneous_controls": 6
+  },
+  "forced_chart": {
+    "seed_base": 3692828,
+    "fixtures": 8,
+    "points": 524288,
+    "bounds": 144,
+    "calls": 48,
+    "charged_calls": 24,
+    "reserved": 214528,
+    "refusals": 24,
+    "splits": 96,
+    "note": "Deliberately disable optional producers; not a universal irreducibility claim."
+  },
+  "cubic": {
+    "variables": 48,
+    "rows": 12,
+    "clauses": 1374,
+    "hist": [
+      393,
+      168,
+      168
+    ],
+    "contrast": [
+      450,
+      -225,
+      -225
+    ],
+    "character": [
+      225,
+      0
+    ],
+    "phase_work": 17711,
+    "phase_leaves": 6,
+    "ledgers": [
+      {
+        "cap": 0,
+        "leaf_cap": 64,
+        "degree": 3,
+        "exact": false,
+        "charges": {}
+      },
+      {
+        "cap": 65536,
+        "leaf_cap": 5,
+        "degree": 3,
+        "exact": false,
+        "charges": {
+          "phase": 65536
+        },
+        "refused": 1
+      },
+      {
+        "cap": 65536,
+        "leaf_cap": 64,
+        "degree": 3,
+        "exact": true,
+        "charges": {
+          "phase": 65536
+        },
+        "completed": 1,
+        "leaves": 6
+      },
+      {
+        "cap": 65536,
+        "leaf_cap": 64,
+        "degree": 2,
+        "exact": false,
+        "charges": {
+          "phase": 65536
+        },
+        "refused": 1
+      }
+    ],
+    "quartic_rejected": true
+  },
+  "descent": {
+    "seed_base": 3692829,
+    "fixtures": 128,
+    "sat": 86,
+    "unsat": 42,
+    "points": 2652,
+    "results": [
+      {
+        "cap": 0,
+        "witness": 86,
+        "unknown": 42,
+        "attempts": 256,
+        "reserved": 0
+      },
+      {
+        "cap": 1048576,
+        "witness": 86,
+        "unknown": 42,
+        "attempts": 256,
+        "reserved": 0
+      }
+    ],
+    "certificate_queries": 3594,
+    "descent_checks": 3594,
+    "positive_terminal": 134,
+    "root_promises": 86,
+    "hard_control": [
+      {
+        "cap": 0,
+        "witness": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0
+        ],
+        "attempts": 9,
+        "refused_scales": 8,
+        "reserved": 0
+      },
+      {
+        "cap": 1048576,
+        "witness": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "attempts": 9,
+        "verification_refusals": 3,
+        "continuation_refusals": 5,
+        "reserved": 8765440,
+        "per_scale_reserved": [
+          1048576,
+          671744,
+          753664,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "timeout_per_batch_seconds": 90,
+    "stack_batches": 8,
+    "descent_batches": 8,
+    "hard_control_replay": true,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "physical_clock_certified": false,
+    "actual_native_candidate_bit_dump": false,
+    "previous_512_query_regression_rerun": false
+  }
+}
