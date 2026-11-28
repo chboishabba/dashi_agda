@@ -3390,3 +3390,73 @@ These sampled exact regression cases do NOT accept universal Clay theorems, prov
 6. **PNP:** actual adaptive block causal information necessity now source-written; unrestricted sharing-stable internal-work mass, full machine read/bit/control semantics OR polynomial SAT solver still unpaid.
 
 Source commits exist and were read from original owner refs. All new native theorem declarations **PENDING_KERNEL** until actual trusted Agda/Lean runs; no Clay endpoint declared complete.
+
+
+## Section 44 — source-native Bishop all-exponent real order, sharper physical NS frequency radius and original 32-deck group action (2026-11-29 AEST)
+
+### Original PR heads and all-files-committed custody
+
+Reconciled live PR heads before Section44 roadmap commit:
+- **YM Agda #1536** `agent/ym-p0-cmp119-r445-master-weld-20261121` at `8a3223492623dfd0b95747a55007640870473b5c`.
+- **NS Lean #123** `research/ns-native-proof-weld-20261127` at `deba1a996ce3880ee4fb54171829231a6e78581c`.
+- **BSD/Hodge Lean #124** `research/clay-bsd-hodge-moment-orientation-20261127` at `dac0116351a3fcb7a15a2fef1b05954931f868e7`.
+- **PNP Lean #119** `research/clay-p0-polynomial-coverage-endpoint-20261124` at `351dc9d853890ba69e5e1bc2ccd9ff8507038fd1` (retains actual Section43 adaptive finite-block F3 causal information theorem; no new PNP theorem this cut).
+- **RH Lean #121** `fix/alpoge-original-admission-axiom-log-20261126` at `b9b95f5d7ef554148cb602c48cfa7b43e3507d28` (retains mandatory exact original source/kernel/axiom RH proof gate; NO actual external theorem admitted).
+- **Canonical all-Clay Agda #1551** `research/clay-four-p0-rollup-20261124` at `9bd0cce6fe7d621c67a51e0997a8cf78d967cdbf` before this roadmap.
+
+All new source theorem bodies, native acceptance roots, executable exact regression, acceptance runner and this roadmap are committed on the genuine original owner PR branches. No loose proof file is the deliverable. Native Agda 2.9 and Lean/Lake toolchains were not available in this execution container. All new Agda/Lean theorems remain **SOURCE_WRITTEN, PENDING_KERNEL**; checks of finite source models cannot prove a Clay conjecture.
+
+### YM — payoff of original real Bishop exponent comparison, all nonnegative unit-interval bases
+
+Earlier Section42/43 had exact Nat degree comparisons and exponent subtraction formulas for the original A(c-1) and B(c-2) filtered Cauchy outer wings. The missing step was not merely Nat arithmetic: original signed Bishop X needs the actual real modulus `u=|X|` and order `u^m<=u^c` when `m>=c`, `0<=u<=1`.
+
+NEW foundation source `DASHI/Foundations/BishopUnitIntervalPowerSuccessorExact.agda`, initial `a0cc662456be88605f7427b64bf378ba3f518a2b`, corrected multiplication side `222deb2daf8984eee0ba64f832df6c25e8f6ccb7`, extended ALL exponent orders `54b84fd64011e8bb32578bcca2ede72e69fb9bae`; acceptance `DASHI/Physics/YangMills/YMClayCMP102Section44BishopPowerAntitoneAcceptanceExact.agda` initial `dd257b3f3472aa8869162313c8ba733bf3f47a04`, Nat import correction `8a3223492623dfd0b95747a55007640870473b5c`.
+
+The source uses the ALREADY OWNED verified proof pattern `DASHI/Analysis/BishopMachinGeometricBishopRateExact.rateSuccessorBelow/rateAntitone`, generalized from fixed q=1/25 to ANY original Bishop real 0<=u<=1:
+- `bishopUnitIntervalPowerSuccessorAntitone`: `u^(suc n)<=u^n` from the original real power recursion, nonnegative powers, multiplying `u<=1` and the genuine Bishop multiplicative identity;
+- `bishopUnitIntervalPowerBelowOne`: `u^n<=1` for all n;
+- `bishopUnitIntervalPowerAntitone`: `small<=large ⇒ u^large<=u^small`, including u=0 and all successor cases.
+
+This is the real all-index power comparator needed by the TRUE original A(c-1)/B(c-2) finite square. It still needs the source `|X|<=quarter` to invoke positive Bishop base order, then the finite `Row.trianglePartial` filtered-positive Cauchy sum inequality and existing original coefficient masses 6/11,10/57. Native Agda --safe import/type acceptance remains pending. Even completed scalar CMP102 is not the interacting 4D SU(N) Wilson/OS/same-H mass gap.
+
+### NS — tighter reverse-solved spectral frequency schedule from the SAME original Galerkin equation
+
+Previously original physical source exact high shell ledger on the SAME finite Galerkin solution:
+`∀T>=0, ∫ E_shell,N(R,t) dt <= E_N(0)/(2νR²)`, with ν>0. Section39/42/43 chose the easy but expensive `R=1+Emax/(2ν ε)`, giving R_j linear in j for ε_j=1/(j+1).
+
+NEW `Synthesis/NavierStokesOriginalSqrtOptimalUniformRadiusExact.lean` initial `a4bd005d27f3487f2b4601cd5eb6e0058f2d2100`, import repaired `dc71fa5fc307a83d4e97739ccb3cc8167c473c91`; native root `Synthesis/ClayNSSection44SqrtUniformRadiusAcceptanceExact.lean` `deba1a996ce3880ee4fb54171829231a6e78581c`. It explicitly chooses
+
+`R(ν,Emax,ε)=1+sqrt(Emax/(2ν ε))`,
+
+and source-proves for all ν>0, Emax>=0, ε>0, R>0 and `Emax<2νR² ε`. It then consumes the SAME original finite real ODE source and true physical high-frequency R^-2 bound to pay `∫_0^T E_shell,N(R,t)dt<ε` for ALL cutoffs N, original admissible x₀ with E_N(0)<=Emax, and T>=0; one radius is chosen BEFORE all cutoffs. For ε_j=1/(j+1), the R_j cost scales `O(sqrt(j+1))` instead of `O(j+1)`. "Optimal" here is the order-of-growth choice plus safe additive margin, NOT the exact minimal R: the strict mathematical threshold is R>sqrt(Emax/(2ν ε)). No cutoff-uniform SIGNED nonlinear quarter transfer or genuine smooth NS continuum existence follows. Native Lean unrun.
+
+### Hodge — whole original even-sign group-law and faithful actual coupled-fibre action
+
+Sections41–43 established that the actual original sixfold Q0 root partner preserves δ, the full original `EvenDeck` has 32 punctured-root orbit coordinates, and the all-negative sign equals the Q0 partner on the SAME `ActualRootFibre`. The missing structural law was that combining real even sign vectors matches composing original root actions.
+
+NEW `Synthesis/MillenniumHodgeDicksonOriginalEvenDeckActionLawExact.lean`, initial `885d0aab0f10f6f04dba00495f29d50987c1a021`, square-one rewrite `16b47773dd50aa797880360e8030b43bd04694f2`; root `Synthesis/ClayHodgeSection44OriginalEvenDeckActionAcceptanceExact.lean`, `dac0116351a3fcb7a15a2fef1b05954931f868e7`. Defines original pointwise `originalEvenDeckOne` and `originalEvenDeckMul` with explicitly retained six-address constraints `∀i,e_i²=1` and `∏_i e_i=1`. Source-written group laws: multiplication associativity, both unit laws, every sign vector self-inverse. WELDS those to `originalEvenDeckActsOnActualRoot` on the TRUE original coupled root fibre: identity, multiplication/action composition, and double action identity. Together with the earlier faithful transitive δ≠0 source, this is the complete local even-sign action group behavior, not merely 32 finite points.
+
+The global projective branch-overlap action and monodromy descent, actual proper algebraic Chow cycle, and nonzero primitive cohomological pairing remain OPEN. Source proof elaboration/axiom audits not run.
+
+### BSD, PNP, RH — owner retention, no counterfeit new universal closure
+
+- BSD #124 retains the real original signed two-crossing all-degree positive Mellin defect and its crossing-swap equivalence. **No selected complex L-derivative/Mellin identification** or arithmetic rank/Sha theorem was newly paid this cut.
+- PNP #119 retains the actual anchored legal F3 Boolean pair and state-dependent adaptive finite-block causal bit-read; no unrestricted SAT lower bound or polynomial SAT algorithm paid this cut.
+- RH #121 retains the strict pinned original external theorem source, Git HEAD, SHA256 tree, native Lean release and transitive axiom gate. No valid external `riemannHypothesis` proof source was supplied, so RH remains open.
+
+### Executed exact regression and native-acceptance count
+
+Canonical `scripts/check_clay_section44_exact_source.py`, commit `c6b7f4c041583d42c44beb5e0f21b9a8b5350167`, was actually run locally with exact Python `Fraction` arithmetic: **56,108 / 56,108 PASS**. Its local git blob SHA `ca08b1598659f35393d5aae704ee75f6c95481d9` EXACTLY matches GitHub fetch SHA, proving byte-identical committed/executed script. Controls: 11,050 Bishop power/exponent pairs including u=0; 7,560 NS exact rational square-root threshold cases; 1,710 strict improvement negative controls; 280 BSD crossing/moment orientation samples; 32,768 full 32×32×32 Hodge sign action composition cases; 32 odd-parity rejected deck sign vectors; 2,708 adaptive PNP finite two-state observation cases. These controls demonstrate finite/rational examples, not full real-analysis claims, native Agda/Lean acceptance or Clay solutions.
+
+Native campaign `scripts/check_clay_section36_native_campaign.py` updated `69e2c052396379dc5e9a2da9b188327db33f18d4` to **37 original Agda/Lean theorem roots + 1 separately pinned external RH admission = 38 mandatory checks**. The fail-closed regression `scripts/test_clay_section37_native_campaign_fail_closed.py` updated `9bd0cce6fe7d621c67a51e0997a8cf78d967cdbf` for actual 37 roots and `Clay44NativeAcceptanceV1`. Required count remains dynamically derived from `ROOTS`. All native roots/externally pinned RH admission are **UNRUN**. Do not claim a selected-root PASS.
+
+### Exact remaining next maximal welds
+
+1. YM: assemble the already-paid general real power antitone and original signed shifted-wing bound into one TRUE filtered Fin positive rectangle inequality, then original A/B factorial masses and native --safe elaboration. Separate physically interacting 4D YM mass gap still open.
+2. NS: exploit new `O(sqrt(j))` Fourier radius but pay the actual missing signed nonlinear transfer and continuum PDE strong regularity, not merely finite spectral tail tightness.
+3. BSD: selected complex L''/signed Mellin source equality plus rank, Selmer and Sha finiteness.
+4. Hodge: original full even-deck group action is source-written; global proper projective quotient/branch gluing and nonzero primitive Chow pairing.
+5. RH: actual original independent proof source and exact native trust admission.
+6. PNP: real unrestricted algorithm sharing-stable internal computational-event lower bound with honest bit/read/control cost, or actual polynomial SAT solver.
+
+All new files and this roadmap are committed. Any actual future native receipts must be executed at exact pinned source HEADs and themselves committed, never fabricated.
