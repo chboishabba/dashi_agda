@@ -27,7 +27,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None,reach_seed=None,clock_start=0.):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None,reach_seed=None,clock_start=0.,jet_error_seed=None):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -140,6 +140,11 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         for state,row in zip((x,dx,x2),(arrival,tangent_arrival,arrival2)):
             if np.any(state[~np.isfinite(row)]!=0):
                 raise ValueError('unlicensed inherited state outside reach')
+    if jet_error_seed is not None:
+        if jet2 is None: raise ValueError('coefficient error requires second-order chart')
+        from solar_jet_error import checked_error,stage_error
+        jet_radius=checked_error(jet_error_seed).copy(); local_initial=jet_radius.copy()
+        local_norm1=local_norm2=0.
     work=loss=0.; receipts=[]
     for k,(ix,a,b,fid) in enumerate(pieces):
         t0=clock_start+k*tau
@@ -200,6 +205,13 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                 a2=block(H2,ix).copy(); b2=f2[ix].copy()
                 if fid is not None:
                     np.fill_diagonal(a2,0); b2[:]=0
+                if jet_error_seed is not None:
+                    if np.linalg.eigvalsh(-(a+a.T)/2).min()<0 or np.linalg.eigvalsh(-(ap+ap.T)/2).min()<0:
+                        raise ValueError('coefficient error requires dissipative original and right stages')
+                    norm1=float(np.linalg.norm(da,ord='fro'));norm2=float(np.linalg.norm(a2,ord='fro'))
+                    jet_radius,_=stage_error(jet_radius,dt,norm1,norm2)
+                    if fid is None:
+                        local_norm1=max(local_norm1,norm1);local_norm2=max(local_norm2,norm2)
                 old2=x2[ix].copy()
                 y2=cayley2(ap,da,a2,old2,dy,old_dx,mid,dt,b2)
                 roots2=ix[b2!=0]; arrival2[roots2]=np.minimum(arrival2[roots2],t0)
@@ -243,6 +255,8 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
                   common_atlas=fixed_pairs is not None,
                   sparse_operator=bool(issparse(H)),
+                  jet_endpoint_error_bound_candidate=None if jet_error_seed is None else jet_radius.tolist(),
+                  jet_local_midpoint_error_bound_candidate=None if jet_error_seed is None else stage_error(local_initial,dt,local_norm1,local_norm2)[1].tolist(),
                   clock_start_s=clock_start,clock_end_s=clock_start+dt,
                   inherited_reach_checked=reach_seed is not None,
                   right_limit_used=right_limit is not None,
