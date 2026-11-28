@@ -2730,3 +2730,74 @@ module At {r : Level} (F : C.RealField r)
   -- theorem once OriginalBR65SourceCompatibility is inhabited.
   -- The independent reference D/E gauge and mean force rows are not
   -- derived from this ten-component Israel identity.
+
+  ------------------------------------------------------------------------
+  -- BR66: NONZERO MEAN-curvature correction to BR65 BR34 source owner.
+  --
+  -- k+=m+j/2, k-=m-j/2. When the BR34 metric normal reference
+  -- derivative is used on either side, the true physical delta K
+  -- also has m H in its raw-normal pullback. Matching delta h on
+  -- the same material graph gives H-=H++2j phi eta.
+  --
+  -- Thus R_full - J_BR34 =
+  --    2(b+''-b-''-2m j) phi eta,
+  -- not just the BR65 mean-free warp-acceleration term.
+  --
+  -- The nonzero mean is a physical background value, not a wall
+  -- Fourier frequency. No characteristic divider appears.
+  ------------------------------------------------------------------------
+
+  record OriginalBR66MeanSource : Set r where
+    constructor originalBR66MeanSource
+    field
+      fullTwoFaceShape : TwoFaceMovingIsraelSource
+      originalMeanExtrinsic : S
+      originalReferenceIsraelJump : S
+      originalTangentialJet : Vec
+      originalPlusMetric originalPlusNormal : Tensor
+      originalMinusMetric originalMinusNormal : Tensor
+  open OriginalBR66MeanSource public
+
+  originalBR66MeanShapePayment : OriginalBR66MeanSource →
+    Wall → Wall → S
+  originalBR66MeanShapePayment d a b =
+    two *
+      (originalWarpSecondJump (fullTwoFaceShape d)
+       - two * originalMeanExtrinsic d * originalReferenceIsraelJump d)
+      * sourceGraphDisplacement
+          (plusMovingShape (fullTwoFaceShape d)) * eta a b
+
+  originalBR66SameSourceResidual : OriginalBR66MeanSource →
+    Wall → Wall → S
+  originalBR66SameSourceResidual d a b =
+    originalGeometricIsraelRows (fullTwoFaceShape d) a b
+      - israel (originalReferenceIsraelJump d)
+          (originalTangentialJet d)
+          (originalPlusMetric d) (originalPlusNormal d)
+          (originalMinusMetric d) (originalMinusNormal d) a b
+      - originalBR66MeanShapePayment d a b
+
+  record OriginalBR66SourceEquality
+      (d : OriginalBR66MeanSource) : Set r where
+    constructor originalBR66SourceEquality
+    field
+      originalMeanJumpCompatible :
+        sourceReferenceWarpK
+          (plusMovingShape (fullTwoFaceShape d))
+          ≡ originalMeanExtrinsic d
+             + half * originalReferenceIsraelJump d
+      originalMeanMinusCompatible :
+        sourceReferenceWarpK
+          (minusMovingShape (fullTwoFaceShape d))
+          ≡ originalMeanExtrinsic d
+             - half * originalReferenceIsraelJump d
+      actualGraphMatched :
+        OriginalTwoFaceShapeCompatibility (fullTwoFaceShape d)
+      originalBR34ToFullPhysicalIsrael :
+        (a b : Wall) → originalBR66SameSourceResidual d a b ≡ O
+  open OriginalBR66SourceEquality public
+
+  -- BR66's nonzero mean term must enter the BR41/44 signed wall work
+  -- and the BR29 variable projected Bianchi connection source.
+  -- Equality is a physical source-specific target, NOT a postulate or
+  -- a declaration that the required background jets already match.
