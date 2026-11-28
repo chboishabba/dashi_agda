@@ -25,7 +25,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None,reach_seed=None,clock_start=0.):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -119,9 +119,27 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     reachable=np.flatnonzero(x!=0); arrival=np.full(d,np.inf); arrival[reachable]=0
     tangent_arrival=None if jvp is None else np.where(dx!=0,0.,np.inf)
     arrival2=None if jet2 is None else np.where(x2!=0,0.,np.inf)
+    if not np.isfinite(clock_start) or clock_start<0:
+        raise ValueError('invalid campaign clock')
+    if reach_seed is None:
+        # Standalone stage chart may seed initial states, not a campaign receipt.
+        for row in (arrival,tangent_arrival,arrival2):
+            if row is not None: row[np.isfinite(row)]=clock_start
+    else:
+        if jet2 is None: raise ValueError('campaign reach seed requires three coefficient fibres')
+        seeded=np.asarray(reach_seed,float)
+        if seeded.shape!=(3,d) or np.isnan(seeded).any() or np.isneginf(seeded).any():
+            raise ValueError('invalid indexed reach seed')
+        if np.any(np.isfinite(seeded)&((seeded<0)|(seeded>clock_start))):
+            raise ValueError('future or negative inherited reach')
+        arrival,tangent_arrival,arrival2=seeded.copy()
+        for state,row in zip((x,dx,x2),(arrival,tangent_arrival,arrival2)):
+            if np.any(state[~np.isfinite(row)]!=0):
+                raise ValueError('unlicensed inherited state outside reach')
     work=loss=0.; receipts=[]
     for k,(ix,a,b,fid) in enumerate(pieces):
-        t0=k*tau; t1=(k+1)*tau
+        t0=clock_start+k*tau
+        t1=clock_start+dt if k+1==len(pieces) else clock_start+(k+1)*tau
         distance=float(np.max(np.linalg.norm(xyz[site[ix]][:,None]-xyz[site[ix]][None,:],axis=-1)))
         if distance>speed*tau: raise ValueError('stage violates calibrated distance/time cone')
         old=x[ix].copy()
@@ -220,6 +238,8 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
     return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
                   common_atlas=fixed_pairs is not None,
+                  clock_start_s=clock_start,clock_end_s=clock_start+dt,
+                  inherited_reach_checked=reach_seed is not None,
                   right_limit_used=right_limit is not None,
                   directional_arrival_s=None if jvp is None or fixed_pairs is None else [
                       float(a) if np.isfinite(a) else None for a in tangent_arrival],
