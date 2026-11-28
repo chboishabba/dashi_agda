@@ -2953,3 +2953,29 @@ Lean companion commit 134e47e9: Integration/Paper9GlobalOriginalHeckeAcceptance.
 3. **End-to-end terminal:** once native global inputs and local kernel proof are inhabited, Original.originalRay/allRaw/period lead to the existing original same-real Machin/Chudnovsky/GMP output theorem and actual performance/scale-budget acceptance; do not introduce another estimator. Independent full-matrix G1–G3 remains stronger optional certification, not a direct endpoint prerequisite.
 
 Local coefficient seam source-written; global native proof and all kernel acceptance remain substantive, not merely administrative.
+
+
+## 29 Nov continuation — constructive quantitative rigidity (source-written; kernel pending)
+
+The native residual rigidity route no longer requires a classical maximum-modulus theorem, an attained global supremum, or an unproved holomorphic modular rigidity oracle. It uses the original convergent q-series, exact S/T invariance, and signed dyadic Fourier projection. Audit of the current branch recovered the existing pole removal, uniform cusp budget, sparse-sector reconstruction, actual slope and jet owners, and finite-gate entrypoints. Targeted master search did not identify a directly reusable native maximum-modulus / fundamental-domain closure; this is not an exhaustive historical audit.
+
+### Implemented source chain
+
+- `UnramifiedResidualExact` (d66b2ec7, b4a985ea): all-degree stride-41 contraction preserves actual convergence and absolute convergence; remove q^82 / q^42 from the original diagonal / slice residual and retain their zero constant coefficient. No artificial substitute for the actual residual.
+- `DyadicFourierProjectionExact` (fff610b0, 33fcd0ef, ae319346): exact signed half-sheet projection on actual upper-half-plane points, with Laurent diagonal/off-diagonal separation and finite prefix projection. Conservative depth bound is linear in the largest degree; this is not a claim of efficient exponential-tree evaluation.
+- `CuspContractionExact` (af143e59, d1ad4fbd): component box estimate using coefficient bound 2M, smaller radius ratio 1/6, geometric majorant 1/5, and contraction 4M/5. Iteration sends every bound to zero using the existing Bishop geometric convergence owner.
+- `DyadicCircleBoundsExact` (bae8cb43): root/leaf height identity and nonexpansive averaging; actual q-reference phase divided by leaf phase has unit radius on every leaf, yielding component bound 2M.
+- `UniformSeriesContinuityExact.limitErrorAfter` (dd72fe1c): shared tail modulus applies at every larger prefix; allows the selected coefficient to lie inside that prefix.
+- `FourierCoefficientBoundExact` (c010c930): finite Laurent extraction plus the common uniform tail modulus and real limit order give the actual weighted coefficient bound 2M. No exchange of an uncontrolled infinite series with a growing sample tree.
+- `QuantitativeRigidityExact` (c833efb5, 3c7c30c2): generic analytic consumer assembles initial absolute bound, Fourier bound, contraction, and vanishing on the actual original diagonal and slice. Inputs still include the constructive orbit cover and native finite gates. No claim that these premises are inhabited or kernel checked.
+- `scripts/paper9_dyadic_rigidity_exact_diagnostic.py` (99fac34c): locally executed equivalent exact Python rational/integer diagnostic: 284 cyclotomic mode checks + 162 geometric identity/bound checks + 3 strip/radius inequalities = 449/449 PASS. Not execution of the Agda proof. Neither Agda nor Lean executable was available in this environment.
+
+### Exact remaining construction order
+
+1. Construct the actual orbit cover. Work backwards from the required ratio 1/6: choose a positive reference point of height 1/64, reduce to |Re tau| <= 2/3 and Im tau >= 1/3. Use located comparisons, bounded integer recentering, actual S inversion height, and finite fuel from the initial positive height. When height < 1/2 and centered, norm-square <= 25/36 < 3/4 gives strict multiplicative progress. Use overlapping located thresholds (1/3, 1/2) to avoid exact real decidability. Pay actual point setoid congruence if orbit transport needs it; do not identify points propositionally merely from coordinate equivalence.
+2. Attach radius comparison on the original Machin exponential: 2*pi*(1/3-1/64) > 19/10 from pi > 3; the degree-4 positive exponential prefix at 19/10 is > 6. Use the original exponential addition, inverse, and nonnegative monotonicity owners to obtain the exact smaller-radius and inside witnesses. The rational inequalities have been checked, but the native analytic/order attachment is still needed.
+3. Feed this cover and the existing finite-gate admissions into `QuantitativeRigidityExact.At.diagonalZero/sliceZero`. The general consumer is written; native kernel acceptance is pending throughout.
+4. Two-point symmetry remains independent. Prefer applying the same generic ordinary-series rigidity consumer to the integer-specialization residuals, reusing existing full-matrix integer gate, column unisolvence and polynomial equality owners. Verify the exact all-degree sector descent and evaluation attachment for arbitrary target slices before using them. Do not infer symmetry from diagonal and fixed slice alone. Alternative is native separated-cusp monic-slice uniqueness.
+5. Run the entire cone in dependency order with Agda/Lean available, repair actual errors, record finite checker reductions, then attach the existing original signed-ray consumer and same-real GMP acceptance. Source-written is not kernel-certified.
+
+No CI invoked; no original pi theorem promoted.
