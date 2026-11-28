@@ -179,6 +179,8 @@ PARTS["terminal"]=[
 
 PARTS["terminal"] += [(f"BR189191.{p}","check_hopf369_br189_191_endpoint_bounds.py",("--part",p)) for p in ("g3","g4","cartan")]
 
+PARTS["terminal"] += [(f"BR192196.{p}","check_hopf369_br192_196_source_endpoint.py",("--part",p)) for p in ("cartan","g3","g4","material","monster")]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
