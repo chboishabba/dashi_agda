@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section52 all-Clay native campaign, fail closed, exact owner checkouts.
+"""Section53 all-Clay native campaign, fail closed, exact owner checkouts.
 
 Every source and acceptance root is committed on its OWN PR branch.
 This runner checks original native Agda/Lean files in independently
@@ -24,7 +24,7 @@ Usage (replace placeholders with genuine original SHA pins):
     --require-head BSD_HODGE=<40-hex-commit>
     --require-head PNP=<40-hex-commit>
     --require-head RH=<40-hex-commit>
-    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection52Native.json
+    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection53Native.json
 
 The arguments are shown on separate lines for readability; pass them
 in ONE shell command (or put literal shell line-continuation characters
@@ -72,6 +72,7 @@ ROOTS = {
   "Synthesis/ClayNSSection49RawPressureAcceptanceExact.lean",
   "Synthesis/ClayNSSection50AllModePressureAcceptanceExact.lean",
   "Synthesis/ClayNSSection52PressureDifferenceAcceptanceExact.lean",
+  "Synthesis/ClayNSSection53FinitePressureTimeAcceptanceExact.lean",
  ]),
  "BSD_HODGE": ("bsd_hodge_root", [
   "Synthesis/ClayBSDSection36AllDegreeMellinEnvelopeAcceptanceExact.lean",
@@ -198,7 +199,7 @@ def main() -> int:
         help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay52NativeAcceptanceV1",
+    report = {"schema": "Clay53NativeAcceptanceV1",
               "all_selected_roots_passed": False, "roots": {}, "checks": [],
               "meaning": "Selected finite theorem roots only; not universal Clay completion"}
     pins = {}
@@ -281,7 +282,7 @@ def main() -> int:
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
-    print("ALL-CLAY SECTION52 SELECTED ROOTS",
+    print("ALL-CLAY SECTION53 SELECTED ROOTS",
           "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
     return 0 if report["all_selected_roots_passed"] else 2
