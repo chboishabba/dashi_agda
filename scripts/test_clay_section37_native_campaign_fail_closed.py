@@ -173,8 +173,8 @@ class NativeCampaignFailClosed(unittest.TestCase):
         runner = load_runner()
         import sys
         code = (
-            "print('x' * 7000)\\n"
-            "print('A.proof depends on axioms: [propext]')\\n"
+            "print('x' * 7000)\n"
+            "print('A.proof depends on axioms: [propext]')\n"
         )
         # Test that full stdout is captured for trusted audit even
         # though the serialized receipt uses a bounded tail.
@@ -183,18 +183,18 @@ class NativeCampaignFailClosed(unittest.TestCase):
         self.assertGreater(len(result["_stdout_full"]), 7000)
         self.assertLessEqual(len(result["stdout_tail"]), 5000)
         ok, reason = runner.lean_axioms_trusted(
-            result["_stdout_full"], "#print axioms A.proof\\n")
+            result["_stdout_full"], "#print axioms A.proof\n")
         self.assertTrue(ok, reason)
 
     def test_long_native_stdout_cannot_hide_duplicate_report(self):
         runner = load_runner()
         output = (
-            "A.proof depends on axioms: [propext]\\n" +
-            "x" * 7000 + "\\n" +
-            "A.proof depends on axioms: [sorryAx]\\n"
+            "A.proof depends on axioms: [propext]\n" +
+            "x" * 7000 + "\n" +
+            "A.proof depends on axioms: [sorryAx]\n"
         )
         ok, reason = runner.lean_axioms_trusted(
-            output, "#print axioms A.proof\\n")
+            output, "#print axioms A.proof\n")
         self.assertFalse(ok)
         self.assertIn("ambiguous", reason)
 
