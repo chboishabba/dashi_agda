@@ -49,6 +49,14 @@ def finite_bound(M,U,V,J,endpoint_error=0,p=1):
         return (inf(J*P)+e*inf(U*P))*inf(V)
     return dict(A=A,norm=bound(A),power=bound(A**p),projection=inf(U*V))
 
+def projected_error(U,V,r,state_error,history_error,clock_state=0,clock_history=0):
+    # Exact leaf preservation is a prerequisite: P T=U V P T.
+    # Project only the numerical error, not the actual exact return.
+    r,state_error,history_error,clock_state,clock_history=map(S.Rational,(r,state_error,history_error,clock_state,clock_history))
+    assert min(r,state_error,history_error,clock_state,clock_history)>=0
+    state=inf(U*V)*(state_error+clock_state)
+    return max(state,r*state,history_error+clock_history)
+
 def accept(bounds,p):
     required={'section_power','section_norm','return_norm','output_error','step_error'}
     if set(bounds)!=required:raise ValueError('incomplete or unexpected bound fields')
