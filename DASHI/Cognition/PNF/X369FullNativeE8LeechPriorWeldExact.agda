@@ -10,6 +10,7 @@ module DASHI.Cognition.PNF.X369FullNativeE8LeechPriorWeldExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_*_)
 open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Data.Empty using (⊥)
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as H
 import DASHI.Foundations.Base369NineCoordinateAggregateBridgeExact as Nine
@@ -38,23 +39,26 @@ nineAfterNative = H.nineFabricRoundTrip
 module ChosenWaveChart
   (Wave8 Centre : Set)
   (encode : Nine.NineTrits → Wave8 × Centre)
-  (decode : Wave8 × Centre → Nine.NineTrits)
-  (decodeEncode : (x : Nine.NineTrits) → decode (encode x) ≡ x) where
+  (decode : Wave8 × Centre → Maybe Nine.NineTrits)
+  (decodeEncode : (x : Nine.NineTrits) →
+    decode (encode x) ≡ just x) where
 
   nativeEncode : Native → Wave8 × Centre
   nativeEncode x = encode (toNine x)
 
-  nativeDecode : Wave8 × Centre → Native
-  nativeDecode w = fromNine (decode w)
+  -- The REAL inverse has no finite-image restriction. The native
+  -- decoder is necessarily partial: a general Weyl image may have
+  -- nonternary coordinates, and is then NOT a 369-native source point.
+  nativeDecode : Wave8 × Centre → Maybe Native
+  nativeDecode w with decode w
+  ... | nothing = nothing
+  ... | just x = just (fromNine x)
 
   nativeReopens : (x : Native) →
-    nativeDecode (nativeEncode x) ≡ x
-  nativeReopens x =
-    trans (Future.cong fromNine (decodeEncode (toNine x)))
-      (nativeAfterNine x)
-    where
-      trans : ∀ {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
-      trans refl q = q
+    nativeDecode (nativeEncode x) ≡ just x
+  nativeReopens x
+    rewrite decodeEncode (toNine x)
+          | nativeAfterNine x = refl
 
   -- If a genuine E8 wave action moves an encoded source point outside
   -- the image of nativeEncode, a native-only action cannot represent it.
