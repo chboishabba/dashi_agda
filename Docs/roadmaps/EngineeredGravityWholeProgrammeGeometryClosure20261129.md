@@ -510,3 +510,68 @@ At each grid the quadratic Euler wall residual was \(<10^{-12}\), mass centre an
 **Next large constructive cut, shared W3–W4:** (i) solve the interior original Euler bulk acceleration and angular Einstein evolution with \(M_2\), \(k\), same \(Y\); (ii) prove/give obstruction for the momentum constraint and boundary flux through the same nonstationary lapse and moving exterior; (iii) close proper-time induced metric, normal, Israel, GHY/corners and graph-domain boundary symplectic energy; (iv) transfer only authenticated tensor/source ABI to original F8/G3/G4 owners; (v) compute source-hash-pinned neutral geodesic/tidal/clock receiver with physical null alternatives. Keep matched Maxwell \(J\) and reciprocal controller/support as distinct original actions.
 
 **Acceptances:** the two mathematical checkers and source hashes are pinned in \`Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json\` under \`w3_original_action_boundary\`, \`physical_paid=false\`, and registered in the checkpointed runner. The DAG validation now accepts W3 entries; negative controls reject false continuum payment and modified original-action pins. Test code is committed but full literal repository replay not yet run. Physical obligations previously 36 remain unpromoted; no native F8.
+
+
+## W3.2 — Original-action nonlinear Einstein radial shooting and independent angular time jet (29 Nov)
+
+**Source audit and reuse:** At start #1547 was \`cdbf3a4c33f0812a897d0f012dfa07b0b01966fd\`, with master comparison 787 ahead / 65 behind (changed-file list capped at 300). Reopened the original \`check_engineered_gravity_tov_material.py\`, \`check_tov_quadratic_constraint_ritz.py\`, \`check_tov_euler_moving_gradient_repair.py\`, \`check_tov_original_euler_boundary_obstruction.py\`, \`check_tov_polar_york.py\`, and \`check_tov_global_york_axial_shear.py\`. York provides structural covariant/inverse forms but **not** a completed original time-dependent free-boundary solver. All results below reuse the exact \(\lambda\)-dependent original TOV scalar material \((a,d,V)\), rather than fitting an independent stress source.
+
+**W3.2a: independently derived exact bulk radial Euler acceleration operator.**
+For original action \(W=d(Y^2)(fY_r^2-Y_t^2/N^2)+2a(Y^2)Y^2/r^2+V(Y^2)\), define its radial Euler residual from the proper \(Nr^2/\sqrt f\) measure. Direct differentiation yields
+\[
+{\cal E}_Y=\frac{2d(Y^2)}{N^2}Y_{tt}+{\cal S},
+\]
+\[
+\begin{split}
+{\cal S}={}&d_Y(-fY_r^2+Y_t^2/N^2)
++2a_Y Y^2/r^2+4aY/r^2+V_Y\\
+&-d f_rY_r-2dfY_{rr}-2dfY_r(2/r+N_r/N)
+-\frac{2dY_tN_t}{N^3}-\frac{dY_tf_t}{fN^2}.
+\end{split}
+\]
+Thus the **interior** Euler acceleration is exactly \(Y_{tt}=-N^2{\cal S}/(2d)\) for \(d>0\). Its principal temporal coefficient \(2d/N^2\) degenerates as \(Y\to1\); the independent W3 wall trace is essential. Symbolic source-equivalent SymPy PASS both direct Euler operator and recovered original static TOV scalar Euler, \(\lambda\)-signed constitutive degeneracy; new \`scripts/check_tov_bulk_euler_acceleration_inverse.py\` commit \`1ae3804eae52938c27d99b81556793441795d9b8\`.
+
+**W3.2b: fully nonlinear spherical radial Einstein constraint boundary shooting** (finite radial initial-data packet, no time PDE theorem). Fix instantaneous smooth field
+\(Y=r+k r(r^2-1)/2,\;Y_t=-r(\lambda+2)s/(\lambda+1+r^2)\), where \(s\) is an initial **material time-derivative amplitude**, not an independently set physical wall coordinate speed (kinematically \(\dot R_{\rm coord}=s/(1+k)\) at \(R=1\)). Use full, untruncated original action stress:
+\[
+\rho=d(Y^2)(fY_r^2+Y_t^2/N^2)+2a(Y^2)Y^2/r^2+V(Y^2),
+\quad
+p_r=d(Y^2)(fY_r^2+Y_t^2/N^2)-2a(Y^2)Y^2/r^2-V(Y^2).
+\]
+Jointly integrate \(m_r=4\pi r^2\rho\) and \(N_r/N=(m+4\pi r^3p_r)/(r^2f)\), \(f=1-2m/r\), using a regular centre. Solve *both* nonlinear wall equations via a two-variable root in \((k,N_c)\):
+\[
+N(1)^2=f(1), \qquad f(1)(1+k)^2-s^2/N(1)^2=f_0(1).
+\]
+These guarantee the source-identical nonlinear degenerate Euler surface trace, exact matched Schwarzschild boundary lapse, zero surface density/radial traction and positive radial \(N,f\) on the tested fixtures. The Schwarzschild mass is allowed to shift to \(m(1)\), **not pinned** to background \(7/500\). This is stronger than the earlier quadratic Schur solver at finite amplitude, but still **not** the full time-dependent original Einstein–matter system or a continuum existence proof.
+
+Local source-equivalent SciPy/Python (90-second cap, no CI), \(\lambda=1/10,s=.02\):
+| max radial step \(1/n\) | \(k\) | \(m(1)\) | exact Euler wall residual | independent Simpson mass residual |
+| --- | ---: | ---: | ---: | ---: |
+| n=120 | .000213347467075987 | .014001633154080916 | 1.11e-16 | 6.78e-11 |
+| n=240 | .000213347467075937 | .014001633154080902 | 1.11e-16 | 4.24e-12 |
+| n=480 | .000213347467075971 | .014001633154080893 | 0 | 2.65e-13 |
+
+Additional **signed** \(s=-.02\), \(s=.01,.04\) at n=240, and \(\lambda=.05,.2\) at \(s=.02\), also passed. The initial mass and \(k\) are even in signed \(s\), while current \(j\) is odd, as required by the chosen time-reversal-symmetric instant ansatz. The interior Euler acceleration reconstructed with **conditional \(N_t=0\)** has finite grid samples: at \(\lambda=.1,s=.02\) \(Y_{tt}(.5)\approx8.6878853\times10^{-4}\), with max tested off-centre/off-boundary \(|Y_{tt}|<9.3\times10^{-4}\). Do not divide through \(d(1)=0\) at the wall; its Euler trace is an independent equation. \(N_t=0\) has **not** been verified against differentiated radial lapse evolution or the exterior time-dependent clock, and cannot yet be promoted as the actual Einstein time slicing. Source-equivalent local scripts \`/mnt/data/w3_bulk_euler.py\`, \`/mnt/data/w3_exact_radial_shooting.py\` executed. Committed \`scripts/check_tov_nonlinear_einstein_euler_shooting.py\` commit \`8da72ff8ae0a001b5daa8390ed3f01055430ebfc\`, later extended with angular check \`4dbde6600ca58011cce00a200cfecfe3f86cba27\`. **Literal committed-script execution is outstanding.**
+
+**W3.2c: independent angular Einstein second-time-jet weld.**
+Derive the full 2D \((t,r)\) Ricci tensor for metric \(-N^2dt^2+dr^2/f\) *directly*. The spherically warped 4D angular Einstein equation gives
+\[
+\begin{split}
+G^\theta{}_\theta={}&
+fN_{rr}/N+\frac{N_r f_r}{2N}+\frac{fN_r}{rN}+\frac{f_r}{2r}
++\frac{f_{tt}}{2N^2f}-\frac{3f_t^2}{4N^2f^2}
+-\frac{N_tf_t}{2N^3f}=8\pi p_t.
+\end{split}
+\]
+The scalar material source is the **same action**, \(p_t=2aY^2/r^2-W\), not a prescribed external pressure. Direct symbolic inversion uniquely determines \(f_{tt}\) for \(f,N>0\); its \(s=0\) limit exactly reproduces the original anisotropic TOV angular Einstein identity. Independently differentiate the momentum constraint \(f_t=-16\pi r\,d(Y^2)fY_tY_r\) using the above Euler \(Y_{tt}\). Its \(N_t\) coefficient is **identical** to the angular Einstein \(f_{tt}\) \(N_t\) coefficient, \(-16\pi r dfY_tY_r/N\); hence that difference is independent of the provisional \(N_t\) choice. New symbolic checker \`scripts/check_tov_angular_einstein_timejet.py\` committed \`df80dd8cb929c7e7d683ada2f7d78e48e046bc67\`; source-equivalent SymPy PASS.
+
+Numerical comparison in the *same nonlinear radial shot*, with a second-order finite-difference \(N_{rr}/N=\nu_r+\nu^2\):
+| n | max \(|f_{tt}^{\rm momentum}-f_{tt}^{\rm angular}|\) on interior strip |
+| --- | ---: |
+| 120 | 4.95712e-5 |
+| 240 | 1.29425e-5 |
+| 480 | 3.30316e-6 |
+
+Errors decrease by approximately ×4 on each refinement, **consistent** with second-order spatial differentiation. This is numerical/conditional initial-jet compatibility, *not* a globally proved coupled evolution. Its wall and centre require dedicated weighted graph-domain/analytic treatment. A finite solver can have compatible first jets without possessing a complete solution.
+
+**Execution, custody and next exact weld:** Both new original action checkers are in the checkpointed \`scripts/run_engineered_gravity_endpoint_local.py\` (plus angular) and pinned with source/checker Git blobs in \`Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json\`; negative controls now reject 24 invalid physical-promotion/changed-source cases. **The entire aggregate and 24-case literal suite have not been run**. Open: prove/reconstruct the differentiated \(N_r/N\) equation's \(N_t\) with actual original \(p_{r,t}\) and \(Y_{tt}\), including moving boundary time clock; solve the coupled Einstein/material initial-value problem, appropriate Sobolev/graph weighted energy and moving Israel/GHY/corner; validate original F8/G3/G4 source and invariant receiver. No native F8, no physical GR shielding, no measurement and no completed 12-lane theorem.
