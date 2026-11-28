@@ -8,7 +8,7 @@ import json
 import numpy as np
 from solar_spherical_cycle import cycle,geometry
 from solar_spherical_reverse_jvp import campaign_jvp
-from solar_physical_causal import MASS,CHARGE
+from solar_population_event import MASS,CHARGE
 
 def fixture():
     radii=[1.,1.2];level=0
