@@ -1,0 +1,16 @@
+{
+  "source": "scripts/check_pnp_live_signed_orbit_join.py",
+  "commit": "04cb6ba102489a74cc2291a5327e7ca894ea6db6",
+  "git_blob": "454ad110729cfeaa5e98b078f6901b5007577bf5",
+  "local_blob_matches_committed": true,
+  "command": "timeout 90 python check_pnp_live_signed_orbit_join.py",
+  "exit_code": 0,
+  "wall_seconds": 1.14,
+  "counts": {
+    "live_fibres": 336,
+    "S3_fibres": 3,
+    "negative_controls": 1,
+    "long_path": 1
+  },
+  "scope": "standalone committed source reconstructed locally; no full checkout, native kernels or CI; candidate literal endpoint campaign not executed"
+}
