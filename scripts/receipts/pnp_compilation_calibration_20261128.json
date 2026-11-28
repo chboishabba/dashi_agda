@@ -1,0 +1,338 @@
+{
+  "date": "2026-11-28",
+  "campaign": "scripts/check_pnp_compilation_calibration.py",
+  "blob": "51eebeb3d4dde19d7e31066cd26c1775d9b96aba",
+  "accumulatorBlob": "c7eb2762b4d33080863700902ef84b03cf16eeb6",
+  "elapsed_seconds": 33.008,
+  "logical_cap": 200000,
+  "probe_cap": 3000000,
+  "state_cap": 4096,
+  "networkx": "3.6.1",
+  "scope": "Local Python with recovered transitive source copies, not full checkout. No CI/native kernel. Each threshold row is 8 unplanted and 8 planted; probe first two of each group in order. Prior is Section32 Hall/resolution/normal portfolio, not Section34 or Section35 fixed allocation. New routes standalone exact count; prior may stop after one witness. Normal rank zero on planner refusal is not a measured width.",
+  "threshold": [
+    {
+      "n": 12,
+      "m": 51,
+      "prior": [
+        14,
+        2,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        16
+      ],
+      "rational": [
+        14,
+        2,
+        0
+      ],
+      "probes": [
+        [
+          45,
+          12,
+          "WITNESS"
+        ],
+        [
+          36,
+          12,
+          "WITNESS"
+        ],
+        [
+          56,
+          12,
+          "WITNESS"
+        ],
+        [
+          77,
+          12,
+          "WITNESS"
+        ]
+      ]
+    },
+    {
+      "n": 20,
+      "m": 85,
+      "prior": [
+        14,
+        2,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        16
+      ],
+      "rational": [
+        0,
+        0,
+        16
+      ],
+      "probes": [
+        [
+          527,
+          20,
+          "WITNESS"
+        ],
+        [
+          375,
+          20,
+          "WITNESS"
+        ],
+        [
+          440,
+          20,
+          "WITNESS"
+        ],
+        [
+          676,
+          20,
+          "WITNESS"
+        ]
+      ]
+    },
+    {
+      "n": 32,
+      "m": 136,
+      "prior": [
+        6,
+        0,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        16
+      ],
+      "rational": [
+        0,
+        0,
+        16
+      ],
+      "probes": [
+        [
+          4097,
+          13,
+          "state_cap"
+        ],
+        [
+          3862,
+          14,
+          "logical_cap"
+        ],
+        [
+          3392,
+          15,
+          "logical_cap"
+        ],
+        [
+          3872,
+          14,
+          "logical_cap"
+        ]
+      ]
+    },
+    {
+      "n": 48,
+      "m": 204,
+      "prior": [
+        2,
+        0,
+        14
+      ],
+      "normal": [
+        0,
+        0,
+        16
+      ],
+      "rational": [
+        0,
+        0,
+        16
+      ],
+      "probes": [
+        [
+          3586,
+          12,
+          "logical_cap"
+        ],
+        [
+          4097,
+          12,
+          "state_cap"
+        ],
+        [
+          3906,
+          12,
+          "logical_cap"
+        ],
+        [
+          3796,
+          12,
+          "logical_cap"
+        ]
+      ]
+    }
+  ],
+  "and_tseitin": [
+    {
+      "vertices": 6,
+      "n": 18,
+      "clauses": [
+        168,
+        176
+      ],
+      "prior": [
+        "WITNESS",
+        "UNKNOWN"
+      ],
+      "probes": [
+        [
+          1792,
+          15,
+          "logical_cap"
+        ],
+        [
+          1536,
+          18,
+          "EMPTY"
+        ]
+      ]
+    },
+    {
+      "vertices": 8,
+      "n": 24,
+      "clauses": [
+        224,
+        232
+      ],
+      "prior": [
+        "UNKNOWN",
+        "UNKNOWN"
+      ],
+      "probes": [
+        [
+          872,
+          19,
+          "logical_cap"
+        ],
+        [
+          792,
+          19,
+          "logical_cap"
+        ]
+      ]
+    },
+    {
+      "vertices": 12,
+      "n": 36,
+      "clauses": [
+        336,
+        344
+      ],
+      "prior": [
+        "UNKNOWN",
+        "UNKNOWN"
+      ],
+      "probes": [
+        [
+          2313,
+          12,
+          "logical_cap"
+        ],
+        [
+          2016,
+          13,
+          "logical_cap"
+        ]
+      ]
+    },
+    {
+      "vertices": 16,
+      "n": 48,
+      "clauses": [
+        448,
+        456
+      ],
+      "prior": [
+        "UNKNOWN",
+        "UNKNOWN"
+      ],
+      "probes": [
+        [
+          1296,
+          12,
+          "logical_cap"
+        ],
+        [
+          1674,
+          12,
+          "logical_cap"
+        ]
+      ]
+    }
+  ],
+  "graph_cnf": [
+    {
+      "n": 12,
+      "m": 18,
+      "prior": "WITNESS",
+      "normal": "WITNESS",
+      "rational": "WITNESS",
+      "probe": [
+        64,
+        12,
+        "WITNESS"
+      ]
+    },
+    {
+      "n": 20,
+      "m": 30,
+      "prior": "WITNESS",
+      "normal": "WITNESS",
+      "rational": "UNKNOWN",
+      "probe": [
+        640,
+        20,
+        "WITNESS"
+      ]
+    },
+    {
+      "n": 32,
+      "m": 48,
+      "prior": "WITNESS",
+      "normal": "UNKNOWN",
+      "rational": "UNKNOWN",
+      "probe": [
+        4097,
+        16,
+        "state_cap"
+      ]
+    },
+    {
+      "n": 48,
+      "m": 72,
+      "prior": "WITNESS",
+      "normal": "UNKNOWN",
+      "rational": "UNKNOWN",
+      "probe": [
+        4097,
+        14,
+        "state_cap"
+      ]
+    }
+  ],
+  "legend": "threshold status arrays WITNESS, EMPTY, UNKNOWN. Probe arrays observed peak, complete layers, status or stop reason. Both AND-Tseitin compressed producers UNKNOWN all eight at 200k. Order even then odd. Random connected 3-regular graphs, no expansion certification. No lower-bound transfer to general SAT. Censored values not estimates of completed peaks.",
+  "cardinality": {
+    "n": 128,
+    "target": 64,
+    "pruned_peak": 65,
+    "unpruned_peak": 127,
+    "pruned_steps": 8444,
+    "logical_used": 1172857,
+    "count": "23951146041928082866135587776380551750"
+  },
+  "instrumentation_regression": "432 exact/clipped original accumulator tests pass after instrumentation",
+  "raw_local_json_sha256": "08e676743c78683686de325dfa288fabd3b8c463ea22e9b253c9e86b2e8706a9"
+}
