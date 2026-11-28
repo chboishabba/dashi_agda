@@ -2502,3 +2502,77 @@ module At {r : Level} (F : C.RealField r)
   -- directions. Existence is NOT proved by this record: it requires
   -- a right-inverse constructor, source-specific Bianchi factorization
   -- and compatible BR58/BR61 metric, gauge and graph jets.
+
+  ------------------------------------------------------------------------
+  -- BR63: FREQUENCY-FREE full nonlinear Israel trace-reversal inverse.
+  --
+  -- For an arbitrary compatible 4D induced metric h with true inverse,
+  -- tr_h(K) = h^ab K_ab,
+  -- I = [K]-h tr_h[K]+3j h.
+  -- Set J=I-3j h. In FOUR wall dimensions,
+  -- [K] = J-(1/3)h tr_h(J), without dividing by a Fourier q².
+  --
+  -- Original eta-index formula is a special case only. General moving
+  -- walls use the same induced metric on both sides, as in BR61.
+  ------------------------------------------------------------------------
+
+  record ActualInducedWallInverse : Set r where
+    constructor actualInducedWallInverse
+    field
+      inducedMetric : Wall → Wall → S
+      inverseInducedMetric : Wall → Wall → S
+      inducedLeftUnit :
+        (a b : Wall) →
+          sum4 (λ k → inverseInducedMetric a k * inducedMetric k b)
+            ≡ delta (wall a) (wall b)
+      inducedRightUnit :
+        (a b : Wall) →
+          sum4 (λ k → inducedMetric a k * inverseInducedMetric k b)
+            ≡ delta (wall a) (wall b)
+  open ActualInducedWallInverse public
+
+  inducedTensorTrace : ActualInducedWallInverse →
+    (Wall → Wall → S) → S
+  inducedTensorTrace h j =
+    sum4 (λ a → sum4 (λ b →
+      inverseInducedMetric h a b * j b a))
+
+  physicalIsraelTensor : ActualInducedWallInverse → S →
+    (Wall → Wall → S) → Wall → Wall → S
+  physicalIsraelTensor h j jump a b =
+    jump a b
+      - inducedMetric h a b * inducedTensorTrace h jump
+      + three * j * inducedMetric h a b
+
+  physicalIsraelInverse : ActualInducedWallInverse → S →
+    (Wall → Wall → S) → Wall → Wall → S
+  physicalIsraelInverse h j physicalJunction a b =
+    (physicalJunction a b - three * j * inducedMetric h a b)
+      - third * inducedMetric h a b *
+          inducedTensorTrace h
+            (λ x y →
+              physicalJunction x y - three * j * inducedMetric h x y)
+
+  record PhysicalFullIsraelInverseCertificate
+      (h : ActualInducedWallInverse) (j : S)
+      (junction : Wall → Wall → S) : Set r where
+    constructor physicalFullIsraelInverseCertificate
+    field
+      actualNonlinearTraceReverse :
+        (a b : Wall) →
+          physicalIsraelTensor h j
+            (physicalIsraelInverse h j junction) a b ≡ junction a b
+      noDiscardedSymmetricModes :
+        (a b : Wall) →
+          physicalIsraelInverse h j junction a b
+            ≡ physicalIsraelInverse h j junction b a
+  open PhysicalFullIsraelInverseCertificate public
+
+  -- BR62 still imposes FOUR physical Codazzi source equations on this
+  -- ten-component geometric inverse. Inverting trace-reversal is NOT
+  -- equivalent to solving the Einstein reduced boundary evolution.
+  --
+  -- The constructive rank-four right inverse of BR62 must be attached
+  -- to a nonzero q pivot (NEVER q²), and the q=0 source compatibility
+  -- survives independently. The full wall metric inverse here needs
+  -- its ACTUAL positive/timelike physical chart proofs.
