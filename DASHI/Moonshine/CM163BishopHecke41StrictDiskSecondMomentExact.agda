@@ -28,7 +28,13 @@ import DASHI.Moonshine.CM163BishopHecke41ConvergentSeriesExact as Eval
 import DASHI.Moonshine.CM163BishopHecke41FormalCyclotomicNormExact as N
 import DASHI.Moonshine.JInvariantBishopFourierRowLimitExact as Lim
 import DASHI.Moonshine.JInvariantBishopDyadicReciprocalLimitExact as Conv
+import DASHI.Moonshine.CM163BishopHecke41SequentialJetExact as J
+import DASHI.Moonshine.CM163BishopHecke41SecondJetCalculusExact as J2
+import DASHI.Analysis.BishopComplexCommutativeSemiringLawsExact as L
+import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 open C using (BishopComplex)
+open A using (_-C_; _*C_; _+C_)
+open Comp using (complexTrans)
 
 squareBudget : Nat → ℝ
 squareBudget n = D.two * (NR.natReal n * NR.natReal n)
@@ -124,3 +130,40 @@ module Shrink (outer inner : BishopComplex)
   -- Both coefficients are evaluated from the same normalized actual
   -- source stream. The outer evaluation constructs both budgets.
   module Jet = T.TwoJet g S.momentSummable secondMoment
+
+  inv : BishopComplex
+  inv = Rec.reciprocalC inner inz
+
+  firstCoefficient : ∀ q → S.Inside q → BishopComplex
+  firstCoefficient q hq = Jet.First.D.value (S.normal q) (S.normal q)
+    (S.normalUpper q hq) (S.normalUpper q hq)
+
+  secondCoefficient : ∀ q → S.Inside q → BishopComplex
+  secondCoefficient q hq = Jet.Second.value (S.normal q) (S.normal q) (S.normal q)
+    (S.normalUpper q hq) (S.normalUpper q hq) (S.normalUpper q hq)
+
+  -- Undo normalization by the actual affine coordinate. No independently
+  -- chosen center, phase, or quotient. Taylor coefficient scales by inv^2.
+  originalTwoJet : ∀ q (hq : S.Inside q) (v : Nat → BishopComplex) →
+    (hv : ∀ n → S.Inside (v n)) → Lim.Conv v q →
+    (eq : Eval.Eval q f) → (ev : ∀ n → Eval.Eval (v n) f) →
+    J2.Jet2 (λ n → v n -C q) (λ n → Eval.value (ev n)) (Eval.value eq)
+      (inv *C firstCoefficient q hq) (inv *C (inv *C secondCoefficient q hq))
+  originalTwoJet q hq v hv cv eq ev =
+    let delta = λ n → v n -C q
+        dc = Lim.limitTransport (J.sameSub q) (Lim.subConv cv (Lim.constantC q))
+        affine : J2.Jet2 delta (λ n → S.normal (v n)) (S.normal q) inv A.zeroC
+        affine = record
+          { J2.first = record
+              { J.quotient = λ _ → inv
+              ; J.factor = λ n → S.diffRead q (v n)
+              ; J.limit = Lim.constantC inv }
+          ; J2.second = J.constant delta inv }
+        actual = Jet.actual (S.normal q) (S.normalUpper q hq) (λ n → S.normal (v n))
+          (λ n → S.normalUpper (v n) (hv n))
+          (Conv.mulConv cv (Lim.constantC inv))
+          (S.normalEval q eq) (λ n → S.normalEval (v n) (ev n))
+        composed = J2.compose dc affine actual
+    in J2.cong2 (λ _ → C.≈C-refl _) (C.≈C-refl _) (C.≈C-refl _)
+      (complexTrans (A.addCCongruent (L.complexMultiplyLeftZero _) (C.≈C-refl _))
+        (L.complexAddLeftIdentity _)) composed
