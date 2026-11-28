@@ -351,7 +351,8 @@ def assert_source_scope() -> None:
         for symbol in markers:
             if symbol not in data:
                 raise AssertionError(f"missing Monster/FLM/KK source crosswalk {symbol}")
-    print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
+    print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")
+    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
 def check_agda() -> None:
