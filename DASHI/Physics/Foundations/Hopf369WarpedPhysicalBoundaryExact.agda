@@ -1513,3 +1513,49 @@ module At {r : Level} (F : C.RealField r)
   -- BR46's contracted-Bianchi principal symbol determines the needed
   -- subsidiary source but cannot set leftoverBianchiSource to zero
   -- without the physical variable connection and source equations.
+
+  ------------------------------------------------------------------------
+  -- BR47: second physical boundary time derivative, native exact
+  -- successor to BR40b first derivative. The executable source checker
+  -- covers the same original 30+10 D/E rows through BR4 order eight.
+  ------------------------------------------------------------------------
+
+  rowScale : S → List S → List S
+  rowScale k [] = []
+  rowScale k (u ∷ us) = k * u ∷ rowScale k us
+
+  metricSecondTimeRows : Allocation →
+    S → Vec → S → Vec → S → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor → List S
+  metricSecondTimeRows a j q jt qt jtt qtt
+    p px m mx pt pxt mt mxt ptt pxtt mtt mxtt =
+    rowAdd
+      (metricRows a j q ptt pxtt mtt mxtt)
+      (rowAdd
+        (rowScale two
+          (metricBackgroundDerivative a jt qt pt pxt mt mxt))
+        (metricBackgroundDerivative a jtt qtt p px m mx))
+
+  gaugeSecondTimeRows : Allocation →
+    S → Vec → S → Vec → S → Vec →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov → List S
+  gaugeSecondTimeRows a j q jt qt jtt qtt
+    p px m mx pt pxt mt mxt ptt pxtt mtt mxtt =
+    rowAdd
+      (gaugeRows a j q ptt pxtt mtt mxtt)
+      (rowAdd
+        (rowScale two
+          (gaugeBackgroundDerivative a jt qt pt pxt mt mxt))
+        (gaugeBackgroundDerivative a jtt qtt p px m mx))
+
+  -- BR47 formula in the original physical background coordinates:
+  -- B^(r) = B(j,q;U^(r)) +
+  --     sum_(k=1)^r binom(r,k) deltaB(j^(k),q^(k);U^(r-k)).
+  -- This time-jet formula assumes the BR34 reference rows depend
+  -- separately AFFINELY on j and q. Full moving-graph jets and
+  -- nonlinear connection products are not claimed to be represented
+  -- by these reference linear rows.
