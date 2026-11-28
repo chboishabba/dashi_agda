@@ -3788,3 +3788,43 @@ module At {r : Level} (F : C.RealField r)
 
   -- For full foliation transport, delta phi=V(phi); for graph-only
   -- lift the normal jet is independent. Retain that distinction.
+
+
+  ------------------------------------------------------------------------
+  -- BR120–123: arbitrary contracted source jump and material chart BIDI.
+  -- The ambient tangential shape extension and its intrinsic trace are
+  -- supplied by actual geometry; lambda and n are the same defining jet.
+  ------------------------------------------------------------------------
+  originalFDerivativeJumpInverse : S → Tensor → S → Cov → Cov → Tensor
+  originalFDerivativeJumpInverse l tangentB traceB n src =
+    tab (λ i k → l * (two * get tangentB i k
+      + two * traceB * n i * n k + n i * src k + src i * n k))
+
+  originalFPureTensionSourceJump : S → S → Tensor → Cov → Cov → Tensor
+  originalFPureTensionSourceJump l j g n src =
+    tab (λ i k → l * (two * j * get g i k
+      + (three * two) * j * n i * n k + n i * src k + src i * n k))
+
+  originalFScaleValueJump : S → Cov → Tensor
+  originalFScaleValueJump p n =
+    tab (λ i k → two * p * n i * n k)
+
+  originalFGeneratorValueJump : S → Tensor → S → Cov → Tensor
+  originalFGeneratorValueJump f derivativeJump p n =
+    addT (mulT f derivativeJump) (originalFScaleValueJump p n)
+
+  originalFMovingMetricValueJump : S → Tensor → Tensor
+  originalFMovingMetricValueJump f derivativeJump =
+    mulT (neg f) derivativeJump
+
+  originalFTransportedGaugeJump : Cov → Cov → Cov
+  originalFTransportedGaugeJump plusP minusP i =
+    minusP i - plusP i
+
+  originalFScalarVectorCommutator : S → S → S
+  originalFScalarVectorCommutator connectionHessianPair vectorCurvaturePair =
+    two * connectionHessianPair + vectorCurvaturePair
+
+  -- Jet expressions only: arbitrary h/source inverse requires the
+  -- geometric hypotheses of BR120; a normally hyperbolic generator
+  -- inverse and physical constrained curvature estimate remain open.

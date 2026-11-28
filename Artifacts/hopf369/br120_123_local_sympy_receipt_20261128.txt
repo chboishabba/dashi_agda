@@ -1,0 +1,9 @@
+Local SymPy 1.14.0, OPENBLAS_NUM_THREADS=1 timeout 90 python check_hopf369_br120_123_F_source_transport.py --part <jump|chart|commutator|null>
+All four exit 0.
+Git blob bb58249213fb46e9b5d7e31ac9b6aebac413ef20
+SHA256 994194b9e480832688e37aededa0f7e19df3d37a2a06a7435deccda51da078ff
+PASS BR120 full 15-row source-jump inverse, arbitrary Israel defect, moving tilt and source Frechet
+PASS BR121 sheared F-to-moving-continuous metric jet BIDI with independent graph and scale derivative, explicit gauge defect
+PASS BR122 independent 5D variable-metric scalar/vector commutator and nonumbilic normal shear factor
+PASS BR123 null mixed polarization satisfies principal gauge/trace/Codazzi yet nonzero shear; not full curved Gauss counterexample
+Scope: exact local source identities, sample rank and counterexample to principal-constraint-only cancellation; no Agda kernel, CI or variable nonlinear PDE acceptance.

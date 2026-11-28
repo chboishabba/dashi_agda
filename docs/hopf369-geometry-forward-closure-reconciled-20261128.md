@@ -1483,3 +1483,59 @@ transmission. Keep BR4 cusp formulation as an alternative
 (not same allocation) and pay mean force explicitly. W0
 same-chart high corners, W2/3 nonzero variable estimate,
 W4a BR98 conditional, W4b/W5/W6/W7 remain as before.
+
+
+## 15. BR120–123 — arbitrary source jump, moving-chart BIDI, commutator and constrained shear
+
+Reconciled already-committed BR116–119 (HEAD 8b1f8f8c27446bd9a7b0fc4a5c742599afe22e86), BR18/19 moving-chart jet, BR22 separated-energy obstruction, BR100 F normal inverse, BR112/118 moving vs transported foliation, BR117 actual AN shear. At inspection master comparison 408 ahead / 42 behind. Targeted master search and PR discovery reopened #1504/#1508/#1512/#1520/#1527 as relevant F8 moving-boundary/energy donors; their existence is not same-source attachment or a full audit of the 42 master commits. No merge/rebase or master edits. Classical Christoffel, Gauss–Codazzi, Lie and scalar commutator identities are prior mathematics; DASHI-specific work is source-preserving F/moving chart and signed AN application.
+
+### BR120 — full nonlinear 15-row derivative jump inverse (continuous metric chart)
+
+At a matched full metric g, timelike graph with defining covector F (F_y=1), lambda=(g^-1(F,F))^-1/2, n_flat=lambda F, E the four tangent columns, h=E^T g E. Differentiated continuity gives [∂_mu g]=F_mu J, J=[∂_y g]. The direct maps are
+ B=[K]=E^T J E/(2lambda),
+ a=[Gamma_lower]=J g^-1 F - F tr_g J/2.
+Let T be the ambient tangential extension of B (T=g E h^-1 B h^-1 E^T g). Then for arbitrary symmetric B and covector a the exact unique inverse is
+ J=lambda(2T+2 tr_h(B) n_flat⊗n_flat+n_flat⊗a+a⊗n_flat).
+Proof by tangent-normal decomposition: tangent block 2B, mixed block a_tan, normal block 2 tr_h B+2a_n in proper-normal derivatives. Direct readback pays all 10 Israel and 5 contracted rows. Rank 15 at any admissible continuous chart, no tangential characteristic inverse. Independent 15x15 exact Jacobian at nonorthogonal Lorentz point with shift, tilted graph, lambda=5/4 passes.
+
+For pure tension B=j h and geometric gauge continuity, a=[H_cov] in the common chart:
+ J=lambda(2j g+6j n_flat⊗n_flat+n_flat⊗a+a⊗n_flat).
+It contains BR1 continuous source (a=0, normal coefficient 8j), BR4 conformal cusp (a=-3j n_flat, normal coefficient 2j), Gaussian trace (a=-4j n_flat, normal coefficient zero) as actual distinct source choices. Do not identify them or assume a=0 after a chart change.
+Variation for independent material metric m, graph covector delta F, source delta a and delta j:
+ delta lambda=-lambda³(2 delta F^T g^-1 F-F^T g^-1 m g^-1 F)/2,
+ delta n_flat=delta lambda F+lambda delta F,
+ delta J=delta lambda (J/lambda)+lambda[2 delta j g+2j m+6 delta j nn
+             +6j sym2(delta n,n)+sym2(delta n,a)+sym2(n,delta a)].
+Here sym2(u,v)=u⊗v+v⊗u. For graph motion delta F_a=-d_a f; material derivative jump is [delta g_y]+f[g_yy]. For fixed constant tension delta j=0; arbitrary j variation only tests source map, not vacuum pure-tension admissibility. delta a is actual material source variation (including evaluation/metric/source transport); it is not silently zero. Independent Sherman–Morrison rank-one metric path and nonzero tilt/source variations check exact derivative. The inverse concerns a common full g, not arbitrary unequal-lambda F background.
+
+### BR121 — conditional linearized F to moving-continuous chart BIDI
+
+At continuous reference g in straight material coordinates F=dy (arbitrary shift, positive lambda), homogeneous F value rows imply [m]=2p nn with p=[delta log lambda]. Choose a generator V with common trace, tangential derivative jumps zero, and [∂_y V]=lambda p n^sharp. Let f=V^y at wall. The exact metric Lie value jump is
+ [Lie_V g]=f J+2p nn.
+Then q=m-Lie_V g with graph displacement f gives
+ [q]+f J=0;
+ inverse m=q+Lie_V g gives F value jump 2p nn. The graph value f and normal scale derivative p are independent jet data (rank 2). The coordinate normal component f=V^y is not proper normal speed when lambda!=1. Its geometric normal component is lambda f. Tangential differentiation of moving continuity gives [q_a]+f_a J+f J_a=0. BR112 naturality transports actual induced metric, Israel and mean force (including evaluation shift and wall tangential reparametrization); geometric gauge jump transports with explicit minus [P_g V], projected on the common physical frame. If P_g V=0, the reduced operator intertwines by BR111. BR120 supplies all 15 derivative jump rows for that moving continuous-metric chart with its actual source jump and graph variation. No claim of off-shell equality of different prescribed gauges; if P_g V≠0 it remains a source. This is a BIDI on jets given V, not a constructed vector transmission inverse on general variable g, not nonlinear chart existence, not equivalence of arbitrary unequal-scale background metrics.
+
+### BR122 — actual geometric factorization of the coordinate shear
+
+For any smooth vector X and scalar v on a Lorentz metric,
+ [Box_g,X]v=2(∇^mu X^nu) Hess_g(v)_mu,nu
+             +(Box_g X+Ric^sharp(X))·dv.
+Derivation is the product rule plus the scalar covector Ricci commutator. Direct coordinate coefficients of second scalar jets are
+ 2g^ab ∂_a X^c - X^d∂_d g^bc (contract with symmetric Hessian);
+ first scalar coefficients are g^ab ∂ab X^c-G^a∂a X^c+X^a∂a G^c,
+ G^c=g^ab Gamma^c_ab. Independent full 5D rational metric two-jet oracle computes all connections, Ricci and covariant Hessian and verifies equality against these coordinate coefficients with non-diagonal g, arbitrary X two-jet and scalar independent jets.
+For X=n, ∇n decomposes into K and normal acceleration. The tangential Hessian contribution is 2 K^ab Hess_g(v)_ab. Its trace-free part is exactly the second-generator shear factor in BR117 for a pure normal Lie perturbation. For X=lambda n, retain the extra derivative of lambda and the acceleration terms. In Gaussian anisotropic warp h_ii=eta_ii exp(2f_i(y)), exact [Box,∂y] is 2 sum_i k_i h^ii ∂ii - tau_y ∂y, verified for two independent tangent derivatives and four independent warp functions. Thus the pure coordinate shear is part of an exact commutator, not an arbitrary forcing. In a fully transported foliation the BR118 good unknown subtracts the corresponding scale derivative; in a graph-only extension it does not. This identifies the correct cancellation on a pure Lie channel, but does not cancel shear from an arbitrary physical perturbation or prove a tame estimate for the commutator. In particular using X=v-independent and the wave equation for v does not mean [Box,X]v=0.
+
+### BR123 — principal gauge and Codazzi alone do not eliminate shear
+
+At an orthonormal wall point h=diag(-1,1,1,1), take null covector z=(1,1,0,0), no normal frequency, mixed metric polarization b=(0,0,1,0), H=l=0. Then full 5D principal harmonic gauge z·m- z tr(m)/2=0, delta tau=0, principal Codazzi z^sharp·delta K-d delta tau=0 with delta K=-(z⊗b+b⊗z)/2. For trace-free spatial mean M with M_12=M_21=1,
+ -2 tr(h^-1 M h^-1 delta K)=2.
+The mixed polarization is not of the pure normal gauge form b proportional to z. Its shear source is not asserted gauge invariant under changes of foliation. Intrinsic scalar curvature principal symbol of this H=0 vanishes, but the full curved linearized Gauss identity has lower-order mean-shape/source terms; those were NOT imposed by this example. This is not a counterexample to full constrained curved evolution.
+BR117 actual AN witness has spatial H_01=0, M_sp,01!=0 at the time-symmetric zero-shift corner; choose equal time component making e0 spatial direction null and transverse e1. The same null/transverse pairing detects that nonzero shape contraction. Thus one cannot erase the BR117 shear term by just the principal Codazzi/trace/gauge identities; full Gauss/curvature or coupled estimates remain necessary. Small amplitude or damping alone is not a proof.
+
+### Exact next weld and acceptance
+
+Carry BR120/121 into the original moving BR18/16 with the actual material source. BR22's unrestricted separated positive energy obstruction remains; do not relabel the chart as a coercivity proof. Derive full curved linearized Gauss/Weyl source factor on the constrained physical quotient, including the lower-order terms BR123 omits. In parallel solve P_g vector transmission with the BR121 normal jump and continuous trace, paying variable graph and source regularity at H² generator order; prove invertible chart map and selected higher corners on original BN/BQ. Use the commutator for pure gauge, not for unconstrained physical perturbations. W2/3 nonzero variable coupled estimate, W4b Weyl preservation, W5 weighted exterior, W6 reduced existence, W7 native/physical acceptance remain open. W4a conditional BR98 remains unchanged.
+
+Local SymPy 1.14.0 four stages exit zero (90s per case, no CI); exact executed Git blob bb58249213fb46e9b5d7e31ac9b6aebac413ef20. Receipt in Artifacts/hopf369/br120_123_local_sympy_receipt_20261128.txt. Native expressions written, kernel unrun. No nonlinear PDE promotion.

@@ -325,3 +325,8 @@ term but also changes the scale-jump channel; the corresponding
 chart transmission and nonlinear energy remain open. These are
 source-specific algebraic and conditional frozen results, not
 proof of physical spacetime development or validation.
+
+
+### Source-jump inverse and transported shear qualification (BR120–123)
+
+At a matched continuous full metric, the normal derivative jump is determined uniquely by the ten geometric Israel rows and five contracted harmonic-source rows, with the actual source jump retained. For constant pure tension and common geometric gauge, the derivative jump in a graph chart is \(J=\lambda(2jg+6j\,n^\flat\otimes n^\flat+n^\flat\otimes[H]+[H]\otimes n^\flat)\). A linearized F scale jump can be transferred to a moving continuous-metric jet by subtracting a common-value Lie generator with the prescribed normal derivative jump; its graph displacement must be retained. This is a conditional jet equivalence, not a variable-coefficient chart existence theorem. The scalar-vector wave commutator identifies the pure-coordinate shear term, but a nonzero null mixed polarization satisfying the principal gauge, trace and Codazzi conditions still has nonzero shear pairing. Full curved Gauss/Weyl conditions, vector transmission, higher regularity and coupled evolution remain necessary. See [BR120–123 roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md#15-br120123--arbitrary-source-jump-moving-chart-bidi-commutator-and-constrained-shear) and [local source checks](../../../scripts/check_hopf369_br120_123_F_source_transport.py). Classical geometry and commutator identities retain prior attribution. No full PDE acceptance is inferred.
