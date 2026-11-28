@@ -33,8 +33,7 @@ def pol(jet,t):
                for i,v in enumerate(jet))
 
 def sp_jet(offset):
-    return var(F(offset,11+offset),F(offset+2,17+offset),
-               F(offset+4,23+offset))
+    return trim([F(offset+2*k+1,11+offset+3*k) for k in range(ORDER+1)])
 
 def independent():
     bdiff=sp_jet(1)
@@ -85,6 +84,7 @@ def check():
     assert (induced-Hm-2*km*ff*E4).applyfunc(s.expand)==s.zeros(4)
     R=2*(fullRp-fullRm)-2*jj*induced
     sourceCorrection=2*(bd-2*mm*jj)*ff*E4
+    source_taylor=independent()
     for allocation in "DE":
         actual=metric_rows(pp,ppx,pm,pmx,z,jj,allocation)
         # Original 10 Israel rows are at offsets 14..23.
@@ -95,7 +95,7 @@ def check():
             v=s.expand(R[a,b]-J[a,b])
             for order in range(ORDER+1):
                 expected=E4[a,b]*s.Rational(
-                    *independent()[order].as_integer_ratio())
+                    *source_taylor[order].as_integer_ratio())
                 assert v.coeff(t,order)==expected,(allocation,a,b,order)
     print("PASS BR67 all 9 time orders, 10 Israel entries, original BR34 D/E")
     print("PASS general-mean/nonzero tension/warp source triple Leibniz and negative controls")
