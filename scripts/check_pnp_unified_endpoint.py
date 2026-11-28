@@ -6,7 +6,7 @@ from check_pnp_binary_support_endpoint import direct,identity_isolation
 from check_pnp_constructive_descent import search
 from check_p0_signed_contrast_20261125 import accepts,ContinuationAllowance
 
-def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None,local=True,screened=True):
+def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None,local=True,screened=True,conditional=True):
     if min(n,cap)<0:raise ValueError('budget/source')
     F=tuple(tuple(c) for c in F)
     if any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('literal')
@@ -27,17 +27,27 @@ def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None,local=True,scree
     status,x,rec=direct(F,n,ledger,**(direct_options or {}))
     d.update(status=status,actual_reserved=ledger.total-ledger.left,queries=rec,baseline_cells=ledger.baseline_cells,boundary_attempts=ledger.boundary_attempts)
     if status!='UNKNOWN':return finish(status,x)
-    G=F;patch={};local_cap=shares[1]//4 if local else 0
+    G=F;patch={};conditional_patches=[];local_cap=shares[1]//4 if local else 0
     if local_cap:
         from check_pnp_local_autarky import descend
         d=reserve('local-autarky',local_cap)
-        status,x,G,patch,used,steps=descend(F,n,local_cap)
+        status,x,G,patch,used,steps=descend(F,n,local_cap//2 if conditional else local_cap)
         d.update(status=status,used=used,patch=patch,steps=steps)
         if status!='UNKNOWN':return finish(status,x)
+        if conditional:
+            from check_pnp_conditional_autarky import descend as conditional_descend
+            status,x,G,conditional_patches,used2=conditional_descend(G,n,local_cap-used)
+            assert used+used2<=local_cap
+            d.update(conditional_status=status,conditional_used=used2,conditional_eliminated=sum(len(P['D']) for P in conditional_patches))
+            if status=='EMPTY':return finish(status,None)
+            if status=='WITNESS':
+                from check_pnp_local_autarky import reopen
+                return finish(status,reopen(F,n,patch,x))
     def lift(x):
         if x is None:return None
+        from check_pnp_conditional_autarky import lift as conditional_lift
         from check_pnp_local_autarky import reopen
-        return reopen(F,n,patch,x)
+        return reopen(F,n,patch,conditional_lift(conditional_patches,x))
     if legacy:
         d=reserve('normal-quotient-portfolio',shares[1]-local_cap)
         from check_p0_correlated_marginal_20261126 import portfolio
