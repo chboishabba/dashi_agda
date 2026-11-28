@@ -69,7 +69,8 @@ ROOTS = {
   "Synthesis/ClayNSSection44SqrtUniformRadiusAcceptanceExact.lean",
   "Synthesis/ClayNSSection45OneFlowAllPrecisionsAcceptanceExact.lean",
   "Synthesis/ClayNSSection48JointModalPressureAcceptanceExact.lean",
-  "Synthesis/ClayNSSection50RawPressureAcceptanceExact.lean",
+  "Synthesis/ClayNSSection49RawPressureAcceptanceExact.lean",
+  "Synthesis/ClayNSSection50AllModePressureAcceptanceExact.lean",
  ]),
  "BSD_HODGE": ("bsd_hodge_root", [
   "Synthesis/ClayBSDSection36AllDegreeMellinEnvelopeAcceptanceExact.lean",
@@ -88,7 +89,8 @@ ROOTS = {
   "Synthesis/ClayHodgeSection44OriginalEvenDeckActionAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection45OriginalFreeEvenDeckAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection47DeckTransitionAcceptanceExact.lean",
-  "Synthesis/ClayBSDSection50MomentIntegralAcceptanceExact.lean",
+  "Synthesis/ClayBSDSection49MomentIntegralAcceptanceExact.lean",
+  "Synthesis/ClayBSDSection50StrictMomentIntegralAcceptanceExact.lean",
  ]),
  "PNP": ("pnp_root", [
   "Welds/PNPSection36SameObligationInputVsWorkAcceptanceExact.lean",
