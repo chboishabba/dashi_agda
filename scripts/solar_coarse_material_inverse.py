@@ -63,7 +63,7 @@ def inverse_in_phase(d,c,amplitude,lo=1,hi=2):
 def run():
     d,c=fixture()
     for q in [S.Rational(1,10),S.Rational(4,5)]:
-        r=inverse_in_phase(d,c,q);print(q,r['status'],r['excluded_sectors'])
+        r=inverse_in_phase(d,c,q);assert r['status']=='EMPTY_IN_PHASE_FIBRE' and r['excluded_sectors']==16;print(q,r['status'],r['excluded_sectors'])
     # Unconstrained resonant static material gives a positive control.
     from solar_coarse_source_cycle import static_optimum
     opt=static_optimum(d,c,S.Rational(1,100),2,S.Integer(1));e=opt['eps'];amp=S.sqrt(opt['efficiency']/c['load'])
