@@ -20,8 +20,9 @@ Usage:
     --rh-main-sha256 <64-hex-pin> \\
     --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection36Native.json
 
-Return 0 ONLY when every original proof root has completed native
-elaboration and RH source admission. Missing inputs, dirty checkout,
+Return 0 ONLY when every SELECTED source entrypoint completes native
+elaboration and RH source admission at immutable pinned HEADs.
+A PASS does NOT establish any universal Millennium conjecture. Missing inputs, dirty checkout,
 wrong branches or failed source check make the overall result FAIL.
 Do not claim the returned report is committed: the runner writes a
 new receipt and the owner must add/commit its exact bytes afterward.
@@ -99,16 +100,35 @@ def main() -> int:
     p.add_argument("--rh-manifest", type=Path, required=True)
     p.add_argument("--rh-main-sha256", required=True)
     p.add_argument("--report", type=Path, required=True)
+    p.add_argument("--require-head", action="append", default=[],
+        metavar="OWNER=COMMIT_SHA",
+        help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay36NativeAcceptanceV1",
-              "fully_accepted": False, "roots": {}, "checks": []}
+    report = {"schema": "Clay36NativeAcceptanceV2",
+              "all_selected_roots_passed": False, "roots": {}, "checks": [],
+              "meaning": "Selected finite theorem roots only; not universal Clay completion"}
+    pins = {}
+    for item in args.require_head:
+        if "=" not in item:
+            p.error("--require-head must be OWNER=40_HEX_SHA")
+        owner, sha = item.split("=", 1)
+        if owner not in ("YM", "NS", "BSD_HODGE", "PNP", "RH") or \
+                len(sha) != 40 or any(c not in "0123456789abcdef" for c in sha):
+            p.error("Invalid owner or SHA in --require-head")
+        if owner in pins:
+            p.error("Duplicate --require-head owner")
+        pins[owner] = sha
+    if set(pins) != {"YM", "NS", "BSD_HODGE", "PNP", "RH"}:
+        p.error("Fail closed: all five original owner HEAD pins are REQUIRED")
     roots = {key: Path(getattr(args, key.lower()+"_root")).resolve()
              for key in ("ym", "ns", "pnp", "rh")}
     roots["bsd_hodge"] = args.bsd_hodge_root.resolve()
     for owner, (attr, paths) in ROOTS.items():
         root = roots[attr.removesuffix("_root")]
         ident = checkout_identity(root, BRANCHES[owner])
+        ident["required_HEAD"] = pins[owner]
+        ident["ok"] = bool(ident["ok"] and ident.get("HEAD") == pins[owner])
         report["roots"][owner] = ident
         if not ident["ok"]:
             report["checks"].append({"owner": owner, "status": "NOT_RUN",
@@ -132,6 +152,8 @@ def main() -> int:
                      "result": result})
     rhroot = roots["rh"]
     ident = checkout_identity(rhroot, BRANCHES["RH"])
+    ident["required_HEAD"] = pins["RH"]
+    ident["ok"] = bool(ident["ok"] and ident.get("HEAD") == pins["RH"])
     report["roots"]["RH"] = ident
     script = rhroot / "scripts/check_alpoge_rh_original_native_admission.py"
     if not ident["ok"] or not script.is_file():
@@ -146,16 +168,16 @@ def main() -> int:
         r = call(command, rhroot, args.timeout)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
-    report["fully_accepted"] = (len(report["checks"]) == 8
+    report["all_selected_roots_passed"] = (len(report["checks"]) == 8
         and all(v.get("ok", False) for v in report["roots"].values())
         and all(v.get("status") == "PASS" for v in report["checks"]))
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
     print("ALL-CLAY SECTION36 NATIVE",
-          "PASS" if report["fully_accepted"] else "FAIL",
+          "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
-    return 0 if report["fully_accepted"] else 2
+    return 0 if report["all_selected_roots_passed"] else 2
 
 
 if __name__ == "__main__":
