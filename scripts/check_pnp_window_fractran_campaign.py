@@ -9,6 +9,14 @@ for seed in range(512):
     r=Random(3692825+seed);q=1+seed%3;a=1+seed%2;n=1+seed%5
     rules=[(r.randrange(q),r.randrange(a),r.randrange(q),r.randrange(a),r.choice((-1,0,1))) for _ in range(seed%9)]
     W=compile_window(q,a,n,rules);C['tables']+=1
+    one=lambda k,d:tuple(int(i==d) for i in range(k))
+    blank=seed%a;initial=seed%q;accept=(seed+1)%q
+    bits=one(a,blank)+one(q,initial)+one(q,accept)+tuple(v for x,y,z,w,d in rules for v in one(q,x)+one(a,y)+one(q,z)+one(a,w)+one(3,d+1))
+    assert compile_static_bits(q,a,n,len(rules),bits)==(W,blank,initial,accept)
+    C['static_bit_roundtrips']+=1
+    try:compile_static_bits(q,a,n,len(rules),(0,)*len(bits))
+    except ValueError:C['empty_field_refusals']+=1
+    else:raise AssertionError('empty field')
     assert len(W.program)<=2*n*q*a
     for p,i,t in product(range(q),range(n),product(range(a),repeat=n)):
         c=(p,i,t);v=W.encode(*c);assert W.decode(v)==c
