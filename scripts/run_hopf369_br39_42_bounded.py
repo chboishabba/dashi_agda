@@ -275,6 +275,14 @@ PARTS["terminal"] += [(f"BR297299.regions{n}","check_hopf369_br297_299_history_r
 
 PARTS["terminal"] += [("BR300.atomic","check_hopf369_br300_literal_atomic.py",()),("BR301.snapshot","check_hopf369_br301_snapshot.py",()),("BR302.boundary7","check_hopf369_br302_boundary.py",("--n","7")),("BR302.boundary9","check_hopf369_br302_boundary.py",("--n","9")),("BR303.wall","check_hopf369_br303_304_source_walls.py",("--part","periodic")),("BR304.caloric","check_hopf369_br303_304_source_walls.py",("--part","material")),("BR305.subsidiary","check_hopf369_br305_sourced_subsidiary.py",())]
 
+PARTS["terminal"] += [
+  ("BR307.wall7","check_hopf369_br307_wall_jet_transport.py",()),
+  ("BR308.heat","check_hopf369_br308_material_stress_exchange.py",()),
+  ("BR309.all-lanes","check_hopf369_br309_terminal_dag.py",()),
+  ("BR310.sbp7","check_hopf369_br310_sbp_source_boundary.py",("--n","7")),
+  ("BR310.sbp9","check_hopf369_br310_sbp_source_boundary.py",("--n","9")),
+]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
