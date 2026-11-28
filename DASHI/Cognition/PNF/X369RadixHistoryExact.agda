@@ -15,6 +15,7 @@ open import Data.Nat.Divisibility using (divides)
 import Data.Nat.Properties as N
 open import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Cognition.PNF.X369OrderedBlockCompositionExact as W
+import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
 
 module Radix {Literal : Set}
   (baseMinusTwo : Nat)
@@ -53,6 +54,36 @@ module Radix {Literal : Set}
   reverse : List Literal → List Literal
   reverse [] = []
   reverse (a ∷ xs) = reverse xs W.++ (a ∷ [])
+
+  appendRightIdentity : (xs : List Literal) → xs W.++ [] ≡ xs
+  appendRightIdentity [] = refl
+  appendRightIdentity (x ∷ xs) =
+    F.cong (λ ys → x ∷ ys) (appendRightIdentity xs)
+
+  reverseAppend : (xs ys : List Literal) →
+    reverse (xs W.++ ys) ≡ reverse ys W.++ reverse xs
+  reverseAppend [] ys =
+    F.cong (λ zs → reverse ys W.++ zs) (appendRightIdentity [])
+  reverseAppend (x ∷ xs) ys =
+    trans (F.cong (λ zs → zs W.++ (x ∷ [])) (reverseAppend xs ys))
+      (W.appendAssoc (reverse ys) (reverse xs) (x ∷ []))
+
+  reverseInvolutive : (xs : List Literal) → reverse (reverse xs) ≡ xs
+  reverseInvolutive [] = refl
+  reverseInvolutive (x ∷ xs) =
+    trans (reverseAppend (reverse xs) (x ∷ []))
+      (F.cong (λ zs → x ∷ zs) (reverseInvolutive xs))
+
+  chronologicalEncode : List Literal → Nat
+  chronologicalEncode xs = value (reverse xs)
+
+  chronologicalDecode : Nat → Nat → List Literal
+  chronologicalDecode n v = reverse (decode n v)
+
+  chronologicalBidi : (xs : List Literal) →
+    chronologicalDecode (W.extent (reverse xs)) (chronologicalEncode xs) ≡ xs
+  chronologicalBidi xs =
+    trans (F.cong reverse (decodeExact (reverse xs))) (reverseInvolutive xs)
 
   chronologicalDecodeExact : ∀ xs →
     decode (W.extent (reverse xs)) (value (reverse xs)) ≡ reverse xs
