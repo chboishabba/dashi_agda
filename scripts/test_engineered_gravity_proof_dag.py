@@ -19,7 +19,7 @@ def main():
         assert len(accepted["owners"][owner])==64 and accepted["status"]=="OPEN"
         # A standalone mathematical fixture must NOT match the pinned original owner.
         assert owner in accepted.get("mismatched_w1_sources",[])
-    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob"):
+    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob","w2_physical_promotion","w2_wrong_source_pin"):
         m=copy.deepcopy(original)
         if which=="fake_stage":m["lanes"]["A_shielding"]["unpaid_stages"].append("PROMOTED")
         elif which=="fake_lane":m["lanes"]["Fake_closure"]={}
@@ -27,10 +27,12 @@ def main():
         elif which=="repeat_weld":m["cross_lane_shared_welds"]["ward_source"].append("A_shielding")
         elif which=="w1_physical_promotion":m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["physical_paid"]=True
         elif which=="w1_bad_lane":m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["lanes"].append("nonexistent_lane")
-        else:m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["source_git_blob_sha1"]="not-a-git-blob"
+        elif which=="w1_bad_blob":m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["source_git_blob_sha1"]="not-a-git-blob"
+        elif which=="w2_physical_promotion":m["w2_boundary_packets"]["moving_tov_timelike"]["physical_paid"]=True
+        else:m["w2_boundary_packets"]["three_source_reverse"]["checker_git_blob_sha1"]="bad-pin"
         try:audit(m)
         except (AssertionError,KeyError):pass
         else:raise AssertionError("admitted "+which)
-    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 7 malformed-claim controls")
+    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 9 malformed-claim controls")
 
 if __name__=="__main__":main()
