@@ -8,8 +8,9 @@ from solar_spherical_whitney import shell_mesh
 from solar_steelman_whitney_lift import solve
 
 
-def run():
-    d=seven();M,N,G,C,D,W=d['M'],d['N'],d['G'],d['C'],d['D'],d['W']
+def run(d=None):
+    if d is None: d=seven()
+    M,N,G,C,D,W=d['M'],d['N'],d['G'],d['C'],d['D'],d['W']
     xyz,s,m,_=shell_mesh([1,1.5,2]);piv=list(d['piv'])
     # Actual integral of J.J, including constant/Whitney cross terms.
     H0=S.zeros(W.cols)
@@ -53,4 +54,5 @@ def run():
     assert H.rows==147  # SPD established by the block Schur complement
     print('PASS actual kinetic Gram SPD, minimum kinetic lift at both bands, reciprocal energy and charge identity')
     print('Dynamic constitutive and HF reaction still required; no physical unity promotion')
+    return dict(d=d,H=H,B=B,U=U,R=R)
 if __name__=='__main__':run()
