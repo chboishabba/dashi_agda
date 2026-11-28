@@ -4,7 +4,9 @@ module DASHI.Moonshine.CM163BishopHecke41PowerDifferenceSeriesExact where
 -- of a complex power series on a closed unit disk with summable first
 -- coefficient moment. The quotient is a genuine series of finite
 -- polynomial wings, including at coincident endpoints.
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+import Data.Nat.Properties as NP
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ; 1ℚᵘ)
@@ -27,10 +29,14 @@ import DASHI.Moonshine.CM163BishopHecke41FormalCyclotomicNormExact as N
 import DASHI.Moonshine.CM163BishopHecke41ConvergentSeriesExact as Eval
 import DASHI.Moonshine.CM163BishopHecke41ActualCrossExact as Cross
 import DASHI.Moonshine.CM163BishopHecke41ProductExact as Prod
+import DASHI.Moonshine.CM163BishopHecke41RamifiedPhaseExact as Ram
+import DASHI.Moonshine.CM163BishopHecke41SectorFilterExact as Filter
+import DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact as Power
+import DASHI.Moonshine.CM163BishopHecke41SelectedFixedChartsExact as Fixed
 import DASHI.Moonshine.CM163BishopHeckeProductAlgebraExact as Alg
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 open C using (BishopComplex; _≈C_)
-open A using (_+C_; _-C_; _*C_; powC)
+open A using (_+C_; _-C_; _*C_; powC; scaleC)
 open Comp using (complexTrans; complexSym)
 open Completion using (original-bishop-pointwise-complex-converges; realConverges; imaginaryConverges)
 open Uniform using (complexPrefix)
@@ -230,3 +236,24 @@ module Factorization (f : N.SeriesC) (summable : Seq._isConvergent (Seq.SeriesOf
   derivativeAlong u hu v hv cv eu ev =
     (λ n → increment u (v n) hu (hv n) eu (ev n)) ,
     D.continuous u hu v u hv hu cv
+
+
+-- Read the diagonal divided difference as the actual derivative
+-- coefficient (n+1) f_(n+1) u^n. This is an all-index finite proof.
+wingDiagonal : ∀ u k n → wing u u k (suc n) ≈C
+  scaleC (NR.natReal (suc n)) (powC u (k + n))
+wingDiagonal u k zero =
+  complexTrans (A.addCCongruent (Power.powAdd u k zero) (C.≈C-refl _))
+    (complexTrans (L.complexAddRightIdentity _) (complexSym (Ram.scaleOne _)))
+wingDiagonal u k (suc n) =
+  let z = powC u (k + suc n)
+      eq = Filter.powIndex u (sym (NP.+-suc k n))
+  in complexTrans (A.addCCongruent (Power.powAdd u k (suc n))
+    (complexTrans (wingDiagonal u (suc k) n) (A.scaleCCongruent eq (NR.natReal (suc n)))))
+    (Ram.scaleSuccessor (suc n) z)
+
+diagonalCoefficient : ∀ f u n → terms f u u (suc n) ≈C
+  scaleC (NR.natReal (suc n)) (f (suc n) *C powC u n)
+diagonalCoefficient f u n =
+  complexTrans (A.mulCCongruent (C.≈C-refl _) (wingDiagonal u zero n))
+    (Fixed.scaleRight (NR.natReal (suc n)) (f (suc n)) (powC u n))
