@@ -5019,3 +5019,53 @@ bytes matched. Checker Git blob
 SHA256 b723d2c9931af55e2a116e1b48a5513ad94859c418f93de958a1c3f66758dde3.
 No full integrated runner, native kernel, CI, nonlinear
 continuum evolution or empirical acceptance.
+
+
+## 32. BR178–180 — same-source stationary symbol and radial differential inverse
+
+Implementation: scripts/check_hopf369_br178_180_cartan_radial.py
+(commit 95db3dca1e812b5ec353a58ee883ea05105ce7fa).
+Written, pending local execution; no PASS promoted.
+
+BR178 consumes original BR143/BR27 matrices. For stationary
+xi=(0,k,0,0,l), construct the full first-pair exterior
+closure C(xi)W=xi wedge W, retaining time-space rows.
+Test rank C=35 and injectivity on ker A(xi) at five
+nonzero directions. Analytic all-direction rationale:
+for spacelike xi choose an orthonormal frame with xi
+along one spatial axis. Closure forces first curvature
+pair to contain that axis; pair symmetry forces second
+pair likewise. Ricci-free contraction on transverse
+indices then annihilates all surviving entries.
+This is a homogeneous defect-free frozen symbol result,
+not exclusion of subsidiary errors or a curved wall
+existence theorem. Null covectors are not covered.
+BR176 remains a valid reference subsidiary obstruction.
+
+BR179 uses O=Tsp D(xi) N on the original stationary
+kernel N and checks rank O^T O=rank O. This Gram is
+the exact observable penalty, not a propagated energy.
+Retain BR139/150 half-order collar budget, BR164
+covariant bulk sources and BR175 signed wall work.
+Next weld: inhomogeneous C(xi)W from actual Cartan
+defect, uniform direction estimate and curved commutator
+control; prove joint constraint propagation from compatible
+W0/W1 data without assuming the conclusion. W5/W6/W7 remain.
+
+BR180 checks signed Jacobian determinant for (lambda,eps)
+to (a,c):
+ -eps lambda^10 (I0 I2-I1^2)/(144 m^2).
+Squared observation determinant is 4ac times this.
+At eps=0 squared Jacobian vanishes, while signed
+observation retains amplitude derivative. Baseline
+degeneracy and physical calibration remain as BR177.
+No CI/SCF or physical measurement acceptance.
+
+Parallel frontiers unchanged: G3 quantitative lifespan
+and spinor history; G4 actual nonlinear profile and
+finite-time trajectories; native signed hyperfabric
+adapter; Monster marked lattice/vertex transport;
+material same-source stress/current/receiver.
+Do not promote any of these from the frozen symbol.
+Run both checker parts locally with 90s cap, verify
+committed dependency bytes, and record actual outputs.
