@@ -22,6 +22,7 @@ import DASHI.Analysis.BishopComplexReciprocalExact as Rec
 import DASHI.Foundations.BishopFiniteCauchyRingWeldExact as Ring
 import DASHI.Moonshine.JInvariantBishopCenteredDyadicRowClosureExact as Close
 import DASHI.Moonshine.JInvariantBishopDyadicReciprocalLimitExact as Conv
+import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Const
 import DASHI.Moonshine.JInvariantBishopFourierRowLimitExact as Lim
 import DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact as Power
 import DASHI.Moonshine.JInvariantBishopThetaCauchyProductExact as CP
@@ -54,17 +55,22 @@ headZero f (suc k) h zero = h zero z≤n
 headZero f (suc k) h (suc n) =
   headZero (λ n → f (suc n)) k (λ j hj → h (suc j) (s≤s hj)) n
 
+prefixDrop : ∀ f n → Seq.SeriesOf f (suc n) ≃ (f zero + Seq.SeriesOf (λ k → f (suc k)) n)
+prefixDrop f zero = P.≃-trans (P.+-identityˡ (f zero)) (P.≃-symm (P.+-identityʳ (f zero)))
+prefixDrop f (suc n) = P.≃-trans (P.+-cong (prefixDrop f n) P.≃-refl)
+  (P.+-assoc (f zero) (Seq.SeriesOf (λ k → f (suc k)) n) (f (suc n)))
+
 dropOneConv : ∀ f v → Seq._ConvergesTo_ (Seq.SeriesOf f) v →
   Seq._ConvergesTo_ (Seq.SeriesOf (λ n → f (suc n))) (v - f zero)
 dropOneConv f v cv = Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
   (λ {(suc n) → P.≃-trans
-    (P.+-cong (Read.prependPrefix (f zero) (λ k → f (suc k)) (suc n)) P.≃-refl)
+    (P.+-cong (prefixDrop f (suc n)) P.≃-refl)
     (let open P.ℝ-Solver in solve 2 (λ a b → (a ⊕ b) ⊖ a ⊜ b)
       P.≃-refl (f zero) (Seq.SeriesOf (λ k → f (suc k)) (suc n)))})
   (_ , Conv.subR (Close.shiftReal cv) (constantReal (f zero)))
   where
   constantReal : ∀ a → Seq._ConvergesTo_ (λ _ → a) a
-  constantReal a = Lim.realConverges (Lim.constantC (C.complex a R.0ℝ))
+  constantReal a = Const.constantConverges a
 
 dropAbs : ∀ f k → Seq.SeriesOf_ConvergesAbsolutely f →
   Seq.SeriesOf_ConvergesAbsolutely (drop k f)
@@ -74,9 +80,11 @@ dropAbs f (suc k) ab = dropAbs (λ n → f (suc n)) k
 
 dropComplexAbs : ∀ f k → C.ComponentwiseAbsoluteSeriesConvergent f →
   C.ComponentwiseAbsoluteSeriesConvergent (drop k f)
-dropComplexAbs f k ab = C.componentwise-absolute-series-convergent
-  (dropAbs (C.realTerms f) k (C.realAbsolute ab))
-  (dropAbs (C.imagTerms f) k (C.imagAbsolute ab))
+dropComplexAbs f zero ab = ab
+dropComplexAbs f (suc k) ab = dropComplexAbs (λ n → f (suc n)) k
+  (C.componentwise-absolute-series-convergent
+    (dropAbs (C.realTerms f) 1 (C.realAbsolute ab))
+    (dropAbs (C.imagTerms f) 1 (C.imagAbsolute ab)))
 
 scalePrefix : ∀ a f n → Seq.SeriesOf (λ k → a * f k) n ≃ a * Seq.SeriesOf f n
 scalePrefix a f zero = P.≃-symm (P.*-zeroʳ a)
@@ -88,7 +96,7 @@ scaleAbs : ∀ a f → Seq.SeriesOf_ConvergesAbsolutely f →
 scaleAbs a f ab =
   let c = ∣ a ∣
       g = λ n → ∣ f n ∣
-      cv = Conv.mulR (Lim.realConverges (Lim.constantC (C.complex c R.0ℝ))) (proj₂ ab)
+      cv = Conv.mulR (Const.constantConverges c) (proj₂ ab)
       scaled = Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
         (λ {(suc n) → P.≃-symm (scalePrefix c g (suc n))}) (_ , cv)
       eq : ∀ n → c * g n ≃ ∣ a * f n ∣
