@@ -1,0 +1,92 @@
+"""Local staged maximum-cut campaign. Run each stage under timeout 90s.
+Only load checkpoints generated and controlled by the caller; pickle is unsafe
+for untrusted files. Source/content identity is checked before combining blocks.
+"""
+import argparse,hashlib,json,pickle,os
+from pathlib import Path
+import numpy as np
+
+HERE=Path(__file__).resolve().parent
+
+def sha(p):
+    h=hashlib.sha256()
+    with open(p,'rb') as f:
+        for b in iter(lambda:f.read(1024*1024),b''):h.update(b)
+    return h.hexdigest()
+
+def sources():
+    paths=sorted(set(HERE.glob('solar_*.py')) | set(HERE.glob('check_smith_filsinger_solar_*.py')))
+    return {p.name:sha(p) for p in paths}
+
+def json_atomic(path,obj):
+    tmp=path.with_suffix(path.suffix+'.tmp')
+    tmp.write_text(json.dumps(obj,sort_keys=True,indent=2));os.replace(tmp,path)
+
+def save(path,obj,upstream,src):
+    tmp=path.with_suffix('.tmp')
+    with open(tmp,'wb') as f:pickle.dump(obj,f,pickle.HIGHEST_PROTOCOL)
+    os.replace(tmp,path)
+    json_atomic(path.with_suffix('.json'),dict(sha=sha(path),upstream=upstream,sources=src))
+
+def load(path,upstream,src):
+    meta=json.loads(path.with_suffix('.json').read_text())
+    if meta!=dict(sha=sha(path),upstream=upstream,sources=src):raise ValueError("checkpoint identity mismatch: "+str(path))
+    with open(path,'rb') as f:return pickle.load(f)
+
+def main():
+    p=argparse.ArgumentParser()
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run'])
+    p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
+    p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
+    p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--exact-null',action='store_true');x=p.parse_args()
+    work=Path(x.work);work.mkdir(parents=True,exist_ok=True);src=sources()
+    seven=work/'seven.pkl';metric=work/'metric.pkl';med=work/'mediator.pkl'
+    if x.stage=='seven':
+        from solar_steelman_seven_edge import run
+        save(seven,run(),{},src);return
+    d=load(seven,{},src);up={'seven':sha(seven)}
+    if x.stage=='metric':
+        from solar_steelman_material_metric import run
+        save(metric,run(d),up,src);return
+    m=load(metric,up,src);up['metric']=sha(metric)
+    if x.stage=='mediator':
+        from solar_steelman_autonomous_mediator import run
+        save(med,run(m),up,src);return
+    a=load(med,up,src);up['mediator']=sha(med)
+    if x.stage=='static':
+        from solar_steelman_combined_static_fibre import run
+        run(m,a,x.exact_null)
+    elif x.stage=='inverse':
+        from solar_steelman_physical_inverse import run
+        run(a)
+    elif x.stage=='preflight':
+        from solar_steelman_reservoir_return import preflight
+        preflight(m,a)
+    elif x.stage=='nonlinear':
+        from solar_steelman_reservoir_return import integrate
+        integrate(m,a,x.tol,x.perturb,x.periods)
+    elif x.stage=='tangent':
+        from solar_steelman_anchored_monodromy import check
+        check(m,a)
+    elif x.stage=='block':
+        from solar_steelman_anchored_monodromy import block
+        if x.start is None or x.stop is None:raise ValueError("column bounds required")
+        path=work/f'M_{x.tol:.12g}_{x.start:03d}_{x.stop:03d}.npz'
+        tmp=path.with_name(path.stem+'.tmp.npz')
+        block(m,a,x.start,x.stop,x.tol,tmp);os.replace(tmp,path)
+        json_atomic(path.with_suffix('.json'),dict(sha=sha(path),upstream=up,sources=src,tol=x.tol))
+    elif x.stage=='assemble':
+        from solar_steelman_anchored_monodromy import assemble
+        paths=sorted(work.glob(f'M_{x.tol:.12g}_*.npz'))
+        if not paths:raise ValueError("no monodromy blocks")
+        for path in paths:
+            meta=json.loads(path.with_suffix('.json').read_text())
+            if meta!=dict(sha=sha(path),upstream=up,sources=src,tol=x.tol):raise ValueError("monodromy provenance mismatch")
+        assemble(paths)
+    elif x.stage in ('delay','delay-run'):
+        from solar_steelman_retarded_face_return import run
+        run(m,a,x.delay,x.tol,x.periods,x.perturb,x.stage=='delay-run')
+    print('STAGE COMPLETE',x.stage,flush=True)
+
+if __name__=='__main__':main()
