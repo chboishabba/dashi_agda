@@ -4,7 +4,7 @@ module DASHI.Mathematics.Complexity.PNPDAGCutsetFactorizationExact where
 -- All bypass inputs are retained in the interface. No extensional
 -- combiner of uncharged size is introduced.
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Vec.Base using (Vec; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
@@ -38,3 +38,28 @@ outputFactor p s w x = cong (C.evaluateWire w x) (attachExact p s x)
 -- Each next constructor is exactly one original gate. The sparse
 -- live cut is a refinement of this complete boundary; unused input
 -- and prefix wires may be dropped only after dependency certification.
+
+record Cut {n h k : Nat} (p : C.GateProgram n (h + k)) : Set where
+  constructor cut
+  field
+    prefix : C.GateProgram n k
+    suffix : Suffix n k (h + k)
+    reassemble : attach prefix suffix ≡ p
+
+splitBySuffix : ∀ {n} (h k : Nat) (p : C.GateProgram n (h + k)) → Cut {h = h} {k = k} p
+splitBySuffix zero k p = cut p stop refl
+splitBySuffix (suc h) k (C.appendGate p a) with splitBySuffix h k p
+... | cut pre s eq = cut pre (next s a) (cong (λ q → C.appendGate q a) eq)
+
+splitOutputExact : ∀ {n} (h k : Nat) (p : C.GateProgram n (h + k))
+  (w : C.WireRef n (h + k)) (x : Vec Bool n) →
+  let c = splitBySuffix h k p in
+  C.evaluateWire w x (C.evaluateProgram p x) ≡
+  C.evaluateWire w x (evalFrom (Cut.suffix c) x (C.evaluateProgram (Cut.prefix c) x))
+splitOutputExact h k p w x with splitBySuffix h k p
+... | cut pre s eq =
+  trans (cong (λ q → C.evaluateWire w x (C.evaluateProgram q x)) (sym eq))
+    (outputFactor pre s w x)
+
+-- Every original gate program of size h+k now has the original
+-- k-gate prefix and h-gate suffix, retaining input bypass wires.
