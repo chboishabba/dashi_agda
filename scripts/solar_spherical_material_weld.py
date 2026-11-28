@@ -37,10 +37,10 @@ def _prepared_static_geometry(radii,level,cell_owner,volumes):
     T=np.block([[LE.T/np.sqrt(me)[None,:],np.zeros((ne,nf))],
                 [np.zeros((nf,ne)),LB.T/np.sqrt(mb)[None,:]]])
     defect=T@K-ref@T
-    return (K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol)
+    return (K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol,E,B)
 
 def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
-    K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol=_prepared_static_geometry(
+    K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol,E,B=_prepared_static_geometry(
         tuple(float(v) for v in radii),int(level),
         tuple(int(v) for v in cell_owner),tuple(float(v) for v in volumes))
     ne=len(me); nf=len(mb); n=len(vol)
