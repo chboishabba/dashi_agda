@@ -1,0 +1,47 @@
+{
+  "predecessor": "08b9e7def0df6a386476516ebeced281e5d4b29c",
+  "script": {
+    "path": "scripts/check_f8_mode3_parity_boundary.py",
+    "commit": "9953e7879e7185b6cb4e37bd87e2c11b583d05b1",
+    "blob": "80795e85774025aec16ad7556edcdeace432702c",
+    "sha256": "e4330ff015f18ba0d2fa7daf9034bc81c7f9579203cc8d5735658df0ab0aa330",
+    "local_output_sha256": "2b3514f83b3ea7badbd61f1fbe5cb3c88b55ebf9742674debc8c083949056b57"
+  },
+  "exact_checks": 43,
+  "modal_diagnostic_cases": 10,
+  "maximum_interior_Q": 6.191665236077171e-12,
+  "modal_diagnostics": {
+    "k": [
+      1,
+      3
+    ],
+    "normal_intervals": [
+      128,
+      256,
+      512,
+      1024,
+      2048
+    ],
+    "Y": 2.01,
+    "clock": "original t=1..12",
+    "pulse": "original .065 bulk clock, unit modal coefficient",
+    "max_mesh_rows": [
+      {
+        "k": 1,
+        "N": 2048,
+        "raw_Y": -1365.7373021457756,
+        "even_Y": 1024.006130143201,
+        "raw_minus_even_direct": 6.155233769657674
+      },
+      {
+        "k": 3,
+        "N": 2048,
+        "raw_Y": -1382.1524721638245,
+        "even_Y": 1023.0870238463955,
+        "raw_minus_even_direct": 6.184971439657698
+      }
+    ],
+    "classification": "nonmonotone unresolved normalized single-mode diagnostics; not actual original FV source projection or production convergence"
+  },
+  "scope": "Exact Taylor and parity algebra; fixed-radial-operator asymptotic argument in roadmap, not tested corrector PDE solve or full joint radial-normal-time asymptotic proof. Original independent parity receiver uses no prescribed-flux or SMS substitution; full source-on capture and kernel acceptance open."
+}

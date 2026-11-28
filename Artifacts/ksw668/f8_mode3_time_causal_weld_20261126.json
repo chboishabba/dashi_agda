@@ -1,0 +1,31 @@
+{
+  "predecessor": "34f2ed0321c4a8349b18ea7cd7cd91754e2373d0",
+  "script": {
+    "path": "scripts/check_f8_mode3_time_causal_weld.py",
+    "commit": "7783ce1d3a4cbde87d7e07253ad5c4ea3cbb4fcd",
+    "blob": "dc51cf4e020f3a209d4deb4ac8c448ca0c330d3e",
+    "sha256": "75f65eefc72100d3e9ff58872ec11c22e313eaa1305512bc46164779df9eab04",
+    "local_output_sha256": "2b0f57c2e4cb6ab1f1c5e74754ffcf10d50fed52f18f22b391ccfc714961477b"
+  },
+  "exact_checks": 67,
+  "clock_span": [
+    2.709159198153532,
+    2.709159198155071
+  ],
+  "causal_margin_lower": {
+    "top_no_return_min_Y_2_01": 0.39417413517826216,
+    "radial_no_hit_R_3_01": 0.26084080184492886,
+    "large_top_no_hit_Y_4_032": 0.4061741351782622,
+    "far_source_margin": 0.06
+  },
+  "extended_clock_upper": 2.789458315432445,
+  "extended_causal_margin_lower": {
+    "top_no_return_min_Y_2_01": 0.307464761490632,
+    "radial_no_hit_R_3_01": 0.18054168456755512,
+    "large_top_no_hit_Y_4_032": 0.319464761490632
+  },
+  "extended_CFL": "dt*(7/dr+10/dy+400)<=1",
+  "extended_growth": 617,
+  "normal_stencil_negative_control": "frozen outgoing scalar transport exact exponential modes, normalized second derivative limit 2 rather than 1; not original full pulse",
+  "scope": "Locally executed exact SymPy/Fraction identities, same-stage rational receiver test, prior sufficient stability extension constants and exact causal clock margins. Source-level analytic argument separate. No CI, native kernel, actual source-on evolution, original raw direct stencil acceptance, independently replayed continuum sign or physical authority."
+}

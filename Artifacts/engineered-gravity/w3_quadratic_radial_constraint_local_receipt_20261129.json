@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-29",
+  "programme": "W3.1 same-action original TOV nonlinear Euler boundary and quadratic radial Einstein constraint",
+  "scope": "source-equivalent locally executed scripts; literal GitHub committed file bytes NOT independently executed",
+  "checks": [
+    {
+      "path": "scripts/check_tov_euler_moving_gradient_repair.py",
+      "result": "PASS",
+      "scope": "exact nonlinear scalar EL surface trace, moving material level-set inverse, smooth polynomial interior lift",
+      "local_equivalent": "/mnt/data/w3_wall_gradient.py",
+      "physical_paid": false
+    },
+    {
+      "path": "scripts/check_tov_quadratic_constraint_ritz.py",
+      "result": "PASS",
+      "scope": "exact original constitutive action differentiation, radial Einstein mass ODE integrating-factor Schur closure and quadratic Euler wall trace",
+      "local_equivalent": "/mnt/data/w3_radial_constraint.py",
+      "physical_paid": false,
+      "grid_results": [
+        {
+          "n": 256,
+          "k": 0.000213368381677,
+          "mass_wall": 0.00000163275011752,
+          "max_ode_residual": 5.9e-9
+        },
+        {
+          "n": 512,
+          "k": 0.000213368513221,
+          "mass_wall": 0.00000163287797835,
+          "max_ode_residual": 1.52e-9
+        },
+        {
+          "n": 1024,
+          "k": 0.000213368546108,
+          "mass_wall": 0.00000163290994426,
+          "max_ode_residual": 3.85e-10
+        }
+      ],
+      "parameters": {
+        "lambda": 0.1,
+        "coordinate_speed": 0.02
+      },
+      "additional_fixture_pass": [
+        "lambda=0.05,speed=0.02,n=256",
+        "lambda=0.2,speed=0.02,n=256",
+        "lambda=0.1,speed=0.04,n=256"
+      ],
+      "wall_trace_abs_max": 1e-12,
+      "independent_source_derivative_check": true
+    }
+  ],
+  "commit_refs": {
+    "surface_gradient": "ecf5137567127fc5aa756cfe731c4a9e2244a105",
+    "radial_constraint": "5226e8e16d368ac43eedf4d21758a907bd8e0902",
+    "roadmap": "a4863b4cf09edb159bfdcd07a1ba3b7a9cb797e6"
+  },
+  "open": [
+    "bulk Euler time acceleration",
+    "full Einstein momentum and angular evolution",
+    "nonlinear corrected source-compatible material action",
+    "proper clock, Israel GHY and corner boundary",
+    "native F8/G3/G4",
+    "physical receivers and empirical 1g controls"
+  ],
+  "ci_used": false,
+  "aggregate_runner_executed": false,
+  "physical_proof_complete": false
+}

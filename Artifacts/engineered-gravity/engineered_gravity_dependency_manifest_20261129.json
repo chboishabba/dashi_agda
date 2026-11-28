@@ -1,0 +1,579 @@
+{
+  "schema": "engineered-gravity-proof-dag-v1",
+  "authority": "A listed owner is a constructor, not a proof or physical source receipt",
+  "stages": [
+    "S0_source",
+    "S1_constraints",
+    "S2_interface",
+    "S3_evolution",
+    "S4_receiver",
+    "S5_certification"
+  ],
+  "lanes": {
+    "A_shielding": {
+      "owner": [
+        "scripts/check_kk_same_action_stress.py",
+        "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+        "scripts/check_engineered_gravity_nonlinear_shell.py"
+      ],
+      "unpaid": [
+        "physical material susceptibility and conserved stress",
+        "Earth source scalar/tensor junction",
+        "neutral clock/tide versus support and EM pickup"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "B_bulk": {
+      "owner": [
+        "scripts/check_engineered_gravity_hopf_axial_trajectory.py",
+        "scripts/check_engineered_gravity_g3_harmonic_receiver.py"
+      ],
+      "unpaid": [
+        "original full spacetime same-event null path",
+        "constraint-compatible physical causal boundary",
+        "converged receiver with source backreaction"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "C_radion": {
+      "owner": [
+        "scripts/check_kk_casimir_bidi_consumer.py",
+        "scripts/check_kk_radion_spherical_match.py",
+        "scripts/check_engineered_gravity_source_receiver_inverse.py"
+      ],
+      "unpaid": [
+        "physical complete KK action and stabilized source",
+        "curved matched Earth/material configuration",
+        "fifth-force and clock/tide physical budgets"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "D_active_stress_TOV": {
+      "owner": [
+        "scripts/check_engineered_gravity_tov_material.py",
+        "scripts/check_tov_covariant_matter_hessian.py",
+        "scripts/check_tov_polar_ritz_search.py",
+        "scripts/check_tov_second_israel_shape.py",
+        "scripts/check_tov_two_face_canonical_second.py"
+      ],
+      "unpaid": [
+        "second-order bulk Einstein Cauchy source and solution",
+        "GHY/corner and moving graph-domain Hessian",
+        "full free-metric nonlinear branch and physical receiver"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "E_coherent_OCT369": {
+      "owner": [
+        "scripts/check_oct369_p024_dynamic_controller_ward.py",
+        "scripts/check_engineered_gravity_shell_compliance.py"
+      ],
+      "unpaid": [
+        "same-state microscopic Hamiltonian/current/stress",
+        "Maxwell-metric-controller joint evolution",
+        "calibrated independent gravity discriminator"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "F_EM_GW": {
+      "owner": [
+        "scripts/check_f8_quadratic_einstein.py",
+        "scripts/check_f8_full_pair_source.py"
+      ],
+      "unpaid": [
+        "original Maxwell/material source work and support",
+        "fully retarded sourced Einstein metric",
+        "static vs radiative neutral receiver"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G_warp_junction": {
+      "owner": [
+        "scripts/check_f8_gauss_israel_energy_weld.py",
+        "scripts/check_f8_two_level_israel_trace_closure.py",
+        "scripts/check_tov_two_face_canonical_second.py"
+      ],
+      "unpaid": [
+        "same-object physical moving source/geometry",
+        "uniform curved differentiated boundary/glancing estimate",
+        "global exterior observer and energy conditions"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "H_lift": {
+      "owner": [
+        "scripts/check_engineered_gravity_source_receiver_inverse.py",
+        "scripts/check_engineered_gravity_l4_budget.py"
+      ],
+      "unpaid": [
+        "actual apparatus EM work/reaction",
+        "independent neutral free-fall/clock/tide",
+        "measured source/calibration uncertainty"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "I_hybrid": {
+      "owner": [
+        "scripts/check_engineered_gravity_shell_ward_hessian.py",
+        "scripts/check_engineered_gravity_shell_compliance.py",
+        "scripts/check_kk_same_action_stress.py"
+      ],
+      "unpaid": [
+        "physical same-source orientation/support",
+        "a posteriori continuum branch bound",
+        "Einstein observer and total work ledger"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "J_F8": {
+      "owner": [
+        "scripts/run_f8_p0_integrated_local.py",
+        "scripts/check_f8_p0_original_same_clock_state.py",
+        "scripts/check_f8_quadratic_einstein.py"
+      ],
+      "unpaid": [
+        "original source-hash-pinned native same-time capture",
+        "full scalar/vector/TT Israel constrained response",
+        "96 signed receiver and causal-null continuum"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G3_vacuum": {
+      "owner": [
+        "scripts/check_engineered_gravity_g3_harmonic.py",
+        "scripts/check_engineered_gravity_g3_harmonic_receiver.py"
+      ],
+      "unpaid": [
+        "physical subsidiary constraints and boundary",
+        "same-event invariant matched observer",
+        "PDE continuation/convergence"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G4_Einstein_RMHD": {
+      "owner": [
+        "scripts/check_engineered_gravity_g3_harmonic.py",
+        "scripts/check_f8_material_momentum_frame_weld.py"
+      ],
+      "unpaid": [
+        "York physical matter initial data",
+        "nonlinear coupled Einstein-RMHD energy/entropy",
+        "matched source-receiver convergence"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    }
+  },
+  "donor_prs": {
+    "1291": "indexed hyperfabric",
+    "1527": "F8 nonlinear source",
+    "1537": "common field/source boundary",
+    "1554": "BR230/232 G4 primitive, BR263-267 boundary, BR268-276 Maxwell/ADM",
+    "1555": "signed solar-vortex MHD"
+  },
+  "cross_lane_shared_welds": {
+    "ward_source": [
+      "A_shielding",
+      "C_radion",
+      "E_coherent_OCT369",
+      "F_EM_GW",
+      "I_hybrid"
+    ],
+    "constrained_Einstein": [
+      "B_bulk",
+      "D_active_stress_TOV",
+      "G_warp_junction",
+      "J_F8",
+      "G3_vacuum",
+      "G4_Einstein_RMHD"
+    ],
+    "moving_two_face": [
+      "D_active_stress_TOV",
+      "G_warp_junction",
+      "J_F8"
+    ],
+    "same_event_receiver": [
+      "A_shielding",
+      "B_bulk",
+      "C_radion",
+      "D_active_stress_TOV",
+      "E_coherent_OCT369",
+      "F_EM_GW",
+      "G_warp_junction",
+      "H_lift",
+      "I_hybrid",
+      "J_F8",
+      "G3_vacuum",
+      "G4_Einstein_RMHD"
+    ]
+  },
+  "w1_source_boundary_welds": {
+    "tov_mass_traction_israel": {
+      "lanes": [
+        "D_active_stress_TOV"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_spherical_source_israel_abi.py",
+      "scope": "exact static/polar-areal spherical Einstein mass+radial traction to Israel K; dynamic velocity, GHY and metric open",
+      "source_equation": "m_prime=4pi*r^2*rho; nu_prime=(m+4pi*r^3*p_r)/(r^2*(1-2m/r))",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "5f577ec1fc071edc37b1195c91a49ad09954d755"
+    },
+    "reciprocal_controller_ward": {
+      "lanes": [
+        "A_shielding",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+      "checker": "scripts/check_engineered_gravity_reciprocal_controller_ward.py",
+      "scope": "signed static radial G(X) flux, geometric dilution, nonzero controller work; physical action embedding and Einstein open",
+      "source_equation": "r^2 G(X) u_prime=q; T_rr_prime+4*T_rr/r=-(1/2)u_prime^T G_X u_prime X_prime",
+      "physical_paid": false,
+      "source_git_blob_sha1": "e0faa5cf1cd543c5c49a9845a0a8bee09c7ba67d",
+      "checker_git_blob_sha1": "25d79cd6c6194034d06c0b32f8414f5f6b962256"
+    },
+    "maxwell_source_work": {
+      "lanes": [
+        "E_coherent_OCT369",
+        "F_EM_GW",
+        "H_lift",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_maxwell_source_work_abi.py",
+      "checker": "scripts/check_engineered_gravity_maxwell_source_work_abi.py",
+      "scope": "Standalone sourced Maxwell polarization/J-work mathematical model only; NO original apparatus current, F8 triad or MHD current admitted; physical source owner missing, Einstein response open",
+      "source_equation": "partial_t((E^2+B^2)/2)+partial_x(E B)=-J E",
+      "physical_paid": false,
+      "physical_source_owner": null,
+      "source_git_blob_sha1": "6f9f5608e5e91d70c88589f4614f5fa5a02f1e51",
+      "checker_git_blob_sha1": "6f9f5608e5e91d70c88589f4614f5fa5a02f1e51"
+    },
+    "f8_israel_current": {
+      "lanes": [
+        "J_F8"
+      ],
+      "source_owner": "scripts/check_f8_full_pair_source.py",
+      "checker": "scripts/check_f8_current_israel_reciprocal_weld.py",
+      "scope": "original F8 master/Israel flux donor, same-clock native sidecar and full moving trace unpaid",
+      "source_equation": "original GN Israel source and reciprocal master flux",
+      "physical_paid": false,
+      "source_git_blob_sha1": "647269cb54d332f8e021eedeb2f5965088e64198",
+      "checker_git_blob_sha1": "011023f65649b64d507294598de77349991ee134"
+    },
+    "g3_harmonic_receiver": {
+      "lanes": [
+        "B_bulk",
+        "G3_vacuum"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_g3_harmonic.py",
+      "checker": "scripts/check_engineered_gravity_g3_harmonic_receiver.py",
+      "scope": "harmonic reduced Einstein comparator, not physical constraint propagation/causal domain",
+      "source_equation": "reduced Ricci=0 plus independent subsidiary constraints",
+      "physical_paid": false,
+      "source_git_blob_sha1": "6c6ab7ee9ecdd6a723f6caf0797dfa8c090744a6",
+      "checker_git_blob_sha1": "e634f687e0e6adb9785ba3318e10ac4a1b52effd"
+    },
+    "g4_curved_frame": {
+      "lanes": [
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_f8_material_momentum_frame_weld.py",
+      "checker": "scripts/check_hopf369_br268_273_endpoint.py",
+      "external_checker_pr": 1554,
+      "scope": "external donor curved primitive stress; not in #1547 checkout nor a coupled Einstein-RMHD solution",
+      "source_equation": "ADM frame transformed RMHD stress",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a9c921903fa207addc13458188dd299e4bdfcf39",
+      "checker_git_blob_sha1": "6bf3f5e0be64db624ccf7c6e2b8c8c7c731ae142",
+      "external_checker_head": "888859ed04881def4d23adf65865ab5316878a31"
+    },
+    "reciprocal_interface_traction": {
+      "lanes": [
+        "A_shielding",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+      "checker": "scripts/check_engineered_gravity_reciprocal_interface_traction.py",
+      "scope": "original static radial reciprocal two-face traction and sourced support; physical wall/controller absent",
+      "source_equation": "[Trr]=q1(Xplus-Xminus)(2q2+q1(Xplus+Xminus))/(2r^4); sheet=-[Trr]",
+      "physical_paid": false,
+      "source_git_blob_sha1": "e0faa5cf1cd543c5c49a9845a0a8bee09c7ba67d",
+      "checker_git_blob_sha1": "f1d2a1f19972366e38561b6c6c83874f1731b74d"
+    }
+  },
+  "w2_boundary_packets": {
+    "moving_tov_timelike": {
+      "lanes": [
+        "D_active_stress_TOV"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_moving_timelike_israel_abi.py",
+      "scope": "exact moving timelike proper-time spherical shell with static polar-areal metrics per face, mass-continuous Einstein source; no dynamic metric/GHY",
+      "source_equation": "Delta_Ktau=4*pi*r*((f+v^2)*pr+v^2*rho)/(f*sqrt(f+v^2))",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "16ce2ab9c3f903974a9bf4bdff181a04bacc484c"
+    },
+    "three_source_reverse": {
+      "lanes": [
+        "A_shielding",
+        "D_active_stress_TOV",
+        "E_coherent_OCT369",
+        "F_EM_GW",
+        "H_lift",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_boundary_packet_w2.py",
+      "checker": "scripts/check_engineered_gravity_boundary_packet_w2.py",
+      "scope": "three distinct typed symbolic boundary inverses; no common physical material/device or coupled Einstein dynamics",
+      "source_equation": "TOV Ktheta -> mass; Ktau rank-1(p,rho); reciprocal traction -> support; Maxwell energy balance -> J only when E!=0",
+      "physical_paid": false,
+      "source_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c",
+      "checker_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c"
+    },
+    "dynamic_tov_flux_israel": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_dynamic_flux_israel_abi.py",
+      "scope": "spherical nonstationary polar-areal Einstein mass/pressure/energy-flux source to moving normal Israel, same boundary N/f; no full Einstein matter evolution or free GHY",
+      "source_equation": "Delta_Ktau=(4*pi*r)/(f*sqrt(f+v^2))*((f+v^2)*p_r+v^2*rho-2*v*sqrt(f+v^2)*j)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76"
+    },
+    "mass_flux_surface": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_mass_flux_surface_closure.py",
+      "scope": "Original Einstein mass radial/time integrability, moving mass continuity and no-shell Israel jointly determine wall radial flux and pressure. Necessary spherical source admissibility only, not full Einstein-matter evolution.",
+      "source_equation": "m_r=4*pi*r^2*rho, m_t=-4*pi*r^2*N*sqrt(f)*j; moving vacuum wall requires j=rho*v/sqrt(f+v^2), p_r=rho*v^2/(f+v^2)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "df20eed79509be852151ce1f38c656130b44ffe9"
+    },
+    "wall_frame_stress_inverse": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_tov_dynamic_flux_israel_abi.py",
+      "checker": "scripts/check_tov_wall_frame_stress_inverse.py",
+      "scope": "Exact 1+1 orthonormal wall-frame stress and inverse zero-normal-flux/traction condition, signed velocity, rank-one source. Tangential stresses and full 3+1 boundary are not identified.",
+      "source_equation": "T_nn=T_un=0 iff j=rho*v/sqrt(f+v^2), p_r=rho*v^2/(f+v^2); rho*p_r=j^2",
+      "physical_paid": false,
+      "source_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76",
+      "checker_git_blob_sha1": "b27efd0f5110228955276a99801675027faa97a9"
+    },
+    "moving_constraint_family": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G3_vacuum",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_moving_constraint_family.py",
+      "scope": "Constructive nonstationary radial mass/lapse-slope density and pressure shape with exact original TOV static limit, zero surface source and Schwarzschild spatial matching. Off-original-constitutive-action and unsolved angular Einstein/matter dynamics.",
+      "source_equation": "m(t,r)=alpha/2*((r/R)^3/3-(r/R)^5/5); rho=alpha*(1-(r/R)^2)/(8pi R^3); j=rho*r*R_t/(R*N*sqrt(f))",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "23f2f03c33300c59a15d648698201220f76c6f5d"
+    },
+    "original_material_flux_weld": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_original_material_flux_weld.py",
+      "scope": "Original repaired covariant a,d,V matter stress/j compared to constructed moving radial Einstein mass profile at first velocity order; strict bulk obstruction to uniform label scaling and smooth reverse material velocity; material Euler/Einstein evolution still open.",
+      "source_equation": "j_action=(rho+p_r)*r*Sdot/(N*sqrt(f)); j_mass=rho*r*Sdot/(N*sqrt(f)); mismatch=p_r*r*Sdot/(N*sqrt(f)); Y_t_required=-(lambda+2)*r*Sdot/(lambda+1+r^2)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af"
+    },
+    "original_euler_firstjet": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_tov_original_material_flux_weld.py",
+      "checker": "scripts/check_tov_original_euler_firstjet_weld.py",
+      "source_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af",
+      "checker_git_blob_sha1": "c7ee43c76d864b3490638599f5a33600fc3194ec",
+      "physical_paid": false,
+      "scope": "Original repaired material action first time jets: radial mass flux and density time derivative exactly match the prescribed scaled Einstein mass profile, but scaled radial-pressure profile is incompatible; original action pressure demands lapse-gradient correction. Full material Euler acceleration and angular Einstein evolution open.",
+      "source_equation": "Y_t=-r*(lambda+2)/(lambda+1+r^2)*Sdot; rho_t=alpha*(-3+5r^2)*Sdot/(8pi); delta(nu_r)_t=4pi*r*(p_action,t-p_scaled,t)/f0"
+    },
+    "original_euler_frozen_surface": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_original_euler_boundary_obstruction.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "76648b5dd7bbb3900753041aaa4dc9511f474a7c",
+      "physical_paid": false,
+      "scope": "Restricted EXACT frozen undeformed Y=r, f=f0,N=N0 slice with nonzero reverse-solved Y_t and bounded Y_tt, N_t, f_t: nonlinear material Euler residual persists at wall. O(v^2) corrected initial spatial and metric geometry explicitly untested.",
+      "source_equation": "ELwall=-225*lambda*(lambda+2)*Sdot^2/[8pi(2lambda^2+4lambda-15)^2] !=0; bounded acceleration coefficient d(1)=0"
+    }
+  },
+  "w3_original_action_boundary": {
+    "surface_gradient_repair": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_euler_moving_gradient_repair.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "c9d167e6b5ff8a5287d82365070cbc80292f8661",
+      "physical_paid": false,
+      "scope": "Exact nonlinear Euler degenerate surface trace gives f Yr²-Yt²/N²=f0_wall, and moving level set fixes Yr. No global bulk Euler/Einstein or GHY.",
+      "source_equation": "Yr_wall²=f0_wall/(f_wall-Rt_coordinate²/N_wall²)"
+    },
+    "quadratic_mass_constraint": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_tov_original_material_flux_weld.py",
+      "checker": "scripts/check_tov_quadratic_constraint_ritz.py",
+      "source_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af",
+      "checker_git_blob_sha1": "ff263d3e89ed9754428c6fa2d3aa68a138262af5",
+      "physical_paid": false,
+      "scope": "Original-action radial density O(v²) plus Einstein mass constraint and corrected Euler wall trace; finite-volume 256/512/1024 candidate, not angular Einstein/fully coupled evolution.",
+      "source_equation": "M2'+8pi*r*d0*M2=4pi*r²(k*A+d0*U²/N0²), k=(M2_wall+U_wall²/(2*N_wall²))/f0_wall"
+    },
+    "bulk_euler_acceleration": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_bulk_euler_acceleration_inverse.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "969467be871bdd4270f32f9710e21e40655261b4",
+      "physical_paid": false,
+      "scope": "Exact radial original a,d,V material Euler differential operator and conditional unique interior Ytt inverse; degeneracy d(1)=0 and wall trace separate. Actual compatible Einstein lapse time jet and evolution unpaid.",
+      "source_equation": "EL=2*d(Y²)*Ytt/N²+S[Y,Yr,Yrr,Yt,f,N,fr,ft,Nr,Nt]; Ytt=-N²*S/(2*d) for d>0"
+    },
+    "nonlinear_radial_shooting": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_nonlinear_einstein_euler_shooting.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "02d093ed72631fc65fee01a0d162820b1ed3e39c",
+      "physical_paid": false,
+      "scope": "Original-action fully nonlinear spherical radial Einstein mass/lapse constraints and exact degenerate Euler wall trace solved by two-parameter shooting; finite grid 120/240/480. Interior Euler acceleration computed conditioned on Nt=0 at instant, not the actual Einstein lapse time evolution. No full coupled Einstein PDE/GHY. Independent angular Einstein f_tt vs differentiated momentum f_tt converges quadratically in radial mesh; gauge Nt coefficient cancels, full evolution still unpaid.",
+      "source_equation": "m_r=4*pi*r²*rho_original[Y,Yr,Yt,f,N]; N_r/N=(m+4*pi*r³*p_original)/(r²*f); wall N²=f and f*Yr²-Yt²/N²=f_original_wall"
+    },
+    "angular_einstein_timejet": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G3_vacuum"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_angular_einstein_timejet.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "4e4faf77145169fcee5b23c090acdf54dc1f878c",
+      "physical_paid": false,
+      "scope": "Original anisotropic TOV angular Gtheta=8pi p_t via exact 2+2 warped-product Ricci, unique ftt coefficient and cancelling lapse-time gauge term in time differentiated momentum. Mathematically exact identity; not solution of full Einstein PDE.",
+      "source_equation": "Gtheta=(f*Nrr/N+Nr*fr/(2N)+f*Nr/(r*N)+fr/(2r))+ftt/(2N²f)-3ft²/(4N²f²)-Nt*ft/(2N³f)=8pi*p_t"
+    }
+  }
+}

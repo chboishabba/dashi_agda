@@ -1,0 +1,49 @@
+{
+  "predecessor": "60e082eebfbcd52f0a7cd14a7b9534c52a945c4a",
+  "scope": "Original prescribed-source linear TT same-reference continuum metric, Israel, Weyl, axial projection and modal distributional layer jump. Analytic identities with SymPy checks, conditional on inherited smooth reference and signed cap bounds. Not discrete G1-G6 authority, nonlinear physical source or native proof kernel.",
+  "script": {
+    "commit": "98e33afba933a3d7bc83790bc6b02fd07ba82054",
+    "blob": "9d33edb40468a6a93c8987faf25474e24b70fd49",
+    "initial_commit": "5a1835dd39c3e6a2d1f13a46253712bcc9e9eda9"
+  },
+  "checks": {
+    "bulk_checks": 726,
+    "bulk_background_riemann": 625,
+    "brane_checks": 56,
+    "wall_checks": 26,
+    "layer_checks": 3,
+    "total_counted": 811,
+    "extra_TT_assertions_not_counted": true
+  },
+  "owners": {
+    "sameObject": "6e0f9e8871f1bbe306bcbc7f4b08ead5f883a806",
+    "prepotential": "e00d0a6c519047697b69c407d9e2527493cba930",
+    "atlas": "ade340f6b31a68014827a71f0e607e8c742ae9af",
+    "israel": "3c0dd02a2cd0ca85d6a5e83e1fb523fab3b0cbcc",
+    "linearWeyl": "cacbedbae0759844375d5e87026e8da18cc97db9",
+    "sourceFree": "e4e40ced8551cddb74b0e78f0bf0e9c5196839ba",
+    "defect": "23c101c4ad91b3ddce8c3db6eb7001c075a08197",
+    "nativeReceiver": "044f76378e7e99357427f73a1ac5ee3f26a2c0dc",
+    "reference": "2ff54afd20939472a9a10f3ff4a17daebd36bd96"
+  },
+  "conclusion": {
+    "background": "Ric=-4g, R^a_bcd=-(delta^a_c g_bd-delta^a_d g_bc)",
+    "linearBulk": "delta(Ric+4g)_ij=-(box5 h_ij-3/z h_ij,z)/2",
+    "wall": "delta K^i_j=n(h^i_j)/2=-3 pi^i_j",
+    "electric4": "-b^2(h_etaeta+Delta h)/4",
+    "electric5": "b^2[-normalJet/(2s)+box5 h/6]",
+    "smsDefect": "E5-SMS=-(b+b^3/2)G-b^2 L/3",
+    "axialAverage": "diag(0,1,-1)*(kx^4+6 |k|^2 kx^2+|k|^4)/8",
+    "layer": "F/2=int[(K_xi-v K_tau+3K/(2b))F-K b^(-3/2)g] ds",
+    "conditionalE4": "previous signed interval transfers to original induced geometric linear electric Weyl yy contraction under the inherited assumptions; no independent full tilted-bound replay",
+    "SMS": "geometrically identified with normal electric Weyl in source-free window, sign remains open"
+  },
+  "execution": "Local independent SymPy execution printed 726+56+26+3 counted equalities. First wall acceleration test used covariant K_tau_tau sign instead of mixed K^tau_tau; corrected before accepted run. First remote file had an extra blank line; corrected and exact git hash-object match verified. No full checkout, CI, proof kernel, numerical trajectory, or matter detector.",
+  "prHeads": {
+    "1291": "03067d08a6736e4cef1f9740d43ccd5af82cd9e2",
+    "1527": "d19a9525968ec2fee92a6e3f73027df05396d497",
+    "1537": "76913b4efaa71cd16be1466f01d6744a5657f86b",
+    "1546": "5a6bc0c02ed89ba278993cdb4b32c92e62faedb8",
+    "1554": "06ce2150d0ce01ac61f4cd701bd6245b7c38a2c6"
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "scope": "D3.5g full six-channel fused step parity, completed medium ledger full-clock forward, and partial fine ledger continuation; not full D3.5 paired-grid reverse or convergence acceptance",
+  "base": "cf5866d08528a17287a4036e957e0092a26b8ec3",
+  "ci": "No CI invocation or rerun. All commits [skip ci].",
+  "local": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "numba": "0.65.1",
+    "blas_threads": 1,
+    "numba_threads": 4,
+    "source_recovery": "Byte-identical donor files recovered through connector; F clock formula reconstructed, unused mode3 entry raises; no full checkout.",
+    "blobs": {
+      "weighted4": "982ce42a579907daf314c18d60da7cf0ceb88d0e",
+      "fv_source": "dec4e79e3a4899952a5deceb786324bc0745982c",
+      "signed_stage": "8ce8026051bcb3d6f0c53745cbd942c091c59389",
+      "raw_receiver": "044f76378e7e99357427f73a1ac5ee3f26a2c0dc",
+      "window": "986d4d537c13e5734c143a99b9b32846b34924b8",
+      "shrinking_jet": "304af9337ab434363954c111c67b9f68174607b0",
+      "shrinking_injection": "d9cde6f1de6dfdec92a12b168212593943377b12",
+      "fused_step": "3ce4af396d7a61efa50fc8b5b43c0a03b26a6186",
+      "fused_checker": "3255631a9d219d79d03a1a1bec028daa88730b2d",
+      "fused_forward": "3b7bc0f9dce13f311b4330cbb92bdb17e26d9dca"
+    }
+  },
+  "fused_parity": {
+    "cases": 18,
+    "bitwise_equal": 18,
+    "max_scaled_error": 0,
+    "grids": [
+      [
+        13,
+        5
+      ],
+      [
+        378,
+        337
+      ],
+      [
+        503,
+        449
+      ]
+    ],
+    "routes": [
+      "ledger",
+      "paired"
+    ],
+    "physical_clocks": [
+      1,
+      2,
+      12
+    ],
+    "source_amplitude": 0.23,
+    "fastmath": false,
+    "limitation": "One-step random projected fixture parity plus each resumed actual receipt state; no claim universal floating-point equivalence or full uninterrupted original-step replay."
+  },
+  "clock": {
+    "nt": 4516,
+    "end": 4517,
+    "dt": 0.0005999023910881472,
+    "receiving_t": 12,
+    "lookahead_t": 12.00717612182339
+  },
+  "receiver_order": [
+    "E4",
+    "legacy4",
+    "direct",
+    "SMS",
+    "F",
+    "R"
+  ],
+  "window_order": [
+    "E4",
+    "SMS"
+  ],
+  "multipoles": [
+    0,
+    2,
+    4
+  ],
+  "positions": [
+    "near",
+    "far"
+  ],
+  "rx": [
+    2.5373657609619378,
+    2.649365760961938
+  ],
+  "delta": 0.06,
+  "medium": {
+    "route": "ledger",
+    "nr": 378,
+    "ny": 337,
+    "complete": true,
+    "anchor": "72431a0df628ab96bdd7dc4b04bf13a150c6dadc9ceee9dfc8a2cfef38cb1235",
+    "chunks": [
+      [
+        200,
+        600,
+        2.9685267827628066e-15,
+        "60055476631b5409582d61e08c243be7f977c47bb9b2455b0440815c7756d9b5",
+        14.108263125999883
+      ],
+      [
+        600,
+        1010,
+        7.435389426117337e-15,
+        "bf1f3135e6df5ded0989ae4fa7fa0ff9c26382fbde6e9347704302928c16e8f0",
+        15.102497792000122
+      ],
+      [
+        1010,
+        1459,
+        6.520717644001769e-15,
+        "b3128afacb22c0e43b6242bd60616ee268d683b7e3659b90926b6407c1d70764",
+        18.11002297899995
+      ],
+      [
+        1459,
+        2050,
+        1.3727472186466952e-14,
+        "bd3a657d39ea731c56d5f3566050b33271f8893f9247e258c69017dd92154ec8",
+        17.098782763000145
+      ],
+      [
+        2050,
+        2841,
+        1.4307218500581438e-14,
+        "e3f8b72079068dc3bd6db7267c32eb7c764d7536bf8e37d1a8a8f64d034946ea",
+        17.076968889
+      ],
+      [
+        2841,
+        3705,
+        1.273469460793452e-14,
+        "13a022daafaeaae30d8d7d0e8182ee44d9a356d9663e34c50f40175e050cd9c2",
+        17.09650630400006
+      ],
+      [
+        3705,
+        4517,
+        1.37155583753728e-14,
+        "897104a8e14e8ab101d0bf1e69defc0c2423507298a6cee1a450dbcd2ef550a3",
+        17.561484606000022
+      ]
+    ],
+    "raw": [
+      [
+        [
+          0.0000033636039541753282,
+          -0.0000284360868937543,
+          -0.000001095157998376249
+        ],
+        [
+          0.0000034082326381931657,
+          -0.000028177597537241473,
+          -0.0000010866799903179928
+        ],
+        [
+          2.966312291113784e-9,
+          -0.0000020150895539397713,
+          -6.567933722960265e-8
+        ],
+        [
+          2.5119396730797616e-8,
+          -0.0000020731246468382665,
+          -7.087168109685706e-8
+        ],
+        [
+          2.1354138619017662e-7,
+          0.000004748561150648203,
+          1.6934485411480723e-7
+        ],
+        [
+          0.0000018559499018119818,
+          -0.0001966129316993137,
+          -0.000008360675405553325
+        ]
+      ],
+      [
+        [
+          -1.918581958276254e-7,
+          -9.16052788553596e-7,
+          -3.2665467343930854e-8
+        ],
+        [
+          -1.932298667094149e-7,
+          -9.240256236899289e-7,
+          -3.297854710284398e-8
+        ],
+        [
+          -2.2224693176280553e-8,
+          -1.0819048420209176e-7,
+          -3.892988571047805e-9
+        ],
+        [
+          -6.278241470846556e-9,
+          -3.020269114252416e-8,
+          -1.0377779564583784e-9
+        ],
+        [
+          -5.890731073997397e-8,
+          -3.131653053409993e-7,
+          -1.1595617437039037e-8
+        ],
+        [
+          0.000009016893737229226,
+          0.00004500382325717603,
+          0.0000016523426654156453
+        ]
+      ]
+    ],
+    "window": [
+      [
+        [
+          -1.325819614476896e-7,
+          -4.6974241595739265e-7,
+          -1.613966881846386e-8
+        ],
+        [
+          -4.321418762654663e-9,
+          -1.4836658521228844e-8,
+          -4.891485963937315e-10
+        ]
+      ],
+      [
+        [
+          -1.3642758038567398e-10,
+          -1.048070549148085e-9,
+          -4.3799120447573195e-11
+        ],
+        [
+          -3.2876106395533562e-12,
+          -2.409667226179419e-11,
+          -9.356335275414881e-13
+        ]
+      ]
+    ],
+    "shrink": [
+      [
+        [
+          7.040975663521812e-7,
+          -1.0144489927551476e-7,
+          -2.1742305430050984e-8
+        ],
+        [
+          7.053834700464862e-7,
+          -4.210884572715467e-8,
+          -1.9778627542104787e-8
+        ],
+        [
+          1.342161537422419e-7,
+          3.375482565810769e-7,
+          7.843584349623495e-9
+        ],
+        [
+          1.5309641122869667e-8,
+          -5.021723462386604e-7,
+          -1.8628147147382962e-8
+        ],
+        [
+          -0.0000028285892964711587,
+          -0.000022280297018736378,
+          -7.00182795998707e-7
+        ],
+        [
+          0.000050806447657015536,
+          0.0004365710202576885,
+          0.000013685346718686463
+        ]
+      ],
+      [
+        [
+          -4.60911188965048e-8,
+          -2.4270972725815415e-7,
+          -8.903775483674655e-9
+        ],
+        [
+          -4.640894174245093e-8,
+          -2.446340383827525e-7,
+          -8.980178109819761e-9
+        ],
+        [
+          -3.8741018597857616e-9,
+          -2.118390642308742e-8,
+          -7.832507521577388e-10
+        ],
+        [
+          -1.6817322869396412e-9,
+          -7.884433928539044e-9,
+          -2.7836948364026854e-10
+        ],
+        [
+          7.25525745513264e-8,
+          4.33699552246539e-7,
+          1.6438105745240665e-8
+        ],
+        [
+          -0.0000016355228377990009,
+          -0.000009697648409144355,
+          -3.6721398952638564e-7
+        ]
+      ]
+    ]
+  },
+  "fine": {
+    "route": "ledger",
+    "nr": 503,
+    "ny": 449,
+    "complete": false,
+    "anchor": "ef331e84476834a17e648998042034d24300817f5e03dcccc611c0134500d5ec",
+    "chunks": [
+      [
+        200,
+        452,
+        4.714975995585117e-15,
+        "bcbacb15bf131dd3fe34cb6a8f0abca209660125161c9d85b605f70d0968a4f5",
+        17.178862664000007
+      ],
+      [
+        452,
+        754,
+        8.362840325632571e-15,
+        "fdcb4e2cc26d0ffcaecd130c44acd09bf99d9ba02e07549a42b2eb44a465a0eb",
+        17.17854301400007
+      ],
+      [
+        754,
+        981,
+        9.517943823030797e-15,
+        "ea1ea12014cc7030695b0b58a3e97a39dadb1d628c7fc30fc9a835d6ef1c2cbc",
+        16.17331749999994
+      ]
+    ],
+    "physical_t": 1.5810531247690278
+  },
+  "chunk_columns": [
+    "start",
+    "end",
+    "max_scaled_constraint",
+    "endpoint_sha256",
+    "seconds_in_propagation_and_checkpoint_loop"
+  ],
+  "limitations": [
+    "Original postsource checkpoint anchor verified against committed step200 receipt; subsequent diagnostic checkpoints authenticate state and receiver arrays and source/code identity; only latest state retained, not D3.5 paired anchors.",
+    "Medium ledger has completed original t12 plus lookahead. Fine ledger and both paired trajectories incomplete; do not infer medium/fine convergence.",
+    "Per-mode observation arrays transcribed from actual local JSON. No full production reverse ledger, numerical causal-null, kernel or physical acceptance.",
+    "Current D3.5 --fused option source-written, not executed end-to-end."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-29",
+  "scope": "W2.5/W2.6 local SymPy source-equivalent, not literal committed source/aggregate checkout",
+  "checks": [
+    {
+      "path": "scripts/check_tov_original_euler_firstjet_weld.py",
+      "status": "PASS_SOURCE_EQUIVALENT",
+      "committed_git_blob": "c7ee43c76d864b3490638599f5a33600fc3194ec",
+      "result": "Original material Y_t solves Einstein mass flux and density time derivative; prescribed scaled radial pressure incompatible; required lapse-gradient time jet regular with centre/surface zero",
+      "example_pressure_gap": "77053/(5043840*pi) at r=1/2, lambda=1/10, Sdot=1",
+      "open": "full time-dependent Euler, angular Einstein and free boundary"
+    },
+    {
+      "path": "scripts/check_tov_original_euler_boundary_obstruction.py",
+      "status": "PASS_SOURCE_EQUIVALENT",
+      "committed_git_blob": "76648b5dd7bbb3900753041aaa4dc9511f474a7c",
+      "result": "Nonzero surface EL residual for frozen uncorrected spatial metric and label initial data with nonzero wall velocity; bounded acceleration and first metric time jets cannot cancel",
+      "surface_EL": "-225*lambda*(lambda+2)*Sdot^2/(8*pi*(2*lambda^2+4*lambda-15)^2)",
+      "open": "O(Sdot^2) corrected original-action initial geometry and Einstein constraints"
+    }
+  ],
+  "acceptance_repair": {
+    "file": "scripts/test_engineered_gravity_proof_dag.py",
+    "commit": "521c16405b4ebedd19817a8b0fc30b7981edf2ff",
+    "finding": "Prior malformed tuple made literal negative-control runner non-executable; syntax corrected; 18 declared rejection cases, not executed in full checkout"
+  },
+  "limits": {
+    "full_repo_replay": false,
+    "original_native_f8": false,
+    "physical_proof_complete": false,
+    "cross_pr_full_sha_audit": false,
+    "github_ci": false
+  },
+  "physical_unpaid_obligations": 36
+}

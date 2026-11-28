@@ -1,0 +1,81 @@
+{
+  "predecessor": "c1e407f94fb75064ab4c9b5b8db42ddc45e71f93",
+  "scope": "Original fixed-window F8 all-frequency self/cross collar estimates and rigorous direct E4 magnitude lower. Conditional smooth-reference/layer and finite-propagation hypotheses; no total signed receiver interval.",
+  "scripts": {
+    "allFrequency": {
+      "commit": "d04da8b18e8c946d0610726638f7b9ad183b65a6",
+      "blob": "4068f5c9cc88c351f575a372eb286b39e0f5304f"
+    },
+    "crossWeight": {
+      "commit": "15f2c9c3aff806bb00048558b52d94c6d00b7211",
+      "blob": "70de150f593b2bd17fcebf72da6dc3b5fd6a10e4"
+    },
+    "directLower": {
+      "commit": "6e1cecb58328c81f7727b0ff8e82a8cf149ab8a6",
+      "blob": "cfa0a6342e78cb4e1c73aec86b541f91d433f49d"
+    }
+  },
+  "geometry": {
+    "excluded": [
+      0.0037,
+      2.6492
+    ],
+    "intervals": 24,
+    "reach_margin_lower_display": 0.000004170518554574447,
+    "emission_h": ".0037",
+    "reception_h": ".01",
+    "emission_b_lower": ".997",
+    "reception_b_lower": ".087"
+  },
+  "selfInverse": {
+    "modeBound": "2 exp(4Bh+4h(a^2 |k|)^(1/3))",
+    "rows": [
+      {
+        "collar": "E",
+        "B": "1500/997",
+        "a": "13/50",
+        "h": "37/10000",
+        "growth_constant_upper": "1517/250000",
+        "constant_exponent": "111/4985"
+      },
+      {
+        "collar": "R",
+        "B": "500/29",
+        "a": "9/100",
+        "h": "1/100",
+        "growth_constant_upper": "21/2500",
+        "constant_exponent": "20/29"
+      }
+    ],
+    "combined_C": "3617/250000",
+    "combined_constant_exponent": "102919/144565",
+    "gevrey_weight_loss": "1/100",
+    "extra_exponent_upper": "47320086113/10546875000000",
+    "combined_prefactor_upper": 12
+  },
+  "cross": {
+    "potential_upper": "2535/4",
+    "uniform_kernel_upper": "2503155504993241601315571986085849",
+    "cross_kernel_multiplier_upper": "25031555049932416013155719860858490000",
+    "cross_operator_upper_coefficient": "92616753684749939248676163485176413",
+    "cross_operator": "C_RE*(1+k^2)",
+    "source_weight": "1/5",
+    "self_weight_loss": "1/100",
+    "cross_polynomial_loss": "1/100",
+    "source_derivative_loss": "1/100",
+    "remaining_weight": "17/100",
+    "cross_polynomial_prefactor_upper": "25600000001"
+  },
+  "directLower": {
+    "cells": 7200,
+    "source_tiles": 20,
+    "receiver_tiles": 30,
+    "radial_strips": 12,
+    "lower_display": 4.536110765573154e-270,
+    "exact_lower_numerator": "4536110765573153915383864911903",
+    "exact_lower_denominator": "1e300",
+    "strict_lower": "1e-270",
+    "largest_tile_display": 2.0025231785706713e-272
+  },
+  "execution": "All three new local scripts completed and match committed script blobs. Initial symbolic factor equality tested structural rather than polynomial equivalence and failed; corrected to expand difference before accepted execution. Local Fbox helper recovered exact function only, not complete remote file. No CI, native proof kernel, new physical trajectory, or actual signed cross-collar evaluation."
+}

@@ -1,0 +1,187 @@
+{
+  "predecessor": "15b9f54e1145aea0086cc759fa10bcc2a66a6b88",
+  "scope": "Selected first/last source slabs and every target slab in original 128-slab clock, both modes. Conditional outward residual/characteristic energy, not whole source-slab matrix or receiver certificate. Different auxiliary profiles are distinct kernels; never intersect their values. Local recovered donor subsets, no full checkout, no CI or native kernel verification.",
+  "scripts": {
+    "constant": {
+      "commit": "e62a90a0b3a390ff2ff24fd7f62a3aa3c49e47ca",
+      "blob": "cf22a48808b77feb2ca6f08ce408b7d055c2bf5d"
+    },
+    "profile_adapter": {
+      "commit": "48cdfb13fc4094c13eb92811ad26b4818762006f",
+      "blob": "6e721fa3611238a8c53b0a5e7bcd3fd21f6d63cc"
+    },
+    "smooth": {
+      "commit": "fbeb16a821ff4d905127b85947e080ee32d243ae",
+      "blob": "5d4e011a8540396353df46a8247fa600352f37f6"
+    }
+  },
+  "parameters": {
+    "n": 128,
+    "h": 0.0078125,
+    "modes": [
+      1,
+      2
+    ],
+    "sources": [
+      0,
+      127
+    ],
+    "target_count_per_run": 128,
+    "distinct_mode_source_target_boxes": 512,
+    "total_evaluations": 1536,
+    "cells_per_run": 108578,
+    "source_boxes": [
+      [
+        0.08333333333099999,
+        0.08510955166900001
+      ],
+      [
+        0.9850901435119999,
+        1.0000000000030003
+      ]
+    ],
+    "upper_cutoff_crossing_counts": [
+      693,
+      1388
+    ]
+  },
+  "checks": {
+    "unique_symbolic_parameter": 9,
+    "unique_symbolic_extension": 8
+  },
+  "rows": [
+    {
+      "mode": 1,
+      "source": 0,
+      "profile": "constant",
+      "degree": 0,
+      "seconds": 14.443354061000008,
+      "max_residual": 142.74159752761634,
+      "value_error": 4.067131484833726,
+      "derivative_error": 32.845253661797884,
+      "sha256": "78618d30ff83e7d256c2f4f02abf6cf79df1e26425bd507a2c294a74b9475a17"
+    },
+    {
+      "mode": 1,
+      "source": 0,
+      "profile": "constant",
+      "degree": 2,
+      "seconds": 24.31747841500001,
+      "max_residual": 142.74159752766707,
+      "value_error": 4.14705974054143,
+      "derivative_error": 33.488453541666125,
+      "sha256": "b6f8be661365932413994f2fe168c46b7bc84941c3224b6d258b9df6648fbd03"
+    },
+    {
+      "mode": 2,
+      "source": 0,
+      "profile": "constant",
+      "degree": 0,
+      "seconds": 10.312043918,
+      "max_residual": 142.74159752757643,
+      "value_error": 4.073395782010228,
+      "derivative_error": 33.93142983148855,
+      "sha256": "49cdb31eecb19c8b81d9ba84404c7277649f5ce610570ae12e03197a7ddbad3b"
+    },
+    {
+      "mode": 2,
+      "source": 0,
+      "profile": "constant",
+      "degree": 2,
+      "seconds": 24.27747982400001,
+      "max_residual": 142.74159752757643,
+      "value_error": 4.1530625930603895,
+      "derivative_error": 34.592765113160304,
+      "sha256": "1a28959b2823d98882f19670903d7ae14a1a5a723a0b57d2508d0fc7bd516bed"
+    },
+    {
+      "mode": 1,
+      "source": 127,
+      "profile": "constant",
+      "degree": 0,
+      "seconds": 13.513456805000004,
+      "max_residual": 305.00008309240064,
+      "value_error": 9.193487782041009,
+      "derivative_error": 90.50906122274277,
+      "sha256": "a653c88c57ab747b1898f435f10452bbbcc9c2ee4d3b19e57f009afdcaf64873"
+    },
+    {
+      "mode": 1,
+      "source": 127,
+      "profile": "constant",
+      "degree": 2,
+      "seconds": 20.163145614,
+      "max_residual": 305.00008309240064,
+      "value_error": 8.924533032874297,
+      "derivative_error": 87.86046895816864,
+      "sha256": "9a625f5eedd15326488d2060281d2be036ee7c6da882efdc35ec5404e7678e2d"
+    },
+    {
+      "mode": 2,
+      "source": 127,
+      "profile": "constant",
+      "degree": 0,
+      "seconds": 9.962004285999996,
+      "max_residual": 305.000083092374,
+      "value_error": 9.200823506577029,
+      "derivative_error": 91.7167610484338,
+      "sha256": "619bc584f5a808087cf830c73837c2f8041dc9ce9e8d595079d27e26f34cec51"
+    },
+    {
+      "mode": 2,
+      "source": 127,
+      "profile": "constant",
+      "degree": 2,
+      "seconds": 18.857957315999982,
+      "max_residual": 305.0000830924079,
+      "value_error": 8.94182423769877,
+      "derivative_error": 89.13263823354487,
+      "sha256": "f2b7838821a01c18caa737258f8424e69935c0f548d646f2f5131cbaf2307485"
+    },
+    {
+      "mode": 1,
+      "source": 0,
+      "profile": "smooth_C2",
+      "degree": 2,
+      "seconds": 23.457953679000013,
+      "max_residual": 68.42361880250435,
+      "value_error": 3.771085632245946,
+      "derivative_error": 34.00443252714687,
+      "sha256": "2d93ca0747b446636050888b5affe2a815ba5fda79b1e888b68676f9313e893f"
+    },
+    {
+      "mode": 2,
+      "source": 0,
+      "profile": "smooth_C2",
+      "degree": 2,
+      "seconds": 30.466585649000024,
+      "max_residual": 69.45210436109186,
+      "value_error": 3.8154379138414543,
+      "derivative_error": 35.35752686769701,
+      "sha256": "248b08697acbe75508d0f279eb477eba76b388085d446f5507d375df3401b082"
+    },
+    {
+      "mode": 1,
+      "source": 127,
+      "profile": "smooth_C2",
+      "degree": 2,
+      "seconds": 31.032726328000024,
+      "max_residual": 939.7963775072311,
+      "value_error": 22.992026919633243,
+      "derivative_error": 250.84644797718954,
+      "sha256": "e56d5d3827345f454146505c54499520c302d92c79cceba13177cc930f1205a2"
+    },
+    {
+      "mode": 2,
+      "source": 127,
+      "profile": "smooth_C2",
+      "degree": 2,
+      "seconds": 29.64391773600005,
+      "max_residual": 939.7963775072451,
+      "value_error": 22.99023431578428,
+      "derivative_error": 253.52243254525717,
+      "sha256": "f8b30c613f842ead7c07e3de521bb007e64ebc60edeec8bc1f25b910fbcd9dc3"
+    }
+  ],
+  "notes": "Value and derivative errors are at opposite end slab; maximum residual over enclosing characteristic grid. Local JSON hashes for replay comparison, not stored full logs. Constant degree0/2 same spatial grid and Richardson jet proposal. Smooth profile matches V,V',V'' at c and plateau; residual certification charges all branches on intersecting cells, including full polynomial overhang. Negative results preserved; no assertion smoothing or parameter interpolation universally improves."
+}

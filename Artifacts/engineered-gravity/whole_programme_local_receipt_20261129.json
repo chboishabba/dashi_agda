@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-29",
+  "scope": "source-equivalent local execution; literal GitHub committed scripts NOT replayed",
+  "checks": [
+    {
+      "name": "TOV second moving-wall junction Cauchy inverse",
+      "status": "PASS",
+      "exit_code": 0,
+      "local_sha256": "1d7e8142cd2790dd48faa7504190c17654f21eebee9823872d0e4a31b811bed2",
+      "log_sha256": "8fb3bc0d304d57e08a03ef923d7a935be9a5b13bf5f1fcd257bf6ddbecf5d81f",
+      "channels": [
+        "f",
+        "nu_prime"
+      ]
+    },
+    {
+      "name": "12-lane dependency negative controls",
+      "status": "PASS",
+      "exit_code": 0,
+      "local_sha256": "6f5ecb7ad9bb615643fa107eaa63ea8049ea06d6e45dfedde151cfd33c70e833",
+      "log_sha256": "13e312ba5b2442260f8235935a61bb019a25801f21fba25dabeb7ec5f2aed360",
+      "lane_count": 12,
+      "unpaid_obligations": 36,
+      "malformed_rejected": 4
+    },
+    {
+      "name": "source admission inventory",
+      "status": "INVENTORY_ONLY",
+      "exit_code": 0,
+      "local_sha256": "6b5eaeb20b7464e0c44964dc580ccedebbfd3bd89dcfbc49999451b90bf6bed9",
+      "log_sha256": "f53f5cc2a1b555da4842110da422d81315c923fe869011f81519ac41fb319093"
+    }
+  ],
+  "blocked": [
+    "literal committed-source replay",
+    "source-owner complete checkout",
+    "native original F8 acceptance",
+    "G3/G4 coupled continuum",
+    "full Einstein/GHY/corner interface",
+    "physical parameter admission"
+  ],
+  "ci_used": false,
+  "all_lanes_solved": false
+}

@@ -1,0 +1,98 @@
+{
+  "scope": "Original-source spectral projection diagnostics, not original full-space solution or continuum receiver acceptance",
+  "software": {
+    "sympy": "1.14.0",
+    "scipy": "1.17.0",
+    "blas_threads": 1
+  },
+  "periodic": {
+    "box": 0.4,
+    "t": [
+      1,
+      1.2
+    ],
+    "first_order_modes": 18,
+    "radial_shells": [
+      1,
+      2
+    ],
+    "normal_quadrature": 100,
+    "radial_source_coefficients": [
+      0.00018278536034727712,
+      0.0007150812827138508
+    ],
+    "columns": [
+      "normal_modes",
+      "peak_H_mode",
+      "peak_A2_mode",
+      "peak_mean_wall_Q",
+      "peak_mean_J_B",
+      "peak_mean_J_Q",
+      "final_J_B",
+      "final_J_Q"
+    ],
+    "rows": [
+      [
+        12,
+        0.00011669475988751427,
+        7.220751207926217e-11,
+        1.955289235146891e-14,
+        6.415493191823536e-9,
+        3.255053310025884e-16,
+        -6.415493191823536e-9,
+        3.030868275335738e-16
+      ],
+      [
+        24,
+        0.00012310060743851755,
+        1.1716078337660727e-10,
+        3.38021418536129e-14,
+        7.742834841537088e-9,
+        5.454636411445139e-16,
+        -7.742834841537088e-9,
+        5.242657449383201e-16
+      ],
+      [
+        48,
+        0.00011717619214155246,
+        1.4900616217898842e-10,
+        4.883567227197962e-14,
+        8.213572196535658e-9,
+        7.605522226502079e-16,
+        -8.213572196535658e-9,
+        7.513168739358542e-16
+      ]
+    ],
+    "normal_72": "timed out, no result",
+    "ricci_donor_projection": "PASS"
+  },
+  "continuous_bulk": {
+    "cutoff": 80,
+    "t": [
+      1,
+      1.2
+    ],
+    "normal_modes": 12,
+    "normal_quadrature": 80,
+    "angular_exact_checks": "4/4 PASS",
+    "columns": [
+      "radial_nodes",
+      "peak_zero_frequency_J_B",
+      "final_zero_frequency_J_B"
+    ],
+    "rows": [
+      [
+        4,
+        0.00008073075237468935,
+        -0.00008073075237468935
+      ],
+      [
+        8,
+        0.0000798902552004775,
+        -0.0000798902552004775
+      ]
+    ],
+    "excluded": "all frequencies above cutoff; continuous controller convolution; nonzero output frequencies"
+  },
+  "execution": "New checker bytes match Git blobs. Local extracted copies of existing Galerkin and Ricci functions used; no full repository replay or kernel/CI. No acceptance based on sampled peaks."
+}

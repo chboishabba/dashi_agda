@@ -1,0 +1,54 @@
+{
+  "predecessor": "48864836c8525aafc4994b3dee83da9204dcba92",
+  "script": {
+    "commit": "04ef3b1f3a17c007fdf2ae81a0e9971fafc3ccb3",
+    "blob": "fc0054cd6202e2114b2b034c32907e4f1fb3c1c7"
+  },
+  "withdrawn_revision": {
+    "commit": "ad6baa720de51ed706c69f94337764081ff8766a",
+    "reason": "Source-axis restoration used moveaxis(i,0) rather than inverse moveaxis(0,i); prior reported radius 2.955778235691454 is invalid and must not be used."
+  },
+  "scope": "Constant auxiliary profile, one original forward source slab, all 128 target slabs, mode 1, h=1/128, one half-subdivision level on crossing cells. Conditional inherited outward arithmetic/characteristic energy assumptions. No receiver rerun or physical promotion.",
+  "checks": {
+    "symbolic": 19,
+    "tensor_axis_regressions": 3
+  },
+  "completed": {
+    "mode": 1,
+    "source": 127,
+    "target": 0,
+    "source_box": [
+      0.9850901435119999,
+      1.0000000000030003
+    ],
+    "cells": 108578,
+    "crossing_cells": 1388,
+    "seconds": 34.05924409600004,
+    "old_peak": 305.00008309240064,
+    "new_peak": 156.34489909574125,
+    "old_value_radius": 8.924533032874297,
+    "new_value_radius": 3.849989607083779,
+    "old_derivative_radius": 87.86046895816864,
+    "new_derivative_radius": 37.948177671266606,
+    "old_squared_sum_diagnostic": 1415144.426564725,
+    "new_squared_sum_diagnostic": 263742.0076945451,
+    "cross_old_fraction_diagnostic": 0.9555803401116624,
+    "cross_new_fraction_diagnostic": 0.8926814790099288,
+    "bounds": [
+      [
+        -3.8487927122945953,
+        3.8556982780343003
+      ],
+      [
+        -38.07507597463731,
+        38.0629056632999
+      ],
+      [
+        -38.098447043060006,
+        38.0395345948772
+      ]
+    ],
+    "local_json_sha256": "44cf2ac02d6de79e2c1dd54e52fdead6f73d101088c950e3cdadb5bfa7bf9874"
+  },
+  "execution_note": "Tool command timed out, but completed mode-1 JSON was present and parsed with all 128 rows and 22 checks. Mode-2 reverse attempt did not produce completed JSON at inspection; not accepted. No CI. Local recovered modules, not full checkout."
+}

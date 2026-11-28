@@ -1,0 +1,107 @@
+{
+  "scope": "Conditional continuous scalar forward Volterra enclosure on original padded clock for retained modes 1,2 only, given layer/Green equivalence, smooth physical reference, weak energy flux and stated outward arithmetic assumptions. Bounds extremely broad. No TT or tail or physical endpoint. No CI.",
+  "predecessor": "7a31459faf4fb1d1abb68b39301a009eea1028dd",
+  "blobs": {
+    "whole_slab": "441d5ffa1ef4c5db9324f653d024db72b907ba7a",
+    "exact": "3e5e50575a5dc3139cc033a91edc32a88d877c1c",
+    "global_kernel": "2b24c33249e40a0cd35c06ff9f043c7dd07f79d0",
+    "interval_owner": "5a7733370d7ae99f7b02d3e41a758999156abd2f"
+  },
+  "checks": {
+    "symbolic_and_exact_recurrence": 12,
+    "independent_local_constant_potential_bessel_regressions": 12
+  },
+  "decisions": {
+    "source": "coarse independent positive source coefficient interval using sin(kr)<=kr and bump<=1; lower bound zero, no fitted source amplitude",
+    "observer": "flat compact window with normalization bracket [1/15,1/5], signed derivative ranges, no sampled quadrature assumed exact",
+    "candidate": "literal piecewise-bilinear Riemann field for each source slab midpoint, actual residual uniform over source slab; strict-lower cell-averaged history approximant. Whole-slab kernel residual, homogeneous flux and local signed Picard intersection.",
+    "direct_correction": "initial development unpreconditioned comparison incorrectly used Delta alone; discarded. Final reruns use Delta+abs(L), full operator block norm, not just difference.",
+    "scope": "whole slab bounds do not establish sharpness; no full normal PDE rerun; previous tighter direct trace bounds remain preferable."
+  },
+  "runs": [
+    {
+      "n": 128,
+      "mode": 1,
+      "seconds": 21.31122053099989,
+      "whole_ordered_pairs": 16384,
+      "causal_pairs": 8256,
+      "characteristic_h": 0.0078125,
+      "source_coeff_upper": 4.6417431353509383e-11,
+      "kernel_max_widths": [
+        24.45174684949261,
+        351.76487979692774,
+        351.76487979692774
+      ],
+      "diagonal_max": 0.4747767627983616,
+      "finite_inverse_defect": 5.275641035140672e-14,
+      "finite_inverse_correction": 1.5066037764925222e-12,
+      "global_delta_max": 943.856326653276,
+      "preconditioned_global_row_max": 10417.273219088254,
+      "preconditioned_last_error": "4740.503288268652157280983758899190403688",
+      "direct_last_error": "5362.343334591440311762413143606993385106",
+      "last_error": "4740.503288268652157280983758899190403688",
+      "observer": [
+        {
+          "receiver": "E4",
+          "reconstruction": [
+            -2.916335937301388e-11,
+            2.4595255023764966e-11
+          ],
+          "radius": "90.39525663838859806546376364901896235077",
+          "absolute_upper": "90.39525663841776142483677752767027508066"
+        },
+        {
+          "receiver": "SMS",
+          "reconstruction": [
+            -5.836687890358258e-11,
+            5.011319900595995e-11
+          ],
+          "radius": "182.2423290056622535053318723714212072050",
+          "absolute_upper": "182.2423290057206203842354549479707744091"
+        }
+      ]
+    },
+    {
+      "n": 128,
+      "mode": 2,
+      "seconds": 22.201188430000002,
+      "whole_ordered_pairs": 16384,
+      "causal_pairs": 8256,
+      "characteristic_h": 0.0078125,
+      "source_coeff_upper": 9.283486270701877e-11,
+      "kernel_max_widths": [
+        24.61525631140533,
+        364.69015111349756,
+        364.69015111349756
+      ],
+      "diagonal_max": 0.4752588244847624,
+      "finite_inverse_defect": 3.979065341108706e-14,
+      "finite_inverse_correction": 9.067393976601345e-13,
+      "global_delta_max": 966.4389944239338,
+      "preconditioned_global_row_max": 10376.69747895322,
+      "preconditioned_last_error": "10085.42220981327749480262313213112963632",
+      "direct_last_error": "11503.56760505317015723207385438463017625",
+      "last_error": "10085.42220981327749480262313213112963632",
+      "observer": [
+        {
+          "receiver": "E4",
+          "reconstruction": [
+            -5.427379829002595e-11,
+            4.5311392419365105e-11
+          ],
+          "radius": "191.5488406647752887125005355228824630636",
+          "absolute_upper": "191.5488406648295625107905614718082274532"
+        },
+        {
+          "receiver": "SMS",
+          "reconstruction": [
+            -1.0898949026525925e-10,
+            9.208027006649561e-11
+          ],
+          "radius": "386.1466339598455016261801786182319992306",
+          "absolute_upper": "386.1466339599544911164454378690534236207"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-29",
+  "programme": "W3.2 original-action Euler/Einstein nonlinear initial-data radial geometry",
+  "execution": "Local source-equivalent Python/SymPy/NumPy/SciPy, each with 90-second cap, no GitHub CI. Literal committed sources not executed in this environment.",
+  "source_equivalent_checks": [
+    {
+      "label": "exact original scalar bulk Euler acceleration and source degeneracy",
+      "status": "PASS",
+      "script": "/mnt/data/w3_bulk_euler.py",
+      "source_sha256": "8e7048546affebeac6603f723452d79633e9d6c6afb6dcc76164293d88d233d2",
+      "log_sha256": "d27a97a5c540469157edb4ae3028ae974c970059ad27643814db151236a4184d",
+      "committed_path": "scripts/check_tov_bulk_euler_acceleration_inverse.py"
+    },
+    {
+      "label": "independent original TOV warped-product angular Einstein tensor and ftt inversion",
+      "status": "PASS",
+      "script": "/mnt/data/w3_angular_einstein.py",
+      "source_sha256": "1b87282c3ac76fb63c0dbecdc24693b6dfe075e742c746411223559181c97ecf",
+      "log_sha256": "ef076a3c3f111e510c135807d53432cf99f1fc3dec673a164282aacae0b1ca96",
+      "committed_path": "scripts/check_tov_angular_einstein_timejet.py"
+    },
+    {
+      "label": "exact nonlinear original-action Einstein radial shooting, Euler conditional initial acceleration and angular/momentum time-jet comparator",
+      "status": "PASS",
+      "script": "/mnt/data/w3_exact_radial_shooting.py",
+      "source_sha256": "9e41e7b44d6e9249b549b3fe27264cc43ae90bab4179e236aff7c354e8d6b626",
+      "log_sha256": "0fda248591217394b49781eb2208d43c27c9ab62b5f4b84c5a92fa0c6c6341e7",
+      "committed_path": "scripts/check_tov_nonlinear_einstein_euler_shooting.py"
+    }
+  ],
+  "baseline": {
+    "lambda": 0.1,
+    "material_time_amplitude": 0.02,
+    "grid": [
+      {
+        "n": 120,
+        "k": 0.00021334746707598733,
+        "wall_mass": 0.014001633154080916,
+        "wall_Euler_abs": 1.11e-16,
+        "lapse_match_abs": 1.67e-15,
+        "Simpson_mass_error_abs": 6.7843373e-11,
+        "angular_vs_momentum_ftt_residual": 0.000049571157
+      },
+      {
+        "n": 240,
+        "k": 0.00021334746707593703,
+        "wall_mass": 0.014001633154080902,
+        "wall_Euler_abs": 1.11e-16,
+        "lapse_match_abs": 5.55e-16,
+        "Simpson_mass_error_abs": 4.2402193e-12,
+        "angular_vs_momentum_ftt_residual": 0.000012942505
+      },
+      {
+        "n": 480,
+        "k": 0.0002133474670759712,
+        "wall_mass": 0.014001633154080893,
+        "wall_Euler_abs": 0,
+        "lapse_match_abs": 1.33e-15,
+        "Simpson_mass_error_abs": 2.6501371e-13,
+        "angular_vs_momentum_ftt_residual": 0.0000033031581
+      }
+    ],
+    "max_interior_abs_euler_acceleration": 0.0009228
+  },
+  "additional_fixtures": [
+    "material amplitude -0.02: even mass/k, opposite signed current, PASS",
+    "amplitude +0.01: PASS",
+    "amplitude +0.04: PASS",
+    "lambda 0.05 and 0.20 at amplitude 0.02: PASS"
+  ],
+  "claimed_payment": "original radial Einstein mass and lapse equations, exact degenerate Euler surface trace, conditional interior Euler acceleration inversion and convergent angular Einstein/momentum initial ftt comparison",
+  "not_paid": [
+    "full Einstein time-dependent lapse Nt equation and time evolution",
+    "global material Euler wellposedness in degenerate graph domain",
+    "moving induced metric/full nonlinear Israel/GHY/corners",
+    "fully coupled axial/polar modes",
+    "original F8/G3/G4 native and physical source/reception",
+    "experimental gravity shielding or 100% physical source-to-receiver"
+  ],
+  "github_ci_used": false,
+  "full_dag_negative_control_suite_ran": false,
+  "literal_committed_source_replay": false
+}

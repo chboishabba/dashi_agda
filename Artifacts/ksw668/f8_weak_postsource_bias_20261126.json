@@ -1,0 +1,168 @@
+{
+  "predecessor": "b274697eacb8cc8cb7f69466bfd7233968f47e66",
+  "executed_script": {
+    "path": "scripts/check_f8_weak_postsource_bias.py",
+    "commit": "8968e10f5e807d1ced33b0baa43191bcc2648797",
+    "blob": "89a71be5be65d41951bcb09bdd50e53b0d214954",
+    "sha256": "c86fc84c3c45848b00cfb333ef344bb49512b48616c3bf31fbd1ade9e586917a",
+    "raw_local_receipt_sha256": "06187f42538e4ef94d14d78d53b19e63a76b17f614cfd81cb20567d1b0a3d8aa"
+  },
+  "source_owner_blobs": {
+    "cell": "dec4e79e3a4899952a5deceb786324bc0745982c",
+    "weak": "69f35c6569667034214035d810dee06251a6d2ad"
+  },
+  "exact_checks": 15,
+  "source_audit_cases": 18,
+  "dimensionless_source_resolutions": [
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "source_norm_difference_by_dimension": {
+    "3": [
+      83.2790276234421,
+      92.80248113599711,
+      26.687072787076662,
+      7.042840812204154,
+      1.7852393637851411,
+      0.44787261694256086
+    ],
+    "7": [
+      119.3846364467094,
+      132.93636473624778,
+      38.16575130500017,
+      10.071486714000404,
+      2.5529181329481365,
+      0.6404622940322939
+    ],
+    "11": [
+      6.096057245559446,
+      6.692931999590142,
+      1.9104284905036284,
+      0.5040861366237717,
+      0.12777378467991687,
+      0.032055080777117516
+    ]
+  },
+  "monopole_h2_K0_exact": "-3840/13",
+  "monopole_h2_K0_n1024": -295.3843562210994,
+  "modal": {
+    "dr": 0.008,
+    "Y": 2.01,
+    "normal_intervals": [
+      256,
+      512
+    ],
+    "low_modes_per_ell": 4,
+    "source_on_normal_transfers": 24,
+    "source_off_exact_zero": true,
+    "rows_axes": "source [cell,weak], receiver [near,far]; first four radial modes only",
+    "window_partial_sums": [
+      {
+        "d": 3,
+        "n": 256,
+        "values": [
+          [
+            1.2931485157767233e-9,
+            1.4673731570700895e-9
+          ],
+          [
+            -1.6758544816592034e-11,
+            -1.8436159713860574e-11
+          ]
+        ]
+      },
+      {
+        "d": 3,
+        "n": 512,
+        "values": [
+          [
+            -3.005002006155369e-11,
+            -3.346225356493748e-11
+          ],
+          [
+            3.7208071477864416e-13,
+            4.064013672795292e-13
+          ]
+        ]
+      },
+      {
+        "d": 7,
+        "n": 256,
+        "values": [
+          [
+            1.4739198168761551e-10,
+            2.37695733530764e-10
+          ],
+          [
+            9.987982451978294e-11,
+            1.6107484577164863e-10
+          ]
+        ]
+      },
+      {
+        "d": 7,
+        "n": 512,
+        "values": [
+          [
+            -2.681795501744917e-12,
+            -4.443547297111759e-12
+          ],
+          [
+            -1.8173051524999091e-12,
+            -3.0111696329775247e-12
+          ]
+        ]
+      },
+      {
+        "d": 11,
+        "n": 256,
+        "values": [
+          [
+            -2.8160402498471363e-12,
+            -1.2705405719989393e-11
+          ],
+          [
+            -2.819068252451456e-12,
+            -1.2716366792667422e-11
+          ]
+        ]
+      },
+      {
+        "d": 11,
+        "n": 512,
+        "values": [
+          [
+            1.3502300625317047e-14,
+            1.5681663008840977e-13
+          ],
+          [
+            1.3531767374824253e-14,
+            1.5696411459072547e-13
+          ]
+        ]
+      }
+    ],
+    "interpretation": "independent strong-incoming upwind comparator, not original mode3 solver, partial sums nonconverged, no tail/sign or physical far-null inference"
+  },
+  "safe_clock": {
+    "driver_commit": "11af57cbd092d4c326c1ddd954aa2b170084dc64",
+    "driver_blob": "7e4cba5ee1bb79b58f78e3a42995e1612325ba62",
+    "capture_wrapper_commit": "3caaee7b08ea52834ef40da415a1c16fbf1faacf",
+    "capture_wrapper_blob": "27e1e651c4a970e70e4b8659292a62d6721b63d1",
+    "config_checks": 4,
+    "A": {
+      "steps": 6347,
+      "actual_dt": 0.000426840900922337
+    },
+    "C": {
+      "steps": 7225,
+      "actual_dt": 0.00037497013123239764
+    },
+    "scope": "locally compiled driver and tested four configurations; native capture wrapper/source-on execution not run"
+  },
+  "scope": "Local script executed with exact source-owner Git blobs, no CI, native kernel, full source-on original run or certified signed bias. Independent analytic postsource elliptic argument in roadmap; constants not enclosed."
+}

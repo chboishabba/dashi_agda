@@ -4,7 +4,7 @@ Short window regression, no production-duration or continuum claim.
 """
 import numpy as np
 from warp_temporal_weighted_adjoint import run as setup
-from ksw668_f8_tt_multipole import stage
+from ksw668_f8_weighted_normal_stage import matched_stage as stage
 from warp_frame_attribution import project, metric, lower, raise_dual, native_reverse
 
 def check(order=4, geometric=False, **params):
