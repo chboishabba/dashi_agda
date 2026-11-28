@@ -176,15 +176,15 @@ module Carrier {Value : Set}
   f0 : Fin 6
   f0 = zero
   f1 : Fin 6
-  f1 = suc f0
+  f1 = suc zero
   f2 : Fin 6
-  f2 = suc f1
+  f2 = suc (suc zero)
   f3 : Fin 6
-  f3 = suc f2
+  f3 = suc (suc (suc zero))
   f4 : Fin 6
-  f4 = suc f3
+  f4 = suc (suc (suc (suc zero)))
   f5 : Fin 6
-  f5 = suc f4
+  f5 = suc (suc (suc (suc (suc zero))))
 
   allPositive : Six Bool
   allPositive = six false false false false false false
