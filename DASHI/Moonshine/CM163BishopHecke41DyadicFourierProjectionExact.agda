@@ -133,13 +133,13 @@ module At (inputs : Round11.BishopCutset) where
   mono m n p = powC (q p) m *C powC (iq p) n
 
   leftSquare : ∀ p → powC (q (left p)) 2 ≈C q p
-  leftSquare p = complexTrans (Power.powTwo (q (left p))) (Ph.squareQ p)
+  leftSquare p = complexTrans (complexSym (Power.powTwo (q (left p)))) (Ph.squareQ p)
 
   rightNeg : ∀ p → q (right p) ≈C Gen.negC (q (left p))
   rightNeg p = Ph.signedQ Phase.positive p
 
   rightSquare : ∀ p → powC (q (right p)) 2 ≈C q p
-  rightSquare p = complexTrans (Power.powTwo (q (right p)))
+  rightSquare p = complexTrans (complexSym (Power.powTwo (q (right p))))
     (complexTrans (A.mulCCongruent (rightNeg p) (rightNeg p))
       (complexTrans (negProduct (q (left p)) (q (left p))) (Ph.squareQ p)))
 
@@ -227,6 +227,8 @@ module At (inputs : Round11.BishopCutset) where
   -- implies there are enough binary sheets to distinguish both.
   meanOff : ∀ k m n → m ≤ k → n ≤ k → (m ≡ n → ⊥) →
     ∀ p → mean k (mono m n) p ≈C A.zeroC
+  meanOff zero (suc m) n () hn h p
+  meanOff zero zero (suc n) hm () h p
   meanOff zero zero zero hm hn h p = ⊥-elim (h refl)
   meanOff (suc k) m n hm hn h p with parity m | parity n
   ... | even a | even b = complexTrans (meanCong k (pairEven a b) p)
