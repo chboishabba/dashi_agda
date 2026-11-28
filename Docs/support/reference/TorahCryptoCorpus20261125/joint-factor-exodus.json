@@ -1,0 +1,308 @@
+{
+  "name": "exodus",
+  "modelCosts": {
+    "trainingLetters": 19971,
+    "countWidth": 15,
+    "headerAssumption": "shared alphabet, fixed algorithm and dimensions; 3-bit model selector; dense fixed-width count tables; dictionary count + 4-bit length + 5-bit glyphs + count; training not transmitted",
+    "unigram": 408,
+    "trigram": 306588,
+    "geoMix": 470613,
+    "jointSoft": 470615,
+    "wordTableBits": 73274
+  },
+  "result": {
+    "blocks": 175,
+    "letters": 15925,
+    "acc": {
+      "trigram": {
+        "bits": 64310.98696286274,
+        "hits": 3568,
+        "bitsPerLetter": 4.038366528280235,
+        "accuracy": 0.2240502354788069,
+        "withModelBits": 370898.9869628627
+      },
+      "geoMix": {
+        "bits": 61543.869459519316,
+        "hits": 3572,
+        "bitsPerLetter": 3.864607187410946,
+        "accuracy": 0.22430141287284144,
+        "withModelBits": 532156.8694595193
+      },
+      "jointSoft": {
+        "bits": 62401.22308054006,
+        "hits": 3532,
+        "bitsPerLetter": 3.918444149484462,
+        "accuracy": 0.22178963893249606,
+        "withModelBits": 533016.2230805401
+      },
+      "unigram": {
+        "bits": 68066.07132891392,
+        "hits": 1556,
+        "bitsPerLetter": 4.274164604641377,
+        "accuracy": 0.09770800627943485,
+        "withModelBits": 68474.07132891392
+      }
+    },
+    "hardImpossibleBlocks": 175,
+    "parityClosures": 9450,
+    "parityCorrect": 377,
+    "hardCount": 175,
+    "mapHits": 1103,
+    "hardHits": 1094,
+    "meanObjectiveDecrease": 76.56144332015315,
+    "meanLexicalDecrease": 28.116574476563322
+  },
+  "target": {
+    "plain": {
+      "initial": "אשלאמץפצכזנסגסטיאקלראלתהבמאלמלראריאהוראתליוםליללאיהמאיהאיאאוולכמהאואאיבמומואמבייואאייוייייו",
+      "final": "אשלאמץפצכזנסגסטיאקלואלמולאאלמאראלישמולאללדועלאכלויהמקנהציאלהעתכמהלואלילהותוממניהויהינויישמו",
+      "before": {
+        "geometry": 356.89163841583,
+        "trigram": 491.9981975788613,
+        "lexical": 438.30686079295765,
+        "objective": 848.8898359946913
+      },
+      "after": {
+        "geometry": 376.2085106367824,
+        "trigram": 376.0015464002843,
+        "lexical": 398.3027363060379,
+        "objective": 752.2100570370667
+      },
+      "parity": 54
+    },
+    "withLex": {
+      "initial": "אשלאמץפצכזנסגסטיאקלראלתהבמאלמלראריאהוראתליוםליללאיהמאיהאיאאוולכמהאואאיבמומואמבייואאייוייייו",
+      "final": "אשלאמץפצכזנסגסטיאקלתאלאהלמכממדואלהמהולאתבצוהויהיויהיאלהביאתועלאלהיראלתתמותואשריעלאכלנוימיןו",
+      "before": {
+        "geometry": 356.89163841583,
+        "trigram": 491.9981975788613,
+        "lexical": 438.30686079295765,
+        "objective": 1287.196696787649
+      },
+      "after": {
+        "geometry": 378.96619396895665,
+        "trigram": 393.0975651740834,
+        "lexical": 371.6190296935276,
+        "objective": 1143.6827888365676
+      },
+      "parity": 54,
+      "tokens": {
+        "bits": 371.6190296935276,
+        "tokens": [
+          {
+            "kind": "literal",
+            "text": "א"
+          },
+          {
+            "kind": "literal",
+            "text": "ש"
+          },
+          {
+            "kind": "word",
+            "text": "לא"
+          },
+          {
+            "kind": "literal",
+            "text": "מ"
+          },
+          {
+            "kind": "literal",
+            "text": "ץ"
+          },
+          {
+            "kind": "literal",
+            "text": "פ"
+          },
+          {
+            "kind": "literal",
+            "text": "צ"
+          },
+          {
+            "kind": "literal",
+            "text": "כ"
+          },
+          {
+            "kind": "literal",
+            "text": "ז"
+          },
+          {
+            "kind": "literal",
+            "text": "נ"
+          },
+          {
+            "kind": "literal",
+            "text": "ס"
+          },
+          {
+            "kind": "literal",
+            "text": "ג"
+          },
+          {
+            "kind": "literal",
+            "text": "ס"
+          },
+          {
+            "kind": "literal",
+            "text": "ט"
+          },
+          {
+            "kind": "literal",
+            "text": "י"
+          },
+          {
+            "kind": "literal",
+            "text": "א"
+          },
+          {
+            "kind": "word",
+            "text": "קלת"
+          },
+          {
+            "kind": "word",
+            "text": "אל"
+          },
+          {
+            "kind": "literal",
+            "text": "א"
+          },
+          {
+            "kind": "literal",
+            "text": "ה"
+          },
+          {
+            "kind": "literal",
+            "text": "ל"
+          },
+          {
+            "kind": "literal",
+            "text": "מ"
+          },
+          {
+            "kind": "literal",
+            "text": "כ"
+          },
+          {
+            "kind": "literal",
+            "text": "מ"
+          },
+          {
+            "kind": "literal",
+            "text": "מ"
+          },
+          {
+            "kind": "literal",
+            "text": "ד"
+          },
+          {
+            "kind": "word",
+            "text": "ואלה"
+          },
+          {
+            "kind": "literal",
+            "text": "מ"
+          },
+          {
+            "kind": "literal",
+            "text": "ה"
+          },
+          {
+            "kind": "word",
+            "text": "ולא"
+          },
+          {
+            "kind": "literal",
+            "text": "ת"
+          },
+          {
+            "kind": "literal",
+            "text": "ב"
+          },
+          {
+            "kind": "word",
+            "text": "צוה"
+          },
+          {
+            "kind": "word",
+            "text": "ויהי"
+          },
+          {
+            "kind": "word",
+            "text": "ויהי"
+          },
+          {
+            "kind": "word",
+            "text": "אלה"
+          },
+          {
+            "kind": "literal",
+            "text": "ב"
+          },
+          {
+            "kind": "literal",
+            "text": "י"
+          },
+          {
+            "kind": "word",
+            "text": "את"
+          },
+          {
+            "kind": "word",
+            "text": "ועל"
+          },
+          {
+            "kind": "word",
+            "text": "אלהי"
+          },
+          {
+            "kind": "literal",
+            "text": "ר"
+          },
+          {
+            "kind": "word",
+            "text": "אל"
+          },
+          {
+            "kind": "literal",
+            "text": "ת"
+          },
+          {
+            "kind": "word",
+            "text": "תמות"
+          },
+          {
+            "kind": "literal",
+            "text": "ו"
+          },
+          {
+            "kind": "word",
+            "text": "אשר"
+          },
+          {
+            "kind": "literal",
+            "text": "י"
+          },
+          {
+            "kind": "word",
+            "text": "על"
+          },
+          {
+            "kind": "word",
+            "text": "אכל"
+          },
+          {
+            "kind": "literal",
+            "text": "נ"
+          },
+          {
+            "kind": "word",
+            "text": "וימין"
+          },
+          {
+            "kind": "literal",
+            "text": "ו"
+          }
+        ]
+      }
+    }
+  }
+}

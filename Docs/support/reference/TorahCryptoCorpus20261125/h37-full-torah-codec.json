@@ -1,0 +1,170 @@
+{
+  "output": [
+    {
+      "variant": "literalHuffman",
+      "headerBits": 137,
+      "totalBits": 1318743,
+      "bytesIfPacked": 164843,
+      "verifiedGlyphs": 304850,
+      "chapters": 187,
+      "summary": [
+        {
+          "name": "genesis",
+          "glyphs": 78069,
+          "blocks": 0,
+          "tail": 0,
+          "payload": 334501,
+          "meta": 1208,
+          "total": 335709
+        },
+        {
+          "name": "exodus",
+          "glyphs": 63531,
+          "blocks": 0,
+          "tail": 0,
+          "payload": 273689,
+          "meta": 968,
+          "total": 274657
+        },
+        {
+          "name": "leviticus",
+          "glyphs": 44795,
+          "blocks": 0,
+          "tail": 0,
+          "payload": 193954,
+          "meta": 656,
+          "total": 194610
+        },
+        {
+          "name": "numbers",
+          "glyphs": 63545,
+          "blocks": 0,
+          "tail": 0,
+          "payload": 275484,
+          "meta": 872,
+          "total": 276356
+        },
+        {
+          "name": "deuteronomy",
+          "glyphs": 54910,
+          "blocks": 0,
+          "tail": 0,
+          "payload": 236450,
+          "meta": 824,
+          "total": 237274
+        }
+      ]
+    },
+    {
+      "variant": "copyBRaw",
+      "headerBits": 272,
+      "totalBits": 1359618,
+      "bytesIfPacked": 169953,
+      "verifiedGlyphs": 304850,
+      "chapters": 187,
+      "summary": [
+        {
+          "name": "genesis",
+          "glyphs": 78069,
+          "blocks": 338,
+          "tail": 5061,
+          "payload": 345429,
+          "meta": 1208,
+          "total": 346637
+        },
+        {
+          "name": "exodus",
+          "glyphs": 63531,
+          "blocks": 273,
+          "tail": 4563,
+          "payload": 282215,
+          "meta": 968,
+          "total": 283183
+        },
+        {
+          "name": "leviticus",
+          "glyphs": 44795,
+          "blocks": 194,
+          "tail": 2891,
+          "payload": 199708,
+          "meta": 656,
+          "total": 200364
+        },
+        {
+          "name": "numbers",
+          "glyphs": 63545,
+          "blocks": 279,
+          "tail": 3281,
+          "payload": 283611,
+          "meta": 872,
+          "total": 284483
+        },
+        {
+          "name": "deuteronomy",
+          "glyphs": 54910,
+          "blocks": 238,
+          "tail": 3502,
+          "payload": 243855,
+          "meta": 824,
+          "total": 244679
+        }
+      ]
+    },
+    {
+      "variant": "minusSumTensor",
+      "headerBits": 272,
+      "totalBits": 1366374,
+      "bytesIfPacked": 170797,
+      "verifiedGlyphs": 304850,
+      "chapters": 187,
+      "summary": [
+        {
+          "name": "genesis",
+          "glyphs": 78069,
+          "blocks": 338,
+          "tail": 5061,
+          "payload": 347172,
+          "meta": 1208,
+          "total": 348380
+        },
+        {
+          "name": "exodus",
+          "glyphs": 63531,
+          "blocks": 273,
+          "tail": 4563,
+          "payload": 283432,
+          "meta": 968,
+          "total": 284400
+        },
+        {
+          "name": "leviticus",
+          "glyphs": 44795,
+          "blocks": 194,
+          "tail": 2891,
+          "payload": 200646,
+          "meta": 656,
+          "total": 201302
+        },
+        {
+          "name": "numbers",
+          "glyphs": 63545,
+          "blocks": 279,
+          "tail": 3281,
+          "payload": 285126,
+          "meta": 872,
+          "total": 285998
+        },
+        {
+          "name": "deuteronomy",
+          "glyphs": 54910,
+          "blocks": 238,
+          "tail": 3502,
+          "payload": 245198,
+          "meta": 824,
+          "total": 246022
+        }
+      ]
+    }
+  ],
+  "qualification": "Whole normalized written consonantal glyph streams by chapter, including all chapter tails, not source XML/vowels/word or verse boundaries. Book order fixed by protocol. Actual prefix streams encoded and decoded with transmitted mode and canonical Huffman length tables, chapter count/number/length header; final byte padding cost reported. Shared alphabet chart, field arithmetic and decoder code not transmitted. Code tables trained Ex1-13 from H37; whole-book results include training and reused regression data, not blind. Raw base27 theoretical per glyph comparison excludes metadata."
+}

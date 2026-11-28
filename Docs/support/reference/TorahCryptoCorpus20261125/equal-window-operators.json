@@ -1,0 +1,177 @@
+{
+  "field": "F3[t]/(t^3-t-1)",
+  "alphabetRoundtrips": 27,
+  "foldedAlphabet": 22,
+  "finalFlags": 5,
+  "results": [
+    {
+      "book": "exodus",
+      "ch": 14,
+      "v": 19,
+      "rowLength": 72,
+      "observedCount": 125,
+      "missingCount": 91,
+      "comparisons": {
+        "atbash": {
+          "hits": 2,
+          "n": 72,
+          "nullMeanHits": 4.191,
+          "nullAtLeast": 952
+        },
+        "albam": {
+          "hits": 2,
+          "n": 72,
+          "nullMeanHits": 3.256,
+          "nullAtLeast": 838
+        },
+        "additive": {
+          "hits": 4,
+          "n": 72,
+          "erasureHits": 2,
+          "erasureN": 53,
+          "softBitsPerPredicted": 4.9560069287227195,
+          "unigramBitsPerPredicted": 4.084579788468854,
+          "nullMeanHits": 2.664,
+          "nullAtLeast": 282
+        },
+        "frobenius": {
+          "hits": 2,
+          "n": 72,
+          "erasureHits": 1,
+          "erasureN": 53,
+          "softBitsPerPredicted": 5.018784268197704,
+          "unigramBitsPerPredicted": 4.084579788468854,
+          "nullMeanHits": 2.384,
+          "nullAtLeast": 672
+        }
+      }
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "v": 6,
+      "rowLength": 51,
+      "observedCount": 89,
+      "missingCount": 64,
+      "comparisons": {
+        "atbash": {
+          "hits": 3,
+          "n": 51,
+          "nullMeanHits": 2.243,
+          "nullAtLeast": 376
+        },
+        "albam": {
+          "hits": 2,
+          "n": 51,
+          "nullMeanHits": 2.589,
+          "nullAtLeast": 742
+        },
+        "additive": {
+          "hits": 1,
+          "n": 51,
+          "erasureHits": 1,
+          "erasureN": 38,
+          "softBitsPerPredicted": 5.269924942206839,
+          "unigramBitsPerPredicted": 4.434293537555436,
+          "nullMeanHits": 1.823,
+          "nullAtLeast": 842
+        },
+        "frobenius": {
+          "hits": 2,
+          "n": 51,
+          "erasureHits": 2,
+          "erasureN": 38,
+          "softBitsPerPredicted": 5.1823670739917285,
+          "unigramBitsPerPredicted": 4.434293537555436,
+          "nullMeanHits": 1.803,
+          "nullAtLeast": 543
+        }
+      }
+    },
+    {
+      "book": "genesis",
+      "ch": 36,
+      "v": 32,
+      "rowLength": 31,
+      "observedCount": 54,
+      "missingCount": 39,
+      "comparisons": {
+        "atbash": {
+          "hits": 1,
+          "n": 31,
+          "nullMeanHits": 1.462,
+          "nullAtLeast": 784
+        },
+        "albam": {
+          "hits": 1,
+          "n": 31,
+          "nullMeanHits": 1.645,
+          "nullAtLeast": 827
+        },
+        "additive": {
+          "hits": 3,
+          "n": 31,
+          "erasureHits": 2,
+          "erasureN": 23,
+          "softBitsPerPredicted": 4.78000279788833,
+          "unigramBitsPerPredicted": 4.125073141453064,
+          "nullMeanHits": 1.184,
+          "nullAtLeast": 108
+        },
+        "frobenius": {
+          "hits": 2,
+          "n": 31,
+          "erasureHits": 1,
+          "erasureN": 23,
+          "softBitsPerPredicted": 4.934466102734684,
+          "unigramBitsPerPredicted": 4.125073141453064,
+          "nullMeanHits": 1.053,
+          "nullAtLeast": 288
+        }
+      }
+    },
+    {
+      "book": "exodus",
+      "ch": 20,
+      "v": 13,
+      "rowLength": 6,
+      "observedCount": 10,
+      "missingCount": 8,
+      "comparisons": {
+        "atbash": {
+          "hits": 1,
+          "n": 6,
+          "nullMeanHits": 0.537,
+          "nullAtLeast": 432
+        },
+        "albam": {
+          "hits": 0,
+          "n": 6,
+          "nullMeanHits": 0.355,
+          "nullAtLeast": 1000
+        },
+        "additive": {
+          "hits": 1,
+          "n": 6,
+          "erasureHits": 1,
+          "erasureN": 4,
+          "softBitsPerPredicted": 4.821162398736863,
+          "unigramBitsPerPredicted": 4.719410043512957,
+          "nullMeanHits": 0.267,
+          "nullAtLeast": 244
+        },
+        "frobenius": {
+          "hits": 1,
+          "n": 6,
+          "erasureHits": 1,
+          "erasureN": 4,
+          "softBitsPerPredicted": 4.821162398736863,
+          "unigramBitsPerPredicted": 4.719410043512957,
+          "nullMeanHits": 0.178,
+          "nullAtLeast": 169
+        }
+      }
+    }
+  ],
+  "notes": "Exploratory fixed operators, raw parity versus folded traditional involutions, not directly comparable. A fully observed, B first k observed in reversed chart, C all missing, B remainder missing. Only k C symbols have two observed operands for additive/Frobenius; Atbash/Albam predict C from A. Full-column hits are diagnostic, not holdout. Shuffles preserve row marginals, not morphology. Soft score 50% hard guess plus 50% training unigram, only scored on k C symbols; not full suffix MDL. Windows already selected; no significance or source intent claim."
+}

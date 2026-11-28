@@ -1,0 +1,394 @@
+{
+  "smallCountChecks": 21,
+  "trainingSpans": [
+    {
+      "book": "genesis",
+      "ch": 36,
+      "v": 32,
+      "n": 31
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "v": 6,
+      "n": 51
+    }
+  ],
+  "test": [
+    {
+      "book": "exodus",
+      "ch": 14,
+      "v": 19,
+      "n": 72,
+      "k": 21,
+      "counts": {
+        "unrestricted": "11433811272836884826665874049685357613602127080237382571153151471568389249023393608050222706416077770721",
+        "verseEndOnly": "9316438814904128377283304781225106203675807250563793206124790087944613462167209606559440723746433739106",
+        "wordCountOracle": "9167718374353723578296555963574948854256678928778970149906144439312264998339359863246305576651707176606",
+        "wordMaskOracle": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+      },
+      "bits": {
+        "unrestricted": 342.3519001557697,
+        "verseEndOnly": 342.05644427224354,
+        "wordCountOracle": 342.0332284047432,
+        "wordMaskOracle": 321.0790765418854
+      },
+      "predictions": {
+        "A": {
+          "correct": 42,
+          "fp": 12,
+          "fn": 18,
+          "violations": 8,
+          "predictedWords": 15,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "B": {
+          "correct": 49,
+          "fp": 11,
+          "fn": 12,
+          "violations": 3,
+          "predictedWords": 20,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "and": {
+          "correct": 49,
+          "fp": 3,
+          "fn": 20,
+          "violations": 6,
+          "predictedWords": 4,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "or": {
+          "correct": 42,
+          "fp": 20,
+          "fn": 10,
+          "violations": 5,
+          "predictedWords": 31,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "xor": {
+          "correct": 45,
+          "fp": 17,
+          "fn": 10,
+          "violations": 5,
+          "predictedWords": 28,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "boundary": {
+          "correct": 52,
+          "fp": 0,
+          "fn": 20,
+          "violations": 6,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "bothEnds": {
+          "correct": 52,
+          "fp": 0,
+          "fn": 20,
+          "violations": 6,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        },
+        "phase": {
+          "correct": 52,
+          "fp": 0,
+          "fn": 20,
+          "violations": 6,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "4512664216072947835553785352838281221974895614898091554873854359918987497838746670415893198012416"
+        }
+      }
+    },
+    {
+      "book": "exodus",
+      "ch": 20,
+      "v": 13,
+      "n": 6,
+      "k": 2,
+      "counts": {
+        "unrestricted": "387420489",
+        "verseEndOnly": "315675954",
+        "wordCountOracle": "242151954",
+        "wordMaskOracle": "113379904"
+      },
+      "bits": {
+        "unrestricted": 28.529325012980813,
+        "verseEndOnly": 28.23386912945464,
+        "wordCountOracle": 27.85133740364379,
+        "wordMaskOracle": 26.756589711823782
+      },
+      "predictions": {
+        "A": {
+          "correct": 6,
+          "fp": 0,
+          "fn": 0,
+          "violations": 0,
+          "predictedWords": 2,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "B": {
+          "correct": 4,
+          "fp": 1,
+          "fn": 1,
+          "violations": 0,
+          "predictedWords": 2,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "and": {
+          "correct": 5,
+          "fp": 0,
+          "fn": 1,
+          "violations": 0,
+          "predictedWords": 1,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "or": {
+          "correct": 5,
+          "fp": 1,
+          "fn": 0,
+          "violations": 0,
+          "predictedWords": 3,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "xor": {
+          "correct": 5,
+          "fp": 1,
+          "fn": 0,
+          "violations": 0,
+          "predictedWords": 3,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "boundary": {
+          "correct": 5,
+          "fp": 0,
+          "fn": 1,
+          "violations": 0,
+          "predictedWords": 1,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "bothEnds": {
+          "correct": 5,
+          "fp": 0,
+          "fn": 1,
+          "violations": 0,
+          "predictedWords": 1,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        },
+        "phase": {
+          "correct": 5,
+          "fp": 0,
+          "fn": 1,
+          "violations": 0,
+          "predictedWords": 1,
+          "admitsTrueRow": true,
+          "distinctCandidates": "113379904"
+        }
+      }
+    }
+  ],
+  "training": [
+    {
+      "book": "genesis",
+      "ch": 36,
+      "v": 32,
+      "n": 31,
+      "k": 7,
+      "counts": {
+        "unrestricted": "235655016338368235499067731945871638181119123",
+        "verseEndOnly": "192015198497929673369610744548488001480911878",
+        "wordCountOracle": "131616342619188673529703860456511308176224378",
+        "wordMaskOracle": "412195366437884247746798137865015318806528"
+      },
+      "bits": {
+        "unrestricted": 147.40151256706753,
+        "verseEndOnly": 147.10605668354134,
+        "wordCountOracle": 146.56117481268709,
+        "wordMaskOracle": 138.24238017775622
+      },
+      "predictions": {
+        "A": {
+          "correct": 20,
+          "fp": 6,
+          "fn": 5,
+          "violations": 3,
+          "predictedWords": 8,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "B": {
+          "correct": 20,
+          "fp": 6,
+          "fn": 5,
+          "violations": 3,
+          "predictedWords": 8,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "and": {
+          "correct": 22,
+          "fp": 3,
+          "fn": 6,
+          "violations": 3,
+          "predictedWords": 4,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "or": {
+          "correct": 18,
+          "fp": 9,
+          "fn": 4,
+          "violations": 3,
+          "predictedWords": 12,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "xor": {
+          "correct": 21,
+          "fp": 6,
+          "fn": 4,
+          "violations": 3,
+          "predictedWords": 9,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "boundary": {
+          "correct": 25,
+          "fp": 0,
+          "fn": 6,
+          "violations": 3,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "bothEnds": {
+          "correct": 25,
+          "fp": 0,
+          "fn": 6,
+          "violations": 3,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        },
+        "phase": {
+          "correct": 25,
+          "fp": 0,
+          "fn": 6,
+          "violations": 3,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "412195366437884247746798137865015318806528"
+        }
+      }
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "v": 6,
+      "n": 51,
+      "k": 12,
+      "counts": {
+        "unrestricted": "9989689095948428268966921126195809393034773710522520293009978943147202723",
+        "verseEndOnly": "8139746670772793404343417213937326172102408208573905423934056916638461478",
+        "wordCountOracle": "6483302030950292413548996551914266082318274944706276554589909382458773978",
+        "wordMaskOracle": "290774770707135299596872173687015749454594731003665396550980471881728"
+      },
+      "bits": {
+        "unrestricted": 242.4992626103369,
+        "verseEndOnly": 242.20380672681074,
+        "wordCountOracle": 241.87555161573022,
+        "wordMaskOracle": 227.43101255050215
+      },
+      "predictions": {
+        "A": {
+          "correct": 28,
+          "fp": 13,
+          "fn": 10,
+          "violations": 7,
+          "predictedWords": 15,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "B": {
+          "correct": 28,
+          "fp": 12,
+          "fn": 11,
+          "violations": 7,
+          "predictedWords": 13,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "and": {
+          "correct": 35,
+          "fp": 5,
+          "fn": 11,
+          "violations": 6,
+          "predictedWords": 6,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "or": {
+          "correct": 21,
+          "fp": 20,
+          "fn": 10,
+          "violations": 8,
+          "predictedWords": 22,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "xor": {
+          "correct": 26,
+          "fp": 15,
+          "fn": 10,
+          "violations": 6,
+          "predictedWords": 17,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "boundary": {
+          "correct": 40,
+          "fp": 0,
+          "fn": 11,
+          "violations": 4,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "bothEnds": {
+          "correct": 40,
+          "fp": 0,
+          "fn": 11,
+          "violations": 4,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        },
+        "phase": {
+          "correct": 40,
+          "fp": 0,
+          "fn": 11,
+          "violations": 4,
+          "predictedWords": 1,
+          "admitsTrueRow": false,
+          "distinctCandidates": "290774770707135299596872173687015749454594731003665396550980471881728"
+        }
+      }
+    }
+  ],
+  "qualification": "Source orthography from H29 pinned WLC; final 5 and medial 5 disjoint, other 17 shared. Known target word count and full target mask are explicitly oracle side information, not original mask. Counts distinct glyph strings compatible with orthographic constraints only, not all grammatical or source-attested strings. A/B boundary rules use visible rows only; learned rules fit two non-Exodus spans; all targets reused exploratory fixtures. Last boundary imposed from known verse end. Middle reversed along with start/end roles. No target letters in candidate construction."
+}

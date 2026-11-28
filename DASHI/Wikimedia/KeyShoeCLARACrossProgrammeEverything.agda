@@ -12,3 +12,19 @@ import DASHI.Wikimedia.KeyShoeCLARAR13DihedralExact
 import DASHI.Wikimedia.KeyShoeCLARAOperatorBoundaryExact
 import DASHI.Wikimedia.KeyShoeCLARALanguageWorldCorrespondenceExact
 import DASHI.Wikimedia.ShemZeta54ZeroGluingExact
+
+import DASHI.Wikimedia.KeyShoeIndexedTrigramWeaveExact
+
+import DASHI.Wikimedia.ShemIndexedAddressProductWeaveExact
+
+import DASHI.Wikimedia.KeyShoeNativeFieldIncidenceExact
+
+import DASHI.Wikimedia.KeyShoeFieldLawMovingFrameExact
+
+import DASHI.Wikimedia.ShemSourcePairPredictionObstructionExact
+
+import DASHI.Wikimedia.ShemCandidateGateBidiExact
+
+import DASHI.Wikimedia.ShemNonlocalHolonomyExact
+
+import DASHI.Wikimedia.ShemReturnInnovationExact

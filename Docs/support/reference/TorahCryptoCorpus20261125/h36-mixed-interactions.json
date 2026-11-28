@@ -1,0 +1,138 @@
+{
+  "actual": {
+    "zero": 0,
+    "copyA": 3,
+    "copyB": 1,
+    "zeroC": 1
+  },
+  "control": {
+    "zero": {
+      "actual": 0,
+      "mean": 1.4583333333333333,
+      "max": 4,
+      "atLeast": 72
+    },
+    "copyA": {
+      "actual": 3,
+      "mean": 1.625,
+      "max": 5,
+      "atLeast": 14
+    },
+    "copyB": {
+      "actual": 1,
+      "mean": 1.3333333333333333,
+      "max": 4,
+      "atLeast": 50
+    },
+    "zeroC": {
+      "actual": 1,
+      "mean": 1.875,
+      "max": 3,
+      "atLeast": 69
+    }
+  },
+  "mixedCount": 45,
+  "domainSizes": [
+    1,
+    1,
+    4,
+    5,
+    4,
+    21,
+    1,
+    6,
+    5,
+    6,
+    4,
+    21,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    1,
+    3,
+    4,
+    1,
+    5,
+    6,
+    6,
+    1,
+    4,
+    5,
+    1,
+    5,
+    6,
+    5,
+    6,
+    3,
+    6,
+    6,
+    1,
+    6,
+    5,
+    21,
+    1,
+    5,
+    21,
+    5,
+    5,
+    5,
+    4,
+    4,
+    1,
+    4,
+    5,
+    5,
+    6,
+    4,
+    5,
+    6,
+    1,
+    21,
+    5,
+    6,
+    5,
+    1,
+    5,
+    6,
+    4,
+    5,
+    6,
+    6,
+    4,
+    6,
+    1,
+    1
+  ],
+  "group": [
+    {
+      "g": 0,
+      "tested": 19683,
+      "validU": 1,
+      "solutions": 1
+    },
+    {
+      "g": 1,
+      "tested": 19683,
+      "validU": 1,
+      "solutions": 1
+    },
+    {
+      "g": 2,
+      "tested": 19683,
+      "validU": 1,
+      "solutions": 1
+    }
+  ],
+  "pairChecks": 1,
+  "exactCombinedOracleCount": "1",
+  "witnesses": [
+    {
+      "changed": [],
+      "output": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+    }
+  ],
+  "qualification": "True mixed differences, true H35 marginal sums, true sheet, true word mask and named anchors are target-side ORACLE information. Exact count of compatible glyph strings under these constraints alone, not blind recovery or grammatical alternatives. Mixed differences on consecutive candidate Bahir addresses are DASHI hypotheses. Shift controls descriptive; source geometry not claimed to provide equations."
+}

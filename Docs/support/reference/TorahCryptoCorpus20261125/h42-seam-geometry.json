@@ -1,0 +1,2187 @@
+{
+  "sourceChecks": 216,
+  "compositionChecks": 13824,
+  "crosswalk": 216,
+  "topology": [
+    {
+      "m": 0,
+      "full": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 215
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 1,
+      "full": {
+        "forward": 1,
+        "reverse": 0,
+        "nonlocal": 214
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 2,
+      "full": {
+        "forward": 2,
+        "reverse": 0,
+        "nonlocal": 213
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 3,
+      "full": {
+        "forward": 1,
+        "reverse": 0,
+        "nonlocal": 214
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 4,
+      "full": {
+        "forward": 1,
+        "reverse": 0,
+        "nonlocal": 214
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 5,
+      "full": {
+        "forward": 2,
+        "reverse": 0,
+        "nonlocal": 213
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 6,
+      "full": {
+        "forward": 1,
+        "reverse": 0,
+        "nonlocal": 214
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    },
+    {
+      "m": 7,
+      "full": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 215
+      },
+      "interior": {
+        "forward": 0,
+        "reverse": 0,
+        "nonlocal": 185
+      }
+    }
+  ],
+  "train": 85,
+  "results": {
+    "genesis": {
+      "full": {
+        "blocks": 338,
+        "n": 73008,
+        "fff": 313604,
+        "frf": 313174,
+        "saving": 430,
+        "perGlyph": 0.0058897655051501204,
+        "fffEdges": {
+          "start": 1380,
+          "seam": 0,
+          "interior": 268474,
+          "boundary": 43750
+        },
+        "frfEdges": {
+          "start": 1380,
+          "seam": 2957,
+          "interior": 268188,
+          "boundary": 40649
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 62530,
+          "boundary": 10140
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 676,
+          "interior": 62530,
+          "boundary": 9464
+        }
+      },
+      "cropFrozen": {
+        "blocks": 338,
+        "n": 62868,
+        "fff": 269963,
+        "frf": 269677,
+        "saving": 286,
+        "perGlyph": 0.004549214226633582,
+        "fffEdges": {
+          "start": 1489,
+          "seam": 0,
+          "interior": 246766,
+          "boundary": 21708
+        },
+        "frfEdges": {
+          "start": 1489,
+          "seam": 0,
+          "interior": 246432,
+          "boundary": 21756
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        }
+      },
+      "cropRefit": {
+        "blocks": 338,
+        "n": 62868,
+        "fff": 270061,
+        "frf": 269863,
+        "saving": 198,
+        "perGlyph": 0.003149456003054018,
+        "fffEdges": {
+          "start": 1471,
+          "seam": 0,
+          "interior": 246862,
+          "boundary": 21728
+        },
+        "frfEdges": {
+          "start": 1471,
+          "seam": 0,
+          "interior": 246604,
+          "boundary": 21788
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        }
+      },
+      "matched": {
+        "blocks": 338,
+        "n": 73008,
+        "fff": 313604,
+        "frf": 313174,
+        "saving": 430,
+        "perGlyph": 0.0058897655051501204,
+        "fffEdges": {
+          "start": 1380,
+          "seam": 0,
+          "interior": 268474,
+          "boundary": 43750
+        },
+        "frfEdges": {
+          "start": 1380,
+          "seam": 2957,
+          "interior": 268188,
+          "boundary": 40649
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 62530,
+          "boundary": 10140
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 676,
+          "interior": 62530,
+          "boundary": 9464
+        }
+      },
+      "shuffled": {
+        "blocks": 338,
+        "n": 73008,
+        "fff": 313528,
+        "frf": 313156,
+        "saving": 372,
+        "perGlyph": 0.005095332018408941,
+        "fffEdges": {
+          "start": 1380,
+          "seam": 0,
+          "interior": 268482,
+          "boundary": 43666
+        },
+        "frfEdges": {
+          "start": 1380,
+          "seam": 2976,
+          "interior": 268132,
+          "boundary": 40668
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 62530,
+          "boundary": 10140
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 676,
+          "interior": 62530,
+          "boundary": 9464
+        }
+      },
+      "shuffleCrop": {
+        "blocks": 338,
+        "n": 62868,
+        "fff": 270017,
+        "frf": 269801,
+        "saving": 216,
+        "perGlyph": 0.0034357701851498376,
+        "fffEdges": {
+          "start": 1471,
+          "seam": 0,
+          "interior": 246852,
+          "boundary": 21694
+        },
+        "frfEdges": {
+          "start": 1471,
+          "seam": 0,
+          "interior": 246579,
+          "boundary": 21751
+        },
+        "fffCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        },
+        "frfCounts": {
+          "start": 338,
+          "seam": 0,
+          "interior": 57460,
+          "boundary": 5070
+        }
+      },
+      "native": {
+        "blocks": 1,
+        "n": 93,
+        "fff": 398,
+        "frf": 401,
+        "saving": -3,
+        "perGlyph": -0.03225806451612903,
+        "fffEdges": {
+          "start": 3,
+          "seam": 0,
+          "interior": 276,
+          "boundary": 119
+        },
+        "frfEdges": {
+          "start": 3,
+          "seam": 8,
+          "interior": 272,
+          "boundary": 118
+        },
+        "fffCounts": {
+          "start": 1,
+          "seam": 0,
+          "interior": 62,
+          "boundary": 30
+        },
+        "frfCounts": {
+          "start": 1,
+          "seam": 2,
+          "interior": 62,
+          "boundary": 28
+        }
+      },
+      "nonconsecutiveNative": {
+        "blocks": 57,
+        "n": 8205,
+        "fff": 35226,
+        "frf": 35183,
+        "saving": 43,
+        "perGlyph": 0.005240706886045094,
+        "fffEdges": {
+          "start": 184,
+          "seam": 0,
+          "interior": 27827,
+          "boundary": 7215
+        },
+        "frfEdges": {
+          "start": 184,
+          "seam": 413,
+          "interior": 27737,
+          "boundary": 6849
+        },
+        "fffCounts": {
+          "start": 57,
+          "seam": 0,
+          "interior": 6438,
+          "boundary": 1710
+        },
+        "frfCounts": {
+          "start": 57,
+          "seam": 114,
+          "interior": 6438,
+          "boundary": 1596
+        }
+      },
+      "rowMajor": 293555,
+      "chapterDeltas": [
+        {
+          "ch": 1,
+          "full": -7,
+          "crop": -3
+        },
+        {
+          "ch": 2,
+          "full": -13,
+          "crop": -4
+        },
+        {
+          "ch": 3,
+          "full": 33,
+          "crop": 13
+        },
+        {
+          "ch": 4,
+          "full": -14,
+          "crop": -8
+        },
+        {
+          "ch": 5,
+          "full": 6,
+          "crop": 33
+        },
+        {
+          "ch": 6,
+          "full": -11,
+          "crop": -28
+        },
+        {
+          "ch": 7,
+          "full": 13,
+          "crop": 7
+        },
+        {
+          "ch": 8,
+          "full": -51,
+          "crop": -43
+        },
+        {
+          "ch": 9,
+          "full": 6,
+          "crop": 3
+        },
+        {
+          "ch": 10,
+          "full": 5,
+          "crop": 11
+        },
+        {
+          "ch": 11,
+          "full": -9,
+          "crop": -2
+        },
+        {
+          "ch": 12,
+          "full": 14,
+          "crop": 18
+        },
+        {
+          "ch": 13,
+          "full": -12,
+          "crop": -12
+        },
+        {
+          "ch": 14,
+          "full": 7,
+          "crop": 18
+        },
+        {
+          "ch": 15,
+          "full": 3,
+          "crop": 3
+        },
+        {
+          "ch": 16,
+          "full": 17,
+          "crop": 7
+        },
+        {
+          "ch": 17,
+          "full": 22,
+          "crop": 21
+        },
+        {
+          "ch": 18,
+          "full": -20,
+          "crop": -2
+        },
+        {
+          "ch": 19,
+          "full": 3,
+          "crop": -7
+        },
+        {
+          "ch": 20,
+          "full": 12,
+          "crop": -11
+        },
+        {
+          "ch": 21,
+          "full": 17,
+          "crop": 23
+        },
+        {
+          "ch": 22,
+          "full": 22,
+          "crop": 11
+        },
+        {
+          "ch": 23,
+          "full": 24,
+          "crop": 31
+        },
+        {
+          "ch": 24,
+          "full": 36,
+          "crop": 11
+        },
+        {
+          "ch": 25,
+          "full": 12,
+          "crop": -32
+        },
+        {
+          "ch": 26,
+          "full": 28,
+          "crop": 25
+        },
+        {
+          "ch": 27,
+          "full": 54,
+          "crop": -2
+        },
+        {
+          "ch": 28,
+          "full": 22,
+          "crop": 32
+        },
+        {
+          "ch": 29,
+          "full": -1,
+          "crop": -13
+        },
+        {
+          "ch": 30,
+          "full": 22,
+          "crop": 70
+        },
+        {
+          "ch": 31,
+          "full": 24,
+          "crop": -11
+        },
+        {
+          "ch": 32,
+          "full": 18,
+          "crop": -12
+        },
+        {
+          "ch": 33,
+          "full": 2,
+          "crop": 1
+        },
+        {
+          "ch": 34,
+          "full": -7,
+          "crop": -27
+        },
+        {
+          "ch": 35,
+          "full": 27,
+          "crop": 9
+        },
+        {
+          "ch": 36,
+          "full": 10,
+          "crop": 31
+        },
+        {
+          "ch": 37,
+          "full": 7,
+          "crop": -40
+        },
+        {
+          "ch": 38,
+          "full": -19,
+          "crop": -11
+        },
+        {
+          "ch": 39,
+          "full": -49,
+          "crop": -22
+        },
+        {
+          "ch": 40,
+          "full": -61,
+          "crop": -28
+        },
+        {
+          "ch": 41,
+          "full": -11,
+          "crop": 19
+        },
+        {
+          "ch": 42,
+          "full": 38,
+          "crop": 20
+        },
+        {
+          "ch": 43,
+          "full": 55,
+          "crop": 29
+        },
+        {
+          "ch": 44,
+          "full": -14,
+          "crop": -45
+        },
+        {
+          "ch": 45,
+          "full": 21,
+          "crop": -2
+        },
+        {
+          "ch": 46,
+          "full": 61,
+          "crop": 26
+        },
+        {
+          "ch": 47,
+          "full": 45,
+          "crop": 35
+        },
+        {
+          "ch": 48,
+          "full": 9,
+          "crop": 10
+        },
+        {
+          "ch": 49,
+          "full": 20,
+          "crop": 29
+        },
+        {
+          "ch": 50,
+          "full": 14,
+          "crop": 17
+        }
+      ]
+    },
+    "exodus": {
+      "full": {
+        "blocks": 175,
+        "n": 37800,
+        "fff": 163918,
+        "frf": 163811,
+        "saving": 107,
+        "perGlyph": 0.0028306878306878307,
+        "fffEdges": {
+          "start": 729,
+          "seam": 0,
+          "interior": 140365,
+          "boundary": 22824
+        },
+        "frfEdges": {
+          "start": 729,
+          "seam": 1517,
+          "interior": 140340,
+          "boundary": 21225
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 32375,
+          "boundary": 5250
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 350,
+          "interior": 32375,
+          "boundary": 4900
+        }
+      },
+      "cropFrozen": {
+        "blocks": 175,
+        "n": 32550,
+        "fff": 141118,
+        "frf": 141093,
+        "saving": 25,
+        "perGlyph": 0.0007680491551459293,
+        "fffEdges": {
+          "start": 753,
+          "seam": 0,
+          "interior": 129036,
+          "boundary": 11329
+        },
+        "frfEdges": {
+          "start": 753,
+          "seam": 0,
+          "interior": 128978,
+          "boundary": 11362
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        }
+      },
+      "cropRefit": {
+        "blocks": 175,
+        "n": 32550,
+        "fff": 141194,
+        "frf": 141099,
+        "saving": 95,
+        "perGlyph": 0.0029185867895545315,
+        "fffEdges": {
+          "start": 768,
+          "seam": 0,
+          "interior": 129081,
+          "boundary": 11345
+        },
+        "frfEdges": {
+          "start": 768,
+          "seam": 0,
+          "interior": 128971,
+          "boundary": 11360
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        }
+      },
+      "matched": {
+        "blocks": 175,
+        "n": 37800,
+        "fff": 163918,
+        "frf": 163811,
+        "saving": 107,
+        "perGlyph": 0.0028306878306878307,
+        "fffEdges": {
+          "start": 729,
+          "seam": 0,
+          "interior": 140365,
+          "boundary": 22824
+        },
+        "frfEdges": {
+          "start": 729,
+          "seam": 1517,
+          "interior": 140340,
+          "boundary": 21225
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 32375,
+          "boundary": 5250
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 350,
+          "interior": 32375,
+          "boundary": 4900
+        }
+      },
+      "shuffled": {
+        "blocks": 175,
+        "n": 37800,
+        "fff": 163934,
+        "frf": 163912,
+        "saving": 22,
+        "perGlyph": 0.000582010582010582,
+        "fffEdges": {
+          "start": 729,
+          "seam": 0,
+          "interior": 140378,
+          "boundary": 22827
+        },
+        "frfEdges": {
+          "start": 729,
+          "seam": 1510,
+          "interior": 140405,
+          "boundary": 21268
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 32375,
+          "boundary": 5250
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 350,
+          "interior": 32375,
+          "boundary": 4900
+        }
+      },
+      "shuffleCrop": {
+        "blocks": 175,
+        "n": 32550,
+        "fff": 141120,
+        "frf": 141140,
+        "saving": -20,
+        "perGlyph": -0.0006144393241167435,
+        "fffEdges": {
+          "start": 768,
+          "seam": 0,
+          "interior": 129014,
+          "boundary": 11338
+        },
+        "frfEdges": {
+          "start": 768,
+          "seam": 0,
+          "interior": 129015,
+          "boundary": 11357
+        },
+        "fffCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        },
+        "frfCounts": {
+          "start": 175,
+          "seam": 0,
+          "interior": 29750,
+          "boundary": 2625
+        }
+      },
+      "native": null,
+      "nonconsecutiveNative": {
+        "blocks": 23,
+        "n": 3099,
+        "fff": 13432,
+        "frf": 13427,
+        "saving": 5,
+        "perGlyph": 0.0016134236850596966,
+        "fffEdges": {
+          "start": 71,
+          "seam": 0,
+          "interior": 10425,
+          "boundary": 2936
+        },
+        "frfEdges": {
+          "start": 71,
+          "seam": 175,
+          "interior": 10407,
+          "boundary": 2774
+        },
+        "fffCounts": {
+          "start": 23,
+          "seam": 0,
+          "interior": 2386,
+          "boundary": 690
+        },
+        "frfCounts": {
+          "start": 23,
+          "seam": 46,
+          "interior": 2386,
+          "boundary": 644
+        }
+      },
+      "rowMajor": 154381,
+      "chapterDeltas": [
+        {
+          "ch": 16,
+          "full": 6,
+          "crop": 12
+        },
+        {
+          "ch": 17,
+          "full": 5,
+          "crop": -7
+        },
+        {
+          "ch": 18,
+          "full": 1,
+          "crop": 19
+        },
+        {
+          "ch": 19,
+          "full": -1,
+          "crop": 6
+        },
+        {
+          "ch": 20,
+          "full": -12,
+          "crop": 4
+        },
+        {
+          "ch": 21,
+          "full": -4,
+          "crop": 12
+        },
+        {
+          "ch": 22,
+          "full": 17,
+          "crop": 13
+        },
+        {
+          "ch": 23,
+          "full": 11,
+          "crop": 23
+        },
+        {
+          "ch": 24,
+          "full": 2,
+          "crop": -5
+        },
+        {
+          "ch": 25,
+          "full": -31,
+          "crop": -31
+        },
+        {
+          "ch": 26,
+          "full": -24,
+          "crop": -36
+        },
+        {
+          "ch": 27,
+          "full": 6,
+          "crop": 4
+        },
+        {
+          "ch": 28,
+          "full": 42,
+          "crop": 28
+        },
+        {
+          "ch": 29,
+          "full": 44,
+          "crop": 8
+        },
+        {
+          "ch": 30,
+          "full": -47,
+          "crop": -13
+        },
+        {
+          "ch": 31,
+          "full": -12,
+          "crop": -26
+        },
+        {
+          "ch": 32,
+          "full": -28,
+          "crop": -40
+        },
+        {
+          "ch": 33,
+          "full": -19,
+          "crop": 0
+        },
+        {
+          "ch": 34,
+          "full": 14,
+          "crop": 17
+        },
+        {
+          "ch": 35,
+          "full": 30,
+          "crop": 32
+        },
+        {
+          "ch": 36,
+          "full": -1,
+          "crop": 4
+        },
+        {
+          "ch": 37,
+          "full": 51,
+          "crop": 33
+        },
+        {
+          "ch": 38,
+          "full": -11,
+          "crop": -31
+        },
+        {
+          "ch": 39,
+          "full": 40,
+          "crop": 38
+        },
+        {
+          "ch": 40,
+          "full": 28,
+          "crop": 31
+        }
+      ]
+    },
+    "leviticus": {
+      "full": {
+        "blocks": 194,
+        "n": 41904,
+        "fff": 182252,
+        "frf": 182057,
+        "saving": 195,
+        "perGlyph": 0.004653493699885452,
+        "fffEdges": {
+          "start": 832,
+          "seam": 0,
+          "interior": 156093,
+          "boundary": 25327
+        },
+        "frfEdges": {
+          "start": 832,
+          "seam": 1729,
+          "interior": 155950,
+          "boundary": 23546
+        },
+        "fffCounts": {
+          "start": 194,
+          "seam": 0,
+          "interior": 35890,
+          "boundary": 5820
+        },
+        "frfCounts": {
+          "start": 194,
+          "seam": 388,
+          "interior": 35890,
+          "boundary": 5432
+        }
+      },
+      "cropFrozen": {
+        "blocks": 194,
+        "n": 36084,
+        "fff": 156906,
+        "frf": 156763,
+        "saving": 143,
+        "perGlyph": 0.00396297527990245,
+        "fffEdges": {
+          "start": 813,
+          "seam": 0,
+          "interior": 143529,
+          "boundary": 12564
+        },
+        "frfEdges": {
+          "start": 813,
+          "seam": 0,
+          "interior": 143333,
+          "boundary": 12617
+        },
+        "fffCounts": {
+          "start": 194,
+          "seam": 0,
+          "interior": 32980,
+          "boundary": 2910
+        },
+        "frfCounts": {
+          "start": 194,
+          "seam": 0,
+          "interior": 32980,
+          "boundary": 2910
+        }
+      },
+      "cropRefit": {
+        "blocks": 194,
+        "n": 36084,
+        "fff": 156827,
+        "frf": 156702,
+        "saving": 125,
+        "perGlyph": 0.0034641392306839595,
+        "fffEdges": {
+          "start": 824,
+          "seam": 0,
+          "interior": 143420,
+          "boundary": 12583
+        },
+        "frfEdges": {
+          "start": 824,
+          "seam": 0,
+          "interior": 143275,
+          "boundary": 12603
+        },
+        "fffCounts": {
+          "start": 194,
+          "seam": 0,
+          "interior": 32980,
+          "boundary": 2910
+        },
+        "frfCounts": {
+          "start": 194,
+          "seam": 0,
+          "interior": 32980,
+          "boundary": 2910
+        }
+      },
+      "matched": {
+        "blocks": 193,
+        "n": 41688,
+        "fff": 181325,
+        "frf": 181139,
+        "saving": 186,
+        "perGlyph": 0.004461715601611974,
+        "fffEdges": {
+          "start": 829,
+          "seam": 0,
+          "interior": 155300,
+          "boundary": 25196
+        },
+        "frfEdges": {
+          "start": 829,
+          "seam": 1722,
+          "interior": 155159,
+          "boundary": 23429
+        },
+        "fffCounts": {
+          "start": 193,
+          "seam": 0,
+          "interior": 35705,
+          "boundary": 5790
+        },
+        "frfCounts": {
+          "start": 193,
+          "seam": 386,
+          "interior": 35705,
+          "boundary": 5404
+        }
+      },
+      "shuffled": {
+        "blocks": 193,
+        "n": 41688,
+        "fff": 181032,
+        "frf": 181099,
+        "saving": -67,
+        "perGlyph": -0.0016071771253118403,
+        "fffEdges": {
+          "start": 829,
+          "seam": 0,
+          "interior": 155076,
+          "boundary": 25127
+        },
+        "frfEdges": {
+          "start": 829,
+          "seam": 1707,
+          "interior": 155093,
+          "boundary": 23470
+        },
+        "fffCounts": {
+          "start": 193,
+          "seam": 0,
+          "interior": 35705,
+          "boundary": 5790
+        },
+        "frfCounts": {
+          "start": 193,
+          "seam": 386,
+          "interior": 35705,
+          "boundary": 5404
+        }
+      },
+      "shuffleCrop": {
+        "blocks": 193,
+        "n": 35898,
+        "fff": 155913,
+        "frf": 155913,
+        "saving": 0,
+        "perGlyph": 0,
+        "fffEdges": {
+          "start": 821,
+          "seam": 0,
+          "interior": 142624,
+          "boundary": 12468
+        },
+        "frfEdges": {
+          "start": 821,
+          "seam": 0,
+          "interior": 142552,
+          "boundary": 12540
+        },
+        "fffCounts": {
+          "start": 193,
+          "seam": 0,
+          "interior": 32810,
+          "boundary": 2895
+        },
+        "frfCounts": {
+          "start": 193,
+          "seam": 0,
+          "interior": 32810,
+          "boundary": 2895
+        }
+      },
+      "native": null,
+      "nonconsecutiveNative": {
+        "blocks": 37,
+        "n": 5367,
+        "fff": 23098,
+        "frf": 23216,
+        "saving": -118,
+        "perGlyph": -0.02198621203651947,
+        "fffEdges": {
+          "start": 128,
+          "seam": 0,
+          "interior": 18224,
+          "boundary": 4746
+        },
+        "frfEdges": {
+          "start": 128,
+          "seam": 275,
+          "interior": 18350,
+          "boundary": 4463
+        },
+        "fffCounts": {
+          "start": 37,
+          "seam": 0,
+          "interior": 4220,
+          "boundary": 1110
+        },
+        "frfCounts": {
+          "start": 37,
+          "seam": 74,
+          "interior": 4220,
+          "boundary": 1036
+        }
+      },
+      "rowMajor": 172887,
+      "chapterDeltas": [
+        {
+          "ch": 1,
+          "full": 2,
+          "crop": 6
+        },
+        {
+          "ch": 2,
+          "full": 10,
+          "crop": 8
+        },
+        {
+          "ch": 3,
+          "full": 42,
+          "crop": 23
+        },
+        {
+          "ch": 4,
+          "full": -30,
+          "crop": -21
+        },
+        {
+          "ch": 5,
+          "full": -25,
+          "crop": -17
+        },
+        {
+          "ch": 6,
+          "full": 11,
+          "crop": -3
+        },
+        {
+          "ch": 7,
+          "full": 26,
+          "crop": 7
+        },
+        {
+          "ch": 8,
+          "full": 5,
+          "crop": 0
+        },
+        {
+          "ch": 9,
+          "full": 12,
+          "crop": 20
+        },
+        {
+          "ch": 10,
+          "full": 14,
+          "crop": 8
+        },
+        {
+          "ch": 11,
+          "full": -23,
+          "crop": -33
+        },
+        {
+          "ch": 12,
+          "full": 9,
+          "crop": 9
+        },
+        {
+          "ch": 13,
+          "full": -23,
+          "crop": 33
+        },
+        {
+          "ch": 14,
+          "full": 3,
+          "crop": -2
+        },
+        {
+          "ch": 15,
+          "full": -28,
+          "crop": -13
+        },
+        {
+          "ch": 16,
+          "full": 26,
+          "crop": -5
+        },
+        {
+          "ch": 17,
+          "full": 10,
+          "crop": 2
+        },
+        {
+          "ch": 18,
+          "full": 62,
+          "crop": 43
+        },
+        {
+          "ch": 19,
+          "full": 33,
+          "crop": 9
+        },
+        {
+          "ch": 20,
+          "full": 37,
+          "crop": 31
+        },
+        {
+          "ch": 21,
+          "full": -33,
+          "crop": -18
+        },
+        {
+          "ch": 22,
+          "full": -3,
+          "crop": 21
+        },
+        {
+          "ch": 23,
+          "full": 22,
+          "crop": 21
+        },
+        {
+          "ch": 24,
+          "full": 4,
+          "crop": -2
+        },
+        {
+          "ch": 25,
+          "full": 18,
+          "crop": 21
+        },
+        {
+          "ch": 26,
+          "full": 74,
+          "crop": 13
+        },
+        {
+          "ch": 27,
+          "full": -60,
+          "crop": -36
+        }
+      ]
+    },
+    "numbers": {
+      "full": {
+        "blocks": 279,
+        "n": 60264,
+        "fff": 262371,
+        "frf": 262071,
+        "saving": 300,
+        "perGlyph": 0.004978096375945838,
+        "fffEdges": {
+          "start": 1179,
+          "seam": 0,
+          "interior": 224808,
+          "boundary": 36384
+        },
+        "frfEdges": {
+          "start": 1179,
+          "seam": 2458,
+          "interior": 224480,
+          "boundary": 33954
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 51615,
+          "boundary": 8370
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 558,
+          "interior": 51615,
+          "boundary": 7812
+        }
+      },
+      "cropFrozen": {
+        "blocks": 279,
+        "n": 51894,
+        "fff": 225987,
+        "frf": 225659,
+        "saving": 328,
+        "perGlyph": 0.006320576559910587,
+        "fffEdges": {
+          "start": 1179,
+          "seam": 0,
+          "interior": 206692,
+          "boundary": 18116
+        },
+        "frfEdges": {
+          "start": 1179,
+          "seam": 0,
+          "interior": 206491,
+          "boundary": 17989
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        }
+      },
+      "cropRefit": {
+        "blocks": 279,
+        "n": 51894,
+        "fff": 226177,
+        "frf": 225852,
+        "saving": 325,
+        "perGlyph": 0.00626276640844799,
+        "fffEdges": {
+          "start": 1192,
+          "seam": 0,
+          "interior": 206832,
+          "boundary": 18153
+        },
+        "frfEdges": {
+          "start": 1192,
+          "seam": 0,
+          "interior": 206665,
+          "boundary": 17995
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        }
+      },
+      "matched": {
+        "blocks": 279,
+        "n": 60264,
+        "fff": 262371,
+        "frf": 262071,
+        "saving": 300,
+        "perGlyph": 0.004978096375945838,
+        "fffEdges": {
+          "start": 1179,
+          "seam": 0,
+          "interior": 224808,
+          "boundary": 36384
+        },
+        "frfEdges": {
+          "start": 1179,
+          "seam": 2458,
+          "interior": 224480,
+          "boundary": 33954
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 51615,
+          "boundary": 8370
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 558,
+          "interior": 51615,
+          "boundary": 7812
+        }
+      },
+      "shuffled": {
+        "blocks": 279,
+        "n": 60264,
+        "fff": 262628,
+        "frf": 262198,
+        "saving": 430,
+        "perGlyph": 0.007135271472189035,
+        "fffEdges": {
+          "start": 1179,
+          "seam": 0,
+          "interior": 225013,
+          "boundary": 36436
+        },
+        "frfEdges": {
+          "start": 1179,
+          "seam": 2435,
+          "interior": 224649,
+          "boundary": 33935
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 51615,
+          "boundary": 8370
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 558,
+          "interior": 51615,
+          "boundary": 7812
+        }
+      },
+      "shuffleCrop": {
+        "blocks": 279,
+        "n": 51894,
+        "fff": 226279,
+        "frf": 225868,
+        "saving": 411,
+        "perGlyph": 0.007919990750375767,
+        "fffEdges": {
+          "start": 1192,
+          "seam": 0,
+          "interior": 206973,
+          "boundary": 18114
+        },
+        "frfEdges": {
+          "start": 1192,
+          "seam": 0,
+          "interior": 206673,
+          "boundary": 18003
+        },
+        "fffCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        },
+        "frfCounts": {
+          "start": 279,
+          "seam": 0,
+          "interior": 47430,
+          "boundary": 4185
+        }
+      },
+      "native": null,
+      "nonconsecutiveNative": {
+        "blocks": 125,
+        "n": 15225,
+        "fff": 67325,
+        "frf": 68482,
+        "saving": -1157,
+        "perGlyph": -0.07599343185550082,
+        "fffEdges": {
+          "start": 531,
+          "seam": 0,
+          "interior": 50197,
+          "boundary": 16597
+        },
+        "frfEdges": {
+          "start": 531,
+          "seam": 1125,
+          "interior": 50976,
+          "boundary": 15850
+        },
+        "fffCounts": {
+          "start": 125,
+          "seam": 0,
+          "interior": 11350,
+          "boundary": 3750
+        },
+        "frfCounts": {
+          "start": 125,
+          "seam": 250,
+          "interior": 11350,
+          "boundary": 3500
+        }
+      },
+      "rowMajor": 245518,
+      "chapterDeltas": [
+        {
+          "ch": 1,
+          "full": 4,
+          "crop": 18
+        },
+        {
+          "ch": 2,
+          "full": 3,
+          "crop": 5
+        },
+        {
+          "ch": 3,
+          "full": -33,
+          "crop": -16
+        },
+        {
+          "ch": 4,
+          "full": 31,
+          "crop": 41
+        },
+        {
+          "ch": 5,
+          "full": -26,
+          "crop": -17
+        },
+        {
+          "ch": 6,
+          "full": 0,
+          "crop": -8
+        },
+        {
+          "ch": 7,
+          "full": 131,
+          "crop": 163
+        },
+        {
+          "ch": 8,
+          "full": -17,
+          "crop": -12
+        },
+        {
+          "ch": 9,
+          "full": -2,
+          "crop": -16
+        },
+        {
+          "ch": 10,
+          "full": 13,
+          "crop": -16
+        },
+        {
+          "ch": 11,
+          "full": -7,
+          "crop": -25
+        },
+        {
+          "ch": 12,
+          "full": 17,
+          "crop": 26
+        },
+        {
+          "ch": 13,
+          "full": 17,
+          "crop": 20
+        },
+        {
+          "ch": 14,
+          "full": -25,
+          "crop": -38
+        },
+        {
+          "ch": 15,
+          "full": 2,
+          "crop": 5
+        },
+        {
+          "ch": 16,
+          "full": 5,
+          "crop": -4
+        },
+        {
+          "ch": 17,
+          "full": 28,
+          "crop": 31
+        },
+        {
+          "ch": 18,
+          "full": 56,
+          "crop": 16
+        },
+        {
+          "ch": 19,
+          "full": 6,
+          "crop": -6
+        },
+        {
+          "ch": 20,
+          "full": 37,
+          "crop": 4
+        },
+        {
+          "ch": 21,
+          "full": 15,
+          "crop": 27
+        },
+        {
+          "ch": 22,
+          "full": -31,
+          "crop": -5
+        },
+        {
+          "ch": 23,
+          "full": 27,
+          "crop": 37
+        },
+        {
+          "ch": 24,
+          "full": -36,
+          "crop": -18
+        },
+        {
+          "ch": 25,
+          "full": 9,
+          "crop": 4
+        },
+        {
+          "ch": 26,
+          "full": 49,
+          "crop": 66
+        },
+        {
+          "ch": 27,
+          "full": 5,
+          "crop": -6
+        },
+        {
+          "ch": 28,
+          "full": -19,
+          "crop": -25
+        },
+        {
+          "ch": 29,
+          "full": 57,
+          "crop": 57
+        },
+        {
+          "ch": 30,
+          "full": -7,
+          "crop": -9
+        },
+        {
+          "ch": 31,
+          "full": -38,
+          "crop": -11
+        },
+        {
+          "ch": 32,
+          "full": 40,
+          "crop": 20
+        },
+        {
+          "ch": 33,
+          "full": 10,
+          "crop": 20
+        },
+        {
+          "ch": 34,
+          "full": 23,
+          "crop": 13
+        },
+        {
+          "ch": 35,
+          "full": -19,
+          "crop": -8
+        },
+        {
+          "ch": 36,
+          "full": -25,
+          "crop": -8
+        }
+      ]
+    },
+    "deuteronomy": {
+      "full": {
+        "blocks": 238,
+        "n": 51408,
+        "fff": 221595,
+        "frf": 221499,
+        "saving": 96,
+        "perGlyph": 0.0018674136321195146,
+        "fffEdges": {
+          "start": 1049,
+          "seam": 0,
+          "interior": 189772,
+          "boundary": 30774
+        },
+        "frfEdges": {
+          "start": 1049,
+          "seam": 2029,
+          "interior": 189683,
+          "boundary": 28738
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 44030,
+          "boundary": 7140
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 476,
+          "interior": 44030,
+          "boundary": 6664
+        }
+      },
+      "cropFrozen": {
+        "blocks": 238,
+        "n": 44268,
+        "fff": 190802,
+        "frf": 190713,
+        "saving": 89,
+        "perGlyph": 0.0020104816119996386,
+        "fffEdges": {
+          "start": 1030,
+          "seam": 0,
+          "interior": 174415,
+          "boundary": 15357
+        },
+        "frfEdges": {
+          "start": 1030,
+          "seam": 0,
+          "interior": 174323,
+          "boundary": 15360
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        }
+      },
+      "cropRefit": {
+        "blocks": 238,
+        "n": 44268,
+        "fff": 190843,
+        "frf": 190651,
+        "saving": 192,
+        "perGlyph": 0.00433721875847113,
+        "fffEdges": {
+          "start": 1047,
+          "seam": 0,
+          "interior": 174435,
+          "boundary": 15361
+        },
+        "frfEdges": {
+          "start": 1047,
+          "seam": 0,
+          "interior": 174210,
+          "boundary": 15394
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        }
+      },
+      "matched": {
+        "blocks": 238,
+        "n": 51408,
+        "fff": 221595,
+        "frf": 221499,
+        "saving": 96,
+        "perGlyph": 0.0018674136321195146,
+        "fffEdges": {
+          "start": 1049,
+          "seam": 0,
+          "interior": 189772,
+          "boundary": 30774
+        },
+        "frfEdges": {
+          "start": 1049,
+          "seam": 2029,
+          "interior": 189683,
+          "boundary": 28738
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 44030,
+          "boundary": 7140
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 476,
+          "interior": 44030,
+          "boundary": 6664
+        }
+      },
+      "shuffled": {
+        "blocks": 238,
+        "n": 51408,
+        "fff": 221598,
+        "frf": 221734,
+        "saving": -136,
+        "perGlyph": -0.0026455026455026454,
+        "fffEdges": {
+          "start": 1049,
+          "seam": 0,
+          "interior": 189743,
+          "boundary": 30806
+        },
+        "frfEdges": {
+          "start": 1049,
+          "seam": 2033,
+          "interior": 189894,
+          "boundary": 28758
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 44030,
+          "boundary": 7140
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 476,
+          "interior": 44030,
+          "boundary": 6664
+        }
+      },
+      "shuffleCrop": {
+        "blocks": 238,
+        "n": 44268,
+        "fff": 190779,
+        "frf": 190917,
+        "saving": -138,
+        "perGlyph": -0.003117375982651125,
+        "fffEdges": {
+          "start": 1047,
+          "seam": 0,
+          "interior": 174359,
+          "boundary": 15373
+        },
+        "frfEdges": {
+          "start": 1047,
+          "seam": 0,
+          "interior": 174445,
+          "boundary": 15425
+        },
+        "fffCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        },
+        "frfCounts": {
+          "start": 238,
+          "seam": 0,
+          "interior": 40460,
+          "boundary": 3570
+        }
+      },
+      "native": {
+        "blocks": 1,
+        "n": 153,
+        "fff": 691,
+        "frf": 677,
+        "saving": 14,
+        "perGlyph": 0.0915032679738562,
+        "fffEdges": {
+          "start": 4,
+          "seam": 0,
+          "interior": 558,
+          "boundary": 129
+        },
+        "frfEdges": {
+          "start": 4,
+          "seam": 11,
+          "interior": 546,
+          "boundary": 116
+        },
+        "fffCounts": {
+          "start": 1,
+          "seam": 0,
+          "interior": 122,
+          "boundary": 30
+        },
+        "frfCounts": {
+          "start": 1,
+          "seam": 2,
+          "interior": 122,
+          "boundary": 28
+        }
+      },
+      "nonconsecutiveNative": {
+        "blocks": 31,
+        "n": 4749,
+        "fff": 20594,
+        "frf": 20637,
+        "saving": -43,
+        "perGlyph": -0.009054537797431038,
+        "fffEdges": {
+          "start": 116,
+          "seam": 0,
+          "interior": 16415,
+          "boundary": 4063
+        },
+        "frfEdges": {
+          "start": 116,
+          "seam": 239,
+          "interior": 16443,
+          "boundary": 3839
+        },
+        "fffCounts": {
+          "start": 31,
+          "seam": 0,
+          "interior": 3788,
+          "boundary": 930
+        },
+        "frfCounts": {
+          "start": 31,
+          "seam": 62,
+          "interior": 3788,
+          "boundary": 868
+        }
+      },
+      "rowMajor": 207157,
+      "chapterDeltas": [
+        {
+          "ch": 1,
+          "full": 44,
+          "crop": 25
+        },
+        {
+          "ch": 2,
+          "full": 36,
+          "crop": 30
+        },
+        {
+          "ch": 3,
+          "full": 38,
+          "crop": -14
+        },
+        {
+          "ch": 4,
+          "full": 7,
+          "crop": -16
+        },
+        {
+          "ch": 5,
+          "full": -16,
+          "crop": 2
+        },
+        {
+          "ch": 6,
+          "full": 5,
+          "crop": -4
+        },
+        {
+          "ch": 7,
+          "full": -32,
+          "crop": -5
+        },
+        {
+          "ch": 8,
+          "full": 20,
+          "crop": -24
+        },
+        {
+          "ch": 9,
+          "full": 47,
+          "crop": 26
+        },
+        {
+          "ch": 10,
+          "full": -29,
+          "crop": -22
+        },
+        {
+          "ch": 11,
+          "full": 33,
+          "crop": 14
+        },
+        {
+          "ch": 12,
+          "full": 16,
+          "crop": -9
+        },
+        {
+          "ch": 13,
+          "full": -12,
+          "crop": 8
+        },
+        {
+          "ch": 14,
+          "full": -27,
+          "crop": -12
+        },
+        {
+          "ch": 15,
+          "full": 5,
+          "crop": -2
+        },
+        {
+          "ch": 16,
+          "full": -2,
+          "crop": 12
+        },
+        {
+          "ch": 17,
+          "full": -7,
+          "crop": 22
+        },
+        {
+          "ch": 18,
+          "full": -2,
+          "crop": 6
+        },
+        {
+          "ch": 19,
+          "full": -5,
+          "crop": 23
+        },
+        {
+          "ch": 20,
+          "full": -10,
+          "crop": 6
+        },
+        {
+          "ch": 21,
+          "full": 12,
+          "crop": 3
+        },
+        {
+          "ch": 22,
+          "full": 18,
+          "crop": 25
+        },
+        {
+          "ch": 23,
+          "full": 26,
+          "crop": 13
+        },
+        {
+          "ch": 24,
+          "full": -15,
+          "crop": 7
+        },
+        {
+          "ch": 25,
+          "full": -23,
+          "crop": 12
+        },
+        {
+          "ch": 26,
+          "full": 23,
+          "crop": 15
+        },
+        {
+          "ch": 27,
+          "full": 6,
+          "crop": 20
+        },
+        {
+          "ch": 28,
+          "full": -5,
+          "crop": 54
+        },
+        {
+          "ch": 29,
+          "full": -4,
+          "crop": 2
+        },
+        {
+          "ch": 30,
+          "full": -18,
+          "crop": -7
+        },
+        {
+          "ch": 31,
+          "full": 4,
+          "crop": 17
+        },
+        {
+          "ch": 32,
+          "full": -46,
+          "crop": -30
+        },
+        {
+          "ch": 33,
+          "full": 2,
+          "crop": -12
+        },
+        {
+          "ch": 34,
+          "full": 7,
+          "crop": 7
+        }
+      ]
+    }
+  },
+  "qualification": "H41 frozen FFF/FRF point-Huffman models plus separately refit k5 training-only interior tables. All comparisons share 3780 table bits+3 mode bits so deltas cancel. Crop keeps 62 columns; decoder verifies retained subset, omitted endpoints are not reconstructed by cropped stream alone (unchanged side info in verification). Edge decomposition full stream: start, physical forward seam, both endpoints interior columns, other boundary. Native source S/A/P action distinct from eight orientation masks. Nonconsecutive synthetic control cycles B and C across different complete blocks of same chapter, preserves role marginals; actual nonconsecutive equal-length verse triples with both gaps>1 additionally tested, not matched length distribution. Chapter synthetic boundaries are not verse boundaries. Leviticus/Numbers/Deut previously used in corpus-wide work, new orientation assay but not pristine blind books. Row-major model retains all physical adjacencies. No inferential significance claim."
+}

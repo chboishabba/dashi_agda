@@ -1,0 +1,731 @@
+{
+  "orbits": [
+    [
+      2
+    ],
+    [
+      3,
+      7,
+      11,
+      13,
+      20,
+      24
+    ],
+    [
+      4,
+      6,
+      9,
+      15,
+      19,
+      22
+    ],
+    [
+      5,
+      8,
+      12,
+      16,
+      21,
+      25
+    ],
+    [
+      10,
+      14,
+      17,
+      18,
+      23,
+      26
+    ]
+  ],
+  "checks": 729,
+  "models": {
+    "0": {
+      "training": {
+        "n": 82,
+        "hist": {
+          "equalsSecond": 7,
+          "orbit2": 14,
+          "orbit1": 17,
+          "orbit4": 13,
+          "orbit3": 17,
+          "equalsFirst": 6,
+          "equalAnchors": 3,
+          "orbit0": 5
+        },
+        "stats": {
+          "affine": {
+            "truth": 5,
+            "single": 82,
+            "correctSingle": 5,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 3,
+            "single": 82,
+            "correctSingle": 3,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 8,
+            "single": 12,
+            "correctSingle": 0,
+            "totalCandidates": 152,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 37,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 884,
+            "unconstrained": 12
+          },
+          "inverseProjective": {
+            "truth": 34,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 884,
+            "unconstrained": 12
+          },
+          "projectiveUnion": {
+            "truth": 44,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1164,
+            "unconstrained": 12
+          }
+        }
+      },
+      "shem": {
+        "n": 72,
+        "hist": {
+          "equalsSecond": 5,
+          "orbit3": 7,
+          "orbit4": 20,
+          "orbit1": 15,
+          "equalsFirst": 5,
+          "orbit2": 12,
+          "equalAnchors": 6,
+          "allEqual": 2
+        },
+        "stats": {
+          "affine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 4,
+            "single": 72,
+            "correctSingle": 4,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 4,
+            "single": 16,
+            "correctSingle": 2,
+            "totalCandidates": 128,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 34,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 880,
+            "unconstrained": 16
+          },
+          "inverseProjective": {
+            "truth": 36,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 880,
+            "unconstrained": 16
+          },
+          "projectiveUnion": {
+            "truth": 41,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1104,
+            "unconstrained": 16
+          }
+        }
+      },
+      "shifted": {
+        "n": 72,
+        "hist": {
+          "equalsSecond": 6,
+          "allEqual": 1,
+          "orbit1": 18,
+          "orbit3": 9,
+          "orbit4": 14,
+          "orbit2": 15,
+          "equalsFirst": 4,
+          "equalAnchors": 4,
+          "orbit0": 1
+        },
+        "stats": {
+          "affine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 4,
+            "single": 72,
+            "correctSingle": 4,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 4,
+            "single": 20,
+            "correctSingle": 2,
+            "totalCandidates": 124,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 38,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 956,
+            "unconstrained": 20
+          },
+          "inverseProjective": {
+            "truth": 39,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 956,
+            "unconstrained": 20
+          },
+          "projectiveUnion": {
+            "truth": 46,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1164,
+            "unconstrained": 20
+          }
+        }
+      },
+      "selectors": {
+        "global": {
+          "aligned": {
+            "covered": 15,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 8,
+            "totalCandidates": 384,
+            "sheetsCorrect": 15
+          },
+          "shifted": {
+            "covered": 15,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 5,
+            "totalCandidates": 402,
+            "sheetsCorrect": 15
+          }
+        },
+        "axis": {
+          "aligned": {
+            "covered": 12,
+            "single": 1,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 587,
+            "sheetsCorrect": 12
+          },
+          "shifted": {
+            "covered": 16,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 532,
+            "sheetsCorrect": 16
+          }
+        },
+        "phase": {
+          "aligned": {
+            "covered": 22,
+            "single": 2,
+            "correctSingle": 0,
+            "empty": 1,
+            "totalCandidates": 556,
+            "sheetsCorrect": 22
+          },
+          "shifted": {
+            "covered": 18,
+            "single": 3,
+            "correctSingle": 1,
+            "empty": 0,
+            "totalCandidates": 457,
+            "sheetsCorrect": 18
+          }
+        }
+      }
+    },
+    "1": {
+      "training": {
+        "n": 82,
+        "hist": {
+          "equalAnchors": 7,
+          "orbit2": 14,
+          "orbit1": 17,
+          "orbit4": 13,
+          "orbit3": 17,
+          "equalsFirst": 6,
+          "equalsSecond": 3,
+          "orbit0": 5
+        },
+        "stats": {
+          "affine": {
+            "truth": 5,
+            "single": 82,
+            "correctSingle": 5,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 3,
+            "single": 82,
+            "correctSingle": 3,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 8,
+            "single": 19,
+            "correctSingle": 0,
+            "totalCandidates": 145,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 41,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1017,
+            "unconstrained": 19
+          },
+          "inverseProjective": {
+            "truth": 38,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1017,
+            "unconstrained": 19
+          },
+          "projectiveUnion": {
+            "truth": 48,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1269,
+            "unconstrained": 19
+          }
+        }
+      },
+      "shem": {
+        "n": 72,
+        "hist": {
+          "equalAnchors": 5,
+          "orbit3": 7,
+          "orbit4": 20,
+          "orbit1": 15,
+          "equalsFirst": 5,
+          "orbit2": 12,
+          "equalsSecond": 6,
+          "allEqual": 2
+        },
+        "stats": {
+          "affine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 4,
+            "single": 72,
+            "correctSingle": 4,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 4,
+            "single": 15,
+            "correctSingle": 2,
+            "totalCandidates": 129,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 33,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 861,
+            "unconstrained": 15
+          },
+          "inverseProjective": {
+            "truth": 35,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 861,
+            "unconstrained": 15
+          },
+          "projectiveUnion": {
+            "truth": 40,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1089,
+            "unconstrained": 15
+          }
+        }
+      },
+      "shifted": {
+        "n": 72,
+        "hist": {
+          "orbit1": 12,
+          "orbit3": 16,
+          "orbit4": 13,
+          "equalsSecond": 7,
+          "equalsFirst": 7,
+          "orbit2": 12,
+          "equalAnchors": 3,
+          "orbit0": 2
+        },
+        "stats": {
+          "affine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 4,
+            "single": 13,
+            "correctSingle": 0,
+            "totalCandidates": 131,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 37,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 823,
+            "unconstrained": 13
+          },
+          "inverseProjective": {
+            "truth": 35,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 823,
+            "unconstrained": 13
+          },
+          "projectiveUnion": {
+            "truth": 42,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1059,
+            "unconstrained": 13
+          }
+        }
+      },
+      "selectors": {
+        "global": {
+          "aligned": {
+            "covered": 15,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 7,
+            "totalCandidates": 390,
+            "sheetsCorrect": 15
+          },
+          "shifted": {
+            "covered": 12,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 3,
+            "totalCandidates": 414,
+            "sheetsCorrect": 12
+          }
+        },
+        "axis": {
+          "aligned": {
+            "covered": 19,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 572,
+            "sheetsCorrect": 19
+          },
+          "shifted": {
+            "covered": 14,
+            "single": 3,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 477,
+            "sheetsCorrect": 14
+          }
+        },
+        "phase": {
+          "aligned": {
+            "covered": 21,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 572,
+            "sheetsCorrect": 21
+          },
+          "shifted": {
+            "covered": 14,
+            "single": 6,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 462,
+            "sheetsCorrect": 14
+          }
+        }
+      }
+    },
+    "2": {
+      "training": {
+        "n": 82,
+        "hist": {
+          "equalsFirst": 7,
+          "orbit2": 14,
+          "orbit1": 17,
+          "orbit4": 13,
+          "orbit3": 17,
+          "equalAnchors": 6,
+          "equalsSecond": 3,
+          "orbit0": 5
+        },
+        "stats": {
+          "affine": {
+            "truth": 5,
+            "single": 82,
+            "correctSingle": 5,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 3,
+            "single": 82,
+            "correctSingle": 3,
+            "totalCandidates": 82,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 8,
+            "single": 17,
+            "correctSingle": 0,
+            "totalCandidates": 147,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 40,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 979,
+            "unconstrained": 17
+          },
+          "inverseProjective": {
+            "truth": 37,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 979,
+            "unconstrained": 17
+          },
+          "projectiveUnion": {
+            "truth": 47,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1239,
+            "unconstrained": 17
+          }
+        }
+      },
+      "shem": {
+        "n": 72,
+        "hist": {
+          "equalsFirst": 5,
+          "orbit3": 7,
+          "orbit4": 20,
+          "orbit1": 15,
+          "equalAnchors": 5,
+          "orbit2": 12,
+          "equalsSecond": 6,
+          "allEqual": 2
+        },
+        "stats": {
+          "affine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 4,
+            "single": 72,
+            "correctSingle": 4,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 4,
+            "single": 20,
+            "correctSingle": 2,
+            "totalCandidates": 124,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 37,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 956,
+            "unconstrained": 20
+          },
+          "inverseProjective": {
+            "truth": 39,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 956,
+            "unconstrained": 20
+          },
+          "projectiveUnion": {
+            "truth": 44,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1164,
+            "unconstrained": 20
+          }
+        }
+      },
+      "shifted": {
+        "n": 72,
+        "hist": {
+          "orbit1": 22,
+          "equalsFirst": 3,
+          "orbit3": 17,
+          "orbit4": 10,
+          "equalAnchors": 6,
+          "orbit2": 5,
+          "equalsSecond": 8,
+          "orbit0": 1
+        },
+        "stats": {
+          "affine": {
+            "truth": 1,
+            "single": 72,
+            "correctSingle": 1,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "inverseAffine": {
+            "truth": 2,
+            "single": 72,
+            "correctSingle": 2,
+            "totalCandidates": 72,
+            "unconstrained": 0
+          },
+          "lineConic": {
+            "truth": 3,
+            "single": 17,
+            "correctSingle": 0,
+            "totalCandidates": 127,
+            "unconstrained": 0
+          },
+          "projective": {
+            "truth": 31,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 899,
+            "unconstrained": 17
+          },
+          "inverseProjective": {
+            "truth": 34,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 899,
+            "unconstrained": 17
+          },
+          "projectiveUnion": {
+            "truth": 38,
+            "single": 0,
+            "correctSingle": 0,
+            "totalCandidates": 1119,
+            "unconstrained": 17
+          }
+        }
+      },
+      "selectors": {
+        "global": {
+          "aligned": {
+            "covered": 15,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 7,
+            "totalCandidates": 390,
+            "sheetsCorrect": 15
+          },
+          "shifted": {
+            "covered": 22,
+            "single": 0,
+            "correctSingle": 0,
+            "empty": 6,
+            "totalCandidates": 396,
+            "sheetsCorrect": 22
+          }
+        },
+        "axis": {
+          "aligned": {
+            "covered": 11,
+            "single": 2,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 562,
+            "sheetsCorrect": 11
+          },
+          "shifted": {
+            "covered": 27,
+            "single": 6,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 522,
+            "sheetsCorrect": 27
+          }
+        },
+        "phase": {
+          "aligned": {
+            "covered": 15,
+            "single": 2,
+            "correctSingle": 0,
+            "empty": 2,
+            "totalCandidates": 510,
+            "sheetsCorrect": 15
+          },
+          "shifted": {
+            "covered": 19,
+            "single": 6,
+            "correctSingle": 0,
+            "empty": 0,
+            "totalCandidates": 522,
+            "sheetsCorrect": 19
+          }
+        }
+      }
+    }
+  },
+  "qualification": "Existing gematria chart, full S3 ratio orbit partition includes diagonal/equal-role strata. Ratio sheet selectors are training-only modal candidate rules on visible pair axis type/phase, not source-attested. Projective line is 8 signed nonzero points in a 2D F3 span; dependent pair explicitly unconstrained (27 candidates), not a fabricated line; inversion uses occupied zero separately. Affine inverse line is global zero-extended inversion pullback, not the existing projective quadratic conic itself. All source spans reused, no fresh blind test."
+}

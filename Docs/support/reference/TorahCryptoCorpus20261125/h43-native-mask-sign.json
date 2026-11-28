@@ -1,0 +1,468 @@
+{
+  "frames": 1322,
+  "tails": 19298,
+  "base": {
+    "payload": 1305746,
+    "header": 4695,
+    "total": 1310441,
+    "verified": 304850
+  },
+  "results": [
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1339953,
+      "header": 4993,
+      "total": 1344946,
+      "verified": 304850,
+      "zeroTrits": 283755,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1311760,
+      "header": 6407,
+      "total": 1318167,
+      "verified": 304850,
+      "zeroTrits": 283755,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1444529,
+      "header": 4993,
+      "total": 1449522,
+      "verified": 304850,
+      "zeroTrits": 300393,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1443821,
+      "header": 6407,
+      "total": 1450228,
+      "verified": 304850,
+      "zeroTrits": 300393,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1524378,
+      "header": 5008,
+      "total": 1529386,
+      "verified": 304850,
+      "zeroTrits": 371265,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1493233,
+      "header": 6422,
+      "total": 1499655,
+      "verified": 304850,
+      "zeroTrits": 371265,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 16
+      },
+      "ctx": false,
+      "payload": 1569467,
+      "header": 5018,
+      "total": 1574485,
+      "verified": 304850,
+      "zeroTrits": 323778,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 16
+      },
+      "ctx": true,
+      "payload": 1568718,
+      "header": 6432,
+      "total": 1575150,
+      "verified": 304850,
+      "zeroTrits": 323778,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1630189,
+      "header": 5018,
+      "total": 1635207,
+      "verified": 304850,
+      "zeroTrits": 357736,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1619578,
+      "header": 6432,
+      "total": 1626010,
+      "verified": 304850,
+      "zeroTrits": 357736,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 27
+      },
+      "ctx": false,
+      "payload": 1517067,
+      "header": 5018,
+      "total": 1522085,
+      "verified": 304850,
+      "zeroTrits": 310445,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 27
+      },
+      "ctx": true,
+      "payload": 1516464,
+      "header": 6432,
+      "total": 1522896,
+      "verified": 304850,
+      "zeroTrits": 310445,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1598355,
+      "header": 5018,
+      "total": 1603373,
+      "verified": 304850,
+      "zeroTrits": 371265,
+      "trits": 856656
+    },
+    {
+      "orientation": "physical",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1573203,
+      "header": 6432,
+      "total": 1579635,
+      "verified": 304850,
+      "zeroTrits": 371265,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1339953,
+      "header": 4993,
+      "total": 1344946,
+      "verified": 304850,
+      "zeroTrits": 283755,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1339926,
+      "header": 6407,
+      "total": 1346333,
+      "verified": 304850,
+      "zeroTrits": 283755,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1444529,
+      "header": 4993,
+      "total": 1449522,
+      "verified": 304850,
+      "zeroTrits": 300393,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": false,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1444529,
+      "header": 6407,
+      "total": 1450936,
+      "verified": 304850,
+      "zeroTrits": 300393,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1521026,
+      "header": 5008,
+      "total": 1526034,
+      "verified": 304850,
+      "zeroTrits": 373587,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": false,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1504643,
+      "header": 6422,
+      "total": 1511065,
+      "verified": 304850,
+      "zeroTrits": 373587,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 16
+      },
+      "ctx": false,
+      "payload": 1569362,
+      "header": 5018,
+      "total": 1574380,
+      "verified": 304850,
+      "zeroTrits": 324113,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 16
+      },
+      "ctx": true,
+      "payload": 1568642,
+      "header": 6432,
+      "total": 1575074,
+      "verified": 304850,
+      "zeroTrits": 324113,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1630522,
+      "header": 5018,
+      "total": 1635540,
+      "verified": 304850,
+      "zeroTrits": 357693,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1619557,
+      "header": 6432,
+      "total": 1625989,
+      "verified": 304850,
+      "zeroTrits": 357693,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 27
+      },
+      "ctx": false,
+      "payload": 1516756,
+      "header": 5018,
+      "total": 1521774,
+      "verified": 304850,
+      "zeroTrits": 310027,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": true,
+        "multi": true,
+        "sym": true,
+        "group": 27
+      },
+      "ctx": true,
+      "payload": 1516492,
+      "header": 6432,
+      "total": 1522924,
+      "verified": 304850,
+      "zeroTrits": 310027,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": false,
+      "payload": 1596842,
+      "header": 5018,
+      "total": 1601860,
+      "verified": 304850,
+      "zeroTrits": 373587,
+      "trits": 856656
+    },
+    {
+      "orientation": "FRF",
+      "opt": {
+        "temporal": false,
+        "multi": true,
+        "sym": true,
+        "group": 9
+      },
+      "ctx": true,
+      "payload": 1584034,
+      "header": 6432,
+      "total": 1590466,
+      "verified": 304850,
+      "zeroTrits": 373587,
+      "trits": 856656
+    }
+  ],
+  "patch": {
+    "exact": 91,
+    "trits": 273,
+    "encodedPayloadBits": 420,
+    "modelBits": 202,
+    "copyPreviousHits": 7
+  },
+  "qualification": "JS independent reference of flagship temporal_forward, multiscale_forward, symmetry_forward and inverses; group16 donor and 9/27 alternatives. Uses native three-trit support mask and conditional packed sign pattern Huffman, NOT donor zlib or rANS. Previous mask context optional, not donor previous-trit bucket. Model fitted on coded stream and lengths charged, descriptive compression not held-out prediction. Full frames across chapter boundaries, chapter lengths and literal tails retained; temporal across synthetic frames not historical chronology. Header accounting: 5 bits/code length, 32 bits per mask bucket length, chapter headers,32 mode/count plus 96 bits for stream lengths; fixed chart/protocol. Actual prefix strings decoded; bit counts not packed serialization. Missing section exact patch derived from true target, previous91 prefix glyphs as simple producer. No claimed Hebrew semantic assignment or independent prediction."
+}

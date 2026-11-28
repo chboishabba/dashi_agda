@@ -1,0 +1,65 @@
+{
+  "books": {
+    "genesis": {
+      "chapters": 50,
+      "chapterNumberGaps": [],
+      "verseNumberGaps": [],
+      "conflicts": [],
+      "emptyVerses": [],
+      "last": {
+        "v": 26,
+        "letters": "וימתיוסףבןמאהועשרשניםויחנטואתוויישםבארוןבמצרים",
+        "conflicts": 0
+      }
+    },
+    "exodus": {
+      "chapters": 40,
+      "chapterNumberGaps": [],
+      "verseNumberGaps": [],
+      "conflicts": [],
+      "emptyVerses": [],
+      "last": {
+        "v": 38,
+        "letters": "כיענןיהוהעלהמשכןיומםואשתהיהלילהבולעיניכלביתישראלבכלמסעיהם",
+        "conflicts": 0
+      }
+    },
+    "leviticus": {
+      "chapters": 27,
+      "chapterNumberGaps": [],
+      "verseNumberGaps": [],
+      "conflicts": [],
+      "emptyVerses": [],
+      "last": {
+        "v": 34,
+        "letters": "אלההמצותאשרצוהיהוהאתמשהאלבניישראלבהרסיני",
+        "conflicts": 0
+      }
+    },
+    "numbers": {
+      "chapters": 36,
+      "chapterNumberGaps": [],
+      "verseNumberGaps": [],
+      "conflicts": [],
+      "emptyVerses": [],
+      "last": {
+        "v": 13,
+        "letters": "אלההמצותוהמשפטיםאשרצוהיהוהבידמשהאלבניישראלבערבתמואבעלירדןירחו",
+        "conflicts": 0
+      }
+    },
+    "deuteronomy": {
+      "chapters": 34,
+      "chapterNumberGaps": [],
+      "verseNumberGaps": [],
+      "conflicts": [],
+      "emptyVerses": [],
+      "last": {
+        "v": 12,
+        "letters": "ולכלהידהחזקהולכלהמוראהגדולאשרעשהמשהלעיניכלישראל",
+        "conflicts": 0
+      }
+    }
+  },
+  "fixtureHoles": []
+}

@@ -1,0 +1,270 @@
+{
+  "sourceCommit": "d40e791e284305f1a219c57c353ba281a7a51335",
+  "sourceBlob": "6127a572e7fb4bd5a7bd9a9511c8f0aaa0dab5ab",
+  "policy": "w plus ketiv k, exclude qere q; collisions explicit and excluded from window tests",
+  "chapters": 40,
+  "verses": 1213,
+  "letters": 63531,
+  "sourceRoundtrips": 63531,
+  "ketiv": 12,
+  "qere": 13,
+  "anomalyCount": 3,
+  "conflicts": [],
+  "eligibleWindows": 1133,
+  "equalWindows": [
+    {
+      "c": 14,
+      "start": 19,
+      "lengths": [
+        72,
+        72,
+        72
+      ],
+      "equal": true
+    },
+    {
+      "c": 20,
+      "start": 13,
+      "lengths": [
+        6,
+        6,
+        6
+      ],
+      "equal": true
+    }
+  ],
+  "exact72": [
+    {
+      "c": 14,
+      "start": 19,
+      "lengths": [
+        72,
+        72,
+        72
+      ],
+      "equal": true
+    }
+  ],
+  "chapterCounts": [
+    {
+      "c": 1,
+      "verses": 22,
+      "letters": 957
+    },
+    {
+      "c": 2,
+      "verses": 25,
+      "letters": 1294
+    },
+    {
+      "c": 3,
+      "verses": 22,
+      "letters": 1535
+    },
+    {
+      "c": 4,
+      "verses": 31,
+      "letters": 1681
+    },
+    {
+      "c": 5,
+      "verses": 23,
+      "letters": 1231
+    },
+    {
+      "c": 6,
+      "verses": 30,
+      "letters": 1575
+    },
+    {
+      "c": 7,
+      "verses": 29,
+      "letters": 1600
+    },
+    {
+      "c": 8,
+      "verses": 28,
+      "letters": 1657
+    },
+    {
+      "c": 9,
+      "verses": 35,
+      "letters": 1936
+    },
+    {
+      "c": 10,
+      "verses": 29,
+      "letters": 1791
+    },
+    {
+      "c": 11,
+      "verses": 10,
+      "letters": 641
+    },
+    {
+      "c": 12,
+      "verses": 51,
+      "letters": 2836
+    },
+    {
+      "c": 13,
+      "verses": 22,
+      "letters": 1237
+    },
+    {
+      "c": 14,
+      "verses": 31,
+      "letters": 1853
+    },
+    {
+      "c": 15,
+      "verses": 27,
+      "letters": 1234
+    },
+    {
+      "c": 16,
+      "verses": 36,
+      "letters": 2067
+    },
+    {
+      "c": 17,
+      "verses": 16,
+      "letters": 914
+    },
+    {
+      "c": 18,
+      "verses": 27,
+      "letters": 1510
+    },
+    {
+      "c": 19,
+      "verses": 25,
+      "letters": 1371
+    },
+    {
+      "c": 20,
+      "verses": 26,
+      "letters": 1143
+    },
+    {
+      "c": 21,
+      "verses": 37,
+      "letters": 1587
+    },
+    {
+      "c": 22,
+      "verses": 30,
+      "letters": 1259
+    },
+    {
+      "c": 23,
+      "verses": 33,
+      "letters": 1500
+    },
+    {
+      "c": 24,
+      "verses": 18,
+      "letters": 966
+    },
+    {
+      "c": 25,
+      "verses": 40,
+      "letters": 1751
+    },
+    {
+      "c": 26,
+      "verses": 37,
+      "letters": 1993
+    },
+    {
+      "c": 27,
+      "verses": 21,
+      "letters": 1084
+    },
+    {
+      "c": 28,
+      "verses": 43,
+      "letters": 2302
+    },
+    {
+      "c": 29,
+      "verses": 46,
+      "letters": 2474
+    },
+    {
+      "c": 30,
+      "verses": 38,
+      "letters": 1780
+    },
+    {
+      "c": 31,
+      "verses": 18,
+      "letters": 866
+    },
+    {
+      "c": 32,
+      "verses": 35,
+      "letters": 2032
+    },
+    {
+      "c": 33,
+      "verses": 23,
+      "letters": 1286
+    },
+    {
+      "c": 34,
+      "verses": 35,
+      "letters": 1976
+    },
+    {
+      "c": 35,
+      "verses": 35,
+      "letters": 1693
+    },
+    {
+      "c": 36,
+      "verses": 38,
+      "letters": 2075
+    },
+    {
+      "c": 37,
+      "verses": 29,
+      "letters": 1419
+    },
+    {
+      "c": 38,
+      "verses": 31,
+      "letters": 1669
+    },
+    {
+      "c": 39,
+      "verses": 43,
+      "letters": 2142
+    },
+    {
+      "c": 40,
+      "verses": 38,
+      "letters": 1614
+    }
+  ],
+  "anomalies": [
+    {
+      "chapter": 8,
+      "verse": 11,
+      "slot": 14,
+      "active": 0
+    },
+    {
+      "chapter": 14,
+      "verse": 25,
+      "slot": 16,
+      "active": 0
+    },
+    {
+      "chapter": 24,
+      "verse": 18,
+      "slot": 14,
+      "active": 0
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "trainingBlocks": 85,
+  "testBlocks": 175,
+  "crossBlocks": 338,
+  "frame": "anchor visible A; scale first nonzero visible difference from B, then nonwrapping adjacent A/B with separate missing sentinel 27; preserve fallback index, scale, zero and signs",
+  "models": {
+    "pair": {
+      "trainingKeys": 4,
+      "trainingConflicts": 4,
+      "trainingOracleCorrect": 418,
+      "test": {
+        "n": 12600,
+        "seen": 12599,
+        "unique": 12599,
+        "correct": 832,
+        "truthInFibre": 12565,
+        "ambiguous": 12599,
+        "unseen": 1
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 24334,
+        "unique": 24334,
+        "correct": 1653,
+        "truthInFibre": 24277,
+        "ambiguous": 24334,
+        "unseen": 2
+      },
+      "shem": {
+        "n": 72,
+        "seen": 72,
+        "unique": 72,
+        "correct": 7,
+        "truthInFibre": 72,
+        "ambiguous": 72,
+        "unseen": 0,
+        "output": "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם"
+      }
+    },
+    "oneNeighbour": {
+      "trainingKeys": 31,
+      "trainingConflicts": 31,
+      "trainingOracleCorrect": 486,
+      "test": {
+        "n": 12600,
+        "seen": 12594,
+        "unique": 11537,
+        "correct": 703,
+        "truthInFibre": 12550,
+        "ambiguous": 12594,
+        "unseen": 6
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 24331,
+        "unique": 22251,
+        "correct": 1431,
+        "truthInFibre": 24231,
+        "ambiguous": 24331,
+        "unseen": 5
+      },
+      "shem": {
+        "n": 72,
+        "seen": 72,
+        "unique": 65,
+        "correct": 7,
+        "truthInFibre": 72,
+        "ambiguous": 72,
+        "unseen": 0,
+        "output": "דייעמלכהההאהה?ה?הלופפיי?תניירראלוילןמעחיההוי?ע?תמדדע?נ?מםירהםויחמממברריה"
+      }
+    },
+    "twoNeighbour": {
+      "trainingKeys": 754,
+      "trainingConflicts": 750,
+      "trainingOracleCorrect": 1333,
+      "test": {
+        "n": 12600,
+        "seen": 12538,
+        "unique": 5778,
+        "correct": 268,
+        "truthInFibre": 3730,
+        "ambiguous": 12505,
+        "unseen": 62
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 24216,
+        "unique": 11277,
+        "correct": 570,
+        "truthInFibre": 7422,
+        "ambiguous": 24123,
+        "unseen": 120
+      },
+      "shem": {
+        "n": 72,
+        "seen": 72,
+        "unique": 38,
+        "correct": 1,
+        "truthInFibre": 18,
+        "ambiguous": 72,
+        "unseen": 0,
+        "output": "ד?לע???ךב?להךםסץ?ד??פ??ןדנ????אל?ז???ברכ?בך?ם???מ?????ךרטד?ע??כצףךע???טי"
+      }
+    },
+    "local": {
+      "trainingKeys": 6025,
+      "trainingConflicts": 93,
+      "trainingOracleCorrect": 6026,
+      "test": {
+        "n": 12600,
+        "seen": 246,
+        "unique": 232,
+        "correct": 13,
+        "truthInFibre": 14,
+        "ambiguous": 14,
+        "unseen": 12354
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 504,
+        "unique": 469,
+        "correct": 23,
+        "truthInFibre": 25,
+        "ambiguous": 35,
+        "unseen": 23832
+      },
+      "shem": {
+        "n": 72,
+        "seen": 6,
+        "unique": 6,
+        "correct": 0,
+        "truthInFibre": 0,
+        "ambiguous": 0,
+        "unseen": 66,
+        "output": "ם?ל???????????????????ק?????ור??????????????????????????י???????????????"
+      }
+    },
+    "wider": {
+      "trainingKeys": 6120,
+      "trainingConflicts": 0,
+      "trainingOracleCorrect": 6120,
+      "test": {
+        "n": 12600,
+        "seen": 2,
+        "unique": 2,
+        "correct": 0,
+        "truthInFibre": 0,
+        "ambiguous": 0,
+        "unseen": 12598
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 1,
+        "unique": 1,
+        "correct": 0,
+        "truthInFibre": 0,
+        "ambiguous": 0,
+        "unseen": 24335
+      },
+      "shem": {
+        "n": 72,
+        "seen": 0,
+        "unique": 0,
+        "correct": 0,
+        "truthInFibre": 0,
+        "ambiguous": 0,
+        "unseen": 72,
+        "output": "????????????????????????????????????????????????????????????????????????"
+      }
+    },
+    "indexedLocal": {
+      "trainingKeys": 6084,
+      "trainingConflicts": 35,
+      "trainingOracleCorrect": 6085,
+      "test": {
+        "n": 12600,
+        "seen": 98,
+        "unique": 94,
+        "correct": 8,
+        "truthInFibre": 8,
+        "ambiguous": 4,
+        "unseen": 12502
+      },
+      "cross": {
+        "n": 24336,
+        "seen": 175,
+        "unique": 159,
+        "correct": 8,
+        "truthInFibre": 9,
+        "ambiguous": 16,
+        "unseen": 24161
+      },
+      "shem": {
+        "n": 72,
+        "seen": 1,
+        "unique": 1,
+        "correct": 0,
+        "truthInFibre": 0,
+        "ambiguous": 0,
+        "unseen": 71,
+        "output": "ם???????????????????????????????????????????????????????????????????????"
+      }
+    }
+  },
+  "backoff": {
+    "test": {
+      "n": 12600,
+      "hits": 678,
+      "unique": 12600,
+      "seen": 12599,
+      "by": {
+        "twoNeighbour": 5641,
+        "oneNeighbour": 6052,
+        "pair": 666,
+        "indexedLocal": 94,
+        "local": 146,
+        "global": 1
+      },
+      "exactBlocks": 0
+    },
+    "cross": {
+      "n": 24336,
+      "hits": 1413,
+      "unique": 24336,
+      "seen": 24334,
+      "by": {
+        "twoNeighbour": 11009,
+        "oneNeighbour": 11574,
+        "local": 317,
+        "pair": 1275,
+        "indexedLocal": 159,
+        "global": 2
+      },
+      "exactBlocks": 0
+    },
+    "shem": {
+      "n": 72,
+      "hits": 6,
+      "unique": 72,
+      "seen": 72,
+      "by": {
+        "indexedLocal": 1,
+        "oneNeighbour": 29,
+        "local": 5,
+        "twoNeighbour": 35,
+        "pair": 2
+      },
+      "exactBlocks": 0,
+      "output": "םילעמלכךבהלהךםסץהדופפיקןדנייוראלוזלןמברכהבךיםעעתמדדעננךרידרעםוכצףךעבררטי"
+    }
+  },
+  "poly": [
+    {
+      "degree": 1,
+      "features": 5,
+      "rank": 5,
+      "augmentedRank": 6,
+      "consistent": false,
+      "trainingRows": 5539
+    },
+    {
+      "degree": 2,
+      "features": 15,
+      "rank": 15,
+      "augmentedRank": 16,
+      "consistent": false,
+      "trainingRows": 5539
+    },
+    {
+      "degree": 3,
+      "features": 35,
+      "rank": 35,
+      "augmentedRank": 36,
+      "consistent": false,
+      "trainingRows": 5539
+    }
+  ],
+  "checks": {
+    "normalization": 702,
+    "reconstruction": 18954
+  },
+  "actualShem": "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים",
+  "qualification": "exploratory reused corpus; empirical normalized context maps fitted on Exodus 1–13 only, no linguistic model, no C supplied to inference. A unique modal value is not logically unique support. Nonwrapping boundary comparator; not source-attested. Genesis previously inspected and not a fresh blind holdout."
+}

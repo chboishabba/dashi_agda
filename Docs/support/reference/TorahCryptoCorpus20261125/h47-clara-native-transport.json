@@ -1,0 +1,1377 @@
+{
+  "results": [
+    {
+      "book": "genesis",
+      "ch": 36,
+      "n": 31,
+      "models": [
+        {
+          "sel": "A",
+          "kind": "normalized",
+          "aligned": {
+            "n": 30,
+            "hits": 6,
+            "unique": 14,
+            "uniqueTrue": 2,
+            "minWeight": 45,
+            "hist": [
+              6,
+              7,
+              13,
+              4
+            ],
+            "forcedZeroCross": 5
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 1,
+            "unique": 14,
+            "uniqueTrue": 0,
+            "minWeight": 52,
+            "hist": [
+              1,
+              12,
+              11,
+              6
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "A",
+          "kind": "physical",
+          "aligned": {
+            "n": 30,
+            "hits": 4,
+            "unique": 14,
+            "uniqueTrue": 0,
+            "minWeight": 43,
+            "hist": [
+              4,
+              11,
+              13,
+              2
+            ],
+            "forcedZeroCross": 4
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 3,
+            "unique": 14,
+            "uniqueTrue": 0,
+            "minWeight": 50,
+            "hist": [
+              3,
+              8,
+              15,
+              4
+            ],
+            "forcedZeroCross": 3
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "normalized",
+          "aligned": {
+            "n": 30,
+            "hits": 3,
+            "unique": 27,
+            "uniqueTrue": 2,
+            "minWeight": 54,
+            "hist": [
+              3,
+              9,
+              9,
+              9
+            ],
+            "forcedZeroCross": 7
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 1,
+            "unique": 28,
+            "uniqueTrue": 0,
+            "minWeight": 57,
+            "hist": [
+              1,
+              10,
+              10,
+              9
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "physical",
+          "aligned": {
+            "n": 30,
+            "hits": 2,
+            "unique": 27,
+            "uniqueTrue": 0,
+            "minWeight": 52,
+            "hist": [
+              2,
+              9,
+              14,
+              5
+            ],
+            "forcedZeroCross": 8
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 2,
+            "unique": 27,
+            "uniqueTrue": 1,
+            "minWeight": 53,
+            "hist": [
+              2,
+              8,
+              15,
+              5
+            ],
+            "forcedZeroCross": 5
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "normalized",
+          "aligned": {
+            "n": 30,
+            "hits": 3,
+            "unique": 12,
+            "uniqueTrue": 2,
+            "minWeight": 46,
+            "hist": [
+              3,
+              12,
+              11,
+              4
+            ],
+            "forcedZeroCross": 6
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 1,
+            "unique": 13,
+            "uniqueTrue": 0,
+            "minWeight": 55,
+            "hist": [
+              1,
+              11,
+              10,
+              8
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "physical",
+          "aligned": {
+            "n": 30,
+            "hits": 2,
+            "unique": 12,
+            "uniqueTrue": 0,
+            "minWeight": 45,
+            "hist": [
+              2,
+              12,
+              15,
+              1
+            ],
+            "forcedZeroCross": 5
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 2,
+            "unique": 13,
+            "uniqueTrue": 0,
+            "minWeight": 50,
+            "hist": [
+              2,
+              10,
+              14,
+              4
+            ],
+            "forcedZeroCross": 6
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "normalized",
+          "aligned": {
+            "n": 30,
+            "hits": 2,
+            "unique": 26,
+            "uniqueTrue": 2,
+            "minWeight": 56,
+            "hist": [
+              2,
+              9,
+              10,
+              9
+            ],
+            "forcedZeroCross": 7
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 0,
+            "unique": 26,
+            "uniqueTrue": 0,
+            "minWeight": 59,
+            "hist": [
+              0,
+              10,
+              11,
+              9
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "physical",
+          "aligned": {
+            "n": 30,
+            "hits": 1,
+            "unique": 26,
+            "uniqueTrue": 0,
+            "minWeight": 55,
+            "hist": [
+              1,
+              8,
+              16,
+              5
+            ],
+            "forcedZeroCross": 8
+          },
+          "shifted": {
+            "n": 30,
+            "hits": 1,
+            "unique": 26,
+            "uniqueTrue": 1,
+            "minWeight": 57,
+            "hist": [
+              1,
+              7,
+              16,
+              6
+            ],
+            "forcedZeroCross": 6
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 6,
+            "nonzero": 25,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 5,
+            "firstCrossings": 1
+          }
+        }
+      ]
+    },
+    {
+      "book": "exodus",
+      "ch": 14,
+      "n": 72,
+      "models": [
+        {
+          "sel": "A",
+          "kind": "normalized",
+          "aligned": {
+            "n": 71,
+            "hits": 6,
+            "unique": 16,
+            "uniqueTrue": 2,
+            "minWeight": 116,
+            "hist": [
+              6,
+              22,
+              35,
+              8
+            ],
+            "forcedZeroCross": 8
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 7,
+            "unique": 23,
+            "uniqueTrue": 2,
+            "minWeight": 112,
+            "hist": [
+              7,
+              23,
+              34,
+              7
+            ],
+            "forcedZeroCross": 4
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "A",
+          "kind": "physical",
+          "aligned": {
+            "n": 71,
+            "hits": 4,
+            "unique": 17,
+            "uniqueTrue": 1,
+            "minWeight": 122,
+            "hist": [
+              4,
+              20,
+              39,
+              8
+            ],
+            "forcedZeroCross": 7
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 5,
+            "unique": 16,
+            "uniqueTrue": 2,
+            "minWeight": 118,
+            "hist": [
+              5,
+              24,
+              32,
+              10
+            ],
+            "forcedZeroCross": 5
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "normalized",
+          "aligned": {
+            "n": 71,
+            "hits": 6,
+            "unique": 63,
+            "uniqueTrue": 2,
+            "minWeight": 130,
+            "hist": [
+              6,
+              15,
+              35,
+              15
+            ],
+            "forcedZeroCross": 9
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 7,
+            "unique": 63,
+            "uniqueTrue": 6,
+            "minWeight": 125,
+            "hist": [
+              7,
+              19,
+              29,
+              16
+            ],
+            "forcedZeroCross": 6
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "physical",
+          "aligned": {
+            "n": 71,
+            "hits": 3,
+            "unique": 63,
+            "uniqueTrue": 1,
+            "minWeight": 135,
+            "hist": [
+              3,
+              15,
+              39,
+              14
+            ],
+            "forcedZeroCross": 8
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 5,
+            "unique": 63,
+            "uniqueTrue": 3,
+            "minWeight": 138,
+            "hist": [
+              5,
+              18,
+              24,
+              24
+            ],
+            "forcedZeroCross": 7
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "normalized",
+          "aligned": {
+            "n": 71,
+            "hits": 8,
+            "unique": 12,
+            "uniqueTrue": 1,
+            "minWeight": 108,
+            "hist": [
+              8,
+              24,
+              33,
+              6
+            ],
+            "forcedZeroCross": 7
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 7,
+            "unique": 17,
+            "uniqueTrue": 1,
+            "minWeight": 112,
+            "hist": [
+              7,
+              24,
+              32,
+              8
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "physical",
+          "aligned": {
+            "n": 71,
+            "hits": 7,
+            "unique": 13,
+            "uniqueTrue": 0,
+            "minWeight": 108,
+            "hist": [
+              7,
+              26,
+              32,
+              6
+            ],
+            "forcedZeroCross": 5
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 8,
+            "unique": 14,
+            "uniqueTrue": 2,
+            "minWeight": 105,
+            "hist": [
+              8,
+              29,
+              26,
+              8
+            ],
+            "forcedZeroCross": 5
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "normalized",
+          "aligned": {
+            "n": 71,
+            "hits": 6,
+            "unique": 29,
+            "uniqueTrue": 2,
+            "minWeight": 114,
+            "hist": [
+              6,
+              24,
+              33,
+              8
+            ],
+            "forcedZeroCross": 7
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 10,
+            "unique": 27,
+            "uniqueTrue": 3,
+            "minWeight": 106,
+            "hist": [
+              10,
+              24,
+              29,
+              8
+            ],
+            "forcedZeroCross": 4
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "physical",
+          "aligned": {
+            "n": 71,
+            "hits": 10,
+            "unique": 28,
+            "uniqueTrue": 1,
+            "minWeight": 108,
+            "hist": [
+              10,
+              22,
+              31,
+              8
+            ],
+            "forcedZeroCross": 8
+          },
+          "shifted": {
+            "n": 71,
+            "hits": 13,
+            "unique": 26,
+            "uniqueTrue": 2,
+            "minWeight": 111,
+            "hist": [
+              13,
+              20,
+              23,
+              15
+            ],
+            "forcedZeroCross": 6
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 7,
+            "nonzero": 65,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 6,
+            "firstCrossings": 1
+          }
+        }
+      ]
+    },
+    {
+      "book": "exodus",
+      "ch": 20,
+      "n": 6,
+      "models": [
+        {
+          "sel": "A",
+          "kind": "normalized",
+          "aligned": {
+            "n": 5,
+            "hits": 2,
+            "unique": 5,
+            "uniqueTrue": 2,
+            "minWeight": 6,
+            "hist": [
+              2,
+              1,
+              1,
+              1
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              2,
+              1,
+              2
+            ],
+            "forcedZeroCross": 0
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "A",
+          "kind": "physical",
+          "aligned": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              1,
+              3,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 9,
+            "hist": [
+              0,
+              2,
+              2,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "normalized",
+          "aligned": {
+            "n": 5,
+            "hits": 2,
+            "unique": 5,
+            "uniqueTrue": 2,
+            "minWeight": 6,
+            "hist": [
+              2,
+              1,
+              1,
+              1
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              2,
+              1,
+              2
+            ],
+            "forcedZeroCross": 0
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "physical",
+          "aligned": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              1,
+              3,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 9,
+            "hist": [
+              0,
+              2,
+              2,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "normalized",
+          "aligned": {
+            "n": 5,
+            "hits": 2,
+            "unique": 5,
+            "uniqueTrue": 2,
+            "minWeight": 6,
+            "hist": [
+              2,
+              1,
+              1,
+              1
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              2,
+              1,
+              2
+            ],
+            "forcedZeroCross": 0
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "physical",
+          "aligned": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              1,
+              3,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 9,
+            "hist": [
+              0,
+              2,
+              2,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "normalized",
+          "aligned": {
+            "n": 5,
+            "hits": 2,
+            "unique": 5,
+            "uniqueTrue": 2,
+            "minWeight": 6,
+            "hist": [
+              2,
+              1,
+              1,
+              1
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              2,
+              1,
+              2
+            ],
+            "forcedZeroCross": 0
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "physical",
+          "aligned": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 10,
+            "hist": [
+              0,
+              1,
+              3,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "shifted": {
+            "n": 5,
+            "hits": 0,
+            "unique": 5,
+            "uniqueTrue": 0,
+            "minWeight": 9,
+            "hist": [
+              0,
+              2,
+              2,
+              1
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 3,
+            "nonzero": 3,
+            "mixed": 1,
+            "firstZero": 1,
+            "firstNonzero": 0,
+            "seedOrbitCeiling": 2,
+            "firstCrossings": 1
+          }
+        }
+      ]
+    },
+    {
+      "book": "deuteronomy",
+      "ch": 32,
+      "n": 51,
+      "models": [
+        {
+          "sel": "A",
+          "kind": "normalized",
+          "aligned": {
+            "n": 50,
+            "hits": 0,
+            "unique": 18,
+            "uniqueTrue": 0,
+            "minWeight": 90,
+            "hist": [
+              0,
+              18,
+              24,
+              8
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 4,
+            "unique": 19,
+            "uniqueTrue": 0,
+            "minWeight": 78,
+            "hist": [
+              4,
+              21,
+              18,
+              7
+            ],
+            "forcedZeroCross": 3
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "A",
+          "kind": "physical",
+          "aligned": {
+            "n": 50,
+            "hits": 1,
+            "unique": 18,
+            "uniqueTrue": 0,
+            "minWeight": 95,
+            "hist": [
+              1,
+              12,
+              28,
+              9
+            ],
+            "forcedZeroCross": 0
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 3,
+            "unique": 18,
+            "uniqueTrue": 0,
+            "minWeight": 87,
+            "hist": [
+              3,
+              17,
+              20,
+              10
+            ],
+            "forcedZeroCross": 1
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "normalized",
+          "aligned": {
+            "n": 50,
+            "hits": 0,
+            "unique": 46,
+            "uniqueTrue": 0,
+            "minWeight": 100,
+            "hist": [
+              0,
+              14,
+              22,
+              14
+            ],
+            "forcedZeroCross": 2
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 4,
+            "unique": 46,
+            "uniqueTrue": 2,
+            "minWeight": 87,
+            "hist": [
+              4,
+              16,
+              19,
+              11
+            ],
+            "forcedZeroCross": 5
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "pair",
+          "kind": "physical",
+          "aligned": {
+            "n": 50,
+            "hits": 1,
+            "unique": 46,
+            "uniqueTrue": 1,
+            "minWeight": 107,
+            "hist": [
+              1,
+              7,
+              26,
+              16
+            ],
+            "forcedZeroCross": 0
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 1,
+            "unique": 46,
+            "uniqueTrue": 1,
+            "minWeight": 94,
+            "hist": [
+              1,
+              16,
+              21,
+              12
+            ],
+            "forcedZeroCross": 3
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "normalized",
+          "aligned": {
+            "n": 50,
+            "hits": 3,
+            "unique": 13,
+            "uniqueTrue": 0,
+            "minWeight": 84,
+            "hist": [
+              3,
+              19,
+              19,
+              9
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 4,
+            "unique": 12,
+            "uniqueTrue": 1,
+            "minWeight": 76,
+            "hist": [
+              4,
+              20,
+              22,
+              4
+            ],
+            "forcedZeroCross": 4
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "13",
+          "kind": "physical",
+          "aligned": {
+            "n": 50,
+            "hits": 3,
+            "unique": 15,
+            "uniqueTrue": 0,
+            "minWeight": 93,
+            "hist": [
+              3,
+              10,
+              28,
+              9
+            ],
+            "forcedZeroCross": 0
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 3,
+            "unique": 13,
+            "uniqueTrue": 0,
+            "minWeight": 80,
+            "hist": [
+              3,
+              20,
+              21,
+              6
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "normalized",
+          "aligned": {
+            "n": 50,
+            "hits": 0,
+            "unique": 28,
+            "uniqueTrue": 0,
+            "minWeight": 94,
+            "hist": [
+              0,
+              17,
+              22,
+              11
+            ],
+            "forcedZeroCross": 1
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 4,
+            "unique": 28,
+            "uniqueTrue": 2,
+            "minWeight": 76,
+            "hist": [
+              4,
+              22,
+              18,
+              6
+            ],
+            "forcedZeroCross": 5
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        },
+        {
+          "sel": "27",
+          "kind": "physical",
+          "aligned": {
+            "n": 50,
+            "hits": 2,
+            "unique": 26,
+            "uniqueTrue": 0,
+            "minWeight": 96,
+            "hist": [
+              2,
+              11,
+              26,
+              11
+            ],
+            "forcedZeroCross": 0
+          },
+          "shifted": {
+            "n": 50,
+            "hits": 2,
+            "unique": 26,
+            "uniqueTrue": 0,
+            "minWeight": 87,
+            "hist": [
+              2,
+              17,
+              23,
+              8
+            ],
+            "forcedZeroCross": 2
+          },
+          "orbit": {
+            "blocks": 1,
+            "zero": 1,
+            "nonzero": 50,
+            "mixed": 1,
+            "firstZero": 0,
+            "firstNonzero": 1,
+            "seedOrbitCeiling": 49,
+            "firstCrossings": 1
+          }
+        }
+      ]
+    }
+  ],
+  "qualification": "Frozen H47 training-selected operators, actual equal-length verse windows rather than synthetic blocks; middle row reversed, original source glyphs preserved. No gate fitted on native windows; teacher-forced oracle union and minimum support, not blind completion. Short windows do not have a lag13/27 return where unavailable. All previously examined."
+}

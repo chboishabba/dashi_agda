@@ -1,0 +1,581 @@
+{
+  "original": [
+    {
+      "mode": "language",
+      "chart": "old",
+      "shift": 0,
+      "map": 11,
+      "marginal": 13,
+      "mapText": "יארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריהוה",
+      "marginalText": "יאהייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייאה",
+      "posteriorMean": 0.11427539638881075,
+      "mapProbability": 4.6706305231251436e-33
+    },
+    {
+      "mode": "uniform",
+      "chart": "old",
+      "shift": 0,
+      "map": 11,
+      "marginal": 14,
+      "mapText": "יארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריהוה",
+      "marginalText": "יאיייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייייאה",
+      "posteriorMean": 0.09665508881082908,
+      "mapProbability": 8.843156884725634e-41
+    },
+    {
+      "mode": "geometry",
+      "chart": "old",
+      "shift": 0,
+      "map": 14,
+      "marginal": 14,
+      "mapText": "לייויהיהלאיהילאיבהיהרייאליהיאאריאהאויהוושיההאיואהיייהיייההייייםוולואההואייויאהנאהוימייויווצ",
+      "marginalText": "לייויהיהלאיהילאיבהיהרייאליהיאאריאהאויהוושיההאיואהיייהיייההייייםוולואההואייויאהנאהוימייויווה",
+      "posteriorMean": 0.11246642435145986,
+      "mapProbability": 1.9475806285854716e-87
+    },
+    {
+      "mode": "joint",
+      "chart": "old",
+      "shift": 0,
+      "map": 11,
+      "marginal": 13,
+      "mapText": "יארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריהוה",
+      "marginalText": "יאיייייייייייייייייייייוייייייהייייייייייייהייוייייייייייייייייייייייייייייייייויייייייייאה",
+      "posteriorMean": 0.10778482916808538,
+      "mapProbability": 5.2251643348269954e-40
+    },
+    {
+      "mode": "direct",
+      "chart": "old",
+      "shift": 0,
+      "map": 11,
+      "marginal": 12,
+      "mapText": "יארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריהוה",
+      "marginalText": "יאיייייייייייייייייייייוייייייהייייייייייייהייויייייייייייייייייייייייייייייאייייייייייייאה",
+      "posteriorMean": 0.11119267181507676,
+      "mapProbability": 8.851103371441843e-40
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 0,
+      "map": 12,
+      "marginal": 12,
+      "mapText": "וייווייאלאייילאיבהיירייווייהאאריווליאההיהיההאהואלוויהייייההיייוהויווההויייויאיםוהוימייווווצ",
+      "marginalText": "וייווייאלאייילאיבהיירייווייהאאריווליאההיהיההאהואלוויהייייההיייוהויווההויייויאיםוהוימייוווומ",
+      "posteriorMean": 0.10965745158262206,
+      "mapProbability": 3.69474078569387e-88
+    },
+    {
+      "mode": "joint",
+      "chart": "ayak",
+      "shift": 0,
+      "map": 11,
+      "marginal": 12,
+      "mapText": "יארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריםויארץמצריהוה",
+      "marginalText": "יאיייייייייייייייהייייייייייייהייייייייייייהייוייייייייייייייייייייייהייייייאייייייייייייאה",
+      "posteriorMean": 0.10738796671144483,
+      "mapProbability": 5.002072414220238e-40
+    },
+    {
+      "mode": "geometry",
+      "chart": "shuffled",
+      "shift": 0,
+      "map": 10,
+      "marginal": 9,
+      "mapText": "יהולההיהווייילויאייייייאיישההרהיאהההייאושיההויווהתוההייייהייויהאימיהייאאייויאינםיוימהויויימ",
+      "marginalText": "יהולההיהווייילויאייייייאיישההרהיאהההייאושיההויווהתוההייייהייויהאימיהייאאייויאינםיוימהויויוה",
+      "posteriorMean": 0.11257759134544328,
+      "mapProbability": 2.5951581705707596e-87
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 1,
+      "map": 15,
+      "marginal": 16,
+      "mapText": "מוויוליויייאמהאםיייהייייאהיורולייאריאייוייייואיייוביוהייאיוייייההוייהליהייייייכויהריולויאלה",
+      "marginalText": "מוויוליויייאמהאםיייהייייאהיורולייאריאייוייייואיייוביוהייאיוייייההוייהליהייייייכויהריולויאהל",
+      "posteriorMean": 0.10752426255920468,
+      "mapProbability": 5.321215560768585e-89
+    }
+  ],
+  "regression": [
+    {
+      "mode": "language",
+      "chart": "old",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 81,
+      "marginal": 110,
+      "exact": 0
+    },
+    {
+      "mode": "uniform",
+      "chart": "old",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 78,
+      "marginal": 96,
+      "exact": 0
+    },
+    {
+      "mode": "geometry",
+      "chart": "old",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 112,
+      "marginal": 110,
+      "exact": 0
+    },
+    {
+      "mode": "joint",
+      "chart": "old",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 79,
+      "marginal": 113,
+      "exact": 0
+    },
+    {
+      "mode": "direct",
+      "chart": "old",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 81,
+      "marginal": 119,
+      "exact": 0
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 100,
+      "marginal": 99,
+      "exact": 0
+    },
+    {
+      "mode": "joint",
+      "chart": "ayak",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 79,
+      "marginal": 108,
+      "exact": 0
+    },
+    {
+      "mode": "geometry",
+      "chart": "shuffled",
+      "shift": 0,
+      "spans": 11,
+      "n": 1001,
+      "map": 96,
+      "marginal": 93,
+      "exact": 0
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 1,
+      "spans": 11,
+      "n": 1001,
+      "map": 106,
+      "marginal": 105,
+      "exact": 0
+    }
+  ],
+  "small": [
+    {
+      "mode": "language",
+      "chart": "old",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 3,
+          "marginal": 3,
+          "exact": 3
+        },
+        "3": {
+          "n": 33,
+          "map": 9,
+          "marginal": 7,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 12,
+          "marginal": 15,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "uniform",
+      "chart": "old",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 4,
+          "marginal": 4,
+          "exact": 4
+        },
+        "3": {
+          "n": 33,
+          "map": 9,
+          "marginal": 7,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 11,
+          "marginal": 15,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "geometry",
+      "chart": "old",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 3,
+          "marginal": 3,
+          "exact": 3
+        },
+        "3": {
+          "n": 33,
+          "map": 2,
+          "marginal": 2,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 13,
+          "marginal": 14,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "joint",
+      "chart": "old",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 3,
+          "marginal": 3,
+          "exact": 3
+        },
+        "3": {
+          "n": 33,
+          "map": 9,
+          "marginal": 7,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 12,
+          "marginal": 18,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "direct",
+      "chart": "old",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 3,
+          "marginal": 3,
+          "exact": 3
+        },
+        "3": {
+          "n": 33,
+          "map": 9,
+          "marginal": 7,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 11,
+          "marginal": 19,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 4,
+          "marginal": 4,
+          "exact": 4
+        },
+        "3": {
+          "n": 33,
+          "map": 2,
+          "marginal": 2,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 10,
+          "marginal": 11,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "joint",
+      "chart": "ayak",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 3,
+          "marginal": 3,
+          "exact": 3
+        },
+        "3": {
+          "n": 33,
+          "map": 9,
+          "marginal": 7,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 12,
+          "marginal": 16,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "geometry",
+      "chart": "shuffled",
+      "shift": 0,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 4,
+          "marginal": 4,
+          "exact": 4
+        },
+        "3": {
+          "n": 33,
+          "map": 2,
+          "marginal": 2,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 6,
+          "marginal": 8,
+          "exact": 0
+        }
+      }
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "shift": 1,
+      "stats": {
+        "1": {
+          "n": 11,
+          "map": 4,
+          "marginal": 4,
+          "exact": 4
+        },
+        "3": {
+          "n": 33,
+          "map": 2,
+          "marginal": 2,
+          "exact": 0
+        },
+        "9": {
+          "n": 99,
+          "map": 13,
+          "marginal": 12,
+          "exact": 0
+        }
+      }
+    }
+  ],
+  "windows": [
+    1,
+    4,
+    7,
+    10,
+    13,
+    16,
+    19,
+    22,
+    25,
+    28,
+    31
+  ],
+  "exhaustive": 27,
+  "retrieval": [
+    {
+      "k": 3,
+      "count": 0,
+      "distinct": 0,
+      "examples": []
+    },
+    {
+      "k": 6,
+      "count": 0,
+      "distinct": 0,
+      "examples": []
+    },
+    {
+      "k": 12,
+      "count": 0,
+      "distinct": 0,
+      "examples": []
+    }
+  ],
+  "gap": [
+    {
+      "mode": "language",
+      "chart": "old",
+      "matrix": [
+        [
+          9,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          6,
+          3,
+          1
+        ],
+        [
+          2,
+          5,
+          1,
+          3
+        ],
+        [
+          1,
+          4,
+          3,
+          3
+        ]
+      ],
+      "located": 7,
+      "locations": 11
+    },
+    {
+      "mode": "joint",
+      "chart": "ayak",
+      "matrix": [
+        [
+          9,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          6,
+          3,
+          1
+        ],
+        [
+          2,
+          4,
+          2,
+          3
+        ],
+        [
+          1,
+          4,
+          4,
+          2
+        ]
+      ],
+      "located": 8,
+      "locations": 11
+    },
+    {
+      "mode": "geometry",
+      "chart": "ayak",
+      "matrix": [
+        [
+          9,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          6,
+          3,
+          1
+        ],
+        [
+          1,
+          3,
+          3,
+          4
+        ],
+        [
+          3,
+          4,
+          2,
+          2
+        ]
+      ],
+      "located": 8,
+      "locations": 11
+    }
+  ],
+  "ends": [
+    {
+      "book": "exodus",
+      "language": 7,
+      "lag216": 9,
+      "n": 91
+    },
+    {
+      "book": "leviticus",
+      "language": 10,
+      "lag216": 6,
+      "n": 91
+    },
+    {
+      "book": "numbers",
+      "language": 10,
+      "lag216": 6,
+      "n": 91
+    },
+    {
+      "book": "deuteronomy",
+      "language": 13,
+      "lag216": 5,
+      "n": 91
+    }
+  ],
+  "qualification": "Exact finite max/sum-product for specified positive conditional model with fixed observed +/-216 anchors and right first2 glyph likelihood. Geometry support/sign residual uses H43 arithmetic and H44-style backoff; direct shares same anchor/mask information. Right anchors participate at every position, backward messages include immediate right boundary. MAP exact up to floating arithmetic, not unique historical recovery; marginal modes not necessarily joint MAP. Original adds 432 right glyphs and 432 left glyphs (explicit extra information), target never in fit. Deut systematic chapter sample previously inspected. Length test 0..3 uniform length prior, location test only ±1 seam for synthetic single deletion; not real lacuna. Literal retrieval from training only, not cipher proof. End backtests earlier books only, lag216 zero innovation and greedy trigram, not extrapolated historical text. No compression objective."
+}

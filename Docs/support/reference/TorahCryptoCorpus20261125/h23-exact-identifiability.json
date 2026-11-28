@@ -1,0 +1,784 @@
+{
+  "source": "pinned WLC / H20 exact indexed Shem",
+  "chart": "existing H18b gematria",
+  "shemRoles": [
+    {
+      "n": 72,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 3,
+          "unique": 64,
+          "correctUnique": 3,
+          "empty": 8,
+          "histogram": {
+            "0": 8,
+            "1": 64
+          }
+        },
+        "reflected": {
+          "truthInFibre": 2,
+          "unique": 64,
+          "correctUnique": 2,
+          "empty": 8,
+          "histogram": {
+            "0": 8,
+            "1": 64
+          }
+        },
+        "two": {
+          "truthInFibre": 5,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 8,
+          "histogram": {
+            "0": 8,
+            "2": 64
+          }
+        },
+        "twelve": {
+          "truthInFibre": 32,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 8,
+          "histogram": {
+            "0": 8,
+            "12": 64
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 56,
+        "ambiguousPairs": 12,
+        "ambiguousOccurrences": 27,
+        "oracleMaxCorrect": 58,
+        "largestObservedFibre": 3,
+        "witness": {
+          "pair": [
+            "ה",
+            "ו"
+          ],
+          "outputs": [
+            {
+              "glyph": "ו",
+              "count": 2,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 0
+              }
+            },
+            {
+              "glyph": "ח",
+              "count": 1,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 23
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 72,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 3,
+          "unique": 65,
+          "correctUnique": 3,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "1": 65
+          }
+        },
+        "reflected": {
+          "truthInFibre": 2,
+          "unique": 65,
+          "correctUnique": 2,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "1": 65
+          }
+        },
+        "two": {
+          "truthInFibre": 5,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "2": 65
+          }
+        },
+        "twelve": {
+          "truthInFibre": 32,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "12": 65
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 61,
+        "ambiguousPairs": 7,
+        "ambiguousOccurrences": 17,
+        "oracleMaxCorrect": 63,
+        "largestObservedFibre": 3,
+        "witness": {
+          "pair": [
+            "י",
+            "י"
+          ],
+          "outputs": [
+            {
+              "glyph": "ל",
+              "count": 1,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 1
+              }
+            },
+            {
+              "glyph": "י",
+              "count": 1,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 21
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 72,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 3,
+          "unique": 65,
+          "correctUnique": 3,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "1": 65
+          }
+        },
+        "reflected": {
+          "truthInFibre": 2,
+          "unique": 65,
+          "correctUnique": 2,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "1": 65
+          }
+        },
+        "two": {
+          "truthInFibre": 5,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "2": 65
+          }
+        },
+        "twelve": {
+          "truthInFibre": 32,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 7,
+          "histogram": {
+            "0": 7,
+            "12": 65
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 64,
+        "ambiguousPairs": 5,
+        "ambiguousOccurrences": 11,
+        "oracleMaxCorrect": 66,
+        "largestObservedFibre": 3,
+        "witness": {
+          "pair": [
+            "י",
+            "ל"
+          ],
+          "outputs": [
+            {
+              "glyph": "י",
+              "count": 1,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 1
+              }
+            },
+            {
+              "glyph": "ה",
+              "count": 1,
+              "where": {
+                "book": "exodus",
+                "chapter": 14,
+                "verses": [
+                  19,
+                  20,
+                  21
+                ],
+                "column": 43
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    }
+  ],
+  "trainRoles": [
+    {
+      "n": 6120,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 227,
+          "unique": 5743,
+          "correctUnique": 227,
+          "empty": 377,
+          "histogram": {
+            "0": 377,
+            "1": 5743
+          }
+        },
+        "reflected": {
+          "truthInFibre": 206,
+          "unique": 5743,
+          "correctUnique": 206,
+          "empty": 377,
+          "histogram": {
+            "0": 377,
+            "1": 5743
+          }
+        },
+        "two": {
+          "truthInFibre": 433,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 377,
+          "histogram": {
+            "0": 377,
+            "2": 5743
+          }
+        },
+        "twelve": {
+          "truthInFibre": 2460,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 377,
+          "histogram": {
+            "0": 377,
+            "12": 5743
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 582,
+        "ambiguousPairs": 486,
+        "ambiguousOccurrences": 6017,
+        "oracleMaxCorrect": 1372,
+        "largestObservedFibre": 22,
+        "witness": {
+          "pair": [
+            "ו",
+            "כ"
+          ],
+          "outputs": [
+            {
+              "glyph": "ו",
+              "count": 3,
+              "where": {
+                "book": "exodus",
+                "chapter": 1,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "א",
+              "count": 2,
+              "where": {
+                "book": "exodus",
+                "chapter": 3,
+                "block": 5,
+                "column": 51
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 6120,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 227,
+          "unique": 5707,
+          "correctUnique": 227,
+          "empty": 413,
+          "histogram": {
+            "0": 413,
+            "1": 5707
+          }
+        },
+        "reflected": {
+          "truthInFibre": 206,
+          "unique": 5707,
+          "correctUnique": 206,
+          "empty": 413,
+          "histogram": {
+            "0": 413,
+            "1": 5707
+          }
+        },
+        "two": {
+          "truthInFibre": 433,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 413,
+          "histogram": {
+            "0": 413,
+            "2": 5707
+          }
+        },
+        "twelve": {
+          "truthInFibre": 2460,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 413,
+          "histogram": {
+            "0": 413,
+            "12": 5707
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 562,
+        "ambiguousPairs": 467,
+        "ambiguousOccurrences": 6020,
+        "oracleMaxCorrect": 1336,
+        "largestObservedFibre": 22,
+        "witness": {
+          "pair": [
+            "ו",
+            "כ"
+          ],
+          "outputs": [
+            {
+              "glyph": "ו",
+              "count": 3,
+              "where": {
+                "book": "exodus",
+                "chapter": 1,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "ע",
+              "count": 3,
+              "where": {
+                "book": "exodus",
+                "chapter": 1,
+                "block": 1,
+                "column": 24
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 6120,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 227,
+          "unique": 5701,
+          "correctUnique": 227,
+          "empty": 419,
+          "histogram": {
+            "0": 419,
+            "1": 5701
+          }
+        },
+        "reflected": {
+          "truthInFibre": 206,
+          "unique": 5701,
+          "correctUnique": 206,
+          "empty": 419,
+          "histogram": {
+            "0": 419,
+            "1": 5701
+          }
+        },
+        "two": {
+          "truthInFibre": 433,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 419,
+          "histogram": {
+            "0": 419,
+            "2": 5701
+          }
+        },
+        "twelve": {
+          "truthInFibre": 2460,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 419,
+          "histogram": {
+            "0": 419,
+            "12": 5701
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 595,
+        "ambiguousPairs": 491,
+        "ambiguousOccurrences": 6011,
+        "oracleMaxCorrect": 1364,
+        "largestObservedFibre": 25,
+        "witness": {
+          "pair": [
+            "ו",
+            "ו"
+          ],
+          "outputs": [
+            {
+              "glyph": "כ",
+              "count": 3,
+              "where": {
+                "book": "exodus",
+                "chapter": 1,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "ל",
+              "count": 4,
+              "where": {
+                "book": "exodus",
+                "chapter": 1,
+                "block": 0,
+                "column": 70
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    }
+  ],
+  "testRoles": [
+    {
+      "n": 12600,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 449,
+          "unique": 11802,
+          "correctUnique": 449,
+          "empty": 798,
+          "histogram": {
+            "0": 798,
+            "1": 11802
+          }
+        },
+        "reflected": {
+          "truthInFibre": 388,
+          "unique": 11802,
+          "correctUnique": 388,
+          "empty": 798,
+          "histogram": {
+            "0": 798,
+            "1": 11802
+          }
+        },
+        "two": {
+          "truthInFibre": 837,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 798,
+          "histogram": {
+            "0": 798,
+            "2": 11802
+          }
+        },
+        "twelve": {
+          "truthInFibre": 4897,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 798,
+          "histogram": {
+            "0": 798,
+            "12": 11802
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 651,
+        "ambiguousPairs": 562,
+        "ambiguousOccurrences": 12510,
+        "oracleMaxCorrect": 2213,
+        "largestObservedFibre": 24,
+        "witness": {
+          "pair": [
+            "י",
+            "י"
+          ],
+          "outputs": [
+            {
+              "glyph": "ו",
+              "count": 11,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "כ",
+              "count": 5,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 1,
+                "column": 9
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 12600,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 449,
+          "unique": 11768,
+          "correctUnique": 449,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "1": 11768
+          }
+        },
+        "reflected": {
+          "truthInFibre": 388,
+          "unique": 11768,
+          "correctUnique": 388,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "1": 11768
+          }
+        },
+        "two": {
+          "truthInFibre": 837,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "2": 11768
+          }
+        },
+        "twelve": {
+          "truthInFibre": 4897,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "12": 11768
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 639,
+        "ambiguousPairs": 573,
+        "ambiguousOccurrences": 12531,
+        "oracleMaxCorrect": 2185,
+        "largestObservedFibre": 25,
+        "witness": {
+          "pair": [
+            "ו",
+            "י"
+          ],
+          "outputs": [
+            {
+              "glyph": "י",
+              "count": 11,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "ל",
+              "count": 9,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 2,
+                "column": 16
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    },
+    {
+      "n": 12600,
+      "byRule": {
+        "direct": {
+          "truthInFibre": 449,
+          "unique": 11768,
+          "correctUnique": 449,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "1": 11768
+          }
+        },
+        "reflected": {
+          "truthInFibre": 388,
+          "unique": 11768,
+          "correctUnique": 388,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "1": 11768
+          }
+        },
+        "two": {
+          "truthInFibre": 837,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "2": 11768
+          }
+        },
+        "twelve": {
+          "truthInFibre": 4897,
+          "unique": 0,
+          "correctUnique": 0,
+          "empty": 832,
+          "histogram": {
+            "0": 832,
+            "12": 11768
+          }
+        }
+      },
+      "pairOnly": {
+        "distinctPairs": 648,
+        "ambiguousPairs": 563,
+        "ambiguousOccurrences": 12512,
+        "oracleMaxCorrect": 2181,
+        "largestObservedFibre": 24,
+        "witness": {
+          "pair": [
+            "ו",
+            "י"
+          ],
+          "outputs": [
+            {
+              "glyph": "י",
+              "count": 11,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 0,
+                "column": 0
+              }
+            },
+            {
+              "glyph": "נ",
+              "count": 3,
+              "where": {
+                "book": "exodus",
+                "chapter": 16,
+                "block": 2,
+                "column": 2
+              }
+            }
+          ]
+        },
+        "qualification": "in-sample oracle ceiling for any deterministic function of ordered visible glyph pair only; not a learned decoder; excludes position/context"
+      }
+    }
+  ],
+  "affineFullRows": {
+    "trainingBlocks": 423,
+    "exodusBlocks": 85,
+    "genesisBlocks": 338,
+    "predictorColumns": 145,
+    "predictorRank": 145,
+    "inconsistentOutputColumns": 72,
+    "outputColumns": 72,
+    "qualification": "fixed affine GF27 map on 144 input glyphs; not arbitrary nonlinear or indexed/context-dependent geometry; corpus blocks synthetic not true verse triplets"
+  },
+  "mask": {
+    "knownPairs": 53,
+    "distinctKnownPairs": 49,
+    "equalKnownPairs": 4,
+    "doubleMissingColumns": 19,
+    "strictTwoSolutions": "0",
+    "strictTwelveSolutions": "0",
+    "allEscapeSolutions": "27^91",
+    "qualification": "strict distinct-anchor models; missing B has 26 possibilities, C has 2 or12; zero if any known equal pair. Full escape allows all assignments."
+  },
+  "qualification": "previously inspected regression corpus; no fresh blind holdout or recovered text"
+}

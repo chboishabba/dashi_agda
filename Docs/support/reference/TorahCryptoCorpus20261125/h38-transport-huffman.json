@@ -1,0 +1,59 @@
+{
+  "results": [
+    {
+      "mode": "pooled",
+      "tableBits": 135,
+      "headerBits": 272,
+      "wholeBits": 1317001,
+      "packedBytes": 164626,
+      "verified": 304850,
+      "blocks": 1322,
+      "test": {
+        "payload": 54815,
+        "glyphs": 12600
+      },
+      "cross": {
+        "payload": 104374,
+        "glyphs": 24336
+      },
+      "equalPayload": true
+    },
+    {
+      "mode": "visibleB",
+      "tableBits": 3645,
+      "headerBits": 3782,
+      "wholeBits": 1323015,
+      "packedBytes": 165377,
+      "verified": 304850,
+      "blocks": 1322,
+      "test": {
+        "payload": 55064,
+        "glyphs": 12600
+      },
+      "cross": {
+        "payload": 105263,
+        "glyphs": 24336
+      },
+      "equalPayload": true
+    },
+    {
+      "mode": "previousC",
+      "tableBits": 3780,
+      "headerBits": 3917,
+      "wholeBits": 1298948,
+      "packedBytes": 162369,
+      "verified": 304850,
+      "blocks": 1322,
+      "test": {
+        "payload": 52274,
+        "glyphs": 12600
+      },
+      "cross": {
+        "payload": 98784,
+        "glyphs": 24336
+      },
+      "equalPayload": true
+    }
+  ],
+  "qualification": "Pull back each direct Huffman codeword along the affine triangular synthesis c_j = z_j + B_j + sum of already decoded anchored parent coefficients. Encoder produces identical codewords to direct model for each source glyph; decoder recovers actual signed tensor coefficients online and reconstructs full normalized corpus. Equal cost is a coordinate-equivariance identity, not compression gain or independent geometric prediction. Conditional direct model modes pooled, B, previous decoded C; trained Ex1-13 only, fixed block order and shared raw tables. Whole stream includes chapter headers and tables, fixed protocol; direct and geometric interpretations share identical stream and header. Packed bytes rounded, not an emitted binary file. Whole corpus includes training, held-out regression previously inspected."
+}

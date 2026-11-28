@@ -1,0 +1,7305 @@
+{
+  "source": "pinned WLC Exodus 14:19-21 H2 fixture",
+  "sourceRows": [
+    "ויסעמלאךהאלהיםההלךלפנימחנהישראלוילךמאחריהםויסעעמודהענןמפניהםויעמדמאחריהם",
+    "ויבאביןמחנהמצריםוביןמחנהישראלויהיהענןוהחשךויאראתהלילהולאקרבזהאלזהכלהלילה",
+    "ויטמשהאתידועלהיםויולךיהוהאתהיםברוחקדיםעזהכלהלילהוישםאתהיםלחרבהויבקעוהמים"
+  ],
+  "shemTriplets": [
+    "והו",
+    "ילי",
+    "סיט",
+    "עלמ",
+    "מהש",
+    "ללה",
+    "אכא",
+    "ךהת",
+    "הזי",
+    "אלד",
+    "לאו",
+    "ההע",
+    "יזל",
+    "םבה",
+    "הרי",
+    "הקם",
+    "לאו",
+    "ךלי",
+    "לוו",
+    "פהל",
+    "נלך",
+    "ייי",
+    "מלה",
+    "חהו",
+    "נתה",
+    "האא",
+    "ירת",
+    "שאה",
+    "ריי",
+    "אום",
+    "לךב",
+    "ושר",
+    "יחו",
+    "להח",
+    "ךוק",
+    "מןד",
+    "אני",
+    "חעם",
+    "רהע",
+    "ייז",
+    "ההה",
+    "םיכ",
+    "וול",
+    "ילה",
+    "סאל",
+    "ערי",
+    "עשל",
+    "מיה",
+    "והו",
+    "דני",
+    "החש",
+    "עמם",
+    "נןא",
+    "ןית",
+    "מבה",
+    "פוי",
+    "נםם",
+    "ייל",
+    "הרח",
+    "םצר",
+    "ומב",
+    "יהה",
+    "ענו",
+    "מחי",
+    "דמב",
+    "מןק",
+    "איע",
+    "חבו",
+    "ראה",
+    "יבמ",
+    "היי",
+    "םום"
+  ],
+  "sourceCoverage": 216,
+  "chartRoundtripsPerAlphabet": 72,
+  "charts": {
+    "gematria": {
+      "degenerate": 7,
+      "twoHits": 5,
+      "twelveHits": 32,
+      "shiftControls": [
+        {
+          "shift": 0,
+          "twoHits": 5,
+          "twelveHits": 32
+        },
+        {
+          "shift": 1,
+          "twoHits": 2,
+          "twelveHits": 25
+        },
+        {
+          "shift": 2,
+          "twoHits": 3,
+          "twelveHits": 20
+        },
+        {
+          "shift": 3,
+          "twoHits": 3,
+          "twelveHits": 25
+        },
+        {
+          "shift": 4,
+          "twoHits": 3,
+          "twelveHits": 30
+        },
+        {
+          "shift": 5,
+          "twoHits": 8,
+          "twelveHits": 32
+        },
+        {
+          "shift": 6,
+          "twoHits": 3,
+          "twelveHits": 27
+        },
+        {
+          "shift": 7,
+          "twoHits": 4,
+          "twelveHits": 29
+        },
+        {
+          "shift": 8,
+          "twoHits": 6,
+          "twelveHits": 25
+        },
+        {
+          "shift": 9,
+          "twoHits": 6,
+          "twelveHits": 24
+        },
+        {
+          "shift": 10,
+          "twoHits": 3,
+          "twelveHits": 22
+        },
+        {
+          "shift": 11,
+          "twoHits": 4,
+          "twelveHits": 30
+        },
+        {
+          "shift": 12,
+          "twoHits": 1,
+          "twelveHits": 29
+        },
+        {
+          "shift": 13,
+          "twoHits": 6,
+          "twelveHits": 30
+        },
+        {
+          "shift": 14,
+          "twoHits": 6,
+          "twelveHits": 29
+        },
+        {
+          "shift": 15,
+          "twoHits": 3,
+          "twelveHits": 25
+        },
+        {
+          "shift": 16,
+          "twoHits": 4,
+          "twelveHits": 25
+        },
+        {
+          "shift": 17,
+          "twoHits": 7,
+          "twelveHits": 24
+        },
+        {
+          "shift": 18,
+          "twoHits": 9,
+          "twelveHits": 25
+        },
+        {
+          "shift": 19,
+          "twoHits": 2,
+          "twelveHits": 29
+        },
+        {
+          "shift": 20,
+          "twoHits": 2,
+          "twelveHits": 28
+        },
+        {
+          "shift": 21,
+          "twoHits": 5,
+          "twelveHits": 22
+        },
+        {
+          "shift": 22,
+          "twoHits": 2,
+          "twelveHits": 26
+        },
+        {
+          "shift": 23,
+          "twoHits": 6,
+          "twelveHits": 32
+        },
+        {
+          "shift": 24,
+          "twoHits": 5,
+          "twelveHits": 23
+        },
+        {
+          "shift": 25,
+          "twoHits": 3,
+          "twelveHits": 27
+        },
+        {
+          "shift": 26,
+          "twoHits": 4,
+          "twelveHits": 26
+        },
+        {
+          "shift": 27,
+          "twoHits": 5,
+          "twelveHits": 25
+        },
+        {
+          "shift": 28,
+          "twoHits": 6,
+          "twelveHits": 31
+        },
+        {
+          "shift": 29,
+          "twoHits": 4,
+          "twelveHits": 27
+        },
+        {
+          "shift": 30,
+          "twoHits": 4,
+          "twelveHits": 29
+        },
+        {
+          "shift": 31,
+          "twoHits": 4,
+          "twelveHits": 30
+        },
+        {
+          "shift": 32,
+          "twoHits": 7,
+          "twelveHits": 32
+        },
+        {
+          "shift": 33,
+          "twoHits": 6,
+          "twelveHits": 24
+        },
+        {
+          "shift": 34,
+          "twoHits": 9,
+          "twelveHits": 32
+        },
+        {
+          "shift": 35,
+          "twoHits": 4,
+          "twelveHits": 20
+        },
+        {
+          "shift": 36,
+          "twoHits": 7,
+          "twelveHits": 34
+        },
+        {
+          "shift": 37,
+          "twoHits": 4,
+          "twelveHits": 30
+        },
+        {
+          "shift": 38,
+          "twoHits": 1,
+          "twelveHits": 29
+        },
+        {
+          "shift": 39,
+          "twoHits": 6,
+          "twelveHits": 23
+        },
+        {
+          "shift": 40,
+          "twoHits": 1,
+          "twelveHits": 23
+        },
+        {
+          "shift": 41,
+          "twoHits": 8,
+          "twelveHits": 30
+        },
+        {
+          "shift": 42,
+          "twoHits": 5,
+          "twelveHits": 30
+        },
+        {
+          "shift": 43,
+          "twoHits": 3,
+          "twelveHits": 25
+        },
+        {
+          "shift": 44,
+          "twoHits": 5,
+          "twelveHits": 24
+        },
+        {
+          "shift": 45,
+          "twoHits": 3,
+          "twelveHits": 23
+        },
+        {
+          "shift": 46,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 47,
+          "twoHits": 1,
+          "twelveHits": 25
+        },
+        {
+          "shift": 48,
+          "twoHits": 4,
+          "twelveHits": 20
+        },
+        {
+          "shift": 49,
+          "twoHits": 5,
+          "twelveHits": 28
+        },
+        {
+          "shift": 50,
+          "twoHits": 7,
+          "twelveHits": 33
+        },
+        {
+          "shift": 51,
+          "twoHits": 6,
+          "twelveHits": 24
+        },
+        {
+          "shift": 52,
+          "twoHits": 5,
+          "twelveHits": 24
+        },
+        {
+          "shift": 53,
+          "twoHits": 9,
+          "twelveHits": 28
+        },
+        {
+          "shift": 54,
+          "twoHits": 0,
+          "twelveHits": 19
+        },
+        {
+          "shift": 55,
+          "twoHits": 7,
+          "twelveHits": 33
+        },
+        {
+          "shift": 56,
+          "twoHits": 3,
+          "twelveHits": 30
+        },
+        {
+          "shift": 57,
+          "twoHits": 7,
+          "twelveHits": 28
+        },
+        {
+          "shift": 58,
+          "twoHits": 7,
+          "twelveHits": 35
+        },
+        {
+          "shift": 59,
+          "twoHits": 7,
+          "twelveHits": 29
+        },
+        {
+          "shift": 60,
+          "twoHits": 1,
+          "twelveHits": 27
+        },
+        {
+          "shift": 61,
+          "twoHits": 2,
+          "twelveHits": 22
+        },
+        {
+          "shift": 62,
+          "twoHits": 6,
+          "twelveHits": 30
+        },
+        {
+          "shift": 63,
+          "twoHits": 3,
+          "twelveHits": 26
+        },
+        {
+          "shift": 64,
+          "twoHits": 5,
+          "twelveHits": 28
+        },
+        {
+          "shift": 65,
+          "twoHits": 2,
+          "twelveHits": 24
+        },
+        {
+          "shift": 66,
+          "twoHits": 6,
+          "twelveHits": 27
+        },
+        {
+          "shift": 67,
+          "twoHits": 6,
+          "twelveHits": 23
+        },
+        {
+          "shift": 68,
+          "twoHits": 4,
+          "twelveHits": 34
+        },
+        {
+          "shift": 69,
+          "twoHits": 4,
+          "twelveHits": 29
+        },
+        {
+          "shift": 70,
+          "twoHits": 4,
+          "twelveHits": 25
+        },
+        {
+          "shift": 71,
+          "twoHits": 9,
+          "twelveHits": 33
+        }
+      ],
+      "records": [
+        {
+          "column": 0,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 71
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            }
+          ],
+          "values": [
+            15,
+            12,
+            15
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 1,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 70
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            }
+          ],
+          "values": [
+            13,
+            10,
+            13
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 2,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 6,
+              "glyph": "ס",
+              "rawLetterIndex": 2
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 69
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 7,
+              "glyph": "ט",
+              "rawLetterIndex": 2
+            }
+          ],
+          "values": [
+            19,
+            13,
+            24
+          ],
+          "chart": {
+            "anchor": 19,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 16
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 3,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 10,
+              "glyph": "ע",
+              "rawLetterIndex": 3
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 68
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 3
+            }
+          ],
+          "values": [
+            4,
+            10,
+            22
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 15,
+            "kind": "ratio",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 4,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 4
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 67
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 4
+            }
+          ],
+          "values": [
+            22,
+            12,
+            23
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 13
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 5,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 5
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 66
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 6,
+              "glyph": "ה",
+              "rawLetterIndex": 5
+            }
+          ],
+          "values": [
+            10,
+            10,
+            12
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 6,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 4,
+              "glyph": "א",
+              "rawLetterIndex": 6
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 0,
+              "glyph": "כ",
+              "rawLetterIndex": 65
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 6
+            }
+          ],
+          "values": [
+            0,
+            16,
+            0
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 7,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 7,
+              "glyph": "ך",
+              "rawLetterIndex": 7
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 64
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 2,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 7
+            }
+          ],
+          "values": [
+            2,
+            12,
+            8
+          ],
+          "chart": {
+            "anchor": 2,
+            "difference": 13,
+            "kind": "ratio",
+            "residual": 7
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 8,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 8
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 0,
+              "glyph": "ז",
+              "rawLetterIndex": 63
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 8
+            }
+          ],
+          "values": [
+            12,
+            18,
+            13
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 15,
+            "kind": "ratio",
+            "residual": 4
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 9,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 9
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 62
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 2,
+              "glyph": "ד",
+              "rawLetterIndex": 9
+            }
+          ],
+          "values": [
+            0,
+            10,
+            9
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 10,
+            "kind": "ratio",
+            "residual": 14
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 10,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 5,
+              "glyph": "ל",
+              "rawLetterIndex": 10
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 61
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 4,
+              "glyph": "ו",
+              "rawLetterIndex": 10
+            }
+          ],
+          "values": [
+            10,
+            0,
+            15
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 11,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 11
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 60
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 11
+            }
+          ],
+          "values": [
+            12,
+            12,
+            4
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 12,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 10,
+              "glyph": "י",
+              "rawLetterIndex": 12
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 0,
+              "glyph": "ז",
+              "rawLetterIndex": 59
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 4,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 12
+            }
+          ],
+          "values": [
+            13,
+            18,
+            10
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 4
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 13,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 11,
+              "glyph": "ם",
+              "rawLetterIndex": 13
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 5,
+              "glyph": "ב",
+              "rawLetterIndex": 58
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 13
+            }
+          ],
+          "values": [
+            5,
+            3,
+            12
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 1,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 14,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 14
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 2,
+              "glyph": "ר",
+              "rawLetterIndex": 57
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 14
+            }
+          ],
+          "values": [
+            12,
+            20,
+            13
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 18
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 15,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 15
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "ק",
+              "rawLetterIndex": 56
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 6,
+              "glyph": "ם",
+              "rawLetterIndex": 15
+            }
+          ],
+          "values": [
+            12,
+            26,
+            5
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 14,
+            "kind": "ratio",
+            "residual": 6
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 16,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 5,
+              "glyph": "ל",
+              "rawLetterIndex": 16
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 5,
+              "glyph": "א",
+              "rawLetterIndex": 55
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 16
+            }
+          ],
+          "values": [
+            10,
+            0,
+            15
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 17,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 7,
+              "glyph": "ך",
+              "rawLetterIndex": 17
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 54
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 17
+            }
+          ],
+          "values": [
+            2,
+            10,
+            13
+          ],
+          "chart": {
+            "anchor": 2,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 18,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ל",
+              "rawLetterIndex": 18
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 53
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 6,
+              "glyph": "ו",
+              "rawLetterIndex": 18
+            }
+          ],
+          "values": [
+            10,
+            15,
+            15
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 19,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 3,
+              "glyph": "פ",
+              "rawLetterIndex": 19
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 52
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 8,
+              "glyph": "ל",
+              "rawLetterIndex": 19
+            }
+          ],
+          "values": [
+            7,
+            12,
+            10
+          ],
+          "chart": {
+            "anchor": 7,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 23
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 20,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 5,
+              "glyph": "נ",
+              "rawLetterIndex": 20
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 51
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ך",
+              "rawLetterIndex": 20
+            }
+          ],
+          "values": [
+            25,
+            10,
+            2
+          ],
+          "chart": {
+            "anchor": 25,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 21,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 21
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 50
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 21
+            }
+          ],
+          "values": [
+            13,
+            13,
+            13
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 22,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 22
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 49
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 2,
+              "glyph": "ה",
+              "rawLetterIndex": 22
+            }
+          ],
+          "values": [
+            22,
+            10,
+            12
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 23,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 23
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 48
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "ו",
+              "rawLetterIndex": 23
+            }
+          ],
+          "values": [
+            21,
+            12,
+            15
+          ],
+          "chart": {
+            "anchor": 21,
+            "difference": 18,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 24,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 24
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 47
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 6,
+              "glyph": "ה",
+              "rawLetterIndex": 24
+            }
+          ],
+          "values": [
+            25,
+            8,
+            12
+          ],
+          "chart": {
+            "anchor": 25,
+            "difference": 10,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 25,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 25
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 46
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 25
+            }
+          ],
+          "values": [
+            12,
+            0,
+            0
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 26,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 26
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 9,
+              "glyph": "ר",
+              "rawLetterIndex": 45
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 26
+            }
+          ],
+          "values": [
+            13,
+            20,
+            8
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 13
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 27,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 27
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 44
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 27
+            }
+          ],
+          "values": [
+            23,
+            0,
+            12
+          ],
+          "chart": {
+            "anchor": 23,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 23
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 28,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 28
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 43
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 4,
+              "glyph": "י",
+              "rawLetterIndex": 28
+            }
+          ],
+          "values": [
+            20,
+            13,
+            13
+          ],
+          "chart": {
+            "anchor": 20,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 29,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 29
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 42
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 7,
+              "glyph": "ם",
+              "rawLetterIndex": 29
+            }
+          ],
+          "values": [
+            0,
+            15,
+            5
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 15,
+            "kind": "ratio",
+            "residual": 11
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 30,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ל",
+              "rawLetterIndex": 30
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 12,
+              "glyph": "ך",
+              "rawLetterIndex": 41
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ב",
+              "rawLetterIndex": 30
+            }
+          ],
+          "values": [
+            10,
+            2,
+            3
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 25
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 31,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 31
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 9,
+              "glyph": "ש",
+              "rawLetterIndex": 40
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 4,
+              "glyph": "ר",
+              "rawLetterIndex": 31
+            }
+          ],
+          "values": [
+            15,
+            23,
+            20
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 32,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 32
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 6,
+              "glyph": "ח",
+              "rawLetterIndex": 39
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 6,
+              "glyph": "ו",
+              "rawLetterIndex": 32
+            }
+          ],
+          "values": [
+            13,
+            21,
+            15
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 33,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 7,
+              "glyph": "ל",
+              "rawLetterIndex": 33
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 38
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 8,
+              "glyph": "ח",
+              "rawLetterIndex": 33
+            }
+          ],
+          "values": [
+            10,
+            12,
+            21
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 5,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 34,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 9,
+              "glyph": "ך",
+              "rawLetterIndex": 34
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 37
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "ק",
+              "rawLetterIndex": 34
+            }
+          ],
+          "values": [
+            2,
+            15,
+            26
+          ],
+          "chart": {
+            "anchor": 2,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 35,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 35
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 8,
+              "glyph": "ן",
+              "rawLetterIndex": 36
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 2,
+              "glyph": "ד",
+              "rawLetterIndex": 35
+            }
+          ],
+          "values": [
+            22,
+            17,
+            9
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 14
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 36,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 36
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 35
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 5,
+              "glyph": "י",
+              "rawLetterIndex": 36
+            }
+          ],
+          "values": [
+            0,
+            25,
+            13
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 25,
+            "kind": "ratio",
+            "residual": 22
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 37,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 5,
+              "glyph": "ח",
+              "rawLetterIndex": 37
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 4,
+              "glyph": "ע",
+              "rawLetterIndex": 34
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 6,
+              "glyph": "ם",
+              "rawLetterIndex": 37
+            }
+          ],
+          "values": [
+            21,
+            4,
+            5
+          ],
+          "chart": {
+            "anchor": 21,
+            "difference": 10,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 38,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 7,
+              "glyph": "ר",
+              "rawLetterIndex": 38
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 33
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 38
+            }
+          ],
+          "values": [
+            20,
+            12,
+            4
+          ],
+          "chart": {
+            "anchor": 20,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 7
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 39,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 9,
+              "glyph": "י",
+              "rawLetterIndex": 39
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 8,
+              "glyph": "י",
+              "rawLetterIndex": 32
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 2,
+              "glyph": "ז",
+              "rawLetterIndex": 39
+            }
+          ],
+          "values": [
+            13,
+            13,
+            18
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 40,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 40
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 5,
+              "glyph": "ה",
+              "rawLetterIndex": 31
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 5,
+              "glyph": "ה",
+              "rawLetterIndex": 40
+            }
+          ],
+          "values": [
+            12,
+            12,
+            12
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 41,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 14,
+              "glyph": "ם",
+              "rawLetterIndex": 41
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 30
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "כ",
+              "rawLetterIndex": 41
+            }
+          ],
+          "values": [
+            5,
+            13,
+            16
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 42,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 42
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 29
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 42
+            }
+          ],
+          "values": [
+            15,
+            15,
+            10
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 4
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 43,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 43
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ל",
+              "rawLetterIndex": 28
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 43
+            }
+          ],
+          "values": [
+            13,
+            10,
+            12
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 11
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 44,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 6,
+              "glyph": "ס",
+              "rawLetterIndex": 44
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 27
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 44
+            }
+          ],
+          "values": [
+            19,
+            0,
+            10
+          ],
+          "chart": {
+            "anchor": 19,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 8
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 45,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 10,
+              "glyph": "ע",
+              "rawLetterIndex": 45
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 26
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 45
+            }
+          ],
+          "values": [
+            4,
+            20,
+            13
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 25,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 46,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 46
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 25
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 46
+            }
+          ],
+          "values": [
+            4,
+            23,
+            10
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 47,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 2,
+              "glyph": "מ",
+              "rawLetterIndex": 47
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 24
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 47
+            }
+          ],
+          "values": [
+            22,
+            13,
+            12
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 18,
+            "kind": "ratio",
+            "residual": 23
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 48,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 5,
+              "glyph": "ו",
+              "rawLetterIndex": 48
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 23
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 48
+            }
+          ],
+          "values": [
+            15,
+            12,
+            15
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 49,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 7,
+              "glyph": "ד",
+              "rawLetterIndex": 49
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 22
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 49
+            }
+          ],
+          "values": [
+            9,
+            25,
+            13
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 50,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 50
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 21
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 7,
+              "glyph": "ש",
+              "rawLetterIndex": 50
+            }
+          ],
+          "values": [
+            12,
+            21,
+            23
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 9,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 51,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 4,
+              "glyph": "ע",
+              "rawLetterIndex": 51
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 20
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 10,
+              "glyph": "ם",
+              "rawLetterIndex": 51
+            }
+          ],
+          "values": [
+            4,
+            22,
+            5
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 18,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 52,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 52
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 6,
+              "glyph": "ן",
+              "rawLetterIndex": 19
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 52
+            }
+          ],
+          "values": [
+            25,
+            17,
+            0
+          ],
+          "chart": {
+            "anchor": 25,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 53,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 8,
+              "glyph": "ן",
+              "rawLetterIndex": 53
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 5,
+              "glyph": "י",
+              "rawLetterIndex": 18
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 53
+            }
+          ],
+          "values": [
+            17,
+            13,
+            8
+          ],
+          "chart": {
+            "anchor": 17,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 11
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 54,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 54
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 3,
+              "glyph": "ב",
+              "rawLetterIndex": 17
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 54
+            }
+          ],
+          "values": [
+            22,
+            3,
+            12
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 55,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 3,
+              "glyph": "פ",
+              "rawLetterIndex": 55
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 16
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 55
+            }
+          ],
+          "values": [
+            7,
+            15,
+            13
+          ],
+          "chart": {
+            "anchor": 7,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 22
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 56,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 56
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 9,
+              "glyph": "ם",
+              "rawLetterIndex": 15
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 7,
+              "glyph": "ם",
+              "rawLetterIndex": 56
+            }
+          ],
+          "values": [
+            25,
+            5,
+            5
+          ],
+          "chart": {
+            "anchor": 25,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 57,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 8,
+              "glyph": "י",
+              "rawLetterIndex": 57
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 14
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 0,
+              "glyph": "ל",
+              "rawLetterIndex": 57
+            }
+          ],
+          "values": [
+            13,
+            13,
+            10
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 6
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 58,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 10,
+              "glyph": "ה",
+              "rawLetterIndex": 58
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 4,
+              "glyph": "ר",
+              "rawLetterIndex": 13
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 3,
+              "glyph": "ח",
+              "rawLetterIndex": 58
+            }
+          ],
+          "values": [
+            12,
+            20,
+            21
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 59,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 13,
+              "glyph": "ם",
+              "rawLetterIndex": 59
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 2,
+              "glyph": "צ",
+              "rawLetterIndex": 12
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 59
+            }
+          ],
+          "values": [
+            5,
+            1,
+            20
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 3
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 60,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 60
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 11
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 7,
+              "glyph": "ב",
+              "rawLetterIndex": 60
+            }
+          ],
+          "values": [
+            15,
+            22,
+            3
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 61,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 61
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 10
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 10,
+              "glyph": "ה",
+              "rawLetterIndex": 61
+            }
+          ],
+          "values": [
+            13,
+            12,
+            12
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 2,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 62,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 7,
+              "glyph": "ע",
+              "rawLetterIndex": 62
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 9
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 62
+            }
+          ],
+          "values": [
+            4,
+            25,
+            15
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 63,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 9,
+              "glyph": "מ",
+              "rawLetterIndex": 63
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 8
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 63
+            }
+          ],
+          "values": [
+            22,
+            21,
+            13
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 2,
+            "kind": "ratio",
+            "residual": 9
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 64,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 12,
+              "glyph": "ד",
+              "rawLetterIndex": 64
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 7
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 6,
+              "glyph": "ב",
+              "rawLetterIndex": 64
+            }
+          ],
+          "values": [
+            9,
+            22,
+            3
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 13,
+            "kind": "ratio",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 65,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 65
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 5,
+              "glyph": "ן",
+              "rawLetterIndex": 6
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 9,
+              "glyph": "ק",
+              "rawLetterIndex": 65
+            }
+          ],
+          "values": [
+            22,
+            17,
+            26
+          ],
+          "chart": {
+            "anchor": 22,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 13
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 66,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 66
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 4,
+              "glyph": "י",
+              "rawLetterIndex": 5
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 11,
+              "glyph": "ע",
+              "rawLetterIndex": 66
+            }
+          ],
+          "values": [
+            0,
+            13,
+            4
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 13,
+            "kind": "ratio",
+            "residual": 22
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 67,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 5,
+              "glyph": "ח",
+              "rawLetterIndex": 67
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "ב",
+              "rawLetterIndex": 4
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 13,
+              "glyph": "ו",
+              "rawLetterIndex": 67
+            }
+          ],
+          "values": [
+            21,
+            3,
+            15
+          ],
+          "chart": {
+            "anchor": 21,
+            "difference": 9,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 68,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 7,
+              "glyph": "ר",
+              "rawLetterIndex": 68
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 9,
+              "glyph": "א",
+              "rawLetterIndex": 3
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 68
+            }
+          ],
+          "values": [
+            20,
+            0,
+            12
+          ],
+          "chart": {
+            "anchor": 20,
+            "difference": 10,
+            "kind": "ratio",
+            "residual": 8
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 69,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 9,
+              "glyph": "י",
+              "rawLetterIndex": 69
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 6,
+              "glyph": "ב",
+              "rawLetterIndex": 2
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 3,
+              "glyph": "מ",
+              "rawLetterIndex": 69
+            }
+          ],
+          "values": [
+            13,
+            3,
+            22
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 25
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 70,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 70
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 70
+            }
+          ],
+          "values": [
+            12,
+            13,
+            13
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 1,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 71,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 14,
+              "glyph": "ם",
+              "rawLetterIndex": 71
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 9,
+              "glyph": "ם",
+              "rawLetterIndex": 71
+            }
+          ],
+          "values": [
+            5,
+            15,
+            5
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 13,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        }
+      ]
+    },
+    "ordinal": {
+      "degenerate": 7,
+      "twoHits": 2,
+      "twelveHits": 23,
+      "shiftControls": [
+        {
+          "shift": 0,
+          "twoHits": 2,
+          "twelveHits": 23
+        },
+        {
+          "shift": 1,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 2,
+          "twoHits": 2,
+          "twelveHits": 22
+        },
+        {
+          "shift": 3,
+          "twoHits": 4,
+          "twelveHits": 31
+        },
+        {
+          "shift": 4,
+          "twoHits": 4,
+          "twelveHits": 26
+        },
+        {
+          "shift": 5,
+          "twoHits": 4,
+          "twelveHits": 30
+        },
+        {
+          "shift": 6,
+          "twoHits": 6,
+          "twelveHits": 24
+        },
+        {
+          "shift": 7,
+          "twoHits": 3,
+          "twelveHits": 26
+        },
+        {
+          "shift": 8,
+          "twoHits": 5,
+          "twelveHits": 30
+        },
+        {
+          "shift": 9,
+          "twoHits": 7,
+          "twelveHits": 25
+        },
+        {
+          "shift": 10,
+          "twoHits": 6,
+          "twelveHits": 28
+        },
+        {
+          "shift": 11,
+          "twoHits": 2,
+          "twelveHits": 34
+        },
+        {
+          "shift": 12,
+          "twoHits": 5,
+          "twelveHits": 29
+        },
+        {
+          "shift": 13,
+          "twoHits": 3,
+          "twelveHits": 24
+        },
+        {
+          "shift": 14,
+          "twoHits": 6,
+          "twelveHits": 24
+        },
+        {
+          "shift": 15,
+          "twoHits": 7,
+          "twelveHits": 25
+        },
+        {
+          "shift": 16,
+          "twoHits": 3,
+          "twelveHits": 22
+        },
+        {
+          "shift": 17,
+          "twoHits": 7,
+          "twelveHits": 32
+        },
+        {
+          "shift": 18,
+          "twoHits": 4,
+          "twelveHits": 28
+        },
+        {
+          "shift": 19,
+          "twoHits": 5,
+          "twelveHits": 20
+        },
+        {
+          "shift": 20,
+          "twoHits": 3,
+          "twelveHits": 26
+        },
+        {
+          "shift": 21,
+          "twoHits": 5,
+          "twelveHits": 31
+        },
+        {
+          "shift": 22,
+          "twoHits": 2,
+          "twelveHits": 21
+        },
+        {
+          "shift": 23,
+          "twoHits": 5,
+          "twelveHits": 22
+        },
+        {
+          "shift": 24,
+          "twoHits": 3,
+          "twelveHits": 23
+        },
+        {
+          "shift": 25,
+          "twoHits": 3,
+          "twelveHits": 32
+        },
+        {
+          "shift": 26,
+          "twoHits": 4,
+          "twelveHits": 30
+        },
+        {
+          "shift": 27,
+          "twoHits": 4,
+          "twelveHits": 22
+        },
+        {
+          "shift": 28,
+          "twoHits": 6,
+          "twelveHits": 29
+        },
+        {
+          "shift": 29,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 30,
+          "twoHits": 6,
+          "twelveHits": 29
+        },
+        {
+          "shift": 31,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 32,
+          "twoHits": 3,
+          "twelveHits": 22
+        },
+        {
+          "shift": 33,
+          "twoHits": 1,
+          "twelveHits": 21
+        },
+        {
+          "shift": 34,
+          "twoHits": 7,
+          "twelveHits": 32
+        },
+        {
+          "shift": 35,
+          "twoHits": 4,
+          "twelveHits": 22
+        },
+        {
+          "shift": 36,
+          "twoHits": 8,
+          "twelveHits": 25
+        },
+        {
+          "shift": 37,
+          "twoHits": 4,
+          "twelveHits": 27
+        },
+        {
+          "shift": 38,
+          "twoHits": 4,
+          "twelveHits": 28
+        },
+        {
+          "shift": 39,
+          "twoHits": 4,
+          "twelveHits": 26
+        },
+        {
+          "shift": 40,
+          "twoHits": 3,
+          "twelveHits": 27
+        },
+        {
+          "shift": 41,
+          "twoHits": 5,
+          "twelveHits": 26
+        },
+        {
+          "shift": 42,
+          "twoHits": 3,
+          "twelveHits": 18
+        },
+        {
+          "shift": 43,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 44,
+          "twoHits": 5,
+          "twelveHits": 26
+        },
+        {
+          "shift": 45,
+          "twoHits": 2,
+          "twelveHits": 27
+        },
+        {
+          "shift": 46,
+          "twoHits": 3,
+          "twelveHits": 26
+        },
+        {
+          "shift": 47,
+          "twoHits": 3,
+          "twelveHits": 29
+        },
+        {
+          "shift": 48,
+          "twoHits": 5,
+          "twelveHits": 22
+        },
+        {
+          "shift": 49,
+          "twoHits": 3,
+          "twelveHits": 25
+        },
+        {
+          "shift": 50,
+          "twoHits": 6,
+          "twelveHits": 30
+        },
+        {
+          "shift": 51,
+          "twoHits": 3,
+          "twelveHits": 24
+        },
+        {
+          "shift": 52,
+          "twoHits": 4,
+          "twelveHits": 29
+        },
+        {
+          "shift": 53,
+          "twoHits": 5,
+          "twelveHits": 30
+        },
+        {
+          "shift": 54,
+          "twoHits": 4,
+          "twelveHits": 22
+        },
+        {
+          "shift": 55,
+          "twoHits": 5,
+          "twelveHits": 34
+        },
+        {
+          "shift": 56,
+          "twoHits": 3,
+          "twelveHits": 33
+        },
+        {
+          "shift": 57,
+          "twoHits": 6,
+          "twelveHits": 26
+        },
+        {
+          "shift": 58,
+          "twoHits": 3,
+          "twelveHits": 30
+        },
+        {
+          "shift": 59,
+          "twoHits": 3,
+          "twelveHits": 24
+        },
+        {
+          "shift": 60,
+          "twoHits": 1,
+          "twelveHits": 30
+        },
+        {
+          "shift": 61,
+          "twoHits": 5,
+          "twelveHits": 23
+        },
+        {
+          "shift": 62,
+          "twoHits": 3,
+          "twelveHits": 25
+        },
+        {
+          "shift": 63,
+          "twoHits": 3,
+          "twelveHits": 22
+        },
+        {
+          "shift": 64,
+          "twoHits": 7,
+          "twelveHits": 31
+        },
+        {
+          "shift": 65,
+          "twoHits": 2,
+          "twelveHits": 28
+        },
+        {
+          "shift": 66,
+          "twoHits": 6,
+          "twelveHits": 34
+        },
+        {
+          "shift": 67,
+          "twoHits": 2,
+          "twelveHits": 25
+        },
+        {
+          "shift": 68,
+          "twoHits": 7,
+          "twelveHits": 28
+        },
+        {
+          "shift": 69,
+          "twoHits": 3,
+          "twelveHits": 23
+        },
+        {
+          "shift": 70,
+          "twoHits": 2,
+          "twelveHits": 30
+        },
+        {
+          "shift": 71,
+          "twoHits": 6,
+          "twelveHits": 30
+        }
+      ],
+      "records": [
+        {
+          "column": 0,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 71
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            }
+          ],
+          "values": [
+            5,
+            4,
+            5
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 2,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 1,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 70
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            }
+          ],
+          "values": [
+            9,
+            12,
+            9
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 3,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 2,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 6,
+              "glyph": "ס",
+              "rawLetterIndex": 2
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 69
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 0,
+              "offset": 7,
+              "glyph": "ט",
+              "rawLetterIndex": 2
+            }
+          ],
+          "values": [
+            17,
+            9,
+            8
+          ],
+          "chart": {
+            "anchor": 17,
+            "difference": 4,
+            "kind": "ratio",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 3,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 10,
+              "glyph": "ע",
+              "rawLetterIndex": 3
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 68
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 3
+            }
+          ],
+          "values": [
+            18,
+            12,
+            14
+          ],
+          "chart": {
+            "anchor": 18,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 4,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 4
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 67
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 4
+            }
+          ],
+          "values": [
+            14,
+            4,
+            25
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 5,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 5
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 66
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 1,
+              "offset": 6,
+              "glyph": "ה",
+              "rawLetterIndex": 5
+            }
+          ],
+          "values": [
+            12,
+            12,
+            4
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 6,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 4,
+              "glyph": "א",
+              "rawLetterIndex": 6
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 0,
+              "glyph": "כ",
+              "rawLetterIndex": 65
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 6
+            }
+          ],
+          "values": [
+            0,
+            11,
+            0
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 7,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 7,
+              "glyph": "ך",
+              "rawLetterIndex": 7
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 64
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 2,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 7
+            }
+          ],
+          "values": [
+            10,
+            4,
+            26
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 7
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 8,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 8
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 0,
+              "glyph": "ז",
+              "rawLetterIndex": 63
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 8
+            }
+          ],
+          "values": [
+            4,
+            6,
+            9
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 5,
+            "kind": "ratio",
+            "residual": 18
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 9,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 9
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 62
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 2,
+              "glyph": "ד",
+              "rawLetterIndex": 9
+            }
+          ],
+          "values": [
+            0,
+            12,
+            3
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 12,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 10,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 5,
+              "glyph": "ל",
+              "rawLetterIndex": 10
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 61
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 3,
+              "offset": 4,
+              "glyph": "ו",
+              "rawLetterIndex": 10
+            }
+          ],
+          "values": [
+            12,
+            0,
+            5
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 11,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 11
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 60
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 11
+            }
+          ],
+          "values": [
+            4,
+            4,
+            18
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 12,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 10,
+              "glyph": "י",
+              "rawLetterIndex": 12
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 0,
+              "glyph": "ז",
+              "rawLetterIndex": 59
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 4,
+              "offset": 2,
+              "glyph": "ל",
+              "rawLetterIndex": 12
+            }
+          ],
+          "values": [
+            9,
+            6,
+            12
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 21
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 13,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 11,
+              "glyph": "ם",
+              "rawLetterIndex": 13
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 5,
+              "glyph": "ב",
+              "rawLetterIndex": 58
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 13
+            }
+          ],
+          "values": [
+            13,
+            1,
+            4
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 22
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 14,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 14
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 2,
+              "glyph": "ר",
+              "rawLetterIndex": 57
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 14
+            }
+          ],
+          "values": [
+            4,
+            24,
+            9
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 13
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 15,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 15
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "ק",
+              "rawLetterIndex": 56
+            },
+            {
+              "verse": 21,
+              "segment": 0,
+              "label": "P",
+              "wordSlot": 5,
+              "offset": 6,
+              "glyph": "ם",
+              "rawLetterIndex": 15
+            }
+          ],
+          "values": [
+            4,
+            23,
+            13
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 8
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 16,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 5,
+              "glyph": "ל",
+              "rawLetterIndex": 16
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 5,
+              "glyph": "א",
+              "rawLetterIndex": 55
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 16
+            }
+          ],
+          "values": [
+            12,
+            0,
+            5
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 24,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 17,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 7,
+              "glyph": "ך",
+              "rawLetterIndex": 17
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 54
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 17
+            }
+          ],
+          "values": [
+            10,
+            12,
+            9
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 5,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 18,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ל",
+              "rawLetterIndex": 18
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 53
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 6,
+              "glyph": "ו",
+              "rawLetterIndex": 18
+            }
+          ],
+          "values": [
+            12,
+            5,
+            5
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 20,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 19,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 3,
+              "glyph": "פ",
+              "rawLetterIndex": 19
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 52
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 8,
+              "glyph": "ל",
+              "rawLetterIndex": 19
+            }
+          ],
+          "values": [
+            20,
+            4,
+            12
+          ],
+          "chart": {
+            "anchor": 20,
+            "difference": 14,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 20,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 5,
+              "glyph": "נ",
+              "rawLetterIndex": 20
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 51
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ך",
+              "rawLetterIndex": 20
+            }
+          ],
+          "values": [
+            16,
+            12,
+            10
+          ],
+          "chart": {
+            "anchor": 16,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 21,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 21
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 50
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 21
+            }
+          ],
+          "values": [
+            9,
+            9,
+            9
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 22,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 22
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 49
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 2,
+              "glyph": "ה",
+              "rawLetterIndex": 22
+            }
+          ],
+          "values": [
+            14,
+            12,
+            4
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 1,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 23,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 23
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 48
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "ו",
+              "rawLetterIndex": 23
+            }
+          ],
+          "values": [
+            7,
+            4,
+            5
+          ],
+          "chart": {
+            "anchor": 7,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 24,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 24
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 47
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 6,
+              "glyph": "ה",
+              "rawLetterIndex": 24
+            }
+          ],
+          "values": [
+            16,
+            26,
+            4
+          ],
+          "chart": {
+            "anchor": 16,
+            "difference": 10,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 25,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 25
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 46
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 25
+            }
+          ],
+          "values": [
+            4,
+            0,
+            0
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 26,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 26
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 9,
+              "glyph": "ר",
+              "rawLetterIndex": 45
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 26
+            }
+          ],
+          "values": [
+            9,
+            24,
+            26
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 15,
+            "kind": "ratio",
+            "residual": 6
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 27,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 27
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 44
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 27
+            }
+          ],
+          "values": [
+            25,
+            0,
+            4
+          ],
+          "chart": {
+            "anchor": 25,
+            "difference": 14,
+            "kind": "ratio",
+            "residual": 8
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 28,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 28
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 43
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 4,
+              "glyph": "י",
+              "rawLetterIndex": 28
+            }
+          ],
+          "values": [
+            24,
+            9,
+            9
+          ],
+          "chart": {
+            "anchor": 24,
+            "difference": 21,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 29,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 29
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 42
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 7,
+              "glyph": "ם",
+              "rawLetterIndex": 29
+            }
+          ],
+          "values": [
+            0,
+            5,
+            13
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 5,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 30,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ל",
+              "rawLetterIndex": 30
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 12,
+              "glyph": "ך",
+              "rawLetterIndex": 41
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ב",
+              "rawLetterIndex": 30
+            }
+          ],
+          "values": [
+            12,
+            10,
+            1
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 7,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 31,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 31
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 9,
+              "glyph": "ש",
+              "rawLetterIndex": 40
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 4,
+              "glyph": "ר",
+              "rawLetterIndex": 31
+            }
+          ],
+          "values": [
+            5,
+            25,
+            24
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 32,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 32
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 6,
+              "glyph": "ח",
+              "rawLetterIndex": 39
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 6,
+              "glyph": "ו",
+              "rawLetterIndex": 32
+            }
+          ],
+          "values": [
+            9,
+            7,
+            5
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 25,
+            "kind": "ratio",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 33,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 7,
+              "glyph": "ל",
+              "rawLetterIndex": 33
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 3,
+              "glyph": "ה",
+              "rawLetterIndex": 38
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 8,
+              "glyph": "ח",
+              "rawLetterIndex": 33
+            }
+          ],
+          "values": [
+            12,
+            4,
+            7
+          ],
+          "chart": {
+            "anchor": 12,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 34,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 7,
+              "offset": 9,
+              "glyph": "ך",
+              "rawLetterIndex": 34
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 37
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "ק",
+              "rawLetterIndex": 34
+            }
+          ],
+          "values": [
+            10,
+            5,
+            23
+          ],
+          "chart": {
+            "anchor": 10,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 25
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 35,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 35
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 8,
+              "glyph": "ן",
+              "rawLetterIndex": 36
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 2,
+              "glyph": "ד",
+              "rawLetterIndex": 35
+            }
+          ],
+          "values": [
+            14,
+            15,
+            3
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 4,
+            "kind": "ratio",
+            "residual": 7
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 36,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 36
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 35
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 5,
+              "glyph": "י",
+              "rawLetterIndex": 36
+            }
+          ],
+          "values": [
+            0,
+            16,
+            9
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 5
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 37,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 5,
+              "glyph": "ח",
+              "rawLetterIndex": 37
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 4,
+              "glyph": "ע",
+              "rawLetterIndex": 34
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 6,
+              "glyph": "ם",
+              "rawLetterIndex": 37
+            }
+          ],
+          "values": [
+            7,
+            18,
+            13
+          ],
+          "chart": {
+            "anchor": 7,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 38,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 7,
+              "glyph": "ר",
+              "rawLetterIndex": 38
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 8,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 33
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 38
+            }
+          ],
+          "values": [
+            24,
+            4,
+            18
+          ],
+          "chart": {
+            "anchor": 24,
+            "difference": 16,
+            "kind": "ratio",
+            "residual": 20
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 39,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 9,
+              "glyph": "י",
+              "rawLetterIndex": 39
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 8,
+              "glyph": "י",
+              "rawLetterIndex": 32
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 2,
+              "glyph": "ז",
+              "rawLetterIndex": 39
+            }
+          ],
+          "values": [
+            9,
+            9,
+            6
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 24
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 40,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 40
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 5,
+              "glyph": "ה",
+              "rawLetterIndex": 31
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 5,
+              "glyph": "ה",
+              "rawLetterIndex": 40
+            }
+          ],
+          "values": [
+            4,
+            4,
+            4
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 41,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 8,
+              "offset": 14,
+              "glyph": "ם",
+              "rawLetterIndex": 41
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 30
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "כ",
+              "rawLetterIndex": 41
+            }
+          ],
+          "values": [
+            13,
+            9,
+            11
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 8,
+            "kind": "ratio",
+            "residual": 16
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 42,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 42
+            },
+            {
+              "verse": 20,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 7,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 29
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 42
+            }
+          ],
+          "values": [
+            5,
+            5,
+            12
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 43,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 43
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 10,
+              "glyph": "ל",
+              "rawLetterIndex": 28
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 43
+            }
+          ],
+          "values": [
+            9,
+            12,
+            4
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 3,
+            "kind": "ratio",
+            "residual": 15
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 44,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 6,
+              "glyph": "ס",
+              "rawLetterIndex": 44
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 7,
+              "glyph": "א",
+              "rawLetterIndex": 27
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 3,
+              "glyph": "ל",
+              "rawLetterIndex": 44
+            }
+          ],
+          "values": [
+            17,
+            0,
+            12
+          ],
+          "chart": {
+            "anchor": 17,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 17
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 45,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 9,
+              "offset": 10,
+              "glyph": "ע",
+              "rawLetterIndex": 45
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 26
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 45
+            }
+          ],
+          "values": [
+            18,
+            24,
+            9
+          ],
+          "chart": {
+            "anchor": 18,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 3
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 46,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 0,
+              "glyph": "ע",
+              "rawLetterIndex": 46
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 2,
+              "glyph": "ש",
+              "rawLetterIndex": 25
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 9,
+              "glyph": "ל",
+              "rawLetterIndex": 46
+            }
+          ],
+          "values": [
+            18,
+            25,
+            12
+          ],
+          "chart": {
+            "anchor": 18,
+            "difference": 7,
+            "kind": "ratio",
+            "residual": 3
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 47,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 2,
+              "glyph": "מ",
+              "rawLetterIndex": 47
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 6,
+              "offset": 0,
+              "glyph": "י",
+              "rawLetterIndex": 24
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 47
+            }
+          ],
+          "values": [
+            14,
+            9,
+            4
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 7,
+            "kind": "ratio",
+            "residual": 19
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 48,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 5,
+              "glyph": "ו",
+              "rawLetterIndex": 48
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 23
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 48
+            }
+          ],
+          "values": [
+            5,
+            4,
+            5
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 2,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 49,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 10,
+              "offset": 7,
+              "glyph": "ד",
+              "rawLetterIndex": 49
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 22
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 49
+            }
+          ],
+          "values": [
+            3,
+            16,
+            9
+          ],
+          "chart": {
+            "anchor": 3,
+            "difference": 13,
+            "kind": "ratio",
+            "residual": 13
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 50,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 50
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 21
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 7,
+              "glyph": "ש",
+              "rawLetterIndex": 50
+            }
+          ],
+          "values": [
+            4,
+            7,
+            25
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 3,
+            "kind": "ratio",
+            "residual": 7
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 51,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 4,
+              "glyph": "ע",
+              "rawLetterIndex": 51
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 5,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 20
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 15,
+              "offset": 10,
+              "glyph": "ם",
+              "rawLetterIndex": 51
+            }
+          ],
+          "values": [
+            18,
+            14,
+            13
+          ],
+          "chart": {
+            "anchor": 18,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 52,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 52
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 6,
+              "glyph": "ן",
+              "rawLetterIndex": 19
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 0,
+              "glyph": "א",
+              "rawLetterIndex": 52
+            }
+          ],
+          "values": [
+            16,
+            15,
+            0
+          ],
+          "chart": {
+            "anchor": 16,
+            "difference": 2,
+            "kind": "ratio",
+            "residual": 16
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 53,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 11,
+              "offset": 8,
+              "glyph": "ן",
+              "rawLetterIndex": 53
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 5,
+              "glyph": "י",
+              "rawLetterIndex": 18
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 16,
+              "offset": 2,
+              "glyph": "ת",
+              "rawLetterIndex": 53
+            }
+          ],
+          "values": [
+            15,
+            9,
+            26
+          ],
+          "chart": {
+            "anchor": 15,
+            "difference": 3,
+            "kind": "ratio",
+            "residual": 22
+          },
+          "memberTwo": true,
+          "memberTwelve": true
+        },
+        {
+          "column": 54,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 54
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 3,
+              "glyph": "ב",
+              "rawLetterIndex": 17
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 54
+            }
+          ],
+          "values": [
+            14,
+            1,
+            4
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 26,
+            "kind": "ratio",
+            "residual": 8
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 55,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 3,
+              "glyph": "פ",
+              "rawLetterIndex": 55
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 4,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 16
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 55
+            }
+          ],
+          "values": [
+            20,
+            5,
+            9
+          ],
+          "chart": {
+            "anchor": 20,
+            "difference": 12,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 56,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 6,
+              "glyph": "נ",
+              "rawLetterIndex": 56
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 9,
+              "glyph": "ם",
+              "rawLetterIndex": 15
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 17,
+              "offset": 7,
+              "glyph": "ם",
+              "rawLetterIndex": 56
+            }
+          ],
+          "values": [
+            16,
+            13,
+            13
+          ],
+          "chart": {
+            "anchor": 16,
+            "difference": 6,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 57,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 8,
+              "glyph": "י",
+              "rawLetterIndex": 57
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 14
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 0,
+              "glyph": "ל",
+              "rawLetterIndex": 57
+            }
+          ],
+          "values": [
+            9,
+            9,
+            12
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 0,
+            "kind": "degenerate",
+            "residual": 3
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 58,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 10,
+              "glyph": "ה",
+              "rawLetterIndex": 58
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 4,
+              "glyph": "ר",
+              "rawLetterIndex": 13
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 3,
+              "glyph": "ח",
+              "rawLetterIndex": 58
+            }
+          ],
+          "values": [
+            4,
+            24,
+            7
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 59,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 12,
+              "offset": 13,
+              "glyph": "ם",
+              "rawLetterIndex": 59
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 2,
+              "glyph": "צ",
+              "rawLetterIndex": 12
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 5,
+              "glyph": "ר",
+              "rawLetterIndex": 59
+            }
+          ],
+          "values": [
+            13,
+            22,
+            24
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 9,
+            "kind": "ratio",
+            "residual": 26
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 60,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 60
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 3,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 11
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 7,
+              "glyph": "ב",
+              "rawLetterIndex": 60
+            }
+          ],
+          "values": [
+            5,
+            14,
+            1
+          ],
+          "chart": {
+            "anchor": 5,
+            "difference": 9,
+            "kind": "ratio",
+            "residual": 6
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 61,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 61
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 7,
+              "glyph": "ה",
+              "rawLetterIndex": 10
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 18,
+              "offset": 10,
+              "glyph": "ה",
+              "rawLetterIndex": 61
+            }
+          ],
+          "values": [
+            9,
+            4,
+            4
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 22,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 62,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 7,
+              "glyph": "ע",
+              "rawLetterIndex": 62
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 4,
+              "glyph": "נ",
+              "rawLetterIndex": 9
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 62
+            }
+          ],
+          "values": [
+            18,
+            16,
+            5
+          ],
+          "chart": {
+            "anchor": 18,
+            "difference": 25,
+            "kind": "ratio",
+            "residual": 2
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 63,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 9,
+              "glyph": "מ",
+              "rawLetterIndex": 63
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 2,
+              "glyph": "ח",
+              "rawLetterIndex": 8
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 63
+            }
+          ],
+          "values": [
+            14,
+            7,
+            9
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 23,
+            "kind": "ratio",
+            "residual": 4
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 64,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 13,
+              "offset": 12,
+              "glyph": "ד",
+              "rawLetterIndex": 64
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 2,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 7
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 6,
+              "glyph": "ב",
+              "rawLetterIndex": 64
+            }
+          ],
+          "values": [
+            3,
+            14,
+            1
+          ],
+          "chart": {
+            "anchor": 3,
+            "difference": 11,
+            "kind": "ratio",
+            "residual": 21
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 65,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 0,
+              "glyph": "מ",
+              "rawLetterIndex": 65
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 5,
+              "glyph": "ן",
+              "rawLetterIndex": 6
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 9,
+              "glyph": "ק",
+              "rawLetterIndex": 65
+            }
+          ],
+          "values": [
+            14,
+            15,
+            23
+          ],
+          "chart": {
+            "anchor": 14,
+            "difference": 4,
+            "kind": "ratio",
+            "residual": 11
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 66,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 3,
+              "glyph": "א",
+              "rawLetterIndex": 66
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 4,
+              "glyph": "י",
+              "rawLetterIndex": 5
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 11,
+              "glyph": "ע",
+              "rawLetterIndex": 66
+            }
+          ],
+          "values": [
+            0,
+            9,
+            18
+          ],
+          "chart": {
+            "anchor": 0,
+            "difference": 9,
+            "kind": "ratio",
+            "residual": 2
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 67,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 5,
+              "glyph": "ח",
+              "rawLetterIndex": 67
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 1,
+              "offset": 0,
+              "glyph": "ב",
+              "rawLetterIndex": 4
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 19,
+              "offset": 13,
+              "glyph": "ו",
+              "rawLetterIndex": 67
+            }
+          ],
+          "values": [
+            7,
+            1,
+            5
+          ],
+          "chart": {
+            "anchor": 7,
+            "difference": 3,
+            "kind": "ratio",
+            "residual": 10
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 68,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 7,
+              "glyph": "ר",
+              "rawLetterIndex": 68
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 9,
+              "glyph": "א",
+              "rawLetterIndex": 3
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 0,
+              "glyph": "ה",
+              "rawLetterIndex": 68
+            }
+          ],
+          "values": [
+            24,
+            0,
+            4
+          ],
+          "chart": {
+            "anchor": 24,
+            "difference": 12,
+            "kind": "ratio",
+            "residual": 9
+          },
+          "memberTwo": false,
+          "memberTwelve": true
+        },
+        {
+          "column": 69,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 9,
+              "glyph": "י",
+              "rawLetterIndex": 69
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 6,
+              "glyph": "ב",
+              "rawLetterIndex": 2
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 3,
+              "glyph": "מ",
+              "rawLetterIndex": 69
+            }
+          ],
+          "values": [
+            9,
+            1,
+            14
+          ],
+          "chart": {
+            "anchor": 9,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 21
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 70,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 11,
+              "glyph": "ה",
+              "rawLetterIndex": 70
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 3,
+              "glyph": "י",
+              "rawLetterIndex": 1
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 7,
+              "glyph": "י",
+              "rawLetterIndex": 70
+            }
+          ],
+          "values": [
+            4,
+            9,
+            9
+          ],
+          "chart": {
+            "anchor": 4,
+            "difference": 17,
+            "kind": "ratio",
+            "residual": 1
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        },
+        {
+          "column": 71,
+          "occurrences": [
+            {
+              "verse": 19,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 14,
+              "offset": 14,
+              "glyph": "ם",
+              "rawLetterIndex": 71
+            },
+            {
+              "verse": 20,
+              "segment": 0,
+              "label": "E",
+              "wordSlot": 0,
+              "offset": 0,
+              "glyph": "ו",
+              "rawLetterIndex": 0
+            },
+            {
+              "verse": 21,
+              "segment": 1,
+              "label": "J",
+              "wordSlot": 20,
+              "offset": 9,
+              "glyph": "ם",
+              "rawLetterIndex": 71
+            }
+          ],
+          "values": [
+            13,
+            5,
+            13
+          ],
+          "chart": {
+            "anchor": 13,
+            "difference": 19,
+            "kind": "ratio",
+            "residual": 0
+          },
+          "memberTwo": false,
+          "memberTwelve": false
+        }
+      ]
+    }
+  },
+  "qualification": "actual source occurrences with reversible candidate coordinate charts; membership is not historical operator recognition; shifts exploratory"
+}

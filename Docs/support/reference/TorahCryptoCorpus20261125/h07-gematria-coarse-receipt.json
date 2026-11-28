@@ -1,0 +1,635 @@
+{
+  "chart": {
+    "alphabet": "אצךבעםגפתדלףהיץוכןזסרחמשטנק",
+    "records": [
+      {
+        "glyph": "א",
+        "value": 1,
+        "index": 0,
+        "digits": [
+          0,
+          0,
+          0
+        ],
+        "next": "י"
+      },
+      {
+        "glyph": "ב",
+        "value": 2,
+        "index": 3,
+        "digits": [
+          0,
+          1,
+          0
+        ],
+        "next": "כ"
+      },
+      {
+        "glyph": "ג",
+        "value": 3,
+        "index": 6,
+        "digits": [
+          0,
+          2,
+          0
+        ],
+        "next": "ל"
+      },
+      {
+        "glyph": "ד",
+        "value": 4,
+        "index": 9,
+        "digits": [
+          0,
+          0,
+          1
+        ],
+        "next": "מ"
+      },
+      {
+        "glyph": "ה",
+        "value": 5,
+        "index": 12,
+        "digits": [
+          0,
+          1,
+          1
+        ],
+        "next": "נ"
+      },
+      {
+        "glyph": "ו",
+        "value": 6,
+        "index": 15,
+        "digits": [
+          0,
+          2,
+          1
+        ],
+        "next": "ס"
+      },
+      {
+        "glyph": "ז",
+        "value": 7,
+        "index": 18,
+        "digits": [
+          0,
+          0,
+          2
+        ],
+        "next": "ע"
+      },
+      {
+        "glyph": "ח",
+        "value": 8,
+        "index": 21,
+        "digits": [
+          0,
+          1,
+          2
+        ],
+        "next": "פ"
+      },
+      {
+        "glyph": "ט",
+        "value": 9,
+        "index": 24,
+        "digits": [
+          0,
+          2,
+          2
+        ],
+        "next": "צ"
+      },
+      {
+        "glyph": "י",
+        "value": 10,
+        "index": 13,
+        "digits": [
+          1,
+          1,
+          1
+        ],
+        "next": "ק"
+      },
+      {
+        "glyph": "כ",
+        "value": 20,
+        "index": 16,
+        "digits": [
+          1,
+          2,
+          1
+        ],
+        "next": "ר"
+      },
+      {
+        "glyph": "ל",
+        "value": 30,
+        "index": 10,
+        "digits": [
+          1,
+          0,
+          1
+        ],
+        "next": "ש"
+      },
+      {
+        "glyph": "מ",
+        "value": 40,
+        "index": 22,
+        "digits": [
+          1,
+          1,
+          2
+        ],
+        "next": "ת"
+      },
+      {
+        "glyph": "נ",
+        "value": 50,
+        "index": 25,
+        "digits": [
+          1,
+          2,
+          2
+        ],
+        "next": "ך"
+      },
+      {
+        "glyph": "ס",
+        "value": 60,
+        "index": 19,
+        "digits": [
+          1,
+          0,
+          2
+        ],
+        "next": "ם"
+      },
+      {
+        "glyph": "ע",
+        "value": 70,
+        "index": 4,
+        "digits": [
+          1,
+          1,
+          0
+        ],
+        "next": "ן"
+      },
+      {
+        "glyph": "פ",
+        "value": 80,
+        "index": 7,
+        "digits": [
+          1,
+          2,
+          0
+        ],
+        "next": "ף"
+      },
+      {
+        "glyph": "צ",
+        "value": 90,
+        "index": 1,
+        "digits": [
+          1,
+          0,
+          0
+        ],
+        "next": "ץ"
+      },
+      {
+        "glyph": "ק",
+        "value": 100,
+        "index": 26,
+        "digits": [
+          2,
+          2,
+          2
+        ],
+        "next": "א"
+      },
+      {
+        "glyph": "ר",
+        "value": 200,
+        "index": 20,
+        "digits": [
+          2,
+          0,
+          2
+        ],
+        "next": "ב"
+      },
+      {
+        "glyph": "ש",
+        "value": 300,
+        "index": 23,
+        "digits": [
+          2,
+          1,
+          2
+        ],
+        "next": "ג"
+      },
+      {
+        "glyph": "ת",
+        "value": 400,
+        "index": 8,
+        "digits": [
+          2,
+          2,
+          0
+        ],
+        "next": "ד"
+      },
+      {
+        "glyph": "ך",
+        "value": 500,
+        "index": 2,
+        "digits": [
+          2,
+          0,
+          0
+        ],
+        "next": "ה"
+      },
+      {
+        "glyph": "ם",
+        "value": 600,
+        "index": 5,
+        "digits": [
+          2,
+          1,
+          0
+        ],
+        "next": "ו"
+      },
+      {
+        "glyph": "ן",
+        "value": 700,
+        "index": 17,
+        "digits": [
+          2,
+          2,
+          1
+        ],
+        "next": "ז"
+      },
+      {
+        "glyph": "ף",
+        "value": 800,
+        "index": 11,
+        "digits": [
+          2,
+          0,
+          1
+        ],
+        "next": "ח"
+      },
+      {
+        "glyph": "ץ",
+        "value": 900,
+        "index": 14,
+        "digits": [
+          2,
+          1,
+          1
+        ],
+        "next": "ט"
+      }
+    ],
+    "geometry": {
+      "fine": 196830,
+      "coarse": 54,
+      "perFibre": 3645,
+      "phaseSquares": 196830,
+      "coarseActiveFixed": 0,
+      "coarseActiveOrbits": 18,
+      "coarseIdentityFixed": 54,
+      "unitProducts": 36,
+      "unitConjugations": 6
+    },
+    "obstructions": {
+      "R13": "1+2*13 vs 9*3; no bijective conjugacy",
+      "frobenius": "3 fixed +8*3 vs 9*3; no bijective conjugacy",
+      "finalSwap": "17 fixed +5*2 vs additive negation 1 fixed+13*2; no bijective conjugacy",
+      "fixedCoarse": "active quotient and identity action distinct; fixed quotient fibres would have to union whole phase orbits; 3645 is divisible by 3 but this particular quotient is not constant on orbits"
+    }
+  },
+  "assay": {
+    "geometry": {
+      "markedStates": 196830,
+      "phaseSquares": 196830,
+      "rotationBasisCovariance": 29160,
+      "canonicalSeams": 6080,
+      "zeroSeams": 426,
+      "cocycle": 49410,
+      "canonicalDirections": 1210
+    },
+    "training": {
+      "blocks": 85,
+      "triples": 6120,
+      "canonicalDirections": 1061
+    },
+    "results": {
+      "exodus": {
+        "blocks": 175,
+        "letters": 9275,
+        "scores": {
+          "unigram": {
+            "bits": 39609.991048086056,
+            "hits": 910,
+            "bitsPerLetter": 4.27061898092572
+          },
+          "pair": {
+            "bits": 42063.24713096635,
+            "hits": 802,
+            "bitsPerLetter": 4.535120984470765
+          },
+          "h07": {
+            "bits": 42505.182855330204,
+            "hits": 665,
+            "bitsPerLetter": 4.582769041005952
+          },
+          "h07Phase": {
+            "bits": 41326.560251918476,
+            "hits": 867,
+            "bitsPerLetter": 4.455693827700105
+          },
+          "uncorrectedPhase": {
+            "bits": 41418.95260358044,
+            "hits": 805,
+            "bitsPerLetter": 4.465655267232393
+          },
+          "relabelControl": {
+            "bits": 42513.77420638422,
+            "hits": 663,
+            "bitsPerLetter": 4.583695332224714
+          },
+          "coarse": {
+            "bits": 39690.61627008012,
+            "hits": 910,
+            "bitsPerLetter": 4.279311727232358
+          },
+          "fineCoarse": {
+            "bits": 40114.439957896015,
+            "hits": 902,
+            "bitsPerLetter": 4.32500700354674
+          }
+        }
+      },
+      "genesis": {
+        "blocks": 338,
+        "letters": 17914,
+        "scores": {
+          "unigram": {
+            "bits": 75856.17791683356,
+            "hits": 2084,
+            "bitsPerLetter": 4.234463431775905
+          },
+          "pair": {
+            "bits": 80760.65995705489,
+            "hits": 1656,
+            "bitsPerLetter": 4.508242712797526
+          },
+          "h07": {
+            "bits": 81721.90023184172,
+            "hits": 1324,
+            "bitsPerLetter": 4.561901319182858
+          },
+          "h07Phase": {
+            "bits": 79403.40017903836,
+            "hits": 1771,
+            "bitsPerLetter": 4.432477401978249
+          },
+          "uncorrectedPhase": {
+            "bits": 79610.85692257174,
+            "hits": 1713,
+            "bitsPerLetter": 4.444058106652436
+          },
+          "relabelControl": {
+            "bits": 81853.08572942839,
+            "hits": 1222,
+            "bitsPerLetter": 4.5692243903889915
+          },
+          "coarse": {
+            "bits": 75918.20932689562,
+            "hits": 2084,
+            "bitsPerLetter": 4.237926165395535
+          },
+          "fineCoarse": {
+            "bits": 76888.737954498,
+            "hits": 1969,
+            "bitsPerLetter": 4.292103268644524
+          }
+        }
+      },
+      "leviticus": {
+        "blocks": 194,
+        "letters": 10282,
+        "scores": {
+          "unigram": {
+            "bits": 43949.3967283742,
+            "hits": 949,
+            "bitsPerLetter": 4.274401549151352
+          },
+          "pair": {
+            "bits": 46844.89460280394,
+            "hits": 936,
+            "bitsPerLetter": 4.556009978876088
+          },
+          "h07": {
+            "bits": 47111.37033791572,
+            "hits": 789,
+            "bitsPerLetter": 4.581926700828217
+          },
+          "h07Phase": {
+            "bits": 45897.68471173519,
+            "hits": 963,
+            "bitsPerLetter": 4.463886861674304
+          },
+          "uncorrectedPhase": {
+            "bits": 45994.79894461502,
+            "hits": 932,
+            "bitsPerLetter": 4.473331933924822
+          },
+          "relabelControl": {
+            "bits": 47063.23216289271,
+            "hits": 756,
+            "bitsPerLetter": 4.577244909832008
+          },
+          "coarse": {
+            "bits": 43983.336347338634,
+            "hits": 949,
+            "bitsPerLetter": 4.277702426311869
+          },
+          "fineCoarse": {
+            "bits": 44495.17503419091,
+            "hits": 998,
+            "bitsPerLetter": 4.327482497003589
+          }
+        }
+      },
+      "numbers": {
+        "blocks": 279,
+        "letters": 14787,
+        "scores": {
+          "unigram": {
+            "bits": 63467.530845970905,
+            "hits": 1482,
+            "bitsPerLetter": 4.29211678136004
+          },
+          "pair": {
+            "bits": 67570.47349203363,
+            "hits": 1305,
+            "bitsPerLetter": 4.569586359101483
+          },
+          "h07": {
+            "bits": 68145.63194310103,
+            "hits": 1011,
+            "bitsPerLetter": 4.608482582207414
+          },
+          "h07Phase": {
+            "bits": 66252.39920424604,
+            "hits": 1350,
+            "bitsPerLetter": 4.480448989263951
+          },
+          "uncorrectedPhase": {
+            "bits": 66354.8284181248,
+            "hits": 1294,
+            "bitsPerLetter": 4.487375966600717
+          },
+          "relabelControl": {
+            "bits": 68076.96961380776,
+            "hits": 1059,
+            "bitsPerLetter": 4.603839156949196
+          },
+          "coarse": {
+            "bits": 63486.86749243575,
+            "hits": 1482,
+            "bitsPerLetter": 4.2934244601633695
+          },
+          "fineCoarse": {
+            "bits": 64212.322533027946,
+            "hits": 1438,
+            "bitsPerLetter": 4.342484786165412
+          }
+        }
+      },
+      "deuteronomy": {
+        "blocks": 238,
+        "letters": 12614,
+        "scores": {
+          "unigram": {
+            "bits": 53557.878973924875,
+            "hits": 1279,
+            "bitsPerLetter": 4.245907640235046
+          },
+          "pair": {
+            "bits": 57103.57831716961,
+            "hits": 1180,
+            "bitsPerLetter": 4.527000025144253
+          },
+          "h07": {
+            "bits": 57457.17349602666,
+            "hits": 978,
+            "bitsPerLetter": 4.5550319879520105
+          },
+          "h07Phase": {
+            "bits": 56050.88634593906,
+            "hits": 1152,
+            "bitsPerLetter": 4.443545770250441
+          },
+          "uncorrectedPhase": {
+            "bits": 56158.78100640762,
+            "hits": 1198,
+            "bitsPerLetter": 4.452099334581229
+          },
+          "relabelControl": {
+            "bits": 57628.72373031115,
+            "hits": 894,
+            "bitsPerLetter": 4.568631974814583
+          },
+          "coarse": {
+            "bits": 53647.3774570204,
+            "hits": 1279,
+            "bitsPerLetter": 4.253002810925986
+          },
+          "fineCoarse": {
+            "bits": 54318.070417803545,
+            "hits": 1236,
+            "bitsPerLetter": 4.306173332630691
+          }
+        }
+      }
+    },
+    "shem": {
+      "blocks": 1,
+      "letters": 53,
+      "scores": {
+        "unigram": {
+          "bits": 218.12596878315998,
+          "hits": 8,
+          "bitsPerLetter": 4.115584316663396
+        },
+        "pair": {
+          "bits": 230.5197639984005,
+          "hits": 8,
+          "bitsPerLetter": 4.349429509403783
+        },
+        "h07": {
+          "bits": 232.8505781832744,
+          "hits": 7,
+          "bitsPerLetter": 4.393407135533479
+        },
+        "h07Phase": {
+          "bits": 227.24850093039205,
+          "hits": 9,
+          "bitsPerLetter": 4.2877075647243785
+        },
+        "uncorrectedPhase": {
+          "bits": 227.83711584226128,
+          "hits": 8,
+          "bitsPerLetter": 4.29881350645776
+        },
+        "relabelControl": {
+          "bits": 244.47605700451277,
+          "hits": 3,
+          "bitsPerLetter": 4.6127557925379765
+        },
+        "coarse": {
+          "bits": 219.41270772412523,
+          "hits": 8,
+          "bitsPerLetter": 4.139862409889155
+        },
+        "fineCoarse": {
+          "bits": 221.05792170535884,
+          "hits": 8,
+          "bitsPerLetter": 4.170904183119978
+        }
+      }
+    },
+    "completion": {
+      "text": "ייייייייייייייייייייייייייייייייייייייייוייהרווהיויהייימייירררלההירלוייילוייהייהויומילויהיי",
+      "length": 91,
+      "knownB": 53,
+      "unobservedB": 19,
+      "qualification": "synthetic pointwise marginal MAP, not joint optimum or restored text"
+    },
+    "notes": "Actual donor pack/chart/projection and phase convention transcribed. Alphabet ordinal and cyclic column mark are chosen adapters, not source semantics. 53 third-row glyphs with both observed inputs (raw prefix 125); no teacher forcing. Scores matched on same symbols; comparison to earlier whole-suffix score invalid. Pair smoothing uses shared training unigram, phase pooling averages counts under corrected action then adds original prior; not strict phase-invariant probability. Relabel control is a second fixed chart labeling, not morphology permutation. No model cost included; heldout books already used in prior experiments, exploratory."
+  },
+  "weighted": {
+    "unigram": 4.26132962623612,
+    "pair": 4.5372865566042115,
+    "h07": 4.577340899990988,
+    "h07Phase": 4.453861923370285,
+    "uncorrectedPhase": 4.463223237996357,
+    "relabelControl": 4.580339521562835,
+    "coarse": 4.265729542695932,
+    "fineCoarse": 4.316635002734869
+  },
+  "letters": 64872,
+  "qualification": "Extended gematria order source convention, not source cipher; decimal magnitude cycle constructed, not independently attested. Fine/coarse active phase is a candidate action on original 6x9 carrier, not fixed 3B coarse sector. Coarse empirical count conditional on selected orientation; full 27 glyph distribution is equivalent to t,r conditional on orientation. Fine/coarse mixture fixed half weights; no full MDL; previously used holdouts exploratory."
+}
