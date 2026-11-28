@@ -40,3 +40,6 @@ See [Woogaroo case attribution and deliverables](RelationalFederationWoogarooCas
 
 ## dashiTRADE / System V lineage
 See [System V option-cone source atlas](RelationalFederationSystemVOptionCone20261129.md). Beer/Cybersyn source, user/DASHI people-steered System V interpretation, dashiTRADE original architecture and golden owner, JMD technical lineage and new DASHI formal composition remain separately attributed. Private runtime inspected without copying source; no runtime conformance or trading/political authority claimed.
+
+## OODA / proof-experiment-action lineage
+See [OODA source and weld crosswalk](RelationalFederationOODA20261129.md). Boyd historical OODA (exact briefing locator pending), Beer VSM, #697 DASHI history-indexed proof/experiment/action and Base369 observer, dashiTRADE original architecture, SLR production and JMD technical precedents remain independently attributed. No sector-to-authority, model score-to-physical outcome or immediate-to-long-horizon promotion.
