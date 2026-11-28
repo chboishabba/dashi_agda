@@ -51,7 +51,10 @@ def bounded_fold(n,R,H,caps,B,leaf_cap=8,seam_cap=8):
     c,h=tables[top][0];B.pay('demand_strata_reopen',1+n*(1+len(H))+len(V)*(1+len(h))+sum(r.bit_count() for r in R))
     Q=canon(h);assert Q is not None
     y=lift(u,V,chart(len(V),Q)[0]);assert satisfies(y,H,()) and all((r&y).bit_count()<=w for r,w in zip(R,caps))
-    return c,y
+    # A root receipt fixes exactly the observed normal span. All remaining
+    # chart-kernel coordinates are free lifts, not additional table labels.
+    B.pay('demand_kernel_mass',1+len(V)+len(Q))
+    return c*(1<<(len(V)-len(Q))),y
 
 
 def subtract(H,E,B):
