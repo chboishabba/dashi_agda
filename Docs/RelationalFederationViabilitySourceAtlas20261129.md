@@ -37,3 +37,6 @@ See [Circular reproduction source atlas and roadmap](RelationalFederationCircula
 
 ## Woogaroo source crosswalk
 See [Woogaroo case attribution and deliverables](RelationalFederationWoogarooCase20261129.md) and master `Docs/WoogarooPreservationSourceAttribution.md`. Preserve original government, consultant/proponent, independent ecological/objection and community source fibres; distinct EPBC actions and legal/physical scopes. JMD and DASHI contributions are separate. No new external source acquisition or current status claim.
+
+## dashiTRADE / System V lineage
+See [System V option-cone source atlas](RelationalFederationSystemVOptionCone20261129.md). Beer/Cybersyn source, user/DASHI people-steered System V interpretation, dashiTRADE original architecture and golden owner, JMD technical lineage and new DASHI formal composition remain separately attributed. Private runtime inspected without copying source; no runtime conformance or trading/political authority claimed.
