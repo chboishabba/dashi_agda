@@ -304,9 +304,16 @@ def selftest():
     assert all(x["status"]=="REFUTED" for x in scale.values())
     sat=saturate([clause_anf((1,2,3))],3,3); assert sat["status"]=="STABLE_NO_REFUTATION"
     php=discover_aux_php(aux_php_source(3,3,1)); assert php_bound(3,3,1)["contradiction"] and not php_bound(2,3,1)["contradiction"]
+    grouped=degree_case({"source_id":"grouped-anf-smoke","family":"smoke-only","n":3,"degrees":[0,1,2,3],"axioms":[list(f) for f in A]}, {"max_rows":10000,"max_work":1000000,"seconds":5})
+    assert grouped["proof_system"]=="grouped-ANF Boolean quotient" and grouped["exact_minimum_in_tested_degrees"]==3
     dup=recovery_audit([{"source_id":"synthetic-a","family":"hidden","n":1,"attempts":1,"source_fingerprint":"same","coupled_constraint_control":True},{"source_id":"synthetic-b","family":"hidden_extra","n":1,"attempts":2,"source_fingerprint":"same","coupled_constraint_control":True}])
+    refused=False
+    try:
+        recovery_audit([{"source_id":"synthetic-a","family":"hidden","n":1,"attempts":1,"source_fingerprint":"same"},{"source_id":"synthetic-b","family":"hidden_extra","n":1,"attempts":2,"source_fingerprint":"same"}])
+    except ValueError: refused=True
+    assert refused
     clique=clique_colour_control()
-    return {"status":"PASS","dense_B":dense,"overlap":overlap,"affine":affine,"degree_floor":floor,"sparse_n32_n48":scale,"satisfiable_control":sat,"aux_PHP":php,"clique_colour":clique,"duplicate_attempt_audit":dup,"claim_ceiling":"finite controls only; no universal SAT producer or P-vs-NP endpoint"}
+    return {"status":"PASS","dense_B":dense,"overlap":overlap,"affine":affine,"degree_floor":floor,"sparse_n32_n48":scale,"satisfiable_control":sat,"grouped_anf_input_path":{"proof_system":grouped["proof_system"],"exact_minimum":grouped["exact_minimum_in_tested_degrees"]},"aux_PHP":php,"clique_colour":clique,"duplicate_attempt_audit":dup,"duplicate_guard_refuses_unlabelled":refused,"claim_ceiling":"finite controls only; no universal SAT producer or P-vs-NP endpoint"}
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--input"); p.add_argument("--output")

@@ -10,9 +10,11 @@
   "affine":{"same_polar_different_affine":true,"x_squared_equals_x":true},
   "degree_floor":["STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","REFUTED"],
   "sparse_n32_n48":{"32":{"status":"REFUTED","degree":3,"rank":8},"48":{"status":"REFUTED","degree":3,"rank":8}},
+  "grouped_anf_input_path":{"proof_system":"grouped-ANF Boolean quotient","exact_minimum":3},
   "satisfiable_control":{"status":"STABLE_NO_REFUTATION","degree":3,"rank":1,"columns_touched":8},
   "aux_PHP":{"pigeons":3,"holes":3,"excluded":1,"discovered":true,"contradiction":true,"boundary_control_p2_h3_r1_satisfiable":true},
   "clique_colour":{"positive_clique_side":true,"negative_colourable_side":true,"four_vertex_graphs_checked":64,"boundary":"semantic interpolation control only; not a Pudlak lower-bound proof"},
   "duplicate_attempt_audit":{"synthetic_records_only":true,"duplicate_control_required":true},
+  "duplicate_guard_refuses_unlabelled":true,
   "claim_ceiling":"finite controls only; no universal SAT producer or P-vs-NP endpoint"
 }
