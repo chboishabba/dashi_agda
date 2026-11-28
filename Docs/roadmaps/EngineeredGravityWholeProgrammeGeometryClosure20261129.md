@@ -337,3 +337,50 @@ The file proves both original Einstein radial mass/flux equations, their differe
 All THREE new W2.2/W2.3 files **ran locally under 90 seconds with exit0**, and their exact Git blob byte hashes match the resulting #1547 committed files. All three have signed \(v\) support and negative controls. The original existing checkpointed runner includes all three. The manifest now holds SEVEN W1 entries and SIX W2 entries, 13 total pinned mathematical source/receiver interfaces, with \`physical_paid=false\`. The added three failure controls (fake mass/flux payment, wall-stress source substitution, invented Einstein physical lane) bring the recorded negative-control suite to fourteen, but literal full DAG test/aggregate replay has NOT occurred. The 36 primary physical programme obligations remain OPEN.
 
 **W2.4 whole-thing next:** compute the original nonlinear repaired TOV material action under a dynamical radial label \(Y(t,r)\); differentiate its exact stress to obtain \(\rho,p_r,j,p_t\), and test whether the W2.3 rescaled mass profile can be generated *without* a separate, unphysical source. This is the decisive material-to-Einstein weld, not more finite positive polar trial searching. If not, identify the exact algebraic incompatibility and reverse-solve admissible \(Y\)/metric histories. Alongside that, attach the same source-qualified work/traction to reciprocal controllers, Maxwell/RMHD matter, and F8/G3 same-event original receivers with independent source hashes. The physical EH/GHY/corner and free nonspherical modes remain essential; no native F8 or empirical 1g claim.
+
+
+## W2.4 DIRECT original constitutive-action audit against the constructed moving Einstein mass profile (29 November)
+
+**Genuine decisive obstruction, not a hypothetical open assumption.** New \`scripts/check_tov_original_material_flux_weld.py\`, committed \`5a9855fb7d9d561f980fca61c331bc96a21af8a2\`, Git blob \`671a81ab6afac23e30dacc5e8b739e0ec5d066af\`; literal locally executed Python/SymPy source PASS under 90 seconds. Reopened the ORIGINAL repaired TOV matter action with \(\lambda>0\), \(\rho=(2+\lambda)p(1-x)\), \(p_r=-p(1-x)^2\), \(p=\lambda/(8\pi)\), \(\,f=1-\lambda(2+\lambda)(x/3-x^2/5)\), \(d=(\rho+p_r)/(2f)\), \(a=(\rho+p_t)/2\), \(V=\rho-2a-df\). For a radially deforming three-component material map \(Y^A=Y(t,r)n^A\), its exact kinetic/source density on polar-areal spacetime is
+\[
+W=d(Y^2)\left[fY_r^2-\frac{Y_t^2}{N^2}\right]+2a(Y^2)\frac{Y^2}{r^2}+V(Y^2)
+\]
+and stress from the SAME action \(S_m=-\int\sqrt{-g} W\):
+\[
+\rho_{\mathrm{Eulerian}}=W+2dY_t^2/N^2,\quad
+p_r=2dfY_r^2-W,\quad
+j=-2d\sqrt f\,Y_tY_r/N.
+\]
+The checker derives and verifies ALL three and reobtains the exact original background \(\rho,p_r,j=0\) with \(Y=r,Y_r=1,Y_t=0\). No separately prescribed \(T_{tr}\) is used.
+
+The constructive radial Einstein family \`check_tov_moving_constraint_family.py\` proposed uniform label scaling \(Y=r/S(t)\), whose first velocity time jet at \(S=1\) is \(Y_t=-r\dot S\). On the initial original metric and source, this true action predicts
+\[
+j_{\rm action}=\frac{(\rho+p_r)r\dot S}{N\sqrt f},
+\quad\text{whereas the prescribed mass profile needs}\quad
+j_{\rm mass}=\frac{\rho\,r\dot S}{N\sqrt f}.
+\]
+Therefore **the original material and the W2.3 mass family fail to weld for uniform scaling inside the bulk**:
+\[
+\boxed{j_{\rm action}-j_{\rm mass}=\frac{p_r r\dot S}{N\sqrt f}\ne0,\quad 0<r<1,\;\dot S\ne0.}
+\]
+At the source edge \(r=1\), this defect vanishes because \(p_r(1)=0\): first-order surface matching is INSUFFICIENT to pay the interior action/Einstein source. A rational pointwise nonzero interior fixture plus static/no-motion zero controls are executed.
+
+**Exact reverse-solved candidate constructor:** on the original slice, holding the source \(d\), the Einstein mass flux constraint fixes the first material velocity to
+\[
+\boxed{Y_t=-\frac{\rho}{\rho+p_r}r\dot S
+=-\frac{\lambda+2}{\lambda+1+r^2}\,r\dot S.}
+\]
+The ratio is regular on the closed star, has centre limit \((\lambda+2)/(\lambda+1)\), equals one at the material wall, and yields the correct kinematic boundary \(Y_t(1)=-\dot S\). This is a **genuine first-time-jet geometric weld** from the original source into the constructed mass profile. The necessary interior motion is **not** a uniform radial scaling; its induced \(Y_r(t,r)\), actual material Euler–Lagrange equation, evolving metric and lapse must be constructed and tested before it is called a solution. If the full PDE refuses this jet, return the exact obstruction; do not relax source identification.
+
+Four W2.2–W2.4 checkers were run locally and exact Git SHA1 blobs matched committed source bytes:
+- \`check_tov_mass_flux_surface_closure.py\` \`df20eed79509be852151ce1f38c656130b44ffe9\`
+- \`check_tov_wall_frame_stress_inverse.py\` \`b27efd0f5110228955276a99801675027faa97a9\`
+- \`check_tov_moving_constraint_family.py\` \`23f2f03c33300c59a15d648698201220f76c6f5d\`
+- \`check_tov_original_material_flux_weld.py\` \`671a81ab6afac23e30dacc5e8b739e0ec5d066af\`.
+
+Actual SHA256 checksums and log hashes committed to \`Artifacts/engineered-gravity/w2_mass_flux_material_local_receipt_20261129.json\`; all 4 exit0 with 90s limit. No GitHub CI, no all-lane aggregate or native F8. The runner now registers these four mathematical checks and W1/W2 manifest pins track the same source, with W2.4 math \`physical_paid=false\`; sixteen malformed-claim tests are committed but **not asserted as replayed**. The 36 named whole-programme physical obligations persist.
+
+### Next whole-problem high-alpha order
+**D first source weld:** generate the exact Euler–Lagrange PDE for radial material \(Y(t,r)\) from the ORIGINAL \(a,d,V\), including nonuniform reverse-solved time jet and the evolving \(f,N\); couple \(T_{tt},T_{tr},T_{rr},T_{\theta\theta}\) to all Einstein equations and matter Ward. Determine if the W2.3 candidate profile must be modified and derive actual \(m_t,m_r,\nu_r\) from one source. Then solve the physical wall graph domain, second Israel normal, EH+GHY/corners, and free metric polar modes, not merely additional Ritz trial signs.
+
+**Cross-lane shared source ownership:** the mathematical Maxwell current \(J\) still has no original physical apparatus source; reciprocal \(G(X)\) needs actual material/controller and support; G3/G4/F8 source-identical causal history, native same-clock receiver and physical calibration are independent unsolved objects. Reuse the source/normal/energy maps and exact no-go fibres, without promoting any lane for algebraic identities or a constructed off-action star.
