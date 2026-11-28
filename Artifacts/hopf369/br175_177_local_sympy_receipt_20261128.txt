@@ -1,0 +1,16 @@
+Local /tmp/hopf175; OPENBLAS_NUM_THREADS=1 timeout 90 python <checker> --part <stage>. All 11 stages exit 0. Original donor BR27 Git blob 75f6d2f9ae23302860074c25cb8d864b7c089148.
+BR132–135 exact local Git blob 0de643a765e455367c6635dad2f6aec808ac01c0; SHA256 d79df051892f4daf1aa66a60866b26fc8267da5ec99cfcfbab21f93aeb649d18. Initial copy mismatch corrected from exact source before execution.
+PASS BR132 full BR29 subsidiary graph discrepancy rank 10 factors exactly through spatial dC_B; naive restricted Gram fails
+PASS BR133 full 12-row multiplier resolves rank-12 work obstruction; tangential skew rank 6 paid by dH, positive corrected wall mass
+PASS BR134 exact five-dimensional exterior Bianchi subsidiary sources [E,R] and [E,*R] on independent noncommuting forms
+PASS BR135 covariant wall Codazzi defect curl factors through Cartan curvature defect and full Bianchi source
+BR136–139 exact local Git blob 2a20407ce64c205df31187f15254e2c008c944cc; SHA256 5899c4db10335cf345c8a6fc3d23a8f6cacdeb51ced6ce3c6eedefa7a7b2775a.
+PASS BR136 arbitrary tracefree nonzero mean: six residual entries retained, zero active and normal work, zero raw magnetic exchange
+PASS BR137 local corrected wall current, SO(3) flux covariance, speeds ±1/2, ±1/3, 0, explicit residual work
+PASS BR138 full 5D degree-2/3 frame/exterior torsion conversion, nonzero correction retained
+PASS BR139 Cartan tangential pullback normal derivative, exact trace budget and L2-only trace refusal
+New checker Git blob 3122119e0a7c1c916dc5bf66f6c75ced45c44e87; SHA256 b723d2c9931af55e2a116e1b48a5513ad94859c418f93de958a1c3f66758dde3.
+PASS BR175 complete frozen bulk/shape reflection split, retained shape and signed energy cancellation
+PASS BR176 paired half-speed and stationary modes satisfy reference wall and magnetic constraints but retain unsuppressed spatial trace
+PASS BR177 actual BR170 moment ratio derivative, exact endpoints ingredients and amplitude reconstruction
+Analytical packet and radial inverse arguments separately written. No full runner, native, CI, actual curved IBVP or empirical receipt.

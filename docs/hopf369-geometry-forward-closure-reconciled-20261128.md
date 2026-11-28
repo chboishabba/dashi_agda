@@ -4777,3 +4777,245 @@ constants and G4 nonlinear profile remain independent.
 Monster marked lattice/action and material receiver
 not newly advanced here; reuse pinned owners from prior
 sections. No sibling edits.
+
+
+## 31. BR175–177 — full reference reflection split, compatible paired trace obstruction and actual radial inverse
+
+Consume BR27/29, BR132–139, BR143, BR169–174 and the atomic
+source owners in sections 24–30. No new generic carrier.
+BR174's selected single tilted wave is valid, but its
+suppression cannot be promoted to the entire two-sided
+reference system. Opposite normal modes must be combined
+before imposing the wall condition.
+
+### 31.1 Exact dependent replay resolves earlier donor limitation
+
+The local original sources now match these committed Git blobs:
+- scripts/check_hopf369_br_curvature_energy.py
+  75f6d2f9ae23302860074c25cb8d864b7c089148.
+- scripts/check_hopf369_br132_135_F_bianchi_cartan.py
+  0de643a765e455367c6635dad2f6aec80804ac01c0,
+  SHA256 d79df051892f4daf1aa66a60866b26fc8267da5ec99cfcfbab21f93aeb649d18.
+- scripts/check_hopf369_br136_139_F_variable_subsidiary.py
+  2a20407ce64c205df31187f15254e2c008c944cc,
+  SHA256 5899c4db10335cf345c8a6fc3d23a8f6cacdeb51ced6ce3c6eedefa7a7b2775a.
+All eight original stages exit zero. The first copy of BR132–135
+had mismatched hash; localized to one ten-line block using line
+checksum comparison, replaced from actual fetched source and
+verified Git hash before execution. BR136–139 exact hash matched
+before run. Together with BR165 and BR169–171's original BR27
+and BR128–131 replays this resolves the earlier byte provenance
+limitation for BR128–139. It is not a full integrated runner,
+native kernel, PDE or curved surface acceptance.
+New BR175/176 use byte-verified original BR27 and BR143
+2354d838727e6d84c1e8da05abad27a9b78efc6d. BR177 consumes
+the radial moment formulas of BR170/173; the existing #886
+atomic, #1241 KK, and earlier pinned CI/SCF/physical source
+owners remain; no new exhaustive master/PR audit.
+Classical Fourier, reflection and moment methods retain prior
+attribution. These are applications to the actual selected
+DASHI carrier and radial operator.
+
+### BR175 — nonzero-shape reference bulk/shape transmission splits exactly
+
+Use a wall at y=0, plus side y>0 and minus side y<0
+(the two one-sided collar coordinates of the original wall).
+For the frozen reference differential system
+ w_t=sum A_i partial_i w+A_n partial_y w,
+ [w]=j Jm, m_t=sum B_i partial_i m-R mean(w),
+ retain all 35 Weyl and nine shape coordinates, j<0.
+The normal reflection F multiplies each packed Riemann
+entry by (-1) to the number of normal indices. Actual
+carrier construction verifies F²=I, F^T G F=G,
+ F A_i=A_i F (tangential i), F A_n=-A_n F,
+ FJ=J, RF=-R. P+=(I+F)/2 has rank19, P- rank16.
+Set u=w+(y), v=F w-(-y) on y>0, a=(u+v)/2,
+ b=(u-v)/2. Both a,b obey the same reference bulk
+ differential equation. Full jump is
+ w+-w-=2P- a+2P+ b,
+ R mean(w)=R b.
+Since J has even parity, the full shape-coupled system
+ separates into
+ a sector: P- a=0 at wall;
+ b,m sector: P+ b=j Jm/2,
+              m_t=sum B_i partial_i m-R b.
+This is an exact split including m, not an assumption
+that wall shape vanishes in all solutions. It includes
+zero normal components and all original jump rows.
+It does not assert independent surjectivity of all
+boundary data or strong well-posedness for this over-
+specified boundary formulation.
+With S=G A_n, P±^T S P±=0 and S J=3 R^T H.
+The a sector has zero normal work; b's work at wall
+ is (1/2)b^T S b=(3j/2)m^T H R b.
+Thus the half-line energy for b,m has positive
+wall weight -3j/2 (with the usual 1/2 factor in
+each quadratic energy); derivative of wall energy
+ cancels the lower-end bulk flux exactly. Same identity
+for complex modes with real-part Hermitian pairing.
+For a sufficiently regular decaying homogeneous solution
+of the reference Laplace-Fourier boundary problem with
+Re s>0, real-part energy integration excludes nonzero
+solutions (assuming no remote-boundary input), including
+nonzero m; this is uniqueness only, not a resolvent
+surjectivity or uniform trace estimate. At Re s=0
+neutral modes are not excluded.
+This is the full reference BULK/SHAPE subsystem split,
+not the full curved Cartan and lower-order nonzero-
+tension boundary system. In particular the actual
+connection Kext terms, Ricci/Torsion defects, wall
+metric matching and higher compatibility are not
+removed by reference reflection.
+
+### BR176 — reflected half-speed and stationary pairs obstruct same-order traces
+
+Use actual original packed coordinates. At tangential
+direction e1 pick w_h with indices 2 and 18 equal to 1,
+ and w_0 with index0=-1,index4=1, all other entries zero.
+These are reflection-even, with A_1 eigenvalues 1/2 and
+0 respectively. Rotate the spatial (1,n) plane by
+cos(theta)=(1-u²)/(1+u²), sin(theta)=2u/(1+u²)
+and use the actual tensor square of its exterior-square
+matrix on Xw (exact same carrier, no independent residual).
+The rotated vectors w_mu(theta) satisfy
+ A(theta)w_mu=mu w_mu, F w_mu(theta)=w_mu(-theta),
+ and have constant G norm.
+For the original independent residual derivative rows
+ c(theta)=D(theta) X w_mu(theta), the exact 9-row
+ spatial electric trace is, zero-based packing,
+ half-speed: entries 2=cos(theta)/2,6=-cos(theta)/2;
+ zero-speed: entries 1=-cos²(theta),3=cos²(theta).
+All others zero. In both cases the reflected pair at
+the wall has trace TW=2 times this expression, not
+O(sin theta). Exact matrix checks also show
+ R(w_mu(theta)+w_mu(-theta))=0,
+ Mag X(w_mu(theta)+w_mu(-theta))=0,
+ Mag L(c(theta)+c(-theta))=0,
+ with BR132/135's full 12-row mixed normal/tangent
+ Mag. Thus the paired frozen fields satisfy the actual
+reference full jump and wall evolution with m=0
+(by choosing the common reflected field on the two sides),
+and zero mixed magnetic Codazzi readout H and its
+selected electric source. The pure tangential Cartan
+trace remains. These do not check every lower-order
+curved Cartan condition or actual initial constrained data.
+
+Written same-order counterexamples for this reference
+bulk/shape subsystem, not the full curved system:
+use a periodic normal coordinate of length L (and
+the frozen tangential Fourier chart), normal frequencies
+ell=2pi n/L, k>0 integer tangential frequency.
+For each positive ell choose w_mu(theta), theta=atan(ell/k)
+ and its reflected partner at -ell. Extend periodically.
+At the seam both partners' exponentials equal one;
+the reference reflection-even sector obeys the boundary
+condition with m=0, and magnetic traces vanish as above.
+Normalize Weyl amplitudes by 1/|xi| (so the derivative
+residual has bounded polarization), then by N^-1/2
+for N chosen positive normal frequencies. By orthogonality
+the bulk L² subsidiary norm stays uniformly bounded
+(normalization on fixed volume); tangential H^s weights
+multiply both sides by comparable k^s.
+For half-speed choose 0<ell<=sqrt(k), N proportional
+to sqrt(k). Frequencies omega=|xi|/2 obey
+ 0<=omega-k/2<=1/4, so the selected trace components
+cohere over 0<=t<=1, up to central phase. Their
+wall norm grows at least as k^(1/4). For stationary
+choose 0<ell<=k/2, N proportional to k, mu=0.
+There is no temporal dephasing, and cos²(theta)>=4/5,
+so the trace grows at least as k^(1/2) for the same
+bounded bulk residual norm. The complex representation
+can be made real by adding conjugate modes, with the
+same norm ratio. This proves sharp half-order necessity
+in this particular frozen bulk/shape stationary trace
+test, consistent with BR150's mixed-norm bound. It
+does not prove sharpness for the full curved IBVP.
+Ordinary time integration can gain a tangential order
+for the half-speed packet (frequencies comparable to k)
+but not for the stationary packet. Therefore simply
+integrating the BR142 electric source in time is not
+a uniform same-order remedy absent actual tangential
+Cartan constraint/control. Need either the full actual
+constraint exclusion of this even stationary family or
+an augmented energy with correct surface/normal weights
+that pays the half-order cost, not another bulk-only
+trace or single incident mode estimate. BR164 derivative-
+free bulk sources remain valid. The full nonzero-shape
+reference split is paid; actual curved Cartan wall
+system still open. The packet bounds are written analytic
+arguments from exact matrices, not simulated packets.
+
+### BR177 — original atomic radial relation closes a scalar inverse
+
+Use BR170's actual selected a,c, with positive supplied
+m and lambda (inverse Bohr scale in source length units).
+Define I_j(lambda)=int_0^infty r^(4+j) exp(-lambda r)
+ /(1+r²)^3 dr, for lambda>0.
+Then a=eps lambda^5 I_1/(12m), c=eps lambda^5 I_0/(12m).
+For nonzero eps the positive ratio
+ rho(lambda)=a/c=I_1/I_0
+ is a mean radius in the probability weight proportional
+to r^4 exp(-lambda r)/(1+r²)^3. By dominated differentiation
+on compact positive lambda intervals, I'_j=-I_(j+1).
+Hence
+ rho' = -(I_0 I_2-I_1²)/I_0² = -Var_lambda(r)<0.
+Strictness follows from positive weight on an interval,
+not a point measure. At lambda down to zero, I_0 tends
+to 3pi/16 by dominated convergence, whereas I_1 tends
+to infinity by monotone convergence (tail ~1/r).
+At lambda up to infinity, substitute x=lambda r and
+apply dominated convergence to the rescaled moments:
+ lambda rho -> 5!/4!=5, so rho ->0.
+Thus rho:(0,infty)->(0,infty) is a continuous strictly
+decreasing bijection, with smooth inverse by rho'<0.
+Integration by parts also gives
+ lambda rho=5-6 E_lambda[r²/(1+r²)]<5.
+These are written analytical arguments; the checker
+verifies moment identities, normalization integral
+and exact asymptotic moment ratio, not a numerical inverse.
+For the BR173 nondegenerate known baseline Es!=Ep,
+if both recovered a²,c² are positive, lambda is uniquely
+determined from sqrt(a²/c²). Then
+ |eps|=12m |c|/(lambda^5 I_0(lambda)).
+A marked observation of either nonzero block restores
+the sign of eps. This only recovers the original selected
+model scale if m and units are known; baseline coefficients
+may themselves be radius-dependent in a physical clock.
+No fixed baseline physical inverse asserted without
+calibration or the full matter model.
+At Es=Ep the spectrum supplies a²+c² only. If lambda
+is known from the independently supplied atomic radial
+source then |eps| is recovered by
+ 12m sqrt(a²+c²)/(lambda^5 sqrt(I_0²+I_1²)).
+If lambda is unknown, a continuous family of (lambda,|eps|)
+remains at fixed positive norm; source relation alone
+does not remove that degeneracy. At eps=0, both couplings
+vanish and lambda cannot be recovered from them.
+Retain the zero fibre, marked orientation and actual
+baseline. No measured spectral data or detector precision
+claim, no physical hydrogenic units inferred from 369.
+This is the source-specific radial BIDI completion of
+the selected BR170/173 observation, not full atomic CI,
+relativistic or interacting spectrum.
+
+### Next parallel proof cut and acceptance
+
+Periodic P0 now the actual curved tangential Cartan
+constraint and correct weighted surface energy with
+stationary reflection-even modes tested, not more
+single-branch suppression; BR128–139 exact dependent
+replay paid. W0/W1/W5/W6/W7 remain. Atomic: selected
+radial inverse paid, use original #886 and CI/SCF
+owners with physical baselines, spinor temporal terms,
+radial/mass/length calibration and native residual
+adapter. G3 analytic lifespan and G4 actual nonlinear
+profile/trajectories independently outstanding. Monster
+marked action/Leech lattice and material/receiver
+not newly implemented here. No sibling edits.
+Three new stages plus eight original replay stages
+exit zero (90s cap per stage), all committed checker
+bytes matched. Checker Git blob
+3122119e0a7c1c916dc5bf66f6c75ced45c44e87,
+SHA256 b723d2c9931af55e2a116e1b48a5513ad94859c418f93de958a1c3f66758dde3.
+No full integrated runner, native kernel, CI, nonlinear
+continuum evolution or empirical acceptance.

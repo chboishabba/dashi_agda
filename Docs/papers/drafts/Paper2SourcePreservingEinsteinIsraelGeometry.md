@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR174; selected joint wall branch BR174, full coupled estimate open)
+## Current proof state — 28 November 2026 (BR177; reference reflection/paired trace BR175–176, full curved Cartan estimate open)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -710,4 +710,55 @@ all glancing modes. The full nonzero-shape joint boundary
 pencil and curved Cartan conditions remain open. BR132–139
 dependent replay remains unpaid. Three local stages passed,
 no native kernel, nonlinear evolution or empirical acceptance.
+See [the proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Reference reflection sectors, paired grazing obstruction and radial inverse (BR175–177)
+
+The actual frozen Weyl/shape wall problem admits an exact
+normal-reflection split. With \(F\) the original signed
+normal-index reflection and \(P_\pm=(I\pm F)/2\), reflecting
+the minus-side field and taking its sum/difference with
+the plus-side field gives sectors \(a,b\) with boundary
+conditions \(P_-a=0,\ P_+b=jJm/2\) and wall equation
+\(m_t=\sum B_i\partial_i m-Rb\). This retains nonzero shape
+and the original work cancellation. It is a reference
+bulk/shape identity, not full curved well-posedness.
+Pairs of opposite normal Fourier waves on the half-speed
+and stationary branches satisfy the reflection-even
+reference wall condition with zero shape and vanishing
+selected mixed magnetic readout, but their spatial
+electric traces are proportional to \(\cos\theta\) and
+\(\cos^2\theta\), respectively, not suppressed at grazing.
+The written periodic Fourier constructions give trace
+growth \(k^{1/4}\) and \(k^{1/2}\) at bounded bulk residual
+norm. The stationary branch therefore also obstructs
+a simple time-integration remedy in this reference
+subsystem. The actual curved tangential Cartan constraints
+and derivative-balanced weighted surface energy remain
+necessary; these are not counterexamples to the full
+Einstein–Israel IBVP.
+
+For the selected atomic radial source, the ratio of the
+two original Hopf coefficients is the mean radius
+\(\rho(\lambda)=I_1/I_0\) with positive weight
+\(r^4e^{-\lambda r}/(1+r^2)^3\).
+Its derivative is minus the strict radial variance.
+The endpoint limits are infinity at \(\lambda\downarrow0\)
+and zero at \(\lambda\uparrow\infty\), so the ratio uniquely
+recovers the inverse Bohr scale within this selected
+model. With known nondegenerate baseline and mass the
+two spectral magnitudes then determine amplitude
+magnitude and the marked matrix restores its sign.
+At baseline degeneracy the independent radial scale
+must be known to recover amplitude magnitude from the
+combined norm. The zero fibre remains non-identifiable
+from the vanishing interaction. No physical calibration
+or complete atomic spectrum is claimed.
+
+All eight original BR132–139 dependent stages now replay
+successfully on byte-identical committed sources, resolving
+the earlier donor provenance limitation for BR128–139.
+Three new exact stages passed. No native kernel, integrated
+runner, nonlinear evolution or empirical acceptance.
 See [the proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
