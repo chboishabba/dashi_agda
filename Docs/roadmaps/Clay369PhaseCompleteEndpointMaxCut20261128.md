@@ -1871,3 +1871,206 @@ E. RH: actual pinned external native theorem admission, no axiom promotion.
 F. PNP: actual internal sharing work for unrestricted SAT or polynomial decision.
 
 Everything newly source written but not compiled is PENDING_NATIVE. Local exact arithmetic/symbolic PASS is not native proof acceptance. No GitHub CI initiated.
+
+
+## Section 33 — original CMP102 weighted finite Cauchy kernel all-degree weld; only physical Bishop-order leaf remains (28 Nov 2026)
+
+### Live owner and exact conditionality audit
+At start the master-based Agda YM #1536 head was
+389ec7174e9e367291b7f4ffbb51d42816de809d;
+all-Clay #1551 was 0c980e12c4d040050f4f69b6be07ba8b67354f23;
+NS Lean #123 5eb50fb0b7f6781d108174cc8540b22882039e30;
+BSD/Hodge Lean #124 e6474bdf84c0184038aff6039e761b2c4bcc3328.
+Original external RH and PNP branches retain Section32 owner status.
+No source is promoted by source text alone. No pinned Agda 2.9,
+Lean/Lake kernel, GitHub CI, complete --safe or transitive axiom audit
+has run. All below native theorem bodies are SOURCE WRITTEN /
+PENDING KERNEL.
+
+### New generic Bishop power/Cauchy constructors: mathematical gap closed in source
+Found the already written native Fin-sum pattern in
+`DASHI/Foundations/BishopExponentialFiniteCauchyCoefficientExact.agda`,
+including `BishopSum.*-distribʳ-sum` and
+`BishopSum.sum-cong-≋`, and the true stdlib/Bishop
+power orientation in `BishopExponentialBinomialCoefficientExact`.
+No new real/power/series carrier was constructed.
+
+NEW #1536:
+- `DASHI/Foundations/BishopFiniteSeriesShiftScaleExact.agda`
+  commits 5d9253a2ec6b1f4525c69b06b4013289f532d4c9,
+  oriented original fixed-head congruence at
+  408b8cf8cc8849dc2f6e61600fe2f8c567950f91.
+  All-count original Bishop `Seq.SeriesOf` real-scale,
+  Fin first-term/shift and scaled head shift theorems.
+- `DASHI/Foundations/BishopFiniteCauchyWeightedPowerExact.agda`
+  commit b5ea7243a075c249ae097b580c1bbb4d6b1b6b3a.
+  A GENERAL, all-degree original represented Bishop-real
+  weighted finite Cauchy theorem for arbitrary actual source
+  sequences `a,b : Nat→R.ℝ` and signed X:
+    (Σ_{k=0}^n a_k b_(n-k)) X^n
+       ~= Σ_{k=0}^n (a_k X^k)(b_(n-k) X^(n-k)).
+  It proves constructive Nat/Fin bounded difference
+  `k+(n∸k)=n`, native Bishop power addition by induction,
+  `bishopFinBoundedPowerSplit` and uses existing Fin-sum
+  scalar distribution and pointwise congruence. No formal
+  infinite series identity, no new factorial/Cauchy axiom.
+  This eliminates the two Section32 weighted-power hypotheses
+  at the mathematical source level, subject to actual Agda
+  elaboration and transitive trust checking.
+
+### True original CMP102 odd/even row source consumers
+NEW #1536:
+- `YMClayCMP102OriginalEvenFinRecurrenceExact.agda`
+  original 4b1a26485bd485a2799ff705d2605afcbc08bbd5,
+  fixed original X ring binder and Fin triangle successor at
+  87df5b0ab9a961d1a3271ce2cce0afcdacea6e29.
+  Actual `evenPart zero=2*a0`,
+  `evenPart(suc n)=2*a_(suc n)+Cauchy(a,a)n` and Bishop
+  `Seq.SeriesOf` true count yields `originalEvenFinRow X n`
+  for all n, given ONLY the true general weighted Cauchy
+  n→ power shift theorem.
+- `YMClayCMP102OriginalOddFinRecurrenceExact.agda`
+  first 0eba8117ea61f186245131edce29ebbf8dab0c52;
+  repaired source odd power proof at
+  da9add408800bb2538dc4c98655b697324d4d480;
+  completed all-count odd recurrence at
+  436724ed9e7f34a91b62c86923e2bb69313f1198.
+  Explicitly handles oddPart(0)=1 and
+  oddPart(1)=2b0 before n>=2; proves linear
+  `2*b_(n+1)*X^(n+2)=2X*(b_(n+1)*X^(n+1))`
+  by native Bishop ring/pow successor. The only proof input
+  is true two-shift Cauchy weighted power identity.
+  All-count `originalOddShortFromWeightedCauchy` and
+  `originalOddFinRowFromWeightedCauchy` consume exactly
+  the original bPrefix SeriesOf successor and signed Cauchy
+  triangle count, including the essential omitted last B term.
+- `YMClayCMP102OriginalFinRowClosureExact.agda`
+  commit 9a04701b005c27acfdb840683bc2ba54f48fde5d.
+  Instantiates the generic weighted Cauchy source proof
+  to CMP102 aCoefficient and bCoefficient, including
+  one/two powers X, yielding actual
+  `originalEvenFinRowClosed`,
+  `originalOddFinRowClosed`,
+  `originalShiftedRowFinReindexClosed`, and critically
+  UNCONDITIONAL
+  `originalGToActualCauchyTailClosed`:
+    originalGPrefix(X,suc n) ≃
+       originalSignedCauchyTail(X,n)
+  for all original signed Bishop real X and all n.
+  The old `OriginalShiftedRowFinReindex` proof premise
+  is no longer an unfilled mathematical condition in
+  the new SOURCE code; it is derived from the actual finite
+  Cauchy constructors. This is a major original scalar FINITE
+  proof layer advance, pending native kernel.
+
+### Actual final scalar receiver, one explicit original positive-tail order
+NEW
+`YMClayCMP102OriginalFiniteTailToLimitExact.agda`
+commit fb252f31410bb3b8e437eeab3c913c8f2c5552ea.
+Consumes the now SOURCE-CLOSED Fin-reindex original
+`originalGToActualCauchyTailClosed` and previously written
+`YMClayCMP102OriginalAbsoluteRateReceiverExact` to transport
+the actual original finite A/B tail absolute Bishop-order
+estimate into ORIGINAL represented analytic G(X)≈0.
+It explicitly distinguishes original count 0
+`G_0=1` from all c>=1; avoids the false assumption
+that `G_0` equals a pure Cauchy wing. The outstanding
+mathematical/native order leaf is now
+`OriginalPositiveTailOrder X`:
+  ∀n, |originalSignedCauchyTail(X,n)-0|
+       <= |3*quarter^(suc n)|,
+alongside the immediate finite count-zero rational boundary
+`OriginalZeroCountOrder X` (1<=3).
+The ordinary weaker 3*4^-count bound was already derived in
+23 Nov original CMP102 owner; Section30's stronger
+267004/393129*|X|^count all-degree mathematical bound is
+available as an exact source derivation but **its Bishop REAL
+order theorem is NOT yet constructed**. Do not claim G=0 is
+fully established in the Agda kernel.
+Native root
+`YMClayCMP102Section33WeightedCauchyClosureAcceptanceExact.agda`
+initial f490d03cad83f5fc2f1fb5f21ac2e1839afaf791,
+expanded 79af8eccd1d2f9dce5e680f9328aa1e7fa18d136.
+It imports the generic finite coefficient theorem, the
+unconditional original finite G-to-tail theorem, and the
+last original absolute-tail-order-to-limit consumer.
+
+### Exact finite controls executed in this turn
+- The user-attached original
+  `/mnt/data/check_ym_cmp102_original_tail_geometry.py`
+  was directly executed **3624/3624 PASS**, with the
+  signed c=0 exception, c=1..64 tail equalities, signed
+  quarter-disk and missing-last-B negative controls.
+- An independently executed exact Fraction programme
+  `/mnt/data/check_ym_cmp102_section33_weighted_cauchy.py`
+  produced **3160/3160 PASS**: 675 identities on generic,
+  explicitly nonfactorial rational a/b coefficient lists and
+  signed X (degrees 0..44), including ordinary, +1 and +2
+  power shifts, plus 2485 bounded Nat subtraction checks
+  (n<=69). This is finite regression, not an Agda proof.
+  A corresponding checker
+  `scripts/check_ym_cmp102_section33_weighted_cauchy.py`
+  committed on #1536 at 50670b25ed7275491c69c380579c370addd9f4d7;
+  the local and committed byte-identical replay status is NOT
+  certified (only equivalent test source).
+- Previous original arbitrary-symbol coefficient odd/even
+  48/48 symbolic checks remain as Section32 independent
+  controls; not re-labeled as native kernel proof.
+
+### Other Clay owners — existing proof constructors retained, no false promotion
+NS Lean #123 already has ONE global physical finite
+Galerkin X_N preserving energy, viscous dissipation,
+arbitrary high-frequency Fourier shells and
+2ν∫E_(1/4),N^4 <= E_N(0)^4. These are genuine
+subcritical compactness payments; the cutoff-uniform SIGNED
+quarter nonlinear transfer original source remains open,
+alongside continuum physical NSE unforced/forced admission.
+BSD Lean #124 retains general number-field Selmer/Sha
+and selected positive two-crossing all-degree Mellin
+weighted-growth obstruction. Selected complex L-jet/moment
+identification, universal analytic rank and Sha finiteness
+remain outstanding, not repaired by finite signs.
+Hodge Lean #124 already owns original affine finite/proper
+rotation projection, generic coupled 5+5 deck geometry and
+punctured six-root nonzero Q0 signed Jacobian. Original global
+projective cycle, fold/branch glue and nonzero primitive
+cohomology remain open.
+RH Lean #121 original xi/zeta subtype and universal RH statement
+BIDI already written; trusted original pinned external proof
+admission and actual axiom transitive audit remain.
+PNP Lean #119 already owns legal anchored F3 original residual
+and true read-clock input payment plus no-go for input-only
+superpoly lower bounds and closed internal fake events;
+unrestricted SAT universal sharing-stable INTERNAL original
+computation demand (or costed poly algorithm) remains.
+Do not add fake Clay theorem bodies to inflate coverage.
+
+### Next decisive aggregate original source cut
+1. YM scalar: prove actual Bishop order
+   `OriginalPositiveTailOrder`, using exact positive
+   rectangle-vs-triangle **at the shifted cutoff c-1/c-2**
+   and original factorial prefix 6/11 and 10/57. Important:
+   the general `BishopFiniteCauchyWingAbsoluteBoundExact`
+   only directly proves a Cauchy wing beginning at count c.
+   The original A and B tails begin at c-1/c-2,
+   so apply the true per-row signed/positive argument or
+   an adjusted finite triangle-tail lemma, NOT the wrong
+   unshifted theorem. Count c=0 bound 1<=3 separately.
+   Then receive actual original Bishop limit G(X)≈0 and
+   native check entire original source/--safe graph.
+   SEPARATELY original interacting Wilson F19/CMP116, OS,
+   nontriviality and same-H mass gap remain extensive.
+2. NS physical signed quarter nonlinear estimate truly
+   uniform in cutoff/time plus continuum physical admission.
+3. BSD exact selected complex L'' source equivalence with
+   Mellin moments and full rank/Sha program.
+4. Hodge global branch-glued projective cycle and primitive
+   nonzero pairing on original X.
+5. RH trusted pinned source admission.
+6. PNP actual unrestricted SAT sharing-stable machine
+   computational resource theorem or polynomial algorithm.
+
+All claims labeled: exact mathematical construction;
+local finite regression; source-written native proof;
+native kernel acceptance; physical continuum and
+universal Millennium endpoint. Never conflate.
