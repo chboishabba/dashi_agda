@@ -40,6 +40,17 @@ def check(P0,G):
     f=Q0[:,iz]
     assert P0*f==s.zeros(n,1)
     assert P*(S*f)==s.zeros(n,1)
+    # Exact moving projector connection identity on an INDEPENDENT jet,
+    # not only on a constrained residual that has already been set to zero.
+    u0=Q0[:,iz]+P0[:,ia]
+    u1=P0[:,ia]-Q0[:,iz]
+    u=S*(u0+t*u1)
+    nabla=lambda v:v.diff(t)-Om*v
+    assert (nabla(P*u)-P*nabla(u)).applyfunc(s.expand)==s.zeros(n,1)
+    assert (nabla(P*u)-S*P0*u1).applyfunc(s.expand)==s.zeros(n,1)
+    # The exact *source* needed for preservation is P0*u1=0. This
+    # deliberately fails for the independent unconstrained u1 above.
+    assert P0*u1!=s.zeros(n,1)
     print('PASS variable projector rank',P0.rank(),'ambient',n,
           'nilpotent signed chart, covariant transport and positive-gram congruence')
 
