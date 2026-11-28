@@ -25,7 +25,7 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_;
-   +-identityʳ; mulZeroˡ)
+   +-identityʳ; *-comm; mulZeroˡ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.YMClaySUNWeightedDisjointPairFibreReparamExact as
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact as Original
 import DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact as W0
 import DASHI.Physics.YangMills.YMClayRealAffineFibreHessianLedgerExact as Ledger
+import DASHI.Physics.Closure.NSPeriodicModeInverseNormScaling as Scaling
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 module _
@@ -429,8 +430,31 @@ module _
         theory traceData exponential beta source bilateral linear))
       (sourceCoarsePartitionStrictlyPositive strict)
 
+  -- The inverse is not assumed on the W1 socket.  It is the typed ordered-real
+  -- reciprocal authority applied only after strict positivity of the SAME
+  -- original source k0 has been constructed above.
+  sourceCoarseInverse :
+    (realInverse : Scaling.OrderedRealInverseAuthority) →
+    SlowField → ℝ
+  sourceCoarseInverse realInverse coarse =
+    Scaling.reciprocal realInverse (k0 coarse)
+
+  sourceCoarseInverseLaw :
+    (realInverse : Scaling.OrderedRealInverseAuthority) →
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ coarse →
+      k0 coarse *ℝ sourceCoarseInverse realInverse coarse ≡ 1ℝ
+  sourceCoarseInverseLaw realInverse strict coarse =
+    trans
+      (*-comm (k0 coarse) (Scaling.reciprocal realInverse (k0 coarse)))
+      (Scaling.reciprocalCancelPositive realInverse
+        (sourceK0StrictlyPositive strict coarse))
+
   w1F19AffineCovarianceLevel : ProofLevel
   w1F19AffineCovarianceLevel = machineChecked
+
+  w1F19SourceInverseApplicationLevel : ProofLevel
+  w1F19SourceInverseApplicationLevel = machineChecked
 
   w1F19NormalizationApplicationLevel : ProofLevel
   w1F19NormalizationApplicationLevel = conditional

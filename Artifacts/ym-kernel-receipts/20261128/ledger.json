@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-28",
+  "pr": "https://github.com/chboishabba/dashi_agda/pull/1557",
+  "branch_head_before_commit": "cf0e1d3e6498dd304ee3342bb11371cab039ce42",
+  "scope": "accepted W1 normalization, integrated covariance, and constructive Walsh tranche",
+  "clay_flags": {
+    "YangMillsClaySolved": false,
+    "clayYangMillsPromoted": false
+  },
+  "receipts": [
+    {
+      "id": "light71",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light71-positivity.log",
+      "target": "DASHI/Physics/YangMills/YMClayW1F19AffineCovarianceExact.agda",
+      "declarations": [
+        "sourceDensityStrictlyPositive",
+        "sourceSpectatorDensityStrictlyPositive",
+        "sourceK0StrictlyPositive",
+        "sourceCoarsePartitionStrictlyPositive",
+        "sourceFinePartitionStrictlyPositive"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
+    },
+    {
+      "id": "light73",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light73-inverse.log",
+      "target": "DASHI/Physics/YangMills/YMClayW1F19AffineCovarianceExact.agda",
+      "declarations": [
+        "sourceCoarseInverse",
+        "sourceCoarseInverseLaw",
+        "w1F19SourceInverseApplicationLevel"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
+    },
+    {
+      "id": "light77",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light77-walsh.log",
+      "target": "DASHI/Physics/YangMills/BalabanBoolean4BlockPoincareExact.agda",
+      "declarations": [
+        "walshSpectralIdentityExpanded",
+        "walshSpectralIdentityRaw",
+        "boolean4CellPoincareDefinitionLevel"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
+    },
+    {
+      "id": "light78",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light78-integrated-covariance.log",
+      "target": "DASHI/Physics/YangMills/YMClayW1F19IntegratedCovarianceMomentWeldExact.agda",
+      "declarations": [
+        "NormalizedExpectation",
+        "quotientFromInverseAuthority",
+        "fineCovarianceEqualsCoarseCovariance",
+        "fineNormalizerStrictlyPositive",
+        "coarseNormalizerStrictlyPositive",
+        "w1F19IntegratedCovarianceMomentWeldLevel"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
+    }
+  ],
+  "remaining_assumptions": [
+    "CertifiedSUNMatrixTheory and SUNMatrixRealTrace authority",
+    "StrictPositiveRealExponential and OneLinkStrictlyPositiveIntegration authority",
+    "OneLinkProductHaar, OneLinkSUNBilateralHaar and OneLinkOrderedHaarAlgebra authority",
+    "OrderedRealInverseAuthority for reciprocal normalization",
+    "w1F19NormalizationApplicationLevel remains conditional",
+    "fixed side-four 64-pair and 896-spectator F19 geometry",
+    "legacy RealAnalysisAxioms real carrier in W1 and integrated covariance"
+  ],
+  "remaining_conditional_socket": "w1F19NormalizationApplicationLevel",
+  "downstream_consumers": {
+    "BalabanBoolean4BlockPoincareExact": [
+      "BalabanBoolean4PatchExtensionsExact",
+      "BalabanBoolean4PatchLaplacianIntertwining",
+      "BalabanBoolean4PhysicalBlockLiftExact",
+      "BalabanPath4ZeroMeanFibrePoincareExact",
+      "BalabanClayAnalyticInhabitationSpine",
+      "ConstructiveYangMillsNextSurface"
+    ],
+    "YMClayW1F19AffineCovarianceExact": [
+      "YMClayW1F19IntegratedCovarianceMomentWeldExact"
+    ],
+    "YMClayW1F19IntegratedCovarianceMomentWeldExact": []
+  },
+  "trust_boundary": {
+    "local_kernel_acceptance": true,
+    "transitive_axiom_free_acceptance": false,
+    "reason": "W1 and the integrated covariance module import the legacy RealAnalysisAxioms real carrier through existing source families; Walsh is --safe and constructive but does not certify those real-analysis roots.",
+    "strict_safe_boundary_audit": "python3 scripts/audit_ym_legacy_real_safe_boundary.py --strict --json remains failing"
+  },
+  "next_cut": "generalize the accepted fixed-cutoff covariance weld over the actual scale-indexed source family, complete W0 historical source correspondence, build one source-preserving RG trajectory, and reverse-solve X/E1/N1/D2/G1 from that same trajectory."
+}
