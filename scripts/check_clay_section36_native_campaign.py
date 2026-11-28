@@ -41,6 +41,7 @@ ROOTS = {
   "DASHI/Physics/YangMills/YMClayCMP102Section34FactorialMassAcceptanceExact.agda",
   "DASHI/Physics/YangMills/YMClayCMP102Section35ThreeWingOrderAcceptanceExact.agda",
   "DASHI/Physics/YangMills/YMClayCMP102Section37NoZeroPremiseAcceptanceExact.agda",
+  "DASHI/Physics/YangMills/YMClayCMP102Section38LastBCoefficientAcceptanceExact.agda",
  ]),
  "NS": ("ns_root", [
   "Synthesis/ClayNSSection36FullSameFlowCompactnessAcceptanceExact.lean",
@@ -217,7 +218,7 @@ def main() -> int:
         r = call(command, rhroot, args.timeout)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
-    report["all_selected_roots_passed"] = (len(report["checks"]) == 14
+    report["all_selected_roots_passed"] = (len(report["checks"]) == 15
         and all(v.get("ok", False) for v in report["roots"].values())
         and all(v.get("status") == "PASS" for v in report["checks"]))
     out = args.report.resolve()
