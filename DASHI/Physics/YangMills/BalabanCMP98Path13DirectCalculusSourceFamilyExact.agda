@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Path13DirectCalculusSourceFamilyExact where
+
+-- This source-facing producer intentionally remains outside the --safe cone:
+-- its SU(2) carrier imports the repository's explicit real-analysis authority.
 
 ------------------------------------------------------------------------
 -- PATH13 EQ. (119): DIRECT R159 DIFFERENTIAL-CALCULUS SOURCE FAMILY
@@ -125,9 +127,9 @@ sourceAt inputs bond = record
   ; TwoCarrier.TwoCarrierEquation119PathData.dexpMinusOuter =
       λ step → R159.dexpMinusAt (differentialCalculus inputs) (outerY inputs bond step)
   ; TwoCarrier.TwoCarrierEquation119PathData.inverseDexpMinusAt =
-      λ step point → R159.jMinusAt (differentialCalculus inputs) (pointY inputs bond step point)
+      (λ step point → R159.jMinusAt (differentialCalculus inputs) (pointY inputs bond step point))
   ; TwoCarrier.TwoCarrierEquation119PathData.adjointExpAt =
-      λ step point → R159.adjointExp (differentialCalculus inputs) (pointY inputs bond step point)
+      (λ step point → R159.adjointExp (differentialCalculus inputs) (pointY inputs bond step point))
   ; TwoCarrier.TwoCarrierEquation119PathData.adjointExpOuter =
       λ step → R159.adjointExp (differentialCalculus inputs) (outerY inputs bond step)
   }

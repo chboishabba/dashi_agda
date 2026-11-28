@@ -9,8 +9,10 @@ module DASHI.Physics.YangMills.YMClayR349CanonicalDistanceCarrierWeldRouteSH1Exa
 -- DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda:40-87
 -- DASHI/Physics/YangMills/BalabanR318CanonicalDirectShellRound398Exact.agda:39-89
 -- DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda:72-97
--- This is an interface compiler only; physical H1/decay/closure inputs remain
--- conditional and no Clay promotion is made.
+-- This is an interface bridge, not yet a terminal recipient: its ABI still
+-- consumes the historical R278/R297/R299/R300/R304/R318/R349/R398 records.
+-- Migration must extract those records into existing canonical owners before
+-- this module can be treated as a Round-free terminal.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -50,7 +52,7 @@ asR349SelectedDistanceCarrierWeld :
 asR349SelectedDistanceCarrierWeld {base = base} {tests = tests}
     {decomposition = decomposition} inputs =
   record
-    { R349.SelectedDistanceCarrierWeld.r318DistanceIsR284Distance =
+    { r318DistanceIsR284Distance =
         λ observable time →
           let index = R300.indexFor decomposition observable time in
           sym

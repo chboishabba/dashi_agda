@@ -6,19 +6,23 @@
 
 The historical-file count is a filesystem/reachability count, not a count of missing proofs. The semantic queue is the live declaration and bundle count.
 
-- Historical files on disk: **1194**
-- Live consumers: **248**
-- Live declaration uses: **12**
+- Historical files on disk: **860**
+- Live consumers: **241**
+- Candidate live declaration uses: **12**
+- Of those, source-bearing: **6**; metadata/status: **6**
+- Mapping-incomplete import edges: **668**, covering **1006** unique declaration names
 - Live module-context cases: **773**
 - No-live-consumer cases: **646**
-- Source bundles requiring semantic migration: **4**
+- Source bundles tracked: **4** (semantic recipient decisions complete)
 - Source-bearing declarations in those bundles: **6**
+- Bundles still needing recipient review: **3**
+- Reconciliation actions: **{'bookkeeping-context': 475, 'confirmed-bundle-migration': 6, 'context-probe-required': 391, 'metadata-status-use': 6, 'shared-bundle-migration': 154}**
+- Reconciliation declaration actions: **{'metadata-status-use': 100, 'shared-structural-bundle': 419, 'unresolved-semantic-mapping': 1352}**
+- Reconciliation unique declaration actions: **{'metadata-status-use': 85, 'shared-structural-bundle': 149, 'unresolved-semantic-mapping': 772}**
+- Migration queues: **{'bookkeeping-context': 475, 'mechanical-repair': 391, 'migration': 193, 'migration-ready': 0, 'proof-cone-external': 0}**
+- External proof-cone items (nonblocking): **4**
 - Deletion authorized: **false**
 
-## Remaining steps
-
-| Step | Status | Action |
-|---|---|---|
 
 ## Completed or attempted
 
@@ -28,15 +32,28 @@ The historical-file count is a filesystem/reachability count, not a count of mis
 | `r330-route-s-and-direct-source-rewire` | **rewired-verification-blocked** | walshSpectralIdentityRaw is constructive, the Boolean/trace/P2 safe boundary checks, and the Route-S target now reaches the intentional DASHI.Foundations.RealAnalysisAxioms postulate boundary |
 | `walsh-spectral-identity` | **constructively-verified** | sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import |
 | `trace-p2-safe-boundary` | **constructively-verified** | sanctioned Colab Agda check passed through BalabanClayT2TraversalRootedShellExact |
+| `r77-h6-bundle-extraction` | **rewired-verification-blocked** | Colab receipt /content/ym-r77-h6-repair-20261128.log: the moved bundle parses, then the sanctioned H6 check stops at the pre-existing unsafe YangMillsClayLiteralTopDownConstructionExact import in the safe cone |
+| `r78-route-s-bundle-extraction` | **rewired-verification-blocked** | Colab receipt /content/ym-r78-pinned-route-repair-20261128-v2.log: the moved bundle parses, then the sanctioned Route-S cone reaches the pre-existing unsafe YangMillsClayProblemContractExact authority boundary |
+| `r270-r87-wrapper-rewire` | **rewired-verification-blocked** | current-source migration scan reports neither wrapper as a direct historical importer; R270 Colab receipt /content/ym-r270-wrapper-rewire-20261128-v2.log reaches the pre-existing unsafe IntrospectiveProofLoopExact boundary, while R87 reaches the pre-existing parser failure in BalabanTopDownSummableRGIncrementExact |
+| `r77-historical-wrapper-rewire` | **rewired-verification-blocked** | bounded sanctioned local checks reached pre-existing boundaries: /home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check-20261128-202856-DASHI__Physics__YangMills__YangMillsClayGoal1NontrivialityAttachmentRound468Exact.agda.log stops at BalabanOSMassGapClosure parser syntax, and /home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check-20261128-202915-DASHI__Physics__YangMills__YangMillsClayGoal1SameHNontrivialityRound439Exact.agda.log stops at the unsafe TopDownConstruction import |
+| `cmp98-pointwise-repair-cone-v20` | **constructively-verified** | sanctioned Colab Agda 2.9.0 check on worker dashi-agda-worker-2 passed; only the pre-existing PatternShadowsConstructor warning remains (receipt: .dashi/round-stranded/ym-repair-pointwise-worker2-v20-20261129.log) |
+| `cmp98-pointwise-repair-cone-v53` | **in-progress-colab-check** | worker-2 receipt /content/ym-repair-pointwise-worker2-v53-20261129.log is actively checking after the latest repairs; no clean result recorded yet |
 
-| `extract-four-live-bundles` | **ready-for-repair** | inline or reproduce each bundle in its existing semantic Clay recipient |
-| `rewire-live-consumers` | **blocked-on-bundle-repair** | replace historical references and imports while preserving local type/import closure |
-| `verify-affected-cones` | **blocked-on-explicit-real-analysis-authority** | run the sanctioned Agda entrypoint and retain receipts |
-| `reclassify-context-cases` | **automatable-after-rewiring** | rescan implicit, instance, module, and operator dependencies; remove only verified unused imports |
-| `open-deletion-gates` | **automatable-after-rewiring** | confirm zero importers, zero reverse consumers, and verified replacement before deletion |
+## Remaining steps
+
+| Step | Status | Action |
+|---|---|---|
+| `external-proof-cones` | **nonblocking** | retain receipts and resolve independently; do not count these as historical-R migration rows |
+| `extract-four-live-bundles` | **semantic-actions-complete-verification-blocked** | finish consumer rewiring and close the verification/deletion gates for the extracted bundles |
+| `resolve-shared-structural-bundles` | **recipient-review-required** | select an existing non-Round owner only after import-cycle and dependent-projection analysis; preserve status surfaces without theorem remapping |
+| `rewire-live-consumers` | **semantic-actions-complete-verification-blocked** | replace historical references and imports while preserving local type/import closure |
+| `verify-affected-cones` | **migration-gated-by-linked-cones** | run the sanctioned Agda entrypoint and retain receipts; classify unrelated canonical failures as external |
+| `reclassify-context-cases` | **automatable** | rescan implicit, instance, module, and operator dependencies; remove only verified unused imports |
+| `reconcile-generated-actions` | **complete** | consume the existing JSON reports and separate migration-ready, mechanical-repair, and external proof-cone queues |
+| `open-deletion-gates` | **automatable-after-rewiring** | confirm zero current source importers, zero reverse consumers, and verified replacement before deletion |
 
 ## Deletion gate
 
-A historical file is removable only after every consumer is rewired, the sanctioned Agda check passes, a fresh import/reverse-consumer scan finds nothing remaining, and the rollback/checkpoint receipt is recorded. The raw ledger may remain fail-closed while these gates are being satisfied.
+A historical file is removable only after every current source consumer is rewired, the sanctioned Agda check passes, a fresh import/reverse-consumer scan finds nothing remaining, and the rollback/checkpoint receipt is recorded. The package ledger is evidence, but the regenerated current-source migration plan controls deletion decisions while package data is stale.
 
 Machine-readable state: `.dashi/round-stranded/ym-migration-roadmap.json`.

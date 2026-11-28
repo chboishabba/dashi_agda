@@ -8027,3 +8027,11 @@ target these literal terms, with spectator summation retained. The R589
 conditional R588 constructor alone is not a same-object proof for this row.
 R588 embeds a fully paid R284 record, so its missing witness must not be
 reported as just an unproved equality. Full NS/Clay objective remains active.
+
+## YM Round migration reconciliation — 2026-11-28
+
+- Existing migration JSON is now joined by `scripts/round_migration_reconcile.py`.
+- All 1,059 current historical import edges enter the scripted probe queue;
+  six source bundles and six metadata/status actions remain separately tracked.
+- Probe application is source-hash checked, checkpointed, explicitly invoked,
+  and never authorizes historical-file deletion by itself.

@@ -33,7 +33,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as R78
+-- The Round78 bundle is now owned by the canonical Route-S module.  Preserve
+-- the historical record shape through that owner while the wrapper itself
+-- remains in place for reverse-cone migration.
+import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as R78
 import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianGapExact as OSGap
 import DASHI.Physics.YangMills.BalabanStochasticFiniteSpeedSpatialClusteringExact as Stochastic
 import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Cluster
@@ -47,7 +50,7 @@ canonicalMassGapEndpoint :
   Five.CutoffUniformPhysicalMassGap Y →
   R78.SameHamiltonianPhysicalMassGap Y
 canonicalMassGapEndpoint gap = record
-  { R78.SameHamiltonianPhysicalMassGap.physicalGap = gap }
+  { physicalGap = gap }
 
 ------------------------------------------------------------------------
 -- Search-role classification.

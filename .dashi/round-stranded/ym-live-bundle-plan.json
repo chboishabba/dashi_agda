@@ -5,9 +5,7 @@
       "declarations": [
         {
           "body_hash": "50bbe4d9771715b7500be1fafdc2f4b000a4ff3c4e3dca426688677383e0e0e7",
-          "consumers": [
-            "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
-          ],
+          "consumers": [],
           "implementation_status": "implemented-in-canonical-ursell-donor; verification-blocked-by-pre-existing-unsafe-import",
           "migration_action": "inline-into-canonical-ursell-payment-bridge",
           "name": "compileCanonicalBPaymentCore",
@@ -29,20 +27,18 @@
       "implementation_statuses": [
         "implemented-in-canonical-ursell-donor; verification-blocked-by-pre-existing-unsafe-import"
       ],
-      "live_consumers": [
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
-      ],
-      "migration_action": "rewire-nonhistorical-consumers",
+      "live_consumers": [],
+      "migration_action": "delete-orphan-after-import-scan",
       "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
-      "preferred_canonical_targets": [
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
-      ],
-      "proposed_recipient": null,
-      "recipient_status": "recipient-review-required",
+      "preferred_canonical_targets": [],
+      "proposed_recipient": "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact",
+      "recipient_status": "semantic-recipient-confirmed",
       "semantic_actions_complete": true,
       "semantic_recipient_notes": [
         "The declaration packages an existing payment core; it is not a missing B theorem."
+      ],
+      "semantic_recipients": [
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
       ],
       "source_imports": [
         "Agda.Builtin.Bool",
@@ -70,9 +66,7 @@
       "declarations": [
         {
           "body_hash": "c67acd0498e660887676c3f2624e7a90313e5748fb05459833868a9f2603fc6f",
-          "consumers": [
-            "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact"
-          ],
+          "consumers": [],
           "migration_action": "inline-required-boundary-projections-into-direct-source-frontier",
           "name": "canonicalRound330Boundary",
           "new_proof_obligation": "none-new; preserve the existing status/audit projections",
@@ -85,9 +79,7 @@
         },
         {
           "body_hash": "e14743eedcb764934461ebca56e299c2ce9f2aa30b5dc5f8f4004ddd9c6b5236",
-          "consumers": [
-            "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact"
-          ],
+          "consumers": [],
           "migration_action": "replace-terminal-use-with-selected-limit-closure; retain-bridge-until-consumers-rewired",
           "name": "toR310RationalUpperOrderClosure",
           "new_proof_obligation": "none-new; the terminal route already consumes SelectedLimitUpperClosure",
@@ -109,37 +101,20 @@
       ],
       "historical_module": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact",
       "implementation_statuses": [],
-      "live_consumers": [
-        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
-        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact"
-      ],
-      "migration_action": "rewire-nonhistorical-consumers",
+      "live_consumers": [],
+      "migration_action": "delete-orphan-after-import-scan",
       "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
-      "preferred_canonical_targets": [
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
-        "DASHI.Physics.YangMills.YMClayAristotleGapParityValidation",
-        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
-        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierValidation",
-        "DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact",
-        "DASHI.Physics.YangMills.YMClayF134TypedCompositionValidation",
-        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
-        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
-        "DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact",
-        "DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionExact",
-        "DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionValidation",
-        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact",
-        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureValidation",
-        "DASHI.Physics.YangMills.YMClayTrancheProofLevelAuditValidation",
-        "DASHI.Physics.YangMills.YMClayVoyager2026CoverageExact",
-        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
-        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
-      ],
-      "proposed_recipient": "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
-      "recipient_status": "single-terminal-recipient",
+      "preferred_canonical_targets": [],
+      "proposed_recipient": null,
+      "recipient_status": "semantic-recipient-confirmed",
       "semantic_actions_complete": true,
       "semantic_recipient_notes": [
         "The live use is a boundary/status coordinate, not a theorem identity.",
         "This is stronger compatibility packaging around the selected-limit terminal route."
+      ],
+      "semantic_recipients": [
+        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
+        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact"
       ],
       "source_imports": [
         "Agda.Builtin.Bool",
@@ -161,17 +136,13 @@
         "Relation.Binary.PropositionalEquality"
       ],
       "source_path": "DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound330Exact.agda",
-      "terminal_recipient_candidates": [
-        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact"
-      ]
+      "terminal_recipient_candidates": []
     },
     {
       "declarations": [
         {
           "body_hash": "07fc5680dd9de943ce0d400f121bee05547475713ef2f73f8d3b9c2cf86653a3",
-          "consumers": [
-            "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact"
-          ],
+          "consumers": [],
           "migration_action": "inline-into-same-h-interacting-witness-closure",
           "name": "round77InteractingWitnessFromLocalAndGap",
           "new_proof_obligation": "none-new; use the existing same-H gap and OPE/Ward inputs",
@@ -188,29 +159,18 @@
       ],
       "historical_module": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact",
       "implementation_statuses": [],
-      "live_consumers": [
-        "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact"
-      ],
-      "migration_action": "rewire-nonhistorical-consumers",
+      "live_consumers": [],
+      "migration_action": "rewire-umbrella-consumers",
       "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
-      "preferred_canonical_targets": [
-        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
-        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
-        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact",
-        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutValidation",
-        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact",
-        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoValidation",
-        "DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayMaxCutExact",
-        "DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayResidualExact",
-        "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact",
-        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
-        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
-      ],
-      "proposed_recipient": null,
-      "recipient_status": "recipient-review-required",
+      "preferred_canonical_targets": [],
+      "proposed_recipient": "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact",
+      "recipient_status": "semantic-recipient-confirmed",
       "semantic_actions_complete": true,
       "semantic_recipient_notes": [
         "The witness is a standard compiler consequence of already identified physical inputs."
+      ],
+      "semantic_recipients": [
+        "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact"
       ],
       "source_imports": [
         "Agda.Builtin.Nat",
@@ -232,9 +192,7 @@
       "declarations": [
         {
           "body_hash": "",
-          "consumers": [
-            "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact"
-          ],
+          "consumers": [],
           "migration_action": "retain-as-field-on-existing-literal-top-down-construction; do-not-duplicate",
           "name": "continuumYM",
           "new_proof_obligation": "the UV-to-continuum same-family physical input remains conditional",
@@ -247,9 +205,7 @@
         },
         {
           "body_hash": "dbedef8c78a4ac1cc8cc5c2cbd3d9ff2691f79c6aacde85ae4c1e96383c1a880",
-          "consumers": [
-            "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact"
-          ],
+          "consumers": [],
           "migration_action": "inline-into-route-s-literal-clay-closure",
           "name": "literalClaySolutionFromTopDownThree",
           "new_proof_obligation": "none-new; compile the existing A/B/C inputs",
@@ -264,10 +220,7 @@
       "historical_imports_to_rewire": [],
       "historical_module": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact",
       "implementation_statuses": [],
-      "live_consumers": [
-        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact"
-      ],
+      "live_consumers": [],
       "migration_action": "rewire-nonhistorical-consumers",
       "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
       "preferred_canonical_targets": [
@@ -281,51 +234,25 @@
         "DASHI.Physics.YangMills.BalabanCMP109TangentialGaussianCancellationRecutExact",
         "DASHI.Physics.YangMills.BalabanCMP109TangentialGaussianCancellationRecutValidation",
         "DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact",
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
-        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact",
         "DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureValidation",
         "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
         "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
         "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact",
         "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutValidation",
-        "DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact",
-        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
-        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureValidation",
         "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact",
         "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoValidation",
-        "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119CompactSimplePhysicalH5Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119CorePhysicalH5Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalEndpointExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectSameSystemH6Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionCoreExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionFromH5Exact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH2EndpointExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH6EndpointExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralMassGapEndpointExact",
-        "DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumConstructionExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerValidation",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionValidation",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalGapAttachmentExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalGapAttachmentValidation",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceExact",
-        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceValidation",
         "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
         "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
       ],
-      "proposed_recipient": "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact",
-      "recipient_status": "single-terminal-recipient",
+      "proposed_recipient": "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
+      "recipient_status": "semantic-recipient-confirmed",
       "semantic_actions_complete": true,
       "semantic_recipient_notes": [
         "The constructor assembles the official solution record from existing route inputs.",
         "This is substantive input data for the existing construction, not a duplicate theorem to rename."
+      ],
+      "semantic_recipients": [
+        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact"
       ],
       "source_imports": [
         "Agda.Builtin.Nat",
@@ -335,13 +262,384 @@
         "DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact"
       ],
       "source_path": "DASHI/Physics/YangMills/BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.agda",
-      "terminal_recipient_candidates": [
-        "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact"
-      ]
+      "terminal_recipient_candidates": []
     }
   ],
   "declaration_count": 6,
   "deletion_authorized": false,
   "purpose": "source-bearing Round bundle extraction plan",
-  "schema_version": 2
+  "schema_version": 3,
+  "shared_structural_bundle_count": 3,
+  "shared_structural_bundles": [
+    {
+      "declarations": [
+        {
+          "consumers": [
+            "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact"
+          ],
+          "migration_action": "preserve-status-surface",
+          "name": "unifiedPresentCutSchwingerRecoveryCompilerLevel",
+          "source_kind": "metadata-status-surface",
+          "source_line": 124,
+          "used_name_count": 1
+        },
+        {
+          "consumers": [
+            "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact"
+          ],
+          "migration_action": "preserve-status-surface",
+          "name": "literalUnifiedPresentCutSchwingerRecoveryLevel",
+          "source_kind": "metadata-status-surface",
+          "source_line": 127,
+          "used_name_count": 1
+        }
+      ],
+      "direct_importers": [
+        "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact"
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.YangMills.BalabanA2PresentCutFallbackRound120Exact",
+        "DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact",
+        "DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact",
+        "DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact",
+        "DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact",
+        "DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact",
+        "DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact",
+        "DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact",
+        "DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact",
+      "importer_count": 2,
+      "live_consumers": [
+        "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact"
+      ],
+      "migration_action": "preserve-status-surface",
+      "owner_candidate_evidence": [
+        {
+          "currently_imports_round_modules": [
+            "DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact"
+          ],
+          "imports_historical_source": false,
+          "module": "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact",
+          "source_exists": true,
+          "static_owner_status": "reject-direct-historical-import"
+        },
+        {
+          "currently_imports_round_modules": [
+            "DASHI.Physics.Closure.NSTriadKNHighestAlphaFrontierRound285Exact",
+            "DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact"
+          ],
+          "imports_historical_source": false,
+          "module": "DASHI.Core.SourceExactFrontierBidiCrossPollination2026",
+          "source_exists": true,
+          "static_owner_status": "reject-direct-historical-import"
+        }
+      ],
+      "owner_candidates": [
+        "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact",
+        "DASHI.Core.SourceExactFrontierBidiCrossPollination2026"
+      ],
+      "owner_note": "Both values are ProofLevel routing metadata used by multiple live surfaces; do not duplicate or reinterpret them as theorem identities.",
+      "policy": "review-only; no recipient assignment, import rewrite, or deletion authorized",
+      "proposed_recipient": null,
+      "recipient_status": "status-owner-review-required",
+      "source_imports": [
+        "Agda.Builtin.Nat",
+        "DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact",
+        "DASHI.Physics.YangMills.BalabanA2PresentCutFallbackRound120Exact",
+        "DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact",
+        "DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact",
+        "DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact",
+        "DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact",
+        "DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact",
+        "DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact",
+        "DASHI.Physics.YangMills.BalabanHeatDoobSameDensityLogHessianRound103Exact",
+        "DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionPhysicalHistoryRound139Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact",
+        "DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact",
+        "Data.Rational.Base"
+      ],
+      "source_kind": "metadata-status-surface",
+      "source_path": "DASHI/Physics/YangMills/BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact.agda"
+    },
+    {
+      "declarations": [
+        {
+          "consumers": [
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FiniteDensityEvaluationExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityExact",
+            "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171FinitePhysicalRealizationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4ContributionSourceLimitExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4RefinementSourceLimitExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171PhysicalTOperationRealizationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171QuantitativeSourceLimitExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitExact",
+            "DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldExact",
+            "DASHI.Physics.YangMills.BalabanCMP119PhysicalEffectiveActionRealizationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact",
+            "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171FiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171StructuredFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119GeneratedActionFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119PhysicalTOperationFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119AssembledFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119PhysicalTOperationFiniteSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsExact"
+          ],
+          "migration_action": "extract-shared-record-bundle",
+          "name": "BetaDrivenCMP119ResidualFamily",
+          "source_kind": "shared-structural-record",
+          "source_line": 30,
+          "used_name_count": 29
+        }
+      ],
+      "direct_importers": [
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FiniteDensityEvaluationExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171FinitePhysicalRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4ContributionSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4RefinementSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171PhysicalTOperationRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171QuantitativeSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalEffectiveActionRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact",
+        "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171FiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171StructuredFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119GeneratedActionFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119PhysicalTOperationFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119AssembledFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119PhysicalTOperationFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsExact"
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.YangMills.BalabanBetaDrivenSourceNativePublishedFlowRound218Exact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact",
+      "importer_count": 29,
+      "live_consumers": [
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FiniteDensityEvaluationExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171FinitePhysicalRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4ContributionSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4RefinementSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171PhysicalTOperationRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171QuantitativeSourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitExact",
+        "DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalEffectiveActionRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact",
+        "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171FiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171StructuredFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119GeneratedActionFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119PhysicalTOperationFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119AssembledFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119PhysicalTOperationFiniteSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsExact"
+      ],
+      "migration_action": "extract-shared-record-bundle",
+      "owner_candidate_evidence": [
+        {
+          "currently_imports_round_modules": [],
+          "imports_historical_source": false,
+          "module": "DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact",
+          "source_exists": true,
+          "static_owner_status": "candidate-excludes-direct-historical-import"
+        },
+        {
+          "currently_imports_round_modules": [],
+          "imports_historical_source": false,
+          "module": "DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact",
+          "source_exists": true,
+          "static_owner_status": "candidate-excludes-direct-historical-import"
+        }
+      ],
+      "owner_candidates": [
+        "DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact",
+        "DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact"
+      ],
+      "owner_note": "The record is a shared type-level carrier with a nontrivial import closure; choose an existing non-Round owner only after checking for import cycles and preserving all dependent projections.",
+      "policy": "review-only; no recipient assignment, import rewrite, or deletion authorized",
+      "proposed_recipient": null,
+      "recipient_status": "recipient-review-required",
+      "source_imports": [
+        "Agda.Builtin.Equality",
+        "Agda.Builtin.Nat",
+        "DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact",
+        "DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact",
+        "DASHI.Physics.YangMills.Balaban1989Theorem1UVStabilityExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenSourceNativePublishedFlowRound218Exact",
+        "DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact",
+        "DASHI.Physics.YangMills.BalabanSourceNativeStrongStateEntryExact",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "Data.Rational.Base"
+      ],
+      "source_kind": "shared-structural-record",
+      "source_path": "DASHI/Physics/YangMills/BalabanBetaDrivenCMP119ResidualFamilyRound219Exact.agda"
+    },
+    {
+      "declarations": [
+        {
+          "consumers": [
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+            "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119FiniteVolumeGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+            "DASHI.Physics.YangMills.BalabanClayGate4PreferredSelectedProbabilityExact",
+            "DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact",
+            "DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemanticsExact",
+            "DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact",
+            "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanFiniteVolumeConditionalGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanFiniteVolumePartitionedGate4PresentationExact",
+            "DASHI.Physics.YangMills.BalabanFiniteVolumeRawDensityGate4PresentationExact"
+          ],
+          "migration_action": "extract-shared-record-bundle",
+          "name": "FiniteVolumeReopeningPresentation",
+          "source_kind": "shared-structural-record",
+          "source_line": 34,
+          "used_name_count": 17
+        }
+      ],
+      "direct_importers": [
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119FiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanClayGate4PreferredSelectedProbabilityExact",
+        "DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeConditionalGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumePartitionedGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeRawDensityGate4PresentationExact"
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.YangMills.BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact",
+      "importer_count": 19,
+      "live_consumers": [
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeExact",
+        "DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119FiniteVolumeGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
+        "DASHI.Physics.YangMills.BalabanClayGate4PreferredSelectedProbabilityExact",
+        "DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemanticsExact",
+        "DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeConditionalGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumePartitionedGate4PresentationExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeRawDensityGate4PresentationExact"
+      ],
+      "migration_action": "extract-shared-record-bundle",
+      "owner_candidate_evidence": [
+        {
+          "currently_imports_round_modules": [],
+          "imports_historical_source": false,
+          "module": "DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact",
+          "source_exists": true,
+          "static_owner_status": "candidate-excludes-direct-historical-import"
+        },
+        {
+          "currently_imports_round_modules": [
+            "DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact"
+          ],
+          "imports_historical_source": false,
+          "module": "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact",
+          "source_exists": true,
+          "static_owner_status": "reject-direct-historical-import"
+        }
+      ],
+      "owner_candidates": [
+        "DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact",
+        "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact"
+      ],
+      "owner_note": "The record welds the preferred T5 law to the finite-RG reopening step and is imported by multiple lanes; verify the owner can absorb Gram/T5/Preferred dependencies without a cycle.",
+      "policy": "review-only; no recipient assignment, import rewrite, or deletion authorized",
+      "proposed_recipient": null,
+      "recipient_status": "recipient-review-required",
+      "source_imports": [
+        "Agda.Builtin.Bool",
+        "Agda.Builtin.Equality",
+        "Agda.Builtin.Nat",
+        "DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact",
+        "DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact",
+        "DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact",
+        "DASHI.Physics.YangMills.BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact",
+        "DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "Data.Rational.Base"
+      ],
+      "source_kind": "shared-structural-record",
+      "source_path": "DASHI/Physics/YangMills/BalabanFiniteVolumeReopeningPresentationRound283Exact.agda"
+    }
+  ],
+  "shared_structural_declaration_count": 4,
+  "unresolved_semantic_mapping_rows_reclassified": 3
 }

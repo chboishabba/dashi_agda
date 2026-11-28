@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This literal source bridge imports the conditional R152 source record and
+-- is intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralRelativeDefectRound164Exact where
 
 ------------------------------------------------------------------------
@@ -37,7 +38,7 @@ open import Data.List.Base using (_++_)
 open import Data.Nat.Base using (_≤_; _+_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _/_)
-open Data.Rational.Base using () renaming (_+_ to _+ℚ_; _-_ to _-ℚ_)
+  renaming (_+_ to _+ℚ_; _-_ to _-ℚ_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)

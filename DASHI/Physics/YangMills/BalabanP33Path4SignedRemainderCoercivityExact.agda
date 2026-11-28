@@ -34,6 +34,7 @@ module DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using ([])
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _/_)
 import Data.Rational.Properties as ℚP

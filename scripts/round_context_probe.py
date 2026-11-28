@@ -10,14 +10,40 @@ variant only; it is not a declaration mapping or deletion authorization.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
+import shutil
 import signal
 import subprocess
 import tarfile
 import tempfile
+from datetime import datetime, timezone
 from collections import defaultdict
 from pathlib import Path
+
+
+AGDA_FAILURE_PATTERNS = (
+    ("parse-error", "[ParseError]"),
+    ("unsafe-import-boundary", "[CoInfectiveImport]"),
+    ("unequal-terms", "Unequal terms"),
+    ("unsolved-metas", "[UnsolvedMetaVariables]"),
+    ("termination", "Termination checking failed"),
+)
+
+
+def classify_agda_failure(output: str) -> tuple[str, str | None]:
+    """Return a stable failure class and the first useful diagnostic line."""
+    for failure_class, marker in AGDA_FAILURE_PATTERNS:
+        if marker not in output:
+            continue
+        lines = output.splitlines()
+        for index, line in enumerate(lines):
+            if marker in line:
+                context = " ".join(part.strip() for part in lines[index:index + 2] if part.strip())
+                return failure_class, context[:1000]
+        return failure_class, marker
+    return ("none", None)
 
 
 def prepare_probe_root(repo_root: Path) -> tuple[tempfile.TemporaryDirectory, Path]:
@@ -62,6 +88,7 @@ def run_probe(repo_root: Path, audit: dict, consumer: str, selected_rows: list[d
     if not rows:
         raise ValueError(f"no context-audit rows for consumer: {consumer}")
     consumer_path = repo_root / rows[0]["consumer_path"]
+    source_sha256 = hashlib.sha256(consumer_path.read_bytes()).hexdigest()
     remove_lines = {row["historical_module"]: row["line"] for row in rows}
 
     temporary = None
@@ -114,10 +141,21 @@ def run_probe(repo_root: Path, audit: dict, consumer: str, selected_rows: list[d
             "consumer": consumer,
             "consumer_path": rows[0]["consumer_path"],
             "removed_historical_modules": [row["historical_module"] for row in rows],
+            "removed_imports": [
+                {"historical_module": row["historical_module"], "line": row["line"]}
+                for row in rows
+            ],
             "removed_line_count": len(rows),
+            "source_sha256": source_sha256,
+            "batch_key": hashlib.sha256(json.dumps(
+                [(row["historical_module"], row["line"]) for row in rows],
+                sort_keys=True,
+            ).encode("utf-8")).hexdigest(),
             "command": f"DASHI_NO_TMUX=1 AGDA_JOBS=1 DASHI_AGDA_RSS_LIMIT_MB={rss_limit} " + " ".join(command),
             "returncode": returncode,
             "status": status,
+            "failure_class": classify_agda_failure(stdout + stderr)[0],
+            "first_diagnostic": classify_agda_failure(stdout + stderr)[1],
             "authorization": "batch-evidence-only",
             "output_tail": (stdout + stderr)[-6000:],
         }
@@ -162,6 +200,73 @@ def adaptive_probe(repo_root: Path, audit: dict, consumer: str, rows: list[dict]
       temporary.cleanup()
 
 
+def apply_probed_batches(repo_root: Path, probe: dict, checkpoint_root: Path) -> list[dict]:
+    """Apply only exact passing probe batches whose source hash still matches.
+
+    The probe is authoritative only for the exact import lines it removed in
+    the disposable copy.  Overlapping or stale receipts are skipped and
+    reported rather than guessed around.
+    """
+    receipts = probe.get("receipts", [])
+    if "receipt" in probe:
+        receipts = [probe["receipt"]]
+    by_consumer: dict[str, list[dict]] = defaultdict(list)
+    for receipt in receipts:
+        if receipt.get("status") == "probe-pass" and receipt.get("removed_imports") and receipt.get("consumer_path"):
+            by_consumer[receipt["consumer_path"]].append(receipt)
+
+    checkpoint_root.mkdir(parents=True, exist_ok=True)
+    applied = []
+    for relative_path, consumer_receipts in sorted(by_consumer.items()):
+        path = repo_root / relative_path
+        if not path.is_file():
+            continue
+        current_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+        expected = {receipt.get("source_sha256") for receipt in consumer_receipts}
+        if len(expected) != 1 or current_hash not in expected:
+            applied.append({"consumer_path": relative_path, "status": "stale-source-skipped", "current_sha256": current_hash})
+            continue
+        removals = {}
+        overlap = False
+        for receipt in consumer_receipts:
+            for item in receipt["removed_imports"]:
+                line = item["line"]
+                if line in removals and removals[line] != item["historical_module"]:
+                    overlap = True
+                removals[line] = item["historical_module"]
+        if overlap:
+            applied.append({"consumer_path": relative_path, "status": "overlapping-batches-skipped"})
+            continue
+        original = path.read_text(encoding="utf-8").splitlines(keepends=True)
+        invalid = [
+            line for line, module in removals.items()
+            if line < 1 or line > len(original) or module not in original[line - 1]
+        ]
+        if invalid:
+            applied.append({"consumer_path": relative_path, "status": "import-line-mismatch-skipped", "lines": sorted(invalid)})
+            continue
+        checkpoint = checkpoint_root / (path.name + "." + current_hash[:16] + ".bak")
+        if not checkpoint.exists():
+            shutil.copy2(path, checkpoint)
+        updated = "".join(line for number, line in enumerate(original, 1) if number not in removals)
+        path.write_text(updated, encoding="utf-8")
+        updated_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+        applied.append({
+            "consumer_path": relative_path,
+            "status": "applied",
+            "removed_imports": [
+                {"historical_module": module, "line": line}
+                for line, module in sorted(removals.items())
+            ],
+            "before_sha256": current_hash,
+            "after_sha256": updated_hash,
+            "checkpoint": str(checkpoint),
+            "applied_at": datetime.now(timezone.utc).isoformat(),
+            "rollback": f"copy {checkpoint} back to {path}",
+        })
+    return applied
+
+
 def write_result(output: Path, result: dict) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
@@ -184,6 +289,10 @@ def main() -> int:
                         help="resume a prior --all output and skip completed consumers")
     parser.add_argument("--max-consumers", type=int, default=0,
                         help="stop after this many newly processed consumers (0 means all)")
+    parser.add_argument("--apply-probed-batches", action="store_true",
+                        help="apply exact passing batches from the existing output after source-hash checks")
+    parser.add_argument("--checkpoint-dir", type=Path,
+                        default=Path(".dashi/round-stranded/probe-checkpoints"))
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--audit", type=Path, default=Path(".dashi/round-stranded/ym-context-audit.json"))
     parser.add_argument("--output", type=Path, default=Path(".dashi/round-stranded/ym-context-probe.json"))
@@ -251,6 +360,23 @@ def main() -> int:
             "deletion_authorized": False,
         }
     output = root / args.output
+    applied_batches = []
+    if args.apply_probed_batches:
+        if not output.is_file():
+            parser.error("--apply-probed-batches requires an existing probe output")
+        existing = json.loads(output.read_text(encoding="utf-8"))
+        applied_batches = apply_probed_batches(root, existing, root / args.checkpoint_dir)
+        existing["applied_batches"] = applied_batches
+        existing["deletion_authorized"] = False
+        write_result(output, existing)
+        result = existing
+        print(json.dumps({
+            "consumer_count": result.get("consumer_count", 0),
+            "receipt_count": result.get("receipt_count", 0),
+            "applied_batch_results": applied_batches,
+            "deletion_authorized": False,
+        }, indent=2))
+        return 0
     write_result(output, result)
     print(json.dumps({
         "consumer_count": result.get("consumer_count", 1),

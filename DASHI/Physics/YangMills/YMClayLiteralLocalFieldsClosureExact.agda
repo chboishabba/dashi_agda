@@ -8,7 +8,7 @@ open import Data.Product using (_×_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as R78
+import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as R78
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact as Stress
 
 ------------------------------------------------------------------------
@@ -57,21 +57,21 @@ literalLocalFieldClosureBuildsFiveT4 :
   LiteralLocalFieldClosureInputs Y →
   Five.ContinuumLocalFieldOPEStressWard Y
 literalLocalFieldClosureBuildsFiveT4 inputs = record
-  { Five.ContinuumLocalFieldOPEStressWard.gaugeInvariantLocalObservable =
+  { gaugeInvariantLocalObservable =
       gaugeInvariantLocalObservable inputs
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorCorrespondence =
+  ; curvatureOperatorCorrespondence =
       curvatureOperatorCorrespondence inputs
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorsGaugeInvariant =
+  ; curvatureOperatorsGaugeInvariant =
       curvatureOperatorsGaugeInvariant inputs
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorsLocal =
+  ; curvatureOperatorsLocal =
       curvatureOperatorsLocal inputs
-  ; Five.ContinuumLocalFieldOPEStressWard.shortDistanceAsymptoticFreedom =
+  ; shortDistanceAsymptoticFreedom =
       shortDistanceAsymptoticFreedom inputs
-  ; Five.ContinuumLocalFieldOPEStressWard.stressTensorAndOPE =
+  ; stressTensorAndOPE =
       Stress.stressAndOPE (literalStressOPE inputs)
-  ; Five.ContinuumLocalFieldOPEStressWard.physicalOPECoefficient =
+  ; physicalOPECoefficient =
       Stress.physicalOPECoefficient (literalStressOPE inputs)
-  ; Five.ContinuumLocalFieldOPEStressWard.physicalOPERemainder =
+  ; physicalOPERemainder =
       Stress.physicalOPERemainder (literalStressOPE inputs)
   }
 
@@ -80,7 +80,7 @@ literalLocalFieldClosureBuildsRound78C :
   LiteralLocalFieldClosureInputs Y →
   R78.SameFamilyLocalFieldsOPEStressWard Y
 literalLocalFieldClosureBuildsRound78C inputs = record
-  { R78.SameFamilyLocalFieldsOPEStressWard.localFields =
+  { localFields =
       literalLocalFieldClosureBuildsFiveT4 inputs
   }
 

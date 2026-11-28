@@ -316,11 +316,11 @@ literalClayEvidenceFromFiveTheorems :
   InteractingContinuumNontriviality Y →
   Top.LiteralClayEvidence Y
 literalClayEvidenceFromFiveTheorems Y structural rg gap continuum local interacting = record
-  { Top.LiteralClayEvidence.preconditions =
+  { preconditions =
       preconditionsFromFive structural rg continuum local
-  ; Top.LiteralClayEvidence.postconditions =
+  ; postconditions =
       postconditionsFromFive structural continuum gap local interacting
-  ; Top.LiteralClayEvidence.invariants =
+  ; invariants =
       invariantsFromFive structural rg gap interacting
   }
 

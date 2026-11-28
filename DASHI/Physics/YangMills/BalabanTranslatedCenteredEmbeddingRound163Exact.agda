@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This source-facing bridge imports the conditional R162 translation
+-- commutation record and is intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanTranslatedCenteredEmbeddingRound163Exact where
 
 ------------------------------------------------------------------------
@@ -36,15 +37,15 @@ translatedEmbedding :
   Contours.AxisSegment →
   Embed.CenteredPeriodicNoWrapEmbedding n radius
 translatedEmbedding {n} embedding segment = record
-  { Embed.CenteredPeriodicNoWrapEmbedding.embeddingCentre =
+  { embeddingCentre =
       Bond.walk
         (Embed.embeddingCentre embedding)
         (Periodic.segmentWord segment)
-  ; Embed.CenteredPeriodicNoWrapEmbedding.embed =
+  ; embed =
       λ point → Bond.walk
         (Embed.embed embedding point)
         (Periodic.segmentWord segment)
-  ; Embed.CenteredPeriodicNoWrapEmbedding.embedMeaning =
+  ; embedMeaning =
       λ point →
         trans
           (cong
@@ -54,7 +55,7 @@ translatedEmbedding {n} embedding segment = record
             (Embed.embeddingCentre embedding)
             (Embed.canonicalCenteredContourWord point)
             (Periodic.segmentWord segment))
-  ; Embed.CenteredPeriodicNoWrapEmbedding.embedInjective =
+  ; embedInjective =
       λ {left} {right} translatedEqual →
         Embed.embedInjective embedding
           (trans
@@ -72,7 +73,7 @@ translatedEmbedding {n} embedding segment = record
                 (Closure.periodicStepInverseLaws n)
                 (Embed.embed embedding right)
                 (Periodic.segmentWord segment))))
-  ; Embed.CenteredPeriodicNoWrapEmbedding.originMeaning =
+  ; originMeaning =
       cong
         (λ start → Bond.walk start (Periodic.segmentWord segment))
         (Embed.originMeaning embedding)

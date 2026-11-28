@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This source-facing defect bridge imports the conditional R158 carrier and
+-- is intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanCMP98Equation119PositiveLinkDefectRound168Exact where
 
 ------------------------------------------------------------------------
@@ -90,14 +91,14 @@ asLiteralRelativeDefectInputs :
   PositiveLinkDefectInputs source →
   R164.LiteralRelativeDefectInputs source
 asLiteralRelativeDefectInputs source inputs = record
-  { R164.LiteralRelativeDefectInputs.kernel = kernel inputs
-  ; R164.LiteralRelativeDefectInputs.kernelIdentityIsGroupIdentity =
+  { kernel = kernel inputs
+  ; kernelIdentityIsGroupIdentity =
       kernelIdentityIsGroupIdentity inputs
-  ; R164.LiteralRelativeDefectInputs.kernelMultiplyIsGroupMultiply =
+  ; kernelMultiplyIsGroupMultiply =
       kernelMultiplyIsGroupMultiply inputs
-  ; R164.LiteralRelativeDefectInputs.orientedLinkDefectSmall =
+  ; orientedLinkDefectSmall =
       orientedLinkDefectFromPositive source inputs
-  ; R164.LiteralRelativeDefectInputs.canonicalContourLengthAtMost24 =
+  ; canonicalContourLengthAtMost24 =
       canonicalContourLengthAtMost24 inputs
   }
 

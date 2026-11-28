@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109ContourLengthExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.List.Base using (_++_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -70,7 +71,7 @@ segmentCountSum (segment ∷ segments) =
 
 periodicAppendLength :
   ∀ {A : Set} (left right : List A) →
-  Periodic.listLength (Periodic._++_ left right)
+  Periodic.listLength (left ++ right)
   ≡ addNat (Periodic.listLength left) (Periodic.listLength right)
 periodicAppendLength [] right = refl
 periodicAppendLength (value ∷ values) right =

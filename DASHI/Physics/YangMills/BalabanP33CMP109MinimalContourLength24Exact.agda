@@ -31,9 +31,9 @@ module DASHI.Physics.YangMills.BalabanP33CMP109MinimalContourLength24Exact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; _+_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; subst₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
@@ -70,6 +70,22 @@ centeredOffsetSignedCount (Centered.positive index) =
 centeredOffsetSignedCount (Centered.negative index) =
   Contours.signedCount Contours.negative
     (suc (Centered.centeredOffsetRank index))
+
+centeredOffsetMagnitudeIsSignedCount : ∀ {radius} (offset : Centered.CenteredOffset radius) →
+  Centered.centeredOffsetMagnitude offset
+  ≡ Contours.count (centeredOffsetSignedCount offset)
+centeredOffsetMagnitudeIsSignedCount Centered.centre = refl
+centeredOffsetMagnitudeIsSignedCount (Centered.positive index) = refl
+centeredOffsetMagnitudeIsSignedCount (Centered.negative index) = refl
+
+centeredOffsetCountBound :
+  ∀ {radius} (offset : Centered.CenteredOffset radius) →
+  Contours.count (centeredOffsetSignedCount offset) ≤ radius
+centeredOffsetCountBound {radius} offset =
+  subst
+    (λ selected → selected ≤ radius)
+    (centeredOffsetMagnitudeIsSignedCount offset)
+    (centeredOffsetMagnitudeBound offset)
 
 centeredPointDisplacement :
   ∀ {radius} →
@@ -153,6 +169,21 @@ activeSegmentsCountExact displacement
   | activeSegmentCountExact Contours.axis3
       (Contours.coordinate3 displacement) = refl
 
+lengthAddNatEqualsBuiltin : ∀ left right →
+  Length.addNat left right ≡ left + right
+lengthAddNatEqualsBuiltin zero right = refl
+lengthAddNatEqualsBuiltin (suc left) right =
+  cong suc (lengthAddNatEqualsBuiltin left right)
+
+lengthAddNatMono : ∀ {left lower right upper} →
+  left ≤ lower → right ≤ upper →
+  Length.addNat left right ≤ Length.addNat lower upper
+lengthAddNatMono {left} {lower} {right} {upper} leftBound rightBound =
+  subst₂ _≤_
+    (sym (lengthAddNatEqualsBuiltin left right))
+    (sym (lengthAddNatEqualsBuiltin lower upper))
+    (NatP.+-mono-≤ leftBound rightBound)
+
 centeredPointCountSumBound :
   ∀ {radius} (point : Centered.CenteredBlockPoint4 radius) →
   Length.segmentCountSum
@@ -160,20 +191,22 @@ centeredPointCountSumBound :
   ≤ Length.addNat radius
       (Length.addNat radius (Length.addNat radius radius))
 centeredPointCountSumBound
+    {radius}
     point@(Carrier.pair (Carrier.pair offset0 offset1)
       (Carrier.pair offset2 offset3)) =
   subst
     (λ selected →
       selected
-      ≤ Length.addNat _ (Length.addNat _ (Length.addNat _ _)))
+      ≤ Length.addNat radius
+          (Length.addNat radius (Length.addNat radius radius)))
     (sym (activeSegmentsCountExact (centeredPointDisplacement point)))
-    (NatP.+-mono-≤
-      (centeredOffsetMagnitudeBound offset0)
-      (NatP.+-mono-≤
-        (centeredOffsetMagnitudeBound offset1)
-        (NatP.+-mono-≤
-          (centeredOffsetMagnitudeBound offset2)
-          (centeredOffsetMagnitudeBound offset3))))
+    (lengthAddNatMono
+      (centeredOffsetCountBound offset0)
+      (lengthAddNatMono
+        (centeredOffsetCountBound offset1)
+        (lengthAddNatMono
+          (centeredOffsetCountBound offset2)
+          (centeredOffsetCountBound offset3))))
 
 minimalFourRadiusIsTwentyFour :
   Length.addNat Minimal.radius

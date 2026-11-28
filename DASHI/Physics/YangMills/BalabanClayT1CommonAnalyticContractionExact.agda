@@ -52,6 +52,14 @@ record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
 
     zeroInBall : norm zero ≤ radius
 
+    -- The contraction proof needs the radius bound for the displacement from
+    -- the distinguished zero state.  This is not derivable from an arbitrary
+    -- `subtract` and `norm`; keep it as an explicit source obligation rather
+    -- than passing the unrelated `norm state ≤ radius` proof at that point.
+    differenceFromZeroInBall : ∀ state →
+      norm state ≤ radius →
+      norm (subtract state zero) ≤ radius
+
     criticalMapDifferenceExact : ∀ index left right →
       subtract (criticalMap index left) (criticalMap index right)
       ≡ green index (subtract (nonlinear index left) (nonlinear index right))
@@ -137,7 +145,7 @@ criticalMapPreservesCommonBall dataSet index state stateInBall =
           (multiplyMonotoneLeftNonnegative dataSet
             (contractionRatio dataSet)
             (contractionRatioNonnegative dataSet)
-            stateInBall))
+            (differenceFromZeroInBall dataSet state stateInBall)))
         (mapAtZeroBudget dataSet index)))
 
 ------------------------------------------------------------------------

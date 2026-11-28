@@ -66,6 +66,14 @@ defectSum :
 defectSum kernel values =
   Sums.sumRational values (defect kernel)
 
+addRightMonoRational :
+  ∀ (left : ℚ) {lower upper : ℚ} →
+  lower ≤ upper → left + lower ≤ left + upper
+addRightMonoRational left bound =
+  let same : left ≤ left
+      same = ℚP.≤-refl
+  in ℚP.+-mono-≤ same bound
+
 productDefectBelowSum :
   ∀ {Unitary : Set}
     (kernel : UnitaryOperatorDefectKernel Unitary)
@@ -76,11 +84,12 @@ productDefectBelowSum kernel [] =
     (λ lower → lower ≤ 0ℚ)
     (sym (identityDefectZero kernel))
     ℚP.≤-refl
+
 productDefectBelowSum kernel (value ∷ values) =
   ℚP.≤-trans
     (productDefectTriangle kernel value (productList kernel values))
-    (ℚP.+-mono-≤
-      ℚP.≤-refl
+    (addRightMonoRational
+      (defect kernel value)
       (productDefectBelowSum kernel values))
 
 record PointwiseDefectMajorant
@@ -101,10 +110,12 @@ sumDefectBelowMajorant :
   PointwiseDefectMajorant kernel values majorant →
   defectSum kernel values ≤ Sums.sumRational values majorant
 sumDefectBelowMajorant kernel [] majorant bounds = ℚP.≤-refl
-sumDefectBelowMajorant kernel (value ∷ values) majorant bounds =
+sumDefectBelowMajorant kernel (value ∷ values) majorant
+  record { pointwise = pointwise } =
   ℚP.+-mono-≤
-    (pointwise bounds value)
-    (sumDefectBelowMajorant kernel values majorant bounds)
+    (pointwise value)
+    (sumDefectBelowMajorant kernel values majorant
+      record { pointwise = pointwise })
 
 productDefectBelowMajorantSum :
   ∀ {Unitary : Set}

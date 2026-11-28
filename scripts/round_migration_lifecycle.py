@@ -67,21 +67,53 @@ def _candidate_summary(candidates: dict | None) -> dict[str, dict]:
 
 
 def build_lifecycle(ledger: dict, plan: dict, probe: dict | None = None,
-                    candidates: dict | None = None) -> dict:
+                    candidates: dict | None = None,
+                    reconciliation: dict | None = None) -> dict:
     probe_status = _probe_summary(probe)
     candidate_status = _candidate_summary(candidates)
+    reconciliation_index = {
+        (row.get("consumer"), row.get("historical_module"), row.get("line")): row
+        for row in (reconciliation or {}).get("rows", [])
+    }
     rows = []
     for row in plan.get("rows", []):
         status = row["status"]
+        reconciliation_row = reconciliation_index.get(
+            (row.get("consumer"), row.get("historical_module"), row.get("line")),
+            {},
+        )
+        action = reconciliation_row.get("action")
         if status == "unused-import-remove-or-recheck":
             context_status = probe_status.get(row["consumer"], "not-probed")
-            lifecycle = "context-probed-batch-pass" if context_status == "batch-probe-pass" else "repair-needed"
-            repair = ("batch probe passed; retain the exact receipt and recheck after the planned "
-                      "rewrite" if lifecycle == "context-probed-batch-pass" else
-                      "audit Agda-level instance, module, operator, and implicit context before removing this import")
+            lifecycle = "context-probed-batch-pass" if action == "probe-removable-batch" or context_status == "batch-probe-pass" else "repair-needed"
+            repair = ("exact passing import batch is ready for explicit checkpointed application and post-edit verification"
+                      if lifecycle == "context-probed-batch-pass" else
+                      "run the generated context probe; audit Agda-level instance, module, operator, and implicit context before removing this import")
         elif status == "mapping-incomplete":
-            lifecycle = "needs-canonical-mapping"
-            repair = "attach the already-established canonical declaration mapping"
+            if action == "bookkeeping-context":
+                lifecycle = "bookkeeping-context-classified"
+                repair = "already classified by the candidate/import reports; no declaration mapping or Agda probe is required"
+            elif action == "context-probe-required":
+                lifecycle = "repair-needed"
+                repair = "run the generated exact import-batch probe before assigning a canonical declaration mapping"
+            elif action == "probe-removable-batch":
+                lifecycle = "context-probed-batch-pass"
+                repair = "exact passing import batch is ready for explicit checkpointed application and post-edit verification"
+            elif action == "confirmed-bundle-migration":
+                lifecycle = "bundle-migration-confirmed"
+                repair = "use the recorded canonical bundle recipient; no new declaration mapping is required"
+            elif action == "metadata-status-use":
+                lifecycle = "metadata-status-use"
+                repair = "preserve or inline the routing/status surface; do not treat it as a theorem duplicate"
+            elif action == "shared-bundle-migration":
+                lifecycle = "shared-bundle-recipient-review"
+                repair = "review the recorded existing owner candidates and import closure; do not assign a recipient or rewrite imports automatically"
+            elif action == "semantic-action-confirmed":
+                lifecycle = "semantic-action-confirmed"
+                repair = "retain the explicit semantic action and verify the affected consumer cone"
+            else:
+                lifecycle = "needs-canonical-mapping"
+                repair = "no explicit canonical recipient exists in the generated evidence; retain the import and record the semantic gap"
         elif status == "rewrite-ready":
             lifecycle = "rewrite-ready"
             repair = "run a sanctioned Agda check after the import rewrite"
@@ -96,6 +128,8 @@ def build_lifecycle(ledger: dict, plan: dict, probe: dict | None = None,
             "status": status,
             "lifecycle_state": lifecycle,
             "context_probe_status": probe_status.get(row["consumer"], "not-probed"),
+            "reconciliation_action": action,
+            "reconciliation_declaration_actions": reconciliation_row.get("declaration_actions", []),
             "candidate_evidence": candidate_status.get(row["historical_module"], {
                 "status_counts": {},
                 "mapping_candidate_count": 0,
@@ -121,6 +155,8 @@ def build_lifecycle(ledger: dict, plan: dict, probe: dict | None = None,
         "candidate_declaration_count": candidates.get("declaration_count", 0) if candidates else 0,
         "candidate_status_counts": candidates.get("status_counts", {}) if candidates else {},
         "terminal_mapping_candidate_count": candidates.get("terminal_mapping_candidate_count", 0) if candidates else 0,
+        "reconciliation_action_counts": (reconciliation or {}).get("action_counts", {}),
+        "reconciliation_declaration_action_counts": (reconciliation or {}).get("declaration_action_counts", {}),
         "state_counts": dict(sorted(state_counts.items())),
         "gates": [
             {"state": "discovered", "entry": "ledger contains the historical module and importer evidence"},
@@ -145,6 +181,8 @@ def main() -> int:
                         help="optional context-probe receipt JSON")
     parser.add_argument("--candidates", type=Path, default=None,
                         help="optional declaration-candidate report JSON")
+    parser.add_argument("--reconciliation", type=Path, default=None,
+                        help="optional reconciled action report JSON")
     parser.add_argument("--output", type=Path, default=Path(".dashi/round-stranded/ym-migration-lifecycle.json"))
     args = parser.parse_args()
     lifecycle = build_lifecycle(
@@ -152,6 +190,7 @@ def main() -> int:
         json.loads(args.plan.read_text(encoding="utf-8")),
         json.loads(args.probe.read_text(encoding="utf-8")) if args.probe else None,
         json.loads(args.candidates.read_text(encoding="utf-8")) if args.candidates else None,
+        json.loads(args.reconciliation.read_text(encoding="utf-8")) if args.reconciliation else None,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(lifecycle, indent=2, sort_keys=True) + "\n", encoding="utf-8")

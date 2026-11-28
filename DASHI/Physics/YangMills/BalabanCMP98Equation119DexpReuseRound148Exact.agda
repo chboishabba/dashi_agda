@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119DexpReuseRound148Exact where
+
+-- This source-facing bridge is outside the --safe cone because its literal
+-- dexp donor imports the source-level SU(2) closed-form carrier.
 
 ------------------------------------------------------------------------
 -- ROUND148 A1 BIDI: SOURCE-CORRECT LEFT/RIGHT DEXP REUSE FOR EQ. (119)

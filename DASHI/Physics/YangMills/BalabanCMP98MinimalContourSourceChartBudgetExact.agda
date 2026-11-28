@@ -105,9 +105,7 @@ finiteLength24DefectSum :
 finiteLength24DefectSum values lengthBound defectMajorant pointwise =
   subst
     (λ upper → Sums.sumRational values defectMajorant ≤ upper)
-    (ℚRing.solve [] :
-      Sums.natAsRational 24 * perLinkDefectMajorant
-      ≡ length24OperatorDefectBudget)
+    (ℚRing.solve [])
     (PathBudget.finiteUniformSumBoundByLength
       values 24 defectMajorant perLinkDefectMajorant
       perLinkDefectMajorantNonnegative lengthBound pointwise)

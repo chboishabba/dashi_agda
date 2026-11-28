@@ -1,10 +1,11 @@
 module DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -66,7 +67,7 @@ configuredTotalCoefficient =
 
 configuredTotalCoefficientExact :
   configuredTotalCoefficient ≡ twoHundredFiftySixℚ
-configuredTotalCoefficientExact = ℚRing.solve []
+configuredTotalCoefficientExact = refl
 ------------------------------------------------------------------------
 -- Literal four-dimensional incidence data.
 ------------------------------------------------------------------------
@@ -193,7 +194,7 @@ configuredFiveRemainderSumBound dataSet background state inRadius =
           + configuredConstraintCoefficient
               * radius dataSet background state
               * normSq dataSet background state))))
-      (totalRemainderDefinition dataSet background state)
+      (sym (totalRemainderDefinition dataSet background state))
       (addMonotone dataSet
         (curvatureDominated dataSet background state inRadius)
         (addMonotone dataSet

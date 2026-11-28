@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119YIndexedDexpRound154Exact where
+
+-- This source-facing bridge is outside the --safe cone because it consumes
+-- the literal least-privilege source from Round152.
 
 ------------------------------------------------------------------------
 -- ROUND154 A1 BIDI: ONE Y-INDEXED DEXP FAMILY, OUTER Y DERIVED FROM THE BLOCK
@@ -79,8 +81,8 @@ outerY :
     (source : R152.LiteralEquation119LeastPrivilegeSource C n Value group) →
   CMP98Equation119PointYFamily source →
   Nat → R126.Vector (R146.additive C)
-outerY source yFamily step =
-  R146.sumV
+outerY {C} source yFamily step =
+  R146.sumV {C = C}
     (scaledPointYTerms source yFamily step
       (Carrier.elements (Centered.centeredBlockFinite 6)))
 
@@ -91,9 +93,9 @@ asYIndexedDexpConvention :
   UniformLeftRightDexpFamily (R126.Vector (R146.additive C)) →
   R148.CMP98Equation119DexpConvention (R126.Vector (R146.additive C))
 asYIndexedDexpConvention source yFamily calculus = record
-  { R148.CMP98Equation119DexpConvention.outer =
+  { outer =
       λ step → atY calculus (outerY source yFamily step)
-  ; R148.CMP98Equation119DexpConvention.atPoint =
+  ; atPoint =
       λ step point → atY calculus (pointY yFamily step point)
   }
 

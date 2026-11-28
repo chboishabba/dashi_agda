@@ -24,7 +24,7 @@ open import Data.Rational.Base using (ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as T78
+import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as T78
 import DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact as SI
 
 ------------------------------------------------------------------------
@@ -274,31 +274,31 @@ asLiteralYangMillsConstruction :
   PinnedYangMillsConstruction {C = C} S →
   Top.LiteralYangMillsConstruction C S
 asLiteralYangMillsConstruction pinned = record
-  { Top.LiteralYangMillsConstruction.spacetime =
+  { spacetime =
       spacetime pinned
-  ; Top.LiteralYangMillsConstruction.finiteMeasure =
+  ; finiteMeasure =
       finiteMeasure (finite pinned)
-  ; Top.LiteralYangMillsConstruction.continuumMeasure =
+  ; continuumMeasure =
       continuumMeasure (continuum pinned)
-  ; Top.LiteralYangMillsConstruction.schwinger =
+  ; schwinger =
       schwinger (continuum pinned)
-  ; Top.LiteralYangMillsConstruction.localObservable =
+  ; localObservable =
       localObservable (local pinned)
-  ; Top.LiteralYangMillsConstruction.curvatureOperator =
+  ; curvatureOperator =
       curvatureOperator (local pinned)
-  ; Top.LiteralYangMillsConstruction.opeCoefficient =
+  ; opeCoefficient =
       opeCoefficient (local pinned)
-  ; Top.LiteralYangMillsConstruction.opeRemainder =
+  ; opeRemainder =
       opeRemainder (local pinned)
-  ; Top.LiteralYangMillsConstruction.stressTensor =
+  ; stressTensor =
       stressTensor (local pinned)
-  ; Top.LiteralYangMillsConstruction.hilbertSpace =
+  ; hilbertSpace =
       hilbertSpace (continuum pinned)
-  ; Top.LiteralYangMillsConstruction.hamiltonian =
+  ; hamiltonian =
       hamiltonian (continuum pinned)
-  ; Top.LiteralYangMillsConstruction.vacuum =
+  ; vacuum =
       vacuum (gap pinned)
-  ; Top.LiteralYangMillsConstruction.massGap =
+  ; massGap =
       massGap (gap pinned)
   }
 
@@ -312,11 +312,11 @@ compileStructuralBase :
   Five.LiteralClayStructuralBase
     (asLiteralYangMillsConstruction pinned)
 compileStructuralBase pinned = record
-  { Five.LiteralClayStructuralBase.compactSimple =
+  { compactSimple =
       compactSimple pinned
-  ; Five.LiteralClayStructuralBase.fourDimensionalEuclidean =
+  ; fourDimensionalEuclidean =
       fourDimensionalEuclidean pinned
-  ; Five.LiteralClayStructuralBase.compactSimpleParameterization =
+  ; compactSimpleParameterization =
       compactSimpleParameterization pinned
   }
 
@@ -326,25 +326,25 @@ compileWeakCouplingRG :
   Five.LiteralWeakCouplingRGConstruction
     (asLiteralYangMillsConstruction pinned)
 compileWeakCouplingRG pinned = record
-  { Five.LiteralWeakCouplingRGConstruction.finiteVolumeCutoffMeasure =
+  { finiteVolumeCutoffMeasure =
       finiteVolumeCutoffMeasure (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.reflectionPositiveRegularization =
+  ; reflectionPositiveRegularization =
       reflectionPositiveRegularization (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.ultravioletYangMillsNormalization =
+  ; ultravioletYangMillsNormalization =
       ultravioletYangMillsNormalization (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.asymptoticallyFreeScaleTrajectory =
+  ; asymptoticallyFreeScaleTrajectory =
       asymptoticallyFreeScaleTrajectory (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.gaugeSymmetryPreserved =
+  ; gaugeSymmetryPreserved =
       gaugeSymmetryPreserved (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.localityPreserved =
+  ; localityPreserved =
       localityPreserved (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.euclideanCovariancePreserved =
+  ; euclideanCovariancePreserved =
       euclideanCovariancePreserved (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.reflectionPositivityPreserved =
+  ; reflectionPositivityPreserved =
       reflectionPositivityPreserved (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.positivityNormalizationPreserved =
+  ; positivityNormalizationPreserved =
       positivityNormalizationPreserved (finite pinned)
-  ; Five.LiteralWeakCouplingRGConstruction.volumeCutoffCompatibility =
+  ; volumeCutoffCompatibility =
       volumeCutoffCompatibility (finite pinned)
   }
 
@@ -354,15 +354,15 @@ compileUnifiedContinuum :
   Five.UnifiedContinuumYMConstruction
     (asLiteralYangMillsConstruction pinned)
 compileUnifiedContinuum pinned = record
-  { Five.UnifiedContinuumYMConstruction.continuumLimit =
+  { continuumLimit =
       continuumLimit (continuum pinned)
-  ; Five.UnifiedContinuumYMConstruction.schwingerBelongsToContinuumMeasure =
+  ; schwingerBelongsToContinuumMeasure =
       schwingerBelongsToContinuumMeasure (continuum pinned)
-  ; Five.UnifiedContinuumYMConstruction.acceptedWightmanOrOSAxioms =
+  ; acceptedWightmanOrOSAxioms =
       acceptedWightmanOrOSAxioms (continuum pinned)
-  ; Five.UnifiedContinuumYMConstruction.reconstructedHilbertSpace =
+  ; reconstructedHilbertSpace =
       reconstructedHilbertSpace (continuum pinned)
-  ; Five.UnifiedContinuumYMConstruction.positiveSelfAdjointHamiltonian =
+  ; positiveSelfAdjointHamiltonian =
       positiveSelfAdjointHamiltonian (continuum pinned)
   }
 
@@ -372,15 +372,15 @@ compilePhysicalMassGap :
   Five.CutoffUniformPhysicalMassGap
     (asLiteralYangMillsConstruction pinned)
 compilePhysicalMassGap pinned = record
-  { Five.CutoffUniformPhysicalMassGap.vacuumSectorAndPositiveEnergyComplement =
+  { vacuumSectorAndPositiveEnergyComplement =
       vacuumSectorAndPositiveEnergyComplement (gap pinned)
-  ; Five.CutoffUniformPhysicalMassGap.strictlyPositiveFiniteMassGap =
+  ; strictlyPositiveFiniteMassGap =
       strictlyPositiveFiniteMassGap (gap pinned)
-  ; Five.CutoffUniformPhysicalMassGap.physicalScaleLowerBoundUniform =
+  ; physicalScaleLowerBoundUniform =
       physicalScaleLowerBoundUniform (gap pinned)
-  ; Five.CutoffUniformPhysicalMassGap.noSpectralPollutionBelowGap =
+  ; noSpectralPollutionBelowGap =
       noSpectralPollutionBelowGap (gap pinned)
-  ; Five.CutoffUniformPhysicalMassGap.gapAndClusteringDerived =
+  ; gapAndClusteringDerived =
       gapAndClusteringDerived (gap pinned)
   }
 
@@ -390,21 +390,21 @@ compileLocalQFT :
   Five.ContinuumLocalFieldOPEStressWard
     (asLiteralYangMillsConstruction pinned)
 compileLocalQFT pinned = record
-  { Five.ContinuumLocalFieldOPEStressWard.gaugeInvariantLocalObservable =
+  { gaugeInvariantLocalObservable =
       gaugeInvariantLocalObservable (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorCorrespondence =
+  ; curvatureOperatorCorrespondence =
       curvatureOperatorCorrespondence (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorsGaugeInvariant =
+  ; curvatureOperatorsGaugeInvariant =
       curvatureOperatorsGaugeInvariant (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.curvatureOperatorsLocal =
+  ; curvatureOperatorsLocal =
       curvatureOperatorsLocal (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.shortDistanceAsymptoticFreedom =
+  ; shortDistanceAsymptoticFreedom =
       shortDistanceAsymptoticFreedom (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.stressTensorAndOPE =
+  ; stressTensorAndOPE =
       stressTensorAndOPE (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.physicalOPECoefficient =
+  ; physicalOPECoefficient =
       physicalOPECoefficient (local pinned)
-  ; Five.ContinuumLocalFieldOPEStressWard.physicalOPERemainder =
+  ; physicalOPERemainder =
       physicalOPERemainder (local pinned)
   }
 
@@ -418,9 +418,9 @@ compileT78A :
   T78.UVToContinuumYM
     (asLiteralYangMillsConstruction pinned)
 compileT78A pinned = record
-  { T78.UVToContinuumYM.weakCouplingRG =
+  { weakCouplingRG =
       compileWeakCouplingRG pinned
-  ; T78.UVToContinuumYM.continuumYM =
+  ; continuumYM =
       compileUnifiedContinuum pinned
   }
 
@@ -430,7 +430,7 @@ compileT78B :
   T78.SameHamiltonianPhysicalMassGap
     (asLiteralYangMillsConstruction pinned)
 compileT78B pinned = record
-  { T78.SameHamiltonianPhysicalMassGap.physicalGap =
+  { physicalGap =
       compilePhysicalMassGap pinned
   }
 
@@ -440,7 +440,7 @@ compileT78C :
   T78.SameFamilyLocalFieldsOPEStressWard
     (asLiteralYangMillsConstruction pinned)
 compileT78C pinned = record
-  { T78.SameFamilyLocalFieldsOPEStressWard.localFields =
+  { localFields =
       compileLocalQFT pinned
   }
 

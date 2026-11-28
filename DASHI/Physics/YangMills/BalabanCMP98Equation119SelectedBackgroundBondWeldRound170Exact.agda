@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This source-facing bond-weld bridge imports the conditional background-field
+-- variational theorem and is intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanCMP98Equation119SelectedBackgroundBondWeldRound170Exact where
 
 ------------------------------------------------------------------------
@@ -176,17 +177,17 @@ asPositiveLinkDefectInputs :
     {CoarseField = CoarseField} {FineField = FineField} {Lie = Lie} source →
   R168.PositiveLinkDefectInputs source
 asPositiveLinkDefectInputs source weld = record
-  { R168.PositiveLinkDefectInputs.kernel = kernel weld
-  ; R168.PositiveLinkDefectInputs.kernelIdentityIsGroupIdentity =
+  { kernel = kernel weld
+  ; kernelIdentityIsGroupIdentity =
       kernelIdentityIsGroupIdentity weld
-  ; R168.PositiveLinkDefectInputs.kernelMultiplyIsGroupMultiply =
+  ; kernelMultiplyIsGroupMultiply =
       kernelMultiplyIsGroupMultiply weld
-  ; R168.PositiveLinkDefectInputs.defectInverseInvariant =
+  ; defectInverseInvariant =
       defectInverseInvariant weld
-  ; R168.PositiveLinkDefectInputs.positiveBondDefectSmall =
+  ; positiveBondDefectSmall =
       λ step site axis →
         selectedKernelDefectBelowPerLinkMajorant weld step (pair site axis)
-  ; R168.PositiveLinkDefectInputs.canonicalContourLengthAtMost24 =
+  ; canonicalContourLengthAtMost24 =
       R172.canonicalContourLengthAtMost24
   }
 

@@ -65,7 +65,7 @@ sumV :
   List (R126.Vector (additive C)) →
   R126.Vector (additive C)
 sumV {C} [] = R126.zeroV (additive C)
-sumV {C} (x ∷ xs) = R126.addV (additive C) x (sumV xs)
+sumV {C} (x ∷ xs) = R126.addV (additive C) x (sumV {C = C} xs)
 
 ------------------------------------------------------------------------
 -- Exact component language for source Eq. (119).
@@ -104,10 +104,10 @@ pointContribution :
   Nat → Nat →
   R126.Vector (additive C) →
   R126.Vector (additive C)
-pointContribution source step x A =
+pointContribution {C} source step x A =
   blockWeight source step
     (inverseGAt source step x
-      (subV
+      (subV {C = C}
         (minusPath source step x A)
         (adjointAt source step x (plusPath source step x A))))
 
@@ -129,8 +129,8 @@ blockContribution :
   Nat →
   R126.Vector (additive C) →
   R126.Vector (additive C)
-blockContribution source step A =
-  sumV (pointContributions source step A (blockPoints source step))
+blockContribution {C} source step A =
+  sumV {C = C} (pointContributions source step A (blockPoints source step))
 
 -- Literal CMP98 Eq. (119).
 equation119QPrime :
@@ -151,8 +151,8 @@ asOneStepAveragingDerivative :
   CMP98Equation119SourceOperators C →
   R126.OneStepAveragingDerivative (additive C)
 asOneStepAveragingDerivative source = record
-  { R126.OneStepAveragingDerivative.q = qSource source
-  ; R126.OneStepAveragingDerivative.qPrime = equation119QPrime source
+  { q = qSource source
+  ; qPrime = equation119QPrime source
   }
 
 -- No function extensionality is required: the derivative selected by the R126

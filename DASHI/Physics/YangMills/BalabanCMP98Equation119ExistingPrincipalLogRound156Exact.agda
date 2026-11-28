@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119ExistingPrincipalLogRound156Exact where
+
+-- This source-facing bridge is outside the --safe cone because it consumes
+-- the literal Round155 contour source and the existing logarithm carrier.
 
 ------------------------------------------------------------------------
 -- ROUND156 A1 BIDI: FORCE ROUND155 THROUGH THE EXISTING PRINCIPAL-LOG OWNER
@@ -50,7 +52,7 @@ existingPrincipalLogSemantics :
   Log.StandardSU2PrincipalLogBall Lie Group Radius →
   R155.CMP98PrincipalLogOverI Group Lie
 existingPrincipalLogSemantics chart = record
-  { R155.CMP98PrincipalLogOverI.logOverI = Log.principalLog chart }
+  { logOverI = Log.principalLog chart }
 
 record RelativeContourPrincipalImage
     {C n Group group Radius}

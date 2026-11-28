@@ -2,48 +2,151 @@
   "completed_or_attempted": [
     {
       "action": "Removed all nonhistorical Agda imports of R275; moved the Ursell compiler dependency into the canonical donor and rewired R282/R286 directly through Gap.",
+      "blocking_for_migration": true,
       "id": "r275-ursell-compiler-extraction",
       "next_action": "repair or adjudicate the pre-existing safe-import boundary, then rerun affected-cone checks before deleting R275",
+      "scope": "historical-round-migration",
       "status": "rewired-verification-blocked",
       "target": "BalabanClayCanonicalBUrsellDonorBidiExact, BalabanClayCanonicalBFrontierRound282Exact, BalabanDirectCanonicalBCompletionRound286Exact",
       "verification": "sanctioned Agda check reached the dependency cone but was blocked by an existing unsafe import in the shared introspection/Ursell chain"
     },
     {
       "action": "Moved the R330 order-closure compatibility adapter into the existing Route-S canonical file and inlined the zero-fresh-B status coordinate into the direct-source frontier; removed nonhistorical R330 imports.",
+      "blocking_for_migration": true,
       "id": "r330-route-s-and-direct-source-rewire",
       "next_action": "keep the real-analysis authority explicit; rerun the affected cone only after a separately reviewed replacement or adjudication of that authority boundary",
+      "scope": "historical-round-migration",
       "status": "rewired-verification-blocked",
       "target": "YMClayRouteSSelectedLimitClosureExact, BalabanCanonicalBOSIndexedCompletionRound333Exact, YMClayDirectSourceOSMassGapFrontierExact",
       "verification": "walshSpectralIdentityRaw is constructive, the Boolean/trace/P2 safe boundary checks, and the Route-S target now reaches the intentional DASHI.Foundations.RealAnalysisAxioms postulate boundary"
     },
     {
       "action": "Replace walshSpectralIdentityRaw with the finite 16-variable rational-ring certificate and mark the module safe.",
+      "blocking_for_migration": false,
       "id": "walsh-spectral-identity",
       "next_action": "retain the proof receipt and continue safe-boundary repair at BalabanClayP2LargeFieldStepVExact",
+      "scope": "proof-cone-external",
       "status": "constructively-verified",
       "target": "BalabanBoolean4BlockPoincareExact",
       "verification": "sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import"
     },
     {
       "action": "Mark the postulate-free geometric trace and finite P2 certificate surfaces safe without promoting their conditional physical producer fields.",
+      "blocking_for_migration": false,
       "id": "trace-p2-safe-boundary",
       "next_action": "retain the explicit conditional ProofLevel fields and continue at the real-analysis authority boundary",
+      "scope": "proof-cone-external",
       "status": "constructively-verified",
       "target": "BalabanTraceKoteckyPreissGeometricExact, BalabanClayP2LargeFieldStepVExact",
       "verification": "sanctioned Colab Agda check passed through BalabanClayT2TraversalRootedShellExact"
+    },
+    {
+      "action": "Reproduced the Round77 same-H Gaussian/Ward compiler bundle in the canonical H6 recipient and removed H6's direct R77 import.",
+      "blocking_for_migration": true,
+      "id": "r77-h6-bundle-extraction",
+      "next_action": "keep the authority boundary explicit, then rewire the remaining historical R77 wrappers and verify the H6 cone after that boundary is separately reviewed",
+      "scope": "historical-round-migration",
+      "status": "rewired-verification-blocked",
+      "target": "YangMillsDirectSourceOSSameSystemH6Exact",
+      "verification": "Colab receipt /content/ym-r77-h6-repair-20261128.log: the moved bundle parses, then the sanctioned H6 check stops at the pre-existing unsafe YangMillsClayLiteralTopDownConstructionExact import in the safe cone"
+    },
+    {
+      "action": "Reproduced the Round78 top-down endpoint records and compiler in the canonical Route-S recipient and removed Route-S's direct R78 import.",
+      "blocking_for_migration": true,
+      "id": "r78-route-s-bundle-extraction",
+      "next_action": "rewire remaining historical R78 wrappers, then rerun the affected Route-S cone after the authority boundary is separately reviewed",
+      "scope": "historical-round-migration",
+      "status": "rewired-verification-blocked",
+      "target": "YMClayLiteralTopDownRouteSClosureExact",
+      "verification": "Colab receipt /content/ym-r78-pinned-route-repair-20261128-v2.log: the moved bundle parses, then the sanctioned Route-S cone reaches the pre-existing unsafe YangMillsClayProblemContractExact authority boundary"
+    },
+    {
+      "action": "Rewired the R270 mass-gap consumer to the canonical Route-S owner and removed the unused R77 import from the R87 analytic wrapper; no historical R77/R78 import remains in either file.",
+      "blocking_for_migration": true,
+      "id": "r270-r87-wrapper-rewire",
+      "next_action": "keep both authority/parser boundaries explicit, then continue with the next script-ranked historical wrappers",
+      "scope": "historical-round-migration",
+      "status": "rewired-verification-blocked",
+      "target": "BalabanClayCanonicalMassGapConsumerRound270Exact, BalabanClayHighestAlphaRound87FourAnalyticLemmaExact",
+      "verification": "current-source migration scan reports neither wrapper as a direct historical importer; R270 Colab receipt /content/ym-r270-wrapper-rewire-20261128-v2.log reaches the pre-existing unsafe IntrospectiveProofLoopExact boundary, while R87 reaches the pre-existing parser failure in BalabanTopDownSummableRGIncrementExact"
+    },
+    {
+      "action": "Rewired the remaining historical R468 and R439 bridge wrappers from the R77 source module to the canonical H6 recipient and exposed the preserved bridge-level status there.",
+      "blocking_for_migration": true,
+      "id": "r77-historical-wrapper-rewire",
+      "next_action": "repair or separately adjudicate those pre-existing boundaries before opening the R77 deletion gate",
+      "scope": "historical-round-migration",
+      "status": "rewired-verification-blocked",
+      "target": "YangMillsClayGoal1NontrivialityAttachmentRound468Exact, YangMillsClayGoal1SameHNontrivialityRound439Exact, YangMillsDirectSourceOSSameSystemH6Exact",
+      "verification": "bounded sanctioned local checks reached pre-existing boundaries: /home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check-20261128-202856-DASHI__Physics__YangMills__YangMillsClayGoal1NontrivialityAttachmentRound468Exact.agda.log stops at BalabanOSMassGapClosure parser syntax, and /home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check-20261128-202915-DASHI__Physics__YangMills__YangMillsClayGoal1SameHNontrivialityRound439Exact.agda.log stops at the unsafe TopDownConstruction import"
+    },
+    {
+      "action": "Repaired the CMP98 pointwise source cone: record-field qualification, lambda parsing, explicit recursive parameters, unequal-term construction, and false safe-boundary declarations were corrected without changing theorem statements.",
+      "blocking_for_migration": false,
+      "id": "cmp98-pointwise-repair-cone-v20",
+      "next_action": "use this clean cone as the baseline for the next script-ranked historical consumer; do not reopen these repairs unless a downstream check identifies a new dependency failure",
+      "scope": "proof-cone-external",
+      "status": "constructively-verified",
+      "target": "BalabanCMP98Equation119ExistingPrincipalLogRound156Exact and its transitive CMP98 pointwise cone",
+      "verification": "sanctioned Colab Agda 2.9.0 check on worker dashi-agda-worker-2 passed; only the pre-existing PatternShadowsConstructor warning remains (receipt: .dashi/round-stranded/ym-repair-pointwise-worker2-v20-20261129.log)"
+    },
+    {
+      "action": "Repair the next transitive CMP98/P33 pointwise cone failures found by the worker-2 Agda probe: false safe declarations, record-field parsing, rational/list imports, recursive Nat addition transport, and total-remainder equality orientation.",
+      "blocking_for_migration": false,
+      "id": "cmp98-pointwise-repair-cone-v53",
+      "next_action": "let the existing worker-2 job finish, download its wrapper receipt, then classify the next failure or promote the cone only on a clean result",
+      "scope": "proof-cone-external",
+      "status": "in-progress-colab-check",
+      "target": "BalabanCMP98Equation119PointwiseSemanticSelectedCutExact and the R170/R168/R164/P33 dependencies it exposes",
+      "verification": "worker-2 receipt /content/ym-repair-pointwise-worker2-v53-20261129.log is actively checking after the latest repairs; no clean result recorded yet"
     }
   ],
   "current_snapshot": {
+    "bookkeeping_context_rows": 475,
+    "candidate_live_declaration_uses": 12,
+    "candidate_metadata_live_declarations": 6,
+    "candidate_source_bearing_live_declarations": 6,
+    "current_source_plan_is_fresh": true,
     "deletion_authorized": false,
-    "direct_historical_import_edges": 1130,
-    "historical_files_on_disk": 1194,
-    "historical_modules_with_live_consumers": 687,
-    "ledger_context_repair_rows": 454,
-    "ledger_mapping_incomplete_rows": 676,
-    "live_consumers": 248,
+    "direct_historical_import_edges": 1059,
+    "external_proof_cone_item_count": 4,
+    "historical_files_on_disk": 860,
+    "historical_modules_with_live_consumers": 594,
+    "ledger_context_repair_rows": 391,
+    "ledger_mapping_incomplete_rows": 668,
+    "live_consumers": 241,
     "live_declaration_uses": 12,
     "live_module_context_cases": 773,
+    "mapping_incomplete_import_edges": 668,
+    "mapping_incomplete_unique_declarations": 1006,
+    "migration_queue_counts": {
+      "bookkeeping-context": 475,
+      "mechanical-repair": 391,
+      "migration": 193,
+      "migration-ready": 0,
+      "proof-cone-external": 0
+    },
     "no_live_consumer_cases": 646,
+    "recipient_review_bundles": 3,
+    "reconciliation_action_counts": {
+      "bookkeeping-context": 475,
+      "confirmed-bundle-migration": 6,
+      "context-probe-required": 391,
+      "metadata-status-use": 6,
+      "shared-bundle-migration": 154
+    },
+    "reconciliation_declaration_action_counts": {
+      "metadata-status-use": 100,
+      "shared-structural-bundle": 419,
+      "unresolved-semantic-mapping": 1352
+    },
+    "reconciliation_unique_declaration_action_counts": {
+      "metadata-status-use": 85,
+      "shared-structural-bundle": 149,
+      "unresolved-semantic-mapping": 772
+    },
+    "shared_structural_bundles": 3,
+    "shared_structural_declarations": 4,
     "source_bearing_declarations": 6,
     "source_bundles": 4
   },
@@ -71,36 +174,56 @@
   "purpose": "YM historical Round to canonical Clay migration roadmap",
   "remaining_steps": [
     {
-      "action": "inline or reproduce each bundle in its existing semantic Clay recipient",
+      "action": "retain receipts and resolve independently; do not count these as historical-R migration rows",
+      "id": "external-proof-cones",
+      "scope": "canonical YM/NS proof obligations encountered while checking migration consumers",
+      "status": "nonblocking"
+    },
+    {
+      "action": "finish consumer rewiring and close the verification/deletion gates for the extracted bundles",
       "evidence": ".dashi/round-stranded/ym-live-bundle-plan.json",
       "id": "extract-four-live-bundles",
-      "scope": "4 bundles / 6 source-bearing declarations",
-      "status": "ready-for-repair"
+      "scope": "4 bundles / 6 source-bearing declarations; semantic actions complete, verification/deletion gates remain",
+      "status": "semantic-actions-complete-verification-blocked"
+    },
+    {
+      "action": "select an existing non-Round owner only after import-cycle and dependent-projection analysis; preserve status surfaces without theorem remapping",
+      "evidence": ".dashi/round-stranded/ym-live-bundle-plan.json",
+      "id": "resolve-shared-structural-bundles",
+      "scope": "3 shared structural bundles / 4 declarations; includes the three former semantic-mapping rows",
+      "status": "recipient-review-required"
     },
     {
       "action": "replace historical references and imports while preserving local type/import closure",
       "evidence": ".dashi/round-stranded/ym-migration-plan.json",
       "id": "rewire-live-consumers",
       "scope": "live consumers of historical declarations and imports",
-      "status": "blocked-on-bundle-repair"
+      "status": "semantic-actions-complete-verification-blocked"
     },
     {
-      "action": "run the sanctioned Agda entrypoint and retain receipts",
+      "action": "run the sanctioned Agda entrypoint and retain receipts; classify unrelated canonical failures as external",
       "command": "DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh <target>",
       "id": "verify-affected-cones",
-      "scope": "each repaired consumer cone",
-      "status": "blocked-on-explicit-real-analysis-authority"
+      "scope": "each repaired historical consumer cone",
+      "status": "migration-gated-by-linked-cones"
     },
     {
       "action": "rescan implicit, instance, module, and operator dependencies; remove only verified unused imports",
       "evidence": ".dashi/round-stranded/ym-context-audit.json",
       "id": "reclassify-context-cases",
       "scope": "773 module-context cases",
-      "status": "automatable-after-rewiring"
+      "status": "automatable"
     },
     {
-      "action": "confirm zero importers, zero reverse consumers, and verified replacement before deletion",
-      "evidence": ".dashi/round-stranded/ym-consolidation-ledger.json",
+      "action": "consume the existing JSON reports and separate migration-ready, mechanical-repair, and external proof-cone queues",
+      "evidence": ".dashi/round-stranded/ym-migration-reconciliation.json",
+      "id": "reconcile-generated-actions",
+      "scope": "all migration-plan and context-audit rows",
+      "status": "complete"
+    },
+    {
+      "action": "confirm zero current source importers, zero reverse consumers, and verified replacement before deletion",
+      "evidence": ".dashi/round-stranded/ym-migration-plan.json plus a fresh source scan",
       "id": "open-deletion-gates",
       "scope": "646 no-live-consumer cases",
       "status": "automatable-after-rewiring"

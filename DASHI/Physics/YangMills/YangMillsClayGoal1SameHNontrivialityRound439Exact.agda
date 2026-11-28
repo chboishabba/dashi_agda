@@ -25,7 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as R78
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact as R77
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact as R77
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as Local
 
@@ -107,12 +107,12 @@ deriveInteracting :
   Five.ContinuumLocalFieldOPEStressWard Y →
   Five.InteractingContinuumNontriviality Y
 deriveInteracting bridge gap local = record
-  { Five.InteractingContinuumNontriviality.nontrivialQuantumYangMills =
+  { nontrivialQuantumYangMills =
       λ group →
         interactingWitnessIsLiteralNontrivial bridge
           gap local group
           (interactingWitness bridge gap local group)
-  ; Five.InteractingContinuumNontriviality.nontrivialityPreservedInLimit =
+  ; nontrivialityPreservedInLimit =
       λ group →
         interactingWitnessPreservedInLiteralLimit bridge
           gap local group
@@ -126,7 +126,7 @@ asRound78StandardSameHConsequence :
     ContinuumFamily Observable Point Scalar →
   R78.StandardSameHGaussianNontrivialityConsequence Y
 asRound78StandardSameHConsequence bridge = record
-  { R78.StandardSameHGaussianNontrivialityConsequence.deriveInteracting =
+  { deriveInteracting =
       deriveInteracting bridge
   }
 

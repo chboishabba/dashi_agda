@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This source-facing differential bridge imports conditional SU2 dexp data
+-- and is intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanCMP98Equation119DifferentialDexpRound159Exact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -46,19 +47,19 @@ dexpMinusAfterJminus calculus y = Dexp.dexpAfterDerivativeLog (differential calc
 
 asLeftRightAtY : ∀ {Lie} → UniformAdjointDifferentialCalculus Lie → Lie → LR.LeftRightDexpCancellationData Lie
 asLeftRightAtY calculus y = record
-  { LR.LeftRightDexpCancellationData.dexpPlus = dexpPlusAt calculus y
-  ; LR.LeftRightDexpCancellationData.dexpMinus = dexpMinusAt calculus y
-  ; LR.LeftRightDexpCancellationData.Jplus = jPlusAt calculus y
-  ; LR.LeftRightDexpCancellationData.Jminus = jMinusAt calculus y
-  ; LR.LeftRightDexpCancellationData.adjointExp = adjointExp calculus y
-  ; LR.LeftRightDexpCancellationData.plusIsAdjointOfMinus = λ vector → refl
-  ; LR.LeftRightDexpCancellationData.JplusAfterDexpPlus = jPlusAfterDexpPlus calculus y
-  ; LR.LeftRightDexpCancellationData.dexpMinusAfterJminus = dexpMinusAfterJminus calculus y
+  { dexpPlus = dexpPlusAt calculus y
+  ; dexpMinus = dexpMinusAt calculus y
+  ; Jplus = jPlusAt calculus y
+  ; Jminus = jMinusAt calculus y
+  ; adjointExp = adjointExp calculus y
+  ; plusIsAdjointOfMinus = λ vector → refl
+  ; JplusAfterDexpPlus = jPlusAfterDexpPlus calculus y
+  ; dexpMinusAfterJminus = dexpMinusAfterJminus calculus y
   }
 
 asUniformLeftRightDexpFamily : ∀ {Lie} → UniformAdjointDifferentialCalculus Lie → R154.UniformLeftRightDexpFamily Lie
 asUniformLeftRightDexpFamily calculus = record
-  { R154.UniformLeftRightDexpFamily.atY = asLeftRightAtY calculus }
+  { atY = asLeftRightAtY calculus }
 
 uniformJminusIsExistingDlog : ∀ {Lie} (calculus : UniformAdjointDifferentialCalculus Lie) y vector →
   LR.Jminus (R154.atY (asUniformLeftRightDexpFamily calculus) y) vector

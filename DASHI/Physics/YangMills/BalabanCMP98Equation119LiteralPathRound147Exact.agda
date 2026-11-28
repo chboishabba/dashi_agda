@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact where
+
+-- This source-facing bridge is outside the --safe cone because it imports the
+-- literal periodic translation carrier from Round150.
 
 ------------------------------------------------------------------------
 -- ROUND147 A1 BIDI MEETING POINT: ACTUAL CMP98 EQ. (119) PATH REALIZATION
@@ -156,15 +158,15 @@ translatedGeometryAt :
   LiteralEquation119PathData C n Value group →
   Nat → R150.TranslatedNeighbourBlockSegment n 6
 translatedGeometryAt dataSet step = record
-  { R150.TranslatedNeighbourBlockSegment.commutation =
+  { commutation =
       translationCommutation dataSet
-  ; R150.TranslatedNeighbourBlockSegment.minusEmbedding =
+  ; minusEmbedding =
       minusEmbedding dataSet step
-  ; R150.TranslatedNeighbourBlockSegment.plusEmbedding =
+  ; plusEmbedding =
       plusEmbedding dataSet step
-  ; R150.TranslatedNeighbourBlockSegment.coarseSegment =
+  ; coarseSegment =
       coarseSegment dataSet step
-  ; R150.TranslatedNeighbourBlockSegment.plusCentreIsCoarseSegment =
+  ; plusCentreIsCoarseSegment =
       coarseSegmentEndsAtPlusCentre dataSet step
   }
 
@@ -190,7 +192,7 @@ r0Path :
   Nat → R126.Vector (R146.additive C) →
   Blocks.PeriodicBlock n → List Word.SignedAxis4 →
   R126.Vector (R146.additive C)
-r0Path dataSet step A site [] = R126.zeroV (R146.additive _)
+r0Path {C} dataSet step A site [] = R126.zeroV (R146.additive C)
 r0Path {C} dataSet step A site (direction ∷ directions) =
   R126.addV (R146.additive C)
     (bondComponent dataSet step A site direction)
@@ -302,7 +304,7 @@ pointTerm :
 pointTerm {C} dataSet step A point =
   scaleV dataSet siteWeightℚ
     (inverseDexpMinusAt dataSet step point
-      (R146.subV
+      (R146.subV {C = C}
         (r0Path dataSet step A
           (Embed.embeddingCentre (minusEmbedding dataSet step))
           (minusToCrossingWord dataSet step point))
@@ -326,8 +328,8 @@ literalBlockContribution :
   LiteralEquation119PathData C n Value group →
   Nat → R126.Vector (R146.additive C) →
   R126.Vector (R146.additive C)
-literalBlockContribution dataSet step A =
-  R146.sumV
+literalBlockContribution {C} dataSet step A =
+  R146.sumV {C = C}
     (pointTerms dataSet step A
       (Carrier.elements (Centered.centeredBlockFinite 6)))
 
@@ -352,8 +354,8 @@ asLiteralOneStepAveragingDerivative :
   LiteralEquation119PathData C n Value group →
   R126.OneStepAveragingDerivative (R146.additive C)
 asLiteralOneStepAveragingDerivative dataSet = record
-  { R126.OneStepAveragingDerivative.q = qSource dataSet
-  ; R126.OneStepAveragingDerivative.qPrime = literalEquation119QPrime dataSet
+  { q = qSource dataSet
+  ; qPrime = literalEquation119QPrime dataSet
   }
 
 literalOneStepDerivativeIsConstructedEquation119 :

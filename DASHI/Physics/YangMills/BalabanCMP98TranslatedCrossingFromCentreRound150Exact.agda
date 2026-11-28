@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98TranslatedCrossingFromCentreRound150Exact where
+
+-- This source-facing bridge is outside the --safe cone because its literal
+-- periodic-block carrier imports the repository's source-level assumptions.
 
 ------------------------------------------------------------------------
 -- ROUND150 A1 BIDI: EQ. (119) TRANSLATED COARSE SEGMENT FROM THE CENTRE

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Audit Agda context supplied by textually-unused historical imports.
+"""Audit Agda context supplied by historical imports.
 
 This is a repair triage tool, not a proof of removability.  It follows the
 existing import graph and flags source/transitive features that can affect
-scope or elaboration even when no declaration name is visibly referenced.
+scope or elaboration.  Every current historical import edge is emitted so the
+batch probe can test even apparently-used imports for redundant re-exports.
 """
 
 from __future__ import annotations
@@ -63,8 +64,6 @@ def build_audit(repo_root: Path, ledger: dict, plan: dict) -> dict:
 
     rows = []
     for item in plan["rows"]:
-        if item["status"] != "unused-import-remove-or-recheck":
-            continue
         source = item["historical_module"]
         transitive = closure(source)
         direct_features = feature_cache.setdefault(
@@ -75,6 +74,8 @@ def build_audit(repo_root: Path, ledger: dict, plan: dict) -> dict:
             for feature in feature_names(records[module].path)
         })
         reasons = []
+        if item.get("used_names"):
+            reasons.append("textual-declaration-use")
         if item.get("import_alias"):
             reasons.append("qualified-alias-context")
         if direct_features:
@@ -92,6 +93,8 @@ def build_audit(repo_root: Path, ledger: dict, plan: dict) -> dict:
             "transitive_features": transitive_features,
             "transitive_module_count": len(transitive),
             "repair_reasons": reasons,
+            "plan_status": item.get("status"),
+            "used_names": item.get("used_names", []),
             "status": "requires-Agda-probe",
             "verification_command": "DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh " + item["consumer_path"],
         })
@@ -101,12 +104,12 @@ def build_audit(repo_root: Path, ledger: dict, plan: dict) -> dict:
             counts[reason] += 1
     return {
         "schema_version": 1,
-        "purpose": "Agda-level context repair triage for textually-unused historical imports",
+        "purpose": "Agda-level repair triage for every current historical import edge",
         "candidate_count": len(rows),
         "reason_counts": dict(sorted(counts.items())),
         "rows": rows,
         "deletion_authorized": False,
-        "policy": "feature detection narrows probes but never authorizes removal; only a sanctioned Agda probe can do that",
+        "policy": "all current historical import edges are probe candidates; feature detection narrows risk but never authorizes removal; only a sanctioned Agda probe can do that",
     }
 
 

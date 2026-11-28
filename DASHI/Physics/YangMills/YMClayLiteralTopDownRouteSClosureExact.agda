@@ -3,16 +3,89 @@ module DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as R78
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact as Stress
 import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as Local
 import DASHI.Physics.YangMills.YMClayRouteSToLiteralYGapAttachmentExact as GapAttach
+
+------------------------------------------------------------------------
+-- The Round78 top-down compiler bundle now lives in its canonical Route-S
+-- recipient.  This preserves the historical theorem types while removing
+-- the live dependency on the numbered wrapper.
+-- Historical source: BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.
+------------------------------------------------------------------------
+
+record UVToContinuumYM
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (Y : Top.LiteralYangMillsConstruction C S) : Set₁ where
+  field
+    weakCouplingRG : Five.LiteralWeakCouplingRGConstruction Y
+    continuumYM : Five.UnifiedContinuumYMConstruction Y
+open UVToContinuumYM public
+
+record SameHamiltonianPhysicalMassGap
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (Y : Top.LiteralYangMillsConstruction C S) : Set₁ where
+  field
+    physicalGap : Five.CutoffUniformPhysicalMassGap Y
+open SameHamiltonianPhysicalMassGap public
+
+record SameFamilyLocalFieldsOPEStressWard
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (Y : Top.LiteralYangMillsConstruction C S) : Set₁ where
+  field
+    localFields : Five.ContinuumLocalFieldOPEStressWard Y
+open SameFamilyLocalFieldsOPEStressWard public
+
+record StandardSameHGaussianNontrivialityConsequence
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (Y : Top.LiteralYangMillsConstruction C S) : Set₁ where
+  field
+    deriveInteracting :
+      Five.CutoffUniformPhysicalMassGap Y →
+      Five.ContinuumLocalFieldOPEStressWard Y →
+      Five.InteractingContinuumNontriviality Y
+open StandardSameHGaussianNontrivialityConsequence public
+
+literalClaySolutionFromTopDownThree :
+  ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
+  Five.LiteralClayStructuralBase Y →
+  UVToContinuumYM Y →
+  SameHamiltonianPhysicalMassGap Y →
+  SameFamilyLocalFieldsOPEStressWard Y →
+  StandardSameHGaussianNontrivialityConsequence Y →
+  Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
+literalClaySolutionFromTopDownThree Y structural uv gap local standard =
+  Five.literalClaySolutionFromFiveTheorems
+    Y
+    structural
+    (weakCouplingRG uv)
+    (physicalGap gap)
+    (continuumYM uv)
+    (localFields local)
+    (deriveInteracting standard (physicalGap gap) (localFields local))
+
+round78IndependentClayAnalyticEndpointCount : Nat
+round78IndependentClayAnalyticEndpointCount = 3
+
+round78TopDownCompilerLevel : ProofLevel
+round78TopDownCompilerLevel = machineChecked
+
+round78PhysicalThreeTheoremInstantiationLevel : ProofLevel
+round78PhysicalThreeTheoremInstantiationLevel = conditional
+
+round78StandardSameHNontrivialityConsequenceLevel : ProofLevel
+round78StandardSameHNontrivialityConsequenceLevel = standardImported
 
 ------------------------------------------------------------------------
 -- LITERAL CLAY TOP-DOWN CLOSURE THROUGH THE VERIFIED ROUTE-S MIN-CUT
@@ -60,9 +133,9 @@ open RouteSLiteralMassGapIntegration public
 routeSIntegrationBuildsRound78B :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
   RouteSLiteralMassGapIntegration Y →
-  R78.SameHamiltonianPhysicalMassGap Y
+  SameHamiltonianPhysicalMassGap Y
 routeSIntegrationBuildsRound78B integration = record
-  { R78.SameHamiltonianPhysicalMassGap.physicalGap =
+  { physicalGap =
       literalPhysicalGap integration
   }
 
@@ -74,20 +147,20 @@ routeSIntegrationBuildsRound78B integration = record
 
 round78CBuildsLiteralStressOPEEvidence :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
-  R78.SameFamilyLocalFieldsOPEStressWard Y →
+  SameFamilyLocalFieldsOPEStressWard Y →
   Stress.LiteralClayStressOPEEvidence Y
 round78CBuildsLiteralStressOPEEvidence local = record
-  { Stress.LiteralClayStressOPEEvidence.stressAndOPE =
-      Five.stressTensorAndOPE (R78.localFields local)
-  ; Stress.LiteralClayStressOPEEvidence.physicalOPECoefficient =
-      Five.physicalOPECoefficient (R78.localFields local)
-  ; Stress.LiteralClayStressOPEEvidence.physicalOPERemainder =
-      Five.physicalOPERemainder (R78.localFields local)
+  { stressAndOPE =
+      Five.stressTensorAndOPE (localFields local)
+  ; physicalOPECoefficient =
+      Five.physicalOPECoefficient (localFields local)
+  ; physicalOPERemainder =
+      Five.physicalOPERemainder (localFields local)
   }
 
 round78CBuildsLiteralStressOPEPostcondition :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
-  R78.SameFamilyLocalFieldsOPEStressWard Y →
+  SameFamilyLocalFieldsOPEStressWard Y →
   Top.postconditionRequirement Y Clay.stressTensorAndOperatorProductExpansion
 round78CBuildsLiteralStressOPEPostcondition {Y = Y} local =
   Stress.literalStressOPEEvidenceIsClayPostcondition
@@ -103,13 +176,13 @@ round78CBuildsLiteralStressOPEPostcondition {Y = Y} local =
 literalClaySolutionFromRouteS :
   ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
   Five.LiteralClayStructuralBase Y →
-  R78.UVToContinuumYM Y →
+  UVToContinuumYM Y →
   RouteSLiteralMassGapIntegration Y →
-  R78.SameFamilyLocalFieldsOPEStressWard Y →
-  R78.StandardSameHGaussianNontrivialityConsequence Y →
+  SameFamilyLocalFieldsOPEStressWard Y →
+  StandardSameHGaussianNontrivialityConsequence Y →
   Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
 literalClaySolutionFromRouteS Y structural uv routeS local standard =
-  R78.literalClaySolutionFromTopDownThree
+  literalClaySolutionFromTopDownThree
     Y structural uv
     (routeSIntegrationBuildsRound78B routeS)
     local standard
@@ -126,10 +199,10 @@ literalClaySolutionFromRouteS Y structural uv routeS local standard =
 literalClaySolutionFromRouteSAndLiteralLocalFields :
   ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
   Five.LiteralClayStructuralBase Y →
-  R78.UVToContinuumYM Y →
+  UVToContinuumYM Y →
   RouteSLiteralMassGapIntegration Y →
   Local.LiteralLocalFieldClosureInputs Y →
-  R78.StandardSameHGaussianNontrivialityConsequence Y →
+  StandardSameHGaussianNontrivialityConsequence Y →
   Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
 literalClaySolutionFromRouteSAndLiteralLocalFields
     Y structural uv routeS local standard =
@@ -164,9 +237,9 @@ certificateIntegrationAsLegacy :
   RouteSLiteralMassGapCertificateIntegration Y →
   RouteSLiteralMassGapIntegration Y
 certificateIntegrationAsLegacy integration = record
-  { RouteSLiteralMassGapIntegration.routeSPhysicalInputs =
+  { routeSPhysicalInputs =
       RouteSLiteralMassGapCertificateIntegration.routeSPhysicalInputs integration
-  ; RouteSLiteralMassGapIntegration.literalPhysicalGap =
+  ; literalPhysicalGap =
       GapAttach.routeSPhysicalGapBuildsLiteralYGap
         (physicalGapAttachment integration)
   }
@@ -174,10 +247,10 @@ certificateIntegrationAsLegacy integration = record
 literalClaySolutionFromRouteSCertificateAndLiteralLocalFields :
   ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
   Five.LiteralClayStructuralBase Y →
-  R78.UVToContinuumYM Y →
+  UVToContinuumYM Y →
   RouteSLiteralMassGapCertificateIntegration Y →
   Local.LiteralLocalFieldClosureInputs Y →
-  R78.StandardSameHGaussianNontrivialityConsequence Y →
+  StandardSameHGaussianNontrivialityConsequence Y →
   Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
 literalClaySolutionFromRouteSCertificateAndLiteralLocalFields
     Y structural uv routeS local standard =

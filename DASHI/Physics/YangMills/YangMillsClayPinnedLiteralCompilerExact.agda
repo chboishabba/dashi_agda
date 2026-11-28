@@ -13,7 +13,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as T78
+import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as T78
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as Pinned
 
 record PinnedInteractingContinuum

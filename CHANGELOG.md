@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-28 — YM historical Round migration reconciliation
+
+- Documented the generated reconciliation layer that consumes the existing
+  migration, candidate, bundle, context-audit, and probe JSON reports.
+- Separated semantic declaration mapping from import-context repair batches;
+  batch application remains explicit, source-hash checked, and fail-closed on
+  deletion.
+
 ## 2026-09-11 — Yang–Mills Path-13 elaboration profiling and RingSolver analysis
 
 - Completed directional energy contraction profiling (`ym-path13-directional`)

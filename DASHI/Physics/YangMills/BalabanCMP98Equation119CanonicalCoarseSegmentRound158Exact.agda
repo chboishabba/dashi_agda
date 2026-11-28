@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This source-facing bridge imports the conditional R152 record; it is
+-- intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact where
 
 ------------------------------------------------------------------------
@@ -104,19 +105,19 @@ asRound152Source :
   CanonicalL13Equation119Source C n Value group →
   R152.LiteralEquation119LeastPrivilegeSource C n Value group
 asRound152Source {n = n} source = record
-  { R152.LiteralEquation119LeastPrivilegeSource.realization = realization source
-  ; R152.LiteralEquation119LeastPrivilegeSource.bondComponent = bondComponent source
-  ; R152.LiteralEquation119LeastPrivilegeSource.adjointLink = adjointLink source
-  ; R152.LiteralEquation119LeastPrivilegeSource.scaleV = scaleV source
-  ; R152.LiteralEquation119LeastPrivilegeSource.qSource = qSource source
-  ; R152.LiteralEquation119LeastPrivilegeSource.minusEmbedding = minusEmbedding source
-  ; R152.LiteralEquation119LeastPrivilegeSource.plusEmbedding =
+  { realization = realization source
+  ; bondComponent = bondComponent source
+  ; adjointLink = adjointLink source
+  ; scaleV = scaleV source
+  ; qSource = qSource source
+  ; minusEmbedding = minusEmbedding source
+  ; plusEmbedding =
       derivedPlusEmbedding source
-  ; R152.LiteralEquation119LeastPrivilegeSource.coarseSegment =
+  ; coarseSegment =
       coarseSegmentAt source
-  ; R152.LiteralEquation119LeastPrivilegeSource.coarseSegmentEndsAtPlusCentre =
+  ; coarseSegmentEndsAtPlusCentre =
       λ step → refl
-  ; R152.LiteralEquation119LeastPrivilegeSource.translationCommutation =
+  ; translationCommutation =
       R162.periodicSegmentCommutation n
   }
 

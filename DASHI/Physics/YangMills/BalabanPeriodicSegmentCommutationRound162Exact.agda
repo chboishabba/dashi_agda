@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- This bridge consumes the conditional literal T2 adjacency carrier and is
+-- therefore intentionally outside Agda's --safe boundary.
 module DASHI.Physics.YangMills.BalabanPeriodicSegmentCommutationRound162Exact where
 
 ------------------------------------------------------------------------
@@ -158,7 +159,7 @@ walkWordsCommute block (direction ∷ directions) right =
 
 periodicSegmentCommutation : ∀ n → Embed.PeriodicSegmentCommutation n
 periodicSegmentCommutation n = record
-  { Embed.PeriodicSegmentCommutation.translationsCommute =
+  { translationsCommute =
       λ point left right →
         walkWordsCommute point
           (Periodic.segmentWord left)

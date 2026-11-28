@@ -33,9 +33,21 @@ module DASHI.Physics.Closure.NSTriadKNLuoUniformCommutatorTaxRound27Exact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import DASHI.Data.RationalExact using (ℚ; oneQ; _*_)
+import Data.Integer.Base as Int
+open import Relation.Binary.PropositionalEquality using (trans; cong)
+open import Data.Rational.Tactic.RingSolver using ()
+open import Data.Rational.Tactic.RingSolver renaming (solve to ringSolve)
+open import Data.Rational.Properties using (*-identityˡ)
+open import DASHI.Core.Q using (ℚ; oneℚ; zeroℚ; _+_; _*_; _/_)
+
+oneQ : ℚ
+oneQ = oneℚ
+
+zeroQ : ℚ
+zeroQ = zeroℚ
 
 record DyadicCommutatorTaxCell : Set where
+  constructor dyadic-commutator-tax-cell
   field
     inverseScale : ℚ
     directScale : ℚ
@@ -44,6 +56,7 @@ record DyadicCommutatorTaxCell : Set where
     motherFirstMoment : ℚ
     lowGradientMagnitude : ℚ
     motherHighGradientMagnitude : ℚ
+    testedShellMagnitude : ℚ
 
 open DyadicCommutatorTaxCell public
 
@@ -57,10 +70,12 @@ shellHighGradientMagnitude cell =
 
 shellCommutatorTax : DyadicCommutatorTaxCell → ℚ
 shellCommutatorTax cell =
-  shellFirstMoment cell
-  * lowGradientMagnitude cell
-  * shellHighGradientMagnitude cell
-  * testedShellMagnitude cell
+  inverseScale cell
+  * directScale cell
+  * (motherFirstMoment cell
+     * lowGradientMagnitude cell
+     * motherHighGradientMagnitude cell
+     * testedShellMagnitude cell)
 
 motherCommutatorTax : DyadicCommutatorTaxCell → ℚ
 motherCommutatorTax cell =
@@ -69,34 +84,30 @@ motherCommutatorTax cell =
   * motherHighGradientMagnitude cell
   * testedShellMagnitude cell
 
+scaleCancellation :
+  (a b tail : ℚ) →
+  a * b ≡ oneQ →
+  (a * b) * tail ≡ tail
+scaleCancellation a b tail scaleLaw =
+  trans
+    (cong (λ scaleProduct → scaleProduct * tail) scaleLaw)
+    unit
+  where
+  unit : oneQ * tail ≡ tail
+  unit = *-identityˡ tail
+
 cutoffIndependentCommutatorCellCoefficient :
   (cell : DyadicCommutatorTaxCell) →
   shellCommutatorTax cell ≡ motherCommutatorTax cell
 cutoffIndependentCommutatorCellCoefficient cell =
-  trans
-    (solve
-      ( inverseScale cell
-      ∷ directScale cell
-      ∷ motherFirstMoment cell
-      ∷ lowGradientMagnitude cell
-      ∷ motherHighGradientMagnitude cell
-      ∷ testedShellMagnitude cell
-      ∷ []))
-    (trans
-      (cong
-        (λ scaleProduct →
-          scaleProduct
-          * (motherFirstMoment cell
-            * lowGradientMagnitude cell
-            * motherHighGradientMagnitude cell
-            * testedShellMagnitude cell))
-        (inverseDirectExact cell))
-      (solve
-        ( motherFirstMoment cell
-        ∷ lowGradientMagnitude cell
-        ∷ motherHighGradientMagnitude cell
-        ∷ testedShellMagnitude cell
-        ∷ [])))
+  scaleCancellation
+    (inverseScale cell)
+    (directScale cell)
+    (motherFirstMoment cell
+     * lowGradientMagnitude cell
+     * motherHighGradientMagnitude cell
+     * testedShellMagnitude cell)
+    (inverseDirectExact cell)
 
 sumShellCommutatorTax : List DyadicCommutatorTaxCell → ℚ
 sumShellCommutatorTax [] = zeroQ
@@ -127,13 +138,27 @@ open DyadicScalePair public
 unitScalePair : DyadicScalePair
 unitScalePair = dyadic-scale-pair oneQ oneQ refl
 
+halfInverse halfDirect : ℚ
+halfInverse = Int.+ 1 / 2
+halfDirect = Int.+ 2 / 1
+
+quarterInverse quarterDirect : ℚ
+quarterInverse = Int.+ 1 / 4
+quarterDirect = Int.+ 4 / 1
+
+halfScaleLaw : halfInverse * halfDirect ≡ oneQ
+halfScaleLaw = refl
+
+quarterScaleLaw : quarterInverse * quarterDirect ≡ oneQ
+quarterScaleLaw = refl
+
 halfDoubleScalePair : DyadicScalePair
 halfDoubleScalePair =
-  dyadic-scale-pair (Int.+ 1 / 2) (Int.+ 2 / 1) (solve [])
+  dyadic-scale-pair halfInverse halfDirect halfScaleLaw
 
 quarterFourScalePair : DyadicScalePair
 quarterFourScalePair =
-  dyadic-scale-pair (Int.+ 1 / 4) (Int.+ 4 / 1) (solve [])
+  dyadic-scale-pair quarterInverse quarterDirect quarterScaleLaw
 
 cellAtScale :
   DyadicScalePair → ℚ → ℚ → ℚ → ℚ → DyadicCommutatorTaxCell

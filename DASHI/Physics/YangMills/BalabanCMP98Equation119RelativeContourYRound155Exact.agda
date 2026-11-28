@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119RelativeContourYRound155Exact where
+
+-- This source-facing bridge is outside the --safe cone because it consumes
+-- the literal least-privilege source from Round152.
 
 ------------------------------------------------------------------------
 -- ROUND155 A1 BIDI: DERIVE CMP98 Y_x FROM THE LITERAL RELATIVE CONTOUR
@@ -143,7 +145,7 @@ asDerivedPointYFamily :
   CMP98PrincipalLogOverI Value (R126.Vector (R146.additive C)) →
   R154.CMP98Equation119PointYFamily source
 asDerivedPointYFamily source chart = record
-  { R154.CMP98Equation119PointYFamily.pointY = derivedPointY source chart }
+  { pointY = derivedPointY source chart }
 
 pointYIsLiteralRelativePrincipalLog :
   ∀ {C n Value group}

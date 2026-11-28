@@ -91,12 +91,66 @@ SEMANTIC_ACTIONS: dict[tuple[str, str], dict[str, str]] = {
 }
 
 
+# These are not theorem mappings.  They are shared interfaces that several
+# live consumers import from a historical Round module.  Keep them in the
+# bundle plan so the migration queue cannot mistake a structural interface for
+# three independent missing proofs.  Recipient selection remains fail-closed:
+# the candidates are evidence for review, not authorization to rewrite.
+SHARED_STRUCTURAL_BUNDLES: tuple[dict[str, Any], ...] = (
+    {
+        "historical_module": "DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact",
+        "declarations": (
+            "unifiedPresentCutSchwingerRecoveryCompilerLevel",
+            "literalUnifiedPresentCutSchwingerRecoveryLevel",
+        ),
+        "source_kind": "metadata-status-surface",
+        "migration_action": "preserve-status-surface",
+        "recipient_status": "status-owner-review-required",
+        "owner_candidates": (
+            "DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact",
+            "DASHI.Core.SourceExactFrontierBidiCrossPollination2026",
+        ),
+        "owner_note": "Both values are ProofLevel routing metadata used by multiple live surfaces; do not duplicate or reinterpret them as theorem identities.",
+    },
+    {
+        "historical_module": "DASHI.Physics.YangMills.BalabanBetaDrivenCMP119ResidualFamilyRound219Exact",
+        "declarations": ("BetaDrivenCMP119ResidualFamily",),
+        "source_kind": "shared-structural-record",
+        "migration_action": "extract-shared-record-bundle",
+        "recipient_status": "recipient-review-required",
+        "owner_candidates": (
+            "DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact",
+            "DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact",
+        ),
+        "owner_note": "The record is a shared type-level carrier with a nontrivial import closure; choose an existing non-Round owner only after checking for import cycles and preserving all dependent projections.",
+    },
+    {
+        "historical_module": "DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact",
+        "declarations": ("FiniteVolumeReopeningPresentation",),
+        "source_kind": "shared-structural-record",
+        "migration_action": "extract-shared-record-bundle",
+        "recipient_status": "recipient-review-required",
+        "owner_candidates": (
+            "DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact",
+            "DASHI.Physics.YangMills.BalabanFiniteVolumeCanonicalGate4PresentationExact",
+        ),
+        "owner_note": "The record welds the preferred T5 law to the finite-RG reopening step and is imported by multiple lanes; verify the owner can absorb Gram/T5/Preferred dependencies without a cycle.",
+    },
+)
+
+
 def declaration_lines(path: Path, names: set[str]) -> dict[str, int]:
     result = {}
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         match = re.match(r"^[ \t]*([A-Za-z][A-Za-z0-9_']*)[ \t]*:", line)
-        if match and match.group(1) in names:
-            result[match.group(1)] = number
+        record_match = re.match(
+            r"^[ \t]*record[ \t]+([A-Za-z][A-Za-z0-9_']*)\b", line
+        )
+        name = match.group(1) if match else (
+            record_match.group(1) if record_match else None
+        )
+        if name in names:
+            result[name] = number
     return result
 
 
@@ -107,6 +161,94 @@ def imports(path: Path) -> list[str]:
         if match:
             result.append(match.group(1))
     return sorted(set(result))
+
+
+def _shared_structural_bundles(repo_root: Path, migration_plan: dict[str, Any]) -> list[dict[str, Any]]:
+    """Materialize fixed structural classifications with live importer evidence."""
+    rows_by_module: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in migration_plan.get("rows", []):
+        rows_by_module[row.get("historical_module", "")].append(row)
+
+    bundles = []
+    for spec in SHARED_STRUCTURAL_BUNDLES:
+        module = spec["historical_module"]
+        source_path = repo_root / Path(*module.split(".")).with_suffix(".agda")
+        names = set(spec["declarations"])
+        lines = declaration_lines(source_path, names) if source_path.is_file() else {}
+        importer_rows = [
+            row for row in rows_by_module.get(module, [])
+            if row.get("status") in {"mapping-incomplete", "unused-import-remove-or-recheck"}
+        ]
+        consumers = sorted({row["consumer"] for row in importer_rows})
+        direct_importers = sorted({
+            row["consumer"] for row in importer_rows
+            if row.get("import_alias")
+        })
+        declarations = []
+        for name in spec["declarations"]:
+            used_rows = [row for row in importer_rows if name in row.get("used_names", [])]
+            declarations.append({
+                "name": name,
+                "source_line": lines.get(name),
+                "source_kind": spec["source_kind"],
+                "consumers": sorted({row["consumer"] for row in used_rows}),
+                "used_name_count": len(used_rows),
+                "migration_action": spec["migration_action"],
+            })
+        bundles.append({
+            "historical_module": module,
+            "source_path": str(source_path.relative_to(repo_root)),
+            "source_kind": spec["source_kind"],
+            "declarations": declarations,
+            "live_consumers": consumers,
+            "direct_importers": direct_importers,
+            "importer_count": len(consumers),
+            "source_imports": imports(source_path) if source_path.is_file() else [],
+            "historical_imports_to_rewire": [
+                imported for imported in imports(source_path)
+                if "Round" in imported or re.search(r"R\d+", imported)
+            ],
+            "migration_action": spec["migration_action"],
+            "owner_candidates": list(spec["owner_candidates"]),
+            "owner_candidate_evidence": [
+                {
+                    "module": candidate,
+                    "source_exists": (
+                        repo_root / Path(*candidate.split(".")).with_suffix(".agda")
+                    ).is_file(),
+                    "imports_historical_source": (
+                        module in {
+                            imported
+                            for imported in imports(
+                                repo_root / Path(*candidate.split(".")).with_suffix(".agda")
+                            )
+                        }
+                        if (repo_root / Path(*candidate.split(".")).with_suffix(".agda")).is_file()
+                        else False
+                    ),
+                    "currently_imports_round_modules": sorted(
+                        imported for imported in imports(
+                            repo_root / Path(*candidate.split(".")).with_suffix(".agda")
+                        )
+                        if "Round" in imported or re.search(r"R\d+", imported)
+                    ) if (repo_root / Path(*candidate.split(".")).with_suffix(".agda")).is_file() else [],
+                    "static_owner_status": "candidate-excludes-direct-historical-import"
+                    if (
+                        repo_root / Path(*candidate.split(".")).with_suffix(".agda")
+                    ).is_file()
+                    and module not in imports(
+                        repo_root / Path(*candidate.split(".")).with_suffix(".agda")
+                    )
+                    else "reject-direct-historical-import",
+                }
+                for candidate in spec["owner_candidates"]
+            ],
+            "recipient_status": spec["recipient_status"],
+            "proposed_recipient": None,
+            "owner_note": spec["owner_note"],
+            "policy": "review-only; no recipient assignment, import rewrite, or deletion authorized",
+        })
+    return bundles
 
 
 def build_plan(repo_root: Path, candidates: dict[str, Any], ledger: dict[str, Any],
@@ -138,7 +280,19 @@ def build_plan(repo_root: Path, candidates: dict[str, Any], ledger: dict[str, An
         if recipient:
             recipient_status = "single-terminal-recipient"
         else:
-            recipient_status = "recipient-review-required"
+            semantic_recipients = sorted({
+                SEMANTIC_ACTIONS[(module, row["name"])] ["semantic_recipient"]
+                for row in rows
+                if (module, row["name"]) in SEMANTIC_ACTIONS
+                and SEMANTIC_ACTIONS[(module, row["name"])].get("semantic_recipient")
+            })
+            if semantic_recipients and all(
+                (module, row["name"]) in SEMANTIC_ACTIONS for row in rows
+            ):
+                recipient = semantic_recipients[0] if len(semantic_recipients) == 1 else None
+                recipient_status = "semantic-recipient-confirmed"
+            else:
+                recipient_status = "recipient-review-required"
         bundles.append({
             "historical_module": module,
             "source_path": str(source_path.relative_to(repo_root)),
@@ -161,6 +315,12 @@ def build_plan(repo_root: Path, candidates: dict[str, Any], ledger: dict[str, An
             "terminal_recipient_candidates": recipient_candidates,
             "preferred_canonical_targets": preferred,
             "proposed_recipient": recipient,
+            "semantic_recipients": sorted({
+                SEMANTIC_ACTIONS[(module, row["name"])] ["semantic_recipient"]
+                for row in rows
+                if (module, row["name"]) in SEMANTIC_ACTIONS
+                and SEMANTIC_ACTIONS[(module, row["name"])].get("semantic_recipient")
+            }),
             "recipient_status": recipient_status,
             "source_imports": imports(source_path) if source_path.is_file() else [],
             "historical_imports_to_rewire": [
@@ -186,12 +346,19 @@ def build_plan(repo_root: Path, candidates: dict[str, Any], ledger: dict[str, An
             "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
         })
 
+    structural_bundles = _shared_structural_bundles(repo_root, migration_plan)
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "purpose": "source-bearing Round bundle extraction plan",
         "bundle_count": len(bundles),
         "declaration_count": sum(len(bundle["declarations"]) for bundle in bundles),
         "bundles": bundles,
+        "shared_structural_bundle_count": len(structural_bundles),
+        "shared_structural_declaration_count": sum(
+            len(bundle["declarations"]) for bundle in structural_bundles
+        ),
+        "shared_structural_bundles": structural_bundles,
+        "unresolved_semantic_mapping_rows_reclassified": 3,
         "deletion_authorized": False,
     }
 

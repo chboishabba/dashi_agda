@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119PointwiseSemanticSelectedCutExact where
+
+-- This source-facing producer intentionally remains outside the --safe cone:
+-- its SU(2) carrier imports the repository's explicit real-analysis authority.
 
 ------------------------------------------------------------------------
 -- CMP98 EQ. (119): POINTWISE SELECTED-CUT SEMANTIC PRODUCER
@@ -85,10 +87,10 @@ pointwiseRelativeContourPrincipalImage :
     (R158.asRound152Source (R182.asCanonicalL13Equation119Source source))
     (Selected.principalChart (R170.bridge weld))
 pointwiseRelativeContourPrincipalImage source weld family = record
-  { R156.RelativeContourPrincipalImage.relativeInImage =
-      λ step point →
+  { relativeInImage =
+      (λ step point →
         Pointwise.actualSelectedCutReceiptGivesPrincipalImage
-          (actualRelativeCutReceipt family step point)
+          (actualRelativeCutReceipt family step point))
   }
 
 pointwisePrincipalPointYExponentiatesToLiteralRelativeContour :

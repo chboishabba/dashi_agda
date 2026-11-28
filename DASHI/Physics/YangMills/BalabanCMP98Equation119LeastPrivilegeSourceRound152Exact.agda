@@ -1,5 +1,7 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP98Equation119LeastPrivilegeSourceRound152Exact where
+
+-- This source-facing bridge is outside the --safe cone because it imports
+-- the literal Round147 path realization.
 
 ------------------------------------------------------------------------
 -- ROUND152 A1 BIDI: LEAST-PRIVILEGE SOURCE DATA FOR CMP98 EQ. (119)
@@ -85,25 +87,25 @@ asLiteralPathData :
   R148.CMP98Equation119DexpConvention (R126.Vector (R146.additive C)) →
   R147.LiteralEquation119PathData C n Value group
 asLiteralPathData source convention = record
-  { R147.LiteralEquation119PathData.realization = realization source
-  ; R147.LiteralEquation119PathData.bondComponent = bondComponent source
-  ; R147.LiteralEquation119PathData.adjointLink = adjointLink source
-  ; R147.LiteralEquation119PathData.scaleV = scaleV source
-  ; R147.LiteralEquation119PathData.qSource = qSource source
-  ; R147.LiteralEquation119PathData.minusEmbedding = minusEmbedding source
-  ; R147.LiteralEquation119PathData.plusEmbedding = plusEmbedding source
-  ; R147.LiteralEquation119PathData.coarseSegment = coarseSegment source
-  ; R147.LiteralEquation119PathData.coarseSegmentEndsAtPlusCentre =
+  { realization = realization source
+  ; bondComponent = bondComponent source
+  ; adjointLink = adjointLink source
+  ; scaleV = scaleV source
+  ; qSource = qSource source
+  ; minusEmbedding = minusEmbedding source
+  ; plusEmbedding = plusEmbedding source
+  ; coarseSegment = coarseSegment source
+  ; coarseSegmentEndsAtPlusCentre =
       coarseSegmentEndsAtPlusCentre source
-  ; R147.LiteralEquation119PathData.translationCommutation =
+  ; translationCommutation =
       translationCommutation source
-  ; R147.LiteralEquation119PathData.dexpMinusOuter =
+  ; dexpMinusOuter =
       R148.outerDexpMinus convention
-  ; R147.LiteralEquation119PathData.inverseDexpMinusAt =
+  ; inverseDexpMinusAt =
       R148.pointInverseDexpMinus convention
-  ; R147.LiteralEquation119PathData.adjointExpAt =
+  ; adjointExpAt =
       R148.pointAdjointExp convention
-  ; R147.LiteralEquation119PathData.adjointExpOuter =
+  ; adjointExpOuter =
       R148.outerAdjointExp convention
   }
 

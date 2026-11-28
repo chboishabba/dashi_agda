@@ -11,6 +11,8 @@ module DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact where
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base using (ℚ)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -20,8 +22,117 @@ import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact as H5
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact as H2Continuum
 import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as Local
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact as R77
+import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
+import DASHI.Physics.YangMills.YangMillsMaxwellLinearDispersionNoGapExact as Disp
+import DASHI.Physics.YangMills.YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact as Ward
+import DASHI.Physics.YangMills.YangMillsGaussianWardGapNontrivialityExact as Nontrivial
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
+
+------------------------------------------------------------------------
+-- The following compiler bundle was historically housed in Round77.  It is
+-- reproduced here because H6 is its canonical same-system recipient.  The
+-- bundle is a constructive consequence of the local Ward package and the
+-- same-H positive gap; it is not a new physical theorem or a promotion.
+-- Historical source: BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact,
+-- sameFamilyLocalAndGapData and round77InteractingWitnessFromLocalAndGap.
+------------------------------------------------------------------------
+
+record StandardGaussianMaxwellSameHGapBridge
+    {ContinuumFamily CurvaturePolynomial LocalOperator Position
+     OPECoefficient StressTensor Hamiltonian Observable Point Scalar : Set}
+    {system : OS.ContinuumSchwingerSystem Observable Point Scalar}
+    (localPackage :
+      Local.SameFamilyOPEStressWardGaussianKernel
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian Observable Point Scalar system)
+    : Set₂ where
+  field
+    reconstruction : OS.OSReconstructionAuthority Observable Point Scalar system
+    gapOrder : Free.GapOrder
+
+    gaussianMaxwellPhysicalSector :
+      (gaussian : Local.Gaussian localPackage system) →
+      Ward.GenericMaxwellQuadraticKernelClassification
+        (Local.coefficientAlgebra localPackage)
+        (Local.gaussianLocalTwoDerivativeWardKernel localPackage gaussian) →
+      Disp.GaplessGaugeInvariantPhysicalSector gapOrder
+
+    PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
+    physicalPositiveGap :
+      PhysicalPositiveGap (OS.hamiltonian reconstruction)
+
+    gapRestrictsToSamePhysicalSector :
+      (gaussian : Local.Gaussian localPackage system) →
+      (classification : Ward.GenericMaxwellQuadraticKernelClassification
+        (Local.coefficientAlgebra localPackage)
+        (Local.gaussianLocalTwoDerivativeWardKernel localPackage gaussian)) →
+      PhysicalPositiveGap (OS.hamiltonian reconstruction) →
+      Free.PositiveSpectralGap
+        (Disp.gaugeInvariantPhysicalSectorGivesGaplessApproximation
+          (gaussianMaxwellPhysicalSector gaussian classification))
+
+    spectralGapContradictionIsAbsurd :
+      (gaussian : Local.Gaussian localPackage system) →
+      (classification : Ward.GenericMaxwellQuadraticKernelClassification
+        (Local.coefficientAlgebra localPackage)
+        (Local.gaussianLocalTwoDerivativeWardKernel localPackage gaussian)) →
+      let sector = gaussianMaxwellPhysicalSector gaussian classification
+          gapData = gapRestrictsToSamePhysicalSector
+            gaussian classification physicalPositiveGap
+      in
+      Free.SpectralContradiction gapData → ⊥
+
+open StandardGaussianMaxwellSameHGapBridge public
+
+sameFamilyLocalAndGapData :
+  ∀ {ContinuumFamily CurvaturePolynomial LocalOperator Position
+      OPECoefficient StressTensor Hamiltonian Observable Point Scalar}
+    {system : OS.ContinuumSchwingerSystem Observable Point Scalar}
+    (localPackage :
+      Local.SameFamilyOPEStressWardGaussianKernel
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian Observable Point Scalar system) →
+    (bridge : StandardGaussianMaxwellSameHGapBridge localPackage) →
+  Nontrivial.SameSystemGaussianWardGapData system
+sameFamilyLocalAndGapData localPackage bridge = record
+  { reconstruction = reconstruction bridge
+  ; Gaussian = Local.Gaussian localPackage
+  ; coefficientAlgebra =
+      Local.coefficientAlgebra localPackage
+  ; localWardKernelUnderGaussian =
+      Local.gaussianLocalTwoDerivativeWardKernel localPackage
+  ; gapOrder = gapOrder bridge
+  ; gaussianMaxwellPhysicalSector =
+      gaussianMaxwellPhysicalSector bridge
+  ; PhysicalPositiveGap =
+      PhysicalPositiveGap bridge
+  ; physicalPositiveGap =
+      physicalPositiveGap bridge
+  ; gapRestrictsToSamePhysicalSector =
+      gapRestrictsToSamePhysicalSector bridge
+  ; spectralGapContradictionIsAbsurd =
+      spectralGapContradictionIsAbsurd bridge
+  }
+
+round77InteractingWitnessFromLocalAndGap :
+  ∀ {ContinuumFamily CurvaturePolynomial LocalOperator Position
+      OPECoefficient StressTensor Hamiltonian Observable Point Scalar}
+    {system : OS.ContinuumSchwingerSystem Observable Point Scalar}
+    (localPackage :
+      Local.SameFamilyOPEStressWardGaussianKernel
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian Observable Point Scalar system) →
+    (bridge : StandardGaussianMaxwellSameHGapBridge localPackage) →
+  OS.InteractingContinuumWitness Observable Point Scalar system
+round77InteractingWitnessFromLocalAndGap localPackage bridge =
+  Nontrivial.nonGaussianityGivesInteractingContinuumWitness
+    (sameFamilyLocalAndGapData localPackage bridge)
+
+round77NontrivialityDependencyCompilerLevel : ProofLevel
+round77NontrivialityDependencyCompilerLevel = machineChecked
+
+standardGaussianMaxwellSameHGapBridgeLevel : ProofLevel
+standardGaussianMaxwellSameHGapBridgeLevel = standardImported
 
 record LiteralDirectSourceSameSystemNontriviality
     {C : Top.LiteralYangMillsCarriers}
@@ -50,7 +161,7 @@ record LiteralDirectSourceSameSystemNontriviality
       (gap : Five.CutoffUniformPhysicalMassGap Y) →
       (local : Five.ContinuumLocalFieldOPEStressWard Y) →
       ∀ G →
-      R77.StandardGaussianMaxwellSameHGapBridge
+      StandardGaussianMaxwellSameHGapBridge
         (localPackageFromLiteralC gap local G)
 
     interactingWitnessIsLiteralClayNontriviality :
@@ -93,7 +204,7 @@ round77Witness :
     ℚ
     (H2Continuum.generatedSystem (H5.continuum source) G)
 round77Witness nontrivial gap local G =
-  R77.round77InteractingWitnessFromLocalAndGap
+  round77InteractingWitnessFromLocalAndGap
     (localPackageFromLiteralC nontrivial gap local G)
     (sameHBridgeFromLiteralBC nontrivial gap local G)
 
@@ -105,12 +216,12 @@ asInteractingContinuumNontriviality :
   Five.ContinuumLocalFieldOPEStressWard Y →
   Five.InteractingContinuumNontriviality Y
 asInteractingContinuumNontriviality nontrivial gap local = record
-  { Five.InteractingContinuumNontriviality.nontrivialQuantumYangMills =
+  { nontrivialQuantumYangMills =
       λ G →
         interactingWitnessIsLiteralClayNontriviality
           nontrivial gap local G
           (round77Witness nontrivial gap local G)
-  ; Five.InteractingContinuumNontriviality.nontrivialityPreservedInLimit =
+  ; nontrivialityPreservedInLimit =
       λ G →
         interactingWitnessIsPreservedInLiteralLimit
           nontrivial gap local G
@@ -119,7 +230,7 @@ asInteractingContinuumNontriviality nontrivial gap local = record
 
 directH6GaussianWardGapCompilerLevel : ProofLevel
 directH6GaussianWardGapCompilerLevel =
-  R77.round77NontrivialityDependencyCompilerLevel
+  round77NontrivialityDependencyCompilerLevel
 
 -- H6 physical payment: a same-system semantic bridge saying the already
 -- constructed literal C theorem supplies the Gaussian Ward kernel on the exact

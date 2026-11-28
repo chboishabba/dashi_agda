@@ -26,7 +26,7 @@ module DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact as R77
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact as R77
 import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as Local
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
@@ -97,11 +97,11 @@ asInteractingContinuumNontriviality :
   Goal1NontrivialitySemanticAttachment Y →
   Five.InteractingContinuumNontriviality Y
 asInteractingContinuumNontriviality attachment = record
-  { Five.InteractingContinuumNontriviality.nontrivialQuantumYangMills =
+  { nontrivialQuantumYangMills =
       λ G →
         interactingWitnessIsLiteralClayNontriviality
           attachment G (round77Witness attachment G)
-  ; Five.InteractingContinuumNontriviality.nontrivialityPreservedInLimit =
+  ; nontrivialityPreservedInLimit =
       λ G →
         interactingWitnessIsPreservedInLiteralLimit
           attachment G (round77Witness attachment G)
