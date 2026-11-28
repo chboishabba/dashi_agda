@@ -15,6 +15,7 @@ def potential_bounds(l,u,D):
     return min(a,b),max(a,b,potential(v,D))
 
 def screen(F,n,cap,split_budget=0):
+    F=tuple(tuple(c) for c in F)
     if min(n,cap,split_budget)<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
     F=canon(F);ledger=ContinuationAllowance(cap)
     cols=((0,),)*n
