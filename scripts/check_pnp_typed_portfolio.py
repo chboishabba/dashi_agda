@@ -68,6 +68,8 @@ def hard_dispatch(n,R,H,caps,x,flats,root,cap,atomic_basis_block=False):
     if not root.reserve("hard_affine",cap):return dict(status="UNKNOWN")
     B=Work(cap)
     try:
+        if n<0 or x<0 or x>>n or len(R)!=len(caps) or any(r<0 or r>>n for r in R) or any(c<0 for c in caps):raise ValueError("source")
+        if any(a<0 or a>>n or b not in (0,1) for a,b in H) or any(a<0 or a>>n or b not in (0,1) for F in flats for a,b in F):raise ValueError("hard constraints")
         B.pay("hard_source",1+n*(1+len(H)+len(R)+sum(map(len,flats))))
         if not satisfies(x,H,flats):raise ValueError("hard incumbent")
         phi=lambda z:sum(max(0,(r&z).bit_count()-c) for r,c in zip(R,caps))
