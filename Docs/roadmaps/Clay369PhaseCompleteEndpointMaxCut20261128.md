@@ -583,3 +583,147 @@ SOURCE-WRITTEN/PENDING_KERNEL. No GitHub CI.
 6. YM: selected original CMP102 physical-source analytic and measure
    enclosure with nontrivial continuum/OS/mass gap; no extrapolation
    from finite source-type analytic identities.
+
+
+## Section 25 — original-fibre geometry, N2e global admission, signed Mellin and paid fuel (28 Nov 2026)
+
+**New construction phase:** recover owner/source theorem -> make the
+original source object common -> forward/inverse exact theorem -> preserve
+nonpromotion -> run finite exact positive/negative controls -> explicitly
+separate kernel, physical analytic and universal endpoint acceptance.
+Current owner heads at start: Agda #1551 11f90b357371; Lean #123
+9cc630a55a81; Lean #124 08e02a08869c; Lean #119
+822317add598; RH #121 3eb36764e36c; YM #1536 495b6e8ebbbb.
+Never merge divergent histories wholesale. No CI or Agda/Lean kernel
+admission performed.
+
+### NS: true original finite global quarter signed FTC, not new calculus
+Lean #123 Synthesis/NavierStokesActualFractionalSignedFTCExact.lean ALREADY
+owns actual_quarter_signed_FTC and the physical Galerkin source, including
+original signed transfer T_{1/4}=E'_{1/4}+2 nu D_{1/4} and full
+same-trajectory square FTC. Likewise actual_global_forward_finite_flow
+and original tail and energy payments were already on branch. New
+Synthesis/NavierStokesOriginalGlobalQuarterFTCSourceWeldExact.lean
+commit e46a04398b8921705f7cca79984f9bcd04506e0f constructs ONE
+global original finite trajectory with original reality, transversality
+and signed quarter FTC for EVERY T>=0, without source derivative
+assumptions. Native acceptance root
+Synthesis/ClayNSSection25QuarterGlobalAcceptanceExact.lean
+851c2f00a258af564058f74167dfda5a2e910183.
+Remaining P0 mathematics: a cutoff/time-uniform bound on the SIGNED
+nonlinear integral int E_{1/4} T_{1/4}, or valid independently
+sufficient critical continuation; plus original A Euclidean
+measure/exterior, unforced profile/certificate, C/D independent
+admission. The unweighted energy/dissipation payment is not critical
+H1 regularity, and the signed FTC is not a bound on its nonlinear RHS.
+
+### BSD: two-crossing moment reverse-solve
+Lean #124 Synthesis/MillenniumBSDSignedMellinMomentProgressionExact.lean
+ALREADY owns all-degree factorization of original positive/negative/
+positive two-crossing density, positive quotient, signed polynomial
+integral and next-moment-positive theorem. New
+Synthesis/MillenniumBSDOriginalTwoCrossingRankFourSignCutExact.lean
+0e32925a71e6bba56012962325a74632b4144a26 gives exact original
+moment sign necessities: assuming zero total mass and STRICTLY
+positive integrated signed quadratic, m2=0 IMPLIES m1<0;
+m1>=0 IMPLIES m2>0. This gives a falsifiable reverse-solve
+constraint on any candidate second complex-derivative cancellation.
+It is not itself the required correspondence of the ORIGINAL selected
+rank-four complex L''(E,1) to the actual signed Mellin moments.
+The separate global/general number-field Kummer/Selmer/Sha algebra
+is already in Section23/24. Remaining P0: source-specific complex
+Mellin comparison, analytic order/rank equality and required Sha
+finiteness, not another generic Kummer model.
+
+### Hodge: original generic root-fibre even-deck torsor
+Lean #124 Synthesis/MillenniumHodgeDicksonGenericSignedFibreExact.lean
+ALREADY owns actualRootFibreEquiv, signedFibreDeckEquiv and original
+punctured generic root existence. New
+Synthesis/MillenniumHodgeDicksonOriginalEvenDeckRootTorsorExact.lean
+c9aa5df692557caba9974471bbaacd6e53ce8f5b
+composes them into actualOriginalRootEvenDeckEquiv between ORIGINAL
+Q0 roots and product-one square-sign deck vectors, including
+surjective/injective and punctured nonempty consumers. It does NOT
+prove a global Chow cycle, proper pushforward, generic primitive
+cycle-class orientation or universal Hodge conjecture. Existing
+Hodge generated-chart ideal BIDI and Proj denominators remain
+distinct geometrical owners. Next: construct proper global family
+with signed fibre monodromy and actual pushforward multiplicity,
+then attach the primitive cycle to the SAME cohomology class.
+
+### PNP: paid query horizon, actual original anchor
+Lean #119 Welds/PNPSameRunReadFootprintExact.lean ALREADY has the
+actual reads_le_fuel bound. Section24's source
+original_anchored_packed_residual_read_payment ALREADY charges original
+anchored legal ZMod3 residuals to THE SAME actual read trace.
+New Welds/PNPOriginalAnchoredPackedFuelClosureExact.lean
+6e40516dba4f8a469fe6b8561d20b442218144af
+composes these to sum_j w_j <= C*k on the ACTUAL query horizon
+subject to original hprefix/haccept/hlegal/hkernel/hvisible/hcapacity.
+Native root Welds/PNPSection25OriginalFuelAcceptanceExact.lean
+dd5202d23e997b888ca95e00dae5f7aa62898a9c.
+This is a rigorous scoped physical-query cost endpoint, not an
+arbitrary Boolean circuit lower bound. Single input read capacity
+cannot be counted as exponentially many independent events.
+Next: original arbitrary SAT-candidate actual state/semantic
+attachment, sharing-aware mandatory work with proven C on true
+internal events, or costed polynomial original SAT algorithm; finish
+C1a physical address/control/signed arithmetic and R1 same-target
+time-horizon equivalence.
+
+### RH: source admission, no replacement theorem
+Lean #121 already has originalXiZetaZeroEquiv,
+originalAllXiZerosAxis_iff_allNontrivialZetaCritical and
+clay_iff_mathlib; Section24's root already checks these. No duplicate
+RH algebra or new assumed external theorem in this phase. Original
+pinned Main kernel admission, exact statement matching, complete
+transitive axiom audit and independent mathematical source review
+are separately OPEN. Xi/zeta predicate BIDI alone is not RH.
+
+### YM: original CMP102 and connected source, no generic reroute
+Agda #1536 YMClayCMP102OriginalGFiniteLimitTransportExact.agda
+already writes originalGPrefixConvergesToOriginalG from the ORIGINAL
+CMP109 Bishop A/B represented sequences and
+originalGZeroFromOriginalPrefixConvergence, the latter explicitly
+assuming original G_N -> 0. The exact all-degree CMP102
+shiftedNativeBracketCoefficientZero is already in
+YMClayCMP102OriginalEndpointCauchyShiftExact.agda; original adjacent
+pair Wilson F19 mixed derivatives retain the shared yz plaquette.
+Section25 tests finite algebraic G rewriting, NOT its actual limit or
+G=0. Next: source-derive the original G_N ->0 quantitative certificate
+on |X|<=1/4 and same physical selected CMP102/Wilson receiver, then
+absolute CMP116 shell, nontrivial continuum Gibbs, OS and same-H
+gap. No independent artificial analytic series/measure. YM scope
+remains CMP102.
+
+### Exact finite replay and native acceptance
+Local Python/SymPy 1.14 execution of
+scripts/check_clay_section25_original_source_geometry.py
+(or equivalent local geometry code): six source-oriented finite
+controls, 1083/1083 PASS: Hodge original Q0 at a=1,y=2,
+D=-3 and 32 even-sign decks 384 checks; BSD positive signed
+two-crossing polynomial 150 checks; NS abstract signed-square FTC
+9 tests (NOT physical Galerkin trajectory); PNP one-read
+per-address capacity control 42; RH signed axis coordinate 462;
+YM original G polynomial rearrangement 36. These finite checks
+do NOT demonstrate original universal source, full input semantics,
+native theorem elaboration, or any Clay prize endpoint. The exact
+local script initially ran as check_clay_section25_geometry.py;
+the committed source at scripts/check_clay_section25_original_source_geometry.py
+(40544d683b399f268464f25dc42f89eced44c045)
+expresses equivalent controls; byte parity and execution of that
+committed Git blob must be checked separately if claimed.
+Section24 exact committed bytes were previously executed
+160340/160340 PASS; Sections22/23 31464/5312 PASS.
+
+Lean #124 acceptance root
+Synthesis/ClayBSDHodgeSection25NativeAcceptanceExact.lean
+bfc0d515dcdbe2a8084ec28d5a91636d9a1fdaac;
+Lean #123 Synthesis/ClayNSSection25QuarterGlobalAcceptanceExact.lean
+851c2f00a258af564058f74167dfda5a2e910183;
+Lean #119 Welds/PNPSection25OriginalFuelAcceptanceExact.lean
+dd5202d23e997b888ca95e00dae5f7aa62898a9c.
+All the newly written native bodies are PENDING_KERNEL. No
+native compiler, test CI, full branch rebase or transitive axiom
+acceptance run has occurred. Never call a source-written theorem
+a Clay endpoint without the physical/universal payments.
