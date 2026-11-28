@@ -234,3 +234,46 @@ Added both new literal-source W2 checkers to \`scripts/run_engineered_gravity_en
 **W3:** solve same-action coupled evolution with signed physical work, native forward source and independent neutral observer; certify or return a precise obstruction.
 
 No physical lane is promoted. The earlier 36 physical obligations remain OPEN.
+
+
+## W2.1 time-dependent spherical Einstein source → moving normal → Israel (29 November)
+
+**Implemented in this same W2 cut, not deferred.** Exact original source-domain symbolic checker \`scripts/check_tov_dynamic_flux_israel_abi.py\` committed \`254e283981d8b5623a6f8de7d4b4f5f8329dfdb6\` (SHA Git blob \`5fd775dc25104bd79f0a670198e08c8278315f76\`, independently equal to the byte-identical local executed file). The nonstationary polar-areal metric is
+\[
+ds^2=-N(t,r)^2dt^2+f(t,r)^{-1}dr^2+r^2d\Omega^2,
+\quad f=1-2m(t,r)/r.
+\]
+With a common proper-time moving wall \(R(\tau)\), \(v=\dot R\), \(a=\ddot R\) and \(U^t=\sqrt{f+v^2}/(N\sqrt f)\), the exact radial acceleration and extrinsic curvature are
+\[
+K^\tau{}_\tau=
+\frac{a+(f+v^2)N_r/N-v^2 f_r/(2f)- vU^t f_t/f}
+{\sqrt{f+v^2}},\qquad
+K^\theta{}_\theta=\frac{\sqrt{f+v^2}}{R}.
+\]
+The **new time-jet term \(-v U^t f_t/f\)** cannot be omitted as in the static comparator. The 2D base warped-product identity gives \(G_{tr}=-f_t/(rf)\). Define the signed Eulerian orthonormal radial energy flux \(j:=-T_{tr}\sqrt{f}/N\); then
+\[
+f_t=8\pi r N\sqrt f\,j,\quad
+m_t=-4\pi r^2N\sqrt f\,j.
+\]
+The other original spherical Einstein sources yield \(f_r=2m/r^2-8\pi r\rho\), \(N_r/N=(m+4\pi r^3p_r)/(r^2 f)\). When the two faces have the **same boundary \(f,N,R,v,a\)** and exterior vacuum, the exact resulting temporal Israel jump is
+\[
+\boxed{
+[K^\tau{}_\tau]
+=\frac{4\pi R}{f\sqrt{f+v^2}}
+\left[(f+v^2)p_r+v^2\rho
+-2v\sqrt{f+v^2}\,j\right].
+}
+\]
+The bracket is precisely \(f\) times the wall-normal material stress \(T_{\mu\nu}n^\mu n^\nu\) in the orthonormal fluid/observer decomposition (with the signed \(j\) convention). This **connects the same source mass, pressure, density, radial momentum flux, moving normal and junction** without inventing an independent normal force. Reverse-solving zero shell traction fixes
+\[
+\boxed{
+p_r=-\frac{v^2\rho-2v\sqrt{f+v^2}j}{f+v^2}.
+}
+\]
+The checker asserts exact nonstationary Christoffel symbols and normal acceleration, mixed Einstein flux equation, forward/reverse symbolic equality, static \(v=0\) reduction and two nonzero-density/flux negative controls. Local literal source under 90 seconds exit0; source SHA256 \`bc49bf91f17747477747fed9a9b2daadb9dbff74a0172ad035c22cc7bf5fe1b1\`, stdout SHA256 \`efa894c722cae311b397600b2da13f9c8bd4323c7b69c356cc938ba16681b3d5\`. The original TOV material level surface has \(\rho=p_r=j=0\) in the static background, but full moving Einstein–matter dynamics may generate nonzero physical flux; its evolution is **not** constructed or assumed away.
+
+**Boundary interpretation limitations:** This is exact algebra for **one spherical polar-areal metric with vanishing radial shift**, the chosen signed flux convention, and assumed common physical boundary induced data. It does not construct the physically required dynamical solution or guarantee that the two faces admit matching \(N,f,R,v,a\); there is no full nonspherical trace analysis, Israel sheet conservation law, GHY/corner second variation or global stability. G4 Einstein–RMHD is a mathematical *consumer* of the flux/normal pattern, not a demonstrated transplant to the distinct G4 matter system.
+
+**Accounting:** Runner registered at \`1e5c5b8f0c675a1822bbc60b3a0a296777c5687d\`. Source checker pinned as third W2 entry \`dynamic_tov_flux_israel\` at \`b1bef684df76d7c2e1bc5220cc19fb86631b6a16\`. Two additional source-admission controls were added to the DAG test at \`47558a63657d9d2a99f1b7f1afe46b53f4c108dd\`, bringing the planned malformed-claim count to eleven; full *committed* DAG test replay remains outstanding. The **three new W2 mathematical scripts** (static moving, typed three-source reverse, dynamic flux) passed **literal byte-identical local execution**; do not conflate that with original native F8, full programme owner replay, verified physical Einstein source or actual device.
+
+**Next whole-system weld:** assemble exact time-dependent S0–S2 Einstein–matter boundary and exterior normal packet with independent nonzero \(j\) and a real constitutive/constraint-compatible matter evolution; simultaneously compile a distinct Maxwell current/stress sheet and reciprocal controller reaction packet. Then attach physical observer/tide/clock via original G3 and F8 receivers, not an arbitrary desired gain. The original 36 whole-programme physical obligations still remain open.
