@@ -823,3 +823,73 @@ module At {r : Level} (F : C.RealField r)
       (localizedMetricRows E j q chi p px m mx)
       (localizedGaugeRows D j q chi gp gx gm gy)
       (localizedGaugeRows E j q chi gp gx gm gy)
+
+  ------------------------------------------------------------------------
+  -- BR40a: curved-chart scalar Hessian, not coordinate-Hessian promotion.
+  -- For ∇_i∇_j chi the Christoffel subtraction is essential. The physical
+  -- metric connection is an input constructed from the source background;
+  -- this carrier cannot assert that a source metric is Einstein–Israel.
+  ------------------------------------------------------------------------
+
+  record ChartConnection : Set r where
+    constructor chartConnection
+    field
+      christoffel : Axis → Axis → Axis → S
+  open ChartConnection public
+
+  covariantScalarHessian : ChartConnection → ScalarJet → Axis → Axis → S
+  covariantScalarHessian g chi i j =
+    second chi i j - sum5 (λ k → christoffel g k i j * first chi k)
+
+  covariantScalarJet : ChartConnection → ScalarJet → ScalarJet
+  covariantScalarJet g chi =
+    scalarJet (value chi) (first chi) (covariantScalarHessian g chi)
+
+  -- Treat TensorJet/CovJet.fieldFirst and .fieldSecond as covariant
+  -- source jets here, not uncorrected partial jets.
+  record MetricVariableCoefficients : Set r where
+    constructor metricVariableCoefficients
+    field
+      metricSecondCoefficient : Axis → Axis → S
+      metricFirstCoefficient : Axis → Tensor → Tensor
+  open MetricVariableCoefficients public
+
+  record GaugeVariableCoefficients : Set r where
+    constructor gaugeVariableCoefficients
+    field
+      gaugeSecondCoefficient : Axis → Axis → S
+      gaugeFirstCoefficient : Axis → Cov → Cov
+  open GaugeVariableCoefficients public
+
+  metricVariableCutoffResidual : ChartConnection → MetricVariableCoefficients →
+    ScalarJet → TensorJet → Tensor
+  metricVariableCutoffResidual g c chi u =
+    addT
+      (sum5 (λ i → sum5 (λ j →
+        addT
+          (mulT (metricSecondCoefficient c i j * covariantScalarHessian g chi i j)
+                (fieldValue u))
+          (addT
+            (mulT (metricSecondCoefficient c i j * first chi i)
+                  (fieldFirst u j))
+            (mulT (metricSecondCoefficient c i j * first chi j)
+                  (fieldFirst u i)))))
+      (sum5 (λ i →
+        metricFirstCoefficient c i (mulT (first chi i) (fieldValue u))))
+
+  gaugeVariableCutoffResidual : ChartConnection → GaugeVariableCoefficients →
+    ScalarJet → CovJet → Cov
+  gaugeVariableCutoffResidual g c chi u k =
+    sum5 (λ i → sum5 (λ j →
+      gaugeSecondCoefficient c i j *
+        (covariantScalarHessian g chi i j * covValue u k
+          + first chi i * covFirst u j k
+          + first chi j * covFirst u i k)))
+      + sum5 (λ i →
+        gaugeFirstCoefficient c i
+          (λ a → first chi i * covValue u a) k)
+
+  -- Actual coordinate connection and physical matrix coefficients are
+  -- still source-specific proof obligations. In particular, this carrier
+  -- never replaces BR29 derivative Bianchi with componentwise scalar
+  -- constraint propagation, nor assumes an inverse for a glancing symbol.
