@@ -1,7 +1,7 @@
 """Bounded independent original-coordinate receipt checks."""
 from random import Random
 from check_pnp_affine_normal_components import Budget, Exhausted, canon, chart, lift, satisfies
-from check_pnp_fractran_trace import trace, recover_trace
+from check_pnp_fractran_trace import trace, recover_trace, improve_trace
 
 def main():
     rng=Random(369); receipts=units=refusals=0
@@ -37,6 +37,29 @@ def main():
     try:trace(3,(7,),(),(0,),7,0,Budget(0))
     except Exhausted:pass
     else:raise AssertionError('budget refusal')
+    # Compare completed aggregate minima to exhaustive original points.
+    folds=0
+    for n in range(1,8):
+        for _ in range(60):
+            x=rng.randrange(1<<n)
+            R=tuple(r for r in range(1,1<<n) if (r&x).bit_count()%2)
+            if not R:continue
+            R=tuple(rng.sample(R,min(8,len(R))))
+            union=0
+            for r in R:union|=r
+            if union!=(1<<n)-1:continue
+            H=canon(tuple((r,1) for r in R))
+            caps=tuple(rng.randrange(1,n+1) for r in R)
+            phi=lambda z:sum(max(0,(r&z).bit_count()-c) for r,c in zip(R,caps))
+            best=min(phi(z) for z in range(1<<n) if satisfies(z,H,()))
+            status,t,lower=improve_trace(n,R,H,caps,x,Budget(10000000))
+            assert status!='UNKNOWN'
+            assert lower==best
+            if phi(x)==0:assert status=='SAT'
+            elif best==phi(x):assert status=='MINIMUM'
+            else:assert status=='IMPROVED' and phi(t['end'])==best
+            folds+=1
+    print('aggregate fold cases',folds)
     print(dict(receipts=receipts,units=units,nonimprovement=refusals,controls='PASS'))
 
 if __name__=='__main__':main()
