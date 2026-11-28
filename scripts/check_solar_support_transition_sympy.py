@@ -26,7 +26,7 @@ def species(n,r,c,z,b,m,v,sign):
 
 def fixture():
     # Electron conservation includes both positive ion channels at the event.
-    populations=((0,0,0),(5,3,2),(2,2,0),(3,0,3))
+    populations=((0,0,0),(1,1,0),(1,0,1),(5,3,2),(2,2,0),(3,0,3))
     cases=0; births=deaths=0
     masses=(s.Rational(1,2),s.Integer(3),s.Integer(5))
     for e,ion1,ion2 in populations:
