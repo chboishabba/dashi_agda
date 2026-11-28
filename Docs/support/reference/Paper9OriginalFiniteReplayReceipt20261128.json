@@ -1,0 +1,24 @@
+{
+  "source_commit": "6996b2057a53337785529b1a3d098ef8d3b66dc6",
+  "source_blob": "916d2c55a40667f740919e59f7933353e7520097",
+  "local_source_blob_matches": true,
+  "seconds": 25.998094248000143,
+  "unit_equations": 6646,
+  "diagonal_equations": 3529,
+  "slice_equations": 1809,
+  "piRoundOK": true,
+  "sqrtRoundOK": true,
+  "expWindowOK": true,
+  "recurrence_packet_comparison": "reconstructed matrix matched historical digests; no direct local source packet comparison",
+  "literal_cross_repository": {
+    "agda_blob": "eb41e2c937d89dfb8cf2f90d1f31e69b945ad5e0",
+    "lean_blob": "185fbf271b9089afc1ce123d2f53a21f5d89a6df",
+    "diagonal_equal": 83,
+    "slice_equal": 43,
+    "shiftOK": true,
+    "jetOK": true,
+    "dominance_ratio_upper": "1/1000000",
+    "method": "direct BigInt equality and original predicates on fetched literal coefficients"
+  },
+  "analytic_or_kernel_acceptance": false
+}
