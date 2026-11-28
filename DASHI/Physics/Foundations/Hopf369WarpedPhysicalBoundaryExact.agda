@@ -1848,7 +1848,7 @@ module At {r : Level} (F : C.RealField r)
           graphDefectSpatialCoefficient g f i * spatialVelocity i))
 
   record OriginalGraphDefectPayment : Set r where
-    constructor originalGraphDefectPayment
+    constructor mkOriginalGraphDefectPayment
     field
       actualGraphDefect : S
       coefficientResolvedDefect : S
@@ -1860,7 +1860,7 @@ module At {r : Level} (F : C.RealField r)
   originalGraphDefectPayment : ADMPhysicalPoint → MaterialGraphGradient →
     S → (BR4Space → S) → OriginalGraphDefectPayment
   originalGraphDefectPayment g f ut du =
-    originalGraphDefectPayment
+    mkOriginalGraphDefectPayment
       (materialGraphFlux g f ut du
         - volumeDensity g * du spaceNormal)
       (scalarGraphDefect g f ut du)
