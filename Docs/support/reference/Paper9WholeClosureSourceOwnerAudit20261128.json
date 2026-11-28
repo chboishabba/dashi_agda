@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-28",
+  "scope": "Paper9 whole-proof source owner reconciliation and original Bishop CM phase/Hecke cusp join",
+  "pr": 1546,
+  "branch": "research/pi-p0-consolidated-gmp-master-20261123",
+  "compare": {
+    "agda": "767 ahead/74 behind master at audit head f4bb9634e039",
+    "lean": "122 ahead/7110 behind main",
+    "reverse_master_changed_files": 55,
+    "matching_paper9_source_files_in_returned_reverse_diff": 0
+  },
+  "false_outstanding": [
+    {
+      "claim": "Actual original Bishop atan-to-Cayley at x=1/5 and 1/239 still requires independent ODE uniqueness",
+      "corrected_by": "DASHI/Analysis/BishopOriginalMachinCayleyEndpointExact.agda",
+      "constructors": [
+        "originalFive",
+        "original239",
+        "originalQuarterEquality",
+        "originalFirstZero"
+      ],
+      "status": "source-written kernel-unchecked"
+    },
+    {
+      "claim": "Original atan actual-limit quadratic derivative remainder is unpaid",
+      "corrected_by": "DASHI/Analysis/BishopOriginalMachinAtanSecondOrderExact.agda",
+      "constructors": [
+        "actualRemainderBound",
+        "finiteRemainderBound"
+      ],
+      "domain": "nonnegative original x and x+h in half-ball",
+      "status": "source-written kernel-unchecked"
+    },
+    {
+      "claim": "Machin product and composed quarter phase are open",
+      "corrected_by": "BishopMachinCayleyNativeProductFirstZeroExact.originalNativeImaginaryExpProduct and BishopMachinTwoPointCayleyCompositionExact.nativeCombinedCayleyFromTwoOriginalAtanValues",
+      "status": "source-written kernel-unchecked"
+    },
+    {
+      "claim": "Hecke normalized cusp tail and invariance must be newly constructed",
+      "corrected_by": "CM163BishopHecke41CuspResidualExact.At.diagonalFactor/sliceFactor/dS/dT/sS/sT, CM163BishopHecke41UniformCuspBoundExact.At.diagonalBound/sliceBound and CM163BishopHecke41CuspLimitExact.At.diagonalZeroAlong/sliceZeroAlong",
+      "status": "source-written kernel-unchecked"
+    },
+    {
+      "claim": "Analytic selected-point hypergeometric E4 root and j Euler jets are missing on Lean",
+      "corrected_by": "Integration/Paper9ActualCMPoint.selectedHyperAtCM/selectedFirstJetAtCM and Integration/Paper9ActualJSourceJet.jQEuler/jExtSecond",
+      "status": "source-written kernel-unchecked"
+    }
+  ],
+  "new_connections": [
+    "DASHI/Moonshine/CM163BishopSelectedTauExponentExact.FromOriginalBishopEndpoint.actualOriginalCMQ (no two free atan evaluations)",
+    "DASHI/Moonshine/CM163BishopOriginalPhaseHeckeCuspWeldExact.Original: selected Machin q, CM E4/E6/Delta guards, original diagonal/slice cusp limits and S/T residual invariance on ONE BishopCutset"
+  ],
+  "remaining_producers": [
+    {
+      "gate": "Round11 source cutset",
+      "need": "explicit constructive BishopElementaryPowerSeriesData + ConfiguredConcreteTermDefinitions or validated existing instance; not an arbitrary cutset",
+      "existing": "BishopElementarySeriesTermsExact.asBishopElementaryPowerSeriesData, BishopCanonicalNegativeLogSameObjectExact.canonicalNegativeLogRound11 (transforms existing only)"
+    },
+    {
+      "gate": "Hecke original global identity",
+      "need": "all-domain pole-free holomorphic residual and constructive global modular rigidity from compactified cusp",
+      "existing": "CM163BishopHecke41CuspResidualExact, UniformCuspBoundExact, CuspLimitExact, Paper9HeckePoleRemoval.normalizedResidualZero",
+      "warning": "S/T invariance and zero cusp limit alone do not imply identically zero"
+    },
+    {
+      "gate": "Exact CM root",
+      "need": "attach actual all-index Hecke diagonal polynomial identity and selected dyadic window to original Bishop guarded real j",
+      "existing": "JInvariantBishopCM163TailGuardExact.Root, Paper9ActualCMRoot.cmRootFromDiagonal"
+    },
+    {
+      "gate": "Bishop factorial hypergeometric same object",
+      "need": "identify original H,J1 with selected E4 root and q-Euler first derivative at the same Bishop q, using original finite coefficient/limit/ODE uniqueness",
+      "existing": "BishopChudnovskyNativeEulerLimitsExact, NativeFactorialEulerAttachmentExact, Paper9ActualCMPoint.selectedHyperAtCM/selectedFirstJetAtCM"
+    },
+    {
+      "gate": "Signed actual Hecke jet",
+      "need": "differentiate genuine Hecke product at original reciprocal CM q to supply actual literalResidual=0, not finite packet only",
+      "existing": "CM163BishopHecke41ActualCrossExact.normalizedCross, CM163BishopHecke41ActualJLogPhaseJetExact.actualLogJet, JInvariantBishopCM163DiskCrossCoefficientExact.signedJetFromLiteral"
+    },
+    {
+      "gate": "Native and GMP execution",
+      "need": "compile exact source and replay native serialization and strict independent floors; matched time/RSS",
+      "existing": "Paper9GmpTraceChecker, scripts/check_pi_gmp_predictive.cpp, scripts/check_pi_gmp_predictive_trace.py"
+    }
+  ],
+  "negative_control": {
+    "source": "scripts/check_paper9_modular_cusp_rigidity_negative.py",
+    "actual_run": "locally equivalent code, committed Git blob was verified but executed file not byte-matched",
+    "degree": 80,
+    "inv_j_coefficients": [
+      0,
+      1,
+      -744,
+      356652,
+      -140361152,
+      49336682190,
+      -16114625669088,
+      4999042477430456
+    ],
+    "conclusion": "nonzero modular meromorphic cusp-zero germ, missing pole-free global rigidity",
+    "native_proof": false
+  },
+  "native_compilers_available": false,
+  "github_ci_executed": false,
+  "unconditional_same_real_proved": false,
+  "attribution": "Machin, Bishop/Bridges, Murray, pinned bishop source, classical modular/Hecke and Chudnovsky; DASHI original-source welds and exact tests"
+}
