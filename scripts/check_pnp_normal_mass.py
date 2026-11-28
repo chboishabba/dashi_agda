@@ -8,7 +8,7 @@ from check_pnp_normal_boundary_join import tree,intersection,value,rows,span
 
 def count(n,H,F,O,cap,clip=None,max_width=16):
     # F: forbidden affine flats; O: exact-one bits (normal, offset).
-    if n<0 or clip not in (None,2) or max_width<0 or any(not 0<=a<1<<n or b not in (0,1) for G in (H,)+F+O for a,b in G):raise ValueError('source')
+    if n<0 or cap<0 or clip not in (None,2) or max_width<0 or any(not 0<=a<1<<n or b not in (0,1) for G in (H,)+F+O for a,b in G):raise ValueError('source')
     B=Budget(cap);width=0
     def trim(v):return v if clip is None else min(2,v)
     def result(status,**kw):return dict(status=status,width=width,used=min(cap,cap-B.left),**kw)
@@ -63,7 +63,7 @@ def count(n,H,F,O,cap,clip=None,max_width=16):
         mass,h=T[0];x=lift(u,V,chart(d,h)[0]);rank=len(space(root[0]));mass=trim(mass*(1<<(d-rank)))
         assert all((a&x).bit_count()%2==b for a,b in H) and all(any((a&x).bit_count()%2!=b for a,b in f) for f in F) and all(sum(((a&x).bit_count()%2)^b for a,b in g)==1 for g in O)
         return result('WITNESS',count=mass,witness=x,entries=tables,rank=rank,free=d)
-    except Exhausted:return result('UNKNOWN')
+    except (Exhausted,RecursionError):return result('UNKNOWN')
 
 
 def main():
