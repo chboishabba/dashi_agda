@@ -384,3 +384,43 @@ Actual SHA256 checksums and log hashes committed to \`Artifacts/engineered-gravi
 **D first source weld:** generate the exact Euler–Lagrange PDE for radial material \(Y(t,r)\) from the ORIGINAL \(a,d,V\), including nonuniform reverse-solved time jet and the evolving \(f,N\); couple \(T_{tt},T_{tr},T_{rr},T_{\theta\theta}\) to all Einstein equations and matter Ward. Determine if the W2.3 candidate profile must be modified and derive actual \(m_t,m_r,\nu_r\) from one source. Then solve the physical wall graph domain, second Israel normal, EH+GHY/corners, and free metric polar modes, not merely additional Ritz trial signs.
 
 **Cross-lane shared source ownership:** the mathematical Maxwell current \(J\) still has no original physical apparatus source; reciprocal \(G(X)\) needs actual material/controller and support; G3/G4/F8 source-identical causal history, native same-clock receiver and physical calibration are independent unsolved objects. Reuse the source/normal/energy maps and exact no-go fibres, without promoting any lane for algebraic identities or a constructed off-action star.
+
+
+## W2.5 — Same-action material Euler/Einstein first-time-jet weld (29 November)
+
+Current PR #1547 started this cut at \`5c927b673149230e6cc603f92e4f19b7dc87162b\`. Reopened exact original \`scripts/check_engineered_gravity_tov_material.py\` (covariant scalar sigma-model), \`scripts/check_tov_original_material_flux_weld.py\` (first-flux inverse), \`scripts/check_tov_moving_constraint_family.py\` (constructive nonstationary Einstein mass shape) and \`scripts/check_tov_mass_flux_surface_closure.py\` (mixed mass integrability). **No source or boundary type conflation.**
+
+**New checked analytic result:** Let \(\alpha=\lambda(\lambda+2)\), \(\rho_0=\alpha(1-r^2)/(8\pi)\), \(p_0=-\lambda(1-r^2)^2/(8\pi)\), and the *same* original material functions \(a(Y^2),d(Y^2),V(Y^2)\) from \`check_engineered_gravity_tov_material.py\`. For a radial material label \(Y(t,r)n^A\), define
+\[
+ W=d(Y^2)(fY_r^2-Y_t^2/N^2)+2a(Y^2)Y^2/r^2+V(Y^2).
+\]
+At the original undeformed static slice \(Y=r,Y_r=1,Y_t=0\), the action-derived density, radial pressure and Euler equation exactly reproduce \(\rho_0,p_0\) and the static TOV field equation. The W2.3 scaled Einstein mass \(\displaystyle m(R,r)=\frac{\alpha}{2}[(r/R)^3/3-(r/R)^5/5]\) fixes
+\[
+ f_t=\alpha r^2(1-r^2)\dot R,\qquad
+ \rho_{t,\mathrm{mass}}=\frac{\alpha(-3+5r^2)}{8\pi}\dot R
+ \quad(R=1).
+\]
+With the already reverse-solved **original-action** material velocity
+\[
+ Y_t=-\frac{\lambda+2}{\lambda+1+r^2}r\dot R,
+\]
+the **original** stress gives not only the required signed \(j\), but independently \(\partial_t\rho_{\rm material}=\rho_{t,\mathrm{mass}}\) identically across \(0\le r\le1\). Thus the previous W2.4 flux weld also pays the next mass-density integrability time jet. This is a genuine two-way original-action source construction rather than an imposed density.
+
+**Exact obstruction to keeping the W2.3 guessed pressure:** If that candidate uses \(\displaystyle p_{\mathrm{scaled}}=-\frac{\lambda}{8\pi R^3}(1-r^2/R^2)^2\), the action-predicted first pressure time derivative differs from its derivative by the explicitly nonzero rational function
+\[
+ \Delta p_t(r):=p_{t,\mathrm{action}}(r)-p_{t,\mathrm{scaled}}(r).
+\]
+It vanishes at the physical surface, but at \(r=1/2,\lambda=1/10,\dot R=1\), \(\Delta p_t=77053/(5043840\pi)\ne0\). Therefore the **previous full prescribed \((m,\rho,p)\) scaled family is not original-action compatible at first time order**, even though its mass/flux and moving-wall checks pass. Do not quote W2.3 as a complete same-action solution. The nonuniform material velocity and prescribed mass remain compatible to first order after **replacing** its independent pressure ansatz with the original constitutive stress.
+
+The original radial Einstein lapse constraint supplies the necessary correction:
+\[
+ \Delta(\partial_t\partial_r\log N)
+ =\frac{4\pi r}{f_0(r)}\Delta p_t(r).
+\]
+This is smooth at the centre (vanishes as \(r\to0\)) and vanishes at the original material boundary \(r=1\). Its radial integral is fixed by a separately specified boundary lapse/clock normalization; that integral has **not** been identified with a full dynamical Einstein solution.
+
+**Euler PDE precise remaining weld:** \(\displaystyle \mathcal E_Y=W_Y-\partial_r W_{Y_r}-\partial_t W_{Y_t}-(2/r+N_r/N-f_r/(2f))W_{Y_r}-(N_t/N-f_t/(2f))W_{Y_t}=0\), with \(W_{Y_t}=-2d(Y^2)Y_t/N^2\). The new checker verifies the original static Euler equation and actual action-derived temporal/spatial Hessian principal coefficients; it does **not** solve \(\mathcal E_Y=0\) for all \(t\). Next solve the material acceleration \(Y_{tt}\) from this equation, obtain the full \(f_t,N_t,p_{t,\mathrm{action}}\) Einstein compatibility (including angular \(G^\theta{}_\theta\)), and propagate the constraint and boundary conditions simultaneously. The moving full Einstein/Israel/GHY/corner/symplectic graph-domain obligations remain.
+
+**Implementation:** new \`scripts/check_tov_original_euler_firstjet_weld.py\` committed \`801b5e380a81a08f58c5df7c37cad9e80c483682\`; imported coefficients rather than a newly fitted stress; registered at \`90b5844454ac99c48ccef3bb12af287593bd82cb\`; manifest pinned original source \`check_tov_original_material_flux_weld.py\` blob \`671a81ab6afac23e30dacc5e8b739e0ec5d066af\` and checker blob \`c7ee43c76d864b3490638599f5a33600fc3194ec\` in commit \`9405a509ab0efacca26853bd575754ecb02eaa65\`. Source-equivalent SymPy run under 90 sec PASS after splitting out the expensive arbitrary-jet operator expansion that timed out. The **literal newly committed checker and whole repository acceptance have not been executed**; no unsupported proof promotion. Existing mathematical W1/W2 packets, native original F8, G3/G4 source admission and 36 physical obligations remain open.
+
+**Next coarse cut:** build an executable mixed Einstein+Euler time-jet object with source values \(\{m,\rho,j,p_r,p_t,N,Y,Y_t,Y_{tt}\}\), a physical same-wall \(\{R,v,n,\gamma,K,\Pi\}\), and both radial and angular Einstein constraints; certify the first nonzero time order and then expand to finite-time local PDE acceptance. Reuse rather than rebuild the existing TOV material Hessian and Israel normal checkers.
