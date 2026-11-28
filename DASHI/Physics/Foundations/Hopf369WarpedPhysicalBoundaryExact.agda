@@ -876,7 +876,7 @@ module At {r : Level} (F : C.RealField r)
             (mulT (metricSecondCoefficient c i j * first chi i)
                   (fieldFirst u j))
             (mulT (metricSecondCoefficient c i j * first chi j)
-                  (fieldFirst u i)))))
+                  (fieldFirst u i))))))
       (sum5T (λ i →
         metricFirstCoefficient c i (mulT (first chi i) (fieldValue u))))
 
