@@ -1240,16 +1240,16 @@ module At {r : Level} (F : C.RealField r)
       scalarWarpIntegral : S
       vectorWarpIntegral : S
       scalarSourceIntegral : S
-      vectorSourceIntegral : Cov
+      vectorSourceIntegral : Vec
   open NormalHolonomyMoments public
 
   record NormalHolonomyResponse : Set r where
     constructor mkNormalHolonomyResponse
     field
       scalarConstant : S
-      vectorConstant : Cov
+      vectorConstant : Vec
       scalarZeroMode : S
-      vectorZeroMode : Cov
+      vectorZeroMode : Vec
   open NormalHolonomyResponse public
 
   solveNormalHolonomy : (m : NormalHolonomyMoments) →
