@@ -10,6 +10,7 @@ module DASHI.Cognition.PNF.X369OriginalSourceMinimalConsumerResidualExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_)
 
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.ConsumerFibreRepairExact as Repair
