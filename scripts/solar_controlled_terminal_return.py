@@ -76,7 +76,7 @@ def controlled_terminal_cycle(material,cfg,policy):
         raise ValueError('controlled comparison requires common fixed horizon')
     cc=dict(cfg,retain_history=True)
     base=cycle(material,cc)
-    vol,_,ne,nf=geometry(cc['radii_m'],cc['angular_level']);n=len(vol);N=ne+nf+9*n
+    vol,_,ne,nf=geometry(cc['radii_m'],cc['angular_level'],int(cc.get('nested_depth',0)));n=len(vol);N=ne+nf+9*n
     last=np.asarray(base['history'][-1],float)
     x=last[:N];pop=last[N:N+3*n].reshape(n,3);pool=last[N+3*n:N+5*n].reshape(n,2);theta=last[N+5*n:]
     q=cc['kinetics'];pop0=np.asarray(material[2])*MASS/CHARGE**2;pool0=np.asarray(q['initial_neutral_m3'])
