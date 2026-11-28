@@ -2220,3 +2220,161 @@ cohomological quotient source maps advanced but local completion
 and rank comparison remain; Hodge direct generic cycle producer
 and universal primitive detector remain. No universal Clay
 endpoint newly solved.
+
+
+## 28 November — original zero coordinate equivalence, periodic gauge, rational Kummer descent, nonsplit middle exterior
+
+All four P0 continued. No changes to PNP/YM. No CI. Runtime has no lean,
+lake, elan or agda and curl to GitHub fails DNS; no compatible native build
+or installation performed. The mathematical arguments below and source
+edits are distinct from local exact Python/SymPy regression.
+
+### RH: actual pole-cancelled zero carriers and signed coordinate
+
+Lean #121 root adapter at 7f72b5d604865909453ffb14f876975d455c1ddb.
+Re-read exact lean-dojo/LeanMillenniumPrizeProblems target
+603053dc267cf3efe422f438eb78098c0ececd6f, including its explicit warning
+against total-function expanded xi formula at trivial zeros and poles.
+Its existing XiZetaZeroCorrespondence.holds and the two inverse coordinate
+identities give a literal equivalence of the subtype of zeros of the
+pole-cancelled entire xi(t) and the subtype of actual nontrivial zeta(s)
+zeros. originalXiZetaZeroEquiv packages these actual maps, not a finite
+zero sample or new analytical function. For t=-i(s-1/2),
+Re(t)=Im(s), Im(t)=-(Re(s)-1/2). The new originalXiParameter_im
+retains the sign on every complex point. Root axiom audit now includes
+the equivalence and coordinate theorem. Existing independent MIT
+verification at https://math.mit.edu/~drew/shortgrh/ remains the source
+of external proof evidence. No new local compatible proof acceptance or
+Lean-to-Agda proof term. This is a source-level original target geometry
+weld, not a rediscovery of RH. Credit original proof and comparator authors.
+
+### NS: exact periodic-pressure gauge on original data
+
+Lean #123 commit 9cb720b104f7fa2202c67777ffbad1dd54eee702 adds
+proofs/alpoge-ns-lean433/PeriodicPressureGauge.lean. Original
+BreakdownOnTorus allows arbitrary pressure and periodic velocity, while
+literal Clay D requires pressure periodic too. Prior source only needed
+Clay-to-original implication. At fixed t, if fderiv p(x+e)=fderiv p(x)
+then the difference p(x+e)-p(x) is constant by the pinned Mathlib
+eq_of_fderiv_eq applied to the actual derivative of the translated
+difference, hence equals p(e)-p(0). Subtracting the linear form with
+these lattice increments makes pressure periodic. Native source includes
+this fixed-time lemma and exact additive acceleration cancellation.
+
+Mathematical time-dependent construction (not a complete native theorem):
+Given an original smooth periodic velocity solution u(t,x) for t>=0,
+the momentum equation implies gradient p periodic at t>0, since all
+spatial/time derivatives of the periodic velocity are periodic. Smooth
+closed-time residual extends it to t=0 by the prior source argument.
+Set c_i(t)=p(t,e_i)-p(t,0); then p(t,x+e_i)-p(t,x)=c_i(t). Smooth c.
+Set b(t)=-integral_0^t (t-r)c(r) dr, b(0)=b'(0)=0, b''=-c.
+Define v(t,x)=u(t,x+b(t))-b'(t), q(t,x)=p(t,x+b(t))+b''(t).x.
+Chain rule:
+v_t=u_t+(b'.grad)u-b'', (v.grad)v=(u.grad)u-(b'.grad)u,
+Delta v=Delta u, grad q=grad p+b'', div v=div u at translated x.
+Thus residual(v,q)(t,x)=residual(u,p)(t,x+b(t)), and q lattice
+increment equals c_i+b''_i=0. v and q smooth periodic, same viscosity,
+zero forcing, same initial data. So existence of original periodic
+velocity solution implies existence of a literal periodic-pressure
+solution for the same initial data, not necessarily the same velocity.
+Reverse implication is immediate from existing transport. This pays
+the mathematical pressure-gauge difference without falsely asserting
+same-velocity pressure periodicity. The full chain rule, smooth integral
+and periodicity transport in native Lean remain to be implemented/
+accepted; fixed-time source lemma is not a complete kernel proof.
+Unforced original certificate/verifier still unpublished according to
+https://math.observer/problems/navier-stokes-existence-and-smoothness/
+(editorial review Nov25, page current); independent forced OpenAI
+claim remains under review. Neither gauge nor tests create the certificate.
+
+### BSD: actual rational fixed-point descent and connecting class
+
+Lean #124 BSDCohomology/EllipticFixedPointDescentExact.lean
+987e8356bebb2687728e2e03e3abd087dd16a4b5. Unlike the H1 donor, the
+required infinite Galois result is present at pinned Mathlib v4.28.0:
+InfiniteGalois.mem_range_algebraMap_iff_fixed. On a characteristic-zero
+base field K, the zero point descends directly. For a fixed geometric
+affine point, equality under each actual Mathlib base-change point
+map implies both coordinates are fixed; the infinite Galois theorem
+returns their base-field coordinates. Nonsingularity reflects along
+the actual injective algebra map. This gives the literal additive
+equivalence E(K) with the fixed subgroup of E(Kbar), including reverse.
+No p-adic approximation or replacement x-T carrier.
+
+Synthesis/MillenniumBSDOriginalRationalKummerConnecting.lean
+0cd1de644ce9544ae3c3133a3990176d7547bff6 consumes the previous actual
+H1 class equality iff coboundary. Two chosen geometric halves differ
+by actual E[2] so the class is independent of choice. If delta Q is a
+torsion coboundary delta T, then Q-T is Galois fixed and has the same
+double P. Conversely a fixed half gives zero class. Using actual
+fixed-point descent, rationalKummerClass(P)=0 iff P=2R for R in E(K).
+The earlier inclusion kernel is now the image of rationalKummerClass
+on base-field points, under geometric doubling onto; for the existing
+selected CM curve that hypothesis is already supplied. Source-written
+class function and zero/image criteria, not yet a bundled additive
+quotient connecting morphism. Standard Kummer mathematics, no claim
+of new arithmetic rank comparison. The existing newer Mathlib
+continuous cohomology pin incompatibility and native kernel acceptance
+remain; the new descent file only uses earlier point/Galois API.
+Local completion coefficient naturality and actual Selmer/Sha comparison,
+rank-four complex derivative and universal rank equality remain unpaid.
+
+### Hodge: nonsplit middle exterior field on actual cubic model
+
+Reuse selected rank6 Q=diag(theta,theta*pi,-1,-pi,-1,-pi),
+pi=2-theta, f(theta)=theta^3+theta^2-2theta-1=0,
+det Q=theta^2*pi^3. On the actual 20-dimensional relative wedge^3
+use ordered triples I, complement I^c and sign epsilon(I,I^c).
+Define J(e_I)=epsilon(I,I^c)*q_I/(theta*pi)*e_(I^c), q_I=product of
+the three diagonal coefficients. The sign changes under exchange
+of complementary triples (3*3 odd). Thus J^2=-pi I, J has zero trace
+and is skew adjoint for wedge^3 Q. The wedge pairing W times J
+equals Q3/(theta*pi). This is the actual nonsplit star, not the
+split-model plus/minus real involution from earlier tests.
+
+Over F its characteristic polynomial is (X^2+pi)^10.
+Rational restriction has dimension60; theta=2+J^2, so f(2+J^2)=0
+and J satisfies X^6+7X^4+14X^2+7. This polynomial is Eisenstein at7,
+and its roots are purely imaginary since all pi embeddings positive.
+Thus F[J] is the CM quadratic extension of F, degree6 over Q.
+Under the stated generic independent SO6 factors, over C the two
+middle exterior chiral components per embedding are the inequivalent
+rank10 symmetric half-spin squares; across the three embeddings the
+independent factors distinguish them. By Schur and descent the
+rational Hodge endomorphism algebra of the relative wedge^3 is
+exactly F[J], dimension6 over Q. This is conditional on the reported
+generic group, not true for arbitrary extra-CM specializations.
+
+If an actual algebraic endomorphism of this same projected motive
+has induced action A=aI+bJ with b nonzero in F, then
+J=b^-1(A-aI). The known algebraic F action and relative projector
+supply both scalar operations. The coefficient formula is
+a=tr_F(A)/20, b=-tr_F(JA)/(20*pi). The latter is an exact diagnostic
+using the Hodge star in cohomology, not a method for constructing it.
+Hence one algebraic endomorphism outside the existing scalar F
+action suffices to produce the actual orientation; conversely
+the volume tensor yields J by the nondegenerate relative pairing.
+This sharpens the direct mixed correspondence target to the
+nontrivial extension of the actual middle-exterior endomorphism
+field, but no such algebraic endomorphism on the generic member has
+been produced. The CM seed already paid its own special orientation,
+not generic spread. Universal primitive detector still outstanding.
+Credit original reported form paper141, classical exterior/orthogonal
+representation and trace theory; DASHI selected exact nonsplit matrix
+and coefficient calculation. No JMD contribution inferred.
+
+Native block and polynomial identities in
+MillenniumHodgeCubicCMExplicitSeed.lean
+771782dc50bd302e7111e26d25e741d680d938a0.
+scripts/check_hodge_cubic_middle_star.py blob
+b302f5fba75de68f9766f1e06baf7b7435004f9b matched local git hash.
+28/28 normal and optimized with exact F arithmetic, rational 60x60
+matrix characteristic polynomial and scalar recovery.
+scripts/check_clay_signed_coordinate_gauges.py blob
+751a5fb7eb7deac03779844d30ddbc0719b7bcd4 matched local git hash,
+163/163 normal and optimized: 150 signed inverse coordinate checks,
+9 polynomial moving-frame PDE residual/divergence/initial controls,
+4 affine pressure gauge controls. These are not native proofs or
+real NS solution/cycle computations. Total 191/191 per mode; no CI.
+RH and NS exact source edits, BSD descent and connecting class, Hodge
+actual nonsplit arithmetic advanced; no universal problem newly closed.
