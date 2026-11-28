@@ -4,14 +4,15 @@ module DASHI.Foundations.BishopConcreteElementaryCutsetExact where
 -- original factorial exponential magnitude have a common ratio tail.
 -- No Round11 convergence input is consumed.
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Nat.Base as N
 import Data.Nat.Properties as NP
 open import Data.Product.Base using (_,_; _×_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_; 1ℚᵘ)
 import Real as R
-open R using (ℝ; _≃_; _≤_; _*_; _⋆; ∣_∣)
+open R using (ℝ; _≃_; _≤_; _⋆; ∣_∣)
+open R renaming (_*_ to _·_) using ()
 import RealProperties as P
 import Sequence as S
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as E
@@ -39,7 +40,7 @@ degreeLower (suc k) zero = N.z≤n
 degreeLower zero (suc n) = N.s≤s (NP.≤-step (degreeLower zero n))
 degreeLower (suc k) (suc n) = N.s≤s (NP.≤-step (degreeLower (suc k) n))
 
-degreeStep : ∀ k n → degree k (suc n) Agda.Builtin.Equality.≡ suc (suc (degree k n))
+degreeStep : ∀ k n → degree k (suc n) ≡ suc (suc (degree k n))
 degreeStep zero n = refl
 degreeStep (suc k) n = refl
 
@@ -50,7 +51,7 @@ signedTerm (suc k) = T.sineSignedTerm
 absRead : ∀ k x n → ∣ signedTerm k x n ∣ ≃ E.expMagnitudeTerm x (degree k n)
 absRead zero x n = read F.evenExponent n
   where
-  read : ∀ d n → ∣ T.alternatingSign n * ((F.inverseFactorialRational (d n) ⋆) * R.pow x (d n)) ∣ ≃ E.expMagnitudeTerm x (d n)
+  read : ∀ d n → ∣ T.alternatingSign n · ((F.inverseFactorialRational (d n) ⋆) · R.pow x (d n)) ∣ ≃ E.expMagnitudeTerm x (d n)
   read d n = P.≃-trans (P.∣x*y∣≃∣x∣*∣y∣ _ _)
     (P.≃-trans (P.*-cong (signAbs n)
       (P.≃-trans (P.∣x*y∣≃∣x∣*∣y∣ _ _)
@@ -65,7 +66,7 @@ absRead (suc k) x n = P.≃-trans (P.∣x*y∣≃∣x∣*∣y∣ _ _)
 -- Two successive original factorial steps give a quarter contraction.
 -- Retain the weaker half bound, avoiding any new ratio-test interface.
 twoStep : ∀ x d → 2 * E.magnitudeNaturalBound x N.≤ suc d →
-  E.expMagnitudeTerm x (suc (suc d)) ≤ E.half * E.expMagnitudeTerm x d
+  E.expMagnitudeTerm x (suc (suc d)) ≤ E.half · E.expMagnitudeTerm x d
 twoStep x d h =
   P.≤-trans (E.expMagnitudeSuccessorRatioHalf x (suc d) (NP.≤-step h))
     (P.≤-trans (P.*-monoˡ-≤-nonNeg (E.expMagnitudeSuccessorRatioHalf x d h)
@@ -88,7 +89,7 @@ sectorAbsolute k x = S.proposition-3-6-1
         (P.≤-respˡ-≃ (P.≃-refl) (step n h))))
   where
   step : ∀ n → suc (2 * E.magnitudeNaturalBound x) N.≤ n →
-    E.expMagnitudeTerm x (degree k (suc n)) ≤ E.half * E.expMagnitudeTerm x (degree k n)
+    E.expMagnitudeTerm x (degree k (suc n)) ≤ E.half · E.expMagnitudeTerm x (degree k n)
   step n h rewrite degreeStep k n =
     twoStep x (degree k n) (NP.≤-trans (NP.≤-trans (NP.n≤1+n _) h)
       (NP.≤-step (degreeLower k n)))
@@ -110,12 +111,12 @@ dataSet = record
   ; negativeLogAbsoluteConvergence = λ x (lo , hi) → Log.sourceNegativeLogAbsolutelyConvergent x lo hi
   ; sineCoefficientRecurrenceExact = λ x n → ∣ T.sineSignedTerm x n ∣ ≃ E.expMagnitudeTerm x (F.oddExponent n)
   ; cosineCoefficientRecurrenceExact = λ x n → ∣ T.cosineSignedTerm x n ∣ ≃ E.expMagnitudeTerm x (F.evenExponent n)
-  ; exponentialCoefficientRecurrenceExact = λ x n → E.expMagnitudeTerm x (suc n) ≃ ((∣ x ∣ * ((+ 1 / suc n) ⋆)) * E.expMagnitudeTerm x n)
-  ; negativeLogCoefficientRecurrenceExact = λ x n → Log.sourceNegativeLogTerm x n ≃ R.pow x (suc n) * ((+ 1 / suc n) ⋆)
-  ; sineOddPowersAndFactorialsExact = λ x n → T.sineSignedTerm x n ≃ T.alternatingSign n * ((F.inverseFactorialRational (F.oddExponent n) ⋆) * R.pow x (F.oddExponent n))
-  ; cosineEvenPowersAndFactorialsExact = λ x n → T.cosineSignedTerm x n ≃ T.alternatingSign n * ((F.inverseFactorialRational (F.evenExponent n) ⋆) * R.pow x (F.evenExponent n))
-  ; exponentialPowersAndFactorialsExact = λ x n → E.expTerm x n ≃ R.pow x n * (E.inverseFactorial n ⋆)
-  ; negativeLogPowersOverPositiveIntegersExact = λ x n → Log.sourceNegativeLogTerm x n ≃ R.pow x (suc n) * ((+ 1 / suc n) ⋆)
+  ; exponentialCoefficientRecurrenceExact = λ x n → E.expMagnitudeTerm x (suc n) ≃ ((∣ x ∣ · ((+ 1 / suc n) ⋆)) · E.expMagnitudeTerm x n)
+  ; negativeLogCoefficientRecurrenceExact = λ x n → Log.sourceNegativeLogTerm x n ≃ R.pow x (suc n) · ((+ 1 / suc n) ⋆)
+  ; sineOddPowersAndFactorialsExact = λ x n → T.sineSignedTerm x n ≃ T.alternatingSign n · ((F.inverseFactorialRational (F.oddExponent n) ⋆) · R.pow x (F.oddExponent n))
+  ; cosineEvenPowersAndFactorialsExact = λ x n → T.cosineSignedTerm x n ≃ T.alternatingSign n · ((F.inverseFactorialRational (F.evenExponent n) ⋆) · R.pow x (F.evenExponent n))
+  ; exponentialPowersAndFactorialsExact = λ x n → E.expTerm x n ≃ R.pow x n · (E.inverseFactorial n ⋆)
+  ; negativeLogPowersOverPositiveIntegersExact = λ x n → Log.sourceNegativeLogTerm x n ≃ R.pow x (suc n) · ((+ 1 / suc n) ⋆)
   ; sineAlternatingSignsExact = λ x n → T.sineSignedTerm (R.- x) n ≃ R.- (T.sineSignedTerm x n)
   ; cosineAlternatingSignsExact = λ x n → T.cosineSignedTerm (R.- x) n ≃ T.cosineSignedTerm x n
   }
