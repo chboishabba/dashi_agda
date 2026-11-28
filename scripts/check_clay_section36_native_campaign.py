@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section 36 all-Clay native campaign, fail closed, exact owner checkouts.
+"""Sections 36–37 all-Clay native campaign, fail closed, exact owner checkouts.
 
 Every source and acceptance root is committed on its OWN PR branch.
 This runner checks original native Agda/Lean files in independently
@@ -47,9 +47,12 @@ ROOTS = {
  "BSD_HODGE": ("bsd_hodge_root", [
   "Synthesis/ClayBSDSection36AllDegreeMellinEnvelopeAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection36AllPowersSaturationAcceptanceExact.lean",
+  "Synthesis/ClayBSDSection37SymmetricMomentFloorAcceptanceExact.lean",
+  "Synthesis/ClayHodgeSection37TwoLiftSaturationAcceptanceExact.lean",
  ]),
  "PNP": ("pnp_root", [
   "Welds/PNPSection36SameObligationInputVsWorkAcceptanceExact.lean",
+  "Welds/PNPSection37ExternalObservationAcceptanceExact.lean",
  ]),
 }
 
@@ -105,7 +108,7 @@ def main() -> int:
         help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay36NativeAcceptanceV2",
+    report = {"schema": "Clay37NativeAcceptanceV1",
               "all_selected_roots_passed": False, "roots": {}, "checks": [],
               "meaning": "Selected finite theorem roots only; not universal Clay completion"}
     pins = {}
@@ -168,7 +171,7 @@ def main() -> int:
         r = call(command, rhroot, args.timeout)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
-    report["all_selected_roots_passed"] = (len(report["checks"]) == 8
+    report["all_selected_roots_passed"] = (len(report["checks"]) == 11
         and all(v.get("ok", False) for v in report["roots"].values())
         and all(v.get("status") == "PASS" for v in report["checks"]))
     out = args.report.resolve()
