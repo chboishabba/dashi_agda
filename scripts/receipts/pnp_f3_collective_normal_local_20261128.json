@@ -1,0 +1,69 @@
+{
+  "scope": "Local exact Python reference. New normal-fold file matches committed Git blob 201c7a357ecdd45875d5aa2d16ebab5bbf269d5d; imported donors and continuation integration locally transcribed. No full checkout/kernel.",
+  "normal": {
+    "seed_base": 3692816,
+    "fixtures": 512,
+    "original_points": 23643,
+    "attempts": 2048,
+    "exact": 1754,
+    "refused": 294,
+    "nonempty_receipts": 446,
+    "boundary_widths": [
+      0,
+      2,
+      3,
+      10
+    ],
+    "all_width10_exact": true
+  },
+  "connected_chain": {
+    "variables": 64,
+    "clauses": 63,
+    "factors": 128,
+    "width": 2,
+    "histogram": [
+      9259318306508,
+      9259286427665,
+      9259285301115
+    ],
+    "work": 14577,
+    "leaf_labels": 762,
+    "join_pairs": 905,
+    "width_zero_refusal": true,
+    "work_one_refusal": true,
+    "oracle": "independent two-state transfer with mod-3 label"
+  },
+  "continuation": {
+    "seed_base": 3692814,
+    "fixtures": 256,
+    "queries": 512,
+    "positive_parents": 163,
+    "bound_checks": 4608,
+    "cert_0": 503,
+    "cert_4": 512,
+    "cert_32": 512,
+    "splits_4": 10,
+    "splits_32": 10,
+    "prior_splits_32": 11,
+    "completed_normal_folds": 2,
+    "refused_normal_folds": 11,
+    "completed_normal_logical_work": 3104
+  },
+  "guard_composition": {
+    "seed_base": 3692817,
+    "comparisons": 8192,
+    "legal": 1455,
+    "dominated_or_duplicate_guards_removed": 34008,
+    "reduced_cases": 4096,
+    "rank_identity_controls": 6
+  },
+  "execution": {
+    "normal_batches": 8,
+    "continuation_batches": 16,
+    "timeout_seconds_per_batch": 90,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false
+  }
+}

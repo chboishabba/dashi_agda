@@ -1,0 +1,164 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python /tmp/pnp35, timeout 90 per campaign. All five new executable blobs match connector readback. Direct chart and Reservation donor blobs match; other portfolio transitive dependencies are recovered previous local sources, not full checkout parity. No native kernels on PATH; no CI.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_boolean_separator_campaign.py",
+      "blob": "c84b3a33e7314c8faf83984111d05baa94fd4c0e",
+      "producerBlob": "37d829abca72127750af320812aaa786e8251343",
+      "seconds": 29.24,
+      "independent_sources": 288,
+      "exact_and_clipped": 576,
+      "WITNESS": 214,
+      "EMPTY": 362,
+      "replay": 576,
+      "affine_paths": [
+        {
+          "free": 16,
+          "count": "2584",
+          "points": 62,
+          "used": 46975
+        },
+        {
+          "free": 32,
+          "count": "5702887",
+          "points": 126,
+          "used": 337727
+        },
+        {
+          "free": 64,
+          "count": "27777890035288",
+          "points": 254,
+          "used": 2567871
+        },
+        {
+          "free": 128,
+          "count": "659034621587630041982498215",
+          "points": 510,
+          "used": 20045247
+        }
+      ],
+      "stars": [
+        {
+          "n": 16,
+          "points": 62,
+          "used": 11313
+        },
+        {
+          "n": 32,
+          "points": 126,
+          "used": 75921
+        },
+        {
+          "n": 64,
+          "points": 254,
+          "used": 561489
+        },
+        {
+          "n": 128,
+          "points": 510,
+          "used": 4334289
+        }
+      ],
+      "bag_width": 2,
+      "pinned_stars": 8,
+      "odd_cycle": 1,
+      "tamper": 1,
+      "omitted_entry": 1,
+      "width_refusals": 2,
+      "replay_refusal": 1,
+      "zero_budget": 1
+    },
+    {
+      "file": "scripts/check_pnp_separator_portfolio.py",
+      "blob": "36886b8cc53eb78a95f2309c54f94d0b05740667",
+      "seconds": 1.6,
+      "original_cnf": 192,
+      "guarded": 192,
+      "separator_replayed": 192,
+      "connected": [
+        {
+          "n": 16,
+          "points": 62,
+          "producer_used": 10039,
+          "prior": "WITNESS"
+        },
+        {
+          "n": 32,
+          "points": 126,
+          "producer_used": 65191,
+          "prior": "WITNESS"
+        },
+        {
+          "n": 64,
+          "points": 254,
+          "producer_used": 474503,
+          "prior": "WITNESS"
+        }
+      ],
+      "guarded_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_separator_marginals.py",
+      "blob": "5d29414301d2191aa49b4a4f6fc1d0c4d14f1f62",
+      "seconds": 1.26,
+      "sources": 216,
+      "original_coordinates": 864,
+      "star_reverse_points": [
+        63,
+        127,
+        255,
+        511
+      ],
+      "star_n": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "clipped_refusal": 1,
+      "budget_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_separator_threshold.py",
+      "blob": "48e0eba821f014d6cf306af550eb927fe1f05df2",
+      "seconds": 3.84,
+      "source_count": 64,
+      "cap": 200000,
+      "section34_vs_section35": [
+        {
+          "n": 12,
+          "prior": 16,
+          "separator": 16
+        },
+        {
+          "n": 20,
+          "prior": 16,
+          "separator": 10
+        },
+        {
+          "n": 32,
+          "prior": 4,
+          "separator": 3
+        },
+        {
+          "n": 48,
+          "prior": 0,
+          "separator": 0
+        }
+      ],
+      "lost_witness": 5,
+      "lost_empty": 2,
+      "recovered": 0,
+      "prior_default_unchanged": true
+    }
+  ],
+  "limits": [
+    "Selected min-induced-degree schedule, not optimum or universally bounded width.",
+    "Logical operation and reservation ledgers, not physical bit-time; full retained trace can require O(d*2^w) entries.",
+    "Replay independently recomputes entries and ownership, but uses same chart and original-factor evaluator; no independent native certification or durable JSON trace format.",
+    "Reverse contexts require exact counts and verify via exact replay; clipped input accepted only if it also satisfies exact replay.",
+    "Previous opt-in Section34 allocation is comparison baseline, not earlier Section33 default.",
+    "No universal endpoint, no native acceptance."
+  ]
+}

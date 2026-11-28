@@ -1,0 +1,167 @@
+{
+  "scope": "Local exact Python replay; new Fourier and online trace core/campaign blobs match committed content, alternating-state campaign matches local hash. Donors and continuation integration locally transcribed, no full checkout or kernel.",
+  "blobs": {
+    "dual": "94e6ff722713eebd4b76f90a382a057167096498",
+    "dual_campaign": "16d5d08acebebb04e11d147d7afc5fc87ed57c78",
+    "online": "42170ea67206a7c2cc942473557f3a3de52d8e87",
+    "online_campaign": "685d8f16023da7303711db47d799341cb5a1f6c2",
+    "alternating": "8daebf5a00f909a469514cd13ac95f5fc9d1c3c9"
+  },
+  "dual": {
+    "seed_base": 3692818,
+    "fixtures": 512,
+    "points": 49434,
+    "attempts": 2048,
+    "refused": 384,
+    "bounds": 4992,
+    "exact": 1038,
+    "partial": 626,
+    "probes": 11685,
+    "logical_work": 126779,
+    "probe_caps": [
+      1,
+      3,
+      9,
+      81
+    ],
+    "dense": [
+      {
+        "rank": 1,
+        "variables": 4,
+        "probes": 1,
+        "work": 15,
+        "count": "3",
+        "omitted_energy": [
+          0,
+          0
+        ]
+      },
+      {
+        "rank": 4,
+        "variables": 16,
+        "probes": 1,
+        "work": 57,
+        "count": "81",
+        "omitted_energy": [
+          0,
+          0
+        ]
+      },
+      {
+        "rank": 16,
+        "variables": 64,
+        "probes": 1,
+        "work": 225,
+        "count": "43046721",
+        "omitted_energy": [
+          0,
+          0
+        ]
+      },
+      {
+        "rank": 64,
+        "variables": 256,
+        "probes": 1,
+        "work": 897,
+        "count": "3433683820292512484657849089281",
+        "omitted_energy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "chirps": [
+      {
+        "rank": 1,
+        "modes": 3,
+        "energy_per_mode": 3,
+        "correlation": 3,
+        "one_mode_head": 1,
+        "one_mode_tail": 2
+      },
+      {
+        "rank": 2,
+        "modes": 9,
+        "energy_per_mode": 9,
+        "correlation": 9,
+        "one_mode_head": 1,
+        "one_mode_tail": 8
+      },
+      {
+        "rank": 3,
+        "modes": 27,
+        "energy_per_mode": 27,
+        "correlation": 27,
+        "one_mode_head": 1,
+        "one_mode_tail": 26
+      },
+      {
+        "rank": 4,
+        "modes": 81,
+        "energy_per_mode": 81,
+        "correlation": 81,
+        "one_mode_head": 1,
+        "one_mode_tail": 80
+      }
+    ]
+  },
+  "continuation": {
+    "seed_base": 3692814,
+    "fixtures": 256,
+    "queries": 512,
+    "positive_parents": 163,
+    "bound_checks": 4608,
+    "cert_0": 503,
+    "cert_4": 512,
+    "cert_32": 512,
+    "splits_32": 10,
+    "dual_attempts": 11,
+    "dual_refusals": 11,
+    "prior_splits_32": 10
+  },
+  "online": {
+    "seed_base": 3692819,
+    "cases": 2048,
+    "raw_steps": 96970,
+    "literal_steps": 17083,
+    "jumps": 2997,
+    "compile_lane_upper": 2457240,
+    "probe_lane_upper": 898259,
+    "dispatch_lane_upper": 130025,
+    "history_symbols": 85030,
+    "candidate_checks": 52094,
+    "probes": 69946,
+    "cache_hits": 6975,
+    "huge": {
+      "raw_steps": 1000000000001,
+      "literal_steps": 2,
+      "jumps": 1,
+      "compile_lane_upper": 12,
+      "probe_lane_upper": 252,
+      "dispatch_lane_upper": 10,
+      "history_symbols": 35,
+      "candidate_checks": 1,
+      "probes": 42,
+      "cache_hits": 0
+    }
+  },
+  "alternating": {
+    "seed_base": 3692820,
+    "fixtures": 4096,
+    "pairs": 73714,
+    "collisions": 38396,
+    "equality_checks": 87380
+  },
+  "execution": {
+    "timeout_seconds_per_batch": 90,
+    "dual_batches": 8,
+    "online_batches": 8,
+    "continuation_batches": 16,
+    "alternating_batches": 1,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "physical_bit_clock": false
+  }
+}

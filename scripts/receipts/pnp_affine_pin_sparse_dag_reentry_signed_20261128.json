@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local recovered repository scripts in /tmp/pnp_next; primary changed source Git blobs verified; selected dependency bodies inherited from earlier exact extracts. No CI or native kernels; full checkout DNS failure rechecked.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_affine_pin_dispatch.py",
+      "blob": "11db4bc009385e305c1e51cd776e05d97cd9abae",
+      "seconds": 0.94,
+      "comparisons": 1296,
+      "identity_controls": 3,
+      "cap4096": {
+        "WITNESS": 172,
+        "EMPTY": 249,
+        "UNKNOWN": 11
+      },
+      "transitions": {
+        "WITNESS->WITNESS": 157,
+        "EMPTY->EMPTY": 249,
+        "UNKNOWN->WITNESS": 15,
+        "UNKNOWN->UNKNOWN": 11
+      },
+      "tuning": {
+        "reserve_1/4": {
+          "new_witness": 18,
+          "lost_witness": 19
+        },
+        "reserve_1/8": {
+          "new_witness": 18,
+          "lost_witness": 3
+        },
+        "reserve_1/16": {
+          "new_witness": 15,
+          "lost_witness": 0
+        }
+      }
+    },
+    {
+      "file": "scripts/check_pnp_reentrant_sweep.py",
+      "blob": "176d5eeaf1e32e5550da8ba143494cff22e32b0d",
+      "seconds": 1.77,
+      "finite_reverse_endpoints": 720,
+      "huge_reverse_steps": 64,
+      "horizon": "10^60+1",
+      "sentinel_refusal": 2
+    },
+    {
+      "file": "scripts/check_pnp_sparse_dag_cut.py",
+      "blob": "2b8d41ac06680858e72e69ff2120c0cc2e6b4e27",
+      "seconds": 1.08,
+      "cuts": 1760,
+      "pointwise": 21824,
+      "strict_live_reduction": 1468,
+      "pruned_gate_occurrences": 7844,
+      "restricted_pointwise": 3968
+    },
+    {
+      "file": "scripts/check_pnp_signed_bit_schedule.py",
+      "blob": "b255022b8a622de5927dd7ffe0ee34eca7831659",
+      "seconds": 1.39,
+      "checks": 579,
+      "charged": 4003263
+    },
+    {
+      "file": "scripts/check_pnp_metered_portfolio_campaign.py",
+      "seconds": 1.94,
+      "source_cases": 1296,
+      "typed_controls": 3,
+      "charged": 4620701,
+      "at4096": {
+        "WITNESS": 157,
+        "EMPTY": 249,
+        "UNKNOWN": 26
+      },
+      "prefixBlob": "44fdcec1fa7c8f7d2e78055338b38910088254fd"
+    },
+    {
+      "file": "scripts/check_pnp_pin_signed_campaign.py",
+      "blob": "a805f277cce3d6eb2ce1e0974a6c0a8c2c033a83",
+      "seconds": 5.08,
+      "pin_cases": 1296,
+      "pin_charged": 9952949,
+      "prefix_clock_controls": 384,
+      "refused": 290,
+      "returned_sound_bounds": 94,
+      "exact_prefix": 96,
+      "prefix_charged": 4506879
+    }
+  ],
+  "additional": [
+    "Original 1299 integrated campaign PASS",
+    "Original changing-stabilizer forced-cut campaign PASS"
+  ],
+  "limits": [
+    "Pin dispatcher alternate entry point; reservation tuned on existing fixtures, not independent validation; RREF trace lacks linear-combination witness coefficients",
+    "Data operation ledger separate from logical reservation; not physical bit clock",
+    "Symbolic reentry is source word semantics, not huge integer materialization or actual same-target execution",
+    "Native DAG demand predicate does not yet certify sparse materialized renumbering; random fixtures contain dead gates",
+    "Native source-written proof bodies unelaborated; universal C1a/S1/R1 open"
+  ]
+}

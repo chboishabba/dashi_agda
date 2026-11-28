@@ -1,0 +1,95 @@
+{
+  "scope": "Independent local Python execution of transcribed donor functions and the rank-two/component implementations; campaign source combined from two local runs. Full repository checkout integration and native kernels not run.",
+  "seed": 3692712,
+  "counts": {
+    "sources": 560,
+    "SAT": 447,
+    "UNSAT": 113,
+    "unique": 82,
+    "cross_row_gain": 3,
+    "rank2_gain": 14,
+    "rank2_stall": 233,
+    "proved_empty_first": 110,
+    "screen_rank2_empty": 113,
+    "screen_origin": 395,
+    "screen_stalled": 52,
+    "stalled_SAT": 52,
+    "stalled_recovered": 52,
+    "all_components_exact": 560,
+    "tseitin_odd": 7,
+    "tseitin_even": 7,
+    "large_factor": 5,
+    "width_refusal": 5,
+    "large_no": 5,
+    "refusal_control": 1
+  },
+  "effective": 238104,
+  "pointchecks": 853992,
+  "examples": {
+    "cross_row": {
+      "M": [
+        {
+          "0": 6,
+          "2": -2,
+          "3": 2
+        },
+        {
+          "0": 10,
+          "2": 4,
+          "3": 4
+        },
+        {
+          "0": 10,
+          "1": 2,
+          "3": 2
+        }
+      ],
+      "caps": [
+        3,
+        5,
+        9
+      ],
+      "truth": [
+        1,
+        2
+      ],
+      "forced": [
+        [
+          3,
+          1
+        ]
+      ]
+    },
+    "rank2": {
+      "M": [
+        {
+          "0": 10,
+          "1": -4,
+          "2": -2,
+          "3": 2
+        },
+        {
+          "0": 12,
+          "1": -2,
+          "2": 6,
+          "3": -2
+        }
+      ],
+      "caps": [
+        7,
+        9
+      ],
+      "truth": [
+        0,
+        2
+      ],
+      "forced": [
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "limitations": "Small residual dimensions 2–5. Graph controls are cycle-plus-antipodal-matching parity systems, not an asymptotic expander proof. Large factors are deliberately independent rank-two blocks, dimensions 4–64, and negative controls append a constant violated row. No speed claim or uniform rank bound."
+}

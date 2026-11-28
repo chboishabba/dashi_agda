@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python tests under timeout 90 using recovered repository files. Primary source hashes verified against GitHub; existing donor dependency extracts not full-module parity. No CI or native kernel run.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_dag_cutset.py",
+      "blob": "8f6a53c607c162ec54468d302c5490072d96ee65",
+      "cuts": 1080,
+      "pointwise": 13392,
+      "restrictions": 720,
+      "strict_eliminations": 720,
+      "bypass": 1
+    },
+    {
+      "file": "scripts/check_pnp_normalized_ir.py",
+      "blob": "dff100ece8114d30106d0104806583627fedd8b7",
+      "seconds": 6.97,
+      "tables": 72,
+      "emitted_endpoints": 1296,
+      "malformed": 3
+    },
+    {
+      "file": "scripts/check_pnp_blank_sweep.py",
+      "blob": "9ec43d4ce0cb1561a35783170144d15de4b75a89",
+      "seconds": 1.44,
+      "finite": 936,
+      "huge_symbolic": 8,
+      "reversal_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_nat_bit_schedule.py",
+      "blob": "7b47462771d0e83e8be2cd1ab8b9e2b1f160651c",
+      "seconds": 5.42,
+      "checks": 1024,
+      "charged": 24129503
+    },
+    {
+      "file": "scripts/check_pnp_metered_portfolio_campaign.py",
+      "blob": "6f3ee0569c7b9011f286dce275d1d533fefd60bd",
+      "seconds": 1.93,
+      "source_cases": 1296,
+      "typed_controls": 3,
+      "charged": 4065390,
+      "categories": {
+        "nat_load": 210913,
+        "nat_copy": 539347,
+        "gate": 3019106,
+        "nat_store": 207617,
+        "load": 6143,
+        "head_move": 63410,
+        "read": 14096,
+        "write": 3540,
+        "register_copy": 1218
+      },
+      "at4096": {
+        "WITNESS": 157,
+        "EMPTY": 249,
+        "UNKNOWN": 26
+      },
+      "at10000000": {
+        "WITNESS": 183,
+        "EMPTY": 249
+      }
+    },
+    {
+      "file": "scripts/check_pnp_refusal_boundary.py",
+      "blob": "69038b0181833ce41d58a3a3564b9aa8c3bd466e",
+      "replay": 1,
+      "high_fill_easy": 1,
+      "data_refusal": 1
+    }
+  ],
+  "additional": [
+    "Original 1299 integrated campaign passed",
+    "Original changing-stabilizer forced-cut campaign passed"
+  ],
+  "changedVerified": {
+    "changing_stabilizer": "9ed7c913dded3f0b58447222ad2486dadcd1854e",
+    "bit_data_schedule": "95129a106cc2b6ec44e72446579530c4e2d0ae1c"
+  },
+  "fullCompilerBlobs": {
+    "stack_fractran": "a4feb63286560c6dcc65a76f2a44e12b49b22594",
+    "stack_priority_transport": "a852d9b046544c4beebeeb0aa125b49bedbb59bc",
+    "candidate_literal_endpoint": "295edcb1735f44a14dbd3ad4ec25bb21c85f2214"
+  },
+  "limits": [
+    "No full checkout (DNS failure) or native kernel acceptance",
+    "DAG evaluator extracted actual eval_circuit body from donor; finite random fixtures include dead gates and do not establish universal strict elimination",
+    "Native shared ABI not executed cross-kernel; Python comparison does not cover duplicate enumeration witnesses",
+    "Symbolic blank sweep is not a physical target run; nonblank huge packed integer/raw ledger not materialized",
+    "Unsigned bit register cost and data schedule are not whole-machine time; host control and other kernels remain unmetered",
+    "Refusal replay does not certify hardness",
+    "All universal P0 open"
+  ]
+}

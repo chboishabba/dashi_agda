@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-28",
+  "scope": "standalone exact Python reference campaigns, reconstructed locally and matched to committed Git blob; integrated solver and emitter flags not run; native kernels deferred; no CI",
+  "runs": [
+    {
+      "source": "scripts/check_pnp_source_derived_cover.py",
+      "commit": "4753c6fb6295e6edf1bfd20818fb6ebb2e953f5a",
+      "blob": "365541ff81ecef65ad6221e9c5ed6e6f55d51ea7",
+      "seconds": 0.86,
+      "exit": 0,
+      "counts": {
+        "original_fibres": 432,
+        "path_width": 2,
+        "planning_refusal": 1
+      }
+    },
+    {
+      "source": "scripts/check_pnp_packed_macro_endpoint.py",
+      "commit": "6ee531978800bc6ac07576030d280487ccd91846",
+      "blob": "4a2c82951e9cc28bb4cbd96a13a772f0e5b8355f",
+      "seconds": 1.02,
+      "exit": 0,
+      "counts": {
+        "packed_word_endpoints": 28724
+      }
+    },
+    {
+      "source": "scripts/check_pnp_actual_event_capacity.py",
+      "commit": "51088c17a8c95f3e7bfcfcc8cdb6bf9299a250cc",
+      "blob": "381d09b74a808101422a34da090e140444a8314a",
+      "seconds": 1.21,
+      "exit": 0,
+      "columns": [
+        "variables",
+        "unsat_rivals",
+        "overlapping_receipts",
+        "distinct_event_positions",
+        "max_event_load",
+        "max_window_load"
+      ],
+      "counts": [
+        [
+          1,
+          1,
+          2,
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          7,
+          33,
+          2,
+          19,
+          24
+        ],
+        [
+          3,
+          37,
+          317,
+          3,
+          133,
+          248
+        ],
+        [
+          4,
+          175,
+          2360,
+          4,
+          882,
+          1760
+        ],
+        [
+          5,
+          781,
+          15140,
+          5,
+          5047,
+          11316
+        ],
+        [
+          6,
+          3367,
+          88139,
+          6,
+          26600,
+          66111
+        ]
+      ]
+    }
+  ]
+}

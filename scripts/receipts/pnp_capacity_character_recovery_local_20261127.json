@@ -1,0 +1,316 @@
+{
+  "key": "da7c917628b26f64283ff7a2c3a7d37471bb394e249da80d1e9d3b8db3d82d08",
+  "cases": [
+    {
+      "name": "small_0",
+      "extensions": 12,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 317939
+    },
+    {
+      "name": "small_1",
+      "extensions": 5,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 62075
+    },
+    {
+      "name": "small_2",
+      "extensions": 24,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 55935
+    },
+    {
+      "name": "small_3",
+      "extensions": 6,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 22536
+    },
+    {
+      "name": "small_4",
+      "extensions": 7,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 5186
+    },
+    {
+      "name": "small_5",
+      "extensions": 12,
+      "intervals": 6,
+      "proofs": 2,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 280578
+    },
+    {
+      "name": "small_6",
+      "extensions": 6,
+      "intervals": 4,
+      "proofs": 0,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 6252
+    },
+    {
+      "name": "small_7",
+      "extensions": 96,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 4782796
+    },
+    {
+      "name": "small_8",
+      "extensions": 8,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 11543
+    },
+    {
+      "name": "small_9",
+      "extensions": 5,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 4049
+    },
+    {
+      "name": "small_10",
+      "extensions": 5,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 4001
+    },
+    {
+      "name": "small_11",
+      "extensions": 5,
+      "intervals": 5,
+      "proofs": 1,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 24791
+    },
+    {
+      "name": "small_12",
+      "extensions": 28,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 3,
+      "refusals": 2,
+      "charged": 8227235
+    },
+    {
+      "name": "small_13",
+      "extensions": 8,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 0,
+      "charged": 4056
+    },
+    {
+      "name": "small_14",
+      "extensions": 48,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 4997125
+    },
+    {
+      "name": "small_15",
+      "extensions": 96,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 1218369
+    },
+    {
+      "name": "small_16",
+      "extensions": 5,
+      "intervals": 5,
+      "proofs": 1,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 32969
+    },
+    {
+      "name": "small_17",
+      "extensions": 48,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 1685283
+    },
+    {
+      "name": "small_18",
+      "extensions": 24,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 575012
+    },
+    {
+      "name": "small_19",
+      "extensions": 24,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 48301
+    },
+    {
+      "name": "small_20",
+      "extensions": 96,
+      "intervals": 6,
+      "proofs": 1,
+      "witnesses": 4,
+      "refusals": 2,
+      "charged": 18498037
+    },
+    {
+      "name": "small_21",
+      "extensions": 48,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 3032303
+    },
+    {
+      "name": "small_22",
+      "extensions": 20,
+      "intervals": 5,
+      "proofs": 0,
+      "witnesses": 5,
+      "refusals": 1,
+      "charged": 1400103
+    },
+    {
+      "name": "small_23",
+      "extensions": 96,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 3,
+      "refusals": 1,
+      "charged": 7161046
+    },
+    {
+      "name": "small_24",
+      "extensions": 10,
+      "intervals": 5,
+      "proofs": 1,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 348187
+    },
+    {
+      "name": "small_25",
+      "extensions": 6,
+      "intervals": 3,
+      "proofs": 0,
+      "witnesses": 3,
+      "refusals": 0,
+      "charged": 4290
+    },
+    {
+      "name": "small_26",
+      "extensions": 12,
+      "intervals": 5,
+      "proofs": 1,
+      "witnesses": 4,
+      "refusals": 0,
+      "charged": 575153
+    },
+    {
+      "name": "small_27",
+      "extensions": 6,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 4884
+    },
+    {
+      "name": "small_28",
+      "extensions": 11,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 5343
+    },
+    {
+      "name": "small_29",
+      "extensions": 36,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 104152
+    },
+    {
+      "name": "small_30",
+      "extensions": 3,
+      "intervals": 3,
+      "proofs": 0,
+      "witnesses": 3,
+      "refusals": 0,
+      "charged": 2471
+    },
+    {
+      "name": "small_31",
+      "extensions": 8,
+      "intervals": 3,
+      "proofs": 0,
+      "witnesses": 3,
+      "refusals": 0,
+      "charged": 23617
+    },
+    {
+      "name": "small_32",
+      "extensions": 24,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 295774
+    },
+    {
+      "name": "small_34",
+      "extensions": 6,
+      "intervals": 6,
+      "proofs": 0,
+      "witnesses": 6,
+      "refusals": 0,
+      "charged": 10108
+    },
+    {
+      "name": "scope",
+      "status": "PASS",
+      "charged": 12425
+    }
+  ]
+}

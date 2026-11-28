@@ -1,0 +1,134 @@
+{
+  "scope": "Local exact Python replay. Both new executable cores and campaigns match committed Git blob hashes; imported donors and continuation integration locally transcribed, not full checkout.",
+  "blobs": {
+    "phase": "19e3ec2ffc88ca6928e0886d242eafb55515279d",
+    "phase_campaign": "53108c911c921cdd45c3ec8631ecf2af3c4a20ff",
+    "mobius": "c160630379354947ef2c6c5e135fb544b0a59ccd",
+    "mobius_campaign": "ce83e3b98191aea919b1ba516d7284f68291a597"
+  },
+  "quadratic": {
+    "seed_base": 3692821,
+    "fixtures": 512,
+    "points": 8817,
+    "attempts": 2048,
+    "exact": 1845,
+    "refused": 203,
+    "structured_blocks": 592,
+    "exceptional_blocks": 986,
+    "branches": 5655,
+    "logical_work": 52264,
+    "gauss_checks": 512,
+    "gauss_points": 79790,
+    "additional_random_gauss_checks": 700,
+    "controls": {
+      "opposite_rank64": {
+        "variables": 256,
+        "phase_rank": 128,
+        "character": [
+          "3433683820292512484657849089281",
+          "0"
+        ],
+        "branches": 1,
+        "work": 35460
+      },
+      "same_rank64": {
+        "variables": 256,
+        "phase_rank": 128,
+        "character": [
+          "1853020188851841",
+          "0"
+        ],
+        "branches": 1,
+        "work": 37604
+      },
+      "mixed_rank12": {
+        "variables": 420,
+        "affine_rows": 132,
+        "clauses": 3642,
+        "hist": [
+          177633,
+          176904,
+          176904
+        ],
+        "character": [
+          729,
+          0
+        ],
+        "branches": 1,
+        "work": 135448
+      },
+      "connected": {
+        "variables": 32,
+        "normal_queries": 3,
+        "count": 1903186,
+        "work": 16389
+      },
+      "cubic_refusal": true,
+      "nonaffine_refusal": true,
+      "translated_affine_acceptance": true
+    }
+  },
+  "mobius": {
+    "seed_base": 3692822,
+    "fixtures": 512,
+    "points": 40243,
+    "attempts": 2048,
+    "exact": 1898,
+    "refused": 150,
+    "work": 126453,
+    "terms": 4062,
+    "cube_states": 50067,
+    "selector": {
+      "variables": 264,
+      "clauses": 256,
+      "selector_bits": 8,
+      "terms": 257,
+      "character": [
+        0,
+        -256
+      ],
+      "work": 168354,
+      "model_count_formula": "256*2^255",
+      "term_cap_refusal": true
+    }
+  },
+  "continuation": {
+    "seed_base": 3692814,
+    "fixtures": 256,
+    "queries": 512,
+    "positive_parents": 163,
+    "bound_checks": 4608,
+    "cert_0": 512,
+    "cert_4": 512,
+    "cert_32": 512,
+    "splits_0": 0,
+    "splits_4": 0,
+    "splits_32": 0,
+    "prior_splits_32": 10,
+    "phase_only": {
+      "cert_0": 503,
+      "splits_32": 10,
+      "attempts": 11,
+      "refused": 11
+    },
+    "mobius": {
+      "attempts": 11,
+      "completed": 11,
+      "terms": 949,
+      "work": 13733
+    },
+    "prior_normal_completed": 2,
+    "prior_normal_work": 3104
+  },
+  "execution": {
+    "timeout_seconds_per_batch": 90,
+    "phase_batches": 8,
+    "mobius_batches": 8,
+    "continuation_batches": 16,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "physical_bit_clock": false
+  }
+}

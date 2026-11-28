@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-28",
+  "status": "PASS",
+  "scope": "local extracted dependency replay, exact Git blob match; not native kernel or full checkout",
+  "script": "scripts/check_pnp_hyperfabric_epoch_cluster_abi.py",
+  "script_blob": "d75c7662fdd922c390060bd5611909aaad751755",
+  "donors": {
+    "check_pnp_conditional_autarky.py": "4443a0eb9742b420310ac535e7dd672a95c3ca44",
+    "check_pnp_cook_affine_seek.py": "7972c98fbcd635b914c95e19fa4fac09c98d2593",
+    "check_pnp_cook_affine_seek_campaign.py": "10135b28739a7a14ab9f1b17d53e8a68772ff4bf",
+    "check_pnp_cook_quadratic_seek.py": "e527024503ef7edbfc41c097451fcb80c676ec88"
+  },
+  "command": "timeout 90s python check_pnp_hyperfabric_epoch_cluster_abi.py",
+  "counts": {
+    "cluster_fibres": 1728,
+    "epoch_anchors": 768,
+    "minimal_events": 1381,
+    "compact_bits": 124221,
+    "huge_boundaries": 4
+  },
+  "huge_horizon": "10^100",
+  "assertions_enabled": true,
+  "limitations": [
+    "Explicit fixed-exterior independent-interior patch join; untouched clauses are caller responsibility; no universal cluster width claim.",
+    "Actual adaptive read-event model; no arbitrary machine lower bound.",
+    "Compact index frame assumes a resident fixed layout; paid bits are frame length, not aggregate physical clock.",
+    "Full checkout blocked by DNS; native verification deferred; no CI invoked."
+  ]
+}

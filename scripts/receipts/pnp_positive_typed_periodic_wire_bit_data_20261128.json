@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-28",
+  "method": "Local Python under timeout 90. Full reconstructed primary source files matched committed Git blobs; selected dependencies were exact extracted function bodies, not complete modules. No CI or native kernel execution.",
+  "runs": [
+    {
+      "campaign": "check_pnp_integrated_source_campaign.py",
+      "seconds": 0.88,
+      "checks": 1299,
+      "at4096": {
+        "WITNESS": 157,
+        "EMPTY": 249,
+        "UNKNOWN": 26,
+        "POSITIVE_NO_LIFT": 0
+      },
+      "fixturewiseComparison": {
+        "EMPTY_to_EMPTY": 249,
+        "WITNESS_to_WITNESS": 117,
+        "POSITIVE_NO_LIFT_to_WITNESS": 40,
+        "UNKNOWN_to_UNKNOWN": 26
+      },
+      "forcedCut": "PASS",
+      "highFill": {
+        "WITNESS": 2,
+        "EMPTY": 1
+      },
+      "at10000000": {
+        "WITNESS": 183,
+        "EMPTY": 249
+      }
+    },
+    {
+      "campaign": "check_pnp_typed_portfolio_campaign.py",
+      "blob": "04238c17322bb2b4bf781dd3fe5e4063ed28a0f0",
+      "seconds": 0.72,
+      "counts": {
+        "cnf": 1,
+        "SAT": 2,
+        "IMPROVED": 5,
+        "MINIMUM": 7,
+        "refusal": 1
+      },
+      "reservations": {
+        "original_cnf": 1000000,
+        "hard_affine": 42000000
+      }
+    },
+    {
+      "campaign": "check_pnp_periodic_candidate.py",
+      "blob": "7e471633bda3f7ca90cf65633f10e38717d6d8d3",
+      "seconds": 19.39,
+      "finite_endpoints": 1200,
+      "huge_periodic": 48,
+      "huge_horizon": "10^60+1",
+      "template_not_state": 1
+    },
+    {
+      "campaign": "check_pnp_wire_rank_capacity.py",
+      "blob": "d818c034b26e631ebbc769c1c880e170f552563e",
+      "seconds": 0.94,
+      "explicit_output_families": 7,
+      "inner_product_families": 8,
+      "largest": {
+        "input_half": 8,
+        "sign_matrix_rank": 256,
+        "boolean_gates_upper": 43,
+        "orthogonal_row_pairs": 32640
+      }
+    },
+    {
+      "campaign": "check_pnp_bit_data_schedule.py",
+      "blob": "b3d92a19d423c3f0399e16b3d1c28b3668fb8b73",
+      "field": 18,
+      "rref": 432,
+      "audit": 378,
+      "refusal": 1,
+      "charged": 450465
+    },
+    {
+      "campaign": "check_pnp_metered_portfolio_campaign.py",
+      "blob": "297a0bab74ae152ee076f4ac97ac19fc2e0109b9",
+      "seconds": 1,
+      "source_fibre_allowance_cases": 1296,
+      "typed_controls": 3,
+      "charged": 153179,
+      "categories": {
+        "load": 6143,
+        "gate": 64772,
+        "head_move": 63410,
+        "read": 14096,
+        "write": 3540,
+        "register_copy": 1218
+      }
+    }
+  ],
+  "verifiedChangedBlobs": {
+    "positive_residual": "a09eae16e913dffb3057910475b9fc0c2fd2d3e9",
+    "changing_stabilizer": "0a1cb8a8fca5676c768b754aa9aa0fc5e62b9c9e",
+    "source_derived_cover": "065e26c274ae4c2097c7d55f33cf2621f5132546",
+    "mobius_prefix": "77e6e6e0359072531e13750f5d232b22629cbc4c",
+    "typed_portfolio": "87123208d4f5fe5face15238f2819fa3f0a4b433"
+  },
+  "extractedDependencies": [
+    "conditional_autarky.project/canon/accepts",
+    "binary_support_endpoint.child_bounds",
+    "check_p0_signed_contrast_20261125.ContinuationAllowance",
+    "affine_normal_components.bits/canon/chart/satisfies/Exhausted",
+    "aggregate_excess_demand.compile_excess_demand",
+    "shared_tseitin_parsimonious.optimized_clauses",
+    "fractran_trace.trace",
+    "previous extracted recursive_quotient.act/canonical, signed_component_histogram.rref, f3_syndrome_boundary.span/chart, hyperfabric_owned_joins.alloc_lane_prime/literal_instruction"
+  ],
+  "limits": [
+    "declared logical cap not physical clock",
+    "metered bit-data schedule charges explicit field register gates and data tape moves/reads/writes, not host address/loop/control, compiler, histogram integer operations, symmetry or full physical clock",
+    "periodic shortcut exact represented execution only, not same-object guarded diagonal",
+    "wire rank bound explicit mandatory outputs only",
+    "native Agda/Lean deferred, universal endpoints open"
+  ]
+}

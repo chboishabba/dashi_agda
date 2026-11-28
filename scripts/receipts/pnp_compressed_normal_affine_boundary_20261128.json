@@ -1,0 +1,153 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python /tmp/pnp36, timeout 90 per campaign; final four primary blobs checked against connector readback. Section34 rational chart and Reservation exact blob parity; normal tree and GF2 canon local recovered selected source bodies, not full-module/transitive checkout parity. Native kernels unavailable; no CI.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_normal_mass.py",
+      "blob": "930e4a64661f04b2fe0a36a59077b679a71f8639",
+      "seconds": 1.06,
+      "independent_sources": 288,
+      "exact_clipped": 576,
+      "EMPTY": 348,
+      "WITNESS": 228,
+      "wide": [
+        {
+          "n": 16,
+          "width": 1,
+          "entries": 5,
+          "used": 2109
+        },
+        {
+          "n": 32,
+          "width": 1,
+          "entries": 5,
+          "used": 7773
+        },
+        {
+          "n": 64,
+          "width": 1,
+          "entries": 5,
+          "used": 29853
+        },
+        {
+          "n": 128,
+          "width": 1,
+          "entries": 5,
+          "used": 117021
+        }
+      ],
+      "wide_rank_zero_flat": 4,
+      "wide_rank_zero_onehot": 4,
+      "width_refusal": 1,
+      "budget_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_affine_accumulator.py",
+      "blob": "97fbd4819fcbd954f59f840aa2042f8e47b51a89",
+      "seconds": 1.07,
+      "independent_sources": 216,
+      "exact_clipped": 432,
+      "WITNESS": 152,
+      "EMPTY": 280,
+      "cardinality": [
+        {
+          "n": 16,
+          "peak": 15,
+          "steps": 240
+        },
+        {
+          "n": 32,
+          "peak": 31,
+          "steps": 992
+        },
+        {
+          "n": 64,
+          "peak": 63,
+          "steps": 4032
+        },
+        {
+          "n": 128,
+          "peak": 127,
+          "steps": 16256
+        }
+      ],
+      "state_refusal": 1,
+      "zero_cap": 1
+    },
+    {
+      "file": "scripts/check_pnp_affine_order.py",
+      "blob": "3bf2a3e5cfb4799caf079fa1ddfe581fff721abc",
+      "seconds": 1.01,
+      "independent": 288,
+      "paired_signed": [
+        {
+          "k": 8,
+          "n": 17,
+          "peak": 2,
+          "steps": 48,
+          "used": 2601
+        },
+        {
+          "k": 16,
+          "n": 33,
+          "peak": 2,
+          "steps": 96,
+          "used": 9273
+        },
+        {
+          "k": 32,
+          "n": 65,
+          "peak": 2,
+          "steps": 192,
+          "used": 34905
+        },
+        {
+          "k": 64,
+          "n": 129,
+          "peak": 2,
+          "steps": 384,
+          "used": 135321
+        }
+      ],
+      "fixed_order_refusal": 4,
+      "zero_cap": 1
+    },
+    {
+      "file": "scripts/check_pnp_compressed_boundary_portfolio.py",
+      "blob": "d199516a476746e5ab0ed324b5a9ae059f67db51",
+      "seconds": 1.38,
+      "original_sources": 192,
+      "exact_route_checks": 384,
+      "guarded_route_checks": 384,
+      "wide_original": [
+        {
+          "n": 16,
+          "normal_used": 6137,
+          "rational_used": 6736
+        },
+        {
+          "n": 32,
+          "normal_used": 40673,
+          "rational_used": 42888
+        },
+        {
+          "n": 64,
+          "normal_used": 293297,
+          "rational_used": 301816
+        },
+        {
+          "n": 128,
+          "normal_used": 2220881,
+          "rational_used": 2254296
+        }
+      ],
+      "refusals": 4
+    }
+  ],
+  "limits": [
+    "Normal tree counts source functional restrictions and kernel lift, not ambient multiplicity per child. Existing tree planning cap only logical; rank algebra and big integer cost not fully metered. No independent table replay or native receipt deserialization for new normal mass.",
+    "Rational accumulator uses original rational chart, explicit order, reachable state cap, exact sums. Signed interval pruning only necessary, not sufficient. No universal polynomial state bound or optimal chart/order theorem.",
+    "Original CNF exact-one compression verified by source membership; native equivalence source-written. Integer/F3/GF2 semantics distinct. New route explicit opt-in, no default changes and no threshold improvement claim.",
+    "All seven universal route targets remain open; no native acceptance or unrestricted lower bound."
+  ]
+}

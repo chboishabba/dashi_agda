@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python timeout90 in /tmp/pnp30, recovered exact selected direct-branch donor function bodies; not a complete checkout or native kernel acceptance. Four new executable blobs match local git hash-object and committed readback.",
+  "sources": {
+    "normal_components": "8b5a9f1170d3cce5bdf51e92684df2d790213380",
+    "normal_boundary": "3e8ffd1beeec472915caacb5b45029efd01a8aab",
+    "endpoint_portfolio": "dfb744bc4e42064b3a0ea40689f7c6575a526ef7",
+    "typed_portfolio": "b1a9c701b6cbf418daacb02e7914f216744a6782"
+  },
+  "runs": [
+    {
+      "file": "scripts/check_pnp_normal_endpoint_weld.py",
+      "blob": "95e947c7e8c277c6994d840fc14e1a23951825d0",
+      "campaign": "scripts/check_pnp_normal_endpoint_campaign.py",
+      "campaignBlob": "7c224bda495f896d07ffad301c34be61854352a0",
+      "seconds": 2.467,
+      "puncture_clipped": 288,
+      "original_x3c": 240,
+      "connected36": {
+        "prior": {
+          "WITNESS": 4,
+          "UNKNOWN": 32
+        },
+        "component_first": {
+          "WITNESS": 13,
+          "UNKNOWN": 23
+        },
+        "transition": {
+          "WITNESS->WITNESS": 4,
+          "UNKNOWN->WITNESS": 9,
+          "UNKNOWN->UNKNOWN": 23
+        },
+        "cap": 20000,
+        "boundary_first_failed": {
+          "WITNESS": 0,
+          "UNKNOWN": 36
+        }
+      },
+      "latin": [
+        {
+          "q": 3,
+          "status": "WITNESS",
+          "width": 2
+        },
+        {
+          "q": 4,
+          "status": "EMPTY",
+          "width": 6
+        },
+        {
+          "q": 5,
+          "status": "WITNESS",
+          "width": 12
+        },
+        {
+          "q": 6,
+          "status": "EMPTY",
+          "route": "parity_inconsistent"
+        }
+      ],
+      "refusal": 2
+    },
+    {
+      "file": "scripts/check_pnp_gain_bisection.py",
+      "blob": "0ad591543e57fed8d5b6bbd4cab2be1314e20db1",
+      "nonmonotone_paths": 4095,
+      "actual_zero_budget_gains": 110,
+      "root_verified": 110,
+      "positive_budget_interior_gains": 22,
+      "refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_dag_frontier_capacity.py",
+      "blob": "0d001b471e7327fecbe53b5fc00934a891c5f106",
+      "seconds": 0.678,
+      "cases": 384,
+      "sensitivity_comparisons": 41088,
+      "essential": 335,
+      "sharp_AND": 7
+    },
+    {
+      "scope": "Inline existing typed dispatcher opt-in solver, local exact source",
+      "cnf": 5,
+      "IMPROVED": 5,
+      "MINIMUM": 7,
+      "SAT": 2,
+      "root_reservations": {
+        "original_cnf": 5000000,
+        "hard_affine": 42000000
+      }
+    }
+  ],
+  "limitations": [
+    "Declared logical allowances; no physical clock receipt, donor operations and preflight validation polynomial overhead not individually metered; optional audit is original witness verification only.",
+    "Donor Budget.pay records rejected charge on exhaustion; root share reserved in full, no assertion rejected donor stats<=cap.",
+    "Connected 36-source allocation comparison in-sample, not universal or optimum width, no claim random sources are hard in worst-case sense.",
+    "Gain localization assumes given valid original witness and fixed deterministic producer; fully pinned override explicit, ROOT_VERIFIED not no-gain certification; not full-code deadline.",
+    "DAG bound is essential input lower bound at most input dimension; cannot resolve S1.",
+    "Native proof bodies unrun; no CI. All universal targets remain open."
+  ]
+}
