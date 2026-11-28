@@ -1363,3 +1363,64 @@ module At {r : Level} (F : C.RealField r)
   -- The payment record is deliberately PARAMETRIC in the actual
   -- physical propositions; there is no postulate or default inhabitant.
   -- Source ledger != accepted physical continuum theorem.
+
+  ------------------------------------------------------------------------
+  -- BR43: FULL PHYSICAL TWO-ENDED TRACE/PREMIUM CARRIER.
+  --
+  -- The 1D weighted H¹ trace theorem on a positive normal collar
+  -- controls time-derivative endpoint traces by the normal H¹ norm
+  -- of the time derivative. That normal derivative is an *extra*
+  -- physical regularity currency, not a term in BR4's lowest energy.
+  --
+  -- Mathematical analytic owner (real/Hermitian) for w >= m > 0:
+  -- |v(0)|²+|v(L)|² <= 4/(Lm) ∫ w|v|² + 2L/m ∫ w|∂n v|².
+  -- This ring-level carrier stores the exact source slots, but does
+  -- not falsely assign positivity to the complex-bilinear norm.
+  ------------------------------------------------------------------------
+
+  record PhysicalTraceCurrency : Set r where
+    constructor physicalTraceCurrency
+    field
+      metricVelocityPlus metricVelocityMinus : Tensor
+      gaugeVelocityPlus gaugeVelocityMinus : Cov
+      metricNormalTimeDerivativePlus metricNormalTimeDerivativeMinus : Tensor
+      gaugeNormalTimeDerivativePlus gaugeNormalTimeDerivativeMinus : Cov
+      normalWeightedMetricMass : S
+      normalWeightedMetricDerivative : S
+      normalWeightedGaugeMass : S
+      normalWeightedGaugeDerivative : S
+      metricNormalDerivativePremium : S
+      gaugeNormalDerivativePremium : S
+  open PhysicalTraceCurrency public
+
+  -- Distinct current and higher-energy sources. Do NOT unify them by a
+  -- generic positive identifier: an independently proved normal H¹
+  -- estimate and BR4 differentiated energy are needed for absorption.
+  record PhysicalTraceEnergyPayment : Set r where
+    constructor physicalTraceEnergyPayment
+    field
+      originalLowerEnergy : S
+      originalNormalDifferentiatedEnergy : S
+      metricBoundaryForcing : S
+      subsidiaryBoundaryForcing : S
+      metricTraceConstant : S
+      normalTraceConstant : S
+      residualUnpaidHigherEnergy : S
+  open PhysicalTraceEnergyPayment public
+
+  -- In an analytic weighted Hilbert-space instance the two trace
+  -- constants can be 4/(L m) and 2L/m. Positivity and reciprocal laws
+  -- must be supplied by the real ordered/weighted physical domain
+  -- owner, not by the arbitrary Complex RealField here.
+  traceEnergyBudget : PhysicalTraceEnergyPayment → S
+  traceEnergyBudget p =
+    metricTraceConstant p * originalLowerEnergy p
+    + normalTraceConstant p * originalNormalDifferentiatedEnergy p
+    + metricBoundaryForcing p + subsidiaryBoundaryForcing p
+    + residualUnpaidHigherEnergy p
+
+  -- The actual 15+5 transported channel slots and the normal-jet
+  -- currency are retained. BR37 Q^4/Q² losses must be paid at
+  -- tangential Sobolev orders s+4/s+2 separately from this normal H¹
+  -- premium; nothing in this finite carrier promotes them to a
+  -- uniform glancing estimate.
