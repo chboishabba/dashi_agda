@@ -1,0 +1,188 @@
+{
+  "source": "scripts/check_pi_gmp_quotient_residual.cpp",
+  "git_blob": "28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e",
+  "local_blob_verified": true,
+  "repetitions": 3,
+  "per_precision_timeout_seconds": 90,
+  "execution": "direct original executable, separate bounded runs; wrapper not executed",
+  "analytic_premises": "classical Chudnovsky identity and alternating tail",
+  "rows": [
+    {
+      "digits": 10000,
+      "mode": "plain_two_floors",
+      "median_total_ms": 2.197,
+      "median_split_ms": 0.606,
+      "median_division_ms": 0.268,
+      "triple_bits": 142231,
+      "last_attempts": 1,
+      "sha256": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 10000,
+      "mode": "plain_one_floor",
+      "median_total_ms": 2.073,
+      "median_split_ms": 0.877,
+      "median_division_ms": 0.269,
+      "triple_bits": 142231,
+      "last_attempts": 1,
+      "sha256": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 10000,
+      "mode": "cross_two_floors",
+      "median_total_ms": 3.457,
+      "median_split_ms": 1.31,
+      "median_division_ms": 0.245,
+      "triple_bits": 90233,
+      "last_attempts": 1,
+      "sha256": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 10000,
+      "mode": "cross_one_floor",
+      "median_total_ms": 2.304,
+      "median_split_ms": 1.284,
+      "median_division_ms": 0.279,
+      "triple_bits": 90233,
+      "last_attempts": 1,
+      "sha256": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 100000,
+      "mode": "plain_two_floors",
+      "median_total_ms": 48.781,
+      "median_split_ms": 16.434,
+      "median_division_ms": 8.009,
+      "triple_bits": 1633834,
+      "last_attempts": 1,
+      "sha256": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 100000,
+      "mode": "plain_one_floor",
+      "median_total_ms": 47.87,
+      "median_split_ms": 15.765,
+      "median_division_ms": 7.316,
+      "triple_bits": 1633834,
+      "last_attempts": 1,
+      "sha256": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 100000,
+      "mode": "cross_two_floors",
+      "median_total_ms": 50.086,
+      "median_split_ms": 22.831,
+      "median_division_ms": 7.523,
+      "triple_bits": 903197,
+      "last_attempts": 1,
+      "sha256": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 100000,
+      "mode": "cross_one_floor",
+      "median_total_ms": 49.676,
+      "median_split_ms": 23.846,
+      "median_division_ms": 5.919,
+      "triple_bits": 903197,
+      "last_attempts": 1,
+      "sha256": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 500000,
+      "mode": "plain_two_floors",
+      "median_total_ms": 396.107,
+      "median_split_ms": 150.496,
+      "median_division_ms": 56.268,
+      "triple_bits": 8915236,
+      "last_attempts": 1,
+      "sha256": "fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 500000,
+      "mode": "plain_one_floor",
+      "median_total_ms": 355.696,
+      "median_split_ms": 148.782,
+      "median_division_ms": 43.525,
+      "triple_bits": 8915236,
+      "last_attempts": 1,
+      "sha256": "fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 500000,
+      "mode": "cross_two_floors",
+      "median_total_ms": 423.976,
+      "median_split_ms": 227.455,
+      "median_division_ms": 51.465,
+      "triple_bits": 4517094,
+      "last_attempts": 1,
+      "sha256": "fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 500000,
+      "mode": "cross_one_floor",
+      "median_total_ms": 402.753,
+      "median_split_ms": 231.322,
+      "median_division_ms": 35.448,
+      "triple_bits": 4517094,
+      "last_attempts": 1,
+      "sha256": "fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 1000000,
+      "mode": "plain_two_floors",
+      "median_total_ms": 862.008,
+      "median_split_ms": 358.274,
+      "median_division_ms": 119.164,
+      "triple_bits": 18472995,
+      "last_attempts": 1,
+      "sha256": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 1000000,
+      "mode": "plain_one_floor",
+      "median_total_ms": 843.515,
+      "median_split_ms": 358.668,
+      "median_division_ms": 96.351,
+      "triple_bits": 18472995,
+      "last_attempts": 1,
+      "sha256": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 1000000,
+      "mode": "cross_two_floors",
+      "median_total_ms": 993.142,
+      "median_split_ms": 584.006,
+      "median_division_ms": 100.328,
+      "triple_bits": 9034322,
+      "last_attempts": 1,
+      "sha256": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 1000000,
+      "mode": "cross_one_floor",
+      "median_total_ms": 1025.702,
+      "median_split_ms": 616.781,
+      "median_division_ms": 76.914,
+      "triple_bits": 9034322,
+      "last_attempts": 1,
+      "sha256": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+      "historical_hash_match": true
+    }
+  ],
+  "external_sota_compared": false
+}
