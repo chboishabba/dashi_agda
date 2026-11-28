@@ -27,6 +27,26 @@ def leaf(m,a):
     assert L*Q==S.eye(Q.cols)
     return Q,L
 
+def exact_tangency(m,a,Q,L):
+    from solar_steelman_history_matrix_enclosure import construct
+    (A,_),(B,_),(C,_),_=construct(m,a,0,1,structural=True)
+    for label,F in (('present',A*Q),('delay1',B),('delay2',C)):
+        D=F-Q*(L*F)
+        if any(S.expand(v)!=0 for v in D):
+            raise ValueError('invariant leaf not preserved: '+label)
+    return True
+
+def endpoint_ratio(m,a):
+    n=len(a['models']);nc=m['d']['M'].rows+m['d']['N'].rows+m['H'].rows+32
+    R=S.zeros(n,nc+5*n+4)
+    for k,(_,_,c) in enumerate(a['models']):
+        z=S.simplify(sum(c.values()))
+        dz=S.simplify(sum(S.I*j*v for j,v in c.items()))
+        assert z.is_Rational and z>0 and dz.is_Rational
+        R[k,nc+k]=R[k,nc+n+k]=1/z
+        R[k,nc+2*n+k]=dz/z;R[k,nc+3*n+k]=-dz/z
+    return R
+
 def section(Q,L,n,knots,R0):
     d,k=Q.shape;h=n*knots
     U=S.diag(Q,S.eye(h));V=S.diag(L,S.eye(h))
