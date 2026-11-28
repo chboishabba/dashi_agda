@@ -1,12 +1,11 @@
 module DASHI.Physics.Foundations.Hopf369MarkedHistoryResidualExact where
 
--- BR286: native source-specific affine history attachment on the original
--- marked chart. Not an autonomous flow or authenticated numerical snapshot.
--- Source-written; kernel acceptance outstanding.
+-- BR306: native source-specific two-path history residual on the original
+-- marked chart. The odd paths remain distinct: only their explicit outputs
+-- are proven by reduction. No autonomous flow or kernel acceptance.
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _+_; _-_)
-import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Core.GovernedIndexedResidualCubeExact as C
 import DASHI.Core.GovernedDiagramCore as G
 import DASHI.Physics.Foundations.Hopf369MarkedTidalCubeExact as M
@@ -40,20 +39,24 @@ record MarkedResidual (s : Step) (a : M.Marked) : Set where
     evenAgreement :
       M.evenScale (advance s (M.reflect (centre s) a)) ≡
       M.evenScale (M.reflect (centre s) (advance s a))
-    oddDifference :
-      M.signedAmplitude (advance s (M.reflect (centre s) a)) -
+    leftOdd :
+      M.signedAmplitude (advance s (M.reflect (centre s) a)) ≡
+      (centre s - M.signedAmplitude a) + oddIncrement s
+    rightOdd :
       M.signedAmplitude (M.reflect (centre s) (advance s a)) ≡
-      oddIncrement s + oddIncrement s
+      centre s - (M.signedAmplitude a + oddIncrement s)
 
 record SplitResidual (s : Step) (a : M.Split) : Set where
   field
     evenAgreement :
       M.coarse (advanceSplit s (M.reflectSplit (centre s) a)) ≡
       M.coarse (M.reflectSplit (centre s) (advanceSplit s a))
-    oddDifference :
-      M.residual (advanceSplit s (M.reflectSplit (centre s) a)) -
+    leftOdd :
+      M.residual (advanceSplit s (M.reflectSplit (centre s) a)) ≡
+      (centre s - M.residual a) + oddIncrement s
+    rightOdd :
       M.residual (M.reflectSplit (centre s) (advanceSplit s a)) ≡
-      oddIncrement s + oddIncrement s
+      centre s - (M.residual a + oddIncrement s)
 
 faces : (s : Step) → C.Faces (cube s)
 faces s = record
@@ -68,13 +71,15 @@ faces s = record
 markedWitness : (s : Step) (a : M.Marked) → MarkedResidual s a
 markedWitness s (M.marked q e) = record
   { evenAgreement = refl
-  ; oddDifference = Ring.solve-∀ (centre s) e (oddIncrement s)
+  ; leftOdd = refl
+  ; rightOdd = refl
   }
 
 splitWitness : (s : Step) (a : M.Split) → SplitResidual s a
 splitWitness s (M.split q e) = record
   { evenAgreement = refl
-  ; oddDifference = Ring.solve-∀ (centre s) e (oddIncrement s)
+  ; leftOdd = refl
+  ; rightOdd = refl
   }
 
 residuals : (s : Step) → C.ResidualFaces (cube s) (faces s)
