@@ -2074,3 +2074,84 @@ All claims labeled: exact mathematical construction;
 local finite regression; source-written native proof;
 native kernel acceptance; physical continuum and
 universal Millennium endpoint. Never conflate.
+
+
+### Section 33b — genuine shifted positive Cauchy wing order (28 November 2026)
+
+Section33 scalar residual arithmetic is advanced beyond generic weighted-Cauchy
+equality. An EXACT donor-gap was recovered during source audit: generic
+`BishopFiniteCauchyWingAbsoluteBoundExact.finiteCauchyWingAbsoluteBound`
+only bounds Rect_c - Tri_c. CMP102 needs Rect_c - Tri_(c-1) in A and
+Rect_c - Tri_(c-2) in B, and blindly rewriting those cutoffs as c
+would LOSE necessary last row(s), including c=1/c=2 endpoints.
+
+New original Bishop-native general foundation
+`DASHI/Foundations/BishopFiniteCauchyShiftedWingAbsoluteExact.agda`
+on YM #1536 commit fd98b2cc7dcfa8174b0548dfef9f111720a089ac.
+Actual theorems:
+- `originalWingOneEarlier`: for EVERY height/count,
+  `Rect_h - Tri_n = (Rect_h - Tri_(n+1)) + CC_n`.
+- `originalWingTwoEarlier`: 
+  `Rect_h - Tri_n = (Rect_h - Tri_(n+2)) + CC_n+CC_(n+1)`.
+- `originalWingOneEarlierAbsolute`: at height c=n+1,
+  `|Rect_c-Tri_(c-1)| <= PositiveTail[c,2c)+|CC_(c-1)|`.
+- `originalWingTwoEarlierAbsolute`: at height c=n+2,
+  `|Rect_c-Tri_(c-2)| <= PositiveTail[c,2c)
+       +|CC_(c-2)|+|CC_(c-1)|`.
+The proof source uses original `FinSum.finSumSuccessor`,
+`BishopFiniteCauchyWingAbsoluteBoundExact`, native
+`P.∣x+y∣≤∣x∣+∣y∣`, `P.+-mono-≤` and setoid triangle congruence.
+No new real, series, positivity axiom or truncated fake cutoff.
+
+New same-original-CMP109 instantiation
+`YMClayCMP102OriginalShiftedWingOrderExact.agda`
+commit 43e6b9e2bf17b36fc56aab5d96eb2242389a82c3:
+- `originalAShiftedAbsoluteWing` for all c>=1;
+- `originalBShiftedAbsoluteWing` for c>=2;
+- `originalSignedCauchyTailTriangleBound` for all c>=1,
+  retaining the sign of the original A wing, original omitted
+  last B term and B wing before applying absolute values.
+  B c=1 special remains distinct and must be checked from
+  literal `Rectangle.rectangleSum(b,b,1,1)` versus Tri_0=0.
+Native root
+`YMClayCMP102Section33ShiftedWingAcceptanceExact.agda`
+commit 062ff243b29377c8e7c53741f619e5f53873564d.
+
+A dedicated exact Fraction regression, independently executed:
+**3180/3180 PASS** for c=1..64, signed X in
+{-1/4,-1/7,0,1/9,1/4}, two arbitrary NONFACTORIAL
+rational coefficient streams. Verifies generic unshifted
+positive-wing inequality, exact one/two omitted-row identities
+and their original positive absolute bounds.
+Equivalent source committed at
+`scripts/check_ym_cmp102_section33_shifted_cauchy_wings.py`
+commit 2731d11ae624fd103f77da4bbfeea51ae70d5ba8.
+No byte-identical committed checkout execution was certified.
+This independently supports the exact all-degree finite Cauchy
+algebra; finite regression is not native Agda kernel acceptance.
+
+UPDATED mathematical source remainder:
+(A) connect the already written one/two shifted positive Cauchy
+row masses to the *explicit degree* >=c after X or X² factors;
+(B) use the genuine original CMP109 factorial coefficient finite
+prefix bounds 6/11 and 10/57 in native Bishop order to bound
+the original source tail by (267004/393129)|X|^c
+(and hence < 3*4^-c for |X|<=1/4);
+(C) handle c=0 G_0=1 and c=1 B singleton explicitly;
+(D) consume `OriginalPositiveTailOrder` and run pinned Agda
+2.9 with the complete --safe import trust graph.
+The remaining G(X) proof obligation is analytic/order,
+NOT the original Fin-row reindex algebra (now source-written),
+and NOT the much larger original physical interacting Wilson
+CMP116, 4D OS reconstruction or same-H mass gap.
+
+Other Clay programmes retain Section33 source owner state:
+NS finite L4_t quarter energy + high shell on one actual flow
+still needs cutoff-uniform signed nonlinear transfer and continuum
+physical admission. BSD selected complex L''/Mellin and
+general rank/Sha remain. Hodge original global projective cycle
+and primitive nonzero pairing remain. RH requires original
+trusted pinned proof admission. PNP requires a sharing-stable
+original unrestricted SAT internal computation theorem (or
+actual polynomial SAT algorithm). No new native kernel admission
+or Clay completion was fabricated in this tranche.
