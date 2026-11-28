@@ -111,3 +111,48 @@ m_1(1)=0,\qquad m_2(1)=-\lambda(\lambda+2)\phi^2.
 For (f=1-2m/r), (f_2(1)=2\lambda(\lambda+2)\phi^2), precisely the necessary metric second-value correction found in `check_tov_second_order_junction_inverse.py`. This is an **actual spherical Einstein source-to-geometric-junction weld**, not simply a prescribed surface metric. The second derivative of the density and the second Einstein mass constraint are retained; physical second lapse derivative, dynamic metric and material evolution, full nonspherical polar/axial extension, common embedding/normal and GHY/corner remain OPEN. Source-equivalent local SymPy execution exited zero under 90s, then file committed as `4ae76b832e07d4240c4f12eb7dcc881820c61423`, integrated runner `44b392e44a26afb8478913661bafc1aa664b8c1c`. Literal committed source replay remains unexecuted. This narrows **D S1/S2** but does not close the physical D receiver or the other 11 lanes.
 
 **Mass-jump scope clarification:** Here \(m_1,m_2\) are the *interior-minus-exterior* perturbation jets. A common exterior ADM mass perturbation is permitted; only its radial derivative vanishes in vacuum. The derived wall constraints pay the **jump**, not the unknown total ADM mass or bulk evolution. Do not set the entire exterior ADM perturbation to zero by this ledger.\n
+
+## W1 integrated action-to-boundary ABI (29 Nov, second construction cut)
+
+**Source reconciliation:** #1547 started this cut at `3a87af1f5113321b8a73985447094538abc41157`; #1554 `8fa26fe7790b8e70712f7b7433874a26bd76517c`; #1537 `95f30beee111e076f224a0be3043913e6682b883`; #1555 `be212eec07c0475117c8985f08fdd7a21e4907e7`. This is current PR metadata, not new exhaustive source-body audits of those donors. Reused existing original action: `check_engineered_gravity_tov_material.py`, `check_tov_moving_mass_constraint_weld.py`, `check_tov_second_israel_shape.py`, `check_engineered_gravity_reciprocal_action_shell.py`, master `check_kk_same_action_stress.py`, original `check_f8_current_israel_reciprocal_weld.py`, `check_engineered_gravity_g3_harmonic_receiver.py` and #1554 BR268/273 curved G4 primitive source. **No substitution of a 5D theorem for 4D Einstein boundary data.**
+
+### W1-TOV: mass and traction already suffice for spherical Israel matching
+The genuinely original spherical static/polar-areal Einstein constraint and constitutive surface give
+\[
+f=1-2m/r,\qquad
+\nu'=(m+4\pi r^3p_r)/(r^2 f).
+\]
+At the same radius on the two faces, if the mass agrees and the interior radial traction is zero, the lapse gradient agrees **identically**, not merely to second order. Consequently `K^theta_theta=sqrt(f)/r` and `K^tau_tau=sqrt(f)nu'` agree. Conversely, on timelike nondegenerate static charts, equality of these eigenvalues forces the mass and radial traction conditions. Thus the spherical lapse-gradient/Israel *value* is not an independent datum; the bulk mass constraint and material traction pay it. New `scripts/check_tov_spherical_source_israel_abi.py`, committed `e12943f41008bfe1b174f767d02764530f28d707` and tested as source-equivalent local SymPy PASS. Separate dynamic wall velocities, normal acceleration, source evolution, moving induced-metric and full nonspherical Israel/GHY/corner remain.
+
+Second moving-wall traction obstruction: with original `p_r=-p(1-r²)²`, `p_r(1)=p_r'(1)=0`, `p_r''(1)=-8p`. Expanding a wall `R=1+epsilon phi+epsilon² psi/2` and a genuinely varying source `p_r=p_{r0}+epsilon p_{r1}+epsilon²p_{r2}/2`, traction-free level set requires `p_{r1}(1)=0` and `p_{r2}(1)=-2phi p_{r1}'(1)+8p phi²`. This is **new second-order source boundary Cauchy data**, not an independent prescribed Israel source. Together with original Einstein mass-jump equation it closes the spherical static boundary *algebra*, not the physical second-order bulk.
+
+### W1-reciprocal controller: no free reaction term
+Reusing the **original** reciprocal two-channel `G(X)=[[1,-X],[-X,1+X²]]`, `det G=1`, static radial source flux (q=r²G(X)u') is conserved on shell interiors. The complete action-derived radial stress/traction is
+\[
+T_{rr}=\tfrac12u'^T G u'=\frac{q_1^2+(q_2+Xq_1)^2}{2r^4}.
+\]
+With (F_X=\frac12u'^T G_Xu'), exact signed exchange identity:
+\[
+T_{rr}'+\frac4r T_{rr}+F_X X'=0,\qquad F_X=-\frac{q_1(q_2+Xq_1)}{r^4}.
+\]
+Hence `-F_X X'` is the actual controller reaction/work in this radial geometry; it cannot be omitted while promising reciprocal field transfer. `scripts/check_engineered_gravity_reciprocal_controller_ward.py` committed `6c4b07ec75a2bf99cb36f3bb213aa258298f3040`, corrected fixed-flux-versus-fixed-gradient sign `6d51f3e459ed35db665f514dd6c7334cd39ebb03`; source-equivalent local SymPy exit0. Nonzero reaction negative control tested. This **does not** provide physical material G(X), controlled rest profile, self-gravity or a neutral receiving experiment. Pays exact static mathematical exchange for A/I, not viability.
+
+### W1-Maxwell source work and two-face sign
+One-polarization exact Maxwell pair `E_t=-B_x-J`, `B_t=-E_x` obeys
+\[
+\partial_t\tfrac12(E^2+B^2)+\partial_x(EB)=-JE.
+\]
+The source work term is unavoidable. `scripts/check_engineered_gravity_maxwell_source_work_abi.py` committed `3e4e52b03b109b03b00f8e34d68accd384d1ae14`; symbolic independent worldtube integration was not computable for uninterpreted functions by SymPy and replaced by an exact polynomial boundary fixture at `21e911c16a584368067d7a4177163f3998812971`, retaining the **general local differential identity**. Source-equivalent local SymPy exit0 with omitted-work negative control. This applies to an independent Maxwell source-work contract, not yet to any specific F8/MHD/scalar controller device. Uses E/F/H/G4 as consumers of a reusable *interface*, not asserted common physical source.
+
+### Existing donors retained: no reinvention, no source identification by analogy
+F8 original current/Israel identity: `check_f8_current_israel_reciprocal_weld.py` and original full pair source; stage J still needs actual same-clock native receiver and second-order moving trace. G3 harmonic receiver: `check_engineered_gravity_g3_harmonic_receiver.py` requires subsidiary constraints/causal boundary. G4 curved-frame primitive from #1554 `check_hopf369_br268_273_endpoint.py` is **external**; do not run it through #1547 without fetching exact donor and dependencies. KK/dynamical scalar Ward donors on master prove effective model exchange only and require physical action admission. These three contracts are manifest entries with physical_paid=false.
+
+### W1 checked dependency interface
+Added six explicit entries in `Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json`: TOV mass/traction->Israel (D), reciprocal static controller (A/I), Maxwell sourced work (E/F/H/G4), F8 Israel flux (J), G3 harmonic receiver (B/G3), curved-frame primitive (G4 external donor). Each names original source_owner, mathematical checker, consumer lane(s), scope, and remains `physical_paid=false`. `scripts/check_engineered_gravity_proof_dag.py` now validates W1 source and checker owner paths, lane membership, provenance and refuses any unearned physical promotion. A repo-backed audit is BLOCKED if an owner/checker is missing; explicit external PR checkers are not claimed present. `scripts/test_engineered_gravity_proof_dag.py` now rejects six malformed/promotion controls (prior four, plus fake physical paid and unknown W1 consumer). The 36 earlier physical unpaid obligations remain 36: these are **separate mathematical identities**, not payments for the full stage.
+
+The native checkpointed `scripts/run_engineered_gravity_endpoint_local.py` now includes all three W1 mathematical checkers and existing W0 mass/junction + DAG gate. Use `--only check_tov_spherical_source_israel_abi.py --only check_engineered_gravity_reciprocal_controller_ward.py --only check_engineered_gravity_maxwell_source_work_abi.py` for fast targeted replay, or full 90s checkpointed run.
+
+### Actual W1 execution and remaining proof cuts
+Source-equivalent local Python/SymPy executions: **3/3 mathematical checkers exit0**, each within 90 seconds. Reciprocal first draft's expected (F_X) sign failed and was **corrected**; Maxwell arbitrary-function definite integral was **replaced by an exact polynomial endpoint fixture**. No receipt of literal committed-source replay or complete W1 ledger test asserted; all new files committed and fetched SHA checked at end. No CI, native F8 or physical result.
+
+W2 **coarse whole-system**: produce lane-identical `BoundaryJet{source,metric,normal,clock,traction,work}` witnesses for A/I, C/E/F, D/G/J, G3/G4, with actual original owner provenance and *commuting source and boundary* maps. Where material/current data are unavailable, construct explicit incompatibility/source-admissibility theorem rather than a guessed field. For D, calculate real moving wall acceleration and metric second variation from the coupled Einstein equations, attach GHY/corners and graph-domain trace; for A/I, solve finite material controller and support reaction from same action; for F/G4, use original full 3+1 Maxwell/RMHD source and physical boundary with BR273 donor. W3: source-driven actual coupled evolution, same-event independent receivers and original native certificates; W4: physically calibrated 1g and energy viability or exact no-go witness. None of these has been paid by W1 alone.
