@@ -196,7 +196,7 @@ testY : Nat → R.ℝ
 testY n = (Literal.Kq ⋆) + h n
 
 testRead : ∀ n → (Poly.realC (testY n) -C Shift.K) ≈C hC n
-testRead n = proj₁ (J.subtractHead Shift.K (hC n)) , P.≃-refl
+testRead n = proj₁ (J.subtractHead Shift.K (hC n)) , P.+-inverseʳ R.0ℝ
 
 testNZ : ∀ n → Rec.BishopComplexNonzero (Poly.realC (testY n) -C Shift.K)
 testNZ n = Apart.complexNonzeroFromRealApart
