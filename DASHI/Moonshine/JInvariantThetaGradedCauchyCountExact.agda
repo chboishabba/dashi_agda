@@ -49,8 +49,13 @@ rowAdd f g h (suc n) =
         (rowZ (T.shift f) h n) (rowZ (T.shift g) h n))
         (cong₂ _+_ (sym (rowHead f h n)) (sym (rowHead g h n)))))
 
+deltaUnit : ∀ n → delta zero n ≡ T.unitZ n
+deltaUnit zero = refl
+deltaUnit (suc n) = refl
+
 rowDelta : ∀ k f n → rowZ (delta k) f n ≡ delay k f n
-rowDelta zero f n = T.rowUnitLeft f n
+rowDelta zero f n = trans (T.rowCong (delta zero) f T.unitZ f deltaUnit (λ _ → refl) n)
+  (T.rowUnitLeft f n)
 rowDelta (suc k) f zero = trans (rowZero (delta (suc k)) f) (Z.*-zeroˡ _)
 rowDelta (suc k) f (suc n) =
   trans (rowHead (delta (suc k)) f n)
