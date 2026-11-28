@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-28",
+  "scope": "Exact real finite split model with fixed binary geometry/input constants; not measured or continuum physical model",
+  "runtime": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "mpmath": "1.3.0",
+    "OPENBLAS_NUM_THREADS": 1,
+    "timeout_per_fixture_s": 90
+  },
+  "verified_blobs": {
+    "solar_tail_dyadic.py": "7d4593ec65fd2aa4768c8ef6e1bd2a600b69012d",
+    "solar_exact_tail_policy.py": "23ea10d9f10ea667bad9febadc11c8835fd2c3c4",
+    "solar_material_interval.py": "5bea965cab93812c75f03f990061661a6d7bb062",
+    "solar_exact_tail_endpoint.py": "4841a0fc48f315a60fed031c2efbd332ab6da5cf",
+    "check_solar_exact_material_interval.py": "1ff8021a4f2a4a37050fe90b9b36db959cb7ef8c",
+    "check_solar_exact_tail_endpoint.py": "e4707fcb975cdab0709da04b7f87b96688487ff5",
+    "check_solar_native_matched_return.py": "840effa076fd3c1deb9adca70bb85ce92bc2d0f6",
+    "check_solar_distributed_tail.py": "825ae6434dbfbfce701416d5b91af8926b28fb61",
+    "solar_controlled_terminal_return.py": "aea7420f3bde6ef6df07d7512df4f5f41a33287b",
+    "solar_spherical_cycle.py": "46a28f46030317dbebd57b2994d0c0c191028c19",
+    "solar_tail_observability.py": "804cac884e7727f4c0d4e94c068c8be7ee52ecb0",
+    "solar_passive_campaign_bound.py": "bfb4ad2205e6f7375e9879c1ae7a5145db985f28",
+    "solar_synthetic_fixture.py": "aa7cdbd48d30f63bb9a54eaa2beb8ce5efc8d247"
+  },
+  "dependency_note": "Local pinned previous source snapshot; full Git clone remains DNS blocked. Original rates function copied verbatim from solar_earth_collision_tensor.py (donor blob 010a4185121bb67d999942c0d7558d2f54efd03f, local rates-only blob 1dff38f602716abc6e245303a04f7316f3488851). Two source hashes initially differed only by comments and line wrapping; committed exact locally executed bytes.",
+  "material": {
+    "status": "PASS",
+    "exp_cases": 16,
+    "component_checks": 1922,
+    "collision_samples": 21,
+    "charge_gap_per_cell": 1.9515469514424357e-9,
+    "paid_interval_J": [
+      0.00006000000000234809,
+      0.00006000000000234809
+    ],
+    "note": "Displayed endpoints rounded to float, actual rational interval not a point."
+  },
+  "single_port_exploration": {
+    "status": "EXACT_PRECONDITIONED_BLOCK",
+    "initial_upper_density": 5,
+    "theta_upper": 20,
+    "block_steps": "18446744073709551616",
+    "rho_upper": "1-2^-74",
+    "step_error_threshold": "2^-138",
+    "note": "Different initial fixture and dt than zero-initial activation endpoint gate; Gram row-sum-only search inconclusive through power 96."
+  },
+  "distributed": {
+    "status": "PASS",
+    "load_per_edge": 0.000625,
+    "edges": 42,
+    "total_budget_used": 0.02625,
+    "budget": 0.04,
+    "block_steps": "281474976710656",
+    "rho_upper": "7/8",
+    "step_error_threshold": "2^-51",
+    "sufficient_start_seconds": 6.5278165111117135e+41
+  },
+  "exact_endpoint": {
+    "status": "PASS",
+    "active_and_passive_exact_finite_split_asymptotic_return": true,
+    "active_upper_J": -0.00011000000000000266,
+    "passive_lower_J": 6.399488030718364e-14,
+    "active_minus_passive_upper_J": -0.00011000000006399754,
+    "block_steps": "18446744073709551616",
+    "rho_upper": "1-2^-127",
+    "tail_seconds_sufficient": 1.2681386070294215e+128,
+    "remaining_work_upper_J": 5e-25,
+    "all_active_heat_paths_compared": false,
+    "exact_real_geometry_scope": true
+  },
+  "matched": {
+    "status": "PASS",
+    "controlled_upper_J": 3.1998720044856626e-9,
+    "asymptotic_prefix_upper_J": 3.1998720044856626e-9,
+    "failed_replays": 0,
+    "off_passive_net_J": 0,
+    "off_active_net_J": -0.00020999400039998004,
+    "source_passive_field_norm": 0.00007999676824082936,
+    "source_active_field_norm": 0.00007999677081327729,
+    "all_material_return_residuals_zero": true,
+    "source_on_restored": false,
+    "interaction_admitted": false
+  },
+  "runner_note": "Combined test invocation exceeded 90s while entering distributed lane. Distributed rerun separately PASS; all four independent lanes passed. No CI/kernel. No full legacy runner or optimizer executed.",
+  "pending": [
+    "Practical physical tail and Gauss constraint consistent propagation",
+    "Exact material interval to full signed field and jet error ledger (not just energy upper)",
+    "Finite duration paid terminal actuator, no unlicensed field reset",
+    "All active heating controls and matched passive load layout global optimum",
+    "Measured original source/receiver impedance, metric/continuum enclosure"
+  ],
+  "physical_admission": false
+}
