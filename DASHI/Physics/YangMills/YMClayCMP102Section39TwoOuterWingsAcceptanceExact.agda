@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.YMClayCMP102Section39TwoOuterWingsAcceptanceExact
 -- Requires Agda 2.9 native --safe source/import elaboration.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat; suc)
 import Real as R
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailGeometryExact as Tail
@@ -28,7 +29,7 @@ originalNativeActualLastBQuarterOrder :
   ∀ X (inside : R._≤_ (R.∣ X ∣) Half.bishopQuarter) n →
   R._≤_
     (R.∣ Tail.originalOmittedLinearB X n ∣)
-    (R.pow Half.bishopQuarter (Agda.Builtin.Nat.suc n))
+    (R.pow Half.bishopQuarter (suc n))
 originalNativeActualLastBQuarterOrder X inside n =
   B.originalOmittedBQuarterWing X inside n
 
