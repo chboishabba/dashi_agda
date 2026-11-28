@@ -2,7 +2,7 @@
 
 Author: Johl Brown
 Date: `2026-09-17`
-Version: `draft 3 — source-native 20 November 2026 reconciliation`
+Version: `draft 3 — source-native 28 November 2026 reconciliation`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
 
 
@@ -77,6 +77,8 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > marked-polymer authors retain mathematical attribution; these terms are
 > independently authored DASHI compositions, not new published source lemmas.
 
+
+> **28 November source-cut update.** The immediate DASHI proof-search priority is the literal CMP102 selected propagator weld, not a new claim that a finite pivot or inverse derivative proves the mass gap. The newer master narrative and older #1536 manuscript are divergent; preserve the original factorial A/B endpoint and Bishop Cauchy owner from #1536 without replacing the source-native Route S/strong-route distinction. See the final dated section and the consolidated roadmap. Native acceptance and the selected physical source remain separate.
 
 ## Abstract
 
@@ -1102,3 +1104,12 @@ NEXT: prove the actual signedEvenRow ~= evenPart and signedOddRow ~= -oddPart, i
 The rank-1 finite algebra weld was discharged in the exact rational reference `scripts/check_ym_cmp102_signed_row_witness_20261123.py`: 128/128 complementary-index partitions, 128/128 `signedEvenRow = evenPart`, 128/128 `signedOddRow = -oddPart`, 128/128 inclusive row cancellations and 128/128 shifted-bracket zeros. The universal reindex is elementary: for `m=2(n+1)`, even positions are the two `1/m!` endpoints plus `r=1..n` interior terms `1/((2r)!(2m-2r)!)` matching `a(r-1)a(n-r)`, while odd positions are the two `1/(m-1)!` endpoints plus `r=1..n-1` interior terms `-1/((2r+1)!(m-2r-1)!)` matching `-b(r-1)b(n-r-1)`; the `n=0` singleton odd row is the remaining endpoint. This is an exact finite-weld reference, not an Agda kernel receipt and not the analytic/physical CMP102 attachment.
 
 The sign loss in Boolean gate summaries was isolated and repaired at the exact representation level by `scripts/check_ym_w4_triangular_mixing_signed_exact_20261123.py`: all 384 signed-permutation W4 elements preserve the unique Λ²(R⁴) invariant form (identity) and the unique R⁴ invariant operator (scalar); the trace-free anisotropic invariant subspace is zero; the sign-flip profile `(-1,-1,-1,1,1,1)` is retained. `ym-audit/audit/tests/test_original_9.py::_test_p90_triangular_lock` now uses exact rational nullspaces instead of the former NumPy/SVD nullity estimate. This verifies the finite sign-bearing representation shadow of Eriksson 2602.0096 Thm 8.5 / Cor 8.6; the full source theorem, its operator-sector inclusion `Z_{4←6}(O^{W4,aniso}_6) ⊂ O^{W4}_4 ∩ O(4)-inv`, and the residue attack remain source-imported, not DASHI kernel-certified. No Clay promotion.
+
+
+## 28 November — selected CMP99/102 Path13 block and mixed inverse
+
+The original master executable `scripts/check_ym_path13_full_q_matrix.py` constructs the full selected 12-row averaging matrix on the 13^4 site lattice, reports flat pivot P0=I/28561, and retains mixed Q and Gram jets. This is a source-specific finite arithmetic result, not a nonflat analytic ball certificate. Lean #15 commits 658d43713943 and 922baf07bdc4 construct the flat pivot/free-coordinate split, inverse G0=28561 I, exact constraint BIDI c=-G B b, signed two-point defect, and mixed inverse coefficient G_st=G P_s G P_t G+G P_t G P_s G-G P_st G. Both noncommuting orders and the free-block changes remain. The prior exact regression on synthetic noncommuting blocks is not a replay of the actual full selected Path13 source.
+
+The #1536 older manuscript's endpoint/Cauchy supplement (23 November, blob 371fc3095129766a635bc9734666b7551975e3d7) records source-written all-n even/odd A/B row identities and the shifted bracket zero. Do not repeat that finite index weld. The same-original-series Bishop analytic Cauchy limit, literal nonflat Q(s) coefficients, uniform inverse enclosure and physical identification H(s(Y0)) on the common CMP102 source ball are unpaid. R367/R368 distinguish C-Lipschitz, same-parameter contraction, and cross-parameter defect; R413/R410 consume the actual selected-stage operator, not arbitrary matrices. The source-native F19 and CMP116/119/122 clustering/expectation/same-H_OS spectral identification remain distinct continuum requirements. No fresh full-path replay, native kernel acceptance, or physical/Clay promotion follows.
+
+Source references: [#1536](https://github.com/chboishabba/dashi_agda/pull/1536), [Lean #15](https://github.com/chboishabba/dashi_lean4/pull/15), [current cross-lane roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Original Bałaban, Bishop/Bridges and Path13 authors retain attribution.
