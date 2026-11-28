@@ -51,7 +51,10 @@ module Execution {State : Set} (f : State → State) where
     trans (appendRepeat (value b) (value b) z)
       (trans (correct b (repeat (value b) z))
         (F.cong (run (compile b)) (correct b z)))
-  correct (odd b) z = correct (even b) (f z)
+  correct (odd b) z =
+    trans (appendRepeat (value b) (value b) (f z))
+      (trans (correct b (repeat (value b) (f z)))
+        (F.cong (run (compile b)) (correct b (f z))))
 
 -- Shared compilation schedule counts one doubling and at most one
 -- extra composition per digit. The expanded Tree above is not itself
@@ -65,3 +68,44 @@ compositions : Count → Nat
 compositions end = zero
 compositions (even b) = suc (compositions b)
 compositions (odd b) = suc (suc (compositions b))
+
+-- Actual collapsed carrier: the two copies of the recursive result
+-- share one compiled value. The composition law is the backend premise.
+module Collapsed {State Code : Set}
+  (f : State → State)
+  (identity atom : Code)
+  (then : Code → Code → Code)
+  (apply : Code → State → State)
+  (identityLaw : (z : State) → apply identity z ≡ z)
+  (atomLaw : (z : State) → apply atom z ≡ f z)
+  (composeLaw : (a b : Code) (z : State) →
+    apply (then a b) z ≡ apply b (apply a z)) where
+
+  module E = Execution f
+
+  compile : Count → Code
+  compile end = identity
+  compile (even b) = let c = compile b in then c c
+  compile (odd b) = let c = compile b in then atom (then c c)
+
+  sound : (b : Count) (z : State) →
+    apply (compile b) z ≡ E.run (E.compile b) z
+  sound end z = identityLaw z
+  sound (even b) z =
+    E.trans (composeLaw (compile b) (compile b) z)
+      (E.trans (sound b (apply (compile b) z))
+        (F.cong (E.run (E.compile b)) (sound b z)))
+  sound (odd b) z =
+    E.trans (composeLaw atom (then (compile b) (compile b)) z)
+      (E.trans (composeLaw (compile b) (compile b) (apply atom z))
+        (E.trans (sound b (apply (compile b) (apply atom z)))
+          (E.trans (F.cong (E.run (E.compile b)) (sound b (apply atom z)))
+            (F.cong (λ x → E.run (E.compile b) (E.run (E.compile b) x))
+              (atomLaw z)))))
+
+  sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+  sym refl = refl
+
+  correct : (b : Count) (z : State) →
+    apply (compile b) z ≡ E.repeat (value b) z
+  correct b z = E.trans (sound b z) (sym (E.correct b z))
