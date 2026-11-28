@@ -31,6 +31,8 @@ def main():
         s.diff(H,r,2).subs(r,1):(1+2*eta)/12}
     eq(V.subs(r,1).subs(hv));eq(s.diff(V,r).subs(r,1).subs(hv))
     curvature=s.factor(s.diff(V,r,2).subs(r,1).subs(hv))
+    eq(curvature,(36*eta-325)/72)
+    assert curvature.subs(eta,1)<0
     print('strict DEC shell Vpp:',curvature)
     # Conditional three-power uplift (comparison only; existing Casimir
     # spectrum is the preferred actual one-loop donor).
