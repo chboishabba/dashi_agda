@@ -762,3 +762,33 @@ the earlier donor provenance limitation for BR128–139.
 Three new exact stages passed. No native kernel, integrated
 runner, nonlinear evolution or empirical acceptance.
 See [the proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Terminal source geometry (BR178–201, source-written)
+
+The homogeneous full exterior symbol of Ricci-free algebraic
+curvature is injective for non-null covectors. The spatial inverse
+uses the exact full exterior matrix and its image projector;
+the complementary incompatible source is retained. BR197 writes
+a direct test of the null kernel against the original projected
+characteristic carrier, retaining five physical polarizations
+per null sign. These tests are pending local replay and do not
+provide curved bulk-boundary estimates.
+
+The selected atomic 28-state n=2 projection now has all hydrogenic
+2s/2p Coulomb channels written with Gaunt angular coefficients and
+the original BR172 marked one-body operator. No beyond-shell
+CI, calibration or physical spectrum is claimed. The radial
+majorant and complex graph bounds give conditional initial
+analytic coefficient control. The marked central tidal readouts
+u=epsilon/p² and v=epsilon²/p² invert both parameters away from
+zero; the zero observation cannot recover p. G4 primitive
+discriminant and enthalpy bounds are conditional continuation
+guards, not an actual evolution proof.
+
+The native marked chart cube has six written proof bodies;
+physical time/history attachment is open. The material
+comparator remains a finite prescribed metric/shift history.
+The complete W0–W7 nonlinear theorem, native kernel and
+BR178–201 local replay remain open. See the controlling register
+for all seven parallel lanes.

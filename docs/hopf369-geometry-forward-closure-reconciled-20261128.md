@@ -5271,3 +5271,37 @@ No local execution or native kernel in this tranche. No actual
 curved PDE solver, native marked cube, Monster intertwiner or
 material receiver evolution newly implemented. Those are explicit
 remaining endpoint welds, not assumed theorems. No sibling edits.
+
+
+## 37. BR192–201 and native marked cube: terminal reconciliation
+
+BR192–196 source checker at 39956890b6a1945edf2322b83e7ec843b06037a8:
+spatial coercivity trace bound, complex graph inverse, primitive
+discriminant guard, actual P0AG and BR153 replays. Native marked cube
+at ce93925b2fdd819c82a18c3a5df457ab9c649e96 supplies six exact chart
+faces, not physical-time transport. All unrun.
+
+BR197–201 source packet scripts/check_hopf369_br197_201_terminal_welds.py:
+BR197 full frozen exterior symbol on original BR143/BR27 carrier
+at tau=0,+/-1/2,+/-1,2. Require null kernel exactly five for each
+physical null sign, zero otherwise; match actual characteristic
+kernel, not suppress true wave modes. BR198 actual BR144/145 two
+readouts u=e/p², v=e²/p² invert e=v/u, p^-2=u²/v off zero;
+at zero the whole tidal tensor vanishes, radius not identifiable.
+BR199 Cauchy derivative bounds on complex inner l1 ball using BR193
+outer bound, mixed polydisc radius 1/12. Initial geometry only.
+BR200 primitive uniform margin dmin/Lmax conditional on actual
+enthalpy and positive denominator caps. BR201 original P0AG
+finite affine comparator SPD time budget lambda_min(H0)/(2||Hs||),
+numerical not interval-certified, and existing material history.
+23 terminal stages registered, all new ones unrun.
+
+Remaining W0-W7 and physical-history obligations in section 36
+unchanged: the null symbol is not a curved boundary estimate,
+initial coefficient bounds are not gauge evolution bounds, finite
+material history is not same-source nonlinear metric evolution.
+Monster #1545 actual F31 marked intertwiners and GF3 word screen
+remain source-specific; no new Monster class equivalence.
+F8 #1547 latest donor edba26d4b8a8c6351140c10f55a69ba6955c2086
+still requires actual normal/PDE residual enclosure.
+No sibling edits or local/kernel/CI acceptance.

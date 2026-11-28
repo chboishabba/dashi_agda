@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""BR181-187: terminal bridge checks; conditional algebra, not PDE acceptance."""
+"""BR181-185: terminal bridge checks; conditional algebra, not PDE acceptance."""
 import sympy as s
 from itertools import combinations
 from check_hopf369_br143_145_parallel import trace
-from check_hopf369_br_curvature_energy import carrier
 
 def cartan():
     P,X,_,_,D,L,E,Sc,T,Tsp,Z=trace()

@@ -19,7 +19,6 @@ def symbol():
         # time-space exterior closure (not just D divergence).
         xi=[0,k,0,0,l]
         from itertools import combinations
-        W=s.zeros(100,35)
         rows=[]
         for a,b,c in combinations(range(5),3):
             for j in range(10):
