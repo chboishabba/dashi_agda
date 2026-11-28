@@ -30,8 +30,10 @@ def normal_probe(F,n,H,root,cap,component=False):
     return dict(status='WITNESS',witness=z,reserved=cap,width=w)
 
 
-def normal_clipped(F,n,H,root,cap,known=None):
-    """Two existential calls, not global counting. Preserve a known witness on refusal."""
+def normal_clipped(F,n,H,root,cap,known=None,marked=False):
+    """Two existential calls by default; optional one-tree marked clipping."""
+    if marked:
+        return normal_clipped_marked(F,n,H,root,cap,known)
     if known is None:
         q=normal_probe(F,n,H,root,cap//2)
         if q['status']=='EMPTY':return dict(q,count=0)
@@ -47,6 +49,39 @@ def normal_clipped(F,n,H,root,cap,known=None):
     if q['status']=='EMPTY':return dict(status='COMPLETE',count=1,witness=known)
     assert q['witness']!=known
     return dict(status='COMPLETE',count=2,witness=known,other=q['witness'])
+
+
+def normal_clipped_marked(F,n,H,root,cap,known=None):
+    """One complete marked join: clip at 2, reopen a distinct original point."""
+    if n<0 or any(not 1<=abs(l)<=n for c in F for l in c) or any(not 0<=a<1<<n or b not in (0,1) for a,b in H):raise ValueError('original source')
+    if known is not None:
+        if len(known)!=n or any(b not in (0,1) for b in known):raise ValueError('anchor')
+        if not all(any(known[abs(l)-1]==int(l>0) for l in c) for c in F):raise ValueError('anchor CNF')
+        a=sum(b<<i for i,b in enumerate(known))
+        if not all((a&r).bit_count()%2==b for r,b in H):raise ValueError('anchor demand')
+    def unknown(reserved):
+        q=dict(status='UNKNOWN',reserved=reserved)
+        if known is not None:q.update(witness=known,lower=1,upper=2)
+        return q
+    if not root.reserve('normal_marked_clipped',cap):return unknown(0)
+    setup=1+n+len(H)*(n+1)+sum(1+len(c)*(n+1) for c in F)
+    if setup>cap:return unknown(cap)
+    from check_pnp_normal_mass import count
+    q=count(n,H,cnf_flats(F),(),cap-setup,clip=2,marks=tuple(1<<i for i in range(n)))
+    if q['status']=='UNKNOWN':return unknown(cap)
+    if q['count']==0:
+        assert known is None
+        return dict(status='EMPTY',count=0,reserved=cap,width=q['width'])
+    x=q['witness'];z=known if known is not None else tuple(x>>i&1 for i in range(n))
+    assert all(any(z[abs(l)-1]==int(l>0) for l in c) for c in F)
+    if q['count']==1:return dict(status='COMPLETE',count=1,witness=z,reserved=cap,width=q['width'])
+    for i,b in enumerate(z):
+        c,y=q['marginals'][i][1-b]
+        if c:
+            other=tuple(y>>j&1 for j in range(n))
+            assert other!=z and all(any(other[abs(l)-1]==int(l>0) for l in C) for C in F)
+            return dict(status='COMPLETE',count=2,witness=z,other=other,reserved=cap,width=q['width'])
+    raise AssertionError('two distinct original points must differ at an original bit')
 
 
 def exact_cover(O,n,root,cap):
