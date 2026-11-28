@@ -117,13 +117,15 @@ def pair(F,n,j,sign=None):
 
 def diff(r):return list(r)+[-x for x in r]
 def matrix(n,k,p):return [[p[n-1+i-j] if n-1+i-j<len(p) else 0 for j in range(n)] for i in range(k)]
-def coefficient(F,n,k,p,compact=True):
+def coefficient(F,n,k,p,compact=True,symmetric=True):
     A=matrix(n,k,p);roots=[];order=[i for j in range(n) for i in (j,n+j)]
     for j in range(n):
         t=len(p)-n+1+j
         if not 0<=t<k:continue
-        for sign in (-1,1):
-            w=-Q(3,3**(2*k-t))
+        for sign in ((1,) if compact and symmetric else (-1,1)):
+            # Pair swap preserves the zero-difference prefix and the signed
+            # observable: both the first-difference sign and delta reverse.
+            w=-Q(6 if compact and symmetric else 3,3**(2*k-t))
             if compact:
                 # The donor substitutes y_i=x_i (i<j), y_j=1-x_j.
                 # Read the last affine row as an observable, NOT as a pin.
@@ -134,13 +136,16 @@ def coefficient(F,n,k,p,compact=True):
                 roots.append(sector(pair(F,n,j,sign),2*n,[diff(r) for r in A[:t]],(0,)*t,[-sign*x for x in diff(A[t])],w,order))
     return roots
 
-def translation(F,n,k,p,b,compact=True):
+def translation(F,n,k,p,b,compact=True,symmetric=True):
     A=matrix(n,k,p);e=len(b);D=3**(k-e-1);order=[i for j in range(n) for i in (j,n+j)]
     roots=[sector(F,n,A[:e],b,A[e],Q(1,D))]
     for j in range(n):
         if compact:
             G,N,rows,target=pair_source(F,n,A,A[:e],b,first=j)
-            roots.append(sector(G,N,rows,target,A[e]+[0]*(N-n),-Q(1,D)))
+            # A(x)=A(y), hence swapping the pair preserves the prefix and
+            # the observed label. First-difference orientation is free.
+            if symmetric:G=G+[((j+1),)]
+            roots.append(sector(G,N,rows,target,A[e]+[0]*(N-n),-Q(2 if symmetric else 1,D)))
         else:
             roots.append(sector(pair(F,n,j),2*n,[diff(r) for r in A]+[r+[0]*n for r in A[:e]],(0,)*k+tuple(b),A[e]+[0]*n,-Q(1,D),order))
     return roots
