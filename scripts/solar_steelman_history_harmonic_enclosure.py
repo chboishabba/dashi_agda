@@ -3,16 +3,20 @@ Polynomial plus uniform scalar error, on s in [0,1].
 No floating coefficients or sampled extrema are accepted.
 """
 import sympy as S
+from functools import lru_cache
 from solar_steelman_history_polynomial_defect import bernstein_bound
 
 s=S.Symbol('s',real=True)
 def rat(v):
     if isinstance(v,(float,S.Float)):raise TypeError('exact rational required')
     return S.Rational(v)
+@lru_cache(maxsize=4096)
 def norm(p):
     return bernstein_bound(S.Matrix([[p]]),s)
 class Ball:
     def __init__(self,p,e=0):
+        p=S.sympify(p)
+        if p.has(S.Float):raise TypeError('exact rational polynomial required')
         self.p=S.Poly(p,s,domain=S.QQ).as_expr()
         self.e=rat(e)
         assert self.e>=0
@@ -29,6 +33,15 @@ class Ball:
     def truncate(self,n):
         p=S.Poly(self.p,s);q=sum(p.nth(i)*s**i for i in range(n+1))
         return Ball(q,self.e+norm(self.p-q))
+    def rounded(self,bits=64):
+        scale=S.Integer(2)**bits
+        p=S.Poly(self.p,s,domain=S.QQ)
+        q=S.S.Zero;error=self.e
+        for (k,),v in p.terms():
+            w=S.floor(v*scale+S.Rational(1,2))/scale
+            q+=w*s**k
+            error+=abs(v-w)
+        return Ball(q,S.ceiling(error*scale)/scale)
     def inverse(self,lower,degree=4):
         # lower is an independently proved positive lower bound on the TRUE
         # denominator. Approximate reciprocal by geometric polynomial.
