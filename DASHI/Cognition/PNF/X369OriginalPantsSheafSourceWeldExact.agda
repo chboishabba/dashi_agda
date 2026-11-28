@@ -11,6 +11,7 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.TernaryThirteenCentralCompletionBundleSheafExact as Sheaf
 import DASHI.Foundations.TernaryThirteenPantsSheafGluingTransportExact as Source13
+import DASHI.Foundations.TernaryThirteenOriginalPantsFrontierBridgeExact as Pants13
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 import DASHI.Reasoning.TypedHyperfabricPantsSourceHeterogeneousTransportExact as Heterogeneous
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
@@ -30,7 +31,7 @@ sourceThirteenGlueRestrictsEveryAxis :
   (agreement : Sheaf.centralFamilyCompatible locals) →
   (axis : Atlas.StageAtlasZeroToEleven) →
   Sheaf.restrictCentral
-    (Source13.Pants.pants13ToSourceCentral
+    (Pants13.pants13ToSourceCentral
       (originalCentralFamilyToPants locals agreement)) axis
     ≡ locals axis
 sourceThirteenGlueRestrictsEveryAxis =
