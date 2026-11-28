@@ -16,8 +16,6 @@ def ratio_bounds(c):
     d2=2*sum(k*k*abs_upper(c[k]) for k in range(1,5))
     # R has two energy entries 1/S and two phase entries +/- S'/S.
     r=2*(1+d1)/low
-    rp=2*(d1+d2)/low+2*d1*d1/low**2
-    # first term for d(1/S) is actually d1/low²; use exact expression.
     rp=2*d1/low**2+2*d2/low+2*d1*d1/low**2
     return low,r,rp
 
