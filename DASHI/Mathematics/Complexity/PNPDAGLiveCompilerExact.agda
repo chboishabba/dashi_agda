@@ -75,15 +75,32 @@ record Compiled {n g : Nat} (p : C.GateProgram n g) (D : S.Demand n g) : Set whe
       C.evaluateWire w x (C.evaluateProgram p x)
 open Compiled
 
-compile : ∀ {n g} (p : C.GateProgram n g) (D : S.Demand n g) →
-  (∀ w → Dec (D w)) → Compiled p D
-compile C.noGates D dec = record
+-- The recursive compiler consumes one explicit decision per gate.
+-- A producer may cache these decisions in a finite backward mask,
+-- rather than repeatedly evaluate the nested demand predicate.
+data Schedule {n : Nat} : ∀ {g} → C.GateProgram n g → S.Demand n g → Set₁ where
+  stop : ∀ {D} → Schedule C.noGates D
+  next : ∀ {g} {p : C.GateProgram n g} {a : C.Gate n g}
+    {D : S.Demand n (suc g)} →
+    Dec (D (C.gateWire fzero)) → Schedule p (S.pre a D) →
+    Schedule (C.appendGate p a) D
+
+predicateSchedule : ∀ {n g} (p : C.GateProgram n g) (D : S.Demand n g) →
+  (∀ w → Dec (D w)) → Schedule p D
+predicateSchedule C.noGates D dec = stop
+predicateSchedule (C.appendGate p a) D dec =
+  next (dec (C.gateWire fzero)) (predicateSchedule p (S.pre a D) (decPre a D dec))
+
+compileSchedule : ∀ {n g} (p : C.GateProgram n g) (D : S.Demand n g) →
+  Schedule p D → Compiled p D
+compileSchedule C.noGates D stop = record
   { count = zero ; program = C.noGates
   ; image = λ { (C.inputWire i) → R.wire (C.inputWire i) ; (C.gateWire ()) }
   ; bound = z≤n
   ; exact = λ { x (C.inputWire i) h → refl ; x (C.gateWire ()) } }
-compile (C.appendGate p a) D dec with compile p (S.pre a D) (decPre a D dec)
-... | old with dec (C.gateWire fzero)
+compileSchedule (C.appendGate p a) D (next verdict prior)
+  with compileSchedule p (S.pre a D) prior
+... | old with verdict
 ...   | no dead = record
   { count = count old ; program = program old
   ; image = R.extendAlias (image old) (R.known false)
@@ -117,6 +134,10 @@ compile (C.appendGate p a) D dec with compile p (S.pre a D) (decPre a D dec)
         trans (cong (λ z → R.evalPlan z x (C.evaluateProgram (program old) x)) (sym eq))
           (planLive (image old) a x (C.evaluateProgram p x)
             (C.evaluateProgram (program old) x) (λ w read → exact old x w (inj₂ (live , read)))) } }
+
+compile : ∀ {n g} (p : C.GateProgram n g) (D : S.Demand n g) →
+  (∀ w → Dec (D w)) → Compiled p D
+compile p D dec = compileSchedule p D (predicateSchedule p D dec)
 
 prune : ∀ {n} → C.ConcreteBooleanCircuit n → C.ConcreteBooleanCircuit n
 prune c =
