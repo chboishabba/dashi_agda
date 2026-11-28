@@ -6,9 +6,7 @@ module DASHI.Moonshine.CM163BishopHecke41QuantitativeRigidityExact where
 -- are assembled on the actual ordinary residual coefficient streams.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
-open import Data.Rational.Unnormalised using (1ℚᵘ)
 import Real as R
-open R using (_-_)
 import RealProperties as P
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
@@ -41,18 +39,13 @@ open Comp using (complexTrans; complexSym)
 -- size of the real part. Their semantics are still proved by induction
 -- from the one-step T invariance and the coordinate-setoid transport.
 minusT : Point → Point
-minusT p = U.bishop-upper-half-plane-point
-  (C.complex (C.re (U.tau p) - R.1ℝ) (C.im (U.tau p)))
-  (U.imaginaryPositive p)
+minusT = Gen.actMinusT
 
 minusTUndo : ∀ p → U.tau (Gen.actT (minusT p)) ≈C U.tau p
-minusTUndo p =
-  (let open P.ℝ-Solver in solve 1
-    (λ x → (x ⊖ Κ 1ℚᵘ) ⊕ Κ 1ℚᵘ ⊜ x)
-    P.≃-refl (C.re (U.tau p))) , P.≃-refl
+minusTUndo = Gen.actTAfterMinusT
 
 minusTHeight : ∀ p → R._≃_ (C.im (U.tau (minusT p))) (C.im (U.tau p))
-minusTHeight p = P.≃-refl
+minusTHeight = Gen.actMinusTHeight
 
 forwardPowerPoint : Nat → Point → Point
 forwardPowerPoint zero p = p
