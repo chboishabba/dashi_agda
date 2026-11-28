@@ -4,7 +4,7 @@ steps are reused. This is a smooth-chart derivative, not an optimum certificate.
 """
 import numpy as np
 from solar_matrix_storage import diagonal
-from solar_physical_causal import MASS,CHARGE
+from solar_population_event import MASS,CHARGE
 from solar_spherical_cycle import geometry
 from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_thermal_population_tangent import reaction_jvp,event_jvp,thermal_jvp,collision_jvp
