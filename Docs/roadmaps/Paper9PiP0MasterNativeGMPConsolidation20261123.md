@@ -2015,3 +2015,21 @@ Preserve the parallel theta donor; this extends the original C1b lattice route.
 - `202e2d992208` RectangleRowFold: actual signed cutoff codec product, membership equivalence/permutation to original rectangle, finite nested horizontal fold.
 - Remaining: connect actual positive paired row limits to this fold, including zero row and negative reflection; absolute Lambert row/degree interchange and normalized E4/E6; then Hecke41/diagonal/ray/RawCross. Native elaboration pending, not solved by finite tests.
 - Local independent rational reference (not repository import): 256 rectangle cases, 71460 points, 16419 positive factor pairs; exact finite regrouping, nontrivial signed sandwich and degree partition checks. No CI. 
+
+
+### 2026-11-28 — signed theta literal coefficient and original modular uniqueness cut
+
+Implemented on this branch:
+- `ce728d93a24b` — `JInvariantThetaIntegerTwistExact`: all-index sign character on the original integer Cauchy row, fourth-power twist, finite-support 16t monomial shift.
+- `238640f06d3d`, `2eecbe7d634d` — `JInvariantBishopThetaSignedReadoutExact`: actual two Machin half-phase readouts A/B/C, signed integer-to-Bishop coefficient transport, Q/V/W polynomial readouts, and analytic Jacobi equality from the all-index native coefficient premise.
+- `a48957a826cc` — independent exact replay `scripts/check_paper9_theta_signed_transport.py`. Local execution: 397/397 checks passed, degrees 0–64, including direct integer/half-integer shell counts, twist, monomial, Jacobi counts and seven symbolic polynomial checks. Not kernel evidence.
+
+Lean companion branch `research/paper9-original-eisenstein-derivative-20261125`:
+- `a5a7f2827011` — `Paper9ThetaShellCoefficientWeld`: source-written exact graded product fibre, signed square and odd triangular coordinate bijections, shell-to-literal convolution readout, all-index Jacobi coefficient conclusion.
+- `25b189d4af53`, `ce961aa1a091` — `Paper9ThetaModularTransport`: original Mathlib two-variable theta functional equation, signed fourth-power S/T transformation, weight 4/6 slash invariance using the existing SL2Z generator owner.
+- `3d38f2700a96`, `ba8ad7a52d51` — `Paper9ThetaCuspNormalization`: signed square/triangular analytic summand pairing, explicit geometric cusp bounds and unit limits.
+- `eb2bd072f1c8`, `19c99b71edbb` — `Paper9ThetaEisensteinSameObject`: theta minus original E4/E6 as cusp forms, quotient by the existing eta24 cusp form, negative-weight constancy and S evaluation at 2i force zero. Intended terminal theorems thetaE4_eq_original, thetaE6_eq_original and thetaDiscriminantNumerator have explicit bodies with no new local postulate. This route does not require the quartic identity as a modularity premise.
+
+All new Agda/Lean source remains uncompiled; pinned Mathlib v4.28 API/elaboration compatibility must be tested locally. No GitHub CI. No proof transfer from Lean to Agda is assumed. Classical theta/Poisson identities, modular uniqueness, and Legendre algebra retain their established attribution; DASHI contribution is the explicit signed transport and original-carrier attachment.
+
+GTheta1: Lean shell-to-literal history source written; native Agda all-index Jacobi coefficient theorem remains the uninhabited input of jacobiFromCoefficients. GTheta2: native analytic readout and conditional transport written. GTheta3: Lean modular uniqueness source written; native Bishop modular transformation/uniqueness or original lattice Fourier equality still required. Lean shell histories and analytic functions also need their exact all-index summation/coeff identification if used as a single chain. Main C1b absolute square-shell/row and Lambert regrouping remains open independently; C1c Hecke, C2 diagonal, C3 ray, H1 and RawCross/GMP acceptance unchanged. Do not replace a native theorem by a foreign theorem name or finite receipt. Next priority: discharge native shell-count theorem or original lattice same-object weld, then attach actual Hecke/CM endpoint.
