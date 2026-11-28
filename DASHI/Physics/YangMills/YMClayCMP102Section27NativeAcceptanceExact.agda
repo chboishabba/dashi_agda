@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.YMClayCMP102OriginalGeometricSqueezeReceiverExact
 
 open import Agda.Builtin.Nat using (Nat)
 import Real as R
+import Sequence as Seq
 
 -- Static same-source owner references, forcing names and imports to
 -- resolve under native Agda, not separate syntactic grep acceptance.
@@ -23,5 +24,5 @@ originalFiniteGFactorization : ∀ X (count : Nat) →
 originalFiniteGFactorization = Algebra.originalGPrefixSignedSquares
 
 originalFiniteRateZero :
-  Rate.Seq._ConvergesTo_ Rate.originalGeometricRate R.0ℝ
+  Seq._ConvergesTo_ Rate.originalGeometricRate R.0ℝ
 originalFiniteRateZero = Rate.originalGeometricRateZero
