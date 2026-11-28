@@ -70,3 +70,37 @@ def recover_trace(n,R,H,caps,x,B,signed_screen=False,flats=()):
         if not satisfies(v.witness,H,flats):return None
         return trace(n,R,H,caps,x,v.witness,B,flats)
     except (ProbeLimit,Exhausted,RecursionError):return None
+
+
+def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8):
+    """Find a strict aggregate improvement by the existing separator fold.
+    Return (status, receipt, lower). A lower bound is for the affine carrier,
+    not a claim that hard nonlinear prefixes are reachable.
+    """
+    from check_pnp_separator_row_strata import build, minimum_excess
+    from check_pnp_demand_strata import Allowance, ProbeLimit
+    from check_pnp_affine_normal_components import Exhausted
+    R,H,caps,flats=tuple(R),tuple(H),tuple(caps),tuple(flats)
+    if n<0 or x<0 or x>>n or len(R)!=len(caps) or any(r<0 or r>>n for r in R) or any(c<0 for c in caps):
+        raise ValueError('invalid source')
+    Q=canon(H)
+    if Q is None or not satisfies(x,H,flats):raise ValueError('invalid start')
+    phi=sum(max(0,(r&x).bit_count()-c) for r,c in zip(R,caps))
+    if phi==0:return 'SAT',None,0
+    if not R or canon(Q+tuple((r,1) for r in R))!=Q:return 'UNKNOWN',None,0
+    # Existing builder requires every original column to occur.
+    union=0
+    for r in R:union|=r
+    if union!=(1<<n)-1:return 'UNKNOWN',None,0
+    lower=0
+    try:
+        A=Allowance(B,max(0,B.left//2))
+        G=build(n,R,Q,A,leaf_cap,seam_cap)
+        if G is None:return 'UNKNOWN',None,0
+        lower,y=minimum_excess(n,R,Q,caps,G,A)
+        if lower>=phi:return 'MINIMUM',None,lower
+        if not satisfies(y,H,flats):return 'UNKNOWN',None,lower
+        receipt=trace(n,R,H,caps,x,y,B,flats)
+        if receipt is None:return 'UNKNOWN',None,lower
+        return 'IMPROVED',receipt,lower
+    except (ProbeLimit,Exhausted,RecursionError):return 'UNKNOWN',None,lower
