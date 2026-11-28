@@ -87,6 +87,6 @@ def main():
             if q['status']=='GAIN' and q['prefix']+1<n:
                 assert valid(q['child'],n,q['witness']);interior+=1;break
     assert interior>0
-    q=localize(((1,),),1,(1,),lambda G,n,c:cnf_solver(G,n,(),(),c),0,ContinuationAllowance(0));assert q['status']=='UNKNOWN' 
+    q=localize(((1,),),1,(1,),lambda G,n,c:cnf_solver(G,n,(),(),c),0,ContinuationAllowance(0));assert q['status']=='UNKNOWN'
     print(dict(nonmonotone_paths=checks,actual_gains=gains,already_verified=complete,interior_gains=interior,refusal=1))
 if __name__=='__main__':main()
