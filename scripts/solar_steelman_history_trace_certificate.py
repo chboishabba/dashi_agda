@@ -38,7 +38,7 @@ def cuts(pieces,initial,delay,T):
         pts.add(j*delay);j+=1
     return sorted(pts)
 
-def certify(m,a,path,degree=8,block_path=None):
+def certify(m,a,path,degree=8,block_path=None,prior=(),checkpoint=None,limit=None):
     with np.load(path,allow_pickle=False) as f:
         d,n,start,stop=map(lambda k:int(f[k]),('d','n','start','stop'))
         delay=q(f['delay']);grid=list(map(q,f['grid']));past=f['past']
@@ -69,19 +69,28 @@ def certify(m,a,path,degree=8,block_path=None):
     for j,p in enumerate(initial):
         initial_error=max(initial_error,bernstein_bound(p[2].subs(s,0)-basis[d+j*n:d+(j+1)*n,:],s))
     initial_state_error=bernstein_bound(X0-expected,s)
-    pts=cuts(pieces,initial,delay,T);slabs=[];prev=None
-    for lo,hi in zip(pts,pts[1:]):
+    pts=cuts(pieces,initial,delay,T);pairs=list(zip(pts,pts[1:]))
+    slabs=list(prior);prev=None
+    assert len(slabs)<=len(pairs)
+    for row,pair in zip(slabs,pairs):
+        assert len(row)==7 and tuple(row[:2])==pair and min(row[3:])>=0
+    if slabs:prev=find(pieces,*pairs[len(slabs)-1]).subs(s,1)
+    from solar_steelman_history_exact_bounds import ratio_bounds
+    r=max(1,max(ratio_bounds(c)[1] for _,_,c in a['models']))
+    count=0
+    for lo,hi in pairs[len(slabs):]:
         X=find(pieces,lo,hi)
         (A,ea),(B,eb),(C,ec),(R,er)=coeff(lo,hi)
         H1,eh1=hist(lo-delay,hi-delay);H2,eh2=hist(lo-2*delay,hi-2*delay)
         rho=defect(s,hi-lo,X,A,B,C,H1,H2,(ea,eb,ec,eh1,eh2))
         mu=logarithmic_norm(A,s,ea)
         # Bound propagated state error through ratio readback globally.
-        from solar_steelman_history_exact_bounds import ratio_bounds
-        r=max(1,max(ratio_bounds(c)[1] for _,_,c in a['models']))
         b=(bernstein_bound(B,s)+eb)*r;c=(bernstein_bound(C,s)+ec)*r
         jump=0 if prev is None else bernstein_bound(X.subs(s,0)-prev,s)
         slabs.append((lo,hi,mu,b,c,rho,jump));prev=X.subs(s,1)
+        count+=1
+        if checkpoint is not None:checkpoint(slabs)
+        if limit is not None and count>=limit and hi<T:return None
     result=replay(delay,T,slabs,initial_state_error,(initial_error,initial_error))
     if block_path is not None:
         with np.load(block_path,allow_pickle=False) as f:
