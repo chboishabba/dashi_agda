@@ -4190,3 +4190,190 @@ with exit 0. Other three returned before timeout. Prior
 BR156/143 byte-identical dependencies replayed. No native
 kernel, integrated runner, CI, nonlinear time evolution,
 or empirical acceptance.
+
+
+## 28. BR165–168 — exact donor reconciliation, actual cylinder spin connection, frozen symbol and extended G4 sign region
+
+Consume sections 0, 21–27. Preserve the independent material,
+atomic, marked quantum action and periodic nonlinear lanes.
+Reopened original BR27 source scripts/check_hopf369_br_curvature_energy.py
+(blob 75f6d2f9ae23302860074c25cb8d864b7c089148), BR128–131
+scripts/check_hopf369_br128_131_F_curvature_development.py
+(9dec80672c8b59c75afa8c877d8d54f6d8d86644), BR132–135
+scripts/check_hopf369_br132_135_F_bianchi_cartan.py
+(0de643a765e455367c6635dad2f6aec80804ac01c0), BR136–139
+scripts/check_hopf369_br136_139_F_variable_subsidiary.py
+(2a20407ce64c205df31187f15254e2c008c944cc), BR143
+scripts/check_hopf369_br143_145_parallel.py
+(2354d838727e6d84c1e8da05abad27a9b78efc6d).
+The original BR27 source is now copied verbatim and verified
+by git hash-object (SHA256 948bb8ca26a4e7e3bb4e30135b97fe33294e05fffb6a19b99261d4a7a9b6392d).
+Its complete standalone run passes. BR165 consumes its carrier
+and the byte-verified BR143 dependency, proving exact equality
+of the full 100x35 embedding X and all four compressed principal
+symbols G A_i=X^T M_i X, and replaying G A_n J=3 R^T H.
+This removes the uncertainty about the BR143 reconstruction's
+basis and symbol identity with the original donor. It does NOT
+replay the actual BR128–139 stage scripts. Their earlier
+receipt correction remains in force. No native kernel run.
+For matter reduction consume #1241 smooth-circle independent
+Maxwell/vectorlike spinor and BR159/163 selected atomic scaling;
+targeted repository search for existing KK spin-connection
+Pauli reduction recovered the OCT369 physical roadmaps as
+candidate owners, not a verified identical formula. Do not
+claim exhaustive novelty; all Cartan, Clifford and Dirac
+formulas are standard prior mathematical physics. The actual
+attachment to the P0T/V central source is the new calculation.
+
+### BR166 — exact spin connection of the original G3 cylinder metric
+
+Use the circle-invariant G3 metric, not the y-dependent periodic
+Einstein–Israel spacetime. Let theta^a be a Jordan orthonormal
+coframe, theta^5=phi(dy+A), v_a=e_a(log phi),
+F=(1/2)F_ab theta^a wedge theta^b. Signature (-++++).
+Connection convention dtheta^A+Omega^A_B wedge theta^B=0,
+Omega_AB=-Omega_BA. The actual torsion-free connection is
+ Omega_5a=v_a theta^5+(phi/2) F_ab theta^b,
+ Omega_ab=omega_ab-(phi/2) F_ab theta^5.
+With Clifford anticommutator {Gamma^A,Gamma^B}=2 eta^AB,
+the Dirac operator convention is
+ D5=Gamma^A(E_A+Omega_BC(E_A) Gamma^B Gamma^C/4).
+Contracting every connection slot yields
+ D5=D_J+Gamma^5 phi^-1 partial_y
+       -Gamma^a A_a partial_y
+       +(1/2) Gamma^a v_a
+       +(phi/8) Gamma^5 F_ab Gamma^a Gamma^b.
+Here D_J uses the base frame derivative before horizontal
+lifting. The coefficient of the geometric Pauli term is phi/8
+with summation over ordered a,b, not phi/4 on ordered pairs;
+changing Clifford/connection/orientation conventions changes
+the corresponding signs consistently. The local checker
+verifies every coframe torsion slot, all 25 Clifford
+anticommutators and the exact matrix-valued contraction with
+arbitrary six independent F_ab and four v_a. This is an
+algebraic derivation of the actual torsion-free KK connection
+for arbitrary positive phi and cylinder fields. A global
+spin structure, periodic spinor boundary condition, independent
+Maxwell action and source coupling are separate assumptions.
+
+For the periodic spin structure and selected y-independent
+spinor, both partial_y terms vanish. The normalization
+psi5=phi^-1/2 chi_J (fixed coordinate period factor suppressed)
+cancels the explicit v term exactly. The Pauli term survives:
+ (D_J-m+(phi/8) Gamma^5 F_ab Gamma^a Gamma^b) chi_J=0
+in the stated real Dirac operator convention (D5-m).
+An independent physical Maxwell field can be added by its
+minimal covariant derivative; F here remains GEOMETRIC and
+must not be interpreted as that Maxwell field.
+At the G3 centre phi=p, F_12=8 eps/p² in the Jordan
+orthonormal frame, F_0i=0 initially. Consequently the Pauli
+operator is b Gamma^5 Gamma^1 Gamma^2, b=2eps/p in the
+original dimensionless source units. It is nonzero even for
+zero compact momentum. A positive reference-normalized Weyl
+scale f=phi/phi_ref sends g_J to g_E=f g_J. By the standard
+four-dimensional Dirac conformal identity and field weight
+chi_J=f^(3/4)chi_E, the mass becomes m f^-1/2 and the
+Pauli operator becomes (phi f^(1/2)/8) Gamma^5
+F^E_ab Gamma^a Gamma^b. This written frame transformation
+is not a separate symbolic check. It must be retained
+alongside BR159/163 Coulomb/Pauli atomic radial terms.
+A bulk zero mode is therefore NOT exactly the simplified
+4D hydrogenic scalar-Coulomb Hamiltonian on the actual G3
+geometry. Test matter/no backreaction is assumed, not a
+solution of the Einstein–Dirac–Maxwell equations.
+
+### BR167 — actual central frozen Dirac symbol and signed observer cut
+
+In a marked Jordan frame at the initial G3 centre, use
+the local constant-coefficient symbol with momenta k_i
+and the actual coefficient b above. Suppress independent
+Maxwell potentials, gradients and curvature variations;
+this is not the full curved differential spectral operator.
+From (D-m) with the (-++++) Clifford convention, the
+Hermitian frozen Hamiltonian is
+ H=-i m Gamma^0-Gamma^0 sum_i k_i Gamma^i
+       +i b Gamma^0 Gamma^5 Gamma^1 Gamma^2.
+The mass and geometric Pauli terms anticommute and the
+latter squares to b² I. The residual of the square is
+ D=H²-(m²+|k|²+b²)I,
+ D²=4 b²(k_x²+k_y²) I, tr D=0.
+The full 4x4 characteristic polynomial is exactly
+ [E²-m²-|k|²-b²]²-4b²(k_x²+k_y²).
+Thus the two positive frozen dispersion energies are
+ E_±=sqrt(m²+k_z²+(k_perp±b)²), k_perp>=0,
+ together with their negatives; the labels interchange
+ under b -> -b. At zero momentum there is NO linear
+ rest-energy shift or simple Zeeman-like rest splitting:
+ E_rest=sqrt(m²+b²), with two positive eigenstates.
+For m>0 the first rest correction is quadratic.
+The signed Pauli matrix is odd in eps, while its unlabelled
+energy spectrum is even. This is another concrete signed
+non-descent observation: an oriented operator/polarization
+readout can retain what the unordered spectrum forgets.
+No absolute physical sign without the marked fibre and
+frame, and no atomic line splitting derived from this
+free frozen symbol. For nonzero transverse momentum,
+the eigenbranches can differ at first order in b if a
+consistent polarization label is retained. Atomic Coulomb
+bound states and their kinetic/Pauli domain are different.
+The next actual detector cut is perturbation of a selected
+bound state with the full spatially dependent G3 geometric
+Pauli/connection operator and independent Maxwell/nuclear
+source, with physical length units and controlled errors.
+Do not add BR159/163 and BR167 energy coefficients as if
+they were the same transition. No experiment or detector
+performance asserted.
+
+### BR168 — certified normalized G4 sign interval, not just a point
+
+Use BR161 exact IY enclosure and the original P0H nonlinear
+error budget. Fix kappa=K0=1,p0=1/4; write t=eps²,
+Q<=q0 t, U<=24 t, G<=176 t, L1<=L10 t,
+q0=(32+2(22/7))/4+(32+4(22/7)/3)/8,
+L10=(8/3)(22/7)². The gradient estimate uses pi>3,
+Gpsi<=gp0 t=(24+L10/12)t.
+Let h_lo=1113/20000,h_hi=1114/20000, so h0/t lies
+between these rational constants. Define
+ eh=3(7q0*176+7*24*gp0)+(7/4)q0 L10+q0 h_hi.
+Then BR161 gives the following uniform upper estimate
+ (Tzz-Txx)/eps² <=
+ -2h_lo+t(2eh+8q0 h_hi+512q0/(1-64t)).
+The right side increases on 0<t<1/64; evaluating at
+t=(1/1200)^2 gives approximately -0.0146882278804,
+strictly negative by exact rational arithmetic. Original
+7Q<1 and 64eps²<min(K0,2p0) hold throughout.
+Thus for every 0<|eps|<=1/1200 in these normalized
+parameters the selected original nonlinear constrained
+G4 initial solution has Tzz<Txx. This extends BR161's
+point witness by monotonicity, not parameter calibration
+or evolved-time stability. No finite-amplitude conformal
+profile computed. The bound depends on the prior P0H
+analytical fixed point and BR161 source estimates; this
+stage checks the sufficient inequality, not a PDE.
+
+### Remaining cuts and receipt
+
+Periodic W2/W3/W4b: BR165 repairs donor parity but does
+not close the derivative-balanced coupled surface energy.
+BR164 covariant bulk graph and BR150 half-order trace
+remain; need actual coupled trace/work estimate, corner
+conditions, exterior, W6 generation. Replay BR128–139
+with the exact original donor as separate checkpoints
+before upgrading their combined acceptance.
+Atomic/physical: BR166/167 give actual source-specific
+geometric Pauli coupling and selected symbol, so next
+bound-state operator must include it; original BR162
+singlet, BR157/163 angular and radial and #886 CI/SCF
+owners remain active. G3 quantitative time constants
+and test-matter validity unpaid. G4 extends the exact
+sign region but actual profile/time trajectory remain.
+Quantum/Monster and material receiver lanes not newly
+implemented here. No sibling modifications or exhaustive
+master reconciliation.
+
+Four new 90s-cap local stages exit zero; original BR27
+standalone run also exits zero. New checker blob
+7f1e2d159955dc9d37026c034a1e423a40184f7d, SHA256
+23673ba2400a89fddeb4bbb6150535f2f796726659473ed471fc8b7556f07506.
+No full runner, BR128–139 replay, native kernel, CI,
+nonlinear evolution or empirical acceptance.

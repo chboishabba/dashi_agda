@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR164; periodic bulk subsidiary source BR164, wall trace BR150)
+## Current proof state — 28 November 2026 (BR168; periodic donor BR165, bulk subsidiary BR164, wall trace BR150)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -597,3 +597,42 @@ curved surface trace and nonlinear coupled existence are
 still unpaid. Four local stages PASS; no native, full
 runner, physical trajectory or empirical acceptance.
 See [the controlling proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Actual cylinder spin connection and extended gravitational sign region (BR165–168)
+
+The exact original BR27 Weyl donor is byte-verified and
+replayed; its embedding and four compressed symbols agree
+with BR143. This does not replay all BR128–139 stages or
+settle the coupled periodic wall trace. On the original
+circle-invariant G3 metric, let \(\theta^5=\phi(dy+A)\).
+The torsion-free connection has
+\(\Omega_{5a}=v_a\theta^5+(\phi/2)F_{ab}\theta^b\) and
+\(\Omega_{ab}=\omega_{ab}-(\phi/2)F_{ab}\theta^5\).
+With the stated Clifford convention, the radius-normalized
+periodic zero-mode Dirac operator contains the actual
+geometric Pauli term \((\phi/8)\Gamma^5F_{ab}\Gamma^a\Gamma^b\)
+in addition to the base operator and supplied mass.
+It survives at zero compact momentum. The independent
+physical Maxwell field is distinct from this connection.
+At the G3 centre the geometric term has coefficient
+\(b=2\epsilon/p\) multiplying \(\Gamma^5\Gamma^1\Gamma^2\).
+For the local frozen free symbol its dispersion is
+\(E_\pm^2=m^2+k_z^2+(k_\perp\pm b)^2\), so the unlabelled
+spectrum forgets the sign and the rest energy is
+\(\sqrt{m^2+b^2}\), not a linear rest splitting.
+Actual bound-state spectroscopy, field variation,
+spin structure, test-matter validity and measurement
+calibration must still be paid. This is not a complete
+Einstein–Dirac–Maxwell solution.
+
+BR161's conservative sufficient G4 sign budget extends
+uniformly at \(\kappa=K_0=1,p_0=1/4\) to all
+\(0<|\epsilon|\le1/1200\). The exact rational inequality
+at the upper endpoint gives a negative upper coefficient
+for \((T_{zz}-T_{xx})/\epsilon^2\) (approximately
+\(-0.0146882278804\)); monotonicity covers the smaller
+amplitudes. This concerns original nonlinear constrained
+initial data, not evolved trajectories or measured units.
+Four local exact stages passed plus the BR27 standalone
+replay. See [the controlling register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
