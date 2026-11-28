@@ -31,3 +31,6 @@ PRs #1090, #1193, #1180, #1125, #1201, #352, #1441, #1443, #1001, #1011, #785, #
 
 ## Education and formation source extension
 See [Education formation source and weld atlas](RelationalFederationEducationFormationWeld20261129.md) for Alice Brown and coauthor DOI coordinates, John Anthony Brown working-manuscript provenance and H1–H5 hypothesis boundaries, Digital ESD original source registry, source-preserving cross-pollination and PR coordinates. The two Brown source families are independent; DASHI synthesis does not transfer authorship or evidence. No private manuscripts reproduced.
+
+## Circular economy and institutional-accountability extension
+See [Circular reproduction source atlas and roadmap](RelationalFederationCircularReproduction20261129.md): DCCEEW, UNEP FI, Ellen MacArthur Foundation, IFC, OECD, Kalundborg, existing ESD source atlas and Australian/US political-finance source owners. External sources, user-origin research direction, JMD implementation and DASHI synthetic mathematics remain distinct. No empirical, legal, causal or authorisation promotion.
