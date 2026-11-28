@@ -7,10 +7,13 @@ module DASHI.Moonshine.JInvariantBishopDyadicRowTailMajorantExact where
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as Q using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Data.Product.Base using (_,_; proj₁; proj₂)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 import Real as R
 open R using (ℝ; _≃_; _≤_; _<_; _+_; _-_; _*_; _⋆; ∣_∣)
 import RealProperties as P
+import Data.Rational.Unnormalised.Properties as QP
+import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflect
+import DASHI.Analysis.BishopComplexCommutativeSemiringLawsExact as Laws
 import Inverse as I
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
@@ -73,7 +76,7 @@ negativeExpFloor a u an un ua =
   let d = a - u
       dn = P.0≤x⇒nonNegx (P.≤-respʳ-≃
         (let open P.ℝ-Solver in solve 2 (λ a u → a ⊕ (⊝ u) ⊜ a ⊖ u) P.≃-refl a u)
-        (P.≤-respˡ-≃ (P.+-inverseʳ u) (P.+-mono-≤ ua P.≤-refl)))
+        (P.≤-respˡ-≃ (P.≃-symm (P.+-inverseʳ u)) (P.+-mono-≤ ua P.≤-refl)))
       r = Exp.bishopExp (R.- a)
       rNN = P.pos⇒nonNeg (P.0<x⇒posx (NegExp.originalNegativeExpPositiveForNonnegative a an))
       eq = let open P.ℝ-Solver in solve 2
@@ -199,3 +202,163 @@ scaledInverseBound q nz h b hp bn cross =
       right = P.≃-trans (P.*-assoc b d (Norm.normSqC i))
         (P.≃-trans (P.*-congˡ law) (P.*-identityʳ b))
   in P.≤-respʳ-≃ right (P.≤-respˡ-≃ left raw)
+
+Box : BishopComplex → ℝ → Set
+Box z b = (∣ C.re z ∣ ≤ b) × (∣ C.im z ∣ ≤ b)
+
+boxCong : ∀ {z w b} → z ≈C w → Box w b → Box z b
+boxCong (r , i) (a , b) = P.≤-respˡ-≃ (P.∣-∣-cong r) a , P.≤-respˡ-≃ (P.∣-∣-cong i) b
+
+boxBudget : ∀ {z a b} → a ≃ b → Box z a → Box z b
+boxBudget eq (r , i) = P.≤-respʳ-≃ eq r , P.≤-respʳ-≃ eq i
+
+boxAdd : ∀ {z w a b} → Box z a → Box w b → Box (z +C w) (a + b)
+boxAdd (r , i) (s , t) = Bounds.boundAdd r s , Bounds.boundAdd i t
+
+boxScale : ∀ {a b z} → R.NonNegative a → Box z b → Box (scaleC a z) (a * b)
+boxScale {a} an (r , i) =
+  Bounds.boundMul (P.≤-reflexive (P.nonNegx⇒∣x∣≃x an)) r ,
+  Bounds.boundMul (P.≤-reflexive (P.nonNegx⇒∣x∣≃x an)) i
+
+boxFromNorm : ∀ z b → R.NonNegative b → Norm.normSqC z ≤ square b → Box z b
+boxFromNorm z b bn bound =
+  Reflect.squareReflectsOnNonnegative (P.nonNeg∣x∣ (C.re z)) bn
+    (P.≤-respˡ-≃ (Norm.absoluteSquare (C.re z))
+      (P.≤-trans (Norm.componentSquareBelowNormSqReal z) bound)) ,
+  Reflect.squareReflectsOnNonnegative (P.nonNeg∣x∣ (C.im z)) bn
+    (P.≤-respˡ-≃ (Norm.absoluteSquare (C.im z))
+      (P.≤-trans (Norm.componentSquareBelowNormSqImag z) bound))
+
+normSquareProductBound : ∀ z w a b → Norm.normSqC z ≤ a → Norm.normSqC w ≤ b →
+  Norm.normSqC (z *C w) ≤ a * b
+normSquareProductBound z w a b az bw =
+  P.≤-respˡ-≃ (Norm.normSqMultiply z w) (P.*-mono-≤ (Inv.normNN z) (Inv.normNN w) az bw)
+
+-- Once the signed geometric estimate pays the cross, the row tail
+-- domination uses the actual scaled rational row (not its limit).
+module TailCell (q : BishopComplex) (nz : Rec.BishopComplexNonzero (Row.gapMinus q))
+  (h b B : ℝ) (hp : R._<_ R.0ℝ h) (hOne : h ≤ R.1ℝ)
+  (bn : R.NonNegative b) (Bn : R.NonNegative B) (bB : b ≤ B)
+  (qNorm : Norm.normSqC q ≤ R.1ℝ)
+  (cross : square h ≤ b * Norm.normSqC (Row.gapMinus q)) where
+
+  v = scaleC (R.- h) (Rec.reciprocalC (Row.gapMinus q) nz)
+  Y = q *C Rat.square v
+  X = Row.X q nz
+
+  normV : Norm.normSqC v ≤ b
+  normV = scaledInverseBound q nz h b hp bn cross
+
+  normY : Norm.normSqC Y ≤ square b
+  normY = P.≤-respʳ-≃ (P.*-identityˡ (square b))
+    (normSquareProductBound q (Rat.square v) R.1ℝ (square b) qNorm
+      (normSquareProductBound v v b b normV normV))
+
+  yBox : Box Y b
+  yBox = boxFromNorm Y b bn normY
+
+  y2Box : Box (Rat.square Y) (square b)
+  y2Box = boxFromNorm (Rat.square Y) (square b) (Sq.bishopSquareNonnegative b)
+    (normSquareProductBound Y Y (square b) (square b) normY normY)
+
+  y3Box : Box (Rat.cube Y) (b * square b)
+  y3Box = boxFromNorm (Rat.cube Y) (b * square b)
+    (P.nonNegx,y⇒nonNegx*y bn (Sq.bishopSquareNonnegative b))
+    (P.≤-respʳ-≃
+      (let open P.ℝ-Solver in solve 1
+        (λ b → (b ⊗ b) ⊗ ((b ⊗ b) ⊗ (b ⊗ b)) ⊜
+          (b ⊗ (b ⊗ b)) ⊗ (b ⊗ (b ⊗ b))) P.≃-refl b)
+      (normSquareProductBound Y (Rat.square Y) (square b) (square (square b)) normY
+        (normSquareProductBound Y Y (square b) (square b) normY normY)))
+
+  hn = P.pos⇒nonNeg (P.0<x⇒posx hp)
+  h2One : square h ≤ R.1ℝ
+  h2One = P.≤-respʳ-≃ (P.*-identityˡ R.1ℝ) (squareMono hn hOne)
+  h4One : S.fourthR h ≤ R.1ℝ
+  h4One = P.≤-respʳ-≃ (P.*-identityˡ R.1ℝ)
+    (squareMono (Sq.bishopSquareNonnegative h) h2One)
+
+  boundedScale : ∀ a z c → R.NonNegative a → a ≤ R.1ℝ →
+    R.NonNegative c → Box z c → Box (scaleC a z) c
+  boundedScale a z c an a1 cn (r , i) =
+    let raw = boxScale an (r , i)
+        upper = P.≤-respʳ-≃ (P.*-identityˡ c) (P.*-monoʳ-≤-nonNeg a1 cn)
+    in P.≤-trans (proj₁ raw) upper , P.≤-trans (proj₂ raw) upper
+
+  yRead : Y ≈C scaleC (square h) X
+  yRead = S.scaledX h q (Rec.reciprocalC (Row.gapMinus q) nz)
+
+  row4Read : scaleC (S.fourthR h) (Row.P4 X) ≈C
+    (scaleC (square h) Y +C Row.scale 6 (Rat.square Y))
+  row4Read = complexTrans (S.scaled4Read h X)
+    (A.addCCongruent (A.scaleCCongruent (complexSym yRead) (square h))
+      (Row.scaleCong 6 (A.mulCCongruent (complexSym yRead) (complexSym yRead))))
+
+  row6Read : scaleC (S.sixthR h) (Row.P6 X) ≈C
+    ((scaleC (S.fourthR h) Y +C Row.scale 30 (scaleC (square h) (Rat.square Y)))
+      +C Row.scale 120 (Rat.cube Y))
+  row6Read =
+    let eq = complexSym yRead
+        sqEq = A.mulCCongruent eq eq
+    in complexTrans (S.scaled6Read h X)
+      (A.addCCongruent (A.addCCongruent (A.scaleCCongruent eq (S.fourthR h))
+        (Row.scaleCong 30 (A.scaleCCongruent sqEq (square h))))
+        (Row.scaleCong 120 (A.mulCCongruent eq sqEq)))
+
+  sixNN : R.NonNegative ((+ 6 / 1) ⋆)
+  sixNN = Bounds.ratNN (+ 6 / 1) (QP.nonNegative⁻¹ (+ 6 / 1))
+  thirtyNN : R.NonNegative ((+ 30 / 1) ⋆)
+  thirtyNN = Bounds.ratNN (+ 30 / 1) (QP.nonNegative⁻¹ (+ 30 / 1))
+  oneTwentyNN : R.NonNegative ((+ 120 / 1) ⋆)
+  oneTwentyNN = Bounds.ratNN (+ 120 / 1) (QP.nonNegative⁻¹ (+ 120 / 1))
+
+  tail4 : Box (scaleC (S.fourthR h) (Row.P4 X))
+    (b + ((+ 6 / 1) ⋆) * square b)
+  tail4 = boxCong row4Read (boxAdd
+    (boundedScale (square h) Y b (Sq.bishopSquareNonnegative h) h2One bn yBox)
+    (boxScale sixNN y2Box))
+
+  tail6 : Box (scaleC (S.sixthR h) (Row.P6 X))
+    ((b + ((+ 30 / 1) ⋆) * square b) + ((+ 120 / 1) ⋆) * (b * square b))
+  tail6 = boxCong row6Read
+    (boxAdd (boxAdd
+      (boundedScale (S.fourthR h) Y b (Sq.bishopSquareNonnegative (square h)) h4One bn yBox)
+      (boxScale thirtyNN
+        (boundedScale (square h) (Rat.square Y) (square b)
+          (Sq.bishopSquareNonnegative h) h2One (Sq.bishopSquareNonnegative b) y2Box)))
+      (boxScale oneTwentyNN y3Box))
+
+  b2Upper : square b ≤ B * b
+  b2Upper = P.*-monoʳ-≤-nonNeg bB bn
+
+  b3Upper : b * square b ≤ square B * b
+  b3Upper = P.≤-respˡ-≃ (P.≃-symm (P.*-assoc b b b))
+    (P.*-monoʳ-≤-nonNeg (squareMono bn bB) bn)
+
+  -- A single summable b=C/J² dominates every moving row, because
+  -- higher powers are bounded by B*b and B²*b with fixed B.
+  tail4Linear : Box (scaleC (S.fourthR h) (Row.P4 X))
+    ((R.1ℝ + ((+ 6 / 1) ⋆) * B) * b)
+  tail4Linear =
+    let r , i = tail4
+        le = P.≤-respʳ-≃
+          (let open P.ℝ-Solver in solve 2
+            (λ B b → b ⊕ Κ (+ 6 / 1) ⊗ (B ⊗ b)
+              ⊜ (Κ 1ℚᵘ ⊕ Κ (+ 6 / 1) ⊗ B) ⊗ b) P.≃-refl B b)
+          (P.+-mono-≤ P.≤-refl (P.*-monoˡ-≤-nonNeg b2Upper sixNN))
+    in P.≤-trans r le , P.≤-trans i le
+
+
+  tail6Linear : Box (scaleC (S.sixthR h) (Row.P6 X))
+    (((R.1ℝ + ((+ 30 / 1) ⋆) * B) + ((+ 120 / 1) ⋆) * square B) * b)
+  tail6Linear =
+    let r , i = tail6
+        le = P.≤-respʳ-≃
+          (let open P.ℝ-Solver in solve 2
+            (λ B b → (b ⊕ Κ (+ 30 / 1) ⊗ (B ⊗ b))
+              ⊕ Κ (+ 120 / 1) ⊗ ((B ⊗ B) ⊗ b)
+              ⊜ ((Κ 1ℚᵘ ⊕ Κ (+ 30 / 1) ⊗ B) ⊕ Κ (+ 120 / 1) ⊗ (B ⊗ B)) ⊗ b)
+            P.≃-refl B b)
+          (P.+-mono-≤ (P.+-mono-≤ P.≤-refl (P.*-monoˡ-≤-nonNeg b2Upper thirtyNN))
+            (P.*-monoˡ-≤-nonNeg b3Upper oneTwentyNN))
+    in P.≤-trans r le , P.≤-trans i le
