@@ -25,7 +25,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -53,6 +53,15 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         if fixed_pairs is None and np.any((H==0)&(dH!=0)&(site[:,None]!=site[None,:])):
             raise ValueError('tangent changes offsite stage support; use separate support chart')
         tangent_mid=np.zeros(d)
+    if jet2 is not None:
+        if jvp is None or fixed_pairs is None or right_limit is None:
+            raise ValueError('second coefficient requires common right-stratum chart')
+        x2,H2,f2=map(lambda a:np.array(a,float,copy=True),jet2)
+        if x2.shape!=x.shape or H2.shape!=H.shape or f2.shape!=force.shape:
+            raise ValueError('second coefficient shape mismatch')
+        if not all(np.isfinite(a).all() for a in (x2,H2,f2)):
+            raise ValueError('nonfinite second coefficient')
+        midpoint2=np.zeros(d)
     forms={} if loss_forms is None else {k:np.asarray(v,float) for k,v in loss_forms.items()}
     for a in forms.values():
         assert a.shape==(d,d) and np.allclose(a,a.T)
@@ -86,12 +95,12 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             if site[i]==site[j]: continue
             active=bool(H[i,j]!=0 or H[j,i]!=0)
             required=active or P[i,j]!=0 or P[j,i]!=0 or (
-                jvp is not None and (dH[i,j]!=0 or dH[j,i]!=0))
+                jvp is not None and (dH[i,j]!=0 or dH[j,i]!=0)) or (jet2 is not None and (H2[i,j]!=0 or H2[j,i]!=0))
             if fixed_pairs is not None:
                 if (i,j) not in fixed_pairs:
                     if required: raise ValueError('offsite support outside common atlas')
                     continue
-                for M in (P,) if jvp is None else (P,dH):
+                for M in ((P,) if jvp is None else (P,dH)) + (() if jet2 is None else (H2,)):
                     if M[i,j]!=-M[j,i]:
                         raise ValueError('nonreciprocal offsite limiting/tangent exchange')
             elif not active: continue
@@ -109,6 +118,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     # Earliest arrival from each initially occupied coordinate and injection.
     reachable=np.flatnonzero(x!=0); arrival=np.full(d,np.inf); arrival[reachable]=0
     tangent_arrival=None if jvp is None else np.where(dx!=0,0.,np.inf)
+    arrival2=None if jet2 is None else np.where(x2!=0,0.,np.inf)
     work=loss=0.; receipts=[]
     for k,(ix,a,b,fid) in enumerate(pieces):
         t0=k*tau; t1=(k+1)*tau
@@ -163,6 +173,20 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                 if ((tangent_reached and (fid is None or np.any(ap)))
                         or (primal_reached and np.any(da))):
                     tangent_arrival[ix]=np.minimum(tangent_arrival[ix],t1)
+            if jet2 is not None:
+                from solar_quadratic_jet import cayley2
+                a2=H2[np.ix_(ix,ix)].copy(); b2=f2[ix].copy()
+                if fid is not None:
+                    np.fill_diagonal(a2,0); b2[:]=0
+                old2=x2[ix].copy()
+                y2=cayley2(ap,da,a2,old2,dy,old_dx,mid,dt,b2)
+                roots2=ix[b2!=0]; arrival2[roots2]=np.minimum(arrival2[roots2],t0)
+                if ((np.any(arrival2[ix]<=t0) and (fid is None or np.any(ap)))
+                        or (tangent_reached and np.any(da))
+                        or (primal_reached and np.any(a2))):
+                    arrival2[ix]=np.minimum(arrival2[ix],t1)
+                if fid is None: midpoint2[ix]=(old2+y2)/2
+                x2[ix]=y2
             if fid is None: tangent_mid[ix]=(old_dx+dy)/2
             dx[ix]=dy
         if retain_stage_residuals and fid is None:
@@ -180,6 +204,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         assert np.all(x[arrival>t1]==0)
         if jvp is not None and fixed_pairs is not None:
             assert np.all(dx[tangent_arrival>t1]==0)
+        if jet2 is not None: assert np.all(x2[arrival2>t1]==0)
         receipts.append(dict(face_id=fid,coordinates=ix.tolist(),start_s=t0,end_s=t1,distance_m=distance,source_roots=roots.tolist(),work_J=w,loss_J=q))
     if forms: assert abs(sum(channel.values())-loss)<1e-9*max(1.,abs(loss))
     if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
@@ -188,6 +213,9 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                   right_limit_used=right_limit is not None,
                   directional_arrival_s=None if jvp is None or fixed_pairs is None else [
                       float(a) if np.isfinite(a) else None for a in tangent_arrival],
+                  state_coefficient2=None if jet2 is None else x2.tolist(),
+                  local_midpoint_coefficient2=None if jet2 is None else midpoint2.tolist(),
+                  coefficient2_arrival_s=None if jet2 is None else [float(a) if np.isfinite(a) else None for a in arrival2],
                   state_jvp=None if jvp is None else dx.tolist(),
                   local_midpoint_jvp=None if jvp is None else tangent_mid.tolist(),
                   exact_binary_stage_error=str(exact_error) if retain_stage_residuals else None,
