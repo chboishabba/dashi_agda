@@ -40,3 +40,31 @@ def jump(v,block,k):
     if any(a+min(0,(k-1)*d)<g for a,d,g in zip(v,D,need)):return None
     if any(hits(v,D,g,k) for g in higher):return None
     return tuple(a+k*d for a,d in zip(v,D))
+
+
+# The preceding generic explicit-guard compiler permits additional guards.
+# For literal reduced Conway fractions, derive denominator requirements
+# from the signed displacement, rather than treating a reducible ratio
+# as an extra precondition.
+def compile_reduced(deltas,chosen):
+    rules=tuple((tuple(max(0,-d) for d in D),tuple(D)) for D in deltas)
+    return compile_block(rules,chosen)
+
+def minimal_guards(guards):
+    """Remove dominated forbidden thresholds; exact union of upper cones."""
+    out=[]
+    for g in sorted(set(guards),key=lambda g:(sum(g),g)):
+        if not any(all(a<=b for a,b in zip(h,g)) for h in out):out.append(g)
+    return tuple(out)
+
+def compose(a,b,guard_cap=4096):
+    """Concatenate already compiled selected blocks, not discovered traces.
+    Guard-size refusal is explicit; summary construction is charged.
+    """
+    G,D,H=a;J,K,L=b
+    if len(D)!=len(K):raise ValueError("dimension")
+    if len(H)+len(L)>guard_cap:return None
+    need=tuple(max(g,j-d) for g,j,d in zip(G,J,D))
+    delta=tuple(d+k for d,k in zip(D,K))
+    higher=minimal_guards(tuple(H)+tuple(tuple(l-d for l,d in zip(h,D)) for h in L))
+    return need,delta,higher
