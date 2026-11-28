@@ -6,18 +6,21 @@ module DASHI.Moonshine.JInvariantBishopCenteredDyadicAddressExact where
 -- Karp #1474 motivates preserving the entire bit payload.  This is the
 -- actual signed-residue chart, not an orientation-only compression.
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _∸_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Vec.Base as V using (Vec; []; _∷_)
 
-open import Data.Fin.Base as F using (Fin; toℕ; inject+; raise)
+open import Data.Fin.Base as F using (Fin; toℕ; inject+; raise; opposite; fromℕ<)
 import Data.Nat.Properties as NP
+import Data.Fin.Properties as FP
+open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
+import DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact as Karp
 open import Data.Nat.Solver using (module +-*-Solver)
 import Data.Integer.Solver as IS
 import Data.Integer.Properties as ZP
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Data.Product.Base using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Data.Product.Base using (_×_; _,_; Σ)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
 open import Data.Integer.Base as Z using (ℤ; +_; -[1+_])
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as B
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Codec
@@ -222,3 +225,86 @@ offsetRead (B.bit1 (B.bit1 w)) =
 
 integerOffsetRead : ∀ {n} (w : B.BinaryWord (suc n)) → integerRead (center w) ≡ offset w
 integerOffsetRead w = trans (signedValueRead (reverseBits (toBits w))) (offsetRead w)
+
+-- The literal integer interval (not only a pair of typed sign sheets).
+-- The upper endpoint is excluded and the lower endpoint included.
+oppositeSum : ∀ {N} (r : Fin N) → toℕ r + suc (toℕ (opposite r)) ≡ N
+oppositeSum {N} r =
+  trans (cong (λ k → toℕ r + suc k) (FP.opposite-prop r))
+    (trans (NP.+-suc (toℕ r) (N ∸ suc (toℕ r)))
+      (trans (NP.+-comm (suc (toℕ r)) (N ∸ suc (toℕ r)))
+        (NP.m∸n+n≡m (FP.toℕ<n r))))
+
+negativeRead : ∀ {n} (r : Fin (Codec.bitCardinality n)) →
+  integerRead (true , r) ≡ -[1+ toℕ (opposite r) ]
+negativeRead {n} r =
+  let a = toℕ r
+      b = suc (toℕ (opposite r))
+      open IS.+-*-Solver
+  in trans (cong (λ k → (+ a) Z.- (+ k)) (sym (oppositeSum r)))
+    (solve 2 (λ a b → a :- (a :+ b) := con (+ 0) :- b) refl (+ a) (+ b))
+
+InRange : Nat → ℤ → Set
+InRange n (+ k) = k < Codec.bitCardinality n
+InRange n (-[1+ k ]) = k < Codec.bitCardinality n
+
+readRange : ∀ {n} (r : SignedIndex n) → InRange n (integerRead r)
+readRange (false , r) = FP.toℕ<n r
+readRange {n} (true , r) =
+  subst (InRange n) (sym (negativeRead r)) (FP.toℕ<n (opposite r))
+
+encodeInteger : ∀ {n} (j : ℤ) → InRange n j → SignedIndex n
+encodeInteger (+ k) b = false , fromℕ< b
+encodeInteger (-[1+ k ]) b = true , opposite (fromℕ< b)
+
+integerRoundtrip : ∀ {n} (j : ℤ) (b : InRange n j) → integerRead (encodeInteger j b) ≡ j
+integerRoundtrip (+ k) b = cong +_ (FP.toℕ-fromℕ< b)
+integerRoundtrip (-[1+ k ]) b = trans (negativeRead (opposite (fromℕ< b)))
+  (cong (λ x → -[1+ x ]) (trans (cong toℕ (FP.opposite-involutive (fromℕ< b))) (FP.toℕ-fromℕ< b)))
+
+positiveInject : ∀ {a b : Nat} → (+ a) ≡ (+ b) → a ≡ b
+positiveInject refl = refl
+
+negativeInject : ∀ {a b : Nat} → -[1+ a ] ≡ -[1+ b ] → a ≡ b
+negativeInject refl = refl
+
+signDisjoint : ∀ {A : Set} {a b : Nat} → (+ a) ≡ -[1+ b ] → A
+signDisjoint ()
+
+integerInjective : ∀ {n} (r s : SignedIndex n) → integerRead r ≡ integerRead s → r ≡ s
+integerInjective (false , r) (false , s) e = cong (false ,_) (FP.toℕ-injective (positiveInject e))
+integerInjective (false , r) (true , s) e = signDisjoint (trans e (negativeRead s))
+integerInjective (true , r) (false , s) e = signDisjoint (sym (trans (sym (negativeRead r)) e))
+integerInjective (true , r) (true , s) e =
+  let same = FP.toℕ-injective (negativeInject
+        (trans (sym (negativeRead r)) (trans e (negativeRead s))))
+  in cong (true ,_) (trans (sym (FP.opposite-involutive r))
+      (trans (cong opposite same) (FP.opposite-involutive s)))
+
+signedRoundtrip : ∀ {n} (r : SignedIndex n) → encodeInteger (integerRead r) (readRange r) ≡ r
+signedRoundtrip r = integerInjective _ r (integerRoundtrip (integerRead r) (readRange r))
+
+-- Karp proof independence for positive integer endpoint reconstruction,
+-- plus the negative chart's involutive opposite. No hidden range proof
+-- identity is required.
+decodeProofIndependent : ∀ {n} (j : ℤ) (a b : InRange n j) →
+  encodeInteger j a ≡ encodeInteger j b
+decodeProofIndependent j a b = integerInjective _ _
+  (trans (integerRoundtrip j a) (sym (integerRoundtrip j b)))
+
+cardPositive : ∀ n → 1 ≤ Codec.bitCardinality n
+cardPositive zero = s≤s z≤n
+cardPositive (suc n) = NP.≤-trans (cardPositive n)
+  (NP.m≤m+n (Codec.bitCardinality n) (Codec.bitCardinality n))
+
+cardDominatesDepth : ∀ n → suc n ≤ Codec.bitCardinality n
+cardDominatesDepth zero = s≤s z≤n
+cardDominatesDepth (suc n) =
+  subst (λ k → k ≤ Codec.bitCardinality (suc n))
+    (trans (NP.+-suc (suc n) zero) (cong suc (NP.+-identityʳ (suc n))))
+    (NP.+-mono-≤ (cardDominatesDepth n) (cardPositive n))
+
+
+cofinal : ∀ (j : ℤ) → Σ Nat (λ k → ∀ n → k ≤ n → InRange n j)
+cofinal (+ k) = k , λ n le → NP.≤-trans (s≤s le) (cardDominatesDepth n)
+cofinal (-[1+ k ]) = k , λ n le → NP.≤-trans (s≤s le) (cardDominatesDepth n)
