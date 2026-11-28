@@ -64,6 +64,11 @@ def original(cells=64,final=1.045):
         normal_rows.append(got[-1][:,2])
     values=[H[-1],*rows]
     Hnn=wall_second(values,dn)
+    # Independent interior integrability: h_n must equal V=(R-L)/2.
+    V1,V2=normal_rows[:2]
+    Hn1=(values[2]-values[0])/(2*dn)
+    Hn2=(values[3]-values[1])/(2*dn)
+    interior_constraint=max(float(np.max(abs(Hn1-V1))),float(np.max(abs(Hn2-V2))))
     hn=-6*ci*bump(final)
     hnn_from_V=(-11*hn+18*normal_rows[0]-9*normal_rows[1]+2*normal_rows[2])/(6*dn)
     h_tt_pde=wave_acceleration(final,k,H[-1],Ht[-1],hn,Hnn)
@@ -75,6 +80,7 @@ def original(cells=64,final=1.045):
     return {'cells':cells,'t':final,'k':k.tolist(),
             'normal2':Hnn.tolist(),'normal2_from_characteristic':hnn_from_V.tolist(),
             'mixed_normal_defect':(Hnn-hnn_from_V).tolist(),
+            'interior_hn_minus_V_max':interior_constraint,
             'pde_time_defect':defect.tolist(),
             'max_defect':float(np.max(abs(defect))),
             'source_wall_hn':hn.tolist()}
