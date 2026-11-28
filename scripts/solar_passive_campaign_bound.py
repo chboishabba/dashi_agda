@@ -150,7 +150,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
                     # E/B exactly untouched. Never prune using pre-control J.
                     count=ne+nf if restoration_mode=='controlled' else ne+nf+9*len(vol)
                     field=np.asarray(out['history'][-1])[:count]
-                    ex=rational_restoration_exclusion(field,out['exact_frozen_population_solve_error'],
+                    ex=rational_restoration_exclusion(field,out['exact_binary_field_solve_error'],
                         rational['parameter_error_exact'],cfg.get('return_atol',[1e-10]*4)[0])
                     if ex['excluded']:
                         restoration_exclusions.append(dict(lo=lo.tolist(),hi=hi.tolist(),mode=restoration_mode,**ex))
@@ -190,6 +190,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
                 scope='conditional source-funded upper bound for matched terminal policy; no physical or outward-rounded certification',
                 restoration_exclusions=restoration_exclusions,
                 no_restored_passive_on_binary_chart=no_restored_chart,
+                fixed_binary_nonfrozen_history=bool(cfg.get('retain_nonfrozen_event_residuals',False)),
+                physical_material_rounding_enclosed=False,
                 outward_rounding_certified=False,physical_admission=False)
 
 def fixtures():
