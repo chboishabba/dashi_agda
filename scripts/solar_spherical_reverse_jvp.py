@@ -147,7 +147,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
             if quadratic_second_order:
                 D2=pop2*CHARGE**2/MASS
                 q2=amplitude2(Dcurrent,dD,D2)
-                ex2=amplitude_exchange_jvp(model,vol,np.sqrt(Dcurrent),q2,coefficient_order=2)['d_exchange']
+                ex2=amplitude_exchange_jvp(model,vol,np.sqrt(Dcurrent),q2)['d_exchange']
                 H2=ex2.copy(); offset=len(x)-9*n
                 for cell in range(n):
                     for species in range(3):
