@@ -481,6 +481,8 @@ all-place Selmer/Sha exact sequence already source-written. New
 Synthesis/MillenniumBSDNumberFieldSelmerCosetBidiExact.lean at
 f76b359b553945b5d9ee80d38abbd8514495e0e8, corrected public
 source dependency at de4be8e3363afc60830da1ba535f4f7feda4ec70,
+then replaced a noncanonical range-membership lemma with the original definitional
+membership BIDI at 08e02a08869c3adeca2f86b72817c9617bf85baa,
 identifies equal actual number-field Selmer rational Kummer values iff
 P-R=2S with S in E(K), and identifies the actual Selmer-to-point-Sha
 kernel with the global rational Kummer image. The original
