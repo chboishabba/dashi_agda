@@ -72,6 +72,23 @@ def dispatch(F,n,A,t,O,cap):
     return result(dict(status='UNKNOWN',source=(F,n,A,t,O),selected_chart=chart_score,reason='bounded_portfolio_inconclusive'))
 
 
+def guarded_clipped(F,n,cap):
+    from check_pnp_guarded_resolution_boundary import guarded,restrict_clause
+    if n<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
+    B=Reservation(cap)
+    try:B.pay(1+3*n+sum(2+len(c) for c in F))
+    except Refused:return dict(status='UNKNOWN')
+    H,G=guarded(F,n);anchor=(0,)*(n+1);assert accepts(H,anchor)
+    R=tuple(r for c in G if (r:=restrict_clause(c,{n:1})) is not None)
+    assert R==tuple(map(norm,F));q=dispatch(R,n,(),(),(),B.left)
+    used=cap-B.left+q['reserved']
+    if q['status']=='EMPTY':return dict(status='COMPLETE',count=1,witness=anchor,reserved=used,receipt=q)
+    if q['status']=='WITNESS':
+        other=q['witness']+(1,);assert accepts(G,other)
+        return dict(status='COMPLETE',count=2,witness=anchor,other=other,reserved=used,receipt=q)
+    return dict(status='UNKNOWN',witness=anchor,lower=1,upper=2,reserved=used,receipt=q)
+
+
 def tseitin(k,odd):
     E=tuple((i,(i+1)%k) for i in range(k))+tuple((i,i+k//2) for i in range(k//2));n=len(E)
     rows=tuple(tuple(j for j,e in enumerate(E) if i in e) for i in range(k));F=tuple(c for i,ids in enumerate(rows) for c in xor_clauses(ids,int(odd and i==0)))
@@ -85,6 +102,7 @@ def main():
     for k in (8,16,32,64):
         for odd in (False,True):
             F,n=tseitin(k,odd);q=dispatch(F,n,(),(),(),10**7);assert q['status']==('EMPTY' if odd else 'WITNESS');assert q['route'] in ('xor','xor_original_audit');C['tseitin',q['status']]+=1
+            g=guarded_clipped(F,n,10**7);assert g['count']==(1 if odd else 2);C['guarded_tseitin']+=1
     for n in (12,20,32,48):
         for planted in (False,True):
             for _ in range(8):
@@ -108,5 +126,9 @@ def main():
             W=any(valid(F,n,A,t,O,x) for x in product((0,1),repeat=n));q=dispatch(F,n,A,t,O,1000000)
             assert q['status']==('WITNESS' if W else 'EMPTY');C['mixed']+=1
     assert dispatch(((1,),),1,(),(),(),0)['status']=='UNKNOWN'
+    assert guarded_clipped(((1,),),1,0)['status']=='UNKNOWN'
+    from check_pnp_prime_power_incidence import latin
+    T,O=latin(4);F=tuple(tuple(i+1 for i in c) for c in O)+tuple((-a-1,-b-1) for c in O for a,b in combinations(c,2))
+    g=guarded_clipped(F,len(T),10**6);assert g['count']==1 and g['receipt']['route']=='modular';C['guarded_modular']+=1
     print(dict(C));print('prior versus diagnostic',dict(compare))
 if __name__=='__main__':main()
