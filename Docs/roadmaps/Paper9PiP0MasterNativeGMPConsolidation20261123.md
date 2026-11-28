@@ -2913,3 +2913,43 @@ Status: SOURCE-WRITTEN / KERNEL PENDING. Local SymPy 1.14.0 exact algebra regres
 3. **Acceptance:** first compile new modules individually in dependency order: ReciprocalRayCoordinateExact, ActualReciprocalRayTransportExact, ReciprocalPhaseJetExact, ReciprocalRayDomainsExact, OriginalRayClosureExact. Check all imported names, dependent type reductions, finite fold, termination and exact equalities. Then attach 1 and 2 and execute the original combined terminal and native GMP benchmark. No Agda/Lean kernel available in this session; no kernel verdict, CI, native gate success, or terminal promotion. Keep repairs and verification receipts committed.
 
 The remaining local mathematical work is now one original two-moment readback, rather than separate ray, chart geometry, inside-domain, chart continuity, eventual apartness, or terminal-existence assumptions. Those latter constructions are written, not accepted. Global analytic producers and certification are still real obligations.
+
+
+## 29 November 2026 — selected original Euler readback and global analytic acceptance reconciliation
+
+**Status: source-written, kernel pending.** Local independent SymPy 1.14.0 regression: 327/327 finite exact checks PASS. No Agda or Lean executable present in this session. The following supersedes the previous two-Euler-readback open seam. No claim of checked proof or original period completion.
+
+### Local proof-producing cut
+
+The efficient forward/backward route is through J=q*j on the original normalized discriminant unit, rather than repeating the original guarded quotient derivation. Write X=E4, Y=E6, D=q d/dq and J=X^3*unit^{-1}. Existing RamanujanDeltaUnitExact.xFlow, inverseFlow and the original formal series ring imply
+
+    D J = J - X^2 Y unit^{-1}
+    L1 = (D-1)J
+    L2 = (D-1)^2 J
+    X L1 + Y J = 0
+    X L2 + (D X+Y)L1 + (D Y)J = 0.
+
+The second equation is derived by applying D-1 to the first; not an independently imposed relation. These identities have the same signs as QuotientJetExact.firstZ and secondZ.
+
+- d8359622: CM163BishopHecke41NormalizedEulerFlowExact — formal all-index first/second cleared normalized equations from original xFlow/inverseFlow, not a new analytic source.
+- ffd8d4ca: CM163BishopHecke41DiagonalEulerMomentsExact — recursive identities for the original first and second divided-difference wings Q_n,T_n at coincident u: u Q_n=n u^n, u Q_n+2u^2 T_n=n^2 u^n, with exact complex coefficient term transport to D and D². This avoids dividing by u and avoids a new infinite derivative assumption.
+- 33c2d3a2: CM163BishopHecke41EulerMomentEvaluationExact — absolute convergence and actual signed limits are preserved by scaling and addition, then normalization is undone by twist composition/dTwist on the existing actual reference disk. Constructs original Euler evaluations of the same Junit from the already-owned two-wing convergence.
+- 110031b1: CM163BishopHecke41SelectedEulerReadbackExact — transports original literal selected real X,Y,DX,DY readouts using Fixed.At.qRead; evaluates both formal normalized Euler equations; cancels the actual nonzero q and positive X with the existing quotient and positivity witnesses. Derives Base.euler1≈C realC QJ.a and Base.eulerTaylor2≈C realC(QJ.b/2), without assuming the CM root or independently supplied derivative equalities.
+- 92545156: CM163BishopHecke41OriginalRayClosureExact.At.Original consumes both newly constructed readbacks directly. Its remaining inputs are the actual global diagonal residual, slice residual, and two-point symmetry. The old Direct module remains a useful diagnostic seam, not a prerequisite assertion of coefficients.
+- c5b1c99a: scripts/check_paper9_selected_euler_readback.py — independently executed local exact regression, 65+65 diagonal-wing polynomial identities, 65 each normalized/first/second formal coefficients (0 through 64), and 2 scalar quotient chain-rule identities. 327/327 PASS, finite diagnostic only; not a kernel or infinite-convergence receipt. Four new source files passed delimiter-balance scan, which is not an Agda parser/typecheck.
+
+### Global owner audit and correction
+
+PR #1546 was read at 92545156. Comparison base 5331203e to master returned 75 commits and 180 paths, no matching CM163/Paper9/Chudnovsky/Hecke41/Bishop Jet/Taylor paths. This is a targeted filename audit, not exhaustive history/semantic inspection.
+
+Reopened the actual Lean companion source on research/paper9-original-eisenstein-derivative-20261125. The integer array cast is **already source-written** on the Lean carrier: Paper9FiniteResidualCheck.unitSound/sectorSound/diagonalChecked/sliceChecked; Paper9ConcreteSectorConsumer.prefixCast/sectorFromResiduals/diagonalFromInteger/sliceFromInteger; Paper9EisensteinIntegerBinding; Paper9IntegerSectorWeld; Paper9CM163LiteralPacket.actualDiagonal/actualSlice. The analytic end of this chain uses ActualTaylorUnit.actualJTruncation, HeckeProductAssembly.diagonalFromCoefficients/sliceFromCoefficients, CyclotomicPacketReflection.diagonalSectorConsumer/sliceSectorConsumer, HeckePoleRemoval.invariantZero. UniversalMonicSlice and SeparatedCusp.actualSymmetry already write the actual two-point symmetry independently. No new array reflection theorem needed on Lean merely because the whole cone is uncompiled.
+
+Lean companion commit 134e47e9: Integration/Paper9GlobalOriginalHeckeAcceptance.lean exposes originalDiagonal, originalSlice, originalSymmetry with no external coefficient/cusp premises, using the existing by-decide admissions and actual analytic consumers. The by-decide reductions are unrun, potentially resource-heavy, and may fail. This is a single source entrypoint for execution, NOT a proof receipt and not a bridge to Agda's real carrier.
+
+### Exact remaining campaign obligations
+
+1. **Native Bishop global geometry:** actual diagonal/slice residual cusp vanishing from the native finite gates (unit, both signed packets) and already-written normalized remainder, then original holomorphic modular rigidity (not a bare cusp limit); actual two-point symmetry either by the native analogue of the monic-slice/separated cusp construction or the stronger full-matrix route after original NodeZero and its unisolvence. Lean has these global source proofs written on its own carrier; cannot use their theorem objects as Agda evidence without an actual same-definition proof in the target system. Do not mark the native global proof closed.
+2. **Kernel validation of complete local cone:** typecheck NormalizedEulerFlowExact, DiagonalEulerMomentsExact, EulerMomentEvaluationExact, SelectedEulerReadbackExact and OriginalRayClosureExact, in dependency order after the previous ray modules. Exact qualified API names, real setoid solver elaboration, definitional equality of selected q/wing streams, proof-relevant witnesses, termination and earlier pending imports require checking. Repair exact failed declarations. No CI. On Lean, compile the global acceptance cone and original finite admissions separately, preserving checkpoint receipts and checking axioms.
+3. **End-to-end terminal:** once native global inputs and local kernel proof are inhabited, Original.originalRay/allRaw/period lead to the existing original same-real Machin/Chudnovsky/GMP output theorem and actual performance/scale-budget acceptance; do not introduce another estimator. Independent full-matrix G1–G3 remains stronger optional certification, not a direct endpoint prerequisite.
+
+Local coefficient seam source-written; global native proof and all kernel acceptance remain substantive, not merely administrative.
