@@ -38,10 +38,14 @@ adapter now lives in `YMClayRouteSSelectedLimitClosureExact`, and the direct
 source frontier carries the existing zero-fresh-B status coordinate directly.
 The former Walsh blocker is now paid constructively: `walshSpectralIdentityRaw`
 is a finite 16-variable rational-ring certificate, and
-`BalabanBoolean4BlockPoincareExact` is marked safe. The downstream R330 cone
-now reaches a separate pre-existing unsafe import at
-`BalabanClayP2LargeFieldStepVExact`; the R330 deletion gate therefore remains
-closed pending that boundary repair and a fresh affected-cone check.
+`BalabanBoolean4BlockPoincareExact` is marked safe. The postulate-free trace
+and finite P2 surfaces are also marked safe, and the downstream R330 cone
+now reaches the intentional authority boundary
+`DASHI.Foundations.RealAnalysisAxioms`. That module explicitly owns the
+real-analysis postulates, so it must remain visible rather than being hidden
+behind a false `--safe` annotation. The R330 deletion gate therefore remains
+closed pending a separately reviewed replacement or adjudication of that
+authority boundary and a fresh affected-cone check.
 
 The constructive Walsh receipt is deliberately local: it establishes the
 finite Boolean-block identity and does not promote any continuum or physical

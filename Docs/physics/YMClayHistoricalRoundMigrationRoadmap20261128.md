@@ -25,12 +25,13 @@ The historical-file count is a filesystem/reachability count, not a count of mis
 | Item | Status | Result |
 |---|---|---|
 | `r275-ursell-compiler-extraction` | **rewired-verification-blocked** | sanctioned Agda check reached the dependency cone but was blocked by an existing unsafe import in the shared introspection/Ursell chain |
-| `r330-route-s-and-direct-source-rewire` | **rewired-verification-blocked** | walshSpectralIdentityRaw is now a constructive finite rational-ring certificate and the Boolean block module checks; the downstream cone reaches a separate pre-existing unsafe import at BalabanClayP2LargeFieldStepVExact |
+| `r330-route-s-and-direct-source-rewire` | **rewired-verification-blocked** | walshSpectralIdentityRaw is constructive, the Boolean/trace/P2 safe boundary checks, and the Route-S target now reaches the intentional DASHI.Foundations.RealAnalysisAxioms postulate boundary |
 | `walsh-spectral-identity` | **constructively-verified** | sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import |
+| `trace-p2-safe-boundary` | **constructively-verified** | sanctioned Colab Agda check passed through BalabanClayT2TraversalRootedShellExact |
 
 | `extract-four-live-bundles` | **ready-for-repair** | inline or reproduce each bundle in its existing semantic Clay recipient |
 | `rewire-live-consumers` | **blocked-on-bundle-repair** | replace historical references and imports while preserving local type/import closure |
-| `verify-affected-cones` | **blocked-on-existing-unsafe-p2** | run the sanctioned Agda entrypoint and retain receipts |
+| `verify-affected-cones` | **blocked-on-explicit-real-analysis-authority** | run the sanctioned Agda entrypoint and retain receipts |
 | `reclassify-context-cases` | **automatable-after-rewiring** | rescan implicit, instance, module, and operator dependencies; remove only verified unused imports |
 | `open-deletion-gates` | **automatable-after-rewiring** | confirm zero importers, zero reverse consumers, and verified replacement before deletion |
 
