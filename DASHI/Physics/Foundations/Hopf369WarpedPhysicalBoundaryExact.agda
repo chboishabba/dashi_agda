@@ -3619,3 +3619,42 @@ module At {r : Level} (F : C.RealField r)
   -- These are reference/coordinate row constructors and exact
   -- count proofs only. BR98 requires the actual geometric F wall
   -- conditions and same reduced solution, not an inhabited count.
+
+
+  -- BR100: explicit nonlinear F fixed-material normal-jet decoders.
+  -- Inputs are actual h inverse, L_beta h and tangential geometric jets.
+  originalFNormalH : S → (Wall → Wall → S) →
+    (Wall → Wall → S) → Wall → Wall → S
+  originalFNormalH l k lieH a b = two * l * k a b + lieH a b
+
+  originalFNormalBeta : S → (Wall → Wall → S) →
+    Vec → Vec → Vec → Vec → Vec → Vec
+  originalFNormalBeta l hi adv c src gamma dlog a =
+    adv a + (l * l) *
+      sum4 (λ b → hi a b * (c b + src b - gamma b + dlog b))
+
+  originalFNormalLambda : S → S → S → S → S → S
+  originalFNormalLambda l adv c src tau =
+    adv + (l * l) * (c + src + tau)
+
+  originalFMeanShape : S → (Wall → Wall → S) →
+    (Wall → Wall → S) → Wall → Wall → S
+  originalFMeanShape f h m a b = m a b + (half * quarter * f) * h a b
+
+  originalFPlusShape : S → S → (Wall → Wall → S) →
+    (Wall → Wall → S) → (Wall → Wall → S) → Wall → Wall → S
+  originalFPlusShape j f h m r a b =
+    originalFMeanShape f h m a b + half * (j * h a b + r a b)
+
+  originalFMinusShape : S → S → (Wall → Wall → S) →
+    (Wall → Wall → S) → (Wall → Wall → S) → Wall → Wall → S
+  originalFMinusShape j f h m r a b =
+    originalFMeanShape f h m a b - half * (j * h a b + r a b)
+
+  originalFPlusGauge : Cov → Cov → Cov
+  originalFPlusGauge mean jump a = mean a + half * jump a
+
+  originalFMinusGauge : Cov → Cov → Cov
+  originalFMinusGauge mean jump a = mean a - half * jump a
+
+  -- Decoders, not an assumed analytic F metric existence theorem.

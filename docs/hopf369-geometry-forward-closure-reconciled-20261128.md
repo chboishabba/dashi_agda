@@ -727,3 +727,103 @@ Fréchet boundary/corner attachment; source-specific rest warped
 DtN bound and actual variable reduced metric estimate; instantiate
 BR98 on that same solution, then W4b–W6. Do not spend more
 work trying to force original BN into a reflection-symmetric subclass.
+
+
+## 10. BR100–103 — nonlinear F normal inverse, corner ownership, scalar wall wave and explicit warped bound
+
+Reconciled BR26 material chart, BR70 physical frame, BR71/72 source
+corrections, BR85 graph variation, BR96–99 F, BR4/20/24/25 and
+BR79/84 initial data, BR35/37 warped Green/covariance donor.
+Classical ADM/Christoffel, trace and wave transmission prior math;
+DASHI-specific attachment to original signed allocation.
+
+**BR100 (W1):** For g=h_ab(dx^a+beta^a dy)(dx^b+beta^b dy)+lambda²dy²,
+lambda>0, common h,beta, independent lambda±, D_y=partial_y-beta.d,
+the exact BR26 readback with source H is
+ K=(h_y-L_beta h)/(2lambda),
+ C_a=Gamma_a(h)-d_a log lambda+lambda^-2 h_ab D_y beta^b-H_a,
+ C_perp=-tr_h K+lambda^-2 D_y lambda-H_perp.
+Invert:
+ h_y=2lambda K+L_beta h,
+ beta_y=beta.d beta+lambda² h^-1(C_tan+H_tan-Gamma(h)+d log lambda),
+ lambda_y=beta.d lambda+lambda²(C_perp+H_perp+tr_h K).
+For arbitrary F residual R=[K]-jh, f=tau+ + tau-, c=[C_tan],
+n=[C_perp], choose h-tracefree M0 and common gauge mean C0:
+ M=M0+(f/8)h; K±=M±(jh+R)/2; C±=C0±(c,n)/2.
+These give exactly the prescribed residuals and reconstruct all
+30 normal derivatives; inverse takes mean TF shape and mean gauge.
+Thus derivative map rank16 and kernel14=9+5 for all admissible
+fixed matched h,beta,lambda and prescribed point-source; add 14
+value rows. Local exact rational test with non-diagonal Lorentz
+h, nonzero shift, lambda 2/3 and 5/4, independent tangent/source
+jets checks full 5x5 Christoffel and K on both faces and ranks.
+No claim that arbitrary off-matching value extension, moving chart
+regularity, or full boundary symbol is already solved. BR70/85
+supply frame and directional graph variation; actual material
+straightening must transport source by inhomogeneous Christoffel law,
+not assume solution-dependent gauge source remains algebraic.
+
+**BR101 (W0):** BR84 full spacetime Israel follows from existing
+time-symmetric spatial jump and log-lapse derivative jump.
+BR4's mean d_n log N=-tr spatial mean enforces tr_h M=0;
+initial vacuum constraints and prescribed gauge source give C=C_t=0.
+These imply F order-zero corner under same-chart hypotheses.
+Higher-order F difference vanishes whenever BOTH one-sided gauge
+jets have been proved zero; cannot infer this just from D/E.
+Reopen BR20/24/25 finite source and mean-acceleration repairs in
+same chart at selected Sobolev order. BR100 highest normal-jet
+decoder supplies algebraic lift, not time-evolution compatibility
+or high-order bounds. No universal corner closure claimed.
+
+**BR102 (W2/W3):** Homogeneous normalized flat principal F gives
+ [H]=[b]=0, [H_n]=0, [b_n]=d_wall p, [l_n]=0, p=[l], l=p_nn/2,
+ tr(H_n^++H_n^-)/2=div_wall(b^++b^-).
+Set U=div_wall b-tr(H_n)/2 on each face. Then [U]=0 and sum U=0,
+so U± vanish separately at wall. In common constant-coefficient
+flat bulk U solves homogeneous wave by commutation. With zero
+initial derivative data and compatible exterior Dirichlet-wave
+energy gives U=0. Differentiate and use [H_nn]=-Box_wall[H]=0:
+ [U_n]=Box_wall p.
+For [b_n]=d_wall p+R and wave(H)=F_H with [H]=0,
+ Box_wall p=[U_n]-div_wall R+tr[F_H]/2.
+Thus flat homogeneous zero-data wall wave gives p=0; all 15
+metric values and principal derivative jumps now match and bulk
+energy gives uniqueness. This is conditional flat-model proof,
+not variable existence; forced trace and commutator estimates
+are separate. In particular U includes a normal derivative.
+
+Exact restricted flux obstruction: with plus p_nn time velocity
+only, compensate [b_n] by its gauge row and vary common p_nn
+normal derivative d, independently of wall values. The power
+coefficient of d is +/-G_nn,nn for any positive plus-face Gram.
+No value-only wall potential cancels this. F gauge BR98 energy
+cannot be repurposed directly as metric energy. The scalar
+wall-wave factor is the genuine q denominator, not a fictitious
+zero-speed residual. Construct curved U/wall source and augmented
+energy/regularity, preserve variable principal commutators.
+
+**BR103 (W3):** Reuse BR35 Green bound e=18a/(1-6a),
+a=2c1/gamma+c0/gamma², metric (1536,30832/25), gauge
+(8,1239/100). Reference optical interval length
+2 atan(3/4)/(4/5)>1 by atan x>=x/(1+x²).
+For Re ell>=gamma, finite flat DtN deviation relative to decaying
+diagonal <=coth(alpha length)-1+csch(alpha length)
+=2/(exp(alpha length)-1)<=2/gamma.
+BR34 optical conversion costs <=13|j|/(4gamma) metric (R norm13),
+3|j|/(4gamma) gauge. Thus delta_m=e_m+2/gamma+13|j|/(4gamma),
+delta_g=e_g+2/gamma+3|j|/(4gamma). Use BR97/99 constants:
+ rho_m=8(5 delta_m+3|j|/gamma),
+ rho_g=(3/2)(2 delta_g+4|j|/gamma).
+At gamma=10^7 both <1/4; rest inverse bounds <11 and <2.
+Conditional on BR35 reference Green and BR97/99 constants,
+BR37 Lorentz covariance transports all F rows, yielding frozen
+Q^4/Q² physical inverse bounds with no E temporal pole.
+BR95 variable geometry obstruction remains.
+
+**Acceptance:** local SymPy 1.14.0 four bounded stages exit 0,
+byte-identical Git blob 515f5ef6e11204956e821e00040c02c758c0463c.
+Receipt committed. Native constructor source-written, kernel
+unrun; no CI requested. Next P0 curved scalar wall-wave source,
+coupled mixed-order estimate, moving chart Fréchet and same-data
+selected-order corner, actual F reduced development then BR98,
+W4b–W6. No W1–W3 full closure claimed.

@@ -1,0 +1,9 @@
+Local execution SymPy 1.14.0, timeout 90 per case; all exit 0.
+Exact executed source Git blob: 515f5ef6e11204956e821e00040c02c758c0463c
+SHA256: 2ee82c94cbe2c6dc886e88c3cbefe1ddfe58292cec80d93ad07e68813669cf43
+Initial local copy differed by one blank line; removed it, matched Git blob, reran all four.
+PASS exact nonlinear unequal-lambda normal jet inverse; independent 2-sided Christoffel oracle
+PASS normal derivative block rank 16, kernel 14, exact 9+5 free-coordinate isomorphism
+PASS free scale derivative flux obstruction; exact principal wall-wave source factor
+PASS BR35-derived sufficient F warped reference damping 10000000 rho 0.22161892809634431 8.799083613869117e-05 inverse 10.277742212352 1.5001319978688108
+Scope: exact source algebra and conditional reference bounds; no Agda, variable PDE or CI acceptance.
