@@ -29,7 +29,7 @@ bishopUnitIntervalPowerSuccessorAntitone :
 bishopUnitIntervalPowerSuccessorAntitone u uNN u≤one n =
   P.≤-respʳ-≃
     (P.*-identityʳ (R.pow u n))
-    (P.*-monoʳ-≤-nonNeg
+    (P.*-monoˡ-≤-nonNeg
       u≤one
       (Seq.nonNegx⇒nonNegxⁿ n uNN))
 
