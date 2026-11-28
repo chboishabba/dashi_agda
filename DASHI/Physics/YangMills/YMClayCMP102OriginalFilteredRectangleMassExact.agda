@@ -18,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.BalabanCMP109BishopRootFreeSeriesExact as CMP
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFactorialRatioBishopExact as Mass
 import Data.Nat.Base as N
+import Data.Nat.Properties as NP
 
 -- The selected original cells, with their external monomial shift.
 -- The triangle-complement identity is a separate algebraic weld.
@@ -91,5 +92,40 @@ originalBMassBelowOne : ∀ count → R._≤_ (Seq.SeriesOf CMP.bCoefficient cou
 originalBMassBelowOne count =
   P.≤-trans (Mass.originalAllBMassBelowTenFiftySevenths count)
     (P.p≤q⇒p⋆≤q⋆ (+ 10 / 57) 1ℚᵘ
-      (Q.*≤* (Z.+≤+ (s≤s (s≤s (s≤s (s≤s (s≤s
-        (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))))))))))
+      (Q.*≤* (Z.+≤+ (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n)))))))))))))
+
+-- Actual A/B shifted filters, including the exceptional B first count.
+originalAFilteredQuarter : ∀ X →
+  R._≤_ (R.∣ X ∣) Half.bishopQuarter → ∀ n →
+  R._≤_
+    (filteredPowerRectangle (λ i j → n N.≤ i + j)
+      (λ i j → n NP.≤? (i + j)) CMP.aCoefficient X (suc zero) (suc n))
+    (R.pow Half.bishopQuarter (suc n))
+originalAFilteredQuarter X inside n =
+  filteredPowerRectangleBelowOneMass _ _ CMP.aCoefficient X
+    (suc zero) (suc n) (suc n) inside CMP.aNN
+    (originalAMassBelowOne (suc n)) (λ i j h → s≤s h)
+
+originalBFilteredQuarter : ∀ X →
+  R._≤_ (R.∣ X ∣) Half.bishopQuarter → ∀ n →
+  R._≤_
+    (filteredPowerRectangle (λ i j → n N.≤ i + j)
+      (λ i j → n NP.≤? (i + j)) CMP.bCoefficient X
+      (suc (suc zero)) (suc (suc n)))
+    (R.pow Half.bishopQuarter (suc (suc n)))
+originalBFilteredQuarter X inside n =
+  filteredPowerRectangleBelowOneMass _ _ CMP.bCoefficient X
+    (suc (suc zero)) (suc (suc n)) (suc (suc n)) inside CMP.bNN
+    (originalBMassBelowOne (suc (suc n))) (λ i j h → s≤s (s≤s h))
+
+originalBFirstFilteredQuarter : ∀ X →
+  R._≤_ (R.∣ X ∣) Half.bishopQuarter →
+  R._≤_
+    (filteredPowerRectangle (λ i j → zero N.≤ i + j)
+      (λ i j → zero NP.≤? (i + j)) CMP.bCoefficient X
+      (suc (suc zero)) (suc zero))
+    (R.pow Half.bishopQuarter (suc zero))
+originalBFirstFilteredQuarter X inside =
+  filteredPowerRectangleBelowOneMass _ _ CMP.bCoefficient X
+    (suc (suc zero)) (suc zero) (suc zero) inside CMP.bNN
+    (originalBMassBelowOne (suc zero)) (λ i j _ → s≤s z≤n)
