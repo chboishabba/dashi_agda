@@ -1,3 +1,95 @@
+## 28 November 2026 — R726 exact physical signed-defect negative control and compensated native endgame
+
+**STATUS CORRECTION / stronger original-source countercontrol:** The previous R726 direct requirement
+`literalR406Integral <= R723.integratedCombinedSelfExternal` is NOT a universal
+physical sign theorem on the true real-Galerkin source. It is a strictly stronger,
+conditional compiler premise, and in the unrestricted original C=1 physical-real
+family there are exact states of both signs.
+
+Reused exact original owners (no reimplementation): R225/R388 (same velocity
+double mixed cells and forcing), R541/R567 (rate Cauchy full square),
+R652 (4F = 2R406 + selfGram + selfFluxTangent), R687 (rate lift = 8
+coherent work), R691/R722/R723 (combined nested orbit = 12 global coherent
+commutator), R726 (literal R406 comparator), R727 (critical consumer).
+The new native R726 actualSignedDefectNumeratorIdentity is SAME R408/R405
+trajectory, cutoff, time integral and actual R652/R723 fields:
+
+  2*[R406_integral(C,T) - Combined_integral(C,T)]
+   = 4*F_unlifted(C,T) - G_self(C,T) - H_selfTangent(C,T)
+       - 2*Combined_integral(C,T).
+
+In the classical true physical-real cutoff-1 specialization the self-diagonal
+G+H=4 F_diag. EXACT source is
+`scripts/check_ns_r726_signed_defect_physical_source_exact_20261128.py`.
+It enumerates the complete original **316** ordered nonzero-output incidences
+(52 zero-input zero-amplitude incidences are RETAINED, not omitted from count),
+actual projected -iP_k(u_p dot q)u_q, reality, transversality, helical
+P± with exact Q(i,sqrt2,sqrt3), R225/R388 M/D and all pair-rate weights.
+It independently checks R652 4F = 2R406+4Fdiag, R687 rate-lift = 8 coherent
+commutator, R726 2(R406-Combined)=4F-4Fdiag-24 commutator.
+
+Two fully specified real conjugate Fourier initial states yield at ν=1:
+
+  D_negative = -26048/9 -(578/3)*sqrt(2) +(1288/3)*sqrt(3) < 0,
+  D_positive = -4267/9 +(385/4)*sqrt(6)
+                       +(2113/9)*sqrt(3) +(12401/12)*sqrt(2) > 0.
+
+Strict signs are elementary using 1<sqrt(2),sqrt(3)<2 and positivity
+of sqrt(6), not floating precision: D_negative < -18320/9 and
+D_positive > 20135/36. On the SAME negative initial state, changing only
+viscosity to ν=1/10 gives
+  D_small_nu = 41974/9 -(2054/3)*sqrt(2)
+                         -(2024/3)*sqrt(3) > 17506/9 > 0.
+At a fixed initial state, physical R406 weights scale as ν^-1 and the
+unlifted combined coherent source is ν-independent. Lean #123
+Synthesis/NavierStokesR726SignedDefectViscosityNoGoExact.lean formalizes the
+real threshold equivalence and existential positive/negative viscosities.
+The original full unforced finite-dimensional Galerkin vector field is smooth;
+a positive time-zero defect persists on a short interval, so the
+uncompensated all-trajectories/all-terminals integrated R726 premise fails
+classically in the matching physical-real semantics. This is NOT a finite
+blowup witness, not a negative regularity theorem, and does NOT by itself
+disprove any uniform time-dependent bound WITH nonzero signed compensation.
+The exact rational Agda HelicalModeScalars cannot embed sqrt2/sqrt3 without
+a separately formalized ordered-algebraic/Bishop carrier; mathematical
+source countercontrol != Agda kernel rejection.
+
+**New actually usable native compensation:** R726 now provides
+CompensatedCombinedR406Transport with one time-only, cutoff-uniform
+`signedDefectCeiling` bounding the ACTUAL signed difference, and
+`compensatedCombinedBuildsExistingR410` consuming it together with R723.
+R727 now has `CompensatedC1C2Inputs`,
+`compensatedUniformCriticalFamily`,
+`compensatedUniformCriticalBarrier` and
+`compensatedC2RetainedMarginPositive`, retaining the original R645 C2
+positive margin and R414 critical slice. No new physical estimate is assumed
+as constructed: R723 combined global upper, the actual **compensated**
+R726 signed defect ceiling, R645 physical C2 margin, standard input/continuum
+all remain unpaid. The old zero-defect R726 is now an OPTIONAL false-universal
+shortcut, not a serial prerequisite. Do not try to use rate positivity or
+unweighted-to-rate-lifted sign transfer; actual physical states reverse both.
+
+**Parallel direct route:** Lean #123
+Synthesis/NavierStokesFractionalR568EndpointWeldExact.lean source-writes
+R596 original C1 upper/positive-trace BIDI, R653 separate C2 lower
+BIDI, N2e exact energy-square FTC and heat/trace product -> R568 C1
+conditioned exactly on the existing signed integral
+`int E_(1/4) T_(1/4)`. These are new proof-compiler bodies, not the
+unrestricted signed transfer estimate. N2c/N2e/N2f physical derivations
+and R681–R695 identities remain prior repo source.
+
+**Receipt:** Equivalent exact SymPy 1.14 source run PASS, all 316 original
+incidences on three complete runs (two velocities at ν=1, one at ν=1/10),
+full R652/R687/R726 normal-form and both strict signs. Exact checked-in
+script was independently source-read but not executed byte-identically
+after GitHub commit. New Agda/Lean theorem bodies are SOURCE-WRITTEN,
+PENDING_KERNEL; no CI and no Clay A/B endpoint promoted. Original PDE
+mathematics/continuation remains open. Prior R/RNNN owners retain provenance;
+DASHI-specific contributions are the new signed deficit identity,
+compensated native weld and strict finite Galerkin countercontrol.
+
+---
+
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
 ## 25 November — signed transport/lattice/Clifford continuation
