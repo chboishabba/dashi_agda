@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-28",
+  "scope": "Native synthetic 24-cell and nested 576-cell coefficient campaigns, rational affine port target, occupied reference contraction, and direct nonfrozen passive boxes",
+  "source_refs": {
+    "initial": "fa857ddf48082ce4928de5752e6ed292e5073af0",
+    "nested_jet": "f17846070990c7b27f50eebd0fc559c8f54ebf06",
+    "native_jet_shadow": "04f0f3ea26779dfecb9d01bd07836f3cca72f61d",
+    "direct_passive": "ce2d3a29df1acca03971fdab110470ca00eb1184"
+  },
+  "verified_blobs": {
+    "solar_spherical_reverse_jvp.py": "56818b3a670696722180783290b85ae67e630224",
+    "solar_material_generator_jvp.py": "a773f3a9a6a1eb302e6d92b892ccba0fcf7c19dc",
+    "solar_quadratic_jet.py": "70db819585dc17c3f9d4f1677712ae7d69dd0f84",
+    "solar_thermal_population_tangent.py": "496d7c8c5067c0dac4c5c1dc7e08315ec036c440",
+    "solar_tail_observability.py": "804cac884e7727f4c0d4e94c068c8be7ee52ecb0",
+    "solar_changing_tail.py": "adf9e085c92691975e06bd2a9caaab238845d5ac",
+    "solar_physical_cone.py": "35f1824636f60cc5b99b980fae7a6e9639d6c41a",
+    "solar_spherical_cycle.py": "46a28f46030317dbebd57b2994d0c0c191028c19",
+    "solar_passive_campaign_bound.py": "bfb4ad2205e6f7375e9879c1ae7a5145db985f28",
+    "check_solar_native_jet_shadow.py": "120155561f859089c64cf7dc9cada2f127fe66fe",
+    "check_solar_exact_affine_port.py": "a2b71770f25b3797991760c2b195258fc6dc7834",
+    "check_solar_native_tail_observability.py": "47757802c7cdab217e2c135f01782da655394bde",
+    "check_solar_direct_passive_binary.py": "8404566be01371aada37c2da1fe00b28796fbb9f",
+    "solar_nested_campaign.py": "bced4d723481fddc87d748ebb28e23ebefdb5674",
+    "check_solar_nested_campaign.py": "8c880c08765c5d572795e2738e6c0d415bf7fde4",
+    "solar_synthetic_fixture.py": "aa7cdbd48d30f63bb9a54eaa2beb8ce5efc8d247"
+  },
+  "dependency_note": "Git checkout DNS blocked. Pinned repository sources materialized manually into local runtime. Original rates function copied verbatim from solar_earth_collision_tensor.py (full donor blob 010a4185121bb67d999942c0d7558d2f54efd03f; local dependency only rates, blob 1dff38f602716abc6e245303a04f7316f3488851). Complete external-data imports and all repo fixtures not executed.",
+  "native_jet_shadow": {
+    "status": "PASS",
+    "steps": 5,
+    "dense_sparse_exact": true,
+    "positive_population_net2_J": -0.00002499999999889843,
+    "shadow_state_bounds": [
+      0.00001999992000032001,
+      0.000039999840000640003,
+      0.000060003886942878274
+    ],
+    "shadow_work_bounds_J": [
+      9.280438097503936e-15,
+      3.1360786595532676e-14,
+      9.120305238940117e-14
+    ],
+    "zero_support_fd": [
+      [
+        0.01,
+        0.0008337208563417107,
+        1.3552527156363152e-16
+      ],
+      [
+        0.001,
+        0.00008387356235157,
+        0
+      ]
+    ]
+  },
+  "nested_jet": {
+    "status": "PASS",
+    "steps": 1,
+    "coarse_coordinates": 314,
+    "fine_coordinates": 7140,
+    "base_reopen": 1.6940658945086007e-21,
+    "base_field_error": 0.00011600453318728349,
+    "base_field_bound": 0.00011600453318728349,
+    "base_receiver_bound": 1.262177448353619e-29,
+    "note": "fixture asserts jet reopening <1e-12 and original shadow checks execute; logged reconstruction error is BASE; no separate jet value logged. One-step native nested replay, multi-step shadow tested separately at 24 cells. Before later exact port/paid/tail additions."
+  },
+  "exact_port": {
+    "status": "PASS",
+    "rational_scalar_cases": 3,
+    "residuals": [
+      3.394426987304999e-17,
+      1.7725321175760528e-16,
+      1.4035478206021373e-19
+    ]
+  },
+  "nonfrozen": {
+    "status": "PASS",
+    "field_error": 1.7742359879395858e-16,
+    "event_error": 1.5456852142352386e-21
+  },
+  "tail": {
+    "status": "PASS",
+    "prime": 65521,
+    "rank": 98,
+    "field_size": 98,
+    "occupied_size": 314,
+    "block_steps": 98,
+    "undamped_rank": 0,
+    "margin_factor": "113078212145816624482091346402713514426980292013971298634923782438912/7067444798332688438791247700515727072825035955342079764307757456209274281",
+    "norm_margin_power_of_two": 670696510,
+    "conditional_same_exact_reference": true,
+    "actual_physical_admission": false,
+    "zero_initial_activated_tail_receipt": {
+      "conditional_full_return_on_same_reference": true,
+      "asymptotic_full_return_admitted": false,
+      "delta_at_64": 1.389632037896868
+    }
+  },
+  "direct_passive": {
+    "status": "PASS",
+    "scalar_cases": 21,
+    "center_replays": 3,
+    "failed_replays": 0,
+    "remaining_boxes": 2,
+    "upper_J": 6.379560809287558e-14,
+    "best_candidate_J": 4.7796078375482116e-14,
+    "fixture_return_atol": [
+      1,
+      100000000,
+      100000000,
+      1
+    ],
+    "scope": "broad synthetic tolerances exercise upper, not physical restoration or certified lower witness"
+  },
+  "sparse_cone_regression": {
+    "status": "PASS",
+    "steps": 2,
+    "stage_receipts": 10,
+    "negative_controls": 3
+  },
+  "pending": [
+    "native matched controlled/asymptotic passive fixture and full reverse optimizer",
+    "multi-step nested two-jet performance and outward-rounded coefficient residuals",
+    "uniform real-material coefficient rounding and exact source reference identification",
+    "useful tail margin, finite tolerance remainder, controlled actuator duration",
+    "all eligible layouts under matched terminal policy, independent source/receiver calibration and continuum convergence"
+  ],
+  "no_ci": true,
+  "no_kernel": true,
+  "physical_admission": false
+}
