@@ -880,3 +880,773 @@ Preserve COMP6-8 and CM gates: minimal canonical form can be more costly
 than sufficient noncanonical carrier; test this separately for Monster/VOA
 orbit/action and FRACDASH reconstruction, do not infer equivalences.
 No CI initiated or Agda kernel receipt.
+
+
+## 23 November 2026 — COMP3b exact prime-valuation carrier; performance negative control
+
+Continuation of COMP1/COMP2/COMP3a from scripts/check_pi_cross_cancel.py,
+with the same original Chudnovsky P_k=-24(2k-1)(6k-5)(6k-1),
+Q_k=640320^3 k^3 and the *same* rational interval and decimal-floor
+consumer. New scripts/check_pi_prime_valuation.py on this PR,
+commit e45255afd9065ad23b3d4fbef28eca2478a164ce;
+the locally executed script and connector readback have the identical
+Git blob 8ae26be179e4664eb373ec8628136c66b96a250a.
+
+At each leaf build exact prime-exponent Counter maps for |P| and Q.
+Represent 640320^3 through triple the exponents of 640320; multiply
+leaf factors 24,(2k-1),(6k-5),(6k-1) and k^3. At each internal merge
+compute the intersection e_l=min(v_l(P_left),v_l(Q_right)), reconstruct
+g=prod_l l^e_l and divide P_left,Q_right *before* constructing
+P_left*P_right,Q_left*Q_right,T_left*Q_right+P_left*T_right.
+Update the maps by the exact cross cancellation, then sum remaining
+P and Q exponents. This is an exact factorization invariant of the
+cross-only triple, not of T. No factorization of an arbitrary large
+post-merge integer is attempted.
+
+Local CPython execution: 64/64 prefixes (n=1..64) match cross-GCD
+**identical P,Q,T integers** and reconstruct |P|,Q exactly from
+the tracked prime maps. Three-run sequential medians for certified
+decimal floors, with shared integer-isqrt and Fraction output:
+| digits | n | cross-GCD ms | valuation-map ms | final sum of P/Q/T bits |
+|---:|---:|---:|---:|---:|
+| 1000 | 73 | 0.595 | 1.932 | 9030 |
+| 10000 | 716 | 26.930 | 41.999 | 90233 |
+| 50000 | 3573 | 534.913 | 612.077 | 451549 |
+
+Exactly the same certified decimal strings at all three precisions,
+including prior SHA256 for 50000:
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+The SPF sieve construction is outside both timed modes (and adds extra
+overhead to the valuation approach in end-to-end use); separate map
+reconstruction assertions are also outside the timed inner loop.
+Full-map bookkeeping is 14.4% *slower* than cross-GCD at 50000 digits
+and produces NO smaller integer carrier. This is a matched local
+negative result, not a native GMP/FLINT/MPFR or external SOTA benchmark.
+The cross-GCD route remains the fastest of these two modes at 50000.
+
+COMP3b exact predictive factoring PASS finite reference; COMP3b
+*performance improvement FAILED at these scales*. Narrow next cut:
+selective valuations for known small/smooth primes; compute the
+residual cross-GCD or a certified residual-coprimality check to preserve
+exactness, and measure the factor-map setup cost. COMP4 tree-shape and
+COMP5 native/externally certified pi remain OPEN. Preserve CM M15k-p
+wheel/primitive repetition, GMP selective coefficients, contour and
+full 163 Masser, and COMP6 Monster/VOA full-operator versus trace
+non-descent, COMP7 FRACDASH reconstruction, COMP8 consumer quotients.
+No cultural-metaphor-to-mathematical-authority promotion:
+Robin Wall Kimmerer / Braiding Sweetgrass is methodological attribution.
+No Agda/Lean compiler or CI run; classical Chudnovsky identity is
+external and Bishop same-real transport remains OPEN.
+
+
+## 23 November — COMP3b selective valuations with residual GCD (local negative result)
+
+Starting live #1529 head 8c6dd40630689b0b12f08f9a2d21f6333b89b81c.
+Committed scripts/check_pi_selective_valuation.py at
+5c718494b8c1e67d4523b753393607d9e519d58e.
+Candidate carries exact selected-prime exponents of the Chudnovsky
+P,Q leaves for all primes <=B, B in {7,31,127}. At each interior
+merge, remove the intersection of P_left and Q_right selected
+valuations before materializing products, and then apply residual
+gcd(P_left,Q_right) to preserve FULL projective exactness.
+For primes outside B, no support is discarded. Exponents of P,Q
+are updated through multiplication and tracked cancellation.
+This is not a claim that the output triple is more compressed than
+the original cross-GCD-only representation.
+
+Local CPython fixture (from the same algorithm source, not a
+byte-identical replay of GitHub script): 448/448 exact subinterval
+triples and selected-valuation invariants PASS for four prime bounds
+2/7/31/127, 16 starting indices, lengths {0,1,2,3,4,8,16}.
+All 12 certified decimal outputs for modes {cross-GCD, select <=7,
+<=31, <=127} at digits {1000,10000,50000} agree exactly and
+retain prior 50000-digit SHA256:
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Exact triple summed bit lengths remain 9030/90233/451549 at
+1000/10000/50000 digits. Three sequential medians (milliseconds,
+enclosure, floor certificate, string conversion; prime list
+construction excluded but small):
+
+| digits | GCD | selected <=7 | <=31 | <=127 |
+|---:|---:|---:|---:|---:|
+| 1000 | 0.663 | 1.109 | 1.290 | 1.501 |
+| 10000 | 27.055 | 30.984 | 33.650 | 37.833 |
+| 50000 | 554.043 | 574.189 | 607.291 | 620.726 |
+
+Selective <=7 is ~3.6% slower than existing cross-GCD at 50000;
+higher selected-prime bounds become slower. Approximately half the
+selected <=7 merge calls still need a nontrivial residual GCD at
+50000 (5325 of 10716 calls across three runs, 49.69%). 127 reduces
+residual-nontrivial cases to 450/10716, but adds greater overhead.
+No native GMP, memory/RSS, randomized order, external SOTA or Agda
+acceptance in this packet. COMP3b exact constructive route retains
+PASS, matched runtime improvement FAILED at tested scales.
+
+Research next: quantify per-prime cancellation benefit vs bookkeeping
+and fuse leaf/merge valuation operations in native code only if it can
+beat GMP gcd; prioritize COMP4 trees and COMP5 production pi output
+and independent established comparator. Do NOT close the CM wheel
+winding/primitive necklace, projected GMP, contour or level-163 Masser,
+or COMP6 Monster/VOA operator-level, COMP7 FRACDASH reconstruction,
+COMP8 all-future-consumer non-descent. Robin Wall Kimmerer / Braiding
+Sweetgrass is methodological attribution, not a theorem source.
+
+
+## 23 November — COMP4 ordered multiplication-tree geometry
+
+Implemented scripts/check_pi_tree_geometry.py on #1529 commit
+b7f023a8a6e68b996736f123eced00d047660225,
+connector readback blob 22ae2bfdf14df1ce226cca3d8c11ebfefb48a2aa.
+Reuse original Chudnovsky integer P,Q,T split and exact COMP3a
+pre-multiplication cross GCD: (p,q,t)*(P,Q,T) with g=gcd(p,Q)
+computed as (p/g*P,q*(Q/g),t*(Q/g)+(p/g)*T).
+Compare ordered (noncommutative upper triangular transport) contiguous
+interval trees using midpoint, predicted q-bit-weight midpoint,
+quarter and three-quarter split. Preserve ORIGINAL series order;
+never permute leaves by valuation, since arbitrary reordering changes
+the noncommutative split and may change term semantics.
+Weight predictor cumulative sum log2(640320^3)+3log2(max(k,1)).
+This is heuristic, not rigorous bit-cost optimization.
+
+Independent local CPython harness /mnt/data/check_pi_tree_geometry.py
+with same algorithms: 612/612 exact subinterval P/Q and T/Q parity;
+12/12 identical certified decimal-floor strings at 1000,10000,50000
+digits, same 50000 SHA256
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Three-run sequential medians (milliseconds; includes interval,
+scaled exact floor and decimal string; excludes statistics collection):
+| digits | midpoint | weighted | quarter | three-quarter |
+|---:|---:|---:|---:|---:|
+| 1000 | .634 | .647 | .673 | .615 |
+| 10000 | 27.024 | 27.657 | 28.315 | 30.370 |
+| 50000 | 541.004 | 564.890 | 553.486 | 537.535 |
+
+All 50000-digit final sum of P/Q/T bit lengths = 451549 (same exact
+cross-cancel output at full interval), not peak process RSS.
+The initial three-quarter marginal lead is not robust:
+subsequent 7-run pseudorandomized interleaved order control at
+50000 digits (same exact consumer and source algorithm) medians:
+midpoint 544.361 ms, weighted 545.867 ms, quarter 564.761 ms,
+three-quarter 548.431 ms. Order control samples included all
+floor and string work. Baseline midpoint leads by only 1.506 ms
+over weighted and 4.070 ms over three-quarter; no statistically
+established speedup or production promotion.
+Tree max intermediate operand bits at 50000:
+midpoint 112172, weighted 108684, quarter 162012,
+three-quarter 154925; tree max depths 11,13,27,24 respectively.
+Proxy bit-products are only illustrative, not actual GMP mul cost
+or work bounds. Distinct product tree shapes cannot be treated as
+independent Monster/VOA/CM equivalence proofs; same rational
+consumer does not reconstruct original operator histories.
+COMP4 finite arithmetic parity PASS, measured improvement OPEN/negative.
+Keep midpoint COMP3a as baseline. Next test thresholded hybrid trees
+only with repeated order-controlled medians, native GMP memory/RSS,
+and genuine external pi software at matched certified output.
+COMP5 fast pi SOTA, CM winding / necklaces / 163 Masser and COMP6-8
+Monster-VOA / FRACDASH / observer-fibre remain OPEN.
+No Agda or CI. Kimmerer Sweetgrass relation is cultural/methodological
+attribution, not theorem authority.
+
+
+## 23 November — COMP5 native GNU GMP baseline, byte-identical source acceptance
+
+Native source committed as scripts/check_pi_native_gmp.cpp at
+2df45bf7be24dda3e9fdf7ae7f8cdd4028af2d45, Git blob
+b5d1d9b7555f559aa4a99225dc98c9ee96a7a9ff.
+The local compiled C++ source has exactly that git hash-object, and
+GitHub connector readback matches byte for byte. Compile locally:
+g++ -O3 -std=c++17 scripts/check_pi_native_gmp.cpp -lgmpxx -lgmp -o /tmp/check_pi_native_gmp
+Run /tmp/check_pi_native_gmp 50000 plain 5 and
+/tmp/check_pi_native_gmp 50000 cross 5.
+Compiler GNU g++ 14.2.0, GMP C++/libgmp.so.10 on Linux x86-64.
+No GitHub CI used; no Agda proof promoted.
+
+Uses original Chudnovsky P/Q/T midpoint tree with optional pre-product
+gcd(P_left,Q_right) and GMP mpz_class/mpq_class, exact integer sqrt of
+10005*2^(2*bits), alternating-tail rational endpoints and integer
+floor(10^d*L)==floor(10^d*U) before decimal emission. Includes binary
+splitting, interval computation, square root, rational floors and
+decimal string conversion INSIDE each timed run; excludes compilation,
+process startup and hashes. Source retains classical Chudnovsky
+pi identity as EXTERNAL premise and original Bishop same-real
+transport OPEN. Distinguish certified precision conditional on the
+identity from a new standalone analytic derivation.
+
+Exact output parity for d=1000,10000,50000:
+hashes respectively
+8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2,
+ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524,
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Matches prior exact CPython reference and matches native
+plain/cross outputs. Native final P/Q/T summed bit sizes at
+d=50000 plain 784923 versus cross 451549.
+
+Five-run within-process native medians, milliseconds:
+| digits | plain GMP | cross GMP | relative cross improvement |
+|---:|---:|---:|---:|
+| 1000 | .168645 | .179010 | negative |
+| 10000 | 4.869130 | 4.517620 | 7.2% |
+| 50000 | 49.345400 | 44.222700 | 10.4% |
+
+Second independent invocation using identical source/toolchain
+again matches ALL exact hashes; five-run medians at d=50000:
+plain 51.5054 ms, cross 45.8929 ms (10.9% faster).
+Single subprocess /usr/bin/time -v for cross d=50000 reported
+peak RSS 3076 KiB, NOT matched plain-v-cross peak RSS and NOT
+a reliable isolated algorithmic memory comparison.
+Relative timings are confined to this specific environment;
+do not extrapolate to native GPU or world-record scale.
+
+No installed y-cruncher, PARI/GP or FLINT development headers were
+found locally. External SOTA remains OPEN. Public source comparators:
+FLINT documentation on fast constants and binary splitting
+https://flintlib.org/doc/algorithms/integers/binary-splitting.html ;
+FLINT arb_const_pi https://flintlib.org/doc/constants.html ;
+y-cruncher official https://www.numberworld.org/y-cruncher/ .
+Their published results do NOT constitute matched hardware/precision/
+certification benchmarking. Next COMP5: same-environment
+FLINT arb_const_pi with explicit uncached work, MPFR/AGM and y-cruncher
+if available, verify identical decimal floor plus independently
+documented rounding guarantees; compare threads, cold/warm cache,
+peak RSS, and complete end-to-end output costs. Consider GMP low-level
+mpn in-place multiplication, reduced rational construction overhead,
+and streaming output for 100k-1M digits.
+
+COMP3a cross cancellation remains valid and beneficial natively
+at d=10000,50000; COMP3b selected-valuation and COMP4 alternative trees
+stay negative controls. Preserve the unified COMP6 Monster/VOA
+full-action non-descent, COMP7 FRACDASH reconstruction, COMP8
+future-consumer sufficiency, CM winding/primitive necklaces and
+level-163 Masser. Sweetgrass cultural/methodological attribution
+belongs to Robin Wall Kimmerer, not mathematical theorem authority.
+
+
+## 23 November — COMP5b fused native GMP integer-floor certificate
+
+New executable scripts/check_pi_gmp_fused_certificate.cpp committed on
+#1529 at 478cc4a4042910a28296a81e8cfe269adfdf95e8; source
+Git blob e356a56f33126059f2b1fa0db3b6668eeb747e80.
+GitHub readback and byte-identical locally compiled file verified
+with git hash-object. Exact command:
+g++ -O3 -std=c++17 scripts/check_pi_gmp_fused_certificate.cpp -lgmpxx -lgmp -o /tmp/check_pi_gmp_fused_certificate
+/tmp/check_pi_gmp_fused_certificate 100000 5
+
+Core identity: with Chudnovsky split (P,Q,T), next-leaf
+p_n=-24(2n-1)(6n-5)(6n-1), q_n=C*n^3,
+v=T/Q, v_next=(T*q_n+P*p_n*(A+B*n))/(Q*q_n).
+For n>=1 compare the exact positive endpoints v,v_next to choose
+S_low and S_high. With integer z=floor(2^bits sqrt(10005)),
+the certified decimal interval floors are
+floor(426880*z*10^d*den(S_high)/(2^bits*num(S_high)))
+and
+floor(426880*(z+1)*10^d*den(S_low)/(2^bits*num(S_low))).
+Compute entirely with mpz integer products and floor division.
+The equality of these floors is the selected consumer; ordinary
+mpq normalization is unnecessary. The analytic Chudnovsky identity
+and alternating-series bound remain EXTERNAL premises; this is
+arithmetic certification conditional on them, not a new proof of
+Bishop same-real analytic transport.
+
+Four modes use identical midpoint tree and tail/precision:
+plain-mpq, cross-gcd-mpq, plain-fused, cross-gcd-fused.
+Fresh byte-identical compiled-source execution (g++ 14.2.0, GMP),
+5 within-process runs per mode, includes binary split, isqrt,
+enclosure, floor, decimal conversion; compilation/startup excluded.
+Single-run medians in milliseconds (noise; repeat before SOTA claim):
+| places | plain mpq | cross mpq | plain fused | cross fused |
+|---:|---:|---:|---:|---:|
+| 1000 | .179120 | .148534 | .057937 | .066490 |
+| 10000 | 5.469310 | 4.533380 | 1.681440 | 1.821290 |
+| 50000 | 51.446400 | 44.901200 | 17.133100 | 16.449300 |
+| 100000 | 142.032000 | 116.518000 | 42.977700 | 41.341800 |
+
+Additional 5 independent process invocations x 3 samples:
+| places | median plain-mpq | cross-mpq | plain-fused | cross-fused |
+|---:|---:|---:|---:|---:|
+| 10000 | 5.235 | 4.526 | 1.666 | 1.730 |
+| 50000 | 50.282 | 44.141 | 16.621 | 16.200 |
+| 100000 | 134.599 | 116.239 | 43.679 | 42.684 |
+This suggests 63% faster certificate path at 50000, 100000 than
+cross-mpq, with the winning fused variant depending on precision.
+Cross-cancellation still substantially reduces final triple bits:
+50000 plain 784923, cross 451549;
+100000 plain 1633834, cross 903197.
+Do not require fully normalized (P,Q,T) when selected decimal-floor
+consumer accepts a sufficient projective representation.
+
+All four modes yielded exactly equal decimal strings and prefix
+hashes for d=1000,10000,50000,100000:
+1000 8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2
+10000 ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524
+50000 c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+Independent mpmath pi decimal hashes cross-checked for d=1000
+and 10000 (not a directed-rounding certified independent pi source).
+No FLINT/PARI/y-cruncher installed; python-flint package unavailable
+via this environment's offline package index, MPFR runtime is present
+but headers unavailable. No world SOTA or external matched comparison
+claimed. No Agda, Lean or CI executed.
+
+COMP5b native direct-quotient optimization exact PASS; matched internal
+GMP performance promising, not final SOTA. Next COMP5c: isolate
+split versus sqrt versus exact floor/string cost and compare to
+FLINT/MPFR on same machine if installed. Test 100k+ digit streaming,
+RSS, cold start, varied order, GMP version/CPU and robust intervals.
+Preserve COMP6 original Monster/VOA actions beyond scalar graded trace;
+COMP7 FRACDASH original instruction trace; COMP8 all-future-observer
+non-descent; CM winding/primitive necklaces, GMP selected coefficient,
+contour, level-163 Masser. Sweetgrass/Kimmerer attribution remains
+methodological and distinct from formal mathematical ownership.
+
+
+## 23 November — COMP5c: stage-level GMP profiling, 1M digits, delayed cross-GCD
+
+Live original #1529 head c0f1081b6aef87368794d7c0f61290cdf5247b3f.
+New compiled exact benchmark scripts/check_pi_gmp_stage_profile.cpp, commit
+ca0c67c033decbe0c262cba8a4f03e32702f86c9, blob
+6a570bdcbd0c28b05aa6894dbf31e353c1908936.
+Local g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto executable was run on
+the byte-identical Git blob (local git hash-object and connector readback
+both equal). All modes use Chudnovsky midpoint P/Q/T, original n=d//14+2,
+exact alternating next term and integer-isqrt bounds, exact integer
+floor(10^d*L)==floor(10^d*U) certificate (conditional on classical identity).
+GMP C++ 14.2.0 Linux; SHA-256 through OpenSSL, no CI, Agda or external SOTA.
+The policy to defer external SOTA is explicit.
+
+The instrumentation splits total work into original binary split; decimal
+power 10^d; square root of 10005*2^(2bits); endpoint product assembly;
+both floor divisions; decimal conversion + SHA256; and residual unaccounted
+timer overhead. All are timed inside each certified invocation; compiler and
+process startup are excluded. Tight bits=ceil(d*log2(10))+64 rather than
+previous wide bits=4d+32. Endpoints are exactly bracketed in BOTH precision
+modes; if decimal floors differ n and bits are expanded, never silently
+rounding. Tight option is an engineering heuristic with 64-bit margin;
+no optimality theorem, and the sqrt rational interval remains outward.
+
+Single-process rotated-order three-run medians for wide and tight at d=100000:
+| method | wide ms | tight ms | final triple summed bits |
+|---|---:|---:|---:|
+| plain midpoint | 42.823 | 40.410 | 1633834 |
+| full cross-GCD | 41.981 | 40.234 | 903197 |
+
+At d=500000 (three-run medians):
+| method | wide ms | tight ms | final triple bits |
+|---|---:|---:|---:|
+| plain | 315.402 | 302.051 | 8915236 |
+| full cross | 341.328 | 335.009 | 4517094 |
+At d=1000000 (three-run medians):
+| method | wide ms | tight ms | final triple bits |
+|---|---:|---:|---:|
+| plain | 701.866 | 688.932 | 18472995 |
+| full cross | 798.615 | 782.499 | 9034322 |
+
+Important change of recommendation: cross-GCD is not a universal default
+with fused certification. Beyond 500k it reduces final triple size
+but raises elapsed time because the GCD merge work exceeds savings in
+later endpoint arithmetic. With tight 1M, plain component medians:
+split 288.738ms, sqrt 39.466ms, power10 4.749ms,
+endpoints 194.998ms, floor divisions 90.796ms,
+serialization+SHA 71.903ms. Cross component medians:
+split 451.491ms, sqrt 40.001ms, power10 4.572ms,
+endpoints 138.429ms, divisions 78.962ms,
+serialization+SHA 68.981ms.
+Component medians should not be summed as they are selected
+independently; these are stage attribution, not machine-independent cost.
+
+Follow-up in the *committed* binary tested thresholded GCD only
+when merge interval length >= L (L=2 full, 8,32,128,512,2048;
+plain no GCD), all using tight bits. At d=1000000, five-run
+rotated-order within-process median total milliseconds:
+| schedule | ms | triple summed bits |
+|---|---:|---:|
+| plain | 692.117 | 18472995 |
+| full cross L=2 | 761.927 | 9034322 |
+| L=8 | 768.782 | 9034478 |
+| L=32 | 739.913 | 9035324 |
+| L=128 | 738.351 | 9039413 |
+| L=512 | 749.063 | 9059579 |
+| L=2048 | 754.617 | 9153108 |
+None beats plain for 1M in this local 7-configuration sweep.
+At d=500000 (3-run): plain 308.603, L=2 324.970, L=8
+312.820, L=32 305.467, L=128 308.143, L=512 315.087,
+L=2048 317.880 ms. Tiny L=32 advantage is not robustly
+established; no production promotion. At d=100000 (3-run),
+plain 42.177, full 43.173, L=8 40.633, L=32 40.304,
+L=128 39.771, L=512 41.099, L=2048 42.061 ms.
+
+All seven schedules give identical certified decimal output and
+only one refinement attempt at 100k, 500k, 1M. Output SHA256s
+(complete integer floor string with initial 3, no decimal point):
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711;
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9;
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+This is exact INTERNAL parity across independent tree representations,
+NOT independently proved equality with the original Bishop pi real.
+No external pi software, native GPU, matched RSS, hardware portability,
+or full kernel proof acceptance.
+
+COMP5c stage profile and 1M exact consumer PASS. 1M cross-GCD
+performance gate NEGATIVE; choose plain fused midpoint as currently
+best tested 1M mode, retaining earlier cross-GCD advantages at smaller
+precision and its usefulness for other selected consumers. Further work:
+tune integer endpoint product schedule/abbreviated quotients,
+benchmark crossover across hardware, profile RSS and allocation,
+precision-adaptive guard bits, and use exact ABI-valid library
+comparisons only later as requested. COMP6 Monster/VOA full operator
+vs character distinctions, COMP7 FRACDASH exact reconstruction,
+COMP8 all-future-observer separation and CM cyclic winding/primitive
+necklaces/Masser remain OPEN, not reduced by decimal hash parity.
+Sweetgrass inspiration attributed to Robin Wall Kimmerer;
+proof authority remains arithmetic and classical Chudnovsky owners.
+
+
+## 23 November — COMP5d RH dyadic geometry transfer: exact atlas, order no-go, native timing
+
+Source-first RH donor (master as of 23 Nov): Docs/proofs/
+RHQuartic163840G2AnalyticDyadicHeisenbergP0MaxCut20261123.md,
+DASHI/Analysis/RHQuartic163840DyadicTailHXIntertwinerExact.agda,
+scripts/check_rh_163840_signed_dyadic_analytic_closure_20261123.py,
+and RH/GRH PR #1533. RH actual signed |q|^-6 reference measure has the
+exact chart u=(8/|q|)^5, signed ray s, 15-bit dyadic k=floor(32768u)
+and continuous theta=32768u-k, with q=+/-8(32768/(k+theta))^(1/5).
+The RH source explicitly proves only a measure-space reindexing;
+XOR on dyadic cells is NOT a smooth-test/source-action symmetry and
+its continuous residual cannot be discarded. This must NOT be
+conflated with the Monster native H6 or actual zeta-zero action.
+
+Concrete *different-source* Pi donor:
+For each ordered Chudnovsky leaf j let positive integer cost weight w_j
+be bitlength(Q_j) or bitlength(P_j)+bitlength(Q_j), with w_0=1.
+Define W=sum_j w_j and cumulative u=(sum_{i<j}w_i+theta*w_j)/W,
+theta in [0,1). Dyadic chart K=floor(32768u), residual rho=32768u-K.
+Retaining (K,rho) and the original weighted-prefix dictionary recovers
+u, original leaf j and theta EXACTLY by rational inversion. This is a
+genuine reversible weighted-coordinate geometry, but is NOT the RH
+q^-6 measure or its physical Gamma test, and 15bits alone is not
+sufficient to reconstruct an ordered 71k-leaf producer.
+
+Exact local Python fixture scripts/check_pi_rh_geometry_contract.py,
+commit 1037a53292ab451943c50570fb0c17ed6d5da151,
+source blob faab9cbffa40c4e732cce6a15b650b60bf7ae69a,
+byte-identical to executed local file:
+492/492 original-index and continuous-residual reconstructions PASS.
+At 1M decimal places original n=71430 leaves; all 32768 dyadic cell
+addresses occur, leaving 38662 duplicate address observations.
+Removing residual causes a provable information-loss collision.
+Negative control on actual Chudnovsky k=1,2 leaf matrices
+[[P,T],[0,Q]]: forward and backward products have DIFFERENT
+offdiagonal T/Q; swapping terms is not a lawful RH bit-mask
+reindexing. Explicit upper commutator entry
+1465872995519475397815282491520 !=0. The correct transport is
+ordered concatenation and associativity, not commutativity.
+
+Native tested scripts/check_pi_rh_geometric_split.cpp, commit
+0dcc8c24d801a760138d9a8f446a2a0a2f33eb54,
+blob 5b06a5ddaf51a720be240024d02cf6ed29c0feb8,
+byte-identical local g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto.
+Three choices: original index midpoint, weighted midpoint of
+cumulative Q_j bitlength, or cumulative P_j+Q_j bitlength. Every
+split remains contiguous and retains original leaf order, and
+uses plain (non-GCD) GMP fused decimal floor. This is the
+algorithmic analogue of an RH weighted-uniformization followed by
+dyadic subdivision, without assuming physical/source invariance.
+
+Five-run rotating-order within-process medians with integer 10^d,
+split, isqrt, integer endpoint products and floor divisions,
+decimal string+SHA-256; no compiler/startup:
+| decimal digits | index midpoint ms | Q-bit coordinate ms | P+Q-bit coordinate ms |
+|---:|---:|---:|---:|
+| 100000 | 42.597 | 41.586 | 41.697 |
+| 1000000 | 695.815 | 704.073 | 702.267 |
+
+At 1M, index midpoint is 0.9-1.2% faster even though the
+geometric coordinates provide an exact invertible atlas. Shape
+choice changes timing but NOT selected consumer or final size:
+at 1M 18472995 summed final P/Q/T bits for all modes.
+All produced prior exact SHA256:
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+1000000 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+Measurements include coordinate construction for both weighted
+modes but NOT unnecessary weight-array construction for the plain
+midpoint baseline. Earlier unadjusted control that built the
+weight-array even for midpoint is superseded by this fair timing.
+A 1ms difference at 100k is small and not a robust speedup claim;
+no new native breakthrough established.
+
+Conclusion: RH geometry helps define a *source-recoverable*
+coordinate, a correct dyadic partition, a collision/no-descent
+acceptance test and admissible ordered balancing heuristics.
+It does NOT grant a beneficial C2^7 action on Chudnovsky terms,
+a permutation of noncommutative triangular transport matrices,
+or improved end-to-end runtime on tested 1M. Further potential
+is geometric scheduling with actual measured multiplication cost
+and remainder theta, avoiding repeated coordinate setup via a
+streaming weight producer, and optimizing endpoint integer
+products, not reusing RH physical masks. COMP5 external SOTA
+remains deferred by explicit request. Original Bishop same-real,
+RH actual selected W signed inequality, CM winding/necklaces/Masser,
+Monster/VOA literal actions, FRACDASH reconstruction and
+COMP8 all-future-consumer sufficiency remain separate OPEN.
+Source attribution: classical Chudnovsky and ordered product,
+RH original selected quartic/Weil source and DASHI #1533;
+Robin Wall Kimmerer is cultural/methodological, not proof authority.
+No Agda/Lean/CI or RH/GRH theorem claim.
+
+
+## 23 November — COMP5e RH-style sufficient quotient-residual witness; SOTA pi remains P0
+
+Keep **FASTEST INDEPENDENTLY CERTIFIED PI** the explicit P0 performance/research
+objective. Per user direction, postpone FLINT/y-cruncher external comparator
+execution for now, but do NOT demote the objective or infer world SOTA from
+internal matched GMP. Next practical optimization must cut actual end-to-end
+certification cost, retaining source identity, classical Chudnovsky premise,
+ordered product and exact decimal-floor acceptance.
+
+Donor: RH/GRH original selected-W source geometry #1533, true signed
+q^-6 weighted-tail dyadic atlas with a continuous residual and exact
+recovery; no unconditional bit-reindexing action on compact-smooth
+tests. The correct transferable principle is **consumer-sufficient
+quotient plus exact residual/boundary**, not 15-bit data magic or
+leaf rearrangement. COMP5d demonstrated a reversible weighted chart
+but no million-digit runtime win, and ruled out commuting term swaps.
+
+NEW COMP5e exact theorem in ordered rational arithmetic:
+For 0 <= L=N_L/D_L <= U=N_U/D_U with positive integer D_L,D_U,
+let x=floor(N_L/D_L). Then
+    floor(U)=x  iff  N_U < (x+1)*D_U.
+Because U>=L>=x, no second integer floor division is needed.
+The strict inequality preserves the exact integer boundary at U=x+1;
+a weak <= would be UNSOUND. If it fails, restore usual adaptive
+term-count and sqrt-precision refinement, without asserting digits.
+The lower quotient x is the compressed consumer; the upper-endpoint
+comparison is the retained boundary witness. This is elementary
+rational order algebra, not a new RH analytic theorem.
+
+Implemented on #1529 as
+scripts/check_pi_gmp_quotient_residual.cpp at commit
+0fae5e6beadec4aae7115564d90aa8d05e0df4ef,
+Git blob 28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e,
+GitHub source readback exact. It modifies the existing COMP5c
+GMP midpoint fused certificate to four order-rotated modes:
+plain_two_floors, plain_one_floor, cross_two_floors, cross_one_floor;
+all retain same interval endpoints, adaptive refinement, full
+decimal serialization/hash and original Chudnovsky term order.
+The committed source has NOT been independently fetched to the
+local compiler due to connector/runtime transfer limitations.
+A separately constructed, mathematically equivalent local native
+GMP/openssl source /tmp/pi_residual.cpp WAS compiled with
+g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto and executed.
+Do not call the committed binary byte-identically compiled.
+
+Exact independent Python Fraction control: 10000 random ordered
+positive-rational pairs, 6785 floor-crossing negative cases and
+exact equality-boundary controls all PASS.
+Local native mode 0 two floors, mode 1 one floor+comparison,
+mode 2 exploratory explicit remainder plus comparison (slower).
+Full output hashes equal for all modes:
+10000 ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524
+100000 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711
+500000 fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9
+1000000 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+All remain CONDITIONAL on classical Chudnovsky identity and tail, not a new
+Agda/Bishop same-real proof.
+
+Rotating mode order five-run native medians (milliseconds, full
+binary split+sqrt+products+floor(s)+serialization/hash):
+| places | two floors | one floor + bound | saving |
+|---:|---:|---:|---:|
+| 500000 | 297.825 | 283.410 | 4.84% |
+| 1000000 | 722.597 | 702.946 | 2.72% |
+Independent seven-run 1000000: two 716.143 vs one 698.856 ms
+(2.41% improvement). Lower-volume 10000 three-run:
+1.648 vs 1.660 ms, noise/no win; 100000 three-run
+42.643 vs 40.310 ms (5.47%). Tests are same-machine within-process,
+not external SOTA or peak-RSS comparisons. Independent stage-med:
+at 1M five-run floor/comparison stage two=94.827ms vs one=75.682ms;
+serialization approximately unchanged (~71ms), so speedup is
+consistent with saving second large division. A naive extra
+remainder extraction costs more than it saves, negative control.
+
+P0 next maximum-cut: combine this one-quotient certificate with
+(1) original fastest GMP fused plain midpoint at >=500k, (2)
+precision/size crossover selection of cross-GCD only when measured
+net positive, (3) direct factor/scale sharing or smaller endpoint
+integer products, (4) controlled 1M-10M arithmetic scaling and
+RSS/allocations. Preserve complete decimal-floor agreement and
+deliberate integer-boundary adversarial controls; never optimize
+using raw hash agreement alone. COMP6 Monster/VOA actual action
+versus character, COMP7 FRACDASH full source reconstruction and
+COMP8 all-future-consumer/observer distinctions remain research
+donors, not substitutes for verified pi speed. CM winding/primitive
+necklaces/Masser still open. Original RH actual selected W and signed
+zero functional admissibility/open terminal remain separate.
+No CI, Lean, Agda kernel, independent external pi benchmark or
+world-SOTA claim.
+
+
+## 23 Nov — COMP5f codec transfer: actual compute-vs-peak-memory gate
+
+Source-first owners: `Docs/specs/TriadicResidualMaskSignCodec.md` and
+`DASHI/Codec/BalancedTritBitFibre.agda`: exact zero/support plus
+conditional sign fibre; `DASHI/Codec/IndexedCubeMaskSignExact.agda`:
+prefix and residual must be reconstructible; and
+`DASHI/Core/ConsumerDescentMinimalObserverExact.agda`: consumer-specific
+fibre-constancy and factorization. These justify retaining actual
+zero, sign and original-order residual witnesses, not encoding
+signed/zero matrix states as anonymous interchangeable integers.
+
+For Chudnovsky, source semigroup states (P,Q,T) correspond to
+upper-triangular [[P,T],[0,Q]]. Ordered composition has
+T_new=T_left Q_right+P_left T_right; leaves and concatenation order
+are noncommutative. A memory optimization may mutate the left
+state only AFTER preserving its old P for addmul. New implementation
+`scripts/check_pi_gmp_codec_memory.cpp`, commit
+913d03d7cbe9dc7d00ed87ce02676e386893758a, GitHub blob
+82027bc7acee4b4711f0ca1a2ed42dce1d60b8c5:
+baseline returns expression-composed temporary P/Q/T;
+in-place uses alias-safe GMP mpz_mul(T,T,Qr),
+mpz_addmul(T,P,Tr), then mpz_mul(P,P,Pr),mpz_mul(Q,Q,Qr).
+No loss of sign or physical zero support, no leaf permutation,
+no full postmerge GCD. Both routes feed the same one-quotient
+exact decimal floor and strict upper-bound consumer from COMP5e.
+
+Local source `/mnt/data/pi_codec_memory.cpp` independently
+implemented and g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto compiled,
+using the same algorithm (not byte-identical committed source
+replay). Tests 10k, 100k, 500k and 1M decimal places. All
+eight mode-precision combinations match existing exact SHA-256
+certified floor strings:
+10k ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524,
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711,
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9,
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+
+Fresh independent-process alternating 5-pair comparisons
+(1 run per process, CPU/system noise remains, cold RSS;
+time includes exact sqrt bound, split, floor, full decimal
+conversion + SHA256; excludes startup/compilation):
+| places | baseline median ms | in-place median ms | baseline median peak RSS KiB | in-place median peak RSS KiB |
+|---:|---:|---:|---:|---:|
+| 100000 | 47.571 | 45.218 | 6308 | 6356 |
+| 500000 | 306.490 | 295.829 | 15684 | 15912 |
+| 1000000 | 737.815 | 728.451 | 28380 | 28540 |
+
+Positive within-sample time effects ~4.95%,3.48%,1.27%;
+these do not establish a production SOTA optimization.
+**NO RSS IMPROVEMENT**: in-place has respectively +48, +228, and +160 KiB higher
+peak RSS in these samples (about +0.8%,+1.5%,+0.6%).
+The source uses fewer large expression-temporary outputs,
+but GMP allocation reuse, heap high-water mark, recursive
+destruction, runtime allocator and many wider endpoint products
+make peak resident memory a distinct measurement.
+A preliminary three-repetition-per-process scan gave
+100k baseline/in-place 45.054/42.871ms,
+500k 302.905/287.380ms and 1M 724.470/722.563ms,
+also all exact hashes; timing variation reinforces the need
+for interleaving/order controls rather than a fixed speed claim.
+
+P0 SOTA Pi **remains priority** even as external SOTA
+comparator execution is deferred per direction. Next
+cut is true live GMP limb allocation peak (not merely RSS),
+memory arenas/streamed chunked leaves/partial-product lifetimes
+and endpoint product scheduling; require *Pareto* compute +
+memory gate and exact source-to-consumer BIDI. Avoid applying
+the 3-state trit support/sign codec to arbitrary dense GMP
+limbs with an unsupported compression guarantee; instead
+codec gives the proper lossless-condition interface.
+No GPU native, Agda/Lean or CI acceptance here; original
+classical Chudnovsky identity and Bishop same-real open,
+RH actual selected W and Monster action unrelated.
+
+
+## 23 Nov — P0 PQT × ternary-in-binary × SWAR source-owner correction and ablation
+
+The previous generic trit-to-GMP proposal was INCOMPLETE: original
+P/Q/T already has a source-native binary-splitting contract in
+`Docs/roadmaps/ConstructivePiBinarySplitMaxCut20261118.md` and
+`scripts/check_pi_projective.py`; the source-native ternary
+binary layout is `DASHI/Codec/TriadicPAdicCodec.agda`,
+`DASHI/Codec/BalancedTritBitFibre.agda`, and
+`DASHI/ComputerScience/TriadicCodecSWARPortableKernelCrossPollinationExact.agda`.
+Furthermore `TriadicSupportMaskSWARExecutionExact.agda` and
+`TriadicPrefixSWARExecutionExact.agda` already cite original
+COMPILED eight-byte-lane uint64 C11 SWAR active-count and prefix
+execution (8^8 exhaustive), while
+`TriadicSignCompactionSWARExecutionExact.agda` records the
+factorized 27-state dense-code execution. This is NOT equivalent to
+full raw-trit encode/decode, SIMD, ROCm, or GMP limb multiplication.
+The source also has `scripts/check_cm163_residue_swar.py`,
+which is GMP Kronecker modular residue **lanes plus CRT**, explicitly
+not fixed-word SWAR arithmetic. And Paper 9 already implements
+`scripts/check_cm163_window.py` with a historical single-process
+CM degree-41 57.2% RSS reduction, ~6% extra construction time,
+and exact coefficient parity (different workload from pi). These
+M1-M4 and CM SWAR results are REUSED, not rediscovered or promoted
+to fast-pi benchmarks.
+
+NEW specific Chudnovsky bridge:
+`scripts/check_pi_pqt_ternary_swar_block.cpp`, commit
+4d7a5645e450daaf7273ca76279fefbc1b458d31,
+Git blob 5c15064c0cce70a885c196a51776422a93ada9d6
+(GitHub readback matches committed UTF-8 source). Uses eight
+byte lanes in uint64 to encode balanced trits 0/positive/negative
+as 00/01/10, rejects 11; retains k as the original leaf residual.
+For actual Chudnovsky leaves, k=0 has zero support, and k>=1 has
+negative P (there is no positive-P leaf). Decode the signed trit
+before producing exact GMP P,Q,T, then combine contiguous leaf
+blocks B in {1,4,8,16} with the original noncommutative
+T=T_left*Q_right+P_left*T_right. Remainder not forgotten;
+output consumer is exact one-quotient-plus-strict-bound decimal floor
+of the unaltered Chudnovsky rational enclosure.
+
+Source-coded acceptance: exhaustive 3^8=6561 ternary-byte
+roundtrips, explicit invalid digit-3 rejection, 32 prefix P/Q/T
+identity comparisons against B=1, and full native π hashes.
+A separately constructed local C++ equivalent source was
+compiled with g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto.
+Local full-run PASS: for each B=1/4/8/16, d=100k,500k,1M,
+all 12 hashes exactly match existing original GMP certificates:
+100k 79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711,
+500k fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9,
+1M 130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18.
+The committed C++ text has NOT been compiled byte-for-byte
+(only readback); do not claim compiler/kernel proof for it.
+
+5-process rotating-order single-invocation 1M runtime medians
+milliseconds, source-equivalent local program:
+B=1 729.822; B=4 750.199; B=8 718.826; B=16 724.350.
+Run ranges overlap strongly (e.g. B=8 from 691 to 765ms);
+no robust native SOTA speedup. At 100k:
+B=1 44.103; B=4 45.474; B=8 46.223; B=16 48.345.
+Earlier independent shell launches with 3 repetitions/process:
+at 1M B=1 733.002, B=4 687.039, B=8 748.209,
+B=16 730.296 milliseconds; inconsistent apparent winner,
+hence NO promotion. Fresh shell isolated peak RSS at 1M
+B=1 29536 KiB, B=4 30248, B=8 30204, B=16 29740
+(specific run only). A Python-parent subprocess RSS observation
+was contaminated by fork-inherited high water and is NOT admitted
+as a comparative peak memory receipt. Nothing proves less memory.
+
+Crucial limitation: this benchmark uses packed byte lanes for
+ternary sign/support **decoding**, not lane-parallel arithmetic
+on P/Q/T and NOT a measured SWAR multiplication kernel.
+At n=71430, largest leaf Q=C*k^3 is already 107 bits,
+exceeding a 64-bit scalar lane; GMP multi-limb multiplication
+remains essential. The full ternary alphabet includes +1
+for codec regression, but actual Chudnovsky P has only
+0/negative sign states. The codec cannot manufacture useful
+low-entropy structure in dense high-precision limbs.
+
+Prioritize P0 fastest independently certified π:
+(1) actual signed P/Q/T projects and quotient-residual consumer;
+(2) *genuine* SWAR only on independent small metadata or modular
+residue subproblems with exact CRT reconstruction and full
+setup/serialization costs, not magical packed GMP multiplication;
+(3) identify compute/RSS Pareto on real limb allocation,
+endpoint scheduling, and producer-local re-use; (4) independent
+cold/hot 1M+ tests. External SOTA comparison execution remains
+deferred, its P0 end objective intact.
+Do not conflate CM p41 RSS improvement or source SWAR
+8^8 acceptance with a π performance gain. Do not claim
+RH actual selected W, Monster group action, formal Bishop pi
+same-real, Agda/Lean kernel or GPU acceptance in this packet.
