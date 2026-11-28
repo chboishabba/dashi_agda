@@ -66,7 +66,7 @@ def twin_generators(F,n,rows,B,max_swaps=3):
         if moved==C:G.append(tuple(g));used.update((i,j))
     return tuple(G)
 
-def source_solve(F,n,rows,target,cap,max_width=8,pin_width=2):
+def source_solve(F,n,rows,target,cap,max_width=8,pin_width=2,data_clock=None):
     from check_pnp_changing_stabilizer import solve
     if min(max_width,pin_width)<0:raise ValueError('width')
     B=Reservation(cap)
@@ -91,8 +91,12 @@ def source_solve(F,n,rows,target,cap,max_width=8,pin_width=2):
         degree=Counter(abs(l)-1 for c in F for l in set(c))
         pins=tuple(sorted(range(n),key=lambda i:(degree[i],i))[:pin_width])
         bags=(pins,)+bags;force_cut=1
-    q=solve(F,n,bags,rows,target,G,B.left,force_cut=force_cut)
+    q=solve(F,n,bags,rows,target,G,B.left,force_cut=force_cut,data_clock=data_clock)
     B.pay(q["reserved"])
+    if data_clock is not None and q["status"]=="WITNESS":
+        from check_pnp_bit_data_schedule import audit,Refused as DataRefused
+        try:assert audit(F,rows,tuple(t%3 for t in target),q["witness"],data_clock)
+        except DataRefused:q=dict(q,status="WITNESS_DATA_AUDIT_REFUSED")
     return dict(q,reserved=cap-B.left,cover_width=width,generators=len(G),
                 high_fill=force_cut is not None,pins=pins)
 
