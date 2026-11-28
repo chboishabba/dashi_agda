@@ -41,8 +41,11 @@ def christoffel(g, inv, i,j,k):
 
 def direct_K(g,f,point,components=None):
     inv,Fs,norm,T,h,HH=conormal(g,f)
+    if s.simplify(point[coords[4]]-f.subs(point))!=0:
+        raise ValueError("evaluation point must lie on the actual material graph F=0")
     z=s.simplify(norm.subs(point))
-    if z.is_nonpositive:raise ValueError("material wall has no spacelike normal")
+    if z.is_positive is not True:
+        raise ValueError("physical spacelike normal requires a positive certificate")
     N=s.sqrt(z)
     result=s.zeros(4)
     required=components if components is not None else [
