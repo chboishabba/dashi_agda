@@ -13,14 +13,22 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact whe
 -- square plus diagonal terms, but R687 explicitly prevents silently replacing
 -- that forcing-full square by the R691 commutator.
 --
--- Therefore the least-privilege downstream seam is one physical inequality:
+-- The previous least-privilege candidate was a zero-defect inequality:
 --
 --   literalR406Integral_N(T) <= IntegratedCombined_N(T).
 --
--- This owner does NOT assert that inequality.  It names it as a single typed
--- transport theorem and proves that, once supplied together with the already
--- paid R723 combined bound, it constructs the existing R410 cancellation
--- object directly.  No parallel remainder consumer is introduced.
+-- 28 Nov physical-real source countercontrol: the raw signed difference has
+-- BOTH signs on genuine C=1 Galerkin states and changes sign on a fixed
+-- state when viscosity changes.  Therefore the unconditional comparison
+-- is NOT an admissible universal physical estimate.  Its old conditional
+-- compiler remains valid, but is no longer the prescribed endpoint route.
+--
+-- The NEW alternative retains the signed difference as a single SAME-SOURCE
+-- physical time- and cutoff-indexed residual.  A cutoff-uniform terminal
+-- ceiling for it, added to the existing R723 combined bound, builds R410
+-- directly.  R652+R723 supply an exact physical signed-defect NUMERATOR,
+-- so the residual is not an unrelated assumed scalar.  The quantitative
+-- bound on this numerator remains a genuine OPEN physical proof obligation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -260,6 +268,12 @@ round726SingleCombinedToR406TransportSufficesForR410 = true
 -- A stronger original zero-defect receipt is OPTIONAL.  The compensated
 -- compiler is theorem-bearing but its cutoff-uniform real physical signed
 -- defect estimate remains an uninhabited producer.
+round726ExactPhysicalRealSignedCountercontrolScriptInstalled : Bool
+round726ExactPhysicalRealSignedCountercontrolScriptInstalled = true
+
+round726NativeAlgebraicFieldCountercontrolInhabited : Bool
+round726NativeAlgebraicFieldCountercontrolInhabited = false
+
 round726SamePhysicalDefectNumeratorIdentityClosed : Bool
 round726SamePhysicalDefectNumeratorIdentityClosed = true
 
