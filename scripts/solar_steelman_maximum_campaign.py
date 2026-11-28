@@ -35,7 +35,7 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
@@ -67,6 +67,16 @@ def main():
     elif x.stage=='reciprocal':
         from solar_steelman_reciprocal_port_inverse import construct
         construct(a)
+    elif x.stage=='static-leaf':
+        from solar_steelman_history_exact_bounds import static_leaf
+        z=static_leaf(m,a)
+        save(work/'static_leaf.pkl',z,up,src)
+        print(z['status'],z['rank'],z['nullity'],flush=True)
+    elif x.stage=='history-bounds':
+        from solar_steelman_history_exact_bounds import ambient_bounds
+        z=ambient_bounds(m,a)
+        save(work/'history_bounds.pkl',z,up,src)
+        print('conditional ambient coefficient bounds', {k:float(v) for k,v in z.items()},flush=True)
     elif x.stage=='history-leaf':
         from solar_steelman_history_leaf import construct
         construct(m,a,x.delay)
