@@ -57,15 +57,15 @@ def symmetry_and_time_commutator(sector,component):
     # The BR4 energy current must include shift B and the actual C.
     flux=s.Matrix([B[i]*w*w+w*sum(C[i,j]*q[j] for j in range(4))
                    for i in range(4)])
-    # Differential energy identity for L(v)=-f convention:
-    # d_t E - div_i flux_i = -w L(v)
-    # + (A_t/2)w² + (C_t/2)[q,q] + v w
-    # + B_t . q w? Coefficient terms need explicit balance.
-    # Derive the exact residual rather than assuming a sign.
+    # Exact BR4 density identity in the same divergent sign convention:
+    # d_t E-div flux +v_t L(v) =
+    # -A_t v_t²/2 + C_t[grad v,grad v]/2
+    # +v v_t + B_t·grad v v_t.
     left=s.diff(energy,t)-sum(s.diff(flux[i],coords[i+1]) for i in range(4))
-    # Exact algebraically evaluated source; lower-order geometry remains
-    # explicit in the remainder, not promoted into a dissipative term.
-    source=s.expand(left+w*L(v))
+    source=(-s.diff(A,t)*w*w/2
+            +(q.T*C.diff(t)*q)[0]/2
+            +v*w
+            +w*sum(s.diff(B[i],t)*q[i] for i in range(4)))
     assert s.expand(left+w*L(v)-source)==0
     # independent source paid by time-differentiated original equation
     original_source=L(u)
