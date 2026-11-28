@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-28",
+  "scope": "Original Bishop K05-PI half-radius second-quotient to rational recurrence and finite budget",
+  "original_source": "DASHI/Analysis/BishopOriginalMachinSecondRadiusRationalReadbackExact.agda",
+  "rational_owner": "DASHI/Analysis/BishopMachinRationalStageEmbeddingExact.qPowEmbeds",
+  "existing_power_source": "DASHI/Analysis/BishopOriginalFiniteLogQuotientSecondOrderExact.sourcePowerSecondQuotient",
+  "original_source_witnesses": [
+    "qZeroEmbeds",
+    "qSecondEmbeds",
+    "qRadiusTermEmbeds",
+    "qRadiusBudgetEmbeds"
+  ],
+  "lean_companion": "Integration/Paper9MachinSecondDefectMajorant.lean",
+  "lean_commit": "349b0b84900b97d8b60088acc88ef020bf05dd28",
+  "lean_formulas": [
+    "rawPowerZero_succ",
+    "rawPowerSecond_succ_succ",
+    "sourceHalfRadiusTerm_eq_radiusTerm",
+    "sourceHalfRadiusBudget_le"
+  ],
+  "reference": {
+    "script": "scripts/check_paper9_original_half_radius_readback.py",
+    "source_blob": "8cbb6f11d18baba7e85065e33aa7668532a6370d",
+    "local_blob": "8cbb6f11d18baba7e85065e33aa7668532a6370d",
+    "source_parity": true,
+    "finite_stages": 1024,
+    "exact_checks": 5120,
+    "corrupted_controls_rejected": 2,
+    "passed": true
+  },
+  "actual_native_agda_typecheck": false,
+  "actual_native_lean_typecheck": false,
+  "real_analytic_limit_proved": false,
+  "genuine_remaining": "Native Agda proof that qRadiusBudget(N) is ≤ 8/9 in Data.Rational.Unnormalised using its exact recurrence and existing Nat/rational embedding/order constructors; then consume qRadiusBudgetEmbeds and originalSignedFiniteSecondBelowRadius. Original atan derivative-limit and exp/Cayley source evaluation remain separate analytic steps."
+}
