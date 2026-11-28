@@ -37,6 +37,7 @@ CORE=(
     "check_engineered_gravity_hopf_axial_trajectory.py",
     "check_engineered_gravity_hopf_fourth_jet.py",
     "check_engineered_gravity_quartic_receiver.py",
+    "check_engineered_gravity_g3_analytic_radius.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
