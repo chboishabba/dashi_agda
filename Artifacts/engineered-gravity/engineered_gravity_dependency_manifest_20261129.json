@@ -367,6 +367,19 @@
       "source_git_blob_sha1": "a9c921903fa207addc13458188dd299e4bdfcf39",
       "checker_git_blob_sha1": "6bf3f5e0be64db624ccf7c6e2b8c8c7c731ae142",
       "external_checker_head": "888859ed04881def4d23adf65865ab5316878a31"
+    },
+    "reciprocal_interface_traction": {
+      "lanes": [
+        "A_shielding",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+      "checker": "scripts/check_engineered_gravity_reciprocal_interface_traction.py",
+      "scope": "original static radial reciprocal two-face traction and sourced support; physical wall/controller absent",
+      "source_equation": "[Trr]=q1(Xplus-Xminus)(2q2+q1(Xplus+Xminus))/(2r^4); sheet=-[Trr]",
+      "physical_paid": false,
+      "source_git_blob_sha1": "e0faa5cf1cd543c5c49a9845a0a8bee09c7ba67d",
+      "checker_git_blob_sha1": "f1d2a1f19972366e38561b6c6c83874f1731b74d"
     }
   }
 }
