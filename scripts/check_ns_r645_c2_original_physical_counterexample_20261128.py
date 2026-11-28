@@ -63,6 +63,15 @@ def main():
     assert simplify(r-expected)==0
     assert (r+S(69)/2).is_negative is True  # exact radical comparison
 
+    # Original 369 sign grade: global velocity inversion preserves D
+    # and every even quadratic observer but reverses genuine R406 quintic.
+    inverted={k:tuple(-x for x in v) for k,v in POSITIVE.items()}
+    reflected,nref=physical_certificate(inverted,viscosity=S.One)
+    Pref,Dref=physical_critical_initial(inverted)
+    assert nref==316 and Pref==0 and Dref==D
+    assert simplify(reflected['r406']+r)==0
+    assert simplify(reflected['combined']+origin['combined'])==0
+
     amplified={k:tuple(2*x for x in v) for k,v in POSITIVE.items()}
     big,entries2=physical_certificate(amplified,viscosity=S.One)
     P2,D2=physical_critical_initial(amplified)
@@ -82,6 +91,7 @@ def main():
     print('all 316 ordered incidences retained per original state')
     print('unscaled production,dissipation,R406:',P,D,r)
     print('scaled production,dissipation,R406:',P2,D2,big['r406'])
+    print('same energy/dissipation inverted velocity R406:',reflected['r406'])
     print('minimum violation margin (δ=0):',uncompensated)
     print('source conditional R645 fails on a sufficiently short real Galerkin interval')
     print('no unrestricted NS regularity or kernel claim')
