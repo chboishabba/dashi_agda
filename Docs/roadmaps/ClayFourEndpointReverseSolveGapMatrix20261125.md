@@ -1383,3 +1383,209 @@ Dickson Q0 family and rStation paper 140; classical Eisenstein,
 Kummer, ramification, Chow localization, Rouché, Mellin and Hasse
 retain attribution. DASHI contributions are these specific component
 resolution and signed zero-disk deductions only.
+
+
+## 28 November — all four P0: root semantic reuse, original C/D, signed contraction, middle-exterior curve cut
+
+This tranche continues all four lanes; PNP and YM unchanged. Existing PRs
+#121, #123, #124 in Lean and #1551 here. No new generic infrastructure.
+
+### RH R-W1 — eliminate the parallel root semantic adapter
+
+Lean #121 c7c730802ee33746df9936d2fefe54b80c7124b9. Re-read actual root
+MillenniumExternal/AlpogeRHBoundaryExact.lean, ExactTargetSurface.lean,
+RHClayAdmission.lean, pinned compact/source runner and parser. The root
+adapter now directly imports Problems.RiemannHypothesis.Millennium, retaining
+its public clay_of_admitted_mathlib, mathlib_of_clay, clay_iff_mathlib
+names and exact upstream of_mathlib/mathlib constructors. Its previous
+dependency on unrelated PNP/BSD/NS imports is removed. In the existing
+isolated v4.35.0 runner the actual root adapter source bytes (Git-checked)
+are rebuilt in the same kernel as the pinned canonical target and external
+Main. RHClayAdmission now consumes that root adapter, not a parallel
+local statement conversion. The root adapter's three declarations have
+their own exact axiom-log audit. Compact is now the default runner
+selection; original remains explicit opt-in. No old root oleans imported.
+This is a same-source semantic weld source implementation, not actual
+native local acceptance or cross-version proof import.
+
+Andrew Sutherland's MIT report https://math.mit.edu/~drew/shortgrh/
+updated Nov27 17:27 UTC says all checks finished. Both compact and
+readable compile and replay all modules and both exact five-statement
+comparators con-leche and con-ron accept; compact paranoid passed on
+two machines, readable on one, second readable stopped for RAM and
+not a proof rejection. Both Schoenfeld equivalence and bound also
+accepted. Licensed pin updated; independent author/rewriter/checker
+credit preserved. Root parser blob c17eb864709fb08d11121b12dc0952555a295d29,
+test_rh_root_audit.py blob 0b4ca2af8852f1272541f7a39bd473ffd99b625d,
+local normal/-O 41/41 fixtures each, exact local Git hashes. This tests
+parser not kernel. Remaining actual shortest path: run the existing
+same-kernel build and axiom/terminal replay; root v4.28 binary environment
+and Agda literal analytic-carrier transport still separate. No need to
+rediscover RH or GRH independently.
+
+### NS — original whole-space and torus source admission together
+
+Lean #123 a7dcd5b18b5e6d32bfd475cacdb843dfbcc7e2aa. Re-read actual
+upstream ad53419de079eb8f95f60313473374624a348546
+lean/Breakdown/Defs.lean and Solution.lean, canonical frozen ClaySpec,
+existing UnforcedAdmission and differential transport. Added
+spatialWord_smooth_compact, compactInitialRapidDecay, zeroSpaceForce,
+boundedEnergy_original, original_space_to_clayC,
+original_cell_condition_to_clayC to existing ClayUnforcedTransport.lean.
+Compact support persists through each fderiv_apply; smoothness gives
+continuity of the polynomially weighted derivative, which is bounded
+on its compact support, proving the actual rapid decay condition.
+MemLp exponent two supplies integrable norm-square;
+ofReal_integral_eq_lintegral_ofReal converts the real bounded integral
+to the exact original extended-real energy. No change of physical
+velocity, pressure, viscosity or initial datum; literal force zero.
+The same original cell witness now has source-written canonical C
+and D consumers. Local runner uses unique logs/oleans and ten exact
+axiom declarations; actual byte-matched parser
+76b29c56f0dcb8411117fd3da715081201ac3d23 passes 14/14 fixtures normal/-O.
+No Lean kernel. No certificate synthesized. Upstream README
+https://github.com/tristanbuckmaster/navier-stokes and current
+https://math.observer/problems/navier-stokes-existence-and-smoothness/
+still report the original Appendix B certificate data/verifier absent;
+the patched Lean package not rebuilt. OpenAI forced C/D remains an
+independent source route, accepted by official Lean kernel as reported
+and undergoing written-proof correspondence review, not a claim of
+CMI recognition. No independent similarity reconstruction prerequisite.
+
+### BSD B-M7 — exact signed root contraction on actual Mellin source
+
+Reuse original B-M7s interval (no new quadrature), prior signed Taylor
+series and original conductor 234446.a1; no further generic rank or
+p-adic transport. Let w=z^2, A=M2/12 >= A0=8270793387711404/(12*10^12),
+m=M1 with |m|<=13/10^12. From original cusp decay and Hasse coefficient
+majorant, the exact deflated completed function is
+G(z)=m+A*w+H(w), H(w)=sum_(n>=2) b_n w^n with |b_n|<=B=25600
+on |w|<1. The coefficient bound follows from the same absolute
+Mellin moment estimate (2/c^2)*(2j)! with c>1/80 as prior disk proof.
+On R=(7/50000000)^2 define the actual signed root map
+Phi(w)=-(m+H(w))/A. It maps the complete closed complex disk of radius R
+strictly inside itself by the exact rational bound
+eta=(13/10^12+B*R^2/(1-R))/A0 < R.
+All-degree telescoping x^n-y^n=(x-y) sum_(i=0..n-1) x^i y^(n-1-i)
+gives the uniform Lipschitz constant
+L=B*(2R-R^2)/(A0*(1-R)^2) < 10^-11.
+In fact eta/R approximately .962324 and L approximately 1.456e-12,
+shown as diagnostics only. Banach fixed-point theorem gives a unique
+w_* on this disk with m+A*w_*+H(w_*)=0, and explicit convergent
+iteration starting at w_0=0. The error after n steps is at most
+L^n/(1-L)*|w_1|. Because coefficients are real and the initial point
+is real, the unique root w_* is real. The real function m+A*w+H(w)
+is strictly increasing there (H Lipschitz < A), so w_* has sign
+opposite to m when nonzero, and w_*=0 iff m=0. Thus the two residual
+zeros in the previous complex disk have a signed squared-coordinate
+producer, without needing Rouché for existence/uniqueness of the
+distinct zero locations. At the fixed point the derivative in w is
+nonzero by the same Lipschitz derivative estimate; w=0 yields
+double multiplicity in z, nonzero w gives two simple zeros.
+The full exact conclusion remains conditional on the earlier
+actual source enclosures and classical completeness and contraction.
+Neither the contraction nor its tiny error proves m=0; the actual
+rank-four coalescence and arbitrary E rank comparison remain open.
+
+Extended Synthesis/MillenniumBSDSignedMellinMomentProgressionExact.lean
+commit 4165b2f7f3775ca83fa4addfab2f5aa423dc7eda, exact rational bounds,
+all-degree norm difference inequality and fixed-point identity.
+Local scripts/check_bsd_signed_root_contraction.py blob
+36a21e2749a3029ba5961279629f58ecbd67a193 matched git hash-object;
+623/623 exact Fraction controls normal/-O. The actual infinite
+contraction argument above is mathematical, not inferred from finite
+fixtures. No native complex contraction kernel, no new Mellin quadrature,
+no new exact vanishing.
+
+### Hodge H-M2 — independent middle-exterior geometric target
+
+Read cm_symmetry_scout rStation paper 143,
+https://rstation.ai/problems/hodge_conjecture/papers/143, Theorem 3
+and section 5, including its conditions and explicit statement that
+positive geometric inputs are still missing. Conditional criteria:
+nonzero actual codim3 bivector input on S^2 x C x D, or nonzero
+codim4 middle input on S^3 x C x D, implies the selected relative
+determinant by chiral trace or conjugate polarization adjoint.
+For our relative rank6, Spin6=SL4, half-spins P and P^vee of rank4,
+wedge^3 of the orthogonal standard splits as Sym^2 P and
+Sym^2 P^vee (rank10 each). The middle criterion uses an actual
+algebraic correspondence into H1(C) tensor H1(D)(1); isolate a
+chirality on the curve side by Hodge endomorphisms of H1, algebraic
+by Lefschetz (1,1), then the conjugate transpose F^dagger F is
+a nonzero scalar times the selected star projector. Its metric
+identity part is killed by alternation; signed star term survives.
+Paper 143's argument is a donor, not a DASHI discovery or an
+unconditional Hodge theorem.
+
+On the existing conditional abelian half-spin B of dimension12
+(realized from the original candidate's relative form/Hodge
+data), a smooth complete intersection curve C in B from eleven
+sufficiently ample divisors supplies H1(B) as a split rational
+Hodge substructure of H1(C): weak Lefschetz, Jacobian map and
+Poincare complete reducibility. The H1 inclusion and retraction
+are realized by algebraic divisor correspondences. Thus given
+that B, actual curve endpoints can be taken as C twice. This
+pays the existence of auxiliary geometric curve carriers, not the
+missing mixed correspondence from S^3 or S^2. For a very ample
+line bundle L and smooth complete intersection C of eleven
+members, adjunction gives g(C)=1+11*c1(L)^12/2; no claim of a
+genus12 Jacobian model, explicit curve equations, or actual
+algebraic half-spin map on the original S.
+
+New mixed-product obstruction for BOTH k=2 and k=3, applying the
+same-object SO6 geometry and actual Kunneth degrees on S^k x C x D.
+Project to the tensor of degree2 primitive K3 slots and the two
+degree1 curve slots, all K3 slots at the same F embedding and
+alternating. In any product of >=2 positive-codimension algebraic
+classes of total codimension k+1, each K3 slot degree2 is supplied
+by one factor (H1(S)=0); each H1 curve slot by one factor. Even
+degree forces both curve slots into the same factor. At least
+one other factor has only a nonempty subset of primitive K3
+slots, 1..k. An odd subset gives zero invariant since -I belongs
+to SO6. A size-two subset has only the symmetric metric tensor
+as invariant and is killed by the full K3 alternation. Thus all
+decomposable lower-codimension products vanish under the mixed
+projection, not just divisor products. This uses the stated
+generic full SO6 Hodge group, algebraic F action and projectors,
+not arbitrary special extra-CM groups.
+
+For k=3 this yields an exact literal Chern producer criterion
+on X=S^3 x C x D. Rational ch:K0(X)_Q -> CH*(X)_Q is an
+isomorphism for smooth projective X. The mixed cubic projector
+P kills every lower-degree positive product. Newton's identity
+ch4=(c1^4-4c1^2*c2+2c2^2+4c1*c3-4c4)/24 therefore gives
+P(ch4(V))=-(1/6)*P(c4(V)).
+One actual algebraic vector bundle with nonzero P(c4) suffices
+to feed the middle-exterior donor, and existence of any nonzero
+projected codim4 cycle implies existence of such a bundle
+(by rational K0 and linearity). No construction of that bundle
+or cohomological nonvanishing supplied. The lower-product
+subring and split proper-subproduct bundle constructions
+cannot pay it. Prior principal-fibre Dickson no-go remains.
+The universal primitive detector is separate.
+
+Native arithmetic and linear-map Chern consumers extended in
+Synthesis/MillenniumHodgeRankSixEvenSignOrientationExact.lean
+commit dcf42c320a768d5616f342114e9ee4be8749d3b2. Local SymPy
+scripts/check_hodge_mixed_middle_cut.py blob
+fc0494a7a4a665442c20ed05b020de13347b06f6 matched git hash-object:
+270/270 normal/-O. Exact placement census 12 for k2 and 74 for k3,
+Newton identities, actual rank-six split-model middle-star
+rank10 projectors and opposite volume contractions -10,+10.
+This is an abstract split-model calculation, not an actual
+K3 Gram/cycle class computation. Classical invariant theory,
+curve Lefschetz and Jacobian splitting, Newton/Chern and Varesco
+retain attribution; paper143 for the mixed exterior criteria;
+DASHI for the selected mixed product obstruction and exact
+Chern reduction. No JMD attribution inferred. No kernel or CI run.
+
+### Disposition
+
+RH and NS shortest external routes have direct source-local semantic
+consumers for their original statements; proof acceptance locally
+remains blocked by unavailable compatible Lean toolchains and NS
+original witness. BSD and Hodge have new source-specific mathematical
+reductions and exact tested controls, not solved endpoint producers.
+No new universal conjecture or prize claim. The next positive work
+must target actual rank comparison/coalescence and actual mixed
+algebraic cycle rather than further restatement of the residuals.
