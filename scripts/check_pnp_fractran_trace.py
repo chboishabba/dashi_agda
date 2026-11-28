@@ -177,3 +177,55 @@ def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
             except (ProbeLimit,Exhausted,RecursionError):continue
     except (ProbeLimit,Exhausted,RecursionError):pass
     return 'UNKNOWN',None,lower
+
+
+def realize_ordered_trace(n,receipt,bridge,primes,B):
+    """Use FRACDASH bridge_macro_common (caller supplies actual module).
+    One extra control prime per program position forces ordered execution,
+    including repeated coordinate swaps; this is a trace-specific program,
+    not a uniform SAT solver. Prime generation is external, validation paid.
+    """
+    from fractions import Fraction
+    from sympy import isprime
+    units=tuple(u for m in receipt['macros'] for u in m['units'])
+    L=len(units)
+    primes=tuple(primes)
+    if len(primes)!=3*n+L+1:raise ValueError('prime basis size')
+    B.pay('prime_basis_validation',1+sum(p.bit_length()**2 for p in primes))
+    if len(set(primes))!=len(primes) or not all(isprime(p) for p in primes):
+        raise ValueError('non-distinct or nonprime basis')
+    registers=tuple(str(i) for i in range(n))
+    lane={r:dict(zip(('negative','zero','positive'),primes[3*i:3*i+3]))
+          for i,r in enumerate(registers)}
+    phase=primes[3*n:]
+    def state(z):
+        return {r:('positive' if z>>i&1 else 'zero') for i,r in enumerate(registers)}
+    x=receipt['start'];z=x
+    initial=bridge.encode_state_integer(state(x),registers,lane)*phase[0]
+    program=[]
+    R,caps=receipt['rows'],receipt['caps']
+    for t,u in enumerate(units):
+        B.pay('prime_compile_unit',1+n+len(R))
+        i,d=u['coord'],u['delta']
+        if not 0<=i<n or d!=1-2*((z>>i)&1):raise ValueError('invalid unit')
+        vector=[0]*n;vector[i]=d
+        nxt,f=bridge.apply_unit_step(state(z),vector,registers,lane)
+        z^=1<<i
+        if nxt!=state(z) or u['state']!=z or u['residual']!=tuple((r&z).bit_count()-c for r,c in zip(R,caps)):
+            raise ValueError('invalid receipt')
+        program.append(f*Fraction(phase[t+1],phase[t]))
+    if z!=receipt['end']:raise ValueError('invalid endpoint')
+    # Unique active phase makes at most L rules fire. Charge the full scan
+    # count and a conservative explicit integer-size proxy before execution.
+    width=sum(max(p.bit_length() for p in lane[r].values()) for r in registers)+max(p.bit_length() for p in phase)
+    B.pay('prime_ordered_replay',1+(L+1)*(L+1)*(1+width**2))
+    final,indices,integers=bridge.fractran_execute(initial,program)
+    if indices!=list(range(L)) or len(integers)!=L+1 or integers[-1]!=final:
+        raise AssertionError('priority or halt mismatch')
+    for t,a in enumerate(integers):
+        if a%phase[t]:raise AssertionError('phase mismatch')
+        decoded=bridge.decode_integer_state(a//phase[t],registers,lane)
+        if decoded!=state(x if t==0 else units[t-1]['state']):
+            raise AssertionError('decode mismatch')
+    return dict(program=tuple(map(str,program)),indices=tuple(indices),
+                integers=tuple(integers),final=final,prime_basis=primes)
