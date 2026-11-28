@@ -21,9 +21,9 @@ class Work:
 def reserve(root,name,cap):
     return Work(cap) if root.reserve(name,cap) else None
 
-def cnf_dispatch(F,n,rows,target,root,cap):
+def cnf_dispatch(F,n,rows,target,root,cap,data_clock=None):
     if reserve(root,"original_cnf",cap) is None:return dict(status="UNKNOWN")
-    q=source_solve(F,n,rows,target,cap)
+    q=source_solve(F,n,rows,target,cap,data_clock=data_clock)
     assert q["reserved"]<=cap
     return q
 
@@ -60,7 +60,7 @@ def parity_cnf(N,H,flats,B):
     C.extend(tuple((i+1)*(1 if b else -1) for i,b in c) for c in optimized_clauses(N,gates,output))
     return N+len(gates),tuple(C)
 
-def hard_dispatch(n,R,H,caps,x,flats,root,cap,atomic_basis_block=False):
+def hard_dispatch(n,R,H,caps,x,flats,root,cap,atomic_basis_block=False,data_clock=None):
     """Strict actual potential improvement or a certified minimum.
     Trace-specific microsteps are only admissible at the declared macro
     boundaries. Refused trace never erases a valid improved endpoint.
@@ -80,7 +80,7 @@ def hard_dispatch(n,R,H,caps,x,flats,root,cap,atomic_basis_block=False):
         # Same executed C1a dispatcher, now on the actual strict-demand
         # CNF. Reserve a trace portion, rather than spending it twice.
         query=B.left*3//4;B.pay("strict_demand_solve",query)
-        q=source_solve(C,N,(),(),query)
+        q=source_solve(C,N,(),(),query,data_clock=data_clock)
         if q["status"]=="EMPTY":return dict(status="MINIMUM",witness=x,potential=start)
         if q["status"]!="WITNESS":return dict(status="UNKNOWN",query=q["status"])
         y=sum(int(b)<<i for i,b in enumerate(q["witness"][:n]))
