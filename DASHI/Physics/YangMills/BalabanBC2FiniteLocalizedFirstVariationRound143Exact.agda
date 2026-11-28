@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact where
 
 ------------------------------------------------------------------------
@@ -46,11 +45,11 @@ asFirstVariationLinearity :
     (Finite.Configuration (Carrier.finiteAction (Present.bc1Carrier present)))
     (Finite.Tangent (Carrier.finiteAction (Present.bc1Carrier present)))
 asFirstVariationLinearity {present = present} laws = record
-  { D1.FirstVariationLinearity.firstVariation =
+  { firstVariation =
       BC2.firstVariation (Present.bc2 present)
-  ; D1.FirstVariationLinearity.firstVariationCong = firstVariationCong laws
-  ; D1.FirstVariationLinearity.zeroFirstVariation = zeroFirstVariation laws
-  ; D1.FirstVariationLinearity.addFirstVariation = addFirstVariation laws
+  ; firstVariationCong = firstVariationCong laws
+  ; zeroFirstVariation = zeroFirstVariation laws
+  ; addFirstVariation = addFirstVariation laws
   }
 
 bc2GlobalFirstVariationIsFiniteLocalizedSum :

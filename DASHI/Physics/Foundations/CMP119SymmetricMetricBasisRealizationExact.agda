@@ -75,10 +75,10 @@ compileSymmetricBasis16 :
   SymmetricMetricBasisRealization domain →
   Basis.MetricBasis16 domain
 compileSymmetricBasis16 realization = record
-  { Basis.MetricBasis16.basisPerturbation =
+  { basisPerturbation =
       λ a b →
         componentPerturbation realization (symmetricSlotOfAxes a b)
-  ; Basis.MetricBasis16.basisAdmissible =
+  ; basisAdmissible =
       λ a b →
         componentPerturbationAdmissible realization
           (symmetricSlotOfAxes a b)

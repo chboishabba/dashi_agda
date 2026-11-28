@@ -40,7 +40,7 @@ canonicalR119Readout :
       domain representation coordinate) →
   Basis.RationalStressPairingReadout representation
 canonicalR119Readout selected = record
-  { Basis.RationalStressPairingReadout.pairingToRational =
+  { pairingToRational =
       R119.readoutToRational selected
   }
 

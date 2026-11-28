@@ -41,7 +41,7 @@ import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Cyl
 

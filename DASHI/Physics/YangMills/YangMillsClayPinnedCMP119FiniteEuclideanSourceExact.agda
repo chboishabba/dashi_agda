@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119FiniteEuclideanSourceExact where
 
 ------------------------------------------------------------------------
@@ -101,13 +100,13 @@ euclideanFromNumeratorChangeOfVariables :
     Configuration EuclideanAction family
 euclideanFromNumeratorChangeOfVariables
     actConfiguration actObservable pullback numerator = record
-  { CMP119WholeLatticeEuclideanCovariance.actConfiguration =
+  { actConfiguration =
       actConfiguration
-  ; CMP119WholeLatticeEuclideanCovariance.actObservable =
+  ; actObservable =
       actObservable
-  ; CMP119WholeLatticeEuclideanCovariance.observableActionIsPullback =
+  ; observableActionIsPullback =
       pullback
-  ; CMP119WholeLatticeEuclideanCovariance.finiteNormalizedExpectationEuclideanInvariant =
+  ; finiteNormalizedExpectationEuclideanInvariant =
       Symmetry.finiteNormalizedExpectationInvariantFromNumerator
         _ actObservable numerator
   }

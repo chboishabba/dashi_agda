@@ -39,8 +39,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _*_; _-_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -104,12 +105,19 @@ normalizedReferenceJacobianIsIdentity weight indices normalized row column =
   trans
     (cong (weight *_)
       (referenceIdentitySumExact indices row column))
-    (normalizeEntry normalized (identity3 row column))
+    (normalizeEntry
+      {w = weight}
+      {count = natAsRational (length indices)}
+      normalized (identity3 row column))
   where
   normalizeEntry : ∀ {w count} → w * count ≡ 1ℚ → ∀ value →
     w * (count * value) ≡ value
-  normalizeEntry {w} {count} equality value
-    rewrite equality = ℚRing.solve-∀ value
+  normalizeEntry {w} {count} equality value =
+    trans
+      (sym (ℚP.*-assoc w count value))
+      (trans
+        (cong (λ z → z * value) equality)
+        (ℚP.*-identityˡ value))
 
 componentAsIdentityPlusResidual :
   ∀ {Index : Set}
@@ -153,7 +161,7 @@ normalizedJacobianIsIdentityPlusResidual
       (sumIdentityPlusResidualExact
         indices component residual decomposition row column))
     (trans
-      (ℚRing.solve-∀
+      (ℚP.*-distribˡ-+
         weight
         (sumRational indices (λ _ → identity3 row column))
         (sumMatrices indices residual row column))

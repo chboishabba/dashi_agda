@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact where
 
 ------------------------------------------------------------------------
@@ -33,7 +32,7 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Varia
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as Congruence
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 
@@ -69,7 +68,7 @@ module _
   periodicProductHaarUnit :
     periodicProductHaar (λ _ → 1ℝ) ≡ 1ℝ
   periodicProductHaarUnit =
-    Product.productIntegralUnit oneLink
+    Product.productIntegralUnit {n = linkCount} oneLink
 
   -- Strict pointwise positivity uses the same native variable-n action.
   periodicActualDensityStrictPositive :
@@ -104,31 +103,31 @@ module _
     Finite.PhysicalFiniteMeasureIntegrationLaws
       periodicProductFiniteMeasure
   periodicProductIntegrationLaws ordered strictToWeak = record
-    { Finite.PhysicalFiniteMeasureIntegrationLaws.densityNonnegative =
+    { densityNonnegative =
         λ links → strictToWeak (periodicActualDensityStrictPositive links)
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralCongruent =
+    ; haarIntegralCongruent =
         λ left right equality →
           Congruence.productIntegralCongruent oneLink
             (λ vector → left (decode vector))
             (λ vector → right (decode vector))
             (λ vector → equality (decode vector))
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralZero =
-        Ordered.productIntegralZero oneLink ordered
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralAdd =
+    ; haarIntegralZero =
+        Ordered.productIntegralZero {n = linkCount} oneLink ordered
+    ; haarIntegralAdd =
         λ left right →
           Ordered.productIntegralAdd oneLink ordered
             (λ vector → left (decode vector))
             (λ vector → right (decode vector))
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralScale =
+    ; haarIntegralScale =
         λ scalar observable →
           Ordered.productIntegralScale oneLink ordered scalar
             (λ vector → observable (decode vector))
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.haarIntegralPositive =
+    ; haarIntegralPositive =
         λ observable pointwise →
           Ordered.productIntegralPositive oneLink ordered
             (λ vector → observable (decode vector))
             (λ vector → pointwise (decode vector))
-    ; Finite.PhysicalFiniteMeasureIntegrationLaws.partitionFunctionIsDensityIntegral =
+    ; partitionFunctionIsDensityIntegral =
         refl
     }
 

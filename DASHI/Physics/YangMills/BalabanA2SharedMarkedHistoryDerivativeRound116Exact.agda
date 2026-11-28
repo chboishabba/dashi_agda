@@ -96,13 +96,13 @@ rowACauchySourceFromMarkedHistory :
   LiteralBetaHistoryMarkedDerivative →
   Cauchy.RowACauchySourceConstants
 rowACauchySourceFromMarkedHistory mixed history = record
-  { Cauchy.RowACauchySourceConstants.gaussianFloor = Ward.wardGaussianFloor
-  ; Cauchy.RowACauchySourceConstants.gaussianFloorPositive =
+  { gaussianFloor = Ward.wardGaussianFloor
+  ; gaussianFloorPositive =
       Ward.wardGaussianFloorPositive
-  ; Cauchy.RowACauchySourceConstants.mixedInteraction = mixed
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstant =
+  ; mixedInteraction = mixed
+  ; historyDerivativeConstant =
       historyDerivativeConstant history
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstantNonnegative =
+  ; historyDerivativeConstantNonnegative =
       historyDerivativeConstantNonnegative history
   }
 

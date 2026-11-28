@@ -84,19 +84,19 @@ orderDataAtScale :
   BetaSplitInverseSquareTerminalHistoryData trajectory split →
   Nat → Order.RationalInverseSquareOrderData
 orderDataAtScale {trajectory} dataSet scale = record
-  { Order.RationalInverseSquareOrderData.coupling = couplingAt dataSet scale
-  ; Order.RationalInverseSquareOrderData.thresholdCoupling = gamma dataSet
-  ; Order.RationalInverseSquareOrderData.inverseCoupling =
+  { coupling = couplingAt dataSet scale
+  ; thresholdCoupling = gamma dataSet
+  ; inverseCoupling =
       Flow.inverseCoupling trajectory scale
-  ; Order.RationalInverseSquareOrderData.inverseThreshold =
+  ; inverseThreshold =
       inverseThreshold dataSet
-  ; Order.RationalInverseSquareOrderData.couplingPositive =
+  ; couplingPositive =
       couplingPositive dataSet scale
-  ; Order.RationalInverseSquareOrderData.thresholdCouplingPositive =
+  ; thresholdCouplingPositive =
       gammaPositive dataSet
-  ; Order.RationalInverseSquareOrderData.inverseCouplingTimesSquare =
+  ; inverseCouplingTimesSquare =
       inverseCouplingRepresentation dataSet scale
-  ; Order.RationalInverseSquareOrderData.inverseThresholdTimesSquare =
+  ; inverseThresholdTimesSquare =
       inverseThresholdRepresentation dataSet
   }
 
@@ -117,19 +117,19 @@ asBetaSplitTerminalHistory :
   BetaSplitInverseSquareTerminalHistoryData trajectory split →
   Terminal.BetaSplitTerminalHistoryData trajectory split
 asBetaSplitTerminalHistory dataSet = record
-  { Terminal.BetaSplitTerminalHistoryData.couplingAt = couplingAt dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.gamma = gamma dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.inverseThreshold =
+  { couplingAt = couplingAt dataSet
+  ; gamma = gamma dataSet
+  ; inverseThreshold =
       inverseThreshold dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.terminalScale = terminalScale dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.ActiveScale = ActiveScale dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.terminalActive = terminalActive dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.gapToTerminal = gapToTerminal dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.scaleReachesTerminal =
+  ; terminalScale = terminalScale dataSet
+  ; ActiveScale = ActiveScale dataSet
+  ; terminalActive = terminalActive dataSet
+  ; gapToTerminal = gapToTerminal dataSet
+  ; scaleReachesTerminal =
       scaleReachesTerminal dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.terminalInverseThreshold =
+  ; terminalInverseThreshold =
       terminalInverseThreshold dataSet
-  ; Terminal.BetaSplitTerminalHistoryData.inverseThresholdImpliesSmallCoupling =
+  ; inverseThresholdImpliesSmallCoupling =
       inverseThresholdImpliesSmallCouplingExact dataSet
   }
 

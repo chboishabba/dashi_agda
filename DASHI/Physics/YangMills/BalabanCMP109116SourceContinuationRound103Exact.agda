@@ -48,15 +48,15 @@ atScaleVolume :
   (source : CMP109116LiteralEffectiveActionContinuation) →
   Scale source → Volume source → Finite.FiniteLocalizedEffectiveAction
 atScaleVolume source scale volume = record
-  { Finite.FiniteLocalizedEffectiveAction.Configuration = Background source
-  ; Finite.FiniteLocalizedEffectiveAction.Tangent = Tangent source
-  ; Finite.FiniteLocalizedEffectiveAction.Component = Component source
-  ; Finite.FiniteLocalizedEffectiveAction.components = components source scale volume
-  ; Finite.FiniteLocalizedEffectiveAction.localActivity =
+  { Configuration = Background source
+  ; Tangent = Tangent source
+  ; Component = Component source
+  ; components = components source scale volume
+  ; localActivity =
       cmp116PhysicalLocalizedActivity source scale volume
-  ; Finite.FiniteLocalizedEffectiveAction.cmp109EffectivePotential =
+  ; cmp109EffectivePotential =
       cmp109EffectivePotential source scale volume
-  ; Finite.FiniteLocalizedEffectiveAction.cmp109PotentialIsLocalizedSum =
+  ; cmp109PotentialIsLocalizedSum =
       effectivePotentialIsLocalizedCompositeSum source scale volume
   }
 

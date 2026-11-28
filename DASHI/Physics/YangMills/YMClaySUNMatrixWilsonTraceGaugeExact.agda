@@ -33,8 +33,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExa
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
-import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SignedSUN
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
+import DASHI.Physics.YangMills.YMClaySide4C3CoreExact as Side4
 import DASHI.Physics.YangMills.YMClaySide4SpatialC3WilsonNaturalityExact as Spatial
 
 record SUNMatrixRealTrace
@@ -54,14 +54,14 @@ open SUNMatrixRealTrace public
 matrixWilsonValue :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex} →
-  SUNMatrixRealTrace theory → SUN.SUNMatrixElement theory → Scalar
+  SUNMatrixRealTrace {Scalar = Scalar} theory → SUN.SUNMatrixElement theory → Scalar
 matrixWilsonValue traceData U =
   normalizedRealTrace traceData (SUN.matrix U)
 
 sunTraceCyclic :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
-    (traceData : SUNMatrixRealTrace theory) x y →
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory) x y →
   matrixWilsonValue traceData (SUN.sunMultiply theory x y)
   ≡ matrixWilsonValue traceData (SUN.sunMultiply theory y x)
 sunTraceCyclic traceData x y =
@@ -70,7 +70,7 @@ sunTraceCyclic traceData x y =
 sunTraceConjugationInvariant :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
-    (traceData : SUNMatrixRealTrace theory) h x →
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory) h x →
   matrixWilsonValue traceData
     (Derived.conjugate (SUN.sunMatrixGroup theory) h x)
   ≡ matrixWilsonValue traceData x
@@ -91,7 +91,7 @@ sunTraceConjugationInvariant {theory = theory} traceData h x =
 sunTraceClass :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
-    (traceData : SUNMatrixRealTrace theory) →
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory) →
   Gauge.ClassFunction
     (SUN.sunMatrixGroup theory) (matrixWilsonValue traceData)
 sunTraceClass traceData = record
@@ -104,14 +104,14 @@ sunTraceClass traceData = record
 sunGaugeRealization :
   ∀ {Matrix Complex : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
-    (links : SignedSUN.SUNSideFourLinks N theory)
-    (gamma : Bond.PeriodicSiteGauge Weld.three (SUN.SUNMatrixElement theory)) →
-  Bond.PeriodicBondGaugeRealization Weld.three
-    (SUN.SUNMatrixElement theory) (SignedSUN.sunExactSignedLinkGroup theory)
+    (links : Density.SUNPeriodicLinks theory Side4.three)
+    (gamma : Bond.PeriodicSiteGauge Side4.three (SUN.SUNMatrixElement theory)) →
+  Bond.PeriodicBondGaugeRealization Side4.three
+    (SUN.SUNMatrixElement theory) (Density.periodicSUNLinkGroup theory)
 sunGaugeRealization theory links gamma =
   Covariance.literalPeriodicBondGaugeRealization
-    (SignedSUN.sunExactSignedLinkGroup theory)
-    (Geometry.periodicStepInverseLaws Weld.three)
+    (Density.periodicSUNLinkGroup theory)
+    (Geometry.periodicStepInverseLaws Side4.three)
     links gamma
 
 -- Selected finite original positive plaquette, with actual inverse links,
@@ -119,10 +119,10 @@ sunGaugeRealization theory links gamma =
 sunOriginalPlaquetteTraceGaugeInvariant :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
-    (traceData : SUNMatrixRealTrace theory)
-    (links : SignedSUN.SUNSideFourLinks N theory)
-    (gamma : Bond.PeriodicSiteGauge Weld.three (SUN.SUNMatrixElement theory))
-    (plaquette : Plaquette.PeriodicPlaquette Weld.three) →
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory)
+    (links : Density.SUNPeriodicLinks theory Side4.three)
+    (gamma : Bond.PeriodicSiteGauge Side4.three (SUN.SUNMatrixElement theory))
+    (plaquette : Plaquette.PeriodicPlaquette Side4.three) →
   matrixWilsonValue traceData
     (Bond.transformedPathHolonomy
       (sunGaugeRealization theory links gamma)
@@ -135,7 +135,7 @@ sunOriginalPlaquetteTraceGaugeInvariant theory traceData links gamma plaquette =
   trans
     (cong (matrixWilsonValue traceData)
       (Bond.plaquetteGaugeCancellation
-        (Geometry.periodicPlaquetteClosure Weld.three)
+        (Geometry.periodicPlaquetteClosure Side4.three)
         (sunGaugeRealization theory links gamma) plaquette))
     (sunTraceConjugationInvariant traceData (gamma (Torus.first plaquette))
       (Bond.plaquetteHolonomyFromBonds
@@ -147,7 +147,7 @@ sunOriginalPlaquetteTraceGaugeInvariant theory traceData links gamma plaquette =
 sunSideFourWilsonC3 :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
-    (traceData : SUNMatrixRealTrace theory)
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory)
     (gaugeField : Gauge.GaugeField {G = SUN.SUNMatrixElement theory}
       Spatial.ForwardBond4) {start}
     (loop : Gauge.Path Spatial.ForwardBond4 start start) →
@@ -170,7 +170,7 @@ sunSideFourWilsonC3 theory traceData gaugeField loop =
 asCanonicalSUNTraceAuthority :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex} →
-  SUNMatrixRealTrace theory →
+  SUNMatrixRealTrace {Scalar = Scalar} theory →
   OriginalSUNTrace.SUNWilsonTraceAuthority
     {Scalar = Scalar} theory
 asCanonicalSUNTraceAuthority traceData = record
@@ -183,7 +183,7 @@ asCanonicalSUNTraceAuthority traceData = record
 canonicalSUNWilsonClassFunctionAgreement :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     {theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex}
-    (traceData : SUNMatrixRealTrace theory)
+    (traceData : SUNMatrixRealTrace {Scalar = Scalar} theory)
     h x →
   OriginalSUNTrace.normalizedRealTrace
     (asCanonicalSUNTraceAuthority traceData)

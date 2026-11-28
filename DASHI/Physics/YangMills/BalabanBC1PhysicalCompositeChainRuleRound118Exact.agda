@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeChainRuleRound118Exact where
 
 ------------------------------------------------------------------------

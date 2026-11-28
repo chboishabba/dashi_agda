@@ -22,15 +22,15 @@ asPreferredRegularERealization :
     (Tangent : Set) →
   R222.PreferredRegularERealization (R243.functionalProjection source)
 asPreferredRegularERealization source localization Tangent = record
-  { R222.PreferredRegularERealization.Background = R242.Background source
-  ; R222.PreferredRegularERealization.Volume = R244.Volume localization
-  ; R222.PreferredRegularERealization.Tangent = Tangent
-  ; R222.PreferredRegularERealization.Component = R244.Component localization
-  ; R222.PreferredRegularERealization.evaluateRegularE = λ regular → regular
-  ; R222.PreferredRegularERealization.components = R244.components localization
-  ; R222.PreferredRegularERealization.localizedRegularActivity =
+  { Background = R242.Background source
+  ; Volume = R244.Volume localization
+  ; Tangent = Tangent
+  ; Component = R244.Component localization
+  ; evaluateRegularE = λ regular → regular
+  ; components = R244.components localization
+  ; localizedRegularActivity =
       R244.localizedRegularActivity localization
-  ; R222.PreferredRegularERealization.selectedRegularEIsLocalizedCompositeSum =
+  ; selectedRegularEIsLocalizedCompositeSum =
       R244.selectedRegularEIsLocalizedCompositeSum localization
   }
 

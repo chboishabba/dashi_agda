@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact where
 
 ------------------------------------------------------------------------
@@ -67,22 +66,22 @@ asR218SourceNativeFlow :
     {trajectory = trajectory} {split = split} inputs →
   R218.BetaDrivenSourceNativePublishedFlowInputs inputs
 asR218SourceNativeFlow dataSet = record
-  { R218.BetaDrivenSourceNativePublishedFlowInputs.Operation = Operation dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.Action = Action dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.Field = Background dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.RegularTerm = Background dataSet → ℝ
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.RTerm = RTerm dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.BoundaryTerm = BoundaryTerm dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.VacuumTerm = VacuumTerm dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.SmallFieldScale = SmallFieldScale dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.BlockRadius = BlockRadius dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.AnalyticRadius = AnalyticRadius dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.Decay = Decay dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.theorem1 = theorem1 dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.completeDensityAt = completeDensityAt dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.densityIsBetaDensity = densityIsBetaDensity dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.couplingIsBetaHistory = couplingIsBetaHistory dataSet
-  ; R218.BetaDrivenSourceNativePublishedFlowInputs.differentiatedAt = differentiatedAt dataSet
+  { Operation = Operation dataSet
+  ; Action = Action dataSet
+  ; Field = Background dataSet
+  ; RegularTerm = Background dataSet → ℝ
+  ; RTerm = RTerm dataSet
+  ; BoundaryTerm = BoundaryTerm dataSet
+  ; VacuumTerm = VacuumTerm dataSet
+  ; SmallFieldScale = SmallFieldScale dataSet
+  ; BlockRadius = BlockRadius dataSet
+  ; AnalyticRadius = AnalyticRadius dataSet
+  ; Decay = Decay dataSet
+  ; theorem1 = theorem1 dataSet
+  ; completeDensityAt = completeDensityAt dataSet
+  ; densityIsBetaDensity = densityIsBetaDensity dataSet
+  ; couplingIsBetaHistory = couplingIsBetaHistory dataSet
+  ; differentiatedAt = differentiatedAt dataSet
   }
 
 selectedRegularEFunction :

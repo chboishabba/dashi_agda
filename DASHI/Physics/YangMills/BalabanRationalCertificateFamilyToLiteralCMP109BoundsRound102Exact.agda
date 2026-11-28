@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanRationalCertificateFamilyToLiteralCMP109BoundsRound102Exact where
 
 ------------------------------------------------------------------------
@@ -61,12 +60,12 @@ asShellRealCertificate :
   Real.LiteralRealBetaFromRationalCertificate
     (embedding dataSet) (certificate dataSet)
 asShellRealCertificate dataSet K k k<K = record
-  { Real.LiteralRealBetaFromRationalCertificate.historyForShell =
+  { historyForShell =
       historyForShell dataSet K k k<K
-  ; Real.LiteralRealBetaFromRationalCertificate.literalMixedDerivative =
+  ; literalMixedDerivative =
       BetaLaw.negativeOffDiagonalSecondMomentumDerivative
         (BetaLaw.vacuumPolarisationCoefficient (dynamics dataSet K)) k
-  ; Real.LiteralRealBetaFromRationalCertificate.literalMixedDerivativeExact =
+  ; literalMixedDerivativeExact =
       mixedDerivativeExact dataSet K k k<K
   }
 
@@ -76,17 +75,17 @@ literalDerivativeBoundsForCutoff :
     K →
   VP.LiteralVacuumPolarisationPointwiseBounds (dynamics dataSet K)
 literalDerivativeBoundsForCutoff dataSet K = record
-  { VP.LiteralVacuumPolarisationPointwiseBounds.betaLower = betaLowerReal dataSet
-  ; VP.LiteralVacuumPolarisationPointwiseBounds.betaUpper = betaUpperReal dataSet
-  ; VP.LiteralVacuumPolarisationPointwiseBounds.betaLowerPositive =
+  { betaLower = betaLowerReal dataSet
+  ; betaUpper = betaUpperReal dataSet
+  ; betaLowerPositive =
       Real.realLowerSlopePositive (embedding dataSet) (certificate dataSet)
-  ; VP.LiteralVacuumPolarisationPointwiseBounds.betaLowerBelowUpper =
+  ; betaLowerBelowUpper =
       Real.realLowerBelowUpperFromWitness
         (embedding dataSet) (certificate dataSet) (historyWitness dataSet)
-  ; VP.LiteralVacuumPolarisationPointwiseBounds.derivativeLower =
+  ; derivativeLower =
       λ k k<K → Real.literalMixedDerivativeRealLower
         (asShellRealCertificate dataSet K k k<K)
-  ; VP.LiteralVacuumPolarisationPointwiseBounds.derivativeUpper =
+  ; derivativeUpper =
       λ k k<K → Real.literalMixedDerivativeRealUpper
         (asShellRealCertificate dataSet K k k<K)
   }

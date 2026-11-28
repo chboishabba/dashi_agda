@@ -264,11 +264,11 @@ asFiniteSourceSensitivityBudget :
   QuarticSourceSensitivityData kernel cutoff →
   Finite.FiniteSourceSensitivityBudget kernel cutoff
 asFiniteSourceSensitivityBudget dataSet = record
-  { Finite.FiniteSourceSensitivityBudget.totalSourceSensitivity =
+  { totalSourceSensitivity =
       quarticSourceTotal dataSet
-  ; Finite.FiniteSourceSensitivityBudget.totalSourceSensitivityNonnegative =
+  ; totalSourceSensitivityNonnegative =
       quarticSourceTotalNonnegative dataSet
-  ; Finite.FiniteSourceSensitivityBudget.sourcePartialBelowTotal =
+  ; sourcePartialBelowTotal =
       sourcePartialUniform dataSet
   }
 

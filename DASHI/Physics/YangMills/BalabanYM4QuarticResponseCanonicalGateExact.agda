@@ -321,12 +321,12 @@ asAugmentedShootingSensitivityData :
   QuarticResponseCanonicalGate quartic →
   Aug.AugmentedShootingSensitivityData cutoff
 asAugmentedShootingSensitivityData {quartic = quartic} dataSet = record
-  { Aug.AugmentedShootingSensitivityData.direct = Quartic.direct quartic
-  ; Aug.AugmentedShootingSensitivityData.historyConstant =
+  { direct = Quartic.direct quartic
+  ; historyConstant =
       quarticResponseHistoryConstant quartic
-  ; Aug.AugmentedShootingSensitivityData.historyConstantNonnegative =
+  ; historyConstantNonnegative =
       quarticResponseHistoryConstantNonnegative quartic
-  ; Aug.AugmentedShootingSensitivityData.augmentedContractionGate =
+  ; augmentedContractionGate =
       augmentedQuarticResponseGate dataSet
   }
 

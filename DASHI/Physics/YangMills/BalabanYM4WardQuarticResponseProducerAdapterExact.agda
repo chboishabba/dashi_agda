@@ -40,12 +40,12 @@ import DASHI.Physics.YangMills.BalabanYM4RowAAugmentedShootingGateExact as Aug
 localCauchySource :
   Mixed.MixedInteractionCauchyData → Cauchy.RowACauchySourceConstants
 localCauchySource mixed = record
-  { Cauchy.RowACauchySourceConstants.gaussianFloor = Ward.wardGaussianFloor
-  ; Cauchy.RowACauchySourceConstants.gaussianFloorPositive =
+  { gaussianFloor = Ward.wardGaussianFloor
+  ; gaussianFloorPositive =
       Ward.wardGaussianFloorPositive
-  ; Cauchy.RowACauchySourceConstants.mixedInteraction = mixed
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstant = 0ℚ
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstantNonnegative =
+  ; mixedInteraction = mixed
+  ; historyDerivativeConstant = 0ℚ
+  ; historyDerivativeConstantNonnegative =
       ℚP.≤-refl
   }
 
@@ -56,21 +56,21 @@ rawWardConstants :
     (quartic : Quartic.QuarticSourceSensitivityData kernel cutoff) →
   WardChoice.WardQuarticResponseConstants
 rawWardConstants mixed kernel quartic = record
-  { WardChoice.WardQuarticResponseConstants.interactionConstant =
+  { interactionConstant =
       Cauchy.sourceInteractionConstant (localCauchySource mixed)
-  ; WardChoice.WardQuarticResponseConstants.localDerivative =
+  ; localDerivative =
       Cauchy.sourceLocalDerivativeConstant (localCauchySource mixed)
-  ; WardChoice.WardQuarticResponseConstants.responseCoefficient =
+  ; responseCoefficient =
       Kernel.responseCoefficient kernel
-  ; WardChoice.WardQuarticResponseConstants.sourceCoefficient =
+  ; sourceCoefficient =
       Quartic.sourceCoefficient quartic
-  ; WardChoice.WardQuarticResponseConstants.interactionConstantNonnegative =
+  ; interactionConstantNonnegative =
       Cauchy.sourceInteractionConstantNonnegative (localCauchySource mixed)
-  ; WardChoice.WardQuarticResponseConstants.localDerivativeNonnegative =
+  ; localDerivativeNonnegative =
       Cauchy.sourceLocalDerivativeConstantNonnegative (localCauchySource mixed)
-  ; WardChoice.WardQuarticResponseConstants.responseCoefficientNonnegative =
+  ; responseCoefficientNonnegative =
       Kernel.responseCoefficientNonnegative kernel
-  ; WardChoice.WardQuarticResponseConstants.sourceCoefficientNonnegative =
+  ; sourceCoefficientNonnegative =
       Quartic.sourceCoefficientNonnegative quartic
   }
 
@@ -154,26 +154,26 @@ asQuarticResponseCanonicalGate :
   ∀ {cutoff} (dataSet : WardQuarticResponseProducer cutoff) →
   Gate.QuarticResponseCanonicalGate (quartic dataSet)
 asQuarticResponseCanonicalGate dataSet = record
-  { Gate.QuarticResponseCanonicalGate.gaussianFloor = Ward.wardGaussianFloor
-  ; Gate.QuarticResponseCanonicalGate.interactionConstant =
+  { gaussianFloor = Ward.wardGaussianFloor
+  ; interactionConstant =
       Cauchy.sourceInteractionConstant
         (localCauchySource (mixedInteraction dataSet))
-  ; Gate.QuarticResponseCanonicalGate.localDerivative =
+  ; localDerivative =
       Cauchy.sourceLocalDerivativeConstant
         (localCauchySource (mixedInteraction dataSet))
-  ; Gate.QuarticResponseCanonicalGate.interactionConstantNonnegative =
+  ; interactionConstantNonnegative =
       Cauchy.sourceInteractionConstantNonnegative
         (localCauchySource (mixedInteraction dataSet))
-  ; Gate.QuarticResponseCanonicalGate.localDerivativeNonnegative =
+  ; localDerivativeNonnegative =
       Cauchy.sourceLocalDerivativeConstantNonnegative
         (localCauchySource (mixedInteraction dataSet))
-  ; Gate.QuarticResponseCanonicalGate.couplingCapAtMostOne =
+  ; couplingCapAtMostOne =
       producerCapAtMostOne dataSet
-  ; Gate.QuarticResponseCanonicalGate.tubeBelowCouplingCap =
+  ; tubeBelowCouplingCap =
       tubeBelowCap dataSet
-  ; Gate.QuarticResponseCanonicalGate.marginExact = marginExact dataSet
-  ; Gate.QuarticResponseCanonicalGate.derivativeExact = derivativeExact dataSet
-  ; Gate.QuarticResponseCanonicalGate.linearizedCombinedSmallness =
+  ; marginExact = marginExact dataSet
+  ; derivativeExact = derivativeExact dataSet
+  ; linearizedCombinedSmallness =
       producerLinearizedSmallness dataSet
   }
 

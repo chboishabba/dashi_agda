@@ -40,28 +40,28 @@ canonicalCMP116CommonDomain :
   Canon.CMP116FiniteNormalizedAnalyticDemands →
   Common.CMP116CommonAnalyticRadius Scale Volume
 canonicalCMP116CommonDomain d = record
-  { Common.CMP116CommonAnalyticRadius.radius = Canon.canonicalCommonRadius d
-  ; Common.CMP116CommonAnalyticRadius.radiusPositive =
+  { radius = Canon.canonicalCommonRadius d
+  ; radiusPositive =
       Canon.canonicalCommonRadiusPositive d
-  ; Common.CMP116CommonAnalyticRadius.BackgroundCoordinateInside =
+  ; BackgroundCoordinateInside =
       λ _ _ →
         Canon.propagatorDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.CMP116CommonAnalyticRadius.SourceCoordinateInside =
+  ; SourceCoordinateInside =
       λ _ _ →
         Canon.linearizingFixedPointDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.CMP116CommonAnalyticRadius.LocalActivityCoordinateInside =
+  ; LocalActivityCoordinateInside =
       λ _ _ →
         Canon.minimizerFixedPointDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.CMP116CommonAnalyticRadius.SubstitutedBackgroundInside =
+  ; SubstitutedBackgroundInside =
       λ _ _ →
         Canon.substitutedBackgroundDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.CMP116CommonAnalyticRadius.backgroundCoordinateInside =
+  ; backgroundCoordinateInside =
       λ _ _ → Canon.propagatorDemandPaid d
-  ; Common.CMP116CommonAnalyticRadius.sourceCoordinateInside =
+  ; sourceCoordinateInside =
       λ _ _ → Canon.linearizingFixedPointDemandPaid d
-  ; Common.CMP116CommonAnalyticRadius.localActivityCoordinateInside =
+  ; localActivityCoordinateInside =
       λ _ _ → Canon.minimizerFixedPointDemandPaid d
-  ; Common.CMP116CommonAnalyticRadius.substitutedBackgroundInside =
+  ; substitutedBackgroundInside =
       λ _ _ → Canon.substitutedBackgroundDemandPaid d
   }
 
@@ -71,13 +71,13 @@ canonicalFirstSecondDerivativeSameRadius :
   Common.FirstSecondDerivativeUseSameRadius
     (canonicalCMP116CommonDomain {Scale} {Volume} d)
 canonicalFirstSecondDerivativeSameRadius d = record
-  { Common.FirstSecondDerivativeUseSameRadius.FirstDerivativeCauchyValid =
+  { FirstDerivativeCauchyValid =
       λ _ _ → Canon.totalDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.FirstSecondDerivativeUseSameRadius.SecondDerivativeCauchyValid =
+  ; SecondDerivativeCauchyValid =
       λ _ _ → Canon.totalDemand d * Canon.canonicalCommonRadius d < 1ℚ
-  ; Common.FirstSecondDerivativeUseSameRadius.firstDerivativeCauchyValid =
+  ; firstDerivativeCauchyValid =
       λ _ _ → Canon.totalDemandTimesRadiusBelowOne d
-  ; Common.FirstSecondDerivativeUseSameRadius.secondDerivativeCauchyValid =
+  ; secondDerivativeCauchyValid =
       λ _ _ → Canon.totalDemandTimesRadiusBelowOne d
   }
 

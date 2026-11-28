@@ -67,32 +67,32 @@ asLiteralDensityNormalizedStressSource :
   R121.LiteralDensityNormalizedStressSource inputs
 asLiteralDensityNormalizedStressSource {measureWeld = measureWeld} calculus =
   record
-    { R121.LiteralDensityNormalizedStressSource.MetricPerturbation =
+    { MetricPerturbation =
         MetricPerturbation calculus
-    ; R121.LiteralDensityNormalizedStressSource.numerator =
+    ; numerator =
         λ density →
           numerator calculus
             (R124.densityToFiniteMeasure measureWeld density)
-    ; R121.LiteralDensityNormalizedStressSource.denominator =
+    ; denominator =
         λ density →
           denominator calculus
             (R124.densityToFiniteMeasure measureWeld density)
-    ; R121.LiteralDensityNormalizedStressSource.numeratorDerivative =
+    ; numeratorDerivative =
         λ density perturbation →
           numeratorDerivative calculus
             (R124.densityToFiniteMeasure measureWeld density)
             perturbation
-    ; R121.LiteralDensityNormalizedStressSource.denominatorDerivative =
+    ; denominatorDerivative =
         λ density perturbation →
           denominatorDerivative calculus
             (R124.densityToFiniteMeasure measureWeld density)
             perturbation
-    ; R121.LiteralDensityNormalizedStressSource.connectedInsertionNumerator =
+    ; connectedInsertionNumerator =
         λ density perturbation →
           connectedInsertionNumerator calculus
             (R124.densityToFiniteMeasure measureWeld density)
             perturbation
-    ; R121.LiteralDensityNormalizedStressSource.normalizedCrossNumeratorIsConnectedInsertion =
+    ; normalizedCrossNumeratorIsConnectedInsertion =
         λ density perturbation →
           normalizedCrossNumeratorIsConnectedInsertion calculus
             (R124.densityToFiniteMeasure measureWeld density)

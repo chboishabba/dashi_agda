@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact where
 
 ------------------------------------------------------------------------
@@ -63,34 +62,34 @@ canonicalCylinderAlgebra :
   Cylinder.ScalarCylinderLimitAlgebra ℝ
 canonicalCylinderAlgebra
     {sequenceLimit = sequenceLimit} laws = record
-  { Cylinder.ScalarCylinderLimitAlgebra.zero = 0ℝ
-  ; Cylinder.ScalarCylinderLimitAlgebra.one = 1ℝ
-  ; Cylinder.ScalarCylinderLimitAlgebra.add = _+ℝ_
-  ; Cylinder.ScalarCylinderLimitAlgebra.multiply = _*ℝ_
-  ; Cylinder.ScalarCylinderLimitAlgebra.LessEqual = _≤ℝ_
-  ; Cylinder.ScalarCylinderLimitAlgebra.Converges =
+  { zero = 0ℝ
+  ; one = 1ℝ
+  ; add = _+ℝ_
+  ; multiply = _*ℝ_
+  ; LessEqual = _≤ℝ_
+  ; Converges =
       Converges sequenceLimit
-  ; Cylinder.ScalarCylinderLimitAlgebra.convergenceUnique =
+  ; convergenceUnique =
       λ sequence left right leftConv rightConv →
         trans (sym leftConv) rightConv
-  ; Cylinder.ScalarCylinderLimitAlgebra.convergencePointwiseCongruent =
+  ; convergencePointwiseCongruent =
       λ left right target pointwise rightConv →
         trans
           (Seq.limitCongruent sequenceLimit left right pointwise)
           rightConv
-  ; Cylinder.ScalarCylinderLimitAlgebra.constantConverges =
+  ; constantConverges =
       constantLimit laws
-  ; Cylinder.ScalarCylinderLimitAlgebra.addConverges =
+  ; addConverges =
       λ left right leftLimit rightLimit leftConv rightConv →
         trans
           (addLimit laws left right)
           (cong₂ _+ℝ_ leftConv rightConv)
-  ; Cylinder.ScalarCylinderLimitAlgebra.multiplyConstantConverges =
+  ; multiplyConstantConverges =
       λ scalar sequence target converges →
         trans
           (multiplyConstantLimit laws scalar sequence)
           (cong (λ value → scalar *ℝ value) converges)
-  ; Cylinder.ScalarCylinderLimitAlgebra.nonnegativeClosedUnderLimit =
+  ; nonnegativeClosedUnderLimit =
       λ sequence target converges pointwise →
         substRight
           (nonnegativeLimitClosed laws sequence pointwise)
@@ -108,24 +107,24 @@ canonicalGramScalarConvergence :
   Gram.ScalarConvergenceAlgebra ℝ 0ℝ _+ℝ_ _*ℝ_
 canonicalGramScalarConvergence
     {sequenceLimit = sequenceLimit} laws = record
-  { Gram.ScalarConvergenceAlgebra.Converges =
+  { Converges =
       Converges sequenceLimit
-  ; Gram.ScalarConvergenceAlgebra.constantConverges =
+  ; constantConverges =
       constantLimit laws
-  ; Gram.ScalarConvergenceAlgebra.addConverges =
+  ; addConverges =
       λ firstSequence firstLimit secondSequence secondLimit
          firstConv secondConv →
         trans
           (addLimit laws firstSequence secondSequence)
           (cong₂ _+ℝ_ firstConv secondConv)
-  ; Gram.ScalarConvergenceAlgebra.multiplyConstantConverges =
+  ; multiplyConstantConverges =
       λ coefficient sequence target converges →
         trans
           (multiplyConstantLimit laws coefficient sequence)
           (cong (λ value → coefficient *ℝ value) converges)
-  ; Gram.ScalarConvergenceAlgebra.limit =
+  ; limit =
       Seq.limit sequenceLimit
-  ; Gram.ScalarConvergenceAlgebra.sequenceConvergesToLimit =
+  ; sequenceConvergesToLimit =
       λ sequence → refl
   }
 

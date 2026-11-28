@@ -159,12 +159,12 @@ responseControl :
       ≤ markedAnalyticShell dataSet kind scale volume root depth) →
   Hess.RootedHessianShellControl Scale Volume Root
 responseControl dataSet kind response responseBelow = record
-  { Hess.RootedHessianShellControl.kpShell = kpShell dataSet kind
-  ; Hess.RootedHessianShellControl.hessianRowShell = response
-  ; Hess.RootedHessianShellControl.derivativeConstant = markedConstant dataSet kind
-  ; Hess.RootedHessianShellControl.derivativeConstantNonnegative =
+  { kpShell = kpShell dataSet kind
+  ; hessianRowShell = response
+  ; derivativeConstant = markedConstant dataSet kind
+  ; derivativeConstantNonnegative =
       markedConstantNonnegative dataSet kind
-  ; Hess.RootedHessianShellControl.hessianShellBelowActivityShell =
+  ; hessianShellBelowActivityShell =
       λ scale volume root depth →
         ℚP.≤-trans
           (responseBelow scale volume root depth)
@@ -248,14 +248,14 @@ responseScaleMajorant :
   Cauchy.ScaleLocalIncrementMajorant
 responseScaleMajorant dataSet kind response responseNonnegative responseBelow
   scale volume root = record
-  { Cauchy.ScaleLocalIncrementMajorant.coefficient = markedConstant dataSet kind
-  ; Cauchy.ScaleLocalIncrementMajorant.coefficientNonnegative =
+  { coefficient = markedConstant dataSet kind
+  ; coefficientNonnegative =
       markedConstantNonnegative dataSet kind
-  ; Cauchy.ScaleLocalIncrementMajorant.incrementMagnitude =
+  ; incrementMagnitude =
       response scale volume root
-  ; Cauchy.ScaleLocalIncrementMajorant.incrementNonnegative =
+  ; incrementNonnegative =
       responseNonnegative scale volume root
-  ; Cauchy.ScaleLocalIncrementMajorant.incrementBelowScaleShell =
+  ; incrementBelowScaleShell =
       λ depth →
         let
           first = ℚP.≤-trans
@@ -340,7 +340,7 @@ hessianWeightedControl :
   SharedMarkedAnalyticShellControl Scale Volume Root →
   Weighted.ExponentialWeightedHessianShellControl Scale Volume Root
 hessianWeightedControl dataSet = record
-  { Weighted.ExponentialWeightedHessianShellControl.hessianControl =
+  { hessianControl =
       hessianResponseControl dataSet
   }
 

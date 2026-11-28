@@ -50,11 +50,11 @@ asPhysicalMetricStressData :
   NZ.PhysicalRationalMetricStressData
     Configuration MetricPerturbation measure
 asPhysicalMetricStressData dataSet = record
-  { NZ.PhysicalRationalMetricStressData.insertionObservable =
+  { insertionObservable =
       insertionObservable dataSet
-  ; NZ.PhysicalRationalMetricStressData.densityDerivative =
+  ; densityDerivative =
       gibbsDensityDerivative dataSet
-  ; NZ.PhysicalRationalMetricStressData.insertionDerivative =
+  ; insertionDerivative =
       insertionVariation dataSet
   }
 
@@ -169,7 +169,7 @@ module _
       {VacuumState = VacuumState}
       MetricPerturbation
   asPhysicalRationalFiniteMeasureStressCalculus family = record
-    { NZ.PhysicalRationalFiniteMeasureStressCalculus.stressDataAt =
+    { stressDataAt =
         λ measure →
           asPhysicalMetricStressData (gibbsDataAt family measure)
     }

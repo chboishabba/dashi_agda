@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanR144ToCMP119StressInsertionExact where
 
 ------------------------------------------------------------------------

@@ -112,16 +112,16 @@ sourceDerivativeConstantNonnegative source =
 asFiniteRowASourceConstants :
   RowACauchySourceConstants → Choice.FiniteRowASourceConstants
 asFiniteRowASourceConstants source = record
-  { Choice.FiniteRowASourceConstants.gaussianFloor = gaussianFloor source
-  ; Choice.FiniteRowASourceConstants.interactionConstant =
+  { gaussianFloor = gaussianFloor source
+  ; interactionConstant =
       sourceInteractionConstant source
-  ; Choice.FiniteRowASourceConstants.derivativeBound =
+  ; derivativeBound =
       sourceDerivativeConstant source
-  ; Choice.FiniteRowASourceConstants.gaussianFloorPositive =
+  ; gaussianFloorPositive =
       gaussianFloorPositive source
-  ; Choice.FiniteRowASourceConstants.interactionConstantNonnegative =
+  ; interactionConstantNonnegative =
       sourceInteractionConstantNonnegative source
-  ; Choice.FiniteRowASourceConstants.derivativeBoundNonnegative =
+  ; derivativeBoundNonnegative =
       sourceDerivativeConstantNonnegative source
   }
 
@@ -190,41 +190,41 @@ asCombinedRowAGateData :
 asCombinedRowAGateData trajectory =
   let sourceData = source trajectory
   in record
-    { Combined.CombinedRowAGateData.gaussianFloor = gaussianFloor sourceData
-    ; Combined.CombinedRowAGateData.interactionConstant =
+    { gaussianFloor = gaussianFloor sourceData
+    ; interactionConstant =
         sourceInteractionConstant sourceData
-    ; Combined.CombinedRowAGateData.couplingCap =
+    ; couplingCap =
         canonicalSourceGamma sourceData
-    ; Combined.CombinedRowAGateData.tubeWidth = tubeWidth trajectory
-    ; Combined.CombinedRowAGateData.derivativeBound =
+    ; tubeWidth = tubeWidth trajectory
+    ; derivativeBound =
         sourceDerivativeConstant sourceData
-    ; Combined.CombinedRowAGateData.coupling = coupling trajectory
-    ; Combined.CombinedRowAGateData.betaGauss = betaGauss trajectory
-    ; Combined.CombinedRowAGateData.betaInteraction = betaInteraction trajectory
-    ; Combined.CombinedRowAGateData.inverseSquare = inverseSquare trajectory
-    ; Combined.CombinedRowAGateData.interactionConstantNN =
+    ; coupling = coupling trajectory
+    ; betaGauss = betaGauss trajectory
+    ; betaInteraction = betaInteraction trajectory
+    ; inverseSquare = inverseSquare trajectory
+    ; interactionConstantNN =
         sourceInteractionConstantNonnegative sourceData
-    ; Combined.CombinedRowAGateData.derivativeBoundNN =
+    ; derivativeBoundNN =
         sourceDerivativeConstantNonnegative sourceData
-    ; Combined.CombinedRowAGateData.couplingCapNN =
+    ; couplingCapNN =
         ℚP.<⇒≤ (canonicalSourceGammaPositive sourceData)
-    ; Combined.CombinedRowAGateData.tubeWidthNN =
+    ; tubeWidthNN =
         tubeWidthNonnegative trajectory
-    ; Combined.CombinedRowAGateData.tubeWidthBelowCouplingCap =
+    ; tubeWidthBelowCouplingCap =
         tubeWidthBelowCanonicalGamma trajectory
-    ; Combined.CombinedRowAGateData.couplingPositive =
+    ; couplingPositive =
         couplingPositive trajectory
-    ; Combined.CombinedRowAGateData.couplingBelowCap =
+    ; couplingBelowCap =
         couplingBelowCanonicalGamma trajectory
-    ; Combined.CombinedRowAGateData.gaussianLower = gaussianLower trajectory
-    ; Combined.CombinedRowAGateData.interactionLower = interactionLower trajectory
-    ; Combined.CombinedRowAGateData.inverseSquareRelation =
+    ; gaussianLower = gaussianLower trajectory
+    ; interactionLower = interactionLower trajectory
+    ; inverseSquareRelation =
         inverseSquareRelation trajectory
-    ; Combined.CombinedRowAGateData.couplingMonotone = couplingMonotone trajectory
-    ; Combined.CombinedRowAGateData.betaIsInverseSquareStep =
+    ; couplingMonotone = couplingMonotone trajectory
+    ; betaIsInverseSquareStep =
         betaIsInverseSquareStep trajectory
-    ; Combined.CombinedRowAGateData.couplingTube = couplingTube trajectory
-    ; Combined.CombinedRowAGateData.combinedSmallness =
+    ; couplingTube = couplingTube trajectory
+    ; combinedSmallness =
         canonicalSourceGammaPaysCombinedGate sourceData
     }
 

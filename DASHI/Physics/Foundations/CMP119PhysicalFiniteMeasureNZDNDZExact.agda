@@ -137,22 +137,22 @@ module _
       measureWeld
   asLiteralFiniteMeasureNormalizedStressCalculus
       {MetricPerturbation = MetricPerturbation} calculus = record
-    { FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.MetricPerturbation =
+    { MetricPerturbation =
         MetricPerturbation
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.numerator =
+    ; numerator =
         λ measure →
           numerator (stressDataAt calculus measure)
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.denominator =
+    ; denominator =
         denominator
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.numeratorDerivative =
+    ; numeratorDerivative =
         λ measure perturbation →
           numeratorDerivative (stressDataAt calculus measure) perturbation
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.denominatorDerivative =
+    ; denominatorDerivative =
         λ measure perturbation →
           denominatorDerivative (stressDataAt calculus measure) perturbation
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.connectedInsertionNumerator =
+    ; connectedInsertionNumerator =
         λ measure perturbation →
           connectedCrossNumerator (stressDataAt calculus measure) perturbation
-    ; FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus.normalizedCrossNumeratorIsConnectedInsertion =
+    ; normalizedCrossNumeratorIsConnectedInsertion =
         λ measure perturbation → refl
     }

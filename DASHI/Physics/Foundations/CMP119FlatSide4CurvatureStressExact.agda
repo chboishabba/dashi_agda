@@ -37,17 +37,17 @@ localCurvatureSix :
   Hodge.Site4 →
   Metric.CurvatureSix
 localCurvatureSix field site = record
-  { Metric.CurvatureSix.f01 =
+  { f01 =
       localCurvatureVector field Hodge.axis0 Hodge.axis1 site
-  ; Metric.CurvatureSix.f02 =
+  ; f02 =
       localCurvatureVector field Hodge.axis0 Hodge.axis2 site
-  ; Metric.CurvatureSix.f03 =
+  ; f03 =
       localCurvatureVector field Hodge.axis0 Hodge.axis3 site
-  ; Metric.CurvatureSix.f12 =
+  ; f12 =
       localCurvatureVector field Hodge.axis1 Hodge.axis2 site
-  ; Metric.CurvatureSix.f13 =
+  ; f13 =
       localCurvatureVector field Hodge.axis1 Hodge.axis3 site
-  ; Metric.CurvatureSix.f23 =
+  ; f23 =
       localCurvatureVector field Hodge.axis2 Hodge.axis3 site
   }
 

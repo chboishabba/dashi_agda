@@ -72,10 +72,10 @@ coefficientPrefixEnergyIsShellPrefix dataSet (suc cutoff) =
 asRound112StressCoefficientShellIdentification :
   LiteralStressShellPartition → R112.LiteralStressCoefficientShellIdentification
 asRound112StressCoefficientShellIdentification dataSet = record
-  { R112.LiteralStressCoefficientShellIdentification.shellData = shellData dataSet
-  ; R112.LiteralStressCoefficientShellIdentification.coefficientSamples =
+  { shellData = shellData dataSet
+  ; coefficientSamples =
       coefficientSamplesThrough dataSet
-  ; R112.LiteralStressCoefficientShellIdentification.coefficientEnergyIsShellPrefix =
+  ; coefficientEnergyIsShellPrefix =
       coefficientPrefixEnergyIsShellPrefix dataSet
   }
 

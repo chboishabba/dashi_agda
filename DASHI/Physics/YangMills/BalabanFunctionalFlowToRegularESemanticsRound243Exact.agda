@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFunctionalFlowToRegularESemanticsRound243Exact where
 
 ------------------------------------------------------------------------
@@ -28,11 +27,11 @@ functionalPointwiseSemantics :
       {trajectory = trajectory} {split = split} inputs) →
   R239.CMP119RegularEPointwiseSemantics (functionalProjection source)
 functionalPointwiseSemantics source = record
-  { R239.CMP119RegularEPointwiseSemantics.Background = R242.Background source
-  ; R239.CMP119RegularEPointwiseSemantics.evaluateRegularE = λ regular → regular
-  ; R239.CMP119RegularEPointwiseSemantics.IsLiteralRegularEEvaluation =
+  { Background = R242.Background source
+  ; evaluateRegularE = λ regular → regular
+  ; IsLiteralRegularEEvaluation =
       λ regular evaluation → evaluation ≡ regular
-  ; R239.CMP119RegularEPointwiseSemantics.selectedRegularEEvaluationIsLiteral =
+  ; selectedRegularEEvaluationIsLiteral =
       λ _ → refl
   }
 

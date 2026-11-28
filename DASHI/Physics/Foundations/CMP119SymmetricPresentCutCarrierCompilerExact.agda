@@ -61,18 +61,18 @@ asBC1CanonicalPhysicalInputs :
     source localization →
   BC1.BC1CanonicalPhysicalInputs
 asBC1CanonicalPhysicalInputs {source = source} {localization = localization} dataSet = record
-  { BC1.BC1CanonicalPhysicalInputs.source =
+  { source =
       R245.asCMP109116Continuation
         source localization K.SymmetricTensorComponent4
-  ; BC1.BC1CanonicalPhysicalInputs.calculus =
+  ; calculus =
       calculus dataSet
-  ; BC1.BC1CanonicalPhysicalInputs.equation51 =
+  ; equation51 =
       equation51 dataSet
-  ; BC1.BC1CanonicalPhysicalInputs.scale =
+  ; scale =
       scale dataSet
-  ; BC1.BC1CanonicalPhysicalInputs.volume =
+  ; volume =
       volume dataSet
-  ; BC1.BC1CanonicalPhysicalInputs.analyticDemands =
+  ; analyticDemands =
       analyticDemands dataSet
   }
 
@@ -109,9 +109,9 @@ asBC1PhysicalCompositeInputs :
     source localization bc1Canonical →
   Composite.BC1PhysicalCompositeInputs
 asBC1PhysicalCompositeInputs {bc1Canonical = bc1Canonical} dataSet = record
-  { Composite.BC1PhysicalCompositeInputs.canonical =
+  { canonical =
       asBC1CanonicalPhysicalInputs bc1Canonical
-  ; Composite.BC1PhysicalCompositeInputs.compositeFamily =
+  ; compositeFamily =
       compositeFamily dataSet
   }
 
@@ -122,13 +122,13 @@ asPresentCutPhysicalSourceInputs :
     source localization bc1Canonical →
   Present.PresentCutPhysicalSourceInputs History Cell cutoff
 asPresentCutPhysicalSourceInputs dataSet = record
-  { Present.PresentCutPhysicalSourceInputs.a1 =
+  { a1 =
       a1 dataSet
-  ; Present.PresentCutPhysicalSourceInputs.a2 =
+  ; a2 =
       a2 dataSet
-  ; Present.PresentCutPhysicalSourceInputs.bc1 =
+  ; bc1 =
       asBC1PhysicalCompositeInputs dataSet
-  ; Present.PresentCutPhysicalSourceInputs.bc2 =
+  ; bc2 =
       bc2 dataSet
   }
 

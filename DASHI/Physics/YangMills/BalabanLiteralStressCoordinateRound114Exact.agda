@@ -56,13 +56,13 @@ asSameObjectProvenance :
   LiteralStressCoordinate Y group →
   R110.LiteralStressSameObjectProvenance Y group
 asSameObjectProvenance dataSet = record
-  { R110.LiteralStressSameObjectProvenance.sourceCauchy =
+  { sourceCauchy =
       asCMP119Cauchy dataSet (coordinate dataSet)
-  ; R110.LiteralStressSameObjectProvenance.markedCompletion =
+  ; markedCompletion =
       asMarkedCompletion dataSet (coordinate dataSet)
-  ; R110.LiteralStressSameObjectProvenance.cmp119CompletedResponse =
+  ; cmp119CompletedResponse =
       cmp119CompletedResponse dataSet
-  ; R110.LiteralStressSameObjectProvenance.cauchyCompletionIsActualMarkedStressFunctional =
+  ; cauchyCompletionIsActualMarkedStressFunctional =
       cauchyCompletionIsActualMarkedStressFunctional dataSet
   }
 

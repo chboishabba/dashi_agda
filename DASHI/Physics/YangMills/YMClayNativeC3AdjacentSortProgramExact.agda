@@ -119,8 +119,8 @@ constructedNativeC3Certificate :
   constructedNativeC3CanonicalLabelGoal →
   Single.SingleVectorC3PermutationCertificate
 constructedNativeC3Certificate proof = record
-  { Single.program = constructedNativeC3Program
-  ; Single.onCanonicalLabels = proof
+  { program = constructedNativeC3Program
+  ; onCanonicalLabels = proof
   }
 
 constructedNativeC3AllVectors :

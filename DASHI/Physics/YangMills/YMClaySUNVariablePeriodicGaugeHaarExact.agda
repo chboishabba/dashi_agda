@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact where
 
 ------------------------------------------------------------------------
@@ -34,7 +33,7 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as Vari
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as Congruence
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 

@@ -55,17 +55,17 @@ crossDataAt :
 crossDataAt {inputs = inputs} dataSet scale perturbation =
   let density = BetaDensity.densityAt inputs scale
   in record
-    { R116.NormalizedSourceDerivativeCrossData.numerator =
+    { numerator =
         numerator dataSet density
-    ; R116.NormalizedSourceDerivativeCrossData.denominator =
+    ; denominator =
         denominator dataSet density
-    ; R116.NormalizedSourceDerivativeCrossData.numeratorDerivative =
+    ; numeratorDerivative =
         numeratorDerivative dataSet density perturbation
-    ; R116.NormalizedSourceDerivativeCrossData.denominatorDerivative =
+    ; denominatorDerivative =
         denominatorDerivative dataSet density perturbation
-    ; R116.NormalizedSourceDerivativeCrossData.connectedInsertionNumerator =
+    ; connectedInsertionNumerator =
         connectedInsertionNumerator dataSet density perturbation
-    ; R116.NormalizedSourceDerivativeCrossData.crossNumeratorIsConnectedInsertion =
+    ; crossNumeratorIsConnectedInsertion =
         normalizedCrossNumeratorIsConnectedInsertion dataSet density perturbation
     }
 

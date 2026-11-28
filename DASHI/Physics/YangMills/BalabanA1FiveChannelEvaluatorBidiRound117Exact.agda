@@ -90,15 +90,15 @@ asEquation51FiveChannelSameObjectData :
   A1ReducedSameObjectInputs History Cell →
   A1.Equation51FiveChannelSameObjectData History Cell
 asEquation51FiveChannelSameObjectData dataSet = record
-  { A1.Equation51FiveChannelSameObjectData.embedding = embedding dataSet
-  ; A1.Equation51FiveChannelSameObjectData.certificate = certificate dataSet
-  ; A1.Equation51FiveChannelSameObjectData.historyWitness = historyWitness dataSet
-  ; A1.Equation51FiveChannelSameObjectData.dynamics = dynamics dataSet
-  ; A1.Equation51FiveChannelSameObjectData.historyForShell = historyForShell dataSet
-  ; A1.Equation51FiveChannelSameObjectData.jetData = jetData dataSet
-  ; A1.Equation51FiveChannelSameObjectData.actualDerivativeIsEmbeddedNegativeMixedJet =
+  { embedding = embedding dataSet
+  ; certificate = certificate dataSet
+  ; historyWitness = historyWitness dataSet
+  ; dynamics = dynamics dataSet
+  ; historyForShell = historyForShell dataSet
+  ; jetData = jetData dataSet
+  ; actualDerivativeIsEmbeddedNegativeMixedJet =
       actualDerivativeIsEmbeddedNegativeMixedJet dataSet
-  ; A1.Equation51FiveChannelSameObjectData.jetBetaIsCertifiedEvaluator =
+  ; jetBetaIsCertifiedEvaluator =
       jetBetaIsCertifiedEvaluator dataSet
   }
 

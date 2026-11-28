@@ -44,12 +44,12 @@ energy value = half * Curl.vectorDot value value
 orientationEnergies :
   CurvatureSix → Diag.SixPlaquetteOrientationEnergies
 orientationEnergies curvature = record
-  { Diag.SixPlaquetteOrientationEnergies.e01 = energy (f01 curvature)
-  ; Diag.SixPlaquetteOrientationEnergies.e02 = energy (f02 curvature)
-  ; Diag.SixPlaquetteOrientationEnergies.e03 = energy (f03 curvature)
-  ; Diag.SixPlaquetteOrientationEnergies.e12 = energy (f12 curvature)
-  ; Diag.SixPlaquetteOrientationEnergies.e13 = energy (f13 curvature)
-  ; Diag.SixPlaquetteOrientationEnergies.e23 = energy (f23 curvature)
+  { e01 = energy (f01 curvature)
+  ; e02 = energy (f02 curvature)
+  ; e03 = energy (f03 curvature)
+  ; e12 = energy (f12 curvature)
+  ; e13 = energy (f13 curvature)
+  ; e23 = energy (f23 curvature)
   }
 
 k01 k02 k03 k12 k13 k23 : CurvatureSix → ℚ
@@ -124,22 +124,22 @@ asClassicalWilsonTenMetricVariation :
   FiniteCurvatureSixFamily Configuration →
   Ten.ClassicalWilsonTenMetricVariation Configuration
 asClassicalWilsonTenMetricVariation family = record
-  { Ten.ClassicalWilsonTenMetricVariation.diagonalEnergies = record
-      { Diag.FiniteSixPlaquetteEnergyFamily.orientationEnergies =
+  { diagonalEnergies = record
+      { orientationEnergies =
           λ configuration →
             orientationEnergies (curvatureAt family configuration)
       }
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed01 =
+  ; mixed01 =
       λ configuration → mixedDS01 (curvatureAt family configuration)
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed02 =
+  ; mixed02 =
       λ configuration → mixedDS02 (curvatureAt family configuration)
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed03 =
+  ; mixed03 =
       λ configuration → mixedDS03 (curvatureAt family configuration)
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed12 =
+  ; mixed12 =
       λ configuration → mixedDS12 (curvatureAt family configuration)
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed13 =
+  ; mixed13 =
       λ configuration → mixedDS13 (curvatureAt family configuration)
-  ; Ten.ClassicalWilsonTenMetricVariation.mixed23 =
+  ; mixed23 =
       λ configuration → mixedDS23 (curvatureAt family configuration)
   }
 

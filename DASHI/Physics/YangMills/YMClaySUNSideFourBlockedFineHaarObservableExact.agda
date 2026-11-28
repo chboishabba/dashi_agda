@@ -48,10 +48,10 @@ import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNBlock
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as Block
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedWilsonGaugeExact as WilsonBlock
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 module _
@@ -99,12 +99,12 @@ module _
       oneLink bilateral (Codec.decodeOriginalBonds 4) divide
       (λ fine → observable (selectedBlock fine))
   blockedPullbackPointwise observable ext = record
-    { GaugeHaar.PeriodicPointwiseObservable.congruentAt =
+    { congruentAt =
         λ left right same →
           sameAtAllBonds ext
             (selectedBlock left) (selectedBlock right)
             (Block.nativeBlockedPositiveLinksPointwise
-              (Native.sunExactSignedLinkGroup theory)
+              (Density.periodicSUNLinkGroup theory)
               left right same)
     }
 
@@ -224,7 +224,7 @@ module _
   selectedFineBlockOrigin : CoarseSite → FineSite
   selectedFineBlockOrigin =
     Block.fineBlockOrigin {m = 1} {l = 1}
-      (Native.sunExactSignedLinkGroup theory)
+      (Density.periodicSUNLinkGroup theory)
 
   selectedCoarseSiteOfFine : FineSite → CoarseSite
   selectedCoarseSiteOfFine fine =
@@ -271,10 +271,10 @@ module _
       (Torus.pair site axis) =
     cong₂
       (λ start finish →
-        Bond.multiply (Native.sunExactSignedLinkGroup theory)
-          (Bond.multiply (Native.sunExactSignedLinkGroup theory)
+        Bond.multiply (Density.periodicSUNLinkGroup theory)
+          (Bond.multiply (Density.periodicSUNLinkGroup theory)
             start (links (Torus.pair site axis)))
-          (Bond.inverse (Native.sunExactSignedLinkGroup theory) finish))
+          (Bond.inverse (Density.periodicSUNLinkGroup theory) finish))
       (same site)
       (same (Bond.positiveStep site axis))
 

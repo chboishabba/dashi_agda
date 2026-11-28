@@ -88,7 +88,7 @@ module _
   -- not a new assertion that integrating a mark commutes with a made-up RG.
   originalFullTwoMarkedFibreEqualsActualEffectiveDensity :
     ∀ (fineWeight : OriginalFineWeight)
-      (left right : OriginalCoarseTest) s t →
+      (left right : OriginalCoarseTest) (s t : ℝ) →
     actualOriginalFineTwoMarkedNumerator fineWeight left right s t
     ≡ actualEffectiveTwoMarkedNumerator fineWeight left right s t
   originalFullTwoMarkedFibreEqualsActualEffectiveDensity
@@ -105,7 +105,7 @@ module _
   actualFineNormalizedTwoMarkedSource :
     (divide : ℝ → ℝ → ℝ)
     (fineWeight : OriginalFineWeight)
-    (left right : OriginalCoarseTest) s t → ℝ
+    (left right : OriginalCoarseTest) (s t : ℝ) → ℝ
   actualFineNormalizedTwoMarkedSource
       divide fineWeight left right s t =
     divide
@@ -116,7 +116,7 @@ module _
   actualEffectiveNormalizedTwoMarkedSource :
     (divide : ℝ → ℝ → ℝ)
     (fineWeight : OriginalFineWeight)
-    (left right : OriginalCoarseTest) s t → ℝ
+    (left right : OriginalCoarseTest) (s t : ℝ) → ℝ
   actualEffectiveNormalizedTwoMarkedSource
       divide fineWeight left right s t =
     divide
@@ -125,9 +125,9 @@ module _
         fineWeight left right 0ℝ 0ℝ)
 
   originalSamePartitionNormalizedMarkedSource :
-    (divide : ℝ → ℝ → ℝ)
-    ∀ (fineWeight : OriginalFineWeight)
-      (left right : OriginalCoarseTest) s t →
+    ∀ (divide : ℝ → ℝ → ℝ)
+      (fineWeight : OriginalFineWeight)
+      (left right : OriginalCoarseTest) (s t : ℝ) →
     actualFineNormalizedTwoMarkedSource
       divide fineWeight left right s t
     ≡
@@ -145,11 +145,11 @@ module _
   -- whenever the original interacting weight is pointwise positive:
   -- no sign-changing RG "probability" is silently substituted.
   originalSelectedEffectiveMarkedDensityStrictlyPositive :
-    (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
-    (fineWeight : OriginalFineWeight)
-    (fineWeightPositive :
-      ∀ pairs spectators → 0ℝ <ℝ fineWeight pairs spectators) →
-    ∀ blocks →
+    ∀ (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
+      (fineWeight : OriginalFineWeight)
+      (fineWeightPositive :
+        ∀ pairs spectators → 0ℝ <ℝ fineWeight pairs spectators)
+      blocks →
     0ℝ <ℝ
       Fibre.originalSelected64Pair896SpectatorEffectiveDensity
         theory source bilateral linear fineWeight blocks

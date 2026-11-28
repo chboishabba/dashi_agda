@@ -49,26 +49,26 @@ wardFloorAtMostOne =
 asFiniteQuarticResponseConstants :
   WardQuarticResponseConstants → Choice.FiniteQuarticResponseConstants
 asFiniteQuarticResponseConstants dataSet = record
-  { Choice.FiniteQuarticResponseConstants.gaussianFloor = Ward.wardGaussianFloor
-  ; Choice.FiniteQuarticResponseConstants.interactionConstant =
+  { gaussianFloor = Ward.wardGaussianFloor
+  ; interactionConstant =
       interactionConstant dataSet
-  ; Choice.FiniteQuarticResponseConstants.localDerivative =
+  ; localDerivative =
       localDerivative dataSet
-  ; Choice.FiniteQuarticResponseConstants.responseCoefficient =
+  ; responseCoefficient =
       responseCoefficient dataSet
-  ; Choice.FiniteQuarticResponseConstants.sourceCoefficient =
+  ; sourceCoefficient =
       sourceCoefficient dataSet
-  ; Choice.FiniteQuarticResponseConstants.gaussianFloorPositive =
+  ; gaussianFloorPositive =
       Ward.wardGaussianFloorPositive
-  ; Choice.FiniteQuarticResponseConstants.gaussianFloorAtMostOne =
+  ; gaussianFloorAtMostOne =
       wardFloorAtMostOne
-  ; Choice.FiniteQuarticResponseConstants.interactionConstantNonnegative =
+  ; interactionConstantNonnegative =
       interactionConstantNonnegative dataSet
-  ; Choice.FiniteQuarticResponseConstants.localDerivativeNonnegative =
+  ; localDerivativeNonnegative =
       localDerivativeNonnegative dataSet
-  ; Choice.FiniteQuarticResponseConstants.responseCoefficientNonnegative =
+  ; responseCoefficientNonnegative =
       responseCoefficientNonnegative dataSet
-  ; Choice.FiniteQuarticResponseConstants.sourceCoefficientNonnegative =
+  ; sourceCoefficientNonnegative =
       sourceCoefficientNonnegative dataSet
   }
 

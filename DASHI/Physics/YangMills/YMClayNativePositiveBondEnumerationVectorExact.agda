@@ -261,7 +261,7 @@ encodeField :
     (finite : Torus.FiniteEnumeration A) →
   (A → B) →
   Vec.Vec B (listLength (Torus.elements finite))
-encodeField finite field = listValues (Torus.elements finite) field
+encodeField finite coord = listValues (Torus.elements finite) coord
 
 decodeField :
   ∀ {A B : Set}
@@ -274,11 +274,11 @@ decodeField finite vector label =
 decodeEncodeAt :
   ∀ {A B : Set}
     (finite : Torus.FiniteEnumeration A)
-    (field : A → B) label →
-  decodeField finite (encodeField finite field) label
-  ≡ field label
-decodeEncodeAt finite field label =
-  memberValueOfListValues field (Torus.complete finite label)
+    (coord : A → B) label →
+  decodeField finite (encodeField finite coord) label
+  ≡ coord label
+decodeEncodeAt finite coord label =
+  memberValueOfListValues coord (Torus.complete finite label)
 
 encodeDecodeExactly :
   ∀ {A B : Set}
@@ -320,8 +320,8 @@ decodeOriginalBonds :
 decodeOriginalBonds L = decodeField (originalPositiveBondFinite L)
 
 originalBondsDecodeEncodeAt :
-  ∀ {B : Set} (L : Nat) (field : Torus.BondField L B) bond →
-  decodeOriginalBonds L (encodeOriginalBonds L field) bond ≡ field bond
+  ∀ {B : Set} (L : Nat) (coord : Torus.BondField L B) bond →
+  decodeOriginalBonds L (encodeOriginalBonds L coord) bond ≡ coord bond
 originalBondsDecodeEncodeAt L =
   decodeEncodeAt (originalPositiveBondFinite L)
 

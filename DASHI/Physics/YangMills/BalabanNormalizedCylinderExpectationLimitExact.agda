@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact where
 
 ------------------------------------------------------------------------
@@ -285,31 +284,31 @@ asScalarCylinderExpectationLimitData :
     Observable ℝ algebra
 asScalarCylinderExpectationLimitData
     {algebra = algebra} dataSet = record
-  { Cylinder.ScalarCylinderExpectationLimitData.zeroObservable =
+  { zeroObservable =
       zeroObservable dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.oneObservable =
+  ; oneObservable =
       oneObservable dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.addObservable =
+  ; addObservable =
       addObservable dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.scaleObservable =
+  ; scaleObservable =
       scaleObservable dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.Nonnegative =
+  ; Nonnegative =
       Nonnegative dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteExpectation =
+  ; finiteExpectation =
       finiteNormalized dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.limitExpectation =
+  ; limitExpectation =
       continuumNormalized dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteZero =
+  ; finiteZero =
       finiteNormalizedZero dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteOne =
+  ; finiteOne =
       finiteNormalizedOne dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteAdd =
+  ; finiteAdd =
       finiteNormalizedAdd dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteScale =
+  ; finiteScale =
       finiteNormalizedScale dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.finitePositive =
+  ; finitePositive =
       finiteNormalizedPositive dataSet
-  ; Cylinder.ScalarCylinderExpectationLimitData.selectedConverges =
+  ; selectedConverges =
       normalizedConverges dataSet
   }
 

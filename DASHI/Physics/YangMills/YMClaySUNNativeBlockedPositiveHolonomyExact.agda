@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact where
 --
 -- This module chooses EXACTLY:
 --   - SUN.CertifiedSUNMatrixTheory N Matrix Complex and its real link;
---   - Native.sunExactSignedLinkGroup theory (selected original group);
+--   - Density.periodicSUNLinkGroup theory (selected original group);
 --   - Variable.SUNPeriodicLinks theory n and SUNPeriodicGauge theory n;
 --   - Variable.periodicSUNGaugeTransform on the original fine/coarse
 --     Wilson links, and the original selected signed path realization.
@@ -31,7 +31,7 @@ open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as Block
 
@@ -44,7 +44,7 @@ module _
   Link = SUN.SUNMatrixElement theory
 
   selectedGroup : Bond.ExactLinkGroup Link
-  selectedGroup = Native.sunExactSignedLinkGroup theory
+  selectedGroup = Density.periodicSUNLinkGroup theory
 
   FineTail : Nat
   FineTail = l + m * suc l
@@ -63,11 +63,11 @@ module _
 
   nativeSUNBlockLinks : FineLinks → CoarseLinks
   nativeSUNBlockLinks =
-    Block.nativeBlockedPositiveLinks selectedGroup
+    Block.nativeBlockedPositiveLinks {m = m} {l = l} selectedGroup
 
   nativeSUNBlockGauge : FineGauge → CoarseGauge
   nativeSUNBlockGauge =
-    Block.nativeBlockedCoarseGauge selectedGroup
+    Block.nativeBlockedCoarseGauge {m = m} {l = l} selectedGroup
 
   nativeSUNBlockAgreesSelectedPath :
     ∀ (fine : FineLinks) (gamma : FineGauge) site axis →
@@ -75,12 +75,12 @@ module _
     ≡
     Bond.pathHolonomy
       (Variable.periodicSUNRealization theory FineTail fine gamma)
-      (Block.fineBlockOrigin selectedGroup site)
-      (Block.positiveBlockDirections selectedGroup axis)
+      (Block.fineBlockOrigin {m = m} {l = l} selectedGroup site)
+      (Block.positiveBlockDirections {m = m} {l = l} selectedGroup axis)
   nativeSUNBlockAgreesSelectedPath fine gamma site axis =
-    Block.positiveHolonomyIsSelectedPath selectedGroup
+    Block.positiveHolonomyIsSelectedPath selectedGroup {n = FineTail}
       (Variable.periodicSUNRealization theory FineTail fine gamma)
-      (Block.fineBlockOrigin selectedGroup site) axis (suc l)
+      (Block.fineBlockOrigin {m = m} {l = l} selectedGroup site) axis (suc l)
 
   nativeSUNBlockGaugeLawAtFineEndpoint :
     ∀ (fine : FineLinks) (gamma : FineGauge) site axis →
@@ -96,18 +96,18 @@ module _
       (Bond.inverse selectedGroup
         (gamma
           (Block.positiveSteps
-            (Block.fineBlockOrigin selectedGroup site)
+            (Block.fineBlockOrigin {m = m} {l = l} selectedGroup site)
             axis (suc l))))
   nativeSUNBlockGaugeLawAtFineEndpoint fine gamma site axis =
     Block.nativeBlockedGaugeLawAtFineEndpoint
-      selectedGroup fine gamma site axis
+      {m = m} {l = l} selectedGroup fine gamma site axis
 
   -- The remaining single finite-arithmetic original-source obligation:
   -- repeated positive cyclic successor on the selected fine block origin
   -- equals the selected next coarse block origin (periodic wrap included).
   NativeSUNBlockEndpoint : Set
   NativeSUNBlockEndpoint =
-    Block.BlockEndpointCompatibility selectedGroup
+    Block.BlockEndpointCompatibility {m = m} {l = l} selectedGroup
 
   nativeSUNBlockGaugeLawOnCoarse :
     NativeSUNBlockEndpoint →
@@ -121,5 +121,5 @@ module _
       (nativeSUNBlockLinks fine)
       (nativeSUNBlockGauge gamma) bond
   nativeSUNBlockGaugeLawOnCoarse endpoint fine gamma bond =
-    Block.nativeBlockedGaugeLawOnCoarse selectedGroup
+    Block.nativeBlockedGaugeLawOnCoarse {m = m} {l = l} selectedGroup
       endpoint fine gamma bond

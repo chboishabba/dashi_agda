@@ -35,12 +35,12 @@ module DASHI.Physics.YangMills.YMClayNativeSideFourPairSpectatorSortProgramExact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayNativeSideFourPairDistinctCertificateExact as Pairs
 import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as C3
@@ -73,7 +73,7 @@ module _
   selectedOriginalFineBonds : List Bond
   selectedOriginalFineBonds =
     Pairs.selectedFinePairLabels
-      (Native.sunExactSignedLinkGroup theory)
+      (Density.periodicSUNLinkGroup theory)
       Pairs.originalCoarseBondLabels
 
   -- The F16 predicate is a Boolean computation over the ORIGINAL

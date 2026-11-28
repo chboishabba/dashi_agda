@@ -69,22 +69,22 @@ betaDrivenCompleteDensityFlow :
   (inputs : BetaDrivenCompleteDensityInputs {trajectory} {split}) →
   Source.Balaban1989EffectiveDensityFlow ℚ (Density inputs)
 betaDrivenCompleteDensityFlow inputs = record
-  { Source.Balaban1989EffectiveDensityFlow.couplingAt =
+  { couplingAt =
       History.couplingAt (betaHistory inputs)
-  ; Source.Balaban1989EffectiveDensityFlow.densityAt = densityAt inputs
-  ; Source.Balaban1989EffectiveDensityFlow.Positive = Positive
-  ; Source.Balaban1989EffectiveDensityFlow.LessEqual = _≤_
-  ; Source.Balaban1989EffectiveDensityFlow.gamma =
+  ; densityAt = densityAt inputs
+  ; Positive = Positive
+  ; LessEqual = _≤_
+  ; gamma =
       History.gamma (betaHistory inputs)
-  ; Source.Balaban1989EffectiveDensityFlow.InSection2DensityClass =
+  ; InSection2DensityClass =
       InSection2DensityClass inputs
-  ; Source.Balaban1989EffectiveDensityFlow.Section2ConditionsAndBounds =
+  ; Section2ConditionsAndBounds =
       Section2ConditionsAndBounds inputs
-  ; Source.Balaban1989EffectiveDensityFlow.allEffectiveCouplingsSmall =
+  ; allEffectiveCouplingsSmall =
       λ scale _ →
         History.smallCouplingAtEveryActiveScale
           (betaHistory inputs) scale (sourceScaleActive inputs scale)
-  ; Source.Balaban1989EffectiveDensityFlow.allEffectiveCouplingsPositive =
+  ; allEffectiveCouplingsPositive =
       History.couplingPositive (betaHistory inputs)
   }
 
@@ -190,21 +190,21 @@ module _
   finiteBetaDrivenCompleteDensityFlow :
     Source.Balaban1989EffectiveDensityFlow ℚ D
   finiteBetaDrivenCompleteDensityFlow = record
-    { Source.Balaban1989EffectiveDensityFlow.couplingAt =
+    { couplingAt =
         λ k → History.couplingAt h (selectedFiniteScale k)
-    ; Source.Balaban1989EffectiveDensityFlow.densityAt =
+    ; densityAt =
         λ k → density (selectedFiniteScale k)
-    ; Source.Balaban1989EffectiveDensityFlow.Positive = Positive
-    ; Source.Balaban1989EffectiveDensityFlow.LessEqual = _≤_
-    ; Source.Balaban1989EffectiveDensityFlow.gamma = History.gamma h
-    ; Source.Balaban1989EffectiveDensityFlow.InSection2DensityClass =
+    ; Positive = Positive
+    ; LessEqual = _≤_
+    ; gamma = History.gamma h
+    ; InSection2DensityClass =
         λ k → form (selectedFiniteScale k)
-    ; Source.Balaban1989EffectiveDensityFlow.Section2ConditionsAndBounds =
+    ; Section2ConditionsAndBounds =
         λ k → bounds (selectedFiniteScale k)
-    ; Source.Balaban1989EffectiveDensityFlow.allEffectiveCouplingsSmall =
+    ; allEffectiveCouplingsSmall =
         λ k _ → History.smallCouplingAtEveryActiveScale h
           (selectedFiniteScale k) (selectedFiniteScaleActive k)
-    ; Source.Balaban1989EffectiveDensityFlow.allEffectiveCouplingsPositive =
+    ; allEffectiveCouplingsPositive =
         λ k → History.couplingPositive h (selectedFiniteScale k)
     }
 

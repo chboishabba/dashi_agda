@@ -83,13 +83,13 @@ asRound103SameDensityCalculus :
   CompactGroupHeatDoobOnCarrier carrier →
   Heat.HeatDoobSameDensityCalculus carrier
 asRound103SameDensityCalculus dataSet = record
-  { Heat.HeatDoobSameDensityCalculus.Time = Time dataSet
-  ; Heat.HeatDoobSameDensityCalculus.firstVariation = firstVariation dataSet
-  ; Heat.HeatDoobSameDensityCalculus.heatTiltExpectation = heatTiltExpectation dataSet
-  ; Heat.HeatDoobSameDensityCalculus.heatTiltCovariance = heatTiltCovariance dataSet
-  ; Heat.HeatDoobSameDensityCalculus.covarianceDefinition = covarianceDefinition dataSet
-  ; Heat.HeatDoobSameDensityCalculus.heatDoobHessian = heatDoobHessian dataSet
-  ; Heat.HeatDoobSameDensityCalculus.logHeatHessianIdentity =
+  { Time = Time dataSet
+  ; firstVariation = firstVariation dataSet
+  ; heatTiltExpectation = heatTiltExpectation dataSet
+  ; heatTiltCovariance = heatTiltCovariance dataSet
+  ; covarianceDefinition = covarianceDefinition dataSet
+  ; heatDoobHessian = heatDoobHessian dataSet
+  ; logHeatHessianIdentity =
       compactGroupLogHeatHessianIdentity dataSet
   }
 

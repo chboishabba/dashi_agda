@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact where
 
 ------------------------------------------------------------------------
@@ -22,15 +21,15 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 zeroObservable :
-  ∀ {Configuration} → Configuration → ℝ
+  ∀ {Configuration : Set} → Configuration → ℝ
 zeroObservable _ = 0ℝ
 
 oneObservable :
-  ∀ {Configuration} → Configuration → ℝ
+  ∀ {Configuration : Set} → Configuration → ℝ
 oneObservable _ = 1ℝ
 
 addObservable :
-  ∀ {Configuration} →
+  ∀ {Configuration : Set} →
   (Configuration → ℝ) →
   (Configuration → ℝ) →
   Configuration → ℝ
@@ -38,7 +37,7 @@ addObservable left right configuration =
   left configuration +ℝ right configuration
 
 scaleObservable :
-  ∀ {Configuration} →
+  ∀ {Configuration : Set} →
   ℝ →
   (Configuration → ℝ) →
   Configuration → ℝ
@@ -46,7 +45,7 @@ scaleObservable scalar observable configuration =
   scalar *ℝ observable configuration
 
 PointwiseNonnegative :
-  ∀ {Configuration} →
+  ∀ {Configuration : Set} →
   (Configuration → ℝ) → Set
 PointwiseNonnegative observable =
   ∀ configuration → 0ℝ ≤ℝ observable configuration
@@ -97,7 +96,7 @@ record PhysicalFiniteMeasureIntegrationLaws
 open PhysicalFiniteMeasureIntegrationLaws public
 
 unnormalizedNumerator :
-  ∀ {Configuration} →
+  ∀ {Configuration : Set} →
   Physical.PhysicalFiniteYMMeasure Configuration ℝ →
   (Configuration → ℝ) → ℝ
 unnormalizedNumerator measure observable =
@@ -155,10 +154,11 @@ densityTimesScale :
     configuration
 densityTimesScale measure scalar observable configuration =
   trans
-    (*-assoc
-      (Physical.density measure configuration)
-      scalar
-      (observable configuration))
+    (sym
+      (*-assoc
+        (Physical.density measure configuration)
+        scalar
+        (observable configuration)))
     (trans
       (cong
         (λ coefficient →
@@ -166,11 +166,10 @@ densityTimesScale measure scalar observable configuration =
         (*-comm
           (Physical.density measure configuration)
           scalar))
-      (sym
-        (*-assoc
-          scalar
-          (Physical.density measure configuration)
-          (observable configuration))))
+      (*-assoc
+        scalar
+        (Physical.density measure configuration)
+        (observable configuration)))
 
 densityTimesNonnegativeObservable :
   ∀ {Configuration}
@@ -182,19 +181,23 @@ densityTimesNonnegativeObservable :
     (λ configuration →
       Physical.density measure configuration
       *ℝ observable configuration)
-densityTimesNonnegativeObservable laws observable observableNN configuration =
+densityTimesNonnegativeObservable {measure = measure} laws observable observableNN configuration =
   subst
     (λ lower →
       lower
       ≤ℝ
-      Physical.density _ configuration
+      Physical.density measure configuration
         *ℝ observable configuration)
     (mulZeroˡ 0ℝ)
     (mulMonotoneNonnegative
+      {a = 0ℝ}
+      {b = Physical.density measure configuration}
+      {c = 0ℝ}
+      {d = observable configuration}
+      ≤ℝ-refl
       (densityNonnegative laws configuration)
       ≤ℝ-refl
-      (observableNN configuration)
-      ≤ℝ-refl)
+      (observableNN configuration))
 
 numeratorZero :
   ∀ {Configuration}

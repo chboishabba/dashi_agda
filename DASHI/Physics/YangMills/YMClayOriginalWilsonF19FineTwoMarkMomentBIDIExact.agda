@@ -25,8 +25,8 @@ open import Relation.Binary.PropositionalEquality using (trans; cong₂)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral

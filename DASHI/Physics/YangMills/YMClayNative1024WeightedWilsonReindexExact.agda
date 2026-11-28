@@ -19,9 +19,9 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Wilson
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Wilson
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as Native
 import DASHI.Physics.YangMills.YMClayNative1024ClosedReindexHaarConsequencesExact as Reindex

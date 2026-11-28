@@ -59,44 +59,44 @@ open CombinedRowAGateData public
 oneGateData :
   ∀ {cutoff} → CombinedRowAGateData cutoff → One.CombinedRowASmallCouplingGate
 oneGateData dataSet = record
-  { One.CombinedRowASmallCouplingGate.gaussianFloor = gaussianFloor dataSet
-  ; One.CombinedRowASmallCouplingGate.interactionConstant = interactionConstant dataSet
-  ; One.CombinedRowASmallCouplingGate.derivativeBound = derivativeBound dataSet
-  ; One.CombinedRowASmallCouplingGate.couplingCap = couplingCap dataSet
-  ; One.CombinedRowASmallCouplingGate.tubeWidth = tubeWidth dataSet
-  ; One.CombinedRowASmallCouplingGate.interactionConstantNonnegative =
+  { gaussianFloor = gaussianFloor dataSet
+  ; interactionConstant = interactionConstant dataSet
+  ; derivativeBound = derivativeBound dataSet
+  ; couplingCap = couplingCap dataSet
+  ; tubeWidth = tubeWidth dataSet
+  ; interactionConstantNonnegative =
       interactionConstantNN dataSet
-  ; One.CombinedRowASmallCouplingGate.derivativeBoundNonnegative =
+  ; derivativeBoundNonnegative =
       derivativeBoundNN dataSet
-  ; One.CombinedRowASmallCouplingGate.couplingCapNonnegative = couplingCapNN dataSet
-  ; One.CombinedRowASmallCouplingGate.tubeWidthNonnegative = tubeWidthNN dataSet
-  ; One.CombinedRowASmallCouplingGate.tubeWidthBelowCouplingCap =
+  ; couplingCapNonnegative = couplingCapNN dataSet
+  ; tubeWidthNonnegative = tubeWidthNN dataSet
+  ; tubeWidthBelowCouplingCap =
       tubeWidthBelowCouplingCap dataSet
-  ; One.CombinedRowASmallCouplingGate.combinedSmallness = combinedSmallness dataSet
+  ; combinedSmallness = combinedSmallness dataSet
   }
 
 asMasterGateData :
   ∀ {cutoff} → CombinedRowAGateData cutoff → Gate.RowAGateData cutoff
 asMasterGateData dataSet = record
-  { Gate.RowAGateData.gaussianFloor = gaussianFloor dataSet
-  ; Gate.RowAGateData.interactionConstant = interactionConstant dataSet
-  ; Gate.RowAGateData.couplingCap = couplingCap dataSet
-  ; Gate.RowAGateData.tubeWidth = tubeWidth dataSet
-  ; Gate.RowAGateData.coupling = coupling dataSet
-  ; Gate.RowAGateData.betaGauss = betaGauss dataSet
-  ; Gate.RowAGateData.betaInteraction = betaInteraction dataSet
-  ; Gate.RowAGateData.inverseSquare = inverseSquare dataSet
-  ; Gate.RowAGateData.interactionConstantNN = interactionConstantNN dataSet
-  ; Gate.RowAGateData.couplingCapNN = couplingCapNN dataSet
-  ; Gate.RowAGateData.couplingPositive = couplingPositive dataSet
-  ; Gate.RowAGateData.couplingBelowCap = couplingBelowCap dataSet
-  ; Gate.RowAGateData.gaussianLower = gaussianLower dataSet
-  ; Gate.RowAGateData.interactionLower = interactionLower dataSet
-  ; Gate.RowAGateData.inverseSquareRelation = inverseSquareRelation dataSet
-  ; Gate.RowAGateData.couplingMonotone = couplingMonotone dataSet
-  ; Gate.RowAGateData.betaIsInverseSquareStep = betaIsInverseSquareStep dataSet
-  ; Gate.RowAGateData.couplingTube = couplingTube dataSet
-  ; Gate.RowAGateData.signGate =
+  { gaussianFloor = gaussianFloor dataSet
+  ; interactionConstant = interactionConstant dataSet
+  ; couplingCap = couplingCap dataSet
+  ; tubeWidth = tubeWidth dataSet
+  ; coupling = coupling dataSet
+  ; betaGauss = betaGauss dataSet
+  ; betaInteraction = betaInteraction dataSet
+  ; inverseSquare = inverseSquare dataSet
+  ; interactionConstantNN = interactionConstantNN dataSet
+  ; couplingCapNN = couplingCapNN dataSet
+  ; couplingPositive = couplingPositive dataSet
+  ; couplingBelowCap = couplingBelowCap dataSet
+  ; gaussianLower = gaussianLower dataSet
+  ; interactionLower = interactionLower dataSet
+  ; inverseSquareRelation = inverseSquareRelation dataSet
+  ; couplingMonotone = couplingMonotone dataSet
+  ; betaIsInverseSquareStep = betaIsInverseSquareStep dataSet
+  ; couplingTube = couplingTube dataSet
+  ; signGate =
       One.combinedSmallnessGivesSignGate (oneGateData dataSet)
   }
 

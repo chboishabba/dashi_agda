@@ -55,12 +55,12 @@ bc1CanonicalCarrier :
   BC1CanonicalPhysicalInputs →
   Carrier.LiteralDifferentiatedEffectiveDensityCarrier
 bc1CanonicalCarrier dataSet = record
-  { Carrier.LiteralDifferentiatedEffectiveDensityCarrier.source = source dataSet
-  ; Carrier.LiteralDifferentiatedEffectiveDensityCarrier.calculus = calculus dataSet
-  ; Carrier.LiteralDifferentiatedEffectiveDensityCarrier.equation51 = equation51 dataSet
-  ; Carrier.LiteralDifferentiatedEffectiveDensityCarrier.scale = scale dataSet
-  ; Carrier.LiteralDifferentiatedEffectiveDensityCarrier.volume = volume dataSet
-  ; Carrier.LiteralDifferentiatedEffectiveDensityCarrier.radiusData =
+  { source = source dataSet
+  ; calculus = calculus dataSet
+  ; equation51 = equation51 dataSet
+  ; scale = scale dataSet
+  ; volume = volume dataSet
+  ; radiusData =
       Radius114.canonicalCMP116CommonDomain (analyticDemands dataSet)
   }
 

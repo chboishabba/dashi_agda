@@ -65,16 +65,16 @@ inverseOfProduct H x y =
 toExactSignedBondGroup :
   ∀ {G : Set} → Core.Group G → Bond.ExactLinkGroup G
 toExactSignedBondGroup H = record
-  { Bond.ExactLinkGroup.identity = Core.identity H
-  ; Bond.ExactLinkGroup.multiply = Core.multiply H
-  ; Bond.ExactLinkGroup.inverse = Core.inverse H
-  ; Bond.ExactLinkGroup.multiplyAssociative = Core.multiplyAssociative H
-  ; Bond.ExactLinkGroup.identityLeft = Core.identityLeft H
-  ; Bond.ExactLinkGroup.identityRight = Core.identityRight H
-  ; Bond.ExactLinkGroup.inverseLeft = Core.inverseLeft H
-  ; Bond.ExactLinkGroup.inverseRight = Core.inverseRight H
-  ; Bond.ExactLinkGroup.inverseProduct = inverseOfProduct H
-  ; Bond.ExactLinkGroup.inverseInverse = Derived.inverseInvolutive H
+  { identity = Core.identity H
+  ; multiply = Core.multiply H
+  ; inverse = Core.inverse H
+  ; multiplyAssociative = Core.multiplyAssociative H
+  ; identityLeft = Core.identityLeft H
+  ; identityRight = Core.identityRight H
+  ; inverseLeft = Core.inverseLeft H
+  ; inverseRight = Core.inverseRight H
+  ; inverseProduct = inverseOfProduct H
+  ; inverseInverse = Derived.inverseInvolutive H
   }
 
 -- The full native SU(N) matrix carrier (provided the certified matrix theory

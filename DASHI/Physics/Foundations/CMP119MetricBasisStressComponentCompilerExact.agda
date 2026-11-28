@@ -73,7 +73,7 @@ cmp119MetricBasisEvaluator :
   Cut.CMP119RationalStressComponentEvaluator
     (StressRep.StressTensor representation)
 cmp119MetricBasisEvaluator basis readout = record
-  { Cut.CMP119RationalStressComponentEvaluator.component =
+  { component =
       cmp119MetricBasisComponent basis readout
   }
 

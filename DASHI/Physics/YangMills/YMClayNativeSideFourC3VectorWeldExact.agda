@@ -27,9 +27,7 @@ import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
-import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Hodge
-import DASHI.Physics.Foundations.CMP119FlatSide4SpatialC3FieldCovarianceExact as C3
-import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
+import DASHI.Physics.YangMills.YMClaySide4C3CoreExact as Side4
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as Reindex
 
@@ -38,45 +36,47 @@ Bond = Torus.PositiveBond Torus.four
 
 forwardBond : Bond → Bond
 forwardBond (Torus.pair site axis) =
-  Torus.pair (C3.spatialC3Site site) (C3.spatialC3Axis axis)
+  Torus.pair (Side4.spatialC3Site site) (Side4.spatialC3Axis axis)
 
 backwardBond : Bond → Bond
 backwardBond (Torus.pair site axis) =
-  Torus.pair (C3.inverseSpatialC3Site site) (C3.inverseSpatialC3Axis axis)
+  Torus.pair (Side4.inverseSpatialC3Site site) (Side4.inverseSpatialC3Axis axis)
 
 axisForwardAfterBackward :
-  ∀ axis → C3.spatialC3Axis (C3.inverseSpatialC3Axis axis) ≡ axis
-axisForwardAfterBackward Hodge.axis0 = refl
-axisForwardAfterBackward Hodge.axis1 = refl
-axisForwardAfterBackward Hodge.axis2 = refl
-axisForwardAfterBackward Hodge.axis3 = refl
+  ∀ axis → Side4.spatialC3Axis (Side4.inverseSpatialC3Axis axis) ≡ axis
+axisForwardAfterBackward Torus.zeroᵢ = refl
+axisForwardAfterBackward (Torus.sucᵢ Torus.zeroᵢ) = refl
+axisForwardAfterBackward (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) = refl
+axisForwardAfterBackward
+  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
 
 forwardAfterBackward : ∀ bond → forwardBond (backwardBond bond) ≡ bond
 forwardAfterBackward (Torus.pair site axis) =
   cong₂ Torus.pair
-    (C3.spatialC3SiteAfterInverse site)
+    (Side4.spatialC3SiteAfterInverse site)
     (axisForwardAfterBackward axis)
 
 backwardAfterForward : ∀ bond → backwardBond (forwardBond bond) ≡ bond
 backwardAfterForward (Torus.pair site axis) =
   cong₂ Torus.pair
-    (C3.inverseSpatialC3SiteAfter site)
-    (C3.inverseSpatialC3AxisAfter axis)
+    (Side4.inverseSpatialC3SiteAfter site)
+    (Side4.inverseSpatialC3AxisAfter axis)
 
 siteOrderThree :
   ∀ site →
-    C3.spatialC3Site (C3.spatialC3Site (C3.spatialC3Site site))
+    Side4.spatialC3Site (Side4.spatialC3Site (Side4.spatialC3Site site))
     ≡ site
 siteOrderThree (Torus.pair (Torus.pair x0 x1) (Torus.pair x2 x3)) = refl
 
 axisOrderThree :
   ∀ axis →
-    C3.spatialC3Axis (C3.spatialC3Axis (C3.spatialC3Axis axis))
+    Side4.spatialC3Axis (Side4.spatialC3Axis (Side4.spatialC3Axis axis))
     ≡ axis
-axisOrderThree Hodge.axis0 = refl
-axisOrderThree Hodge.axis1 = refl
-axisOrderThree Hodge.axis2 = refl
-axisOrderThree Hodge.axis3 = refl
+axisOrderThree Torus.zeroᵢ = refl
+axisOrderThree (Torus.sucᵢ Torus.zeroᵢ) = refl
+axisOrderThree (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) = refl
+axisOrderThree
+  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
 
 bondOrderThree :
   ∀ bond → forwardBond (forwardBond (forwardBond bond)) ≡ bond
@@ -101,7 +101,7 @@ module _ {Value : Set} where
     ∀ vector bond →
     Codec.decodeOriginalBonds Torus.four (forwardVector vector) bond
     ≡
-    Weld.nativeForwardC3Bonds
+    Side4.nativeForwardC3Bonds
       (Codec.decodeOriginalBonds Torus.four vector) bond
   nativeForwardIsVectorAt vector (Torus.pair site axis) =
     Reindex.reindexAt Torus.four forwardBond vector
@@ -110,12 +110,12 @@ module _ {Value : Set} where
   nativeForwardEncodesExactly :
     ∀ vector →
     Codec.encodeOriginalBonds Torus.four
-      (Weld.nativeForwardC3Bonds
+      (Side4.nativeForwardC3Bonds
         (Codec.decodeOriginalBonds Torus.four vector))
     ≡ forwardVector vector
   nativeForwardEncodesExactly vector =
     Codec.originalBondsEncodePointwise Torus.four
-      (Weld.nativeForwardC3Bonds
+      (Side4.nativeForwardC3Bonds
         (Codec.decodeOriginalBonds Torus.four vector))
       (λ bond →
         Codec.decodeOriginalBonds Torus.four vector (forwardBond bond))

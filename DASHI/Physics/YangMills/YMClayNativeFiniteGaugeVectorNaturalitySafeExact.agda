@@ -82,29 +82,29 @@ module _
   -- The one-link bilateral Haar action uses right association.
   originalGauge :
     Gauge → Torus.BondField L Link → Torus.BondField L Link
-  originalGauge gamma field bond =
+  originalGauge gamma bonds bond =
     Core.multiply group
-      (Core.multiply group (leftField gamma bond) (field bond))
+      (Core.multiply group (leftField gamma bond) (bonds bond))
       (rightField gamma bond)
 
   vectorGaugeListNaturality :
     ∀ {A : Set}
       (labels : List.List A)
-      (left right field : A → Link) →
+      (left right bonds : A → Link) →
     vectorGauge
       (Codec.listValues labels left)
       (Codec.listValues labels right)
-      (Codec.listValues labels field)
+      (Codec.listValues labels bonds)
     ≡
     Codec.listValues labels
       (λ label →
-        singleGauge (left label) (right label) (field label))
-  vectorGaugeListNaturality List.[] left right field = refl
-  vectorGaugeListNaturality (List._∷_ label labels) left right field =
+        singleGauge (left label) (right label) (bonds label))
+  vectorGaugeListNaturality List.[] left right bonds = refl
+  vectorGaugeListNaturality (List._∷_ label labels) left right bonds =
     cong
       (Vec._∷_ (singleGauge
-        (left label) (right label) (field label)))
-      (vectorGaugeListNaturality labels left right field)
+        (left label) (right label) (bonds label)))
+      (vectorGaugeListNaturality labels left right bonds)
 
   vectorGaugeEncoded :
     ∀ gamma vector →

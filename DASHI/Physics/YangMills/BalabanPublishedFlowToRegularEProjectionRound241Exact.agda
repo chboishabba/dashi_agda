@@ -30,13 +30,13 @@ asRegularESourceProjection :
     {trajectory = trajectory} {split = split} inputs →
   R221.CMP119RegularESourceProjection inputs
 asRegularESourceProjection source = record
-  { R221.CMP119RegularESourceProjection.RegularTerm = R218.RegularTerm source
-  ; R221.CMP119RegularESourceProjection.regularEOfDensity =
+  { RegularTerm = R218.RegularTerm source
+  ; regularEOfDensity =
       λ scale _ → CMP119.regularE (R218.completeDensityAt source scale)
-  ; R221.CMP119RegularESourceProjection.IsCMP119Section2RegularE =
+  ; IsCMP119Section2RegularE =
       λ scale _ regular →
         regular ≡ CMP119.regularE (R218.completeDensityAt source scale)
-  ; R221.CMP119RegularESourceProjection.selectedRegularEIsSourceCoordinate =
+  ; selectedRegularEIsSourceCoordinate =
       λ _ → refl
   }
 

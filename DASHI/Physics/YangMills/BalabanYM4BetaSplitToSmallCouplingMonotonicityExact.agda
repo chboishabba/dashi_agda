@@ -64,7 +64,7 @@ betaSplitAsNonnegativeTrajectory :
   Split.FiniteLatticeBetaSplit trajectory →
   Step.NonnegativeBetaTrajectory trajectory
 betaSplitAsNonnegativeTrajectory split = record
-  { Step.NonnegativeBetaTrajectory.betaNonnegative =
+  { betaNonnegative =
       betaSplitGivesNonnegativeBeta split
   }
 

@@ -34,8 +34,8 @@ spatialXYZAxisImage Signed.axis3 = Signed.axis1
 
 spatialXYZAxisAction : Signed.SignedAxisAction
 spatialXYZAxisAction = record
-  { Signed.SignedAxisAction.axisImage = spatialXYZAxisImage
-  ; Signed.SignedAxisAction.axisSign = λ _ → Signed.plus
+  { axisImage = spatialXYZAxisImage
+  ; axisSign = λ _ → Signed.plus
   }
 
 -- The direct action is definitionally the composition of the two existing B4
@@ -70,8 +70,8 @@ spatialXYZComponentCubed K.component33 = refl
 
 r144SpatialTensorC3Action : C3.OrderThreeAction K.SymmetricTensorComponent4
 r144SpatialTensorC3Action = record
-  { C3.OrderThreeAction.rotate = spatialXYZComponent
-  ; C3.OrderThreeAction.rotateCubed = spatialXYZComponentCubed
+  { rotate = spatialXYZComponent
+  ; rotateCubed = spatialXYZComponentCubed
   }
 
 -- Sanity checks: time is fixed and the spatial stress slots rotate cyclically.

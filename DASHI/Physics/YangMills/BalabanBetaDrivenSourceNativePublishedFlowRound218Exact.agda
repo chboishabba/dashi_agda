@@ -71,25 +71,25 @@ asSourceNativePublishedFlow :
     {trajectory = trajectory} {split = split} inputs →
   Entry.SourceNativePublishedFlow
 asSourceNativePublishedFlow {inputs = inputs} dataSet = record
-  { Entry.SourceNativePublishedFlow.Coupling = ℚ
-  ; Entry.SourceNativePublishedFlow.Density = Beta.Density inputs
-  ; Entry.SourceNativePublishedFlow.Operation = Operation dataSet
-  ; Entry.SourceNativePublishedFlow.Action = Action dataSet
-  ; Entry.SourceNativePublishedFlow.Field = Field dataSet
-  ; Entry.SourceNativePublishedFlow.RegularTerm = RegularTerm dataSet
-  ; Entry.SourceNativePublishedFlow.RTerm = RTerm dataSet
-  ; Entry.SourceNativePublishedFlow.BoundaryTerm = BoundaryTerm dataSet
-  ; Entry.SourceNativePublishedFlow.VacuumTerm = VacuumTerm dataSet
-  ; Entry.SourceNativePublishedFlow.SmallFieldScale = SmallFieldScale dataSet
-  ; Entry.SourceNativePublishedFlow.BlockRadius = BlockRadius dataSet
-  ; Entry.SourceNativePublishedFlow.AnalyticRadius = AnalyticRadius dataSet
-  ; Entry.SourceNativePublishedFlow.Decay = Decay dataSet
-  ; Entry.SourceNativePublishedFlow.flow = Beta.betaDrivenCompleteDensityFlow inputs
-  ; Entry.SourceNativePublishedFlow.theorem1 = theorem1 dataSet
-  ; Entry.SourceNativePublishedFlow.completeDensityAt = completeDensityAt dataSet
-  ; Entry.SourceNativePublishedFlow.densityIsFlowDensity = densityIsBetaDensity dataSet
-  ; Entry.SourceNativePublishedFlow.couplingIsFlowCoupling = couplingIsBetaHistory dataSet
-  ; Entry.SourceNativePublishedFlow.differentiatedAt = differentiatedAt dataSet
+  { Coupling = ℚ
+  ; Density = Beta.Density inputs
+  ; Operation = Operation dataSet
+  ; Action = Action dataSet
+  ; Field = Field dataSet
+  ; RegularTerm = RegularTerm dataSet
+  ; RTerm = RTerm dataSet
+  ; BoundaryTerm = BoundaryTerm dataSet
+  ; VacuumTerm = VacuumTerm dataSet
+  ; SmallFieldScale = SmallFieldScale dataSet
+  ; BlockRadius = BlockRadius dataSet
+  ; AnalyticRadius = AnalyticRadius dataSet
+  ; Decay = Decay dataSet
+  ; flow = Beta.betaDrivenCompleteDensityFlow inputs
+  ; theorem1 = theorem1 dataSet
+  ; completeDensityAt = completeDensityAt dataSet
+  ; densityIsFlowDensity = densityIsBetaDensity dataSet
+  ; couplingIsFlowCoupling = couplingIsBetaHistory dataSet
+  ; differentiatedAt = differentiatedAt dataSet
   }
 
 sourceNativeFlowCouplingIsBetaHistory :

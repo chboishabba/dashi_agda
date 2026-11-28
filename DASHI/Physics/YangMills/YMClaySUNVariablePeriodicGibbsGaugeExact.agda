@@ -21,8 +21,9 @@ module DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; -ℝ_; _<ℝ_)
 
@@ -33,12 +34,24 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as B
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
-import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Sums
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
-import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
+import DASHI.Physics.YangMills.YMClaySide4C3CoreExact as Side4
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+
+realSumMap :
+  ∀ {A : Set} (values : List A) (f : A → ℝ) → ℝ
+realSumMap [] f = 0ℝ
+realSumMap (value ∷ values) f = f value +ℝ realSumMap values f
+
+realSumMapCong :
+  ∀ {A : Set} (values : List A) {f g : A → ℝ} →
+    (∀ value → f value ≡ g value) →
+    realSumMap values f ≡ realSumMap values g
+realSumMapCong [] equality = refl
+realSumMapCong (value ∷ values) equality =
+  cong₂ _+ℝ_ (equality value) (realSumMapCong values equality)
 
 SUNPeriodicLinks :
   ∀ {Matrix Complex : Set} {N : Nat}
@@ -61,10 +74,10 @@ periodicSUNRealization :
     (links : SUNPeriodicLinks theory n)
     (gamma : SUNPeriodicGauge theory n) →
   Bond.PeriodicBondGaugeRealization n
-    (SUN.SUNMatrixElement theory) (Native.sunExactSignedLinkGroup theory)
+    (SUN.SUNMatrixElement theory) (Density.periodicSUNLinkGroup theory)
 periodicSUNRealization theory n links gamma =
   Covariance.literalPeriodicBondGaugeRealization
-    (Native.sunExactSignedLinkGroup theory)
+    (Density.periodicSUNLinkGroup theory)
     (Geometry.periodicStepInverseLaws n)
     links gamma
 
@@ -127,10 +140,10 @@ periodicSUNSixDeficit :
     (n : Nat) →
   SUNPeriodicLinks theory n → ℝ
 periodicSUNSixDeficit theory traceData n links =
-  Sums.realSum
+  realSumMap
     (Torus.elements (Torus.periodicTorus4Finite (suc n)))
     (λ site →
-      Sums.realSum (Plaquette.ownedPeriodicPlaquettes site)
+      realSumMap (Plaquette.ownedPeriodicPlaquettes site)
         (λ p → 1ℝ -ℝ
           Trace.matrixWilsonValue traceData
             (periodicSUNPositivePlaquette theory n links p)))
@@ -146,11 +159,11 @@ periodicSUNSixDeficitGaugeInvariant :
     (periodicSUNGaugeTransform theory n links gamma)
   ≡ periodicSUNSixDeficit theory traceData n links
 periodicSUNSixDeficitGaugeInvariant theory traceData n links gamma =
-  Sums.realSumCong
+  realSumMapCong
     (Torus.elements (Torus.periodicTorus4Finite (suc n)))
     (λ site →
-      Sums.realSumCong (Plaquette.ownedPeriodicPlaquettes site)
-        (λ p → cong (1ℝ -ℝ_)
+      realSumMapCong (Plaquette.ownedPeriodicPlaquettes site)
+        (λ p → cong (λ value → 1ℝ -ℝ value)
           (periodicSUNPositivePlaquetteGaugeTrace
             theory traceData n links gamma p)))
 
@@ -235,22 +248,22 @@ periodicSUNFiniteGibbsMeasure theory traceData exponential n beta productHaar di
 sideFourPlaquetteSameNativeHolonomy :
   ∀ {Matrix Complex : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
-    (links : Native.SUNSideFourLinks N theory)
-    (p : Plaquette.PeriodicPlaquette Weld.three) →
-  periodicSUNPositivePlaquette theory Weld.three links p
-  ≡ Native.sunPositivePlaquetteHolonomy theory links p
+    (links : Density.SUNPeriodicLinks theory Side4.three)
+    (p : Plaquette.PeriodicPlaquette Side4.three) →
+  periodicSUNPositivePlaquette theory Side4.three links p
+  ≡ Density.periodicSUNPositivePlaquette theory Side4.three links p
 sideFourPlaquetteSameNativeHolonomy theory links p = refl
 
 sideFourPlaquetteSameNativeWilsonTrace :
   ∀ {Matrix Complex Scalar : Set} {N : Nat}
     (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
     (traceData : Trace.SUNMatrixRealTrace {Scalar = Scalar} theory)
-    (links : Native.SUNSideFourLinks N theory)
-    (p : Plaquette.PeriodicPlaquette Weld.three) →
+    (links : Density.SUNPeriodicLinks theory Side4.three)
+    (p : Plaquette.PeriodicPlaquette Side4.three) →
   Trace.matrixWilsonValue traceData
-    (periodicSUNPositivePlaquette theory Weld.three links p)
+    (periodicSUNPositivePlaquette theory Side4.three links p)
   ≡ Trace.matrixWilsonValue traceData
-    (Native.sunPositivePlaquetteHolonomy theory links p)
+    (Density.periodicSUNPositivePlaquette theory Side4.three links p)
 sideFourPlaquetteSameNativeWilsonTrace theory traceData links p =
   cong (Trace.matrixWilsonValue traceData)
     (sideFourPlaquetteSameNativeHolonomy theory links p)

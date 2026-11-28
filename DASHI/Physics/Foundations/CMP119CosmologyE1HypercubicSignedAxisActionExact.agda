@@ -65,8 +65,8 @@ axisSignOf Hyper.swap23 _ = Signed.plus
 hypercubicSignedAxisAction :
   Hyper.HypercubicGenerator → Signed.SignedAxisAction
 hypercubicSignedAxisAction generator = record
-  { Signed.SignedAxisAction.axisImage = axisImageOf generator
-  ; Signed.SignedAxisAction.axisSign = axisSignOf generator
+  { axisImage = axisImageOf generator
+  ; axisSign = axisSignOf generator
   }
 
 ------------------------------------------------------------------------

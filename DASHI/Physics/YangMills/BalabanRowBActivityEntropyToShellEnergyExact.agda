@@ -179,22 +179,22 @@ open SummableMarkedActivityEntropyShellData public
 asGeometricMarkedShellEnergy :
   SummableMarkedActivityEntropyShellData → Shell.GeometricMarkedShellEnergy
 asGeometricMarkedShellEnergy dataSet = record
-  { Shell.GeometricMarkedShellEnergy.shellEnergy =
+  { shellEnergy =
       shellEnergy (sourceData dataSet)
-  ; Shell.GeometricMarkedShellEnergy.baseEnergy =
+  ; baseEnergy =
       combinedBaseEnergy (sourceData dataSet)
-  ; Shell.GeometricMarkedShellEnergy.ratio =
+  ; ratio =
       combinedShellRatio (sourceData dataSet)
-  ; Shell.GeometricMarkedShellEnergy.geometricBound = geometricBound dataSet
-  ; Shell.GeometricMarkedShellEnergy.baseEnergyNonnegative =
+  ; geometricBound = geometricBound dataSet
+  ; baseEnergyNonnegative =
       combinedBaseEnergyNonnegative (sourceData dataSet)
-  ; Shell.GeometricMarkedShellEnergy.ratioNonnegative =
+  ; ratioNonnegative =
       combinedShellRatioNonnegative (sourceData dataSet)
-  ; Shell.GeometricMarkedShellEnergy.oneMinusRatioPositive =
+  ; oneMinusRatioPositive =
       oneMinusCombinedRatioPositive dataSet
-  ; Shell.GeometricMarkedShellEnergy.geometricBoundIdentity =
+  ; geometricBoundIdentity =
       geometricBoundIdentity dataSet
-  ; Shell.GeometricMarkedShellEnergy.shellEnergyBound =
+  ; shellEnergyBound =
       activityEntropyGiveGeometricShellEnergy (sourceData dataSet)
   }
 

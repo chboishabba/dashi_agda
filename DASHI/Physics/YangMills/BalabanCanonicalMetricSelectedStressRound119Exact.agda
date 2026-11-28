@@ -83,29 +83,29 @@ asRound118CanonicalMetricWeld :
     domain representation coordinate →
   R118.CanonicalMetricCMP119StressWeld domain representation
 asRound118CanonicalMetricWeld {coordinate = coordinate} dataSet = record
-  { R118.CanonicalMetricCMP119StressWeld.readoutToRational =
+  { readoutToRational =
       readoutToRational dataSet
-  ; R118.CanonicalMetricCMP119StressWeld.normalizedInsertion =
+  ; normalizedInsertion =
       λ background perturbation → record
-        { R116.MetricStressNormalizedInsertionWeld.normalizedSource =
+        { normalizedSource =
             normalizedSource dataSet background perturbation
-        ; R116.MetricStressNormalizedInsertionWeld.metricFirstVariationCrossNumerator =
+        ; metricFirstVariationCrossNumerator =
             metricFirstVariationCrossNumerator dataSet background perturbation
-        ; R116.MetricStressNormalizedInsertionWeld.source =
+        ; source =
             R109.source
               (R114.asCMP119Cauchy coordinate (R114.coordinate coordinate))
-        ; R116.MetricStressNormalizedInsertionWeld.stressInsertion =
+        ; stressInsertion =
             R109.stressInsertion
               (R114.asCMP119Cauchy coordinate (R114.coordinate coordinate))
-        ; R116.MetricStressNormalizedInsertionWeld.localInsertionNumerator =
+        ; localInsertionNumerator =
             localInsertionNumerator dataSet
-        ; R116.MetricStressNormalizedInsertionWeld.metricVariationIsNormalizedCrossNumerator =
+        ; metricVariationIsNormalizedCrossNumerator =
             metricVariationIsNormalizedCrossNumerator dataSet background perturbation
-        ; R116.MetricStressNormalizedInsertionWeld.connectedInsertionIsSelectedCMP119StressInsertion =
+        ; connectedInsertionIsSelectedCMP119StressInsertion =
             connectedInsertionIsSelectedCMP119StressInsertion
               dataSet background perturbation
         }
-  ; R118.CanonicalMetricCMP119StressWeld.finiteFirstVariationReadoutIsNormalizedCrossNumerator =
+  ; finiteFirstVariationReadoutIsNormalizedCrossNumerator =
       finiteFirstVariationReadoutIsCrossNumerator dataSet
   }
 

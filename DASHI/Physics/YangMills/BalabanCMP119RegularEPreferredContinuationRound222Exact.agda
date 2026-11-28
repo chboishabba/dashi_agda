@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP119RegularEPreferredContinuationRound222Exact where
 
 ------------------------------------------------------------------------
@@ -50,18 +49,18 @@ asCMP109116Continuation :
     {trajectory = trajectory} {split = split} {inputs = inputs} projection →
   Continue.CMP109116LiteralEffectiveActionContinuation
 asCMP109116Continuation {projection = projection} realization = record
-  { Continue.CMP109116LiteralEffectiveActionContinuation.Scale = Nat
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.Volume = Volume realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.Background = Background realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.Tangent = Tangent realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.Component = Component realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.components = components realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.cmp116PhysicalLocalizedActivity =
+  { Scale = Nat
+  ; Volume = Volume realization
+  ; Background = Background realization
+  ; Tangent = Tangent realization
+  ; Component = Component realization
+  ; components = components realization
+  ; cmp116PhysicalLocalizedActivity =
       localizedRegularActivity realization
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.cmp109EffectivePotential =
+  ; cmp109EffectivePotential =
       λ scale _ → evaluateRegularE realization
         (ESource.selectedRegularE projection scale)
-  ; Continue.CMP109116LiteralEffectiveActionContinuation.effectivePotentialIsLocalizedCompositeSum =
+  ; effectivePotentialIsLocalizedCompositeSum =
       selectedRegularEIsLocalizedCompositeSum realization
   }
 

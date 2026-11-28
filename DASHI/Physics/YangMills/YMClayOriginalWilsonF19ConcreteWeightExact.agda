@@ -7,8 +7,8 @@ open import Relation.Binary.PropositionalEquality using (sym; subst)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral

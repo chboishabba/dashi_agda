@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact where
 
 ------------------------------------------------------------------------
@@ -40,7 +39,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ord
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as VariableHaar
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as GaugeHaar
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 module _
@@ -89,23 +88,23 @@ module _
   -- canonical *unmodified* original bond enumeration.
   gaugeVectorOfList :
     ∀ {A : Set} (labels : List.List A)
-      (left right field : A → Link) →
+      (left right bonds : A → Link) →
     Bilateral.gaugeBondVector theory oneLink bilateral
       (Codec.listValues labels left)
       (Codec.listValues labels right)
-      (Codec.listValues labels field)
+      (Codec.listValues labels bonds)
     ≡
     Codec.listValues labels
       (λ label →
         Bilateral.gaugeOneLink theory oneLink bilateral
-          (left label) (right label) (field label))
-  gaugeVectorOfList List.[] left right field = refl
-  gaugeVectorOfList (List._∷_ label labels) left right field =
+          (left label) (right label) (bonds label))
+  gaugeVectorOfList List.[] left right bonds = refl
+  gaugeVectorOfList (List._∷_ label labels) left right bonds =
     cong
       (Vec._∷_
         (Bilateral.gaugeOneLink theory oneLink bilateral
-          (left label) (right label) (field label)))
-      (gaugeVectorOfList labels left right field)
+          (left label) (right label) (bonds label)))
+      (gaugeVectorOfList labels left right bonds)
 
   -- The decoder is a genuine two-sided finite codec. We need its
   -- vector roundtrip to replace an arbitrary vector by encode(decode v).
@@ -130,7 +129,8 @@ module _
         (leftField gamma) (rightField gamma) (nativeDecode vector))
 
   actualGaugeVectorDecodedAt :
-    (gamma : Gamma) (vector : Vec.Vec Link positiveBondCount) bond →
+    (gamma : Gamma) (vector : Vec.Vec Link positiveBondCount)
+    (bond : Torus.PositiveBond (suc n)) →
     nativeDecode
       (Bilateral.gaugeBondVector theory oneLink bilateral
         (leftFactors gamma) (rightFactors gamma) vector)
@@ -202,11 +202,11 @@ module _
       theory traceData exponential n beta oneLink bilateral
       nativeDecode divide
   constructedOriginalPeriodicGaugeNaturality = record
-    { GaugeHaar.OriginalPeriodicGaugeVectorNaturality.leftFactors =
+    { leftFactors =
         leftFactors
-    ; GaugeHaar.OriginalPeriodicGaugeVectorNaturality.rightFactors =
+    ; rightFactors =
         rightFactors
-    ; GaugeHaar.OriginalPeriodicGaugeVectorNaturality.gaugeDecodeAt =
+    ; gaugeDecodeAt =
         safeNativeGaugeDecodeAt
     }
 
@@ -272,7 +272,7 @@ module _
       nativeDecode divide
       (Variable.periodicSUNSixDeficit theory traceData n)
   actualSixDeficitPointwise = record
-    { GaugeHaar.PeriodicPointwiseObservable.congruentAt =
+    { congruentAt =
         Pointwise.variableSixWilsonDeficitPointwise theory traceData n
     }
 

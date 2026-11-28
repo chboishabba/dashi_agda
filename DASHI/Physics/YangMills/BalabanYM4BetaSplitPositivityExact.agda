@@ -124,14 +124,14 @@ betaSplitProducesUniformEnclosure :
     (split : FiniteLatticeBetaSplit trajectory) →
   Flow.UniformBetaEnclosure trajectory
 betaSplitProducesUniformEnclosure split = record
-  { Flow.UniformBetaEnclosure.betaLower = half (gaussianLower split)
-  ; Flow.UniformBetaEnclosure.betaUpper =
+  { betaLower = half (gaussianLower split)
+  ; betaUpper =
       gaussianUpper split + half (gaussianLower split)
-  ; Flow.UniformBetaEnclosure.betaLowerNonnegative =
+  ; betaLowerNonnegative =
       halfGaussianNonnegative split
-  ; Flow.UniformBetaEnclosure.betaLowerBelow =
+  ; betaLowerBelow =
       fullBetaLowerHalfGaussian split
-  ; Flow.UniformBetaEnclosure.betaBelowUpper =
+  ; betaBelowUpper =
       fullBetaUpperGaussianPlusHalf split
   }
 

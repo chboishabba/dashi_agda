@@ -65,12 +65,12 @@ totalDemandNN d =
 asCanonicalSmallnessData :
   CMP116FiniteNormalizedAnalyticDemands → Canon.FiniteRowASourceConstants
 asCanonicalSmallnessData d = record
-  { Canon.FiniteRowASourceConstants.gaussianFloor = 1ℚ
-  ; Canon.FiniteRowASourceConstants.interactionConstant = totalDemand d
-  ; Canon.FiniteRowASourceConstants.derivativeBound = 0ℚ
-  ; Canon.FiniteRowASourceConstants.gaussianFloorPositive = ℚP.positive⁻¹ 1ℚ
-  ; Canon.FiniteRowASourceConstants.interactionConstantNonnegative = totalDemandNN d
-  ; Canon.FiniteRowASourceConstants.derivativeBoundNonnegative = ℚP.≤-refl
+  { gaussianFloor = 1ℚ
+  ; interactionConstant = totalDemand d
+  ; derivativeBound = 0ℚ
+  ; gaussianFloorPositive = ℚP.positive⁻¹ 1ℚ
+  ; interactionConstantNonnegative = totalDemandNN d
+  ; derivativeBoundNonnegative = ℚP.≤-refl
   }
 
 canonicalCommonRadius : CMP116FiniteNormalizedAnalyticDemands → ℚ

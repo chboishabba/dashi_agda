@@ -80,16 +80,16 @@ effectiveDerivativeNonnegative dataSet =
 asCanonicalSourceConstants :
   FiniteQuarticResponseConstants → Choice.FiniteRowASourceConstants
 asCanonicalSourceConstants dataSet = record
-  { Choice.FiniteRowASourceConstants.gaussianFloor = gaussianFloor dataSet
-  ; Choice.FiniteRowASourceConstants.interactionConstant =
+  { gaussianFloor = gaussianFloor dataSet
+  ; interactionConstant =
       interactionConstant dataSet
-  ; Choice.FiniteRowASourceConstants.derivativeBound =
+  ; derivativeBound =
       effectiveDerivative dataSet
-  ; Choice.FiniteRowASourceConstants.gaussianFloorPositive =
+  ; gaussianFloorPositive =
       gaussianFloorPositive dataSet
-  ; Choice.FiniteRowASourceConstants.interactionConstantNonnegative =
+  ; interactionConstantNonnegative =
       interactionConstantNonnegative dataSet
-  ; Choice.FiniteRowASourceConstants.derivativeBoundNonnegative =
+  ; derivativeBoundNonnegative =
       effectiveDerivativeNonnegative dataSet
   }
 

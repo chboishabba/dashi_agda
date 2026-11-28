@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanA1Equation51FiveChannelSameObjectRound103Exact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -64,12 +63,12 @@ asLiteralCMP109RationalCertificateFamily :
   Equation51FiveChannelSameObjectData History Cell →
   Family.LiteralCMP109RationalCertificateFamily History Cell
 asLiteralCMP109RationalCertificateFamily dataSet = record
-  { Family.LiteralCMP109RationalCertificateFamily.embedding = embedding dataSet
-  ; Family.LiteralCMP109RationalCertificateFamily.certificate = certificate dataSet
-  ; Family.LiteralCMP109RationalCertificateFamily.historyWitness = historyWitness dataSet
-  ; Family.LiteralCMP109RationalCertificateFamily.dynamics = dynamics dataSet
-  ; Family.LiteralCMP109RationalCertificateFamily.historyForShell = historyForShell dataSet
-  ; Family.LiteralCMP109RationalCertificateFamily.mixedDerivativeExact =
+  { embedding = embedding dataSet
+  ; certificate = certificate dataSet
+  ; historyWitness = historyWitness dataSet
+  ; dynamics = dynamics dataSet
+  ; historyForShell = historyForShell dataSet
+  ; mixedDerivativeExact =
       mixedDerivativeExact dataSet
   }
 

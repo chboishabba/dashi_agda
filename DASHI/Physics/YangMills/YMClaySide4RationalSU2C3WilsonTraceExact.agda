@@ -45,14 +45,14 @@ RationalSU2 = SU2.RationalUnitQuaternion
 
 rationalSU2Group : Group.Group RationalSU2
 rationalSU2Group = record
-  { Group.Group.identity = Q.identityRationalSU2
-  ; Group.Group.multiply = Q.multiplyRationalSU2
-  ; Group.Group.inverse = Q.inverseRationalSU2
-  ; Group.Group.multiplyAssociative = Q.multiplyAssociative
-  ; Group.Group.identityLeft = Q.identityLeft
-  ; Group.Group.identityRight = Q.identityRight
-  ; Group.Group.inverseLeft = Q.inverseLeft
-  ; Group.Group.inverseRight = Q.inverseRight
+  { identity = Q.identityRationalSU2
+  ; multiply = Q.multiplyRationalSU2
+  ; inverse = Q.inverseRationalSU2
+  ; multiplyAssociative = Q.multiplyAssociative
+  ; identityLeft = Q.identityLeft
+  ; identityRight = Q.identityRight
+  ; inverseLeft = Q.inverseLeft
+  ; inverseRight = Q.inverseRight
   }
 
 rationalTraceCyclic : ∀ left right →
@@ -90,7 +90,7 @@ rationalTraceConjugationInvariant h x =
 rationalSU2WilsonTraceClass :
   Gauge.ClassFunction rationalSU2Group SU2.realPart
 rationalSU2WilsonTraceClass = record
-  { Gauge.ClassFunction.conjugationInvariant =
+  { conjugationInvariant =
       rationalTraceConjugationInvariant }
 
 -- Explicit physical source: periodic side-four positive bond link fields

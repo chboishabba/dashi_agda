@@ -92,15 +92,15 @@ module Gates {cutoff : Nat} (d : RowAGateData cutoff) where
   shellAt : Nat → Shell.LinearInteractionShell
     (gaussianFloor d) (interactionConstant d) (couplingCap d)
   shellAt j = record
-    { Shell.LinearInteractionShell.coupling = coupling d j
-    ; Shell.LinearInteractionShell.betaZ = betaGauss d j
-    ; Shell.LinearInteractionShell.betaInt = betaInteraction d j
-    ; Shell.LinearInteractionShell.interactionConstantNonnegative = interactionConstantNN d
-    ; Shell.LinearInteractionShell.couplingNonnegative = ℚP.<⇒≤ (couplingPositive d j)
-    ; Shell.LinearInteractionShell.gammaNonnegative = couplingCapNN d
-    ; Shell.LinearInteractionShell.couplingBelowGamma = couplingBelowCap d j
-    ; Shell.LinearInteractionShell.gaussianLower = gaussianLower d j
-    ; Shell.LinearInteractionShell.interactionLower = interactionLower d j
+    { coupling = coupling d j
+    ; betaZ = betaGauss d j
+    ; betaInt = betaInteraction d j
+    ; interactionConstantNonnegative = interactionConstantNN d
+    ; couplingNonnegative = ℚP.<⇒≤ (couplingPositive d j)
+    ; gammaNonnegative = couplingCapNN d
+    ; couplingBelowGamma = couplingBelowCap d j
+    ; gaussianLower = gaussianLower d j
+    ; interactionLower = interactionLower d j
     }
 
   inverseSquareMargin : ∀ j → j ℕ.< cutoff →
@@ -112,13 +112,13 @@ module Gates {cutoff : Nat} (d : RowAGateData cutoff) where
 
   inducedFlow : Cubic.InverseSquareMarginFlow cutoff
   inducedFlow = record
-    { Cubic.InverseSquareMarginFlow.marginConstant = betaMargin
-    ; Cubic.InverseSquareMarginFlow.coupling = coupling d
-    ; Cubic.InverseSquareMarginFlow.inverseSquare = inverseSquare d
-    ; Cubic.InverseSquareMarginFlow.couplingPositive = couplingPositive d
-    ; Cubic.InverseSquareMarginFlow.inverseSquareRelation = inverseSquareRelation d
-    ; Cubic.InverseSquareMarginFlow.couplingMonotone = couplingMonotone d
-    ; Cubic.InverseSquareMarginFlow.marginStep = inverseSquareMargin
+    { marginConstant = betaMargin
+    ; coupling = coupling d
+    ; inverseSquare = inverseSquare d
+    ; couplingPositive = couplingPositive d
+    ; inverseSquareRelation = inverseSquareRelation d
+    ; couplingMonotone = couplingMonotone d
+    ; marginStep = inverseSquareMargin
     }
 
   cubicSumBound : ∀ K → K ℕ.≤ cutoff →
@@ -139,16 +139,16 @@ module Gates {cutoff : Nat} (d : RowAGateData cutoff) where
 
     sensitivityData : Shooting.CumulativeSensitivityData cutoff
     sensitivityData = record
-      { Shooting.CumulativeSensitivityData.marginConstant = betaMargin
-      ; Shooting.CumulativeSensitivityData.derivativeBound = derivativeBound
-      ; Shooting.CumulativeSensitivityData.tubeWidth = tubeWidth d
-      ; Shooting.CumulativeSensitivityData.coupling = coupling d
-      ; Shooting.CumulativeSensitivityData.sensitivity = sensitivity
-      ; Shooting.CumulativeSensitivityData.marginPositive = betaMarginPositive
-      ; Shooting.CumulativeSensitivityData.derivativeNonNegative = derivativeNonNegative
-      ; Shooting.CumulativeSensitivityData.cubicSumBound = cubicSumBound
-      ; Shooting.CumulativeSensitivityData.sensitivityCubic = sensitivityCubic
-      ; Shooting.CumulativeSensitivityData.contractionGate = contractionGate
+      { marginConstant = betaMargin
+      ; derivativeBound = derivativeBound
+      ; tubeWidth = tubeWidth d
+      ; coupling = coupling d
+      ; sensitivity = sensitivity
+      ; marginPositive = betaMarginPositive
+      ; derivativeNonNegative = derivativeNonNegative
+      ; cubicSumBound = cubicSumBound
+      ; sensitivityCubic = sensitivityCubic
+      ; contractionGate = contractionGate
       }
 
     cumulativeSensitivityBelowOne : ∀ K → K ℕ.≤ cutoff →

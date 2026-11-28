@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact where
 
 ------------------------------------------------------------------------
@@ -94,15 +93,15 @@ asFiniteHaarMeasurePreservingAction :
     {Configuration = Configuration} {Action = Action}
     measure laws
 asFiniteHaarMeasurePreservingAction dataSet = record
-  { R431.FiniteHaarMeasurePreservingAction.actConfiguration =
+  { actConfiguration =
       actConfiguration dataSet
-  ; R431.FiniteHaarMeasurePreservingAction.actObservable =
+  ; actObservable =
       actObservable dataSet
-  ; R431.FiniteHaarMeasurePreservingAction.observableActionIsPullback =
+  ; observableActionIsPullback =
       observableActionIsPullback dataSet
-  ; R431.FiniteHaarMeasurePreservingAction.densityInvariant =
+  ; densityInvariant =
       gibbsDensityInvariant dataSet
-  ; R431.FiniteHaarMeasurePreservingAction.haarIntegralPullbackInvariant =
+  ; haarIntegralPullbackInvariant =
       haarIntegralPullbackInvariant dataSet
   }
 

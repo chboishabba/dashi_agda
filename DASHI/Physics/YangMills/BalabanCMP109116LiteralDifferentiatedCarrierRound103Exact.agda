@@ -132,34 +132,34 @@ asLegacySameDifferentiatedCarrier :
   (dataSet : LiteralDifferentiatedEffectiveDensityCarrier) →
   Legacy.SameDifferentiatedEffectiveDensityCarrier
 asLegacySameDifferentiatedCarrier dataSet = record
-  { Legacy.SameDifferentiatedEffectiveDensityCarrier.Configuration =
+  { Configuration =
       Source.Background (source dataSet)
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.Tangent =
+  ; Tangent =
       Source.Tangent (source dataSet)
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.Scalar = ℝ
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.effectivePotential =
+  ; Scalar = ℝ
+  ; effectivePotential =
       effectivePotential dataSet
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.secondVariation =
+  ; secondVariation =
       cmp109Polarization dataSet
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.cmp109EffectiveActionIsThisPotential =
+  ; cmp109EffectiveActionIsThisPotential =
       ∀ background u v →
         cmp109Polarization dataSet background u v
         ≡ Finite.secondVariation (calculus dataSet)
             (effectivePotential dataSet) background u v
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.cmp109E2PiIsThisSecondVariation =
+  ; cmp109E2PiIsThisSecondVariation =
       ∀ background u v →
         cmp109Polarization dataSet background u v
         ≡ cmp109Polarization dataSet background u v
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.cmp116LocalizedActivityIsThisPotential =
+  ; cmp116LocalizedActivityIsThisPotential =
       ∀ background →
         Source.cmp109EffectivePotential
           (source dataSet) (scale dataSet) (volume dataSet) background
         ≡ Finite.localizedPotential (finiteAction dataSet) background
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.cmp116HessianMarkIsThisSecondVariation =
+  ; cmp116HessianMarkIsThisSecondVariation =
       ∀ background u v →
         cmp116PhysicalMarkedHessian dataSet background u v
         ≡ cmp109Polarization dataSet background u v
-  ; Legacy.SameDifferentiatedEffectiveDensityCarrier.heatDoobInitialDensityIsExpMinusThisPotential =
+  ; heatDoobInitialDensityIsExpMinusThisPotential =
       ℝ ≡ ℝ
   }
 

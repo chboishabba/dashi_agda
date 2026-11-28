@@ -42,7 +42,7 @@ import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Varia
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as Block
 import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as Endpoint
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 
 module _
     {Matrix Complex : Set} {N : Nat}

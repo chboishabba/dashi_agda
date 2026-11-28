@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanRegularEPointwiseSemanticsRound239Exact where
 
 ------------------------------------------------------------------------
@@ -59,16 +58,16 @@ asSelectedEffectiveDensitySemantics :
   Selected.SelectedEffectiveDensitySemantics inputs
 asSelectedEffectiveDensitySemantics {inputs = inputs} {projection = projection}
     semantics = record
-  { Selected.SelectedEffectiveDensitySemantics.Background = Background semantics
-  ; Selected.SelectedEffectiveDensitySemantics.selectedPotential =
+  { Background = Background semantics
+  ; selectedPotential =
       λ scale → evaluateRegularE semantics (ESource.selectedRegularE projection scale)
-  ; Selected.SelectedEffectiveDensitySemantics.IsSourceMeaningOfSelectedDensity =
+  ; IsSourceMeaningOfSelectedDensity =
       SelectedMeaningWitness semantics
-  ; Selected.SelectedEffectiveDensitySemantics.selectedPotentialHasSourceMeaning =
+  ; selectedPotentialHasSourceMeaning =
       λ scale → record
-        { SelectedMeaningWitness.regularEIsSourceCoordinate =
+        { regularEIsSourceCoordinate =
             ESource.selectedRegularEHasSourceAuthority projection scale
-        ; SelectedMeaningWitness.potentialIsLiteralRegularEEvaluation = refl
+        ; potentialIsLiteralRegularEEvaluation = refl
         }
   }
 
@@ -79,8 +78,8 @@ asSelectedRegularESemanticWeld :
   R238.SelectedRegularESemanticWeld
     projection (asSelectedEffectiveDensitySemantics semantics)
 asSelectedRegularESemanticWeld semantics = record
-  { R238.SelectedRegularESemanticWeld.evaluateRegularE = evaluateRegularE semantics
-  ; R238.SelectedRegularESemanticWeld.selectedSourcePotentialIsRegularE =
+  { evaluateRegularE = evaluateRegularE semantics
+  ; selectedSourcePotentialIsRegularE =
       λ _ _ → refl
   }
 

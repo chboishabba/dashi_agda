@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact where
 
 ------------------------------------------------------------------------
@@ -32,11 +31,10 @@ import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as 
 import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Signed
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
-import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Sums
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 
 VariableBondPointwise :
   ∀ {Matrix Complex : Set} {N : Nat}
@@ -56,9 +54,9 @@ variableOrientedLinkPointwise :
     (site : Periodic.PeriodicBlock n)
     (direction : Signed.SignedAxis4) →
   Bond.orientedLinkBase
-    (Native.sunExactSignedLinkGroup theory) left site direction
+    (Density.periodicSUNLinkGroup theory) left site direction
   ≡ Bond.orientedLinkBase
-      (Native.sunExactSignedLinkGroup theory) right site direction
+      (Density.periodicSUNLinkGroup theory) right site direction
 variableOrientedLinkPointwise theory n left right same site
     (Torus.pair axis true) =
   same (Torus.pair site axis)
@@ -113,12 +111,12 @@ variableSixWilsonDeficitPointwise :
   Variable.periodicSUNSixDeficit theory traceData n left
   ≡ Variable.periodicSUNSixDeficit theory traceData n right
 variableSixWilsonDeficitPointwise theory traceData n left right same =
-  Sums.realSumCong
+  Variable.realSumMapCong
     (Torus.elements (Torus.periodicTorus4Finite (suc n)))
     (λ site →
-      Sums.realSumCong (Plaquette.ownedPeriodicPlaquettes site)
+      Variable.realSumMapCong (Plaquette.ownedPeriodicPlaquettes site)
         (λ plaquette →
-          cong (1ℝ -ℝ_)
+          cong (λ value → 1ℝ -ℝ value)
             (cong (Trace.matrixWilsonValue traceData)
               (variablePositivePlaquettePointwise
                 theory n left right same plaquette))))

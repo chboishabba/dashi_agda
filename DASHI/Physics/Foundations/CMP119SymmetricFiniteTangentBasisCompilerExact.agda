@@ -89,11 +89,11 @@ compileFiniteTangentBasisToCMP119MetricBasis :
   MetricBasis.SymmetricMetricBasisRealization domain
 compileFiniteTangentBasisToCMP119MetricBasis
     {attachment = attachment} finiteBasis = record
-  { MetricBasis.SymmetricMetricBasisRealization.componentPerturbation =
+  { componentPerturbation =
       λ component →
         R144Attach.toMetricPerturbation attachment
           (componentFiniteTangent finiteBasis component)
-  ; MetricBasis.SymmetricMetricBasisRealization.componentPerturbationAdmissible =
+  ; componentPerturbationAdmissible =
       λ component →
         R144Attach.selectedMetricPerturbationAdmissible attachment
           (referenceBackground finiteBasis)

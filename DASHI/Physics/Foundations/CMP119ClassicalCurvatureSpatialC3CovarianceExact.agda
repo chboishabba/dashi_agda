@@ -43,12 +43,12 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact a
 
 spatialC3Curvature : Metric.CurvatureSix → Metric.CurvatureSix
 spatialC3Curvature curvature = record
-  { Metric.CurvatureSix.f01 = Metric.f03 curvature
-  ; Metric.CurvatureSix.f02 = Metric.f01 curvature
-  ; Metric.CurvatureSix.f03 = Metric.f02 curvature
-  ; Metric.CurvatureSix.f12 = Curl.negV (Metric.f13 curvature)
-  ; Metric.CurvatureSix.f13 = Curl.negV (Metric.f23 curvature)
-  ; Metric.CurvatureSix.f23 = Metric.f12 curvature
+  { f01 = Metric.f03 curvature
+  ; f02 = Metric.f01 curvature
+  ; f03 = Metric.f02 curvature
+  ; f12 = Curl.negV (Metric.f13 curvature)
+  ; f13 = Curl.negV (Metric.f23 curvature)
+  ; f23 = Metric.f12 curvature
   }
 
 energyNeg : ∀ value →

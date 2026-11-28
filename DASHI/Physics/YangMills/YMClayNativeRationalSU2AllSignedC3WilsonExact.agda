@@ -83,9 +83,9 @@ c3NativeData :
   Native.RationalSU2BondData Weld.three →
   Native.RationalSU2BondData Weld.three
 c3NativeData dataSet = record
-  { Native.RationalSU2BondData.links =
+  { links =
       Weld.nativeForwardC3Bonds (Native.links dataSet)
-  ; Native.RationalSU2BondData.siteGauge =
+  ; siteGauge =
       λ site → Native.siteGauge dataSet (C3.spatialC3Site site)
   }
 

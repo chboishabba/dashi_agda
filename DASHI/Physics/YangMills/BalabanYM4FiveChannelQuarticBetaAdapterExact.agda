@@ -243,14 +243,14 @@ asFiniteInteractionAtomEnclosure :
   ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) →
   Beta.FiniteInteractionAtomEnclosure Cell
 asFiniteInteractionAtomEnclosure dat = record
-  { Beta.FiniteInteractionAtomEnclosure.atoms = cells dat
-  ; Beta.FiniteInteractionAtomEnclosure.coupling = coupling dat
-  ; Beta.FiniteInteractionAtomEnclosure.betaInt = betaInt dat
-  ; Beta.FiniteInteractionAtomEnclosure.interactionAtom = localRemainder dat
-  ; Beta.FiniteInteractionAtomEnclosure.coefficient = localCoefficient dat
-  ; Beta.FiniteInteractionAtomEnclosure.betaIntExact = refl
-  ; Beta.FiniteInteractionAtomEnclosure.coefficientNonnegative = localCoefficientNN dat
-  ; Beta.FiniteInteractionAtomEnclosure.atomLower = localQuarticLower dat
+  { atoms = cells dat
+  ; coupling = coupling dat
+  ; betaInt = betaInt dat
+  ; interactionAtom = localRemainder dat
+  ; coefficient = localCoefficient dat
+  ; betaIntExact = refl
+  ; coefficientNonnegative = localCoefficientNN dat
+  ; atomLower = localQuarticLower dat
   }
 
 yM4FiveChannelQuarticBetaAdapterLevel : ProofLevel

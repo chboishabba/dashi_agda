@@ -47,9 +47,9 @@ asCMP109E2 :
   Finite.CMP109E2FromSamePotential
     (Source.atScaleVolume source scale volume) calculus
 asCMP109E2 eq51 scale volume = record
-  { Finite.CMP109E2FromSamePotential.cmp109E2 =
+  { cmp109E2 =
       polarizationSecondVariation eq51 scale volume
-  ; Finite.CMP109E2FromSamePotential.cmp109E2IsSecondVariation =
+  ; cmp109E2IsSecondVariation =
       equation51 eq51 scale volume
   }
 

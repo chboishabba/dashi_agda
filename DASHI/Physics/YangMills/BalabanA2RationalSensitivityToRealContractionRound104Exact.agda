@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact where
 
 ------------------------------------------------------------------------

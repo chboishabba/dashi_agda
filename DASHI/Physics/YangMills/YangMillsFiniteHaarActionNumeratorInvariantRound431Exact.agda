@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsFiniteHaarActionNumeratorInvariantRound431Exact where
 
 ------------------------------------------------------------------------
@@ -131,7 +130,7 @@ familyNumeratorActionInvariant :
   Sym.FiniteNumeratorActionInvariant family globalAct
 familyNumeratorActionInvariant family globalAct actionData localActionIsGlobal =
   record
-    { Sym.FiniteNumeratorActionInvariant.numeratorInvariant =
+    { numeratorInvariant =
         λ cutoff action observable →
           trans
             (sym

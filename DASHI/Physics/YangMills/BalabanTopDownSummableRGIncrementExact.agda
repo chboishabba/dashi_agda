@@ -133,14 +133,14 @@ open PublishedTailToCommonIncrement public
 publishedTailMajorant :
   PublishedTailToCommonIncrement → Scale.ScaleLocalIncrementMajorant
 publishedTailMajorant dataSet = record
-  { Scale.ScaleLocalIncrementMajorant.coefficient = coefficient dataSet
-  ; Scale.ScaleLocalIncrementMajorant.coefficientNonnegative =
+  { coefficient = coefficient dataSet
+  ; coefficientNonnegative =
       coefficientNonnegative dataSet
-  ; Scale.ScaleLocalIncrementMajorant.incrementMagnitude =
+  ; incrementMagnitude =
       sourceGeneratedIncrement dataSet
-  ; Scale.ScaleLocalIncrementMajorant.incrementNonnegative =
+  ; incrementNonnegative =
       sourceGeneratedIncrementNonnegative dataSet
-  ; Scale.ScaleLocalIncrementMajorant.incrementBelowScaleShell =
+  ; incrementBelowScaleShell =
       generatedIncrementDyadic dataSet
   }
 
@@ -148,19 +148,19 @@ publishedTailToSameFamilySummableIncrement :
   (dataSet : PublishedTailToCommonIncrement) →
   SameFamilySummableScaleIncrement
 publishedTailToSameFamilySummableIncrement dataSet = record
-  { SameFamilySummableScaleIncrement.commonMajorant =
+  { commonMajorant =
       publishedTailMajorant dataSet
-  ; SameFamilySummableScaleIncrement.ordinaryDifference =
+  ; ordinaryDifference =
       PublishedTailToCommonIncrement.ordinaryDifference dataSet
-  ; SameFamilySummableScaleIncrement.characteristicDifference =
+  ; characteristicDifference =
       PublishedTailToCommonIncrement.characteristicDifference dataSet
-  ; SameFamilySummableScaleIncrement.ordinaryDifferenceNonnegative =
+  ; ordinaryDifferenceNonnegative =
       PublishedTailToCommonIncrement.ordinaryDifferenceNonnegative dataSet
-  ; SameFamilySummableScaleIncrement.characteristicDifferenceNonnegative =
+  ; characteristicDifferenceNonnegative =
       PublishedTailToCommonIncrement.characteristicDifferenceNonnegative dataSet
-  ; SameFamilySummableScaleIncrement.ordinaryDifferenceBelowTail =
+  ; ordinaryDifferenceBelowTail =
       PublishedTailToCommonIncrement.ordinaryResponseBelowGeneratedTail dataSet
-  ; SameFamilySummableScaleIncrement.characteristicDifferenceBelowTail =
+  ; characteristicDifferenceBelowTail =
       PublishedTailToCommonIncrement.characteristicResponseBelowGeneratedTail dataSet
   }
 

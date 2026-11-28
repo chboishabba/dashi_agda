@@ -73,10 +73,10 @@ module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
     Bond.PeriodicBondField n Value →
     Torus.periodicTorus4Definition (suc n) →
     Torus.Axis4 → Nat → Value
-  positiveHolonomy field site axis zero = Bond.identity group
-  positiveHolonomy field site axis (suc k) =
-    Bond.multiply group (field (Torus.pair site axis))
-      (positiveHolonomy field (Bond.positiveStep site axis) axis k)
+  positiveHolonomy bonds site axis zero = Bond.identity group
+  positiveHolonomy bonds site axis (suc k) =
+    Bond.multiply group (bonds (Torus.pair site axis))
+      (positiveHolonomy bonds (Bond.positiveStep site axis) axis k)
 
   -- Native Wilson bond fields are FUNCTIONS; this avoids any global
   -- function-extensionality principle when transporting blocked paths.
@@ -98,32 +98,32 @@ module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
   -- No signed-negative inverse covariance record is required here.
   positiveHolonomyGaugeCovariant :
     ∀ {n}
-      (field : Bond.PeriodicBondField n Value)
+      (bonds : Bond.PeriodicBondField n Value)
       (gamma : Bond.PeriodicSiteGauge n Value)
       site axis k →
     positiveHolonomy
-      (Bond.transformedBondBase group field gamma) site axis k
+      (Bond.transformedBondBase group bonds gamma) site axis k
     ≡
     Bond.multiply group
       (Bond.multiply group
-        (gamma site) (positiveHolonomy field site axis k))
+        (gamma site) (positiveHolonomy bonds site axis k))
       (Bond.inverse group (gamma (positiveSteps site axis k)))
-  positiveHolonomyGaugeCovariant field gamma site axis zero =
+  positiveHolonomyGaugeCovariant bonds gamma site axis zero =
     Bond.conjugateIdentity group (gamma site)
-  positiveHolonomyGaugeCovariant field gamma site axis (suc k) =
+  positiveHolonomyGaugeCovariant bonds gamma site axis (suc k) =
     trans
       (cong
         (Bond.multiply group
-          (Bond.transformedBondBase group field gamma
+          (Bond.transformedBondBase group bonds gamma
             (Torus.pair site axis)))
-        (positiveHolonomyGaugeCovariant field gamma
+        (positiveHolonomyGaugeCovariant bonds gamma
           (Bond.positiveStep site axis) axis k))
       (Bond.composeGaugeSegments group
         (gamma site)
         (gamma (Bond.positiveStep site axis))
         (gamma (positiveSteps site axis (suc k)))
-        (field (Torus.pair site axis))
-        (positiveHolonomy field
+        (bonds (Torus.pair site axis))
+        (positiveHolonomy bonds
           (Bond.positiveStep site axis) axis k))
 
   -- Explicit same-object agreement with the existing old signed-path

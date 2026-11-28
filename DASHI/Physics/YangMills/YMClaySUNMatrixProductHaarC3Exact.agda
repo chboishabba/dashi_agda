@@ -27,9 +27,15 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ)
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
-import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as Weld
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
+import DASHI.Physics.YangMills.YMClaySide4C3CoreExact as Side4
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
+
+SUNSideFourLinks :
+  ∀ {Matrix Complex : Set} (N : Nat) →
+  SUN.CertifiedSUNMatrixTheory N Matrix Complex → Set
+SUNSideFourLinks N theory =
+  Bond.PeriodicBondField Side4.three (SUN.SUNMatrixElement theory)
 
 productIntegralCongruent :
   ∀ {Link : Set} {n : Nat}
@@ -53,11 +59,11 @@ record SUNNativeBondProductCodec
     (linkCount : Nat) : Set₁ where
   field
     encode :
-      Native.SUNSideFourLinks N theory →
+      SUNSideFourLinks N theory →
       Vec (SUN.SUNMatrixElement theory) linkCount
     decode :
       Vec (SUN.SUNMatrixElement theory) linkCount →
-      Native.SUNSideFourLinks N theory
+      SUNSideFourLinks N theory
 
     -- Two-sided identity. This is a real bond-coordinate enumeration,
     -- NOT an imported assumption of measure equality or compactness.
@@ -67,7 +73,7 @@ record SUNNativeBondProductCodec
     c3Permutation : Product.LinkPermutation linkCount
     c3Decode :
       ∀ vector →
-      Weld.nativeForwardC3Bonds (decode vector)
+      Side4.nativeForwardC3Bonds (decode vector)
       ≡ decode (Product.permuteLinks c3Permutation vector)
 
 open SUNNativeBondProductCodec public
@@ -78,7 +84,7 @@ nativeSUNProductIntegral :
     (source :
       Product.OneLinkProductHaar (SUN.SUNMatrixElement theory))
     (codec : SUNNativeBondProductCodec theory linkCount) →
-  (Native.SUNSideFourLinks N theory → ℝ) → ℝ
+  (SUNSideFourLinks N theory → ℝ) → ℝ
 nativeSUNProductIntegral source codec integrand =
   Product.productIntegral source (λ vector → integrand (decode codec vector))
 
@@ -90,9 +96,9 @@ nativeSUNProductIntegralSpatialC3Invariant :
     (source :
       Product.OneLinkProductHaar (SUN.SUNMatrixElement theory))
     (codec : SUNNativeBondProductCodec theory linkCount)
-    (integrand : Native.SUNSideFourLinks N theory → ℝ) →
+    (integrand : SUNSideFourLinks N theory → ℝ) →
   nativeSUNProductIntegral source codec
-    (λ links → integrand (Weld.nativeForwardC3Bonds links))
+    (λ links → integrand (Side4.nativeForwardC3Bonds links))
   ≡ nativeSUNProductIntegral source codec integrand
 nativeSUNProductIntegralSpatialC3Invariant source codec integrand =
   trans
@@ -111,5 +117,5 @@ nativeSUNProductIntegralUnit :
     (codec : SUNNativeBondProductCodec theory linkCount) →
   nativeSUNProductIntegral source codec (λ _ → 1ℝ)
   ≡ 1ℝ
-nativeSUNProductIntegralUnit source codec =
-  Product.productIntegralUnit source
+nativeSUNProductIntegralUnit {linkCount = linkCount} source codec =
+  Product.productIntegralUnit {n = linkCount} source

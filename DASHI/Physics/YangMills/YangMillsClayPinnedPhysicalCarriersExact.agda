@@ -99,35 +99,35 @@ physicalLiteralCarriers
   HilbertSpace
   Hamiltonian
   VacuumState = record
-  { Top.LiteralYangMillsCarriers.CompactSimpleGroup =
+  { CompactSimpleGroup =
       CompactSimpleGroup
-  ; Top.LiteralYangMillsCarriers.Spacetime =
+  ; Spacetime =
       Spacetime
-  ; Top.LiteralYangMillsCarriers.Cutoff =
+  ; Cutoff =
       Cutoff
-  ; Top.LiteralYangMillsCarriers.FiniteMeasure =
+  ; FiniteMeasure =
       PhysicalFiniteYMMeasure Configuration Scalar
-  ; Top.LiteralYangMillsCarriers.ContinuumMeasure =
+  ; ContinuumMeasure =
       PhysicalContinuumYMMeasure Observable Scalar
-  ; Top.LiteralYangMillsCarriers.SchwingerFamily =
+  ; SchwingerFamily =
       PhysicalSchwingerFamily Observable Position Scalar
-  ; Top.LiteralYangMillsCarriers.Observable =
+  ; Observable =
       Observable
-  ; Top.LiteralYangMillsCarriers.Position =
+  ; Position =
       Position
-  ; Top.LiteralYangMillsCarriers.CurvaturePolynomial =
+  ; CurvaturePolynomial =
       CurvaturePolynomial
-  ; Top.LiteralYangMillsCarriers.LocalOperator =
+  ; LocalOperator =
       LocalOperator
-  ; Top.LiteralYangMillsCarriers.OPECoefficient =
+  ; OPECoefficient =
       OPECoefficient
-  ; Top.LiteralYangMillsCarriers.StressTensor =
+  ; StressTensor =
       StressTensor
-  ; Top.LiteralYangMillsCarriers.HilbertSpace =
+  ; HilbertSpace =
       HilbertSpace
-  ; Top.LiteralYangMillsCarriers.Hamiltonian =
+  ; Hamiltonian =
       Hamiltonian
-  ; Top.LiteralYangMillsCarriers.VacuumState =
+  ; VacuumState =
       VacuumState
   }
 

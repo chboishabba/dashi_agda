@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentAttachmentExact where
 
 ------------------------------------------------------------------------
@@ -216,15 +215,15 @@ asOldR144ToSelectedCMP119StressInsertion :
     {coordinate = coordinate} selected
 asOldR144ToSelectedCMP119StressInsertion
     {composite = composite} attachment = record
-  { Old.R144ToSelectedCMP119StressInsertion.finiteD1ToRational =
+  { finiteD1ToRational =
       finiteD1ToCanonicalMetricRational attachment
-  ; Old.R144ToSelectedCMP119StressInsertion.toMetricBackground =
+  ; toMetricBackground =
       R144.globalBackgroundToStressBackground composite
-  ; Old.R144ToSelectedCMP119StressInsertion.toMetricPerturbation =
+  ; toMetricPerturbation =
       toMetricPerturbation attachment
-  ; Old.R144ToSelectedCMP119StressInsertion.selectedMetricPerturbationAdmissible =
+  ; selectedMetricPerturbationAdmissible =
       selectedMetricPerturbationAdmissible attachment
-  ; Old.R144ToSelectedCMP119StressInsertion.localizedD1IsCanonicalMetricReadout =
+  ; localizedD1IsCanonicalMetricReadout =
       localizedD1IsCanonicalMetricReadout attachment
   }
 

@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanA2LiteralSameHistoryPrefixSensitivityRound103Exact where
 
 ------------------------------------------------------------------------
@@ -117,14 +116,14 @@ asBetaPrefixShootingMap :
   ∀ {TubePoint K} →
   LiteralSameHistoryShootingData TubePoint K → Shoot.BetaPrefixShootingMap TubePoint
 asBetaPrefixShootingMap {K = K} dataSet = record
-  { Shoot.BetaPrefixShootingMap.initialInverseSquare =
+  { initialInverseSquare =
       initialInverseSquare (shells dataSet)
-  ; Shoot.BetaPrefixShootingMap.renormalisationMap = renormalisationMap dataSet
-  ; Shoot.BetaPrefixShootingMap.renormalisedInverseSquare =
+  ; renormalisationMap = renormalisationMap dataSet
+  ; renormalisedInverseSquare =
       renormalisedInverseSquare dataSet
-  ; Shoot.BetaPrefixShootingMap.cumulativeBeta =
+  ; cumulativeBeta =
       λ u → betaPrefixAt (shells dataSet) u K
-  ; Shoot.BetaPrefixShootingMap.mapHasSourceFormula =
+  ; mapHasSourceFormula =
       mapHasLiteralPrefixFormula dataSet
   }
 

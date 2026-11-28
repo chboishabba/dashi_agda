@@ -78,14 +78,14 @@ forgetSign = component
 
 identityAxisAction : SignedAxisAction
 identityAxisAction = record
-  { SignedAxisAction.axisImage = λ axis → axis
-  ; SignedAxisAction.axisSign = λ _ → plus
+  { axisImage = λ axis → axis
+  ; axisSign = λ _ → plus
   }
 
 timeReflection : SignedAxisAction
 timeReflection = record
-  { SignedAxisAction.axisImage = λ axis → axis
-  ; SignedAxisAction.axisSign = timeSign
+  { axisImage = λ axis → axis
+  ; axisSign = timeSign
   }
   where
     timeSign : Axis4 → BasisSign

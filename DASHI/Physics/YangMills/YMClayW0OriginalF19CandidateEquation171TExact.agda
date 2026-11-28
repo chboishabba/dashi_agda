@@ -23,8 +23,8 @@ open import Data.Vec.Base using (Vec; _∷_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
@@ -189,16 +189,16 @@ module _
     FineTest →
     Eq171.CMP122Equation171TOperationSemantics FinePairField SlowField
   originalF19CandidateEquation171 integrand = record
-    { Eq171.CMP122Equation171TOperationSemantics.equation171ExponentialDensity =
+    { equation171ExponentialDensity =
         λ cutoff coarse pairs →
           spectatorMarginalOfFineIntegrand integrand pairs
-    ; Eq171.CMP122Equation171TOperationSemantics.equation171ConstrainedIntegral =
+    ; equation171ConstrainedIntegral =
         λ cutoff coarse values →
           sourceConstrainedHaarT coarse values
-    ; Eq171.CMP122Equation171TOperationSemantics.sourceTOperationMass =
+    ; sourceTOperationMass =
         λ cutoff coarse →
           candidateF19Mass integrand coarse
-    ; Eq171.CMP122Equation171TOperationSemantics.equation171DefinesTOperationMass =
+    ; equation171DefinesTOperationMass =
         λ cutoff coarse → refl
     }
 

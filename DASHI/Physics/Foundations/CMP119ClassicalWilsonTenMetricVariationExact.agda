@@ -87,10 +87,10 @@ asGibbsMetricInsertionData :
   Gibbs.GibbsMetricInsertionData
     Configuration K.SymmetricTensorComponent4 measure
 asGibbsMetricInsertionData dataSet = record
-  { Gibbs.GibbsMetricInsertionData.insertionObservable =
+  { insertionObservable =
       insertionObservable dataSet
-  ; Gibbs.GibbsMetricInsertionData.actionVariation =
+  ; actionVariation =
       actionVariationAt (actionMetricVariation dataSet)
-  ; Gibbs.GibbsMetricInsertionData.insertionVariation =
+  ; insertionVariation =
       insertionVariation dataSet
   }

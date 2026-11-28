@@ -26,7 +26,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as B
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as Block
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNBlock
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 
 -- There are four axis constructors in the original CyclicIndex 4.
@@ -89,5 +89,5 @@ sideFourSUNBlockGaugeCovariant :
 sideFourSUNBlockGaugeCovariant theory fine gamma coarseBond =
   SUNBlock.nativeSUNBlockGaugeLawOnCoarse {m = 1} {l = 1}
     theory (sideFourTwoBlockEndpoint
-      (Native.sunExactSignedLinkGroup theory))
+      (Density.periodicSUNLinkGroup theory))
     fine gamma coarseBond

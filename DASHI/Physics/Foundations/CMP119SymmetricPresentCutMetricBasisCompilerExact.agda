@@ -70,9 +70,9 @@ compilePresentCutTenSlotFiniteBasis :
             (Present10.asPresentCutPhysicalSourceInputs presentData)))) →
   FiniteBasis.SymmetricFiniteSourceTangentBasis attachment
 compilePresentCutTenSlotFiniteBasis presentData attachment background = record
-  { FiniteBasis.SymmetricFiniteSourceTangentBasis.referenceBackground =
+  { referenceBackground =
       background
-  ; FiniteBasis.SymmetricFiniteSourceTangentBasis.componentFiniteTangent =
+  ; componentFiniteTangent =
       Present10.symmetricSlotAsPresentCutFiniteTangent presentData
   }
 

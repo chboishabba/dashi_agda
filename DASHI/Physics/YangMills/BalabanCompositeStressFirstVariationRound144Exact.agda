@@ -69,13 +69,13 @@ asUnifiedGeneratedActionFirstVariation :
     {present = present} actionWeld laws →
   R133.UnifiedGeneratedActionFirstVariation actionWeld
 asUnifiedGeneratedActionFirstVariation {present = present} {laws = laws} dataSet = record
-  { R133.UnifiedGeneratedActionFirstVariation.stressActivity =
+  { stressActivity =
       stressActivity dataSet
-  ; R133.UnifiedGeneratedActionFirstVariation.globalBackgroundToStressBackground =
+  ; globalBackgroundToStressBackground =
       globalBackgroundToStressBackground dataSet
-  ; R133.UnifiedGeneratedActionFirstVariation.globalTangentToStressTangent =
+  ; globalTangentToStressTangent =
       globalTangentToStressTangent dataSet
-  ; R133.UnifiedGeneratedActionFirstVariation.bc2GlobalFirstVariationIsStressActivityFirstVariation =
+  ; bc2GlobalFirstVariationIsStressActivityFirstVariation =
       λ background tangent →
         trans
           (R143.bc2GlobalFirstVariationIsFiniteLocalizedSum laws background tangent)

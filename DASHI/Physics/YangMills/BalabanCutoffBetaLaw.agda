@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCutoffBetaLaw where
 
 -- Producer-side surface for the finite-cutoff coupling dynamics.  The

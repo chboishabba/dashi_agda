@@ -282,9 +282,9 @@ open LiteralClayEvidence public
 literalClayVocabulary :
   ∀ {C S} → LiteralYangMillsConstruction C S → Clay.ClayProblemVocabulary
 literalClayVocabulary Y = record
-  { Clay.ClayProblemVocabulary.PreconditionWitness = preconditionRequirement Y
-  ; Clay.ClayProblemVocabulary.PostconditionWitness = postconditionRequirement Y
-  ; Clay.ClayProblemVocabulary.InvariantWitness = invariantRequirement Y
+  { PreconditionWitness = preconditionRequirement Y
+  ; PostconditionWitness = postconditionRequirement Y
+  ; InvariantWitness = invariantRequirement Y
   }
 
 literalTopDownClaySolution :
@@ -292,7 +292,7 @@ literalTopDownClaySolution :
   LiteralClayEvidence Y →
   Clay.ClayYangMillsSolution (literalClayVocabulary Y)
 literalTopDownClaySolution Y evidence = record
-  { Clay.ClayYangMillsSolution.preconditions = preconditions evidence
-  ; Clay.ClayYangMillsSolution.postconditions = postconditions evidence
-  ; Clay.ClayYangMillsSolution.invariants = invariants evidence
+  { preconditions = preconditions evidence
+  ; postconditions = postconditions evidence
+  ; invariants = invariants evidence
   }

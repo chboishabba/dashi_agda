@@ -77,21 +77,21 @@ baselineAt :
   (published : SourceNativePublishedFlow) → Nat →
   Native.SourceNativeBalabanBaseline
 baselineAt published scale = record
-  { Native.SourceNativeBalabanBaseline.Coupling = Coupling published
-  ; Native.SourceNativeBalabanBaseline.Density = Density published
-  ; Native.SourceNativeBalabanBaseline.Operation = Operation published
-  ; Native.SourceNativeBalabanBaseline.Action = Action published
-  ; Native.SourceNativeBalabanBaseline.Field = Field published
-  ; Native.SourceNativeBalabanBaseline.RegularTerm = RegularTerm published
-  ; Native.SourceNativeBalabanBaseline.RTerm = RTerm published
-  ; Native.SourceNativeBalabanBaseline.BoundaryTerm = BoundaryTerm published
-  ; Native.SourceNativeBalabanBaseline.VacuumTerm = VacuumTerm published
-  ; Native.SourceNativeBalabanBaseline.SmallFieldScale = SmallFieldScale published
-  ; Native.SourceNativeBalabanBaseline.BlockRadius = BlockRadius published
-  ; Native.SourceNativeBalabanBaseline.AnalyticRadius = AnalyticRadius published
-  ; Native.SourceNativeBalabanBaseline.Decay = Decay published
-  ; Native.SourceNativeBalabanBaseline.completeDensity = completeDensityAt published scale
-  ; Native.SourceNativeBalabanBaseline.differentiated = differentiatedAt published scale
+  { Coupling = Coupling published
+  ; Density = Density published
+  ; Operation = Operation published
+  ; Action = Action published
+  ; Field = Field published
+  ; RegularTerm = RegularTerm published
+  ; RTerm = RTerm published
+  ; BoundaryTerm = BoundaryTerm published
+  ; VacuumTerm = VacuumTerm published
+  ; SmallFieldScale = SmallFieldScale published
+  ; BlockRadius = BlockRadius published
+  ; AnalyticRadius = AnalyticRadius published
+  ; Decay = Decay published
+  ; completeDensity = completeDensityAt published scale
+  ; differentiated = differentiatedAt published scale
   }
 
 record SourceNativeStrongStateAt

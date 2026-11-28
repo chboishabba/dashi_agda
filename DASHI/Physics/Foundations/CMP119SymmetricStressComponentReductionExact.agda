@@ -66,7 +66,7 @@ metricBasisEvaluatorIsComponentSymmetric :
 metricBasisEvaluatorIsComponentSymmetric
     {representation = representation}
     realization readout stress = record
-  { PairingComponentSymmetry.componentSymmetric =
+  { componentSymmetric =
       λ a b →
         cong
           (λ component →
@@ -121,37 +121,37 @@ tenSymmetricComponentsCompileToSixteen :
   NormalizedSymmetricTenComponentInstance evaluator stress →
   Cut.NormalizedCrossSectorStressInstance StressTensor evaluator stress
 tenSymmetricComponentsCompileToSixteen instance = record
-  { Cut.NormalizedCrossSectorStressInstance.qft00 = qft00 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft11 = qft11 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft22 = qft22 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft33 = qft33 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft01 = qft01 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft02 = qft02 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft03 = qft03 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft10 =
+  { qft00 = qft00 instance
+  ; qft11 = qft11 instance
+  ; qft22 = qft22 instance
+  ; qft33 = qft33 instance
+  ; qft01 = qft01 instance
+  ; qft02 = qft02 instance
+  ; qft03 = qft03 instance
+  ; qft10 =
       trans
         (componentSymmetric (symmetry instance) Flat.xAxis Flat.timeAxis)
         (qft01 instance)
-  ; Cut.NormalizedCrossSectorStressInstance.qft12 = qft12 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft13 = qft13 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft20 =
+  ; qft12 = qft12 instance
+  ; qft13 = qft13 instance
+  ; qft20 =
       trans
         (componentSymmetric (symmetry instance) Flat.yAxis Flat.timeAxis)
         (qft02 instance)
-  ; Cut.NormalizedCrossSectorStressInstance.qft21 =
+  ; qft21 =
       trans
         (componentSymmetric (symmetry instance) Flat.yAxis Flat.xAxis)
         (qft12 instance)
-  ; Cut.NormalizedCrossSectorStressInstance.qft23 = qft23 instance
-  ; Cut.NormalizedCrossSectorStressInstance.qft30 =
+  ; qft23 = qft23 instance
+  ; qft30 =
       trans
         (componentSymmetric (symmetry instance) Flat.zAxis Flat.timeAxis)
         (qft03 instance)
-  ; Cut.NormalizedCrossSectorStressInstance.qft31 =
+  ; qft31 =
       trans
         (componentSymmetric (symmetry instance) Flat.zAxis Flat.xAxis)
         (qft13 instance)
-  ; Cut.NormalizedCrossSectorStressInstance.qft32 =
+  ; qft32 =
       trans
         (componentSymmetric (symmetry instance) Flat.zAxis Flat.yAxis)
         (qft23 instance)

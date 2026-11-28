@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact where
 
 ------------------------------------------------------------------------
@@ -218,31 +217,31 @@ asCylinderLimitData :
 asCylinderLimitData
     {sequenceLimit = sequenceLimit}
     {limitLaws = limitLaws} family = record
-  { Cylinder.ScalarCylinderExpectationLimitData.zeroObservable =
+  { zeroObservable =
       Finite.zeroObservable
-  ; Cylinder.ScalarCylinderExpectationLimitData.oneObservable =
+  ; oneObservable =
       Finite.oneObservable
-  ; Cylinder.ScalarCylinderExpectationLimitData.addObservable =
+  ; addObservable =
       Finite.addObservable
-  ; Cylinder.ScalarCylinderExpectationLimitData.scaleObservable =
+  ; scaleObservable =
       Finite.scaleObservable
-  ; Cylinder.ScalarCylinderExpectationLimitData.Nonnegative =
+  ; Nonnegative =
       Finite.PointwiseNonnegative
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteExpectation =
+  ; finiteExpectation =
       finiteExpectation family
-  ; Cylinder.ScalarCylinderExpectationLimitData.limitExpectation =
+  ; limitExpectation =
       limitExpectation family
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteZero =
+  ; finiteZero =
       finiteExpectationZero family
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteOne =
+  ; finiteOne =
       finiteExpectationOne family
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteAdd =
+  ; finiteAdd =
       finiteExpectationAdd family
-  ; Cylinder.ScalarCylinderExpectationLimitData.finiteScale =
+  ; finiteScale =
       finiteExpectationScale family
-  ; Cylinder.ScalarCylinderExpectationLimitData.finitePositive =
+  ; finitePositive =
       finiteExpectationPositive family
-  ; Cylinder.ScalarCylinderExpectationLimitData.selectedConverges =
+  ; selectedConverges =
       λ observable → refl
   }
 

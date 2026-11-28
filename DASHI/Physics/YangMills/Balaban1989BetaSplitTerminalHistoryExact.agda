@@ -78,21 +78,21 @@ asTerminalHistory :
   BetaSplitTerminalHistoryData trajectory split →
   Terminal.TerminalInverseThresholdHistory trajectory
 asTerminalHistory {split = split} dataSet = record
-  { Terminal.TerminalInverseThresholdHistory.couplingAt = couplingAt dataSet
-  ; Terminal.TerminalInverseThresholdHistory.gamma = gamma dataSet
-  ; Terminal.TerminalInverseThresholdHistory.inverseThreshold =
+  { couplingAt = couplingAt dataSet
+  ; gamma = gamma dataSet
+  ; inverseThreshold =
       inverseThreshold dataSet
-  ; Terminal.TerminalInverseThresholdHistory.terminalScale = terminalScale dataSet
-  ; Terminal.TerminalInverseThresholdHistory.ActiveScale = ActiveScale dataSet
-  ; Terminal.TerminalInverseThresholdHistory.terminalActive = terminalActive dataSet
-  ; Terminal.TerminalInverseThresholdHistory.gapToTerminal = gapToTerminal dataSet
-  ; Terminal.TerminalInverseThresholdHistory.scaleReachesTerminal =
+  ; terminalScale = terminalScale dataSet
+  ; ActiveScale = ActiveScale dataSet
+  ; terminalActive = terminalActive dataSet
+  ; gapToTerminal = gapToTerminal dataSet
+  ; scaleReachesTerminal =
       scaleReachesTerminal dataSet
-  ; Terminal.TerminalInverseThresholdHistory.terminalInverseThreshold =
+  ; terminalInverseThreshold =
       terminalInverseThreshold dataSet
-  ; Terminal.TerminalInverseThresholdHistory.betaNonnegative =
+  ; betaNonnegative =
       Monotone.betaSplitAsNonnegativeTrajectory split
-  ; Terminal.TerminalInverseThresholdHistory.inverseThresholdImpliesSmallCoupling =
+  ; inverseThresholdImpliesSmallCoupling =
       inverseThresholdImpliesSmallCoupling dataSet
   }
 

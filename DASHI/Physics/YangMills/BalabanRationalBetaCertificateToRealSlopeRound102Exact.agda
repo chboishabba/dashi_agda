@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact where
 
 open import Agda.Builtin.Equality using (_≡_)

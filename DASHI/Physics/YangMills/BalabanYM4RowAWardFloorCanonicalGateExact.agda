@@ -43,12 +43,12 @@ wardCauchySourceConstants :
   0ℚ ≤ historyConstant →
   Cauchy.RowACauchySourceConstants
 wardCauchySourceConstants mixed historyConstant historyNN = record
-  { Cauchy.RowACauchySourceConstants.gaussianFloor = wardGaussianFloor
-  ; Cauchy.RowACauchySourceConstants.gaussianFloorPositive =
+  { gaussianFloor = wardGaussianFloor
+  ; gaussianFloorPositive =
       wardGaussianFloorPositive
-  ; Cauchy.RowACauchySourceConstants.mixedInteraction = mixed
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstant = historyConstant
-  ; Cauchy.RowACauchySourceConstants.historyDerivativeConstantNonnegative = historyNN
+  ; mixedInteraction = mixed
+  ; historyDerivativeConstant = historyConstant
+  ; historyDerivativeConstantNonnegative = historyNN
   }
 
 wardCanonicalGamma :

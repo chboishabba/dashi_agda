@@ -45,11 +45,11 @@ stressFiniteHilbertData :
   (dataSet : LiteralStressCoefficientShellIdentification) →
   Nat → Hilbert.FiniteMarkedSourceHilbertData
 stressFiniteHilbertData dataSet cutoff = record
-  { Hilbert.FiniteMarkedSourceHilbertData.samples = coefficientSamples dataSet cutoff
-  ; Hilbert.FiniteMarkedSourceHilbertData.coefficientEnergyCap =
+  { samples = coefficientSamples dataSet cutoff
+  ; coefficientEnergyCap =
       RowB.combinedBaseEnergy (RowB.sourceData (shellData dataSet))
         * RowB.geometricBound (shellData dataSet)
-  ; Hilbert.FiniteMarkedSourceHilbertData.coefficientEnergyBound =
+  ; coefficientEnergyBound =
       stressCoefficientEnergyUniformBound dataSet cutoff
   }
 

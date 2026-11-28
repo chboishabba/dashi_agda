@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanSelectedRegularESourceCompilerRound238Exact where
 
 ------------------------------------------------------------------------
@@ -63,15 +62,15 @@ compilePreferredRegularERealization :
   R222.PreferredRegularERealization projection
 compilePreferredRegularERealization {projection = projection} {semantics = semantics}
     localization weld = record
-  { R222.PreferredRegularERealization.Background = Selected.Background semantics
-  ; R222.PreferredRegularERealization.Volume = Volume localization
-  ; R222.PreferredRegularERealization.Tangent = Tangent localization
-  ; R222.PreferredRegularERealization.Component = Component localization
-  ; R222.PreferredRegularERealization.evaluateRegularE = evaluateRegularE weld
-  ; R222.PreferredRegularERealization.components = components localization
-  ; R222.PreferredRegularERealization.localizedRegularActivity =
+  { Background = Selected.Background semantics
+  ; Volume = Volume localization
+  ; Tangent = Tangent localization
+  ; Component = Component localization
+  ; evaluateRegularE = evaluateRegularE weld
+  ; components = components localization
+  ; localizedRegularActivity =
       physicalLocalizedActivity localization
-  ; R222.PreferredRegularERealization.selectedRegularEIsLocalizedCompositeSum =
+  ; selectedRegularEIsLocalizedCompositeSum =
       λ scale volume background →
         trans
           (sym (selectedSourcePotentialIsRegularE weld scale background))

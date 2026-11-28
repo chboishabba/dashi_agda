@@ -26,9 +26,11 @@ module DASHI.Physics.YangMills.BalabanPhysicalSU2RationalMatrixCoordinatesExact 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _*_)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -40,6 +42,9 @@ import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as Physi
 
 emptyElim : ∀ {A : Set} → Empty → A
 emptyElim ()
+
+zeroPlusZero : 0ℚ + 0ℚ ≡ 0ℚ
+zeroPlusZero = ℚRing.solve-∀
 
 kroneckerDelta :
   ∀ {A : Set} → DecidableEquality A → A → A → ℚ
@@ -57,9 +62,21 @@ kroneckerSelf decide value with decide value value
 kroneckerDifferent :
   ∀ {A : Set} (decide : DecidableEquality A) {left right} →
   left ≢ right → kroneckerDelta decide left right ≡ 0ℚ
-kroneckerDifferent decide different with decide _ _
+kroneckerDifferent decide {left} {right} different with decide left right
 ... | yes equality = emptyElim (different equality)
 ... | no inequality = refl
+
+notMemberOfCons :
+  ∀ {A : Set} {value row : A} {values : List A} →
+  row ∉ (value ∷ values) → row ≡ value → ⊥
+notMemberOfCons notMember equality with equality
+... | refl = notMember here
+
+notTailAtEqual :
+  ∀ {A : Set} {value row : A} {values : List A} →
+  value ∉ values → row ∈ values → row ≡ value → ⊥
+notTailAtEqual notTail membership equality with equality
+... | refl = notTail membership
 
 deltaSumAbsent :
   ∀ {A : Set}
@@ -71,15 +88,13 @@ deltaSumAbsent :
     (λ column → kroneckerDelta decide row column * vector column)
   ≡ 0ℚ
 deltaSumAbsent decide [] row notMember vector = refl
-deltaSumAbsent decide (value ∷ values) row notMember vector
-  rewrite kroneckerDifferent decide
-    (λ equality →
-      notMember
-        (subst (λ candidate → candidate ∈ value ∷ values)
-          (sym equality) here))
+deltaSumAbsent decide (value ∷ values) row notMember vector with decide row value
+... | yes equality = ⊥-elim (notMemberOfCons notMember equality)
+... | no inequality
+  rewrite ℚP.*-zeroˡ (vector value)
         | deltaSumAbsent decide values row
-            (λ membership → notMember (there membership)) vector =
-  ℚRing.solve-∀
+            (λ membership → notMember (there membership)) vector
+        | zeroPlusZero = refl
 
 deltaSumIdentity :
   ∀ {A : Set}
@@ -94,15 +109,17 @@ deltaSumIdentity :
 deltaSumIdentity decide []-free row () vector
 deltaSumIdentity decide (notTail ∷-free tailFree) row here vector
   rewrite kroneckerSelf decide row
-        | deltaSumAbsent decide _ row notTail vector =
-  ℚRing.solve-∀
+        | deltaSumAbsent decide _ row notTail vector
+        | ℚP.*-identityˡ (vector row)
+        | ℚP.+-identityʳ (vector row) = refl
 deltaSumIdentity decide {values = value ∷ values}
     (notTail ∷-free tailFree) row (there membership) vector
-  rewrite kroneckerDifferent decide
-    (λ equality →
-      notTail (subst (λ candidate → candidate ∈ values) equality membership))
-        | deltaSumIdentity decide tailFree row membership vector =
-  ℚRing.solve-∀
+  with decide row value
+... | yes equality = ⊥-elim (notTailAtEqual notTail membership equality)
+... | no inequality
+  rewrite deltaSumIdentity decide tailFree row membership vector =
+  trans (cong (λ z → z + vector row) (ℚP.*-zeroˡ (vector value)))
+        (ℚP.+-identityˡ (vector row))
 
 ------------------------------------------------------------------------
 -- Three Lie-coordinate factors.
@@ -212,11 +229,11 @@ physicalCoordinateDelta L =
 physicalFiniteRationalCoordinates : ∀ L →
   Matrix.FiniteRationalCoordinates (Physical.PhysicalSU2Coordinate L)
 physicalFiniteRationalCoordinates L = record
-  { Matrix.FiniteRationalCoordinates.coordinates =
+  { coordinates =
       elements (physicalCoordinateFinite L)
-  ; Matrix.FiniteRationalCoordinates.delta =
+  ; delta =
       physicalCoordinateDelta L
-  ; Matrix.FiniteRationalCoordinates.deltaActsAsIdentity = λ vector row →
+  ; deltaActsAsIdentity = λ vector row →
       deltaSumIdentity
         (physicalCoordinateDecidableEquality L)
         (physicalCoordinateElementsDuplicateFree L)

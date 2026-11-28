@@ -40,7 +40,8 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _<ℝ
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
+import DASHI.Physics.YangMills.CompactLieGroupCore as Core
+import DASHI.Physics.YangMills.CompactLieGroupDerived as Derived
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
@@ -60,8 +61,44 @@ module _
   Pair : Set
   Pair = Torus.Product Link Link
 
+  group : Core.Group Link
+  group = SUN.sunMatrixGroup theory
+
+  inverseOfProduct : ∀ x y →
+    Core.inverse group (Core.multiply group x y)
+      ≡ Core.multiply group (Core.inverse group y) (Core.inverse group x)
+  inverseOfProduct x y =
+    sym (Derived.rightInverseUnique group
+      (Core.multiply group (Core.inverse group y) (Core.inverse group x))
+      (trans
+        (Core.multiplyAssociative group x y
+          (Core.multiply group (Core.inverse group y) (Core.inverse group x)))
+        (trans
+          (cong (Core.multiply group x)
+            (sym (Core.multiplyAssociative group y
+              (Core.inverse group y) (Core.inverse group x))))
+          (trans
+            (cong (Core.multiply group x)
+              (cong (λ z → Core.multiply group z (Core.inverse group x))
+                (Core.inverseRight group y)))
+            (trans
+              (cong (Core.multiply group x)
+                (Core.identityLeft group (Core.inverse group x)))
+              (Core.inverseRight group x))))))
+
   originalGroup : Bond.ExactLinkGroup Link
-  originalGroup = Native.sunExactSignedLinkGroup theory
+  originalGroup = record
+    { identity = Core.identity group
+    ; multiply = Core.multiply group
+    ; inverse = Core.inverse group
+    ; multiplyAssociative = Core.multiplyAssociative group
+    ; identityLeft = Core.identityLeft group
+    ; identityRight = Core.identityRight group
+    ; inverseLeft = Core.inverseLeft group
+    ; inverseRight = Core.inverseRight group
+    ; inverseProduct = inverseOfProduct
+    ; inverseInverse = Derived.inverseInvolutive group
+    }
 
   multiply : Link → Link → Link
   multiply = SUN.sunMultiply theory
@@ -211,8 +248,9 @@ module _
       (λ pairs →
         Product.productIntegral source
           (λ spectator → integrand pairs spectator))
-  originalAllPairsWithArbitrarySpectatorWeight integrand =
-    originalAllPairsGeneralWeightedChange _
+  originalAllPairsWithArbitrarySpectatorWeight {n = n} {spectators = spectators}
+      integrand =
+    originalAllPairsGeneralWeightedChange {n = n} _
 
   -- Specific arities of the native periodic side-four -> side-two
   -- fine-bond partition from F15/F16; linking THIS vector integral
@@ -338,8 +376,8 @@ module _
   -- one-link strict-positive integration input, not a separate
   -- postulate that the coarse Wilson-Gibbs partition is nonzero.
   originalAllPairsFibreDensityStrictlyPositive :
-    (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
-    ∀ {n}
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ {n : Nat}
     (weight : Vec Pair n → ℝ) →
     (∀ pairs → 0ℝ <ℝ weight pairs) →
     ∀ blocks →
@@ -364,8 +402,8 @@ module _
   -- The numerical value is the SAME unnormalized fine partition by
   -- F19; this does not construct the physical Borel Haar itself.
   originalAllPairsEffectivePartitionStrictlyPositive :
-    (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
-    ∀ {n}
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ {n : Nat}
     (weight : Vec Pair n → ℝ) →
     (∀ pairs → 0ℝ <ℝ weight pairs) →
     0ℝ <ℝ Product.productIntegral source
@@ -509,13 +547,13 @@ module _
         (λ pairs →
           weight pairs *ℝ observable (actualPairBlockVector pairs))
       ≡ actualAllPairsWeightedCoarseNumerator weight observable
-    originalAllPairsWeightedHaarDisintegration
+    originalAllPairsWeightedHaarDisintegration {n = n}
         weight observable =
       trans
-        (originalAllPairsGeneralWeightedChange _)
+        (originalAllPairsGeneralWeightedChange {n = n} _)
         (trans
-          (originalInterleavedIntegralIsCoarseFibre _)
-          (IntegralCongruence.productIntegralCongruent source _ _
+          (originalInterleavedIntegralIsCoarseFibre {n = n} _)
+          (IntegralCongruence.productIntegralCongruent {n = n} source _ _
             (originalFibreIntegralPullsCoarseObservable
               weight observable)))
 

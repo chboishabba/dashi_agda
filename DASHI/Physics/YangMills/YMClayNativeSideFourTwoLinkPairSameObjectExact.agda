@@ -36,14 +36,14 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as Block
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SUNNative
+import DASHI.Physics.YangMills.YMClaySUNPeriodicWilsonDensityCoreExact as Density
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNBlock
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
-import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+import DASHI.Physics.YangMills.YMClayStrictPositiveRealExponentialCoreExact as Exp
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
@@ -102,7 +102,7 @@ module _
   Link = SUN.SUNMatrixElement theory
 
   selectedOriginalGroup : Bond.ExactLinkGroup Link
-  selectedOriginalGroup = SUNNative.sunExactSignedLinkGroup theory
+  selectedOriginalGroup = Density.periodicSUNLinkGroup theory
 
   originalSUNSideFourLinks : Set
   originalSUNSideFourLinks = Variable.SUNPeriodicLinks theory 3
@@ -145,6 +145,6 @@ module _
       fine bond
     ≡
     literalOriginalTwoFineLinkProduct
-      (SUNNative.sunExactSignedLinkGroup theory) fine bond
+      (Density.periodicSUNLinkGroup theory) fine bond
   actualSelectedWeightedGibbsBlockIsNativePair fine bond =
     originalSUNBlockIsLiteralTwoLinkProduct theory fine bond

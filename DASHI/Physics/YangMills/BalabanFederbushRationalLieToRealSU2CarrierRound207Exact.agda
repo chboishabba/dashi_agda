@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFederbushRationalLieToRealSU2CarrierRound207Exact where
 
 ------------------------------------------------------------------------
