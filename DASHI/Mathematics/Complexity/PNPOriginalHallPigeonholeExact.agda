@@ -41,17 +41,20 @@ requiredSubsetNoGo : ∀ {Variable Column : Set} {r : Nat}
   PHP.carrierSize (Carrier.allNodes columns) < r →
   (selected : Variable → Bool) →
   (row : Fin.Fin r → Variable → Bool) →
-  (column : Variable → Column) →
+  (column : ∀ i v → row i v ≡ true → Column) →
   (cover : ∀ i → Σ Variable (λ v → selected v ≡ true × row i v ≡ true)) →
   (rowDisjoint : ∀ i j v → row i v ≡ true → row j v ≡ true → i ≡ j) →
-  (columnCapacity : ∀ u v → selected u ≡ true → selected v ≡ true →
-    column u ≡ column v → u ≡ v) → ⊥
+  (columnCapacity : ∀ i j u v (hu : row i u ≡ true) (hv : row j v ≡ true) →
+    selected u ≡ true → selected v ≡ true →
+    column i u hu ≡ column j v hv → u ≡ v) → ⊥
 requiredSubsetNoGo columns excess selected row column cover rowDisjoint capacity =
-  noCarrierInjection columns excess (λ i → column (proj₁ (cover i)))
+  noCarrierInjection columns excess
+    (λ i → column i (proj₁ (cover i)) (proj₂ (proj₂ (cover i))))
     (λ i j same →
       rowDisjoint i j (proj₁ (cover i))
         (proj₂ (proj₂ (cover i)))
-        (trans (cong (row j) (capacity (proj₁ (cover i)) (proj₁ (cover j))
+        (trans (cong (row j) (capacity i j (proj₁ (cover i)) (proj₁ (cover j))
+          (proj₂ (proj₂ (cover i))) (proj₂ (proj₂ (cover j)))
           (proj₁ (proj₂ (cover i))) (proj₁ (proj₂ (cover j))) same))
           (proj₂ (proj₂ (cover j)))))
 
@@ -65,12 +68,14 @@ exactCoverSubsetNoGo : ∀ {Element Variable Column : Set} {r : Nat}
   (contains : Variable → Element → Bool) →
   (selected : Variable → Bool) →
   (rows : Fin.Fin r → Element) →
-  (column : Variable → Column) →
+  (column : ∀ i v → contains v (rows i) ≡ true → Column) →
   Karp.ExactCover contains selected →
   (rowDisjoint : ∀ i j v → contains v (rows i) ≡ true →
     contains v (rows j) ≡ true → i ≡ j) →
-  (columnCapacity : ∀ u v → selected u ≡ true → selected v ≡ true →
-    column u ≡ column v → u ≡ v) → ⊥
+  (columnCapacity : ∀ i j u v (hu : contains u (rows i) ≡ true)
+    (hv : contains v (rows j) ≡ true) →
+    selected u ≡ true → selected v ≡ true →
+    column i u hu ≡ column j v hv → u ≡ v) → ⊥
 exactCoverSubsetNoGo columns excess contains selected rows column cover disjoint capacity =
   requiredSubsetNoGo columns excess selected (λ i v → contains v (rows i))
     column (λ i → Karp.ExactlyOneIndexed.covered cover (rows i))
