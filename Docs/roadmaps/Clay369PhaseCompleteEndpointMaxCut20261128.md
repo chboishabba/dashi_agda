@@ -1,3 +1,20 @@
+> **28 November 2026 NS MATHEMATICAL VALIDITY OVERRIDE — READ FIRST.**
+> The controlling original-source inventory, real physical negative controls and
+> repaired A/B/C/D critical path now live in
+> [NavierStokesAllEndpointsGeometryForwardMaxCut20261128.md](NavierStokesAllEndpointsGeometryForwardMaxCut20261128.md).
+> Exact original 316-incidence physical-real cutoff-1 Galerkin witness refutes
+> the **UNRESTRICTED** R645/R653 strict-margin C2 analytical premise
+> (critical production 0, D=432, R406<-1104 at scaled amplitude 2).
+> Source-written conditional R645/R727 compilers remain correct as conditionals,
+> but cannot establish arbitrary-data periodic B using that false physical
+> hypothesis. Previously stated R645 "open analytic obligation" is SUPERSEDED
+> by "refuted as universal physical-real" for this exact premise.
+> Independent R726 uncompensated sign is also refuted; R723+defect=R406 means
+> a joint estimate is not two independent new payments. R596 is finite
+> Gram/forcing algebra, *not* a native proof of Q' without a real-time heat/FTC
+> weld. Existing A physical two-seam and convolution compilers remain
+> conditional on the original kernel/measure. No Clay endpoint promoted.
+>
 # Clay endpoint producer max-cut — 28 November 2026
 
 Companion to ClayFourEndpointReverseSolveGapMatrix20261125.md; not a replacement for the original theorem owners. Source-written mathematics, no native kernel acceptance. All lanes active; A/B independent of C/D.
