@@ -27,6 +27,7 @@ import DASHI.Moonshine.CM163BishopHecke41FormalCyclotomicNormExact as N
 import DASHI.Moonshine.CM163BishopHecke41ConvergentSeriesExact as Eval
 import DASHI.Moonshine.CM163BishopHecke41ActualCrossExact as Cross
 import DASHI.Moonshine.CM163BishopHecke41ProductExact as Prod
+import DASHI.Moonshine.CM163BishopHeckeProductAlgebraExact as Alg
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 open C using (BishopComplex; _≈C_)
 open A using (_+C_; _-C_; _*C_; powC)
@@ -172,3 +173,60 @@ module At (f : N.SeriesC) (summable : Seq._isConvergent (Seq.SeriesOf (moment f)
             (C.imagConverges (converges u (v n) hu (hv n))) k) ,
           Budget.limitError (C.imagTerms (terms f u z)) _ (λ i → proj₂ (termBound f u z hu hz i))
             (C.imagConverges (converges u z hu hz)) k))
+
+
+-- Same finite summation and convergence carriers as the original Eval.
+-- The limit factor is constructed from every finite prefix.
+prefixCong : ∀ f g → (∀ n → f n ≈C g n) → ∀ m →
+  complexPrefix f m ≈C complexPrefix g m
+prefixCong f g h zero = C.≈C-refl _
+prefixCong f g h (suc m) = A.addCCongruent (prefixCong f g h m) (h m)
+
+prefixSub : ∀ f g m → complexPrefix (λ n → f n -C g n) m ≈C
+  (complexPrefix f m -C complexPrefix g m)
+prefixSub f g m = CP.minusPrefix (C.realTerms f) (C.realTerms g) m ,
+  CP.minusPrefix (C.imagTerms f) (C.imagTerms g) m
+
+prefixMul : ∀ w f m → complexPrefix (λ n → w *C f n) m ≈C (w *C complexPrefix f m)
+prefixMul w f zero = complexSym (L.complexMultiplyRightZero w)
+prefixMul w f (suc m) = complexTrans (A.addCCongruent (prefixMul w f m) (C.≈C-refl _))
+  (complexSym (L.complexMultiplyDistributesLeft w _ _))
+
+prefixLimit : ∀ {f z} → C.ComplexSeriesConvergesTo f z → Lim.Conv (complexPrefix f) z
+prefixLimit cv = original-bishop-pointwise-complex-converges (C.realConverges cv) (C.imagConverges cv)
+
+termFactor : ∀ f u v n → (N.twist v f n -C N.twist u f n) ≈C
+  ((v -C u) *C terms f u v n)
+termFactor f u v n =
+  complexTrans (complexSym (Alg.mulSub (f n) (powC v n) (powC u n)))
+    (complexTrans (A.mulCCongruent (C.≈C-refl _) (factor u v n))
+      (complexTrans (complexSym (L.complexMultiplyAssociative (f n) (v -C u) (Q u v n)))
+        (complexTrans (A.mulCCongruent (L.complexMultiplyCommutative (f n) (v -C u)) (C.≈C-refl _))
+          (L.complexMultiplyAssociative (v -C u) (f n) (Q u v n)))))
+
+module Factorization (f : N.SeriesC) (summable : Seq._isConvergent (Seq.SeriesOf (moment f))) where
+  module D = At f summable
+
+  increment : ∀ u v hu hv → (eu : Eval.Eval u f) → (ev : Eval.Eval v f) →
+    (Eval.value ev -C Eval.value eu) ≈C ((v -C u) *C D.value u v hu hv)
+  increment u v hu hv eu ev =
+    let cv = Lim.subConv (prefixLimit (Eval.converges ev)) (prefixLimit (Eval.converges eu))
+        right = Lim.mulConst (v -C u) (prefixLimit (D.converges u v hu hv))
+        eq : ∀ m → (complexPrefix (N.twist v f) m -C complexPrefix (N.twist u f) m) ≈C
+          ((v -C u) *C complexPrefix (terms f u v) m)
+        eq m = complexTrans (complexSym (prefixSub (N.twist v f) (N.twist u f) m))
+          (complexTrans (prefixCong _ _ (termFactor f u v) m) (prefixMul (v -C u) (terms f u v) m))
+    in Lim.convUnique (Lim.convTransport eq cv) right
+
+  -- Local factor-derivative receipt at an arbitrary interior point.
+  -- The derivative value is the diagonal quotient, and the same
+  -- function is used on both sides of the increment identity.
+  derivativeAlong : ∀ u (hu : UnitDisk u) (v : Nat → BishopComplex) →
+    (hv : ∀ n → UnitDisk (v n)) → Lim.Conv v u →
+    (eu : Eval.Eval u f) → (ev : ∀ n → Eval.Eval (v n) f) →
+    (∀ n → (Eval.value (ev n) -C Eval.value eu) ≈C
+      ((v n -C u) *C D.value u (v n) hu (hv n))) ×
+    Lim.Conv (λ n → D.value u (v n) hu (hv n)) (D.value u u hu hu)
+  derivativeAlong u hu v hv cv eu ev =
+    (λ n → increment u (v n) hu (hv n) eu (ev n)) ,
+    D.continuous u hu v u hv hu cv
