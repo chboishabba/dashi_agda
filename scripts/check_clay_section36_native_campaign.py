@@ -17,7 +17,7 @@ Usage:
     --agda-include /checkout/bishop \\
     --rh-source-root /checkout/pinned_external_rh \\
     --rh-manifest /checkout/sha256_manifest.json \\
-    --rh-main-sha256 <64-hex-pin> \\\n    --rh-source-head <40-hex-external-original-commit> \\
+    --rh-main-sha256 <64-hex-pin> \\n    --rh-source-head <40-hex-external-original-commit> \\
     --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection36Native.json
 
 Return 0 ONLY when every SELECTED source entrypoint completes native
@@ -104,18 +104,18 @@ def lean_axioms_trusted(output: str, source: str) -> tuple[bool, str]:
     No proof status can be inferred from an empty or unparsable log.
     """
     requested = re.findall(
-        r"(?m)^\\s*#print\\s+axioms\\s+([\\w.]+)\\s*$", source)
+        r"(?m)^\s*#print\s+axioms\s+([\w.]+)\s*$", source)
     if not requested:
         return False, "missing #print axioms in source"
     allow = {"propext", "Classical.choice", "Quot.sound"}
     for declaration in requested:
         leaf = re.escape(declaration)
         matches = re.findall(
-            r"(?m)^\\s*" + leaf +
-            r"\\s+depends on axioms:\\s*\\[([^]]*)\\]\\s*$", output)
+            r"(?m)^\s*" + leaf +
+            r"\s+depends on axioms:\s*\[([^]]*)\]\s*$", output)
         empties = re.findall(
-            r"(?m)^\\s*" + leaf +
-            r"\\s+does not depend on any axioms\\s*$", output)
+            r"(?m)^\s*" + leaf +
+            r"\s+does not depend on any axioms\s*$", output)
         if len(matches) + len(empties) != 1:
             return False, "missing/ambiguous axiom audit: " + declaration
         actual = {a.strip() for a in matches[0].split(",")
@@ -190,7 +190,7 @@ def main() -> int:
             audit = "Agda --safe"
             if owner != "YM" and result["exit"] == 0:
                 trusted, audit = lean_axioms_trusted(
-                    result["stdout_tail"] + "\\n" + result["stderr_tail"],
+                    result["stdout_tail"] + "\n" + result["stderr_tail"],
                     (root / path).read_text(encoding="utf8"))
             report["checks"].append({"owner": owner, "path": path,
                      "status": "PASS" if result["exit"] == 0 and trusted else "FAIL",
