@@ -80,7 +80,8 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
                     # Store actual signed residuals, independently of index labels.
                     indexed_events.append(dict(
                         index=dict(history=cfg['row_keys'][i],time=[cycle_index,index],
-                            depth=cfg['angular_level'],iteration=cycle_index,
+                            depth=dict(spatial=cfg['angular_level'],temporal=cfg.get('temporal_depth')),
+                            iteration=cfg.get('frobenius_iteration'),
                             version=cfg.get('source_version','unversioned')),
                         cell=i,old_right=pop_right[i].tolist(),new_right=pr.tolist(),
                         signed_amplitude_residual=lift['signed_amplitude_residual'].tolist(),
