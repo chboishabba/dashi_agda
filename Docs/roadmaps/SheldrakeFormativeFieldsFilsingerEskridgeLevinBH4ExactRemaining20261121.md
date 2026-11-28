@@ -1,5 +1,22 @@
 # Formative fields × source work × Filsinger/Eskridge × Levin/BH4 — exact remaining phase roadmap
 
+## 2026-11-28 — Coherent steelman / Gauss-ADE-reverse connected maximum cut
+
+Reconcile master KSW668FullVectorMaxwellJetExact, SmithFilsingerMaxwellTimedSpatialWeldExact (26e31a2e), SmithFilsingerSpaceTimePoyntingTelescopeExact (bfb4bef5), SmithFilsingerIndexedCayleyFaceWeldExact (ebd8b018), #1524 be26bcef switched ADE (64ebab27), Lorentz ADE (af7a88e5), Floquet (a5accb7c), harmonic (f8d4df38), #1291 c68b44f and master GovernedIndexedResidualCubeExact (42b70ebb). These are existing owners, not new missing abstract lemmas. Preserve same original source, geometry, clock, material and receiver. Source-authored #1537 commits 3bf23236 (solar_gauss_ade_weld.py), 1af9e025 (solar_coherent_reverse_weld.py), 5d0ce90e (check_solar_gauss_ade_reverse.py). These gates are UNEXECUTED at roadmap insertion; do not mark accepted until local receipt.
+
+| P0 | Exact connected deliverable | Acceptance boundary |
+|---|---|---|
+| 1 | Original incidence/Hodge Q A=0, signed Q T-Q on actual scheduler, physical kernel and complementary energy; local constraint-compatible propagation | Audit original shell including order, compare full midpoint only as nonlocal reference; no free projection or causal promotion |
+| 2 | Rectangular switched ADE on same edge/face complex, displacement continuity, charge continuity, signed modulation work | Exact ledger and explicit material coefficient provenance; scalar synthetic permittivity not measured HF response |
+| 3 | Existing Floquet/harmonic owner with rectangular maps, singular compatible periodic state, reverse reachable target/null fibre, actual receiver work | Finite transfer and paid control; no inferred phase coherence or source origin |
+| 4 | Signed nested restriction/prolongation of Gauss, material, field and coefficient work residuals under independent hyperfabric indices | Actual commutators and interval propagation, not labels |
+| 5 | Coherent activation versus fixed-heat dominated routes; both coherent-wave and biased/slow source regimes, nonlinear history remains main physical target | Reverse-solve paid modulation threshold; strongest passive comparator; four-world same boundary |
+| 6 | Constraint-compatible practical restoration, controlled-duration actuator or rigorous obstruction | No artificial damping of Gauss sectors; exact finite versus asymptotic distinction |
+| 7 | All eligible layout and control upper/lower certificates, 3:2 versus golden ratio, travelling-wave polarization and frequency comparisons | Same resource budget, source impedance and phase assumptions; not geometry-only advantage |
+| 8 | Original same-device/source data, independent V/I and physical material modulation, open-boundary/continuum causal identification | External evidence cannot be manufactured by proofs; preserve Filsinger/Smith/user attribution and separate regimes |
+
+Next execution: local exact tetrahedron fixture, then actual original shell incidence and indexed stage receipt audit, constraint-preserving reference with explicit nonlocal scope, coherent same-shell maps and matched work ledger. No CI/kernel or detached files. Prior exact tail results remain scoped to the split model, not the corrected Maxwell constraint chart.
+
 ## 2026-11-28 — Exact-input finite-split endpoint, outward material history, matched return
 
 **Reconciliation:** starting HEAD 7e1013ad1aa2 already has native nested two-jet acceptance, exact modular observability, direct nonfrozen passive box, original source/receiver ledger, and separate controlled/source-off terminal policies. This tranche reuses them; it does not replace the native solver or claim a physical continuum model.
