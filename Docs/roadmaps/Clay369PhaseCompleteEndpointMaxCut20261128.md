@@ -727,3 +727,153 @@ All the newly written native bodies are PENDING_KERNEL. No
 native compiler, test CI, full branch rebase or transitive axiom
 acceptance run has occurred. Never call a source-written theorem
 a Clay endpoint without the physical/universal payments.
+
+
+## Section 26 — same original source, inverse-limit geometry and true no-go controls
+
+Date 2026-11-28. This tranche uses original-source owner branches
+rather than replacing them. Fresh PR heads BEFORE edits:
+Agda #1551 b024a5f99abc; YM #1536 495b6e8ebbbb;
+Lean #123 851c2f00a258; #124 bfc0d515dcdbe;
+PNP #119 dd5202d23e99; RH #121 3eb36764e36c.
+Neither Agda nor Lean kernel or GitHub CI has been run.
+All native additions here are SOURCE-WRITTEN/PENDING_KERNEL.
+
+### YM CMP102 — exact original finite G_COUNT geometric rate derived
+This is the highest mathematical impact this tranche. Original
+DASHI/Foundations/BishopFinSumSeriesBridgeExact.agda explicitly proves
+Seq.SeriesOf(c,count) is the sum over j=0,...,count-1;
+there is no guessed inclusive-index convention. The selected original
+YMClayCMP102OriginalGFiniteLimitTransportExact.agda uses
+a_j=1/(2j+2)!, b_j=1/(2j+3)! in the original Bishop represented real,
+A_c=sum_{j<c}a_j X^j, B_c=sum_{j<c}b_j X^j,
+G_c=1-2A_c-X A_c^2+2X B_c+X^2 B_c^2.
+
+Original signed even/odd finite Cauchy parity is ALREADY source-written
+in YMClayCMP102OriginalEndpointCauchyShiftExact:
+shiftedNativeBracketCoefficientZero and all-degree signed row identities.
+Independent all-degree algebraic proof: C(z)^2-S(z)^2=1 coefficient
+cancellation is exactly even-minus-odd binomial parity at degree 2k,
+so every coefficient [X^k]G_c=0 for k<c; first nonzero
+[X^c]G_c=2/(2c+2)! for c>=1. Uniform positive-coefficient geometric
+ratios a_(j+1)/a_j <=1/12 and b_(j+1)/b_j <=1/20 imply
+A_c(1)<=6/11<3/5, B_c(1)<=10/57<1/5. Hence finite absolute
+coefficient norm ||G_c||_1<=1+2A+A²+2B+B²<=3, and for ALL c>=0,
+ALL |X|<=1/4, |G_c(X)|<=3*4^(-c).
+This is NOT just a finite checked conjecture; a mathematical all-degree
+proof is written with the exact old coefficients and original
+finite-sum convention. Its remaining NATIVE obligation is expressing
+the rational polynomial coefficient, factorial monotonicity, finite
+sum triangle and geometric tail lemma in the original Bishop
+Real/Seq types, then constructing the concrete
+Seq._ConvergesTo_ (originalGPrefix X) R.0ℝ and consuming the already
+written originalGZeroFromOriginalPrefixConvergence. No independent
+analytic carrier/physical measure needed for this scalar CMP102 step.
+YM owner's new committed exact receipt:
+scripts/check_ym_cmp102_original_count_prefix_geometric_bound_20261128.py
+a84d64731b3b6ae01703edfd5f5ca30e7826c892,
+and mathematical derivation/native weld owner:
+Docs/physics/YMClayCMP102OriginalCountPrefixGeometricZeroCertificate20261128.md
+1356067b6ecc62e04f3a58324e9a2d0a0950f656.
+Locally reconstructed exact Fraction regression 1188/1188 PASS
+(counts 0..40, all 820 lower coefficients, 40 leading, 123 majorants,
+205 signed quarter-disk evaluations). The committed byte-identical
+script was not independently executed. The scalar identity does NOT
+provide interacting Wilson CMP116 absolute cluster, OS positivity,
+nontrivial physical continuum or mass gap.
+
+### NS — exact inverse scalar budget is paid structurally
+Existing original actual_quarter_signed_FTC on original Galerkin finite
+trajectory was connected in Section25. New Lean #123
+Synthesis/NavierStokesOriginalQuarterSignedTransferInverseCutExact.lean
+271b9409b24a9604371954f9a010265f3b7e2eaa:
+on the SAME original finite solution, for a supplied B,
+int_0^T E_(1/4)*F_(1/4)<=B
+IFF
+E_(1/4)(T)^2 + 4nu int_0^T E_(1/4)*D_(1/4)
+ <= E_(1/4)(0)^2 + 2B.
+Also derives E_(1/4)(T)^2<=E_(1/4)(0)^2+2B when
+the actual viscous integral is nonnegative. These are genuine
+signed reverse-solve equivalences, NOT an assumption that all data
+has a cutoff-uniform B. Source-native audit root
+Synthesis/ClayNSSection26SignedTransferInverseAcceptanceExact.lean
+d54d6badb278689fa13ea583642d8679071152a6.
+Next nonformal original-PDE producer must supply signed B uniformly
+in cutoff/time or alternative valid continuum critical control;
+physical forced C/D and unforced fifteen-field certificate remain.
+
+### Hodge — eliminate supplied generic root basepoint
+Lean #124 existing actualRootFibreEquiv and signedFibreDeckEquiv
+plus Section25 originalRootEvenDeck map now produce
+Synthesis/MillenniumHodgeDicksonOriginalGenericQ0TorsorRealizationExact.lean
+first commit 71e05c5ae6c80e9c11aed6e52bcb243271ef6da2,
+corrected inverse-uniqueness orientation at
+12f7185ccca9319d42f2d7e0417cb03c5ef38fd2:
+for actual y_i!=0, delta!=0, delta²=prod_i deltaField(a_i,y_i)
+over an algebraically closed field, there EXISTS original
+Q0 root base and a real equivalence EvenDeck F ≃ ActualRootFibre;
+for any fixed base/root target, the deck vector is UNIQUE.
+This is a complete original punctured generic FIBRE torsor and its
+inverse, not the proper global cycle or its primitive cohomology
+class. Acceptance:
+Synthesis/ClayHodgeSection26OriginalGenericTorsorAcceptanceExact.lean
+d3b768e852e3edd471804d351a049b7f1b204d7d.
+Next mathematical owner: actual global Proj chart generation and
+proper pushforward monodromy/orientation, nonzero primitive
+cohomology pairing, universal Hodge class.
+
+### PNP — original input-capacity reverse no-go
+Already source-written
+Welds/PNPInputOnlyChargeCeilingExact and
+Welds/PNPOriginalFractionalSupportLowerBoundExact PROVE that input
+only fractional packing has at most original n-coordinate budget.
+New Lean #119
+Welds/PNPOriginalAnchoredInputOnlyCeilingNoGoExact.lean
+d4f8b5f50b26644eaa30327678aa79f5ea0dcaff
+instantiates exact original legal anchored F3 alternatives and
+finite weighted obligation family under same per-address capacity:
+if every alternative changes an original input coordinate,
+sum_j weight_j<=n*C. This is essential nonpromotion:
+even with exponentially many alternate encodings and low
+capacity, the original input-only charge can never supply
+superlinear, let alone superpolynomial, physical cost.
+Acceptance Welds/PNPSection26AnchoredInputCeilingAcceptanceExact.lean
+caa5a33c0071c76a1db1c411ead9e86b24f5d89f.
+Next P0 is a genuinely internally paid share-stable SAT lower-bound
+potential or an actual costed polynomial SAT decision algorithm.
+Complete machine/bit/control and original-target ABI as separate
+requirements, not a static support count.
+
+### BSD and RH — already paid owners, no duplicate theorem
+BSD exact original global Selmer/Sha quotient and first-moment
+two-crossing obstruction remain Section23–25. The math unfilled is
+actual selected complex L'' comparison, general analytic rank equality
+and needed Sha finiteness. The current all-degree signed positivity
+source constrains possible cancellations but does not prove their
+existence or impossibility for the original complex L-source.
+RH #121 exact actual xi/zeta/Clay statement BIDI, pinned admission
+parser and Section24 acceptance root remain; the independent
+admitted original kernel witness and transitive axiom audit remain.
+No invented independent RH or BSD endpoint in this tranche.
+
+### Global next proof graph
+A. YM scalar CMP102: native Bishop |G_COUNT|<=3*4^-COUNT ->
+   original finite G_COUNT converges to 0 ->
+   originalG=0 under existing actual limit uniqueness;
+   independently original interacting Wilson source/cluster
+   remains large.
+B. NS: source-derive independent uniform signed 1/4-transfer B,
+   then combine Section26 iff + original compactness and physical
+   source requirements.
+C. BSD: original complex Mellin/source comparison before rank-four
+   cancellation; do not infer complex L derivative from p-adic jet.
+D. Hodge: original global cycle/Proj/localization and primitive
+   signed cohomology pushforward; the generic torsor is finite-fibre
+   geometry not the global algebraic-cycle theorem.
+E. RH: original pinned submission kernel and theorem/axiom semantics.
+F. PNP: internal work cost or direct poly SAT algorithm, not input
+   address-pack count.
+
+Source files are to be written for native execution; status remains
+SOURCE-WRITTEN until the original toolchains run. Do not claim any
+Clay millennium theorem is established.
