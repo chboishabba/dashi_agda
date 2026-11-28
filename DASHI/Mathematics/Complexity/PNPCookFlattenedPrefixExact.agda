@@ -136,3 +136,98 @@ prefixBitExact f g k
     transport : Lookup.lookupBit (3 * bodyWidth f + k) (L.append prefix suffix)
       ≡ Lookup.lookupBit k suffix
     transport rewrite sym lengthExact = lookupSkip prefix suffix k
+
+
+bodyWidthAppend : ∀ {n} (f g : CNF.CNF n) →
+  bodyWidth (L.append f g) ≡ bodyWidth f + bodyWidth g
+bodyWidthAppend [] g = refl
+bodyWidthAppend (c ∷ cs) g rewrite bodyWidthAppend cs g =
+  cong suc (sym (N.+-assoc (clauseWidth c) (bodyWidth cs) (bodyWidth g)))
+
+-- Actual global-stream consumer, rather than a second encoding.
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
+import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
+import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as Global
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier as Cursor
+import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+
+placedAppendSame : ∀ {A : Set} (xs ys : List A) → Placed.append xs ys ≡ L.append xs ys
+placedAppendSame [] ys = refl
+placedAppendSame (x ∷ xs) ys rewrite placedAppendSame xs ys = refl
+
+streamedAtSplit :
+  ∀ {machine : L.ConcreteTapeMachine}
+  (sc : Canonical.EnumerationCoverage (L.finiteState machine))
+  (ac : Canonical.EnumerationCoverage (L.finiteSymbol machine))
+  (nonempty : Selector.NonemptyRuleTable machine)
+  (steps cols : Nat)
+  (initial : CNF.Bits (Decode.RowBitsWidth machine cols))
+  (f g : CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps cols))
+  (k : Nat) →
+  Global.globalCookLevinCNF sc ac nonempty steps cols initial ≡ L.append f g →
+  Cursor.streamedCookBit sc ac nonempty steps cols initial (3 * bodyWidth f + k)
+    ≡ Lookup.lookupBit k (T.cnfTokenBits g)
+streamedAtSplit sc ac nonempty steps cols initial f g k split
+  rewrite Stream.streamedCookBitExact sc ac nonempty steps cols initial (3 * bodyWidth f + k)
+    | split | sym (T.cnfTokenBitsExact (L.append f g)) =
+  prefixBitExact f g k
+
+transitionSectionSplit :
+  ∀ {machine : L.ConcreteTapeMachine}
+  (sc : Canonical.EnumerationCoverage (L.finiteState machine))
+  (ac : Canonical.EnumerationCoverage (L.finiteSymbol machine))
+  (nonempty : Selector.NonemptyRuleTable machine)
+  (steps cols : Nat)
+  (initial : CNF.Bits (Decode.RowBitsWidth machine cols)) →
+  Global.globalCookLevinCNF sc ac nonempty steps cols initial ≡
+  L.append (Global.liftTransitionCNF sc ac nonempty steps cols)
+    (Placed.append (Endpoint.initialEndpointCNF {steps = steps} initial)
+      (Endpoint.acceptingEndpointCNF {steps = steps} {cols = cols} sc ac))
+transitionSectionSplit sc ac nonempty steps cols initial =
+  placedAppendSame (Global.liftTransitionCNF sc ac nonempty steps cols)
+    (Placed.append (Endpoint.initialEndpointCNF {steps = steps} initial)
+      (Endpoint.acceptingEndpointCNF {steps = steps} {cols = cols} sc ac))
+
+-- Closed form arithmetic is attached below the same actual CNF prefix.
+-- The remaining layout-specific equality is the affine length of each
+-- placed local rejected-row block, including renaming order.
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
+
+tri : Nat → Nat
+tri zero = zero
+tri (suc n) = tri n + n
+
+linearSum : Nat → Nat → Nat → Nat
+linearSum a c zero = zero
+linearSum a c (suc n) = linearSum a c n + (a * n + c)
+
+linearSumExact : ∀ a c n → linearSum a c n ≡ a * tri n + c * n
+linearSumExact a c zero =
+  solve 2 (λ a c → con 0 := a :* con 0 :+ c :* con 0) refl a c
+linearSumExact a c (suc n) rewrite linearSumExact a c n =
+  solve 4 (λ a c n t →
+    (a :* t :+ c :* n) :+ (a :* n :+ c) :=
+    a :* (t :+ n) :+ c :* (con 1 :+ n)) refl a c n (tri n)
+
+rowSum : Nat → Nat → Nat → Nat → Nat → Nat
+rowSum a b c t j = linearSum b (a * t + c) j
+
+rectangleSum : Nat → Nat → Nat → Nat → Nat → Nat
+rectangleSum a b c J zero = zero
+rectangleSum a b c J (suc t) = rectangleSum a b c J t + rowSum a b c t J
+
+rectangleExact : ∀ a b c J t →
+  rectangleSum a b c J t ≡ J * (a * tri t + c * t) + b * t * tri J
+rectangleExact a b c J zero =
+  solve 5 (λ a b c J u → con 0 :=
+    J :* (a :* con 0 :+ c :* con 0) :+ b :* con 0 :* u) refl a b c J (tri J)
+rectangleExact a b c J (suc t)
+  rewrite rectangleExact a b c J t | linearSumExact b (a * t + c) J =
+  solve 7 (λ a b c J t u v →
+    (J :* (a :* u :+ c :* t) :+ b :* t :* v) :+
+    (b :* v :+ (a :* t :+ c) :* J) :=
+    J :* (a :* (u :+ t) :+ c :* (con 1 :+ t)) :+
+    b :* (con 1 :+ t) :* v) refl a b c J t (tri t) (tri J)
