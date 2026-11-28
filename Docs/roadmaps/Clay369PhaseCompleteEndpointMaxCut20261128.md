@@ -1,3 +1,5 @@
+> **369 rich-carrier geometry-forward implementation (28 November, later pass).** See [Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md](Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) for the recovered R526–R537 independence/optional-transport cut, six-programme source-written native attachments, exact 63,234-control local receipt and revised remaining mathematical obligations. The NS validity override below remains controlling; source-written ≠ kernel acceptance.
+
 > **28 November 2026 NS MATHEMATICAL VALIDITY OVERRIDE — READ FIRST.**
 > The controlling original-source inventory, real physical negative controls and
 > repaired A/B/C/D critical path now live in
