@@ -117,7 +117,7 @@ def reverse_constrained(material,cfg,design):
                 strongest_passive_certified=False,global_optimum_certified=False,
                 physical_admission=False)
 
-def quadratic_ray_seeds(net,returns,smax,target=0.):
+def quadratic_ray_seeds(net,returns,smax,target=0.,thermal_u=None):
     """Bidi solve of the coefficient polynomial; candidates only, no remainder bound.
     net and each normalized return polynomial use ascending coefficients.
     """
@@ -134,10 +134,19 @@ def quadratic_ray_seeds(net,returns,smax,target=0.):
     if net[2]!=0:
         z=-net[1]/(2*net[2])
         if 0<z<smax: cuts.add(float(z))
+    if thermal_u is not None:
+        thermal_u=np.asarray(thermal_u,float)
+        if thermal_u.shape!=(3,) or not np.isfinite(thermal_u).all():
+            raise ValueError('invalid exact-affine thermal return coefficients')
+        for z in np.polynomial.polynomial.polyroots(thermal_u-np.array([1.,0.,0.])):
+            if abs(z.imag)<=1e-10 and 0<=z.real<=smax*smax: cuts.add(float(np.sqrt(z.real)))
     points=sorted(cuts)
     probes=sorted(set(points+[(a+b)/2 for a,b in zip(points,points[1:])]))
     def score(s): return float(np.polynomial.polynomial.polyval(s,net))
-    def residual(s): return np.array([np.polynomial.polynomial.polyval(s,row) for row in returns])
+    def residual(s):
+        out=np.array([np.polynomial.polynomial.polyval(s,row) for row in returns])
+        if thermal_u is not None: out[3]=np.polynomial.polynomial.polyval(s*s,thermal_u)
+        return out
     return sorted([dict(s=s,predicted_net_J=score(s),predicted_return=residual(s).tolist(),
         predicted_target_residual_J=score(s)-target) for s in probes],
         key=lambda z:(max(z['predicted_return'])<=1.,z['predicted_net_J']),reverse=True)
@@ -168,7 +177,12 @@ def reverse_quadratic_ray(material,cfg,dheating,dload,design,target_J=0.,smax=1.
     returns=np.array([[np.sum((x-o)**2),2*np.sum((x-o)*a),
         np.sum(a*a)+2*np.sum((x-o)*b)] for x,o,a,b in zip(end,original,first,second)])/tol[:,None]**2
     net=[j['campaign_net_J'],j['dcampaign_net_J'],j['net_coefficient2_J']]
-    seeds=quadratic_ray_seeds(net,returns,smax,target_J)
+    # Thermal state is exactly affine in u under the original held-input law.
+    # Its squared return is quartic in s: a second-order jet alone would miss
+    # every positive heating path starting at exact zero temperature rise.
+    th=end[3]-original[3];th_u=second[3]
+    thermal_u=np.array([th@th,2*th@th_u,th_u@th_u])/tol[3]**2
+    seeds=quadratic_ray_seeds(net,returns,smax,target_J,thermal_u)
     # Probe backtracking points as well: the quadratic model is not certified.
     proposals=sorted(set([0.,float(smax)]+[q['s'] for q in seeds]+[q['s']/2 for q in seeds]))
     trials=[]; best=None
@@ -181,7 +195,7 @@ def reverse_quadratic_ray(material,cfg,dheating,dload,design,target_J=0.,smax=1.
             if score is not None and (best is None or score>best[0]): best=(score,s,trial)
         except (ValueError,AssertionError,ArithmeticError,np.linalg.LinAlgError,FloatingPointError) as exc:
             trials.append(dict(s=s,rejected=str(exc)))
-    return dict(net_coefficients=net,return_coefficients=returns.tolist(),predicted_seeds=seeds,
+    return dict(net_coefficients=net,return_coefficients=returns.tolist(),thermal_return_u_coefficients=thermal_u.tolist(),predicted_seeds=seeds,
         trials=trials,restored_witness=None if best is None else dict(net_J=best[0],s=best[1],
             target_residual_J=best[0]-target_J,four_worlds=four_worlds(material,best[2])),
         Taylor_remainder_certified=False,global_optimum_certified=False,physical_admission=False)
