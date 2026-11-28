@@ -37,6 +37,7 @@ PARTS={
     ("BR45.energy_ledger","check_hopf369_br45_differentiated_br4.py",("--sector","ledger")),
   ],
   "heavy":[
+    *[(f"BR47.{sector}.{alloc}.{k}","check_hopf369_br47_boundary_hierarchy.py",("--sector",sector,"--allocation",alloc,"--order",str(k))) for sector in ("metric","gauge") for alloc in ("D","E") for k in range(9)],
     *[(f"BR45.metric.{k}","check_hopf369_br45_differentiated_br4.py",("--sector","metric","--component",str(k))) for k in range(15)],
     *[(f"BR45.gauge.{k}","check_hopf369_br45_differentiated_br4.py",("--sector","gauge","--component",str(k))) for k in range(5)],
     *[(f"BR46.bianchi.{k}","check_hopf369_br46_bianchi_source_weld.py",("--component",str(k))) for k in range(5)],
