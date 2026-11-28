@@ -35,7 +35,7 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
@@ -95,7 +95,11 @@ def main():
         out=work/f'full_{x.tol:.12g}.npz'
         np.savez(out,M=M)
         json_atomic(out.with_suffix('.json'),dict(sha=sha(out),upstream=up,sources=src,tol=x.tol))
-        run(M)
+        run(M,m,a)
+    elif x.stage in ('delay-tangent','delay-action'):
+        from solar_steelman_delayed_tangent import check,history_action
+        if x.stage=='delay-tangent':check(m,a,x.delay)
+        else:history_action(m,a,x.delay,x.tol,x.periods)
     elif x.stage in ('delay','delay-run'):
         from solar_steelman_retarded_face_return import run
         run(m,a,x.delay,x.tol,x.periods,x.perturb,x.stage=='delay-run')
