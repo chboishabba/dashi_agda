@@ -7,14 +7,14 @@ module DASHI.Physics.YangMills.YMClayCMP102Section44BishopPowerAntitoneAcceptanc
 -- Next source debt is original filtered positive Cauchy summation.
 -- Agda 2.9 --safe/native acceptance UNRUN.
 ------------------------------------------------------------------------
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat.Base using (_≤_)
 import Real as R
 import DASHI.Foundations.BishopUnitIntervalPowerSuccessorExact as Power
 
 originalBishopPowerSuccessor :
   ∀ u → R.NonNegative u → R._≤_ u R.1ℝ →
-  ∀ n → R._≤_ (R.pow u (Agda.Builtin.Nat.suc n)) (R.pow u n)
+  ∀ n → R._≤_ (R.pow u (suc n)) (R.pow u n)
 originalBishopPowerSuccessor = Power.bishopUnitIntervalPowerSuccessorAntitone
 
 originalBishopPowerAllExponentOrders :
