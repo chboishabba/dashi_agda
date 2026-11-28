@@ -219,7 +219,10 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 if cfg.get('retain_jet_history',False):
                     transport_receipts.append(dict(time=[cycle_index,index],clock_start_s=elapsed,
                         earliest_recorded_s=[[None if not np.isfinite(a) else float(a) for a in row] for row in arrival_history],
-                        field=x.tolist(),first=dx.tolist(),second=x2.tolist()))
+                        field=x.tolist(),first=dx.tolist(),second=x2.tolist(),
+                        population=pop.tolist(),pool=pool.tolist(),temperature=theta.tolist(),
+                        population_u=dpop.tolist(),pool_u=dpool.tolist(),temperature_u=dtheta.tolist(),
+                        population_u2=pop2.tolist(),pool_u2=pool2.tolist()))
                 elapsed+=dt
             useful+=dt*float(cur_load@em**2)
             duseful+=dt*float((0. if quadratic_amplitude_path else cur_dload@em**2)+2*(cur_load*em)@dem)
