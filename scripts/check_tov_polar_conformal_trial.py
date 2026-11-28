@@ -25,10 +25,11 @@ def coefficients():
     return s.lambdify(r,expressions,'numpy')
 
 
-def run(coef,n,ell,Rmax):
+def run(coef,n,ell,Rmax,exact_exterior=False):
     # Unit sphere harmonic norm; radial displacement U Y_lm n.
     L=ell*(ell+1); M=7/500
     nodes=np.r_[np.linspace(0,1,n+1),np.geomspace(1,Rmax,n+1)[1:]]
+    if exact_exterior: nodes=np.linspace(0,1,n+1)
     t,wt=leggauss(6); left=nodes[:-1,None]; dr=np.diff(nodes)[:,None]
     r=left+dr*(t+1)/2; weights=dr*wt/2; inside=r<1
     ri=r[inside]; f=1-2*M/r; V=np.zeros_like(r)
@@ -55,8 +56,20 @@ def run(coef,n,ell,Rmax):
             vals.extend(np.sum(weights*N*N*(A*deriv[i]*deriv[j]+w*L/r**2*shape[i]*shape[j]),axis=1))
             rows.extend(np.arange(len(nodes)-1)+i);cols.extend(np.arange(len(nodes)-1)+j)
     H=coo_matrix((vals,(rows,cols)),shape=(len(nodes),len(nodes))).tocsr()
-    v=np.zeros(len(nodes)); v[1:-1]=spsolve(H[1:-1,1:-1],rhs[1:-1])
-    assert np.max(np.abs((H@v-rhs)[1:-1]))<1e-8
+    v=np.zeros(len(nodes))
+    if exact_exterior:
+        # Isotropic Schwarzschild R: chi=R^(-ell-1)/(1+M/(2R));
+        # v=chi/N=R^(-ell-1)/(1-M/(2R)). Exact decaying vacuum DtN.
+        from scipy.sparse import diags
+        R=(1-M+np.sqrt(1-2*M))/2
+        z=M/(2*R)
+        dtn=(1-2*M)*(ell+1+z/(1-z))
+        diag=np.zeros(len(nodes));diag[-1]=dtn
+        H=H+diags(diag)
+        active=slice(1,None)
+    else: active=slice(1,-1)
+    v[active]=spsolve(H[active,active],rhs[active])
+    assert np.max(np.abs((H@v-rhs)[active]))<1e-8
     chi=(N*(v[:-1,None]*shape[0]+v[1:,None]*shape[1]))[inside]
     # Target-normalized strain, angular integrated (H norm 1).
     Z=2*Up-fr/fi*U-4*chi; Y=2*U/ri-4*chi
@@ -65,7 +78,7 @@ def run(coef,n,ell,Rmax):
     F2=T2+V2+2*chi*T1+10*chi*V1+20*chi*chi*Vi+repair
     energy=np.sum(weights[inside]*N[inside]*w[inside]*F2)
     assert np.isfinite(energy)
-    print(ell,n,Rmax,'signed ADM trial',energy,flush=True)
+    print(ell,n,'exact exterior' if exact_exterior else Rmax,'signed ADM trial',energy,flush=True)
     return energy
 
 
@@ -73,3 +86,4 @@ if __name__=='__main__':
     coef=coefficients()
     for ell in (1,2,3,4):
         for n,R in ((64,8),(128,8),(128,16),(256,16)):run(coef,n,ell,R)
+        for n in (64,128,256):run(coef,n,ell,1,exact_exterior=True)
