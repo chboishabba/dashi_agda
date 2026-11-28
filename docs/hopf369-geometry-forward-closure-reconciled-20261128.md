@@ -5326,3 +5326,31 @@ No byte-identical repository replay because checkout DNS blocked.
 Remaining analytic weld: variable projector derivative and
 boundary source transport on actual metric, not flat rank alone.
 Other lanes remain as section 37. No new native/continuum acceptance.
+
+
+## 39. BR203 — actual spatial rotation/covector weld
+
+Reuse BR40 (selected moving chart) and BR164 (curvature/torsion
+sources), not generic replacements. On the original BR27 Weyl
+carrier X, G=X^T X, let K be a spatial so(4) generator, L its
+bivector action, T=L tensor I+I tensor L, Omega=G^-1 X^T T X.
+The checker verifies X Omega=T X, Omega^T G+G Omega=0,
+[Omega,A(xi)]=A(K xi), and DP[A](A(K xi))=[Omega,P].
+P=(4 A^4-A^2)/3, DP[A](B)=(4 sum A^j B A^(3-j)-AB-BA)/3.
+At a rational tilted unit covector (3/5,4/5,0,0) with tangent
+(-4/5,3/5,0,0), verify rank 10, G-self-adjointness and
+P dP+dP P=dP, P dP P=0. Local independent carrier reconstruction
+executed all six rotation generators x four axes, and tilted tangent,
+exit zero in SymPy 1.14.0 under 90s cap.
+Committed entry uses actual BR27 carrier; full donor entry unrun.
+This covers spatial rotations preserving the chosen observer time
+axis, not arbitrary Lorentz boosts or full microlocal quantization.
+For independent normalized covector motion h=dot xi-Omega_vector xi,
+covariant projector derivative is DP[A](A(h)), not zero in general.
+The resulting source in the physical/subsidiary split is off-diagonal.
+For unit xi and G-operator norm, ||A||=1 and
+||DP[A](B)|| <= 6 ||B||; rotational covariance gives ||A(h)||=|h|.
+Remaining curved weld: actual Hamilton flow and observer/boost terms,
+source-compatible curved constraints, trace loss and coupled wall
+estimate, then W0/W5/W6/W7. No new nonlinear existence or other
+lane completion. Terminal stage 25 registered. No CI.

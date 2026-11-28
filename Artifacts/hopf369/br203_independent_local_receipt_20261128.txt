@@ -1,0 +1,13 @@
+BR203 local independent reconstruction, SymPy 1.14.0.
+Command: timeout 90 python /tmp/hopf-replay/run_moving.py
+Exit 0. Original Weyl packing and characteristic matrices independently
+reconstructed; committed BR27 donor import not replayed.
+rotation 1 2 four axes PASS
+rotation 1 3 four axes PASS
+rotation 1 4 four axes PASS
+rotation 2 3 four axes PASS
+rotation 2 4 four axes PASS
+rotation 3 4 four axes PASS
+tilted unit covector tangent PASS
+PASS BR203 rotation covariance and normalized covector derivative 1.14.0
+No native kernel, full coupled estimate, or continuum acceptance.
