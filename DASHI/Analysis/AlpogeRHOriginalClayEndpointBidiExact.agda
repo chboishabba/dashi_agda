@@ -13,6 +13,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Analysis.RiemannAnalyticSubstrate
 import DASHI.Analysis.RiemannZetaProgramBoundary as Clay
 import DASHI.Analysis.AlpogeGRHGeometricTransportExact as External
+import Real as Bishop
+import DASHI.Analysis.RiemannBishopLocatedHeightCarrierExact as Height
+import DASHI.Analysis.RiemannAnalyticLocatedHeightCarrierRealizationExact as Located
+import DASHI.Analysis.RiemannBishopSetoidCriticalLineRefinementExact as BC
+open import Relation.Binary.PropositionalEquality using (sym; subst)
 
 private
   module A = AnalyticSubstrate
@@ -132,11 +137,12 @@ originalClayWitnessToSameOriginalRH analytic strip weld witness refl =
 analyticOwnedStrip :
   (analytic : AnalyticSubstrate) →
   (half : C.Real (A.carrier analytic)) →
+  (realEq : C.Real (A.carrier analytic) → C.Real (A.carrier analytic) → Set) →
   ((s : C.Complex (A.carrier analytic)) →
     Z.criticalLine (A.completed analytic) s →
-    C.realPart (A.carrier analytic) s ≡ half) →
+    realEq (C.realPart (A.carrier analytic) s) half) →
   Clay.CriticalStripWitness
-analyticOwnedStrip analytic half lineMeansHalf =
+analyticOwnedStrip analytic half realEq lineMeansHalf =
   record
     { Complex = C.Complex (A.carrier analytic)
     ; zeta = C.apply (A.carrier analytic) (Z.zeta (A.completed analytic))
@@ -144,6 +150,7 @@ analyticOwnedStrip analytic half lineMeansHalf =
     ; Real = C.Real (A.carrier analytic)
     ; realPart = C.realPart (A.carrier analytic)
     ; oneHalf = half
+    ; realEq = realEq
     ; nontrivialZero = Z.nontrivialZero (A.completed analytic)
     ; criticalLine = Z.criticalLine (A.completed analytic)
     ; criticalLineMeansHalf = lineMeansHalf
@@ -152,11 +159,12 @@ analyticOwnedStrip analytic half lineMeansHalf =
 analyticOwnedStripWeld :
   (analytic : AnalyticSubstrate) →
   (half : C.Real (A.carrier analytic)) →
+  (realEq : C.Real (A.carrier analytic) → C.Real (A.carrier analytic) → Set) →
   (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
     Z.criticalLine (A.completed analytic) s →
-    C.realPart (A.carrier analytic) s ≡ half) →
-  OriginalRHClayEndpointWeld analytic (analyticOwnedStrip analytic half lineMeansHalf)
-analyticOwnedStripWeld analytic half lineMeansHalf =
+    realEq (C.realPart (A.carrier analytic) s) half) →
+  OriginalRHClayEndpointWeld analytic (analyticOwnedStrip analytic half realEq lineMeansHalf)
+analyticOwnedStripWeld analytic half realEq lineMeansHalf =
   record
     { toStrip = λ s → s
     ; fromStrip = λ s → s
@@ -170,26 +178,112 @@ analyticOwnedStripWeld analytic half lineMeansHalf =
 externalToOwnedClayWitness :
   (analytic : AnalyticSubstrate) →
   (half : C.Real (A.carrier analytic)) →
+  (realEq : C.Real (A.carrier analytic) → C.Real (A.carrier analytic) → Set) →
   (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
     Z.criticalLine (A.completed analytic) s →
-    C.realPart (A.carrier analytic) s ≡ half) →
+    realEq (C.realPart (A.carrier analytic) s) half) →
   External.ExternalRHGeometricTransport analytic →
   Clay.RiemannHypothesisWitness
-externalToOwnedClayWitness analytic half lineMeansHalf ext =
+externalToOwnedClayWitness analytic half realEq lineMeansHalf ext =
   alpogeExternalToOriginalClayWitness analytic
-    (analyticOwnedStrip analytic half lineMeansHalf) ext
-    (analyticOwnedStripWeld analytic half lineMeansHalf)
+    (analyticOwnedStrip analytic half realEq lineMeansHalf) ext
+    (analyticOwnedStripWeld analytic half realEq lineMeansHalf)
 
 ownedClayWitnessRecoversAnalytic :
   (analytic : AnalyticSubstrate) →
   (half : C.Real (A.carrier analytic)) →
+  (realEq : C.Real (A.carrier analytic) → C.Real (A.carrier analytic) → Set) →
   (lineMeansHalf : (s : C.Complex (A.carrier analytic)) →
     Z.criticalLine (A.completed analytic) s →
-    C.realPart (A.carrier analytic) s ≡ half) →
+    realEq (C.realPart (A.carrier analytic) s) half) →
   (witness : Clay.RiemannHypothesisWitness) →
-  W.strip witness ≡ analyticOwnedStrip analytic half lineMeansHalf →
+  W.strip witness ≡ analyticOwnedStrip analytic half realEq lineMeansHalf →
   RiemannHypothesisFor analytic
-ownedClayWitnessRecoversAnalytic analytic half lineMeansHalf witness same =
+ownedClayWitnessRecoversAnalytic analytic half realEq lineMeansHalf witness same =
   originalClayWitnessToSameOriginalRH analytic
-    (analyticOwnedStrip analytic half lineMeansHalf)
-    (analyticOwnedStripWeld analytic half lineMeansHalf) witness same
+    (analyticOwnedStrip analytic half realEq lineMeansHalf)
+    (analyticOwnedStripWeld analytic half realEq lineMeansHalf) witness same
+
+
+-- Concrete existing Bishop-real half and setoid, with the actual analytic
+-- carrier attachment. No new half or real-equality authority is invented.
+private
+  castSymRoundtrip : ∀ {A B : Set} (p : A ≡ B) (x : B) →
+    Located.cast p (Located.cast (sym p) x) ≡ x
+  castSymRoundtrip refl x = refl
+
+bishopOwnedHalf :
+  (analytic : AnalyticSubstrate) →
+  Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier →
+  C.Real (A.carrier analytic)
+bishopOwnedHalf analytic attachment =
+  Located.cast (sym (Located.realCarrierIdentity attachment)) BC.bishopHalf
+
+bishopOwnedEq :
+  (analytic : AnalyticSubstrate) →
+  Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier →
+  C.Real (A.carrier analytic) → C.Real (A.carrier analytic) → Set
+bishopOwnedEq analytic attachment r q =
+  Bishop._≃_
+    (Located.cast (Located.realCarrierIdentity attachment) r)
+    (Located.cast (Located.realCarrierIdentity attachment) q)
+
+bishopOwnedLineMeansHalf :
+  (analytic : AnalyticSubstrate) →
+  (attachment : Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier) →
+  BC.BishopCriticalLineHalfCharacterization analytic attachment →
+  (s : C.Complex (A.carrier analytic)) →
+  Z.criticalLine (A.completed analytic) s →
+  bishopOwnedEq analytic attachment (C.realPart (A.carrier analytic) s)
+    (bishopOwnedHalf analytic attachment)
+bishopOwnedLineMeansHalf analytic attachment characterization s h =
+  subst
+    (λ q → Bishop._≃_
+      (Located.cast (Located.realCarrierIdentity attachment)
+        (C.realPart (A.carrier analytic) s)) q)
+    (sym (castSymRoundtrip (Located.realCarrierIdentity attachment) BC.bishopHalf))
+    (BC.criticalLineImpliesBishopHalf characterization s h)
+
+bishopOwnedStrip :
+  (analytic : AnalyticSubstrate) →
+  (attachment : Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier) →
+  BC.BishopCriticalLineHalfCharacterization analytic attachment →
+  Clay.CriticalStripWitness
+bishopOwnedStrip analytic attachment characterization =
+  analyticOwnedStrip analytic (bishopOwnedHalf analytic attachment)
+    (bishopOwnedEq analytic attachment)
+    (bishopOwnedLineMeansHalf analytic attachment characterization)
+
+bishopOwnedHalfMeansLine :
+  (analytic : AnalyticSubstrate) →
+  (attachment : Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier) →
+  (characterization : BC.BishopCriticalLineHalfCharacterization analytic attachment) →
+  (s : C.Complex (A.carrier analytic)) →
+  S.realEq (bishopOwnedStrip analytic attachment characterization)
+    (S.realPart (bishopOwnedStrip analytic attachment characterization) s)
+    (S.oneHalf (bishopOwnedStrip analytic attachment characterization)) →
+  Z.criticalLine (A.completed analytic) s
+bishopOwnedHalfMeansLine analytic attachment characterization s h =
+  BC.bishopHalfImpliesCriticalLine characterization s
+    (subst
+      (λ q → Bishop._≃_
+        (Located.cast (Located.realCarrierIdentity attachment)
+          (C.realPart (A.carrier analytic) s)) q)
+      (castSymRoundtrip (Located.realCarrierIdentity attachment) BC.bishopHalf) h)
+
+externalToBishopOwnedClayWitness :
+  (analytic : AnalyticSubstrate) →
+  (attachment : Located.AnalyticLocatedHeightCarrierAttachment
+    analytic Height.bishopLocatedHeightCarrier) →
+  BC.BishopCriticalLineHalfCharacterization analytic attachment →
+  External.ExternalRHGeometricTransport analytic →
+  Clay.RiemannHypothesisWitness
+externalToBishopOwnedClayWitness analytic attachment characterization ext =
+  externalToOwnedClayWitness analytic (bishopOwnedHalf analytic attachment)
+    (bishopOwnedEq analytic attachment)
+    (bishopOwnedLineMeansHalf analytic attachment characterization) ext
