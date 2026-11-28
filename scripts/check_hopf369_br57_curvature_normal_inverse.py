@@ -39,7 +39,7 @@ def reconstruct(Fsource,moment):
     return s.simplify((C+primitive)/b2),C
 
 def sector(component):
-    # Twenty independent source profiles; not just a scalar trace.
+    # Sixteen independent 4x4 source profiles; not just a scalar trace.
     k=component
     p=s.Rational(k+2,11)+s.Rational(k+3,13)*n
     p+=s.Rational(k+5,17)*n*n
@@ -60,12 +60,12 @@ def sector(component):
     zeroQ=s.S.Zero
     kernelS=constant/b2
     kernelE=-s.diff(b2*kernelS,n)/b2
-    assert kernelE==0 and constant!=0
-    assert s.integrate(b2*kernelS,(n,0,L))==L*constant
+    assert s.simplify(kernelE)==0 and constant!=0
+    assert s.simplify(s.integrate(b2*kernelS,(n,0,L))-L*constant)==0
     print("PASS BR57 exact BS13 normal electric/shear inverse channel",k)
 
 def constants():
-    assert b.subs(n,0)==1 and b.subs(n,L)==1
+    assert s.simplify(b.subs(n,0)-1)==0 and s.simplify(b.subs(n,L)-1)==0
     assert s.simplify(b.subs(n,L/2)-s.Rational(4,5))==0
     # Sharp source warp lower bound m=(4/5)^2; every n∈[0,L]
     # has cosh(n-log2)>=1. The inequality follows from FTC twice.
