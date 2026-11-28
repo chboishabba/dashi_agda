@@ -46,3 +46,8 @@ native kernel receipts, external review and official recognition are
 different categories. Classical mathematics retains its original attribution;
 DASHI source-specific attachments are not renamed JMD constructions, and
 vice versa. No CI, external submission or Clay status changes.
+
+
+## Current synchronization — P0 proof production
+
+All ten numbered families now contain a dated current-state section. Rollup live Paper 1 58e8d145131a, Paper 3 330bab7de4da, Paper 8 eb321b3b1d37; historical Paper 4 fa9e2ae51049, 5 a1867102e243, 6 0bcdfb4d7942, 7 068acc32bbfa. Actual independent owner draft Paper 2 #1554 c54769f12909 (BR89–91 full defect-aware source); Paper 9 #1546 add95dbb3596 (latest reduced real norm, native finite reflection and uniform cusp bound); Paper 10 #1546 7022d34d6b9b (latest inspected TOE #1217 09166d57a3cb, no new Monster identity). These supersede older snapshot pointers above. Source papers must follow actual proof states; manuscript edits do not change theorem status. No new claim for legacy Paper 2 or physical CKM/DHR/Stone. Current [proof ledger](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) is P0, with native and independent acceptance distinguished.
