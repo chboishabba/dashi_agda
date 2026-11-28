@@ -22,7 +22,7 @@ def main():
     q=hard_dispatch(2,(3,),(),(0,),3,(),root,3*10**6,data_clock=data)
     assert q['status']=='IMPROVED' and q['potential']==0
     q=cnf_dispatch(((1,),),1,(),(),root,10**6,data_clock=Clock(0))
-    assert q['status']=='WITNESS_DATA_AUDIT_REFUSED' and q['witness']==(1,)
+    assert q['status']=='UNKNOWN' and q['stop']=='frontier_data_clock'
     assert sum(root.charges.values())+root.left==root.total
     assert sum(data.count.values())+data.left==data.cap
     print(dict(C),dict(data.count),data.cap-data.left)
