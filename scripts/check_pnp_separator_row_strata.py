@@ -101,3 +101,37 @@ def descent(n,R,P,x,B,leaf_cap=8,seam_cap=8,history=None,k_index=0):
     assert all((r&y).bit_count()==1 for r in R)
     if history is not None:history.append((k_index,0,x,v,tuple((r&x).bit_count()-(r&y).bit_count() for r in R),B.left))
     return y,True
+
+
+def minimum_excess(n,R,P,caps,G,B):
+    """Exact min-plus fold on existing compatible separator labels.
+    Returns minimum and original witness; width refusal belongs to build.
+    No rowwise nonincrease assumption: repairs may trade against damage.
+    """
+    n0,R0,P0,u,V,nodes,top,width=G
+    assert (n,tuple(R),P)==(n0,R0,P0) and len(R)==len(caps)
+    tables=[]
+    def put(T,k,c,h):
+        if k not in T or c<T[k][0]:T[k]=(c,h)
+    for node in nodes:
+        T={}
+        if len(node)==2:
+            e,L=node
+            for k,w,h in L:
+                B.pay('excess_leaf',1+len(h))
+                put(T,k,max(0,w-caps[e]),h)
+        else:
+            l,r,L=node;A=tables[l];C=tables[r]
+            for i,j,k in L:
+                B.pay('excess_pair')
+                if i not in A or j not in C:continue
+                a,h=A[i];b,g=C[j]
+                B.pay('excess_join',1+len(h)+len(g))
+                put(T,k,a+b,h+g)
+        tables.append(T)
+    cost,h=tables[top][0]
+    B.pay('excess_reopen',1+n*(1+len(P))+len(V)*(1+len(h))+sum(r.bit_count() for r in R))
+    Q=canon(h);assert Q is not None
+    y=lift(u,V,chart(len(V),Q)[0])
+    assert satisfies(y,P,()) and cost==sum(max(0,(r&y).bit_count()-c) for r,c in zip(R,caps))
+    return cost,y
