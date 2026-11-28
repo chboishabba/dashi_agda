@@ -38,8 +38,7 @@ if hom=fail then Error("free word map unavailable"); fi;
 q:=RepresentativeAction(G,T,H);;
 if q=fail then
   Print("X369RESULT ",[0,Size(G)]," X369END\\n");
-  QUIT;
-fi;
+else
 C:=Centralizer(G,H);;
 gens:=GeneratorsOfGroup(C);;
 W:=List(Concatenation([q^-1],gens),x->PreImagesRepresentative(hom,x));;
@@ -49,6 +48,7 @@ if not ForAll([1..Length(W)],i->Image(hom,W[i])=Concatenation([q^-1],gens)[i]) t
 fi;
 if not T^q=H or not ForAll(gens,x->x*H=H*x) then Error("centralizer witness"); fi;
 Print("X369RESULT ",[1,Size(G),Size(C),List(W,LetterRepAssocWord)]," X369END\\n");
+fi;
 QUIT;
 """
     base=dict(alignment_sha256=a.alignment_sha256,local_sha256=r['local_sha256'],
