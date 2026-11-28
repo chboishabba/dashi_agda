@@ -777,7 +777,7 @@ module At {r : Level} (F : C.RealField r)
     diagonal normal (wall _) = O
     diagonal (wall _) normal = O
 
-  metricFirstCutoff : S → S → S → S → S → S →
+  metricFirstCutoff : S → S → S → S → S → S → S →
     ScalarJet → Tensor → Tensor
   metricFirstCutoff bk a e c ai ei ci chi u =
     spectral a e c
@@ -791,7 +791,7 @@ module At {r : Level} (F : C.RealField r)
   -- The second-order part and all first-order matrix terms now match the
   -- original frozen optical BR15 / BS4 coefficient OWNERS. Potential
   -- terms commute with a scalar chi. No estimate is hidden in this term.
-  metricOpticalCutoffResidual : S → S → S → S → S → S →
+  metricOpticalCutoffResidual : S → S → S → S → S → S → S →
     ScalarJet → TensorJet → Tensor
   metricOpticalCutoffResidual bk a e c ai ei ci chi u =
     addT (fullTensorCutoffResidual opticalPrincipal chi u)
@@ -811,7 +811,7 @@ module At {r : Level} (F : C.RealField r)
       actualGaugeD actualGaugeE : List S
   open OpticalLocalizationDefects public
 
-  opticalLocalizedDefects : S → S → S → S → S → S →
+  opticalLocalizedDefects : S → S → S → S → S → S → S →
     ScalarJet → TensorJet → CovJet → S → Vec →
     Tensor → Tensor → Tensor → Tensor →
     Cov → Cov → Cov → Cov → OpticalLocalizationDefects
