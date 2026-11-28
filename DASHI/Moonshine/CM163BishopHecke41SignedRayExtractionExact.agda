@@ -126,18 +126,7 @@ module Along (w : Nat → BishopComplex) (cv : Lim.Conv w A.zeroC)
     -- zero-mode term and the sign of the reciprocal multiplier trace.
     coefficientRead : (left1 - right1) ≃ Disk.literalResidual a b (Packet.s2 ⋆) (Packet.s3 ⋆) (Packet.p2 ⋆) (Packet.p3 ⋆)
     coefficientRead = let open P.ℝ-Solver in solve 6
-      (λ a b s t u v →
-        (((Κ (- (+ 81) / 41) ⊗ a ⊗ b ⊗ u ⊕ (a ⊗ a) ⊗ (v ⊗ a)) ⊖
-          (Κ (+ 163 / 1681) ⊗ a ⊗ b ⊗ s ⊕ Κ (+ 163 / 41) ⊗ (a ⊗ a) ⊗ (t ⊗ a))) ⊗ (a ⊗ a)
-          ⊕ ((a ⊗ a) ⊗ u ⊖ Κ (+ 163 / 41) ⊗ (a ⊗ a) ⊗ s) ⊗ (b ⊗ a ⊕ a ⊗ b))
-          ⊖ (((Κ (- (+ 81) / 41) ⊗ a ⊗ b ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊕
-            (a ⊗ a) ⊗ (Κ (+ 163 / 1681) ⊗ a ⊗ b)) ⊗ (a ⊗ Κ 0ℚᵘ)) ⊕
-            ((a ⊗ a) ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a))) ⊗ (b ⊗ Κ 0ℚᵘ ⊕ a ⊗ t))
-        ⊜
-        (((Κ (- (+ 81) / 41) ⊗ a ⊗ b ⊗ u ⊕ (a ⊗ a) ⊗ v ⊗ a
-          ⊖ (Κ (+ 163 / 1681) ⊗ a ⊗ b ⊗ s ⊕ Κ (+ 163 / 41) ⊗ (a ⊗ a) ⊗ t ⊗ a)) ⊗ (a ⊗ a)
-          ⊕ ((a ⊗ a) ⊗ u ⊖ Κ (+ 163 / 41) ⊗ (a ⊗ a) ⊗ s) ⊗ (Κ (+ 2 / 1) ⊗ a ⊗ b)
-          ⊖ ((a ⊗ a) ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊗ a ⊗ t)))
+      (λ a b s t u v → ((((((((Κ (- (+ 81) / 41) ⊗ a) ⊗ b) ⊗ u) ⊕ ((a ⊗ a) ⊗ (v ⊗ a))) ⊖ ((((Κ (+ 163 / 1681) ⊗ a) ⊗ b) ⊗ s) ⊕ ((Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊗ (t ⊗ a)))) ⊗ (a ⊗ a)) ⊕ ((((a ⊗ a) ⊗ u) ⊖ ((Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊗ s)) ⊗ ((b ⊗ a) ⊕ (a ⊗ b)))) ⊖ ((((((Κ (- (+ 81) / 41) ⊗ a) ⊗ b) ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a))) ⊕ ((a ⊗ a) ⊗ ((Κ (+ 163 / 1681) ⊗ a) ⊗ b))) ⊗ (a ⊗ Κ 0ℚᵘ)) ⊕ (((a ⊗ a) ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a))) ⊗ ((b ⊗ Κ 0ℚᵘ) ⊕ (a ⊗ t))))) ⊜ ((((((((Κ (- (+ 81) / 41) ⊗ a) ⊗ b) ⊗ u) ⊕ (((a ⊗ a) ⊗ v) ⊗ a)) ⊖ ((((Κ (+ 163 / 1681) ⊗ a) ⊗ b) ⊗ s) ⊕ (((Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊗ t) ⊗ a))) ⊗ (a ⊗ a)) ⊕ ((((a ⊗ a) ⊗ u) ⊖ ((Κ (+ 163 / 41) ⊗ (a ⊗ a)) ⊗ s)) ⊗ ((Κ (+ 2 / 1) ⊗ a) ⊗ b))) ⊖ ((((a ⊗ a) ⊗ (Κ (+ 163 / 41) ⊗ (a ⊗ a))) ⊗ a) ⊗ t)))
       P.≃-refl a b (Packet.s2 ⋆) (Packet.s3 ⋆) (Packet.p2 ⋆) (Packet.p3 ⋆)
 
     residual : (∀ n → lhs n ≈C rhs n) →
