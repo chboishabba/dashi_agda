@@ -2,7 +2,7 @@
 function campaign(){
 "use strict";
 const assert=(x,m)=>{if(!x)throw Error(m)},key=x=>JSON.stringify(x),seq=n=>Array.from({length:n},(_,i)=>i);
-const ledger={stableSquares:0,pairReferees:0,separatorReplays:0,traceReplays:0,exactReopens:0,linearPairs:0,linearSquares:0,defectChecks:0,dagChecks:0};
+const ledger={stableSquares:0,pairReferees:0,separatorReplays:0,traceReplays:0,exactReopens:0,linearPairs:0,linearSquares:0,defectChecks:0,dagChecks:0,coordinateSquares:0,representativeReopens:0,affineJumpChecks:0};
 let seed=4601;const rnd=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return (seed>>>8)%n};
 // Explicit finite, deterministic partial action graph. null = disabled,
 // [successor,cost] = enabled. Costs are observed only when requested.
@@ -56,14 +56,25 @@ function linearClosure(n,actions,O){
  let B=basis(),agenda=[],ops=0;for(let r of O){let q=B.insert(r);if(q)agenda.push(q)}
  for(let i=0;i<agenda.length;i++)for(let {M} of actions){let r=B.insert(pull(agenda[i],M));ops++;if(r)agenda.push(r)}
  assert(agenda.length<=n&&O.every(r=>B.contains(r)),"span");for(let r of agenda)for(let {M} of actions){assert(B.contains(pull(r,M)),"invariance");ledger.linearSquares++}
- return {rows:agenda,ops,rank:agenda.length,code:x=>agenda.map(r=>Number(dot(r,x))).join("")};
+ const pivot=new Map(agenda.map((r,i)=>[r.toString(2).length-1,i]));
+ function coordinates(r){let c=0n;while(r){let p=r.toString(2).length-1,i=pivot.get(p);assert(i!==undefined,"unspanned row");r^=agenda[i];c^=1n<<BigInt(i)}return c}
+ const packed=x=>agenda.reduce((z,r,i)=>z|(dot(r,x)<<BigInt(i)),0n);
+ const reduced=actions.map(({M,b})=>({M:agenda.map(r=>coordinates(pull(r,M))),b:packed(b)}));
+ function reopen(c){let x=0n;for(let p of [...pivot.keys()].sort((a,b)=>a-b)){let i=pivot.get(p),want=(c>>BigInt(i))&1n;if(dot(agenda[i],x)!==want)x|=1n<<BigInt(p)}assert(packed(x)===c,"symbolic representative");return x}
+ return {rows:agenda,ops,rank:agenda.length,packed,reduced,reopen,code:x=>agenda.map(r=>Number(dot(r,x))).join("")};
 }
+function compose(a,b){return {M:a.M.map(r=>pull(r,b.M)),b:apply(a.M,b.b,a.b)}}
+function jump(action,x,h){let z=x,A=action;while(h){if(h&1n)z=apply(A.M,z,A.b);h>>=1n;if(h)A=compose(A,A)}return z}
 let affine=[];for(let k=0;k<70;k++){let n=1+rnd(6),N=2**n,A=1+rnd(3),actions=seq(A).map(()=>({M:seq(n).map(()=>BigInt(rnd(N))),b:BigInt(rnd(N))})),O=seq(1+rnd(n)).map(()=>BigInt(rnd(N))),L=linearClosure(n,actions,O);
  let G={obs:seq(N).map(s=>O.map(r=>Number(dot(r,BigInt(s))))),edges:seq(N).map(s=>actions.map(({M,b})=>[Number(apply(M,BigInt(s),b)),1]))},Q=quotient(G);
  for(let s=0;s<N;s++)for(let t=s;t<N;t++){assert((L.code(BigInt(s))===L.code(BigInt(t)))===(Q.q[s]===Q.q[t]),"affine quotient mismatch");ledger.linearPairs++}
+ for(let x=0;x<N;x++){let c=L.packed(BigInt(x));assert(L.packed(L.reopen(c))===c,"reopen");ledger.representativeReopens++;
+ for(let a=0;a<A;a++){let z=actions[a],r=L.reduced[a];assert(L.packed(apply(z.M,BigInt(x),z.b))===apply(r.M,c,r.b),"coordinate square");ledger.coordinateSquares++}
+ }
+ for(let j=0;j<4;j++){let a=rnd(A),x=BigInt(rnd(N)),h=1+rnd(40),z=actions[a],r=L.reduced[a],y=x;for(let i=0;i<h;i++)y=apply(z.M,y,z.b);assert(L.packed(y)===jump(r,L.packed(x),BigInt(h)),"jump");ledger.affineJumpChecks++}
  affine.push({n,rank:L.rank,classes:Q.classes,rowPulls:L.ops});
 }
-let shifts=[];for(let n of [8,16,32,64,128,256]){let M=seq(n).map(i=>1n<<BigInt((i+1)%n)),L=linearClosure(n,[{M,b:0n}],[1n]);assert(L.rank===n,"delayed hidden bits");shifts.push({n,rank:L.rank,rowPulls:L.ops,explicitStates:"2^"+n})}
+let shifts=[];for(let n of [8,16,32,64,128,256]){let M=seq(n).map(i=>1n<<BigInt((i+1)%n)),L=linearClosure(n,[{M,b:0n}],[1n]);assert(L.rank===n,"delayed hidden bits");let x=(1n<<BigInt(n-1))|1n,h=(1n<<80n)+12345n,k=h%BigInt(n),mask=(1n<<BigInt(n))-1n,y=((x>>k)|(x<<BigInt(n)-k))&mask;assert(jump(L.reduced[0],L.packed(x),h)===L.packed(y),"large shift jump");ledger.affineJumpChecks++;shifts.push({n,rank:L.rank,rowPulls:L.ops,explicitStates:"2^"+n,jumpHorizon:h.toString()})}
 // Nonlinear exact residual identity on an integer trajectory, not a PDE.
 // e_{j+1} = d_j + [B_a(Qs_j)-B_a(z_j)], using actual and reference.
 const f=[x=>[x[0]+x[1],x[1]-1],x=>[x[0]-x[1],x[1]+2]],Q=x=>x[0];
