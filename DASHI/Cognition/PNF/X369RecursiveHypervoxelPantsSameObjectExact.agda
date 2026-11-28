@@ -7,6 +7,7 @@ module DASHI.Cognition.PNF.X369RecursiveHypervoxelPantsSameObjectExact where
 -- already inhabits this packet without a source-owned admission map.
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Fin using (Fin)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as H
@@ -22,6 +23,7 @@ import DASHI.Core.FactorisationSpineCrosswalkExact as Factorisation
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
 import DASHI.Reasoning.TypedHyperfabricPantsSignatureCompletenessExact as Match
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
+import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 
 -- The full native H369 is not 13 trits. A depth-13 completed source
 -- valuation is a separate, retained, sourced fibre above H369.
@@ -77,7 +79,7 @@ module SameSourcePacket (Residual Index : Set) where
   localCompatibility p =
     Sheaf.centralRestrictsCompatible (sourceCentral p)
 
-  actualPants13 : Packet → DASHI.Topology.TernaryPantsFrontierExact.PantsPath 13
+  actualPants13 : Packet → Frontier.PantsPath 13
   actualPants13 p =
     Pants13.glueCompatibleLocalsToPants
       (originalLocalFamily p) (localCompatibility p)
