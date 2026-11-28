@@ -1,0 +1,57 @@
+Checking DASHI.Physics.YangMills.YMClayW1F19IntegratedCovarianceMomentWeldExact (/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClayW1F19IntegratedCovarianceMomentWeldExact.agda).
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda:110.19-23: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+actualPairBlock pair
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda:116.26-30: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+actualPairBlockVector (pair ∷ pairs)
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClayOriginalWilsonF19ConcreteWeightExact.agda:26.15-19: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+flattenPairs (pair Vec.∷ rest)
+
+———— All done; warnings encountered ————————————————————————
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClayOriginalWilsonF19ConcreteWeightExact.agda:26.15-19: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+flattenPairs (pair Vec.∷ rest)
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda:110.19-23: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+actualPairBlock pair
+
+/content/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda:116.26-30: warning: -W[no]PatternShadowsConstructor
+The pattern variable pair has the same name as the constructor
+Torus.pair
+when checking the clause left hand side
+actualPairBlockVector (pair ∷ pairs)

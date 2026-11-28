@@ -21,11 +21,11 @@ module DASHI.Physics.YangMills.YMClayW1F19AffineCovarianceExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_;
-   +-identityʳ; mulZeroˡ)
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_;
+   +-identityʳ; *-comm; mulZeroˡ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.YMClaySUNWeightedDisjointPairFibreReparamExact as
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact as Original
 import DASHI.Physics.YangMills.YMClayW0OriginalF19CandidateEquation171TExact as W0
 import DASHI.Physics.YangMills.YMClayRealAffineFibreHessianLedgerExact as Ledger
+import DASHI.Physics.Closure.NSPeriodicModeInverseNormScaling as Scaling
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 module _
@@ -388,8 +389,72 @@ module _
           (sym (sourceAffineMassIsAffine left right s t coarse)))
         (invLaw coarse))
 
+  -- Strict positivity is inherited from the actual exponential density
+  -- and the SAME one-link strict integration authority, not a new
+  -- independently supplied coarse normalizer. Selected test-class
+  -- semantics and the real authority remain conditional.
+  sourceDensityStrictlyPositive :
+    ∀ pairs spectators → 0ℝ <ℝ density pairs spectators
+  sourceDensityStrictlyPositive pairs spectators =
+    Exp.expPositive exponential _
+
+  sourceSpectatorDensityStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ pairs → 0ℝ <ℝ spec density pairs
+  sourceSpectatorDensityStrictlyPositive strict pairs =
+    Ordered.productIntegralStrictlyPositive source strict
+      (density pairs) (sourceDensityStrictlyPositive pairs)
+
+  sourceK0StrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ coarse → 0ℝ <ℝ k0 coarse
+  sourceK0StrictlyPositive strict =
+    Fibre.originalAllPairsFibreDensityStrictlyPositive
+      theory source bilateral strict (spec density)
+      (sourceSpectatorDensityStrictlyPositive strict)
+
+  sourceCoarsePartitionStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    0ℝ <ℝ Product.productIntegral source k0
+  sourceCoarsePartitionStrictlyPositive strict =
+    Ordered.productIntegralStrictlyPositive source strict k0
+      (sourceK0StrictlyPositive strict)
+
+  sourceFinePartitionStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    0ℝ <ℝ Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear density
+  sourceFinePartitionStrictlyPositive strict =
+    subst (λ z → 0ℝ <ℝ z)
+      (sym (Original.originalPhysicalF19Z
+        theory traceData exponential beta source bilateral linear))
+      (sourceCoarsePartitionStrictlyPositive strict)
+
+  -- The inverse is not assumed on the W1 socket.  It is the typed ordered-real
+  -- reciprocal authority applied only after strict positivity of the SAME
+  -- original source k0 has been constructed above.
+  sourceCoarseInverse :
+    (realInverse : Scaling.OrderedRealInverseAuthority) →
+    SlowField → ℝ
+  sourceCoarseInverse realInverse coarse =
+    Scaling.reciprocal realInverse (k0 coarse)
+
+  sourceCoarseInverseLaw :
+    (realInverse : Scaling.OrderedRealInverseAuthority) →
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+    ∀ coarse →
+      k0 coarse *ℝ sourceCoarseInverse realInverse coarse ≡ 1ℝ
+  sourceCoarseInverseLaw realInverse strict coarse =
+    trans
+      (*-comm (k0 coarse) (Scaling.reciprocal realInverse (k0 coarse)))
+      (Scaling.reciprocalCancelPositive realInverse
+        (sourceK0StrictlyPositive strict coarse))
+
   w1F19AffineCovarianceLevel : ProofLevel
   w1F19AffineCovarianceLevel = machineChecked
+
+  w1F19SourceInverseApplicationLevel : ProofLevel
+  w1F19SourceInverseApplicationLevel = machineChecked
 
   w1F19NormalizationApplicationLevel : ProofLevel
   w1F19NormalizationApplicationLevel = conditional
