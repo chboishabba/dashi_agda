@@ -36,7 +36,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
             sorted(k for k in campaign.BRANCHES),
             ["BSD_HODGE", "NS", "PNP", "RH", "YM"])
         self.assertEqual(sum(len(paths) for _, paths in
-                             campaign.ROOTS.values()), 37)
+                             campaign.ROOTS.values()), 41)
 
     def run_campaign(self, extra_pins):
         with tempfile.TemporaryDirectory() as tmp:
@@ -99,10 +99,10 @@ class NativeCampaignFailClosed(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIsNone(data)
 
-    def test_exact_thirty_seven_native_roots_plus_rh(self):
+    def test_exact_forty_one_native_roots_plus_rh(self):
         campaign = load_runner()
-        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 37)
-        self.assertIn("Clay44NativeAcceptanceV1",
+        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 41)
+        self.assertIn("Clay45NativeAcceptanceV1",
                       inspect.getsource(campaign))
 
     def test_lean_native_axioms_allowlisted(self):
@@ -202,7 +202,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
         runner = load_runner()
         self.assertEqual(
             sum(len(paths) for _, paths in runner.ROOTS.values()) + 1,
-            38)
+            42)
         source = SCRIPT.read_text(encoding="utf8")
         self.assertIn(
             'sum(len(owner_paths) for _, owner_paths in ROOTS.values()) + 1',
