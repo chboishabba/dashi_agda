@@ -63,6 +63,7 @@ CORE=(
     "check_tov_two_face_canonical_second.py",
     "check_tov_second_israel_shape.py",
     "check_tov_second_order_junction_inverse.py",
+    "check_tov_moving_mass_constraint_weld.py",
     "check_tov_constrained_mass_hessian.py",
     "check_tov_causal_constitutive_repair.py",
     "check_tov_radial_dynamics.py",
