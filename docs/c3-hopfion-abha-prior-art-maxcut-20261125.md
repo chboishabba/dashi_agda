@@ -2323,3 +2323,45 @@ D. Uniform continuation **on the same constructed solution**: use F8's existing 
 **Status labels:** BR4 variable coefficient energy/hierarchy = CONSTRUCTED (source arithmetic); BR19–25 corner and nonlinear seam = CONSTRUCTED (finite jets); BR27–30 positive projected system = CONSTRUCTED (constant/regular projected model); BR31/BS13 holonomy/kernel = CONSTRUCTED; BR33/34/37 frozen D/E = CONSTRUCTED/partly locally checked; BR39/40a localized carriers = CONSTRUCTED_PENDING_KERNEL. A–D = UNPROVED_PHYSICAL_PDE_WELDS, not unimplemented generic identities. This audit is source inspection only, not new kernel/continuum acceptance; no CI run.
 
 Next max-cut should **reuse actual** BR4 variable symmetrizer, BR33/34 physical boundary and BR29 subsidiary, and write ONLY the missing cross-owner source-specific estimates. Avoid reopening already constructed algebraic and geometry modules.
+
+
+## BR40b–e — same-physical-row differentiated weld, wall work and variable zero-speed transport (source committed; acceptance deferred)
+
+**New native source in existing BR34 owner** `DASHI/Physics/Foundations/Hopf369WarpedPhysicalBoundaryExact.agda`: `metricBackgroundDerivative`, `metricTimeRows`, `gaugeBackgroundDerivative`, `gaugeTimeRows`, `metricTimeMeanForce`, `coordinateCodazziTime`, `physicalTimeForcing`, `normalTraceMean`, `normalTraceJump`, `normalTracePlus`, `normalTraceMinus`, `coordinateTangentDerivativeJump`, `normalGaugeDerivativeJump`, and `physicalNormalWork`, `israelWallWork`, `longitudinalWallWork`, `scaleWallWork`, `signedWallWorkResidual`. This consumes the actual D/E 30+10 rows and general mean-extrinsic coordinate Codazzi from BR34, not a duplicate boundary model.
+
+For the normalized BR34 reference, with H=metric tangent 4x4, b±=metric mixed 4, l±=metric normal/2, q=tangential frequency, j=Israel jump, Hx±=normal tangent derivative:
+```
+J_ab := 2(K+_ab-K-_ab)-j(H+_ab+H-_ab)
+     = Hx+_ab-Hx-_ab-q_a(b+_b-b-_b)-(b+_a-b-_a)q_b-j(l++l-)eta_ab.
+F := tau+ +tau- = (tr_eta Hx+ +tr_eta Hx-)/2
+                     -dot_eta(q,b++b-)-2j(l+-l-).
+```
+These identities make an algebraic two-sided trace solver with NO division by a spatial frequency or normal spectral root:
+```
+mu = F+dot_eta(q,b++b-)+2j(l+-l-)
+delta = tr_eta(J)+2dot_eta(q,b+-b-)+4j(l++l-)
+tr_eta(Hx+) = mu+delta/2; tr_eta(Hx-) = mu-delta/2.
+```
+The corresponding signed wall-wave work for common tangential field velocity V is
+```
+<V,Hx+-Hx->_eta = <V,J>_eta
+                  +<V,q tensor (b+-b-)+(b+-b-) tensor q>_eta
+                  +j(l++l-) tr_eta(V).
+```
+The last term and longitudinal term are NOT positive wall squares. This explicitly connects BR4 variable energy work to BR34 physical mean-force rows without assuming coercivity or promoting the BR29 forbidden constant wall-only subsidiary Gram.
+
+For the BR33/34 gauge, derivative recovery is algebraic even at glancing:
+```
+[∂n C_n] = GaussRow +dot_eta(q,[C_a])+2j(C_n+ + C_n-)
+[∂n C_a] = CoordinateCodazziRow_a-q_a[C_n]
+           +2M_a^b[C_b]+j(C_a+ +C_a-).
+```
+General `M_t` enters the differentiated coordinate Codazzi source explicitly. For BR34 reference matrix rows, differentiation gives
+`∂t B(j,q;U)=B(j,q;U_t)+B(j_t,q_t;U)-B(0,0;U)`.
+This formula is for the existing *reference linear boundary operator*, which is separately linear in j and q; it is NOT the full nonlinear Fréchet derivative of Einstein–Israel on an arbitrary moving background. That latter operator needs the BR19/31 graph source variation and actual variable-coefficient PDE solution.
+
+**Companion checker:** `scripts/check_hopf369_br40_physical_time_weld.py` imports the actual BR34 row implementation. It independently checks D/E differentiated metric and gauge rows, both one-sided normal traces, 10-component signed Israel work and nonzero mean/time-varying Codazzi; accepts `--part time|trace|subsidiary|all` for bounded local runs. Committed, UNRUN; native code CONSTRUCTED_PENDING_KERNEL.
+
+**New BR40e projector transport:** `scripts/check_hopf369_br40_variable_projector_transport.py` consumes the actual original BR29 carrier (35D Weyl, rank-nine zero normal speed, original positive Gram). For any admissible nontrivial rank-one nilpotent K from the actual active/zero split, S=I+tK, P(t)=SP0 S^{-1}, G(t)=S^{-T}GS^{-1}. Then P²=P, G(t)P=P^TG(t), and `Pdot=[Omega,P]` with `Omega=K`. A source residual vector with P0 u=0 transported as D(t)=S(t)u satisfies P(t)D(t)=0 and `(∂t-Omega)D=0`. The full physical source still must prove that its varying Weyl normal projector evolves with the chosen geometric connection AND that its constraint forcing has vanishing projected component; a formal arbitrary chart conjugation alone is not Bianchi propagation. The checker supports `--part small` and `--part physical` (the latter builds original heavy BR29 carrier), both UNRUN. The Gram congruence retains the positive energy and the nine zero modes; no eigenvalue clipping.
+
+**Correct remaining endpoint:** full variable Einstein–Israel Fréchet derivative including chart/graph and changing normal source, a frequency-weighted D/E estimate uniform under variable coefficients and cutoff, coupled Bianchi forcing compatibility with BR29 and BR40e connection, and weighted BS13 quotient + BR31 exterior/holonomy domain estimates sufficient for local physical existence and continuation. Generic algebraic boundary rows, normal trace solve, variable-principal energy, normal jet hierarchy, and chart-level projector transport are already constructed. No CI used; execution/kernel check intentionally deferred.
