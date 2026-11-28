@@ -26,6 +26,8 @@ SCRIPTS=(
     "check_f8_original_pulse_derivative_bounds.py",
     "check_f8_full_ward_jet_majorant.py",
     "check_f8_original_pulse_jet_receipt.py",
+    "check_f8_retarded_controller_jet_enclosure.py",
+    "check_f8_original_source_jet_closure.py",
     "check_f8_gauss_israel_energy_weld.py",
     "check_f8_scalar_density_momentum_schur.py",
     "check_f8_material_momentum_frame_weld.py",
