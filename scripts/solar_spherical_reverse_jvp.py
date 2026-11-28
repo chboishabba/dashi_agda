@@ -3,6 +3,7 @@ Actual reaction/event, thermal, collision, reciprocal Whitney and indexed Cayley
 steps are reused. This is a smooth-chart derivative, not an optimum certificate.
 """
 import numpy as np
+from solar_matrix_storage import diagonal
 from solar_physical_causal import MASS,CHARGE
 from solar_spherical_cycle import geometry
 from solar_spherical_material_weld import construct,structural_stage_atlas
@@ -19,7 +20,8 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
     This is not a density-gradient or unrestricted optimization certificate.
     """
     rows,neutral,D,gyro,axis=material
-    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level']); n=len(vol)
+    depth=int(cfg.get('nested_depth',0)); sparse=bool(depth or cfg.get('sparse_operator',False))
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],depth); n=len(vol)
     assert len(rows)==n and len(cfg['row_keys'])==n
     src=np.asarray(cfg['incident_sqrt_W'],float)
     heat=np.asarray(cfg['heating_W'],float)
@@ -55,7 +57,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
     start=(x.copy(),pop.copy(),pool.copy(),theta.copy())
     dstart=(dx.copy(),dpop.copy(),dpool.copy(),dtheta.copy())
     port=np.zeros(len(x));port[int(cfg['source_edge'])]=float(cfg['source_coupling_sqrt_inv_s'])
-    source=np.outer(port,port)
+    source=diagonal(port**2,sparse)
     paid=dpaid=useful=duseful=0.
     term_load=np.asarray(cfg.get('terminal_load_rate_s_inv',load),float)
     term_dload=np.zeros(ne) if 'terminal_load_rate_s_inv' in cfg else dload
@@ -118,7 +120,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                     # Store actual signed residuals, independently of index labels.
                     indexed_events.append(dict(
                         index=dict(history=cfg['row_keys'][i],time=[cycle_index,index],
-                            depth=dict(spatial=cfg['angular_level'],temporal=cfg.get('temporal_depth')),
+                            depth=dict(spatial=cfg['angular_level'],nested=depth,temporal=cfg.get('temporal_depth')),
                             iteration=cfg.get('frobenius_iteration'),
                             version=cfg.get('source_version','unversioned')),
                         cell=i,old_right=pop_right[i].tolist(),new_right=pr.tolist(),
@@ -152,7 +154,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
             Dcurrent=pop*CHARGE**2/MASS
             dD=dpop*CHARGE**2/MASS
             model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),
-                vol,Dcurrent,nu,gyro,axis)
+                vol,Dcurrent,nu,gyro,axis,nested_depth=depth,sparse_operator=sparse)
             if cfg.get('common_stage_atlas',False) and atlas is None:
                 atlas=structural_stage_atlas(model,mesh)
             if quadratic_amplitude_path:
@@ -162,9 +164,8 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 j=amplitude_material_boundary_jvp(model,vol,np.sqrt(Dcurrent),dq,nu,np.zeros_like(dnu),gyro,axis,pop_right)
             else:
                 j=material_jvp(model,vol,Dcurrent,nu,dD,dnu)
-            L=np.zeros_like(model['generator']);dL=np.zeros_like(L)
-            L[np.arange(ne),np.arange(ne)]=cur_load
-            dL[np.arange(ne),np.arange(ne)]=0. if quadratic_amplitude_path else cur_dload
+            L=diagonal(np.r_[cur_load,np.zeros(len(x)-ne)],sparse)
+            dL=diagonal(np.r_[np.zeros(ne) if quadratic_amplitude_path else cur_dload,np.zeros(len(x)-ne)],sparse)
             A=model['generator']-L-source
             dA=(j['d_right_generator'] if quadratic_amplitude_path else j['d_generator'])-dL
             right_limit=j['right_limit']-L-source if quadratic_amplitude_path else None
@@ -173,14 +174,13 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 D2=pop2*CHARGE**2/MASS
                 q2=amplitude2(Dcurrent,dD,D2)
                 ex2=amplitude_exchange_jvp(model,vol,np.sqrt(Dcurrent),q2)['d_exchange']
-                H2=ex2.copy(); collision2_diag=np.zeros(len(x)); offset=len(x)-9*n
+                collision2_diag=np.zeros(len(x)); offset=len(x)-9*n
                 for cell in range(n):
                     for species in range(3):
                         if pop_right[cell,species]:
                             ix=np.arange(offset+9*cell+3*species,offset+9*cell+3*species+3)
-                            H2[ix,ix]-=dnu[cell,species]
                             collision2_diag[ix]=dnu[cell,species]
-                H2[np.arange(ne),np.arange(ne)]-=cur_dload
+                H2=ex2-diagonal(collision2_diag+np.r_[cur_dload,np.zeros(len(x)-ne)],sparse)
                 jet2=(x2,H2,np.zeros_like(x))
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
                 dict(collision=model['loss'],load=L,source=source),port,inc,
@@ -199,7 +199,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 m2=np.asarray(receipt['local_midpoint_coefficient2'])
                 refl0=m0@port-inc;refl1=m1@port;refl2=m2@port
                 outgoing2=dt*(refl1*refl1+2*refl0*refl2)
-                collision2=dt*work2(m0,m1,m2,np.diag(j['right_loss']),collision2_diag)
+                collision2=dt*work2(m0,m1,m2,j['right_loss'].diagonal(),collision2_diag)
                 absorbed2=dt*float(dpower.sum())
                 bath2=absorbed2-cap@(dtheta-dt0)
                 parts=np.array([energy2(),-before2,outgoing2,useful_step2,collision2,bath2,
@@ -255,6 +255,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
         restoration_coefficient2=squared_return2(end,start,dend,second) if quadratic_second_order else None,
         population_pool_u2=(pop2,pool2) if quadratic_second_order else None,
         indexed_jet_history=transport_receipts,
+        nested_depth=depth,sparse_operator=sparse,
         coefficient2_energy_ledger=ledger2,
         campaign_discrete_reach_checked=bool(quadratic_second_order),
         global_causal_cone_admitted=False,
