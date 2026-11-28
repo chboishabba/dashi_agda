@@ -99,7 +99,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 rational=rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 rational_candidates.append(rational)
                 rational_upper=exact_ceiling-F(rational['reflection_lower_exact'])
-                upper=min(upper,float(rational_upper))
+                upper=min(upper,rational_upper)
             else:
                 en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 upper=min(upper,ceiling-en['reflection_lower_J'])
@@ -109,7 +109,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
             failed+=1 # retain parent upper; never discard failed region
         seq+=1; heapq.heappush(queue,(-upper,seq,lo,hi))
     lo=np.zeros(ne); hi=np.zeros(ne); hi[ids]=budget
-    box(lo,hi,ceiling)
+    box(lo,hi,exact_ceiling if exact_ceiling is not None else ceiling)
     for _ in range((max_boxes-1)//2):
         if not queue:break
         neg,_,lo,hi=heapq.heappop(queue)
@@ -120,10 +120,12 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
         h=hi.copy(); h[j]=m
         l=lo.copy(); l[j]=m
         box(lo,h,-neg);box(l,hi,-neg)
-    upper=max((-item[0] for item in queue),default=ceiling)
+    upper=max((-item[0] for item in queue),default=exact_ceiling if exact_ceiling is not None else ceiling)
     if best is not None and best>upper+1e-8*max(1.,abs(upper)):
         raise ArithmeticError('candidate enclosure violated by replay')
-    return dict(upper_candidate_J=float(upper),best_center_net_J=best,
+    return dict(upper_candidate_J=float(upper),
+                upper_exact_binary_chart=None if exact_ceiling is None else str(upper),
+                best_center_net_J=best,
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
                 gap_J=None if best is None else float(upper-best),
                 rational_trace_candidates=rational_candidates,
