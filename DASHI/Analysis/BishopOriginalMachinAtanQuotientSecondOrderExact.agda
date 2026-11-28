@@ -22,6 +22,7 @@ import Real as R
 import RealProperties as P
 import Sequence as Seq
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
+import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Derivative
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
 import DASHI.Analysis.BishopOriginalMachinAtanFiniteDerivativeExact as Original
 import DASHI.Analysis.BishopOriginalMachinAtanDerivativeGeometricWeldExact as Weld
@@ -163,11 +164,20 @@ termAtZero :
   R._≃_ (termQuotient x R.0ℝ k)
     (Original.sourceAtanDerivativeTerm x k)
 termAtZero x k rewrite Original.oddExponentIsSuccessorEven k =
-  P.≃-trans
+  let
+    sign = Sign.alternatingSign k
+    coeff = R._⋆ (Atan.inverseOddRational k)
+    derivative = Derivative.powerDerivative
+      (suc (Estimate.evenExponent k)) x
+    open P.ℝ-Solver
+  in P.≃-trans
     (P.*-congˡ
       (P.≃-symm (Power.powerDerivativeIsDifferenceQuotientAtZero
         x (Estimate.evenExponent k))))
-    (P.*-congˡ (Original.sourceOddReciprocalDerivativeCancel x k))
+    (P.≃-trans
+      (solve 3 (λ a b d → (a ⊗ b) ⊗ d ⊜ a ⊗ (b ⊗ d))
+        P.≃-refl sign coeff derivative)
+      (P.*-congˡ (Original.sourceOddReciprocalDerivativeCancel x k)))
 
 finiteAtZero :
   (x : R.ℝ) (n : Nat) →
