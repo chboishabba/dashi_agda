@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalFactorialMassBudgetExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product using (_×_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
 import Real as R
