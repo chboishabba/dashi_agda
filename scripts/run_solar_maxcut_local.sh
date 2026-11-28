@@ -12,6 +12,7 @@ for entry in \
   check_passive_global_exact_sympy.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
+  check_solar_material_cache_parity.py \
   check_solar_spherical_reverse_integration.py; do
   if [[ ! -f "$entry" ]]; then
     echo "MISSING_SOURCE: $entry" >&2
