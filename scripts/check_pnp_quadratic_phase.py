@@ -145,6 +145,32 @@ def affine_axis_reduce(P,n,pay):
     return None
 
 
+def quadratic_axis_reduce(P,n,pay):
+    """Complete a square at a constant nonzero quadratic axis, even
+    when its linear coefficient depends quadratically on other axes.
+    Reduce powers as functions on F3. Accept the resulting polynomial
+    only if it still has degree <=3; otherwise leave the original
+    connected residual intact for the bounded branch compiler."""
+    pay(1+n+sum(1+len(m) for m in P))
+    for i in range(n):
+        a=P.get((i,i),0)%3
+        if not a:continue
+        terms=[(m,b) for m,b in P.items() if i in m and m!=(i,i)]
+        pay(1+len(P))
+        if not any(len(m)==3 for m,b in terms):continue
+        if any(m.count(i)!=1 for m,b in terms):continue
+        L={tuple(j for j in m if j!=i):b%3 for m,b in terms if b%3}
+        Q={m:b for m,b in P.items() if i not in m}
+        pay(len(L)*len(L))
+        for m,b in L.items():
+            for t,c in L.items():put(Q,reduce_monomial(m+t),-a*b*c)
+        if any(len(m)>3 for m in Q):continue
+        R={tuple(j-(j>i) for j in m):b for m,b in Q.items()}
+        pay(1+len(R))
+        return add(ONE,add(OMEGA[a],OMEGA[a])),n-1,R
+    return None
+
+
 def conditional_gauss(P,n,pay,budget):
     """Branch only on a coordinate hitting actual degree-three terms.
     Quadratic residuals go to the existing exact Gauss compiler.
@@ -167,6 +193,10 @@ def conditional_gauss(P,n,pay,budget):
         factor,k,Q=reduced
         if factor==0:return Z
         return mul((factor,0),conditional_gauss(Q,k,pay,budget))
+    square=quadratic_axis_reduce(P,n,pay)
+    if square is not None:
+        factor,k,Q=square
+        return mul(factor,conditional_gauss(Q,k,pay,budget))
     hits={i:sum(i in m for m in hard) for i in set().union(*map(set,hard))}
     j=min(hits,key=lambda i:(-hits[i],i))
     z=Z
