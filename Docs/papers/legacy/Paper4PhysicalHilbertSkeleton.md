@@ -15,6 +15,11 @@ continuous traversal group, a self-adjoint physical colimit generator, a GNS
 Hilbert-space construction, or a Born-rule theorem.  Those promotion boundaries
 are fixed false in the cited receipt modules.
 
+
+## Current proof-state note — 28 November 2026
+
+This historical support draft retains its own finite Hilbert/Stone/GNS scope. TOE #1217 AX supplies a selected normalized Matrix2C pointer real self-pair on the original cyclic Gram carrier, including zero; the stronger ABL admissibility does not follow from half-normalization. NS finite physical energy and YM conditional Path13 inverse bounds are additional source-specific controlled consumers, not physical colimit, Stone or same-H_OS realizations. The physical infinite-depth completion, noncollapsed quotient, strong continuity and GNS remain open. See the [current paper-family ledger](../PaperFamilyReconciliation20261128.md).
+
 ## 1. Scope And Claim
 
 The construction starts from depth carriers rather than from an assumed

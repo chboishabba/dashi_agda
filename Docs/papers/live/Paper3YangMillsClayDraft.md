@@ -2,7 +2,7 @@
 
 Author: Johl Brown
 Date: `2026-09-17`
-Version: `draft 3 — source-native 20 November 2026 reconciliation`
+Version: `draft 3 — source-native 28 November 2026 reconciliation`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
 
 
@@ -77,6 +77,28 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 > marked-polymer authors retain mathematical attribution; these terms are
 > independently authored DASHI compositions, not new published source lemmas.
 
+
+> **28 November source-cut update.** The immediate DASHI proof-search priority is the literal CMP102 selected propagator weld, not a new claim that a finite pivot or inverse derivative proves the mass gap. The newer master narrative and older #1536 manuscript are divergent; preserve the original factorial A/B endpoint and Bishop Cauchy owner from #1536 without replacing the source-native Route S/strong-route distinction. See the final dated section and the consolidated roadmap. Native acceptance and the selected physical source remain separate.
+
+
+
+
+
+## Current proof state — 28 November 2026, Section 16
+
+The actual unit-quaternion conjugation operator qHq* now supplies the signed-word BondBound norm and defect (≤1 and ≤2||q−1||) with the unit tangent-injection premise. The exact chord/angle relation is ||q−1||=2 sin(θ/2), with chord≤θ≤π chord/2; the previous length-74 dexp inverse series enclosure on a chord ball uses the enlarged angle radius πe/2, not the original constants without conversion. Lean #15 `beed8ba5cb08`. Actual source radius, Lie carrier tangent injection, differential equality and selected CMP102 operator remain P0. Rational quaternion checks are not a nonflat selected-source replay. [Section 16](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
+## Current proof state — 28 November 2026, Section 15
+
+The immediate CMP102 task has an actual quaternion principal-angle word estimate and continuous commutator operator. For unit links with principal angles at most e, a word of length at most 74 in the stated angle ball has principal-vector norm at most 74e and hence ||ad_X||≤148e. The nonzero-imaginary principal vector exponentiates to the same unit quaternion; identity is separate. Lean #15 (`c8ecbb886441`) feeds that actual radius to the previous dexp-series two-sided inverse bound. Source angle versus chord-ball identification, actual differential equality/restriction to the Lie carrier and selected H(s(Y0)) are still unpaid. The exact rational quaternion fixtures do not replay the nonflat selected source word. [Section 15](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
+## Current proof state — 28 November 2026, cross-Clay P0 (Section 14)
+
+The immediate YM target remains the actual nonflat Path13 CMP102 selected-operator enclosure, not an assertion of mass gap. Lean #15 (`7071c042ed1d`) supplies the exponential-differential series estimate D(A)=1+Σ A^(n+1)/(n+2)! and a two-sided inverse J in a complete normed real algebra. For ||A||≤148e≤1/2, ||D−1||≤148e, ||J||≤2 and ||J−1||≤296e. These are the quantitative bounds needed by the existing 13^4-offset row budget, conditional on identifying this series and its commutator radius with the actual SU(2) principal differential. That identification, nonflat selected H(s(Y0)), and the final CMP102 enclosure are not yet established. No native kernel or nonflat numerical acceptance was performed here. See [P0 roadmap, Section 14](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
+## Current proof state — 28 November 2026 (P0 CMP102)
+
+Lean #15 [0f1fc0d21803](https://github.com/chboishabba/dashi_lean4/commit/0f1fc0d218035a7bfde0df320f249571cfb1ddb9) constructs the ordered signed path derivative recursion matching the Path13 deposit convention, including negative links after their adjoint factor. Given each elementary adjoint norm ≤1, defect ≤2e and tangent-map norm ≤1, a word of length L has adjoint defect ≤2Le and derivative defect ≤2L²e. Actual offset paths have length ≤24, coarse paths 13, M/P length ≤37, relative word ≤74. [858caa5eb9c9](https://github.com/chboishabba/dashi_lean4/commit/858caa5eb9c9c5683d5f3d38e0eba019bab2d38a) retains the literal Eq119/120 row D avg[J(M−Ad_R P)]+Ad_expY rc+avg[Ad_C plus−minus], divided by 13. Under the stated nonflat log/exp operator estimates, the per-block difference is bounded by (61874/13)e; a four-block row sum ≤20000e yields a sufficient e≤1/1142440000 for the prior selected inverse enclosure. This is a conditional source-shaped analytic bound, not a measured physical ball or actual H(s(Y0)) identification. The principal logarithm/dexp estimates and identification on the original common CMP102 source ball remain P0; no finite-jet-to-uniform-limit promotion. The existing Route S and strong F1/F3/F4 distinctions and all continuum payments remain unchanged.
 
 ## Abstract
 
@@ -1102,3 +1124,32 @@ NEXT: prove the actual signedEvenRow ~= evenPart and signedOddRow ~= -oddPart, i
 The rank-1 finite algebra weld was discharged in the exact rational reference `scripts/check_ym_cmp102_signed_row_witness_20261123.py`: 128/128 complementary-index partitions, 128/128 `signedEvenRow = evenPart`, 128/128 `signedOddRow = -oddPart`, 128/128 inclusive row cancellations and 128/128 shifted-bracket zeros. The universal reindex is elementary: for `m=2(n+1)`, even positions are the two `1/m!` endpoints plus `r=1..n` interior terms `1/((2r)!(2m-2r)!)` matching `a(r-1)a(n-r)`, while odd positions are the two `1/(m-1)!` endpoints plus `r=1..n-1` interior terms `-1/((2r+1)!(m-2r-1)!)` matching `-b(r-1)b(n-r-1)`; the `n=0` singleton odd row is the remaining endpoint. This is an exact finite-weld reference, not an Agda kernel receipt and not the analytic/physical CMP102 attachment.
 
 The sign loss in Boolean gate summaries was isolated and repaired at the exact representation level by `scripts/check_ym_w4_triangular_mixing_signed_exact_20261123.py`: all 384 signed-permutation W4 elements preserve the unique Λ²(R⁴) invariant form (identity) and the unique R⁴ invariant operator (scalar); the trace-free anisotropic invariant subspace is zero; the sign-flip profile `(-1,-1,-1,1,1,1)` is retained. `ym-audit/audit/tests/test_original_9.py::_test_p90_triangular_lock` now uses exact rational nullspaces instead of the former NumPy/SVD nullity estimate. This verifies the finite sign-bearing representation shadow of Eriksson 2602.0096 Thm 8.5 / Cor 8.6; the full source theorem, its operator-sector inclusion `Z_{4←6}(O^{W4,aniso}_6) ⊂ O^{W4}_4 ∩ O(4)-inv`, and the residue attack remain source-imported, not DASHI kernel-certified. No Clay promotion.
+
+
+## 28 November — selected CMP99/102 Path13 block and mixed inverse
+
+The original master executable `scripts/check_ym_path13_full_q_matrix.py` constructs the full selected 12-row averaging matrix on the 13^4 site lattice, reports flat pivot P0=I/28561, and retains mixed Q and Gram jets. This is a source-specific finite arithmetic result, not a nonflat analytic ball certificate. Lean #15 commits 658d43713943 and 922baf07bdc4 construct the flat pivot/free-coordinate split, inverse G0=28561 I, exact constraint BIDI c=-G B b, signed two-point defect, and mixed inverse coefficient G_st=G P_s G P_t G+G P_t G P_s G-G P_st G. Both noncommuting orders and the free-block changes remain. The prior exact regression on synthetic noncommuting blocks is not a replay of the actual full selected Path13 source.
+
+The #1536 older manuscript's endpoint/Cauchy supplement (23 November, blob 371fc3095129766a635bc9734666b7551975e3d7) records source-written all-n even/odd A/B row identities and the shifted bracket zero. Do not repeat that finite index weld. The same-original-series Bishop analytic Cauchy limit, literal nonflat Q(s) coefficients, uniform inverse enclosure and physical identification H(s(Y0)) on the common CMP102 source ball are unpaid. R367/R368 distinguish C-Lipschitz, same-parameter contraction, and cross-parameter defect; R413/R410 consume the actual selected-stage operator, not arbitrary matrices. The source-native F19 and CMP116/119/122 clustering/expectation/same-H_OS spectral identification remain distinct continuum requirements. No fresh full-path replay, native kernel acceptance, or physical/Clay promotion follows.
+
+Source references: [#1536](https://github.com/chboishabba/dashi_agda/pull/1536), [Lean #15](https://github.com/chboishabba/dashi_lean4/pull/15), [current cross-lane roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Original Bałaban, Bishop/Bridges and Path13 authors retain attribution.
+
+
+## Section 17 CMP102 source-state update
+
+Lean #15 2f1f58f30b6f writes actual unit quaternion left/right tangent norm isometries, scalar orthogonality and two-point adjoint defect, and populates the prior chord-ball BondBound with left multiplication. The selected Path13 tangent identification, actual left-trivialized differential, nonflat H(s(Y0)) and CMP102 enclosure remain open. No wider mass-gap claim; 768 independent exact controls, native elaboration pending.
+
+
+## Section 18 — actual signed bond curve
+
+Lean #15 711fa9bdf761 consumes the one-parameter quaternion exponential derivative for q exp(tH) and exp(-tH)q*. At zero the actual signed velocities are qH and -Hq*, with unit bond norm isometry. Full noncommuting derivative, chosen Path13 identification and CMP102 enclosure remain open. Eight symbolic first-order coordinate controls, native kernel pending.
+
+
+## Section 19 — actual noncommutative word velocity
+
+Lean #15 595945568544 differentiates the actual ordered signed quaternion word at zero, retains product order, and bounds its velocity by the sum of bond direction norms. 128 exact product-rule insertion controls. Actual selected Path13 word identity, full logarithmic differential and nonflat CMP102 enclosure remain open; native elaboration pending.
+
+
+## Section 20 — actual left-trivialized word velocity
+
+Lean #15 79d5b59751a5 attaches actual signed bond body velocities H or −qHq*, derives suffix adjoint transport in the noncommuting actual word, norm equality and reversible reopening. 1992 exact rational independent controls. Full selected Path13 identification, actual logarithm differential/depx series comparison and CMP102 enclosure remain open; native elaboration pending.

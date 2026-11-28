@@ -17,8 +17,12 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exa
 -- R414 then constructs the uniform signed critical family and barrier.
 --
 -- No R568 forcing-square identification is used.  No separate self/external
--- payment reappears.  This owner is a compiler only: it leaves C1a, C1b and C2
--- visibly proof-bearing.
+-- payment reappears.  The historical R726 C1b exact-zero-defect condition
+-- has strict physical-real sign countercontrols (28 Nov 2026), so the new
+-- compensated R726 route accepts a cutoff-uniform SIGNED defect ceiling and
+-- builds the SAME R410/R414 critical barrier.  Both the R723 combined bound
+-- and this physical defect ceiling, plus original positive-margin C2, remain
+-- proof-bearing mathematical inputs, not auto-constructed bounds.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -224,6 +228,106 @@ module Endgame
     Physical.PositiveRetainedViscosityReceipt.retainedViscosityPositive
       receipt
 
+  ------------------------------------------------------------------------
+  -- Compensated original combined-R406 pathway.
+  --
+  -- The original R726 required the (potentially unnecessarily strong)
+  -- literalR406 <= combined pointwise-in-terminal inequality.  The new
+  -- R726 native compiler permits a physical signed discrepancy bounded by
+  -- an independent cutoff-uniform terminal function.  Here the exact
+  -- EXISTING R414 critical consumer is reached without any new critical
+  -- representation, without using the false R687 unlifted-to-lifted
+  -- implication and without weakening the actual R645 positive C2 margin.
+  ------------------------------------------------------------------------
+
+  record CompensatedC1C2Inputs (terminal : Time) : Set₁ where
+    field
+      compensatedCombinedPayment :
+        Combined.CutoffUniformCombinedSelfExternalPayment
+
+      compensatedTransport :
+        Bridge.CompensatedCombinedR406Transport R
+
+      compensatedStrictMarginC2 :
+        (cutoff : Nat) →
+        Strict.StrictMarginPhysicalProductionData
+          D C R cutoff terminal
+
+      compensatedInitialCritical :
+        Initial.InitialCriticalRealization
+          T R terminal (c2Slice terminal compensatedStrictMarginC2)
+
+  open CompensatedC1C2Inputs public
+
+  compensatedR410Cancellation :
+    (terminal : Time) →
+    CompensatedC1C2Inputs terminal →
+    Unified.Cancel.SignedCriticalCancellation T R
+  compensatedR410Cancellation terminal I =
+    Bridge.compensatedCombinedBuildsExistingR410
+      R (compensatedCombinedPayment I) (compensatedTransport I)
+
+  compensatedUnifiedCriticalData :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    Unified.UnifiedCancellationCriticalData T R terminal
+  compensatedUnifiedCriticalData terminal I = record
+    { Unified.cancellation = compensatedR410Cancellation terminal I
+    ; Unified.sliceData = c2Slice terminal (compensatedStrictMarginC2 I)
+    ; Unified.uniformInitialCeiling =
+        Initial.cutoffIndependentInitialCeiling
+          (compensatedInitialCritical I)
+    ; Unified.uniformInitialCritical =
+        Initial.realizationPaysUniformInitialCritical
+          (compensatedInitialCritical I)
+    }
+
+  compensatedUniformCriticalFamily :
+    (terminal : Time) →
+    CompensatedC1C2Inputs terminal →
+    Signed.UniformSignedCriticalProductionFamily
+  compensatedUniformCriticalFamily terminal I =
+    Unified.toUniformSignedCriticalProductionFamily
+      (compensatedUnifiedCriticalData terminal I)
+
+  compensatedUniformCriticalBarrier :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    (cutoff : Nat) →
+    let family = compensatedUniformCriticalFamily terminal I
+    in
+    Signed.terminalCritical (Signed.slice family cutoff)
+      + Signed.retainedViscosity (Signed.slice family cutoff)
+          * Signed.criticalDissipation (Signed.slice family cutoff)
+    ≤ Signed.uniformCriticalCeiling family
+  compensatedUniformCriticalBarrier terminal I cutoff =
+    Unified.oneCancellationBuildsUniformCriticalBarrier
+      (compensatedUnifiedCriticalData terminal I) cutoff
+
+  compensatedC2RetainedMarginPositive :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    (cutoff : Nat) →
+    0ℚ <
+      Unified.viscousCoefficient
+        (c2Slice terminal (compensatedStrictMarginC2 I) cutoff)
+      -
+      Unified.absorbedCoefficient
+        (c2Slice terminal (compensatedStrictMarginC2 I) cutoff)
+  compensatedC2RetainedMarginPositive terminal I cutoff =
+    let
+      P = compensatedStrictMarginC2 I cutoff
+      receipt = Strict.strictMarginBuildsPositiveRetainedViscosity P
+    in
+    Physical.PositiveRetainedViscosityReceipt.retainedViscosityPositive
+      receipt
+
+------------------------------------------------------------------------
+-- 2026-11-28 PHYSICAL REAL STRICT-MARGIN SCOPE FIREWALL:
+-- Conditional C1/C2 compiler remains algebraically valid, but the unrestricted original physical-real R645 C2 premise is refuted on a genuine cutoff-1 Galerkin velocity (316 incidences, scaled amplitude 2). At C=1 critical w(k)=1, production 0, dissipation 432, signed R406<-1104: for every delta>=0, production>(2nu-delta)D+R406 at time zero and on a short interval. Thus CombinedC1C2Inputs is NOT a source-admitted universal periodic-B theorem; the conditional compiler cannot be promoted without a mathematically different valid regularity criterion.
+-- Exact regression: scripts/check_ns_r645_c2_original_physical_counterexample_20261128.py
+-- The source conditional theorem body is preserved; no Agda field or
+-- native kernel false witness is asserted for irrational helical scalars.
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -245,6 +349,12 @@ round727SeparateSelfPaymentReintroduced = false
 
 round727SeparateExternalPaymentReintroduced : Bool
 round727SeparateExternalPaymentReintroduced = false
+
+round727CompensatedSignedTransportCompilerClosed : Bool
+round727CompensatedSignedTransportCompilerClosed = true
+
+round727CompensatedPhysicalDefectPaymentClosed : Bool
+round727CompensatedPhysicalDefectPaymentClosed = false
 
 round727CombinedPaymentClosed : Bool
 round727CombinedPaymentClosed = R723.round723CombinedCutoffUniformPaymentClosed

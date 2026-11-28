@@ -302,6 +302,12 @@ module Sandwich
       (coupledPaymentBuildsR648 P)
 
 ------------------------------------------------------------------------
+-- 2026-11-28 PHYSICAL REAL STRICT-MARGIN SCOPE FIREWALL:
+-- R653's literal C1/C2 sandwich is exact BIDI algebra. The C2 side is NOT an unrestricted all-smooth-data analytic truth in the original physical-real Fourier semantics: the C=1 weight is constant, nonlinear critical production is zero, and witness B at amplitude 2 has R406<-1104 while 2nu D=864. Accordingly the sandwich is only a conditional recast of the refuted-as-universal R645 payment. Do not infer C2 from R652, positive Gram, unlifted forcing, or a source-written equivalence.
+-- Exact regression: scripts/check_ns_r645_c2_original_physical_counterexample_20261128.py
+-- The source conditional theorem body is preserved; no Agda field or
+-- native kernel false witness is asserted for irrational helical scalars.
+------------------------------------------------------------------------
 -- Status / analytic interpretation.
 ------------------------------------------------------------------------
 

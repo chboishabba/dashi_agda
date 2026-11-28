@@ -25,6 +25,7 @@ module DASHI.Foundations.BishopExponentialCauchyProductExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (toℕ)
+open import Relation.Nullary using (¬_)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans; sym)
@@ -329,3 +330,103 @@ bishopExpTimesNegativeIsOne value =
       (ExpCong.bishopExpCongruent
         (BishopP.+-inverseʳ value))
       Positive.bishopExpZero)
+
+
+------------------------------------------------------------------------
+-- Native exponential injectivity by located order and cancellation.
+-- No classical trichotomy or logarithm premise. Source-written only.
+------------------------------------------------------------------------
+
+bishopExpEqualityExcludesStrictOrder :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  ¬ BishopReal._<_ x y
+bishopExpEqualityExcludesStrictOrder {x} {y} equal xBelowY =
+  let
+    difference = BishopReal._+_ y (BishopReal.-_ x)
+    positive : BishopReal._<_ BishopReal.0ℝ difference
+    positive =
+      BishopP.<-respˡ-≃
+        (BishopP.+-inverseʳ x)
+        (BishopP.+-monoˡ-< (BishopReal.-_ x) xBelowY)
+    differenceExpOne :
+      BishopReal._≃_ (Exp.bishopExp difference) BishopReal.1ℝ
+    differenceExpOne =
+      BishopP.≃-trans
+        (bishopExpAdd y (BishopReal.-_ x))
+        (BishopP.≃-trans
+          (BishopP.*-cong (BishopP.≃-symm equal) BishopP.≃-refl)
+          (bishopExpTimesNegativeIsOne x))
+  in
+  BishopP.<-irrefl (BishopP.≃-symm differenceExpOne)
+    (Positive.bishopExpStrictlyAboveOneOnPositive positive)
+
+bishopExpInjective :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  BishopReal._≃_ x y
+bishopExpInjective {x} {y} equal =
+  BishopP.≤-antisym
+    (BishopP.≮⇒≥
+      (bishopExpEqualityExcludesStrictOrder {x = y} {y = x}
+        (BishopP.≃-symm equal)))
+    (BishopP.≮⇒≥ (bishopExpEqualityExcludesStrictOrder {x = x} {y = y} equal))
+
+
+-- Strict order from a positive exponential value; no need to assume
+-- global exponential positivity or use a classical real logarithm.
+bishopExpStrictOrderFromPositiveValue :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal._<_ BishopReal.0ℝ (Exp.bishopExp x) →
+  BishopReal._<_ x y →
+  BishopReal._<_ (Exp.bishopExp x) (Exp.bishopExp y)
+bishopExpStrictOrderFromPositiveValue {x} {y} expXPositive xBelowY =
+  let
+    d = BishopReal._+_ y (BishopReal.-_ x)
+    dPositive =
+      BishopP.<-respˡ-≃
+        (BishopP.+-inverseʳ x)
+        (BishopP.+-monoˡ-< (BishopReal.-_ x) xBelowY)
+    sumIsY : BishopReal._≃_ (BishopReal._+_ x d) y
+    sumIsY =
+      let open BishopP.ℝ-Solver in
+      solve 2 (λ a b → a ⊕ (b ⊖ a) ⊜ b)
+        BishopP.≃-refl x y
+    productIsY =
+      BishopP.≃-trans
+        (BishopP.≃-symm (bishopExpAdd x d))
+        (ExpCong.bishopExpCongruent sumIsY)
+  in
+  BishopP.<-respʳ-≃ productIsY
+    (BishopP.<-respˡ-≃
+      (BishopP.*-identityʳ (Exp.bishopExp x))
+      (BishopP.*-monoʳ-<-pos
+        (BishopP.0<x⇒posx expXPositive)
+        (Positive.bishopExpStrictlyAboveOneOnPositive dPositive)))
+
+
+-- Weak order is obtained by the same actual nonnegative difference.
+-- It requires only nonnegativity of exp(x), already known in the
+-- negative-real decay application.
+bishopExpWeakOrderFromNonnegativeValue :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal.NonNegative (Exp.bishopExp x) →
+  BishopReal._≤_ x y →
+  BishopReal._≤_ (Exp.bishopExp x) (Exp.bishopExp y)
+bishopExpWeakOrderFromNonnegativeValue {x} {y} expXNN x≤y =
+  let
+    d = BishopReal._-_ y x
+    sumIsY : BishopReal._≃_ (BishopReal._+_ x d) y
+    sumIsY =
+      let open BishopP.ℝ-Solver in
+      solve 2 (λ a b → a ⊕ (b ⊖ a) ⊜ b)
+        BishopP.≃-refl x y
+    productIsY =
+      BishopP.≃-trans
+        (BishopP.≃-symm (bishopExpAdd x d))
+        (ExpCong.bishopExpCongruent sumIsY)
+  in
+  BishopP.≤-respʳ-≃ productIsY
+    (BishopP.≤-respˡ-≃ (BishopP.*-identityʳ (Exp.bishopExp x))
+      (BishopP.*-monoˡ-≤-nonNeg
+        (Positive.bishopExpAtLeastOneOnNonnegative x≤y) expXNN))

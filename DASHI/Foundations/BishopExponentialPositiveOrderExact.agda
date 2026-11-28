@@ -88,7 +88,7 @@ expPartialSumsIncreasing {x} xNonnegative n =
     partial = BishopSequence.SeriesOf (Exp.expTerm x) n
   in
   BishopP.≤-respˡ-≃
-    (BishopP.≃-symm (BishopP.+-identityʳ partial))
+    (BishopP.+-identityʳ partial)
     (BishopP.+-monoʳ-≤ partial
       (BishopP.nonNegx⇒0≤x
         (expTermNonnegative xNonnegative n)))
@@ -113,7 +113,7 @@ oneBelowOnePlusPositive :
   BishopReal._<_ BishopReal.1ℝ (BishopReal._+_ BishopReal.1ℝ x)
 oneBelowOnePlusPositive {x} zeroBelowX =
   BishopP.<-respˡ-≃
-    (BishopP.≃-symm (BishopP.+-identityʳ BishopReal.1ℝ))
+    (BishopP.+-identityʳ BishopReal.1ℝ)
     (BishopP.+-monoʳ-< BishopReal.1ℝ zeroBelowX)
 
 oneBelowOrEqualOnePlusNonnegative :
@@ -122,7 +122,7 @@ oneBelowOrEqualOnePlusNonnegative :
   BishopReal._≤_ BishopReal.1ℝ (BishopReal._+_ BishopReal.1ℝ x)
 oneBelowOrEqualOnePlusNonnegative {x} xNonnegative =
   BishopP.≤-respˡ-≃
-    (BishopP.≃-symm (BishopP.+-identityʳ BishopReal.1ℝ))
+    (BishopP.+-identityʳ BishopReal.1ℝ)
     (BishopP.+-monoʳ-≤ BishopReal.1ℝ
       (BishopP.nonNegx⇒0≤x xNonnegative))
 

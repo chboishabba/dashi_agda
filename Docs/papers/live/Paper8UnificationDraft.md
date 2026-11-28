@@ -5,6 +5,40 @@ Date: `2026-06-09`
 Version: `draft 1`
 Status: live closure-architecture manuscript; non-promoting
 
+
+
+
+
+
+## Current proof state — 28 November 2026, Section 16
+
+All-Clay parallel implementation explicitly reuses the existing RSA/Shor exact hidden-subgroup coset law in the original elliptic geometry. Actual geometric doubling fibre E[2]≃[2]⁻¹(P) uses Q+T and R−Q, and the Galois address σQ−Q equals the actual Kummer cocycle. The distinct rational Kummer observation has kernel 2E(K), not E[2]. The even sign action now feeds Mathlib affine secant addition by the actual root point (e0,0), with nonsingularity from the same split curve (Lean #124 `462c91fa2a12`, `65a1cc338de2`). The old RSA/SSP local-product nonseparation control and finite cyclic Shor scope are preserved: no quantum speedup, rational rank conclusion or Selmer proof follows from finite fibre counts. Actual x−T cohomological comparison, all-place arithmetic exhaustion and analytic rank remain.
+
+NS source-written pressure and half-weight integrated convergence, forced replay hardening and unforced certificate blocker are retained. Hodge's actual chart denominator squared descends from the base discriminant; finite/proper localized base change and global primitive cycle remain. RH revalidates the pinned target vendor before/after replay; no native proof receipt. PNP actual bounded larger-block normal-fold ingress passed 44 checks on top of the connected cubic carrier, not a universal resource bound. YM actual unit quaternion conjugation and chord/angle bound feed the signed word, with differential/selected operator still open. Local exact controls total 14,022; no native kernel available. See [Section 16](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
+## Current proof state — 28 November 2026, Section 15
+
+Parallel original-source proofs: NS A has the signed continuum involution and Lebesgue integral commutator; A/B retain the exact radial numerator, critical ceiling open. Forced C/D consume the canonical Fefferman carrier, fresh kernel pending; original unforced data still absent. BSD reverse-solves the nonexceptional geometric half from signed roots and recovers the same tangent-root coordinates, not yet actual arithmetic Kummer/analytic rank equality. Hodge has an explicit point and nonzero denominator in the coupled affine quotient, not a proper global primitive cycle. RH consumes the pinned external proof through actual universal xi/zeta subtype endpoints, native replay pending. PNP has a bounded original Boolean CNF ingress through the actual compiler body (190 local controls), not the unrestricted resource theorem. YM actual quaternion word angle/ad-radius feeds the previous series bound, pending actual differential and selected CMP102 identification. 5,347 algebraic/CNF controls plus 52 parser fixtures in each mode; no native kernel acceptance. See [Section 15](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Earlier sections are historical snapshots.
+
+## Current proof state — 28 November 2026, cross-Clay P0 (Section 14)
+
+The cross-programme implementation remains parallel. NS has the joint periodic limit energy inequality and signed commutator, original forced-source pin audit and fresh-replay gate, and conditional unforced interval margin compiler. BSD has the split x−T Galois sign character and exact tangent product, not yet the actual cocycle comparison or analytic rank equality. Hodge has a universal six-coordinate monic quotient algebra over the explicit Dickson/Q0 and derivative-product base, with a source-written proper affine projection (Lean #124, `0e6f49de3d78`); saturation, global projective cycle and primitive pairing remain open. RH has a strengthened original-source pinned admission runner and a matched compact upstream statement/main source, not a locally replayed proof. PNP's production phase contractor now attempts connected separator elimination and exact completed-residual sharing (Agda #1548, `d7ab0b9e3dda`); full CNF campaign and unrestricted resource bound are not established. YM has the quantitative exponential-differential/inverse series bounds (Lean #15, `7071c042ed1d`), pending actual principal-differential and CMP102 source-ball attachment.
+
+The local exact regression passed 77,672 algebraic controls, including the extracted changed PNP recursion against independent donors, not a full production CNF execution. All new native proof bodies await elaboration. No external recognition or unconditional Clay claim follows. The [consolidated roadmap, Section 14](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) records source owners, exact commits, remaining cuts and regression scope. Earlier status sections are historical snapshots.
+
+## Current proof state — 28 November 2026 (same-source diagonal and signed limit)
+
+The clopen continuation construction now feeds a source-written finite-horizon periodic modal integral equation: one compact countable product of actual Fourier time charts, one increasing cutoff subsequence, explicit original initial data, integrated strong modal error, and original absolutely summable signed nonlinear convolution primitive. This is a substantive same-carrier limiting construction, not an assertion of strong infinite-dimensional ball compactness. N2e's weighted signed energy-square FTC is attached to the actual finite trajectories; its uniform signed ceiling remains unproved. Preserve the distinction between weak Fourier modal limit, physical-space PDE formulation, critical smooth continuation and terminal UCT. [Section 13 proof ledger](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md), 192975 exact local algebraic controls, native pending. Other programme claims unchanged.
+
+## Current proof state — 28 November 2026 (P0)
+
+Current same-object examples: (i) NS local original Galerkin flow with conjugate-reality uniqueness and finite energy FTC, not a uniform critical bound; (ii) YM signed path derivative recursion and conditional quantitative nonflat Path13 inverse budget, not same-H_OS; (iii) original BSD split-cubic torsion translation gives (+,−,−) tangent-root signs, with actual continuous H1/point-group arithmetic character and analytic rank still distinct; (iv) Hodge generic Dickson projection is injective on fixed seventh-power addresses away from y²=a⁷, and five free deck coordinates determine the sixth, not a Chow pairing; (v) connected PNP cubic characters admit affine orthogonality and nonlinear square elimination when no quartic spill occurs. The local extracted phase core passed 284/284 controls including a 256-variable connected chain with one quadratic leaf; exact quartic escape is retained. Newer PNP source #1548 also has fixed-program compressed exact-extent stack simulation, actual constructive witness search and restricted same-input multiple-cut bounds; ordinary integer FRACTRAN time and unrestricted complexity not identified. RH pinned admission remains kernel-blocked. The [live endpoint roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) carries actual source revisions and exact remaining cuts. No U-1a/UCT or physical terminal claim is promoted.
+
+
+## Current proof state — 28 November 2026 (clopen real continuation)
+
+The NS finite-flow source now gives an actual topology distinction and compatible-chart construction: symbolic Base369 prefix equivalence supplies refinement; real closed energy cells shrink to a singleton on a compact fixed-dimensional carrier; the equality set of actual ODE solution charts, not the ambient physical ball, is clopen on their connected time overlap. This source-written attachment to original R27/R29/R30 yields global finite forward flow at fixed N, integrated high-mode tails and cutoff-independent fixed-mode equicontinuity. It does not make the infinite-dimensional strong energy ball compact or prove the signed critical NS budget. [Current proof ledger, Section 12](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md); exact local regressions passed, kernel pending. No change to U-1a/UCT or other physical endpoints.
+
 ## Abstract
 
 This paper is the canonical home for the DASHI closure grammar. Its core claim
@@ -433,3 +467,30 @@ mathematical-physics readership.
 | Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`. | The analytic content of those lanes remains in Papers 1 and 3 and in their cited external inputs. | Any analytic YM or NS proof narrative inside Paper 8. |
 | Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`. | External DHR authority may be cited by downstream illustrations. | Full DHR reconstruction, internal compact-group construction, or exact `G_DHR ~= G_SM`. |
 | Sections 6-8 and the blocker table freeze the architecture-level scope boundary for GR, empirical, and prediction consumers. | Any GR or empirical authority belongs to the downstream consumer lane that invokes it. | Continuum GR, empirical validation, terminal unification, or automatic promotion from closure grammar to observational adequacy. |
+
+
+## 28 November — original-carrier closure and non-descent examples
+
+Cross-paper updates use the existing FactorsThrough / indexed-residual governance, not a new claim of U-1a or UCT closure. Paper 1 gives an instructive counterexample: exact positive Cauchy Gram does not imply positive centered signed remainder; ordinary kinetic energy does not control a D^(3/2) time integral; quartic and quintic observables are not interchangeable. Paper 3's 12-channel pivot and mixed inverse preserve the actual signed free-coordinate defect; finite jets do not determine the nonflat source-ball inverse. General Weierstrass doubling and actual place-indexed Kummer exactness are classical algebraic constructions, source-written in Lean #124; no analytic BSD rank equality follows. The signed Dickson full deck trace has 64 delta on full support and zero on proper supports; a proper algebraic cycle-class pairing is a separate consumer. PNP's character product applies to actually separated pulled-back phase supports, not arbitrary connected problems or a universal resource closure. RH's pinned proof admission is not a replacement for kernel execution.
+
+Retain original mathematical attribution, especially JMD finite algebra/action and DASHI source-specific attachment. The #1546 Paper 9 two-slice residual and #1554 Paper 2 source-preserving metric/normal-jet examples are independent working-draft donors, not coequal live corpus additions or evidence of terminal unification. Their distinct Paper 8 branch appendices should be reconciled by source-linked union, not by replacing one with the other. See [paper-family reconciliation](../PaperFamilyReconciliation20261128.md). No new U-1a/UCT theorem or verification status promotion.
+
+
+## Section 17 and 17a cross-programme source-state update
+
+Actual BSD split sign rows and first root cocycle difference (Lean #124 6dea0c83e043), Hodge canonical source/pulled localization equivalence and finite/proper localized projection (f7017b2748cd), NS mean and transverse force/tail (#123 d04a2fff44d8), same-run PNP support criterion attached to separated_epoch and survives_epoch (#119 f5b3c14e68db), actual quaternion tangent (#15 2f1f58f30b6f), and strengthened RH/forced NS admission are source-written. See the consolidated roadmap Section 17/17a at ba318f0100d6. 4503 independently executed exact controls, committed matching blob 0feec3741f7a. Native elaboration and universal mathematical endpoints remain open; no proof promotion. PNP default-branch merge-forward confirmed; other branch transitive compatibility still pending.
+
+
+## Section 18 — actual carrier geometry
+
+NS divergence heat identity and integrated energy tail, Hodge actual affine closure saturation (Lean #124 2cc4f8dfdd8d), BSD actual cyclic split sign differences (339eb7fb57bf), original-source PNP component planner (Agda #1548 8d26c500b2c1), and YM signed exponential tangent (Lean #15 711fa9bdf761) advance the original carriers. See consolidated roadmap 6b4b13d80e6e. 6475 exact local controls; planner and regression blob parity; donor function slices rather than full checkout. RH and NS C/D pinned replay, all universal endpoint cuts, native proof elaboration remain outstanding. No claim promotion.
+
+
+## Section 19 — original carrier advances
+
+BSD explicit actual split doubling 1cba973d61a4, Hodge full-coordinate homogenized cone kernel and h-saturation b257907ab3f8, NS ordered reality covariance 62ef5713d71a and AB import 7999cc7057da, YM signed ordered derivative 595945568544, PNP reserved exterior search 7987ab9699bd. See consolidated roadmap 703761273f04. 2827 local scoped controls, not native acceptance. RH/forced NS pinned replay and unforced physical certificate remain blocked. No universal endpoint promotion.
+
+
+## Section 20 — original carrier advances
+
+Original finite NS ODE/local existence and bounded-ball reality (#123 c515e2aa71e6; AB import 28ab0c54090d), actual split BSD Kummer value (#124 226757cc1778), actual Hodge cone homogeneous ideal (#124 178be82a6f1b), reversible signed-word body velocity (#15 79d5b59751a5), and actual disjoint epoch injection (#119 1d1a435ba629) are source-written. See consolidated Section 20 roadmap 92e26c2caa51. Independent regression 6172/6172, tested bytes verified at a0c3795c7390. Native kernel absent; no universal endpoint promotion.

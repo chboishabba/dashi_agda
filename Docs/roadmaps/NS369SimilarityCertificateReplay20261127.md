@@ -1,0 +1,140 @@
+# NS proof-first native closure — 27 November 2026
+
+Supersedes simulation-first priority. Python reconstruction and replay are
+optional research artifacts, not acceptance dependencies. No simulation or CI
+required. Formal proof bodies in Agda and Lean are the deliverable.
+
+## Implemented native source, kernel not yet run
+
+- Lean main ExternalClayNS/LeanDojoExactTerminal.lean: literal C/D bodies,
+  using comparator authority and actual momentum/divergence/energy transports.
+  LeanDojoCComparatorBridge and LeanDojoMaxCut already exist. External proof
+  trust and exact-head kernel audit separate from independent construction.
+- Lean #123, f8bb36ae6edf326706888514a23fcc70088c6d1c:
+  Synthesis/NavierStokesSignedGeometryWeld.lean: full three-grade curl split,
+  residual BIDI, signed rate increment, envelope and existing integral
+  consumer composition, coercivity residual BIDI.
+- Agda NSTriadKNR650SignedRateBudgetWeldExact: exact selected-rate difference,
+  original-rate equality transport and R854 endpoint comparison.
+- Agda master R853 owns actual packet/physical normal form and integrated
+  equality; R854 owns exact rational horizon and negativity.
+- Lean main R854 affine and integrated rate consumers already exist.
+- Agda #1279 IncompressibleEulerGalerkinCoreExact is an Euler adapter, not a
+  new NS physical trajectory. Original owner NSTriadKNComplex3GalerkinEquationAudit
+  has exact projected finite ODE and physical output fibre, but some audit
+  fields are Set-valued markers rather than proofs of the required properties.
+- #1543 signed physical rate/bucket source, #1291 indexed geometry, #1551
+  similarity and multishell sources remain donors, not wholesale replacements.
+
+## Remaining exact mathematical cuts
+
+1. Independent similarity profile: construct an inhabited nonzero periodic
+   divergence-free solution of original similarity equations, pressure,
+   symmetry and decay on full space. Signed curl split retains all residuals
+   and zero grade; not sufficient alone. Need actual continuum inverse
+   estimates or analytic construction, not existence as a record field.
+2. Original weighted cell forms: prove profile-specific coercivity and
+   enclosures including infinite tail; use residual BIDI to isolate exact
+   missing lower bound. No finite sampled matrix implies continuum estimate.
+3. Global adjoint: construct solution with actual original adjoint boundary
+   conditions and normalization, prove solvability and exact actuator
+   cancellation on same profile, not merely formal local differential identity.
+4. Original fifteen-field certificate: instantiate actual original constructors
+   with these witnesses and exact scalar smallness; no new wrapper as substitute.
+5. Separate original R408 Galerkin lane: establish actual real ODE trajectory,
+   same-object R853 rate semantics over reals and three one-sided increment
+   estimates with combined 6(12 L_C + L_P + L_D) <= L854. Then existing
+   R854 real integral consumer applies. Finite selected rate is not a
+   continuum global estimate; retain original signed middle-shell obstruction.
+
+No new universal NS proof claimed. Source written, not kernel checked.
+Alpoge–Buckmaster retain original similarity/certificate authorship;
+classical vector identities and ordered field arithmetic classical;
+DASHI signed residual/R853/R854 specialization and composition only.
+
+## Native analytic continuation — same day
+
+Lean #123 now contains source-written theorem bodies:
+- NavierStokesQuadraticInverseExact (0bc669a): complete closed-ball contraction
+  gives actual nonzero root; injective preconditioner, exact quadratic
+  expansion, ball invariance and contraction bounds are explicit.
+- NavierStokesCoerciveAdjointExact (f7fd072): signed perturbation coercivity,
+  primal/transpose weak existence and uniqueness by Mathlib Lax-Milgram;
+  homogeneous coercive adjoint is zero; actuator pairing BIDI.
+- NavierStokesBorderedActuatorExact (ce58ef3): actual rank-one Schur complement
+  solution with gauge, and multiplier cancellation iff residual pairing zero.
+- NavierStokesCoerciveNonlinearRootExact (0b94cb5): same-space inverse
+  composition, explicit radius 2*e and half contraction from 8*b*e <= 1.
+- Agda NSQuadraticCorrectionBudgetExact (bd3e912): exact rational slack
+  factorization and actuator balance, no added postulates.
+
+Original source ad53419: Breakdown/CertCell/StatementDefs.lean defines
+CellLayerData, IsCellMesh, CellVecField, CellMatField, ModelErrors,
+SignedTree and PassesRealNodeEnclosure/PassesComplexNodeEnclosure.
+Breakdown/Cert/ExtendedCoerciveDefs.lean defines weighted derivative,
+transport, weak second derivative, harmonic and split lower bound predicates.
+These are the actual target owners; a generic Hilbert form is not yet their
+instantiation. No assumption that original similarity operator is coercive
+on the full ungauged space; the weak adjoint may require a different
+bordered realization or dual space. No assumption that period-dependent
+residual is quadratic in all parameters; exact expansion must be proved
+on the selected fixed-period chart or an appropriate remainder bound used.
+
+Remaining: construct actual weighted carrier and bounded physical form,
+prove positive diagonal gap (including exterior and full harmonic tails),
+identify original projected residual with Riesz representative and exact
+quadratic expansion on that carrier, construct a nonzero seed and bound
+its inverse residual and quadratic norm, actual actuator/gauge coupling
+and zero residual pairing, pressure recovery, smoothness and original
+fifteen-field inhabitants. These are explicit analytic obligations, not
+acceptance or simulation tasks. External C/D unchanged. No kernel run.
+
+## Original physical formula specialization
+
+Lean #123:
+- 73f4f24 NavierStokesPhysicalCoefficientExact: literal harmonic lattice
+  labelTime/labelAzimuth/labelFlip; inverse parity, injectivity, zero,
+  additive and reflected transport. Original Coercive.baseDensity five
+  channels: signed difference, lower bound conditional on the negative
+  velocity channel estimate, exact simultaneous weight interval feasibility.
+- a5a1317 NavierStokesOriginalCertificateBudgetExact: original
+  IsExtendedCertificate small_first/second/third reduced to strict cap
+  and two endpoint margins; constructive scalar witness; transfer and size
+  denominator BIDI. Source constants and profile bounds not manufactured.
+- e09fa25 NavierStokesPhysicalStretchExact: weighted Young inequality,
+  three signed stretching contractions and exterior strain radius bound.
+- Agda 03d8d625 NSPhysicalCoefficientResidualExact: rational exact
+  density difference, margin decomposition and Young square.
+
+Source read: upstream Challenge.lean at ad53419 contains three sorry
+challenge endpoints; do NOT import these as proof authority. ExtendedStatement
+contains actual ExtendedCertificateData and IsExtendedCertificate.
+CertCell/StatementDefs defines original 15-field CellSystemCondition;
+not identical to generic Lax-Milgram or scalar budget theorem. Need actual
+profile shape and pressure coefficients, original weighted Hardy/derivative
+and harmonic block estimates, far-field mean/wave majorants with original
+radial measure, exact signed tree cell data, actuator and adjoint field links,
+and parameter-box nontriviality. The base density alone is not full
+coercivity. No kernel test, no simulation, no claim of completed original
+certificate. Native source code search on Lean default branch returned no
+matches; not an exhaustive inventory of all existing donors.
+
+## Radial Hardy and signed seam continuation
+
+Lean #123 commit af6fbe134638a1be1dbaaca198d17235e8b6c081 adds
+NavierStokesRadialHardyExact: classical radial square completion with
+variable weight derivative, oriented endpoint flux, seam cancellation,
+integrated negative velocity absorption, and interior/exterior mixed debt.
+The exact coefficient is w+2r w', not w alone; the original physical
+weight and carrier must be instantiated before claiming the Hardy leaf.
+Local SymPy: 8/8 symbolic identities (two universal polynomial identities,
+six rational radial test functions). No kernel run.
+
+Existing ns369_similarity_reconstruct.py owns the smooth potential basis
+and signed Fourier candidate; ns369_similarity_certificate.py owns compact
+interval replay and sampled adjoint; ns_cell_signed_node.py owns rational
+LDL with constraint-kernel negative columns. Reuse these, not a new sampled
+certificate. Remaining: actual nonzero seed, full weighted integration by
+parts and trace closure, global tail and harmonic estimates, original
+cell enclosures, adjoint/actuator and fifteen-field admission. All remain
+open or conditional; finite checks are not native acceptance.

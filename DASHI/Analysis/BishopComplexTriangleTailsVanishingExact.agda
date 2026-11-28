@@ -554,3 +554,134 @@ originalBishopFactorialComplexWingImagConvergesZero x y =
           (factorialRealStream x)
           (factorialImaginaryStream y) n)
         (originalBishopFourFactorialImaginaryTailBound x y n))
+
+
+------------------------------------------------------------------------
+-- The imaginary x imaginary specialization on the SAME factorial stream.
+-- Attribution: Bishop & Bridges, Constructive Analysis (1985), original
+-- vendored Bishop real sequence convergence and the owners above.
+-- No new analytic assumption. Source-written; kernel acceptance separate.
+------------------------------------------------------------------------
+
+originalBishopImaginaryPairRealTailBound :
+  ∀ x y count →
+  BishopReal._≤_
+    (BishopReal._+_
+      (ComplexWing.positiveTriangleTail
+        (Complex.realTerms (factorialImaginaryStream x))
+        (Complex.realTerms (factorialImaginaryStream y))
+        count)
+      (ComplexWing.positiveTriangleTail
+        (Complex.imagTerms (factorialImaginaryStream x))
+        (Complex.imagTerms (factorialImaginaryStream y))
+        count))
+    (doubleFactorialPositiveTail x y count)
+originalBishopImaginaryPairRealTailBound x y count =
+  let
+    Ann : ∀ n → BishopReal.NonNegative (ExpCauchy.absoluteExpTerm x n)
+    Ann n = BishopP.nonNeg∣x∣ (Exp.expTerm x n)
+    realBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.realTerms (factorialImaginaryStream y)) n)
+    realBnn n = BishopP.nonNeg∣x∣
+      (Complex.realTerms (factorialImaginaryStream y) n)
+    imagBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.imagTerms (factorialImaginaryStream y)) n)
+    imagBnn n = BishopP.nonNeg∣x∣
+      (Complex.imagTerms (factorialImaginaryStream y) n)
+  in
+  BishopP.+-mono-≤
+    (originalBishopCauchyTriangleTailMonotone
+      (imaginaryFactorRealAbsoluteBound x)
+      (imaginaryFactorRealAbsoluteBound y)
+      Ann realBnn count count)
+    (originalBishopCauchyTriangleTailMonotone
+      (imaginaryFactorImagAbsoluteBound x)
+      (imaginaryFactorImagAbsoluteBound y)
+      Ann imagBnn count count)
+
+originalBishopImaginaryPairWingRealConvergesZero :
+  ∀ x y →
+  BishopSequence._ConvergesTo_
+    (λ n → Complex.re
+      (ComplexWing.upperWingResidual
+        (factorialImaginaryStream x)
+        (factorialImaginaryStream y) n))
+    BishopReal.0ℝ
+originalBishopImaginaryPairWingRealConvergesZero x y =
+  originalBishopDominatedByDoubleFactorialTailVanishes x y
+    (λ n → Complex.re
+      (ComplexWing.upperWingResidual
+        (factorialImaginaryStream x)
+        (factorialImaginaryStream y) n))
+    (λ n →
+      BishopP.≤-trans
+        (ComplexWing.originalBishopComplexWingRealAbsoluteBound
+          (factorialImaginaryStream x)
+          (factorialImaginaryStream y) n)
+        (originalBishopImaginaryPairRealTailBound x y n))
+
+
+originalBishopImaginaryPairImagTailBound :
+  ∀ x y count →
+  BishopReal._≤_
+    (BishopReal._+_
+      (ComplexWing.positiveTriangleTail
+        (Complex.realTerms (factorialImaginaryStream x))
+        (Complex.imagTerms (factorialImaginaryStream y))
+        count)
+      (ComplexWing.positiveTriangleTail
+        (Complex.imagTerms (factorialImaginaryStream x))
+        (Complex.realTerms (factorialImaginaryStream y))
+        count))
+    (doubleFactorialPositiveTail x y count)
+originalBishopImaginaryPairImagTailBound x y count =
+  let
+    Ann : ∀ n → BishopReal.NonNegative (ExpCauchy.absoluteExpTerm x n)
+    Ann n = BishopP.nonNeg∣x∣ (Exp.expTerm x n)
+    realBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.realTerms (factorialImaginaryStream y)) n)
+    realBnn n = BishopP.nonNeg∣x∣
+      (Complex.realTerms (factorialImaginaryStream y) n)
+    imagBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.imagTerms (factorialImaginaryStream y)) n)
+    imagBnn n = BishopP.nonNeg∣x∣
+      (Complex.imagTerms (factorialImaginaryStream y) n)
+  in
+  BishopP.+-mono-≤
+    (originalBishopCauchyTriangleTailMonotone
+      (imaginaryFactorRealAbsoluteBound x)
+      (imaginaryFactorImagAbsoluteBound y)
+      Ann imagBnn count count)
+    (originalBishopCauchyTriangleTailMonotone
+      (imaginaryFactorImagAbsoluteBound x)
+      (imaginaryFactorRealAbsoluteBound y)
+      Ann realBnn count count)
+
+originalBishopImaginaryPairWingImagConvergesZero :
+  ∀ x y →
+  BishopSequence._ConvergesTo_
+    (λ n → Complex.im
+      (ComplexWing.upperWingResidual
+        (factorialImaginaryStream x)
+        (factorialImaginaryStream y) n))
+    BishopReal.0ℝ
+originalBishopImaginaryPairWingImagConvergesZero x y =
+  originalBishopDominatedByDoubleFactorialTailVanishes x y
+    (λ n → Complex.im
+      (ComplexWing.upperWingResidual
+        (factorialImaginaryStream x)
+        (factorialImaginaryStream y) n))
+    (λ n →
+      BishopP.≤-trans
+        (ComplexWing.originalBishopComplexWingImagAbsoluteBound
+          (factorialImaginaryStream x)
+          (factorialImaginaryStream y) n)
+        (originalBishopImaginaryPairImagTailBound x y n))

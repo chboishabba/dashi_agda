@@ -26,6 +26,8 @@ module DASHI.Analysis.BishopOriginalNativeComplexExpAdditionFromTrigExact where
 -- Pinned Agda 2.9 kernel acceptance of the new source remains OPEN.
 ------------------------------------------------------------------------
 
+open import Data.Product.Base using (proj₁; proj₂)
+
 import Real as R
 import RealProperties as RP
 
@@ -34,6 +36,7 @@ import DASHI.Foundations.BishopExponentialCauchyProductExact as RealExp
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
+import DASHI.Analysis.BishopComplexExpFactEqualsNativeExpExact as FactorialProduct
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as A
 import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as Bridge
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
@@ -148,3 +151,40 @@ originalBishopAnalyticExpAddFromNativeRealExpAndTrig
         (C.complex x y) (C.complex a b)
   in
   C.reEquivalent equality , C.imEquivalent equality
+
+
+-- The original two trigonometric leaves are now produced by the
+-- imaginary factorial limit on this same configured carrier.
+-- Source-written only; pinned kernel verification remains outstanding.
+originalBishopCosineAdditionFromFactorial : 
+  (T : C.BishopSetoidComplexTranscendentals) →
+  OriginalCosineAddition T
+originalBishopCosineAdditionFromFactorial T x y =
+  proj₂ (C.imaginaryExponentialProductGivesAddition T x y
+    (FactorialProduct.originalBishopImaginaryExpMultiplicative T x y))
+
+originalBishopSineAdditionFromFactorial :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  OriginalSineAddition T
+originalBishopSineAdditionFromFactorial T x y =
+  proj₁ (C.imaginaryExponentialProductGivesAddition T x y
+    (FactorialProduct.originalBishopImaginaryExpMultiplicative T x y))
+
+originalBishopExpCAddFromFactorial :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (z w : C.BishopComplex) →
+  C._≈C_
+    (C.expC T (C._+C_ z w))
+    (C._*C_ (C.expC T z) (C.expC T w))
+originalBishopExpCAddFromFactorial T =
+  originalBishopExpCAddFromNativeRealExpAndTrig T
+    (originalBishopCosineAdditionFromFactorial T)
+    (originalBishopSineAdditionFromFactorial T)
+
+originalBishopAnalyticExpAddFromFactorial :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  Dyadic.OriginalBishopAnalyticExpAddLaw T
+originalBishopAnalyticExpAddFromFactorial T =
+  originalBishopAnalyticExpAddFromNativeRealExpAndTrig T
+    (originalBishopCosineAdditionFromFactorial T)
+    (originalBishopSineAdditionFromFactorial T)

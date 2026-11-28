@@ -30,6 +30,11 @@ matrix as identity and the `|V_us|` target as comparison-only; and
 `YukawaFromCarrier.agda` keeps `physicalYukawaPromotionConstructed = false`
 even after exposing diagonal and symbolic off-diagonal carrier entries.
 
+
+## Current proof-state note — 28 November 2026
+
+Historical support manuscript. The independent Paper 9 #1546 now has native source-written degree-41 reduced cyclic norm, integer prefix reflection, actual normalized series evaluation and a uniform shifted cusp disk majorant. These extend the existing ramified CM diagnostics, not physical Yukawa/CKM calibration. The selected p=29 phase, actual calibrated coupling and nonidentity physical CKM remain open. Preserve the distinction between classical CM theory and DASHI source-specific arithmetic. See the [current paper-family ledger](../PaperFamilyReconciliation20261128.md).
+
 ## Abstract
 
 We describe the matter/Yukawa/CKM frontier currently formalized in DASHI as a

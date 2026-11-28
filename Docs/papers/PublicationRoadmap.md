@@ -385,3 +385,7 @@ established algorithms, and conduct external mathematics and novelty
 review. Initial computational paper can use local SymPy/integer certificates;
 native Bishop/Agda kernel supplement is optional for that paper but required
 for any formal-verification claim. Paper 8 may cite Paper 9 after stabilization.
+
+## 28 November 2026 — controlling paper-family correction
+
+The [ten-family reconciliation](PaperFamilyReconciliation20261128.md) supersedes older proof-search priorities without deleting historical sequencing. Paper 1 R752/W2 universal positivity and R820–825 reserve are refuted; do not allocate further effort to proving those unrestricted inequalities. The repaired A/B frontier is actual trajectory, valid signed critical-time estimate and continuum continuation. C/D pinned original admission and unforced profile route are separate. Paper 3 retains source-native Route S and strong-route distinctions; the immediate source task is literal CMP102 nonflat H(s(Y0)) with enclosure, not finite pivot algebra or an asserted continuum gap. Paper 8 uses controlled same-object non-descent examples, not terminal promotion. Revived Paper 2 (#1554), Paper 9 and Paper 10 (#1546) are independent working manuscripts; preserve their owner branches and respective source gates. Historical Paper 4–7 status unchanged. Do not regenerate theorem manifests or claim kernel acceptance from documentation updates.

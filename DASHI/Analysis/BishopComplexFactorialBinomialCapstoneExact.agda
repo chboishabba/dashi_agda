@@ -157,7 +157,7 @@ originalBishopFiniteComplexBinomialLeafInhabited x y =
             (Axis.imaginaryAxis y)
             n)
           (Algebra.scaleCCongruent
-            (Algebra.powCCongruent n
-              (originalBishopRealPlusImaginaryAxisIsCartesian x y))
+            (Algebra.powCCongruent
+              (originalBishopRealPlusImaginaryAxisIsCartesian x y) n)
             (coeff n))
     }

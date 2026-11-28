@@ -126,3 +126,7 @@ Clay claim flags, or generated satellite index is intended. Exact local
 SymPy/integer reproduction, complexity review, prior-art comparison and
 additional CM cases are required before submission; native kernel claims
 remain separate.
+
+## 28 November 2026 — paper-family reconciliation
+
+See [PaperFamilyReconciliation20261128.md](PaperFamilyReconciliation20261128.md) for all ten numbered families and pinned owner drafts. Independent working manuscripts now include revived Paper 2 (#1554), Paper 9 and Paper 10 (#1546, Paper 10 mathematical owner TOE #1217). The historical Paper 2 and Papers 4–7 remain support. The three live core papers, renderer and generated satellite index stay unchanged in scope. The older #1529 Paper 9 pointer is historical; use the #1546 owner draft. Current source claims and proof acceptance are separate.

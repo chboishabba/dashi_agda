@@ -4,6 +4,11 @@ Date: `2026-05-29`
 Status: standalone draft; docs-only; non-constructive; fail-closed
 Scope: terminal composition remains non-constructible in the current repository
 
+
+## Current proof-state note — 28 November 2026
+
+Historical support manuscript; Paper 8 remains the live closure-grammar owner. Current source-written NS local flow, original BSD arithmetic signs, Hodge fixed-address projection, connected PNP and YM nonflat Path13 estimates do not jointly inhabit the terminal product. The positive and negative NS outcomes are alternative lanes, not simultaneous obligations of that product. The [current endpoint roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) controls current proof states; all physical/continuum/authority compatibility gates remain individually typed and unpaid where indicated.
+
 ## Abstract
 
 This paper states the terminal composition target for DASHI as a typed
