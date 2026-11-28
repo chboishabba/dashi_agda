@@ -11,7 +11,7 @@ def zero(x):
 
 
 def main():
-    f,v=s.symbols('f v',positive=True)
+    f=s.symbols('f',positive=True);v=s.symbols('v',real=True)
     rho,j,p=s.symbols('rho j p',real=True)
     k=s.sqrt(f+v*v); gamma=k/s.sqrt(f); w=v/s.sqrt(f)
     eta=s.diag(-1,1)
