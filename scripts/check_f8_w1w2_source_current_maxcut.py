@@ -13,6 +13,8 @@ SCRIPTS=(
     "check_f8_full_gn_fourier_current.py",
     "check_f8_gn_current_budget.py",
     "check_f8_current_israel_reciprocal_weld.py",
+    "check_f8_differentiated_gn_energy.py",
+    "check_f8_gn_coefficient_enclosure.py",
     "check_f8_gauss_israel_energy_weld.py",
     "check_f8_scalar_density_momentum_schur.py",
     "check_f8_material_momentum_frame_weld.py",
