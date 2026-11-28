@@ -6,7 +6,8 @@ import numpy as np
 from scipy.constants import c
 from solar_spherical_material_weld import construct
 from solar_spherical_whitney import shell_mesh
-from solar_physical_causal import event,reaction,MASS,CHARGE
+from solar_physical_causal import reaction,MASS,CHARGE
+from solar_support_transition import support_transition
 from solar_earth_collision_tensor import rates
 from solar_physical_cone import timed_step
 
@@ -60,7 +61,7 @@ def cycle(material,cfg):
         return [float(np.linalg.norm(u-v)/max(np.linalg.norm(u),np.linalg.norm(v),1e-30)) for u,v in zip(a,b)]
     assert int(cfg['max_cycles'])>=1 and cfg['auxiliary_J']>=0
     assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
-    campaign={}; preparation={}; trace=[]; history=[]; sensitivity=[]
+    campaign={}; preparation={}; trace=[]; history=[]; sensitivity=[]; support_receipts=[]
     from fractions import Fraction
     solve_error=Fraction(0)
     exact_trace=cfg.get('retain_stage_residuals',False)
@@ -96,7 +97,11 @@ def cycle(material,cfg):
                         raise ValueError('frozen-population certificate encountered nonzero event')
                     w=np.zeros(3)
                 else:
-                    x[sl],pop[i],w=event(x[sl],pop[i],r,a,birth[i],vol[i])
+                    x[sl],pop[i],w,support_receipt=support_transition(
+                        x[sl],pop[i],r,a,birth[i],vol[i])
+                    if support_receipt['support_changed']:
+                        support_receipts.append(dict(cycle=iteration+1,step=step,
+                                                     cell=i,receipt=support_receipt))
                 costs[:3]+=w; costs[3]+=vol[i]*(a@chem); costs[4]+=vol[i]*(r@chem)
             theta1=np.exp(-dt*cool/cap)*theta-np.expm1(-dt*cool/cap)*p/cool
             mid=np.exp(-dt*cool/(2*cap))*theta-np.expm1(-dt*cool/(2*cap))*p/cool
@@ -140,7 +145,11 @@ def cycle(material,cfg):
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
                 strict_campaign_net_J=corrected_net if full_restored else None,
-                terminal_depletion_J=depletion,exact_frozen_population_solve_error=str(solve_error) if exact_trace else None,history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
+                terminal_depletion_J=depletion,
+                support_transition_count=len(support_receipts),
+                support_transition_receipts=support_receipts,
+                fixed_support_campaign=not bool(support_receipts),
+                exact_frozen_population_solve_error=str(solve_error) if exact_trace else None,history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
                 preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
                 cycle_trace=trace,net_J=net,periodic_return=ret,original_return=orig,
                 restored=bool(restored),original_material_restored=bool(material_restored),
