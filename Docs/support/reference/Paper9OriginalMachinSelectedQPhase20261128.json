@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-28",
+  "source_script": "scripts/check_paper9_machin_two_atom_cayley.py",
+  "source_git_blob": "f89d58b681ecb008c4df534a76b28fc16ef7d732",
+  "local_git_blob": "f89d58b681ecb008c4df534a76b28fc16ef7d732",
+  "local_sha256": "5e54474e12c50904c98f7ecc955036de559e2c4fe7383ad2d003ccedce0df0a7",
+  "byte_identical": true,
+  "executed": true,
+  "python_exact_rational": true,
+  "sympy_symbolic": true,
+  "accepted": {
+    "five_phase": [
+      "12/13",
+      "5/13"
+    ],
+    "two39_phase": [
+      "28560/28561",
+      "239/28561"
+    ],
+    "fourth_of_five": [
+      "-239/28561",
+      "28560/28561"
+    ],
+    "combined": [
+      "0",
+      "1"
+    ],
+    "negative_controls_rejected": 3,
+    "cayley_first_order_ODE": true,
+    "arctan_reference_derivative": true,
+    "selected_CM_scale": true,
+    "log_q_second_order": true
+  },
+  "provenance": {
+    "pair_assembly": "BishopMachinTwoPointCayleyCompositionExact.nativeCombinedCayleyFromTwoOriginalAtanValues",
+    "imaginary_product": "BishopMachinCayleyNativeProductFirstZeroExact.originalNativeImaginaryExpProduct",
+    "machin_phase": "BishopMachinSelectedImaginaryPhaseWeldExact.machinImaginaryPhaseFromTwoOriginalAtans",
+    "selected_bishop_q": "CM163BishopOriginalQPhaseFromCayleyExact.FromTwoOriginalAtans.originalQ",
+    "original_q_radius": "JInvariantBishopCM163SelectedDiskExact.radius",
+    "original_exp_source": "BishopExponentialSeriesConvergenceExact.bishopExp"
+  },
+  "unproved_producers": [
+    "OriginalAtanFiveCayleyEvaluation (actual Bishop atan/exponential)",
+    "OriginalAtan239CayleyEvaluation (actual Bishop atan/exponential)",
+    "actual all-index Hecke product and CM j literal root",
+    "hypergeometric original Bishop factorial Euler limit identification"
+  ],
+  "external_real_pi_used_in_agda_proof": false,
+  "native_kernel_checked": false,
+  "github_ci": false
+}
