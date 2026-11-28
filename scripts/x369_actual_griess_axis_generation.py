@@ -192,7 +192,7 @@ def run(indices,seconds):
         mmgroup_version=version('mmgroup'),columns_requested=len(indices),columns_verified=len(rows),
         rows=rows,source_dimension=DIM,source_generating_family='signed short axes and X triality images',
         all_basis_columns_explicitly_verified=len(rows)==DIM,
-        mathematical_spanning_from_source_axis_formula=True,
+        spanning_construction_uses_source_axis_formula=True,
         original_JMD_FLm_basis_alignment_certified=False)
 
 
