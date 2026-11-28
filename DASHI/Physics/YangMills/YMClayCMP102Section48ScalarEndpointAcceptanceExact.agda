@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.YMClayCMP102Section48ScalarEndpointAcceptanceExact where
+
+open import DASHI.Physics.YangMills.YMClayCMP102OriginalOuterWingsClosedExact public
