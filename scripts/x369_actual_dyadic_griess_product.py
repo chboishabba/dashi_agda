@@ -140,7 +140,8 @@ def run(a):
     e=times(F(1,8),std)
     require(times(F(1,8),standard_product(e,deadline)).same(times(2,e)),
             'Ising multiplication scaling')
-    specs=((300,300),(300,576),(852,24),(98580,147732))
+    all_specs=((300,300),(300,576),(852,24),(98580,147732))
+    specs=() if a.covariance_only else tuple(all_specs[i] for i in (a.pair_index or range(len(all_specs))))
     rows=[]
     for i,j in specs:
         try:
@@ -169,7 +170,7 @@ def run(a):
                 'actual Y443 source scope')
         t=AxisTerm(F(1),int(XLeech2(MM('q','v+')).ord))
         v=unit(300)
-        for name in ('u','v'):
+        for name in ((a.generator,) if a.generator else ('u','v')):
             try:
                 check_budget(deadline)
                 g=MM(r['words'][name]);ax=axis_word(t.q,0)*g
@@ -181,7 +182,7 @@ def run(a):
                 require(lhs.same(rhs),'actual JMD product covariance')
                 cov.append(dict(generator=name,product_sha256=lhs.digest(),covariance=True))
             except TimeoutError:break
-    complete=len(rows)==len(specs) and (not a.source or len(cov)==2)
+    complete=len(rows)==len(specs) and (not a.source or len(cov)==(1 if a.generator else 2))
     return dict(status='actual_dyadic_griess_product_audit' if complete else 'bounded_incomplete',
         mmgroup_version=version('mmgroup'),standard_axis_eigenvalue=16,ising_product_scaling='axis/8',
         standard_integer_row_bound=ROW_BOUND,rows=rows,requested_pairs=len(specs),
@@ -195,8 +196,14 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument('--seconds',type=float,default=90);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--source',type=Path);p.add_argument('--source-sha256')
+    p.add_argument('--pair-index',type=int,choices=range(4),action='append')
+    p.add_argument('--covariance-only',action='store_true');p.add_argument('--generator',choices=('u','v'))
     a=p.parse_args()
-    require(0<a.seconds<=90 and bool(a.source)==bool(a.source_sha256),'bounded source scope')
+    require(0<a.seconds<=90 and bool(a.source)==bool(a.source_sha256) and
+            (not a.covariance_only or bool(a.source)) and
+            (not a.generator or bool(a.source)) and
+            not (a.covariance_only and a.pair_index) and
+            len(set(a.pair_index or []))==len(a.pair_index or []),'bounded source scope')
     r=run(a);a.output.parent.mkdir(parents=True,exist_ok=True)
     with a.output.open('x') as f:json.dump(r,f,sort_keys=True,indent=2);f.write('\n')
     print(r['status'],len(r['rows']),len(r['jmd_covariance']))
