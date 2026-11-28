@@ -24,8 +24,9 @@ def main():
     assert wrong!=0
     # Finite worldtube integration, source and two fluxes both signed.
     xa,xb=s.symbols('xa xb',real=True)
-    term=s.integrate(S.diff(x),(x,xa,xb))
-    eq(term-(S.subs(x,xb)-S.subs(x,xa)))
+    fixture=(x*x+t)*(t*x+x**3)
+    term=s.integrate(fixture.diff(x),(x,xa,xb))
+    eq(term-(fixture.subs(x,xb)-fixture.subs(x,xa)))
     # Matched transport channels: outward normals opposite on two faces.
     flux=s.Symbol('flux',real=True)
     eq(flux+(-flux))
