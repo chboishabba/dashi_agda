@@ -130,6 +130,32 @@ positiveBudgetBelowEightNinths n =
         denominatorNZ = positiveDenominatorNonZero n
   in FractionOrder.natFractionLe (positiveCrossOrder n)
 
+-- This polynomial identity is the cross-product of the source
+-- recurrence B_(n+1) = B_n + 2*n/p_n, expressed entirely in Nats.
+-- No rational normalization or analytic premise is necessary.
+positiveBudgetStepCross :
+  (n : Nat) →
+  (8 * slack (suc n)) * ((9 * powerFour n) * powerFour n)
+  ≡
+  (((8 * slack n) * powerFour n)
+    + ((2 * n) * (9 * powerFour n)))
+    * (9 * powerFour (suc n))
+positiveBudgetStepCross n =
+  solve 3
+    (λ s p k →
+      (con 8 :* ((con 4 :* s) :+ (con 9 :* k)))
+      :* ((con 9 :* p) :* p)
+      :=
+      (((con 8 :* s) :* p)
+        :+ ((con 2 :* k) :* (con 9 :* p)))
+        :* (con 9 :* (con 4 :* p)))
+    refl (slack n) (powerFour n) n
+
+-- This is the exact finite rational induction certificate behind
+-- the qRadiusBudget recurrence; the remaining native Agda bridge
+-- is the equality between qRadiusTerm and 2*n/powerFour(n) in the
+-- ORIGINAL unnormalised Q carrier, not any positivity estimate.
+
 -- Rational recurrence: positiveBudget(n+1) = positiveBudget(n)
 --    + 2*n / 4^n.
 -- Reuse the original Nat identity powerFourDecomposition, the
