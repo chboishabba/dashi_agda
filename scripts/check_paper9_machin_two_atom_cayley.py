@@ -49,6 +49,13 @@ def main():
     h=S.symbols('h', positive=True)
     p=S.symbols('p', positive=True)
     assert S.simplify(2*p*(h/2)-p*h)==0
+    # True selected CM exponent: 2*pi_M*i*((-1+i*h)/2)=-pi_M*h-i*pi_M.
+    tau=(-1+I*h)/2
+    exact_arg=S.expand(2*p*I*tau)
+    assert S.simplify(exact_arg-(-p*h-I*p))==0
+    # +i*pi_M exponent is equivalent only modulo the separately
+    # established original Machin imaginary period, NOT the same arg.
+    assert S.simplify(exact_arg-(-p*h+I*p))!=0
     q,w=S.symbols('q w')
     logratio=-2*p*h*w/(1-w)
     assert S.expand(S.series(S.exp(logratio),w,0,3).removeO()-(1-2*p*h*w+(2*(p*h)**2-2*p*h)*w*w))==0
@@ -56,7 +63,7 @@ def main():
         'five_fourth':['-239/28561','28560/28561'], 'combined':['0','1'],
         'signed_negative_controls':3, 'cayley_complex_ODE_exact':True,
         'analytic_atan_derivative_reference':True,
-        'selected_tau_half_to_full':True,
+        'selected_tau_half_to_full':True,'selected_tau_negative_imaginary_argument':True,
         'q_log_ray_two_coefficients':True,
         'original_bishop_atan_exp_evaluations_proved':False},sort_keys=True))
 
