@@ -1,0 +1,5 @@
+BR210 local standalone execution:
+timeout 90 python /tmp/hopf210/check_hopf369_br210_collar_trace.py
+PASS BR210 exterior symbol, exact closed two-form trace obstruction, finite collar identity, half-order budget 1.14.0
+Exit 0. Source copied into committed script; byte hash comparison not yet performed.
+No donor-import execution or full curved PDE acceptance.

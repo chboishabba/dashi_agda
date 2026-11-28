@@ -5486,3 +5486,46 @@ norms. No automatic estimate of those norms from bulk L2.
 Terminal stage 30 registered. Original donor entry unrun.
 No native kernel, CI, curved boundary estimate or nonlinear
 generation accepted. Other programme lanes unchanged.
+
+
+## 45. BR210 — derivative-balanced collar trace and closed-form refusal
+
+From BR139 use the actual tangential Cartan exterior equation
+D_y E_ij = -C_ijy -D_i E_jy +D_j E_iy.
+On a flat collar with Fourier weight lambda=(1+|xi|²)^1/2,
+let A=||E_parallel||_{L2_y H^(s+1/2)},
+M=||E_mixed||_{L2_y H^(s+1/2)},
+B=||C_mixed||_{L2_y H^(s-1/2)}.
+The finite collar trace identity and exterior symbol yield
+||E_parallel(0)||_{H^s}² <= l^-1 A² + 2 A (B+M).
+For a variable connection include the actual commutator term
+K=||connection work||_{L2_y H^(s-1/2)} on the RHS,
+subject to the chart metric and Sobolev multiplier bounds;
+this is conditional, not a proved variable-coefficient estimate.
+Use Young with any positive d:
+trace² <= (l^-1+d) A² + (B+M+K)²/d.
+For the BR137 surface current with forcing L E_parallel(0),
+Cauchy/Young reduces the integrated surface work to this same
+bulk premium, provided the actual source map L and its multiplier
+norm are certified. No assumption that those norms follow from
+BR209's L2 Bel estimate.
+
+New sharp flat exterior negative control: exact closed two-form
+d(alpha), alpha=exp(-ky+ikx1) dx2/(ik), with tangential and mixed
+components equal in magnitude, trace squared 1, bulk squared 1/k.
+For E_iy convention m=(0,-i exp(-ky),0), e' + i L_xi m=0.
+Hence even homogeneous exterior closure alone cannot pay the
+L2 trace premium. The homogeneous half-order tangential weight
+is sharp on this family; inhomogeneous weight has same asymptotic
+behavior. This packet is not claimed to satisfy the full algebraic
+Weyl, Israel and dynamical equations and is not an IBVP counterexample.
+Retain BR176 actual reference Weyl obstruction separately.
+The next genuine weld is the differentiated coupled bulk energy
+controlling A,M,B,K with compatible corner and boundary data,
+or an improved full-system estimate that excludes the packet.
+
+Local executed exact BR210 checker with exit zero under 90s cap,
+SymPy 1.14.0. This standalone flat exterior calculation has no
+repository donor imports. No curved trace estimate, coupled
+nonlinear generation, native kernel or complete runner acceptance.
+Terminal stage 31 registered. Other lanes unchanged. No CI.
