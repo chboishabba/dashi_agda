@@ -9,7 +9,8 @@ module DASHI.Codec.IndexedAffinePivotPrefixIsometryBidiExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import DASHI.Algebra.Trit using (Trit)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 import DASHI.Codec.TriadicMaskSignFactorization as M
 import DASHI.Codec.IndexedCubeAffineStableOverlapExact as Stable
 import DASHI.Codec.IndexedCubePivot02RechartedExact as Pivot
@@ -69,3 +70,124 @@ record SelectedPrefixTransport : Set₁ where
       (x y : Source) →
       originalAgreement (Pivot.pivotRaw x) (Pivot.pivotRaw y)
         ≡ originalAgreement x y
+
+
+-- The actual lower-triangular pivot depends only on earlier selected
+-- digits. Extract exactly those equalities; no enumeration of pairs.
+headEqual : ∀ {a b : Trit} {as bs : List Trit} →
+  (a ∷ as) ≡ (b ∷ bs) → a ≡ b
+headEqual refl = refl
+
+tailEqual : ∀ {a b : Trit} {as bs : List Trit} →
+  (a ∷ as) ≡ (b ∷ bs) → as ≡ bs
+tailEqual refl = refl
+
+slopeInjective : {s t : M.Sign} →
+  Stable.rawSlope s ≡ Stable.rawSlope t → s ≡ t
+slopeInjective {M.negative} {M.negative} _ = refl
+slopeInjective {M.positive} {M.positive} _ = refl
+slopeInjective {M.negative} {M.positive} ()
+slopeInjective {M.positive} {M.negative} ()
+
+prefixForward : (k : Nat) (x y : Source) →
+  PrefixEqual k x y →
+  PrefixEqual k (Pivot.pivotRaw x) (Pivot.pivotRaw y)
+prefixForward zero x y eq = refl
+prefixForward (suc (zero))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq)) = refl
+
+prefixForward (suc (suc (zero)))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq))) = refl
+
+prefixForward (suc (suc (suc (zero))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq)))) = refl
+
+prefixForward (suc (suc (suc (suc (zero)))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq)))) = refl
+
+prefixForward (suc (suc (suc (suc (suc (zero))))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))) = refl
+
+prefixForward (suc (suc (suc (suc (suc (suc (zero)))))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))) = refl
+
+prefixForward (suc (suc (suc (suc (suc (suc (suc (zero))))))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))) = refl
+
+prefixForward (suc (suc (suc (suc (suc (suc (suc (suc (zero)))))))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))))) = refl
+
+prefixForward (suc (suc (suc (suc (suc (suc (suc (suc (suc (k))))))))))
+  (Stable.stableBlocks (M.triple a b c) (M.triple s t u) (M.triple d e f))
+  (Stable.stableBlocks (M.triple a′ b′ c′) (M.triple s′ t′ u′) (M.triple d′ e′ f′)) eq
+  rewrite slopeInjective {s} {s′} (headEqual (eq))
+        | slopeInjective {t} {t′} (headEqual (tailEqual (eq)))
+        | slopeInjective {u} {u′} (headEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (eq))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq)))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))))
+        | headEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (tailEqual (eq))))))))) = refl
+
+prefixBackward : (k : Nat) (x y : Source) →
+  PrefixEqual k (Pivot.pivotRaw x) (Pivot.pivotRaw y) →
+  PrefixEqual k x y
+prefixBackward k x y eq =
+  trans (sym (cong (λ z → prefix k (selectedDigits z))
+                    (Pivot.onRaw Pivot.selectedPivotInvolution x)))
+    (trans (prefixForward k (Pivot.pivotRaw x) (Pivot.pivotRaw y) eq)
+           (cong (λ z → prefix k (selectedDigits z))
+                 (Pivot.onRaw Pivot.selectedPivotInvolution y)))
+
+selectedPrefixIsometry : SelectedPrefixIsometry
+selectedPrefixIsometry = record
+  { forward = prefixForward ; backward = prefixBackward }
+
+-- The original recharted cube already consumes selectedPivotInvolution.
+-- All prefix depths (including k >= 9) are covered by the clauses above.
+-- Source-written; no kernel acceptance asserted.
