@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python under timeout 90 from recovered sources in /tmp/pnp31; new executable blobs verified against GitHub. Full checkout DNS failure rechecked; selected prior dependencies are exact function extracts rather than complete-module parity. No Agda/Lean or CI run.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_frontier_resolution_campaign.py",
+      "blob": "521c3b86a37ed732ad33e508cb7e9c47d60e9a29",
+      "producerBlob": "97f4f69a5b243382ca190e217a88608222058a81",
+      "seconds": 2.733,
+      "small_source_allowance_checks": 1152,
+      "unique_connected_cnf": {
+        "sources": 24,
+        "n": [
+          10,
+          12
+        ],
+        "logical_cap": 20000,
+        "passive_completed": 15,
+        "passive_unknown": 9,
+        "normal_completed": 0,
+        "normal_unknown": 24,
+        "resolution_completed": 24
+      },
+      "unique_exact_cover": {
+        "sources": 24,
+        "passive_completed": 24,
+        "resolution_completed": 24
+      },
+      "tamper_refusal": 1,
+      "zero_budget_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_linear_live_dag.py",
+      "blob": "7f109d9940fdb61bbd77a5eb9eeebad606286188",
+      "seconds": 1.396,
+      "cuts": 2496,
+      "pointwise": 52416,
+      "gate_visits": 14976,
+      "marks": 4429,
+      "shared_scale": [
+        1024,
+        4096,
+        16384,
+        65536
+      ],
+      "marks_per_shared_gate": 2
+    },
+    {
+      "file": "scripts/check_pnp_fixed_code_gain.py",
+      "blob": "b4a8f23a8233d0d94a7e64ca16f6b0f07f84fd96",
+      "seconds": 0.921,
+      "source_defined_gain_localizations": 120,
+      "fully_pinned_root_verified": 120,
+      "first_scanned_gain": {
+        "n": 1,
+        "parent": [],
+        "literal": -1,
+        "witness": [
+          0
+        ],
+        "calls": 2,
+        "grade": 1
+      },
+      "finite_prefix_exhaustive_control": {
+        "calls": 197,
+        "max_grade": 5,
+        "status": "NO_GAIN_WITHIN_PREFIX"
+      },
+      "padding_controls": 5,
+      "refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_guarded_resolution_boundary.py",
+      "blob": "ad728375acb6d819a4565a08bb7a1d6e3ceb18a2",
+      "seconds": 1.878,
+      "guarded_refutations_restricted": 163,
+      "restricted_proof_steps": 311,
+      "php_small": [
+        {
+          "holes": 1,
+          "original": 5,
+          "restricted": 2
+        },
+        {
+          "holes": 2,
+          "original": 17,
+          "restricted": 10
+        },
+        {
+          "holes": 3,
+          "original": 63,
+          "restricted": 50
+        }
+      ],
+      "capacity": [
+        {
+          "holes": 4,
+          "n": 20,
+          "used": 270
+        },
+        {
+          "holes": 8,
+          "n": 72,
+          "used": 1674
+        },
+        {
+          "holes": 16,
+          "n": 272,
+          "used": 11730
+        },
+        {
+          "holes": 32,
+          "n": 1056,
+          "used": 87714
+        },
+        {
+          "holes": 64,
+          "n": 4160,
+          "used": 678210
+        }
+      ],
+      "negative_controls": 3,
+      "integrated_guarded": 7,
+      "guarded_refusal": 1
+    }
+  ],
+  "limits": [
+    "Resolution producer and capacity bypass are scoped, not a universal poly producer; resolution-only completion impossible by classical Haken lower bound transported by restriction.",
+    "Same logical allowances across different solvers are not equivalent physical time.",
+    "Explicit array scan O(n+S) word accesses, not native linked-vector or tape bit-time bound; native cached schedule written unelaborated.",
+    "Fixed-code tests use actual deterministic bounded Python witness producers with source-defined anchor; no native full standard-code coverage or total deadline; exhaustive finite control is not a polynomial candidate family.",
+    "Legacy Section30 localize override path-dependent on full pin position, so prior fixture gains not evidence of fixed code without source-defined anchor repair.",
+    "All universal endpoints open."
+  ]
+}
