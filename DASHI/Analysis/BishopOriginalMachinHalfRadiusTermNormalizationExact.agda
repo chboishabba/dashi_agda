@@ -44,6 +44,7 @@ import DASHI.Analysis.BishopOriginalMachinPositiveSlackBudgetExact as Slack
 import DASHI.Analysis.BishopOriginalMachinRationalSlackToUniformDefectExact as Consumer
 import DASHI.Analysis.BishopMachinRationalStageEmbeddingExact as Stage
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Atan
+import DASHI.Analysis.BishopOriginalMachinAtanFiniteDerivativeExact as Derivative
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimate
 
@@ -171,21 +172,41 @@ oddPowerTwoIsTwiceFour (suc k) =
 
 -- Exact odd-index coefficient n=2k+1; its double is the original
 -- qSecondScaled(odd) polynomial; no (2k+2) off-by-one.
+sucAsPlusOne : (n : Nat) → suc n ≡ n + 1
+sucAsPlusOne n =
+  solve 1 (λ x → con 1 :+ x := x :+ con 1) refl n
+
+evenExponentAsTwice : (k : Nat) →
+  Estimate.evenExponent k ≡ 2 * k
+evenExponentAsTwice zero = refl
+evenExponentAsTwice (suc k) =
+  trans
+    (cong (λ z → suc (suc z)) (evenExponentAsTwice k))
+    (solve 1 (λ x →
+      con 2 :+ (con 2 :* x)
+      := con 2 :* (con 1 :+ x))
+      refl k)
+
+oddExponentAs2kPlusOne : (k : Nat) →
+  Estimate.oddExponent k ≡ 2 * k + 1
+oddExponentAs2kPlusOne k =
+  trans
+    (Derivative.oddExponentIsSuccessorEven k)
+    (trans
+      (cong suc (evenExponentAsTwice k))
+      (sucAsPlusOne (2 * k)))
+
 secondScaledOdd :
   (k : Nat) →
   qSecondScaled (Estimate.oddExponent k) ≡
     (2 * (2 * k)) * (2 * k + 1)
-secondScaledOdd k =
-  -- oddExponent k is definitionally suc(evenExponent k).
-  -- The equality of evenExponent k and 2*k is elementary Nat induction.
+secondScaledOdd k
+  rewrite Derivative.oddExponentIsSuccessorEven k
+        | evenExponentAsTwice k =
   trans
-    (qSecondScaledClosed (Estimate.evenExponent k))
-    (solve 1 (λ k →
-      (con 2 :* (con 2 :* k))
-        :* ((con 2 :* k) :+ con 1)
-      := (con 2 :* (con 2 :* k))
-        :* ((con 2 :* k) :+ con 1))
-      refl k)
+    (qSecondScaledClosed (2 * k))
+    (cong (λ z → (2 * (2 * k)) * z)
+      (sucAsPlusOne (2 * k)))
 
 -- The original denominator 2k+1 is retained until cross products
 -- cancel. Both 4^k and 2^(2k+1) have source Nat nonzero witnesses.
@@ -195,22 +216,31 @@ originalTermNormalizes :
     (Original.qRadiusTerm k)
     (+ (2 * k) / Slack.powerFour k)
 originalTermNormalizes k =
-  let instance
-        pnNZ = powerTwoNonZero (Estimate.oddExponent k)
-        fourNZ = Slack.powerFourNonZero k
+  let
+    odd = Estimate.oddExponent k
+    instance
+      pnNZ = powerTwoNonZero odd
+      fourNZ = Slack.powerFourNonZero k
   in QP.≃-trans
-    (QP.*-cong QP.≃-refl
-      (qSecondNormalizes (Estimate.oddExponent k)))
-    (Q.*≡* (Zsolve 2
-      (λ k p →
-        ((ZK (+ 2) ⊗ (ZK (+ 2) ⊗ k))
-          ⊗ ((ZK (+ 2) ⊗ k) ⊕ ZK (+ 1)))
-          ⊗ p
-        ⊜
-        (ZK (+ 2) ⊗ k)
-          ⊗ (((ZK (+ 2) ⊗ k) ⊕ ZK (+ 1))
-            ⊗ (ZK (+ 2) ⊗ p)))
-      refl (+ k) (+ Slack.powerFour k)))
+    (QP.*-cong QP.≃-refl (qSecondNormalizes odd))
+    (QP.≃-trans
+      (QP.*-cong
+        (QP.≃-reflexive
+          (QP./-cong refl (oddExponentAs2kPlusOne k)))
+        (QP.≃-reflexive
+          (QP./-cong
+            (cong +_ (secondScaledOdd k))
+            (oddPowerTwoIsTwiceFour k))))
+      (Q.*≡* (Zsolve 2
+        (λ k p →
+          ((ZK (+ 2) ⊗ (ZK (+ 2) ⊗ k))
+            ⊗ ((ZK (+ 2) ⊗ k) ⊕ ZK (+ 1)))
+            ⊗ p
+          ⊜
+          (ZK (+ 2) ⊗ k)
+            ⊗ (((ZK (+ 2) ⊗ k) ⊕ ZK (+ 1))
+              ⊗ (ZK (+ 2) ⊗ p)))
+        refl (+ k) (+ Slack.powerFour k))))
 
 -- The requested earlier one-field input is now source-written,
 -- not adopted as an opaque analytic axiom.
