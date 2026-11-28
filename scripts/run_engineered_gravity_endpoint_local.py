@@ -39,6 +39,7 @@ CORE=(
     "check_engineered_gravity_quartic_receiver.py",
     "check_engineered_gravity_g3_analytic_radius.py",
     "check_engineered_gravity_g3_split_majorant.py",
+    "check_engineered_gravity_g3_weighted_majorant.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
