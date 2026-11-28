@@ -140,6 +140,36 @@ def evaluate(word,words,one):
     return g
 
 
+def candidates(gens,atlas,budget,deadline):
+    """Finite quotient-word search, with exact linear equations only
+    after cheap order and pair constraints. Not an exhaustive group search."""
+    from collections import deque
+    names=list(gens)
+    letters=[(n,gens[n]) for n in names]+[('-'+n,inverse(gens[n])) for n in names]
+    queue=deque([((),I)]);seen={I.tobytes()};cs=[];ds=[];inspected=0;pairs=0
+    while queue and inspected<budget:
+        if monotonic()>=deadline:break
+        w,x=queue.popleft();inspected+=1
+        if w:
+            # Powers of the original ATLAS lift, not its projective order.
+            x2=mm(x,x)
+            if np.array_equal(x2,-I%3):cs.append((w,x))
+            if not np.array_equal(x,I) and np.array_equal(mm(x2,x),I):ds.append((w,x))
+            fresh=[(w,x,d,y) for d,y in ds] if cs and cs[-1][0]==w else []
+            if ds and ds[-1][0]==w:fresh.extend((c,y,w,x) for c,y in cs)
+            for c,u,d,v in fresh:
+                if monotonic()>=deadline:return None,dict(inspected=inspected,pairs=pairs)
+                if not np.array_equal(pow3(mm(u,v),28),-I%3):continue
+                pairs+=1
+                P,dim=intertwiner((u,v),atlas)
+                if P is not None:return (c,d),dict(inspected=inspected,pairs=pairs)
+        for name,g in letters:
+            y=mm(x,g);k=y.tobytes()
+            if k not in seen and len(seen)<budget:
+                seen.add(k);queue.append((w+(name,),y))
+    return None,dict(inspected=inspected,pairs=pairs)
+
+
 def run(a):
     from mmgroup import MM
     deadline=monotonic()+a.seconds
@@ -150,13 +180,21 @@ def run(a):
     atlas=atlas_matrices(Path(__file__).resolve().parents[1])
     # Candidate C,D words are explicit source inputs. Do not replace
     # a failure by a dimension/order coincidence.
-    cw=a.c.split(',');dw=a.d.split(',')
+    stats=None
+    if a.search:
+        gs={name:source_action(g,z,A,B)[:12,:12] for name,g in words.items()}
+        found,stats=candidates(gs,atlas,a.search,deadline)
+        if found is None:return dict(status='bounded_candidate_search_incomplete',
+            local_sha256=a.local_sha256,manifest_sha256=checked['manifest_sha256'],
+            search=stats,atlas_class_map_certified=False,six_suz_cover_lift_certified=False)
+        cw,dw=map(list,found)
+    else:cw=a.c.split(',');dw=a.d.split(',')
     C,D=[evaluate(w,words,MM(1)) for w in (cw,dw)]
     L=[source_action(g,z,A,B) for g in (C,D)]
     P,dim=intertwiner([x[:12,:12] for x in L],atlas)
     out=dict(status='actual_ATLAS_quotient_generator_alignment' if P is not None else 'candidate_not_certified',
         local_sha256=a.local_sha256,manifest_sha256=checked['manifest_sha256'],
-        original_atlas_sha256=SOURCE_DIGESTS,word_pair=[cw,dw],literal_words=[str(C),str(D)],
+        original_atlas_sha256=SOURCE_DIGESTS,search=stats,word_pair=[cw,dw],literal_words=[str(C),str(D)],
         automorphism_matrices=[x.tolist() for x in L],intertwiner_kernel_dimension=dim,
         actual_quotient_intertwiner=None,atlas_class_map_certified=False,six_suz_cover_lift_certified=False)
     if P is None:return out
@@ -183,10 +221,10 @@ def run(a):
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--local',type=Path,required=True);p.add_argument('--local-sha256',required=True)
-    p.add_argument('--c',required=True);p.add_argument('--d',required=True)
+    p.add_argument('--c');p.add_argument('--d');p.add_argument('--search',type=int)
     p.add_argument('--conjugacy',type=Path);p.add_argument('--conjugacy-sha256')
     p.add_argument('--seconds',type=float,default=80);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();require(0<a.seconds<=90 and bool(a.conjugacy)==bool(a.conjugacy_sha256),'bounded scope')
+    a=p.parse_args();require(0<a.seconds<=90 and bool(a.conjugacy)==bool(a.conjugacy_sha256) and\n        ((a.search is not None and 1<=a.search<=200000 and a.c is None and a.d is None) or\n         (a.search is None and bool(a.c) and bool(a.d))),'bounded scope')
     r=run(a);a.output.parent.mkdir(parents=True,exist_ok=True)
     with a.output.open('x') as f:json.dump(r,f,indent=2,sort_keys=True);f.write('\n')
     print(r['status'])
