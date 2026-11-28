@@ -1812,3 +1812,211 @@ advanced, complex coalescence and universal rank still unpaid.
 Hodge concrete full-rank CM period producer advanced on one member,
 generic orientation and arbitrary primitive detector remain.
 No new unconditional universal conjecture or prize claim.
+
+
+## 28 November — exact admission source identity, bidirectional energy, actual H1 quotient and relative CM orientation
+
+Continued all four P0; PNP and YM untouched. Current Lean PR heads:
+RH #121 79dc0beedbbcb5ae4ece22f3fe3bc5febec6c8e1;
+NS #123 12a1b36cbedcd482328fc3371269d20704f007b6;
+BSD/Hodge #124 375e65e9ea0c470f7346646e28eb31d3a2590010.
+
+### RH — same-kernel admission source identity
+
+Rechecked MIT https://math.mit.edu/~drew/shortgrh/ (Nov27 17:27 UTC,
+all checks finished) and actual RHClayAdmission and local admission
+runner. Independent external theorem verification is unchanged.
+In check_original_p0_admission.sh bind the DASHI semantic source to its
+actual Git HEAD, check eight committed/working byte hashes before
+and after the run, and compare the two source receipts. Includes the
+actual root boundary, both local theorem adapters, scripts, pins
+and axiom auditor. Reject altered inputs or a changed HEAD rather
+than advertising acceptance of a different local semantic theorem.
+Prior pinned source/Mathlib checks and fresh replay remain unchanged.
+This is source-written admission guard, not a kernel run.
+No new Agda proof ingress: the actual analytic Real half and
+cross-kernel source transport remain explicit. Do not confuse
+independent external replay with a local root/Agda proof term.
+No local compatible toolchain available.
+
+### NS — exact reverse energy transport
+
+Re-read frozen ClaySpec BoundedEnergy and actual original
+BreakdownOnSpace. They use respectively a real integral with
+MemLp exponent two and a strict common bound, versus an ENNReal
+nonnegative integral with weak bound. Previous forward transport
+was sufficient for the negative statement. Added the reverse
+on the very same smooth velocity to ClayUnforcedTransport.lean:
+smoothness gives continuity of each spatial slice and norm-square;
+finite nonnegative extended integral gives integrability via
+hasFiniteIntegral_iff_norm; integrable_norm_rpow_iff gives MemLp
+at exponent two; integral_eq_lintegral_of_nonneg_ae and
+ENNReal.toReal_mono give a real uniform bound. Replacing C by
+max(C,0)+1 gives strict inequality, with no modification to u.
+sameVelocityEnergy_iff gives equivalence of the exact two energy
+clauses under the stated smoothness. Do not assert equivalence of
+the full periodic-pressure clauses, since the original allows
+arbitrary pressure. Added the theorem to the admission audit,
+now fifteen expected declarations. Actual parser blob
+d87b287587959f4c633d4525892552e8630682d7 locally matched;
+14/14 synthetic controls each normal and optimized. No kernel
+receipt. Unforced original certificate still absent according to
+https://math.observer/problems/navier-stokes-existence-and-smoothness/
+(last reviewed Nov25); OpenAI forced C/D independent, existing
+literal and direct paper spines unchanged. No native proof acceptance
+or new unconditional terminal claimed.
+
+### BSD — actual homogeneous cochain and H1 quotient construction
+
+Read existing literal elliptic TopRep, prior representative-level
+Kummer exactness and selected trivial-action low-degree H1 owner.
+The new Synthesis/MillenniumBSDOriginalHomogeneousH1Exact.lean
+extends the actual Mathlib homogeneous-cochain API, not a new
+cohomology carrier. For a continuous crossed cocycle c on G with
+coefficients X, c(gh)=c(g)+rho(g)c(h), set
+H(x,y)=c(y)-c(x). This is jointly continuous and hence curried
+continuous for locally compact G (absolute Galois is profinite).
+The crossed law implies H(gx,gy)=rho(g)H(x,y), and the
+homogeneous differential H(y,z)-H(x,z)+H(x,y)=0. Conversely
+normalize H at (1,g); the cocycle law and equivariance give the
+original crossed law, and H(1,1)=0 gives both inverse identities.
+The construction uses the actual kernel of d(1,2), its canonical
+categorical cycles isomorphism and ContinuousCohomology.pi.
+The actual H1 homology object is identified by the cokernel
+universal property with the existing TopModuleCat.coker of the
+incoming toCycles 0 1 map. Source-written quotient isomorphism,
+commuting projection, surjectivity and kernel=boundary assertions.
+A homogeneous zero-cochain b is the actual orbit of b(1);
+normalizing d(0,1)b at (1,g) gives rho(g)b(1)-b(1).
+Instantiated direct originalPointH1Class and originalKummerH1Class
+on the literal EllipticPointH1 and EllipticTwoTorsionH1; the latter
+uses Krull continuity of the actual selected half difference,
+not the square-class presentation. This connects prior actual
+representative constructions to the genuine H1 objects at source
+level. Still need full naturality of the class construction under
+actual coefficient morphisms and completion maps, and native
+identification of the prior representative exactness with the two
+induced H1 maps on the same objects. Classical exactness mathematics
+is not a new BSD theorem. The actual central rank-four complex
+derivative and universal rank comparison are unchanged.
+
+Native source used the existing repo LowDegree donor plus the
+current public Mathlib ContCohomology.Basic and
+TopModuleCat.Homology API; attempts to retrieve those exact
+Mathlib files at root pin 8f9d9cff... and v4.28.0 returned 404,
+while current master supplied them. This is a potential existing
+dependency-pin incompatibility to resolve by actual isolated build;
+do not silently update the repository pin or claim this compiles
+on v4.28.0. No Lean executable in runtime. Local exact finite
+regression scripts/check_bsd_homogeneous_quotient.py blob
+e33028cf82e0ae26f5cfeba083cc4146620a7fff (local hash matches)
+368/368 normal and optimized. Five cyclic finite models including
+nontrivial actions, all represented cycles, normalization,
+equivariance, three-variable differential, coboundary class
+comparison. These are not actual elliptic H1/Sha computations.
+
+### Hodge — explicit relative-field orientation and CM orbit in original family
+
+Use the previous explicit Q, S0, E, D=130001 and irreducible CM
+skew seed A. Compute the actual trace Gram on (1,theta,theta^2):
+G=[[3,-1,5],[-1,5,-4],[5,-4,13]], det G=49.
+The trace dual basis is
+(1-theta/7-3theta^2/7, (-1+2theta+theta^2)/7,
+ (-3+theta+2theta^2)/7).
+For e=sum_i u_i tensor u_i^*, the separability idempotent, its
+actual multiplication matrix P on F tensor_Q F has rank3,
+P^2=P, (theta tensor1-1tensor theta)P=0. Relative multiplication
+m and J(v)=e(v tensor1) satisfy mJ=I, Jm=P; this retains all
+three embeddings and the actual rational trace inverse.
+On six tensor factors the commuting pair projectors e_(1,i)
+(i=2..6) give the relative equal-field summand; after alternating
+the six relative slots this is wedge_F^6 T, rational dimension3.
+These projectors use algebraic field actions on the actual CM
+member as established by the preceding Cayley/Buskin route.
+No division by a vanished embedding or unsigned orientation.
+
+For M=D*S0+E, the actual scaled skew numerator, computed
+Pfaffian modulo theta^3+theta^2-2theta-1:
+276828202338870058 theta^2 -276827881238610075 theta
+-92276518098180134.
+At theta=7 modulo13 this is 12, nonzero. det(M)=pf(M)^2 exactly
+in F; the cube of its alternating two-form has signed coefficient
+6 pf(M)/D^3 for the unscaled form. Raising both indices by the
+nondegenerate relative pairing does not change nonvanishing.
+Multiplying that coefficient by 1,theta,theta^2 gives three
+independent rational vectors; the actual trace Gram determinant
+of this orbit is 49 times Norm(6pf(M)/D^3)^2, nonzero.
+So the explicit seed gives an entire relative determinant line
+on its period-realized CM member, not just an unspecified
+nonzero direction. Native trace-dual and Pfaffian finite
+reduction in MillenniumHodgeCubicCMExplicitSeed.lean
+commit 01658ed1719aa5cdeab85ba94eaef5e7f8d67741.
+scripts/check_hodge_cubic_cm_relative_orientation.py exact
+blob cb6958e7b3427789a95c85253a1a1cb269cf8405 locally matched,
+25/25 normal and optimized. No native kernel or cycle-class
+software verification.
+
+Original-family existence refinement (classical density plus
+specific seed): fix a rational F-marking of the reported
+rank-six quadratic space, with active signature (2,4).
+SO(Q)(F) has dense image in the identity component of
+SO(2,4)(R) at the active embedding in the following sense:
+the Cayley map on Q-skew matrices is a local analytic
+diffeomorphism near zero onto a neighborhood of identity.
+F is dense at this embedding (contains Q); approximate all
+independent entries of the skew numerator, which remain in
+F and avoid the determinant denominator near zero. The
+closure of the rational group's image contains this
+neighborhood, hence the connected identity component.
+This component acts transitively on the chosen connected
+period component of oriented positive two-planes. Replace A
+by gAg^-1 and the period by g omega for g in SO(Q)(F)
+in that component. Each conjugate has the same irreducible
+CM field, full rank18 and positive plane; the rational
+F-linear Hodge isometry extends by identity on the fixed
+NS rational subspace. Period-realized projective K3 surfaces
+are thus Hodge-isometric to the seed, and Buskin gives actual
+algebraic transports of the determinant basis on their
+powers. The orbit is countable and analytically dense.
+The reported four-dimensional full-moduli Dickson family
+(rStation paper141, based on paper140) has locally open
+marked period image by local Torelli and maximal dimension.
+Choose the seed period component matching a local chart
+(conjugate omega if necessary). The dense orbit intersects
+that open image. Thus SOME actual smooth Dickson family
+members have the full-rank CM orientation cycle, conditional
+on the reported local form and moduli results and classical
+period/Buskin inputs. No particular coefficient parameter
+identified; not a claim the initial seed itself is in the
+image. This is a specific same-CM-field orbit construction,
+not a new general CM Hodge theorem. Varesco already covers
+all powers of CM K3s.
+
+Density is not spread: the countably many relative Hilbert
+scheme images may all be proper closed loci even when their
+union is dense. To get the generic member need one dominating
+relative cycle component (or an actual mixed algebraic
+correspondence); nonzero orientation on a dense countable
+set alone cannot establish it. Pairwise skew Hodge
+endomorphism cannot persist at the generic End_Hdg=F,
+where F acts self-adjointly. The earlier lower-product and
+principal-fibre obstructions remain. Universal primitive
+detector unpaid. Attribution: reported quadratic/period
+geometry paper141 author, Dickson family paper140 author,
+classical trace idempotent, Cayley, Buskin, period and
+Varesco results credited; DASHI specific exact seed
+relative projection and orbit composition. No JMD
+contribution inferred.
+
+### Disposition
+
+RH external verification complete as reported, own local
+acceptance and cross-kernel ingress outstanding.
+NS exact energy clause reverse added; actual unforced
+certificate and own compatible kernel remain missing.
+BSD actual H1 source-level class and quotient advanced,
+native map naturality and endpoint rank theorem open.
+Hodge actual relative coefficient and dense selected CM
+orbit advanced; generic algebraic orientation and universal
+detector open. No native kernels or CI run; no universal
+Clay problem newly solved.
