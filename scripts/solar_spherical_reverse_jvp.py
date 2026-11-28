@@ -49,7 +49,9 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
     dpop=np.zeros_like(pop);dpool=np.zeros_like(pool)
     dtheta=np.zeros_like(theta);dx=np.zeros_like(x)
     pop2=np.zeros_like(pop);pool2=np.zeros_like(pool);x2=np.zeros_like(x)
-    elapsed=0.; arrival_history=None
+    elapsed=0.; arrival_history=None; ledger2=[]
+    def energy2():
+        return float(x@x2+dx@dx/2+cap@dtheta+np.einsum('is,i,s->',dpop,vol,chem))
     start=(x.copy(),pop.copy(),pool.copy(),theta.copy())
     dstart=(dx.copy(),dpop.copy(),dpool.copy(),dtheta.copy())
     port=np.zeros(len(x));port[int(cfg['source_edge'])]=float(cfg['source_coupling_sqrt_inv_s'])
@@ -67,6 +69,8 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
             inc=0. if terminal else src[index]
             cur_load=term_load if terminal else load
             cur_dload=term_dload if terminal else dload
+            before2=energy2() if quadratic_second_order else 0.
+            event_kinetic2=np.zeros(3)
             formed=removed_energy=birth_energy=0.
             dformed=dremoved_energy=dbirth_energy=0.
             for i in range(n):
@@ -86,8 +90,12 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                         dx[sl],oldd,dr,da,pop_right[i],pr)
                     dz,dpnew=lift['state_jvp'],lift['population_u']
                     if quadratic_second_order:
-                        z2=event_state2(x[sl],dx[sl],x2[sl],old,removed,created,
-                            oldd,dr,da,pop2[i],r2,a2,birth[i],np.sign(CHARGE)*np.sqrt(vol[i]*MASS))
+                        z2,k2=event_state2(x[sl],dx[sl],x2[sl],old,removed,created,
+                            oldd,dr,da,pop2[i],r2,a2,birth[i],np.sign(CHARGE)*np.sqrt(vol[i]*MASS),return_kinetic=True)
+                        terms=np.array([z@z2,-x[sl]@x2[sl],dz@dz/2,-dx[sl]@dx[sl]/2,-k2[0],k2[1],k2[2]])
+                        if abs(terms.sum())>1e-9*max(1e-30,np.sum(abs(terms))):
+                            raise ArithmeticError('second coefficient event energy mismatch')
+                        event_kinetic2+=k2
                         q2_before=amplitude2(old,oldd,pop2[i])
                         pop2[i]=pop2[i]-r2+a2;pool2[i]=pp2;x2[sl]=z2
                         q2_residual=amplitude2(pnew,dpnew,pop2[i])-q2_before
@@ -148,12 +156,13 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 D2=pop2*CHARGE**2/MASS
                 q2=amplitude2(Dcurrent,dD,D2)
                 ex2=amplitude_exchange_jvp(model,vol,np.sqrt(Dcurrent),q2)['d_exchange']
-                H2=ex2.copy(); offset=len(x)-9*n
+                H2=ex2.copy(); collision2_diag=np.zeros(len(x)); offset=len(x)-9*n
                 for cell in range(n):
                     for species in range(3):
                         if pop_right[cell,species]:
                             ix=np.arange(offset+9*cell+3*species,offset+9*cell+3*species+3)
                             H2[ix,ix]-=dnu[cell,species]
+                            collision2_diag[ix]=dnu[cell,species]
                 H2[np.arange(ne),np.arange(ne)]-=cur_dload
                 jet2=(x2,H2,np.zeros_like(x))
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
@@ -165,7 +174,25 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
             if quadratic_second_order:
                 x2=np.asarray(receipt['state_coefficient2'],float)
                 em2=np.asarray(receipt['local_midpoint_coefficient2'][:ne],float)
-                useful2+=dt*work2(em,dem,em2,cur_load,cur_dload)
+                useful_step2=dt*work2(em,dem,em2,cur_load,cur_dload)
+                useful2+=useful_step2
+                m0=np.asarray(receipt['local_midpoint']);m1=np.asarray(receipt['local_midpoint_jvp'])
+                m2=np.asarray(receipt['local_midpoint_coefficient2'])
+                refl0=m0@port-inc;refl1=m1@port;refl2=m2@port
+                outgoing2=dt*(refl1*refl1+2*refl0*refl2)
+                collision2=dt*work2(m0,m1,m2,np.diag(j['right_loss']),collision2_diag)
+                absorbed2=dt*float(dpower.sum())
+                bath2=absorbed2-cap@(dtheta-dt0)
+                parts=np.array([energy2(),-before2,outgoing2,useful_step2,collision2,bath2,
+                    event_kinetic2[1],event_kinetic2[2],dremoved_energy,
+                    -absorbed2,-event_kinetic2[0],-dformed])
+                balance2=float(parts.sum())
+                if abs(balance2)>1e-8*max(1e-30,np.sum(abs(parts))):
+                    raise ArithmeticError('second coefficient campaign energy mismatch')
+                ledger2.append(dict(time=[cycle_index,index],field_work=receipt['coefficient2_work_J'],
+                    field_loss=receipt['coefficient2_loss_J'],outgoing=outgoing2,useful=useful_step2,
+                    collision=collision2,bath=float(bath2),event_kinetic=event_kinetic2.tolist(),
+                    formation=dformed,recombination=dremoved_energy,absorbed=absorbed2,balance=balance2))
                 # Store stage-local reach in the absolute campaign clock;
                 # inherited nonzero states are not evidence of fresh injection.
                 local=[receipt['arrival_s'],receipt['directional_arrival_s'],receipt['coefficient2_arrival_s']]
@@ -210,5 +237,6 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
         restoration_coefficient2=squared_return2(end,start,dend,second) if quadratic_second_order else None,
         population_pool_u2=(pop2,pool2) if quadratic_second_order else None,
         indexed_jet_history=transport_receipts,
+        coefficient2_energy_ledger=ledger2,
         global_causal_cone_admitted=False,
         scope=('one-sided quadratic control path, finite velocity; not an unrestricted density gradient' if quadratic_amplitude_path else 'fixed topology, positive population; not strict restored-net gate'))
