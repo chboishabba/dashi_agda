@@ -316,11 +316,12 @@
         "H_lift",
         "G4_Einstein_RMHD"
       ],
-      "source_owner": "scripts/check_kk_same_action_stress.py",
+      "source_owner": "scripts/check_engineered_gravity_maxwell_source_work_abi.py",
       "checker": "scripts/check_engineered_gravity_maxwell_source_work_abi.py",
-      "scope": "independent Maxwell 1-polarization source J, signed Poynting flux and J dot E; material constitutive J and Einstein open; KK source file is donor not same-source identification",
+      "scope": "Standalone sourced Maxwell polarization/J-work mathematical model only; NO original apparatus current, F8 triad or MHD current admitted; physical source owner missing, Einstein response open",
       "source_equation": "partial_t((E^2+B^2)/2)+partial_x(E B)=-J E",
-      "physical_paid": false
+      "physical_paid": false,
+      "physical_source_owner": null
     },
     "f8_israel_current": {
       "lanes": [
