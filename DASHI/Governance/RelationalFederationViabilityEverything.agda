@@ -36,3 +36,5 @@ import DASHI.Governance.RelationalFederationWoogarooCaseExact
 import DASHI.Governance.RelationalFederationSystemVOptionConeExact
 
 import DASHI.Governance.RelationalFederationOODALoopExact
+
+import DASHI.Governance.RelationalFederationLESProofSearchExact
