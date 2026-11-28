@@ -23,9 +23,9 @@ def nested_problem(material,cfg,fine_ports):
     fm=([dict(rows[i]) for i in owner],np.asarray(neutral)[owner],np.asarray(D)[owner],
         np.asarray(gyro)[owner],np.asarray(axis)[owner])
     fc=dict(cfg,nested_depth=1,sparse_operator=True,common_stage_atlas=True,retain_history=True,retain_sensitivity=True)
-    if not {'source_edge','source_coupling_sqrt_inv_s','load_rate_s_inv'}<=set(fine_ports):
-        raise ValueError('independent fine source/receiver ownership required')
-    for name in ('source_edge','source_coupling_sqrt_inv_s','load_rate_s_inv','terminal_load_rate_s_inv'):
+    if not {'source_edge','source_coupling_sqrt_inv_s','load_rate_s_inv','return_atol'}<=set(fine_ports):
+        raise ValueError('independent fine source/receiver and return allowance required')
+    for name in ('source_edge','source_coupling_sqrt_inv_s','load_rate_s_inv','terminal_load_rate_s_inv','return_atol'):
         if name in fine_ports:fc[name]=fine_ports[name]
     if 'terminal_load_rate_s_inv' in cfg and 'terminal_load_rate_s_inv' not in fine_ports:
         raise ValueError('explicit fine terminal receiver required')
@@ -61,6 +61,20 @@ def compare_nested(material,cfg,fine_ports,dheating=None,dload=None,fine_dload=N
     result=dict(coarse=coarse,fine=fine,geometry=meta,base_reopen_error=history['reconstruction_error'],
         signed_field_residual=history['signed_residual'].tolist(),field_complement=history['complement'].tolist(),
         physical_admission=False)
+    # Intensive material states use volume-weighted restriction, not the
+    # energy-coordinate lift applied to normalized current.
+    from scipy.sparse import kron,eye
+    def material_reopen(fh,ch,width):
+        mL=kron(cells['density_prolongation'],eye(width),format='csr')
+        mR=kron(cells['density_restriction'],eye(width),format='csr')
+        out=coefficient_reopen(fh,ch,mL,mR)
+        return dict(reconstruction_error=out['reconstruction_error'],signed_residual=out['signed_residual'].tolist(),complement=out['complement'].tolist())
+    ch=np.asarray(coarse['history']);fh=np.asarray(fine['history']);nc=len(cells['coarse_volumes']);nf=len(cells['fine_volumes'])
+    result['material_reopen']={}
+    offc=L.shape[1];offf=L.shape[0]
+    for name,width in (('population',3),('pool',2),('temperature',1)):
+        result['material_reopen'][name]=material_reopen(fh[:,offf:offf+nf*width],ch[:,offc:offc+nc*width],width)
+        offc+=nc*width;offf+=nf*width
     if dheating is not None:
         if dload is None or fine_dload is None:
             raise ValueError('independent load direction required on each mesh')
@@ -73,4 +87,8 @@ def compare_nested(material,cfg,fine_ports,dheating=None,dload=None,fine_dload=N
         result['jet_reopen']=dict(reconstruction_error=out['reconstruction_error'],
             signed_residual=out['signed_residual'].tolist(),complement=out['complement'].tolist(),
             coefficient_evolution_bound_admitted=False)
+        result['material_jet_reopen']={}
+        for name,width in (('population',3),('pool',2),('temperature',1),('population_u',3),('pool_u',2),('temperature_u',1),('population_u2',3),('pool_u2',2)):
+            def read(j):return np.array([np.asarray(row[name]).ravel() for row in j['indexed_jet_history']])
+            result['material_jet_reopen'][name]=material_reopen(read(f),read(c),width)
     return result
