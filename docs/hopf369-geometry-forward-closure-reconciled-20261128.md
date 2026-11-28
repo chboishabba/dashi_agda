@@ -6040,3 +6040,39 @@ Two bounded executions passed; final local blob
 uses original donor imports and minor cleanup, unrun.
 No CI/native/curved PDE acceptance. Other six lanes unchanged.
 Terminal stage 43.
+
+
+## 58. BR223 — regular algebraic complement through glancing
+
+Normalize t=tau/k, k>0; D=Q(t C0+i C1), A=-Kn(t C0+i C1).
+At t=±i the same 25 selected rows and columns give determinant -i.
+Rows: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,31,32,33,37,38,39.
+Columns: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,22,26,29,30,31,32,33,34.
+Let R select rows, E embed selected columns, Z embed remaining ten,
+H=Z^T. V=E(R D E)^-1 R, N=Z-V D Z, M=H A N.
+All are regular near either glancing point. BR222 rank and kernel
+identities away from q=0 imply D N=0, A N=N M, M²=(t²+1)I;
+extend these by analyticity to glancing. H V=0, H N=I,
+V D+N H=I. At both glancing points and t=1±i the local
+exact independent checks passed these identities; M rank5 at
+glancing, rank10 off. Thus algebraic complement has no pole.
+For admissible smooth forcing, W=V Q f/k+N x; multiplying
+the normal ODE by H eliminates the derivative of the algebraic
+lift (constant coefficients): x'=k M x+H(A V Q+Kn)f.
+The two physical projections in reduced coordinates
+P±=(I±k M/lambda)/2 have norm O(1+k/|lambda|).
+Stable Green integration as in BR222 yields a particular
+L2 bound O(k^-1 + (1+k/|lambda|)/Re lambda) ||f||,
+uniform O(1) on fixed positive compact damping intervals
+along the damped glancing ray for sufficiently large k.
+Endpoint bound O(k^-1)||f(endpoint)|| +
+O((1+k/|lambda|)/sqrt(Re lambda))||f||_L2;
+the second coefficient is O(k^1/4) at fixed damping.
+These are analytic consequences, not executed integral tests.
+Comparison with BR220-admissible solution justifies the
+stable particular lift; no assertion of arbitrary source
+admissibility. Boundary correction BR217 can add losses,
+and no sharp full forced bound or curved transfer is claimed.
+Local independent br223.py executed under timeout 90, exit 0,
+SymPy 1.14.0. Committed original donor-import driver unrun.
+Terminal stage 44. Other lanes unchanged. No CI/native/PDE acceptance.

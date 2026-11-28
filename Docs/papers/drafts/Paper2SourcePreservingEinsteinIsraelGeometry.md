@@ -836,3 +836,7 @@ Both normal branches give the finite interval boundary pencil with factors 1-z a
 ### BR222 intrinsic particular solution
 
 The normal DAE has an exact rank-ten physical spectral projector and a rank-25 algebraic constraint sector. The original symbol identities give an explicit algebraic inverse for the latter. For BR220-admissible smooth sources, stable one-sided Green integrals on the finite interval yield a full-exterior particular solution by subtracting homogeneous endpoint modes. Explicit finite-frequency L2 and trace bounds follow, but oblique projector growth near glancing remains to be sharpened. The BR221 boundary image criterion gives conditional unique forced finite-interval solvability. Exact interpolation and signed inverse checks passed locally; twelve manufactured affine-source diagnostics had relative residuals below 1e-5. See roadmap section 57.
+
+### BR223 regular algebraic complement
+
+A common nonsingular rank-25 constraint minor at both glancing endpoints gives a regular graph parametrization of the ten-dimensional physical kernel. The reduced normal evolution squares to the scalar normal-root square, and has rank five at glancing. The regular complement eliminates the polynomial-projector pole in algebraic reconstruction and yields a bounded intrinsic particular L2 lift along fixed-positive-damping glancing rays by stable Green integration. Source admissibility and full boundary correction estimates remain separate. Local independent exact checks passed; see roadmap section 58.

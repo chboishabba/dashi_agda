@@ -1,0 +1,9 @@
+Command: cd /tmp/hopf211; set -o pipefail; timeout 90 python br223.py | tee br223_receipt.txt
+sign -1 rows [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 31, 32, 33, 37, 38, 39] cols [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 22, 26, 29, 30, 31, 32, 33, 34] minor at glancing -I
+  t -I reduced square 0 rank reduced 5
+  t 1 - I reduced square 1 + (1 - I)**2 rank reduced 10
+sign 1 rows [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 31, 32, 33, 37, 38, 39] cols [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 22, 26, 29, 30, 31, 32, 33, 34] minor at glancing -I
+  t I reduced square 0 rank reduced 5
+  t 1 + I reduced square 1 + (1 + I)**2 rank reduced 10
+PASS BR223 regular algebraic complement and ten-coordinate reduced evolution 1.14.0
+Container exit 0. Independent local carrier; committed donor import not executed.

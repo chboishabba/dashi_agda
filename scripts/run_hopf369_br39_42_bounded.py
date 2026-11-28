@@ -223,6 +223,8 @@ PARTS["terminal"].append(("BR221.finite_physical_transmission","check_hopf369_br
 
 PARTS["terminal"].append(("BR222.intrinsic_particular","check_hopf369_br222_intrinsic_particular.py",()))
 
+PARTS["terminal"].append(("BR223.regular_complement","check_hopf369_br223_regular_complement.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
