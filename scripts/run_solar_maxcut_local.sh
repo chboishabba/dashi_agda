@@ -39,6 +39,10 @@ for entry in \
   check_solar_native_nested_assembly.py \
   check_solar_native_forward.py \
   check_solar_native_nonfrozen_binary.py \
+  check_solar_exact_affine_port.py \
+  check_solar_native_jet_shadow.py \
+  check_solar_native_tail_observability.py \
+  check_solar_direct_passive_binary.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
