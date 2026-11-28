@@ -271,6 +271,8 @@ PARTS["terminal"] += [(f"BR295.cmc{n}","check_hopf369_br295_cmc_lift.py",("--n",
 
 PARTS["terminal"] += [(f"BR296.history{n}","check_hopf369_br296_cmc_history.py",("--n",str(n))) for n in (6,7,8,9)]
 
+PARTS["terminal"] += [(f"BR297299.regions{n}","check_hopf369_br297_299_history_regions.py",("--n",str(n))) for n in (6,7,8,9)] + [("BR297299.time9fine","check_hopf369_br297_299_history_regions.py",("--n","9","--steps","8","--dt",".0005"))]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
