@@ -71,7 +71,7 @@ offsetRead k (Fin.suc i) = trans (offsetRead (suc k) i)
   (sym (NP.+-suc k (toℕ i)))
 
 shifted : ∀ {n} → Nat → Fin n → BishopComplex
-shifted k i = Poly.realC (I.embed (+ offset k i))
+shifted k i = Poly.realC (I.embed (+ (offset k i)))
 
 -- The head-to-tail real difference is exactly the positive integer
 -- successor, not an arbitrary complex-apartness axiom.
