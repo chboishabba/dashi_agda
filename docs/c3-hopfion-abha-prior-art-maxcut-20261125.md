@@ -2776,3 +2776,40 @@ New owner `scripts/check_hopf369_br64_full_israel_optical_bidi.py` imports **the
 - P0-reconstruction and continuation: BR57 supplies a genuine *normal* shear inverse with original moment, BR63 full finite wall jump inverse. The remaining weighted BS13 curvature-to-metric reconstruction involves tangential York/Hodge gauge and all global holonomy/exterior modes, followed by an actual continuous PDE iteration and BR42 uniform restart. No finite source checker or uninhabited Agda record establishes these endpoints.
 
 **Acceptance state:** BR59–64 checkers and native additions are COMMITTED_UNRUN / CONSTRUCTED_PENDING_KERNEL by user direction. BR59 additionally refuses off-wall evaluation and any non-positive/unknown spacelike-normal guard; do not infer geometric positivity from a sample or from a complex-field record. Bounded runner `--part frontier` includes all new source sections, with BR60 ten components each in a separate <=90s stage. No GitHub CI was triggered and no theorem promotion is claimed.
+
+
+## BR65–67 — exact BR34 optical-to-NONLINEAR Israel geometric comparison, including nonzero mean and order eight (28 Nov 2026)
+
+These source cuts identify the missing **physical change-of-variables equality** much more sharply than the previous BR64 description. Reuse the ORIGINAL `scripts/check_hopf369_br_warped_physical_attachment.py` `metric_side/metric_rows`, BR19 material graph, BR59/60 full nonlinearly normalized unit normal/extrinsic curvature and BR61/64 ten-row trace-reversal. No substitute boundary operator, no frequency inverse, no projected Weyl-to-metric conflation.
+
+**BR65 – matched mean-free original BR34 Israel reference.** At a two-face Gaussian wall with `k_+=j/2`, `k_-=-j/2`, let `H±` be the original normalized metric tangent traces, `beta±` the mixed traces, `ell±` the normal-scale perturbations and `px±` the original normalized optical normal jets. The actual raw physical metric derivative has the connection contribution `(p_ab,n)_physical=(px_ab)_BR34+2k± H±`, and the reference tangential mixed jet is `∂a p_nb=q_a beta_b`. The *full* moving BR60 source has
+```
+  delta K± = K_BR34± - Hess_wall(phi)
+                   +(k±²+b±''(0))phi eta.
+  delta h± = H±+2k±phi eta.
+```
+Induced matching implies `H- = H+ +2j phi eta`, so the common graph Hessian cancels in the jump but **is retained in each physical face**. With the actual original BR34 Israel tensor `J_BR34=2(K+_BR34-K-_BR34)-j(H++H-)` and the full geometric reference `R=2[delta K]-2j delta h`:
+```
+  R-J_BR34 = 2(b+''-b-'')phi eta.        (BR65)
+```
+This is the exact correction for a mean-free Gaussian reference. Hence **BR34 equals the nonlinear geometric reference only if the warp-acceleration source difference vanishes or is explicitly paid**. The nonzero source is not a generic “coordinate remainder.” New `scripts/check_hopf369_br65_optical_geometric_israel_weld.py` uses the actual original BR34 `metric_side`/`metric_rows` for both D/E allocations (10 Israel indices 14–23), with independent reference and geometric comparison checks, matched-induced-metric negative control and BR64 full ten-row reverse trace. Native `originalWarpSecondJump`, `originalBR65ShapePayment`, `originalBR65OpticalGeometryResidual`, `OriginalBR65SourceCompatibility`, `originalBR65FullIsraelFromBR34` retain the exact original source agreement, not a false equality postulate.
+
+**BR66 – genuine nonzero mean K source, as required by BR19/29.** The actual geometric background may have `k_+=m+j/2`, `k_-=m-j/2` with **m nonzero**. Original frozen BR34 rows still use `k_ref±=±j/2`, so physical source metric/normal transport additionally contributes `m H±` to each first extrinsic variation. Keeping induced matching `H- = H+ +2j phi eta`, the full exact correction is
+```
+  R-J_BR34 = 2{b+''-b-'' -2m j}phi eta.  (BR66)
+```
+The extra `-4mj phi eta` is real even when `b+''=b-''`. It must enter the original signed BR41 wall work and BR29 variable-mean connection source. This correction cannot be dropped by “mean-free flat” normalization. `scripts/check_hopf369_br66_nonzero_mean_israel_weld.py` constructs the actual original 30-row D/E operators with a general-mean physical extrinsic source, retains all ten Israel entries, two-face induced matching, nonzero-mean negative controls and inverse full shape trace reversal; native `OriginalBR66MeanSource`, `originalBR66MeanShapePayment`, `originalBR66SameSourceResidual`, `OriginalBR66SourceEquality` are the explicit physical source certificate. The scalar identity was also cross-checked independently by a direct SymPy expansion; the committed checker itself remains UNRUN.
+
+**BR67 – all eighth-order differentiated physical source, including TRIPLE products.** The true moving-wall reference correction is `T(t)=2[(b+''-b-'')(t)-2m(t)j(t)]phi(t) eta`. Every high-order BR47 D/E boundary derivative must include `∂^r T`, not only the frozen `m_0,j_0,phi_0`. Using BR52 existing divided Taylor jets, the exact order-n coefficient is
+```
+ T_n =2 {[(b+''-b-'')*phi]_n -2[(m*j)*phi]_n} eta,
+ [(m*j)*phi]_n=sum_{a+b+c=n}m_a j_b phi_c.
+```
+Thus no hidden binomial/multinomial factors are lost when multiplying raw time derivatives: `∂_t^n T=n! T_n`. Native `OriginalBR67EvolvingWallSource`, `originalBR67SecondWarpJump`, `originalBR67CorrectionJet`, `originalBR67TenGeometricRows`, `OriginalBR67WallTimeCompatibility` keep the original time-dependent mean, jump, warp acceleration and displacement jets, and demand equality between the actual physical and reference Israel tensors at EVERY order. New `scripts/check_hopf369_br67_eighth_order_israel_source.py` compares the original D/E Israel indices through order eight with independent source profiles and strict non-frozen negative controls. Like BR65–66, it is **committed but unrun**.
+
+**Updated exact mathematical split:**
+1. **Constructed source identity BR65–67:** the missing nonlinear shape/mean/warp-acceleration correction to the original 10 Israel rows is now explicit, frequency-free and source indexed through eighth order. Full nonlinear shape Hessian and unit normal still belong to BR59/60 and remain visible on either individual face. It is NOT claimed that the reference BR34 20 remaining gauge/value/mean rows automatically match the full physical nonlinear gauge sources.
+2. **Remaining physical boundary weld:** derive the corresponding *full nonlinear* mean force, four tangential and one normal gauge/constraint rows, matching real lapse, connection and graph normalization on two sides; preserve every D/E allocation and physical corner. This is **smaller and more precise** than an unspecified nonlinear Israel gap.
+3. **Remaining analytic theorem:** a genuine weighted/anisotropic high-order boundary energy estimate controlling BR37 glancing and the BR67 source at each order, BR29 projected constraint propagation through the same physical background (including rank12 wall-only Gram obstruction), BS13/BR31 weighted quotient/tangential holonomy, local PDE construction and continuation. The symbolic source equalities do not automatically imply these.
+
+**Acceptance:** `scripts/run_hopf369_br39_42_bounded.py --part frontier` now includes BR65 geometric/reference controls, BR66 mean source, BR67 eighth-order coefficient and full heavy physical comparison. Each is checkpointed independently <=90 s, no CI, no native kernel execution. BR65–67 native source is CONSTRUCTED_PENDING_KERNEL; source algebra claims are pending actual checker runs. Do not promote a check's presence to a verified proof.
