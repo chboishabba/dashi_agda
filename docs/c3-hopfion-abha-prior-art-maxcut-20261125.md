@@ -2479,3 +2479,39 @@ Here BR43 fixes `b=epsilon*(2L c_n/m)` and supplies the trace contribution to `a
 The underlying proof is `H' <= (a+lambda c)E+(b+lambda d)D+f+lambda g`; compare each positive coefficient with K_lambda and lambda K_lambda. It yields a conditional integral Gronwall/finite-slab Duhamel inequality once the independent actual PDE source estimates are supplied. This is a substantially more explicit analytical endpoint than a single unproved “tame bound”: the minimal required additional theorem is a high-order BR4 energy bound supplying real c,d and physical forcing g on the **same** D/E wall, alongside BR29 Bianchi source cancellation and BR31 domain control. None is supplied by BR44's arithmetic.
 
 The new checker retains the positive normal derivative budget, tests 16 exact rational coupled steps and the coefficient comparison, and is registered in the <=90s checkpointed runner as `BR44.two_level`. Source is COMMITTED_UNRUN; high-order PDE estimate/Agda kernel acceptance still unpaid. No CI, no declaration that the physical Einstein–Israel nonlinear theorem is solved. Continuing priority: derive the actual differentiated BR4 energy matrices with BR40b background/source time jets and BR40d signed normal work; pay normal derivative higher-energy and tangential BR37 losses simultaneously; attach BR29 actual variable constraint forcing; only then physical local solution and reflecting-domain continuation.
+
+
+## BR45–47 — original differentiated BR4/physical wall/contracted Bianchi max-cut (constructed, deferred acceptance)
+
+**BR45 actual 4+1-dimensional differentiated divergence operator**: `scripts/check_hopf369_br45_differentiated_br4.py` now uses all five coordinates (t,x,y,z,n), the same original BR4 variable symmetrizer and independent variable normal coefficients. With `L(u)=-∂t(A u_t)+∂t(B^i u_i)+∂i(B^i u_t)+∂i(C^{ij}u_j)`, the complete source Leibniz identity is `[∂t,L]u=L_(A_t,B_t,C_t)u`, **including normal/tangent and shift derivatives**. If `L(u)=F`, the true differentiated forcing is `L(u_t)=F_t-L_(A_t,B_t,C_t)u`; this is not an arbitrary new source chosen to satisfy the energy estimate. The exact BR4 differentiated energy current for `v=u_t`, `w=v_t`, `d_i=v_i` is
+```
+ e=(A w²+C[d,d]+v²)/2;  Phi_i=B_i w²+w C_ij d_j;
+ d_t e-div Phi + w L(v)
+   = -A_t w²/2 + C_t[d,d]/2 + (B_t.d) w + v w.
+```
+The script explicitly verifies the formula (no tautological residual), 15 independent metric and five gauge component jets by checkpointed index, plus original source commutation. These are source-level identities, not construction of a well-posed physical IBVP. The operator is the BR4 shared principal part, with BR15/BS4 non-diagonal lower-order couplings still required in the actual physical forcing and energy estimate.
+
+**BR45b explicit coefficient-growth majorant**: for actual real physical time slices with `A>=a0>0`, `C>=c0 I`, `|A_t|<=at`, `||C_t||op<=ct`, `||B_t||<=bt`, the exact lower-order source above has the pointwise sufficient estimate
+```
+ |S| <= K e,  K=at/a0+ct/c0+2bt/sqrt(a0 c0)+1/sqrt(a0).
+```
+This follows by positive square/Young estimates on the original BR4 symmetrizer, including the shifting `B_t.d w` term. `scripts/check_hopf369_br45_coefficient_growth.py` supplies independent exact-rational signed controls (no claimed physical coefficient measurement). If the actual metric background gives positivity and bounded derivatives, this pays a **concrete piece of BR44's high-order coefficient rate**; it does not pay the wall trace, BR37 glancing inverse, or nonlinear source. Native `BR4Space` retains all x,y,z and material normal components. Native `BR4DifferentiatedCoefficientJet`, `BR4DifferentiatedFieldJet`, `br4DifferentiatedEnergy`, `br4CoefficientWork`, `BR45PhysicalSourceOwner` explicitly retain coefficient/shift derivative power, full physical source rows, graph material source, BR43 normal trace premium, and unpaid Bianchi source on the SAME 15/5 carriers. These are new source owners attached to existing `Hopf369WarpedPhysicalBoundaryExact.agda`, not new hyperfabric abstractions.
+
+**BR46 exact original reduced Einstein/Bianchi principal source**: `scripts/check_hopf369_br46_bianchi_source_weld.py` uses general symmetric 5x5 h, exact 5D eta and five arbitrary Fourier covector components. Set `C_b=z^a h_ab-(z_b/2) tr_eta(h)`, `Ric_lin_ab=(z_a z^c h_cb+z_b z^c h_ca-z²h_ab-z_a z_b tr_eta h)/2`, `Rred_ab=Ric_lin_ab-(z_a C_b+z_b C_a)/2`. Then `Rred_ab=-z²h_ab/2`, `z^a(Ric_lin_ab-eta_ab tr Ric_lin/2)=0`, and
+```
+ z^a(Rred_ab-eta_ab tr Rred/2)=-(z²/2)C_b.
+```
+Thus the subsidiary forcing from the *actual reduced metric residual* is neither identically zero off shell nor an optional finite PNP constraint; it has an exact source identity. At the wave root `z²=0`, this is `0=0` and does NOT force C=0. Five independent component checks preserve temporal/spatial/normal sectors. Variable metric Christoffel, full nonlinear harmonic source, physical boundary Codazzi/Gauss and BR29 constrained projection still require their own compatibility proof. This is a principal-symbol weld, not full Bianchi propagation.
+
+**BR47 physical D/E higher wall time jets**: existing BR4 already owns tangential derivative hierarchy through order 8, while BR40b/f only supplied time order one on the boundary. `scripts/check_hopf369_br47_boundary_hierarchy.py` now checks the original 30-row BR34 D/E metric and 10-row subsidiary operators through orders 0–8 with every differentiated `j(t)`, `q(t)` term:
+```
+ (B(j,q;U))^(r)
+ = B(j,q;U^(r))
+   + sum_(k=1)^r binom(r,k)
+     [B(j^(k),q^(k);U^(r-k))-B(0,0;U^(r-k))].
+```
+The physical mean trace force is retained in the final metric row at every order, and the 4/5 subsidiary normal constraints are not discarded. Native `rowScale`, `metricSecondTimeRows`, `gaugeSecondTimeRows` provide the explicit r=2 proof-body targets in the original Agda owner; r<=8 is a source-level independently written executable identity subject to later validation. **This formula applies to reference BR34 linear boundary rows separately affine in j,q**; nonlinear moving-graph Fréchet products, derivatives of intrinsic connections and full physical source coefficients still need to be welded and paid as independent BR19/31 source terms.
+
+**Execution deferred at user instruction**: new BR45, BR45b, BR46, BR47 checkers registered in `scripts/run_hopf369_br39_42_bounded.py`; each higher-order D/E allocation/sector/order, BR45 15+5 components and BR46 five subsidiary equations has its own max-90s checkpoint. No local checkers/Agda kernel were executed in this tranche; GitHub CI not used. New modules are CONSTRUCTED_PENDING_KERNEL, not verified proof acceptance.
+
+**Remaining actual physical promotion, further narrowed**: source-compatible full nonlinear reduced Einstein coefficient and material chart linearisation; ensure BR45 interior coefficient majorant extends through weighted high-order BR4 tensors and its differentiated **physical** normal wall energy with BR47 high-order boundary/source product; quantitatively bound the BR37 glancing losses without an unproven derivative gain; prove BR29 *variable* projected Bianchi forcing factors through the actual wall Codazzi graph and preserves the zero-speed kernel despite the rank12 obstruction to the previously chosen constant wall-only Gram; establish BS13+BR31 weighted curvature/metric quotient estimate; construct the continuous physical local iteration and uniform continuation. Neither BR45–47 nor BR42 assumes any of these unpaid PDE facts.
