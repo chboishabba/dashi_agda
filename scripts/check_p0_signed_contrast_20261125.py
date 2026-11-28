@@ -30,7 +30,23 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536):
+class ContinuationAllowance:
+    """Shared reservation of declared capped-producer work, NOT a physical clock.
+    Refusals retain their entire allocation. Baseline fixed-width work and
+    root construction are recorded separately, not silently treated as free.
+    """
+    def __init__(self,total):
+        if total<0:raise ValueError('allowance')
+        self.total=total;self.left=total;self.charges={};self.baseline_cells=0;self.boundary_attempts=0
+    def reserve(self,name,cap):
+        if cap<0:raise ValueError('negative cap')
+        if cap>self.left:return False
+        self.left-=cap;self.charges[name]=self.charges.get(name,0)+cap
+        return True
+
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None):
+    if ledger is not None:ledger.baseline_cells+=1
+    def take(name,cap):return bool(cap) and (ledger is None or ledger.reserve(name,cap))
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -93,6 +109,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
         radius=abs(w)*isqrt(4*E)
         lo=[max(a,-radius) for a in lo];hi=[min(a,radius) for a in hi]
     if E is not None and boundary_width is not None and any(a!=b for a,b in zip(lo,hi)):
+        if ledger is not None:ledger.boundary_attempts+=1
         cert=boundary_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width)
         if cert is not None:
             a,b,_=cert
@@ -101,7 +118,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # Intrinsic syndrome cut: coupling through the original affine image
     # rather than a shared list of Boolean variables. The attempt is
     # independently capped; on refusal retain the prior certificate.
-    if E is not None and boundary_width is not None and syndrome_budget and any(a!=b for a,b in zip(lo,hi)):
+    if E is not None and boundary_width is not None and any(a!=b for a,b in zip(lo,hi)) and take('syndrome',syndrome_budget):
         cert=syndrome_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width,syndrome_budget)
         if cert is not None:
             a,b,_=cert
@@ -109,7 +126,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             assert all(x<=y for x,y in zip(lo,hi))
     # Collective factor-normal join after the prior source certificates.
     # The same original affine chart supplies every coordinate guard.
-    if E is not None and boundary_width is not None and normal_budget and any(a!=b for a,b in zip(lo,hi)):
+    if E is not None and boundary_width is not None and any(a!=b for a,b in zip(lo,hi)) and take('normal',normal_budget):
         cert=normal_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width,normal_budget)
         if cert is not None:
             a,b,_=cert
@@ -117,7 +134,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             lo,hi=list(a),list(b)
     # Source-derived dual probes: absolute Parseval tail, not an oracle
     # for the heavy frequencies. Independent attempt cap.
-    if E is not None and dual_budget and any(a!=b for a,b in zip(lo,hi)):
+    if E is not None and any(a!=b for a,b in zip(lo,hi)) and take('dual',dual_budget):
         cert=dual_contrast(F,cols,target,offset,remaining,w,component_width,dual_probes,dual_budget)
         if cert is not None:
             a,b,_=cert
@@ -126,13 +143,13 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # Verified structured phase generator, then signed overlapping-clause
     # intersections with low-rank cube characters. Independent caps;
     # refused attempts leave the previous certified interval intact.
-    if E is not None and phase_budget and any(a!=b for a,b in zip(lo,hi)):
+    if E is not None and any(a!=b for a,b in zip(lo,hi)) and take('phase',phase_budget):
         cert=structured_contrast(F,cols,target,offset,remaining,w,component_width,64,phase_budget,degree_cap=3,phase_branch_cap=64)
         if cert is not None:
             a,b,_=cert
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
             lo,hi=list(a),list(b)
-    if mobius_budget and any(a!=b for a,b in zip(lo,hi)):
+    if any(a!=b for a,b in zip(lo,hi)) and take('mobius',mobius_budget):
         cert=mobius_contrast(F,cols,target,offset,remaining,w,4,4096,mobius_budget)
         if cert is not None:
             a,b,_=cert
@@ -140,17 +157,17 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             lo,hi=list(a),list(b)
     # A completed prefix is exact even when the full signed intersection
     # expansion refuses. The removed mass is bounded label by label.
-    if prefix_budget and any(a!=b for a,b in zip(lo,hi)):
+    if any(a!=b for a,b in zip(lo,hi)) and take('prefix',prefix_budget):
         cert=prefix_portfolio(F,cols,target,offset,remaining,w,4096,prefix_budget)
         if cert is not None:
             a,b,_=cert
             lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
             assert all(x<=y for x,y in zip(lo,hi))
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
-def sector(F,n,rows,target,obs,w,order=None,offset=0):
+def sector(F,n,rows,target,obs,w,order=None,offset=0,ledger=None):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
-    return cell(canon(F),cols,tuple(target),offset,tuple(range(n)) if order is None else tuple(order),w)
-def refine(roots,eps,budget,focus=True,exact_probe_budget=0):
+    return cell(canon(F),cols,tuple(target),offset,tuple(range(n)) if order is None else tuple(order),w,ledger=ledger)
+def refine(roots,eps,budget,focus=True,exact_probe_budget=0,ledger=None):
     lo=[Q(0)]*3;hi=lo.copy();heap=[];serial=0;done=0
     def account(c,sign):
         for d in range(3):lo[d]+=sign*c[-2][d];hi[d]+=sign*c[-1][d]
@@ -181,12 +198,13 @@ def refine(roots,eps,budget,focus=True,exact_probe_budget=0):
                 F,cols,t,o,R,w,clo,chi=c
                 free=len(R)-len(basis(cols[i][:-1] for i in R))
                 cost=max(1,len(R))*(1<<free)
-                if cost<=exact_probe_budget:
+                if cost<=exact_probe_budget and (ledger is None or cost<=ledger.left):
                     candidates.append(((chi[d]-clo[d])/cost,-cost,-sid,index,free))
             if not candidates:return bestlo,besthi,choices,done
             _,negcost,_,index,free=max(candidates)
             _,_,c=heap.pop(index);heapify(heap);account(c,-1)
             F,cols,t,o,R,w,_,_=c
+            if ledger is not None:assert ledger.reserve('exact_chart',-negcost)
             exact_probe_budget+=negcost
             ok,C,H,E=component_bounds(F,cols,t,o,R,free,spectral=True)
             assert ok
@@ -199,7 +217,7 @@ def refine(roots,eps,budget,focus=True,exact_probe_budget=0):
             _,_,c=heap.pop(index);heapify(heap)
         else:_,_,c=heappop(heap)
         account(c,-1);F,cols,t,o,R,w,_,_=c;i=R[0]
-        for bit in (0,1):push(cell(restrict(F,i,bit),cols,add(t,cols[i][:-1],-bit),(o+bit*cols[i][-1])%3,R[1:],w))
+        for bit in (0,1):push(cell(restrict(F,i,bit),cols,add(t,cols[i][:-1],-bit),(o+bit*cols[i][-1])%3,R[1:],w,ledger=ledger))
         done+=1
 
 def pair(F,n,j,sign=None):
@@ -211,7 +229,7 @@ def pair(F,n,j,sign=None):
 
 def diff(r):return list(r)+[-x for x in r]
 def matrix(n,k,p):return [[p[n-1+i-j] if n-1+i-j<len(p) else 0 for j in range(n)] for i in range(k)]
-def coefficient(F,n,k,p,compact=True,symmetric=True):
+def coefficient(F,n,k,p,compact=True,symmetric=True,ledger=None):
     A=matrix(n,k,p);roots=[];order=[i for j in range(n) for i in (j,n+j)]
     for j in range(n):
         t=len(p)-n+1+j
@@ -225,23 +243,23 @@ def coefficient(F,n,k,p,compact=True,symmetric=True):
                 # Read the last affine row as an observable, NOT as a pin.
                 G,N,rows,target=pair_source(F,n,A[:t+1],first=j)
                 roots.append(sector(G+[((j+1)*sign,)],N,rows[:-1],target[:-1],
-                    [-sign*a for a in rows[-1]],w,offset=sign*target[-1]%3))
+                    [-sign*a for a in rows[-1]],w,offset=sign*target[-1]%3,ledger=ledger))
             else:
-                roots.append(sector(pair(F,n,j,sign),2*n,[diff(r) for r in A[:t]],(0,)*t,[-sign*x for x in diff(A[t])],w,order))
+                roots.append(sector(pair(F,n,j,sign),2*n,[diff(r) for r in A[:t]],(0,)*t,[-sign*x for x in diff(A[t])],w,order,ledger=ledger))
     return roots
 
-def translation(F,n,k,p,b,compact=True,symmetric=True):
+def translation(F,n,k,p,b,compact=True,symmetric=True,ledger=None):
     A=matrix(n,k,p);e=len(b);D=3**(k-e-1);order=[i for j in range(n) for i in (j,n+j)]
-    roots=[sector(F,n,A[:e],b,A[e],Q(1,D))]
+    roots=[sector(F,n,A[:e],b,A[e],Q(1,D),ledger=ledger)]
     for j in range(n):
         if compact:
             G,N,rows,target=pair_source(F,n,A,A[:e],b,first=j)
             # A(x)=A(y), hence swapping the pair preserves the prefix and
             # the observed label. First-difference orientation is free.
             if symmetric:G=G+[((j+1),)]
-            roots.append(sector(G,N,rows,target,A[e]+[0]*(N-n),-Q(2 if symmetric else 1,D)))
+            roots.append(sector(G,N,rows,target,A[e]+[0]*(N-n),-Q(2 if symmetric else 1,D),ledger=ledger))
         else:
-            roots.append(sector(pair(F,n,j),2*n,[diff(r) for r in A]+[r+[0]*n for r in A[:e]],(0,)*k+tuple(b),A[e]+[0]*n,-Q(1,D),order))
+            roots.append(sector(pair(F,n,j),2*n,[diff(r) for r in A]+[r+[0]*n for r in A[:e]],(0,)*k+tuple(b),A[e]+[0]*n,-Q(1,D),order,ledger=ledger))
     return roots
 
 def accepts(F,x):return all(any(x[abs(l)-1]==int(l>0) for l in c) for c in F)
