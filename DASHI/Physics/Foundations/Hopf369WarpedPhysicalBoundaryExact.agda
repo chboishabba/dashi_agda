@@ -2646,3 +2646,87 @@ module At {r : Level} (F : C.RealField r)
   -- change-of-variables and the equality of the geometric ten rows
   -- to metricRows' original Israel indices. The freestanding record
   -- does not manufacture the two reverse proofs or a PDE solution.
+
+  ------------------------------------------------------------------------
+  -- BR65: exact ORIGINAL BR34 reference-Israel vs BR60/61 nonlinear
+  -- geometric Israel under the SAME matched induced wall.
+  --
+  -- Given raw physical metric derivative
+  --   (p_ab)'_physical = (px_ab)_BR34+2k p_ab,
+  -- source tangent derivative d_a p_nb=q_a beta_b, and matched
+  -- induced delta h_ab=H+_ab+2k+ phi eta_ab
+  --                    =H-_ab+2k- phi eta_ab,
+  -- k+ - k-=j, the true moving geometric reference R satisfies
+  --
+  --   R_ab = original BR34 israel_ab
+  --          +2 (b+''(0)-b-''(0)) phi eta_ab.
+  --
+  -- It is INCORRECT to claim that original BR34 Israel is the true
+  -- moving shape reference without paying this warp acceleration,
+  -- and matching the induced metric. Both D/E metricRows share the
+  -- SAME underlying ten Israel entries.
+  ------------------------------------------------------------------------
+
+  originalWarpSecondJump : TwoFaceMovingIsraelSource → S
+  originalWarpSecondJump d =
+    sourceReferenceWarpSecond (plusMovingShape d)
+      - sourceReferenceWarpSecond (minusMovingShape d)
+
+  originalBR65ShapePayment : TwoFaceMovingIsraelSource →
+    Wall → Wall → S
+  originalBR65ShapePayment d a b =
+    two * originalWarpSecondJump d
+      * sourceGraphDisplacement (plusMovingShape d) * eta a b
+
+  originalBR65OpticalGeometryResidual : TwoFaceMovingIsraelSource →
+    S → Vec → Tensor → Tensor → Tensor → Tensor →
+    Wall → Wall → S
+  originalBR65OpticalGeometryResidual d j q p px m mx a b =
+    originalGeometricIsraelRows d a b
+      - israel j q p px m mx a b
+      - originalBR65ShapePayment d a b
+
+  record OriginalBR65SourceCompatibility
+    (d : TwoFaceMovingIsraelSource)
+    (j : S) (q : Vec)
+    (p px m mx : Tensor) : Set r where
+    constructor originalBR65SourceCompatibility
+    field
+      physicalWallMatch : OriginalTwoFaceShapeCompatibility d
+      originalReferenceJumpAgreement :
+        originalIsraelJump d ≡ j
+      physicalInducedReferenceMatch :
+        (a b : Wall) →
+          H p a b
+            + two * sourceReferenceWarpK (plusMovingShape d)
+                * sourceGraphDisplacement (plusMovingShape d)
+                * eta a b
+            ≡ H m a b
+            + two * sourceReferenceWarpK (minusMovingShape d)
+                * sourceGraphDisplacement (minusMovingShape d)
+                * eta a b
+      fullGeometricReferenceFromOriginalBR34 :
+        (a b : Wall) →
+          originalBR65OpticalGeometryResidual
+            d j q p px m mx a b ≡ O
+  open OriginalBR65SourceCompatibility public
+
+  -- The certificate is not constructed from arbitrary free inputs.
+  -- It requires the actual raw-to-optical derivative ownership,
+  -- compatible tangential Fourier jets, physical shape, and source
+  -- b'' on both sides. It also avoids silently claiming b+''=b-''.
+  originalBR65FullIsraelFromBR34 :
+    (d : TwoFaceMovingIsraelSource) →
+    S → Vec → Tensor → Tensor → Tensor → Tensor →
+    Wall → Wall → S
+  originalBR65FullIsraelFromBR34 d j q p px m mx a b =
+    half * originalTraceReverseFour
+      (λ i k → israel j q p px m mx i k
+        + originalBR65ShapePayment d i k) a b
+      + three * derivativeIsraelJump d * eta a b
+
+  -- The target equality of this formula with
+  -- originalIsraelShapeFrechet d is an exact, source-dependent
+  -- theorem once OriginalBR65SourceCompatibility is inhabited.
+  -- The independent reference D/E gauge and mean force rows are not
+  -- derived from this ten-component Israel identity.
