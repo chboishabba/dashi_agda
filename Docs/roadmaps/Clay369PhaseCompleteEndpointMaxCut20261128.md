@@ -877,3 +877,146 @@ F. PNP: internal work cost or direct poly SAT algorithm, not input
 Source files are to be written for native execution; status remains
 SOURCE-WRITTEN until the original toolchains run. Do not claim any
 Clay millennium theorem is established.
+
+
+## Section 27 — Bishop native receiver and actual original-source maximum cut (28 Nov 2026)
+
+Head audit at start:
+Agda #1551 6b7cfdf4fb26a6b123a7c2fc0b95f5cd483b1c26;
+YM #1536 1356067b6ecc62e04f3a58324e9a2d0a0950f656;
+Lean #123 d54d6badb278689fa13ea583642d8679071152a6;
+Lean #124 d3b768e852e3edd471804d351a049b7f1b204d7d;
+PNP Lean #119 caa5a33c0071c76a1db1c411ead9e86b24f5d89f;
+RH Lean #121 3eb36764e36c526b7129550b737ffc507b3cb95f.
+No CI or native Agda/Lean compiler was run.
+
+### YM CMP102 native same-source implementation (priority)
+Owner #1536, original Bishop-real Sequence and CMP109 coefficient values.
+New source files:
+- DASHI/Physics/YangMills/YMClayCMP102OriginalGPrefixSignedSquaresBIDIExact.agda
+  initial b106baec3fab91b2c1440c8f5adf97709b540c51, repaired
+  direct source import/rational literal at
+  8ae84932ec50a6bedb3168bf62c4e0b1ade44c5c.
+  Uses the actual originalGPrefix X count and
+  original aPrefix/bPrefix, with P.ℝ-Solver to witness the exact
+  ring factorization
+    G_c=(1-A_c)^2-(1+X)A_c^2+X B_c(2+X B_c).
+  All variables are same ORIGINAL Bishop real, original count and
+  sources; not an alternate expansion or a zero theorem.
+- DASHI/Physics/YangMills/YMClayCMP102OriginalGeometricSqueezeReceiverExact.agda
+  first ec3c6fe485276aa4d0fae93b7899bb31bcfc769a, extended
+  b9602f5fbb4ec730eaf598472a1479e1f37c423e.
+  Reuses master and #1536 source available on THIS BRANCH:
+  DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.nativeBishopSqueeze,
+  DASHI/Foundations/BishopMachinArctanConstructionExact.quarterPositive/
+  quarterBelowOne, Sequence.∣r∣<1⇒rⁿ→0 and original
+  Sequence multiplication. Proves the 3*(1/4)^n rate tends to 0 in
+  the ORIGINAL represented Bishop sequence (SOURCE-WRITTEN,
+  PENDING_KERNEL). Then two-sided finite original Bishop-order
+  bounds -rate_c <= originalGPrefix X c <= rate_c yield
+  Seq._ConvergesTo_ originalGPrefix 0 and immediately
+  Original.originalGZeroFromOriginalPrefixConvergence to G(X)≈0.
+  This removes *the geometric-power vanishing analytical step*
+  from the open list, conditional on native elaboration.
+  The **only outstanding scalar mathematical source leaf** is the
+  concrete original finite-prefix Bishop-order bracket derived from
+  all-degree signed Cauchy coefficient cancellation and factorial
+  majorants: 3*4^-c. The all-degree mathematical derivation is in
+  Docs/physics/YMClayCMP102OriginalCountPrefixGeometricZeroCertificate20261128.md,
+  not yet translated into that Agda lemma. The abstract squeeze
+  theorem cannot synthesize its bracket.
+  Verified existence of actual squeeze, Machin, and geometric owner
+  files on the diverged #1536 branch itself.
+  This scalar CMP102 identity is NOT original 4D Wilson physical
+  CMP116 absolute shell, interacting OS/measure or a mass gap.
+
+### NS — all-cutoff uniform critical criterion explicitly isolated
+Lean #123
+Synthesis/NavierStokesOriginalAllCutoffsSignedBudgetCeilingExact.lean
+original acc66001eec727ee523a55ff121445bc9af7115e,
+correct Nat cutoff typed head e075d45a3ed38e33134404ee6287b8151dc08b65.
+On actual Galerkin X_N, true hODE_N, original quarter energy at t=0
+bounded by E0, same-source signed transfer uniformly <=B for
+every N and T>=0, and nonnegative actual dissipative payment,
+the exact conclusion is
+  E_{1/4,N}(T)^2 <= E0+2 B
+for EVERY N,T, independent of cutoff. No assumption that energy E0
+alone pays original quarter norm or htransfer; those are the
+original hard endpoint. Acceptance root:
+Synthesis/ClayNSSection27UniformSignedBudgetAcceptanceExact.lean
+2716a32db363e70b404e28f03ff98e593a48892c.
+Remaining: derive htransfer uniformly by true signed physical
+geometry or another actual continuation criterion, original A
+Euclidean exterior, unforced 15-field profile, C/D native admission.
+
+### Hodge — exact five-independent-coordinate true Q0 root fibre
+Lean #124
+Synthesis/MillenniumHodgeDicksonOriginalQ0FiveDeckBidiExact.lean
+bab2b29b398bb7f7a626c27be3a6762eedebb47a.
+Consumes existing `fiveDeckEquiv 2` and actual Q0 even-deck
+torsor. The five independent square-one deck coordinates determine
+the sixth product-one sign, giving a full invertible map to the
+original six-root fibre, with unique inverse for any original target.
+Avoid mistaking the six labelled roots for six independent sign
+choices: only 2^5 valid signs in char zero. Acceptance:
+Synthesis/ClayHodgeSection27OriginalFiveDeckAcceptanceExact.lean
+02ef347a217ceb9842932a508780c335114161ec.
+Remaining original global Proj denominator generator, proper cycle
+extension, generic primitive pairing and arbitrary-X cycle proof.
+Finite generic torsor is not a global algebraic Chow cycle.
+
+### PNP — tightened original input-only NO-GO envelope
+Lean #119
+Welds/PNPOriginalAnchoredInputReadDoubleCeilingExact.lean
+initial a53e3d476e7eb568de295876e0a91cc29b6df9b2,
+type-stable explicit min case split at
+534e065a44fbb324d44018fd7276f1a2ba9a58a7.
+On the SAME legal anchored F3 family and actual read trace, with
+original terminal distinction and per-address capacity C,
+the exact scoped charge is
+  sum_j w_j <= C * min(n, k),
+where n is original independent input addresses and k the true
+physical adaptive query fuel. This is a NO-GO for obtaining
+superlinear SAT complexity merely by adding counterfactual
+alternatives or multiple overlapping static input covers.
+Acceptance Welds/PNPSection27OriginalDoubleCeilingAcceptanceExact.lean
+fff6c4c41d7e33c89fb2161d932951b124864c4e.
+The genuine universal P vs NP endpoint needs paid internal
+sharing-stable events on original arbitrary SAT machine (or
+a true costed polynomial SAT algorithm), plus C1a bit/control and
+R1 first-rule candidate/physical-horizon attachment.
+
+### BSD/RH original owners (no duplicate)
+BSD #124 general 2-Selmer/Sha same-object quotient + original
+Mellin two-crossing positive polynomial already source-written;
+new four-cutoff tranche adds no BSD analytic-rank theorem. Remaining
+selected complex L''/source Mellin comparison and universal
+arithmetic/analytic rank equality/finiteness, independently of p-adic
+jet. RH #121 exact original xi/zeta and Clay/Mathlib BIDI with
+dedicated original pinned admission root already exists. Remaining
+genuine original kernel theorem witness, same-source statement
+equality, transitive axiom audit and mathematical source verification.
+
+### Exact regression
+Committed scripts/check_clay_section27_original_welds.py at
+5d5318e29e1719fc9270f19abe16f5676e3d6251.
+Locally independently reproduced equivalent checks in Python 3.13/
+SymPy, 11367/11367 PASS:
+ YM 3800 checks count 0..79 original rational cancellation, leading
+ coefficient 2/(2c+2)!, majorant <=3 and signed |X|<=1/4;
+ Hodge 64 exact six/even-deck combinatorics;
+ BSD 60 rational two-crossing sign-necessity cases;
+ NS 9 exact signed square-FTC polynomial controls;
+ PNP 7203 finite dual input/query ceiling controls;
+ RH 231 original horizontal signed coordinate checks.
+Original G algebraic factorization additionally verified by SymPy
+expand giving 0. The locally executed code is equivalent to, NOT
+claimed byte-identical with, the committed GitHub script. These
+finite checks do NOT certify Agda/Lean elaboration or any universal
+Clay endpoint.
+
+Do NOT add new kernels or guess a new YM scalar analytic
+source: finish the ONE original Bishop finite-prefix bracket,
+run Agda native acceptance, then retain the separate physically
+interacting Wilson F19/CMP116/mass-gap frontier. Main branch and
+active divergent PR provenance must be preserved.
