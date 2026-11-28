@@ -239,3 +239,47 @@ halfOddFourth j u v w = solve 4
       :- (con (+ 2) :* v :+ con (+ 1)) :- (con (+ 2) :* w :+ con (+ 1))
     := con (+ 2) :* (con (+ 2) :* j :- u :- v :- w :- con (+ 1)) :+ con (+ 1))
   refl j u v w
+
+
+-- Full dependent-shell reconstruction uses decidable integer equality,
+-- not an axiom of proof irrelevance for arbitrary types.
+import Data.Integer.Properties as ZP
+open import Axiom.UniquenessOfIdentityProofs using (Decidable⇒UIP)
+
+shellPath : ∀ (grade : Quad → ℤ) {n}
+  (x y : Σ Quad (λ q → grade q ≡ n)) →
+  proj₁ x ≡ proj₁ y → x ≡ y
+shellPath grade (x , p) (.x , q) refl =
+  cong (x ,_) (Decidable⇒UIP.≡-irrelevant ZP._≟_ p q)
+
+integerFullRoundTrip : ∀ {n} (x : IntegerShell n) →
+  fromEven (toEven x) ≡ x
+integerFullRoundTrip x =
+  shellPath (λ q → (+ 4) * normSq (integerOdd q)) _ x (integerRoundTrip x)
+
+evenFullRoundTrip : ∀ {n} (x : EvenShell n) →
+  toEven (fromEven x) ≡ x
+evenFullRoundTrip x =
+  shellPath (λ q → normSq (halfEven q)) _ x (evenRoundTrip x)
+
+oddFullRoundTrip : ∀ {n} (x : OddShell n) →
+  toOdd (fromOdd x) ≡ x
+oddFullRoundTrip x =
+  shellPath (λ q → normSq (halfOdd q)) _ x (oddRoundTrip x)
+
+evenFlipFullRoundTrip : ∀ {n} (x : EvenShell n) →
+  fromOdd (toOdd x) ≡ x
+evenFlipFullRoundTrip x =
+  shellPath (λ q → normSq (halfEven q)) _ x (evenFlipRoundTrip x)
+
+twoCopiesLeft : ∀ {n} (x : IntegerShell n ⊎ IntegerShell n) →
+  reopen (twoCopies x) ≡ x
+twoCopiesLeft (inj₁ x) = cong inj₁ (integerFullRoundTrip x)
+twoCopiesLeft (inj₂ x) = cong inj₂
+  (trans (cong fromEven (evenFlipFullRoundTrip (toEven x))) (integerFullRoundTrip x))
+
+twoCopiesRight : ∀ {n} (x : EvenShell n ⊎ OddShell n) →
+  twoCopies (reopen x) ≡ x
+twoCopiesRight (inj₁ x) = cong inj₁ (evenFullRoundTrip x)
+twoCopiesRight (inj₂ x) = cong inj₂
+  (trans (cong toOdd (evenFullRoundTrip (fromOdd x))) (oddFullRoundTrip x))
