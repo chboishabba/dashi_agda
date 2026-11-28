@@ -808,3 +808,7 @@ With wall rows divided by k and h=1/k, symbolic maximal minors establish first-o
 ### BR215 damped-scale normalized loss
 
 An explicit nonzero original polarization/shape amplitude has normalized boundary residual O(u²) on h=c u² with symbolic c, for both signs. Combined with the jump-only inverse this gives sharp second-order loss in the normalized compatible amplitude norm along fixed-damping high-frequency rays. The unnormalized wall residual is not small by this witness. Source-specific admissibility and curved energy remain open. See roadmap section 50.
+
+### BR216 selective resonant wall weighting
+
+Keeping the original rank-one resonant wall forcing while normalizing the eight nonresonant rows gives elementary orders (0^14,1^5) for every nonzero compactified damping parameter a=u²/h. Exact symbolic minors and local rank calculations establish the half-order amplitude upper bound along fixed-positive-damping rays in the selectively weighted norm, hence also in the original forcing norm. Bulk integration and physical source compatibility, curved energy and nonlinear existence remain open. See roadmap section 51.

@@ -5679,3 +5679,39 @@ normal integration, differentiated curved boundary energy.
 Independent local damped.py ran twice under 90s, both exit 0.
 Final stdout recorded. Committed donor import unrun.
 Terminal stage 36. No CI/native/PDE or other-lane acceptance.
+
+
+## 51. BR216 — selective resonant wall weighting recovers half-order amplitude loss
+
+Reuse BR213 chart and BR215 physical damped scale. Write a=u²/h,
+h=1/k. Let P0 be the rank-one spectral projector of original B1
+at sigma, and Q0=I-P0. Multiply original wall rows by P0+h Q0,
+not h I. The polynomial-cleared wall block is
+[0,(P0+u² Q0/a) R N, (-2 sigma i a P0+Q0(t I-i d B1)) d³],
+where d=1+u², t=sigma i(1-u²). Exact local independent
+carrier reconstruction shows leading rank 14 and two-level
+Toeplitz rank 33 over Q(i)(a), with minors
+214990848 i a/390625 and
+sigma 47330370277129322496 i a²/152587890625.
+For every complex a !=0, minors and generic rank upper bounds
+give nullities 5,5 and elementary orders 0^14,1^5.
+Both signs and a=±i/2,±i,1 independently pass direct rank
+lift (rank19, no remaining second-order direction).
+On any compact subset of a !=0, the rank and derivative
+transversality are uniform; finite local block inverses yield
+a uniform O(|u|^-1) amplitude left inverse on compatible
+image sources for small nonzero u. Since h=u²/a and physical
+fixed damping gamma>0 implies a tends to -gamma/(2 sigma i),
+this recovers the half-order upper bound on that ray in
+selectively weighted source norm, and hence in original source
+norm (P0+hQ0 bounded for h<=1). Not uniform as gamma tends
+to zero/infinity; not a lower bound in original source norm.
+No claim that arbitrary compatible sources satisfy all
+physical constraints or that amplitude estimate already pays
+bulk normal integration and curved trace. Next: actual source
+norm transfer, normal integration and coupled differentiated
+energy, then W0/W5/W6/W7. Other lanes unchanged.
+Local independent reconstruction weighted.py executed twice
+with 90s caps, exit zero; final stdout in receipt. New donor
+entry adds expected assertions, unrun. Terminal stage 37.
+No CI/native/PDE acceptance.
