@@ -7,11 +7,17 @@ module DASHI.Moonshine.CM163BishopHecke41QuantitativeRigidityExact where
 open import Agda.Builtin.Nat using (zero)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
 import Real as R
+import RealProperties as P
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Analysis.BishopComplexNormSquareUpperPowerEnvelopeExact as Upper
 import DASHI.Moonshine.JInvariantBishopLatticeGeneratorSummandExact as Gen
+import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneLatticeDenominatorExact as U
+import DASHI.Moonshine.CM163BishopHecke41RamifiedPhaseExact as Ram
+import DASHI.Moonshine.CM163BishopHecke41FormalCyclotomicNormExact as Series
+import DASHI.Moonshine.JInvariantBishopThetaCauchyProductExact as CP
+import DASHI.Moonshine.CM163BishopHecke41CuspTailFactorExact as Same
 import DASHI.Moonshine.CM163BishopHecke41DyadicCircleBoundsExact as Circle
 import DASHI.Moonshine.CM163BishopHecke41DyadicFourierProjectionExact as Proj
 import DASHI.Moonshine.CM163BishopHecke41FourierCoefficientBoundExact as Fourier
@@ -35,22 +41,26 @@ data Orbit : Point → Point → Set where
   stay : ∀ p → Orbit p p
   stepS : ∀ {p v} → Orbit p v → Orbit p (Gen.actS v)
   stepT : ∀ {p v} → Orbit p v → Orbit p (Gen.actT v)
+  same : ∀ {p v w} → Orbit p v → U.tau v ≈C U.tau w → Orbit p w
   backS : ∀ {p v} → Orbit p (Gen.actS v) → Orbit p v
   backT : ∀ {p v} → Orbit p (Gen.actT v) → Orbit p v
 
 orbitRead : ∀ (F : Func) →
   (∀ p → F (Gen.actS p) ≈C F p) →
   (∀ p → F (Gen.actT p) ≈C F p) →
+  (∀ p v → U.tau p ≈C U.tau v → F p ≈C F v) →
   ∀ {p v} → Orbit p v → F p ≈C F v
-orbitRead F hs ht (stay p) = C.≈C-refl _
-orbitRead F hs ht (stepS {v = v} w) = complexTrans (orbitRead F hs ht w) (complexSym (hs v))
-orbitRead F hs ht (stepT {v = v} w) = complexTrans (orbitRead F hs ht w) (complexSym (ht v))
-orbitRead F hs ht (backS {v = v} w) = complexTrans (orbitRead F hs ht w) (hs v)
-orbitRead F hs ht (backT {v = v} w) = complexTrans (orbitRead F hs ht w) (ht v)
+orbitRead F hs ht hc (stay p) = C.≈C-refl _
+orbitRead F hs ht hc (stepS {v = v} w) = complexTrans (orbitRead F hs ht hc w) (complexSym (hs v))
+orbitRead F hs ht hc (stepT {v = v} w) = complexTrans (orbitRead F hs ht hc w) (complexSym (ht v))
+orbitRead F hs ht hc (same {v = v} {w = w} o e) = complexTrans (orbitRead F hs ht hc o) (hc v w e)
+orbitRead F hs ht hc (backS {v = v} w) = complexTrans (orbitRead F hs ht hc w) (hs v)
+orbitRead F hs ht hc (backT {v = v} w) = complexTrans (orbitRead F hs ht hc w) (ht v)
 
 module At (inputs : Round11.BishopCutset) where
   module H = Circle.At inputs
   module Fourier0 = Fourier.At inputs
+  module Rm = Ram.At inputs
   q = H.q
   nz = H.nz
 
@@ -74,6 +84,21 @@ module At (inputs : Round11.BishopCutset) where
     (hs : ∀ p → F (Gen.actS p) ≈C F p)
     (ht : ∀ p → F (Gen.actT p) ≈C F p) where
 
+    -- Setoid coordinate transport is derived from the SAME series,
+    -- not assumed as an additional invariance premise.
+    qCong : ∀ p v → U.tau p ≈C U.tau v → q p ≈C q v
+    qCong p v (x , y) = Rm.expCong
+      (P.-‿cong (P.*-congˡ y) , P.*-congˡ x)
+
+    valueCong : ∀ p v → U.tau p ≈C U.tau v → F p ≈C F v
+    valueCong p v h =
+      let e = ev p
+          moved : Eval.Eval (q v) f
+          moved = record { value = Eval.value e
+                         ; absolute = CP.complexAbsTransport (Series.twistPhaseCong (qCong p v h) f) (Eval.absolute e)
+                         ; converges = CP.complexLimitTransport (Series.twistPhaseCong (qCong p v h) f) (Eval.converges e) }
+      in complexTrans (actual p) (complexTrans (Same.sameEval moved (ev v)) (complexSym (actual v)))
+
     module D = Contract.Disk (q ref) (nz ref) f (ev ref) zeroMode
     module FB = Fourier0.For ref f ev
     module I = Contract.Iterate F
@@ -82,7 +107,7 @@ module At (inputs : Round11.BishopCutset) where
     initial p =
       let c = cover p
           v = Reduced.point c
-          eq = complexTrans (orbitRead F hs ht (Reduced.word c)) (actual v)
+          eq = complexTrans (orbitRead F hs ht hc (Reduced.word c)) (actual v)
       in boxCong (complexSym eq) (D.B.valueBound (q v) (Reduced.inside c) (ev v))
 
     shrink : ∀ M → R.NonNegative M → I.Global M → I.Global (R._*_ Contract.contraction M)
@@ -90,7 +115,7 @@ module At (inputs : Round11.BishopCutset) where
       let c = cover p
           v = Reduced.point c
           coeff = FB.coefficientBound M (λ u → boxCong (actual u) (hb u))
-          eq = complexTrans (orbitRead F hs ht (Reduced.word c)) (actual v)
+          eq = complexTrans (orbitRead F hs ht hc (Reduced.word c)) (actual v)
       in boxCong (complexSym eq) (D.contract M nn coeff (q v) (Reduced.small c) (ev v))
 
     module End = I.From D.B.M D.B.Mnonnegative initial shrink
