@@ -30,24 +30,29 @@ SCRIPTS=(
     "check_f8_full_band_ward_attachment.py",
 )
 
-def run(history=False,seconds=30):
+def run(history=False,original_jets=False,seconds=30):
     root=Path(__file__).resolve().parent
     env=dict(os.environ,OPENBLAS_NUM_THREADS="1",OMP_NUM_THREADS="1")
-    for name in SCRIPTS+(("check_f8_w1w2_integrated_receipt.py",) if history else ()):
+    tasks=[(name,()) for name in SCRIPTS]
+    if history:tasks.append(("check_f8_w1w2_integrated_receipt.py",()))
+    if original_jets:tasks.append(("check_f8_ward_timejet_receipt.py",("--original",)))
+    for name,extra in tasks:
         path=root/name
         if not path.is_file():raise FileNotFoundError(path)
-        result=subprocess.run((sys.executable,str(path)),cwd=root,env=env,
+        result=subprocess.run((sys.executable,str(path),*extra),cwd=root,env=env,
                               capture_output=True,text=True,
-                              timeout=90 if history and name.endswith("integrated_receipt.py") else seconds)
+                              timeout=90 if extra or name.endswith("integrated_receipt.py") else seconds)
         if result.returncode:
             raise RuntimeError(f"{name} FAILED rc={result.returncode}\n{result.stdout}\n{result.stderr}")
         print(f"PASS {name}: {result.stdout.strip()[:220]}",flush=True)
     print("EXACT ALGEBRA ACCEPTED; original history="+("EXECUTED" if history else "NOT EXECUTED"))
+    print("Original full Ward time-jets="+("EXECUTED, UNCERTIFIED" if original_jets else "NOT EXECUTED"))
     print("Full continuum Einstein-Israel physical energy and receiver remain OPEN")
 
 if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("--history",action="store_true",help="run original finite history, 90s local cap")
+    p.add_argument("--original-jets",action="store_true",help="run actual full-band Ward time-jets, 90s local cap")
     p.add_argument("--seconds",type=int,default=30,help="per exact script timeout")
     args=p.parse_args()
-    run(args.history,args.seconds)
+    run(args.history,args.original_jets,args.seconds)
