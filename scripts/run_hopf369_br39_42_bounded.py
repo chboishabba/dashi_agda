@@ -273,6 +273,8 @@ PARTS["terminal"] += [(f"BR296.history{n}","check_hopf369_br296_cmc_history.py",
 
 PARTS["terminal"] += [(f"BR297299.regions{n}","check_hopf369_br297_299_history_regions.py",("--n",str(n))) for n in (6,7,8,9)] + [("BR297299.time9fine","check_hopf369_br297_299_history_regions.py",("--n","9","--steps","8","--dt",".0005"))]
 
+PARTS["terminal"] += [("BR300.atomic","check_hopf369_br300_literal_atomic.py",()),("BR301.snapshot","check_hopf369_br301_snapshot.py",()),("BR302.boundary7","check_hopf369_br302_boundary.py",("--n","7")),("BR302.boundary9","check_hopf369_br302_boundary.py",("--n","9")),("BR303.wall","check_hopf369_br303_304_source_walls.py",("--part","periodic")),("BR304.caloric","check_hopf369_br303_304_source_walls.py",("--part","material")),("BR305.subsidiary","check_hopf369_br305_sourced_subsidiary.py",())]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
