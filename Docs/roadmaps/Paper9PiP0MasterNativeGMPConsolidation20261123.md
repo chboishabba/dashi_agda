@@ -2472,3 +2472,21 @@ B: actual q jets and E4/E6 coefficients at the SAME selected q, establishing the
 C: original hypergeometric ODE uniqueness and chain readout proving H²=X and derivative l for H and J1;
 D: construct OriginalCMProducers fields and call sameReal/universalRawCross. Do not add a new endpoint theorem or arbitrary period equality. Strict positivity/apartness must be supplied constructively before cancellation.
 Computational code and receipts remain independent: predictive GMP and original Machin common-floor checks cannot instantiate a real analytic field. Bounded local SymPy tests can validate coefficient identities only. No native proof run or CI.
+
+
+### A4 producer reduced to one original Ramanujan differential owner — 2026-11-28
+Cross-check of branch source shows JInvariantBishopCM163NativeJetReductionExact.FirstQJet and SecondQJet are EXACTLY the following two readouts at the same selected point, with X=E4, Y=E6, K=j, a=Dj, b=D²j, U=3D E4:
+- X*a = -K*Y
+- 6 X²*b = K*(3 X³ + 3 Y² - Y*U).
+
+There is NO need to prove these as two unrelated analytic identities. Both follow from the same original Ramanujan derivation:
+3 D E4=E2 E4-E6; 2 D E6=E2 E6-E4²; D Delta=E2 Delta; j Delta=E4³.
+Differentiate j Delta=E4³, use Delta apartness, derive X*a=-K*Y. Differentiate that CLEARED equation and use the two Ramanujan identities to derive 6X²*b=K*(3X³+3Y²-Y*U); no inverse of X required. All equations are on original j and Delta, so this is a SAME-SOURCE closure. New source-written Lean Integration/Paper9OriginalRamanujanTwoJetWeld.lean (companion commit ffd1846d6cce86068e9cc42b11cb98abf8e6b372) contains the two actual algebraic derivations using linear_combination, plus a joint consumer. Its remaining input is original analytic differentiation/product rule at the selected Bishop q, not an assumed jet or second j.
+
+New source scripts/check_paper9_original_jet_derivation.py (487e53e9c1d0) gives exact formal q-coefficients for original E2,E4,E6, Delta=(E4³-E6²)/1728, J=q*j via integer formal inversion, and both j-jets with signed Laurent normalization. Local equivalent SymPy 1.14 script at degree 256: 771 Ramanujan, 257 discriminant, 257 first jet and 257 second jet exact coefficient checks PASS; the two cleared polynomial syzygies PASS. Original disk/period SymPy script also reran 17/17 PASS. This does NOT prove Bishop termwise differentiation, q-domain analyticity or modular point admission. The committed Python source itself has not been byte-verified against the locally run variant; receipt Docs/support/reference/Paper9OriginalRamanujanTwoJet20261128.json.
+
+Remaining A4 proof inputs now:
+1. Use original analytic q-domain and radius witnesses from JInvariantBishopEisensteinEulerJetExact, JInvariantBishopUnitDiskEisensteinCompletionExact, JInvariantBishopRamanujanDeltaUnitExact, and ActualJLocalSecondJetExact; show termwise Euler differentiation (or reuse its existing native theorem), product rule for j Delta=E4³ on that original disk.
+2. Specialize to the literal negative-real selected CM q, with actual negative Delta apartness (RealSlicePeriodExact.AtNegativeDelta.nz) and map q-jets to real components; do not assert missing derivative from finite coefficient checks.
+3. Consume the now ONE Ramanujan jet result to fill OriginalCMProducers.firstQ / secondQ, retaining exact K sign and U normalization. Finish the actual reciprocal Hecke literalResidual and hypergeometric H²/chain; then instantiate OriginalCMProducers and obtain NativePeriod/same-real/universal cross.
+No new period proof, new j, new q or independent first/second jet assumptions; kernel execution deferred by user.
