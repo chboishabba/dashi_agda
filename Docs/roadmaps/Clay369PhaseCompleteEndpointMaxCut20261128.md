@@ -1497,3 +1497,82 @@ PNP Lean #119 actual anchored signed residual and no-go/input
 capacity; NEED universal original SAT sharing-stable internal work
 or real costed poly SAT algorithm with full bit clock/R1 ABI.
 Do not invent cross-domain theorems just to advance a section number.
+
+
+### Section 30 continuation — NS integrated high-shell and Hodge original monic proper chart
+
+**NS Lean #123:** Source
+Synthesis/NavierStokesOriginalIntegratedHighShellPaymentExact.lean
+commit c6b049a2b533270cdc8057042bfcc8a65beb7495.
+Consumes the ORIGINAL periodic_tail_energy_le and global Galerkin
+physical dissipation budget on the SAME actual finite Fourier output.
+From R² E_{N,>=R}(t)<=D_N(t) for the genuine `outputModes N`,
+the native interval integral comparison and original time energy
+ledger yield the exact time-integrated physical shell payment:
+    2nu R² int_0^T E_{N,>=R}(t) dt <= E0,
+    int_0^T E_{N,>=R} <= E0/(2nu R²)
+for T>=0, R>0, nu>0. The proof explicitly requires interval
+integrability of both actual finite shell energy and physical
+dissipation; these should be discharged directly from the donor
+`SolvesOn` finite ODE and finite-coordinate continuity in its
+global-flow consumer. Do not silently treat integrability as
+automatically proved. Native acceptance
+Synthesis/ClayNSSection30IntegratedHighShellAcceptanceExact.lean
+88cd678cd39b76f221b26204ad15f816518f979e.
+This is an actual useful *integrated* high-frequency compactness
+payment independent of cutoff when E0 uniformly bounded; it does
+NOT prove uniform H1 in time, signed 1/4 transfer bound, or
+unrestricted 3D Navier–Stokes continuum regularity.
+Independent local exact Fraction checks of fixed original-style
+nonnegative Fourier weights and integrated polynomial envelope
+20/20 PASS (algebraic model, not actual PDE solution or kernel).
+
+**Hodge Lean #124:** Existing
+Synthesis/MillenniumHodgeDicksonAffineFiniteProperExact.lean
+ALREADY owns the monic rotation_fold_monic, rotation_fold_integral,
+finite generated affine rotation chart, finite scheme map and
+`rotationChart_projection_proper`. Important reconciliation:
+do NOT list "affine finite/proper projection" as unconstructed;
+it IS SOURCE WRITTEN. The still missing object is the selected
+GLOBAL projective proper correspondence and primitive Chow/Hodge
+cohomological pairing (and branch glue) on the original X.
+
+New
+Synthesis/MillenniumHodgeDicksonActualCoupledAffineMonicBridgeExact.lean
+commit 152149a337a75dbd52565dbd6c3c3fe11091c233.
+On the SAME original coupled rotation-product/Q0 root pair
+`p : RotationFibre y eta × ActualRootFibre a y delta`, uses the
+donor original seventh Laurent identity and original
+`actual_surface_address_quadratic` to prove every coordinate:
+   y_i² - Q0Field(a_i,s_i)*y_i + a_i⁷ = 0.
+Its geometric realization theorem produces ONE source pair
+satisfying ALL SIX monic relations under actual original
+punctured product eta^7=prod y and delta²=prod Delta, not separate
+per-coordinate arbitrary points. It explicitly imports existing
+AffineFiniteProper owner, maintaining the actual monic algebraic
+geometry. Acceptance
+Synthesis/ClayHodgeSection30ActualCoupledAffineMonicAcceptanceExact.lean
+4a24be8a344abbbc8a5e45d92664d2c4df8e95c4.
+This is original generic-to-affine algebraic relation, NOT the
+global proper cycle / primitive cohomological nonvanishing.
+
+**Other Clay owners unchanged (not duplicate targets):**
+BSD Lean #124 all-degree original signed Mellin obstruction and
+number-field Selmer/Sha quotient already written; still actual
+selected complex L''/Mellin source, arithmetic/analytic rank, Sha
+finiteness. RH Lean #121 original xi/zeta/Clay statement BIDI;
+still pinned external proof admission plus full transitive kernel
+axiom and mathematical source audit. PNP Lean #119 original legal
+F3 residual/same-run query price, input-only nC ceiling, closed
+internal observer no-go; still actual sharing-stable universal SAT
+internal event charge or costed polynomial original algorithm.
+Do NOT claim existential original geometric source alone proves
+a universal Clay endpoint.
+
+**Source verification** of all added files must be followed by
+native Lean/Agda acceptance and dependency graph/axiom audit.
+Agda CMP102 Section30's sharper all-degree finite wing bound is
+a source-written geometry construction plus checked Fraction
+certificate; its final native original G-to-wing equality and
+factorial Bishop-order bound remain pending. Do not report
+kernel verification or all-Clay completion before running them.
