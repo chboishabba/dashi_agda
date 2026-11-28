@@ -71,8 +71,10 @@ record CriticalStripWitness : Set₁ where
     Complex : Set
     zeta : Complex → Complex
     zero : Complex
-    realPart : Complex → ℚ
-    oneHalf : ℚ
+    -- The analytic real carrier is not restricted to rational coordinates.
+    Real : Set
+    realPart : Complex → Real
+    oneHalf : Real
     nontrivialZero : Complex → Set
     criticalLine : Complex → Set
     criticalLineMeansHalf : (s : Complex) → criticalLine s → realPart s ≡ oneHalf
