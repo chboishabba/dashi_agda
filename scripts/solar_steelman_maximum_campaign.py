@@ -35,7 +35,7 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
@@ -60,6 +60,9 @@ def main():
     elif x.stage=='inverse':
         from solar_steelman_physical_inverse import run
         run(a)
+    elif x.stage in ('span','span-full'):
+        from solar_steelman_constitutive_span import local_inverse
+        local_inverse(a,x.stage=='span-full')
     elif x.stage=='preflight':
         from solar_steelman_reservoir_return import preflight
         preflight(m,a)
@@ -84,6 +87,15 @@ def main():
             meta=json.loads(path.with_suffix('.json').read_text())
             if meta!=dict(sha=sha(path),upstream=up,sources=src,tol=x.tol):raise ValueError("monodromy provenance mismatch")
         assemble(paths)
+        from solar_steelman_return_compatibility import run
+        matrices=[]
+        for path in paths:
+            with np.load(path,allow_pickle=False) as f:matrices.append((int(f['start']),f['M']))
+        M=np.column_stack([v for _,v in sorted(matrices,key=lambda x:x[0])])
+        out=work/f'full_{x.tol:.12g}.npz'
+        np.savez(out,M=M)
+        json_atomic(out.with_suffix('.json'),dict(sha=sha(out),upstream=up,sources=src,tol=x.tol))
+        run(M)
     elif x.stage in ('delay','delay-run'):
         from solar_steelman_retarded_face_return import run
         run(m,a,x.delay,x.tol,x.periods,x.perturb,x.stage=='delay-run')
