@@ -9,10 +9,11 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalGPrefixSignedSquaresBIDIExact
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (1ℚᵘ)
+open import Data.Rational.Unnormalised using (1ℚᵘ; _/_)
 import Real as R
 import RealProperties as P
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGFiniteLimitTransportExact as Original
+import DASHI.Physics.YangMills.YMClayCMP102OriginalEndpointCauchyShiftExact as CMP102
 
 -- Use the same source values, with their actual Sequence.SeriesOf count
 -- semantics: sums from index 0 through count - 1.
@@ -28,7 +29,7 @@ originalSignedSquares X count =
       (R._*_ (R._+_ R.1ℝ X) (R._*_ A A)))
     (R._*_
       (R._*_ X B)
-      (R._+_ Original.CMP102.two (R._*_ X B)))
+      (R._+_ CMP102.two (R._*_ X B)))
 
 -- All degrees, all X and all finite count. The leading coefficient
 -- cancels only AFTER the source's original even/odd Cauchy parity:
