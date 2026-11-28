@@ -117,7 +117,7 @@ def cycle(material,cfg,shadow=None):
             if cfg.get('common_stage_atlas',False) and atlas is None:
                 atlas=structural_stage_atlas(model,mesh)
             A=model['generator']-current_L-S
-            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=retain_sensitivity,retain_stage_residuals=exact_trace,atlas_pairs=atlas)
+            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=retain_sensitivity,retain_stage_residuals=exact_trace,atlas_pairs=atlas,exact_port_base=model['generator'] if exact_trace else None)
             if retain_sensitivity:
                 item=dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude'],incident=float(inc),useful_J=w['loss_channels_J']['load'])
                 if exact_trace:
