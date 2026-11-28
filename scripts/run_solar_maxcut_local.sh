@@ -22,6 +22,7 @@ for entry in \
   check_solar_common_atlas_sympy.py \
   check_solar_common_atlas_native.py \
   check_solar_support_transition_native.py \
+  check_solar_amplitude_path_sympy.py \
   check_solar_amplitude_event.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
