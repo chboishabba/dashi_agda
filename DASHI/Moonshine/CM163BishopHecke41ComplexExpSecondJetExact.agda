@@ -26,6 +26,7 @@ import DASHI.Moonshine.AbelBishopOriginalComplexCarrierWeldExact as Weld
 import DASHI.Moonshine.JInvariantBishopComplexOriginQuadraticRemainderExact as Origin
 import DASHI.Moonshine.JInvariantBishopHomogeneousKleinTransportExact as Cancel
 import DASHI.Moonshine.JInvariantBishopFourierRowLimitExact as Lim
+import DASHI.Moonshine.AbelBishopKoenigsComponentwiseCompletionExact as Completion
 import DASHI.Moonshine.JInvariantBishopThetaCauchyProductExact as CP
 import DASHI.Moonshine.JInvariantBishopThetaSignedReadoutExact as Sp
 import DASHI.Moonshine.CM163BishopHecke41ConvergentSeriesExact as Eval
@@ -103,16 +104,17 @@ expansion T z h =
       tail = Remainder.D.evaluate z h
       cv = Eval.converges e
       open C
-      shifted = C.complex-series-converges-to
+      shifted = Completion.original-bishop-pointwise-complex-converges
         (Seq.fast-xₙ⊆yₙ∧yₙ→y⇒xₙ→y
           (Seq.shift-is-subsequence (Seq.SeriesOf (C.realTerms (N.twist z f))) 2) (_ , realConverges cv))
         (Seq.fast-xₙ⊆yₙ∧yₙ→y⇒xₙ→y
           (Seq.shift-is-subsequence (Seq.SeriesOf (C.imagTerms (N.twist z f))) 2) (_ , imagConverges cv))
-  in Lim.convUnique (Lim.convTransport (prefixExpansion z) (D.prefixLimit shifted))
+  in Lim.convUnique (Lim.convTransport (prefixExpansion z) shifted)
     (Lim.addConv (Lim.constantC (A.oneC +C z)) (Lim.mulConst (powC z 2) (D.prefixLimit (Eval.converges tail))))
 
 zeroInside : Inside A.zeroC
-zeroInside = P.≤-respˡ-≃ (P.≃-symm (P.+-identityʳ R.0ℝ))
+zeroInside = P.≤-respˡ-≃ (let open P.ℝ-Solver in solve 0
+  (Κ 0ℚᵘ ⊜ Κ 0ℚᵘ ⊗ Κ 0ℚᵘ ⊕ Κ 0ℚᵘ ⊗ Κ 0ℚᵘ) P.≃-refl)
   (P.≤-respʳ-≃ (P.≃-symm Norm.normSqOne)
     (P.<⇒≤ (P.p<q⇒p⋆<q⋆ 0ℚᵘ 1ℚᵘ (from-yes (0ℚᵘ QP.<? 1ℚᵘ)))))
 
@@ -129,10 +131,10 @@ zeroPrefix (suc n) = complexTrans
 center : remainder A.zeroC zeroInside ≈C Poly.realC ((+ 1 / 2) ⋆)
 center =
   let cv = D.prefixLimit (Eval.converges (Remainder.D.evaluate A.zeroC zeroInside))
-      shifted = C.complex-series-converges-to
+      shifted = Completion.original-bishop-pointwise-complex-converges
         (Seq.fast-xₙ⊆yₙ∧yₙ→y⇒xₙ→y (Seq.shift-is-subsequence (Seq.SeriesOf (C.realTerms (N.twist A.zeroC (Tail.drop 2 f)))) 1) (_ , C.realConverges (Eval.converges (Remainder.D.evaluate A.zeroC zeroInside))))
         (Seq.fast-xₙ⊆yₙ∧yₙ→y⇒xₙ→y (Seq.shift-is-subsequence (Seq.SeriesOf (C.imagTerms (N.twist A.zeroC (Tail.drop 2 f)))) 1) (_ , C.imagConverges (Eval.converges (Remainder.D.evaluate A.zeroC zeroInside))))
-      c = Lim.convTransport zeroPrefix (D.prefixLimit shifted)
+      c = Lim.convTransport zeroPrefix shifted
   in complexTrans (Lim.convUnique c (Lim.constantC (f 2))) (P.≃-refl , P.≃-refl)
 
 -- Actual second coefficient at 0, in every complex direction.
