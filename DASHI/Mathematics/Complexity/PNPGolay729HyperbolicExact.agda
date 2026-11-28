@@ -12,6 +12,7 @@ import DASHI.Foundations.Base369TriTruthField as F
 import DASHI.Foundations.TernaryGolay.ExplicitCode729 as G
 import DASHI.Foundations.TernaryGolay.CodeBoundary as C
 
+Word : Set
 Word = C.Word12
 
 sumWord : Word → TriTruth
