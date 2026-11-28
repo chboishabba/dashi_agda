@@ -22,6 +22,7 @@ SCRIPTS=(
     "check_f8_two_level_israel_trace_closure.py",
     "check_f8_israel_trace_source_schur.py",
     "check_f8_ward_timejet_receipt.py",
+    "check_f8_timejet_stencil_certificate.py",
     "check_f8_gauss_israel_energy_weld.py",
     "check_f8_scalar_density_momentum_schur.py",
     "check_f8_material_momentum_frame_weld.py",
