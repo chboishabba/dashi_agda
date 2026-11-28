@@ -9,6 +9,17 @@ from scipy.sparse.linalg import spsolve
 from numpy.polynomial.legendre import leggauss
 
 
+def exterior_identity():
+    R,M,l=s.symbols('R M l',positive=True)
+    z=M/(2*R); r=R*(1+z)**2; N=(1-z)/(1+z); f=N*N
+    v=R**(-l-1)/(1-z)
+    D=lambda a:s.diff(a,R)/s.diff(r,R)
+    A=r*r*N; w=r*r/N
+    assert s.simplify(-A*N*N*D(v)/v-r*f*(l+1+z/(1-z)))==0
+    assert s.simplify(D(A*N*N*D(v))-w*N*N*l*(l+1)/r**2*v)==0
+    print('PASS exact exterior transformed equation and DtN all symbolic ell')
+
+
 def coefficients():
     x=s.symbols('x'); l=s.Rational(1,10); p=l/(8*s.pi)
     rho=(2+l)*p*(1-x); pr=-p*(1-x)**2
@@ -83,6 +94,7 @@ def run(coef,n,ell,Rmax,exact_exterior=False):
 
 
 if __name__=='__main__':
+    exterior_identity()
     coef=coefficients()
     for ell in (1,2,3,4):
         for n,R in ((64,8),(128,8),(128,16),(256,16)):run(coef,n,ell,R)
