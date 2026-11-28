@@ -7,12 +7,12 @@ from solar_physical_causal import reaction,event,MASS,CHARGE
 def reaction_jvp(n,pool,T,p,h,q,dn,dpool,dT,dp):
     alpha=np.asarray(q['recombination_m3_s']); k=np.asarray(q['ionization_s_inv'])
     g=np.asarray(q['heater_ionization_per_J']); Q=np.asarray(q.get('activation_temperature_K',[0.,0.]))
-    exp=np.exp(-h*alpha*n[0]); r=n[1:]*(1-exp)
-    dr=dn[1:]*(1-exp)+n[1:]*exp*h*alpha*dn[0]
+    exp=np.exp(-h*alpha*n[0]); fraction=-np.expm1(-h*alpha*n[0]); r=n[1:]*fraction
+    dr=dn[1:]*fraction+n[1:]*exp*h*alpha*dn[0]
     avail=pool+r; davail=dpool+dr
     rate=k*np.exp(-Q/T)+g*p; drate=k*np.exp(-Q/T)*Q*dT/T**2+g*dp
-    surv=np.exp(-h*rate); a=avail*(1-surv)
-    da=davail*(1-surv)+avail*surv*h*drate
+    surv=np.exp(-h*rate); fraction=-np.expm1(-h*rate); a=avail*fraction
+    da=davail*fraction+avail*surv*h*drate
     primal=reaction(n,pool,T,p,h,q)
     assert np.allclose(primal[0],np.r_[r.sum(),r]) and np.allclose(primal[1],np.r_[a.sum(),a])
     return primal,(np.r_[dr.sum(),dr],np.r_[da.sum(),da],davail-da)
