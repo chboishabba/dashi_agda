@@ -38,7 +38,7 @@ def geometry(radii,level,nested_depth=0):
               faces=faces,front_speed_m_s=c,scope='barycentric support graph; area is geometric support weight, not exterior flux')
     return vol,mesh,ne,nf
 
-def cycle(material,cfg):
+def cycle(material,cfg,shadow=None):
     rows,neutral,D,gyro,axis=material
     depth=int(cfg.get('nested_depth',0)); sparse=bool(depth or cfg.get('sparse_operator',False))
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],depth); n=len(vol)
@@ -84,7 +84,13 @@ def cycle(material,cfg):
     terminal_L=diagonal(np.r_[terminal_load,np.zeros(size-ne)],sparse)
     atol=np.asarray(cfg.get('return_atol',[1e-10,1e-10,1e-10,1e-10]),float)
     assert atol.shape==(4,) and np.all(atol>=0)
-    atlas=None
+    atlas=None; residual_trace=[]; residual_bound=0.; work_error_bound=0.;step_index=0
+    if shadow is not None:
+        from solar_evolution_residual import event_affine,residual_step
+        P=shadow['prolongation']; reference=np.asarray(shadow['endpoints'],float)
+        reference_work=np.asarray(shadow['useful_J'],float)
+        if not cfg.get('fixed_horizon',True) or reference.shape!=(horizon*len(src)+tail,P.shape[1]) or P.shape[0]!=size or reference_work.shape!=(len(reference),):
+            raise ValueError('shadow requires same fixed physical endpoint clock')
     for iteration in range(int(cfg['max_cycles'])):
         initial=(x.copy(),pop.copy(),pool.copy(),theta.copy()); total={}
         steps=list(zip(src,heat))
@@ -93,11 +99,16 @@ def cycle(material,cfg):
             terminal=step>=len(src)
             current_L=terminal_L if terminal else L
             before=energy(); costs=np.zeros(5)
+            if shadow is not None:
+                shadow_x=np.zeros(size) if step_index==0 else np.asarray(P@reference[step_index-1]).ravel()
             for i in range(n):
                 analytic_pop_support[i],analytic_pool_support[i]=right_reaction_support(
                     analytic_pop_support[i],analytic_pool_support[i],p[i],0.,q)
                 r,a,pool[i]=reaction(pop[i],pool[i],rows[i]['te']+theta[i],p[i],dt,q)
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
+                if shadow is not None and not exact_trace:
+                    coef,shift=event_affine(pop[i],r,a,birth[i],vol[i],MASS,CHARGE)
+                    shadow_x[sl]=coef*shadow_x[sl]+shift
                 if exact_trace:
                     # Rates are admitted only on the frozen-population chart.
                     # Avoid a numerically rounded current -> velocity -> current
@@ -122,13 +133,20 @@ def cycle(material,cfg):
             A=model['generator']-current_L-S
             x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=cfg.get('retain_sensitivity',False),retain_stage_residuals=exact_trace,atlas_pairs=atlas)
             if cfg.get('retain_sensitivity',False):
-                item=dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude'],incident=float(inc))
+                item=dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude'],incident=float(inc),useful_J=w['loss_channels_J']['load'])
                 if exact_trace:
                     item['midpoint_error']=[str(solve_error+Fraction(v)) for v in w['exact_binary_midpoint_error'][:ne]]
                     solve_error+=Fraction(w['exact_binary_stage_error'])
                     item['state_error']=str(solve_error)
                 sensitivity.append(item)
             channels=w['loss_channels_J']; useful=channels['load']; collision=channels['collision']
+            if shadow is not None:
+                sy,sr=timed_step(shadow_x,A,2*inc*port,dt,mesh,retain_local_midpoint=True,atlas_pairs=atlas)
+                er=residual_step(x,sy,np.asarray(P@reference[step_index]).ravel(),residual_bound,
+                    sr['local_midpoint'],current_L.diagonal(),dt,reference_work[step_index],useful)
+                residual_bound=er['error_bound_candidate'];work_error_bound+=er['work_error_bound_candidate_J']
+                er['time']=[iteration,step]; residual_trace.append(er)
+            step_index+=1
             paid=absorbed/cfg['heater_efficiency']+(costs[0]+costs[3])/q['chemical_input_efficiency']-q['chemical_recovery_efficiency']*costs[4]
             balance=energy()-before+w['outgoing_J']+useful+collision+bath+costs[1]+costs[2]+costs[4]-w['incident_J']-absorbed-costs[0]-costs[3]
             assert abs(balance)<=1e-8*max(abs(before),abs(energy()),w['incident_J'],absorbed,costs[3],1e-30)
@@ -171,6 +189,9 @@ def cycle(material,cfg):
                 strict_campaign_net_J=corrected_net if full_restored else None,
                 terminal_depletion_J=depletion,
                 nested_depth=depth,sparse_operator=sparse,
+                signed_evolution_residual_trace=residual_trace,
+                final_state_error_bound_candidate=residual_bound if shadow is not None else None,
+                total_receiver_work_error_bound_candidate_J=work_error_bound if shadow is not None else None,
                 common_stage_atlas=atlas is not None,
                 support_transition_count=len(support_receipts),
                 support_transition_receipts=support_receipts,
