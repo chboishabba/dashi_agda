@@ -83,6 +83,11 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 
 
+
+## Current proof state — 28 November 2026, Section 16
+
+The actual unit-quaternion conjugation operator qHq* now supplies the signed-word BondBound norm and defect (≤1 and ≤2||q−1||) with the unit tangent-injection premise. The exact chord/angle relation is ||q−1||=2 sin(θ/2), with chord≤θ≤π chord/2; the previous length-74 dexp inverse series enclosure on a chord ball uses the enlarged angle radius πe/2, not the original constants without conversion. Lean #15 `beed8ba5cb08`. Actual source radius, Lie carrier tangent injection, differential equality and selected CMP102 operator remain P0. Rational quaternion checks are not a nonflat selected-source replay. [Section 16](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Current proof state — 28 November 2026, Section 15
 
 The immediate CMP102 task has an actual quaternion principal-angle word estimate and continuous commutator operator. For unit links with principal angles at most e, a word of length at most 74 in the stated angle ball has principal-vector norm at most 74e and hence ||ad_X||≤148e. The nonzero-imaginary principal vector exponentiates to the same unit quaternion; identity is separate. Lean #15 (`c8ecbb886441`) feeds that actual radius to the previous dexp-series two-sided inverse bound. Source angle versus chord-ball identification, actual differential equality/restriction to the Lie carrier and selected H(s(Y0)) are still unpaid. The exact rational quaternion fixtures do not replay the nonflat selected source word. [Section 15](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
