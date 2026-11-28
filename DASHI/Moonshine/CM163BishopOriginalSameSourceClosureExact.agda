@@ -18,6 +18,7 @@ import DASHI.Moonshine.JInvariantBishopCM163E4JetPeriodExact as Jet
 import DASHI.Moonshine.JInvariantBishopCM163TailGuardExact as Guard
 import DASHI.Foundations.BishopChudnovskySignedPeriodNormalizationExact as Norm
 import DASHI.Foundations.BishopChudnovskyNativePeriodProductExact as End
+import DASHI.Foundations.BishopChudnovskyNativeEulerLimitsExact as Euler
 import DASHI.Foundations.BishopChudnovskyNativeRealExact as Native
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopChudnovskyRawCoordinateWeldExact as Raw
@@ -35,8 +36,8 @@ module At (a b s t u v l : ℝ) where
 
       -- The actual existing factorial series limits, not newly chosen H,J1.
       hyperSquare : Reduction.HyperSquare
-      chainZ : (Reduction.X * l) ≃ (Reduction.Y * Reduction.E.J₁)
-      chainSquare : (Norm.six * Reduction.E.H * l) ≃ Reduction.U
+      chainZ : (Reduction.X * l) ≃ (Reduction.Y * Euler.J₁)
+      chainSquare : (Norm.six * Euler.H * l) ≃ Reduction.U
 
       -- Do not replace true apartness by a negated equality or finite scan.
       firstApart : R._≄0 (Disk.A Reduction.p a)
