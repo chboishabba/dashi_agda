@@ -49,7 +49,7 @@ after (suc k) y = after k (Phase.half * y)
 
 afterCong : ∀ k {x y} → x ≃ y → after k x ≃ after k y
 afterCong zero h = h
-afterCong (suc k) h = afterCong k (P.*-congˡ h)
+afterCong (suc k) h = afterCong k (P.*-cong P.≃-refl h)
 
 rootHeight : ∀ k p → after k (height (root k p)) ≃ height p
 rootHeight zero p = P.≃-refl
@@ -86,18 +86,18 @@ meanOuter zero f p = C.≈C-refl _
 meanOuter (suc k) f p = meanOuter k (pair f) p
 
 halfNN : R.NonNegative Phase.half
-halfNN = P.0<x⇒nonNegx Phase.halfPositive
+halfNN = P.0≤x⇒nonNegx (P.<⇒≤ Phase.halfPositive)
 
 halfBound : ∀ M a b → ∣ a ∣ ≤ M → ∣ b ∣ ≤ M →
   ∣ Phase.half * (a + b) ∣ ≤ M
 halfBound M a b ha hb =
   let triangle = P.≤-trans (P.∣x+y∣≤∣x∣+∣y∣ a b) (P.+-mono-≤ ha hb)
       eq = P.≃-trans (P.∣x*y∣≃∣x∣*∣y∣ Phase.half (a + b))
-        (P.*-congʳ (P.nonNegx⇒∣x∣≃x halfNN))
+        (P.*-cong (P.nonNegx⇒∣x∣≃x halfNN) P.≃-refl)
       finish = let open P.ℝ-Solver in solve 1
         (λ m → Κ (+ 1 / 2) ⊗ (m ⊕ m) ⊜ m) P.≃-refl M
   in P.≤-respˡ-≃ (P.≃-symm eq)
-    (P.≤-respʳ-≃ finish (P.*-monoˡ-≤-nonNeg triangle halfNN))
+    (P.≤-respʳ-≃ finish (P.*-monoʳ-≤-nonNeg triangle halfNN))
 
 pairBox : ∀ M f p → Box M (f (left p)) → Box M (f (right p)) →
   Box M (pair f p)
@@ -152,7 +152,7 @@ module At (inputs : Round11.BishopCutset) where
         nn = P.0≤x⇒nonNegx (P.≤-trans (P.0≤∣x∣ (C.re z)) (proj₁ b))
         eq = let open P.ℝ-Solver in solve 0
           (Κ 1ℚᵘ ⊕ Κ 1ℚᵘ ⊜ Κ (+ 2 / 1)) P.≃-refl
-        le = P.*-monoʳ-≤-nonNeg
+        le = P.*-monoˡ-≤-nonNeg
           (P.≤-respʳ-≃ eq (P.+-mono-≤ (proj₁ u) (proj₂ u))) nn
     in P.≤-trans (proj₁ raw) le , P.≤-trans (proj₂ raw) le
 
