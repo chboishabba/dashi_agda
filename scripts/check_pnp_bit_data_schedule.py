@@ -80,6 +80,25 @@ def rref_bits(rows,n,c):
     if any(nonzero(c,get(i,n)) for i in range(p,m)):return None
     return tuple(tuple(value(get(i,j)) for j in range(n+1)) for i in range(p)),tuple(piv)
 
+def span_bits(A,r,c):
+    result=rref_bits(tuple(tuple(a)+(0,) for a in A),r,c)
+    assert result is not None
+    return tuple(row[:-1] for row in result[0])
+
+def chart_bits(A,b,r,c):
+    rr=rref_bits(tuple(tuple(a)+(t,) for a,t in zip(A,b)),r,c)
+    if rr is None:return None
+    rows,piv=rr;free=tuple(i for i in range(r) if i not in piv)
+    c.pay('register_copy',2*r*(1+len(free)))
+    u=[0]*r
+    for i,row in zip(piv,rows):u[i]=row[-1]
+    V=[]
+    for j in free:
+        v=[0]*r;v[j]=1
+        for i,row in zip(piv,rows):v[i]=value(neg(c,code(row[j])))
+        V.append(tuple(v))
+    return tuple(u),tuple(V)
+
 def audit(F,rows,target,x,c):
     """All clause and F3 operations on actual original witness bits."""
     if len(rows)!=len(target) or any(len(r)!=len(x) for r in rows):raise ValueError('shape')
