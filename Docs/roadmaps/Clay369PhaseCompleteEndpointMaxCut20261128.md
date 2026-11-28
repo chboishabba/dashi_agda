@@ -25,8 +25,8 @@ Acceptance: exact local regression is separate from native kernel and original e
 
 ## 28 November max-cut continuation: exact remaining physical/proof leaves
 
-### NS B — actual four-leaf S2b2d1b2 owner, NOT a new abstraction
-The default-branch file DASHI/Physics/Closure/NSTriadKNS2b2d1b2QuantitativePaymentExact.agda already inhabits six same-object source/compiler fields and identifies four UNINHABITED quantitative propositions:
+### NS B — historical S2b2d1b2 four-field route (OPTIONAL, not the mandatory minimum cut)
+The default-branch file DASHI/Physics/Closure/NSTriadKNS2b2d1b2QuantitativePaymentExact.agda already inhabits six same-object source/compiler fields and identifies four UNINHABITED quantitative propositions **for this particular R571/R579/R577 -> R568 Schur adapter only**. These four fields are NOT four indispensable independent prerequisites of the original NS B endpoint: R596/N2e and R723/R726/R727 provide different, more direct physical proof-search reductions:
 1. R571Gate.r571GateAStateDerivativeEnvelopeClosed: actual state derivative envelope for original physical Fourier output.
 2. R579.round579LiteralSignedGramResidualPaid: signed FOUR-sign original-output Gram residual, with phase/orientation retained.
 3. R568Bidi.round577SignedResponseMajorizationClosed: physical signed response majorized by original commutator/Schur output.
@@ -34,7 +34,7 @@ The default-branch file DASHI/Physics/Closure/NSTriadKNS2b2d1b2QuantitativePayme
 
 Existing full consumers: R571 finite second-moment compiler, R579 literal output enumeration and positive part convolution, R568 live commutator owner, R577 compiler, R572/R503 and R854. DO NOT change four false flags based on a finite triad or generic arithmetic. New Lean #123 Synthesis/MillenniumNSSignedSpectralResidualExact.lean gives division-free affine signed-transfer cancellation, secant numerator, quotient if x != z, exact complex cubic source telescope, norm bound and phase flip. Those constrain the R579/R571 input geometry, but do not inhabit the four fields. The original real+conjugate six-mode R734 witness and its *different sampled Gram operator* remain separate; physical phase dependence invalidates phase-blind scalar coercivity and original unrestricted W2.
 
-Next single mathematical product: on the actual R571/R579 ordered Fourier carrier define phase-complete intervals for each coefficient and exact real four-sign Gram source, prove the finite state derivative identity with actual Leray projector and spectral weights, then produce an **integrable majorant independent of cutoff** before attempting R568. A source-level finite identity alone does not imply uniformity.
+If this OPTIONAL historical Schur route is selected, its next mathematical product is to define on the actual R571/R579 ordered Fourier carrier phase-complete intervals for each coefficient and exact real four-sign Gram source, prove the finite state derivative identity with actual Leray projector and spectral weights, then produce an **integrable majorant independent of cutoff** before attempting R568. A source-level finite identity alone does not imply uniformity.
 
 For k != 0 on physical periodic Galerkin modes, the original Leray equation gives the VALID finite source estimate
   |u_hat'_k| <= nu |k|^2 |u_hat_k| + sum_{p+q=k} |q| |u_hat_p| |u_hat_q|,
@@ -84,3 +84,62 @@ Next local gates (no GitHub CI): Python script above; source R734 phase-flip tes
 - P vs NP original binary threshold-clock complement to Agda #1548: scripts/check_pnp_aggregate_binary_clamp_bitclock_20261128.py commit 896d908fe4c1cfcb92570b8310669b3cd364eebf; mathematical induction and exact DAG manifest Docs/roadmaps/PNPBinaryThresholdBitClockActualDAG20261128.md commit 806f7fcfcfa92297b3910fbd696ca48af343520e. Local equivalent exact reference check PASS 15,342 step/prefix instances plus 131,072-bit stream. Native Agda binary-value rewrite remains; not polynomial semantic coverage or complexity separation.
 - YM original source is more advanced than generic CMP102: #1536 already has original 1536-face 12-staple continuous SU(N) Haar one-pair T, SU3 signed baryon negative control, and a true overlapping two-pair mixed Hessian. Source: Docs/physics/YMClayP0OriginalSUNF19TwelveStapleCenterHaarBaryonAndNonfactorization20261123.md. New same-source all-order connected derivative family on original Wilson Cartan slice: Docs/physics/YMClayP0OriginalF19TwoPairConnectedAllOrders20261128.md commit 416321e6c6560dad99c33bf1fe5e26a69d767a8e; scripts/check_ym_original_two_pair_all_mixed_derivatives_20261128.py commit f7b2f17c6ed83542a6d936a65aa620fc2590d198; independent equivalent SymPy local checks PASS 64 mixed derivative patterns symbolically for all rank N plus five rank instances. True next cut is constrained Omega/Lambda/S ordered T retaining linked spectators and adjacent-pair residual, plus cutoff-uniform individually absolute CMP116 rooted spatial shell; NOT another CMP102 A/B parity proof.
 - No native Lean/Agda in current runtime, no CI. New theorem bodies source-written/PENDING_KERNEL; original universal endpoints remain open.
+
+
+## 28 November NS exact-body re-audit CORRECTION — supersedes four-field compulsory reading
+
+Direct source inspection covered dashi_agda master, open Agda #1543 and #1551, and the actual Lean #123 theorem bodies. **The four fields in S2b2d1b2QuantitativePayment are optional historical Schur-route receipts, not the minimal required proof endpoints.** Keep all independent routes available; never conflate a conditional compiler with a physical estimate.
+
+### 1. Previously completed original mathematics/constructors
+
+- R225/R388/R560/R565/R596/R597: on actual physical real Galerkin trajectories with scalar-FTC premises, the coherent Cauchy Gram Q_C >= 0 and H_C >= 0 satisfy Q'_C = 4 F_C - 2 H_C, and hence 4 int_0^T F_C = Q_C(T) - Q_C(0) + 2 int_0^T H_C. The initial smooth mean-zero datum has a cutoff-uniform classical bound Q_C(0) <= 32 ||u0_Fourier||_ell1^4 / nu. This gives a signed LOWER bound on int F, not the required C1 UPPER.
+- R681 p-dot-q original physical signed rate, R682 actual R408/R664/R665 live time and output attachment, R683 vector cross-gradient source, R684 exact input-Laplacian vector, R685 rate-kernel = commutator minus tangent, R687--R689 original rate-lifted cancellation, R690 sum before norms/time, R691 global mixed-product energy; R692--R695 complete nonzero-output four-helicity nested source. Do not rebuild these identities or infer unlifted R568 sign control from the rate lift: exact physical Galerkin seeds 61/63 reverse its sign.
+- R722/R723 already identify combined self+external residue = complete nested orbit = 12 global coherent commutator (integrated before estimation). R726 compiles a supplied signed literal-R406-below-combined estimate. R727 then compiles the existing R410/R414 uniform critical family from R723 + R726 + R645 C2 + cutoff-uniform initial realization. R727 explicitly does not need an R568 forcing-square identification.
+- R571 preferred radial linearization makes its plus remainder zero, reuses A1/A2 Lean radial receipts, G0' scalarisation, G1 local bound; R579 already has literal four-sign original-output enumeration and finite convolution, R577 the conditional Schur compiler. They are NOT unimplemented geometry. The unbounded family/physical signed receipt is distinct.
+- Selected R735 physical W1 has a proved-classical local H1 payment and a small-H1-data all-time subclass, **not** unrestricted periodic B. R734 unrestricted W2 and R820/R823 auxiliary positive reserve are refuted by actual physical Galerkin data; do not revive either or confuse padded R236 with R568.
+
+### 2. R568 direct proof route, precisely reduced
+
+For positive source rate r_a and same-source mixed cells M_a, define (R597 normalisation) Q_C(t)=2 sum_(k != 0,a,b) Re<M_a,M_b>/(r_a+r_b), H_C(t)=sum_(k!=0)||sum_a M_a||^2. Given R388 derivative and real scalar FTC, original R568 C1 upper is equivalent to cutoff-uniform control of Q_C(T)+2 int H_C, for fixed original Q_C(0) ceiling. No separate Gram algebra or rate-bucket reconstruction is missing.
+
+**N2c on Agda #1543 already derives a valid classical negative-order PHYSICAL estimate** for mean-zero periodic Galerkin:
+ Q_(-1)(T)+2 int H_(-1) <= 8 K ||u0||_2^4/nu.
+Here Q_(-1)=sum_(k!=0)|k|^-1 Q_k, similarly H_(-1). It is uniform in cutoff and time but is NOT R568, because the first output-frequency moment is unpaid. If a_j sums positive [Q_k(T)+2 int H_k]/|k| on the jth dyadic output shell, one knows sum_j a_j bounded and needs sup_(C,T) sum_j 2^j a_j bounded.
+
+**N2e on #1551 NSProofControl20260915.md provides the sharper actual fractional-source weld**: for a in [0,1/4], E_a=||Lambda^a u_C||², D_a=||Lambda^(1+a)u_C||², signed T_a=E'_a+2nu D_a and original Gram with output weight |k|^(4a-1), classical product/heat calculus yields
+ Q_a(T)+2 int H_a <= (8 K_a/nu) [E_a(0)^2+2 int E_a T_a].
+At a=0 this is N2c. At a=1/4 the output weight is ONE and it directly supplies R568 C1 if one proves an original cutoff-uniform signed upper for int E_(1/4) T_(1/4) (plus the original initial E_a bound). The paired true Galerkin input permutation cancels affine/energy terms but not the whole nonlinear signed transfer; the 369 phase-flip regression forbids a phase-blind shortcut.
+
+**N2f** already separates low advectors and high-high contributions: the low-frequency paired transfer has a controlled M_R E_a coefficient, and the high-high contribution is bounded by C_a ||u_{>R}||_3 D_a. A globally uniform small high-frequency L3 tail would close the direct fractional C1 estimate by Gronwall, but that all-data uniform tail SMALLNESS is still unproved. N2f is a conditional criterion, not unconditional 3D regularity.
+
+### 3. R568-BYPASS original critical route
+
+R727's own exact typed record CombinedC1C2Inputs requires:
+ (i) R723.CutoffUniformCombinedSelfExternalPayment on the actual R691 original global commutator (OPEN);
+ (ii) R726.CombinedR406Transport, an actual same-trajectory signed inequality literalR406Integral_C(T) <= IntegratedCombined_C(T) (OPEN);
+ (iii) R645.StrictMarginPhysicalProductionData for each cutoff, with positive retained margin (OPEN);
+ plus cutoff-uniform initial critical realization and ordinary analytic/continuum admission.
+Source flags round723CombinedCutoffUniformPaymentClosed=false, round726CombinedToR406TransportClosed=false, round727C2StrictMarginPaymentClosed=false. These are different mathematical payments from the R571 four-leaf Schur route and do not assert R568 identification. Neither C1 nor C2 is closed merely because R722/R723/R727 compilers are source-written.
+
+### 4. C2 geometric recut rather than new leaves
+
+R652/R653 already supply same-trajectory 4F=2 R406+G+H and exactly equivalent C2 sandwich 2 S_delta + G+H <= 4 F (with positive delta and real FTC). R654 additionally has the original upper=collar+remote packet split and low/remote spectral CROSS COERCIVITY. Still false in the actual owner: round654RemoteSpectralCoercivityPaysRemoteBoundaryFlux and round654SignedCollarPaymentClosed. The missing *analytic* work is coercivity-to-physical remote **boundary flux transport** and the signed collar payment. Do not falsely report the spectral decomposition or margin compiler as open.
+
+### 5. Whole-space A is not a blank continuum layer
+
+Master NSClayFacingAPhysicalSameObjectCutExact.agda source-writes the near-origin saturation analytic estimate and high-frequency scale-relative curvature bound (both status true) and constructive Bishop positive rational lower-floor witnesses for the original positive heat inverse. It explicitly marks the real Euclidean original-kernel same-object attachment and finite-energy convolution majorant identification false. On original physical midpoint xi with d=eta-xi/2, r_eta+r_(xi-eta)=nu|xi|²/2+2nu|d|²; R290 R541 are finite periodic donors but Euclidean field currencies must remain distinct. The existing A2-midpoint transversality sector already pays local inner Delta<=M|xi|^(3/4) bound, while the genuinely signed exterior sector, actual continuum measure/low-frequency weld and arbitrary-data global time continuation remain. Lean #123 finite-horizon critical_time_exists, euclidean_time_exists and reference_rate_no_spectral_gap are CONDITIONAL consumers given an original smooth solution on the required horizon, not survival producers.
+
+### 6. Unforced breakdown profile versus forced released C/D
+
+Lean #123 proofs/alpoge-ns-lean433/UnforcedAdmission.lean has the actual original Alpöge–Buckmaster *conditional* unforced source: from_profile and from_original_cell_condition (seven source objects plus original 15-field CellSystemCondition) would imply original A/B breakdown and refute positive A/B. Existing source-shaped H19 signed lattice, finite rational cell-node builder, reverse-solved scalar certificate budget, Hilbert weak inverse/adjoint and bordered actuator are already written. Still missing original genuinely nonzero continuum similarity profile, actual full weighted physical enclosures, global adjoint/actuator, actual original fifteen-field certificate and independent pinned kernel/semantic acceptance. The reported November 20 original numerical certificate is not present in inspected sources. Do not call conditional profile a proof of unforced breakdown or positive A/B.
+
+Separately, official OpenAI forced C/D upstream source and same-target Lean main bridge are already source-written, and neither needs A/B's R568/R653 estimates. Literal nested pinned native build, transitive axiom audit and mathematical statement/fidelity review remain independent. Distinguish official C/D labels from the R568/R653 local C1/C2 and selected R853/R854 finite C1/C2.
+
+### New corrected decision
+
+Do not build the four historical R571 fields in series by default. Parallel genuine P0 NS B choices:
+  B-P1: original R596/N2e fractional signed int E_(1/4) T_(1/4) uniform bound -> R568 C1, together with independent R653 strict physical C2;
+  B-P2: original R723 cutoff-uniform combined commutator + R726 same-source R406 signed transport + R645 C2 -> already implemented R727 critical barrier;
+  B-P3: existing scale-critical polynomial/Euclidean finite-reference continuation if it genuinely certifies the full all-data horizon (not merely late-time existence).
+For NS A pursue actual R3 same-kernel/majorant/euclidean exterior and all-data regularity or original unforced certificate independent of B's periodic lattice.
+Source-written/finite classical derivation/KERNEL/official endpoint remain distinct, no CI or native acceptance promoted.
