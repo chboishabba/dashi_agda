@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalThreeWingOrderWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product using (_×_; proj₁; proj₂)
 open import Data.Integer.Base as Z using (+_; +≤+)
 open import Data.Nat.Base using (z≤n)
 open import Data.Rational.Unnormalised as Q using (0ℚᵘ; 1ℚᵘ; _/_; *≤*)
@@ -28,6 +29,7 @@ import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailGeometryExact as Ta
 import DASHI.Physics.YangMills.YMClayCMP102OriginalShiftedWingOrderExact as Wing
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGeometricSqueezeReceiverExact as Rate
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailToLimitExact as Limit
+import DASHI.Physics.YangMills.YMClayCMP102OriginalGFiniteLimitTransportExact as Original
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 
 -- Every source term here is the LITERAL original A/B shifted Cauchy
@@ -75,9 +77,9 @@ originalPositiveTailFromThreeActualWings X wing n =
     A = R.- (R._*_ X (Tail.originalAWing X (suc n)))
     B = Tail.originalOmittedLinearB X n
     C = R._*_ (R._*_ X X) (Tail.originalBWing X (suc n))
-    hA = (wing n).proj₁
-    hB = (wing n).proj₂.proj₁
-    hC = (wing n).proj₂.proj₂
+    hA = proj₁ (wing n)
+    hB = proj₁ (proj₂ (wing n))
+    hC = proj₂ (proj₂ (wing n))
     hSum = P.≤-trans
       (Wing.originalSignedCauchyTailTriangleBound X n)
       (P.+-mono-≤
@@ -105,7 +107,7 @@ originalGZeroFromThreeActualWings :
   ∀ X (inside : R._≤_ (R.∣ X ∣) Half.bishopQuarter) →
   Limit.OriginalZeroCountOrder X →
   OriginalThreeWingOrder X →
-  R._≃_ (Limit.Original.originalG X inside) R.0ℝ
+  R._≃_ (Original.originalG X inside) R.0ℝ
 originalGZeroFromThreeActualWings X inside hzero hwing =
   Limit.originalGZeroFromActualFiniteTailOrder
     X inside hzero
