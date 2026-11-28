@@ -1,0 +1,98 @@
+# Engineered gravity — whole-programme geometry-first closure campaign
+**29 November 2026. Controlling recut; supplements and supersedes serial-only TOV priorities.**
+
+## Executive outcome
+**Nothing here establishes a physical antigravity device or a general stability theorem.** This roadmap resolves the campaign into finite, independently checkable *source-identical* proof edges. A construction of the desired inverse target by adjustable coefficients is NOT proof that any material/device realizes those coefficients. Symbolic source, physical source, full PDE, and native execution are separately payable obligations.
+
+### Evidence authority and audited sources
+Current checked PR heads at audit:
+- [#1547](https://github.com/chboishabba/dashi_agda/pull/1547) head `277eb9f9cab0875f85361897002134ad8a9b3c9a` before this cut. Master comparison: master `c67d5d0e51f98d6171e77f440ddacc717a3201d8`, common ancestor `c36aa4a423091063bb3741cc74044726279b47c4`, 701 commits ahead and 65 behind, 300 returned filenames. This is **not** an exhaustive master signature audit or a recommendation to rebase a live branch.
+- [#1554](https://github.com/chboishabba/dashi_agda/pull/1554) `d4f0f47b4180029a6c067ce6f0d5076666ecc0f8`: BR230/232/233 original G4 primitive/evolution, BR260/262 metric-jet correction, BR263/267 boundary/SBP/incoming, BR268/273 curved-frame stress and exterior-square inversion, BR273/276 Maxwell ADM and marked cube. Actual source bodies checked. The restricted or incoming full-grid traces **do not** constitute an independent physical causal exterior.
+- [#1537](https://github.com/chboishabba/dashi_agda/pull/1537) `e5658091ce9a70ded26207ec15459482f3617388`: original field/source boundary and conservation owner; metadata, not a fresh exhaustive source replay this cut.
+- [#1555](https://github.com/chboishabba/dashi_agda/pull/1555) `be212eec07c0475117c8985f08fdd7a21e4907e7`: original MHD source owner; do not fabricate full Maxwell stress or calibration.
+- [#1527](https://github.com/chboishabba/dashi_agda/pull/1527) `d19a9525968ec2fee92a6e3f73027df05396d497`: F8 full nonlinear source donor; not identical to TOV or G3.
+- [#1291](https://github.com/chboishabba/dashi_agda/pull/1291) `c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04`: indexed composition and non-promotion. Very large changed-file inventory can be capped; do not claim absence from capped lists.
+- Master literal bodies checked: `check_kk_same_action_stress.py` blob `edeaa4fe11313ad0611cb741883366f0ffa902c3` (actual action, Ward and switching work); `check_kk_casimir_bidi_consumer.py` `d997847e2206f1f84a4be522369c8ff8f49e4897` (conditional stabilized radion + graviphoton/Maxwell distinction); `check_oct369_p024_dynamic_controller_ward.py` `c83dfb76bb5b3a2bb791c34ea87875ffa00d2e63` (dynamical controller exchange).
+- #1547 selected bodies checked: original TOV second shape and two-face canonical momentum, original nonlinear reciprocal shell, G3 harmonic receiver, F8 quadratic Einstein and original same-clock sidecar. Full native artifacts are not locally present.
+
+## Shared terminal contract and proof objects
+**S0 source:** original single action, admitted state, stress and exchange Ward, geometry, unit scale, attribution and source identity. No independently fitted `T_{ab}` and receiver map.
+**S1 constraints:** Hamiltonian/momentum/Gauss plus gauge/embedding; compatible initial and interface jets; York/Schur solve with the *same* action.
+**S2 boundary:** actual normals, two-sided induced metric, full Israel/GHY/corner, supported controller and exterior resolvent or causal boundary data. Trace must be controlled in the **correct graph domain**, not an unavailable bulk form norm.
+**S3 evolution:** regularity, subsidiary constraints, positivity or actual counterexample, nonzero source, signed energy/entropy, stability/continuation, causal support, dynamic interface.
+**S4 receiver:** identified same-event congruence/clock; proper support acceleration vs neutral free-fall vs tidal/clock shift and pickup; use signed observer data, including what remains unchanged.
+**S5 acceptance:** original native history, source hashes, independent continuum/interval/no-go witnesses, empirical source and calibration where necessary. A source file without a run is not a receipt; a finite run is not a continuum theorem.
+
+Each candidate is a row of an **inverse/forward commuting square**:
+`physical source -> field/evolution -> (source-ID, receiver-ID, signed observation)` versus `desired observation -> admissible inverse -> physical source`. Require both paths return the same source object, boundary/clock, units and signed output. If image of forward map excludes target, emit a left-null or energy witness; do NOT change target or invent a gain.
+
+## Executable dependency ledger
+- `Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json` enumerates twelve lanes, original local owners, **36 named unpaid obligations**, stage lists, and overlapping owner interfaces. External PR donors are separate and must not be misreported as present on #1547.
+- `scripts/check_engineered_gravity_proof_dag.py` validates paths/lanes/stages and emits source hashes or `MISSING` with a nonzero exit; `--execute --repo REPO --owner scripts/owner.py` performs one explicitly selected **original** checker with a 90s cap, retaining exit and source/output hashes.
+- `scripts/test_engineered_gravity_proof_dag.py` provides exact manifest admission and missing-source/non-promotion negative controls.
+- Default `python scripts/check_engineered_gravity_proof_dag.py` is inventory-only; success means valid bookkeeping, **not lane proof**. Reproducible local source-equivalent Python executed 12/12 lane schema and 4/4 malformed-claim controls. Full repo owner replay outstanding.
+
+## Cross-lane geometric welds to reuse rather than re-derive
+
+| Weld | Actual constructor | Consumers and exact unpaid step |
+|---|---|---|
+| Covariant source Ward | master `check_kk_same_action_stress.py`; OCT369 P024 | A/C/E/F/I: replace abstract (J,K) with original microscopic measured source/drive/support and actual metric variation |
+| Reciprocal static transfer | `check_engineered_gravity_reciprocal_action_shell.py`; compliant nonlinear shell | A/I: same-action physical susceptibility, exterior Earth source, branch enclosure, tensor gravitational leakage |
+| Admissible radion stabilization | master `check_kk_casimir_bidi_consumer.py`; `check_kk_radion_spherical_match.py` | C: full quantum source/earth boundary/stress, not merely example one-loop vacuum |
+| Matter/Einstein local Hessian | `check_tov_covariant_matter_hessian.py`, `check_tov_einstein_harmonic_jets.py` | D/G/J: full constrained polar free metric, weighted moving surface and EH+GHY/corners, not two-parameter positive Ritz |
+| Global York, ADM inverse | `check_tov_global_york_axial_shear.py`, `check_tov_conformal_monopole_inverse.py` | D/G4: compatible full nonlinear source and free conformal metric, generated monopole and dynamical boundary |
+| Two-face action/current | `check_tov_two_face_canonical_second.py`, `check_f8_two_level_israel_trace_closure.py` | D/G/J: actual coupled second order boundary jets and correct energy normal |
+| Curved/incoming energy | #1554 BR263/267, BR273 Maxwell ADM | B/G/J/G3/G4: source-identical physical boundary plus interface geometry; no surrogate zero-extension |
+| Original F8 native same-clock | `run_f8_p0_integrated_local.py`, `check_f8_p0_original_same_clock_state.py` | J: original checkpoint with instrumented t12 sidecar and 96 signed outputs; do not relabel terminal lookahead |
+| G3 invariant observer | `check_engineered_gravity_g3_harmonic_receiver.py` | B/G3: compatible original harmonic constraints and same-event physical causal domain |
+| G4 material primitive | #1554 BR230/233 and BR269 | G4: physical York data and fully coupled Einstein–RMHD, not just fixed-metric primitive parity |
+
+## Concrete exact remaining lemmas/welds by lane
+**A:** A1 true matter Hamiltonian -> gauge-covariant (J^mu,T_{mu
+u}), A2 physical scalar/tensor interface with Earth incident mode and neutral body, A3 calibrated same-apparatus signed 1g inverse and energy/viability. Existing reciprocal transfer and scalar-only 25% conditional ceiling remain scoped, not universal.
+**B:** B1 original time-dependent same-event KK/base cone comparison and closed fibre winding, B2 actual source/retarded geodesic with exterior physical boundary, B3 receiver proper-time and finite-aperture/energy convergence. Frozen G3 path cannot be paid as evolved causal shortcut.
+**C:** C1 consistent radion EFT source and stabilization, C2 finite Earth/material profile and tensor+scalar Einstein response, C3 fifth-force bounds, source mass/energy and independent clock/tide.
+**D:** D1 original full polar/axial constrained free metric and material Hessian in physical weighted graph domain, D2 actual second-order Einstein bulk/interface solution with original surface source and GHY/corner, D3 nonlinear branch/energy sign + independently reconstructed receiver. A positive selected Ritz is not a spectral gap.
+**E:** E1 microscopic OCT/SC Hamiltonian same state/stress/EM current, E2 actual controller+Maxwell+metric signed work, E3 reaction and independent gravimetric null calibrated to external source.
+**F:** F1 original Maxwell/MHD apparatus work and full (T), F2 retarded second-order Einstein metric static/radiative projection, F3 independent neutral receiver with same drive.
+**G:** G1 physical moving Israel boundary source and metric-compatible chart, G2 curved differentiated incoming boundary energy and corner, G3 globally matched stress + invariant receiver and viability.
+**H:** H1 complete apparatus force/reaction/support and heat, H2 independent neutral free-fall/clock/tide, H3 uncertainty/force vs gravity rejection.
+**I:** I1 same controller/orientation physical action, I2 coercive nonlinear source branch with independently enclosed error, I3 actual Einstein response/support stress and signed total work.
+**J:** J1 original hash-pinned native A0/A1/C0/C1 same-clock history, J2 original quadratic Einstein scalar/vector/TT and moving Israel, J3 receiver 96 signed outputs, causal-null and independent continuum. No generic positive socket.
+**G3:** G3.1 constraints and physical outer domain, G3.2 harmonic reduced->full Einstein subsidiary propagation, G3.3 invariant same-event receiver/independent convergence.
+**G4:** G4.1 actual matter/metric constraint-compatible York initial slice, G4.2 nonlinear coupled Einstein-RMHD flux/entropy/subsidiary evolution, G4.3 invariant receiver and certified convergence.
+
+## New original TOV second-order boundary Cauchy inverse (direct implementation)
+`scripts/check_tov_second_order_junction_inverse.py` uses original
+(f=1-lambda(2+lambda)(r^2/3-r^4/5)),
+(F=1-2M/r), (M=lambda(lambda+2)/15),
+(n=rlambda P/f), (n_{mathrm{ext}}=M/(r^2F)).
+For either (D=f-F) or (D=n-n_{mathrm{ext}}), background (D(1)=D'(1)=0), (D''(1)\ne0).
+Writing physical metric first and second **jump functions** as (a(r),b(r)), the common moved radius (r_b=1+arepsilonphi+arepsilon^2psi/2) gives
+[
+ [q]^{(1)}=a(1),\quad [q]^{(2)}=b(1)+2phi a'(1)+phi^2 D''(1).
+]
+For the radial derivative,
+[
+ [q_r]^{(1)}=a'(1)+phi D''(1),\quad
+ [q_r]^{(2)}=b'(1)+2phi a''(1)+phi^2D'''(1)+psi D''(1).
+]
+Consequently first value and normal matching require (a(1)=0), (a'(1)=-phi D''(1)). **Second value matching then REQUIRES** (b(1)=+phi^2D''(1)); second normal matching REQUIRES
+(b'(1)=-2phi a''(1)-phi^2D'''(1)-psi D''(1)).
+These are *genuinely forced boundary Cauchy data* in the selected common-coordinate radial derivative model, not solved bulk fields or automatic Israel matching. For `f`, (D''(1)=2lambda(lambda+2)), (D'''(1)=4lambda(lambda+2)). For (n), the actual rational original expressions are evaluated exactly.
+Local SymPy execution of equivalent implementation passed. **Do not misidentify common-coordinate radial derivatives with the full physical second fundamental form**; finish the normal/embedding transformation, source mass and stress constraints, GHY/corners. No direct proof of existence.
+
+### Coarse-to-fine roadmapped implementation order
+**Cut W0 (this commit):** exact audit / named lane dependency DAG and necessary original TOV second Cauchy data, local symbolic gates + negative controls.
+**Cut W1 (joint):** source-identity boundary ABI: compile E0 original (T,J,gamma,K) from each owner, verify 2-face action and Ward with changed boundary; prove/obstruct original free-metric and support terms; attach #1554 BR266/267 only in matching geometry.
+**Cut W2 (joint):** source-admissible constrained York initial data for D/J/G3/G4 and A/I scalar–tensor physical shell; include independent metric & material variations, physical source equations.
+**Cut W3 (joint):** nonzero coupled evolution (G3/G4/F8 + scalar shell), constrained boundary energy and receiver signatures with same clock/normal, certified residual & provenance.
+**Cut W4 (joint):** reverse target 1g/shielding/shortcut/repulsion against feasible source states and real finite budgets; emit theorem or exact no-go, not imposed target. Independent physical measurements and bounds are not replaceable by SymPy.
+
+## Execution / acceptance
+Run locally on a full literal checkout, no CI:
+`python scripts/test_engineered_gravity_proof_dag.py`;
+`python scripts/check_engineered_gravity_proof_dag.py --repo . --output .local-engineered-gravity/proof-dag.json`;
+`python scripts/check_tov_second_order_junction_inverse.py`;
+`python scripts/run_engineered_gravity_endpoint_local.py --timeout 90 --resume`.
+Original F8 native run remains separately hash-pinned and must use actual instrumented same-time sidecar. The manifest's `INVENTORY_ONLY` is **not PASS of the 12 lanes**. Missing source returns BLOCKED. Local repository clone unavailable here (DNS), so literal committed-source replay and aggregate/native acceptance remain OPEN. No source/boundary assertion promoted by unexecuted code.
