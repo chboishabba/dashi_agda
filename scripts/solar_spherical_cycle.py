@@ -4,7 +4,7 @@ Uses diagonal Hodge candidate; full consistent mass remains reference.
 """
 import numpy as np
 from scipy.constants import c
-from solar_spherical_material_weld import construct
+from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_spherical_whitney import shell_mesh
 from solar_physical_causal import reaction,MASS,CHARGE
 from solar_support_transition import support_transition
@@ -78,6 +78,7 @@ def cycle(material,cfg):
     terminal_L=np.diag(np.r_[terminal_load,np.zeros(size-ne)])
     atol=np.asarray(cfg.get('return_atol',[1e-10,1e-10,1e-10,1e-10]),float)
     assert atol.shape==(4,) and np.all(atol>=0)
+    atlas=None
     for iteration in range(int(cfg['max_cycles'])):
         initial=(x.copy(),pop.copy(),pool.copy(),theta.copy()); total={}
         steps=list(zip(src,heat))
@@ -108,8 +109,10 @@ def cycle(material,cfg):
             absorbed=dt*p.sum(); bath=absorbed-cap@(theta1-theta); theta=theta1
             nu=rates([dict(r,te=r['te']+mid[i]) for i,r in enumerate(rows)],neutral)
             model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),vol,pop*CHARGE**2/MASS,nu,gyro,axis)
+            if cfg.get('common_stage_atlas',False) and atlas is None:
+                atlas=structural_stage_atlas(model,mesh)
             A=model['generator']-current_L-S
-            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=cfg.get('retain_sensitivity',False),retain_stage_residuals=exact_trace)
+            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=cfg.get('retain_sensitivity',False),retain_stage_residuals=exact_trace,atlas_pairs=atlas)
             if cfg.get('retain_sensitivity',False):
                 item=dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude'],incident=float(inc))
                 if exact_trace:
@@ -146,6 +149,7 @@ def cycle(material,cfg):
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
                 strict_campaign_net_J=corrected_net if full_restored else None,
                 terminal_depletion_J=depletion,
+                common_stage_atlas=atlas is not None,
                 support_transition_count=len(support_receipts),
                 support_transition_receipts=support_receipts,
                 fixed_support_campaign=not bool(support_receipts),
