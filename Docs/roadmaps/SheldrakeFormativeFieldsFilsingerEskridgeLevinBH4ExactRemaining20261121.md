@@ -1,5 +1,16 @@
 # Formative fields × source work × Filsinger/Eskridge × Levin/BH4 — exact remaining phase roadmap
 
+## 2026-11-28 — exact committed local SymPy parity and strict inverse four worlds
+
+[Native scattering/population exact SymPy checker](../../scripts/check_solar_native_contract_sympy.py) 2099d8495d6b6ec1435c2f88e8b4380efaa01fe5 was executed from exact local bytes in /mnt/data/solar_maxcut/check_native_contract_sympy.py; exact committed Git blob SHA **dfce1d6a442251ffe27446bbadeaabae8bdd6c1b** MATCHED the local computed git-blob hash. SymPy 1.14 exit 0, scattering identity (including nonzero state), load derivative, zero-state matching root, exact Cayley power identity, positive population mixing and non-dissipative negative control passed. These are EXACT algebraic source-stage contracts, not original spherical campaign acceptance.
+
+[Constrained reverse source](../../scripts/solar_spherical_constrained_reverse.py) f291309b44c6 and bc90b32f9ac5 separately optimize sampled heater/load directions with four original-state restoration constraints, strict full-forward replay, and selected same-layout four-world source on/off and heater on/off audit. Strongest-passive GLOBAL certification remains false, and conditional/no restored candidates remain honest outputs.
+
+[Native spherical acceptance fixture](../../scripts/check_solar_spherical_reverse_integration.py) 1776d61f72a1 and 2f08647d1042 now checks four endpoint JVP components, squared original return JVP, work derivative and separate strict-state restoration. It is COMMITTED_PENDING_NATIVE_EXECUTION; no complete Git checkout in local filesystem and direct network clone fails DNS, so no native 24-cell PASS is claimed.
+
+Actually rerun local scripts: material JVP errors at h 1e-3/1e-4/1e-5 = 7.593648765e-10/7.077755049e-12/2.792364950e-11, 12-group exact two-stage SymPy PASS, one-cell nonlinear multi-step mock net and EM/thermal JVP PASS (population/reservoir finite differences show absolute cancellation at h 1e-5). No CI, Agda or Lean. Physical original-source work, original hardware identity, positive net and continuum Maxwell interpretation remain OPEN.
+
+
 ## 2026-11-28 — original-state constrained inverse search and verification scope
 
 **Committed source:** [spherical constrained inverse](../../scripts/solar_spherical_constrained_reverse.py), commit f291309b44c6, optimizes a positive heater template and a nonnegative receiver template under a common campaign-wide energy/load budget. It consumes the existing physical fixed-support campaign JVP to provide objective and FOUR independent original-state restoration constraint derivatives. Active and passive are separately optimized. Every accepted candidate must be replayed through original spherical cycle(), with strict_campaign_net_J present. It returns SAMPLED_RESTORED_CANDIDATE or NO_RESTORED_WITNESS, and never claims strongest-passive global certification or positive physical extraction.
