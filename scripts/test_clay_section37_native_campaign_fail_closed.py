@@ -36,7 +36,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
             sorted(k for k in campaign.BRANCHES),
             ["BSD_HODGE", "NS", "PNP", "RH", "YM"])
         self.assertEqual(sum(len(paths) for _, paths in
-                             campaign.ROOTS.values()), 19)
+                             campaign.ROOTS.values()), 22)
 
     def run_campaign(self, extra_pins):
         with tempfile.TemporaryDirectory() as tmp:
@@ -99,75 +99,104 @@ class NativeCampaignFailClosed(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIsNone(data)
 
-    def test_exact_nineteen_native_roots_plus_rh(self):
+    def test_exact_twenty_two_native_roots_plus_rh(self):
         campaign = load_runner()
-        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 19)
-        self.assertIn("Clay39NativeAcceptanceV1",
+        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 22)
+        self.assertIn("Clay40NativeAcceptanceV1",
                       inspect.getsource(campaign))
 
     def test_lean_native_axioms_allowlisted(self):
         runner = load_runner()
-        source = "#check A.proof\\n#print axioms A.proof\\n"
+        source = "#check A.proof\n#print axioms A.proof\n"
         ok, explanation = runner.lean_axioms_trusted(
-            "A.proof depends on axioms: [propext, Classical.choice]\\n",
+            "A.proof depends on axioms: [propext, Classical.choice]\n",
             source)
         self.assertTrue(ok, explanation)
 
     def test_lean_native_axioms_missing_is_failure(self):
         runner = load_runner()
         ok, reason = runner.lean_axioms_trusted(
-            "compilation succeeded", "#print axioms A.proof\\n")
+            "compilation succeeded", "#print axioms A.proof\n")
         self.assertFalse(ok)
         self.assertIn("missing", reason)
 
     def test_lean_native_axioms_unsafe_is_failure(self):
         runner = load_runner()
         ok, reason = runner.lean_axioms_trusted(
-            "A.proof depends on axioms: [propext, sorryAx]\\n",
-            "#print axioms A.proof\\n")
+            "A.proof depends on axioms: [propext, sorryAx]\n",
+            "#print axioms A.proof\n")
         self.assertFalse(ok)
         self.assertIn("nontrusted", reason)
 
     def test_lean_native_axioms_duplicate_is_failure(self):
         runner = load_runner()
-        line = "A.proof depends on axioms: [propext]\\n"
+        line = "A.proof depends on axioms: [propext]\n"
         ok, reason = runner.lean_axioms_trusted(
-            line + line, "#print axioms A.proof\\n")
+            line + line, "#print axioms A.proof\n")
         self.assertFalse(ok)
         self.assertIn("ambiguous", reason)
 
     def test_lean_native_axioms_all_declared_consumers_must_pass(self):
         runner = load_runner()
-        source = "#print axioms A.first\\n#print axioms A.second\\n"
+        source = "#print axioms A.first\n#print axioms A.second\n"
         ok, reason = runner.lean_axioms_trusted(
-            "A.first depends on axioms: [propext]\\n",
+            "A.first depends on axioms: [propext]\n",
             source)
         self.assertFalse(ok)
         self.assertIn("A.second", reason)
 
     def test_lean_quoted_exact_axiom_declaration(self):
         runner = load_runner()
-        src = "#print axioms DASHI.NS.receipt\\n"
-        log = "'DASHI.NS.receipt' depends on axioms: [propext]\\n"
+        src = "#print axioms DASHI.NS.receipt\n"
+        log = "'DASHI.NS.receipt' depends on axioms: [propext]\n"
         ok, reason = runner.lean_axioms_trusted(log, src)
         self.assertTrue(ok, reason)
 
     def test_lean_quoted_wrong_declaration_rejected(self):
         runner = load_runner()
-        src = "#print axioms DASHI.NS.receipt\\n"
-        log = "'DASHI.NS.fake' depends on axioms: [propext]\\n"
+        src = "#print axioms DASHI.NS.receipt\n"
+        log = "'DASHI.NS.fake' depends on axioms: [propext]\n"
         ok, reason = runner.lean_axioms_trusted(log, src)
         self.assertFalse(ok)
         self.assertIn("missing", reason)
 
     def test_lean_multiple_all_declarations_quoted(self):
         runner = load_runner()
-        src = ("#print axioms DASHI.NS.first\\n"
-               "#print axioms DASHI.NS.second\\n")
-        log = ("'DASHI.NS.first' depends on axioms: [propext]\\n"
-               "'DASHI.NS.second' depends on axioms: [Classical.choice]\\n")
+        src = ("#print axioms DASHI.NS.first\n"
+               "#print axioms DASHI.NS.second\n")
+        log = ("'DASHI.NS.first' depends on axioms: [propext]\n"
+               "'DASHI.NS.second' depends on axioms: [Classical.choice]\n")
         ok, reason = runner.lean_axioms_trusted(log, src)
         self.assertTrue(ok, reason)
+
+    def test_long_native_stdout_preserves_full_axiom_source(self):
+        runner = load_runner()
+        import sys
+        code = (
+            "print('x' * 7000)\\n"
+            "print('A.proof depends on axioms: [propext]')\\n"
+        )
+        # Test that full stdout is captured for trusted audit even
+        # though the serialized receipt uses a bounded tail.
+        result = runner.call([sys.executable, "-c", code], Path.cwd(), 10)
+        self.assertEqual(result["exit"], 0)
+        self.assertGreater(len(result["_stdout_full"]), 7000)
+        self.assertLessEqual(len(result["stdout_tail"]), 5000)
+        ok, reason = runner.lean_axioms_trusted(
+            result["_stdout_full"], "#print axioms A.proof\\n")
+        self.assertTrue(ok, reason)
+
+    def test_long_native_stdout_cannot_hide_duplicate_report(self):
+        runner = load_runner()
+        output = (
+            "A.proof depends on axioms: [propext]\\n" +
+            "x" * 7000 + "\\n" +
+            "A.proof depends on axioms: [sorryAx]\\n"
+        )
+        ok, reason = runner.lean_axioms_trusted(
+            output, "#print axioms A.proof\\n")
+        self.assertFalse(ok)
+        self.assertIn("ambiguous", reason)
 
     def test_wrong_branch_fails_closed(self):
         campaign = load_runner()
