@@ -143,3 +143,109 @@ Do not build the four historical R571 fields in series by default. Parallel genu
   B-P3: existing scale-critical polynomial/Euclidean finite-reference continuation if it genuinely certifies the full all-data horizon (not merely late-time existence).
 For NS A pursue actual R3 same-kernel/majorant/euclidean exterior and all-data regularity or original unforced certificate independent of B's periodic lattice.
 Source-written/finite classical derivation/KERNEL/official endpoint remain distinct, no CI or native acceptance promoted.
+
+
+## 28 November further NS mathematical max-cut — R726 original physical no-go and compensated exact native closure
+
+**This further exact-body re-audit supersedes the earlier provisional R726 ZERO-defect option as a plausible universal P0 producer.** R723 and R726 remain distinct from original unlifted R568. The original same-trajectory algebra R652 states 4F_unlifted=2R406+G_self+H_selfFlux; the real original combined R722/R723=12 global R691 coherent commutator. The **new Agda #1551 original-typed theorem**
+`NSTriadKNR650CombinedToLiteralR406Round726Exact.actualSignedDefectNumeratorIdentity`
+takes the same R408 velocity, same cutoff and time, and has *no external physical inequality* premise:
+
+  2*(R406_integral - R723_integratedCombined)
+   = 4*R568_unlifted_F_integral - G_self_integral
+     - H_selfFlux_integral - 2*R723_integratedCombined.
+
+This exposes exactly the signed quantity required by the R726 comparison, preserving zero-input spectators, viscosity and original signed R568/R687 distinction. No additional M2/Schur construction is necessary.
+
+**Physical finite source countercontrol new and ACTUALLY RUN exact at current Git bytes.**
+`scripts/check_ns_r726_signed_defect_physical_source_exact_20261128.py`
+blob `804278ed0189ba796a2275d1b9354710471deb58`, SHA256
+`aa7bc01df75e7a6bebdd2f25449c6887f659f1d497d7ba11f8cb1de7513159be`,
+git hash-object byte-identical to locally executed script. It uses EXACT
+SymPy Q(i,sqrt2,sqrt3) and the FULL 316 ordered source occurrences on all
+26 nonzero C=1 outputs, including 52 zero-input incidences (they contribute
+zero to physical R568 M/D, but are not dropped from the original count).
+Velocity input coefficients are explicitly listed in the script; all are
+divergence-free and conjugate-real. Compute original -iP_k(u_p.q)u_q with the
+full physical cutoff, genuine helicity P±, complete R225/R388 double cells and
+double forcing, original positive r=ν(|p|²+|q|²) and all ordered pair weights.
+Independent checks exactly satisfy original R652 4F=2R406+4F_diag,
+R687 liftedFull=8 coherentWork, and the new R726 numerator identity.
+
+The physical instantaneous signed defect D=R406−Combined is not sign-definite:
+- Original witness A, ν=1:
+  D=−26048/9−(578/3)sqrt2+(1288/3)sqrt3 < −18320/9 <0.
+- Original witness B, ν=1:
+  D=−4267/9+(385/4)sqrt6+(2113/9)sqrt3+(12401/12)sqrt2
+  >20135/36>0.
+- Same witness A, viscosity ν=1/10:
+  D=41974/9−(2054/3)sqrt2−(2024/3)sqrt3
+  >17506/9>0.
+
+The strict inequalities use only 0<sqrt2,sqrt3<2 and 1<sqrt2
+and nonnegative sqrt6; they are exact algebraic signs, NOT float heuristics.
+At the same initial Fourier velocity, original R406 instantaneously scales
+as 1/ν and the R723 coherent combined source is independent of ν. Lean #123
+`Synthesis/NavierStokesR726SignedDefectViscosityNoGoExact.lean` proves this
+real threshold BIDI and that a positive pair has viscosities of opposite
+defect sign; `Synthesis/NavierStokesR726PhysicalRadicalSignCertificatesExact.lean`
+proves the actual strict radical inequalities from the displayed source
+coefficients. The finite original Galerkin ODE has a smooth local trajectory
+and the signed integrand is continuous in time, so a positive initial
+defect persists over a sufficiently short genuine interval. Therefore the
+unqualified ALL-physical-trajectories R726 zero-defect integrated comparison
+is a FALSE universal shortcut in its intended physical-real semantics.
+The native Agda rational fixed-field source does not yet admit the actual
+sqrt2/sqrt3 helical values as original proof terms; no native kernel
+counterexample or continuum witness is claimed.
+
+**Important 369/zero/sign observation:** N(u) is quadratic, original M(u)
+is quadratic and original D(u) is cubic, so R406, combined and their signed
+defect are quintic in u at each fixed viscosity. Under GLOBAL original
+velocity phase inversion u→−u, the defect changes sign although energy,
+enstrophy and the quadratic physical helicity are unchanged. A positive
+signed upper cannot be inferred from these coarse even observers alone:
+actual full modal phases, time ordering and original rates are indispensable.
+The sign is not a refutation of existence/regularity or of a genuinely
+cutoff-uniform time-dependent compensated bound.
+
+**Compensated original terminal path is now source-written, not just a plan:**
+R726 `CompensatedCombinedR406Transport` has an ACTUAL time-only
+`signedDefectCeiling` and proves
+`compensatedCombinedBuildsExistingR410` by using R723's same-object
+combined payment plus this explicit discrepancy. R727's native
+`CompensatedC1C2Inputs`, `compensatedR410Cancellation`,
+`compensatedUnifiedCriticalData`, `compensatedUniformCriticalFamily`,
+`compensatedUniformCriticalBarrier` and
+`compensatedC2RetainedMarginPositive` reuse the existing R414/R645
+consumers, and do not insert false R568→R687 sign transfer.
+
+**Parallel already-derived fractional path now source-written in Lean:**
+`Synthesis/NavierStokesFractionalR568EndpointWeldExact.lean` supplies the
+R596 signed R568 C1 positive-trace iff, independent R653 strict surplus iff,
+the genuine N2e E_a² FTC and N2e heat/trace upper -> original R568 upper
+at a=1/4, conditional exactly on cutoff-uniform SIGNED
+int E_(1/4) T_(1/4). Lean NS ABFiniteHorizonExact imports this source
+and both R726 sign-owner modules. No original physical estimate fabricated.
+
+**CORRECTED NS B P0 mathematical alternatives, NOT four Schur flags:**
+- Direct: prove true original signed N2e int E_(1/4)T_(1/4) bound
+  (or N2f genuinely uniform critical L3 tail), then R596/R568 C1,
+  along with original R653/R654 strictly positive physical margin C2.
+- Bypass: prove original R723 cutoff-uniform combined commutator bound,
+  a genuine cutoff-uniform **COMPENSATED** R726 signed physical defect
+  ceiling (now necessary; zero-defect shortcut refuted), original R645
+  C2 strict margin and initial critical/continuum admission, then consume
+  R727's native completed critical compiler.
+- Independent all-data periodic finite-horizon/certificate route if
+  genuine original solution existence or externally accepted unforced
+  certificate is produced, preserving original Clay B quantifiers.
+
+No new universal PDE estimate, R723 cutoff-uniform producer, R726 physical
+defect ceiling, R645 C2 margin, A continuum all-data continuation or
+Alpoge–Buckmaster nonzero certificate has been inhabited. New Agda and
+Lean proof bodies are SOURCE-WRITTEN/PENDING_KERNEL; exact SymPy physical
+source was locally RUN at byte-identical Git blob; no GitHub CI.
+Original Navier–Stokes source and external original authors retain credit;
+DASHI owns the exact current signed physical countercontrol, correction,
+native reduction and acceptance wiring only.
