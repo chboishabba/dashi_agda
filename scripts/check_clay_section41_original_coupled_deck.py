@@ -15,7 +15,8 @@ from fractions import Fraction as Q
 from itertools import product
 
 counts = {"Hodge_Q0_profile": 0, "Hodge_coupled_delta": 0,
-          "Hodge_odd_negative": 0, "Hodge_free_puncture": 0,\n          "Hodge_fold_negative": 0, "PNP_bit_clock": 0}
+          "Hodge_odd_negative": 0, "Hodge_free_puncture": 0,
+          "Hodge_fold_negative": 0, "PNP_bit_clock": 0}
 
 def q0(a, s):
     return -3*a**3 -3*a*a*s-a*a+3*a*s+3*a-2*s*s+s+3
