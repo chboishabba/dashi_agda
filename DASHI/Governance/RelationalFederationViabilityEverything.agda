@@ -30,3 +30,5 @@ import DASHI.Governance.ITIRPluralViabilityTSFVExact
 import DASHI.Governance.CybersynPhysicalFinanceCutExact
 
 import DASHI.Governance.RelationalFederationCircularReproductionExact
+
+import DASHI.Governance.RelationalFederationWoogarooCaseExact
