@@ -10,6 +10,8 @@ for entry in \
   check_solar_native_contract_sympy.py \
   check_solar_indexed_stage_tangent_sympy.py \
   check_passive_global_exact_sympy.py \
+  check_two_load_bernstein_sympy.py \
+  check_four_world_source_off_sympy.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
