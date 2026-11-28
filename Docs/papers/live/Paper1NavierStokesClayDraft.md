@@ -20,59 +20,25 @@ Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
 ```
 
-The active manuscript construction is **Lane B**. The current preferred
-Clay-facing analytic frontier is the R752 dyadic-difference two-leaf cut. Its
-nonstandard PDE inputs are:
+The active manuscript construction is **Lane B**, with a parallel independent
+Lane A programme. The September R752 dyadic-difference reduction is retained
+as an exact conditional identity, but its unrestricted W2 positive-margin
+payment is **refuted** by the October 27 real six-mode positive-helicity
+counterexample on the original dyadic carrier. The later complete four-helicity
+R820/R823/R825 universal reserve also fails on the original radius-four real
+Fourier witness. Neither counterexample is a breakdown of Navier–Stokes.
 
-1. **W1**, a cutoff-uniform signed payment
-   \[
-   W_N(T)+Q_{+-,N}(T)\le B(T);
-   \]
-2. **W2**, nonnegativity of the integrated R751 dyadic-difference residual,
-   \[
-   0\le \int_0^T G_{N,\delta}(t)\,dt,
-   \qquad \delta_N>0,
-   \]
-   where
-   \[
-   G_{N,\delta}(t)
-   =
-   \sum_\beta\!\left[
-     3R^{\rm nested}_N(\beta,t)
-     -P^{\rm dyad\text{-}diff}_N(\beta,t)
-   \right]
-   +3(2\nu-\delta_N)d_N(t).
-   \]
-
-R733 identifies the coherent mixed endpoint with the canonical \(Q_{+-}\)
-observable. R737--R742 then differentiate the augmented observable
-\(\mathscr A_N=X_N-12Q_{+-}\), substitute the R684 input-Laplacian form, and
-show that the weighted/input-Laplacian term cancels exactly from the local W2
-inequality. Thus the derivative calculation does **not** manufacture a new
-coercive term: it exposes W2 as one signed physical packet-versus-combined
-comparison. R741 gives a stronger pointwise producer form; R742 preserves the
-original integrated theorem without that strengthening.
-
-R744--R751 then put both nonlinear pieces on the same complete physical triad
-carrier.  The production term must first be paired with its swap mate before
-the exact three-leg energy cancellation applies.  After pairing, R748 reduces
-it to exactly two differences of the **actual dyadic critical weights**,
-not the historical radial \\(|k|\\) coefficients. R750 proves these production
-difference channels vanish identically on same-shell nonzero triads. R751
-integrates this literal local carrier, and R747/R746 prove its nonnegativity is
-exactly equivalent to R742's packet-versus-combined spacetime inequality.
-
-Once W1 and W2 are supplied, the existing exact compiler gives the uniform
-critical barrier and the standard periodic compactness/continuation layer can
-be invoked at its typed source boundary. The present paper is therefore a
-conditional reduction manuscript, not an unconditional Clay/global-regularity
-claim.
-
-The R568/R572/R503 direct-companion chain, the R726 literal-R406 transport,
-and the older centered/Taylor, second-moment, Gram/P3, Bony/Schur, radial,
-Pluecker, and self/external decompositions remain theorem-bearing alternate
-coordinates or producer strategies. They are not the current terminal analytic
-cut.
+The November source-written work instead constructs the original signed
+ordered Galerkin RHS, the real-time mixed-helical trace, coherent Cauchy
+Laplace realization and ordinary finite energy equality. The quartic Gram
+and the quintic R406 remainder must not be identified. A valid cutoff-uniform
+critical-time estimate (or an independent critical continuation theorem),
+actual trajectory and continuum attachment remain open. No absolute spatial
+majorant proportional to E^(1/2) D^(3/2) can be integrated using only the
+ordinary energy budget without an additional bound. Section 1 records the
+historical conditional identities; the current roadmap states the repaired
+frontier. The manuscript is a conditional reduction and obstruction study,
+not an unconditional global regularity claim.
 
 Lane A remains an independent unforced whole-space obligation. Periodic B proof
 progress does not imply whole-space A proof progress, and A does not imply B,
@@ -82,12 +48,12 @@ unforced alternative.
 
 ## 1. Four-lane claim boundary and live Lane-B cutset
 
-The current preferred periodic-B interface is R752:
+The historical R752 periodic-B interface is an exact conditional compiler, not an available universal proof:
 
 ```text
 W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
 
-W2  integral R751 dyadic-difference residual >= 0                  OPEN
+W2  integral R751 dyadic-difference residual >= 0                  REFUTED universally
     residual = 3*nested orbit
                - swap-paired two-dyadic-difference production
                + 3*(2nu-delta_N)*critical dissipation
@@ -200,7 +166,7 @@ the same local carrier. R747/R746 identify
 }
 \]
 
-This is the preferred W2 analytic surface. The R742 packet-versus-combined
+This is the exact historical W2 analytic surface; its universal positivity is refuted. The R742 packet-versus-combined
 inequality remains an exact alternate coordinate, not a separate theorem.
 
 W1 remains
@@ -217,8 +183,9 @@ without circularity, because W1+W2 are being used to construct the uniform
 \(H^{1/2}\) barrier.
 
 The R723/R730 direct-combined cut is an exact alternate terminal presentation.
-R726 plus strict-margin literal-R406 production remain a sufficient
-factorization of R730, not mandatory independent leaves.
+R726 plus strict-margin literal-R406 production give a conditional
+factorization of R730, not mandatory leaves. Their unrestricted signed
+comparison and strict-margin premises fail on physical witnesses.
 
 ### Historical/alternate direct-companion route
 
@@ -524,7 +491,7 @@ A configured workflow is not itself a kernel receipt.
 | R572 | direct leaf-A compiler | constructed given listed receipts | alternate Lane-B compiler | source/workflow status does not constitute R568 proof |
 | R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; W1/W2 payments open | current Lane-B frontier precursor | source-written; head-specific kernel receipt not claimed here |
 | R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; packet/combined payment open | current frontier precursor | source-written/static-audited; no fresh kernel receipt claimed |
-| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions closed; W1 and residual nonnegativity open | **current Lane-B analytic frontier** | source-written/static-audited; no fresh kernel receipt claimed |
+| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions source-written; W1 open; unrestricted residual nonnegativity refuted | historical conditional compiler; unrestricted W2 refuted | source-written/static-audited; no fresh kernel receipt claimed |
 
 This table is intentionally conservative. Later validation work may upgrade a
 `CertificationStatus` without changing the underlying mathematical theorem.
@@ -595,9 +562,9 @@ internal results receive their own mathematical credit; earlier DASHI objects
 receive only the ancestry/priority statement supported by dated source.
 Citation does not import proof or certification.
 
-## Current roadmap
+## Current roadmap (superseded September route)
 
-The active periodic-B proof-search order is now:
+The September conditional proof-search order was the following. It is no longer a viable universal route:
 
 ```text
 W1
@@ -637,8 +604,7 @@ The R737--R740 derivative experiment remains a completed no-shortcut result:
 the R684 input-Laplacian (W_N) term cancels exactly from local W2. Likewise,
 the finite critical-norm equivalence machinery does not justify replacing
 signed dyadic coefficient differences by physical mode-norm differences.
-The next analytic work must therefore act on the literal R751 signed residual
-or prove a lawful further cancellation on that same carrier.
+Any new analytic work must change the invalid universal inequality, not merely repackage R751. A restricted trajectory or compensated bound must explicitly pay its additional hypotheses.
 
 Alternate/historical producer work remains available but is not the primary
 queue:
@@ -666,7 +632,7 @@ visible as provenance.
 
 ## 2026-11-20 — canonical #1444 reconciliation (NS)
 
-All new Clay proof work is routed to PR #1444; older PRs and numbered rounds are historical theorem donors, not competing endpoints. Steelman the literal endpoint, BIDI, reverse solve, weld existing producers, then local verification. Use SymPy for exact independent arithmetic/physical controls; this is not Agda kernel acceptance.
+Historical routing at 20 November was PR #1444; current NS proof source is Lean #123, with Agda #1551 reconciliation. Older numbered rounds remain theorem donors, not competing endpoints. Steelman the literal endpoint, BIDI, reverse solve, weld existing producers, then local verification. Use SymPy for exact independent arithmetic/physical controls; this is not Agda kernel acceptance.
 
 The R664/R665/R685 collinear heat-flow regression, originally committed at 08996708ed951abcd3b21bd89b8c63646fc17c05, is preserved at `scripts/check_ns_collinear_rate_kernel.py`. Local SymPy execution was repeated: N=5, K=2, k=(5,0,0), 726 ordered incidences, two active mixed cells, W(0)=-56 nu, n W(0)=-40656 nu, and W=-d|M|²/dt for this exact unforced real Fourier heat flow. This is only a historical signed-kernel positivity negative control, not a new current collar gate, not a C2 refutation, and not the original rational Agda trajectory weld.
 
@@ -687,3 +653,14 @@ Local `python scripts/check_ns_r236_moments.py` passed 81 symbolic tag assignmen
 The source-native physicalOutputFiber is the ordered integer cutoff cube intersected with its reflection about k/2. For cumulative radii a,b, each axis has L=max(-a,k_i-b), U=min(a,k_i+b); empty intersections give zero. Count is the product of interval lengths. Input mass J=sum(|p|²+|q|²) follows from the telescoping polynomials F1(x)=x(x+1)/2, F2(x)=x(x+1)(2x+1)/6: each axis contributes 2ΔF2-2k_iΔF1+k_i² length, multiplied by the other two axis lengths. The two-shell inclusion-exclusion then yields exact count and mass per shell pair; route by existing R236 tags. The actual NSTriadKNPhysicalScaleTrichotomy / Round25/63 comparisons are strict j+3<j', with precedence LH, HL, HH, CC. Shell zero includes zero and unit modes. The final shell is clipped at N; outputs outside N have empty fibres. Existing NSPeriodicFarLowShellIntersectionCount and NSPeriodicNearShellOverlapCount do not replace these exact weighted counts.
 
 Local SymPy 1.14.0 regression scripts/check_ns_r236_lattice_moments.py passed 2600 literal fibre comparisons, three symbolic telescoping identities, all region classes, reflection and strict collar controls. At N=5,k=(5,0,0), core count=726 and input mass=42350. At N=2^20,k=(5,0,0), total count=9223363240747073532 with 441 shell pairs; no explicit large fibre enumeration. O((1+log N)^2) arithmetic operations per output for geometric moments only; no bit-complexity or all-output complexity claim. For physical decay rate multiply mass by viscosity, but the literal R236 row uses input mass prior to viscosity. Counts and mass cover zero-work cells; sparse W,V still depend on the actual mixed-product fold and coherent work. The classifier is a source-transcribed Python consumer, not an Agda execution; both comparison routes share it. No B1–B4 inequality, new Clay endpoint, or kernel acceptance follows. Canonical PR #1444 only.
+
+
+## 28 November 2026 — corrected current A/B/C/D frontier
+
+**Refutations:** [R734/R735 original physical W2](../../research/ns_r734_pure_plus_physical_w2_no_go_20261027.md) and [R820–R825 unrestricted reserve](../../roadmaps/ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md) are not open positive producers. The former uses a six-mode positive-helicity state at N=2, scaled by 512, with mixed field initially zero and positive critical production exceeding viscous payment. The latter has actual R853 rate -28273644/125 at initial time and strict negative signed integral on a certified short interval. Both refute auxiliary inequalities only. R645/R726 signed defect and homogeneity failures are likewise retained in the current rollup, not reinterpreted as blow-up.
+
+**Constructed pending native kernel:** Lean #123 commits 199a4f1cae3e, cac7be7c530f, 1994278d0ec5: exact ordered cutoff fibre with original -i Leray force, real mixed-cell derivative/FTC, coherent heat square, signed energy involution (p,q,k)->(-p,k,q), and finite E(T)+2 nu integral D=E(0) conditional on actual differentiable modal curve with reality, transverse and mean-zero invariants. The weighted all-output trace is not a uniform critical estimate. The Euclidean same-output four-factor majorant is spatial; its D^(3/2) cost does not follow from energy. Original R369/R568/R854 consumers remain, but need genuinely valid hypotheses.
+
+**Next proof cut:** actual finite Galerkin existence/invariance and source transport; signed cutoff-uniform critical-time budget (N2e or a new valid critical continuation criterion) and compactness; independent Euclidean A measure/continuation. C/D retain the existing nested ExternalClayNS direct source admission at pin f9e8bc5b38b6e212696e8a30e3e91517af887bbd, Lean 4.34.0-rc2; no new kernel admission or independent source validation claimed. Unforced breakdown is a separate candidate route requiring a literal nonzero continuum profile, verified coercivity and interval certificate. Any one valid Fefferman alternative suffices, not a simultaneous proof of incompatible outcomes.
+
+Current implementation and exact regression receipts: [consolidated Sections 6–9 and following](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Classical Galerkin/Leray, Waleffe and original external source attribution retained. No external or Clay acceptance.
