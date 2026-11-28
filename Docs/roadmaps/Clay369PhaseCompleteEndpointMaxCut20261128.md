@@ -2155,3 +2155,45 @@ trusted pinned proof admission. PNP requires a sharing-stable
 original unrestricted SAT internal computation theorem (or
 actual polynomial SAT algorithm). No new native kernel admission
 or Clay completion was fabricated in this tranche.
+
+
+### Section 33c — two final original COUNT exceptions (28 Nov 2026)
+
+Agda YM #1536 original `YMClayCMP102OriginalShiftedWingOrderExact.agda`
+was updated at 3d46398f4b18feb8f58a86ed8d0faed3cf780a57
+with `originalBCountOneSingleton`: exactly at c=1 the ORIGINAL
+B wing is the literal one-by-one `bTerm X 0 * bTerm X 0`
+and the triangle at `c∸2=0` vanishes. The standard two-earlier
+bound only applies for c>=2 and must not be applied to c=1.
+Native acceptance `YMClayCMP102Section33ShiftedWingAcceptanceExact.agda`
+was updated at 08059ff3d704ad21ad48d67ecbe6b7fa6e3aafe0.
+
+`YMClayCMP102OriginalFiniteTailToLimitExact.agda` was updated
+at 7f61b11527e2de7591dc719d49d7ecb02d4ce82d
+with `originalGZeroCountIsOne`: the literal original
+`Seq.SeriesOf` empty A/B prefixes produce `G_0(X)≈1` for
+ALL signed Bishop real X by exact five-term polynomial ring
+algebra. Thus `OriginalZeroCountOrder` is now a *rational order*
+leaf `1<=3`, not an unresolved original finite algebra identity.
+No native Agda compilation of these bodies has yet run.
+
+Remaining scalar mathematical order proof is properly isolated:
+prove true finite positive shifted A/B Cauchy row coefficient
+mass bound and factorial powers at actual original |X|<=1/4,
+including the c=1 B singleton, to inhabit
+`OriginalPositiveTailOrder`. Earlier 23 Nov mathematical
+all-degree 3*4^-c and later sharpened 267004/393129 constants
+are retained without falsely declaring Bishop native setoid
+order acceptance. Agda --safe transitive graph and 2.9 typecheck
+are still mandatory. The original interacting Wilson
+CMP116/OS/same-H gap is distinct.
+
+All finite exact checks in this continuation: previous 3624
+original signed tail, new 3160 weighted Cauchy power, new 3180
+shifted one/two-row bounds, for **9964/9964 separate exact
+assertions PASS**. They are tests of finite algebra and
+coefficient envelopes, not native Agda or any Millennium
+theorem. The locally executed 3180 test was written as a
+Python-visible exact rational programme; committed corresponding
+YM #1536 source script `scripts/check_ym_cmp102_section33_shifted_cauchy_wings.py`
+is not claimed byte-identically executed.
