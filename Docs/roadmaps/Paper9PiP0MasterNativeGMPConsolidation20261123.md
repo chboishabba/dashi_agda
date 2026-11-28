@@ -2109,3 +2109,32 @@ SOURCE-WRITTEN, KERNEL PENDING. Supersedes the missing-producer inventory for C1
 The decisive cofinal geometry is triangle(n) ⊆ rectangle(n,max(n,m)) ⊆ triangle(n*max(n,m)); for any retained positive pair degree is m*d. Both real and imaginary signed differences are bounded by the positive degree-majorant tail, independently of the vertical cutoff. The actual E4/E6 degree budgets are supplied by the pre-existing polynomial-geometric majorants, not a newly assumed absolute double-series interchange. The weight-six minus sign is retained separately from the unsigned positive majorant. Normalization uses 2*zeta(4)=pi^4/45 and 2*zeta(6)=2*pi^6/945 on the original Machin object.
 
 Current next cut: use the native qE4S/T and qE6S/T source terminals in the original j/modular transport, then degree-41 Hecke product, pole removal, diagonal and ray residual. GTheta3 direct native analytic theta-to-Eisenstein equality is not asserted; the alternative original lattice/Fourier route is now source-written. Existing Lean theta modular uniqueness is untouched. C2/C3/H1/RawCross/GMP and kernel acceptance remain outstanding. Static delimiter scan of all nine new Agda modules passed; no explicit holes, postulates or termination overrides found in these new files. This is not a typecheck or a transitive axiom audit. Agda and Lean unavailable in local runtime; no CI invoked.
+
+
+### 2026-11-28 — native homogeneous j, Hecke chart/product and selected fixed-point weld
+
+SOURCE-WRITTEN, KERNEL PENDING. Starting PR head 4af3b8cff082. This cut reuses the actual normalized Bishop q-series S/T endpoints, original Fin42 classical correspondence, literal integral generator correction tables and selected CM disk guard. No new local axiom or termination override intended.
+
+| Commit | Native construction |
+|---|---|
+| 4862422a36c9 | JInvariantBishopHomogeneousKleinTransportExact: numerator and normalized Delta weight-12 transformation, nonzero-scale guard transport, reciprocal uniqueness and guarded quotient S/T invariance; no E4 nonzero requirement. |
+| d045e5ac1513 | CM163Hecke41CorrectionWordsExact: exact SL2Z words for all original 84 corrections (not a PSL sign quotient), with literal matrix equalities. |
+| a781f9ae40c8 | JInvariantBishopDiskSetoidTransportExact: original disk series extensional in q across radius and convergence witnesses, actual phase congruence and guarded j congruence. |
+| 6d346b0df927 | CM163BishopHecke41ProjectiveRowsExact: original row evaluation, nonzero homogeneous scale composition, generator/word readout, point equality by cancellation. |
+| 1f1b5feda459 | CM163BishopHecke41AnalyticChartsExact: actual affine charts, existing S/T correction equality, projective comparison and j chart transport on guarded domain. |
+| 27f3e314ea8a | CM163BishopHecke41ProductExact: original foldFin product, exact permutation transport, fixed slice and diagonal invariance on guarded domain, homogeneous diagonal factor and zeroAt consumer. |
+| 6ebd77ab75ab | CM163BishopHecke41SelectedFixedChartsExact: original Machin q phase to selected disk, guard transport, two actual reciprocal fixed chart identities and unconditional-on-other-chart-guards clearedDiagonalZero; quotientDiagonalZero consumes AllGuards. |
+| dd4943d665fc | scripts/check_paper9_hecke_native_projective.py: independent exact local SymPy 1.14 reference replay, 252 integer determinant/edge/word checks, 5 homogeneous algebra checks and 5 CM quadratic/fixed-chart checks, plus 2 permutation and 2 integer product assertions. Not an Agda execution. |
+
+The original CM point satisfies tau^2+tau+41=0. Thus A_1 tau=S tau and A_0 tau=S(T tau); both obtain the original j value by native modular transport and selected guard. No need to invert the other 40 factors to prove the cleared diagonal zero. This does not yet identify that cleared diagonal or the quotient product with the integer class polynomial. Fixed-chart zero and polynomial diagonal zero are separate facts.
+
+Re-audit of original nonvanishing donors: DeltaNormalizedWeight12SameObjectExact has generic normalization and eta24 transport and records the pinned Lean eta24 same-object theorem, not a native Bishop inhabitant. IbrahimDedekindEtaDeltaJNonvanishingSnowballExact and IbrahimDeltaRedirectWeierstrassEllipticLatticeSnowballExact are typed source/availability frontiers, not concrete native global guard proofs. LeanDeltaFinalMinCutParityExact is an older conditional parity receipt; no automatic proof import. Keep the pinned Lean analytic product/nonvanishing and weight-zero rigidity donors for the next native cut. Do not repeat the already-paid quotient algebra or finite chart correction geometry.
+
+Revised max-cut:
+- C1b original Eisenstein modular transport: source-written, kernel pending.
+- C1c native j numerator/denominator covariance, guarded chart/product S/T invariance, selected fixed chart and cleared diagonal zero: source-written. Remaining global literal Delta apartness (eta product same-object, or quantitative fundamental-domain guard and constructive orbit reduction), native holomorphic residual pole-removal/weight-zero rigidity, analytic ramified coefficient reflection for the original diagonal and fixed slice. Lean donor already has source-written product/remainder/rigidity consumers, with finite coefficient premises still unpaid.
+- C2 integer polynomial diagonal evaluated at selected original j: open, not implied by the homogeneous fixed factor alone. Use existing original packet shift, root enclosure and native terminal after product-to-polynomial equality.
+- C3 ray residual: open; keep original signed jet and two reciprocal multipliers, no replacement derivative carrier.
+- H1 final coefficient grouping, RawCross/GMP, all native acceptance: unchanged. No CI. Agda/Lean absent locally. Static delimiter/no-hole/no-local-postulate/no-termination-override scan passed for the seven new Agda modules; actual committed 84 correction words were independently parsed and multiplied back to the actual original table. This is not a typecheck or a transitive axiom audit. Long literal correction words (max 692 generators) may require elaboration/performance repair.
+
+Attribution: classical modular and Hecke geometry remains classical; the existing Diamond–Shurman, Broeker–Lauter–Sutherland, Serre, Miyake and Apostol source attribution retained. DASHI contribution is the explicit same-carrier homogeneous/correction transport and source-specific attachment. No Lean branch change in this cut.
