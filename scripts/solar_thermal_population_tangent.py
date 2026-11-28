@@ -2,7 +2,7 @@
 Positive support chart only; zero support is handled separately, never divided by.
 """
 import numpy as np
-from solar_physical_causal import reaction,event,MASS,CHARGE
+from solar_population_event import reaction,event,MASS,CHARGE
 
 def reaction_jvp(n,pool,T,p,h,q,dn,dpool,dT,dp):
     alpha=np.asarray(q['recombination_m3_s']); k=np.asarray(q['ionization_s_inv'])
