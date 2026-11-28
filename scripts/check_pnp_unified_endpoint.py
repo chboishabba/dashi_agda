@@ -6,7 +6,7 @@ from check_pnp_binary_support_endpoint import direct,identity_isolation
 from check_pnp_constructive_descent import search
 from check_p0_signed_contrast_20261125 import accepts,ContinuationAllowance
 
-def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None):
+def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None,local=True,screened=True):
     if min(n,cap)<0:raise ValueError('budget/source')
     F=tuple(tuple(c) for c in F)
     if any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('literal')
@@ -27,19 +27,35 @@ def solve(F,n,cap,*,legacy=True,shares=None,direct_options=None):
     status,x,rec=direct(F,n,ledger,**(direct_options or {}))
     d.update(status=status,actual_reserved=ledger.total-ledger.left,queries=rec,baseline_cells=ledger.baseline_cells,boundary_attempts=ledger.boundary_attempts)
     if status!='UNKNOWN':return finish(status,x)
+    G=F;patch={};local_cap=shares[1]//4 if local else 0
+    if local_cap:
+        from check_pnp_local_autarky import descend
+        d=reserve('local-autarky',local_cap)
+        status,x,G,patch,used,steps=descend(F,n,local_cap)
+        d.update(status=status,used=used,patch=patch,steps=steps)
+        if status!='UNKNOWN':return finish(status,x)
+    def lift(x):
+        if x is None:return None
+        from check_pnp_local_autarky import reopen
+        return reopen(F,n,patch,x)
     if legacy:
-        d=reserve('normal-quotient-portfolio',shares[1])
+        d=reserve('normal-quotient-portfolio',shares[1]-local_cap)
         from check_p0_correlated_marginal_20261126 import portfolio
-        try:y,done,route=portfolio(n,(),F,shares[1])
+        try:y,done,route=portfolio(n,(),G,shares[1]-local_cap)
         except RecursionError:y,done,route=None,False,'recursion-refusal'
         status='WITNESS' if y is not None else 'EMPTY' if done else 'UNKNOWN'
         d.update(status=status,inner_route=route)
-        if status!='UNKNOWN':return finish(status,tuple((y>>i)&1 for i in range(n)) if y is not None else None)
+        if status!='UNKNOWN':return finish(status,lift(tuple((y>>i)&1 for i in range(n)) if y is not None else None))
     d=reserve('signed-seed',shares[2]);per=shares[2]//(n+1)
-    x,rec=search(F,n,per)
+    if screened and shares[2]:
+        from check_pnp_scale_gate import screened_search
+        x,s,rec=screened_search(G,n,shares[2],screen_cap=min(4096,shares[2]//16))
+        d.update(screen=s)
+        per=s.get('per_scale',0)
+    else:x,rec=search(G,n,per)
     assert sum(a['reserved'] for a in rec)<=shares[2]
     d.update(status='WITNESS' if x is not None else 'UNKNOWN',per_scale=per,scales=rec)
-    return finish(d['status'],x)
+    return finish(d['status'],lift(x))
 
 def classify(F,n,cap,known=None,**options):
     F=tuple(tuple(c) for c in F)
