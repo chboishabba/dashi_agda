@@ -1,0 +1,8 @@
+Local SymPy; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf140/check_hopf369_br140_142_F_surface_cartan.py --part <jump|shear|transport>
+Three stages exit 0.
+Git blob 10382931d6aae05435b0bc328abab90b13d428d3
+SHA256 a8ab09a4966f34a5c3a089c048ce2645ff69bfc53aecdd58d522aefe1d45e62e
+PASS BR140 common-wall tangential Cartan jump cancels; mixed jump retains intrinsic torsion
+PASS BR141 spatial algebraic Gauss defect work is axial commutator of mean shear and dual curvature; generic rank 3
+PASS BR142 adapted-frame surface Cartan ODE retains both normal connection exchange terms and electric Bianchi trace
+Scope: independent local exact algebra; conditional surface estimate, no bulk-to-wall trace closure, full runner, native kernel, CI or nonlinear acceptance.

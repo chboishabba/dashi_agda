@@ -4,6 +4,8 @@
 > [Hopf/369 Einstein–Israel geometry-forward eight-weld reconciliation](hopf369-geometry-forward-closure-reconciled-20261128.md).
 > This historical document preserves all P0/BR implementations and attribution. The shorter roadmap controls exact outstanding physical lemmas, source ownership, master/F8 donor status and non-promotion. Do not interpret older “outstanding” lists without its reconciliation.
 >
+> **Controlling scope correction (after BR139):** The periodic Einstein–Israel roadmap is one stronger branch, not a gate on the G3/G4 local analytical developments, material physics, quantum-geometry comparisons, or existing TOE shared-carrier adapters. See [programme scope and parallel deliverables](hopf369-geometry-forward-closure-reconciled-20261128.md#0-controlling-programme-scope--28-november-2026-after-br139). Preserve P0T/U/V physical laws and helicity discriminator; do not reopen paid KK reductions. New BR140–142 surface Cartan results live in the canonical roadmap. No higher authority grade is inferred.
+
 ## Source ownership and evidence levels
 The supplied @vortex_math screenshot reproduces Kobayashi–Nitta Figure 4 (arXiv:1304.6021 v2 PDF p4), including panel labels, green n3=0 and blue n1=-0.97 isosurfaces. Original source https://arxiv.org/pdf/1304.6021 ; first submission 2013-04-22 https://arxiv.org/abs/1304.6021 ; DOI 10.1016/j.physletb.2013.12.002. PDF pp4–5 visually inspected. The authors solve a classical extended Faddeev–Skyrme model numerically; no quark detection. Personal priority investigation retired by user direction; original scientific and independent Rodin/ABHA source records remain in scope.
 

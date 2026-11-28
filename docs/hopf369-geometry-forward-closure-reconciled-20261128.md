@@ -6,6 +6,91 @@ Source branch: [PR #1554](https://github.com/chboishabba/dashi_agda/pull/1554),
 `research/c3-hopfion-abha-prior-art-20261125`.
 Default branch is **master**, not main. All new proof source remains committed in this PR.
 
+
+## 0. Controlling programme scope — 28 November 2026, after BR139
+
+**The original programme is not the periodic Einstein–Israel theorem alone.**
+The objective is source-preserving signed 369/Hopf geometry in actual
+classical and quantum-geometry models, with reversible observation maps
+and explicit non-descent. The stronger periodic positive-tension AdS
+branch remains a P0 proof target within #1554, not a prerequisite for
+recognizing or advancing every other realization. This section governs
+priority and authority; historical BR registers retain their mathematical
+obligations within the periodic branch.
+
+### Existing source-specific connections — consume, do not reimplement
+
+| Lane | Existing producer / authority | Exact next deliverable |
+|---|---|---|
+| Signed 369/Hopf and indexed hyperfabric | H01–H06, P0A–B, P0I–N, P0AB; #1291; original spectral split/reopen and signed carry; native TOEHopfMonsterSourceRealizationsExact | Replay actual proof owners and source-specific geometry/physical-time transport; do not conflate spectral order with time or shared carrier with continuum equivalence |
+| G3 noncompact vacuum KK | P0T1–2/U1/V3–5: positive actual Hopf initial constraint, local analytic development argument, circle-invariant reduction and actual initial radion/connection/metric acceleration | Quantify short-time bounds and continuation; compute actual same-state curvature, proper-time/geodesic/light observables and compare to controls |
+| G4 noncompact Einstein–ideal-RMHD | P0H/T3–5/U1–2/V3: actual matter/geometry constraints, primitive inverse, analytic local slab argument and ideal helicity | Weighted relative background energy, quantitative continuation and same-state stress/observables; retain constitutive assumptions |
+| Material and electromagnetic | P0O–S/Y–AD and AE–AG: reciprocal current, same-current Gauss, reactive PNP, curved Hodge, finite implicit midpoint and exterior/refinement ledgers | Actual continuum current/metric coupling, constitutive and experimental admission; no finite receiver as gravity boundary |
+| Periodic Einstein–Israel | P0AK/AM/BN and BR79–142: exact reference, signed nonzero seed, conditional spatial constraint, junction and partial energy/subsidiary estimates | W0–W7 local physical-time development for the actual BN data; this is one specific stronger theorem |
+| AdS3 / quantum-geometry comparisons | P0AL/AM/AN/AO, AP and Paper 2, Paper 10 #1545: same-object AdS3 slicing, positive TT gap, restricted EH action, 196884 polarization BIDI, FLM/Leech and natural-action obstructions | Actual source-specific spectral and action/representation comparisons; do not force failed natural intertwiner or infer quantum equivalence from dimensions |
+| TOE integration | DASHI/Unified/TOEHopfMonsterSourceRealizationsExact.agda consumes actual FLM inverses, spectral reopening, KK metric shear and signed probe identities; #1217 and #1291 source handoffs | Preserve sharedCarrier grade; pay actual representation action, dynamics equivariance, action/Hamiltonian, metric variation, stress/readout, calibration and independent evidence separately |
+
+G3 and G4 analytical arguments are not kernel receipts or global stability
+theorems. They do establish candidate local dynamical realizations under
+their stated hypotheses without the periodic wall. P0V4 already derives
+the actual cylinder-invariant Jordan-frame vacuum KK equations
+ Ric4=phi^-1 Hess phi+(phi²/2)F_mu^lambda F_nu,lambda,
+ div(phi³ F)=0, Box phi=phi³ F²/4.
+Do not rederive them as an outstanding generic KK task. P0V5 already
+distinguishes vacuum KK helicity acceleration
+ Hddot(0)=-2 eps² int psi^-2 B0·curl B0 < 0
+from G4 ideal transported helicity (constant on its admitted slab).
+This is a source-preserving history non-equivalence, not an error to
+remove or a universal helicity law. Retain signed orientation, gauge,
+radius, winding and independent time/history. Classical equations retain
+prior attribution; JMD only evidenced contributions; DASHI only the
+actual source-specific constructions and verified attachments.
+
+### Three parallel deliverables (endpoint-first, no artificial serial gate)
+
+1. **Periodic development:** finish the original W0–W7 theorem using
+   the already-constructed BN/BR geometry. Work backward from a
+   nonzero compatible solution with actual wall, curvature, holonomy,
+   exterior and positive lapse; find exact producers, then prove
+   forward estimates and generation. BR140–142 below narrows the
+   surface defect. Do not accumulate generic curvature identities.
+2. **Actual physical laws and observables:** consume G3/G4 now, independent
+   of the periodic theorem. First evaluate the already-derived P0V
+   initial KK jets and selected proper-time/radion/curvature probes
+   against zero, mirror and same-data controls; reuse existing
+   KK/TSFV/LARES and F8 owners before writing new ones. Separately
+   compute the same-source reduced action/metric variation and
+   admissible relative energy/flux, then extend to the periodic
+   non-cylinder metric only when a real development is available.
+   A coordinate KK decomposition is not a cylinder reduction of
+   a y-dependent metric. Material and RMHD constitutive branches
+   stay distinct. Require units, domains, source, uncertainty and
+   independent calibration before physical prediction promotion.
+3. **TOE/quantum handoff:** use actual #1291 and #1217 typed consumers
+   and #1545 action/representation owners; audit each map in both
+   directions for retained residual, action, dynamics and observable
+   preservation. Keep same-object AdS3 slice distinct from autonomous
+   massless 3D gravity (selected TT gap m² ell3²=3). Keep natural-action
+   Monster/FLM versus p-form mismatch and its assumptions, rather
+   than forcing equality. Derive new intertwiner only if actual
+   action/domain/physical symmetry allows it. Publish Paper 2,
+   Paper 8/10 scoped results and negative results independently of
+   W6. Do not claim TOE closure, quark identity or experiment.
+
+Completion grades are independent: exact geometry/representation,
+conditional analytical realization, numerical receipt, kernel receipt,
+strong nonlinear theorem, calibrated empirical realization. A shared
+carrier or source-written interface does not imply all higher grades.
+The source audit here is targeted, not an exhaustive proof replay or
+merge. Live PR metadata at this reconciliation: #1554 parent
+46aca5f4f06c363aae3595c71476d2a94d53b921, #1217
+09166d57a3cb13b6e298d53bc56b55bbb4601402, #1291
+c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04, #1545
+ab583022e81b604556348648c221e5c39cd7d607, #1547
+0d927ff78e621b8f2cb33d327fbc9eea9eec3f2c. All open;
+#1554 compared with master is 413 ahead / 42 behind before this
+commit. No sibling PR edits, no merge, no exhaustive reconciliation.
+
 ## 1. Reconciliation receipt and authority boundary
 
 - At the 28 Nov audit, comparison `master...research/c3-hopfion-abha-prior-art-20261125`
@@ -2561,3 +2646,75 @@ BR132/135 donor file byte-identical to its committed blob;
 its BR29 carrier dependency locally extracted (not a
 full checkout/replay). Native expressions written,
 kernel unrun, no CI or nonlinear PDE acceptance.
+
+
+## 20. BR140–142 — surface Cartan BIDI, actual anisotropic source and time evolution
+
+Consume BR135/137/139, not another generic Gauss theory.
+In an actual matched common wall coframe theta with common intrinsic
+connection omega, k^±=M^sharp(theta)±j theta/2 and k_flat=k^T h.
+For a metric-compatible ambient block connection
+ Omega=[omega,k; -k_flat,0],
+ the tangential curvature pullback is F_omega-k wedge k_flat,
+ and the normal-tangential row is -D_omega k_flat.
+These are direct Cartan block formulas.
+
+BR140: at constant j the tangential jump is exactly
+ -j(k_M wedge theta_flat+theta wedge k_M_flat).
+If target R has the same full Gauss jump (vacuum BR125), then
+ [E_parallel]=0 for E=F_Omega-R.
+The mixed target R jump is zero, so [E_nt]=-j T_wall_flat with
+ T_wall=D_omega theta. Intrinsic torsion has NOT disappeared
+ off shell; common intrinsic omega and coframe, matching k and
+ target jumps are hypotheses, not consequences of arbitrary Cartan
+ initial data. BR129 Ricci-defect corrections must be retained for
+ reduced nonvacuum target. The mean source of BR135 becomes
+ mean(Omega_nt wedge E_parallel)=-k_M_flat wedge E_parallel
+ under [E_parallel]=0; the j terms cancel, not the mean term.
+
+BR141: in the restricted algebraic sector where the tangential
+ curvature defect has Riemann pair symmetry and vanishing time-form
+ slots, all remaining indices are spatial. Let its double spatial
+ Hodge dual be the symmetric 3x3 matrix S, so
+ E_ijba=epsilon_ijl epsilon_bam S_lm.
+ The spatial triple of -k_M_flat wedge E_parallel is exactly
+ the axial vector of [M_sp,S]=M_sp S-S M_sp, using the stated
+ orientation (K_12,K_20,K_01 with indices 0,1,2).
+ Thus its nonzero shear work lies in three off-diagonal
+ commutator directions for a simple-spectrum spatial mean.
+ The rank-three example M_sp=diag(1,2,4) with S01 nonzero
+ is compatible with tracefree full mean by setting M00=7.
+ Commuting S and M_sp gives zero, pure trace M_sp gives zero.
+ Neither condition follows from the full nonzero Hopf source.
+ Generic off-shell E need NOT have Riemann pair symmetry:
+ torsion and algebraic Cartan defects must be retained separately.
+ This is a precise negative control to a scalar cancellation,
+ not a counterexample to the full constrained system.
+
+BR142: with coordinate time electric defect E_ti=0 (BR131),
+ spatial wall two-form defect obeys
+ partial_t E_ij+[Omega_t,E_ij]=-C_tij, C=D_Omega R.
+ In an adapted wall frame write E_ij=[B,q;e,0],
+ Omega_t=[omega_t,k_t;kn_t,0], kn_t=-k_t^T h.
+ The actual surface block equations are
+ partial_t B+[omega_t,B]=-C_tij,parallel-k_t e+q kn_t,
+ partial_t e-e omega_t=-C_tij,nt-kn_t B.
+ They are an ODE along coordinate time on the wall, with bounded
+ coefficient homogeneous exchange in positive component norms.
+ If the actual C_tij trace is controlled in L²_t L²_wall,
+ then a Gronwall surface norm estimate follows with compatible
+ initial surface data and common time chart. This does not require
+ the adapted frame to be the temporal connection gauge.
+ It also does NOT manufacture that Bianchi trace estimate
+ from bulk L²: BR139 boundary layer refusal still applies.
+ The next actual estimate is a joint active-flux/compatible
+ surface evolution for the C_tij trace and the BR141 commutator,
+ including torsion, or a justified mixed-order trace bound.
+ W5 exterior and W6 generation remain; no PDE promotion.
+
+Three local independent SymPy stages exit 0, 90s cap each,
+ checker blob 10382931d6aae05435b0bc328abab90b13d428d3.
+ Native source not changed in this tranche; no kernel, full runner,
+ CI or nonlinear acceptance. Classical Cartan block and spatial
+ Hodge formulas are prior mathematics; source-specific signed
+ jump and mean commutator are the attachment.
