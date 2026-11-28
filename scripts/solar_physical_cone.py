@@ -188,7 +188,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             hh=rational(dt); rr=[]
             for ii in range(len(ix)):
                 ri=rational(y[ii])-rational(old[ii])-hh*exact_b[ii]
-                ri-=hh*sum(rational(a[ii,jj])*(rational(y[jj])+rational(old[jj]))/2 for jj in range(len(ix)))
+                ri-=hh*sum(Fraction(int(aa[ii,jj].p),int(aa[ii,jj].q))*(rational(y[jj])+rational(old[jj]))/2 for jj in range(len(ix)))
                 rr.append(abs(ri))
             local_error=sum(rr)
             if fid is None:
