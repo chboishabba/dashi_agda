@@ -6287,3 +6287,14 @@ BR232 uses BR227 stiff-EOS primitive inversion in a flat periodic conservative f
 BR233 extends actual P0AG surface/assembly/current maps with positive prescribed cell-volume history, endpoint chemical potential, signed volume work and original Hodge midpoint work. Check amount conservation, patch charge, Gauss/divB, nonlinear residual and energy ledger. Hodge and volume histories are prescribed independently, not yet from a common Einstein metric. Next replace both with a same-state metric history.
 
 BR231 G3: actual reduced equation and harmonic subsidiary remain unpaid. BR234 atomic: marked parameter inverse and calibration remain. BR235 indexed histories: native arrows and chronology residuals remain. BR236 Monster: original marked action/projector inhabitants remain. Reuse section 60 donor owners. Metadata audit retrieved F8 #1547 4c41ea21b55c264d26b0edd2e93fbf45984ead54; #1291, #1217, #1545, #1536 unchanged from section 60. No exhaustive sibling/master code reconciliation in this cut. No claim of terminal runner registration or executed acceptance.
+
+
+## 62. BR237-239 adapted geometric connection and same-metric storage
+
+BR230/232/233 now locally executed, driver and all imported donor blobs verified. BR232 640 post-step primitive recoveries, minimum physical margin 0.6841537591667224; BR233 two signed histories, maximum residual 2.2026824808563106e-13. No curved continuum promotion.
+
+BR237: for unit spacelike normal n, u=∇_X n tangent, K_X=u⊗n^flat−n⊗u^flat. K_X is g-skew, K_X n=u, ∇N=[K_X,N]. The metric-compatible adapted connection ∇hat=∇−K preserves n and N; algebraic Israel map intertwines induced adapted connections. Actual BR207 Weyl representation tested symbolically with arbitrary four-component u and nine-component wall M; ambient defect outside fixed jump image nonzero. Need actual BN connection jets and differentiated bulk forcing estimate, not another frozen carrier. W0-W7 remain as section 60.
+
+BR238/239: derive Hodge and interior volume from the SAME prescribed conformal metric a²h0 with zero shift. Exact 3D scaling gives H=H0/a and V=a³V0. Exterior reservoir volumes fixed, conductance selected proportional to a; no claim of physical boundary calibration. Consume original P0AG 54-patch and P0Y maps; eight steps total, combined residual <=3.340e-13. Contraction volume/Hodge work positive, expansion negative. Not dynamically evolved Einstein geometry. Next general metric quadrature consumer and actual G3 history, then G4 coupled evolution. BR231/234/235/236 still outstanding; no inferred atomic calibration or Monster inhabitants. 
+
+Local accepted driver blob d46dec27fe099206a5fe2a45956a94b5c78ffbf1 matches committed source. Receipt Artifacts/hopf369/br230_239_local_receipt_20261128.txt. Six terminal stages registered (56 total). No CI or native kernel. No exhaustive sibling reconciliation this cut. 
