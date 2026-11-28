@@ -88,5 +88,4 @@ def run(n=11,steps=8):
     final=energy(q,p,coeff(hist[-1]));assert abs(final-initial-total)<1e-8
     target=hist[-1]['C'][sl];print('BR257-259',n,steps,'energy initial/final',initial,final,'work',total,'ledger',worst,'force',maxforce,'margin',margin,'gauge mismatch',np.max(abs(q-target)),flush=True)
 
-
 if __name__=='__main__':run()
