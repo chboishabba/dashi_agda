@@ -26,7 +26,10 @@ open import DASHI.Foundations.RealAnalysisAxioms
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as Native
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
@@ -88,6 +91,26 @@ module _
           (Physical.partitionFunction (nativeMeasure n))
 
   open ActualNativeFiniteIntegration public
+
+  constructActualNativeFiniteIntegration :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink) →
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink) →
+    (strictToNonzero : ∀ value → 0ℝ <ℝ value → Quotient.Nonzero quotient value) →
+    ActualNativeFiniteIntegration
+  constructActualNativeFiniteIntegration ordered strictToWeak strict strictToNonzero =
+    record
+      { integrals = λ n →
+          Original.originalWilsonFiniteIntegrationLaws
+            theory traceData exponential beta oneLink bilateral
+            (Quotient.divide quotient) ordered strictToWeak n
+      ; nonzero = λ n →
+          strictToNonzero
+            (Physical.partitionFunction (nativeMeasure n))
+            (Family.physicalFinitePartitionPositive
+              theory traceData exponential beta oneLink bilateral
+              (Quotient.divide quotient) strict n)
+      }
 
   -- Existing finite-cylinder normalized laws apply at any ONE n by
   -- making an irrelevant constant family at that fixed link carrier.
