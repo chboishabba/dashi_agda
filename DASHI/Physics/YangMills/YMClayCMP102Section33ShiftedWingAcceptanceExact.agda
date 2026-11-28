@@ -14,3 +14,5 @@ originalTwoEarlierAbsolute = Shift.originalWingTwoEarlierAbsolute
 originalCMP102AShiftedOrder = Original.originalAShiftedAbsoluteWing
 originalCMP102BShiftedOrder = Original.originalBShiftedAbsoluteWing
 originalCMP102SignedTailTriangle = Original.originalSignedCauchyTailTriangleBound
+
+originalCMP102BCountOneSingleton = Original.originalBCountOneSingleton
