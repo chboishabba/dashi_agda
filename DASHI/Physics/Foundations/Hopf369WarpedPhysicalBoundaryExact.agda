@@ -896,3 +896,22 @@ module At {r : Level} (F : C.RealField r)
   -- still source-specific proof obligations. In particular, this carrier
   -- never replaces BR29 derivative Bianchi with componentwise scalar
   -- constraint propagation, nor assumes an inverse for a glancing symbol.
+
+  -- Source Gaussian warp g=dn²+b(n)² eta, k=b'/b. This is the
+  -- actual BR31 reference connection, with both tangent/normal signs.
+  -- General variable backgrounds use their independent ChartConnection.
+  warpedChristoffel : S → S → Axis → Axis → Axis → S
+  warpedChristoffel b k normal (wall a) (wall c) =
+    neg (b * b * k * eta a c)
+  warpedChristoffel b k (wall a) (wall c) normal =
+    k * eta a c * sign a
+  warpedChristoffel b k (wall a) normal (wall c) =
+    k * eta a c * sign a
+  warpedChristoffel b k _ _ _ = O
+
+  warpedConnection : S → S → ChartConnection
+  warpedConnection b k = chartConnection (warpedChristoffel b k)
+
+  -- Gaussian reference scalar collar: chi=1 and d_n chi=0 on n=0.
+  -- The actual cutoffs and their supported weighted chart domain remain
+  -- user-supplied jets. No artificial source profile is assumed.
