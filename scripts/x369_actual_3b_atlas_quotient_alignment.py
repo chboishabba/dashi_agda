@@ -124,6 +124,38 @@ def recover_coset(g,h,z,A,B):
     return (*c[:2],t)
 
 
+def e_conjugator(L,offset):
+    """Solve x h x^-1 = e h in E without enumerating 3^13.
+    In logarithm coordinates the quotient equation is (I-S)v=d.
+    Substitute Sv=v-d into the central equation, which is then linear.
+    """
+    S=L[:12,:12];ell=L[12,:12];s=int(L[12,12])
+    e=log_coord(offset);d=e[:12]
+    # log(x alpha_h(x)^-1)=((I-S)v,(1-s)t-ell*v-1/2 <v,Sv>).
+    # On the quotient solution set, -1/2 <v,Sv> = +1/2 <v,d>.
+    M=np.zeros((13,13),dtype=np.int64)
+    M[:12,:12]=(I-S)%3
+    M[12,:12]=(-ell+2*(J@d))%3;M[12,12]=(1-s)%3
+    r,p=rref(np.column_stack((M,e)))
+    if 13 in p:return None
+    x=np.zeros(13,dtype=np.int64)
+    for i,j in enumerate(p):x[j]=r[i,13]
+    require(np.array_equal(M@x%3,e),'exact E conjugator linear solve')
+    v=x[:12];u=L@x%3
+    actual=(x-u)%3;actual[12]=(actual[12]-2*int(v@J@u[:12]))%3
+    require(np.array_equal(actual,e),'original class-two conjugacy equation')
+    return group_coord(x)
+
+
+def actual_e_conjugacy(g,h,z,A,B):
+    e=recover_coset(g,h,z,A,B)
+    L=source_action(h,z,A,B);x=e_conjugator(L,e)
+    if x is None:return dict(extraspecial_conjugate=False,offset=e,conjugator=None)
+    w=make_word(x,z,A,B)
+    require(w*h*w**-1==g,'actual E conjugator does not realize equation')
+    return dict(extraspecial_conjugate=True,offset=e,conjugator=x,literal_conjugator=str(w))
+
+
 def atlas_matrices(root):
     data=root/'data'/'atlas';out=[]
     for name,sha in SOURCE_DIGESTS.items():
@@ -217,7 +249,10 @@ def run(a):
         e=recover_coset(moved,h,z,A,B)
         out['literal_quotient_conjugacy']=dict(word=str(g),representative=str(h),conjugator=str(k),
             extraspecial_residual=e,actual_group_conjugacy=(moved==h),
+            corrected_E_conjugacy=actual_e_conjugacy(moved,h,z,A,B),
             full_cover_class_identified=False)
+    out['central_shift_E_conjugacy']={name:[actual_e_conjugacy(g*z**i,g,z,A,B) for i in (1,2)]
+        for name,g in (('C',C),('D',D))}
     return out
 
 
