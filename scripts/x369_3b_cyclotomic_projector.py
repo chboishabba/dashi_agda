@@ -113,7 +113,7 @@ def run(a):
             and fc['zeta']==a.zeta and fc['mmgroup_version']==version('mmgroup'),'complete actual phase source')
     j=a.seed
     require(0<=j<90 and len(f['seed_labels'])==len(f['pivot_indices'])==90,'actual seed scope')
-    label=f['seed_labels'][j];index=MMSpace.index_to_linear(*label)
+    label=f['seed_labels'][j];index=int(MMSpace.index_to_linear(*label))
     V=MMV(7);z=MM(m['center_word']);A=tuple(MM(w) for w in m['translation_words']);B=tuple(MM(w) for w in m['modulation_words'])
     mf=WeylFrame(3,a.zeta,z,A,B,[],[],RowBasis())
     mod=mf.project(V(*label))
