@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section45 all-Clay native campaign, fail closed, exact owner checkouts.
+"""Section47 all-Clay native campaign, fail closed, exact owner checkouts.
 
 Every source and acceptance root is committed on its OWN PR branch.
 This runner checks original native Agda/Lean files in independently
@@ -24,7 +24,7 @@ Usage (replace placeholders with genuine original SHA pins):
     --require-head BSD_HODGE=<40-hex-commit>
     --require-head PNP=<40-hex-commit>
     --require-head RH=<40-hex-commit>
-    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection45Native.json
+    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection47Native.json
 
 The arguments are shown on separate lines for readability; pass them
 in ONE shell command (or put literal shell line-continuation characters
@@ -57,6 +57,7 @@ ROOTS = {
   "DASHI/Physics/YangMills/YMClayCMP102Section43PowerFactorAcceptanceExact.agda",
   "DASHI/Physics/YangMills/YMClayCMP102Section44BishopPowerAntitoneAcceptanceExact.agda",
   "DASHI/Physics/YangMills/YMClayCMP102Section45RealFilteredDegreeAcceptanceExact.agda",
+  "DASHI/Physics/YangMills/YMClayCMP102Section47FilteredMassAcceptanceExact.agda",
  ]),
  "NS": ("ns_root", [
   "Synthesis/ClayNSSection36FullSameFlowCompactnessAcceptanceExact.lean",
@@ -83,6 +84,7 @@ ROOTS = {
   "Synthesis/ClayHodgeSection43CentralDeckQ0WeldAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection44OriginalEvenDeckActionAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection45OriginalFreeEvenDeckAcceptanceExact.lean",
+  "Synthesis/ClayHodgeSection47DeckTransitionAcceptanceExact.lean",
  ]),
  "PNP": ("pnp_root", [
   "Welds/PNPSection36SameObligationInputVsWorkAcceptanceExact.lean",
@@ -185,7 +187,7 @@ def main() -> int:
         help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay45NativeAcceptanceV1",
+    report = {"schema": "Clay47NativeAcceptanceV1",
               "all_selected_roots_passed": False, "roots": {}, "checks": [],
               "meaning": "Selected finite theorem roots only; not universal Clay completion"}
     pins = {}
@@ -268,7 +270,7 @@ def main() -> int:
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
-    print("ALL-CLAY SECTION45 SELECTED ROOTS",
+    print("ALL-CLAY SECTION47 SELECTED ROOTS",
           "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
     return 0 if report["all_selected_roots_passed"] else 2
