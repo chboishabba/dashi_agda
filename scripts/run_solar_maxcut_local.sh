@@ -27,6 +27,9 @@ for entry in \
   check_solar_quadratic_jet.py \
   check_solar_passive_restoration_box.py \
   check_solar_restoration_geometry.py \
+  check_solar_asymptotic_return.py \
+  check_solar_controlled_terminal_return.py \
+  check_solar_nested_cochain_refinement.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
