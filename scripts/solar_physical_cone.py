@@ -9,6 +9,8 @@ spatial dimensions. All distances in metres and times in seconds.
 import numpy as np
 from scipy.constants import c
 from scipy.linalg import solve
+from scipy.sparse import issparse,csr_matrix
+from solar_matrix_storage import matrix,finite,block,close,nonzero_pairs
 
 def validate_mesh(mesh,d):
     xyz=np.asarray(mesh['positions_m'],float)
@@ -32,14 +34,14 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     is rejected unless its actual allotted interval satisfies the cone.
     This is a distinct approximation, not the original dense midpoint map.
     """
-    x=np.array(x,float,copy=True); H=np.asarray(H,float); force=np.asarray(force,float)
+    x=np.array(x,float,copy=True); H=matrix(H); force=np.asarray(force,float)
     d=len(x); assert H.shape==(d,d) and force.shape==(d,) and dt>0
     xyz,site,faces=validate_mesh(mesh,d)
     groups=[np.flatnonzero(site==i) for i in range(len(xyz))]
     if right_limit is not None and (jvp is None or atlas_pairs is None):
         raise ValueError('right limit requires JVP and common atlas')
-    P=H if right_limit is None else np.asarray(right_limit,float)
-    if P.shape!=H.shape or not np.isfinite(P).all():
+    P=H if right_limit is None else matrix(right_limit)
+    if P.shape!=H.shape or not finite(P):
         raise ValueError('invalid right limiting generator')
     fixed_pairs=None if atlas_pairs is None else tuple(tuple(p) for p in atlas_pairs)
     if fixed_pairs is not None:
@@ -48,25 +50,27 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             raise ValueError('invalid common offsite atlas')
         fixed_pairs=set(fixed_pairs)
     if jvp is not None:
-        dx,dH,df=map(lambda a:np.array(a,float,copy=True),jvp)
+        dx,dH,df=jvp
+        dx=np.array(dx,float,copy=True);dH=matrix(dH);df=np.array(df,float,copy=True)
         assert dx.shape==force.shape==df.shape and dH.shape==H.shape
-        if fixed_pairs is None and np.any((H==0)&(dH!=0)&(site[:,None]!=site[None,:])):
+        if fixed_pairs is None and any(H[i,j]==0 and dH[i,j]!=0 or H[j,i]==0 and dH[j,i]!=0 for i,j in nonzero_pairs(dH,site)):
             raise ValueError('tangent changes offsite stage support; use separate support chart')
         tangent_mid=np.zeros(d)
     if jet2 is not None:
         if jvp is None or fixed_pairs is None or right_limit is None:
             raise ValueError('second coefficient requires common right-stratum chart')
-        x2,H2,f2=map(lambda a:np.array(a,float,copy=True),jet2)
+        x2,H2,f2=jet2
+        x2=np.array(x2,float,copy=True);H2=matrix(H2);f2=np.array(f2,float,copy=True)
         if x2.shape!=x.shape or H2.shape!=H.shape or f2.shape!=force.shape:
             raise ValueError('second coefficient shape mismatch')
-        if not all(np.isfinite(a).all() for a in (x2,H2,f2)):
+        if not all(finite(a) for a in (x2,H2,f2)):
             raise ValueError('nonfinite second coefficient')
         midpoint2=np.zeros(d); total_w2=total_q2=total_balance2=0.
-    forms={} if loss_forms is None else {k:np.asarray(v,float) for k,v in loss_forms.items()}
+    forms={} if loss_forms is None else {k:matrix(v) for k,v in loss_forms.items()}
     for a in forms.values():
-        assert a.shape==(d,d) and np.allclose(a,a.T)
-        if np.any(a[site[:,None]!=site[None,:]]!=0): raise ValueError('loss form must be site-local')
-    if forms and not np.allclose(sum(forms.values()),-(H+H.T)/2,rtol=1e-10,atol=1e-12): raise ValueError('loss partition mismatch')
+        assert a.shape==(d,d) and close(a,a.T)
+        if nonzero_pairs(a,site): raise ValueError('loss form must be site-local')
+    if forms and not close(sum(forms.values()),-(H+H.T)/2,rtol=1e-10,atol=1e-12): raise ValueError('loss partition mismatch')
     channel={k:0. for k in forms}; incoming=outgoing=0.
     local_mid=np.zeros(d) if retain_local_midpoint else None
     reflected=None
@@ -77,41 +81,41 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         source_port=np.asarray(source_port,float); assert source_port.shape==(d,)
         assert len(np.unique(site[source_port!=0]))==1
         assert np.allclose(force,2*incident*source_port)
-        assert 'source' in forms and np.allclose(forms['source'],np.outer(source_port,source_port))
-    pieces=[]; accounted=np.zeros_like(H)
+        assert 'source' in forms
+        if issparse(forms['source']):
+            v=csr_matrix(source_port[:,None]); expected=v@v.T
+        else: expected=np.outer(source_port,source_port)
+        assert close(forms['source'],expected)
+    pieces=[]
     for ix in groups:
         if not len(ix): continue
-        a=H[np.ix_(ix,ix)]
+        a=block(H,ix)
         pieces.append((ix,a,force[ix],None))
-        accounted[np.ix_(ix,ix)]=a
     # Off-site couplings must be skew exchange on actual indexed faces.
     bypair={}
     for f in faces.values():
         key=tuple(sorted((f['source'],f['target'])))
         if key in bypair: raise ValueError('ambiguous face ownership')
         bypair[key]=f
-    for i in range(d):
-        for j in range(i+1,d):
-            if site[i]==site[j]: continue
-            active=bool(H[i,j]!=0 or H[j,i]!=0)
-            required=active or P[i,j]!=0 or P[j,i]!=0 or (
-                jvp is not None and (dH[i,j]!=0 or dH[j,i]!=0)) or (jet2 is not None and (H2[i,j]!=0 or H2[j,i]!=0))
-            if fixed_pairs is not None:
-                if (i,j) not in fixed_pairs:
-                    if required: raise ValueError('offsite support outside common atlas')
-                    continue
-                for M in ((P,) if jvp is None else (P,dH)) + (() if jet2 is None else (H2,)):
-                    if M[i,j]!=-M[j,i]:
-                        raise ValueError('nonreciprocal offsite limiting/tangent exchange')
-            elif not active: continue
-            if not np.isclose(H[i,j],-H[j,i],rtol=1e-12,atol=0):
-                raise ValueError('nonlocal dissipative/direct-feedthrough operator')
-            f=bypair.get(tuple(sorted((site[i],site[j]))))
-            if f is None: raise ValueError('missing original face')
-            ix=np.array([i,j]); a=H[np.ix_(ix,ix)].copy(); np.fill_diagonal(a,0)
-            pieces.append((ix,a,np.zeros(2),f['id']))
-            accounted[i,j]=H[i,j]; accounted[j,i]=H[j,i]
-    assert np.array_equal(accounted,H)
+    required=nonzero_pairs(H,site)|nonzero_pairs(P,site)
+    if jvp is not None: required|=nonzero_pairs(dH,site)
+    if jet2 is not None: required|=nonzero_pairs(H2,site)
+    if fixed_pairs is not None and not required<=fixed_pairs:
+        raise ValueError('offsite support outside common atlas')
+    for i,j in sorted(required if fixed_pairs is None else fixed_pairs):
+        active=bool(H[i,j]!=0 or H[j,i]!=0)
+        if fixed_pairs is not None:
+            for M in ((P,) if jvp is None else (P,dH)) + (() if jet2 is None else (H2,)):
+                if M[i,j]!=-M[j,i]:
+                    raise ValueError('nonreciprocal offsite limiting/tangent exchange')
+        elif not active: continue
+        if not np.isclose(H[i,j],-H[j,i],rtol=1e-12,atol=0):
+            raise ValueError('nonlocal dissipative/direct-feedthrough operator')
+        f=bypair.get(tuple(sorted((site[i],site[j]))))
+        if f is None: raise ValueError('missing original face')
+        ix=np.array([i,j]); a=block(H,ix).copy(); np.fill_diagonal(a,0)
+        pieces.append((ix,a,np.zeros(2),f['id']))
+    if not pieces: raise ValueError('empty stage chart')
     tau=dt/len(pieces); gain=dt/tau
     speed=float(mesh.get('front_speed_m_s',c))
     assert 0<speed<=c
@@ -169,11 +173,11 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             exact_error+=local_error
         mid=(old+y)/2; w=dt*float(mid@b); q=-dt*float(mid@a@mid)
         if jvp is not None:
-            da=dH[np.ix_(ix,ix)].copy(); db=df[ix].copy()
+            da=block(dH,ix).copy(); db=df[ix].copy()
             if fid is not None:
                 np.fill_diagonal(da,0); db[:]=0
             old_dx=dx[ix].copy()
-            ap=P[np.ix_(ix,ix)].copy()
+            ap=block(P,ix).copy()
             if fid is not None: np.fill_diagonal(ap,0)
             if right_limit is None:
                 dy=solve(I-dt*a/2,(I+dt*a/2)@old_dx+dt*(da@mid+db))
@@ -193,7 +197,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                     tangent_arrival[ix]=np.minimum(tangent_arrival[ix],t1)
             if jet2 is not None:
                 from solar_quadratic_jet import cayley2
-                a2=H2[np.ix_(ix,ix)].copy(); b2=f2[ix].copy()
+                a2=block(H2,ix).copy(); b2=f2[ix].copy()
                 if fid is not None:
                     np.fill_diagonal(a2,0); b2[:]=0
                 old2=x2[ix].copy()
@@ -224,7 +228,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         assert abs((y@y-old@old)/2-w+q)<1e-9*max(1.,abs(w),float(old@old))
         if fid is None:
             if local_mid is not None: local_mid[ix]=mid
-            for name,F in forms.items(): channel[name]+=dt*float(mid@F[np.ix_(ix,ix)]@mid)
+            for name,F in forms.items(): channel[name]+=dt*float(mid@block(F,ix)@mid)
             if source_port is not None and np.any(source_port[ix]!=0):
                 reflected=float(mid@source_port[ix]-incident)
                 incoming+=dt*incident**2; outgoing+=dt*reflected**2
@@ -238,6 +242,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
     return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
                   common_atlas=fixed_pairs is not None,
+                  sparse_operator=bool(issparse(H)),
                   clock_start_s=clock_start,clock_end_s=clock_start+dt,
                   inherited_reach_checked=reach_seed is not None,
                   right_limit_used=right_limit is not None,
