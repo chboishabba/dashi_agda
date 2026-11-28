@@ -107,7 +107,7 @@ module At (inputs : Round11.BishopCutset) where
     initial p =
       let c = cover p
           v = Reduced.point c
-          eq = complexTrans (orbitRead F hs ht hc (Reduced.word c)) (actual v)
+          eq = complexTrans (orbitRead F hs ht valueCong (Reduced.word c)) (actual v)
       in boxCong (complexSym eq) (D.B.valueBound (q v) (Reduced.inside c) (ev v))
 
     shrink : ∀ M → R.NonNegative M → I.Global M → I.Global (R._*_ Contract.contraction M)
@@ -115,7 +115,7 @@ module At (inputs : Round11.BishopCutset) where
       let c = cover p
           v = Reduced.point c
           coeff = FB.coefficientBound M (λ u → boxCong (actual u) (hb u))
-          eq = complexTrans (orbitRead F hs ht hc (Reduced.word c)) (actual v)
+          eq = complexTrans (orbitRead F hs ht valueCong (Reduced.word c)) (actual v)
       in boxCong (complexSym eq) (D.contract M nn coeff (q v) (Reduced.small c) (ev v))
 
     module End = I.From D.B.M D.B.Mnonnegative initial shrink
