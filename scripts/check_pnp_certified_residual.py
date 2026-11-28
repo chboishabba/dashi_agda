@@ -81,7 +81,7 @@ def tseitin(k,odd):
 def main():
     from random import Random
     from collections import Counter
-    rng=Random(3693302);C=Counter()
+    rng=Random(3693302);C=Counter();compare=Counter()
     for k in (8,16,32,64):
         for odd in (False,True):
             F,n=tseitin(k,odd);q=dispatch(F,n,(),(),(),10**7);assert q['status']==('EMPTY' if odd else 'WITNESS');assert q['route'] in ('xor','xor_original_audit');C['tseitin',q['status']]+=1
@@ -94,6 +94,9 @@ def main():
                     if planted and not accepts((c,),w):c=(-c[0],)+c[1:]
                     F.append(c)
                 F=tuple(F);q=dispatch(F,n,(),(),(),200000);status=q['status'];C[n,planted,status]+=1
+                old=prior(F,n,(),(),200000);compare[old['status'],status]+=1
+                if old['status']=='WITNESS':assert valid(F,n,(),(),(),old['witness'])
+                if old['status']!='UNKNOWN' and status!='UNKNOWN':assert old['status']==status
                 if status=='WITNESS':assert valid(F,n,(),(),(),q['witness'])
                 if status=='UNKNOWN':assert q['source']==(F,n,(),(),()) and q['reserved']==200000
                 if planted:assert status!='EMPTY'
@@ -105,5 +108,5 @@ def main():
             W=any(valid(F,n,A,t,O,x) for x in product((0,1),repeat=n));q=dispatch(F,n,A,t,O,1000000)
             assert q['status']==('WITNESS' if W else 'EMPTY');C['mixed']+=1
     assert dispatch(((1,),),1,(),(),(),0)['status']=='UNKNOWN'
-    print(dict(C))
+    print(dict(C));print('prior versus diagnostic',dict(compare))
 if __name__=='__main__':main()
