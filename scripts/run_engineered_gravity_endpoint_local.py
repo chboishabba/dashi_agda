@@ -12,6 +12,8 @@ from pathlib import Path
 
 CORE=(
     "check_engineered_gravity_proof_dag.py",
+    "check_engineered_gravity_reciprocal_controller_ward.py",
+    "check_engineered_gravity_maxwell_source_work_abi.py",
     "test_engineered_gravity_proof_dag.py",
     "check_engineered_gravity_coarse_to_fine.py",
     "check_engineered_gravity_endpoint_bidi.py",
@@ -64,6 +66,7 @@ CORE=(
     "check_tov_second_israel_shape.py",
     "check_tov_second_order_junction_inverse.py",
     "check_tov_moving_mass_constraint_weld.py",
+    "check_tov_spherical_source_israel_abi.py",
     "check_tov_constrained_mass_hessian.py",
     "check_tov_causal_constitutive_repair.py",
     "check_tov_radial_dynamics.py",
