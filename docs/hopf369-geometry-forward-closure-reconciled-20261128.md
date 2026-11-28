@@ -5652,3 +5652,30 @@ compact_symbolic.py executed with 90s caps, exit zero.
 The new combined checker contains additional assertions and
 third-level finite-h ranks not replayed; original donor import
 unrun. Terminal stage 35. No CI/native/PDE acceptance.
+
+
+## 50. BR215 — damped-scale sharp normalized amplitude loss
+
+Actual BR214 polynomial pencil M(u,h), normalized wall rows.
+At (0,0), K=ker M0 has dimension 6. Project the kernel of
+[M0, M_u K] to the last six coordinates and embed with K.
+The liftable leading amplitude space has dimension one.
+Local exact calculation gives v0=(a=0,b=(-3/5,-3/5,0,0,0),
+m=(sigma,0,0,1,0,0,0,0,0)), v1=0 for both signs.
+With h=c u² and symbolic complex c, M(u,h)v0 has zero
+constant and linear terms, nonzero quadratic coefficient
+independent of c. Its wall part is (-2i,0,0,-2 sigma i,0,...).
+Hence for |h|=O(|u|²), including fixed-positive-damping
+physical high-frequency rays, normalized compatible source
+M v0 is O(|u|²) while amplitude is nonzero. Combined with
+BR213 jump-only local inverse upper bound this gives sharp
+Theta(|u|^-2) normalized amplitude inverse loss on the ray.
+No claim for original unnormalized wall forcing: multiplying
+the wall residual by k makes the displayed quadratic term
+O(1) there. Nor is an arbitrary compatible image source
+necessarily an admissible physical Bianchi/Israel forcing.
+Need source-specific quotient or weighted estimate, bulk
+normal integration, differentiated curved boundary energy.
+Independent local damped.py ran twice under 90s, both exit 0.
+Final stdout recorded. Committed donor import unrun.
+Terminal stage 36. No CI/native/PDE or other-lane acceptance.

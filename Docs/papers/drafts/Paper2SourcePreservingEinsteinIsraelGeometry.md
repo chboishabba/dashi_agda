@@ -804,3 +804,7 @@ Exact truncated coefficient-map ranks on both glancing signs at k=1,2,10 give el
 ### BR214 compactified frequency
 
 With wall rows divided by k and h=1/k, symbolic maximal minors establish first-order local coupled elementary divisors for every finite positive k. At h=0 the jump-only second-order direction returns. A product-neighborhood uniform first-order inverse in these normalized norms is therefore excluded; the damped physical ray and compatible source weights still need a two-parameter estimate. See roadmap section 49.
+
+### BR215 damped-scale normalized loss
+
+An explicit nonzero original polarization/shape amplitude has normalized boundary residual O(u²) on h=c u² with symbolic c, for both signs. Combined with the jump-only inverse this gives sharp second-order loss in the normalized compatible amplitude norm along fixed-damping high-frequency rays. The unnormalized wall residual is not small by this witness. Source-specific admissibility and curved energy remain open. See roadmap section 50.
