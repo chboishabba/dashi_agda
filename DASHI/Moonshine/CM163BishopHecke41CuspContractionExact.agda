@@ -77,7 +77,7 @@ geoBound n =
       nn = Seq.nonNegx⇒nonNegxⁿ n rhoNN
       h = P.+-monoʳ-≤ (R.1ℝ - p) (P.nonNegx⇒0≤x nn)
       subOne = P.≤-respʳ-≃ (let open P.ℝ-Solver in solve 1
-        (λ p → (Κ 1ℚᵘ ⊖ p) ⊕ p ⊜ Κ 1ℚᵘ) P.≃-refl p)
+        (λ p → p ⊕ (Κ 1ℚᵘ ⊖ p) ⊜ Κ 1ℚᵘ) P.≃-refl p)
         (P.≤-respˡ-≃ (P.+-identityˡ (R.1ℝ - p)) h)
       fifthNN = P.0≤x⇒nonNegx
         (P.p≤q⇒p⋆≤q⋆ 0ℚᵘ (+ 1 / 5) (from-yes (0ℚᵘ QP.≤? (+ 1 / 5))))
