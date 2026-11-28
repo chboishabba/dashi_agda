@@ -1,0 +1,22 @@
+BR301,302,303,304,305 local execution in /tmp/hopf230, OPENBLAS_NUM_THREADS=1 timeout 90s python respective script. Six invocations: BR301 one, BR302 two, BR303/304 two, BR305 one, all explicit EXIT:0. Local git blobs verified against remote: BR301 c5506f347dc5ca7f378f4dd462c5cb54e23777ca; BR302 1c3d44a305b256e1d7ec409fd8265f5f5402bd0b; BR303/304 f621fe2c960c46df318e9ab4d3d9a2b38e3a0403; BR305 4dc8e4b3cab9c10107a6fe1c3840ef6467634715.
+BR301 four exact dyadic source-array marked steps. Source before/after SHA256 chain:
+7e85d6b483b890acb799f2b4b95d8b7f4284396004ed75ddc5ee85216dd8368f
+3f76e3177ce8842cec7bd9dc57cdb3719efe804fa53aec48712450f854538173
+fc7c24972135869c1a7193e061b69a016160869b00e196d00f4136f7c7ec495f
+045adfc755d3795e723c8fca6dd2327f640adc5fcdacf3cb8f04c0662b410088
+3a1d2162687cce918f2ec2235f27763eafdf484d678a8477cc45973c31369ebc
+Signed residuals in order [-7528395470103,1125899906842624],[-89740397078417,4503599627370496],[-73118651184375,2251799813685248],[-12361400219633,281474976710656].
+BR301 selected g44,g34 metric coordinates, not tidal observable or full native authentication.
+BR302 --n 7, --n 9. Two development attempts failed (inspect dynamic function and name shadowing), fixed before successful executions. Both four steps dt=.001, diagnostic time .002.
+BR302 7 boundary-jet velocity discrepancy 2.8494368198295206e-08
+BR302 7 outer-band H M C reduced [8.408459886374755e-06,1.3336195733170314e-08,1.622244005794471e-09,2.854286570241893e-05]
+BR302 7 core H M C reduced [6.4916284878757824e-06,1.0991056546389035e-08,5.5717914171360405e-09,2.8541859026676164e-05]
+BR302 9 boundary-jet velocity discrepancy 2.849379665548213e-08
+BR302 9 outer-band H M C reduced [2.6610888543655077e-06,9.629512137154946e-09,1.482760303428421e-09,2.8540400921039932e-05]
+BR302 9 core H M C reduced [1.0784713614406657e-05,9.462469540397789e-09,3.75019681975175e-09,2.8541931160308565e-05]
+BR302 interior magnetic divergence drift 4.336808689942018e-19 / 1.007346340231365e-18. Not physical causal exterior or independently verified boundary flux ledger.
+BR303 --part periodic: exact 5D vacuum Gauss and normal Ricci jump: mean trace zero and next normal jet agreement. OPEN actual BN representatives, tangential/time hierarchy and exterior.
+BR304 --part material: candidate caloric extension matches T=1 P0AG free energy; exact first law and positive heat capacity. OPEN physical caloric coefficient, material transport/action and reservoir stress; energy projection is not full momentum closure.
+BR305 dimension 4 exact trace reversal, contracted Bianchi and sourced subsidiary normal component PASS
+BR305 dimension 5 exact trace reversal, contracted Bianchi and sourced subsidiary normal component PASS
+BR300 source committed unrun: original BR229 donor file absent in local scratch and raw GitHub DNS failed, no source acceptance. No full native/kernel/continuum proof, no CI.
