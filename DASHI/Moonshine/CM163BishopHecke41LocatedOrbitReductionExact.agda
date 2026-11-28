@@ -232,7 +232,7 @@ module Lift (initial : Point) where
         hv = Centered.height c
         yv = P.≤-respʳ-≃ (P.≃-symm hv) base
         gain = heightGain v (Centered.lower c) (Centered.upper c) (P.<-respˡ-≃ (P.≃-symm hv) low)
-        dBound = P.*-monoʳ-≤-nonNeg yv (P.0≤x⇒nonNegx (P.<⇒≤ thirdPos))
+        dBound = P.*-monoˡ-≤-nonNeg yv (P.0≤x⇒nonNegx (P.<⇒≤ thirdPos))
         addGain = P.≤-trans (P.+-mono-≤ P.≤-refl dBound)
           (P.≤-respˡ-≃ (let open P.ℝ-Solver in solve 1
             (λ y → Κ (+ 4 / 3) ⊗ y ⊜ y ⊕ Κ (+ 1 / 3) ⊗ y) P.≃-refl (y v)) gain)
@@ -261,7 +261,7 @@ module Lift (initial : Point) where
   fuelEnough : third ≤ (y initial + NR.natReal fuel * delta)
   fuelEnough =
     let h = P.≤-trans (P.x≤∣x∣ {x = inv}) (P.<⇒≤ (Exp.magnitudeBelowNaturalBound inv))
-        mul = P.*-monoˡ-≤-nonNeg h (P.0≤x⇒nonNegx (P.<⇒≤ deltaPos))
+        mul = P.*-monoʳ-≤-nonNeg h (P.0≤x⇒nonNegx (P.<⇒≤ deltaPos))
         one = P.≤-respˡ-≃ (I.*-inverseˡ delta (inj₂ deltaPos)) mul
         more = P.≤-respˡ-≃ (P.+-identityˡ (NR.natReal fuel * delta))
           (P.+-mono-≤ (P.<⇒≤ (U.imaginaryPositive initial)) P.≤-refl)
