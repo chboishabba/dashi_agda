@@ -1,0 +1,62 @@
+{
+  "source": "scripts/check_pi_gmp_codec_memory.cpp",
+  "git_blob": "82027bc7acee4b4711f0ca1a2ed42dce1d60b8c5",
+  "local_blob_verified": true,
+  "compiler": "g++ 14.2.0 -O3 -std=c++17 -lgmpxx -lgmp -lcrypto",
+  "mode": "inplace",
+  "repetitions": 1,
+  "per_precision_timeout_seconds": 90,
+  "runner": "direct original executable, separate bounded runs; checkpoint wrapper not executed",
+  "analytic_identity_and_tail": "classical premises; native proof not checked",
+  "external_sota_compared": false,
+  "rows": [
+    {
+      "digits": 10000,
+      "ms": 3.9866,
+      "peak_rss_kib": 4736,
+      "triple_bits": 142231,
+      "sha256": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 100000,
+      "ms": 71.7083,
+      "peak_rss_kib": 6360,
+      "triple_bits": 1633834,
+      "sha256": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 500000,
+      "ms": 363.369,
+      "peak_rss_kib": 15916,
+      "triple_bits": 8915236,
+      "sha256": "fe727f5894e072423c570402dd3948bef1f318ea957498aab06a95351e1018f9",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 1000000,
+      "ms": 866.2665,
+      "peak_rss_kib": 28504,
+      "triple_bits": 18472995,
+      "sha256": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 5000000,
+      "ms": 6650.2244,
+      "peak_rss_kib": 132824,
+      "triple_bits": 99827455,
+      "sha256": "09eb526274ac828a3a54614e72fac5baa8ab6b26b8484fe1b065f678b2c8dbad",
+      "historical_hash_match": true
+    },
+    {
+      "digits": 10000000,
+      "ms": 15316.8999,
+      "peak_rss_kib": 264072,
+      "triple_bits": 206083400,
+      "sha256": "ae9c137083802006c204e6683c28c6727a862103d703b5e0d79a22ddaa201999",
+      "historical_hash_match": true
+    }
+  ]
+}
