@@ -34,3 +34,6 @@ See [Education formation source and weld atlas](RelationalFederationEducationFor
 
 ## Circular economy and institutional-accountability extension
 See [Circular reproduction source atlas and roadmap](RelationalFederationCircularReproduction20261129.md): DCCEEW, UNEP FI, Ellen MacArthur Foundation, IFC, OECD, Kalundborg, existing ESD source atlas and Australian/US political-finance source owners. External sources, user-origin research direction, JMD implementation and DASHI synthetic mathematics remain distinct. No empirical, legal, causal or authorisation promotion.
+
+## Woogaroo source crosswalk
+See [Woogaroo case attribution and deliverables](RelationalFederationWoogarooCase20261129.md) and master `Docs/WoogarooPreservationSourceAttribution.md`. Preserve original government, consultant/proponent, independent ecological/objection and community source fibres; distinct EPBC actions and legal/physical scopes. JMD and DASHI contributions are separate. No new external source acquisition or current status claim.
