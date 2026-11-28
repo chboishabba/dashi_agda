@@ -162,7 +162,10 @@ def main():
     if cached_stdlib.is_dir():
         audit_roots.append(str(cached_stdlib))
     def include_root(value):
-        root = Path(value).resolve()
+        root = Path(value)
+        if not root.is_absolute():
+            root = ROOT/root
+        root = root.resolve()
         return root/"src" if (root/"src").is_dir() else root
     audit_roots = [str(include_root(p)) for p in audit_roots]
     args.include = [str(include_root(p)) for p in args.include]
@@ -200,7 +203,10 @@ def main():
         if not out:
             raise RuntimeError("pinned Agda flake produced no output path")
         executable = str(Path(out[-1])/"bin/agda")
-    executable_path = Path(executable).resolve()
+    executable_path = Path(executable)
+    if not executable_path.is_absolute():
+        executable_path = ROOT/executable_path
+    executable_path = executable_path.resolve()
     if not executable_path.is_file():
         raise RuntimeError(f"resolved Agda binary is missing: {executable_path}")
     env["AGDA_BIN"] = str(executable_path)
