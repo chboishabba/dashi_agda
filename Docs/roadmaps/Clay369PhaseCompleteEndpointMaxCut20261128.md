@@ -1204,3 +1204,29 @@ or source-to-complex L derivative equivalence.
 
 All status must distinguish finite check, source theorem written,
 native kernel acceptance, physical construction and universal result.
+
+
+### Section 28 critical provenance correction: CMP102 23 Nov donors ALREADY PAID
+A fresh exact owner read of Agda #1536
+Docs/physics/YMCMP102OriginalSeriesQuarterDiskUniformModulus20261123.md
+and Docs/physics/YMCMP102OriginalEndpointCauchySourceWeld20261123.md
+shows that the all-degree finite polynomial coefficient cancellation,
+A_N(1)<=6/11, B_N(1)<=10/57, absolute-norm <=3,
+|G_N(X)|<=3*4^-N and explicit original A/B tail moduli
+were MATHEMATICALLY DERIVED on **23 Nov 2026**, before
+Sections26–27. They must be attributed to that earlier owner;
+Sections26–27 did NOT discover that mathematical estimate.
+The genuinely newer owners are the exact original SeriesOf count
+regression/receipt, Bishop original signed-square source file,
+Bishop geometric squeeze-to-zero receiver, and native acceptance
+entrypoint. No native finite Bishop-order bound is proved yet.
+The earlier original CMP102 23 Nov docs also reported a selected
+audit finding AT LEAST 13 `--safe` consumer-to-non-safe producer
+import edges among 15 examined Agda sources, including original
+Bishop finite Cauchy/parity constructors. This is a real native
+acceptance debt and was omitted from some later rollup summaries.
+Before declaring even scalar CMP102 kernel accepted, run the pinned
+Agda 2.9 and stdlib graph with source-level trust/--safe checking;
+do not remove safety pragmas blindly or rely on byte/source parity.
+The exact original native finite coefficient/bracket and its
+dependency-safe source import remain the target.
