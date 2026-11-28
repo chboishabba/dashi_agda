@@ -1,5 +1,5 @@
 """Original TOV spherical Einstein mass constraint pays moving Israel f-jets.
-Necessary source parity, not nonlinear Einstein free-boundary existence.
+Mass jets m1,m2 represent the INTERIOR-EXTERIOR JUMP: an exterior\nADM mass perturbation may be nonzero but has zero radial derivative.\nNecessary source parity, not nonlinear Einstein free-boundary existence.
 """
 import sympy as s
 def z(x):
