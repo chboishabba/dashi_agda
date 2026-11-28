@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python timeout 90 in /tmp/pnp32; new executable primary blobs checked against connector readback. Existing dependencies selected recovered source bodies, including actual max_flow_min_cut body from master script blob09c88ab4e2718da39c3cedd8c7e426f051e13c3a (local function-only module blob de78ec8a6751a6a10f21384bf8bc38f6eb0ab17d). Full Git checkout DNS failure rechecked. Native kernels unavailable/deferred, no CI.",
+  "runs": [
+    {
+      "file": "scripts/check_pnp_hall_geometry.py",
+      "blob": "ff68353f6f621b0373202956b2d03d900e2cc535",
+      "seconds": 1.07,
+      "bipartite_graphs": 512,
+      "forced_edge_tests": 2304,
+      "tripartite": {
+        "WITNESS": 61,
+        "EMPTY": 35,
+        "removed_edge_receipts": 355
+      },
+      "balanced_defects": [
+        {
+          "rows": 4,
+          "n": 8,
+          "subset": 3,
+          "neighbours": 2,
+          "used": 871
+        },
+        {
+          "rows": 8,
+          "n": 32,
+          "subset": 5,
+          "neighbours": 4,
+          "used": 4709
+        },
+        {
+          "rows": 16,
+          "n": 128,
+          "subset": 9,
+          "neighbours": 8,
+          "used": 30745
+        },
+        {
+          "rows": 32,
+          "n": 512,
+          "subset": 17,
+          "neighbours": 16,
+          "used": 222113
+        }
+      ],
+      "negative_controls": 2
+    },
+    {
+      "file": "scripts/check_pnp_hall_portfolio_campaign.py",
+      "blob": "e4fd9845a496d0c3b79664d776151bdbe6a48700",
+      "seconds": 0.81,
+      "independent_cnf": 144,
+      "guarded": 144,
+      "entailed_units": 118,
+      "conditional_receipts": 118,
+      "typed_cnf": 5,
+      "hard": {
+        "SAT": 2,
+        "IMPROVED": 5,
+        "MINIMUM": 7
+      },
+      "root_reservations": {
+        "original_cnf": 5000000,
+        "hard_affine": 42000000
+      },
+      "guarded_refusal": 1
+    },
+    {
+      "file": "scripts/check_pnp_finite_code_delay.py",
+      "blob": "1ea8a372ef04cfddf0d967d2bdbc850ab613adef",
+      "seconds": 1.03,
+      "prefix_source_checks": 2127,
+      "codes": 6,
+      "prefixes": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "states": [
+        7,
+        19,
+        53,
+        175,
+        721,
+        3469
+      ],
+      "prefix_calls": [
+        5,
+        16,
+        52,
+        197,
+        861,
+        4236
+      ],
+      "verified_later_gain_grade": [
+        7,
+        10,
+        13,
+        16,
+        19,
+        22
+      ]
+    },
+    {
+      "file": "scripts/check_pnp_decision_gain_bridge.py",
+      "blob": "e291b3c3eeb0decc6d9444f967c36e40d0177ee8",
+      "seconds": 1.19,
+      "source_candidate_pairs": 960,
+      "verified": 606,
+      "actual_query_failure": 354,
+      "gain_to_failure": 354
+    },
+    {
+      "file": "scripts/check_pnp_occurrence_compact.py",
+      "blob": "95960e33e62b981c04d987a54a0f1217a5cd06f5",
+      "seconds": 0.99,
+      "formulas": 320,
+      "forward": 1272,
+      "backward": 2220,
+      "exact_queries": 543,
+      "missed_source_controls": 78,
+      "huge_repeated_label": 1
+    }
+  ],
+  "limits": [
+    "Flow donor actual function reused; dense Edmonds-Karp logical allowance, not physical tape timing; no full checkout parity.",
+    "Tripartite groups supplied and verified, not automatically discovered on arbitrary X3C; forced-pair support necessary not sufficient; residual normal exact cover still required.",
+    "Hall proof replay and source-derived negative units sound scoped, not complete for arbitrary nonlinear source.",
+    "Finite-code trie construction offline unbounded, actual Python finite control model, no native TM compile or full-code deadline.",
+    "Decision error verification may use exponential truth enumeration, outside actual candidate runtime; Python CNF and AST fixture tests are separate from native Agda elaboration.",
+    "All seven universal routes remain open; no Clay endpoint or native acceptance."
+  ]
+}
