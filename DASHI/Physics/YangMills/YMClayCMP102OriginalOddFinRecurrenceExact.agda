@@ -55,19 +55,33 @@ originalOddFirstTerm X =
 
 -- The true higher odd shifted-Cauchy row, with both X² and
 -- the exact original b_(n+1) term, all degrees n>=0.
-originalOddHigherTerm :
-  ∀ X n → OddWeightedCauchy X →
+-- The linear original B term's exponent step follows directly from
+-- native Bishop `pow X (suc k) = pow X k * X`. No Cauchy estimate.
+originalOddLinearPower : ∀ X n →
   R._≃_
     (R._*_ (R._*_ C.two (C.bCoefficient (suc n)))
       (R.pow X (suc (suc n))))
-    (R._*_ (R._*_ C.two X) (W.bTerm X (suc n))) →
+    (R._*_ (R._*_ C.two X) (W.bTerm X (suc n)))
+originalOddLinearPower X n =
+  let
+    b = C.bCoefficient (suc n)
+    p = R.pow X (suc n)
+    open P.ℝ-Solver
+  in solve 3
+    (λ b x p →
+      (Κ (+ 2 / 1) ⊗ b) ⊗ (p ⊗ x)
+      ⊜ ((Κ (+ 2 / 1) ⊗ x) ⊗ (b ⊗ p)))
+    P.≃-refl b X p
+
+originalOddHigherTerm :
+  ∀ X n → OddWeightedCauchy X →
   R._≃_
     (O.originalOddAt X (suc (suc n)))
     (R._+_
       (R._*_ (R._*_ C.two X) (W.bTerm X (suc n)))
       (R._*_ (R._*_ X X)
         (Row.cauchyCoefficient (W.bTerm X) (W.bTerm X) n)))
-originalOddHigherTerm X n weighted hlinear =
+originalOddHigherTerm X n weighted =
   P.≃-trans
     (let
        b = C.bCoefficient (suc n)
@@ -79,7 +93,7 @@ originalOddHigherTerm X n weighted hlinear =
          ((Κ (+ 2 / 1) ⊗ b) ⊕ q) ⊗ p
          ⊜ ((Κ (+ 2 / 1) ⊗ b) ⊗ p) ⊕ (q ⊗ p))
        P.≃-refl b q p)
-    (P.+-cong hlinear (weighted n))
+    (P.+-cong (originalOddLinearPower X n) (weighted n))
 
 -- Short original odd normal form: the right-hand prefix is B_n
 -- directly. This is equivalent to the Section32 formulation
