@@ -11,8 +11,8 @@ def child_bounds(lo,hi,parent_lower=0,parent_upper=None):
     # Delta2=-m, Delta0=3*c0-m, Delta1=3*c1-m.
     mlo=max(0,parent_lower,ceil(-hi[2]));mhi=floor(-lo[2])
     if parent_upper is not None:mhi=min(mhi,parent_upper)
-    L=[max(0,ceil((lo[d]+mlo)/3)) for d in (0,1)]
-    U=[min(mhi,floor((hi[d]+mhi)/3)) for d in (0,1)]
+    L=[max(0,ceil(Q(lo[d]+mlo)/3)) for d in (0,1)]
+    U=[min(mhi,floor(Q(hi[d]+mhi)/3)) for d in (0,1)]
     a,b=L;u,v=U
     L=(max(a,mlo-v),max(b,mlo-u));U=(min(u,mhi-b),min(v,mhi-a))
     assert mlo<=mhi and all(0<=a<=b for a,b in zip(L,U))
@@ -24,8 +24,9 @@ def direct(F,n,ledger,rows=(),target=(),split_budget=4,exact_probe_budget=0,cell
     All prefixes are original unit clauses. One observer query per bit,
     with optional refinement only when the existing bounds cannot progress.
     """
-    F=canon(tuple(tuple(c) for c in F));rows=tuple(tuple(r) for r in rows);target=tuple(target)
+    F=tuple(tuple(c) for c in F);rows=tuple(tuple(r) for r in rows);target=tuple(target)
     if n<0 or len(rows)!=len(target) or any(len(r)!=n for r in rows) or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
+    F=canon(F)
     opt={} if cell_options is None else dict(cell_options)
     if 'ledger' in opt:raise ValueError('ledger')
     valid=lambda x:accepts(F,x) and tuple(sum(a*b for a,b in zip(r,x))%3 for r in rows)==target
