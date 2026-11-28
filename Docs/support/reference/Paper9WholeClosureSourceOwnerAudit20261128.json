@@ -86,7 +86,7 @@
   ],
   "negative_control": {
     "source": "scripts/check_paper9_modular_cusp_rigidity_negative.py",
-    "actual_run": "locally equivalent code, committed Git blob was verified but executed file not byte-matched",
+    "actual_run": "Committed exact Git blob b4dbc22c0c3e54a452c9729d6d0aa54a378af725 executed locally at degrees 80 and 256; both PASS",
     "degree": 80,
     "inv_j_coefficients": [
       0,
@@ -99,7 +99,13 @@
       4999042477430456
     ],
     "conclusion": "nonzero modular meromorphic cusp-zero germ, missing pole-free global rigidity",
-    "native_proof": false
+    "native_proof": false,
+    "byte_identical": true,
+    "degrees": [
+      80,
+      256
+    ],
+    "source_git_blob": "b4dbc22c0c3e54a452c9729d6d0aa54a378af725"
   },
   "native_compilers_available": false,
   "github_ci_executed": false,
