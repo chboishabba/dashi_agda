@@ -39,6 +39,7 @@ def main():
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--slab-limit',type=int,default=1)
     p.add_argument('--local-growth',action='store_true')
     p.add_argument('--power',type=int,default=2)
     p.add_argument('--degree',type=int,default=8)
@@ -87,8 +88,15 @@ def main():
         ap=work/f'{prefix}_cert{x.degree}_aggregate.pkl'
         ag=load(ap,up,src)
         T,delay=ag['clock']
-        z=construct(m,a,delay,T,x.degree)
-        save(work/f'{prefix}_cert{x.degree}_growth.pkl',z,dict(up,aggregate=sha(ap)),src)
+        deps=dict(up,aggregate=sha(ap))
+        partial=work/f'{prefix}_cert{x.degree}_growth_partial.pkl'
+        prior=load(partial,deps,src) if partial.exists() else []
+        if x.slab_limit<1:raise ValueError('positive slab limit required')
+        z=construct(m,a,delay,T,x.degree,prior=prior,
+                    checkpoint=lambda rows:save(partial,rows,deps,src),limit=x.slab_limit)
+        if z is None:
+            print('PARTIAL local growth; resume same command',flush=True);return
+        save(work/f'{prefix}_cert{x.degree}_growth.pkl',z,deps,src)
         print('conditional local growth envelope written',flush=True)
     elif x.stage=='history-contract':
         from solar_steelman_history_acceptance import complete
