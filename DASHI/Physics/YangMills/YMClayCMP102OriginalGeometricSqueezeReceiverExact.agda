@@ -88,7 +88,7 @@ quarterAbsBelowOne :
   R._<_ (R.∣ Half.bishopQuarter ∣) R.1ℝ
 quarterAbsBelowOne =
   P.<-respˡ-≃
-    (P.≃-symm (P.nonNegx⇒∣x∣≃x quarterNonnegative))
+    (P.nonNegx⇒∣x∣≃x quarterNonnegative)
     Machin.quarterBelowOne
 
 -- Existing Bishop geometric-power vanishing and sequence multiplication
