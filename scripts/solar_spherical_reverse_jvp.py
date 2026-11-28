@@ -7,10 +7,16 @@ from solar_physical_causal import MASS,CHARGE
 from solar_spherical_cycle import geometry
 from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_thermal_population_tangent import reaction_jvp,event_jvp,thermal_jvp,collision_jvp
-from solar_material_generator_jvp import material_jvp
+from solar_material_generator_jvp import material_jvp,amplitude_material_boundary_jvp
+from solar_population_amplitude_event import event_amplitude_jvp,right_reaction_support
 from solar_physical_cone import timed_step
 
-def campaign_jvp(material,cfg,dheating,dload):
+def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
+    """Smooth chart, or one-sided s>=0 path with controls affine in u=s*s.
+    In the latter chart density and thermal derivatives are retained in u,
+    normalized current and the objective first derivative are in s.
+    This is not a density-gradient or unrestricted optimization certificate.
+    """
     rows,neutral,D,gyro,axis=material
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level']); n=len(vol)
     assert len(rows)==n and len(cfg['row_keys'])==n
@@ -28,9 +34,15 @@ def campaign_jvp(material,cfg,dheating,dload):
     cap=np.asarray(cfg['heat_capacity_J_K'],float)
     cool=np.asarray(cfg['cooling_W_K'],float)
     pop=np.asarray(D,float)*MASS/CHARGE**2
-    if not np.all(pop>0):raise ValueError('positive population support chart required')
+    if not quadratic_amplitude_path and not np.all(pop>0):raise ValueError('positive population support chart required')
+    if quadratic_amplitude_path and (not cfg.get('common_stage_atlas',False) or not cfg.get('fixed_horizon',True)):
+        raise ValueError('quadratic path requires common atlas and fixed horizon')
+    if quadratic_amplitude_path and (np.any((heat==0)&(dheat<0)) or np.any((load==0)&(dload<0))):
+        raise ValueError('negative right control path')
     pool=np.asarray(q['initial_neutral_m3'],float).copy()
     theta=np.zeros(n);x=np.zeros(ne+nf+9*n)
+    pop_right=pop>0; pool_right=pool>0
+    indexed_events=[]; paid_u=0.
     dpop=np.zeros_like(pop);dpool=np.zeros_like(pool)
     dtheta=np.zeros_like(theta);dx=np.zeros_like(x)
     start=(x.copy(),pop.copy(),pool.copy(),theta.copy())
@@ -59,9 +71,25 @@ def campaign_jvp(material,cfg,dheating,dload):
                 removed,created,newpool=primal
                 dr,da,dnewpool=deriv
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
-                (z,pnew,kinetics),(dz,dpnew)=event_jvp(
-                    x[sl],old,removed,created,birth[i],vol[i],
-                    dx[sl],oldd,dr,da)
+                if quadratic_amplitude_path:
+                    pr,rr=right_reaction_support(pop_right[i],pool_right[i],power[i],dpower[i],q)
+                    (z,pnew,kinetics),lift=event_amplitude_jvp(
+                        x[sl],old,removed,created,birth[i],vol[i],
+                        dx[sl],oldd,dr,da,pop_right[i],pr)
+                    dz,dpnew=lift['state_jvp'],lift['population_u']
+                    # Store actual signed residuals, independently of index labels.
+                    indexed_events.append(dict(
+                        index=dict(history=cfg['row_keys'][i],time=[cycle_index,index],
+                            depth=cfg['angular_level'],iteration=cycle_index,
+                            version=cfg.get('source_version','unversioned')),
+                        cell=i,old_right=pop_right[i].tolist(),new_right=pr.tolist(),
+                        signed_amplitude_residual=lift['signed_amplitude_residual'].tolist(),
+                        signed_tangent_residual=lift['signed_tangent_residual'].tolist()))
+                    pop_right[i]=pr;pool_right[i]=rr
+                else:
+                    (z,pnew,kinetics),(dz,dpnew)=event_jvp(
+                        x[sl],old,removed,created,birth[i],vol[i],
+                        dx[sl],oldd,dr,da)
                 x[sl]=z;dx[sl]=dz;pop[i]=pnew;dpop[i]=dpnew
                 pool[i]=newpool;dpool[i]=dnewpool
                 formed+=vol[i]*float(created@chem)
@@ -85,28 +113,39 @@ def campaign_jvp(material,cfg,dheating,dload):
                 vol,Dcurrent,nu,gyro,axis)
             if cfg.get('common_stage_atlas',False) and atlas is None:
                 atlas=structural_stage_atlas(model,mesh)
-            j=material_jvp(model,vol,Dcurrent,nu,dD,dnu)
+            if quadratic_amplitude_path:
+                if np.any((Dcurrent==0)&(dD<0)):
+                    raise ValueError('negative right density coefficient')
+                dq=np.sqrt(np.where(Dcurrent==0,dD,0.))
+                j=amplitude_material_boundary_jvp(model,vol,np.sqrt(Dcurrent),dq,nu,np.zeros_like(dnu),gyro,axis,pop_right)
+            else:
+                j=material_jvp(model,vol,Dcurrent,nu,dD,dnu)
             L=np.zeros_like(model['generator']);dL=np.zeros_like(L)
             L[np.arange(ne),np.arange(ne)]=cur_load
-            dL[np.arange(ne),np.arange(ne)]=cur_dload
+            dL[np.arange(ne),np.arange(ne)]=0. if quadratic_amplitude_path else cur_dload
             A=model['generator']-L-source
-            dA=j['d_generator']-dL
+            dA=(j['d_right_generator'] if quadratic_amplitude_path else j['d_generator'])-dL
+            right_limit=j['right_limit']-L-source if quadratic_amplitude_path else None
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
                 dict(collision=model['loss'],load=L,source=source),port,inc,
-                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas)
+                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas,right_limit=right_limit)
             dx=np.asarray(receipt['state_jvp'],float)
             em=np.asarray(receipt['local_midpoint'][:ne],float)
             dem=np.asarray(receipt['local_midpoint_jvp'][:ne],float)
             useful+=dt*float(cur_load@em**2)
-            duseful+=dt*float(cur_dload@em**2+2*(cur_load*em)@dem)
+            duseful+=dt*float((0. if quadratic_amplitude_path else cur_dload@em**2)+2*(cur_load*em)@dem)
             absorbed=dt*float(power.sum());dabsorbed=dt*float(dpower.sum())
             ec=q['chemical_input_efficiency']
             er=q['chemical_recovery_efficiency']
             paid+=absorbed/cfg['heater_efficiency']+(
                 formed+birth_energy)/ec-er*removed_energy
-            dpaid+=dabsorbed/cfg['heater_efficiency']+(
+            cost_tangent=dabsorbed/cfg['heater_efficiency']+(
                 dformed+dbirth_energy)/ec-er*dremoved_energy
-    end=(x,pop,pool,theta);dend=(dx,dpop,dpool,dtheta)
+            if quadratic_amplitude_path: paid_u+=cost_tangent
+            else: dpaid+=cost_tangent
+    end=(x,pop,pool,theta)
+    density_u=(dpop,dpool,dtheta) if quadratic_amplitude_path else None
+    dend=(dx,np.zeros_like(dpop),np.zeros_like(dpool),np.zeros_like(dtheta)) if quadratic_amplitude_path else (dx,dpop,dpool,dtheta)
     restoration_squared=sum(float(np.sum((a-b)**2)) for a,b in zip(end,start))
     drestoration_squared=2*sum(float(np.sum((a-b)*(da-db)))
         for a,b,da,db in zip(end,start,dend,dstart))
@@ -117,4 +156,7 @@ def campaign_jvp(material,cfg,dheating,dload):
         drestoration_squared=drestoration_squared,
         endpoint=end,endpoint_jvp=dend,
         common_stage_atlas=atlas is not None,
-        scope='fixed topology, positive population; not strict restored-net gate')
+        quadratic_amplitude_path=bool(quadratic_amplitude_path),
+        population_pool_temperature_u_jvp=density_u,paid_u_jvp=paid_u if quadratic_amplitude_path else None,
+        indexed_event_residuals=indexed_events,
+        scope=('one-sided quadratic control path, finite velocity; not an unrestricted density gradient' if quadratic_amplitude_path else 'fixed topology, positive population; not strict restored-net gate'))
