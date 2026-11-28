@@ -35,10 +35,11 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble','history-exact-leaf'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble','history-exact-leaf','history-contract'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--power',type=int,default=2)
     p.add_argument('--degree',type=int,default=8)
     p.add_argument('--export-trace',action='store_true')
     p.add_argument('--knots',type=int,default=4)
@@ -79,6 +80,16 @@ def main():
         z=ambient_bounds(m,a)
         save(work/'history_bounds.pkl',z,up,src)
         print('conditional ambient coefficient bounds', {k:float(v) for k,v in z.items()},flush=True)
+    elif x.stage=='history-contract':
+        from solar_steelman_history_acceptance import complete
+        prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
+        ag=load(work/f'{prefix}_cert{x.degree}_aggregate.pkl',up,src)
+        leaf=load(work/'history_exact_leaf.pkl',up,src)
+        bounds=load(work/'history_bounds.pkl',up,src)
+        assert float(ag['clock'][1])==x.delay
+        z=complete(ag,leaf,bounds,x.knots,x.power)
+        save(work/f'{prefix}_cert{x.degree}_power{x.power}.pkl',z,up,src)
+        print(z['status'],flush=True)
     elif x.stage=='history-exact-leaf':
         from solar_steelman_history_acceptance import leaf,exact_tangency,endpoint_ratio
         Q,L=leaf(m,a)
