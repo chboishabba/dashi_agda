@@ -5,7 +5,7 @@ module DASHI.Mathematics.Complexity.PNPDAGSparseDependencyExact where
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Fin.Base renaming (zero to fzero; suc to fsuc)
+open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Vec.Base using (Vec; _∷_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Product using (_×_; _,_)
