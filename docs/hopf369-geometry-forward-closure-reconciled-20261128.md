@@ -5459,3 +5459,30 @@ current, metric/observer deformation bounds and wall shape current
 on the same field, differentiated source compatibility and
 derivative-balanced trace. No new W0-W7 closure or other lane
 implementation. No native kernel/CI/continuum acceptance.
+
+
+## 44. BR209 — actual Bel divergence source factor
+
+Reuse BR27 original carrier X,G,A and Bel contraction. At an
+orthonormal point use covariant Weyl first jets z (175 entries),
+exterior defect C z (100 packed entries). Contract the exterior
+defect to recover divergence via Ricci-free jets and pair symmetry:
+div W_{b,de}=sum_a eta_a C_{ade,ab}. Electric rows take minus
+this contraction; magnetic rows take C_{0ij,de}. This defines
+B, with X^T B C = G R, R=[I,-A1,-A2,-A3,-A4].
+The full 35x175 rational identity passes; direct Bel divergence
+at fixed observer agrees with -w^T X^T B C z in two nonzero
+rational sample jets (120/77 and -115/77). Local independent
+reconstruction executed SymPy 1.14.0 under 90s, exit 0.
+The general pointwise source formula follows from BR27 quadratic
+energy/flux identities and this matrix identity. Observer
+deformation remains the separate three-argument BR208 current
+term. This is a source identity, not constraint propagation:
+actual curved Bianchi defect must be bounded or shown zero by
+same-source evolution. BR139/150 collar equation provides a
+conditional mixed-norm trace bound; BR137 surface current must
+be composed with it using actual mixed curvature and source
+norms. No automatic estimate of those norms from bulk L2.
+Terminal stage 30 registered. Original donor entry unrun.
+No native kernel, CI, curved boundary estimate or nonlinear
+generation accepted. Other programme lanes unchanged.
