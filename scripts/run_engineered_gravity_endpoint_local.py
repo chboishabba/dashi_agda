@@ -19,6 +19,7 @@ CORE=(
     "check_engineered_gravity_finite_source_families.py",
     "check_engineered_gravity_finite_admissibility.py",
     "check_engineered_gravity_shell_dynamics.py",
+    "check_engineered_gravity_general_shell_hybrid.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
