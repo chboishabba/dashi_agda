@@ -44,7 +44,7 @@ def audit(m,repo=None):
                     results[w["lanes"][0]].setdefault("missing_w1_sources",[]).append(w[key])
                     continue
                 b=f.read_bytes()
-                actual=hashlib.sha1(("blob "+str(len(b))+"\\0").encode()+b).hexdigest()
+                actual=hashlib.sha1(("blob "+str(len(b))+"\0").encode()+b).hexdigest()
                 if actual!=w[pin]:
                     results[w["lanes"][0]].setdefault("mismatched_w1_sources",[]).append(w[key])
     return results
