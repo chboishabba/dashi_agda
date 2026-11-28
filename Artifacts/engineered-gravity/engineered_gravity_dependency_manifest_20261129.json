@@ -296,7 +296,9 @@
       "checker": "scripts/check_tov_spherical_source_israel_abi.py",
       "scope": "exact static/polar-areal spherical Einstein mass+radial traction to Israel K; dynamic velocity, GHY and metric open",
       "source_equation": "m_prime=4pi*r^2*rho; nu_prime=(m+4pi*r^3*p_r)/(r^2*(1-2m/r))",
-      "physical_paid": false
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "c4183ce3b49d36c598f4e0313197fdd2daafe473"
     },
     "reciprocal_controller_ward": {
       "lanes": [
@@ -307,7 +309,9 @@
       "checker": "scripts/check_engineered_gravity_reciprocal_controller_ward.py",
       "scope": "signed static radial G(X) flux, geometric dilution, nonzero controller work; physical action embedding and Einstein open",
       "source_equation": "r^2 G(X) u_prime=q; T_rr_prime+4*T_rr/r=-(1/2)u_prime^T G_X u_prime X_prime",
-      "physical_paid": false
+      "physical_paid": false,
+      "source_git_blob_sha1": "e0faa5cf1cd543c5c49a9845a0a8bee09c7ba67d",
+      "checker_git_blob_sha1": "25d79cd6c6194034d06c0b32f8414f5f6b962256"
     },
     "maxwell_source_work": {
       "lanes": [
@@ -321,7 +325,9 @@
       "scope": "Standalone sourced Maxwell polarization/J-work mathematical model only; NO original apparatus current, F8 triad or MHD current admitted; physical source owner missing, Einstein response open",
       "source_equation": "partial_t((E^2+B^2)/2)+partial_x(E B)=-J E",
       "physical_paid": false,
-      "physical_source_owner": null
+      "physical_source_owner": null,
+      "source_git_blob_sha1": "6f9f5608e5e91d70c88589f4614f5fa5a02f1e51",
+      "checker_git_blob_sha1": "6f9f5608e5e91d70c88589f4614f5fa5a02f1e51"
     },
     "f8_israel_current": {
       "lanes": [
@@ -331,7 +337,9 @@
       "checker": "scripts/check_f8_current_israel_reciprocal_weld.py",
       "scope": "original F8 master/Israel flux donor, same-clock native sidecar and full moving trace unpaid",
       "source_equation": "original GN Israel source and reciprocal master flux",
-      "physical_paid": false
+      "physical_paid": false,
+      "source_git_blob_sha1": "647269cb54d332f8e021eedeb2f5965088e64198",
+      "checker_git_blob_sha1": "011023f65649b64d507294598de77349991ee134"
     },
     "g3_harmonic_receiver": {
       "lanes": [
@@ -342,7 +350,9 @@
       "checker": "scripts/check_engineered_gravity_g3_harmonic_receiver.py",
       "scope": "harmonic reduced Einstein comparator, not physical constraint propagation/causal domain",
       "source_equation": "reduced Ricci=0 plus independent subsidiary constraints",
-      "physical_paid": false
+      "physical_paid": false,
+      "source_git_blob_sha1": "6c6ab7ee9ecdd6a723f6caf0797dfa8c090744a6",
+      "checker_git_blob_sha1": "e634f687e0e6adb9785ba3318e10ac4a1b52effd"
     },
     "g4_curved_frame": {
       "lanes": [
@@ -353,7 +363,10 @@
       "external_checker_pr": 1554,
       "scope": "external donor curved primitive stress; not in #1547 checkout nor a coupled Einstein-RMHD solution",
       "source_equation": "ADM frame transformed RMHD stress",
-      "physical_paid": false
+      "physical_paid": false,
+      "source_git_blob_sha1": "a9c921903fa207addc13458188dd299e4bdfcf39",
+      "checker_git_blob_sha1": "6bf3f5e0be64db624ccf7c6e2b8c8c7c731ae142",
+      "external_checker_head": "888859ed04881def4d23adf65865ab5316878a31"
     }
   }
 }
