@@ -46,8 +46,9 @@ def fixture():
     dload=np.zeros(ne);dload[0]=.08
     return material,cfg,dheat,dload
 
-def run():
+def run(common_atlas=False):
     material,cfg,dheat,dload=fixture()
+    cfg['common_stage_atlas']=bool(common_atlas)
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level']);n=len(vol)
     base=campaign_jvp(material,cfg,dheat,dload)
     zero=cycle(material,cfg)
@@ -87,10 +88,12 @@ def run():
                           restoration_squared_jvp_relative_error=restoration_error))
         assert error < 1e-5*max(1.,abs(fd))
     return dict(status='NATIVE_SYNTHETIC_SPHERICAL_JVP_PASS',
+                common_stage_atlas=bool(common_atlas),
                 n_cells=len(cfg['row_keys']),work_jvp=base['dcampaign_net_J'],
                 original_return_squared=base['restoration_squared'],
                 derivative_tests=tests,full_original_restored=bool(zero['full_original_restored']),
                 strict_campaign_net_J=zero['strict_campaign_net_J'],
                 positive_physical_endpoint_claim=False)
 if __name__=='__main__':
-    print(json.dumps(run(),indent=2))
+    import sys
+    print(json.dumps(run('--common-atlas' in sys.argv),indent=2))
