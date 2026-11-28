@@ -7,6 +7,9 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Vec.Base using (Vec; _∷_)
+open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as Repair
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as C
 
@@ -63,3 +66,38 @@ splitOutputExact h k p w x with splitBySuffix h k p
 
 -- Every original gate program of size h+k now has the original
 -- k-gate prefix and h-gate suffix, retaining input bypass wires.
+
+-- Reuse the exact donor behind anyActualTwinResidualMustSeparate:
+-- the original gate-prefix observation can omit input bypasses, and
+-- those bypasses are a typed residual of the cut.
+module ActualCut {n g h : Nat}
+  (p : C.GateProgram n g) (s : Suffix n g h)
+  (w : C.WireRef n h) where
+
+  coarse : Vec Bool n → Vec Bool g
+  coarse = C.evaluateProgram p
+
+  consumer : Vec Bool n → Bool
+  consumer x = C.evaluateWire w x (C.evaluateProgram (attach p s) x)
+
+  combine : Vec Bool g × Vec Bool n → Bool
+  combine (v , x) = C.evaluateWire w x (evalFrom s x v)
+
+  repair : Repair.ResidualRepair coarse (λ x → x) consumer
+  repair = record
+    { Repair.jointSufficient = λ x y same →
+        trans (outputFactor p s w x)
+          (trans (cong combine same) (sym (outputFactor p s w y)))
+    }
+
+  -- ANY repair, not just the full original input, must separate each
+  -- actual prefix collision with distinct final decision.
+  cutResidualMustSeparate : ∀ {R : Set} (r : Vec Bool n → R) →
+    (collision : Repair.ConsumerRelevantCollision coarse consumer) →
+    Repair.ResidualRepair coarse r consumer →
+    r (Repair.left collision) ≡ r (Repair.right collision) → ⊥
+  cutResidualMustSeparate r collision correct same =
+    Repair.residualMustSeparateRelevantCollision collision correct same
+
+-- This transfers consumer-indexed necessity, not arithmetic primality
+-- results or a universal SAT circuit lower bound.
