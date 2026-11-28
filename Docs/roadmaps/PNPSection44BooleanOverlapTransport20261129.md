@@ -1,4 +1,7 @@
 # Section 44 — Boolean overlap transport, exact circuit lift and weighted execution frontier
+
+> **Scope correction — Section 45 controls:** [block overlap and direct Boolean resource frontier](PNPSection45BlockOverlapDirectBoolean20261129.md). This is classical-style parameterized multilinearization, not a repair of the upstream proof internals or an unrestricted Boolean lower bound. Even a valid arithmetic bound only yields a shared-support tradeoff and no effective threshold here. The nonuniform implication is VP=VNP => NP subset P/poly under the stated field assumptions; no implication from uniform P=NP to VP=VNP is asserted. See Section 45 for actual DAG diagnostics and the fixed-cut rank counterexample.
+
 Date: 2026-11-29. Controlling PR #1548, base master (reported fad22a838ab8324d863bc1d683c8135c3be1bef1 at audit). Source audit head 59dd06f1ab82dbced65e9f60935bb6e3220ddaa0; executable checker commit afa92271dd367d884b7585156e734f099f30f811. Donor PR #1549 head 8c1091c45c3ffa8c1eb87f527fcce61d9137c07d. Targeted default-branch search for global overlap multilinear, syntactic multilinear, symbolic_state_sum, overlap conditioning found no matching complexity owner; search index URLs were at c67d5d0e51f98d6171e77f440ddacc717a3201d8, not the reported base tip. This is not an exhaustive master audit.
 
 ## Provenance and status
