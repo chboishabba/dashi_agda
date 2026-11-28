@@ -11,7 +11,7 @@ from solar_spherical_reverse_jvp import campaign_jvp
 from solar_physical_causal import MASS,CHARGE
 
 def reverse_constrained(material,cfg,design):
-    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
     n=len(vol);src=np.asarray(cfg['incident_sqrt_W'],float)
     template_h=np.asarray(design['heater_pattern_W'],float)
     template_l=np.asarray(design['load_pattern_s_inv'],float)
