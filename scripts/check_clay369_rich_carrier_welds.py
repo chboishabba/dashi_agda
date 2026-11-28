@@ -85,6 +85,21 @@ for _ in range(128):
     rot=lambda v: tuple(v[i] for i in p)
     check('RH_determinant_C3',dot(a,cross(b,c))==dot(rot(a),cross(rot(b),rot(c))))
 
+# Actual connected-score identity on a finite positive quadrature measure.
+for _ in range(128):
+    weights=[Q(rng.randint(1,7),7) for _ in range(6)]
+    a,b,c=([Q(rng.randint(-9,9),3) for _ in weights] for _ in range(3))
+    Z=sum(weights)
+    Za,Zb=dot(weights,a),dot(weights,b)
+    Zab=dot(weights,[x+y*z for x,y,z in zip(c,a,b)])
+    connected=(Z*Zab-Za*Zb)/Z**2
+    check('YM_connected_score',connected==dot(weights,c)/Z+dot(weights,[x*y for x,y in zip(a,b)])/Z-Za*Zb/Z**2)
+# Coordinate map zeta -> xi uses the signed horizontal displacement.
+for x,y in it.product(range(-8,9),repeat=2):
+    re,im=Q(x,4),Q(y,3)
+    tr,ti=im,Q(1,2)-re
+    check('RH_axis_coordinate', (Q(1,2)-ti,tr)==(re,im) and ((ti==0)==(re==Q(1,2))))
+
 for k,v in counts.items():
     print(k,v,'PASS')
 print('TOTAL',sum(counts.values()),'PASS')
