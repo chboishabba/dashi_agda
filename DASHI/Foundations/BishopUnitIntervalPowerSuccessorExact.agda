@@ -15,7 +15,8 @@ module DASHI.Foundations.BishopUnitIntervalPowerSuccessorExact where
 -- Source-written, Agda 2.9 --safe elaboration pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Real as R
 import RealProperties as P
 import Sequence as Seq
@@ -37,3 +38,38 @@ bishopUnitIntervalPowerSuccessorAntitone u uNN u≤one n =
 -- Zero-degree factor is already handled by the standard Bishop
 -- power recursion; do not assume q>0 when X may be exactly zero.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Exact all-index ANTI-MONOTONIC Bishop power exponent order.
+-- Reuses the existing native proof pattern from the original
+-- BishopMachinGeometricBishopRateExact.rateAntitone, now for EVERY
+-- 0<=u<=1. This is the MISSING real-analytic degree comparator
+-- for the original CMP102 filtered Cauchy outer wings.
+------------------------------------------------------------------------
+
+bishopUnitIntervalPowerBelowOne :
+  ∀ (u : R.ℝ) →
+  R.NonNegative u →
+  R._≤_ u R.1ℝ →
+  ∀ n → R._≤_ (R.pow u n) R.1ℝ
+bishopUnitIntervalPowerBelowOne u uNN u≤one zero = P.≤-refl
+bishopUnitIntervalPowerBelowOne u uNN u≤one (suc n) =
+  P.≤-trans
+    (bishopUnitIntervalPowerSuccessorAntitone u uNN u≤one n)
+    (bishopUnitIntervalPowerBelowOne u uNN u≤one n)
+
+bishopUnitIntervalPowerAntitone :
+  ∀ (u : R.ℝ) →
+  R.NonNegative u →
+  R._≤_ u R.1ℝ →
+  ∀ {small large} →
+  small ≤ large →
+  R._≤_ (R.pow u large) (R.pow u small)
+bishopUnitIntervalPowerAntitone u uNN u≤one {zero} {large} z≤n =
+  bishopUnitIntervalPowerBelowOne u uNN u≤one large
+bishopUnitIntervalPowerAntitone u uNN u≤one {suc small} {zero} ()
+bishopUnitIntervalPowerAntitone u uNN u≤one
+    {suc small} {suc large} (s≤s step) =
+  P.*-monoʳ-≤-nonNeg
+    (bishopUnitIntervalPowerAntitone u uNN u≤one step)
+    uNN
