@@ -23,6 +23,7 @@ import DASHI.Foundations.BishopFiniteSeriesAbsoluteBoundExact as Triangle
 import DASHI.Analysis.BishopOriginalMachinAtanQuotientSecondOrderExact as Original
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as PowerSecond
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Sign
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimate
 
 originalSecondAsActualFiniteSeries :
   (x h : R.ℝ) (n : Nat) →
@@ -51,26 +52,6 @@ originalCoefficientAbsolute k =
         (Atan.embeddedInverseOddAbs k))
       (P.*-identityˡ (R._⋆ (Atan.inverseOddRational k))))
 
-originalSecondTermAbsolute :
-  (x h : R.ℝ) (k : Nat) →
-  R._≃_
-    (R.∣ Original.termSecond x h k ∣)
-    (R._*_
-      (R._⋆ (Atan.inverseOddRational k))
-      (R.∣ PowerSecond.sourcePowerSecondQuotient
-        x h (suc (suc (k + k))) ∣))
-originalSecondTermAbsolute x h k =
-  P.≃-trans
-    (P.∣x*y∣≃∣x∣*∣y∣
-      (Original.coefficient k)
-      (PowerSecond.sourcePowerSecondQuotient
-        x h (suc (suc (k + k)))))
-    (P.*-cong
-      (originalCoefficientAbsolute k)
-      P.≃-refl)
-
--- The actual source odd exponent is (2*k+1), not 2*k+2.
--- Separate local shape to avoid hiding an index change in an order proof.
 originalSecondTermAbsoluteOdd :
   (x h : R.ℝ) (k : Nat) →
   R._≃_
@@ -78,13 +59,13 @@ originalSecondTermAbsoluteOdd :
     (R._*_
       (R._⋆ (Atan.inverseOddRational k))
       (R.∣ PowerSecond.sourcePowerSecondQuotient
-        x h (Original.Estimate.oddExponent k) ∣))
+        x h (Estimate.oddExponent k) ∣))
 originalSecondTermAbsoluteOdd x h k =
   P.≃-trans
     (P.∣x*y∣≃∣x∣*∣y∣
       (Original.coefficient k)
       (PowerSecond.sourcePowerSecondQuotient
-        x h (Original.Estimate.oddExponent k)))
+        x h (Estimate.oddExponent k)))
     (P.*-cong
       (originalCoefficientAbsolute k)
       P.≃-refl)
@@ -112,7 +93,7 @@ originalSignedFiniteSecondAbsoluteCoefficients :
       (λ k → R._*_
         (R._⋆ (Atan.inverseOddRational k))
         (R.∣ PowerSecond.sourcePowerSecondQuotient
-          x h (Original.Estimate.oddExponent k) ∣)) n)
+          x h (Estimate.oddExponent k) ∣)) n)
 originalSignedFiniteSecondAbsoluteCoefficients x h zero =
   P.≃-refl
 originalSignedFiniteSecondAbsoluteCoefficients x h (suc n) =
