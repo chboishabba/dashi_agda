@@ -5,7 +5,7 @@ module DASHI.Cognition.PNF.X369ConcreteLiteralHistorySeparatorExact where
 -- No claim that original learned Torch recurrence satisfies these equations.
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Fin using (Fin)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; _∷_)
 open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.X369ConcreteSixVectorExact as Six
 import DASHI.Cognition.PNF.X369ConstructiveConsumerSplitExact as Split
