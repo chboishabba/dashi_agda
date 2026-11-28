@@ -2813,3 +2813,84 @@ Thus no hidden binomial/multinomial factors are lost when multiplying raw time d
 3. **Remaining analytic theorem:** a genuine weighted/anisotropic high-order boundary energy estimate controlling BR37 glancing and the BR67 source at each order, BR29 projected constraint propagation through the same physical background (including rank12 wall-only Gram obstruction), BS13/BR31 weighted quotient/tangential holonomy, local PDE construction and continuation. The symbolic source equalities do not automatically imply these.
 
 **Acceptance:** `scripts/run_hopf369_br39_42_bounded.py --part frontier` now includes BR65 geometric/reference controls, BR66 mean source, BR67 eighth-order coefficient and full heavy physical comparison. Each is checkpointed independently <=90 s, no CI, no native kernel execution. BR65–67 native source is CONSTRUCTED_PENDING_KERNEL; source algebra claims are pending actual checker runs. Do not promote a check's presence to a verified proof.
+
+
+## BR68–72 — consolidated original NONLINEAR gauge/mean/Codazzi source and eighth-order full D/E boundary object (28 Nov 2026)
+
+After BR65–67 established the **nonlinear Israel ten-row** geometric-to-optical source comparison, there remained a *different physical set of boundary rows*: the **four covector Codazzi**, the **one normal Gauss**, the **metric mean-force** and the D/E reference prefix/harmonic allocations. This pass implements those with source owners, explicit correction formulas, a moving ADM unit-normal gauge frame, and one coherent eighth-order 30+10 D/E source tower. Reuse original BR34 `metric_side/metric_rows/gauge_rows`, native `gaugeCodazzi`, `coordinateCodazzi`, `gaugeGauss`, `tau`, `meanForce`, BR52/58 material ADM jets, BR65–67 actual nonlinear Israel correction. **No independent substitute boundary problem was introduced.**
+
+### BR68 — exact original BR34 gauge/Codazzi and mean force at nonzero mean
+
+For the actual four-dimensional tangential covector `c±`, normal covector components `c_n±`, normal derivatives `dc±`, background jump j, tangential Fourier jet q, and general **nonzero mean wall extrinsic tensor** `M_ab`:
+```
+  Gref_a = dc+_a - dc-_a + q_a(c_n+ - c_n-)
+               -(j/2)(c+_a + c-_a),
+  Gphys_a = dc+_a - dc-_a + q_a(c_n+ - c_n-)
+               -2 M_a^b(c+_b-c-_b)-j(c+_a+c-_a),
+  Gphys_a-Gref_a = -2 M_a^b[c_b]-(j/2)(c+_a+c-_a).        (BR68a)
+```
+These are **the actual existing** BR34 `gaugeCodazzi` and native `coordinateCodazzi` definitions, including their parallel-versus-coordinate frame distinction. They are not interchangeable at M!=0 or j!=0; the four-component source difference is now explicit. Both D/E use their original distinct first-five value/normal allocations and their same final five Codazzi/Gauss rows. The normal Gauss `dc_n+-dc_n- - dot(q,[c_a])-2j(c_n++c_n-)` is retained, **not** overwritten by the tangential Codazzi correction.
+
+BR34 original metric mean force is `F_ref=tau(j/2,q;p+,px+)+tau(-j/2,q;p-,px-)`. With actual `k+=m+j/2`, `k-=m-j/2` and `tau(k)=tr(px)/2-dot(q,beta)-4k ell`, its exact nonzero-mean reference difference is
+```
+  F_phys-F_ref = -4m(ell+ +ell-).                        (BR68b)
+```
+Here m is the **scalar mean** warp curvature and M the general **tensor mean** appearing in Codazzi. Neither is inferred from the other without actual physical background conditions. This correction belongs specifically in original metric D/E **row 29**, not the ten Israel components. Original gauge/normal rows are separate.
+
+New source owner `scripts/check_hopf369_br68_physical_gauge_mean.py` independently imports actual BR34 metric/gauge rows and compares (a)/(b) with both D/E allocations; native `originalBR68GaugeCorrection`, `originalBR68PhysicalGaugeCodazzi`, `originalBR68MeanForceCorrection`, `originalBR68PhysicalMeanForce` and `OriginalBR68BoundaryPayments` retain both signed source corrections. Scripts COMMITTED_UNRUN; Agda kernel UNRUN.
+
+### BR69 — all eight derivative orders of true mean-Codazzi source
+
+The original source coefficients `M_ab(t),j(t),m(t),c±_a(t),ell±(t)` are retained **independently** as divided Taylor jets through order eight; do not replace them by frozen values. Their exact physical correction coefficients are
+```
+ (delta G_a)_n =
+   -2 sum_b eta^bb [M_ab*(c+_b-c-_b)]_n
+   - 1/2 [j*(c+_a+c-_a)]_n,
+ (delta F)_n=-4[m*(ell++ell-)]_n .
+```
+Ordinary divided-jet convolution carries all binomial cross terms and correct source ownership, including M_t and j_t. New `scripts/check_hopf369_br69_physical_gauge_mean_tower.py` compares source coefficients with an independently multiplied SymPy polynomial to degree eight and retains a frozen-background negative control. Native `OriginalBR69SourceTower`, `originalBR69CodazziCorrection`, `originalBR69MeanForceCorrection` and `OriginalBR69NonlinearSourceDebt` expose also the unproved graph shape Hessian, unit-normal, curved connection and Gauss sources. No field source is silently promoted into a nonlinear harmonic gauge solution.
+
+### BR70 — ACTUAL moving material gauge tangent/normal frame, both sides
+
+At physical ADM metric g and moving material graph `F=n-f(t,x,y,z)`, positive normal norm `z=g^{mu nu}F_mu F_nu>0`, wall tangent frame `e_a^mu=delta_a^mu+f_a delta_n^mu` and physical unit normal `n^mu=g^{mu nu}F_nu/sqrt(z)`, **the true covector components are**
+```
+ c_a^physical=e_a^mu C_mu=C_a+f_a C_n,
+ c_perp^physical=n^mu C_mu.
+```
+In a general shifted or tilted chart `c_perp != C_n`; similarly the tangential physical field is not just C_a. The full 5×5 physical gauge frame `[e_a^mu;n^mu]` is invertible at a nondegenerate spacelike material wall; BR70 supplies actual source geometry, bidirectional frame reconstruction and negative controls rejecting the coordinate-normal shortcut. Source: `scripts/check_hopf369_br70_moving_gauge_frame.py`, native `materialGaugeTangent`, `OriginalBR70UnitNormal`, `materialGaugeNormal`, `OriginalBR70GaugePhysicalPair` and `assembleOriginalBR70GaugePhysicalPair`. **The native positive square-root/frame-inverse and differentiated moving harmonic connection are explicit UNPAID analytic/geometry witnesses**, not fabricated from an arbitrary complex field.
+
+### BR71 — ONE original physical 30 metric + 10 gauge row map per allocation
+
+The native BR34 owner now exports `originalBR71MetricPrefix`, `originalBR71MetricSuffix`, `originalBR71MetricRows`, `originalBR71GaugeRows`, `OriginalBR71UnifiedPhysicalBoundary`, `assembleOriginalBR71UnifiedBoundary` and `originalBR71MetricCount/originalBR71GaugeCount` with explicit `refl` kernel targets. The actual allocation maps retain:
+- metric rows 0–9 tangent metric continuity, 10–13 mixed continuity,
+- metric 14–23 original BR34 **Israel ten** plus BR66 geometric mean/warp correction,
+- metric 24–28 the original **allocation-specific** harmonic/gauge rows,
+- metric 29 the original mean force plus BR68 nonzero-mean scalar correction,
+- gauge 0–4 the original **allocation-specific** value/normal prefix,
+- gauge 5–8 the original reference Codazzi plus BR68 actual nonzero-mean coordinate correction,
+- gauge 9 original normal Gauss.
+No D/E row gets silently identified with its other allocation. Full nonlinear moving graph/connection residuals are retained as **independent nonzero source fields**, not set to zero by the assembly. New `scripts/check_hopf369_br71_full_physical_de_rows.py` imports the original BR34 row owner, retains all 15/5 and symmetric wall coordinates, and checks the correction only appears at the actual owned indices. The row-count proof bodies are PRESENT but remain pending Agda kernel acceptance.
+
+### BR72 — eighth-order unified SAME-DATA physical boundary acceptance
+
+Earlier BR58, BR67 and BR69 checkers sampled their individual geometry from different source fixtures. New `scripts/check_hopf369_br72_unified_eighth_order_boundary.py` is one coherent original source: its plus/minus metric and gauge values and normal jets, ADM moving conormal, independent background `j,q,m,phi,b±''` and 4×4 mean extrinsic `M_ab` are all instantiated on the SAME time-jet carrier through order eight. For each D/E allocation at each order n=0,...,8, it forms
+```
+ physicalB_n =
+   originalBR34DividedJetRows_n
+   +BR52/58MaterialConormalColumns_n
+   +[BR67GeometricIsraelCorrection_n at metric 14:24]
+   +[BR69MeanCorrection_n at metric 29]
+   +[BR69CoordinateCodazziCorrection_n at gauge 5:9].
+```
+Original BR34 row count remains metric 30, gauge 10; every D/E prefix and normal Gauss is independently preserved. The graph/physical unit-normal conversion of BR70, nonlinear shape/connection debts from BR59/60, background source positivity, and **induced metric matching** are NOT asserted merely because a rational test fixture can instantiate the affine row map. The source-level correction is a coordinated **candidate physical boundary linearization**, not full nonlinear Einstein–Israel boundary well-posedness.
+
+`scripts/run_hopf369_br39_42_bounded.py --part frontier` now includes BR68 separate gauge/mean, BR69 all-order, BR70 frame/shift/refusal, BR71 integrated D/E allocation guards, and **18 independent BR72 D/E×9 orders** in heavy checkpointed sections <=90s each, SHA256 receipts, no GitHub CI. Source has been COMMITTED; new symbolic checks and kernel remain UNRUN.
+
+### Exact next proof obligations (not another generic carrier)
+
+1. **Full nonlinear geometric boundary equality**: prove the BR71/72 coordinate reference gauge rows agree with the BR70 moving physical-frame harmonic/Codazzi/Gauss source after the BR19 shape, BR59/61 induced metric, BR65/66 acceleration/mean source, and physical ADM/optical transformation. The metric ten Israel plus mean scalar and Codazzi corrections are now explicitly constructed, but the independently curved harmonic connection and physical unit-normal differential remain outstanding.
+2. **High-order physical energy**: prove that the **same** BR71/72 30+10 boundary operator satisfies an actual weighted anisotropic BR4/45 trace/Kreiss estimate with BR37 Q⁴/Q² glancing losses and BR43 normal derivative currency, paying all graph/shape/mean time jets through order eight. A finite polynomial/row correction identity is not the positive boundary estimate.
+3. **Same-solution Bianchi**: prove the nonlinear contracted Bianchi and full Codazzi/Gauss equations factor through the BR29 original projected 35D/nine-zero-speed wall source, retaining the rank12 obstruction to the old wall-only Gram. BR70 correct physical gauge frame must be used, not the coordinate C_n as physical normal.
+4. **Weighted quotient and continuous construction**: BS13/BR57 exact normal inverse already exists; add tangential York/gauge/Hodge control, full BR31 reflecting AdS weighted exterior and holonomy quotient, physical local PDE iteration and BR42 continuation. The theorem remains unproved until genuine analytic estimates and Agda/Lean acceptance are completed.
+
+**Status**: BR68–72 = COMMITTED_SOURCE / CONSTRUCTED_PENDING_KERNEL; no symbolic scripts executed, no native Agda kernel pass, no physical PDE theorem pass. Attribution: ADM/Israel/Codazzi and frame projection are classical; DASHI owner contribution is exact original D/E source crosswalk, signed slots, same-input time jets and non-promotion negative controls.
