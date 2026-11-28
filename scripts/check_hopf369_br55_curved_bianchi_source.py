@@ -3,9 +3,9 @@
 
 Classical exact tensor identity for any Levi-Civita connection:
  S_ab(C)=(∇_a C_b+∇_b C_a)/2, tr S=∇·C.
- ∇^a(S_ab-g_ab tr S)=1/2(□ C_b+Ric_b^c C_c).
+ ∇^a(S_ab-g_ab tr S/2)=1/2(□ C_b+Ric_b^c C_c).
 
-At the actual AdS5 source Ric=-4g:
+Only at the AdS5 vacuum reference Ric=-4g (not a general reduced metric):
   ∇^a trace_reverse(S_ab)=1/2(□-4)C_b.
 Since the full Einstein tensor is divergence free (and Λg as well),
 the trace-reversed REDUCED Einstein residual must source the

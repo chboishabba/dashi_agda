@@ -2039,9 +2039,9 @@ module At {r : Level} (F : C.RealField r)
         (a : Axis) → originalBianchiSourceResidual z p a ≡ O
   open OriginalBianchiPrincipalCertificate public
 
-  -- Geometrically curved source requires Ric=-4g on the same AdS
-  -- background, with the exact connection-commutator identity:
-  --   div_g( symgrad C - g div C ) = (box_g C + Ric(C))/2.
+  -- General reduced metric: retain its actual Ricci action. On the
+  -- AdS vacuum reference it specializes to Ric=-4g. Exact identity:
+  --   div_g( symgrad C - half * g div C ) = (box_g C + Ric(C))/2.
   -- The extra Ric term and moving Israel Codazzi/Gauss residuals are
   -- not optional and are NOT recovered by the flat principal symbol.
   record PhysicalCurvedBianchiPayment : Set r where
@@ -3533,3 +3533,48 @@ module At {r : Level} (F : C.RealField r)
   -- quotient and BR31 exterior; (6) construct an actual physical
   -- 5D solution and continuation. None may be silently inferred
   -- from the scalar Hamiltonian or the reference static lapse.
+
+
+  -- BR92/93: actual reduced Ricci action, signed Gaussian fold.
+  originalSameMetricGaugeWave : Cov → Cov → Cov
+  originalSameMetricGaugeWave boxC ricC a = boxC a + ricC a
+
+  originalFoldOdd : Cov → Cov → Cov
+  originalFoldOdd p m (wall a) = p (wall a) - m (wall a)
+  originalFoldOdd p m normal = p normal + m normal
+
+  originalFoldEven : Cov → Cov → Cov
+  originalFoldEven p m (wall a) = p (wall a) + m (wall a)
+  originalFoldEven p m normal = p normal - m normal
+
+  originalFoldOddRadial : Cov → Cov → Cov
+  originalFoldOddRadial dp dm (wall a) = dp (wall a) + dm (wall a)
+  originalFoldOddRadial dp dm normal = dp normal - dm normal
+
+  originalFoldEvenRadial : Cov → Cov → Cov
+  originalFoldEvenRadial dp dm (wall a) = dp (wall a) - dm (wall a)
+  originalFoldEvenRadial dp dm normal = dp normal + dm normal
+
+  originalFoldDNormalRobin : S → Cov → Cov → Cov → Cov → S
+  originalFoldDNormalRobin j p m dp dm =
+    originalFoldOddRadial dp dm normal - two * j * originalFoldOdd p m normal
+
+  originalFoldDNormalRobinExact :
+    (j : S) (p m dp dm : Cov) →
+    originalFoldDNormalRobin j p m dp dm
+      ≡ (dp normal - dm normal) - two * j * (p normal + m normal)
+  originalFoldDNormalRobinExact j p m dp dm = refl
+
+  originalFoldDTangentRobin : S → Cov → Cov → Cov → Cov → Vec
+  originalFoldDTangentRobin j p m dp dm a =
+    originalFoldEvenRadial dp dm (wall a) - j * originalFoldEven p m (wall a)
+
+  originalFoldDTangentRobinExact :
+    (j : S) (p m dp dm : Cov) (a : Wall) →
+    originalFoldDTangentRobin j p m dp dm a
+      ≡ (dp (wall a) - dm (wall a)) - j * (p (wall a) + m (wall a))
+  originalFoldDTangentRobinExact j p m dp dm a = refl
+
+  -- Robin residuals AFTER D's homogeneous value conditions vanish.
+  -- Analytic cascade requires identical reflected operators, compatible
+  -- boundary multiplier, zero initial/exterior data. Not asserted here.

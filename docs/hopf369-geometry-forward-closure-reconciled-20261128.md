@@ -491,3 +491,112 @@ the gauge-Hessian wave-compatible 25/9 and exact contraction factor.
 This was not a byte-identical run of the committed new checker.
 BR89 algebra/warped and BR90/91 committed checker stages are pending.
 No native kernel or CI run. Runner closure includes BR89–91.
+
+
+## 8. BR92–95 — same-metric subsidiary, signed D fold and glancing derivatives
+
+BR26/BR5 already prove gauge uniqueness for the old six-value allocation,
+but BR32 proves its reduced metric principal problem rank deficient.
+BR33 fixes this with physical mean force and different D/E conditions.
+Do not import BR26 energy into D or E unchanged. Reuse BR33/68/70/86/89.
+
+**BR92 (W4a):** Ered=Ric+4g-S(C), S=symgrad C. The half trace reverse
+TR(Ric+4g) is divergence free in five dimensions. Metric compatibility
+and the covector commutator give
+  div(S(C)-(1/2)g div C)=(Box C+Ric(C))/2,
+  Box C+Ric(C)=-2 div TR(Ered).
+Use the actual reduced metric Ricci coefficient, not -4 before C=0.
+Correct BR55's misleading full-trace comments (native traceReverse5
+already uses half). Exact non-diagonal Lorentz 2-jet oracle computes
+Christoffel, its derivatives, Ricci, 125 covariant Hessian entries and
+five equations, with both incorrect shortcuts explicitly refused.
+
+**BR93 (W4a):** In a Gaussian collar with common induced h, [K]=jh,
+constant j, tr_h M=0, fold periodic n in [0,L] to r in [0,L/2].
+Write p=C(r), v=R C(L-r), R=diag(1,1,1,1,-1), A=p-v, B=p+v.
+Use actual reflection differential in non-Gaussian charts. Thus
+A_a=[C_a], A_n=C_n^++C_n^-, B_a=C_a^++C_a^-, B_n=[C_n].
+Radial jets A_r=C'_++R C'_-, B_r=C'_+-R C'_-.
+BR33's exact physical derivative rows become
+  B_{a,r}+D_a B_n-2 M_a^b A_b-j B_a=0,
+  A_{n,r}-D^a A_a-2j A_n=0.
+BR68's physical correction from -j/2 is retained. D value conditions
+A_a=0, A_n+B_n=0; E instead A_i=0,A_n=B_n=0, no A_0 condition.
+At smooth midpoint, A_a=0, A_{n,r}=0, B_n=0, B_{a,r}=0 by parity.
+The full signed fold and its inverse are exact, no frequency division.
+
+**BR94 (W2/W4a): conditional analytic uniqueness proof.**
+Assume a GIVEN regular reduced solution with reflection-invariant
+metric and therefore reflected full covector wave/Ricci operator,
+positive lapse/coercive spatial metric, bounded first/lower coefficients,
+constant j, D physical BC and zero initial C and time derivative.
+Use boundary-adapted slice/time multiplier tangent to wall and midpoint
+with normal spatial there, and homogeneous nonincoming exterior flux;
+noncompact domain additionally requires justified weighted integration
+and trace bounds. Reflection invariance is not asserted for nonzero BN.
+Naturality makes A and B independent homogeneous normally hyperbolic
+systems. A has four Dirichlet components and A_{n,r}=2j A_n at wall,
+plus the above midpoint homogeneous D/N conditions. The BR86 positive
+component/fibre energy (normal/tangent block diagonal at wall) plus mass
+has Robin outward power -2j weighted A_n partial_t A_n; add the signed
+boundary potential j times the weighted A_n squared. Weight derivatives
+yield only quadratic trace work. Treat covector connection terms as
+bounded lower-order coefficients on this given geometry. Dirichlet
+velocities and Neumann derivatives contribute zero flux.
+For a>0, epsilon>0,
+  |u(0)|² <= epsilon int_0^a |u'|² +
+              (1/a+1/epsilon) int_0^a |u|²
+by averaging u(0)^2=u(r)^2-2 int_0^r uu' and Young. Use actual
+metric/weight comparison constants, choose epsilon small enough to
+absorb negative Robin derivative charge, then a sufficiently large
+positive bulk mass to dominate its negative value charge. Energy is
+equivalent to H1 x L2. All remaining lower-order and boundary weight
+work is bounded by that energy, so dE/dt<=K E and zero initial energy
+gives A=0 by Gronwall. Now B_n=0 and B_{a,r}=j B_a; repeat the same
+mixed D/R argument to get B=0. Reverse fold gives C=0. BR92 with
+Ered=0 yields Ric=-4g; BR90/91 defect sources then vanish.
+This is conditional uniqueness, not existence or acceptance for
+original nonsymmetric BN data, not an independent Weyl proof.
+
+**Exact general-background obstruction:** if reflected operators
+Lp,Lm differ, Lbar=(Lp+Lm)/2, Delta=(Lp-Lm)/2, the equations become
+  Lbar A+Delta B=0, Lbar B+Delta A=0.
+Delta may be SECOND ORDER away from the seam, even though h matches.
+A restricted constant face Gram G=[[a,b],[b,c]] in the scalar normal
+subblock cancels D's free inward derivative only if b=c (flux has
+(b-c)xy+2j c x²). Commutation with unequal diagonal principal speeds
+forces b=0, contradicting positive c. This rules out that chosen
+constant cross-face energy, NOT general microlocal symmetrizers.
+Check actual BN/BQ reflection and gauge before attempting to instantiate
+the cascade. Do not assume symmetry or switch to E.
+
+**BR95 (W3):** With sigma=Re s>0, Z=max(|s|,|xi_i|), L=|ell|,
+factor ell²=(s+i|xi|)(s-i|xi|) to obtain L²>=sigma Z. Independent
+complex perturbations of the four z coordinates with |delta|<=sigma/64
+give |delta ell²|<=8Z delta+4delta²<L²/4. Same holomorphic root chart:
+|ell'/ell-1|<=1/4, |ell'|>=3L/4, |a'-a|<=|a|/3+1/48.
+Since |1+a|>=max(1,|a|) originally, the perturbed Lorentz denominator
+stays >=half that bound. |v|²<=1+|a|² at real frequency gives a
+conservative 128Q row norm bound for perturbed boost and inverse;
+rank-two lifts cost Q². Cauchy bounds fixed-metric frequency derivatives
+by alpha! (64/sigma)^|alpha| times corresponding chart power.
+This is a damping-scale bound, not conventional symbol order reduction
+or control of variable metric derivatives. Indeed vary principal spatial
+coefficient c², ell²=s²+c² k²; on s=sigma+i k, c=1,
+  partial_c log ell=k²/(sigma²+2i sigma k).
+For k>=sigma its squared modulus is between k²/(5sigma²) and
+k²/(4sigma²): geometry derivative costs a full frequency power here.
+No ordinary zero-order localization estimate follows from BR89.
+Need genuine variable glancing patches or coupled defect energy.
+
+**Acceptance:** four independent bounded stages in runner.
+Independent local SymPy checks passed BR92 general curvature and
+negative controls, BR93 fold and shape, BR94 restricted Gram algebra,
+BR95 lower glancing derivative inequality. One structural equality
+needed expansion before passing. Exact committed checker and native
+kernel unrun. Classical geometry and energy attribution retained.
+No CI run requested; commit marked skip ci. Next: inspect actual BN/BQ
+reflection data, either instantiate BR94 or close coupled second-order
+parity defect; W1 curved D/E Jacobian, W2 actual metric energy, W3
+variable localization, W4b independent Weyl, W5/6 exterior/existence
+remain open.
