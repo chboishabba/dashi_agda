@@ -118,7 +118,7 @@ parity (suc (suc n)) with parity n
 
 halfBound : ∀ a k → a * 2 ≤ suc k → a ≤ k
 halfBound zero k h = z≤n
-halfBound (suc a) k (s≤s h) = NP.≤-trans (s≤s (NP.m≤m*n a 1)) h
+halfBound (suc a) k (s≤s h) = NP.≤-trans (s≤s (NP.m≤m*n a 2)) h
 
 module At (inputs : Round11.BishopCutset) where
   module Rm = Ram.At inputs
