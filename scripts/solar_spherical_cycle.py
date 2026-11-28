@@ -4,8 +4,9 @@ Uses diagonal Hodge candidate; full consistent mass remains reference.
 """
 import numpy as np
 from scipy.constants import c
-from solar_spherical_material_weld import construct,structural_stage_atlas
-from solar_spherical_whitney import shell_mesh
+from solar_spherical_material_weld import construct,structural_stage_atlas,assembly_mesh
+from solar_matrix_storage import diagonal
+from scipy.sparse import csr_matrix
 from solar_physical_causal import reaction,MASS,CHARGE
 from solar_support_transition import support_transition
 from solar_restoration_geometry import thermal_return_geometry,analytic_support_return_obstruction
@@ -14,8 +15,8 @@ from solar_population_amplitude_event import right_reaction_support
 from solar_earth_collision_tensor import rates
 from solar_physical_cone import timed_step
 
-def geometry(radii,level):
-    xyz,s,m,d=shell_mesh(radii,level)
+def geometry(radii,level,nested_depth=0):
+    xyz,s,m,d=assembly_mesh(tuple(radii),int(level),int(nested_depth))
     # One material owner per tetrahedron: no instant shared remote material.
     vol=np.array([abs(np.linalg.det((xyz[list(t)][1:]-xyz[t[0]]).T))/6 for t in s[3]])
     pos=np.array([xyz[list(t)].mean(axis=0) for k in (1,2,3) for t in s[k]])
@@ -39,7 +40,8 @@ def geometry(radii,level):
 
 def cycle(material,cfg):
     rows,neutral,D,gyro,axis=material
-    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level']); n=len(vol)
+    depth=int(cfg.get('nested_depth',0)); sparse=bool(depth or cfg.get('sparse_operator',False))
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],depth); n=len(vol)
     # One original row and provenance key per tetrahedron, explicitly assigned.
     assert len(rows)==n and len(cfg['row_keys'])==n
     D=np.asarray(D,float); pop0=D*MASS/CHARGE**2
@@ -56,7 +58,7 @@ def cycle(material,cfg):
     port=np.zeros(size); edge=int(cfg['source_edge']); assert 0<=edge<ne
     port[edge]=cfg['source_coupling_sqrt_inv_s']; assert port[edge]>0
     load=np.zeros(size); load[:ne]=cfg['load_rate_s_inv']; assert np.all(load>=0)
-    L=np.diag(load); S=np.outer(port,port)
+    L=diagonal(load,sparse); S=diagonal(port**2,sparse)
     def energy():
         return x@x/2+cap@theta+np.einsum('is,i,s->',pop,vol,chem)
     original=(x.copy(),pop.copy(),pool.copy(),theta.copy())
@@ -79,7 +81,7 @@ def cycle(material,cfg):
     # All worlds use identical source-off terminal slots; no external reset.
     terminal_load=np.asarray(cfg.get('terminal_load_rate_s_inv',load[:ne]),float)
     assert terminal_load.shape==(ne,) and np.all(terminal_load>=0)
-    terminal_L=np.diag(np.r_[terminal_load,np.zeros(size-ne)])
+    terminal_L=diagonal(np.r_[terminal_load,np.zeros(size-ne)],sparse)
     atol=np.asarray(cfg.get('return_atol',[1e-10,1e-10,1e-10,1e-10]),float)
     assert atol.shape==(4,) and np.all(atol>=0)
     atlas=None
@@ -114,7 +116,7 @@ def cycle(material,cfg):
             mid=np.exp(-dt*cool/(2*cap))*theta-np.expm1(-dt*cool/(2*cap))*p/cool
             absorbed=dt*p.sum(); bath=absorbed-cap@(theta1-theta); theta=theta1
             nu=rates([dict(r,te=r['te']+mid[i]) for i,r in enumerate(rows)],neutral)
-            model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),vol,pop*CHARGE**2/MASS,nu,gyro,axis)
+            model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),vol,pop*CHARGE**2/MASS,nu,gyro,axis,nested_depth=depth,sparse_operator=sparse)
             if cfg.get('common_stage_atlas',False) and atlas is None:
                 atlas=structural_stage_atlas(model,mesh)
             A=model['generator']-current_L-S
@@ -168,6 +170,7 @@ def cycle(material,cfg):
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
                 strict_campaign_net_J=corrected_net if full_restored else None,
                 terminal_depletion_J=depletion,
+                nested_depth=depth,sparse_operator=sparse,
                 common_stage_atlas=atlas is not None,
                 support_transition_count=len(support_receipts),
                 support_transition_receipts=support_receipts,
