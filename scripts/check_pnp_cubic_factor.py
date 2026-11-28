@@ -1,11 +1,11 @@
-"""Actual extracted conditional cubic core; independent enumerative leaves.
+"""Actual extracted conditional cubic core; enumerative leaves for small controls.
 This is not the full production CNF integration or a physical bit-clock test.
 """
 import argparse,hashlib,math
 from pathlib import Path
 from itertools import product,combinations_with_replacement
 from random import Random
-Z=(0,0);OMEGA=((1,0),(0,1),(-1,-1))
+Z=(0,0);ONE=(1,0);OMEGA=((1,0),(0,1),(-1,-1))
 class Refusal(Exception):pass
 
 def add(a,b):return a[0]+b[0],a[1]+b[1]
@@ -29,10 +29,11 @@ def gauss(P,n,pay):
 
 def main(path):
     raw=path.read_text()
-    start=raw.index('def put(');end=raw.find('\ndef pull(',start)
+    start=raw.index('def put(');end=raw.find('\ndef recognize(',start)
     core=raw[start:end] if end>=0 else raw[start:]
     print('core bytes',len(core.encode()),'sha256',hashlib.sha256(core.encode()).hexdigest())
     env=dict(globals());exec(compile(core,str(path),'exec'),env)
+    actual_gauss=env['gauss'];env['gauss']=gauss
     calc=env['conditional_gauss'];pieces=env['independent_phase_pieces'];noop=lambda _:None
     rng=Random(3699);count=0
     for n in range(1,8):
@@ -45,11 +46,12 @@ def main(path):
         assert calc(P,3*k,noop,b)==(15**k,0);count+=1
         assert b[0]==0;count+=1
         assert calc({**P,():2},3*k+2,noop,[3*k])==phase((9*15**k,0),2);count+=1
+    env['gauss']=actual_gauss
     for k in (2,3,4,8,16,32,64):
         P={(3*j,3*j+1,3*j+2):1 for j in range(k)}
         for j in range(k-1):
             P[(3*j,3*k+j)]=1;P[(3*(j+1),3*k+j)]=2
-        b=[2*k+1]
+        b=[3]
         assert len(pieces(P,4*k-1,noop)[0])==1;count+=1
         assert calc(P,4*k-1,noop,b)==(3**(k-1)*(3**(2*k)+2*3**k),0);count+=1
         assert b[0]==0;count+=1
