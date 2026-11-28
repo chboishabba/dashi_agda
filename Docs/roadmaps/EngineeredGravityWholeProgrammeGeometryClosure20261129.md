@@ -459,3 +459,54 @@ Equivalently, forcing Euler acceleration to cancel the residual on that *frozen 
 **Acceptance repair in same cut:** discovered that the previously committed \`scripts/test_engineered_gravity_proof_dag.py\` contained a malformed \`for which in (...\` tuple (missing closing parenthesis), so its advertised earlier negative controls **could not have run literally as committed**. Fixed syntax and added two W2.5/2.6 false-proof/source-SHA rejection controls at \`521c16405b4ebedd19817a8b0fc30b7981edf2ff\`; current declared 18 cases. Source structural audit confirms 18 exact keys and valid source pins. Full literal script replay is still outstanding; earlier claims of a full literal negative-control run are superseded. No GitHub CI or original F8 native acceptance.
 
 **Next W3 whole-system, coarse before fine:** construct a corrected moving \(O(\dot R^2)\) spatial-material/York metric initial slice *from the original action*; enforce radial and angular Einstein constraints and second-order Israel + GHY/corners; determine whether a smooth Euler boundary-domain solution exists or obtain a source-derived no-go. In parallel retain A/I reciprocal support and Maxwell/MHD source work; do not re-label the manufactured mass profile as source-admissible in full GR. All physical twelve-lane terminal obligations remain unpaid.
+
+
+## W3.1 source-identical nonlinear Euler wall repair + quadratic radial Einstein constraint (29 Nov)
+
+**Reconciliation at start:** #1547 head de1607671b778f87cc971d0ea74f844079a58d24; master comparison earlier 787 ahead/65 behind and compare list capped at 300. Reopened originals \`check_engineered_gravity_tov_material.py\`, \`check_tov_original_material_flux_weld.py\`, \`check_tov_original_euler_firstjet_weld.py\`, \`check_tov_original_euler_boundary_obstruction.py\`, \`check_tov_global_york_axial_shear.py\` (owner inventory), \`check_tov_moving_constraint_family.py\`. This construction **preserves original \(a,d,V\)** and uses the W2.5 velocity, not a new action or a tunable wall stress.
+
+**Exact nonlinear boundary trace solved, rather than frozen.** Let \(f_w=f(t_0,R)\), \(N_w=N(t_0,R)\), \(g=Y_r(t_0,R)\), \(u=Y_t(t_0,R)\), with material surface \(Y(t,R(t))=1\). Since \(a(1)=d(1)=V(1)=0\), the exact nonlinear scalar Euler wall trace (assuming regular jets) reduces to
+\[
+ {\cal E}_Y|_w=2d_x(1)\left[
+ f_0(1)-f_wg^2+u^2/N_w^2
+ \right].
+\]
+This uses the *background original static Euler* identity \(4a_x(1)+2V_x(1)=2d_x(1)f_0(1)\); all terms multiplied by \(d(1)\) vanish. The moving-level-set kinematics \(u=-\dot R_{\rm coord}g\) then give the **exact algebraic gradient repair**
+\[
+ \boxed{g^2={f_0(1)\over f_w-\dot R_{\rm coord}^2/N_w^2}},
+\]
+subject to a positive timelike denominator and the same material source and chart. A frozen \(g=1,f_w=f_0(1)\) violates this at nonzero speed, explaining the restricted W2.6 obstruction. For unchanged spatial metric at leading order, \(g=1+\dot R_{\rm coord}^2/(2N_w^2f_0(1))+O(\dot R^4)\). The simple smooth label deformation \(Y=r+h\,r(r^2-1)/2\), \(h=g-1\), meets \(Y(1)=1\), centre regularity and \(Y_r(1)=g\), **but is not by itself a bulk solution**. An exact symbolic local SymPy regression passed with a source-equivalent file \`/mnt/data/w3_wall_gradient.py\`. Committed \`scripts/check_tov_euler_moving_gradient_repair.py\` at \`ecf5137567127fc5aa756cfe731c4a9e2244a105\`. Literal source replay still pending.
+
+**Quadratic original-action Einstein mass equation is now solved in a finite radial chart.** Write the static original action metric and scalar field as \(Y=r+\varepsilon^2 kH(r)\), \(Y_t=\varepsilon U(r)\), \(m=m_0+\varepsilon^2M_2(r)\), \(f=f_0-2\varepsilon^2M_2/r\). Choose the centre-regular wall-zero \(H(r)=r(r^2-1)/2\) and W2.5 signed first-jet \(U(r)=-r(\lambda+2)\dot R/(\lambda+1+r^2)\). With \(d_0=d(r^2)\), the original stress density expansion from the **same material action** yields
+\[
+ \rho_2(r)=k\,A(r)+d_0U(r)^2/N_0(r)^2 - {2d_0\over r}M_2(r),
+\]
+where
+\[
+ A(r)=\left.\left(W_YH+W_{Y_r}H'\right)\right|_{Y=r,Y_r=1,f=f_0,Y_t=0}.
+\]
+This \(A\) is independently differentiated from the original constitutive \(a,d,V\), not fitted to an ideal mass. The Einstein radial constraint becomes a **linear inhomogeneous ODE**
+\[
+ \boxed{M_2'+8\pi r d_0M_2
+ =4\pi r^2\bigl(kA+d_0U^2/N_0^2\bigr),\quad M_2(0)=0.}
+\]
+The wall Euler trace to quadratic order is the second independent equation
+\[
+ \boxed{2f_0(1)k-2M_2(1)-U(1)^2/N_0(1)^2=0.}
+\]
+Solve the ODE twice using its positive integrating factor, with \(k=0\) and unit-\(k\), then solve the **one scalar Schur complement** for \(k\). This is a coarse solve of the coupled original-action material–Einstein radial bulk/wall problem, not an imposed arbitrary wall correction.
+
+**Actual local NumPy/SciPy/SymPy execution, under 90s**, at \(\lambda=0.1\), coordinate speed 0.02:
+| radial intervals | \(k\) | \(M_2(1)\) | interior max radial mass-ODE residual |
+| --- | ---: | ---: | ---: |
+| 256 | 0.000213368381677 | 0.00000163275011752 | 5.90e-9 |
+| 512 | 0.000213368513221 | 0.00000163287797835 | 1.52e-9 |
+| 1024 | 0.000213368546108 | 0.00000163290994426 | 3.85e-10 |
+
+At each grid the quadratic Euler wall residual was \(<10^{-12}\), mass centre and density surface gates pass. Local parameter perturbations \(\lambda=0.05,0.2\) (n256,speed .02) and speed .04 (\(\lambda=.1\),n256) also PASS. The Schur denominator is nonzero on these fixtures; **no uniform-in-\(\lambda\) invertibility theorem is claimed**. Local source-equivalent file \`/mnt/data/w3_radial_constraint.py\` passed with the independently differentiated \(A\) identity; committed \`scripts/check_tov_quadratic_constraint_ritz.py\` at \`e5f6e1dd8f46dc46996be123ca8414a02182e60e\` + exact source verification \`5226e8e16d368ac43eedf4d21758a907bd8e0902\`. Numeric checker defaults to 256,512,1024; no CI.
+
+**Why this narrows, but does not pay, W3:** The local quadratic state has the exact \(\varepsilon^2\) **radial Hamiltonian mass constraint** and degenerate scalar Euler *surface trace* compatible. Its first-order \(Y_t\) is compatible with the moving material level set **through quadratic order**; at finite speed \(R_t=-Y_t/Y_r\) differs by \(O(\dot R^3)\) from the speed parameter. The full local momentum/constraint propagation, angular Einstein equation, \(N_t\), bulk scalar Euler acceleration, global positive/regular matter and the full GHY/corner two-face action are **open**. Exterior ADM mass must adjust by \(M_2(1)\); zero exterior mass perturbation is not implied. A finite radial approximation and smooth trial label are **not** a continuum proof or nonlinear evolution. The 12-lane physical terminal proof and original source-to-receiver remain outstanding.
+
+**Next large constructive cut, shared W3–W4:** (i) solve the interior original Euler bulk acceleration and angular Einstein evolution with \(M_2\), \(k\), same \(Y\); (ii) prove/give obstruction for the momentum constraint and boundary flux through the same nonstationary lapse and moving exterior; (iii) close proper-time induced metric, normal, Israel, GHY/corners and graph-domain boundary symplectic energy; (iv) transfer only authenticated tensor/source ABI to original F8/G3/G4 owners; (v) compute source-hash-pinned neutral geodesic/tidal/clock receiver with physical null alternatives. Keep matched Maxwell \(J\) and reciprocal controller/support as distinct original actions.
+
+**Acceptances:** the two mathematical checkers and source hashes are pinned in \`Artifacts/engineered-gravity/engineered_gravity_dependency_manifest_20261129.json\` under \`w3_original_action_boundary\`, \`physical_paid=false\`, and registered in the checkpointed runner. The DAG validation now accepts W3 entries; negative controls reject false continuum payment and modified original-action pins. Test code is committed but full literal repository replay not yet run. Physical obligations previously 36 remain unpromoted; no native F8.
