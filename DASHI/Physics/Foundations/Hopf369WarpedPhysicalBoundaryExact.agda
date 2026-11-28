@@ -3144,3 +3144,239 @@ module At {r : Level} (F : C.RealField r)
   -- per allocation. The nonlinear graph, full harmonic connection,
   -- and rank-nine BR29 source factor remain present as UNPAID fields;
   -- this assembly alone cannot certify physical IBVP solvability.
+
+  ------------------------------------------------------------------------
+  -- BR73–78: source-specific REAL physical energy / curved wall
+  -- constraint owners after BR71/72. Existing tensor/graph, original
+  -- 30+10 D/E reference and BR29/BS13 curvature data are retained.
+  --
+  -- BR73 corrects the coordinate-symmetrizer overrestriction:
+  -- H>0, N>0 => positive ADM normal-frame energy at ANY shift v.
+  -- C itself can be indefinite; use A(u_t-v.grad u)^2+D H^-1[du,du].
+  ------------------------------------------------------------------------
+
+  originalADMNormalTime : ADMPhysicalPoint → S →
+    (BR4Space → S) → S
+  originalADMNormalTime g ut grad =
+    ut - sumBR4Space (λ i → fourShift g i * grad i)
+
+  originalADMNormalSpatialPower : ADMPhysicalPoint →
+    (BR4Space → S) → S
+  originalADMNormalSpatialPower g grad =
+    volumeDensity g * sumBR4Space (λ i → sumBR4Space (λ k →
+      spatialInverse g i k * grad i * grad k))
+
+  originalADMNormalEnergy : ADMPhysicalPoint → S →
+    (BR4Space → S) → S
+  originalADMNormalEnergy g ut grad =
+    half * (admBR4A g *
+      originalADMNormalTime g ut grad *
+      originalADMNormalTime g ut grad
+      + originalADMNormalSpatialPower g grad)
+
+  originalADMCoordinateEnergy : ADMPhysicalPoint → S →
+    (BR4Space → S) → S
+  originalADMCoordinateEnergy g ut grad =
+    half * (admBR4A g * ut * ut
+      + br4SpatialSquare (admBR4C g) grad)
+
+  originalADMShiftCorrection : ADMPhysicalPoint → S →
+    (BR4Space → S) → S
+  originalADMShiftCorrection g ut grad =
+    neg (sumBR4Space (λ i → admBR4B g i * grad i) * ut)
+      + admBR4A g *
+         (sumBR4Space (λ i → fourShift g i * grad i)) *
+         (sumBR4Space (λ i → fourShift g i * grad i))
+
+  -- Source-level equality to certify using the actual BR48 ADM
+  -- identities and complex-ring distributive/commutative laws.
+  record OriginalADMNormalEnergyWeld
+      (g : ADMPhysicalPoint) (ut : S)
+      (grad : BR4Space → S) : Set r where
+    constructor originalADMNormalEnergyWeld
+    field
+      normalVsCoordinate :
+        originalADMNormalEnergy g ut grad ≡
+          originalADMCoordinateEnergy g ut grad
+            + originalADMShiftCorrection g ut grad
+
+  ------------------------------------------------------------------------
+  -- BR74–75: full nonlinear GRAPH intrinsic Gauss/Codazzi algebra.
+  -- In flat ambient eta5, at n=f(t,x,y,z):
+  -- h_ab=eta_ab+f_a f_b, z=1+f^a f_a,
+  -- K_ab=-f_ab/sqrt(z), Gamma^c_ab=f^c f_ab/z.
+  -- The full 64 Codazzi components vanish by symmetric third jets;
+  -- the complete 256 Gauss tensor is (H_ac H_bd-H_ad H_bc)/z.
+  -- Curved AdS ambient Ricci/Weyl is an EXTERNAL nonzero source.
+  ------------------------------------------------------------------------
+
+  record OriginalNonlinearWallGraphJets : Set r where
+    constructor originalNonlinearWallGraphJets
+    field
+      graphGradient : Vec
+      graphHessian : Wall → Wall → S
+      graphThirdDerivative : Wall → Wall → Wall → S
+      graphNormalSquared : S
+      reciprocalGraphNormalSquared : S
+      hessianSymmetric :
+        (a b : Wall) → graphHessian a b ≡ graphHessian b a
+      thirdDerivativeSymmetric :
+        (a b c : Wall) →
+          graphThirdDerivative a b c ≡
+          graphThirdDerivative b a c
+      thirdDerivativeLastSymmetric :
+        (a b c : Wall) →
+          graphThirdDerivative a b c ≡
+          graphThirdDerivative a c b
+  open OriginalNonlinearWallGraphJets public
+
+  originalGraphRaisedGradient : OriginalNonlinearWallGraphJets → Vec
+  originalGraphRaisedGradient p a =
+    sign a * graphGradient p a
+
+  originalGraphHessianContraction :
+    OriginalNonlinearWallGraphJets → Vec
+  originalGraphHessianContraction p a =
+    sum4 (λ i → originalGraphRaisedGradient p i *
+      graphHessian p a i)
+
+  originalGraphCodazziNumerator :
+    OriginalNonlinearWallGraphJets → Wall → Wall → Wall → S
+  originalGraphCodazziNumerator p c a b =
+    neg (graphNormalSquared p *
+      (graphThirdDerivative p c a b
+        - graphThirdDerivative p a c b))
+      + graphHessian p a b *
+          originalGraphHessianContraction p c
+      + graphHessian p c a *
+          originalGraphHessianContraction p b
+      + graphHessian p c b *
+          originalGraphHessianContraction p a
+      - graphHessian p c b *
+          originalGraphHessianContraction p a
+      - graphHessian p a c *
+          originalGraphHessianContraction p b
+      - graphHessian p a b *
+          originalGraphHessianContraction p c
+
+  originalGraphGaussNumerator :
+    OriginalNonlinearWallGraphJets →
+    Wall → Wall → Wall → Wall → S
+  originalGraphGaussNumerator p a b c d =
+    graphHessian p a c * graphHessian p b d
+      - graphHessian p a d * graphHessian p b c
+
+  record OriginalGraphCurvatureSourcePayment : Set r where
+    constructor originalGraphCurvatureSourcePayment
+    field
+      originalWallGeometry : OriginalNonlinearWallGraphJets
+      originalAmbientRicciNormal : Vec
+      originalAmbientRiemannTangent :
+        Wall → Wall → Wall → Wall → S
+      originalWallStressDivergence : Vec
+      originalGraphCodazziResidual : Wall → Wall → Wall → S
+      originalGraphGaussResidual :
+        Wall → Wall → Wall → Wall → S
+  open OriginalGraphCurvatureSourcePayment public
+
+  -- The polynomial flat-ambient source vanishes only after the
+  -- symmetric hessian/third-jet/ring laws have been proved.
+  -- For AdS and real curved Einstein g, retain ambient curvature
+  -- and physical material graph unit-normal source.
+  ------------------------------------------------------------------------
+  -- BR76–77: signed physical stress through the true moving wall.
+  -- T(t,s)=(t.du)(s.du)-1/2 g(t,s)g^-1(du,du).
+  -- The scalar normal-slice energy controls this by
+  -- |flux| <= (|chi|+sqrt(1+chi²)) E, chi=g(t,s).
+  -- Positivity and absolute values belong to ordered REAL/Hermitian
+  -- physical fields. Nothing makes Complex F ordered here.
+  ------------------------------------------------------------------------
+
+  record OriginalPhysicalEnergyFrames : Set r where
+    constructor originalPhysicalEnergyFrames
+    field
+      sourcePhysicalADM : ADMPhysicalPoint
+      sourcePhysicalWallGraph : MaterialGraphGradient
+      unitSliceTimelike : Cov
+      unitWallSpacelike : Cov
+      sourcePhysicalMetric : Axis → Axis → S
+      sourceInversePhysicalMetric : Axis → Axis → S
+      originalWallTilt : S
+      originalUnitNormalCompatibility : S
+  open OriginalPhysicalEnergyFrames public
+
+  originalEnergyFramePair : OriginalPhysicalEnergyFrames →
+    Cov → Cov → S
+  originalEnergyFramePair d u v =
+    sum5 (λ a → sum5 (λ b →
+      sourcePhysicalMetric d a b * u a * v b))
+
+  originalInverseGradientNorm : OriginalPhysicalEnergyFrames →
+    Cov → S
+  originalInverseGradientNorm d du =
+    sum5 (λ a → sum5 (λ b →
+      sourceInversePhysicalMetric d a b * du a * du b))
+
+  originalPhysicalStressFlux : OriginalPhysicalEnergyFrames →
+    Cov → S
+  originalPhysicalStressFlux d du =
+    sum5 (λ a → unitSliceTimelike d a * du a)
+      * sum5 (λ a → unitWallSpacelike d a * du a)
+      - half * originalEnergyFramePair d
+          (unitSliceTimelike d) (unitWallSpacelike d)
+          * originalInverseGradientNorm d du
+
+  record OriginalSharpMovingFluxPayment : Set r where
+    constructor originalSharpMovingFluxPayment
+    field
+      originalPhysicalFrames : OriginalPhysicalEnergyFrames
+      originalPositiveSliceEnergy : S
+      originalPhysicalFlux : S
+      originalGeometricTiltCoefficient : S
+      residualUnpaidBoundaryTrace : S
+      residualUnpaidWallIsrael : S
+      residualUnpaidEinsteinConnection : S
+  open OriginalSharpMovingFluxPayment public
+
+  ------------------------------------------------------------------------
+  -- BR78: nonlinear vacuum Einstein–Israel Bianchi / TENSION Ward.
+  -- With one matched h and physical Israel I=[K]-h tr[K]+3j h-S:
+  --   D^a I_ab = [Ric_g(n,e_b)]+3 D_b j-D^a S_ab.
+  -- If both bulk Ric=-4g and S=0 and I=0, then D_b j=0
+  -- on ALL FOUR tangent channels. Independent varying j(t) sources
+  -- in BR67/69 are formal algebraic fixtures, not vacuum Einstein
+  -- walls unless compensated by actual wall matter/flux.
+  ------------------------------------------------------------------------
+
+  record OriginalVacuumWallWardSource : Set r where
+    constructor originalVacuumWallWardSource
+    field
+      originalJunctionDivergence : Vec
+      originalBulkNormalRicciJump : Vec
+      originalTensionTangentialGradient : Vec
+      originalWallMatterDivergence : Vec
+      remainingPhysicalWardDefect : Vec
+  open OriginalVacuumWallWardSource public
+
+  originalWallWardDefect : OriginalVacuumWallWardSource → Vec
+  originalWallWardDefect d a =
+    originalJunctionDivergence d a
+      - originalBulkNormalRicciJump d a
+      - three * originalTensionTangentialGradient d a
+      + originalWallMatterDivergence d a
+
+  record OriginalPhysicalEinsteinIsraelWardCertificate
+      (d : OriginalVacuumWallWardSource) : Set r where
+    constructor originalPhysicalEinsteinIsraelWardCertificate
+    field
+      genuineNonlinearCodazzi : (a : Wall) →
+        originalWallWardDefect d a ≡ O
+      originalPhysicalNoHiddenSource :
+        (a : Wall) → remainingPhysicalWardDefect d a ≡ O
+  open OriginalPhysicalEinsteinIsraelWardCertificate public
+
+  -- The nonzero rank-nine BR29 projected Weyl wall system and
+  -- the five harmonic source still need a SAME-solution factor.
+  -- The Ward obstruction and shift-robust energy are added to the
+  -- actual physical payment list; neither a placeholder record
+  -- nor an algebraic test is accepted as a solved PDE.
