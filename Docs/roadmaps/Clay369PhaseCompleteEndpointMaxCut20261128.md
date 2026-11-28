@@ -1230,3 +1230,122 @@ Agda 2.9 and stdlib graph with source-level trust/--safe checking;
 do not remove safety pragmas blindly or rely on byte/source parity.
 The exact original native finite coefficient/bracket and its
 dependency-safe source import remain the target.
+
+
+## Section 29 — native source integrity repair and maximum-cut reconciliation (28 November 2026)
+
+### Current original owner states, verified live
+At intake, Agda YM #1536 head d85aa53efd930a082fddf5833f1ce07e44761c6e;
+all-Clay Agda #1551 head 26b9d39b4255eedfbde2afbc48f8ff4c28246e6b;
+NS Lean #123 a9751e1d45de789a5186a4c908792e15b15363a1;
+BSD/Hodge Lean #124 2cceb3106cd992977508f89f7023ae55e629b559;
+PNP Lean #119 887b9ba3292b1fb9d2103ad8ab0e9b1ed9759d22;
+RH Lean #121 3eb36764e36c526b7129550b737ffc507b3cb95f.
+These owner branches are not assumed to match master/main without a
+native branch/typecheck and source comparison. No branch merge.
+
+### YM: actual checked donor signatures and source-level correction
+Original donor modules inspected on #1536:
+- `YMClayCMP102OriginalGFiniteLimitTransportExact`: actual
+  aPrefix/bPrefix and originalGPrefix; originalGPrefixConvergesToOriginalG;
+  originalGZeroFromOriginalPrefixConvergence (requires a genuine
+  original prefix convergence-to-zero witness).
+- `YMClayCMP102OriginalEndpointCauchyShiftExact`:
+  shiftedNativeBracketCoefficientZero for every degree, with the
+  original signed even/odd Cauchy rows and endpoint cases.
+- `BishopSetoidSqueezeConvergenceExact.nativeBishopSqueeze`,
+  `BishopMachinArctanConstructionExact.quarterPositive` and
+  `quarterBelowOne`, and original Sequence geometric-power
+  convergence (all imported files confirmed ON #1536).
+
+Source review uncovered a probable STRICT-ORDER REWRITE ORIENTATION
+DEFECT in
+`YMClayCMP102OriginalGeometricSqueezeReceiverExact.quarterAbsBelowOne`:
+the left-hand setoid equality originally pointed from quarter to
+|quarter| whereas `P.<-respˡ-≃` needs the converse direction
+|quarter| ≃ quarter to transport quarter<1. Corrected in
+YM #1536 commit 164fa27168c151e9e4294a174a0eebc5a02af71c.
+This is a source correction and NOT a verified Agda elaboration.
+The original signed-squares algebraic solver,
+geometric-rate-to-zero receiver, and acceptance root are on that
+branch. The finite original Bishop real-order bracket
+  -3*quarter^count <= originalGPrefix(X,count)
+                 <= 3*quarter^count
+remains the single scalar analytic source proof body not yet written.
+Do NOT confuse the independently mathematically derived 23 Nov
+all-degree rational coefficient proof with a term inhabiting this
+Bishop-order statement. A pinned native typecheck may reveal other
+errors; do not assert readiness before it runs.
+
+### Source trust audit now executable, not just documentary
+On YM #1536, newly committed
+`scripts/check_ym_cmp102_original_native_imports.py`
+initial 02ce66800704b55ca4599453dcb8cb32df716a59,
+corrected b288c7d973b6ab558db6ba7b020c7a872b3b9ecc:
+- recursively resolves direct and transitive Agda imports from the
+  actual `YMClayCMP102Section27NativeAcceptanceExact` root;
+- accepts `--repo-root` and repeated `--include-root` for pinned
+  Bishop vendor and stdlib, including unqualified Real/Sequence;
+- fails CLOSED on unresolved imports and when a `--safe` consumer
+  directly imports a non-safe producer;
+- reports graph edges and missing providers;
+- only invokes actual local `agda` on explicit `--typecheck`;
+  absent executable yields nonzero status, not a fake PASS.
+A synthetic local Python import-graph test using safe Main and Real
+plus non-safe Foo.Bar correctly identified the unsafe edge and
+resolved single-component Real imports. This is parser/preflight
+unit acceptance only; the *actual remote #1536 dependency graph*
+was NOT executed locally because the user checkout/vendor paths are
+not available here. It must not be presented as a transitive safe
+proof or Agda kernel receipt. Genuine prior owner notes found at
+least 13 original safe-to-unsafe import edges in an earlier selected
+15-file set; those remain a real acceptance concern.
+
+Example in user's fully populated checkout:
+```sh
+python scripts/check_ym_cmp102_original_native_imports.py \
+  --repo-root . --include-root vendor/bishop \
+  --include-root vendor/stdlib
+python scripts/check_ym_cmp102_original_native_imports.py \
+  --repo-root . --include-root vendor/bishop \
+  --include-root vendor/stdlib --typecheck --agda agda
+```
+The vendor directories shown are placeholders to substitute with the
+REAL checked-out include paths; the actual `-i` flags must reflect
+the pinned Agda project. A missing external stdlib MUST produce
+UNRESOLVED, not be treated as an empty import graph.
+
+### Source ownership / logical debt clarified
+Existing NS #123 Section28 single actual finite-global Galerkin
+trajectory plus signed quarter FTC/energy/tail; needs truly
+cutoff-uniform critical nonlinear transfer and continuum source,
+not more finite budget duplication.
+BSD/Hodge #124: all-degree signed two-crossing Mellin positivity is
+conditional on strict original source integral; original complex
+L''/rank and Sha remain. Hodge generic 5+5 rotation/sign deck
+equivalence and original projected chart away from fold already
+written; global proper Chow cycle and primitive pairing remain.
+PNP #119: existing exact original anchored F3 input/query ceiling
+and deterministic closed-internal-observer no-go. These tell us
+what DOES NOT establish unrestricted SAT hardness; next source must
+pay genuine internal sharing-stable events or implement an actual
+polytime SAT algorithm. RH #121 native original xi/zeta BIDI is
+not the external original proof's certified admission or an
+independent RH theorem. YM remains limited to CMP102 scalar and
+original physical source/Wilson stress without an unrelated
+finite substitute. Original F19 shared plaquette, CMP116 absolute
+cluster shell, reflection-positive interacting OS and same-H mass gap
+are separate source requirements.
+
+### Acceptance categories and exact next cut
+This tranche's new deliverables are a native Agda source rewrite fix,
+a fail-closed user-executable import/safety/typecheck preflight,
+a local synthetic parser unit check, and this roadmap correction.
+It does NOT claim a new finite regression count, native Agda/Lean
+kernel pass, universality of NS/PNP, or completion of any Clay
+problem. Future large-bite cut: ORIGINAL finite Bishop polynomial
+bracket from all-degree CMP102 signed Cauchy donors; native Agda
+import graph + pinned compiler; simultaneously NS original critical
+signed estimate, BSD original complex Mellin L bridge, Hodge
+proper original Chow/primitive cycle, PNP actual internal/shared
+computation semantics, RH trusted pinned source admission.
