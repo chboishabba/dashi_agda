@@ -2,6 +2,7 @@ from fractions import Fraction as Q
 from itertools import product
 from random import Random
 from heapq import heappush, heappop, heapify
+from check_p0_budgeted_residual_20261125 import cap as source_cap
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -41,10 +42,23 @@ def cell(F,cols,target,offset,remaining,w):
         for i in remaining:H=[H[z]+H[(z-cols[i][-1])%3] for z in range(3)]
         a=tuple(w*(3*h-C) for h in H)
         return (F,cols,target,offset,remaining,w,a,a)
+    # Refine the old common cap by the original source's disjoint-free-
+    # clause cap, then condition on the ACTUAL observable label.  The
+    # two signed contributions are bounded separately, preserving the
+    # common-mode cancellation and avoiding a global magnitude envelope.
+    C=min(C,source_cap(F,remaining,[v[:-1] for v in cols],target))
+    if not C:return None
+    label_caps=[min(C,source_cap(F,remaining,cols,target+((d-offset)%3,)))
+                if d in labels else 0 for d in range(3)]
+    C=min(C,sum(label_caps))
+    if not C:return None
     lo=[];hi=[]
     for d in range(3):
-        a=[w*(3*int(z==d)-1) for z in labels]
-        lo.append(C*min(0,*a));hi.append(C*max(0,*a))
+        positive=2*min(C,label_caps[d])
+        negative=min(C,sum(label_caps[j] for j in range(3) if j!=d))
+        # Exact contrast w*(2*N_d-N_other); both masses are nonnegative.
+        a,b=-w*negative,w*positive
+        lo.append(min(a,b));hi.append(max(a,b))
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
 def sector(F,n,rows,target,obs,w,order=None):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
