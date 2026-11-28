@@ -58,10 +58,14 @@ def recover_trace(n,R,H,caps,x,B,signed_screen=False,flats=()):
     from check_pnp_capacity_partition import recover_cell
     from check_pnp_demand_strata import ProbeLimit
     from check_pnp_affine_normal_components import Exhausted
+    R,H,caps,flats=tuple(R),tuple(H),tuple(caps),tuple(flats)
     Q=canon(H)
     if Q is None or not satisfies(x,H,flats):raise ValueError('invalid start')
+    # Existing capacity recovery is specialized to odd row weights.
+    if canon(Q+tuple((r,1) for r in R))!=Q:return None
+    from check_pnp_demand_strata import Allowance
     try:
-        v=recover_cell(n,R,Q,caps,B,signed_screen=signed_screen)
+        v=recover_cell(n,R,Q,caps,Allowance(B,max(0,B.left//2)),signed_screen=signed_screen)
         if v.witness is None:return None
         if not satisfies(v.witness,H,flats):return None
         return trace(n,R,H,caps,x,v.witness,B,flats)
