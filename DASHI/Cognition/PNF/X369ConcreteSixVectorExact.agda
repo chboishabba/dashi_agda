@@ -247,3 +247,45 @@ module Carrier {Value : Set}
     apply (literal (inverseLiteral u)) (apply (literal u) z) ≡ z
   literalRoundtrip u z = useInverseLeft
     (literal u) (literal (inverseLiteral u)) (inverseReceipt u) z
+
+  -- Guard-labelled translations lie in the same cyclic C3 subgroup.
+  -- Nine finite combinations, including zero. This is NOT a statement
+  -- that reflection and translation commute.
+  aGuard : Fin 3 → Code
+  aGuard zero = literal a0
+  aGuard (suc zero) = literal a1
+  aGuard (suc (suc zero)) = literal a2
+
+  bGuard : Fin 3 → Code
+  bGuard zero = literal b0
+  bGuard (suc zero) = literal b1
+  bGuard (suc (suc zero)) = literal b2
+
+  translationCommute : (a b : Fin 3) →
+    then (aGuard a) (bGuard b) ≡
+    then (bGuard b) (aGuard a)
+  translationCommute zero zero = refl
+  translationCommute zero (suc zero) = refl
+  translationCommute zero (suc (suc zero)) = refl
+  translationCommute (suc zero) zero = refl
+  translationCommute (suc zero) (suc zero) = refl
+  translationCommute (suc zero) (suc (suc zero)) = refl
+  translationCommute (suc (suc zero)) zero = refl
+  translationCommute (suc (suc zero)) (suc zero) = refl
+  translationCommute (suc (suc zero)) (suc (suc zero)) = refl
+
+  commuteAction : (a b : Fin 3) (z : State) →
+    apply (bGuard b) (apply (aGuard a) z) ≡
+    apply (aGuard a) (apply (bGuard b) z)
+  commuteAction a b z =
+    trans (symEq (composeLaw (aGuard a) (bGuard b) z))
+      (trans (congCode (translationCommute a b) z)
+        (composeLaw (bGuard b) (aGuard a) z))
+    where
+      symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+      symEq refl = refl
+      trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+      trans refl p = p
+      congCode : ∀ {x y : Code} → x ≡ y → (z : State) →
+        apply x z ≡ apply y z
+      congCode refl z = refl
