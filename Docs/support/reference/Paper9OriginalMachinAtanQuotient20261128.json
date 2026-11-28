@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-28",
+  "original_atan_source": "DASHI/Analysis/BishopOriginalMachinAtanQuotientSecondOrderExact.agda",
+  "agda_source_blob": "85ab6cd4c8051d7f29a9eb59ea1bbe4d23ed7c2a",
+  "source_written": true,
+  "native_kernel_checked": false,
+  "tests": {
+    "path": "scripts/check_paper9_original_atan_quotient.py",
+    "git_blob": "7808ee48b2a1e313f22b46dc66f749b71f8dfeb8",
+    "local_git_blob": "7808ee48b2a1e313f22b46dc66f749b71f8dfeb8",
+    "local_sha256": "a623c91fdec361dbc9ae87b69e30092f974cc488162d23634bf77e61933250c6",
+    "byte_identical": true,
+    "executed_local": true,
+    "rational_identities_passed": 2096,
+    "signed_negative_controls_rejected": 3,
+    "finite_terms_max": 32,
+    "power_degree_max": 64,
+    "example_points": [
+      [
+        0,
+        0
+      ],
+      [
+        "1/5",
+        0
+      ],
+      [
+        "1/239",
+        0
+      ],
+      [
+        "-1/5",
+        "1/239"
+      ],
+      [
+        "1/5",
+        "-1/239"
+      ],
+      [
+        "1/3",
+        "1/6"
+      ],
+      [
+        "-1/2",
+        "1/5"
+      ],
+      [
+        "1/2",
+        "-1/239"
+      ]
+    ],
+    "second_defect_sample_bound": "8/9",
+    "all_index_bound_proved": false
+  },
+  "original_selected_tau_exponent_source": "DASHI/Moonshine/CM163BishopSelectedTauExponentExact.agda",
+  "original_selected_tau_exponent_git_blob": "aac8d2bd29e4acce529fec004d945bf6ce059f12",
+  "analytic_remaining": [
+    "Prove |finiteSecond x h N| <= 8/9 uniformly over |x|,|x+h|<=1/2 on original Bishop real, using source power quotient triangle inequalities and geometric weighted sum",
+    "Use this uniform second defect and original uniform tail to construct derivative-of-limit interchange for original Bishop Machin atan real",
+    "Supply original Bishop complex imaginary-exponential derivative/origin and constructive ODE uniqueness, then derive both actual atan-to-Cayley evaluations",
+    "Construct original all-index CM root Hecke residual and original Bishop hypergeometric factorial attachment"
+  ],
+  "github_ci": false
+}
