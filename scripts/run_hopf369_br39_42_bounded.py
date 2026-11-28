@@ -233,6 +233,9 @@ PARTS["terminal"] += [(f"BR230233.{p}","check_hopf369_br230_233_dynamic_cut.py",
 
 PARTS["terminal"] += [(f"BR237239.{p}","check_hopf369_br237_239_geometry.py",("--part",p)) for p in ("wall","material","scaling")]
 
+PARTS["terminal"] += [(f"BR240241.n{n}","check_hopf369_br241_metric_consumer.py",("--n",str(n))) for n in (11,17)]
+PARTS["terminal"] += [(f"BR242244.{p}","check_hopf369_br242_244_constraint_history.py",("--part",p)) for p in ("jets","grids")]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
