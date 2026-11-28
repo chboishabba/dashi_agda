@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–66 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–67 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -66,8 +66,10 @@ PARTS={
     ("BR65.geometry","check_hopf369_br65_optical_geometric_israel_weld.py",("--part","geometry")),
     ("BR65.reference","check_hopf369_br65_optical_geometric_israel_weld.py",("--part","reference")),
     ("BR66.mean","check_hopf369_br66_nonzero_mean_israel_weld.py",()),
+    ("BR67.coeff","check_hopf369_br67_eighth_order_israel_source.py",("--part","coeff")),
   ],
   "heavy":[
+    ("BR67.physical","check_hopf369_br67_eighth_order_israel_source.py",("--part","physical")),
     *[(f"BR60.K.{i}","check_hopf369_br60_moving_israel_frechet.py",("--part","component","--index",str(i))) for i in range(10)],
     ("BR52.metric","check_hopf369_br52_all_order_material_flux.py",("--part","metric")),
     ("BR52.gauge","check_hopf369_br52_all_order_material_flux.py",("--part","gauge")),
@@ -164,7 +166,7 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67"}]
     else:
         plans=PARTS[args.part]
     outcome={}
