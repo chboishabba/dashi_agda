@@ -27,6 +27,10 @@ import DASHI.Moonshine.JInvariantBishopFormalHyperClearedODEExact as Proof
 import DASHI.Moonshine.JInvariantBishopWeightedCauchyEvaluationExact as EV
 import DASHI.Moonshine.JInvariantBishopFiniteCompositionExchangeExact as EX
 import DASHI.Moonshine.JInvariantBishopCompositionLimitExact as CL
+import DASHI.Moonshine.JInvariantBishopLiteralRamanujanExact as Literal
+import DASHI.Foundations.BishopChudnovskyNativePeriodProductExact as Period
+import DASHI.Foundations.BishopChudnovskyNativeRealExact as Native
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 open U using (Series; _⊗s_; scale)
 
 q : ℝ
@@ -142,3 +146,31 @@ module AtOriginalZ
     actualRaw hx hy he xa ya ua xv yv uv root jet =
       End.rawFromThree root (actualSquare hx hy he xv)
         (actualClearedJet hx hy he xa ya ua xv yv uv) jet
+
+    -- The original all-index Ramanujan producers already exist. Discharge
+    -- those arguments here, not via a new external coefficient receipt.
+    -- Remaining inputs are actual weighted evaluation and signed CM geometry.
+    originalSquare : Eval U.X End.X → End.HyperSquare
+    originalSquare = actualSquare Literal.ramanujanX Literal.ramanujanY Literal.ramanujanE
+
+    originalClearedJet : Abs U.X → Abs U.Y → Abs uSeries →
+      Eval U.X End.X → Eval U.Y End.Y → Eval uSeries End.U → End.ClearedHyperJet
+    originalClearedJet = actualClearedJet Literal.ramanujanX Literal.ramanujanY Literal.ramanujanE
+
+    originalPeriod : Abs U.X → Abs U.Y → Abs uSeries →
+      Eval U.X End.X → Eval U.Y End.Y → Eval uSeries End.U →
+      End.CMRoot → End.SignedJet → Period.NativePeriod
+    originalPeriod xa ya ua xv yv uv root jet =
+      End.periodFromThree root (originalSquare xv)
+        (originalClearedJet xa ya ua xv yv uv) jet
+
+    originalSameReal : Abs U.X → Abs U.Y → Abs uSeries →
+      Eval U.X End.X → Eval U.Y End.Y → Eval uSeries End.U →
+      End.CMRoot → End.SignedJet → Native.chudnovskyReal ≃ Machin.bishopMachinPi
+    originalSameReal xa ya ua xv yv uv root jet =
+      Period.periodToSameReal (originalPeriod xa ya ua xv yv uv root jet)
+
+    originalRaw : Abs U.X → Abs U.Y → Abs uSeries →
+      Eval U.X End.X → Eval U.Y End.Y → Eval uSeries End.U →
+      End.CMRoot → End.SignedJet → (k : Nat) → Raw.RawCross k
+    originalRaw = actualRaw Literal.ramanujanX Literal.ramanujanY Literal.ramanujanE
