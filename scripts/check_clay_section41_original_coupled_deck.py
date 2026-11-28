@@ -15,7 +15,7 @@ from fractions import Fraction as Q
 from itertools import product
 
 counts = {"Hodge_Q0_profile": 0, "Hodge_coupled_delta": 0,
-          "Hodge_odd_negative": 0, "PNP_bit_clock": 0}
+          "Hodge_odd_negative": 0, "Hodge_free_puncture": 0,\n          "Hodge_fold_negative": 0, "PNP_bit_clock": 0}
 
 def q0(a, s):
     return -3*a**3 -3*a*a*s-a*a+3*a*s+3*a-2*s*s+s+3
@@ -66,6 +66,32 @@ assert all(q0(ai,si)==Q(3) and q0(ai,ti)==Q(3)
 assert mul(derivative(ai,si) for ai,si in zip(a,s))==Q(1)
 assert mul(derivative(ai,ti) for ai,ti in zip(a,t))==Q(1)
 counts["Hodge_coupled_delta"]+=3
+
+# A complete, original coupled Q0(a,s)=y+a^7/y fibre sample
+# with all a_i=0, y_i=3, s_i∈{0,1/2}. Every derivative is ±1,
+# so δ is genuinely nonzero and the sixfold partner has NO fixed
+# point on any of the 2^6 legal signed-root sheets.
+for choices in product((0,1),repeat=6):
+    a=(Q(0),)*6
+    y=(Q(3),)*6
+    s=tuple(Q(b,2) for b in choices)
+    t=tuple(partner(ai,si) for ai,si in zip(a,s))
+    delta=mul(derivative(ai,si) for ai,si in zip(a,s))
+    assert all(q0(ai,si)==yi and q0(ai,ti)==yi
+               for ai,yi,si,ti in zip(a,y,s,t))
+    assert delta != 0
+    assert mul(derivative(ai,ti) for ai,ti in zip(a,t))==delta
+    assert t!=s
+    assert tuple(partner(ai,ti) for ai,ti in zip(a,t))==s
+    counts["Hodge_free_puncture"]+=5
+
+# The δ≠0 hypothesis is REAL: all six branch roots s=1/4 at
+# a=0 have dField=0 and the partner fixes the same original root.
+branch=(Q(1,4),)*6
+assert all(derivative(Q(0),si)==0 for si in branch)
+assert mul(derivative(Q(0),si) for si in branch)==0
+assert tuple(partner(Q(0),si) for si in branch)==branch
+counts["Hodge_fold_negative"]+=3
 
 # Deterministic 1-bit source programs, explicit addressed input-bit
 # observations and original terminal clock k. If outputs diverge,
