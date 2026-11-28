@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR171; periodic grazing trace BR171, coupled wall estimate open)
+## Current proof state — 28 November 2026 (BR174; selected joint wall branch BR174, full coupled estimate open)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -676,3 +676,38 @@ joint boundary-symbol estimates and nonlinear
 generation remain. Three new exact stages passed;
 no kernel, full PDE or empirical acceptance.
 See [the controlling register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Joint selected atomic fine structure and wall-compatible half-speed branch (BR172–174)
+
+Adding the selected \(s/p\) energies and central one-electron
+spin-orbit term directly to BR170's eight-state Hopf matrix
+preserves axial \(J_z\) and a Kramers antiunitary on this
+initial projected operator. The exact characteristic
+polynomial is
+\[
+ (x-E_p-\zeta/2)^2
+ \big[(x-E_s)((x-E_p+\zeta/2)(x-E_p)-2c^2-\zeta^2/2)
+       -2a^2(x-E_p)\big]^2.
+\]
+The cubic determines \(a^2,c^2\) individually off \(E_s=E_p\)
+for known baseline coefficients; at degeneracy it retains
+only their sum. The marked matrix blocks restore the sign,
+whereas even the combined energy spectrum forgets it.
+This is a selected atomic model, not a measured spectrum
+or the full interacting curved Dirac dynamics.
+
+For the frozen reference periodic bulk/shape system with
+common Weyl value and zero shape perturbation, the actual
+constraint \(Rw=0\) leaves five exactly tangential half-speed
+directions at each sign, with spatial trace rank two.
+At three nonzero rational tilts the \(+1/2\) subspace has
+rank-seven wall-source restriction. A symbolic continuing
+mode satisfies \(A(\theta)w=w/2,\ Rw=0\) and exact spatial
+trace norm ratio \(\sin^2\theta\cos^2\theta/12\). This supplies
+normal-angle suppression for that selected branch, not for
+all glancing modes. The full nonzero-shape joint boundary
+pencil and curved Cartan conditions remain open. BR132–139
+dependent replay remains unpaid. Three local stages passed,
+no native kernel, nonlinear evolution or empirical acceptance.
+See [the proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

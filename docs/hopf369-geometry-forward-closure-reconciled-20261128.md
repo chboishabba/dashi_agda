@@ -4602,3 +4602,178 @@ retained). Quantum marked Monster action and material
 receiver not newly implemented in this tranche.
 No sibling edits, native kernel, CI, integrated runner,
 full nonlinear evolution or empirical acceptance.
+
+
+## 30. BR172–174 — joint atomic fine structure, spectral inverse and selected wall-compatible symbol
+
+Consume actual BR169–171 and the existing original Weyl
+and spinor sources. BR172/173 reconstruct the same BR170
+matrix in its original marked basis (not a new numerical
+Hamiltonian); BR174 consumes the byte-matched BR27 and BR143
+carrier and trace functions. Parent source blob pins:
+scripts/check_hopf369_br169_171_bound_trace.py
+754fe689d23990f4685e5157f2cd4b4a3ac13de0;
+scripts/check_hopf369_br165_168_parallel.py
+7f1e2d159955dc9d37026c034a1e423a40184f7d;
+scripts/check_hopf369_br_curvature_energy.py
+75f6d2f9ae23302860074c25cb8d864b7c089148;
+scripts/check_hopf369_br143_145_parallel.py
+2354d838727e6d84c1e8da05abad27a9b78efc6d.
+The complete BR132–135 and BR136–139 source texts were
+reopened (blobs as in section 28); the latter depend on the
+former. Their byte-matched dependent-stage replay is NOT
+performed here. BR128–131 original replay remains paid.
+No new claim of exhaustive master or PR reconciliation.
+
+### BR172 — simultaneous atomic operators, not independent spectra
+
+On the original eight-state (s,px,py,pz) tensor spin basis,
+take BR170's marked M(a,c), and add the selected central
+s/p scalar energies and p-shell one-electron spin-orbit term:
+ H=M+diag(Es I2,Ep I6)+zeta (0_2 direct_sum L dot S).
+Here L_i[j,k]=-i epsilon_ijk and S_i=sigma_i/2, with the
+BR163 radial coefficient as a possible leading source for
+zeta (consistent energy units required). Es,Ep,zeta are
+real supplied model coefficients, NOT an independently
+derived Lamb shift or measured line. The direct matrix
+identity [H,Jz]=0 holds with Jz=Lz+Sz, and the antiunitary
+Theta=(I4 tensor i sigma_y) K (K complex conjugation)
+satisfies Theta²=-I, Theta H Theta^-1=H and reverses Jz.
+This is an exact symmetry of the selected initial matrix,
+not a proof of time reversal of the full evolving metric
+or independently applied magnetic Maxwell field.
+
+The Jz=±3/2 spaces are one-dimensional with energy
+ Ep+zeta/2. The Jz=±1/2 spaces are three-dimensional
+and have the identical monic polynomial
+ f(x)=(x-Es)[(x-Ep+zeta/2)(x-Ep)-2c²-zeta²/2]
+             -2a²(x-Ep).
+Consequently det(xI-H)=(x-Ep-zeta/2)² f(x)².
+All four restrictions are checked by actual eigenspace
+embeddings and matrix intertwining, plus exact charpoly.
+This gives four Kramers pairs counted with multiplicity,
+allowing further accidental degeneracy. It correctly
+reduces to BR170's signed spectral triad when Es=Ep=0
+and zeta=0. The rephased axial 120-degree spinor rotation
+- exp(-2pi i Jz/3) has cube I and multiplicities (2,3,3),
+with the two ±3/2 states in its invariant sector; this
+follows directly from the four eigenspace dimensions,
+not a new verified matrix exponential. This is an actual
+selected atomic C3 action, distinct from the bare lane
+cycle and from a full physical rotation's order six.
+
+### BR173 — reverse solve the actual spectral observation
+
+Assuming Es,Ep,zeta are known, the marked Jz=±1/2 cubic
+can be used to recover squared Hopf matrix coefficients.
+For Es!=Ep,
+ a²=-f(Es)/(2(Es-Ep)),
+ c²=-f(Ep)/(2(Ep-Es))-zeta²/4.
+At Es=Ep the cubic reduces to
+ (x-Ep)[(x-Ep+zeta/2)(x-Ep)-2(a²+c²)-zeta²/2],
+so that the two independent algebraic coefficients
+cannot be recovered individually from the spectrum;
+the retained observation is a²+c². The original radial
+integral relation may further constrain them, but that
+is additional source information, not a spectral inverse.
+The spectrum is even under simultaneous sign reversal,
+even with the selected central splitting and spin-orbit
+term included. A marked block measurement restores
+the sign:
+ a=(i/2)tr(sigma_y M_{s,px}),
+ c=(i/2)tr(sigma_x M_{px,pz}).
+The inverse is a mathematical observer of the projected
+matrix, not a demonstrated experimental tomography protocol.
+At a=c=0 retain the whole original shell, not an artificial
+sign. On any observation quotient keep the source-specific
+splitting and marked axes; this is not a universal spectral
+reconstruction or canonical Leech correspondence.
+Further relativistic, many-electron, nuclear, field,
+curvature and temporal corrections remain necessary.
+
+### BR174 — first joint reference bulk/zero-shape wall symbol cut
+
+Use BR27's actual 35-component Weyl carrier, normal jump
+w^+-w^-=j J m and selected wall evolution with source
+-R mean(w). The following exact algebra restricts to
+the common Weyl value with m=0, so Rw=0 in the frozen
+reference bulk/shape subsystem. Do not treat this as
+a solution of every Cartan, differentiated seam,
+background connection or nonzero-shape condition.
+
+In the exactly tangential direction A_1 eigenmodes:
+speed +1/2 and -1/2 each have dimension 8, rank R|V=3,
+with five-dimensional zero-wall-source subspace.
+On each such subspace rank of full electric trace of
+D_1 Xw is 5 and spatial trace rank 2.
+At speed 0 the corresponding dimension is 9,
+rank R|V=4, five-dimensional survivor, full trace rank4,
+spatial trace rank1. Thus the exactly glancing condition
+Rw=0 does NOT annihilate the BR171 spatial trace.
+
+In the normal/tangential plane use the exact rational
+direction chart cos(theta)=(1-u²)/(1+u²),
+sin(theta)=2u/(1+u²). Write
+ A(u)=cos(theta) A_1+sin(theta) A_n,
+ D(u)=cos(theta) D_1+sin(theta) D_n
+ (D is restricted to the BR143 independent rows).
+For the nonzero rational tilt test points u=1/100,1/10,1/2,
+the actual +1/2 eigenspace dimension is 8 and R has
+rank7 on it. This is a tested rank at three directions,
+not a proof of the generic rank at every angle.
+In the pinned original coordinates a symbolic all-u
+solution w(u) has nonzero-index entries (zero-based)
+ w_0=2u,w_4=-2u,w_8=u²-1,w_13=2(u²-1),
+ w_23=-1-u²,w_26=-2(1+u²).
+Exact A(u)w=w/2, Rw=0,
+ w^T G w=24(1+u²)², and
+ ||T_sp D(u) X w||²/(w^T G w)
+     =sin²(theta) cos²(theta)/12
+where the D restriction is understood and T_sp is
+the BR143 spatial electric trace. This is a symbolic
+identity valid for the entire rational chart, including
+its zero-tilt limit. On THIS smoothly continuing
+wall-source-free half-speed mode the trace amplitude is
+suppressed by the normal angle. For a Fourier covector
+(k,ell), the normalized direction trace bound becomes
+ ||T_sp D(k,ell) Xw|| <= |ell| ||w||_G/sqrt(12)
+since |xi| sin(theta)=ell and |cos(theta)|<=1.
+The last bound is relative to the Weyl amplitude, not
+a claim of a uniform trace estimate on all residual
+data. The exact glancing eigenspace enlarges and still
+has other nonzero spatial traces. This is a genuine
+boundary-condition-specific improvement for a selected
+branch, NOT a proof of the coupled boundary estimate.
+BR171 bulk-only counterexample is not automatically
+admissible under wall conditions; neither this branch
+nor the three sampled ranks excludes all glancing packets
+with nonzero wall shape, distinct incoming/outgoing
+polarizations or the BR164 lower-order Cartan source.
+The next controlling cut is the full joint boundary pencil
+with m retained, both normal characteristic signs,
+boundary frequency, and subsidiary/Cartan equations;
+construct a uniform energy or weighted trace bound or
+a concrete joint counterexample. No PDE evolution claimed.
+
+### Acceptance and next cuts
+
+Three final local stages passed with original local
+donor and BR143 bytes checked. Initial charpoly comparison
+failed due to distinct symbol assumptions; use its actual
+generator for substitution. Initial symbolic wall vector
+had index 25 instead of 26 and proposed Gram 48 instead
+of 24; corrected against actual original carrier, reran
+all three final stages. No native kernel, complete
+BR132–139 replay, integrated runner, CI, nonlinear
+evolution or empirical acceptance. Checker Git blob
+43b24d78db2eda0661e147cadb38d223832ee53f; SHA256
+704a547014916a7966034644c397a77ee47ec4db3da5a1cd51de8820927d6a58.
+Atomic: selected combined operator and spectral inverse
+paid; full radial physical scaling, CI/SCF, native signed
+consumer and time-dependent spinor remain. Periodic:
+full nonzero-shape boundary pencil, donor replay,
+curved energy and generation remain P0. G3 finite-time
+constants and G4 nonlinear profile remain independent.
+Monster marked lattice/action and material receiver
+not newly advanced here; reuse pinned owners from prior
+sections. No sibling edits.
