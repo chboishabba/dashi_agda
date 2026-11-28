@@ -1589,3 +1589,226 @@ reductions and exact tested controls, not solved endpoint producers.
 No new universal conjecture or prize claim. The next positive work
 must target actual rank comparison/coalescence and actual mixed
 algebraic cycle rather than further restatement of the residuals.
+
+
+## 28 November — canonical RH real carrier, NS original terminal coverage, BSD Kummer representative exactness, explicit full-rank CM orientation
+
+All four P0 continued, PNP/YM excluded. No native kernels available in this
+runtime; no CI invoked. Use existing source owners and explicit hypotheses.
+
+### RH R-W1: actual rational-coordinate defect removed
+
+Re-read DASHI/Analysis/RiemannZetaProgramBoundary.agda,
+RiemannAnalyticSubstrate.agda, AlpogeRHOriginalClayEndpointBidiExact.agda
+and DashiWeilRiemannBridge.agda. The original Clay strip incorrectly required
+realPart : Complex -> Q, even though the analytic substrate has an
+independent Real carrier. This cannot faithfully encode arbitrary complex
+coordinates. Changed the existing CriticalStripWitness to carry Real : Set,
+realPart : Complex -> Real, oneHalf : Real; rational exact samples remain
+unchanged. Targeted default-branch searches for CriticalStripWitness and
+criticalLineMeansHalf found no concrete record construction requiring
+conversion; not an exhaustive all-branch build. Commit
+b432e79a77c46f8a4bdcd4829e91a102b4345508.
+Extended AlpogeRHOriginalClayEndpointBidiExact.agda at
+260a8133f602013909fc484a4abea02a2d6edf12 with analyticOwnedStrip,
+analyticOwnedStripWeld, externalToOwnedClayWitness,
+ownedClayWitnessRecoversAnalytic. The canonical strip uses EXACT carrier,
+apply(zeta), zero, Real, realPart, nontrivialZero and criticalLine
+from the existing completed analytic owner. Its maps are identity and all
+four predicate transports are definitionally the same witnesses.
+The actual value half and proof of the real critical-line equality remain
+explicit, as the current ComplexAnalyticCarrier has no Real field operations.
+For arbitrary preexisting independent strips the previous explicit weld
+remains valid; no claim arbitrary strip equals the canonical one.
+Actual external theorem transport still needs same-object analytic ingress,
+not a log or mere record of external verification. Lean #121 unchanged;
+MIT https://math.mit.edu/~drew/shortgrh/ rechecked, all verification complete
+as of Nov27 17:27 UTC, five exact statements in its own v4.35.0 environment.
+Raw compact-axioms.log viewed on MIT page; direct container download
+failed, so no local byte-level external receipt or local kernel acceptance
+claimed. This round repairs the Agda semantic shape, not cross-kernel proof
+transfer. Credit original Alpöge/Claude, rewrite authors, independent
+checkers; DASHI for the carrier fix.
+
+### NS: consume all available original nonfractional conditional terminals
+
+Lean #123 2402c5e9922df2beb7f12cd4f10f10d7d142a2cd.
+Read original Breakdown/Defs.lean and Solution.lean at ad53419d and actual
+pinned derivative donor. Reworked gradient_original to use the exact
+inner_gradient_right and EuclideanSpace.inner_single_left identities,
+then the actual source finite coordinate sum. The incompressibility
+proof directly transports equality, no dependence on a rewrite matching
+a particular eta-expanded time-first function.
+Added direct source-written original_profile_to_clayCD,
+original_weak_profile_to_clayC, original_certificate_to_clayC and
+original_extended_certificate_to_clayC to the same ClayUnforcedTransport.
+These call the actual upstream theorem bodies breakdown_on_space,
+breakdown_on_torus, breakdown_on_space_of_weak,
+certificate_breakdown_on_space, extended_certificate_breakdown_on_space
+with their respective actual hypotheses. Thus any one upstream witness
+can feed the appropriate literal original terminal, not only the
+seven-object fifteen-condition route. The unforced source always uses
+zero force and same velocity/pressure. No fractional exponent is
+silently equated to ordinary viscosity. Audit now requires fourteen
+declarations. Local Python normal/-O 14/14 synthetic parser controls
+each, exact blob 6d9acd27b51e7e5f9ce74edb915e23a324bd4204.
+Prior C/D cell condition adapters retained. Current math.observer
+https://math.observer/problems/navier-stokes-existence-and-smoothness/
+(last reviewed Nov25) still reports unforced certificate missing and
+patched source not rebuilt; OpenAI official kernel acceptance and written
+proof correspondence review are distinct. No witness manufactured, no
+native execution.
+
+### BSD: actual signed Kummer reverse construction at degree one
+
+Existing generic EllipticKummerCocycleAlgebraExact and selected
+CMOriginalGeometricKummerGroupExact, CMGeometricKummerContinuousH1Exact,
+CMOriginalEbarTopRepUnderlyingExact and ActualE2H1LowDegreeReduction
+re-read. The selected curve already has literal Ebar doubling surjectivity
+and the trivial E[2] character to H1 map. The missing representative
+exactness is now implemented in
+Synthesis/MillenniumBSDOriginalKummerCocycleExactness.lean
+(Lean #124 commit 0c424d264bf89081bd87f67149ef6b8d09d65a69).
+Use delta Q(sigma)=sigma Q-Q on the actual geometric point carrier.
+For two halves Q1,Q2 of the same fixed point,
+delta Q2-delta Q1=delta(Q2-Q1), where Q2-Q1 lies in literal E[2].
+Unlike the selected trivial action, the difference is NOT assumed zero.
+If an E[2]-valued cocycle is delta Q in Ebar, doubling gives
+delta(2Q)=0, so P=2Q is Galois-fixed and the cocycle is precisely the
+Kummer representative for P and half Q. Conversely the Kummer
+representative is the indicated Ebar-coboundary. This is the first
+degree-one exactness assertion on representatives.
+If a point crossed-cocycle c satisfies 2c=delta P, choose actual Q
+with 2Q=P (selected original doubling onto supplies it, general curve
+requires the actual geometric doubling theorem). Then
+d=c-delta Q lies in E[2] and is crossed; c=d+delta Q.
+Conversely doubling that decomposition gives delta(2Q).
+These are explicit signed reverse maps, not a new cohomology carrier.
+The new source also proves originalPointOrbit_continuous by Krull-open
+stabilizers of the two affine coordinates, translates the stabilizer
+neighborhood at each sigma, and obtains continuity of delta Q and the
+torsion lift for continuous c. The finite group regressions
+scripts/check_bsd_kummer_representatives.py blob
+0328b465257b624762e77a5c8065f62224902902 match local hash and pass
+2716/2716 normal and optimized, trivial and nontrivial involutions,
+only double targets in finite modules. No actual arithmetic H1
+computed by the fixtures. The remaining native weld is comparison of
+these representatives with the general Mathlib homogeneous-cochain
+H1 quotient, actual rational fixed-point descent and local completion
+naturality, then genuine cohomological Selmer/Sha quotient. The selected
+CM group exactness is not universal BSD. For 234446.a1 the independent
+analytic rank {2,4}, signed coalescence and universal rank comparison
+remain open. Rechecked Kezuka–Zagier BSD Dichotomy
+https://people.mpim-bonn.mpg.de/zagier/files/preprints/BSD_Dichotomy.pdf:
+this particular rank-four arithmetic/analytic equality is still
+identified as unresolved; no deduction from tiny derivative or p-adic
+unit is asserted.
+
+### Hodge: explicit full-rank CM period and actual existential orientation on that member
+
+This is a positive selected geometric producer, not a new generic
+orientation proof. Re-read source rStation paper141 Proposition 3.1
+https://rstation.ai/problems/hodge_conjecture/papers/141:
+reported F=Q(theta), theta^3+theta^2-2theta-1=0, relative rank6
+determinant class pi=2-theta, signatures (2,4),(0,6),(0,6), Hasse -1
+only the two definite real places, dyadic prime2, prime over7; rational
+trace carrier of lattice U+K7 perpendicular. Retain these as source
+hypotheses (not an independent proof of the original Dickson family).
+Choose labeling with positive theta embedding active; if needed
+conjugate the field action and pi together. The new diagonal model
+Q=diag(theta,theta*pi,-1,-pi,-1,-pi) has det theta^2*pi^3,
+correct signatures. Theta is an integral unit (norm1), pi has norm7;
+all diagonal entries units at odd primes except7, hence local Hasse +1
+there. At 2, -pi is a square by the original source identity (or
+cyclotomic splitting), so all three binary planes are hyperbolic,
+giving Hasse -1 because the unramified local degree is three.
+At the two definite real places Hasse -1 and the active real place +1;
+global Hilbert reciprocity forces Hasse -1 at7. Thus by Hasse–Minkowski
+the diagonal model realizes the reported F-form up to isometry.
+This is a rational form identity, not an integral Gram identification.
+
+Define A0 in consecutive two-coordinate blocks
+[[0,-j*pi],[j,0]] for j=1,2,3; Q A0=S0 is skew. Define
+A=Q^-1(S0+E/130001), E the exact alternating matrix in
+scripts/check_hodge_cubic_cm_period.py and
+Synthesis/MillenniumHodgeCubicCMExplicitSeed.lean.
+At the place above 13 with theta=7, Q is invertible and denominator
+130001=1 mod13; explicit reduced matrix has characteristic polynomial
+X^6-2X^4-2X^2+6, irreducible over F13. Rabin checks
+X^(13^6)=X mod f and gcd(X^(13^d)-X,f)=1 for d=2,3.
+Therefore the actual charpoly is irreducible over F (monic and
+integral at that DVR). At all three real embeddings theta in
+(-1.9,-1.7),(-.5,-.4),(1.2,1.3), pi>=.7, min abs diag Q>1/3.
+In the positive Euclidean metric scaling by |Q|^(1/2), A0 is normal,
+with distinct eigenvalues +/- i*j*sqrt(pi). Perturbation norm at most
+69/130001<.001 (E has max absolute row sum 23, also max column sum).
+This remains true along A(t)=A0+t Q^-1 E/130001 for 0<=t<=1.
+The disjoint .001 disks around the six base eigenvalues retain
+one eigenvalue each by normal-matrix spectral inclusion and continuity.
+Q-skew plus reality gives symmetry lambda -> -conj(lambda), which
+preserves each such disk; hence each eigenvalue is purely imaginary.
+The original positive two-plane stays positive along the homotopy:
+paired opposite eigenlines have nondegenerate restriction (distinct
+skew spectrum pairs only opposite eigenvalues), so its signature
+cannot change. Other two-planes at that embedding remain negative.
+A is invertible. Its even irreducible polynomial gives the degree-six
+over F field F[A]; F[A^2] totally real of degree3 over F by the
+negative real squares at all embeddings; F[A] is CM degree18 over Q.
+
+Choose the positive eigenplane in the active embedding and its
+oriented isotropic eigenline omega. Through the reported rational
+isometry into the marked K3 lattice, period surjectivity realizes
+a projective K3 S (the orthogonal lattice has positive class).
+There is no rational transcendental-complement vector orthogonal to
+omega: if v in F^6 nonzero, its A-cyclic span over F is the whole
+space by irreducibility; the eigenline pairing vanishes on that
+span if it vanishes on v, impossible by nondegeneracy at the active
+embedding. Thus T(S) retains the full rational rank18 and Picard
+number4, not a Picard jump. A and F preserve the Hodge decomposition.
+This is a specific marked CM period, not an equation for S or proof
+that the point lies inside the original open Dickson-family image.
+
+For this actual realized S, the rational Hodge isometry
+R=(1+A)(1-A)^-1 extends by identity on NS and is algebraic by Buskin.
+Recover A=(R-1)(R+1)^-1 algebraically using polynomial inverse
+(Cayley–Hamilton), hence its nondegenerate alternating form
+q_F(Ax,y). For each nonzero u in F the same construction for uA
+makes uA algebraic; composition with algebraic A^-1 supplies u,
+so F action on the SAME S is algebraic without assuming a new RM
+correspondence. With the existing primitive/relative equal-field
+idempotents, the alternating two-form tensor produces a nonzero
+relative determinant by its triple exterior product, as in the
+already-paid CM Pfaffian construction. All operations are induced
+by actual rational algebraic correspondences and exterior
+permutations on S^6. Existence of the cycle on this specific
+period-realized CM surface follows conditionally on the reported
+form invariants and classical K3 period and Buskin theorems.
+No explicit cycle equations or native Chow verification.
+The generic exact-RM member has End_Hdg(T)=F, so this extra skew
+endomorphism cannot be retained generically; need genuine new
+generic mixed half-spin correspondence or variational/spread
+argument. Universal primitive detector remains independent.
+The previous principal-fibre no-go is unchanged.
+
+Local exact checker 32/32 normal/-O, actual hash
+946146d1fda82a7f7a25806e4b805f6c7bd3d8d3 matches remote.
+Native seed module commit 97b2d83ad4452c48b84cf1f72b7a82d3d200494a
+in Lean #124. Source-written matrix/determinant/skew/reduction
+proofs; finite-field irreducibility and perturbation rational
+bounds tested locally, no native kernel or period-map computation.
+Attribution: original paper141 author for reported lattice/form,
+classical Hasse–Minkowski, K3 period theorem, Buskin, Zarhin and
+Varesco for their theorems; DASHI for explicit chosen diagonal
+model and rational skew seed and their source-specific composition.
+No JMD contribution inferred.
+
+### Remaining
+
+RH canonical strip conversion paid at source level, original local
+kernel and actual analytic half/Lean-to-Agda ingress still required.
+NS original terminal routes source-written, actual original witness
+and native admission remain. BSD representative-level Kummer cut
+advanced, complex coalescence and universal rank still unpaid.
+Hodge concrete full-rank CM period producer advanced on one member,
+generic orientation and arbitrary primitive detector remain.
+No new unconditional universal conjecture or prize claim.
