@@ -1,0 +1,9 @@
+Actual local rerun BR266 and BR267, both exit zero. OPENBLAS_NUM_THREADS=1 timeout 90s python respective scripts.
+BR266 source blob ab6d0bee302795b98b2f3fff391671a7a18adce4; BR267 e49840e6199c92105bcd32418b5c413425e06add; both local and remote match.
+BR266:
+BR257-259 11 8 energy initial/final 0.0013366896798901148 0.0015673641295928082 work 0.00023067444970283578 ledger 3.14554155292357e-17 force 0.7551652748758829 margin 1.0432564964621251 gauge mismatch 0.000793037557056928
+BR266 SBP/SAT boundary work -0.00015724499170127767
+BR267:
+BR257-259 11 8 energy initial/final 0.0013366896798901148 0.001988176771992756 work 0.0006514870921027657 ledger 2.245653749760601e-17 force 0.7551652748758829 margin 1.0432564964621251 gauge mismatch 0.0009267955317594457
+BR266 SBP/SAT boundary work 0.00011601843926464724
+BR267 reference is gauge trace from same full-grid frozen-boundary metric, not an independent exterior. Gauge mismatch worsens. No physical boundary or continuum certification.
