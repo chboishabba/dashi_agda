@@ -80,9 +80,10 @@ and R681–R695 identities remain prior repo source.
 
 **Receipt:** Equivalent exact SymPy 1.14 source run PASS, all 316 original
 incidences on three complete runs (two velocities at ν=1, one at ν=1/10),
-full R652/R687/R726 normal-form and both strict signs. Exact checked-in
-script was independently source-read but not executed byte-identically
-after GitHub commit. New Agda/Lean theorem bodies are SOURCE-WRITTEN,
+full R652/R687/R726 normal-form and both strict signs. The actually executed local script was byte-identical to the GitHub
+blob 804278ed0189ba796a2275d1b9354710471deb58
+(git hash-object matched), with SHA256
+aa7bc01df75e7a6bebdd2f25449c6887f659f1d497d7ba11f8cb1de7513159be. New Agda/Lean theorem bodies are SOURCE-WRITTEN,
 PENDING_KERNEL; no CI and no Clay A/B endpoint promoted. Original PDE
 mathematics/continuation remains open. Prior R/RNNN owners retain provenance;
 DASHI-specific contributions are the new signed deficit identity,
