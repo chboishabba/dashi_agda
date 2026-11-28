@@ -143,6 +143,8 @@ def main():
     # Overlap without a real lift, unsupported large clause, removed source clause.
     F=((1,2),(-1,2),(1,-2));q=solve(F,2);assert q['status']!='EMPTY'
     q=solve(((1,),(-1,)),1);assert q['status']=='EMPTY';bad=dict(q['certificate'],polynomials=((0,()),));assert not replay(((1,),(-1,)),1,bad,Reservation(1000))
+    assert not replay(((1,),),1,q['certificate'],Reservation(1000))
+    assert solve(((-1,),(1,2),(1,-2),(-1,2)),2)['status']=='UNKNOWN'
     assert solve(((1,),),1,cap=0)['status']=='UNKNOWN'
     assert solve(((1,2,3),),3,width=1)['status']=='UNKNOWN'
 if __name__=='__main__':main()
