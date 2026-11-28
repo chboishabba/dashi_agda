@@ -92,3 +92,30 @@ Therefore the Leech gap is precisely instantiate an ACTUAL normed 24D rootless G
 
 ### Final P0 trivalent nonvacuous topology change (55b762d)
 The original source-loaded three-leg theorem now goes beyond matched signatures: X369PantsThreeLegConsumerCoherenceExact.agda contains actual three distinct heterogeneously stalked source edges, three original source vertices, three *inhabited* BeforeIncidence witnesses; one post-merge shared SeamSignature edge with three inhabited AfterIncidence witnesses; actual GlobalSections before and after; per-vertex restriction preservation and per-edge-value preservation; and concatenation of all three ordered original provenance lists. Signature transitivity constructs all three actual five-field InterfaceMatches, and separate residual packet/consumer nonfactorability remain. This is a real **finite typed hyperfabric edge-address quotient** for the selected three source channels, NOT smooth pair-of-pants gluing, arbitrary sheaf gluing, full BranchChannel equality or automatic neural source action. Agda proof bodies are written with kernel checks intentionally deferred.
+
+## 28 November: hypervoxel / tetration / factorisation parent-carrier reconciliation
+
+The two previously claimed separate gaps (original source to depth-13 central-family sheaf; original source to five-field typed pants seam) should NOT produce new parallel geometry. They are views of ONE retained indexed hyperfabric once an original-source admission exists.
+
+### Existing constructors actually inspected in master
+
+- DASHI/Foundations/RecursiveRadixHypervoxel.agda: TernaryAddress rank depth, AddressSuffix, joinAddress, coarsen, fineBlock, CrossObjectJoin, SiblingAggregation, ScaleLiftTransport. Address extension, sibling assembly and cross-object gluing are distinct. Rank 3 depth 1 has 27 sites; rank 3 depth 2 has 729. Exponentiation of spatial site count differs from configuration-count growth.
+- DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda: SelfIndexedCarrier 0=unit; SelfIndexedCarrier (suc n)=SelfIndexedCarrier n -> Fin 9. Exact base-9 tetration. Hyperfibre retains residual and path, resolution 3/6/9 and typed length vs execution length.
+- DASHI/Biology/SelfIndexedParetoHyperfabricTetrationExact.agda: level-one nine ternary axes have 19683 profiles, but exact cardinality does NOT identify them semantically with original Base369 fabric.
+- DASHI/Cognition/PNF/SelfIndexedSemanticFractranTetrationBidiExact.agda: fine world/history/occurrence/residual/phase remain above coarse addresses.
+- DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda: full-address dependent IndexedFabric and Situated states, GuardedGluing, query-relative consumer sufficiency and nonfactorability. No flattening of residuals/provenance.
+- DASHI/Core/FactorisationSpineCrosswalkExact.agda: query factorisation / IntersectionalNonFactorability / observer refinement / consumer descent / fibre repair already unified. DO NOT duplicate the factorisation calculus.
+- DASHI/Foundations/ConwayChainedArrowFiniteBridgeExact.agda separately defines factorial, factorialTower, Conway/Knuth/tetration. Factorial recursion, product growth and true self-indexing tetration are different operations. The term factoriation should not be silently equated with any one of them.
+- DASHI/Foundations/TernaryThirteenCentralCompletionBundleSheafExact.agda: original 12 local (valuation, common centre) sections, central compatibility, glue, pointwise restrict inverse, puncture and an explicit incompatible family. Existing TernaryThirteenPantsSheafGluingTransportExact supplies real source pants13 and each axis inverse.
+
+### New original same-object packet, no invented source map
+
+DASHI/Cognition/PNF/X369RecursiveHypervoxelPantsSameObjectExact.agda (b6a62f8, earlier f4a3271/aba21cd) defines ONE source packet containing full 9-trit hyperfabric, ACTUAL original 12+1 source central completion, an arbitrary retained residual, and independent source index. Exact packet split/reopen BIDI, centralRestrictsCompatible, glueCompatibleLocalsToPants, originalPantsGlueRestricts are composed from existing source owners. SelectedSeam uses actual five-field signatureMatchComplete. OriginalSourceAdmission shows that ONE sourceEncode/sourceDecode construction yields both views and all original axis restrictions. It is explicitly conditional on the native source having that admission; no 9=13 claim. Existing radix join, genuine self-indexed function-space recursion and Pareto profile count are referenced without conflating them.
+
+Executable partner: LeechTransformer PR #5 scripts/x369_hypervoxel_stage13_pants_same_object.py (15c0e90), tests/test_x369_hypervoxel_stage13_pants_same_object.py (ef13775). Native 9-trits, original 13 stage trits, full original byte history and five independent indices are required explicitly. BIDI, stage13 local compatibility/reopening, retained three 24D Fourier lanes and three centres, radix join, matched five-field pants interface and impossible malformed families are checked by source-written regression. Not yet run from committed checkout; Agda kernel deferred.
+
+### Coarse-to-fine actual remaining source weld
+
+P0: original recurrent-state -> Maybe retained common Packet, with an inverse on admitted states. Source-supplied original 12+1 stage valuation, full 9-trit chart or partial admission, exact source bytes, five indexed dimensions, actual BranchChannel semantic interpreters, original observation/transition commuting squares. If a chart fails, preserve actual native bytes and separating witness. The existing original 13-stage sheaf/pants and nonvacuous heterogeneous seam then apply without new general gluing axioms.
+
+P1: actual next-level self-indexed tower transition, not an ordinary spatial refinement; typed C3/zero/orientation, genuine Leech membership, native LILA language consumer, physical and numerical checks all separately admitted. Never promote 19683 matching counts into equality of the original model with a 9-dimensional ternary world.
