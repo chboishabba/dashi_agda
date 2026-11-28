@@ -73,17 +73,27 @@ def rational_restoration_exclusion(field,center_error,parameter_error,atol):
     return dict(excluded=norm2>threshold,center_norm2=str(norm2),
                 squared_return_radius=str(threshold))
 
-def bound_layout(material,cfg,ids,budget,max_boxes=8):
+def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_tolerance',terminal_policy=None):
     from solar_spherical_cycle import cycle,geometry
+    if restoration_mode not in ('finite_tolerance','controlled','asymptotic'):
+        raise ValueError('unknown restoration policy')
+    if (restoration_mode=='controlled') != (terminal_policy is not None):
+        raise ValueError('controlled route requires its actual shared terminal actuator policy')
+    if restoration_mode=='asymptotic' and 'asymptotic_tail_probe_steps' not in cfg:
+        raise ValueError('asymptotic route requires source-off tail receipt')
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
     ids=np.asarray(ids,int); assert len(ids)>0 and len(set(ids))==len(ids)
+    if 'terminal_load_rate_s_inv' in cfg:
+        t=np.asarray(cfg['terminal_load_rate_s_inv'],float)
+        if t.shape!=(ne,) or np.any(t<0) or t.sum()>budget or not set(np.flatnonzero(t))<=set(ids):
+            raise ValueError('terminal receiver outside matched layout/resource budget')
     assert np.all((ids>=0)&(ids<ne)) and budget>=0 and max_boxes>=1
     dt=cfg['period_s']/len(cfg['incident_sqrt_W'])
     incident=cfg['max_cycles']*dt*np.sum(np.asarray(cfg['incident_sqrt_W'])**2)
     ceiling=float(incident-cfg['max_cycles']*cfg['auxiliary_J'])
     port=float(cfg['source_coupling_sqrt_inv_s']); edge=int(cfg['source_edge'])
     seq=0; queue=[]; replay_count=0; failed=0; best=None
-    rational_candidates=[]; restoration_exclusions=[]
+    rational_candidates=[]; restoration_exclusions=[]; mode_candidates=[]
     from fractions import Fraction as F
     exact_ceiling=None
     if cfg.get('retain_stage_residuals',False):
@@ -116,25 +126,41 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 heating_W=np.zeros_like(cfg['heating_W']),load_rate_s_inv=mid)
         upper=parent_upper
         try:
-            replay_count+=1; out=cycle(material,cc)
+            replay_count+=1
+            if restoration_mode=='controlled':
+                from solar_controlled_terminal_return import controlled_terminal_cycle
+                controlled=controlled_terminal_cycle(material,cc,terminal_policy)
+                out=controlled['original_prefix'];score=controlled['controlled_tolerance_net_J']
+                mode_candidates.append(dict(mode=restoration_mode,accepted=score is not None,
+                    gross_paid_J=controlled['controlled_return']['gross_paid_J']))
+            else:
+                out=cycle(material,cc)
+                score=out['strict_campaign_net_J'] if restoration_mode=='finite_tolerance' else None
+                if restoration_mode=='asymptotic':
+                    # A prefix with a conditional tail interval is NOT an
+                    # admitted asymptotic restored witness.
+                    mode_candidates.append(dict(mode=restoration_mode,accepted=False,tail=out['asymptotic_tail']))
             if exact_ceiling is not None:
                 rational=rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 rational_candidates.append(rational)
                 rational_upper=exact_ceiling-F(rational['reflection_lower_exact'])
                 upper=min(upper,rational_upper)
-                field=np.asarray(out['history'][-1])[:ne+nf+9*len(vol)]
-                ex=rational_restoration_exclusion(field,out['exact_frozen_population_solve_error'],
-                    rational['parameter_error_exact'],cfg.get('return_atol',[1e-10]*4)[0])
-                if ex['excluded']:
-                    restoration_exclusions.append(dict(lo=lo.tolist(),hi=hi.tolist(),**ex))
-                    return
+                if restoration_mode!='asymptotic':
+                    # Controlled return can change material current but leaves
+                    # E/B exactly untouched. Never prune using pre-control J.
+                    count=ne+nf if restoration_mode=='controlled' else ne+nf+9*len(vol)
+                    field=np.asarray(out['history'][-1])[:count]
+                    ex=rational_restoration_exclusion(field,out['exact_frozen_population_solve_error'],
+                        rational['parameter_error_exact'],cfg.get('return_atol',[1e-10]*4)[0])
+                    if ex['excluded']:
+                        restoration_exclusions.append(dict(lo=lo.tolist(),hi=hi.tolist(),mode=restoration_mode,**ex))
+                        return
             else:
                 en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 upper=min(upper,ceiling-en['reflection_lower_J'])
-            score=out['strict_campaign_net_J']
             if center_feasible and score is not None and np.isfinite(score):best=score if best is None else max(best,score)
         except (ValueError,AssertionError,ArithmeticError,np.linalg.LinAlgError,FloatingPointError):
-            failed+=1 # retain parent upper; never discard failed region
+            failed+=1;upper=parent_upper # retain parent upper; never discard failed region
         seq+=1; heapq.heappush(queue,(-upper,seq,lo,hi))
     lo=np.zeros(ne); hi=np.zeros(ne); hi[ids]=budget
     box(lo,hi,exact_ceiling if exact_ceiling is not None else ceiling)
@@ -160,6 +186,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
                 gap_J=None if best is None else float(upper-best),
                 rational_trace_candidates=rational_candidates,
+                restoration_mode=restoration_mode,mode_candidates=mode_candidates,
+                scope='conditional source-funded upper bound for matched terminal policy; no physical or outward-rounded certification',
                 restoration_exclusions=restoration_exclusions,
                 no_restored_passive_on_binary_chart=no_restored_chart,
                 outward_rounding_certified=False,physical_admission=False)
