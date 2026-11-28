@@ -80,13 +80,18 @@ def compare_nested(material,cfg,fine_ports,dheating=None,dload=None,fine_dload=N
             raise ValueError('independent load direction required on each mesh')
         cc['retain_jet_history']=True;fc['retain_jet_history']=True
         c=campaign_jvp(material,cc,dheating,dload,quadratic_amplitude_path=True,quadratic_second_order=True)
-        f=campaign_jvp(fm,fc,np.asarray(dheating)[:,cells['owner']]/24,fine_dload,
-            quadratic_amplitude_path=True,quadratic_second_order=True)
         def fields(j):return np.array([[s[k] for k in ('field','first','second')] for s in j['indexed_jet_history']])
+        jet_shadow=dict(prolongation=L,endpoints=fields(c),
+            useful_coefficients_J=[s['useful_coefficients_J'] for s in c['indexed_jet_history']])
+        f=campaign_jvp(fm,fc,np.asarray(dheating)[:,cells['owner']]/24,fine_dload,
+            quadratic_amplitude_path=True,quadratic_second_order=True,shadow=jet_shadow)
         out=coefficient_reopen(fields(f),fields(c),L,R)
         result['jet_reopen']=dict(reconstruction_error=out['reconstruction_error'],
             signed_residual=out['signed_residual'].tolist(),complement=out['complement'].tolist(),
-            coefficient_evolution_bound_admitted=False)
+            coefficient_evolution_bound_candidate=f['jet_endpoint_error_bound_candidate'],
+            receiver_coefficient_error_bound_candidate_J=f['jet_receiver_work_error_bound_candidate_J'],
+            signed_evolution_residual_trace=f['signed_jet_evolution_residual_trace'],
+            outward_rounding_certified=False,coefficient_evolution_bound_admitted=False)
         result['material_jet_reopen']={}
         for name,width in (('population',3),('pool',2),('temperature',1),('population_u',3),('pool_u',2),('temperature_u',1),('population_u2',3),('pool_u2',2)):
             def read(j):return np.array([np.asarray(row[name]).ravel() for row in j['indexed_jet_history']])
