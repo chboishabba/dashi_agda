@@ -277,3 +277,63 @@ The checker asserts exact nonstationary Christoffel symbols and normal accelerat
 **Accounting:** Runner registered at \`1e5c5b8f0c675a1822bbc60b3a0a296777c5687d\`. Source checker pinned as third W2 entry \`dynamic_tov_flux_israel\` at \`b1bef684df76d7c2e1bc5220cc19fb86631b6a16\`. Two additional source-admission controls were added to the DAG test at \`47558a63657d9d2a99f1b7f1afe46b53f4c108dd\`, bringing the planned malformed-claim count to eleven; full *committed* DAG test replay remains outstanding. The **three new W2 mathematical scripts** (static moving, typed three-source reverse, dynamic flux) passed **literal byte-identical local execution**; do not conflate that with original native F8, full programme owner replay, verified physical Einstein source or actual device.
 
 **Next whole-system weld:** assemble exact time-dependent S0–S2 Einstein–matter boundary and exterior normal packet with independent nonzero \(j\) and a real constitutive/constraint-compatible matter evolution; simultaneously compile a distinct Maxwell current/stress sheet and reciprocal controller reaction packet. Then attach physical observer/tide/clock via original G3 and F8 receivers, not an arbitrary desired gain. The original 36 whole-programme physical obligations still remain open.
+
+
+## W2.2/W2.3 large-cut closure: original Einstein mass + moving Israel + wall-frame inverse + constructive radial constraints (29 November)
+
+**Repository reconciliation.** #1547 began this cut at \`d862d0337d0c621bd5838a287be3741ac2587b08\`; #1554 \`9c8e8721f4b0d721a630b5491a0870a0523a86d8\`; #1537 \`5b00538d4ba19b8c69cb198fe51b2c6aeba204c2\`; #1555 \`be212eec07c0475117c8985f08fdd7a21e4907e7\`. Read the literal existing original \`check_tov_dynamic_flux_israel_abi.py\`, \`check_tov_moving_mass_constraint_weld.py\`, \`check_engineered_gravity_boundary_packet_w2.py\` and the W2 manifest; reused them. No new PR-donor source code imported, no unverified master search success claimed.
+
+### W2.2 two Einstein equations simultaneously close the moving wall stress source
+New \`scripts/check_tov_mass_flux_surface_closure.py\`, executed literal source with Git blob \`df20eed79509be852151ce1f38c656130b44ffe9\`. Starting from the SAME Misner–Sharp mass \(m(t,r)\), original spherical Einstein equations
+\[
+m_r=4\pi r^2\rho,\qquad m_t=-4\pi r^2N\sqrt f\,j
+\]
+require exact mixed-derivative compatibility:
+\[
+\boxed{\partial_t(r^2\rho)+\partial_r(r^2N\sqrt f\,j)=0.}
+\]
+An independently prescribed density/current that violates this condition cannot arise from one smooth mass function. A nonzero-divergence numerical-symbolic negative control is included.
+
+For a vacuum Schwarzschild exterior with constant \(M\), a common radius \(R(\tau)\), timelike proper radial velocity \(v=\dot R\), and common induced surface geometry, \(\frac{d}{d\tau}(m_{\mathrm{int}}-M)=0\) gives the **moving mass-flux condition**
+\[
+\boxed{j_{\mathrm{wall}}=\frac{\rho_{\mathrm{wall}} v}{\sqrt{f+v^2}}.}
+\]
+Together with the previously derived exact moving temporal Israel condition
+\[
+(f+v^2)p_r+v^2\rho-2v\sqrt{f+v^2}\,j=0,
+\]
+it determines the two radial source components uniquely for fixed wall density and velocity:
+\[
+\boxed{j=\frac{\rho v}{\sqrt{f+v^2}},\qquad p_r=\frac{\rho v^2}{f+v^2},\qquad \rho p_r=j^2.}
+\]
+The coefficient determinant in \((j,p_r)\) is \(- (f+v^2)^{3/2}\), nonzero for a timelike wall (\(f>0\)); the wall density \(\rho\), tangential stresses, matter action, bulk continuation and support dynamics remain FREE/UNPAID. The formula works for BOTH signs of \(v\) and does not assert positive energy when the source has arbitrary-sign \(\rho\). It is a necessary no-shell vacuum boundary relation, **not** a general bulk equation of state.
+
+The original repaired TOV material profile has \(\rho_0(1)=p_{r0}(1)=0\). If a future physical material evolution preserves the *moving* zero-density level surface, then zero normal flux and pressure follow on the wall from these relations. At coordinate-fixed radius, however, the original \(p_{r0}''(1)=-8p\) makes the second pressure jet necessarily \(\;p_{r2}(1)=-2\phi p_{r1}'(1)+8p\phi^2\;\), and for a background zero current \(j_2(1)=-2\phi j_1'(1)\). These are not independently disposable. The checker verifies both shape derivatives and independent source/flux counterexamples.
+
+### W2.2 exact moving observer stress frame (bidi converse)
+New \`scripts/check_tov_wall_frame_stress_inverse.py\`, executed literal source Git blob \`b27efd0f5110228955276a99801675027faa97a9\`. In the radial Eulerian orthonormal frame the physical 1+1 stress is \(T_{\hat\alpha\hat\beta}=\begin{psmallmatrix}\rho&-j\\-j&p_r\end{psmallmatrix}\). The moving wall tangent and outward normal are \(U^{\hat\alpha}=(\sqrt{f+v^2},v)/\sqrt f\), \(n^{\hat\alpha}=(v,\sqrt{f+v^2})/\sqrt f\). Both orthonormality and independent stress projections are proved:
+\[
+T_{nn}=\frac{(f+v^2)p_r+v^2\rho-2v\sqrt{f+v^2}j}{f},\quad
+T_{Un}=0\iff\text{no energy flow normal to wall}.
+\]
+Solving **both** \(T_{Un}=0\) and \(T_{nn}=0\) in reverse uniquely reproduces the same \(j,p_r\) as the Einstein mass/Israel forward construction. The resulting radial stress has rank one, \(\det T_{1+1}=0\), and the wall-frame comoving density is \(\rho f/(f+v^2)\), generically nonzero; a no-shell vacuum exterior does not imply vacuum matter immediately inside the wall. This is an exact two-way geometric equivalence. It leaves transverse pressure and the full tensor, actual material constitutive law and GHY/corner second variation unconstructed.
+
+### W2.3 explicit NONZERO radial Einstein constraint family (constructive, NOT original action)
+New \`scripts/check_tov_moving_constraint_family.py\`, executed literal Git blob \`23f2f03c33300c59a15d648698201220f76c6f5d\`. Instead of assigning independent wall data, construct, for any smooth positive radius \(R(t)\), with \(\alpha=\lambda(\lambda+2)\), \(x=r/R(t)\),
+\[
+m(t,r)=\frac{\alpha}{2}\left(\frac{x^3}{3}-\frac{x^5}{5}\right),\quad
+\rho(t,r)=\frac{\alpha(1-x^2)}{8\pi R^3},\quad
+p_r(t,r)=-\frac{\lambda(1-x^2)^2}{8\pi R^3}.
+\]
+Define \(f=1-2m/r\), the Einstein radial lapse slope \(N_r/N=(m+4\pi r^3p_r)/(r^2f)\) with exterior-matched boundary lapse, and **derive** the nonzero signed Eulerian flux
+\[
+j=\frac{\rho\,r\,\dot R}{R\,N\sqrt f}.
+\]
+The file proves both original Einstein radial mass/flux equations, their differential integrability (as one \(m\)), and the exact original TOV static limit at \(R=1,\dot R=0\), including \(f,\rho,p_r,N_r/N\). On \(r=R(t)\): \(m=M=\alpha/15\), \(\rho=p_r=j=0\), and \(f,f_r,N_r/N\) match the instantaneous Schwarzschild exterior. Thus this is a nontrivial **radially constrained, source-compatible geometric continuation** with nonzero interior time flux and matched physical wall *spatial* jets, not merely an imposed boundary condition.
+
+**ESSENTIAL non-promotion:** The rescaled \(\rho,p_r,j\) have NOT been derived from the original 3-field repaired TOV constitutive action for dynamical material labels. \(N\) is defined by a spatial integration of its radial Einstein equation; no independent time equation, Einstein angular stress \(p_t\), Ward/matter Euler evolution, momentum constraint for a full 3+1 slice, global causal exterior, GHY/corner or energy positivity/regularity theorem was solved. The wall \(R(t)\) is prescribed for this *constructive radial constraint family*, not shown to satisfy the original material equations. Treat this as a candidate to weld to an actual constitutive deformation or use its failure as a concrete obstruction; do not promote it to a physical evolving star.
+
+### Acceptance, provenance and next bigger cut
+All THREE new W2.2/W2.3 files **ran locally under 90 seconds with exit0**, and their exact Git blob byte hashes match the resulting #1547 committed files. All three have signed \(v\) support and negative controls. The original existing checkpointed runner includes all three. The manifest now holds SEVEN W1 entries and SIX W2 entries, 13 total pinned mathematical source/receiver interfaces, with \`physical_paid=false\`. The added three failure controls (fake mass/flux payment, wall-stress source substitution, invented Einstein physical lane) bring the recorded negative-control suite to fourteen, but literal full DAG test/aggregate replay has NOT occurred. The 36 primary physical programme obligations remain OPEN.
+
+**W2.4 whole-thing next:** compute the original nonlinear repaired TOV material action under a dynamical radial label \(Y(t,r)\); differentiate its exact stress to obtain \(\rho,p_r,j,p_t\), and test whether the W2.3 rescaled mass profile can be generated *without* a separate, unphysical source. This is the decisive material-to-Einstein weld, not more finite positive polar trial searching. If not, identify the exact algebraic incompatibility and reverse-solve admissible \(Y\)/metric histories. Alongside that, attach the same source-qualified work/traction to reciprocal controllers, Maxwell/RMHD matter, and F8/G3 same-event original receivers with independent source hashes. The physical EH/GHY/corner and free nonspherical modes remain essential; no native F8 or empirical 1g claim.
