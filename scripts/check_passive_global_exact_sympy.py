@@ -35,13 +35,20 @@ def run():
     # feasible interval imply the unique global maximum at q=2.
     upper=s.cancel(useful.subs(q,2))
     assert upper>0 and upper<incident
+    # Stronger than testing the optimizing point: the first state component
+    # has no zero for ANY feasible q, so no passive load restores both states.
+    first_num=s.fraction(s.cancel(x[0]))[0]
+    assert s.count_roots(first_num,0,2)==0
+    assert first_num.subs(q,0)!=0
     assert storage.subs(q,2)>0  # terminal state is not exactly restored
     # For an arbitrary active candidate A, A - upper is a rigorous lower
     # bound on its advantage for THIS scalar comparator only.
     return dict(status='EXACT_SCALAR_PASSIVE_GLOBAL_OPTIMUM',
         optimal_load='2',global_upper_J=str(upper),global_upper_float=float(upper),
         incident_J=str(incident),sturm_roots_in_interval=0,
-        derivative_positive=True,energy_identity=True,original_restored=False,
+        derivative_positive=True,energy_identity=True,
+        any_exactly_restored_passive=False,restoration_obstruction='first endpoint coordinate has no roots on [0,2]',
+        original_restored=False,
         physical_admission=False)
 
 if __name__=='__main__':
