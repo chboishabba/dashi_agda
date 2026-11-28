@@ -2659,3 +2659,90 @@ BR43/44 must pay the V² and U_s terms from real norms, and BR37's Q⁴/Q² tang
 Updated `scripts/run_hopf369_br39_42_bounded.py` (historical filename retained) has `--part frontier` for just BR52–58, preserving `--part fast|heavy|all`, each source check in its own <=90-second subprocess with SHA256 digest/checkpoint and fail-closed FAIL/TIMEOUT. The heavy original BR29 factor and BS13 sixteen components are isolated. All newly authored symbolic checkers are **COMMITTED_UNRUN**, all Agda additions **CONSTRUCTED_PENDING_KERNEL**; no CI credits spent.
 
 **Do not reopen generic geometry. Remaining four genuine analytic theorem cuts:** P0a actual full moving nonlinear reduced Einstein material coefficient/connection and H^s weighted tame well-posedness with BR37 glancing; P0b actual same-solution Bianchi/BR29 projected source cancellation and constraint-preserving boundary IBVP (rank12 obstruction); P0c BS13 tangential+normal weighted quotient coercivity including global holonomy/exterior and physical gauge; P0d a constructive local iteration and continuation with physical initial/corner and BR31 exterior conditions. The donor machinery for every finite signed, metric, gauge, graph and normal integration term is now explicitly cross-attached; the unproved hypotheses have not been silently replaced by records.
+
+
+## BR59–63 — LARGE integrated nonlinear Einstein–Israel junction, Codazzi and reverse-solve pass (28 Nov 2026)
+
+This is the next nonlinear geometric weld **after** BR48–58, not a replacement for those source owners. BR58 had successfully constructed the full 15+5 moving material **conormal derivative** correction and its 30+10 D/E linear boundary-column attachment, but a *genuinely nonlinear moving wall* also requires (i) induced metric, (ii) unit normal, (iii) extrinsic shape Hessian, (iv) true nonlinear trace-reversed Israel junction and (v) its source Codazzi compatibility. BR59–63 construct exactly those missing source objects and their full linearization/reverse-solve. They do not infer nonlinear hyperbolic well-posedness.
+
+### BR59 — full nonlinear hypersurface source, all ten physical K components
+
+Source `scripts/check_hopf369_br59_full_moving_israel_geometry.py` derives directly from original 5D metric g and actual graph `F=n-f(t,x,y,z)`:
+```
+ e_a^mu=delta_a^mu+(partial_a f)delta_n^mu,
+ F_mu=(-partial_a f,1),
+ z=g^{mu nu} F_mu F_nu,  n_mu=F_mu/sqrt(z),
+ h_ab=g_{mu nu} e_a^mu e_b^nu,
+ K_ab=[e_a^mu e_b^nu
+          (partial_mu partial_nu F-Gamma^lambda_mu_nu F_lambda)]/sqrt(z).
+```
+The ten symmetric K rows are actually computed from Christoffel **metric derivatives**, not an arbitrary supplied wall curvature. Reference geometries include flat moving nonzero graph Hessian, actual Gaussian warp with K=(b'/b)h and a shifted ADM chart where `∂n` is not a unit normal. Spacelike-normal guard z>0 is kept. The full graph does not reduce to the BR34 coordinate-normal rows without BR48/49 matching.
+
+### BR60 — true metric+wall-shape Fréchet at original Gaussian source
+
+Source `scripts/check_hopf369_br60_moving_israel_frechet.py` computes a direct independent dual/first-variation oracle from metric inverse/connection and hypersurface defining function, versus the *explicit* geometric derivative:
+```
+delta h_ab = p_ab + 2k phi eta_ab,
+delta K_ab = -partial_a partial_b phi
+          +(k²+b''(0))phi eta_ab
+          + (partial_n p_ab -partial_a p_nb-partial_b p_na)/2
+          -(k/2)p_nn eta_ab.
+```
+Here k=b'(0), b(0)=1 and **p is the raw source metric variation** (not BR14's b-rescaled normalized field). The unit-normal `p_nn` correction, *moving* graph Hessian and background shape acceleration are retained. This bridges actual nonlinear shape variation and prior BR19 material graph geometry. Source has independent 10-row component partitions and refuses the error that omits the graph Hessian; all are COMMITTED_UNRUN.
+
+### BR61 — two-sided full Israel junction, original induced metric continuity
+
+Source `scripts/check_hopf369_br61_two_face_nonlinear_israel.py`; native `OriginalMovingShapeData`, `originalInducedVariation`, `originalExtrinsicVariation`, `TwoFaceMovingIsraelSource`, `originalShapeJump`, `originalIsraelShapeFrechet`, `OriginalTwoFaceShapeCompatibility`, `FullMovingJunctionWeld`, `assembleFullMovingJunction`. Original mean k_+=j/2, k_-=-j/2; the two independent metric perturbations are matched by actual induced-metric continuity `delta h_+=delta h_-` on the shared graph. With signed physical Israel definition
+```
+ I_ab=[K_ab]-h_ab tr_h[K]+3j h_ab,  [K_ab]_0=j eta_ab,
+```
+its first variation is
+```
+ delta I_ab =
+       [delta K_ab] -eta_ab tr_eta[delta K]
+       -j(delta h_ab-eta_ab tr_eta delta h)
+       +3 (delta j) eta_ab.
+```
+Both graph K tensors, all ten Israel source rows, nonzero tension derivative and original mean trace remain. If two face induced metrics do not match, the *single-h* junction source is refused rather than repaired by an invented coordinate gauge. Native `FullMovingJunctionWeld` deliberately retains the **unmatched** BR34 reference and BR61 full geometric rows, pending their actual change-of-variables/Jacobian equality proof. It does NOT claim they are equal by construction.
+
+### BR62 — original four Codazzi conditions and SIX free Israel directions
+
+For any real/signed tangential Fourier covector `q`, the first-order Codazzi symbol on a physical symmetric 4x4 Israel source is
+```
+ D_q(T)_b=q^a T_ab - q_b tr_eta T.
+```
+The exact 4×10 coefficient map has rank four for any nonzero q (timelike, spacelike **or null** q²=0), leaving six physical source directions; at q=0 the map is identically zero, so **no right inverse exists at q=0**. `scripts/check_hopf369_br62_israel_codazzi_rank.py` constructs exact right inverses by pivoting on original independent symmetric columns, retains six nullspace generators, and tests seven nonzero/zero strata with rational arithmetic. It **never** divides by q². Native `originalIsraelCodazziSymbol`, `OriginalCodazziWallSource`, `originalCodazziSourceResidual`, `OriginalCodazziFactorizationCertificate`, `OriginalNonzeroTangentialPivot`, `OriginalIsraelCodazziRightInverse` explicitly preserve the original source momentum constraint
+```
+ D_q(I)_b = 3 partial_b j + [Ric(n,e_b)] + connection/wall corrections.
+```
+The full curved Codazzi identity requires **genuine** induced Levi-Civita derivatives and nonlinear Einstein Ricci; BR62 is its principal tangential symbol, not a proof of BR29 subsidiary preservation. The right-inverse record is a **required certificate**, not a constructed Agda inversion theorem. At q=0, original zero-mode source compatibility remains independent.
+
+### BR63 — frequency-free full nonlinear Israel back-solve
+
+On an actual nondegenerate moving induced metric h and its real inverse, write
+```
+ J_ab=I_ab-3j h_ab.
+ [K_ab]= J_ab -(1/3)h_ab tr_h J.
+```
+This is a genuine algebraic *bidirectional* reconstruction of the entire extrinsic-curvature jump from the original full nonlinear Israel tensor, including all ten physical channels at **zero and null tangential frequencies**. There is no glancing root or q² division because this inverts finite-dimensional trace reversal, **not** the hyperbolic wall evolution. `scripts/check_hopf369_br63_nonlinear_israel_inverse.py` independently reconstructs the original junction on eta and an actual non-diagonal induced metric from a spacelike moving graph, tests pure-tension `I=0 ⇒ [K]=j h` and preserves a null-Codazzi violation as a negative control. Native `ActualInducedWallInverse`, `inducedTensorTrace`, `physicalIsraelTensor`, `physicalIsraelInverse`, `PhysicalFullIsraelInverseCertificate` retain both inverse-metric laws and the uninhabited proof target; Agda kernel work remains pending.
+
+### How these weld to the pre-existing machinery
+
+- BR48/49 original ADM metric & graph -> BR59 nonlinear h,n,K -> BR60 Fréchet -> BR61 two-face Israel source.
+- BR52/54 original full eighth-order 15+5 moving material field conormal -> BR58 actual BR34 D/E derivative columns.
+- BR61 full geometric Israel source and BR58 reference physical rows are now co-owned in native `FullMovingJunctionWeld`; the **source-specific nonlinear shape/gauge normalisation change-of-variables equality** is the next explicit terminal lemma. It must include BR19 shape derivatives, the original BR14 optical tensor reweighting, physical induced h and normal normalization, and both D/E allocations.
+- BR61 full ten-component Israel source -> BR62 four signed Codazzi conditions with six untouched free directions. BR63 reverse-solves full [K] from those ten Israel entries even at null and zero tangential frequency; **it does not construct the missing physical hyperbolic estimate**.
+- BR55 five harmonic-gauge subsidiary + BR53 actual BR29 nine projected Weyl zero-speed modes must be attached to the **same** curved Codazzi source and actual nonlinear metric solution. The original rank12 wall-only Gram no-go is still a negative control.
+- BR56 paid boundary source + BR43/44 higher-order energy + BR57 BS13 normal electric/shear back-solve still need the real weighted physical trace, global tangential quotient and BR37 glancing/tame estimate before local PDE iteration.
+
+### Updated exact remaining acceptance/promotion
+
+**P0a:** prove the original nonlinear source variation/weld BR61 ↔ BR58/BR34 after BR14 optical and BR19 moving shape, with full background metric connection and two-face density/normal matching. BR59–63 provide the geometric and algebraic constructor sides, not yet the native equality proof.
+
+**P0b:** prove variable-coefficient differentiated BR4 energy and *actual boundary estimate* with BR61 shape Hessian, BR58 order-eight moving conormal and BR47 coefficient jets. BR43 normal H¹ payment and BR56 algebraic product estimate exist, but a tame normal/tangential 15+5 system with BR37 glancing losses is not certified.
+
+**P0c:** prove same-object curved contracted Bianchi/Codazzi source compatibility through BR29 projected wall dynamics, retaining rank-nine zero speeds, nonlinear Ric=-4 Einstein source and the rank12 wall-only Gram refusal. BR62 only solves the 4/10 **algebraic** tangential symbol.
+
+**P0d:** prove BS13/BR31 full weighted curvature-to-metric quotient (including exterior, tangential gauge, all holonomies) and a continuous local PDE solution/iteration/continuation on one physical data set. BR57 gives the exact forced normal inverse, not this global theorem.
+
+**Test policy:** New `BR59/60/61/62/63` source checks are registered under `scripts/run_hopf369_br39_42_bounded.py --part frontier`, which now covers BR52–63. Ten BR60 shape components run in separate <=90s checkpoints; no CI and no local test or Agda kernel execution in this implementation pass. All new source files are **COMMITTED_UNRUN / CONSTRUCTED_PENDING_KERNEL**. This is intentional, not a claim of kernel acceptance or of a solved 5D Einstein–Israel boundary PDE.
