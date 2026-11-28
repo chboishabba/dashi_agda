@@ -1,7 +1,7 @@
 """Restrict actual resolution DAGs and recover original guard payload.
 A separate original incidence capacity certificate bypasses PHP resolution.
 """
-from check_pnp_frontier_resolution import norm,resolvent,replay,learn,accepts
+from check_pnp_frontier_resolution import norm,resolvent,replay,learn,accepts,puncture
 from check_pnp_source_derived_cover import Reservation,Refused
 
 
@@ -55,6 +55,7 @@ def capacity(F,n,cap):
     Actual original clauses suffice for a cardinality contradiction.
     No promise that source is PHP; failed recognition is UNKNOWN.
     """
+    if n<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
     B=Reservation(cap)
     try:
         B.pay(1+n+sum(1+len(c) for c in F));P=tuple(c for c in map(norm,F) if c and min(c)>0)
@@ -73,6 +74,20 @@ def capacity(F,n,cap):
         if len(P)<=len(Q):return dict(status='UNKNOWN')
         return dict(status='EMPTY',rows=P,columns=tuple(Q),used=cap-B.left)
     except Refused:return dict(status='UNKNOWN')
+
+
+def guarded_clipped(F,n,cap):
+    if n<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
+    B=Reservation(cap)
+    try:B.pay(1+3*n+sum(2+len(c) for c in F))
+    except Refused:return dict(status='UNKNOWN')
+    H,G=guarded(F,n);a=(0,)*(n+1)
+    # Paid original branch recognition; retain refusal allocation.
+    k=B.left//2;B.pay(k)
+    R=tuple(r for c in G if (r:=restrict_clause(c,{n:1})) is not None)
+    q=capacity(R,n,k)
+    if q['status']=='EMPTY':return dict(status='COMPLETE',count=1,witness=a,route='original_partition_capacity',reserved=cap-B.left)
+    return dict(puncture(H,n+1,a,B.left),route='resolution_fallback',reserved=cap)
 
 
 def main():
@@ -96,7 +111,11 @@ def main():
         R=tuple(r for c in G if (r:=restrict_clause(c,{n:1})) is not None)
         q=capacity(R,n,10**7);assert q['status']=='EMPTY' and len(q['rows'])==h+1 and len(q['columns'])==h
         print('php capacity',h,n,q['used'])
+        z=guarded_clipped(F,n,10**7);assert z['count']==1 and z['route']=='original_partition_capacity'
     F,n=php(4,4);assert capacity(F,n,10**7)['status']=='UNKNOWN'
     F,n=php(5,4);assert capacity(F[:-1],n,10**7)['status']=='UNKNOWN';assert capacity(F,n,0)['status']=='UNKNOWN'
-    print(dict(guarded_restrictions=checks,restricted_proof_steps=steps,capacity_controls=5,negative_controls=3))
+    for F,n,c in ((((1,),),1,2),(((1,),(-1,)),1,1)):
+        z=guarded_clipped(F,n,10000);assert z['count']==c
+    assert guarded_clipped(((1,),),1,0)['status']=='UNKNOWN'
+    print(dict(guarded_restrictions=checks,restricted_proof_steps=steps,capacity_controls=5,negative_controls=3,integrated_guarded=7,guarded_refusal=1))
 if __name__=='__main__':main()
