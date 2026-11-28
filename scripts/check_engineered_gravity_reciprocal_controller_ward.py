@@ -30,7 +30,7 @@ def main():
     # Work is odd under signed flux cross term; shell transmission alone
     # cannot certify net source/reaction energy or neutral gravitational pickup.
     eq(traction-(q1*q1+(q2+X*q1)**2)/(2*r**4))
-    eq(controller-(q1*q2+X*q1*q1)/r**4)
+    eq(controller+(q1*q2+X*q1*q1)/r**4)
     assert s.factor(controller.subs({q1:1,q2:0,X:s.Rational(3,2)}))!=0
     # Fixed-source external flux is independent of internal X.  Genuine
     # controller dynamics must supply the equal and opposite Ward force.
