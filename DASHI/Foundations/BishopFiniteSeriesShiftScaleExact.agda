@@ -52,7 +52,7 @@ finiteSeriesHeadShift term count =
     (P.≃-symm (FinSum.finSumIsSeriesOf term (suc count)))
     (P.≃-trans
       (Row.finSumHead term count)
-      (P.+-congˡ
+      (P.+-congʳ
         (term zero)
         (FinSum.finSumIsSeriesOf (Row.shift term) count)))
 
