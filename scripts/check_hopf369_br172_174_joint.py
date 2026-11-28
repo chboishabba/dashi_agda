@@ -25,6 +25,7 @@ def atomic():
         E=s.Matrix.hstack(*(Jz-j*s.eye(8)).nullspace());R=((E.H*E).inv()*E.H*H*E).applyfunc(s.simplify);eq(E*R,H*E)
         poly=R.charpoly();eq(poly.as_expr().subs(poly.gen,x),f if abs(j)==Q(1,2) else x-ep-l/2)
     print('PASS BR172 combined shell axial action, Kramers antiunitary and exact doubled cubic')
+    return H,Jz,U,(a,c,es,ep,l)
 
 def inverse():
     a,c,es,ep,l,x=s.symbols('a c es ep l x',real=True)
