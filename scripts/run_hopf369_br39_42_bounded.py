@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–42 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–58 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -7,7 +7,7 @@ are retained, never recorded as PASS. Completed matching cases are skipped.
 No script is executed merely by importing this module.
 
 Usage:
- python scripts/run_hopf369_br39_42_bounded.py --part fast --output /tmp/hopf-receipts
+ python scripts/run_hopf369_br39_42_bounded.py --part frontier --output /tmp/hopf-receipts\n python scripts/run_hopf369_br39_42_bounded.py --part fast --output /tmp/hopf-receipts
  python scripts/run_hopf369_br39_42_bounded.py --part heavy --output /tmp/hopf-receipts
  python scripts/run_hopf369_br39_42_bounded.py --part all --output /tmp/hopf-receipts
 
@@ -43,8 +43,24 @@ PARTS={
     ("BR51.defect_algebra","check_hopf369_br51_graph_defect_budget.py",("--part","algebra")),
     ("BR51.defect_budget","check_hopf369_br51_graph_defect_budget.py",("--part","budget")),
     ("BR51.defect_channels","check_hopf369_br51_graph_defect_budget.py",("--part","channels")),
+    ("BR52.negative","check_hopf369_br52_all_order_material_flux.py",("--part","negative")),
+    ("BR53.small","check_hopf369_br53_physical_bianchi_factor.py",("--part","small")),
+    ("BR54.negative","check_hopf369_br54_mixed_material_tame.py",("--part","negative")),
+    ("BR55.curved","check_hopf369_br55_curved_bianchi_source.py",("--part","curved")),
+    ("BR55.boundary","check_hopf369_br55_curved_bianchi_source.py",("--part","boundary")),
+    ("BR56.energy","check_hopf369_br56_tame_graph_energy.py",("--part","energy")),
+    ("BR56.refusal","check_hopf369_br56_tame_graph_energy.py",("--part","refusal")),
+    ("BR57.constants","check_hopf369_br57_curvature_normal_inverse.py",("--part","constants")),
   ],
   "heavy":[
+    ("BR52.metric","check_hopf369_br52_all_order_material_flux.py",("--part","metric")),
+    ("BR52.gauge","check_hopf369_br52_all_order_material_flux.py",("--part","gauge")),
+    ("BR53.physical","check_hopf369_br53_physical_bianchi_factor.py",("--part","physical")),
+    *[(f"BR54.{sector}.{multi}","check_hopf369_br54_mixed_material_tame.py",("--part",sector,"--multi",multi)) for sector in ("metric","gauge") for multi in ("2,2,2,2","8,0,0,0","0,8,0,0","0,0,0,8","4,2,1,1")],
+    ("BR55.flat","check_hopf369_br55_curved_bianchi_source.py",("--part","flat")),
+    ("BR56.coeff","check_hopf369_br56_tame_graph_energy.py",("--part","coeff")),
+    *[(f"BR57.normal.{k}","check_hopf369_br57_curvature_normal_inverse.py",("--part","channel","--component",str(k))) for k in range(16)],
+    *[(f"BR58.{sector}.{alloc}","check_hopf369_br58_material_boundary_jets.py",("--sector",sector,"--allocation",alloc)) for sector in ("metric","gauge") for alloc in ("D","E")],
     ("BR48.variable_source","check_hopf369_br48_adm_boundary_geometry.py",("--part","source")),
     *[(f"BR47.{sector}.{alloc}.{k}","check_hopf369_br47_boundary_hierarchy.py",("--sector",sector,"--allocation",alloc,"--order",str(k))) for sector in ("metric","gauge") for alloc in ("D","E") for k in range(9)],
     *[(f"BR45.metric.{k}","check_hopf369_br45_differentiated_br4.py",("--sector","metric","--component",str(k))) for k in range(15)],
@@ -121,14 +137,20 @@ def stage(label,script,args,receipts,identity,seconds):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--part",choices=("fast","heavy","all"),default="fast")
+    parser.add_argument("--part",choices=("fast","heavy","frontier","all"),default="frontier")
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--seconds",type=int,default=90)
     args=parser.parse_args()
     if not 1<=args.seconds<=90:raise ValueError("bounded run: max 90 seconds/case")
     args.output.mkdir(parents=True,exist_ok=True)
     ident=manifest_hash()
-    plans=PARTS["fast"]+PARTS["heavy"] if args.part=="all" else PARTS[args.part]
+    if args.part=="all":
+        plans=PARTS["fast"]+PARTS["heavy"]
+    elif args.part=="frontier":
+        plans=[p for group in ("fast","heavy") for p in PARTS[group]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58"}]
+    else:
+        plans=PARTS[args.part]
     outcome={}
     for label,script,opts in plans:
         outcome[label]=stage(label,script,opts,args.output,ident,args.seconds)
