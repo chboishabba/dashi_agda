@@ -46,6 +46,7 @@ def fixture():
 
 def run():
     material,cfg,dheat,dload=fixture()
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level']);n=len(vol)
     base=campaign_jvp(material,cfg,dheat,dload)
     zero=cycle(material,cfg)
     assert abs(zero['campaign_net_J']-base['campaign_net_J']) < 1e-7*max(1,abs(zero['campaign_net_J']))
