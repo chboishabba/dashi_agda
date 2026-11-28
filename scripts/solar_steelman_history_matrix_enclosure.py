@@ -18,6 +18,19 @@ def local_trig(lo,hi,w,degree):
     C,Z=trig(0,hi-lo,w,degree)
     return (C0*C-Z0*Z).truncate(degree),(Z0*C+C0*Z).truncate(degree)
 
+def local_ratios(c,lo,hi,degree):
+    from solar_steelman_history_exact_bounds import ratio_bounds
+    lower,_,_=ratio_bounds(c)
+    store=Ball(c[0]);derivative=Ball(0)
+    for k in range(1,5):
+        assert S.expand(c[-k]-S.conjugate(c[k]))==0
+        co,si=local_trig(lo,hi,k,degree)
+        v=c[k];w=S.I*k*v
+        store=store+2*(S.re(v)*co-S.im(v)*si)
+        derivative=derivative+2*(S.re(w)*co-S.im(w)*si)
+    inv=store.inverse(lower,4).truncate(degree)
+    return inv,(derivative*inv).truncate(degree)
+
 def wave(pair,lo,hi,degree,derivative=0):
     C1,Z1=local_trig(lo,hi,1,degree);C2,Z2=local_trig(lo,hi,2,degree)
     a,b=pair[1];c,d=pair[2]
@@ -74,7 +87,7 @@ def construct(m,a,lo,hi,degree=8,gain=100,Wstar=100,structural=False):
         if structural:
             inv,sp=S.symbols(f'inv{k} slope{k}',real=True)
         else:
-            inv,sp=ratios(c,lo,hi,max(96,degree),4)
+            inv,sp=local_ratios(c,lo,hi,degree)
             inv,sp=inv.truncate(degree),sp.truncate(degree)
         rr.append([(e0+k,inv),(e1+k,inv),(h0+k,sp),(h1+k,-sp)])
         for col,val in rr[-1]:R.add(k,col,val)
@@ -126,6 +139,24 @@ def construct(m,a,lo,hi,degree=8,gain=100,Wstar=100,structural=False):
     A.add(i,phi,2*Li[0,0]*phase);A.add(i,W,Li[0,0]*drive*(1/Wstar))
     A.add(W,phi,-2*drive*phase);A.add(W,W,-drive*drive*(1/Wstar))
     return tuple(Y.export() for Y in (A,D1,D2,R))
+
+def parity(m,a,delay,lo,hi,degree=8):
+    """Numerical cross-owner diagnostic, not an exact derivative proof."""
+    import numpy as np
+    from solar_steelman_history_section import reduced
+    mat,R,_,_,_=reduced(m,a,float(delay))
+    bounds=construct(m,a,lo,hi,degree)
+    worst=[]
+    for u in (S.S.Zero,S.Rational(1,2),S.S.One):
+        t=float(lo+(hi-lo)*u)
+        for (P,e),actual in zip(bounds,(*mat(t),R(t))):
+            approx=np.array(P.subs(s,u),dtype=float)
+            diff=np.linalg.norm(approx-actual,np.inf)
+            allowance=float(e)+1e-9*max(1,np.linalg.norm(actual,np.inf))
+            if not np.isfinite(diff) or diff>allowance:
+                raise ValueError(('coefficient parity',t,diff,allowance))
+            worst.append(diff)
+    return max(worst)
 
 def fixture():
     lo,hi=S.Rational(0),S.Rational(1,10)
