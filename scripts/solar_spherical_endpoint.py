@@ -99,7 +99,16 @@ def optimize(material,cfg,design):
     # separately checked full-state domination certificate is supplied.
     reflection=first_incident_reflection_bound(dt,float(cfg['incident_sqrt_W'][0]),float(cfg['source_coupling_sqrt_inv_s']),budget,int(cfg['source_edge']) in eligible)
     tighter=max(0.,ceiling-reflection['reflection_lower_J'])
+    campaign_bounds={}
+    if int(design.get('passive_bound_boxes',0))>0:
+        from solar_passive_campaign_bound import bound_layout
+        for layout in layouts:
+            if layout['receiver_edges']:
+                campaign_bounds[layout['id']]=bound_layout(material,cfg,layout['receiver_edges'],budget,int(design['passive_bound_boxes']))
+        if campaign_bounds:
+            tighter=min(tighter,max(v['upper_candidate_J'] for v in campaign_bounds.values()))
     result=dict(layouts=results,layout_geometry=layouts,evaluations=evaluations,universal_passive_upper_J=ceiling,
+        full_campaign_passive_bounds=campaign_bounds,
         discrete_passive_upper_candidate_J=tighter,first_stage_reflection=reflection,
         best_active=None if a is None else a[0],best_passive=None if p is None else p[0],
         sampled_advantage_J=None if a is None or p is None else a[0]-p[0],
