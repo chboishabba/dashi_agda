@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-28",
+  "entry": {
+    "agda": "f80df18ee92dc19d826a3b73d738dbedbc9922df",
+    "lean": "9a24d4bf3ad476ab8e122f3ee868fc75642da07c"
+  },
+  "scope": "New Python core/campaign files and updated dispatcher matched fetched Git blob hashes. Conditional projection and pointer/charge controls self-contained; stack and unified dispatcher import prior locally transcribed donor modules (not full checkout). Native proof bodies written, kernels not executed.",
+  "blobs": {
+    "conditional": "4443a0eb9742b420310ac535e7dd672a95c3ca44",
+    "conditional_campaign": "c351fda467059b249c94d0e4ca61b3c95e3b17fa",
+    "pointer": "122392e2d23cfac24aa2debeac321b38b81770f0",
+    "stack_priority": "a852d9b046544c4beebeeb0aa125b49bedbb59bc",
+    "stack_campaign": "ada75273452403c3eb9c4d5949b00c48a10f79fb",
+    "future_charge": "7e8cb5b8c07e27e868f243ab706ad61b18a4ad03",
+    "unified": "a7dfc2530a7f36f149d69f8ec35a695343cd3300"
+  },
+  "C1a": {
+    "seed": 3692836,
+    "fixtures": 512,
+    "points": 57742,
+    "fibre_checks": 20286,
+    "completed_projections": 952,
+    "refused_projections": 72,
+    "patches": 365,
+    "witness": 175,
+    "empty": 337,
+    "reopen": 24422,
+    "chain": {
+      "n": 264,
+      "patches": 263,
+      "logical_work": 1325257,
+      "blocker": true,
+      "zero_cap": true
+    },
+    "unified": {
+      "fixtures": 128,
+      "empty": 92,
+      "witness": 36,
+      "legacy": false,
+      "forced_chain": {
+        "n": 17,
+        "binary": "UNKNOWN",
+        "autarky": "UNKNOWN",
+        "conditional": "WITNESS",
+        "eliminated": 16
+      }
+    },
+    "note": "Exact bounded existential projection, boundary retained; affine full contribution key retained (not rank-reduced). No uniform bounded-width assumption."
+  },
+  "S1": {
+    "pointer": {
+      "checks": 50068,
+      "reads": 158748,
+      "seed": 3692837,
+      "controls": [
+        {
+          "n": 8,
+          "sensitive_words": 8,
+          "reads": 8,
+          "workspace_upper": 16,
+          "read_bits": 32
+        },
+        {
+          "n": 32,
+          "sensitive_words": 32,
+          "reads": 32,
+          "workspace_upper": 22,
+          "read_bits": 192
+        },
+        {
+          "n": 128,
+          "sensitive_words": 128,
+          "reads": 128,
+          "workspace_upper": 28,
+          "read_bits": 1024
+        },
+        {
+          "n": 512,
+          "sensitive_words": 512,
+          "reads": 512,
+          "workspace_upper": 34,
+          "read_bits": 5120
+        },
+        {
+          "n": 2048,
+          "sensitive_words": 2048,
+          "reads": 2048,
+          "workspace_upper": 40,
+          "read_bits": 24576
+        }
+      ]
+    },
+    "future": {
+      "seed": 3692839,
+      "fixtures": 128,
+      "runs": 4578,
+      "collisions": 34936,
+      "packed": 1747,
+      "nonzero": 1443,
+      "overlap": {
+        "alternatives": 2048,
+        "unit_capacity": 1,
+        "reads": 1
+      }
+    },
+    "note": "Word-address model, read-only table. Actual adaptive suffix state collision packing; conditional, not universal separation."
+  },
+  "R1": {
+    "native_placed_window": {
+      "commits": [
+        "58fcaf997c68fca2c09baac3c69ebda0ccbc7a36",
+        "147712ab036771f6a70009ec95174234af30c7f9"
+      ],
+      "kernel": false,
+      "actual_native_template_export": false,
+      "arbitrary_prefix_and_endpoint_seek_pending": true
+    },
+    "stack": {
+      "seed": 3692838,
+      "fixtures": 256,
+      "edges": 24850,
+      "loop_phases": 6808,
+      "raw": 36044,
+      "jumps": 1828,
+      "literal": 6346,
+      "checks": 3656,
+      "endpoints": 1024,
+      "halts": 454,
+      "huge": {
+        "raw": "86461353570082943257819734317025136881640218343356168133377718",
+        "jumps": 8,
+        "literal": 10,
+        "checks": 16,
+        "lanes": 42,
+        "fractions": 58
+      }
+    },
+    "note": "Actual sparse phase audit, literal and independent packed numeric successor equivalence on controls. Canonical bounds at boundary, separate private phase invariant. Native complete compiler-list attachment and same-target physical clock remain open."
+  },
+  "execution": {
+    "batch_timeout_seconds": 90,
+    "conditional_batches": 8,
+    "stack_batches": 8,
+    "full_checkout": false,
+    "dns_failure": true,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "universal_P0_closed": false
+  }
+}
