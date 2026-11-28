@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR160; periodic Einstein–Israel branch BR150)
+## Current proof state — 28 November 2026 (BR164; periodic bulk subsidiary source BR164, wall trace BR150)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -557,3 +557,43 @@ and the actual nonlinear finite-amplitude quadrupole remain
 open. The corresponding leading tidal difference is
 \(-a^2 I_Y/10+O(\epsilon^4)\), not a certified finite-amplitude
 sign. See [BR157–160 in the roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Exact G4 anisotropy, selected atomic Pauli term and covariant Bianchi source (BR161–164)
+
+The original York quadrupole has the closed form
+\(I_Y=2224/3-75\pi^2\), with exact rational enclosure
+\(1.113<I_Y<1.114\). An explicit Newton-gradient/source-error
+budget gives a sufficient finite-amplitude bound for the
+central tidal difference. For the chosen normalized admitted
+G4 parameters \(\kappa=K_0=1,p_0=1/4,\epsilon=1/2000\),
+the full initial \(T_{zz}-T_{xx}\) is bounded above by
+\(-117169089470921/6124902000000000000000\).
+This is an analytical consequence of the original contraction
+solution under its hypotheses; no numerical nonlinear profile,
+evolved spacetime or calibrated parameter claim is made.
+
+The actual p² singlet projectors \(Z_k\) form an orthogonal
+three-element orbit on the BR158 invariant support \(Q_E\);
+with \(\delta=81/2560\), the interaction residual is exactly
+\(R_k=\delta(Z_k-Q_E/3)\). Reopening is lossless. The
+selected hydrogenic 2p radial Pauli coefficient is
+\(\zeta=\alpha_{\rm EM}^2Z^4/48\) in atomic units. In the
+selected bulk matter model the leading Pauli and Coulomb
+Jordan-time gap weights differ (\(f^{-4}\) versus \(f^{-2}\)).
+Neither the full interacting Breit–Pauli operator nor the
+actual KK spin connection is included.
+
+For the periodic branch, use the covariant alternating
+operator \(A=\mathrm{Alt}\nabla\) on all tensor slots rather
+than the exterior residual. Its square on the target
+algebraic curvature and its Hodge dual is a homogeneous
+source in connection curvature error and torsion times
+first target derivatives, without differentiated torsion.
+The actual BR132/143 rank-10 compatibility factorization
+is replayed and gives a route to an extended symmetric
+bulk subsidiary equation on a given regular frame. The
+curved surface trace and nonlinear coupled existence are
+still unpaid. Four local stages PASS; no native, full
+runner, physical trajectory or empirical acceptance.
+See [the controlling proof register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

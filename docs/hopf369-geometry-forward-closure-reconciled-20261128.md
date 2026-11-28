@@ -3918,3 +3918,275 @@ and rerun. BR156 dependency replayed twice. No integrated
 runner, native kernel, CI, full continuum, measured clock or
 exhaustive master reconciliation. Numerical quadrature is
 not an interval certificate.
+
+
+## 27. BR161–164 — exact G4 sign, atomic singlet triad, radial Pauli coefficient and covariant subsidiary source
+
+Section 0 and 24–26 remain controlling. This tranche consumes
+the actual BR152/160 York, BR156/157 atomic and BR132/143
+subsidiary owners rather than adding independent geometries.
+Reopened exact parent paths and hashes:
+- scripts/check_hopf369_br157_160_parallel.py
+  1c0421acc55c50fae16f5dc5c6df7d5aa4dabd85, quadrupole, ls,
+  residual, frames; original P0H source and contraction Q
+  in the historical ledger; BR148/152 full G4 tensor.
+- scripts/check_hopf369_br154_156_atomic.py
+  1f53a9dc5498007a15c97b2a68c349b45ab1e00a, coulomb;
+  local actual file Git hash verified, replayed in BR162.
+  P0 atomic #886, AtomicPeriodicTable369P2CoulombExecutionExact,
+  ManyBodyHamiltonianTerminalMaxCutExact, AFQMC and CI
+  source owners retained from sections 25–26.
+- scripts/check_hopf369_br143_145_parallel.py
+  2354d838727e6d84c1e8da05abad27a9b78efc6d, trace();
+  actual local dependency hash verified and replayed in BR164.
+- scripts/check_hopf369_br132_135_F_bianchi_cartan.py
+  0de643a765e455367c6635dad2f6aec80804ac01c0, bulk/graph;
+  scripts/check_hopf369_br_curvature_energy.py
+  75f6d2f9ae23302860074c25cb8d864b7c089148, carrier;
+  reopened original committed sources. BR164 uses the
+  byte-verified independent BR143 reconstruction, not an
+  assumed local copy of the BR27 donor.
+Receipt clarification: BR128–139 checker hashes were verified
+as recorded, but their locally reconstructed BR27 carrier
+definitions were not a verified byte-identical extraction of
+the complete original donor file. Do not treat those as a full
+donor replay; replay the original donor and the dependent
+stages before exact combined acceptance. No such replay or
+native kernel acceptance is claimed here. This is independent
+of BR164's verified BR143 dependency.
+Classical mathematical identities retain prior attribution;
+the source-specific calculations and selected attachments
+are DASHI work, JMD only where evidenced.
+
+### BR161 — exact original York integral and sufficient nonlinear sign certificate
+
+BR160's truncated numerical quadrature is replaced by exact
+integration. Let z=atan r. The primitive of V2/r is
+ F(r)=-300 z²
+ -(600r^8+400r^6-80r^4-72r²-144)z/(r^9+r^7)
+ +(12r²-72)z²/r^8
+ -(300r^6+100r^4+12r²+72)/(r^8+r^6).
+Exact differentiation and endpoint limits give
+ F(0+)=-2224/3, F(infty)=-75pi².
+ Therefore I_Y=2224/3-75pi².
+ Machin's identity and rational alternating arctan enclosures
+ give 1113/1000<I_Y<1114/1000.
+This certifies the leading sign with no truncated quadrature.
+
+Retain original G4 parameters a²=kappa² K0 eps² and source
+ f0=(kappa/4) eps² |B|²+|Y|²/8,
+ f=(kappa/4) eps² |B|² psi^-3+|Y|² psi^-7/8.
+Original P0H gives 1<=psi<=1+Q, 7Q<1,
+ Q=(kappa/4) eps²(32+2pi)+(a²/8)(32+4pi/3).
+Set the following positive source bounds in Euclidean coordinates:
+ U=16 kappa eps²+8a² >= ||f0||inf,
+ G=128 kappa eps²+48a² >= ||grad f0||inf,
+ L1=2pi² kappa eps²+(2pi²/3)a² >= ||f0||1.
+They follow from |B|²=64/(1+r²)^4 and its derivative,
+ ||Y||inf<=8|a| and ||Y||2²=16pi² a²/3 (P0H),
+ plus ||grad Y||inf<=24|a| by the same Fourier L1
+ bound multiplied by |k|, whose radial moment ratio is 3.
+Here gradient tensor norms are Euclidean/Frobenius.
+The Newton gradient bound on the actual fixed point is
+ ||grad psi||inf <= U+L1/(4pi)=Gpsi,
+ splitting the |x-y|^-2 kernel at distance 1.
+Product/chain rule and psi>=1 give
+ ||f-f0||1 <=7Q L1,
+ ||grad(f-f0)||inf <=7Q G+7U Gpsi.
+At the centre let H=Hz-Hx and h0=a² I_Y/20.
+Use BR152's Newton quadrupole, with angular P2 bounded by 1.
+For r<=1 subtract (f-f0)(0) before integrating, since
+ int P2 dmu=0. The near part costs at most 3||grad(f-f0)||inf;
+ the r>=1 part costs at most 3||f-f0||1/(4pi), using
+ r^-1<=r² and axisymmetric volume 2pi r² dr dmu.
+The 1/p prefactor contributes at most Q |h0|. Thus
+ |H-h0| <= E_H :=
+ 3(7Q G+7U Gpsi)+21Q L1/(4pi)+Q h0.
+This is an explicit finite-amplitude bound for the original
+nonlinear solution, not a numerical solution of psi.
+
+At the centre the physical b²<=64eps², and
+ S_perp-S_parallel=b²(1-K0 psi^-8/den),
+ den=(K0+b²+sqrt(Delta))/2>=K0.
+ Rationalizing den-K0 using the original Delta gives
+ 0<=S_perp-S_parallel<=8Q b² K0/(K0-b²).
+ Since |p^-4-1|<=4Q and h0>0, the full nonlinear tidal
+ difference from BR152 obeys
+ Tzz-Txx <= -2h0+2E_H+8Q h0
+             +8 kappa Q (64eps²) K0/(K0-64eps²).
+Reverse solve the sufficient sign criterion that the three
+positive error terms sum to less than 2h0.
+For the explicitly chosen normalized example
+ kappa=K0=1,p0=1/4,eps=1/2000,
+ use pi<22/7, pi>3, h0 between the rational bounds above.
+The P0H smallness conditions and full upper inequality
+are exact rational checks. The upper bound is
+ -117169089470921/6124902000000000000000
+ (approximately -1.91299533398e-8).
+Thus this selected actual constrained G4 initial solution
+has strictly negative longitudinal-minus-transverse tidal
+difference. No sign conclusion for all amplitudes; the
+normalized example is a chosen sufficient witness, not
+calibrated experimental parameters. This result is conditional
+on the original analytical fixed-point construction and
+regularity, not a verified native continuum proof. No
+numerical solution of the conformal profile or later time
+evolution was performed.
+
+### BR162 — exact singlet triad reconstruction, not just a rank-three residual
+
+Consume actual V,W from BR156. Let p,d,z be the ^3P,^1D,^1S
+eigenvalues and delta=z-d=81/2560. The spectral projectors
+ P=(V-dI)(V-zI)/((p-d)(p-z)),
+ Z=(V-pI)(V-dI)/((z-p)(z-d))
+ have ranks9 and1. Set Z_k=W^k Z W^-k.
+The three actual rank-one singlet orbit projectors are
+mutually orthogonal, not merely independent. Their sum Q_E
+is the BR158 invariant rank3 support, and W preserves P.
+Then
+ V_k=pP+d(I-P)+delta Z_k,
+ R_k=delta(Z_k-Q_E/3),
+ Z_k=R_k/delta+Q_E/3.
+Exact residual polynomial:
+ R_k²-(delta/3)R_k-(2delta²/9)Q_E=0.
+Thus on the support its eigenvalues are 2delta/3,-delta/3,
+ -delta/3; outside it is zero. The orbit gives a concrete
+ three-coordinate triad of projectors with sum fixed, and
+ two independent tracefree diagonal coordinates. Do not
+ mistake the rank-three Hilbert support for the dimension
+ of all Hermitian operators or an atomic/Leech identification.
+The actual physical singlet projector reopens from the
+signed residual, without replacing the original Hamiltonian
+by an artificial invariant average. The existing
+ConsumerFibreRepairExact, punctured-nine signed triad and
+indexed history owners remain the native consumer cut;
+native implementation not changed here.
+
+### BR163 — radial spin-orbit coefficient and two physical clock weights
+
+For hydrogenic 2p with nuclear charge Z, normalized
+ R21=Z^(5/2) r exp(-Zr/2)/(2 sqrt6),
+ integral r² R21²=1 and <r^-3>=Z³/24.
+The standard leading central Coulomb Pauli term in atomic
+units is alpha_EM² Z/(2r³) l dot s, giving
+ zeta=alpha_EM² Z^4/48.
+This supplies a selected one-electron hydrogenic coefficient
+for BR157's J blocks, NOT the full interacting p² Breit-Pauli
+operator. Two-electron spin-other-orbit, spin-spin, mass
+velocity, Darwin, correlation, recoil and radial relaxation
+remain distinct. No new actual atom term spectrum asserted.
+
+In BR159's selected locally constant-radius bulk Dirac plus
+independent Maxwell model, alpha_EM scales f^-1 and m_E
+scales f^-1/2. A leading Coulomb gap scales in Jordan proper
+time f^-2, while a leading hydrogenic Pauli splitting scales
+f^-4 (the dimensional Hartree contributes alpha² and the
+Pauli coefficient another alpha²). Their ratio scales f^-2.
+At the actual central G3 initial event with f(0)=1,
+ f_t=0, f_tt=-112eps²/(3p²), the respective normalized
+ second derivatives are 224eps²/(3p²) and 448eps²/(3p²).
+They are selected local model contributions, not complete
+clock signals, and the Pauli term does NOT include the
+geometric graviphoton spin connection. Actual 5D spinor
+reduction, fixed matter action/units and calibrated transition
+comparison remain required. A fixed Jordan-minimal brane
+clock does not have this particular radion scaling.
+No inferred physical EM identification, no data claim.
+
+### BR164 — covariant subsidiary propagation without a differentiated torsion source
+
+This is a different formulation of BR138, not a cancellation
+claimed for the exterior derivative residual. Work in a
+metric-compatible independent frame connection with torsion
+T, actual curvature F_Omega, target algebraic Riemann
+endomorphism-valued form R (Weyl plus fixed constant-curvature
+part) and E=F_Omega-R. For an endomorphism-valued k-form Z
+define A Z=Alt nabla Z using the induced connection on ALL
+form and endomorphism slots. The second covariant derivative
+commutator is
+ [nabla_i,nabla_j]^(2) Z=F_Omega,ij acting on all slots
+                             -T^a_ij nabla_a Z.
+Here the notation means the antisymmetrized second covariant
+derivative with derivative indices also covariant, not the
+ordinary directional commutator in an arbitrary frame.
+In A²Z the corresponding sum is over all pairs of slots
+with alternating signs. With curvature F_Omega replaced by
+target R, the form-slot curvature terms cancel by the
+algebraic first Bianchi identity, and the endomorphism action
+is the graded bracket [R,Z]. For Z=R, this bracket is zero
+by even degree; for Z=*R, it vanishes because the metric
+Hodge pairing makes R wedge *R and *R wedge R equal
+(symmetric contraction of the same matrices). Hence
+ A²R=Alt(E acting on R)-Alt(T·nabla R),
+ A²(*R)=Alt(E acting on *R)-Alt(T·nabla *R).
+No derivative of T or E appears on the right. Point-jet
+oracle uses a nonzero Kulkarni-Nomizu target, independent
+metric-compatible connection curvature error and torsion,
+arbitrary selected derivative jets, and checks all output
+slots for k=2,3. The general identity is the written tensor
+argument; the selected oracle is not a kernel proof.
+
+Define C=A R, D=A(*R), not the exterior residuals Cext,Dext.
+Since nabla preserves metric and algebraic Riemann symmetries,
+each covariant Weyl first jet belongs to X's algebraic
+carrier. In the exact projected covariant Bianchi equation
+ nabla_0 u=Pi sum_i M_i nabla_i u,
+ the BR132/143 graph relation r=Lc, c_full=E_c c
+ holds directly for covariant jets, even with torsion.
+C_0ij=-r_Bij and C_ijk=c_Bijk; the contracted current
+ J_0=-c_E,J_i=r_Ei, with D the Hodge equivalent of J.
+The temporal components of A C and divergence J give
+ nabla_0 c_full+sum_i D_i r = source(E R,T nabla R)
+ in the actual form/endomorphism slot notation. Converting
+ to component frame derivatives introduces connection
+ coefficients multiplying C,D (linear in c), not
+ derivatives of torsion. Select the same independent rows
+ as BR132 to obtain c evolution. The spatial component
+ of A C gives the remaining compatibility source:
+ sum_i N_i E_c e_i(c)=source(E R,T nabla R)+O(Omega c).
+Replay the exact rank10 graph discrepancy
+ U_i B-B K_i=Tmap N_i E_c, B=[L;E_c],
+ K_i=-D_i[ids,:] L.
+Thus the extended symmetric component system for Bc can be
+sourced by those algebraic compatibility sources, with
+bounded coefficients on a GIVEN regular adapted frame.
+This identifies a homogeneous bulk defect equation with
+source bounded by coefficient norms times |c|+|E|+|T|;
+there is no unavoidable bulk derivative of torsion from
+BR138's conversion. Actual frame/coordinate time mass,
+regularity and physical evolution still required.
+The Cartan evolution equations use D_Omega rather than A;
+ conversion D_Omega Z=A Z+T wedge contraction Z
+ (BR138) gives algebraic torsion corrections to their
+ sources, including the wall trace. This does not give a
+ same-order trace bound for E or T; BR150 remains.
+The source-specific curved coupled surface energy, initial
+compatibility, W5 exterior and W6 generation remain open.
+No claim that the original full nonlinear IBVP is solved.
+
+### Next cut and execution boundary
+
+G4 finite-amplitude sign paid for the explicit normalized
+example; actual profile, physical units, longer-time
+trajectory/energy and general sign thresholds remain.
+Atomic actual central Pauli coefficient and orthogonal
+residual triad available; full CI, neutral/cation SCF,
+complete Breit-Pauli, AFQMC and native attachment remain.
+G3 use BR163 with actual Dirac spin connection and physical
+clock model; finite-time bounds and calibrated data remain.
+Periodic: use BR164's derivative-free bulk defect source
+in combined bulk/surface estimate rather than differentiate
+torsion; actual wall compatibility, exterior, corners and
+nonlinear generation remain. Quantum/Leech marked action
+and material receiver lanes independent, no new proof for
+them here. Existing source ownership retained; no sibling
+edits or exhaustive master reconciliation.
+
+Local checker blob 2ce307b058d11601e480f6bae131b37ea2f06a93,
+SHA256 486947c202fdcd0cf3bb0c160df55e5516d6f47e396801885687e57011fd131d.
+Four local stages PASS; combined 20s shell timeout occurred
+after all printed PASS lines, so cartan rerun separately
+with exit 0. Other three returned before timeout. Prior
+BR156/143 byte-identical dependencies replayed. No native
+kernel, integrated runner, CI, nonlinear time evolution,
+or empirical acceptance.
