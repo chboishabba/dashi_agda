@@ -2033,3 +2033,29 @@ Lean companion branch `research/paper9-original-eisenstein-derivative-20261125`:
 All new Agda/Lean source remains uncompiled; pinned Mathlib v4.28 API/elaboration compatibility must be tested locally. No GitHub CI. No proof transfer from Lean to Agda is assumed. Classical theta/Poisson identities, modular uniqueness, and Legendre algebra retain their established attribution; DASHI contribution is the explicit signed transport and original-carrier attachment.
 
 GTheta1: Lean shell-to-literal history source written; native Agda all-index Jacobi coefficient theorem remains the uninhabited input of jacobiFromCoefficients. GTheta2: native analytic readout and conditional transport written. GTheta3: Lean modular uniqueness source written; native Bishop modular transformation/uniqueness or original lattice Fourier equality still required. Lean shell histories and analytic functions also need their exact all-index summation/coeff identification if used as a single chain. Main C1b absolute square-shell/row and Lambert regrouping remains open independently; C1c Hecke, C2 diagonal, C3 ray, H1 and RawCross/GMP acceptance unchanged. Do not replace a native theorem by a foreign theorem name or finite receipt. Next priority: discharge native shell-count theorem or original lattice same-object weld, then attach actual Hecke/CM endpoint.
+
+
+### 2026-11-28 — existing Walsh–Hadamard reuse; native affine shell and independent analytic Jacobi
+
+SOURCE-WRITTEN, KERNEL PENDING. User-directed audit recovered master owners:
+- `DASHI/Physics/YangMills/BalabanBooleanFourCubeWalshCharacterExact.agda` and `BalabanBooleanFourCubeWalshInversionExact.agda`: exact 16-point character inversion over rational values.
+- `DASHI/Physics/Closure/NSTriadKNLuoPeriodicWalshParsevalExact.agda`: eight-coordinate unnormalised energy identity and normalized Parseval.
+- `DASHI/Analysis/NonArchimedeanHadamardEnergyNormalizationExact.agda` and `NonArchimedeanHadamardTwistedSectorBidiExact.agda`: source-specific receipts for rational two-point similarity and explicit normalisation; not D4 integral-shell proofs.
+
+Direct D4 donor remains the existing companion `Paper9ThetaHadamardGeometry.lean` and `Paper9ThetaShellCoefficientWeld.lean`. Classical Hadamard, Jacobi, Poisson and modular-form identities retain their historical attribution. No import of unrelated physical carriers or promotion of a receipt to a theorem.
+
+| Commit | Native construction |
+|---|---|
+| Lean 34bcc6055e7f | `Integration/Paper9ThetaAnalyticJacobi.lean`: actual signed residual R=B-A-C transforms by -1 under T and -z² under S. R² has weight 4, vanishes at cusp, and existing cuspZero forces R=0. Actual E4 and E6 Legendre and discriminant numerator attachments. Independent of shell counts. |
+| Agda d12680e31074 | `JInvariantThetaHadamardIntegralChartExact`: division-free integral charts of both half-coordinate sheets; exact inverseRead, norm and reconstruction. |
+| Agda d0a1ddfa40a2 | Raw coordinate coverage with explicit parity witnesses, fourth coordinate oddness. |
+| Agda 830067d624ce | Full dependent grade round trips using decidable integer equality; twoCopiesLeft and twoCopiesRight. |
+| Agda a091b1318a89 | `scripts/check_paper9_hadamard_affine_chart.py`: local independent reference PASS, 35 symbolic equalities, 439230 scalar affine chart checks, all 65 shell-degree comparisons (0–64), 20185 integer and 20352 half-coordinate points. Not an execution of committed Agda/Lean proof bodies. |
+
+Integral geometry: let integer chart (k,b,c,d) read (2k+1-b-c-d,b,c,d). Half-even chart (j,u,v,w) reads (2u+1,2v+1,2w+1,4j-(2u+1)-(2v+1)-(2w+1)). Half-odd adds 2 to the last coordinate. The Hadamard chart map is (k,b,c,d) -> (2k+1-b-c-d,k,k-c-d,k-b-d). Its inverse is (j,u,v,w) -> (u,u+v+1-j,u+w+1-j,j-v-w-1). First-coordinate reflection maps the half-even chart to (j-u-1,-u-1,v,w) on the half-odd chart; inverse (j-u,-u-1,v,w). All maps are integral, affine and reconstruct every coordinate, not merely the norm. Original theta histories are unchanged.
+
+Revised GTheta max-cut:
+- Lean analytic Jacobi, S/T modularity, cusp normalization, original E4/E6 and Legendre/discriminant identity now source-written; do not list as missing constructions. All remain kernel-pending. The independent literal series-evaluation attachment of Lean jacobiLiteral remains optional cross-check, not needed for signed residual rigidity.
+- Agda native D4 chart geometry and dependent two-sheet equivalence now source-written. Remaining exact native finite proof: extract parity witnesses from arbitrary raw coordinates, establish unique bounded signed enumeration of each grade, read its counts into the existing square/triangular scans and rowZ Cauchy convolution, use the chart permutation to pay B_n=A_n+C_n. Then instantiate existing jacobiFromCoefficients without rebuilding analytic readout. No cross-kernel proof import assumed.
+- Native Bishop theta-to-Eisenstein same-object or original lattice-Fourier route still needed. C1b infinite rectangle-row and Lambert degree regrouping, C1c degree-41 product and pole removal, C2 original diagonal zero, C3 original ray residual and H1 final coefficient grouping remain. No new progress asserted on these lanes in this cut.
+- Native/Lean kernels and original GMP acceptance remain separate. No CI invoked; pinned source elaboration may require API repairs.
