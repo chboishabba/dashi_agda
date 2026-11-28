@@ -57,7 +57,7 @@ def main():
         for grade in range(1,N+1):
             for n in range(1,grade+1):
                 for F in syntax(n,grade-n):
-                    x=e.run(F,n);w=any(valid(F,n,z) for z in product((0,1),repeat=n))
+                    T.reads=0;x=e.run(F,n);w=any(valid(F,n,z) for z in product((0,1),repeat=n))
                     assert (x is not None)==w
                     if x is not None:assert valid(F,n,x)
                     assert T.reads<=len(tuple(word(F,n)))
