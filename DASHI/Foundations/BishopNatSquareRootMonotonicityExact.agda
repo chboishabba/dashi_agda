@@ -10,6 +10,7 @@ module DASHI.Foundations.BishopNatSquareRootMonotonicityExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Data.Nat.Base using (_≤_; NonZero)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Unnormalised as ℚ using (_≤_)
@@ -87,5 +88,9 @@ canonicalFloorSquareRootRealMonotone {left} {right} left≤right =
     (Root.canonicalRegularApproximation left)
     (Root.canonicalRegularApproximation right)
     (λ precision →
-      canonicalFloorApproximationMonotone
-        {left = left} {right = right} {precision = precision} left≤right)
+      subst (λ q → Root.canonicalFloorSequence left precision ℚ.≤ q)
+        (sym (Root.canonicalFloorSequencePositive right precision))
+        (subst (λ q → q ℚ.≤ Cross.floorApproximationFraction right precision)
+          (sym (Root.canonicalFloorSequencePositive left precision))
+          (canonicalFloorApproximationMonotone
+            {left = left} {right = right} {precision = precision} left≤right)))

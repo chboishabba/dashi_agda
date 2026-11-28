@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-28",
+  "programme": "Paper9 same-source selected q phase and reciprocal disk",
+  "agda_module": "DASHI/Moonshine/CM163BishopSelectedQScaleTransportExact.agda",
+  "agda_commit": "99ace933c55e732c22ed86e2064a528a36a6a3c3",
+  "geometry_script": "scripts/check_paper9_selected_q_phase_geometry.py",
+  "geometry_script_commit": "014ed7de691680689177e1d76906bbb8a940f386",
+  "local_method": "SymPy 1.14.0, equivalent local source, Git blob parity not established",
+  "precision": "symbolic exact sqrt163 and formal derivatives",
+  "passed": {
+    "cm_quadratic": true,
+    "reciprocal_fixed_points": 2,
+    "mobius_derivative_multipliers": 2,
+    "multiplier_product_and_trace": 2,
+    "tau_to_disk_scale": true,
+    "logarithmic_first_and_second_jets": 2,
+    "formal_exponential_ray_coefficients": 3,
+    "classical_phase_reference": true
+  },
+  "existing_source_proofs": {
+    "negative_delta": "JInvariantBishopCM163TailGuardExact.negativeDelta",
+    "e4_positive": "JInvariantBishopCM163TailGuardExact.xPositive",
+    "e6_positive": "JInvariantBishopCM163TailGuardExact.yPositive",
+    "guarded_original_root": "JInvariantBishopCM163TailGuardExact.Root",
+    "exponent_shape": "JInvariantBishopCM163RadiusGuardExact.exponentShape",
+    "cayley_phase_producer": "BishopMachinCayleyHalfPhaseToFirstZeroExact.OriginalMachinCayleySameObjectEvaluation",
+    "complex_exp_original_carrier": "AbelBishopOriginalComplexCarrierWeldExact.originalBishopExpSameSource"
+  },
+  "unproved": [
+    "actual Bishop complex q(tau) equals negative-real Selected.q",
+    "original Machin/Cayley imaginary-exponential evaluation at actual Bishop pi",
+    "exact CM j root value via original analytic Hecke modular rigidity",
+    "original hypergeometric same-factorial identification and signed Hecke product"
+  ],
+  "kernel_checked": false,
+  "github_ci": false
+}

@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "source_blobs": {
+    "check_paper9_full_hecke_symmetry.py": "3f7b41b7521e7d519b30da60741c0a2dfa116d72",
+    "check_paper9_signed_integer_matrix_checkpointed.py": "961fac5d93c83a294167ca1bc62bc42339a701ba",
+    "check_paper9_signed_integer_matrix_weld.py": "ea502febea8ddf75080183f194b7d21aa1ea9b89",
+    "paper9_hecke_packed_mul.cpp": "30bd71e5f93e1fa3ede0a85ca36f7342c7f0660e"
+  },
+  "pairs": {
+    "1": {
+      "equations": 3618,
+      "nodes": [
+        1,
+        -1
+      ],
+      "seconds": 4.01223
+    },
+    "2": {
+      "equations": 3618,
+      "nodes": [
+        2,
+        -2
+      ],
+      "seconds": 4.075281
+    },
+    "3": {
+      "equations": 3618,
+      "nodes": [
+        3,
+        -3
+      ],
+      "seconds": 4.194077
+    },
+    "4": {
+      "equations": 3618,
+      "nodes": [
+        4,
+        -4
+      ],
+      "seconds": 4.220367
+    },
+    "5": {
+      "equations": 3618,
+      "nodes": [
+        5,
+        -5
+      ],
+      "seconds": 4.319717
+    },
+    "6": {
+      "equations": 3618,
+      "nodes": [
+        6,
+        -6
+      ],
+      "seconds": 4.057055
+    },
+    "7": {
+      "equations": 3618,
+      "nodes": [
+        7,
+        -7
+      ],
+      "seconds": 4.395525
+    },
+    "8": {
+      "equations": 3618,
+      "nodes": [
+        8,
+        -8
+      ],
+      "seconds": 4.00575
+    },
+    "9": {
+      "equations": 3618,
+      "nodes": [
+        9,
+        -9
+      ],
+      "seconds": 3.868988
+    },
+    "10": {
+      "equations": 3618,
+      "nodes": [
+        10,
+        -10
+      ],
+      "seconds": 3.940566
+    },
+    "11": {
+      "equations": 3618,
+      "nodes": [
+        11,
+        -11
+      ],
+      "seconds": 4.589249
+    },
+    "12": {
+      "equations": 3618,
+      "nodes": [
+        12,
+        -12
+      ],
+      "seconds": 4.01374
+    },
+    "13": {
+      "equations": 3618,
+      "nodes": [
+        13,
+        -13
+      ],
+      "seconds": 4.36534
+    },
+    "14": {
+      "equations": 3618,
+      "nodes": [
+        14,
+        -14
+      ],
+      "seconds": 4.311837
+    },
+    "15": {
+      "equations": 3618,
+      "nodes": [
+        15,
+        -15
+      ],
+      "seconds": 4.052988
+    },
+    "16": {
+      "equations": 3618,
+      "nodes": [
+        16,
+        -16
+      ],
+      "seconds": 4.08645
+    },
+    "17": {
+      "equations": 3618,
+      "nodes": [
+        17,
+        -17
+      ],
+      "seconds": 4.127282
+    },
+    "18": {
+      "equations": 3618,
+      "nodes": [
+        18,
+        -18
+      ],
+      "seconds": 4.168822
+    },
+    "19": {
+      "equations": 3618,
+      "nodes": [
+        19,
+        -19
+      ],
+      "seconds": 4.148864
+    },
+    "20": {
+      "equations": 3618,
+      "nodes": [
+        20,
+        -20
+      ],
+      "seconds": 4.622252
+    },
+    "21": {
+      "equations": 3618,
+      "nodes": [
+        21,
+        -21
+      ],
+      "seconds": 4.546775
+    }
+  }
+}

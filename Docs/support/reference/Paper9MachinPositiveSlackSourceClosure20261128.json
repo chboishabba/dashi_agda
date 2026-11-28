@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-28",
+  "programme": "Paper 9 original Bishop Machin uniform finite quotient normalization and constructive 8/9 budget",
+  "source_modules": [
+    "DASHI/Analysis/BishopOriginalMachinPositiveSlackBudgetExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinRationalSlackToUniformDefectExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinHalfRadiusTermNormalizationExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinSecondRadiusRationalReadbackExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinSharpUniformDefectConsumerExact.agda"
+  ],
+  "implementation_components": [
+    "positive integer powerFour/slack decomposition",
+    "strict positive Nat rational denominator constructors",
+    "positive Nat cross-product budget bound",
+    "exact slack budget recurrence cross product",
+    "qZero and qSecond normalization by 2^n",
+    "oddExponent=2k+1 structural normalization",
+    "qRadiusTerm=2k/4^k",
+    "inductive original qRadiusBudget=positiveBudget",
+    "instantiate OriginalRationalBudgetOrder and actual signed uniform finite modulus"
+  ],
+  "local_python_fraction_stages": 401,
+  "local_python_fraction_all_pass": true,
+  "local_symbolic_ring_residuals": {
+    "qZero_step": "0",
+    "qSecond_step": "0",
+    "odd_term": "0",
+    "positive_slack_step": "0"
+  },
+  "mutations_or_fake_kernel_claims": false,
+  "math_boundary": "All needed finite algebra proof bodies source-written; these modules have not been typechecked by Agda/Lean, so not counted as kernel theorems",
+  "pending_analytic": [
+    "actual original Bishop atan infinite-series factorization and derivative-of-limit using uniform quotient Cauchy",
+    "single Bishop exp(2i atan x) Cayley ODE uniqueness at original carrier",
+    "original Hecke CM root/rigidity and signed analytic product",
+    "original Bishop factorial hypergeometric H² and shared derivative"
+  ],
+  "local_agda_installed": false,
+  "github_ci_executed": false
+}

@@ -46,7 +46,9 @@ canonicalFloorSquareRootNonnegative radicand =
       in
       ℚP.≤-trans
         (negativeOneOverNatBelowZero precision)
-        (floorApproximationNonnegative radicand precision))
+        (subst (0ℚᵘ ℚ.≤_)
+          (sym (Regular.canonicalFloorSequencePositive radicand precision))
+          (floorApproximationNonnegative radicand precision)))
 
 bishopNatSquareRootNonnegativeLevel : ProofLevel
 bishopNatSquareRootNonnegativeLevel = machineChecked

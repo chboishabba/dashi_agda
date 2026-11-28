@@ -1,0 +1,77 @@
+{
+  "predictive_source_blob": "f3218e6003877aace21a98cf9f6b4e4128ccccac",
+  "original_source_blob": "28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e",
+  "local_cpp_blob_verified": true,
+  "compiler": "g++ -O3 -std=c++17 -lgmpxx -lgmp -lcrypto",
+  "timeout_seconds": 90,
+  "predictive": [
+    {
+      "digits": 10000,
+      "ms": 10.6152,
+      "bits": 90233,
+      "trace": true,
+      "attempts": 1,
+      "sha": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524"
+    },
+    {
+      "digits": 100000,
+      "ms": 81.7489,
+      "bits": 903197,
+      "trace": false,
+      "attempts": 1,
+      "sha": "79b862cc31ceb97bb3c39d05ae74664c99f0ff7670b3e08a4b21a31ef84d7711"
+    },
+    {
+      "digits": 1000000,
+      "ms": 1321.25,
+      "bits": 9034322,
+      "trace": false,
+      "attempts": 1,
+      "sha": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18"
+    }
+  ],
+  "trace_replay": {
+    "method": "independent local harness, not committed Python reader",
+    "digits": 10000,
+    "leaves": 716,
+    "merges": 715,
+    "raw_triple_equal_full_gcd": true,
+    "negative_controls_rejected": [
+      "sign",
+      "divisor",
+      "leaf order",
+      "root",
+      "floor"
+    ]
+  },
+  "common_floor": {
+    "method": "local reproduction of original evaluator equations, not committed wrapper",
+    "rows": [
+      {
+        "digits": 100,
+        "n": 9,
+        "m": 75,
+        "k": 25,
+        "seconds": 0.0004257930004314403,
+        "sha": "a84a33ae8eb14f703291215f08b6d4cf1b1066b24171927021dee2a7ef54fbc2"
+      },
+      {
+        "digits": 1000,
+        "n": 73,
+        "m": 750,
+        "k": 250,
+        "seconds": 0.003091505000156758,
+        "sha": "8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2"
+      },
+      {
+        "digits": 10000,
+        "n": 716,
+        "m": 7500,
+        "k": 2500,
+        "seconds": 0.15702859000066383,
+        "sha": "ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524"
+      }
+    ]
+  },
+  "native_or_universal_acceptance": false
+}
