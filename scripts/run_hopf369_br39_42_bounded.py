@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–72 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–78 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -74,8 +74,25 @@ PARTS={
     ("BR70.shift","check_hopf369_br70_moving_gauge_frame.py",("--part","shift")),
     ("BR70.negative","check_hopf369_br70_moving_gauge_frame.py",("--part","negative")),
     ("BR71.physical","check_hopf369_br71_full_physical_de_rows.py",("--part","all")),
+    ("BR73.algebra","check_hopf369_br73_adm_normal_energy.py",("--part","algebra")),
+    ("BR73.negative","check_hopf369_br73_adm_normal_energy.py",("--part","negative")),
+    ("BR73.channels","check_hopf369_br73_adm_normal_energy.py",("--part","channels")),
+    ("BR74.jet","check_hopf369_br74_nonlinear_graph_codazzi.py",("--part","jet")),
+    ("BR74.rank","check_hopf369_br74_nonlinear_graph_codazzi.py",("--part","rank")),
+    ("BR75.algebra","check_hopf369_br75_nonlinear_graph_gauss.py",("--part","algebra")),
+    ("BR75.refusal","check_hopf369_br75_nonlinear_graph_gauss.py",("--part","refusal")),
+    ("BR76.moving","check_hopf369_br76_adm_moving_energy_flux.py",("--part","moving")),
+    ("BR77.decomposition","check_hopf369_br77_wall_flux_coercivity.py",("--part","decomposition")),
+    ("BR77.sharp","check_hopf369_br77_wall_flux_coercivity.py",("--part","sharp")),
+    ("BR77.channels","check_hopf369_br77_wall_flux_coercivity.py",("--part","channels")),
+    ("BR77.negative","check_hopf369_br77_wall_flux_coercivity.py",("--part","negative")),
+    *[(f"BR78.{part}","check_hopf369_br78_tension_bianchi_ward.py",("--part",part)) for part in ("vacuum","matter","symbol","negative")],
   ],
   "heavy":[
+    ("BR74.graph","check_hopf369_br74_nonlinear_graph_codazzi.py",("--part","graph")),
+    ("BR75.sample","check_hopf369_br75_nonlinear_graph_gauss.py",("--part","sample")),
+    ("BR76.formula","check_hopf369_br76_adm_moving_energy_flux.py",("--part","formula")),
+    ("BR76.channels","check_hopf369_br76_adm_moving_energy_flux.py",("--part","channels")),
     *[(f"BR72.{alloc}.{k}","check_hopf369_br72_unified_eighth_order_boundary.py",("--allocation",alloc,"--order",str(k))) for alloc in ("D","E") for k in range(9)],
     ("BR67.physical","check_hopf369_br67_eighth_order_israel_source.py",("--part","physical")),
     *[(f"BR60.K.{i}","check_hopf369_br60_moving_israel_frechet.py",("--part","component","--index",str(i))) for i in range(10)],
@@ -174,7 +191,7 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78"}]
     else:
         plans=PARTS[args.part]
     outcome={}
