@@ -1,3 +1,9 @@
+## Current scope override — 28 November 2026
+
+The all-Clay endpoint scope, independent unforced NS A/B finite-horizon and signed physical reference cut, BSD additive rational Kummer quotient and Hodge actual cyclotomic lift are now consolidated in [ClaySixMillenniumEndpointsExactRoadmap20261115.md](ClaySixMillenniumEndpointsExactRoadmap20261115.md#28-november--current-all-clay-endpoint-max-cut-supersedes-older-prioritydefer-policies), commit a6a5ef06ee8baa8bc01ea77e728cad9131cd54e1. The prior four-P0 history below is retained for provenance, but the user no longer restricts active scope to those four, and A is not deferred behind B. No status promotion: actual all-data A/B finite-horizon regularity, RH/NS external admission, BSD analytic comparison, Hodge generic orientation and arbitrary-X detector, PNP universal endpoint, YM physical continuum all remain open in our source. PNP/YM remain specialist branch owners; no duplicate implementation there. Local new exact controls 3486/3486 per normal and optimized mode; no native kernel or CI.
+
+---
+
 # Four-Clay P0 controlling endpoint reverse-solve and constructor/gap matrix
 
 ## 27 November — executable independent NS369 reconstruction
