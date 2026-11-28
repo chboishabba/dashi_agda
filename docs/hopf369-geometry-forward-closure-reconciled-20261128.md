@@ -385,3 +385,22 @@ W4 sourced subsidiary uniqueness. W5/6 remain dependent on this
 chain; no new scalar solve, no promotion from pointwise/ray checks.
 Local runner closure partition includes BR85–88 in independent bounded
 stages. No GitHub Actions run requested.
+
+### BR87 opposite-sector obstruction and exact bounds
+
+Independent local SymPy 1.14 transcription of the BR34 normalized
+principal row formulas (not the committed script) returned exact
+row-sum coefficient bounds 19, 4, 31/4 and 11/2 for D metric, D gauge,
+E metric, E gauge respectively, multiplying |w|^3, |w|^2, |w|, |w|
+on the damped glancing ray. The exact inverse also has a contrasting
+sector: s=sigma>0 real, |xi| tends to infinity; then
+w=(sigma+i|xi|)/sqrt(sigma^2+|xi|^2) -> i and
+w^2+1=2w sigma/ell -> 0. At w=i there are **12 metric E and 8 gauge E
+nonzero simple pole residues**, but zero in both D matrices. Thus E's
+improved glancing loss is NOT a globally superior fixed allocation.
+Its opposite-sector normalized inverse cost is at least |xi|/sigma.
+Do not frequency-switch physical D/E rows without an equivalence or
+well-posed mixed-allocation construction. Compare global tame norms in
+both sectors; keep original physical gauge and initial-corner conditions.
+The BR87 runner checks these residues and exact constants. The actual
+repository checker remains COMMITTED_PENDING_LOCAL_RUN.

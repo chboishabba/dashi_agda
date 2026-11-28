@@ -185,7 +185,18 @@ def br87(alloc,sector):
     power=max(degrees)
     assert power=={('D','metric'):3,('D','gauge'):2,('E','metric'):1,('E','gauge'):1}[alloc,sector]
     bound=max(sum(costs[i*n:(i+1)*n]) for i in range(n))
-    assert bound>0
+    assert bound=={('D','metric'):19,('D','gauge'):4,('E','metric'):Q(31,4),('E','gauge'):Q(11,2)}[alloc,sector]
+    # Opposite regime: sigma fixed, omega=0 and |xi| grows.
+    # w=(sigma+i|xi|)/sqrt(sigma²+|xi|²) approaches i,
+    # and w²+1=2w sigma/ell tends to zero. E has genuine simple
+    # poles, while D has Laurent-only denominators. A sectorwise
+    # comparison is not permission to switch physical boundary rows.
+    residues=[s.cancel((w-s.I)*x).subs(w,s.I) for x in inv]
+    count=sum(x!=0 for x in residues)
+    assert count=={('D','metric'):0,('D','gauge'):0,('E','metric'):12,('E','gauge'):8}[alloc,sector]
+    if alloc=='E':
+        assert all(s.cancel((w-s.I)*x).subs(w,s.I).is_finite for x in inv)
+        print(f'BR87 REFUSAL: {count} actual E inverse entries have a simple pole at w=i (low temporal/high spatial sector)')
     # Nonzero leading coefficient also gives the matching asymptotic
     # lower exponent for this matrix on the ray.
     lead=[s.limit(x/w**power,w,s.oo) for x in inv if x]
