@@ -3202,3 +3202,44 @@ The three time-jet commutator terms MUST be paid as differentiated source, volum
 A concrete bounded-coefficient improvement: using exponential half Taylor upper 0<=n<=1/2, exp(1/2)<5/3 with geometric tail ratio <=1/16, cosh n<7/6, sinh n<8/15, exp(-n)>3/5. a_t=N>0, a_n=-sqrt(1+t²)N<0 gives a(t,n)>1/5, 3/5<N<7/6, and |N_t|<4/15 on original collar. Consequently |A_t/A|<20, |B_t/B|<20, and |(Na)_t/(Na)|<7 for all t in [1,12], n in [0,1/2]. The original coefficient C=Na k² is zero at k=0; interpret the last ratio for the k-independent Na (or k≠0), never divide by C at k0. These are elementary exact rational geometric coefficient enclosures, not a bound on the coupled metric coefficients, normal derivatives of unknown solutions, boundary traces, or original source temporal derivative.
 
 Paying the differentiated physical energy now reduces to controlling these nonfrozen commutator source terms in BR83/BR44 two-level energy, the signed Israel wall trace Z and Z_t including actual Q_t, and simultaneously paying the fully constrained Einstein/material/gauge source residual and five negative unquotiented metric fibres. This is a stronger actual geometry/current construction than generic BR83 principal current, but NO unconditional highGap>crossBudget or original W1/W2/3 acceptance has occurred. The execution of scripts/check_f8_w1w2_integrated_receipt.py in the literal checkout, independent original normal/time/Fourier error estimates, receiver and native kernel remain P0.
+
+
+### 28 November — actual two-level GN graph-energy and second-normal-jet reverse solve
+
+Large W2 cut committed with four exact locally executed SymPy scripts, preserving the original F8 background/source definitions and the original wall sign, no CI:
+- scripts/check_f8_two_level_source_energy.py commit 89d2d9ff780126b40575b38749bcd9305d719fd3 blob 4717a88b09567cae95338c406a4bc5815d1d80ab: two-level actual GN local divergence identity and wall signs at both levels, differentiated Israel Znt, pointwise Young squares, explicit boundary trace negative control. Local executed git hash matches committed blob.
+- scripts/check_f8_gn_commutator_graph_reduction.py commit 26575a3b802c5e74f2c4860b1af7b90dffee3584 blob 79e719c3da32fc79009c1030c9cf839ee98e6fa2: EXACT use of original L[u]=F to eliminate u_nn from the nonfrozen commutator; local executed git hash matches blob.
+- scripts/check_f8_gn_graph_majorant.py commit f67644998ad1c949c2f19ecf1eb3961c9ea43f92 blob 276e35a05514f14d06839b44c4839fb6e41e2bef: rational coefficient enclosures for rA,rB,rC and rBn, Cauchy sum-of-squares and explicit graph norm cost; local executed git hash matches blob.
+- scripts/check_f8_gn_graph_energy_growth.py commit 9c3d4b835b761b3d364f40d93713e8370d405691 blob 4b966399fd9377d3df14d91b6fc53fe457c5402a: scalar graph-energy growth and signed flux with algebraic conditional Gronwall, locally executed PASS; local binary hash not independently matched in this paragraph, fetched committed blob available.
+- scripts/check_f8_w1w2_source_current_maxcut.py updated at 4d19a81cb257b521e5d9dddc279c71556f9d06ae to cover four scripts. The aggregate runner AND its original History --history option remain not executed in a literal checkout; they must not be marked PASS merely because individual SymPy test files passed locally.
+
+Precise original modal differential identity: A=a^3/N, B=Na^3, C=Na k², L[u]=-∂t(Au_t)+∂n(Bu_n)-Cu. Let E0=(A u_t²+B u_n²+C u²)/2, E1=(A u_tt²+B u_tn²+C u_t²)/2. For any smooth original equation L[u]=F, and v=u_t with L[v]=F_t+comm, the exact energy balance on 0<=n<=1/2 is
+
+E0'= [B u_t u_n]outer-inner -int F u_t + coefficient work
+E1'= [B u_tt u_tn]outer-inner -int (F_t+comm) u_tt + coefficient work,
+
+where each coefficient work =int (-A_t p² + B_t q²+C_t u²)/2 and |work| <=20 E_j from prior rational collar enclosure. At inner original wall, combined flux (1+k²)t³ Z_t Z_n + t³ Z_tt Z_nt has no fixed dissipative sign, and Z_nt=(k²(f_t-2f/t)/t²-j_t)/3. This is a source-resolved TWO-LEVEL identity, not simply a formal current.
+
+Reverse solve of NORMAL second jet: from L[u]=F, u_nn=(F+A_t u_t+A u_tt-B_n u_n+C u)/B. Write rA=A_t/A, rB=B_t/B, rC=C_t/C with rC for k=0 interpreted as (Na)_t/(Na). Then
+
+comm=A[dA u_t+(rA-rB)u_tt] -B (∂n rB)u_n + C(rC-rB)u -rB F,
+dA=∂t rA+rA(rA-rB).
+
+For actual GN, rA-rB=-2N_t/N, rC-rB=-2N/a, B/A=N², C/A=(N/a)²k². The second normal derivative has been eliminated WITHOUT fabricating a new pressure equation or assuming a frozen metric. The last C u term scales as k²u, so E0+E1 alone is not a uniform source norm; must add the spatial graph level k²E0 (or equivalent physical Sobolev graph energy), a genuine previous missing requirement.
+
+From exact 1<=t<=12 and 0<=n<=1/2 GN rational bounds: |dA|<140, |rA-rB|<1, |N ∂n rB|<1750, |rC-rB| sqrt(C/A) <72|k|, |rB|<20. Thus for weighted scalar jets P=sqrt(A)|u_t|, Q=sqrt(B)|u_n|, V=sqrt(A)|u_tt|, W=|k|sqrt(C)|u|, f=|F|/sqrt(A),
+|comm|/sqrt(A) <=140P+1750Q+V+72W+20f;
+the Cauchy sum-of-ten-squares identity yields
+int comm²/A <=30625000 E0+10 E1+51840 k² E0+2000 int F²/A.
+This bound is extremely loose but uniform and explicit, and is a correct conditional SCALAR principal energy estimate for the original F8 background. It is not Einstein/gauge/material coupled coercivity.
+
+Define graph H=E0+E1+k²E0. Using pointwise Young and (Ft+comm)²<=2 Ft²+2 comm², the resulting scalar modal differential inequality is
+H' <= 30625021 H
++ (2000.5+k²/2) int F²/A
++int |F_t|²/A
++ [ (1+k²) B u_tu_n+B u_ttu_tn ]outer-inner.
+Gronwall therefore applies ONLY after bounding physical signed boundary flux and the actual original-source derivative/spectral norms. The constant 30625021 is a formal sufficient coefficient, not a practical numerical growth certificate; on an 11-unit window it yields an unusable exponential. Do not claim physical stability or receiver convergence from it. Complex modes require Hermitian real pairing, and actual source F is not yet a certified complete coupled Einstein residual.
+
+The zero-frequency C=0 case is retained without C_t/C division; actual original inner wall flux remains, not discarded. A generic positive E0+E1 does NOT control boundary trace without higher collar Sobolev control; explicit normalized exponential concentration negative control implemented.
+
+Updated truly open W2 max-cut: replace huge coefficient with sharp frequency-resolved constrained estimate, instantiate actual Einstein/gauge/material source F and derivative; independently prove signed Israel boundary flux/differentiated trace and real physical highGap>crossBudget on all k incl zero and mid; construct outer outgoing trace. W1 original full-source Q5/Rnn and literal integrated history, W3 certified evolution, W4 same-window receiver, W5 Agda/Lean/physical authority remain separately open. No new general ADM or pressure construction.
