@@ -11,6 +11,8 @@ module DASHI.Physics.YangMills.YMClayCMP102Section27NativeAcceptanceExact where
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGFiniteLimitTransportExact as Original
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGPrefixSignedSquaresBIDIExact as Algebra
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGeometricSqueezeReceiverExact as Rate
+import DASHI.Physics.YangMills.YMClayCMP102OriginalAbsoluteRateReceiverExact as Abs
+import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteCauchyWingBoundsExact as Wing
 
 open import Agda.Builtin.Nat using (Nat)
 import Real as R
@@ -29,10 +31,18 @@ originalFiniteRateZero = Rate.originalGeometricRateZero
 
 -- Section 30: direct ONE-absolute-bound receiver on the same original
 -- Bishop represented finite source (no independent lower/upper brackets).
-import DASHI.Physics.YangMills.YMClayCMP102OriginalAbsoluteRateReceiverExact as Abs
-
 originalFiniteAbsoluteErrorConverges :
   ∀ X → Abs.originalAbsoluteRateBound X →
   Seq._ConvergesTo_ (Original.originalGPrefix X) R.0ℝ
 originalFiniteAbsoluteErrorConverges =
   Abs.originalGPrefixZeroFromAbsoluteRate
+
+-- Section 30 original physical-signed coefficient histories: the
+-- imported finite native Bishop triangle and Cauchy wing are actual
+-- all-count values, not synthetic abstract finite coefficient data.
+originalFiniteAPrefixAbsoluteBound = Wing.originalAPrefixAbsoluteBound
+originalFiniteBPrefixAbsoluteBound = Wing.originalBPrefixAbsoluteBound
+originalFiniteASquareWingAbsoluteBound =
+  Wing.originalASquareCauchyWingFiniteBound
+originalFiniteBSquareWingAbsoluteBound =
+  Wing.originalBSquareCauchyWingFiniteBound
