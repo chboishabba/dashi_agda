@@ -217,6 +217,8 @@ PARTS["terminal"].append(("BR218.forced_boundary_lift","check_hopf369_br218_forc
 
 PARTS["terminal"].append(("BR219.exterior_source_inverse","check_hopf369_br219_exterior_source_inverse.py",()))
 
+PARTS["terminal"].append(("BR220.normal_constraint_propagation","check_hopf369_br220_normal_constraint_propagation.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

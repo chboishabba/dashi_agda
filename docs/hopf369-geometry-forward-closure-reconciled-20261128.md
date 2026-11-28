@@ -5863,3 +5863,39 @@ under 90s. Removed third sample, reran bounded checker,
 exit 0, SymPy 1.14.0; actual stdout receipt attached. Original
 donor-import entry unrun. Terminal stage 40. No CI/native/
 curved PDE acceptance.
+
+
+## 55. BR220 — intrinsic normal constraint propagation and initial-jet admissibility
+
+With C=C_n d_y+C_t, K=K_n d_y+K_t, BR219 gives
+KC=(d_y²-lambda²)I on the flat constant-coefficient collar.
+For sufficiently smooth full source f, solve
+W''-lambda² W=K_n f'+K_t f. For residual r=CW-f,
+r''-lambda² r=CKf-(d_y²-lambda²)f.
+If the source satisfies CKf=(d_y²-lambda²)f and both
+r(0)=r'(0)=0, uniqueness for the residual ODE proves CW=f
+on the entire interval. Conversely every solution has these
+conditions. This is an intrinsic sufficient and necessary
+construction with admissible initial jets, not a source
+extension hypothesis. Explicit initial-jet matrix
+T=[C_t,C_n;lambda² C_n,C_t] on (W0,W1) has RHS
+(f0,f1-C_n(K_n f1+K_t f0)).
+For tau=1±i,k=2 exact ranks 60 (200x70) and rank25
+of (I-C_n K_n)C_t, homogeneous initial-jet dimension 10.
+Both samples pass manufactured polynomial compatibility
+and independent incompatible initial-data refusal (rank61
+augmented). Rank statement sampled; general nonnull proof
+can split initial jets into ±lambda branches and use
+the BR212 physical polarization dimension five on each.
+Need actual trace/energy bounds, finite periodic boundary
+solvability with ten homogeneous coordinates and nine wall
+coordinates, source admissibility, curved commutator terms.
+No claim of arbitrary source existence without the differential
+and initial-jet compatibility conditions. Smooth source
+regularity here; weak/distributional trace extension unproved.
+Local independent original carrier execution under 90s cap,
+SymPy 1.14.0, exit zero; local blob
+7f3fff777c030a27414a86309c284a7aa90d8b32.
+Committed driver switches to original BR27 donor import, unrun.
+Other lanes unchanged. Terminal stage 41. No CI/native/PDE
+theorem acceptance.

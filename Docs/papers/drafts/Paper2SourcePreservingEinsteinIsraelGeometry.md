@@ -824,3 +824,7 @@ The original full exterior defect of a nonzero particular curvature field is ret
 ### BR219 full exterior compatible-source inverse
 
 The original Weyl exterior symbol admits a linear contraction symbol K with K C=q I, verified on all fifteen exact quadratic matrix coefficients. Away from the null cone, C K/q is an exact source-image projector and K f/q is the unique solution for compatible f. Positive Gram projected evolution then bounds the whole-line Fourier particular solution by the projected forcing divided by positive damping. The intrinsic normal DAE retains a rank-65 constraint projector, avoiding an assumed arbitrary extension. Half-collar source admissibility and trace estimates remain open. See roadmap section 54.
+
+### BR220 intrinsic normal constraint propagation
+
+The full exterior equation factors to a forced normal wave ODE. Its residual obeys the scalar normal wave operator in every source coordinate, with forcing CKf minus the normal wave operator applied to f. Differential source compatibility and two vanishing initial residuals therefore give exact propagation on the flat collar. The explicit 200-by-70 initial-jet matrix has rank 60 in both tested damped samples, with ten homogeneous freedoms; incompatible source refusal and nonzero manufactured data passed locally. This does not establish finite periodic boundary solvability or a frequency-uniform estimate. See roadmap section 55.
