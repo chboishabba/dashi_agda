@@ -3,7 +3,7 @@ module DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact where
 -- Source-written, uncompiled. Read the actual fixed row endpoint as
 -- the original lattice kernel on (1,j), with the literal (2*pi*i)^-k
 -- factor outside. No choice of a complex root or alternate pi.
-open import Agda.Builtin.Nat as Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat as Nat using (Nat; zero; suc) renaming (_+_ to _+N_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ; 1ℚᵘ)
@@ -77,7 +77,7 @@ powOne z = Laws.complexMultiplyRightIdentity z
 powTwo : ∀ z → Rat.square z ≈C powC z 2
 powTwo z = A.mulCCongruent (C.≈C-refl _) (complexSym (powOne z))
 
-powAdd : ∀ z a b → (powC z a *C powC z b) ≈C powC z (a + b)
+powAdd : ∀ z a b → (powC z a *C powC z b) ≈C powC z (a +N b)
 powAdd z zero b = Laws.complexMultiplyLeftIdentity (powC z b)
 powAdd z (suc a) b = complexTrans (Laws.complexMultiplyAssociative z (powC z a) (powC z b))
   (A.mulCCongruent (C.≈C-refl _) (powAdd z a b))

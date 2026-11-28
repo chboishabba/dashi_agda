@@ -2,7 +2,7 @@ module DASHI.Moonshine.JInvariantBishopCenteredDyadicTailGeometryExact where
 
 -- Source-written, kernel pending. The tail sign is chosen by the integer
 -- coordinate, not by deciding the sign of an arbitrary Bishop real.
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Product.Base using (Σ; _,_; proj₁; proj₂; _×_)

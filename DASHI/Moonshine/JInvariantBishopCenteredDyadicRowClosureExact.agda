@@ -76,7 +76,7 @@ unshiftReal : ∀ {f : Nat → ℝ} {v} → Seq._ConvergesTo_ (λ n → f (suc n
   Seq._ConvergesTo_ f v
 unshiftReal (Seq.con* cv) = Seq.con* λ { (suc k) →
   suc (proj₁ (cv (suc k))) , λ
-    { (suc (suc n)) past → proj₂ (cv (suc k)) (suc n) (s≤s⁻¹ past) } }
+    { (suc zero) (s≤s ()) ; (suc (suc n)) past → proj₂ (cv (suc k)) (suc n) (s≤s⁻¹ past) } }
 
 shiftC : ∀ {f : Nat → BishopComplex} {v} → Lim.Conv f v → Lim.Conv (λ n → f (suc n)) v
 shiftC cv = original-bishop-pointwise-complex-converges

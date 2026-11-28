@@ -1933,3 +1933,26 @@ Source-written proof bodies on PR #1546; no Agda kernel or CI acceptance asserte
 Donor provenance: existing DASHI binary branch owner and PNP finite codec, Karp canonical Fin decoder (Karp PR #1474; PNP Agda #1548 / Lean #119), standard-library finite-index lemmas. New signed dyadic lattice attachment and analytic limit proofs are DASHI extensions; classical Fourier, exponential and Basel identities retain their original mathematical provenance. This does not pay P vs NP's universal cost/progress obligation or modify the donor branches.
 
 **Remaining C1a max-cut:** instantiate the explicit geometric tail hypotheses uniformly on the actual centred integer range, including the eventually small real shift and the sign-dependent angle bound. Then weld the conserved finite fold and fixed summand limits to the original lattice row by cofinal dominated summation, keeping the zero index separate. The half-integer real-axis specialization and even-zeta normalization are not yet paid. C1b infinite Lambert rearrangement and normalized E4/E6 equality, C1c degree-41 Hecke identity/pole removal, C2 original diagonal zero, C3 analytic ray residual, and terminal RawCross/GMP acceptance remain. All new native proof bodies are uncompiled; no CI invoked. Lean companion unchanged.
+
+
+### 2026-11-28 — C1a upper-half-plane row max-cut
+
+Source-written, kernel pending; no CI run. This cut completes the intended upper-half-plane horizontal row proof chain at source level; it does not establish Agda acceptance. The real-axis normalization and two-dimensional row rearrangement remain independent.
+
+| Commit | Actual source implementation |
+|---|---|
+| 42209e0a1af8 / c621f2a7d6f2 | JInvariantBishopCenteredDyadicTailGeometryExact: h(suc n)*2^n=1/2; constructive dyadic depth and Archimedean index cutoffs; both actual signed leaves, radial floor and original disk norm, literal Basel majorants |
+| 1ceb75f3fad1 | JInvariantBishopCenteredDyadicFoldReindexExact: existing binary word and finite unique-permutation owner; canonical signed interval pairs (+k,-(k+1)); exact integer coverage and fold transport |
+| 1922a6fa8b6f5 | JInvariantBishopCenteredDyadicDominatedSumExact: actual finite prefix complement bound and constructive cofinal passage to a conserved target; no assumed target series convergence |
+| b21b0ee73cd7 | JInvariantBishopCenteredDyadicRowClosureExact: componentwise cofinal convergence for original weight 4 and 6 Fourier rows using actual fixed-integer convergence, paired majorants, and exact conserved aggregate |
+| d120ebe80d01 / 7ea75f3e3331 | JInvariantBishopCenteredDyadicLatticeReadoutExact: original lattice kernel on (1,j), exact reciprocal product and inverse-power normalization, unweighted paired lattice row convergence with explicit undo4/undo6 |
+
+Geometry: h=2^-m, J=|j|, x=Re(tau). For h|x|<=1/8, hJ<=1/2 and J>=2|x|, set v=h(J+sgn(j)x), u=pi*v. Then 0<=hJ/2<=v<=5/8, u<=110/56<2, and hJ<=(2/3)u. The integer coordinate chooses the phase sign, so no decidability of arbitrary Bishop real signs is needed. With rho0=exp(-2*pi*Im(tau))>0 and rho>=rho0, the existing half-angle lemma gives rho0*(hJ)^2<=normSq(1-q). The previous tail polynomials now instantiate on both actual signed sheets. Pairing (+k,-(k+1)) avoids the extra positive endpoint and retains zero once. The majorant for k>=1 is C*(1/k^2+1/(k+1)^2), and the finite head is handled separately.
+
+Cofinal passage: for arbitrary precision epsilon choose a fixed interior K past the summable-tail cutoff. Choose depth n after the actual finite-prefix convergence modulus; the original dyadic cardinal covers K. The moving complement is bounded by the difference of two convergent majorant prefixes, hence <=epsilon/2; the interior discrepancy is <=epsilon/4. Conservation identifies the original Fourier row as the fixed-lattice-prefix limit. No infinite-sum exchange is assumed.
+
+New terminal source declarations: latticeRow4, latticeRow6 (original lattice kernel at horizontal coordinate 1); limits are (2*pi*i)^k/(k-1)! times the original rational Fourier row. The prefactor is canceled by an actual complex product identity. Zero and the imaginary sign are preserved. This is not yet the full double lattice or normalized E4/E6 theorem.
+
+Independent exact replay: scripts/check_paper9_centered_tail_geometry.py; local 32467/32467 assertions (11 ranges, 20249 geometric bounds, 12205 pairing/positive majorant checks, 2 symbolic phase equations). No native elaboration, kernel or performance receipt. This replay tests finite/rational geometry, not the universal analytic proof.
+
+Next maximum cut: (i) actual half-integer real-axis nonpole guards and same dyadic limit (or a proved vertical-boundary passage) to pay even-zeta normalization; (ii) absolute two-dimensional lattice shell to row/degree fibre rearrangement, original Lambert E4/E6 equality; (iii) Hecke-41 product and pole removal; (iv) C2 original diagonal zero and C3 analytic jet/ray producer; (v) RawCross and GMP. Reuse existing native shell, Euler and Hecke consumers. H1's outstanding coefficient regrouping/attachment and all prior kernel checks remain separate. Donor branches (Karp, Direct PNP, FRACDASH, Lean companion) unchanged. The signed finite codec and original finite permutation donors are retained; no computational independence or universal P vs NP progress claim.
