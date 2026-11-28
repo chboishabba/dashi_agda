@@ -1133,3 +1133,8 @@ The original master executable `scripts/check_ym_path13_full_q_matrix.py` constr
 The #1536 older manuscript's endpoint/Cauchy supplement (23 November, blob 371fc3095129766a635bc9734666b7551975e3d7) records source-written all-n even/odd A/B row identities and the shifted bracket zero. Do not repeat that finite index weld. The same-original-series Bishop analytic Cauchy limit, literal nonflat Q(s) coefficients, uniform inverse enclosure and physical identification H(s(Y0)) on the common CMP102 source ball are unpaid. R367/R368 distinguish C-Lipschitz, same-parameter contraction, and cross-parameter defect; R413/R410 consume the actual selected-stage operator, not arbitrary matrices. The source-native F19 and CMP116/119/122 clustering/expectation/same-H_OS spectral identification remain distinct continuum requirements. No fresh full-path replay, native kernel acceptance, or physical/Clay promotion follows.
 
 Source references: [#1536](https://github.com/chboishabba/dashi_agda/pull/1536), [Lean #15](https://github.com/chboishabba/dashi_lean4/pull/15), [current cross-lane roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Original Bałaban, Bishop/Bridges and Path13 authors retain attribution.
+
+
+## Section 17 CMP102 source-state update
+
+Lean #15 2f1f58f30b6f writes actual unit quaternion left/right tangent norm isometries, scalar orthogonality and two-point adjoint defect, and populates the prior chord-ball BondBound with left multiplication. The selected Path13 tangent identification, actual left-trivialized differential, nonflat H(s(Y0)) and CMP102 enclosure remain open. No wider mass-gap claim; 768 independent exact controls, native elaboration pending.
