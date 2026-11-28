@@ -96,7 +96,15 @@ def reverse_constrained(material,cfg,design):
     gap=None
     if all(x['status']=='SAMPLED_RESTORED_CANDIDATE' for x in (active,passive)):
         gap=active['strict_net_J']-passive['strict_net_J']
+    selected_four_worlds=None
+    if active['status']=='SAMPLED_RESTORED_CANDIDATE':
+        z=active['control']
+        cc=dict(cfg,fixed_horizon=True,
+            heating_W=(z[0]*template_h).tolist(),
+            load_rate_s_inv=(z[1]*template_l).tolist())
+        selected_four_worlds=four_worlds(material,cc)
     return dict(active=active,passive=passive,
+                active_selected_four_worlds=selected_four_worlds,
                 sampled_advantage_J=gap,derivative_evaluations=calls,
                 strongest_passive_certified=False,global_optimum_certified=False,
                 physical_admission=False)
