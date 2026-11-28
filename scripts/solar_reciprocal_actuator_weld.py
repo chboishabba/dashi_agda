@@ -42,6 +42,14 @@ def comparator():
     opt=2*S.sqrt(5)/3;cap=S.simplify(W.subs(l,opt))
     assert S.simplify(W.subs(l,1))==passive_optimum()
     assert S.simplify(cap-W-4*(3*l-2*S.sqrt(5))**2/((24+12*S.sqrt(5))*(9*l*l+24*l+20)))==0
+    a,b=S.symbols('a b',positive=True)
+    Z=a*B*B.T+b*C*C.T+S.I*S.diag(1+l,1,1)
+    det=Z.det();q=(Z.inv()*S.Matrix([0,0,1]))[0]
+    assert S.simplify(q-a*b/det)==0
+    # Every inverse-power coefficient is nonnegative; a,b<=1 minimise denominator at 1,1.
+    den=S.expand(det*S.conjugate(det)/(a*a*b*b))
+    assert all(v>0 for v in S.Poly(den.subs({a:1/a,b:1/b}),a,b,l).coeffs())
+    assert S.simplify(den.subs({a:1,b:1})-(9*l*l+24*l+20))==0
     return cap
 
 
@@ -65,4 +73,8 @@ def run():
     bad=actuator_lift(r,schedule,S.Rational(1,10000),1,1,S.Rational(3,10));assert not bad['restored']
     off=cycle(schedule,[S.zeros(3,1)]*4);assert off['receiver']==0
     print('PASS excess damping and source-off negative controls')
+    assert z['output']/12<p/8
+    fast=actuator_lift(r,schedule,'0.00001','0.0001','0.1','0.3')
+    assert fast['restored'] and fast['output']/(8+4*S.Rational(1,10))>p/8
+    print('PASS equal elapsed-time frozen-stage comparator',float(fast['output']/(8+4*S.Rational(1,10))), 'passive',float(p/8),'peak_force',float(fast['peak_force']))
 if __name__=='__main__':run()
