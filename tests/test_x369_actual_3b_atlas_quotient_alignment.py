@@ -5,6 +5,7 @@ from scripts.x369_actual_3b_atlas_quotient_alignment import (
     I,J,mm,inverse,intertwiner,log_coord,group_coord,inner_offset,
     e_conjugator,atlas_matrices,candidates)
 from time import monotonic
+from scripts.x369_3b_atlas_inverse_words import matrix_word
 
 
 class AtlasAlignment(unittest.TestCase):
@@ -19,6 +20,9 @@ class AtlasAlignment(unittest.TestCase):
         self.assertTrue(np.array_equal(Q,P) or np.array_equal(Q,-P%3))
         found,stats=candidates(dict(C=actual[0],D=actual[1]),atlas,100,monotonic()+20)
         self.assertIsNotNone(found)
+        self.assertTrue(np.array_equal(matrix_word([1,2,-2,-1],atlas),I))
+        self.assertTrue(np.array_equal(matrix_word([1,2],atlas),mm(*atlas)))
+        with self.assertRaises(ValueError):matrix_word([3],atlas)
 
     def test_extraspecial_log_and_inner_action(self):
         a=(1,2,0,1,2,0);b=(0,1,2,0,1,2)
