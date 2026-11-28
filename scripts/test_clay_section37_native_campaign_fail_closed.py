@@ -36,7 +36,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
             sorted(k for k in campaign.BRANCHES),
             ["BSD_HODGE", "NS", "PNP", "RH", "YM"])
         self.assertEqual(sum(len(paths) for _, paths in
-                             campaign.ROOTS.values()), 14)
+                             campaign.ROOTS.values()), 19)
 
     def run_campaign(self, extra_pins):
         with tempfile.TemporaryDirectory() as tmp:
@@ -99,10 +99,10 @@ class NativeCampaignFailClosed(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIsNone(data)
 
-    def test_exact_fourteen_native_roots_plus_rh(self):
+    def test_exact_nineteen_native_roots_plus_rh(self):
         campaign = load_runner()
-        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 14)
-        self.assertIn("Clay38NativeAcceptanceV1",
+        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 19)
+        self.assertIn("Clay39NativeAcceptanceV1",
                       inspect.getsource(campaign))
 
     def test_lean_native_axioms_allowlisted(self):
@@ -144,6 +144,30 @@ class NativeCampaignFailClosed(unittest.TestCase):
             source)
         self.assertFalse(ok)
         self.assertIn("A.second", reason)
+
+    def test_lean_quoted_exact_axiom_declaration(self):
+        runner = load_runner()
+        src = "#print axioms DASHI.NS.receipt\\n"
+        log = "'DASHI.NS.receipt' depends on axioms: [propext]\\n"
+        ok, reason = runner.lean_axioms_trusted(log, src)
+        self.assertTrue(ok, reason)
+
+    def test_lean_quoted_wrong_declaration_rejected(self):
+        runner = load_runner()
+        src = "#print axioms DASHI.NS.receipt\\n"
+        log = "'DASHI.NS.fake' depends on axioms: [propext]\\n"
+        ok, reason = runner.lean_axioms_trusted(log, src)
+        self.assertFalse(ok)
+        self.assertIn("missing", reason)
+
+    def test_lean_multiple_all_declarations_quoted(self):
+        runner = load_runner()
+        src = ("#print axioms DASHI.NS.first\\n"
+               "#print axioms DASHI.NS.second\\n")
+        log = ("'DASHI.NS.first' depends on axioms: [propext]\\n"
+               "'DASHI.NS.second' depends on axioms: [Classical.choice]\\n")
+        ok, reason = runner.lean_axioms_trusted(log, src)
+        self.assertTrue(ok, reason)
 
     def test_wrong_branch_fails_closed(self):
         campaign = load_runner()
