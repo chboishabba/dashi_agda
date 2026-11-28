@@ -534,6 +534,32 @@
       "physical_paid": false,
       "scope": "Original-action radial density O(v²) plus Einstein mass constraint and corrected Euler wall trace; finite-volume 256/512/1024 candidate, not angular Einstein/fully coupled evolution.",
       "source_equation": "M2'+8pi*r*d0*M2=4pi*r²(k*A+d0*U²/N0²), k=(M2_wall+U_wall²/(2*N_wall²))/f0_wall"
+    },
+    "bulk_euler_acceleration": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_bulk_euler_acceleration_inverse.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "969467be871bdd4270f32f9710e21e40655261b4",
+      "physical_paid": false,
+      "scope": "Exact radial original a,d,V material Euler differential operator and conditional unique interior Ytt inverse; degeneracy d(1)=0 and wall trace separate. Actual compatible Einstein lapse time jet and evolution unpaid.",
+      "source_equation": "EL=2*d(Y²)*Ytt/N²+S[Y,Yr,Yrr,Yt,f,N,fr,ft,Nr,Nt]; Ytt=-N²*S/(2*d) for d>0"
+    },
+    "nonlinear_radial_shooting": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_nonlinear_einstein_euler_shooting.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "ec47d92249b2d86f09502376151c3deade755450",
+      "physical_paid": false,
+      "scope": "Original-action fully nonlinear spherical radial Einstein mass/lapse constraints and exact degenerate Euler wall trace solved by two-parameter shooting; finite grid 120/240/480. Interior Euler acceleration computed conditioned on Nt=0 at instant, not the actual Einstein lapse time evolution. No full coupled Einstein PDE/GHY.",
+      "source_equation": "m_r=4*pi*r²*rho_original[Y,Yr,Yt,f,N]; N_r/N=(m+4*pi*r³*p_original)/(r²*f); wall N²=f and f*Yr²-Yt²/N²=f_original_wall"
     }
   }
 }
