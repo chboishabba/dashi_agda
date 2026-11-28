@@ -80,6 +80,7 @@ CORE=(
     "check_tov_euler_moving_gradient_repair.py",
     "check_tov_quadratic_constraint_ritz.py",
     "check_tov_bulk_euler_acceleration_inverse.py",
+    "check_tov_angular_einstein_timejet.py",
     "check_tov_nonlinear_einstein_euler_shooting.py",
     "check_tov_mass_flux_surface_closure.py",
     "check_tov_wall_frame_stress_inverse.py",
