@@ -6,6 +6,8 @@ module DASHI.Moonshine.JInvariantBishopCenteredDyadicSummandLimitExact where
 -- and q-gap guard from the existing native source owners.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst)
+import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 open import Data.Integer.Base using (ℤ; +_)
 open import Data.Rational.Unnormalised as Q using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Product.Base using (_,_)
@@ -213,3 +215,44 @@ module At (inputs : Round11.BishopCutset) where
       (Rows.row6 (scaledPoint p (Addr.integerRead r) (suc n)))
   leaf6 {n} r p = A.scaleCCongruent
     (row6Cong _ _ (Chart.centeredChart r p)) (weight ((+ 1 / 64) ⋆) (suc n))
+
+  -- Actual finite conserved row over the centred integer fibre. The
+  -- original path fold and the existing refinement theorem are reused;
+  -- no fresh tree or leaf count semantics is introduced.
+  module Conservation = Chart.At inputs
+
+  wordLeaf4 : ∀ {n} (w : Binary.BinaryWord (suc n)) p →
+    scaleC (weight ((+ 1 / 16) ⋆) (suc n)) (Rows.row4 (Chart.walk w p)) ≈C
+    scaleC (weight ((+ 1 / 16) ⋆) (suc n))
+      (Rows.row4 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n)))
+  wordLeaf4 {n} w p = subst
+    (λ a → scaleC (weight ((+ 1 / 16) ⋆) (suc n)) (Rows.row4 (Chart.walk a p)) ≈C
+      scaleC (weight ((+ 1 / 16) ⋆) (suc n))
+        (Rows.row4 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n))))
+    (Addr.uncenterCenter w) (leaf4 (Addr.center w) p)
+
+  wordLeaf6 : ∀ {n} (w : Binary.BinaryWord (suc n)) p →
+    scaleC (weight ((+ 1 / 64) ⋆) (suc n)) (Rows.row6 (Chart.walk w p)) ≈C
+    scaleC (weight ((+ 1 / 64) ⋆) (suc n))
+      (Rows.row6 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n)))
+  wordLeaf6 {n} w p = subst
+    (λ a → scaleC (weight ((+ 1 / 64) ⋆) (suc n)) (Rows.row6 (Chart.walk a p)) ≈C
+      scaleC (weight ((+ 1 / 64) ⋆) (suc n))
+        (Rows.row6 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n))))
+    (Addr.uncenterCenter w) (leaf6 (Addr.center w) p)
+
+  centeredConserved4 : ∀ n p →
+    Chart.fold (λ (w : Binary.BinaryWord (suc n)) →
+      scaleC (weight ((+ 1 / 16) ⋆) (suc n))
+        (Rows.row4 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n)))) ≈C Rows.row4 p
+  centeredConserved4 n p = complexTrans
+    (Chart.foldCong _ _ (λ w → complexSym (wordLeaf4 w p)))
+    (Conservation.conserved4 (suc n) p)
+
+  centeredConserved6 : ∀ n p →
+    Chart.fold (λ (w : Binary.BinaryWord (suc n)) →
+      scaleC (weight ((+ 1 / 64) ⋆) (suc n))
+        (Rows.row6 (scaledPoint p (Addr.integerRead (Addr.center w)) (suc n)))) ≈C Rows.row6 p
+  centeredConserved6 n p = complexTrans
+    (Chart.foldCong _ _ (λ w → complexSym (wordLeaf6 w p)))
+    (Conservation.conserved6 (suc n) p)
