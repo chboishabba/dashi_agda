@@ -5964,3 +5964,79 @@ Terminal stage 42. Remaining: source-specific admissibility
 and bounded intrinsic particular operator, frequency coverage,
 curved constraint/energy and iteration. No CI/native/PDE
 acceptance. Other six lanes unchanged.
+
+
+## 57. BR222 — invariant normal DAE split and bounded intrinsic particular lift
+
+Use C_t,K_t,C_n,K_n from BR219–220, L=K_n,
+Q=I-C_n L, A=-L C_t, D=Q C_t, q=lambda²=tau²+k².
+For axial tangential frequency verify
+A(A²-q I)(4 A²-q I)=0,
+D(4 A^4-q A²)=0, trace(4 A^4-q A²)=30 q².
+All are homogeneous polynomials in (tau,k) of degree at most
+five. Exact evaluation at tau=1,k=0,...,5 proves the
+coefficient identities by polynomial interpolation, hence
+all complex axial frequencies. Spatial wall rotations
+transport the result when the original SO(3) equivariance
+is invoked; this checker does not independently replay it.
+For q!=0 the distinct factors give the physical projector
+P=(4 A^4-q A²)/(3 q²), commuting with A, with rank10.
+D P=0. BR219 mixed identity gives K_t C_n=A,
+K_t D=A²-q I. If D w=0 then A² w=q w and P w=w,
+so ker D=im P and rank D=25. The algebraic part of any
+compatible solution is uniquely
+W_c=V Q f, V=-(4 A²+3 q I) K_t/(3 q²),
+since V D=I-P. The exact two signed sample checks confirm
+these identities and an independent selected-minor inverse
+V_selected D=I-P. Separate local rank probe at normalized
+tau=±i,k=1 found rank D=25 even at glancing, but P and V
+are singular there; no uniform oblique complement bound.
+
+Define P_±=(P ± A P/lambda)/2, Re lambda=r>0.
+For BR220-admissible smooth f (differential compatibility
+and admissible initial jets), a solution exists by BR220.
+Its physical components obey p_±'=±lambda p_±+P_± L f.
+Choose zero incoming endpoint components by subtracting
+the homogeneous physical solutions; equivalently set
+p_-(y)=int_0^y exp(-lambda(y-x)) P_- L f(x) dx,
+p_+(y)=-int_y^ell exp(-lambda(x-y)) P_+ L f(x) dx.
+Then W_part=V Q f+p_-+p_+ solves the full exterior system.
+This follows by comparison with the BR220 solution, not by
+assuming DAE compatibility for arbitrary ambient f.
+The homogeneous corrections satisfy C_n(±lambda) p+C_t p=0
+because D p=0 and C_t p=-C_n A p. No unstable exponential
+forward integration or whole-line extension is required.
+
+In fixed compatible norms, Young convolution gives
+||W_part||_L2 <= [||V Q||+(||P_- L||+||P_+ L||)/r]||f||_L2.
+Each endpoint trace is bounded by
+||V Q|| ||f(endpoint)||+
+(||P_- L||+||P_+ L||)/sqrt(2r) ||f||_L2.
+These are explicit finite-frequency bounds; they are not
+a sharp glancing-uniform estimate because P,V can grow.
+For smooth compatible source and corrected boundary datum
+in im T_ell (BR221), append homogeneous boundary correction;
+unique finite-interval solution follows from BR221 signed
+energy. The source-range requirement and actual nonlinear
+geometric admissibility remain open. The algebraic sector
+requires a source trace for the stated endpoint estimate.
+Weak regularity extension, frequency-uniform bounds and
+curved iteration still outstanding. Homogeneous jump energy
+bound from BR221 avoids charging the worst separate lift
+loss to the combined energy once existence holds.
+
+Actual local execution: independent original BR27 carrier and
+BR220 symbol construction, SymPy 1.14.0. Six interpolation
+nodes, two exact signed inverse cases and twelve manufactured
+affine-source diagnostics across signs, gamma=.5,2 and
+k=2,100,10000 (four normal points each). Max relative full
+exterior residual 3.673135185026573e-7; normal ODE residual
+4.454100081228186e-7, below declared 1e-5 tolerance. Numerical
+test uses subtraction of known affine endpoints, not direct
+quadrature or arbitrary unmanufactured source inversion.
+Polynomial projector cancellation at high k is visible.
+Two bounded executions passed; final local blob
+73613c14ba32cc5908d6576d70ee544dd8de8d44. Committed script
+uses original donor imports and minor cleanup, unrun.
+No CI/native/curved PDE acceptance. Other six lanes unchanged.
+Terminal stage 43.
