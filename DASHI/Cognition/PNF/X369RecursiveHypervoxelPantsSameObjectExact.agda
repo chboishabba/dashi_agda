@@ -20,6 +20,7 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Tower
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact as Pareto
 import DASHI.Core.FactorisationSpineCrosswalkExact as Factorisation
+import DASHI.Cognition.PNF.X369NativeNineStageThirteenChartExact as StageChart
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
 import DASHI.Reasoning.TypedHyperfabricPantsSignatureCompletenessExact as Match
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
@@ -184,6 +185,67 @@ module OriginalSourceAdmission
 
     sourceHistoryRetained : sourceDecode (sourceEncode x) ≡ x
     sourceHistoryRetained = sourceReopens x
+
+-- Concrete CHOSEN finite instantiation of the source packet; not
+-- merely a conditional source-family socket. The actual full H369
+-- nine-trit address PLUS four independently retained stage trits
+-- constructs an original Stage13 global source section and all pants
+-- local restrictions via existing donors.
+module NinePlusFourSourceSpecimen (Residual Index : Set) where
+  module P = SameSourcePacket Residual Index
+
+  nativeWithStageResidual :
+    (h : H.TernaryHyperformalPoint)
+    (lastFour : StageChart.StageFour) →
+    Residual → Index → P.Packet
+  nativeWithStageResidual h lastFour r k =
+    P.packet h
+      (StageChart.sourceCentralFromNinePlusFour
+        (H.fabricToNineTrits h) lastFour)
+      r k
+
+  nativeNineRecovered :
+    (h : H.TernaryHyperformalPoint)
+    (lastFour : StageChart.StageFour)
+    (r : Residual) (k : Index) →
+    StageChart.nativeNineFromCentral
+      (P.sourceCentral (nativeWithStageResidual h lastFour r k))
+    ≡ H.fabricToNineTrits h
+  nativeNineRecovered h lastFour r k =
+    StageChart.nineBidi (H.fabricToNineTrits h) lastFour
+
+  stageFourRecovered :
+    (h : H.TernaryHyperformalPoint)
+    (lastFour : StageChart.StageFour)
+    (r : Residual) (k : Index) →
+    StageChart.stageFourFromCentral
+      (P.sourceCentral (nativeWithStageResidual h lastFour r k))
+    ≡ lastFour
+  stageFourRecovered h lastFour r k =
+    StageChart.fourBidi (H.fabricToNineTrits h) lastFour
+
+  actualThirteenPantsRestrictions :
+    (h : H.TernaryHyperformalPoint)
+    (lastFour : StageChart.StageFour)
+    (r : Residual) (k : Index)
+    (axis : Atlas.StageAtlasZeroToEleven) →
+    Sheaf.restrictCentral
+      (Bridge13.pants13ToSourceCentral
+        (P.actualPants13 (nativeWithStageResidual h lastFour r k))) axis
+    ≡
+    P.originalLocalFamily
+      (nativeWithStageResidual h lastFour r k) axis
+  actualThirteenPantsRestrictions h lastFour r k axis =
+    P.everyLocalReopens (nativeWithStageResidual h lastFour r k) axis
+
+  fullNativeAndSourceRetained :
+    (h : H.TernaryHyperformalPoint)
+    (lastFour : StageChart.StageFour)
+    (r : Residual) (k : Index) →
+    P.reopen (P.sourceParts (nativeWithStageResidual h lastFour r k))
+    ≡ nativeWithStageResidual h lastFour r k
+  fullNativeAndSourceRetained h lastFour r k =
+    P.reopenExact (nativeWithStageResidual h lastFour r k)
 
 -- Actual depth-dependent radix refinement is a DIFFERENT constructor:
 -- rank and depth are distinct, not a fiat equality with nine channels.
