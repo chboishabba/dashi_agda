@@ -193,3 +193,37 @@ Source tests PR #5 e692b43/755533a: exact full 19683 address BIDI, original cent
 5. Still separate finite native 19683-point lattice, Leech minimal vectors 196560, Monster representation 196884 and original source E×2×W state. Never conflate the numerals or skip the independent E8→Leech lattice gluing theorem.
 
 Execution once source checkout available: python -m unittest tests.test_x369_full_native_e8_leech_chart and python -m scripts.check_x369_full_native_e8_leech_chart. Original native gfx803 acceptance separately under the existing immutable source stage. Kernel deferred at user's request.
+
+
+## 28 November — Recovered master 369/E8/Leech/LILA weld and concrete native Fourier source BIDI
+
+The user was correct that 369 to E8/Leech/LILA is ALREADY represented by existing donor bridge files. This P0 reconciliation MUST precede any new geometry implementation:
+
+| Existing actual master owner | Existing proof/interface | Actual limit |
+| --- | --- | --- |
+| Reasoning/LeechE8PriorStrataBidiExact | root E8 rank8, 240, E8 ambient 24/48/384 tiling | 8 punctured native 3²−1 points are NOT an E8 lattice, and 3 E8 blocks alone are NOT Leech |
+| Reasoning/Leech369TrialecticWaveLearningArchitectureBidiExact | original LILA 384=16×24=16×3×8, 3+6 directed faces, C2/C3 wave/trialectic | Irreducible semantic face, true original recurrent consumer and actual learned equivariance remain |
+| Reasoning/LeechPuncturedNineLearningBridgeExact, Moonshine/OggSSPP2BalancedTernaryPuncturedPlaneExact, C3FourierConjugationExact | real 9-point F3² puncture BIDI with four conjugate character pairs and separate centre | Intrinsic F3² plane differs from nine labelled Base369 world amplitudes unless an explicit chart is chosen |
+| Reasoning/E8StructuredFullWeylReceiptExact, Reasoning/LilaWeylGrokkingFibreMaxCutExact | full Weyl 240-root/696729600-order presentations and generic semantic action framework | Actual LILA checkpoint same-action and heldout generalisation not accepted |
+| Moonshine/MonsterThreeLocalE8LeechBridgeExact, Biology/ExceptionalLatticeGrokkingProtocolExact | rank-24 Leech and 196560 minimal vectors, E8 240×819 arithmetic | No glued Euclidean Leech-lattice coordinate/isometry from the arithmetic alone |
+| Foundations/UBP/LeechValidMoveSet, Foundations/TernaryGolay/CoxeterToddRoutesBoundary | certified lattice displacement and shadow interfaces, Leech→K12 fixed-sublattice route, Eisenstein Bc route | Explicit construction/lattice membership or actual automorphism receipts remain uninhabited; do not mark lattice dynamics proved |
+| Unified/LeechQualityGuardTOEBridgeExact, Reasoning/LeechSharedCanonicalOrbitHistoryExact | conditional quality-gated teacher erasure and canonical history inverse | Original 12-layer live trained model and verified guard prerequisites required |
+
+New same-object *chosen chart* source: LeechTransformer PR #5 scripts/check_x369_full_native_e8_leech_chart.py (b691311, c3f7859, 03eef539, 886aca6), tests/test_x369_full_native_e8_leech_chart.py (e692b43, 755533a, 52bdcab, 1896aab). Uses EXISTING models/punctured_nine_wave_prior.py SITES, scripts/certify_punctured_nine_exact.py symbolic B, models/e8_orbit_actions.py E8 root-preserving signed transformations and models/e8_root_prior.py E8 enumeration. Original full Base369 T3^3 interaction, T3^3 appraisalA, T3^3 appraisalB is represented as NINE ordered amplitudes assigned to the nine pointed Fourier sites by an EXPLICIT CHOSEN LABEL RECHART; this is not an intrinsic canonical equality of site geometry, interaction voxel origin or E8 lattice group law.
+
+For f∈R^9: w=B^T f, c=f_0, reopens f=B w+(c−(B w)_0)1. The exact 9×9 matrix identity B B^T+1(e0^T−e0^T B B^T)=I9 pays ALL original 19683 ternary points simultaneously (the same identity holds on every real f). Retained centre c is genuinely necessary; all-zero and all-one nine-site amplitude rows have the SAME wave8 and DIFFERENT centre. For the original 384D LILA block chart, 48 independent full-native nine-site packets map to wave384 plus 48 independent centre scalars, reopen BIDI exactly. 24D blocks = three ambient wave8 charts; THIS IS NOT an isometry to a 24D Leech lattice without gluing.
+
+Actual E8 norm2 root (1,1,0,0,0,0,0,0) applied as real wave8 Weyl reflection gives nonternary native inverse output at source f=(1,0,0,0,0,0,0,0,0): values 1/3±sqrt(3)/9. Rejection is rigorous *in the chosen real chart*: E8 isometry remains valid in wave8, but its IMAGE is outside the discrete source nine-trit subcarrier, so source-native closure needs a typed action domain and retained real residual. Exact four predefined E8 subgroup actions check: identity preserves all native ternary9; negative8 preserves chosen centre-zero slice, not ALL native ternary9; swap01 and flip01 fail full-domain closure. Do not extrapolate four checked generators to all E8 Weyl elements or Leech automorphisms. The chosen centre-zero amplitude is NOT the origin voxel of the original 27-point interaction.
+
+New formal adapter DASHI/Cognition/PNF/X369FullNativeE8LeechPriorWeldExact.agda (eb7c769/7140834/8263a5a) imports original native nine-trit BIDI plus E8 root-count and Leech-LILA dimension owners, defines a conditional chosen-wave encode/decode, transported finite native reopening, exact nonclosure implication and centre-erasure impossibility lemma, plus 384=48×8. Numeric Fourier and action-equality proofs reside in the existing SymPy owner, not a purported Agda kernel theorem. Kernel deferred at user request.
+
+Independent local SymPy 1.14 verification ran the exact B.T B, projector, E8 reflection nonclosure, 48-pack centre collision, and four action full/marked-domain criteria. The new committed script and tests have not been run in author environment; do not fabricate suite acceptance. No native GPU/torch, source checkpoint, physical metric, original LILA SOTA claim, CI, or neural model training is inferred.
+
+### The remaining coarse-to-fine terminals
+1. *Exact wave-native action admission*: parameterise original discrete subset preserving each chosen E8 or C3 action and prove actual image membership or export unavoidable real residual. Existing generated roots/full Weyl donors already own the action algebra.
+2. *Genuine E8-to-Leech gluing*: instantiate actual lattice points, Golay shadow/Construction A/Bc, source LeechValidMoveSet membership, and automorphism of the SAME 24D lattice. Source 196560/theta-coefficient arithmetic alone is insufficient. Search master/active PRs before pronouncing a named gluing lemma missing.
+3. *Original 384D learned network*: actual source hooks/attention FFN, C2×C3 router/expert/transitions and original LILA tokenizer/language consumer factorization through explicit centre/residual, not a shortcut via supplied target labels. Preserve pre-existing quality-gate and teacher-erasure obligations.
+4. *Full 369 typed source*: include independent appraisalA/B, 18-state 6×_3 9 zero pullback, six H07 cube faces, marked source 189 seeds, phase/time/version/Frobenius/physical residual. None is identified with E8 R^8 or a 96-float new-source history just because its COUNT matches part of 384.
+5. Empirical gfx803 precision/latency, neural original language accuracy and deferred Agda kernel remain separate admission gates.
+
+Original Leech-LILA attribution belongs to Anatolii Kornienko. Existing original mathematical authors remain credited in the source owners.
