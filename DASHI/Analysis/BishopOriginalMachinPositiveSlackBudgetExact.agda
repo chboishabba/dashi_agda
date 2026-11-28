@@ -77,7 +77,7 @@ slackBelowPowerFour n =
 -- BishopMachinCrossEnvelopeBishopOrderExact. No denominator supplied as
 -- a free theorem argument to the subsequent rational order.
 powerFourNonZero : (n : Nat) → NonZero (powerFour n)
-powerFourNonZero zero = _
+powerFourNonZero zero = NP.m^n≢0 4 0
 powerFourNonZero (suc n) =
   NP.m*n≢0 4 (powerFour n)
     {{_}} {{powerFourNonZero n}}
