@@ -113,6 +113,38 @@ def independent_phase_pieces(P,n,pay):
     return pieces,n-len(active),P.get((),0)%3
 
 
+def affine_axis_reduce(P,n,pay):
+    """Exact sum over a linear character axis x. If its coefficient
+    A(y) is affine, orthogonality imposes A(y)=0. For a nonconstant
+    A solve one actual pivot y_j and substitute it into B. This
+    removes two coordinates without branching, even in a connected
+    cubic carrier. Do not eliminate axes with quadratic coefficient."""
+    pay(1+n+sum(1+len(m) for m in P))
+    incident=[[] for _ in range(n)]
+    for m,a in P.items():
+        if not a%3:continue
+        for i in set(m):incident[i].append((m,a))
+    for i,terms in enumerate(incident):
+        pay(1+len(terms))
+        if not terms or any(m.count(i)!=1 or len(m)>2 for m,a in terms):continue
+        A={tuple(j for j in m if j!=i):a%3 for m,a in terms}
+        pivots=[m[0] for m,a in A.items() if m and a]
+        if not pivots:
+            # Nonzero constant linear character sums to zero.
+            if A.get((),0):return (0,0,{})
+            continue
+        j=min(pivots);inv=A[(j,)] # a^{-1}=a for nonzero a in F3
+        free=[k for k in range(n) if k not in (i,j)]
+        pos={k:h for h,k in enumerate(free)}
+        forms=[{} for _ in range(n)]
+        for k in free:forms[k]={(pos[k],):1}
+        forms[j]=linear(-inv*A.get((),0),tuple(-inv*A.get((k,),0) for k in free))
+        B={m:a for m,a in P.items() if i not in m}
+        pay(1+n+len(B))
+        return (3,n-2,pull_cubic(B,forms,pay))
+    return None
+
+
 def conditional_gauss(P,n,pay,budget):
     """Branch only on a coordinate hitting actual degree-three terms.
     Quadratic residuals go to the existing exact Gauss compiler.
@@ -130,6 +162,11 @@ def conditional_gauss(P,n,pay,budget):
             z=mul(z,conditional_gauss(Q,k,pay,budget))
             if z==Z:break # exact zero factor, not an unvisited refusal
         return z
+    reduced=affine_axis_reduce(P,n,pay)
+    if reduced is not None:
+        factor,k,Q=reduced
+        if factor==0:return Z
+        return mul((factor,0),conditional_gauss(Q,k,pay,budget))
     hits={i:sum(i in m for m in hard) for i in set().union(*map(set,hard))}
     j=min(hits,key=lambda i:(-hits[i],i))
     z=Z
