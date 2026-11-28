@@ -1,5 +1,9 @@
 # C3 / 369 Hopfion, ABHA and torus-knot prior-art ledger — 2026-11-25
 
+> **Canonical physical closure roadmap (28 Nov 2026):**
+> [Hopf/369 Einstein–Israel geometry-forward eight-weld reconciliation](hopf369-geometry-forward-closure-reconciled-20261128.md).
+> This historical document preserves all P0/BR implementations and attribution. The shorter roadmap controls exact outstanding physical lemmas, source ownership, master/F8 donor status and non-promotion. Do not interpret older “outstanding” lists without its reconciliation.
+>
 ## Source ownership and evidence levels
 The supplied @vortex_math screenshot reproduces Kobayashi–Nitta Figure 4 (arXiv:1304.6021 v2 PDF p4), including panel labels, green n3=0 and blue n1=-0.97 isosurfaces. Original source https://arxiv.org/pdf/1304.6021 ; first submission 2013-04-22 https://arxiv.org/abs/1304.6021 ; DOI 10.1016/j.physletb.2013.12.002. PDF pp4–5 visually inspected. The authors solve a classical extended Faddeev–Skyrme model numerically; no quark detection. Personal priority investigation retired by user direction; original scientific and independent Rodin/ABHA source records remain in scope.
 
