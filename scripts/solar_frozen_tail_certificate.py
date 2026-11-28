@@ -15,6 +15,8 @@ def tail_stage_matrix(H,dt,receipt):
     if d!=H.cols or h<=0: raise ValueError('invalid frozen tail generator')
     T=S.eye(d); accounted=S.zeros(d)
     for item in receipt['events']:
+        if item.get('source_roots') or item.get('work_J')!=0.:
+            raise ValueError('tail receipt contains forcing')
         ix=item['coordinates']; a=H.extract(ix,ix)
         if item['face_id'] is not None:
             if len(ix)!=2: raise ValueError('invalid indexed face')
