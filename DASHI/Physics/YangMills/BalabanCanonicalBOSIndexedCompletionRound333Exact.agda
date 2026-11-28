@@ -24,8 +24,6 @@ module DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge as Sequential
-import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationWeldRound92Exact as RationalNS
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
@@ -34,15 +32,11 @@ import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Ex
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as R311
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact as R330
+import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteS
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact as R332
 import DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact as R316
-
-RationalSequentialOrderClosure : Set₁
-RationalSequentialOrderClosure =
-  Sequential.SequentialOrderClosure RationalNS.rationalAbsorptionArithmetic
 
 record CanonicalBOSIndexedApplication
     {Measure TestObservable PhysicalObservable Loop Translation Rotation : Set}
@@ -66,9 +60,9 @@ record CanonicalBOSIndexedApplication
       R315.PairwiseWilsonCylinderPresentation {Loop = Loop}
         (R332.asR310PairwiseEuclideanTimeSemantics assembly euclideanSemantics)
 
-    sequentialClosure : RationalSequentialOrderClosure
+    sequentialClosure : RouteS.RationalSequentialOrderClosure
     convergenceWeld :
-      R330.T5SequentialOrderClosureWeld dataSet sequentialClosure
+      RouteS.T5SequentialOrderClosureWeld dataSet sequentialClosure
 
     transferCoordinate :
       R331.OSIndexedTransferCoordinate reconstruction Energy
@@ -132,7 +126,7 @@ orderClosure :
       dataSet extension finite assembly reconstruction Energy) →
   R310.RationalUpperOrderClosure dataSet
 orderClosure application =
-  R330.toR310RationalUpperOrderClosure
+  RouteS.toR310RationalUpperOrderClosure
     (sequentialClosure application) (convergenceWeld application)
 
 pairwisePresentation :

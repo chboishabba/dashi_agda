@@ -4,11 +4,13 @@ module DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact as R330
+import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge as Sequential
+import DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationWeldRound92Exact as RationalNS
 import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342Exact as R342
 
 ------------------------------------------------------------------------
@@ -35,6 +37,42 @@ import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 -- inhabitant is supplied.
 ------------------------------------------------------------------------
 
+RationalSequentialOrderClosure : Set₁
+RationalSequentialOrderClosure =
+  Sequential.SequentialOrderClosure RationalNS.rationalAbsorptionArithmetic
+
+record T5SequentialOrderClosureWeld
+    {Measure TestObservable : Set}
+    (dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ)
+    (closure : RationalSequentialOrderClosure) : Set₁ where
+  field
+    sameConvergence : ∀ sequence limit →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence limit
+      ≡ Sequential.Converges closure sequence limit
+
+open T5SequentialOrderClosureWeld public
+
+toR310RationalUpperOrderClosure :
+  ∀ {Measure TestObservable}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
+  (closure : RationalSequentialOrderClosure) →
+  T5SequentialOrderClosureWeld dataSet closure →
+  R310.RationalUpperOrderClosure dataSet
+toR310RationalUpperOrderClosure {dataSet = dataSet} closure weld = record
+  { upperClosed =
+      λ sequence target upper sequenceConverges sequenceUpper →
+        Sequential.orderClosed closure
+          (subst (λ proposition → proposition)
+            (sameConvergence weld sequence target)
+            sequenceConverges)
+          (subst (λ proposition → proposition)
+            (sameConvergence weld (λ _ → upper) upper)
+            (Gram.constantConverges (Gram.scalarConvergence dataSet) upper))
+          sequenceUpper
+  }
+
+------------------------------------------------------------------------
+
 terminalSelectedLimitClosure :
   ∀ {Measure TestObservable}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ} →
@@ -53,12 +91,12 @@ r310UpperClosureToTerminalSelectedClosure closure =
 r330PackagingToTerminalSelectedClosure :
   ∀ {Measure TestObservable}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    (closure : R330.RationalSequentialOrderClosure) →
-  R330.T5SequentialOrderClosureWeld dataSet closure →
+    (closure : RationalSequentialOrderClosure) →
+  T5SequentialOrderClosureWeld dataSet closure →
   R342.SelectedLimitUpperClosure {dataSet = dataSet}
 r330PackagingToTerminalSelectedClosure closure weld =
   r310UpperClosureToTerminalSelectedClosure
-    (R330.toR310RationalUpperOrderClosure closure weld)
+    (toR310RationalUpperOrderClosure closure weld)
 
 ------------------------------------------------------------------------
 -- Pareto classification.

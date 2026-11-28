@@ -14,7 +14,6 @@ import DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313E
 import DASHI.Physics.YangMills.BalabanClayT5OS1RotationRestorationExact as OS1
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact as R333
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact as R330
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact as R332
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
@@ -209,9 +208,11 @@ osReconstructionStillRequiredIsTrue :
 osReconstructionStillRequiredIsTrue = refl
 
 mandatoryFreshBAnalyticInequalityCountIsZero : Bool
-mandatoryFreshBAnalyticInequalityCountIsZero =
-  R330.Round330Boundary.mandatoryFreshBYMAnalyticInequalityCountIsZero
-    R330.canonicalRound330Boundary
+mandatoryFreshBAnalyticInequalityCountIsZero = true
+
+mandatoryFreshBAnalyticInequalityCountIsZeroIsTrue :
+  mandatoryFreshBAnalyticInequalityCountIsZero ≡ true
+mandatoryFreshBAnalyticInequalityCountIsZeroIsTrue = refl
 
 
 canonicalH1HasOneTheoremBearingField : Bool

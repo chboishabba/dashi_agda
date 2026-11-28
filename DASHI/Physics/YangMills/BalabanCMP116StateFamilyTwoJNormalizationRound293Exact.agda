@@ -73,25 +73,25 @@ asRound290Presentation :
   R290.TwoPhysicalJInsertionSourcePresentation
     Scale Volume Root State Observable SourceDirection
 asRound290Presentation presentation = record
-  { R290.TwoPhysicalJInsertionSourcePresentation.shellData = shellData presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.scaleOf = scaleOf presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.volumeOf = volumeOf presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.physicalDistance =
+  { shellData = shellData presentation
+  ; scaleOf = scaleOf presentation
+  ; volumeOf = volumeOf presentation
+  ; physicalDistance =
       physicalDistance presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.connectingRoot =
+  ; connectingRoot =
       connectingRoot presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.sourceDirection =
+  ; sourceDirection =
       Cumulant.sourceDirectionOf (meaning presentation)
-  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogSourceDerivativeMagnitude =
+  ; secondLogSourceDerivativeMagnitude =
       λ state leftDirection rightDirection →
         Cumulant.literalMixedSecondLogDerivative (meaning presentation)
           leftDirection rightDirection state
-  ; R290.TwoPhysicalJInsertionSourcePresentation.connectedCovarianceMagnitude =
+  ; connectedCovarianceMagnitude =
       λ state left right →
         Cumulant.connectedCovariance (algebra presentation) left right state
-  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogDerivativeIsConnectedCovariance =
+  ; secondLogDerivativeIsConnectedCovariance =
       pointwiseMixedLogDerivativeIsConnectedCovariance presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
+  ; differentiatedSourceBoundOnSelectedDirections =
       differentiatedSourceBoundOnSelectedDirections presentation
   }
 
