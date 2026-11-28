@@ -37,8 +37,10 @@ def fixture():
         kinetics=q,heat_capacity_J_K=np.ones(n).tolist(),
         cooling_W_K=(np.ones(n)*.2).tolist(),
         heater_efficiency=.8,auxiliary_J=0.,
-        restoration_steps=1,return_rtol=1e-6,
-        return_atol=[1e-3,1e-3,1e-3,1e-3],
+        restoration_steps=1,return_rtol=1e-12,
+        # Tight return tolerances: distinguish a small residual from genuine
+        # original restoration; no artificial 1e-3 absolute field allowance.
+        return_atol=[1e-12,1e-8,1e-8,1e-12],
         fixed_horizon=True,retain_history=True)
     dheat=np.zeros((2,n));dheat[:,0]=[.2,-.1]
     dload=np.zeros(ne);dload[0]=.08
