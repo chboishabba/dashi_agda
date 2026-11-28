@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-28",
+  "status": "PASS",
+  "scope": "Normalized four-phase discrete reciprocal three-oscillator chain, fixed independent harmonic source, bond range [0,1]; not physical HF/LF or actual actuator admission",
+  "runtime": {
+    "sympy": "1.14.0",
+    "timeout_per_gate_s": 90,
+    "OPENBLAS_NUM_THREADS": 1
+  },
+  "verified_executed_blobs": {
+    "solar_reciprocal_periodic_switch.py": "bfb5035c8c30c07b9acb3b7127efa7945aae311e",
+    "solar_reciprocal_continuous_inverse.py": "9a55d5b2b57d81a4573314b4531134424d404a79",
+    "solar_reciprocal_global_gap.py": "410a0e8a51f136ccdf2ad9d41181f8c3389c3be7"
+  },
+  "results": {
+    "passive_target_reopened": true,
+    "ideal_center_excluded_sectors": 25,
+    "all_continuous_sign_sectors_separated": 256,
+    "squared_distance_lower": "1/864",
+    "ideal_work_upper": "179/216",
+    "stationary_passive": "4/53",
+    "binary_recovery_witness": {
+      "eta": "3/10",
+      "monodromy_power": 1,
+      "frobenius_norm_squared_approx": 0.3041586156424199,
+      "export": "869/10443",
+      "buffer_capacity": "1079/10443",
+      "combined_output": "2803/31329"
+    },
+    "interior_witness": {
+      "schedule": [
+        [
+          "1/100",
+          "99/100"
+        ],
+        [
+          "1/100",
+          "99/100"
+        ],
+        [
+          "1/100",
+          "99/100"
+        ],
+        [
+          "99/100",
+          "1/100"
+        ]
+      ],
+      "eta": "3/10",
+      "contraction_certified": true,
+      "buffer_restored": true,
+      "combined_output_approx": 0.0895138582351186,
+      "gain_exact": "737594590105177193083581041/52527145660036449970176649216",
+      "break_even_recovery_approx": 0.25845248371209567
+    }
+  },
+  "audit": [
+    "SymPy simplex returned a candidate violating original inequalities; replaced with exact rational Fourier–Motzkin elimination and checked witness inequalities.",
+    "Initial local/remote source mismatch was print-only z.get('excluded') versus z['excluded']; matched and reran exact committed bytes.",
+    "Full projection timed out at 20s tool limit; replaced by valid selective affine separator retaining strongest inequality at centre for each hidden normal, exact 256 sectors PASS."
+  ],
+  "limitations": [
+    "Global bound not claimed sharp; continuous paid-work global optimum unresolved.",
+    "Stable monodromy concerns prescribed mechanical switching only, not physical controller or recovery buffer perturbation dynamics.",
+    "Buffer is ideal scalar accounting with assumed recovery fraction, not a physical impedance/force actuator.",
+    "Passive comparator fixed topology, load, clock and bond range, not all eligible passive multiport networks.",
+    "No native Maxwell geometry, nonlinear constitutive realization, measured source, physical HF/LF coupling, CI or kernel admission."
+  ]
+}
