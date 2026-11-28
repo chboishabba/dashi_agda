@@ -33,7 +33,7 @@ def source():
     t=s.symbols('t')
     def sym(seed):
         return s.Matrix(5,5,lambda a,b:
-            s.Rational(((a+3)*(b+4)+seed)%17-8,9))
+            s.Rational(((min(a,b)+3)*(max(a,b)+4)+seed)%17-8,9))
     p,m=sym(0),sym(1)
     px,mx=sym(2),sym(3)
     V=s.Matrix(4,4,lambda i,j:s.Rational(i+j+2,7))
@@ -81,10 +81,14 @@ def source():
     # Independent five-component gauge conormal, retained normal mode.
     gauge=[s.Matrix([s.Rational((i+2)*(k+1)%11-5,7)
                      for i in range(5)]) for k in range(6)]
+    A=D/N**2;B=A*v;C=D*s.eye(4)-A*v*v.T
+    Gi=(-s.ones(1,1)/N**2).row_join((v/N**2).T)
+    Gi=Gi.col_join((v/N**2).row_join(s.eye(4)-v*v.T/N**2))
     for a in range(5):
-        q0=flux(D,N,v,h,df,gauge[0][a],
-                s.Matrix([gauge[i+1][a] for i in range(4)]))
-        assert q0==s.simplify(q0)
+        first=s.Matrix([gauge[i][a] for i in range(5)])
+        q0=flux(D,N,v,h,df,first[0],first[1:5,0])
+        direct=(D*df.T*Gi*first)[0]
+        assert s.cancel(q0-direct)==0
     print('PASS BR50 original 10-row Israel work, 15/5 moving conormal and signed nonzero graph residual')
 
 def main():
