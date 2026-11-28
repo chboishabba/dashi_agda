@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–58 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–63 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -51,8 +51,19 @@ PARTS={
     ("BR56.energy","check_hopf369_br56_tame_graph_energy.py",("--part","energy")),
     ("BR56.refusal","check_hopf369_br56_tame_graph_energy.py",("--part","refusal")),
     ("BR57.constants","check_hopf369_br57_curvature_normal_inverse.py",("--part","constants")),
+    ("BR59.flat","check_hopf369_br59_full_moving_israel_geometry.py",("--part","flat")),
+    ("BR59.warped","check_hopf369_br59_full_moving_israel_geometry.py",("--part","warped")),
+    ("BR59.shift","check_hopf369_br59_full_moving_israel_geometry.py",("--part","shift")),
+    ("BR60.shape_negative","check_hopf369_br60_moving_israel_frechet.py",("--part","negative")),
+    ("BR61.junction","check_hopf369_br61_two_face_nonlinear_israel.py",("--part","rows")),
+    ("BR61.unmatched","check_hopf369_br61_two_face_nonlinear_israel.py",("--part","refusal")),
+    ("BR62.codazzi","check_hopf369_br62_israel_codazzi_rank.py",()),
+    ("BR63.eta","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","reference")),
+    ("BR63.moving","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","moving")),
+    ("BR63.null","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","source")),
   ],
   "heavy":[
+    *[(f"BR60.K.{i}","check_hopf369_br60_moving_israel_frechet.py",("--part","component","--index",str(i))) for i in range(10)],
     ("BR52.metric","check_hopf369_br52_all_order_material_flux.py",("--part","metric")),
     ("BR52.gauge","check_hopf369_br52_all_order_material_flux.py",("--part","gauge")),
     ("BR53.physical","check_hopf369_br53_physical_bianchi_factor.py",("--part","physical")),
@@ -148,7 +159,7 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63"}]
     else:
         plans=PARTS[args.part]
     outcome={}
