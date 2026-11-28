@@ -1,6 +1,6 @@
 {
   "date": "2026-11-28",
-  "scope": "Local Python in /tmp/pnp33, timeout 90 per campaign. Two final primary executable blobs matched GitHub readback; copied prior selected dependencies from /tmp/pnp32. No full checkout parity. Git DNS failed; agda, lake and lean --version all command not found. No CI.",
+  "scope": "Local Python in /tmp/pnp33, timeout 90 per campaign. Three final primary executable blobs matched GitHub readback; copied prior selected dependencies from /tmp/pnp32. No full checkout parity. Git DNS failed; agda, lake and lean --version all command not found. No CI.",
   "runs": [
     {
       "file": "scripts/check_pnp_prime_power_incidence.py",
@@ -85,6 +85,42 @@
         "prior_default_unchanged": true
       },
       "zero_cap_controls": 2
+    },
+    {
+      "file": "scripts/check_pnp_incidence_line.py",
+      "blob": "a390622932d32a9ec08c970503ca6f0b33fde819",
+      "seconds": 1,
+      "joint_counterexample": {
+        "columns": 8,
+        "rows": 9,
+        "pair_supports": 21,
+        "signed_integer_solution": [
+          -1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "fractional_solution": [
+          "1/5",
+          "3/5",
+          "1/5",
+          "1/5",
+          "2/5",
+          "2/5",
+          "3/5",
+          "2/5"
+        ],
+        "boolean_free_dimension": 1,
+        "logical_used": 2294
+      },
+      "independent_random": 256,
+      "completed": 159,
+      "unknown": 97,
+      "refusal": 1
     }
   ],
   "limits": [
@@ -93,6 +129,7 @@
     "Complete local XOR pattern recognition bounded arity <=4. Tseitin cycle plus matching graph not asserted expander or lower-bound family.",
     "Random/planted threshold-density diagnostics not known-hard instances; larger unplanted unknown truth not enumerated; planted witnesses known to test only. No solver lower bound.",
     "Selected chart score not minimum width or global irreducibility; declared reservation not physical bit clock; prior exact completion may require replay of producer rather than independent short proof.",
-    "No universal Clay endpoint established."
+    "No universal Clay endpoint established.",
+    "Affine line rational RREF checks original row combinations; at most one free coordinate solved, higher nullity UNKNOWN. Rational bit cost not fully metered. Joint example is not a lower bound on arbitrary exact-cover computation."
   ]
 }
