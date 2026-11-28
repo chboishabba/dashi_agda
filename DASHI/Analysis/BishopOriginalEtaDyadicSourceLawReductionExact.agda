@@ -19,19 +19,28 @@ module DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact where
 -- Then P2's ORIGINAL finite eta/zeta theorem follows at EVERY cutoff,
 -- with scale literally the original source term a_s(1)=expC(-s*L2).
 --
--- IMPORTANT: (L) and (E) are the remaining analytic LEAVES and are
--- explicit arguments, NOT record instances, postulates, or proofs.
--- This does NOT establish either leaf or compact-uniform eta
--- convergence; it makes the original dyadic maximum cut exact.
+-- The generic compiler keeps (L) and (E) explicit. The native mesh
+-- specialization below supplies (L) from existing Bishop exp/log laws.
+-- Actual complex exp addition and compact-uniform eta convergence remain.
 --
 -- Source-written, original pinned Agda 2.9 kernel acceptance pending.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Nat.Properties as NatP
+open import Data.Empty using (⊥)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as BishopReal
 import RealProperties as BishopP
+
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpProduct
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpOrder
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NatLog
+import DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact as Mesh
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as Analytic
 import DASHI.Analysis.BishopRiemannAnalyticSetoidExpReuseExact as ExpBridge
@@ -124,6 +133,79 @@ originalEtaDyadicScaleFromLogAndExp T logNat s logLaw expLaw k =
       T realSame imaginarySame)
     (expLaw first second)
 
+-- The original mesh already pays exp_B(log(n+1)) = n+1.
+-- Recover injectivity constructively from the existing positive-side
+-- strict bound and all-real exponential product; no trichotomy.
+nativeExpDifferenceIsOne :
+  (x y : BishopReal.ℝ) →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  BishopReal._≃_ (Exp.bishopExp (BishopReal._-_ y x)) BishopReal.1ℝ
+nativeExpDifferenceIsOne x y same =
+  BishopP.≃-trans (ExpProduct.bishopExpAdd y (BishopReal.- x))
+    (BishopP.≃-trans
+      (BishopP.*-cong (BishopP.≃-symm same) BishopP.≃-refl)
+      (ExpProduct.bishopExpTimesNegativeIsOne x))
+
+nativeExpEqualExcludesLess :
+  (x y : BishopReal.ℝ) →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  BishopReal._<_ x y → ⊥
+nativeExpEqualExcludesLess x y same less =
+  BishopP.<-irrefl
+    (BishopP.≃-symm (nativeExpDifferenceIsOne x y same))
+    (ExpOrder.bishopExpStrictlyAboveOneOnPositive
+      (BishopP.x<y⇒0<y-x x y less))
+
+nativeExpReflectsEquality :
+  (x y : BishopReal.ℝ) →
+  BishopReal._≃_ (Exp.bishopExp x) (Exp.bishopExp y) →
+  BishopReal._≃_ x y
+nativeExpReflectsEquality x y same =
+  BishopP.≤-antisym
+    (BishopP.≮⇒≥
+      (nativeExpEqualExcludesLess y x (BishopP.≃-symm same)))
+    (BishopP.≮⇒≥ (nativeExpEqualExcludesLess x y same))
+
+canonicalNatLogExpInverse :
+  (n : Nat) →
+  BishopReal._≃_
+    (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
+    (NatReal.natReal (suc n))
+canonicalNatLogExpInverse =
+  NatLog.sourceCanonicalNatLogAllIndicesExpInverse
+    Mesh.originalBishopNegativeLogExponentialGap
+
+dyadicNatIndex :
+  (k : Nat) → suc (suc (Eta.twice k)) ≡ 2 * suc k
+dyadicNatIndex k
+  rewrite NatP.+-identityʳ (suc k) | NatP.+-suc k k = refl
+
+canonicalDyadicNatValue :
+  (k : Nat) →
+  BishopReal._≃_
+    (NatReal.natReal (suc (suc (Eta.twice k))))
+    (BishopReal._*_ (NatReal.natReal 2) (NatReal.natReal (suc k)))
+canonicalDyadicNatValue k rewrite dyadicNatIndex k =
+  NatReal.natRealMul 2 (suc k)
+
+-- The actual log leaf of the existing finite eta compiler.
+canonicalDyadicNatLogFromMesh :
+  OriginalDyadicNatLogLaw Terms.sourceCanonicalNatLogCandidate
+canonicalDyadicNatLogFromMesh k =
+  nativeExpReflectsEquality _ _
+    (BishopP.≃-trans
+      (canonicalNatLogExpInverse (suc (Eta.twice k)))
+      (BishopP.≃-trans
+        (canonicalDyadicNatValue k)
+        (BishopP.≃-trans
+          (BishopP.*-cong
+            (BishopP.≃-symm (canonicalNatLogExpInverse (suc zero)))
+            (BishopP.≃-symm (canonicalNatLogExpInverse k)))
+          (BishopP.≃-symm
+            (ExpProduct.bishopExpAdd
+              (Terms.sourceCanonicalNatLogCandidate (suc zero))
+              (Terms.sourceCanonicalNatLogCandidate k))))))
+
 -- The selected Round11 Machin/Bishop eta source is the SAME object
 -- already used in BishopOriginalDirichletEtaFinitePairingExact.
 -- There is no new analytic family, witness function or source scale.
@@ -168,3 +250,13 @@ module OriginalRound11
     Finite.actualOriginalRound11EtaFiniteScaleBridge
       s (Selected.sourceTerms s (suc zero))
       (originalRound11DyadicScaleFromTwoLaws s logLaw expLaw) n
+
+  -- No remaining Nat-log premise: only the actual complex exp law.
+  originalRound11DyadicScaleFromExpLaw :
+    (s : Analytic.BishopComplex) →
+    OriginalBishopAnalyticExpAddLaw T →
+    Scale.OriginalDyadicSourceScale
+      (Selected.sourceTerms s)
+      (Selected.sourceTerms s (suc zero))
+  originalRound11DyadicScaleFromExpLaw s =
+    originalRound11DyadicScaleFromTwoLaws s canonicalDyadicNatLogFromMesh
