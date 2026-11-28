@@ -122,3 +122,7 @@ module Original (inputs : Round11.BishopCutset) where
     -- the cusp limit into all-point diagonal/slice identities.
     -- That would then supply the existing actual CM root/Hecke
     -- signed reciprocal two-jet consumers without redefining j or π.
+
+-- Concrete source configuration, with no external elementary cutset.
+import DASHI.Foundations.BishopConcreteElementaryCutsetExact as Concrete
+module ConcreteOriginal = Original Concrete.concreteCutset
