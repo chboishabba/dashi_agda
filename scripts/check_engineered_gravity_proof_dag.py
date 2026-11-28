@@ -32,13 +32,21 @@ def audit(m,repo=None):
         assert w["checker"].startswith("scripts/") and w["checker"].endswith(".py"),label
         assert w["scope"] and w["source_equation"],label
         assert w["physical_paid"] is False,label
-        if "external_checker_pr" in w:assert int(w["external_checker_pr"])>0
+        for name in ("source_git_blob_sha1","checker_git_blob_sha1"):
+            assert len(w[name])==40 and all(t in "0123456789abcdef" for t in w[name]),(label,name)
+        if "external_checker_pr" in w:
+            assert int(w["external_checker_pr"])>0 and len(w["external_checker_head"])==40
         if repo is not None:
-            for key in ("source_owner","checker"):
+            for key,pin in (("source_owner","source_git_blob_sha1"),("checker","checker_git_blob_sha1")):
                 if key=="checker" and "external_checker_pr" in w:continue
-                # A donor may be absent on this PR; don't silently pay it.
-                if not (repo/w[key]).is_file():
+                f=repo/w[key]
+                if not f.is_file():
                     results[w["lanes"][0]].setdefault("missing_w1_sources",[]).append(w[key])
+                    continue
+                b=f.read_bytes()
+                actual=hashlib.sha1(("blob "+str(len(b))+"\\0").encode()+b).hexdigest()
+                if actual!=w[pin]:
+                    results[w["lanes"][0]].setdefault("mismatched_w1_sources",[]).append(w[key])
     return results
 
 def main():
@@ -70,7 +78,7 @@ def main():
                     "source_sha256":hashlib.sha256(f.read_bytes()).hexdigest(),
                     "output_sha256":hashlib.sha256((z.stdout+z.stderr).encode()).hexdigest()}
             except subprocess.TimeoutExpired:checks[path]={"status":"TIMEOUT"}
-    status="BLOCKED" if repo and any("MISSING" in z["owners"].values() or z.get("missing_w1_sources") for z in result.values()) else "INVENTORY_ONLY"
+    status="BLOCKED" if repo and any("MISSING" in z["owners"].values() or z.get("missing_w1_sources") or z.get("mismatched_w1_sources") for z in result.values()) else "INVENTORY_ONLY"
     payload={"status":status,"lane_count":len(result),"lanes":result,"owner_checks":checks,
              "known_unpaid_count":sum(len(x["unpaid"]) for x in result.values()),
              "scope":"Source-qualified bookkeeping, not native or physical certification"}
