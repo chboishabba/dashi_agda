@@ -269,6 +269,8 @@ PARTS["terminal"] += [("BR294.parity7","check_hopf369_br294_parity.py",()),("BR2
 
 PARTS["terminal"] += [(f"BR295.cmc{n}","check_hopf369_br295_cmc_lift.py",("--n",str(n))+(("--lift",) if n%2 else ())) for n in (6,7,8,9)]
 
+PARTS["terminal"] += [(f"BR296.history{n}","check_hopf369_br296_cmc_history.py",("--n",str(n))) for n in (6,7,8,9)]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
