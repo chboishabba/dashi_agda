@@ -36,8 +36,8 @@ def ratio(r):
 def algebra():
     r=s.symbols('r',positive=True)
     q4=r**4/(1+4*r*r)
-    assert s.factor(q4-r*r/5)==r*r*(r*r-1)/(5*(1+4*r*r))
-    assert s.factor(r*r/4-q4)==r*r/(4*(1+4*r*r))
+    assert s.cancel(q4-r*r/5-r*r*(r*r-1)/(5*(1+4*r*r)))==0
+    assert s.cancel(r*r/4-q4-r*r/(4*(1+4*r*r)))==0
     # Q_spatial>=1 for r>=3, so the BR37 max selects this ray.
     assert ratio(3)[1]>1
     print('PASS BR82 exact damped glancing Q^4 sandwich and no characteristic root division')
