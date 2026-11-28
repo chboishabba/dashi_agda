@@ -15,6 +15,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as L
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as C
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCodeExact as Code
 
 record Rule : Set where
   constructor rule
@@ -80,6 +81,14 @@ module Actual {cost : PR.PolynomialCostModel Cook.BooleanFormula}
   normalizedFromDecoded :
     ∀ rs → map normalizeRule (E.encodeRules rs) ≡ map originalRule rs
   normalizedFromDecoded = normalizeList
+
+  actualRuleOrder : IR.rules actualIR ≡ map originalRule (L.rules P.D.concrete)
+  actualRuleOrder = trans
+    (normalizeList (Code.decodeProgramRules P.D.concrete
+      (Candidate.candidateStateCoverage standard) (Candidate.candidateSymbolCoverage standard)
+      (Candidate.candidateProgramBits standard)))
+    (cong (map originalRule) (Code.decodeStaticProgramRules P.D.concrete
+      (Candidate.candidateStateCoverage standard) (Candidate.candidateSymbolCoverage standard)))
 
   originalBlank : D.digit (L.blank P.D.concrete) ≡ zero
   originalBlank = D.blankZero
