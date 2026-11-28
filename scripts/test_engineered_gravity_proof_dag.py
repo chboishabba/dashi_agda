@@ -19,7 +19,7 @@ def main():
         assert len(accepted["owners"][owner])==64 and accepted["status"]=="OPEN"
         # A standalone mathematical fixture must NOT match the pinned original owner.
         assert owner in accepted.get("mismatched_w1_sources",[])
-    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob","w2_physical_promotion","w2_wrong_source_pin","w2_flux_promotion","w2_flux_bad_blob"):
+    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob","w2_physical_promotion","w2_wrong_source_pin","w2_flux_promotion","w2_flux_bad_blob","w2_mass_flux_promotion","w2_wall_frame_bad_pin","w2_constraint_family_bad_lane"):
         m=copy.deepcopy(original)
         if which=="fake_stage":m["lanes"]["A_shielding"]["unpaid_stages"].append("PROMOTED")
         elif which=="fake_lane":m["lanes"]["Fake_closure"]={}
@@ -31,10 +31,13 @@ def main():
         elif which=="w2_physical_promotion":m["w2_boundary_packets"]["moving_tov_timelike"]["physical_paid"]=True
         elif which=="w2_wrong_source_pin":m["w2_boundary_packets"]["three_source_reverse"]["checker_git_blob_sha1"]="bad-pin"
         elif which=="w2_flux_promotion":m["w2_boundary_packets"]["dynamic_tov_flux_israel"]["physical_paid"]=True
-        else:m["w2_boundary_packets"]["dynamic_tov_flux_israel"]["checker_git_blob_sha1"]="bad-pin"
+        elif which=="w2_flux_bad_blob":m["w2_boundary_packets"]["dynamic_tov_flux_israel"]["checker_git_blob_sha1"]="bad-pin"
+        elif which=="w2_mass_flux_promotion":m["w2_boundary_packets"]["mass_flux_surface"]["physical_paid"]=True
+        elif which=="w2_wall_frame_bad_pin":m["w2_boundary_packets"]["wall_frame_stress_inverse"]["checker_git_blob_sha1"]="bad-pin"
+        else:m["w2_boundary_packets"]["moving_constraint_family"]["lanes"].append("false_physical_lane")
         try:audit(m)
         except (AssertionError,KeyError):pass
         else:raise AssertionError("admitted "+which)
-    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 11 malformed-claim controls")
+    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 14 malformed-claim controls")
 
 if __name__=="__main__":main()
