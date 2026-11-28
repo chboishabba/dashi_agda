@@ -479,3 +479,8 @@ Retain original mathematical attribution, especially JMD finite algebra/action a
 ## Section 17 and 17a cross-programme source-state update
 
 Actual BSD split sign rows and first root cocycle difference (Lean #124 6dea0c83e043), Hodge canonical source/pulled localization equivalence and finite/proper localized projection (f7017b2748cd), NS mean and transverse force/tail (#123 d04a2fff44d8), same-run PNP support criterion attached to separated_epoch and survives_epoch (#119 f5b3c14e68db), actual quaternion tangent (#15 2f1f58f30b6f), and strengthened RH/forced NS admission are source-written. See the consolidated roadmap Section 17/17a at ba318f0100d6. 4503 independently executed exact controls, committed matching blob 0feec3741f7a. Native elaboration and universal mathematical endpoints remain open; no proof promotion. PNP default-branch merge-forward confirmed; other branch transitive compatibility still pending.
+
+
+## Section 18 — actual carrier geometry
+
+NS divergence heat identity and integrated energy tail, Hodge actual affine closure saturation (Lean #124 2cc4f8dfdd8d), BSD actual cyclic split sign differences (339eb7fb57bf), original-source PNP component planner (Agda #1548 8d26c500b2c1), and YM signed exponential tangent (Lean #15 711fa9bdf761) advance the original carriers. See consolidated roadmap 6b4b13d80e6e. 6475 exact local controls; planner and regression blob parity; donor function slices rather than full checkout. RH and NS C/D pinned replay, all universal endpoint cuts, native proof elaboration remain outstanding. No claim promotion.
