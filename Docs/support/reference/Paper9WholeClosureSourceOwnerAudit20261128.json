@@ -56,7 +56,8 @@
   "new_connections": [
     "DASHI/Moonshine/CM163BishopSelectedTauExponentExact.FromOriginalBishopEndpoint.actualOriginalCMQ (no two free atan evaluations)",
     "DASHI/Moonshine/CM163BishopOriginalPhaseHeckeCuspWeldExact.Original: selected Machin q, CM E4/E6/Delta guards, original diagonal/slice cusp limits and S/T residual invariance on ONE BishopCutset",
-    "Lean Integration/Paper9HeckeFiniteRemainder.bothActualHeckeIdentitiesFromRamifiedGerms and actualCMPolynomialRootFromRamifiedGerms from exact 3363/1723 analytic Rem and actual ramified source readouts"
+    "Lean Integration/Paper9HeckeFiniteRemainder.bothActualHeckeIdentitiesFromRamifiedGerms and actualCMPolynomialRootFromRamifiedGerms from exact 3363/1723 analytic Rem and actual ramified source readouts",
+    "Lean Integration/Paper9NativeOriginalFiniteGateAdmissions: pure kernel decide proof candidates for unitOK/diagOK/sliceOK and existing diagonalOfCheck/sliceOfCheck (unexecuted)"
   ],
   "remaining_producers": [
     {
@@ -124,5 +125,22 @@
     "producer_exact": "Rem 3363 diagUnit diagPacket, Rem 1723 sliceUnit slicePacket, actual eventual t^3362/t^1722 source equations",
     "consumer": "bothActualHeckeIdentitiesFromRamifiedGerms; actualCMPolynomialRootFromRamifiedGerms",
     "kernel_checked": false
+  },
+  "finite_gate_admissions": {
+    "source": "Integration/Paper9NativeOriginalFiniteGateAdmissions.lean",
+    "commit": "d1368c0205b79e01de6f2edbc3b2e2b05f5b1602",
+    "method": "pure kernel decide (NOT native_decide)",
+    "flags": [
+      "unitOK=true",
+      "diagOK=true",
+      "sliceOK=true"
+    ],
+    "consumers": [
+      "diagonalOfCheck",
+      "sliceOfCheck"
+    ],
+    "executed": false,
+    "runtime_ceiling_seconds": 90,
+    "note": "Theorem source written, must fail on false flags; performance may exceed bounded local kernel reduction and should be checkpointed individually."
   }
 }
