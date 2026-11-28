@@ -16,6 +16,8 @@ SCRIPTS=(
     "check_f8_differentiated_gn_energy.py",
     "check_f8_gn_coefficient_enclosure.py",
     "check_f8_two_level_source_energy.py",
+    "check_f8_gn_commutator_graph_reduction.py",
+    "check_f8_gn_graph_majorant.py",
     "check_f8_gauss_israel_energy_weld.py",
     "check_f8_scalar_density_momentum_schur.py",
     "check_f8_material_momentum_frame_weld.py",
