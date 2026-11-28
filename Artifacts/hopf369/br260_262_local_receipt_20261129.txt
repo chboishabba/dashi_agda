@@ -1,0 +1,7 @@
+BR260-262 local execution; exact source Git blob a634334ffc86ac914c29b981be4c791a3509a42f matches committed source b66b00c5b2e149c87ec02c362bf7c7ec4a6a6ba5.
+Commands OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br260_262_operator_weld.py --part audit, and --part evolve --steps 8 / 16; all exit 0.
+BR260 matched reduced defect 1.2524703496552547e-15 old composed defect 0.9323566233170252
+BR261 independent T,Z,E contraction errors [0.0, 5.273559366969494e-16, 5.108760636751697e-16]
+BR257-259 11 8 energy initial/final 0.0014659250741159851 0.0028795967624891945 work 0.0014136716883732295 ledger 5.583641188300348e-18 force 0.7551652748758829 margin 1.0432564964621251 gauge mismatch 0.0007930448170724899
+BR257-259 11 16 energy initial/final 0.0014659250741159851 0.002879665056152316 work 0.001413739982036304 ledger 9.540979117872439e-18 force 0.7552551156252059 margin 1.0432542853611189 gauge mismatch 0.0007930459322930359
+Audit uses original initial metric plus seeded symmetric velocity perturbation; reduced residual evaluated interior; independent index loops at 3 points. Reconciled diagonal second stencil in geometry, not a discrete Bianchi theorem. Remaining forcing stencil reaches frozen boundary; causal boundary and product-rule accounting outstanding. Original BR257 energy restriction unchanged. No CI/native/continuum acceptance.
