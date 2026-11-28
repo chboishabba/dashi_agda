@@ -127,7 +127,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # intersections with low-rank cube characters. Independent caps;
     # refused attempts leave the previous certified interval intact.
     if E is not None and phase_budget and any(a!=b for a,b in zip(lo,hi)):
-        cert=structured_contrast(F,cols,target,offset,remaining,w,component_width,64,phase_budget)
+        cert=structured_contrast(F,cols,target,offset,remaining,w,component_width,64,phase_budget,degree_cap=3,phase_branch_cap=64)
         if cert is not None:
             a,b,_=cert
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
