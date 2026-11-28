@@ -41,6 +41,9 @@ def exact():
     t=s.symbols('t',positive=True)
     B=s.sinh(s.asinh(t)-n)**3*s.cosh(s.asinh(t)-n)/s.sqrt(1+t*t)
     assert s.simplify(s.diff(B,n).subs(n,0)/t**3+t/s.sqrt(1+t*t)+3*s.sqrt(1+t*t)/t)==0
+    # Independent 4-point one-sided first derivative (order-three) for V=H_n.
+    assert sum(w*j*j for j,w in enumerate((-11,18,-9,2)))==0
+    assert sum(w*j for j,w in enumerate((-11,18,-9,2)))==6
     # Negative control: first-normal Israel alone never fixes second normal.
     assert wall_second([0,0,0,1],1)==-1
     print('PASS one-sided normal stencil moments, exact F8 wall wave acceleration and derivative negative controls')
@@ -50,7 +53,7 @@ def original(cells=64,final=1.045):
     from check_f8_characteristic_history import evolve,coefficient,bump
     k=np.array([0.,5.,10.]);ci=coefficient(k)
     dn=.5/cells
-    rows=[]
+    rows=[];normal_rows=[]
     for j in (1,2,3):
         got=evolve(k,ci,cells,final,sample_n=j*dn)
         if j==1:time,mass,flux,H,Ht,outer,_=got
@@ -58,9 +61,11 @@ def original(cells=64,final=1.045):
             assert np.allclose(time,got[0],rtol=0,atol=0)
             assert np.allclose(H,got[3],rtol=0,atol=0)
         rows.append(got[-1][:,0])
+        normal_rows.append(got[-1][:,2])
     values=[H[-1],*rows]
     Hnn=wall_second(values,dn)
     hn=-6*ci*bump(final)
+    hnn_from_V=(-11*hn+18*normal_rows[0]-9*normal_rows[1]+2*normal_rows[2])/(6*dn)
     h_tt_pde=wave_acceleration(final,k,H[-1],Ht[-1],hn,Hnn)
     dt=time[1]-time[0]
     h_tt_time=(3*Ht[-1]-4*Ht[-2]+Ht[-3])/(2*dt)
@@ -68,7 +73,9 @@ def original(cells=64,final=1.045):
     assert np.all(np.isfinite(defect))
     assert abs(H[-1,0])+abs(Ht[-1,0])+abs(Hnn[0])<1e-12
     return {'cells':cells,'t':final,'k':k.tolist(),
-            'normal2':Hnn.tolist(),'pde_time_defect':defect.tolist(),
+            'normal2':Hnn.tolist(),'normal2_from_characteristic':hnn_from_V.tolist(),
+            'mixed_normal_defect':(Hnn-hnn_from_V).tolist(),
+            'pde_time_defect':defect.tolist(),
             'max_defect':float(np.max(abs(defect))),
             'source_wall_hn':hn.tolist()}
 
