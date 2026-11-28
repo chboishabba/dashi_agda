@@ -2,7 +2,7 @@ from fractions import Fraction as Q
 from itertools import product
 from random import Random
 from heapq import heappush, heappop, heapify
-from check_p0_budgeted_residual_20261125 import cap as source_cap
+from check_p0_budgeted_residual_20261125 import cap as source_cap, pair_source
 from check_pnp_signed_component_histogram import component_bounds
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
@@ -76,9 +76,9 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6):
         a,b=-w*negative,w*positive
         lo.append(min(a,b));hi.append(max(a,b))
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
-def sector(F,n,rows,target,obs,w,order=None):
+def sector(F,n,rows,target,obs,w,order=None,offset=0):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
-    return cell(canon(F),cols,tuple(target),0,tuple(range(n)) if order is None else tuple(order),w)
+    return cell(canon(F),cols,tuple(target),offset,tuple(range(n)) if order is None else tuple(order),w)
 def refine(roots,eps,budget,focus=True):
     lo=[Q(0)]*3;hi=lo.copy();heap=[];serial=0;done=0
     def account(c,sign):
@@ -117,19 +117,32 @@ def pair(F,n,j,sign=None):
 
 def diff(r):return list(r)+[-x for x in r]
 def matrix(n,k,p):return [[p[n-1+i-j] if n-1+i-j<len(p) else 0 for j in range(n)] for i in range(k)]
-def coefficient(F,n,k,p):
+def coefficient(F,n,k,p,compact=True):
     A=matrix(n,k,p);roots=[];order=[i for j in range(n) for i in (j,n+j)]
     for j in range(n):
         t=len(p)-n+1+j
         if not 0<=t<k:continue
         for sign in (-1,1):
-            roots.append(sector(pair(F,n,j,sign),2*n,[diff(r) for r in A[:t]],(0,)*t,[-sign*x for x in diff(A[t])],-Q(3,3**(2*k-t)),order))
+            w=-Q(3,3**(2*k-t))
+            if compact:
+                # The donor substitutes y_i=x_i (i<j), y_j=1-x_j.
+                # Read the last affine row as an observable, NOT as a pin.
+                G,N,rows,target=pair_source(F,n,A[:t+1],first=j)
+                roots.append(sector(G+[((j+1)*sign,)],N,rows[:-1],target[:-1],
+                    [-sign*a for a in rows[-1]],w,offset=sign*target[-1]%3))
+            else:
+                roots.append(sector(pair(F,n,j,sign),2*n,[diff(r) for r in A[:t]],(0,)*t,[-sign*x for x in diff(A[t])],w,order))
     return roots
 
-def translation(F,n,k,p,b):
+def translation(F,n,k,p,b,compact=True):
     A=matrix(n,k,p);e=len(b);D=3**(k-e-1);order=[i for j in range(n) for i in (j,n+j)]
     roots=[sector(F,n,A[:e],b,A[e],Q(1,D))]
-    for j in range(n):roots.append(sector(pair(F,n,j),2*n,[diff(r) for r in A]+[r+[0]*n for r in A[:e]],(0,)*k+tuple(b),A[e]+[0]*n,-Q(1,D),order))
+    for j in range(n):
+        if compact:
+            G,N,rows,target=pair_source(F,n,A,A[:e],b,first=j)
+            roots.append(sector(G,N,rows,target,A[e]+[0]*(N-n),-Q(1,D)))
+        else:
+            roots.append(sector(pair(F,n,j),2*n,[diff(r) for r in A]+[r+[0]*n for r in A[:e]],(0,)*k+tuple(b),A[e]+[0]*n,-Q(1,D),order))
     return roots
 
 def accepts(F,x):return all(any(x[abs(l)-1]==int(l>0) for l in c) for c in F)
