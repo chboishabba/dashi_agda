@@ -114,3 +114,42 @@ module Source {n : Nat} {A B : Set} (left : A → V n) (right : B → V n)
 
 -- A finite list/table implementation still needs native RREF and count
 -- reification. This theorem pays the exact BIDI fibre partition only.
+
+-- Reuse the previous rational character carrier. The retained-retained
+-- term and the three omitted products are the exact four source pieces.
+open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.List.Base as List using ()
+open import Data.Rational.Tactic.RingSolver using (solve)
+import DASHI.Mathematics.Complexity.PNPSignedCharacterTailExact as H
+
+hadd : H.Hist → H.Hist → H.Hist
+hadd (H.hist a b c) (H.hist d e f) = H.hist (a + d) (b + e) (c + f)
+
+mass : H.Hist → ℚ
+mass (H.hist a b c) = a + b + c
+
+massAdd : ∀ h k → mass (hadd h k) ≡ mass h + mass k
+massAdd (H.hist a b c) (H.hist d e f) =
+  solve (a List.∷ b List.∷ c List.∷ d List.∷ e List.∷ f List.∷ List.[])
+
+massProduct : ∀ h k → mass (H.conv h k) ≡ mass h * mass k
+massProduct (H.hist a b c) (H.hist d e f) =
+  solve (a List.∷ b List.∷ c List.∷ d List.∷ e List.∷ f List.∷ List.[])
+
+omitted : H.Hist → H.Hist → H.Hist → H.Hist → H.Hist
+omitted h j p q = hadd (H.conv h q) (hadd (H.conv p j) (H.conv p q))
+
+productPartition : ∀ h j p q →
+  H.conv (hadd h p) (hadd j q) ≡ hadd (H.conv h j) (omitted h j p q)
+productPartition (H.hist a b c) (H.hist d e f) (H.hist g h i) (H.hist j k l) =
+  H.histEq (solve vars) (solve vars) (solve vars)
+  where vars = a List.∷ b List.∷ c List.∷ d List.∷ e List.∷ f List.∷
+               g List.∷ h List.∷ i List.∷ j List.∷ k List.∷ l List.∷ List.[]
+
+omittedMass : ∀ h j p q →
+  mass (omitted h j p q) ≡ mass h * mass q + mass j * mass p + mass p * mass q
+omittedMass h j p q
+  rewrite massAdd (H.conv h q) (hadd (H.conv p j) (H.conv p q))
+        | massAdd (H.conv p j) (H.conv p q)
+        | massProduct h q | massProduct p j | massProduct p q =
+  solve (mass h List.∷ mass j List.∷ mass p List.∷ mass q List.∷ List.[])
