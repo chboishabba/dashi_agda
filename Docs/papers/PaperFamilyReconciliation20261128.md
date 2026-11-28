@@ -66,3 +66,8 @@ Live Paper 1 NS 93dbf3273b08, Paper 3 YM 853b8f79e506, Paper 8 cross-programme 9
 ## Section 16 synchronization
 
 Live Paper 1 NS e36eae0859d86, Paper 3 YM 48c0366a4922 and Paper 8 cross-programme 3f9aa65fccf9 track the [Section 16 ledger](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (06b4dbcc5756). RSA/Shor exact coset geometry attached to actual BSD geometric doubling and Kummer fibres, with the split Mathlib root translation source; finite-field controls do not prove rational rank. All six unresolved Clay programmes retained. 14022 exact local algebraic/normal-fold controls; native kernel absent. RH/forced C/D admission still pending, unforced profile data unavailable. Independent Papers 2, 9, 10 and historical 4–7 unchanged; no duplication or promoted terminal claims.
+
+
+## Section 17/17a synchronization
+
+Live Paper 1 NS 43ad73121c0d, Paper 3 YM dd5a7ba7ff43 and Paper 8 cross-programme 95d637e1fef2 track [Section 17/17a](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (ba318f0100d6). Hodge now has source-written actual punctured finite/proper projection; BSD actual split sign-row difference, NS mean and force tangency, PNP same-run epoch attachment and CMP102 quaternion tangent source advance. 4503 independent exact controls, no native kernel. Original RH/NS C/D admission and unforced profile remain blocked by toolchain/source inputs. Papers 2, 9, 10 and historical 4–7 unchanged in this tranche; no promotion or duplicate ownership.
