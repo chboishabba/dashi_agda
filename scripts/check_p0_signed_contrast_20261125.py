@@ -1,4 +1,5 @@
 from fractions import Fraction as Q
+from math import isqrt
 from itertools import product
 from random import Random
 from heapq import heappush, heappop, heapify
@@ -58,9 +59,13 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6):
     if not C:return None
     # Exact multiplicative mass / additive label fold. A refused component
     # still contributes its certified cap; no global assignment expansion.
+    E=None
     if component_width is not None:
-        done,cc,hh=component_bounds(F,cols,target,offset,remaining,component_width)
+        done,cc,hh,E=component_bounds(F,cols,target,offset,remaining,component_width,spectral=True)
         if not cc:return None
+        if E==0:
+            a=(Q(0),)*3
+            return (F,cols,target,offset,remaining,w,a,a)
         if done:
             a=tuple(w*(3*h-cc) for h in hh)
             return (F,cols,target,offset,remaining,w,a,a)
@@ -75,6 +80,11 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6):
         # Exact contrast w*(2*N_d-N_other); both masses are nonnegative.
         a,b=-w*negative,w*positive
         lo.append(min(a,b));hi.append(max(a,b))
+    if E is not None:
+        # Each contrast is an integer multiple of w and its square is <=4E.
+        # No floating point or absolute mass reconstruction needed.
+        radius=abs(w)*isqrt(4*E)
+        lo=[max(a,-radius) for a in lo];hi=[min(a,radius) for a in hi]
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
 def sector(F,n,rows,target,obs,w,order=None,offset=0):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
