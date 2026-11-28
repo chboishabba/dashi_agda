@@ -3026,3 +3026,45 @@ Repeat on unchanged source to resume. The runner records stdout/stderr and SHA-2
 The new runner itself is source-written and has not been exercised against a local Agda checkout in the assistant environment (no Agda/Lean executable, GitHub git remote unavailable). The connector was used to read and commit sources. Existing finite-node arithmetic receipts remain diagnostics only. Do not treat a timeout or an ordinary diagnostic success as theorem acceptance. Exact native gate reduction cost and remaining elaboration defects are still unknown until local replay.
 
 Acceptance order remains: staged geometric/analytic cone, finite certificates, concrete terminal module, then the original GMP same-real attachment and backend acceptance. No CI invoked; no theorem promoted.
+
+## 29 Nov — compact indexed orbit witnesses and replay hardening
+
+### Geometry/orbit weld
+
+The finite recentering proof previously built an explicit Orbit constructor chain for every unit T and inverse-T move. The rational stress cases show that the underlying integer shift can be enormous: the worst sampled center used 3,000,000,000,002 unit translations. That is mathematically finite, but it is an unnecessarily expanded proof witness.
+
+The orbit carrier now has indexed finite-run constructors:
+
+- tRun prefix n represents the actual n-fold forward generator action.
+- minusRun prefix n represents the actual n-fold inverse-T action.
+- forwardPowerRead derives invariance by induction from the existing one-step T invariance.
+- minusPowerRead derives inverse-T invariance from one-step T invariance plus the exact coordinate weld T(T⁻¹p) ≈ p, transported by the same-series coordinate congruence.
+- The inverse-T action, its exact undo law and its imaginary-height preservation are now owned canonically by JInvariantBishopLatticeGeneratorSummandExact as actMinusT, actTAfterMinusT, and actMinusTHeight. The reciprocal-ray module and the quantitative rigidity consumer reuse that owner; the orbit layer no longer duplicates the point action.
+- LeftCentered records the actual point, the integer shift count, and a coordinate-setoid readback against the indexed inverse-T power. The final centered witness is one tRun, one minusRun, and one same weld. The geometric comparison recursion still performs its constructive finite search; this change compresses the proof-relevant orbit word, not the search's worst-case number of comparisons.
+
+Relevant commits: 11161d9c (stress diagnostic), dfb3a688 (indexed orbit semantics), e9b79e43 (compressed centered witness), dae6962f (Bishop syntax alignment), 5582dbcf (canonical inverse-T owner), 1c3b0cf5 (rigidity reuse), a76f2a8a (reciprocal-ray reuse).
+
+### Exact local diagnostics
+
+- Re-ran the original committed check_paper9_located_orbit_reduction.py after verifying its Git blob SHA-1 dca220a6501bc195723209e657fb812c50b2319a: 12,480 cases per policy; 6,291 and 8,444 inversions; exact radius inequalities PASS.
+- An additional independent closed-form rational stress replay exercised 27,308 inputs per policy, including strip/height boundary neighbours, 10^12-scale real parts and heights down to 10^-12. High-first: 53,920 inversions; low-first: 58,587. Exact radius prefix, gap and norm inequalities PASS.
+- The stress replay counted the unit translations represented by the pre-compression path: 16,016,218,443,578 and 16,016,219,167,546 total respectively; worst sampled center 3,000,000,000,002. This is the reason for the indexed witness representation. It is not a claim that the Bishop-real search is logarithmic or practically executable for arbitrary huge coordinates.
+- Local SymPy 1.14.0 checked the exact S-inversion gain identities, additive fuel increment, exponential prefix 1533881/240000 > 6, gap 61/32 > 19/10, and 25/36 < 3/4: PASS.
+- These are finite exact-rational / symbolic diagnostics. They do not replace universal Bishop-real lemmas or Agda kernel checking.
+
+### Acceptance runner corrected to repository policy
+
+The staged runner now invokes scripts/run_agda29_parallel_check.sh, the repository's documented sole Agda entrypoint, rather than calling bare agda -l dashi-agda. It pre-resolves the sibling pinned Agda flake when AGDA_BIN is not supplied, records the compiler and wrapper hashes, checks only the three relevant initialized source submodules, passes --safe in the strict lane, requires a clean tracked/untracked checkout, and checkpoints each stage with an 80-second internal timeout. The diagnostic lane omits --safe and cannot report strict acceptance.
+
+Use the repository's pinned environment:
+
+```sh
+timeout 90s python3 -u scripts/check_paper9_native_global_checkpointed.py \
+  --checkpoint /tmp/paper9-native-strict.json
+```
+
+Repeat on the same committed source/environment to resume. A failed or timed-out stage does not erase earlier receipts. If the run is interrupted by the outer 90-second cap, repeat; the last completed stage remains checkpointed. Do not substitute a direct Agda invocation or GitHub CI.
+
+### Current execution boundary
+
+The assistant execution container has Python 3 and SymPy 1.14.0, but no Agda, Lean, Nix, GHC or Cabal, and no local repository checkout or sibling Agda flake. The exact rational and SymPy diagnostics were run locally. The formal runner cannot be invoked here; no kernel PASS is claimed. The next executable step is the wrapper-driven staged replay in the user's pinned Dashi environment, followed by repairs from actual elaboration errors and then the terminal/GMP same-real reconciliation.
