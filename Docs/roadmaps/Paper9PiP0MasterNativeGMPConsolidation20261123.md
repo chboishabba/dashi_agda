@@ -2006,3 +2006,12 @@ The all-index Hadamard donor is H4(x)=(a+b+c+d,a+b-c-d,a-b+c-d,a-b-c+d). H4²=4I
 - GTheta3: identify theta Q and W/2 with the original analytic E4/E6, either by native theta S/T + weight-four/six modular uniqueness (Poisson/theta transform and cusp normalization), or by all-index arithmetic identities on the original coefficients. Finite degree checks are not enough; this step is not paid by the first root coefficient.
 - Main C1b: original 2D lattice-shell-to-row and Lambert degree rearrangement remains independently live. The theta donor does not replace this analytic weld unless GTheta3 is established. Retain horizontal-zero row, negative-m reflection, explicit residual bounds and original normalization.
 - C1c, C2, C3, H1 and native RawCross/GMP remain unchanged by this parallel donor. All new proof bodies require pinned local kernel elaboration; no CI invoked. No master, RH, BSD, Karp or PNP donor branch modified. Lean changes on research/paper9-original-eisenstein-derivative-20261125 only. 
+
+### 2026-11-28 — absolute rectangular exhaustion / row-fold attachment
+
+Preserve the parallel theta donor; this extends the original C1b lattice route.
+- `a410d1487ade` CofinalSquareSandwich: unique finite exhaustion between original inner and outer squares inherits original limit via absolute prefix difference and epsilon/4 splitting.
+- `627bc9ec887c` RectangleExhaustion: original filtered square list with horizontal radius n and vertical radius max(n,m), arbitrary cofinal schedule, iterated limit consumer via chosen finite-row modulus.
+- `202e2d992208` RectangleRowFold: actual signed cutoff codec product, membership equivalence/permutation to original rectangle, finite nested horizontal fold.
+- Remaining: connect actual positive paired row limits to this fold, including zero row and negative reflection; absolute Lambert row/degree interchange and normalized E4/E6; then Hecke41/diagonal/ray/RawCross. Native elaboration pending, not solved by finite tests.
+- Local independent rational reference (not repository import): 256 rectangle cases, 71460 points, 16419 positive factor pairs; exact finite regrouping, nontrivial signed sandwich and degree partition checks. No CI. 
