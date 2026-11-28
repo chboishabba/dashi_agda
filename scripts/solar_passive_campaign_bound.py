@@ -91,9 +91,10 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
         raise ValueError('asymptotic route requires source-off tail receipt')
     vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
     ids=np.asarray(ids,int); assert len(ids)>0 and len(set(ids))==len(ids)
+    from fractions import Fraction as F
     if 'terminal_load_rate_s_inv' in cfg:
         t=np.asarray(cfg['terminal_load_rate_s_inv'],float)
-        if t.shape!=(ne,) or np.any(t<0) or t.sum()>budget or not set(np.flatnonzero(t))<=set(ids):
+        if t.shape!=(ne,) or not np.isfinite(t).all() or np.any(t<0) or sum((F(float(v)) for v in t),F(0))>F(float(budget)) or not set(np.flatnonzero(t))<=set(ids):
             raise ValueError('terminal receiver outside matched layout/resource budget')
     assert np.all((ids>=0)&(ids<ne)) and budget>=0 and max_boxes>=1
     dt=cfg['period_s']/len(cfg['incident_sqrt_W'])
@@ -102,7 +103,6 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
     port=float(cfg['source_coupling_sqrt_inv_s']); edge=int(cfg['source_edge'])
     seq=0; queue=[]; replay_count=0; failed=0; best=None
     rational_candidates=[]; restoration_exclusions=[]; mode_candidates=[]
-    from fractions import Fraction as F
     exact_ceiling=None
     nonfrozen_binary=bool(cfg.get('retain_nonfrozen_event_residuals',False))
     if cfg.get('retain_stage_residuals',False):
@@ -211,7 +211,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
     finite_upper=bool(np.isfinite(float(upper)))
     return dict(upper_candidate_J=float(upper) if finite_upper else None,
                 upper_exact_binary_chart=None if exact_ceiling is None or not finite_upper else str(upper),
-                unresolved_upper=not finite_upper,
+                unresolved_upper=not finite_upper and not no_restored_chart,
                 best_center_net_J=best,
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
                 gap_J=None if best is None or not finite_upper else float(upper-best),
