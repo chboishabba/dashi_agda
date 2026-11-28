@@ -26,8 +26,11 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -44,6 +47,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNSignedTTStarCriticalCancellationTargetRound410Exact as R410
 import DASHI.Physics.Closure.NSTriadKNOneCancellationPaysRemainderAndCriticalRound414Exact as R414
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
+import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact as R687
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
@@ -103,6 +108,67 @@ module CombinedToR406
     Time initialTime integrateTo VectorDerivativeOf
 
   T = Live.literalPhysicalTrajectory D
+
+  ------------------------------------------------------------------------
+  -- R652 AND R723 ACTUAL SAME-OBJECT SIGNED DEFECT NUMERATOR.
+  --
+  -- 2*(literal R406 - complete combined commutator)
+  --   = 4*UNLIFTED R568 forcing
+  --     - integrated self Gram - integrated self flux tangent
+  --     - 2*R723 integrated combined commutator.
+  --
+  -- This is a genuine original physical-trajectory identity. It reduces
+  -- R726's missing inequality to the sign/upper bound of a single
+  -- physically generated integrated numerator. In particular, a positive
+  -- rate-lifted Cauchy Gram does not set this numerator to zero.
+  ------------------------------------------------------------------------
+
+  module Source = R652.Coupling
+    Time initialTime integrateTo DerivativeOf integrationTransport
+
+  actualSignedDefectNumerator :
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (terminal : Time) → ℚ
+  actualSignedDefectNumerator R cutoff terminal =
+    R567.four567 *
+      Source.Comm.integratedGlobalForcingFull
+        T R cutoff terminal
+      - integrateTo (Source.Live.selfGram T R cutoff) terminal
+      - integrateTo (Source.Live.selfFluxTangent T R cutoff) terminal
+      - R539.two * Combined.integratedCombinedSelfExternal cutoff terminal
+
+  actualSignedDefectNumeratorIdentity :
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (terminal : Time) →
+    R539.two *
+      (Unified.literalRemainderIntegral T R cutoff terminal
+        - Combined.integratedCombinedSelfExternal cutoff terminal)
+    ≡ actualSignedDefectNumerator R cutoff terminal
+  actualSignedDefectNumeratorIdentity R cutoff terminal =
+    let
+      r = Unified.literalRemainderIntegral T R cutoff terminal
+      g = integrateTo (Source.Live.selfGram T R cutoff) terminal
+      h = integrateTo (Source.Live.selfFluxTangent T R cutoff) terminal
+      c = Combined.integratedCombinedSelfExternal cutoff terminal
+
+      source : R567.four567 *
+          Source.Comm.integratedGlobalForcingFull T R cutoff terminal
+          ≡ R539.two * r + g + h
+      source =
+        Source.integratedFourForcingIsTwoR406PlusDiagonal
+          T R cutoff terminal
+
+      normal :
+        R539.two * (r - c)
+        ≡ (((R539.two * r + g + h) - g) - h)
+            - R539.two * c
+      normal = solve (r ∷ g ∷ h ∷ c ∷ [])
+    in
+    trans normal
+      (sym
+        (cong
+          (λ x → (((x - g) - h) - R539.two * c))
+          source))
 
   record CombinedR406Transport
       (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
@@ -194,6 +260,9 @@ round726SingleCombinedToR406TransportSufficesForR410 = true
 -- A stronger original zero-defect receipt is OPTIONAL.  The compensated
 -- compiler is theorem-bearing but its cutoff-uniform real physical signed
 -- defect estimate remains an uninhabited producer.
+round726SamePhysicalDefectNumeratorIdentityClosed : Bool
+round726SamePhysicalDefectNumeratorIdentityClosed = true
+
 round726CompensatedR406CompilerClosed : Bool
 round726CompensatedR406CompilerClosed = true
 
