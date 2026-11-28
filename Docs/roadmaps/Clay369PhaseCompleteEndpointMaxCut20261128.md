@@ -1797,3 +1797,77 @@ Source bodies #1536/Lean #123/#124 were committed and need native
 checking, including cross-branch source signatures. Retain the
 documented original `--safe` import graph (at least thirteen
 selected safe/non-safe edges), no blind safety pragma removal.
+
+
+## Section 32 — actual original CMP102 odd/even finite row source cut; same-flow NS L4; Hodge signed Q0 Jacobian (28 November 2026)
+
+### Live owner state and exact source inventory
+At intake Agda YM #1536 head 67fff31d129754b2d84a502dbe1295486234eb5e; all-Clay Agda #1551 head 20d8754ac46cba7ff53f3f5dfaf3df092eb26cf5; Lean NS #123 head 3d087cde087f85d28fe9277f2b383caef151536a; Lean BSD/Hodge #124 head 81bcda84bb426f408962bcbb5e76b4a246c33496; Lean PNP #119 head 2f0d5808b23a65ed9714b73699d4844da25ac5cb; RH Lean #121 head 3eb36764e36c526b7129550b737ffc507b3cb95f. Source inspection included original Agda `YMClayCMP102OriginalGToTailAlgebraExact`, `OriginalEndpointCauchyShiftExact`, `OriginalFiniteTailGeometryExact`, CMP109 original finite `term`/coefficient owners, `BishopFiniteSeriesDifferenceExact`, `BishopFiniteSeriesExtensionalityExact` and `BishopFiniteCauchyRowReindexExact`; original Hodge signed Q0/rotation fibre and proper affine sources; original NS physical energy/quarter L4/global flow; RH `AlpogeRHBoundaryExact`, `AlpogeRHUniversalXiZetaBidiExact`, Section24 actual admission root.
+
+All newly written Lean/Agda source is **SOURCE WRITTEN / PENDING KERNEL**, no pinned native Agda/Lean/Lake or GitHub CI run. A local supplied original CMP102 exact Fraction checker did execute successfully 3,624/3,624, including negative controls. The local synthetic symbolic comparison is not native kernel acceptance.
+
+### YM — one original Fin-reindex is reduced to TWO exact endpoint rows
+New on Agda #1536:
+`DASHI/Physics/YangMills/YMClayCMP102OriginalOddEvenFinRowBIDIExact.agda`, commit 808fab5358c2f03b4a47858034d9cc2f1a9da53c.
+Consumes original `CMP102.oddPart`, `CMP102.evenPart`, `Original.originalGPrefix`, `Signed.originalSignedTriangle`, the existing finite Bishop `BishopFiniteSeriesDifferenceExact.finiteSeriesDifference` and `BishopFiniteSeriesExtensionalityExact.seriesPartialSumsCongruent`.
+
+Actual theorem `originalSignedTriangleOddMinusEven` proves, for every original represented real X and COUNT c, the exact source finite-sum relation
+  T_c(X)=Seq.SeriesOf((oddPart k)*X^k,c)
+        -Seq.SeriesOf((evenPart k)*X^k,c).
+No need to repeat Cauchy coefficient cancellation: existing original `shiftedNativeBracketCoefficientZero` proves T_c=0 in Section30.
+
+Two precisely identified pending native `Set` proof inputs:
+  `originalOddFinRow X n`:
+    Odd_(n+1)=1 + 2 X (B_(n+1) - b_n X^n)
+                     + X² Tri_b(n-1);
+  `originalEvenFinRow X n`:
+    Even_(n+1)=2 A_(n+1)+ X Tri_a(n).
+Finite triangle counts are exactly `(suc n)∸2` and
+`(suc n)∸1`, respectively, including c=1/c=2 endpoint exceptions. These are obligations on ORIGINAL `oddPart`, `evenPart`, `aCoefficient`, `bCoefficient`, original `Sequence.SeriesOf` and `Row.cauchyCoefficient`, NOT axioms, not supplied by hand.
+
+Theorem `originalShiftedRowFinReindexFromOriginalOddEven` proves that the conjunction of the two true native source row equations constructs the PREVIOUS single missing `OriginalShiftedRowFinReindex`; `originalGIsCauchyTailFromNativeOddEven` then finishes original G_(n+1) equal to the original signed A/B Cauchy tail, consuming actual Section31 ring algebra and original rectangle identities. Both direction and sign preserved, no finite G=0 premise.
+Native acceptance root
+`DASHI/Physics/YangMills/YMClayCMP102Section32OddEvenFinRowAcceptanceExact.agda` commit 389ec7174e9e367291b7f4ffbb51d42816de809d; native elaboration still pending.
+
+Independent exact symbolic check: 48/48 PASS on counts c=1..16, with EACH a_j and b_j an arbitrary independent SymPy variable. It verifies the actual odd row normal form, even row normal form and full five-term original G-to-Cauchy-tail identity, including c=1/c=2 degree endpoints. This is a finite check supporting the general finite polynomial argument, NOT a proof for all c in Agda. On #1536 `scripts/check_ym_cmp102_original_odd_even_fin_rows.py` commit a3e892470e25137bcb506cc7a42a8e15797051ec; equivalent local source ran, not byte-identical GitHub script replay.
+The existing 23 Nov original all-degree mathematical 3*4^-count bound, 30 Nov sharper original signed wing constant 267004/393129, and Section31 direct Bishop absolute receiver still need native original two-row finite proofs and the positive Bishop-order factorial wing inequality before G=0 can be kernel-accepted. Physical interacting F19, CMP116, OS and same-H gap remain categorically separate from scalar G=0.
+
+### NS — one actual Galerkin source X_N, not two existential flows
+Existing global original R30 `actual_global_finite_tail_and_energy_payment` constructs actual X_N with reality, transversality, real modal ODE, energy and integrated viscosity ledger, arbitrary Fourier high-shell inequality. Existing original `quarter_energy_fourth_le` already proves E_{1/4}^4 <= E^3 D. Section31 `original_actual_finite_quarter_and_dissipation_integrable` supplies time interval integrability from that SAME physical ODE, and `original_quarter_energy_L4_time_paid_by_physical_dissipation` integrates it.
+
+New Lean #123
+`Synthesis/NavierStokesOriginalSameFlowTailL4CompactnessExact.lean` commit 8a5f5b181b24e75672356fbaa3f550d812c9a57a.
+It now produces ONE `X : ℝ→FiniteState N` with, for EVERY physical t≥0, T≥0 and shell R>0:
+  E_N(t) <= E_N(0),
+  2ν∫_0^T D_N(s)ds <= E_N(0),
+  R² Σ_{original modes |k|²>=R²} |U_k(t)|² <= D_N(t),
+  2ν ∫_0^T E_{1/4,N}(t)^4 dt <= E_N(0)^4.
+There is no independent existential solution, no added uniform initial H1 premise and no synthetic scalar E. Source-native acceptance:
+`Synthesis/ClayNSSection32SameFlowTailL4AcceptanceExact.lean` commit 5eb50fb0b7f6781d108174cc8540b22882039e30. Still needs native elaboration. Real original cutoff-uniform signed nonlinear transfer upper and physical continuum regularity/forced/unforced original admission remain open. These compactness payments alone are not a regularity proof.
+
+### Hodge — original signed Jacobian first jet, punctured simple roots
+Existing original `Q0Field a s`, `dField a s`, signed discriminant `δ=∏_i dField(a_i,s_i)`, actual `ActualRootFibre`, `actualRootFibreEquiv`, `signedFibre_nonzero`, generic coupled 5+5 deck and finite/proper affine projection were independently fetched and checked for signatures.
+
+New Lean #124
+`Synthesis/MillenniumHodgeDicksonOriginalQ0SignedJacobianJetExact.lean` at 8d5a8fc89b775c7750564f93bd104ebe2de7981f,
+scoped BigOperators at 78afba15b2db7454a6dfa71e0da2398119e4f810.
+True original finite polynomial identity for ALL a,s,h in field char zero:
+  Q0(a,s+h)-Q0(a,s)=h*(dField(a,s)-2h).
+Hence dField is precisely original Q0 root-direction first derivative, with finite-difference quadratic correction exactly -2h². For any actual signed product cover point p with δ≠0, `original_Q0_generic_all_jacobians_nonzero` proves ALL SIX individual dField(a_i,s_i)≠0 (consuming existing `signedFibre_nonzero`, no independent smoothness axiom). `original_Q0_signed_jacobian_product` identifies the actual product with δ. These are true original generic simple-root/etale-local geometry, not global projective smoothness.
+Acceptance `Synthesis/ClayHodgeSection32OriginalSignedJacobianAcceptanceExact.lean` commit e6474bdf84c0184038aff6039e761b2c4bcc3328.
+Remaining: actual global proper projective cycle, ramified fold/branch gluing, cycle pushforward and nonzero primitive class pairing; affine finite/properness is ALREADY SOURCE WRITTEN and must not be incorrectly counted as outstanding.
+
+### BSD / RH / PNP genuine frontiers unchanged
+BSD Lean #124 `MillenniumBSDOriginalTwoCrossingStrictMomentGrowthExact` already proves conditional all-degree positive weighted Mellin ratio; original number-field Selmer/Sha quotient already written. Need source-specific selected COMPLEX L''/original Mellin identity, actual selected complex zero/rank and universal rank equality with Sha finiteness. A positive moment constraint is not L''=0.
+RH Lean #121 `MillenniumExternal/AlpogeRHBoundaryExact.lean`, `AlpogeRHUniversalXiZetaBidiExact.lean`, `AlpogeRHSection24OriginalAdmissionAcceptanceExact.lean` were fetched: exact original xi/zeta subtype equivalence, all-zero predicate iff and Clay↔Mathlib equivalence are already available. They neither supply nor assume a real proof witness `RiemannHypothesis`. The external pinned theorem still requires legitimate trusted admission, exact statement and transitive axiom audit; no new mathematical RH proof claimed.
+PNP Lean #119 already owns original anchored F3 residual/source legal reopen, actual query read-clock fuel, input-only capacity ceiling and closed-internal-observer no-split. These negative controls prohibit false superlinear SAT resource promotion. The missing genuinely universal original SAT sharing-stable internal work lower bound (or actual polynomial decision algorithm) and C1a/R1 machine/bit/control semantics remain open.
+
+### Section 32 aggregate decisive next implementation
+A. YM: prove BOTH original odd and even native finite row source identities using existing Sequence.SeriesOf, finite Cauchy coefficient and exponent/power transport; their completed joint theorem immediately pays `OriginalShiftedRowFinReindex`; then original factorial ratio positive wing Bishop order, originalG=0 and native safe import audit. Only then return to *separate* 4D physical Wilson CMP116/OS/H gap.
+B. NS: consume the one-flow L4 and tail into physical continuum compactness and derive separately cutoff-uniform signed quarter nonlinear transfer; do NOT infer this latter estimate from subcritical L4 or total energy.
+C. BSD: bridge actual selected complex L-jet to original Mellin source and rank equality.
+D. Hodge: use new unramified punctured Jacobian and existing affine finite/proper source to build actual global branch-glued proper Chow cycle and primitive pairing.
+E. RH: actual pinned external native theorem admission, no axiom promotion.
+F. PNP: actual internal sharing work for unrestricted SAT or polynomial decision.
+
+Everything newly source written but not compiled is PENDING_NATIVE. Local exact arithmetic/symbolic PASS is not native proof acceptance. No GitHub CI initiated.
