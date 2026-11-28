@@ -77,13 +77,13 @@ geoBound n =
       nn = Seq.nonNegx⇒nonNegxⁿ n rhoNN
       h = P.+-monoʳ-≤ (R.1ℝ - p) (P.nonNegx⇒0≤x nn)
       subOne = P.≤-respʳ-≃ (let open P.ℝ-Solver in solve 1
-        (λ p → p ⊕ (Κ 1ℚᵘ ⊖ p) ⊜ Κ 1ℚᵘ) P.≃-refl p)
-        (P.≤-respˡ-≃ (P.+-identityˡ (R.1ℝ - p)) h)
+        (λ p → (Κ 1ℚᵘ ⊖ p) ⊕ p ⊜ Κ 1ℚᵘ) P.≃-refl p)
+        (P.≤-respˡ-≃ (P.+-identityʳ (R.1ℝ - p)) h)
       fifthNN = P.0≤x⇒nonNegx
         (P.p≤q⇒p⋆≤q⋆ 0ℚᵘ (+ 1 / 5) (from-yes (0ℚᵘ QP.≤? (+ 1 / 5))))
   in P.≤-respˡ-≃ (P.≃-symm (geoRead n))
     (P.≤-respʳ-≃ (P.*-identityʳ ((+ 1 / 5) ⋆))
-      (P.*-monoˡ-≤-nonNeg subOne fifthNN))
+      (P.*-monoʳ-≤-nonNeg subOne fifthNN))
 
 two four : ℝ
 two = (+ 2 / 1) ⋆
@@ -120,7 +120,7 @@ module Disk (r : BishopComplex) (nz : Rec.BishopComplexNonzero r)
           (λ p M → (p ⊕ p) ⊗ (Κ (+ 2 / 1) ⊗ M) ⊜ (Κ (+ 4 / 1) ⊗ M) ⊗ p)
           P.≃-refl p M
         hi = P.≤-respʳ-≃ read
-          (P.*-monoʳ-≤-nonNeg
+          (P.*-monoˡ-≤-nonNeg
             (P.+-mono-≤ (Upper.realPowerUpper small n) (Upper.imagPowerUpper small n))
             (P.nonNegx,y⇒nonNegx*y twoNN nn))
         -- The product bound uses w*a; twist stores a*w.
@@ -157,7 +157,7 @@ module Disk (r : BishopComplex) (nz : Rec.BishopComplexNonzero r)
         each zero = P.≤-respˡ-≃ (P.≃-symm (P.nonNegx⇒∣x∣≃x P.nonNeg0))
           (P.nonNegx⇒0≤x (P.nonNegx,y⇒nonNegx*y contractNN nn))
         each (suc n) = P.≤-trans (prefixBound g M nn h0 hb n)
-          (P.≤-respʳ-≃ finish (P.*-monoˡ-≤-nonNeg (geoBound n) bound))
+          (P.≤-respʳ-≃ finish (P.*-monoʳ-≤-nonNeg (geoBound n) bound))
     in Seq.xₙ≤y⇒limxₙ≤y each (_ , Seq.∣xₙ∣→∣x₀∣ (v , cv))
 
   contract : ∀ M → R.NonNegative M → CoeffBound M → ∀ q → Small q →
