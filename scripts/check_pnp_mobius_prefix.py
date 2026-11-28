@@ -10,6 +10,17 @@ class Refusal(Exception): pass
 def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_width=8,data_clock=None):
     R=tuple(sorted(R));n=len(R);r=len(target);full=(1<<n)-1
     st=dict(work=0,clauses=0,prefix=0,peak_terms=1,cube_queries=0,chart_points=0,dp_states=0)
+    if data_clock is not None:
+        from check_pnp_signed_bit_schedule import IntOps,Refused as DataRefused
+        ops=IntOps(data_clock)
+    def arith(name,*a):
+        if data_clock is None:
+            if name=='add':return a[0]+a[1]
+            if name=='sub':return a[0]-a[1]
+            if name=='mul':return a[0]*a[1]
+            return sum(a[0])
+        try:return getattr(ops,name)(*a)
+        except DataRefused:raise Refusal()
     def measured_span(A,r):
         if data_clock is None:return span(A,r)
         from check_pnp_bit_data_schedule import span_bits,Refused as DataRefused
@@ -29,10 +40,10 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
     def plus(a,b):return tuple((x+y)%3 for x,y in zip(a,b))
     def minus(a,b):return tuple((x-y)%3 for x,y in zip(a,b))
     def result(H,caps):
-        lo=[];hi=[];total=sum(H);C=tuple(min(h,c) for h,c in zip(H,caps))
+        lo=[];hi=[];total=arith('sum',H);C=tuple(min(h,c) for h,c in zip(H,caps))
         for d,h in enumerate(H):
-            v=3*h-total
-            a=w*(v-2*C[d]);b=w*(v+sum(C[j] for j in range(3) if j!=d))
+            v=arith('sub',arith('mul',3,h),total)
+            a=arith('mul',w,arith('sub',v,arith('mul',2,C[d])));b=arith('mul',w,arith('add',v,arith('sum',(C[j] for j in range(3) if j!=d))))
             lo.append(min(a,b));hi.append(max(a,b))
         return tuple(lo),tuple(hi),dict(st,head=H,removed_label_caps=C,exact=not any(C))
     try:
@@ -66,13 +77,14 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
                     u,V=q;pay(max(1,k)*2**len(V));st['chart_points']+=2**len(V)
                     for z in product(range(2),repeat=len(V)):
                         x=tuple((v+sum(c*b[i] for c,b in zip(z,V)))%3 for i,v in enumerate(u))
-                        if 2 not in x:H[(o+sum(obs[j]*v for j,v in zip(I,x)))%3]+=1
+                        if 2 not in x:
+                            j=(o+sum(obs[j]*v for j,v in zip(I,x)))%3;H[j]=arith('add',H[j],1)
             else:
                 D={(0,)*d:(1,0,0)}
                 for j in I:
                     pay(1+2*len(D));E=D.copy()
                     for v,h in D.items():
-                        u=plus(v,A[j]);old=E.get(u,(0,0,0));E[u]=tuple(old[i]+h[(i-obs[j])%3] for i in range(3))
+                        u=plus(v,A[j]);old=E.get(u,(0,0,0));E[u]=tuple(arith('add',old[i],h[(i-obs[j])%3]) for i in range(3))
                     D=E;st['dp_states']+=len(D)
                 h=D.get(s,(0,0,0));H=[h[(i-o)%3] for i in range(3)]
             cache[key]=tuple(H);return cache[key]
@@ -83,14 +95,14 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
                 pay(len(M));N=M.copy();removed=[0,0,0]
                 for (p,q),c in M.items():
                     if p&b or q&a:continue
-                    key=(p|a,q|b);v=N.get(key,0)-c
+                    key=(p|a,q|b);v=arith('sub',N.get(key,0),c)
                     if v:N[key]=v
                     else:N.pop(key,None)
                     if len(N)>term_cap:raise Refusal()
                     h=hist(*key)
-                    for i in range(3):removed[i]+=c*h[i]
+                    for i in range(3):removed[i]=arith('add',removed[i],arith('mul',c,h[i]))
                 assert all(0<=v<=h for v,h in zip(removed,H))
-                H=tuple(h-v for h,v in zip(H,removed));M=N;st['prefix']+=1;st['peak_terms']=max(st['peak_terms'],len(M))
+                H=tuple(arith('sub',h,v) for h,v in zip(H,removed));M=N;st['prefix']+=1;st['peak_terms']=max(st['peak_terms'],len(M))
                 if not any(H):return result(H,(0,0,0))
             except Refusal:break
         caps=[0,0,0]
@@ -99,7 +111,7 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
         for a,b in cubes[st['prefix']:]:
             try:h=hist(a,b)
             except Refusal:h=(2**(n-(a|b).bit_count()),)*3
-            for i in range(3):caps[i]=min(H[i],caps[i]+h[i])
+            for i in range(3):caps[i]=min(H[i],arith('add',caps[i],h[i]))
         return result(H,caps)
     except Refusal:return None
 
