@@ -1734,3 +1734,81 @@ module At {r : Level} (F : C.RealField r)
   -- its positive square root to normalize the wall normal. This field
   -- cannot inhabit the unproved physical Bianchi or BR37 glancing
   -- certificate by algebraic projection alone.
+
+  ------------------------------------------------------------------------
+  -- BR50: same original ADM moving conormal on all 15 metric channels
+  -- and five subsidiary channels. This is the physical correction to
+  -- BR41's Gaussian-wall normal work, not an independent abstract PDE.
+  ------------------------------------------------------------------------
+
+  materialGraphTensorFlux : ADMPhysicalPoint → MaterialGraphGradient →
+    Tensor → (BR4Space → Tensor) → Tensor
+  materialGraphTensorFlux g f timeJet spatialJet =
+    tab (λ i k →
+      materialGraphFlux g f (get timeJet i k)
+        (λ a → get (spatialJet a) i k))
+
+  materialGraphGaugeFlux : ADMPhysicalPoint → MaterialGraphGradient →
+    Cov → (BR4Space → Cov) → Cov
+  materialGraphGaugeFlux g f timeJet spatialJet k =
+    materialGraphFlux g f (timeJet k)
+      (λ a → spatialJet a k)
+
+  -- The two-face normal fields are kept independent, matching the
+  -- original plus/minus BR34 Israel allocation and BR29 constraint.
+  record OriginalMaterialPower : Set r where
+    constructor originalMaterialPower
+    field
+      plusMovingPower : S
+      minusMovingPower : S
+      signedMovingPower : S
+      gaussianBR41Power : S
+      missingGraphPower : S
+      plusMetricConormal : Tensor
+      minusMetricConormal : Tensor
+      plusGaugeConormal : Cov
+      minusGaugeConormal : Cov
+  open OriginalMaterialPower public
+
+  assembleOriginalMaterialPower :
+    ADMPhysicalPoint → ADMPhysicalPoint →
+    MaterialGraphGradient → MaterialGraphGradient →
+    (Wall → Wall → S) →
+    Tensor → Tensor →
+    (BR4Space → Tensor) → (BR4Space → Tensor) →
+    Cov → Cov →
+    (BR4Space → Cov) → (BR4Space → Cov) →
+    OriginalMaterialPower
+  assembleOriginalMaterialPower gp gm fp fm velocity
+    pt mt ps ms ct dt cs ds =
+    originalMaterialPower
+      (wallPair velocity (H qp))
+      (wallPair velocity (H qm))
+      (wallPair velocity (λ a b → H qp a b - H qm a b))
+      (wallPair velocity (λ a b →
+        volumeDensity gp * H (ps spaceNormal) a b
+          - volumeDensity gm * H (ms spaceNormal) a b))
+      (wallPair velocity (λ a b →
+        H qp a b - H qm a b
+        - volumeDensity gp * H (ps spaceNormal) a b
+        + volumeDensity gm * H (ms spaceNormal) a b))
+      qp qm qcg qcm
+    where
+      qp : Tensor
+      qp = materialGraphTensorFlux gp fp pt ps
+
+      qm : Tensor
+      qm = materialGraphTensorFlux gm fm mt ms
+
+      qcg : Cov
+      qcg = materialGraphGaugeFlux gp fp ct cs
+
+      qcm : Cov
+      qcm = materialGraphGaugeFlux gm fm dt ds
+
+  -- For a fixed compatible Gaussian wall each graph correction vanishes
+  -- and the conormal work reduces to the volume-weighted BR41 normal
+  -- work. In the general moving/sheared chart the graph correction is
+  -- an independent signed forcing in BR42/45, not an assumed positive
+  -- multiple of the Israel Hessian. Its control needs actual metric
+  -- regularity and timelike/spacelike material guard.
