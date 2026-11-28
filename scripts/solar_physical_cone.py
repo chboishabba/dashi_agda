@@ -25,7 +25,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -36,6 +36,12 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     d=len(x); assert H.shape==(d,d) and force.shape==(d,) and dt>0
     xyz,site,faces=validate_mesh(mesh,d)
     groups=[np.flatnonzero(site==i) for i in range(len(xyz))]
+    if jvp is not None:
+        dx,dH,df=map(lambda a:np.array(a,float,copy=True),jvp)
+        assert dx.shape==force.shape==df.shape and dH.shape==H.shape
+        if np.any((H==0)&(dH!=0)&(site[:,None]!=site[None,:])):
+            raise ValueError('tangent changes offsite stage support; use separate support chart')
+        tangent_mid=np.zeros(d)
     forms={} if loss_forms is None else {k:np.asarray(v,float) for k,v in loss_forms.items()}
     for a in forms.values():
         assert a.shape==(d,d) and np.allclose(a,a.T)
@@ -108,6 +114,17 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                 for ii in ix: midpoint_error[ii]=exact_error+local_error/2
             exact_error+=local_error
         mid=(old+y)/2; w=dt*float(mid@b); q=-dt*float(mid@a@mid)
+        if jvp is not None:
+            da=dH[np.ix_(ix,ix)].copy(); db=df[ix].copy()
+            if fid is not None:
+                np.fill_diagonal(da,0); db[:]=0
+            old_dx=dx[ix].copy()
+            dy=solve(I-dt*a/2,(I+dt*a/2)@old_dx+dt*(da@mid+db))
+            if fid is None: tangent_mid[ix]=(old_dx+dy)/2
+            dx[ix]=dy
+        if retain_stage_residuals and fid is None:
+            for ii,v in enumerate(ix):
+                midpoint_error[v]+=abs(rational(mid[ii])-(rational(old[ii])+rational(y[ii]))/2)
         assert q>=-1e-10*max(1.,abs(w),float(old@old))
         assert abs((y@y-old@old)/2-w+q)<1e-9*max(1.,abs(w),float(old@old))
         if fid is None:
@@ -122,6 +139,8 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     if forms: assert abs(sum(channel.values())-loss)<1e-9*max(1.,abs(loss))
     if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
     return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
+                  state_jvp=None if jvp is None else dx.tolist(),
+                  local_midpoint_jvp=None if jvp is None else tangent_mid.tolist(),
                   exact_binary_stage_error=str(exact_error) if retain_stage_residuals else None,
                   exact_binary_midpoint_error=[str(v) for v in midpoint_error] if retain_stage_residuals else None,
                   local_midpoint=None if local_mid is None else local_mid.tolist(),reflected_amplitude=reflected,
