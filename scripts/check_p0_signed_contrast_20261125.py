@@ -3,6 +3,7 @@ from itertools import product
 from random import Random
 from heapq import heappush, heappop, heapify
 from check_p0_budgeted_residual_20261125 import cap as source_cap
+from check_pnp_signed_component_histogram import component_bounds
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -21,7 +22,7 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w,conditioned=True):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6):
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -55,6 +56,18 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True):
                 if d in labels else 0 for d in range(3)]
     C=min(C,sum(label_caps))
     if not C:return None
+    # Exact multiplicative mass / additive label fold. A refused component
+    # still contributes its certified cap; no global assignment expansion.
+    if component_width is not None:
+        done,cc,hh=component_bounds(F,cols,target,offset,remaining,component_width)
+        if not cc:return None
+        if done:
+            a=tuple(w*(3*h-cc) for h in hh)
+            return (F,cols,target,offset,remaining,w,a,a)
+        C=min(C,cc)
+        label_caps=[min(C,a,b) for a,b in zip(label_caps,hh)]
+        C=min(C,sum(label_caps))
+        if not C:return None
     lo=[];hi=[]
     for d in range(3):
         positive=2*min(C,label_caps[d])
