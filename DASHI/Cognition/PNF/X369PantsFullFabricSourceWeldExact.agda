@@ -15,7 +15,7 @@ import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Geome
 import DASHI.Reasoning.TypedHyperfabricPantsSignatureCompletenessExact as Complete
 import DASHI.Reasoning.TypedHyperfabricPantsSourceHeterogeneousTransportExact as Existing
 import DASHI.Reasoning.TypedHyperfabricCore as Fabric
-import Data.List.Base as List
+open import Data.List.Base using (_++_)
 
 sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
@@ -48,8 +48,6 @@ module MatchedSource
   mergedSignature : Geometry.SeamSignature
   mergedSignature = Geometry.boundarySignature (asLeft left)
 
-  originalPantsSeam = Seam.admittedOriginalPantsSeam
-
   -- Two genuinely different incidences become one merged edge; this is
   -- the existing donor's actual topology change, not just a match flag.
   actualMergedIncidences :
@@ -60,7 +58,7 @@ module MatchedSource
   originalProvenanceRetained :
     Fabric.edgeProvenance Seam.afterFabric Geometry.mergedSeam ≡
     Fabric.edgeProvenance Seam.beforeFabric Geometry.outerEdge
-    List.++ Fabric.edgeProvenance Seam.beforeFabric Geometry.innerEdge
+    ++ Fabric.edgeProvenance Seam.beforeFabric Geometry.innerEdge
   originalProvenanceRetained = Seam.entireSourceProvenanceRetained
 
   -- Source BIDI: signature quotient does NOT reconstruct the two
