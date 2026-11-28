@@ -7,6 +7,7 @@ import numpy as np
 from check_f8_full_band_ward_attachment import assemble,exact as ward_exact
 from check_f8_scalar_density_momentum_schur import exact as schur_exact
 from check_f8_full_band_wall_controller import History,Q
+from check_f8_material_clock_controller import source_shear_bound
 
 def run(K=20.,cells=64,nh=8,nodes=3):
     ward_exact()
@@ -30,6 +31,11 @@ def run(K=20.,cells=64,nh=8,nodes=3):
             assert np.max(abs(W))<1e-13
         rows.append((k,float(np.linalg.norm(T)),float(np.linalg.norm(C)),
                      float(np.linalg.norm(W))))
+    # Keep the actual fixed-action shear coefficient explicit; S=1 is only
+    # the perturbative coefficient-level normalization, not a physical unit drive.
+    actual_mu=source_shear_bound()+1
+    phys=assemble(h,t,K/2,muS=actual_mu,Qrot=qrot)
+    assert all(np.isfinite(v).all() for v in phys)
     # Elastic is strictly a K-supported term: never extend it to 3K.
     high=assemble(h,t,5*K/2,muS=7.,Qrot=qrot)
     base=assemble(h,t,5*K/2,muS=0.,Qrot=qrot)
