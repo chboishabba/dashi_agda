@@ -2576,3 +2576,73 @@ module At {r : Level} (F : C.RealField r)
   -- to a nonzero q pivot (NEVER q²), and the q=0 source compatibility
   -- survives independently. The full wall metric inverse here needs
   -- its ACTUAL positive/timelike physical chart proofs.
+
+  ------------------------------------------------------------------------
+  -- BR64: FULL ISRAEL FRECHET ↔ BR34 GEOMETRIC REFERENCE TEN ROWS.
+  --
+  -- With original two-face matching, R_ab=2[delta K_ab]-2j delta h_ab.
+  -- The full nonlinear Israel shell derivative is exactly
+  --   delta I=1/2 (R-eta tr_eta R)+3(delta j)eta.
+  -- The bidirectional inverse (FOUR tangential dimensions) is
+  --   R=2{delta I-3(delta j)eta
+  --             -(1/3)eta tr_eta(delta I-3(delta j)eta)}.
+  -- No frequency, zero-mode, glancing root or rank-nine projection
+  -- appears in this finite geometric reversal.
+  --
+  -- The original BR34 10-row *reference operator* must still be
+  -- identified with this R by the BR19/48/59 physical shape/coordinate
+  -- and BR14 optical normalisation. That comparison is not automatic.
+  ------------------------------------------------------------------------
+
+  originalGeometricIsraelRows : TwoFaceMovingIsraelSource →
+    Wall → Wall → S
+  originalGeometricIsraelRows d a b =
+    two * originalShapeJump d a b
+      - two * originalIsraelJump d *
+          originalInducedVariation (plusMovingShape d) a b
+
+  originalTraceReverseFour :
+    (Wall → Wall → S) → Wall → Wall → S
+  originalTraceReverseFour p a b =
+    p a b - eta a b * trace4 p
+
+  originalTraceUnreverseFour :
+    (Wall → Wall → S) → Wall → Wall → S
+  originalTraceUnreverseFour p a b =
+    p a b - third * eta a b * trace4 p
+
+  originalFullShapeFromReference : TwoFaceMovingIsraelSource →
+    Wall → Wall → S
+  originalFullShapeFromReference d a b =
+    half * originalTraceReverseFour (originalGeometricIsraelRows d) a b
+      + three * derivativeIsraelJump d * eta a b
+
+  originalReferenceFromFullShape : TwoFaceMovingIsraelSource →
+    Wall → Wall → S
+  originalReferenceFromFullShape d a b =
+    two * originalTraceUnreverseFour
+      (λ i k →
+        originalIsraelShapeFrechet d i k
+          - three * derivativeIsraelJump d * eta i k) a b
+
+  record OriginalFullIsraelBidirectionalWeld
+      (d : TwoFaceMovingIsraelSource) : Set r where
+    constructor originalFullIsraelBidirectionalWeld
+    field
+      actualInducedAndGraphCompatible :
+        OriginalTwoFaceShapeCompatibility d
+      physicalToGeometricReference :
+        (a b : Wall) →
+          originalFullShapeFromReference d a b ≡
+            originalIsraelShapeFrechet d a b
+      geometricReferenceFromPhysical :
+        (a b : Wall) →
+          originalReferenceFromFullShape d a b ≡
+            originalGeometricIsraelRows d a b
+  open OriginalFullIsraelBidirectionalWeld public
+
+  -- This is the exact remaining source-specific bridge to the native
+  -- BR34 ten-row Israel block. Prove the BR14 optical jet/BR19 graph
+  -- change-of-variables and the equality of the geometric ten rows
+  -- to metricRows' original Israel indices. The freestanding record
+  -- does not manufacture the two reverse proofs or a PDE solution.
