@@ -17,14 +17,14 @@ def build(m,a):
     def unpack(y):return np.split(y,cuts)
     def pack(*v):return np.concatenate([np.asarray(x).ravel() for x in v])
     def store(c,u):return sum(v*u**k for k,v in c.items()).real
-    def rhs(t,y,gamma=0):
+    def rhs(t,y,gamma=0,store_gain=0):
         E,b,z,i,q,x,v,j,Q,X,V,e0,e1,th0,th1,p=unpack(y)
         u=np.exp(1j*(th1-th0));e=e0+e1;ratio=np.array([e[k]/store(c,u[k]) for k,(_,_,c) in enumerate(models)])
         F=np.zeros_like(z);de=np.zeros(n);dp=np.zeros(n)
         for k,(ids,r,c) in enumerate(models):
             f=np.sqrt(2)*(r[2]*u[k]**2+h*r[1]*u[k]).real*ratio[k];F[ids]+=f;de[k]-=z[ids]@f
         for k,l,flow in edges:
-            f=flow*ratio[k]*ratio[l];de[k]-=f;de[l]+=f
+            f=flow*ratio[k]*ratio[l]+store_gain*(ratio[k]-ratio[l]);de[k]-=f;de[l]+=f
             torque=np.imag(u[l]*u[k].conjugate())+gamma*(p[l]-p[k]);dp[k]+=torque;dp[l]-=torque
         s=np.sqrt(2)*np.cos(2*t)
         return pack(Mi@(C.T@N@b-B@z+ts.T@i-tr.T@j),-C@E,Hi@(B.T@E+F),Li[0]@(2*s-i-ts@E-Ks@q-x),i,i-v,x,Li[1]@(tr@E-R*j-Kr@Q-X),j,j-4*V,X,de*e0/e,de*e1/e,np.full(n,float(OMEGA)),float(OMEGA)+1+p,dp)
