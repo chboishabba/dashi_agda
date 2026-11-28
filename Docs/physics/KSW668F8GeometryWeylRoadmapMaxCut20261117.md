@@ -21,3 +21,44 @@ The increasing then nonmonotone metric-Hessian Htt residual is a NEGATIVE accept
 The unified scripts/check_f8_w1w2_source_current_maxcut.py was extended at 67c447f3e89e4f7a15a3291dc0c3f4bf4bb0c87b: default checks now include exact wall reverse, rational H7 caps, real donor W1/W3 graph and normal-stencil algebra; --original-normal runs the actual three-grid 64/128/256 original negative receipt as a separately opted-in local <=90s subprocess. The entire aggregated full PR checkout script remains UNEXECUTED, and so do --history and --original-jets modes. No native kernel or GitHub CI.
 
 Revised narrow P0: (i) the mathematical H7 formulas and coefficient/compact source caps are DONE and tested locally; (ii) establish original finite-slab N2_0..N2_5 and true F0..F5 source-compatible residuals by an actual normal higher-graph energy or independent certified collocation/interval scheme, preserving first-order Israel defect; (iii) improve/independently certify the near-wall normal Hessian reconstruction and source/ODE time errors, not merely compare grids; (iv) feed certified caps through the now connected original controller and Ward C6 pipeline; (v) attach source-compatible Q5/Rnn Gauss and physical Schur, same-window receiver and native proof authority as previously recorded. Avoid duplicated generic H7 postulates.
+
+
+### 28 November — W3 original normal-graph hierarchy and exact characteristic-to-GN weld
+
+Implemented a connected, original-geometry, multi-order normal graph cut on F8 #1547. New source files, tested locally with SymPy 1.14 and source blob parity verified through git hash-object:
+- scripts/check_f8_normal_graph_hierarchy.py commit 74fc62a988ab79d2764a85a33278b98f9e223d10, blob 3346509808467ba1265d39da8f0297d943adc13e.
+- scripts/check_f8_characteristic_pde_weld.py commit c38d1677b6bdeb82461012bc8d4d3845fa985f39, blob bf5135027a057ad73143791eabe4e7a93868f6cb.
+- scripts/check_f8_normal_graph_trace_socket.py commit 95a5f6d1c6cd4b0da15fcb19f5fef9925ed55e7d, blob 061a9c0c495fcdfcd7f1b120c35dee6eef54c826.
+- scripts/check_f8_normal_graph_energy_hierarchy.py commit 5b4468c031c7f24aa2b1ed6efc7a5d574c7bed82, blob 3edcfaabf9aa6e0cba9f7d89533df5530f3006ab.
+All four exact modules passed locally and current committed source bytes match those executed. Default combined check scripts/check_f8_w1w2_source_current_maxcut.py amended at 6fbaf07668b32e7a3efa9307f937e2c662316368 to include them. The combined PR-checkout runner and original --history/--original-jets remain unexecuted. No CI or native formal kernel.
+
+The existing original characteristic solver uses R=W+V, L=W-V, H_t=N W, H_n=V. Its actual first-order dynamics are
+ R_t=N R_n+S+N_n W,
+ L_t=-N L_n+S-N_n W,
+ W_t=N V_n+(N_n-3Nc/a)V-3N W/a-Nk² H/a²,
+ V_t=(N W)_n,
+where a=sinh(asinh(t)-n), c=cosh(asinh(t)-n), N=c/sqrt(1+t²). Thus ∂t(H_n-V)=0 for compatible H_t=N W and initial integrability, with original wall V=-6Pi. Independently eliminating W,V reproduces exactly L H=0, L=-∂t(A ∂t)+∂n(B ∂n)-C, A=a³/N, B=Na³, C=Na k². This is a source-to-GN mathematical identity, not an independent PDE residual or numerical propagation proof. Off-shell, if H_t=N W+G, H_n=V+D and W_t=W_t,expected+U, the exact wave residual is F= -A_t G -A G_t -A N U + B_n D+B D_n; all defects must be independently bounded, not assumed zero.
+
+For m>=1, differentiating the original GN wave in n yields a true normal-hierarchy source
+ L(∂n^m H)= ∂n^m F
+ +sum_{j=1}^m binom(m,j)[∂t((∂n^j A) ∂t∂n^{m-j}H)
+                         -∂n((∂n^j B)∂n^{m-j+1} H)
+                         +(∂n^j C)∂n^{m-j} H].
+Verified through m=4 against independent manufactured polynomial variable-coefficient examples, with the actual original GN m=1 coefficients also checked. Boundary values are NOT filled by differentiating the original Neumann V=-6Pi in n: a counterexample H=n+g(t)n² has the same wall H_n as H=n but different wall H_nn.
+
+At every m=0..4, the exact scalar-principal energy of v=∂n^m H,
+ E_m=1/2 int_0^{1/2}[A|v_t|²+B|v_n|²+C|v|²]dn,
+satisfies
+ E_m'=[B Re(conj(v_t) v_n)]outer-inner
+      -Re int F_m conj(v_t) dn
+      +1/2 int[-A_t|v_t|²+B_t|v_n|²+C_t|v|²]dn,
+ F_m=∂n^m F+comm_m.
+All normal differentiated boundary fluxes are independently signed (m>=1 cannot use the original Israel H_n boundary to drop them). Thus no fictional normal-boundary dissipation or positivity theorem is asserted.
+
+For each j=0..5, define normal Sobolev graph X_j=1/2 int[A|∂t^j H_nn|²+B|∂t^j H_nnn|²]dn. The actual original collar bounds A>6/875,B>3/625 and FTC imply the exact conditional trace
+ |∂t^j H_nn(t,0)|² <=(3500/3) X_j^{(A)}+(1250/3) X_j^{(B)},
+where X_j^(A/B) denote the respective half-weighted pieces. These six X_j have NOT been certified for the original evolving solution: this is a precise norm to obtain, not a newly asserted bound. Higher source and initial compatibility plus higher differentiated wall/outgoing flux must be controlled.
+
+The two actual original one-sided normal reconstructions have distinct unconditional Taylor-remainder interfaces: Dnn^H=(2H0-5H1+4H2-H3)/h² satisfies |Dnn^H-H_nn|<=(25/4)h² sup|H_nnnn|, whereas Dn^V=(-11V0+18V1-9V2+2V3)/(6h) satisfies |Dn^V-V_n|<=(9/4)h³ sup|V_nnnn|=(9/4)h³ sup|H_nnnnn| only if V=H_n is genuinely controlled. The apparently improved V-based empirical three-grid residual costs a FIFTH normal derivative, not a free fourth-normal bound. This is an important regularity tradeoff and prevents inappropriate promotion of the three-grid diagnostics to a rate certificate.
+
+Next exact P0 max-cut should instantiate actual normal energies E_m and time-differentiated versions m=1..4,j=0..5 with existing original characteristic source, original C5/C6 compact bump, true initial/outer boundary data, off-shell residuals and named higher wall traces. Prove source and boundary admissibility and normal derivative regularity or produce an independently certified numerical enclosure. Only then can six X_j pay H_nn,t^0..5 and existing H7 -> retarded controller C6 -> complete Ward C6 -> scalar reciprocal Q,Q_t,Q_tt -> coupled Einstein/material/gauge receiver. Do not duplicate general normal commutators, and do not claim full physical endpoint acceptance from local symbolic PASS.
