@@ -241,6 +241,8 @@ PARTS["terminal"] += [(f"BR245247.{p}","check_hopf369_br245_247_subsidiary.py",(
 PARTS["terminal"].append(("BR248.energy","check_hopf369_br248_250_forced_subsidiary.py",("--part","energy")))
 PARTS["terminal"] += [(f"BR249250.n{n}","check_hopf369_br248_250_forced_subsidiary.py",("--part","refine","--n",str(n))) for n in (11,17,23)]
 
+PARTS["terminal"] += [(f"BR251252.n{n}","check_hopf369_br251_history_jets.py",("--n",str(n))) for n in (11,17,23)]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
