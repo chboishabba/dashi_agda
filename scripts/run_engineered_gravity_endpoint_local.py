@@ -46,6 +46,8 @@ CORE=(
     "check_engineered_gravity_g3_harmonic_receiver.py",
     "check_engineered_gravity_nonlinear_shell.py",
     "check_engineered_gravity_shell_ward_hessian.py",
+    "check_engineered_gravity_shell_compliance.py",
+    "check_engineered_gravity_same_endpoint_active.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
