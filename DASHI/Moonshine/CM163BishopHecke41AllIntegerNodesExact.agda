@@ -20,6 +20,7 @@ import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
 import DASHI.Moonshine.CM163BishopHecke41IntegerPrefixCertificateExact as Cert
 import DASHI.Moonshine.CM163Hecke41FullIntegerMatrixExact as Matrix
+import DASHI.Moonshine.CM163BishopHecke41MatrixSymmetryExact as MatrixEval
 import DASHI.Moonshine.CM163BishopHecke41IntegerSpecializationReflectionExact as Reflect
 import DASHI.Moonshine.CM163BishopHecke41NativeFiniteAcceptanceExact as Native
 import DASHI.Moonshine.CM163BishopHecke41ArbitrarySliceSeriesExact as Series
@@ -81,3 +82,19 @@ module At (inputs : Round11.BishopCutset) where
     C._≈C_ (For.F.S.S.residual n p)
       (A._*C_ (R.A0.A0.t p) (Eval.value (For.F.S.S.tail n p)))
   nodePole gates n hn = For.poleRemoved n nativeUnit (nodeAt gates n hn)
+
+
+  -- Explicitly isolate GLOBAL analytic rigidity as one node-indexed
+  -- obligation. It cannot be replaced by a finite cusp prefix.
+  NodeZero : Set
+  NodeZero = ∀ n → n ≤ 42 → ∀ p →
+    C._≈C_ (For.F.S.S.residual n p) A.zeroC
+
+  -- A zero-residual proof at every selected integer target is now
+  -- transported to the SAME bivariate candidate, with no new data.
+  nodeIdentity : NodeZero → ∀ n → n ≤ 42 → ∀ p →
+    C._≈C_ (R.A0.A0.G.product p (Poly.realC (I.embed (node n))))
+      (MatrixEval.matrix candidate (R.A0.A0.G.j p)
+        (Poly.realC (I.embed (node n))))
+  nodeIdentity zeros n hn p =
+    S.For.actualIdentity candidate (node n) p (zeros n hn p)
