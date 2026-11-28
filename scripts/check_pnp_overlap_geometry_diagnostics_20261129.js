@@ -107,4 +107,15 @@ function graphBlock(k){
 let block=[3,4,5,6,8].map(graphBlock);
 return {status:"PASS",standard,cdcl,block,checks,scope:"exact finite checks; syntactic metrics, not minimum complexity; no upstream result assumed"};
 }
-console.log(JSON.stringify(campaign(),null,2));
+function equalityControl(){
+ const a=[];let checks=0;
+ for(let r of [1,2,4,8,12,16]){
+  const n=2**r;
+  const evalEq=(x,y)=>{let f=1;for(let i=0;i<r;i++)f&=1^((x>>i)&1)^((y>>i)&1);return f};
+  if(r<=8){for(let x=0;x<n;x++)for(let y=0;y<n;y++){if(evalEq(x,y)!==+(x===y))throw Error("equality");checks++}}
+  else for(let x=0;x<n;x+=127){if(evalEq(x,x)!==1||evalEq(x,(x+1)%n)!==0)throw Error("equality");checks+=2}
+  a.push({r,variables:2*r,arithmeticOperations:3*r-1,rank:n,w:0,b:0,t:0});
+ }
+ return {a,checks};
+}
+const result=campaign();result.fullCubeEquality=equalityControl();console.log(JSON.stringify(result,null,2));
