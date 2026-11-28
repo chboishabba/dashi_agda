@@ -70,7 +70,7 @@ def main():
                     "source_sha256":hashlib.sha256(f.read_bytes()).hexdigest(),
                     "output_sha256":hashlib.sha256((z.stdout+z.stderr).encode()).hexdigest()}
             except subprocess.TimeoutExpired:checks[path]={"status":"TIMEOUT"}
-    status="BLOCKED" if repo and any("MISSING" in z["owners"].values() for z in result.values()) else "INVENTORY_ONLY"
+    status="BLOCKED" if repo and any("MISSING" in z["owners"].values() or z.get("missing_w1_sources") for z in result.values()) else "INVENTORY_ONLY"
     payload={"status":status,"lane_count":len(result),"lanes":result,"owner_checks":checks,
              "known_unpaid_count":sum(len(x["unpaid"]) for x in result.values()),
              "scope":"Source-qualified bookkeeping, not native or physical certification"}
