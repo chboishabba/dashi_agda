@@ -44,12 +44,13 @@ def elastic(k,H,t,muS):
     R[1:]=-1j*muS*np.asarray(k)@H/t
     return T,C,R
 
-def assemble(history,t,k,muS=0.):
+def assemble(history,t,k,muS=0.,Qrot=None):
     """Actual original-source finite-band known T, effective Israel C, Ward R.
     Output k is along local z; rotate original source tensor for other directions.
     """
     from scipy.interpolate import CubicSpline
-    from check_f8_full_band_wall_controller import triangles,sectors,Q
+    from check_f8_full_band_wall_controller import triangles,sectors,Q as original_Q
+    Q=original_Q if Qrot is None else np.asarray(Qrot)
     from check_f8_nonzero_convolution import project
     from check_f8_characteristic_history import coefficient,bump
     cutoff=history.K;b=1/t;w=b**4/12
