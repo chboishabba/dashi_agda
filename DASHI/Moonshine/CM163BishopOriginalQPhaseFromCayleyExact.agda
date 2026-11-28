@@ -19,12 +19,14 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 import Real as R
+open R using (_*_; _≃_)
 import RealProperties as P
 import DASHI.Analysis.BishopSetoidComplexExact as Setoid
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Series
 import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as K05
 import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as Cayley
+import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Moonshine.JInvariantBishopCM163SelectedDiskExact as CM
 import DASHI.Moonshine.CM163BishopSelectedQScaleTransportExact as Scale
@@ -44,7 +46,7 @@ seriesCongruent h = Setoid.reEquivalent h , Setoid.imEquivalent h
 -- The real exponential is from the existing native Bishop exponential
 -- and its original selected q-radius, not a second analytic evaluation.
 radiusRead :
-  Exp.bishopExp (R.- Scale.fullDiskScale) R.≃ CM.radius
+  Exp.bishopExp (R.- Scale.fullDiskScale) ≃ CM.radius
 radiusRead =
   ExpCong.bishopExpCongruent
     (P.-‿cong (P.≃-symm Scale.exponentToDisk))
@@ -54,8 +56,8 @@ module At (inputs : Round11.BishopCutset)
   (cayley : K05.OriginalMachinCayleySameObjectEvaluation inputs) where
 
   quarterEqual :
-    R._≃_ (K05.Quad.quarterCos inputs)
-      (K05.Quad.quarterSin inputs)
+    R._≃_ (Quad.quarterCos inputs)
+      (Quad.quarterSin inputs)
   quarterEqual =
     K05.sourceMachinQuarterEqualityFromCayley inputs product
       (Setoid.≈C-trans cayley
@@ -75,7 +77,7 @@ module At (inputs : Round11.BishopCutset)
   realPhase :
     (Exp.bishopExp (R.- Scale.fullDiskScale) *
       Product.cosB inputs Machin.bishopMachinPi)
-      R.≃ (R.- CM.radius)
+      ≃ (R.- CM.radius)
   realPhase =
     P.≃-trans
       (P.*-congˡ (proj₂ endpoints))
@@ -88,7 +90,7 @@ module At (inputs : Round11.BishopCutset)
   imaginaryPhase :
     (Exp.bishopExp (R.- Scale.fullDiskScale) *
       Product.sinB inputs Machin.bishopMachinPi)
-      R.≃ R.0ℝ
+      ≃ R.0ℝ
   imaginaryPhase =
     P.≃-trans
       (P.*-congˡ (proj₁ endpoints))
