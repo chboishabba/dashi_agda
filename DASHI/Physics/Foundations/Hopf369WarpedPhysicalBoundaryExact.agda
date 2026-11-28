@@ -3578,3 +3578,44 @@ module At {r : Level} (F : C.RealField r)
   -- Robin residuals AFTER D's homogeneous value conditions vanish.
   -- Analytic cascade requires identical reflected operators, compatible
   -- boundary multiplier, zero initial/exterior data. Not asserted here.
+
+
+  ------------------------------------------------------------------------
+  -- BR97 candidate F: full geometric gauge continuity plus BR33
+  -- mean force, preserving D/E and their existing source consumers.
+  ------------------------------------------------------------------------
+  originalMetricRowsF : S → Vec → Tensor → Tensor → Tensor → Tensor → List S
+  originalMetricRowsF j q p px m mx =
+    metricPrefix j q p px m mx ++
+    (pack4 (tangentJump j q p px m mx) ++
+      ((gaugeNorm q p px - gaugeNorm q m mx) ∷
+        meanForce j q p px m mx ∷ []))
+
+  originalGaugeRowsF : S → Vec → Cov → Cov → Cov → Cov → List S
+  originalGaugeRowsF j q p px m mx =
+    ((p normal - m normal) ∷ pack4 (λ a → p (wall a) - m (wall a))) ++
+    (pack4 (gaugeCodazzi j q p px m mx) ++ (gaugeGauss j q p px m mx ∷ []))
+
+  originalMetricCountF : (j : S) (q : Vec) (p px m mx : Tensor) →
+    length (originalMetricRowsF j q p px m mx) ≡ 30
+  originalMetricCountF j q p px m mx = refl
+
+  originalGaugeCountF : (j : S) (q : Vec) (p px m mx : Cov) →
+    length (originalGaugeRowsF j q p px m mx) ≡ 10
+  originalGaugeCountF j q p px m mx = refl
+
+  originalPhysicalGaugeRowsF : S → (Wall → Wall → S) → Vec →
+    Cov → Cov → Cov → Cov → List S
+  originalPhysicalGaugeRowsF j M q p dp m dm =
+    ((p normal - m normal) ∷ pack4 (λ a → p (wall a) - m (wall a))) ++
+    (pack4 (coordinateCodazzi j M q p dp m dm) ++
+      (gaugeGauss j q p dp m dm ∷ []))
+
+  originalPhysicalGaugeCountF : (j : S) (M : Wall → Wall → S)
+    (q : Vec) (p dp m dm : Cov) →
+    length (originalPhysicalGaugeRowsF j M q p dp m dm) ≡ 10
+  originalPhysicalGaugeCountF j M q p dp m dm = refl
+
+  -- These are reference/coordinate row constructors and exact
+  -- count proofs only. BR98 requires the actual geometric F wall
+  -- conditions and same reduced solution, not an inhabited count.

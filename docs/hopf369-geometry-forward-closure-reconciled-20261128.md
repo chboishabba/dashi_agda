@@ -600,3 +600,130 @@ reflection data, either instantiate BR94 or close coupled second-order
 parity defect; W1 curved D/E Jacobian, W2 actual metric energy, W3
 variable localization, W4b independent Weyl, W5/6 exterior/existence
 remain open.
+
+
+## 9. BR96–99 — nonzero source reflection audit and full-continuity allocation F
+
+**BR96 source audit.** Reopened original AN metric, BE seed/coupling,
+BN interval/radial/verification, BO third-jet and BQ fourth-jet owners.
+AN has a(x) independent of n with g_an/g_nn=a; b(n) is even around
+L/2. Its nonzero signed amplitude changes under n->L-n, and the
+original AN/BN tests explicitly compare +eps at n with -eps at L-n.
+BE's odd second-jet lift f(n) multiplies an odd source correction;
+the scalar factor and tangential-only BO/BQ repair preserve the
+KK readback. Do not confuse signed covariance with invariance at
+one fixed nonzero eps. Exact origin jets of AN rational pullback:
+a(0)=(0,0,5 eps), (d a)_12(0)=50 eps=5/4 at eps=1/40.
+For base-identity fibre reversal n->L-n+f(x), invariance of the
+connection would require df=-2a, impossible where da !=0.
+This is not a general all-isometry obstruction, and does not assume
+BN existence beyond its conditional source proof. BR94 cannot simply
+be instantiated on the actual nonzero fixed-source metric.
+
+**BR97 / W1,W3: third candidate F, not a change to D/E.** Choose
+same BR26 two-chart matched metric geometry and same BR33 physical
+mean force:
+ [h]=0 (10), [beta]=0 (4), [K]=jh (10),
+ [C_a]=0 (4), [C_n]=0 (1), tau+ + tau-=0 (1).
+Here C_n is physical unit-normal gauge in matching Gaussian trace
+frames, not raw coordinate C_y. The full 5-component geometric
+gauge continuity replaces D's one-sided normal Dirichlet. Unlike
+BR26's rank-deficient six-value allocation, F keeps mean force and
+only five gauge conditions. With BR33 common H, d=beta+-beta-,
+b=beta++beta-, p=ell+-ell-, a=ell++ell-, finite flat T=ell tanh
+and C=ell coth, the five gauge rows are ct=-z p-T b,
+nn=T tr H+div d-T a, mean=-div b. Reverse solve for arbitrary
+forcing R,g,nn,d0,f:
+ H=-(R+z d0^T+d0 z^T)/(2T);
+ p=(T f-div g)/q; b=-(g+zp)/T;
+ a=tr H+(div d0-nn)/T.
+The determinant is signed 2^14 T^14 q, nonzero on the damped
+flat domain q=-ell². Gauge F keeps normal and tangent jumps,
+then solves their sums by original BR33 Codazzi/Gauss suffix.
+No temporal z0 divisor. The full 30 and 10 principal matrices
+use actual BR34 rows, only replacing D's one-sided normal with
+normal jump. Independent local SymPy 1.13.1 calculation of the
+literal full row formula gave both inverse products for the four
+rest/ray cases. Exact rest infinity bounds: metric 8, gauge 3/2.
+On s=1+i omega, |xi|=omega, w=ell, exact Laurent inverses have
+max powers 3 and 1, coefficient bounds 11 and 2 respectively.
+No w²+1 denominator: no E opposite-sector temporal pole. This
+is a source-compatible *candidate*, not yet a native original
+F metric solution; W0 higher compatibility and W1 full moving
+nonlinear Jacobian attachment remain. D/E retained unchanged.
+
+**BR98 / W4a: conditional general-background uniqueness for F.**
+Assume a given sufficiently regular reduced solution on the
+actual two-chart material seam, with F boundary conditions,
+constant pure tension, matched induced metric and normals,
+compatible wall-tangent time multiplier with normal spatial
+there, zero initial gauge and normal time derivative, and
+homogeneous nonincoming exterior flux with justified weighted
+energy/trace bounds. No normal reflection hypothesis.
+BR92 gives homogeneous gauge wave with actual Ricci coefficients.
+BR33/68 in common Gaussian trace coordinates gives
+ [partial_n C_a] = 2j C_a,
+ [partial_n C_n] = 4j C_n
+since ALL five values match, tangential derivatives of jumps
+vanish, [K]=jh and mean tau=0. In parallel-frame notation the
+tangential covariant normal jump is instead j C_a: do not mix
+those conventions. Common physical wall trace, time derivative
+and positive weight/Gram are available via chart gluing and a
+boundary-adapted positive component energy. Pick a smooth real
+positive fibre Gram G, same on the two wall traces and block
+diagonal in tangent/normal there; extend separately into each
+bulk. Work in the Gaussian trace coordinate components, put
+connection/curvature coefficients into bounded lower-order work.
+The outward sum of both energy fluxes is
+ -<partial_t C, G S C> with S=diag(2j,2j,2j,2j,4j),
+including the common boundary density/lapse factor in G.
+G S symmetric. Add signed wall potential (1/2)<C,G S C>;
+its derivative cancels the velocity flux, leaving only
+(1/2)<C,partial_t(G S) C>, controlled by H1 trace.
+Use BR94 trace interpolation on either/both actual collars to
+absorb negative derivative charge and select large bulk mass;
+positive modified energy equivalent to H1 x L2 then obeys
+dE/dt<=K E. Zero initial energy yields C=0 by Gronwall.
+This conditional argument allows unequal reflected principal
+operators: the energy is separate bulk energies plus COMMON
+wall value potential, not a constant off-diagonal face Gram.
+It requires the actual nonlinear geometric F boundary conditions,
+regularity and weighted exterior hypotheses, not merely row count
+or principal inverse. Once C=0, Ric=-4g and BR90/91 sources
+vanish. Independent Weyl preservation remains distinct.
+This is an analytic proof written in roadmap, not Agda acceptance.
+
+**BR99 / W3: full frozen warped F route.** Use BR34 actual finite
+warped optical DtN, BR35 Green bounds and BR37 Lorentz covariance.
+At rest normalize derivative rows by |ell|=L and compare to
+flat decaying principal matrix. Let delta bound the relative
+endpoint derivative error including finite interval tails and
+optical-to-parallel conversion. Exact F row norms give derivative
+coefficients <=5 metric, <=2 gauge, and explicit j lower terms
+<=3|j|/L and <=4|j|/L. Thus the rest Neumann factors are
+ rho_m<=8(5 delta+3|j|/L),
+ rho_g<=(3/2)(2 delta+4|j|/L).
+If both <1, the rest inverse norms are <=8/(1-rho_m) and
+(3/2)/(1-rho_g). BR35/37 existing rest estimates supply a
+route to sufficiently large damping, but the exact F relative
+error must be traced to its actual operator and accepted.
+All F continuity/derivative rows transform as tensors,
+covectors or scalars under BR37, including normal gauge jump
+and mean. Hence global frozen F transport follows without E
+rank-one temporal denominator; physical coordinate chart powers
+remain metric Q^4/gauge Q² as safe BR37 upper bounds. BR95
+variable localization defect still unpaid for metric evolution.
+Do not claim variable-coefficient wellposedness from this route.
+
+Acceptance: independent local full principal F matrices gave
+rest 8 and 3/2, ray powers 3/1 and constants 11/2 (meaning
+metric 11, gauge 2 separately), no w²+1 pole. This was a
+transcription, not execution of committed checker. BR96 origin
+calculation and BR98–99 source bodies, finite interval checker,
+native F row/count bodies all pending exact replay and kernel.
+No CI; commit marked skip ci. Keep manuscript provenance and
+all D/E negative controls. Next max-cut: full F curved
+Fréchet boundary/corner attachment; source-specific rest warped
+DtN bound and actual variable reduced metric estimate; instantiate
+BR98 on that same solution, then W4b–W6. Do not spend more
+work trying to force original BN into a reflection-symmetric subclass.
