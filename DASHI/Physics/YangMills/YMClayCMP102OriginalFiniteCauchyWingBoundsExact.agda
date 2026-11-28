@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteCauchyWingBoundsExact w
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 import Real as R
+import RealProperties as P
 
 import DASHI.Physics.YangMills.BalabanCMP109BishopRootFreeSeriesExact as CMP109
 import DASHI.Physics.YangMills.YMClayCMP102OriginalEndpointCauchyShiftExact as CMP102
@@ -73,3 +74,22 @@ originalBSquareCauchyWingFiniteBound : ∀ X count →
         (Wing.absoluteTerms (bTerm X)) count))
 originalBSquareCauchyWingFiniteBound X count =
   Wing.finiteCauchyWingAbsoluteBound (bTerm X) (bTerm X) count
+
+-- Original square terms in G_count are EXACTLY the original finite
+-- Bishop Cauchy rectangles: this consumes the existing source
+-- rectangleProduct proof, not a formal power-series equality.
+originalASquareIsOriginalRectangle : ∀ X count →
+  R._≃_
+    (R._*_ (Original.aPrefix X count)
+           (Original.aPrefix X count))
+    (Rectangle.rectangleSum (aTerm X) (aTerm X) count count)
+originalASquareIsOriginalRectangle X count =
+  P.≃-symm (Rectangle.rectangleProduct (aTerm X) (aTerm X) count count)
+
+originalBSquareIsOriginalRectangle : ∀ X count →
+  R._≃_
+    (R._*_ (Original.bPrefix X count)
+           (Original.bPrefix X count))
+    (Rectangle.rectangleSum (bTerm X) (bTerm X) count count)
+originalBSquareIsOriginalRectangle X count =
+  P.≃-symm (Rectangle.rectangleProduct (bTerm X) (bTerm X) count count)
