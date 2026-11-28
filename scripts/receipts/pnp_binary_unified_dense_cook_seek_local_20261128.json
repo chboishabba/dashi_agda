@@ -1,0 +1,160 @@
+{
+  "scope": "P vs NP only; local Python. New binary support core/campaign and seek/core campaign byte-matched fetched blobs; unified core and dense control matched. Local shared continuation imports transcribed; legacy normal-quotient portfolio not exercised. No native kernels/full checkout/CI.",
+  "blobs": {
+    "binary": "233365cca7fe8311332d30b2a984e4386b25296d",
+    "binary_campaign": "0fd604957a42ce92563edd9fef4456f48ceb2e70",
+    "unified": "bf7c0894a61b6000e49a68f47683b66a1bd81686",
+    "unified_campaign": "51ecfe67d9552a43ac4242b97396639a13ef682b",
+    "dense": "400d939115dfdb62052e68c637afb3bf7098d025",
+    "seek": "7972c98fbcd635b914c95e19fa4fac09c98d2593",
+    "seek_campaign": "10135b28739a7a14ab9f1b17d53e8a68772ff4bf"
+  },
+  "binary": {
+    "seed": 3692830,
+    "fixtures": 256,
+    "points": 14323,
+    "inhabited": 110,
+    "empty": 146,
+    "singleton": 24,
+    "multiple": 86,
+    "caps": [
+      0,
+      1048576
+    ],
+    "each_cap": {
+      "witness": 110,
+      "empty": 146,
+      "queries": 614,
+      "reserved": 0
+    },
+    "bounds": 3684,
+    "identity_isolation": 200,
+    "guarded": {
+      "singleton": 32,
+      "multiple": 32
+    },
+    "interval_controls": 576,
+    "hard": [
+      {
+        "cap": 0,
+        "queries": 8,
+        "splits": 1,
+        "reserved": 0
+      },
+      {
+        "cap": 1048576,
+        "queries": 8,
+        "splits": 0,
+        "reserved": 180224
+      }
+    ],
+    "witness": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "exact_large_int_control": "100-digit count"
+  },
+  "unified": {
+    "seed": 3692832,
+    "fixtures": 128,
+    "cap": 65536,
+    "decisions": {
+      "witness": 36,
+      "empty": 92
+    },
+    "classification": {
+      "singleton": 8,
+      "multiple": 28,
+      "empty": 92
+    },
+    "forced_fallback": {
+      "cap": 0,
+      "binary": "UNKNOWN",
+      "signed_seed": "WITNESS",
+      "witness": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "legacy_exercised": false,
+    "note": "Executed equivalent local inline test, committed standalone campaign; baseline uncapped physical costs unpaid."
+  },
+  "dense": {
+    "exhaustive_roundtrips": 5460,
+    "controls": [
+      {
+        "n": 2,
+        "gates": 5,
+        "edges": 8
+      },
+      {
+        "n": 4,
+        "gates": 15,
+        "edges": 24
+      },
+      {
+        "n": 6,
+        "gates": 25,
+        "edges": 40
+      },
+      {
+        "n": 8,
+        "gates": 33,
+        "edges": 52
+      },
+      {
+        "n": 10,
+        "gates": 43,
+        "edges": 68
+      },
+      {
+        "n": 12,
+        "gates": 53,
+        "edges": 84
+      },
+      {
+        "n": 128,
+        "gates": 593,
+        "edges": 932
+      },
+      {
+        "n": 1024,
+        "gates": 4775,
+        "edges": 7504
+      }
+    ],
+    "sensitivity": "n-1 per output at zero; max fanout 3, fanin 2; disjoint Toffoli then even parity mask"
+  },
+  "seek": {
+    "fixtures": 128,
+    "tokens": 758204,
+    "bit_checks": 325101,
+    "huge_T": 1000000000000,
+    "huge_columns": 2000000000003,
+    "huge_tokens": "24000000000110000000000257000000000328000000000194",
+    "huge_bits": "72000000000330000000000771000000000984000000000582",
+    "scope": "Parameterized templates, actual original layout and token grammar, independent explicit reference; native actual truth-table export not executed."
+  },
+  "execution": {
+    "ci": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "full_checkout": false,
+    "physical_bit_clock": false,
+    "uniform_adequacy": false,
+    "unrestricted_lower_bound": false,
+    "self_quotation_resource_closure": false
+  }
+}
