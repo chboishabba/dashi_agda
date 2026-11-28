@@ -3898,3 +3898,35 @@ module At {r : Level} (F : C.RealField r)
   -- Given-metric energy uniqueness is conditional on actual regular
   -- geometry, initial/exterior data and same-source Cotton/Codazzi.
   -- These expressions do not provide nonlinear Cartan development.
+
+
+  ------------------------------------------------------------------------
+  -- BR132–135: full subsidiary wall work and covariant Cartan sources.
+  -- Positive squares are supplied in the common spatial Hodge frame.
+  ------------------------------------------------------------------------
+  originalFSubsidiaryWallMass : S → S → S → S
+  originalFSubsidiaryWallMass eSquare symmetricSquare skewSquare =
+    (three * three * half) * eSquare
+    + three * symmetricSquare + (three * two) * skewSquare
+
+  originalFSubsidiaryDivergenceSource : S → S
+  originalFSubsidiaryDivergenceSource electricSource =
+    two * electricSource
+
+  originalFSubsidiaryWallSkewWork : S → S
+  originalFSubsidiaryWallSkewWork electricDivPair =
+    neg (three * half * electricDivPair)
+
+  originalFExteriorBianchiDefect : S → S → S
+  originalFExteriorBianchiDefect leftWedge rightWedge =
+    leftWedge - rightWedge
+
+  originalFCodazziCartanCurlSource : S → S → S
+  originalFCodazziCartanCurlSource ambientBianchi normalConnectionDefect =
+    ambientBianchi + normalConnectionDefect
+
+  -- These are coefficient/source expressions only. BR133 uses the
+  -- full 12-row derivative of the 11-coordinate wall graph, and its
+  -- spatial differential compatibility. No free extra wall mode.
+  -- BR134/135 are exterior identities; torsion/frame conversion,
+  -- variable seam, exterior and nonlinear generation remain open.

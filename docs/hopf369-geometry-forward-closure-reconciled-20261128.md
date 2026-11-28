@@ -2039,3 +2039,266 @@ donor (not a full repository checkout/replay). BR130/131
 independent symbolic tests. Native kernel and integrated
 PDE unrun; no CI. Targeted owner audit, not exhaustive master
 reconciliation. No new detached deliverables.
+
+
+## 18. BR132–135 — close the reference subsidiary work obstruction using the full cyclic row and spatial Bianchi
+
+Consume the ACTUAL BR29 unprojected residual/source owner
+scripts/check_hopf369_br_curvature_constraints.py, not just
+BR27/29's projected energy. Reopened BR53/55, BR78 constant
+tension Ward, BR90/91 Cotton, BR124–131 reconstruction and
+Cartan development. On master reopened
+DASHI/Geometry/DifferentialBianchiTheoremBoundary.agda,
+which explicitly has theorem interfaces rather than a
+general nonflat covariant-derivative proof, and the OCT369
+static tetrad check scripts/check_oct369_p021_tetrad_curvature_stress.py.
+The new results are source-specific attachment to BR29,
+not new classical Bianchi/Cartan mathematics. Preserve the
+existing 35D Weyl carrier and full signed normal modes.
+
+### BR132 — exact graph differential compatibility from the existing spatial Bianchi identity
+
+Use the original BR29 extended bulk subsidiary:
+ u=raw 100-component Weyl embedding Xw,
+ r=Q sum_i M_i partial_i u, c_full=sum_i D_i partial_i u,
+ Q=I-X(X^T X)^-1 X^T.
+D_i are the actual 50-row divergence-electric and
+spatial-curl-magnetic maps; M_i are the full Maxwell
+generators, not their 35D projections. Their graph is
+ r=L c, c_full=E_c c
+in the original rank-35 independent spatial residual
+coordinates c. These are BR29's exact L_c,E_c factors.
+Set K_i=-select(D_i L), select the same 35 rows.
+BR29 extended positive system has principal matrices
+ U_i=[-Q M_i Q,-Q D_i^T;-D_i Q,0].
+The naive graph mass L^T L+E_c^T E_c does NOT symmetrize
+K_i for arbitrary independent jets. Each directional
+difference
+ F_i=U_i [L;E_c]-[L;E_c] K_i
+has rank10. This is a genuine non-invariance of the
+algebraic graph on arbitrary derivative data, not an
+obstruction to its differential compatibility.
+
+Let N_i be the spatial exterior derivative on the magnetic
+curl entries: for ordered spatial indices 1,2,3,4 it takes
+the complementary triple and sign (-1)^(i-1), with all ten
+second bivector slots retained. Exact tests:
+ N_i D_i=0, N_i D_k+N_k D_i=0.
+Concatenated F=[F_1,...,F_4] and
+ N=[N_1 E_c,...,N_4 E_c] have rank10, and stacked rank10.
+An explicit rational solution T of T N=F is checked.
+Thus the entire graph derivative discrepancy factors
+through the spatial exterior derivative of the magnetic
+Bianchi residual C_B. For constant frame/flat principal
+jets of an actual smooth w, d_sp C_B=d_sp²(u)=0, not an
+extra arbitrary condition. This explains the extended
+symmetric system compatibility without falsely declaring
+the reduced graph itself symmetric on free jets.
+For evolving nonflat geometry the exact exterior defect
+source of this ten-channel derivative is BR134 below.
+Conversion between exterior and full frame covariant
+residuals needs actual coframe/torsion terms.
+
+### BR133 — restore all 12 wall evolution rows and pay tangential skew using spatial dH
+
+The original BR29 reference seam uses
+ H_{aij}=mean W_{naij}-partial_j M_ai+partial_i M_aj,
+ a=0..3, 1<=i<j<=3, 12 packed components, one cyclic
+ algebraic relation. Write H_full=E_H h for the eleven
+ independent coordinates h (E_H is BR29 HE). Use the same
+ Sc extended bulk subsidiary flux, Zall jump matrix,
+ Coupling Cw satisfying Cw Hred=Sc Zall, including the
+ original symmetric AK extrinsic connection jump Kext.
+Then bulk normal work is -j mean(c)^T Cw h (the free
+ P0 normal derivative is killed by Sc as BR29 proved).
+The previous negative result used Qred=-Mag[Hids,:] L,
+ rank11, rank([Qred^T,Cw])=12. It remains correct for
+ that specific omitted-row multiplier.
+Restore the entire 12-row source Qfull=-Mag L. Exact:
+ rank Qfull=12, rank([Qfull^T,Cw])=12,
+ Qfull^T W=Cw with unique 12x11 W.
+ S=E_H^T W symmetric with eigenvalues -3/2 x3,-3 x4,
+ -6 x3,-9 x1 in the selected coordinates.
+W is orthogonal to the cyclic annihilator ker E_H^T.
+With the full time-dependent wall equation paired with
+ j W h and j=-6/5, jS positive and normal work cancels
+ exactly. No twelfth independent wall degree of freedom
+ has been invented: the twelve evolution rows for the
+ eleven-dimensional actual derivative H are used, not
+ a separate evolution with arbitrary incompatible source.
+
+There is a second obstruction: W^T Dh_i RW is NOT symmetric.
+Do not stop at cancellation of normal flux. Use 3D Hodge
+coordinates (signed orientation of the common spatial frame)
+ H_0ij=epsilon_ijk e_k,
+ H_aij=epsilon_ijk X_ak, a=1,2,3, tr X=0.
+Here X denotes the 3x3 wall Hodge matrix ONLY, not the bulk
+embedding. X_s and X_a its symmetric tracefree and skew
+parts. With the minus sign extracted from jS, the wall
+quadratic form is
+ Gnew = (3/2)|e|²+3||X_s||_F²+6||X_a||_F².
+Using all twelve rows (not the selected eleven rows as
+an independent system), each full tangential work matrix
+has skew rank6; its e-X block is exactly
+ -3/2 times the i-th ROW of X as a map to e.
+After spatial integration by parts on a tangential torus
+(or vanishing/controlled tangential boundary work), its
+entire skew work is
+ -3/2 integral e · div_T X,
+ (div_T X)_k=sum_i partial_i X_ik.
+Do not confuse div_T with rowwise divergence
+ (div X)_a=sum_i partial_i X_ai.
+The actual full magnetic equation and BR29 raw
+antisymmetric projection residual give
+ e_t=(div_T X-div X)/2+E_src mean(c).
+The spatial exterior derivative of H uses the fact
+d_sp² M_a=0 in flat principal coordinates:
+ div X = Rowdiv mean(c),
+ Rowdiv_a= -E_c[spatial triple (123), second pair (a,4)].
+Exact matrix identity Rowdiv=2 E_src for all 35 residual
+coordinates. Hence on actual compatible derivatives
+ div_T X=2 e_t,
+ -3/2 int e·div_T X=-3 int e·e_t.
+The bulk-trace source created by the skew rewrite cancels
+EXACTLY; no trace inequality has been assumed. Add
+3|e|² to the quadratic mass, obtaining
+ Gfinal=(9/2)|e|²+3||X_s||_F²+6||X_a||_F².
+The combined energy is 1/2 integral (|r|²+|c_full|²)
+plus (-j)/2 integral Gfinal. Its signed normal and
+tangential principal work cancels for the BR29 extended
+flat bulk principal system and original symmetric AK seam
+work map, on actual compatible residual derivatives,
+with the specified tangential/exterior flux conditions.
+In particular zero initial compatible subsidiary data
+remain zero in the homogeneous reference PRINCIPAL
+energy calculation. Bounded homogeneous lower terms
+would give Gronwall. The work identity is not an existence
+theorem for projected solutions. It is not a symmetrizer
+for arbitrary unconstrained independent wall jets, nor
+a proof for the full variable curved AK or nonzero Hopf
+IBVP. The actual curved lower terms, nonzero M seam,
+shift/time frame transport and full Cartan compatibility
+must be attached before that promotion.
+This resolves the old rank12 separated-work obstruction
+in its reference algebra by using the previously omitted
+full equation AND the spatial differential constraint,
+not by denying the earlier negative result.
+
+### BR134 — covariant exterior sources on unknown geometry
+
+Let Omega be an actual connection on an independent
+invertible coframe theta, R an algebraic Riemann
+endomorphism-valued two-form, F_Omega=dOmega+Omega²,
+E=F_Omega-R. Define C=d_Omega R (degree 3) and
+D=d_Omega (*_g R) (degree 4, actual metric Hodge).
+The connection need not yet be torsion free. Exterior
+covariant differentiation squares to the graded
+commutator with F_Omega. Hence exactly
+ d_Omega C=[E,R], d_Omega D=[E,*R].
+Because [R,R]=0 and [R,*R]=0 (the latter pointwise
+by symmetry of the form inner product and antisymmetry
+of matrix commutators), the right sides are algebraic
+in the curvature defect, not derivatives of E or R.
+No metric derivative is omitted by using the exterior
+identity with the actual varying Hodge: it is included
+in D. Independent polynomial noncommuting 2x2 matrices
+on all five coordinate dimensions verify both equations,
+the Hodge contraction and nonzero source control.
+These identities supply the covariant exterior version
+of BR132's spatial dC_B compatibility, and temporal
+evolution of the spatial exterior constraints with
+the exterior electric/magnetic residuals.
+They do NOT by themselves imply the full projected
+subsidiary system has only homogeneous lower terms.
+The original BR29 projected equations use full covariant
+frame derivatives. Their conversion to d_Omega forms
+includes torsion times R, and frame/Hodge coefficients;
+in a reduced nonvacuum metric retain Ricci derivatives
+in the divergence source. Need the actual variable
+frame residual graph and differentiated projection or
+choose an exterior constraint-added evolution (which
+agrees when torsion=0) and prove the wall attachment.
+No use of vacuum Bianchi on an unconstrained unknown
+connection.
+
+### BR135 — covariant wall curl of Codazzi defect, Cartan attachment
+
+In a common intrinsic wall frame with Lorentz connection
+omega and coframe pullback, split the actual ambient
+metric-compatible connection as
+ Omega=[omega,k; Omega_nt,0], Omega_nt=-k^T eta_h.
+Here k is the tangent-normal connection one-form, and
+its covariant normal-tangent curvature is -D_omega K.
+In the same block frame let the Cartan curvature defect
+ E have normal-tangent row e_E and tangential block B_E.
+Exact block formula (forms with matrix multiplication)
+ (D_Omega E)_nt=D_omega e_E+Omega_nt wedge B_E.
+With common intrinsic connection on the two faces and
+ K^±=M±j h/2 in the common coframe, the full mixed
+ Codazzi defect H=mean R_nt+D_omega M is
+ H=-mean e_E.
+In vacuum mixed R_nt=W_nt; in reduced case retain
+ mixed Schouten/Ricci as in BR129. Then using BR131
+ D_Omega E=-D_Omega R,
+ D_omega H=mean(D_Omega R)_nt
+              +mean(Omega_nt wedge B_E).
+This is a covariant source identity for the wall curl
+used in BR133: it pays the commutator of covariant
+derivatives of M by the actual tangential Cartan defect,
+rather than pretending d_omega² M=0 on a curved wall.
+The sign follows from the ambient normal-tangent row;
+independent polynomial Lorentz block connection and
+curvature-defect forms check the identity. If intrinsic
+connections do not match, or torsion and K matching
+are not yet satisfied, extra defects must be kept;
+they are not annihilated by this test. The H here is
+the FULL spacetime Codazzi defect; BR133 consumes its
+spatial components. This does not close its variable
+time evolution or its trace bounds on unknown geometry.
+
+### Updated W4b/W2-3/W5/W6 max-cut and acceptance
+
+W4b: BR129 conditional given-metric uniqueness remains.
+BR132/133 now give compatible-reference-principal bulk
+and wall subsidiary energy, removing the previous rank12
+work obstruction. W4b unknown metric still needs variable
+constraint transport including exterior-vs-frame graph,
+torsion, nonzero mean seam, Gauss/connection matching,
+and actual existence. Do not list generic Bianchi or
+Weyl algebra as missing.
+
+W2/3: BR128 variable projected material energy unchanged;
+BR133 corrected subsidiary mass provides the candidate
+for variable compatible constraint estimate. Reverse-solve
+full nonzero M derivative jump and actual moving-frame
+time mass, substitute BR134/135 with Cartan defects,
+and absorb all lower terms including their traces. The
+constant-reference work cancellation is not automatically
+a nonlinear tame estimate or global reflecting domain.
+
+W5: BR130 weighted moment and material acceleration
+retained. Need full lapse-Hessian and transported moment
+attachment, actual exterior norm/flux propagation for both
+curvature and subsidiary energies; no boundary-at-infinity
+conditions assumed from compact-torus proof.
+
+W6: BR131 time Cartan development with E_ti=T_ti=0 and
+exact E_ij,t=-(D_Omega R)_tij, T_ij,t=E_ij theta_t
+under algebraic R wedge theta=0. BR134/135 supply
+the exact sources to couple, not an independent R
+solution or a constructed nonlinear fixed point.
+Need full variable homogeneous combined energy for
+(E,T,exterior/frame constraints,wall residuals), wall
+initial and boundary compatibility, actual BN/BQ
+higher corners, exterior/holonomy closure and
+nonlinear generation. W7 remains unrun.
+
+Local SymPy 1.14.0 four stages exit 0, executed exact
+checker blob 0de643a765e455367c6635dad2f6aec808ac01c0.
+The BR29 carrier/read definitions were reused from
+the fetched donor, extracted local module (not full
+repository checkout); checker byte-verified after
+five blank-line differences corrected and all stages
+replayed. Native expressions and manuscript updated,
+kernel unrun, no CI or nonlinear acceptance. Targeted
+master owner audit only, not full base reconciliation.
