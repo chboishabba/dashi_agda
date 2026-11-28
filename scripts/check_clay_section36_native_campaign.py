@@ -58,6 +58,7 @@ ROOTS = {
   "Synthesis/ClayHodgeSection39OriginalQ0PartnerAcceptanceExact.lean",
   "Synthesis/ClayBSDSection40MonotoneMellinAcceptanceExact.lean",
   "Synthesis/ClayHodgeSection40AllSixQ0PartnerAcceptanceExact.lean",
+  "Synthesis/ClayHodgeSection41OriginalCoupledSixDeckAcceptanceExact.lean",
  ]),
  "PNP": ("pnp_root", [
   "Welds/PNPSection36SameObligationInputVsWorkAcceptanceExact.lean",
@@ -65,6 +66,7 @@ ROOTS = {
   "Welds/PNPSection38PreterminalExternalObservationAcceptanceExact.lean",
   "Welds/PNPSection39PairedPreterminalSplitAcceptanceExact.lean",
   "Welds/PNPSection40OriginalFinClockAcceptanceExact.lean",
+  "Welds/PNPSection41OriginalCausalBitReadAcceptanceExact.lean",
  ]),
 }
 
@@ -156,7 +158,7 @@ def main() -> int:
         help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay40NativeAcceptanceV1",
+    report = {"schema": "Clay41NativeAcceptanceV1",
               "all_selected_roots_passed": False, "roots": {}, "checks": [],
               "meaning": "Selected finite theorem roots only; not universal Clay completion"}
     pins = {}
@@ -231,13 +233,13 @@ def main() -> int:
         r.pop("_stderr_full", None)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
-    report["all_selected_roots_passed"] = (len(report["checks"]) == 23
+    report["all_selected_roots_passed"] = (len(report["checks"]) == 25
         and all(v.get("ok", False) for v in report["roots"].values())
         and all(v.get("status") == "PASS" for v in report["checks"]))
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
-    print("ALL-CLAY SECTION40 SELECTED ROOTS",
+    print("ALL-CLAY SECTION41 SELECTED ROOTS",
           "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
     return 0 if report["all_selected_roots_passed"] else 2
