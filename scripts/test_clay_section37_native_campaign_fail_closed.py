@@ -50,6 +50,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
                     "--rh-source-root", str(root/"missing_external"),
                     "--rh-manifest", str(root/"missing.json"),
                     "--rh-main-sha256", "0"*64,
+                    "--rh-source-head", "0"*40,
                     "--report", str(output)] + extra_pins
             campaign = load_runner()
             with mock.patch.object(sys, "argv", args):
