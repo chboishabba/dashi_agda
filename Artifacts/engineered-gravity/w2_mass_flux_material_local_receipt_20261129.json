@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-29",
+  "scope": "W2.2-W2.4 original spherical source/constraint/Israel mathematical construction, not complete Einstein-material evolution",
+  "git_pr": 1547,
+  "checks": [
+    {
+      "file": "scripts/check_tov_mass_flux_surface_closure.py",
+      "exit_code": 0,
+      "git_blob_sha1": "df20eed79509be852151ce1f38c656130b44ffe9",
+      "source_sha256": "887b4dda63f0d386a5fff3a80318015a366bff4c31f7b5456f83404e6dd9cff8",
+      "stdout_sha256": "853e74e26a5f1c67fe3f77a10761a5b63a039df43bae7e54765658e9bf8a09af",
+      "scope": "mass mixed-partial integrability, vacuum moving wall density/pressure/flux, second wall pressure/current jets"
+    },
+    {
+      "file": "scripts/check_tov_wall_frame_stress_inverse.py",
+      "exit_code": 0,
+      "git_blob_sha1": "b27efd0f5110228955276a99801675027faa97a9",
+      "source_sha256": "36025e39f93328375d6ae0df2cf91855484e1f6f299afc4e4c31ebaa9781ae07",
+      "stdout_sha256": "249a68cb0f3fbb5bab43f6a30b482882084e27715d446e6977948257eaf06cd6",
+      "scope": "orthonormal wall-frame two stress projections, bidirectional unique radial source inversion"
+    },
+    {
+      "file": "scripts/check_tov_moving_constraint_family.py",
+      "exit_code": 0,
+      "git_blob_sha1": "23f2f03c33300c59a15d648698201220f76c6f5d",
+      "source_sha256": "555ed18f2b0aa3e294f0ebee8fca26c61e757030065d76033af1854047946616",
+      "stdout_sha256": "a2b0ad5e695d3f9617d4fb2060dac52d5f99b2bae77fba760c0abb6fd48b868a",
+      "scope": "nonzero moving Einstein radial constraint family static TOV limit and vacuum boundary, not original material action"
+    },
+    {
+      "file": "scripts/check_tov_original_material_flux_weld.py",
+      "exit_code": 0,
+      "git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af",
+      "source_sha256": "ce123ba8f501cc45d45284529c152fc409cf5a9839ec3de86b2ea8cb3086c5dc",
+      "stdout_sha256": "f56d3b6975cef7f2564bc33bb87841f3f14eda12efc03b1342eec02a51d73895",
+      "scope": "original covariant matter stress first velocity jet, uniform scaling nonzero bulk flux obstruction, reverse smooth material velocity; first attempt sign error corrected"
+    }
+  ],
+  "execution": {
+    "literal_committed_source_bytes_verified": true,
+    "local_python_exit_zero": 4,
+    "total": 4,
+    "timeout_s_each": 90,
+    "aggregate_runner_executed": false,
+    "github_ci": false,
+    "native_f8": false
+  },
+  "programme": {
+    "physical_lanes_complete": 0,
+    "primary_unpaid_obligations": 36,
+    "w1_math_pins": 7,
+    "w2_math_pins": 7,
+    "remaining": [
+      "original material Euler PDE and moving radial label compatibility",
+      "fully time-dependent metric/lapse/angular Einstein constraints",
+      "same-source worldtube GHY/corner/domain and nonlinear continuation",
+      "F8/G3/G4 original native/physical receiver"
+    ]
+  }
+}
