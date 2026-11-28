@@ -82,7 +82,7 @@ mean zero f = f
 mean (suc k) f = mean k (pair f)
 
 pairCong : ∀ {f g} → (∀ p → f p ≈C g p) → ∀ p → pair f p ≈C pair g p
-pairCong h p = A.scaleCCongruent (A.addCCongruent (h (left p)) (h (right p))) P.≃-refl
+pairCong h p = A.scaleCCongruent (A.addCCongruent (h (left p)) (h (right p))) Phase.half
 
 meanCong : ∀ k {f g} → (∀ p → f p ≈C g p) → ∀ p → mean k f p ≈C mean k g p
 meanCong zero h p = h p
@@ -190,14 +190,14 @@ module At (inputs : Round11.BishopCutset) where
   pairEven m n p = complexTrans
     (A.scaleCCongruent (A.addCCongruent
       (evenMono p (left p) m n (leftSquare p))
-      (evenMono p (right p) m n (rightSquare p))) P.≃-refl)
+      (evenMono p (right p) m n (rightSquare p))) Phase.half)
     (halfSame (mono m n p))
 
   pairOddOdd : ∀ m n p → pair (mono (suc (m * 2)) (suc (n * 2))) p ≈C mono m n p
   pairOddOdd m n p = complexTrans
     (A.scaleCCongruent (A.addCCongruent
       (oddOdd p (left p) m n (leftSquare p))
-      (oddOdd p (right p) m n (rightSquare p))) P.≃-refl)
+      (oddOdd p (right p) m n (rightSquare p))) Phase.half)
     (halfSame (mono m n p))
 
   pairOddEven : ∀ m n p → pair (mono (suc (m * 2)) (n * 2)) p ≈C A.zeroC
@@ -205,7 +205,7 @@ module At (inputs : Round11.BishopCutset) where
     (A.scaleCCongruent (A.addCCongruent
       (oddEven p (left p) m n (leftSquare p))
       (complexTrans (oddEven p (right p) m n (rightSquare p))
-        (A.mulCCongruent (rightNeg p) (C.≈C-refl _)))) P.≃-refl)
+        (A.mulCCongruent (rightNeg p) (C.≈C-refl _)))) Phase.half)
     (halfOpposite (q (left p)) (mono m n p))
 
   pairEvenOdd : ∀ m n p → pair (mono (m * 2) (suc (n * 2))) p ≈C A.zeroC
@@ -213,7 +213,7 @@ module At (inputs : Round11.BishopCutset) where
     (A.scaleCCongruent (A.addCCongruent
       (evenOdd p (left p) m n (leftSquare p))
       (complexTrans (evenOdd p (right p) m n (rightSquare p))
-        (A.mulCCongruent (inverseNeg p) (C.≈C-refl _)))) P.≃-refl)
+        (A.mulCCongruent (inverseNeg p) (C.≈C-refl _)))) Phase.half)
     (halfOpposite (iq (left p)) (mono m n p))
 
   diag : ∀ n p → mono n n p ≈C A.oneC
