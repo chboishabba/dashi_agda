@@ -33,6 +33,9 @@ def cuts(pieces,initial,delay,T):
             for k in (1,2):
                 z=t+k*delay
                 if 0<z<T:pts.add(z)
+    j=1
+    while j*delay<T:
+        pts.add(j*delay);j+=1
     return sorted(pts)
 
 def certify(m,a,path,degree=8):
@@ -60,8 +63,11 @@ def certify(m,a,path,degree=8):
     R0,er0=coeff(0,pieces[0][1])[3]
     X0=find(pieces,0,pieces[0][1]).subs(s,0)
     H0=initial[-1][2].subs(s,1)
-    initial_error=bernstein_bound(R0.subs(s,0)*X0-H0,s)+er0*bernstein_bound(X0,s)
-    expected=S.eye(d+len(initial)*n)[:d,start:stop]
+    basis=S.eye(d+len(initial)*n)[:,start:stop]
+    expected=basis[:d,:]
+    initial_error=bernstein_bound(R0.subs(s,0)*expected-H0,s)+er0*bernstein_bound(expected,s)
+    for j,p in enumerate(initial):
+        initial_error=max(initial_error,bernstein_bound(p[2].subs(s,0)-basis[d+j*n:d+(j+1)*n,:],s))
     initial_state_error=bernstein_bound(X0-expected,s)
     pts=cuts(pieces,initial,delay,T);slabs=[];prev=None
     for lo,hi in zip(pts,pts[1:]):
@@ -77,6 +83,7 @@ def certify(m,a,path,degree=8):
         jump=0 if prev is None else bernstein_bound(X.subs(s,0)-prev,s)
         slabs.append((lo,hi,mu,b,c,rho,jump));prev=X.subs(s,1)
     result=replay(delay,T,slabs,initial_state_error,(initial_error,initial_error))
+    result['start']=start;result['stop']=stop;result['T']=T;result['delay']=delay
     return result
 
 def fixture():
