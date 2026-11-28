@@ -27,7 +27,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None,reach_seed=None,clock_start=0.,jet_error_seed=None):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False,jvp=None,atlas_pairs=None,right_limit=None,jet2=None,reach_seed=None,clock_start=0.,jet_error_seed=None,exact_port_base=None):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -86,6 +86,17 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             v=csr_matrix(source_port[:,None]); expected=v@v.T
         else: expected=np.outer(source_port,source_port)
         assert close(forms['source'],expected)
+    if exact_port_base is not None:
+        if not retain_stage_residuals or source_port is None or 'load' not in forms:
+            raise ValueError('exact affine port chart requires exact residuals and original port/load')
+        exact_port_base=matrix(exact_port_base)
+        if exact_port_base.shape!=H.shape or not finite(exact_port_base):
+            raise ValueError('invalid exact binary material generator')
+        if not close(H,exact_port_base-forms['load']-forms['source'],rtol=0,atol=0):
+            raise ValueError('rounded generator does not match original affine port assembly')
+        load_exact=forms['load'].diagonal()
+        if not close(forms['load'],csr_matrix((load_exact,(np.arange(d),np.arange(d))),shape=(d,d)),rtol=0,atol=0) or np.any(load_exact<0):
+            raise ValueError('exact affine port chart requires diagonal nonnegative receiver')
     pieces=[]
     for ix in groups:
         if not len(ix): continue
@@ -164,12 +175,19 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
             # underlying physical material/metric model. All previous stage
             # error contracts when the exact symmetric part is nonpositive.
             import sympy as sp
-            aa=sp.Matrix([[sp.Rational(float(v)) for v in row] for row in a])
+            target=a if exact_port_base is None else block(exact_port_base,ix).copy()
+            if exact_port_base is not None and fid is not None:np.fill_diagonal(target,0)
+            aa=sp.Matrix([[sp.Rational(float(v)) for v in row] for row in target])
+            exact_b=[rational(v) for v in b]
+            if exact_port_base is not None and fid is None:
+                p=sp.Matrix([sp.Rational(float(source_port[i])) for i in ix])
+                aa-=sp.diag(*[sp.Rational(float(load_exact[i])) for i in ix])+p*p.T
+                exact_b=[2*rational(incident)*rational(source_port[i]) for i in ix]
             if not (-(aa+aa.T)).is_positive_semidefinite:
                 raise ValueError('exact dissipativity failed')
             hh=rational(dt); rr=[]
             for ii in range(len(ix)):
-                ri=rational(y[ii])-rational(old[ii])-hh*rational(b[ii])
+                ri=rational(y[ii])-rational(old[ii])-hh*exact_b[ii]
                 ri-=hh*sum(rational(a[ii,jj])*(rational(y[jj])+rational(old[jj]))/2 for jj in range(len(ix)))
                 rr.append(abs(ri))
             local_error=sum(rr)
@@ -270,6 +288,7 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
                   coefficient2_arrival_s=None if jet2 is None else [float(a) if np.isfinite(a) else None for a in arrival2],
                   state_jvp=None if jvp is None else dx.tolist(),
                   local_midpoint_jvp=None if jvp is None else tangent_mid.tolist(),
+                  exact_affine_port_chart=exact_port_base is not None,
                   exact_binary_stage_error=str(exact_error) if retain_stage_residuals else None,
                   exact_binary_midpoint_error=[str(v) for v in midpoint_error] if retain_stage_residuals else None,
                   local_midpoint=None if local_mid is None else local_mid.tolist(),reflected_amplitude=reflected,
