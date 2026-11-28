@@ -1,0 +1,155 @@
+{
+  "date": "2026-11-28",
+  "scope": "Focused native assembly at 24/576 cells, actual original synthetic nonlinear forward and nested primal shadow; local triangular and rational event tests. No full reverse campaign or physical admission.",
+  "runtime": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "OPENBLAS_NUM_THREADS": 1,
+    "timeout_s": 90
+  },
+  "verified_blobs": {
+    "check_solar_event_rounding.py": "8d5444f5935bb3126f17f6c76e28dbba73668175",
+    "check_solar_jet_error.py": "a62aef7cb7633cc69cc774b6cbe34f764821da11",
+    "check_solar_native_assembly.py": "b60b381b6bb2de17186aa78338b0ede8da97b427",
+    "check_solar_native_forward.py": "b125e541f3b23449345d7c3d8b8ee71b4d18f660",
+    "check_solar_sparse_cone.py": "cf3357dacfcdd47b510198f12a4af62bcd212a08",
+    "check_solar_nested_campaign.py": "8c880c08765c5d572795e2738e6c0d415bf7fde4",
+    "solar_asymptotic_return.py": "f60c0adf681dee6e80659ba82f7fb9647affe3b9",
+    "solar_event_rounding.py": "d726e47cbb835720fd3c577445a580fd1d07808f",
+    "solar_evolution_residual.py": "c10ea554ad902be04f13288834282603822e5cb7",
+    "solar_jet_error.py": "2806731aafdecf40d1868ace9674321b73dcb50d",
+    "solar_matrix_storage.py": "960f913d81a1f3a4cfee687b720a7ebbe61f4a86",
+    "solar_metric_cochain_weld.py": "dcccaf2588d7f41c3e8709bc9e78dceabfa1e8f4",
+    "solar_nested_cochain_refinement.py": "531d938a4d92b52b7445cfff2fa6c347850edb9d",
+    "solar_physical_cone.py": "3f91bcdc5e529d3fb0a133efdd7553488f82f29d",
+    "solar_population_amplitude_event.py": "1318f2a3db16bcc1342e6f525294680be7abd271",
+    "solar_population_event.py": "798aa5bfc8b2e1c843f46d90cdf001bea28d4892",
+    "solar_restoration_geometry.py": "055fe767ec50bc7259f8e230f4aaead73bcac6cd",
+    "solar_spherical_cycle.py": "cf2038e6bf846cef471be319df2c68d6276c6005",
+    "solar_spherical_geometry.py": "7ccbf18bade216874e04fb5ebe10d94cabcd75b2",
+    "solar_spherical_material_weld.py": "d38cba1182b6fac0b8b6035069f9e7a3d22e1943",
+    "solar_spherical_whitney.py": "3faf4f27b043936085465693f9d2a2d36b675a2d",
+    "solar_support_boundary_cayley.py": "ca09a34f3db30e298577de01160a8ff312a383be",
+    "solar_support_transition.py": "0f4cd384644a8791cbe0c032112962b3a87632ba",
+    "solar_synthetic_fixture.py": "aa7cdbd48d30f63bb9a54eaa2beb8ce5efc8d247",
+    "solar_nested_campaign.py": "bced4d723481fddc87d748ebb28e23ebefdb5674"
+  },
+  "source_copy_dependencies": [
+    {
+      "path": "scripts/solar_earth_collision_tensor.py",
+      "repo_blob": "010a4185121bb67d999942c0d7558d2f54efd03f",
+      "local_blob": "1dff38f602716abc6e245303a04f7316f3488851",
+      "scope": "verbatim rates function and numpy import; unrelated data functions not invoked"
+    },
+    {
+      "path": "scripts/solar_quadratic_jet.py",
+      "repo_blob": "70db819585dc17c3f9d4f1677712ae7d69dd0f84",
+      "local_blob": "7c5534efcc3a563e7a696fd8d09a9b05a508c16d",
+      "scope": "verbatim cayley2 and imports; full reaction jet not executed"
+    }
+  ],
+  "native_assembly": {
+    "coarse": {
+      "status": "PASS",
+      "cells": 24,
+      "coordinates": 314,
+      "nonzeros": 2272,
+      "structural_pairs": 1440,
+      "stages": 1562,
+      "energy_residual": 4.060630761260169e-17,
+      "dense_sparse_exact": true
+    },
+    "nested": {
+      "status": "PASS",
+      "cells": 576,
+      "coordinates": 7140,
+      "nonzeros": 54304,
+      "structural_pairs": 34608,
+      "stages": 37140,
+      "energy_residual": 2.923279563089462e-16,
+      "cone_blob_at_execution": "e28e39fedafaf58cda1468fadb724944d928911b",
+      "note": "final cone exercised by native nested forward shadow; exact port mode off in static fixture"
+    }
+  },
+  "native_forward": {
+    "status": "PASS",
+    "cells": 24,
+    "steps": 5,
+    "dense_sparse_exact": true,
+    "balance_abs_J": 3.712794571991688e-20,
+    "campaign_net_J": -0.00005999999999944921,
+    "four_world_nets": {
+      "off_passive": 0,
+      "off_active": -0.00006,
+      "source_passive": 5.507903440191378e-16,
+      "source_active": -0.00005999999999944921
+    },
+    "strict_interaction_admitted": false
+  },
+  "native_nested_primal": {
+    "status": "PASS",
+    "cells": [
+      24,
+      576
+    ],
+    "steps": 1,
+    "field_error": 0.00011600453318728349,
+    "field_bound": 0.00011600453318728349,
+    "receiver_bound": 1.262177448353619e-29,
+    "base_reopen_error": 1.6940658945086007e-21,
+    "physical_port_equivalence": false
+  },
+  "native_nonfrozen_binary": {
+    "status": "PASS",
+    "steps": 2,
+    "field_error": 1.7742359880025298e-16,
+    "event_error": 1.5456852142352386e-21,
+    "exact_affine_port_chart": true,
+    "physical_material_rounding_enclosed": false
+  },
+  "triangular": {
+    "status": "PASS",
+    "symbolic_event_cases": 11,
+    "native_steps": 4,
+    "max_propagation_ratio": 0.9630055368848975,
+    "max_work_ratio": 0.09787789551524229,
+    "final_bounds": [
+      5.218172063383292,
+      24.705227689111716,
+      69.37164070085302
+    ]
+  },
+  "event_rounding": {
+    "status": "PASS",
+    "sqrt_cases": 7,
+    "event_cases": 4,
+    "components": 36,
+    "max_l1_radius": 3.336226215453898e-24
+  },
+  "support_mask": {
+    "status": "PASS",
+    "positive_other_species_cartesian_component": true,
+    "absent_species_current_rejected": true,
+    "scope": "ad hoc native local regression"
+  },
+  "sparse_cone": {
+    "status": "PASS",
+    "steps": 2,
+    "stage_receipts": 10,
+    "exact_receipt_parity": true,
+    "negative_controls": 3
+  },
+  "pending": [
+    "full native positive-support JVP and support-boundary first/two-jet campaigns",
+    "native nested two-jet shadow",
+    "actual matched passive box replays with nonfrozen exact trace and controlled/asymptotic policies",
+    "changing-material actual right-limit stability or obstruction",
+    "material coefficient uncertainty/outward rounding",
+    "physical ports and continuum convergence"
+  ],
+  "dns_checkout": "Could not resolve host: github.com",
+  "ci": false,
+  "kernel": false,
+  "physical_admission": false
+}
