@@ -92,3 +92,24 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
             for i in range(3):caps[i]=min(H[i],caps[i]+h[i])
         return result(H,caps)
     except Refusal:return None
+
+
+def prefix_portfolio(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,initial=1024):
+    """Geometric restart allowance with a shared total reservation.
+    Every attempted cap is charged in full, even on refusal. This pays
+    only declared logical work, not a physical bit-clock theorem.
+    """
+    if initial<=0 or work_cap<0:raise ValueError('budget')
+    left=work_cap;size=initial;best=None;attempts=accepted=0
+    while left:
+        cap=min(size,left);left-=cap;attempts+=1
+        q=prefix_contrast(F,cols,target,offset,R,w,term_cap,cap)
+        if q is not None:
+            accepted+=1;a,b,st=q
+            if best is not None:a=tuple(max(x,y) for x,y in zip(a,best[0]));b=tuple(min(x,y) for x,y in zip(b,best[1]))
+            assert all(x<=y for x,y in zip(a,b));best=(a,b,st)
+            if a==b:break
+        size*=2
+    if best is None:return None
+    a,b,st=best
+    return a,b,dict(st,allocated=work_cap-left,attempts=attempts,accepted=accepted,exact_contrast=a==b)
