@@ -218,15 +218,12 @@ periodicSUNFiniteGibbsMeasure :
     (divide : ℝ → ℝ → ℝ) →
   Physical.PhysicalFiniteYMMeasure (SUNPeriodicLinks theory n) ℝ
 periodicSUNFiniteGibbsMeasure theory traceData exponential n beta productHaar divide =
-  record
-    { Physical.density =
-        periodicSUNGibbsDensity theory traceData exponential n beta
-    ; Physical.haarIntegral = productHaar
-    ; Physical.multiply = _*ℝ_
-    ; Physical.divide = divide
-    ; Physical.partitionFunction =
-        productHaar (periodicSUNGibbsDensity theory traceData exponential n beta)
-    }
+  Physical.physicalFiniteMeasure
+    (periodicSUNGibbsDensity theory traceData exponential n beta)
+    productHaar
+    _*ℝ_
+    divide
+    (productHaar (periodicSUNGibbsDensity theory traceData exponential n beta))
 
 
 ------------------------------------------------------------------------

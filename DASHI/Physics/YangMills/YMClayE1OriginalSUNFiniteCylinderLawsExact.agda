@@ -15,24 +15,31 @@ module DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.List.Base using (List)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_; *-comm)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as Native
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as OriginalWilson
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.YMClayOriginalWilsonContinuousA2BridgeExact as A2
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -85,6 +92,26 @@ module _
 
   open ActualNativeFiniteIntegration public
 
+  constructActualNativeFiniteIntegration :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink) →
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink) →
+    (strictToNonzero : ∀ value → 0ℝ <ℝ value → Quotient.Nonzero quotient value) →
+    ActualNativeFiniteIntegration
+  constructActualNativeFiniteIntegration ordered strictToWeak strict strictToNonzero =
+    record
+      { integrals = λ n →
+          Original.originalWilsonFiniteIntegrationLaws
+            theory traceData exponential beta oneLink bilateral
+            (Quotient.divide quotient) ordered strictToWeak n
+      ; nonzero = λ n →
+          strictToNonzero
+            (Physical.partitionFunction (nativeMeasure n))
+            (Family.physicalFinitePartitionPositive
+              theory traceData exponential beta oneLink bilateral
+              (Quotient.divide quotient) strict n)
+      }
+
   -- Existing finite-cylinder normalized laws apply at any ONE n by
   -- making an irrelevant constant family at that fixed link carrier.
   -- The actual source across n is STILL the varying nativeMeasure.
@@ -96,12 +123,9 @@ module _
         oneLink bilateral (Quotient.divide quotient) n)
       limitLaws quotient division
   fixedCutoffFiniteLaws source n = record
-    { Limit.FinitePhysicalNormalizedFamily.finiteMeasure =
-        λ _ → nativeMeasure n
-    ; Limit.FinitePhysicalNormalizedFamily.integrationLaws =
-        λ _ → integrals source n
-    ; Limit.FinitePhysicalNormalizedFamily.partitionNonzero =
-        λ _ → nonzero source n
+    { finiteMeasure = λ _ → nativeMeasure n
+    ; integrationLaws = λ _ → integrals source n
+    ; partitionNonzero = λ _ → nonzero source n
     }
 
   -- Notice: finiteExpectation (fixedCutoffFiniteLaws source n) zero
@@ -226,25 +250,25 @@ module _
     PhysicalRealSequentialConvergenceLaws →
     E1.SelectedScalarConvergence ℝ
   realSelectedScalarLaws topology = record
-    { E1.SelectedScalarConvergence.zero = 0ℝ
-    ; E1.SelectedScalarConvergence.one = 1ℝ
-    ; E1.SelectedScalarConvergence.add = _+ℝ_
-    ; E1.SelectedScalarConvergence.multiply = _*ℝ_
-    ; E1.SelectedScalarConvergence.Nonnegative =
+    { zero = 0ℝ
+    ; one = 1ℝ
+    ; add = _+ℝ_
+    ; multiply = _*ℝ_
+    ; Nonnegative =
         λ value → 0ℝ ≤ℝ value
-    ; E1.SelectedScalarConvergence.Converges =
+    ; Converges =
         PhysicalRealConverges
-    ; E1.SelectedScalarConvergence.convergenceUnique =
+    ; convergenceUnique =
         convergenceUnique topology
-    ; E1.SelectedScalarConvergence.constantConverges =
+    ; constantConverges =
         constantConverges topology
-    ; E1.SelectedScalarConvergence.addConverges =
+    ; addConverges =
         addConverges topology
-    ; E1.SelectedScalarConvergence.multiplyConstantConverges =
+    ; multiplyConstantConverges =
         multiplyConstantConverges topology
-    ; E1.SelectedScalarConvergence.nonnegativeClosed =
+    ; nonnegativeClosed =
         nonnegativeClosed topology
-    ; E1.SelectedScalarConvergence.convergenceCongruent =
+    ; convergenceCongruent =
         convergenceCongruent topology
     }
 
@@ -310,12 +334,12 @@ module _
         bilateral (Quotient.divide quotient))
       (Observable selection) ℝ
   selectedRealization selection = record
-    { E1.CylinderRealization.realization =
+    { realization =
         λ n observable → selectedSection selection observable n
-    ; E1.CylinderRealization.zeroObservable = zeroObservable selection
-    ; E1.CylinderRealization.oneObservable = oneObservable selection
-    ; E1.CylinderRealization.addObservable = addObservable selection
-    ; E1.CylinderRealization.scalarObservable = scalarObservable selection
+    ; zeroObservable = zeroObservable selection
+    ; oneObservable = oneObservable selection
+    ; addObservable = addObservable selection
+    ; scalarObservable = scalarObservable selection
     }
 
   nativeExpectationExtensional :
@@ -438,33 +462,33 @@ module _
       (selectedRealization selection)
       (realSelectedScalarLaws topology)
   nativeSUNAsDependentE1Source finite selection topology selected = record
-    { E1.ActualVariableCutoffCylinderFamily.finitePhysicalMeasure =
+    { finitePhysicalMeasure =
         nativeMeasure
-    ; E1.ActualVariableCutoffCylinderFamily.originalNormalizedExpectation =
+    ; originalNormalizedExpectation =
         λ n → Physical.normalizedExpectation
-    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectation =
+    ; finiteExpectation =
         λ n observable →
           nativeExpectation n (selectedSection selection observable)
-    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectationIsOriginalWilson =
+    ; finiteExpectationIsOriginalWilson =
         λ n observable → refl
-    ; E1.ActualVariableCutoffCylinderFamily.finiteZero =
+    ; finiteZero =
         nativeSelectedExpectationZero finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteOne =
+    ; finiteOne =
         nativeSelectedExpectationOne finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteAdd =
+    ; finiteAdd =
         nativeSelectedExpectationAdd finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.finiteScale =
+    ; finiteScale =
         nativeSelectedExpectationScale finite selection
-    ; E1.ActualVariableCutoffCylinderFamily.PositiveCylinder =
+    ; PositiveCylinder =
         Nonnegative selection
-    ; E1.ActualVariableCutoffCylinderFamily.finitePositive =
+    ; finitePositive =
         λ n observable positive →
           nativeExpectationPositive finite n
             (selectedSection selection observable)
             (nonnegativeMeaning selection observable positive n)
-    ; E1.ActualVariableCutoffCylinderFamily.continuumExpectation =
+    ; continuumExpectation =
         continuumExpectation selected
-    ; E1.ActualVariableCutoffCylinderFamily.originalWilsonConverges =
+    ; originalWilsonConverges =
         originalWilsonCylinderConverges selected
     }
 
@@ -554,26 +578,211 @@ module _
   originWilsonPolynomialSelectedAlgebra :
     SelectedNativeCylinderAlgebra
   originWilsonPolynomialSelectedAlgebra = record
-    { SelectedNativeCylinderAlgebra.Observable = OriginWilsonPolynomial
-    ; SelectedNativeCylinderAlgebra.selectedSection =
+    { Observable = OriginWilsonPolynomial
+    ; selectedSection =
         evalOriginWilsonPolynomial
-    ; SelectedNativeCylinderAlgebra.zeroObservable = zeroP
-    ; SelectedNativeCylinderAlgebra.oneObservable = oneP
-    ; SelectedNativeCylinderAlgebra.addObservable = addP
-    ; SelectedNativeCylinderAlgebra.scalarObservable = scaleP
-    ; SelectedNativeCylinderAlgebra.zeroMeaning =
+    ; zeroObservable = zeroP
+    ; oneObservable = oneP
+    ; addObservable = addP
+    ; scalarObservable = scaleP
+    ; zeroMeaning =
         λ n links → refl
-    ; SelectedNativeCylinderAlgebra.oneMeaning =
+    ; oneMeaning =
         λ n links → refl
-    ; SelectedNativeCylinderAlgebra.addMeaning =
+    ; addMeaning =
         λ n left right links → refl
-    ; SelectedNativeCylinderAlgebra.scalarMeaning =
+    ; scalarMeaning =
         λ n scalar expr links → refl
-    ; SelectedNativeCylinderAlgebra.Nonnegative =
+    ; Nonnegative =
         λ expr → ∀ n links →
           0ℝ ≤ℝ evalOriginWilsonPolynomial expr n links
-    ; SelectedNativeCylinderAlgebra.nonnegativeMeaning =
+    ; nonnegativeMeaning =
         λ expr positive n links → positive n links
-    ; SelectedNativeCylinderAlgebra.gaugeInvariantSelection =
+    ; gaugeInvariantSelection =
         originPolynomialGaugeInvariant
     }
+
+
+  ------------------------------------------------------------------------
+  -- A2 source-first finite-cutoff *real SU(N) Wilson* expectation adapter.
+  --
+  -- Unlike a new abstract ContinuousExpectationAlgebra parameter, this
+  -- value is constructed from the existing native Wilson finite measure,
+  -- its integration/partition laws, and the ORIGINAL Wilson extensionality
+  -- proof.  No finite enumeration of continuous SU(N) is used.
+  --
+  -- This does NOT construct the genuine complex trace range/normalized
+  -- physical deficit, the selected continuous clamp, true compact Borel
+  -- Haar semantics or the P-CONT/P-MATCH/P-SMALL physical rates.
+  ------------------------------------------------------------------------
+
+  originalSUNFixedCutoffA2Expectation :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat) →
+    A2.ContinuousExpectationAlgebra
+      (Native.ActualLinks theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient) n)
+  originalSUNFixedCutoffA2Expectation finite arithmetic n =
+    let
+      family = fixedCutoffFiniteLaws finite n
+      E = Limit.finiteExpectation family zero
+      addLaw = Limit.finiteExpectationAdd family zero
+      scaleLaw = Limit.finiteExpectationScale family zero
+      extLaw =
+        OriginalWilson.originalWilsonExpectationExtensional
+          theory traceData exponential beta oneLink bilateral
+          (Quotient.divide quotient) n
+    in record
+      { E = E
+      ; EZero =
+          Limit.finiteExpectationZero family zero
+      ; EOne =
+          Limit.finiteExpectationOne family zero
+      ; EAdd = addLaw
+      ; EScale = scaleLaw
+      ; EPositive =
+          Limit.finiteExpectationPositive family zero
+      ; EExt = extLaw
+      ; ECenteredProduct =
+          A2.ContinuousWilsonArithmetic.centeredProductExpectation
+            arithmetic E addLaw scaleLaw extLaw
+      }
+
+  -- Important signed-order check: the new A2 pair covariance writes
+  -- E(g)E(f); the native original Wilson definition writes E(f)E(g).
+  -- Equality uses precisely the sourced real scalar commutativity, not
+  -- any equality between physical effective and bare coarse laws.
+  originalSUNFixedCutoffA2CovarianceIsOriginal :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat)
+    (f g : Native.ActualLinks theory traceData exponential beta oneLink
+       bilateral (Quotient.divide quotient) n → ℝ) →
+    let
+      source = originalSUNFixedCutoffA2Expectation finite arithmetic n
+      E = A2.ContinuousExpectationAlgebra.E source
+    in
+      (E (λ links → f links *ℝ g links) -ℝ
+        E g *ℝ E f)
+      ≡
+      OriginalWilson.originalWilsonConnectedCovariance
+        theory traceData exponential beta oneLink bilateral
+        (Quotient.divide quotient) n f g
+  originalSUNFixedCutoffA2CovarianceIsOriginal finite arithmetic n f g =
+    let
+      source = originalSUNFixedCutoffA2Expectation finite arithmetic n
+      E = A2.ContinuousExpectationAlgebra.E source
+    in
+      cong (λ value →
+        E (λ links → f links *ℝ g links) -ℝ value)
+        (*-comm (E g) (E f))
+
+
+  ------------------------------------------------------------------------
+  -- Literal native SU(N) plaquette / gauge geometry for A2.  These are
+  -- the same original periodic positive Wilson plaquette holonomies,
+  -- not a synthetic "ContinuousWilsonSourceContract" object.
+  --
+  -- The abstract SUNMatrixRealTrace contains only CYCLICITY, not the
+  -- genuine |Re Tr(U)/N|≤1 theorem. The two physical trace-range proofs
+  -- below therefore remain EXPLICIT INPUTS from a certified complex
+  -- unitary matrix/real trace implementation; do not derive them from
+  -- cyclicity or silently assume them.
+  ------------------------------------------------------------------------
+
+  originalSUNRawPlaquetteDeficit :
+    (n : Nat) → Plaquette.PeriodicPlaquette n →
+    Native.ActualLinks theory traceData exponential beta oneLink
+      bilateral (Quotient.divide quotient) n → ℝ
+  originalSUNRawPlaquetteDeficit n p links =
+    1ℝ -ℝ
+      Trace.matrixWilsonValue traceData
+        (Variable.periodicSUNPositivePlaquette theory n links p)
+
+  originalSUNRawPlaquetteDeficitGaugeInvariant :
+    (n : Nat) (p : Plaquette.PeriodicPlaquette n) →
+    OriginalWilson.originalGaugeInvariant
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient) n
+      (originalSUNRawPlaquetteDeficit n p)
+  originalSUNRawPlaquetteDeficitGaugeInvariant n p gamma links =
+    cong (λ trace → 1ℝ -ℝ trace)
+      (Variable.periodicSUNPositivePlaquetteGaugeTrace
+        theory traceData n links gamma p)
+
+  -- This constructor pays the configuration/plaquette/gauge/expectation
+  -- geometry of A2 from the ACTUAL original Wilson family. Only the
+  -- physical normalized-complex-trace range remains an external source
+  -- theorem; normalized Haar laws are already in the native finite record.
+  originalSUNFixedCutoffA2Source :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (n : Nat) →
+    (rawDeficitNonnegative :
+      ∀ p links → 0ℝ ≤ℝ originalSUNRawPlaquetteDeficit n p links) →
+    (rawDeficitAtMostTwo :
+      ∀ p links → originalSUNRawPlaquetteDeficit n p links
+        ≤ℝ (1ℝ +ℝ 1ℝ)) →
+    A2.ContinuousWilsonSourceContract
+  originalSUNFixedCutoffA2Source finite arithmetic n lower upper =
+    record
+      { Configuration =
+          Native.ActualLinks theory traceData exponential beta oneLink
+            bilateral (Quotient.divide quotient) n
+      ; PlaquetteIndex =
+          Plaquette.PeriodicPlaquette n
+      ; expectation =
+          originalSUNFixedCutoffA2Expectation finite arithmetic n
+      ; deficit =
+          originalSUNRawPlaquetteDeficit n
+      ; deficitNonnegative = lower
+      ; deficitLeTwo = upper
+      ; gaugeInvariant =
+          OriginalWilson.originalGaugeInvariant
+            theory traceData exponential beta oneLink bilateral
+            (Quotient.divide quotient) n
+      ; deficitGaugeInvariant =
+          originalSUNRawPlaquetteDeficitGaugeInvariant n
+      }
+
+
+  ------------------------------------------------------------------------
+  -- Native gauge-invariant A2 CONTOUR geometry, not just a syntactic
+  -- arbitrary list: for every finite original periodic plaquette list,
+  -- its A2 soft union cutoff is invariant under the original on-site
+  -- SU(N) gauge transform. The "connecting" property and physical rate
+  -- still demand a source-selected geometric contour family.
+  ------------------------------------------------------------------------
+
+  originalSUNFixedCutoffA2ContourGaugeInvariant :
+    (finite : ActualNativeFiniteIntegration)
+    (arithmetic : A2.ContinuousWilsonArithmetic quotient)
+    (clampSource : A2.ContinuousClampSource)
+    (n : Nat)
+    (rawDeficitNonnegative :
+      ∀ p links → 0ℝ ≤ℝ originalSUNRawPlaquetteDeficit n p links)
+    (rawDeficitAtMostTwo :
+      ∀ p links → originalSUNRawPlaquetteDeficit n p links
+        ≤ℝ (1ℝ +ℝ 1ℝ))
+    (contours : List (List (Plaquette.PeriodicPlaquette n))) →
+    OriginalWilson.originalGaugeInvariant
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient) n
+      (A2.badContourCutoff quotient arithmetic clampSource
+        (originalSUNFixedCutoffA2Source
+          finite arithmetic n rawDeficitNonnegative rawDeficitAtMostTwo)
+        contours)
+  originalSUNFixedCutoffA2ContourGaugeInvariant
+      finite arithmetic clampSource n lower upper contours gamma links =
+    A2.badContourCutoffNaturality
+      quotient arithmetic clampSource
+      (originalSUNFixedCutoffA2Source finite arithmetic n lower upper)
+      (λ config → Variable.periodicSUNGaugeTransform theory n config gamma)
+      (λ p config →
+        A2.ContinuousClampSource.congruent clampSource
+          (cong
+            (λ raw → Quotient.divide quotient raw (1ℝ +ℝ 1ℝ))
+            (originalSUNRawPlaquetteDeficitGaugeInvariant
+              n p gamma config)))
+      contours links

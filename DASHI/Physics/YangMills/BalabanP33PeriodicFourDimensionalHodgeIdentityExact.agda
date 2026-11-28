@@ -30,6 +30,7 @@ module DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExa
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
+open import Data.List.Base using (_∷_; [])
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -38,10 +39,146 @@ open import Relation.Binary.PropositionalEquality using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier public using
-  (CyclicIndex; Axis4; Product; pair; four)
+  (CyclicIndex; Axis4; Product; pair; four; zeroᵢ; sucᵢ)
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact using
   (index0; index1; index2; index3)
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+
+
+------------------------------------------------------------------------
+-- Explicit ring-solver helpers.  These avoid tactic application syntax that
+-- is not accepted by the current Agda 2.9 ring-solver macro.
+------------------------------------------------------------------------
+
+sumSitesSubtractNeg : ∀ a b → a + (- b) ≡ a - b
+sumSitesSubtractNeg a b =
+  ℚRing.solve (a ∷ b ∷ [])
+
+multiplyCommutative : ∀ a b → a * b ≡ b * a
+multiplyCommutative a b =
+  ℚRing.solve (a ∷ b ∷ [])
+
+forwardMinusTest : ∀ a b c → (a - b) * c ≡ a * c - b * c
+forwardMinusTest a b c =
+  ℚRing.solve (a ∷ b ∷ c ∷ [])
+
+subtractIsNeg : ∀ a b → a - b ≡ - (b - a)
+subtractIsNeg a b =
+  ℚRing.solve (a ∷ b ∷ [])
+
+backwardMinusTest : ∀ a b c → a * b - a * c ≡ a * (b - c)
+backwardMinusTest a b c =
+  ℚRing.solve (a ∷ b ∷ c ∷ [])
+
+negSubToAddNeg : ∀ a b → - (a - b) ≡ b + (- a)
+negSubToAddNeg a b =
+  ℚRing.solve (a ∷ b ∷ [])
+
+subtractSubtract : ∀ p q r s →
+  (p - q) - (r - s) ≡ (p - r) - (q - s)
+subtractSubtract p q r s =
+  ℚRing.solve (p ∷ q ∷ r ∷ s ∷ [])
+
+normDiffSiteHelper : ∀ a b →
+  (a - b) * (a - b) ≡ (a * a + b * b) + (- ((+ 2 / 1) * (a * b)))
+normDiffSiteHelper a b =
+  ℚRing.solve (a ∷ b ∷ [])
+
+addNegToSub : ∀ a b c → (a + b) + (- c) ≡ a + b - c
+addNegToSub a b c =
+  ℚRing.solve (a ∷ b ∷ c ∷ [])
+
+norm4SiteHelper : ∀ a b c d →
+  (a + (b + (c + d))) * (a + (b + (c + d)))
+  ≡ ((a * a + b * b) + (c * c + d * d))
+    + ((+ 2 / 1) * (a * b + (a * c + (a * d + (b * c + (b * d + c * d))))))
+norm4SiteHelper a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+assoc4Zero : ∀ a b c d → a + (b + (c + (d + 0ℚ))) ≡ ((a + b) + c) + d
+assoc4Zero a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+crossAssoc3 : ∀ a b c → a + (b + c) ≡ (a + b) + c
+crossAssoc3 a b c =
+  ℚRing.solve (a ∷ b ∷ c ∷ [])
+
+crossAssoc4 : ∀ a b c d → a + ((b + c) + d) ≡ ((a + b) + c) + d
+crossAssoc4 a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+crossAssoc5 : ∀ a b c d e → a + (((b + c) + d) + e) ≡ (((a + b) + c) + d) + e
+crossAssoc5 a b c d e =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ [])
+
+crossAssoc6 : ∀ a b c d e f →
+  a + ((((b + c) + d) + e) + f) ≡ (((((a + b) + c) + d) + e) + f)
+crossAssoc6 a b c d e f =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ [])
+
+norm4Combine : ∀ s1 s2 s3 s4 c12 c13 c14 c23 c24 c34 →
+  (s1 + s2 + s3 + s4)
+    + ((+ 2 / 1) * (c12 + c13 + c14 + c23 + c24 + c34))
+  ≡ (((s1 + s2) + s3) + s4)
+    + ((+ 2 / 1) * (((((c12 + c13) + c14) + c23) + c24) + c34))
+norm4Combine s1 s2 s3 s4 c12 c13 c14 c23 c24 c34 =
+  ℚRing.solve
+    (s1 ∷ s2 ∷ s3 ∷ s4 ∷ c12 ∷ c13 ∷ c14 ∷ c23 ∷ c24 ∷ c34 ∷ [])
+
+hodgeFinal16 : ∀
+  g00 g10 g20 g30 g01 g11 g21 g31 g02 g12 g22 g32 g03 g13 g23 g33
+  c01 c02 c03 c12 c13 c23 →
+  g00 + g10 + g20 + g30 + g01 + g11 + g21 + g31
+    + g02 + g12 + g22 + g32 + g03 + g13 + g23 + g33
+  ≡
+    ((g01 + g10 - (+ 2 / 1) * c01)
+      + (g02 + g20 - (+ 2 / 1) * c02)
+      + (g03 + g30 - (+ 2 / 1) * c03)
+      + (g12 + g21 - (+ 2 / 1) * c12)
+      + (g13 + g31 - (+ 2 / 1) * c13)
+      + (g23 + g32 - (+ 2 / 1) * c23))
+    + (g00 + g11 + g22 + g33
+        + (+ 2 / 1) * (c01 + c02 + c03 + c12 + c13 + c23))
+hodgeFinal16
+  g00 g10 g20 g30 g01 g11 g21 g31 g02 g12 g22 g32 g03 g13 g23 g33
+  c01 c02 c03 c12 c13 c23 =
+  ℚRing.solve
+    (g00 ∷ g10 ∷ g20 ∷ g30 ∷ g01 ∷ g11 ∷ g21 ∷ g31 ∷
+     g02 ∷ g12 ∷ g22 ∷ g32 ∷ g03 ∷ g13 ∷ g23 ∷ g33 ∷
+     c01 ∷ c02 ∷ c03 ∷ c12 ∷ c13 ∷ c23 ∷ [])
+
+physicalCombine : ∀ cx cy cz dx dy dz →
+  (cx + dx) + (cy + dy) + (cz + dz) ≡ (cx + cy + cz) + (dx + dy + dz)
+physicalCombine cx cy cz dx dy dz =
+  ℚRing.solve (cx ∷ cy ∷ cz ∷ dx ∷ dy ∷ dz ∷ [])
+
+
+sumIndex4Next4 : ∀ a b c d →
+  b + (c + (d + (a + 0ℚ))) ≡ a + (b + (c + (d + 0ℚ)))
+sumIndex4Next4 a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+sumIndex4Previous4 : ∀ a b c d →
+  d + (a + (b + (c + 0ℚ))) ≡ a + (b + (c + (d + 0ℚ)))
+sumIndex4Previous4 a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+sumIndex4Add8 : ∀ a b c d e f g h →
+  (a + e) + ((b + f) + ((c + g) + ((d + h) + 0ℚ)))
+  ≡ (a + (b + (c + (d + 0ℚ)))) + (e + (f + (g + (h + 0ℚ))))
+sumIndex4Add8 a b c d e f g h =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ [])
+
+sumIndex4Neg4 : ∀ a b c d →
+  (- a) + ((- b) + ((- c) + ((- d) + 0ℚ)))
+  ≡ - (a + (b + (c + (d + 0ℚ))))
+sumIndex4Neg4 a b c d =
+  ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
+sumIndex4Scale5 : ∀ scalar a b c d →
+  scalar * a + (scalar * b + (scalar * c + (scalar * d + 0ℚ)))
+  ≡ scalar * (a + (b + (c + (d + 0ℚ))))
+sumIndex4Scale5 scalar a b c d =
+  ℚRing.solve (scalar ∷ a ∷ b ∷ c ∷ d ∷ [])
 
 ------------------------------------------------------------------------
 -- Literal side-four cyclic shifts.
@@ -60,116 +197,116 @@ axis2 = index2
 axis3 = index3
 
 next4 : Index4 → Index4
-next4 index0 = index1
-next4 index1 = index2
-next4 index2 = index3
-next4 index3 = index0
+next4 zeroᵢ = sucᵢ zeroᵢ
+next4 (sucᵢ zeroᵢ) = sucᵢ (sucᵢ zeroᵢ)
+next4 (sucᵢ (sucᵢ zeroᵢ)) = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+next4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) = zeroᵢ
 
 previous4 : Index4 → Index4
-previous4 index0 = index3
-previous4 index1 = index0
-previous4 index2 = index1
-previous4 index3 = index2
+previous4 zeroᵢ = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+previous4 (sucᵢ zeroᵢ) = zeroᵢ
+previous4 (sucᵢ (sucᵢ zeroᵢ)) = sucᵢ zeroᵢ
+previous4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) = sucᵢ (sucᵢ zeroᵢ)
 
 nextPrevious4 : ∀ index → next4 (previous4 index) ≡ index
-nextPrevious4 index0 = refl
-nextPrevious4 index1 = refl
-nextPrevious4 index2 = refl
-nextPrevious4 index3 = refl
+nextPrevious4 zeroᵢ = refl
+nextPrevious4 (sucᵢ zeroᵢ) = refl
+nextPrevious4 (sucᵢ (sucᵢ zeroᵢ)) = refl
+nextPrevious4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) = refl
 
 previousNext4 : ∀ index → previous4 (next4 index) ≡ index
-previousNext4 index0 = refl
-previousNext4 index1 = refl
-previousNext4 index2 = refl
-previousNext4 index3 = refl
+previousNext4 zeroᵢ = refl
+previousNext4 (sucᵢ zeroᵢ) = refl
+previousNext4 (sucᵢ (sucᵢ zeroᵢ)) = refl
+previousNext4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) = refl
 
 shiftForward : Axis4 → Site4 → Site4
-shiftForward axis0 (pair (pair x0 x1) (pair x2 x3)) =
+shiftForward zeroᵢ (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair (next4 x0) x1) (pair x2 x3)
-shiftForward axis1 (pair (pair x0 x1) (pair x2 x3)) =
+shiftForward (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 (next4 x1)) (pair x2 x3)
-shiftForward axis2 (pair (pair x0 x1) (pair x2 x3)) =
+shiftForward (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 x1) (pair (next4 x2) x3)
-shiftForward axis3 (pair (pair x0 x1) (pair x2 x3)) =
+shiftForward (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 x1) (pair x2 (next4 x3))
 
 shiftBackward : Axis4 → Site4 → Site4
-shiftBackward axis0 (pair (pair x0 x1) (pair x2 x3)) =
+shiftBackward zeroᵢ (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair (previous4 x0) x1) (pair x2 x3)
-shiftBackward axis1 (pair (pair x0 x1) (pair x2 x3)) =
+shiftBackward (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 (previous4 x1)) (pair x2 x3)
-shiftBackward axis2 (pair (pair x0 x1) (pair x2 x3)) =
+shiftBackward (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 x1) (pair (previous4 x2) x3)
-shiftBackward axis3 (pair (pair x0 x1) (pair x2 x3)) =
+shiftBackward (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) =
   pair (pair x0 x1) (pair x2 (previous4 x3))
 
 shiftBackwardForward : ∀ axis site →
   shiftBackward axis (shiftForward axis site) ≡ site
-shiftBackwardForward axis0 (pair (pair x0 x1) (pair x2 x3))
+shiftBackwardForward zeroᵢ (pair (pair x0 x1) (pair x2 x3))
   rewrite previousNext4 x0 = refl
-shiftBackwardForward axis1 (pair (pair x0 x1) (pair x2 x3))
+shiftBackwardForward (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3))
   rewrite previousNext4 x1 = refl
-shiftBackwardForward axis2 (pair (pair x0 x1) (pair x2 x3))
+shiftBackwardForward (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3))
   rewrite previousNext4 x2 = refl
-shiftBackwardForward axis3 (pair (pair x0 x1) (pair x2 x3))
+shiftBackwardForward (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3))
   rewrite previousNext4 x3 = refl
 
 shiftForwardBackward : ∀ axis site →
   shiftForward axis (shiftBackward axis site) ≡ site
-shiftForwardBackward axis0 (pair (pair x0 x1) (pair x2 x3))
+shiftForwardBackward zeroᵢ (pair (pair x0 x1) (pair x2 x3))
   rewrite nextPrevious4 x0 = refl
-shiftForwardBackward axis1 (pair (pair x0 x1) (pair x2 x3))
+shiftForwardBackward (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3))
   rewrite nextPrevious4 x1 = refl
-shiftForwardBackward axis2 (pair (pair x0 x1) (pair x2 x3))
+shiftForwardBackward (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3))
   rewrite nextPrevious4 x2 = refl
-shiftForwardBackward axis3 (pair (pair x0 x1) (pair x2 x3))
+shiftForwardBackward (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3))
   rewrite nextPrevious4 x3 = refl
 
 forwardShiftsCommute : ∀ left right site →
   shiftForward left (shiftForward right site)
   ≡ shiftForward right (shiftForward left site)
-forwardShiftsCommute axis0 axis0 site = refl
-forwardShiftsCommute axis0 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis0 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis0 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis1 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis1 axis1 site = refl
-forwardShiftsCommute axis1 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis1 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis2 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis2 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis2 axis2 site = refl
-forwardShiftsCommute axis2 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis3 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis3 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis3 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-forwardShiftsCommute axis3 axis3 site = refl
+forwardShiftsCommute zeroᵢ zeroᵢ site = refl
+forwardShiftsCommute zeroᵢ (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ zeroᵢ) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) site = refl
+forwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ)) site = refl
+forwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+forwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site = refl
 
 backwardForwardShiftsCommute : ∀ left right site →
   shiftBackward left (shiftForward right site)
   ≡ shiftForward right (shiftBackward left site)
-backwardForwardShiftsCommute axis0 axis0 site =
+backwardForwardShiftsCommute zeroᵢ zeroᵢ site =
   trans (shiftBackwardForward axis0 site)
     (sym (shiftForwardBackward axis0 site))
-backwardForwardShiftsCommute axis0 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis0 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis0 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis1 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis1 axis1 site =
+backwardForwardShiftsCommute zeroᵢ (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ zeroᵢ) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) site =
   trans (shiftBackwardForward axis1 site)
     (sym (shiftForwardBackward axis1 site))
-backwardForwardShiftsCommute axis1 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis1 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis2 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis2 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis2 axis2 site =
+backwardForwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ)) site =
   trans (shiftBackwardForward axis2 site)
     (sym (shiftForwardBackward axis2 site))
-backwardForwardShiftsCommute axis2 axis3 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis3 axis0 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis3 axis1 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis3 axis2 (pair (pair x0 x1) (pair x2 x3)) = refl
-backwardForwardShiftsCommute axis3 axis3 site =
+backwardForwardShiftsCommute (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ)) (pair (pair x0 x1) (pair x2 x3)) = refl
+backwardForwardShiftsCommute (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans (shiftBackwardForward axis3 site)
     (sym (shiftForwardBackward axis3 site))
 
@@ -191,34 +328,33 @@ sumIndex4Cong left right pointwise
 sumIndex4Next : ∀ term →
   sumIndex4 (λ index → term (next4 index)) ≡ sumIndex4 term
 sumIndex4Next term =
-  ℚRing.solve-∀
+  sumIndex4Next4
     (term index0) (term index1) (term index2) (term index3)
 
 sumIndex4Previous : ∀ term →
   sumIndex4 (λ index → term (previous4 index)) ≡ sumIndex4 term
 sumIndex4Previous term =
-  ℚRing.solve-∀
+  sumIndex4Previous4
     (term index0) (term index1) (term index2) (term index3)
 
 sumIndex4Add : ∀ left right →
   sumIndex4 (λ index → left index + right index)
   ≡ sumIndex4 left + sumIndex4 right
 sumIndex4Add left right =
-  ℚRing.solve-∀
+  sumIndex4Add8
     (left index0) (left index1) (left index2) (left index3)
     (right index0) (right index1) (right index2) (right index3)
 
 sumIndex4Neg : ∀ term →
   sumIndex4 (λ index → - term index) ≡ - sumIndex4 term
 sumIndex4Neg term =
-  ℚRing.solve-∀
-    (term index0) (term index1) (term index2) (term index3)
+  sumIndex4Neg4 (term index0) (term index1) (term index2) (term index3)
 
 sumIndex4Scale : ∀ scalar term →
   sumIndex4 (λ index → scalar * term index)
   ≡ scalar * sumIndex4 term
 sumIndex4Scale scalar term =
-  ℚRing.solve-∀ scalar
+  sumIndex4Scale5 scalar
     (term index0) (term index1) (term index2) (term index3)
 
 sumSites : (Site4 → ℚ) → ℚ
@@ -241,22 +377,22 @@ sumSitesCong left right pointwise =
 
 sumSitesForwardInvariant : ∀ term axis →
   sumSites (λ site → term (shiftForward axis site)) ≡ sumSites term
-sumSitesForwardInvariant term axis0 =
+sumSitesForwardInvariant term zeroᵢ =
   sumIndex4Next
     (λ x0 → sumIndex4 (λ x1 → sumIndex4 (λ x2 → sumIndex4
       (λ x3 → term (pair (pair x0 x1) (pair x2 x3))))))
-sumSitesForwardInvariant term axis1 =
+sumSitesForwardInvariant term (sucᵢ zeroᵢ) =
   sumIndex4Cong _ _ (λ x0 →
     sumIndex4Next
       (λ x1 → sumIndex4 (λ x2 → sumIndex4
         (λ x3 → term (pair (pair x0 x1) (pair x2 x3))))))
-sumSitesForwardInvariant term axis2 =
+sumSitesForwardInvariant term (sucᵢ (sucᵢ zeroᵢ)) =
   sumIndex4Cong _ _ (λ x0 →
     sumIndex4Cong _ _ (λ x1 →
       sumIndex4Next
         (λ x2 → sumIndex4
           (λ x3 → term (pair (pair x0 x1) (pair x2 x3))))))
-sumSitesForwardInvariant term axis3 =
+sumSitesForwardInvariant term (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) =
   sumIndex4Cong _ _ (λ x0 →
     sumIndex4Cong _ _ (λ x1 →
       sumIndex4Cong _ _ (λ x2 →
@@ -361,8 +497,8 @@ sumSitesSubtract left right =
   trans
     (sumSitesAdd left (λ site → - right site))
     (trans
-      (cong (sumSites left +_) (sumSitesNeg right))
-      (ℚRing.solve-∀ (sumSites left) (sumSites right)))
+      (cong (λ value → sumSites left + value) (sumSitesNeg right))
+      (sumSitesSubtractNeg (sumSites left) (sumSites right)))
 
 ------------------------------------------------------------------------
 -- Difference calculus and summation by parts.
@@ -395,14 +531,14 @@ fieldInnerSymmetric : ∀ left right →
   fieldInner left right ≡ fieldInner right left
 fieldInnerSymmetric left right =
   sumSitesCong _ _ (λ site →
-    ℚRing.solve-∀ (left site) (right site))
+    multiplyCommutative (left site) (right site))
 
 fieldInnerCongRight : ∀ left right replacement →
   (∀ site → right site ≡ replacement site) →
   fieldInner left right ≡ fieldInner left replacement
 fieldInnerCongRight left right replacement pointwise =
   sumSitesCong _ _ (λ site →
-    cong (left site *_) (pointwise site))
+    cong (λ value → left site * value) (pointwise site))
 
 shiftedProductReindex : ∀ left right axis →
   sumSites
@@ -420,7 +556,7 @@ shiftedProductReindex left right axis =
           (λ site → left (shiftForward axis site) * right site)
     shiftedExact =
       sumSitesCong _ _ (λ site →
-        cong (left (shiftForward axis site) *_)
+        cong (λ value → left (shiftForward axis site) * value)
           (cong right (shiftBackwardForward axis site)))
   in
   trans
@@ -440,7 +576,7 @@ summationByParts axis fieldValue test =
     expandedLeft =
       trans
         (sumSitesCong _ _ (λ site →
-          ℚRing.solve-∀
+          forwardMinusTest
             (fieldValue (shiftForward axis site))
             (fieldValue site) (test site)))
         (sumSitesSubtract
@@ -453,51 +589,40 @@ summationByParts axis fieldValue test =
     (trans
       (cong (_- fieldInner fieldValue test) reindexed)
       (trans
-        (ℚRing.solve-∀
-          (fieldInner fieldValue test)
+        (subtractIsNeg
           (sumSites
-            (λ site → fieldValue site * test (shiftBackward axis site))))
-        (sym
-          (trans
-            (cong -_
-              (trans
-                (sumSitesCong _ _ (λ site →
-                  ℚRing.solve-∀
-                    (fieldValue site) (test site)
-                    (test (shiftBackward axis site))))
-                (sumSitesSubtract
-                  (λ site → fieldValue site * test site)
-                  (λ site →
-                    fieldValue site * test (shiftBackward axis site)))))
-            (ℚRing.solve-∀
-              (fieldInner fieldValue test)
-              (sumSites
+            (λ site → fieldValue site * test (shiftBackward axis site)))
+          (fieldInner fieldValue test))
+        (let
+          inner' :
+            fieldInner fieldValue (backwardDifference axis test)
+            ≡ fieldInner fieldValue test
+              - sumSites
+                  (λ site → fieldValue site * test (shiftBackward axis site))
+          inner' =
+            trans
+              (sym (sumSitesCong _ _ (λ site →
+                backwardMinusTest
+                  (fieldValue site) (test site)
+                  (test (shiftBackward axis site)))))
+              (sumSitesSubtract
+                (λ site → fieldValue site * test site)
                 (λ site →
-                  fieldValue site * test (shiftBackward axis site))))))))
+                  fieldValue site * test (shiftBackward axis site)))
+        in cong -_ (sym inner'))))
 
 backwardForwardDifferenceCommute : ∀ backwardAxis forwardAxis fieldValue site →
   backwardDifference backwardAxis
     (forwardDifference forwardAxis fieldValue) site
   ≡ forwardDifference forwardAxis
       (backwardDifference backwardAxis fieldValue) site
-backwardForwardDifferenceCommute backwardAxis forwardAxis fieldValue site =
-  subst
-    (λ mixedSite →
-      (fieldValue (shiftForward forwardAxis site) - fieldValue mixedSite)
-      - (fieldValue site - fieldValue (shiftBackward backwardAxis site))
-      ≡
-      (fieldValue (shiftForward forwardAxis site)
-        - fieldValue (shiftBackward backwardAxis
-            (shiftForward forwardAxis site)))
-      - (fieldValue site - fieldValue (shiftBackward backwardAxis site)))
-    (sym (backwardForwardShiftsCommute
-      backwardAxis forwardAxis site))
-    (ℚRing.solve-∀
-      (fieldValue (shiftForward forwardAxis site))
-      (fieldValue (shiftBackward backwardAxis
-        (shiftForward forwardAxis site)))
-      (fieldValue site)
-      (fieldValue (shiftBackward backwardAxis site)))
+backwardForwardDifferenceCommute backwardAxis forwardAxis fieldValue site
+  rewrite backwardForwardShiftsCommute backwardAxis forwardAxis site =
+  subtractSubtract
+    (fieldValue (shiftForward forwardAxis site))
+    (fieldValue site)
+    (fieldValue (shiftForward forwardAxis (shiftBackward backwardAxis site)))
+    (fieldValue (shiftBackward backwardAxis site))
 
 forwardBackwardNormExact : ∀ axis fieldValue →
   fieldNormSq (forwardDifference axis fieldValue)
@@ -509,7 +634,7 @@ forwardBackwardNormExact axis fieldValue =
       ≡ forwardDifference axis fieldValue (shiftBackward axis site)
     backwardAsShiftedForward site =
       cong (_- fieldValue (shiftBackward axis site))
-        (cong fieldValue (shiftForwardBackward axis site))
+        (cong fieldValue (sym (shiftForwardBackward axis site)))
 
     backwardNormAsShift :
       fieldNormSq (backwardDifference axis fieldValue)
@@ -569,9 +694,7 @@ mixedCrossIdentity leftAxis rightAxis fieldValue =
         (cong -_ (fieldInnerSymmetric (fieldValue rightAxis) forwardB))
         (trans
           (cong -_ second)
-          (ℚRing.solve-∀
-            (fieldInner B
-              (backwardDifference rightAxis (fieldValue rightAxis)))))))
+          refl)))
 
 backwardNormIsForward : ∀ axis fieldValue →
   fieldNormSq (backwardDifference axis fieldValue)
@@ -599,7 +722,7 @@ normDifferenceExpansion : ∀ left right →
 normDifferenceExpansion left right =
   trans
     (sumSitesCong _ _ (λ site →
-      ℚRing.solve-∀ (left site) (right site)))
+      normDiffSiteHelper (left site) (right site)))
     (trans
       (sumSitesAdd
         (λ site → left site * left site + right site * right site)
@@ -615,9 +738,7 @@ normDifferenceExpansion left right =
             (cong -_
               (sumSitesScale (+ 2 / 1)
                 (λ site → left site * right site)))))
-        (ℚRing.solve-∀
-          (fieldNormSq left) (fieldNormSq right)
-          (fieldInner left right))))
+        refl))
 
 fieldSum4 : ScalarField → ScalarField → ScalarField → ScalarField → ScalarField
 fieldSum4 first second third fourth site =
@@ -635,21 +756,20 @@ normSum4Expansion first second third fourth =
   let
     squares : ScalarField
     squares site =
-      first site * first site
-      + second site * second site
-      + third site * third site
-      + fourth site * fourth site
+      (first site * first site + second site * second site)
+      + (third site * third site + fourth site * fourth site)
 
     crosses : ScalarField
     crosses site =
       first site * second site
-      + first site * third site + first site * fourth site
-      + second site * third site + second site * fourth site
-      + third site * fourth site
+      + (first site * third site
+        + (first site * fourth site
+          + (second site * third site
+            + (second site * fourth site + third site * fourth site))))
   in
   trans
     (sumSitesCong _ _ (λ site →
-      ℚRing.solve-∀
+      norm4SiteHelper
         (first site) (second site) (third site) (fourth site)))
     (trans
       (sumSitesAdd squares
@@ -665,26 +785,20 @@ normSum4Expansion first second third fourth =
           squareExpansion =
             trans
               (sumSitesAdd
-                (λ site → first site * first site)
-                (λ site →
-                  second site * second site
-                  + third site * third site
+                (λ site → first site * first site
+                  + second site * second site)
+                (λ site → third site * third site
                   + fourth site * fourth site))
               (trans
-                (cong
-                  (fieldNormSq first +_)
-                  (trans
-                    (sumSitesAdd
-                      (λ site → second site * second site)
-                      (λ site →
-                        third site * third site
-                        + fourth site * fourth site))
-                    (cong (fieldNormSq second +_)
-                      (sumSitesAdd
-                        (λ site → third site * third site)
-                        (λ site → fourth site * fourth site)))))
-                (ℚRing.solve-∀
-                  (fieldNormSq first) (fieldNormSq second)
+                (cong₂ _+_
+                  (sumSitesAdd
+                    (λ site → first site * first site)
+                    (λ site → second site * second site))
+                  (sumSitesAdd
+                    (λ site → third site * third site)
+                    (λ site → fourth site * fourth site)))
+                (crossAssoc3
+                  (fieldNormSq first + fieldNormSq second)
                   (fieldNormSq third) (fieldNormSq fourth)))
 
           crossExpansion :
@@ -698,30 +812,31 @@ normSum4Expansion first second third fourth =
               (sumSitesAdd
                 (λ site → first site * second site)
                 (λ site →
-                  first site * third site + first site * fourth site
-                  + second site * third site + second site * fourth site
-                  + third site * fourth site))
+                  first site * third site
+                  + (first site * fourth site
+                    + (second site * third site
+                      + (second site * fourth site + third site * fourth site)))))
               (trans
-                (cong (fieldInner first second +_)
+                (cong (λ value → fieldInner first second + value)
                   (trans
                     (sumSitesAdd
                       (λ site → first site * third site)
                       (λ site →
                         first site * fourth site
-                        + second site * third site
-                        + second site * fourth site
-                        + third site * fourth site))
+                        + (second site * third site
+                          + (second site * fourth site
+                            + third site * fourth site))))
                     (trans
-                      (cong (fieldInner first third +_)
+                      (cong (λ value → fieldInner first third + value)
                         (trans
                           (sumSitesAdd
                             (λ site → first site * fourth site)
                             (λ site →
                               second site * third site
-                              + second site * fourth site
-                              + third site * fourth site))
+                              + (second site * fourth site
+                                + third site * fourth site)))
                           (trans
-                            (cong (fieldInner first fourth +_)
+                            (cong (λ value → fieldInner first fourth + value)
                               (trans
                                 (sumSitesAdd
                                   (λ site → second site * third site)
@@ -729,26 +844,26 @@ normSum4Expansion first second third fourth =
                                     second site * fourth site
                                     + third site * fourth site))
                                 (trans
-                                  (cong (fieldInner second third +_)
+                                  (cong (λ value → fieldInner second third + value)
                                     (sumSitesAdd
                                       (λ site → second site * fourth site)
                                       (λ site → third site * fourth site)))
-                                  (ℚRing.solve-∀
+                                  (crossAssoc3
                                     (fieldInner second third)
                                     (fieldInner second fourth)
                                     (fieldInner third fourth)))))
-                            (ℚRing.solve-∀
+                            (crossAssoc4
                               (fieldInner first fourth)
                               (fieldInner second third)
                               (fieldInner second fourth)
                               (fieldInner third fourth)))))
-                      (ℚRing.solve-∀
+                      (crossAssoc5
                         (fieldInner first third)
                         (fieldInner first fourth)
                         (fieldInner second third)
                         (fieldInner second fourth)
                         (fieldInner third fourth)))))
-                (ℚRing.solve-∀
+                (crossAssoc6
                   (fieldInner first second)
                   (fieldInner first third)
                   (fieldInner first fourth)
@@ -759,8 +874,8 @@ normSum4Expansion first second third fourth =
          trans
           (cong₂ _+_
             squareExpansion
-            (cong ((+ 2 / 1) *_) crossExpansion))
-          (ℚRing.solve-∀
+            (cong (λ value → (+ 2 / 1) * value) crossExpansion))
+          (norm4Combine
             (fieldNormSq first) (fieldNormSq second)
             (fieldNormSq third) (fieldNormSq fourth)
             (fieldInner first second) (fieldInner first third)
@@ -914,7 +1029,7 @@ periodicScalarHodgeIdentity fieldValue
         | backwardCrossIsForward axis1 axis2 fieldValue
         | backwardCrossIsForward axis1 axis3 fieldValue
         | backwardCrossIsForward axis2 axis3 fieldValue =
-  ℚRing.solve-∀
+  hodgeFinal16
     (fieldNormSq (forwardDifference axis0 (fieldValue axis0)))
     (fieldNormSq (forwardDifference axis1 (fieldValue axis0)))
     (fieldNormSq (forwardDifference axis2 (fieldValue axis0)))
@@ -954,42 +1069,47 @@ periodicScalarHodgeIdentity fieldValue
 -- Three-component physical SU(2) lift.
 ------------------------------------------------------------------------
 
+data LieCoordinate3 : Set where
+  coordinateX : LieCoordinate3
+  coordinateY : LieCoordinate3
+  coordinateZ : LieCoordinate3
+
 PhysicalBondField4 : Set
-PhysicalBondField4 = Physical.LieCoordinate3 → BondField4
+PhysicalBondField4 = LieCoordinate3 → BondField4
 
 physicalPeriodicGradientEnergy : PhysicalBondField4 → ℚ
 physicalPeriodicGradientEnergy fieldValue =
-  periodicGradientEnergy (fieldValue Physical.coordinateX)
-  + periodicGradientEnergy (fieldValue Physical.coordinateY)
-  + periodicGradientEnergy (fieldValue Physical.coordinateZ)
+  periodicGradientEnergy (fieldValue coordinateX)
+  + periodicGradientEnergy (fieldValue coordinateY)
+  + periodicGradientEnergy (fieldValue coordinateZ)
 
 physicalPeriodicCurlEnergy : PhysicalBondField4 → ℚ
 physicalPeriodicCurlEnergy fieldValue =
-  periodicCurlEnergy (fieldValue Physical.coordinateX)
-  + periodicCurlEnergy (fieldValue Physical.coordinateY)
-  + periodicCurlEnergy (fieldValue Physical.coordinateZ)
+  periodicCurlEnergy (fieldValue coordinateX)
+  + periodicCurlEnergy (fieldValue coordinateY)
+  + periodicCurlEnergy (fieldValue coordinateZ)
 
 physicalPeriodicDivergenceEnergy : PhysicalBondField4 → ℚ
 physicalPeriodicDivergenceEnergy fieldValue =
-  periodicDivergenceEnergy (fieldValue Physical.coordinateX)
-  + periodicDivergenceEnergy (fieldValue Physical.coordinateY)
-  + periodicDivergenceEnergy (fieldValue Physical.coordinateZ)
+  periodicDivergenceEnergy (fieldValue coordinateX)
+  + periodicDivergenceEnergy (fieldValue coordinateY)
+  + periodicDivergenceEnergy (fieldValue coordinateZ)
 
 physicalPeriodicHodgeIdentity : ∀ fieldValue →
   physicalPeriodicGradientEnergy fieldValue
   ≡ physicalPeriodicCurlEnergy fieldValue
     + physicalPeriodicDivergenceEnergy fieldValue
 physicalPeriodicHodgeIdentity fieldValue
-  rewrite periodicScalarHodgeIdentity (fieldValue Physical.coordinateX)
-        | periodicScalarHodgeIdentity (fieldValue Physical.coordinateY)
-        | periodicScalarHodgeIdentity (fieldValue Physical.coordinateZ) =
-  ℚRing.solve-∀
-    (periodicCurlEnergy (fieldValue Physical.coordinateX))
-    (periodicCurlEnergy (fieldValue Physical.coordinateY))
-    (periodicCurlEnergy (fieldValue Physical.coordinateZ))
-    (periodicDivergenceEnergy (fieldValue Physical.coordinateX))
-    (periodicDivergenceEnergy (fieldValue Physical.coordinateY))
-    (periodicDivergenceEnergy (fieldValue Physical.coordinateZ))
+  rewrite periodicScalarHodgeIdentity (fieldValue coordinateX)
+        | periodicScalarHodgeIdentity (fieldValue coordinateY)
+        | periodicScalarHodgeIdentity (fieldValue coordinateZ) =
+  physicalCombine
+    (periodicCurlEnergy (fieldValue coordinateX))
+    (periodicCurlEnergy (fieldValue coordinateY))
+    (periodicCurlEnergy (fieldValue coordinateZ))
+    (periodicDivergenceEnergy (fieldValue coordinateX))
+    (periodicDivergenceEnergy (fieldValue coordinateY))
+    (periodicDivergenceEnergy (fieldValue coordinateZ))
 
 sideFourCyclicReindexLevel : ProofLevel
 sideFourCyclicReindexLevel = machineChecked

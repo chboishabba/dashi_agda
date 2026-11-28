@@ -132,14 +132,25 @@ finiteRGMultiscaleCovarianceTelescopes (terminal value) =
   sym (ℚP.+-identityʳ value)
 finiteRGMultiscaleCovarianceTelescopes
     (prepend {fine} {coarse} remainder stepExact tail) =
+  let
+    associativity∀ : ∀ (t s r : ℚ) → t + s + r ≡ t + (s + r)
+    associativity∀ = ℚRing.solve-∀
+
+    associativity :
+      terminalCovariance tail + fibreRemainderSum tail + remainder
+      ≡ terminalCovariance (prepend remainder stepExact tail)
+        + fibreRemainderSum (prepend remainder stepExact tail)
+    associativity =
+      associativity∀
+        (terminalCovariance tail)
+        (fibreRemainderSum tail)
+        remainder
+  in
   trans stepExact
     (trans
       (cong (_+ remainder)
         (finiteRGMultiscaleCovarianceTelescopes tail))
-      (ℚRing.solve-∀
-        (terminalCovariance tail)
-        (fibreRemainderSum tail)
-        remainder))
+      associativity)
 
 finiteRGMultiscaleAbsoluteCovarianceUpper :
   ∀ {fine} (chain : ExactCovarianceChain fine) →
@@ -161,15 +172,26 @@ finiteRGMultiscaleAbsoluteCovarianceUpper
 
     tailUpper = finiteRGMultiscaleAbsoluteCovarianceUpper tail
     lifted = ℚP.+-mono-≤ tailUpper ℚP.≤-refl
+
+    envelopeId∀ : ∀ (t a r : ℚ) → (t + a) + r ≡ t + (a + r)
+    envelopeId∀ = ℚRing.solve-∀
+
+    envelopeId :
+      (∣ terminalCovariance tail ∣ + absoluteFibreRemainderSum tail)
+        + ∣ remainder ∣
+      ≡ ∣ terminalCovariance tail ∣
+        + (absoluteFibreRemainderSum tail + ∣ remainder ∣)
+    envelopeId =
+      envelopeId∀
+        (∣ terminalCovariance tail ∣)
+        (absoluteFibreRemainderSum tail)
+        ∣ remainder ∣
   in
   ℚP.≤-trans oneStep
     (subst
       (λ upper →
         ∣ coarse ∣ + ∣ remainder ∣ ≤ upper)
-      (ℚRing.solve-∀
-        ∣ terminalCovariance tail ∣
-        (absoluteFibreRemainderSum tail)
-        ∣ remainder ∣)
+      envelopeId
       lifted)
 
 ------------------------------------------------------------------------

@@ -105,7 +105,7 @@ finiteRGObservableExpectationPreserved :
     (observable : Observable Fine) →
   fineExpectation step observable
   ≡ coarseExpectation step (transportObservable step observable)
-finiteRGObservableExpectationPreserved step observable =
+finiteRGObservableExpectationPreserved {Fine} {Coarse} step observable =
   let
     expandedFine : Fine → ℚ
     expandedFine fine =
@@ -137,10 +137,11 @@ finiteRGObservableExpectationPreserved step observable =
                     coarseWeight step coarse
                       * reopeningKernel step coarse fine)))
               (Sums.sumRationalCong (coarseStates step) _ _
-                (λ coarse → ℚRing.solve-∀
-                  (coarseWeight step coarse)
-                  (reopeningKernel step coarse fine)
-                  (observable fine))))))
+                (λ coarse →
+                  ℚP.*-comm
+                    (observable fine)
+                    (coarseWeight step coarse
+                      * reopeningKernel step coarse fine))))))
 
     swap :
       Sums.sumRational (fineStates step) expandedFine
@@ -167,10 +168,11 @@ finiteRGObservableExpectationPreserved step observable =
     factor coarse =
       trans
         (Sums.sumRationalCong (fineStates step) _ _
-          (λ fine → ℚRing.solve-∀
-            (coarseWeight step coarse)
-            (reopeningKernel step coarse fine)
-            (observable fine)))
+          (λ fine →
+            ℚP.*-assoc
+              (coarseWeight step coarse)
+              (reopeningKernel step coarse fine)
+              (observable fine)))
         (Sums.sumRationalScale
           (coarseWeight step coarse)
           (fineStates step)

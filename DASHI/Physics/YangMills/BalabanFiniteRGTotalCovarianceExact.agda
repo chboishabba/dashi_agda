@@ -36,6 +36,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _-_; _*_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -103,13 +104,32 @@ sumWeightedSubtract :
     (λ value → weight value * (left value - right value))
   ≡ Sums.sumRational values (λ value → weight value * left value)
     - Sums.sumRational values (λ value → weight value * right value)
-sumWeightedSubtract [] weight left right = ℚRing.solve []
+sumWeightedSubtract [] weight left right =
+  sym (ℚP.+-inverseʳ ℚ.0ℚ)
 sumWeightedSubtract (value ∷ values) weight left right
   rewrite sumWeightedSubtract values weight left right =
-  ℚRing.solve-∀
-    (weight value) (left value) (right value)
-    (Sums.sumRational values (λ selected → weight selected * left selected))
-    (Sums.sumRational values (λ selected → weight selected * right selected))
+  let
+    leftSum =
+      Sums.sumRational values
+        (λ selected → weight selected * left selected)
+    rightSum =
+      Sums.sumRational values
+        (λ selected → weight selected * right selected)
+    algebra∀ :
+      ∀ (w l r a b : ℚ) →
+        w * (l - r) + (a - b) ≡ (w * l + a) - (w * r + b)
+    algebra∀ = ℚRing.solve-∀
+
+    algebra :
+      weight value * (left value - right value) + (leftSum - rightSum)
+      ≡ (weight value * left value + leftSum)
+        - (weight value * right value + rightSum)
+    algebra =
+      algebra∀
+        (weight value) (left value) (right value)
+        leftSum rightSum
+  in
+  algebra
 
 coarseExpectationSubtractExact :
   ∀ {Fine Coarse}
@@ -177,6 +197,11 @@ finiteRGTotalCovariance {Coarse = Coarse} step left right =
           meanRight = Reopen.coarseExpectation step transportedRight
           productTransport = Reopen.coarseExpectation step transportedProduct
 
+          covarianceAlgebra∀ :
+            ∀ (pT pC mL mR : ℚ) →
+              pT - mL * mR ≡ (pC - mL * mR) + (pT - pC)
+          covarianceAlgebra∀ = ℚRing.solve-∀
+
           residualExact :
             Reopen.coarseExpectation step
               (conditionalCovariance step left right)
@@ -184,7 +209,7 @@ finiteRGTotalCovariance {Coarse = Coarse} step left right =
           residualExact = residualMoment
         in
         trans
-          (ℚRing.solve-∀ productTransport productCoarse meanLeft meanRight)
+          (covarianceAlgebra∀ productTransport productCoarse meanLeft meanRight)
           (cong
             (λ residual →
               (productCoarse - meanLeft * meanRight) + residual)

@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1980" viewBox="0 0 1600 1980" role="img" aria-labelledby="title desc">
+<title id="title">Yang–Mills P0 — remaining proof geometry</title><desc id="desc">Source identification and physical rate dependency diagram, with existing formalized donors and open continuum endpoints. Master 534595d1b8.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto-start-reverse"><path d="M0 0 L9 4.5 L0 9Z" fill="#65768b"/></marker></defs>
+<rect width="1600" height="1980" fill="#f7f9fc"/>
+<rect x="0" y="0" width="1600" height="150" fill="#24364d"/>
+<text x="44" y="55" font-family="DejaVu Sans, sans-serif" font-size="40" font-weight="700" fill="#ffffff" text-anchor="start">Yang–Mills P0  /  remaining proof geometry</text>
+<text x="46" y="91" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#dce6f5" text-anchor="start">Original Wilson source → Bałaban selected RG → same continuum OS Hamiltonian</text>
+<text x="46" y="125" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#c9d7e9" text-anchor="start">26 Nov 2026  •  master 534595d1b8  •  source/analytic frontier, not a Clay proof</text>
+<rect x="44" y="172" width="23" height="23" rx="5" fill="#e8f4ef" stroke="#39755d" stroke-width="2"/>
+<text x="79" y="190" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700" fill="#164e3a" text-anchor="start">Existing algebra / donors</text>
+<rect x="440" y="172" width="23" height="23" rx="5" fill="#eaf1fc" stroke="#5275ac" stroke-width="2"/>
+<text x="475" y="190" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700" fill="#234e89" text-anchor="start">Conditional consumer / candidate</text>
+<rect x="940" y="172" width="23" height="23" rx="5" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="975" y="190" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700" fill="#744711" text-anchor="start">Open physical or trust gate</text>
+<text x="44" y="238" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" fill="#5275ac" text-anchor="start">01</text>
+<text x="92" y="238" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#24364d" text-anchor="start">Original source and historical source selection — P0W / P0V</text>
+<path d="M520 356 H575" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M1025 356 H1080" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M800 442 V472" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M280 442 V472" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1320 442 V472" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/YMClayW0OriginalF19CandidateEquation171TExact.agda" target="_blank">
+<rect x="44" y="260" width="476" height="182" rx="13" fill="#eaf1fc" stroke="#5275ac" stroke-width="2"/>
+<text x="64" y="292" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#234e89" text-anchor="start">Original Wilson / F19</text>
+<text x="64" y="321" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">4D compact SU(N), six planes;</text>
+<text x="64" y="346" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">64 pairs + 896 coupled spectators</text>
+<text x="64" y="371" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">at side-four benchmark; all-scale</text>
+<text x="64" y="396" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">physical instantiation still needed.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="575" y="260" width="450" height="182" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="595" y="292" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">W0a · domain dictionary</text>
+<text x="595" y="321" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Ω / Λ / S / B histories;</text>
+<text x="595" y="346" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">components and ordered steps;</text>
+<text x="595" y="371" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">forward cover + reverse selection;</text>
+<text x="595" y="396" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">retain excluded histories.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayW0PrimaryVisualEquationCrosswalk20261126.md" target="_blank">
+<rect x="1080" y="260" width="476" height="182" rx="13" fill="#ffffff" stroke="#c1ccda" stroke-width="2"/>
+<text x="1100" y="292" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#26364a" text-anchor="start">Bałaban primary source</text>
+<text x="1100" y="321" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#26364a" text-anchor="start">CMP119 (2.18)–(2.23);</text>
+<text x="1100" y="346" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#26364a" text-anchor="start">CMP122-II (1.71), pp. 378–379;</text>
+<text x="1100" y="371" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#26364a" text-anchor="start">CMP122-I localized R operation.</text>
+<text x="1100" y="396" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#26364a" text-anchor="start">Visual crosswalk recorded.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/roadmaps/ClayYMProofRoadmap.md" target="_blank">
+<rect x="44" y="472" width="476" height="148" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="504" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">P0V · physical input gates</text>
+<text x="64" y="533" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">SU(N) trace, real arithmetic, clamp,</text>
+<text x="64" y="558" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">measurable Haar and good mass;</text>
+<text x="64" y="583" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">connecting contours, E1 kernel.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="575" y="472" width="981" height="148" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="595" y="504" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">W0b · constrained integral equivalence</text>
+<text x="595" y="533" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Construct the measure transport: Haar / FP / axial-tree constraints, gauge quotient,</text>
+<text x="595" y="558" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Jacobian, B and Vₕ fluctuations, Wilson/action terms, localized V/E/R/B and vacuum normalization.</text>
+<text x="595" y="583" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Prove equality after gauge integration, not raw pointwise density equality.</text>
+</a>
+<path d="M1065 620 V647 H800 V660" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M282 620 V648 H550 V660" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/BalabanCMP119Equation171WeightedStepApproximationExact.agda#L60-L67" target="_blank">
+<rect x="44" y="660" width="1512" height="134" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="692" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">W0c · four-column source correspondence</text>
+<text x="64" y="721" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Match K₀, K_F, K_G, K_FG of ONE fixed original Wilson density with selected T masses; preserve fine-mark fibres.</text>
+<text x="64" y="746" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Exact gate: sourceStepIsEquation171Mass — Factor.oneStepValue ≡ Eq171.sourceTOperationMass.</text>
+<text x="64" y="771" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">A quantified mismatch is an alternative route, not a proof of the equality field.</text>
+</a>
+<text x="44" y="840" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" fill="#5275ac" text-anchor="start">02</text>
+<text x="92" y="840" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#24364d" text-anchor="start">Signed residual and original weak-coupling rate — P0W / P0X</text>
+<path d="M1450 794 V852 H410 V866" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1450 794 V852 H1185 V866" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/YMClayOriginalAffineFibreHessianLedgerExact.agda" target="_blank">
+<rect x="44" y="866" width="735" height="161" rx="13" fill="#e8f4ef" stroke="#39755d" stroke-width="2"/>
+<text x="64" y="898" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#164e3a" text-anchor="start">W1 · affine Hessian / covariance donors</text>
+<text x="64" y="921" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">K = K₀ + sK_F + tK_G + stK_FG</text>
+<text x="64" y="943" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">det = K₀K_FG − K_FK_G; ∂s∂t log K = det/K²</text>
+<text x="64" y="965" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">∂s∂t(−log K) = −det/K²</text>
+<text x="64" y="987" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">Existing finite telescoping and signed fibre residual.</text>
+<text x="64" y="1009" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">W1 rational algebra / polydisc receipts recorded PASS.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="821" y="866" width="735" height="161" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="841" y="898" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">X0 · actual renormalized history</text>
+<text x="841" y="927" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Original β(a) → ∞; selected E/R/B/V and denominators.</text>
+<text x="841" y="952" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">CMP122-I/II R-operation on genuine source components.</text>
+<text x="841" y="977" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">No fixed-cutoff q &lt; 1 or bare strong-coupling shortcut.</text>
+</a>
+<path d="M410 1027 V1047" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1185 1027 V1047" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="44" y="1047" width="735" height="134" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="1079" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">W1 physical · continuous fibres</text>
+<text x="64" y="1108" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Instantiate continuous Haar, integrability and K₀ support.</text>
+<text x="64" y="1133" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Keep zero-mass fibres; never silently erase signed residual.</text>
+<text x="64" y="1158" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Use existing total covariance and telescoping compilers.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="821" y="1047" width="735" height="134" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="841" y="1079" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">X1 / X2 · marked and exceptional sectors</text>
+<text x="841" y="1108" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Source-selected CMP116 mixed Hessian / score bounds;</text>
+<text x="841" y="1133" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">actual large-field suppression, including mixed sectors;</text>
+<text x="841" y="1158" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">absolute connected charges, all spectators and histories.</text>
+</a>
+<path d="M410 1181 V1201" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1185 1181 V1201" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="44" y="1201" width="735" height="134" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="1233" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">W2 · source comparison (one sufficient route)</text>
+<text x="64" y="1262" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Bound signed conditional fibre, transported means and</text>
+<text x="64" y="1287" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">effective-law ↔ CMP116 mismatch on original marks.</text>
+<text x="64" y="1312" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Direct W1/W3 absolute proof can replace this route.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/BalabanFiniteRGGoodBadResidualEnvelopeExact.agda" target="_blank">
+<rect x="821" y="1201" width="735" height="134" rx="13" fill="#e8f4ef" stroke="#39755d" stroke-width="2"/>
+<text x="841" y="1233" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#164e3a" text-anchor="start">Existing shell / exceptional consumers</text>
+<text x="841" y="1262" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">P06 animal entropy, R429 / Step-V; good/bad envelope;</text>
+<text x="841" y="1287" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">finite RG telescope and exceptional covariance mass.</text>
+<text x="841" y="1312" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#164e3a" text-anchor="start">These propagate bounds; do not manufacture physical ones.</text>
+</a>
+<path d="M410 1335 V1356 H800 V1370" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="8 7"/>
+<path d="M1185 1335 V1356 H800 V1370" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/physics/YMClayP0W0XOriginalSourceSelectedProofProgramme20261126.md" target="_blank">
+<rect x="44" y="1370" width="1512" height="111" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="1402" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">X3 / W3 · uniform physical rooted-shell rate</text>
+<text x="64" y="1431" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Terminal + Σ |good marked residual| + Σ |exceptional marked residual| ≤ C exp(−mR).</text>
+<text x="64" y="1456" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">C finite and m &gt; 0 independent of cutoff a and volume L; R is physical separation, not RG time.</text>
+</a>
+<text x="44" y="1525" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" fill="#5275ac" text-anchor="start">03</text>
+<text x="92" y="1525" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#24364d" text-anchor="start">Parallel original continuum and endpoint — P0Y</text>
+<path d="M140 1481 V1498 H22 V1544 H224 V1555" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda" target="_blank">
+<rect x="44" y="1555" width="360" height="130" rx="13" fill="#eaf1fc" stroke="#5275ac" stroke-width="2"/>
+<text x="64" y="1587" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#234e89" text-anchor="start">D1 · original clustering</text>
+<text x="64" y="1616" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">Full Wilson covariance bound;</text>
+<text x="64" y="1641" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">transfer to the same E1 state.</text>
+<text x="64" y="1666" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#234e89" text-anchor="start">Existing conditional compiler.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/DASHI/Physics/YangMills/YMClayE1OriginalSUNFiniteCylinderLawsExact.agda" target="_blank">
+<rect x="428" y="1555" width="360" height="130" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="448" y="1587" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">E1 · continuum / OS</text>
+<text x="448" y="1616" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Actual cylinder convergence;</text>
+<text x="448" y="1641" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">all-word RP, OS reconstruction;</text>
+<text x="448" y="1666" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">interacting theory identification.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/roadmaps/ClayYMProofRoadmap.md" target="_blank">
+<rect x="812" y="1555" width="360" height="130" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="832" y="1587" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">N1 · noncollapse</text>
+<text x="832" y="1616" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Surviving gauge-invariant word;</text>
+<text x="832" y="1641" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">positive charge or equivalent;</text>
+<text x="832" y="1666" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">same continuum witness.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/roadmaps/ClayYMProofRoadmap.md" target="_blank">
+<rect x="1196" y="1555" width="360" height="130" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="1216" y="1587" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">G1 · group scope</text>
+<text x="1216" y="1616" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Each compact simple group;</text>
+<text x="1216" y="1641" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">actual source and UV/IR bounds;</text>
+<text x="1216" y="1666" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">no SU(2)-only promotion.</text>
+</a>
+<path d="M224 1685 V1708 H800 V1720" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M608 1685 V1708 H800 V1720" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M992 1685 V1708 H800 V1720" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1376 1685 V1708 H800 V1720" fill="none" stroke="#65768b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/roadmaps/ClayYMProofRoadmap.md" target="_blank">
+<rect x="44" y="1720" width="1512" height="105" rx="13" fill="#fff3df" stroke="#b47925" stroke-width="2"/>
+<text x="64" y="1752" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#744711" text-anchor="start">D2 + endpoint review · same reconstructed H_OS</text>
+<text x="64" y="1781" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Dense centered gauge-invariant word core, positive physical gap, full-spectrum exclusion and vacuum uniqueness.</text>
+<text x="64" y="1806" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#744711" text-anchor="start">Independent full E1 exact-head Agda receipt and transitive RealAnalysisAxioms / --safe audit still open.</text>
+</a>
+<a xlink:href="https://github.com/chboishabba/dashi_agda/blob/534595d1b884f34adc92899429e26239e03d9c10/Docs/roadmaps/ClayYMProofRoadmap.md" target="_blank">
+<rect x="44" y="1845" width="1512" height="78" rx="13" fill="#24364d" stroke="#24364d" stroke-width="2"/>
+<text x="64" y="1877" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#ffffff" text-anchor="start">No promotion</text>
+<text x="64" y="1906" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#ffffff" text-anchor="start">YangMillsClaySolved = false     |     clayYangMillsPromoted = false     |     No new proof/kernel run in this visualization.</text>
+</a>
+<text x="44" y="1954" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#53647c" text-anchor="start">Source links are embedded in the SVG boxes. PR #1444 donor; #1536/#1544 stale relative to master — do not merge wholesale.</text>
+</svg>

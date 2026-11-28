@@ -54,16 +54,16 @@ nativeBondsFromGraphField :
   ∀ {G : Set} →
   Gauge.GaugeField {G = G} Spatial.ForwardBond4 →
   Bonds.PeriodicBondField three G
-nativeBondsFromGraphField field (Torus.pair site axis) =
-  field site (Hodge.shiftForward axis site) (Spatial.forwardBond axis)
+nativeBondsFromGraphField gaugeField (Torus.pair site axis) =
+  gaugeField site (Hodge.shiftForward axis site) (Spatial.forwardBond axis)
 
 nativeAfterGraphPointwise :
   ∀ {G : Set}
-  (field : Gauge.GaugeField {G = G} Spatial.ForwardBond4)
+  (gaugeField : Gauge.GaugeField {G = G} Spatial.ForwardBond4)
   site axis →
-  nativeBondsFromGraphField field (Torus.pair site axis)
-  ≡ field site (Hodge.shiftForward axis site) (Spatial.forwardBond axis)
-nativeAfterGraphPointwise field site axis = refl
+  nativeBondsFromGraphField gaugeField (Torus.pair site axis)
+  ≡ gaugeField site (Hodge.shiftForward axis site) (Spatial.forwardBond axis)
+nativeAfterGraphPointwise gaugeField site axis = refl
 
 graphAfterNativePointwise :
   ∀ {G : Set}
@@ -88,12 +88,12 @@ nativeRoundTrip bonds site axis = refl
 -- pointwise, with no function extensionality and no chosen external decoder.
 graphRoundTrip :
   ∀ {G : Set}
-  (field : Gauge.GaugeField {G = G} Spatial.ForwardBond4)
+  (gaugeField : Gauge.GaugeField {G = G} Spatial.ForwardBond4)
   start finish (edge : Spatial.ForwardBond4 start finish) →
-  graphFieldFromNativeBonds (nativeBondsFromGraphField field)
+  graphFieldFromNativeBonds (nativeBondsFromGraphField gaugeField)
     start finish edge
-  ≡ field start finish edge
-graphRoundTrip field site .(Hodge.shiftForward axis site)
+  ≡ gaugeField start finish edge
+graphRoundTrip gaugeField site .(Hodge.shiftForward axis site)
     (Spatial.forwardBond axis) = refl
 
 -- A native rational SU2 BondData is not a fresh/free group wrapper:
