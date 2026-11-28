@@ -1,0 +1,44 @@
+"""Reconciled F8 W1/W2 local acceptance: exact wall source/current/Schur checks,
+with separate opt-in original finite-history gate. Never invokes CI.
+No automatic promotion from symbolic algebra to coupled physical solution.
+"""
+import argparse
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+SCRIPTS=(
+    "check_f8_actual_gn_current.py",
+    "check_f8_full_gn_fourier_current.py",
+    "check_f8_gn_current_budget.py",
+    "check_f8_current_israel_reciprocal_weld.py",
+    "check_f8_gauss_israel_energy_weld.py",
+    "check_f8_scalar_density_momentum_schur.py",
+    "check_f8_material_momentum_frame_weld.py",
+    "check_f8_scalar_frequency_schur_bridge.py",
+    "check_f8_scalar_master_flux_weld.py",
+    "check_f8_full_band_ward_attachment.py",
+)
+
+def run(history=False,seconds=30):
+    root=Path(__file__).resolve().parent
+    env=dict(os.environ,OPENBLAS_NUM_THREADS="1",OMP_NUM_THREADS="1")
+    for name in SCRIPTS+(("check_f8_w1w2_integrated_receipt.py",) if history else ()):
+        path=root/name
+        if not path.is_file():raise FileNotFoundError(path)
+        result=subprocess.run((sys.executable,str(path)),cwd=root,env=env,
+                              capture_output=True,text=True,
+                              timeout=90 if history and name.endswith("integrated_receipt.py") else seconds)
+        if result.returncode:
+            raise RuntimeError(f"{name} FAILED rc={result.returncode}\n{result.stdout}\n{result.stderr}")
+        print(f"PASS {name}: {result.stdout.strip()[:220]}",flush=True)
+    print("EXACT ALGEBRA ACCEPTED; original history="+("EXECUTED" if history else "NOT EXECUTED"))
+    print("Full continuum Einstein-Israel physical energy and receiver remain OPEN")
+
+if __name__=="__main__":
+    p=argparse.ArgumentParser()
+    p.add_argument("--history",action="store_true",help="run original finite history, 90s local cap")
+    p.add_argument("--seconds",type=int,default=30,help="per exact script timeout")
+    args=p.parse_args()
+    run(args.history,args.seconds)
