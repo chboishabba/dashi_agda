@@ -1,8 +1,8 @@
 {
   "date": "2026-11-28",
   "pr": "https://github.com/chboishabba/dashi_agda/pull/1557",
-  "branch_head_before_commit": "cf0e1d3e6498dd304ee3342bb11371cab039ce42",
-  "scope": "accepted W1 normalization, integrated covariance, and constructive Walsh tranche",
+  "branch_head_before_commit": "29cef2a4e988f663778507a583cc3dc8c9a169b4",
+  "scope": "accepted W1 normalization, integrated covariance, constructive Walsh, and generic four-column source-family weld tranche",
   "clay_flags": {
     "YangMillsClaySolved": false,
     "clayYangMillsPromoted": false
@@ -56,6 +56,35 @@
         "w1F19IntegratedCovarianceMomentWeldLevel"
       ],
       "status": "KERNEL_ACCEPTED_LOCAL"
+    },
+    {
+      "id": "light80",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light80-source-family.log",
+      "target": "DASHI/Physics/YangMills/YMClayW1SourceFamilyNormalizedCovarianceWeldExact.agda",
+      "declarations": [
+        "W1FourColumnSourceFamily",
+        "normalizedFineF",
+        "normalizedFineG",
+        "normalizedFineFG",
+        "fineCovariance",
+        "coarseCovariance",
+        "covarianceEqual",
+        "sideFourW1FourColumnSourceFamily",
+        "sideFourFamilyCovarianceIsWeldCovariance"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
+    },
+    {
+      "id": "light81",
+      "path": "Artifacts/ym-kernel-receipts/20261128/light81-indexed-source-family.log",
+      "target": "DASHI/Physics/YangMills/YMClayW1SourceFamilyNormalizedCovarianceWeldExact.agda",
+      "declarations": [
+        "W1IndexedSourceFamily",
+        "covarianceEqualAt",
+        "W1FourColumnSourceFamily",
+        "sideFourW1FourColumnSourceFamily"
+      ],
+      "status": "KERNEL_ACCEPTED_LOCAL"
     }
   ],
   "remaining_assumptions": [
@@ -65,7 +94,9 @@
     "OrderedRealInverseAuthority for reciprocal normalization",
     "w1F19NormalizationApplicationLevel remains conditional",
     "fixed side-four 64-pair and 896-spectator F19 geometry",
-    "legacy RealAnalysisAxioms real carrier in W1 and integrated covariance"
+    "legacy RealAnalysisAxioms real carrier in W1 and integrated covariance",
+    "W1FourColumnSourceFamily and W1IndexedSourceFamily are abstract interfaces; no actual variable-periodic scale inhabitant or successive-blocking compatibility theorem is supplied",
+    "source-family positivity and normalization remain inherited from per-scale source producers"
   ],
   "remaining_conditional_socket": "w1F19NormalizationApplicationLevel",
   "downstream_consumers": {
@@ -80,7 +111,10 @@
     "YMClayW1F19AffineCovarianceExact": [
       "YMClayW1F19IntegratedCovarianceMomentWeldExact"
     ],
-    "YMClayW1F19IntegratedCovarianceMomentWeldExact": []
+    "YMClayW1F19IntegratedCovarianceMomentWeldExact": [
+      "YMClayW1SourceFamilyNormalizedCovarianceWeldExact"
+    ],
+    "YMClayW1SourceFamilyNormalizedCovarianceWeldExact": []
   },
   "trust_boundary": {
     "local_kernel_acceptance": true,
@@ -88,5 +122,5 @@
     "reason": "W1 and the integrated covariance module import the legacy RealAnalysisAxioms real carrier through existing source families; Walsh is --safe and constructive but does not certify those real-analysis roots.",
     "strict_safe_boundary_audit": "python3 scripts/audit_ym_legacy_real_safe_boundary.py --strict --json remains failing"
   },
-  "next_cut": "generalize the accepted fixed-cutoff covariance weld over the actual scale-indexed source family, complete W0 historical source correspondence, build one source-preserving RG trajectory, and reverse-solve X/E1/N1/D2/G1 from that same trajectory."
+  "next_cut": "inhabit W1IndexedSourceFamily at actual variable-periodic scales and prove successive-blocking compatibility, complete W0 historical source correspondence, build one source-preserving RG trajectory, and reverse-solve X/E1/N1/D2/G1 from that same trajectory."
 }
