@@ -26,7 +26,9 @@ def audit(m,repo=None):
                       "unpaid_stages":spec["unpaid_stages"],"owners":owners}
     for label,p in m["cross_lane_shared_welds"].items():
         assert len(set(p))==len(p) and len(p)>1 and set(p)<=set(LANES),label
-    for label,w in m.get("w1_source_boundary_welds",{}).items():
+    welds={**m.get("w1_source_boundary_welds",{}),**m.get("w2_boundary_packets",{})}
+    assert len(welds)==len(m.get("w1_source_boundary_welds",{}))+len(m.get("w2_boundary_packets",{}))
+    for label,w in welds.items():
         assert w["lanes"] and len(set(w["lanes"]))==len(w["lanes"]) and set(w["lanes"])<=set(LANES),label
         assert w["source_owner"].startswith("scripts/") and w["source_owner"].endswith(".py"),label
         assert w["checker"].startswith("scripts/") and w["checker"].endswith(".py"),label
