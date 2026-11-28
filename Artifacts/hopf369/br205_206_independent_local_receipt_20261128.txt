@@ -1,0 +1,14 @@
+BR205 local independent reconstruction, SymPy 1.14.0
+Command: timeout 90 python /tmp/hopf205/check.py
+Exit 0
+0 1 PASS
+0 2 PASS
+0 3 PASS
+1 2 PASS
+1 3 PASS
+2 3 PASS
+PASS wall Lorentz generator intertwiners 1.14.0
+Independent reconstruction from original BR27/175 packing and jump formulas.
+BR206 separately executed local scalar identities, exit 0:
+PASS BR206 transfer cancellation and trace Young identity 1.14.0
+Committed donor-import entry not run; no native or PDE acceptance.

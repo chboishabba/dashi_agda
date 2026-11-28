@@ -5380,3 +5380,37 @@ reconstruction driver is committed alongside the checker;
 original donor import entry and complete runner remain unrun.
 Terminal stage 26. No CI/native/PDE acceptance.
 Other lanes unchanged; this is not complete programme closure.
+
+
+## 41. BR205–206 — wall-tangent Lorentz covariance, energy budget
+
+Original BR27 X,G,Y,H,J and BR175 reflection F. For each of the
+six so(1,3) generators K tangent to the timelike wall, induce
+the bivector-square action T on curvature and U=K⊗I+I⊗K
+on symmetric wall shape. O=G^-1 X^T T X, B=H^-1 Y^T U Y.
+Exact X O=T X, Y B=U Y, O J=J B, [O,F]=0.
+Spatial rotations skew-adjoint, boosts self-adjoint relative
+to the respective positive Grams. Unit axial wall boosts
+satisfy B(B²-I)(B²-4I)=0, so ||B(b)||_H<=2|b| by
+tangential spatial rotation covariance. Same bound for bulk
+from BR204. Common tangent-frame boost therefore contributes
+at most 4|b| E to combined positive BR175 bulk/shape energy,
+with constant negative j and fixed component weights.
+For prescribed source-free transport OJ=JB preserves jump,
+and [O,F]=0 preserves both parity spaces. Does not establish
+covariance of observer-specific flux/source R alone or normal
+boost on a fixed wall. Actual moving-normal transport needs
+the normal and jump map derivatives jointly.
+
+BR206 only checks scalar opposite transfer cancellation and
+Young square d x²+y²/d-2xy=(dx-y)²/d. It does NOT pay the
+BR139/150 mixed-norm derivative budget. The physical coupled
+surface trace estimate, Hamilton flow, full variable boundary
+and nonlinear existence obligations remain open. No new
+implementation in the other programme lanes.
+
+Local independent exact reconstruction of BR27/175 carriers
+ran in container with SymPy 1.14.0: all six generator cases exit 0,
+90s cap; scalar test exit 0. Committed donor-import entry point
+unrun. Receipt records actual outputs; no full runner/native/CI
+acceptance. Terminal stage 27 registered.

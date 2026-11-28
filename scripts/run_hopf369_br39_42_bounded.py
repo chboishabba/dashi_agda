@@ -189,6 +189,8 @@ PARTS["terminal"].append(("BR203.moving_projector","check_hopf369_br203_moving_p
 
 PARTS["terminal"].append(("BR204.boost_null","check_hopf369_br204_boost_null.py",()))
 
+PARTS["terminal"].append(("BR205.wall_lorentz","check_hopf369_br205_wall_lorentz.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
