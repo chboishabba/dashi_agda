@@ -49,7 +49,6 @@ def solve_fold(F,n,rows,target,cap,data_clock=None):
         return dict(q,route='clause_syndrome')
     return dict(solve_pins(F,n,rows,target,cap,data_clock=data_clock),route='pins')
 
-
 def main():
     from itertools import product
     from random import Random
