@@ -45,11 +45,18 @@
       "claim": "Analytic selected-point hypergeometric E4 root and j Euler jets are missing on Lean",
       "corrected_by": "Integration/Paper9ActualCMPoint.selectedHyperAtCM/selectedFirstJetAtCM and Integration/Paper9ActualJSourceJet.jQEuler/jExtSecond",
       "status": "source-written kernel-unchecked"
+    },
+    {
+      "claim": "Global weight-zero modular rigidity is missing in every proof carrier",
+      "corrected_by": "Lean Integration/Paper9HeckePoleRemoval.invariantZero, jHolo, productHolo, polynomialHolo, diagonalIdentity, sliceIdentity; pinned MoonshineLevelOneWeightZeroPinned.levelOne_weight_zero_const",
+      "status": "source-written kernel-unchecked",
+      "qualification": "Bishop-native same-object global rigidity is still not automatically proved"
     }
   ],
   "new_connections": [
     "DASHI/Moonshine/CM163BishopSelectedTauExponentExact.FromOriginalBishopEndpoint.actualOriginalCMQ (no two free atan evaluations)",
-    "DASHI/Moonshine/CM163BishopOriginalPhaseHeckeCuspWeldExact.Original: selected Machin q, CM E4/E6/Delta guards, original diagonal/slice cusp limits and S/T residual invariance on ONE BishopCutset"
+    "DASHI/Moonshine/CM163BishopOriginalPhaseHeckeCuspWeldExact.Original: selected Machin q, CM E4/E6/Delta guards, original diagonal/slice cusp limits and S/T residual invariance on ONE BishopCutset",
+    "Lean Integration/Paper9HeckeFiniteRemainder.bothActualHeckeIdentitiesFromRamifiedGerms and actualCMPolynomialRootFromRamifiedGerms from exact 3363/1723 analytic Rem and actual ramified source readouts"
   ],
   "remaining_producers": [
     {
@@ -59,8 +66,8 @@
     },
     {
       "gate": "Hecke original global identity",
-      "need": "all-domain pole-free holomorphic residual and constructive global modular rigidity from compactified cusp",
-      "existing": "CM163BishopHecke41CuspResidualExact, UniformCuspBoundExact, CuspLimitExact, Paper9HeckePoleRemoval.normalizedResidualZero",
+      "need": "On Lean side, construct exact analytic ramified Rem 3363/1723 witnesses and actual normalized Hecke source equality; global rigidity invariantZero already exists. On Bishop side, construct/transport original pole-free modular rigidity without conflating carriers.",
+      "existing": "CM163BishopHecke41CuspResidualExact, UniformCuspBoundExact, CuspLimitExact, Paper9HeckePoleRemoval.normalizedResidualZero; Lean Paper9HeckePoleRemoval.invariantZero and both original polynomial identity theorems; Lean Paper9HeckeFiniteRemainder.Rem/remProd/residualGermToCusp",
       "warning": "S/T invariance and zero cusp limit alone do not imply identically zero"
     },
     {
@@ -110,5 +117,12 @@
   "native_compilers_available": false,
   "github_ci_executed": false,
   "unconditional_same_real_proved": false,
-  "attribution": "Machin, Bishop/Bridges, Murray, pinned bishop source, classical modular/Hecke and Chudnovsky; DASHI original-source welds and exact tests"
+  "attribution": "Machin, Bishop/Bridges, Murray, pinned bishop source, classical modular/Hecke and Chudnovsky; DASHI original-source welds and exact tests",
+  "corrected_lean_hecke": {
+    "module": "Integration/Paper9HeckeFiniteRemainder.lean",
+    "commit": "7228c73b32615bdfd21d20a288c583ce4d8de1bf",
+    "producer_exact": "Rem 3363 diagUnit diagPacket, Rem 1723 sliceUnit slicePacket, actual eventual t^3362/t^1722 source equations",
+    "consumer": "bothActualHeckeIdentitiesFromRamifiedGerms; actualCMPolynomialRootFromRamifiedGerms",
+    "kernel_checked": false
+  }
 }
