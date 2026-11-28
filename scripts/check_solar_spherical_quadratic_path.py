@@ -5,7 +5,7 @@ import numpy as np
 from check_solar_spherical_reverse_integration import fixture
 from solar_spherical_cycle import cycle,geometry
 from solar_spherical_reverse_jvp import campaign_jvp
-from solar_physical_causal import MASS,CHARGE
+from solar_population_event import MASS,CHARGE
 
 
 def run():
