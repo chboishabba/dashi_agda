@@ -7,9 +7,19 @@ from check_pnp_f3_syndrome_boundary import span,chart
 
 class Refusal(Exception): pass
 
-def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_width=8):
+def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_width=8,data_clock=None):
     R=tuple(sorted(R));n=len(R);r=len(target);full=(1<<n)-1
     st=dict(work=0,clauses=0,prefix=0,peak_terms=1,cube_queries=0,chart_points=0,dp_states=0)
+    def measured_span(A,r):
+        if data_clock is None:return span(A,r)
+        from check_pnp_bit_data_schedule import span_bits,Refused as DataRefused
+        try:return span_bits(A,r,data_clock)
+        except DataRefused:raise Refusal()
+    def measured_chart(A,b,r):
+        if data_clock is None:return chart(A,b,r)
+        from check_pnp_bit_data_schedule import chart_bits,Refused as DataRefused
+        try:return chart_bits(A,b,r,data_clock)
+        except DataRefused:raise Refusal()
     def pay(k):
         if st['work']+k>work_cap:raise Refusal()
         st['work']+=k
@@ -29,7 +39,7 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
         # Reserve input and final suffix-scan charges before doing any work.
         pay(1+n+r+sum(5+len(c) for c in F))
         if () in F:return result((0,0,0),(0,0,0))
-        B=span((cols[j][:-1] for j in R),r);d=len(B)
+        B=measured_span((cols[j][:-1] for j in R),r);d=len(B)
         piv=tuple(next(i for i,a in enumerate(b) if a) for b in B);t=tuple(target[i] for i in piv)
         if tuple(sum(a*b[i] for a,b in zip(t,B))%3 for i in range(r))!=tuple(target):return result((0,0,0),(0,0,0))
         A=tuple(tuple(cols[j][i] for i in piv) for j in R);obs=tuple(cols[j][-1] for j in R);pos={j:i for i,j in enumerate(R)}
@@ -49,9 +59,9 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
             for j in bits(b):pay(1);s=minus(s,A[j]);o=(o+obs[j])%3
             I=tuple(bits(full^(a|b)));k=len(I);pay(1+k)
             # Small nullity alternative avoids a full syndrome table at high rank.
-            rank=len(span((A[j] for j in I),d));H=[0,0,0]
+            rank=len(measured_span((A[j] for j in I),d));H=[0,0,0]
             if k-rank<=chart_width and 2**(k-rank)<3**d:
-                q=chart(tuple(tuple(A[j][i] for j in I) for i in range(d)),s,k)
+                q=measured_chart(tuple(tuple(A[j][i] for j in I) for i in range(d)),s,k)
                 if q is not None:
                     u,V=q;pay(max(1,k)*2**len(V));st['chart_points']+=2**len(V)
                     for z in product(range(2),repeat=len(V)):
@@ -94,7 +104,7 @@ def prefix_contrast(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,chart_
     except Refusal:return None
 
 
-def prefix_portfolio(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,initial=1024):
+def prefix_portfolio(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,initial=1024,data_clock=None):
     """Geometric restart allowance with a shared total reservation.
     Every attempted cap is charged in full, even on refusal. This pays
     only declared logical work, not a physical bit-clock theorem.
@@ -103,7 +113,7 @@ def prefix_portfolio(F,cols,target,offset,R,w,term_cap=4096,work_cap=65536,initi
     left=work_cap;size=initial;best=None;attempts=accepted=0
     while left:
         cap=min(size,left);left-=cap;attempts+=1
-        q=prefix_contrast(F,cols,target,offset,R,w,term_cap,cap)
+        q=prefix_contrast(F,cols,target,offset,R,w,term_cap,cap,data_clock=data_clock)
         if q is not None:
             accepted+=1;a,b,st=q
             if best is not None:a=tuple(max(x,y) for x,y in zip(a,best[0]));b=tuple(min(x,y) for x,y in zip(b,best[1]))
