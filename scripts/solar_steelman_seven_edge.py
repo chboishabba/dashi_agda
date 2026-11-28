@@ -72,5 +72,17 @@ def run():
     for name,p,receiver in [('high',high[0],mid),('low',low[0],inner)]:
         r=Z.T*receiver.T*p
         print(name,'material current range membership',r==S.zeros(Z.cols,1),flush=True)
-    print('PASS exact seven-edge graph, charge continuity, fixed-source matching, material-range audit; no physical constitutive admission')
+    # Enrich with the minimum number of globally assembled Whitney current
+    # basis directions. M is invertible, so Z^T M has full row rank.
+    piv=(Z.T*M).rref()[1];assert len(piv)==Z.cols
+    B=M[:,list(piv)];Wplus=W.row_join(B)
+    assert Wplus.rank()==M.rows
+    # Exact current representative via an independent column subset.
+    cols=Wplus.rref()[1];Cw=Wplus[:,list(cols)]
+    for p,receiver in [(high[0],mid),(low[0],inner)]:
+        target=receiver.T*p;coeff=solve(Cw,target)
+        assert (Cw*coeff-target).applyfunc(S.simplify)==S.zeros(M.rows,1)
+    # Reciprocal work uses the same enriched map and its transpose.
+    print('minimal enrichment',len(piv),'Whitney edge basis indices',piv,'rank',Wplus.rank(),flush=True)
+    print('PASS exact enriched material injection, charge continuity, fixed-source matching; physical constitutive admission open')
 if __name__=='__main__':run()
