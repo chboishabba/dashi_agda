@@ -2599,3 +2599,63 @@ Consequently `|J_F-D partial_n u|²<=D²||k||²||du||²`. The same inequality su
 The native BR34 owner now contains `normalSpaceDelta`, `graphDefectTimeCoefficient`, `graphDefectSpatialCoefficient`, `scalarGraphDefect`, and `OriginalGraphDefectPayment` / `originalGraphDefectPayment`, retaining both the raw BR49 flux difference and its coefficient-decomposed expression (and explicit residual). New `scripts/check_hopf369_br51_graph_defect_budget.py` independently tests the ADM identity, compatible collar control, a strictly-spacelike nontrivial rational moving graph, all 10 exact wedge squares, and full original 15/5 positive-channel sum. Bounded runner separates algebra/budget/channels into three <=90-second source checks. **COMMITTED_UNRUN**, native kernel unrun, no CI.
 
 **Updated remaining physical weld:** derive chart-dependent `||k||_{W^{s,∞}}` and `D` bounds from actual BR19/31 material graph and BR48 ADM source, use product/Kato–Ponce or explicit BR4 hierarchy to bound the high-order graph work by BR44 differentiated energy plus BR47 physical boundary forcing; absorb only if corresponding coefficient constants allow it. This is a genuine source-level candidate for the variable moving-wall work estimate, but it is not itself the global tame trace/coercivity estimate. The BR29 physical subsidiary source and BS13 weighted quotient remain separate P0, with negative controls preserved.
+
+
+## BR52–58 — consolidated same-source max-cut (2026-11-28, constructed; execution deferred)
+
+This pass implements one *connected* BR4/19/29/31/33/34/37/41/47/51 programme, rather than another list of disconnected algebraic donors. Sources remain in existing [PR #1554](https://github.com/chboishabba/dashi_agda/pull/1554), branch `research/c3-hopfion-abha-prior-art-20261125`. Keep the original 15 symmetric Einstein metric, five harmonic subsidiary, 35 projected Weyl and nine zero-speed constraint degrees in their **different** owners. Do not infer the nonlinear physical theorem from an analytic model, finite SymPy fixture or a new type record.
+
+### Source owners and exact new welds
+
+| Cut | Source artefact | Actual construction | What is NOT claimed |
+| --- | --- | --- | --- |
+| BR52 | `scripts/check_hopf369_br52_all_order_material_flux.py`, native `DividedJet`, `splitConvolution`, `OriginalMaterialJetTower`, `TwoFaceMaterialJetTower` | Full independent plus/minus ADM N,H,v,D, moving F, all five derivatives of all 15+5 channels through **time order eight**. Exact divided Taylor convolution and termwise coefficient absolute-value budgets; no erased high-order product. | A physical solution's source jet equality; non-diagonal H generic proof; tame PDE bound |
+| BR53 | `scripts/check_hopf369_br53_physical_bianchi_factor.py` | Reuses actual BR29 `carrier()`, original `P0=I-A_n(5A_n-4A_n³)`, rank nine, `P0(A_i J-J B_i)=0`, `P0(Kext+JR)=0`, and an independent source that violates `P(t)F=0`. Also source factorization iff kernel inclusion. | Nonlinear Bianchi preservation or rank12 no-go repair |
+| BR54 | `scripts/check_hopf369_br54_mixed_material_tame.py` | The actual moving F=n-f in conforming ADM N=2,H=I,v=0 and full **4D tangential mixed multi-indices through total order eight**; independent 15/5 fields, exact multinomial Leibniz and positive rational term budgets. | General physical chart high-order weighted source norm |
+| BR55 | `scripts/check_hopf369_br55_curved_bianchi_source.py`, native `linearRicciSymbol`, `reducedEinsteinRicciSymbol`, `originalBianchiSourceResidual`, `PhysicalCurvedBianchiPayment` | All-five-index original reduced Ricci/contracted Bianchi principal formula AND curved connection correction `div(TR(symgrad C))=(box C+Ric·C)/2`; actual AdS Ric=-4; separate D/E physical gauge rows, nonzero mean M correction. The exact Agda all-index principal Bianchi equality is an **uninhabited required certificate** until kernel/ring proof bodies close it. | Five gauge channels are not BR29 nine zero-speed constraint channels; nonlinear Bianchi propagation remains open |
+| BR56 | `scripts/check_hopf369_br56_tame_graph_energy.py` | Original BR52 full moving ADM jets feed derivative-by-derivative positive graph mismatch majorants. Conditional BR43 trace and BR44 high energy get exact positive `2^s Dmax K_s` worst-case coefficients; explicit missing-witness refusal. BR37 Q⁴ metric/Q² subsidiary losses unchanged. | Actual physical W^{s,infty} or H^s estimates |
+| BR57 | `scripts/check_hopf369_br57_curvature_normal_inverse.py`, native `ElectricNormalPrimitive`, `ElectricNormalShearTransport` | Actual BS13 normal electric/shear equation and **exact bidirectional forced normal primitive** with both endpoints and holonomy moment M. Warp b=4/5 cosh(n-log2), m=bmin²=16/25; 16 original 4×4 electric channels; normal inverse bound retains M. | Full 5D weighted curvature-to-metric quotient or tangent/AdS exterior control |
+| BR58 | `scripts/check_hopf369_br58_material_boundary_jets.py`, native `OriginalPhysicalReferenceTower`, `metricMaterialCorrectionAt`, `gaugeMaterialCorrectionAt`, `PhysicalReferenceJetCompatibility` | The BR52 moving material conormal normal-jet correction is injected into **original BR34 D/E derivative columns**, retaining all 30 metric rows/10 gauge rows, both faces, each time order 0..8, independently varying j/q jets, mean-force row and graph mismatch. Native proof bodies for split convolution order 0/1/2 and source-normal ownership provided. | Complete nonlinear moving-wall Fréchet operator or trace estimate |
+
+### The same-object analytic flow
+
+1. **Source geometry** BR48/49 fixes g, ADM density D, graph F, normal geometry and the exact unnormalised material conormal. BR51 splits it into the canonical normal term and physical five-jet coefficient k.
+2. **Original full trace jets** BR52 convolves D, k and all 15+5 field derivatives at both faces, retaining every coefficient of the original source through order eight. Divided Taylor jets are used; the order-r physical derivative is r! times coefficient r.
+3. **Tangential derivatives and physical wall** BR54 pays mixed x,t,y,z Leibniz terms; BR58 attaches the resulting normal correction to existing BR34 30+10 D/E rows, while BR47 still owns the independent j/q background derivative hierarchy. BR19 moving second fundamental form, normalisation sqrt(z), and unequal two-face densities remain additional physical graph source terms; they cannot be hidden in a coordinate-normal substitution.
+4. **Interior differentiated energy** BR4/45 shared principal tensor and its true coefficient derivative work feed BR43 (normal H¹ trace), BR44 (two-level E+D energy) and BR56 (high-order positive graph work). Explicit `2^s` worst-case derivative cost is not a proof of a tame physical energy with no derivative loss; one needs actual chart regularity, trace and BR37 frequency estimates.
+5. **Subsidiary** BR46/55 gives the actual 5D harmonic contracted-Bianchi source including AdS Ric=-4, BR53 retains the **distinct** rank-nine zero-speed projected Weyl source factor. A full physical compatibility theorem must prove the source graph and time-dependent projector connection agree with the actual nonlinear Einstein–Israel development. BR29's rank12 wall-only Gram obstruction remains intact.
+6. **Geometric back-solve** BS13/BR57 recovers the normal shear S from electric curvature E and Q plus an original *normal holonomy* moment M, via the explicit unique primitive. It cannot reconstruct the full metric without tangential York/holonomy chart equations, AdS weighted domain and physical gauge quotient.
+7. **Continuation** BR42 can restart only once those source-specific physical analytic estimates are proved on a common function space, including timelikeness, positivity of ADM wave symmetrizer, material graph z>0, BR31 reflecting falloff and same-source initial/corner compatibility. A finite rational acceptance PASS never supplies those.
+
+### Precise BS13 normal inverse (new genuine mathematical lemma)
+
+The original physical electric identity is
+`E = -(b²S)'/b²+2Q/b⁴`.
+Set `p=b²S`, `F=-b²E+2b^-2Q`, `M=int_0^L p`. Then
+```
+p(n)=C+int_0^n F(x)dx,
+C=[M-int_0^L (L-x)F(x)dx]/L.
+```
+The formula is unique given both source F and original moment M. For b²>=m>0, the elementary integral estimate gives
+```
+sup |S| <= m^-1 (|M|/L+2 int_0^L |F|).
+```
+No spectral root or frequency is inverted. If F=0 but M≠0, the nonzero solution `S=M/(L b²)` survives: **curvature alone does not determine that normal kernel mode**. At actual AK warp b=4/5 cosh(n-log2), m=16/25, L=2log2. This closes one **normal transport** slice of BS13; not its entire Sobolev quotient.
+
+### Explicit BR56 high-order boundary payment
+
+For any tangential multi-index α of length s<=8, the actual graph-correction source satisfies by Leibniz/triangle/Cauchy
+```
+||∂^α(Dk·∂u)||_{L²_w}
+ <= sum_{β<=α} C(α,β) ||∂^β(Dk)||_{L∞}
+                            ||∂^{α-β}∂u||_{L²_w}.
+```
+If source-coefficient bounds are K_s and actual differentiated field norms are U_s, the sufficient per-index bound is `2^s K_s U_s`, with a **separate** normal derivative currency and actual positive ADM density. Thus at physical real wall one can use
+`2|<V,W_graph>| <= ε||V||²+ε^-1 ||W_graph||²`;
+BR43/44 must pay the V² and U_s terms from real norms, and BR37's Q⁴/Q² tangential losses remain. This is a conditional quantitative cut, not a physical W^{s,∞} source estimate. `BR56` rejects promotion unless independent physical trace/graph certificates are present.
+
+### Acceptance/remaining endpoint
+
+Updated `scripts/run_hopf369_br39_42_bounded.py` (historical filename retained) has `--part frontier` for just BR52–58, preserving `--part fast|heavy|all`, each source check in its own <=90-second subprocess with SHA256 digest/checkpoint and fail-closed FAIL/TIMEOUT. The heavy original BR29 factor and BS13 sixteen components are isolated. All newly authored symbolic checkers are **COMMITTED_UNRUN**, all Agda additions **CONSTRUCTED_PENDING_KERNEL**; no CI credits spent.
+
+**Do not reopen generic geometry. Remaining four genuine analytic theorem cuts:** P0a actual full moving nonlinear reduced Einstein material coefficient/connection and H^s weighted tame well-posedness with BR37 glancing; P0b actual same-solution Bianchi/BR29 projected source cancellation and constraint-preserving boundary IBVP (rank12 obstruction); P0c BS13 tangential+normal weighted quotient coercivity including global holonomy/exterior and physical gauge; P0d a constructive local iteration and continuation with physical initial/corner and BR31 exterior conditions. The donor machinery for every finite signed, metric, gauge, graph and normal integration term is now explicitly cross-attached; the unproved hypotheses have not been silently replaced by records.
