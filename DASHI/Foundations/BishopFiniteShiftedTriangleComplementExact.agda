@@ -7,6 +7,7 @@ open import Data.Nat.Base as N using (_≤_; z≤n; s≤s; _∸_)
 import Data.Nat.Properties as NP
 open import Relation.Nullary using (¬_)
 open import Data.Empty using (⊥-elim)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
 open import Data.Rational.Unnormalised using (0ℚᵘ)
 import Real as R
 import RealProperties as P
@@ -35,7 +36,8 @@ afterRejected (suc k) f (suc j) h =
   afterRejected k (Row.shift f) j (λ p → h (s≤s p))
 
 cutToRow : ∀ k i j → k ≤ i + j → k ∸ i ≤ j
-cutToRow zero i j h = z≤n
+cutToRow zero zero j h = z≤n
+cutToRow zero (suc i) j h = z≤n
 cutToRow (suc k) zero j h = h
 cutToRow (suc k) (suc i) j (s≤s h) = cutToRow k i j h
 
@@ -43,6 +45,10 @@ rowToCut : ∀ k i j → k ∸ i ≤ j → k ≤ i + j
 rowToCut zero i j h = z≤n
 rowToCut (suc k) zero j h = h
 rowToCut (suc k) (suc i) j h = s≤s (rowToCut k i j h)
+
+zeroMinus : ∀ i → zero ∸ i ≡ zero
+zeroMinus zero = refl
+zeroMinus (suc i) = refl
 
 zeroPrefix : ∀ n → R._≃_ (Seq.SeriesOf (λ _ → R.0ℝ) n) R.0ℝ
 zeroPrefix zero = P.≃-refl
@@ -81,8 +87,10 @@ paddedRowsAreMertens : ∀ a b k height → k ≤ height →
 paddedRowsAreMertens a b zero height h =
   P.≃-trans
     (Ext.finiteSumCongruent
-      (λ i → let open P.ℝ-Solver in
-        solve 1 (λ x → x ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl (a i)) height)
+      (λ i → P.≃-trans
+        (P.*-congˡ (P.≃-refl₂ (cong (Fin.finSum b) (zeroMinus i))))
+        (let open P.ℝ-Solver in
+          solve 1 (λ x → x ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl (a i))) height)
     (zeroPrefix height)
 paddedRowsAreMertens a b (suc k) zero ()
 paddedRowsAreMertens a b (suc k) (suc height) (s≤s h) =
