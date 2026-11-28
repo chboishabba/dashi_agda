@@ -97,3 +97,40 @@ e8RootCountWitness = E8.E8Has240Roots
 -- an actual Leech lattice without a gluing/coset/isometry proof.
 lila24DChartCount : 384 ≡ 16 * 24
 lila24DChartCount = Lila.d384IsSixteen24Blocks
+
+-- Full nine-site wave chart has an independent DC/centre amplitude.
+-- If two real native address vectors have the same eight non-DC
+-- coordinates but different centres, no eight-only reader can reopen
+-- that centre. Exact SymPy fixture: all-zero and all-one 9-site rows.
+module CentreResidualNecessity
+  {Wave8 Centre : Set}
+  (wave : Native → Wave8)
+  (centre : Native → Centre)
+  (zero one : Native)
+  (sameWave : wave zero ≡ wave one)
+  (distinctCentre : centre zero ≡ centre one → ⊥) where
+
+  sym : ∀ {A : Set} {a b : A} → a ≡ b → b ≡ a
+  sym refl = refl
+
+  trans : ∀ {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
+  trans refl q = q
+
+  noNonDCOnlyReopening :
+    (reader : Wave8 → Centre) →
+    ((native : Native) → reader (wave native) ≡ centre native) →
+    ⊥
+  noNonDCOnlyReopening reader faithful =
+    distinctCentre
+      (trans (sym (faithful zero))
+        (trans (Future.cong reader sameWave) (faithful one)))
+
+-- 384 = 16 blocks of 24 = 48 ambient 8D Fourier/E8 charts.
+-- Forty-eight independent nine-site centre amplitudes are NOT inside
+-- those 384 wave slots. Their retention is required for exact BIDI
+-- on arbitrary original nine-site amplitudes.
+lilaWaveCharts : 384 ≡ 48 * 8
+lilaWaveCharts = refl
+
+lilaIndependentCentreCount : 48 ≡ 16 * 3
+lilaIndependentCentreCount = refl
