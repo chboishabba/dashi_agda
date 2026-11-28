@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -130,6 +130,52 @@ module CombinedToR406
             (Combined.combinedSelfExternalPayment P cutoff terminal)
     }
 
+  ------------------------------------------------------------------------
+  -- Signed COMPENSATED route, preserving the original R406 currency.
+  --
+  -- The old R726 transport insists literalR406 <= combined.  This is
+  -- strictly stronger than the estimate needed by R410: a terminal
+  -- signed defect bounded uniformly over the physical cutoff suffices.
+  -- The original R723 time-only ceiling and the defect's time-only
+  -- ceiling then sum WITHOUT replacing the unlifted R568 work by its
+  -- rate-lifted R687 partner.
+  --
+  -- Neither the defect's signed bound nor the R723 physical bound is
+  -- constructed in this algebraic compiler.  They are real analytic
+  -- producers, not flags disguised as proof terms.
+  ------------------------------------------------------------------------
+
+  record CompensatedCombinedR406Transport
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      signedDefectCeiling : Time → ℚ
+      literalR406BelowCombinedPlusDefect :
+        (cutoff : Nat) (terminal : Time) →
+        Unified.literalRemainderIntegral T R cutoff terminal
+        ≤ Combined.integratedCombinedSelfExternal cutoff terminal
+          + signedDefectCeiling terminal
+
+  open CompensatedCombinedR406Transport public
+
+  compensatedCombinedBuildsExistingR410 :
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Combined.CutoffUniformCombinedSelfExternalPayment →
+    CompensatedCombinedR406Transport R →
+    Target.SignedCriticalCancellation T R
+  compensatedCombinedBuildsExistingR410 R P D = record
+    { Target.cutoffIndependentRemainderBound =
+        λ terminal →
+          R700.twelve * Combined.cutoffIndependentBound P terminal
+            + signedDefectCeiling D terminal
+    ; Target.signedRemainderBudget =
+        λ cutoff terminal →
+          ℚP.≤-trans
+            (literalR406BelowCombinedPlusDefect D cutoff terminal)
+            (ℚP.+-mono-≤
+              (Combined.combinedSelfExternalPayment P cutoff terminal)
+              ℚP.≤-refl)
+    }
+
 ------------------------------------------------------------------------
 -- Boundary / routing status.
 ------------------------------------------------------------------------
@@ -144,6 +190,15 @@ round726R723AutomaticallyIsR568ForcingFull =
 
 round726SingleCombinedToR406TransportSufficesForR410 : Bool
 round726SingleCombinedToR406TransportSufficesForR410 = true
+
+-- A stronger original zero-defect receipt is OPTIONAL.  The compensated
+-- compiler is theorem-bearing but its cutoff-uniform real physical signed
+-- defect estimate remains an uninhabited producer.
+round726CompensatedR406CompilerClosed : Bool
+round726CompensatedR406CompilerClosed = true
+
+round726CompensatedSignedDefectPhysicalPaymentClosed : Bool
+round726CompensatedSignedDefectPhysicalPaymentClosed = false
 
 round726CombinedToR406TransportClosed : Bool
 round726CombinedToR406TransportClosed = false
