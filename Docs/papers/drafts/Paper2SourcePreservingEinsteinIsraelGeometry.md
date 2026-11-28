@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR153)
+## Current proof state — 28 November 2026 (BR160; periodic Einstein–Israel branch BR150)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
