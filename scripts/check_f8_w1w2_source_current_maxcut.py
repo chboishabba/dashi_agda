@@ -23,6 +23,10 @@ SCRIPTS=(
     "check_f8_israel_trace_source_schur.py",
     "check_f8_ward_timejet_receipt.py",
     "check_f8_timejet_stencil_certificate.py",
+    "check_f8_characteristic_jet_reverse.py",
+    "check_f8_characteristic_jet_caps.py",
+    "check_f8_characteristic_to_ward_weld.py",
+    "check_f8_original_wall_normal_jet.py",
     "check_f8_original_pulse_derivative_bounds.py",
     "check_f8_full_ward_jet_majorant.py",
     "check_f8_original_pulse_jet_receipt.py",
@@ -36,12 +40,13 @@ SCRIPTS=(
     "check_f8_full_band_ward_attachment.py",
 )
 
-def run(history=False,original_jets=False,seconds=30):
+def run(history=False,original_jets=False,original_normal=False,seconds=30):
     root=Path(__file__).resolve().parent
     env=dict(os.environ,OPENBLAS_NUM_THREADS="1",OMP_NUM_THREADS="1")
     tasks=[(name,()) for name in SCRIPTS]
     if history:tasks.append(("check_f8_w1w2_integrated_receipt.py",()))
     if original_jets:tasks.append(("check_f8_ward_timejet_receipt.py",("--original",)))
+    if original_normal:tasks.append(("check_f8_original_wall_normal_jet.py",("--original",)))
     for name,extra in tasks:
         path=root/name
         if not path.is_file():raise FileNotFoundError(path)
@@ -53,12 +58,14 @@ def run(history=False,original_jets=False,seconds=30):
         print(f"PASS {name}: {result.stdout.strip()[:220]}",flush=True)
     print("EXACT ALGEBRA ACCEPTED; original history="+("EXECUTED" if history else "NOT EXECUTED"))
     print("Original full Ward time-jets="+("EXECUTED, UNCERTIFIED" if original_jets else "NOT EXECUTED"))
+    print("Original normal second-jet="+("EXECUTED, UNCERTIFIED" if original_normal else "NOT EXECUTED"))
     print("Full continuum Einstein-Israel physical energy and receiver remain OPEN")
 
 if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("--history",action="store_true",help="run original finite history, 90s local cap")
     p.add_argument("--original-jets",action="store_true",help="run actual full-band Ward time-jets, 90s local cap")
+    p.add_argument("--original-normal",action="store_true",help="run original characteristic 64/128 cell normal-jet diagnostic")
     p.add_argument("--seconds",type=int,default=30,help="per exact script timeout")
     args=p.parse_args()
-    run(args.history,args.original_jets,args.seconds)
+    run(args.history,args.original_jets,args.original_normal,args.seconds)
