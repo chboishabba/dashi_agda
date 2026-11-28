@@ -18,6 +18,20 @@ def run():
     L0=-Nw*r*r*rho/s.sqrt(f)
     slope=s.simplify(s.diff(L0,r).subs(r,1))
     assert s.simplify(slope-2*(2+lam)*p)==0
+    # Derive the material first jet independently from the ORIGINAL inverse
+    # constitutive action, rather than assuming its boundary value.
+    x,R,Rp=s.symbols('x R Rp',positive=True)
+    rrho=(2+lam)*p*(1-x); rpr=-p*(1-x)**2
+    F=1-lam*(2+lam)*(x/3-x**2/5)
+    PP=(2+lam)*(s.Rational(1,3)-x/5)/2-(1-x)**2/2
+    pt=rpr+x*s.diff(rpr,x)+x*lam*(rrho+rpr)*PP/(2*F)
+    aa=(rrho+pt)/2; dd=(rrho+rpr)/(2*F)
+    VV=rrho-2*aa-dd*F
+    W=dd.subs(x,R*R)*f*Rp**2+2*aa.subs(x,R*R)*R**2/r**2+VV.subs(x,R*R)
+    WR=s.factor(s.diff(W,R).subs({R:r,Rp:1}).subs(r,1))
+    assert s.simplify(WR+2*(2+lam)*p)==0
+    material_L1=-WR*u  # N r²/sqrt(f)=1 at wall
+    assert s.simplify(material_L1.subs(u,-phi)+phi*slope)==0
     # Shape derivative including material first variation; L0(1)=0.
     L1,L2=s.symbols('L1 L2',real=True)
     shape=2*phi*L1+phi*phi*slope
