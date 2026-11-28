@@ -82,7 +82,7 @@ gapLower p high =
             ((⊝ Κ (+ 1 / 64)) ⊕ Κ (+ 1 / 3) ⊜ Κ (+ 61 / 192)) P.≃-refl)
             (P.≤-respʳ-≃ (P.+-comm (R.- refHeight) (Reduce.y p))
               (P.+-monoʳ-≤ (R.- refHeight) high))
-      piBound = P.*-monoʳ-≤-nonNeg Pi.threeBelowMachinPiNonStrict
+      piBound = P.*-monoˡ-≤-nonNeg Pi.threeBelowMachinPiNonStrict
         (P.0≤x⇒nonNegx (P.<⇒≤ Radius.twoPositive))
       six = P.≤-respˡ-≃ (let open P.ℝ-Solver in solve 0
               (Κ (+ 2 / 1) ⊗ Κ (+ 3 / 1) ⊜ Κ (+ 6 / 1)) P.≃-refl) piBound
@@ -135,7 +135,7 @@ radiusNN p = P.0≤x⇒nonNegx (P.<⇒≤ (Radius.qRadiusPositive
 radiusBound : ∀ p → Reduce.third ≤ Reduce.y p →
   radius p ≤ (radius reference * Contract.rho)
 radiusBound p h = P.≤-respˡ-≃ (P.≃-symm (radiusFactor p))
-  (P.*-monoʳ-≤-nonNeg (gapDecay p h) (radiusNN reference))
+  (P.*-monoˡ-≤-nonNeg (gapDecay p h) (radiusNN reference))
 
 module At (inputs : Round11.BishopCutset) where
   module R0 = Rig.At inputs
@@ -161,7 +161,7 @@ module At (inputs : Round11.BishopCutset) where
   inside : ∀ p → Reduce.third ≤ Reduce.y p → Norm.normSqC (q p) ≤ Norm.normSqC r
   inside p h = P.≤-trans (normBound p h)
     (P.≤-respʳ-≃ (P.*-identityˡ (Norm.normSqC r))
-      (P.*-monoˡ-≤-nonNeg
+      (P.*-monoʳ-≤-nonNeg
         (P.≤-respˡ-≃ (let open P.ℝ-Solver in solve 0
           (Κ (+ 1 / 36) ⊜ Κ (+ 1 / 6) ⊗ Κ (+ 1 / 6)) P.≃-refl)
           (P.p≤q⇒p⋆≤q⋆ (+ 1 / 36) 1ℚᵘ (from-yes ((+ 1 / 36) QP.≤? 1ℚᵘ))))
@@ -174,7 +174,7 @@ module At (inputs : Round11.BishopCutset) where
         nv = Norm.normSqC v
         rr = Norm.normSqC r
         s = Contract.rho * Contract.rho
-        mul = P.*-monoˡ-≤-nonNeg (normBound p h) (Upper.normSquareNonnegative v)
+        mul = P.*-monoʳ-≤-nonNeg (normBound p h) (Upper.normSquareNonnegative v)
         one = P.≃-trans (P.≃-symm (Norm.normSqMultiply r v))
           (P.≃-trans (Bound.normCong (Rec.multiplyReciprocal r (nz reference))) Norm.normSqOne)
     in record
