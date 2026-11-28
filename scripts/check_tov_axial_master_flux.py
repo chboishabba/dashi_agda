@@ -38,5 +38,4 @@ def main():
     print('PASS axial canonical momentum bilinear, CPM normalization and total time derivative')
     print('OPEN polar flux, moving embedding/corners, interior trace and full spatial energy')
 
-
 if __name__=='__main__':main()
