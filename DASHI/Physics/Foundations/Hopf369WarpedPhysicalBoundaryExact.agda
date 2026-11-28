@@ -3863,3 +3863,38 @@ module At {r : Level} (F : C.RealField r)
   -- BR126 combines active AND zero-speed characteristic observations.
   -- The actual analytic trace/constraint propagation, normal chart
   -- regularity, and variable coupled curvature energy remain separate.
+
+
+  ------------------------------------------------------------------------
+  -- BR128–131: material normal constant, defect-shifted wall and
+  -- conditional Cartan/normal transport source expressions.
+  ------------------------------------------------------------------------
+  originalFEffectiveWallForcing : S → S → S → S → S
+  originalFEffectiveWallForcing codazzi e0delta tangentDelta lowerDelta =
+    codazzi + e0delta - tangentDelta - lowerDelta
+
+  originalFMaterialNormalScale : S → S → S → S
+  originalFMaterialNormalScale lapse leafCoefficient shiftNormalCoefficient =
+    lapse * leafCoefficient + shiftNormalCoefficient
+
+  originalFMaterialRiccatiElectric : S → S → S → S
+  originalFMaterialRiccatiElectric normalShape shapeSquare lapseHessian =
+    neg normalShape - shapeSquare - lapseHessian
+
+  originalFMaterialRiccatiSource : S → S → S → S
+  originalFMaterialRiccatiSource electricVariation lapseVariation normalVariation =
+    electricVariation + lapseVariation + normalVariation
+
+  originalFTransportedMomentPrimitive : S → S → S → S
+  originalFTransportedMomentPrimitive moment weightedPrimitive primitive =
+    moment + weightedPrimitive - primitive
+
+  originalFCartanCurvatureDefectTime : S → S
+  originalFCartanCurvatureDefectTime bianchiDefect = neg bianchiDefect
+
+  originalFCartanTorsionDefectTime : S → S
+  originalFCartanTorsionDefectTime electricDefectTheta = electricDefectTheta
+
+  -- Given-metric energy uniqueness is conditional on actual regular
+  -- geometry, initial/exterior data and same-source Cotton/Codazzi.
+  -- These expressions do not provide nonlinear Cartan development.

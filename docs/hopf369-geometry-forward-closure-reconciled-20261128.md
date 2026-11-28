@@ -1726,3 +1726,316 @@ Native source expressions and manuscript qualification
 updated. Kernel unrun, no CI. No new master/other PR
 full reconciliation in this tranche; the earlier 42
 behind comparison remains the last audited base count.
+
+
+## 17. BR128–131 — consume existing curvature owners; variable material energy and development
+
+Reopened repository owners, not a new generic Weyl/Gauss/Ricci
+construction. On master: DASHI/Physics/GR/RiemannTensor.agda
+explicitly stages a canonical zero-table model, not a nonflat
+five-dimensional theorem; DASHI/Geometry/LeviCivitaBridge.agda
+contains the postulated DCHoTT emergence socket, not general
+nonflat uniqueness; DASHI/Physics/Closure/ContinuumCurvatureSourceSpinTwo.agda
+has the continuum authority and Bianchi receipt interfaces.
+Docs/physics/KSW668F8GeometryWeylRoadmapMaxCut20261117.md
+documents the same distinction. The actual F8 characteristic
+donor scripts/ksw668_f8_characteristic_constraint_maxcut.py
+preserves interior constraints for mode3 but leaves weak SAT
+endpoints open and has a different weighted-mode commutator.
+Do not import that finite TT acceptance as full Hopf curvature.
+
+Actual original-source owners: BR27/29
+scripts/check_hopf369_br_curvature_energy.py (35D Weyl, 9D
+wall, positive Gram, signed flux), BR30 frozen projected
+generation, BR53 zero-speed/connection factor, BR90/91 actual
+Ricci-defect/Cotton source, BR31/BS11/13 exterior and holonomy,
+BR57 normal primitive, BR124–127 curved Gauss and electric
+readout, BR104/118 material normal and defining function.
+Classical Bianchi, Cartan, Riccati, symmetric-hyperbolic energy
+and matrix ODE arguments retain prior attribution. DASHI work
+is the source-specific weld to these actual carriers.
+
+### BR128 — variable material projected energy, no normal derivative in tangential commutators
+
+Given a piecewise sufficiently regular material metric, choose
+one-sided orthonormal frames with e0 future timelike and
+e0,e1,e2,e3 tangent to the y-leaves, e4=n; choose the same
+intrinsic frame on the two wall faces via common h. Not assuming
+e0 is a common ambient geodesic, nor that dt(n)=0. This is a
+local chart/frame construction with timelike time covector dt.
+In these frames the actual BR29 projected Maxwell equations
+have constant component matrices A_i, positive Gram G, connection
+lower term L_g, and Cotton source F_g from BR91:
+ e0 w = sum_{i=1..3} A_i e_i w + A_n n w + L_g w + F_g.
+The connection here is the actual metric frame connection on
+both bivector pairs, not the toy conjugation of BR40e. For the
+geometric Weyl field the equation is obtained by selecting the
+divergence and time-containing Bianchi rows and projecting into
+the 35D algebraic Weyl carrier. Projection does not imply the
+other unprojected Bianchi equations for an independent field.
+
+Write n=lambda^-1(partial_y-beta^a partial_a), a=0..3. Multiply
+by lambda to obtain
+ C^a partial_a w - A_n partial_y w = lambda L_g w + lambda F_g,
+ C^a=lambda(e0^a I-sum_i e_i^a A_i)+beta^a A_n.
+Each G C^a is symmetric. The normal matrix G A_n is CONSTANT
+in these coordinates, even for unequal lambda and arbitrary
+one-sided beta. The raw Maxwell matrix for spatial vector v
+acts between electric and magnetic slots by wedge v and its
+Euclidean adjoint; norm <=|v|. Compression into the Weyl
+subspace in the positive component Gram cannot enlarge that
+bound. The analogous raw wall matrix acts on the time column
+and spatial columns by v and its adjoint, norm <=|v|. Thus
+timelike dt with positive e0(t) gives strictly positive G C^t
+and H D^t on the wall, with quantitative margins
+ lambda(e0(t)-sqrt(sum_{i=1..4} e_i(t)^2)) G,
+ (e0(t)-sqrt(sum_{i=1..3} e_i(t)^2)) H respectively.
+Need uniform lower and upper comparability on the chart.
+
+For the wall write D^a=e0^a I-sum_i e_i^a B_i (B_i BR29),
+ D^a partial_a m = L_h m-R mean(w)+f_wall.
+Use common coordinate tangential measure dx^1dx^2dx^3 (or
+a common smooth positive weight in both energies; include its
+derivatives in lower terms). Define energy on a compact slab
+ E=1/2 int_bulk w^T G C^t w + (-3j)/2 int_wall m^T H D^t m.
+Here j=-6/5, -3j=18/5>0. For the active jump
+ A_n([w]-j J m)=0, the signed bulk normal work is
+ -mean(w)^T G A_n [w]=-3j mean(w)^T R^T H m;
+ the wall exchange contributes +3j m^T H R mean(w).
+Exact cancellation by BR27/29, also if only active jump is
+imposed, because G A_n P0=0 and R P0=0.
+No assumption of equal normal lapse or reflection symmetry.
+Energy derivative consists of bounded coefficient-divergence,
+connection work, bulk and wall source pairings and exterior
+flux. On compact charts with uniform time coercivity and
+bounded coefficients/first derivatives, homogeneous nonincoming
+outer flux (or separately controlled forcing), Cauchy/Young and
+Gronwall give
+ E(t)<=exp(Kt)(E(0)+K int_0^t (||F_g||²+||f_wall||²)ds)
+with K depending on actual chart bounds, not frequency.
+This is an a priori estimate for sufficiently regular solutions
+on a GIVEN metric. It does not establish their existence.
+The wall shape L² is paid directly by this energy, without
+first proving a separate trace estimate on each Weyl face.
+Individual active or zero-speed Weyl traces are NOT bounded by
+this L² energy alone.
+
+For tangential spacetime multiindex alpha, differentiating the
+scaled material equation gives no normal-principal commutator:
+ [partial^alpha,P] w =
+ sum_{0<nu<=alpha} binom(alpha,nu)
+ (partial^nu C^a) partial_a partial^(alpha-nu)w
+ minus the lower-coefficient commutators if included in P.
+The analogous wall coefficient derivatives are tangential;
+R,J,A_n and G,H constant in the common adapted frame. Thus
+the differentiated active jump and exchange still cancel.
+For integer s>=0, uniform bounded coefficient derivatives
+through s+1 (or later proved tame product bounds), compatible
+initial spacetime tangent jets through s, and differentiated
+outer work hypotheses, summing all |alpha|<=s gives E_s'
+<=K_s E_s+K_s source_s². There is no normal derivative
+of the zero-speed sector in this commutator, nor derivative
+loss relative to tangential curvature order on a fixed
+background with those coefficient bounds. This is NOT a tame
+quasilinear estimate in unknown metric regularity, a full H^s
+normal estimate, nor a free exterior estimate. Partition of
+unity on common tangential charts requires matched wall weights
+and connection-compatible frames. Do not assume a global
+orthonormal frame or global uniform time margin.
+
+### BR129 — absorb actual Ricci defect into wall energy; conditional W4b uniqueness
+
+In a matched F metric, D=Ric+4g, tr_h M=0, [K]=jh.
+BR125 gives [w]=j J m_eff, with m_eff=m+delta, where delta
+is the 9-coordinate encoding of tf_h[D_tan]/(3j).
+This is an exact source shift, not an assumption of vacuum.
+Mean Codazzi in our convention is
+ D^a M_ab=mean D_nb,
+ D_0 M_ia = D_i M_0a - mean Riem_{n a 0 i}.
+With frame derivatives and the intrinsic connection separated,
+the raw wall source from Ricci defect in column i=0 is
+ -mean D_na; in i=1..3 it is
+ -(mean D_n0 h_ai - mean D_ni h_a0)/3
+since (g wedge Sch)_{n a 0 i}=Sch_n0 h_ai-Sch_ni h_a0,
+Sch_na=D_na/3. Project with H^-1 Y^T into the actual
+9-coordinate wall carrier. This source is not generically zero.
+Thus for m_eff the wall equation has the SAME principal/exchange
+matrices, with forcing
+ f_eff=f_Codazzi+e0 delta-sum_i B_i e_i delta-L_h delta.
+Frame dependence of the tracefree operation is included by
+using the same wall orthonormal frame; its derivatives are
+part of these actual tangential derivatives. No arbitrary
+boundary flux pairing with an uncontrolled mean w trace
+remains from the algebraic Ricci jump; it is paid in wall
+forcing. Bulk forcing remains the actual Cotton source F_g.
+Regularity requirement: tangential derivatives of f_eff through
+order s involve order s+1 of the wall Ricci-defect trace; bulk
+F_g has one derivative of D. Not a free metric energy estimate.
+
+Conditional W4b theorem: on the SAME given sufficiently regular
+matched F metric, with D from that metric, same material frame,
+connection, actual Cotton/Codazzi/Schouten sources, same
+geometric initial (w,m_eff), and same exterior conditions,
+any sufficiently regular projected solution with active jump
+A_n([w]-j J m_eff)=0 equals the actual geometric Weyl and
+effective mean shape. Proof: the geometric pair satisfies the
+projected bulk equations by differential Bianchi and projected
+wall equations by Gauss/Codazzi, and the full jump by BR125.
+Subtract, apply BR128 homogeneous energy with zero initial
+data and zero/nonincoming exterior difference work, conclude
+w_diff=m_eff_diff=0. Then the full zero-speed jump and all
+geometric Bianchi constraints follow for this pair by equality,
+rather than independently assuming an arbitrary projected
+source lies in the P0 kernel. The vacuum case D=0 follows
+only on a same-solution BR98 vacuum development. This pays the
+conditional same-metric preservation implication on a regular
+compact chart. Global weighted uniqueness needs the exterior
+and localization hypotheses. It does NOT construct a metric,
+an independent projected solution, or solve the Cartan
+constraint propagation when the metric itself is unknown.
+BR53/91 remain relevant to construction, not overwritten.
+
+Given g, a possible projected weak generation route on a
+compact tangential torus: use the BR30 dense fixed active-jump
+domain and positive time mass above, Galerkin test functions
+satisfying the same jump, integrate the normal skew exchange
+exactly and use time-dependent positive finite mass ODEs.
+A priori L² energy and weak compactness would yield a weak
+formulation with the domain pairing; strong traces,
+spacetime-jet compatibility and higher regularity still
+need a proof. This route is not executed or claimed complete.
+
+### BR130 — actual lapse acceleration in normal curvature transport, weighted inverse
+
+BR127 Gaussian inverse is not directly the material identity.
+On arbitrary regular timelike leaves write A=h^-1 K,
+a=nabla_n n=-D psi, psi=log lambda, and use the projected
+normal derivative D_n on mixed tangential tensors:
+ R_e=(R_{n a n b})^sharp
+   =-D_n A-A²+(D a)^sharp-a^sharp tensor a_flat
+   =-D_n A-A²-lambda^-1(Hess_h lambda)^sharp.
+The second identity uses a=-D log lambda and the Hessian
+chain rule. Trace gives exactly BR104 Ric_nn.
+Independent rational 5D nonumbilic variable lapse/metric
+two-jet oracle with non-diagonal h, zero shift, checks all
+16 mixed normal curvature components. In general nonzero
+shift use projected connection derivative, not raw partial_y.
+The curvature sign and acceleration term also follow from
+the Ricci identity on n, decomposing nabla_n n and nabla_X n.
+Linearizing in a fixed normal-parallel comparison frame yields
+ D_n B+A B+B A=-E_eff, B=delta A,
+ E_eff=delta R_e+delta(lambda^-1 Hess_h lambda)^sharp
+       +(delta D_n)A.
+All frame, metric and normal variations in the last terms
+are retained; this is not closure of the lapse-Hessian debt.
+
+Let r be proper normal along a regular segment, U'=U A,
+V'=A V, U(0)=V(0)=I, Z=U B V. Then Z'=-F,
+F=U E_eff V. For any positive integrable weight omega,
+let Qomega=int omega, and momega=Qomega^-1 int omega Z
+(the TRANSPORTED moment). Exact weighted primitive inverse:
+ Z(r)=momega+Qomega^-1 int_0^d omega(x) int_0^x F
+                        -int_0^r F,
+ B=U^-1 Z V^-1.
+For |A|<=a0 on length d and weight 0<omega_min<=omega<=omega_max,
+using ||Z||<=|momega|+2 int |F| gives for positive
+submultiplicative component norms
+ ||B||_{L2(omega)} <= exp(2a0 d) sqrt(Qomega)|momega|
+      +2 exp(4a0 d) sqrt(Qomega int omega^-1)
+                           ||E_eff||_{L2(omega)}.
+Cauchy-Schwarz supplies the last factor. For scalar A=k I,
+b(0)=1, U=V=b I and omega=1, this recovers BR57's
+b² shear moment. General transported moment must be attached
+to original BR31/BS11 graph/holonomy, not freely set to zero.
+Alternatively BR125 supplies B(0) if actual metric/wall
+regularity and Ricci trace are paid. Uniform normal segment
+length, coefficient and weight distortion across the actual
+Hopf foliation, global coordinate coverage and focal/holonomy
+compatibility remain W5.
+
+Exterior: reopen BR31/BS12 actual static reference weights
+N³ dvol ~ R^4 dR, outer curvature work ~ R^6 W_even W_odd.
+For even W=O(R^-p) and odd W=O(R^-(p+1)), p>=3,
+energy tail integrable and flux tends zero (p=3 gives
+R^-2 energy and R^-1 work). Without parity p=3 gives
+O(1) flux, not vanishing. These are explicit sufficient
+asymptotic hypotheses inherited from BR31, not established
+for evolved nonzero geometry or independent projected W.
+The static Bel/Killing current and material projected energy
+must be matched before using this bound as a global estimate:
+BR128's coordinate coefficient work may grow at AdS infinity,
+and projected fields are not automatically divergence-free
+Bel tensors. No global weighted exterior coercivity claim.
+
+### BR131 — Cartan development route for W6, exact defects and wall obstruction
+
+Reuse the existing general Levi-Civita/Bianchi interfaces
+and BR120/121 material chart. For metric-compatible Lorentz
+connection Omega and coframe theta, define curvature
+F_Omega=dOmega+Omega wedge Omega and torsion
+T=dtheta+Omega wedge theta. Work in temporal frame gauge
+Omega_t=0 along a given timelike coordinate flow, with theta_t
+not necessarily constant (wall flow need not be geodesic).
+For prescribed algebraic Riemann carrier R=W+g wedge Schouten,
+the time equations
+ partial_t Omega_i=R_{ti},
+ partial_t theta_i=partial_i theta_t+Omega_i theta_t
+impose E_ti=0 and T_ti=0 for E=F_Omega-R.
+Exact Cartan differential identities:
+ D_Omega E=-D_Omega R,
+ D_Omega T=F_Omega wedge theta.
+If the FULL unprojected Bianchi D_Omega R=0 and algebraic
+R wedge theta=0 hold, the remaining spatial defects satisfy
+ partial_t E_ij=0,
+ partial_t T_ij=E_ij theta_t.
+More generally partial_t E_ij=-(D_Omega R)_{tij}.
+Zero initial defects then imply actual torsion-free
+metric-compatible curvature, hence same-source Levi-Civita
+and actual Riemann. In vacuum select Sch=-g/2; if reduced
+retain actual Sch with D as in BR90. These are conditional
+Cartan defect equations, not proof that the projected
+35D evolution implies the unprojected equations on the
+unknown coframe/connection. Need the combined constraint
+propagation and wall matching theorem before construction
+can invoke this route. Local oracle computes noncommuting
+polynomial connection and coframe on 1+2 coordinates,
+checks Cartan identities directly; the general exterior
+calculus derivation is dimension-independent, not a full
+5D nonlinear solution test.
+
+Do NOT fix theta_t to a common unit ambient geodesic
+tangent to the wall on both faces. For a unit wall timelike
+T, [K(T,T)]=-j !=0. Both ambient accelerations cannot vanish;
+a frame parallel along coordinate time need not be the
+wall-adapted orthonormal frame. Must transport the actual
+BR29 frame through the temporal gauge and pay the wall
+embedding/gauge/lapse choices (BR120/121). This is the
+exact new construction cut, not an arbitrary source change.
+
+### Updated max-cut and acceptance
+
+W4b: conditional same-g regular projected uniqueness paid
+analytically (BR128/129). Unconditional same-object existence
+and full Cartan constraint evolution on unknown g remain.
+W2/3: regular given-metric compact tangential E_s hierarchy
+and Ricci-defect forcing attachment paid at a priori level.
+Actual nonlinear tame coefficient control, normal derivatives,
+higher corners and weighted exterior remain.
+W5: nonumbilic material acceleration and weighted transported
+moment inverse constructed; actual lapse-Hessian control,
+uniform coverage, original holonomy and exterior closure open.
+W6: temporal Cartan equations with explicit torsion/curvature
+defect conditions written; no nonlinear fixed point or complete
+initial-boundary construction claimed. Need actual compatible
+BN/BQ corners, full unprojected Bianchi/Cartan subsidiary,
+wall gauge/embedding, coupled normal/exterior estimates.
+Keep W4a conditional BR98 and W7 native/physical acceptance.
+
+Local SymPy 1.14.0 four stages exit zero, bounded 90s each;
+checker Git blob 9dec80672c8b59c75afa8c877d8d54f6d8d86644.
+BR128/129 import the existing BR29 carrier; local execution
+used the extracted carrier/read definitions from the fetched
+donor (not a full repository checkout/replay). BR130/131
+independent symbolic tests. Native kernel and integrated
+PDE unrun; no CI. Targeted owner audit, not exhaustive master
+reconciliation. No new detached deliverables.
