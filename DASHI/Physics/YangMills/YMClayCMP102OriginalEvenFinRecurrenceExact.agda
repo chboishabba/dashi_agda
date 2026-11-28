@@ -90,15 +90,15 @@ originalEvenRowFromWeightedCauchy X (suc n) weighted =
       (originalEvenRowFromWeightedCauchy X n weighted)
       (originalEvenStep X n weighted))
     (P.≃-trans
-      (solve 4
-        (λ A a tri q →
-          ((Κ (+ 2 / 1) ⊗ A) ⊕ (X ⊗ tri))
-            ⊕ ((Κ (+ 2 / 1) ⊗ a) ⊕ (X ⊗ q))
+      (solve 5
+        (λ x A a tri q →
+          ((Κ (+ 2 / 1) ⊗ A) ⊕ (x ⊗ tri))
+            ⊕ ((Κ (+ 2 / 1) ⊗ a) ⊕ (x ⊗ q))
           ⊜
           (Κ (+ 2 / 1) ⊗ (A ⊕ a))
-            ⊕ (X ⊗ (tri ⊕ q)))
-        P.≃-refl A a tri q)
+            ⊕ (x ⊗ (tri ⊕ q)))
+        P.≃-refl X A a tri q)
       (P.+-cong
         (P.*-congˡ P.≃-refl)
-        (P.*-congˡ (FinSum.finSumSuccessor
-          (Row.cauchyCoefficient (W.aTerm X) (W.aTerm X)) n))))
+        (P.*-congˡ (P.≃-symm (FinSum.finSumSuccessor
+          (Row.cauchyCoefficient (W.aTerm X) (W.aTerm X)) n)))))
