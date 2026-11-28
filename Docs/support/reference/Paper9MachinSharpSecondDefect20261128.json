@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-28",
+  "programme": "Paper 9 original Bishop arctangent finite second-defect sharp radius",
+  "algorithm": "Original signed Machin atan / native Bishop finite second quotient with K04d LOG second power reuse",
+  "checks": {
+    "source_script": "scripts/check_paper9_machin_second_defect_radius.py",
+    "repository_git_blob": "d760fe5aa361d9b7e914616ae8aa36977517ec70",
+    "executed_git_blob": "d760fe5aa361d9b7e914616ae8aa36977517ec70",
+    "byte_identical": true,
+    "sympy_formal_power_quotient_degree_count": 100,
+    "geometric_budget_exact_n_count": 1001,
+    "signed_point_count": 8,
+    "signed_finite_lengths_per_point": 33,
+    "exact_identities_checked": 2666,
+    "all_pass": true
+  },
+  "rational_all_n_identity": "B_N = sum_{k<N} 2k/4^k = (8/9)*(1-(3N+1)/4^N) <= 8/9",
+  "power_coefficient_identity": "T_m(x,y)=sum_{j=0}^{m-2}(j+1)*x^j*y^(m-2-j)",
+  "native_agda_files": [
+    "DASHI/Analysis/BishopOriginalMachinAtanQuotientSecondOrderExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinSignedSecondTriangleExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinSignedPowerRadiusExact.agda",
+    "DASHI/Analysis/BishopOriginalMachinSignedSecondRadiusEnvelopeExact.agda"
+  ],
+  "lean_companion": "Integration/Paper9MachinSecondDefectMajorant.lean",
+  "lean_branch": "research/paper9-original-eisenstein-derivative-20261125",
+  "lean_commit": "f5c306d05484bd8ac13426490aaba32ac7f28028",
+  "native_kernel_checked": false,
+  "ci_executed": false,
+  "exact_remaining_bishop_weld": "Show that sourceRadiusTerm k in original Bishop real equals embedding of (2*k/4^k) using the already-owned Nat, odd reciprocal, and half-radius embedding; sum and apply rational budget bound. Confirm all newly written native modules typecheck.",
+  "downstream_producers": [
+    "Original Bishop atan derivative-of-limit interchange via signed second defect bound + function tails + derivative-series convergence",
+    "Original two-atom atan-to-Cayley analytic ODE uniqueness",
+    "Actual Hecke CM root and analytic product",
+    "Original Bishop hypergeometric H^2 and chain"
+  ]
+}
