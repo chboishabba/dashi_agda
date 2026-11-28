@@ -1,0 +1,11 @@
+BR245-247 local execution, SymPy 1.14.0.
+Local source Git blob c0028b869b5f27365769afe267f3616740d35370 matches committed source after whitespace reconciliation.
+Donor blobs b2a2b9e7e2edc00f9643d0e7247f1829436a93d7 and 2c5f14387b27a8481ce7d033dfdcdc041ef58d12.
+Commands used OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br245_247_subsidiary.py --part initial/refine.
+BR245 PASS exact normal gauge jet, including nonzero reduced residual correction
+BR246 11 t 0.09 offset 0.30000000000000004 8 sites max H M C E [0.17893876993975255, 0.04512066480985865, 0.009774452733326347, 0.024382154598056482]
+BR246 17 t 0.09999999999999999 offset 0.375 8 sites max H M C E [0.08599428670727113, 0.026409612862764862, 0.005392511067572561, 0.01277853422649914]
+BR246 23 t 0.10666666666666666 offset 0.2727272727272725 8 sites max H M C E [0.040839480212169356, 0.015628568021211518, 0.0033688038407698184, 0.005028838501208964]
+BR247 fine/coarse ratios H M C E [0.22823159131986728, 0.346372733803265, 0.3446539599382133, 0.2062507839897716]
+BR247 finite diagnostics; sample times and offsets differ, no convergence certificate.
+Independent temporal reconstruction uses three metric snapshots. Off-centre momentum nonzero. No subsidiary wave energy execution or native/continuum acceptance. No CI.
