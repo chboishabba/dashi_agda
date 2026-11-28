@@ -26,6 +26,7 @@ import DASHI.Moonshine.JInvariantBishopThetaCauchyProductExact as CP
 import DASHI.Moonshine.JInvariantBishopThetaCoefficientEvaluationExact as E
 import DASHI.Moonshine.JInvariantThetaLegendreSignedGeometryExact as T
 import DASHI.Moonshine.JInvariantThetaIntegerTwistExact as ZT
+import DASHI.Moonshine.JInvariantThetaJacobiAllIndexExact as Jacobi
 import DASHI.Moonshine.JInvariantBishopDyadicFourierRowExact as D
 import DASHI.Moonshine.JInvariantBishopOriginalDyadicRowTransportExact as Phase
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
@@ -217,6 +218,10 @@ module At (inputs : Round11.BishopCutset) (p : U.BishopUpperHalfPlanePoint) wher
   jacobiFromCoefficients : (∀ n → T.B n ≡ T.add T.A T.C n) → b ≈C (a +C c)
   jacobiFromCoefficients h =
     sameReadout (coeffTransport h Bread) (plusReadout Aread Cread)
+
+  -- Actual all-index finite signed shell producer, no coefficient premise.
+  analyticJacobi : b ≈C (a +C c)
+  analyticJacobi = jacobiFromCoefficients Jacobi.jacobiAll
 
   -- Q, W and V on the original half-phase, with unconditional
   -- absolute convergence and evaluation of their literal histories.
