@@ -4,8 +4,8 @@ function campaign(){
 const assert=(x,m)=>{if(!x)throw Error(m)},seq=n=>Array.from({length:n},(_,i)=>i),bit=i=>1n<<BigInt(i);
 const pop=x=>{let c=0;while(x){x&=x-1n;c++}return c},dot=(x,y)=>pop(x&y)&1;
 class Refusal extends Error{}
-function solve(n,source,queries,lim,clip=null){
- let stats={work:0,joins:0,compatible:0,width:0,peakTable:0,treeCandidates:0,queries:0,countBitOps:0};
+function solve(n,source,queries,lim,clip=null,marked=false){
+ let stats={work:0,joins:0,compatible:0,width:0,peakTable:0,treeCandidates:0,queries:0,countBitOps:0,markedConvolutions:0,markedLeafChannels:0,markedTreeNodes:0};
  function pay(k=1){if(stats.work+k>lim.work)throw new Refusal("work");stats.work+=k}
  function mul(a,b){let k=a.toString(2).length*b.toString(2).length;pay(k);stats.countBitOps+=k;let v=a*b;return clip===null?v:v>clip?clip:v}
  function add(a,b){let k=Math.max(a.toString(2).length,b.toString(2).length);pay(k);stats.countBitOps+=k;let v=a+b;return clip===null?v:v>clip?clip:v}
@@ -27,6 +27,50 @@ function solve(n,source,queries,lim,clip=null){
  while(nodes.length>1){let best=null;for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){pay();stats.treeCandidates++;let mask=nodes[i].mask|nodes[j].mask,d=D(mask).length;let score=[d,pop(mask),i,j];if(best===null||score[0]<best[0]||score[0]===best[0]&&score[1]<best[1])best=score}
  let [d,sz,i,j]=best,l=nodes[i],r=nodes[j],mask=l.mask|r.mask;nodes.splice(j,1);nodes.splice(i,1);nodes.push(node(mask,U(mask),D(mask),l,r))}
  return nodes[0]
+ }
+ function splitNormal(a,A,B){
+ let rows=new Map(),L=[...A,...B];
+ for(let i=0;i<L.length;i++){let v=L[i],c=bit(i);while(v){pay(n+L.length+1);let p=v.toString(2).length-1;if(rows.has(p)){let [w,d]=rows.get(p);v^=w;c^=d}else{rows.set(p,[v,c]);break}}}
+ let c=0n,v=a;while(v){pay(n+L.length+1);let p=v.toString(2).length-1;if(!rows.has(p))return null;let [w,d]=rows.get(p);v^=w;c^=d}
+ let l=0n,r=0n;for(let i=0;i<L.length;i++){pay();if(c&bit(i)){if(i<A.length)l^=L[i];else r^=L[i]}}assert((l^r)===a,"normal split");return [l,r]
+ }
+ function runMarked(root,Q){
+ if(!root){let base={count:pow(n),witness:0n};return {base,children:Q.map(a=>a===0n?[base,{count:0n,witness:null}]:[{count:pow(n-1),witness:0n},{count:pow(n-1),witness:a&-a}])}}
+ let inside=[],outside=[];Q.forEach((a,i)=>{let r=splitNormal(a,root.U,[]);(r?inside:outside).push(i)});
+ function fold(t,marks){
+ stats.markedTreeNodes++;let d=t.D.length;stats.width=Math.max(stats.width,d);if(d>lim.width)throw new Refusal("width");
+ let T=new Map(),blank=()=>({count:0n,witness:null});
+ function put(k,j,b,c,x){if(!c)return;pay();let e=T.get(k);if(!e){e={base:blank(),marks:marks.map(()=>[blank(),blank()])};T.set(k,e);stats.peakTable=Math.max(stats.peakTable,T.size)}
+ let z=j<0?e.base:e.marks[j][b];z.count=add(z.count,c);if(z.witness===null)z.witness=x
+ }
+ function clipped(c){return clip===null?c:c>clip?clip:c}
+ if(t.leaf){
+ let f=t.leaf,rank=t.U.length;
+ if(f.kind==="onehot"||f.kind==="require"){
+ let patterns=f.kind==="require"?[f.rows]:f.rows.map((_,j)=>f.rows.map(([a,b],i)=>[a,b^Number(i!==j)])),seen=new Set();
+ for(let pat of patterns){pay();let R=canon(pat);if(R===null)continue;let x=rep(R),v=val(t.U,x);if(seen.has(v))continue;seen.add(v);let k=val(t.D,x);put(k,-1,0,1n,x);marks.forEach((a,j)=>{pay(n+1);put(k,j,dot(a,x),1n,x);stats.markedLeafChannels++})}
+ }else{
+ let bad=canon(f.rows),badX=bad===null?null:rep(bad);
+ function channel(pins){let R=canon(pins);if(R===null)return blank();let x=rep(R),c=bit(rank-R.length),excluded=badX!==null&&pins.every(([a,b])=>dot(a,badX)===b);if(excluded)c--;if(!c)return blank();
+ if(badX!==null&&f.rows.every(([a,b])=>dot(a,x)===b)){let v=orth(R.map(z=>z[0])).find(y=>t.U.some(a=>dot(a,y)));assert(v!==undefined,"marked leaf escape");x^=v}
+ assert(valid(x,[f])&&pins.every(([a,b])=>dot(a,x)===b),"marked leaf");return {count:clipped(c),witness:x}}
+ for(let k=0n;k<bit(d);k++){pay();let pins=eq(t.D,k),z=channel(pins);put(k,-1,0,z.count,z.witness);if(!z.count)continue;
+ marks.forEach((a,j)=>{for(let b=0;b<2;b++){let q=channel([...pins,[a,b]]);put(k,j,b,q.count,q.witness);stats.markedLeafChannels++}})}
+ }return T
+ }
+ let splits=marks.map(a=>{let s=splitNormal(a,t.l.U,t.r.U);assert(s,"mark in span");return s}),L=fold(t.l,splits.map(x=>x[0])),R=fold(t.r,splits.map(x=>x[1])),I=inter(t.l.U,t.r.U),bins=new Map();
+ function glue(l,r){let H=canon([...eq(t.l.U,val(t.l.U,l)),...eq(t.r.U,val(t.r.U,r))]);assert(H!==null,"marked gluing");return rep(H)}
+ for(let e of R.values()){let k=val(I,e.base.witness);if(!bins.has(k))bins.set(k,[]);bins.get(k).push(e)}
+ for(let l of L.values()){let k=val(I,l.base.witness);for(let r of bins.get(k)||[]){pay();stats.joins++;stats.compatible++;let x=glue(l.base.witness,r.base.witness),p=val(t.D,x);put(p,-1,0,mul(l.base.count,r.base.count),x);
+ for(let j=0;j<marks.length;j++)for(let a=0;a<2;a++)for(let b=0;b<2;b++){let v=l.marks[j][a],w=r.marks[j][b];pay();stats.markedConvolutions++;if(v.count&&w.count){let y=glue(v.witness,w.witness);assert(val(t.D,y)===p&&dot(marks[j],y)===(a^b),"marked parent");put(p,j,a^b,mul(v.count,w.count),y)}}}}
+ return T
+ }
+ let T=fold(root,inside.map(i=>Q[i])),e=T.get(0n),base=e?{count:mul(e.base.count,pow(n-root.U.length)),witness:e.base.witness}:{count:0n,witness:null},children=Q.map(()=>[blankRoot(),blankRoot()]);
+ function blankRoot(){return {count:0n,witness:null}}
+ if(!e)return {base,children};
+ inside.forEach((i,j)=>{children[i]=e.marks[j].map(z=>({count:mul(z.count,pow(n-root.U.length)),witness:z.witness}))});
+ for(let i of outside){let a=Q[i],v=orth(root.U).find(y=>dot(a,y));assert(v!==undefined,"free radical");let x=e.base.witness,b=dot(a,x),c=mul(e.base.count,pow(n-root.U.length-1));children[i][b]={count:c,witness:x};children[i][b^1]={count:c,witness:x^v}}
+ return {base,children}
  }
  function valid(x,L){return L.every(f=>{let k=f.rows.filter(([a,b])=>dot(a,x)===b).length;return f.kind==="forbid"?k!==f.rows.length:f.kind==="require"?k===f.rows.length:k===1})}
  function run(root){
@@ -61,20 +105,21 @@ function solve(n,source,queries,lim,clip=null){
  }
  try{
  assert(clip===null||clip>=1n,"clip");assert(source.every(f=>["forbid","require","onehot"].includes(f.kind)),"kind");pay(1+n+source.reduce((s,f)=>s+1+f.rows.length,0));
+ if(marked){let z=runMarked(prepare(source),queries);assert(z.base.witness===null||valid(z.base.witness,source),"marked root");z.children.forEach((c,i)=>{assert(add(c[0].count,c[1].count)===z.base.count,"marked conservation");c.forEach((a,b)=>{if(a.count)assert(valid(a.witness,source)&&dot(queries[i],a.witness)===b,"marked reopen")})});return {status:"EXACT",...z,stats}}
  let base=run(prepare(source));assert(base.witness===null||valid(base.witness,source),"original witness");
  let children=[];for(let a of queries){let c=[];for(let b=0;b<2;b++){stats.queries++;let L=[...source,{kind:"require",rows:[[a,b]]}],q=run(prepare(L));assert(q.witness===null||valid(q.witness,L),"conditional witness");c.push(q)}assert(add(c[0].count,c[1].count)===base.count,"parent conservation");children.push(c)}
  return {status:"EXACT",base,children,stats};
  }catch(e){if(e instanceof Refusal)return {status:"CENSORED",reason:e.message,stats};throw e}
 }
 let seed=5001;const rnd=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return (seed>>>8)%n};
-let counts={cases:0,counts:0,conditional:0,witnesses:0,clip:0,refusals:0};
+let counts={cases:0,counts:0,conditional:0,witnesses:0,clip:0,refusals:0,marked:0,markedClip:0};
 const lim={work:30000000,width:12};
 function valid(x,S){return S.every(f=>{let k=f.rows.filter(([a,b])=>dot(a,x)===b).length;return f.kind==="forbid"?k!==f.rows.length:f.kind==="require"?k===f.rows.length:k===1})}
 for(let i=0;i<128;i++){let n=1+rnd(7),S=seq(rnd(7)).map(()=>({kind:["forbid","require","onehot"][rnd(3)],rows:seq(rnd(4)).map(()=>[BigInt(rnd(2**n)),rnd(2)])})),Q=seq(n).map(bit),truth=seq(2**n).map(BigInt).filter(x=>valid(x,S));
  let r=solve(n,S,Q,lim);assert(r.status==="EXACT"&&r.base.count===BigInt(truth.length),"count");counts.counts++;
  if(truth.length){assert(truth.includes(r.base.witness),"reopen");counts.witnesses++}
  for(let j=0;j<n;j++)for(let b=0;b<2;b++){let a=truth.filter(x=>dot(Q[j],x)===b),z=r.children[j][b];assert(z.count===BigInt(a.length),"conditional");if(a.length){assert(a.includes(z.witness),"conditional reopen");counts.witnesses++}counts.conditional++}
- let c=solve(n,S,[],lim,2n);assert(c.status==="EXACT"&&c.base.count===BigInt(Math.min(2,truth.length)),"clipped");counts.clip++;counts.cases++;
+ let z=solve(n,S,Q,lim,null,true);assert(z.status==="EXACT"&&z.base.count===r.base.count,"marked root oracle");for(let j=0;j<n;j++)for(let b=0;b<2;b++){assert(z.children[j][b].count===r.children[j][b].count,"marked pin oracle");counts.marked++;}let zc=solve(n,S,Q,lim,2n,true);assert(zc.status==="EXACT"&&zc.base.count===(r.base.count>2n?2n:r.base.count),"marked clip root");for(let j=0;j<n;j++)for(let b=0;b<2;b++){let c=r.children[j][b].count;assert(zc.children[j][b].count===(c>2n?2n:c),"marked clip oracle");counts.markedClip++}let c=solve(n,S,[],lim,2n);assert(c.status==="EXACT"&&c.base.count===BigInt(Math.min(2,truth.length)),"clipped");counts.clip++;counts.cases++;
 }
 // High local rank, small boundary. One forbidden point is not enumerated.
 let big=solve(128,[{kind:"forbid",rows:seq(128).map(j=>[bit(j),0])}], [bit(0),bit(127)],{work:30000000,width:4});assert(big.status==="EXACT"&&big.base.count===bit(128)-1n&&big.children[0][0].count===bit(127)-1n&&big.children[0][1].count===bit(127),"high rank");
@@ -94,7 +139,7 @@ let lift=z=>V.reduce((a,v,j)=>z&bit(j)?a^v:a,u),w=lift(orig.base.witness);
 assert(R.every(a=>pop(a&w)===1),"original lift");
 let direct=[];function covers(mask,x){if(mask===bit(18)-1n){direct.push(x);return}let j=0;while(mask&bit(j))j++;for(let i=0;i<30;i++){let a=original[i].reduce((m,k)=>m|bit(k),0n);if(a&bit(j)&&!(a&mask))covers(mask|a,x|bit(i))}}
 covers(0n,0n);assert(direct.length===7&&direct.includes(w),"independent original");
-let conditional=[];for(let j=0;j<30;j++){let q=solve(V.length,S,[forms[j]],{work:200000000,width:14});assert(q.status==="EXACT","original conditional");let p=Number((u>>BigInt(j))&1n);let a=[q.children[0][p],q.children[0][p^1]];for(let b=0;b<2;b++){assert(a[b].count===BigInt(direct.filter(x=>Number((x>>BigInt(j))&1n)===b).length),"original bit");if(a[b].count)assert(direct.includes(lift(a[b].witness))&&Number((lift(a[b].witness)>>BigInt(j))&1n)===b,"original conditional lift");counts.conditional++}conditional.push({column:j,counts:a.map(z=>String(z.count)),work:q.stats.work})}
-return {status:"PASS",counts,highRank:{count:String(big.base.count),stats:big.stats},original:{chartDimension:V.length,count:String(orig.base.count),witness:String(w),stats:orig.stats,conditional,conditionalWork:conditional.reduce((a,x)=>a+x.work,0)},scope:"exact finite counted normal-boundary join, caps not physical clocks; no unrestricted width claim"};
+let shared=solve(V.length,S,forms,{work:200000000,width:14},null,true);assert(shared.status==='EXACT'&&shared.base.count===7n,'shared original');let conditional=[];for(let j=0;j<30;j++){let q=solve(V.length,S,[forms[j]],{work:200000000,width:14});assert(q.status==="EXACT","original conditional");let p=Number((u>>BigInt(j))&1n);let a=[q.children[0][p],q.children[0][p^1]];assert(shared.children[j][p].count===a[0].count&&shared.children[j][p^1].count===a[1].count,"shared vs pins");counts.marked+=2;for(let b=0;b<2;b++){assert(a[b].count===BigInt(direct.filter(x=>Number((x>>BigInt(j))&1n)===b).length),"original bit");if(a[b].count)assert(direct.includes(lift(a[b].witness))&&Number((lift(a[b].witness)>>BigInt(j))&1n)===b,"original conditional lift");counts.conditional++}conditional.push({column:j,counts:a.map(z=>String(z.count)),work:q.stats.work})}
+return {status:"PASS",counts,highRank:{count:String(big.base.count),stats:big.stats},original:{chartDimension:V.length,count:String(orig.base.count),witness:String(w),stats:orig.stats,conditional,conditionalWork:conditional.reduce((a,x)=>a+x.work,0),sharedStats:shared.stats},scope:"exact finite counted normal-boundary join, caps not physical clocks; no unrestricted width claim"};
 }
 console.log(JSON.stringify(campaign(),null,2));
