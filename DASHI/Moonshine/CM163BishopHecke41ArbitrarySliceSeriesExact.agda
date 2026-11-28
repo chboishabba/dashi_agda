@@ -50,7 +50,7 @@ hY y = G._⊖s_ D.Junit (Coeff.delay 1 (G.constant y))
 gY y = G._⊖s_ (Coeff.expand (Coeff.expand D.Junit)) (Coeff.delay 1681 (G.constant y))
 
 hY0 : ∀ y → R._≃_ (hY y zero) R.1ℝ
-hY0 y = P.≃-trans (P.+-cong D.Junit0 P.≃-refl) (P.+-identityʳ R.1ℝ)
+hY0 y = P.≃-trans (P.+-cong Coeff.J0 P.≃-refl) (P.+-identityʳ R.1ℝ)
 
 module At (inputs : Round11.BishopCutset) where
   module V = Prior.At inputs
@@ -102,7 +102,7 @@ module At (inputs : Round11.BishopCutset) where
             (complexTrans (A.powCCongruent (Rm.tPower p) 41) (complexSym (Rm.infinityQ p))))
           (C.≈C-refl Y)))
 
-    slice : ∀ p → Eval.Eval (t p) (Norm.norm (E.lift h))alized
+    slice : ∀ p → Eval.Eval (t p) series
     slice p = Eval.product (Eval.fromReal (sG p)) (sliceNorm p)
 
     sliceValue : ∀ p → Eval.value (slice p) ≈C A0.sliceNormalized p Y
