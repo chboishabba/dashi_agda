@@ -3,9 +3,11 @@ Uses rational metric inverses and rational enclosures of sqrt(2), not the
 binary64 analytic tangent as a source of certified coefficients.
 """
 import sympy as S
+from functools import lru_cache
 from solar_steelman_history_harmonic_enclosure import Ball,trig,rat,norm,s,ratios
 from solar_steelman_boundary_weld import branch
 
+@lru_cache(maxsize=1)
 def sqrt2():
     # Consecutive decimal rational bounds checked by squaring.
     lo=S.Rational(1414213562373095048801688724209,10**30)
@@ -13,10 +15,12 @@ def sqrt2():
     assert lo**2<2<hi**2
     return Ball((lo+hi)/2,(hi-lo)/2)
 
+@lru_cache(maxsize=128)
 def local_trig(lo,hi,w,degree):
     C0,Z0=trig(lo,lo,w,max(96,degree))
+    C0,Z0=C0.rounded(),Z0.rounded()
     C,Z=trig(0,hi-lo,w,degree)
-    return (C0*C-Z0*Z).truncate(degree),(Z0*C+C0*Z).truncate(degree)
+    return (C0*C-Z0*Z).truncate(degree).rounded(),(Z0*C+C0*Z).truncate(degree).rounded()
 
 def local_ratios(c,lo,hi,degree):
     from solar_steelman_history_exact_bounds import ratio_bounds
@@ -28,8 +32,9 @@ def local_ratios(c,lo,hi,degree):
         v=c[k];w=S.I*k*v
         store=store+2*(S.re(v)*co-S.im(v)*si)
         derivative=derivative+2*(S.re(w)*co-S.im(w)*si)
-    inv=store.inverse(lower,4).truncate(degree)
-    return inv,(derivative*inv).truncate(degree)
+    store,derivative=store.rounded(),derivative.rounded()
+    inv=store.inverse(lower,4).truncate(degree).rounded()
+    return inv,(derivative*inv).truncate(degree).rounded()
 
 def wave(pair,lo,hi,degree,derivative=0):
     C1,Z1=local_trig(lo,hi,1,degree);C2,Z2=local_trig(lo,hi,2,degree)
@@ -38,7 +43,7 @@ def wave(pair,lo,hi,degree,derivative=0):
     for i in range(len(a)):
         v=S.expand((1+S.I)*(a[i]+S.I*b[i])*S.I**derivative)
         u=S.expand((c[i]+S.I*d[i])*(2*S.I)**derivative)
-        out.append((S.re(v)*C1-S.im(v)*Z1+sqrt2()*(S.re(u)*C2-S.im(u)*Z2)).truncate(degree))
+        out.append((S.re(v)*C1-S.im(v)*Z1+sqrt2()*(S.re(u)*C2-S.im(u)*Z2)).truncate(degree).rounded())
     return out
 
 class Sparse:
@@ -50,7 +55,7 @@ class Sparse:
             return
         if not isinstance(v,Ball):v=Ball(v)
         if v.p==0 and v.e==0:return
-        self.data[i,j]=(self.data.get((i,j),Ball(0))+v).truncate(self.degree)
+        self.data[i,j]=(self.data.get((i,j),Ball(0))+v).truncate(self.degree).rounded()
     def block(self,i,j,M,scale=1):
         for r in range(M.rows):
             for c in range(M.cols):
@@ -161,7 +166,7 @@ def parity(m,a,delay,lo,hi,degree=8):
 def fixture():
     lo,hi=S.Rational(0),S.Rational(1,10)
     x=Sparse(2,2,4);x.add(0,0,Ball(s, S.Rational(1,10)));x.add(0,1,2)
-    P,e=x.export();assert P[0,0]==s and P[0,1]==2 and e==S.Rational(1,10)
+    P,e=x.export();assert P[0,0]==s and P[0,1]==2 and S.Rational(1,10)<=e<S.Rational(1,10)+S.Rational(1,2**64)
     c,z=local_trig(lo,hi,2,4)
     assert c.p.subs(s,0)==1 and z.p.subs(s,0)==0
     print('PASS sparse matrix enclosure fixture')
