@@ -106,7 +106,7 @@ def run(a):
     aa=[source_coords(h**-1*g*h,z,A,B) for g in A]
     bb=[source_coords(h**-1*g*h,z,A,B) for g in B]
     phase=1 if s['source_zeta']==2 else 2
-    phi=reference(bb,phase,c and mod['normalization_weight'])
+    phi=reference(bb,phase,mod['normalization_weight'])
     require([x.pack() for x in phi]==f['reference_phi'] and [x.mod7() for x in phi]==mod['reference_phi'],
             'actual exact normalized reference')
     coord,t,ordinary,n=nonzero_trace(phi,aa,phase,deadline)
