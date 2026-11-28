@@ -88,7 +88,7 @@ module At (inputs : Round11.BishopCutset) where
     -- not assumed as an additional invariance premise.
     qCong : ∀ p v → U.tau p ≈C U.tau v → q p ≈C q v
     qCong p v (x , y) = Rm.expCong
-      (P.-‿cong (P.*-congˡ y) , P.*-congˡ x)
+      (P.-‿cong (P.*-cong P.≃-refl y) , P.*-cong P.≃-refl x)
 
     valueCong : ∀ p v → U.tau p ≈C U.tau v → F p ≈C F v
     valueCong p v h =
