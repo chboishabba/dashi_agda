@@ -26,8 +26,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 import Data.Nat.Properties as NP
-open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
+open import Data.Nat.Base using (_≤_; NonZero)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst; subst₂)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_)
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as FractionOrder
@@ -75,21 +75,42 @@ slackBelowPowerFour n =
 
 -- This is the positive remainder representation of B_n.
 -- It never requires subtracting (3n+1) from 4^n.
-positiveBudget : (n : Nat) → .{{_ : Data.Nat.Base.NonZero (9 * powerFour n)}} → ℚᵘ
+positiveBudget : (n : Nat) → .{{_ : NonZero (9 * powerFour n)}} → ℚᵘ
 positiveBudget n = (+ (8 * slack n) / (9 * powerFour n))
 
--- Representation-level order proof from positive Nat cross-products.
--- The denominator 9*powerFour n is strictly positive by powerFourPositive.
+-- The integer cleared-denominator inequality uses only positivity
+-- of the *existing* slack and the commutative Nat semiring solver.
+positiveCrossOrder : (n : Nat) →
+  (8 * slack n) * 9 ≤ 8 * (9 * powerFour n)
+positiveCrossOrder n =
+  let
+    raw :
+      (slack n * 8) * 9 ≤ (powerFour n * 8) * 9
+    raw =
+      NP.*-mono-≤
+        (NP.*-mono-≤ (slackBelowPowerFour n) NP.≤-refl)
+        NP.≤-refl
+    leftReorder :
+      ((slack n * 8) * 9) ≡ ((8 * slack n) * 9)
+    leftReorder = solve 1
+      (λ s → (s :* con 8) :* con 9
+        := (con 8 :* s) :* con 9)
+      refl (slack n)
+    rightReorder :
+      ((powerFour n * 8) * 9) ≡ (8 * (9 * powerFour n))
+    rightReorder = solve 1
+      (λ p → (p :* con 8) :* con 9
+        := con 8 :* (con 9 :* p))
+      refl (powerFour n)
+  in subst₂ _≤_ leftReorder rightReorder raw
+
+-- Representation-level order from the existing constructive Nat fraction
+-- bridge; the positive denominator is an explicit original Nat witness.
 positiveBudgetBelowEightNinths :
-  (n : Nat) → .{{_ : Data.Nat.Base.NonZero (9 * powerFour n)}} →
+  (n : Nat) → .{{_ : NonZero (9 * powerFour n)}} →
   Q._≤_ (positiveBudget n) (+ 8 / 9)
 positiveBudgetBelowEightNinths n =
-  FractionOrder.natFractionLe
-    (NP.*-mono-≤
-      (NP.*-mono-≤
-        (slackBelowPowerFour n)
-        NP.≤-refl)
-      NP.≤-refl)
+  FractionOrder.natFractionLe (positiveCrossOrder n)
 
 -- Rational recurrence: positiveBudget(n+1) = positiveBudget(n)
 --    + 2*n / 4^n.
