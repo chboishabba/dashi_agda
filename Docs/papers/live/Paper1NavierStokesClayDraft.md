@@ -10,6 +10,13 @@ Status: live analytic manuscript draft; conditional; non-promoting
 
 
 
+
+## Current proof state — 28 November 2026, Section 15
+
+The whole-space A route now has the actual signed advective involution on Cartesian frequencies, transported through Lebesgue translation/reflection and Fubini (Lean #123, `7b924eacace0`), conditional on integrability of the two actual weighted folds. For both A and B, the quarter-weight difference has the exact physical radial numerator |p|²+2p·q and division-free zero seam (`922c41261367`). The time-uniform signed critical bound, localization and physical PDE continuation remain open. The local Gaussian-polynomial Fourier fixture has nonzero exact normalized signed transfer, not a nonlinear trajectory.
+
+The forced C/D direct source spines now consume the existing canonical Fefferman transport and require its terminal fresh replay (`0895759c0657`, `82cf5183f679`). Native execution is still unavailable. Rechecking the unforced original pinned and current main README confirms that the physical certificate and external rigorous interval verifier are not yet in the source; prior conditional coercivity consumers remain. No new unforced profile is asserted. See [Section 15](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Current proof state — 28 November 2026, cross-Clay P0 (Section 14)
 
 The periodic construction now has a source-written joint energy–dissipation inequality on the same modal subsequence (Lean #123, `c778a128d53d`): both positive sums are summable and their combined budget is the original initial energy. The exact weighted nonlinear commutator uses the physical energy involution (p,q) ↦ (−p,p+q), retaining the signed weight difference w(p+q)−w(q) (`80d388848b36`). This is not a uniform bound for the critical signed time integral; the prior counterexamples remain operative. Whole-space localization and measure transport, physical-space limit reconstruction, and critical continuation remain open.
