@@ -111,7 +111,7 @@ def improve_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,atomic_basis_blo
 
 
 def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
-                     atomic_basis_block=False):
+                     atomic_basis_block=False,aggregate_cap=8192):
     """Shared-clock sufficient-observation portfolio. No width or progress oracle.
     Return status, receipt, certified lower bound on the original hard carrier.
     A verified zero endpoint is useful even if its trace refuses; use
@@ -147,7 +147,9 @@ def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
                     t=trace(n,R,Q,caps,x,y,A,flats,atomic_basis_block)
                     if t is not None:return 'IMPROVED',t,lower
         except (ProbeLimit,Exhausted):pass
-        if canon(Q+tuple((r,1) for r in R))!=Q:return 'UNKNOWN',None,lower
+        if canon(Q+tuple((r,1) for r in R))!=Q:
+            from check_pnp_aggregate_excess_demand import pair_or_aggregate_trace
+            return pair_or_aggregate_trace(n,R,Q,caps,x,B,flats,atomic_basis_block,lower,aggregate_cap)
         # Zero target permits arbitrary compensating changes. Additional
         # demands enforce rowwise nonincreasing excess with one strict repair.
         ceiling=tuple(max(a,c) for a,c in zip(w,caps))
@@ -176,7 +178,8 @@ def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
                     except (ProbeLimit,Exhausted,RecursionError):continue
             except (ProbeLimit,Exhausted,RecursionError):continue
     except (ProbeLimit,Exhausted,RecursionError):pass
-    return 'UNKNOWN',None,lower
+    from check_pnp_aggregate_excess_demand import pair_or_aggregate_trace
+    return pair_or_aggregate_trace(n,R,Q,caps,x,B,flats,atomic_basis_block,lower,aggregate_cap)
 
 
 def realize_ordered_trace(n,receipt,bridge,primes,B):
