@@ -75,7 +75,7 @@ def rational_restoration_exclusion(field,center_error,parameter_error,atol):
 
 def bound_layout(material,cfg,ids,budget,max_boxes=8):
     from solar_spherical_cycle import cycle,geometry
-    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'])
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
     ids=np.asarray(ids,int); assert len(ids)>0 and len(set(ids))==len(ids)
     assert np.all((ids>=0)&(ids<ne)) and budget>=0 and max_boxes>=1
     dt=cfg['period_s']/len(cfg['incident_sqrt_W'])
