@@ -1539,3 +1539,190 @@ BR117 actual AN witness has spatial H_01=0, M_sp,01!=0 at the time-symmetric zer
 Carry BR120/121 into the original moving BR18/16 with the actual material source. BR22's unrestricted separated positive energy obstruction remains; do not relabel the chart as a coercivity proof. Derive full curved linearized Gauss/Weyl source factor on the constrained physical quotient, including the lower-order terms BR123 omits. In parallel solve P_g vector transmission with the BR121 normal jump and continuous trace, paying variable graph and source regularity at H² generator order; prove invertible chart map and selected higher corners on original BN/BQ. Use the commutator for pure gauge, not for unconstrained physical perturbations. W2/3 nonzero variable coupled estimate, W4b Weyl preservation, W5 weighted exterior, W6 reduced existence, W7 native/physical acceptance remain open. W4a conditional BR98 remains unchanged.
 
 Local SymPy 1.14.0 four stages exit zero (90s per case, no CI); exact executed Git blob bb58249213fb46e9b5d7e31ac9b6aebac413ef20. Receipt in Artifacts/hopf369/br120_123_local_sympy_receipt_20261128.txt. Native expressions written, kernel unrun. No nonlinear PDE promotion.
+
+
+## 16. BR124–127 — full Gauss shear source, Weyl inverse and normal transport
+
+Reopened actual BR90 Ricci-defect jump, BR27/29 positive 35D
+Weyl carrier, BR53 zero-speed factorization, BR57 normal
+electric primitive/holonomy, BR117 actual nonzero shear and
+BR123 principal-only negative control. Classical Gauss,
+Schouten/Weyl, characteristic linear algebra and Riccati
+transport are prior mathematics; DASHI-specific attachment
+is the original F signed-source inverse and use of the
+actual BR29 carrier. No duplicate spatial constraint solve.
+
+### BR124 — full curved scalar Gauss supplies the wall contraction
+
+Write D=Ric+4g (actual Ricci defect), M=mean K, A_M=h^-1 M,
+tr_h M=0 and [K]=jh. On each leaf the scalar Gauss equation
+is R_h=-12+tr_h D_tan-D_nn+tau²-tr(A²), A=h^-1 K.
+Taking the wall average, tau±=±2j, gives exactly
+ R_h=-12+3j²-tr(A_M²)+d_G,
+ d_G=mean(tr_h D_tan-D_nn).
+The signed trace-reversed normal constraint, not just a
+principal Codazzi symbol, is required. Its jump also gives
+[D_nn]=tr_h[D_tan] since tr_h M=0.
+For an arbitrary material metric variation H and mean shape
+variation N, delta A_M=h^-1(N-H A_M), including the inverse
+metric variation. Hence
+ -2 tr(A_M delta A_M)=delta R_h-6j delta j-delta d_G.
+For fixed tension delta j=0. This is the precise contraction
+that BR123 omitted, not a general vanishing of shear.
+The intrinsic scalar variation is
+ delta R_h=-<Ric_h,H>+D^a D^b H_ab-Box_h tr_h H.
+Thus trading the mean shape contraction for Gauss alone
+exchanges it for two tangent metric derivatives. No gain in
+regularity is inferred unless an actual curvature variable
+pays that term. The identity is at the wall, not a bulk
+extension of the mean condition to every leaf. BR124 checks
+the exact signed shape algebra and inverse-metric variation;
+it does not independently compute the intrinsic curvature
+of a nonzero evolved metric.
+
+### BR125 — full BR90 Weyl jump factors through a single effective shape
+
+At a matched wall with constant j, full Gauss and Codazzi
+give [D_na]=0 and [D_nn]=tr_h[D_tan]+6j tr_h M.
+Set B=[D_tan], tf_h X=X-h tr_h X/4. The exact jump carrier
+from BR90 is
+ M_eff=tf_h M+tf_h B/(3j),  j!=0,
+ [W_abcd]=-j (h wedge M_eff)_abcd,
+ [W_nabc]=0,
+ [W_nanb]=2j (M_eff)_ab.
+Derivation: subtract the full 5D Schouten jump
+([D]-g tr_g[D]/8)/3 from the Riemann jump given by Gauss and
+Ricci contraction. The pure trace of M cancels; the B trace
+also cancels. All 55 packed symmetric bivector coordinates,
+including algebraic Bianchi and tracefree constraints in
+the BR29 carrier, are retained. Direct local algebra checks
+every tangential component and all 16 electric components;
+the original jump carrier factors through the SAME nine
+shape coordinates. Rank of mean map 9; combined mean and
+Ricci jump map still rank 9. In particular the former
+BR90 rank-nine Ricci contribution does not open an
+independent second nine-dimensional Weyl channel.
+
+For F (tr_h M=0), exact inverse with the defect retained:
+ M=[W_nanb]/(2j)-tf_h B/(3j).
+No tangential frequency division. On an actual vacuum
+development B=0; then M is determined by the electric
+Weyl jump. In a reduced development do NOT set B=0 unless
+BR98 is established on that same solution. The local
+masking control M=diag(0,1,-1,0), B=-3j M gives identically
+zero entire Weyl jump despite nonzero mean shape. It is an
+algebraic Ricci-defect witness, not a constructed metric
+solution. Thus an independent projected Weyl carrier cannot
+certify the gauge subsidiary or the actual geometric shape.
+
+For material variations use the same transported orthonormal
+frame on both sides; include the frame variation in delta
+electric and delta B. In a fixed such frame at fixed j,
+ delta M_eff=delta[W_nanb]/(2j).
+The reconstructed delta M requires subtracting the
+variation of tf_h B/(3j) (including h variation if using
+coordinate components); the mixed shape uses delta h too.
+Consequently a curvature trace estimate in positive component
+norm controls the wall shear contraction without explicitly
+taking two extra tangent metric derivatives. This is an
+algebraic readout, not a proof of that trace estimate.
+
+### BR126 — recover all nine shapes from active AND zero-speed Weyl traces
+
+Independently reconstruct the exact BR27/29 packed carrier:
+55 symmetric bivector coordinates, algebraic Bianchi and
+Ricci trace constraints, 35D nullspace basis, positive Gram
+G=X^T X and projected normal Maxwell matrix A_n.
+Use the physical scaled jump J=j J_BR29 restricted to the
+same tracefree wall basis (all nine independent coordinates).
+P0=I-A_n(5 A_n-4 A_n³), rank 9, P0 A_n=0.
+Exact ranks:
+ rank J=9,
+ rank A_n J=8,
+ rank P0 J=6,
+ rank stacked(A_n J,P0 J)=9.
+The active normal map misses exactly the tracefree isotropic
+direction diag(3,1,1,1); the zero-speed projection detects
+it. With L=5 A_n-4 A_n³ and B_J=(J^T G J)^-1 J^T G,
+ J=L A_n J+P0 J,
+ m_eff=B_J(L a+z), a=A_n[W], z=P0[W].
+Both directions verified as exact matrices in original
+basis. At j=-6/5, maximum absolute row sums of B_J L and
+B_J are 5/3 and 5/12 respectively. Thus in the specific
+packed coordinate infinity norms,
+ ||m_eff||_inf <= (5/3)||a||_inf+(5/12)||z||_inf.
+These are coefficient norms, not a boundary trace/coercive
+energy constant. Transporting the physical frame changes
+coordinate norms and introduces BR40/53 connection
+commutators. P0 jump trace must be obtained from actual
+constraint-compatible evolution and compatible initial
+data; it is not a free input to be deleted because it has
+zero normal speed. BR53's source factor and BR91's nonzero
+projected Cotton obstruction still apply.
+
+### BR127 — normal extension beyond BR57's scalar warp
+
+In a regular Gaussian normal collar with proper normal r
+and h(r), K=h_r/2, A=h^-1 K, R_e=h^-1 R_{n a n b},
+the full normal Riccati identity is
+ A_r+A²=-R_e.
+At fixed Gaussian coordinate its linearization is
+ B_r+A B+B A=-E, B=delta A, E=delta R_e
+(including inverse-metric variation in E). No assumption
+of commuting shape and derivative. Let U_r=U A and
+V_r=A V, U(0)=V(0)=I. Exact inverse
+ B(r)=U(r)^-1 (B(0)-integral_0^r U E V) V(r)^-1.
+For any submultiplicative norm and bounded A along a finite
+normal segment, elementary linear ODE theory gives
+ ||B(r)|| <= exp(2 integral_0^r ||A||)
+       (||B(0)||+integral_0^r ||E||).
+This follows directly by Gronwall on the B equation; use
+positive component norms not signed Lorentz contractions.
+Boundary B(0) may be supplied by BR125's electric jump plus
+the actual defect and h variation: K±=M±j h/2 implies
+A±=A_M±j I/2, so delta A±=delta A_M for fixed j.
+Alternatively retain an initial/holonomy moment and invert
+with its actual transport kernel; zero electric source
+alone leaves a homogeneous shape solution, as in BR57.
+Local tests check diagonal anisotropic Gaussian Riemann
+formula, exact noncommuting variation/integrating factor,
+and nonzero homogeneous scalar-kernel solution. They do
+not construct normal collars or solve the actual nonzero
+metric. The Gaussian transport identity does not directly
+apply to the fixed harmonic material foliation: the normal
+acceleration terms and coordinate/source transport from
+BR104/118 must be retained and paid. Nor does a local
+Gaussian collar guarantee complete normal coverage,
+uniform AdS exterior estimates or absence of focal points.
+
+### Max-cut consequences and execution
+
+The full curved wall Gauss contraction and Weyl jump
+inverse now have concrete producers; do not repeat a
+principal shear cancellation search. For the remaining
+nonzero curved metric W2/W3 estimate:
+1. Control the actual constrained BR29 curvature trace,
+   including P0 zero-speed part, using BR53 factorization
+   plus actual geometric Bianchi propagation (W4b).
+   Control Ricci defect using same-solution BR98 (W4a);
+   off-shell source estimates retain the masking term.
+2. Transport the resulting wall shape into the collar via
+   BR127/57 and the actual material acceleration terms;
+   retain chart and normal holonomy, with W5 exterior
+   and weighted Hodge quotient still to pay.
+3. Derive coupled curvature-to-metric energy with actual
+   BR120/121 material BIDI and generator P_g, pay H²
+   generator transmission and higher-order corners.
+   The full BR106 second-jet feedback is NOT closed by
+   a wall shape readout. No claim of an independent
+   curvature solution equaling geometric Weyl until W4b.
+4. Actual nonlinear reduced construction W6 and native/
+   physical acceptance W7 remain open. Do not infer
+   physical evolution from local algebra.
+
+Local SymPy 1.14.0 four bounded stages exit zero, exact Git
+blob 0eaff8e1df44fa73b828503d0cbba328ec9598b0.
+Native source expressions and manuscript qualification
+updated. Kernel unrun, no CI. No new master/other PR
+full reconciliation in this tranche; the earlier 42
+behind comparison remains the last audited base count.

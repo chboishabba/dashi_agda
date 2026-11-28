@@ -3828,3 +3828,38 @@ module At {r : Level} (F : C.RealField r)
   -- Jet expressions only: arbitrary h/source inverse requires the
   -- geometric hypotheses of BR120; a normally hyperbolic generator
   -- inverse and physical constrained curvature estimate remain open.
+
+
+  ------------------------------------------------------------------------
+  -- BR124–127: Gauss source, effective Weyl shape and Riccati transport.
+  -- These are signed Lorentz contractions, not positive-energy norms.
+  ------------------------------------------------------------------------
+  originalFGaussMeanScalar : S → S → S → S
+  originalFGaussMeanScalar j shapeSquare gaussDefect =
+    neg (three * four) + three * j * j - shapeSquare + gaussDefect
+
+  originalFGaussShearVariation : S → S → S → S → S
+  originalFGaussShearVariation j deltaJ deltaScalar deltaDefect =
+    deltaScalar - (three * two) * j * deltaJ - deltaDefect
+
+  -- inverseJ must be an actual reciprocal of nonzero tension.
+  originalFEffectiveMeanShape : S → Tensor → Tensor → Tensor
+  originalFEffectiveMeanShape inverseJ meanTF defectTF =
+    addT meanTF (mulT (third * inverseJ) defectTF)
+
+  originalFWeylElectricJump : S → Tensor → Tensor
+  originalFWeylElectricJump j effectiveShape =
+    mulT (two * j) effectiveShape
+
+  originalFWeylMeanInverse : S → Tensor → Tensor → Tensor
+  originalFWeylMeanInverse inverseJ electricJump defectTF =
+    subT (mulT (half * inverseJ) electricJump)
+         (mulT (third * inverseJ) defectTF)
+
+  originalFRiccatiLinearSource : S → S → S → S
+  originalFRiccatiLinearSource electric leftShape rightShape =
+    neg electric - leftShape - rightShape
+
+  -- BR126 combines active AND zero-speed characteristic observations.
+  -- The actual analytic trace/constraint propagation, normal chart
+  -- regularity, and variable coupled curvature energy remain separate.
