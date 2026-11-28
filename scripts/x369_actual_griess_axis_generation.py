@@ -97,15 +97,16 @@ def short_mean(index):
 
 def symmetric_pair(i,j):
     from mmgroup import MMSpace
-    x=MMSpace.index_to_linear('B',i,j);y=MMSpace.index_to_linear('C',i,j)
+    u,v=(i,j) if i>j else (j,i)
+    x=MMSpace.index_to_linear('B',u,v);y=MMSpace.index_to_linear('C',u,v)
     _,_,_,a=short_pair(x);_,_,_,b=short_pair(y)
-    k=MMSpace.index_to_linear('A',i,j)
+    k=MMSpace.index_to_linear('A',u,v)
     di=MMSpace.index_to_linear('A',i,i);dj=MMSpace.index_to_linear('A',j,j)
     require(a.get(di)==a.get(dj)==b.get(di)==b.get(dj)==1 and
             a.get(k) in (F(-1),F(1)) and b.get(k)==-a[k] and
             set(a)==set(b)=={di,dj,k},'actual two-point short tensor geometry')
-    t,u=short_mean(x),short_mean(y)
-    return plus(scale(F(1,2),t),scale(F(1,2),u)),plus(scale(F(1,2)/a[k],t),scale(F(-1,2)/a[k],u))
+    t,m=short_mean(x),short_mean(y)
+    return plus(scale(F(1,2),t),scale(F(1,2),m)),plus(scale(F(1,2)/a[k],t),scale(F(-1,2)/a[k],m))
 
 
 def basis_terms(index):
