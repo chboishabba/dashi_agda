@@ -29,7 +29,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
    oneNonnegative; mulOneʳ; mulMonotoneNonnegative; ≤ℝ-refl)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
-import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceCoreExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Wilson
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
