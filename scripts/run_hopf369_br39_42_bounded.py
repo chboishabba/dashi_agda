@@ -283,6 +283,8 @@ PARTS["terminal"] += [
   ("BR310.sbp9","check_hopf369_br310_sbp_source_boundary.py",("--n","9")),
 ]
 
+PARTS["terminal"] += [("BR311.maxwell7","check_hopf369_br311_maxwell_sbp_sat.py",("--n","7")),("BR311.maxwell9","check_hopf369_br311_maxwell_sbp_sat.py",("--n","9"))]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
