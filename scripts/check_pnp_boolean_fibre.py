@@ -6,14 +6,7 @@ from itertools import product
 from math import prod
 
 
-class Refusal(Exception):pass
-class Budget:
-    def __init__(self,cap):
-        if cap<0:raise ValueError('cap')
-        self.left=cap
-    def pay(self,k):
-        if k>self.left:raise Refusal()
-        self.left-=k
+from check_pnp_source_derived_cover import Reservation as Budget, Refused as Refusal
 
 
 def chart(A,b,n,B):
