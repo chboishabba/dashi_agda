@@ -1081,3 +1081,49 @@ module At {r : Level} (F : C.RealField r)
   -- estimate requires positivity/control of the remaining trace and
   -- normal energy work, and compatible differentiability of the source
   -- background. The indefinite Israel Hessian is deliberately retained.
+
+  ------------------------------------------------------------------------
+  -- BR40d: actual signed Israel contribution to variable BR4 normal work.
+  -- For a common tangential velocity w_ab the normal-principal flux is
+  -- <w,[H_x]>_eta. The equation J=2[K]-j(H+ +H-) gives
+  -- [H_x]=J+q⊗[beta]+[beta]⊗q+j(l+ +l-)eta.
+  -- This is NOT positive: retain trace and longitudinal cross terms.
+  ------------------------------------------------------------------------
+
+  wallPair : (Wall → Wall → S) → (Wall → Wall → S) → S
+  wallPair a b = sum4 (λ i → sum4 (λ k →
+    sign i * sign k * a i k * b i k))
+
+  normalTensorJump : Tensor → Tensor → Wall → Wall → S
+  normalTensorJump px mx a b = H px a b - H mx a b
+
+  physicalNormalWork : (Wall → Wall → S) → Tensor → Tensor → S
+  physicalNormalWork velocity px mx =
+    wallPair velocity (normalTensorJump px mx)
+
+  israelWallWork : S → Vec → (Wall → Wall → S) →
+    Tensor → Tensor → Tensor → Tensor → S
+  israelWallWork j q velocity p px m mx =
+    wallPair velocity (israel j q p px m mx)
+
+  longitudinalWallWork : Vec → (Wall → Wall → S) →
+    Tensor → Tensor → S
+  longitudinalWallWork q velocity p m =
+    wallPair velocity (λ a b →
+      q a * betaJump p m b + betaJump p m a * q b)
+
+  scaleWallWork : S → (Wall → Wall → S) → Tensor → Tensor → S
+  scaleWallWork j velocity p m =
+    j * (scale p + scale m) * trace4 velocity
+
+  -- The residual is zero under the BR34 tensor identities and ordinary
+  -- complex ring laws; keep it explicit until kernel-checked. In
+  -- particular the negative trace/shear Israel Hessian prevents the
+  -- energy from becoming positive by merely discarding cross terms.
+  signedWallWorkResidual : S → Vec → (Wall → Wall → S) →
+    Tensor → Tensor → Tensor → Tensor → S
+  signedWallWorkResidual j q velocity p px m mx =
+    physicalNormalWork velocity px mx
+      - israelWallWork j q velocity p px m mx
+      - longitudinalWallWork q velocity p m
+      - scaleWallWork j velocity p m
