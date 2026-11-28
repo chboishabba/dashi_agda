@@ -6,10 +6,21 @@ from check_pnp_intrinsic_patch import Image
 from check_pnp_signed_component_histogram import rref
 
 
+def extend_rref(B,a):
+    """One exact insertion into a reduced row basis, O(r*rank) work."""
+    for b in B:
+        j=next(i for i,v in enumerate(b) if v);c=a[j]
+        if c:a=tuple((x-c*y)%3 for x,y in zip(a,b))
+    if not any(a):return B
+    j=next(i for i,v in enumerate(a) if v);a=tuple(a[j]*x%3 for x in a)
+    C=tuple(tuple((x-b[j]*y)%3 for x,y in zip(b,a)) if b[j] else b for b in B)+(a,)
+    return tuple(sorted(C,key=lambda b:next(i for i,v in enumerate(b) if v)))
+
+
 def trellis(F,cols,target,offset,R,cap):
     R=tuple(R);target=tuple(a%3 for a in target);m=len(target);n=len(R);N=len(cols)
     if cap<0 or len(set(R))!=n or any(not 0<=i<N for i in R) or any(len(c)!=m+1 for c in cols) or any(abs(l)-1 not in R for c in F for l in c):raise ValueError('source')
-    stats=dict(work=0,peak=0,probes=0,rank=0,crossing=0)
+    stats=dict(work=0,peak=0,probes=0,rank=0,crossing=0,clause_crossing=0)
     def pay(k):
         if stats['work']+k>cap:raise OverflowError('cap')
         stats['work']+=k
@@ -20,15 +31,15 @@ def trellis(F,cols,target,offset,R,cap):
         pay(scan)
         if () in F:return empty()
         rows=tuple(tuple(c[j] for c in cols) for j in range(m))
-        pay((m+1)**2*(n+1)**2)
+        pay(16*(m+1)*(n+1)*(min(m,n)+1))
         I=Image(rows,R);t=I.encode(target);r=len(I.piv);stats['rank']=r
         if t is None:return empty()
         A=tuple(I.key(cols[i][:-1]) for i in R)
         # Row bases of the remaining image, built incrementally. The
         # redundant target coordinates are removed only after membership.
         def extend(B,a):
-            pay((r+1)*(len(B)+1)**2*4)
-            return tuple(row[:-1] for row in rref(tuple(b+(0,) for b in B+(a,)),r)[0])
+            pay(12*(r+1)*(len(B)+1))
+            return extend_rref(B,a)
         suffix=[()]*(n+1)
         for i in range(n-1,-1,-1):suffix[i]=extend(suffix[i+1],A[i])
         piv=[tuple(next(j for j,v in enumerate(b) if v) for b in B) for B in suffix]
@@ -40,10 +51,11 @@ def trellis(F,cols,target,offset,R,cap):
         future=[0]*(n+1)
         for i in range(n-1,-1,-1):future[i]=future[i+1]|masks[i][0]|masks[i][1]
         H=tuple(int(d==offset%3) for d in range(3));P=tuple(0 if h else None for h in H)
-        states={(t,(1<<len(F))-1):(H,P)};prefix=()
+        states={(t,(1<<len(F))-1):(H,P)};prefix=();touched=0
         for i,(a,ms) in enumerate(zip(A,masks)):
             prefix=extend(prefix,a)
-            stats['crossing']=max(stats['crossing'],len(prefix)+len(suffix[i+1])-r)
+            d=len(prefix)+len(suffix[i+1])-r;stats['crossing']=max(stats['crossing'],d)
+            touched|=ms[0]|ms[1];w=(touched&future[i+1]).bit_count();stats['clause_crossing']=max(stats['clause_crossing'],w)
             pay(2*len(states)*(1+r*(len(suffix[i+1])+1)+len(F)+n))
             nxt={}
             for (y,u),(H,P) in states.items():
@@ -57,6 +69,7 @@ def trellis(F,cols,target,offset,R,cap):
                     np=tuple(p[d] if p[d] is not None else None if P[(d-shift)%3] is None else P[(d-shift)%3]|(b<<i) for d in range(3))
                     nxt[z,v]=nh,np
             states=nxt;stats['peak']=max(stats['peak'],len(states))
+            assert len(states)<=3**d*2**w
             if not states:return empty()
         H,P=states.get(((0,)*r,0),((0,0,0),(None,None,None)))
         return done(H,tuple(None if p is None else tuple((p>>i)&1 for i in range(n)) for p in P))
