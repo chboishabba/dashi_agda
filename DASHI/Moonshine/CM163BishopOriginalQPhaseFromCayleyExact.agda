@@ -2,7 +2,7 @@ module DASHI.Moonshine.CM163BishopOriginalQPhaseFromCayleyExact where
 
 -- SOURCE-WRITTEN / NOT NATIVE-CHECKED.
 -- Actual Bishop q phase e_B^(2*pi_B*i*tau) =
---       e_B^(-pi_B*sqrt163+i*pi_B) = -e_B^(-pi_B*sqrt163).
+--       e_B^(-pi_B*sqrt163-i*pi_B) = -e_B^(-pi_B*sqrt163).
 -- Conditional ONLY on K05's original exp/atan Cayley source evaluation
 -- and the already-owned imaginary exponential product.
 -- The real radius and selected negative-real q are existing originals;
@@ -23,6 +23,7 @@ import RealProperties as P
 import DASHI.Analysis.BishopSetoidComplexExact as Setoid
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Series
 import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
+import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as Parity
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as K05
 import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as Cayley
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
@@ -79,7 +80,10 @@ module At (inputs : Round11.BishopCutset)
       ≃ (R.- CM.radius)
   realPhase =
     P.≃-trans
-      (P.*-congˡ (proj₂ endpoints))
+      (P.*-congˡ (P.≃-trans
+        (Parity.bishopCosNeg (Round11.round11ParityInputs inputs)
+          (R.- Machin.bishopMachinPi))
+        (proj₂ endpoints)))
       (P.≃-trans
         (let open P.ℝ-Solver in
           solve 1 (λ a → a ⊗ (⊝ Κ (+ 1 / 1)) ⊜ ⊝ a)
@@ -92,11 +96,17 @@ module At (inputs : Round11.BishopCutset)
       ≃ R.0ℝ
   imaginaryPhase =
     P.≃-trans
-      (P.*-congˡ (proj₁ endpoints))
-      (P.*-zeroʳ (Exp.bishopExp (R.- Scale.fullDiskScale)))
+      (P.*-congˡ
+        (P.≃-trans
+          (Parity.bishopSinNeg (Round11.round11ParityInputs inputs)
+            Machin.bishopMachinPi)
+          (P.-‿cong (proj₁ endpoints))))
+      (let open P.ℝ-Solver in
+        solve 1 (λ a → a ⊗ (⊝ Κ (+ 0 / 1)) ⊜ Κ (+ 0 / 1))
+          P.≃-refl (Exp.bishopExp (R.- Scale.fullDiskScale)))
 
   -- The original complex exponential at the actual tau has exponent
-  -- -pi_M*sqrt163+i*pi_M. Scale.halfToFull identifies it with
+  -- -pi_M*sqrt163-i*pi_M. Scale.halfToFull identifies it with
   -- 2*pi_M*i*((-1+i sqrt163)/2), without invoking foreign pi.
   originalComplexQ : Setoid.BishopComplex
   originalComplexQ =
