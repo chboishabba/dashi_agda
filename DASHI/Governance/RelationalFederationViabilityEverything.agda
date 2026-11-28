@@ -24,3 +24,7 @@ import DASHI.Governance.RelationalFederationEducationFormationExact
 import DASHI.Education.DigitalESDJointHyperfabricConsumerExact
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapBrownExtensionExact
 import DASHI.JohnAnthonyBrownReceptionAdaptiveEverything
+
+import DASHI.Governance.RelationalFederationScopedViabilityExact
+import DASHI.Governance.ITIRPluralViabilityTSFVExact
+import DASHI.Governance.CybersynPhysicalFinanceCutExact
