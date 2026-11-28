@@ -298,7 +298,7 @@
       "source_equation": "m_prime=4pi*r^2*rho; nu_prime=(m+4pi*r^3*p_r)/(r^2*(1-2m/r))",
       "physical_paid": false,
       "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
-      "checker_git_blob_sha1": "c4183ce3b49d36c598f4e0313197fdd2daafe473"
+      "checker_git_blob_sha1": "5f577ec1fc071edc37b1195c91a49ad09954d755"
     },
     "reciprocal_controller_ward": {
       "lanes": [
