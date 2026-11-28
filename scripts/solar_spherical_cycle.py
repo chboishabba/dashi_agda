@@ -8,6 +8,8 @@ from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_spherical_whitney import shell_mesh
 from solar_physical_causal import reaction,MASS,CHARGE
 from solar_support_transition import support_transition
+from solar_restoration_geometry import thermal_return_geometry,analytic_support_return_obstruction
+from solar_population_amplitude_event import right_reaction_support
 from solar_earth_collision_tensor import rates
 from solar_physical_cone import timed_step
 
@@ -57,6 +59,7 @@ def cycle(material,cfg):
     def energy():
         return x@x/2+cap@theta+np.einsum('is,i,s->',pop,vol,chem)
     original=(x.copy(),pop.copy(),pool.copy(),theta.copy())
+    analytic_pop_support=pop0>0;analytic_pool_support=pool0>0
     def residual(a,b):
         return [float(np.linalg.norm(u-v)/max(np.linalg.norm(u),np.linalg.norm(v),1e-30)) for u,v in zip(a,b)]
     assert int(cfg['max_cycles'])>=1 and cfg['auxiliary_J']>=0
@@ -88,6 +91,8 @@ def cycle(material,cfg):
             current_L=terminal_L if terminal else L
             before=energy(); costs=np.zeros(5)
             for i in range(n):
+                analytic_pop_support[i],analytic_pool_support[i]=right_reaction_support(
+                    analytic_pop_support[i],analytic_pool_support[i],p[i],0.,q)
                 r,a,pool[i]=reaction(pop[i],pool[i],rows[i]['te']+theta[i],p[i],dt,q)
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
                 if exact_trace:
@@ -145,7 +150,12 @@ def cycle(material,cfg):
     depletion=max(0.,float(initial_energy-energy()))
     corrected_net=campaign_net-depletion-campaign['balance_abs_J']
     assert corrected_net<=campaign['incident_J']+1e-8*max(1.,campaign['incident_J'])
+    thermal_geometry=thermal_return_geometry(heat,dt,cap,cool,iteration+1,tail,atol[3])
+    support_geometry=analytic_support_return_obstruction(pop0>0,analytic_pop_support)
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
+                analytic_return_geometry=dict(thermal=thermal_geometry,population=support_geometry,
+                    exact_original_return_obstructed=thermal_geometry['exact_zero_return_obstructed'] or support_geometry['exact_zero_population_return_obstructed'],
+                    current_strict_gate_is_tolerance_based=True),
                 campaign_net_J=campaign_net,full_original_restored=bool(full_restored),
                 strict_campaign_net_J=corrected_net if full_restored else None,
                 terminal_depletion_J=depletion,
