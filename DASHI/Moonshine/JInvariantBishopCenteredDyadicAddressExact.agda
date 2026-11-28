@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Moonshine.JInvariantBishopCenteredDyadicAddressExact where
 
 -- Donors: DASHI.Core.BinaryBranchOutcomeEnumerationExact and
@@ -282,7 +281,8 @@ integerInjective (true , r) (true , s) e =
       (trans (cong opposite same) (FP.opposite-involutive s)))
 
 signedRoundtrip : ∀ {n} (r : SignedIndex n) → encodeInteger (integerRead r) (readRange r) ≡ r
-signedRoundtrip r = integerInjective _ r (integerRoundtrip (integerRead r) (readRange r))
+signedRoundtrip (false , r) = cong (false ,_) (Karp.reconstructCanonicalFin r)
+signedRoundtrip r@(true , _) = integerInjective _ r (integerRoundtrip (integerRead r) (readRange r))
 
 -- Karp proof independence for positive integer endpoint reconstruction,
 -- plus the negative chart's involutive opposite. No hidden range proof
