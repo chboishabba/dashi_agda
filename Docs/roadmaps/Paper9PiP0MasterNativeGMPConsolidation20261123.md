@@ -2842,3 +2842,6 @@ This is a **whole-proof backsolve**, not solvedness promotion. Current branch PR
 2. Agda smallest imports: `FullIntegerMatrixExact` → `IntegerSpecializationReflectionExact` → `AllIntegerNodesExact` → `MatrixSymmetryExact`; check finite gate reduction in isolated entrypoints, checkpoint if huge.
 3. Agda global analytic/polynomial uniqueness producers independently, then disk-geometry/jet proof cone independently, then combined closure.
 4. Native GMP original same-real and performance acceptance. No GitHub CI use. Keep no generated standalone chat files.
+
+### Isolated G1/G2 native entrypoint
+Commit b90a0a5b adds `CM163BishopHecke41AllIntegerNodesAcceptanceExact.agda` with independent `from-yes` witnesses for originalNewtonCheck, originalColumnCheck, originalSymmetryCheck, originalPacketCheck, and the entire 43-target `nodes?`. Never import this expensive normalization gate into ordinary analytic development; load only in local acceptance cone. This entrypoint is SOURCE-WRITTEN UNEXECUTED and may expose a genuine failed matrix certificate. If so, retain failure and repair the original candidate; do not add a postulate or manually assert gates. Distinguish finite pole removal from `NodeZero` and `FullIdentity`.
