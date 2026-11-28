@@ -48,7 +48,6 @@ def run(m,a):
     print('PASS finite source loses exactly 2*pi per nominal period, no unpowered full source return')
     print('LIMIT ideal effort transduction, source phase controller and abstract upstream feed; no natural-source admission')
 
-
 if __name__=='__main__':
     import argparse,pickle
     p=argparse.ArgumentParser();p.add_argument('--metric',required=True);p.add_argument('--mediator',required=True);a=p.parse_args()
