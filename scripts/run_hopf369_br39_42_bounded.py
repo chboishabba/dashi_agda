@@ -33,8 +33,13 @@ PARTS={
     ("BR43.trace.loss","check_hopf369_br43_two_sided_trace.py",("--sector","loss")),
     ("BR43.charge","check_hopf369_br43_trace_energy_weld.py",()),
     ("BR44.two_level","check_hopf369_br44_two_level_energy.py",()),
+    ("BR45.coefficient_growth","check_hopf369_br45_coefficient_growth.py",()),
+    ("BR45.energy_ledger","check_hopf369_br45_differentiated_br4.py",("--sector","ledger")),
   ],
   "heavy":[
+    *[(f"BR45.metric.{k}","check_hopf369_br45_differentiated_br4.py",("--sector","metric","--component",str(k))) for k in range(15)],
+    *[(f"BR45.gauge.{k}","check_hopf369_br45_differentiated_br4.py",("--sector","gauge","--component",str(k))) for k in range(5)],
+    *[(f"BR46.bianchi.{k}","check_hopf369_br46_bianchi_source_weld.py",("--component",str(k))) for k in range(5)],
     ("BR43.trace.metric","check_hopf369_br43_two_sided_trace.py",("--sector","metric")),
     ("BR43.trace.gauge","check_hopf369_br43_two_sided_trace.py",("--sector","gauge")),
     ("BR40.projector.physical","check_hopf369_br40_variable_projector_transport.py",("--part","physical")),
