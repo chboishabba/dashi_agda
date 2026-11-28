@@ -3438,3 +3438,103 @@ Tests check the algebra/matrix identities; analytical estimates
 and character proof separately derived. No full integrated
 runner, native kernel, CI, exhaustive master reconciliation,
 full PDE solution or empirical calibration.
+
+
+## 24. Controlling correction to BR153 — actual 369 punctured-nine / rank24 / Leech geometry
+
+The user correctly points to the EXISTING 24=3(3²−1)=8×3
+geometry. BR153's actual selected Leech isometry remains a valid
+negative control for that actor, NOT a test of every source-owned
+369 action or of the punctured-nine transport itself.
+
+Master exact owners reopened (source hashes, not kernel receipts):
+- DASHI/Reasoning/LeechPuncturedNineArithmeticExact.agda
+  1b423f0410c8b0d3f59d5bdeb3228e0232e518be:
+  puncturedNineCount, puncturedNineIsFourPairs, one24DChart,
+  threeEightModeWaveLanes, fullLearner.
+- DASHI/Reasoning/LeechPuncturedNineLearningBridgeExact.agda
+  1e021771400ee2bbf7b8d19ea3e357188959410f:
+  WaveBlock24, applyPointAntipode, applyCoefficientSign,
+  dependentCentreBidiAlreadyProved. Actual eight POINT indices
+  separate from non-DC Fourier modes and coefficient sign.
+- DASHI/Reasoning/Leech369TrialecticWaveLearningArchitectureBidiExact.agda
+  38bc4d6f96158d3643efd84dd12ff5546a4b205c:
+  each24BlockHasEightOrderedTriads, primeAlignedHidden,
+  primeAlignedHead, primeAlignedConjugatePairs,
+  c2AndC3CommuteOnTriple, three24BlocksHaveEightT9Charts.
+  Correct source chart is three punctured lanes with centre side
+  state; 24=2*9+6 is a different complete-nine tiling cut.
+- DASHI/Reasoning/LeechE8PriorStrataBidiExact.agda
+  3f6ec5cd1e4a68cc8c4c2534fb27dbb318a1a5d8:
+  threeE8CoordinateBlocksFit24, eightPuncturedNinePoints,
+  e8PriorIsNotPuncturedIndexRole. Rank equality not lattice isometry.
+- DASHI/Foundations/Base369FaceSheetPunctureIncidenceIdentityExact.agda
+  d3ee32f9e2853ded6474d936a0d962d70feb0962:
+  puncturedFaceIsFourDirectionsByTwo, faceSheetIsOnePlusEight,
+  sixFacesTimesNineSheetIs54. Face incidences not distinct points.
+- DASHI/Foundations/Base369Ternary27HypervoxelFabricGeometryExact.agda
+  eabb5876f391abc285d042a789ab4a29fc6b82b0:
+  literal 27-point cube, 54 undirected nonwrapping edges, three
+  interaction/appraisal cube product, fabricRoundTrip,
+  hyperfabricStateCountIs19683. The 24 coefficient chart is not
+  the full 9-coordinate / 19683-state hyperfabric.
+- DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda
+  8d33a9014bc5a57ebcaae6ec7017625e7669dff3:
+  E8 rank8, Leech rank24, twoThreeLocalChartsShare65610:
+  10*3^8=90*3^6=65610. Keep actual F3^8 quadratic source,
+  E8 Euclidean lattice and 6D Lagrangian separate.
+- Docs/LeechLILAPrimePuncturedNineJWaveMaxCut20261101.md
+  559d9962ce30cbeb0c1c14a34a6154e308a5ea04:
+  actual R8 puncture/zero-mean wave rechart, four real Fourier
+  conjugate pairs, retained centre amplitude, C2 sign vs site
+  antipode vs Fourier conjugation, F3² translations regauge centre.
+  Original LILA attribution Anatolii Kornienko, prior mathematics
+  and JMD/DASHI source roles retained.
+- docs/369-27-cube-geometry-modular-carrier-disambiguation-20261024.md
+  dd6684c4a39eea20ffc43b643e4700554b33b575: native cube graph
+  vs cyclic residues and chosen modular actions; actual 48-element
+  cube graph automorphism group and source adjacency distinction.
+- Docs/roadmaps/JMDDASHIThreeCResidualNorthStar20261120.md
+  07c6cc90d8fc7612e360ea388a5ef9a85d77bcaa:
+  common 196830 core, 54 residual, 3B vs 3C restrictions.
+  196830=10*19683, 196884=196830+54; 3B fixes 54 residual
+  states in the selected model while 3C translates them.
+  This is a character-compatible carrier comparison, not a
+  canonical Monster submodule or actual action intertwiner.
+
+Geometry-first distinction: choose P=F3² minus (0,0). Three
+sheet lanes give 27=3*(8+1)=24+3, and free lane cycling on
+C3×P has eight triads with four antipodal pairs of triads
+(C2 acts on P). Retain the three centres in the full carrier.
+For the genuine spatial cube axis-permutation rotation
+R(x,y,z)=(z,x,y), the fixed line instead consists of
+(t,t,t) for t in {-1,0,1}. Its complement has eight free
+C3 orbits, with antipode pairing these into four pairs.
+A marked C3×C2 equivariant set chart exists by choosing four
+orbit representatives and their negatives, and assigning the
+four punctured-plane antipodal direction pairs. It is not
+canonical and need not preserve grid adjacency. In fact the
+sheet-centre puncture (0,0,z) leaves 40 native edges, whereas
+the rotation-fixed diagonal puncture leaves 42. Independent
+local Python enumeration of all 27 sites and 54 native
+edges confirms these counts and orbit pairing. No native
+kernel execution or new continuum theorem.
+
+BR153's selected fixed-free order3 lattice actor has eight
+triads, and is thus equivariantly RECHARTABLE on the free
+24-site C3 set; this fact alone says nothing about the native
+sheet adjacency, point antipode versus lattice coefficient
+inversion, centre reopening or original lattice Gram/cocycle.
+A permutation label change cannot change its trace zero
+into 3B trace54. The actual next weld is select an original
+marked C3 actor from #1545 and the existing 3-local/FLM
+owners; construct BIDI on the source-indexed free triads
+and retained residuals, transport the lattice Gram, gluing,
+signed cocycle and action, compare actual characters and
+mixed vertex operators. Preserve the full 369 hyperfabric
+and source-specific action, not another arbitrary 8+8+8
+partition. If the physical source action does not descend,
+record the exact residual or non-descent. The periodic and
+G3/G4 classical lanes continue independently per section 0.
+This scope audit is targeted master-source inspection, not
+an exhaustive sibling reconciliation or new Monster proof.
