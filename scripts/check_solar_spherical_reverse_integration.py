@@ -39,7 +39,7 @@ def fixture():
         heater_efficiency=.8,auxiliary_J=0.,
         restoration_steps=1,return_rtol=1e-6,
         return_atol=[1e-3,1e-3,1e-3,1e-3],
-        fixed_horizon=True)
+        fixed_horizon=True,retain_history=True)
     dheat=np.zeros((2,n));dheat[:,0]=[.2,-.1]
     dload=np.zeros(ne);dload[0]=.08
     return material,cfg,dheat,dload
@@ -60,7 +60,19 @@ def run():
             vals.append(cycle(material,cc))
         fd=(vals[0]['campaign_net_J']-vals[1]['campaign_net_J'])/(2*eps)
         error=abs(fd-base['dcampaign_net_J'])
-        tests.append(dict(epsilon=eps,work_derivative_error_J=error))
+        states=[]
+        for out in vals:
+            z=np.asarray(out['history'][-1],float);k=ne+nf+9*n
+            states.append((z[:k],z[k:k+3*n].reshape(n,3),z[k+3*n:k+5*n].reshape(n,2),z[k+5*n:]))
+        terminal_errors=[]
+        for k in range(4):
+            d=(states[0][k]-states[1][k])/(2*eps)
+            analytic=np.asarray(base['endpoint_jvp'][k])
+            err=float(np.linalg.norm(d-analytic)/max(1.,np.linalg.norm(analytic)))
+            terminal_errors.append(err)
+            assert err < 1e-4,(k,eps,err)
+        tests.append(dict(epsilon=eps,work_derivative_error_J=error,
+                          terminal_relative_jvp_errors=terminal_errors))
         assert error < 1e-5*max(1.,abs(fd))
     return dict(status='NATIVE_SYNTHETIC_SPHERICAL_JVP_PASS',
                 n_cells=len(cfg['row_keys']),work_jvp=base['dcampaign_net_J'],
