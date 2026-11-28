@@ -1,9 +1,14 @@
 # Paper 9 — Exact CM derivative certificates from modular polynomial slices
 
 **Subtitle:** A constructive derivation and verification of Chudnovsky-type series  
-**Status:** Living working manuscript, revised 25 November 2026. Independent computational mathematics candidate; not submitted, peer reviewed, or kernel certified.  
+**Status:** Living working manuscript, revised 28 November 2026. Independent computational mathematics candidate; not submitted, peer reviewed, or kernel certified.  
 **Primary classification:** math.NT; secondary math.NA, cs.SC.  
 **Source branch:** [PR #1546](https://github.com/chboishabba/dashi_agda/pull/1546), master-native consolidation of historical PR #1529. Audited parent `1f53737635811b6aee827ada5f36612cc9126b11`; Lean derivative companion `094b4f6cc9c9a653783d7ff42621dc91e06c4d89`. Current status below supersedes historical progress entries.
+
+
+## Current proof state — 28 November 2026 (P0)
+
+The degree-41 branch has moved beyond the 26 November finite-geometry ledger. Source-written sparse stride restriction and reconstruction give the reduced real norm recurrence m N_m=Σ_{i=1}^m L_(41i)N_(m−i), N_0=1; the imaginary part vanishes by the original zero-head Euler recurrence. Integer candidate U/J/L/N, bounded residual predicates, original rowEmbed and finite-prefix reflection now bind the normalized column packet, with diagonal/slice residual vanishing through degrees 3362/1722 conditional on concrete finite gates. The actual normalized series evaluation uses all 41 signed finite chart factors plus the infinity factor, with the original q powers; it is not a replacement auxiliary root. [28 November roadmap](https://github.com/chboishabba/dashi_agda/commit/ad6c982d4bdfb881999bdc5cd754d6ddcbb64406) records the repeated local exact arithmetic replay (3363 trace sectors, 3323 normalized discriminant/J pairs, 3363/1723 Euler residuals, 83/43 norm and column coefficients). New native from-yes entrypoint not run. [Uniform cusp bound](https://github.com/chboishabba/dashi_agda/commit/8be7e609c6f69e02b92c69e846a389dfd95adc42) uses absolute convergence at one fixed nonzero original CM reference to bound the SAME shifted coefficient streams on the entire smaller disk including zero, without dividing by the variable phase. Native kernel, actual Hecke identity on full analytic domain, remaining original Ramanujan/CM root and signed-jet attachments and GMP production acceptance remain P0. Classical modular and Chudnovsky identities retain attribution.
 
 ## Abstract
 
