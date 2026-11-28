@@ -25,7 +25,7 @@ LEECH=(
 'actual_leech_neural_action','campaign_progress','constructive_maxcut','e8_three_leech_glue_obstruction',
 'exact_operator_transport','f3_two_seed_maxcut','fixed_phase_gauge_and_dynamic_null',
 'frozen_history_intervention','full_fabric_pants_source_weld','full_native_e8_leech_chart',
-'geometry_training','hyperfabric_scope','hypervoxel_stage13_pants_same_object',
+'geometry_training','gwb_three_view_boundary','hyperfabric_scope','hypervoxel_stage13_pants_same_object',
 'indexed_fibre_acceptance_stage','indexed_source_fibre_audit','leech24_pants_wave_weld',
 'mod3_checkpointed','native_independent_semantic_appraisal','native_reasoning_evidence',
 'native_stage13_evidence_manifest','original_capacity_fibre_reflections',
@@ -106,7 +106,8 @@ def execute(root,key,module,contract,timeout):
     skipped=sum(int(x) for x in re.findall(r'skipped=(\d+)',m[-1])) if m else 0
     expected_failures=sum(int(x) for x in re.findall(r'expected failures=(\d+)',m[-1])) if m else 0
     status=('TIMEOUT' if code is None else 'FAIL' if code!=0 else
-        'PASS' if m and count>skipped+expected_failures else 'HELD_NO_EXECUTED_PASS')
+        'PASS_WITH_DECLARED_SKIPS' if m and count>skipped+expected_failures and (skipped or expected_failures) else
+        'PASS' if m and count>0 and not (skipped or expected_failures) else 'HELD_NO_EXECUTED_PASS')
     v=dict(source=key,module=module,head=contract['head'],test_sha256=contract['modules'][module],
         command=argv,status=status,exit_code=code,reported_tests=count,skipped=skipped,
         expected_failures=expected_failures,seconds=monotonic()-start,
@@ -121,7 +122,7 @@ def main():
         p.add_argument('--'+n,type=Path,required=True)
         p.add_argument('--'+n+'-head',required=True)
         p.add_argument('--'+n+'-python',type=Path,required=True)
-    p.add_argument('--directory',type=Path,required=True);p.add_argument('--max-modules',type=int,default=66)
+    p.add_argument('--directory',type=Path,required=True);p.add_argument('--max-modules',type=int,default=len(DASHI)+len(LEECH))
     p.add_argument('--timeout',type=float,default=90);a=p.parse_args()
     require(0<a.timeout<=90 and a.max_modules>0,'bounded regression scope')
     r=a.directory.resolve();r.mkdir(parents=True,exist_ok=True)
