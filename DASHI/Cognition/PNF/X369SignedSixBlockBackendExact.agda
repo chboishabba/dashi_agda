@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Fin using (Fin)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
+open import Relation.Binary.PropositionalEquality using (sym)
 import DASHI.Cognition.PNF.X369BinaryBlockExecutionExact as Binary
 
 xor : Bool → Bool → Bool
@@ -43,7 +44,7 @@ module SignedSix {Value : Set}
   signCompose false false v = refl
   signCompose false true v = refl
   signCompose true false v = refl
-  signCompose true true v = flipInvolutive v
+  signCompose true true v = sym (flipInvolutive v)
 
   identity : Code
   identity = code (λ i → i) (λ i → false)
