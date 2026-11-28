@@ -2865,3 +2865,117 @@ Committed original exact checker `scripts/check_clay_section37_source_geometry.p
 6. PNP: transform real external-event dependency into unavoidable universal sharing-stable original SAT work / full machine bit ABI, or actual polynomial decision algorithm.
 
 **User workflow maintained:** all artifact sources, regressions and roadmaps in PR commits; no distributed loose files presented. No universal Millennium claim from finite arithmetic, formal theorem declaration alone, or failed/unrun native admissions.
+
+
+## Section 38 — all-Clay original source repair, time-indexed reverse solve, finite Bishop last-B coefficient, and pinned native axiom audits (28 November 2026)
+
+### Ownership and all-artifacts-committed discipline
+
+Intake active PRs: Yang–Mills Agda #1536, NS Lean #123, BSD/Hodge Lean #124, PNP Lean #119, RH Lean #121, and all-Clay canonical Agda #1551. Final inspected source heads before this roadmap update:
+- YM #1536: `1ec49bb0d328903e37d4d40b017e4274233cc400`
+- NS #123: `3bfd9d0a7c036d62d95830c95a6ce413bdaf7cd8`
+- BSD/Hodge #124: `f4bc282cf29d2b5ad80dd7fe0aca8a32c8a442f7` (Section37 symmetric original Mellin and two-lift saturation owners retained)
+- PNP #119: `5eb1b4ca6957a0fd9c00ddd8260abf49d766279e`
+- RH #121: `9a7c2babc209ff159f8424a276818f9706272a10`
+- Canonical rollup #1551 pre-roadmap: `a86647f86ad9806888d6bd52934454c76ad8fc48`.
+
+Every new theorem body, acceptance entrypoint, checker, regression and this roadmap is committed on its relevant owner branch. The user explicitly requires NO uncommitted source as the artifact of record. Unrun native admission is **PENDING_KERNEL**, not a `PASS` receipt; any subsequently generated actual compiler results must be committed before being reported as permanent proof-campaign artifacts.
+
+### YM — all-index omitted original B coefficient mass paid from ORIGINAL CMP109 source
+
+Original `BalabanCMP109BishopRootFreeSeriesExact.agda` already proves actual `bStep n : b_(n+1)<=b_n`, `aStep`, `bNN`, `aNN`, and defines exactly the SAME factorial coefficients used by CMP102. Existing `YMClayCMP102OriginalFactorialSingletonExact` owns the first coefficients b0=1/6 and a0=1/2. These are *not* hypothetical sequence witnesses.
+
+New Agda #1536
+`DASHI/Physics/YangMills/YMClayCMP102OriginalLastBCoefficientCeilingExact.agda`
+commit `bc433058b1ddec608e9e46319fa7cc1c2943454a`;
+acceptance root
+`DASHI/Physics/YangMills/YMClayCMP102Section38LastBCoefficientAcceptanceExact.agda`
+commit `1ec49bb0d328903e37d4d40b017e4274233cc400`.
+The native theorem bodies induct directly over CMP109's original decreasing factorial source, proving for ALL n:
+  b_n<=b0=1/6;
+  a_n<=a0=1/2;
+  2*b_n<=1/3 in original Bishop real order.
+No infinite geometric series, no new coefficient family, no factor guessed from finite runs.
+This gives the original omitted odd B endpoint a strictly better direct coefficient ceiling than the global B total mass 10/57: the future native original
+  |2 X b_n X^n| <= quarter^(n+1)
+needs only the already-known true sign-power factor
+  |X|^(n+1)<=quarter^(n+1)
+and 2b_n<=1/3. The actual signed Bishop absolute-power transport and native checker are **NOT YET PAID**. Preserve original c=1 and all endpoint cases, no synthetic leading-degree cancellation. This scalar work does not prove 4D interacting SU(N) Yang–Mills Wilson/CMP116/F19, OS or same-H mass gap.
+
+### NS — same original physical ODE high shell, epsilon/radius reverse solve
+
+Original NS #123 owner `NavierStokesOriginalSameFlowUnconditionalShellIntegrabilityExact` already constructed a single actual finite Galerkin X_N with true ODE, energy/dissipation ledger, quarter L4_t and integrated Fourier high shell:
+  ∫_0^T E_{N,>=R}(t) dt <= E_N(0)/(2 ν R²)
+for ALL T>=0 and positive R, with integrability sourced from that SAME ODE.
+
+New Lean #123
+`Synthesis/NavierStokesOriginalSameFlowEpsilonRadiusTightnessExact.lean`
+initial commit `f44b31032d1ac1fdffea87903634ad2035c6adf8`,
+ODE provenance repair `3bfd9d0a7c036d62d95830c95a6ce413bdaf7cd8`;
+acceptance `Synthesis/ClayNSSection38EpsilonRadiusAcceptanceExact.lean`
+commit `6d216b6222548e28fb406eb975303b94753cd90e`.
+It constructs a SAME original X_N for which
+  E_N(0)<2νR² ε, ν>0,R>0,ε>0
+   ⇒ ∀T>=0, ∫_0^T E_{N,>=R}(t)dt<ε.
+The second theorem uses E_N(0)<=Emax to provide the SAME radius threshold across a family with a genuine UNIFORM initial-energy ceiling Emax, while explicitly preserving the actual `SolvesOn (finiteForce N ν) X (Ioi a)` witness; it does not silently replace the solution with arbitrary field functions. Mathematical constructive radius example: choose R=1+Emax/(2ν ε) for Emax>=0, giving a valid strict bound; local exact arithmetic tested this example but no Lean proof of the universal radius choice was committed in this cut.
+
+These are potentially useful continuum spatial L1_t compactness inputs, NOT physical 3D NS global smoothness, and do not imply the missing cutoff-uniform SIGNED quarter nonlinear transfer or pressure/strong continuation. Native Lean/Lake compile still unrun.
+
+### PNP — temporal reverse solve: actual original external observation strictly BEFORE terminal
+
+Section37 `PNPOriginalAnchoredExternalObservationWitnessExact` proved some genuine external observation must distinguish a visible anchored F3 residual, but did not bound WHEN; an observation after the terminal event is not a valid paid causal explanation.
+
+New Lean PNP #119
+`Welds/PNPOriginalAnchoredPreterminalExternalObservationExact.lean`
+commit `8efa0ef675135fb8636a3fe970ee2a356cbb140f`;
+root `Welds/PNPSection38PreterminalExternalObservationAcceptanceExact.lean`
+commit `5eb1b4ca6957a0fd9c00ddd8260abf49d766279e`.
+This source-inducts the actual deterministic machine states from the same anchored Boolean x and legally reopened y, with `A(boolEmbed x)=A(boolEmbed y)`, and derives:
+  faithful consumer terminal divergence at physical time k
+    ⇒ ∃ j<k,
+      [observe(j,x)≠readout(j,state(x,j)) OR
+       observe(j,y)≠readout(j,state(y,j))].
+Both source executions and the time bound are essential. The result makes actual external-information necessity causally meaningful and preserves the original legal source/reopen/Boolean consumer. It neither counts sharing-stable obligatory internal events nor proves any superpolynomial SAT bound; original unrestricted SAT universal algorithm lower bound, bit/control ABI and legitimate physical execution model remain open. Source written, pending Lean elaboration.
+
+### RH — native original source admission hardening and isolated failure tests
+
+Original RH Lean #121 exact xi/zeta and Clay↔Mathlib BIDI adapters already exist but do not prove RH. Section37 external source pinning/strict complete source-tree hash is retained.
+
+Source repairs to
+`scripts/check_alpoge_rh_original_native_admission.py`:
+- `6bb98fd4cc2210876570827113aec60acf5f7d62`: eliminated user-overridable native compiler version; still requires pinned Lean v4.33.1; gracefully fails closed if original Git checkout or Git binary cannot be inspected; requires an EXACT uniquely identified native original RH witness `#print axioms` report, not an arbitrary phrase in stdout.
+- `6d304e2941ce83193f6a651e7d79643f7904d4b3`: repaired over-escaped Python regular expressions for exact native proof report.
+- `scripts/test_alpoge_rh_section38_native_admission_fail_closed.py` commit `9a7c2babc209ff159f8424a276818f9706272a10`: committed fail-closed source tests for missing external source, malformed commit, wrong/missing original Git identity, mandatory actual witness and fixed Lean version.
+No actual valid external original proof witness was provided or admitted, so all RH theorem goals remain OPEN; source checker/tests are not proof.
+
+### All-Clay native acceptance — version 38 fail-closed and exact source audits
+
+Original canonical native campaign `scripts/check_clay_section36_native_campaign.py` on Agda #1551:
+- `f2ac592025ca6e01379dce5fcf4761113228bd9e`: adds strict native Lean `#print axioms` check for EVERY selected declaration, rejecting missing/ambiguous nonwhitelisted/`sorryAx` transitive dependencies. Supports real Git linked worktrees, not only worktrees with literal `.git/` directories.
+- `cf34abb6e7347555813dbda06b800e252634e66f`: repairs over-escaped raw regexes in the declaration-audit parser.
+- `e9dd79341a83e9fdcee78b99627c39341b6eefbc`: includes NS Section38 epsilon and PNP preterminal native roots.
+- `3728a39dc309e33aef57abc0891d9220aad3a26e`: includes original YM last-B coefficient native root.
+Current campaign has EXACTLY 14 Agda/Lean native entrypoints plus 1 external RH proof admission, ALL 15 selected roots must complete on immutable owner-HEAD pins for a selected-roots-only `PASS`. A PASS, if it ever occurs, is **NOT** a complete Millennium theorem, nor a guarantee that an untested theorem downstream has no axioms. No campaign has been executed here.
+
+Original `scripts/test_clay_section37_native_campaign_fail_closed.py` expanded at `74c22506a9c787b722de3ff14e3839bb843b04ec` with native axiom report positive/unsafe/missing/duplicate/multi-declaration tests; root count updated at `c639c0a43ed27a93c9ebf6112003fbd633f7dbe8` and `f9c9d30338d4d2bb6811743a3f98edaa76fe2df9`. The committed test script was not executed byte-identically against the actual GitHub runner in this environment; a separately executed Python regex test of the identical algorithm passed 6/6 expected allow/reject cases.
+
+### Executed exact fraction/finite controls
+
+Canonical `scripts/check_clay_section38_epsilon_preterminal.py` initially `7eb5d224cf7b9ef2ba617dca0132d093a96192e1`, expanded at `a86647f86ad9806888d6bd52934454c76ad8fc48`.
+Independent matching Python Fraction/finite-state test was EXECUTED:
+- NS radius epsilon: 81 exact positive examples PASS.
+- NS too-small radius negative controls: 18 exact cases PASS.
+- Original YM b_n<=1/6, 2b_n<=1/3 and strict predecessor monotonicity: 767 exact checks PASS, n=0..255.
+- PNP two-step Boolean deterministic machine finite witness cases: 72 actual terminal divergences checked; every such divergence has preterminal non-closed observation.
+TOTAL **938/938 exact finite control checks PASS**. Committed script source implements those same cases, but was not byte-identically replayed. This finite testing is NOT a native compiler receipt or proof of any universal Clay endpoint.
+
+### The real six outstanding universal mathematical endpoints (do not promote finite cuts)
+
+YM: original positive-count signed Bishop three-wing absolute power order remains after coefficient ceiling; native Agda 2.9 source/trust audit needed, then separately actual interacting 4D Wilson/CMP116, OS positivity, gap and shared-H physical realization.
+NS: true cutoff-uniform signed nonlinear quarter transfer and correct physical continuum global smoothness, beyond same-flow L4/shell spatial tightness.
+BSD: original selected complex L-derivative and Mellin identification, analytic-rank/Selmer/Sha rank equality and finiteness; symmetric moment floor is only conditional source necessary geometry.
+Hodge: original projective homogenization, branch-glued proper algebraic cycle and NONZERO primitive cohomological class pairing, beyond original affine saturation and two-lift geometry.
+RH: actual trusted independent original Riemann hypothesis proof and pinned native axiom admission; statement BIDI alone is insufficient.
+PNP: original unrestricted SAT sharing-stable unavoidable INTERNAL machine work or full costed polynomial algorithm, real bit/read/control R1 semantics and legitimate universal quantification across algorithms; preterminal observation witness is not a runtime lower bound.
+
+All source-written theorem declarations are PENDING_KERNEL until actually run. No GitHub CI, native Agda or Lean execution in this tranche. All new work is saved in commits and exact owner paths for user execution.
