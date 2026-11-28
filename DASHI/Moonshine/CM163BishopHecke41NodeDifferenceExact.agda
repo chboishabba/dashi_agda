@@ -8,6 +8,7 @@ module DASHI.Moonshine.CM163BishopHecke41NodeDifferenceExact where
 -- The remaining Newton-form reconstruction is a separate bridge.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_<_; z≤n; s≤s)
 open import Data.Product.Base using (_×_; _,_)
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
@@ -53,3 +54,17 @@ triangle {suc n} xs = cons (values xs zero) (triangle (diff xs))
 
 -- Polynomial uniqueness is not declared here: an explicit
 -- Newton-form coefficient/evaluation transport is still required.
+
+-- Construct a row from consecutive values, then prove ALL its entries
+-- zero from finite proof-relevant node witnesses, not external arrays.
+tabulate : ∀ n → (Nat → BishopComplex) → Row n
+tabulate zero f = nil
+tabulate (suc n) f = cons (f zero) (tabulate n (λ k → f (suc k)))
+
+tabulateZero : ∀ n (f : Nat → BishopComplex) →
+  (∀ k → k < n → f k ≈C A.zeroC) →
+  zeroRow (tabulate n f)
+tabulateZero zero f h = C.≈C-refl _
+tabulateZero (suc n) f h =
+  h zero (s≤s z≤n) ,
+  tabulateZero n (λ k → f (suc k)) (λ k hk → h (suc k) (s≤s hk))
