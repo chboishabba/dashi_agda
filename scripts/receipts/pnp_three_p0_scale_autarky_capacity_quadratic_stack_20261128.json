@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local exact replays with byte-matched new Python modules; existing imported continuation/stack donors from earlier local transcription, not a full exact-head checkout. Combined campaign committed but ad hoc equivalent local replay, legacy=false.",
+  "blobs": {
+    "descent": "ce44870fe2cc1a55c5dd6c5901ed0b6434da1af7",
+    "quadratic": "e527024503ef7edbfc41c097451fcb80c676ec88",
+    "autarky": "15ea9915756f23642232c7953c25888e5b2f624a",
+    "screen": "97a5f5646b823080de4759f13f517bc965b77d96",
+    "stack": "237db7ad3a28b5bc42808ae46834682a96e0ec72",
+    "unified": "0b0663d09aeab2d0da622bc2e0b541a40de465df"
+  },
+  "C1a": {
+    "mass": 134,
+    "root_potentials": [
+      "-17420/9",
+      "-16616/81",
+      "-14204/729",
+      "-6968/6561",
+      "14740/59049",
+      "79864/531441",
+      "275236/4782969",
+      "861352/43046721",
+      "2619700/387420489"
+    ],
+    "guaranteed_scale": 6,
+    "promised": [
+      5,
+      6
+    ],
+    "screen_reserved": 2048,
+    "baseline_total": 8765440,
+    "baseline": [
+      [
+        1,
+        "verification refusal",
+        1048576,
+        17,
+        "bit",
+        7
+      ],
+      [
+        2,
+        "verification refusal",
+        671744,
+        19,
+        "bit",
+        7
+      ],
+      [
+        3,
+        "verification refusal",
+        753664,
+        21,
+        "bit",
+        7
+      ],
+      [
+        4,
+        "continuation refusal",
+        1048576,
+        13,
+        "target",
+        1
+      ],
+      [
+        5,
+        "continuation refusal",
+        1048576,
+        13,
+        "target",
+        0
+      ],
+      [
+        6,
+        "continuation refusal",
+        1048576,
+        12,
+        "seed",
+        11
+      ],
+      [
+        7,
+        "continuation refusal",
+        1048576,
+        12,
+        "seed",
+        11
+      ],
+      [
+        8,
+        "continuation refusal",
+        1048576,
+        12,
+        "seed",
+        11
+      ],
+      [
+        9,
+        "witness",
+        1048576,
+        33,
+        "bit",
+        7
+      ]
+    ],
+    "prioritized_total": 5244928,
+    "promised_only_total": 2656256,
+    "promised_only_scale": 5,
+    "promised_only_queries": 25,
+    "screen_fixtures": 128,
+    "screen_bounds": 1266,
+    "exact_mass_each_cap": 128,
+    "autarky": {
+      "fixtures": 512,
+      "witness": 148,
+      "empty": 350,
+      "unknown": 14,
+      "patches": 278,
+      "reopen": 11568
+    },
+    "unified": {
+      "fixtures": 128,
+      "witness": 36,
+      "empty": 92,
+      "singleton": 8,
+      "multiple": 28,
+      "all_default_binary": true,
+      "forced_local": "WITNESS",
+      "forced_screened": "WITNESS",
+      "forced_cap0_seed": "WITNESS",
+      "legacy_exercised": false
+    }
+  },
+  "S1": {
+    "paired_equality_checks": 21844,
+    "n_range": [
+      1,
+      7
+    ],
+    "distinct_rows": "2^n",
+    "conditional_weighted_capacity": true,
+    "unrestricted_lower_bound": false
+  },
+  "R1": {
+    "quadratic_seek": {
+      "inverse_checks": 45600,
+      "sqrt_checks": 1024,
+      "token_checks": 758204,
+      "fixtures": 128,
+      "large_checks": 260,
+      "large_horizons": [
+        "10^12",
+        "10^100"
+      ],
+      "token_bit_lengths": [
+        165,
+        1334
+      ]
+    },
+    "stack": {
+      "fixtures": 256,
+      "exact": 133,
+      "early_halt": 123,
+      "source_transitions": 602,
+      "step_equiv": 256,
+      "core_weight": 64439329,
+      "extra_terminal_probe_weight": 14856676,
+      "terminal": 134,
+      "huge": [
+        {
+          "N": 32,
+          "max_bits": 52,
+          "weighted": 1069691
+        },
+        {
+          "N": 64,
+          "max_bits": 103,
+          "weighted": 2001554
+        },
+        {
+          "N": 128,
+          "max_bits": 204,
+          "weighted": 3873127
+        },
+        {
+          "N": 256,
+          "max_bits": 407,
+          "weighted": 7614566
+        },
+        {
+          "N": 512,
+          "max_bits": 813,
+          "weighted": 15086594
+        },
+        {
+          "N": 1024,
+          "max_bits": 1624,
+          "weighted": 30044557
+        }
+      ],
+      "each_huge": {
+        "jumps": 8,
+        "literal": 10,
+        "arithmetic_ops": 23841
+      },
+      "weight_scope": "Metered grade-school arithmetic/scan weights; not actual target machine steps; initial/final packing and receipt logging excluded from measured weight."
+    }
+  },
+  "blockers": {
+    "checkout": "git ls-remote failed DNS; no native Agda or Lean executables",
+    "ci": false,
+    "kernel": false,
+    "legacy": false,
+    "native_template_export": false,
+    "universal_progress": false,
+    "unrestricted_charge": false,
+    "same_object_clock": false
+  }
+}
