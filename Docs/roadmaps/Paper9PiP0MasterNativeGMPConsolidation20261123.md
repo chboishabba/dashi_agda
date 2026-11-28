@@ -2555,3 +2555,52 @@ Native conditional phase chain now source-written (not kernel checked):
 Minimal analytic K05-PI completion path from this state: establish an ORIGINAL Bishop uniform derivative-of-limit interchange for atan_B(x), via the existing all-N finite factor derivative, geometric residual, derivative-series convergence and uniform tails; combine the original complex exponential derivative/source Cauchy product and constructive ODE uniqueness to show exp_C(2i atan_B x) = (1+i x)/(1-i x) on original Bishop |x|≤1/2. One uniform theorem pays x=1/5 and x=1/239, removing both atomic premises. The necessary complex exp derivative might itself require source-origin Taylor quotient, so do not infer it from uncompiled real exp results. Alternative: direct constructive power-series coefficient-uniqueness and absolute Cauchy product, paying same 2 atomic values without derivative interchange. Both are proof routes, not established kernel theorems.
 
 Remaining actual Paper9 large cuts AFTER phase are still genuine: Hecke modular polynomial analytic root at CM163, same-source Bishop H² / hypergeometric E4 and derivative, signed all-index Hecke two-jet residual. The phase construction DOES NOT imply these other producers or NativePeriod automatically. No Agda/Lean execution/CI.
+
+
+### 2026-11-28 — original Bishop Machin arctangent derivative-interchange narrowed to one uniform SECOND defect bound
+
+Recovered source owners are stronger than prior gap accounting:
+* BishopPowerFirstOrderDifferenceFactorisationExact.powerDifferenceFactorisation and powerDerivativeIsDifferenceQuotientAtZero provide the ORIGINAL Bishop finite power quotient, division-free at h=0.
+* BishopOriginalFiniteLogQuotientSecondOrderExact.originalPowerQuotientSecondOrder supplies the ORIGINAL power second quotient recursively, for all exponents and all Bishop x,h. No new second-order power law necessary.
+* BishopOriginalMachinAtanFiniteDerivativeExact owns true signed original atan term/partial factor derivatives. BishopOriginalMachinAtanDerivativeGeometricWeldExact owns actual derivative == geometricPartial(-x²,N), not a generic approximation.
+* BishopOriginalLogAtanDerivativeLimitValuesExact.originalAtanSourceDerivativeLimitIsReciprocal pays the actual derivative-series limit on the Bishop half-ball; BishopOriginalMachinAtanUniformHalfBallTailExact supplies original function uniform tails; neither is to be re-proved.
+
+New DASHI/Analysis/BishopOriginalMachinAtanQuotientSecondOrderExact.agda source-written, not Agda elaborated, assembles an ALL-N original signed finite quotient and second-order defect from these owners:
+  Q_N(x,h) = Σ_{k<N} (-1)^k/(2k+1) * powerDifferenceQuotient(x,h,2k+1)
+  S_N(x,h) = Σ_{k<N} (-1)^k/(2k+1) * sourcePowerSecondQuotient(x,h,2k+1)
+  A_N(x+h)-A_N(x) ≃ h Q_N(x,h)
+  Q_N(x,h) ≃ A'_N(x) + h S_N(x,h)
+  Q_N(x,0) ≃ A'_N(x) = geometricPartial(-x*x,N).
+No division by h or fake derivative at x=0; all signed odd reciprocal factors original.
+
+scripts/check_paper9_original_atan_quotient.py blob 7808ee48b2a1e313f22b46dc66f749b71f8dfeb8 is byte-for-byte locally executed: 2096 exact rational identities PASS including power differences (degrees 0..64), source atan finite quotients n=0..32 at eight signed half-ball (x,h) pairs, h=0, original signed derivative and SECOND defect, sample |S_N|<=8/9 and 3 sign/denominator negative controls rejected. Receipt Docs/support/reference/Paper9OriginalMachinAtanQuotient20261128.json. The 8/9 is only sample tested, not a proven all-index Bishop bound.
+
+THE NEW EXACT ANALYTIC MINCUT (instead of generic derivative-limit interchange):
+  prove for all N and all Bishop x,h with |x|,|x+h|<=1/2, |S_N(x,h)|<=8/9,
+  by bounding each original quotient second power term with the finite
+  polynomial difference and summing k*(1/2)^(2k-1), whose geometric weighted
+  infinite sum is 8/9. This is a finite/compact-uniform polynomial
+  inequality; no mean-value theorem or second source-defined atan.
+  Then Q_N(x,h) differs from A'_N(x) by <=(8/9)|h| uniformly in N;
+  combine the already-owned source uniform A_N tails and native derivative
+  series convergence to construct the actual original Bishop atan
+  factorDerivativeAt x with derivative geometric limit. The remaining
+  comparison to Cayley requires original complex exp source derivative at
+  its argument, normalization at zero, and uniqueness of
+  (1+x²)F'=2i F, F(0)=1. Both x=1/5 and x=1/239 follow from the SAME
+  one-parameter theorem. Do not introduce two pointwise derivative axioms.
+
+The signed chosen complex exponent is now proved SOURCE-WRITTEN in
+CM163BishopSelectedTauExponentExact.literalExponentSigned:
+  2*pi_M*i*((-1+i sqrt163)/2) = -pi_M sqrt163 - i*pi_M.
+FromTwoOriginalAtans.actualBishopCMQ composes that genuine literal
+argument with the two-atom original Bishop complex exponential, via
+componentwise same-Bishop-real carrier transport, to the existing
+JInvariantBishopCM163SelectedDiskExact.q. Previous +i*pi_M argument was
+NOT the literal 2*pi_M*i*tau; it is only period-equivalent after phase
+evaluation. Current script check_paper9_machin_two_atom_cayley.py
+blob 45c3ec9b4958be664583c8535d3ed8f88b2351d6 byte-matched locally
+and passes negative imaginary exponent and incorrect positive argument
+control; refreshed receipt Paper9OriginalMachinSelectedQPhase20261128.json.
+
+Acceptance classification: new Agda all-N theorem and phase composition are source-written, not native Agda kernel accepted; local exact rational checks do not supply all-N Bishop inequalities or the actual exp/atan derivative-limit. Do not promote to unconditional original Machin q phase or Chudnovsky same-real; original Hecke CM root, original Bishop hypergeometric identification and all-index signed Hecke residual are still independent analytic source obligations. No CI used.
