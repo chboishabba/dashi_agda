@@ -182,7 +182,7 @@ def productive_trace(n,R,H,caps,x,B,flats=(),leaf_cap=8,seam_cap=8,
     return pair_or_aggregate_trace(n,R,Q,caps,x,B,flats,atomic_basis_block,lower,aggregate_cap)
 
 
-def realize_ordered_trace(n,receipt,bridge,primes,B):
+def realize_ordered_trace(n,receipt,bridge,primes,B,valuation_replay=False):
     """Use FRACDASH bridge_macro_common (caller supplies actual module).
     One extra control prime per program position forces ordered execution,
     including repeated coordinate swaps; this is a trace-specific program,
@@ -230,5 +230,20 @@ def realize_ordered_trace(n,receipt,bridge,primes,B):
         decoded=bridge.decode_integer_state(a//phase[t],registers,lane)
         if decoded!=state(x if t==0 else units[t-1]['state']):
             raise AssertionError('decode mismatch')
-    return dict(program=tuple(map(str,program)),indices=tuple(indices),
+    out=dict(program=tuple(map(str,program)),indices=tuple(indices),
                 integers=tuple(integers),final=final,prime_basis=primes)
+    if valuation_replay:
+        # Actual bridge-generated ordered reduced fractions, not a
+        # hypothetical self-quotation exporter. This optional check does
+        # not replace the existing literal source receipt.
+        from check_pnp_gated_guarded_trace import valuation_adapter
+        from math import prod
+        v,why,stats=valuation_adapter(program,initial,primes,L+1)
+        B.pay('prime_valuation_tariff',sum(stats[k] for k in
+            ('factor_readout_charge','compile_charge','probe_charge',
+             'bookkeeping_charge','literal_charge')))
+        # The existing finite ordered carrier bounds materialization.
+        if why!='halt' or stats['raw_steps']!=L or prod(p**a for p,a in zip(primes,v))!=final:
+            raise AssertionError('valuation endpoint or priority mismatch')
+        out['valuation_replay']=stats
+    return out
