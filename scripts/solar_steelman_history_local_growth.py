@@ -23,7 +23,7 @@ def envelope(slabs,delay,T,window_start,r,rprime):
     W=max(S.Rational(v[3]) for v in z['slabs'] if v[1]>window_start)
     return dict(g=max(1,r)*W,dx=D,dh=H,horizon=T,window_start=window_start,global_growth=G)
 
-def construct(m,a,delay,trace_T,degree=8):
+def construct(m,a,delay,trace_T,degree=8,prior=(),checkpoint=None,limit=None):
     from solar_steelman_history_matrix_enclosure import construct as matrix
     from solar_steelman_history_exact_bounds import ratio_bounds
     delay,trace_T=map(S.Rational,(delay,trace_T))
@@ -31,13 +31,19 @@ def construct(m,a,delay,trace_T,degree=8):
     T=max(phi,trace_T);window=min(plo,trace_T)-2*delay
     rr=[ratio_bounds(c) for _,_,c in a['models']]
     r=max(v[1] for v in rr);rp=max(v[2] for v in rr)
-    slabs=[];lo=S.Integer(0)
+    slabs=list(prior);lo=S.Integer(0)
+    for row in slabs:
+        assert len(row)==6 and row[0]==lo and row[1]==min(lo+delay,T)
+        lo=row[1]
+    count=0
     while lo<T:
         hi=min(lo+delay,T)
         (A,ea),(B,eb),(C,ec),_=matrix(m,a,lo,hi,degree)
         norm=lambda M,e:bernstein_bound(M,s)+e
         slabs.append((lo,hi,logarithmic_norm(A,s,ea),norm(A,ea),norm(B,eb),norm(C,ec)))
-        lo=hi
+        lo=hi;count+=1
+        if checkpoint is not None:checkpoint(slabs)
+        if limit is not None and count>=limit and lo<T:return None
     z=envelope(slabs,delay,T,window,r,rp)
     z.update(slabs=slabs,r=r,rprime=rp,delay=delay,trace_T=trace_T)
     return z
