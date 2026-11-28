@@ -1,0 +1,12 @@
+Actual local execution in /tmp/hopf230, all three commands exit 0, OPENBLAS_NUM_THREADS=1 timeout 90s python respective scripts. Local and remote blobs match.
+BR283-284 source a694b4895b40839b69ca1cc6a28e8b23ad73ff16, commit 6a9551c19f423cd4bd6dc418b1049444a913fc8d.
+BR283-284 7 2 0.002 initial gauge 2.220446049250313e-16 final gauge 1.149580056127187e-05 magnetic divergence drift 4.336808689942018e-19 update arithmetic 5.551115123125783e-17 margin 0.24999200014344897 metric change 0.011916359137096322
+BR283-284 9 4 0.001 initial gauge 2.220446049250313e-16 final gauge 7.388583578947971e-06 magnetic divergence drift 8.673617379884035e-19 update arithmetic 5.5185890579512176e-17 margin 0.24999200014344897 metric change 0.011916448093219012
+Commands default and --n 9 --steps 4 --dt .001. Central box frozen edges, two resolutions and time steps changed jointly. Magnetic divergence drift relative to initial discrete divergence (not zero absolute divergence). Update arithmetic is a self-update consistency check, not independent conservation certification. No independent reduced curvature or evolved constraints tested.
+BR285 source d90865f95b95970f823cbd289d73fa9cf193bea6 commit 180223b2c0427e150b22095d65de785ffb2d7e9.
+BR285 4.529923254602502e-06 1.2549868616540394e-08 -4.786102070220011e-15
+BR285 4.452705012397542e-05 1.2048564707045628e-07 2.7538735181131813e-15
+BR285 0.00015186831390679633 3.997971377289744e-07 4.956104970865738e-15
+BR285 0.00035244139896203777 9.025907498905195e-07 1.4850967677837446e-14
+BR241 11 steps 4 max residual 2.842170943040401e-14 Hodge change 0.1096054038423409 volume change 0.0025144942914644692 Hodge work -4.1324202946191034e-05 volume work 0.012728088496095628
+BR285 is original free-energy ledger with two accumulated counters, not a dynamical heat stress or conserved covariant material action. BR286 native source written, unrun. BR287 not implemented. No CI/native/continuum acceptance.
