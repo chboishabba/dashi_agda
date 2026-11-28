@@ -1,6 +1,6 @@
 """Native 24->576 tetrahedral nested campaign, not a physical port identity."""
 import numpy as np
-from check_solar_spherical_reverse_integration import fixture
+from solar_synthetic_fixture import fixture
 from solar_spherical_material_weld import assembly_mesh
 from solar_nested_cochain_refinement import nested_cochains
 from solar_nested_campaign import compare_nested
