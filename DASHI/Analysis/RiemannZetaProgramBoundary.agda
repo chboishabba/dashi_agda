@@ -75,9 +75,11 @@ record CriticalStripWitness : Set₁ where
     Real : Set
     realPart : Complex → Real
     oneHalf : Real
+    -- Mathematical equality can be a setoid relation on real representations.
+    realEq : Real → Real → Set
     nontrivialZero : Complex → Set
     criticalLine : Complex → Set
-    criticalLineMeansHalf : (s : Complex) → criticalLine s → realPart s ≡ oneHalf
+    criticalLineMeansHalf : (s : Complex) → criticalLine s → realEq (realPart s) oneHalf
 
 record RiemannHypothesisWitness : Set₁ where
   field
