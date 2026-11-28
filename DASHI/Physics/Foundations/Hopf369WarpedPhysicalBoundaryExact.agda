@@ -1559,3 +1559,86 @@ module At {r : Level} (F : C.RealField r)
   -- separately AFFINELY on j and q. Full moving-graph jets and
   -- nonlinear connection products are not claimed to be represented
   -- by these reference linear rows.
+
+  ------------------------------------------------------------------------
+  -- BR48: ACTUAL ADM PHYSICAL METRIC -> BR4 FOUR-SPATIAL COEFFICIENTS.
+  --
+  -- g=-N²dt²+H_ij(dx^i+v^i dt)(dx^j+v^j dt), i=x,y,z,n.
+  -- D=N sqrt(det H)>0; the positive-volume witness and inverse spatial
+  -- metric are supplied by the original physical source geometry.
+  --
+  -- A=D/N²; B^i=A v^i; C^ij=D H^ij-A v^i v^j.
+  -- C+B Bᵀ/A=D H^ij >0, but positivity of C by itself requires
+  -- the additional physical spacelike/shift guard |v|_H<N.
+  -- No false inference that positive H automatically makes C positive.
+  ------------------------------------------------------------------------
+
+  record ADMPhysicalPoint : Set r where
+    constructor admPhysicalPoint
+    field
+      lapse : S
+      volumeDensity : S
+      inverseLapseSquared : S
+      spatialInverse : BR4Space → BR4Space → S
+      fourShift : BR4Space → S
+  open ADMPhysicalPoint public
+
+  admBR4A : ADMPhysicalPoint → S
+  admBR4A g = volumeDensity g * inverseLapseSquared g
+
+  admBR4B : ADMPhysicalPoint → BR4Space → S
+  admBR4B g i = admBR4A g * fourShift g i
+
+  admBR4C : ADMPhysicalPoint → BR4Space → BR4Space → S
+  admBR4C g i k =
+    volumeDensity g * spatialInverse g i k
+      - admBR4A g * fourShift g i * fourShift g k
+
+  -- The primitive normal conormal current from the actual divergence
+  -- operator contains both the material time velocity and all four
+  -- spatial derivative components in general. The old BR34 normal
+  -- derivative is only obtained after paying its Gaussian collar.
+  admNormalFlux : ADMPhysicalPoint → S → (BR4Space → S) → S
+  admNormalFlux g timeVelocity gradient =
+    admBR4B g spaceNormal * timeVelocity
+      + sumBR4Space (λ i →
+          admBR4C g spaceNormal i * gradient i)
+
+  -- BR48 source-preserving Gaussian fixed material collar:
+  -- fourShift(n)=0 and H^na=0, H^nn=1; then the ADM conormal
+  -- is volumeDensity * partial_n. Instead of an unsound universal
+  -- assertion, the equalities below are required as explicit witness
+  -- FIELDS on the same physical source.
+  record ADMPhysicalNormalCollar (g : ADMPhysicalPoint) : Set r where
+    constructor admPhysicalNormalCollar
+    field
+      normalShiftZero : fourShift g spaceNormal ≡ O
+      normalInverseXZero : spatialInverse g spaceNormal spaceX ≡ O
+      normalInverseYZero : spatialInverse g spaceNormal spaceY ≡ O
+      normalInverseZZero : spatialInverse g spaceNormal spaceZ ≡ O
+      normalInverseUnit : spatialInverse g spaceNormal spaceNormal ≡ U
+
+  record BR48FluxMatchingSource : Set r where
+    constructor br48FluxMatchingSource
+    field
+      originalADM : ADMPhysicalPoint
+      normalVelocity : S
+      fourSpatialJet : BR4Space → S
+      conormalFlux : S
+      sourceGaussianFlux : S
+      uncorrectedMaterialFlux : S
+  open BR48FluxMatchingSource public
+
+  constructBR48FluxMatching : ADMPhysicalPoint → S →
+    (BR4Space → S) → BR48FluxMatchingSource
+  constructBR48FluxMatching g wt dx =
+    br48FluxMatchingSource
+      g wt dx
+      (admNormalFlux g wt dx)
+      (volumeDensity g * dx spaceNormal)
+      (admNormalFlux g wt dx - volumeDensity g * dx spaceNormal)
+
+  -- At nonzero normal shift or sheared normal spatial inverse, the
+  -- residual is intentionally NONZERO. BR19 moving-material graph and
+  -- normal-chart weld must consume it before BR41 wall work is asserted
+  -- for the true PDE conormal. No inverse or positivity is assumed.
