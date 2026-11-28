@@ -20,7 +20,7 @@ def support_transition(z, population, removed, created, birth, volume):
             and np.all(np.isfinite(c)) and np.all(np.isfinite(current))
             and np.all(np.isfinite(b))):
         raise ValueError('nonfinite support event')
-    if np.any((n==0)&(current!=0)):
+    if np.any((n==0)[:,None]&(current!=0)):
         raise ValueError('uninhabited species carries current')
     before=(n>0)
     out,new,ledger=event(current,n,r,c,b,volume)
