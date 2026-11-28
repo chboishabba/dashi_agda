@@ -3243,3 +3243,30 @@ Gronwall therefore applies ONLY after bounding physical signed boundary flux and
 The zero-frequency C=0 case is retained without C_t/C division; actual original inner wall flux remains, not discarded. A generic positive E0+E1 does NOT control boundary trace without higher collar Sobolev control; explicit normalized exponential concentration negative control implemented.
 
 Updated truly open W2 max-cut: replace huge coefficient with sharp frequency-resolved constrained estimate, instantiate actual Einstein/gauge/material source F and derivative; independently prove signed Israel boundary flux/differentiated trace and real physical highGap>crossBudget on all k incl zero and mid; construct outer outgoing trace. W1 original full-source Q5/Rnn and literal integrated history, W3 certified evolution, W4 same-window receiver, W5 Agda/Lean/physical authority remain separately open. No new general ADM or pressure construction.
+
+
+### 28 November — W2 two-level Israel acceleration trace actually canceled; original full Ward source-time-jet producer
+
+This new implementation reduces the previous signed differentiated inner-wall flux to a SAME-COLLAR velocity trace that the existing E0+E1 geometric energy can actually bound. The result is stronger than the prior generic BR43 trace socket, but retains the original physical source/history admission debt. Three new scripts:
+1. scripts/check_f8_two_level_israel_trace_closure.py commit 2785d67b45ea33c9114d6c52ea1e51c908b8c6a0, fetched blob 42b2a40e45504ff64bb57b77f8f5f4bfeb5bf51e = local executed git hash. Local SymPy 1.14 PASS, original zero mode, Hermitian pairing and FTC rational trace bound.
+2. scripts/check_f8_israel_trace_source_schur.py commit 81bdb680889225eb33001bb014d9006631a4efaa, fetched blob c5e2ead17adafd3b24c53a29fb55dbb137daefbf = local executed git hash. Local SymPy 1.14 PASS, two-branch physical trace budget, exact real/Hermitian Young squares, negative source-energy check.
+3. scripts/check_f8_ward_timejet_receipt.py commit c22c6bac922a20001ab0f94eac4fdf1d6f4e08ae, fetched blob 7fc20725ffc1b4abb501e542520f06ca55e5d87e. Local synthetic full tensor/Israel/Ward time-jet numerical test PASS but executed local hash f6ed915939c6621ee760ea926e1e610cdb688c2b differs from committed Git blob; exact committed-source replay NOT certified. Its --original mode consumes original History.known_ward on both 0 and nonzero-output K,2K,3K and produces h versus h/2 five-point derivative defects for T,C,R. The original mode was NOT executed; defects are NOT interval enclosures. A source interpolation polynomial vanishing at all stencil sample locations provides an explicit negative control against promoting two-stencil agreement to a rigorous error bound.
+4. scripts/check_f8_w1w2_source_current_maxcut.py amended commit 542bff47df4e37799e5c30c2fc519ec135ed7927 to run all three exact/synthetic default checks. The aggregate runner remains unexecuted in literal checkout; --history original receipt remains separate. No CI.
+
+Exact wall-reduction: for any real/Hermitian Fourier mode, L=1+k², eta>0, original physical inner-wall flux IN THE ENERGY DERIVATIVE is L t³ Re(conj(Z_t)Q)+eta t³ Re(conj(Z_tt)Q_t), because compatible Israel gives Z_n=-Q and Z_tn=-Q_t (for k≠0 Q=A+M/(ik)+j/3; for independently compatible k0 Qzero=j/3). Define the boundary correction D=eta t³ Re(conj(Z_t)Q_t), and corrected scalar graph energy Hcorr=H-D, H=L E0+eta E1. Then the original acceleration trace Z_tt COMPLETELY CANCELS:
+
+ Hcorr' = bulk+outer + Re(conj(Z_t) S),
+ S=L t³ Q -eta ∂t(t³Q_t).
+
+This is a genuine bidirectional Israel reciprocal temporal integration by parts. The high normal-velocity trace Z_tt(0) is no longer a needed independent Hilbert-space trace for the energy inequality; the source demands Q, Q_t, Q_tt instead, and these are not independently bounded for the original coupled history. This matters especially at low/zero k: use the original k0 Neumann j0/3 without division, but k→0 continuity of the nonzero mode Q still needs the actual momentum M'(k) compatibility.
+
+Direct original finite-collar trace for v=Z_t on [0,1/2], FTC+Young:
+ |v(0)|² <=4 int |v|² dn + int |v_n|² dn.
+Using exact prior original F8 coefficient enclosures A>6/875, B>3/625 (A=a³/N, B=Na³), and E0>=A_min/2 int |Z_t|², E1>=B_min/2 int |Z_tn|², obtains
+ |Z_t(0)|² <=(3500/3) E0 +(1250/3) E1 <=Lambda_k H,
+ Lambda_k=max((3500/3)/(1+k²),(1250/3)/eta).
+No k=0 division and no need to control Z itself at zero frequency. For any eps>0:
+ |Re(conj(Z_t) S)| <=eps H+Lambda_k |S|²/(4eps).
+The correction itself satisfies |D| <=delta H + Lambda_k eta² t^6 |Q_t|²/(4delta). Thus Hcorr is positive only MODULO an explicit source Q_t budget, not an autonomous coercive energy. If Q_t is arbitrarily large, Hcorr can be negative (implemented negative control). This is an actually paid velocity trace with sharp source-debt interface, NOT a proof that the original Q_t or Q_tt is bounded, nor an Einstein/gauge/material highGap witness.
+
+Next maximum cut is now MUCH narrower for the scalar-principal inner wall: attach original full-band History.known_ward source temporal jets and actual scalar/normal Ricci/geometry reconstruction to bound S and Q_t in the SAME physical norm and certify numerical h/2 refinement with independent derivative/interval bounds; combine outer wall with BR83 principal current and actual constraint-restricted Einstein/gauge/material Schur strict gap. Continue W3 all-sector full histories, W4 original same-window receiver and W5 native authority only after this source debt is paid. Original finite-history acceptance remains unexecuted.
