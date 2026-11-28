@@ -21,20 +21,15 @@ module Retained
   (sourceObserve : U → H × S → O)
   where
 
-  Joint : Set
-  Joint = H × S
+  -- Instantiate the existing product codec with identity observations.
+  -- Real joint dynamics and readout are independent of this specialization.
+  module Codec = W.ExactTransport H C S U H
+    encode decode decodeEncode (λ _ h → h) (λ _ h → h) (λ _ s → s)
 
-  Packet : Set
-  Packet = C × S
-
-  pack : Joint → Packet
-  pack (h , s) = encode h , s
-
-  reopen : Packet → Joint
-  reopen (c , s) = decode c , s
+  open Codec using (Joint; Packet; pack; reopen)
 
   section : (j : Joint) → reopen (pack j) ≡ j
-  section (h , s) = F.cong (λ x → x , s) (decodeEncode h)
+  section = Codec.exactJointReopen
 
   packetStep : U → Packet → Packet
   packetStep u p = pack (sourceStep u (reopen p))
