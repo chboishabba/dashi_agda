@@ -332,3 +332,113 @@ endpoint assumptions. No native kernel/CI claim. Default-branch direct
 fetch of several new owner paths returned 404; absence from search is
 not evidence of nonexistence elsewhere. Selective import reconciliation
 and actual native build still required.
+
+
+## Section 23 — original geometry implementation, source-owner reconciliation
+
+Date 2026-11-28. Current source owner heads were freshly fetched before
+writes. This section SUPERSEDES Section 22's statement that general BSD
+Selmer/Sha exactness or all-place completion comparison is unimplemented.
+
+### BSD actual number-field global/local quotient — implemented in native source
+Existing original Synthesis/MillenniumBSDOriginalPlaceSelmerShaExact.lean
+already contained originalSelmerTwo, originalPointShaTwo, originalSelmerTwo_mem_iff,
+globalKummer_mem_selmer, selmerToShaTwo, its surjectivity, kernel=image and
+selmerQuotientEquivShaTwo. This was an existing completed constructor,
+not a mathematical gap. New Lean #124
+Synthesis/MillenniumBSDNumberFieldSelmerShaOriginalWeldExact.lean at
+455e54297d9500983ee16b0db6d1f63163295e48 consumes
+general_geometric_doubling_onto (global and every original finite or
+infinite completion) to eliminate the supplied half-surjectivity
+hypotheses and expose the original numberFieldSelmerTwo,
+numberFieldKummerToSelmer, numberFieldSelmerQuotientEquivShaTwo,
+numberField_selmerToSha_kernel and surjective result. This is genuine
+original H1 arithmetic exactness, not an analytic rank theorem.
+Remaining BSD endpoint: prove universal complex analytic order equals
+Mordell-Weil rank and all requisite Sha finiteness conditions.
+Selected rank-four source still needs the real complex L''(E,1)=0
+annihilation (p-adic order 4 is insufficient). Native acceptance pending.
+
+### NS finite-global source already exists; stronger physical ledger consumer
+Lean #123 actual_global_forward_finite_flow and energyBall_compact
+already gave fixed-cutoff global trajectory. New
+Synthesis/NavierStokesOriginalGlobalEnergyPaymentExact.lean at
+7969de728e321cd0872b1c91605e5ecc5de80e7c proves the additional
+same-trajectory bounds E_N(t)<=E_N(0) and
+2 nu int_0^t D_N<=E_N(0), retaining reality and divergence.
+These ceilings are cutoff uniform IF the initial energies are bounded;
+they do NOT yield H1 or critical norm uniformity. The true direct
+R568 signed fractional estimate, valid compensated R726 and R645
+strict-margin replacement/alternative, physical A Euclidean exterior,
+nonzero unforced fifteen-field physical certificate, and independent
+forced C/D original admission remain the substantive lanes.
+Do not revive physical no-go R645 or zero-defect R726 shortcuts.
+
+### Hodge projective source polynomial weld
+Lean #124 Synthesis/MillenniumHodgeDicksonOriginalGeneratedChartWeldExact.lean
+at 0f3fac66d3cea9f806fc5a04cdc79b83446263a8 consumes original
+coneAtOne and OriginalCoord projective rename: originalCoordinateEval,
+projectiveCoordinateLift, originalCoordinateEval_eq_cone_lift,
+original_coordinate_generated_has_projective_lift. Arbitrary original
+coordinate polynomials, not only single variables, now have a literal
+h=1 cone numerator. This is SOURCE-WRITTEN, kernel pending. Exact
+negative control over dual-number thickening shows a coordinate
+generated B may be proper in open A: don't assert B=A without the
+original denominator/generation proof. Remaining actual projective
+Proj chart identification, global cycle, primitive class and generic
+non-scalar oriented correspondence are unpaid mathematics.
+
+### PNP signed residue to physical read, without charging rivals
+Lean #119 Welds/PNPOriginalResidualFutureReadWeldExact.lean at
+b4c8b75dcc8646c36562f4e91a50369304f95e0c composes ORIGINAL
+PNPResidualGeometryBridgeExact.anchored_reopen/LegalAt with
+PNPFutureResidualCharge.collision_requires_read on the same actual
+adaptive trace. A legal retained-kernel displacement with a real
+observable terminal difference forces a real read of a differing
+coordinate. A coordinate observer and prefix encoding are explicitly
+required; the theorem does NOT manufacture huge collision families,
+bound all arbitrary shared computations, or prove P != NP.
+Existing Section 26 sparse DAG, bypass inputs, flat candidate IR,
+blank sweep and unsigned bit schedule continue as original donors.
+Remaining C1a physical all-operations clock + unrestricted affordable
+progress; S1 actual sharing-stable SAT mandatory work or polynomial SAT
+algorithm; R1 normalized first-rule cross-language physical resource
+closure. No generic tensor-rank shortcut.
+
+### RH and YM donor non-duplication
+RH #121 already implements original xi-zero/zeta-zero subtype BIDI,
+universal statement correspondence and pinned parser. The exact
+original zeta_zero_parameter uses t.im=-(s.re-1/2), NOT t.re.
+No replacement RH theorem manufactured; native admitted proof/source
+axiom/statement review still independently required. No universal
+RH assertion follows from the BIDI alone.
+
+YM #1536 remains the selected CMP102 lane only. Existing source
+R384/R385 comparison does not manufacture absolute source localization
+(R386 negative control). Section22 root-free inverse chart estimate
+requires same selected Path13 logarithmic chart and actual radius,
+nonflat operator enclosure and source CMP102/CMP116 physical measure
+identification. Do not relabel local quaternion algebra as full YM gap.
+
+### Actual regression and native replay
+- Section 22 equivalent source reconstruction: local Python
+  31,464 / 31,464 exact cases PASS (BSD491, Hodge392,
+  PNP27280, YM101, NS3200). The locally reconstructed source was NOT
+  byte-identical to the previously committed script.
+- Section 23 equivalent six-lane source reconstruction: local Python
+  4,912 / 4,912 PASS (BSD857, Hodge225, PNP3636, NS12,
+  YM101, RH81). Committed scripts/check_clay_section23_original_welds.py
+  at 5ea1df9946ad493ee74e92fe669ee5c41e21c3da; exact committed
+  script is NOT separately executed, equivalent local logic was run.
+  The Hodge negative case is a proper generated subring.
+- Section 23 native acceptance roots: Lean #124
+  Synthesis/ClayBSDHodgeSection23NativeAcceptanceExact.lean
+  2de320872845eda152925889b4064a89804d9cc6;
+  Lean #123 Synthesis/ClayNSSection23NativeAcceptanceExact.lean
+  1f9199be724fcefeb376a37c6f90834c081efc20;
+  Lean #119 Welds/PNPSection23NativeAcceptanceExact.lean
+  6c5d21bf1d2be5e48887b3b8e28936043cfbfc96.
+- Native Lean/Lake/Agda unavailable in local runtime; source-written
+  bodies NOT elaborated. No CI. No new universal Clay solution claimed.
+- No wholesale default-branch merge of diverged donor PR histories.
+  Original object type/sign/zero/phase and attribution remain mandatory.
