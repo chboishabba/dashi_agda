@@ -40,6 +40,9 @@ PARTS={
     ("BR49.graph","check_hopf369_br49_moving_wall_conormal.py",("--part","graph")),
     ("BR49.channels","check_hopf369_br49_moving_wall_conormal.py",("--part","channels")),
     ("BR50.wall_source","check_hopf369_br50_material_energy_weld.py",("--part","source")),
+    ("BR51.defect_algebra","check_hopf369_br51_graph_defect_budget.py",("--part","algebra")),
+    ("BR51.defect_budget","check_hopf369_br51_graph_defect_budget.py",("--part","budget")),
+    ("BR51.defect_channels","check_hopf369_br51_graph_defect_budget.py",("--part","channels")),
   ],
   "heavy":[
     ("BR48.variable_source","check_hopf369_br48_adm_boundary_geometry.py",("--part","source")),
