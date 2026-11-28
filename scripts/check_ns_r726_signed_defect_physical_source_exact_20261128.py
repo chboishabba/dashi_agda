@@ -28,7 +28,8 @@ def helicity(k,v,sign):
     return vexp((transverse(k,v)+sign*I*Matrix(k).cross(v)/sqrt(ksq(k)))/2)
 def pair(u,v):return simplify(re(sum(conjugate(u[i])*v[i] for i in range(3))))
 
-def physical_certificate(positive_modes):
+def physical_certificate(positive_modes, viscosity=S.One):
+    assert viscosity.is_positive is True
     u={k:Matrix(v) for k,v in positive_modes.items()}
     for k,v in list(u.items()):
         assert simplify(dot(k,v)) == 0
@@ -63,7 +64,7 @@ def physical_certificate(positive_modes):
             m=vexp(2*(a+A(q,p)))
             d=vexp(2*(B(p,q)+B(q,p)))
             if m==ZERO and d==ZERO:continue
-            blocks[k].append((a,m,d,ksq(p)+ksq(q)))
+            blocks[k].append((a,m,d,viscosity*(ksq(p)+ksq(q))))
     full=diag=lift=comm=companion=S.Zero
     for items in blocks.values():
         a_sum=sum((x[0] for x in items),ZERO.copy())
@@ -112,7 +113,11 @@ POSITIVE={
 def main():
     n,ncells=physical_certificate(NEGATIVE)
     p,pcells=physical_certificate(POSITIVE)
-    assert ncells==pcells==316
+    small,scells=physical_certificate(NEGATIVE,S(1)/10)
+    assert ncells==pcells==scells==316
+    assert simplify(small['r406']-10*n['r406'])==0
+    assert simplify(small['combined']-n['combined'])==0
+    assert small['defect'].is_positive is True
     # Exact algebraic signs, not floating heuristic. SymPy's real algebraic
     # number comparator certifies the roots and the strict inequalities.
     assert n['defect'].is_negative is True,n['defect']
@@ -121,5 +126,6 @@ def main():
           'ordered original incidences and both strict defect signs')
     print('negative:',n['defect'])
     print('positive:',p['defect'])
+    print('same-state viscosity 1/10 positive:',small['defect'])
     print('R652, R687, R726 signed numerator identities all PASS')
 if __name__=='__main__': main()
