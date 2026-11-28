@@ -180,6 +180,10 @@ def cycle(material,cfg,shadow=None):
         if 'work' in tail_receipt:
             tail_receipt['conditional_limit_net_interval_J']=[campaign_net,campaign_net+tail_receipt['work']['additional_net_upper_J']]
             tail_receipt['interval_is_rounding_certified']=False
+            from solar_changing_tail import tail_envelope
+            tail_receipt['changing_operator_envelope']=tail_envelope(model,pop,theta,vol,rows,neutral,MASS,CHARGE,
+                q['recombination_m3_s'],cap,cool,dt,cfg['asymptotic_tail_probe_steps'])
+            tail_receipt['changing_operator_envelope']['requires_fixed_terminal_atlas']=True
     return dict(ledger=total,campaign_ledger=campaign,preparation_ledger=preparation,preparation_cost_J=prep_paid,
                 asymptotic_tail=tail_receipt,
                 analytic_return_geometry=dict(thermal=thermal_geometry,population=support_geometry,
