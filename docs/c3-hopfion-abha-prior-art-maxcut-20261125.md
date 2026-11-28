@@ -2574,3 +2574,28 @@ consuming actual BR34/41 sources (same source, common density assumption). An in
 4. **Global quotient and continuation**: BS13 curvature-to-metric weighted coercivity modulo all normal/tangential holonomy and BR31 reflecting exterior preservation; then construct the genuine common-space local PDE solution and uniform restart. Do not promote BR48–50 coordinate geometry into that theorem until these are proved.
 
 Attribution: classical ADM, defining-function conormal and Lorentzian Israel calculus are pre-existing geometry; original prior BR4/19/29/31/33/34/37/41 source retained; DASHI-specific new weld is same-source sign/normal/density matching and explicit negative controls. No JMD co-attribution claimed.
+
+
+### BR51 — explicit coefficient of the moving-graph conormal error; real Cauchy payment
+
+Following BR48–50, the true wall conormal mismatch is now a concrete pointwise **geometry-by-field derivative product**, not an unspecified forcing. For `F=n-f(t,x,y,z)`, spatial inverse `H^{ij}`, ADM shift `v^i`, `theta=F_t-v^i F_i`, `D=N sqrt(det H)`, define
+```
+ k_t = -theta/N²,
+ k_i = H^{ji} F_j - delta_(i,n) + (theta/N²) v^i.
+```
+Then the exact BR49-to-Gaussian comparison is
+```
+ D g^{-1}(dF,du) - D partial_n u
+     = D [ k_t partial_t u + sum_i k_i partial_i u ].
+```
+For **real physical source jets**, the 5D Lagrange identity gives the fully explicit positive certificate
+```
+ (sum_{mu=0}^4 k_mu²)(sum_{mu=0}^4 u_mu²)
+        -(sum_{mu=0}^4 k_mu u_mu)²
+   = sum_{mu<nu}(k_mu u_nu-k_nu u_mu)² >=0.
+```
+Consequently `|J_F-D partial_n u|²<=D²||k||²||du||²`. The same inequality sums over the original 15 metric and five gauge channels under their **positive Hermitian** component Gram (the Lorentzian signed Israel pairing is retained separately). In the genuine BR48 Gaussian collar, `F=n,v^n=0,H^{na}=0,H^{nn}=1`, all `k_mu` vanish. For a moving/tilted/sheared source, retain the exact `k` coefficients as a new boundary source payment; do not assert they vanish by chart covariance.
+
+The native BR34 owner now contains `normalSpaceDelta`, `graphDefectTimeCoefficient`, `graphDefectSpatialCoefficient`, `scalarGraphDefect`, and `OriginalGraphDefectPayment` / `originalGraphDefectPayment`, retaining both the raw BR49 flux difference and its coefficient-decomposed expression (and explicit residual). New `scripts/check_hopf369_br51_graph_defect_budget.py` independently tests the ADM identity, compatible collar control, a strictly-spacelike nontrivial rational moving graph, all 10 exact wedge squares, and full original 15/5 positive-channel sum. Bounded runner separates algebra/budget/channels into three <=90-second source checks. **COMMITTED_UNRUN**, native kernel unrun, no CI.
+
+**Updated remaining physical weld:** derive chart-dependent `||k||_{W^{s,∞}}` and `D` bounds from actual BR19/31 material graph and BR48 ADM source, use product/Kato–Ponce or explicit BR4 hierarchy to bound the high-order graph work by BR44 differentiated energy plus BR47 physical boundary forcing; absorb only if corresponding coefficient constants allow it. This is a genuine source-level candidate for the variable moving-wall work estimate, but it is not itself the global tame trace/coercivity estimate. The BR29 physical subsidiary source and BS13 weighted quotient remain separate P0, with negative controls preserved.
