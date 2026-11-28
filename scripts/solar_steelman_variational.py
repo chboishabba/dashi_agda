@@ -23,7 +23,7 @@ def construct(m,a):
     A[E,b]=Mi@C.T@N;A[E,z]=-Mi@B;A[E,i]=Mi@ts.T;A[E,j]=-Mi@tr.T
     A[b,E]=-C;A[z,E]=Hi@B.T
     A[i,E]=-Ls@ts;A[i,i]=-Ls;A[i,q]=-Ls@Ks;A[i,x]=-Ls
-    A[q,i]=I[q,q];A[x,i]=I[x,i];A[x,v]=-I[x,x];A[v,x]=I[v,v]
+    A[q,i]=I[q,q];A[x,i]=I[x,x];A[x,v]=-I[x,x];A[v,x]=I[v,v]
     A[j,E]=Lr@tr;A[j,j]=-R*Lr;A[j,Q]=-Lr@Kr;A[j,X]=-Lr
     A[Q,j]=I[Q,Q];A[X,j]=I[X,X];A[X,V]=-4*I[X,X];A[V,X]=I[V,V]
     models=[(np.array(ids),{w:cx(r[w][0]+S.I*r[w][1]) for w in (1,2)},{k:complex(v) for k,v in c.items()}) for ids,r,c in a['models']]
