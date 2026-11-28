@@ -5,6 +5,7 @@ module DASHI.Cognition.PNF.X369HyperformalFabricScopeExact where
 -- The six-slot representation is a typed projection, NOT the whole fabric.
 -- Kernel checking is deferred. No identification of unlike native dynamics.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Cognition.PNF.X369ConcreteSixVectorExact as Six
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as Future
@@ -57,8 +58,35 @@ module SixConsumer {Value Input Output : Set}
 
   -- One-step transport and observation MUST be source-owned inputs.
   -- Under precisely those hypotheses, arbitrary future words factor.
-  module Dynamics = Future
-  -- No unconditional claim about the learned MoE / native wave source.
+  trans : ∀ {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
+  trans refl q = q
+
+  sym : ∀ {A : Set} {a b : A} → a ≡ b → b ≡ a
+  sym refl = refl
+
+  outputStable : (u : Input) (x y : FullState) →
+    chart x ≡ chart y → fineObserve u x ≡ fineObserve u y
+  outputStable u x y eq =
+    trans (observationWeld u x)
+      (trans (Future.cong (semanticObserve u) eq)
+        (sym (observationWeld u y)))
+
+  transitionStable : (u : Input) (x y : FullState) →
+    chart x ≡ chart y → chart (fineStep u x) ≡ chart (fineStep u y)
+  transitionStable u x y eq =
+    trans (transitionWeld u x)
+      (trans (Future.cong (semanticStep u) eq)
+        (sym (transitionWeld u y)))
+
+  fullFabricConsumerDescent : (inputs : List Input) (x y : FullState) →
+    chart x ≡ chart y →
+    Future.trace fineStep fineObserve inputs x ≡
+    Future.trace fineStep fineObserve inputs y
+  fullFabricConsumerDescent inputs x y same =
+    Future.inputIndexedTraceDescent fineStep fineObserve chart
+      outputStable transitionStable inputs x y same
+
+  -- No unconditional claim about learned MoE / native time evolution.
 
 -- The source's other layers are separately typed:
 -- GovernedIndexedResidualCubeExact: 6 faces, 12 edges, 8 vertices.
