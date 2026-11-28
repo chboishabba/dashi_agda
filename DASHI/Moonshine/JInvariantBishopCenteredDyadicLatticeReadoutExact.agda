@@ -3,9 +3,9 @@ module DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact where
 -- Source-written, uncompiled. Read the actual fixed row endpoint as
 -- the original lattice kernel on (1,j), with the literal (2*pi*i)^-k
 -- factor outside. No choice of a complex root or alternate pi.
-open import Agda.Builtin.Nat as Nat using (Nat)
+open import Agda.Builtin.Nat as Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (ℤ; +_)
+open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Product.Base using (_,_)
 open import Data.Sum.Base using (inj₂)
@@ -34,7 +34,7 @@ import DASHI.Moonshine.JInvariantBishopDyadicReciprocalLimitExact as Inv
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as L
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 open C using (BishopComplex; _≈C_)
-open A using (_*C_; powC)
+open A using (_*C_; _+C_; powC)
 open Comp using (complexTrans; complexSym)
 
 notOrigin1 : (+ 1) ≡ (+ 0) → L.⊥
@@ -77,9 +77,9 @@ powOne z = Laws.complexMultiplyRightIdentity z
 powTwo : ∀ z → Rat.square z ≈C powC z 2
 powTwo z = A.mulCCongruent (C.≈C-refl _) (complexSym (powOne z))
 
-powAdd : ∀ z a b → (powC z a *C powC z b) ≈C powC z (Nat._+_ a b)
-powAdd z Nat.zero b = Laws.complexMultiplyLeftIdentity (powC z b)
-powAdd z (Nat.suc a) b = complexTrans (Laws.complexMultiplyAssociative z (powC z a) (powC z b))
+powAdd : ∀ z a b → (powC z a *C powC z b) ≈C powC z (a + b)
+powAdd z zero b = Laws.complexMultiplyLeftIdentity (powC z b)
+powAdd z (suc a) b = complexTrans (Laws.complexMultiplyAssociative z (powC z a) (powC z b))
   (A.mulCCongruent (C.≈C-refl _) (powAdd z a b))
 
 powFour : ∀ z → Rat.square (Rat.square z) ≈C powC z 4
@@ -96,6 +96,40 @@ scaleProduct h (C.complex a b) (C.complex c d) =
   (let open P.ℝ-Solver in solve 5
     (λ h a b c d → h ⊗ (a ⊗ d ⊕ b ⊗ c)
       ⊜ (h ⊗ a) ⊗ d ⊕ (h ⊗ b) ⊗ c) P.≃-refl h a b c d)
+
+-- This is the original paired partial sum, not a new summation rule.
+prefixCong : ∀ (f g : ℤ → BishopComplex) → (∀ j → f j ≈C g j) → ∀ n →
+  Close.pairPrefix f n ≈C Close.pairPrefix g n
+prefixCong f g eq zero = C.≈C-refl _
+prefixCong f g eq (suc n) = A.addCCongruent (prefixCong f g eq n)
+  (A.addCCongruent (eq (+ n)) (eq (-[1+ n ])))
+
+prefixMul : ∀ a f n →
+  Close.pairPrefix (λ j → a *C f j) n ≈C (a *C Close.pairPrefix f n)
+prefixMul a f zero = complexSym (Laws.complexMultiplyRightZero a)
+prefixMul a f (suc n) = complexTrans
+  (A.addCCongruent (prefixMul a f n)
+    (complexSym (Laws.complexMultiplyDistributesLeft a (f (+ n)) (f (-[1+ n ])))))
+  (complexSym (Laws.complexMultiplyDistributesLeft a (Close.pairPrefix f n) (Close.pair f n)))
+
+powUnit : ∀ n → powC A.oneC n ≈C A.oneC
+powUnit zero = C.≈C-refl _
+powUnit (suc n) = complexTrans (A.mulCCongruent (C.≈C-refl _) (powUnit n))
+  (Laws.complexMultiplyLeftIdentity A.oneC)
+
+powerInverse : ∀ n → (powC factor n *C powC V n) ≈C A.oneC
+powerInverse n = complexTrans (complexSym (G.powProduct factor V n))
+  (complexTrans (A.powCCongruent (Rec.multiplyReciprocal factor factorNZ) n) (powUnit n))
+
+scaledProduct : ∀ h k z w →
+  (A.scaleC h z *C A.scaleC k w) ≈C A.scaleC (h * k) (z *C w)
+scaledProduct h k (C.complex a b) (C.complex c d) =
+  (let open P.ℝ-Solver in solve 6
+    (λ h k a b c d → (h ⊗ a) ⊗ (k ⊗ c) ⊖ (h ⊗ b) ⊗ (k ⊗ d)
+      ⊜ (h ⊗ k) ⊗ (a ⊗ c ⊖ b ⊗ d)) P.≃-refl h k a b c d) ,
+  (let open P.ℝ-Solver in solve 6
+    (λ h k a b c d → (h ⊗ a) ⊗ (k ⊗ d) ⊕ (h ⊗ b) ⊗ (k ⊗ c)
+      ⊜ (h ⊗ k) ⊗ (a ⊗ d ⊕ b ⊗ c)) P.≃-refl h k a b c d)
 
 module At (inputs : Round11.BishopCutset) (p : U.BishopUpperHalfPlanePoint) where
   module Rw = D.At inputs
@@ -143,3 +177,46 @@ module At (inputs : Round11.BishopCutset) (p : U.BishopUpperHalfPlanePoint) wher
     (complexTrans (Row.scaleCong 120 (A.powCCongruent (inverseRead j) 6))
       (complexTrans (Row.scaleCong 120 (G.powProduct V (W p j) 6))
         (scaleProduct ((+ 120 / 1) ⋆) (powC V 6) (lattice 6 j))))
+
+  weighted4 : Lim.Conv (λ n → prefactor4 *C Close.pairPrefix (lattice 4) n) (Rw.row4 p)
+  weighted4 = Lim.convTransport
+    (λ n → complexTrans (prefixCong Cl.g4 (λ j → prefactor4 *C lattice 4 j) g4Read n)
+      (prefixMul prefactor4 (lattice 4) n)) Cl.actualRow4
+
+  weighted6 : Lim.Conv (λ n → prefactor6 *C Close.pairPrefix (lattice 6) n) (Rw.row6 p)
+  weighted6 = Lim.convTransport
+    (λ n → complexTrans (prefixCong Cl.g6 (λ j → prefactor6 *C lattice 6 j) g6Read n)
+      (prefixMul prefactor6 (lattice 6) n)) Cl.actualRow6
+
+  undo4 undo6 : BishopComplex
+  undo4 = A.scaleC ((+ 1 / 6) ⋆) (powC factor 4)
+  undo6 = A.scaleC ((+ 1 / 120) ⋆) (powC factor 6)
+
+  undo4Law : (undo4 *C prefactor4) ≈C A.oneC
+  undo4Law = complexTrans (scaledProduct ((+ 1 / 6) ⋆) ((+ 6 / 1) ⋆) (powC factor 4) (powC V 4))
+    (complexTrans (A.scaleCCongruent (powerInverse 4) (((+ 1 / 6) ⋆) * ((+ 6 / 1) ⋆)))
+      ((let open P.ℝ-Solver in solve 0
+        ((Κ (+ 1 / 6) ⊗ Κ (+ 6 / 1)) ⊗ Κ 1ℚᵘ ⊜ Κ 1ℚᵘ) P.≃-refl) ,
+       (let open P.ℝ-Solver in solve 0
+        ((Κ (+ 1 / 6) ⊗ Κ (+ 6 / 1)) ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl)))
+
+  undo6Law : (undo6 *C prefactor6) ≈C A.oneC
+  undo6Law = complexTrans (scaledProduct ((+ 1 / 120) ⋆) ((+ 120 / 1) ⋆) (powC factor 6) (powC V 6))
+    (complexTrans (A.scaleCCongruent (powerInverse 6) (((+ 1 / 120) ⋆) * ((+ 120 / 1) ⋆)))
+      ((let open P.ℝ-Solver in solve 0
+        ((Κ (+ 1 / 120) ⊗ Κ (+ 120 / 1)) ⊗ Κ 1ℚᵘ ⊜ Κ 1ℚᵘ) P.≃-refl) ,
+       (let open P.ℝ-Solver in solve 0
+        ((Κ (+ 1 / 120) ⊗ Κ (+ 120 / 1)) ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) P.≃-refl)))
+
+  -- Actual unscaled lattice row, with the known Fourier normalization.
+  latticeRow4 : Lim.Conv (Close.pairPrefix (lattice 4)) (undo4 *C Rw.row4 p)
+  latticeRow4 = Lim.convTransport
+    (λ n → complexTrans (complexSym (Laws.complexMultiplyAssociative undo4 prefactor4 _))
+      (complexTrans (A.mulCCongruent undo4Law (C.≈C-refl _)) (Laws.complexMultiplyLeftIdentity _)))
+    (Lim.mulConst undo4 weighted4)
+
+  latticeRow6 : Lim.Conv (Close.pairPrefix (lattice 6)) (undo6 *C Rw.row6 p)
+  latticeRow6 = Lim.convTransport
+    (λ n → complexTrans (complexSym (Laws.complexMultiplyAssociative undo6 prefactor6 _))
+      (complexTrans (A.mulCCongruent undo6Law (C.≈C-refl _)) (Laws.complexMultiplyLeftIdentity _)))
+    (Lim.mulConst undo6 weighted6)
