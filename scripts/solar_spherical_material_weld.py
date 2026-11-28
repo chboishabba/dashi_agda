@@ -64,6 +64,29 @@ def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
                 simplices=s,owners=owners,material_map=W,energy_masses=(me,mb),
                 consistent_masses=(E,B),physical_admission=False)
 
+def structural_stage_atlas(model,mesh):
+    """Exact nonzero coordinate support of the fixed Whitney maps, independent of D.
+
+    All species use the same geometric edge-current map. Zero exchange slots
+    reserve time on their original indexed face, not on an invented connection.
+    """
+    W=np.asarray(model['material_map'])
+    ne,n3=W.shape; n=n3//3
+    N=len(model['generator']); nf=N-ne-9*n
+    if n3!=3*n or nf<0:
+        raise ValueError('invalid Whitney material chart')
+    site=np.asarray(mesh['coordinate_site'])
+    if site.shape!=(N,): raise ValueError('invalid atlas site map')
+    pairs=set()
+    for i,j in zip(*np.nonzero(np.triu(model['exchange'][:ne+nf,:ne+nf],1))):
+        if site[i]!=site[j]: pairs.add((int(i),int(j)))
+    for e,k in zip(*np.nonzero(W)):
+        o,component=divmod(int(k),3)
+        for species in range(3):
+            j=ne+nf+9*o+3*species+component
+            if site[e]!=site[j]: pairs.add((int(e),j))
+    return tuple(sorted(pairs))
+
 def observe(model,P,L,x):
     from solar_metric_cochain_weld import observation,recover
     A=model['generator']; reduced,defect,Q=observation(A,P,L)
