@@ -424,6 +424,34 @@
       "physical_paid": false,
       "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
       "checker_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76"
+    },
+    "mass_flux_surface": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_mass_flux_surface_closure.py",
+      "scope": "Original Einstein mass radial/time integrability, moving mass continuity and no-shell Israel jointly determine wall radial flux and pressure. Necessary spherical source admissibility only, not full Einstein-matter evolution.",
+      "source_equation": "m_r=4*pi*r^2*rho, m_t=-4*pi*r^2*N*sqrt(f)*j; moving vacuum wall requires j=rho*v/sqrt(f+v^2), p_r=rho*v^2/(f+v^2)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "df20eed79509be852151ce1f38c656130b44ffe9"
+    },
+    "wall_frame_stress_inverse": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_tov_dynamic_flux_israel_abi.py",
+      "checker": "scripts/check_tov_wall_frame_stress_inverse.py",
+      "scope": "Exact 1+1 orthonormal wall-frame stress and inverse zero-normal-flux/traction condition, signed velocity, rank-one source. Tangential stresses and full 3+1 boundary are not identified.",
+      "source_equation": "T_nn=T_un=0 iff j=rho*v/sqrt(f+v^2), p_r=rho*v^2/(f+v^2); rho*p_r=j^2",
+      "physical_paid": false,
+      "source_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76",
+      "checker_git_blob_sha1": "b27efd0f5110228955276a99801675027faa97a9"
     }
   }
 }
