@@ -45,6 +45,13 @@
       "lane_count": 12,
       "unpaid": 36,
       "limit": "not physical acceptance"
+    },
+    {
+      "name": "reciprocal_interface_traction",
+      "result": "PASS source-equivalent local SymPy timeout90",
+      "scope": "original two-channel G(X) static two-face traction, signed support force, balanced exceptions",
+      "limit": "no actual physical wall, controller mechanics, gravitational stress or receiver",
+      "literal_committed_source_replay": false
     }
   ],
   "full_checkout_replay": false,
@@ -54,7 +61,7 @@
   "source_blob_pinning": {
     "status": "PASS source-equivalent",
     "test": "git hash-object equals SHA1('blob '+decimal_bytes+'\\\\0'+bytes); missing/mutated source blocks physical admission",
-    "pins": 6,
+    "pins": 7,
     "external_hopf_checker": "pinned to PR #1554 HEAD; not replayed in current checkout",
     "literal_committed_source_replay": false
   }
