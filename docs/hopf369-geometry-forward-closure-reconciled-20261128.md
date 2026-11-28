@@ -202,3 +202,126 @@ the P0AK static calculation and BR80 first-jet reduction had small
 independent SymPy spot audits this turn, not an execution receipt for
 the exact repository scripts. No full 5D theorem or Agda kernel
 acceptance is asserted.
+
+
+## 5. BR83–84 — full 5D current and original BN/BE timelike-wall corner
+
+This second phase strengthens the **actual operator**, rather than adding generic carrier records.
+
+**BR83 `scripts/check_hopf369_br83_full_5d_energy_current.py`:**
+The source-independent classical differential identity behind BR80 is now
+transcribed and independently checked on a genuine **five-axis** ADM
+Riemannian-spatial block with non-diagonal positive 4×4 spatial H,
+four nontrivial ADM shift components, independent first jets in all
+five directions of N,H,v, and symmetric scalar Hessians. The full
+contravariant stress `T=grad u tensor grad u -g^-1 g^-1(du,du)/2`,
+future slice normal `X=(1,-v)/N`, and densitized current
+`J=D T^mu{}_nu X^nu` are constructed **from the original ADM
+metric**, including its actual derivative jets. The exact identity
+being checked is
+```
+ ∂mu J^mu / D =
+      (□_g u) X(u) + (1/2) T^{mu nu}(Lie_X g)_{mu nu}.
+```
+No scalar frozen coefficient is substituted for the true time,
+spatial/normal lapse, shift, H-shear and Christoffel/deformation
+terms. The checker has 15+5 independent original field-channel
+stress evaluations, true moving material-wall flux and a nonzero
+deformation negative control. It provides a genuinely five-dimensional
+source **principal** energy geometry, but remains
+COMMITTED_PENDING_LOCAL_RUN. It does not assert the full 15-coupled
+Einstein connection is symmetric-hyperbolic or that the 30+10 physical
+boundary map is dissipative.
+
+**BR84 `scripts/check_hopf369_br84_bn_wall_corner.py`:**
+The existing BN/BE/P0AK spatial/wall sources give a **complete
+time-symmetric initial wall Israel corner** under the explicitly
+prescribed zero-shift/static-material initial gauge, not a generic
+positive-time boundary theorem. For the actual four-dimensional
+timelike wall induced metric `h4=diag(-N²,H_3)`, positive N and
+positive non-diagonal H_3, its physical wall second fundamental form
+is
+```
+ Kwall_tt=-N ∂normal N,
+ Kwall_AB=1/2 ∂normal H_AB .
+```
+Thus all ten original spacetime-wall Israel equations
+`[Kwall_ab]=j h4_ab` are **bidirectionally equivalent** to
+```
+ [Kwall_AB]=j H_AB       (six existing spatial BN/BE components)
+ [∂normal log N]=j       (one BE/P0AK lapse-Hermite corner)
+ [Kwall_tA]=0            (three time-symmetric mixed corner conditions).
+```
+The last three are actual zero-shift/time-symmetric material **gauge
+conditions**, not consequences of the scalar Hamiltonian. The
+full four-dimensional trace reverse is
+`[K]-h tr[K]=-3j h`; BR63's full Israel inverse recovers the jump
+without a Fourier denominator. The checker retains mismatched-lapse
+and mixed-velocity negative controls. For arbitrary initial shift,
+wall motion or nonzero Cauchy K, the genuine additional mixed-corner
+equations must be paid separately.
+
+**Hard physical promotion boundary:** W0's *reference/time-symmetric
+corner* now has a concrete source-equation back-solve from existing
+P0 owners, but not yet an inhabitant of the original Agda all-corners
+certificate or a high-order corner regularity estimate on the
+nonzero BN constructed solution. The time-symmetric input condition
+`K_Cauchy=0` cannot be promoted to a static lapse for nonzero Hopf
+spatial metric. W1's original full D/E optical physical-wall
+Fréchet equality still requires the real moving harmonic connection
+and curved Gauss/Codazzi terms. W2/W3 need a positive *15+5*
+weighted **full variable source boundary** energy/Kreiss estimate,
+not just BR83's physical scalar-principal current.
+
+Updated local acceptance:
+```bash
+python scripts/run_hopf369_br39_42_bounded.py \
+  --part closure --seconds 90 --output /tmp/hopf369-acceptance
+```
+It now includes independent BR79–84 stages, split all BR83 full
+metric/channel/moving/negative cases, and the three BR84 corner/BIDI
+negative cases. All original P0/BN producers are in receipt fingerprints.
+No new source checkout or Agda kernel test was performed.
+
+## 6. Exact next integrated terminal programme
+
+The project does **not** need another original spatial scalar solver,
+time-symmetric ADM Hamiltonian identity, fixed-reference AdS lapse,
+standard nonlinear moving hypersurface shape operator, finite Israel
+trace inverse or abstract signed hyperfabric. Those owners exist.
+
+- **Real W1+W2 (same solution):** instantiate the BR71/72 D/E full
+  metric+gauge rows from the *actual* nonlinear Ric=-4g unknown,
+  matching the BR84 corners and BR83 current. In the exact variable
+  ADM normal frame, compute all BR14/15 lower-order 15 metric
+  Christoffel source matrices and all five BR55 subsidiary sources,
+  then prove their real positive symmetrizer/commutator estimate.
+  Explicitly include BR59/61 nonzero shape Hessian, BR66 warp-mean,
+  BR69 Codazzi/mean, BR70 unit-normal frame, BR78 tension Ward and
+  BR77 physical moving tilt.
+- **W3+W4 (one boundary-source operator):** reverse-solve the BR37
+  frozen D/E map with BR82's actual glancing ray and construct an
+  adapted microlocal estimate (or state exact positive loss if truly
+  unavoidable). Attach the **same** actual 35D BR29 physical Weyl
+  projector source and curved Bianchi to BR74/75 nonlinear
+  Gauss/Codazzi, distinguishing nine zero-speed modes from five
+  harmonic modes and retaining rank12 wall-only Gram refusal.
+  A failed frozen or finite wall-only Gram does not prove the
+  full coupled boundary estimate impossible; test bulk/wall
+  cross terms and choose D/E source allocation accordingly.
+- **W5–W7 (constructive completion):** use existing BS13 forced
+  normal shear primitive with its holonomy moment; provide
+  tangential York/Hodge resonance-aware gauge reconstruction and
+  reflecting AdS exterior. Construct an actual loss-aware
+  continuous time solution map from BN/BE/BO/BQ compatible
+  initial data and uniform source estimates. Discharge native
+  Agda proof certificates and local source checks in bounded
+  checkpointed runs, never GitHub CI.
+
+**Status/attribution:** BR79–84 source is committed. The short
+independent static-lapse/SymPy and first-jet algebra identities were
+checked in this turn. The repository scripts themselves, larger
+full-dimensional symbolic suites and native Agda kernel are
+NOT yet accepted. The final nonlinear 5D Einstein–Israel
+well-posedness theorem remains outstanding, precisely at the
+operator/estimate/continuation welds above.
