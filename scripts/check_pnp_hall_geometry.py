@@ -37,19 +37,24 @@ def matching(L,R,E,B):
     return tuple(M)
 
 
-def verify_hall(F,n,rows,cols,X,Y,B):
+def verify_partition(F,n,rows,cols,B):
     B.pay(1+n+sum(1+len(c) for c in F)+sum(len(c)**2 for c in cols))
     D=set(map(norm,F));assert all(c in D and c and min(c)>0 for c in rows)
     flat=[v for c in rows for v in c];assert len(flat)==len(set(flat))
     assert sorted(v for c in cols for v in c)==list(range(1,n+1))
     assert all(norm((-a,-b)) in D for c in cols for a,b in combinations(c,2))
+    return True
+
+
+def verify_hall(F,n,rows,cols,X,Y,B):
+    assert verify_partition(F,n,rows,cols,B)
     assert len(set(X))==len(X) and len(set(Y))==len(Y) and len(X)>len(Y)
     assert all(0<=i<len(rows) for i in X) and all(0<=j<len(cols) for j in Y)
     assert set(v for i in X for v in rows[i])<=set(v for j in Y for v in cols[j])
     return True
 
 
-def cnf_hall(F,n,cap):
+def cnf_hall(F,n,cap,contract=False):
     if n<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
     B=Reservation(cap)
     try:
@@ -78,10 +83,35 @@ def cnf_hall(F,n,cap):
         if h is not None:
             X,Y=h;assert verify_hall(F,n,row,col,X,Y,B)
             return dict(status='EMPTY',route='hall',rows=row,cols=col,X=X,Y=Y,used=cap-B.left)
+        if contract:
+            assert verify_partition(F,n,row,col,B)
+            units=[];receipts=[]
+            for a,b in sorted(A):
+                h=flow(tuple(i for i in L if i!=a),tuple(j for j in R if j!=b),A,B)
+                if h is None:continue
+                X,Y=h;B.pay(1+len(X)+len(Y)+sum(len(row[i]) for i in X)+len(row[a]))
+                assert a not in X and b not in Y and len(X)>len(Y)
+                assert all(pos[v] in set(Y)|{b} for i in X for v in row[i])
+                bad=tuple(v for v in row[a] if pos[v]==b)
+                units.extend((-v,) for v in bad);receipts.append((a,b,X,Y,bad))
+            return dict(status='RESIDUAL',F=F+tuple(units),units=tuple(units),rows=row,cols=col,receipts=tuple(receipts),used=cap-B.left)
         chosen={edge[p] for p in matching(L,R,A,B)};x=tuple(int(i in chosen) for i in range(1,n+1))
         B.pay(1+n+sum(1+len(c) for c in F))
         return dict(status='WITNESS',witness=x,used=cap-B.left) if accepts(F,x) else dict(status='UNKNOWN',used=cap-B.left)
     except Refused:return dict(status='UNKNOWN',used=cap-B.left)
+
+
+def cnf_solver(F,n,rows,target,cap,data_clock=None):
+    from check_pnp_frontier_resolution import cnf_solver as prior
+    if rows or target or data_clock is not None:return prior(F,n,rows,target,cap,data_clock)
+    root=ContinuationAllowance(cap);a=cap//4;assert root.reserve('hall',a)
+    q=cnf_hall(F,n,a,contract=True)
+    if q['status']=='EMPTY':return dict(q,reserved=a)
+    rest=root.left;assert root.reserve('prior',rest)
+    G=q['F'] if q['status']=='RESIDUAL' else F
+    z=prior(G,n,rows,target,rest,data_clock)
+    if z['status']=='WITNESS':assert accepts(F,z['witness'])
+    return dict(z,reserved=cap,hall_units=q.get('units',()),hall_receipts=q.get('receipts',()))
 
 
 def projection(O,n,groups,cap):
