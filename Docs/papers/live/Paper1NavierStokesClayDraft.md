@@ -715,3 +715,8 @@ Current implementation and exact regression receipts: [consolidated Sections 6�
 ## Section 17 source-state update
 
 Lean #123 d04a2fff44d8 writes the literal zero-mode force, mean constancy on the same modal ODE, transverse Leray and Galerkin forcing and squared-radius dissipation tail inequality. The exact independent regression exercises projection including zero and tail controls (1012). Reality/divergence preservation along an actual trajectory, global physical existence and the cutoff-uniform critical budget remain open. Forced C/D admission runner 0c7b03758407 strengthens tracked-input and manifest checks; native replay still absent. Unforced profile/certificate still unavailable.
+
+
+## Section 18 — original modal divergence and integrated tail
+
+Lean #123 b30b86c379b5 / dc4e9aa8dd8f: actual longitudinal heat identity gives initial-to-later divergence preservation; existing energy FTC and pointwise tail inequality supply 2νR²∫tail≤initial energy under original trajectory premises. Finite ODE existence, conjugate reality, physical continuum and critical-time estimate remain open. Native kernel pending; three independent symbolic integrating-factor controls, integrated bound not separately executed.
