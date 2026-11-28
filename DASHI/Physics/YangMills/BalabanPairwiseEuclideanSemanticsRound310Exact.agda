@@ -104,16 +104,16 @@ asPhysicalPairwiseTimePresentation :
   RationalUpperOrderClosure dataSet →
   R304.PhysicalPairwiseTimePresentation dataSet extension finite
 asPhysicalPairwiseTimePresentation semantics admissibility orderClosure = record
-  { R304.PhysicalPairwiseTimePresentation.decode = decode semantics
-  ; R304.PhysicalPairwiseTimePresentation.timeTranslate = timeTranslate semantics
-  ; R304.PhysicalPairwiseTimePresentation.leftBounded = leftBounded admissibility
-  ; R304.PhysicalPairwiseTimePresentation.translatedRightBounded =
+  { decode = decode semantics
+  ; timeTranslate = timeTranslate semantics
+  ; leftBounded = leftBounded admissibility
+  ; translatedRightBounded =
       translatedRightBounded admissibility
-  ; R304.PhysicalPairwiseTimePresentation.translatedProductBounded =
+  ; translatedProductBounded =
       translatedProductBounded admissibility
-  ; R304.PhysicalPairwiseTimePresentation.supportDistanceIsTime =
+  ; supportDistanceIsTime =
       supportDistanceIsTime semantics
-  ; R304.PhysicalPairwiseTimePresentation.orderClosedUnderContinuumLimit =
+  ; orderClosedUnderContinuumLimit =
       upperClosed orderClosure
   }
 

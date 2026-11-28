@@ -1,0 +1,347 @@
+{
+  "bundle_count": 4,
+  "bundles": [
+    {
+      "declarations": [
+        {
+          "body_hash": "50bbe4d9771715b7500be1fafdc2f4b000a4ff3c4e3dca426688677383e0e0e7",
+          "consumers": [
+            "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
+          ],
+          "implementation_status": "implemented-in-canonical-ursell-donor; verification-blocked-by-pre-existing-unsafe-import",
+          "migration_action": "inline-into-canonical-ursell-payment-bridge",
+          "name": "compileCanonicalBPaymentCore",
+          "new_proof_obligation": "none-new; preserve the PositiveTransferGapCore compiler",
+          "proof_search_role": "compiler-consequence",
+          "recipient_evidence_note": "The declaration packages an existing payment core; it is not a missing B theorem.",
+          "semantic_recipient": "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact",
+          "signature_hash": "0bf87e36c4d5dc764d182acc9c3bdb86521da262f3833be626abc023c7766be3",
+          "source": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact.compileCanonicalBPaymentCore",
+          "source_line": 130
+        }
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.YangMills.BalabanClayCanonicalMassGapConsumerRound270Exact",
+        "DASHI.Physics.YangMills.BalabanClayDirectQuantitativeClusteringRound274Exact",
+        "DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact",
+      "implementation_statuses": [
+        "implemented-in-canonical-ursell-donor; verification-blocked-by-pre-existing-unsafe-import"
+      ],
+      "live_consumers": [
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
+      ],
+      "migration_action": "rewire-nonhistorical-consumers",
+      "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
+      "preferred_canonical_targets": [
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact"
+      ],
+      "proposed_recipient": null,
+      "recipient_status": "recipient-review-required",
+      "semantic_actions_complete": true,
+      "semantic_recipient_notes": [
+        "The declaration packages an existing payment core; it is not a missing B theorem."
+      ],
+      "source_imports": [
+        "Agda.Builtin.Bool",
+        "Agda.Builtin.Equality",
+        "DASHI.Interop.IntrospectiveProofLoopExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalMassGapConsumerRound270Exact",
+        "DASHI.Physics.YangMills.BalabanClayDirectQuantitativeClusteringRound274Exact",
+        "DASHI.Physics.YangMills.BalabanClayDyadicPhysicalClusteringExponentExact",
+        "DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact",
+        "DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact",
+        "DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact",
+        "DASHI.Physics.YangMills.BalabanClusteringRateSameGapCandidateWeldExact",
+        "DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact",
+        "DASHI.Physics.YangMills.BalabanLargeFieldStepV",
+        "DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationCompilerExact",
+        "DASHI.Physics.YangMills.BalabanMassGapSurvival",
+        "DASHI.Physics.YangMills.BalabanTerminalScalePhysicalClustering",
+        "DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact",
+        "DASHI.Physics.YangMills.CompactLieProofLevel"
+      ],
+      "source_path": "DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound275Exact.agda",
+      "terminal_recipient_candidates": []
+    },
+    {
+      "declarations": [
+        {
+          "body_hash": "c67acd0498e660887676c3f2624e7a90313e5748fb05459833868a9f2603fc6f",
+          "consumers": [
+            "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact"
+          ],
+          "migration_action": "inline-required-boundary-projections-into-direct-source-frontier",
+          "name": "canonicalRound330Boundary",
+          "new_proof_obligation": "none-new; preserve the existing status/audit projections",
+          "proof_search_role": "audit-coordinate",
+          "recipient_evidence_note": "The live use is a boundary/status coordinate, not a theorem identity.",
+          "semantic_recipient": "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
+          "signature_hash": "42bf9e809dafa8596f37aac3fbccbfa09fb731ff09c8cfb15e1b5de0525c881d",
+          "source": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact.canonicalRound330Boundary",
+          "source_line": 228
+        },
+        {
+          "body_hash": "e14743eedcb764934461ebca56e299c2ce9f2aa30b5dc5f8f4004ddd9c6b5236",
+          "consumers": [
+            "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact"
+          ],
+          "migration_action": "replace-terminal-use-with-selected-limit-closure; retain-bridge-until-consumers-rewired",
+          "name": "toR310RationalUpperOrderClosure",
+          "new_proof_obligation": "none-new; the terminal route already consumes SelectedLimitUpperClosure",
+          "proof_search_role": "compatibility-packaging",
+          "recipient_evidence_note": "This is stronger compatibility packaging around the selected-limit terminal route.",
+          "semantic_recipient": "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact",
+          "signature_hash": "37809cf286bb0fa1991d3bf2e71dbf83e9918019ab3bc5dae18969665e60a35e",
+          "source": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact.toR310RationalUpperOrderClosure",
+          "source_line": 171
+        }
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationWeldRound92Exact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound329Exact",
+        "DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact",
+        "DASHI.Physics.YangMills.BalabanO4SpatialToTemporalClusteringRound276Exact",
+        "DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact",
+        "DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact",
+      "implementation_statuses": [],
+      "live_consumers": [
+        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
+        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact"
+      ],
+      "migration_action": "rewire-nonhistorical-consumers",
+      "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
+      "preferred_canonical_targets": [
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
+        "DASHI.Physics.YangMills.YMClayAristotleGapParityValidation",
+        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
+        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierValidation",
+        "DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact",
+        "DASHI.Physics.YangMills.YMClayF134TypedCompositionValidation",
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
+        "DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact",
+        "DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionExact",
+        "DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionValidation",
+        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact",
+        "DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureValidation",
+        "DASHI.Physics.YangMills.YMClayTrancheProofLevelAuditValidation",
+        "DASHI.Physics.YangMills.YMClayVoyager2026CoverageExact",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
+      ],
+      "proposed_recipient": "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact",
+      "recipient_status": "single-terminal-recipient",
+      "semantic_actions_complete": true,
+      "semantic_recipient_notes": [
+        "The live use is a boundary/status coordinate, not a theorem identity.",
+        "This is stronger compatibility packaging around the selected-limit terminal route."
+      ],
+      "source_imports": [
+        "Agda.Builtin.Bool",
+        "Agda.Builtin.Equality",
+        "Agda.Builtin.List",
+        "Agda.Builtin.String",
+        "DASHI.Core.AttributedSourceCore",
+        "DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge",
+        "DASHI.Physics.Closure.NSTriadKNIntegratedDangerOccupationWeldRound92Exact",
+        "DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound329Exact",
+        "DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact",
+        "DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact",
+        "DASHI.Physics.YangMills.BalabanO4SpatialToTemporalClusteringRound276Exact",
+        "DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact",
+        "DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "Data.Rational.Base",
+        "Relation.Binary.PropositionalEquality"
+      ],
+      "source_path": "DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound330Exact.agda",
+      "terminal_recipient_candidates": [
+        "DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact"
+      ]
+    },
+    {
+      "declarations": [
+        {
+          "body_hash": "07fc5680dd9de943ce0d400f121bee05547475713ef2f73f8d3b9c2cf86653a3",
+          "consumers": [
+            "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact"
+          ],
+          "migration_action": "inline-into-same-h-interacting-witness-closure",
+          "name": "round77InteractingWitnessFromLocalAndGap",
+          "new_proof_obligation": "none-new; use the existing same-H gap and OPE/Ward inputs",
+          "proof_search_role": "compiler-consequence",
+          "recipient_evidence_note": "The witness is a standard compiler consequence of already identified physical inputs.",
+          "semantic_recipient": "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact",
+          "signature_hash": "a964655ed6f3647163dca98bbbb098ad98d8944aa3068deec2cb794d5c74efba",
+          "source": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact.round77InteractingWitnessFromLocalAndGap",
+          "source_line": 124
+        }
+      ],
+      "historical_imports_to_rewire": [
+        "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound76SixAnalyticCutsetExact"
+      ],
+      "historical_module": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact",
+      "implementation_statuses": [],
+      "live_consumers": [
+        "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact"
+      ],
+      "migration_action": "rewire-nonhistorical-consumers",
+      "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
+      "preferred_canonical_targets": [
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
+        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact",
+        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutValidation",
+        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact",
+        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoValidation",
+        "DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayMaxCutExact",
+        "DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayResidualExact",
+        "DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
+      ],
+      "proposed_recipient": null,
+      "recipient_status": "recipient-review-required",
+      "semantic_actions_complete": true,
+      "semantic_recipient_notes": [
+        "The witness is a standard compiler consequence of already identified physical inputs."
+      ],
+      "source_imports": [
+        "Agda.Builtin.Nat",
+        "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound76SixAnalyticCutsetExact",
+        "DASHI.Physics.YangMills.BalabanOSMassGapClosure",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "DASHI.Physics.YangMills.SchattenTraceClassCompositePerturbationExact",
+        "DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact",
+        "DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact",
+        "DASHI.Physics.YangMills.YangMillsGaussianWardGapNontrivialityExact",
+        "DASHI.Physics.YangMills.YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact",
+        "DASHI.Physics.YangMills.YangMillsMaxwellLinearDispersionNoGapExact",
+        "Data.Empty"
+      ],
+      "source_path": "DASHI/Physics/YangMills/BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact.agda",
+      "terminal_recipient_candidates": []
+    },
+    {
+      "declarations": [
+        {
+          "body_hash": "",
+          "consumers": [
+            "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact"
+          ],
+          "migration_action": "retain-as-field-on-existing-literal-top-down-construction; do-not-duplicate",
+          "name": "continuumYM",
+          "new_proof_obligation": "the UV-to-continuum same-family physical input remains conditional",
+          "proof_search_role": "canonical-consumer-residual",
+          "recipient_evidence_note": "This is substantive input data for the existing construction, not a duplicate theorem to rename.",
+          "semantic_recipient": "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
+          "signature_hash": "1c6803e539863dde3d5ffcffb376b93b5d0b23d41e01f2df610543b30d0ede21",
+          "source": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.continuumYM",
+          "source_line": 68
+        },
+        {
+          "body_hash": "dbedef8c78a4ac1cc8cc5c2cbd3d9ff2691f79c6aacde85ae4c1e96383c1a880",
+          "consumers": [
+            "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact"
+          ],
+          "migration_action": "inline-into-route-s-literal-clay-closure",
+          "name": "literalClaySolutionFromTopDownThree",
+          "new_proof_obligation": "none-new; compile the existing A/B/C inputs",
+          "proof_search_role": "compiler-consequence",
+          "recipient_evidence_note": "The constructor assembles the official solution record from existing route inputs.",
+          "semantic_recipient": "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
+          "signature_hash": "a667040d81d2461e7ff7989d1512da9b99d7f5f6ad5e82b770327c630e8202ca",
+          "source": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.literalClaySolutionFromTopDownThree",
+          "source_line": 126
+        }
+      ],
+      "historical_imports_to_rewire": [],
+      "historical_module": "DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact",
+      "implementation_statuses": [],
+      "live_consumers": [
+        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact"
+      ],
+      "migration_action": "rewire-nonhistorical-consumers",
+      "policy": "plan-only; no declaration move, import rewrite, or deletion authorized",
+      "preferred_canonical_targets": [
+        "DASHI.Physics.YangMills.BalabanA1HistoryUniformRemainderAntiDoubleCountExact",
+        "DASHI.Physics.YangMills.BalabanCMP109A1CrossPollinatedDebtProducersExact",
+        "DASHI.Physics.YangMills.BalabanCMP109CorrectedPatchMarginCrossProverExact",
+        "DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact",
+        "DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression",
+        "DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact",
+        "DASHI.Physics.YangMills.BalabanCMP109SeagullHistorySourceRefinementExact",
+        "DASHI.Physics.YangMills.BalabanCMP109TangentialGaussianCancellationRecutExact",
+        "DASHI.Physics.YangMills.BalabanCMP109TangentialGaussianCancellationRecutValidation",
+        "DASHI.Physics.YangMills.BalabanCMP109UniformFloorSummableHistoryRefinementExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact",
+        "DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact",
+        "DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureValidation",
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismExact",
+        "DASHI.Physics.YangMills.YMClayFullPhysicalFormalismValidation",
+        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact",
+        "DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutValidation",
+        "DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact",
+        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact",
+        "DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureValidation",
+        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact",
+        "DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoValidation",
+        "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119CompactSimplePhysicalH5Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119CorePhysicalH5Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalEndpointExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119DirectSameSystemH6Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionCoreExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionFromH5Exact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH2EndpointExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH6EndpointExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119LiteralMassGapEndpointExact",
+        "DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumConstructionExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerValidation",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionValidation",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalGapAttachmentExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalGapAttachmentValidation",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceExact",
+        "DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceValidation",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact",
+        "DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation"
+      ],
+      "proposed_recipient": "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact",
+      "recipient_status": "single-terminal-recipient",
+      "semantic_actions_complete": true,
+      "semantic_recipient_notes": [
+        "The constructor assembles the official solution record from existing route inputs.",
+        "This is substantive input data for the existing construction, not a duplicate theorem to rename."
+      ],
+      "source_imports": [
+        "Agda.Builtin.Nat",
+        "DASHI.Physics.YangMills.CompactLieProofLevel",
+        "DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact",
+        "DASHI.Physics.YangMills.YangMillsClayProblemContractExact",
+        "DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact"
+      ],
+      "source_path": "DASHI/Physics/YangMills/BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.agda",
+      "terminal_recipient_candidates": [
+        "DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact"
+      ]
+    }
+  ],
+  "declaration_count": 6,
+  "deletion_authorized": false,
+  "purpose": "source-bearing Round bundle extraction plan",
+  "schema_version": 2
+}

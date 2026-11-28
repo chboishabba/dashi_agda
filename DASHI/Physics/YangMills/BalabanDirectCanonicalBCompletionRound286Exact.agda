@@ -25,7 +25,6 @@ import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRoun
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact as R284
 import DASHI.Physics.YangMills.BalabanClusteringDecayRatioToGapRound285Exact as R285
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact as R275
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 record DirectCanonicalBPayment
@@ -51,25 +50,6 @@ record DirectCanonicalBPayment
 
 open DirectCanonicalBPayment public
 
-asCanonicalBPayment275 :
-  ∀ {Measure TestObservable SpectralObservable Energy}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-    {tests : R278.SelectedConnectedCovarianceTests dataSet}
-    {source : R281.ContinuumCovarianceSpectrumData
-      {SpectralObservable = SpectralObservable} {Energy = Energy}
-      dataSet extension tests} →
-  DirectCanonicalBPayment dataSet extension tests source →
-  R275.CanonicalBPayment275 (R281.asReconstructedClusteringSpectrum source)
-asCanonicalBPayment275 payment = record
-  { R275.CanonicalBPayment275.clusteringUpper =
-      R284.compileDirectCMP116ToContinuumClustering
-        (clusteringPayment payment)
-  ; R275.CanonicalBPayment275.candidatePositive =
-      R285.candidateGapPositiveFromDecayRate
-        (gapIdentification payment)
-  }
-
 compileDirectCanonicalBToPositiveTransferGap :
   ∀ {Measure TestObservable SpectralObservable Energy}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
@@ -80,8 +60,13 @@ compileDirectCanonicalBToPositiveTransferGap :
       dataSet extension tests} →
   DirectCanonicalBPayment dataSet extension tests source →
   Gap.PositiveTransferGap (R281.asReconstructedClusteringSpectrum source)
-compileDirectCanonicalBToPositiveTransferGap payment =
-  R275.compileCanonicalBPayment (asCanonicalBPayment275 payment)
+compileDirectCanonicalBToPositiveTransferGap {source = source} payment =
+  Gap.positiveTransferGapFromClusteringCutset
+    (R281.asReconstructedClusteringSpectrum source)
+    (R284.compileDirectCMP116ToContinuumClustering
+      (clusteringPayment payment))
+    (R285.candidateGapPositiveFromDecayRate
+      (gapIdentification payment))
 
 record Round286Boundary : Set where
   constructor round286-boundary

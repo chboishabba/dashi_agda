@@ -42,16 +42,16 @@ t5FiniteExpectationAlgebra :
     (extension : R278.ScalarCovarianceConvergenceExtension dataSet) →
   Cumulant.TwoSourceMomentAlgebra Observable (Nat → ℚ)
 t5FiniteExpectationAlgebra dataSet extension = record
-  { Cumulant.TwoSourceMomentAlgebra.subtract =
+  { subtract =
       λ first second cutoff →
         Gram.add (Gram.operations dataSet)
           (first cutoff) (R278.negate extension (second cutoff))
-  ; Cumulant.TwoSourceMomentAlgebra.multiply =
+  ; multiply =
       λ first second cutoff →
         Gram.multiply (Gram.operations dataSet) (first cutoff) (second cutoff)
-  ; Cumulant.TwoSourceMomentAlgebra.productObservable =
+  ; productObservable =
       Gram.multiplyObservable (Gram.operations dataSet)
-  ; Cumulant.TwoSourceMomentAlgebra.expectation =
+  ; expectation =
       λ observable cutoff →
         Gram.expectation (Gram.operations dataSet)
           (Gram.measureSequence dataSet cutoff) observable
@@ -135,16 +135,16 @@ asR293StateFamily :
     (Scale presentation) (Volume presentation) (Root presentation)
     Nat TestObservable (SourceDirection presentation)
 asR293StateFamily {extension = extension} presentation = record
-  { R293.StateFamilyTwoJSourcePresentation.algebra =
+  { algebra =
       t5FiniteExpectationAlgebra _ extension
-  ; R293.StateFamilyTwoJSourcePresentation.calculus = calculus presentation
-  ; R293.StateFamilyTwoJSourcePresentation.meaning = meaning presentation
-  ; R293.StateFamilyTwoJSourcePresentation.shellData = shellData presentation
-  ; R293.StateFamilyTwoJSourcePresentation.scaleOf = scaleOf presentation
-  ; R293.StateFamilyTwoJSourcePresentation.volumeOf = volumeOf presentation
-  ; R293.StateFamilyTwoJSourcePresentation.physicalDistance = physicalDistance presentation
-  ; R293.StateFamilyTwoJSourcePresentation.connectingRoot = connectingRoot presentation
-  ; R293.StateFamilyTwoJSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
+  ; calculus = calculus presentation
+  ; meaning = meaning presentation
+  ; shellData = shellData presentation
+  ; scaleOf = scaleOf presentation
+  ; volumeOf = volumeOf presentation
+  ; physicalDistance = physicalDistance presentation
+  ; connectingRoot = connectingRoot presentation
+  ; differentiatedSourceBoundOnSelectedDirections =
       λ cutoff left right →
         ℚP.≤-trans
           (signedBelowMagnitude presentation
@@ -164,27 +164,27 @@ asR290Presentation :
     (Scale presentation) (Volume presentation) (Root presentation)
     Nat TestObservable (SourceDirection presentation)
 asR290Presentation {dataSet = dataSet} {extension = extension} presentation = record
-  { R290.TwoPhysicalJInsertionSourcePresentation.shellData = shellData presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.scaleOf = scaleOf presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.volumeOf = volumeOf presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.physicalDistance =
+  { shellData = shellData presentation
+  ; scaleOf = scaleOf presentation
+  ; volumeOf = volumeOf presentation
+  ; physicalDistance =
       physicalDistance presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.connectingRoot =
+  ; connectingRoot =
       connectingRoot presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.sourceDirection =
+  ; sourceDirection =
       Cumulant.sourceDirectionOf (meaning presentation)
-  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogSourceDerivativeMagnitude =
+  ; secondLogSourceDerivativeMagnitude =
       λ cutoff leftDirection rightDirection →
         R278.magnitude extension
           (Cumulant.literalMixedSecondLogDerivative (meaning presentation)
             leftDirection rightDirection cutoff)
-  ; R290.TwoPhysicalJInsertionSourcePresentation.connectedCovarianceMagnitude =
+  ; connectedCovarianceMagnitude =
       λ cutoff left right →
         R278.connectedCovarianceMagnitude extension
           (Gram.measureSequence dataSet cutoff) left right
-  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogDerivativeIsConnectedCovariance =
+  ; secondLogDerivativeIsConnectedCovariance =
       mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude presentation
-  ; R290.TwoPhysicalJInsertionSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
+  ; differentiatedSourceBoundOnSelectedDirections =
       differentiatedSourceMagnitudeBoundOnSelectedDirections presentation
   }
 
@@ -195,15 +195,15 @@ asR291Presentation :
   (presentation : DirectT5StateFamilyJPresentation dataSet extension) →
   R291.DirectT5JInsertionShellPresentation dataSet extension
 asR291Presentation presentation = record
-  { R291.DirectT5JInsertionShellPresentation.Scale = Scale presentation
-  ; R291.DirectT5JInsertionShellPresentation.Volume = Volume presentation
-  ; R291.DirectT5JInsertionShellPresentation.Root = Root presentation
-  ; R291.DirectT5JInsertionShellPresentation.SourceDirection = SourceDirection presentation
-  ; R291.DirectT5JInsertionShellPresentation.sourcePresentation =
+  { Scale = Scale presentation
+  ; Volume = Volume presentation
+  ; Root = Root presentation
+  ; SourceDirection = SourceDirection presentation
+  ; sourcePresentation =
       asR290Presentation presentation
-  ; R291.DirectT5JInsertionShellPresentation.sourceCovarianceIsSelectedT5Covariance =
+  ; sourceCovarianceIsSelectedT5Covariance =
       λ cutoff left right → refl
-  ; R291.DirectT5JInsertionShellPresentation.ConnectingClusterMeetsBothSupports =
+  ; ConnectingClusterMeetsBothSupports =
       ConnectingClusterMeetsBothSupports presentation
   }
 

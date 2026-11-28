@@ -36,7 +36,6 @@ open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
-import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact as R275
 import DASHI.Physics.YangMills.BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact as R280
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 

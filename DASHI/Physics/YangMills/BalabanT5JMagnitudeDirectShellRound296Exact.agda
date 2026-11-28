@@ -72,25 +72,25 @@ asMagnitudeCorrectedPresentation :
   Magnitude295.CorrectedT5TwoJMagnitudePresentation dataSet extension
 asMagnitudeCorrectedPresentation {dataSet = dataSet} {extension = extension}
     presentation = record
-  { Magnitude295.CorrectedT5TwoJMagnitudePresentation.Scale =
+  { Scale =
       T5Source.Scale (source presentation)
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.Volume =
+  ; Volume =
       T5Source.Volume (source presentation)
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.Root =
+  ; Root =
       T5Source.Root (source presentation)
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.SourceDirection =
+  ; SourceDirection =
       T5Source.SourceDirection (source presentation)
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.sourceFamily =
+  ; sourceFamily =
       T5Source.asR293StateFamily (source presentation)
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.sourceSignedCovarianceIsSelectedT5Value =
+  ; sourceSignedCovarianceIsSelectedT5Value =
       λ cutoff left right →
         T5Source.sourceConnectedCovarianceIsExactFiniteT5
           dataSet extension left right cutoff
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.t5MagnitudeIsRationalAbsolute =
+  ; t5MagnitudeIsRationalAbsolute =
       t5MagnitudeIsRationalAbsolute presentation
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.literalTwoJMagnitudeBelowConnectingShell =
+  ; literalTwoJMagnitudeBelowConnectingShell =
       literalTwoJMagnitudeBelowConnectingShell presentation
-  ; Magnitude295.CorrectedT5TwoJMagnitudePresentation.ConnectingClusterMeetsBothSupports =
+  ; ConnectingClusterMeetsBothSupports =
       T5Source.ConnectingClusterMeetsBothSupports (source presentation)
   }
 
