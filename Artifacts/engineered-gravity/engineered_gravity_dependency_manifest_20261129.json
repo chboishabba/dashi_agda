@@ -452,6 +452,20 @@
       "physical_paid": false,
       "source_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76",
       "checker_git_blob_sha1": "b27efd0f5110228955276a99801675027faa97a9"
+    },
+    "moving_constraint_family": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G3_vacuum",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_moving_constraint_family.py",
+      "scope": "Constructive nonstationary radial mass/lapse-slope density and pressure shape with exact original TOV static limit, zero surface source and Schwarzschild spatial matching. Off-original-constitutive-action and unsolved angular Einstein/matter dynamics.",
+      "source_equation": "m(t,r)=alpha/2*((r/R)^3/3-(r/R)^5/5); rho=alpha*(1-(r/R)^2)/(8pi R^3); j=rho*r*R_t/(R*N*sqrt(f))",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "23f2f03c33300c59a15d648698201220f76c6f5d"
     }
   }
 }
