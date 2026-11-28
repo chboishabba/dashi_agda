@@ -74,3 +74,57 @@ def exact_uniform_block(T,K,block_steps,step_error):
                 actual_changing_material_return_admitted=False)
     return dict(status='NO_REFERENCE_CONTRACTION',conditional_decay_proved=False,
         actual_changing_material_return_admitted=False)
+
+def right_limit_reference(material,cfg,pop):
+    """Actual terminal generator on the fixed support of a birth-free tail.
+    Inactive padded current slots excluded from the occupied subspace.
+    """
+    from solar_spherical_cycle import geometry
+    from solar_spherical_material_weld import construct,structural_stage_atlas
+    from solar_material_generator_jvp import amplitude_material_boundary_jvp
+    from solar_earth_collision_tensor import rates
+    from solar_matrix_storage import diagonal
+    from solar_physical_cone import timed_step
+    depth=int(cfg.get('nested_depth',0));sparse=bool(depth or cfg.get('sparse_operator',False))
+    if np.any(np.asarray(cfg['kinetics']['ionization_s_inv'])!=0):
+        raise ValueError('birth-free tail requires zero baseline ionization')
+    rows,neutral,D,gyro,axis=material
+    vol,mesh,ne,nf=geometry(cfg['radii_m'],cfg['angular_level'],depth)
+    pop=np.asarray(pop,float);active=pop>0
+    if pop.shape!=(len(vol),3) or np.any(pop<0):raise ValueError('invalid right support')
+    nu=rates(rows,neutral);z=np.zeros_like(pop)
+    model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(len(vol)),vol,z,nu,gyro,axis,
+        nested_depth=depth,sparse_operator=sparse)
+    right=amplitude_material_boundary_jvp(model,vol,z,z,nu,z,gyro,axis,active)['right_limit']
+    N=right.shape[0];port=np.zeros(N);port[int(cfg['source_edge'])]=float(cfg['source_coupling_sqrt_inv_s'])
+    load=np.asarray(cfg.get('terminal_load_rate_s_inv',cfg['load_rate_s_inv']),float)
+    if load.shape!=(ne,) or np.any(load<0):raise ValueError('invalid terminal receiver')
+    H=right-diagonal(np.r_[load,np.zeros(N-ne)]+port**2,sparse)
+    atlas=structural_stage_atlas(model,mesh)
+    occupied=np.r_[np.ones(ne+nf,dtype=bool),np.repeat(active.ravel(),3)]
+    dt=float(cfg['period_s'])/len(cfg['incident_sqrt_W'])
+    # All future stages leave this coordinate subspace invariant: no birth,
+    # inactive species have zero coupling/local block, and the affine event
+    # is diagonal. This statement needs support to remain mathematically
+    # positive, not numerically underflowed.
+    _,receipt=timed_step(np.zeros(N),H,np.zeros(N),dt,mesh,atlas_pairs=atlas)
+    return dict(generator=H,receipt=receipt,occupied=occupied,atlas=atlas,dt=dt,model=model,
+        finite_reaction_support_premise=True,physical_admission=False)
+
+def reverse_tail_start(envelope,target,max_steps=2**40):
+    """Back-solve smallest integer step satisfying monotone numerical envelope.
+    The callback must be the actual monotone tail_envelope, not a sample fit.
+    """
+    if not 0<target<1 or max_steps<1:raise ValueError('invalid contraction margin')
+    def ok(k):return envelope(k)['operator_step_error_upper_candidate']<=target
+    if ok(0):return dict(status='CANDIDATE',start_step=0,outward_rounding_certified=False)
+    hi=1
+    while hi<max_steps and not ok(hi):hi=min(hi*2,max_steps)
+    if not ok(hi):return dict(status='MARGIN_NOT_REACHED',outward_rounding_certified=False)
+    lo=0
+    while hi-lo>1:
+        m=(lo+hi)//2
+        if ok(m):hi=m
+        else:lo=m
+    return dict(status='CANDIDATE',start_step=hi,operator_step_error_upper_candidate=envelope(hi)['operator_step_error_upper_candidate'],
+        outward_rounding_certified=False)
