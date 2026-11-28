@@ -479,6 +479,20 @@
       "physical_paid": false,
       "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
       "checker_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af"
+    },
+    "original_euler_firstjet": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_tov_original_material_flux_weld.py",
+      "checker": "scripts/check_tov_original_euler_firstjet_weld.py",
+      "source_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af",
+      "checker_git_blob_sha1": "c7ee43c76d864b3490638599f5a33600fc3194ec",
+      "physical_paid": false,
+      "scope": "Original repaired material action first time jets: radial mass flux and density time derivative exactly match the prescribed scaled Einstein mass profile, but scaled radial-pressure profile is incompatible; original action pressure demands lapse-gradient correction. Full material Euler acceleration and angular Einstein evolution open.",
+      "source_equation": "Y_t=-r*(lambda+2)/(lambda+1+r^2)*Sdot; rho_t=alpha*(-3+5r^2)*Sdot/(8pi); delta(nu_r)_t=4pi*r*(p_action,t-p_scaled,t)/f0"
     }
   }
 }
