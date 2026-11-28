@@ -41,7 +41,7 @@ def reduced(m,a,delay=.01,gain=100.):
         print('PASS exact structural delay factorization (numerical readback)',d,n,flush=True)
     return matrices,R,d,n,verify
 
-def block(m,a,delay,knots,start,stop,tol,out):
+def block(m,a,delay,knots,start,stop,tol,out,export=False):
     mat,R,d,n,verify=reduced(m,a,delay);verify()
     if knots<2:raise ValueError('at least two history intervals')
     # Current state plus ratio history at knots excluding t=0; endpoint
@@ -51,7 +51,7 @@ def block(m,a,delay,knots,start,stop,tol,out):
     k=stop-start
     basis=np.eye(size)[:,start:stop];Y=basis[:d].copy()
     past=np.concatenate((basis[d:].reshape(knots,n,k),(R(0)@Y)[None]),axis=0)
-    pieces=[]
+    pieces=[]; exported=[]
     def hist(s):
         if s<=0:
             j=min(knots-1,max(0,np.searchsorted(grid,s,side='right')-1))
@@ -68,12 +68,25 @@ def block(m,a,delay,knots,start,stop,tol,out):
         end=min(T,t+delay)
         s=solve_ivp(f,(t,end),Y.ravel(),method='DOP853',rtol=tol,atol=tol*.01,dense_output=True)
         if not s.success:raise RuntimeError(s.message)
+        if export:
+            # DOP853 dense polynomial: nested alternating s and 1-s.
+            # Preserve raw binary64 coefficients; independent replay treats
+            # each bit pattern as an exact rational, not as true dynamics.
+            for p in s.sol.interpolants:
+                if not hasattr(p,'F'):raise ValueError('unexpected dense output type')
+                exported.append((p.t_old,p.t,p.y_old.copy(),p.F.copy()))
         pieces.append((t,end,s.sol));Y=s.y[:,-1].reshape(d,k);t=end
         # Only last two delays needed; retain enough for endpoint history.
         pieces=[p for p in pieces if p[1]>=t-2*delay-1e-12]
     M=np.vstack((Y,*[hist(T+s) for s in grid[:-1]]))
     assert M.shape==(size,k) and np.isfinite(M).all()
     np.savez(out,M=M,start=start,stop=stop,delay=delay,knots=knots,tol=tol)
+    if export:
+        from pathlib import Path
+        p=Path(out); trace=p.with_name(p.stem+'_trace.npz')
+        np.savez_compressed(trace,times=np.array([[q[0],q[1]] for q in exported]),
+            y0=np.stack([q[2] for q in exported]),F=np.stack([q[3] for q in exported]),
+            grid=grid,past=past,start=start,stop=stop,d=d,n=n,delay=delay,knots=knots,tol=tol)
     print('PASS finite history return block',size,start,stop,flush=True)
 
 def assemble(paths):
