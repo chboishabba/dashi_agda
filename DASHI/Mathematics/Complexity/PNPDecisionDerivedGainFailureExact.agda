@@ -10,7 +10,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Fin.Base using (Fin)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.BooleanFormulaFiniteSATDecisionExact as Finite
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
@@ -29,6 +29,19 @@ assignment {n = zero} c f = Finite.emptyAssignment
 assignment {n = suc n} c f with query c f
 ... | true = SAT.extendAssignment false (assignment c (SAT.restrictHead false f))
 ... | false = SAT.extendAssignment true (assignment c (SAT.restrictHead true f))
+
+queryCount : ∀ {cost n} → Candidate cost → SAT.BooleanFormula n → Nat
+queryCount {n = zero} c f = zero
+queryCount {n = suc n} c f with query c f
+... | true = suc (queryCount c (SAT.restrictHead false f))
+... | false = suc (queryCount c (SAT.restrictHead true f))
+
+queryCountExact : ∀ {cost n} (c : Candidate cost) (f : SAT.BooleanFormula n) →
+  queryCount c f ≡ n
+queryCountExact {n = zero} c f = refl
+queryCountExact {n = suc n} c f with query c f
+... | true = cong suc (queryCountExact c (SAT.restrictHead false f))
+... | false = cong suc (queryCountExact c (SAT.restrictHead true f))
 
 data TraceFailure {cost : PR.PolynomialCostModel Cook.BooleanFormula}
   (c : Candidate cost) : ∀ {n} → SAT.BooleanFormula n → Set₁ where
