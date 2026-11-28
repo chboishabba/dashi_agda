@@ -43,6 +43,8 @@ zpow a (suc n) = Z._*_ a (zpow a n)
 
 -- Trace q^n coefficient of the k-th power, for k<=41.
 -- k=41 also has one negative coefficient q^-1=41.
+-- Newton iteration k is zero-based: the next elementary is e_(k+1),
+-- and the exact integer division is by k+1, NEVER by k.
 trace : SeriesZ → Nat → SeriesZ
 trace j k n = Z._*_ (+ 41) (power j k (41 * n + k))
 
@@ -51,7 +53,7 @@ newton j es k n = sum k (λ i → Z._*_ (sign i)
   (rowZ (row es (k ∸ suc i)) (trace j (suc i)) n))
 
 nextE : SeriesZ → Matrix → Nat → List ℤ
-nextE j es k = build (λ _ n → divPositive (newton j es (suc k) n) k) 41
+nextE j es k = build (λ _ n → divPositive (newton j es (suc k) n) (suc k)) 41
 
 elementariesFrom : SeriesZ → Matrix → Nat → Nat → Matrix
 elementariesFrom j es k zero = es
