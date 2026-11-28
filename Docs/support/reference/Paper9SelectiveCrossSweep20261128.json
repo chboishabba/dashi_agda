@@ -1,0 +1,117 @@
+{
+  "digits": 1000000,
+  "source_blob": "0c98513d9f17489d65b0a4a295d994ab0aacde70",
+  "local_blob": "0c98513d9f17489d65b0a4a295d994ab0aacde70",
+  "original_blob": "28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e",
+  "timeout_seconds_per_batch": 90,
+  "hash": "130203eb055a962b8441af76c22b75627ec18c672a485904e567f59251e8ee18",
+  "all_25_hashes_match": true,
+  "all_attempts_one": true,
+  "sweep": [
+    {
+      "threshold": 2,
+      "ms": 937.991,
+      "bits": 9034322
+    },
+    {
+      "threshold": 4,
+      "ms": 958.454,
+      "bits": 9034412
+    },
+    {
+      "threshold": 8,
+      "ms": 922.3,
+      "bits": 9034478
+    },
+    {
+      "threshold": 16,
+      "ms": 901.443,
+      "bits": 9034721
+    },
+    {
+      "threshold": 32,
+      "ms": 906.114,
+      "bits": 9035324
+    },
+    {
+      "threshold": 64,
+      "ms": 886.1,
+      "bits": 9036567
+    },
+    {
+      "threshold": 128,
+      "ms": 882.203,
+      "bits": 9039413
+    },
+    {
+      "threshold": 256,
+      "ms": 893.286,
+      "bits": 9045824
+    },
+    {
+      "threshold": 512,
+      "ms": 1175.526,
+      "bits": 9059579
+    },
+    {
+      "threshold": 1024,
+      "ms": 899.004,
+      "bits": 9089388
+    },
+    {
+      "threshold": 4096,
+      "ms": 955.214,
+      "bits": 9286488
+    },
+    {
+      "threshold": 16384,
+      "ms": 874.521,
+      "bits": 10130672
+    },
+    {
+      "threshold": 1000000000,
+      "ms": 846.181,
+      "bits": 18472995
+    }
+  ],
+  "repeats": [
+    {
+      "threshold": 128,
+      "ms": [
+        909.703,
+        892.911,
+        1052.19
+      ],
+      "median_ms": 909.703
+    },
+    {
+      "threshold": 16384,
+      "ms": [
+        992.034,
+        942.689,
+        1041.676
+      ],
+      "median_ms": 992.034
+    },
+    {
+      "threshold": 1000000000,
+      "ms": [
+        842.777,
+        885.966,
+        809.383
+      ],
+      "median_ms": 842.777
+    },
+    {
+      "threshold": 2,
+      "ms": [
+        997.931,
+        1294.374,
+        1117.155
+      ],
+      "median_ms": 1117.155
+    }
+  ],
+  "peak_rss_measured": false,
+  "external_sota_compared": false
+}
