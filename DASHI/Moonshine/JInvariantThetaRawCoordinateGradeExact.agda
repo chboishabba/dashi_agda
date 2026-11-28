@@ -59,13 +59,13 @@ squareGradeRead -[1+ n ] = refl
 halfGradeRead : ∀ z → oddCoordinate z * oddCoordinate z ≡ (+ 4) * (+ halfGrade z) + (+ 1)
 halfGradeRead (+ n) = solve 1
   (λ x → (con (+ 2) :* x :+ con (+ 1)) :* (con (+ 2) :* x :+ con (+ 1))
-    := con (+ 4) :* (x :* (x :+ con (+ 1))) :+ con (+ 1)) refl (+ n)
+    := con (+ 4) :* (x :* (con (+ 1) :+ x)) :+ con (+ 1)) refl (+ n)
 halfGradeRead -[1+ n ] =
   -- -[1+n] is -(n+1), so the same triangular grade is retained.
   solve 1 (λ x →
-    (con (+ 2) :* (con (+ 0) :- (x :+ con (+ 1))) :+ con (+ 1)) :*
-    (con (+ 2) :* (con (+ 0) :- (x :+ con (+ 1))) :+ con (+ 1))
-    := con (+ 4) :* (x :* (x :+ con (+ 1))) :+ con (+ 1)) refl (+ n)
+    (con (+ 2) :* (con (+ 0) :- (con (+ 1) :+ x)) :+ con (+ 1)) :*
+    (con (+ 2) :* (con (+ 0) :- (con (+ 1) :+ x)) :+ con (+ 1))
+    := con (+ 4) :* (x :* (con (+ 1) :+ x)) :+ con (+ 1)) refl (+ n)
 
 mapAppend : ∀ {A B : Set} (f : A → B) xs ys →
   map f (xs ++ ys) ≡ map f xs ++ map f ys
