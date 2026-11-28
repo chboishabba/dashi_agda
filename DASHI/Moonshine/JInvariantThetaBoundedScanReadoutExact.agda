@@ -88,7 +88,7 @@ positiveZero f nonzero (suc k) rewrite deltaDifferent (f (suc k)) zero (nonzero 
 
 squareNonzero : ∀ k → T.sqN (suc k) ≢ zero
 squareNonzero k eq = NP.1+n≰n
-  (subst (suc k ≤_) eq (squareBound (suc k)))
+  (NP.≤-trans (subst (suc k ≤_) eq (squareBound (suc k))) (z≤n {n = k}))
 
 squareScan : Nat → List Nat
 squareScan k = zero ∷ (positive T.sqN k ++ positive T.sqN k)
