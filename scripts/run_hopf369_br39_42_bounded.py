@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–67 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–72 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -67,8 +67,16 @@ PARTS={
     ("BR65.reference","check_hopf369_br65_optical_geometric_israel_weld.py",("--part","reference")),
     ("BR66.mean","check_hopf369_br66_nonzero_mean_israel_weld.py",()),
     ("BR67.coeff","check_hopf369_br67_eighth_order_israel_source.py",("--part","coeff")),
+    ("BR68.gauge","check_hopf369_br68_physical_gauge_mean.py",("--part","gauge")),
+    ("BR68.mean","check_hopf369_br68_physical_gauge_mean.py",("--part","mean")),
+    ("BR69.tower","check_hopf369_br69_physical_gauge_mean_tower.py",("--part","all")),
+    ("BR70.frame","check_hopf369_br70_moving_gauge_frame.py",("--part","frame")),
+    ("BR70.shift","check_hopf369_br70_moving_gauge_frame.py",("--part","shift")),
+    ("BR70.negative","check_hopf369_br70_moving_gauge_frame.py",("--part","negative")),
+    ("BR71.physical","check_hopf369_br71_full_physical_de_rows.py",("--part","all")),
   ],
   "heavy":[
+    *[(f"BR72.{alloc}.{k}","check_hopf369_br72_unified_eighth_order_boundary.py",("--allocation",alloc,"--order",str(k))) for alloc in ("D","E") for k in range(9)],
     ("BR67.physical","check_hopf369_br67_eighth_order_israel_source.py",("--part","physical")),
     *[(f"BR60.K.{i}","check_hopf369_br60_moving_israel_frechet.py",("--part","component","--index",str(i))) for i in range(10)],
     ("BR52.metric","check_hopf369_br52_all_order_material_flux.py",("--part","metric")),
@@ -166,7 +174,7 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72"}]
     else:
         plans=PARTS[args.part]
     outcome={}
