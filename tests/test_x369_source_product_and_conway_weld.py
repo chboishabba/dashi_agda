@@ -43,7 +43,7 @@ class SourceWeld(unittest.TestCase):
         e=Factor(2,2,np.array([[1,0],[2,1]],dtype=np.int64),I)
         de,s=compose(d,e)
         self.assertIn(s,range(1,7))
-        self.assertTrue(np.array_equal(np.kron(de.W,de.M),
+        self.assertTrue(np.array_equal(np.kron(de.W,de.M)%7,
             np.kron(e.W,e.M)@np.kron(d.W,d.M)%7))
         with self.assertRaises(ValueError):compose(a,c)
 
