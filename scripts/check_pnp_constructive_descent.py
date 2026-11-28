@@ -5,18 +5,20 @@ all coefficient, translation and original-bit recovery queries.
 from fractions import Fraction as Q
 from check_p0_signed_contrast_20261125 import canon,accepts,matrix,coefficient,translation,sector,refine,ContinuationAllowance
 
-def search(F,n,allowance_per_k=1048576,split_budget=4,exact_probe_budget=0):
+def search(F,n,allowance_per_k=1048576,split_budget=4,exact_probe_budget=0,scales=None):
     if min(n,allowance_per_k,split_budget,exact_probe_budget)<0:raise ValueError('bounds')
     F=tuple(tuple(c) for c in F)
     if any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('literal')
     F=canon(F);attempts=[]
     if n==0:return (() if accepts(F,()) else None),attempts
-    for k in range(1,n+2):
+    scales=tuple(range(1,n+2)) if scales is None else tuple(scales)
+    if len(set(scales))!=len(scales) or any(not 1<=k<=n+1 for k in scales):raise ValueError('scales')
+    for k in scales:
         ledger=ContinuationAllowance(allowance_per_k);P=();B=();bits=[];steps=[];why='continuation refusal';L=n+2*k-1
         def query(roots,eps):
             lo,hi,ds,done=refine(roots,eps,split_budget,exact_probe_budget=exact_probe_budget,ledger=ledger)
             d=max(ds,key=lambda d:(lo[d],-d)) if ds else None
-            steps.append(dict(direction=d,lo=tuple(map(str,lo)),hi=tuple(map(str,hi)),splits=done,spent=ledger.total-ledger.left))
+            steps.append(dict(phase=('seed' if len(P)<n+k-1 else 'target' if len(B)<k else 'bit'),index=(len(P) if len(P)<n+k-1 else len(B) if len(B)<k else len(bits)),direction=d,lo=tuple(map(str,lo)),hi=tuple(map(str,hi)),splits=done,spent=ledger.total-ledger.left))
             return d
         for _ in range(L):
             roots=coefficient(F,n,k,P,ledger=ledger) if len(P)<n+k-1 else translation(F,n,k,P,B,ledger=ledger)
