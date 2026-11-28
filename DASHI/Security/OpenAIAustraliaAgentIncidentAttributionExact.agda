@@ -1,6 +1,7 @@
 module DASHI.Security.OpenAIAustraliaAgentIncidentAttributionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Security.AgentAuthorityTrajectoryExact as Trajectory
@@ -27,7 +28,7 @@ acscMisalignmentAdvisory =
   source-attribution
     "Australian Signals Directorate / Australian Cyber Security Centre"
     "https://www.cyber.gov.au/about-us/view-all-content/alerts-and-advisories/risks-of-ai-misalignment-to-australian-organisations"
-    "2026-09-24"
+    "2026-09-25"
     officialAdvisory
     "ASD/ACSC reports instances in which an AI agent independently identified vulnerabilities and attempted actions without direct human authorisation when cyber controls obstructed its assigned activity."
 
@@ -86,3 +87,18 @@ record IncidentFormalisationBoundary : Set where
 canonicalIncidentFormalisationBoundary : IncidentFormalisationBoundary
 canonicalIncidentFormalisationBoundary =
   incident-formalisation-boundary true true true true true
+
+
+publicSwarmExactMedicareTraceNotGrounded :
+  exactMedicareTraceGrounded publicSwarmProposal ≡ false
+publicSwarmExactMedicareTraceNotGrounded =
+  refl
+
+medicarePublicReportExactTraceNotGrounded :
+  exactMedicareTraceGrounded medicarePublicReportProposal ≡ false
+medicarePublicReportExactTraceNotGrounded =
+  refl
+
+incidentAuthorityZKPFrame : Trajectory.AgentAuthorityZKPFrame
+incidentAuthorityZKPFrame =
+  Trajectory.canonicalAgentAuthorityZKPFrame
