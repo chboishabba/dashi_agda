@@ -607,3 +607,94 @@ module Interior (machine : L.ConcreteTapeMachine) (steps cols : Nat)
   actualTransitionSplit ts j rest h =
     trans (cong lifted (predicateSplit ts j rest h))
       (liftedAppend (prefix ts j) (suffix ts j rest))
+
+
+-- The original stream starts with transition clauses, then initial
+-- units, then acceptance. Bit offsets multiply TOKEN widths by three.
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier as Cursor
+import DASHI.Mathematics.Complexity.CanonicalVirtualFormulaBitSourceExact as Lookup
+import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact as Tokens
+
+module StreamCut (machine : L.ConcreteTapeMachine) (steps cols : Nat)
+  (sc : C.EnumerationCoverage (L.finiteState machine))
+  (ac : C.EnumerationCoverage (L.finiteSymbol machine))
+  (nonempty : R.NonemptyRuleTable machine)
+  (initial : CNF.Bits (D.RowBitsWidth machine cols)) where
+
+  module I = Interior machine steps cols sc ac nonempty
+  open I using (prefix; suffix; rowOffset; columnOffset; prefixWidth)
+  open I.Q using (lifted; size; J)
+
+  endpoints : CNF.CNF (E.ExtendedGlobalWidth machine steps cols)
+  endpoints = Placed.append (E.initialEndpointCNF {machine} {steps} {cols} initial)
+    (E.acceptingEndpointCNF {machine} {steps} {cols} sc ac)
+
+  globalSplit : ∀ {t} (ts : G.Slot t steps) j rest →
+    drop t (Enum.allSlots steps) ≡ Enum.some-slot t ts ∷ rest →
+    Global.globalCookLevinCNF {machine} sc ac nonempty steps cols initial ≡
+    L.append (lifted (prefix ts j)) (L.append (lifted (suffix ts j rest)) endpoints)
+  globalSplit ts j rest h =
+    trans (F.transitionSectionSplit sc ac nonempty steps cols initial)
+      (trans (cong (λ xs → L.append xs endpoints)
+        (I.actualTransitionSplit ts j rest h))
+        (F.appendAssoc (lifted (prefix ts j)) (lifted (suffix ts j rest)) endpoints))
+
+  streamedInterior : ∀ {t} (ts : G.Slot t steps) j rest k
+    (ht : t ≤ steps) (hj : j ≤ J) →
+    drop t (Enum.allSlots steps) ≡ Enum.some-slot t ts ∷ rest →
+    Cursor.streamedCookBit sc ac nonempty steps cols initial
+      (3 * (rowOffset t + columnOffset t j) + k)
+    ≡ Lookup.lookupBit k (Tokens.cnfTokenBits
+      (L.append (lifted (suffix ts j rest)) endpoints))
+  streamedInterior ts j rest k ht hj h
+    rewrite sym (prefixWidth ts j ht hj) =
+    F.streamedAtSplit sc ac nonempty steps cols initial
+      (lifted (prefix ts j)) (L.append (lifted (suffix ts j rest)) endpoints)
+      k (globalSplit ts j rest h)
+
+  -- At an admissible cut, windowAtCut identifies the head of this
+  -- exact suffix. The local token seeker may then use its original
+  -- clause order. No materialized prefix is needed in the arithmetic model.
+
+-- Actual initial unit section length, including the negative-literal
+-- count. The generic index-offset hypothesis is discharged below by
+-- the existing row-zero Fin placement identity.
+open import Agda.Builtin.Bool using (Bool; true; false)
+
+zeroCount : ∀ {n} → CNF.Bits n → Nat
+zeroCount CNF.[]ᵇ = zero
+zeroCount (false CNF.∷ᵇ xs) = suc (zeroCount xs)
+zeroCount (true CNF.∷ᵇ xs) = zeroCount xs
+
+unitWidthExact : ∀ {n m} (rename : Fin.Fin n → Fin.Fin m)
+  (p : Nat) (bits : CNF.Bits n) →
+  (∀ i → Fin.toℕ (rename i) ≡ p + Fin.toℕ i) →
+  F.bodyWidth (E.unitClausesForTarget rename bits) ≡
+    F.tri n + (p + 5) * n + zeroCount bits
+unitWidthExact {zero} rename p CNF.[]ᵇ h =
+  solve 1 (λ p → con 0 := con 0 :+ (p :+ con 5) :* con 0 :+ con 0) refl p
+unitWidthExact {suc n} rename p (false CNF.∷ᵇ bits) h
+  rewrite h Fin.zero | unitWidthExact (λ i → rename (Fin.suc i)) (suc p) bits next =
+  solve 4 (λ p n t z → con 6 :+ p :+
+    (t :+ (con 1 :+ p :+ con 5) :* n :+ z) :=
+    (t :+ n) :+ (p :+ con 5) :* (con 1 :+ n) :+ (con 1 :+ z))
+    refl p n (F.tri n) (zeroCount bits)
+  where
+    next : ∀ i → Fin.toℕ (rename (Fin.suc i)) ≡ suc p + Fin.toℕ i
+    next i = trans (h (Fin.suc i)) (N.+-suc p (Fin.toℕ i))
+unitWidthExact {suc n} rename p (true CNF.∷ᵇ bits) h
+  rewrite h Fin.zero | unitWidthExact (λ i → rename (Fin.suc i)) (suc p) bits next =
+  solve 4 (λ p n t z → con 5 :+ p :+ (t :+ (con 1 :+ p :+ con 5) :* n :+ z) :=
+    (t :+ n) :+ (p :+ con 5) :* (con 1 :+ n) :+ z)
+    refl p n (F.tri n) (zeroCount bits)
+  where
+    next : ∀ i → Fin.toℕ (rename (Fin.suc i)) ≡ suc p + Fin.toℕ i
+    next i = trans (h (Fin.suc i)) (N.+-suc p (Fin.toℕ i))
+
+initialWidthExact : ∀ {machine steps cols}
+  (bits : CNF.Bits (D.RowBitsWidth machine cols)) →
+  F.bodyWidth (E.initialEndpointCNF {machine} {steps} {cols} bits) ≡
+    F.tri (D.RowBitsWidth machine cols) + 5 * D.RowBitsWidth machine cols + zeroCount bits
+initialWidthExact {machine} {steps} {cols} bits =
+  unitWidthExact (E.initialRowExtendedRename {machine} {steps} {cols}) zero bits
+    (λ i → trans (A.leftIndex _) (A.rowIndex {machine} {steps} {cols} G.here i))
