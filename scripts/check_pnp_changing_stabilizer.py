@@ -126,14 +126,12 @@ def finish_residual(D,P,j,F,rows,target,B):
         lo,hi,_=q
         if hi[0]==0:continue
         if lo[0]<=0:unknown=True;continue
-        positive=True;z={}
-        for i in R:
-            for b in (0,1):
-                C1=C+(((i+1) if b else -(i+1),),)
-                r=query(C1)
-                if r is not None and r[0][0]>0:
-                    C=C1;z[i]=b;break
-            else:break
+        positive=True
+        from check_pnp_positive_residual import recover
+        # Limit recovery to this fibre's fair share of remaining allowance.
+        cap=min(B.left,2*len(R)*per_query);B.pay(cap)
+        z=recover(C,R,rows,cols,t,n,lo,hi,Budget(cap))
+        if z is None:continue
         if len(z)==len(R):
             x=tuple((w|z)[i] for i in range(n))
             assert accepts(F,x) and tuple(sum(a*b for a,b in zip(row,x))%3 for row in rows)==tuple(t%3 for t in target)
