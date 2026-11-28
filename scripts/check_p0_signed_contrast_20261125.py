@@ -38,13 +38,14 @@ class ContinuationAllowance:
     def __init__(self,total):
         if total<0:raise ValueError('allowance')
         self.total=total;self.left=total;self.charges={};self.baseline_cells=0;self.boundary_attempts=0
+        self.phase_completed=0;self.phase_refused=0;self.phase_leaves=0;self.phase_preflight=0
     def reserve(self,name,cap):
         if cap<0:raise ValueError('negative cap')
         if cap>self.left:return False
         self.left-=cap;self.charges[name]=self.charges.get(name,0)+cap
         return True
 
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None,phase_degree=3,phase_leaf_cap=64):
     if ledger is not None:ledger.baseline_cells+=1
     def take(name,cap):return bool(cap) and (ledger is None or ledger.reserve(name,cap))
     # Unit propagation keeps both target and observable offset on original indices.
@@ -143,10 +144,19 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # Verified structured phase generator, then signed overlapping-clause
     # intersections with low-rank cube characters. Independent caps;
     # refused attempts leave the previous certified interval intact.
-    if E is not None and any(a!=b for a,b in zip(lo,hi)) and take('phase',phase_budget):
-        cert=structured_contrast(F,cols,target,offset,remaining,w,component_width,64,phase_budget,degree_cap=3,phase_branch_cap=64)
-        if cert is not None:
-            a,b,_=cert
+    # Minimum input traversal charge already used by the phase producer.
+    # This is not a degree oracle: non-cubicity requires verification.
+    phase_min=1+len(remaining)+len(target)+sum(1+len(c) for c in F)
+    if E is not None and phase_budget and phase_budget<phase_min and ledger is not None:
+        ledger.phase_preflight+=1
+    if E is not None and phase_budget>=phase_min and any(a!=b for a,b in zip(lo,hi)) and take('phase',phase_budget):
+        cert=structured_contrast(F,cols,target,offset,remaining,w,component_width,64,phase_budget,degree_cap=phase_degree,phase_branch_cap=phase_leaf_cap)
+        if cert is None:
+            if ledger is not None:ledger.phase_refused+=1
+        else:
+            a,b,st=cert
+            if ledger is not None:
+                ledger.phase_completed+=1;ledger.phase_leaves+=st['phase_leaves']
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
             lo,hi=list(a),list(b)
     if any(a!=b for a,b in zip(lo,hi)) and take('mobius',mobius_budget):
@@ -167,7 +177,9 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
 def sector(F,n,rows,target,obs,w,order=None,offset=0,ledger=None):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
     return cell(canon(F),cols,tuple(target),offset,tuple(range(n)) if order is None else tuple(order),w,ledger=ledger)
-def refine(roots,eps,budget,focus=True,exact_probe_budget=0,ledger=None):
+def refine(roots,eps,budget,focus=True,exact_probe_budget=0,ledger=None,cell_options=None):
+    cell_options={} if cell_options is None else dict(cell_options)
+    if 'ledger' in cell_options:raise ValueError('pass ledger explicitly')
     lo=[Q(0)]*3;hi=lo.copy();heap=[];serial=0;done=0
     def account(c,sign):
         for d in range(3):lo[d]+=sign*c[-2][d];hi[d]+=sign*c[-1][d]
@@ -217,7 +229,7 @@ def refine(roots,eps,budget,focus=True,exact_probe_budget=0,ledger=None):
             _,_,c=heap.pop(index);heapify(heap)
         else:_,_,c=heappop(heap)
         account(c,-1);F,cols,t,o,R,w,_,_=c;i=R[0]
-        for bit in (0,1):push(cell(restrict(F,i,bit),cols,add(t,cols[i][:-1],-bit),(o+bit*cols[i][-1])%3,R[1:],w,ledger=ledger))
+        for bit in (0,1):push(cell(restrict(F,i,bit),cols,add(t,cols[i][:-1],-bit),(o+bit*cols[i][-1])%3,R[1:],w,ledger=ledger,**cell_options))
         done+=1
 
 def pair(F,n,j,sign=None):
