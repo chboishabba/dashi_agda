@@ -170,3 +170,11 @@ originalSymmetryCheck = symmetryDec originalMatrix
 
 originalPacketCheck : Dec (PacketGate originalMatrix)
 originalPacketCheck = packetDec originalMatrix
+
+-- Keep these four decisions separate: a symmetric packet is not by
+-- itself proof that its coefficients came from the actual Hecke roots.
+originalNewtonCheck : Dec (NewtonGate C.j (elementaries C.j))
+originalNewtonCheck = newtonDec C.j (elementaries C.j)
+
+originalColumnCheck : Dec (ColumnGate C.j (elementaries C.j) originalMatrix)
+originalColumnCheck = columnDec C.j (elementaries C.j) originalMatrix
