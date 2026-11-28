@@ -6,6 +6,7 @@ from heapq import heappush, heappop, heapify
 from check_p0_budgeted_residual_20261125 import cap as source_cap, pair_source
 from check_pnp_signed_component_histogram import component_bounds
 from check_pnp_signed_boundary_energy import boundary_contrast
+from check_pnp_f3_syndrome_boundary import syndrome_contrast
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -24,7 +25,7 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384):
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -88,6 +89,15 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
         lo=[max(a,-radius) for a in lo];hi=[min(a,radius) for a in hi]
     if E is not None and boundary_width is not None and any(a!=b for a,b in zip(lo,hi)):
         cert=boundary_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width)
+        if cert is not None:
+            a,b,_=cert
+            lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
+            assert all(x<=y for x,y in zip(lo,hi))
+    # Intrinsic syndrome cut: coupling through the original affine image
+    # rather than a shared list of Boolean variables. The attempt is
+    # independently capped; on refusal retain the prior certificate.
+    if E is not None and boundary_width is not None and syndrome_budget and any(a!=b for a,b in zip(lo,hi)):
+        cert=syndrome_contrast(F,cols,target,offset,remaining,w,component_width,boundary_width,syndrome_budget)
         if cert is not None:
             a,b,_=cert
             lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
