@@ -100,6 +100,7 @@ def certify(m,a,path,degree=8,block_path=None):
             history_read=max(history_read,bernstein_bound(H-stored[d+j*n:d+(j+1)*n,:],s)+er*bernstein_bound(X,s))
         result['state_matrix_error']=S.Rational(result['endpoint'])+state_read
         result['history_matrix_error']=r*S.Rational(result['last_window'])+history_read
+    result['spacing']=max(v-u for u,v in zip(grid,grid[1:]))
     result['start']=start;result['stop']=stop;result['T']=T;result['delay']=delay
     return result
 
