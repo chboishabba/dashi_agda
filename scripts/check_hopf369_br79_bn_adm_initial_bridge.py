@@ -45,7 +45,9 @@ def cauchy():
     assert s.expand((-12)+q-(-12))!=0
     assert s.simplify((-12-12*k*k)+q+12)==0
     # Tracefree K has opposite constraint sign.
-    TT=h*s.diag(1,-1,0,0)
+    hi=h.inv()
+    TT=s.diag(1,-hi[0,0]/hi[1,1],0,0)
+    assert TT==TT.T
     q,t,ss=invariant(h,TT)
     assert t==0 and q==-ss and ss>0
     assert s.simplify((-12+ss)+q+12)==0
