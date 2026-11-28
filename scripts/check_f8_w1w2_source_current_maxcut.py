@@ -45,6 +45,7 @@ SCRIPTS=(
     "check_f8_characteristic_lift_source6.py",
     "check_f8_characteristic_lift_energy_inequality.py",
     "check_f8_characteristic_lift_source_envelope.py",
+    "check_f8_characteristic_lift_hierarchy.py",
     "check_f8_original_pulse_derivative_bounds.py",
     "check_f8_full_ward_jet_majorant.py",
     "check_f8_original_pulse_jet_receipt.py",
