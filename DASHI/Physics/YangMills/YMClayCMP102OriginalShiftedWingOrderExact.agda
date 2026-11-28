@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalShiftedWingOrderExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 import Real as R
 import RealProperties as P
 
@@ -93,3 +94,22 @@ originalSignedCauchyTailTriangleBound X n =
     (P.+-mono-≤
       (P.∣x+y∣≤∣x∣+∣y∣ A B)
       P.≤-refl)
+
+
+-- The c=1 B wing is NOT covered by a two-earlier theorem (which
+-- requires c>=2). The original finite rectangle is a one-by-one
+-- square, while original triangle count c∸2=0 is empty.
+originalBCountOneSingleton :
+  ∀ X →
+  R._≃_
+    (Tail.originalBWing X (suc zero))
+    (R._*_
+      (Original.bTerm X zero)
+      (Original.bTerm X zero))
+originalBCountOneSingleton X =
+  let
+    b = Original.bTerm X zero
+    open P.ℝ-Solver
+  in solve 1
+    (λ b → (b ⊗ b) ⊖ Κ 0ℚᵘ ⊜ b ⊗ b)
+    P.≃-refl b
