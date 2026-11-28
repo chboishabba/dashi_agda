@@ -216,8 +216,8 @@ def run(a):
     # Candidate C,D words are explicit source inputs. Do not replace
     # a failure by a dimension/order coincidence.
     stats=None
+    gs={name:source_action(g,z,A,B)[:12,:12] for name,g in words.items()}
     if a.search:
-        gs={name:source_action(g,z,A,B)[:12,:12] for name,g in words.items()}
         found,stats=candidates(gs,atlas,a.search,deadline)
         if found is None:return dict(status='bounded_candidate_search_incomplete',
             local_sha256=a.local_sha256,manifest_sha256=checked['manifest_sha256'],
@@ -229,7 +229,8 @@ def run(a):
     P,dim=intertwiner([x[:12,:12] for x in L],atlas)
     out=dict(status='actual_ATLAS_quotient_generator_alignment' if P is not None else 'candidate_not_certified',
         local_sha256=a.local_sha256,manifest_sha256=checked['manifest_sha256'],
-        original_atlas_sha256=SOURCE_DIGESTS,search=stats,word_pair=[cw,dw],literal_words=[str(C),str(D)],
+        original_atlas_sha256=SOURCE_DIGESTS,search=stats,
+        actual_normalizer_quotient_matrices={n:x.tolist() for n,x in gs.items()},word_pair=[cw,dw],literal_words=[str(C),str(D)],
         automorphism_matrices=[x.tolist() for x in L],intertwiner_kernel_dimension=dim,
         actual_quotient_intertwiner=None,atlas_class_map_certified=False,six_suz_cover_lift_certified=False)
     if P is None:return out
@@ -237,6 +238,20 @@ def run(a):
     require(np.array_equal(mm(P,Pi),I),'coordinate inverse')
     out.update(actual_quotient_intertwiner=P.tolist(),inverse=Pi.tolist(),transport_checks=2,
                transported_alternating_form=mm(mm(P.T,J),P).tolist())
+    if a.back_words:
+        b=read_pinned(a.back_words,a.back_words_sha256)
+        require(b['status']=='ATLAS_quotient_inverse_word_witness' and
+                b['actual_word_pair']==[cw,dw] and b['local_sha256']==a.local_sha256 and
+                set(b['inverse_words'])==set(words),'actual reverse word scope')
+        w={'C':C,'D':D}
+        out['reverse_word_residuals']={}
+        for name,g in words.items():
+            h=evaluate(b['inverse_words'][name],w,MM(1))
+            c=recover_coset(g,h,z,A,B)
+            require(g==make_word(c,z,A,B)*h,'exact reverse source word')
+            out['reverse_word_residuals'][name]=dict(word=b['inverse_words'][name],extraspecial_residual=c)
+        out['both_generated_quotient_groups_identified']=True
+    else:out['both_generated_quotient_groups_identified']=False
     # Literal representative/conjugator words are optional. Verify
     # a supplied quotient conjugation by actual source multiplication,
     # and recover the entire E discrepancy, not just its phase.
@@ -261,8 +276,9 @@ def main():
     p.add_argument('--local',type=Path,required=True);p.add_argument('--local-sha256',required=True)
     p.add_argument('--c');p.add_argument('--d');p.add_argument('--search',type=int)
     p.add_argument('--conjugacy',type=Path);p.add_argument('--conjugacy-sha256')
+    p.add_argument('--back-words',type=Path);p.add_argument('--back-words-sha256')
     p.add_argument('--seconds',type=float,default=80);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();require(0<a.seconds<=90 and bool(a.conjugacy)==bool(a.conjugacy_sha256) and\n        ((a.search is not None and 1<=a.search<=200000 and a.c is None and a.d is None) or\n         (a.search is None and bool(a.c) and bool(a.d))),'bounded scope')
+    a=p.parse_args();require(0<a.seconds<=90 and bool(a.conjugacy)==bool(a.conjugacy_sha256) and bool(a.back_words)==bool(a.back_words_sha256) and\n        ((a.search is not None and 1<=a.search<=200000 and a.c is None and a.d is None) or\n         (a.search is None and bool(a.c) and bool(a.d))),'bounded scope')
     r=run(a);a.output.parent.mkdir(parents=True,exist_ok=True)
     with a.output.open('x') as f:json.dump(r,f,indent=2,sort_keys=True);f.write('\n')
     print(r['status'])
