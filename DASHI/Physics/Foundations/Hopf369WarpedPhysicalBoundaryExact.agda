@@ -1424,3 +1424,92 @@ module At {r : Level} (F : C.RealField r)
   -- tangential Sobolev orders s+4/s+2 separately from this normal H¹
   -- premium; nothing in this finite carrier promotes them to a
   -- uniform glancing estimate.
+
+  ------------------------------------------------------------------------
+  -- BR45/46: actual differentiated BR4 4+1-variable coefficient source,
+  -- coupled to the existing BR40b physical time rows.
+  --
+  -- The original lower-order coefficient power on a physical real
+  -- fixed-chart slice is:
+  -- -At wt²/2 + Ct[grad v,grad v]/2 + wt Bt.grad v + v wt.
+  -- Keep the material-normal spatial derivative and all three wall
+  -- tangential derivatives. This COMPLEX algebra is not an order
+  -- or positivity proof; real/Hermitian bounds are independent.
+  ------------------------------------------------------------------------
+
+  data BR4Space : Set where
+    spaceX spaceY spaceZ spaceNormal : BR4Space
+
+  spaceAxis : BR4Space → Axis
+  spaceAxis spaceX = wall x
+  spaceAxis spaceY = wall y
+  spaceAxis spaceZ = wall z
+  spaceAxis spaceNormal = normal
+
+  sumBR4Space : (BR4Space → S) → S
+  sumBR4Space f =
+    f spaceX + f spaceY + f spaceZ + f spaceNormal
+
+  record BR4DifferentiatedCoefficientJet : Set r where
+    constructor br4DifferentiatedCoefficientJet
+    field
+      coefficientA coefficientAt : S
+      coefficientB coefficientBt : BR4Space → S
+      coefficientC coefficientCt : BR4Space → BR4Space → S
+  open BR4DifferentiatedCoefficientJet public
+
+  record BR4DifferentiatedFieldJet : Set r where
+    constructor br4DifferentiatedFieldJet
+    field
+      differentiatedValue : S
+      differentiatedTime : S
+      differentiatedSpatial : BR4Space → S
+  open BR4DifferentiatedFieldJet public
+
+  br4SpatialSquare : (BR4Space → BR4Space → S) →
+    (BR4Space → S) → S
+  br4SpatialSquare c d =
+    sumBR4Space (λ i →
+      sumBR4Space (λ k → c i k * d i * d k))
+
+  br4DifferentiatedEnergy : BR4DifferentiatedCoefficientJet →
+    BR4DifferentiatedFieldJet → S
+  br4DifferentiatedEnergy c u =
+    half * (coefficientA c * differentiatedTime u * differentiatedTime u
+      + br4SpatialSquare (coefficientC c) (differentiatedSpatial u)
+      + differentiatedValue u * differentiatedValue u)
+
+  br4CoefficientWork : BR4DifferentiatedCoefficientJet →
+    BR4DifferentiatedFieldJet → S
+  br4CoefficientWork c u =
+    neg (half * coefficientAt c *
+      differentiatedTime u * differentiatedTime u)
+    + half * br4SpatialSquare (coefficientCt c) (differentiatedSpatial u)
+    + differentiatedTime u *
+        sumBR4Space (λ i → coefficientBt c i * differentiatedSpatial u i)
+    + differentiatedValue u * differentiatedTime u
+
+  -- Keep the original 15 metric and five subsidiary channel jets.
+  -- Lower-order matrix couplings from BR15/BS4, commutator sources
+  -- and BR40b/f wall time derivatives are separate, not discarded.
+  record BR45PhysicalSourceOwner : Set r where
+    constructor br45PhysicalSourceOwner
+    field
+      metricCoefficient : BR4DifferentiatedCoefficientJet
+      metricFifteen : Tensor
+      gaugeFive : Cov
+      metricCoefficientPower : S
+      gaugeCoefficientPower : S
+      originalTimeRows : DifferentiatedPhysicalForcing
+      materialBoundary : PhysicalMaterialWeld
+      tracePremium : PhysicalTraceEnergyPayment
+      leftoverBianchiSource : Cov
+  open BR45PhysicalSourceOwner public
+
+  -- A true variable Einstein–Israel estimate must instantiate both
+  -- coefficient jets from the SAME background and prove A>=a0>0,
+  -- C>=c0 I, bounded coefficient derivatives, compatible wall/corner
+  -- source, and an H^1 normal trace paid by BR4 higher energies.
+  -- BR46's contracted-Bianchi principal symbol determines the needed
+  -- subsidiary source but cannot set leftoverBianchiSource to zero
+  -- without the physical variable connection and source equations.
