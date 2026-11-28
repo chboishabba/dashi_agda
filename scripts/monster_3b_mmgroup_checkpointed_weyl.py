@@ -43,9 +43,9 @@ def run(a):
     A=tuple(MM(w) for w in manifest['translation_words'])
     B=tuple(MM(w) for w in manifest['modulation_words'])
     contract=dict(local_receipt_sha256=a.local_sha256,manifest_sha256=checked['manifest_sha256'],
-        mmgroup_version=version('mmgroup'),modulus=7,zeta=2,expected_multiplicity=90,
+        mmgroup_version=version('mmgroup'),modulus=7,zeta=a.zeta,expected_multiplicity=90,
         source_owners={p:sha((ROOT/p).read_bytes()) for p in OWNERS})
-    V=MMV(7);frame=WeylFrame(3,2,z,A,B,[],[],RowBasis())
+    V=MMV(7);frame=WeylFrame(3,a.zeta,z,A,B,[],[],RowBasis())
     cursor=0;verified=0;checks=0
     if a.resume:
         prior=read_pinned(a.resume,a.resume_sha256)
@@ -91,6 +91,7 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument('--local-receipt',type=Path,required=True);p.add_argument('--local-sha256',required=True)
     p.add_argument('--resume',type=Path);p.add_argument('--resume-sha256')
+    p.add_argument('--zeta',type=int,choices=(2,4),default=2)
     p.add_argument('--seconds',type=float,default=80);p.add_argument('--candidates',type=int,default=1000)
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
