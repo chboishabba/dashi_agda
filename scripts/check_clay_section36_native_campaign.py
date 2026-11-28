@@ -1,24 +1,34 @@
 #!/usr/bin/env python3
-"""Sections 36–37 all-Clay native campaign, fail closed, exact owner checkouts.
+"""Section43 all-Clay native campaign, fail closed, exact owner checkouts.
 
 Every source and acceptance root is committed on its OWN PR branch.
 This runner checks original native Agda/Lean files in independently
 provided worktrees, records actual exit codes and Git HEADs, and never
 turns a symbolic Python check into a kernel receipt.
 
-Usage:
-  python scripts/check_clay_section36_native_campaign.py \\
-    --ym-root /checkout/dashi_agda_ym \\
-    --ns-root /checkout/dashi_lean4_ns \\
-    --bsd-hodge-root /checkout/dashi_lean4_bsd \\
-    --pnp-root /checkout/dashi_lean4_pnp \\
-    --rh-root /checkout/dashi_lean4_rh \\
-    --agda-include /checkout/stdlib \\
-    --agda-include /checkout/bishop \\
-    --rh-source-root /checkout/pinned_external_rh \\
-    --rh-manifest /checkout/sha256_manifest.json \\
-    --rh-main-sha256 <64-hex-pin> \\n    --rh-source-head <40-hex-external-original-commit> \\
-    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection36Native.json
+Usage (replace placeholders with genuine original SHA pins):
+  python scripts/check_clay_section36_native_campaign.py
+    --ym-root /checkout/dashi_agda_ym
+    --ns-root /checkout/dashi_lean4_ns
+    --bsd-hodge-root /checkout/dashi_lean4_bsd
+    --pnp-root /checkout/dashi_lean4_pnp
+    --rh-root /checkout/dashi_lean4_rh
+    --agda-include /checkout/stdlib
+    --agda-include /checkout/bishop
+    --rh-source-root /checkout/pinned_external_rh
+    --rh-manifest /checkout/sha256_manifest.json
+    --rh-main-sha256 <64-hex-main-pin>
+    --rh-source-head <40-hex-external-source-commit>
+    --require-head YM=<40-hex-commit>
+    --require-head NS=<40-hex-commit>
+    --require-head BSD_HODGE=<40-hex-commit>
+    --require-head PNP=<40-hex-commit>
+    --require-head RH=<40-hex-commit>
+    --report /checkout/dashi_agda_rollup/Docs/receipts/ClaySection43Native.json
+
+The arguments are shown on separate lines for readability; pass them
+in ONE shell command (or put literal shell line-continuation characters
+between the lines). The runner does NOT guess SHA pins from branch names.
 
 Return 0 ONLY when every SELECTED source entrypoint completes native
 elaboration and RH source admission at immutable pinned HEADs.
