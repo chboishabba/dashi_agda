@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-28",
+  "method": "Local Python timeout 90, no CI. Connector-recovered full files verified by git hash-object where listed. Full repository checkout DNS blocked. Extracted original function bodies for imports not needed in full.",
+  "runs": [
+    {
+      "campaign": "check_pnp_integrated_source_campaign.py",
+      "blob": "a83fb50cd12df3b6b9b2e9bd1f91e3424f2bc2d5",
+      "seconds": 0.94,
+      "passed": 1299,
+      "counts": {
+        "0": {
+          "UNKNOWN": 432
+        },
+        "4096": {
+          "WITNESS": 117,
+          "EMPTY": 249,
+          "POSITIVE_NO_LIFT": 40,
+          "UNKNOWN": 26
+        },
+        "10000000": {
+          "WITNESS": 183,
+          "EMPTY": 249
+        },
+        "high_fill": {
+          "WITNESS": 2,
+          "EMPTY": 1
+        }
+      },
+      "fullBlobs": {
+        "source_derived_cover": "e614c347d623515d398eeedc621614922642132f",
+        "changing_stabilizer": "a294ab6af1d1e038fcff3ca9a39f7f64f0d01c42",
+        "mobius_prefix": "8729c977e1afbda13bb3be21ad515954771fbeaa",
+        "live_signed_orbit_join": "454ad110729cfeaa5e98b078f6901b5007577bf5"
+      },
+      "extracted": [
+        "recursive_quotient.act/canonical",
+        "f3_syndrome_boundary.span/chart",
+        "signed_component_histogram.rref"
+      ],
+      "earlierFailure": "original forced cut zero returned POSITIVE_NO_LIFT; repaired reservation for both polarities and original audit, original forced-cut campaign passed after repair"
+    },
+    {
+      "campaign": "check_pnp_packed_macro_endpoint.py --emitter",
+      "blob": "4a2c82951e9cc28bb4cbd96a13a772f0e5b8355f",
+      "seconds": 2.68,
+      "packed_word_endpoints": 28724,
+      "actual_emitted_endpoints": 756,
+      "fullBlobs": {
+        "stack_fractran": "a4feb63286560c6dcc65a76f2a44e12b49b22594",
+        "stack_priority_transport": "a852d9b046544c4beebeeb0aa125b49bedbb59bc",
+        "fractran_guarded_block": "b4d022f274aca70000f261008afc979ca0995b5f",
+        "window_fractran": "1ec7adce4ab547910c49acdc58a7138cb39d2a84"
+      }
+    },
+    {
+      "campaign": "check_pnp_candidate_literal_endpoint.py",
+      "blob": "295edcb1735f44a14dbd3ad4ec25bb21c85f2214",
+      "seconds": 5.25,
+      "candidate_literal_endpoint": 216,
+      "extracted": [
+        "hyperfabric_owned_joins.alloc_lane_prime/literal_instruction"
+      ],
+      "dependencies": "same full four compiler files as emitter"
+    },
+    {
+      "campaign": "check_pnp_sparse_and_window_boundary.py",
+      "blob": "acd799302a1b1afbefacc408071258eeb2f3c786",
+      "seconds": 0.87,
+      "sparse": [
+        [
+          2,
+          4,
+          6,
+          3,
+          2
+        ],
+        [
+          3,
+          9,
+          12,
+          4,
+          3
+        ],
+        [
+          5,
+          25,
+          30,
+          6,
+          5
+        ],
+        [
+          7,
+          49,
+          56,
+          8,
+          7
+        ],
+        [
+          11,
+          121,
+          132,
+          12,
+          11
+        ]
+      ],
+      "windows": [
+        [
+          2,
+          14,
+          10
+        ],
+        [
+          3,
+          27,
+          21
+        ],
+        [
+          5,
+          65,
+          55
+        ],
+        [
+          8,
+          152,
+          136
+        ],
+        [
+          12,
+          324,
+          300
+        ]
+      ],
+      "fullBlobs": {
+        "cook_affine_seek": "7972c98fbcd635b914c95e19fa4fac09c98d2593",
+        "cook_quadratic_seek": "e527024503ef7edbfc41c097451fcb80c676ec88"
+      }
+    }
+  ],
+  "limitations": [
+    "native Agda/Lean deferred; no kernel acceptance",
+    "integrated source solver exercises actual orbit/frontier/prefix path, not every conditional-autarky/binary receiver variant",
+    "extracted dependencies use original function bodies, not full-module byte parity",
+    "logical allowance not physical bit clock",
+    "toy window control is not an original arbitrary candidate tableau",
+    "all universal P0 open"
+  ]
+}
