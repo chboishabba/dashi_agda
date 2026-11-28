@@ -20,6 +20,15 @@ JMD='https://github.com/AxiomMath/CFSGCorollary/blob/main/CFSGCorollary/Sporadic
 U=('d3','c3','b3','a','b1','c1','d1','e1')
 BETA=('b2','c2','d2','e2')
 V=U+('e1',)+BETA
+P3=dict(zip(NODES,('P0','L0','P1','L8','P5','L1','P2','L7','P7','L3','P11','L5')))
+
+
+def incidence_check():
+    edges={frozenset((n,m)) for n,m in combinations(NODES,2)
+           if P3[n][0]!=P3[m][0] and
+           (int(P3[n][1:])+int(P3[m][1:]))%13 in (0,1,3,9)}
+    require(len(set(P3.values()))==12 and edges==EDGES,'actual projective-plane embedding')
+    return len(edges)
 
 
 def require(ok,msg):
@@ -73,6 +82,9 @@ def run(seconds):
     def budget():
         if monotonic()>=deadline:raise TimeoutError('Y443 source budget')
     one=BiMM(1);mone=MM(1)
+    from mmgroup.bimm import P3_node
+    require(incidence_check()==11,'source graph')
+    require(all(P3_node(n).ord==P3_node(P3[n]).ord for n in NODES),'source node naming')
     nodes={n:P3_BiMM([n]) for n in NODES}
     c=evaluate(tuple(CENTRAL)*9,nodes,one)
     a,b,e=c.decompose()
@@ -108,7 +120,7 @@ def run(seconds):
         original_node_words={n:str(left[n]) for n in NODES},
         second_factor_node_words={n:str(right[n]) for n in NODES},
         central_swap_first_word=str(a),original_relator_checks=checks,
-        original_relators_verified=80,original_relator_letters=463,
+        original_relators_verified=80,original_relator_letters=463,projective_plane_embedding=P3,
         words={'u':str(u),'v':str(v)},second_factor_pair={'u':str(ur),'v':str(vr)},
         w_word=str(w),node_words_in_jmd_pair=words,
         node_recovery_count=12,all_word_factor_conjugation_from_generators=True,
