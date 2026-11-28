@@ -15,6 +15,7 @@ import Real as R
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as K05
+import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as CayleyBridge
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Moonshine.BishopMachinSetoidComplexInstanceExact as Route
 import DASHI.Foundations.BishopMachinArctanConstructionExact as M
@@ -40,7 +41,7 @@ machinImaginaryPhase inputs product sameObject =
     quarterEqual =
       K05.sourceMachinQuarterEqualityFromCayley inputs product
         (C.≈C-trans sameObject
-          K05.CayleyBridge.originalMachinRationalCayleyIsBishopImaginaryUnit)
+          CayleyBridge.originalMachinRationalCayleyIsBishopImaginaryUnit)
     endpoints =
       Product.round11MachinTrigEndpointFromImaginaryProduct
         inputs product quarterEqual
