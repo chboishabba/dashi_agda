@@ -31,7 +31,7 @@ def reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_terminal=F
         per_step.append(dict(reflection_lower_J=dt*r*r,state_error_radius=float(error)))
     return dict(reflection_lower_J=float(lower),final_error_radius=float(error),steps=per_step)
 
-def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_terminal=False):
+def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_terminal=False,terminal_load=None):
     """Exact rational enclosure conditional on common binary operator history.
 
     Midpoint errors must include accumulated center solve defects. A separate
@@ -44,7 +44,10 @@ def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_t
     assert h>0 and p>0 and len(center)==len(lo)==len(hi)
     assert all(0<=l<=m<=u for l,m,u in zip(lo,center,hi))
     radius=[max(m-l,u-m) for l,m,u in zip(lo,center,hi)]
-    error=F(0); lower=F(0)
+    error=F(0); lower=F(0); direct=F(0)
+    term=None if terminal_load is None else list(map(q,terminal_load))
+    if term is not None and (len(term)!=len(hi) or any(t<0 for t in term)):raise ValueError('invalid fixed terminal receiver')
+    direct_available=not fixed_terminal or term is not None
     for step in trace:
         mid=list(map(q,step['edge_midpoint']))
         eps=list(map(q,step['midpoint_error']))
@@ -58,8 +61,13 @@ def rational_reflection_enclosure(trace,center,lo,hi,dt,port,source_edge,fixed_t
         r=p*mid[source_edge]-inc
         allowance=p*(error+perturb[source_edge]/2+eps[source_edge])
         lower+=h*max(F(0),abs(r)-allowance)**2
+        if direct_available:
+            upper_load=term if fixed_terminal and step['terminal'] else hi
+            upper_mid=[abs(m)+e+error+d/2 for m,e,d in zip(mid,eps,perturb)]
+            direct+=h*sum((l*m*m for l,m in zip(upper_load,upper_mid)),F(0))
         error+=sum(perturb)
     return dict(reflection_lower_exact=str(lower),parameter_error_exact=str(error),
+                direct_useful_upper_exact=str(direct) if direct_available else None,
                 scope='conditional rational trace enclosure; coefficient and midpoint rounding premises required')
 
 def rational_restoration_exclusion(field,center_error,parameter_error,atol):
@@ -96,6 +104,7 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
     rational_candidates=[]; restoration_exclusions=[]; mode_candidates=[]
     from fractions import Fraction as F
     exact_ceiling=None
+    nonfrozen_binary=bool(cfg.get('retain_nonfrozen_event_residuals',False))
     if cfg.get('retain_stage_residuals',False):
         # Binary64 input chart, exact rational accounting of the incident
         # source amplitude squares and auxiliary tariff. No claim of exact
@@ -141,10 +150,28 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
                     # admitted asymptotic restored witness.
                     mode_candidates.append(dict(mode=restoration_mode,accepted=False,tail=out['asymptotic_tail']))
             if exact_ceiling is not None:
-                rational=rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
+                rational=rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg,cfg.get('terminal_load_rate_s_inv'))
                 rational_candidates.append(rational)
                 rational_upper=exact_ceiling-F(rational['reflection_lower_exact'])
-                upper=min(upper,rational_upper)
+                rational['conditional_source_funded_upper_exact']=str(rational_upper)
+                # On a nonfrozen recorded binary history, do not assume the
+                # exact physical material energy telescopes across rounded
+                # density updates. Use direct receiver work minus exact paid.
+                direct=F(rational['direct_useful_upper_exact'])-F(out['exact_binary_paid_J'])-int(cfg['max_cycles'])*F(float(cfg['auxiliary_J']))
+                formation=F(out['exact_binary_terminal_formation_J'])
+                recovery=F(float(cfg['kinetics']['chemical_recovery_efficiency']))*formation
+                if restoration_mode=='controlled':direct+=recovery
+                if restoration_mode=='asymptotic':
+                    if 'work' not in (out.get('asymptotic_tail') or {}):direct=None
+                    else:
+                        from solar_event_rounding import sqrt_interval
+                        x=np.asarray(out['history'][-1])[:ne+nf+9*len(vol)]
+                        _,norm=sqrt_interval(sum((F(float(v))**2 for v in x),F(0)))
+                        radius=F(out['exact_binary_field_solve_error'])+F(rational['parameter_error_exact'])
+                        direct+=(norm+radius)**2/2+recovery
+                rational['direct_net_upper_exact']=None if direct is None else str(direct)
+                if direct is not None:upper=min(upper,direct)
+                if not nonfrozen_binary:upper=min(upper,rational_upper)
                 if restoration_mode!='asymptotic':
                     # Controlled return can change material current but leaves
                     # E/B exactly untouched. Never prune using pre-control J.
@@ -163,7 +190,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
             failed+=1;upper=parent_upper # retain parent upper; never discard failed region
         seq+=1; heapq.heappush(queue,(-upper,seq,lo,hi))
     lo=np.zeros(ne); hi=np.zeros(ne); hi[ids]=budget
-    box(lo,hi,exact_ceiling if exact_ceiling is not None else ceiling)
+    parent=(float('inf') if nonfrozen_binary else exact_ceiling) if exact_ceiling is not None else ceiling
+    box(lo,hi,parent)
     for _ in range((max_boxes-1)//2):
         if not queue:break
         neg,_,lo,hi=heapq.heappop(queue)
@@ -177,17 +205,19 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8,restoration_mode='finite_to
         l=lo.copy(); l[j]=m
         box(lo,h,-neg);box(l,hi,-neg)
     no_restored_chart=bool(exact_ceiling is not None and not queue)
-    upper=max((-item[0] for item in queue),default=exact_ceiling if exact_ceiling is not None else ceiling)
+    upper=max((-item[0] for item in queue),default=parent)
     if best is not None and best>upper+1e-8*max(1.,abs(upper)):
         raise ArithmeticError('candidate enclosure violated by replay')
-    return dict(upper_candidate_J=float(upper),
-                upper_exact_binary_chart=None if exact_ceiling is None else str(upper),
+    finite_upper=bool(np.isfinite(float(upper)))
+    return dict(upper_candidate_J=float(upper) if finite_upper else None,
+                upper_exact_binary_chart=None if exact_ceiling is None or not finite_upper else str(upper),
+                unresolved_upper=not finite_upper,
                 best_center_net_J=best,
                 center_replays=replay_count,failed_replays=failed,remaining_boxes=len(queue),
-                gap_J=None if best is None else float(upper-best),
+                gap_J=None if best is None or not finite_upper else float(upper-best),
                 rational_trace_candidates=rational_candidates,
                 restoration_mode=restoration_mode,mode_candidates=mode_candidates,
-                scope='conditional source-funded upper bound for matched terminal policy; no physical or outward-rounded certification',
+                scope='conditional fixed binary material history direct receiver/paid bound; source-funded ceiling requires consistent energy ledger; no physical admission',
                 restoration_exclusions=restoration_exclusions,
                 no_restored_passive_on_binary_chart=no_restored_chart,
                 fixed_binary_nonfrozen_history=bool(cfg.get('retain_nonfrozen_event_residuals',False)),
