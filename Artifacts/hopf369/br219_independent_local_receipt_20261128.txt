@@ -1,0 +1,12 @@
+BR219 independent local BR27 reconstruction.
+Initial command: cd /tmp/hopf211; timeout 90 python br219.py
+Passed 15 coefficients, normal inverse, two complex samples, then timed out on third redundant complex sample.
+Removed third sample; final command:
+cd /tmp/hopf211; timeout 90 python br219.py | tee br219_receipt.txt
+PASS 15 exact coefficient identities K(xi) C(xi)=q(xi) I
+PASS intrinsic normal left inverse and rank-65 constraint projector
+PASS compatible projector and incompatible source (1, I, 0, 0, 2*I)
+PASS compatible projector and incompatible source (2 + I, 3*I, 0, 0, -I)
+PASS BR219 1.14.0
+PIPESTATUS:0 0
+Committed original donor import not run. Analytic consequences are not executed PDE acceptance.

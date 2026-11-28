@@ -820,3 +820,7 @@ The selectively weighted physical glancing matrix has five singular coordinate c
 ### BR218 manufactured interior source attachment
 
 The original full exterior defect of a nonzero particular curvature field is retained in a two-sided half-collar construction. Subtracting its actual jump and reflected mean-curvature contribution allows exact recovery of the homogeneous five-polarization amplitudes on both sides and nine wall-shape coordinates, with all 44 boundary rows verified for two damped complex samples. This is a manufactured forced-solution audit, not a bounded arbitrary-source particular operator. BR30's existing projected periodic resolvent does not alone certify full exterior compatibility. See roadmap section 53.
+
+### BR219 full exterior compatible-source inverse
+
+The original Weyl exterior symbol admits a linear contraction symbol K with K C=q I, verified on all fifteen exact quadratic matrix coefficients. Away from the null cone, C K/q is an exact source-image projector and K f/q is the unique solution for compatible f. Positive Gram projected evolution then bounds the whole-line Fourier particular solution by the projected forcing divided by positive damping. The intrinsic normal DAE retains a rank-65 constraint projector, avoiding an assumed arbitrary extension. Half-collar source admissibility and trace estimates remain open. See roadmap section 54.

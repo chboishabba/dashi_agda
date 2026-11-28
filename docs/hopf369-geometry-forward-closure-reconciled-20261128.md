@@ -5821,3 +5821,45 @@ two-ended constraint-compatible transmission, and curved estimates.
 No claim that BR30 projected resolvent automatically pays full
 Bianchi constraints. Other six lanes unchanged. Terminal stage 39.
 Original donor-import entry unrun. No CI/native/PDE acceptance.
+
+
+## 54. BR219 — full exterior compatible-source inverse and intrinsic normal DAE
+
+Reuse actual BR27 carrier X,G, BR209 contraction, BR218 source
+attachment. Construct C_a (100x35) exterior symbol coefficients,
+D (50x100) Ricci-free divergence extraction, K_a (35x100) from
+interior product of exterior defect plus wedge of D defect,
+then left pack by G^-1 X^T. All fifteen coefficient identities
+K_a C_a = eta_a I and K_a C_b+K_b C_a=0 (a != b) pass exactly.
+Thus K(xi) C(xi)=q(xi) I, q=-xi0²+sum spatial xi², and for
+q !=0 the complete compatible source condition is
+(I-C K/q) f=0, with unique W=K f/q. This is universal algebra,
+not manufactured forcing. Two complex sample projectors and
+incompatible source refusals pass exactly. For xi=(tau,i*k),
+real spatial k and Re tau>0, q=-tau²-|k|² never vanishes.
+On the whole spatial Fourier domain, BR209 gives
+L_proj W = D_proj f where D_proj=G^-1 X^T B (BR209 B),
+L_proj=tau I-i sum k_j A_j. BR27 positive Gram symmetry
+implies ||W||_G <= ||D_proj f||_G/Re tau for compatible f.
+Plancherel yields a bounded whole-line normal particular
+inverse for L2 sources satisfying the Fourier compatibility
+condition a.e. This analytic consequence is not a numerical
+PDE solve, nor an extension theorem for arbitrary half-collar f.
+For the intrinsic normal derivative L=K_4, LC_4=I;
+Q=I-C_4 L is a rank-65 oblique constraint projector.
+Writing C_t=tau C_0+i sum tangential k_j C_j, the exact
+normal system is W'=L f-L C_t W, Q(f-C_t W)=0.
+Conversely these two equations imply C_4 W'+C_t W=f.
+This avoids arbitrary normal extension but does not establish
+existence of compatible initial/boundary data or a uniform
+normal trace estimate. Next: intrinsic constraint evolution
+and admissible source class, trace and finite collar attachment
+to BR217, variable coefficients and W0-W7. Other lanes unchanged.
+
+Local independent BR27 reconstruction, /tmp/hopf211/br219.py:
+first attempt passed all 15 coefficients, normal inverse and
+two complex samples, then timed out at a third redundant sample
+under 90s. Removed third sample, reran bounded checker,
+exit 0, SymPy 1.14.0; actual stdout receipt attached. Original
+donor-import entry unrun. Terminal stage 40. No CI/native/
+curved PDE acceptance.
