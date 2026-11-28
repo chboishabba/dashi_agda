@@ -33,6 +33,18 @@ exactCover(0n,0n);assert(independent.length===7&&new Set(independent).size===7,"
 for(let i=0;i<30;i++)for(let b=0;b<2;b++){assert(Q.counts[i][b]===BigInt(independent.filter(w=>Number((w>>BigInt(i))&1n)===b).length),"original conditional");checks++}
 let pool=independent.slice();for(let d of Q.descent){let counts=[0,0];for(let w of pool)counts[Number((w>>BigInt(d.column))&1n)]++;assert(d.children.every((v,b)=>BigInt(v)===BigInt(counts[b]))&&BigInt(d.parent)===BigInt(pool.length),"prefix replay");pool=pool.filter(w=>Number((w>>BigInt(d.column))&1n)===d.chosen)}assert(pool.length===1&&pool[0]===Q.witness,"full original witness replay");
 let refuse=solve(cols,18,order,{width:0,states:100});assert(refuse.status==="CENSORED","width refusal");let cap=solve(cols,18,order,{width:18,states:1});assert(cap.status==="CENSORED","state refusal");
-return {status:"PASS",random,checks,original:{count:Q.total.toString(),counts:Q.counts.map(c=>c.map(String)),witness:Q.witness.toString(),stats:Q.stats,order,descent:Q.descent,independent:independent.map(String)},refusals:[refuse.reason,cap.reason]};
+// Original exact-one verifier DAG, creation-order ABI, one gate event each.
+const gates=[],I=i=>["i",i],G=i=>["g",i],emit=(op,args)=>{let j=gates.length;gates.push([op,args]);return G(j)};
+const zero=emit("const",[false]),one=emit("const",[true]);let out=one;
+for(let r=0;r<18;r++){let seen=zero,good=one;for(let j=0;j<30;j++)if(cols[j]&bit(r)){let overlap=emit("and",[seen,I(j)]);good=emit("and",[good,emit("not",[overlap])]);seen=emit("or",[seen,I(j)])}out=emit("and",[out,emit("and",[seen,good])])}
+const read=(x,v,w)=>w[0]==="i"?x[w[1]]:v[w[1]];
+function evaluate(g,x){let v=[];for(let [op,a] of g){let z=op==="const"?a[0]:op==="not"?!read(x,v,a[0]):op==="and"?read(x,v,a[0])&&read(x,v,a[1]):read(x,v,a[0])||read(x,v,a[1]);v.push(z)}return v}
+function cut(k){let live=new Map();for(let w of [out,...gates.slice(k).flatMap(([op,a])=>op==="const"?[]:a)])if(w[0]==="i"||w[1]<k)live.set(w.join(":"),w);
+ let keys=[...live.values()],ix=new Map(keys.map((w,j)=>[w.join(":"),j])),move=w=>ix.has(w.join(":"))?I(ix.get(w.join(":"))):G(w[1]-k);
+ return {keys,suffix:gates.slice(k).map(([op,a])=>[op,op==="const"?a:a.map(move)]),out:move(out)}}
+let cutChecks=0,verifierChecks=0,maxLive=0;const inputs=[...independent,0n,bit(30)-1n,...range(30).map(i=>Q.witness^bit(i)),...range(40).map(()=>BigInt(rnd(2**30)))];
+for(let w of inputs){let x=range(30).map(i=>!!(w&bit(i))),v=evaluate(gates,x),expected=valid(cols,18,w);assert(read(x,v,out)===expected,"actual original verifier");verifierChecks++;
+ for(let k=0;k<=gates.length;k++){let c=cut(k),pre=v.slice(0,k),y=c.keys.map(w=>read(x,pre,w)),s=evaluate(c.suffix,y);assert(k+c.suffix.length===gates.length&&read(y,s,c.out)===expected,"joint cost split");cutChecks++;maxLive=Math.max(maxLive,c.keys.length)}}
+return {status:"PASS",random,checks,verifier:{gates:gates.length,inputs:verifierChecks,cutChecks,maxLive},original:{count:Q.total.toString(),counts:Q.counts.map(c=>c.map(String)),witness:Q.witness.toString(),stats:Q.stats,order,descent:Q.descent,independent:independent.map(String)},refusals:[refuse.reason,cap.reason]};
 }
 console.log(JSON.stringify(campaign(),null,2));
