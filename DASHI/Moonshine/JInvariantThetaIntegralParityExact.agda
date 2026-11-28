@@ -148,3 +148,67 @@ halfChart x odds@((u , ha) , (v , hb) , (w , hc) , (r , hd))
         (solve 1 (λ j → con (+ 2) :* (con (+ 2) :* j :+ con (+ 1))
           := con (+ 4) :* j :+ con (+ 2)) refl j)))
       ha hb hc)
+
+
+-- Exclusivity and uniqueness of the affine parity witness.
+open import Data.Empty using (⊥; ⊥-elim)
+open import Relation.Binary.PropositionalEquality using (_≢_)
+open import Data.Nat.Base using (_≤_)
+
+plusInject : ∀ {m n : Nat} → (+ m) ≡ (+ n) → m ≡ n
+plusInject refl = refl
+
+doubleNotOne : ∀ z → (+ 2) * z ≢ (+ 1)
+doubleNotOne (+ zero) ()
+doubleNotOne (+ suc n) h =
+  NP.1+n≰n (subst (2 ≤_) (plusInject h) (NP.m≤m*n 2 (suc n)))
+doubleNotOne -[1+ n ] ()
+
+evenNotOdd : ∀ z → Even z → Odd z → ⊥
+evenNotOdd z (k , he) (l , ho) = doubleNotOne (k - l)
+  (trans (solve 2 (λ k l → con (+ 2) :* (k :- l)
+    := con (+ 2) :* k :- con (+ 2) :* l) refl k l)
+    (trans (cong (_- ((+ 2) * l)) (trans (sym he) ho))
+      (solve 1 (λ l → con (+ 2) :* l :+ con (+ 1) :- con (+ 2) :* l
+        := con (+ 1)) refl l)))
+
+cancelScale : ∀ (c : Nat) x y → (+ suc c) * x ≡ (+ suc c) * y → x ≡ y
+cancelScale c x y h = ZP.*-cancelʳ-≡ x y (+ suc c)
+  (trans (ZP.*-comm x (+ suc c)) (trans h (ZP.*-comm (+ suc c) y)))
+
+oddWitnessUnique : ∀ k l → (+ 2) * k + (+ 1) ≡ (+ 2) * l + (+ 1) → k ≡ l
+oddWitnessUnique k l h = cancelScale 1 k l
+  (trans (solve 1 (λ k → con (+ 2) :* k := con (+ 2) :* k :+ con (+ 1) :- con (+ 1)) refl k)
+    (trans (cong (_- (+ 1)) h)
+      (solve 1 (λ l → con (+ 2) :* l :+ con (+ 1) :- con (+ 1) := con (+ 2) :* l) refl l)))
+
+oddParam : ℤ → ℤ
+oddParam z with parity z
+... | inj₁ _ = + 0
+... | inj₂ (k , _) = k
+
+oddParamRead : ∀ z → Odd z → (+ 2) * oddParam z + (+ 1) ≡ z
+oddParamRead z odd with parity z
+... | inj₁ even = ⊥-elim (evenNotOdd z even odd)
+... | inj₂ (k , e) = sym e
+
+oddParamExact : ∀ k → oddParam ((+ 2) * k + (+ 1)) ≡ k
+oddParamExact k = oddWitnessUnique _ k
+  (oddParamRead ((+ 2) * k + (+ 1)) (k , refl))
+
+-- The sign history is exactly the parity of the degree, including zero.
+import DASHI.Moonshine.JInvariantThetaLegendreSignedGeometryExact as T
+
+signByParity : ∀ n →
+  (Even (+ n) × (T.sign n ≡ + 1)) ⊎
+  (Odd (+ n) × (T.sign n ≡ -[1+ 0 ]))
+signByParity zero = inj₁ (((+ 0) , refl) , refl)
+signByParity (suc n) with signByParity n
+... | inj₁ ((k , h) , hs) = inj₂
+  ((k , trans (sym (cong +_ (NP.+-comm n 1))) (cong (_+ (+ 1)) h)) , cong -_ hs)
+... | inj₂ ((k , h) , hs) = inj₁
+  ((k + (+ 1) ,
+    trans (sym (cong +_ (NP.+-comm n 1)))
+      (trans (cong (_+ (+ 1)) h)
+        (solve 1 (λ k → con (+ 2) :* k :+ con (+ 1) :+ con (+ 1)
+          := con (+ 2) :* (k :+ con (+ 1))) refl k))) , cong -_ hs)
