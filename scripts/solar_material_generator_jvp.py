@@ -86,12 +86,12 @@ def amplitude_material_boundary_jvp(model,volumes,q,dq,nu,dnu,gyro,axis,right_su
         b=axis[o]; cross=np.array([[0,-b[2],b[1]],[b[2],0,-b[0]],[-b[1],b[0],0]])
         for j in range(3):
             sl=slice(offset+9*o+3*j,offset+9*o+3*j+3)
-            block=-gyro[o,j]*cross-nu[o,j]*np.eye(3)
-            expected=block if q[o,j]>0 else np.zeros((3,3))
+            local_block=-gyro[o,j]*cross-nu[o,j]*np.eye(3)
+            expected=local_block if q[o,j]>0 else np.zeros((3,3))
             if not close(block(H,np.arange(sl.start,sl.stop)),expected,rtol=0,atol=0):
                 raise ValueError('base generator does not match stated amplitude support')
             if active[o,j]:
-                P[sl,sl]=block
+                P[sl,sl]=local_block
                 plus_loss[sl,sl]=nu[o,j]*np.eye(3)
                 dloss[sl,sl]=dnu[o,j]*np.eye(3)
     if sparse:P=P.tocsr();plus_loss=plus_loss.tocsr();dloss=dloss.tocsr()
