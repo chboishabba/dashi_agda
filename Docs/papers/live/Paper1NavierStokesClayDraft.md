@@ -14,6 +14,15 @@ The original finite-cutoff Galerkin RHS now has a source-written Picard–Lindel
 
 Forced C/D use the existing original direct source terms and fail-closed pinned admission; unforced breakdown instead needs the independent Alpöge–Buckmaster physical certificate (absent from the inspected upstream release) and full coercivity. No new native admission or Clay result. See the [current endpoint roadmap](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
 
+
+## Current proof state — 28 November 2026 (clopen energy continuation)
+
+The original R27/R29/R30 finite-flow reducers and Base369 nested-prefix topology are now joined in Lean #123 by actual real ODE solution-chart agreement: the equality set on a connected common existence interval is closed by continuity and open by local uniqueness. The literal energy sublevel K_N(B)={u:E_N(u)≤B} at fixed cutoff is compact in its finite real coefficient space, with each coordinate bounded by sqrt(B). It is not ambient clopen. A finite subcover of local Picard charts yields a positive restart radius at fixed N; compatible overlap gluing gives the source-written arbitrary-forward-horizon finite physical flow with transverse, conjugate-real and mean-zero conditions and the original energy identity. See [actual global flow](https://github.com/chboishabba/dashi_lean4/commit/958e62961bc619822aca6da13f85d28a998663d4).
+
+The genuine closed real ternary refinement cells have shared endpoints and shrinking diameters; the nested compact singleton construction is distinct from the symbolic clopen address cylinder. The original energy/dissipation gives time-integrated high-frequency L² tail ≤E0/(2νR²) and squared homogeneous H^(1/2) tail ≤E0/(2νR). The fixed-output ordered resonance p+q=k has injective projections to both inputs; using the existing physical Leray contraction, each input mass fold costs at most E_N, so |F_N(k)_i|≤|k|E_N and the fixed-mode time Lipschitz bound is ν|k|² sqrt(B)+|k|B. The finite-prefix diagonal subsequence and full original nonlinear PDE limit remain to be constructed. This is weak/strong integrated compactness preparation, not a cutoff-uniform critical-time budget or pointwise H^(1/2) control. Energy balls across unbounded cutoffs are not strongly precompact (distinct transverse unit shear modes have constant energy and pairwise separated norms). R734/R820/R645/R726 negative controls remain.
+
+Source-written pending native kernel. Exact local 177062/177062 regression controls on ternary geometry, heat shears, tail budgets and Gaussian-rational original fixed-mode force; no full nonlinear time integration. [Section 12 proof ledger](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) records source and matching Git blobs. No CI, no Clay result.
+
 ## Abstract
 
 This manuscript records the current proof-critical **periodic** Navier–Stokes
