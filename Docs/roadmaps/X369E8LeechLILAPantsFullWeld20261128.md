@@ -79,3 +79,12 @@ The source pants boundary has **five** original coordinates: proposition, capaci
 
 ### Unified executable exact source-free receipt
 LeechTransformer PR #5 scripts/check_x369_pants_e8_full_weld.py at e677bdc composes already-owned symbolic nine-point Fourier BIDI, the true five-field two/three-source pants seam and exact original byte-history recovery, and the 24D/three-centre native three-leg inverse into ONE deterministic JSON receipt. It explicitly records that actual original checkpoint, model transition, consumer sufficiency, real Leech lattice gluing, smooth physical/13-source global identification and Agda kernel have NOT been accepted. This entrypoint is source-written only, not yet run against the committed repository.
+
+
+### Final external-owner reconciliation: rootless Leech and VOA inputs (cross-repo scan)
+
+Searching chboishabba/dashi_lean4 and dashi_agda master for an ACTUAL Leech lattice construction/glued coset did not surface an inhabited lattice witness. Additional DASHI master owners recovered:
+- DASHI/Foundations/UBP/ExactnessAndLatticeBoundary.agda: AmbientLeechAddressBoundary, LeechMembershipCertificate (actual GolayCosetWitness, ParityWitness, GlueWitness, certifiedMembership), and LatticeClosureBoundary. It proves a single ambient 4e_i probe is not an automatically valid lattice member and explicitly requires membership before closure. This is a stronger existing native acceptance interface than simply \`LeechValidMoveSet\`.
+- DASHI/Moonshine/VNaturalOrbifoldConstruction.agda: genuine *interface* LeechLatticeVOAInput with leechRootless : Set, fixed-point VOA, canonical twisted module and orbifold construction. An interface alone is not an inhabited lattice or full moonshine VOA proof. Its corrected linear direct-sum carrier is a pair, not a tagged sum.
+
+Therefore the Leech gap is precisely instantiate an ACTUAL normed 24D rootless Golay/parity/glue lattice and certified membership, then the already-present VOA/automorphism and K12 routes; the E8 ambient 720-root obstruction remains valid. The new selected 369 source pants signature gluing is independent from the existing orbital VOA gluing; do not equate their seam types.
