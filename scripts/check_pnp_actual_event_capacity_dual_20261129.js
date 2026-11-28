@@ -46,9 +46,23 @@ for(let k=0;k<64;k++){let n=2+rnd(5),m=2+rnd(8),g=seq(m).map(()=>[rnd(n),rnd(m),
 // Multiple incomparable original disagreement supports can attach to one
 // actual observation event only if the source schedule reads a common bit.
 // Distinct unit demands are NOT justified merely by this construction.
+// Literal adaptive AND-OR program. At all-zero x the output is false;
+// each minimal different-output support is {0,i}. They all separate
+// at the SAME first observation, even though there are 4 alternatives.
+// A padded sink performs no useful new distinction.
+const n=5,g=[[0,1,3],[0,1,1],[0,2,2],...seq(n-1).map((_,j)=>[j+1,j===n-2?1:j+4,2])];
+const baseline=run(g,0,n,0),alts=[];
+assert(baseline.end===1,"baseline false");
+for(let y=0;y<1<<n;y++)if(run(g,y,n,0).end===2)alts.push(y);
+const minimal=alts.filter(y=>!alts.some(z=>z!==y&&(z&y)===z));
+assert(minimal.length===4&&minimal.every(y=>(y&1)&&((y-1)&(y-2))===0),"actual minimal alternatives");
+const eligible=minimal.map(y=>{let q=run(g,y,n,0);return seq(n).filter(i=>baseline.states[i]===q.states[i]&&baseline.states[i+1]!==q.states[i+1])});
+assert(eligible.every(e=>e.length===1&&e[0]===0),"actual shared divergence");
+const actualOverlap=allocate(minimal.map(()=>1),seq(n).map(()=>1),eligible);
+assert(actualOverlap.flow===1&&actualOverlap.deficit===3,"actual candidate overcharge");
 let overlap=allocate([1,1,1,1],[1],[[0],[0],[0],[0]]);
 assert(overlap.deficit===3&&overlap.flow===1,"shared event rejection");
 let disjoint=allocate([1,1,1],[1,1,1],[[0],[1],[2]]);assert(disjoint.flow===3,"disjoint packing");
-return {status:"PASS",counts,totals,overlap:{flow:overlap.flow,deficit:overlap.deficit},scope:"finite actual adaptive read epochs; candidate attachment feasibility, not unavoidable demands or arbitrary machine lower bounds"};
+return {status:"PASS",counts,totals,overlap:{flow:overlap.flow,deficit:overlap.deficit},actualOverlap:{minimal,eligible,flow:actualOverlap.flow,deficit:actualOverlap.deficit},scope:"finite actual adaptive read epochs; candidate attachment feasibility, not unavoidable demands or arbitrary machine lower bounds"};
 }
 console.log(JSON.stringify(campaign(),null,2));
