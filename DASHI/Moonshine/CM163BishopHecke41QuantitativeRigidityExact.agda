@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
 open import Data.Rational.Unnormalised using (1ℚᵘ)
 import Real as R
+open R using (_-_)
 import RealProperties as P
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
@@ -41,7 +42,7 @@ open Comp using (complexTrans; complexSym)
 -- from the one-step T invariance and the coordinate-setoid transport.
 minusT : Point → Point
 minusT p = U.bishop-upper-half-plane-point
-  (C.complex (R._-_ (C.re (U.tau p)) R.1ℝ) (C.im (U.tau p)))
+  (C.complex (C.re (U.tau p) - R.1ℝ) (C.im (U.tau p)))
   (U.imaginaryPositive p)
 
 minusTUndo : ∀ p → U.tau (Gen.actT (minusT p)) ≈C U.tau p
