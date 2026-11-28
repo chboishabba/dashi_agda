@@ -7,7 +7,7 @@ from scipy.constants import c
 from solar_spherical_material_weld import construct,structural_stage_atlas,assembly_mesh
 from solar_matrix_storage import diagonal
 from scipy.sparse import csr_matrix
-from solar_physical_causal import reaction,MASS,CHARGE
+from solar_population_event import reaction,MASS,CHARGE
 from solar_support_transition import support_transition
 from solar_restoration_geometry import thermal_return_geometry,analytic_support_return_obstruction
 from solar_asymptotic_return import source_off_tail_receipt
