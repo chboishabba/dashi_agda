@@ -484,3 +484,8 @@ Actual BSD split sign rows and first root cocycle difference (Lean #124 6dea0c83
 ## Section 18 — actual carrier geometry
 
 NS divergence heat identity and integrated energy tail, Hodge actual affine closure saturation (Lean #124 2cc4f8dfdd8d), BSD actual cyclic split sign differences (339eb7fb57bf), original-source PNP component planner (Agda #1548 8d26c500b2c1), and YM signed exponential tangent (Lean #15 711fa9bdf761) advance the original carriers. See consolidated roadmap 6b4b13d80e6e. 6475 exact local controls; planner and regression blob parity; donor function slices rather than full checkout. RH and NS C/D pinned replay, all universal endpoint cuts, native proof elaboration remain outstanding. No claim promotion.
+
+
+## Section 19 — original carrier advances
+
+BSD explicit actual split doubling 1cba973d61a4, Hodge full-coordinate homogenized cone kernel and h-saturation b257907ab3f8, NS ordered reality covariance 62ef5713d71a and AB import 7999cc7057da, YM signed ordered derivative 595945568544, PNP reserved exterior search 7987ab9699bd. See consolidated roadmap 703761273f04. 2827 local scoped controls, not native acceptance. RH/forced NS pinned replay and unforced physical certificate remain blocked. No universal endpoint promotion.
