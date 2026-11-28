@@ -1,0 +1,4 @@
+module DASHI.Physics.YangMills.YMClayCMP102Section47FilteredMassAcceptanceExact where
+
+open import DASHI.Foundations.BishopFiniteFilteredCellSumExact public
+open import DASHI.Physics.YangMills.YMClayCMP102OriginalFilteredRectangleMassExact public
