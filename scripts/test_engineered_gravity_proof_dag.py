@@ -19,7 +19,7 @@ def main():
         assert len(accepted["owners"][owner])==64 and accepted["status"]=="OPEN"
         # A standalone mathematical fixture must NOT match the pinned original owner.
         assert owner in accepted.get("mismatched_w1_sources",[])
-    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob","w2_physical_promotion","w2_wrong_source_pin","w2_flux_promotion","w2_flux_bad_blob","w2_mass_flux_promotion","w2_wall_frame_bad_pin","w2_constraint_family_bad_lane","w2_material_flux_promotion","w2_material_flux_bad_pin","w2_euler_frozen_false_promotion","w2_euler_firstjet_bad_pin"):
+    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane","w1_bad_blob","w2_physical_promotion","w2_wrong_source_pin","w2_flux_promotion","w2_flux_bad_blob","w2_mass_flux_promotion","w2_wall_frame_bad_pin","w2_constraint_family_bad_lane","w2_material_flux_promotion","w2_material_flux_bad_pin","w2_euler_frozen_false_promotion","w2_euler_firstjet_bad_pin","w3_false_promotion","w3_bad_source_pin"):
         m=copy.deepcopy(original)
         if which=="fake_stage":m["lanes"]["A_shielding"]["unpaid_stages"].append("PROMOTED")
         elif which=="fake_lane":m["lanes"]["Fake_closure"]={}
@@ -38,10 +38,12 @@ def main():
         elif which=="w2_material_flux_promotion":m["w2_boundary_packets"]["original_material_flux_weld"]["physical_paid"]=True
         elif which=="w2_material_flux_bad_pin":m["w2_boundary_packets"]["original_material_flux_weld"]["checker_git_blob_sha1"]="bad-pin"
         elif which=="w2_euler_frozen_false_promotion":m["w2_boundary_packets"]["original_euler_frozen_surface"]["physical_paid"]=True
-        else:m["w2_boundary_packets"]["original_euler_firstjet"]["checker_git_blob_sha1"]="bad-pin"
+        elif which=="w2_euler_firstjet_bad_pin":m["w2_boundary_packets"]["original_euler_firstjet"]["checker_git_blob_sha1"]="bad-pin"
+        elif which=="w3_false_promotion":m["w3_original_action_boundary"]["quadratic_mass_constraint"]["physical_paid"]=True
+        else:m["w3_original_action_boundary"]["surface_gradient_repair"]["source_git_blob_sha1"]="bad-pin"
         try:audit(m)
         except (AssertionError,KeyError):pass
         else:raise AssertionError("admitted "+which)
-    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 18 malformed-claim controls")
+    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 20 malformed-claim controls")
 
 if __name__=="__main__":main()
