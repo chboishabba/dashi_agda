@@ -88,7 +88,15 @@ def cycle(material,cfg):
             for i in range(n):
                 r,a,pool[i]=reaction(pop[i],pool[i],rows[i]['te']+theta[i],p[i],dt,q)
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
-                x[sl],pop[i],w=event(x[sl],pop[i],r,a,birth[i],vol[i])
+                if exact_trace:
+                    # Rates are admitted only on the frozen-population chart.
+                    # Avoid a numerically rounded current -> velocity -> current
+                    # conversion when its exact mathematical action is identity.
+                    if np.any(r) or np.any(a):
+                        raise ValueError('frozen-population certificate encountered nonzero event')
+                    w=np.zeros(3)
+                else:
+                    x[sl],pop[i],w=event(x[sl],pop[i],r,a,birth[i],vol[i])
                 costs[:3]+=w; costs[3]+=vol[i]*(a@chem); costs[4]+=vol[i]*(r@chem)
             theta1=np.exp(-dt*cool/cap)*theta-np.expm1(-dt*cool/cap)*p/cool
             mid=np.exp(-dt*cool/(2*cap))*theta-np.expm1(-dt*cool/(2*cap))*p/cool
