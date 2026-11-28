@@ -2059,3 +2059,31 @@ Revised GTheta max-cut:
 - Agda native D4 chart geometry and dependent two-sheet equivalence now source-written. Remaining exact native finite proof: extract parity witnesses from arbitrary raw coordinates, establish unique bounded signed enumeration of each grade, read its counts into the existing square/triangular scans and rowZ Cauchy convolution, use the chart permutation to pay B_n=A_n+C_n. Then instantiate existing jacobiFromCoefficients without rebuilding analytic readout. No cross-kernel proof import assumed.
 - Native Bishop theta-to-Eisenstein same-object or original lattice-Fourier route still needed. C1b infinite rectangle-row and Lambert degree regrouping, C1c degree-41 product and pole removal, C2 original diagonal zero, C3 original ray residual and H1 final coefficient grouping remain. No new progress asserted on these lanes in this cut.
 - Native/Lean kernels and original GMP acceptance remain separate. No CI invoked; pinned source elaboration may require API repairs.
+
+
+### 2026-11-28 — native all-index Jacobi and rectangular row limit attachment
+
+SOURCE-WRITTEN, KERNEL PENDING. This cut supersedes the prior GTheta1/GTheta2 missing-producer inventory. No native compiler is available in this runtime; no GitHub CI requested or invoked.
+
+| Commit | Source implementation |
+|---|---|
+| b539c6ac6fde / 549744032e44 / e4366e3988f3 | JInvariantThetaGradedCauchyCountExact: finite labelled grade histogram, exact pair/fourfold count on original rowZ, delta shift and degree-local congruence, explicit unit reflection. |
+| 20cdf702eb40 / a2d6bc08b32e | JInvariantThetaBoundedScanReadoutExact: exact finite square and triangular scan reflection, cutoff stability, zero counted once, all-index B and H^4 count. |
+| 0b69354722c7 / a20652bdc5db / 99c824c79a57 | JInvariantThetaIntegralParityExact: constructive parity on signed integers, norm-total parity transport, half-chart split, parity exclusivity and cancellation, exact sign history. |
+| eed550672b2f / 65fb45bf24fe / 27ac1c558706 | JInvariantThetaRawCoordinateGradeExact: literal signed raw labels and balanced product, filtered list count for B_n and A_(n+1), actual raw norm readout and factor 16, successor-first triangular embedding. |
+| 2b7e1fce6d75 | JInvariantThetaBoundedShellEnumerationExact: unique bounded integer and odd-coordinate label lists and actual grade soundness/completeness. |
+| 43e6da3281ee / 9c4e16523c1b | JInvariantThetaRawHadamardTransportExact: actual orientation-indexed forward map, norm transport, restricted injection, constructive preimage for every odd-coordinate tuple. |
+| f2e59f12f048 | JInvariantThetaJacobiAllIndexExact: explicit list permutation by existing unique-membership theorem; odd-degree A=B+B; even-degree A=0; negative coefficient twist; terminal jacobiAll for every n. |
+| 99a603a73463 | JInvariantBishopThetaSignedReadoutExact.At.analyticJacobi = jacobiFromCoefficients Jacobi.jacobiAll. Actual original Bishop readout; no uninhabited coefficient argument remains in this intended terminal. |
+| f49e88325231 | scripts/check_paper9_raw_jacobi_permutation.py, independent local Python replay of equivalent reference. 20352 forward and 20352 reverse point checks, 65 exact shell image comparisons, 195 original integer coefficient comparisons, 20185 integer and 20352 half-shell points. Additional independent finite graded Cauchy replay 840/840. These do not execute the Agda sources. |
+| 78177f6ee69d | JInvariantBishopRectangleRowLimitAttachmentExact: actual finite list of row limits, max(n,m) schedule, exact rectangle-to-nested-row fold transport and cofinal limit consumer actualRowSum. It consumes individual row limits, not an assumed interchange or desired global identity. |
+
+Geometry: for degree n>0, square-shell labels are actual signed integers, with zero unique; half-shell labels are actual signed odd parameters z mapped to 2z+1, with triangular grade j(j+1), j=z for z>=0 or j=-z-1 for z<0. The raw norm is exactly four times (sum of triangular grades + 1). Bounded lists are duplicate-free and complete on each grade; the odd-degree source retains a Boolean orientation tag. The forward map is injective on the actual odd-total source and has a constructive preimage for every target. Existing finite weighted reindex, list uniqueness, original rowZ, signed twist and Bishop readout owners are consumed. The even-degree half-shell is empty by norm parity. Thus the native intended terminal has no external Jacobi identity, count axiom, or finite diagnostic premise.
+
+Remaining:
+- GTheta1/GTheta2: source-written end-to-end; pinned Agda elaboration and kernel acceptance, including dependent with-abstraction, stdlib APIs, and solver performance. No new mathematical premise intended; do not call accepted until run.
+- GTheta3: Lean theta-to-original-Eisenstein and analytic Jacobi are already source-written. Native Bishop original normalized E4/E6 identity is still genuinely required; choose the actual lattice Fourier route or native theta coefficient/uniqueness attachment.
+- C1b: actual finite rectangle fold/limit consumer now written. Attach individual normalized positive rows to signed symmetric row prefixes (including zero endpoint and negative reflection), then absolute Lambert degree-fibre regrouping and native normalized E4/E6. The generic finite limit consumer does not supply the remaining row witnesses.
+- C1c Hecke41 product/pole removal, C2 original diagonal zero, C3 original ray residual, H1 final coefficient grouping and RawCross/GMP acceptance remain. No change to these downstream lanes or Lean branch in this cut.
+
+Classical Jacobi and Hadamard identities retain historical attribution; the DASHI contribution is the explicit integral signed source-specific permutation and attachment. All committed proofs remain uncompiled. No postulates, holes or termination overrides intentionally introduced by these new modules; transitive axioms audit and native acceptance still required.
