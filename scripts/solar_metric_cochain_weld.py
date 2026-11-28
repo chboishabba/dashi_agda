@@ -8,7 +8,10 @@ def metric_curl(d0,d1,d2,me,mh):
     d0,d1,d2=map(np.asarray,(d0,d1,d2))
     if not all(np.all(np.isin(a,[-1,0,1])) for a in (d0,d1,d2)):
         raise ValueError('signed incidence required')
-    if np.any(d1@d0) or np.any(d2@d1):
+    from scipy.sparse import csr_matrix
+    p=csr_matrix(d1)@csr_matrix(d0);q=csr_matrix(d2)@csr_matrix(d1)
+    p.eliminate_zeros();q.eliminate_zeros()
+    if p.nnz or q.nnz:
         raise ValueError('boundary of boundary is nonzero')
     me,mh=map(lambda a:np.asarray(a,float),(me,mh))
     if me.shape!=(d1.shape[1],) or mh.shape!=(d1.shape[0],) or np.any(me<=0) or np.any(mh<=0):
