@@ -414,3 +414,196 @@ module Rectangle (machine : L.ConcreteTapeMachine) (steps cols : Nat)
 -- Actual full transition body width now follows from the original
 -- allSlots/allWindowStarts enumeration, including empty rows/windows.
 -- Arbitrary interior prefix and endpoint layout offsets remain separate.
+
+
+-- Prefix cuts keep the ORIGINAL placement width; take on the already
+-- enumerated slots is not recompilation at a shorter horizon.
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.List.Base using (take; drop)
+open import Agda.Primitive using (Level)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+
+takeSlotsShift : ∀ {n} k (xs : List (Enum.SomeSlot n)) →
+  take k (Enum.mapShiftSlots xs) ≡ Enum.mapShiftSlots (take k xs)
+takeSlotsShift zero xs = refl
+takeSlotsShift (suc k) [] = refl
+takeSlotsShift (suc k) (x ∷ xs) rewrite takeSlotsShift k xs = refl
+
+takeWindowsShift : ∀ {n} k (xs : List (Enum.SomeWindowStart n)) →
+  take k (Enum.mapShiftWindowStarts xs) ≡ Enum.mapShiftWindowStarts (take k xs)
+takeWindowsShift zero xs = refl
+takeWindowsShift (suc k) [] = refl
+takeWindowsShift (suc k) (x ∷ xs) rewrite takeWindowsShift k xs = refl
+
+slotPrefixSum : ∀ a c k n → k ≤ n →
+  slotSum a c (take k (Enum.allSlots n)) ≡ a * F.tri k + c * k
+slotPrefixSum a c zero n h = allSlotSum a c zero
+slotPrefixSum a c (suc k) (suc n) (s≤s h)
+  rewrite takeSlotsShift k (Enum.allSlots n)
+        | shiftSlotSum a c (take k (Enum.allSlots n))
+        | slotPrefixSum a (a + c) k n h =
+  solve 4 (λ a c k u → (a :* con 0 :+ c) :+
+    (a :* u :+ (a :+ c) :* k) :=
+    a :* (u :+ k) :+ c :* (con 1 :+ k)) refl a c k (F.tri k)
+
+windowPrefixSum : ∀ a c k n → k ≤ windowCount n →
+  windowSum a c (take k (Enum.allWindowStarts n)) ≡
+    a * F.tri k + c * k
+windowPrefixSum a c zero n h = allSlotSum a c zero
+windowPrefixSum a c (suc k) (suc (suc (suc n))) (s≤s h)
+  rewrite takeWindowsShift k (Enum.allWindowStarts (suc (suc n)))
+        | shiftWindowSum a c (take k (Enum.allWindowStarts (suc (suc n))))
+        | windowPrefixSum a (a + c) k (suc (suc n)) h =
+  solve 4 (λ a c k u → (a :* con 0 :+ c) :+
+    (a :* u :+ (a :+ c) :* k) :=
+    a :* (u :+ k) :+ c :* (con 1 :+ k)) refl a c k (F.tri k)
+
+-- Indexed witness recovered at the actual list cut.
+dropSlotsShift : ∀ {n} k (xs : List (Enum.SomeSlot n)) →
+  drop k (Enum.mapShiftSlots xs) ≡ Enum.mapShiftSlots (drop k xs)
+dropSlotsShift zero xs = refl
+dropSlotsShift (suc k) [] = refl
+dropSlotsShift (suc k) (x ∷ xs) = dropSlotsShift k xs
+
+dropWindowsShift : ∀ {n} k (xs : List (Enum.SomeWindowStart n)) →
+  drop k (Enum.mapShiftWindowStarts xs) ≡ Enum.mapShiftWindowStarts (drop k xs)
+dropWindowsShift zero xs = refl
+dropWindowsShift (suc k) [] = refl
+dropWindowsShift (suc k) (x ∷ xs) = dropWindowsShift k xs
+
+slotAtCut : ∀ k n → suc k ≤ n →
+  Σ (G.Slot k n) (λ w → Σ (List (Enum.SomeSlot n)) (λ rest →
+    drop k (Enum.allSlots n) ≡ Enum.some-slot k w ∷ rest))
+slotAtCut zero (suc n) h = G.here , Enum.mapShiftSlots (Enum.allSlots n) , refl
+slotAtCut (suc k) (suc n) (s≤s h) with slotAtCut k n h
+... | w , rest , eq rewrite dropSlotsShift k (Enum.allSlots n) | eq =
+  G.there w , Enum.mapShiftSlots rest , refl
+
+windowAtCut : ∀ k n → suc k ≤ windowCount n →
+  Σ (Raw.WindowStart k n) (λ w → Σ (List (Enum.SomeWindowStart n)) (λ rest →
+    drop k (Enum.allWindowStarts n) ≡ Enum.some-window-start k w ∷ rest))
+windowAtCut zero (suc (suc (suc n))) h =
+  Raw.here , Enum.mapShiftWindowStarts (Enum.allWindowStarts (suc (suc n))) , refl
+windowAtCut (suc k) (suc (suc (suc n))) (s≤s h)
+  with windowAtCut k (suc (suc n)) h
+... | w , rest , eq rewrite dropWindowsShift k (Enum.allWindowStarts (suc (suc n))) | eq =
+  Raw.there w , Enum.mapShiftWindowStarts rest , refl
+
+-- Universe-polymorphic split for the actual placed predicates (Set1).
+appendU : ∀ {l : Level} {A : Set l} → List A → List A → List A
+appendU [] ys = ys
+appendU (x ∷ xs) ys = x ∷ appendU xs ys
+
+takeDrop : ∀ {l : Level} {A : Set l} k (xs : List A) →
+  appendU (take k xs) (drop k xs) ≡ xs
+takeDrop zero xs = refl
+takeDrop (suc k) [] = refl
+takeDrop (suc k) (x ∷ xs) = cong (x ∷_) (takeDrop k xs)
+
+module Interior (machine : L.ConcreteTapeMachine) (steps cols : Nat)
+  (sc : C.EnumerationCoverage (L.finiteState machine))
+  (ac : C.EnumerationCoverage (L.finiteSymbol machine))
+  (nonempty : R.NonemptyRuleTable machine) where
+
+  module Q = Rectangle machine steps cols sc ac nonempty
+  open Q using (size; lifted; sizeAppend; a; b; c; J; rowWidth)
+
+  timePred = Enum.predicatesForAllTimes {machine} {steps} {cols} sc ac nonempty
+  rowPred : ∀ {t} → G.Slot t steps → List (Enum.SomeWindowStart cols) → List Q.Pred
+  rowPred ts = Enum.predicatesForOneTime {machine} {steps} {cols} sc ac nonempty ts
+
+  rowAppend : ∀ {t} (ts : G.Slot t steps) xs ys →
+    rowPred ts (appendU xs ys) ≡ Enum.appendPredicates (rowPred ts xs) (rowPred ts ys)
+  rowAppend ts [] ys = refl
+  rowAppend ts (x ∷ xs) ys rewrite rowAppend ts xs ys = refl
+
+  predAssoc : ∀ (xs ys zs : List Q.Pred) →
+    Enum.appendPredicates (Enum.appendPredicates xs ys) zs ≡
+    Enum.appendPredicates xs (Enum.appendPredicates ys zs)
+  predAssoc [] ys zs = refl
+  predAssoc (x ∷ xs) ys zs rewrite predAssoc xs ys zs = refl
+
+  timeAppend : ∀ xs ys →
+    timePred (appendU xs ys) ≡ Enum.appendPredicates (timePred xs) (timePred ys)
+  timeAppend [] ys = refl
+  timeAppend (Enum.some-slot t ts ∷ xs) ys rewrite timeAppend xs ys =
+    sym (predAssoc (rowPred ts (Enum.allWindowStarts cols)) (timePred xs) (timePred ys))
+
+  priorRows t = timePred (take t (Enum.allSlots steps))
+
+  priorWindows : ∀ {t} → G.Slot t steps → Nat → List Q.Pred
+  priorWindows ts j = rowPred ts (take j (Enum.allWindowStarts cols))
+
+  rowOffset t = J * (a * F.tri t + c * t) + b * t * F.tri J
+  columnOffset t j = j * (a * t + c) + b * F.tri j
+
+  rowsWidth : ∀ t → t ≤ steps → size (priorRows t) ≡ rowOffset t
+  rowsWidth t ht =
+    trans (Q.allTimes (take t (Enum.allSlots steps)))
+      (trans (sumCong (λ x → rowWidth (Enum.SomeSlot.index x))
+        (λ x → (J * a) * Enum.SomeSlot.index x + (J * c + b * F.tri J))
+        (take t (Enum.allSlots steps)) (λ x → Q.rowReorder (Enum.SomeSlot.index x)))
+        (trans (slotPrefixSum (J * a) (J * c + b * F.tri J) t steps ht)
+          (solve 7 (λ a b c J t u v →
+            (J :* a) :* u :+ (J :* c :+ b :* v) :* t :=
+            J :* (a :* u :+ c :* t) :+ b :* t :* v)
+            refl a b c J t (F.tri t) (F.tri J))))
+
+  windowsWidth : ∀ {t} (ts : G.Slot t steps) j → j ≤ J →
+    size (priorWindows ts j) ≡ columnOffset t j
+  windowsWidth {t} ts j hj =
+    trans (Q.oneTime ts (take j (Enum.allWindowStarts cols)))
+      (trans (sumCong (λ x → eval Q.O.block t (Enum.SomeWindowStart.index x))
+        (λ x → b * Enum.SomeWindowStart.index x + (a * t + c))
+        (take j (Enum.allWindowStarts cols)) (λ x → Q.evalReorder t (Enum.SomeWindowStart.index x)))
+        (trans (windowPrefixSum b (a * t + c) j cols hj)
+          (solve 4 (λ b u j v → b :* u :+ v :* j := j :* v :+ b :* u)
+            refl b (F.tri j) j (a * t + c))))
+
+  prefix : ∀ {t} → G.Slot t steps → Nat → List Q.Pred
+  prefix {t} ts j = Enum.appendPredicates (priorRows t) (priorWindows ts j)
+
+  prefixWidth : ∀ {t} (ts : G.Slot t steps) j → t ≤ steps → j ≤ J →
+    size (prefix ts j) ≡ rowOffset t + columnOffset t j
+  prefixWidth {t} ts j ht hj =
+    trans (sizeAppend (priorRows t) (priorWindows ts j))
+      (cong₂ _+_ (rowsWidth t ht) (windowsWidth ts j hj))
+
+  suffix : ∀ {t} → G.Slot t steps → Nat → List (Enum.SomeSlot steps) → List Q.Pred
+  suffix ts j rest = Enum.appendPredicates
+    (rowPred ts (drop j (Enum.allWindowStarts cols))) (timePred rest)
+
+  -- Row and column cuts refer to the original enumerated list, so
+  -- actual compiler order (including all duplicate clauses) is preserved.
+  predicateSplit : ∀ {t} (ts : G.Slot t steps) j rest →
+    drop t (Enum.allSlots steps) ≡ Enum.some-slot t ts ∷ rest →
+    Enum.allGlobalTransitionPredicates {machine} sc ac nonempty steps cols ≡
+    Enum.appendPredicates (prefix ts j) (suffix ts j rest)
+  predicateSplit {t} ts j rest h =
+    trans (cong timePred (sym (takeDrop t (Enum.allSlots steps))))
+      (trans (timeAppend (take t (Enum.allSlots steps)) (drop t (Enum.allSlots steps)))
+        (trans (cong (Enum.appendPredicates (priorRows t)) (cong timePred h))
+          (trans (cong (λ z → Enum.appendPredicates (priorRows t)
+              (Enum.appendPredicates z (timePred rest)))
+              (trans (cong (rowPred ts) (sym (takeDrop j (Enum.allWindowStarts cols))))
+                (rowAppend ts (take j (Enum.allWindowStarts cols))
+                  (drop j (Enum.allWindowStarts cols)))))
+            (trans (cong (Enum.appendPredicates (priorRows t))
+                (predAssoc (priorWindows ts j)
+                  (rowPred ts (drop j (Enum.allWindowStarts cols))) (timePred rest)))
+              (sym (predAssoc (priorRows t) (priorWindows ts j) (suffix ts j rest)))))))
+
+  liftedAppend : ∀ ps qs → lifted (Enum.appendPredicates ps qs) ≡
+    L.append (lifted ps) (lifted qs)
+  liftedAppend ps qs
+    rewrite compileAppend ps qs =
+      renameLocalAppend (E.liftBaseIndex {machine} {steps} {cols})
+        (Placed.compilePlacedAll ps) (Placed.compilePlacedAll qs)
+
+  actualTransitionSplit : ∀ {t} (ts : G.Slot t steps) j rest →
+    drop t (Enum.allSlots steps) ≡ Enum.some-slot t ts ∷ rest →
+    Global.liftTransitionCNF {machine} sc ac nonempty steps cols ≡
+      L.append (lifted (prefix ts j)) (lifted (suffix ts j rest))
+  actualTransitionSplit ts j rest h =
+    trans (cong lifted (predicateSplit ts j rest h))
+      (liftedAppend (prefix ts j) (suffix ts j rest))
