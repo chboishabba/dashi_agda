@@ -1,0 +1,27 @@
+{
+  "scope": "Exact normalized static reciprocal source geometry; not atmospheric conversion or a physical periodic orbit",
+  "status": "PASS",
+  "runtime": {
+    "sympy": "1.14.0",
+    "timeout_seconds": 90
+  },
+  "verified_executed_blobs": {
+    "solar_coarse_access_inverse.py": "d7d80cef2bc135c3246159291979a0589f0367ef",
+    "solar_multiport_access_geometry.py": "730106fe3ff49d784f0e0073fde60c1e6f541c57"
+  },
+  "results": {
+    "scalar_fixed_mismatch": "4/25",
+    "scalar_matched": "1/4",
+    "multiport_restricted_cap": "1/8",
+    "multiport_full_cap": "1/2",
+    "multiport_residual": "3/8",
+    "signed_orientation_null": "0",
+    "signed_orientation_aligned": "1/2"
+  },
+  "limitations": [
+    "Local prior snapshot unavailable; two sources reconstructed and hash checked individually.",
+    "No old donor replay, CI or kernel.",
+    "Scalar joint_cycle checks aggregate energy closure, not complete state return.",
+    "Static source power in normalized unit duration; no measured source, physical coupling or actuator."
+  ]
+}
