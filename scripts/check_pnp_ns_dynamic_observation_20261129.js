@@ -25,10 +25,10 @@ function quotient(G,observeCost=true){
 // Independent BFS on product graph returns shortest distinguishing word,
 // including final observation, action enabledness and per-step cost.
 function distinguish(G,s,t,cost){
- let todo=[[s,t,[]]],seen=new Set();for(let i=0;i<todo.length;i++){let [u,v,w]=todo[i],k=u+":"+v;if(seen.has(k))continue;seen.add(k);
+ let todo=[[s,t,[]]],seen=new Set();for(let i=0;i<todo.length;i++){let [u,v,w,kind]=todo[i];if(kind)return {word:w,kind};let k=u+":"+v;if(seen.has(k))continue;seen.add(k);
   if(key(G.obs[u])!==key(G.obs[v]))return {word:w,kind:"observation"};
-  for(let a=0;a<G.edges[u].length;a++){let e=G.edges[u][a],f=G.edges[v][a];if((e===null)!==(f===null))return {word:[...w,a],kind:"enablement"};
-   if(e&&f){if(cost&&e[1]!==f[1])return {word:[...w,a],kind:"cost"};todo.push([e[0],f[0],[...w,a]])}
+  for(let a=0;a<G.edges[u].length;a++){let e=G.edges[u][a],f=G.edges[v][a];if((e===null)!==(f===null)){todo.push([u,v,[...w,a],"enablement"]);continue}
+   if(e&&f){if(cost&&e[1]!==f[1]){todo.push([u,v,[...w,a],"cost"]);continue}todo.push([e[0],f[0],[...w,a]])}
   }
  }return null;
 }
@@ -37,14 +37,14 @@ function verify(G,cost=true,allPairs=true){
  let Q=quotient(G,cost),N=G.obs.length,A=G.edges[0].length,maxWord=0;
  if(allPairs)for(let s=0;s<N;s++)for(let t=s;t<N;t++){let d=distinguish(G,s,t,cost);assert((d===null)===(Q.q[s]===Q.q[t]),"independent product referee");ledger.pairReferees++;if(d){assert(key(trace(G,s,d.word,cost))!==key(trace(G,t,d.word,cost)),"separator replay");ledger.separatorReplays++;maxWord=Math.max(maxWord,d.word.length)}}
  for(let k=0;k<80;k++){let s=rnd(N),w=seq(20).map(()=>rnd(A));assert(key(trace(G,s,w,cost))===key(trace(Q.reduced,Q.q[s],w,cost)),"trace");ledger.traceReplays++}
- return {states:N,classes:Q.classes,rounds:Q.rounds,signatureRows:Q.signatures,maxWord};
+ return {states:N,classes:Q.classes,rounds:Q.rounds,signatureRows:Q.signatures,maxWord:allPairs?maxWord:null};
 }
 let random=[];for(let k=0;k<100;k++){let N=2+rnd(18),A=1+rnd(4),G={obs:seq(N).map(()=>rnd(3)),edges:seq(N).map(()=>seq(A).map(()=>rnd(5)===0?null:[rnd(N),rnd(4)]))};random.push(verify(G,false),verify(G,true))}
 const costG={obs:[0,0,1],edges:[[[2,1]],[[2,7]],[null]]};
 assert(quotient(costG,false).classes===2&&quotient(costG,true).classes===3,"cost hiding");
 const disabledG={obs:[0,0],edges:[[null],[[1,0]]]};assert(quotient(disabledG).classes===2,"admissibility hiding");
 let counters=[];for(let n of [2,3,4,5,6,7,8,9]){let N=2**n,G={obs:seq(N).map(s=>+(s===0)),edges:seq(N).map(s=>[[(s+1)%N,1]])};
- let r=verify(G,true,n<=5);assert(r.classes===N,"counter must separate");assert((N-1+1234567)%N===((N-1)+1234567)%N,"jump arithmetic");counters.push({bits:n,...r,jump:"(state+horizon) mod 2^n",largestShortestSeparator:N-2})}
+ let r=verify(G,true,n<=5);assert(r.classes===N,"counter must separate");let x=N-1;for(let j=0;j<12345;j++)x=G.edges[x][0][0];assert(x===(N-1+12345)%N,"jump arithmetic");counters.push({bits:n,...r,jump:"(state+horizon) mod 2^n",largestShortestSeparator:N-2})}
 // Affine F2 action dynamics on a compact bit state. A row is a bit mask.
 // Symbolic row saturation computes span of all O A_word, not state tables.
 const parity=x=>{let b=0n;while(x){b^=1n;x&=x-1n}return b};
@@ -66,7 +66,7 @@ let affine=[];for(let k=0;k<70;k++){let n=1+rnd(6),N=2**n,A=1+rnd(3),actions=seq
 let shifts=[];for(let n of [8,16,32,64,128,256]){let M=seq(n).map(i=>1n<<BigInt((i+1)%n)),L=linearClosure(n,[{M,b:0n}],[1n]);assert(L.rank===n,"delayed hidden bits");shifts.push({n,rank:L.rank,rowPulls:L.ops,explicitStates:"2^"+n})}
 // Nonlinear exact residual identity on an integer trajectory, not a PDE.
 // e_{j+1} = d_j + [B_a(Qs_j)-B_a(z_j)], using actual and reference.
-const f=[x=>[x[0]+x[1],x[1]-1],x=>[x[0]-x[1],x[1]+2]],B=[z=>z*z-2,z=>2*z+1],Q=x=>x[0];
+const f=[x=>[x[0]+x[1],x[1]-1],x=>[x[0]-x[1],x[1]+2]],Q=x=>x[0];
 for(let k=0;k<60;k++){let s=[rnd(9)-4,rnd(9)-4],z=BigInt(Q(s));let e=0n;for(let j=0;j<5;j++){let a=rnd(2),next=f[a](s),b=a===0?v=>v*v-2n:v=>2n*v+1n;
  let d=BigInt(Q(next))-b(BigInt(Q(s))),prop=b(BigInt(Q(s)))-b(z),newz=b(z),newE=BigInt(Q(next))-newz;
  assert(newE===d+prop&&e===BigInt(Q(s))-z,"signed nonlinear defect");ledger.defectChecks++;s=next;z=newz;e=newE}
