@@ -21,7 +21,7 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w):
+def cell(F,cols,target,offset,remaining,w,conditioned=True):
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -42,6 +42,9 @@ def cell(F,cols,target,offset,remaining,w):
         for i in remaining:H=[H[z]+H[(z-cols[i][-1])%3] for z in range(3)]
         a=tuple(w*(3*h-C) for h in H)
         return (F,cols,target,offset,remaining,w,a,a)
+    if not conditioned:
+        a=[[w*(3*int(z==d)-1) for z in labels] for d in range(3)]
+        return (F,cols,target,offset,remaining,w,tuple(C*min(0,*q) for q in a),tuple(C*max(0,*q) for q in a))
     # Refine the old common cap by the original source's disjoint-free-
     # clause cap, then condition on the ACTUAL observable label.  The
     # two signed contributions are bounded separately, preserving the
