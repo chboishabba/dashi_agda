@@ -78,6 +78,41 @@ def cubic_interpolation(D,d,pay):
     return P
 
 
+def independent_phase_pieces(P,n,pay):
+    """Factor only after affine pullback, on the FULL nonconstant
+    monomial dependency graph (including quadratic bridges).
+    Free variables contribute exactly 3^free. All purely quadratic
+    components are pooled into one Gauss leaf. No independent split
+    is inferred from original source-block labels."""
+    pay(1+n+sum(1+len(m) for m in P))
+    parent=list(range(n))
+    def root(i):
+        while parent[i]!=i:
+            parent[i]=parent[parent[i]];i=parent[i]
+        return i
+    active=set()
+    for m,a in P.items():
+        if not m or not a%3:continue
+        active.update(m)
+        for i in m[1:]:parent[root(i)]=root(m[0])
+    groups={}
+    for i in sorted(active):groups.setdefault(root(i),[]).append(i)
+    terms={k:{} for k in groups}
+    for m,a in P.items():
+        if m and a%3:terms[root(m[0])][m]=a
+    hard=[];soft=[];softterms={}
+    for k,I in groups.items():
+        if any(len(m)>2 for m in terms[k]):hard.append((I,terms[k]))
+        else:soft.extend(I);softterms.update(terms[k])
+    if soft:hard.append((sorted(soft),softterms))
+    pieces=[]
+    for I,T in hard:
+        pos={v:i for i,v in enumerate(I)}
+        pay(1+len(I)+sum(1+len(m) for m in T))
+        pieces.append((len(I),{tuple(pos[i] for i in m):a for m,a in T.items()}))
+    return pieces,n-len(active),P.get((),0)%3
+
+
 def conditional_gauss(P,n,pay,budget):
     """Branch only on a coordinate hitting actual degree-three terms.
     Quadratic residuals go to the existing exact Gauss compiler.
@@ -88,6 +123,13 @@ def conditional_gauss(P,n,pay,budget):
         if budget[0]<=0:raise Refusal('phase branch cap')
         budget[0]-=1
         return gauss(P,n,pay)
+    pieces,free,constant=independent_phase_pieces(P,n,pay)
+    if len(pieces)>1 or free:
+        z=phase((3**free,0),constant)
+        for k,Q in pieces:
+            z=mul(z,conditional_gauss(Q,k,pay,budget))
+            if z==Z:break # exact zero factor, not an unvisited refusal
+        return z
     hits={i:sum(i in m for m in hard) for i in set().union(*map(set,hard))}
     j=min(hits,key=lambda i:(-hits[i],i))
     z=Z
