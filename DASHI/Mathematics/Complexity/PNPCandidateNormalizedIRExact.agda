@@ -6,6 +6,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Fin.Base using (toℕ)
+open import Data.Fin.Properties using (toℕ<n)
+open import Data.Nat.Base using (_<_ ; _≤_ ; z≤n ; s≤s)
+open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 import DASHI.Mathematics.Complexity.PNPActualCandidateParsedEndpointExact as Parsed
 import DASHI.Mathematics.Complexity.PNPStandardCandidateRuleExportExact as Export
@@ -28,10 +31,23 @@ record IR : Set where
     states alphabet initial accepting : Nat
     rules : List Rule
 
+RuleBound : Nat → Nat → Rule → Set
+RuleBound Q A (rule q a p b d) =
+  (q < Q) × (a < A) × (p < Q) × (b < A) × (d < 3)
+
+data RulesBound (Q A : Nat) : List Rule → Set where
+  nil : RulesBound Q A []
+  cons : ∀ {r rs} → RuleBound Q A r → RulesBound Q A rs → RulesBound Q A (r ∷ rs)
+
 directionCode : L.Direction → Nat
 directionCode L.moveLeft = 0
 directionCode L.stayPut = 1
 directionCode L.moveRight = 2
+
+directionBound : ∀ d → directionCode d < 3
+directionBound L.moveLeft = s≤s z≤n
+directionBound L.stayPut = s≤s (s≤s z≤n)
+directionBound L.moveRight = s≤s (s≤s (s≤s z≤n))
 
 flattenRules : List Rule → List Nat
 flattenRules [] = []
@@ -89,6 +105,26 @@ module Actual {cost : PR.PolynomialCostModel Cook.BooleanFormula}
       (Candidate.candidateProgramBits standard)))
     (cong (map originalRule) (Code.decodeStaticProgramRules P.D.concrete
       (Candidate.candidateStateCoverage standard) (Candidate.candidateSymbolCoverage standard)))
+
+  normalizedRuleBound : ∀ r → RuleBound (C.StateWidth P.D.concrete)
+    (C.listLength D.alphabet) (normalizeRule r)
+  normalizedRuleBound (E.indexed-rule q a p b d) =
+    toℕ<n q , P.actualDigitBound (E.symbolRead a) ,
+    toℕ<n p , P.actualDigitBound (E.symbolRead b) , directionBound d
+
+  normalizedRulesBound : ∀ rs → RulesBound (C.StateWidth P.D.concrete)
+    (C.listLength D.alphabet) (map normalizeRule rs)
+  normalizedRulesBound [] = nil
+  normalizedRulesBound (r ∷ rs) = cons (normalizedRuleBound r) (normalizedRulesBound rs)
+
+  exportedBounds : RulesBound (IR.states actualIR) (IR.alphabet actualIR) (IR.rules actualIR)
+  exportedBounds = normalizedRulesBound P.E.exportedRules
+
+  initialBound : IR.initial actualIR < IR.states actualIR
+  initialBound = toℕ<n (E.initialFromBits (Candidate.candidateProgramBits standard))
+
+  acceptingBound : IR.accepting actualIR < IR.states actualIR
+  acceptingBound = toℕ<n (E.acceptingFromBits (Candidate.candidateProgramBits standard))
 
   originalBlank : D.digit (L.blank P.D.concrete) ≡ zero
   originalBlank = D.blankZero
