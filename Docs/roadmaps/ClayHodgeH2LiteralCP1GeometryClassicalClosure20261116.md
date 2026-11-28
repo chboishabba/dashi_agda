@@ -1,5 +1,27 @@
 # Clay Hodge H2 — literal CP¹ and CP¹×CP¹ rational Hodge cycle-class comparison
 
+## 23 November 2026 — non-product Gr(2,4) all rational Schubert-cycle inverse
+
+[Original six-lane geometry-first alpha ledger](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md), [locally executed exact Schubert BIDI script](../../scripts/check_hodge_gr24_schubert_cycle_bidi_20261123.py), Git blob c437b482b547ae0a5773ee9a8f5931b89a2778c0 (byte-identical executed script). This expands the classical **selected H2** laboratory beyond P¹ products to the actual smooth projective fourfold X=Gr(2,4), Plücker Klein quadric Q⁴⊂P⁵, with six flag-defined algebraic Schubert varieties. Standard classical Schubert cellular theory identifies its true Chow and rational singular cohomology as Q[h,c]/(h³−2hc,h⁴−3h²c+c²), where h=c₁(S*), c=c₂(S*), and the six classes (1,h,h²−c,c,hc,c²) have codimensions (0,1,2,2,3,4).
+
+**Geometry labels source-corrected**: sigma₂=h²−c is lines **through a fixed projective point**; sigma₁₁=c is lines **contained in a fixed projective plane**. The two middle classes have self-intersection one and mixed intersection zero; ∫h⁴=2, Hodge codimension ranks (1,1,2,1,1), and no off-diagonal cohomology by affine Schubert cells. The actual complementary Schubert pairing is unimodular (determinant 1, P²=I). For any rational Hodge class alpha in THIS X, coefficients a_lambda=∫alpha sigma_(lambda-complement) recover a unique **literal rational algebraic cycle** sum a_lambda[Omega_lambda]; 7,200 exact rational recovery cases PASS. This is the already established classical cellular/Schubert result, not a general Hodge proof.
+
+**Native H2 Gr(2,4) OPEN**: construct true Plücker smooth projective variety and tautological bundle, six literal flag incidence schemes and Chow cycles, original cycle-to-singular/de Rham Hodge comparison, exact Pieri/Giambelli/duality and the inverse in the already-owned true RationalAlgebraicCycle carrier. Do not relabel the abstract P¹ weld as Gr(2,4). H1 native rational→complex Hodge transport and universal H3 for arbitrary noncellular smooth projective X remain OPEN. See standard Schubert reference https://www.math.uzh.ch/en/fileadmin/user/kresch/publikation/goe07.pdf .
+
+
+
+## 23 November 2026 — complementary-pairing inverse and cycle reconstruction
+
+[Geometry-forward BIDI/reverse-solve](ClayFourLaneGeometryForwardBidiReverseSolve20261123.md) strengthens the classical finite-product result: for `X_r=(CP¹)^r`, the rational complementary intersection pairing is a permutation matrix. For a class `alpha=sum_{|I|=p} a_I h_I`, recover each original coefficient **exactly** via `a_I=int(alpha h_(I^c))`, then return the genuine rational algebraic coordinate-cycle sum `sum_I a_I [coordinate_point_cycle_I]`. This explicit forward/reverse correspondence is classical Künneth/divisor geometry only, not a universal Hodge cycle-preimage or native `ProjectiveLineGenericCycleClassWeldExact` constructor. Exact rational script checks 900 reconstructed class vectors at `r=0..8`; [script](../../scripts/check_clay_geometry_reverse_20261123.py). General H1/H3 and Agda kernel acceptance OPEN.
+
+
+## 23 November 2026 — selected all-r product-family extension (classical Künneth donor)
+
+The documented literal CP¹ and CP¹×CP¹ H2 cases admit an elementary **all finite products** extension X_r=(CP¹)^r without constructing a generic smooth-projective H3 instance. Under established projective-space Hodge, singular/de Rham comparison, algebraic divisor cycle and Künneth theorems, H*(X_r,Q)=Q[h_1,...,h_r]/(h_i²); its binomial(r,p) squarefree monomials in degree 2p are all rational (p,p) classes and represent actual codimension-p coordinate products of point divisors. Complementary intersection pairing int(h_I h_J)=1 iff J=I^c, otherwise zero. Factor permutations preserve products and natural cycle classes. Thus the known Hodge conjecture holds classically for each chosen X_r at all codimensions; this does not address arbitrary varieties or count H2 again.
+
+[Four-lane geometric proof and source boundary](ClayNonYMRHFourLaneGeometricMaxCut20261123.md); [exact regression](../../scripts/check_clay_four_lane_geometric_shortcuts_20261123.py): 5,504 exact cup/intersection/permutation cases at r=0..7. The finite tests do not prove the arbitrary-r geometric comparisons. The existing ProjectiveLineGenericCycleClassWeldExact remains conditional on supplied actual geometry, and HodgeAlgebraicCycleClayCoreExact still requires authentic rational algebraic cycles on general X. **H1/H3 universal, generic comparison and native kernel acceptance remain OPEN.**
+
+
 **16 November 2026. H2 is CLASSICALLY MATHEMATICALLY CLOSED for the literal projective-line and product examples, under the established user-authorized classical/Python protocol. Native Agda kernel/geometric comparison remains OPEN. The universal Hodge conjecture H3 and general H1 source geometry remain OPEN.** This note pays the exact *special-case physical geometry* gate, not the general Hodge conjecture.
 
 ## Original owner audit and why old source was insufficient
