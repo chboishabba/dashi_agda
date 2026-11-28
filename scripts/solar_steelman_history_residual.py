@@ -21,6 +21,9 @@ def step(h,mu,b,c,residual,e0,e1,e2):
 
 def replay(h,slabs,initial=0,history=(0,0)):
     # h must equal delay: each slab reads the preceding two slabs.
+    # b,c include delayed ratio readback R for propagated state errors;
+    # for initial ratio errors use max(1,||R||) in those coefficients.
+    # residual includes approximate history and coefficient error.
     e=rational(initial); past=list(map(rational,history)); out=[]
     assert len(past)==2 and min(e,*past)>=0
     for mu,b,c,residual in slabs:
