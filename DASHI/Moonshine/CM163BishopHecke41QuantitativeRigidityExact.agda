@@ -4,6 +4,7 @@ module DASHI.Moonshine.CM163BishopHecke41QuantitativeRigidityExact where
 -- Geometry is isolated as a constructive S/T orbit cover, not as an
 -- analytic vanishing hypothesis. All remaining analytic estimates
 -- are assembled on the actual ordinary residual coefficient streams.
+open import Agda.Builtin.Nat using (zero)
 open import Data.Product.Base using (_,_; _×_; proj₁; proj₂)
 import Real as R
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
@@ -12,6 +13,7 @@ import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Analysis.BishopComplexNormSquareUpperPowerEnvelopeExact as Upper
 import DASHI.Moonshine.JInvariantBishopLatticeGeneratorSummandExact as Gen
 import DASHI.Moonshine.CM163BishopHecke41DyadicCircleBoundsExact as Circle
+import DASHI.Moonshine.CM163BishopHecke41DyadicFourierProjectionExact as Proj
 import DASHI.Moonshine.CM163BishopHecke41FourierCoefficientBoundExact as Fourier
 import DASHI.Moonshine.CM163BishopHecke41CuspContractionExact as Contract
 import DASHI.Moonshine.CM163BishopHecke41UniformCuspBoundExact as Bound
@@ -23,7 +25,7 @@ import DASHI.Moonshine.CM163BishopHecke41ReducedCauchyExact as R41
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 open C using (BishopComplex; _≈C_)
-open Circle using (Point; Func)
+open Proj using (Point; Func)
 open Contract using (Box; boxCong)
 open Comp using (complexTrans; complexSym)
 
@@ -66,7 +68,7 @@ module At (inputs : Round11.BishopCutset) where
   Cover ref = ∀ p → Reduced ref p
 
   module For (ref : Point) (cover : Cover ref)
-    (f : N.SeriesC) (zeroMode : f 0 ≈C A.zeroC)
+    (f : N.SeriesC) (zeroMode : f zero ≈C A.zeroC)
     (ev : ∀ p → Eval.Eval (q p) f)
     (F : Func) (actual : ∀ p → F p ≈C Eval.value (ev p))
     (hs : ∀ p → F (Gen.actS p) ≈C F p)
