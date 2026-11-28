@@ -35,7 +35,7 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble','history-exact-leaf'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
@@ -79,6 +79,13 @@ def main():
         z=ambient_bounds(m,a)
         save(work/'history_bounds.pkl',z,up,src)
         print('conditional ambient coefficient bounds', {k:float(v) for k,v in z.items()},flush=True)
+    elif x.stage=='history-exact-leaf':
+        from solar_steelman_history_acceptance import leaf,exact_tangency,endpoint_ratio
+        Q,L=leaf(m,a)
+        assert exact_tangency(m,a,Q,L)
+        R=endpoint_ratio(m,a)
+        save(work/'history_exact_leaf.pkl',dict(Q=Q,L=L,R=R),up,src)
+        print('PASS exact structural leaf tangency and endpoint',Q.shape,flush=True)
     elif x.stage=='history-leaf':
         from solar_steelman_history_leaf import construct
         construct(m,a,x.delay)
