@@ -48,7 +48,8 @@ def cycle(material,cfg,shadow=None):
     assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
     campaign={}; preparation={}; trace=[]; history=[]; sensitivity=[]; support_receipts=[]
     from fractions import Fraction
-    solve_error=Fraction(0); event_error_exact=Fraction(0)
+    solve_error=Fraction(0); event_error_exact=Fraction(0); paid_exact=Fraction(0)
+    def Q(v):return Fraction(float(v))
     exact_trace=cfg.get('retain_stage_residuals',False)
     exact_events=bool(cfg.get('retain_nonfrozen_event_residuals',False))
     if exact_events and not exact_trace:raise ValueError('nonfrozen event enclosure requires exact stage residuals')
@@ -81,6 +82,7 @@ def cycle(material,cfg,shadow=None):
             terminal=step>=len(src)
             current_L=terminal_L if terminal else L
             before=energy(); costs=np.zeros(5)
+            exact_costs=[Fraction(0)]*3 if exact_trace else None
             if shadow is not None:
                 shadow_x=np.zeros(size) if step_index==0 else np.asarray(P@reference[step_index-1]).ravel()
             for i in range(n):
@@ -109,6 +111,11 @@ def cycle(material,cfg,shadow=None):
                         support_receipts.append(dict(cycle=iteration+1,step=step,
                                                      cell=i,receipt=support_receipt))
                 costs[:3]+=w; costs[3]+=vol[i]*(a@chem); costs[4]+=vol[i]*(r@chem)
+                if exact_trace:
+                    # Binary recorded material event inputs, with exact arithmetic.
+                    exact_costs[0]+=Q(vol[i])*sum((Q(MASS[j])*Q(a[j])*sum((Q(v)**2 for v in birth[i,j]),Fraction(0))/2 for j in range(3)),Fraction(0))
+                    exact_costs[1]+=Q(vol[i])*sum((Q(a[j])*Q(chem[j]) for j in range(3)),Fraction(0))
+                    exact_costs[2]+=Q(vol[i])*sum((Q(r[j])*Q(chem[j]) for j in range(3)),Fraction(0))
             theta1=np.exp(-dt*cool/cap)*theta-np.expm1(-dt*cool/cap)*p/cool
             mid=np.exp(-dt*cool/(2*cap))*theta-np.expm1(-dt*cool/(2*cap))*p/cool
             absorbed=dt*p.sum(); bath=absorbed-cap@(theta1-theta); theta=theta1
@@ -134,6 +141,8 @@ def cycle(material,cfg,shadow=None):
                 er['time']=[iteration,step]; residual_trace.append(er)
             step_index+=1
             paid=absorbed/cfg['heater_efficiency']+(costs[0]+costs[3])/q['chemical_input_efficiency']-q['chemical_recovery_efficiency']*costs[4]
+            if exact_trace:
+                paid_exact+=Q(dt)*sum((Q(v) for v in p),Fraction(0))/Q(cfg['heater_efficiency'])+(exact_costs[0]+exact_costs[1])/Q(q['chemical_input_efficiency'])-Q(q['chemical_recovery_efficiency'])*exact_costs[2]
             balance=energy()-before+w['outgoing_J']+useful+collision+bath+costs[1]+costs[2]+costs[4]-w['incident_J']-absorbed-costs[0]-costs[3]
             assert abs(balance)<=1e-8*max(abs(before),abs(energy()),w['incident_J'],absorbed,costs[3],1e-30)
             if cfg.get('retain_history',False): history.append(np.r_[x,pop.ravel(),pool.ravel(),theta].tolist())
@@ -205,6 +214,8 @@ def cycle(material,cfg,shadow=None):
                 exact_frozen_population_solve_error=str(solve_error) if exact_trace and not exact_events else None,
                 exact_binary_field_solve_error=str(solve_error) if exact_trace else None,
                 exact_binary_event_error=str(event_error_exact) if exact_events else None,
+                exact_binary_paid_J=str(paid_exact) if exact_trace else None,
+                exact_binary_terminal_formation_J=str(sum((Q(vol[i])*Q(pop[i,j])*Q(chem[j]) for i in range(n) for j in range(3)),Fraction(0))) if exact_trace else None,
                 fixed_binary_material_history_enclosure=bool(exact_trace),physical_material_rounding_enclosed=False,
                 history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
                 preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
