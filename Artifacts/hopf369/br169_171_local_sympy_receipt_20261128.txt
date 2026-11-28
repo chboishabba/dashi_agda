@@ -1,0 +1,16 @@
+Local directory /tmp/hopf169; SymPy exact stages OPENBLAS_NUM_THREADS=1 timeout 90 python <script> --part <stage>.
+Original BR27 donor Git blob 75f6d2f9ae23302860074c25cb8d864b7c089148.
+Original BR128-131 checker Git blob 9dec80672c8b59c75afa8c877d8d54f6d8d86644 verified; all 4 exit 0:
+PASS BR128 actual BR29 signed flux, zero-speed firewall, variable material normal constant and tangential commutator
+PASS BR129 actual BR29 Ricci-defect wall absorption, mixed Schouten/Codazzi source and unchanged flux
+PASS BR130 full nonumbilic lapse Riccati acceleration, weighted transported moment inverse, BR31 exterior parity power
+PASS BR131 Cartan connection/torsion Bianchi identities and two-sided tangent-geodesic obstruction
+New checker Git blob 754fe689d23990f4685e5157f2cd4b4a3ac13de0
+SHA256 035b14ef4942b3c39ceb4cedb352f25a0cc60635547809db1875e287f39b71d4
+All 3 exit 0:
+PASS BR169 actual mass grading, differential Pauli square and original divergence-free linear Hopf source
+PASS BR170 full 2s+2p spin-orbital leading Hopf matrix, rank four and signed paired eigenvalues
+BR143 ranks normal flux, full electric trace, spatial trace, kernel images: 22 23 3 4 0
+PASS BR143 normal-work kernel split, spatial Cartan trace factors through flux; full trace has four blind directions
+PASS BR171 actual compatible tangential half-speed modes have spatial electric trace rank two (both signs)
+Analytical estimates separate from exact matrix checks. No BR132-139 replay, integrated runner, kernel, CI, actual nonlinear evolution or empirical acceptance.

@@ -6,7 +6,7 @@
 **Source:** [Hopf #1554, P0AK–AO and predecessors](https://github.com/chboishabba/dashi_agda/blob/7914ec131be930eb8baa237f3489930ec91c2d24/docs/c3-hopfion-abha-prior-art-maxcut-20261125.md). Historical [Paper 2](../legacy/Paper2GRGeometryDraft.md) remains unchanged; its finite DCHoTT/Gate 4 construction is an independent antecedent, not assumed equivalent to the continuum metrics below.
 
 
-## Current proof state — 28 November 2026 (BR168; periodic donor BR165, bulk subsidiary BR164, wall trace BR150)
+## Current proof state — 28 November 2026 (BR171; periodic grazing trace BR171, coupled wall estimate open)
 
 The periodic positive-tension Einstein–Israel development is a stronger selected branch, not the first or only classical gravitational realization of the Hopf geometry. P0T/U/V already give the noncompact vacuum KK and ideal Einstein–RMHD analytical local-development arguments under their stated assumptions; P0V derives the actual cylinder-invariant reduced Einstein–Maxwell–radion equations and distinguishes vacuum KK helicity acceleration from ideal RMHD helicity transport. Those results may be advanced and reported independently. Neither is a proof of the periodic AdS wall theorem. Existing source-specific TOE adapters consume actual FLM coordinate inverses and spectral reopening at shared-carrier grade, not universal dynamical or quantum equivalence.
 
@@ -636,3 +636,43 @@ amplitudes. This concerns original nonlinear constrained
 initial data, not evolved trajectories or measured units.
 Four local exact stages passed plus the BR27 standalone
 replay. See [the controlling register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).
+
+
+### Selected spatial Hopf spinor interaction and compatible grazing trace (BR169–171)
+
+The original KK Dirac odd block has \(D_+=-i\sigma\cdot p
+-\sigma\cdot b(x)\), with its adjoint as lower block.
+Its positive-mass square is
+\(p^2+|b|^2+\operatorname{div}b+
+\sigma\cdot(2b\times p+i\operatorname{curl}b)\).
+At the initial G3 slice the actual linear source is
+\(b=\epsilon B_0/4\), divergence-free. On the complete
+hydrogenic \(n=2\) spin-orbital projection the leading
+Pauli perturbation includes both \(2s\)-\(2p\) and
+\(2p\)-\(2p\) blocks. With inverse Bohr scale \(\lambda\)
+in source units, their coefficients are
+\(a=\epsilon\lambda^5(12m)^{-1}\int_0^\infty
+r^5e^{-\lambda r}(1+r^2)^{-3}dr\) and the analogous
+\(c\) with \(r^4\). Both have the sign of \(\epsilon\).
+The exact polynomial is
+\(E^4(E^2-2a^2-2c^2)^2\), a signed triad of
+multiplicities \(2,4,2\) at nonzero amplitude.
+The sign exchanges the two nonzero spectral projectors,
+not the unordered spectrum. This is a selected leading
+nonrelativistic degenerate-shell perturbation, not a
+calibrated transition or a complete curved Dirac
+spectrum. Actual fine structure and interactions must
+be combined at the matrix level.
+
+The periodic flat-principal Weyl half-speed modes have
+nonzero restricted spatial electric trace of rank two
+on each eight-dimensional actual constraint image.
+The written grazing wave-packet argument excludes
+a same-order trace bound from uncoupled bulk evolution
+alone, not from the coupled Israel wall problem.
+The exact BR128–131 source replay passed using the
+byte-identical original BR27 donor. BR132–139 replay,
+joint boundary-symbol estimates and nonlinear
+generation remain. Three new exact stages passed;
+no kernel, full PDE or empirical acceptance.
+See [the controlling register](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md).

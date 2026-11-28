@@ -4377,3 +4377,228 @@ standalone run also exits zero. New checker blob
 23673ba2400a89fddeb4bbb6150535f2f796726659473ed471fc8b7556f07506.
 No full runner, BR128–139 replay, native kernel, CI,
 nonlinear evolution or empirical acceptance.
+
+
+## 29. BR169–171 — original spatial KK bound-state interaction and actual grazing trace modes
+
+Consume the original P0T/V cylinder geometry, BR165–168 spinor
+and Weyl donors, and sections 24–27 atomic source owners.
+This is a source-specific selected initial operator, not a
+new atomic theory or a nonlinear Einstein–Dirac solution.
+Classical Clifford/Pauli, hydrogenic radial and Fourier
+methods are prior art; the attachment to the original
+Hopf field and source-specific matrices is DASHI work.
+
+### 29.1 Original source replay and dependencies
+
+Reopened parent source and verified the actual local Git blobs:
+- scripts/check_hopf369_br_curvature_energy.py
+  75f6d2f9ae23302860074c25cb8d864b7c089148.
+- scripts/check_hopf369_br128_131_F_curvature_development.py
+  9dec80672c8b59c75afa8c877d8d54f6d8d86644.
+  All four exact original stages material, defect, weighted,
+  cartan exit zero using the exact original donor (no
+  substituted carrier). BR128–131 provenance correction is
+  thereby resolved for these checks, not a new PDE result.
+- scripts/check_hopf369_br143_145_parallel.py
+  2354d838727e6d84c1e8da05abad27a9b78efc6d, trace().
+- scripts/check_hopf369_br165_168_parallel.py
+  7f1e2d159955dc9d37026c034a1e423a40184f7d, gamma().
+  BR169 consumes the actual Clifford representation.
+BR132–135 (0de643a765e455367c6635dad2f6aec80804ac01c0)
+and BR136–139 (2a20407ce64c205df31187f15254e2c008c944cc)
+were reopened by path in the preceding turn but their complete
+byte-identical dependent-stage replay is STILL required.
+BR164 and BR165 independent exact graph checks remain valid.
+
+Atomic donors: #886 original atomic construction, AtomicFermionShellExact,
+AtomicPeriodicTable369ManyBodyHamiltonianTerminalMaxCutExact,
+AtomicPeriodicTable369P2CoulombExecutionExact, BR154–163
+selected interacting shell and radial operators; #1241
+KKLightElectronBIDIChiralityRadionMaxCut20261024.md and
+KKTOEPhysicalModelForkPareto20261024.md provide separate
+physical Maxwell/vectorlike matter. Their historical
+pinned file paths and hashes are in sections 25–28.
+No new claim of exhaustive sibling/master audit.
+
+### BR169 — actual differential positive-energy Pauli source
+
+With the BR166 Clifford conventions and mass grading
+beta=-i Gamma^0=diag(I2,-I2), the spatial odd Dirac
+operator has upper-right block
+ D_+=-i sigma dot p-sigma dot b(x),
+and lower-left adjoint D_- = i sigma dot p-sigma dot b(x).
+Here p=-i grad and b is the geometric compact Pauli
+coefficient vector, not the independent physical Maxwell
+magnetic field. Squaring the actual odd operator gives
+ D_+ D_- = p²+|b|²+div b
+               +sigma dot(2 b cross p+i curl b).
+The independent matrix/first-jet check verifies all
+momentum and derivative coefficients, not just the
+constant-field symbol. The spin-momentum term is formally
+Hermitian on smooth compactly supported spinors; its
+matrix elements between real scalar orbitals f,g are
+ -i sigma dot int b cross(f grad g-g grad f) d³x.
+This follows by integration by parts in the curl term,
+with vanishing boundary terms. In particular a single
+real spatial orbital has no diagonal linear contribution
+from this term.
+
+The leading positive-mass block of a nonrelativistic
+expansion in odd kinetic/geometric scales relative to m
+is D_+D_-/(2m), in addition to the supplied independent
+Coulomb potential. This is the leading Pauli approximation
+only: the higher relativistic potential commutators,
+time-dependent FW terms, actual physical units and
+domain/error bounds have not been paid.
+At the initial G3 slice, phi=psi, gamma_J=psi² delta,
+so b=eps B0/(4psi) in the marked orthonormal frame,
+and psi=1+O(eps²) by P0T. Thus its linear term in eps is
+the actual spatial source eps B0/4; the base metric and
+its spatial connection differ from the flat control
+only at quadratic order. At this order div B0=0 exactly.
+The b² contribution is second order; do not use the
+linear projection as a complete second-order Hamiltonian.
+
+### BR170 — full selected n=2 shell, actual s/p interaction and signed triad
+
+Take the original nonrelativistic hydrogenic n=2 shell
+with both spin states retained and radial inverse Bohr
+scale lambda>0 in the original dimensionless Hopf
+length units (lambda is not inferred from gravity).
+Real scalar orbitals:
+ f_s=C(2-lambda r) exp(-lambda r/2),
+ f_i=C lambda x_i exp(-lambda r/2), i=x,y,z,
+ C²=lambda³/(32pi).
+Both normalizations and angular moments verified.
+Let zhat be the marked Hopf axis. Split original
+ b=eps B0/4 into its parity even and odd parts:
+ b_even=2eps[(1-r²)zhat+2z x]/(1+r²)^3,
+ b_odd=4eps(zhat cross x)/(1+r²)^3.
+The exact angular integration of the linear Pauli
+operator gives two real coefficients
+ a=eps lambda^5/(12m) int_0^infty
+       r^5 exp(-lambda r)/(1+r²)^3 dr,
+ c=eps lambda^5/(12m) int_0^infty
+       r^4 exp(-lambda r)/(1+r²)^3 dr.
+For a, the original signed radial integrand
+ r²(3-r²-lambda r) exp(-lambda r)/(1+r²)^3
+ is equal in integral to lambda r^5 exp(-lambda r)/(1+r²)^3
+ by differentiating r³ exp(-lambda r)/(1+r²)^2;
+ both endpoints vanish. Both a,c are nonzero with the
+ sign of eps for m,lambda>0. No numerical quadrature
+ or radial approximation of these coefficients required.
+
+On the original complete eight spin-orbital basis
+(s up/down, px up/down, py up/down, pz up/down),
+the Hermitian first-order selected perturbation M has
+ blocks:
+ M_ss=0,
+ M_si=-i a sigma dot(zhat cross e_i),
+ M_is=M_si^dagger,
+ M_ij=-i c sigma dot(e_i z_j-e_j z_i).
+Thus the even Hopf component mixes s with transverse p;
+the odd component transports p orbital-spin directions.
+Exact characteristic polynomial and annihilator:
+ det(E I-M)=E^4(E²-2a²-2c²)^2,
+ M³=2(a²+c²) M.
+For eps!=0 the rank is four; four zero modes and two
+positive/two negative shifts. The spectral projectors
+are Q0=I-M²/d², Q±=(M²/d²±M/d)/2, d=sqrt(2(a²+c²)).
+This follows from the cubic, Hermiticity and trace;
+not a separate native proof.
+Under reversal eps -> -eps, M -> -M, Q+ and Q- exchange
+for fixed d>0, zero support retained. At eps=0 M=0,
+d=0 and the whole original shell reopens, not division
+by zero. This is an actual selected atomic operator
+realization of a signed triad (-,0,+) with multiplicities
+(2,4,2) on the eight-state punctured address chart.
+The four zero modes are not the missing ninth geometric
+centre. The signed basis/orientation is essential;
+the unordered energy spectrum forgets eps's sign.
+These are shifts in the degenerate nonrelativistic
+hydrogenic n=2 projection, not an actual measured
+fine-structure spectrum. Fine structure, Lamb shift,
+external fields, recoil and interactions lift the
+degeneracy and must be combined as actual matrices
+before diagonalization, not by adding unrelated spectra.
+The leading 1/m approximation has no quantified
+remainder here; no actual electron/nucleus source
+or calibration implied by lambda or m.
+
+### BR171 — exact compatible grazing traces and the boundary estimate cut
+
+Use the original projected Weyl evolution w_t=A_i w_i,
+not independent arbitrary subsidiary jets. In the
+reference flat-principal frame, choose tangential direction
+i=1, and Di=D_i[ids,:]X. The actual residual c=Di w
+(up to the derivative/Fourier factor) satisfies
+ K_i c=mu c whenever A_i w=mu w, with
+ K_i=-D_i[ids,:] L. For each actual eigenspace the exact
+matrix ranks are:
+ mu=+/-1/2: dim 8 each, rank Di image 8,
+             rank T Di on each 8, rank T_sp Di on each 2;
+ mu=0: dim9, rank T Di 8, rank T_sp Di 1;
+ mu=+/-1: dim5 each, both trace maps rank0.
+The latter are the physical flat constraint-kernel
+light-speed modes. This is an actual compatibility test,
+not the abstract trace counterexample of BR150.
+In particular the restricted spatial electric trace
+DOES NOT annihilate the tangential half-speed branches.
+Its normal-work factorization in BR143/146 therefore
+does not by itself give a non-glancing estimate.
+
+Analytical consequence for the uncoupled reference flat
+bulk system on a full normal line, with periodic tangential
+x1: SO(4) spatial covariance transports a chosen half-speed
+eigenvector w0 with T_sp Di w0 nonzero to nearby normal
+directions xi=(k,0,0,ell). Use the smoothly rotated
+eigenvector w(xi) and residual polarization
+ c(xi)=D(xi)X w(xi)/|xi|, with the selected independent
+rows understood, so c -> Di w0 as ell/k ->0.
+Use L²-normalized normal Fourier amplitude proportional
+to k^-1/4 on |ell|<=sqrt(k), tangential frequency k.
+For the half-speed dispersion omega=|xi|/2,
+ |omega-k/2| <= ell²/(4k)<=1/4,
+ so for 0<=t<=1 all phases relative to the central
+frequency lie within 1/4 radian. At y=0 the projection
+onto the fixed nonzero T_sp Di w0 therefore has magnitude
+bounded below by a constant times k^1/4 for large k,
+whereas the L² bulk residual norm stays bounded by
+Plancherel and smooth polarization. One can choose
+a smooth nonnegative compact frequency cutoff with the
+same scaling; real data follow by pairing conjugate
+frequencies. This written wave-packet argument proves
+that no unrestricted same-order L² wall trace bound
+follows from the flat compatible bulk evolution alone.
+It is NOT a counterexample to the actual coupled
+Einstein–Israel transmission/Cartan wall system:
+the packet does not impose its jump, wall evolution
+or corner data. Nor does it prove the optimal derivative
+loss on solutions. The actual next cut is a joint
+boundary-symbol estimate (glancing and zero modes
+retained), using the signed energy cancellation and
+wall equations BR133/137/142/164. Do not pursue a
+bulk-only same-order trace estimate or remove the
+tangential half-speed modes by assumption.
+
+### Parallel frontier and acceptance
+
+Three new exact stages and four original BR128–131
+replays exit zero. New checker blob
+754fe689d23990f4685e5157f2cd4b4a3ac13de0, SHA256
+035b14ef4942b3c39ceb4cedb352f25a0cc60635547809db1875e287f39b71d4.
+Analytical wave-packet and leading Pauli approximation
+arguments are written, not a numerical packet/evolved
+bound-state/continuum proof. BR132–139 full replay remains.
+Periodic: joint boundary symbol, actual nonlinear
+generation and W0/W1/W5/W6/W7. Atomic: combine actual
+shell operators with independent physical fine-structure
+and CI/SCF source; native signed triad and indexed
+consumers. G3: full time-dependent spinor/clock and
+quantitative remainder; G4: actual nonlinear profile
+and finite-time dynamics (BR168 certified initial sign
+retained). Quantum marked Monster action and material
+receiver not newly implemented in this tranche.
+No sibling edits, native kernel, CI, integrated runner,
+full nonlinear evolution or empirical acceptance.
