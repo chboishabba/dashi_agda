@@ -71,6 +71,8 @@ CORE=(
     "check_tov_spherical_source_israel_abi.py",
     "check_tov_moving_timelike_israel_abi.py",
     "check_tov_dynamic_flux_israel_abi.py",
+    "check_tov_mass_flux_surface_closure.py",
+    "check_tov_wall_frame_stress_inverse.py",
     "check_tov_constrained_mass_hessian.py",
     "check_tov_causal_constitutive_repair.py",
     "check_tov_radial_dynamics.py",
