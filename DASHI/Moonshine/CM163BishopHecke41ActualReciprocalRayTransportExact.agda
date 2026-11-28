@@ -39,13 +39,10 @@ open A using (_+C_; _-C_; _*C_; scaleC)
 open Comp using (complexTrans; complexSym)
 
 minusT : U.BishopUpperHalfPlanePoint → U.BishopUpperHalfPlanePoint
-minusT p = U.bishop-upper-half-plane-point
-  (C.complex (C.re (U.tau p) - R.1ℝ) (C.im (U.tau p))) (U.imaginaryPositive p)
+minusT = Gen.actMinusT
 
 undoT : ∀ p → U.tau (Gen.actT (minusT p)) ≈C U.tau p
-undoT p =
-  (let open P.ℝ-Solver in solve 1 (λ x → (x ⊖ Κ 1ℚᵘ) ⊕ Κ 1ℚᵘ ⊜ x)
-    P.≃-refl (C.re (U.tau p))) , P.≃-refl
+undoT = Gen.actTAfterMinusT
 
 minusTRead : ∀ p → U.tau (minusT p) ≈C (U.tau p -C A.oneC)
 minusTRead p = P.≃-refl ,
