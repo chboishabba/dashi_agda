@@ -2063,3 +2063,188 @@ module At {r : Level} (F : C.RealField r)
   -- Its original projected-source factor is checked against original
   -- J,A,B,R in BR53. This Cov keeps precisely the five harmonic-gauge
   -- subsidiary sources; do not silently equate rank-five and rank-nine.
+
+  ------------------------------------------------------------------------
+  -- BR57: BS13 original ELECTRIC NORMAL CURVATURE transport.
+  --
+  -- E = -(b² S)'/b²+2 Q/b⁴. If p=b²S then
+  -- p'=-b² E +2 Q/b². Both endpoints and the full original
+  -- holonomy moment M=Int p remain independent; the primitive
+  -- C=(M-Int_0^L (L-x)F(x)dx)/L is fixed by M.
+  --
+  -- The real analytic normal primitive and positive b²>=m>0
+  -- are external proof-bearing data. There is no unjustified inverse
+  -- of a 5D curvature tensor nor projection of BS13 kernel modes.
+  ------------------------------------------------------------------------
+
+  record ElectricNormalPrimitive : Set r where
+    constructor electricNormalPrimitive
+    field
+      warpSquaredAtStart : S
+      warpSquaredAtEnd : S
+      positiveWarpLower : S
+      physicalNormalLength : S
+      integratedNormalElectricSource : S
+      integratedMomentOfSource : S
+      originalNormalHolonomyMoment : S
+      reciprocalNormalLength : S
+      reconstructedNormalConstant : S
+  open ElectricNormalPrimitive public
+
+  bs13NormalConstant : ElectricNormalPrimitive → S
+  bs13NormalConstant d =
+    reciprocalNormalLength d *
+      (originalNormalHolonomyMoment d
+        - integratedMomentOfSource d)
+
+  -- For each original 4x4 electric curvature coordinate, keep the
+  -- same physical source and all 16 components. The symmetric,
+  -- trace-reduced constraints of BS13 remain independently enforced.
+  record ElectricNormalShearTransport : Set r where
+    constructor electricNormalShearTransport
+    field
+      normalShearStart : Wall → Wall → S
+      normalShearEnd : Wall → Wall → S
+      normalElectricSource : Wall → Wall → S
+      normalQSource : Wall → Wall → S
+      sourceHolonomy : Wall → Wall → S
+      unallocatedWeightedQuotient : Wall → Wall → S
+  open ElectricNormalShearTransport public
+
+  ------------------------------------------------------------------------
+  -- BR58: all-order ACTUAL D/E physical boundary operator receives the
+  -- BR52 material conormal jets through its true normal derivative
+  -- columns; background j/q Taylor coefficients remain independent.
+  ------------------------------------------------------------------------
+
+  zeroTensor : Tensor
+  zeroTensor = tab (λ _ _ → O)
+
+  zeroCov : Cov
+  zeroCov _ = O
+
+  record OriginalPhysicalReferenceTower : Set r where
+    constructor originalPhysicalReferenceTower
+    field
+      backgroundIsraelTaylor : DividedJet
+      backgroundFrequencyTaylor : Wall → DividedJet
+      plusMetricValueTaylor plusMetricNormalTaylor : Nat → Tensor
+      minusMetricValueTaylor minusMetricNormalTaylor : Nat → Tensor
+      plusGaugeValueTaylor plusGaugeNormalTaylor : Nat → Cov
+      minusGaugeValueTaylor minusGaugeNormalTaylor : Nat → Cov
+      sourceMaterialTower : TwoFaceMaterialJetTower
+  open OriginalPhysicalReferenceTower public
+
+  towerFrequency : OriginalPhysicalReferenceTower → Nat → Vec
+  towerFrequency t n a = backgroundFrequencyTaylor t a n
+
+  metricReferenceAt : Allocation → OriginalPhysicalReferenceTower →
+    Nat → List S
+  metricReferenceAt a t n =
+    metricRows a (backgroundIsraelTaylor t zero)
+      (towerFrequency t zero)
+      (plusMetricValueTaylor t n)
+      (plusMetricNormalTaylor t n)
+      (minusMetricValueTaylor t n)
+      (minusMetricNormalTaylor t n)
+
+  gaugeReferenceAt : Allocation → OriginalPhysicalReferenceTower →
+    Nat → List S
+  gaugeReferenceAt a t n =
+    gaugeRows a (backgroundIsraelTaylor t zero)
+      (towerFrequency t zero)
+      (plusGaugeValueTaylor t n)
+      (plusGaugeNormalTaylor t n)
+      (minusGaugeValueTaylor t n)
+      (minusGaugeNormalTaylor t n)
+
+  -- The actual BR34 normal-derivative columns do not contain j or q.
+  -- A moving material graph therefore enters by these same columns.
+  -- This is reference *linearisation* only: the BR19 nonlinear normal
+  -- and shape derivative remain separate original physical sources.
+  metricMaterialCorrectionAt : Allocation →
+    OriginalPhysicalReferenceTower → Nat → List S
+  metricMaterialCorrectionAt a t n =
+    metricRows a O zeroQ
+      zeroTensor
+      (metricConormalDefectJet (plusMaterialTower (sourceMaterialTower t)) n)
+      zeroTensor
+      (metricConormalDefectJet (minusMaterialTower (sourceMaterialTower t)) n)
+
+  gaugeMaterialCorrectionAt : Allocation →
+    OriginalPhysicalReferenceTower → Nat → List S
+  gaugeMaterialCorrectionAt a t n =
+    gaugeRows a O zeroQ
+      zeroCov
+      (gaugeConormalDefectJet (plusMaterialTower (sourceMaterialTower t)) n)
+      zeroCov
+      (gaugeConormalDefectJet (minusMaterialTower (sourceMaterialTower t)) n)
+
+  -- Each Taylor order r also contains background derivative terms
+  -- deltaB(j_k,q_k;U_(r-k)), k=1..r. The zero-frequency base is kept
+  -- independent; this explicitly exposes every source payment to the
+  -- BR47/58 summation rather than postulating a tame bound.
+  metricBackgroundJetSource : Allocation →
+    OriginalPhysicalReferenceTower → Nat → Nat → List S
+  metricBackgroundJetSource a t coefficientOrder fieldOrder =
+    rowSub
+      (metricRows a
+        (backgroundIsraelTaylor t coefficientOrder)
+        (towerFrequency t coefficientOrder)
+        (plusMetricValueTaylor t fieldOrder)
+        (plusMetricNormalTaylor t fieldOrder)
+        (minusMetricValueTaylor t fieldOrder)
+        (minusMetricNormalTaylor t fieldOrder))
+      (metricRows a O zeroQ
+        (plusMetricValueTaylor t fieldOrder)
+        (plusMetricNormalTaylor t fieldOrder)
+        (minusMetricValueTaylor t fieldOrder)
+        (minusMetricNormalTaylor t fieldOrder))
+
+  gaugeBackgroundJetSource : Allocation →
+    OriginalPhysicalReferenceTower → Nat → Nat → List S
+  gaugeBackgroundJetSource a t coefficientOrder fieldOrder =
+    rowSub
+      (gaugeRows a
+        (backgroundIsraelTaylor t coefficientOrder)
+        (towerFrequency t coefficientOrder)
+        (plusGaugeValueTaylor t fieldOrder)
+        (plusGaugeNormalTaylor t fieldOrder)
+        (minusGaugeValueTaylor t fieldOrder)
+        (minusGaugeNormalTaylor t fieldOrder))
+      (gaugeRows a O zeroQ
+        (plusGaugeValueTaylor t fieldOrder)
+        (plusGaugeNormalTaylor t fieldOrder)
+        (minusGaugeValueTaylor t fieldOrder)
+        (minusGaugeNormalTaylor t fieldOrder))
+
+  -- Source compatibility is crucial: the normal Taylor jet on BR34
+  -- must be the same normal derivative as in BR52's ADM field jet.
+  -- The original source needs to inhabit these exact equalities; a
+  -- free-record assembly cannot manufacture a physical solution.
+  record PhysicalReferenceJetCompatibility
+      (t : OriginalPhysicalReferenceTower) : Set r where
+    constructor physicalReferenceJetCompatibility
+    field
+      plusMetricNormalOwnership :
+        plusMetricNormalTaylor t zero ≡
+          spatialMetricTaylor (plusMaterialTower (sourceMaterialTower t))
+            spaceNormal zero
+      minusMetricNormalOwnership :
+        minusMetricNormalTaylor t zero ≡
+          spatialMetricTaylor (minusMaterialTower (sourceMaterialTower t))
+            spaceNormal zero
+      plusGaugeNormalOwnership :
+        plusGaugeNormalTaylor t zero ≡
+          spatialGaugeTaylor (plusMaterialTower (sourceMaterialTower t))
+            spaceNormal zero
+      minusGaugeNormalOwnership :
+        minusGaugeNormalTaylor t zero ≡
+          spatialGaugeTaylor (minusMaterialTower (sourceMaterialTower t))
+            spaceNormal zero
+  open PhysicalReferenceJetCompatibility public
+
+  -- The original source checked by BR58 must also identify the
+  -- time-derivative and mixed-tangential jets of BR52 with the physical
+  -- field, the curvature Bianchi source of BR55 with BR29's actual
+  -- rank-nine projected wall graph, and preserve BR31's weighted domain.
