@@ -5,7 +5,7 @@ steps are reused. This is a smooth-chart derivative, not an optimum certificate.
 import numpy as np
 from solar_physical_causal import MASS,CHARGE
 from solar_spherical_cycle import geometry
-from solar_spherical_material_weld import construct
+from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_thermal_population_tangent import reaction_jvp,event_jvp,thermal_jvp,collision_jvp
 from solar_material_generator_jvp import material_jvp
 from solar_physical_cone import timed_step
@@ -41,6 +41,7 @@ def campaign_jvp(material,cfg,dheating,dload):
     term_load=np.asarray(cfg.get('terminal_load_rate_s_inv',load),float)
     term_dload=np.zeros(ne) if 'terminal_load_rate_s_inv' in cfg else dload
     tail=int(cfg.get('restoration_steps',0))
+    atlas=None
     for cycle_index in range(horizon):
         for index in range(len(src)+(tail if cycle_index==horizon-1 else 0)):
             terminal=index>=len(src)
@@ -82,6 +83,8 @@ def campaign_jvp(material,cfg,dheating,dload):
             dD=dpop*CHARGE**2/MASS
             model=construct(cfg['radii_m'],cfg['angular_level'],np.arange(n),
                 vol,Dcurrent,nu,gyro,axis)
+            if cfg.get('common_stage_atlas',False) and atlas is None:
+                atlas=structural_stage_atlas(model,mesh)
             j=material_jvp(model,vol,Dcurrent,nu,dD,dnu)
             L=np.zeros_like(model['generator']);dL=np.zeros_like(L)
             L[np.arange(ne),np.arange(ne)]=cur_load
@@ -90,7 +93,7 @@ def campaign_jvp(material,cfg,dheating,dload):
             dA=j['d_generator']-dL
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
                 dict(collision=model['loss'],load=L,source=source),port,inc,
-                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)))
+                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas)
             dx=np.asarray(receipt['state_jvp'],float)
             em=np.asarray(receipt['local_midpoint'][:ne],float)
             dem=np.asarray(receipt['local_midpoint_jvp'][:ne],float)
@@ -113,4 +116,5 @@ def campaign_jvp(material,cfg,dheating,dload):
         restoration_squared=restoration_squared,
         drestoration_squared=drestoration_squared,
         endpoint=end,endpoint_jvp=dend,
+        common_stage_atlas=atlas is not None,
         scope='fixed topology, positive population; not strict restored-net gate')
