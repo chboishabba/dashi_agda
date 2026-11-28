@@ -1148,3 +1148,8 @@ Lean #15 711fa9bdf761 consumes the one-parameter quaternion exponential derivati
 ## Section 19 — actual noncommutative word velocity
 
 Lean #15 595945568544 differentiates the actual ordered signed quaternion word at zero, retains product order, and bounds its velocity by the sum of bond direction norms. 128 exact product-rule insertion controls. Actual selected Path13 word identity, full logarithmic differential and nonflat CMP102 enclosure remain open; native elaboration pending.
+
+
+## Section 20 — actual left-trivialized word velocity
+
+Lean #15 79d5b59751a5 attaches actual signed bond body velocities H or −qHq*, derives suffix adjoint transport in the noncommuting actual word, norm equality and reversible reopening. 1992 exact rational independent controls. Full selected Path13 identification, actual logarithm differential/depx series comparison and CMP102 enclosure remain open; native elaboration pending.
