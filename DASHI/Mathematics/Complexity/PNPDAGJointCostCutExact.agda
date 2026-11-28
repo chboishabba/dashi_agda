@@ -9,7 +9,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Vec.Base using (Vec)
 open import Data.Product using (Σ; _,_)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as C
 import DASHI.Mathematics.Complexity.PNPDAGCutsetFactorizationExact as Cut
 
@@ -32,8 +32,10 @@ record JointCut {n : Nat} (f : Vec Bool n → Bool) (k h : Nat) : Set where
 toJoint : ∀ {n} {f : Vec Bool n → Bool} (k h : Nat) →
   CircuitAtCost f (h + k) → JointCut f k h
 toJoint k h (circuit-at-cost p w correct) with Cut.splitBySuffix h k p
-... | c = joint-cut (Cut.Cut.prefix c) (Cut.Cut.suffix c) w
-  (λ x → trans (sym (Cut.splitOutputExact h k p w x)) (correct x))
+... | Cut.cut pre s eq = joint-cut pre s w
+  (λ x → trans (sym (Cut.outputFactor pre s w x))
+    (trans (cong (λ q → C.evaluateWire w x (C.evaluateProgram q x)) eq)
+      (correct x)))
 
 fromJoint : ∀ {n} {f : Vec Bool n → Bool} {k h} →
   JointCut f k h → CircuitAtCost f (h + k)
