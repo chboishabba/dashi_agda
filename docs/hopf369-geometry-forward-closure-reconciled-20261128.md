@@ -5158,3 +5158,38 @@ marked observation instance, not another generic cube.
 Other terminal targets from section 33 remain. No new
 G3/G4 evolution, Monster transport or receiver implementation.
 No native kernel, CI service, local execution, or empirical claim.
+
+
+## 35. BR187–188 — complete selected shell and explicit scalar lifespan
+
+scripts/check_hopf369_br187_188_full_shell_lifespan.py
+at 2e35c959c4cb40f72f5ed90c1175590328a3a819.
+Local independent SymPy radial evaluation obtained Fss0=77/512,
+Fsp0=83/512, Gsp1=45/512, Fpp0=93/512, Fpp2=45/512.
+The committed full matrix checker is not executed. It consumes
+BR172 and BR156 and uses normalized hydrogenic Z=1 2s/2p radial
+functions, spin selection and Gaunt multipoles, with antisymmetrized
+direct/exchange terms. Tests recovery of original p-p block,
+marked Cartesian embedding, Hermiticity, axial symmetry and
+time reversal of full projected 28-state operator. Full selected
+n=2 projection is not full atomic CI beyond that shell, physical
+baseline calibration, or SCF. Units of BR172 parameters must match
+atomic units. Classical hydrogenic and Gaunt methods retain prior
+attribution.
+
+BR188 consumes the actual P0V scalar implicit majorant
+P=(1-z/rho)w-Aw^2/2-c t, A=n(3/rho+1/eta).
+For |z|<=rho/2 and |t|<=3/(32 A c), the small analytic branch
+has |w|<=1/(4A), and |P_w|>=1/4 (by positive coefficients
+or the quadratic formula). This is a conditional scalar
+majorant radius, not a quantified physical lifespan until
+actual coefficient bounds c,n,rho,eta and analytic initial
+data norm are certified and the majorization hypotheses applied.
+No spinor evolution claimed.
+Remaining whole-programme targets in sections 33–34 remain:
+actual curved Cartan generation, physical radial/baseline and
+beyond-shell CI, G3 coefficient bounds/history, G4 nonlinear
+profile/continuation, native indexed residual, Monster marked
+action, actual material current/stress/receiver.
+No new source implementation in the latter five tracks.
+No integrated checker, native kernel or CI execution.
