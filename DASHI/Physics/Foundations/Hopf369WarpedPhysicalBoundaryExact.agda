@@ -1659,8 +1659,14 @@ module At {r : Level} (F : C.RealField r)
 
   materialDefiningCovector : MaterialGraphGradient → Cov
   materialDefiningCovector f normal = U
-  materialDefiningCovector f (wall a) =
-    neg (graphTangentGradient f a)
+  materialDefiningCovector f (wall t) =
+    neg (graphTimeGradient f)
+  materialDefiningCovector f (wall x) =
+    neg (graphTangentGradient f x)
+  materialDefiningCovector f (wall y) =
+    neg (graphTangentGradient f y)
+  materialDefiningCovector f (wall z) =
+    neg (graphTangentGradient f z)
 
   -- D g^{-1}(dF,du) for the ORIGINAL variable ADM source. Here the
   -- four spatial axes are x,y,z,normal; the wall time covector is
@@ -1706,7 +1712,7 @@ module At {r : Level} (F : C.RealField r)
   -- The exact conforming collar is a SPECIAL CASE; the material
   -- mismatch is a first-class source, not set to zero off shell.
   record MaterialConormalMismatch : Set r where
-    constructor materialConormalMismatch
+    constructor mkMaterialConormalMismatch
     field
       graphConormalWork : S
       coordinateNormalWork : S
@@ -1717,7 +1723,7 @@ module At {r : Level} (F : C.RealField r)
   materialConormalMismatch : ADMPhysicalPoint → MaterialGraphGradient →
     S → (BR4Space → S) → MaterialConormalMismatch
   materialConormalMismatch g f ut du =
-    materialConormalMismatch
+    mkMaterialConormalMismatch
       (materialGraphFlux g f ut du)
       (volumeDensity g * du spaceNormal)
       (materialGraphFlux g f ut du
