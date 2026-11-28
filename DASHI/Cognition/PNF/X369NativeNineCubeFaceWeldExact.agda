@@ -8,6 +8,9 @@ module DASHI.Cognition.PNF.X369NativeNineCubeFaceWeldExact where
 -- Kernel deferred by user; no postulate, hole, or CI.
 open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Algebra.Trit as T
+import DASHI.Codec.TriadicMaskSignFactorization as M
+open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 import DASHI.Codec.IndexedCubeMaskSignExact as C
 import DASHI.Codec.IndexedCubeMaskSignInstanceExact as I
 import DASHI.Codec.IndexedCubeHyperfibreExact as H07
@@ -105,3 +108,69 @@ module Consumer {Output : Set} (observe : Full → Output) where
 -- SAME codec; it certifies local faces, not arbitrary cross-time dynamics.
 -- The physical 6+3 tangent, C26 indexed Singer and native graph adjacency
 -- remain separate source actors; no equality is manufactured here.
+
+-- The exact six-prefix/three-suffix codec is reversible ONLY if the
+-- third triple is retained. This formalizes why six signed coordinates
+-- must never be promoted to the whole T3^3 native fabric.
+SixPrefix : Set
+SixPrefix = M.Triple T.Trit × M.Triple T.Trit
+
+prefix6 : Source → SixPrefix
+prefix6 (C.blocks a b tail) = a , b
+
+suffix3 : Source → M.Triple T.Trit
+suffix3 = C.residualBlock
+
+joinPrefixSuffix : SixPrefix → M.Triple T.Trit → Source
+joinPrefixSuffix (a , b) r = C.blocks a b r
+
+prefixSuffixLeft : (x : Source) →
+  joinPrefixSuffix (prefix6 x) (suffix3 x) ≡ x
+prefixSuffixLeft (C.blocks a b c) = refl
+
+prefixSuffixRight : (a : SixPrefix) (r : M.Triple T.Trit) →
+  prefix6 (joinPrefixSuffix a r) ≡ a
+prefixSuffixRight (a , b) r = refl
+
+suffixReopens : (a : SixPrefix) (r : M.Triple T.Trit) →
+  suffix3 (joinPrefixSuffix a r) ≡ r
+suffixReopens (a , b) r = refl
+
+zeroTriple : M.Triple T.Trit
+zeroTriple = M.triple T.zer T.zer T.zer
+
+positiveTriple : M.Triple T.Trit
+positiveTriple = M.triple T.pos T.zer T.zer
+
+suffixCase0 suffixCase1 : Source
+suffixCase0 = C.blocks zeroTriple zeroTriple zeroTriple
+suffixCase1 = C.blocks zeroTriple zeroTriple positiveTriple
+
+sameSixPrefix : prefix6 suffixCase0 ≡ prefix6 suffixCase1
+sameSixPrefix = refl
+
+differentTrit : T.zer ≡ T.pos → ⊥
+differentTrit ()
+
+differentSuffix : suffix3 suffixCase0 ≡ suffix3 suffixCase1 → ⊥
+differentSuffix eq = differentTrit (F.cong M.first eq)
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl q = q
+
+noSixPrefixOnlySuffixConsumer :
+  (read : SixPrefix → M.Triple T.Trit) →
+  ((x : Source) → read (prefix6 x) ≡ suffix3 x) →
+  ⊥
+noSixPrefixOnlySuffixConsumer read faithful =
+  differentSuffix
+    (trans (sym (faithful suffixCase0))
+      (trans (F.cong read sameSixPrefix)
+        (faithful suffixCase1)))
+
+-- There is no lemma here that the original LeechTransformer's physical
+-- signed six channels equal prefix6. That would require the actual source
+-- decoder/stalk chart and source-specific transition equations.
