@@ -20,7 +20,7 @@ def verify(A,b,n,R):
     ds=[D[i,i] for i in range(min(m,n))];nz=[d for d in ds if d]
     if ds[:len(nz)]!=nz or any(d<=0 for d in nz) or any(b%a for a,b in zip(nz,nz[1:])):return False
     if R['status']=='EMPTY':
-        y=R['covector'];return y.shape==(1,m) and all(v.is_Integer for v in y*M) and (y*B)[0].is_Integer is False
+        y=R['covector'];return y.shape==(1,m) and all(v.is_Rational is True for v in y) and all(v.is_Integer for v in y*M) and (y*B)[0].is_Integer is False
     if R['status']!='INTEGER':return False
     x,K=R['particular'],R['kernel'];r=len(nz)
     return x.shape==(n,1) and all(v.is_Integer for v in x) and M*x==B and K==V[:,r:] and M*K==zeros(m,n-r)
@@ -28,8 +28,10 @@ def verify(A,b,n,R):
 
 def solve(A,b,n,max_entries=4096,max_bits=256):
     if len(A)!=len(b) or any(type(t)!=int for t in b):raise ValueError('target')
-    M=matrix(A,n);m=len(A);B=Matrix(m,1,b)
-    if m*m+n*n+m*n>max_entries or max((abs(int(v)).bit_length() for v in list(M)+list(B)),default=0)>max_bits:return dict(status='UNKNOWN')
+    m=len(A)
+    if n<0 or any(len(row)!=n or any(type(x)!=int for x in row) for row in A):raise ValueError('matrix')
+    if m*m+n*n+m*n>max_entries or max((abs(v).bit_length() for v in b),default=0)>max_bits or any(abs(v).bit_length()>max_bits for row in A for v in row):return dict(status='UNKNOWN')
+    M=matrix(A,n);B=Matrix(m,1,b)
     if m*n:D,U,V=smith_normal_decomp(M,domain=ZZ)
     else:D,U,V=zeros(m,n),eye(m),eye(n)
     for i in range(min(m,n)):
