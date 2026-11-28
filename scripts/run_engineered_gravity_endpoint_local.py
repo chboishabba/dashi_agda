@@ -77,6 +77,7 @@ CORE=(
     "check_tov_axial_spatial_action.py",
     "check_tov_conformal_mass_second_variation.py",
     "check_tov_conformal_monopole_inverse.py",
+    "check_tov_polar_conformal_trial.py",
 )
 DONORS=(
     "check_kk_radion_reduced_action.py",
