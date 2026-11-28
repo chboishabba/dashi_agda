@@ -3184,3 +3184,21 @@ W2: instantiate true material + constrained Einstein/gauge trace and higher ener
 W3: certify independent normal/time/radial/Fourier error enclosure for original full source (existing negative Bianchi and cutoff controls remain failing); original coupled bulk and wall solution not yet established.
 W4: feed same-chart certified real Z,H,Ht,J,Q to signed directional inverse and actual nonlinear original receiver window.
 W5: native F8-specific proof instantiation and independent physical calibration. No detached chat files, no GitHub CI.
+
+
+### 28 November — differentiated GN source/current max-cut and uniform collar coefficient enclosure
+
+Implemented, local SymPy executed and exact committed blob parity checked:
+1. scripts/check_f8_differentiated_gn_energy.py commit 263b4c843eae54d874b24221b4f141073b208d16; blob b964c1fa148fb9bf30664065a29cb08334ba329f; exact local execution PASS after fixing the incorrect step of substituting a reconstructed f into an already differentiated expression without also replacing f_t.
+2. scripts/check_f8_gn_coefficient_enclosure.py commit ed14448224042f90abf7adc215d0018986f244d0; blob 9e760ef3fa0a9419d9963fcdcace7a4fb67e719c; rational Taylor upper for exp(1/2) and exact hyperbolic GN derivative identities locally PASS.
+3. unified local source/current checker scripts/check_f8_w1w2_source_current_maxcut.py amended at 05f710c8a5688af3e8297a122c46d293059df90c to include both (the unified runner itself and its --history option have NOT been executed in a literal checkout).
+
+Actual original F8 geometry on the finite collar [1,12]x[0,1/2]: a=sinh(asinh(t)-n), N=cosh(asinh(t)-n)/sqrt(1+t²). Define A=a³/N, B=Na³, C=Na k², L[u]=-∂t(Au_t)+∂n(Bu_n)-Cu. For v=u_t, the exact genuinely nonfrozen differentiated operator is
+
+  L[v] = ∂t L[u] + ∂t(A_t u_t) - ∂n(B_t u_n) + C_t u.
+
+The three time-jet commutator terms MUST be paid as differentiated source, volume and boundary work; they are not zero and cannot be dropped in a BR83 current estimate. At n=0: A=B=t³, C=tk², A_t=B_t=3t², C_t=k², N_n=-t/sqrt(1+t²). Current wall trace Z_n=(k² f/t²-j)/3 satisfies Z_nt=(k²(f_t-2f/t)/t²-j_t)/3. Existing compatible Israel substitution f=-3t²/k² [G+M/(ik)] for k≠0 yields exact C_boundary= -t³Z Q, Q=G+M/(ik)+j/3, AND C_boundary,t= -∂t(t³ZQ) only when both the f and f_t jets are replaced consistently. This checks the required temporal material/geometric source derivative and does not prove its norm bound; M(k)=0 at k0 requires M' to divide smoothly.
+
+A concrete bounded-coefficient improvement: using exponential half Taylor upper 0<=n<=1/2, exp(1/2)<5/3 with geometric tail ratio <=1/16, cosh n<7/6, sinh n<8/15, exp(-n)>3/5. a_t=N>0, a_n=-sqrt(1+t²)N<0 gives a(t,n)>1/5, 3/5<N<7/6, and |N_t|<4/15 on original collar. Consequently |A_t/A|<20, |B_t/B|<20, and |(Na)_t/(Na)|<7 for all t in [1,12], n in [0,1/2]. The original coefficient C=Na k² is zero at k=0; interpret the last ratio for the k-independent Na (or k≠0), never divide by C at k0. These are elementary exact rational geometric coefficient enclosures, not a bound on the coupled metric coefficients, normal derivatives of unknown solutions, boundary traces, or original source temporal derivative.
+
+Paying the differentiated physical energy now reduces to controlling these nonfrozen commutator source terms in BR83/BR44 two-level energy, the signed Israel wall trace Z and Z_t including actual Q_t, and simultaneously paying the fully constrained Einstein/material/gauge source residual and five negative unquotiented metric fibres. This is a stronger actual geometry/current construction than generic BR83 principal current, but NO unconditional highGap>crossBudget or original W1/W2/3 acceptance has occurred. The execution of scripts/check_f8_w1w2_integrated_receipt.py in the literal checkout, independent original normal/time/Fourier error estimates, receiver and native kernel remain P0.
