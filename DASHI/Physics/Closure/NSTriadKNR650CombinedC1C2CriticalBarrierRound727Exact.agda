@@ -224,6 +224,100 @@ module Endgame
     Physical.PositiveRetainedViscosityReceipt.retainedViscosityPositive
       receipt
 
+  ------------------------------------------------------------------------
+  -- Compensated original combined-R406 pathway.
+  --
+  -- The original R726 required the (potentially unnecessarily strong)
+  -- literalR406 <= combined pointwise-in-terminal inequality.  The new
+  -- R726 native compiler permits a physical signed discrepancy bounded by
+  -- an independent cutoff-uniform terminal function.  Here the exact
+  -- EXISTING R414 critical consumer is reached without any new critical
+  -- representation, without using the false R687 unlifted-to-lifted
+  -- implication and without weakening the actual R645 positive C2 margin.
+  ------------------------------------------------------------------------
+
+  record CompensatedC1C2Inputs (terminal : Time) : Set₁ where
+    field
+      compensatedCombinedPayment :
+        Combined.CutoffUniformCombinedSelfExternalPayment
+
+      compensatedTransport :
+        Bridge.CompensatedCombinedR406Transport R
+
+      compensatedStrictMarginC2 :
+        (cutoff : Nat) →
+        Strict.StrictMarginPhysicalProductionData
+          D C R cutoff terminal
+
+      compensatedInitialCritical :
+        Initial.InitialCriticalRealization
+          T R terminal (c2Slice terminal compensatedStrictMarginC2)
+
+  open CompensatedC1C2Inputs public
+
+  compensatedR410Cancellation :
+    (terminal : Time) →
+    CompensatedC1C2Inputs terminal →
+    Unified.Cancel.SignedCriticalCancellation T R
+  compensatedR410Cancellation terminal I =
+    Bridge.compensatedCombinedBuildsExistingR410
+      R (compensatedCombinedPayment I) (compensatedTransport I)
+
+  compensatedUnifiedCriticalData :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    Unified.UnifiedCancellationCriticalData T R terminal
+  compensatedUnifiedCriticalData terminal I = record
+    { Unified.cancellation = compensatedR410Cancellation terminal I
+    ; Unified.sliceData = c2Slice terminal (compensatedStrictMarginC2 I)
+    ; Unified.uniformInitialCeiling =
+        Initial.cutoffIndependentInitialCeiling
+          (compensatedInitialCritical I)
+    ; Unified.uniformInitialCritical =
+        Initial.realizationPaysUniformInitialCritical
+          (compensatedInitialCritical I)
+    }
+
+  compensatedUniformCriticalFamily :
+    (terminal : Time) →
+    CompensatedC1C2Inputs terminal →
+    Signed.UniformSignedCriticalProductionFamily
+  compensatedUniformCriticalFamily terminal I =
+    Unified.toUniformSignedCriticalProductionFamily
+      (compensatedUnifiedCriticalData terminal I)
+
+  compensatedUniformCriticalBarrier :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    (cutoff : Nat) →
+    let family = compensatedUniformCriticalFamily terminal I
+    in
+    Signed.terminalCritical (Signed.slice family cutoff)
+      + Signed.retainedViscosity (Signed.slice family cutoff)
+          * Signed.criticalDissipation (Signed.slice family cutoff)
+    ≤ Signed.uniformCriticalCeiling family
+  compensatedUniformCriticalBarrier terminal I cutoff =
+    Unified.oneCancellationBuildsUniformCriticalBarrier
+      (compensatedUnifiedCriticalData terminal I) cutoff
+
+  compensatedC2RetainedMarginPositive :
+    (terminal : Time) →
+    (I : CompensatedC1C2Inputs terminal) →
+    (cutoff : Nat) →
+    0ℚ <
+      Unified.viscousCoefficient
+        (c2Slice terminal (compensatedStrictMarginC2 I) cutoff)
+      -
+      Unified.absorbedCoefficient
+        (c2Slice terminal (compensatedStrictMarginC2 I) cutoff)
+  compensatedC2RetainedMarginPositive terminal I cutoff =
+    let
+      P = compensatedStrictMarginC2 I cutoff
+      receipt = Strict.strictMarginBuildsPositiveRetainedViscosity P
+    in
+    Physical.PositiveRetainedViscosityReceipt.retainedViscosityPositive
+      receipt
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -245,6 +339,12 @@ round727SeparateSelfPaymentReintroduced = false
 
 round727SeparateExternalPaymentReintroduced : Bool
 round727SeparateExternalPaymentReintroduced = false
+
+round727CompensatedSignedTransportCompilerClosed : Bool
+round727CompensatedSignedTransportCompilerClosed = true
+
+round727CompensatedPhysicalDefectPaymentClosed : Bool
+round727CompensatedPhysicalDefectPaymentClosed = false
 
 round727CombinedPaymentClosed : Bool
 round727CombinedPaymentClosed = R723.round723CombinedCutoffUniformPaymentClosed
