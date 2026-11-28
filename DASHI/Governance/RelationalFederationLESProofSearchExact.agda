@@ -4,6 +4,7 @@ module DASHI.Governance.RelationalFederationLESProofSearchExact where
 -- are canonical. New arithmetic is a two-site, one-unit, one-period weld.
 -- No empirical calibration, legal authority or cryptographic security claim.
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_)
 open import Agda.Builtin.List using ([])
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -65,13 +66,27 @@ localBalance b =
     t = Q.magnitude (Q.accountedTransformation b)
     r = Q.magnitude (Q.unaccountedResidual b)
 
+-- Each edge in the recorded path must have the declared window and medium.
+-- Source validation, actual direction and capacity remain separate receipts.
+data PathAt (window : Spatial.TimeWindow) (medium : Spatial.TransportKind) :
+  ∀ {source target} → Spatial.Path source target → Set where
+  atHere : ∀ {x} → PathAt window medium (Spatial.here {x})
+  atStep : ∀ {x y z} {edge : Spatial.TransportEdge x y}
+    {tail : Spatial.Path y z} →
+    Spatial.activeWindow edge ≡ window →
+    Spatial.transport edge ≡ medium →
+    PathAt window medium tail →
+    PathAt window medium (Spatial.step edge tail)
+
 -- Same exact unit. Sender's entire export is the recipient's entire input;
 -- extra external edges require explicit decomposition in the generalization.
 record MatchedTransfer {u : Q.Unit}
   (source target : Spatial.SpatialNode) (window : Spatial.TimeWindow)
   (sender receiver : Q.BalanceReceipt u) : Set where
   field
+    medium : Spatial.TransportKind
     path : Spatial.Path source target
+    pathAt : PathAt window medium path
     transferMatches : Q.externalExport sender ≡ Q.externalInput receiver
 
 -- Algebraic cancellation; no netting of mismatched units, receipts or time.
@@ -111,7 +126,9 @@ pondTransferFixture :
   MatchedTransfer Pond.upperCatchment Pond.pond Pond.window
     senderFixture receiverFixture
 pondTransferFixture = record
-  { path = Pond.phosphorusPath
+  { medium = Spatial.dissolvedPhosphorus
+  ; path = Pond.phosphorusPath
+  ; pathAt = atStep refl refl (atStep refl refl atHere)
   ; transferMatches = refl }
 
 pondConsolidates :
@@ -125,12 +142,14 @@ pondConsolidates = twoSiteConservation senderFixture receiverFixture pondTransfe
 -- Independent verifier, semantic review and exact target must still be paid.
 record VerifiedTarget (target : ABI.ProofObligation)
   (Verify : ABI.ProofReceipt → Set)
-  (SemanticReview : ABI.ProofObligation → Set) : Set where
+  (SemanticReview : ABI.ProofObligation → Set)
+  (ArtifactMatches : Press.Receipt → ABI.ProofReceipt → Set) : Set where
   field
     frame : Z.ZKPFrame
     artifactReceipt : Press.Receipt
     artifactBound : Press.ReceiptBound artifactReceipt
     proofReceipt : ABI.ProofReceipt
+    sameArtifact : ArtifactMatches artifactReceipt proofReceipt
     exactObligation : ABI.obligation proofReceipt ≡ target
     actualRun : ABI.executionObserved proofReceipt ≡ true
     success : ABI.resultKind proofReceipt ≡ ABI.proofSucceeded
