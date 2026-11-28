@@ -13,6 +13,7 @@ from pathlib import Path
 CORE=(
     "check_engineered_gravity_coarse_to_fine.py",
     "check_engineered_gravity_endpoint_bidi.py",
+    "check_engineered_gravity_receiver_inverse.py",
     "check_engineered_gravity_coupled_radion_material.py",
     "check_engineered_gravity_same_action_geometry.py",
     "check_engineered_gravity_derivative_action.py",
