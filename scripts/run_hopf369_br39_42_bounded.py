@@ -261,6 +261,8 @@ PARTS["terminal"] += [("BR283284.g4","check_hopf369_br283_284_g4_coupled.py",())
 
 PARTS["terminal"] += [("BR287289.audit7","check_hopf369_br287_289_g4_audit.py",()),("BR287289.audit9","check_hopf369_br287_289_g4_audit.py",("--n","9","--steps","4","--dt",".001")),("BR290.curl","check_hopf369_br290_magnetic_curl.py",()),("BR291.reverse7","check_hopf369_br291_reverse_constraints.py",()),("BR291.reverse9","check_hopf369_br291_reverse_constraints.py",("--n","9","--steps","4","--dt",".001"))]
 
+PARTS["terminal"] += [("BR292.geometry7","check_hopf369_br292_geometry_inverse.py",()),("BR292.geometry9","check_hopf369_br292_geometry_inverse.py",("--n","9","--steps","4","--dt",".001"))]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
