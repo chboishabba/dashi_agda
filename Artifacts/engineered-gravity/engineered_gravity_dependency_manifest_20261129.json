@@ -381,5 +381,36 @@
       "source_git_blob_sha1": "e0faa5cf1cd543c5c49a9845a0a8bee09c7ba67d",
       "checker_git_blob_sha1": "f1d2a1f19972366e38561b6c6c83874f1731b74d"
     }
+  },
+  "w2_boundary_packets": {
+    "moving_tov_timelike": {
+      "lanes": [
+        "D_active_stress_TOV"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_moving_timelike_israel_abi.py",
+      "scope": "exact moving timelike proper-time spherical shell with static polar-areal metrics per face, mass-continuous Einstein source; no dynamic metric/GHY",
+      "source_equation": "Delta_Ktau=4*pi*r*((f+v^2)*pr+v^2*rho)/(f*sqrt(f+v^2))",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "16ce2ab9c3f903974a9bf4bdff181a04bacc484c"
+    },
+    "three_source_reverse": {
+      "lanes": [
+        "A_shielding",
+        "D_active_stress_TOV",
+        "E_coherent_OCT369",
+        "F_EM_GW",
+        "H_lift",
+        "I_hybrid"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_boundary_packet_w2.py",
+      "checker": "scripts/check_engineered_gravity_boundary_packet_w2.py",
+      "scope": "three distinct typed symbolic boundary inverses; no common physical material/device or coupled Einstein dynamics",
+      "source_equation": "TOV Ktheta -> mass; Ktau rank-1(p,rho); reciprocal traction -> support; Maxwell energy balance -> J only when E!=0",
+      "physical_paid": false,
+      "source_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c",
+      "checker_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c"
+    }
   }
 }
