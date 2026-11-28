@@ -132,7 +132,19 @@ def main():
     status,t,lower=productive_trace(3,(7,),((7,1),),(1,),7,Budget(1000000),
                                    flats=(((1,0),),((2,0),),((4,0),)))
     assert status in ('MINIMUM','UNKNOWN') and t is None
-    checkpoint('productive_controls',status='PASS')
+    # A genuine transmuting macro: no rowwise-nonincreasing improvement exists.
+    R=(73,111,15,117,151);H=((130,0),(70,0),(38,0),(21,1),(15,1))
+    F=(((128,0),(64,0)),((4,0),(1,0)),((64,1),(2,1)))
+    x=142;caps=(1,)*5
+    w=lambda z:tuple((r&z).bit_count() for r in R)
+    phi=lambda z:sum(max(0,a-1) for a in w(z))
+    truth=[z for z in range(256) if satisfies(z,H,F)]
+    assert min(map(phi,truth))==4
+    assert min(phi(z) for z in truth if all(a<=b for a,b in zip(w(z),w(x))))==6
+    status,t,lower=improve_trace(8,R,H,caps,x,Budget(10000000),F,atomic_basis_block=True)
+    assert status=='IMPROVED' and lower==4 and phi(t['end'])==4
+    assert any(a>b for a,b in zip(w(t['end']),w(x)))
+    checkpoint('productive_controls',status='PASS',transmuting_initial=6,transmuting_minimum=4,rowwise_minimum=6)
     # Explicit FRACDASH checkout; no vendored evaluator.
     import os,sys
     bridge_path=os.environ.get('FRACDASH_SCRIPTS')
