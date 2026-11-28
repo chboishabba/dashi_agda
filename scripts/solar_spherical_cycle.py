@@ -48,12 +48,15 @@ def cycle(material,cfg,shadow=None):
     assert 0<cfg['heater_efficiency']<=1 and 0<q['chemical_input_efficiency']<=1 and 0<=q['chemical_recovery_efficiency']<=1
     campaign={}; preparation={}; trace=[]; history=[]; sensitivity=[]; support_receipts=[]
     from fractions import Fraction
-    solve_error=Fraction(0)
+    solve_error=Fraction(0); event_error_exact=Fraction(0)
     exact_trace=cfg.get('retain_stage_residuals',False)
-    # Exact binary operator enclosure currently admits only identity population
-    # events. Nontrivial event rounding requires its own certified affine map.
-    if exact_trace and (np.any(q['recombination_m3_s']) or np.any(q['ionization_s_inv']) or np.any(q['heater_ionization_per_J'])):
-        raise ValueError('exact campaign solve enclosure requires frozen population')
+    exact_events=bool(cfg.get('retain_nonfrozen_event_residuals',False))
+    if exact_events and not exact_trace:raise ValueError('nonfrozen event enclosure requires exact stage residuals')
+    if exact_events:
+        from solar_event_rounding import event_rounding_receipt
+    if exact_trace and not exact_events and (np.any(q['recombination_m3_s']) or np.any(q['ionization_s_inv']) or np.any(q['heater_ionization_per_J'])):
+        raise ValueError('exact campaign solve enclosure requires frozen population or explicit binary event enclosure')
+    retain_sensitivity=bool(cfg.get('retain_sensitivity',False) or exact_trace)
     initial_energy=energy()
     tail=int(cfg.get('restoration_steps',0)); assert tail>=0
     horizon=int(cfg['max_cycles'])
@@ -85,10 +88,10 @@ def cycle(material,cfg,shadow=None):
                     analytic_pop_support[i],analytic_pool_support[i],p[i],0.,q)
                 r,a,pool[i]=reaction(pop[i],pool[i],rows[i]['te']+theta[i],p[i],dt,q)
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
-                if shadow is not None and not exact_trace:
+                if shadow is not None and (not exact_trace or exact_events):
                     coef,shift=event_affine(pop[i],r,a,birth[i],vol[i],MASS,CHARGE)
                     shadow_x[sl]=coef*shadow_x[sl]+shift
-                if exact_trace:
+                if exact_trace and not exact_events:
                     # Rates are admitted only on the frozen-population chart.
                     # Avoid a numerically rounded current -> velocity -> current
                     # conversion when its exact mathematical action is identity.
@@ -96,8 +99,12 @@ def cycle(material,cfg,shadow=None):
                         raise ValueError('frozen-population certificate encountered nonzero event')
                     w=np.zeros(3)
                 else:
+                    if exact_events:old_z=x[sl].copy();old_n=pop[i].copy()
                     x[sl],pop[i],w,support_receipt=support_transition(
                         x[sl],pop[i],r,a,birth[i],vol[i])
+                    if exact_events:
+                        er=event_rounding_receipt(old_z,old_n,r,a,birth[i],vol[i],MASS,CHARGE,x[sl])
+                        local_error=Fraction(er['error_l1_exact']);solve_error+=local_error;event_error_exact+=local_error
                     if support_receipt['support_changed']:
                         support_receipts.append(dict(cycle=iteration+1,step=step,
                                                      cell=i,receipt=support_receipt))
@@ -110,8 +117,8 @@ def cycle(material,cfg,shadow=None):
             if cfg.get('common_stage_atlas',False) and atlas is None:
                 atlas=structural_stage_atlas(model,mesh)
             A=model['generator']-current_L-S
-            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=cfg.get('retain_sensitivity',False),retain_stage_residuals=exact_trace,atlas_pairs=atlas)
-            if cfg.get('retain_sensitivity',False):
+            x,w=timed_step(x,A,2*inc*port,dt,mesh,dict(collision=model['loss'],load=current_L,source=S),port,inc,retain_local_midpoint=retain_sensitivity,retain_stage_residuals=exact_trace,atlas_pairs=atlas)
+            if retain_sensitivity:
                 item=dict(terminal=terminal,edge_midpoint=w['local_midpoint'][:ne],reflected=w['reflected_amplitude'],incident=float(inc),useful_J=w['loss_channels_J']['load'])
                 if exact_trace:
                     item['midpoint_error']=[str(solve_error+Fraction(v)) for v in w['exact_binary_midpoint_error'][:ne]]
@@ -179,7 +186,11 @@ def cycle(material,cfg,shadow=None):
                 support_transition_count=len(support_receipts),
                 support_transition_receipts=support_receipts,
                 fixed_support_campaign=not bool(support_receipts),
-                exact_frozen_population_solve_error=str(solve_error) if exact_trace else None,history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
+                exact_frozen_population_solve_error=str(solve_error) if exact_trace and not exact_events else None,
+                exact_binary_field_solve_error=str(solve_error) if exact_trace else None,
+                exact_binary_event_error=str(event_error_exact) if exact_events else None,
+                fixed_binary_material_history_enclosure=bool(exact_trace),physical_material_rounding_enclosed=False,
+                history=history,sensitivity_trace=sensitivity,elapsed_s=((iteration+1)*len(src)+tail)*dt,
                 preparation_charged_periodic_net_J=net-prep_paid if restored and material_restored else None,
                 cycle_trace=trace,net_J=net,periodic_return=ret,original_return=orig,
                 restored=bool(restored),original_material_restored=bool(material_restored),
