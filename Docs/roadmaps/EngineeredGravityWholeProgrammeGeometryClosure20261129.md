@@ -424,3 +424,38 @@ This is smooth at the centre (vanishes as \(r\to0\)) and vanishes at the origina
 **Implementation:** new \`scripts/check_tov_original_euler_firstjet_weld.py\` committed \`801b5e380a81a08f58c5df7c37cad9e80c483682\`; imported coefficients rather than a newly fitted stress; registered at \`90b5844454ac99c48ccef3bb12af287593bd82cb\`; manifest pinned original source \`check_tov_original_material_flux_weld.py\` blob \`671a81ab6afac23e30dacc5e8b739e0ec5d066af\` and checker blob \`c7ee43c76d864b3490638599f5a33600fc3194ec\` in commit \`9405a509ab0efacca26853bd575754ecb02eaa65\`. Source-equivalent SymPy run under 90 sec PASS after splitting out the expensive arbitrary-jet operator expansion that timed out. The **literal newly committed checker and whole repository acceptance have not been executed**; no unsupported proof promotion. Existing mathematical W1/W2 packets, native original F8, G3/G4 source admission and 36 physical obligations remain open.
 
 **Next coarse cut:** build an executable mixed Einstein+Euler time-jet object with source values \(\{m,\rho,j,p_r,p_t,N,Y,Y_t,Y_{tt}\}\), a physical same-wall \(\{R,v,n,\gamma,K,\Pi\}\), and both radial and angular Einstein constraints; certify the first nonzero time order and then expand to finite-time local PDE acceptance. Reuse rather than rebuild the existing TOV material Hessian and Israel normal checkers.
+
+
+## W2.6 — Nonlinear Euler wall obstruction for uncorrected moving initial geometry
+
+Reopening the **same** original \(a,d,V\) constitutive material (W2.5) gives an exact source action
+\[
+W=d(Y^2)(fY_r^2-Y_t^2/N^2)+2a(Y^2)Y^2/r^2+V(Y^2),
+\qquad \mathcal E_Y=W_Y-\partial_r W_{Y_r}-\partial_t W_{Y_t}
+-\Bigl(2/r+N_r/N-f_r/(2f)\Bigr)W_{Y_r}
+-\Bigl(N_t/N-f_t/(2f)\Bigr)W_{Y_t}.
+\]
+**Restricted initial datum:** \(Y(t_0,r)=r,\ Y_r(t_0,r)=1,\ f(t_0,r)=f_0(r),N(t_0,r)=N_0(r)\), with the W2.5 *nonzero* material velocity \(Y_t=-r(\lambda+2)\dot R/(\lambda+1+r^2)\). This is *not* a fully constraint-corrected moving initial slice (the quadratic kinetic stress already perturbs its Einstein mass). Evaluating the actual nonlinear Euler equation on that exact slice—not truncating the \(Y_t^2\) term—gives
+\[
+\mathcal E_Y\big|_{t_0}={1\over N_0^2}
+\left[2r\,d_x(r^2)Y_t^2+2d(r^2)Y_{tt}
+-2d(r^2)Y_t{N_t\over N_0}
+-d(r^2)Y_t{f_t\over f_0}\right].
+\]
+Because \(d(1)=0\) but \(d_x(1)\ne0\), for **bounded acceleration and metric first-time jets**, as \(r\to1^-\),
+\[
+\boxed{\displaystyle
+\lim_{r\uparrow1}\mathcal E_Y
+=-{225\lambda(\lambda+2)\dot R^2
+\over8\pi(2\lambda^2+4\lambda-15)^2}\ne0
+\quad(\dot R\ne0).}
+\]
+Equivalently, forcing Euler acceleration to cancel the residual on that *frozen spatial* slice would require a singular term \(Y_{tt}\sim\dot R^2/[2(1-r)]\). The exact original constitutive surface degeneracy produces this **restricted nonlinear obstruction**; it is not repaired by the first-order lapse correction in W2.5, since the bounded lapse-time coefficient is itself multiplied by \(d(1)=0\).
+
+**Crucial non-promotion:** this does NOT rule out actual nonzero-velocity material free boundaries. A physically consistent moving Einstein initial state generally has \(O(\dot R^2)\) corrections to \(Y,Y_r,f,N,m\) and may possess different boundary graph-domain regularity, material support, surface terms and constraint data. They were held artificially frozen here. Whether one can construct a regular **corrected** initial state in the original source action, with all Einstein constraints and material Euler evolution, is the exact next W3 weld. Nor does this prove instability, gravity shielding or a physical device. A negative surface residual on an uncorrected ansatz is not a continuum impossibility theorem.
+
+**Executed:** source-equivalent local SymPy under 90s PASS, exact original \(d_x\) and full Euler time jet, nonzero wall negative control and leading formal acceleration divergence. New committed \`scripts/check_tov_original_euler_boundary_obstruction.py\` at \`b01d703719a8d6c3c55dcdca5266d683987ff989\` (Git blob \`76648b5dd7bbb3900753041aaa4dc9511f474a7c\`); registered runner \`c992d14801808c54e73204e78320890347619464\`, pinned to original action source at \`b23714a15f520ecfa60c0bfb4f1f25520ca22a48\`.
+
+**Acceptance repair in same cut:** discovered that the previously committed \`scripts/test_engineered_gravity_proof_dag.py\` contained a malformed \`for which in (...\` tuple (missing closing parenthesis), so its advertised earlier negative controls **could not have run literally as committed**. Fixed syntax and added two W2.5/2.6 false-proof/source-SHA rejection controls at \`521c16405b4ebedd19817a8b0fc30b7981edf2ff\`; current declared 18 cases. Source structural audit confirms 18 exact keys and valid source pins. Full literal script replay is still outstanding; earlier claims of a full literal negative-control run are superseded. No GitHub CI or original F8 native acceptance.
+
+**Next W3 whole-system, coarse before fine:** construct a corrected moving \(O(\dot R^2)\) spatial-material/York metric initial slice *from the original action*; enforce radial and angular Einstein constraints and second-order Israel + GHY/corners; determine whether a smooth Euler boundary-domain solution exists or obtain a source-derived no-go. In parallel retain A/I reciprocal support and Maxwell/MHD source work; do not re-label the manufactured mass profile as source-admissible in full GR. All physical twelve-lane terminal obligations remain unpaid.
