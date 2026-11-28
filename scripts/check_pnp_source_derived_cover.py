@@ -66,8 +66,9 @@ def twin_generators(F,n,rows,B,max_swaps=3):
         if moved==C:G.append(tuple(g));used.update((i,j))
     return tuple(G)
 
-def source_solve(F,n,rows,target,cap):
+def source_solve(F,n,rows,target,cap,max_width=8,pin_width=2):
     from check_pnp_changing_stabilizer import solve
+    if min(max_width,pin_width)<0:raise ValueError('width')
     B=Reservation(cap)
     try:
         reserve=cap//4;B.pay(reserve);P=Reservation(reserve)
@@ -80,9 +81,20 @@ def source_solve(F,n,rows,target,cap):
     try:
         B.pay(1+n+sum(1+len(c) for c in F)+len(rows)*(n+1))
     except Refused:return dict(status="UNKNOWN",reserved=cap-B.left)
-    q=solve(F,n,bags,rows,target,G,B.left)
+    pins=();force_cut=None
+    if width is not None and width[0]>max_width and not G:
+        # A measured high-fill diagnostic, NOT a treewidth lower bound.
+        # Add an original pin bag, keeping all source clauses covered.
+        try:
+            B.pay(1+n+sum(1+len(c) for c in F))
+        except Refused:return dict(status="UNKNOWN",reserved=cap-B.left,cover_width=width)
+        degree=Counter(abs(l)-1 for c in F for l in set(c))
+        pins=tuple(sorted(range(n),key=lambda i:(degree[i],i))[:pin_width])
+        bags=(pins,)+bags;force_cut=1
+    q=solve(F,n,bags,rows,target,G,B.left,force_cut=force_cut)
     B.pay(q["reserved"])
-    return dict(q,reserved=cap-B.left,cover_width=width,generators=len(G))
+    return dict(q,reserved=cap-B.left,cover_width=width,generators=len(G),
+                high_fill=force_cut is not None,pins=pins)
 
 def count_reference(F,n,bags,rows,target):
     # Independent raw frontier: owner and exact last-use deletion.
