@@ -9,6 +9,12 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as F
 import DASHI.Cognition.PNF.X369ConstructiveConsumerSplitExact as Split
 
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl q = q
+
 module Witness {Semantic : Set}
   (action : Split.Literal → Semantic → Semantic)
   (abCommute : (z : Semantic) →
@@ -42,6 +48,8 @@ module Witness {Semantic : Set}
       read (run word z) ≡ Split.runLatch word Split.unset) → ⊥
   cannotFactorFirstThroughEndpoint suffix z read exact =
     Split.distinct
-      (F.trans (F.sym (exact (Split.a ∷ Split.b ∷ suffix)))
-        (F.trans (F.cong read (semanticCollision suffix z))
-          (exact (Split.b ∷ Split.a ∷ suffix))))
+      (trans (sym (memoryA suffix))
+        (trans (sym (exact (Split.a ∷ Split.b ∷ suffix)))
+          (trans (F.cong read (semanticCollision suffix z))
+            (trans (exact (Split.b ∷ Split.a ∷ suffix))
+              (memoryB suffix)))))
