@@ -2454,3 +2454,21 @@ First compose terminal conditional interfaces on the original objects (A0-A6), t
 
 ### Predictive production closure replay
 Exact local C++ blob f3218e6003877aace21a98cf9f6b4e4128ccccac and original quotient blob 28f4657e5bdbfc27ebb7cc3690f6144590ba2d5e verified; 10k/100k/1M all first-attempt floor admissions, historical hashes match, 90s bounds. At 1M 1321.25 ms and 9034322 bits; map ledger slower than plain. 10k actual postorder trace independently replayed by local harness: 716 leaves, 715 merges, exact raw P,Q,T equality with full GCD, five corrupted controls rejected (sign, divisor, leaf order, root, floor). Independent local reconstruction of original Machin and Chudnovsky rational evaluator equations admitted common strict floors at 100/1000/10000, overlap also checked. The committed Python wrappers were not byte-matched/run; native parser, large-precision predictive runs, optimization and analytic A1-A5 producer proofs remain. Receipt Docs/support/reference/Paper9PredictiveGMPClosureReplay20261128.json. No CI or kernel promotion.
+
+
+### 2026-11-28 original same-source analytic closure cut (P0)
+
+New owner: DASHI/Moonshine/CM163BishopOriginalSameSourceClosureExact.agda, commit 4fbbb9fc2e6b. The original CM producers are collected as ONE proof-relevant record parameterised by the same actual coefficient jets (a,b), Hecke packet (s,t,u,v), and hypergeometric chain derivative l. It intentionally does not manufacture existence of the record. Its fields are precisely:
+1. Actual guarded root Reduction.CMRoot, sourced by SelectedDiskExact/RealSlicePeriodExact, which still needs original analytic CM modular rigidity and cusp enclosure at the actual selected q.
+2. Actual original factorial limit square Reduction.HyperSquare, sourced by NativeEulerLimitsExact.H and E4 coefficient/ODE matching. No replacement H.
+3. Same derivative l: X*l=Y*Euler.J1 and 6*Euler.H*l=U; clearedFromChain produces ClearedHyperJet. Source owners: NativeHyperODEExact, NativeFactorialEulerAttachmentExact, ActualJLogPhaseJetExact, EisensteinEulerJetExact. This is not achieved by separately assuming a freely chosen analytic flow.
+4. Actual q derivatives a,b satisfying NativeJetReductionExact.FirstQJet/SecondQJet, genuine apartness of disk A and S2. Existing same-analytic-point series jets ActualJLocalSecondJetExact/ActualJLogPhaseJetExact must be specialised to native selected q; derivative coefficient readout is needed, not a second independent j.
+5. Actual literal Hecke packet P2/P3 signed relations and analytic literalResidual=0 of the same reciprocal product. The finite 126 packet equality and 17 symbolic checks are supporting reference checks, not this original analytic product proof. DiskCrossCoefficientExact.signedJetFromLiteral eliminates s,t and transports the original κ sign; it supplies native SignedJet.
+The module then COMPOSES actual producers with existing NativeJetReductionExact.clearedFromChain / periodFromThree and End.periodToSameReal / periodToExpanded plus RawCoordinateWeldExact.rawFromPeriod to derive the literal original Bishop same-real, universal expanded cross, and all-index raw cross. It additionally exposes correctionFromSigned/signedFromCorrection under the same selected cubic for bidirectional checking. This is source-written and not Agda-kernel-checked. None of the five proof-producing fields are claimed inhabited just by defining the record.
+
+Reverse-solve exact priority:
+A: original analytic Hecke product (construct real series equality on CM q, prove reduced residual=0) and Bishop root enclosure/rigidity;
+B: actual q jets and E4/E6 coefficients at the SAME selected q, establishing the first/second derivative equations, not postulated values;
+C: original hypergeometric ODE uniqueness and chain readout proving H²=X and derivative l for H and J1;
+D: construct OriginalCMProducers fields and call sameReal/universalRawCross. Do not add a new endpoint theorem or arbitrary period equality. Strict positivity/apartness must be supplied constructively before cancellation.
+Computational code and receipts remain independent: predictive GMP and original Machin common-floor checks cannot instantiate a real analytic field. Bounded local SymPy tests can validate coefficient identities only. No native proof run or CI.
