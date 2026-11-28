@@ -2716,3 +2716,6 @@ Exactly matched source-owner audit saved in \`Docs/support/reference/Paper9Whole
 (4) precise Round11 cutset construction and native Agda/Lean typecheck;
 (5) original trace serialization and strict decimal floor production acceptance.
 Recompute provenance against master/PR heads; avoid wholesale rebase. Source-written does not mean typechecked; no native compilers and no GitHub CI here.
+
+
+**Exact-source regression update:** `check_paper9_modular_cusp_rigidity_negative.py` committed blob `b4dbc22c0c3e54a452c9729d6d0aa54a378af725` was locally reproduced byte-identically (`git hash-object` match) and executed at degrees 80 and 256: both exact formal products PASS, with `1/j` zero at cusp and nonzero q-germ. This is a negative control proving the necessity of pole-free global rigidity; still not an Agda or Lean kernel execution.
