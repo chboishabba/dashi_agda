@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "status": "complete",
+  "source_blobs": {
+    "check_paper9_full_hecke_symmetry.py": "3f7b41b7521e7d519b30da60741c0a2dfa116d72",
+    "check_paper9_signed_integer_matrix_checkpointed.py": "961fac5d93c83a294167ca1bc62bc42339a701ba",
+    "check_paper9_signed_integer_matrix_weld.py": "ea502febea8ddf75080183f194b7d21aa1ea9b89",
+    "paper9_hecke_packed_mul.cpp": "30bd71e5f93e1fa3ede0a85ca36f7342c7f0660e"
+  },
+  "pairs": {
+    "1": {
+      "nodes": [
+        1,
+        -1
+      ],
+      "equations": 3618,
+      "seconds": 4.01223
+    },
+    "2": {
+      "nodes": [
+        2,
+        -2
+      ],
+      "equations": 3618,
+      "seconds": 4.075281
+    },
+    "3": {
+      "nodes": [
+        3,
+        -3
+      ],
+      "equations": 3618,
+      "seconds": 4.194077
+    },
+    "4": {
+      "nodes": [
+        4,
+        -4
+      ],
+      "equations": 3618,
+      "seconds": 4.220367
+    },
+    "5": {
+      "nodes": [
+        5,
+        -5
+      ],
+      "equations": 3618,
+      "seconds": 4.319717
+    },
+    "6": {
+      "nodes": [
+        6,
+        -6
+      ],
+      "equations": 3618,
+      "seconds": 4.057055
+    },
+    "7": {
+      "nodes": [
+        7,
+        -7
+      ],
+      "equations": 3618,
+      "seconds": 4.395525
+    },
+    "8": {
+      "nodes": [
+        8,
+        -8
+      ],
+      "equations": 3618,
+      "seconds": 4.00575
+    },
+    "9": {
+      "nodes": [
+        9,
+        -9
+      ],
+      "equations": 3618,
+      "seconds": 3.868988
+    },
+    "10": {
+      "nodes": [
+        10,
+        -10
+      ],
+      "equations": 3618,
+      "seconds": 3.940566
+    },
+    "11": {
+      "nodes": [
+        11,
+        -11
+      ],
+      "equations": 3618,
+      "seconds": 4.589249
+    },
+    "12": {
+      "nodes": [
+        12,
+        -12
+      ],
+      "equations": 3618,
+      "seconds": 4.01374
+    },
+    "13": {
+      "nodes": [
+        13,
+        -13
+      ],
+      "equations": 3618,
+      "seconds": 4.36534
+    },
+    "14": {
+      "nodes": [
+        14,
+        -14
+      ],
+      "equations": 3618,
+      "seconds": 4.311837
+    },
+    "15": {
+      "nodes": [
+        15,
+        -15
+      ],
+      "equations": 3618,
+      "seconds": 4.052988
+    },
+    "16": {
+      "nodes": [
+        16,
+        -16
+      ],
+      "equations": 3618,
+      "seconds": 4.08645
+    },
+    "17": {
+      "nodes": [
+        17,
+        -17
+      ],
+      "equations": 3618,
+      "seconds": 4.127282
+    },
+    "18": {
+      "nodes": [
+        18,
+        -18
+      ],
+      "equations": 3618,
+      "seconds": 4.168822
+    },
+    "19": {
+      "nodes": [
+        19,
+        -19
+      ],
+      "equations": 3618,
+      "seconds": 4.148864
+    },
+    "20": {
+      "nodes": [
+        20,
+        -20
+      ],
+      "equations": 3618,
+      "seconds": 4.622252
+    },
+    "21": {
+      "nodes": [
+        21,
+        -21
+      ],
+      "equations": 3618,
+      "seconds": 4.546775
+    }
+  },
+  "invocation_seconds": [
+    7.633,
+    15.991,
+    16.503,
+    15.231,
+    16.698,
+    16.008,
+    15.917,
+    13.022
+  ],
+  "equations": {
+    "log": 72366,
+    "norm": 1806,
+    "column": 1806,
+    "total": 75978
+  },
+  "native_kernel_checked": false,
+  "notes": "Exact source arithmetic replay under separate external 90 second cutoffs. This receipt is not a native proof object."
+}
