@@ -82,6 +82,41 @@ def accept(bounds,p):
     if set(bounds)!=required:raise ValueError('incomplete or unexpected bound fields')
     return contraction(p=p,**bounds)
 
+def complete(aggregate,leaf_receipt,coefficient_bounds,knots,p):
+    """Conditional sufficient bound; coefficient bounds must cover [0,2*pi]
+    and the rational trace clock. No empirical or nonlinear promotion."""
+    from solar_steelman_history_clock import period_bounds,clock_error
+    from solar_steelman_history_residual import exp_upper
+    from solar_steelman_history_dense_decode import q
+    T,delay=map(S.Rational,aggregate['clock'])
+    lo,hi=map(S.Rational,period_bounds())
+    horizon=max(T,hi)
+    assert min(T,lo)>2*delay
+    a,b,c,r,rp=(S.Rational(coefficient_bounds[k]) for k in ('a','b','c','r','rprime'))
+    assert min(a,b,c,r,rp)>=0
+    G=S.Rational(exp_upper((a+(b+c)*max(1,r))*horizon))
+    H=max(1,r)*G
+    D=a*G+(b+c)*H
+    Dh=rp*G+r*D
+    clock=clock_error(T,D,Dh)
+    U,V,J=section(leaf_receipt['Q'],leaf_receipt['L'],leaf_receipt['R'].rows,knots,leaf_receipt['R'])
+    M=S.Matrix([[q(v) for v in row] for row in aggregate['matrix']])
+    f=finite_bound(M,U,V,J,p=p)
+    errors=aggregate['errors']
+    u=projected_error(U,V,r,errors['state'],errors['history'],clock['state'],clock['history'])
+    e=Dh*S.Rational(aggregate['spacing'])/2
+    bounds=dict(section_power=f['power'],section_norm=f['norm'],return_norm=H,output_error=e,step_error=u)
+    result=accept(bounds,p)
+    # Reverse solve strict margin for admissible combined local errors,
+    # holding section norm, power and return norm fixed.
+    k=H*sum(H**(p-1-j)*f['norm']**j for j in range(p))
+    spare=1-f['power']*H
+    result.update(bounds=bounds,clock=clock,derivatives=(D,Dh),
+                  max_step_error=(spare-(H**p+k)*e)/k if k>0 else None,
+                  max_output_error=(spare-k*u)/(H**p+k) if H**p+k>0 else None,
+                  status='CONDITIONAL_CONTRACTION' if result['contracting'] else 'SUFFICIENT_BOUND_NOT_MET')
+    return result
+
 def fixture():
     Q=S.Matrix([[1],[1]]);L=S.Matrix([[1,0]])
     U,V,J=section(Q,L,1,1,S.Matrix([[1,0]]))
