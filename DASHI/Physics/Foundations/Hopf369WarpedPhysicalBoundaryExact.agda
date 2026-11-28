@@ -3658,3 +3658,38 @@ module At {r : Level} (F : C.RealField r)
   originalFMinusGauge mean jump a = mean a - half * jump a
 
   -- Decoders, not an assumed analytic F metric existence theorem.
+
+
+  ------------------------------------------------------------------------
+  -- BR104/105: material foliation source (actual signed contractions).
+  -- The signed tangential shape square and tangential drift are
+  -- supplied by the actual Lorentz leaf metric, not positive norms.
+  ------------------------------------------------------------------------
+  originalFNormalRicci :
+    S → S → S → S → S
+  originalFNormalRicci nTau shapeSquare leafBoxPsi leafGradSquare =
+    neg nTau - shapeSquare - leafBoxPsi - leafGradSquare
+
+  originalFScaleWaveSource :
+    S → S → S → S → S → S → S
+  originalFScaleWaveSource tau nPsi shapeSquare nHperp gaugeDrift reducedNN =
+    tau * nPsi - shapeSquare + nHperp - gaugeDrift + four - reducedNN
+
+  originalFWallScaleWaveSource : S → S → S → S → S
+  originalFWallScaleWaveSource j gaugeNormal jumpNTau jumpReducedTrace =
+    neg jumpNTau - four * j * gaugeNormal - jumpReducedTrace
+
+  -- BR106 expanded divergence: B=Box psi-|dpsi|², V=∇_(grad psi)n.
+  -- Box Q reduction on the same metric uses BR92, not vacuum Ricci.
+  originalFMeanCurvatureWaveSource :
+    S → S → S → S → S → S → S → S
+  originalFMeanCurvatureWaveSource nB tau b divV boxQ gradPair qBoxPsi =
+    nB + tau * b + two * divV - boxQ + gradPair + qBoxPsi
+
+  -- BR107 exact source of the positive Dirichlet normal multiplier.
+  originalFDirichletNormalStress : S → S
+  originalFDirichletNormalStress normalDerivative =
+    half * (normalDerivative * normalDerivative)
+
+  -- No analytic trace, variable high-order tame or continuum existence
+  -- witness is inferred from these algebraic expressions.

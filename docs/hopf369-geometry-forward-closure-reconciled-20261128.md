@@ -827,3 +827,150 @@ unrun; no CI requested. Next P0 curved scalar wall-wave source,
 coupled mixed-order estimate, moving chart Fréchet and same-data
 selected-order corner, actual F reduced development then BR98,
 W4b–W6. No W1–W3 full closure claimed.
+
+
+## 11. BR104–107 — curved F wall-wave, foliation subsidiary and hidden trace
+
+Reconciled actual BR26/100 material inverse, BR74/75/78 physical
+Gauss–Codazzi and tension, BR92 same-metric Bianchi, BR98 F
+continuous gauge, BR102 flat scalar wall factor, BR80/83 stress
+current, BR43/44/56 trace/energy. No new scalar spatial solve.
+Classical Raychaudhuri, Bochner, Hodge commutator, stress multiplier,
+Lie derivative are prior mathematics; DASHI-specific attachment
+to original F and signed nonzero Hopf carrier.
+
+### BR104: exact curved normal curvature and scale wave
+
+On each material collar let psi=log lambda, n=e^-psi(∂y-beta.d),
+K=1/2 Lie_n h, tau=tr_h K, Q=C_perp+H_perp=n psi-tau.
+D is the intrinsic Lorentzian leaf connection, a=∇_n n=-D psi
+(spacelike normal sign); K² below is signed tr(h^-1 K)^2, not
+an assumed positive Lorentz norm. The exact identities are
+ Ric_nn=-n tau-tr(K²)-Box_h psi-<D psi,D psi>_h,
+ Box_g y=-e^-psi Q,
+ Box_g psi=(n psi)^2-tr(K²)+n Q-Q n psi-Ric_nn.
+The last follows from scalar Bochner on y: Hess y has ttangent
+block e^-psi K, mixed -e^-psi D psi, nn=-e^-psi n psi.
+With Ered=Ric+4g-S(C), Ric_nn=n C_perp+
+<D psi,C_tan>+Ered_nn-4, hence
+ Box_g psi=tau n psi-tr(K²)+n H_perp
+            -<D psi,C_tan>+4-Ered_nn.
+The actual material acceleration term is indispensable: n of the
+normal component is NOT the Gaussian extension derivative of that
+component unless normal acceleration vanishes. Direct independent
+full 5x5 Christoffel, Ricci, scalar Hessian calculation at a
+non-diagonal Lorentz point with variable shift, scale and rational
+2-jets passes all three curvature/acceleration/Bochner identities.
+No use of Ric=-4g before C=0.
+
+### BR105: nonlinear wall-scale jump equation
+
+On F wall, same h and geometric C, [K]=jh, tau+ + tau-=0,
+tau±=±2j. Thus [tr(K²)]=2j tr M=0. The physical Gauss identity
+[G_nn]=0 implies [Ric_nn]=tr_h[Ric_ab]. Since tangential
+S(C)_ab=D_(a C_b)+K_ab C_perp, this equals
+4j C_perp + tr_h[Ered_ab].
+Taking the jump of BR104 gives the exact curved wall wave
+ Box_h p + <D(psi+ + psi-),D p>_h
+   = -[n tau]-4j C_perp-tr_h[Ered_ab], p=[psi].
+This is valid for distinct reflected metrics and normal scale,
+with a common wall h and fixed material foliation. The drift
+is a genuine tangential first-order term; it does not vanish
+by Israel. If reduced equations hold Ered=0; retain C until
+BR98 has been proved on the same development. At normalized
+flat principal linearization tau=-U, recovering BR102 including
+the correct sign. A different normal-coordinate foliation gives
+a different psi: this is a coordinate scale channel, not a new
+physical radion or a gauge-invariant curvature degree.
+
+### BR106: bulk mean-curvature subsidiary, no third metric jet on shell
+
+For n^flat=e^psi dy, div n=tau, let B=Box_g psi-|dpsi|_g²
+(signed contraction), V=∇_(grad psi) n. The product rule and
+covector commutator give
+ Box_g n^flat-Ric(n)^flat
+   = B n^flat+2 V^flat-dQ+Q dpsi.
+The divergence of Box_g n^flat-Ric(n)^flat equals Box_g tau
+by the Hodge Laplacian/divergence commutation. Therefore
+ Box_g tau=div_g(B n+2V-Q_gradient+Q grad psi),
+ V=K^sharp(D psi)-n(psi) D psi (view tangent vector in g).
+Expanded:
+ Box_g tau=n B+tau B+2 div_g V-Box_g Q+
+             <dQ,dpsi>+Q Box_g psi.
+Independent exact differential check with curved Lorentz
+h=e^(2f) eta4, lambda=e^psi, nonconstant f,psi in t,x,y and
+two spectators passes. This test is not the general proof;
+the general proof is the tensor product and Hodge identity above.
+
+For a GIVEN regular reduced solution Ered=0, substitute BR104
+into B. It becomes a first-jet expression if H(x,g) algebraic
+and the material defining function fixed. Then n B and div V
+use at most second metric jets. Reduce the apparent third jets
+in Box Q by writing Q=C(n)+H_perp:
+ Box Q=(Box C)(n)+2 contraction(∇C,∇n)+C(Box n)+Box H_perp.
+BR92 gives Box C=-Ric(C) on the same reduced metric; Box n
+uses the preceding product formula and at most second jets;
+Box H_perp uses at most second metric jets for algebraic H.
+Thus on shell the tau source can be expressed with at most
+SECOND metric jets, not third; with nonzero residual retain
+div TREred and n Ered_nn. For solution-dependent chart changes
+or derivative-dependent H this order statement requires new
+proof. This is a nonlinear identity for an actual regular
+reduced solution, not an independent existence theorem for tau.
+For homogeneous F tau±=±2j Dirichlet on the original wall.
+Use a smooth prescribed collar lift of these two constants;
+w=tau-lift has zero wall trace, source includes Box(lift).
+
+### BR107: hidden normal trace and explicit reconstruction debt
+
+For a GIVEN regular curved scalar Dirichlet wave Box w=F,
+with spacelike slices and timelike boundary, choose a smooth
+bounded multiplier X equal to outward unit normal at wall,
+with controlled deformation and exterior flux. Stress tensor
+T=dw⊗dw-g|dw|²/2 (mass can be added). Dirichlet trace gives
+all tangential derivatives zero, dw=(n_out w)n_out^flat,
+T(n_out,X)=|n_out w|²/2. Divergence
+ div(T(.,X))=F X(w)+T:Lie_X g/2
+and spacetime integration imply
+ ||n_out w||²_L2(wall slab)
+ <= C(E_w(t)+E_w(0)+ integral(E_w+||F||²)).
+The constant depends on actual multiplier and positive slice
+energy comparisons, coefficients and exterior control; weighted
+noncompact application requires integration and cutoff payment.
+Combined with ordinary Dirichlet energy, this provides a
+conditional L2 normal-trace estimate without an additional
+normal differentiation of w. On F wall use both sides; [n tau]
+then sources BR105 wall wave. The wall wave with drift has
+ordinary intrinsic positive energy on regular wall foliation;
+source L2 bound controls p in H1 x L2. Tangential commuted
+versions require actual coefficient commutators, boundary
+compatibility, and normal recovery. No uniform high-order
+tame estimate claimed from this low-order multiplier.
+
+Reconstruction obstruction: at flat principal level a normal
+coordinate generator V_n=chi(y)p with chi(0)=0, chi'(0)=1 on
+one face creates exactly the scale jump p and tangential shift
+normal jump d_wall p via Lie_V g. It preserves common H,b
+values. Since Box commutes with flat derivative,
+ Box(Lie_V g)=2 symgrad(Box V), Box V_n=chi Box_h p+chi'' p.
+Direct lift therefore differentiates the wall-wave forcing
+[n tau] once; merely inserting BR107 L2 trace into this lift
+does not pay the differentiated bulk source. Need a wave-adapted
+lift/good unknown or an actual augmented mixed-order energy
+with compatible regularity; cannot claim full metric evolution
+from a scalar wall energy. At curved level retain Lie and
+source transport, metric/normal commutators and the true
+induced geometry. The fixed-source H restriction is essential.
+
+Acceptance: byte-identical local SymPy 1.14.0 four separate
+90-second-bounded stages all exit zero. One initial wall
+assertion needed expansion rather than structural equality.
+Source SHA and stdout in Artifacts/hopf369/br104_107_local_sympy_receipt_20261128.txt.
+Native algebraic source constructors written, Agda kernel unrun;
+no CI requested. BR105 and BR106 are analytic identities, BR107
+conditional low-order energy. Next P0: wave-adapted normal
+coordinate lift/augmented energy that avoids the derivative of
+wall forcing, with actual variable coefficients and same-chart
+corners. Full W2/3/6 remain open; BR98 follows only on actual F
+reduced development. No physical Weyl or weighted exterior
+acceptance inferred.
