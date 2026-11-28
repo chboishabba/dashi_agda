@@ -23,6 +23,7 @@ CORE=(
     "check_engineered_gravity_localized_source_action.py",
     "check_engineered_gravity_alternative_mechanisms.py",
     "check_engineered_gravity_static_tensor_constraints.py",
+    "check_engineered_gravity_finite_response_history.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
