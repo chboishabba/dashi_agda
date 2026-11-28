@@ -8,6 +8,7 @@ from check_pnp_signed_component_histogram import component_bounds
 from check_pnp_signed_boundary_energy import boundary_contrast
 from check_pnp_f3_syndrome_boundary import syndrome_contrast
 from check_pnp_f3_normal_fold import normal_contrast
+from check_pnp_dual_syndrome_fourier import dual_contrast
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -26,7 +27,7 @@ def basis(cols):
 def member(B,v):
     for i,u in sorted(B.items()):v=add(v,u,-v[i])
     return not any(v)
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32):
     # Unit propagation keeps both target and observable offset on original indices.
     while True:
         if () in F:return None
@@ -111,6 +112,14 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             a,b,_=cert
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
             lo,hi=list(a),list(b)
+    # Source-derived dual probes: absolute Parseval tail, not an oracle
+    # for the heavy frequencies. Independent attempt cap.
+    if E is not None and dual_budget and any(a!=b for a,b in zip(lo,hi)):
+        cert=dual_contrast(F,cols,target,offset,remaining,w,component_width,dual_probes,dual_budget)
+        if cert is not None:
+            a,b,_=cert
+            lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
+            assert all(x<=y for x,y in zip(lo,hi))
     return (F,cols,target,offset,remaining,w,tuple(lo),tuple(hi))
 def sector(F,n,rows,target,obs,w,order=None,offset=0):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
