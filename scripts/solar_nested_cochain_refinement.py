@@ -145,3 +145,55 @@ def endpoint_time_complement(bundle,k,fine,coarse):
     return dict(signed_residual=signed,spatial_complement=spatial,temporal_complement=temporal,
         zero_mode=y.mean(axis=0),square_residual=square,
         reconstruction_error=float(np.max(abs(reconstructed-fine))))
+
+def maxwell_galerkin_weld(bundle,coarse_masses,fine_masses):
+    """Original normalized consistent Maxwell generator, same nested cochains.
+    P^T K_f P = K_c, not K_f P = P K_c. Preserve the signed lift defect.
+    """
+    from solar_spherical_whitney import normalized
+    from scipy.linalg import solve_triangular
+    Dc=bundle['coarse_incidence'];Df=bundle['fine_incidence']
+    Kc,Ec,Bc=normalized(Dc,*coarse_masses)
+    Kf,Ef,Bf=normalized(Df,*fine_masses)
+    def norm_lift(k,F,C):
+        L=bundle['numerator'][k]/bundle['denominator'][k]
+        return solve_triangular(C,(F.T@L).T,lower=True).T
+    PE=norm_lift(1,Ef,Ec);PB=norm_lift(2,Bf,Bc)
+    P=np.block([[PE,np.zeros((len(Ef),len(Bc)))],[np.zeros((len(Bf),len(Ec))),PB]])
+    isometry=P.T@P-np.eye(P.shape[1])
+    defect=Kf@P-P@Kc
+    projected=P.T@Kf@P-Kc
+    ne=len(Ec);nf=len(Ef)
+    scale=max(np.linalg.norm(Kc),1e-300)
+    return dict(prolongation=P,restriction=P.T,signed_operator_defect=defect,
+        isometry_error=float(np.linalg.norm(isometry)),
+        projected_relative_defect=float(np.linalg.norm(projected)/scale),
+        magnetic_relative_defect=float(np.linalg.norm(defect[nf:,:ne])/scale),
+        full_relative_defect=float(np.linalg.norm(defect)/scale),
+        full_operator_commutation_admitted=False,physical_admission=False)
+
+def material_cell_maps(bundle,coarse_xyz,coarse_simplices):
+    """Piecewise constant material carrier, exact parent incidence and
+    volume-weighted densities, normalized currents for identical D in parent.
+    """
+    from scipy.sparse import csr_matrix
+    cxyz=np.asarray(coarse_xyz,float);fxyz=bundle['xyz']
+    ct=coarse_simplices[3];ft=bundle['simplices'][3]
+    cm={tuple(t):i for i,t in enumerate(ct)}
+    owner=np.array([cm[bundle['carrier'][t[-1]]] for t in ft])
+    def volumes(x,t):
+        return np.array([abs(np.linalg.det((x[list(v)][1:]-x[v[0]]).T))/6 for v in t])
+    cv=volumes(cxyz,ct);fv=volumes(fxyz,ft)
+    if np.any(cv<=0) or np.any(fv<=0):raise ValueError('degenerate material cell')
+    j=np.arange(len(ft));ratio=fv/cv[owner]
+    L=csr_matrix((np.ones(len(ft)),(j,owner)),shape=(len(ft),len(ct)))
+    R=csr_matrix((ratio,(owner,j)),shape=(len(ct),len(ft)))
+    J=csr_matrix((np.sqrt(ratio),(j,owner)),shape=L.shape)
+    err=float(np.max(abs(np.bincount(owner,weights=fv,minlength=len(ct))/cv-1)))
+    if err>1e-12 or not np.allclose((R@L).toarray(),np.eye(len(ct))) or not np.allclose((J.T@J).toarray(),np.eye(len(ct))):
+        raise ArithmeticError('material volume/current map mismatch')
+    return dict(owner=owner,coarse_volumes=cv,fine_volumes=fv,
+        density_prolongation=L,density_restriction=R,
+        current_prolongation=J,current_restriction=J.T.tocsr(),
+        relative_volume_error=err,
+        scope='identical parent material densities, padded normalized current coordinates')
