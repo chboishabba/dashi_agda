@@ -20,9 +20,18 @@ def main():
     A=set(product(range(p),repeat=3)) # Q_p[eps,delta]/(eps,delta)^2
     B={(a,b,0) for a,b in product(range(p),repeat=2)}
     assert len(B)==p*p and len(A)==p**3 and B < A
-    for a,b,d in product(range(p),range(p),range(1,10)):
-        assert (a,b)==(a,b) and d>=1
-        n["hodge"]+=1
+    # Exact nonreduced homogeneous h-chart, F5[eps]/eps^2.
+    # p(x)=c0+c1*x+c2*x^2, homogenize at D>=2 and substitute
+    # h=T, z=eps*T. Every term has T^D, with eps^2=0.
+    for degree in range(2,7):
+        for coeffs in product(range(p),repeat=3):
+            affine=(coeffs[0]%p,coeffs[1]%p)
+            cone=(0,0)
+            for j,c in enumerate(coeffs):
+                term=(c%p,0) if j==0 else ((0,c%p) if j==1 else (0,0))
+                cone=((cone[0]+term[0])%p,(cone[1]+term[1])%p)
+            assert cone==affine
+            n["hodge"]+=1
     for k in range(2,8):
         words=list(product((0,1),repeat=k))
         for x in words:
