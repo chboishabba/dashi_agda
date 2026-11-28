@@ -520,3 +520,69 @@ module At {r : Level} (F : C.RealField r)
     cp (wall a) = half * (cs a + cj a)
     cm normal = O
     cm (wall a) = half * (cs a - cj a)
+
+  -- BR36 complex Lorentz chart, acting on covectors (not conjugate vectors).
+  -- q/ell=(a,v), v.v=a²-1. The two inverse certificates below are
+  -- denominator guards, not a claim that the supplied q is on shell.
+  spatialDot : Vec → Vec → S
+  spatialDot p q = p x * q x + p y * q y + p z * q z
+
+  boostEntry : (a : S) → Vec → Reciprocal (U + a) → Wall → Wall → S
+  boostEntry a v ai t t = a
+  boostEntry a v ai t x = v x
+  boostEntry a v ai t y = v y
+  boostEntry a v ai t z = v z
+  boostEntry a v ai x t = v x
+  boostEntry a v ai y t = v y
+  boostEntry a v ai z t = v z
+  boostEntry a v ai i j = delta (wall i) (wall j) + inv ai * v i * v j
+
+  liftBoost : (Wall → Wall → S) → Axis → Axis → S
+  liftBoost B normal normal = U
+  liftBoost B normal (wall _) = O
+  liftBoost B (wall _) normal = O
+  liftBoost B (wall i) (wall j) = B i j
+
+  sum5 : (Axis → S) → S
+  sum5 f = sum4 (λ i → f (wall i)) + f normal
+
+  transportCov : (Axis → Axis → S) → Cov → Cov
+  transportCov B c i = sum5 (λ j → B i j * c j)
+
+  transportTensor : (Axis → Axis → S) → Tensor → Tensor
+  transportTensor B p = tab (λ i j →
+    sum5 (λ a → sum5 (λ b → B i a * B j b * get p a b)))
+
+  transportMetricPair : (Axis → Axis → S) → MetricTracePair → MetricTracePair
+  transportMetricPair B (metricPair p m) =
+    metricPair (transportTensor B p) (transportTensor B m)
+
+  transportGaugePair : (Axis → Axis → S) → GaugeTracePair → GaugeTracePair
+  transportGaugePair B (gaugePair p m) =
+    gaugePair (transportCov B p) (transportCov B m)
+
+  -- D-to-E uses the actual response to the released D row. In particular
+  -- den is NOT replaced by its flat value. The linear row proof and
+  -- nonvanishing proof are separate obligations of the actual DtN owner.
+  updateMetricPair : MetricTracePair → MetricTracePair → S → MetricTracePair
+  updateMetricPair (metricPair p m) (metricPair hp hm) a =
+    metricPair (addT p (mulT a hp)) (addT m (mulT a hm))
+
+  updateGaugePair : GaugeTracePair → GaugeTracePair → S → GaugeTracePair
+  updateGaugePair (gaugePair p m) (gaugePair hp hm) a =
+    gaugePair (λ i → p i + a * hp i) (λ i → m i + a * hm i)
+
+  rowCorrection : (den : S) → Reciprocal den → S → S → S
+  rowCorrection den di target current = inv di * (target - current)
+
+  metricEFromD : (base response : MetricTracePair) →
+    (row : MetricTracePair → S) → Reciprocal (row response) →
+    S → MetricTracePair
+  metricEFromD base response row ri target =
+    updateMetricPair base response (rowCorrection (row response) ri target (row base))
+
+  gaugeEFromD : (base response : GaugeTracePair) →
+    (row : GaugeTracePair → S) → Reciprocal (row response) →
+    S → GaugeTracePair
+  gaugeEFromD base response row ri target =
+    updateGaugePair base response (rowCorrection (row response) ri target (row base))
