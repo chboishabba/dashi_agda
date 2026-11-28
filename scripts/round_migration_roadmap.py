@@ -64,8 +64,8 @@ def build_roadmap(ledger: dict, plan: dict, candidates: dict, bundles: dict) -> 
                 "status": "rewired-verification-blocked",
                 "action": "Moved the R330 order-closure compatibility adapter into the existing Route-S canonical file and inlined the zero-fresh-B status coordinate into the direct-source frontier; removed nonhistorical R330 imports.",
                 "target": "YMClayRouteSSelectedLimitClosureExact, BalabanCanonicalBOSIndexedCompletionRound333Exact, YMClayDirectSourceOSMassGapFrontierExact",
-                "verification": "walshSpectralIdentityRaw is now a constructive finite rational-ring certificate and the Boolean block module checks; the downstream cone reaches a separate pre-existing unsafe import at BalabanClayP2LargeFieldStepVExact",
-                "next_action": "repair or adjudicate the P2 safe-import boundary, then rerun the affected cone before deleting R330",
+                "verification": "walshSpectralIdentityRaw is constructive, the Boolean/trace/P2 safe boundary checks, and the Route-S target now reaches the intentional DASHI.Foundations.RealAnalysisAxioms postulate boundary",
+                "next_action": "keep the real-analysis authority explicit; rerun the affected cone only after a separately reviewed replacement or adjudication of that authority boundary",
             },
             {
                 "id": "walsh-spectral-identity",
@@ -74,6 +74,14 @@ def build_roadmap(ledger: dict, plan: dict, candidates: dict, bundles: dict) -> 
                 "target": "BalabanBoolean4BlockPoincareExact",
                 "verification": "sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import",
                 "next_action": "retain the proof receipt and continue safe-boundary repair at BalabanClayP2LargeFieldStepVExact",
+            },
+            {
+                "id": "trace-p2-safe-boundary",
+                "status": "constructively-verified",
+                "action": "Mark the postulate-free geometric trace and finite P2 certificate surfaces safe without promoting their conditional physical producer fields.",
+                "target": "BalabanTraceKoteckyPreissGeometricExact, BalabanClayP2LargeFieldStepVExact",
+                "verification": "sanctioned Colab Agda check passed through BalabanClayT2TraversalRootedShellExact",
+                "next_action": "retain the explicit conditional ProofLevel fields and continue at the real-analysis authority boundary",
             },
         ],
         "remaining_steps": [
@@ -93,7 +101,7 @@ def build_roadmap(ledger: dict, plan: dict, candidates: dict, bundles: dict) -> 
             },
             {
                 "id": "verify-affected-cones",
-                "status": "blocked-on-existing-unsafe-p2",
+                "status": "blocked-on-explicit-real-analysis-authority",
                 "scope": "each repaired consumer cone",
                 "action": "run the sanctioned Agda entrypoint and retain receipts",
                 "command": "DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh <target>",
