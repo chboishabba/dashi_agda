@@ -21,6 +21,7 @@ CORE=(
     "check_engineered_gravity_shell_dynamics.py",
     "check_engineered_gravity_general_shell_hybrid.py",
     "check_engineered_gravity_localized_source_action.py",
+    "check_engineered_gravity_alternative_mechanisms.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
