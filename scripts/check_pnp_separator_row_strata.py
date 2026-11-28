@@ -6,7 +6,7 @@ from check_pnp_affine_normal_components import bits, canon, chart, lift, satisfi
 from check_pnp_normal_boundary_join import span, value, rows, representative, tree
 
 
-def build(n,R,P,B,leaf_cap=8,seam_cap=8):
+def build(n,R,P,B,leaf_cap=8,seam_cap=8,hard_flats=()):
     """None = width refusal, not exclusion. Geometry is independent of incumbent t."""
     assert R and P==canon(P) and canon(P+tuple((r,1) for r in R))==P
     assert leaf_cap>=0 and seam_cap>=0
@@ -14,8 +14,11 @@ def build(n,R,P,B,leaf_cap=8,seam_cap=8):
     u,V=chart(n,P);d=len(V);m=len(R)
     F=tuple(tuple((value(V,1<<j),u>>j&1) for j in bits(r)) for r in R)
     B.pay('seam_normals',1+d*sum(map(len,F)))
-    root,boundary,space=tree(d,F,B)
-    assert len(space(root[0]))==d # every original column occurs
+    hard_flats=tuple(hard_flats)
+    G=tuple(tuple((value(V,a),b^((a&u).bit_count()%2)) for a,b in flat) for flat in hard_flats)
+    B.pay('seam_hard_normals',1+d*sum(map(len,G)))
+    root,boundary,space=tree(d,F+G,B)
+    # Unobserved chart kernel coordinates can be freely reopened.
     nodes=[];width=[0,0]
     def prepare(node):
         mask,A,C=node;D=boundary(mask);width[1]=max(width[1],len(D))
@@ -26,7 +29,11 @@ def build(n,R,P,B,leaf_cap=8,seam_cap=8):
             B.pay('seam_leaf_labels',(1<<len(U))*(1+d*(1+len(U)+len(D))+len(F[e])))
             T=[]
             for p in range(1<<len(U)):
-                z=representative(d,U,p);w=sum(b^((a&z).bit_count()%2) for a,b in F[e])
+                z=representative(d,U,p)
+                if e<m:w=sum(b^((a&z).bit_count()%2) for a,b in F[e])
+                else:
+                    if all((a&z).bit_count()%2==b for a,b in G[e-m]):continue
+                    w=0
                 T.append((value(D,z),w,rows(U,p)))
             nodes.append((e,T));return len(nodes)-1
         a=prepare(A);c=prepare(C)
@@ -42,7 +49,7 @@ def build(n,R,P,B,leaf_cap=8,seam_cap=8):
         nodes.append((a,c,T));return len(nodes)-1
     top=prepare(root)
     if top is None:return None
-    return n,tuple(R),P,u,tuple(V),tuple(nodes),top,tuple(width)
+    return n,tuple(R),P,u,tuple(V),tuple(nodes),top,tuple(width) if not hard_flats else (tuple(width),hard_flats)
 
 
 def observe(n,R,P,x,G,B):
@@ -51,6 +58,7 @@ def observe(n,R,P,x,G,B):
     """
     n0,R0,P0,u,V,nodes,top,width=G
     assert (n,tuple(R),P)==(n0,R0,P0) and satisfies(x,P,())
+    assert len(width)==2 and isinstance(width[0],int), 'row-only observe requires row-only geometry'
     m=len(R);zero=(0,)*m;tables=[]
     # Entries: admissible mass, cover mass, per-root masses, any/cover/strict receipt.
     def put(T,k,v):
@@ -103,13 +111,14 @@ def descent(n,R,P,x,B,leaf_cap=8,seam_cap=8,history=None,k_index=0):
     return y,True
 
 
-def minimum_excess(n,R,P,caps,G,B):
+def minimum_excess(n,R,P,caps,G,B,hard_flats=()):
     """Exact min-plus fold on existing compatible separator labels.
     Returns minimum and original witness; width refusal belongs to build.
     No rowwise nonincrease assumption: repairs may trade against damage.
     """
     n0,R0,P0,u,V,nodes,top,width=G
     assert (n,tuple(R),P)==(n0,R0,P0) and len(R)==len(caps)
+    assert width[1]==tuple(hard_flats) if hard_flats else isinstance(width[0],int)
     tables=[]
     def put(T,k,c,h):
         if k not in T or c<T[k][0]:T[k]=(c,h)
@@ -119,7 +128,7 @@ def minimum_excess(n,R,P,caps,G,B):
             e,L=node
             for k,w,h in L:
                 B.pay('excess_leaf',1+len(h))
-                put(T,k,max(0,w-caps[e]),h)
+                put(T,k,max(0,w-caps[e]) if e<len(R) else 0,h)
         else:
             l,r,L=node;A=tables[l];C=tables[r]
             for i,j,k in L:
@@ -129,9 +138,10 @@ def minimum_excess(n,R,P,caps,G,B):
                 B.pay('excess_join',1+len(h)+len(g))
                 put(T,k,a+b,h+g)
         tables.append(T)
+    if 0 not in tables[top]:return None,None
     cost,h=tables[top][0]
     B.pay('excess_reopen',1+n*(1+len(P))+len(V)*(1+len(h))+sum(r.bit_count() for r in R))
     Q=canon(h);assert Q is not None
     y=lift(u,V,chart(len(V),Q)[0])
-    assert satisfies(y,P,()) and cost==sum(max(0,(r&y).bit_count()-c) for r,c in zip(R,caps))
+    assert satisfies(y,P,hard_flats) and cost==sum(max(0,(r&y).bit_count()-c) for r,c in zip(R,caps))
     return cost,y
