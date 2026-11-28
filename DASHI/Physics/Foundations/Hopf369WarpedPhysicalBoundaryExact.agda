@@ -1127,3 +1127,72 @@ module At {r : Level} (F : C.RealField r)
       - israelWallWork j q velocity p px m mx
       - longitudinalWallWork q velocity p m
       - scaleWallWork j velocity p m
+
+  ------------------------------------------------------------------------
+  -- BR40f: the EXISTING BR19 moving-graph material jump, now attached
+  -- to BR40b's differentiated physical source instead of being a
+  -- disconnected symbolic geometry calculation.
+  -- Original adapted wall point g=eta_5, n=unit normal; graphGrad_n=0.
+  -- Full 15 components, including harmonic normal-normal and mixed.
+  ------------------------------------------------------------------------
+
+  normalUnit : Cov
+  normalUnit normal = U
+  normalUnit (wall _) = O
+
+  tangentialGraphGradient : Vec → Cov
+  tangentialGraphGradient a (wall i) = a i
+  tangentialGraphGradient a normal = O
+
+  graphMaterialJump : S → Vec → Tensor → Tensor
+  graphMaterialJump j a p =
+    tab (λ i k →
+      two * j * get p i k
+      + j * h44 p * metric i k
+      + (three * three) * j * h44 p * normalUnit i * normalUnit k
+      - (three * two) * j *
+          (tangentialGraphGradient a i * normalUnit k
+           + normalUnit i * tangentialGraphGradient a k))
+
+  -- On a moving material wall, Q_material = Q_coordinate - f D_n Q_ref.
+  -- Preserve both the normal transport and the graph displacement f;
+  -- never identify a graph-fixed coordinate source with the original.
+  materialGoodUnknown : S → Tensor → Tensor → Tensor
+  materialGoodUnknown displacement coordinateJet sourceNormalJet =
+    subT coordinateJet (mulT displacement sourceNormalJet)
+
+  graphMaterialForcing : S → Vec → S →
+    Tensor → Tensor → Tensor → Tensor
+  graphMaterialForcing j grad displacement perturbation
+                       sourceNormalJet =
+    subT (graphMaterialJump j grad perturbation)
+         (mulT displacement sourceNormalJet)
+
+  record PhysicalMaterialWeld : Set r where
+    constructor physicalMaterialWeld
+    field
+      differentiatedRows : DifferentiatedPhysicalForcing
+      movingGraphSource : Tensor
+      originalMetricJet : Tensor
+  open PhysicalMaterialWeld public
+
+  physicalMovingWallWeld : S → Vec → S → Vec →
+    (Wall → Wall → S) → (Wall → Wall → S) →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov →
+    Vec → S → Tensor → PhysicalMaterialWeld
+  physicalMovingWallWeld j q dj dq M Mt p px m mx pt pxt mt mxt
+                         c cx d dx ct cxt dt dxt graphGrad displacement
+                         sourceNormalJet =
+    physicalMaterialWeld
+      (physicalTimeForcing j q dj dq M Mt p px m mx pt pxt mt mxt
+                           c cx d dx ct cxt dt dxt)
+      (graphMaterialForcing j graphGrad displacement p sourceNormalJet)
+      (materialGoodUnknown displacement p sourceNormalJet)
+
+  -- Original BR19/31 source geometry owns the material jump and graph
+  -- shape; the BR34 rows own the linearized reference boundary operator.
+  -- This record transports both but does not equate them without a
+  -- variable-background harmonic-source and gauge proof.
