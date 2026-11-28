@@ -710,3 +710,8 @@ Local SymPy 1.14.0 regression scripts/check_ns_r236_lattice_moments.py passed 26
 **Next proof cut:** actual finite Galerkin existence/invariance and source transport; signed cutoff-uniform critical-time budget (N2e or a new valid critical continuation criterion) and compactness; independent Euclidean A measure/continuation. C/D retain the existing nested ExternalClayNS direct source admission at pin f9e8bc5b38b6e212696e8a30e3e91517af887bbd, Lean 4.34.0-rc2; no new kernel admission or independent source validation claimed. Unforced breakdown is a separate candidate route requiring a literal nonzero continuum profile, verified coercivity and interval certificate. Any one valid Fefferman alternative suffices, not a simultaneous proof of incompatible outcomes.
 
 Current implementation and exact regression receipts: [consolidated Sections 6–9 and following](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md). Classical Galerkin/Leray, Waleffe and original external source attribution retained. No external or Clay acceptance.
+
+
+## Section 17 source-state update
+
+Lean #123 d04a2fff44d8 writes the literal zero-mode force, mean constancy on the same modal ODE, transverse Leray and Galerkin forcing and squared-radius dissipation tail inequality. The exact independent regression exercises projection including zero and tail controls (1012). Reality/divergence preservation along an actual trajectory, global physical existence and the cutoff-uniform critical budget remain open. Forced C/D admission runner 0c7b03758407 strengthens tracked-input and manifest checks; native replay still absent. Unforced profile/certificate still unavailable.
