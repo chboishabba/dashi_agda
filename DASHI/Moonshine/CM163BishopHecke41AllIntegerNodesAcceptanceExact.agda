@@ -9,7 +9,12 @@ import DASHI.Moonshine.CM163Hecke41FullIntegerMatrixExact as M
 import DASHI.Moonshine.CM163BishopHecke41AllIntegerNodesExact as Nodes
 import DASHI.Foundations.BishopConcreteElementaryCutsetExact as Concrete
 
+import DASHI.Moonshine.CM163BishopHecke41IntegerPrefixCertificateExact as Cert
+
 module N = Nodes.At Concrete.concreteCutset
+
+unit : N.R.L.W.UnitGate
+unit = from-yes Cert.unitCheck
 
 newton : M.NewtonGate M.C.j (M.elementaries M.C.j)
 newton = from-yes M.originalNewtonCheck
