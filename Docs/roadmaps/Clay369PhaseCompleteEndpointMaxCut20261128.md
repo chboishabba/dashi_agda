@@ -268,3 +268,67 @@ source was locally RUN at byte-identical Git blob; no GitHub CI.
 Original Navier–Stokes source and external original authors retain credit;
 DASHI owns the exact current signed physical countercontrol, correction,
 native reduction and acceptance wiring only.
+
+
+## Section 22 — all-Clay original-object maximum-cut, 28 November 2026
+
+Reconciliation at Agda #1551 e7123aa4e477, Lean #123 2764886670c3,
+#124 15d03799b68b, #121 f30d809efde6, Agda #1548 ba5aa62bf097,
+Lean #119 743e8e4dba72, Agda #1536 495b6e8ebbbb. Compare ahead/behind
+385/63, 142/259, 91/259, 41/259, 682/0, 482/0, 113/70224
+respectively. No wholesale divergent merge. All five non-YM lanes
+active; YM restricted to CMP102. Source-written is not kernel accepted.
+
+* NS: retire Section 20 finite continuation debt: actual_global_forward_finite_flow
+  in Synthesis/NavierStokesActualGlobalFiniteFlowExact.lean consumes
+  actual_physical_forward_extension, energyBall_compact and
+  reality_on_open_interval from the original energy ball owner.
+  R726 zero-defect and unrestricted R645 strict margin are refuted in
+  original physical semantics. Do not use either as a universal premise.
+  Direct target: cutoff-uniform signed fractional integral or critical
+  tail, then independently valid continuation criterion; whole-space
+  original kernel/measure and exterior weld separate. Forced C/D
+  original admission audit independent. Unforced actual nonzero profile,
+  weighted global form/adjoint and 15-field original certificate remain.
+* BSD: MillenniumBSDGeneralKummerCosetExact already writes general
+  geometric doubling, sameCoset, zero_iff_double, quotient_injective,
+  and general_originalKummerExactAtH1. Reuse local completion naturality;
+  exact Selmer/Sha comparison and any required Weil pairing are the
+  next arithmetic cut. Selected rank-four complex L''(E,1)=0 remains
+  independent of p-adic order four; universal analytic rank comparison
+  cannot be inferred from selected curves.
+* Hodge: MillenniumHodgeDicksonConeHomogeneousChartExact,
+  ConeComponentKernelExact, OriginalChartGeneratorExact already give
+  homogeneous numerator kernel, degreewise ideal and coordinate lifts.
+  Identify degree-zero localization with generated chart subring first;
+  prove full target generation separately (local denominators cannot be
+  assumed generated). Actual Proj/global cycle multiplicity/pushforward
+  and primitive cohomology comparison remain. Generic middle exterior
+  non-scalar algebraic endomorphism A=aI+bJ, b!=0 suffices to recover J,
+  not supplied by selected CM matrix. Universal primitive producer open.
+* RH: #121 existing pinned original admission, axiom parser and
+  universal xi/zeta BIDI; verify literal statements, source pin, kernel
+  and transitive axioms; no replacement proof required for this route.
+* PNP: use Section 26 of ClayPNPResidualGeometryForwardMaxCut20261128.md.
+  Actual DAG suffix retains bypass inputs; sparse renumber and sharing
+  cost, normalized candidate cross-kernel ABI, physical bit control
+  and original source universal progress remain. Blank sweep and full
+  state recurrence are scoped. Mandatory SAT-specific sharing-stable
+  potential or actual polynomial algorithm required, no communication
+  rank lower bound or chosen-cut refusal promotion.
+* YM CMP102 only: master Docs/support/reference/YMCMPWorkStatus.md
+  confirms variational authority and optional R367 route; direct R384/R385
+  does not require generic C-Lipschitz. For selected Path13 consumer
+  retain actual ordered signed body velocity, identify selected source
+  and common radius, recover log differential on invertible domain,
+  enclose actual selected nonflat operator. Comparison alone cannot
+  establish absolute localization (R386). Do not expand scope.
+
+Companion mathematical implementation and exact regression:
+scripts/check_clay_original_object_maxcut_20261128.py (finite controls),
+Docs/proofs/ClayOriginalObjectMaxCutWelds20261128.md (proof derivations).
+The proof target is original-object reconstruction, not new synthetic
+endpoint assumptions. No native kernel/CI claim. Default-branch direct
+fetch of several new owner paths returned 404; absence from search is
+not evidence of nonexistence elsewhere. Selective import reconciliation
+and actual native build still required.
