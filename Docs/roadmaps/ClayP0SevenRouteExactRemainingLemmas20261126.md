@@ -1780,3 +1780,8 @@ Receipt a2a7afda7e50; four new executed Python script blobs match live Git hashe
 
 ## 28 November — three-P0 geometry-forward consolidation
 See [residual geometry maximum cut](ClayPNPResidualGeometryForwardMaxCut20261128.md) for the source-derived order, anchored consumer quotient, materialized valuation resource bounds, owner reconciliation and exact remaining universal quantifiers. All three universal endpoints remain OPEN; native and full checkout verification pending.
+
+
+## Section 16 — actual bounded normal-fold ingress
+
+df5c56d56cc6 `scripts/check_pnp_normal_cubic_ingress.py` (blob dac4cccd5b55ac7b473223e91b5bde164800974f) passes 44/44 exact controls. Adds unique-lift equality copies to the previous seven-master connected cubic CNF. Actual full compiler and normal-fold files both Git-byte matched (fca3c0a72fc7 and 201c7a357ecd), with exact extracted dependency function slices. 53–58 Boolean variables, 602–612 clauses, 3 normal queries per run, 12 structured blocks, 9 phase leaves, no exceptions, all 12 offset comparisons match independent master-trit enumeration; 14821–18025 abstract work units. Width/work refusals checked; optimized execution refuses. Not a full transitive checkout replay and not an unrestricted width or physical bit-clock result. Existing native endpoint/epoch resource owners retained. See consolidated Section 16 in #1551.
