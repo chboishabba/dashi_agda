@@ -119,11 +119,11 @@ def lean_axioms_trusted(output: str, source: str) -> tuple[bool, str]:
     for declaration in requested:
         leaf = re.escape(declaration)
         matches = re.findall(
-            r"(?m)^\s*" + leaf +
-            r"\s+depends on axioms:\s*\[([^]]*)\]\s*$", output)
+            r"(?m)^\s*'?" + leaf +
+            r"'?\s+depends on axioms:\s*\[([^]]*)\]\s*$", output)
         empties = re.findall(
-            r"(?m)^\s*" + leaf +
-            r"\s+does not depend on any axioms\s*$", output)
+            r"(?m)^\s*'?" + leaf +
+            r"'?\s+does not depend on any axioms\s*$", output)
         if len(matches) + len(empties) != 1:
             return False, "missing/ambiguous axiom audit: " + declaration
         actual = {a.strip() for a in matches[0].split(",")
