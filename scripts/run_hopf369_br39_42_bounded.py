@@ -213,6 +213,8 @@ PARTS["terminal"].append(("BR216.selective_wall_weight","check_hopf369_br216_sel
 
 PARTS["terminal"].append(("BR217.regularized_inverse","check_hopf369_br217_regularized_inverse.py",()))
 
+PARTS["terminal"].append(("BR218.forced_boundary_lift","check_hopf369_br218_forced_boundary_lift.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

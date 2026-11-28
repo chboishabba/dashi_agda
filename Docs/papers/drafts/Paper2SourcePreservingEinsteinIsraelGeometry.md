@@ -816,3 +816,7 @@ Keeping the original rank-one resonant wall forcing while normalizing the eight 
 ### BR217 regularized boundary lift and wall shape
 
 The selectively weighted physical glancing matrix has five singular coordinate columns, all supported on the bulk polarization coordinates. Dividing those columns by u yields an analytic full-rank lift with a selected limiting determinant proportional to a=ku². Its exact image projector retains incompatible sources, and all nine wall-shape coordinates are regular. Integrating homogeneous decaying modes normally improves the squared bulk boundary amplitude cost k/gamma to sqrt(k)/gamma^(3/2), yielding quarter-order bulk L2 amplitude loss at fixed damping, with no glancing wall-shape loss. This is a homogeneous half-collar lift, not an interior-forced or curved resolvent. Local independent exact algebra passed; see roadmap section 52.
+
+### BR218 manufactured interior source attachment
+
+The original full exterior defect of a nonzero particular curvature field is retained in a two-sided half-collar construction. Subtracting its actual jump and reflected mean-curvature contribution allows exact recovery of the homogeneous five-polarization amplitudes on both sides and nine wall-shape coordinates, with all 44 boundary rows verified for two damped complex samples. This is a manufactured forced-solution audit, not a bounded arbitrary-source particular operator. BR30's existing projected periodic resolvent does not alone certify full exterior compatibility. See roadmap section 53.

@@ -5779,3 +5779,45 @@ signs passed, exit 0. Local script blob e54df0b7235b98fca6b618529bcbe42af3923c56
 includes independent driver, while committed entry uses
 original donor import and has not been replayed. No CI/native/
 PDE theorem acceptance. Terminal stage 38.
+
+
+## 53. BR218 — actual manufactured interior defect and compatible boundary correction
+
+Reuse BR27 actual Weyl/shape carrier, BR175 reflection, BR212
+complex null symbol and BR217 compatible image concept. BR30
+already owns the finite periodic projected 35+9 normal resolvent
+and energy identity, but its arbitrary projected forcing does not
+certify full exterior Bianchi compatibility. BR100–103 own the
+separate metric/gauge normal jet inverse, not this curvature lift.
+
+For k=100 and u=(1+sigma i)/20, tau=k sigma i(1-u²)/(1+u²),
+lambda=2ku/(1+u²), both real parts positive and lambda²=tau²+k².
+N=ker C(tau,ik,0,0,-lambda) is dimension five. Choose nonzero
+manufactured particular fields p exp(-y), q exp(-y) on reflected
+half collars. Full exterior defects are C(tau,ik,0,0,-1)p
+and C(tau,ik,0,0,-1)q, neither zero. The original unreflected
+minus source is obtained by tensor reflection and coordinate
+reversal, not identified componentwise with q's reflected source.
+The particular jump/mean source is (p-Fq,R(p+Fq)/2).
+Subtract this from prescribed 44-row boundary forcing and solve
+the remaining actual 19-column homogeneous matrix using independent
+rows and exact full residual check. Recover both five-polarization
+amplitudes and nine shape variables. Check homogeneous exterior
+kernel and projected evolution, original mean R N b, normal
+derivative contribution. Both signs passed independent local
+reconstruction with SymPy 1.14.0 under 90s cap.
+
+The new test manufactures forcing from known fields and amplitudes,
+and verifies exact recovery; not an arbitrary source existence
+theorem, not a uniform norm estimate. Uses direct selected minor,
+not BR217's frequency-uniform regularized inverse in this test.
+The actual analytic weld is a particular-solution operator for
+physically compatible full exterior sources, with trace control.
+On whole normal line, projected Fourier resolvent has Gram bound
+1/Re tau by BR27 self-adjointness, but extension of half-collar
+sources and exact exterior compatibility must be proved. Need
+source extension or intrinsic normal ODE, actual finite periodic
+two-ended constraint-compatible transmission, and curved estimates.
+No claim that BR30 projected resolvent automatically pays full
+Bianchi constraints. Other six lanes unchanged. Terminal stage 39.
+Original donor-import entry unrun. No CI/native/PDE acceptance.
