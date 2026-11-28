@@ -114,6 +114,23 @@ def cnf_solver(F,n,rows,target,cap,data_clock=None):
     return dict(z,reserved=cap,hall_units=q.get('units',()),hall_receipts=q.get('receipts',()))
 
 
+def guarded_clipped(F,n,cap):
+    from check_pnp_guarded_resolution_boundary import guarded,restrict_clause
+    if n<0 or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
+    B=Reservation(cap);anchor=(0,)*(n+1)
+    try:B.pay(1+3*n+sum(2+len(c) for c in F))
+    except Refused:return dict(status='UNKNOWN')
+    H,G=guarded(F,n);assert accepts(H,anchor)
+    R=tuple(r for c in G if (r:=restrict_clause(c,{n:1})) is not None)
+    assert R==tuple(map(norm,F))
+    q=cnf_solver(R,n,(),(),B.left)
+    if q['status']=='EMPTY':return dict(status='COMPLETE',count=1,witness=anchor,reserved=cap-B.left+q['reserved'])
+    if q['status']=='WITNESS':
+        x=q['witness']+(1,);assert accepts(G,x)
+        return dict(status='COMPLETE',count=2,witness=anchor,other=x,reserved=cap-B.left+q['reserved'])
+    return dict(status='UNKNOWN',witness=anchor,lower=1,upper=2,reserved=cap-B.left+q['reserved'])
+
+
 def projection(O,n,groups,cap):
     """Original tripartite incidence, no relaxation promoted to exact cover.
     Every column must have exactly one row in each given partition.
