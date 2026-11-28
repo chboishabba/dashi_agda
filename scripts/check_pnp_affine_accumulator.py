@@ -10,8 +10,8 @@ def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_s
     if n<0 or len(A)!=len(b) or len(H)!=len(t) or any(len(r)!=n for r in A+H) or any(not 1<=abs(l)<=n for c in F for l in c) or any(len(set(c))!=len(c) or any(not 0<=i<n for i in c) for c in O) or clip not in (None,2) or max_states<1:raise ValueError('source')
     p=tuple(range(n)) if permutation is None else tuple(permutation)
     if len(p)!=n or set(p)!=set(range(n)):raise ValueError('permutation')
-    B=Reservation(cap);peak=1;steps=0
-    def out(status,**kw):return dict(status=status,used=cap-B.left,peak=peak,steps=steps,**kw)
+    B=Reservation(cap);peak=1;observed_peak=1;steps=0;completed_layers=0;stop=None
+    def out(status,**kw):return dict(status=status,used=cap-B.left,peak=peak,observed_peak=observed_peak,completed_layers=completed_layers,stop=stop,steps=steps,**kw)
     def trim(m):return m if clip is None else min(2,m)
     try:
         B.pay(1+n+len(A)*(n+1));z,_=chart(tuple(tuple(r[j] for j in p) for r in A),b,n,B)
@@ -69,14 +69,17 @@ def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_s
                         B.pay(1+len(curC))
                         if any(not any(v+lo<=a<=v+hi for a in (0,1)) for i,v in zip(curC,cv) for lo,hi in (bounds[i,k],)):continue
                     key=(cv,tuple(fval.get(i,0) for i in curF));old,rep=N.get(key,(0,w|(bit<<j)));N[key]=(trim(old+mass),rep)
-                    if len(N)>max_states:raise Refused()
-            D=N;prevC,prevF=curC,curF;peak=max(peak,len(D))
+                    observed_peak=max(observed_peak,len(N))
+                    if len(N)>max_states:stop="state_cap";raise Refused()
+            D=N;prevC,prevF=curC,curF;peak=max(peak,len(D));completed_layers=k+1
             if not D:return out('EMPTY',count=0)
         mass,w=D.get(((),()),(0,0));assert mass
         B.pay(1+n*(n+1)+len(H)*(n+1)+sum(1+len(c) for c in F+O));x=tuple(int(a+sum(v*(w>>k&1) for k,v in s.items())) for a,s in C)
         assert all(v in (0,1) for v in x) and all(sum(v*y for v,y in zip(r,x))==s for r,s in zip(A,b)) and all(any(x[abs(l)-1]==int(l>0) for l in c) for c in F) and all(sum(v*y for v,y in zip(r,x))%3==s%3 for r,s in zip(H,t)) and all(sum(x[i] for i in c)==1 for c in O)
         return out('WITNESS',count=mass,witness=x,free=len(J))
-    except Refused:return out('UNKNOWN')
+    except Refused:
+        if stop is None:stop='logical_cap'
+        return out('UNKNOWN')
 
 
 def main():
