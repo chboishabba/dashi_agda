@@ -1,0 +1,17 @@
+BR268-272 local rerun, all five parts exit 0. Source blob 6bf3f5e0be64db624ccf7c6e2b8c8c7c731ae142 matches commit d6a208da0ae7eb2944c2445251213518f14aecd7.
+OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br268_273_endpoint.py --part atomic/g4/analytic/history/material.
+BR268 exact 64-entry exterior-square inverse; subtract authenticated Coulomb first; unknown radial scale not inferred
+BR269 curved-frame stress/primitive weld 1.3322676295501878e-15 margin 0.5430074038855699 24 fixtures; no York or coupled evolution
+BR272 finite zero-jet recursion fixture; analytic uniqueness requires actual noncharacteristic analytic solution
+BR240 11 dt 0.03 gauge initial 1.1102230246251565e-16 final 0.012547764760561908 common cube gauge 0.012547764760561908 change 0.05150032454289766 center radius squared 1.0966956440975162 horizontal volume 1.0955367979636126
+BR271 actual history KK reopen/reflection 0.0 fixed-arrow chronology/reflection residual 0.14566491487036368
+PASS: exact 27x108 continuity, invertible 27-charge map, 54-to-24 boundary rank 24 + residual 30, work adjoint; SymPy 1.14.0
+surface: 54 patches, weak rank 26 nullity 28 face rank 24
+BR240 11 dt 0.03 gauge initial 1.1102230246251565e-16 final 0.012547764760561908 common cube gauge 0.012547764760561908 change 0.05150032454289766 center radius squared 1.0966956440975162 horizontal volume 1.0955367979636126
+BR270 spacetime assembly margin 0.9999999999999999 shift 0.0 cross 0.0
+BR270 spacetime assembly margin 0.9968024582682598 shift 0.002874401921989907 cross 0.01337681871518339
+BR270 spacetime assembly margin 0.993622361711704 shift 0.0057010152302353475 cross 0.026623665081129542
+BR270 spacetime assembly margin 0.9905064491313612 shift 0.008432816060683556 cross 0.03961201841443875
+BR270 spacetime assembly margin 0.9874906600676779 shift 0.011025160471026443 cross 0.05221692056389721
+BR241 11 steps 4 max residual 2.842170943040401e-14 Hodge change 0.10960540384234087 volume change 0.0025144942914644692 Hodge work -4.132420294619121e-05 volume work 0.012728088496095632
+Scope: BR270 original fixed-circle induced spacetime metric, candidate Hamiltonian assembled with original P0AG sign convention, no independent Maxwell sign or stress variation acceptance. BR271 fixed increment is an affine marked arrow, not an autonomous physical solver or evidence of reflection symmetry breaking. BR272 finite ODE recursion fixture, not full PDE proof. No BR273 executed, no native/CI/continuum/physical promotion.
