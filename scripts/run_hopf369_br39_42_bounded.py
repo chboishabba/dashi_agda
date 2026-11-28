@@ -227,6 +227,8 @@ PARTS["terminal"].append(("BR223.regular_complement","check_hopf369_br223_regula
 
 PARTS["terminal"].append(("BR224.composed_energy","check_hopf369_br224_composed_energy.py",()))
 
+PARTS["terminal"] += [(f"BR225229.{p}","check_hopf369_br225_229_endpoint_welds.py",("--part",p)) for p in ("periodic","g3","g4","material","atomic")]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

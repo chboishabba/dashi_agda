@@ -844,3 +844,7 @@ A common nonsingular rank-25 constraint minor at both glancing endpoints gives a
 ### BR224 composed finite-collar energy
 
 A direct two-ended homogeneous trace estimate in the positive bulk Gram norm combined with the original signed energy gives a quarter-order jump-source upper bound for the combined energy norm at fixed positive damping on the high-frequency glancing ray, retaining the algebraic endpoint source trace. No multiplication of separate particular and homogeneous lifting losses is needed. Twelve manufactured interior/boundary numerical cases passed locally. This is an a priori estimate for existing compatible solutions, not geometric source surjectivity or curved existence. See roadmap section 59.
+
+### BR225–229 whole-programme endpoint reconciliation
+
+The curved exterior source identity, original G3 complex initial coefficient budget, general magnetized stiff-EOS inverse, evolving-volume material storage law and complete selected n=2 interacting operator have standalone exact local checks. These lanes are independent of periodic glancing closure. See controlling roadmap section 60 for remaining geometric admissibility, exterior, dynamical generation, native history and source-action obligations. No new continuum, calibration or kernel promotion.

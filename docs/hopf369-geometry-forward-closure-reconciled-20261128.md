@@ -6124,3 +6124,155 @@ max bound ratio .012137977835937263. Exit 0 under 90s cap.
 Committed driver uses original donor imports; not replayed.
 No arbitrary-source or curved continuum solve or CI/native
 acceptance. Terminal stage 45 registered.
+
+
+## 60. CONTROLLING whole-programme cut after BR224 (supersedes narrow priorities)
+
+Source reconciliation: #1554 parent 1ce653ab4737bad97bdc83deeeb2a53311679c70; master
+fad22a838ab8324d863bc1d683c8135c3be1bef1; #1291
+c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04; #1217
+09166d57a3cb13b6e298d53bc56b55bbb4601402; #1547
+8bbe4afd0ce878c8b89446a47f2a061486f5f2ed; #1545
+ab583022e81b604556348648c221e5c39cd7d607; #1536
+4ed50d3c3623192a705f5802c0135756deb7e852. All PRs open.
+Reverse comparison #1554 HEAD...master: master 42 ahead,
+Hopf 465 ahead; 34 returned changed paths, none matching
+Hopf/F8/Monster/atomic/cube/RMHD names. Targeted audit, not
+complete rebase or proof replay. F8 latest roadmap blob
+12340668b7f1d3ea0c9350c6b9a1382909ae7636 and actual Ward
+connector blob 542007acd0fefdfed9920f185233bbb004607e38:
+H0,H1 plus actual normal2/PDE caps give H7, no independent
+H2..H7 premise. Three-grid original diagnostic is negative
+for certified convergence: fourth normal derivative enclosure
+still unpaid. Monster roadmap 84858fdc182f66ab730d0fe7ee01ab2ebb2668db:
+A-C literal K-linear action/projector/word custody and source
+character equality remain, not a new abstract Hom theorem.
+No sibling PR mutation or CI.
+
+Seven-lane dependency plan. Do not serialize the other six lanes
+behind the periodic problem. Each endpoint requires forward and
+reverse constructors and explicit non-descent at missing premises.
+
+1. Periodic W0-W7: BR219-224 provide the compatible constant-
+coefficient finite-collar operator and quarter-order jump-source
+a priori estimate on the damped glancing ray. Do not reopen these
+as absent. BR225 verifies noncommuting covariant exterior identity
+d_D² W=[F_D wedge W] in all five four-index components, with 250
+derivative commutator checks, using endomorphism-valued fields.
+For an actual induced connection, the same identity is universal;
+the curved source constraint is not flat CKf=qf. Differentiating
+a genuine solution produces f_alpha=[D^alpha,C]W (plus differentiated
+physical source), and its compatibility must be derived from this
+identity with curvature and connection terms retained. W1/W4:
+use BR205/207 tangent/normal covariance and a common adapted wall
+connection; homogeneous differentiated jump if D_ad J=0, j fixed,
+and common source is transported; extrinsic connection difference
+is explicit forcing in ambient derivative. Need actual same-source
+nonlinear D/E equality, BN corner hierarchy W0, and construct
+solutions with propagated constraints rather than presume image
+membership. W2/W3: global variable-coefficient localized tame
+estimate across all frequencies, not just fixed damping ray;
+W5: weighted exterior and moment reconstruction BR31/57;
+W6: derivative-loss-aware generation with actual compatibility;
+W7: donor-import + native acceptance. Stop isolated frozen minor
+refinements unless a specific global weld requires them.
+
+2. Atomic BR229: actual BR187 radial/Gaunt antisymmetrized n=2
+Coulomb operator, 28 states, exact eigenvalues 21/128 (9),
+237/1280 (5), (47±sqrt(241))/256 (one each), 17/128 (9),
+49/256 (3). Positive definite, compressed pp spectrum matches
+BR156. Combined original BR172 Cartesian H, spherical chart,
+exterior-square lift, axial and time reversal identities pass.
+Standalone reconstruction, not original BR187 donor import.
+Selected operator constructed and exact algebra locally checked;
+next parameter inverse with marked radial scale/sign and
+independent calibration; beyond-shell CI/SCF is a stronger grade.
+No element identification from shell dimensions alone.
+
+3. G3 BR226: original P0T/V normalized Newton bound 8 eps²/9
+at eps=1/4 gives real 1<=psi<=18/17. BR189 complex radial disk
+bounds normalized f by 729/697 above, 665/697 below; r² holomorphic
+even radial series extends on complex l1 ball <=1/2. BR193 graph
+metric/inverse bound 31/3 gives ||g0||inf,||g0^-1||inf<16.
+Use lapse1, shift0, K=0, harmonic first jets g00,t=0,
+g0i,t=h^jk(d_j h_ki-d_i h_jk/2), gij,t=0.
+Cauchy on inner l1 ball 1/4 gives first metric jets <=64,
+harmonic shift <=6144. State U=(g,g_t,g_i), 90 slots (circle
+invariant, 3 active spatial derivatives), U0 cap8192; derivative
+cap65536 on l1<=1/8. Component perturbation eta=1/8192 gives
+inverse norm<18, |g^00|>1/2 by Neumann bound. Classical harmonic
+Ricci principal wave: lower terms obtained by setting second
+jets zero in R_ab-nabla_(a C_b); derivative inverse cap
+25*18²*8193, Christoffel cap (15/2)*18*8193, products bounded
+by the conservative sums in checker. First-order coefficients
+and shifted-source bound <2^100. With complex coordinate
+polydisk rho=1/24 and each state perturbation <=eta,
+Cauchy coefficient majorant feeds P0V/BR188 scalar PDE
+w_t(1-z/rho-nw/eta)=c(1+3n w_z). Implicit quadratic
+(1-z/rho)w-Aw²/2=ct, A=n(3/rho+1/eta), gives explicit
+conditional t0=3/(32Ac) on half-radius. This is a conservative
+central-patch coefficient budget, not a useful lifespan for
+the entire noncompact domain, a PDE execution or formal proof.
+Need verify reduced-equation source conventions in actual
+evolution, constraints via harmonic subsidiary, uniform patch
+and real proper-time histories, then global continuation only
+if required. Preserve P0V5 KK helicity acceleration vs ideal
+conservation; do not conflate G3 and G4.
+
+4. G4 BR227: use P0T actual rho,j for arbitrary velocity and B,
+EOS e-p=C, b=|B|², q=(e+p)Gamma², split j parallel/perp.
+v_parallel=j_parallel/q, v_perp=j_perp/(q+b).
+Phi(q)=q+|j_parallel|²/q+|j_perp|²/(q+b)=2rho-C-b.
+Phi'=1-v². Enthalpy w=q(1-v²) has w'=1-v²-q(v²)' >0
+on admissible branch; v² nonincreasing, w unbounded.
+Demand q>0,w>|C| for positive e,p; relaxed boundary only if
+explicitly intended. This defines an upper interval (q_min,infty).
+Unique admissible root iff energy target exceeds lim Phi(q_min+).
+At B=0 use entire j in parallel term (or b=0 sum), no projection
+division by zero. Jacobian in q,v is q(q+b)^2(1-v²)/2,
+in p,v is q(q+b)^2. This is a full primitive inverse, not a
+parallel-only local discriminant. Next: actual conservative
+evolution, metric/York coupling, positive enthalpy/speed margins
+and weighted relative energy (not a new inverse theorem).
+
+5. Hyperfabric: checked actual GovernedIndexedResidualCubeExact
+blob 42b70ebb7376813076934f2245ce6011b76f10c8 and original marked
+cube c53c75161ce5801b1c52eb4696d1d67fe08e3e00. Existing exact
+chart faces are valid interface shapes; no assertion they are
+physical-time commutation. Follow existing independent index
+(History Time Depth Frob Version). Actual physical history
+must supply source/target states and readout update; retain two
+chronology/reflection residual faces if not equal. No inference
+from spectral advance to time. Native new attachment planned
+with actual dynamic arrows; no kernel available locally.
+
+6. Monster: #1545 source has actual finite-field generator gate
+and modular projective Sym² transport. Gate's rank-one Hom case
+is sufficient, not necessary when nullity>1; do not mislabel
+uncertified search as nonexistence. Original marked manifest,
+generator word correspondence and A-C characteristic-zero
+action/projector inhabitants remain; reuse literal Weyl frame,
+projected character and ordinary gauge formal path. No fabricated
+source matrices or word map. BR153 fixed-free selected weight-two
+trace0 excludes trace54 equivalence on that actual carrier.
+Alternative correct source representation remains a separate task.
+
+7. Material BR228: P0AG 54-patch incidence, field Hodge and
+reciprocal midpoint map unchanged. For varying volume v0,v1,
+E(n1,v1)-E(n0,v0)=log(n1/v1)(n1-n0) -
+[n0 log(n0/n1)-n0+n1] -n0 log(v1/v0).
+Add signed volume work to existing symmetric-Hodge midpoint
+metric work, keep source-positive amount and conservative
+same-current update. Need actual time-dependent Hodge/volume
+history from G3/G4, source-aware material evolution, continuum
+refinement and independent receiver calibration. Prescribed
+history comparator is not dynamical metric evidence.
+
+New local exact standalone script
+scripts/check_hopf369_br225_229_endpoint_welds.py, executed
+five parts under 90s each, exit zero. Local blob
+61324ed30facdf3e1a137a9548f86b1f4a65608d. Local receipt
+Artifacts/hopf369/br225_229_local_receipt_20261128.txt.
+These checks are separate from original donor import and native
+acceptance. Five stages added to terminal runner. No continuum
+or empirical claim. All files remain committed with work.
