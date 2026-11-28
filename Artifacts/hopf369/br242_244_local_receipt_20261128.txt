@@ -1,0 +1,12 @@
+BR242-244 local execution; both commands exit 0 under timeout 90s, OPENBLAS_NUM_THREADS=1.
+Exact local Git blobs match committed sources:
+2c5f14387b27a8481ce7d033dfdcdc041ef58d12 check_hopf369_br242_244_constraint_history.py
+b2a2b9e7e2edc00f9643d0e7247f1829436a93d7 check_hopf369_br240_metric_history.py
+
+BR242 PASS 12 arbitrary Lorentzian circle-invariant metric jets; reduced residual 1.494637746901617e-14 principal residual 2.7755575615628914e-16 gauge residual 9.71445146547012e-16
+BR243 11 dt 0.03 initial (Hamiltonian,momentum,gauge,reduced) (0.18302260893204397, 0.0, 1.232595164407831e-32, 1.6653345369377348e-16) final (0.10482524775206203, 4.721506137665087e-16, 0.01005197733677729, 1.609823385706477e-15) common sampled gauge 0.012547764760561906
+BR243 17 dt 0.02 initial (Hamiltonian,momentum,gauge,reduced) (0.09164783528255846, 0.0, 0.0, 8.881784197001252e-16) final (0.04609790129370662, 6.1512410634705305e-18, 0.0051619535827636676, 6.661338147750939e-16) common sampled gauge 0.0061348865143957204
+BR243 23 dt 0.013333333333333332 initial (Hamiltonian,momentum,gauge,reduced) (0.052621219388701845, 0.0, 4.930380657631324e-32, 7.28583859910259e-16) final (0.025217818571321826, 4.7727015235867804e-14, 0.0030000472235263698, 5.14518982974721e-15) common sampled gauge 0.0035981846322555135
+BR244 common physical samples intergrid metric differences 0.014357118258124302 0.007648770483700246 ratio 0.532751095741098 gauge [0.012547764760561906, 0.0061348865143957204, 0.0035981846322555135]
+BR244 finite diagnostics completed; no continuum convergence certificate
+Hamiltonian/momentum measured at origin only, not whole region. Gauge and metric on common 125 samples. No CI/native proof.
