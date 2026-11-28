@@ -1143,3 +1143,8 @@ Lean #15 2f1f58f30b6f writes actual unit quaternion left/right tangent norm isom
 ## Section 18 — actual signed bond curve
 
 Lean #15 711fa9bdf761 consumes the one-parameter quaternion exponential derivative for q exp(tH) and exp(-tH)q*. At zero the actual signed velocities are qH and -Hq*, with unit bond norm isometry. Full noncommuting derivative, chosen Path13 identification and CMP102 enclosure remain open. Eight symbolic first-order coordinate controls, native kernel pending.
+
+
+## Section 19 — actual noncommutative word velocity
+
+Lean #15 595945568544 differentiates the actual ordered signed quaternion word at zero, retains product order, and bounds its velocity by the sum of bond direction norms. 128 exact product-rule insertion controls. Actual selected Path13 word identity, full logarithmic differential and nonflat CMP102 enclosure remain open; native elaboration pending.
