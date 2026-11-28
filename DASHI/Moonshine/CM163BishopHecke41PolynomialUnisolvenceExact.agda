@@ -6,7 +6,8 @@ module DASHI.Moonshine.CM163BishopHecke41PolynomialUnisolvenceExact where
 -- there is NEVER division by the evaluation coordinate at a root.
 -- Distinct-node apartness is needed only in the finite root induction.
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Fin.Base as Fin using (Fin)
+open import Data.Fin.Base as Fin using (Fin; toℕ)
+open import Data.Nat.Base using (_∸_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Data.Unit.Base using (⊤; tt)
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
@@ -21,6 +22,7 @@ import DASHI.Moonshine.CM163BishopHecke41ActualCrossExact as Cross
 import DASHI.Moonshine.CM163BishopHeckeProductAlgebraExact as Alg
 import DASHI.Moonshine.CM163BishopHecke41ProductExact as Prod
 import DASHI.Moonshine.CM163BishopHecke41ComplexPacketShiftExact as Shift
+import DASHI.Moonshine.CM163BishopHecke41FormalCyclotomicNormExact as N
 open C using (BishopComplex; _≈C_)
 open A using (_+C_; _-C_; _*C_)
 open Comp using (complexTrans; complexSym)
@@ -117,7 +119,7 @@ zeroEverywhere : ∀ {n} (p : Row n) (z : Fin n → BishopComplex) →
   Apart z → (∀ i → eval p (z i) ≈C A.zeroC) →
   ∀ x → eval p x ≈C A.zeroC
 zeroEverywhere nil z apart roots x = C.≈C-refl _
-zeroEverywhere (cons a p) z (apart , later) roots x =
+zeroEverywhere {suc n} (cons a p) z (apart , later) roots x =
   let r = z Fin.zero
       f = cons a p
       q = quotient r f
@@ -130,7 +132,7 @@ zeroEverywhere (cons a p) z (apart , later) roots x =
             (complexTrans (A.subCCongruent (roots (Fin.suc i)) (roots Fin.zero))
               (complexTrans (J.sameSub A.zeroC)
                 (complexSym (L.complexMultiplyRightZero w)))))
-      qZero = zeroEverywhere q (λ i → z (Fin.suc i)) later tailRoots x
+      qZero = zeroEverywhere {n} q (λ i → z (Fin.suc i)) later tailRoots x
       difference = complexTrans (quotientRead r f x)
         (complexTrans (A.mulCCongruent (C.≈C-refl _) qZero)
           (L.complexMultiplyRightZero (x -C r)))
@@ -185,3 +187,34 @@ productRead : ∀ {n} (f : Fin n → BishopComplex) x →
 productRead {zero} f x = singleRead A.oneC x
 productRead {suc n} f x = complexTrans (linearRead (f Fin.zero) _ x)
   (A.mulCCongruent (C.≈C-refl _) (productRead (λ i → f (Fin.suc i)) x))
+
+-- A descending Fin-indexed coefficient enumeration is converted to
+-- the same ascending Horner carrier, with its degree preserved.
+monomial : ∀ n → BishopComplex → Row (suc n)
+monomial zero a = cons a nil
+monomial (suc n) a = cons A.zeroC (monomial n a)
+
+monomialRead : ∀ n a x →
+  eval (monomial n a) x ≈C (a *C A.powC x n)
+monomialRead zero a x = complexTrans (singleRead a x)
+  (complexSym (L.complexMultiplyRightIdentity a))
+monomialRead (suc n) a x =
+  complexTrans (L.complexAddLeftIdentity _)
+    (complexTrans (A.mulCCongruent (C.≈C-refl _) (monomialRead n a x))
+      (commuteInner x a (A.powC x n)))
+
+descending : ∀ {n} → (Fin n → BishopComplex) → Row n
+descending {zero} f = nil
+descending {suc n} f =
+  add (monomial n (f Fin.zero)) (pad (descending (λ i → f (Fin.suc i))))
+
+descendingRead : ∀ {n} (f : Fin n → BishopComplex) x →
+  eval (descending f) x ≈C
+    N.sumC (λ i → f i *C A.powC x (n ∸ suc (toℕ i)))
+descendingRead {zero} f x = C.≈C-refl _
+descendingRead {suc n} f x =
+  complexTrans (addRead (monomial n (f Fin.zero))
+    (pad (descending (λ i → f (Fin.suc i)))) x)
+    (A.addCCongruent (monomialRead n (f Fin.zero) x)
+      (complexTrans (padRead (descending (λ i → f (Fin.suc i))) x)
+        (descendingRead (λ i → f (Fin.suc i)) x)))
