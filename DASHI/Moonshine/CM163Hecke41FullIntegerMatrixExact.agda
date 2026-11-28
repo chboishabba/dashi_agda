@@ -8,7 +8,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Nat.Base using (_∸_)
 open import Data.Integer.Base as Z using (ℤ; +_)
 open import Data.List.Base using (List; []; _∷_; _++_)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Relation.Nullary using (Dec)
 import Data.Integer.Properties as ZP
 import Data.Nat.Properties as NP
@@ -131,3 +131,42 @@ PacketGate c = Through 84 (λ n → diagonal c n ≡ originalD n) ×
   ... | no _ = + 0
   originalS : SeriesZ
   originalS n = Q.numerator (Shift.coeff (42 ∸ n) Packet.slice)
+
+
+-- Exact executable decisions for the canonical matrix, separately
+-- from analytic rigidity and without reducing them on every import.
+newtonDec : ∀ j es → Dec (NewtonGate j es)
+newtonDec j es = decThrough 40 _ (λ k → decThrough 41 _ (λ n →
+  ZP._≟_ (Z._*_ (+ (suc k)) (row es (suc k) n)) (newton j es (suc k) n)))
+
+columnDec : ∀ j es c → Dec (ColumnGate j es c)
+columnDec j es c = decThrough 42 _ (λ y → decThrough 42 _ (λ n →
+  ZP._≟_ (coeff es y n) (sum (suc n) (λ i →
+    Z._*_ (c (42 ∸ i) y) (power j (42 ∸ i) (n ∸ i))))))
+
+symmetryDec : ∀ c → Dec (SymmetryGate c)
+symmetryDec c = decThrough 42 _ (λ x → decThrough 42 _ (λ y → ZP._≟_ (c x y) (c y x)))
+
+packetDiagonalZ : SeriesZ
+packetDiagonalZ n with n NP.≤? 82
+... | yes _ = Q.numerator (Shift.coeff (82 ∸ n) Packet.diagonal)
+... | no _ = + 0
+
+packetSliceZ : SeriesZ
+packetSliceZ n = Q.numerator (Shift.coeff (42 ∸ n) Packet.slice)
+
+packetDec : ∀ c → Dec (PacketGate c)
+packetDec c with decThrough 84 _ (λ n → ZP._≟_ (diagonal c n) (packetDiagonalZ n))
+               | decThrough 42 _ (λ n → ZP._≟_ (slice c n) (packetSliceZ n))
+... | yes d | yes s = yes (d , s)
+... | no d | _ = no (λ h → d (proj₁ h))
+... | yes d | no s = no (λ h → s (proj₂ h))
+
+originalMatrix : Nat → Nat → ℤ
+originalMatrix = candidate C.j
+
+originalSymmetryCheck : Dec (SymmetryGate originalMatrix)
+originalSymmetryCheck = symmetryDec originalMatrix
+
+originalPacketCheck : Dec (PacketGate originalMatrix)
+originalPacketCheck = packetDec originalMatrix
