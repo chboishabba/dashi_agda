@@ -17,7 +17,7 @@ def bump(t):
     return np.exp(1-1/(1-x*x)) if abs(x)<1 else 0.
 
 
-def evolve(k,ci,cells=512,final=1.2):
+def evolve(k,ci,cells=512,final=1.2,sample_n=None):
     if not 1<final<=1.2:raise ValueError('short causal slab only')
     n=np.linspace(0,.5,cells+1);dn=n[1];steps=int(np.ceil((final-1)/(.3*dn)));dt=(final-1)/steps
     k=np.asarray(k)[:,None];ci=np.asarray(ci); y=np.zeros((3,len(k),len(n)))
@@ -44,7 +44,18 @@ def evolve(k,ci,cells=512,final=1.2):
     for t in times[:-1]:
         a=rhs(t,y);b=rhs(t+dt/2,y+dt*a/2);c=rhs(t+dt/2,y+dt*b/2);d=rhs(t+dt,y+dt*c)
         y+=dt*(a+2*b+2*c+d)/6;hist.append(obs(t+dt,y))
-    mass,flux,h,ht,outer=map(np.array,zip(*hist));return times,mass,flux,h,ht,outer
+    mass,flux,h,ht,outer=map(np.array,zip(*hist))
+    if sample_n is None:return times,mass,flux,h,ht,outer
+    # Actual final interior history jets at fixed GN time and normal.
+    from scipy.interpolate import CubicSpline
+    if not 0<sample_n<.5:raise ValueError('interior sample only')
+    enforce(final,y);a,c,N,Nn=geo(final);U,R,L=y;W=(R+L)/2;V=(R-L)/2
+    Wn=CubicSpline(n,W,axis=1)(sample_n,1);Vn=CubicSpline(n,V,axis=1)(sample_n,1)
+    get=lambda arr:CubicSpline(n,arr,axis=-1)(sample_n)
+    U0,W0,V0=map(get,(U,W,V));aa,cc,NN,NNn=map(get,(a,c,N,Nn));Nt=NN*(aa/cc-final/np.sqrt(1+final*final))/np.sqrt(1+final*final)
+    Wt=NN*Vn+(NNn-3*NN*cc/aa)*V0-3*NN/aa*W0-NN*k[:,0]**2/aa**2*U0
+    gn=np.stack((U0,NN*W0,V0,Nt*W0+NN*Wt,NNn*W0+NN*Wn,Vn),axis=1)
+    return times,mass,flux,h,ht,outer,gn
 
 
 def run(cutoff=80,nodes=12,cells=512):
