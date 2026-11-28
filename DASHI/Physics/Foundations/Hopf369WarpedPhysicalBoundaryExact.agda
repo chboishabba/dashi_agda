@@ -3053,12 +3053,6 @@ module At {r : Level} (F : C.RealField r)
           (originalMinusMetric d) (originalMinusNormal d) a b
           + originalBR66MeanShapePayment d a b))
 
-  originalBR71MetricRows : Allocation →
-    OriginalBR66MeanSource → List S
-  originalBR71MetricRows a d =
-    originalBR71MetricPrefix d ++
-      originalBR71MetricSuffix a d
-
   originalBR71MetricSuffix : Allocation →
     OriginalBR66MeanSource → List S
   originalBR71MetricSuffix D d =
@@ -3090,6 +3084,12 @@ module At {r : Level} (F : C.RealField r)
       (originalReferenceIsraelJump d) (originalTangentialJet d)
       (originalPlusMetric d) (originalPlusNormal d)
       (originalMinusMetric d) (originalMinusNormal d) ∷ []
+
+  originalBR71MetricRows : Allocation →
+    OriginalBR66MeanSource → List S
+  originalBR71MetricRows a d =
+    originalBR71MetricPrefix d ++
+      originalBR71MetricSuffix a d
 
   originalBR71GaugeRows : Allocation →
     S → (Wall → Wall → S) → Vec →
