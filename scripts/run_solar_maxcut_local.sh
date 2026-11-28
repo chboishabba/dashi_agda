@@ -22,13 +22,15 @@ for entry in \
   check_solar_common_atlas_sympy.py \
   check_solar_common_atlas_native.py \
   check_solar_support_transition_native.py \
+  check_solar_amplitude_event.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
   check_solar_rational_reflection_box.py \
   check_solar_spherical_material_atlas.py \
   check_solar_spherical_reverse_integration.py \
-  check_solar_spherical_reverse_atlas.py; do
+  check_solar_spherical_reverse_atlas.py \
+  check_solar_spherical_quadratic_path.py; do
   if [[ ! -f "$entry" ]]; then
     echo "MISSING_SOURCE: $entry" >&2
     exit 2
