@@ -5529,3 +5529,33 @@ SymPy 1.14.0. This standalone flat exterior calculation has no
 repository donor imports. No curved trace estimate, coupled
 nonlinear generation, native kernel or complete runner acceptance.
 Terminal stage 31 registered. Other lanes unchanged. No CI.
+
+
+## 46. BR211 — actual static complex-null boundary exclusion
+
+BR210's exterior-only packet is not enough to infer a full Weyl/Israel
+obstruction. Use the original BR27 carrier and BR175 reflection.
+Complex covector (0,i,0,0,-1) is null, although temporal frequency
+is zero; its full exterior kernel N has dimension 5, and projected
+evolution (i A1-A4)N=0. Reflected minus kernel is F N at opposite
+decay sign. For plus/reflected minus sum/difference amplitudes a,b
+in C^5, and full shape m in C^9, the actual jump matrix is
+T=[(I-F)N,(I+F)N,-j J], j=-6/5. Its rank is 19, both parity
+images rank 5, and the 19-column kernel is zero even before the
+wall equation. The independent local exact minor on zero-based
+rows 2,5,7,10,11,14,15,16,18,19,20,22,23,24,25,29,32,33,34
+has determinant 20639121408 i / 1953125 in the local basis.
+The Gram determinant is 425973332494163902464/30517578125.
+All k>0 have the same normalized static jump matrix. Additional
+wall equation sample rows at k=1,2,10 retain full rank; jump
+alone proves injectivity for all static k. This is not a uniform
+estimate in nonstatic frequency or at glancing. Normalized complex
+null basis may become ill-conditioned there; need uniform physical
+stable-subspace estimate or explicit loss. BR44/56 differentiated
+energy rates remain conditional and BR82 chart loss cannot be
+discarded. Next: nonstatic complex-null frequency and glancing
+limits, quantitative inhomogeneous estimates and curved transfer.
+Independent local reconstruction of BR27/175 carrier ran under
+90s cap, exact SymPy 1.14.0, exit 0. Original donor import unrun.
+Terminal stage 32 registered. Other lanes unchanged. No CI/native/
+continuum acceptance.

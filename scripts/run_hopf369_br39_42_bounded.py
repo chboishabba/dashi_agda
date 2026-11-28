@@ -199,6 +199,8 @@ PARTS["terminal"].append(("BR209.bianchi_energy","check_hopf369_br209_bianchi_en
 
 PARTS["terminal"].append(("BR210.collar_trace","check_hopf369_br210_collar_trace.py",()))
 
+PARTS["terminal"].append(("BR211.static_evanescent","check_hopf369_br211_static_evanescent.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
