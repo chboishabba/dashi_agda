@@ -4,7 +4,7 @@ module DASHI.Moonshine.JInvariantBishopRamanujanDeltaDiskConvergenceExact where
 -- choose a larger Bishop radius rho<1. The finite-prefix recurrence
 -- bound at rho gives a geometric absolute majorant at r. No eta
 -- product identity or global j-invariance is used by this construction.
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Agda.Builtin.Nat as Nat
 import Data.Nat.Properties as NP
 open import Data.Product.Base using (_,_; proj₁; proj₂)
@@ -50,15 +50,15 @@ prefixBelow : ∀ f → (∀ n → R.NonNegative (f n)) →
   R._≤_ (Seq.SeriesOf f count) (Seq.lim cv)
 prefixBelow f nn cv count =
   let s = Seq.SeriesOf f
-      shifted = λ index → s (index + count)
+      shifted = λ index → s (index Nat.+ count)
       sub : Seq._SubsequenceOf_ shifted s
-      sub = Seq.subseq* ((λ index → index + count) , (λ _ → P.≃-refl) ,
-        (λ index → NP.n<1+n (index + count)))
+      sub = Seq.subseq* ((λ index → index Nat.+ count) , (λ _ → P.≃-refl) ,
+        (λ index → NP.n<1+n (index Nat.+ count)))
       cs = s count , Power.constantConverges (s count)
       vs = Seq.lim cv , Seq.xₙ⊆yₙ∧yₙ→y⇒xₙ→y sub cv
   in Seq.xₙ≤yₙ⇒limxₙ≤limyₙ
     (λ index → Seq.isIncreasing⇒isIncreasing₂
-      (FiniteOrder.partialSumsIncreasing nn) (index + count) count (NP.m≤n+m count index))
+      (FiniteOrder.partialSumsIncreasing nn) (index Nat.+ count) count (NP.m≤n+m count index))
     cs vs
 
 sigmaEnvelope : ∀ n → R._≤_ (NR.natReal (24 Nat.* Div.sigma1 (suc n)))
