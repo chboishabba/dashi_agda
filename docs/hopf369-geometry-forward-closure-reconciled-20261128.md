@@ -5354,3 +5354,29 @@ Remaining curved weld: actual Hamilton flow and observer/boost terms,
 source-compatible curved constraints, trace loss and coupled wall
 estimate, then W0/W5/W6/W7. No new nonlinear existence or other
 lane completion. Terminal stage 25 registered. No CI.
+
+
+## 40. BR204 — signed null boost and normalized covector transport
+
+Actual BR27 carrier, BR202 P and BR203 induced bivector generator.
+P_sigma=(I+sigma A)P/2 has rank five. For infinitesimal boost b
+acting on covector (sigma,n), normalize the temporal component:
+dot n_sigma=sigma(b-(b.n)n). On each signed branch F=P_sigma,
+the exact geometric tangency identity is (I-F) Omega F=dot F F.
+Boosts are G-self-adjoint, unlike spatial rotations. For a unit
+axis boost Omega satisfies Omega(Omega²-I)(Omega²-4I)=0.
+Thus ||Omega(b)||_G<=2|b| by spatial rotation covariance,
+and the instantaneous component energy contribution is bounded
+by 4|b| E for E=||W||_G²/2. No claim of positive norm invariance
+under boosts. Do not replace signed null transport by commutator
+transport of the sum P when the two normalized directions differ.
+For a fixed sign, tangency shows no leakage on an exactly
+transported null branch; actual curved evolution still needs
+Hamilton flow, lower-order source matching and boundary trace.
+
+Local independent source formula reconstruction exit 0, 32 signed
+axis cases, positive Gram boost polynomial. The exact local
+reconstruction driver is committed alongside the checker;
+original donor import entry and complete runner remain unrun.
+Terminal stage 26. No CI/native/PDE acceptance.
+Other lanes unchanged; this is not complete programme closure.
