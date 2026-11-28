@@ -53,7 +53,7 @@ module At (inputs : Round11.BishopCutset) where
     zeroPrefix : R.L.W.UnitGate → Gate → F.S.S.PrefixGate
     zeroPrefix hu hn = F.zeroPrefix hu hn
 
-    poleRemoved : N.B.UnitGate → Gate → ∀ p →
+    poleRemoved : R.L.W.UnitGate → Gate → ∀ p →
       C._≈C_ (F.S.S.residual p)
         (A._*C_ (R.A0.A0.t p) (Eval.value (F.S.S.tail p)))
     poleRemoved hu hn = F.poleRemoved hu hn
