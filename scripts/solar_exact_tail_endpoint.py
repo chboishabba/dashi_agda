@@ -5,7 +5,7 @@ from fractions import Fraction as F
 from solar_event_rounding import q,sqrt_interval
 from solar_tail_dyadic import ceil_div
 from solar_material_interval import exact_material_prefix
-from solar_exact_tail_policy import certify_policy
+from solar_exact_tail_policy import certify_policy,rate_bounds
 from solar_spherical_geometry import geometry
 
 
@@ -63,6 +63,19 @@ def exact_endpoint(material,cfg,powers=(48,64,80),bits=256,atol=None):
         result['status']='EXACT_ORIGINAL_MATERIAL_RETURN_NOT_ADMITTED';return result
     if any(q(v)!=0 for v in cfg['kinetics']['ionization_s_inv']) or min(map(q,cfg['kinetics']['recombination_m3_s']))<=0:
         result['status']='BIRTH_FREE_TAIL_NOT_ADMITTED';return result
+    rows,neutral,D,gyro,axis=material
+    # The field-energy bound is licensed only on passive original stages.
+    # Verify the original collision domain throughout the exact prefix,
+    # not merely the final thermal interval.
+    import numpy as np
+    _,_,ne,_=geometry(cfg['radii_m'],cfg['angular_level'],int(cfg.get('nested_depth',0)))
+    L=list(map(q,cfg['load_rate_s_inv']));edge=int(cfg['source_edge']);p=q(cfg['source_coupling_sqrt_inv_s'])
+    if len(L)!=ne or min(L)<0 or not 0<=edge<ne or p<=0 or not np.isfinite(gyro).all() or not np.isfinite(axis).all():
+        raise ValueError('nonpassive prefix chart')
+    for step in prefix['history']:
+        for i,row in enumerate(rows):
+            lo,hi=rate_bounds(row,neutral[i],F(step['mid_temperature'][i][1]))
+            if min(lo)<=0:raise ValueError('prefix collision damping not admitted')
     policy=certify_policy(material,cfg,prefix['population_support'],prefix['electron_upper'],prefix['temperature_upper'],powers,bits)
     result['tail_policy']=policy
     if not policy['conditional_tail_decay_proved']:
@@ -74,6 +87,33 @@ def exact_endpoint(material,cfg,powers=(48,64,80),bits=256,atol=None):
     # Exact passive event and port identities, zero initial storage and exact
     # asymptotic restoration: incident is an upper bound on net work. The
     # crude lower bound credits no useful output or future chemical recovery.
-    result['asymptotic_net_interval_J']=[str(-paid_hi-aux),str(incident-aux)]
+    h=q(float(cfg['period_s'])/len(cfg['incident_sqrt_W']));inc=q(cfg['incident_sqrt_W'][0])
+    mid=h*inc*p/(1+h*(L[edge]+p*p)/2)
+    first_work=h*L[edge]*mid*mid
+    direct=F(prefix['field_energy_upper_J'])-paid_lo+q(cfg['kinetics']['chemical_recovery_efficiency'])*F(prefix['terminal_formation_J'][1])-aux
+    upper=min(incident-aux,direct)
+    result['asymptotic_net_interval_J']=[str(first_work-paid_hi-aux),str(upper)]
+    result['first_receiver_work_lower_J']=str(first_work)
+    result['all_nonnegative_loads_fixed_heat_upper_J']=str(upper)
+    result['upper_scope']='fixed exact material and heating, any nonnegative receiver loads with admitted source-off continuation' 
     if atol is not None:result['finite_tolerance']=tolerance_clock(prefix,policy,material,cfg,vol,atol)
     return result
+
+
+def compare_fixed_heat(material,cfg,budget,powers=(64,),bits=256):
+    """Compare one fixed active heating path against a passive witness.
+    The active upper covers all nonnegative load layouts, NOT all heat paths.
+    Shared source, clock, terminal receiver and load budget are retained.
+    """
+    import numpy as np
+    B=q(budget)
+    for loads in (cfg['load_rate_s_inv'],cfg.get('terminal_load_rate_s_inv',cfg['load_rate_s_inv'])):
+        if B<0 or any(q(v)<0 for v in loads) or sum(map(q,loads),F(0))>B:raise ValueError('shared receiver budget exceeded')
+    a=exact_endpoint(material,cfg,powers,bits)
+    b=exact_endpoint(material,dict(cfg,heating_W=np.zeros_like(cfg['heating_W'])),powers,bits)
+    if not (a['exact_finite_split_asymptotic_return'] and b['exact_finite_split_asymptotic_return']):
+        return dict(active=a,passive=b,comparison_admitted=False,physical_admission=False)
+    upper=F(a['all_nonnegative_loads_fixed_heat_upper_J']);lower=F(b['asymptotic_net_interval_J'][0]);gap=upper-lower
+    return dict(active=a,passive=b,comparison_admitted=True,active_upper_J=str(upper),passive_lower_J=str(lower),
+        active_minus_passive_upper_J=str(gap),fixed_heat_active_dominated=gap<0,
+        all_active_heat_paths_compared=False,physical_admission=False)
