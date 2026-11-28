@@ -139,3 +139,66 @@ originalOddShortOne X =
          (Κ 1ℚᵘ ⊕ ((Κ (+ 2 / 1) ⊗ x) ⊗ b))
           ⊕ ((x ⊗ x) ⊗ Κ 0ℚᵘ))
        P.≃-refl X b)
+
+
+-- The entire original odd source row is now paid by a SINGLE
+-- weighted Cauchy degree/power lemma for all n, including both
+-- exceptional endpoints. This is the actual Bishop SeriesOf count,
+-- not a shifted surrogate or a scalarized trace.
+originalOddShortFromWeightedCauchy :
+  ∀ X n → OddWeightedCauchy X → originalOddShort X n
+originalOddShortFromWeightedCauchy X zero weighted =
+  originalOddShortZero X
+originalOddShortFromWeightedCauchy X (suc zero) weighted =
+  originalOddShortOne X
+originalOddShortFromWeightedCauchy X (suc (suc n)) weighted =
+  let
+    B = G.bPrefix X (suc n)
+    b = W.bTerm X (suc n)
+    tri = T.originalBLowTriangle X (suc (suc n))
+    q = Row.cauchyCoefficient (W.bTerm X) (W.bTerm X) n
+    open P.ℝ-Solver
+  in
+  P.≃-trans
+    (P.+-cong
+      (originalOddShortFromWeightedCauchy X (suc n) weighted)
+      (originalOddHigherTerm X n weighted))
+    (P.≃-trans
+      (solve 5
+        (λ x B b tri q →
+          ((Κ 1ℚᵘ ⊕ ((Κ (+ 2 / 1) ⊗ x) ⊗ B))
+            ⊕ ((x ⊗ x) ⊗ tri))
+           ⊕ (((Κ (+ 2 / 1) ⊗ x) ⊗ b)
+            ⊕ ((x ⊗ x) ⊗ q))
+          ⊜
+          ((Κ 1ℚᵘ ⊕ ((Κ (+ 2 / 1) ⊗ x) ⊗ (B ⊕ b)))
+            ⊕ ((x ⊗ x) ⊗ (tri ⊕ q))))
+        P.≃-refl X B b tri q)
+      (P.+-cong
+        (P.+-congʳ R.1ℝ
+          (P.*-congˡ P.≃-refl))
+        (P.*-congˡ
+          (P.≃-symm (FinSum.finSumSuccessor
+            (Row.cauchyCoefficient (W.bTerm X) (W.bTerm X)) n)))))
+
+-- The original desired row in Section32 uses B_(n+1)-last term.
+-- That is the same source as B_n by the LITERAL SeriesOf successor.
+originalOddFinRowFromWeightedCauchy :
+  ∀ X n → OddWeightedCauchy X → O.originalOddFinRow X n
+originalOddFinRowFromWeightedCauchy X n weighted =
+  let
+    B = G.bPrefix X n
+    b = W.bTerm X n
+    tri = T.originalBLowTriangle X (suc n)
+    open P.ℝ-Solver
+  in P.≃-trans
+    (originalOddShortFromWeightedCauchy X n weighted)
+    (solve 4
+      (λ x B b tri →
+        ((Κ 1ℚᵘ ⊕ ((Κ (+ 2 / 1) ⊗ x) ⊗ B))
+          ⊕ ((x ⊗ x) ⊗ tri))
+        ⊜
+        ((Κ 1ℚᵘ ⊕
+          ((Κ (+ 2 / 1) ⊗ x) ⊗ ((B ⊕ b) ⊖ b)))
+          ⊕ ((x ⊗ x) ⊗ tri)))
+      P.≃-refl X B b tri)
