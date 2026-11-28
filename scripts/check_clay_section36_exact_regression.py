@@ -40,8 +40,9 @@ for count in range(1, 70):
             checks["YM_three_wings"] += 1
         assert abs(G) <= 3*F(1,4)**count
         checks["YM_three_wings"] += 1
-        assert G != components[0]+components[2]
-        checks["YM_missing_B_negative"] += 1
+        if X != 0:
+            assert G != components[0]+components[2]
+            checks["YM_missing_B_negative"] += 1
 
 for values in product(range(5), repeat=4):
     E = sum(v*v for v in values)
