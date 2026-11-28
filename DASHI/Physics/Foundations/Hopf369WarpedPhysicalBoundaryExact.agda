@@ -2428,3 +2428,77 @@ module At {r : Level} (F : C.RealField r)
   -- BR34 reference Israel block is shown to equal this BR61 Fréchet
   -- after physical graph, gauge, coordinate, density and normal
   -- transport, it cannot be labelled a solved boundary condition.
+
+  ------------------------------------------------------------------------
+  -- BR62: ORIGINAL ten Israel rows -> FOUR wall Codazzi source slots.
+  --
+  -- For physical tangential covector q, the signed wall constraint is
+  -- D_q(T)_b = q^a T_ab - q_b trace_eta(T).
+  -- At q !=0 this is a rank-four map Sym²(R^4)->R^4, leaving SIX
+  -- original shear/trace degrees; for q=0 it is rank zero.
+  -- BR62's exact rational source checker supplies both null q²=0
+  -- and non-null reverse solves, WITHOUT any inverse of q².
+  ------------------------------------------------------------------------
+
+  originalIsraelCodazziSymbol : Vec →
+    (Wall → Wall → S) → Vec
+  originalIsraelCodazziSymbol q j b =
+    sum4 (λ a → sign a * q a * j a b)
+       - q b * trace4 j
+
+  record OriginalCodazziWallSource : Set r where
+    constructor originalCodazziWallSource
+    field
+      originalTensorSource : Wall → Wall → S
+      originalTangentialFrequency : Vec
+      originalIsraelGradient : Vec
+      originalRicciNormalJump : Vec
+      originalConnectionCorrection : Vec
+      unpaidCodazziResidual : Vec
+  open OriginalCodazziWallSource public
+
+  originalCodazziSourceResidual : OriginalCodazziWallSource → Vec
+  originalCodazziSourceResidual d b =
+    originalIsraelCodazziSymbol
+      (originalTangentialFrequency d)
+      (originalTensorSource d) b
+      - three * originalIsraelGradient d b
+      - originalRicciNormalJump d b
+      - originalConnectionCorrection d b
+
+  record OriginalCodazziFactorizationCertificate
+      (d : OriginalCodazziWallSource) : Set r where
+    constructor originalCodazziFactorizationCertificate
+    field
+      allFourWallSources :
+        (b : Wall) → originalCodazziSourceResidual d b ≡ O
+  open OriginalCodazziFactorizationCertificate public
+
+  -- This source owner has no false rank-four claim at q=0:
+  -- a certified inverse must choose a NONZERO coordinate of q,
+  -- or explicitly retain the independent zero-frequency constraint.
+  record OriginalNonzeroTangentialPivot (q : Vec) : Set r where
+    constructor originalNonzeroTangentialPivot
+    field
+      pivot : Wall
+      pivotReciprocal : Reciprocal (q pivot)
+  open OriginalNonzeroTangentialPivot public
+
+  record OriginalIsraelCodazziRightInverse
+      (q target : Vec) : Set r where
+    constructor originalIsraelCodazziRightInverse
+    field
+      actualTenWallSource : Wall → Wall → S
+      sourceSymmetric :
+        (a b : Wall) →
+          actualTenWallSource a b ≡ actualTenWallSource b a
+      fourSourceRightInverse :
+        (b : Wall) →
+          originalIsraelCodazziSymbol q actualTenWallSource b ≡ target b
+  open OriginalIsraelCodazziRightInverse public
+
+  -- At nonzero frequency the actual 10-row Israel system has four
+  -- constrained Codazzi directions and six free physical wall
+  -- directions. Existence is NOT proved by this record: it requires
+  -- a right-inverse constructor, source-specific Bianchi factorization
+  -- and compatible BR58/BR61 metric, gauge and graph jets.
