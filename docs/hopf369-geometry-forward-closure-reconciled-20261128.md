@@ -5127,3 +5127,34 @@ Run BR178–180 and BR181–185 locally, 90s cap per stage,
 original dependency byte verification and recorded outputs.
 No new local PASS, kernel, CI, nonlinear existence, or
 empirical acceptance. No sibling modifications.
+
+
+## 34. BR186 — actual interacting shell source attachment
+
+Historical #886 script paths at its closed head return 404;
+both recovered on master with exact previously recorded blobs:
+atomic_369_p2_coulomb_exact.py 28093e07e4c8e661a27ea4eb76ef412372aea3b3,
+atomic_369_manybody_c3_hamiltonian.py 762a66e0f7c8d5bc0484e083cc433f4cf718fac6.
+BR156 already supplies the full spin 15-state p-p Coulomb
+matrix, so use that actual constructor, not another generic lift.
+BR172 atomic() now returns H,Jz,U,parameters after its original
+checks (f587ea3c16e406f6bbfe92649015dba35dcc10c8).
+BR186 scripts/check_hopf369_br186_interacting_shell.py
+(a7122e7f47ea6e9a024636c454429b530963de21) embeds the
+actual magnetic p-shell in BR172 Cartesian spin basis, with
+Condon-Shortley phases, verifies Jz labels and wedge isometry,
+and builds dGamma(H)+W V W^H on 28 states. Tests Hermiticity,
+axial commutation, two-electron time reversal and donor recovery.
+The two-electron antiunitary squares to +I, not -I.
+Only p-p ERIs included: s-containing direct/exchange and
+configuration mixing ERIs remain, plus physical units/calibration.
+Do not label this full CI. All new checks pending execution.
+
+P0T/P0V source reopened, exact existing primitive Jacobian
+w gamma^2 (w gamma^2+b^2)^2 and analytic majorant retained.
+GovernedIndexedResidualCubeExact reopened; exact six-face
+witness and independent indices already constructed. Need actual
+marked observation instance, not another generic cube.
+Other terminal targets from section 33 remain. No new
+G3/G4 evolution, Monster transport or receiver implementation.
+No native kernel, CI service, local execution, or empirical claim.
