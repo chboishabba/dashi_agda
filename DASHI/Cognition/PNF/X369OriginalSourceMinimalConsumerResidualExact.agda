@@ -59,6 +59,29 @@ module OriginalConsumerResidual
     actualSourceConsumerSufficient u =
       sourceReadoutStable u
 
+    -- A source collision may only become visible after a DELAYED
+    -- chronological original input word. Since the repaired observer
+    -- preserves ALL finite futures by the original existing theorem,
+    -- the already-owned fibre repair lemma forces a distinct retained
+    -- residual for every such delayed original source separator.
+    futureTraceSufficient :
+      (word : List Input) →
+      Descent.ConsumerSufficient repairedObserver
+        (Future.trace actualLearnedStep actualSourceReadout word)
+    futureTraceSufficient word x y same =
+      originalEveryFiniteFuture word x y same
+
+    originalDelayedCollisionMustRetainResidual :
+      (word : List Input) →
+      (w : Descent.ConsumerNonDescentWitness
+          originalCoarseGeometry
+          (Future.trace actualLearnedStep actualSourceReadout word)) →
+      retainedConsumerResidual (Descent.left w) ≡
+      retainedConsumerResidual (Descent.right w) → ⊥
+    originalDelayedCollisionMustRetainResidual word witness =
+      Repair.refinementRepairSeparatesWitness witness
+        (futureTraceSufficient word)
+
     -- A witnessed collision of the COARSE source chart and a consumer
     -- necessarily lives in different retained residual fibres.
     -- Exactly the existing ConsumerFibreRepairExact theorem.
