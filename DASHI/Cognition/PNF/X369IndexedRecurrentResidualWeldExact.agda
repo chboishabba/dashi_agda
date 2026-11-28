@@ -59,11 +59,11 @@ module IndexedSource
     chart (reopen x r k) ≡ x
   splitBidi x r k = refl
 
-  residualBidi : (x : Full) (r : Residual) (k : index) →
+  residualBidi : (x : Full) (r : Residual) (k : Index) →
     residual (reopen x r k) ≡ r
   residualBidi x r k = refl
 
-  indexBidi : (x : Full) (r : Residual) (k : index) →
+  indexBidi : (x : Full) (r : Residual) (k : Index) →
     sourceIndex (reopen x r k) ≡ k
   indexBidi x r k = refl
 
@@ -137,11 +137,10 @@ module IndexedSource
         trans : ∀ {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
         trans refl p = p
 
--- Deliberately not instantiated to source neural bytes: source-specific
--- chart and state splitting, plus native observation/transition squares,
--- are required before a quotient can be asserted. Indexed six-face data
--- come from GovernedIndexedResidualCubeExact; they do not follow from
--- this BIDI alone.
+  -- Deliberately not instantiated to source neural bytes: source-specific
+  -- chart and state splitting, plus native observation/transition squares,
+  -- are required before a quotient can be asserted. Indexed six-face data
+  -- come from GovernedIndexedResidualCubeExact; BIDI alone is insufficient.
 
   module ResidualNecessity
     {Output : Set}
