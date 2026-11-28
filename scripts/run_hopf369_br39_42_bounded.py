@@ -225,6 +225,8 @@ PARTS["terminal"].append(("BR222.intrinsic_particular","check_hopf369_br222_intr
 
 PARTS["terminal"].append(("BR223.regular_complement","check_hopf369_br223_regular_complement.py",()))
 
+PARTS["terminal"].append(("BR224.composed_energy","check_hopf369_br224_composed_energy.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

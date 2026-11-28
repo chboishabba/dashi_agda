@@ -840,3 +840,7 @@ The normal DAE has an exact rank-ten physical spectral projector and a rank-25 a
 ### BR223 regular algebraic complement
 
 A common nonsingular rank-25 constraint minor at both glancing endpoints gives a regular graph parametrization of the ten-dimensional physical kernel. The reduced normal evolution squares to the scalar normal-root square, and has rank five at glancing. The regular complement eliminates the polynomial-projector pole in algebraic reconstruction and yields a bounded intrinsic particular L2 lift along fixed-positive-damping glancing rays by stable Green integration. Source admissibility and full boundary correction estimates remain separate. Local independent exact checks passed; see roadmap section 58.
+
+### BR224 composed finite-collar energy
+
+A direct two-ended homogeneous trace estimate in the positive bulk Gram norm combined with the original signed energy gives a quarter-order jump-source upper bound for the combined energy norm at fixed positive damping on the high-frequency glancing ray, retaining the algebraic endpoint source trace. No multiplication of separate particular and homogeneous lifting losses is needed. Twelve manufactured interior/boundary numerical cases passed locally. This is an a priori estimate for existing compatible solutions, not geometric source surjectivity or curved existence. See roadmap section 59.

@@ -6076,3 +6076,51 @@ and no sharp full forced bound or curved transfer is claimed.
 Local independent br223.py executed under timeout 90, exit 0,
 SymPy 1.14.0. Committed original donor-import driver unrun.
 Terminal stage 44. Other lanes unchanged. No CI/native/PDE acceptance.
+
+
+## 59. BR224 — composed finite-collar energy, without multiplying lift losses
+
+For an existing BR220/223/221 compatible flat finite-interval
+solution W=Wpart+Wh, write Wh=p exp(-lambda y)+q exp(-lambda(L-y)),
+r=Re lambda, rL>=3. The diagonal normal integral is
+(1-exp(-2rL))/(2r), while the cross integral is bounded by
+L exp(-rL). Their difference is at least 1/(4r):
+for x>=3, x exp(-x)<=3 exp(-3)<0.15, and
+(1-exp(-2x))/2>0.49. Thus ||Wh||² >=
+(||p||_G²+||q||_G²)/(4r), and
+||mean Wh||_G <= 3 sqrt(r)||Wh||_L2G.
+No conditioning of polarization bases is involved.
+
+Set E=int ||W||_G²+c||m||_H², c=-3j,
+Jd=||G^(-1/2) S f_J|| (dual G norm), d=projected interior
+forcing, fw=original wall forcing. BR221 signed identity and
+the triangle inequality give gamma E <= A0 sqrt(E)+B0,
+A0=||d||_L2G+sqrt(c)||fw||_H+3 sqrt(r) Jd,
+B0=(3 sqrt(r)||Wpart||_L2G+||mean Wpart||_G) Jd.
+Therefore sqrt(E)<=A0/gamma+sqrt(B0/gamma).
+BR223 at fixed positive damping on a compact interval gives
+||Wpart||=O(1)||f|| and ||mean Wpart||<=
+O(k^1/4)||f||+O(k^-1)||f_endpoint||.
+Since r=O(sqrt(k)), the full combined energy norm is bounded
+by C (||f||+||fw||+k^1/4 Jd+
+sqrt(k^-1 ||f_endpoint|| Jd)), using Young on the mixed term.
+This does not add the separate particular trace and boundary
+lift losses. The homogeneous-jump bound retains no derivative
+loss in the combined energy. This is an a priori estimate for
+existing compatible solutions, on the specified axial damped
+ray, not surjectivity or a sharp lower bound. The algebraic
+source trace term must be retained. General frequency coverage,
+actual geometric source admissibility, curved commutators and
+nonlinear iteration remain open; other lanes unchanged.
+
+Local /tmp/hopf211/br224.py with independent original carrier
+and BR220 symbols, NumPy 256-node Gauss quadrature, 12 cases,
+both signs, gamma=.5,2 and k=100,1000,10000. Manufactured
+affine interior fields and compatible manufactured boundary
+forcing; SVD physical modes and actual least-squares correction.
+All trace and energy inequalities pass. Max relative energy
+residual 1.485154249656112e-13, boundary 2.825390147389197e-15,
+max bound ratio .012137977835937263. Exit 0 under 90s cap.
+Committed driver uses original donor imports; not replayed.
+No arbitrary-source or curved continuum solve or CI/native
+acceptance. Terminal stage 45 registered.
