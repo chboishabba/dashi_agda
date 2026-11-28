@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–63 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–64 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -61,6 +61,8 @@ PARTS={
     ("BR63.eta","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","reference")),
     ("BR63.moving","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","moving")),
     ("BR63.null","check_hopf369_br63_nonlinear_israel_inverse.py",("--part","source")),
+    ("BR64.bidi","check_hopf369_br64_full_israel_optical_bidi.py",("--part","bidi")),
+    ("BR64.negative","check_hopf369_br64_full_israel_optical_bidi.py",("--part","negative")),
   ],
   "heavy":[
     *[(f"BR60.K.{i}","check_hopf369_br60_moving_israel_frechet.py",("--part","component","--index",str(i))) for i in range(10)],
@@ -159,7 +161,7 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64"}]
     else:
         plans=PARTS[args.part]
     outcome={}
