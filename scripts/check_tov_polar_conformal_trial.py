@@ -57,7 +57,7 @@ def run(coef,n,ell,Rmax,exact_exterior=False):
     T1=TR*U+Tj*Up; V1=VR*U
     T2=TRR*U*U+2*TRj*U*Up+Tjj*Up*Up+2*d*L*U*U/ri**2
     V2=VRR*U*U
-    S=np.zeros_like(r); S[inside]=2*np.pi*(T1+V1)
+    S=np.zeros_like(r); S[inside]=(T1+V1)
     # Ground-state solve chi=N v; weak form with angular potential.
     shape=np.array([(1-t)/2,(1+t)/2]); deriv=np.array([-1,1])[:,None,None]/dr
     rows=[];cols=[];vals=[];rhs=np.zeros(len(nodes))
