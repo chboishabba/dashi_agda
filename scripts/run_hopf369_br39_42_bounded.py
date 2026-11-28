@@ -249,6 +249,8 @@ PARTS["terminal"] += [("BR266.sbp","check_hopf369_br266_sbp.py",()),("BR267.inco
 
 PARTS["terminal"] += [(f"BR268272.{p}","check_hopf369_br268_273_endpoint.py",("--part",p)) for p in ("atomic","g4","material","history","analytic")]
 
+PARTS["terminal"] += [("BR273274.reciprocal","check_hopf369_br273_276_reciprocal.py",()),("BR275.atomic","check_hopf369_br275_atomic_marked.py",())]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
