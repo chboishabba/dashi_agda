@@ -36,5 +36,4 @@ def main():
     print('PASS polar York trace-free form, flat dipole translation control, maximal lapse bound V>-1/10')
     print('OPEN source norm and global physical York domain, spatial Hessian, moving junction and nonlinear continuation')
 
-
 if __name__=='__main__':main()
