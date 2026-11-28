@@ -49,7 +49,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
     dpop=np.zeros_like(pop);dpool=np.zeros_like(pool)
     dtheta=np.zeros_like(theta);dx=np.zeros_like(x)
     pop2=np.zeros_like(pop);pool2=np.zeros_like(pool);x2=np.zeros_like(x)
-    elapsed=0.; arrival_history=None; ledger2=[]
+    elapsed=0.; arrival_history=np.full((3,len(x)),np.inf); ledger2=[]
     def energy2():
         return float(x@x2+dx@dx/2+cap@dtheta+np.einsum('is,i,s->',dpop,vol,chem))
     start=(x.copy(),pop.copy(),pool.copy(),theta.copy())
@@ -96,6 +96,22 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                         if abs(terms.sum())>1e-9*max(1e-30,np.sum(abs(terms))):
                             raise ArithmeticError('second coefficient event energy mismatch')
                         event_kinetic2+=k2
+                        # Each event is local on the original cell. Newly reached
+                        # coefficients require an inherited coordinate or actual
+                        # nonzero birth momentum in the relevant order.
+                        root_masks=[(created>0),(pnew==0)&(da>0),
+                                    (created>0)|(da!=0)|(a2!=0)]
+                        root_tags=[]
+                        for order,state in enumerate((z,dz,z2)):
+                            mask=(np.asarray(state)!=0)&~np.isfinite(arrival_history[order,sl])
+                            for loc in np.flatnonzero(mask):
+                                inherited=bool(np.any(np.isfinite(arrival_history[:order,sl][:,loc])))
+                                born=bool(root_masks[order][loc//3] and birth[i,loc//3,loc%3]!=0)
+                                if not (inherited or born):
+                                    raise ValueError('unlicensed local event current coefficient')
+                                arrival_history[order,sl][loc]=elapsed
+                                root_tags.append(dict(order=order,coordinate=int(sl.start+loc),
+                                    kind='local_birth_momentum' if born else 'local_inherited_coefficient'))
                         q2_before=amplitude2(old,oldd,pop2[i])
                         pop2[i]=pop2[i]-r2+a2;pool2[i]=pp2;x2[sl]=z2
                         q2_residual=amplitude2(pnew,dpnew,pop2[i])-q2_before
@@ -110,6 +126,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                         signed_tangent_residual=lift['signed_tangent_residual'].tolist()))
                     if quadratic_second_order:
                         indexed_events[-1]['signed_coefficient2_residual']=q2_residual.tolist()
+                        indexed_events[-1]['reach_roots']=root_tags
                     pop_right[i]=pr;pool_right[i]=rr
                 else:
                     (z,pnew,kinetics),(dz,dpnew)=event_jvp(
@@ -167,7 +184,9 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                 jet2=(x2,H2,np.zeros_like(x))
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
                 dict(collision=model['loss'],load=L,source=source),port,inc,
-                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas,right_limit=right_limit,jet2=jet2)
+                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas,right_limit=right_limit,jet2=jet2,
+                reach_seed=arrival_history if quadratic_second_order else None,
+                clock_start=elapsed if quadratic_second_order else 0.)
             dx=np.asarray(receipt['state_jvp'],float)
             em=np.asarray(receipt['local_midpoint'][:ne],float)
             dem=np.asarray(receipt['local_midpoint_jvp'][:ne],float)
@@ -193,11 +212,10 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
                     field_loss=receipt['coefficient2_loss_J'],outgoing=outgoing2,useful=useful_step2,
                     collision=collision2,bath=float(bath2),event_kinetic=event_kinetic2.tolist(),
                     formation=dformed,recombination=dremoved_energy,absorbed=absorbed2,balance=balance2))
-                # Store stage-local reach in the absolute campaign clock;
-                # inherited nonzero states are not evidence of fresh injection.
+                # The native scheduler now consumes inherited absolute reaches;
+                # only explicit source roots and local birth events seed new reach.
                 local=[receipt['arrival_s'],receipt['directional_arrival_s'],receipt['coefficient2_arrival_s']]
-                absolute=np.array([[np.inf if a is None else elapsed+a for a in row] for row in local])
-                arrival_history=absolute if arrival_history is None else np.minimum(arrival_history,absolute)
+                arrival_history=np.array([[np.inf if a is None else a for a in row] for row in local])
                 if cfg.get('retain_jet_history',False):
                     transport_receipts.append(dict(time=[cycle_index,index],clock_start_s=elapsed,
                         earliest_recorded_s=[[None if not np.isfinite(a) else float(a) for a in row] for row in arrival_history],
@@ -238,5 +256,6 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quad
         population_pool_u2=(pop2,pool2) if quadratic_second_order else None,
         indexed_jet_history=transport_receipts,
         coefficient2_energy_ledger=ledger2,
+        campaign_discrete_reach_checked=bool(quadratic_second_order),
         global_causal_cone_admitted=False,
         scope=('one-sided quadratic control path, finite velocity; not an unrestricted density gradient' if quadratic_amplitude_path else 'fixed topology, positive population; not strict restored-net gate'))
