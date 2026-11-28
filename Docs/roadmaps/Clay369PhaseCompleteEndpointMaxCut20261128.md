@@ -2979,3 +2979,126 @@ RH: actual trusted independent original Riemann hypothesis proof and pinned nati
 PNP: original unrestricted SAT sharing-stable unavoidable INTERNAL machine work or full costed polynomial algorithm, real bit/read/control R1 semantics and legitimate universal quantification across algorithms; preterminal observation witness is not a runtime lower bound.
 
 All source-written theorem declarations are PENDING_KERNEL until actually run. No GitHub CI, native Agda or Lean execution in this tranche. All new work is saved in commits and exact owner paths for user execution.
+
+
+## Section 39 — original six-Clay geometric maximum cut, true signed Cauchy witness and all-cutoff single radius (28 November 2026)
+
+### Provenance: everything remains committed on original owner PRs
+
+At closing source audit, owner branches and heads were:
+- YM Agda #1536, `agent/ym-p0-cmp119-r445-master-weld-20261121` at `bb1c34eb2f89db777edc13d1d24947c2cf28be31`;
+- NS Lean #123, `research/ns-native-proof-weld-20261127` at `4051705b306d6050128b9e3881383993f1b217ae`;
+- BSD/Hodge Lean #124, `research/clay-bsd-hodge-moment-orientation-20261127` at `51315075a689ea28776df4667239d1f38a6defa6`;
+- PNP Lean #119, `research/clay-p0-polynomial-coverage-endpoint-20261124` at `b7f2d8c15d036b147ae952b4f1d7cb2aa6b20315`;
+- RH Lean #121, `fix/alpoge-original-admission-axiom-log-20261126` at `aa6b0323d25acb7de3f85187e801939de40039d8`;
+- canonical all-Clay Agda #1551, `research/clay-four-p0-rollup-20261124`, at `13d5afaa673b7bbeab927511e40392f93ae01370` BEFORE this roadmap append.
+
+All theorem sources, acceptance roots and exact checker source are saved in the above branches and were committed before documentation. No local source file is the artifact of record. We have no pinned Agda/Lean executables in the local container; native checks are **UNRUN**, source theorem bodies are **PENDING_KERNEL**. Neither a finite test nor a theorem declaration means that a Millennium problem is solved.
+
+### YM — original omitted B wing proved on FULL signed Bishop magnitude, two genuine outer wings left
+
+Original source already owned the exact five-term G-prefix, the all-count signed triangle identity, shifted Cauchy wings at true c-1/c-2, original factorial coefficient ceilings and original count-zero Bishop rate. Section38 paid only `2*b_n<=1/3` for actual b_n.
+
+NEW Agda owner #1536:
+- `DASHI/Physics/YangMills/YMClayCMP102OriginalOmittedBPositiveWingExact.agda`, commit `37cdbe9d507652a30d3c547a76f50435a91825d6`. Consumes the EXACT same original `Tail.originalOmittedLinearB X n = (two*X)*(b_n*X^n)` and original native `Seq.∣xⁿ∣≃∣x∣ⁿ`, `P.∣x*y∣≃∣x∣*∣y∣`, original CMP109 `bNN`, Section38 `2b_n<=1/3`, and the true `|X|<=quarter` to source-write
+  `|originalOmittedLinearB X n| <= quarter^(suc n)`
+  for all n, both signs of X, including X=0 and c=1.
+- `DASHI/Physics/YangMills/YMClayCMP102OriginalTwoOuterWingsToLimitExact.agda`, commit `69f68802a5ddbf004be18cf83ca479164e65d111`. Defines exactly the TWO genuine unfilled original Cauchy source orders: `|X*originalAWing X (suc n)|<=quarter^(suc n)` with A triangle c-1 and `|X²*originalBWing X (suc n)|<=quarter^(suc n)` with B triangle c-2. It supplies the middle B wing automatically from the previous NEW theorem, then consumes the existing ZERO-count-paid original scalar receiver. Thus `originalGZeroFromActualTwoOuterWings` has ONLY these two quantifiable positive shifted Cauchy wing premises, plus the already existing real quarter-domain.
+- Native source root `YMClayCMP102Section39TwoOuterWingsAcceptanceExact.agda`, initial commit `0e68db7619610f7854a464ed21ef766f425ad4e1`, Nat/suc import repair `bb1c34eb2f89db777edc13d1d24947c2cf28be31`.
+
+**Exactly TWO conceptual scalar positive-count Bishop order leaves remain**: the actual A(c-1) and B(c-2) shifted Cauchy rectangle/triangle order with n-power extraction and actual 6/11, 10/57 source masses; those need trusted all-index Agda proof terms and full native typechecking. No original interacting 4D Wilson F19/CMP116 measure, OS positivity or SAME-H mass-gap theorem is claimed.
+
+### NS — ONE radius for ALL original Galerkin cutoffs, preserving the same physical ODE
+
+The source #123 already has ONE physical X_N per finite cutoff with true ODE, real/transverse constraints, energy/dissipation payment and integrated high-shell
+  `∫_0^T E_shell,N(R,t) dt <= E_N(0)/(2ν R²)`.
+Section38 turned this into an epsilon bound for a supplied threshold on R.
+
+NEW Lean #123:
+- `Synthesis/NavierStokesOriginalUniformAllCutoffsHighShellRadiusExact.lean`, commit `221057ad05ccd85c37531c419dca987fcab70b8b`.
+- `Synthesis/ClayNSSection39UniformRadiusAllCutoffsAcceptanceExact.lean`, commit `4051705b306d6050128b9e3881383993f1b217ae`.
+
+The source first constructs explicitly, ONCE:
+  `R(ν,Emax,ε)=1+Emax/(2ν ε)`;
+for `ν>0, Emax>=0, ε>0` it proves real order
+  `R>0` and `Emax < 2ν R² ε`.
+Then it quantifies over **every original cutoff N**, original initial state `x₀:FiniteState N`, actual reflection/transversality and `E_N(0)<=Emax`, and only then constructs the SAME genuine physical ODE solution `X_N` with
+  `∀T≥0, ∫_0^T originalPhysicalHighShell N X_N R t dt < ε`.
+There is no choice of a different radius per N and no substitution of an unrelated synthetic field. This is genuine source-written time-integrated high-shell spatial tightness. It is NOT the missing cutoff-uniform signed quarter nonlinear estimate or a globally smooth 3D continuum solution. Pinned Lean kernel remains UNRUN.
+
+### BSD — strict positive-degree original symmetric two-crossing moment floor
+
+Existing owner #124 had `h(a,b,n)` both true recurrences and `m_(n+2)>=max(a,b)^n*m2` for all n, conditional on original signed two-crossing integrated positivity, m0=0, m1≥0, a,b>0.
+
+NEW
+`Synthesis/MillenniumBSDOriginalTwoCrossingStrictPositiveDegreeFloorExact.lean`, commit `01881596c53b42bfac775665f562ecd56789ed34`;
+`Synthesis/ClayBSDSection39StrictPositiveDegreeFloorAcceptanceExact.lean`, commit `abbb355136e8edb1230f558e2c9599375c0c4961`.
+This recovers the one missing STRICT inequality at every n>0 via the source-positive next degree:
+  `m_(n+2) > max(a,b)^n * m2`, for n≥1;
+and yields a literal reverse-solve no-go when a supposed original positive-source Mellin moment sequence attains/falls below that floor.
+
+This remains a NECESSARY conditional inequality on original signed moments, not an actual selected complex L'' identity, BSD analytic-rank equality, rational point rank, or Sha finiteness. Do not promote.
+
+### Hodge — original Q0 signed partner as involution, fold locus exactly its fixed points
+
+The genuine Section32 donor `MillenniumHodgeDicksonOriginalQ0SignedJacobianJetExact` already owns the original exact equation
+  `Q0(a,s+h)-Q0(a,s)=h(dField(a,s)-2h)`
+for arbitrary char-zero field and the six-root punctured nonzero discriminant.
+
+NEW #124:
+`Synthesis/MillenniumHodgeDicksonOriginalQ0SignedPartnerInvolutionExact.lean`, initial commit `cf3df268352673a1c3be6cc9b29e1fff3ea5d876`, ring/involution source repair `baa6afaef5eec25d0f2d7632e5d2c7e9ace39d99`;
+`Synthesis/ClayHodgeSection39OriginalQ0PartnerAcceptanceExact.lean`, commit `51315075a689ea28776df4667239d1f38a6defa6`.
+Constructs the ACTUAL Q0 root partner
+  `partner(a,s) = s + dField(a,s)/2`
+and source-writes
+  `Q0(a,partner(a,s))=Q0(a,s)`,
+  `dField(a,partner(a,s))=-dField(a,s)`,
+  `partner(a,partner(a,s))=s`,
+  `partner(a,s)=s ↔ dField(a,s)=0`.
+This completes a local exact quadratic sign-deck/fold bridge without selecting an independent square root; matches the existing original 5+5 deck constructor. Still NOT the original global proper projective Hodge cycle or NONZERO primitive cohomology class. Pending Lean kernel.
+
+### PNP — SAME two actual anchored Boolean source runs differ in a genuine observation before terminal
+
+Existing Section38 closed-observer argument showed a non-closed readout before terminal, but its witness was relative to an arbitrary `readout`. New #119
+`Welds/PNPOriginalAnchoredPairedPreterminalObservationSplitExact.lean`, commit `9cd52d3bbf335036217425c7a8809dcb26fb4545`;
+`Welds/PNPSection39PairedPreterminalSplitAcceptanceExact.lean`, commit `b7f2d8c15d036b147ae952b4f1d7cb2aa6b20315`.
+Using the genuine original legal reopen x→y at signed F3 kernel A, deterministic physical machine state, original Boolean terminal consumer B and faithful terminal difference, the source proves
+  `∃ j<k, observe(j,x) ≠ observe(j,y)`;
+also `0<k`. The witness uses THE SAME two executions, not a third unrelated input and not a future event after the terminal. It explicitly does not prove unavoidable large work for all unrestricted SAT algorithms, a sharing-stable event mass, or P-vs-NP.
+
+### RH — stricter exact original native report without theorem-name substitution
+
+The original external proof source has NOT been supplied; RH remains open. Retain original compiled theorem requirements and full source/lockfile SHA256/Git pin. New #121 checker patch
+`aa6b0323d25acb7de3f85187e801939de40039d8`
+accepts optional Lean native single-quoted declaration spellings for the original `riemannHypothesis` audit only. It STILL requires exactly one correct theorem report with whitelisted transitive axioms and successful native elaboration, and never accepts a different declaration or an empty compiler log. This is an acceptance-tool repair, NOT an original proof.
+
+### Unified actual-native entrypoints with strict source pins
+
+Canonical #1551
+`scripts/check_clay_section36_native_campaign.py` expanded:
+`c5ba82ad72fcea126ab62af350cd70e7343475ba` adds Section39 original YM, NS, BSD, Hodge and PNP acceptance roots;
+`052ebdb9f8f856d973d5ab47d4b7226b960cdb7d` permits exact optional quoted Lean native theorem reports (the declaration identity is still matched exactly).
+The campaign now requires **19 Agda/Lean native source roots PLUS 1 RH external original proof admission**: all TWENTY must pass on exact immutable owner HEADs to produce `all_selected_roots_passed=true`. It is a selected-root audit only, NOT an all-Millennium theorem.
+Original fail-closed test `scripts/test_clay_section37_native_campaign_fail_closed.py`, commit `13d5afaa673b7bbeab927511e40392f93ae01370`, was updated for 19 roots + RH, with quoted/native correct, wrong-declaration rejected and multi-declaration proof-audit controls. Its native compilation status is unrun.
+
+### Independently EXECUTED exact arithmetic control
+
+Canonical regression source `scripts/check_clay_section39_original_maxcut.py`, commit `d9b26c9da4b584580962f369aba9ebdf714be56e`, was independently reproduced in local Python Fraction/SymPy and **2040/2040 arithmetic checks PASS**:
+- 800 actual signed YM B wing absolute-value and quarter-power tests, both signs, n<80.
+- 108 constructive NS ONE-radius all-energy-ceiling tests.
+- 312 original two-crossing BSD strict positive-degree moment source tests.
+- 12 Hodge quadratic Q0 partner polynomial identity/sign/fold algebra tests.
+- 808 deterministic two-source PNP bounded preterminal observation split cases.
+The executed independent code is mathematically equivalent to committed regression, but byte-identical replay of that specific GitHub blob is NOT claimed.
+Additionally a separately executed independent Python Lean native-axiom-regex audit passed **6/6** allow/reject cases; these do NOT execute the 19 native proof roots or RH.
+
+### Coarse-to-fine decisive remaining UNIVERSAL work — no false promotion
+
+1. YM: original scalar CMP102 TWO actual shifted positive Bishop A(c-1) and B(c-2) Cauchy wings, and pinned Agda 2.9 --safe imports; then the separate interacting SU(N) Wilson F19/CMP116, OS positivity, nontriviality and SAME-H mass-gap dynamics.
+2. NS: proper cutoff-uniform SIGNED quarter nonlinear transfer and physical continuum PDE strong regularity. Same-flow uniform radius only gives L1_t Fourier shell tightness.
+3. BSD: original selected complex L-jet/Mellin source equality and full arithmetic-to-analytic rank/Sha finiteness proof. Strict symmetric moment floor is NOT enough.
+4. Hodge: actual projective branch/fold overlap and global proper Chow cycle with nonzero primitive pairing on the original variety, beyond quadratic local deck and affine saturation.
+5. RH: actually produce a valid external original RH theorem and run exact native trusted proof admission; the checker does not prove RH.
+6. PNP: unavoidable original unrestricted SAT internal sharing-stable computational-work lower bound under full time/bit/control R1 semantics, OR a genuine polynomial SAT decision algorithm. One paired observation difference cannot imply superpolynomial time.
+
+All source code is WRITTEN AND COMMITTED. Native proof bodies have NOT been compiled, and the universal Clay claims all remain open until real kernel/analytic acceptance.
