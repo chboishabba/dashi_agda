@@ -1,0 +1,21 @@
+{
+  "status": "EXACT_CENTERED_RECOVERY",
+  "source_head": "f04f9eb9c7a354f7b0039a8084094fd630089c68",
+  "source_blob": "9e6934afe640c9ffa43d880543de5341624767c8",
+  "checker_blob": "bd45db7d88d17f6369248efe2c82bf2b98e6ffa7",
+  "center_modes": 16,
+  "residual": "53/100000000000",
+  "tail": "337/1000000000000",
+  "distance": "333/500000000000",
+  "center_norm": "51250835319/500000000000",
+  "eta_lower": "118177727987/500000000000",
+  "eta_upper": "236355456253/1000000000000",
+  "eta_lower_float": 0.2363554559742348,
+  "eta_upper_float": 0.23635545625242013,
+  "guard_bounds_retained": true,
+  "original_J36": false,
+  "physical": false,
+  "CI": false,
+  "kernel": false,
+  "scope": "Locally executed byte-pinned exact XCVIII donor and XCIX checker. Floating-point centre proposal only, verified using exact Fraction complex pairs, outward square-root and pi bounds, full convolution support and infinite source tail. Same rational model and same periodic pulse; no new parameter choice."
+}

@@ -1,0 +1,42 @@
+{
+  "status": "PASS_EXACT_SMALL_SIGNAL_PASSIVITY_NUMERICAL_SPECTRAL_SCAN",
+  "checker_blob": "8dbdda4ab62ca5667764c2df90b2bb5a1c2a7beb",
+  "dc_admittance_per_beta_squared": [
+    [
+      "62400/25168126517",
+      "343200000/25168126517"
+    ],
+    [
+      "-343200000/25168126517",
+      "9488775/25168126517"
+    ]
+  ],
+  "grid_cases": 961,
+  "harmonic_truncation_scan": 128,
+  "harmonic_truncation_recheck": 256,
+  "baseline": {
+    "beta": 10,
+    "Y1": 1,
+    "eta": 0.004619988645451191,
+    "dc_eta": 0.00461998864037467,
+    "spectral_radius": 0.9889842001416016,
+    "linear_sample_max_diode_gap": 0.024181414519001142,
+    "linear_sample_max_abs_HF_cap": 0.04713125592931628,
+    "linear_state_return_error": 2.413400288244105e-16,
+    "nonlinear_periodic_certificate": false
+  },
+  "top": {
+    "beta": 15.035617008818173,
+    "Y1": 2.9999999999999996,
+    "eta": 0.005914698623523487,
+    "dc_eta": 0.005914698588870736,
+    "spectral_radius": 0.9889842001416016,
+    "linear_sample_max_diode_gap": 0.027366947949635997,
+    "linear_sample_max_abs_HF_cap": 0.053331202733469474,
+    "linear_state_return_error": 1.4503898342978048e-16,
+    "nonlinear_periodic_certificate": false
+  },
+  "nonlinear_guard_admission": false,
+  "physical_admission": false,
+  "receipt_scope": "Selected baseline and top numerical results; committed checker regenerates all 961 grid rows."
+}

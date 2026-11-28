@@ -1,0 +1,52 @@
+{
+  "status": "CONDITIONAL_DISTRIBUTED_LAYERED_SHELL",
+  "checker_blob": "bb7d13fcdea531c2d3312b871bd9bbcaed5661f0",
+  "source_donors": {
+    "layered_shell": "097cc72daff0ccb657972e9316a3f0244fb6591d",
+    "angular_current_budget": "97d67fa9e4af6f61835f766fbe89994a922c48cc",
+    "native_finite_return": "291933beaaf7995fb56fe5fc9a03de396ab80822",
+    "metric_charge": "1f3ee2625ede999147386b8f94e9078d29c94e65",
+    "distributed_box": "4f84dd277738d8cd75dfec386f759d9faa19b857"
+  },
+  "execution": "local OPENBLAS_NUM_THREADS=1 timeout 90 python; exit0; committed checker Git blob equals executed file; donor equations transcribed, full donor scripts not rerun",
+  "frequencies": [
+    0.005,
+    0.05,
+    3.915,
+    7.83
+  ],
+  "areas": [
+    1000000,
+    10000000000
+  ],
+  "spread": [
+    0,
+    0.1
+  ],
+  "cases": 16,
+  "source_on_columns": 32,
+  "source_off_controls": 16,
+  "max_work_ledger": 8.239594987205501e-14,
+  "max_adjoint_identity_error": 1.3451099972811387e-17,
+  "min_hermitian_eigenvalue": -5.315600137072384e-22,
+  "max_principal_block_defect": 508.11628083472255,
+  "max_schur_defect": 74.47353301378298,
+  "dual_bound_improved_columns": 26,
+  "dual_to_global_bound_ratio": [
+    0.0003293798189681211,
+    9.905574246145399
+  ],
+  "selected_783_1e10": {
+    "line_useful": [
+      0.00011230707000332706,
+      0.00011111445289268576
+    ],
+    "distributed_useful": [
+      0.00011393961363799615,
+      0.00011125736849046441
+    ]
+  },
+  "initial_failure": "principal-submatrix equivalence assertion false; retained actual block residual, then reran; no forced equivalence",
+  "physical_admission": false,
+  "scope": "Normalized seven-port off-guard circuit, 6/16 modal shell, discrete radial sheets, no full finite-width conductor, no DC shell continuation, no measured source, no interval-rounded conditioning, no certified angular tail, no CI or kernel."
+}

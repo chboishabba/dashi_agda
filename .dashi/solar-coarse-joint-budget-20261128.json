@@ -1,0 +1,28 @@
+{
+  "scope": "Exact normalized coarse algebra and two-capacitor periodic midpoint; no physical admission",
+  "runtime": {
+    "sympy": "1.14.0",
+    "timeout_seconds": 90
+  },
+  "executed_blob": "c9658c11e5bc178ddf58f82b3f890d8c86b46c0e",
+  "local_hash": "c9658c11e5bc178ddf58f82b3f890d8c86b46c0e",
+  "status": "PASS",
+  "results": {
+    "recovery_for_gain_1_over_1000": "107663341145137346012941687537/1814725294120897382629123200000",
+    "buffer_capacity": "107663341145137346012941687537/15977132145264779470477687537000",
+    "passive_fixed_load": "1/16",
+    "active_alternating": "25/484",
+    "global_ceiling": "1/12",
+    "matched_passive": "1/12",
+    "fixed_load_unresolved_headroom": "1/48",
+    "ceiling_mean_current": "1/6",
+    "conditional_triad_pump": "10"
+  },
+  "limitations": [
+    "Prior recovery receipt numbers are supplied premises, not independently replayed this turn.",
+    "Recovery buffer does not realize material actuator force or impedance.",
+    "Source circuit has prescribed resistance schedule and no ion-state dynamics; periodic return only of two capacitor states.",
+    "DC ceiling assumes constant exogenous voltage and fixed lower resistance bound; not general natural-source backaction.",
+    "No measured HF/LF interaction or coherent joint trajectory established."
+  ]
+}

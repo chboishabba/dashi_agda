@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-28",
+  "scope": "local discrete common-atlas cone composition; no physical admission",
+  "executed": [
+    {
+      "path": "scripts/check_solar_common_atlas_sympy.py",
+      "blob": "06c67e83eb5760d1744ab5e1894eafe34e12cc38",
+      "status": "PASS",
+      "result": [
+        "0",
+        "54823/132098",
+        "24/257",
+        "5512/66049"
+      ]
+    },
+    {
+      "path": "scripts/check_solar_common_atlas_native.py",
+      "blob": "dce3de5f295125ebc91acd8c5faadd30dbb24d42",
+      "status": "PASS",
+      "dependencies": {
+        "scripts/solar_physical_cone.py": "906a8f4394ba88a0c479418a7f697012dfcf2e72",
+        "scripts/solar_support_boundary_cayley.py": "ca09a34f3db30e298577de01160a8ff312a383be"
+      },
+      "perturbations": [
+        0.01,
+        0.001,
+        0.0001,
+        0.00001
+      ],
+      "errors": [
+        0.0010554460390398345,
+        0.00010554474558908212,
+        0.000010554475073566638,
+        0.0000010554446205920178
+      ],
+      "directional": [
+        0,
+        0.4150176384199609,
+        0.0933852140077821,
+        0.08345319384093629
+      ],
+      "negative_controls": [
+        "missing atlas pair",
+        "inadequate time cone",
+        "incompatible base current"
+      ]
+    },
+    {
+      "path": "scripts/solar_physical_cone.py",
+      "blob": "906a8f4394ba88a0c479418a7f697012dfcf2e72",
+      "status": "PASS (legacy fixture)",
+      "energy_residual": 5.551115123125783e-17,
+      "short_clock_rejected": true
+    }
+  ],
+  "pending": [
+    "check_solar_spherical_material_atlas.py",
+    "check_solar_spherical_reverse_integration.py",
+    "check_solar_spherical_reverse_atlas.py",
+    "global population-event amplitude tangent",
+    "cross-step causal admission",
+    "strict restored nonlinear passive global comparison",
+    "independent source measurement"
+  ],
+  "no_ci": true,
+  "no_agda_lean": true,
+  "physical_admission": false
+}

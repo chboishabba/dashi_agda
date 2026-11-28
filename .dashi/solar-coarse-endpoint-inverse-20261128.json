@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-28",
+  "scope": "Exact finite synthetic inverse, four-phase single transverse triangle mode, uniform scalar eps, fixed incident wave and receiver load; not physical source, actuator, stability or continuum proof",
+  "runtime": {
+    "python": "3.13.5",
+    "sympy": "1.14.0",
+    "timeout_per_fixture_s": 90,
+    "OPENBLAS_NUM_THREADS": 1
+  },
+  "verified_blobs": {
+    "check_solar_coarse_endpoint.py": "f625f83ea702e215264b581f1a5476a0eb37d38c",
+    "check_solar_endpoint_inverse_fibre.py": "16a4133ad1b065f0fdf41a6f27962511134e22df",
+    "solar_coarse_endpoint.py": "eb1f18218d8f9cd5ef4e001e6ee669df484a4912",
+    "solar_coarse_material_inverse.py": "072f6669b31ed649d93cf231f0aea1fe0e3193e3",
+    "solar_coarse_quadrature_global.py": "5137d3a4229c7c0696cc4a04d257eef11822b563",
+    "solar_coarse_source_cycle.py": "b633464e676a7b7c7f34ade2c5047086d403033f",
+    "solar_coherent_reverse_weld.py": "d9aa217d037ccd01aa07f8ffc7ffb7b051991",
+    "solar_endpoint_inverse_fibre.py": "11b66bc53847f2b502e1faffb66620f540c9d45a",
+    "solar_gauss_ade_weld.py": "2c7f855953de0a07acd5332f1cf9eab0eddb5818"
+  },
+  "executed": {
+    "inverse_fibre": {
+      "status": "PASS",
+      "ade_control_proxy": "28947/64",
+      "ade_source_off_net": "-27/80"
+    },
+    "coarse_endpoint": {
+      "status": "PASS",
+      "assertions": 9
+    },
+    "source_cycle": {
+      "status": "PASS",
+      "incident": "6/5",
+      "passive_eps": "1",
+      "passive_useful": "27169920/1573877233",
+      "active_eps": [
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "active_net": "-1271368312170071040/10151447527333778689",
+      "universal_net_upper": "24/25",
+      "source_off_worlds_zero": true
+    },
+    "material_inverse": {
+      "status": "PASS",
+      "excluded_in_phase_targets": [
+        "1/10",
+        "4/5"
+      ],
+      "excluded_sectors_each": 16,
+      "positive_control_eps_interval": [
+        "1/100",
+        "2"
+      ],
+      "positive_control_amplitude": "113208/90223",
+      "reopened_witnesses": 1
+    },
+    "global_quadrature": {
+      "status": "PASS",
+      "feasible_sectors": 1,
+      "total_sectors": 16,
+      "winning_polygon_vertices": 4,
+      "ideal_upper": "1270018436261909760/10151447527333778689",
+      "ideal_eps": [
+        2,
+        1,
+        2,
+        1,
+        2
+      ],
+      "ideal_quadrature": [
+        "223945800/3186133633",
+        "492263280/3186133633"
+      ],
+      "no_recovery_witness_net": "116989943269599360/10151447527333778689",
+      "witness_positive_pump_work": "0",
+      "witness_negative_modulation_work": "-1153028492992310400/10151447527333778689",
+      "receiver_upper": "27169920/1573877233",
+      "receiver_upper_equals_passive": true,
+      "receiver_eps": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "recovery_break_even": "474594338558440/9393543042332297",
+      "recovery_strict_gain_requires_above": true,
+      "additional_overhead_assumed_zero": true
+    }
+  },
+  "limitations": [
+    "Exact rational source copies reconstructed locally and Git blob verified, not full repo checkout.",
+    "No kernel/CI, no measured parameters, physical recovery actuator or stability proof.",
+    "Four-phase uniform single-mode domain only; no inference for all frequency conversions, spatial material patterns, source backaction, other geometries, periods or full multimode trajectories.",
+    "Ideal signed recovery is a distinct system-wide output, not increased designated receiver work.",
+    "Pending exact tetrahedral gate and fine geometry are deferred unless decisive residual demands them."
+  ],
+  "physical_admission": false
+}

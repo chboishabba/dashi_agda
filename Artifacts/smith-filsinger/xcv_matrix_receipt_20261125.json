@@ -1,0 +1,215 @@
+{
+  "status": "EXACT_DC_CONSTRUCTION_AND_NUMERICAL_OFF_BRANCH_DIAGNOSTICS",
+  "checker_blob": "e29d3f093c7562b6605e2c19db5578b0c47f8382",
+  "dc_native_useful_fraction": "122500/126517",
+  "dc_native_direction": [
+    "-875/78",
+    "-154000000/379551"
+  ],
+  "dc_source_quarter_useful_ceiling": "30625/126517",
+  "linear": [
+    {
+      "beta": 10,
+      "kind": "rank1_reciprocal",
+      "eta": 0.0037071503996949436,
+      "dc_eta": 0.0037071503857827016,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 30,
+      "kind": "rank1_reciprocal",
+      "eta": 0.029722755277718636,
+      "dc_eta": 0.02972275513018311,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 100,
+      "kind": "rank1_reciprocal",
+      "eta": 0.147333013127372,
+      "dc_eta": 0.14733300639060698,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 300,
+      "kind": "rank1_reciprocal",
+      "eta": 0.22592246033758984,
+      "dc_eta": 0.22592241777064592,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 1000,
+      "kind": "rank1_reciprocal",
+      "eta": 0.24051593028972815,
+      "dc_eta": 0.24051590889971822,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 10,
+      "kind": "full_reciprocal",
+      "eta": 0.002065021511522778,
+      "dc_eta": 0.002065019611373625,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 30,
+      "kind": "full_reciprocal",
+      "eta": 0.00036822538698227697,
+      "dc_eta": 0.00036820942314809283,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 100,
+      "kind": "full_reciprocal",
+      "eta": 0.00009731381330334375,
+      "dc_eta": 0.00009715614221214012,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 300,
+      "kind": "full_reciprocal",
+      "eta": 0.000002011183812221097,
+      "dc_eta": 0.000001978906261477298,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 1000,
+      "kind": "full_reciprocal",
+      "eta": 1.5039446534360108e-8,
+      "dc_eta": 1.4929162494547425e-8,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 10,
+      "kind": "full_gyrator",
+      "eta": 0.003899084957472002,
+      "dc_eta": 0.0038990830198101104,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 30,
+      "kind": "full_gyrator",
+      "eta": 0.031085977861938296,
+      "dc_eta": 0.03108594636337368,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 100,
+      "kind": "full_gyrator",
+      "eta": 0.15027290279001737,
+      "dc_eta": 0.15027286714397123,
+      "decay": 0.027692307692307693
+    },
+    {
+      "beta": 300,
+      "kind": "full_gyrator",
+      "eta": 0.22667800506663952,
+      "dc_eta": 0.22667798357692162,
+      "decay": 0.008534384068710361
+    },
+    {
+      "beta": 1000,
+      "kind": "full_gyrator",
+      "eta": 0.24059276649554456,
+      "dc_eta": 0.2405927462667329,
+      "decay": 0.0011482884254091546
+    }
+  ],
+  "nonlinear": [
+    {
+      "beta": 100,
+      "kind": "rank1_reciprocal",
+      "eta": 0.14733301169748753,
+      "ledger": [
+        0.1,
+        0.07454350443653106,
+        0.014733301169748752,
+        0.010239819686316532,
+        0.0004833747073841241,
+        0.015216675877136238
+      ],
+      "return_error": 3.447242491461111e-14,
+      "ledger_residual": 1.955380302121057e-14,
+      "sampled_diode_gap": -0.13638953562169517,
+      "sampled_bank_max": -5.619493368844518e-32,
+      "sampled_cap_max": 0.266216221909332,
+      "sampled_off_guard_ok": true,
+      "root_success": true,
+      "nonlinear_periodic_certificate": false
+    },
+    {
+      "beta": 300,
+      "kind": "rank1_reciprocal",
+      "eta": 0.22592244757813273,
+      "ledger": [
+        0.1,
+        0.07434641209717074,
+        0.022592244757813275,
+        0.002318516147589905,
+        0.0007428269970574228,
+        0.023335071755222127
+      ],
+      "return_error": 1.4710455076283324e-13,
+      "ledger_residual": 3.6866343311459104e-13,
+      "sampled_diode_gap": -0.1686630718374234,
+      "sampled_bank_max": 8.392004078052558e-31,
+      "sampled_cap_max": 0.32974006903247244,
+      "sampled_off_guard_ok": true,
+      "root_success": true,
+      "nonlinear_periodic_certificate": false
+    },
+    {
+      "beta": 100,
+      "kind": "full_gyrator",
+      "eta": 0.15027289510065517,
+      "ledger": [
+        0.1,
+        0.07495467125957032,
+        0.015027289510065517,
+        0.009525254733460352,
+        0.0004927844971315635,
+        0.015520074006864311
+      ],
+      "return_error": 2.195466031196247e-13,
+      "ledger_residual": -2.2774837571404305e-13,
+      "sampled_diode_gap": -0.13746083730014408,
+      "sampled_bank_max": -3.31982377594823e-30,
+      "sampled_cap_max": 0.2689572927470477,
+      "sampled_off_guard_ok": true,
+      "root_success": true,
+      "nonlinear_periodic_certificate": false
+    },
+    {
+      "beta": 300,
+      "kind": "full_gyrator",
+      "eta": 0.22667799860795945,
+      "ledger": [
+        0.1,
+        0.07499671126283304,
+        0.022667799860795947,
+        0.0015921644817360305,
+        0.0007433243942296382,
+        0.023411124255273478
+      ],
+      "return_error": 4.566503425396107e-13,
+      "ledger_residual": 4.0534242629064465e-13,
+      "sampled_diode_gap": -0.1690460068923881,
+      "sampled_bank_max": -4.149779722040391e-31,
+      "sampled_cap_max": 0.33024481674609096,
+      "sampled_off_guard_ok": true,
+      "root_success": true,
+      "nonlinear_periodic_certificate": false
+    }
+  ],
+  "ledger_order": [
+    "incident",
+    "reflected",
+    "hf_load",
+    "maxwell_losses",
+    "circuit_losses",
+    "signed_internal_port_work"
+  ],
+  "physical_admission": false,
+  "original_J36": false,
+  "ci": false,
+  "scope": "Full local numerical outputs transcribed from checker stdout; source equations transcribed, not donor-byte execution. Ideal static power transformer, not conventional DC electromagnetic transformer. Off-branch numerical shooting and samples only."
+}

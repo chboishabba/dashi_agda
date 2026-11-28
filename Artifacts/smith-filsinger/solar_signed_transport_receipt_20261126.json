@@ -1,0 +1,72 @@
+{
+  "status": "CONDITIONAL_SIGNED_TRANSPORT_AND_ORIGINAL_PAIR_ALIGNMENT",
+  "checker_blob": "80ade2a57573106dab8a726b4c64f9e01942947a",
+  "donors": {
+    "tangential": "c8294bac77068ec47677b1c02053d99dfc76d0af",
+    "elsasser": "7feecd2bbede7b73d378beb9e395e2afb010cf0a",
+    "circular": "0a12507825b5676c46d897aa160ab14745575fab"
+  },
+  "data_sha256": "8ff495be1ebdd6609813061880b8faf08ac8365540e8ac2d2d64961c9b3b6880",
+  "execution": "OPENBLAS_NUM_THREADS=1 timeout 90 python local exit0; donor transcribed and verified exact Git blob, executed; committed checker verified exact Git blob. Initial symbolic PSD property on congruence matrix not established by SymPy; replaced by exact Hermitian check and mathematical PSD congruence from checked D. Complex simplifier assertion resolved by explicit real/imaginary variables. No CI/kernel.",
+  "loss_ranks": [
+    0,
+    3,
+    3
+  ],
+  "max_split_error_W_m2": 6.098637220230962e-20,
+  "data_shape": [
+    61,
+    615
+  ],
+  "separate_trace_shape": [
+    3,
+    609
+  ],
+  "results": {
+    "full": {
+      "signed_component_product_W_m2": [
+        -0.00008017923374541802,
+        0.00008006853967230263
+      ],
+      "positive": 308,
+      "negative": 307,
+      "alignment_quantiles": [
+        0.1279535689719611,
+        0.5088502218014697,
+        0.6232012397459861,
+        0.7592097983273093,
+        0.9108584075647895
+      ],
+      "lesser_split_fraction_quantiles": [
+        0.044570796217605235,
+        0.12039510083634536,
+        0.18839938012700697,
+        0.2455748890992652,
+        0.43602321551401946
+      ]
+    },
+    "fundamental": {
+      "signed_component_product_W_m2": [
+        -0.00008053420312609746,
+        0.00008042058229100356
+      ],
+      "positive": 308,
+      "negative": 307,
+      "alignment_quantiles": [
+        0.17629209258953787,
+        0.5135755246738201,
+        0.6341390268290339,
+        0.7921437274007379,
+        0.9999604149586807
+      ],
+      "lesser_split_fraction_quantiles": [
+        0.000019792520659644985,
+        0.10392813629963107,
+        0.18293048658548305,
+        0.24321223766308997,
+        0.41185395370523104
+      ]
+    }
+  },
+  "scope": "Exact restricted planar generator, rational Cayley fixtures and ground graph identity. No geospace material calibration, no spatial propagation calculation between GAMERA and AusLAMP. Original paired scalar E and B converted to H with mu0 vacuum approximation, full sampled weighted time means and 200s least-squares harmonic phasors. Lesser split fraction is a sharp bound within arbitrary positive real scalar reference splits, not a measured reflection coefficient, physical Elsasser variable or actual counterpropagating wave energy. The separate 609-point trace has not been identified with 615-point keogram coordinate. No raw file redistribution, no physical admission."
+}

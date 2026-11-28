@@ -1,0 +1,129 @@
+{
+  "status": "PASS_LOCAL_CONDITIONAL_SIGNED_MATERIAL_EXTERIOR",
+  "consumer_commit": "c9373d2a5767d8675e383fb8fc36e51a7d08c96e",
+  "consumer_blob": "331a67feb41b5b78fa26f5568b2ace0de63bb9a8",
+  "executed_blob_matches": true,
+  "stdout_sha256": "d49b2c241d0e459c9dd81b2c2597f27a3a47c7b34fc85436adcfff74b2cc3aa4",
+  "execution": "OPENBLAS_NUM_THREADS=1 timeout 90s python solar_material_exterior_weld.py; exit 0",
+  "sympy": "1.14.0",
+  "scipy": "1.17.0",
+  "donors": {
+    "si_covariance_repository_blob": "1a3a2df7892833ac4560d462c5d5843222767fff",
+    "executed_definition_prefix_sha1": "ab105e28cf1abbd145d4fd7a02daecfea8d124cc",
+    "prefix_length": 4864,
+    "full_covariance_blob_locally_matched": false,
+    "signed_thermal_vector_blob": "2f897b0fcc6fe710462c35c2b9e8069396ab7083",
+    "thermal_vector_exact_blob_executed": true,
+    "thermal_source_backaction_inspected_blob": "e6d1db59fb0408120a3656cb67eb7fcc6d09b685"
+  },
+  "fixture": {
+    "source_incident_W": 1,
+    "aperture_m2": 1000000,
+    "copper_m3": 0.005,
+    "volume_floor": 0.1,
+    "angular_modes": 16,
+    "edges": 7,
+    "angular_sites": 26,
+    "synthetic_normalized_drude_weight": 30,
+    "collision_rate_s_inverse": 30,
+    "gyro_rad_s": 10,
+    "collision_fourier_amplitude_s_inverse": 10
+  },
+  "rows": [
+    {
+      "frequencies_Hz": [
+        3.915,
+        7.83,
+        11.745
+      ],
+      "baseline_ideal_W": 3.199956332768619e-11,
+      "modulated_ideal_W": 3.210310626477901e-11,
+      "baseline_diagonal_load_W": 3.199956332768618e-11,
+      "modulated_allocation_relaxation_upper_W": 3.2103106854179724e-11,
+      "gross_ideal_delta_W": 1.0354293709281899e-13,
+      "baseline_sheet_heat_W": 0.09259433697843182,
+      "modulated_sheet_heat_W": 0.08946872848422001,
+      "conditional_same_mean_heater_W": 0.0031256084942118123,
+      "conditional_paid_margin_upper_W": -0.003125608494108269,
+      "omitted_material_rhs_norm": 0.11561908067090251,
+      "max_ledger_residual_W": 7.120509245705031e-16
+    },
+    {
+      "frequencies_Hz": [
+        -7796.085,
+        3.915,
+        7803.915
+      ],
+      "baseline_ideal_W": 2.8243473670162412e-11,
+      "modulated_ideal_W": 2.8243473470940398e-11,
+      "gross_ideal_delta_W": -1.9922201413112705e-19,
+      "conditional_same_mean_heater_W": -1.8876142315882305e-9,
+      "omitted_material_rhs_norm": 0.0001742849560364115,
+      "max_ledger_residual_W": 7.317792053926488e-16
+    },
+    {
+      "frequencies_Hz": [
+        -15596.085,
+        -7796.085,
+        3.915,
+        7803.915,
+        15603.915
+      ],
+      "baseline_ideal_W": 2.8243473670162412e-11,
+      "modulated_ideal_W": 2.8243473470940395e-11,
+      "gross_ideal_delta_W": -1.9922201736230131e-19,
+      "conditional_same_mean_heater_W": -1.887614120565928e-9,
+      "omitted_material_rhs_norm": 1.509747348305344e-8,
+      "max_ledger_residual_W": 6.450026428993537e-16
+    }
+  ],
+  "signed_pair": {
+    "norm": 0.0000038131805028819497,
+    "analytic_upper": 0.0000038131833605483106,
+    "relative_to_nu": 1.2710611201827702e-7,
+    "scope": "3-band material Schur complement with zero impressed sideband fields, not full loaded shell upper"
+  },
+  "four_world": {
+    "frequencies_Hz": [
+      -7792.17,
+      3.915,
+      7800
+    ],
+    "output_order": [
+      "LF_load",
+      "all_load"
+    ],
+    "off": [
+      0,
+      0
+    ],
+    "natural_only_W": [
+      2.333109188207785e-11,
+      2.333109188207785e-11
+    ],
+    "driver_only_W": [
+      6.826374699519416e-21,
+      6.350951881756638e-14
+    ],
+    "both_phase_average_W": [
+      2.3331091713058764e-11,
+      2.3394601225114886e-11
+    ],
+    "interaction_W": [
+      -1.7584546234514106e-19,
+      -1.7578053121568492e-19
+    ],
+    "driver_incident_W": 1
+  },
+  "limitations": [
+    "Finite angular and harmonic Galerkin and numerical radial ODE; no interval or continuum proof; HF gain sign below ledger residual",
+    "Synthetic added dimensionless material sheet, no original atmosphere row replay or measured modulation coefficient",
+    "Thermal mean comparison applies to selected heat values under same mean temperature, bath, linear cooling and unchanged other heat; does not prove complete thermal waveform or all material designs excluded",
+    "Diagonal load assumes eligible independent edge ports; ideal full-current output is a relaxation; no complete passive topology or continuous geometry optimization",
+    "HF source does not generate stipulated modulation law in this model; external drive work and converter costs not yet closed",
+    "Variable population needs original momentum, birth/removal and heat/chemical/outflow work ledger, not scalar D variation alone"
+  ],
+  "github_ci_used": false,
+  "agda_kernel_run": false,
+  "physical_admission": false
+}

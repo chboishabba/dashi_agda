@@ -1,0 +1,44 @@
+{
+  "status": "CONDITIONAL_DISTRIBUTED_SEVEN_EDGE_PORT",
+  "script_blob": "4f84dd277738d8cd75dfec386f759d9faa19b857",
+  "donor_blob": "66c63c068144b49db850dc93c6d204fd09e3a3af",
+  "donor_excerpt_length": 2609,
+  "donor_excerpt_fnv32": 3051832000,
+  "donor_excerpt_sha256": "d5502bf04844668d0636d9943d7cbc33f445c5884eac483038224edf6dbf0972",
+  "execution": "local timeout90 exit0; selected donor excerpt transcribed and matched length/FNV32 to connector source; SHA256 pinned locally; full donor not executed; final checker Git blob exact local match",
+  "fine_edges": 6084,
+  "fine_faces": 5616,
+  "translated_copies": 27,
+  "port_rank": 7,
+  "dc_pole_rank": 5,
+  "dc_cycle_nullity": 2,
+  "dc_residue_errors": [
+    0.000012076143453780306,
+    1.205444363103548e-7
+  ],
+  "rows": [
+    {
+      "omega": 0.5,
+      "min_hermitian_eigenvalue": 0.01195973708726666,
+      "max_work_error": 9.992007221626409e-16,
+      "max_port_error": 0.12586306483786364,
+      "max_residual_bound": 6.834565161291932
+    },
+    {
+      "omega": 1,
+      "min_hermitian_eigenvalue": 0.01596430170447828,
+      "max_work_error": 1.8041124150158794e-16,
+      "max_port_error": 0.06119977000247026,
+      "max_residual_bound": 7.6818633882909335
+    },
+    {
+      "omega": 2,
+      "min_hermitian_eigenvalue": 0.03442687566599908,
+      "max_work_error": 3.0531133177191805e-16,
+      "max_port_error": 0.09604506855597496,
+      "max_residual_bound": 13.513420587532753
+    }
+  ],
+  "physical_admission": false,
+  "scope": "Flat constant-metric finite reflecting box, distributed translated-chain surrogate, positive real Laplace line, no actual finite conductor, loaded original circuit, interval rounding, noncompact radiation, raw source data, CI or kernel"
+}

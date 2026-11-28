@@ -1,0 +1,122 @@
+{
+  "date": "2026-11-25",
+  "pr": 1537,
+  "status": "PASS_EXACT_RATIONAL_CONDITIONAL_9D_LYAPUNOV_AND_SIX_SOURCE_BRACKET_BUDGETS_NOT_PERIODIC_ORBIT",
+  "original_source": "Original Smith/Filsinger J23–J34 nine-state synthetic finite-loss prescribed-wave source",
+  "constructor": "scripts/check_smith_filsinger_j35_conditional_lyapunov_geometry_20261125.py",
+  "constructor_git_blob_byte_identical_to_local": "ddeee94c2c297c29d138a5db2384a5b71218f1ed",
+  "deterministic_full_machine_output_sha256": "0446f9b0be26d8386e8e7e0f48bfa811f95bb001069fa71bf7a558af558306ec",
+  "deterministic_full_machine_output_bytes": 6039,
+  "candidate_M0_P_source": "Independent numerical original 7-segment ODE + variational/saltation source integration rounded to 8 decimal (M0) and discrete Lyapunov P rounded to 6 decimals; numerical candidate only",
+  "compressed_candidate_rational_M_P_json_sha256": "e4f0426aa82786146b5c5725425afe7f036867bcd394e576cee7d687dee4b8e4",
+  "exact_rational_checks": {
+    "dimension": 9,
+    "full_fraction_P_and_R_LDL_pivots_positive": 18,
+    "P_gersh_lower": "435741/1000000",
+    "P_gersh_upper": "3179023/500000",
+    "R0_equals_P_minus_M0_transpose_P_M0_gersh_lower": "312499047233301776097/312500000000000000000",
+    "exact_P_greater_than_one_quarter_identity": true,
+    "exact_P_less_than_7_identity": true,
+    "exact_R0_greater_than_99_over_100_identity": true,
+    "target_original_full_9D_hybrid_D_Poincare_minus_M0_norm1_and_infinity": "1/20",
+    "exact_Perturbation_lemma_operator_norm_infinity_upper": "813322010464543/1000000000000000",
+    "strict_perturbation_operator_less_than_41_over_50": true,
+    "implied_P_minus_Mtranspose_P_M_greater_than_one_sixth_identity": true,
+    "implied_full_hybrid_poincare_P_norm_contraction_less_than": "99/100",
+    "actual_original_source_derivative_within_1_over_20_proved": false,
+    "actual_original_source_fixed_point_proved": false
+  },
+  "reverse_solver_design": {
+    "exact_P_ellipsoid_radius": "1/10000000",
+    "coordinate_projection_from_P_greater_than_quarter_identity": "1/5000000",
+    "original_source_center_return_residual_target_in_P_norm": "1/10000000000",
+    "original_source_center_return_residual_target_proved": false,
+    "event_time_l1_sensitivity_targets": [
+      10,
+      20,
+      20,
+      10,
+      4,
+      40
+    ],
+    "event_state_Dx_infinity_targets": [
+      50,
+      150,
+      150,
+      10,
+      10,
+      10
+    ],
+    "original_guards_uniform_strict_monotonicity_on_ellipsoid_unproved": true
+  },
+  "original_root_bracket_remaining_margins_seconds_model_units": [
+    {
+      "event": 1,
+      "margin": "0.000004998894",
+      "maximum_shift_under_target": "0.000002"
+    },
+    {
+      "event": 2,
+      "margin": "0.00000496881",
+      "maximum_shift_under_target": "0.000004"
+    },
+    {
+      "event": 3,
+      "margin": "0.000004529143",
+      "maximum_shift_under_target": "0.000004"
+    },
+    {
+      "event": 4,
+      "margin": "0.000003801725",
+      "maximum_shift_under_target": "0.000002"
+    },
+    {
+      "event": 5,
+      "margin": "0.000000973744",
+      "maximum_shift_under_target": "0.0000008"
+    },
+    {
+      "event": 6,
+      "margin": "0.00001530242042441424",
+      "maximum_shift_under_target": "0.000008"
+    }
+  ],
+  "source_clock_budget_all_six_strict_as_conditional_algebra": true,
+  "original_state_J24_first_five_requires_extra_nominal_center_error_margin_not_yet_proved": true,
+  "sixth_J24_narrow_box_unpaid_use_broad_original_source_event6_from_J32": true,
+  "numeric_directional_findings_not_rigorous": {
+    "sampled_original_hybrid_return_spectral_radius": 0.8881037941543025,
+    "sampled_entrywise_abs_return_spectral_radius": 1.0035341419576351,
+    "sampled_original_initial_to_event_time_l1_derivatives": [
+      4.328069336261913,
+      14.550125145054848,
+      13.611191030554867,
+      1.0052328415665677,
+      0.9572682088867454,
+      0.477252569235831
+    ],
+    "sampled_event_state_jacobian_infinity_norms": [
+      38.41877122362212,
+      130.4943406602051,
+      122.1635360022998,
+      6.7088826793385135,
+      6.472927169171825,
+      3.903733052166032
+    ],
+    "sampled_9D_return_I_minus_M_condition_infinity": 23.951406734976132,
+    "actual_original_per_ball_source_interval_D_Poincare_missing": true
+  },
+  "frontier": {
+    "conditional_original_smooth_source_legs": 7,
+    "source_global_69D_row_F_DF_exported": 15,
+    "remaining_full_original_source_joint_F_DF_rows": 54,
+    "original_guard_scalar_implicit_root_family_not_proved": true,
+    "original_source_Poincare_9D_Banach_contraction_not_proved": true,
+    "source_69D_Krawczyk_rows": 0,
+    "exact_periodic_orbit": false,
+    "physical_environment_energy_metrology_unproved": true,
+    "no_CI": true,
+    "no_formal_kernel": true,
+    "no_rebase_or_merge": true
+  }
+}

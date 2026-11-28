@@ -1,0 +1,121 @@
+{
+  "status": "CONDITIONAL_LAYERED_SPHERE_TE_TM",
+  "source_head": "877e502dcac807df2f0a31611c0f372a2b4c5a30",
+  "checker_blob": "097cc72daff0ccb657972e9316a3f0244fb6591d",
+  "local_execution": {
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "exact_radial_identities": 2,
+    "exact_Lorentz_real_admittance": 1,
+    "byte_match": "Initial local version had extra harmless semicolon; removed and reran exact committed blob successfully."
+  },
+  "donors": {
+    "OCT369_preflight": "1f493bdedf3ca058470db4fe0154c13d4df905b4",
+    "vector_shell": "cddbc3c4d5455d2c654d11c6057434fef764e6df",
+    "LXXXIV_ADE": "b40208923744dcc2eab613473f28a57584d334da",
+    "ground_P1": "1a9ad6f6ba05ac1cc6648831160937fd0cd91a6b",
+    "full_vector_Poynting": "1661ea45cbeacc638601935ca489c4d75e197f24",
+    "scope": "OCT original preflight runpy byte matched; LXXXIV polarization coefficients transcribed, not full ADE execution or same-clock weld; previous vector and ground checkers inspected."
+  },
+  "cases": 216,
+  "max_energy_residual": 1.0547118733938987e-15,
+  "max_radial_residual": 9.992007221626409e-16,
+  "max_match_error": 2.5683429076283283e-16,
+  "normalization": "angular probability weights; hscaled=h/ya, work divided by 4*pi*ya; source amplitudes arbitrary, not measurements; total incident norm squared=2",
+  "fixtures": {
+    "l": 1,
+    "earth_radius_m": 6371000,
+    "shell_height_m": 110000,
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "top_half_conductivity_S_m": [
+      0,
+      1e-9
+    ],
+    "lower_sheet_over_ya": [
+      0.1,
+      1,
+      10
+    ],
+    "anisotropy_Hall_pairs": [
+      [
+        0,
+        0
+      ],
+      [
+        0.5,
+        0
+      ],
+      [
+        0.5,
+        1
+      ]
+    ],
+    "phase": [
+      0,
+      1.5707963267948966,
+      3.141592653589793
+    ],
+    "clock": "dimensionless z=f/7.83; Lorentz sheet scaled by ya, assumed"
+  },
+  "mix_eigenvalues": [
+    -0.5,
+    -0.5,
+    0,
+    0,
+    0.5,
+    0.5
+  ],
+  "uniform_cross_max": 6.288512807529753e-17,
+  "selected": {
+    "f_Hz": 0.005,
+    "sigair": 0,
+    "ground": 0.1,
+    "anis": 0.5,
+    "hall": 0,
+    "phase": 3.141592653589793,
+    "load_fraction": 0.19922336442437666,
+    "solar_label_only_normalized": 0.3285139635674833,
+    "lightning_label_only_normalized": 0.006138601044892357,
+    "cross_normalized": 0.06379416423637765,
+    "sheet_heat_fraction": 0.5448520817345779,
+    "radial_heat_fraction": 0,
+    "uniform_load_fraction": 0.1612867404463599,
+    "anis_phase0_fraction": 0.13542920018799912,
+    "anis_phase90_fraction": 0.16732303857132086
+  },
+  "by_frequency": [
+    {
+      "f": 0.005,
+      "max_load_fraction": 0.19922336442437666,
+      "max_abs_cross": 0.06379416423637765,
+      "max_radial_heat_fraction": 0.00002174249080886891
+    },
+    {
+      "f": 0.05,
+      "max_load_fraction": 0.19915752294560665,
+      "max_abs_cross": 0.06377308175871574,
+      "max_radial_heat_fraction": 0.000022624440784790136
+    },
+    {
+      "f": 3.915,
+      "max_load_fraction": 0.07166439013641664,
+      "max_abs_cross": 0.02202346564627493,
+      "max_radial_heat_fraction": 0.008791029924988933
+    },
+    {
+      "f": 7.83,
+      "max_load_fraction": 0.047083698143645554,
+      "max_abs_cross": 0.013743458675588224,
+      "max_radial_heat_fraction": 0.09565367226403651
+    }
+  ],
+  "limits": "Truncated l=1 Galerkin boundary, higher modes omitted; anisotropy static passive; normalized upper scalar admittance surrogate, resistive lower boundary not Earth volume, two prescribed air layers, no actual material calibration, no true MHD forcing, no measured source spectra, no frequency conversion, no actual HF actuation, no finite collector, no physical solar extraction. Source labels are synthetic common-frequency TE/TM vectors. Strongest passive conjugate match on six retained modes, not a hardware design. Small energy residual proves projected ledger, not angular truncation convergence or physical accuracy.",
+  "attribution": "Classical vector spherical harmonics, layered Maxwell, Lorentz response, Poynting and conjugate matching prior art; original OCT369 and Filsinger donors credited; user shared-cavity and half-mode hypothesis; DASHI specific donor-linked Galerkin application; no new documented JMD input."
+}

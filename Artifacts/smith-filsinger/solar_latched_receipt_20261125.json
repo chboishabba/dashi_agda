@@ -1,0 +1,72 @@
+{
+  "status": "CONDITIONAL_AVERAGED_LATCH_AND_PASSIVE_BOUND",
+  "source_head": "71349647069fb813db66503602f0fca118a4f321",
+  "checker_blob": "4affe9a4d8ac5de1553c455543797fa049ee04e7",
+  "local_executed_blob": "4affe9a4d8ac5de1553c455543797fa049ee04e7",
+  "cases": 128,
+  "zero_source_controls": 128,
+  "max_residual": 9.188269079783492e-16,
+  "max_periodic_error": 1.1324274851176597e-13,
+  "baseline": 0.2191780821917808,
+  "matched_passive": 0.25,
+  "carrier": {
+    "ratio": 1000,
+    "Q": 10000,
+    "load": 0.2500000175781554,
+    "source": 0.5000000000000256,
+    "exchange": 3.515628510530888e-8,
+    "maintenance": 0.075,
+    "net": 0.17499998242187026
+  },
+  "best_latch": {
+    "period": 64,
+    "duty": 0.9921875,
+    "phase": 0,
+    "source": 0.49956727328927775,
+    "load": 0.24986974410512094,
+    "switch_positive": 0.00017221492096433842,
+    "switch_negative": -3.6222437846267375e-31,
+    "net_without_additional_cost": 0.2496975291841566,
+    "incremental_budget_no_recovery": 0.0305194469923758,
+    "latch_extra_cost_per_cycle_budget": 12.272597819247476
+  },
+  "best_duty": {
+    "period": 1,
+    "duty": 0.25,
+    "phase": 3.9269908169872414,
+    "source": 0.45535545835780494,
+    "load": 0.22486700552823222,
+    "switch_positive": 0.00036567190908797436,
+    "switch_negative": -0.005987119210428304,
+    "net_ideal_recovery": 0.21173845282957257
+  },
+  "period_budgets": [
+    {
+      "period": 1,
+      "budget": 0.02473169182553836
+    },
+    {
+      "period": 4,
+      "budget": 0.02598238475811246
+    },
+    {
+      "period": 16,
+      "budget": 0.029612034544839655
+    },
+    {
+      "period": 64,
+      "budget": 0.0305194469923758
+    }
+  ],
+  "donors": {
+    "paid_actuator": "0626d7525d12b58075792a506bbf38897e898a65",
+    "hopf_head": "c542c3677ec7ab6edf7801c723fbdfc72583a166",
+    "hopf_roadmap": "f32a81381c9172dc15524142c23183b8d07230b9",
+    "cube_head": "bcd97048bef6c40969fd8b4e82cadf6a2aaef9bd",
+    "cube_blob": "42b70ebb7376813076934f2245ce6011b76f10c8"
+  },
+  "limits": "Local numerical matrix exponentials and Floquet truncation; exact square completion verified in SymPy. 128 grid entries include duplicate duty at n=1. Intermittent averaged approximation, ideal signed energy recovery; no actual latch, no calibrated source, no full field access model. Fixed source ceiling not a universal physical bound.",
+  "CI": false,
+  "kernel": false,
+  "physical": false
+}

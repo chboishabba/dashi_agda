@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-23",
+  "status": "J27_PASS_BYTE_IDENTICAL_LOCAL_NOMINAL_TWO_EVENTS_AND_J24_BOXES_2_OF_6",
+  "pr": 1537,
+  "base": "master",
+  "source_branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "J25_interval_primitive_blob": "5d723374d71281cc5583582cc17d15016deaa8a3",
+  "J26_first_event_verifier_blob": "78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94",
+  "J27_second_event_verifier_blob": "6c7d7781f11943fc5b1267a6259bf3dc14f374d3",
+  "source_execution": "Original nine-state J18 equations independently transcribed into exact J25/J26/J27 interval consumers; J18 numerical Python is not byte-executed",
+  "arithmetic": "exact rational fractions, outward 10^30 integer-grid, 52nd-order Taylor residual, componentwise nonnegative Jacobian matrix exponential with exact tail",
+  "original_initial_state": "specified exact J23 rational numerical root, not proved periodic",
+  "nominal_only": true,
+  "first_event": {
+    "diode": "V",
+    "activation_interval": [
+      "3.389367008",
+      "3.389367010"
+    ],
+    "source": "J26 replay",
+    "event_state_J24_box_coordinates": 9,
+    "all_coordinates_included": true
+  },
+  "handoff": {
+    "event_time_uncertainty_width": "2/1000000000",
+    "virtual_inactive_to_physical_diode_V_active": "state continuous, no reset",
+    "active_jacobian_infty_norm_upper": "100 (strict)",
+    "active_V_guard_derivative_positive": true,
+    "virtual_V_guard_after_crossing_upper": "<1/1000000000",
+    "discrepancy_due_to_diode_current_upper": "<13/1000000000 per model time",
+    "Gronwall_factor_upper": "1/(1-100*2e-9)<2",
+    "state_mismatch_exact_rational_upper": "13/499999900000000000",
+    "state_uncertainty_added_for_continuation": "1/1000000000000000"
+  },
+  "physical_V_active": {
+    "accepted_guard_free_segments": 13,
+    "through_time": "3.490367010",
+    "diode_U_inactive": true,
+    "diode_V_active": true,
+    "spark_initially_ON": true
+  },
+  "spark_OFF": {
+    "event_time_bracket": [
+      "3.49129269",
+      "3.49129275"
+    ],
+    "width_model_time": "0.00000006",
+    "left_guard_integer_grid": [
+      "835604387886156863784",
+      "4905633029523974031447"
+    ],
+    "right_guard_integer_grid": [
+      "-4686566508518742755322",
+      "-616531726389373125989"
+    ],
+    "signed_event_slope_integer_grid": [
+      "91248020302944744320890109809",
+      "94346345898621305380292417041"
+    ],
+    "pre_bank_slope_negative": true,
+    "post_bank_slope_positive": true,
+    "rank_one_saltation_determinant_interval_grid": [
+      "-2267911308167538426014111777576",
+      "-2267901476781109364209437589017"
+    ],
+    "orientation_reversing": true,
+    "original_J24_spark_OFF_event_state_box_coordinates": 9,
+    "original_J24_all_coordinates_included": true
+  },
+  "original_J24_conditional_event_boxes_now_paid": 2,
+  "original_J24_total_six": 6,
+  "completion_boundary": [
+    "spark-OFF physical post-event not yet integrated",
+    "spark-ON, U-diode ON, V-diode OFF, U-diode OFF still uncertified",
+    "full tau return map and derivative not interval certified",
+    "exact periodic fixed point not proved",
+    "five-parameter uniform period not proved",
+    "environmental incident source and original Filsinger hardware unmeasured"
+  ],
+  "no_ci": true,
+  "no_agda_kernel": true,
+  "no_physical_100_percent_efficiency_claim": true
+}

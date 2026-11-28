@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local independent residual and changing-tail fixture plus actual original dense/CSR cone parity; full native spherical graph not executed",
+  "runtime": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0",
+    "OPENBLAS_NUM_THREADS": 1,
+    "timeout_s": 90
+  },
+  "verified_blobs": {
+    "scripts/solar_matrix_storage.py": "960f913d81a1f3a4cfee687b720a7ebbe61f4a86",
+    "scripts/solar_evolution_residual.py": "c10ea554ad902be04f13288834282603822e5cb7",
+    "scripts/solar_changing_tail.py": {
+      "blob": "cb49e1fa89539ccaaf6a1f4e7a18d80924c400ce",
+      "ref": "8ca9d994fea33d1c592cebf8b10f2c634b0ae420",
+      "note": "later right_limit_reference and reverse_tail_start functions appended but not executed"
+    },
+    "scripts/check_solar_evolution_tail.py": "fd84ff5b703652305a6d3be6fa0a9e0b620b2aae",
+    "scripts/solar_physical_cone.py": "0be1e6faa1eba29291805d83c52b1d453825da6e",
+    "scripts/solar_support_boundary_cayley.py": "ca09a34f3db30e298577de01160a8ff312a383be",
+    "scripts/check_solar_sparse_cone.py": "cf3357dacfcdd47b510198f12a4af62bcd212a08"
+  },
+  "source_copy_dependency": {
+    "path": "scripts/solar_quadratic_jet.py",
+    "blob": "70db819585dc17c3f9d4f1677712ae7d69dd0f84",
+    "scope": "cayley2 function and imports copied verbatim; full module not blob-matched"
+  },
+  "local_evolution_tail": {
+    "status": "PASS",
+    "storage_cases": 3,
+    "affine_cases": 3,
+    "history_reopen_error": 2.220446049250313e-16,
+    "residual_steps": 8,
+    "final_state_bound": 1.707407469573735,
+    "work_error_bound": 1.3251717605028146,
+    "tail_steps": 65,
+    "max_operator_bound_ratio": 0.1034835209678988,
+    "last_tail_bound": 0.2062121643654027,
+    "exact_conditional_block": "13/16",
+    "negative_controls": 2
+  },
+  "local_sparse_cone": {
+    "status": "PASS",
+    "steps": 2,
+    "stage_receipts": 10,
+    "exact_dense_sparse_state_parity": true,
+    "exact_receipt_parity": true,
+    "negative_controls": 3,
+    "first_test_premise_corrected": "A2 acting only on first-order state is third order; test now includes two A1 exchanges to inhabit second-order remote arrival"
+  },
+  "pending": [
+    "complete native 24-cell source graph and legacy gates",
+    "native sparse spherical parity",
+    "native 24->576 primal and two-jet campaign",
+    "matched controlled/asymptotic passive native gates",
+    "right-limit reference construction and reverse tail margin on full source graph",
+    "uniform full occupied-subspace decay or obstruction, outward rounding",
+    "physical cochain/port identification and continuum error"
+  ],
+  "dns_checkout": "Could not resolve host: github.com",
+  "ci": false,
+  "kernel": false,
+  "physical_admission": false
+}

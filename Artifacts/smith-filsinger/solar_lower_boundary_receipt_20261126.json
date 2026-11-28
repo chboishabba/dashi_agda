@@ -1,0 +1,50 @@
+{
+  "status": "LOWER_BOUNDARY_CONDITIONAL_LEDGER_AND_ORIGINAL_DIAGNOSTICS",
+  "checker_blob": "bc32016792a247e8642196dfe7054befcf697d5d",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout90 python exit0 (output complete, piped to tee; checker hash and remote readback verified); no CI/kernel",
+  "hashes": {
+    "PF_fig_JH.nc": "2213a4fbcf2f3f7354dd16b53699decbcca5d4043b3ec71f73d2ae8fb9528255",
+    "Lin25_PF_fig_JH.m": "cd9193d648601c69f85c31e185214555df690ef5c8ee2ae72ff1321344a8d552"
+  },
+  "source": "Lin et al., DOI 10.1029/2025GL118532, supplied original figure data and plotting code",
+  "donors": {
+    "local": "f73c17031698d88f701c7069859d97b640d697e7",
+    "layered": "b5f68b1836b736789698f8370c04bdd7a2e94192",
+    "spatial": "78302a9afdf72beacc5a5f60cd1de507ffb6930e",
+    "field_bridge": "1bae7dc0e6b9afd1ff68c444b8ed7a9979a94392"
+  },
+  "unique_plot_samples": 16200,
+  "duplicate_seam_samples": 45,
+  "dc_missing_full": 1128,
+  "fac_range_uA_m2": [
+    -0.7956253405339617,
+    0.6624168846605986
+  ],
+  "potential_range_kV": [
+    -12.217922128574184,
+    4.163148699297205
+  ],
+  "unweighted_fac_mean_uA_m2": -0.004450586857041068,
+  "unweighted_product_mean_mW_m2": 0.1606228596157904,
+  "unweighted_product_mean_shifted_1kV_mW_m2": 0.1561722727587494,
+  "periods_s": [
+    50,
+    100,
+    200,
+    300,
+    500,
+    1000,
+    null
+  ],
+  "upstream_net_GW": [
+    8.051900621846258,
+    11.150743940287654,
+    13.721687047053322,
+    17.998670476760534,
+    11.207712221743076,
+    7.7860902908264285,
+    6.190063931719261
+  ],
+  "scope": "Exact real-valued sheet fixture and finite graph current closure, not an actual sheet model or new measured heat. Original array avg_joun is DC Poynting flux per MATLAB plot labels, not independent heat observation. Unweighted FAC/potential sample mean is a gauge-dependence discriminator only; no physical quadrature or normal assigned. Conditional energy-only bounds [0, upstream total] assume restored storage, no other input and nonnegative net lower/side exit and dissipation, not physically achievable transport range or actual available ground power. Original published no-leak assumption is distinct. Donor definitions inspected not rerun. No raw files redistributed.",
+  "physical_admission": false
+}

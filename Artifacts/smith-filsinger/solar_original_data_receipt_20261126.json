@@ -1,0 +1,126 @@
+{
+  "status": "SOURCE_DIAGNOSTIC_AND_MEASURED_TRANSFER_REPLAY",
+  "checker_blob": "d0c9a30ce8ca443b93ce4ec01611802169104694",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python exit 0; exact committed source blob verified; initial SHA transcription mismatch corrected against local bytes before successful run; no CI/kernel",
+  "hashes": {
+    "PF_fig_PF.nc": "8ff495be1ebdd6609813061880b8faf08ac8365540e8ac2d2d64961c9b3b6880",
+    "PF_fig_JH.nc": "2213a4fbcf2f3f7354dd16b53699decbcca5d4043b3ec71f73d2ae8fb9528255",
+    "Lin25_PF_fig_JH.m": "cd9193d648601c69f85c31e185214555df690ef5c8ee2ae72ff1321344a8d552",
+    "Lin25_PF_fig_PF.m": "03c65aac070842225bf705a82f6b7a82649f9a11f409ee1769166a655bd7e1aa",
+    "auslamp-qld-phase-3-edi.zip": "26020ec6a1db00359a8703fad30219e6e2e9b20e8b87e968633576525b4fab49"
+  },
+  "publisher_checksum_match": "AusLAMP only; other hashes calculated from supplied bytes, not independently authenticated against Zenodo",
+  "sources": {
+    "gamera": "Lin et al. DOI 10.1029/2025GL118532; Zenodo 16424673; user-supplied original figure diagnostics and Matlab plotting sources",
+    "auslamp": "P. Maher, Janelle Kerr, D. Brown, Adrian Hitchman, Wenping Jiang, R. Hassan (2024), AusLAMP Queensland Phase 3, DOI 10.26186/150000, CC-BY-4.0, regenerated AusMT distribution; original authors credited"
+  },
+  "period_s": [
+    50,
+    100,
+    200,
+    300,
+    500,
+    1000,
+    null
+  ],
+  "alfven_GW": [
+    1.0502156300211043,
+    4.0064187960791875,
+    5.614449936095215,
+    4.718154471011989,
+    2.5622712130267677,
+    1.489869849869266,
+    0.00044634069201534063
+  ],
+  "dc_GW": [
+    7.001684991825153,
+    7.144325144208468,
+    8.107237110958106,
+    13.280516005748545,
+    8.64544100871631,
+    6.296220440957162,
+    6.189617591027246
+  ],
+  "ped_S": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "ped_alfven_GW": [
+    6.561084810974287,
+    5.614449936095215,
+    4.671236904926804,
+    4.1320686022203414
+  ],
+  "ped_dc_GW": [
+    8.043491419729088,
+    8.107237110958106,
+    7.826604996151381,
+    7.325664396673518
+  ],
+  "baseline_map_GW": 5.612407439193058,
+  "baseline_table_minus_map_GW": 0.002042496902157076,
+  "peak_alfven_mW_m2": 1.4883406744623717,
+  "peak_dc_mW_m2": 5.281491781066907,
+  "dc_map_missing": 1128,
+  "keogram": {
+    "time_samples": 61,
+    "space_samples": 615,
+    "cadence_s": 10,
+    "duration_s": 600,
+    "fit_period_s": 200,
+    "component_product_W_m2_range": [
+      -0.00008059019738542436,
+      0.00008049245762195247
+    ],
+    "scope": "least squares fundamental component product, not full vector signed flux, source covariance or local measurements"
+  },
+  "edi": {
+    "station_count": 41,
+    "frequency_rows": 1467,
+    "range_Hz": [
+      0.000015625,
+      0.1875
+    ],
+    "rho_relative_error_percentiles_50_95_100": [
+      6.610752700808575e-8,
+      2.941343037687891e-7,
+      4.868677050406944e-7
+    ],
+    "summary": [
+      {
+        "f": 0.005,
+        "count": 39,
+        "gain_min_median_max": [
+          0.6073676697511917,
+          1.2807209854465675,
+          39.42300012388654
+        ],
+        "positive_nominal_signed_forms": 38,
+        "median_variance_scale": 0.008429402766507246
+      },
+      {
+        "f": 0.05,
+        "count": 39,
+        "gain_min_median_max": [
+          0.6413999189230091,
+          1.5391759482096734,
+          91.20908025431143
+        ],
+        "positive_nominal_signed_forms": 38,
+        "median_variance_scale": 0.030569216542135978
+      },
+      {
+        "f": 3.915,
+        "count": 0
+      },
+      {
+        "f": 7.83,
+        "count": 0
+      }
+    ],
+    "scope": "stored component units checked via apparent resistivity identity; no electric-axis azimuth or physical signed frame inferred; variance scales not joint confidence ellipsoid; no station ranking or absolute incident power"
+  },
+  "limitations": "Figure data only, no full GAMERA rerun, no original area quadrature weights, no same-event joint source/ground time series, no physical actuator transfer, source attribution or extraction. No raw user files redistributed."
+}

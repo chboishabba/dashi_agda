@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-28",
+  "scope": "local exact symbolic and native cone geometry; full spherical source graph not executed",
+  "executed_blobs": {
+    "scripts/solar_quadratic_jet.py": "70db819585dc17c3f9d4f1677712ae7d69dd0f84",
+    "scripts/solar_physical_cone.py": "3adff771e09da6a8f2271a490966bab20cf387c3",
+    "scripts/check_solar_quadratic_jet.py": "029c52b8888ff1163594f1cf2dfea05b7d32762b",
+    "scripts/solar_restoration_geometry.py": "055fe767ec50bc7259f8e230f4aaead73bcac6cd",
+    "scripts/check_solar_restoration_geometry.py": "332ea44bd0f079a9b402b7e410f9ae0f5f2f9415"
+  },
+  "prior_boundary_dependency": "ca09a34f3db30e298577de01160a8ff312a383be",
+  "quadratic_jet": {
+    "status": "PASS",
+    "event_cases": 9,
+    "reaction_channels": 2,
+    "kinetic_coefficients": true,
+    "second_only_dormant_face": true,
+    "inherited_absolute_reach": true,
+    "invalid_reach_seeds_rejected": 2,
+    "errors": [
+      [
+        0.0033844595852463074,
+        0.00001913053093168665
+      ],
+      [
+        0.0003393439717073423,
+        0.0000019416439512517925
+      ],
+      [
+        0.00003394153633258619,
+        1.944720996113758e-7
+      ]
+    ],
+    "s": [
+      0.01,
+      0.001,
+      0.0001
+    ],
+    "work2": 0.03573356731079717,
+    "state2": [
+      -0.15112480337322343,
+      -0.12835034840382434,
+      0
+    ]
+  },
+  "thermal": {
+    "status": "PASS",
+    "necessary_tail_candidate": 248,
+    "sufficient_tail_candidate": 251,
+    "underflow_log_norm": -7499.849314544847,
+    "exact_return_obstructed": true,
+    "initial_sympy_factored_positivity_indeterminate_corrected": true
+  },
+  "pending": [
+    "actual 24-cell source graph",
+    "native passive box and reverse ray execution",
+    "physical signed source impedance",
+    "rigorous coefficient/mesh/remainder enclosure",
+    "independent measured source and receiver work"
+  ],
+  "ci": false,
+  "kernel": false,
+  "physical_admission": false
+}

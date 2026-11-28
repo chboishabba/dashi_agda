@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-24",
+  "pr": 1537,
+  "status": "PASS_J32_ORIGINAL_SOURCE_EVENT3_SPARK_ON_TO_EVENT4_U_ON_128_SLAB_TAYLOR7_PB6_CONDITIONAL",
+  "source": {
+    "jet": "scripts/check_smith_filsinger_j32_source_taylor_jets_20261124.py",
+    "jet_blob": "22cff0bcc48f9cec68ec2c173237b0b224745197",
+    "executable": "scripts/check_smith_filsinger_j32_signed_affine_full_leg_20261124.py",
+    "executable_blob": "a9b773a5e716eea21439d5df40657a1c3d0b4512",
+    "original_model": "J25/J31 original nine-state prescribed-wave nonlinear-capacitor and original guard modes",
+    "original_source_dependency": "scripts/check_smith_filsinger_j31_native_seven_shortcharts_interval_20261124.py"
+  },
+  "execution": {
+    "local_fraction_four_32_slab_checkpoints": true,
+    "new_J32_executable_bytes_git_verified": true,
+    "exact_full_result_sha256": "8a67981a67a6e754881e908a6ee174f97f14da0f5c079a39006b33ccefa2dd6a",
+    "full_output_bytes": 55972,
+    "local_equivalent_original_source_primitives_with_phase_cache": true,
+    "latest_full_original_J31_import_byte_replay": false,
+    "original_full_result_regenerable_from_committed_code": true,
+    "CI_used": false,
+    "kernel_checked": false
+  },
+  "original": {
+    "source_mode": [
+      0,
+      1,
+      1
+    ],
+    "from": "event3 spark ON",
+    "to": "event4 U diode ON",
+    "nominal_start_time": "3.515340479143",
+    "nominal_end_time": "4.275489023275",
+    "independent_start_end_time_halfwidth": "1/200000",
+    "original_J29_start_state_box_halfwidth": "1/10000",
+    "prior_J29_root_time_brackets_contained": 2,
+    "source_event_guard_zero_at_actual_terminal_still_unproved": true
+  },
+  "exact_acceptance": {
+    "strict_Picard_slabs": 128,
+    "source_PB6_chronological_nine_by_nine_slabs": 128,
+    "analytic_source_Taylor_degree": 6,
+    "Lagrange_remainder_order": 7,
+    "original_U_diode_OFF_guard_strictly_negative_slabs": 127,
+    "original_final_U_ON_pre_switch_slope_strictly_positive_slabs": 1,
+    "original_endtime_U_ON_slope_positive": true,
+    "original_V_diode_ON_fulltime": true,
+    "source_spark_ON_fulltime": true,
+    "original_start_spark_ON_post_slope_negative": true,
+    "independent_absolute_start_end_time_state_and_jacobian_intervals": true,
+    "maximum_source_q_less_than": "0.163908",
+    "final_reference_residual_radius_less_than": "3e-8",
+    "source_initial_input_image_radius_less_than": "0.001842",
+    "terminal_state_component_diameter_less_than": "0.003696"
+  },
+  "numeric_diagnostic": {
+    "nine_terminal_states_inside_rational_interval": "9/9",
+    "nine_by_nine_nominal_state_jacobian_entries_inside": "81/81",
+    "nine_by_nine_independent_clock_jacobian_entries_inside": "81/81",
+    "start_clock_partial_components_inside": "9/9",
+    "end_clock_partial_components_inside": "9/9",
+    "maximum_tangent_interval_element_width_approx": 10.634,
+    "numerical_only_not_formal_interval_proof": true
+  },
+  "geometric_firewall": {
+    "original_J24_event4_narrow_target_box_inside_broad_source_output": "9/9",
+    "original_source_output_inside_original_J24_event4_narrow_box": "0/9",
+    "original_J24_full_source_box_admission_not_inferred_from_this_output": true,
+    "original_actual_guard_zero_not_proved": true,
+    "full_69D_source_F_and_DF_not_produced": true,
+    "interval_Jacobian_current_too_wide_for_unqualified_Krawczyk_contraction_claim": true,
+    "strict_69D_Krawczyk": false,
+    "exact_periodic_orbit": false
+  },
+  "now_complete_conditional_original_source_smooth_mode_count": 5,
+  "original_smooth_mode_total": 7,
+  "remaining_complete_modes": [
+    "0→event1",
+    "event6→original τ=20π/11"
+  ],
+  "no_rebase_or_merge": true
+}

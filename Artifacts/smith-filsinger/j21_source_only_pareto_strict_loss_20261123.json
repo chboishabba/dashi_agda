@@ -1,0 +1,70 @@
+{
+  "status": "J21_LOCAL_INDEPENDENT_J18_EQUATION_REPLAY_PASS_NATIVE_J21_SCRIPT_NOT_BYTE_EXECUTED",
+  "date": "2026-11-23",
+  "method": "Independent local implementation of native J18 exact nine-state equations, cross-checked on three J20 fixtures; SymPy 1.14 strict loss-floor algebra",
+  "original_blobs": {
+    "J12": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+    "J18": "f4270a475f010874056cfe3cdeff5ee8e43c44eb",
+    "J19": "cc5cec2d4f881b38b4c01ef79dd93f36e9ef1439",
+    "J20": "ed09b82287ec1ca0318b4f8e9d355f614d00d894"
+  },
+  "parameters": {
+    "drive_amp": 0,
+    "gamma_internal": 0.0002,
+    "gamma_rad": 0.015,
+    "k": 0.35,
+    "kh": 2,
+    "Gload": 0.52,
+    "source_amp": 1.2,
+    "phase": 0.3,
+    "wave_handedness": -1,
+    "off_return": "capacitive",
+    "Rcoil": 0.05,
+    "Rgap": 0.09,
+    "Rfree": 0
+  },
+  "candidate": {
+    "accepted": true,
+    "events": 22,
+    "closure": 0.0000013894478056997173,
+    "adjacent_event_shift": 0.000020012980940009584,
+    "incident": 90.47786842338606,
+    "outgoing": 31.05793702873486,
+    "load": 46.56166007802276,
+    "load_over_incident": 0.5146193305542976,
+    "wave_capture": 0.656734430530558,
+    "field_heat": 1.6460778385708899,
+    "gap_heat": 2.793612797787275,
+    "coil_heat": 1.5524691874989909,
+    "copper_heat": 2.914589583695755,
+    "diode_heat": 0.40317502025548513,
+    "bleed_heat": 3.5483485718734653,
+    "driver_work": 0,
+    "storage_delta": -0.0000021908932694714167,
+    "signed_residual": 5.078398501723314e-7
+  },
+  "event_sensitivity": {
+    "source_amp_1_1995_1_2005": 0.0004263884090960346,
+    "phase_0_299_0_301": 0.0018301104197462337,
+    "k_0_3495_0_3505": 0.0017661806790556511,
+    "Gload_0_518_0_522": 0.01958138601094106,
+    "kh_2_005_switch_branch_changed": true
+  },
+  "controls": {
+    "zero_internal_damping_load_over_incident": 0.520737,
+    "zero_sources_load": 0,
+    "driver_on_wave_off_incident": 0,
+    "driver_on_wave_off_load": 0.5865299,
+    "no_spark_at_high_load_is_not_valid_same_event_branch": true
+  },
+  "exact_floor": {
+    "equation": "Wcoil>=Rcoil*Gload*Wload",
+    "end_to_end_ceiling": "eta <=1/(1+Rcoil*Gload)",
+    "ceiling_at_candidate": 0.9746588693957114,
+    "coil_floor_at_candidate": 1.210603162028592
+  },
+  "not_physical_filsinger_measurement": true,
+  "committed_native_J21_script_not_executed_in_this_session": true,
+  "github_CI_used": false,
+  "agda_kernel_run": false
+}

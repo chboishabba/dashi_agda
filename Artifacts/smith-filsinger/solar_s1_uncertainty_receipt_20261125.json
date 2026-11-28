@@ -1,0 +1,141 @@
+{
+  "status": "CONDITIONAL_S1_UNCERTAINTY_COVARIANCE",
+  "source_head": "65f3f8524172f7f5815ade84b9a6349c6d482b88",
+  "checker_blob": "be0fb24a8b0f0314f07767bb2731b14f099d7bf6",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "initial_failure": "SymPy structural equality needed expansion; corrected and rerun.",
+    "perturbation_checks": 512,
+    "covariance_endpoint_checks": 8,
+    "exact_label_identities": 2,
+    "byte_match": true
+  },
+  "donors": [
+    "3fd8dc6a93bafcdbebae9b570713f9c9f2e6e164",
+    "291933beaaf7995fb56fe5fc9a03de396ab80822",
+    "97d67fa9e4af6f61835f766fbe89994a922c48cc",
+    "06d683bd2dfd24d4ad9de0620ef3718001fdbe36",
+    "1f3ee2625ede999147386b8f94e9078d29c94e65"
+  ],
+  "fixtures": {
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "N": 48,
+    "area_m2": 1,
+    "aspect": 1,
+    "g": 1,
+    "source_indices": [
+      0,
+      4
+    ],
+    "incident_norm_sq": 1,
+    "relative_error": [
+      0,
+      0.0001,
+      0.01,
+      0.1
+    ],
+    "seed": 369,
+    "scope": "Hypothetical unloaded observer and loaded output, normalized model, no empirical measurement."
+  },
+  "relative_interval_width_ranges": [
+    [
+      0,
+      0.0000020741206670941908,
+      0.00003542888655893163
+    ],
+    [
+      0.0001,
+      0.0004029773955180634,
+      0.001819535230650627
+    ],
+    [
+      0.01,
+      0.04006664202506682,
+      0.17865197422297954
+    ],
+    [
+      0.1,
+      0.40064540950157257,
+      1.786219599091835
+    ]
+  ],
+  "observer_ranks": {
+    "all_four_frequencies": [
+      2,
+      2,
+      6
+    ],
+    "observers": [
+      "local E",
+      "local E and power-conjugate H",
+      "local E plus upper E and H"
+    ],
+    "scope": "Numerical rank at relative SVD threshold1e-12; lower h=-yg e in unloaded surrogate, not generic physical observation law."
+  },
+  "covariance_rows": [
+    {
+      "f": 0.005,
+      "lower": 2.081382569155868e-16,
+      "upper": 2.0813896559991716e-16,
+      "actual": 2.0813861174340343e-16
+    },
+    {
+      "f": 0.05,
+      "lower": 2.0816845805364509e-16,
+      "upper": 2.081692240475879e-16,
+      "actual": 2.0816884169571985e-16
+    },
+    {
+      "f": 3.915,
+      "lower": 4.3220381291902497e-16,
+      "upper": 4.3220501839926094e-16,
+      "actual": 4.3220441764463074e-16
+    },
+    {
+      "f": 7.83,
+      "lower": 1.1015446255447955e-14,
+      "upper": 1.1015469110336104e-14,
+      "actual": 1.1015457714994178e-14
+    }
+  ],
+  "clock_one_degree_seconds": [
+    [
+      0.005,
+      0.5555555555555556
+    ],
+    [
+      0.05,
+      0.05555555555555555
+    ],
+    [
+      3.915,
+      0.0007095217823187171
+    ],
+    [
+      7.83,
+      0.00035476089115935857
+    ],
+    [
+      7800,
+      3.561253561253561e-7
+    ]
+  ],
+  "acquisition": {
+    "status": "BLOCKED_RAW_DATA",
+    "attempts": [
+      "curl -IL https://zenodo.org/records/16424673/files/PF_fig_JH.nc",
+      "curl -IL https://ausmt.auscope.org.au/data/bundles/auslamp-qld-phase-3-edi.zip"
+    ],
+    "result": "Both DNS resolution failed, curl exit6; no binary replay."
+  },
+  "limits": "Conservative outer bounds on noisy observation, not sharp in general, not interval-arithmetic certified. Norm lower bound is necessary not sufficient for feasible data. Exact covariance fibre theorem under known linear observation and trace budget; numerical witnesses only for selected fixtures. No source-specific covariance restrictions admitted, so label repartition is a nonidentifiability counterexample, not evidence that distinct physical sources have identical spectra. Assumed lower boundary h=-yg e, no independent physical H measurement. No physical calibration, actual data, source attribution or extraction. Classical SVD, covariance factorization and triangle inequality prior art; original DASHI source inverse retained; new application only."
+}

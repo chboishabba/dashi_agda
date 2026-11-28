@@ -1,0 +1,60 @@
+{
+  "status": "CONDITIONAL_COVARIANCE_FIBRE_REPAIR",
+  "checker_blob": "4b99486f87ae68f6b73354b2e5152f82384fc1d5",
+  "archive_sha256": "26020ec6a1db00359a8703fad30219e6e2e9b20e8b87e968633576525b4fab49",
+  "execution": "Local OPENBLAS_NUM_THREADS=1 timeout 90 python exit0; committed checker exact blob match; no CI/kernel",
+  "records": 1467,
+  "attained_endpoints": 2934,
+  "max_endpoint_error": 2.7755575615628914e-17,
+  "summary": {
+    "all": {
+      "n": 1467,
+      "needs_cross_quadrature": 1467,
+      "strict_positive_equal_autospectra": 1378,
+      "sign_ambiguous_equal_autospectra": 87,
+      "nonpositive_upper": 2,
+      "negative_mode_unrestricted": 170,
+      "cross_radius_ohm_min_median_max": [
+        0.0000011335217178178054,
+        0.00011123586266918797,
+        0.04944257422128396
+      ]
+    },
+    "5mHz": {
+      "n": 39,
+      "needs_cross_quadrature": 39,
+      "strict_positive_equal_autospectra": 39,
+      "sign_ambiguous_equal_autospectra": 0,
+      "nonpositive_upper": 0,
+      "negative_mode_unrestricted": 1,
+      "cross_radius_ohm_min_median_max": [
+        0.0000045977866510861714,
+        0.00018227353312940894,
+        0.01682476006265625
+      ]
+    },
+    "50mHz": {
+      "n": 39,
+      "needs_cross_quadrature": 39,
+      "strict_positive_equal_autospectra": 39,
+      "sign_ambiguous_equal_autospectra": 0,
+      "nonpositive_upper": 0,
+      "negative_mode_unrestricted": 1,
+      "cross_radius_ohm_min_median_max": [
+        0.0000060652677181266545,
+        0.00011407295268758422,
+        0.03488105028339419
+      ]
+    }
+  },
+  "donors": {
+    "consumer_descent": "d0961074290dd887af3c96add0957a0fa14140be",
+    "consumer_repair": "5bab8f89861559c14f3877acd5e11424b21a6a6d",
+    "query_factorization": "98c592232292bbb6c5f0df047c8df3fd42be30d3",
+    "spacetime": "bfb4bef54d96b4e90303b9d8928cd0221fb0b089",
+    "meter": "26cce860eb0d27b044f87988257273fb7261d959",
+    "funding": "18845974a25975e4fe3f799f5cf961b0b63d1c06"
+  },
+  "scope": "Observed complex EDI tensors; hypothetical equal magnetic autospectra and trace1, not actual measured H covariance. Conditional common right-handed frame; no causal or physical boundary admission. Numerical nonzero threshold 1e-12 relative operator norm. Rank repair over unrestricted linear covariance readouts, not guaranteed realizable physical instrument. Donor definitions inspected not executed; no raw files redistributed or empirical extraction.",
+  "physical_admission": false
+}

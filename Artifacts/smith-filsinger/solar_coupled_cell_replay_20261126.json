@@ -1,0 +1,47 @@
+{
+  "fixtures": 54,
+  "propagator_error": 6.8833827526759706e-15,
+  "independent_quadrature_error": 3.3306690738754696e-16,
+  "signed_kick_ledger_error": 3.4833247397614286e-15,
+  "symbolic_identities": 2,
+  "packet_sha256": "d771b81b3498e4cf9424325afe9e27f1c3f8125d0ba6c608c175cb62bd955fb6",
+  "rows": 3087,
+  "operator_evaluations": 12348,
+  "diagnostic_steps_s": [
+    1e-06,
+    0.001
+  ],
+  "histories": {
+    "history": {
+      "1e-06": {
+        "max_energy_operator_residual": 3.574993226147614e-14,
+        "min_loss_eigenvalue": -2.1769218770171823e-20,
+        "max_propagator_norm": 0.9999980660798334,
+        "max_direct_expm_difference": 5.769685405891208e-13
+      },
+      "0.001": {
+        "max_energy_operator_residual": 2.7027869547766414e-11,
+        "min_loss_eigenvalue": 0.0,
+        "max_propagator_norm": 0.9980679066770891,
+        "max_direct_expm_difference": 2.6664056468698385e-10
+      }
+    },
+    "daily": {
+      "1e-06": {
+        "max_energy_operator_residual": 3.597205194923333e-14,
+        "min_loss_eigenvalue": -1.3609099272481734e-20,
+        "max_propagator_norm": 0.9999981209403173,
+        "max_direct_expm_difference": 5.745474377301197e-13
+      },
+      "0.001": {
+        "max_energy_operator_residual": 2.7843048481287782e-11,
+        "min_loss_eigenvalue": 0.0,
+        "max_propagator_norm": 0.9981226647258153,
+        "max_direct_expm_difference": 2.6791862090174753e-10
+      }
+    }
+  },
+  "status": "CONDITIONAL_COUPLED_LOCAL_CELL",
+  "physical_admission": false,
+  "scope": "Fixed population and coefficients, local electric-current exchange with no spatial curl in this stage; synthetic diagnostic timesteps and signed source-kick fixtures only. Loss operators independently integrated, no inferred actual work or physical propagation."
+}

@@ -1,0 +1,143 @@
+{
+  "status": "CONDITIONAL_LOADED_PLANAR_TRANSFER",
+  "source_head": "16c3e05ffc771e44765b3a18acf3f9df8819526f",
+  "checker_blob": "1a9ad6f6ba05ac1cc6648831160937fd0cd91a6b",
+  "cases": 108,
+  "worlds": 432,
+  "max_energy_residual": 2.8918011144922157e-16,
+  "max_air_residual": 1.9949319973733282e-17,
+  "normalization": "RMS incident amplitude 1 V/m for scale cancellation only; incident power density 0.7957747154594768 W/m² in surrogate, NOT natural observed amplitude. All output fractions refer to the upper boundary incident mode, not solar wind upstream.",
+  "fixtures": {
+    "f_Hz": [
+      0.005,
+      0.05
+    ],
+    "wavelength_km": [
+      100,
+      1000,
+      10000
+    ],
+    "Pedersen_S": [
+      3,
+      5,
+      20
+    ],
+    "Hall_S": [
+      0,
+      5
+    ],
+    "soil_S_m": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "height_m": 110000,
+    "Alfven_speed_m_s": 1000000,
+    "angle_grid": 181,
+    "control_off_fraction_of_optimal_G": 0.1
+  },
+  "selected": [
+    {
+      "lambda_km": 100,
+      "load_fraction": 1.4400136460999704e-9,
+      "delta_natural_fraction": -7.90881576204673e-10,
+      "incremental_control_budget_fraction": 1.1491857675171256e-9,
+      "conjugate_match_fraction": 2.958307345988702e-8,
+      "G_opt_S": 3186.0704287825115
+    },
+    {
+      "lambda_km": 1000,
+      "load_fraction": 0.0008178690516654994,
+      "delta_natural_fraction": 0.00029426699535533906,
+      "incremental_control_budget_fraction": 0.0005870842624547756,
+      "conjugate_match_fraction": 0.0010996223168854731,
+      "G_opt_S": 582.751580629306
+    },
+    {
+      "lambda_km": 10000,
+      "load_fraction": 0.0013412297344961807,
+      "delta_natural_fraction": 0.0008341298721189414,
+      "incremental_control_budget_fraction": 0.0009422299802385873,
+      "conjugate_match_fraction": 0.0016085035272565232,
+      "G_opt_S": 511.5130897468997
+    }
+  ],
+  "selected_common": {
+    "f_Hz": 0.005,
+    "Pedersen_S": 5,
+    "Hall_S": 5,
+    "soil_S_m": 0.01,
+    "angle_deg": 90
+  },
+  "maximum": {
+    "f_Hz": 0.05,
+    "lambda_km": 10000,
+    "Pedersen_S": 3,
+    "Hall_S": 5,
+    "soil_S_m": 0.001,
+    "load_fraction": 0.022087688661131706,
+    "delta_natural_fraction": 0.02443231733074356,
+    "incremental_control_budget_fraction": 0.01543752545720391,
+    "conjugate_match_fraction": 0.02587465796597705
+  },
+  "minimum": {
+    "f_Hz": 0.005,
+    "lambda_km": 100,
+    "Pedersen_S": 20,
+    "Hall_S": 0,
+    "soil_S_m": 0.1,
+    "load_fraction": 1.1121715504598494e-28
+  },
+  "dataset": {
+    "doi": "10.5281/zenodo.16424673",
+    "version": "v1",
+    "published": "2025-07-26",
+    "paper": "10.1029/2025GL118532",
+    "creators": [
+      "Dong Lin",
+      "Michael Hartinger",
+      "William Lotko",
+      "Wenbin Wang",
+      "Xueling Shi",
+      "Viacheslav Merkin",
+      "Bharat Kunduri",
+      "Kareem Sorathia",
+      "Michael Wiltberger",
+      "Kevin Pham"
+    ],
+    "metadata_url": "https://zenodo.org/records/16424673",
+    "files": [
+      {
+        "name": "PF_fig_JH.nc",
+        "md5": "5ade8efddf74068bdbd7fe6dfc3c51b8"
+      },
+      {
+        "name": "PF_fig_PF.nc",
+        "md5": "4267281ca83411bdd979ea0327f8f4d3"
+      },
+      {
+        "name": "Lin25_PF_fig_JH.m",
+        "md5": "f9c6cabd01fa55ce0b94c961607bb8f2"
+      },
+      {
+        "name": "Lin25_PF_fig_PF.m",
+        "md5": "2531365eb7c8236d9c0d2f9edcb205a9"
+      }
+    ],
+    "download": "failed; published digests not locally verified; no dataset replay"
+  },
+  "scope": "Numerical boundary model with exact scalar matching derivative and Hall antisymmetry checked in SymPy, byte-matched local execution. Homogenized sheet load not discrete antenna. Upper boundary surrogate not actual MHD. No actual HF actuator or physical source power. Source-off no feedthrough by construction.",
+  "attribution": {
+    "scientific_sources": [
+      "Lin et al. 2026, DOI 10.1029/2025GL118532",
+      "Transmission of a Magnetospheric Pc1 Wave Beam Through the Ionosphere to the Ground, 2018, DOI 10.1029/2018JA025338",
+      "Modeling geomagnetically induced currents, DOI 10.1002/2016SW001499"
+    ],
+    "user": "HF conduit and geometry comparison research direction",
+    "JMD": "documented contributions only; no new JMD result imported in this tranche",
+    "DASHI": "new conditional source-loaded boundary and reverse matching calculation; classical Maxwell/impedance and Hall/Pedersen theory not new discoveries",
+    "hopf_donor": "PR #1554 P0F 2a148f8c7b84b007f5b3dbe963538fcf1e7d382b; latest head observed 23591f1e1f886df37a31f78cd109e2e52454699d; no new donor merge or loaded Hopf calculation"
+  },
+  "CI": false,
+  "kernel": false
+}

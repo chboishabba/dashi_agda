@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-24",
+  "status": "PASS_J31_INDEPENDENT_NUMERICAL_MEMBERSHIP_9_STATE_81_DX_ONLY",
+  "source": "J31 independent 15D/69D SciPy source-specific seven-mode solver",
+  "audit_source": "scripts/check_smith_filsinger_j31_full_spark_off_independent_numerical_20261124.py",
+  "audit_code_blob": "bf13ce52e058b5fc3d77e461d8fe2bdb4a637a54",
+  "interval_reference": "scripts/check_smith_filsinger_j31_full_spark_off_four_slab_20261124.py",
+  "interval_reference_blob": "f9e8ff2389655e45ca6ca2bc9a2e818167a4f442",
+  "independent_scipy_state_membership": 9,
+  "source_state_dimensions": 9,
+  "independent_scipy_variational_membership": 81,
+  "source_tangent_entries": 81,
+  "ODE_solver_steps": 50,
+  "relative_tolerance": 2e-12,
+  "absolute_tolerance": 1e-13,
+  "max_step": 0.0005,
+  "scope": "Double precision independent numerical regression only; cannot promote rigorous inclusion, global seven-leg DF, strict Krawczyk or exact periodic orbit",
+  "original_source_exact_interval_PB12_proof_is_separate": true,
+  "full_seven_segments_certified": false,
+  "strict_69D_Krawczyk": false,
+  "exact_periodic_orbit": false,
+  "github_ci": false
+}

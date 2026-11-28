@@ -1,0 +1,165 @@
+{
+  "date": "2026-11-23",
+  "status": "J23_INDEPENDENT_TWO_SWITCH_FUNDAMENTAL_32_32_WIDER_CORNERS_NUMERICAL_PASS_NATIVE_J23_NOT_BYTE_EXECUTED",
+  "provenance": {
+    "original_pr": 1537,
+    "base": "master",
+    "numerical_solver": "independently reconstructed J18/J22 9-state switched ODE, hybrid variational saltation and SciPy numerical work replay",
+    "j23_native_source_script": "scripts/check_smith_filsinger_j23_fundamental_11fold_poincare_20261123.py",
+    "native_j23_script_committed": true,
+    "native_j23_script_byte_executed": false,
+    "user_uploaded_independent_j22_archive_replayed": true,
+    "original_source_sha": {
+      "J12": "f5f66e343a979dfe2bc70f68e1e98fce75817653",
+      "J18": "f4270a475f010874056cfe3cdeff5ee8e43c44eb",
+      "J19": "cc5cec2d4f881b38b4c01ef79dd93f36e9ef1439",
+      "J20": "ed09b82287ec1ca0318b4f8e9d355f614d00d894",
+      "J21": "b4c865f465f1a4a2e8dd40820eb02a6456454d67",
+      "J22": "5b2b84b247630d10794fa2f91617a82ac4e318fc"
+    },
+    "github_actions_or_ci_run": false,
+    "agda_kernel_run": false,
+    "original_filsinger_device_or_environmental_source_verified": false
+  },
+  "exact_sympy": {
+    "omega_rational": "11/10",
+    "native_period": "20*pi",
+    "fundamental_period": "20*pi/11",
+    "exact_source_quadrature_periodicity": true,
+    "exact_number_fundamental_periods": 11,
+    "original_source_only_hybrid_flow_composition": "P_T=(P_tau)^11 on state x switch-mode carrier",
+    "at_fixed_point": "M_T=M_tau^11, signed per-period work contributions repeat 11-fold",
+    "controller_ON_has_tau_period": false
+  },
+  "central": {
+    "parameters": {
+      "drive_amp": 0,
+      "source_amp": 1.2,
+      "wave_handedness": -1,
+      "off_return": "capacitive",
+      "gamma_internal": 0.0002,
+      "gamma_rad": 0.015,
+      "k": 0.35,
+      "kh": 2,
+      "Gload": 0.52,
+      "Rcoil": 0.05,
+      "Rgap": 0.09
+    },
+    "numerical_two_event_root": [
+      -0.04585851023046709,
+      0.0967120405698972,
+      1.9865816276887802,
+      1.1890650910077614,
+      2.3839347955003958,
+      5.502919318568432,
+      -5.781120275385947,
+      -0.7451738522543331,
+      -1.5585226674954609
+    ],
+    "switches_per_fundamental": 2,
+    "switches_per_native_period": 22,
+    "tau_event_times": [
+      3.491292721172182,
+      3.5153404791260408
+    ],
+    "min_event_gap": 0.02404775795385875,
+    "min_pre_switch_signed_slope": 0.0920361285,
+    "monodromy_rho_fundamental": 0.8881037941541999,
+    "monodromy_rho_native_period": 0.2710821865674899,
+    "relative_power_matrix_difference": 3.4947453296043935e-10,
+    "singular_min_IminusM_fundamental": 0.11950617607301879,
+    "inverse_operator_2_norm_numeric": 8.367768368632225,
+    "fundamental_return_defect_original_root": 9.559686375837373e-12,
+    "fundamental_return_defect_after_shoot": 1.9539925233402755e-14,
+    "independent_energy_replay_closure": 1.6340528929958964e-9,
+    "source_input_per_fundamental": 8.225260765762371,
+    "outgoing_per_fundamental": 2.823448617073247,
+    "hf_load_per_fundamental": 4.232878140398976,
+    "load_over_incident": 0.5146193246563466,
+    "net_wave_capture_fraction": 0.656734455,
+    "max_22_switch_times_vs_two_event_translation": 2.802516974043101e-8,
+    "elevenfold_hf_load_numerical_difference": 9.902876740852662e-9
+  },
+  "parameter_corners": {
+    "n_params": 5,
+    "count_tight": 32,
+    "tight_corners_passed": 32,
+    "count_wide": 32,
+    "wide_corners_passed": 32,
+    "warm_continuation_required": 14,
+    "params_center": {
+      "gamma_rad": 0.015,
+      "gamma_internal": 0.0002,
+      "k": 0.35,
+      "kh": 2,
+      "Gload": 0.52
+    },
+    "wide_half_widths": {
+      "gamma_rad": 0.0001,
+      "gamma_internal": 0.00005,
+      "k": 0.0005,
+      "kh": 0.0005,
+      "Gload": 0.0005
+    },
+    "tight_half_width_scale": 0.1,
+    "warm_continuation_fractions": [
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "observed_wide_min_max": {
+      "load_over_incident": [
+        0.5128428819915074,
+        0.5163825869643378
+      ],
+      "wave_capture": [
+        0.65388693924624,
+        0.659541691049603
+      ],
+      "min_signed_event_slope": [
+        0.08379355633318367,
+        0.09999873232368685
+      ],
+      "event_gap": [
+        0.023631026832598323,
+        0.024489961743545674
+      ],
+      "monodromy_rho_fundamental": [
+        0.8872291377169378,
+        0.8889820076008267
+      ],
+      "sigma_min_IminusM": [
+        0.11872565243370821,
+        0.12028638691433172
+      ],
+      "work_solver_closure": [
+        7.736922214007791e-11,
+        4.697806588183084e-9
+      ],
+      "return_map_residual": [
+        4.196643033083092e-14,
+        1.4036283246809944e-10
+      ],
+      "work_residual": [
+        3.842259843622742e-11,
+        3.926903247020164e-11
+      ],
+      "storage_delta": [
+        -1.5949837006701273e-9,
+        3.4917775337817147e-9
+      ]
+    },
+    "strong_negative_control": "A different 4-event trajectory from a cold seed did not exclude the two-event periodic root; 21-point warm homotopy recovered it.",
+    "uniform_continuous_parameter_box_interval_proved": false,
+    "unique_periodic_orbit_proved": false
+  },
+  "rigorous_future": {
+    "interval_flow_and_diode_guard_enclosure": false,
+    "interval_spark_event_localization_and_slope": false,
+    "interval_DP_tau_box": false,
+    "verified_Krawczyk_Banach_inclusion": false,
+    "exact_periodic_orbit_exists_and_unique_proved": false,
+    "physical_end_to_end_efficiency_measured": false
+  }
+}

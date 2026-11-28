@@ -1,0 +1,180 @@
+{
+  "status": "CONDITIONAL_SI_MATERIAL_COVARIANCE",
+  "checker_blob": "7e79948aab082702bd262548be4f60a8c7135d89",
+  "donor_blob": "1a3a2df7892833ac4560d462c5d5843222767fff",
+  "execution": "local OPENBLAS_NUM_THREADS=1 timeout 90 python, exit 0, executed and committed checker blob exact match; pinned local donor exact Git blob checked; SymPy exact identities and SciPy numerical work",
+  "fixtures": {
+    "global_incident_W": 1,
+    "source_states": [
+      "TE_x",
+      "TE_y",
+      "TM_x"
+    ],
+    "persistence": 0.9,
+    "areas_m2": [
+      1,
+      1000000
+    ],
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "aspects": [
+      1,
+      1.5,
+      1.618033988749895,
+      2
+    ],
+    "angles_deg": [
+      0,
+      45,
+      90
+    ],
+    "assumed_resistivity_ohm_m": 1.68e-8,
+    "volume_m3": [
+      0.000005,
+      0.005
+    ],
+    "cross_section_reference_m2": 0.000001,
+    "uniform_cross_section_floor_fractions": [
+      0.1,
+      0.5,
+      1
+    ],
+    "assumed_per_state_rms_density_cap_A_m2": 1000000
+  },
+  "evaluations": 6912,
+  "geometry_cases": 96,
+  "material_cases": 288,
+  "material_allocations_per_case": 8,
+  "max_ledger_W": 1.0356539315976069e-15,
+  "max_pair_W": 1.550963648536927e-25,
+  "max_density_A_m2": 2.0909115801200686,
+  "summary": [
+    {
+      "area_m2": 1,
+      "floor": 0.1,
+      "lower_W": [
+        3.6421017595195866e-14,
+        3.6858405739983996e-14,
+        3.747946131301523e-14
+      ],
+      "upper_W": [
+        3.6421017595985914e-14,
+        3.6858405740773065e-14,
+        3.747946131380624e-14
+      ],
+      "gain_interval_W": [
+        4.373881439980821e-16,
+        4.373881455771986e-16
+      ],
+      "incident_1uW_controller_sufficient_W": 2286298825.704761
+    },
+    {
+      "area_m2": 1,
+      "floor": 0.5,
+      "lower_W": [
+        3.048497598258371e-14,
+        3.39499559917509e-14,
+        3.5753909794943385e-14
+      ],
+      "upper_W": [
+        3.0484975983132595e-14,
+        3.394995599230364e-14,
+        3.5753909795516495e-14
+      ],
+      "gain_interval_W": [
+        3.4649800086183036e-15,
+        3.4649800097199257e-15
+      ],
+      "incident_1uW_controller_sufficient_W": 288601953.6946074
+    },
+    {
+      "area_m2": 1,
+      "floor": 1,
+      "lower_W": [
+        2.322142281235948e-14,
+        3.1391920177759544e-14,
+        3.359697039724752e-14
+      ],
+      "upper_W": [
+        2.3221422812670896e-14,
+        3.139192017814174e-14,
+        3.359697039765432e-14
+      ],
+      "gain_interval_W": [
+        8.170497365088648e-15,
+        8.170497365782259e-15
+      ],
+      "incident_1uW_controller_sufficient_W": 122391569.97624834
+    },
+    {
+      "area_m2": 1000000,
+      "floor": 0.1,
+      "lower_W": [
+        3.6421861762817725e-11,
+        3.68592478900903e-11,
+        3.748030531905081e-11
+      ],
+      "upper_W": [
+        3.642186255265122e-11,
+        3.685924867890248e-11,
+        3.748030610985698e-11
+      ],
+      "gain_interval_W": [
+        4.3738533743908e-13,
+        4.3738691608475425e-13
+      ],
+      "incident_1uW_controller_sufficient_W": 2286313.4961383613
+    },
+    {
+      "area_m2": 1000000,
+      "floor": 0.5,
+      "lower_W": [
+        3.048544492221033e-11,
+        3.3950410399670544e-11,
+        3.5754378512680895e-11
+      ],
+      "upper_W": [
+        3.048544547109245e-11,
+        3.3950410952431856e-11,
+        3.575437908579974e-11
+      ],
+      "gain_interval_W": [
+        3.464964928578095e-12,
+        3.464966030221526e-12
+      ],
+      "incident_1uW_controller_sufficient_W": 288603.209733025
+    },
+    {
+      "area_m2": 1000000,
+      "floor": 1,
+      "lower_W": [
+        2.3221422457734375e-11,
+        3.139191971118859e-11,
+        3.359696989892215e-11
+      ],
+      "upper_W": [
+        2.322142276914666e-11,
+        3.139192009339289e-11,
+        3.359697030572819e-11
+      ],
+      "gain_interval_W": [
+        8.170496942041928e-12,
+        8.170497635658514e-12
+      ],
+      "incident_1uW_controller_sufficient_W": 122391.5763133601
+    }
+  ],
+  "best_geometry_all": [
+    3.915,
+    1,
+    90
+  ],
+  "scope": "Optimistic independent seven-port current relaxation; ideal instantaneous within-subspace matching for both classes; causal previous state selects subspace. No physical switch, winding pack, circuit topology, material measurement, skin/proximity or contact losses, terminal rectification, controller cost or source calibration. Same aperture and copper volume within each envelope; different envelopes use different volumes. Finite geometry grid; continuous conductor allocation upper bounds from removing exterior dissipative matrix and maximizing convex Ky Fan function over material simplex vertices; numerical, not interval-certified. Positive difference only against fixed rank-one class, not unrestricted rank-seven. Thresholds conditional on linear source scaling and inactive density constraints, no thermal or stability proof. No empirical extraction. Classical prior art retained; no new JMD donor.",
+  "physical_admission": false,
+  "CI": false,
+  "kernel": false
+}

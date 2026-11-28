@@ -1,0 +1,87 @@
+{
+  "status": "CONDITIONAL_OCT369_VECTOR_ANGULAR_AND_TE_RADIAL",
+  "source_head": "f7700c29bb060db660464549f33189b244de1b4b",
+  "checker_blob": "cddbc3c4d5455d2c654d11c6057434fef764e6df",
+  "local_execution": {
+    "checks": 136,
+    "passed": 136,
+    "moments": 120,
+    "other": 16,
+    "timeout_seconds": 90,
+    "CI": false,
+    "kernel": false
+  },
+  "donor": {
+    "path": "scripts/check_oct369_geometry_gravity_preflight.py",
+    "ref": "master",
+    "blob": "1f493bdedf3ca058470db4fe0154c13d4df905b4",
+    "executed_byte_matched": true,
+    "available_on_starting_branch": false,
+    "invocation": "python scripts/check_smith_filsinger_oct369_vector_shell.py <local pinned donor path>"
+  },
+  "other_owners": [
+    [
+      "PR #1534",
+      "09a3ed67c2c8c0404e493395e10c988bf2a0fcdb"
+    ],
+    [
+      "scripts/check_ym_em_filsinger_gravity_3d_comparator_sympy.py",
+      "142624d1030a187b7d733ec0779239358c5015c8"
+    ],
+    [
+      "DASHI/Foundations/Base369Ternary27HypervoxelFabricGeometryExact.agda",
+      "eabb5876f391abc285d042a789ab4a29fc6b82b0"
+    ],
+    [
+      "DASHI/Mathematics/Symmetry/Punctured27NineSheetBridgeExact.agda",
+      "635d85dc260ab8c91a839e0a7cba8b5277b43e08"
+    ],
+    [
+      "OCT369P034FieldLoomCoilSourceGravityBidi20261122.md",
+      "5b878a709bb2facf240694c98ab6f1a64f0cce31"
+    ],
+    [
+      "OCT369P035SheldrakeFieldFormFilsingerLevinSourceBidi20261122.md",
+      "16078f760dfce146806300a6ddf714d8c7f6d87f"
+    ],
+    [
+      "SmithFilsingerFullVectorPoyntingPortWeldExact.agda",
+      "1661ea45cbeacc638601935ca489c4d75e197f24"
+    ],
+    [
+      "scripts/psychotronics_field_loom_coils.py",
+      "342bf32aadda4d29b671f3b263d6afc7ea29b57e"
+    ]
+  ],
+  "geometry": {
+    "weights": [
+      "1/21",
+      "4/105",
+      "9/280"
+    ],
+    "strata": [
+      6,
+      12,
+      8
+    ],
+    "origin": [
+      0,
+      0,
+      0
+    ],
+    "degree8_alias": "2/315",
+    "vector_projection": {
+      "same_family_l1_l2": "6 Qp/5",
+      "mixed_poloidal_toroidal_l1": "2 b cross p",
+      "reverse": "b=p cross t/(2|p|²)+b_parallel, t dot p=0"
+    },
+    "radial_TE": "P=-4*pi*l(l+1)*Im(conj(u)*u')/(omega*mu), P'=-4*pi*l(l+1)*sigma*|u|²; u and u'/mu continuous at no-sheet interface"
+  },
+  "scope": "Exact signed angular integration and projected scalar quadratic density of vector harmonics, plus homogeneous TE radial flux identity. No physical material coupling, TM stratified solution, actual solar source, finite physical collector, experimental result or kernel. Donor preflight consumed, other owners read only. Oction exact spelling no repo/code match; interpreted as OCT369 relevant content, not claim of octonion/Oction equivalence.",
+  "attribution": "Lebedev quadrature, vector spherical harmonics, Maxwell/Poynting classical; original OCT369, Field Loom and native carrier retained; user shared-cavity/geometry hypothesis; DASHI specific source-linked projection and radial work comparator only; no new JMD artifact.",
+  "prior_art": [
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.lebedev_rule.html",
+    "https://www.gnu.org/software/gsl/doc/html/integration.html",
+    "https://doi.org/10.1007/s12200-023-00102-2"
+  ]
+}

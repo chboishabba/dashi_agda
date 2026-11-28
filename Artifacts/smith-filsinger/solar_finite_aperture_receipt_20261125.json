@@ -1,0 +1,88 @@
+{
+  "status": "CONDITIONAL_FINITE_GEODESIC_APERTURE",
+  "source_head": "a45368bb9931272af22ac1308d30362ad85aa26d",
+  "checker_blob": "06d683bd2dfd24d4ad9de0620ef3718001fdbe36",
+  "execution": {
+    "local": true,
+    "timeout_seconds": 90,
+    "exit": 0,
+    "CI": false,
+    "kernel": false,
+    "cases": 72,
+    "max_energy_residual": 2.0188885285765679e-13,
+    "all_numerical_ranks": 4
+  },
+  "donors": {
+    "metric_charge": "1f3ee2625ede999147386b8f94e9078d29c94e65",
+    "layered_shell": "097cc72daff0ccb657972e9316a3f0244fb6591d",
+    "portable_original": "4389c68a69aeb4d3310dee1981de1013d4d86fec",
+    "scope": "Original pinned metric-charge prefix executed byte-matched, layered radial and angular matrices transcribed, no full donor sweep or physical receiver geometry imported."
+  },
+  "fixture": {
+    "areas_m2": [
+      1,
+      1000000,
+      10000000000
+    ],
+    "aspect": [
+      1,
+      1.5,
+      1.618033988749895
+    ],
+    "frequencies_Hz": [
+      0.005,
+      0.05,
+      3.915,
+      7.83
+    ],
+    "sources": [
+      "TE_x",
+      "TM_y"
+    ],
+    "incident_each": 1,
+    "scope": "North pole gnomonic two-square topology mapped to spherical patch, equal spherical area within aspect comparisons; normalized native current scale and clock assumed, no physical hardware equality claim."
+  },
+  "selected_square_TE_x_7_83": [
+    {
+      "area": 1,
+      "full": 0.031228906348664324,
+      "restricted_ideal": 0.015108318858129934,
+      "load": 1.9303351104236937e-14,
+      "useful": 1.2543382873362634e-14,
+      "singular": [
+        5.472892748992001e-7,
+        2.735610785724026e-7,
+        1.6406602682001245e-14,
+        6.976648697350402e-15
+      ],
+      "unused_edge_norm": 9.225017146044894e-8,
+      "backreaction_norm": 1.5232526613123198e-12
+    },
+    {
+      "area": 1000000,
+      "full": 0.031228906348664324,
+      "restricted_ideal": 0.015108418594841437,
+      "load": 1.9303526899669242e-8,
+      "useful": 1.2543487462307433e-8
+    },
+    {
+      "area": 10000000000,
+      "full": 0.031228906348664324,
+      "restricted_ideal": 0.015119150975259964,
+      "load": 0.00020098321949820743,
+      "useful": 0.00013085600994134858
+    }
+  ],
+  "selected_1m2_TE_x_5mHz": {
+    "full": 0.29608062299586446,
+    "restricted_ideal": 0.009548774583627238,
+    "load": 5.623672357971019e-15,
+    "useful": 4.656342227112109e-16,
+    "aspect_useful": [
+      4.656342227112109e-16,
+      3.1042281582495327e-16,
+      2.877777767283116e-16
+    ]
+  },
+  "limits": "Normalized modal work, not measured watts or physical efficiency. Ideal current subspace ceiling has no current norm/resource bound; weak singular directions require large currents. Receiver driven by four active edge efforts, external inactive edge trace retained and nonzero, physical clamp not welded. Only l=1 Galerkin reaction, no local radiation/higher angular modes, conductor Maxwell solution, calibrated source, physical clock or current conversion, actual off-guard admission or nonlinear receiver. Radial loss from boundary flux difference. No active control or source-off trajectories in this tranche. Classical vector spherical harmonics, geodesic integrals, adjoint pairing, passive matching prior art; original DASHI source and receiver owners retained, user geometry hypothesis distinct, no new JMD artifact or physical extraction."
+}

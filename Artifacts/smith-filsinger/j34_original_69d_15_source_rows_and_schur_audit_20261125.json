@@ -1,0 +1,148 @@
+{
+  "date": "2026-11-25",
+  "pr": 1537,
+  "status": "PASS_J34_15_OF_69_EXACT_ORIGINAL_SOURCE_F_DF_ROWS;_54_UNKNOWN_FAIL_CLOSED",
+  "original_source": "Smith/Filsinger J23–J33 nine-state prescribed-wave finite-loss synthetic circuit",
+  "original_source_executable": "scripts/check_smith_filsinger_j34_69d_exact_rows_20261125.py",
+  "executable_byte_identical_git_blob": "7aa09a7d421da56b7d65d5d44e20c6542fdbcbb1",
+  "test_executable": "scripts/test_smith_filsinger_j34_exact_rows_20261125.py",
+  "test_byte_identical_git_blob": "81c1ae66e6f0a53d4a9ba8b01dc60890de7aa63e",
+  "exact_source_F_DF_row_count": 15,
+  "source_rows": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68
+  ],
+  "missing_source_rows": 54,
+  "missing_row_ranges": [
+    [
+      9,
+      17
+    ],
+    [
+      18,
+      26
+    ],
+    [
+      27,
+      35
+    ],
+    [
+      36,
+      44
+    ],
+    [
+      45,
+      53
+    ],
+    [
+      54,
+      62
+    ]
+  ],
+  "original_nine_state_x0_and_y1_to_y6_labels": true,
+  "original_six_event_times_independent": true,
+  "original_state_box_halfwidth": "1/1000000",
+  "event_clock_halfwidths": [
+    "1/200000",
+    "1/200000",
+    "1/200000",
+    "1/200000",
+    "1/200000",
+    "1/5000"
+  ],
+  "source_J33_full_49900_byte_receipt_sha256": "1736f652288fd77bfc165fc86eadb268fc94418c9024e19591a70bc08a4beb3b",
+  "original_six_named_guards": [
+    "V_ON",
+    "spark_OFF",
+    "spark_ON",
+    "U_ON",
+    "V_OFF",
+    "U_OFF"
+  ],
+  "original_six_signed_transversality": [
+    1,
+    -1,
+    1,
+    1,
+    -1,
+    -1
+  ],
+  "original_guard_interval_rational_boxes": [
+    [
+      "-1/500000",
+      "1/500000"
+    ],
+    [
+      "-1/1000000",
+      "1/1000000"
+    ],
+    [
+      "-1/1000000",
+      "1/1000000"
+    ],
+    [
+      "-1/500000",
+      "1/500000"
+    ],
+    [
+      "-1/500000",
+      "1/500000"
+    ],
+    [
+      "-1/500000",
+      "1/500000"
+    ]
+  ],
+  "approximate_outward_guard_slope_display": [
+    "[0.45490586,0.45491713]",
+    "[-0.09206334,-0.09200892]",
+    "[0.14771431,0.14776566]",
+    "[0.99273799,0.99283149]",
+    "[-0.44379573,-0.44361353]",
+    "[-0.14941416,-0.14930499]"
+  ],
+  "six_missing_full_outward_source_producers": [
+    "j31_two_track_full_v_on_spark_off_64_slab_receipt_20261124.json",
+    "j31_full_spark_off_four_slab_source_20261124.json",
+    "j32_event3_to_event4_signed_taylor_128slab_20261124.json",
+    "j31_two_track_full_uv_on_32_slab_receipt_20261124.json",
+    "j32_event5_to_event6_signed_taylor_128slab_20261124.json",
+    "j32_event6_broad_source_to_exact_tau_128slab_20261124.json"
+  ],
+  "compact_source_receipts_missing_original_full_interval_arrays": true,
+  "exact_source_only_local_full_result_sha256": "ae9bec481ef0e0a6f43841cf5c3127615707d658a191d011bb3c52d6d750f544",
+  "exact_source_only_local_full_result_bytes": 23298,
+  "adversarial_local_tests_pass": 9,
+  "adversarial_receipt_sha256": "ac931570bd979399e63a24dab2123e03795223ab1fa968e98d95e0a6f0f3183b",
+  "independent_numeric_only": {
+    "source_rhs_and_jacobian_spotchecks": 630,
+    "maximum_excess": 3.552713678800501e-15,
+    "full_69_by_69_J_nonzero": 748,
+    "schur_69d_15d_gap": 5.283140854659217e-15,
+    "condition_inf_15D": 141.29667619848686,
+    "nominal_global_F_inf": 3.4949959593078006e-11,
+    "nominal_period_return_defect_inf": 1.9204637879965958e-12,
+    "wrong_time_sign_negative_rejected": true
+  },
+  "exact_complete_69D_F_DF": false,
+  "source_69D_Krawczyk_rows": 0,
+  "exact_periodic_orbit": false,
+  "original_six_actual_guard_zeros_not_jointly_solved": true,
+  "original_sixth_J24_narrow_box_unpaid": true,
+  "original_hardware_energy_measurement": false,
+  "formal_kernel": false,
+  "github_ci": false
+}

@@ -1,0 +1,50 @@
+{
+  "status": "NUMERICAL_LINEAR_GUARD_BUDGET_SCAN_PASS_NONLINEAR_OPEN",
+  "source_head": "9f4759f4eb206783ceae69425b4f917e84af1f93",
+  "checker_blob": "1fb1f93433a57071acd177e9ea15bc54e42d890a",
+  "scope": "32 cases, 256 harmonics, 2049 phase samples; finite harmonic guard sum is floating point and excludes tail; source waveform unchanged",
+  "selected": {
+    "scale": 0.5411695265464638,
+    "dc": 0.22592241777064592,
+    "ac": 0.01565178843628217,
+    "eta": 0.2415742062069281,
+    "sampled_guard": 0.05555000331430601,
+    "finite_harmonic_guard_bound": [
+      0.055553315028249034,
+      -0.02430970549165476
+    ],
+    "cap_max": 0.45225232741697535
+  },
+  "unrestricted": {
+    "scale": 1,
+    "dc": 0.22592241777064592,
+    "ac": 0.06648157417485914,
+    "eta": 0.29240399194550504,
+    "sampled_guard": 0.29379972542622534,
+    "finite_harmonic_guard_bound": [
+      0.29380120193737963,
+      0.12923084324546463
+    ],
+    "cap_max": 0.5824050221066079
+  },
+  "nonlinear": {
+    "status": "attempted; no completed receipt",
+    "guard_certificate": false
+  },
+  "previous_xcvi_certificate_unchanged": true,
+  "physical_admission": false,
+  "CI": false,
+  "donor_heads": {
+    "1547": "4aa94536edb5142c4d2e58636b3a0509eb3f073a",
+    "1548": "af4ddcfbdcd70b4f8e0488096868cfe9e7ba4392",
+    "1549": "0a1d67a4caf4d2ce3091161e8983a3decf8c7b12",
+    "1552": "f8a55989ff26da080763e4c3d4d683dbfb498f63",
+    "1553": "715c099a2ee2f95a030c059fe19110d571f080af"
+  },
+  "limitations": [
+    "selected rows only; full scan regenerable from byte-matched executable",
+    "no outward-rounded Fourier tail",
+    "no exact nonlinear periodic admission",
+    "no new physical transducer realization"
+  ]
+}

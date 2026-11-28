@@ -1,0 +1,124 @@
+{
+  "status": "ORIGINAL_MODEL_RECOVERED_CONDITIONAL_RECIPROCAL_CAVITY",
+  "source_head": "8d416dd7760d274f1b94c9f68f668bf88684a479",
+  "checker_blob": "c446d6ec45a9b29fb378164468ca6e89e13b18ce",
+  "local_blob": "c446d6ec45a9b29fb378164468ca6e89e13b18ce",
+  "local_execution": {
+    "tool": "SymPy 1.14.0",
+    "passed": 19,
+    "total": 19,
+    "timeout_seconds": 90,
+    "CI": false,
+    "kernel": false
+  },
+  "source_owners": [
+    {
+      "path": "Docs/research/SmithFilsingerEarthMultirateC3ReverseRoadmap20261120.md",
+      "ref": "master",
+      "blob": "6ab31aa435a096679e4ade9b8369358f033c13ec",
+      "role": "MR26-39, explicit cavity-as-intermediary antenna and half-Schumann pumping user hypotheses; absent on starting PR ref"
+    },
+    {
+      "path": "Docs/research/FilsingerEarthCosmicGoldenTwoModeOptimisation20261111.md",
+      "blob": "4389c68a69aeb4d3310dee1981de1013d4d86fec"
+    },
+    {
+      "path": "Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md",
+      "blob": "17cea1da80f1e61ba08f784f7d3360c230828ee6"
+    },
+    {
+      "path": "Docs/research/DonSmithFilsingerReelsOriginalClaimBidi20261111.md",
+      "blob": "5fc95ca888cab81942a0ad5443c5e25044b79d65"
+    },
+    {
+      "path": "Docs/research/SmithFilsingerSunEarthCoupledGlobalCircuitMaxCut20261116.md",
+      "blob": "64bf4625eb7b837f0287238b6f17429fb7977d07"
+    },
+    {
+      "path": "Artifacts/smith-filsinger/source_indexed_transcript_diagram_values_20261122.json",
+      "blob": "d1c24f4e5c2b281fb6a73bc76afd18b7edc281c0"
+    },
+    {
+      "path": "scripts/check_shared_cavity_port_exact.py",
+      "ref": "master",
+      "blob": "f88ffe8834cbf3ee1a9f0cf505351047032d5ed6"
+    },
+    {
+      "path": "scripts/check_half_mode_readout.py",
+      "ref": "master",
+      "blob": "e65907e6d406dfe3ff97b721720d8a60a48204c9"
+    },
+    {
+      "path": "scripts/check_source_transfer_ceiling.py",
+      "ref": "master",
+      "blob": "a7300d269373c7f0c5b8512c40a66150c694067f"
+    },
+    {
+      "path": "scripts/check_smith_filsinger_cavity_response_discriminators.py",
+      "ref": "master",
+      "blob": "9072605a9f053a95b5d5920db592418dad946469"
+    },
+    {
+      "path": "scripts/check_smith_filsinger_dual_source_exact.py",
+      "ref": "master",
+      "blob": "8f071e5df3f2ce8813fe6aa9fd394fb3f618f529"
+    },
+    {
+      "path": "Docs/research/SmithFilsingerSchumannPhysicalSourceMaxCut20261112.md",
+      "ref": "master",
+      "blob": "ae7e700d1942db2dc6802c956a43a0e4a308b01a"
+    }
+  ],
+  "model": {
+    "separate": "Earth-ground narrated apparatus, portable common-midpoint plate, user extension upstream solar cavity, direct radiation hypotheses",
+    "cavity": "conditional reciprocal single-mode temporal coupled-mode reference at common carrier, not actual Maxwell spherical Earth cavity",
+    "half": "three-coordinate conservative nonlinear oscillator, bounded storage for positive stiffness/beta/c; HF h modulates half q; q^2 drives full z; exact zero q invariant absent seed; no stability or actual downconversion established",
+    "frequency": "7.8 kHz acoustic not measured electrical, 3.915/7.83 candidate, 30 Hz below 2000x half nominal",
+    "worlds": [
+      [
+        "A",
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        "B",
+        0,
+        "1/2",
+        "1/4",
+        "-1/4"
+      ],
+      [
+        "C",
+        "1/2",
+        0,
+        "1/4",
+        "1/4"
+      ],
+      [
+        "D",
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        "D_antiphase",
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "world_columns": [
+      "world",
+      "natural work rate",
+      "half-mode supplied work rate",
+      "load",
+      "load minus half-mode work"
+    ],
+    "world_scope": "unit RMS forces, Rs=Rl=1, same resonant fixed port; half-mode force prescribed for diagnostic, actual fast pump cost not included; no demonstrated HF-only production of that force"
+  },
+  "limits": "No original reel reopened; source records only. Master donor read, not executed, not merged. No calibrated solar/Schumann transfer, cosmic-ray transducer, direct solar RF spectrum, autonomous HF response, or physical extraction. Classical temporal coupled-mode, oscillator energy, frequency mixing prior art; original Filsinger claims and Smith lineage distinct, user proposal attributed, DASHI particular reciprocal source extension, no new JMD artifact."
+}

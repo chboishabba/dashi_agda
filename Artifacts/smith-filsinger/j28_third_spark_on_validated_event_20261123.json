@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-23",
+  "status": "J28_PASS_BYTE_IDENTICAL_NOMINAL_3_OF_6_ORIGINAL_J24_EVENT_STATE_BOXES",
+  "source_owner": "chboishabba/dashi_agda PR #1537",
+  "base": "master",
+  "branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "checker": "scripts/check_smith_filsinger_j28_spark_return_on_interval_20261123.py",
+  "committed_git_blob_executed_locally": "e22573e6189ff460e80f9bc1de13b3787d169b79",
+  "predecessor_blobs": {
+    "J25": "5d723374d71281cc5583582cc17d15016deaa8a3",
+    "J26": "78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94",
+    "J27": "6c7d7781f11943fc5b1267a6259bf3dc14f374d3",
+    "J24_event_centres": "edcec489212e81b473af5ea1049b958236781d12"
+  },
+  "provenance": {
+    "original_J18_equations": "independently transcribed, original numerical J18 script itself not byte-executed",
+    "initial_state": "exact rational nine-coordinate J23 numerical seed, not certified periodic",
+    "arithmetic": "exact rational and outward 10^30 integer grid",
+    "Taylor_order": 52,
+    "comparison": "componentwise nonnegative nine-state Jacobian majorant; exact matrix exponential geometric tail",
+    "Ci_or_Github_Actions_used": false,
+    "Agda_kernel_used": false,
+    "environmental_source_measured": false
+  },
+  "J27_second_spark_OFF": {
+    "time_bracket": [
+      "3.49129269",
+      "3.49129275"
+    ],
+    "uncertain_width_model_time": "0.00000006",
+    "event_state_all_nine_enclosed": true
+  },
+  "OFF_mode_event_handoff": {
+    "state_reset": "none (state continuous)",
+    "switched_terms": "bank receives +ih/Cb in OFF relative to ON; HF inductor loses b/Lh and removes Rgap*ih/Lh",
+    "uncertainty_represented_by": "event-state interval and event-time interval, not a single picked time",
+    "fixed_handoff_time": "3.49129275",
+    "Picard_self_inclusion": true,
+    "maximum_state_width_at_handoff_approx": 0.0000010747319982331357,
+    "uniform_jacobian_sup_norm_bound_at_handoff": "25668717948717948717948717948729/10^30",
+    "gamma_time_product_below_half": true,
+    "original_diode_U": "inactive",
+    "original_diode_V": "active",
+    "spark_mode": "OFF"
+  },
+  "physical_OFF_mode": {
+    "validated_guard_free_segments": 5,
+    "lengths": [
+      "0.005",
+      "0.005",
+      "0.005",
+      "0.005",
+      "0.002"
+    ],
+    "reached_time": "3.51329275",
+    "no_extra_diode_or_spark_events": true
+  },
+  "third_spark_ON": {
+    "time_bracket": [
+      "3.51534025",
+      "3.51534095"
+    ],
+    "width_model_time": "0.00000070",
+    "left_bank_guard_numerators": [
+      "-52758619633402386075209",
+      "-14393509752171757963516"
+    ],
+    "right_bank_guard_numerators": [
+      "50658885676384984352089",
+      "89024671736032091849592"
+    ],
+    "signed_derivative_numerators": [
+      "147368577971186488764594187387",
+      "151700834822405639423069432271"
+    ],
+    "saltation_determinant_numerators": [
+      "-857413612054554194682875513000",
+      "-857376183230349703481199800970"
+    ],
+    "scale": "10^30",
+    "pre_bank_derivative_positive": true,
+    "post_bank_derivative_negative": true,
+    "diode_U_inactive": true,
+    "diode_V_active": true,
+    "J24_original_event_state_box_all_nine_included": true,
+    "physical_post_ON_equations_not_part_of_this_checker": true
+  },
+  "J24_event_state_box_admissions_paid": 3,
+  "total_J24_event_state_boxes": 6,
+  "outstanding": [
+    "validated diode U activation, V deactivation, U deactivation and their J24 nine-state boxes",
+    "full fundamental period tau=20*pi/11 interval flow to exact endpoint",
+    "interval return-map derivative and rational Banach/Krawczyk existence for a periodic orbit",
+    "uniform 5-parameter periodic family; original Filsinger physical metrology"
+  ],
+  "exact_periodic_orbit_proved": false,
+  "fully_uniform_5_parameter_family_proved": false,
+  "physical_100_percent_source_to_load_claim": false
+}

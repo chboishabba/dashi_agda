@@ -1,0 +1,124 @@
+{
+  "status": "EXACT_FINITE_MODEL_NONLINEAR_PERIODIC_EXISTENCE_AND_LINEAR_SPECTRAL_ENVELOPE",
+  "source_head": "5ecf0a98ba816b1573637ca10b3c9223f48b78fb",
+  "executed_blobs": {
+    "wiener": "7c62bf9e110f17eeda5618413ef020a837d8049c",
+    "spectral": "e966c295d9f252c2c99dc0c6ede364d070cd5281"
+  },
+  "nonlinear_certificate": {
+    "scope": "nearby rational rank-one off-guard model; exact mathematical certificate via Wiener contraction; not formal kernel, original J36 or physical hardware",
+    "ell": [
+      "-36/25",
+      "-6589440/126517"
+    ],
+    "Y": [
+      [
+        "209/45",
+        "-20/9"
+      ],
+      [
+        "-20/9",
+        "36"
+      ]
+    ],
+    "mean_x": "9200240000/27917520759",
+    "radius": "11/40000",
+    "self_map_upper": 0.000274168076,
+    "contraction_upper": 0.000362,
+    "guard_upper": [
+      -0.168386,
+      -0.168625
+    ],
+    "bank_exact": "0",
+    "eta_lower_exact": "176060385399808000000/779387965329195936081",
+    "eta_upper_exact": "1760605079975349462825207455413/7793879653291959360810000000000",
+    "eta_lower_approx": 0.22589569409818133,
+    "eta_upper_approx": 0.22589585139818133,
+    "finite_harmonics": 16,
+    "analytic_infinite_tail": true,
+    "amp_upper": [
+      "24062231809/1000000000000",
+      "387259407479/1000000000000",
+      "198014711/250000000000",
+      "9821774307/1000000000000",
+      "104500677/1000000000000",
+      "1203006037/1000000000000",
+      "1772036489/1000000000000",
+      "1462826153/62500000000",
+      "286438037/1000000000000",
+      "2857847579/1000000000000",
+      "80473/25000000000",
+      "432133/40000000000",
+      "84158171/125000000000",
+      "216967201/500000000000",
+      "22145343013/1000000000000",
+      "40637383317/100000000000",
+      "123706487/200000000000",
+      "274118397/1000000000000"
+    ],
+    "H_upper": [
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1043465803879/1000000000000",
+      "1328519690139/1000000000000"
+    ]
+  },
+  "linear_envelope": {
+    "scope": "off-switch small-signal circuit, passive LTI mode-preserving ideal matching of same 0.4-period input; not nonlinear ceiling",
+    "lambda_DC": "122500/126517",
+    "lambda_first": 0.29765609290247924,
+    "lambda_second": 0.004219239332162778,
+    "envelope_lower_approx": 0.36356649098126975,
+    "envelope_upper_approx": 0.3635695821718575,
+    "outward_simple_upper": "36357/100000",
+    "attainability": false
+  },
+  "diplexer": {
+    "scope": "six additional positive L/C storage states, reciprocal ideal algebraic effort/flow attachment; exact storage identity; numerical linear truncated Fourier diagnostic only",
+    "log_params": [
+      0.05062544010579979,
+      1.693920383568875,
+      2.3560191376414155,
+      -1.9312719391871591,
+      -3.706267075904543,
+      1.3457281077477645,
+      -4.189915383847338,
+      -0.8299539509959512,
+      1.2222486178553746
+    ],
+    "dc": 0.22592241777064592,
+    "ac": 0.06648157417485913,
+    "total": 0.29240399194550504,
+    "first_harmonic": 0.16403670926000297,
+    "sampled_diode_gap": 0.2937997535092369,
+    "sampled_cap_max": 0.5824050221066079,
+    "harmonics": 256,
+    "nonlinear_admission": false,
+    "stability_certificate": false
+  },
+  "original_J36": false,
+  "physical_admission": false,
+  "CI": false,
+  "kernel": false,
+  "limitations": [
+    "source equations transcribed and compared, not full dependency-byte replay",
+    "proof uses nearby rational parameter choice, not exact floating beta300",
+    "exact existence in Fourier ball, not global attraction",
+    "LC numerical guard fails and no nonlinear or stability promotion",
+    "ideal static transformer not physical DC implementation"
+  ]
+}

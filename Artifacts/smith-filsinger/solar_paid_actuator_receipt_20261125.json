@@ -1,0 +1,106 @@
+{
+  "status": "CONDITIONAL_PAID_ACTUATOR_AND_RECIPROCAL_HOPF_PASS",
+  "source_head": "2f3f14af493fb9c760dc04d02f65b55a31b8a603",
+  "checker_blob": "0626d7525d12b58075792a506bbf38897e898a65",
+  "execution": "Local SymPy exact symbolic identities, SciPy signed Floquet sidebands and reciprocal ODE; timeout 90 seconds, completed, no CI/kernel",
+  "actuator": {
+    "model": "q''+(Rs+RL)q'+(k+gy²)q=Fs; m y''+m Omega/Q y'+(m Omega²+gq²)y=Fp",
+    "fixture": {
+      "Rs": 1,
+      "RL": 1,
+      "k": 0.25,
+      "g": 1,
+      "source_rms": 1,
+      "source_angular_frequency": 1,
+      "controlled_y_peak": "sqrt(3/2)",
+      "mass_scaling": "m Omega²=1"
+    },
+    "configurations": 16,
+    "worlds": 64,
+    "sideband_cutoff": 8,
+    "comparison_cutoff": 16,
+    "comparison_tolerance": 1e-10,
+    "exact_energy_identity": true,
+    "independent_exchange_check_tolerance": 2e-9,
+    "baseline": {
+      "source": 0.43835616438356156,
+      "load": 0.21917808219178078
+    },
+    "selected": [
+      {
+        "ratio": 20,
+        "load": 0.25004413546600135,
+        "exchange": 0.00008810999994079971,
+        "Q_incremental_threshold": 487.36200032362336,
+        "incremental_net_Q10000": 0.029277943274279766,
+        "incremental_net_Q100000000": 0.030777793274279763
+      },
+      {
+        "ratio": 1000,
+        "load": 0.2500000175781554,
+        "exchange": 3.515628510530888e-8,
+        "Q_incremental_threshold": 24333.347210949112,
+        "incremental_net_Q10000": -0.044178099769910495,
+        "incremental_net_Q100000000": 0.030814400230089495
+      },
+      {
+        "ratio": 2000,
+        "load": 0.2500000043945331,
+        "exchange": 8.7890646982558e-9,
+        "Q_incremental_threshold": 48666.673605470176,
+        "incremental_net_Q10000": -0.11917808658631232,
+        "incremental_net_Q100000000": 0.03080691341368766
+      },
+      {
+        "ratio": 1560000,
+        "load": 0.25000000000000716,
+        "exchange": 1.4432899320127035e-14,
+        "Q_incremental_threshold": 37960000.000008896,
+        "incremental_net_Q10000": -116.96917808219175,
+        "incremental_net_Q100000000": 0.019121917808211958
+      }
+    ],
+    "asymptotic_incremental_Q_threshold": "(73/3)*Omega in selected normalization, not universal",
+    "source_off_control_has_positive_pump_heat": true,
+    "limits": "Prescribed y=A cos(Omega t) via ideal force servo; required force contains slow backreaction sidebands. Net signed pump cost assumes ideal recovery; actual pure HF material response, servo overhead and physical parameter calibration open. Finite Fourier cutoff numerical, not rigorous tail enclosure."
+  },
+  "hopf": {
+    "profile": "P0H uncut Bz=8*(1+z²-r²)/(1+z²+r²)^3",
+    "flux": "8*pi*R²/(1+z²+R²)^2",
+    "force": "i*dPhi/dz",
+    "emf": "-zdot*dPhi/dz",
+    "fixture": {
+      "mass": 10,
+      "inductance": 1,
+      "copper_R": 0.1,
+      "flux_scale": 0.1,
+      "start_z": -20,
+      "end_z": 20,
+      "initial_speed": 0.5
+    },
+    "runs": 12,
+    "maximum_abs_energy_residual": 1.0940796879577164e-11,
+    "selected": {
+      "radius": 1,
+      "load_R": 1,
+      "kinetic_in": 1.25,
+      "useful": 0.10854086823630756,
+      "copper": 0.010854086823630744,
+      "coil_storage": 1.130300823984837e-12,
+      "reset_kinetic_cost": 0.1193949550656963,
+      "residual": 4.6277027349050925e-12
+    },
+    "limits": "Nonrelativistic rigid generalized-coordinate reciprocal model, not full loaded Maxwell/RMHD or solar source. Same L and copper R held as radius varies, not equal wire resources. Finite flight and velocity reset only; returning source position may add costs."
+  },
+  "donors": {
+    "hopf_head": "3d8464246dcc505aab4fe1b44f336fdf1227bc23",
+    "hopf_p0h_blob": "f5c21339b60254296d234aba71ee5b65ad575d61",
+    "hopf_p0i_roadmap_blob": "9e7c8fe0293339b3a5f10e5540276331e30fab05",
+    "prior_ground_blob": "1a9ad6f6ba05ac1cc6648831160937fd0cd91a6b"
+  },
+  "attribution": "Original classical Hopf, Faraday, reciprocal electromechanics, Lorentz oscillator and Floquet theory retain prior art; Smith/Filsinger documented claims only; user HF-conduit/geometry direction; DASHI new source-specific reciprocal comparator and paid servo test; no new JMD artifact used; joint attribution only where evidenced.",
+  "physical_admission": false,
+  "solar_net_gain_demonstrated": false,
+  "CI": false,
+  "kernel": false
+}
