@@ -12,6 +12,9 @@ import json
 from pathlib import Path
 from time import monotonic
 import numpy as np
+import sys
+# Original ATLAS source owners import sibling scripts by bare name.
+sys.path.insert(0,str(Path(__file__).resolve().parent))
 from scripts.monster_3b_mmgroup_checkpointed_weyl import read_pinned
 from scripts.monster_3b_mmgroup_weyl_word_alignment import check_words
 from scripts.x369_actual_3b_normalizer_tensor import source_coords
