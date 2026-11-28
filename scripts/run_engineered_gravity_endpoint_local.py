@@ -80,6 +80,7 @@ CORE=(
     "check_tov_conformal_monopole_inverse.py",
     "check_tov_polar_conformal_trial.py",
     "check_tov_polar_coupled_trial.py",
+    "check_tov_polar_ritz_search.py",
 )
 DONORS=(
     "check_kk_radion_reduced_action.py",
