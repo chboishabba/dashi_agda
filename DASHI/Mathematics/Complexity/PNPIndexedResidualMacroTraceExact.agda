@@ -10,7 +10,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as N
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 violations : ∀ {m} → Vec Bool m → Nat
 violations [] = zero
@@ -65,6 +65,33 @@ traceDamage : ∀ {S : Set} {m} {Legal : S → S → Set}
 traceDamage b done = zero
 traceDamage b (step {x} {y} edge rest) =
   damage (b x) (b y) + traceDamage b rest
+
+-- Compose exact ledgers without subtracting naturals.
+swapLast : (a b c : Nat) → a + (b + c) ≡ (a + c) + b
+swapLast a b c = trans (cong (λ t → a + t) (N.+-comm b c))
+  (sym (N.+-assoc a c b))
+
+joinLedger : (a b c r s p q : Nat) →
+  b + r ≡ c + p → a + s ≡ b + q →
+  a + (r + s) ≡ c + (p + q)
+joinLedger a b c r s p q first rest =
+  trans (swapLast a r s)
+    (trans (cong (λ t → t + r) rest)
+      (trans (N.+-assoc b q r)
+        (trans (swapLast b q r)
+          (trans (cong (λ t → t + q) first)
+            (N.+-assoc c p q)))))
+
+traceLedger : ∀ {S : Set} {m} {Legal : S → S → Set}
+  (b : S → Vec Bool m) {x y} (t : SourceTrace Legal x y) →
+  violations (b y) + traceRepairs b t ≡
+  violations (b x) + traceDamage b t
+traceLedger b done = refl
+traceLedger b (step {x} {y} {z} edge rest) =
+  joinLedger (violations (b z)) (violations (b y)) (violations (b x))
+    (repairs (b x) (b y)) (traceRepairs b rest)
+    (damage (b x) (b y)) (traceDamage b rest)
+    (signedLedger (b x) (b y)) (traceLedger b rest)
 
 -- Each strict outer step contains a real source trace and an independently
 -- established persistent-target inequality; no assertion of universal
