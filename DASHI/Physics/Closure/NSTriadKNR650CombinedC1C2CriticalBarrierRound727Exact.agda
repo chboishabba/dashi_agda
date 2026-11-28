@@ -323,6 +323,12 @@ module Endgame
       receipt
 
 ------------------------------------------------------------------------
+-- 2026-11-28 PHYSICAL REAL STRICT-MARGIN SCOPE FIREWALL:
+-- Conditional C1/C2 compiler remains algebraically valid, but the unrestricted original physical-real R645 C2 premise is refuted on a genuine cutoff-1 Galerkin velocity (316 incidences, scaled amplitude 2). At C=1 critical w(k)=1, production 0, dissipation 432, signed R406<-1104: for every delta>=0, production>(2nu-delta)D+R406 at time zero and on a short interval. Thus CombinedC1C2Inputs is NOT a source-admitted universal periodic-B theorem; the conditional compiler cannot be promoted without a mathematically different valid regularity criterion.
+-- Exact regression: scripts/check_ns_r645_c2_original_physical_counterexample_20261128.py
+-- The source conditional theorem body is preserved; no Agda field or
+-- native kernel false witness is asserted for irrational helical scalars.
+------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
 
