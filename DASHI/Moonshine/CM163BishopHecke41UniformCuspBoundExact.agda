@@ -62,7 +62,7 @@ relativeUpper t r nz h =
         (P.≃-trans (normCong (Rec.multiplyReciprocal r nz)) Norm.normSqOne)
   in record
     { Upper.radiusNonnegative = P.0≤x⇒nonNegx (P.<⇒≤ (P.p<q⇒p⋆<q⋆ 0ℚᵘ 1ℚᵘ (from-yes (0ℚᵘ QP.<? 1ℚᵘ))))
-    ; Upper.normSqBelowRadiusSquare = P.≤-respˡ-≃ (Norm.normSqMultiply t v)
+    ; Upper.normSqBelowRadiusSquare = P.≤-respˡ-≃ (P.≃-symm (Norm.normSqMultiply t v))
       (P.≤-respʳ-≃ (P.≃-trans one (P.≃-symm (P.*-identityʳ R.1ℝ))) bound) }
 
 realUnit : ∀ {w} → Upper.BishopComplexNormSquareUpperRadius w R.1ℝ →
@@ -86,7 +86,7 @@ productBound : ∀ a b x y M →
   ∣ C.im (C.complex x y *C C.complex a b) ∣ ≤ ((∣ x ∣ + ∣ y ∣) * M)
 productBound a b x y M ha hb =
   let term : ∀ u v → ∣ v ∣ ≤ M → ∣ u * v ∣ ≤ ∣ u ∣ * M
-      term u v h = P.≤-respˡ-≃ (absProduct u v)
+      term u v h = P.≤-respˡ-≃ (P.≃-symm (absProduct u v))
         (P.*-mono-≤ (P.nonNeg∣x∣ u) (P.nonNeg∣x∣ v) P.≤-refl h)
       dist = P.≃-symm (P.*-distribʳ-+ M ∣ x ∣ ∣ y ∣)
   in P.≤-trans (absSubBound (x * a) (y * b))
@@ -135,18 +135,18 @@ module Disk (r : BishopComplex) (nz : Rec.BishopComplexNonzero r)
         p = productBound (C.re b) (C.im b) (C.re a) (C.im a) R.1ℝ
           (realUnit u n) (imagUnit u n)
         read = termRead t n
-    in P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₁ read)))
+    in P.≤-respˡ-≃ (P.∣-∣-cong (proj₁ read))
       (P.≤-respʳ-≃ (P.*-identityʳ (budget n)) (proj₁ p)) ,
-       P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₂ read)))
+       P.≤-respˡ-≃ (P.∣-∣-cong (proj₂ read))
       (P.≤-respʳ-≃ (P.*-identityʳ (budget n)) (proj₂ p))
 
   absoluteOn : ∀ t → Norm.normSqC t ≤ Norm.normSqC r →
     C.ComponentwiseAbsoluteSeriesConvergent (twist t f)
   absoluteOn t h = C.componentwise-absolute-series-convergent
     (Seq.proposition-3-5 budgetConvergent (zero , λ n _ →
-      P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ _)) (proj₁ (termBound t h n))))
+      P.≤-respˡ-≃ (P.≃-symm (P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ _))) (proj₁ (termBound t h n))))
     (Seq.proposition-3-5 budgetConvergent (zero , λ n _ →
-      P.≤-respˡ-≃ (P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ _)) (proj₂ (termBound t h n))))
+      P.≤-respˡ-≃ (P.≃-symm (P.nonNegx⇒∣x∣≃x (P.nonNeg∣x∣ _))) (proj₂ (termBound t h n))))
 
   -- Value bound from finite prefix triangle inequality and the
   -- pinned real limit order. Uniform constant independent of t.
@@ -189,8 +189,8 @@ module At (inputs : Round11.BishopCutset) where
         e = R0.diagonalFactor hu hd p
         z = Eval.value (dTail p)
         p0 = productBound (C.re z) (C.im z) (C.re (t p)) (C.im (t p)) D.M (proj₁ b) (proj₂ b)
-    in P.≤-respˡ-≃ (P.∣-∣-cong (proj₁ e)) (proj₁ p0) ,
-       P.≤-respˡ-≃ (P.∣-∣-cong (proj₂ e)) (proj₂ p0)
+    in P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₁ e))) (proj₁ p0) ,
+       P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₂ e))) (proj₂ p0)
 
   sliceBound : R0.R.W.UnitGate → R0.R.W.SliceGate → ∀ p →
     Norm.normSqC (t p) ≤ Norm.normSqC reference →
@@ -201,5 +201,5 @@ module At (inputs : Round11.BishopCutset) where
         e = R0.sliceFactor hu hs p
         z = Eval.value (sTail p)
         p0 = productBound (C.re z) (C.im z) (C.re (t p)) (C.im (t p)) S.M (proj₁ b) (proj₂ b)
-    in P.≤-respˡ-≃ (P.∣-∣-cong (proj₁ e)) (proj₁ p0) ,
-       P.≤-respˡ-≃ (P.∣-∣-cong (proj₂ e)) (proj₂ p0)
+    in P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₁ e))) (proj₁ p0) ,
+       P.≤-respˡ-≃ (P.∣-∣-cong (P.≃-symm (proj₂ e))) (proj₂ p0)
