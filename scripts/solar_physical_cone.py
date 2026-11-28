@@ -25,7 +25,7 @@ def validate_mesh(mesh,d):
         faces[f['id']]=f
     return xyz,site,faces
 
-def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False):
+def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,retain_local_midpoint=False,retain_stage_residuals=False):
     """Lie product of local midpoint maps, partitioning generator exactly.
     One serial stage consumes its own elapsed physical time. Coefficients are
     rescaled so integrated first-order generator equals dt*H. A remote stage
@@ -44,6 +44,9 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     channel={k:0. for k in forms}; incoming=outgoing=0.
     local_mid=np.zeros(d) if retain_local_midpoint else None
     reflected=None
+    from fractions import Fraction
+    exact_error=Fraction(0); midpoint_error=[Fraction(0)]*d
+    def rational(v): return Fraction(float(v))
     if source_port is not None:
         source_port=np.asarray(source_port,float); assert source_port.shape==(d,)
         assert len(np.unique(site[source_port!=0]))==1
@@ -87,6 +90,23 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
         roots=ix[b!=0]; arrival[roots]=np.minimum(arrival[roots],t0)
         if np.any(arrival[ix]<=t0): arrival[ix]=np.minimum(arrival[ix],t1)
         I=np.eye(len(ix)); y=solve(I-dt*a/2,(I+dt*a/2)@old+dt*b)
+        if retain_stage_residuals:
+            # Exact residual of the binary64 input coefficients, not of the
+            # underlying physical material/metric model. All previous stage
+            # error contracts when the exact symmetric part is nonpositive.
+            import sympy as sp
+            aa=sp.Matrix([[sp.Rational(float(v)) for v in row] for row in a])
+            if not (-(aa+aa.T)).is_positive_semidefinite:
+                raise ValueError('exact dissipativity failed')
+            hh=rational(dt); rr=[]
+            for ii in range(len(ix)):
+                ri=rational(y[ii])-rational(old[ii])-hh*rational(b[ii])
+                ri-=hh*sum(rational(a[ii,jj])*(rational(y[jj])+rational(old[jj]))/2 for jj in range(len(ix)))
+                rr.append(abs(ri))
+            local_error=sum(rr)
+            if fid is None:
+                for ii in ix: midpoint_error[ii]=exact_error+local_error/2
+            exact_error+=local_error
         mid=(old+y)/2; w=dt*float(mid@b); q=-dt*float(mid@a@mid)
         assert q>=-1e-10*max(1.,abs(w),float(old@old))
         assert abs((y@y-old@old)/2-w+q)<1e-9*max(1.,abs(w),float(old@old))
@@ -102,6 +122,8 @@ def timed_step(x,H,force,dt,mesh,loss_forms=None,source_port=None,incident=0.,re
     if forms: assert abs(sum(channel.values())-loss)<1e-9*max(1.,abs(loss))
     if source_port is not None: assert abs(work-channel['source']-incoming+outgoing)<1e-9*max(1.,incoming,outgoing)
     return x,dict(work_J=work,loss_J=loss,loss_channels_J=channel,incident_J=incoming,outgoing_J=outgoing,events=receipts,arrival_s=[float(a) if np.isfinite(a) else None for a in arrival],
+                  exact_binary_stage_error=str(exact_error) if retain_stage_residuals else None,
+                  exact_binary_midpoint_error=[str(v) for v in midpoint_error] if retain_stage_residuals else None,
                   local_midpoint=None if local_mid is None else local_mid.tolist(),reflected_amplitude=reflected,
                   physical_front_admitted=False,stage_speed_bound_m_s=speed,
                   approximation='serial local midpoint product; first order consistent at fixed mesh, admissible time intervals only')
