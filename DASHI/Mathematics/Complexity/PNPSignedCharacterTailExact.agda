@@ -141,3 +141,23 @@ boundaryTailSquared xs =
 
 pairSwap : ∀ sign x y → (- sign) * (y - x) ≡ sign * (x - y)
 pairSwap sign x y = solve (sign ∷ x ∷ y ∷ [])
+
+-- A concrete involution, not merely equality of its scalar observation.
+open import Data.Rational.Properties using (+-inverseˡ)
+open import Algebra.Properties.Group as Group
+module AddGroup = Group Q.+-0-group
+
+OrientedPair : Set
+OrientedPair = ℚ × (ℚ × ℚ)
+
+swapPair : OrientedPair → OrientedPair
+swapPair (s , x , y) = (- s , y , x)
+
+swapInvolutive : ∀ p → swapPair (swapPair p) ≡ p
+swapInvolutive (s , x , y) = cong (λ t → t , x , y) (AddGroup.⁻¹-involutive s)
+
+observe : OrientedPair → ℚ
+observe (s , x , y) = s * (x - y)
+
+swapPreserves : ∀ p → observe (swapPair p) ≡ observe p
+swapPreserves (s , x , y) = pairSwap s x y
