@@ -73,14 +73,14 @@ def trace():
     assert zero(mean+(jump/2)-targetp)
     assert zero(mean-(jump/2)-targetm)
     # Actual Israel jump, including off-continuity beta and both scale sheets.
-    rhs=px[:4,:4]-mx[:4,:4]-q*betaJump.T-betaJump*q.T-j*scaleSum*2*E4
+    rhs=px[:4,:4]-mx[:4,:4]-q*betaJump.T-betaJump*q.T-j*scaleSum*E4
     assert zero(J-rhs)
     # Signed boundary energy work on a continuous tangential time jet:
     # trace is not a positive shear square.
     w=s.Matrix(4,4,lambda a,b:s.Rational((a+b+2)*(a+b+3),7))
     contraction=lambda a,b: s.trace(E4*a*E4*b)
     jumpN=px[:4,:4]-mx[:4,:4]
-    assert zero(contraction(w,jumpN)-contraction(w,J+q*betaJump.T+betaJump*q.T+2*j*scaleSum*E4))
+    assert zero(contraction(w,jumpN)-contraction(w,J+q*betaJump.T+betaJump*q.T+j*scaleSum*E4))
     print('PASS physical trace-plus/minus reconstruction and 10-component Israel source work')
 
 def subsidiary():
