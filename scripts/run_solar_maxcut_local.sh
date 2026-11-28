@@ -8,7 +8,7 @@ RECEIPTS="${RECEIPTS:-./solar_maxcut_receipts}"
 mkdir -p "$RECEIPTS"
 # Invalidate cached checkpoints when sibling Python dependencies change.
 # Conservative scope: all Python files in this script directory and this runner.
-runtime_hash="$($PYTHON -c 'import sys,platform,numpy,scipy,sympy; print(sys.version,platform.platform(),numpy.__version__,scipy.__version__,sympy.__version__)' | sha256sum | cut -d ' ' -f1)"
+runtime_hash="$($PYTHON -c 'import sys,platform,numpy,scipy,sympy,mpmath; print(sys.version,platform.platform(),numpy.__version__,scipy.__version__,sympy.__version__,mpmath.__version__)' | sha256sum | cut -d ' ' -f1)"
 source_hash="$(find . -maxdepth 1 -type f \( -name '*.py' -o -name 'run_solar_maxcut_local.sh' \) -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d ' ' -f1)"
 for entry in \
   check_solar_native_contract_sympy.py \
@@ -42,6 +42,10 @@ for entry in \
   check_solar_exact_affine_port.py \
   check_solar_native_jet_shadow.py \
   check_solar_native_tail_observability.py \
+  check_solar_exact_material_interval.py \
+  check_solar_exact_tail_endpoint.py \
+  check_solar_distributed_tail.py \
+  check_solar_native_matched_return.py \
   check_solar_direct_passive_binary.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
