@@ -168,7 +168,11 @@ def test_live_bundle_plan_records_semantic_actions():
     report = build_plan(
         ROOT,
         json.loads((ROOT / ".dashi/round-stranded/ym-migration-candidates.json").read_text()),
-        json.loads((ROOT / ".dashi/round-stranded/ym-consolidation-ledger.json").read_text()),
+        build_ledger(
+            ROOT,
+            ROOT / ".dashi/round-stranded/ym-packages.jsonl",
+            ROOT / "Docs/physics/YMClayEndpointPhaseLemmaManifest20261108.json",
+        ),
         json.loads((ROOT / ".dashi/round-stranded/ym-migration-plan.json").read_text()),
     )
     assert report["schema_version"] == 2
@@ -186,13 +190,21 @@ def test_live_bundle_plan_records_semantic_actions():
 def test_migration_roadmap_separates_filesystem_count_from_semantic_queue():
     base = ROOT / ".dashi/round-stranded"
     roadmap = build_roadmap(
-        json.loads((base / "ym-consolidation-ledger.json").read_text()),
+        build_ledger(
+            ROOT,
+            ROOT / ".dashi/round-stranded/ym-packages.jsonl",
+            ROOT / "Docs/physics/YMClayEndpointPhaseLemmaManifest20261108.json",
+        ),
         json.loads((base / "ym-migration-plan.json").read_text()),
         json.loads((base / "ym-migration-candidates.json").read_text()),
         json.loads((base / "ym-live-bundle-plan.json").read_text()),
     )
     snapshot = roadmap["current_snapshot"]
-    assert snapshot["historical_files_on_disk"] == 1194
+    assert snapshot["historical_files_on_disk"] == build_ledger(
+        ROOT,
+        ROOT / ".dashi/round-stranded/ym-packages.jsonl",
+        ROOT / "Docs/physics/YMClayEndpointPhaseLemmaManifest20261108.json",
+    )["historical_module_count"]
     assert snapshot["live_declaration_uses"] == 12
     assert snapshot["source_bundles"] == 4
     assert snapshot["source_bearing_declarations"] == 6
