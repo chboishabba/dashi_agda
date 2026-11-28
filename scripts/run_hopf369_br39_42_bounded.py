@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–84 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–88 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -89,6 +89,10 @@ PARTS={
     *[(f"BR78.{part}","check_hopf369_br78_tension_bianchi_ward.py",("--part",part)) for part in ("vacuum","matter","symbol","negative")],
   ],
   "heavy":[
+    ("BR85.geometry","check_hopf369_br85_88_geometric_weld.py",("--part","BR85")),
+    ("BR86.energy","check_hopf369_br85_88_geometric_weld.py",("--part","BR86")),
+    *[(f"BR87.{a}.{b}","check_hopf369_br85_88_geometric_weld.py",("--part","BR87","--allocation",a,"--sector",b)) for a in ("D","E") for b in ("metric","gauge")],
+    ("BR88.projector","check_hopf369_br85_88_geometric_weld.py",("--part","BR88")),
     *[(f"BR82.{part}","check_hopf369_br82_glancing_loss.py",("--part",part)) for part in ("algebra","growth","refusal")],
     *[(f"BR83.{part}","check_hopf369_br83_full_5d_energy_current.py",("--part",part)) for part in ("full","channels","moving","negative")],
     *[(f"BR84.{part}","check_hopf369_br84_bn_wall_corner.py",("--part",part)) for part in ("corner","inverse","negative")],
@@ -208,10 +212,10 @@ def main():
         plans=PARTS["fast"]+PARTS["heavy"]
     elif args.part=="closure":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR79","BR80","BR81","BR82","BR83","BR84"}]
+               if p[0].split(".")[0] in {"BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88"}]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81","BR82","BR83","BR84"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88"}]
     else:
         plans=PARTS[args.part]
     outcome={}

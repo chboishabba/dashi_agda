@@ -39,7 +39,7 @@ def curved():
     # Same-object source equation from contracted Bianchi:
     # if Ered=Etrue-S(C), then div TREred=-1/2(□-4)C.
     source=-expected
-    assert divergence_trace_reversed+source==s.zeros(5)
+    assert divergence_trace_reversed+source==s.zeros(5,1)
     print('PASS BR55 five curved Ric=-4 Bianchi channels, source equation, missing-curvature negative control')
 
 def flat():
@@ -70,7 +70,7 @@ def boundary():
     reference=original['D'][5:9,0]
     correction_due_to_curvature=physical_tangent-reference
     assert (correction_due_to_curvature
-      +2*M*E4*jump+j*(cp[:4,0]+cm[:4,0])/2)==s.zeros(4)
+      +2*M*E4*jump+j*(cp[:4,0]+cm[:4,0])/2)==s.zeros(4,1)
     assert correction_due_to_curvature!=s.zeros(4,1)
     assert original['D'][-1]==original['E'][-1]
     print('PASS BR55 true 10-row D/E original gauge and explicit curved nonzero-mean Codazzi forcing')

@@ -325,3 +325,63 @@ full-dimensional symbolic suites and native Agda kernel are
 NOT yet accepted. The final nonlinear 5D Einstein–Israel
 well-posedness theorem remains outstanding, precisely at the
 operator/estimate/continuation welds above.
+
+
+## 6. BR85–88 — connected W1–W4 pass (28 Nov)
+
+New executable owner: scripts/check_hopf369_br85_88_geometric_weld.py.
+Status: COMMITTED_PENDING_LOCAL_RUN, except independent local principal
+matrix calculations (not an execution receipt for this file). No Agda
+kernel acceptance. Retain the classical attribution and all earlier
+negative controls.
+
+- **BR85/W1:** explicit non-Gaussian moving graph first variation of the
+  induced metric, normalized Hessian/connection Israel K, contracted
+  coordinate gauge and physical tangent/normal gauge frame. Both face
+  first jets share the induced h. Differentiate BR63 trace-reversal and
+  its inverse including the derivative of h^{-1}; use an independent
+  exact rank-one metric path oracle. This is a directional source
+  certificate; full arbitrary-background BR71/72 row equivalence,
+  including mean and allocation-specific conditions, remains open.
+- **BR86/W2:** real positive covector fibre metric M=g^{-1}+2XX^T and
+  symmetric-tensor induced 15-channel Gram, attached to the 5-channel
+  covector Gram. First-order normal/spatial principal symbol is
+  symmetrized by diag(1,H^{-1}); the actual Levi-Civita connection
+  induces coupled symmetric-tensor connection work
+  dG-A^T G-G A. Exact divided time-jet product/commutator through order
+  eight. Need integrated mixed-spatial coefficient bounds, physical wall
+  energy/trace closure and actual same-solution coefficients.
+- **BR87/W3:** directly invert the ORIGINAL BR34 normalized flat
+  decaying half-space principal row maps, retaining D/E distinct.
+  Set z=((w+w^{-1})/2,(w-w^{-1})/2,0,0), plus derivative=-value,
+  minus derivative=+value, j=0 in normalized principal symbol.
+  Along s=1+i omega, xi=omega, w=ell, w^2=1+2i omega.
+  Both inverse products are checked exactly. Every denominator is
+  constant times w^a(w^2+1)^b; |w|>=1 and |w^2+1|>=|w|^2.
+  Coefficient l1 gives an explicit row-sum bound. Exact maximum powers
+  of |w| are D metric 3, D gauge 2, E metric 1, E gauge 1, with
+  nonzero leading inverse coefficient. Thus E has a half-derivative
+  normalized principal ray cost, D has 3/2 and 1. This is stronger
+  than BR37's chart upper bound on this ray, NOT a global Kreiss
+  theorem or finite warped DtN estimate. Do not change physical
+  allocation without W0/W1 compatibility. Next: perturb the actual
+  BR34 warped finite-interval DtN in the E norm, preserve the row
+  scaling, extend to all damped sectors and variable coefficients.
+- **BR88/W4:** use the original BR29 rank-nine projector and the actual
+  induced bivector frame rotation in the spatial normal/tangent plane.
+  Its derivative is the commutator with the compressed 35D geometric
+  generator; transport the source as well as projector. Prior to
+  subsidiary uniqueness Ric=-4g+D, D=S(C)+Ered; Schouten=-g/2+
+  (D-g tr D/8)/3. Mixed Codazzi Weyl source retains the Ricci defect,
+  not its prematurely zeroed vacuum value. Need full contracted
+  Cotton source and physical wall projected kernel + uniqueness on
+  the same solution. A general source fails P0*f=0, explicitly tested.
+- Repair existing BR55 vector-versus-square-zero assertions in
+  curved and boundary checks; no change of mathematical claim.
+
+**Revised remaining critical cut:** W1 full D/E Jacobian attachment ->
+W2 actual high-order wall/bulk estimate -> W3 warped E tame resolvent ->
+W4 sourced subsidiary uniqueness. W5/6 remain dependent on this
+chain; no new scalar solve, no promotion from pointwise/ray checks.
+Local runner closure partition includes BR85–88 in independent bounded
+stages. No GitHub Actions run requested.
