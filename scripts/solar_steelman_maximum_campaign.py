@@ -35,7 +35,7 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
@@ -67,6 +67,9 @@ def main():
     elif x.stage=='reciprocal':
         from solar_steelman_reciprocal_port_inverse import construct
         construct(a)
+    elif x.stage=='history-leaf':
+        from solar_steelman_history_leaf import construct
+        construct(m,a,x.delay)
     elif x.stage in ('history-block','history-assemble'):
         from solar_steelman_history_section import block,assemble
         prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
@@ -77,12 +80,18 @@ def main():
             block(m,a,x.delay,x.knots,x.start,x.stop,x.tol,tmp);os.replace(tmp,path)
             json_atomic(path.with_suffix('.json'),dict(sha=sha(path),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots))
         else:
-            paths=sorted(work.glob(prefix+'_*.npz'))
+            paths=sorted(p for p in work.glob(prefix+'_*.npz') if not p.name.endswith('_leaf.npz'))
             if not paths:raise ValueError("no history blocks")
             for path in paths:
                 meta=json.loads(path.with_suffix('.json').read_text())
                 if meta!=dict(sha=sha(path),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots):raise ValueError("history provenance mismatch")
-            assemble(paths)
+            M=assemble(paths)
+            from solar_steelman_history_leaf import construct,section
+            _,_,Q=construct(m,a,x.delay)
+            A,defect=section(M,Q,len(a['models']),x.knots)
+            out=work/f'{prefix}_leaf.npz'
+            np.savez(out,M=A,Q=Q,defect=defect)
+            json_atomic(out.with_suffix('.json'),dict(sha=sha(out),upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots))
     elif x.stage=='preflight':
         from solar_steelman_reservoir_return import preflight
         preflight(m,a)
