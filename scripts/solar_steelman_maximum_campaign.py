@@ -141,7 +141,14 @@ def main():
             if x.start is None or x.stop is None:raise ValueError('column bounds required')
             path=work/f'{prefix}_{x.start:04d}_{x.stop:04d}.npz'
             trace,provenance=verify_block(path)
-            z=certify(m,a,trace,x.degree,block_path=path)
+            partial=path.with_name(path.stem+f'_cert{x.degree}_partial.pkl')
+            prior=load(partial,provenance,src) if partial.exists() else []
+            if x.slab_limit<1:raise ValueError('positive slab limit required')
+            z=certify(m,a,trace,x.degree,block_path=path,prior=prior,
+                      checkpoint=lambda rows:save(partial,rows,provenance,src),
+                      limit=x.slab_limit)
+            if z is None:
+                print('PARTIAL trace certificate; resume same command',flush=True);return
             out=path.with_name(path.stem+f'_cert{x.degree}.pkl')
             save(out,z,provenance,src)
             print('conditional rational-time block certificate written',out,flush=True)
