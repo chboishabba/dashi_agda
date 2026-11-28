@@ -160,11 +160,16 @@ def recognize(T,r,pay,degree_cap=2):
     for i in range(d):
         for j in range(i+1,d):
             z=point({i:1,j:1});put(P,(i,j),D[z]-evaluate(P,z))
-    if degree_cap==3:P=cubic_interpolation(D,d,pay)
-    for z,e in D.items():
-        pay(1+len(P))
-        if evaluate(P,z)!=e:return None
-    return c,u,V,P
+    def matches(P):
+        for z,e in D.items():
+            pay(1+len(P))
+            if evaluate(P,z)!=e:return False
+        return True
+    if matches(P):return c,u,V,P
+    if degree_cap==3:
+        P=cubic_interpolation(D,d,pay)
+        if matches(P):return c,u,V,P
+    return None
 
 
 def singleton(s,a):return a,s,(),{}
