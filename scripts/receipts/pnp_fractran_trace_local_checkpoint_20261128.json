@@ -1,0 +1,167 @@
+{
+  "scope": "local connector-transcribed function bodies, not full checkout; exact complete FRACDASH helper git blob verified",
+  "source_head": "636d78725a430895704c495d2488386469c95cd0",
+  "fractdash_bridge_blob": "f8629757efc83462f15c9de0fcc3849926a2875b",
+  "timeout_seconds": 90,
+  "checkpoint_policy": "atomic replace per dimension or every 64 replay cases; independent stress and transmutation checkpoints",
+  "initial_failure": {
+    "type": "IndexError",
+    "cause": "hard leaf charged len(F[e]) with e outside capacity rows",
+    "fix": "636d78725a430895704c495d2488386469c95cd0"
+  },
+  "stages": {
+    "trace": {
+      "completed": 1280,
+      "receipts": 385,
+      "units": 1287,
+      "nonimprovement": 895
+    },
+    "prefix_controls": {
+      "checks": 3
+    },
+    "aggregate": {
+      "completed": 360,
+      "counts": {
+        "SAT": 257,
+        "IMPROVED": 3,
+        "MINIMUM": 100
+      }
+    },
+    "hard_minimum": {
+      "completed": 360,
+      "empty": 135
+    },
+    "original_mass": {
+      "completed": 800,
+      "free_coordinate_cases": 233
+    },
+    "ordered": {
+      "completed": 385,
+      "steps": 1287,
+      "repeated_coordinate_traces": 87
+    },
+    "final": {
+      "status": "PASS",
+      "elapsed_seconds_excluding_imports": 0.685,
+      "exit_code": 0
+    }
+  },
+  "stress": {
+    "completed": 700,
+    "improved": 248,
+    "minimum": 46,
+    "sat": 406,
+    "zero_target": 639,
+    "positive_minimum": 61,
+    "compensating_damage": 0,
+    "free_coordinates": 435,
+    "elapsed_seconds_excluding_imports": 0.362,
+    "exit_code": 0
+  },
+  "transmutation": {
+    "status": "PASS",
+    "checked": 6,
+    "n": 8,
+    "rows": [
+      73,
+      111,
+      15,
+      117,
+      151
+    ],
+    "demand": [
+      [
+        130,
+        0
+      ],
+      [
+        70,
+        0
+      ],
+      [
+        38,
+        0
+      ],
+      [
+        21,
+        1
+      ],
+      [
+        15,
+        1
+      ]
+    ],
+    "caps": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "hard_flats": [
+      [
+        [
+          128,
+          0
+        ],
+        [
+          64,
+          0
+        ]
+      ],
+      [
+        [
+          4,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          64,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ]
+    ],
+    "start": 142,
+    "end": 100,
+    "start_weights": [
+      1,
+      3,
+      3,
+      1,
+      3
+    ],
+    "end_weights": [
+      1,
+      3,
+      1,
+      3,
+      1
+    ],
+    "initial": 6,
+    "minimum": 4,
+    "rowwise_minimum": 6,
+    "elapsed_seconds_excluding_imports": 0.004,
+    "exit_code": 0
+  },
+  "not_run": [
+    "recover_trace",
+    "productive_trace partial/collective fallback",
+    "full checkout campaign",
+    "Agda",
+    "Lean"
+  ],
+  "blockers": [
+    "sandbox cannot resolve github.com for git clone",
+    "agda and lean executables unavailable"
+  ],
+  "ci": false
+}
