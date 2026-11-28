@@ -41,8 +41,11 @@ def exact():
     altered=from_normal_history(40,0,0,zeros,[Q(1)]+zeros[1:],5)
     assert altered['H_jets'][2]>r['H_jets'][2]
     # Genuine Fourier zero mode and no 1/k admission.
-    z=from_normal_history(0,0,0,zeros,zeros,5)
-    assert all(v==0 for v in z['H_jets'])
+    # The controller/positive-volume majorant is scoped to K>0. At K=0
+    # use the separate homogeneous characteristic recurrence, never divide
+    # by cutoff or pretend a positive-volume controller exists.
+    z=wall_jet_caps(0,0,0,zeros,zeros)
+    assert all(v==0 for v in z)
     try:from_normal_history(40,0,0,zeros[:5],zeros,5)
     except ValueError:pass
     else:raise AssertionError('missing normal trace admitted')
