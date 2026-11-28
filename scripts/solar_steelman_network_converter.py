@@ -21,7 +21,6 @@ def run():
     two_mode_hamiltonian()
     # Input series current is sqrt(2)*a; normalize its auxiliary coordinates
     # by sqrt(2). Output currents are b,d; only final load resistors dissipate.
-    names=['a','c','b','d']+[f'{k}{j}' for k in ('a','b','d') for j in ('q','x','z')]
     r=S.symbols('r:13',real=True); im=S.symbols('i:13',real=True)
     X=S.Matrix([u+I*v for u,v in zip(r,im)])
     a,c,b,d=X[:4]; sr,si=S.symbols('sr si',real=True);s=sr+I*si
@@ -59,7 +58,6 @@ def run():
     # Largest A-invariant subspace of ker H, exact rational elimination.
     N=S.Matrix.hstack(*H.nullspace());dims=[N.cols]
     while N.cols:
-        constraints=H*A*N
         # Invariance refinement uses annihilator of current subspace.
         annih=N.T.nullspace()
         constraints=S.Matrix.vstack(*[v.T*A*N for v in annih])
@@ -72,4 +70,5 @@ def run():
     print('PASS exact continuous causal LC converter: incident=1 useful=1 reflection=0 dark=0')
     print('PASS weighted dissipativity and invariant-kernel elimination',dims,'rank=26/26')
     print('Conditional normalized two-quadrature branches, fixed HF action; physical source and distributed Maxwell open')
+    return X,ff,r+im,sub,A,G,physical
 if __name__=='__main__':run()
