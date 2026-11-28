@@ -29,7 +29,7 @@ import Data.Nat.Properties as NP
 open import Data.Nat.Base using (_≤_; NonZero)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst; subst₂)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_)
+open import Data.Rational.Unnormalised as Q using (ℚᵘ; _/_; _≤_; _≃_; _+_; *≡*)
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as FractionOrder
 
 powerFour : Nat → Nat
@@ -156,10 +156,18 @@ positiveBudgetStepCross n =
 -- is the equality between qRadiusTerm and 2*n/powerFour(n) in the
 -- ORIGINAL unnormalised Q carrier, not any positivity estimate.
 
--- Rational recurrence: positiveBudget(n+1) = positiveBudget(n)
---    + 2*n / 4^n.
--- Reuse the original Nat identity powerFourDecomposition, the
--- positive denominator proof above, and source Q.*≡* cross products.
--- This last equality to Readback.qRadiusBudget remains to be
--- implemented and checked natively before OriginalRationalBudgetOrder
--- can be inhabited.
+-- The original unnormalised-rational recurrence now follows from the
+-- CROSS-PRODUCT CERTIFICATE above and the explicit nonzero Nat
+-- denominators. This is not merely a numerical check of 8/9.
+positiveBudgetStep :
+  (n : Nat) →
+  Q._≃_
+    (positiveBudget (suc n))
+    (Q._+_ (positiveBudget n)
+      (+ (2 * n) / powerFour n))
+positiveBudgetStep n =
+  let instance
+        currentNZ = positiveDenominatorNonZero n
+        nextNZ = positiveDenominatorNonZero (suc n)
+        powerNZ = powerFourNonZero n
+  in Q.*≡* (cong +_ (positiveBudgetStepCross n))
