@@ -29,8 +29,13 @@ PARTS={
     ("BR41.work","check_hopf369_br41_signed_wall_work_budget.py",()),
     ("BR41.holonomy","check_hopf369_br41_normal_holonomy_projection.py",()),
     ("BR42.energy","check_hopf369_br42_physical_energy_restart.py",()),
+    ("BR43.trace.warp","check_hopf369_br43_two_sided_trace.py",("--sector","warp")),
+    ("BR43.trace.loss","check_hopf369_br43_two_sided_trace.py",("--sector","loss")),
+    ("BR43.charge","check_hopf369_br43_trace_energy_weld.py",()),
   ],
   "heavy":[
+    ("BR43.trace.metric","check_hopf369_br43_two_sided_trace.py",("--sector","metric")),
+    ("BR43.trace.gauge","check_hopf369_br43_two_sided_trace.py",("--sector","gauge")),
     ("BR40.projector.physical","check_hopf369_br40_variable_projector_transport.py",("--part","physical")),
     *[(f"BR40.warp.covector.{k}","check_hopf369_br40_warped_connection.py",
        ("--sector","covector","--index",str(k))) for k in range(5)],
