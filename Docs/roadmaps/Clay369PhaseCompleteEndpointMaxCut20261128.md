@@ -1576,3 +1576,192 @@ a source-written geometry construction plus checked Fraction
 certificate; its final native original G-to-wing equality and
 factorial Bishop-order bound remain pending. Do not report
 kernel verification or all-Clay completion before running them.
+
+
+## Section 31 — original finite CMP102 row-max-cut; genuine NS quarter L4 time compactness; BSD strict moment slope (28 November 2026)
+
+### Live PR owner and existing-constructor reconciliation
+At intake Agda #1536 master-based was 3d9b1f8838b86c7d0aa14425d7b2cc8a8faaa97e,
+Agda #1551 rollup 649d2e9d4c1bd5e4f6e32b74d9cdefd38afa96e9,
+Lean NS #123 88cd678cd39b76f221b26204ad15f816518f979e,
+Lean BSD/Hodge #124 4a24be8a344abbbc8a5e45d92664d2c4df8e95c4,
+Lean PNP #119 ffb4ee52b55c5726647e27976226ccf87e29d18b,
+Lean RH #121 3eb36764e36c526b7129550b737ffc507b3cb95f.
+No native Agda 2.9, Lean/Lake, GitHub CI, full branch rebase,
+or transitive axiom/import trust acceptance. Native proof bodies
+SOURCE-WRITTEN / PENDING_KERNEL. No Millennium result declared.
+
+### YM — original five-term G-source actual finite algebra bridge
+
+Original donor: `YMClayCMP102OriginalEndpointCauchyShiftExact`
+already owns `shiftedNativeBracketCoefficientZero` for EVERY
+degree including singleton and endpoint cases; `GFiniteLimitTransport`
+already owns literal `aPrefix`, `bPrefix`, `originalGPrefix`,
+`originalGPrefixConvergesToOriginalG`, and
+`originalGZeroFromOriginalPrefixConvergence`.
+Section30 `OriginalSignedTriangleZero` gives the actual native
+Bishop finite evaluation T_c(X)=0; Section30 original A/B rectangle
+weld gives actual squares and the positive Cauchy wings.
+
+NEW Agda #1536
+`DASHI/Physics/YangMills/YMClayCMP102OriginalGToTailAlgebraExact.agda`
+source commit 9b51a9341c965ba6b435e49746ea634ccae1948d;
+expanded 6e576b2d71cfc1cfa101bc4e768805792e5ed986.
+It introduces `originalShiftedRowNormal X n` from the exact
+original A_{n+1}, B_{n+1}, original A/B Cauchy triangles and
+last native bTerm. The source-solver lemma
+`originalGIsSourceNormalPlusRawWings` proves the all-count
+five-term real algebra, including 2X*b_n X^n that MUST NOT be
+lost. Original square rectangle identities then yield
+`originalRawSquareWingsAreActualCauchyTail`.
+The single *named actual missing Fin-row leaf* is
+`OriginalShiftedRowFinReindex X n`, asserting the already
+proved signed coefficient triangle T_{n+1}(X) is equivalent to
+the original truncated native row normal form. Given that
+explicit original Fin-reindex evidence (not a postulate),
+`originalGIsOriginalSignedCauchyTail` constructs the full
+original G_{n+1}(X)=the actual original signed Cauchy tail,
+via the already written `T_{n+1}=0`.
+No alternative analytic carrier, no G=0 premise.
+Native import/signature acceptance root on #1536
+`YMClayCMP102Section31FiniteTailAcceptanceExact.agda`
+commit b255cf494cc2d20a489c2c1676c523c4ab361fc7.
+Its source is NOT proven to elaborate until Agda runs.
+
+The all-degree mathematical estimate from Section30:
+for c>=1, |G_c(X)|<=267004/393129 |X|^c
+< (3/4)4^-c at |X|<=1/4;
+original c=0: G_0=1. Original 23 Nov mathematical donor
+already proved weaker 3*4^-c and A/B explicit moduli; retain
+that attribution. The actual Section30 exact checker
+`/mnt/data/check_ym_cmp102_original_tail_geometry.py`
+provided with conversation was executed IN THE CURRENT TURN:
+3624/3624 PASS (including 7 last-B omission negatives).
+That exact provided file exists and can be linked; it is
+not asserted byte-identical to the earlier GitHub-committed
+`scripts/check_ym_cmp102_original_tail_geometry.py` unless
+their Git blob hashes actually match.
+
+Original scalar CMP102 remaining source-welds are now
+(a) PAY `OriginalShiftedRowFinReindex` via native finite
+Sequence.SeriesOf, exact original even/odd shift identities
+and Cauchy row triangle construction;
+(b) PAY the source Bishop finite wing factorial positive bound,
+to produce the ORIGINAL `originalAbsoluteRateBound X`;
+(c) consume `originalGZeroFromAbsoluteRate` and run pinned
+Agda 2.9 with native --safe import graph.
+The actual original 4D Wilson F19 shared plaquette and
+connected CMP116 rooted absolute shell, CMP119/122 physical T,
+noncollapsed interacting OS and SAME-H gap are separate major
+physical YM obligations. Scalar identity never grants them.
+
+### NS — strict same-source physical Galerkin L4_t quarter energy
+
+The actual original `Synthesis/NavierStokesActualFractionalSignedFTCExact.lean`
+ALREADY has the important donor
+`quarter_energy_fourth_le`:
+  (fractionalEnergy N quarterWeight U t)^4
+     <= (periodicEnergy N U t)^3
+           * periodicDissipation N U t.
+Original R30 `actual_global_finite_energy_and_dissipation_payment`
+already produces ONE globally defined finite Galerkin X with
+E_N(t)<=E_N(0) and 2nu int_0^T D_N<=E_N(0).
+New Lean NS #123
+`Synthesis/NavierStokesOriginalQuarterL4TimeFromPhysicalLedgerExact.lean`
+initial 70834438d8f6ba33dd2fd5f75502f4935d2b1bfa,
+extended 27f001789a81aa9f47d3b3d36896f2a8b9c8f4c4.
+First theorem integrates the SAME source donor interpolation to
+yield 2nu int_0^T E_{1/4,N}(t)^4 dt <= E0^4.
+Second theorem explicitly derives needed interval integrability
+from original finite ODE via `zeroExtend_ODE_of_derivative`,
+continuous finite Fourier sums and continuous physical
+dissipation. Third theorem
+`actual_global_original_quarter_L4_time_payment`
+constructs ONE original real/transverse global finite X and
+includes ALL these payments for ALL T>=0.
+This is a cutoff-independent L4_t quarter-ENERGY bound
+whenever the original energy E0 is uniformly bounded.
+It is NOT an L∞_t critical regularity theorem and it does
+NOT source-derive the signed nonlinear transfer upper
+int E_{1/4,N}*F_{1/4,N}, which is still the decisive N2e/R568
+original universal gap. The full original continuum weak/strong
+compactness and pressure, and unforced/forced admission remain.
+Acceptance root `Synthesis/ClayNSSection31QuarterL4TimeAcceptanceExact.lean`
+initial 64b97a737d5a977277764acf7e3df2b3c1b56fbf,
+extended 3d087cde087f85d28fe9277f2b383caef151536a.
+An independent exact rational finite Fourier model sampled 625
+nonnegative four-mode configurations with wave numbers perfect
+squares; all 625 satisfy Q^4<=E^3 D. This tests the weighted
+interpolation only, not an actual NS solution and not a native
+Lean kernel receipt.
+
+### BSD — strict all-degree original weighted Mellin slope
+
+Existing original `MillenniumBSDSignedMellinMomentProgressionExact`
+already defines the original two-crossing complete homogeneous
+h(a,b,n), its positive quotient, signed polynomial factorization
+and exact `next_moment_pos`. Section28 already paid
+all-degree strict m(n+2)>0 *conditional* on positive original
+signed source and m0=0,m1>=0. NEW #124
+`Synthesis/MillenniumBSDOriginalTwoCrossingStrictMomentGrowthExact.lean`
+commit e64df3938247f8c51f760832c97f0062fe1913fe,
+theorems `original_two_crossing_all_degree_strict_weighted_growth`,
+`original_two_crossing_strict_moment_ratio` and
+`original_two_crossing_no_nonpositive_weighted_increment`.
+For each source degree n and same m:
+  h_n m_{n+2} > h_{n+1} m_{n+1},
+  m_{n+2} > (h_{n+1}/h_n) m_{n+1}.
+Strict source positivity and original m0=0 are EXPLICIT;
+no separate analytic density/complex L jet is invented.
+This is a genuinely falsifiable necessary growth condition on
+any original selected complex L''/Mellin identification.
+Acceptance root
+`Synthesis/ClayBSDSection31MomentGrowthAcceptanceExact.lean`
+commit 81bcda84bb426f408962bcbb5e76b4a246c33496.
+Still OPEN: the original selected complex L-derivative Mellin
+comparison, analytic rank equality and Sha finiteness. This
+weighted growth does not prove rank equality or L'' vanishing.
+
+### Hodge / RH / PNP — owner checking and nonpromotion
+
+Hodge #124 donor
+`MillenniumHodgeDicksonAffineFiniteProperExact.lean`
+ALREADY proves the original finite/proper AFFINE rotation
+projection; Section30 original six simultaneous Q0 monic
+relations connected the coupled ten-deck generic root fibre.
+Remaining GLOBAL original Proj chart, proper projective
+correspondence with branch monodromy and nonzero primitive
+Chow/cycle-class pairing; no universal Hodge proof.
+RH #121 already owns original xi-zeta BIDI, pinned admission
+infrastructure and native axiom audit root; missing independent
+trusted native original proof and transitive complete axiom
+acceptance; no new zero theorem was fabricated.
+PNP #119 already owns anchored F3 residual geometry, actual
+read-clock fuel, input nC ceiling, closed-state observer no-go.
+These rule out INPUT-only and closed-internal pseudo-demand as
+unrestricted SAT lower bounds. Need actual SAT universal machine
+work lower bound with sharing-stable unavoidable INTERNAL events,
+or actual polynomial SAT algorithm and full bit/control R1 ABI;
+no P-vs-NP result promoted.
+
+### Exact next aggregate maximum cut
+
+1. YM: one native original Fin-row `OriginalShiftedRowFinReindex`
+   and one source Bishop-order positive Cauchy wing bound, then
+   original Bishop limit uniqueness; separately original physical
+   Wilson/F19/CMP116/OS/H gap (dominant).
+2. NS: original signed 1/4 nonlinear transfer geometry with true
+   cutoff/time uniformity and continuum compactness; consume the
+   now source-written global quarter L4_t payment, but do NOT
+   treat it as sufficient critical uniqueness/regularity.
+3. BSD: selected complex original Mellin derivative source
+   comparison and signed crossing consistency, universal
+   analytic rank arithmetic/Sha closure.
+4. Hodge: actual global projective cycle and primitive class,
+   consuming already-paid generic ten-deck and affine properness.
+5. RH: original pinned trusted kernel proof and statement/axiom audit.
+6. PNP: original unrestricted SAT computation and legitimate paid
+   share-stable internal event producer or polynomial algorithm.
+
+All fresh source files fetched/committed require native Agda/Lean
+typecheck. No GitHub CI or kernel proof run in this tranche.
