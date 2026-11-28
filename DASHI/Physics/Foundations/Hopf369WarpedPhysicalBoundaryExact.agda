@@ -2801,3 +2801,65 @@ module At {r : Level} (F : C.RealField r)
   -- and the BR29 variable projected Bianchi connection source.
   -- Equality is a physical source-specific target, NOT a postulate or
   -- a declaration that the required background jets already match.
+
+  ------------------------------------------------------------------------
+  -- BR67: EIGHTH-ORDER NONZERO MEAN + SECOND-WARP SOURCE via BR52's
+  -- existing DIVIDED jets (no duplicate Taylor machinery).
+  --
+  -- The exact BR66 physical correction at each time is
+  --   T=2[(b+''-b-'')-2m*j] phi eta.
+  -- At order n the coefficient is a triple Leibniz convolution,
+  -- with arbitrary independent b'',m,j,phi jets. The original
+  -- metricRows D/E Israel entries must receive this physical source.
+  ------------------------------------------------------------------------
+
+  record OriginalBR67EvolvingWallSource : Set r where
+    constructor originalBR67EvolvingWallSource
+    field
+      evolvingPlusWarpAcceleration : DividedJet
+      evolvingMinusWarpAcceleration : DividedJet
+      evolvingMeanExtrinsic : DividedJet
+      evolvingIsraelJump : DividedJet
+      evolvingMaterialDisplacement : DividedJet
+  open OriginalBR67EvolvingWallSource public
+
+  originalBR67SecondWarpJump : OriginalBR67EvolvingWallSource →
+    DividedJet
+  originalBR67SecondWarpJump d n =
+    evolvingPlusWarpAcceleration d n
+      - evolvingMinusWarpAcceleration d n
+
+  originalBR67CorrectionJet : OriginalBR67EvolvingWallSource →
+    DividedJet
+  originalBR67CorrectionJet d =
+    jetScale two
+      (jetProduct
+        (λ n → originalBR67SecondWarpJump d n
+          - two * jetProduct
+              (evolvingMeanExtrinsic d) (evolvingIsraelJump d) n)
+        (evolvingMaterialDisplacement d))
+
+  originalBR67TenGeometricRows : OriginalBR67EvolvingWallSource →
+    Nat → List S
+  originalBR67TenGeometricRows d n =
+    pack10 (λ a b → originalBR67CorrectionJet d n * eta a b)
+
+  record OriginalBR67WallTimeCompatibility : Set r where
+    constructor originalBR67WallTimeCompatibility
+    field
+      physicalReference : OriginalPhysicalReferenceTower
+      actualEvolvingSource : OriginalBR67EvolvingWallSource
+      fullMovingGeometricRows : Nat → Wall → Wall → S
+      physicalBR34IsraelRows : Nat → Wall → Wall → S
+      allOrderSourceEquality :
+        (n : Nat) (a b : Wall) →
+          fullMovingGeometricRows n a b ≡
+          physicalBR34IsraelRows n a b
+            + originalBR67CorrectionJet actualEvolvingSource n * eta a b
+  open OriginalBR67WallTimeCompatibility public
+
+  -- This record spells out the ENTIRE missing physical source equality,
+  -- rather than assuming BR34's frozen ten-row Israel block is the
+  -- nonlinear moving-wall source at nonzero mean. The kernel must
+  -- verify all-order product proofs and actual source ownership before
+  -- treating it as a proof of an evolving Einstein–Israel boundary.
