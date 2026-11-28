@@ -21,6 +21,8 @@ import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Tower
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact as Pareto
 import DASHI.Core.FactorisationSpineCrosswalkExact as Factorisation
 import DASHI.Cognition.PNF.X369NativeNineStageThirteenChartExact as StageChart
+import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as Future
+open import Agda.Builtin.List using (List)
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
 import DASHI.Reasoning.TypedHyperfabricPantsSignatureCompletenessExact as Match
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
@@ -185,6 +187,58 @@ module OriginalSourceAdmission
 
     sourceHistoryRetained : sourceDecode (sourceEncode x) ≡ x
     sourceHistoryRetained = sourceReopens x
+
+  -- Only the original source commuting squares remain to transport
+  -- ALL subsequent consumer observations. The selected chart can
+  -- retain any native9/stage13/pants signature/fine residual/index mix.
+  -- This is a specialization of the pre-existing future theorem,
+  -- not a new factorisation calculus.
+  module OriginalFuture {Input Code Output : Set}
+    (sourceStep : Input → Actual → Actual)
+    (sourceObserve : Input → Actual → Output)
+    (select : P.Packet → Code)
+    (codedStep : Input → Code → Code)
+    (codedObserve : Input → Code → Output)
+    (transitionSquare : (u : Input) (x : Actual) →
+      select (sourceEncode (sourceStep u x)) ≡
+      codedStep u (select (sourceEncode x)))
+    (observationSquare : (u : Input) (x : Actual) →
+      sourceObserve u x ≡
+      codedObserve u (select (sourceEncode x))) where
+
+    chart : Actual → Code
+    chart x = select (sourceEncode x)
+
+    sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+    sym refl = refl
+
+    trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+    trans refl q = q
+
+    consumerStable : (u : Input) (x y : Actual) →
+      chart x ≡ chart y →
+      sourceObserve u x ≡ sourceObserve u y
+    consumerStable u x y same =
+      trans (observationSquare u x)
+        (trans (Future.cong (codedObserve u) same)
+          (sym (observationSquare u y)))
+
+    transitionStable : (u : Input) (x y : Actual) →
+      chart x ≡ chart y →
+      chart (sourceStep u x) ≡ chart (sourceStep u y)
+    transitionStable u x y same =
+      trans (transitionSquare u x)
+        (trans (Future.cong (codedStep u) same)
+          (sym (transitionSquare u y)))
+
+    allOriginalFutureTraces : (words : List Input) (x y : Actual) →
+      chart x ≡ chart y →
+      Future.trace sourceStep sourceObserve words x ≡
+      Future.trace sourceStep sourceObserve words y
+    allOriginalFutureTraces words x y same =
+      Future.inputIndexedTraceDescent
+        sourceStep sourceObserve chart
+        consumerStable transitionStable words x y same
 
 -- Concrete CHOSEN finite instantiation of the source packet; not
 -- merely a conditional source-family socket. The actual full H369
