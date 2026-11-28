@@ -7,11 +7,12 @@ from solar_physical_causal import MASS,CHARGE
 from solar_spherical_cycle import geometry
 from solar_spherical_material_weld import construct,structural_stage_atlas
 from solar_thermal_population_tangent import reaction_jvp,event_jvp,thermal_jvp,collision_jvp
-from solar_material_generator_jvp import material_jvp,amplitude_material_boundary_jvp
+from solar_material_generator_jvp import material_jvp,amplitude_material_boundary_jvp,amplitude_exchange_jvp
+from solar_quadratic_jet import reaction_u2,amplitude2,event_state2,work2,squared_return2
 from solar_population_amplitude_event import event_amplitude_jvp,right_reaction_support
 from solar_physical_cone import timed_step
 
-def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
+def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False,quadratic_second_order=False):
     """Smooth chart, or one-sided s>=0 path with controls affine in u=s*s.
     In the latter chart density and thermal derivatives are retained in u,
     normalized current and the objective first derivative are in s.
@@ -42,9 +43,13 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
     pool=np.asarray(q['initial_neutral_m3'],float).copy()
     theta=np.zeros(n);x=np.zeros(ne+nf+9*n)
     pop_right=pop>0; pool_right=pool>0
-    indexed_events=[]; paid_u=0.
+    if quadratic_second_order and not quadratic_amplitude_path:
+        raise ValueError('second coefficient requires quadratic amplitude path')
+    indexed_events=[]; paid_u=0.; useful2=0.; transport_receipts=[]
     dpop=np.zeros_like(pop);dpool=np.zeros_like(pool)
     dtheta=np.zeros_like(theta);dx=np.zeros_like(x)
+    pop2=np.zeros_like(pop);pool2=np.zeros_like(pool);x2=np.zeros_like(x)
+    elapsed=0.; arrival_history=None
     start=(x.copy(),pop.copy(),pool.copy(),theta.copy())
     dstart=(dx.copy(),dpop.copy(),dpool.copy(),dtheta.copy())
     port=np.zeros(len(x));port[int(cfg['source_edge'])]=float(cfg['source_coupling_sqrt_inv_s'])
@@ -68,6 +73,9 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
                 old=pop[i].copy();oldd=dpop[i].copy()
                 primal,deriv=reaction_jvp(old,pool[i],rows[i]['te']+theta[i],
                     power[i],dt,q,oldd,dpool[i],dtheta[i],dpower[i])
+                if quadratic_second_order:
+                    r2,a2,pp2=reaction_u2(old,pool[i],rows[i]['te']+theta[i],power[i],dt,q,
+                        oldd,dpool[i],dtheta[i],dpower[i],pop2[i],pool2[i])
                 removed,created,newpool=primal
                 dr,da,dnewpool=deriv
                 sl=slice(ne+nf+9*i,ne+nf+9*i+9)
@@ -77,6 +85,12 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
                         x[sl],old,removed,created,birth[i],vol[i],
                         dx[sl],oldd,dr,da,pop_right[i],pr)
                     dz,dpnew=lift['state_jvp'],lift['population_u']
+                    if quadratic_second_order:
+                        z2=event_state2(x[sl],dx[sl],x2[sl],old,removed,created,
+                            oldd,dr,da,pop2[i],r2,a2,birth[i],np.sign(CHARGE)*np.sqrt(vol[i]*MASS))
+                        q2_before=amplitude2(old,oldd,pop2[i])
+                        pop2[i]=pop2[i]-r2+a2;pool2[i]=pp2;x2[sl]=z2
+                        q2_residual=amplitude2(pnew,dpnew,pop2[i])-q2_before
                     # Store actual signed residuals, independently of index labels.
                     indexed_events.append(dict(
                         index=dict(history=cfg['row_keys'][i],time=[cycle_index,index],
@@ -86,6 +100,8 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
                         cell=i,old_right=pop_right[i].tolist(),new_right=pr.tolist(),
                         signed_amplitude_residual=lift['signed_amplitude_residual'].tolist(),
                         signed_tangent_residual=lift['signed_tangent_residual'].tolist()))
+                    if quadratic_second_order:
+                        indexed_events[-1]['signed_coefficient2_residual']=q2_residual.tolist()
                     pop_right[i]=pr;pool_right[i]=rr
                 else:
                     (z,pnew,kinetics),(dz,dpnew)=event_jvp(
@@ -127,12 +143,39 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
             A=model['generator']-L-source
             dA=(j['d_right_generator'] if quadratic_amplitude_path else j['d_generator'])-dL
             right_limit=j['right_limit']-L-source if quadratic_amplitude_path else None
+            jet2=None
+            if quadratic_second_order:
+                D2=pop2*CHARGE**2/MASS
+                q2=amplitude2(Dcurrent,dD,D2)
+                ex2=amplitude_exchange_jvp(model,vol,np.sqrt(Dcurrent),q2,coefficient_order=2)['d_exchange']
+                H2=ex2.copy(); offset=len(x)-9*n
+                for cell in range(n):
+                    for species in range(3):
+                        if pop_right[cell,species]:
+                            ix=np.arange(offset+9*cell+3*species,offset+9*cell+3*species+3)
+                            H2[ix,ix]-=dnu[cell,species]
+                H2[np.arange(ne),np.arange(ne)]-=cur_dload
+                jet2=(x2,H2,np.zeros_like(x))
             x,receipt=timed_step(x,A,2*inc*port,dt,mesh,
                 dict(collision=model['loss'],load=L,source=source),port,inc,
-                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas,right_limit=right_limit)
+                retain_local_midpoint=True,jvp=(dx,dA,np.zeros_like(x)),atlas_pairs=atlas,right_limit=right_limit,jet2=jet2)
             dx=np.asarray(receipt['state_jvp'],float)
             em=np.asarray(receipt['local_midpoint'][:ne],float)
             dem=np.asarray(receipt['local_midpoint_jvp'][:ne],float)
+            if quadratic_second_order:
+                x2=np.asarray(receipt['state_coefficient2'],float)
+                em2=np.asarray(receipt['local_midpoint_coefficient2'][:ne],float)
+                useful2+=dt*work2(em,dem,em2,cur_load,cur_dload)
+                # Store stage-local reach in the absolute campaign clock;
+                # inherited nonzero states are not evidence of fresh injection.
+                local=[receipt['arrival_s'],receipt['directional_arrival_s'],receipt['coefficient2_arrival_s']]
+                absolute=np.array([[np.inf if a is None else elapsed+a for a in row] for row in local])
+                arrival_history=absolute if arrival_history is None else np.minimum(arrival_history,absolute)
+                if cfg.get('retain_jet_history',False):
+                    transport_receipts.append(dict(time=[cycle_index,index],clock_start_s=elapsed,
+                        earliest_recorded_s=[[None if not np.isfinite(a) else float(a) for a in row] for row in arrival_history],
+                        field=x.tolist(),first=dx.tolist(),second=x2.tolist()))
+                elapsed+=dt
             useful+=dt*float(cur_load@em**2)
             duseful+=dt*float((0. if quadratic_amplitude_path else cur_dload@em**2)+2*(cur_load*em)@dem)
             absorbed=dt*float(power.sum());dabsorbed=dt*float(dpower.sum())
@@ -150,6 +193,7 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
     restoration_squared=sum(float(np.sum((a-b)**2)) for a,b in zip(end,start))
     drestoration_squared=2*sum(float(np.sum((a-b)*(da-db)))
         for a,b,da,db in zip(end,start,dend,dstart))
+    second=(x2,dpop,dpool,dtheta) if quadratic_second_order else None
     return dict(useful_J=useful,duseful_J=duseful,paid_J=paid,dpaid_J=dpaid,
         campaign_net_J=useful-paid-horizon*cfg['auxiliary_J'],
         dcampaign_net_J=duseful-dpaid,
@@ -160,4 +204,11 @@ def campaign_jvp(material,cfg,dheating,dload,quadratic_amplitude_path=False):
         quadratic_amplitude_path=bool(quadratic_amplitude_path),
         population_pool_temperature_u_jvp=density_u,paid_u_jvp=paid_u if quadratic_amplitude_path else None,
         indexed_event_residuals=indexed_events,
+        endpoint_coefficient2=second,
+        useful_coefficient2_J=useful2 if quadratic_second_order else None,
+        net_coefficient2_J=useful2-paid_u if quadratic_second_order else None,
+        restoration_coefficient2=squared_return2(end,start,dend,second) if quadratic_second_order else None,
+        population_pool_u2=(pop2,pool2) if quadratic_second_order else None,
+        indexed_jet_history=transport_receipts,
+        global_causal_cone_admitted=False,
         scope=('one-sided quadratic control path, finite velocity; not an unrestricted density gradient' if quadratic_amplitude_path else 'fixed topology, positive population; not strict restored-net gate'))
