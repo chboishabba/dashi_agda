@@ -1,0 +1,9 @@
+Local actual execution in /tmp/hopf230, both parts exit 0, OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br277_278_actual_reciprocal.py --part material/cube.
+Local source Git blob 4dc6223ff02b4925dacc267e1d9d7fb142ff3e90 equals committed source at 2575b13b83708fd04e16e8a4decbdc1a40e6830a.
+BR240 11 dt 0.03 gauge initial 1.1102230246251565e-16 final 0.012547764760561908 common cube gauge 0.012547764760561908 change 0.05150032454289766 center radius squared 1.0966956440975162 horizontal volume 1.0955367979636126
+PASS: exact 27x108 continuity, invertible 27-charge map, 54-to-24 boundary rank 24 + residual 30, work adjoint; SymPy 1.14.0
+BR277 0.001 matrix derivative error 1.5098526595647144e-11 fixed-cochain work error 3.691181388321141e-11 work -0.03592039285898855
+BR277 0.0001 matrix derivative error 1.0658090382476004e-10 fixed-cochain work error 7.469037194285377e-11 work -0.03592039285898855
+BR240 11 dt 0.03 gauge initial 1.1102230246251565e-16 final 0.012547764760561908 common cube gauge 0.012547764760561908 change 0.05150032454289766 center radius squared 1.0966956440975162 horizontal volume 1.0955367979636126
+BR278 actual history 48 face/path array checks max defect 2.220446049250313e-16 max retained signed residual 0.043916515649417676
+BR277 directional derivative along actual endpoint metric difference, seeded fixed cochains (not actual material trajectory); matrix derivative independently checked by central quadrature perturbations of same assembly. No full nodal adjoint or Einstein backreaction. BR278 actual metric arrays and fixed increments, affine test, not autonomous reflection equivariance or native acceptance. No CI.
