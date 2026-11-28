@@ -48,13 +48,13 @@ module Budget (b : Nat → ℝ) (bConv : Seq._isConvergent (Seq.SeriesOf b)) whe
 
   -- Choose the subsequence starting at the cutoff. This avoids a
   -- reversed-tail branch and transports the bound to the actual limit.
-  limitError : ∀ f v → (∀ n → R._≤_ (∣ f n ∣) (b n)) →
+  limitErrorAfter : ∀ f v → (∀ n → R._≤_ (∣ f n ∣) (b n)) →
     Seq._ConvergesTo_ (Seq.SeriesOf f) v →
     (k : Nat) → .{{_ : NonZero k}} →
-    R._≤_ (∣ v - Seq.SeriesOf f (cutoff k) ∣) ((+ 1 / k) ⋆)
-  limitError f v h cv k =
-    let m = cutoff k
-        partial = Seq.SeriesOf f
+    (m : Nat) → cutoff k ≤ m →
+    R._≤_ (∣ v - Seq.SeriesOf f m ∣) ((+ 1 / k) ⋆)
+  limitErrorAfter f v h cv k m hm =
+    let partial = Seq.SeriesOf f
         shifted n = partial (n + m)
         shiftedCv : Seq._ConvergesTo_ shifted v
         shiftedCv = Seq.xₙ⊆yₙ∧yₙ→y
@@ -64,8 +64,14 @@ module Budget (b : Nat → ℝ) (bConv : Seq._isConvergent (Seq.SeriesOf b)) whe
         ac = Seq.∣xₙ∣→∣x₀∣ (v - partial m , dc)
         each : ∀ n → R._≤_ (∣ shifted n - partial m ∣) ((+ 1 / k) ⋆)
         each n = P.≤-respˡ-≃ (P.≃-symm (P.∣-∣-cong (Basel.partialMinusIsFiniteTail f m (n + m))))
-          (orderedTail f h k m (n + m) (NP.m≤n+m m n) NP.≤-refl (NP.m≤n+m m n))
+          (orderedTail f h k m (n + m) (NP.m≤n+m m n) hm (NP.≤-trans hm (NP.m≤n+m m n)))
     in Seq.xₙ≤y⇒limxₙ≤y each (_ , ac)
+
+  limitError : ∀ f v → (∀ n → R._≤_ (∣ f n ∣) (b n)) →
+    Seq._ConvergesTo_ (Seq.SeriesOf f) v →
+    (k : Nat) → .{{_ : NonZero k}} →
+    R._≤_ (∣ v - Seq.SeriesOf f (cutoff k) ∣) ((+ 1 / k) ⋆)
+  limitError f v h cv k = limitErrorAfter f v h cv k (cutoff k) NP.≤-refl
 
 -- Sequence-indexed version of the existing real three-leg theorem.
 -- Works on a dependent disk membership witness without pretending
