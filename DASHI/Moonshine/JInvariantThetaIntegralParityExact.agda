@@ -32,16 +32,19 @@ step z (inj₂ (k , h)) =
     (solve 1 (λ k → (con (+ 2) :* k :+ con (+ 1)) :+ con (+ 1)
       := con (+ 2) :* (k :+ con (+ 1))) refl k))
 
+negAsSub : ∀ z → - z ≡ (+ 0) - z
+negAsSub z = sym (ZP.+-identityˡ (- z))
+
 negateParity : ∀ z → Parity z → Parity (- z)
 negateParity z (inj₁ (k , h)) =
   inj₁ ((+ 0) - k , trans (cong -_ h)
-    (solve 1 (λ k → con (+ 0) :- (con (+ 2) :* k)
-      := con (+ 2) :* (con (+ 0) :- k)) refl k))
+    (trans (negAsSub _) (solve 1 (λ k → con (+ 0) :- (con (+ 2) :* k)
+      := con (+ 2) :* (con (+ 0) :- k)) refl k)))
 negateParity z (inj₂ (k , h)) =
   inj₂ ((+ 0) - k - (+ 1) , trans (cong -_ h)
-    (solve 1 (λ k → con (+ 0) :- (con (+ 2) :* k :+ con (+ 1))
+    (trans (negAsSub _) (solve 1 (λ k → con (+ 0) :- (con (+ 2) :* k :+ con (+ 1))
       := con (+ 2) :* ((con (+ 0) :- k) :- con (+ 1)) :+ con (+ 1))
-      refl k))
+      refl k)))
 
 natParity : ∀ n → Parity (+ n)
 natParity zero = inj₁ ((+ 0) , refl)
