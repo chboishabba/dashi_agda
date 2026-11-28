@@ -6,7 +6,7 @@ Actuator duration, impedance and empirical efficiency remain external.
 """
 import numpy as np
 from solar_support_transition import support_transition
-from solar_physical_causal import MASS,CHARGE
+from solar_population_event import MASS,CHARGE
 
 def local_return(field,pop,pool,theta,target_pop,target_pool,vol,cap,chem,kinetics,policy):
     x,n,p,t,n0,p0,V,C,E=map(lambda a:np.asarray(a,float),
