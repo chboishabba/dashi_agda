@@ -73,13 +73,30 @@ slackBelowPowerFour n =
     (sym (powerFourDecomposition n))
     (NP.m≤n+m (slack n) (linear n))
 
--- This is the positive remainder representation of B_n.
--- It never requires subtracting (3n+1) from 4^n.
-positiveBudget : (n : Nat) → .{{_ : NonZero (9 * powerFour n)}} → ℚᵘ
-positiveBudget n = (+ (8 * slack n) / (9 * powerFour n))
+-- Use the SAME original unnormalised Nat NonZero constructor used by
+-- BishopMachinCrossEnvelopeBishopOrderExact. No denominator supplied as
+-- a free theorem argument to the subsequent rational order.
+powerFourNonZero : (n : Nat) → NonZero (powerFour n)
+powerFourNonZero zero = _
+powerFourNonZero (suc n) =
+  NP.m*n≢0 4 (powerFour n)
+    {{_}} {{powerFourNonZero n}}
+
+positiveDenominatorNonZero :
+  (n : Nat) → NonZero (9 * powerFour n)
+positiveDenominatorNonZero n =
+  NP.m*n≢0 9 (powerFour n)
+    {{_}} {{powerFourNonZero n}}
+
+-- Positive rational residual B_n = 8*s_n/(9*p_n).
+positiveBudget : Nat → ℚᵘ
+positiveBudget n =
+  let instance
+        denominatorNZ = positiveDenominatorNonZero n
+  in (+ (8 * slack n) / (9 * powerFour n))
 
 -- The integer cleared-denominator inequality uses only positivity
--- of the *existing* slack and the commutative Nat semiring solver.
+-- of the existing slack and the commutative Nat semiring solver.
 positiveCrossOrder : (n : Nat) →
   (8 * slack n) * 9 ≤ 8 * (9 * powerFour n)
 positiveCrossOrder n =
@@ -104,13 +121,14 @@ positiveCrossOrder n =
       refl (powerFour n)
   in subst₂ _≤_ leftReorder rightReorder raw
 
--- Representation-level order from the existing constructive Nat fraction
--- bridge; the positive denominator is an explicit original Nat witness.
+-- Fully inhabited constructive order bound, conditional on TYPECHECK
+-- only; there is no new original-budget bound axiom here.
 positiveBudgetBelowEightNinths :
-  (n : Nat) → .{{_ : NonZero (9 * powerFour n)}} →
-  Q._≤_ (positiveBudget n) (+ 8 / 9)
+  (n : Nat) → Q._≤_ (positiveBudget n) (+ 8 / 9)
 positiveBudgetBelowEightNinths n =
-  FractionOrder.natFractionLe (positiveCrossOrder n)
+  let instance
+        denominatorNZ = positiveDenominatorNonZero n
+  in FractionOrder.natFractionLe (positiveCrossOrder n)
 
 -- Rational recurrence: positiveBudget(n+1) = positiveBudget(n)
 --    + 2*n / 4^n.
