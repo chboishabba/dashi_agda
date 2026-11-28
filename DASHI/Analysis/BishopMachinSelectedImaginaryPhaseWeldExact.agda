@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Analysis.BishopMachinSelectedImaginaryPhaseWeldExact where
 
 -- SOURCE-WRITTEN; local native typecheck pending.
