@@ -404,3 +404,90 @@ well-posed mixed-allocation construction. Compare global tame norms in
 both sectors; keep original physical gauge and initial-corner conditions.
 The BR87 runner checks these residues and exact constants. The actual
 repository checker remains COMMITTED_PENDING_LOCAL_RUN.
+
+
+## 7. BR89–91 — warped adapted inverse and same-metric defect source
+
+Reuse BR37 (existing exact Lie-algebra and finite-chart intertwiner),
+BR34 actual warped DtN, BR35 rest-frame Green contraction, BR63/78
+Israel and Ward, BR29 original Weyl carrier. Do not reopen those owners.
+
+**BR89 / W3: positive adapted frozen reference norm.** In the scaled
+D row coordinates let T transport all D rows, U transport endpoints,
+D(z) U = T D(ell). For E, reorder its replacement row into the
+omitted temporal D slot r. Let g0 be the scalar replacement row
+at rest, l=g0 D(ell)^-1 and v=T^-1 e_r. Rotational covariance
+gives l(v)=a l(e_r), a=s/ell. With f0 the E data with its omitted
+D slot set to zero and g the replacement datum, the full inverse
+is exactly
+  y=T^-1 f0; lambda=(g-l(y))/(a*l(e_r));
+  u=U D(ell)^-1 (y+v lambda).
+This is the existing BR37 rank-one update performed in the **rest**
+data and endpoint norm, not a new physical allocation. In positive
+Hermitian endpoint norm ||U^-1 u||, D is bounded by its rest constant;
+E satisfies
+  ||U^-1 u|| <= ||D(ell)^-1|| [||y||+
+     max(1,|xi|/|s|) (|g|+||l|| ||y||)/|l(e_r)|]
+using spatial rotation to align xi. This is conditional on the
+existing BR35/37 rest inverse and nonzero rest replacement response.
+No product of two additional large Lorentz matrix norms is necessary
+in this adapted norm. It is frequency dependent; it is NOT a local
+physical energy or uniform Sobolev norm. BR87 physical coordinate
+powers and the E low-temporal pole remain valid. New checker uses
+actual BR34 warped collocation (three frequency sectors, both fields)
+and tests full two-sided inverse, not just one forced solution.
+Numerical checks pending; require interval or analytic DtN acceptance
+for any continuum promotion. Variable localization needs estimates
+of U, T, their derivatives and commutators, and the exact physical
+boundary source; no claim that this is already paid.
+
+**BR90 / W4: full defect-aware Gauss–Israel jump.** Use fixed signed
+j=-6/5, matched h, [K]=jh, mean M, D=Ric+4g. Covariant Codazzi
+gives [D_na]=0 for constant tension. Scalar Gauss gives
+  [D_nn]=tr_h[D_ab]+6j tr_h M.
+Tangential Riemann jump is -j(h wedge M); mixed jump vanishes;
+electric jump is [D_ab]+j(2M+h tr M). Subtract g wedge the
+actual Schouten defect (D-g tr D/8)/3 to reconstruct all 55 packed
+curvature slots. The result is algebraically Weyl and the Ricci
+contraction is the original defect. Its tracefree M component is
+exactly j times the existing BR29 jump map; the pure trace mean
+cancels only after the scalar Gauss relation has been paid.
+The defect-to-Weyl map has rank 9; its P0 projection rank 6;
+An projection rank 8. P0 kernel on the ten tangent defect channels
+is four-dimensional: the three time-space mixed entries and
+pure Lorentz trace. Hence even physical matched Israel with
+constant tension does not algebraically remove the zero-speed
+defect. Do not equate these ranks to evolution-mode counts.
+
+**BR91 / W4: actual differential Cotton source.** At an orthonormal
+point retain all 75 covariant first jets of D. Contracted Bianchi
+imposes five independent equations, leaving a 70-dimensional jet
+space. Differentiate the Schouten defect and use BOTH Weyl divergence
+and full differential Bianchi to construct electric and magnetic
+forcing in BR29's actual 100-slot embedding. Compress by G^-1 X^T.
+The resulting compatible Cotton map has rank 25 and its projection
+onto P0 has rank 9. The ranks remain 25/9 on the smaller image of
+D=S(C) constructed from actual symmetric Hessians of the five gauge
+components with all five homogeneous principal wave constraints.
+The exact contraction identity on that Hessian carrier is
+  div S(C) - 1/2 d tr S(C) = Box C/2.
+Thus no unconditional P0 Cotton cancellation is available even on
+wave-compatible gauge jets. The proper proof order is:
+  (i) construct the reduced metric using actual W1–W3;
+  (ii) prove the homogeneous gauge wave IBVP with zero initial and
+       compatible physical boundary data on that same reduced metric;
+  (iii) infer D=0 for Ered=0; then the Cotton source and defect jump
+        vanish and BR29 vacuum subsidiary identities apply;
+  (iv) if evolving independent Weyl variables, separately prove
+       their equality to geometric curvature using the coupled
+       subsidiary flux/trace estimate. Preserve BR29 rank12
+       obstruction to the chosen separated wall-only Gram.
+This is not a no-go for the final physical theorem, but a no-go
+for using contracted Bianchi alone as a projected-source-zero proof.
+
+Independent local SymPy 1.14 transcription of original BR29 packed
+carrier and these source maps returned ranks 9/6/8 and 25/9, including
+the gauge-Hessian wave-compatible 25/9 and exact contraction factor.
+This was not a byte-identical run of the committed new checker.
+BR89 algebra/warped and BR90/91 committed checker stages are pending.
+No native kernel or CI run. Runner closure includes BR89–91.
