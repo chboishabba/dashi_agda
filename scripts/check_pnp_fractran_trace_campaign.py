@@ -157,9 +157,10 @@ def main():
         assert t is not None
         L=sum(len(m['units']) for m in t['macros'])
         p=tuple(int(prime(i)) for i in range(1,3*3+L+2))
-        q=realize_ordered_trace(3,t,bridge,p,Budget(10000000))
+        q=realize_ordered_trace(3,t,bridge,p,Budget(10000000),valuation_replay=True)
         assert q['indices']==tuple(range(L))
-        checkpoint('ordered_replay',status='PASS',units=L)
+        assert q['valuation_replay']['probes']==0
+        checkpoint('ordered_replay',status='PASS',units=L,valuation=q['valuation_replay'])
     else:checkpoint('ordered_replay',status='SKIPPED',reason='set FRACDASH_SCRIPTS')
     print('aggregate fold cases',folds,'hard cases',hard_cases)
     checkpoint('final',status='PASS',receipts=receipts,units=units,nonimprovement=refusals)
