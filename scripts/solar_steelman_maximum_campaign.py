@@ -35,10 +35,11 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble','history-exact-leaf','history-contract'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble','history-exact-leaf','history-contract','history-local-growth'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--local-growth',action='store_true')
     p.add_argument('--power',type=int,default=2)
     p.add_argument('--degree',type=int,default=8)
     p.add_argument('--export-trace',action='store_true')
@@ -80,6 +81,15 @@ def main():
         z=ambient_bounds(m,a)
         save(work/'history_bounds.pkl',z,up,src)
         print('conditional ambient coefficient bounds', {k:float(v) for k,v in z.items()},flush=True)
+    elif x.stage=='history-local-growth':
+        from solar_steelman_history_local_growth import construct
+        prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
+        ap=work/f'{prefix}_cert{x.degree}_aggregate.pkl'
+        ag=load(ap,up,src)
+        T,delay=ag['clock']
+        z=construct(m,a,delay,T,x.degree)
+        save(work/f'{prefix}_cert{x.degree}_growth.pkl',z,dict(up,aggregate=sha(ap)),src)
+        print('conditional local growth envelope written',flush=True)
     elif x.stage=='history-contract':
         from solar_steelman_history_acceptance import complete
         prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
@@ -87,8 +97,15 @@ def main():
         leaf=load(work/'history_exact_leaf.pkl',up,src)
         bounds=load(work/'history_bounds.pkl',up,src)
         assert float(ag['clock'][1])==x.delay
-        z=complete(ag,leaf,bounds,x.knots,x.power)
-        save(work/f'{prefix}_cert{x.degree}_power{x.power}.pkl',z,up,src)
+        local=None
+        if x.local_growth:
+            ap=work/f'{prefix}_cert{x.degree}_aggregate.pkl'
+            local=load(work/f'{prefix}_cert{x.degree}_growth.pkl',dict(up,aggregate=sha(ap)),src)
+        z=complete(ag,leaf,bounds,x.knots,x.power,local=local)
+        suffix='_local' if x.local_growth else '_global'
+        deps=dict(up,aggregate=sha(work/f'{prefix}_cert{x.degree}_aggregate.pkl'),leaf=sha(work/'history_exact_leaf.pkl'),bounds=sha(work/'history_bounds.pkl'))
+        if x.local_growth:deps['growth']=sha(work/f'{prefix}_cert{x.degree}_growth.pkl')
+        save(work/f'{prefix}_cert{x.degree}_power{x.power}{suffix}.pkl',z,deps,src)
         print(z['status'],flush=True)
     elif x.stage=='history-exact-leaf':
         from solar_steelman_history_acceptance import leaf,exact_tangency,endpoint_ratio
