@@ -14,7 +14,8 @@ module DASHI.Foundations.FiniteCauchyOriginalShiftedDegreeFilterExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Relation.Binary.PropositionalEquality using (_≡_; sym; trans)
+open import Data.Nat.Base using (_≤_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as NP
 
 -- A's literal original cutoff at count c=suc n is n: every
@@ -60,3 +61,47 @@ bOriginalCellDegreeUnshift n i j h =
     (NP.≤-trans
       (NP.n≤1+n (i + j))
       (NP.n≤1+n (suc (i + j))))
+
+------------------------------------------------------------------------
+-- Exact ALL-INDEX exponent factorization for the upcoming native
+-- Bishop-real |X|^m order transport.  No finite numerical
+-- interpolation and no power manipulation by definitional fiat.
+------------------------------------------------------------------------
+
+finiteDegreePowerFactor :
+  ∀ (count degree : Nat) →
+  count ≤ degree →
+  degree ≡ count + (degree ∸ count)
+finiteDegreePowerFactor count degree cutoff =
+  trans
+    (sym (NP.m∸n+n≡m cutoff))
+    (NP.+-comm (degree ∸ count) count)
+
+originalAFilteredPowerFactor :
+  ∀ (n i j : Nat) →
+  n ≤ i + j →
+  suc (i + j) ≡ suc n + (suc (i + j) ∸ suc n)
+originalAFilteredPowerFactor n i j cutoff =
+  finiteDegreePowerFactor
+    (suc n) (suc (i + j))
+    (aOriginalShiftedCellDegree n i j cutoff)
+
+originalBFilteredPowerFactor :
+  ∀ (n i j : Nat) →
+  n ≤ i + j →
+  suc (suc (i + j)) ≡
+    suc (suc n) +
+      (suc (suc (i + j)) ∸ suc (suc n))
+originalBFilteredPowerFactor n i j cutoff =
+  finiteDegreePowerFactor
+    (suc (suc n)) (suc (suc (i + j)))
+    (bOriginalShiftedCellDegree n i j cutoff)
+
+originalBCountOnePowerFactor :
+  ∀ (i j : Nat) →
+  suc (suc (i + j)) ≡
+    suc zero + (suc (suc (i + j)) ∸ suc zero)
+originalBCountOnePowerFactor i j =
+  finiteDegreePowerFactor
+    (suc zero) (suc (suc (i + j)))
+    (bOriginalCountOneDegree i j)
