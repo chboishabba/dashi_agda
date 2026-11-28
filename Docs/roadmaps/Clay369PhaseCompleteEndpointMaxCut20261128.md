@@ -1061,3 +1061,146 @@ cycle/primitive pairing, RH pinned admission, PNP internal events
 on original SAT machine and original YM interacting Wilson
 CMP116/OS/mass-gap physics. No generic finite scaffold is a substitute
 for the original universal endpoint.
+
+
+## Section 28 — original same-source full physical/inverse-geometry cut (2026-11-28)
+
+**Head reconciliation:** Before writing, checked YM Agda #1536
+d85aa53efd930a082fddf5833f1ce07e44761c6e, all-Clay #1551
+1181bdb35005685d0817a27f3a74cbfb0399a045, NS Lean #123
+2716a32db363e70b404e28f03ff98e593a48892c, BSD/Hodge Lean
+#124 02ef347a217ceb9842932a508780c335114161ec,
+PNP Lean #119 fff6c4c41d7e33c89fb2161d932951b124864c4e
+and RH Lean #121 3eb36764e36c526b7129550b737ffc507b3cb95f.
+Default-branch parity remains a separate audit, not an assumption.
+All new native theorem bodies are **SOURCE-WRITTEN, PENDING_KERNEL**.
+No Agda/Lean/lake or GitHub CI run, no universal Millennium proof.
+
+### Navier–Stokes — actual same flow, all physical finite ledgers
+Lean #123
+Synthesis/NavierStokesOriginalGlobalFullPhysicalLedgerExact.lean
+commit 516e777bb78a640dd78f9c50fe9684c174a00d73.
+Reuses the already written actual_global_finite_tail_and_energy_payment
+and actual_quarter_signed_FTC with ONE actual finite Galerkin trajectory
+X_N on all physical nonnegative times, preserving original
+Euler/NS ODE, reality and transversality. The *same* X_N has:
+E_N(t)<=E_N(0); 2nu int_0^t D_N<=E_N(0); arbitrary original
+Fourier tail R² E_(>=R)<=D_N(t); and signed quarter FTC
+ E_(1/4)(T)^2-E_(1/4)(0)^2
+   =2int E_(1/4)F_(1/4)-4nu int E_(1/4)D_(1/4).
+The signed nonlinear upper payment is NOT inferred from FTC.
+Native import/axiom acceptance:
+Synthesis/ClayNSSection28FullPhysicalLedgerAcceptanceExact.lean
+a9751e1d45de789a5186a4c908792e15b15363a1.
+Actual remaining NS: cutoff-uniform signed nonlinear estimate or
+independent critical continuation, physical Euclidean exterior,
+unforced nonzero certificate, and separately admitted forced C/D.
+
+### BSD — original two-crossing positivity to ALL degrees
+Lean #124
+Synthesis/MillenniumBSDOriginalTwoCrossingAllDegreeSignPropagationExact.lean
+commit 68e69fbe23281b54875c805b9c505628ebf3fa51.
+Consumes exact original two-crossing all-degree
+h(a,b,n), signedPolynomial_factor, quotient_pos, next_moment_pos.
+Given original same source m(0)=0, m(1)>=0, positive a,b,
+and strictly positive integrated signed polynomial for EVERY n,
+prove by induction m(n+2)>0 for EVERY n. Reverse no-go:
+if any m(n+2)<=0 then m(1)<0 under the same original source
+hypotheses. This generalizes Section25 m2 sign to all degrees;
+it does not prove the selected complex L''=0 or
+arithmetic/analytic rank equality. The actual Mellin-to-L source,
+complex derivatives and Sha-finiteness remain outstanding.
+Existing number-field Kummer/Selmer/Sha exact sequence is not debt.
+
+### Hodge — original paired Dickson rotation/sign 5+5 geometry
+Lean #124
+Synthesis/MillenniumHodgeDicksonOriginalCoupledTenDeckGeometryExact.lean
+commit ca9621234b0cae3b21c00dbe491ba45cc091bc04.
+Consumes existing rotationFibre_inhabited, rotationDeckEquiv,
+fiveDeckEquiv, actualOriginalQ0FiveDeckEquiv and
+coupledSurfaceFibreEquiv: with original paired y,eta,delta,
+nonzero product and compatible source equations, FIVE independent
+seventh-root deck coordinates and FIVE independent square-sign
+coordinates determine BOTH sixth coordinates, yielding a BIDI
+between original coupled rotation/Q0 roots and the 5+5 deck.
+Away from the actual fold branch y_i²=a_i^7 this is transported
+to the ORIGINAL coupledProjection image, not a synthetic image.
+This is a finite generic-fibre result, NOT a proper algebraic
+Chow cycle or primitive Hodge class. Remaining actual Proj chart,
+branch/monodromy glue, proper pushforward, primitive orientation
+and arbitrary-X cycle. BSD/Hodge native acceptance:
+Synthesis/ClayBSDHodgeSection28OriginalOwnerAcceptanceExact.lean
+2cceb3106cd992977508f89f7023ae55e629b559.
+
+### PNP — anchored real Boolean source cannot split closed states
+Lean #119
+Welds/PNPOriginalResidualClosedInternalNoGoExact.lean
+commit 943daca326b28a26fac83beaf80acc5f45e8ecfd.
+Consumes original anchored_reopen/LegalAt/A d=0 retained F3
+collision and existing PNPActualEventDemand.internal_observer_no_split.
+If the actual initial state depends only on retained original A,
+and every subsequent observation is a deterministic readout of
+that closed state, the final original Boolean B-consumer CANNOT
+distinguish the original anchor and legal reopened source.
+Reverse obstruction: any genuine terminal distinction requires
+external source information or an explicitly different initial
+state, not invented internal oracle events. Import/axiom root:
+Welds/PNPSection28ClosedInternalNoGoAcceptanceExact.lean
+6ad77d8a660cd8d0171f0afaaeea865d9a01e376.
+Remaining original SAT arbitrary-sharing internal source-work
+lower bound or real polynomial algorithm, C1a full bit clock,
+R1 same-target candidate compiler; static input-only nC ceiling
+and closed-observer no-go are nonpromotion constraints.
+
+### YM and RH retained original owners
+YM Agda #1536 Section26/27 already derives the ORIGINAL rational
+CMP109 factorial finite G_count coefficient-cancellation geometry,
+with original Bishop rate-to-zero and squeeze receiver source-written.
+The exact remaining native step is proving the *finite* original
+Bishop real-order bracket
+ -3*(1/4)^count <= originalGPrefix X count
+                   <= 3*(1/4)^count
+for every |X|<=1/4 and all original SeriesOf counts, consuming
+existing all-degree original signed Cauchy source and factorial
+finite order. No duplicate coefficients or alternative analytic
+carrier. Physical connected two-pair Wilson CMP116, interacting
+continuum measure, OS, nontriviality and same-H gap separately open.
+RH Lean #121 already owns xi/zeta original-parameter and
+Clay/Mathlib statement BIDI. Pinned external admission and true
+transitive native axiom/source verification remain; no new RH
+theorem from existing algebraic equivalence.
+
+### Exact six-programme regression, scope and source
+Local Python 3.13.5 exact rational/group execution:
+**32552 / 32552 PASS** (YM 4922 including original finite prefixes
+counts 0..90 and 100 untruncated binomial even/odd parity rows;
+BSD 90 exact positive moment recursion; Hodge 16839 five seventh
+root and five sign deck product-one controls; NS 144 exact signed
+FTC payment iff; PNP 6336 closed-state deterministic no-split;
+RH 4221 signed Xi horizontal coordinate).
+New script on #1551
+scripts/check_clay_section28_same_source_full_cut.py
+commit ad3efc747a0df50ba1bb5600418c0764e928e5df.
+The local independently executed source is equivalent to the committed
+script; NOT a verified byte-identical GitHub checkout. Container
+could not resolve raw.githubusercontent.com, so no downloaded
+execution parity is claimed. These finite fixtures do NOT establish
+a Clay endpoint, kernel acceptance, universal PDE or SAT statements,
+or source-to-complex L derivative equivalence.
+
+### Exact next proof maximum cut
+1. YM: original finite count-indexed Bishop Cauchy triangle/order
+   certificate => Section27 squeeze => originalG=0, then actual
+   interacting F19/CMP116/OS/mass gap *separate* physics.
+2. NS: true signed quarter nonlinear control UNIFORM in original
+   Galerkin cutoff/time => compact critical/physical endpoint.
+3. BSD: original selected complex L derivative mapped to signed
+   Mellin moments; general rank equality and Sha finiteness.
+4. Hodge: original global proper cycle plus nonzero primitive
+   cohomology pairing after ten-deck generic fibre gluing.
+5. RH: pinned proof admission, actual statement/kernel/axiom audit.
+6. PNP: original arbitrary SAT shared computation and legitimate
+   unavoidable internal event payment or true polynomial algorithm.
+
+All status must distinguish finite check, source theorem written,
+native kernel acceptance, physical construction and universal result.
