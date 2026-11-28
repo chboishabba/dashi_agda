@@ -3724,3 +3724,31 @@ module At {r : Level} (F : C.RealField r)
   -- Analytic identity: D Ered(Lie_V g) = Lie_V Ered - symgrad(P_g V).
   -- These are source expressions, not an admitted inverse for P_g,
   -- nor the curved graph lift or variable glancing estimate.
+
+
+  ------------------------------------------------------------------------
+  -- BR112–115 scalar generator and F normal scale source attachments.
+  -- These are geometric/source expressions, not analytic inverse proofs.
+  ------------------------------------------------------------------------
+  originalFGeneratorConormalTangential : S → Vec → Vec
+  originalFGeneratorConormalTangential j w a = j * w a
+
+  originalFOpticalGeneratorPotential : S → S → S
+  originalFOpticalGeneratorPotential k derivativeK =
+    (three * half) * derivativeK + (three * three * quarter) * (k * k)
+
+  originalFOpticalGeneratorJump : S → S → S → S
+  originalFOpticalGeneratorJump j a derivativeJump =
+    derivativeJump - (three * half) * j * a
+
+  originalFScaleNeumannPlus : S → S → S → S
+  originalFScaleNeumannPlus j c src = two * j + c + src
+
+  originalFScaleNeumannMinus : S → S → S → S
+  originalFScaleNeumannMinus j c src = neg (two * j) + c + src
+
+  originalFScaleNeumannJumpSource : S → S → S
+  originalFScaleNeumannJumpSource j sourceJump = four * j + sourceJump
+
+  -- BR114 finite scalar reference Green estimate and BR115 glancing
+  -- loss are separate analytic acceptance obligations. No promotion.

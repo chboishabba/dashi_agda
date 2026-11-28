@@ -1115,3 +1115,188 @@ or coupled energy with adequate derivative regularity,
 W0 same-chart high corners, W6 actual reduced existence.
 W4a remains conditional BR98; W4b/W5 separate. Do not promote
 a flat half-line estimate into an actual nonzero curved IBVP.
+
+
+## 13. BR112–115 — physical generator transmission, finite AK joint bound, first-jet scale route
+
+Reopened BR26, BR32, BR4/6/19, BQ conformal and derivative-source
+controls, BR14/34/35/37, BR104–111. Distinguish the subsidiary
+gauge wave (covector) from the gauge-preserving generator P_g
+(vector). Classical diffeomorphism, scalar wave, Green spectral
+bounds and stress energy prior mathematics; DASHI-specific
+attachment to the original signed F source. No replacement of
+the nonzero Hopf data by the symmetric AK reference.
+
+### BR112 — generator equation and moving material graph
+
+For C_mu=g_mu,nu g^ab(Gamma^nu_ab-hatGamma^nu_ab)-H_mu,
+with fixed reference connection and prescribed H(x,g), covariance
+when the background structures are also transported gives
+ P_g V=DC_g[Lie_V g]-Lie_V C
+      =g_mu,nu g^ab (Lie_V hatGamma)^nu_ab
+       +Lie_V H_mu-D_g H_mu[Lie_V g].
+Here Lie_V of a connection is the connection Lie derivative
+(including ∂ab V^nu); in the BR14 coordinate contracted source
+hatGamma=0 in the chosen chart and H fixed in the metric,
+ P_g V=g_mu,nu g^ab ∂ab V^nu+Lie_V H_mu.
+For a GIVEN smooth g and algebraic H, lower terms are first order;
+do not assume hatGamma is a tensor or transport H without the
+inhomogeneous source rule. This identity follows from covariance
+of the connection difference with both backgrounds varied.
+
+Use matched Gaussian trace collars for the geometric boundary
+calculation only, g=dn²+h(n,x), K±=1/2 h_n±, with common h,
+[K]=jh and mean trace zero. Write V=w+v n, common value at seam,
+[w_n]=0, [v_n]=p. Lie metric perturbations at fixed graph are
+ k_ab=Lie_w h+2v K_ab, k_an=h_ab w_n^b+d_a v,
+ k_nn=2v_n.
+Material graph displacement f=-v removes normal evaluation
+from k_ab, so common induced metric variation is Lie_w h,
+mixed jump zero, material normal scale jump p. Exact transported
+embedding is the inverse diffeomorphism on the original wall:
+pullback metric plus pullback embedding yields natural pullback
+of its first and second fundamental forms and normal gauge
+projection. With tangential wall parameter w, δh=Lie_w h,
+δK±=Lie_w K±; thus δ([K]-jh)=0 and δmean tau=0 on the actual
+physical shell, constant j. For P_g V=0, δC=Lie_V C, so
+the combined graph/metric variation also preserves all geometric
+gauge value jumps. If P differs across the wall, its projected
+jump is an explicit gauge defect. The coordinate normal derivative
+jump [w_n]=0 is NOT [∇_n w]=0: the latter equals j w on this
+collar. Covariant conormal transport must include that term.
+These are exact geometric first variations; the combined graph
+lift is not a fixed-wall diffeomorphism, nor a finite-amplitude
+piecewise chart existence theorem.
+
+For prescribed p on a given continuous metric in a matched
+material chart, solve P_g V=0 with common V and prescribed
+coordinate conormal jump p n (with appropriate density).
+With uniform slice energy, common positive component wall Gram,
+bounded piecewise coefficients and homogeneous exterior flux,
+the signed generator flux is -<V_t,W p>, W includes density,
+normal direction and Gram. Add <V,W p> to energy, leaving
+<V,∂t(W p)>. Normal H1 trace interpolation and Young control
+the cross term by small bulk energy plus C||p||²_wall, and
+the remaining power by E_V+C(||p||²+||p_t||²)_wall (bounded
+W,W_t). Hence a conditional low-order generator energy
+estimate for p∈H1_t L²_wall and compatible initial data.
+For existence still construct the weak/strong solution in the
+actual chart and pay exterior and boundary coefficient regularity.
+This gives V H1, NOT V H2 required for metric H1.
+
+### BR113 — actual harmonic-Y scalar reference generator
+
+On BR14 AK reference g=b² h_base+b^8 dY², H_Y=0, H_a equals
+base contracted lower Christoffel independent of Y. A pure
+normal coordinate generator V=v ∂Y has Lie_V H=0 (H has no
+Y component or dependence). At the frozen base RNC point
+P_g^Y V=0 reduces exactly to the scalar normal ODE
+ b^-6 ∂YY v-ell² v=0 after multiplying by b².
+With dx/dY=b³, k=b_x/b, this is
+ v_xx+3k v_x-ell² v=0.
+The same scalar ODE governs the mean-curvature Dirichlet
+wave at the frozen base RNC point (forcing b²F_tau).
+This is NOT the BR34 covector gauge operator.
+Conjugate v=b^-3/2 u:
+ u_xx-(ell²+U)u=0, U=(3/2)k_x+(9/4)k².
+Actual optical b=(4/5) sec((4/5)x), k=(4/5)tan((4/5)x),
+k_x=b², 4/5<=b<=1, |k|<=3/5. Thus 0<U<=231/100<3.
+Same conjugation of scalar forced equation gives source
+b^(7/2) F_tau with L² norm <=||F_tau||. At endpoints b=1,
+[v_x]=[u_x]-(3/2)j A for common value A, j=-6/5.
+H_perp and mean scalar are evaluated on the reference, not
+promoted to the nonzero BN collar.
+
+### BR114 — finite scalar AK joint Green estimate
+
+Let d=2 atan(3/4)/(4/5)>1, a=Re ell>=gamma, L=|ell|.
+For gamma>=16, e^-ad<=1/7 since ad>=2 and e²>7.
+Dirichlet homogeneous kernels
+ K0=sinh(ell(d-x))/sinh(ell d), Kd=sinh(ell x)/sinh(ell d).
+Both endpoint values A use extension A(K0+Kd).
+Flat trace jump for Dirichlet source f is
+ -integral(K0+Kd) f, bilinear (not Hermitian), whose functional
+norm equals ||K0+Kd||. Bounds |K0|<=(7/6)e^-ax and
+|Kd|<=(7/6)e^-a(d-x), so norm<=2/sqrt(a).
+The flat endpoint derivative jump for common A is
+ D0 A=-2ell tanh(ell d/2) A, with
+ (3/2)L<=|D0|<=(8/3)L.
+
+Dirichlet inverse norm <=1/(aL) in L² by sine spectral basis:
+ |ell²+kappa²|²=(a²-b_im²+kappa²)²+4a² b_im².
+If b_im²<=a² minimum on kappa²>=0 at 0, L^4>=a²L²;
+otherwise minimum >=4a²b_im²>=a²L².
+For U with c=3 bound, delta=c/(aL)<=3/gamma²<1/64.
+Neumann series gives scalar Dirichlet trace bound
+ <=2/(sqrt(a)(1-delta))||f||<=3||f||/sqrt(a)
+and equal-endpoint homogeneous u norm <=3|A|/sqrt(a).
+Derivative jump correction <=6c|A|/a by flat Green trace;
+include optical conjugation shift (3/2)j A. At gamma>=16
+ 6c/a+(3/2)|j|<L/2, so physical derivative jump scalar
+D has |D|>=L and A=p/D uniquely. For integration by parts
+|D_u|<=3L; ||u'||² <=(L²+c)||u||²+3L|A|²
+<=16 L²|A|²/a, and ||u''||<=4 L²|A|/sqrt(a).
+b^-3/2 and its first two derivatives bounded by 2,2,5;
+hence v norm<=6|A|/sqrt(a), v'<=9L|A|/sqrt(a),
+v''<=10L²|A|/sqrt(a).
+
+For the principal scalar wall inverse p=(signed n tau jump)/ell²,
+use BR105 linearized drift-free reference. Other terms (including
+gauge, background variation of n tau, residuals and material
+graph transport) are separate sources, not included in this
+particular operator. With Dfreq=max(L,|s|,|xi|), BR109 root
+inequalities yield
+ ||any optical/tangent second derivative of v||_L²
+ <=30 Dfreq²/(L³ a) ||F_tau|| <=60/gamma² ||F_tau||.
+All constants conservative and rational except exact optical
+coordinate bounds; no numerical frequency sampling assumption.
+Metric Lie reconstruction incurs fixed smooth background
+coefficients, and its boundary/material graph attachment must
+consume the full BR112 geometry. This is the actual AK frozen
+scalar-generator collar estimate, not a variable curved
+matrix Green theorem or full warped F boundary inverse.
+The full generator on actual nonzero g requires variable
+coefficient P_g, graph chart transport and source estimates.
+
+### BR115 — alternative first-jet scale equation and sharp refusal
+
+BR100+104 give a direct alternative to BR106:
+ Box_g psi=tau n psi-tr(K²)+nH_perp-<Dpsi,C_tan>+4-Ered_nn,
+ n psi±=±2j+C_perp+H_perp± on F.
+This is a bulk wave with Neumann data and first metric jets
+if H algebraic, fixed chart, actual reduced solution. The
+normal derivative jump is 4j+[H_perp], independent of common C.
+Do not assert C vanishes before BR98. On reference RNC
+H_perp=0, C=0; linearize n psi±=±2j: since npsi0=4k
+and Dpsi0=0, linearized Robin is n(δpsi)-4k δpsi=0,
+not raw homogeneous coordinate Neumann.
+
+The scale-Neumann route removes the explicit second-jet
+tau source but is not automatically a better metric estimate.
+Flat principal arbitrary bulk scale source F_l on two half-lines,
+homogeneous Neumann, trace difference norm exactly
+1/(L sqrt(a)) by Green functional exp(-ell r)/ell.
+BR108 lift then gives ∂t²v operator norm
+ |s|²/(2L² a).
+On glancing s=gamma+i r, |xi|=r, its square /r tends to
+1/(16 gamma³). Thus it loses half a tangential derivative
+in norm for arbitrary bulk forcing. BR114 tau route has
+uniform joint bound but second-jet source. Neither arbitrary
+source route closes the nonlinear feedback at the same
+metric energy order. Need structured source factorization
+or an augmented energy / moving-wall formulation with
+derivative-compatible trace, not just add a large damping
+constant. This refusal is about these exact model operators,
+not an impossibility theorem for Einstein–Israel development.
+
+Acceptance: actual local SymPy 1.14.0 four bounded checks,
+all exit 0. Git blob matches executed source after correcting
+one blank-line difference and rerunning. Receipt records hashes.
+Native algebraic additions, kernel unrun; no CI requested.
+Next max-cut: compute actual structured BR104/106 first/second
+jet source symbol on the nonzero geometry, including generator
+transport of the foliation and gauge-source terms, seek a
+cancellation or uniform mixed-order energy without derivative
+loss; actual moving chart and W0 higher corners remain.
+W4a conditional BR98, W4b Weyl, W5 exterior/Hodge, W6 physical
+development and W7 acceptance remain separate.
