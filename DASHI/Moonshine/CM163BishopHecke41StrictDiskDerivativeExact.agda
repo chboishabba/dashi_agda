@@ -107,7 +107,7 @@ module Shrink (outer inner : BishopComplex)
               b = Outer.budget k
               p = R.pow s k
               weightLe = P.≤-respˡ-≃
-                (P.≃-trans (P.nonNegx⇒∣x∣≃x (PG.polynomialGeometricTermNonnegative s 1 k (P.0≤x⇒nonNegx s0)))
+                (P.≃-trans (P.nonNegx⇒∣x∣≃x (PG.polynomialGeometricTermNonnegative s0 1 k))
                   (P.≃-symm (momentRead k))) (hb k)
               raw = P.*-monoʳ-≤-nonNeg (massBound k)
                 (P.nonNegx,y⇒nonNegx*y (PG.natRealNonnegative 2) (PG.natRealNonnegative k))
