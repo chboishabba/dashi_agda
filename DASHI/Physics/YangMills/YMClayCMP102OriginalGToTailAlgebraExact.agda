@@ -153,3 +153,56 @@ originalGIsRawWingsFromOriginalFinReindex X n hrow =
        in solve 1
             (λ tail → Κ 0ℚᵘ ⊕ tail ⊜ tail)
             P.≃-refl (originalRawSquareWingTail X n)))
+
+
+-- The two original finite squares are now transported to the actual
+-- two original Bishop Cauchy rectangles. Thus the raw square
+-- difference is literally the source `originalAWing/originalBWing`.
+-- This does not require a new analytic argument or limit.
+originalRawSquareWingsAreActualCauchyTail :
+  ∀ X n →
+  R._≃_
+    (originalRawSquareWingTail X n)
+    (Tail.originalSignedCauchyTail X n)
+originalRawSquareWingsAreActualCauchyTail X n =
+  let
+    count = suc n
+    A = Original.aPrefix X count
+    B = Original.bPrefix X count
+    TA = originalALowTriangle X count
+    TB = originalBLowTriangle X count
+    hAWing :
+      R._≃_
+        ((A ⊠ A) ⊟ TA)
+        (Tail.originalAWing X count)
+    hAWing =
+      P.+-cong
+        (Wing.originalASquareIsOriginalRectangle X count)
+        (P.-‿cong P.≃-refl)
+    hBWing :
+      R._≃_
+        ((B ⊠ B) ⊟ TB)
+        (Tail.originalBWing X count)
+    hBWing =
+      P.+-cong
+        (Wing.originalBSquareIsOriginalRectangle X count)
+        (P.-‿cong P.≃-refl)
+  in
+  P.+-cong
+    (P.+-cong
+      (P.-‿cong (P.*-congˡ hAWing))
+      P.≃-refl)
+    (P.*-congˡ hBWing)
+
+-- Original G_count -> EXACT ORIGINAL signed Cauchy source tail:
+-- one remaining owner-specific finite row reindex witness and all
+-- other data strictly from original Agda finite Cauchy constructors.
+originalGIsOriginalSignedCauchyTail :
+  ∀ X n → OriginalShiftedRowFinReindex X n →
+  R._≃_
+    (Original.originalGPrefix X (suc n))
+    (Tail.originalSignedCauchyTail X n)
+originalGIsOriginalSignedCauchyTail X n hrow =
+  P.≃-trans
+    (originalGIsRawWingsFromOriginalFinReindex X n hrow)
+    (originalRawSquareWingsAreActualCauchyTail X n)
