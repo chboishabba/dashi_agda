@@ -5591,3 +5591,32 @@ Local independent reconstruction: scan.py and poly.py executed
 with SymPy 1.14.0 and 90s caps; outputs in receipt. New committed
 donor entry adds algebraic chart assertions and is unrun.
 Terminal stage 33. No CI/native acceptance.
+
+
+## 48. BR213 — exact local Smith filtration and first-order coupled loss
+
+Use the BR212 regular physical chart at both glancing endpoints,
+t=sigma i(1-u²)/(1+u²), l=2u/(1+u²). Clearing denominators
+by the analytic unit (1+u²)^4 gives a polynomial matrix, with
+the same local elementary divisors. For coefficient matrices T_i
+construct the truncated lower block Toeplitz map L_m with blocks
+T_(i-j) for i>=j, zero otherwise. Over Q(i) compute
+nullity(L_m)=sum_i min(m,nu_i) by exact DomainMatrix rank.
+Independent local SymPy 1.14.0 execution, timeout 90, exit 0:
+both signs and k=1,2,10 yield jump nullities 6,7,7 and
+joint nullities 4,4. Thus jump elementary orders are
+0^13,1^5,2^1; joint orders 0^15,1^4. The seventh-order
+minor in BR212 is the sum of orders, not the maximum.
+For fixed tested k, analytic local Smith equivalence implies
+jump inverse norm on its image comparable to |u|^-2, joint
+comparable to |u|^-1, for sufficiently small nonzero complex u.
+The regular chart has full column rank at the endpoint.
+No global k-uniform constants are established. In particular
+the source-to-amplitude estimates must track k, compatible
+source image and normal integration, damping and finite collar.
+Next: symbolic parameter k and high-frequency normalized
+wall rows, explicit source quotient and glancing energy.
+Original donor import entry and added exact expected-value
+assertion not replayed; independent reconstruction did run.
+Terminal stage 34 registered. No CI/native/PDE acceptance.
+Other six lanes unchanged.

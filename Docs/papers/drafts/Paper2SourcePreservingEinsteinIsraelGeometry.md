@@ -796,3 +796,7 @@ for all seven parallel lanes.
 ### BR211–212 physical boundary pencil
 
 The original static complex-null Weyl/Israel jump is injective, but a regular five-polarization chart at glancing reveals rank 13 rather than 19. Adding the original wall evolution rows yields rank 15 at both glancing signs for three tested tangential frequencies. A factored minor proves injectivity on the real parametrized open oscillatory arc; its seventh-order vanishing is not a sharp inverse-loss bound. Local independent exact checks passed; original donor import, damped complex-frequency bounds and curved existence remain open. See roadmap section 47.
+
+### BR213 local glancing elementary divisors
+
+Exact truncated coefficient-map ranks on both glancing signs at k=1,2,10 give elementary orders (0^13,1^5,2) for the jump and (0^15,1^4) for the joint jump/wall system. Thus the local inverse loss for the coupled physical system is first order in the glancing normal parameter at these fixed frequencies. Uniform high-frequency constants, compatible sources and curved transfer remain open. See roadmap section 48.

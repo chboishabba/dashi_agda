@@ -203,6 +203,8 @@ PARTS["terminal"].append(("BR211.static_evanescent","check_hopf369_br211_static_
 
 PARTS["terminal"].append(("BR212.glancing_pencil","check_hopf369_br212_glancing_pencil.py",()))
 
+PARTS["terminal"].append(("BR213.glancing_filtration","check_hopf369_br213_glancing_filtration.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
