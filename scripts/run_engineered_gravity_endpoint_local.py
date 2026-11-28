@@ -33,6 +33,7 @@ CORE=(
     "check_engineered_gravity_hopf_receiver.py",
     "check_engineered_gravity_same_source_observers.py",
     "check_engineered_gravity_hopf_full_receiver.py",
+    "check_engineered_gravity_hopf_time_receiver.py",
     "check_engineered_gravity_l4_budget.py",
 )
 DONORS=(
