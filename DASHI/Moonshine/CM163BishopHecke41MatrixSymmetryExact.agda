@@ -12,6 +12,11 @@ import DASHI.Moonshine.JInvariantBishopHomogeneousKleinTransportExact as Cancel
 import DASHI.Moonshine.CM163BishopHecke41AnalyticChartsExact as Chart
 import DASHI.Moonshine.CM163BishopHecke41ProductExact as Prod
 import DASHI.Moonshine.CM163BishopHecke41RestSlopeLimitExact as Rest
+import DASHI.Moonshine.CM163BishopHecke41SignedRayExtractionExact as Ray
+import DASHI.Moonshine.JInvariantBishopCM163LiteralTerminalExact as Terminal
+import DASHI.Moonshine.JInvariantBishopCM163ReciprocalGeometryExact as Geo
+import DASHI.Moonshine.CM163BishopHecke41SequentialJetExact as Jet
+import DASHI.Foundations.BishopChudnovskyRawCoordinateWeldExact as Raw
 import DASHI.Moonshine.JInvariantBishopFourierRowLimitExact as Lim
 import DASHI.Moonshine.JInvariantBishopCenteredDyadicLatticeReadoutExact as Power
 open import Data.Fin.Base as Fin using (Fin; toℕ)
@@ -42,7 +47,7 @@ import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneLatticeDenominatorExact as 
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 import DASHI.Physics.YangMills.YangMillsSubmissionBishopCutsetExact as Round11
 open C using (BishopComplex; _≈C_)
-open A using (_+C_; _*C_; powC)
+open A using (_+C_; _*C_; _-C_; powC)
 open Comp using (complexTrans; complexSym)
 open N using (sumC; sumCong; sumMul)
 open Poly using (realC)
@@ -223,3 +228,52 @@ module At (inputs : Round11.BishopCutset) where
   originalCenterSlope c sym gate full hj y nz cv =
     Slope.centerSlopeFromReverseSlice (λ n → A._-C_ (realC (y n)) Shift.K) nz cv
       (λ n → reverseComplement c sym gate full hj (y n) (nz n))
+
+
+  -- One global diagonal proof supplies the selected root; the full
+  -- matrix identity supplies the reverse slice. No independent root
+  -- or forty-factor slope is accepted by the terminal consumer.
+  module Closure (c : Coefficient) (sym : Symmetric c)
+    (gate : SliceGate c) (full : FullIdentity c)
+    (hd : ∀ p → H.R.d p ≈C A.zeroC)
+    (hs : ∀ p → H.R.s p ≈C A.zeroC) where
+
+    module RY = Ray.At inputs
+
+    root : CM.CMRoot
+    root = SR.rootFromResidual (hd Fixed.p)
+
+    slopeAlong :
+      (y : Nat → R.ℝ) →
+      (∀ n → Rec.BishopComplexNonzero (realC (y n) -C Shift.K)) →
+      Lim.Conv (λ n → realC (y n) -C Shift.K) A.zeroC →
+      (p : Nat → U.BishopUpperHalfPlanePoint) →
+      (∀ i → Lim.Conv (λ n → H.chart (p n) i) (H.chart Fixed.p i)) →
+      Lim.Conv (λ n → H.x (p n)) A.zeroC →
+      Lim.Conv (λ n → Cross.slope (H.c (p n)) (H.x (p n))) (realC (Literal.s3 ⋆))
+    slopeAlong y nz cv p charts hx =
+      Lim.limitTransport (originalCenterSlope c sym gate full root y nz cv)
+        (Slope.actualSlopeLimit p charts hx)
+
+    ray :
+      (y : Nat → R.ℝ) →
+      (∀ n → Rec.BishopComplexNonzero (realC (y n) -C Shift.K)) →
+      Lim.Conv (λ n → realC (y n) -C Shift.K) A.zeroC →
+      (w : Nat → BishopComplex) (p : Nat → U.BishopUpperHalfPlanePoint) →
+      (X Xp Xm : Nat → BishopComplex) →
+      (cv : Lim.Conv w A.zeroC) → (nz : ∀ n → Rec.BishopComplexNonzero (w n)) →
+      (∀ n → H.x (p n) ≈C (w n *C X n)) →
+      (∀ n → H.xp (p n) ≈C (w n *C Xp n)) →
+      (∀ n → H.xm (p n) ≈C (w n *C Xm n)) →
+      Jet.Jet w X (realC RY.a) (realC RY.b) →
+      Jet.Jet w Xp (Geo.p0 RY.a) (Geo.p1 RY.b) →
+      Jet.Jet w Xm (Geo.m0 RY.a) (Geo.m1 RY.b) →
+      (∀ i → Lim.Conv (λ n → H.chart (p n) i) (H.chart Fixed.p i)) →
+      Lim.Conv (λ n → H.x (p n)) A.zeroC →
+      Terminal.OriginalRayResidual
+    ray y ynz ycv w p X Xp Xm cv nz hx hp hm jx jp jm charts xc =
+      RY.rayFromActual w p X Xp Xm cv nz hx hp hm jx jp jm
+        (slopeAlong y ynz ycv p charts xc) (λ n → hd (p n)) (λ n → hs (p n))
+
+    allRaw : Terminal.OriginalRayResidual → (k : Nat) → Raw.RawCross k
+    allRaw = SR.allRaw (hd Fixed.p)
