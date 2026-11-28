@@ -3183,3 +3183,74 @@ RH #121: existing xi/zeta statement BIDI and strict exact external native source
 PNP #119: actual original paired legal finite-clock external observation NECESSITY, but no general algorithm sharing-stable unavoidable huge internal-event mass, legitimate full machine bit/control R1 cost, or polynomial SAT algorithm. No P vs NP proof.
 
 All new theorem files are SOURCE_WRITTEN and read back from GitHub; native Agda/Lean execution and complete trusted axiom checks have NOT run. All six universal Millennium problems remain open.
+
+
+## Section 41 — original Hodge sixfold signed-coupling WELD and free deck, original PNP causal bit-read, exact YM outer-wing degree filter (2026-11-29 AEST)
+
+### Verified live source heads, ownership, and status
+
+At roadmap write, all work was committed to the ORIGINAL owner PR branches:
+- YM Agda #1536 `agent/ym-p0-cmp119-r445-master-weld-20261121` — `0bb96deb30da9f225282476acaf683e2aa911093`.
+- NS Lean #123 `research/ns-native-proof-weld-20261127` — `4051705b306d6050128b9e3881383993f1b217ae` (unchanged Section39 same-flow all-cutoff high-shell radius; do not manufacture a signed nonlinear endpoint).
+- BSD/Hodge Lean #124 `research/clay-bsd-hodge-moment-orientation-20261127` — `6d375ccc50b6874b76c59811887c87741486a072`.
+- PNP Lean #119 `research/clay-p0-polynomial-coverage-endpoint-20261124` — `1c872e4fb9d7cebd25bd804bb18ba703a2fdec39`.
+- RH Lean #121 `fix/alpoge-original-admission-axiom-log-20261126` — `aa6b0323d25acb7de3f85187e801939de40039d8` (unchanged: external genuine proof not supplied).
+- Canonical rollup #1551 `research/clay-four-p0-rollup-20261124` — `ea0f429080eadc22de09257f10e12d0d0d99d5da` before roadmap append.
+
+**Native status:** No Agda, Lean or Lake executable is available locally. ALL new proof bodies remain `SOURCE_WRITTEN/PENDING_KERNEL`; no source-written theorem declaration, exact Fraction regression or source-hash matching promotes a Clay problem to solved. No CI was run. No loose file is delivered as an artifact of record: all new source, checkers, acceptance roots and this roadmap are committed with the work.
+
+### YM — universal two-outer-wing mathematical construction against the original CMP109/102 source
+
+The remaining positive-count scalar leaves after the prior original B-endpoint and zero-count source payments are exactly:
+`|X * Tail.originalAWing X c| <= quarter^c`
+and
+`|X² * Tail.originalBWing X c| <= quarter^c`,
+for all c>=1, |X|<=quarter, with the ACTUAL a triangle count c-1 and B triangle count c-2.
+
+NEW owner #1536:
+- `Docs/roadmaps/YMClayCMP102Section41OriginalOuterDegreeFilter.md`, commit `e6fdd7fa9bd8c0ef5c004caa322b544cbcb48086`. It gives the COMPLETE original finite mathematics: A rectangle-minus-triangle retains exactly pairs i,j<c with i+j>=c-1. After its X factor, EVERY term has degree i+j+1>=c. B retains pairs with i+j>=max(c-2,0); after X² EVERY term has degree >=c (for c=1, 2>=c and B rectangle is the true singleton b0²). With 0<=u=|X|<=q=1/4<=1, each selected monomial <=q^c. Original CMP109 nonnegative a_i,b_i and original finite mass ceilings give
+  `|X W_A(c)| <= q^c (Σ_(i<c) a_i)^2 <= q^c (6/11)^2 = q^c*36/121 <= q^c`,
+  `|X² W_B(c)| <= q^c (Σ_(i<c) b_i)^2 <= q^c (10/57)^2 = q^c*100/3249 <= q^c`.
+  This is a rigorous universal FINITE algebraic proof strategy on the true original a/b coefficient series, not a new analytic series. Native Agda still must implement the finite filtered-Fin Cauchy inclusion, the finite positive sum/monomial degree-order transport, and correct factorial-rational order typechecks before calling `OriginalOuterTwoWings X`. The exact c=1 B branch is an explicit distinct constructor; original c=0 already source-paid in Section37. The original physical interacting Wilson/OS/same-H mass-gap endpoints remain completely separate.
+- `scripts/check_ym_cmp102_section41_original_degree_filter.py`, commit `0bb96deb30da9f225282476acaf683e2aa911093`. An independent exact Fraction execution of the same checks over ALL c=1..64 and signed X in {-1/4,-1/8,0,1/8,1/4}, with actual factorial a_i,b_i, correct filtered rectangles, A/B mass, c=1 and original five-term G-to-tail identity, passed **937,738 / 937,738 exact assertions**. This confirms the finite sampled arithmetic and formulas, not their Agda Bishop-order type correctness; byte-identical execution of the GitHub script was not established.
+
+**The next YM native proof file needs to be ONE full filtered-square/degree-majorant foundation constructor plus its original A/B instantiation**, not another trivial conditional wrapper. Finish and run the current Agda 2.9 --safe source graph before labeling CMP102 accepted.
+
+### Hodge — FULL original signed δ-coupled sixfold deck (the previous missing mathematical bridge)
+
+Section40 only proved six INDIVIDUAL Q0 partners preserved each polynomial value and derivative square. That did not establish that they preserve the ORIGINAL coupled orientation
+`∏_(i:Address) dField(a_i,s_i)=δ` in `ActualRootFibre(a,y,δ)`.
+NEW owner Lean #124:
+- `Synthesis/MillenniumHodgeDicksonOriginalCoupledSixSignedDeckExact.lean`, commit `fd2786c47e44c91a5d13fa8e3db687fc3c0c7a4b`. Provides the original all-negative `EvenDeck` on the literal six-address carrier. Since (-1)^6=+1, simultaneously applying the ALREADY owned Q0 partner to each root reverses every derivative but preserves the ORIGINAL SIXFOLD signed PRODUCT δ, with no change to the original Q0 equations. It therefore constructs `originalQ0CoupledSixPartner` as an endomap of the ACTUAL `ActualRootFibre a y δ`, proves its involution ON THE FIBRE and the exact existing `actualRootFibreEquiv` signed-deck equivariance.
+- `Synthesis/MillenniumHodgeDicksonOriginalPuncturedCoupledDeckFreeExact.lean`, commit `b455d73f63a56d3920ce021fa3f29ca101ff744e`. Upgrades the map to a genuine `Equiv.Perm` of the original coupled root fibre and proves **NO fixed points when the genuine signed product δ != 0**: any fixed coordinate would give `dField=0`, contradicting the existing `signedFibre_nonzero` theorem on the original same δ. This is a real free C2 local deck on punctured original coupled incidence. It is NOT an original globally homogenized projective cycle, proof of branch-overlap monodromy, Chow pushforward or nonzero primitive Hodge cohomology.
+- Native root `Synthesis/ClayHodgeSection41OriginalCoupledSixDeckAcceptanceExact.lean`, initial `1f07b6695b8818e70836d25d6033c5b9894e521c`, expanded `6d375ccc50b6874b76c59811887c87741486a072`. It checks signed-product preservation, coupled involution, equivariance and punctured freeness with explicit native `#print axioms`. **NOT YET RUN**.
+
+### PNP — original finite clock is now a real addressed Boolean-bit read, under explicit machine ABI
+
+NEW owner Lean #119 `Welds/PNPOriginalAnchoredCausalBitReadWeldExact.lean`, commit `22a9029ecee62f7acc3e871a6dda2f060b971592`; native root `Welds/PNPSection41OriginalCausalBitReadAcceptanceExact.lean`, commit `1c872e4fb9d7cebd25bd804bb18ba703a2fdec39`.
+
+From the already-paid SAME original anchored F3 legal pair x,y and faithful Boolean consumer split, the original `Fin k` paired-observation witness demands `observe(j,x) != observe(j,y)` for actual j<k. NEW exact observation ABI:
+`observe(j,u) = probe(j, u(address(j)))`, with original physical `address : Nat → Fin n`.
+The theorem derives a *real original Boolean coordinate*
+`∃ j : Fin k, x(address(j)) != y(address(j))`.
+This is a causal actual input information dependency, not a fictitious internal oracle or observation at a future time. The addressed single-bit read factorization is an EXPLICIT premise: unrestricted SAT algorithms can read blocks, preprocess, compress, and share work. No superpolynomial P-vs-NP lower bound, all-algorithm universal quantification, or legitimate bit/control R1 workload cost is inferred. Native Lean unrun.
+
+### Actual exact local controls on the signed coupling and its branch obstruction
+
+NEW canonical rollup #1551 `scripts/check_clay_section41_original_coupled_deck.py`, initial `d5315dc1044d5ed91ac40f2b5d368824346e7d13`; augmented original 64 punctured sheets and δ=0 branch negative control `7da34736a4adfac4d9c4fb14397b00b255bad1d8`; newline fixture repair `ea0f429080eadc22de09257f10e12d0d0d99d5da`.
+Independently executed exact Fraction controls **3,289 / 3,289 PASS**: 312 original Q0 polynomial/derivative/involution per-coordinate tests; 16 sixfold signed-product parity tests; 22 odd-five-coordinate orientation negative controls; 320 sixfold punctured actual-root sheet/free involution tests across all 2^6 sign choices; 3 δ=0 genuine branch fixed-point negative controls; 2616 finite deterministic paired original bit-clock tests. The script is committed and reviewed; byte-identical replay of the GitHub blob is not claimed. These do NOT verify formal Lean elaboration or global Hodge cycles.
+
+### Native campaign / trust receipts
+
+Canonical `scripts/check_clay_section36_native_campaign.py` expanded on #1551 at `c369d15a61128ed43d0f58546ff8d7fee9bfed29` to include NEW Hodge coupled-root and PNP addressed-bit native roots: **24 original Agda/Lean roots + 1 original externally pinned RH proof admission** = 25 checks. Native test contract `scripts/test_clay_section37_native_campaign_fail_closed.py` updated at `96d59a8347ba77cefe1b4c4186e2545f11c38bf5`. The campaign needs exact immutable original owner HEAD pins and original RH source pin; selected-root PASS (if achieved) is never universal Clay completion. No actual new native compiler invocation occurred.
+
+### All six actual remaining mathematical endpoints and next coarse/fine native cut
+
+1. **YM #1536:** the original scalar two-wing mathematical construction is explicit; next implement/execute ONE original full Fin filtered-Cauchy positive degree-majorant Bishop-order constructor using the prior owned exact shifted-wing and coefficient-mass donors. Even if accepted, the TRUE interacting 4D SU(N) Wilson, OS, common-H positive mass gap remains open.
+2. **NS #123:** true cutoff-uniform SIGNED nonlinear quarter-energy transfer for the SAME original Galerkin family and valid physical PDE continuum global regularity, not merely uniform integrated high-frequency tails.
+3. **BSD #124:** actual selected original complex L''↔Mellin source equality and full arithmetic rank/Selmer/Sha comparison; signed two-crossing moment positivity/strict growth alone is not analytic rank.
+4. **Hodge #124:** **new true coupled δ sixfold C2 deck source is written**. Next global original projective branch-overlap gluing/monodromy and proper Chow cycle, followed by a rigorously NONZERO primitive class pairing on the original projective variety.
+5. **RH #121:** retrieve a genuine independent original RH proof source, pinned native exact declaration and transitive axiom audit; currently no proof supplied, no theorem admission.
+6. **PNP #119:** extend the actual causal one-coordinate read into a universal sharing-stable unavoidable INTERNAL computational-event budget with faithful unrestricted algorithm semantics and exact time/bit/control ABI, OR construct a truly polynomial full SAT solver. The one-event dependency itself is not such a bound.
+
+All new source is COMMITTED, mathematical boundaries explicitly separated, Agda/Lean kernels unrun, no universal Millennium solution claimed.
