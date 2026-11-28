@@ -64,8 +64,16 @@ def build_roadmap(ledger: dict, plan: dict, candidates: dict, bundles: dict) -> 
                 "status": "rewired-verification-blocked",
                 "action": "Moved the R330 order-closure compatibility adapter into the existing Route-S canonical file and inlined the zero-fresh-B status coordinate into the direct-source frontier; removed nonhistorical R330 imports.",
                 "target": "YMClayRouteSSelectedLimitClosureExact, BalabanCanonicalBOSIndexedCompletionRound333Exact, YMClayDirectSourceOSMassGapFrontierExact",
-                "verification": "Colab sanctioned check reached the dependency cone but was blocked by a pre-existing unsafe dependency: BalabanBoolean4BlockPoincareExact contains the postulate walshSpectralIdentityRaw",
-                "next_action": "adjudicate or replace that unsafe postulated dependency, then rerun the affected cone before deleting R330",
+                "verification": "walshSpectralIdentityRaw is now a constructive finite rational-ring certificate and the Boolean block module checks; the downstream cone reaches a separate pre-existing unsafe import at BalabanClayP2LargeFieldStepVExact",
+                "next_action": "repair or adjudicate the P2 safe-import boundary, then rerun the affected cone before deleting R330",
+            },
+            {
+                "id": "walsh-spectral-identity",
+                "status": "constructively-verified",
+                "action": "Replace walshSpectralIdentityRaw with the finite 16-variable rational-ring certificate and mark the module safe.",
+                "target": "BalabanBoolean4BlockPoincareExact",
+                "verification": "sanctioned Colab Agda check passed for the module; the downstream safe cone now proceeds past it and stops at the pre-existing P2 unsafe import",
+                "next_action": "retain the proof receipt and continue safe-boundary repair at BalabanClayP2LargeFieldStepVExact",
             },
         ],
         "remaining_steps": [
@@ -85,7 +93,7 @@ def build_roadmap(ledger: dict, plan: dict, candidates: dict, bundles: dict) -> 
             },
             {
                 "id": "verify-affected-cones",
-                "status": "not-started",
+                "status": "blocked-on-existing-unsafe-p2",
                 "scope": "each repaired consumer cone",
                 "action": "run the sanctioned Agda entrypoint and retain receipts",
                 "command": "DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh <target>",
