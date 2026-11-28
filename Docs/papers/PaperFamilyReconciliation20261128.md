@@ -56,3 +56,8 @@ All ten numbered families now contain a dated current-state section. Rollup live
 ## Section 14 synchronization — cross-Clay P0
 
 The live manuscript family has been advanced alongside the actual proof sources: Paper 1 NS (`e8c78d41a878`), Paper 3 YM (`f829cd863a81`), Paper 8 cross-programme (`cbfb9ba562b2`). The consolidated [proof roadmap, Section 14](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (`d9e58289059a`) records the exact new Lean and Agda owners, commit identities, remaining cuts, and 77,672 exact local regression controls. Native proof bodies are pending kernel elaboration; the PNP local check is a changed-core extraction, not full CNF acceptance. No claims have been promoted beyond those boundaries. Historical Papers 4–7 and the independent Papers 2, 9 and 10 are not rewritten in this tranche; the existing reconciliation remains applicable to those families. BSD, Hodge, RH and PNP continue to be represented in the live cross-programme manuscript and roadmap rather than new duplicate standalone drafts.
+
+
+## Section 15 synchronization
+
+Live Paper 1 NS 93dbf3273b08, Paper 3 YM 853b8f79e506, Paper 8 cross-programme 92abbe2e417a follow the actual [Section 15 proof ledger](../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md) (320b0e31e554). All six programmes retained. 5347 algebraic/CNF checks and 52 parser fixtures in each mode, native proofs pending. The unforced original upstream data/verifier remain unavailable. No new proof-state claims in independent Papers 2, 9, 10 or historical 4–7 in this tranche; retain prior reconciliation rather than overwrite parallel work.
