@@ -58,26 +58,28 @@ originalOddFirstTerm X =
 originalOddHigherTerm :
   ∀ X n → OddWeightedCauchy X →
   R._≃_
+    (R._*_ (R._*_ C.two (C.bCoefficient (suc n)))
+      (R.pow X (suc (suc n))))
+    (R._*_ (R._*_ C.two X) (W.bTerm X (suc n))) →
+  R._≃_
     (O.originalOddAt X (suc (suc n)))
     (R._+_
       (R._*_ (R._*_ C.two X) (W.bTerm X (suc n)))
       (R._*_ (R._*_ X X)
         (Row.cauchyCoefficient (W.bTerm X) (W.bTerm X) n)))
-originalOddHigherTerm X n weighted =
-  let
-    b = C.bCoefficient (suc n)
-    p = R.pow X (suc (suc n))
-    q = Row.cauchyCoefficient C.bCoefficient C.bCoefficient n
-    open P.ℝ-Solver
-  in
+originalOddHigherTerm X n weighted hlinear =
   P.≃-trans
-    (solve 3
-      (λ x b p →
-        (Κ (+ 2 / 1) ⊗ b) ⊗ p
-        ⊜ ((Κ (+ 2 / 1) ⊗ x) ⊗
-             (b ⊗ (p ⊘ x))))
-      P.≃-refl X b p)
-    P.≃-refl
+    (let
+       b = C.bCoefficient (suc n)
+       q = Row.cauchyCoefficient C.bCoefficient C.bCoefficient n
+       p = R.pow X (suc (suc n))
+       open P.ℝ-Solver
+     in solve 3
+       (λ b q p →
+         ((Κ (+ 2 / 1) ⊗ b) ⊕ q) ⊗ p
+         ⊜ ((Κ (+ 2 / 1) ⊗ b) ⊗ p) ⊕ (q ⊗ p))
+       P.≃-refl b q p)
+    (P.+-cong hlinear (weighted n))
 
 -- Short original odd normal form: the right-hand prefix is B_n
 -- directly. This is equivalent to the Section32 formulation
