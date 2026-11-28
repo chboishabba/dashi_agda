@@ -2,7 +2,7 @@
 from itertools import product,combinations
 from random import Random
 from collections import Counter
-from check_pnp_hall_geometry import cnf_hall,cnf_solver,verify_partition,Reservation
+from check_pnp_hall_geometry import cnf_hall,cnf_solver,guarded_clipped,verify_partition,Reservation
 from check_pnp_frontier_resolution import accepts
 from check_pnp_normal_endpoint_weld import cnf_solver as prior
 from check_pnp_typed_portfolio import cnf_dispatch,hard_dispatch,satisfies
@@ -28,7 +28,9 @@ def main():
             z=cnf_solver(F,n,(),(),10**7)
             assert z['status']==('WITNESS' if W else 'EMPTY')
             if W:assert z['witness'] in W
-            C['sources']+=1
+            g=guarded_clipped(F,n,10**7);assert g['count']==(2 if W else 1)
+            if W:assert g['other'][:-1] in W
+            C['sources']+=1;C['guarded']+=1
     root=ContinuationAllowance(100_000_000)
     for n in range(1,6):
         F=tuple((i+1,) for i in range(n));q=cnf_dispatch(F,n,(),(),root,1000000,solver=cnf_solver);assert q['status']=='WITNESS' and q['witness']==(1,)*n;C['typed_cnf']+=1
@@ -40,5 +42,6 @@ def main():
         else:assert q['status']=='IMPROVED' and satisfies(q['witness'],H,flats) and q['witness'].bit_count()<x.bit_count()
         C[q['status']]+=1
     assert sum(root.charges.values())+root.left==root.total
+    assert guarded_clipped(((1,),),1,0)['status']=='UNKNOWN'
     print(dict(C),root.charges)
 if __name__=='__main__':main()
