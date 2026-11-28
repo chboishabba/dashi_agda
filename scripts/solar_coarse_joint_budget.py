@@ -41,15 +41,21 @@ def source_cycle(channel,voltage,feed,outer,load,cs,cr,h):
     for rc in ch:
         k=1/(r+rc);A=G.inv()*S.Matrix([[-g-k,k],[k,-k-L]]);f=G.inv()*S.Matrix([g*v,0]);D=(I-h*A/2).inv();T=D*(I+h*A/2);u=D*h*f
         maps.append((T,u));M=T*M;b=T*b+u
-    x=(I-M).inv()*b;initial=x;W={k:S.Integer(0) for k in ('natural','feed','outer','channel','receiver')}
+    x=(I-M).inv()*b;initial=x;currents=[];W={k:S.Integer(0) for k in ('natural','feed','outer','channel','receiver')}
     for rc,(T,u) in zip(ch,maps):
         y=T*x+u;vs,vr=(x+y)/2;i=(vs-vr)/(r+rc);j=g*(v-vs)
-        step=dict(natural=h*v*j,feed=h*j*j/g,outer=h*r*i*i,channel=h*rc*i*i,receiver=h*L*vr*vr)
+        currents.append((j,i,rc));step=dict(natural=h*v*j,feed=h*j*j/g,outer=h*r*i*i,channel=h*rc*i*i,receiver=h*L*vr*vr)
         assert ((y.T*G*y-x.T*G*x)[0]/2)==step['natural']-sum(step[k] for k in ('feed','outer','channel','receiver'))
         for k in W:W[k]+=step[k]
         x=y
     assert x==initial and W['natural']==sum(W[k] for k in ('feed','outer','channel','receiver'))
-    return dict(work=W,initial=initial,monodromy=M,restored=True)
+    T=h*len(ch);mu=sum(i for j,i,rc in currents)/len(ch);assert sum(j for j,i,rc in currents)==len(ch)*mu
+    R=1/g+r+min(ch);cap=T*v*v/(4*R)
+    gaps=dict(match=T*R*(mu-v/(2*R))**2,feed_variance=h*sum((j-mu)**2/g for j,i,rc in currents),
+              series_variance=h*sum((r+min(ch))*(i-mu)**2 for j,i,rc in currents),
+              excess_channel=h*sum((rc-min(ch))*i*i for j,i,rc in currents))
+    assert cap-W['receiver']==sum(gaps.values())
+    return dict(work=W,initial=initial,monodromy=M,restored=True,mean_current=mu,cap=cap,gaps=gaps)
 
 
 def dc_ceiling(voltage,feed,outer,channel_min,load,duration):
@@ -67,6 +73,15 @@ def static_receiver(voltage,feed,outer,channel_min,load,duration):
     v,g,r,c,L,T=map(S.Rational,(voltage,feed,outer,channel_min,load,duration))
     assert min(g,r,c,L,T)>0
     return T*L*(v/(1+L*(1/g+r+c)))**2
+
+
+def reverse_dc_target(target,voltage,feed,outer,channel_min,duration):
+    """Necessary mean-current interval for a specified receiver work."""
+    y,v,g,r,c,T=map(S.Rational,(target,voltage,feed,outer,channel_min,duration))
+    assert y>=0 and min(g,r,c,T)>0
+    R=1/g+r+c;disc=v*v-4*R*y/T
+    if disc<0:return dict(empty=True,mean_current=None)
+    return dict(empty=False,mean_current=((v-S.sqrt(disc))/(2*R),(v+S.sqrt(disc))/(2*R)))
 
 
 def triad_inverse(required_lf,fast,slow,downstream):
@@ -87,6 +102,10 @@ def run():
     p=static_receiver(1,1,1,1,1,1);cap=dc_ceiling(1,1,1,1,1,1)
     assert passive['work']['receiver']==p==S.Rational(1,16)
     assert active['work']['receiver']<p<cap==S.Rational(1,12)
+    matched=source_cycle([1,1],1,1,1,S.Rational(1,3),1,1,S.Rational(1,2))
+    assert matched['work']['receiver']==cap and all(x==0 for x in matched['gaps'].values())
+    assert reverse_dc_target(cap,1,1,1,1,1)['mean_current']==(S.Rational(1,6),)*2
+    assert reverse_dc_target(cap+S.Rational(1,100),1,1,1,1,1)['empty']
     assert triad_inverse(S.Rational(1,100),1000,1,1)==10
     print('PASS', 'recovery_for_gain',eta,'buffer_capacity',buf['capacity'],'passive',p,'active',active['work']['receiver'],'all_schedule_cap',cap,'unresolved_headroom',cap-p)
 if __name__=='__main__':run()
