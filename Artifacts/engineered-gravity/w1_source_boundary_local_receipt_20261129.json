@@ -34,8 +34,9 @@
       "stdout_sha256": "22b0b53ec2fd27f6c3523b3ab613d69020aba856639d6d1df97ef253498dfb0c",
       "lane_count": 12,
       "unpaid": 36,
-      "malformed_claims_rejected": 6,
-      "limit": "locally adapted manifest/checker, not literal committed-source"
+      "malformed_claims_rejected": 7,
+      "limit": "locally adapted manifest/checker, not literal committed-source",
+      "source_equivalent_note": "W1 local adapted checker verifies exact Git SHA-1 blob NUL prefix and rejects changed original source; 7 invalid controls"
     },
     {
       "name": "w1_inventory",
@@ -49,5 +50,12 @@
   "full_checkout_replay": false,
   "github_ci": false,
   "original_native_f8": false,
-  "physical_endpoints_paid": 0
+  "physical_endpoints_paid": 0,
+  "source_blob_pinning": {
+    "status": "PASS source-equivalent",
+    "test": "git hash-object equals SHA1('blob '+decimal_bytes+'\\\\0'+bytes); missing/mutated source blocks physical admission",
+    "pins": 6,
+    "external_hopf_checker": "pinned to PR #1554 HEAD; not replayed in current checkout",
+    "literal_committed_source_replay": false
+  }
 }
