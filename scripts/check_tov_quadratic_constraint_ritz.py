@@ -17,6 +17,13 @@ def run(n,lam=0.1,wall_speed=0.02):
     # H=k*r*(r²-1)/2, so H(1)=0 and H'(1)=k.
     # A is the action's exact first derivative of material rho in k.
     A=(x-1)*(x*(s.diff(d,x)*f+2*s.diff(a,x)+s.diff(V,x))+2*a)+d*f*(3*x-1)
+    # Independently differentiate the ORIGINAL covariant material action,
+    # rather than trusting the finite-volume source A as a fitted profile.
+    y,yr,fr,rr=s.symbols("y yr fr rr",positive=True)
+    W=d.subs(x,y*y)*fr*yr**2+2*a.subs(x,y*y)*y*y/rr**2+V.subs(x,y*y)
+    drho=s.diff(W,y).subs({y:rr,yr:1,fr:f.subs(x,rr*rr)})*(rr*(rr*rr-1)/2)
+    drho+=s.diff(W,yr).subs({y:rr,yr:1,fr:f.subs(x,rr*rr)})*((3*rr*rr-1)/2)
+    assert s.cancel(drho-A.subs(x,rr*rr))==0
     ffun=s.lambdify((x,l),f,"numpy")
     dfun=s.lambdify((x,l),d,"numpy")
     Afun=s.lambdify((x,l),A,"numpy")
