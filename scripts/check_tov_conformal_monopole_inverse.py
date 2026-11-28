@@ -7,7 +7,7 @@ def main():
     r=s.symbols('r',positive=True)
     N,u,w,A=s.symbols('N u w A',cls=s.Function)
     N,u,w,A=[v(r) for v in (N,u,w,A)]
-    q=-(A*N.diff(r)).diff(r)/(w*N)
+    q=(A*N.diff(r)).diff(r)/(w*N)
     op=lambda v:-(A*v.diff(r)).diff(r)+w*q*v
     assert s.cancel(op(N))==0
     # Ground-state transform for all multipoles, including generated monopole.
@@ -18,8 +18,6 @@ def main():
     Ne=s.sqrt(f); Ae=r*r*s.sqrt(f)
     assert s.simplify(Ae*Ne.diff(r)-M)==0
     # radial Green inverse: -(A N² v')'=w N S.
-    j=s.Function('j')(r); v=s.Function('v')(r)
-    assert s.expand(-(A*N*N*v.diff(r)).diff(r)+(A*N*N*v.diff(r)).diff(r))==0
     # If F=int_0^r w N S, then v'= -F/(A N²).
     F=s.Function('F')(r)
     assert s.simplify(-(A*N*N*(-F/(A*N*N))).diff(r)-F.diff(r))==0
