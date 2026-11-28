@@ -1,7 +1,7 @@
 """Bounded independent original-coordinate receipt checks."""
 from random import Random
 from check_pnp_affine_normal_components import Budget, Exhausted, canon, chart, lift, satisfies
-from check_pnp_fractran_trace import trace, recover_trace, improve_trace
+from check_pnp_fractran_trace import trace, recover_trace, improve_trace, productive_trace, realize_ordered_trace
 
 def main():
     rng=Random(369); receipts=units=refusals=0
@@ -87,6 +87,31 @@ def main():
     assert trace(2,(3,),(),(0,),3,0,Budget(100000),F) is None
     t=trace(2,(3,),(),(0,),3,0,Budget(100000),F,atomic_basis_block=True)
     assert t is not None and len(t['macros'])==1 and len(t['macros'][0]['units'])==2
+    # Force width refusal; existing legal basis move must still reopen.
+    status,t,lower=productive_trace(3,(7,),((7,1),),(1,),7,Budget(1000000),
+                                   leaf_cap=0,seam_cap=0)
+    assert status=='IMPROVED' and t['decrease']==2 and lower==0
+    # A hard source with no improving endpoint may be a minimum or unknown
+    # (bounded refusal), never a fabricated witness.
+    status,t,lower=productive_trace(3,(7,),((7,1),),(1,),7,Budget(1000000),
+                                   flats=(((1,0),),((2,0),),((4,0),)))
+    assert status in ('MINIMUM','UNKNOWN') and t is None
+    # Explicit FRACDASH checkout; no vendored evaluator.
+    import os,sys
+    bridge_path=os.environ.get('FRACDASH_SCRIPTS')
+    if bridge_path:
+        sys.path.insert(0,bridge_path)
+        import bridge_macro_common as bridge
+        from sympy import prime
+        # Repeated bit swaps across two RREF moves must not loop or reorder.
+        H=((7,1),);t=trace(3,(7,),H,(1,),7,1,Budget(100000))
+        assert t is not None
+        L=sum(len(m['units']) for m in t['macros'])
+        p=tuple(int(prime(i)) for i in range(1,3*3+L+2))
+        q=realize_ordered_trace(3,t,bridge,p,Budget(10000000))
+        assert q['indices']==tuple(range(L))
+        print('actual FRACDASH ordered replay PASS')
+    else:print('actual FRACDASH ordered replay SKIPPED: set FRACDASH_SCRIPTS')
     print('aggregate fold cases',folds,'hard cases',hard_cases)
     print(dict(receipts=receipts,units=units,nonimprovement=refusals,controls='PASS'))
 
