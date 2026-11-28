@@ -8,11 +8,12 @@ module DASHI.Moonshine.CM163BishopHecke41NodeDifferenceExact where
 -- The remaining Newton-form reconstruction is a separate bridge.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product.Base using (_,_)
+open import Data.Product.Base using (_×_; _,_)
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as C
 import DASHI.Analysis.BishopComplexAlgebraExact as A
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact as Comp
 import DASHI.Moonshine.CM163BishopHecke41IntegerPrefixCertificateExact as Cert
+import DASHI.Moonshine.CM163BishopHecke41SequentialJetExact as Jet
 
 open C using (BishopComplex; _≈C_)
 open Comp using (complexTrans)
@@ -41,10 +42,8 @@ diffZero : ∀ {n} (xs : Row (suc n)) →
   zeroRow xs → zeroRow (diff xs)
 diffZero (cons x nil) h = C.≈C-refl _
 diffZero (cons x (cons y xs)) (hx , (hy , rest)) =
-  A.subCCongruent hy hx
-    -- The resulting zero-minus-zero is algebraically zero.
-    -- This transport is completed by the original algebra owner.
-    , diffZero (cons y xs) (hy , rest)
+  (complexTrans (A.subCCongruent hy hx) (Jet.sameSub A.zeroC)) ,
+    diffZero (cons y xs) (hy , rest)
 
 -- The *exact* finite-difference data at integer nodes is retained;
 -- any interpolating-polynomial owner may consume the full triangle.
