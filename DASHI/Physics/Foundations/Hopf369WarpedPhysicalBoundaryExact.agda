@@ -761,3 +761,65 @@ module At {r : Level} (F : C.RealField r)
   -- estimates on derivatives of chi and all fields, trace lift,
   -- source compatibility and boundary collar. Neither finite signed
   -- ledgers nor this constructor supplies PDE existence.
+
+  ------------------------------------------------------------------------
+  -- BR39b: not merely a scalar proxy. Attach the ACTUAL BR15 spectral
+  -- conjugated first-order metric matrices and BS4/5 covector generators
+  -- to the diagonal optical wave principal part.
+  ------------------------------------------------------------------------
+
+  opticalPrincipal : PrincipalJet
+  opticalPrincipal = principalJet diagonal (λ _ → O)
+    where
+    diagonal : Axis → Axis → S
+    diagonal (wall a) (wall b) = eta a b
+    diagonal normal normal = U
+    diagonal normal (wall _) = O
+    diagonal (wall _) normal = O
+
+  metricFirstCutoff : S → S → S → S → S → S →
+    ScalarJet → Tensor → Tensor
+  metricFirstCutoff bk a e c ai ei ci chi u =
+    spectral a e c
+      (sumT (λ i → mulT (bk * first chi (wall i))
+                    (J i (spectral ai ei ci u))))
+
+  gaugeFirstCutoff : S → ScalarJet → Cov → Cov
+  gaugeFirstCutoff bk chi u k =
+    two * bk * sum4 (λ i → sign i * first chi (wall i) * L i u k)
+
+  -- The second-order part and all first-order matrix terms now match the
+  -- original frozen optical BR15 / BS4 coefficient OWNERS. Potential
+  -- terms commute with a scalar chi. No estimate is hidden in this term.
+  metricOpticalCutoffResidual : S → S → S → S → S → S →
+    ScalarJet → TensorJet → Tensor
+  metricOpticalCutoffResidual bk a e c ai ei ci chi u =
+    addT (fullTensorCutoffResidual opticalPrincipal chi u)
+         (metricFirstCutoff bk a e c ai ei ci chi (fieldValue u))
+
+  gaugeOpticalCutoffResidual : S → ScalarJet → CovJet → Cov
+  gaugeOpticalCutoffResidual bk chi u k =
+    covCutoffResidual opticalPrincipal chi u k
+      + gaugeFirstCutoff bk chi (covValue u) k
+
+  record OpticalLocalizationDefects : Set r where
+    constructor opticalLocalizationDefects
+    field
+      actualMetricBulk : Tensor
+      actualGaugeBulk : Cov
+      actualMetricD actualMetricE : List S
+      actualGaugeD actualGaugeE : List S
+  open OpticalLocalizationDefects public
+
+  opticalLocalizedDefects : S → S → S → S → S → S →
+    ScalarJet → TensorJet → CovJet → S → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Cov → Cov → Cov → Cov → OpticalLocalizationDefects
+  opticalLocalizedDefects bk a e c ai ei ci chi tu cu j q p px m mx gp gx gm gy =
+    opticalLocalizationDefects
+      (metricOpticalCutoffResidual bk a e c ai ei ci chi tu)
+      (gaugeOpticalCutoffResidual bk chi cu)
+      (localizedMetricRows D j q chi p px m mx)
+      (localizedMetricRows E j q chi p px m mx)
+      (localizedGaugeRows D j q chi gp gx gm gy)
+      (localizedGaugeRows E j q chi gp gx gm gy)
