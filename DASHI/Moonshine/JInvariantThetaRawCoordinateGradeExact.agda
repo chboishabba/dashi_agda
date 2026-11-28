@@ -142,3 +142,77 @@ integerCount cutoff n h =
     (trans (cong (λ xs → G.hist xs n) (fourLabelRead squareGrade (integerLabels cutoff)))
       (trans (cong (λ xs → G.hist (G.fourGrades xs) n) (squareLabelsRead cutoff))
         (S.BCount cutoff n h)))
+
+
+-- Independent labels at both signs give the coefficient factor 2^4,
+-- including both ±1 coordinates at triangular grade zero.
+import Data.Nat.Properties as NP
+import Data.Integer.Properties as Z
+import DASHI.Mathematics.NumberTheory.FiniteDivisorConvolutionIntegerRowExact as I
+import DASHI.Moonshine.JInvariantThetaIntegerTwistExact as Tw
+open I using (rowZ; rowZero; rowHead)
+
+rowScaleBoth : ∀ c d f g n →
+  rowZ (Tw.scale c f) (Tw.scale d g) n ≡ (c * d) * rowZ f g n
+rowScaleBoth c d f g zero =
+  trans (rowZero (Tw.scale c f) (Tw.scale d g))
+    (trans (solve 4 (λ c d a b → (c :* a) :* (d :* b) := (c :* d) :* (a :* b))
+      refl c d (f zero) (g zero))
+      (cong ((c * d) *_) (sym (rowZero f g))))
+rowScaleBoth c d f g (suc n) =
+  trans (rowHead (Tw.scale c f) (Tw.scale d g) n)
+    (trans (cong₂ _+_
+      (solve 4 (λ c d a b → (c :* a) :* (d :* b) := (c :* d) :* (a :* b))
+        refl c d (f zero) (g (suc n)))
+      (rowScaleBoth c d (Tw.shift f) g n))
+      (trans (sym (Z.*-distribˡ-+ (c * d) (f zero * g (suc n))
+        (rowZ (Tw.shift f) g n)))
+        (cong ((c * d) *_) (sym (rowHead f g n)))))
+
+halfAt : ∀ cutoff n → n ≤ cutoff →
+  G.hist (map halfGrade (oddLabels cutoff)) n ≡ (+ 2) * T.halfTheta n
+halfAt cutoff n h =
+  trans (cong (λ xs → G.hist xs n) (halfLabelsRead cutoff))
+    (trans (G.histAppend (S.scan T.triN cutoff) (S.scan T.triN cutoff) n)
+      (trans (cong₂ _+_ (S.halfAt cutoff n h) (S.halfAt cutoff n h))
+        (solve 1 (λ a → a :+ a := con (+ 2) :* a) refl (T.halfTheta n))))
+
+fourScaled : ∀ f n → T.fourth (Tw.scale (+ 2) f) n ≡ (+ 16) * T.fourth f n
+fourScaled f n =
+  trans (Tw.rowCong
+    (rowZ (Tw.scale (+ 2) f) (Tw.scale (+ 2) f))
+    (rowZ (Tw.scale (+ 2) f) (Tw.scale (+ 2) f))
+    (Tw.scale (+ 4) (rowZ f f)) (Tw.scale (+ 4) (rowZ f f))
+    (rowScaleBoth (+ 2) (+ 2) f f) (rowScaleBoth (+ 2) (+ 2) f f) n)
+    (rowScaleBoth (+ 4) (+ 4) (rowZ f f) (rowZ f f) n)
+
+oddCount : ∀ cutoff n → n ≤ cutoff →
+  (+ W.listLength (oddList cutoff n)) ≡ T.A (suc n)
+oddCount cutoff n h =
+  trans (sym (histFilter (grade halfGrade) (fourLabels (oddLabels cutoff)) n))
+    (trans (cong (λ xs → G.hist xs n) (fourLabelRead halfGrade (oddLabels cutoff)))
+      (trans (G.fourCountThrough (map halfGrade (oddLabels cutoff))
+        (Tw.scale (+ 2) T.halfTheta) n (λ i hi → halfAt cutoff i (NP.≤-trans hi h)))
+        (fourScaled T.halfTheta n)))
+
+oddQuadOf : Pairs → H.Quad
+oddQuadOf ((a , b) , (c , d)) =
+  H.quad (oddCoordinate a) (oddCoordinate b) (oddCoordinate c) (oddCoordinate d)
+
+-- Exact raw norm relation. In the half-integer shell the total
+-- triangular grade n is shifted to n+1, not silently rounded.
+integerNormRead : ∀ x → H.normSq (quadOf x) ≡ + grade squareGrade x
+integerNormRead ((a , b) , (c , d)) =
+  trans (cong₂ _+_ (cong₂ _+_ (cong₂ _+_ (squareGradeRead a) (squareGradeRead b))
+    (squareGradeRead c)) (squareGradeRead d))
+    (Z.+-assoc ((+ squareGrade a) + (+ squareGrade b)) (+ squareGrade c) (+ squareGrade d))
+
+oddNormRead : ∀ x → H.normSq (oddQuadOf x) ≡ (+ 4) * (+ suc (grade halfGrade x))
+oddNormRead ((a , b) , (c , d)) =
+  trans (cong₂ _+_ (cong₂ _+_ (cong₂ _+_ (halfGradeRead a) (halfGradeRead b))
+    (halfGradeRead c)) (halfGradeRead d))
+    (solve 4 (λ a b c d →
+      ((con (+ 4) :* a :+ con (+ 1)) :+ (con (+ 4) :* b :+ con (+ 1))) :+
+        (con (+ 4) :* c :+ con (+ 1)) :+ (con (+ 4) :* d :+ con (+ 1))
+       := con (+ 4) :* (con (+ 1) :+ ((a :+ b) :+ (c :+ d))))
+      refl (+ halfGrade a) (+ halfGrade b) (+ halfGrade c) (+ halfGrade d))
