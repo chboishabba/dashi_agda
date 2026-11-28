@@ -126,6 +126,65 @@ module SameSourcePacket (Residual Index : Set) where
       ≡ originalLocalFamily p axis
     source13LocalViewUnchanged = everyLocalReopens p
 
+-- Reverse-solve the genuine source admission, rather than requesting
+-- separate unrelated source→13 and source→pants mappings. ONE source
+-- packet interpretation supplies BOTH original geometric projections.
+module OriginalSourceAdmission
+  (Residual Index Actual : Set)
+  (sourceEncode : Actual →
+    SameSourcePacket.Packet Residual Index)
+  (sourceDecode :
+    SameSourcePacket.Packet Residual Index → Actual)
+  (sourceReopens : (x : Actual) →
+    sourceDecode (sourceEncode x) ≡ x) where
+
+  module P = SameSourcePacket Residual Index
+
+  sourceHyperfabric : Actual → H.TernaryHyperformalPoint
+  sourceHyperfabric x = P.nativeFabric (sourceEncode x)
+
+  sourceLocalFamily : Actual → Sheaf.CentralLocalFamily
+  sourceLocalFamily x = P.originalLocalFamily (sourceEncode x)
+
+  sourcePants13 : Actual → Frontier.PantsPath 13
+  sourcePants13 x = P.actualPants13 (sourceEncode x)
+
+  sourceLocalCompatibility : (x : Actual) →
+    Sheaf.centralFamilyCompatible (sourceLocalFamily x)
+  sourceLocalCompatibility x =
+    P.localCompatibility (sourceEncode x)
+
+  sameOriginalSourceRestriction : (x : Actual)
+    (axis : Atlas.StageAtlasZeroToEleven) →
+    Sheaf.restrictCentral
+      (Bridge13.pants13ToSourceCentral (sourcePants13 x)) axis
+    ≡ sourceLocalFamily x axis
+  sameOriginalSourceRestriction x axis =
+    P.everyLocalReopens (sourceEncode x) axis
+
+  originalSourceReopens : (x : Actual) →
+    sourceDecode (sourceEncode x) ≡ x
+  originalSourceReopens = sourceReopens
+
+  module OriginalSeam
+    (left right : Actual → Pants.BranchChannel)
+    (x : Actual)
+    (matched :
+      Seam.boundarySignature (left x) ≡
+      Seam.boundarySignature (right x)) where
+
+    sourceInterface : Pants.InterfaceMatch (left x) (right x)
+    sourceInterface = Match.signatureMatchComplete matched
+
+    sourcePants13PreservesLocal : (axis : Atlas.StageAtlasZeroToEleven) →
+      Sheaf.restrictCentral
+        (Bridge13.pants13ToSourceCentral (sourcePants13 x)) axis
+      ≡ sourceLocalFamily x axis
+    sourcePants13PreservesLocal = sameOriginalSourceRestriction x
+
+    sourceHistoryRetained : sourceDecode (sourceEncode x) ≡ x
+    sourceHistoryRetained = sourceReopens x
+
 -- Actual depth-dependent radix refinement is a DIFFERENT constructor:
 -- rank and depth are distinct, not a fiat equality with nine channels.
 radixJoinKeepsCoarse :
