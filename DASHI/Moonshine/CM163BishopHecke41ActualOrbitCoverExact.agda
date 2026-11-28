@@ -155,7 +155,7 @@ module At (inputs : Round11.BishopCutset) where
           P.≃-refl rr rho
     in P.≤-respˡ-≃ (P.≃-symm (Disk.normSquareAgreement (Ph.disk p)))
       (P.≤-respʳ-≃ (P.≃-trans rearrange
-        (P.*-congˡ (P.≃-symm (Disk.normSquareAgreement (Ph.disk reference)))))
+        (P.*-cong P.≃-refl (P.≃-symm (Disk.normSquareAgreement (Ph.disk reference)))))
         (P.*-mono-≤ (radiusNN p) (radiusNN p) b b))
 
   inside : ∀ p → Reduce.third ≤ Reduce.y p → Norm.normSqC (q p) ≤ Norm.normSqC r
@@ -182,7 +182,7 @@ module At (inputs : Round11.BishopCutset) where
       ; normSqBelowRadiusSquare =
           P.≤-respˡ-≃ (P.≃-symm (Norm.normSqMultiply (q p) v))
             (P.≤-respʳ-≃ (P.≃-trans (P.*-assoc s rr nv)
-              (P.≃-trans (P.*-congˡ one) (P.*-identityʳ s))) mul) }
+              (P.≃-trans (P.*-cong P.≃-refl one) (P.*-identityʳ s))) mul) }
 
   cover : R0.Cover reference
   cover p =
