@@ -426,9 +426,9 @@ identification. Do not relabel local quaternion algebra as full YM gap.
   PNP27280, YM101, NS3200). The locally reconstructed source was NOT
   byte-identical to the previously committed script.
 - Section 23 equivalent six-lane source reconstruction: local Python
-  4,912 / 4,912 PASS (BSD857, Hodge225, PNP3636, NS12,
+  5,312 / 5,312 PASS (BSD857, Hodge625, PNP3636, NS12,
   YM101, RH81). Committed scripts/check_clay_section23_original_welds.py
-  at 5ea1df9946ad493ee74e92fe669ee5c41e21c3da; exact committed
+  initial 5ea1df9946ad493ee74e92fe669ee5c41e21c3da, strengthened actual nonreduced h-chart at 4f65421c377d40b605210c20c76c84a50855857d; exact committed
   script is NOT separately executed, equivalent local logic was run.
   The Hodge negative case is a proper generated subring.
 - Section 23 native acceptance roots: Lean #124
