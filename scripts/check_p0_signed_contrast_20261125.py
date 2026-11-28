@@ -96,7 +96,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
 def sector(F,n,rows,target,obs,w,order=None,offset=0):
     cols=tuple(tuple(r[i]%3 for r in rows)+(obs[i]%3,) for i in range(n))
     return cell(canon(F),cols,tuple(target),offset,tuple(range(n)) if order is None else tuple(order),w)
-def refine(roots,eps,budget,focus=True):
+def refine(roots,eps,budget,focus=True,exact_probe_budget=0):
     lo=[Q(0)]*3;hi=lo.copy();heap=[];serial=0;done=0
     def account(c,sign):
         for d in range(3):lo[d]+=sign*c[-2][d];hi[d]+=sign*c[-1][d]
@@ -115,7 +115,30 @@ def refine(roots,eps,budget,focus=True):
         bestlo=[max(a[d],-sum(b[j] for j in range(3) if j!=d)) for d in range(3)]
         besthi=[min(b[d],-sum(a[j] for j in range(3) if j!=d)) for d in range(3)]
         choices=[d for d in range(3) if bestlo[d]>=-eps]
-        if choices or not heap or done>=budget:return bestlo,besthi,choices,done
+        if choices or not heap:return bestlo,besthi,choices,done
+        if done>=budget:
+            # Retire expensive frontier cells by a bounded exact chart fold.
+            # All local free dimensions sum to the ambient nullity, so
+            # len(R)*2^nullity dominates the total enumerated local points.
+            # Polynomial elimination/CNF evaluation overhead is separate.
+            candidates=[]
+            d=max(range(3),key=lambda j:bestlo[j])
+            for index,(_,sid,c) in enumerate(heap):
+                F,cols,t,o,R,w,clo,chi=c
+                free=len(R)-len(basis(cols[i][:-1] for i in R))
+                cost=max(1,len(R))*(1<<free)
+                if cost<=exact_probe_budget:
+                    candidates.append(((chi[d]-clo[d])/cost,-cost,-sid,index,free))
+            if not candidates:return bestlo,besthi,choices,done
+            _,negcost,_,index,free=max(candidates)
+            _,_,c=heap.pop(index);heapify(heap);account(c,-1)
+            F,cols,t,o,R,w,_,_=c
+            exact_probe_budget+=negcost
+            ok,C,H,E=component_bounds(F,cols,t,o,R,free,spectral=True)
+            assert ok
+            a=tuple(w*(3*h-C) for h in H)
+            account((F,cols,t,o,R,w,a,a),1)
+            continue
         if focus:
             d=max(range(3),key=lambda j:bestlo[j])
             index=max(range(len(heap)),key=lambda i:(heap[i][2][-1][d]-heap[i][2][-2][d],-heap[i][0],-heap[i][1]))
