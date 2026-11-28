@@ -28,3 +28,4 @@ import DASHI.Biology.Levin.TravelingFieldControl
 import DASHI.Biology.Physical.BiologicalParametricStochasticLumpingExact
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.LawlikeRegularityCounterfactualExact
+import DASHI.Physics.Motors.SmithFilsingerRetardedFaceCycleWeldExact
