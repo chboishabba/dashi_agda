@@ -109,7 +109,7 @@ leftFuel (suc n) p lo hi with P.fast-corollary-2-17 (x p) third twoThird thirdTw
       low' = P.≤-respʳ-≃ (P.+-comm (R.- R.1ℝ) (x p))
         (P.≤-respˡ-≃
           (let open P.ℝ-Solver in solve 0
-            ((⊝ Κ 1ℚᵘ) ⊕ Κ (+ 1 / 3) ⊜ ⊝ Κ (+ 2 / 3))) P.≃-refl)
+            ((⊝ Κ 1ℚᵘ) ⊕ Κ (+ 1 / 3) ⊜ ⊝ Κ (+ 2 / 3)) P.≃-refl)
           (P.+-monoʳ-≤ (R.- R.1ℝ) (P.<⇒≤ h)))
       up : x v ≤ (NR.natReal n + twoThird)
       up = P.≤-respˡ-≃ (P.+-comm (R.- R.1ℝ) (x p))
