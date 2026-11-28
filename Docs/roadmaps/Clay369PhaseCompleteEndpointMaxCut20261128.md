@@ -1349,3 +1349,151 @@ import graph + pinned compiler; simultaneously NS original critical
 signed estimate, BSD original complex Mellin L bridge, Hodge
 proper original Chow/primitive cycle, PNP actual internal/shared
 computation semantics, RH trusted pinned source admission.
+
+
+## Section 30 — original CMP102 signed Cauchy triangle and two native finite square wings (2026-11-28)
+
+This tranche fulfills the user-selected geometry-forward/no-duplicate
+coarse-to-fine construction, with a real new same-source finite algebra
+attachment and an improved all-degree mathematical rate. Default branch
+and divergent PRs must not be treated as identical; source was fetched
+directly from master-based YM Agda #1536. Exact native Agda/Lean/Lake
+compiler acceptance and true transitive --safe graph remain OPEN.
+
+### Original CMP102 source proof owners newly advanced on #1536
+1. DASHI/Physics/YangMills/YMClayCMP102OriginalAbsoluteRateReceiverExact.agda
+   commit 1c5e396aef02b1d0c7562c73363f886e208abb13.
+   Reuses existing BishopVanishingDifferenceConvergenceExact:
+   a SINGLE original |G_c(X)-0|<=|3*quarter^c| bound plus existing
+   actual represented power convergence proves
+   Seq._ConvergesTo_ (Original.originalGPrefix X) 0 and the
+   originalGZeroFromOriginalPrefixConvergence consumer.
+   No two separate lower/upper bound proofs are needed.
+2. Important donor-signature repair:
+   YMClayCMP102OriginalGeometricSqueezeReceiverExact.agda
+   restored to original correct strict-order transport equality
+   orientation at bf01b0eb24119f2261880756659ab3f4e9329426.
+   Previous Section29 correction 164fa27168c151e9e4294a174a0eebc5a02af71c
+   was WRONG: P.<-respˡ-≃ consumes an equivalence from the old
+   left-hand expression quarter TO the target |quarter|, so
+   P.≃-symm (nonNegx⇒∣x∣≃x ...) is required. Checked donor usage
+   in BishopUnitIntervalMidpointExact. This provenance and correction
+   are critical; no native elaboration is asserted.
+3. DASHI/Physics/YangMills/YMClayCMP102OriginalFiniteCauchyWingBoundsExact.agda
+   commits 75498ca4e23c1087a6cfa312f137ab67d45f387a and
+   c6f092dd561f9b4ecefc6537b7beaeb0d9fc8115.
+   Uses the EXACT original CMP109.term CMP102.aCoefficient/bCoefficient X
+   and original SeriesOf count. Has source-written all-count
+   native Bishop triangle:
+   |A_c|<=sum_{j<c}|a_j X^j|, |B_c| similarly;
+   original A²/B² signed rectangle minus triangle wings bounded by
+   the original positive Cauchy triangle tails, using the existing
+   BishopFiniteSeriesAbsoluteBoundExact and
+   BishopFiniteCauchyWingAbsoluteBoundExact.
+   Explicit originalASquareIsOriginalRectangle and B counterpart
+   consume BishopFiniteSeriesRectangleProductExact and identify
+   the exact A_c², B_c² from original G with its native rectangles.
+4. DASHI/Physics/YangMills/YMClayCMP102OriginalSignedTriangleZeroExact.agda
+   commit f7e3bfb50f2b6912e568905148b5db904d8a9c1a.
+   Original shiftedNativeBracketCoefficientZero (already in #1536)
+   multiplied by original Bishop X^k and native SeriesOf summed
+   gives T_c(X)=sum_{k<c}(oddPart(k)-evenPart(k))*X^k=0 for ALL
+   c and signed X, with genuine Agda proof bodies (P.ℝ-Solver,
+   *-congʳ, +-cong, successor induction); SOURCE-WRITTEN,
+   PENDING_KERNEL, no postulate.
+5. DASHI/Physics/YangMills/YMClayCMP102OriginalFiniteTailGeometryExact.agda
+   commit 58c015741bf48e9cae31410327684987247c8768.
+   Introduces ORIGINAL actual Bishop square-wing terms
+   W_A(c)=Rect_c(a,a)-Tri_(c-1)(a,a),
+   W_B(c)=Rect_c(b,b)-Tri_(c-2)(b,b),
+   with correct Nat truncated subscript at c=1;
+   omitted last B term L_B(c)=2X*b_(c-1)X^(c-1).
+   Mathematical all-degree exact decomposition for c>=1:
+     G_c(X)=T_c(X)-X*W_A(c)+L_B(c)+X²*W_B(c).
+   Native source already owns T_c=0 and true A²/B² rectangle
+   identification. IMPORTANT: this exact G_c-to-tail equality is
+   NOT YET a native elaborated Agda theorem; must prove its
+   original Fin/SeriesOf triangle reindex.
+6. Native root
+   YMClayCMP102Section27NativeAcceptanceExact.agda updated at
+   7e3fb9f8b43ad2e3ea827cc02c9eb34eb724ef5d,
+   cba3a935da6cf0f738ed5126520b64cae7e6da52,
+   ba1cdb06f9efa22cb4eab40adc865aa39b33a9f5
+   to import absolute receiver, original finite A/B wing
+   theorem declarations, literal all-degree T_c=0 and actual
+   rectangle product. NO pinned Agda typecheck yet.
+
+### New all-degree improved mathematical bound (not earlier 23 Nov claim)
+The ordinary bound 3*4^-c was proved mathematically in the
+23 Nov original CMP102 owner, and MUST NOT be reattributed.
+This tranche proves a SHARPER tail constant for c>=1 using
+the all-degree ORIGINAL 3-term wing decomposition above:
+   sum a_j <= 6/11; sum b_j <= 10/57;
+   |W_A contribution|<= (6/11)^2 |X|^c;
+   |L_B|<= 2*(10/57)|X|^c;
+   |W_B contribution|<= (10/57)^2 |X|^c.
+Exact coefficient arithmetic yields
+   |G_c(X)| <= 267004/393129 * |X|^c
+             < 3/4 * 4^-c,  |X|<=1/4, c>=1.
+At c=0 ORIGINAL G_0(X)=1 and the older 3*4^-c bound applies.
+Proof algebra: all original signed Cauchy coefficients of degrees
+< c are zero; finite A/B square Cauchy wings have only degrees
+>=c after their original X and X² factors; the last B term has
+exact degree c. Take the coefficient absolute sum of each positive
+rectangle tail and use original factorial-ratio bounds. The
+constant equality is EXACT:
+  (6/11)^2+20/57+(10/57)^2 = 267004/393129 < 3/4.
+This is a general exact finite mathematical argument, not
+extrapolation from small-count regression. The NATIVE Bishop
+finite wing-to-G equality and the rate's original order estimates
+remain to be written, compiled and proven in Agda.
+
+### Executed negative-control regression
+scripts/check_ym_cmp102_original_tail_geometry.py committed on
+#1536 at 7d7b50333e57a4943df21917de0f4a9149fa3060.
+An independent local /mnt/data/check_ym_cmp102_original_tail_geometry.py
+with equivalent mathematical source was ACTUALLY EXECUTED:
+3,624/3,624 exact Fraction controls PASS, counts 0..64:
+1 zero-prefix; 192 G/T/tail polynomial decompositions;
+2,144 lower coefficient and first surviving coefficient;
+384 positive square/linear wing ceilings; 896 signed quarter-disk
+checks; seven intentionally omitted B endpoint NEGATIVE controls.
+Original mathematical source negative control catches the loss of
+2X*b_(c-1)X^(c-1) in c>=1.
+Local Git blob e57892dfaeb0c6aab78d94400a30ec45534e5273,
+GitHub script blob 4314cbd85e9a61c19ba52ea745c961eec49cf313.
+They are NOT byte identical; do not claim a committed checkout run.
+Original source authors' work is retained.
+
+### Precise remaining original scalar native weld (small set)
+(A) Bishop Fin/SeriesOf triangle coefficient split showing
+    originalGPrefix(X,c)=originalSignedTriangle(X,c)
+       +originalSignedCauchyTail(X,c) for c>=1.
+(B) Original positive-tail coefficient dominance in Bishop order:
+    |G_c| <= (267004/393129)*|X|^c and c=0 special.
+(C) Consume direct originalAbsoluteRateBound + source
+    BishopVanishingDifferenceConvergenceExact => G(X)=0;
+    run pinned native Agda 2.9 with true --safe graph. The
+    existing direct receiver body is source-written.
+This scalar target does NOT pay the independent original 4D
+SU(N) CMP119/122 T, connected two-pair Wilson F19 shared
+plaquette, absolute CMP116 rooted shell, OS nontriviality and
+same-H gap.
+
+### Cross-Clay endgame unchanged; no invented promotions
+NS Lean #123 global original finite energy, tail and quarter FTC
+already present; NEED ACTUAL cutoff-uniform signed nonlinear
+transfer bound and physical continuum/A/C/D.
+BSD Lean #124 general original Selmer/Sha and two-crossing
+all-degree signs present; NEED selected original complex
+L''/Mellin bridge, universal analytic rank and Sha finiteness.
+Hodge Lean #124 actual coupled 5+5 deck original fibre and
+generic projection present; NEED original global proper Chow
+cycle, monodromy/branch glue and nonzero primitive Hodge pairing.
+RH Lean #121 original xi/zeta original-parameter statement BIDI;
+NEED pinned source actual trusted proof admission and transitive
+axiom audit, not just syntax/statement equivalence.
+PNP Lean #119 actual anchored signed residual and no-go/input
+capacity; NEED universal original SAT sharing-stable internal work
+or real costed poly SAT algorithm with full bit clock/R1 ABI.
+Do not invent cross-domain theorems just to advance a section number.
