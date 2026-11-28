@@ -1,0 +1,19 @@
+Local standalone source-equivalent endpoint weld checker, SymPy 1.14.0.
+Command: for p in periodic g3 g4 material atomic; do timeout 90 python check_hopf369_br225_229_endpoint_welds.py --part "$p"; done
+Executed git blob: 61324ed30facdf3e1a137a9548f86b1f4a65608d
+=== periodic ===
+PASS BR225 curved exterior compatibility and 250 covariant derivative commutators
+exit=0
+=== g3 ===
+PASS BR226 initial complex metric/inverse <16, gauge/nondegeneracy tube, conditional CK constants 1/24 1/8192 1/10056829977874644263010005077658173440
+exit=0
+=== g4 ===
+PASS BR227 general magnetized primitive inverse, monotonicity, enthalpy and exact full Jacobian
+exit=0
+=== material ===
+PASS BR228 evolving-volume entropy and electromagnetic midpoint work; negative volume work retained
+exit=0
+=== atomic ===
+PASS BR229 full n=2 Coulomb carrier, p-p donor spectrum, combined BR172 axial and time-reversal identities; Coulomb spectrum {21/128: 9, 237/1280: 5, 47/256 - sqrt(241)/256: 1, sqrt(241)/256 + 47/256: 1, 17/128: 9, 49/256: 3}
+exit=0
+Standalone independently reconstructed formulas; no source-donor import or native kernel test. No curved nonlinear solution or empirical acceptance.

@@ -1,0 +1,20 @@
+BR214 local independent BR27/175 reconstruction, SymPy.
+Commands: cd /tmp/hopf211; timeout 90 python compact.py; timeout 90 python compact_symbolic.py
+Both exit 0.
+-1 0 joint nullities [6, 7, 7] increments [6, 1, 0]
+-1 1/10 joint nullities [4, 4] increments [4, 0]
+-1 1/2 joint nullities [4, 4] increments [4, 0]
+-1 1 joint nullities [4, 4] increments [4, 0]
+1 0 joint nullities [6, 7, 7] increments [6, 1, 0]
+1 1/10 joint nullities [4, 4] increments [4, 0]
+1 1/2 joint nullities [4, 4] increments [4, 0]
+1 1 joint nullities [4, 4] increments [4, 0]
+-1 generic T0 rank 15
+-1 T0minor -26873856*h**2/390625
+-1 generic T01 rank 34
+-1 T01minor -277326388342554624*h**5/762939453125
+1 generic T0 rank 15
+1 T0minor -26873856*h**2/390625
+1 generic T01 rank 34
+1 T01minor 277326388342554624*h**5/762939453125
+Combined committed donor-import checker not replayed. No native/PDE acceptance.

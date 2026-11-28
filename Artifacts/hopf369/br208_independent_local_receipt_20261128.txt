@@ -1,0 +1,26 @@
+BR208 independent local reconstruction of BR27 carrier and original Bel formula.
+Command: cd /tmp/hopf208 && timeout 90 python local.py | tee receipt.txt
+PIPESTATUS:0 0
+seed 1 generator 0 1 joint flux PASS
+seed 1 generator 0 2 joint flux PASS
+seed 1 generator 0 3 joint flux PASS
+seed 1 generator 0 4 joint flux PASS
+seed 1 generator 1 2 joint flux PASS
+seed 1 generator 1 3 joint flux PASS
+seed 1 generator 1 4 joint flux PASS
+seed 1 generator 2 3 joint flux PASS
+seed 1 generator 2 4 joint flux PASS
+seed 1 generator 3 4 joint flux PASS
+seed 2 generator 0 1 joint flux PASS
+seed 2 generator 0 2 joint flux PASS
+seed 2 generator 0 3 joint flux PASS
+seed 2 generator 0 4 joint flux PASS
+seed 2 generator 1 2 joint flux PASS
+seed 2 generator 1 3 joint flux PASS
+seed 2 generator 1 4 joint flux PASS
+seed 2 generator 2 3 joint flux PASS
+seed 2 generator 2 4 joint flux PASS
+seed 2 generator 3 4 joint flux PASS
+PASS BR208 simultaneous curvature/observer/normal flux derivative 1.14.0
+Exact selected rational states; not byte-identical donor-import entry execution.
+No native or PDE acceptance.

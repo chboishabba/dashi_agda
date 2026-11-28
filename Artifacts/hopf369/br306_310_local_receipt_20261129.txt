@@ -1,0 +1,34 @@
+2026-11-29 local construction execution receipt, /tmp/hopf230, Python 3 with SymPy 1.14 / SciPy 1.17.
+No CI, Agda, Lean or mmgroup execution; no physical-PDE theorem promoted.
+All source files and manifest uploaded to PR #1554 and checked against exact local git blob SHA.
+
+BR307: OPENBLAS_NUM_THREADS=1 timeout 30s python check_hopf369_br307_wall_jet_transport.py
+Exit 0. PASS seven exact pure-tension Gauss/normal-Ricci wall time jets; PASS trace-reversed Codazzi jump and variable-tension source.
+Source blob 8f4cbff5c4ccc6e9df4cf673f4c1e2261ef81267.
+Scope: exact constructed tracefree 4x4 wall formal coefficients on original BR84 h/j; NOT original BN bulk-generated jets.
+
+BR308: OPENBLAS_NUM_THREADS=1 timeout 30s python check_hopf369_br308_material_stress_exchange.py
+First development attempt exit 1: direct SymPy structural equality for solved acceleration instead of algebraic equivalence. Corrected to s.simplify and final exit 0.
+PASS Gibbs/Euler identity, original BR304 candidate entropy and conserved-number first law; conditional signed EM/material/bath source cancellation; temperature derivative (Q - T*rho*theta)/(c*rho).
+Source blob ce4d75f0adaa19e9d8486c1f14ea696213e4b1df.
+Scope: candidate caloric physics, not original source action's verified stress, real bath or full PDE.
+
+BR309: python check_hopf369_br309_terminal_dag.py
+Exit 0. PASS 27 graph nodes, seven held terminal endpoints, negative missing-owner/cycle/false-theorem-promotion tests.
+Actual earliest unresolved frontier ["A.literal", "G3.native", "G4.propagation", "H.native", "M.source", "P.BN", "T.source"].
+Transitive blockers retained, not just immediate edge; P.time remains blocked on original BN.
+Script blob c891db39e96554ee3d32ff3125e7278ae04395dd; manifest blob 7507c2c80cc5101ec61e7d8fed6e256886e1fe0d.
+Statuses distinguish accepted_source / executed_finite / written_unrun / conditional / held. No claimed proof acceptance.
+
+BR310: cd /tmp/hopf230 && OPENBLAS_NUM_THREADS=1 timeout 45s python check_hopf369_br310_sbp_source_boundary.py --n 7 [and --n 9].
+Both exit 0. Original BR283 G4 matter/flux and 3D diagonal-norm SBP, seven-component signed instant conservation:
+n7 max |integrated RHS + oriented face flux - geometric source| 2.1316282072803006e-14
+n9 max 5.289833111533775e-16
+At both sizes BR302's edge_order=2 boundary operator has non-SBP defect 0.5 under this diagonal norm. Source blob 39be15b79a856bb056f235cbfa702c553f8e12f2.
+Scope: instantaneous original G4 data, a proposed SBP operator, not evolved SBP/SAT Einstein-RMHD, constraint-preserving exterior or stability theorem.
+
+BR306 native correction: source-written on branch. Removes unchecked Ring.solve-∀ and uses two constructor-defined odd-path endpoint equalities with refl. Not Agda typechecked; neither signed difference=2de nor physical tidal equivalence is promoted to kernel result. Native source blob d4ac8519e07b1a1835a4f5b2fe1adeff096c35cc.
+
+Donors rechecked by connector: master c67d5d0e51f98d6171e77f440ddacc717a3201d8; F8 #1547 cdbf3a4c33f0812a897d0f012dfa07b0b01966fd (new original Euler moving-gradient repair and quadratic Ritz); X369 #1550 2e43f8df227fd60a974e31c85e40737bafcb750e (new quotient centralizer coset action and whole programme ledger); #1537 ccdd3d8916427852f6bea9e50522ea92f8a4b93e. Nothing cherry-picked or misrepresented as an original Hopf theorem.
+
+Outstanding execution: BR300 exact literal atomic checker still lacks original full BR229 file in local scratch; Github raw DNS failed. Native Agda/Lean and Monster MM packets unavailable in this runtime. Existing 125 registered stages unrerun; now plus five BR307-310 stages (130).

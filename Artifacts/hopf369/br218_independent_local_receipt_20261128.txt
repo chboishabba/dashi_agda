@@ -1,0 +1,9 @@
+BR218 local independent reconstruction.
+Executed: cd /tmp/hopf211; timeout 90 python br218.py
+sign -1 compatible forced lift, full exterior and 44 boundary rows PASS
+sign 1 compatible forced lift, full exterior and 44 boundary rows PASS
+PASS BR218 manufactured particular plus homogeneous correction 1.14.0
+Exit code 0 (container tool).
+Local run() transcribed in committed checker; driver replaced
+with original BR27 donor import, which was not executed.
+Manufactured sources, not arbitrary compatible-source solvability.

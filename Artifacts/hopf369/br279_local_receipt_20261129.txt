@@ -1,0 +1,9 @@
+Actual local execution in /tmp/hopf230. OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br279_nodal_adjoint.py; exit 0.
+Local git blob 1a5f5cfa1fbe5e39276f0d5d991e8c0abb794346 matches remote implementation at 28f0e418a18ed2ff2f3998263b1d8d080bcce2e9.
+PASS: exact 27x108 continuity, invertible 27-charge map, 54-to-24 boundary rank 24 + residual 30, work adjoint; SymPy 1.14.0
+BR240 11 dt 0.03 gauge initial 1.1102230246251565e-16 final 0.012547764760561908 common cube gauge 0.012547764760561908 change 0.05150032454289766 center radius squared 1.0966956440975162 horizontal volume 1.0955367979636126
+surface: 54 patches, weak rank 26 nullity 28 face rank 24
+BR279 nodal adjoint 0.013056772692322747 FD 0.013056772587560772 error 1.0476197513653585e-10
+BR279 nodal adjoint -0.0018670251862614917 FD -0.001867025147817003 error 3.8444488694930334e-11
+BR279 actual trajectory endpoint energy -66.1611493688366 nodal covector norm 0.8321019105649704
+Scope: original BR241 material iteration with BR270 spacetime assembly via BR277, same 4-step actual G3 metric history. Endpoint cochains and amounts used at fixed storage; EM Hamiltonian and volume entropy gradients independently checked against central differences in two directions, not all individual coordinates. No claim free-energy gradient is a covariantly conserved stress; reservoir/internal heat, gauge-source and backreaction outstanding. No CI/native/continuum acceptance.

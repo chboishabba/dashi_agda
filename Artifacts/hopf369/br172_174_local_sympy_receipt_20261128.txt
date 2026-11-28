@@ -1,0 +1,10 @@
+Local directory /tmp/hopf172. OPENBLAS_NUM_THREADS=1 timeout 90 python check_hopf369_br172_174_joint.py --part <atomic|inverse|wall>. Final 3 exit 0.
+Checker Git blob 43b24d78db2eda0661e147cadb38d223832ee53f
+SHA256 704a547014916a7966034644c397a77ee47ec4db3da5a1cd51de8820927d6a58
+Original local dependencies copied from byte-verified /tmp/hopf169 (BR27, BR143, BR165, BR169).
+PASS BR172 combined shell axial action, Kramers antiunitary and exact doubled cubic
+PASS BR173 spectral inverse off s/p degeneracy, residual norm at degeneracy, signed marked block readout
+BR143 ranks normal flux, full electric trace, spatial trace, kernel images: 22 23 3 4 0
+PASS BR143 normal-work kernel split, spatial Cartan trace factors through flux; full trace has four blind directions
+PASS BR174 zero-shape wall compatibility: exact tilted half-speed mode and spatial trace ratio sin^2 cos^2/12
+Initial charpoly symbol mismatch fixed; initial tilted mode index 25 corrected to 26 and Gram 48 corrected to 24; final full rerun. BR132–139 source inspected, not replayed. No integrated runner, kernel, CI, nonlinear PDE or empirical acceptance.

@@ -18,3 +18,6 @@ open import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact public
 open import DASHI.Unified.TOEGovernanceSemanticNonPromotionValidation public
 
 import DASHI.Moonshine.JMDDASHIThreeCResidualWeldExact
+
+import DASHI.Unified.TOEHopfMonsterSourceRealizationsExact
+import DASHI.Physics.Foundations.Hopf369WarpedPhysicalBoundaryExact

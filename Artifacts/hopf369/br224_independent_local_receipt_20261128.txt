@@ -1,0 +1,4 @@
+Local execution: cd /tmp/hopf211; OPENBLAS_NUM_THREADS=1 timeout 90 python br224.py | tee br224_receipt.txt
+PASS 12 composed finite collar cases; energy residual 1.485154249656112e-13 boundary residual 2.825390147389197e-15 max bound ratio 0.012137977835937263
+PIPESTATUS:0 0
+Independent original carrier and BR220 symbols; manufactured affine interior and compatible boundary forcing; numerical quadrature and linear solves. Committed donor import not executed.

@@ -1,0 +1,9 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/br104_107.py --part <wall|trace|tau|normal>
+All four exit 0 after expanding a structural wall equality.
+Git blob d222a176d8bf5e3f7e301ff8cceff89c58f71e24
+SHA256 f14691b31e170ef9baa6e6de675112e2928c216ac70e5330758b6d92b63ffe69
+PASS BR105 matched F shape squares cancel; exact signed scale-jump wave with drift and reduced defect
+PASS BR107 Dirichlet normal stress, exact normal-coordinate lift and derivative source refusal
+PASS BR106 curved foliation wave divergence identity with nonconstant lapse and time/space dependence
+PASS BR104 actual variable shift/scale five-dimensional Ricci, acceleration and Bochner identities
+Scope: local exact identities and conditional analytic estimates only; no Agda kernel, CI or PDE acceptance.

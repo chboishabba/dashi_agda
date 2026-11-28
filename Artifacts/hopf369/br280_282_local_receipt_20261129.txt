@@ -1,0 +1,11 @@
+Actual local execution in /tmp/hopf230; OPENBLAS_NUM_THREADS=1 timeout 90s python respective scripts. All four invocations exit 0. Source Git blobs match committed files.
+BR280 source 337567e5b8857423f2a09a2ae55e03aca9c986e3 at 978e94d74c5d9ae566c86a506fc1b3dab7f6200c
+BR280 32 1001 6 iterations 3 fixed-point update 2.463277689733912e-18 central psi 1.0000007471272536 Q 3.523598775598299e-06 elliptic 6.153950784467779e-11 Hamiltonian 4.923146335045203e-10 York divergence 1.6013479604837233e-12 trace 4.0332320816460765e-17 primitive recovery 1.1102230246251565e-16 margin 0.24999372278721232
+BR280 64.0 2001 6 iterations 3 fixed-point update 2.4612659864841832e-18 central psi 1.0000007471289174 Q 3.523598775598299e-06 elliptic 2.5844370646607636e-10 Hamiltonian 2.0675425815852577e-09 York divergence 1.6013479604837233e-12 trace 4.0332320816460765e-17 primitive recovery 1.1102230246251565e-16 margin 0.2499937227872127
+Original BR152 formulas reconstructed from pinned source; finite truncated multipole Newton, 18 common points per run, independently differentiated splines and finite-difference York divergence, no certified infinite-domain convergence or coupled evolution. Second Hamiltonian residual increases. Commands default and --R 64 --nr 2001 --lmax 6.
+BR281 source 134b63342cf0d9b4610aa40f5b27774e7f95e5cf at 2de598acb0ae23aab5f815f590ae3996ede4bcbc
+BR281 tube contraction 128/729 psi lower/upper 473/601 729/601 metric cap 256 time bound 1/5480662500413821376952610907289882235468114821120
+BR281 uniform analytic coefficient and implicit majorant inequalities PASS; classical CK and constraint propagation proof separate
+BR282 source cd573f667d1345058879a717772e8f8d53df7604 at 52575d552eefc7a36a62392a0ef865faf5ba56d4
+BR282 seven canonical jet levels, exact triangular inverse and moving-wall second chain rule PASS
+BR282 uses literal BR84 base metric/tension fixture and synthetic higher jets, not actual nonlinear BN jets. No native Agda/Lean executable found. No CI, no continuum or physical calibration acceptance.

@@ -1,0 +1,13 @@
+Local OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf165/check_hopf369_br_curvature_energy.py: exit 0, original source blob 75f6d2f9ae23302860074c25cb8d864b7c089148; SHA256 948bb8ca26a4e7e3bb4e30135b97fe33294e05fffb6a19b99261d4a7a9b6392d.
+PASS exact 35-component Weyl carrier, 9-component wall, Bel flux and positive work coefficient
+bulk normal speeds: +/-1 x5, +/-1/2 x8, zero x9; wall tangential speeds +/-1 x1, +/-1/2 x2, zero x3
+PASS active transmission rank 26, jump coupling rank 8, physical flat spatial constraint kernel 10
+Local OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf165/check_hopf369_br165_168_parallel.py --part <donor|spin|symbol|region>: all 4 exit 0.
+New checker Git blob 7f1e2d159955dc9d37026c034a1e423a40184f7d; SHA256 23673ba2400a89fddeb4bbb6150535f2f796726659473ed471fc8b7556f07506.
+BR143 dependency blob 2354d838727e6d84c1e8da05abad27a9b78efc6d verified and replayed.
+PASS BR165 original BR27 carrier equals BR143 embedding and all four compressed symbols; signed work replay
+PASS BR166 all KK coframe torsion slots and exact spin connection contraction
+PASS BR167 central frozen Dirac symbol: no linear rest shift, anisotropic transverse dispersion
+BR168 normalized upper coefficient at eps=1/1200: -0.0146882278804
+PASS BR168 uniform nonlinear initial sign for 0<|eps|<=1/1200 at normalized parameters
+Scope: exact source algebra and sufficient bound. No BR128–139 replay, integrated runner, native kernel, CI, full nonlinear evolution or empirical acceptance.

@@ -1,0 +1,12 @@
+BR217 local independent carrier reconstruction.
+Command: cd /tmp/hopf211; timeout 90 python br217.py | tee br217_receipt.txt
+Initial attempt failed on structural equality U0*Lv==I for unsimplified complex expressions; corrected exact cancellation comparison.
+Final stdout:
+sign -1 regularized minor -220150628352*a/390625 shape kernel rank 0
+sign -1 exact compatible quotient and incompatible row refusal PASS
+sign 1 regularized minor 220150628352*a/390625 shape kernel rank 0
+sign 1 exact compatible quotient and incompatible row refusal PASS
+PASS BR217 regularized inverse, source quotient, normal integration 1.14.0
+PIPESTATUS:0 0
+Local script Git blob e54df0b7235b98fca6b618529bcbe42af3923c56 (includes independent driver).
+Committed original donor import not run; no curved or native acceptance.

@@ -1,0 +1,12 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf132/check_hopf369_br136_139_F_variable_subsidiary.py --part <mean|current|torsion|trace>
+Final four stages exit 0.
+Checker Git blob 2a20407ce64c205df31187f15254e2c008c944cc
+SHA256 5899c4db10335cf345c8a6fc3d23a8f6cacdeb51ced6ce3c6eedefa7a7b2775a
+BR132-135 dependency exact local Git blob 0de643a765e455367c6635dad2f6aec808ac01c0.
+BR29 extracted carrier local blob 7054569bff228be0dae53cddf609c72e21a855d8, SHA256 4ce132426fbcdef47fa414b1b64390fe867d378469433f81a6fcc225b03125f4 (not full donor file).
+Initial full symbolic polynomial torsion case timed out. Replaced with independent exact rational point first jets and replayed all four.
+PASS BR136 arbitrary tracefree nonzero mean: six residual entries retained, zero active and normal work, zero raw magnetic exchange
+PASS BR137 local corrected wall current, SO(3) flux covariance, speeds ±1/2, ±1/3, 0, explicit residual work
+PASS BR138 full 5D degree-2/3 frame/exterior torsion conversion, nonzero correction retained
+PASS BR139 Cartan tangential pullback normal derivative, exact trace budget and L2-only trace refusal
+Scope: exact algebra and conditional compatible current/trace identities; no native kernel, CI, full repository runner replay, variable nonlinear PDE or global exterior acceptance.

@@ -1,0 +1,9 @@
+Local command: OPENBLAS_NUM_THREADS=1 timeout 90 python check_hopf369_br154_156_atomic.py --part <chars|lane|coulomb>
+All three final stages passed. Initial lane structural comparison required simplify before exact equality; replayed all stages.
+Git blob 90e375e0ca64f1fb7fcc97f6aa8af5ee14c0e871
+SHA256 8d6b764a1ce52a4670ddda584207240ae5f7d25ff61a9ddae1bed6ba0b2b0364
+PASS BR154 actual atomic shell and spin-lift character, period partition and filled-shell determinant
+PASS BR155 marked 3x8 chart, diagonal lane/atomic rotation BIDI and selected-mode energy intertwiner
+BR156 projected Coulomb eigenvalues: {237/1280: 5, 21/128: 9, 111/512: 1} cyclic charge commutator rank: 2
+PASS BR156 full 2p^2 antisymmetric spin-orbital Coulomb, physical rotation retained, bare charge shift obstructed
+F0,F2 consumed from original exact radial donor; not rerun. No Agda, CI, full atomic benchmark or continuum execution.

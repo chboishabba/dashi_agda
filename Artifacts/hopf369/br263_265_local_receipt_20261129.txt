@@ -1,0 +1,16 @@
+BR263-265 local execution. Forced mode ran before addition of homogeneous option (blob 186c163fc7ceb8cc543b7d958ac305134c6c1210); final source d62f333f7750d7a6c47fc2e7408b1ada9f5f58bb matches remote and homogeneous run. Forced branch unchanged by option addition, but final source forced mode not rerun this cut.
+OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br263_265_boundary.py [--homogeneous].
+BR263 split total/interior/exterior/core 0.7537748475584587 0.0036755125503469383 0.7548508840654109 1.1001110105231875e-06 BR264 remainder/error 0.02714167176897159 1.028122703034306e-15
+BR263 split total/interior/exterior/core 0.7538245525546644 0.0036759327421215368 0.7549006145241509 3.2998555942688313e-06 BR264 remainder/error 0.02713243179231349 7.861583834010283e-16
+BR263 split total/interior/exterior/core 0.7539239521775666 0.0036767701644633255 0.7550000639000809 5.498169146682917e-06 BR264 remainder/error 0.02711395042770961 9.513230318520388e-16
+BR263 split total/interior/exterior/core 0.7540730256593914 0.0036780188931014707 0.7551492090842528 7.694095644557601e-06 BR264 remainder/error 0.027086224854878164 8.417203566091214e-16
+BR263 split total/interior/exterior/core 0.7542717417768188 0.003679670036577554 0.7553480153486348 9.886678712958917e-06 BR264 remainder/error 0.02704925084896056 1.0522453134514942e-15
+BR263 split total/interior/exterior/core 0.7545200587651579 0.0036817117305175 0.7555964362687314 1.207495881167079e-05 BR264 remainder/error 0.027003022787197087 7.464460907019577e-16
+BR263 split total/interior/exterior/core 0.7548179242041889 0.003684129130001155 0.7558944136206608 1.4257974724703047e-05 BR264 remainder/error 0.026947533657826518 1.1176769145609944e-15
+BR263 split total/interior/exterior/core 0.7551652748758829 0.0036869044008864976 0.7562418772529116 1.6434760280472583e-05 BR264 remainder/error 0.026882775071207975 7.479809144023825e-16
+BR257-259 11 8 energy initial/final 0.0014659250741159851 0.0030259669503055766 work 0.001560041876189216 ledger 8.294146619514109e-17 force 0.7551652748758829 margin 1.0432564964621251 gauge mismatch 0.0007930768837489858
+BR265 boundary work 0.00013666380213911818
+BR257-259 11 8 energy initial/final 0.0 0.0 work 0.0 ledger 0.0 force 0.0 margin 1.0432564964621251 gauge mismatch 0.00640267244438511
+BR265 boundary work 0.0
+BR265 homogeneous zero control PASS
+Boundary form is algebraic symmetric part of non-skew discrete derivative, not a physical causal boundary condition or flux theorem. Product remainder audited for contracted spatial divergence of E, not all Bianchi terms. Homogeneous control deliberately replaces actual gauge initial data and forcing, hence mismatch against actual metric gauge is expected. No continuum/native/CI acceptance.

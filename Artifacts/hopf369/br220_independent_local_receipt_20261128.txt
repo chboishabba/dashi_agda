@@ -1,0 +1,8 @@
+BR220 independent local carrier.
+cd /tmp/hopf211; timeout 90 python br220.py | tee br220_receipt.txt
+sign -1 initial jet rank 60, homogeneous dimension 10, constraint rank 25, incompatible initial source refused
+sign 1 initial jet rank 60, homogeneous dimension 10, constraint rank 25, incompatible initial source refused
+PASS BR220 1.14.0
+PIPESTATUS:0 0
+Local git blob 7f3fff777c030a27414a86309c284a7aa90d8b32.
+Committed driver uses original donor import; not run.

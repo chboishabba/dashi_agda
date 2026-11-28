@@ -1,0 +1,2 @@
+BG global rational envelope < 51/1000; computed bound 0.050147554854793844
+PASS exact collar energy scaling and endpoint jets

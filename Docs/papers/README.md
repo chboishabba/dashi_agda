@@ -126,3 +126,11 @@ Clay claim flags, or generated satellite index is intended. Exact local
 SymPy/integer reproduction, complexity review, prior-art comparison and
 additional CM cases are required before submission; native kernel claims
 remain separate.
+
+
+## 26 November 2026 working manuscripts — Papers 2 and 10
+
+- [Paper 2: Source-Preserving Dimensional Reduction and Einstein–Israel Geometry](https://github.com/chboishabba/dashi_agda/blob/db4e6fdad79e91043fb5449f77e326cdc6c16c1b/Docs/papers/drafts/Paper2SourcePreservingEinsteinIsraelGeometry.md) revives the existing GR satellite as a working manuscript on #1554. The legacy DCHoTT/finite GR source remains unchanged.
+- [Paper 10: Exact cyclotomic intertwiners for finite Heisenberg representations](https://github.com/chboishabba/dashi_agda/blob/ab583022e81b604556348648c221e5c39cd7d607/Docs/papers/drafts/Paper10SignedCyclotomicMonsterDraft.md) on #1545 retains its ternary Monster normalizer focus and adds a binary Leech central-extension comparison. Mathematical consolidation remains #1217.
+
+Neither is promoted into the live core corpus. See PublicationRoadmap.md for dependencies, acceptance and scope. Paper 9 stays independent; no new Paper 11, PDF generation, Clay or terminal unification promotion.

@@ -1,0 +1,7 @@
+BR209 independent local reconstruction of original BR27 Weyl carrier and Bel formula.
+Command: cd /tmp/hopf209; timeout 90 python local.py | tee receipt.txt
+seed 1 Bel divergence = Bianchi source 120/77
+seed 2 Bel divergence = Bianchi source -115/77
+PASS BR209 exact 35x175 source factor and two Bel divergence states 1.14.0
+PIPESTATUS:0 0
+Original donor-import entry not executed. No native or PDE acceptance.

@@ -1,0 +1,11 @@
+BR204 local independent source reconstruction, SymPy 1.14.0.
+Command: cd /tmp/hopf204 && timeout 90 python local_carrier.py
+Exit 0.
+boost 1 eight signed axial branches PASS
+boost 2 eight signed axial branches PASS
+boost 3 eight signed axial branches PASS
+boost 4 eight signed axial branches PASS
+PASS BR204 signed null boost tangency, positive Gram boost spectrum 1.14.0
+Driver independently reconstructs BR27 packing, algebraic Weyl constraints
+and characteristic matrices from fetched source formulas. Not byte-identical
+original donor import replay. No curved PDE or native kernel acceptance.

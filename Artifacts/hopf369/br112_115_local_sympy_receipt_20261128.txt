@@ -1,0 +1,9 @@
+Local execution: SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/br112_115.py --part <graph|reference|finite|neumann>
+All four exit 0. Git blob 3b3e30e3a5c175390311efdc344c17703fa8b008
+SHA256 ae5060b41c577562224ba06786d29ccd4c67ca8760ae61f16cae6ec1b01a237f
+Initial local source differed by one blank line from uploaded blob; matched source and reran four cases.
+PASS BR112 material graph Lie displacement, Israel/mean variation, mixed/scale generator jump, gauge defect and vector flux
+PASS BR113 original harmonic-Y normal generator and scalar reference conjugation; potential <= 231/100
+PASS BR114 finite AK scalar Green composition: gamma>=16, joint second generator derivatives <=60/gamma² times source norm
+PASS BR115 first-jet scale-Neumann route and exact arbitrary-source glancing half-derivative obstruction
+Scope: finite source algebra and analytical frozen scalar reference estimates; no Agda kernel, CI or variable PDE acceptance.

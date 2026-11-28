@@ -1,0 +1,10 @@
+BR211 independent local source reconstruction.
+Command: cd /tmp/hopf211; timeout 90 python check.py
+complex null kernel 5
+even odd ranks 5 5
+jump only rank 19 joint ranks [(1, 19), (2, 19), (10, 19)]
+minor rows [2, 5, 7, 10, 11, 14, 15, 16, 18, 19, 20, 22, 23, 24, 25, 29, 32, 33, 34] det 20639121408*I/1953125
+Gram determinant 425973332494163902464/30517578125
+jump kernel 0
+PASS static complex null audit
+Exit 0. SymPy 1.14.0. Independent reconstruction, not byte-identical donor import.

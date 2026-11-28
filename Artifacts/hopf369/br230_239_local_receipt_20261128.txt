@@ -1,0 +1,19 @@
+Local execution receipt: BR230/232/233 and BR237/238/239
+Python/SymPy 1.14.0; OPENBLAS_NUM_THREADS=1; timeout 90s each.
+BR230-233 driver Git blob b01435a67ac60b0499b13bd8b5d643fc5b12e8fd
+BR237-239 driver Git blob d46dec27fe099206a5fe2a45956a94b5c78ffbf1
+Donor blobs checked locally:
+af1f67b6b871e9ff0d113763f0369f07621abb79 check_hopf369_br205_wall_lorentz.py
+2ef5d5b4b6cba8050957eeaf659c25ccb739bc4a check_hopf369_br207_moving_normal.py
+75f6d2f9ae23302860074c25cb8d864b7c089148 check_hopf369_br_curvature_energy.py
+0c635181c353393fc891606898a636221c8d50b9 check_hopf369_p0ag.py
+35acf469b8d34f3b827423d6c8699228ee45aeef check_hopf369_p0y.py
+a5c9f1b490e4c9b90ad310b21a6534dcf42831f4 hopf369_dual_midpoint.py
+
+BR230: six tangent and four normal generators; 36 jump columns; left inverse and projection PASS.
+BR232 rerun exit 0: minimum physical margin 0.6841537591667224.
+BR233 prior local log: negative history worst 1.8474111129762605e-13 volume work 0.012360337470056753; positive history worst 2.2026824808563106e-13 volume work 0.003748181208181451.
+BR237 initial symbolic structural equality failed; corrected by exact expansion of difference, not change to identity. Final exit 0: metric-compatible adapted connection, symbolic actual jump derivative, nonzero ambient defect.
+BR238 exit 0: contraction residual 3.339550858072471e-13 volume work 3.3970623277027663 Hodge work 0.010028458841474491; expansion residual 2.0605739337042905e-13 volume work -3.209140406510263 Hodge work -0.008894299279073259.
+BR239 exit 0: exact common metric Hodge and volume scaling.
+Final source differs from initial BR237-239 material/scaling run only by exact symbolic expansion assertions inside wall(). Wall rerun on final source. No CI, native kernel or curved PDE acceptance.

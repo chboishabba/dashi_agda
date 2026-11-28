@@ -1,0 +1,12 @@
+BR222 local independent carrier and BR220 symbol construction.
+Command: cd /tmp/hopf211; OPENBLAS_NUM_THREADS=1 timeout 90 python br222.py | tee br222_receipt.txt
+PASS universal axial normal polynomial: six exact degree-five coefficients by interpolation
+sign -1 rank10 physical/rank25 algebraic; exact inverse and commutation PASS
+sign 1 rank10 physical/rank25 algebraic; exact inverse and commutation PASS
+diagnostic 12 max full exterior relative residual 3.673135185026573e-07 max normal ODE relative residual 4.454100081228186e-07
+PASS BR222 exact split 1.14.0
+PIPESTATUS:0 0
+Local git blob 73613c14ba32cc5908d6576d70ee544dd8de8d44.
+Final execution includes interpolation checks of D P=0 and trace, polynomial algebraic inverse and diagnostic tolerance 1e-5.
+Separate local rank probe: normalized tau=I,-I,1,0, k=1 each D rank25.
+Committed donor-import entry and minor cleanup not replayed.

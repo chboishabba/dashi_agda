@@ -1,0 +1,9 @@
+Local SymPy 1.14.0, OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/br124_127.py --part <gauss|electric|split|riccati>
+Four stages completed exit 0.
+Git blob 0eaff8e1df44fa73b828503d0cbba328ec9598b0
+SHA256 b20726a91ac38cc36d9e58bc9b868497986aee1c798db009e7d625d117c0147e
+PASS BR124 full scalar Gauss average, inverse metric shape derivative, explicit defect and intrinsic curvature debt
+PASS BR125 full 55 Weyl jump components factor through effective nine-shape; electric inverse and Ricci masking witness
+PASS BR126 actual BR29 split ranks 6/8/9, isotropic active kernel recovered, inverse row bounds 5/3 5/12
+PASS BR127 Gaussian normal Riccati variation, noncommuting two-sided integrating factor, homogeneous holonomy control
+Scope: exact local source algebra and analytic conditional transport identity; no Agda kernel, CI or nonlinear PDE acceptance.

@@ -1,0 +1,7 @@
+BR221 local independent reconstruction.
+Command: cd /tmp/hopf211; set -o pipefail; OPENBLAS_NUM_THREADS=1 timeout 90 python br221.py | tee br221_receipt.txt
+PASS 12 finite physical mode solves; max energy residual 3.683652549081481e-12 max boundary residual 4.968161942657906e-15
+Container exit 0.
+Exact SymPy identity assertions and numerical NumPy solves.
+Committed run() transcribed; driver switched to original donor import, not executed.
+Manufactured boundary sources; no arbitrary interior-source numerical solve or curved PDE acceptance.

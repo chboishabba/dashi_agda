@@ -1,0 +1,11 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf132/check_hopf369_br132_135_F_bianchi_cartan.py --part <graph|wall|exterior|cartan>
+All four stages exit 0.
+Checker Git blob 0de643a765e455367c6635dad2f6aec808ac01c0
+SHA256 d79df051892f4daf1aa66a60866b26fc8267da5ec99cfcfbab21f93aeb649d18
+The initial upload differed from local file by five blank lines. Local source adjusted to byte-identical blob and all four stages replayed.
+BR132/133 use extracted BR29 carrier/read definitions from fetched donor; extracted module SHA256 4ce132426fbcdef47fa414b1b64390fe867d378469433f81a6fcc225b03125f4. Not a full repository checkout or integrated runner replay.
+PASS BR132 full BR29 subsidiary graph discrepancy rank 10 factors exactly through spatial dC_B; naive restricted Gram fails
+PASS BR133 full 12-row multiplier resolves rank-12 work obstruction; tangential skew rank 6 paid by dH, positive corrected wall mass
+PASS BR134 exact five-dimensional exterior Bianchi subsidiary sources [E,R] and [E,*R] on independent noncommuting forms
+PASS BR135 covariant wall Codazzi defect curl factors through Cartan curvature defect and full Bianchi source
+Scope: exact finite matrices and source identities, conditional reference principal energy derivation. No native kernel, CI, actual variable constraint propagation, exterior or nonlinear PDE acceptance.

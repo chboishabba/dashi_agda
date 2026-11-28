@@ -1,0 +1,28 @@
+BR213 independent local reconstruction: /tmp/hopf211/filtration.py
+Command: cd /tmp/hopf211; timeout 90 python filtration.py
+SymPy 1.14.0, exit 0.
+-1 1 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+-1 1 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+-1 2 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+-1 2 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+-1 10 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+-1 10 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+1 1 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+1 1 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+1 2 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+1 2 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+1 10 jump nullities [6, 7, 7] increments [6, 1, 0]
+orders {1: 5, 2: 1}
+1 10 joint nullities [4, 4] increments [4, 0]
+orders {1: 4}
+Uses independent BR27/175 carrier reconstruction. Committed donor import and added explicit expected sequence assertion unrun.

@@ -1,0 +1,10 @@
+Local command: OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf161/check_hopf369_br161_164_parallel.py --part <york|atomic|pauli|cartan>
+Final four stages PASS; combined 20s container command timed out after printed final PASS, cartan separately replayed exit 0.
+Checker Git blob 2ce307b058d11601e480f6bae131b37ea2f06a93 SHA256 486947c202fdcd0cf3bb0c160df55e5516d6f47e396801885687e57011fd131d
+Local donor BR156 blob 1f53a9dc5498007a15c97b2a68c349b45ab1e00a; BR143 blob 2354d838727e6d84c1e8da05abad27a9b78efc6d; both verified via git hash-object and replayed.
+BR161 normalized example upper tidal difference: -117169089470921/6124902000000000000000 approx -1.91299533398e-8
+PASS BR161 exact IY=2224/3-75*pi^2, rational enclosure (1.113,1.114), original source moments and sufficient nonlinear sign budget
+PASS BR162 singlet orbit orthogonal triad, signed rank-one reconstruction and exact residual polynomial
+PASS BR163 hydrogenic Pauli radial coefficient, separate Coulomb/fine-structure radion weights
+PASS BR164 covariant alternating square for R and *R, exact graph discrepancy; no differentiated torsion in commutator source
+Scope: local exact algebra, selected jets and rational sufficient bound; analytical continuum arguments are separate. No native kernel, integrated runner, CI, nonlinear time evolution or empirical acceptance.

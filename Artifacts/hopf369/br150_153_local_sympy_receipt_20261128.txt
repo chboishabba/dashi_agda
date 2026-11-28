@@ -1,0 +1,10 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf150/check_hopf369_br150_153_parallel.py --part <trace|optics|york|leech>
+Four stages exit 0. BR143 trace replayed in BR150.
+Git blob 35e6b4b3e54df3ee8758c4c485eec80abfe2c6e7
+SHA256 b87c5a95068163068d4ccf8979a60bd02c2e8935b7971c36fc4f1103dc1e2e6e
+BR143 dependency git blob 2354d838727e6d84c1e8da05abad27a9b78efc6d
+PASS BR150 full normal trace and sharp half-order mixed-norm budget
+PASS BR151 Einstein-frame optical sign change, observer inverse, Jacobi remainder coefficient, central radius interval
+PASS BR152 original G4 radial York source, exact central gradient, axial norm and tidal Hessian cut
+PASS BR153 literal fixed-free Golay/Leech order3, corrected cocycle lift, ground trace +16 and selected weight-two trace 0
+Scope: exact source algebra, independent symbolic checks and integer lattice matrices; analytic estimates and character argument not an executed PDE/4096-square matrix. No kernel, integrated runner, CI or empirical acceptance.

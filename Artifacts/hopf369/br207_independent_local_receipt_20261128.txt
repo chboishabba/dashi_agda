@@ -1,0 +1,9 @@
+BR207 independent local reconstruction from BR27/175 source formulas.
+Command: cd /tmp/hopf207 && timeout 90 python local.py
+SymPy 1.14.0
+normal generator 0 reflection and 9 jump columns PASS
+normal generator 1 reflection and 9 jump columns PASS
+normal generator 2 reflection and 9 jump columns PASS
+normal generator 3 reflection and 9 jump columns PASS
+PASS BR207 moving normal exact derivatives 1.14.0
+No committed donor-import execution, native kernel or PDE acceptance.

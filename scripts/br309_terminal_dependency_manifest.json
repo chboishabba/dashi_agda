@@ -1,0 +1,243 @@
+{
+  "nodes": {
+    "A.H": {
+      "deps": [],
+      "lane": "atomic",
+      "owner": "scripts/check_hopf369_br225_229_endpoint_welds.py",
+      "status": "executed_finite"
+    },
+    "A.endpoint": {
+      "deps": [
+        "A.literal"
+      ],
+      "endpoint": true,
+      "lane": "atomic",
+      "owner": "original H/He source, BR886",
+      "status": "held",
+      "unpaid": "BR300 execution, independent original physical interaction and calibration"
+    },
+    "A.inverse": {
+      "deps": [
+        "A.H"
+      ],
+      "lane": "atomic",
+      "owner": "scripts/check_hopf369_br275_atomic_marked.py",
+      "status": "executed_finite"
+    },
+    "A.literal": {
+      "deps": [
+        "A.inverse"
+      ],
+      "lane": "atomic",
+      "owner": "scripts/check_hopf369_br300_literal_atomic.py",
+      "status": "written_unrun"
+    },
+    "G3.endpoint": {
+      "deps": [
+        "G3.native"
+      ],
+      "endpoint": true,
+      "lane": "g3",
+      "owner": "original G3 Einstein vacuum",
+      "status": "held",
+      "unpaid": "Native proof, constraint propagation, continuation and exterior"
+    },
+    "G3.majorant": {
+      "deps": [],
+      "lane": "g3",
+      "owner": "scripts/check_hopf369_br281_uniform_analytic.py",
+      "status": "executed_finite"
+    },
+    "G3.native": {
+      "deps": [
+        "G3.majorant"
+      ],
+      "lane": "g3",
+      "owner": "G3 complex tube local CK argument, roadmap sections 77/85",
+      "status": "written_unrun"
+    },
+    "G4.data": {
+      "deps": [],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br295_cmc_lift.py",
+      "status": "executed_finite"
+    },
+    "G4.endpoint": {
+      "deps": [
+        "G4.propagation"
+      ],
+      "endpoint": true,
+      "lane": "g4",
+      "owner": "original coupled Einstein RMHD",
+      "status": "held",
+      "unpaid": "Convergent source-preserving Einstein-RMHD trajectory and continuum certification"
+    },
+    "G4.history": {
+      "deps": [
+        "G4.data"
+      ],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br302_boundary.py",
+      "status": "executed_finite"
+    },
+    "G4.maxwellSAT": {
+      "deps": [
+        "G4.sbp"
+      ],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br311_maxwell_sbp_sat.py",
+      "status": "executed_finite"
+    },
+    "G4.propagation": {
+      "deps": [
+        "G4.history",
+        "G4.maxwellSAT"
+      ],
+      "lane": "g4",
+      "owner": "BR305 sourced subsidiary and BR297 independent temporal jets",
+      "status": "held",
+      "unpaid": "Original source-compatible causal boundary, Hamiltonian constraint propagation and uniform energy estimate"
+    },
+    "G4.sbp": {
+      "deps": [
+        "G4.history"
+      ],
+      "lane": "g4",
+      "owner": "scripts/check_hopf369_br310_sbp_source_boundary.py",
+      "status": "executed_finite"
+    },
+    "H.cube": {
+      "deps": [],
+      "lane": "hyperfabric",
+      "owner": "DASHI/Core/GovernedIndexedResidualCubeExact.agda",
+      "status": "accepted_source"
+    },
+    "H.endpoint": {
+      "deps": [
+        "H.native"
+      ],
+      "endpoint": true,
+      "lane": "hyperfabric",
+      "owner": "BR145 original tidal readout and source index",
+      "status": "held",
+      "unpaid": "Kernel proof and genuine physical tidal observation/source attachment"
+    },
+    "H.native": {
+      "deps": [
+        "H.snapshot"
+      ],
+      "lane": "hyperfabric",
+      "owner": "DASHI/Physics/Foundations/Hopf369MarkedHistoryResidualExact.agda",
+      "status": "written_unrun"
+    },
+    "H.snapshot": {
+      "deps": [
+        "H.cube"
+      ],
+      "lane": "hyperfabric",
+      "owner": "scripts/check_hopf369_br301_snapshot.py",
+      "status": "executed_finite"
+    },
+    "M.endpoint": {
+      "deps": [
+        "M.packet"
+      ],
+      "endpoint": true,
+      "lane": "monster",
+      "owner": "PR #1550 source trace-character and original FLM",
+      "status": "held",
+      "unpaid": "Authenticated cover class map, coherent scalar cochain, source 12+78 and VOA/FLM identification"
+    },
+    "M.packet": {
+      "deps": [
+        "M.source"
+      ],
+      "lane": "monster",
+      "owner": "PR #1550 actual mmgroup source receipts",
+      "status": "held",
+      "unpaid": "Pinned MM modular frames, characteristic-zero columns and literal source words"
+    },
+    "M.source": {
+      "deps": [],
+      "lane": "monster",
+      "owner": "PR #1550 cyclotomic rank/projector and quotient centralizer",
+      "status": "written_unrun"
+    },
+    "P.BN": {
+      "deps": [],
+      "lane": "periodic",
+      "owner": "scripts/check_hopf369_p0bn.py",
+      "status": "conditional",
+      "unpaid": "Original BN scalar existence and representative beyond interval barrier"
+    },
+    "P.corner": {
+      "deps": [
+        "P.BN"
+      ],
+      "lane": "periodic",
+      "owner": "scripts/check_hopf369_br84_bn_wall_corner.py",
+      "status": "executed_finite"
+    },
+    "P.endpoint": {
+      "deps": [
+        "P.time"
+      ],
+      "endpoint": true,
+      "lane": "periodic",
+      "owner": "original BN/P0 wall programme",
+      "status": "held",
+      "unpaid": "Nonlinear bulk/wall existence, variable-coefficient glancing estimate and physical exterior"
+    },
+    "P.normal": {
+      "deps": [
+        "P.corner"
+      ],
+      "lane": "periodic",
+      "owner": "scripts/check_hopf369_br307_wall_jet_transport.py",
+      "status": "executed_finite"
+    },
+    "P.time": {
+      "deps": [
+        "P.normal"
+      ],
+      "lane": "periodic",
+      "owner": "BR282 canonical time jet inverse",
+      "status": "held",
+      "unpaid": "Actually generated mixed wall time jets, source PDE and corner admissibility"
+    },
+    "T.adjoint": {
+      "deps": [],
+      "lane": "material",
+      "owner": "scripts/check_hopf369_br279_nodal_adjoint.py",
+      "status": "executed_finite"
+    },
+    "T.endpoint": {
+      "deps": [
+        "T.source"
+      ],
+      "endpoint": true,
+      "lane": "material",
+      "owner": "BR285 reciprocal material programme",
+      "status": "held",
+      "unpaid": "Physical constitutive calibration and source-coupled energy stable metric trajectory"
+    },
+    "T.source": {
+      "deps": [
+        "T.thermo"
+      ],
+      "lane": "material",
+      "owner": "original BR241 material action",
+      "status": "held",
+      "unpaid": "Actual covariant caloric/heat source, Maxwell/material/bath stress and reservoir momentum"
+    },
+    "T.thermo": {
+      "deps": [
+        "T.adjoint"
+      ],
+      "lane": "material",
+      "owner": "scripts/check_hopf369_br308_material_stress_exchange.py",
+      "status": "executed_finite"
+    }
+  },
+  "schema": "hopf369.proof-dependency.v1"
+}

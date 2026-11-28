@@ -1,0 +1,12 @@
+BR215 independent BR27/175 reconstruction. Local command:
+cd /tmp/hopf211; timeout 90 python damped.py | tee damped_receipt.txt
+Both signs executed successfully. stdout:
+-1 nonzero amplitude [0, 0, 0, 0, 0, -3/5, -3/5, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0] order2 source rank 0
+v1 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] quadratic residual [(5, 12/5), (12, -24/5), (25, 48/5), (32, -24/5), (34, -24/5), (35, -2*I), (38, 2*I)]
+wall residual quadratic [-2*I, 0, 0, 2*I, 0, 0, 0, 0, 0]
+PASS damped-scale polynomial witness
+1 nonzero amplitude [0, 0, 0, 0, 0, -3/5, -3/5, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0] order2 source rank 0
+v1 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] quadratic residual [(5, -12/5), (12, 24/5), (25, 48/5), (32, -24/5), (34, -24/5), (35, -2*I), (38, -2*I)]
+wall residual quadratic [-2*I, 0, 0, -2*I, 0, 0, 0, 0, 0]
+PASS damped-scale polynomial witness
+Independent reconstruction, original donor import unrun.

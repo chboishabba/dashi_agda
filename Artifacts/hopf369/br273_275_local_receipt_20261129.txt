@@ -1,0 +1,6 @@
+Local execution in /tmp/hopf230, both invocations exit 0. Commands: timeout 90s python check_hopf369_br273_276_reciprocal.py; OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br275_atomic_marked.py.
+BR273 Maxwell Legendre sign, lapse, shift and diagonal metric stress PASS
+BR274 six marked affine faces and six paths PASS; physical arrow attachment not inferred
+BR275 marked design rank 6 Gram determinant 7047243/10 signed six-parameter inverse PASS
+Local Git blobs 96bd0671d535ee2cf4d0522c2828faacffd473ae and 3642d5278e55e255cad963c2ea57854c7822524a match remote readback.
+BR275 radial integrals and chart reconstructed from BR229, not literal donor import; no physical calibration. BR273 diagonal spatial metric symbolic fixture, no reciprocal evolution. BR274 abstract affine arrows, no actual physical-history cube attachment. No BR276 executable, no CI or native proof.

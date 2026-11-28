@@ -1,0 +1,10 @@
+Local SymPy 1.14.0, OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf128/check_hopf369_br128_131_F_curvature_development.py --part <material|defect|weighted|cartan>
+All four stages exit 0.
+Checker Git blob 9dec80672c8b59c75afa8c877d8d54f6d8d86644
+SHA256 dd14873b854f99a0c25533a4ba708d33326de7d61a561f9e25e2e8e655457b66
+BR128/129 use the extracted carrier/read definitions of the fetched BR27/29 donor, not a full repository checkout; local extracted module SHA256 4ce132426fbcdef47fa414b1b64390fe867d378469433f81a6fcc225b03125f4.
+PASS BR128 actual BR29 signed flux, zero-speed firewall, variable material normal constant and tangential commutator
+PASS BR129 actual BR29 Ricci-defect wall absorption, mixed Schouten/Codazzi source and unchanged flux
+PASS BR130 full nonumbilic lapse Riccati acceleration, weighted transported moment inverse, BR31 exterior parity power
+PASS BR131 Cartan connection/torsion Bianchi identities and two-sided tangent-geodesic obstruction
+Scope: exact local algebra/oracles and written conditional analytic estimates; no Agda kernel, CI, integrated PDE, global exterior or nonlinear acceptance.

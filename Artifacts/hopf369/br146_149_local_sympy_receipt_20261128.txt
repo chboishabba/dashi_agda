@@ -1,0 +1,13 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/hopf146/check_hopf369_br146_149_parallel.py --part <normal|optical|rmhd|observer>
+All four stages exit 0. BR143 trace replayed in BR146.
+Checker Git blob 78525b79716b4f4376c9a80ed9180ca09eccbf2c
+SHA256 e4e80eaaa37f7255ea0ed5bf19110fae611c558769d62021e1ec812a4eef9944
+BR143 dependency Git blob 2354d838727e6d84c1e8da05abad27a9b78efc6d
+SHA256 6bea0598d9d933c9bd9107060e74e9432b85793276b8fcbfd4e334abffdd37fe
+BR143 ranks normal flux, full electric trace, spatial trace, kernel images: 22 23 3 4 0
+PASS BR143 normal-work kernel split, spatial Cartan trace factors through flux; full trace has four blind directions
+PASS BR146 full electric trace factors through rank-26 normal action; old four blind channels recovered; true kernel dimension 9
+PASS BR147 actual G3 Jordan optical screen and null Ricci, Jacobi signed leading term and fibre-momentum distinction
+PASS BR148 actual G4 aligned stress anisotropy and Einstein tidal trace, full ADM tensor source retained
+PASS BR149 paired optical and marked mixed readout recovers signed amplitude and radius squared off zero; zero fibre retained
+Scope: exact reference graph matrices and local original-source analytic algebra. No full runner, native, CI, nonlinear continuum or calibration acceptance.

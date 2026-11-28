@@ -1,0 +1,22 @@
+BR216 independent BR27/175 local reconstruction; SymPy 1.14.0.
+Command: cd /tmp/hopf211; timeout 90 python weighted.py | tee weighted_receipt.txt
+-1 I/2 rank0 14 rank lift 19 remaining 0
+-1 -I/2 rank0 14 rank lift 19 remaining 0
+-1 I rank0 14 rank lift 19 remaining 0
+-1 -I rank0 14 rank lift 19 remaining 0
+-1 1 rank0 14 rank lift 19 remaining 0
+generic rank0 14
+generic Toeplitz rank 33
+minor 14 214990848*I*a/390625
+minor 33 -47330370277129322496*I*a**2/152587890625
+1 I/2 rank0 14 rank lift 19 remaining 0
+1 -I/2 rank0 14 rank lift 19 remaining 0
+1 I rank0 14 rank lift 19 remaining 0
+1 -I rank0 14 rank lift 19 remaining 0
+1 1 rank0 14 rank lift 19 remaining 0
+generic rank0 14
+generic Toeplitz rank 33
+minor 14 214990848*I*a/390625
+minor 33 47330370277129322496*I*a**2/152587890625
+PIPESTATUS:0 0
+Original donor import and extra expected-value assertions unrun.

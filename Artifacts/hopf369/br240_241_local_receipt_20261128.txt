@@ -1,0 +1,9 @@
+BR240/241 local bounded execution, 2026-11-28.
+Exact executed source blob hashes verified against committed GitHub content:
+b2a2b9e7e2edc00f9643d0e7247f1829436a93d7 check_hopf369_br240_metric_history.py
+8aa728e221181cd88b859c7e4a507e28802b0598 check_hopf369_br241_metric_consumer.py
+Commands: OPENBLAS_NUM_THREADS=1 timeout 90s python check_hopf369_br241_metric_consumer.py --n 11 (and --n 17).
+Both completed successfully. SymPy 1.14.0 donor continuity.
+11^3: dt .03, gauge initial 1.1102230246251565e-16, final common cube 0.012547764760561908, metric change 0.05150032454289766, central q 1.0966956440975162; 4 material steps, residual 3.552713678800501e-14, Hodge change 0.08185362145360213, volume change 0.0025144942914644692, Hodge work 6.909080849281971e-05, volume work 0.01272808850175762.
+17^3: dt .02, gauge initial 8.326672684688674e-17, final common cube 0.006208525539115384, metric change 0.05783378161454478, central q 1.0925022674592224; 6 material steps, residual 2.1316282072803006e-14, Hodge change 0.10250449985499377, volume change 0.002091044948993849, Hodge work 7.38370148377475e-05, volume work 0.011406361811435504.
+Finite reduced-equation diagnostic only; frozen outer grid boundary, no continuum/exterior/constraint convergence or independent lower-order Ricci contraction verification. Material one-way fixed-circle spatial storage, lapse/shift omitted, synthetic conductance/reservoirs; no physical spacetime Maxwell or backreaction claim. No CI/native kernel.
