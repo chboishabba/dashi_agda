@@ -8,6 +8,7 @@ Uses the same script file, imported directly from this repository.
 """
 import contextlib
 import importlib.util
+import inspect
 import io
 import json
 from pathlib import Path
@@ -35,7 +36,7 @@ class NativeCampaignFailClosed(unittest.TestCase):
             sorted(k for k in campaign.BRANCHES),
             ["BSD_HODGE", "NS", "PNP", "RH", "YM"])
         self.assertEqual(sum(len(paths) for _, paths in
-                             campaign.ROOTS.values()), 7)
+                             campaign.ROOTS.values()), 10)
 
     def run_campaign(self, extra_pins):
         with tempfile.TemporaryDirectory() as tmp:
@@ -90,6 +91,18 @@ class NativeCampaignFailClosed(unittest.TestCase):
                          {"YM", "NS", "BSD_HODGE", "PNP", "RH"})
         self.assertTrue(all(row["status"] != "PASS"
                             for row in data["checks"]))
+
+    def test_malformed_sha_rejected_before_write(self):
+        code, data = self.run_campaign(
+            ["--require-head", "YM=not-a-real-commit"])
+        self.assertEqual(code, 2)
+        self.assertIsNone(data)
+
+    def test_exact_ten_native_roots_plus_rh(self):
+        campaign = load_runner()
+        self.assertEqual(sum(len(v[1]) for v in campaign.ROOTS.values()), 10)
+        self.assertIn("Clay37NativeAcceptanceV1",
+                      inspect.getsource(campaign))
 
     def test_wrong_branch_fails_closed(self):
         campaign = load_runner()
