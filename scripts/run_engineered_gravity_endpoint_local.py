@@ -13,6 +13,7 @@ from pathlib import Path
 CORE=(
     "check_engineered_gravity_proof_dag.py",
     "check_engineered_gravity_reciprocal_controller_ward.py",
+    "check_engineered_gravity_reciprocal_interface_traction.py",
     "check_engineered_gravity_maxwell_source_work_abi.py",
     "test_engineered_gravity_proof_dag.py",
     "check_engineered_gravity_coarse_to_fine.py",
