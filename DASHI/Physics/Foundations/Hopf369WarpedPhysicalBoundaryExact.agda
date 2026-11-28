@@ -1162,7 +1162,7 @@ module At {r : Level} (F : C.RealField r)
     subT coordinateJet (mulT displacement sourceNormalJet)
 
   graphMaterialForcing : S → Vec → S →
-    Tensor → Tensor → Tensor → Tensor
+    Tensor → Tensor → Tensor
   graphMaterialForcing j grad displacement perturbation
                        sourceNormalJet =
     subT (graphMaterialJump j grad perturbation)
