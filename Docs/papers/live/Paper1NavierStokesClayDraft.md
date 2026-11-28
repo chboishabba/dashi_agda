@@ -725,3 +725,8 @@ Lean #123 b30b86c379b5 / dc4e9aa8dd8f: actual longitudinal heat identity gives i
 ## Section 19 — actual signed reality covariance
 
 Lean #123 62ef5713d71a writes signed conjugation of the actual ordered force using the original negated input pair carrier; 7999cc7057da imports the divergence/reality chain into AB. Conditional fixed-point consequence; actual reflected trajectory, ODE uniqueness/existence and critical continuation remain open. 128 independent ordered-cell exact controls, not full finite-force or native replay.
+
+
+## Section 20 — original finite state ODE and reality
+
+Lean #123 59eafe9b67d5 / c515e2aa71e6 constructs the actual cutoff Banach carrier and C1 polynomial RHS, local existence through Mathlib Picard–Lindelöf, modal zero-extension, finite reflected trajectory and uniqueness/reality on a common closed ball. AB import 28ab0c54090d. 1312 exact independent full finite convolution/viscous symmetry controls; native existence/uniqueness not executed. Compact-time common ball, arbitrary-horizon continuation, actual continuum and uniform critical estimate remain open.
