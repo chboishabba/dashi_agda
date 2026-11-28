@@ -82,7 +82,7 @@ def accept(bounds,p):
     if set(bounds)!=required:raise ValueError('incomplete or unexpected bound fields')
     return contraction(p=p,**bounds)
 
-def complete(aggregate,leaf_receipt,coefficient_bounds,knots,p):
+def complete(aggregate,leaf_receipt,coefficient_bounds,knots,p,local=None):
     """Conditional sufficient bound; coefficient bounds must cover [0,2*pi]
     and the rational trace clock. No empirical or nonlinear promotion."""
     from solar_steelman_history_clock import period_bounds,clock_error
@@ -94,10 +94,17 @@ def complete(aggregate,leaf_receipt,coefficient_bounds,knots,p):
     assert min(T,lo)>2*delay
     a,b,c,r,rp=(S.Rational(coefficient_bounds[k]) for k in ('a','b','c','r','rprime'))
     assert min(a,b,c,r,rp)>=0
-    G=S.Rational(exp_upper((a+(b+c)*max(1,r))*horizon))
-    H=max(1,r)*G
-    D=a*G+(b+c)*H
-    Dh=rp*G+r*D
+    if local is None:
+        G=S.Rational(exp_upper((a+(b+c)*max(1,r))*horizon))
+        H=max(1,r)*G
+        D=a*G+(b+c)*H
+        Dh=rp*G+r*D
+    else:
+        assert local['delay']==delay and local['trace_T']==T
+        assert local['horizon']>=horizon and local['window_start']<=min(T,lo)-2*delay
+        H,D,Dh=map(S.Rational,(local['g'],local['dx'],local['dh']))
+        r=S.Rational(local['r'])
+        assert min(H,D,Dh,r)>=0
     clock=clock_error(T,D,Dh)
     U,V,J=section(leaf_receipt['Q'],leaf_receipt['L'],leaf_receipt['R'].rows,knots,leaf_receipt['R'])
     M=S.Matrix([[q(v) for v in row] for row in aggregate['matrix']])
