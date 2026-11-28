@@ -1,0 +1,21 @@
+module DASHI.Governance.RelationalFederationViabilityEverything where
+
+-- Focused acceptance root. Source-written only until exact-head kernel run.
+-- See Docs/roadmaps/RelationalFederationViability20261129.md.
+import DASHI.Governance.RelationalFederationViabilityExact
+import DASHI.Governance.FederatedViabilityTransitionExact
+import DASHI.Governance.FederatedCouncilIncidenceBridgeExact
+import DASHI.Governance.BoloBoloLongitudinalNonDominationExact
+import DASHI.Governance.BoloBoloCausalJointPromotionExact
+import DASHI.Governance.BoloBoloExternalAutonomyNonDominationExact
+import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact
+import DASHI.Governance.CybersynAuthorityFeedbackExact
+import DASHI.Governance.KnowledgeProcessingSovereignCaptureExact
+import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact
+import DASHI.Interop.DistributedEpistemicPlaneSeparationExact
+import DASHI.Interop.DistributedEvidenceHistoryProjectionExact
+import DASHI.Interop.SensibLawFederatedZOSAcquisitionExact
+import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact
+import DASHI.Biology.Agriculture.BNFSevenGenerationPlanningExact
+import DASHI.Biology.Agriculture.BNFSevenGenerationRobustnessExact
+import DASHI.Core.IntergenerationalPlanningHorizonExact
