@@ -5069,3 +5069,61 @@ material same-source stress/current/receiver.
 Do not promote any of these from the frozen symbol.
 Run both checker parts locally with 90s cap, verify
 committed dependency bytes, and record actual outputs.
+
+
+## 33. BR181–185 — parallel endpoint bridge packet
+
+New checker scripts/check_hopf369_br181_185_terminal_bridges.py
+at 8d514be6719ef71cf63f4c809befdbafbf162e7f.
+Written, not executed. The module docstring range should be read
+as BR181–185 only; there are no BR186/187 implementations here.
+
+BR181: original BR143 axial spatial exterior symbol C on X;
+left inverse U=(C^T C)^-1 C^T, image projector CU, retained
+incompatible source (I-CU)F, electric factor OUC=O.
+Spatial rotations and homogeneity give the analytic uniform
+spatial estimate |xi| ||W|| <= const ||C_xi W||.
+Not a spacetime null-symbol estimate. Actual curved defect
+propagation, compatible W0/W1 corner, exterior W5 and
+generation W6/W7 remain. Use BR139/150/164/175 and actual
+F8 Ward donors, not a new generic Cartan carrier.
+
+BR182: signed radial Jacobian, tangent to degenerate norm
+level set, zero-amplitude signed derivative. BR183: wedge2
+one-body lift on eight labels, selected rational commutator
+and identity checks. This is a reusable operator bridge, not
+yet an actual combined BR172 + #886 Coulomb/CI calculation.
+BR184: actual BR144 marked central tidal tensor parity and
+two-way residual reconstruction; no spinor history or lifespan.
+BR185: generic incidence transpose work identity only, not
+same-source material admission. Do not count generic tests as
+physical closure.
+
+Refreshed donor HEADs: #1291 c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04;
+#1217 09166d57a3cb13b6e298d53bc56b55bbb4601402;
+#1545 ab583022e81b604556348648c221e5c39cd7d607;
+#1547 c8b2093be93248548e7a0483e1b12f610bd91b6b (advanced);
+#886 be528d4cdeb01930f143d486af3c998744084576;
+#1241 219f7962b36f30342bb27935cfeaa2ecd82dd97d.
+Metadata refreshed, not exhaustive donor source replay.
+
+Terminal parallel acceptance cut (no artificial serial gate):
+- Periodic: actual inhomogeneous constraint/trace estimate,
+  compatible BN corners, curved iteration and exterior.
+- Atomic: instantiate wedge2 BR172 on actual #886 source
+  Coulomb matrix, radial units and physical calibration.
+- G3: consume P0T/U/V actual seed, quantitative analytic
+  radius and evolving spinor/geodesic histories.
+- G4: consume P0H/T/V actual nonlinear profile and
+  relative energy/finite-time continuation, distinct from G3.
+- Hyperfabric: attach marked BR184 residual to actual
+  GovernedIndexedResidualCubeExact and #1291 typed source.
+- Monster: #1545 marked generator/vertex/lattice intertwiner,
+  preserve failed natural action and source-specific grades.
+- Material: actual P0O–S/Y–AG common current, metric stress,
+  constitutive and receiver history; #1547 donor source match.
+
+Run BR178–180 and BR181–185 locally, 90s cap per stage,
+original dependency byte verification and recorded outputs.
+No new local PASS, kernel, CI, nonlinear existence, or
+empirical acceptance. No sibling modifications.
