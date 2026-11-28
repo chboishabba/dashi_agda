@@ -1,5 +1,17 @@
 """Bounded independent original-coordinate receipt checks."""
 from random import Random
+import json,os,time
+from pathlib import Path
+
+CHECKPOINT=Path(os.environ.get('PNP_TRACE_CHECKPOINT','pnp_fractran_trace_checkpoint.json'))
+RESULTS={}
+def checkpoint(stage,**result):
+    RESULTS[stage]=result
+    CHECKPOINT.parent.mkdir(parents=True,exist_ok=True)
+    tmp=CHECKPOINT.with_suffix(CHECKPOINT.suffix+'.tmp')
+    tmp.write_text(json.dumps(RESULTS,indent=2)+'\n')
+    os.replace(tmp,CHECKPOINT)
+    print(stage,result,flush=True)
 from check_pnp_affine_normal_components import Budget, Exhausted, canon, chart, lift, satisfies
 from check_pnp_fractran_trace import trace, recover_trace, improve_trace, productive_trace, realize_ordered_trace
 
@@ -29,6 +41,7 @@ def main():
                     assert q['residual']==tuple((r&z).bit_count()-c for r,c in zip(R,caps))
                 assert z==m['after'] and satisfies(z,H,())
             assert z==y
+        checkpoint('trace',completed=160*n,receipts=receipts,units=units,nonimprovement=refusals)
     # Odd-row onehot instance: source has three ones; target has one.
     t=recover_trace(3,(7,),((7,1),),(1,),7,Budget(1000000))
     assert t is not None and t['decrease']==2
@@ -37,6 +50,7 @@ def main():
     try:trace(3,(7,),(),(0,),7,0,Budget(0))
     except Exhausted:pass
     else:raise AssertionError('budget refusal')
+    checkpoint('prefix_and_recovery',status='PASS')
     # Compare completed aggregate minima to exhaustive original points.
     folds=0
     for n in range(1,8):
@@ -59,6 +73,7 @@ def main():
             elif best==phi(x):assert status=='MINIMUM'
             else:assert status=='IMPROVED' and phi(t['end'])==best
             folds+=1
+        checkpoint('aggregate',completed=folds)
     # Hard nonlinear leaves, free coordinates and atomic semantics.
     from check_pnp_separator_row_strata import build, minimum_excess
     hard_cases=0
@@ -83,6 +98,27 @@ def main():
             assert (v is None)==(not truth)
             if truth:assert v==min(truth) and satisfies(y,H,F)
             hard_cases+=1
+        checkpoint('hard_minimum',completed=hard_cases)
+    # Original masses include the unobserved kernel, not only quotient labels.
+    from check_pnp_separator_row_strata import observe
+    mass_cases=free_cases=0
+    for n in range(1,9):
+        for _ in range(100):
+            x=rng.randrange(1,1<<n)
+            P=tuple(r for r in range(1,1<<n) if (r&x).bit_count()%2)
+            R=tuple(rng.sample(P,min(3,len(P))))
+            H=canon(tuple((r,1) for r in R));B=Budget(10000000)
+            G=build(n,R,H,B);assert G is not None
+            w=tuple((r&x).bit_count() for r in R)
+            admissible=[z for z in range(1<<n) if satisfies(z,H,()) and all((r&z).bit_count()<=v for r,v in zip(R,w))]
+            cover=[z for z in admissible if all((r&z).bit_count()==1 for r in R)]
+            strict=tuple(sum((r&z).bit_count()<v for z in admissible) for r,v in zip(R,w))
+            _,_,roots,c,a=observe(n,R,H,x,G,B)
+            assert (roots,c,a)==(strict,len(cover),len(admissible))
+            union=0
+            for r in R:union|=r
+            free_cases+=int(union!=(1<<n)-1);mass_cases+=1
+        checkpoint('original_mass',completed=mass_cases,free_coordinate_cases=free_cases)
     F=(((1,0),(2,1)),)
     assert trace(2,(3,),(),(0,),3,0,Budget(100000),F) is None
     t=trace(2,(3,),(),(0,),3,0,Budget(100000),F,atomic_basis_block=True)
@@ -96,6 +132,7 @@ def main():
     status,t,lower=productive_trace(3,(7,),((7,1),),(1,),7,Budget(1000000),
                                    flats=(((1,0),),((2,0),),((4,0),)))
     assert status in ('MINIMUM','UNKNOWN') and t is None
+    checkpoint('productive_controls',status='PASS')
     # Explicit FRACDASH checkout; no vendored evaluator.
     import os,sys
     bridge_path=os.environ.get('FRACDASH_SCRIPTS')
@@ -110,9 +147,9 @@ def main():
         p=tuple(int(prime(i)) for i in range(1,3*3+L+2))
         q=realize_ordered_trace(3,t,bridge,p,Budget(10000000))
         assert q['indices']==tuple(range(L))
-        print('actual FRACDASH ordered replay PASS')
-    else:print('actual FRACDASH ordered replay SKIPPED: set FRACDASH_SCRIPTS')
+        checkpoint('ordered_replay',status='PASS',units=L)
+    else:checkpoint('ordered_replay',status='SKIPPED',reason='set FRACDASH_SCRIPTS')
     print('aggregate fold cases',folds,'hard cases',hard_cases)
-    print(dict(receipts=receipts,units=units,nonimprovement=refusals,controls='PASS'))
+    checkpoint('final',status='PASS',receipts=receipts,units=units,nonimprovement=refusals)
 
 if __name__=='__main__':main()
