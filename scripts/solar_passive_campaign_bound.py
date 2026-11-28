@@ -73,6 +73,15 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
     port=float(cfg['source_coupling_sqrt_inv_s']); edge=int(cfg['source_edge'])
     seq=0; queue=[]; replay_count=0; failed=0; best=None
     rational_candidates=[]
+    from fractions import Fraction as F
+    exact_ceiling=None
+    if cfg.get('retain_stage_residuals',False):
+        # Binary64 input chart, exact rational accounting of the incident
+        # source amplitude squares and auxiliary tariff. No claim of exact
+        # physical source provenance or material assembly rounding.
+        h=F(float(dt)); exact_ceiling=int(cfg['max_cycles'])*(
+            sum((h*F(float(a))**2 for a in cfg['incident_sqrt_W']),F(0))
+            -F(float(cfg['auxiliary_J'])))
     def box(lo,hi,parent_upper):
         nonlocal seq,replay_count,failed,best
         if lo.sum()>budget: return
@@ -86,10 +95,14 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
         upper=parent_upper
         try:
             replay_count+=1; out=cycle(material,cc)
-            en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
-            upper=min(upper,ceiling-en['reflection_lower_J'])
-            if cfg.get('retain_stage_residuals',False):
-                rational_candidates.append(rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg))
+            if exact_ceiling is not None:
+                rational=rational_reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
+                rational_candidates.append(rational)
+                rational_upper=exact_ceiling-F(rational['reflection_lower_exact'])
+                upper=min(upper,float(rational_upper))
+            else:
+                en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
+                upper=min(upper,ceiling-en['reflection_lower_J'])
             score=out['strict_campaign_net_J']
             if score is not None and np.isfinite(score):best=score if best is None else max(best,score)
         except (ValueError,AssertionError,np.linalg.LinAlgError,FloatingPointError):
