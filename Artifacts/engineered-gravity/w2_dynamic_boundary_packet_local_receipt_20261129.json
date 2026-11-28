@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-29",
+  "scope": "W2 isolated mathematical construction; three Git-blob-identical locally executed SymPy source files; not full repo/native/physical acceptance",
+  "git_pr": 1547,
+  "checks": [
+    {
+      "path": "scripts/check_tov_moving_timelike_israel_abi.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "timeout_s": 90,
+      "git_blob_sha1": "16ce2ab9c3f903974a9bf4bdff181a04bacc484c",
+      "local_source_sha256": "939f752dee81df56daf03d75f579019e8d38ae160b0f7a2b77f61227acb900e9",
+      "stdout_sha256": "c4bab6bb117531f062c24d4f018996c84a91f105efabb98be6ad91c866c161aa",
+      "scope": "spherical moving timelike normal, static-face original Einstein mass/density/pressure Israel; no full dynamical Einstein"
+    },
+    {
+      "path": "scripts/check_engineered_gravity_boundary_packet_w2.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "timeout_s": 90,
+      "git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c",
+      "local_source_sha256": "e426db646a22e793a363e708bf7b862864a36d23564ddb2414269db77a9feffb",
+      "stdout_sha256": "1b6f9dc4dafb452a5b1e85100bdd216c2f39939de7afd5f40edf571db081f63f",
+      "scope": "three typed source-distinct TOV/reciprocal/Maxwell forward reverse inverses; no cross-source promotion"
+    },
+    {
+      "path": "scripts/check_tov_dynamic_flux_israel_abi.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "timeout_s": 90,
+      "git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76",
+      "local_source_sha256": "bc49bf91f17747477747fed9a9b2daadb9dbff74a0172ad035c22cc7bf5fe1b1",
+      "stdout_sha256": "efa894c722cae311b397600b2da13f9c8bd4323c7b69c356cc938ba16681b3d5",
+      "scope": "exact nonstationary Einstein Gtr and moving wall normal-stress Israel; no actual coupled bulk"
+    }
+  ],
+  "manifest": {
+    "w1_pins": 7,
+    "w2_pins": 3,
+    "lanes": 12,
+    "physical_unpaid_obligations": 36,
+    "dag_negative_controls_declared": 11,
+    "dag_negative_controls_executed_this_cut": false
+  },
+  "nonpromotion": {
+    "full_repo_checkout": false,
+    "aggregate_runner_executed": false,
+    "github_ci": false,
+    "native_f8": false,
+    "independent_physical_source": false,
+    "full_einstein_ghy": false,
+    "experimental_receiver": false
+  },
+  "notes": [
+    "first moving-wall local fixture had SymPy replacement-order failure; corrected before committing and PASS",
+    "three-source inverse local script had Python precedence syntax error; corrected before committing and PASS",
+    "all final 3 GitHub source blob SHA-1 values verified equal to actual executed local files"
+  ]
+}
