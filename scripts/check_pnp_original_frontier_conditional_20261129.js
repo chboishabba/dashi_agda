@@ -10,18 +10,18 @@ function solve(cols,r,order,limits){
  for(let i=n-1;i>=0;i--)suffix[i]=suffix[i+1]|C[i];
  for(let i=0;i<n;i++)prefix[i+1]=prefix[i]|C[i];
  const frontier=prefix.map((p,i)=>p&suffix[i]),width=Math.max(...frontier.map(pop));
- let stats={width,states:0,edges:0,peakLayer:0};if(suffix[0]!==all)return {status:"EXACT",total:0n,counts:null,stats};
+ let stats={width,states:0,edges:0,peakLayer:0,forwardEdges:0,descentEdges:0};if(suffix[0]!==all)return {status:"EXACT",total:0n,counts:range(n).map(()=>[0n,0n]),stats};
  if(width>limits.width)return {status:"CENSORED",reason:"width",stats};
  const memo=range(n+1).map(()=>new Map());let refused=false;
  function transitions(i,m){let a=[];for(let b=0;b<2;b++){if(b&&(m&C[i]))continue;let z=m|(b?C[i]:0n);let retiring=suffix[i]&~suffix[i+1];if((z&retiring)!==retiring)continue;a.push([b,z&frontier[i+1]])}return a}
  function back(i,m){if(refused)return 0n;if(i===n)return 1n;if(memo[i].has(m))return memo[i].get(m);
  if(stats.states>=limits.states){refused=true;return 0n}stats.states++;let v=0n;for(let [b,z] of transitions(i,m)){stats.edges++;v+=back(i+1,z)}memo[i].set(m,v);stats.peakLayer=Math.max(stats.peakLayer,memo[i].size);return v}
  const total=back(0,0n);if(refused)return {status:"CENSORED",reason:"states",stats};
- let F=new Map([[0n,1n]]),counts=range(n).map(()=>[0n,0n]),witness=0n,m=0n;
- for(let i=0;i<n;i++){let next=new Map();for(let [s,a] of F)for(let [b,z] of transitions(i,s)){let q=back(i+1,z);counts[order[i]][b]+=a*q;if(q)next.set(z,(next.get(z)||0n)+a)}F=next;
- if(total){let e=transitions(i,m).find(([b,z])=>back(i+1,z)>0n);assert(e,"reopen");if(e[0])witness|=bit(order[i]);m=e[1]}}
+ let F=new Map([[0n,1n]]),counts=range(n).map(()=>[0n,0n]),witness=0n,m=0n,descent=[];
+ for(let i=0;i<n;i++){let next=new Map();for(let [s,a] of F)for(let [b,z] of transitions(i,s)){stats.forwardEdges++;let q=back(i+1,z);counts[order[i]][b]+=a*q;if(q)next.set(z,(next.get(z)||0n)+a)}F=next;
+ if(total){let es=transitions(i,m),child=[0n,0n];for(let [b,z] of es){stats.descentEdges++;child[b]=back(i+1,z)}let parent=back(i,m);assert(child[0]+child[1]===parent,"parent count");let chosen=child[1]>child[0]?1:0,e=es.find(([b])=>b===chosen);assert(e&&child[chosen]>0n,"reopen");descent.push({column:order[i],parent:String(parent),children:child.map(String),chosen,contrastNumerator:String(child[0]-child[1])});if(e[0])witness|=bit(order[i]);m=e[1]}}
  assert(counts.every(c=>c[0]+c[1]===total),"conditional sum");
- return {status:"EXACT",total,counts,witness,stats,order};
+ return {status:"EXACT",total,counts,witness,stats,order,descent};
 }
 function valid(cols,r,w){let s=0n;for(let i=0;i<cols.length;i++)if(w&bit(i)){if(s&cols[i])return false;s|=cols[i]}return s===bit(r)-1n}
 function greedy(cols){let remaining=new Set(range(cols.length)),p=0n,o=[];while(remaining.size){let best=-1,score=Infinity;for(let i of remaining){let future=0n;for(let j of remaining)if(i!==j)future|=cols[j];let x=pop((p|cols[i])&future);if(x<score){best=i;score=x}}remaining.delete(best);o.push(best);p|=cols[best]}return o}
@@ -31,7 +31,8 @@ const cols=original.map(s=>s.reduce((a,i)=>a|bit(i),0n)),order=greedy(cols),Q=so
 let independent=[];function exactCover(covered,w){if(covered===bit(18)-1n){independent.push(w);return}let j=0;while(covered&bit(j))j++;for(let i=0;i<cols.length;i++)if((cols[i]&bit(j))&&!(cols[i]&covered))exactCover(covered|cols[i],w|bit(i))}
 exactCover(0n,0n);assert(independent.length===7&&new Set(independent).size===7,"independent exact cover");
 for(let i=0;i<30;i++)for(let b=0;b<2;b++){assert(Q.counts[i][b]===BigInt(independent.filter(w=>Number((w>>BigInt(i))&1n)===b).length),"original conditional");checks++}
+let pool=independent.slice();for(let d of Q.descent){let counts=[0,0];for(let w of pool)counts[Number((w>>BigInt(d.column))&1n)]++;assert(d.children.every((v,b)=>BigInt(v)===BigInt(counts[b]))&&BigInt(d.parent)===BigInt(pool.length),"prefix replay");pool=pool.filter(w=>Number((w>>BigInt(d.column))&1n)===d.chosen)}assert(pool.length===1&&pool[0]===Q.witness,"full original witness replay");
 let refuse=solve(cols,18,order,{width:0,states:100});assert(refuse.status==="CENSORED","width refusal");let cap=solve(cols,18,order,{width:18,states:1});assert(cap.status==="CENSORED","state refusal");
-return {status:"PASS",random,checks,original:{count:Q.total.toString(),counts:Q.counts.map(c=>c.map(String)),witness:Q.witness.toString(),stats:Q.stats,order,independent:independent.map(String)},refusals:[refuse.reason,cap.reason]};
+return {status:"PASS",random,checks,original:{count:Q.total.toString(),counts:Q.counts.map(c=>c.map(String)),witness:Q.witness.toString(),stats:Q.stats,order,descent:Q.descent,independent:independent.map(String)},refusals:[refuse.reason,cap.reason]};
 }
 console.log(JSON.stringify(campaign(),null,2));
