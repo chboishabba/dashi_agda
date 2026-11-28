@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-28",
+  "entry": {
+    "agda": "b97cbe07778892843e621aaae980f417c96515f3",
+    "lean": "a385a3d03f4af95ab5b8b223ec0cfa4705602276"
+  },
+  "blobs": {
+    "trellis": "a0602ddf18cb9acdbde4a02280e8a95ee779e3e6",
+    "trellis_campaign": "4eddb59dbd683c2ade5e03052499978610affa0c",
+    "linear_consumer": "9cc54db5b62b06c67e2cdc8af9caa1ca241cb3e5",
+    "five_lane": "d7aaf50b0fa3ad0c883d8f0aa5e55c58c6ae7509"
+  },
+  "C1a": {
+    "seed": 3692843,
+    "basis_seed": 3692846,
+    "fixtures": 512,
+    "points": 38646,
+    "labels": 1536,
+    "witnesses": 127,
+    "basis_insertions": 4813,
+    "chain": {
+      "variables": 128,
+      "global_rank": 64,
+      "crossing_rank": 1,
+      "clause_crossing": 1,
+      "peak": 2,
+      "probes": 510,
+      "mass": 65,
+      "histogram": [
+        22,
+        22,
+        21
+      ],
+      "initial_work": 167816318,
+      "incremental_work": 17603853,
+      "cap": 20000000,
+      "zero_cap_refusal": true
+    },
+    "scope": "Declared logical work includes conservative RREF/scan and transitions; not bit clock. Opt-in trellis_budget=0 default; full dispatcher replay pending. Source order supplied, no universal low-crossing-width guarantee."
+  },
+  "S1": {
+    "seed": 3692844,
+    "fixtures": 512,
+    "boolean_points": 10716,
+    "sufficient": 363,
+    "obstructed": 149,
+    "kernel_witnesses": 4374,
+    "adaptive_firewall": true,
+    "scope": "Linear stored state and fixed read-set criterion only. Difference realization uses two Boolean lifts; need not hold at an arbitrary given lift or under adaptive read sets."
+  },
+  "R1": {
+    "seed": 3692845,
+    "programs": 256,
+    "endpoints": 1024,
+    "raw": 84009,
+    "jumps": 2168,
+    "exits": 6605,
+    "halts": 395,
+    "huge": {
+      "raw": "86461353570082943257819734317025136881640218343356168133377718",
+      "jumps": 8,
+      "exits": 10,
+      "fractions": 58
+    },
+    "scope": "Independent grouped normalized five-lane phase runner vs literal original sparse priority and source_next. Large case against previous verified guarded-block runner. Native repeat and emitted divisor premises written; complete native instruction and prime realization/standard-machine clock pending."
+  },
+  "execution": {
+    "batch_timeout_seconds": 90,
+    "all_four_new_script_blobs_match": true,
+    "dependency_scope": "Existing local donor copies including RREF shim from earlier transcriptions; not full checkout",
+    "full_checkout": false,
+    "native_agda": false,
+    "native_lean": false,
+    "ci": false,
+    "universal_P0_closed": false
+  }
+}
