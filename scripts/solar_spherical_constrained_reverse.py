@@ -50,14 +50,17 @@ def reverse_constrained(material,cfg,design):
                           (np.zeros_like(template_h),template_l)):
                 j=campaign_jvp(material,cc,dh,dl)
                 grads.append(j['dcampaign_net_J'])
-                rest_grads.append([float(np.sum((v-u)*dv))/max(np.linalg.norm(v-u),1e-30)
+                rest_grads.append([2*float(np.sum((v-u)*dv))
                     for v,u,dv in zip(base['endpoint'],original,j['endpoint_jvp'])])
-            res=np.array([np.linalg.norm(v-u)/allowances[i] for i,(v,u) in
-                enumerate(zip(base['endpoint'],original))])
-            jac=np.array(rest_grads,dtype=float).T/np.asarray(allowances)[:,None]
+            # Smooth squared original-state return contract. The norm's
+            # gradient is undefined at exact restoration and must not be
+            # silently replaced by zero using an arbitrary denominator.
+            res=np.array([float(np.sum((v-u)**2))/allowances[i]**2
+                for i,(v,u) in enumerate(zip(base['endpoint'],original))])
+            jac=np.array(rest_grads,dtype=float).T/np.asarray(allowances)[:,None]**2
             out=dict(ok=True,net=float(base['campaign_net_J']),
-                gradient=np.asarray(grads,float),restoration_ratio=res,
-                restoration_jacobian=jac,config=cc)
+                gradient=np.asarray(grads,float),restoration_squared_ratio=res,
+                restoration_squared_jacobian=jac,config=cc)
         except (AssertionError,ValueError,FloatingPointError,np.linalg.LinAlgError) as ex:
             out=dict(ok=False,error=type(ex).__name__+': '+str(ex))
         memo[key]=out
@@ -71,9 +74,9 @@ def reverse_constrained(material,cfg,design):
             e=evaluate(z)
             return -e['gradient'] if e['ok'] else np.zeros(2)
         cons=[dict(type='ineq',
-                   fun=lambda z,i=i: 1.-evaluate(z)['restoration_ratio'][i]
+                   fun=lambda z,i=i: 1.-evaluate(z)['restoration_squared_ratio'][i]
                         if evaluate(z)['ok'] else -1e15,
-                   jac=lambda z,i=i: -evaluate(z)['restoration_jacobian'][i]
+                   jac=lambda z,i=i: -evaluate(z)['restoration_squared_jacobian'][i]
                         if evaluate(z)['ok'] else np.zeros(2)) for i in range(4)]
         candidates=[]
         for seed in ((0.,0.),(0.,1.),(1.,0.),(1.,1.)):
