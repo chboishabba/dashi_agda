@@ -11,7 +11,7 @@ from check_pnp_f3_normal_fold import normal_contrast
 from check_pnp_dual_syndrome_fourier import dual_contrast
 from check_pnp_quadratic_phase import structured_contrast
 from check_pnp_mobius_character import mobius_contrast
-from check_pnp_mobius_prefix import prefix_contrast
+from check_pnp_mobius_prefix import prefix_portfolio
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -141,7 +141,7 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
     # A completed prefix is exact even when the full signed intersection
     # expansion refuses. The removed mass is bounded label by label.
     if prefix_budget and any(a!=b for a,b in zip(lo,hi)):
-        cert=prefix_contrast(F,cols,target,offset,remaining,w,4096,prefix_budget)
+        cert=prefix_portfolio(F,cols,target,offset,remaining,w,4096,prefix_budget)
         if cert is not None:
             a,b,_=cert
             lo=[max(x,y) for x,y in zip(lo,a)];hi=[min(x,y) for x,y in zip(hi,b)]
