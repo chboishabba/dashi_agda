@@ -116,3 +116,72 @@ def reverse_constrained(material,cfg,design):
                 sampled_advantage_J=gap,derivative_evaluations=calls,
                 strongest_passive_certified=False,global_optimum_certified=False,
                 physical_admission=False)
+
+def quadratic_ray_seeds(net,returns,smax,target=0.):
+    """Bidi solve of the coefficient polynomial; candidates only, no remainder bound.
+    net and each normalized return polynomial use ascending coefficients.
+    """
+    if not np.isfinite(smax) or smax<=0: raise ValueError('positive finite ray interval required')
+    net=np.asarray(net,float); returns=np.asarray(returns,float)
+    if net.shape!=(3,) or returns.shape!=(4,3) or not np.isfinite(net).all() or not np.isfinite(returns).all():
+        raise ValueError('invalid quadratic residual fibre')
+    cuts={0.,float(smax)}
+    def roots(c):
+        for z in np.polynomial.polynomial.polyroots(c):
+            if abs(z.imag)<=1e-10 and 0<=z.real<=smax: cuts.add(float(z.real))
+    for row in returns: roots(row-np.array([1.,0.,0.]))
+    roots(net-np.array([target,0.,0.]))
+    if net[2]!=0:
+        z=-net[1]/(2*net[2])
+        if 0<z<smax: cuts.add(float(z))
+    points=sorted(cuts)
+    probes=sorted(set(points+[(a+b)/2 for a,b in zip(points,points[1:])]))
+    def score(s): return float(np.polynomial.polynomial.polyval(s,net))
+    def residual(s): return np.array([np.polynomial.polynomial.polyval(s,row) for row in returns])
+    return sorted([dict(s=s,predicted_net_J=score(s),predicted_return=residual(s).tolist(),
+        predicted_target_residual_J=score(s)-target) for s in probes],
+        key=lambda z:(max(z['predicted_return'])<=1.,z['predicted_net_J']),reverse=True)
+
+def reverse_quadratic_ray(material,cfg,dheating,dload,design,target_J=0.,smax=1.):
+    """Use native signed jet to propose control rays and replay actual campaign.
+    Same budget throughout. Taylor feasibility is never terminal feasibility.
+    """
+    cc=dict(cfg,common_stage_atlas=True,fixed_horizon=True)
+    h=np.asarray(cc['heating_W'],float); l=np.asarray(cc['load_rate_s_inv'],float)
+    dh=np.asarray(dheating,float); dl=np.asarray(dload,float)
+    dt=cc['period_s']/len(cc['incident_sqrt_W'])
+    if h.shape!=dh.shape or l.shape!=dl.shape: raise ValueError('ray shape mismatch')
+    for s in (0.,smax):
+        H=h+s*s*dh; L=l+s*s*dl
+        if np.any(H<0) or np.any(L<0) or dt*cc['max_cycles']*H.sum()>design['heating_budget_J'] or L.sum()>design['load_budget_s_inv']:
+            raise ValueError('ray outside shared resources')
+    if 'terminal_load_rate_s_inv' in cc:
+        term=np.asarray(cc['terminal_load_rate_s_inv'],float)
+        if term.shape!=l.shape or np.any(term<0) or term.sum()>design['load_budget_s_inv']:
+            raise ValueError('terminal load outside shared resources')
+    j=campaign_jvp(material,cc,dh,dl,quadratic_amplitude_path=True,quadratic_second_order=True)
+    end=j['endpoint']; first=j['endpoint_jvp']; second=j['endpoint_coefficient2']
+    original=(np.zeros_like(end[0]),np.asarray(material[2])*MASS/CHARGE**2,
+        np.asarray(cc['kinetics']['initial_neutral_m3']),np.zeros_like(end[3]))
+    tol=np.asarray(cc.get('return_atol',[1e-10]*4))+cc['return_rtol']*np.array([np.linalg.norm(z) for z in original])
+    if np.any(tol<=0): raise ValueError('positive return tolerances required')
+    returns=np.array([[np.sum((x-o)**2),2*np.sum((x-o)*a),
+        np.sum(a*a)+2*np.sum((x-o)*b)] for x,o,a,b in zip(end,original,first,second)])/tol[:,None]**2
+    net=[j['campaign_net_J'],j['dcampaign_net_J'],j['net_coefficient2_J']]
+    seeds=quadratic_ray_seeds(net,returns,smax,target_J)
+    # Probe backtracking points as well: the quadratic model is not certified.
+    proposals=sorted(set([0.,float(smax)]+[q['s'] for q in seeds]+[q['s']/2 for q in seeds]))
+    trials=[]; best=None
+    for s in proposals:
+        trial=dict(cc,heating_W=(h+s*s*dh).tolist(),load_rate_s_inv=(l+s*s*dl).tolist())
+        try:
+            out=cycle(material,trial)
+            score=out['strict_campaign_net_J']
+            trials.append(dict(s=s,strict_net_J=score,return_residual=out['original_return']))
+            if score is not None and (best is None or score>best[0]): best=(score,s,trial)
+        except (ValueError,AssertionError,ArithmeticError,np.linalg.LinAlgError,FloatingPointError) as exc:
+            trials.append(dict(s=s,rejected=str(exc)))
+    return dict(net_coefficients=net,return_coefficients=returns.tolist(),predicted_seeds=seeds,
+        trials=trials,restored_witness=None if best is None else dict(net_J=best[0],s=best[1],
+            target_residual_J=best[0]-target_J,four_worlds=four_worlds(material,best[2])),
+        Taylor_remainder_certified=False,global_optimum_certified=False,physical_admission=False)
