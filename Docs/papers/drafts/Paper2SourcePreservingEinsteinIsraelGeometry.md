@@ -812,3 +812,7 @@ An explicit nonzero original polarization/shape amplitude has normalized boundar
 ### BR216 selective resonant wall weighting
 
 Keeping the original rank-one resonant wall forcing while normalizing the eight nonresonant rows gives elementary orders (0^14,1^5) for every nonzero compactified damping parameter a=u²/h. Exact symbolic minors and local rank calculations establish the half-order amplitude upper bound along fixed-positive-damping rays in the selectively weighted norm, hence also in the original forcing norm. Bulk integration and physical source compatibility, curved energy and nonlinear existence remain open. See roadmap section 51.
+
+### BR217 regularized boundary lift and wall shape
+
+The selectively weighted physical glancing matrix has five singular coordinate columns, all supported on the bulk polarization coordinates. Dividing those columns by u yields an analytic full-rank lift with a selected limiting determinant proportional to a=ku². Its exact image projector retains incompatible sources, and all nine wall-shape coordinates are regular. Integrating homogeneous decaying modes normally improves the squared bulk boundary amplitude cost k/gamma to sqrt(k)/gamma^(3/2), yielding quarter-order bulk L2 amplitude loss at fixed damping, with no glancing wall-shape loss. This is a homogeneous half-collar lift, not an interior-forced or curved resolvent. Local independent exact algebra passed; see roadmap section 52.

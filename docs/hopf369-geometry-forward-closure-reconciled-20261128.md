@@ -5715,3 +5715,67 @@ Local independent reconstruction weighted.py executed twice
 with 90s caps, exit zero; final stdout in receipt. New donor
 entry adds expected assertions, unrun. Terminal stage 37.
 No CI/native/PDE acceptance.
+
+
+## 52. BR217 — explicit regularized source quotient and normal-integrated loss
+
+Actual BR216 selectively weighted polynomial matrix M(u,a),
+a=k u². In the original 19 coordinates its kernel at u=0
+for nonzero a is precisely the span of zero-based coordinate
+vectors 0,1,4,7,8. They are purely bulk polarizations:
+all nine wall-shape coordinates lie in the regular complement.
+Let E contain the other 14 identity columns, K the five
+singular columns, S=[E,K] (det=1). L=[M E,M K/u] is analytic
+at u=0. For row selector R on zero-based rows
+0,1,2,3,5,6,7,8,9,12,14,15,16,18,20,22,25,29,35,
+det(R L(0,a))=sigma*220150628352*a/390625.
+This proves uniform regularized invertibility on small u
+over compact nonzero a, without a frequency-dependent
+singular column basis. Define U=(R L)^-1 R, Pi=L U.
+Compatibility in this algebraic image is (I-Pi)f=0.
+Then v=S diag(I14,u^-1 I5) U f, retaining rather than
+discarding incompatible residuals. This is an oblique image
+projector, not a claim that its image equals the physically
+admissible inhomogeneous Bianchi/Israel source space.
+The exact sample u=(1+sigma i)/20, a=100 u², both signs,
+verified U L=I, Pi²=Pi, U Pi=U, compatible image recovery,
+and refusal of a nonzero omitted-row source. This sample is
+an algebraic complex-frequency check, not exactly the fixed
+imaginary-frequency damped ray. Since K has zero shape
+rows, ||m|| <= C||f|| with no u^-1 factor, whereas the bulk
+boundary amplitude has ||v_bulk|| <= C|u|^-1||f||.
+Here f is the selectively weighted original boundary source,
+including the analytic denominator d^4; its norm is bounded
+by the original source norm for k>=1 in fixed Gram norms.
+
+For the actual decaying homogeneous physical branches on
+two half-collars, let lambda=sqrt(gamma²+2 sigma i gamma k)
+with positive real part. Original field traces are
+N/d^4 (a_bulk+b_bulk) and F N/d^4 (a_bulk-b_bulk).
+Using F^* G F=G and the parallelogram identity, the sum of
+squared bulk L2 normal norms on half-lines equals
+(||N a_bulk/d^4||_G²+||N b_bulk/d^4||_G²)/Re lambda.
+Finite flat collars give at most this quantity. At fixed
+damping gamma>0, Re lambda>=sqrt(gamma k), and
+|u|^-2=(k/gamma) sqrt(4+(gamma/k)²).
+Hence for k>=gamma and sufficiently large k the squared
+homogeneous bulk L2 contribution is bounded by
+C sqrt(k)/gamma^(3/2) ||f||², i.e. bulk amplitude L2 cost
+k^(1/4)/gamma^(3/4), while wall shape has no glancing
+frequency loss. C is locally uniform for compact positive
+damping, not asserted uniform as gamma approaches zero.
+This is a homogeneous stable-mode boundary lifting estimate,
+not a forced bulk resolvent or finite-collar transmission
+solution. Need source-compatible interior particular lift,
+physical boundary/corner admissibility, glancing/non-glancing
+partition and variable-coefficient estimates; BR210 trace
+and BR209/137 energy still require the actual bulk norm bounds.
+Other lanes unchanged, W0-W7 not closed.
+
+Local execution: independent original BR27/175 carrier,
+SymPy 1.14.0, timeout 90. Initial structural complex equality
+failed; exact cancellation comparison corrected it and both
+signs passed, exit 0. Local script blob e54df0b7235b98fca6b618529bcbe42af3923c56
+includes independent driver, while committed entry uses
+original donor import and has not been replayed. No CI/native/
+PDE theorem acceptance. Terminal stage 38.

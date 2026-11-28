@@ -211,6 +211,8 @@ PARTS["terminal"].append(("BR215.damped_scale","check_hopf369_br215_damped_scale
 
 PARTS["terminal"].append(("BR216.selective_wall_weight","check_hopf369_br216_selective_wall_weight.py",()))
 
+PARTS["terminal"].append(("BR217.regularized_inverse","check_hopf369_br217_regularized_inverse.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
