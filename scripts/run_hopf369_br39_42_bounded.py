@@ -191,6 +191,8 @@ PARTS["terminal"].append(("BR204.boost_null","check_hopf369_br204_boost_null.py"
 
 PARTS["terminal"].append(("BR205.wall_lorentz","check_hopf369_br205_wall_lorentz.py",()))
 
+PARTS["terminal"].append(("BR207.moving_normal","check_hopf369_br207_moving_normal.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

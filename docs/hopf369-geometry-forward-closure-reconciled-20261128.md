@@ -5414,3 +5414,26 @@ ran in container with SymPy 1.14.0: all six generator cases exit 0,
 90s cap; scalar test exit 0. Committed donor-import entry point
 unrun. Receipt records actual outputs; no full runner/native/CI
 acceptance. Terminal stage 27 registered.
+
+
+## 42. BR207 — ambient moving-normal Israel jump
+
+Original BR27/175 jump has ambient covariant tensor expression
+J_n(M)=-g wedge M+3(n tensor n) wedge M, with unit spacelike
+conormal n and tracefree symmetric M tangent to n. For metric-
+preserving frame generator K, dn=Kn, dM=KM+MK^T, dN=dn n^T+n dn^T.
+The actual derivative dJ=-g wedge dM+3 dN wedge M+3 N wedge dM
+agrees columnwise with the original bulk induced generator Omega J.
+Reflection r_n=I-2 n n^T eta; its bivector-square derivative yields
+dF=[Omega,F], dF F+F dF=0, dF J+F dJ=dJ.
+Verified four normal-changing generators (one boost, three rotations)
+and all nine original jump columns each, with independent reconstructed
+BR27/175 carrier, SymPy 1.14.0, local timeout 90s, exit 0.
+This extends BR205 to transported wall normal and shape at a point;
+not an actual spacetime moving wall solution or differentiated flux
+estimate. In particular the observer and normal deformation of the
+energy flux must be evaluated together, not assume fixed positive
+Gram is Lorentz invariant. BR139/150 trace estimate and actual
+Hamilton flow, W0-W7 remain. Other lanes unchanged.
+Terminal stage 28 registered; full donor entry and runner unrun.
+No CI/native/PDE acceptance.
