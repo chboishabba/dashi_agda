@@ -35,10 +35,11 @@ def load(path,upstream,src):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds'])
+    p.add_argument('stage',choices=['seven','metric','mediator','static','inverse','preflight','nonlinear','tangent','block','assemble','delay','delay-run','span','span-full','delay-tangent','delay-action','reciprocal','history-block','history-assemble','history-leaf','static-leaf','history-bounds','history-certify','history-cert-assemble'])
     p.add_argument('--work',required=True);p.add_argument('--tol',type=float,default=1e-7)
     p.add_argument('--perturb',type=float,default=0.);p.add_argument('--periods',type=int,default=1)
     p.add_argument('--start',type=int);p.add_argument('--stop',type=int);p.add_argument('--delay',type=float,default=.01)
+    p.add_argument('--degree',type=int,default=8)
     p.add_argument('--export-trace',action='store_true')
     p.add_argument('--knots',type=int,default=4)
     p.add_argument('--exact-null',action='store_true');x=p.parse_args()
@@ -81,6 +82,44 @@ def main():
     elif x.stage=='history-leaf':
         from solar_steelman_history_leaf import construct
         construct(m,a,x.delay)
+    elif x.stage in ('history-certify','history-cert-assemble'):
+        from solar_steelman_history_trace_certificate import certify
+        from solar_steelman_history_clock import aggregate
+        prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
+        def verify_block(path):
+            meta=dict(upstream=up,sources=src,tol=x.tol,delay=x.delay,knots=x.knots)
+            if json.loads(path.with_suffix('.json').read_text())!=dict(meta,sha=sha(path)):
+                raise ValueError('block provenance mismatch')
+            trace=path.with_name(path.stem+'_trace.npz')
+            if json.loads(trace.with_suffix('.json').read_text())!=dict(meta,sha=sha(trace),block=sha(path)):
+                raise ValueError('trace provenance mismatch')
+            return trace,dict(meta,block=sha(path),trace=sha(trace),degree=x.degree)
+        if x.stage=='history-certify':
+            if x.start is None or x.stop is None:raise ValueError('column bounds required')
+            path=work/f'{prefix}_{x.start:04d}_{x.stop:04d}.npz'
+            trace,provenance=verify_block(path)
+            z=certify(m,a,trace,x.degree,block_path=path)
+            out=path.with_name(path.stem+f'_cert{x.degree}.pkl')
+            save(out,z,provenance,src)
+            print('conditional rational-time block certificate written',out,flush=True)
+        else:
+            paths=sorted(p for p in work.glob(prefix+'_*.npz') if not p.name.endswith(('_leaf.npz','_trace.npz')))
+            if not paths:raise ValueError('missing blocks')
+            records=[];clocks=set();spacings=set();matrices=[]
+            for path in paths:
+                trace,provenance=verify_block(path)
+                z=load(path.with_name(path.stem+f'_cert{x.degree}.pkl'),provenance,src)
+                with np.load(path,allow_pickle=False) as f:
+                    assert int(f['start'])==z['start'] and int(f['stop'])==z['stop']
+                    matrices.append((z['start'],f['M']))
+                records.append((z['start'],z['stop'],z['state_matrix_error'],z['history_matrix_error']))
+                clocks.add((z['T'],z['delay']));spacings.add(z['spacing'])
+            assert len(clocks)==len(spacings)==1
+            M=np.column_stack([v for _,v in sorted(matrices,key=lambda z:z[0])])
+            assert M.shape[0]==M.shape[1]
+            cap=aggregate(records,M.shape[0])
+            save(work/f'{prefix}_cert{x.degree}_aggregate.pkl',dict(matrix=M,errors=cap,clock=next(iter(clocks)),spacing=next(iter(spacings)),records=records),up,src)
+            print('conditional rational-time complete block error ledger; exact-period/leaf projection/contraction not yet certified',flush=True)
     elif x.stage in ('history-block','history-assemble'):
         from solar_steelman_history_section import block,assemble
         prefix=f'H_{x.delay:.12g}_{x.knots}_{x.tol:.12g}'
