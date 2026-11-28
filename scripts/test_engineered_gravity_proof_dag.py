@@ -17,15 +17,17 @@ def main():
         p=root/owner;p.parent.mkdir(parents=True);p.write_text("print('PASS symbolically')\n")
         accepted=audit(original,root)["A_shielding"]
         assert len(accepted["owners"][owner])==64 and accepted["status"]=="OPEN"
-    for which in ("fake_stage","fake_lane","no_owner","repeat_weld"):
+    for which in ("fake_stage","fake_lane","no_owner","repeat_weld","w1_physical_promotion","w1_bad_lane"):
         m=copy.deepcopy(original)
         if which=="fake_stage":m["lanes"]["A_shielding"]["unpaid_stages"].append("PROMOTED")
         elif which=="fake_lane":m["lanes"]["Fake_closure"]={}
         elif which=="no_owner":m["lanes"]["A_shielding"]["owner"]=[]
-        else:m["cross_lane_shared_welds"]["ward_source"].append("A_shielding")
+        elif which=="repeat_weld":m["cross_lane_shared_welds"]["ward_source"].append("A_shielding")
+        elif which=="w1_physical_promotion":m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["physical_paid"]=True
+        else:m["w1_source_boundary_welds"]["tov_mass_traction_israel"]["lanes"].append("nonexistent_lane")
         try:audit(m)
         except (AssertionError,KeyError):pass
         else:raise AssertionError("admitted "+which)
-    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 4 malformed-claim controls")
+    print("PASS 12 lanes, 36 unpaid results, source presence nonpromotion, 6 malformed-claim controls")
 
 if __name__=="__main__":main()
