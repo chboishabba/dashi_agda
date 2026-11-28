@@ -98,7 +98,7 @@ sheetDisjoint q r h =
           (trans (cong H.total h)
             (trans (oddTotal r)
               (solve 1 (λ x → con (+ 4) :* x :+ con (+ 2)
-                := con (+ 2) :* (con (+ 2) :* x :+ con (+ 1))) refl (H.a r))))))))
+                := con (+ 2) :* (con (+ 2) :* x :+ con (+ 1))) refl (H.a r)))))))
 
 evenInject : ∀ {q r} → H.halfEven q ≡ H.halfEven r → q ≡ r
 evenInject {H.quad j u v w} {H.quad j' u' v' w'} h =
