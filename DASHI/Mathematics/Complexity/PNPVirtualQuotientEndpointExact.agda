@@ -3,7 +3,7 @@ module DASHI.Mathematics.Complexity.PNPVirtualQuotientEndpointExact where
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
@@ -17,6 +17,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.StandardMachineSimulationExact as RunTools
 import DASHI.Mathematics.Complexity.RecursiveHyperfabricQuotientExact as Q
+import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact as Virtual
+import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
 
 -- Existing master owner already turns the exact same-object opposite
 -- endpoint into SAT failure. Do not make another Cook semantic premise.
@@ -47,14 +49,8 @@ module OnTarget {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     { Fixed.fixed = fixed
     ; Fixed.finish = finish
     ; Fixed.execution = run
-    ; Fixed.endpointDecisionExact = trans (symClosed q finish) flip
+    ; Fixed.endpointDecisionExact = trans (sym (Q.closed q finish)) flip
     }
-    where
-      symClosed : ∀ {K : Set} {g : K → Bool}
-        (q : Q.QuotientStep Config K Bool observe g) (x : Config) →
-        observe x ≡ g (Q.contract q x)
-      symClosed q x with Q.closed q x
-      ... | refl = refl
 
   failureFromExactRun : ∀ {K : Set} {g : K → Bool}
     (q : Q.QuotientStep Config K Bool observe g)
@@ -71,3 +67,36 @@ module OnTarget {cost : PR.PolynomialCostModel Cook.BooleanFormula}
 -- Existing VirtualQuotationFrontierExact.virtualRunToTargetRun supplies
 -- the literal run for an inhabited virtual simulation; exact same-object
 -- setup/resume/suffix and horizon equality remain producer obligations.
+
+-- Attach directly to the existing virtual compiler, whose generator and
+-- simulated candidate already live on the SAME coded fixed target.
+module FromVirtual {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+  {candidate : Direct.PolynomialSATDeciderCandidate cost}
+  {clocked : Clocked.PolynomiallyClockedStandardCandidate candidate}
+  (compilation : Virtual.VirtualSelfQuotationCompilation clocked) where
+
+  module T = OnTarget (Virtual.fixedOfVirtualCompilation compilation)
+  sim = Virtual.candidateSimulation compilation
+  simSteps = Virtual.virtualRunTargetSteps sim
+
+  actualFailure : ∀ {K : Set} {g : K → Bool} {setup suffix : Nat}
+    (q : Q.QuotientStep T.Config K Bool T.observe g)
+    (finish : T.Config) →
+    Run.StandardExactRun T.machine setup T.start
+      (Virtual.candidateTargetStart compilation) →
+    Run.StandardExactRun T.machine suffix
+      (Virtual.candidateTargetFinish compilation) finish →
+    ((setup + simSteps) + suffix) ≡
+      Fixed.steps (Virtual.fixedOfVirtualCompilation compilation) →
+    g (Q.contract q finish) ≡ Opposite.notBool
+      (Direct.decide candidate
+        (Fixed.fixedCookFormula (Virtual.fixedOfVirtualCompilation compilation))) →
+    Direct.SATDecisionFailure candidate
+  actualFailure q finish first last fits flip =
+    T.failureFromExactRun q finish
+      (RunTools.transportRunSteps fits
+        (RunTools.appendThreeExactRuns first
+          (Virtual.virtualRunToTargetRun sim) last)) flip
+
+-- This receiver uses equality, not a bare <=; any padding needed to
+-- inhabit the exact guarded horizon must be an actual suffix run.
