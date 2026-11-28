@@ -9,6 +9,15 @@ Status: live analytic manuscript draft; conditional; non-promoting
 
 
 
+
+## Current proof state — 28 November 2026, cross-Clay P0 (Section 14)
+
+The periodic construction now has a source-written joint energy–dissipation inequality on the same modal subsequence (Lean #123, `c778a128d53d`): both positive sums are summable and their combined budget is the original initial energy. The exact weighted nonlinear commutator uses the physical energy involution (p,q) ↦ (−p,p+q), retaining the signed weight difference w(p+q)−w(q) (`80d388848b36`). This is not a uniform bound for the critical signed time integral; the prior counterexamples remain operative. Whole-space localization and measure transport, physical-space limit reconstruction, and critical continuation remain open.
+
+For C/D the pinned original forced-source declarations were reopened and all five audited source/toolchain blobs matched; the local admission runner now requires fresh isolated terminal kernel replay (`492a87dc3f44`). No replay occurred here. The unforced branch has the literal five-channel interval margin compiler (`ac8438c1f43f`), conditional on actual profile-derived intervals and Hardy/cover bounds. No nonzero physical profile or certificate is supplied by that compiler. These alternatives must not be conflated with an unconditional regularity proof.
+
+All new Lean bodies remain pending native elaboration. Exact local algebraic controls are recorded in the consolidated [P0 roadmap, Section 14](../../roadmaps/Clay369RichCarrierGeometryForwardEndpointMaxCut20261128.md).
+
 ## Current proof state — 28 November 2026 (periodic modal limit and N2e)
 
 Supersedes the earlier prospective compactness paragraph. Lean #123 now has source-written simultaneous modal extraction, actual original initial projection and integrated strong Fourier convergence. The compact countable product of Arzelà–Ascoli closures on [0,T] gives one strictly increasing cutoff subsequence with uniform convergence of each fixed complex Fourier coordinate. The actual energy identity supplies all finite-subset mass/dissipation bounds, and the limit inherits initial data, zero mean, reality and transversality. The finite-prefix/tail theorem proves summability of the modal squared error integrals and convergence of their sum to zero.
