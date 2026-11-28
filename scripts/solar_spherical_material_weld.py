@@ -9,7 +9,11 @@ from solar_spherical_whitney import shell_mesh,whitney,normalized
 from solar_metric_cochain_weld import metric_curl
 from solar_physical_cone import timed_step
 
-def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
+from functools import lru_cache
+
+@lru_cache(maxsize=12)
+def _prepared_static_geometry(radii,level,cell_owner,volumes):
+    """Invariant signed cochain and reciprocal Whitney map, one per mesh."""
     xyz,s,m,d= shell_mesh(radii,level)
     E,B,V=whitney(xyz,s,m)
     # Positive diagonal scaling, not row sums (signed bases).
@@ -28,6 +32,18 @@ def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
         for i,j in combinations(range(4),2):
             W[m[1][(tet[i],tet[j])],3*o:3*o+3]+=v*(g[j]-g[i])/4
     assert np.allclose(actual,vol,rtol=1e-9,atol=0)
+    # Exact metric discrepancy on the identical unnormalized cochains.
+    ref,LE,LB=normalized(d,E,B)
+    T=np.block([[LE.T/np.sqrt(me)[None,:],np.zeros((ne,nf))],
+                [np.zeros((nf,ne)),LB.T/np.sqrt(mb)[None,:]]])
+    defect=T@K-ref@T
+    return (K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol)
+
+def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
+    K,me,mb,W,ref,T,defect,d,xyz,s,owners,vol=_prepared_static_geometry(
+        tuple(float(v) for v in radii),int(level),
+        tuple(int(v) for v in cell_owner),tuple(float(v) for v in volumes))
+    ne=len(me); nf=len(mb); n=len(vol)
     # xJ = sqrt(V/D) J; reciprocal force uses identical integrated basis.
     Ds=np.asarray(Dspecies,float); nu=np.asarray(nu,float); gyro=np.asarray(gyro,float); axis=np.asarray(axis,float)
     assert Ds.shape==nu.shape==gyro.shape==(n,3) and np.all(Ds>=0) and np.all(nu>=0)
@@ -43,11 +59,6 @@ def construct(radii,level,cell_owner,volumes,Dspecies,nu,gyro,axis):
             A[sl,sl]=-gyro[o,j]*cross if Ds[o,j]>0 else 0
             loss[sl]=nu[o,j] if Ds[o,j]>0 else 0
     assert np.array_equal(A,-A.T)
-    # Exact metric discrepancy on the identical unnormalized cochains.
-    ref,LE,LB=normalized(d,E,B)
-    T=np.block([[LE.T/np.sqrt(me)[None,:],np.zeros((ne,nf))],
-                [np.zeros((nf,ne)),LB.T/np.sqrt(mb)[None,:]]])
-    defect=T@K-ref@T
     return dict(generator=A-np.diag(loss),exchange=A,loss=np.diag(loss),reference=ref,
                 metric_transport=T,metric_defect=defect,incidence=d,positions=xyz,
                 simplices=s,owners=owners,material_map=W,energy_masses=(me,mb),
