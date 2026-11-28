@@ -915,3 +915,106 @@ module At {r : Level} (F : C.RealField r)
   -- Gaussian reference scalar collar: chi=1 and d_n chi=0 on n=0.
   -- The actual cutoffs and their supported weighted chart domain remain
   -- user-supplied jets. No artificial source profile is assumed.
+
+  ------------------------------------------------------------------------
+  -- BR40b: DIFFERENTIATED PHYSICAL SOURCE ROWS.
+  -- Actual BR34 rows are homogeneous linear in their endpoint field
+  -- jets and affine-linear in the background j,q (without j*q terms).
+  -- The time derivative must retain both field and background jets.
+  ------------------------------------------------------------------------
+
+  zeroQ : Vec
+  zeroQ _ = O
+
+  rowAdd rowSub : List S → List S → List S
+  rowAdd [] [] = []
+  rowAdd (a ∷ as) (b ∷ bs) = (a + b) ∷ rowAdd as bs
+  rowAdd [] (_ ∷ _) = []
+  rowAdd (_ ∷ _) [] = []
+  rowSub [] [] = []
+  rowSub (a ∷ as) (b ∷ bs) = (a - b) ∷ rowSub as bs
+  rowSub [] (_ ∷ _) = []
+  rowSub (_ ∷ _) [] = []
+
+  -- ∂_t metricRows(j,q;U) =
+  -- metricRows(j,q;U_t) +
+  -- metricRows(j_t,q_t;U) - metricRows(0,0;U).
+  -- Source-side construction; an analytic time-derivative theorem still
+  -- needs the true variable Einstein-Israel coefficient dependence.
+  metricBackgroundDerivative : Allocation → S → Vec →
+    Tensor → Tensor → Tensor → Tensor → List S
+  metricBackgroundDerivative a dj dq p px m mx =
+    rowSub (metricRows a dj dq p px m mx)
+           (metricRows a O zeroQ p px m mx)
+
+  metricTimeRows : Allocation → S → Vec → S → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor → List S
+  metricTimeRows a j q dj dq p px m mx pt pxt mt mxt =
+    rowAdd (metricRows a j q pt pxt mt mxt)
+           (metricBackgroundDerivative a dj dq p px m mx)
+
+  gaugeBackgroundDerivative : Allocation → S → Vec →
+    Cov → Cov → Cov → Cov → List S
+  gaugeBackgroundDerivative a dj dq p px m mx =
+    rowSub (gaugeRows a dj dq p px m mx)
+           (gaugeRows a O zeroQ p px m mx)
+
+  gaugeTimeRows : Allocation → S → Vec → S → Vec →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov → List S
+  gaugeTimeRows a j q dj dq p px m mx pt pxt mt mxt =
+    rowAdd (gaugeRows a j q pt pxt mt mxt)
+           (gaugeBackgroundDerivative a dj dq p px m mx)
+
+  -- The physical mean force is the LAST ROW of BOTH differentiated
+  -- metric allocations, including the derivative of the background k.
+  metricTimeMeanForce : S → Vec → S → Vec →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor → S
+  metricTimeMeanForce j q dj dq p px m mx pt pxt mt mxt =
+    tau (half * j) q pt pxt
+    + tau (neg (half * j)) q mt mxt
+    + half * dj * (neg (four * scale p) + four * scale m)
+    - dot dq (beta p)
+    - dot dq (beta m)
+
+  -- General nonzero mean extrinsic curvature: differentiate the actual
+  -- coordinate Codazzi jump. The mean and its time derivative are
+  -- INDEPENDENT input tensors; never set M_t=0 as a flat shortcut.
+  coordinateCodazziTime : S → S →
+    (Wall → Wall → S) → (Wall → Wall → S) →
+    Vec → Vec →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov → Vec
+  coordinateCodazziTime j dj M Mt q qt p px m mx pt pxt mt mxt a =
+    coordinateCodazzi j M q pt pxt mt mxt a
+    + coordinateCodazzi dj Mt qt p px m mx a
+    - coordinateCodazzi O (λ _ _ → O) zeroQ p px m mx a
+
+  -- A nonzero reduced source or differentiated wall geometry belongs in
+  -- the forcing, not silently in the homogeneous BR34 boundary matrix.
+  record DifferentiatedPhysicalForcing : Set r where
+    constructor differentiatedPhysicalForcing
+    field
+      metricDTime metricETime : List S
+      gaugeDTime gaugeETime : List S
+      meanTime : S
+      meanCodazziTime : Vec
+  open DifferentiatedPhysicalForcing public
+
+  physicalTimeForcing : S → Vec → S → Vec →
+    (Wall → Wall → S) → (Wall → Wall → S) →
+    Tensor → Tensor → Tensor → Tensor →
+    Tensor → Tensor → Tensor → Tensor →
+    Cov → Cov → Cov → Cov →
+    Cov → Cov → Cov → Cov → DifferentiatedPhysicalForcing
+  physicalTimeForcing j q dj dq M Mt p px m mx pt pxt mt mxt
+                      c cx d dx ct cxt dt dxt =
+    differentiatedPhysicalForcing
+      (metricTimeRows D j q dj dq p px m mx pt pxt mt mxt)
+      (metricTimeRows E j q dj dq p px m mx pt pxt mt mxt)
+      (gaugeTimeRows D j q dj dq c cx d dx ct cxt dt dxt)
+      (gaugeTimeRows E j q dj dq c cx d dx ct cxt dt dxt)
+      (metricTimeMeanForce j q dj dq p px m mx pt pxt mt mxt)
+      (coordinateCodazziTime j dj M Mt q dq c cx d dx ct cxt dt dxt)
