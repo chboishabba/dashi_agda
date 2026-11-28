@@ -75,7 +75,8 @@ def original(cells=64,final=1.045):
     dt=time[1]-time[0]
     h_tt_time=(3*Ht[-1]-4*Ht[-2]+Ht[-3])/(2*dt)
     defect=h_tt_pde-h_tt_time
-    assert np.all(np.isfinite(defect))
+    char_defect=wave_acceleration(final,k,H[-1],Ht[-1],hn,hnn_from_V)-h_tt_time
+    assert np.all(np.isfinite(defect)) and np.all(np.isfinite(char_defect))
     assert abs(H[-1,0])+abs(Ht[-1,0])+abs(Hnn[0])<1e-12
     return {'cells':cells,'t':final,'k':k.tolist(),
             'normal2':Hnn.tolist(),'normal2_from_characteristic':hnn_from_V.tolist(),
@@ -83,15 +84,19 @@ def original(cells=64,final=1.045):
             'interior_hn_minus_V_max':interior_constraint,
             'pde_time_defect':defect.tolist(),
             'max_defect':float(np.max(abs(defect))),
+            'characteristic_wave_defect':char_defect.tolist(),
+            'characteristic_max_defect':float(np.max(abs(char_defect))),
             'source_wall_hn':hn.tolist()}
 
 
 def run():
     exact()
-    a=original(64);b=original(128)
-    print('ORIGINAL first-order GN normal-jet comparison:',a,b,flush=True)
+    a=original(64);b=original(128);c=original(256)
+    print('ORIGINAL first-order GN normal-jet comparison:',a,b,c,flush=True)
+    print('characteristic wave residuals [64,128,256]:',
+          [r['characteristic_max_defect'] for r in (a,b,c)],flush=True)
     print('NOT CERTIFIED: this checks only Hnn numerical and Htt residual; derivatives through N2_5 not admitted')
-    return a,b
+    return a,b,c
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--original',action='store_true')
