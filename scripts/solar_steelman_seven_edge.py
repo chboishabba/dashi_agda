@@ -85,4 +85,5 @@ def run():
     # Reciprocal work uses the same enriched map and its transpose.
     print('minimal enrichment',len(piv),'Whitney edge basis indices',piv,'rank',Wplus.rank(),flush=True)
     print('PASS exact enriched material injection, charge continuity, fixed-source matching; physical constitutive admission open')
+    return dict(M=M,N=N,G=G,C=C,D=D,T=T,W=W,Wplus=Wplus,piv=piv,cols=cols,high=high,low=low,mid=mid,inner=inner)
 if __name__=='__main__':run()
