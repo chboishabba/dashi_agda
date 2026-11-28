@@ -69,3 +69,25 @@ def reopen(P,x,target=()):
     if entry is None:return None
     d,N=entry;p=dict(zip(D,d))
     return tuple(p.get(i,b) for i,b in enumerate(x)),N
+
+def histogram(F,cols,target,offset,R,cap,interior_width=24):
+    """Exact original signed observer; extra image coordinate is the label."""
+    R=tuple(sorted(R));n=len(cols);target=tuple(target)
+    if not R:
+        return ((0,0,0) if () in F or any(target) else tuple(int(d==offset%3) for d in range(3))),dict(work=0,rank=0)
+    if () in F:return (0,0,0),dict(work=0,rank=0)
+    rows=tuple(tuple(c[j] for c in cols) for j in range(len(target)+1))
+    P,w=project(F,n,R,cap,rows,boundary_width=0,interior_width=interior_width)
+    if P is None:return None,dict(work=w)
+    assert not P['S'] and not P['G']
+    H=[]
+    for d in range(3):
+        k=P['image'].encode(target+((d-offset)%3,));entry=P['table'].get(((),k))
+        H.append(entry[1] if entry is not None else 0)
+    return tuple(H),dict(work=w,rank=P['rank'],peak=P['peak'],probes=P['probes'])
+
+def contrast(F,cols,target,offset,R,w,cap,interior_width=24):
+    H,stats=histogram(F,cols,target,offset,R,cap,interior_width)
+    if H is None:return None
+    a=tuple(w*(3*h-sum(H)) for h in H)
+    return a,a,dict(stats,head=H)
