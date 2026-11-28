@@ -2376,3 +2376,34 @@ At the adapted wall point with g=eta5, n=unit normal, tangential graph gradient 
 The transport retains all tangential, tangent-normal and normal-normal entries. The independent good unknown `Q_material=Q_coordinate-f D_n Q_reference` remains reversible when the reference normal source is kept: no chart/graph projection claims losslessness without retaining f and the original normal jet. The linearized BR34 Israel rows and the full material 15-tensor are not declared identical; to establish physical non-linear boundary well-posedness, a source-specific full variable Fréchet linearisation and compatibility proof still must connect them.
 
 The BR40 checker gained `--part graph` verifying the original nonlinear defining-function derivative, all 15 symmetric entries and original good-unknown BIDI. This test and the prior `--part time|trace|subsidiary` remain committed but unexecuted; full Weyl projector original-carrier check remains isolated `--part physical` in the separate BR40e checker. Next run requests should use 90-second independent parts and checkpoint receipts rather than CI. A passing algebraic test is not a continuum estimate or a native kernel theorem.
+
+
+## BR41a/b — signed Israel energy budget and two-sided normal holonomy coercivity (source constructed)
+
+Actual source owner `DASHI/Physics/Foundations/Hopf369WarpedPhysicalBoundaryExact.agda` now exports `PhysicalWallWorkSources`, `assemblePhysicalWallWorkSources`, `NormalHolonomyMoments`, `NormalHolonomyResponse`, and `solveNormalHolonomy`. These consume BR40d's original physical signed `israelWallWork`, `longitudinalWallWork`, `scaleWallWork`, and `physicalNormalWork`; they retain `unallocatedPower` as an explicit residual. The normal holonomy solver takes reciprocal witnesses for both positive integral denominators; it retains the original scalar and vector moments. It does not assert complex-bilinear wall work is positive, does not hide the original zero mode, and does not claim a global curvature-to-metric inverse.
+
+Exact physical Israel work in BR40d, for **real physical traces** V, J, longitudinal q,d=[beta], ell=l++l-, eta=diag(-1,+1,+1,+1):
+```
+ W_phys = <V,J>_eta + <V,q d^T + d q^T>_eta + j ell tr_eta(V).
+```
+Let Q=q d^T+d q^T, S=j ell eta, Z=J+Q+S, ||.|| the positive real 16-entry Euclidean Frobenius norm. Because Lorentzian signs in <V,Z>_eta have magnitude 1, the exact square identity yields for every epsilon>0:
+```
+  2 epsilon |W_phys|
+    <= epsilon² ||V||² + 3 (||J||² + 4||q||²||d||² + 4j² ell²).
+```
+The improvement is that no positivity is asserted for the Israel Hessian: the formula is a signed work **upper bound**, dependent on actual V and normal trace control. Positivity follows algebraically from 16 explicit squares, the three-source pairwise-difference squares `3(sum||A||²)-||A+B+C||² = ||A-B||²+||A-C||²+||B-C||²`, and the exact wedge identity `4||q||²||d||²-||Q||²=2 sum_{i<k}(q_i d_k-q_k d_i)²`. This cannot be absorbed into BR4 energy unless the physical trace/commutator estimate and coefficients are paid.
+
+New `scripts/check_hopf369_br41_signed_wall_work_budget.py` consumes actual BR34 `metric_side` for original Israel comparison and supplies independent rational physical traces, SOS decompositions and explicit negative-control interpretation. COMMITTED_UNRUN.
+
+The existing BS11 normal holonomy is now promoted to a quantitative *reference normal* rank-one projection, not global H^s coercivity. For b(n)=4/5 cosh(n-log 2), n in [0,2log2], bmin=4/5,bendpoints=1:
+```
+ I2 = int b² dn = 16/25 log2 + 3/5 > 0,
+ I4 = int b⁴ dn = 192/625 log2 + 147/250 >0.
+ C = -int phi/(2I2) where xi'=-phi-2 C b², xi(0)=xi(L)=0.
+ A = int b⁴ beta/I4 where U'=b⁴(A-beta), U(0)=U(L)=0.
+```
+For any positive finite weights w_i and real source y_i, the constructive projection `a=sum(w_i y_i)/sum(w_i)` has residual orthogonal to constants and exact variance split `sum w_i y_i² = sum w_i(y_i-a)² + (sum w_i)a²`. Consequently the scalar/vector normal reference modes are identifiable and source-bounded when both original integral moments are retained. A zero-endpoint normal primitive also satisfies a one-dimensional Poincare/Cauchy trace estimate with positive warp bound ratio `max b⁴/min b⁴=625/256`, but this is not the five-dimensional weighted H^s metric quotient. All zero modes, source integrals and original two endpoints remain visible.
+
+New `scripts/check_hopf369_br41_normal_holonomy_projection.py` independently checks the analytic AK warp integrals and both homogeneous endpoint normal transports, with rational discrete positive Gram, variance, signed constant shift and normal Poincare controls. COMMITTED_UNRUN. No Lean/Agda kernel, user workstation or GitHub CI acceptance claimed in this tranche.
+
+**Remaining exact analytical promotion conditions:** (A) a uniformly controlled metric trace from BR4 + BR33/37 D/E (including glancing loss) that makes the BR41a signed work absorbable; (B) an actual subsidiary-to-metric source equality, not just BR40e chart conjugation, on the same moving wall (BR29 rank12 obstruction retained); (C) BS13 full weighted *curvature-to-metric* coercivity modulo all normal and tangential holonomies, not just BS11 normal primitive; (D) a constructive PDE solution/iteration plus continuation preserving BR31 timelike reflecting domain. At this source stage BR41a/b is a concrete scalar energy inequality and normal reference projection, not endpoint closure.
