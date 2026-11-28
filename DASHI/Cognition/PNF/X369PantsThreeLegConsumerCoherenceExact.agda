@@ -174,6 +174,12 @@ module ThreeSourceLegs
   mergeIncidence bIncidence = bMerged
   mergeIncidence cIncidence = cMerged
 
+  interpretBefore : (edge : BeforeEdge) →
+    EdgeStalk edge → Pants.BranchChannel
+  interpretBefore legA = toA
+  interpretBefore legB = toB
+  interpretBefore legC = toC
+
   everySourceIncidencePreserved :
     {side : Side} {edge : BeforeEdge} →
     (incident : BeforeIncidence side edge) →
@@ -187,12 +193,6 @@ module ThreeSourceLegs
   everySourceIncidencePreserved aIncidence = refl
   everySourceIncidencePreserved bIncidence = refl
   everySourceIncidencePreserved cIncidence = refl
-
-  interpretBefore : (edge : BeforeEdge) →
-    EdgeStalk edge → Pants.BranchChannel
-  interpretBefore legA = toA
-  interpretBefore legB = toB
-  interpretBefore legC = toC
 
   sourceEdgeValuesPreserved :
     (edge : BeforeEdge) →
