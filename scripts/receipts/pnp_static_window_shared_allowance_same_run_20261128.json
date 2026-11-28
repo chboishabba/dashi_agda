@@ -1,0 +1,87 @@
+{
+  "scope": "Local Python, exact committed window core/campaign and adaptive-read campaign; shared-continuation campaign source matches committed blob but integration and donor bodies transcribed from previous local reference (quadratic phase donor rather than live degree-3 options). No full checkout or native kernel.",
+  "blobs": {
+    "window": "1ec7adce4ab547910c49acdc58a7138cb39d2a84",
+    "window_campaign": "e6559f2496623ea8dcc55e635cf1b90884252077",
+    "shared_campaign": "7f6f055c3fa11bfbc077d66cd32735231375fa0a",
+    "read_campaign": "a1f7449145a66e97dbe9e5c3e1c6f67f39e547f2"
+  },
+  "window": {
+    "seed_base": 3692825,
+    "tables": 512,
+    "static_bit_roundtrips": 512,
+    "empty_field_refusals": 512,
+    "one_step": 27863,
+    "runs": 512,
+    "limit": 133,
+    "raw_steps": 2420,
+    "integer_and_gated": 64,
+    "halt": 201,
+    "escape": 178
+  },
+  "shared": {
+    "seed_base": 3692814,
+    "fixtures": 256,
+    "queries_per_cap": 512,
+    "directional_checks": 6144,
+    "split_budget": 4,
+    "exact_probe_budget": 0,
+    "results": [
+      {
+        "cap": 0,
+        "certified": 494,
+        "splits": 133,
+        "reserved": 0,
+        "baseline_cells": 2352,
+        "boundary_attempts": 318
+      },
+      {
+        "cap": 65536,
+        "certified": 511,
+        "splits": 16,
+        "reserved": 1654784,
+        "baseline_cells": 2118,
+        "boundary_attempts": 164
+      },
+      {
+        "cap": 262144,
+        "certified": 512,
+        "splits": 1,
+        "reserved": 3031040,
+        "baseline_cells": 2088,
+        "boundary_attempts": 151
+      },
+      {
+        "cap": 1048576,
+        "certified": 512,
+        "splits": 0,
+        "reserved": 3162112,
+        "baseline_cells": 2086,
+        "boundary_attempts": 151
+      }
+    ],
+    "note": "Per-query shared allowance across six capped producers. Baseline/root construction and heap operations not fully charged. Exact chart integration source written but not exercised in this replay."
+  },
+  "same_run": {
+    "seed_base": 3692826,
+    "tables": 512,
+    "runs": 18544,
+    "complement_controls": 18544,
+    "flip_checks": 112276,
+    "sensitive_reads": 6846,
+    "parity_controls": 3586,
+    "equality_controls": 7172
+  },
+  "execution": {
+    "timeout_per_batch_seconds": 90,
+    "shared_batches": 16,
+    "window_final_runs": 1,
+    "read_runs": 1,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "physical_clock": false,
+    "actual_native_candidate_bit_dump": false
+  }
+}
