@@ -1196,3 +1196,74 @@ module At {r : Level} (F : C.RealField r)
   -- shape; the BR34 rows own the linearized reference boundary operator.
   -- This record transports both but does not equate them without a
   -- variable-background harmonic-source and gauge proof.
+
+  ------------------------------------------------------------------------
+  -- BR41a/b: actual physical work budget and two-sided holonomy payments.
+  --
+  -- In the Lorentzian physical wallPair the metric signs are retained.
+  -- Positive real trace bounds use Hermitian magnitudes in the analytic
+  -- owner, never this complex-bilinear work as a positive quadratic form.
+  ------------------------------------------------------------------------
+
+  record PhysicalWallWorkSources : Set r where
+    constructor physicalWallWorkSources
+    field
+      israelPower : S
+      longitudinalPower : S
+      tracePower : S
+      physicalPower : S
+      unallocatedPower : S
+  open PhysicalWallWorkSources public
+
+  physicalWallWorkSources : S → Vec → (Wall → Wall → S) →
+    Tensor → Tensor → Tensor → Tensor → PhysicalWallWorkSources
+  physicalWallWorkSources j q velocity p px m mx =
+    physicalWallWorkSources
+      (israelWallWork j q velocity p px m mx)
+      (longitudinalWallWork q velocity p m)
+      (scaleWallWork j velocity p m)
+      (physicalNormalWork velocity px mx)
+      (signedWallWorkResidual j q velocity p px m mx)
+
+  -- BS11 normal holonomy in its original two-sided form:
+  --
+  -- xi' = -phi - 2 b² C, xi(0)=xi(L)=0
+  -- U'  = b⁴(A-beta), U(0)=U(L)=0.
+  --
+  -- C = -Int(phi)/(2 Int(b²)); A = Int(b⁴ beta)/Int(b⁴).
+  -- The source integral carries its original graph and time indices.
+  -- The two denominator witnesses are supplied by the POSITIVE warp
+  -- owner; this complex algebra does not assert positivity by itself.
+  record NormalHolonomyMoments : Set r where
+    constructor normalHolonomyMoments
+    field
+      scalarWarpIntegral : S
+      vectorWarpIntegral : S
+      scalarSourceIntegral : S
+      vectorSourceIntegral : Cov
+  open NormalHolonomyMoments public
+
+  record NormalHolonomyResponse : Set r where
+    constructor normalHolonomyResponse
+    field
+      scalarConstant : S
+      vectorConstant : Cov
+      scalarZeroMode : S
+      vectorZeroMode : Cov
+  open NormalHolonomyResponse public
+
+  normalHolonomyResponse : (m : NormalHolonomyMoments) →
+    Reciprocal (scalarWarpIntegral m) →
+    Reciprocal (vectorWarpIntegral m) →
+    NormalHolonomyResponse
+  normalHolonomyResponse m i2 i4 =
+    normalHolonomyResponse
+      (neg (half * inv i2 * scalarSourceIntegral m))
+      (λ k → inv i4 * vectorSourceIntegral m k)
+      (scalarSourceIntegral m)
+      (vectorSourceIntegral m)
+
+  -- Do NOT drop original integral moments (or invent a zero-mode gauge
+  -- fixing): they are retained in NormalHolonomyResponse for subsequent
+  -- physical quotient detection. The actual BS13 curvature kernel and
+  -- BR31 weighted exterior must supply the global analytic inequality.
