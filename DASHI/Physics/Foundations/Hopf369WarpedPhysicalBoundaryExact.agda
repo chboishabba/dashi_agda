@@ -3752,3 +3752,39 @@ module At {r : Level} (F : C.RealField r)
 
   -- BR114 finite scalar reference Green estimate and BR115 glancing
   -- loss are separate analytic acceptance obligations. No promotion.
+
+
+  ------------------------------------------------------------------------
+  -- BR116–119 structured scale source and defining-function variation.
+  -- Algebraic contractions supplied by the original geometry. Not an
+  -- analytic proof of the scalar inverse or nonzero curved evolution.
+  ------------------------------------------------------------------------
+  originalFAKScaleSource : S → S → S → S → S → S
+  originalFAKScaleSource k normalL l gaugeNormal reducedNN =
+    (three * two) * k * normalL + (four * two) * l
+    + two * k * gaugeNormal - reducedNN
+
+  originalFShapeVariationSource : S → S → S → S → S → S
+  originalFShapeVariationSource tau nPsi deltaNPsi deltaQ shearPair =
+    (nPsi + half * tau) * deltaNPsi
+    - (nPsi - half * tau) * deltaQ - two * shearPair
+
+  originalFDefiningScaleVariation : S → S → S → S
+  originalFDefiningScaleVariation metricNN lambda normalSigma =
+    half * metricNN - lambda * normalSigma
+
+  originalFDefiningNormalTangentVariation : S → Vec → Vec → Vec
+  originalFDefiningNormalTangentVariation lambda metricNormalTang gradSigma a =
+    neg (metricNormalTang a) + lambda * gradSigma a
+
+  originalFDefiningMeanVariation : S → S → S → S
+  originalFDefiningMeanVariation lambda leafBoxSigma gradPair =
+    lambda * (leafBoxSigma + two * gradPair)
+
+  originalFAKScaleOpticalPotential : S → S → S
+  originalFAKScaleOpticalPotential b kOpt =
+    ((three * four + U) * half) * (b * b)
+    + (three * three * quarter) * (kOpt * kOpt)
+
+  -- For full foliation transport, delta phi=V(phi); for graph-only
+  -- lift the normal jet is independent. Retain that distinction.

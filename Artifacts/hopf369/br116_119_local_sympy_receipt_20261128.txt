@@ -1,0 +1,11 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/br116_119.py --part <ak|shear|foliation|robin>
+All four exit 0, full expanded final source replayed.
+Git blob 84f9a7afa580a04956e91745641d458fd95539e0
+SHA256 5560585ed941eaf04fceb6afcc739014d197d3545965d7df438bdccd6e54b3f1
+PASS BR116 exact 5D linearized reduced Ricci normal component at four actual AK points, optical reduction
+PASS BR117 actual AN signed shear at x=(1/5,0,0), exact minor -5721931274414062500/2095616609275832161
+PASS BR117 conformal/first-jet repair persistence and null-cone shear obstruction
+PASS BR118 general defining-function metric variation, curved divergence and transport vs graph-only distinction
+PASS BR119 finite Robin trace inverse <=2/L; joint bulk H1-source bound <=180/gamma²; separate Robin forcing retained
+PASS BR119 actual AK scale potential [104/25,731/100], Robin form lower bound -17, damped scalar inverse <=1/239 at gamma=16
+Scope: exact source identities and frozen scalar reference estimates only; no Agda kernel, CI or nonlinear PDE acceptance.

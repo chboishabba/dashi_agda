@@ -284,3 +284,44 @@ The [compiled cover](../../../scripts/check_hopf369_p0bn_graph.py) covers 32768 
 Writing \(z=w/f_0\) makes the reciprocal jump condition precisely matching value and first normal derivative across the glued periodic seam. The scalar equation \(-T(f_0 z)=0\) is a uniformly elliptic divergence equation with continuous principal coefficient across that seam and a Carathéodory lower term of natural quadratic gradient growth. On each bounded solid-torus exhaustion, the ordered barriers and zero exterior Dirichlet data meet the hypotheses of Boccardo–Murat–Puel, *Résultats d'existence pour certains problèmes elliptiques quasilinéaires*, Ann. Scuola Norm. Sup. Pisa 11 (1984), 213–235, [Theorem 2.1](https://www.numdam.org/item/ASNSP_1984_4_11_2_213_0/). The BN local regularity argument uses exponential tests and weak Harnack, harmonic comparison and Campanato gradient decay, then a one-sided normal second-jet extension and linear Schauder regularity. Local compactness gives a complete-carrier solution with matching first jet of \(z\) and piecewise \(C^{2,\beta}\) regularity. The exterior weighted comparison gives \(w=O(\delta^{5/2})\) and corresponding normalized derivative decay. The full spatial \(J_2=0\) then follows from BE's exact trace-free identity and the common scalar curvature \(-12\).
 
 This establishes classical spatial initial-data existence at the two specified nonzero amplitudes, subject to the documented interval arithmetic assumptions and classical analytic argument; the zero comparator remains exact. It does not assert an amplitude interval, a computed exact representative, membership of this solution in BM's small derivative neighborhood, global uniqueness, native kernel certification, analytic higher-corner compatibility, physical-time Einstein evolution or a physical validation. The original connection, tension and coordinate period remain unchanged, and the proper fibre length is bounded between \(L/(1+.08\delta^2)\) and \(L/(1-.08\delta^2)\); the Gaussian-normal distance is a different quantity. BE lapse data and BA/BB/BC evolution are the next consumer, not an automatic consequence of this spatial proposition.
+
+
+### Reduced evolution frontier: fixed-material F scale channel (BR96–119)
+
+The [reconciled closure roadmap](../../../docs/hopf369-geometry-forward-closure-reconciled-20261128.md)
+retains the original signed BN/BE/BO/BQ geometry. A third candidate
+boundary allocation F imposes all five geometric gauge jumps and
+retains the mean-force equation. The gauge subsidiary uniqueness
+argument uses continuous traces and a signed Robin potential,
+conditional on a given regular reduced development with compatible
+initial/exterior data. Neither a full variable metric energy nor
+that reduced development has been established.
+
+For the original zero-Hopf AK harmonic-Y reference, the exact
+linearized normal-scale equation at the BR14 base RNC point is
+\[
+(\Box_g-6k n-8)\ell=2k\,\delta C_\perp-\delta E_{\mathrm{red},nn},
+\qquad n\ell-4k\ell=\delta C_\perp\quad\text{at the F seam}.
+\]
+Here \(\ell=\delta\log\lambda\) is a metric perturbation (not the
+normal spectral root). The optical conjugation gives a scalar
+potential between \(104/25\) and \(731/100\); a conservative
+frozen Robin spectral lower bound is \(-17\), and the damped
+scalar resolvent is bounded by \(1/239\) at damping at least
+16. The [BR116–119 source checks](../../../scripts/check_hopf369_br116_119_F_structured_scale.py)
+independently compare the normal reduced Ricci component and
+retain nonzero gauge and reduced defects. No general tangential
+chart or nonzero Hopf estimate follows from this reference calculation.
+
+The general shape-source variation retains the term
+\(-2\operatorname{tr}(S\,\delta A)\), with \(A=h^{-1}K\) and
+\(S=A-\operatorname{tr}(A)I/4\). Exact differentiation of the
+original AN seed at \((1/5,0,0)\), \(\epsilon=1/40\), gives
+a nonzero mean spatial shear minor, which is preserved by
+positive conformal scaling and the first-jet-preserving BE/BO/BQ
+repairs. Thus the reference cancellation cannot be carried over
+unchanged. Full foliation transport cancels the pure Lie shape
+term but also changes the scale-jump channel; the corresponding
+chart transmission and nonlinear energy remain open. These are
+source-specific algebraic and conditional frozen results, not
+proof of physical spacetime development or validation.

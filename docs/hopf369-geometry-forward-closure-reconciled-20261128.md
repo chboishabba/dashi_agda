@@ -1300,3 +1300,186 @@ cancellation or uniform mixed-order energy without derivative
 loss; actual moving chart and W0 higher corners remain.
 W4a conditional BR98, W4b Weyl, W5 exterior/Hodge, W6 physical
 development and W7 acceptance remain separate.
+
+
+## 14. BR116–119 — structured scale factorization, actual shear and transported foliation
+
+Reopened BR14/34/35 AK harmonic-Y reference, BR100/104/105 material
+foliation, BR112–115 generator/Green and Neumann routes, actual AN
+metric and BE/BO/BQ source-preserving correction. No new spatial
+solve. Classical curvature variation, Robin spectral form and
+diffeomorphism naturality retain prior attribution. DASHI-specific
+contribution is the exact signed source factorization and obstruction.
+
+### BR116 — scalar decoupling at the original AK reference
+
+Use the original BR14 fixed lower harmonic source H, tangential base
+RNC at the point, H_Y=0 and H_a independent of Y. Proper normal
+k=b_n/b, k_n+k²=1, K=k h, tau=n psi=4k. Metric variation m is
+normalized as in BR14; l=delta psi=m_YY/(2b^8), c=delta C_perp,
+e=delta Ered_nn. Keep all fifteen metric components, nonzero c,e.
+The algebraic variation is
+ delta tr(K²)=2k delta tau,
+ delta(n psi)=n l-4k l,
+ delta tau=n l-4k l-c
+at the base RNC point. Variation of H_perp and its normal derivative
+vanish there (H_a=0 along the normal line). The direct scalar
+wave variation includes the inverse normal metric and contracted
+connection:
+ delta(Box_g psi)=Box_g l-8(k_n+4k²)l-4k c.
+Variation of the BR104 right side is
+ 6k n l-24k² l-2k c-e.
+Consequently the exact original frozen reference scalar equation is
+ (Box_g-6k n-8)l=2k c-e.
+This is not just a principal symbol: all reference normal drift
+and zeroth terms are included. Independent full 5D Christoffel,
+inverse metric derivative, linearized Ric_YY, and contracted
+gauge calculation using independent 15-component metric jets
+checks the equation at (b,k)=(1,-3/5),(4/5,0),(5/6,7/25),
+(1,3/5), with nonzero c and e. General identity derived above;
+finite rational points are oracle checks, not exhaustive proof.
+The F mean and jump of K imply delta tau±=0 on the reference,
+so n l-4k l=c on both sides. Do not set c=0 as an existence
+hypothesis for arbitrary reduced forcing. Conditional BR98
+uniqueness on a given smooth homogeneous reduced linearized
+solution with zero initial gauge does allow c=0 for that solution.
+
+In optical x, let k_o=b_x/b=b k. Then l=b^(3/2) u gives
+ u_xx-(ell²+U_s)u=b^(1/2)(2k c-e),
+ U_s=8 b²-(3/2)k_o,x+(9/4)k_o²
+    =(13/2)b²+(9/4)k_o².
+At b=1 endpoints, outward Robin derivative minus (3/2)u
+equals the signed c trace, since k_o=±3/5.
+No use of variable tangential chart covariance or nonzero
+Hopf equality in this frozen BR14 scalar reduction.
+
+### BR117 — exact shear term and actual nonzero AN obstruction
+
+For A=h^-1 K and S=A-(tau/4)I, set Q=n psi-tau. The exact
+first variation of the shape-dependent source is
+ delta(tau n psi-tr A²)
+ = (n psi+tau/2) delta(n psi)
+   -(n psi-tau/2) delta Q-2 tr(S delta A).
+This identifies the precise additional shape derivative on
+non-umbilic data; other BR104 gauge, source and operator variations
+must also be retained. AK S=0 is the special decoupling case.
+
+Use actual AN seed at x=(1/5,0,0), eps=1/40, at paired seam
+b=1. Its spatial induced metric H=gamma+a a^T, shift beta=H^-1 a,
+lambda²=1-a^T H^-1 a. Opposite b_y terms cancel in the mean
+spatial K, so -2lambda M_sp=Lie_beta H. Direct exact rational
+differentiation of the original AN rational pullback gives
+ (Lie_beta H)_01 H_00-(Lie_beta H)_00 H_01
+ = -5721931274414062500/2095616609275832161 != 0.
+Here H_01=0, and (Lie_beta H)_01!=0. Thus the spatial mean
+shape has a genuine nonzero trace-free part. Under conformal
+u²g, M_sp^TF -> u M_sp^TF (normal derivative of u only adds
+pure trace); BE/BO/BQ tangent-block lifts vanish to first order
+at the seam. Therefore the same obstruction survives in the
+conditional nonzero spatial source, independent of the unknown
+positive scalar representative. At the time-symmetric corner
+choose spatial v±=e0±e1 and equal time components making them
+null in the induced Lorentz metric. Their squared spatial lengths
+coincide and their shear contractions differ by 4 M_sp,01.
+With zero mixed time-space mean shape at the time-symmetric
+zero-shift corner, at least one contraction on the null cone is
+nonzero. This is a specific actual source witness, not a
+general no-go for coordinate choices or Einstein evolution.
+
+For a pure normal Lie metric variation on a fixed Gaussian
+foliation, the leading tangential second-generator term in
+delta A is -h^-1 D²v (other terms lower), so the shape coupling
+contains 2 S^{ab} D_aD_b v. It cannot in general be replaced by
+a multiple of Box_h v: null-cone shear survives. The arbitrary
+source glancing bound from BR115 cannot be made harmless merely
+by the AK cancellation or a small fixed nonzero amplitude.
+No assertion that the entire coupled source has no other
+possible compensating terms: that is the remaining proof cut.
+
+### BR118 — distinguish moving graph from transported foliation
+
+For independent metric variation m and defining-function
+variation sigma=delta phi, lambda=(g^-1(dphi,dphi))^-1/2,
+n=lambda grad phi, psi=log lambda, exact first variations are
+ delta psi=(1/2)m_nn-lambda n(sigma),
+ delta n=-(1/2)m_nn n-(m^sharp n)_tan+lambda D sigma.
+With g fixed, the foliation contribution to delta tau is
+ lambda (Box_h sigma+2<D psi,D sigma>).
+Using normalized Hess phi and moving tangent frame, the fixed
+metric foliation contribution to delta K is
+ lambda(D_aD_b sigma+D_a psi D_b sigma+D_b psi D_a sigma)
+in the tangential frame identified by normal projection.
+The normal-Hess and normalization terms cancel; this also
+checks the trace identity. The independent local test includes
+a sheared Lorentz metric, arbitrary defining-function and metric
+jets, moving frame Hessian calculation and curved divergence.
+
+Full Lie transport of BOTH g and phi gives delta psi=V(psi)
+and delta tau=V(tau), and the tensor shape transport is natural.
+The top-order shear term of the fixed-foliation Lie lift is
+canceled by the transported defining function. But at Gaussian
+reference phi=y, m=Lie_V g, delta phi=V(phi)=v gives
+delta psi=v_n-v_n=0. It therefore also removes the very
+scale jump p the graph-only lift was constructed to carry.
+Graph-only extension sigma with common wall value v and zero
+normal derivative instead preserves [v_n]=p. Do not conflate
+these two transformations. BR111/112 moving wall geometry
+controls the embedding, not automatically all normal derivatives
+of its foliation extension. A transported-foliation formulation
+must supply an independent scalar chart equation and transmission,
+recover the fixed-material variables with source transport,
+and prove invertibility/regularity. This is a precise remaining
+coordinate choice, not a free cancellation in the current F IBVP.
+
+### BR119 — explicit finite AK scalar Robin inverse and joint bound
+
+U_s lies in [104/25,731/100], optical length d>1. For the
+self-adjoint scalar operator A_s=-d²/dx²+U_s with outward
+Robin derivative (3/2)u at both ends, form
+ ||u'||²+int U_s |u|²-(3/2)(|u(0)|²+|u(d)|²).
+Use endpoint trace <=(2/d)||u||²+4||u||||u'|| and Young
+4c ab <= b²/2+8c² a², c=3/2. This gives
+ form >= ||u'||²/2-17||u||².
+For real tangential spatial frequency, gamma>=16, spectral
+parameter s=gamma+i omega, the distance estimate
+ |s²+|xi|²+lambda_s|>=gamma²-17 for lambda_s>=-17
+follows by separating omega²<=gamma²-17 from the complementary
+case. Thus scalar L² inverse <=1/(gamma²-17)<=1/239.
+This suffices for homogeneous frozen scale uniqueness when
+c=e=0, with homogeneous Robin rows and zero initial data.
+
+For arbitrary bulk f=b^(1/2)(2k c-e) and separate Robin forcing
+g_R (two endpoint values), retain BR114 a=Re ell, L=|ell|,
+Dfreq=max(L,|s|,|xi|), m=max(|s|,|xi|).
+U_s bounded by 8, Dirichlet inverse <=1/(aL), perturbation
+<=8/gamma²<=1/32, endpoint extension and forced normal trace
+norms <=3/sqrt(a). Since exp(-ad)<1/100, flat outward DtN
+differs from ell I in operator norm by <=2L/99. Perturbation
+cost <=6*8/a, subtract Robin (3/2)I; total relative difference
+<1/2 at gamma>=16. Inverse endpoint map <=2/L. Therefore
+ |p| <=3||g_R||/L+9||f||/(L sqrt(a)).
+Compose BR114 scalar generator, retaining graph and smooth
+reference Lie metric factors separately:
+ ||D²v|| <=30 Dfreq²/(L² sqrt(a))||g_R||
+            +90 Dfreq²/(L² a)||f||.
+Since aL²>=gamma² m and Dfreq²<=2m², the bulk term is
+<=180 m||f||/gamma². This controls a bulk H1 tangential
+source (in particular independent gauge of that regularity),
+NOT arbitrary Robin forcing at the same order, nor arbitrary
+first-jet shear forcing from the metric. For c=e=0 and homogeneous
+data the reference scalar sector is homogeneous and l=0 by
+the scalar inverse; then p=0 and the generator correction
+is absent. This is a frozen reference scalar result, not
+full metric/glancing/variable reduced existence.
+
+Acceptance: actual local SymPy 1.14.0, four bounded stages
+all exit zero; exact executed blob 84f9a7afa580a04956e91745641d458fd95539e0.
+Native source expressions and manuscript qualification updated;
+kernel and integrated PDE acceptance unrun, no CI. Next
+max-cut: exploit Codazzi/Israel constraints on the genuine
+shear derivative or build an independent transported defining
+function with correct gauge-source/embedding and normal-jet
+transmission. Keep BR4 cusp formulation as an alternative
+(not same allocation) and pay mean force explicitly. W0
+same-chart high corners, W2/3 nonzero variable estimate,
+W4a BR98 conditional, W4b/W5/W6/W7 remain as before.
