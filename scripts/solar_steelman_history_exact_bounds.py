@@ -59,6 +59,58 @@ def static_leaf(m,a):
     # This class fixes all other coordinates. It is not an exhaustive
     # classification of constant or periodic tangent solutions.
 
+def ambient_bounds(m,a,gain=S.Integer(100),Wstar=S.Integer(100)):
+    """Conservative exact ambient row-sum bound, valid also on embedded leaf.
+    Uses original metric inverses; no orthonormal basis rounding.
+    """
+    from solar_steelman_boundary_weld import branch
+    d=m['d'];M,N,C,B,H=d['M'],d['N'],d['C'],m['B'],m['H']
+    T=d['T'];ts=T[:1,:];tr=T[8:15,:];hi,lo=a['rows']
+    Ls,Ks=branch(S.Integer(2),S.Integer(1),-hi['X'][:1,:1])
+    Lr,Kr=branch(S.Integer(1),S.Integer(2),-lo['X'][8:15,8:15])
+    Mi=M.inv();Hi=H.inv()/2;Li=Ls.inv();Lri=Lr.inv()
+    inf=lambda X:max(sum(abs_upper(v) for v in X[i,:]) for i in range(X.rows))
+    base=max(inf(Mi*C.T*N)+inf(Mi*B)+inf(Mi*ts.T)+inf(Mi*tr.T),
+             inf(C),inf(Hi*B.T),inf(Li*ts)+inf(Li)+inf(Li*Ks)+inf(Li),
+             inf(Lri*tr)+lo['load']*inf(Lri)+inf(Lri*Kr)+inf(Lri),5)
+    n=len(a['models']);low=[];jz=S.zeros(H.rows,1);pz=S.zeros(H.rows,1);je=[];pe=[]
+    # sqrt(2)<3/2, |(1+i)/sqrt(2)|=1; bound real waveform by l1 phasors.
+    for ids,r,c in a['models']:
+        l,_,_=ratio_bounds(c);low.append(l)
+        sp=2*sum(k*abs_upper(c[k]) for k in range(1,5))
+        f=S.Matrix([S.Rational(3,2)*sum(abs(v[i]) for w in (1,2) for v in r[w]) for i in range(len(ids))])
+        fp=2*f
+        z=S.Matrix([S.Rational(3,2)*sum(abs(v[j]) for w in (1,2) for v in a['data'][w][0]) for j in ids])
+        th=fp+f*sp/l
+        jz+=Hi[:,ids].applyfunc(abs_upper)*f/l
+        pz+=Hi[:,ids].applyfunc(abs_upper)*th
+        je.append(sum(f)+z.dot(f)/l);pe.append(z.dot(th))
+    # Original instantaneous face and its subtraction are both bounded;
+    # the added current-time delayed launch is bounded independently.
+    for j in a['order'][1:]:
+        k=a['parent'][j];F=abs(a['flows'][j])
+        for row in (k,j):
+            for col in (k,j):
+                sp=2*sum(t*abs_upper(a['models'][col][2][t]) for t in range(1,5))
+                je[row]+=2*(F+gain)/low[col]
+                pe[row]+=2*(F+gain)*sp/low[col]
+    J=max(base+max(jz),max(je));P=max(max(pz),max(pe))
+    rb=delay_bounds(a,gain)
+    # core lift sums two store energies and phase differences, each norm 2.
+    # fraction derivative adds |S'|/S; phase/anchor rows bounded by degree.
+    degree=[0]*n
+    for j in a['order'][1:]:degree[j]+=1;degree[a['parent'][j]]+=1
+    rotor=4*max(degree)+12
+    phase_source=3*inf(Li)*(1+1/(2*Wstar))
+    reservoir=4+2/Wstar
+    # Extra current-time launch term per receiving/sending store row.
+    launch=[0]*n
+    for j in a['order'][1:]:
+        k=a['parent'][j];f=a['flows'][j];src=k if f>0 else j
+        launch[src]+=(abs(f)+gain)*rb['r']/2
+    rb['a']=2*J+2*P+phase_source+rb['r']+rotor+reservoir+max(launch)
+    return rb
+
 def fixture():
     c={k:S.Integer(0) for k in range(-4,5)}
     c[0]=3;c[1]=c[-1]=1
