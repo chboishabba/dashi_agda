@@ -800,3 +800,7 @@ The original static complex-null Weyl/Israel jump is injective, but a regular fi
 ### BR213 local glancing elementary divisors
 
 Exact truncated coefficient-map ranks on both glancing signs at k=1,2,10 give elementary orders (0^13,1^5,2) for the jump and (0^15,1^4) for the joint jump/wall system. Thus the local inverse loss for the coupled physical system is first order in the glancing normal parameter at these fixed frequencies. Uniform high-frequency constants, compatible sources and curved transfer remain open. See roadmap section 48.
+
+### BR214 compactified frequency
+
+With wall rows divided by k and h=1/k, symbolic maximal minors establish first-order local coupled elementary divisors for every finite positive k. At h=0 the jump-only second-order direction returns. A product-neighborhood uniform first-order inverse in these normalized norms is therefore excluded; the damped physical ray and compatible source weights still need a two-parameter estimate. See roadmap section 49.

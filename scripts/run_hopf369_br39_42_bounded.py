@@ -205,6 +205,8 @@ PARTS["terminal"].append(("BR212.glancing_pencil","check_hopf369_br212_glancing_
 
 PARTS["terminal"].append(("BR213.glancing_filtration","check_hopf369_br213_glancing_filtration.py",()))
 
+PARTS["terminal"].append(("BR214.frequency_compactification","check_hopf369_br214_frequency_compactification.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

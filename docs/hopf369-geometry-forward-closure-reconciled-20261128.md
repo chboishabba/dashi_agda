@@ -5620,3 +5620,35 @@ Original donor import entry and added exact expected-value
 assertion not replayed; independent reconstruction did run.
 Terminal stage 34 registered. No CI/native/PDE acceptance.
 Other six lanes unchanged.
+
+
+## 49. BR214 — compactified frequency and exact failure of uniform first-order regularization
+
+Normalize wall rows by h=1/k, giving [0,h R N,t I-i B1] in
+the BR212 rational chart, with the same analytic denominator
+clearing as BR213. At h=0 the coupled filtration becomes
+6,7,7 (orders 0^13,1^5,2); for h=1/10,1/2,1 it remains
+4,4 (orders 0^15,1^4), both signs. Independent local SymPy
+execution confirms this. Symbolic ranks over Q(i)(h) are
+15 and 34 for T0 and the two-level Toeplitz matrix, respectively;
+selected maximal minors are -26873856 h²/390625 and
+sigma*277326388342554624 h^5/762939453125. Thus the
+finite-frequency filtration holds for every h>0, not only
+sampled k. At h=0 the regularization vanishes. A uniform
+O(|u|^-1) inverse with normalized wall-row source norm cannot
+hold on an entire product neighborhood of (u,h)=(0,0), by
+continuity at fixed u and the second-order h=0 Smith factor.
+This does not decide the narrower damped physical ray or a
+different compatible weighted source norm. Jump-only BR213
+orders provide a uniform local O(|u|^-2) upper bound independent
+of h because the joint operator contains the same top rows;
+this upper bound is for a compatible amplitude inverse, not
+a bulk PDE resolvent. Next: two-parameter Schur filtration,
+damped physical relation u²~gamma h, compatible source
+projection and actual curved energy. No new other-lane closure.
+
+Local independent reconstruction commands compact.py and
+compact_symbolic.py executed with 90s caps, exit zero.
+The new combined checker contains additional assertions and
+third-level finite-h ranks not replayed; original donor import
+unrun. Terminal stage 35. No CI/native/PDE acceptance.
