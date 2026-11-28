@@ -47,14 +47,14 @@ if not ForAll(T,x->x in G) then Error("actual quotient membership failed"); fi;
 W:=List(T,x->PreImagesRepresentative(hom,x));;
 if fail in W then Error("constructive membership unavailable"); fi;
 if not ForAll([1..Length(T)],i->Image(hom,W[i])=T[i]) then Error("word evaluation failed"); fi;
-Print("X369WORDS ",List(W,LetterRepAssocWord),"\\n");
+Print("X369WORDS ",List(W,LetterRepAssocWord)," X369END\\n");
 QUIT;
 """
     try:p=subprocess.run([a.gap,'-q','-b'],input=program,text=True,capture_output=True,timeout=a.seconds)
     except subprocess.TimeoutExpired:return dict(status='bounded_inverse_word_search_incomplete',alignment_sha256=a.alignment_sha256)
-    lines=[l for l in p.stdout.splitlines() if l.startswith('X369WORDS ')]
-    require(p.returncode==0 and len(lines)==1,'GAP constructive word search failed: '+p.stderr[-2000:])
-    words=json.loads(lines[0][len('X369WORDS '):])
+    require(p.returncode==0 and p.stdout.count('X369WORDS ')==1 and p.stdout.count(' X369END')==1,
+            'GAP constructive word search failed: '+p.stderr[-2000:])
+    words=json.loads(p.stdout.split('X369WORDS ',1)[1].split(' X369END',1)[0])
     require(len(words)==len(names),'actual inverse word count')
     out={}
     for n,w,t in zip(names,words,targets):
