@@ -57,10 +57,13 @@ def rref_bits(rows,n,c):
     m=len(rows)
     if any(len(row)!=n+1 for row in rows):raise ValueError('matrix')
     tape=Tape(c,(b for row in rows for a in row for b in code(a)))
+    from check_pnp_nat_bit_schedule import NatOps
+    ops=NatOps(c)
+    def address(i,j):return ops.mul(2,ops.address(i,n+1,j))
     def get(i,j):
-        k=2*(i*(n+1)+j);return tape.read(k),tape.read(k+1)
+        k=address(i,j);return tape.read(k),tape.read(ops.add(k,1))
     def put(i,j,a):
-        k=2*(i*(n+1)+j);tape.write(k,a[0]);tape.write(k+1,a[1])
+        k=address(i,j);tape.write(k,a[0]);tape.write(ops.add(k,1),a[1])
     p=0;piv=[]
     for j in range(n):
         i=next((i for i in range(p,m) if nonzero(c,get(i,j))),None)
