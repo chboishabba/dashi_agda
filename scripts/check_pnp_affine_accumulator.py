@@ -6,7 +6,7 @@ from check_pnp_boolean_fibre import chart
 from check_pnp_source_derived_cover import Reservation,Refused
 
 
-def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_states=4096):
+def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_states=4096,prune=False):
     if n<0 or len(A)!=len(b) or len(H)!=len(t) or any(len(r)!=n for r in A+H) or any(not 1<=abs(l)<=n for c in F for l in c) or any(len(set(c))!=len(c) or any(not 0<=i<n for i in c) for c in O) or clip not in (None,2) or max_states<1:raise ValueError('source')
     p=tuple(range(n)) if permutation is None else tuple(permutation)
     if len(p)!=n or set(p)!=set(range(n)):raise ValueError('permutation')
@@ -19,6 +19,13 @@ def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_s
         J,C0=z;J=tuple(p[j] for j in J);C=[None]*n
         for j,(a,s) in enumerate(C0):C[p[j]]=(a,{p[k]:v for k,v in s.items()})
         pos={j:k for k,j in enumerate(J)};end=[max((pos[k] for k in s),default=-1) for a,s in C];start=[min((pos[k] for k in s),default=-1) for a,s in C]
+        bounds={}
+        if prune:
+            B.pay(1+n*(1+len(J)))
+            for i,(a,s) in enumerate(C):
+                lo=hi=Q(0)
+                for k in reversed(range(len(J))):
+                    bounds[i,k]=(lo,hi);c=s.get(J[k],0);lo+=min(0,c);hi+=max(0,c)
         factors=[];uses=[[] for _ in range(n)]
         def add(kind,terms,target):
             i=len(factors);last=max((end[j] for j in terms),default=-1);first=min((end[j] for j in terms),default=-1)
@@ -57,7 +64,11 @@ def solve(A,b,n,F=(),H=(),t=(),O=(),cap=1000000,clip=None,permutation=None,max_s
                         for f,a in uses[i]:
                             fval[f]=update(factors[f][0],fval.get(f,0),a,int(v))
                     if not ok or any(fval.get(i,0)!=factors[i][2] for i in retire) or any(factors[i][0]=='one' and fval.get(i,0)>1 for i in curF):continue
-                    key=(tuple(partial(i) for i in curC),tuple(fval.get(i,0) for i in curF));old,rep=N.get(key,(0,w|(bit<<j)));N[key]=(trim(old+mass),rep)
+                    cv=tuple(partial(i) for i in curC)
+                    if prune:
+                        B.pay(1+len(curC))
+                        if any(not any(v+lo<=a<=v+hi for a in (0,1)) for i,v in zip(curC,cv) for lo,hi in (bounds[i,k],)):continue
+                    key=(cv,tuple(fval.get(i,0) for i in curF));old,rep=N.get(key,(0,w|(bit<<j)));N[key]=(trim(old+mass),rep)
                     if len(N)>max_states:raise Refused()
             D=N;prevC,prevF=curC,curF;peak=max(peak,len(D))
             if not D:return out('EMPTY',count=0)
