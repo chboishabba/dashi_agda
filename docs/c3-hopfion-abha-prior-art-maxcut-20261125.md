@@ -2515,3 +2515,62 @@ The physical mean trace force is retained in the final metric row at every order
 **Execution deferred at user instruction**: new BR45, BR45b, BR46, BR47 checkers registered in `scripts/run_hopf369_br39_42_bounded.py`; each higher-order D/E allocation/sector/order, BR45 15+5 components and BR46 five subsidiary equations has its own max-90s checkpoint. No local checkers/Agda kernel were executed in this tranche; GitHub CI not used. New modules are CONSTRUCTED_PENDING_KERNEL, not verified proof acceptance.
 
 **Remaining actual physical promotion, further narrowed**: source-compatible full nonlinear reduced Einstein coefficient and material chart linearisation; ensure BR45 interior coefficient majorant extends through weighted high-order BR4 tensors and its differentiated **physical** normal wall energy with BR47 high-order boundary/source product; quantitatively bound the BR37 glancing losses without an unproven derivative gain; prove BR29 *variable* projected Bianchi forcing factors through the actual wall Codazzi graph and preserves the zero-speed kernel despite the rank12 obstruction to the previously chosen constant wall-only Gram; establish BS13+BR31 weighted curvature/metric quotient estimate; construct the continuous physical local iteration and uniform continuation. Neither BR45–47 nor BR42 assumes any of these unpaid PDE facts.
+
+
+## BR48–50 — physical ADM/BR4 source coefficient and MOVING Einstein–Israel normal flux weld
+
+This tranche closes a previously implicit but essential operator-type mismatch between BR45's variable BR4 interior **conormal** and BR34/41's material normal derivative. It does **not** claim the full nonlinear Einstein–Israel PDE IBVP is solved. New source bodies live in the existing native `DASHI/Physics/Foundations/Hopf369WarpedPhysicalBoundaryExact.agda`, with independent source checker owners `scripts/check_hopf369_br48_adm_boundary_geometry.py`, `scripts/check_hopf369_br49_moving_wall_conormal.py`, and `scripts/check_hopf369_br50_material_energy_weld.py`.
+
+### BR48 — derive actual BR4 divergence coefficients from same ADM metric
+
+Four spatial directions include the physical normal n, not only the three wall directions. For physical ADM source `g=-N²dt²+H_ij(dx^i+v^i dt)(dx^j+v^j dt)`, define `D=N sqrt(det H)`, `H^ij=(H^-1)^ij`. The exact densitized inverse is
+```
+ D*g^tt=-A,             A=D/N²,
+ D*g^ti=B^i,            B^i=A v^i,
+ D*g^ij=C^ij,           C^ij=D H^ij-A v^i v^j.
+```
+Therefore the original divergence `∂_μ(D g^{μν}∂_ν u)` is *exactly* the BR45 operator `-∂t(A u_t)+∂t(B^i u_i)+∂i(B^i u_t)+∂i(C^ij u_j)` with the **same physical metric**. The full inverse and determinant are checked independently from source metric, plus an independently differentiated five-coordinate polynomial jet in the heavy acceptance partition. Native `ADMPhysicalPoint`, `admBR4A/B/C`, and `admNormalFlux` explicitly assemble the source operator coefficients. Positivity/determinant/inverse proofs from physical metric remain independent input certificates, not inferred from arbitrary `Complex RealField`.
+
+**Important corrected chart condition:** `C+B B^T/A=D H^{-1}` is positive for positive spatial H, but `C` itself need not be positive for unrestricted ADM shift. In fact, positivity of `C` is equivalent to `v^T H v<N²` for positive H,N. BR48's exact symmetric-rank-one determinant and superluminal-normal-shift negative control prevent mistakenly deriving the BR4 `C>0` symmetrizer from `H>0` alone. A different normal-frame symmetrizer may avoid this *coordinate* restriction, but then BR4's present symmetrizer cannot be used without its actual time-slicing hypothesis.
+
+### BR49 — replace coordinate normal derivative by true moving-material conormal
+
+For the original moving interface `F=n-f(t,x,y,z)`, `F_μ=(-f_t,-f_x,-f_y,-f_z,1)`, the wall normal squared is
+```
+ z=g^{μν}F_μ F_ν
+   =H^{ij} F_i F_j-N^-2(F_t-v^i F_i)^2.
+```
+If z>0 the *outward unit normal* is `n^μ=g^{μν}F_ν/sqrt(z)` and the exact material flux is
+```
+ J_F(u) = D*g^{μν}F_μ∂_ν u
+        = D*sqrt(z)*n^ν ∂_ν u
+        = D[H^{ij}F_i u_j - N^-2(F_t-v.F)(u_t-v.grad u)].
+```
+There is no appeal to a flat RNC estimate for a moving physical wall. Native `MaterialGraphGradient`, `materialDefiningCovector`, `materialGraphSpaceNormal`, `graphAdvectiveTime`, `graphNormSquared`, `materialGraphFlux`, and `MaterialConormalMismatch` retain the time/shift/shear terms and the explicit mismatch `J_F-D ∂_n`. A separate strictly positive graph-norm witness is required before taking a real square root; z<=0 is a negative-control inadmissible material wall.
+
+**Exact Gaussian collar specialization:** on a fixed wall F=n, with `v^n=0`, `H^{na}=0` for a=x,y,z and `H^{nn}=1`, `J_F=D ∂_n`. This is the source-compatible condition under which BR41's older flat-weighted normal power matches the physical BR45 flux. The source contains indexed `ADMPhysicalNormalCollar` witnesses, rather than assuming arbitrary evolving coordinates satisfy them.
+
+### BR50 — same 15/5-channel, two-sided signed physical wall work
+
+New native `materialGraphTensorFlux` applies the true BR49 conormal to **all 15 original symmetric metric components**, and `materialGraphGaugeFlux` to **all five** subsidiary components. `OriginalMaterialPower` and `assembleOriginalMaterialPower` keep independent plus/minus physical ADM charts, full conormal tensors, signed moving tangential work, Gaussian comparison and an explicit unallocated graph-power mismatch. Thus
+```
+ W_moving = <V,J_F(H)_+ - J_F(H)_->eta
+          = <V, D_+ ∂n H_+ - D_- ∂n H_->_eta + W_graph,
+```
+where `W_graph` is retained, not declared zero for a moving or sheared wall. Under a common fixed Gaussian collar D_+=D_-=D this reduces to
+```
+ W_moving = D [<V,Israel>_eta + <V,q tensor [beta] + [beta] tensor q>_eta
+                       + j(l_+ +l_-) tr_eta V ],
+```
+consuming actual BR34/41 sources (same source, common density assumption). An interface with different physical density on the two sides must pay those extra terms independently; a same-density conormal cannot be assumed from metric continuity without explicit matching of lapse/induced metric/chart identification.
+
+**Independent checker** imports original BR34 `metric_side` and verifies the off-continuity signed Israel/normal derivative identity, its common-Gaussian density scaling, the original 15/5 moving fields and a nonzero moving-graph correction. All new sources are **COMMITTED_UNRUN**. The bounded local runner `scripts/run_hopf369_br39_42_bounded.py` now includes BR48 ADM collar/shift, BR49 moving flux, BR50 signed work in fast; full polynomial variable ADM divergence in heavy, with 90-second stage isolation and SHA/checkpointing. No CI or Agda kernel check was triggered.
+
+### Remaining actual max-cut after BR50
+
+1. **Physical coefficient and domain evidence**: instantiate the native `ADMPhysicalPoint` from the full original nonlinear Einstein–Israel background, prove its positivity/spacelike/lapse/normal-chart certificates, and show the BR48 densitized wave **matrix** differs from the original reduced BR14/15/BS4 by exactly the calculated connection and source terms, with weighted regularity.
+2. **Moving material boundary analytical estimate**: insert the nonzero `BR50.missingGraphPower` and density mismatch into the BR41/43/44 high-order energy, using BR19 graph material derivatives, BR47 eighth-order D/E rows, and BR37 frequency losses. Derive actual tame physical trace/absorption, not just a finite source budget.
+3. **Subsidiary**: use BR46 contracted Bianchi on the *same* ADM/graph background, prove BR29 projected zero-speed Bianchi forcing factors through physical Codazzi/Gauss boundary constraints. The known rank12 constant wall Gram obstruction still applies.
+4. **Global quotient and continuation**: BS13 curvature-to-metric weighted coercivity modulo all normal/tangential holonomy and BR31 reflecting exterior preservation; then construct the genuine common-space local PDE solution and uniform restart. Do not promote BR48–50 coordinate geometry into that theorem until these are proved.
+
+Attribution: classical ADM, defining-function conormal and Lorentzian Israel calculus are pre-existing geometry; original prior BR4/19/29/31/33/34/37/41 source retained; DASHI-specific new weld is same-source sign/normal/density matching and explicit negative controls. No JMD co-attribution claimed.
