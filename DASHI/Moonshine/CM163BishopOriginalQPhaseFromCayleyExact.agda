@@ -109,3 +109,25 @@ module At (inputs : Round11.BishopCutset)
   originalPhaseSelected :
     Series._≈C_ (toSeries originalComplexQ) CM.q
   originalPhaseSelected = realPhase , imaginaryPhase
+
+-- All original phase multiplication and quarter-angle composition are
+-- supplied by old K05 owners. The two atomic arctan series evaluations
+-- are the precise remaining SOURCE producer obligations, not the final
+-- CM negative-q equality or a generic "pi is classical" assumption.
+import DASHI.Analysis.BishopMachinTwoPointCayleyCompositionExact as TwoPoint
+import DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact as Native
+
+module FromTwoOriginalAtans
+  (inputs : Round11.BishopCutset)
+  (five : TwoPoint.OriginalAtanFiveCayleyEvaluation inputs)
+  (twoHundredThirtyNine :
+    TwoPoint.OriginalAtan239CayleyEvaluation inputs) where
+
+  module Result = At inputs
+    (Native.originalNativeImaginaryExpProduct inputs)
+    (TwoPoint.nativeCombinedCayleyFromTwoOriginalAtanValues
+      inputs five twoHundredThirtyNine)
+
+  originalQ :
+    Series._≈C_ (toSeries Result.originalComplexQ) CM.q
+  originalQ = Result.originalPhaseSelected
