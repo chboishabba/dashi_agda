@@ -792,3 +792,7 @@ comparator remains a finite prescribed metric/shift history.
 The complete W0–W7 nonlinear theorem, native kernel and
 BR178–201 local replay remain open. See the controlling register
 for all seven parallel lanes.
+
+### BR211–212 physical boundary pencil
+
+The original static complex-null Weyl/Israel jump is injective, but a regular five-polarization chart at glancing reveals rank 13 rather than 19. Adding the original wall evolution rows yields rank 15 at both glancing signs for three tested tangential frequencies. A factored minor proves injectivity on the real parametrized open oscillatory arc; its seventh-order vanishing is not a sharp inverse-loss bound. Local independent exact checks passed; original donor import, damped complex-frequency bounds and curved existence remain open. See roadmap section 47.

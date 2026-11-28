@@ -201,6 +201,8 @@ PARTS["terminal"].append(("BR210.collar_trace","check_hopf369_br210_collar_trace
 
 PARTS["terminal"].append(("BR211.static_evanescent","check_hopf369_br211_static_evanescent.py",()))
 
+PARTS["terminal"].append(("BR212.glancing_pencil","check_hopf369_br212_glancing_pencil.py",()))
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 

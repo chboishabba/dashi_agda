@@ -5559,3 +5559,35 @@ Independent local reconstruction of BR27/175 carrier ran under
 90s cap, exact SymPy 1.14.0, exit 0. Original donor import unrun.
 Terminal stage 32 registered. Other lanes unchanged. No CI/native/
 continuum acceptance.
+
+
+## 47. BR212 — regular physical null chart and exact glancing rank loss
+
+For xi=(t,i,0,0,-l), l²-t²=1, use transverse vectors
+(l,0,0,0,-t), e2,e3 with Lorentz Gram diag(-1,1,1).
+The five tracefree symmetric polarizations produce curvature
+Z=(xi wedge v) S (xi wedge v)^T. This chart avoids division by l.
+At static, damped and oscillatory rational samples the original
+two-sided jump T=[(I-F)N,(I+F)N,-jJ] has rank 19.
+At both glancing endpoints t=±i,l=0 the null carrier still
+has dimension five but jump rank drops to 13, nullity six,
+with shape image rank one. On the entire real parametrized
+oscillatory arc t=i(1-u²)/(1+u²), l=2u/(1+u²), u>0,
+the selected 19-row minor equals
+10567230160896 i u^7(u^4+1)^2/[1953125(u²+1)^11].
+This proves full jump rank on that arc, not on all complex
+damped frequencies. Its seventh-order vanishing is a minor
+order, not a sharp singular-value or derivative-loss exponent.
+Adding original wall rows [0,RN,k(t I-i B1)] at exact
+glancing yields rank 15, nullity four, shape image rank one
+for each sign and k=1,2,10. Glancing is a limiting symbol,
+not an exponentially localized mode at l=0. A uniform inverse
+on all 19 independent amplitudes cannot extend to this limit.
+Remaining: exact singular filtration and source-compatible
+quotient, damped complex frequency, quantitative loss,
+finite-collar and variable-coefficient closure. BR44/56 rates
+remain conditional. No nonlinear theorem or other lane closure.
+Local independent reconstruction: scan.py and poly.py executed
+with SymPy 1.14.0 and 90s caps; outputs in receipt. New committed
+donor entry adds algebraic chart assertions and is unrun.
+Terminal stage 33. No CI/native acceptance.
