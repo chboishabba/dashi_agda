@@ -12,6 +12,7 @@ from check_pnp_dual_syndrome_fourier import dual_contrast
 from check_pnp_quadratic_phase import structured_contrast
 from check_pnp_mobius_character import mobius_contrast
 from check_pnp_mobius_prefix import prefix_portfolio
+from check_pnp_intrinsic_patch import contrast as intrinsic_patch_contrast
 
 # Each source sector: CNF, affine rows/target, one observable trit, signed weight.
 def canon(F):
@@ -45,7 +46,7 @@ class ContinuationAllowance:
         self.left-=cap;self.charges[name]=self.charges.get(name,0)+cap
         return True
 
-def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None,phase_degree=3,phase_leaf_cap=64):
+def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,boundary_width=3,syndrome_budget=16384,normal_budget=16384,dual_budget=16384,dual_probes=32,phase_budget=65536,mobius_budget=65536,prefix_budget=65536,ledger=None,phase_degree=3,phase_leaf_cap=64,patch_budget=16384,patch_width=24):
     if ledger is not None:ledger.baseline_cells+=1
     def take(name,cap):return bool(cap) and (ledger is None or ledger.reserve(name,cap))
     # Unit propagation keeps both target and observable offset on original indices.
@@ -161,6 +162,14 @@ def cell(F,cols,target,offset,remaining,w,conditioned=True,component_width=6,bou
             lo,hi=list(a),list(b)
     if any(a!=b for a,b in zip(lo,hi)) and take('mobius',mobius_budget):
         cert=mobius_contrast(F,cols,target,offset,remaining,w,4,4096,mobius_budget)
+        if cert is not None:
+            a,b,_=cert
+            assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
+            lo,hi=list(a),list(b)
+    # Bounded exact original Boolean residual-mask fold. A full image
+    # key includes the observable; a refusal retains all earlier bounds.
+    if len(remaining)<=patch_width and any(a!=b for a,b in zip(lo,hi)) and take('intrinsic_patch',patch_budget):
+        cert=intrinsic_patch_contrast(F,cols,target,offset,remaining,w,patch_budget,patch_width)
         if cert is not None:
             a,b,_=cert
             assert all(x<=y<=z for x,y,z in zip(lo,a,hi))
