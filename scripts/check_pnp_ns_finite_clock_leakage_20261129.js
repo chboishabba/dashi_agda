@@ -3,7 +3,7 @@ function campaign(){
 "use strict";
 const assert=(x,m)=>{if(!x)throw Error(m)},range=n=>Array.from({length:n},(_,i)=>i);
 let seed=4701;const rnd=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return (seed>>>8)%n};
-const counts={nonlinearPairs:0,nonlinearSquares:0,defectReplays:0,clockedPrefixes:0,clockedWitnesses:0,nsPairDerivatives:0,nsBuckets:0,nsRadicalReopens:0};
+const counts={nonlinearPairs:0,nonlinearSquares:0,defectReplays:0,clockedPrefixes:0,clockedWitnesses:0,nsPairDerivatives:0,nsBuckets:0,nsRadicalReopens:0,nsSignPairs:0,nsResidualDerivative:0};
 const parity=x=>{let y=0n;while(x){y^=1n;x&=x-1n}return y};
 function mobius(v,n){let a=v.slice();for(let j=0;j<n;j++)for(let m=0;m<a.length;m++)if(m&(1<<j))a[m]^=a[m^(1<<j)];return a.reduce((r,x,i)=>r|(BigInt(x)<<BigInt(i)),0n)}
 function value(p,x){let a=0;for(let s=x;;s=(s-1)&x){a^=Number((p>>BigInt(s))&1n);if(!s)return a}}
@@ -39,7 +39,7 @@ for(let k=0;k<100;k++){let n=2+rnd(6),N=1<<n,F=range(1+rnd(8)).map(()=>range(1+r
 }
 const C=1,modes=[];for(let i=-C;i<=C;i++)for(let j=-C;j<=C;j++)for(let k=-C;k<=C;k++)modes.push([i,j,k]);
 const key=v=>v.join(","),dot=(a,b)=>a.reduce((z,x,i)=>z+x*b[i],0),add=(a,b)=>a.map((x,i)=>x+b[i]),sub=(a,b)=>a.map((x,i)=>x-b[i]),scale=(a,k)=>a.map(x=>x*k),neg=a=>scale(a,-1),norm=a=>dot(a,a),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],tensor=(a,b)=>a.flatMap(x=>b.map(y=>x*y));
-const Z=()=>Array(9).fill(0),D=6;let leakage=0;
+const Z=()=>Array(9).fill(0),D=6;let leakage=0,signObstructions=0,radicalForcing=0,firstObstruction=null;
 for(let trial=0;trial<18;trial++){
  let U=new Map();for(let p of modes){if(U.has(key(p)))continue;let v=norm(p)?cross(p,range(3).map(()=>rnd(7)-3)):[0,0,0];U.set(key(p),v);U.set(key(neg(p)),v)}
  let N=new Map();for(let k of modes){let g=[0,0,0];for(let p of modes){let q=sub(k,p);if(U.has(key(q)))g=add(g,scale(U.get(key(q)),dot(U.get(key(p)),q)))}
@@ -51,14 +51,18 @@ for(let trial=0;trial<18;trial++){
  let plus=tensor(add(scale(a,D),N.get(key(p))),add(scale(b,D),N.get(key(q))));
  let minus=tensor(sub(scale(a,D),N.get(key(p))),sub(scale(b,D),N.get(key(q))));
  assert(key(sub(plus,minus))===key(scale(j,2*D)),"product derivative");counts.nsPairDerivatives+=9;
+ // Reversed original velocity has the same quadratic RHS, same pair value,
+ // opposite cubic pair forcing; compare the independently constructed pair.
+ let rd=tensor(neg(a),neg(b)),rj=add(tensor(N.get(key(p)),neg(b)),tensor(neg(a),N.get(key(q))));
+ assert(key(rd)===key(d)&&key(rj)===key(neg(j)),"source sign reversal");counts.nsSignPairs++;
  rows.push({r,d,j});let g=buckets.get(r)||{d:Z(),j:Z(),n:0};g.d=add(g.d,d);g.j=add(g.j,j);g.n++;buckets.set(r,g)}
  for(let [r,g] of buckets){let direct=rows.filter(x=>x.r===r).reduce((z,x)=>add(z,x.j),Z());assert(key(direct)===key(g.j),"bucket forcing derivative");
  let damping=rows.filter(x=>x.r===r).reduce((z,x)=>add(z,scale(x.d,-r)),Z());assert(key(damping)===key(scale(g.d,-r)),"rate damping commutes");counts.nsBuckets++;
- for(let x of rows.filter(x=>x.r===r)){let residual=sub(scale(x.d,g.n),g.d);assert(key(add(residual,g.d))===key(scale(x.d,g.n)),"scaled reopen");counts.nsRadicalReopens++}
- if(g.j.some(x=>x!==0))leakage++;
+ let residualSum=Z(),rs=rows.filter(x=>x.r===r);for(let x of rs){let residual=sub(scale(x.d,g.n),g.d),residualJ=sub(scale(x.j,g.n),g.j);assert(key(add(residual,g.d))===key(scale(x.d,g.n)),"scaled reopen");residualSum=add(residualSum,residualJ);if(residualJ.some(v=>v!==0))radicalForcing++;counts.nsRadicalReopens++;counts.nsResidualDerivative++}assert(residualSum.every(v=>v===0),"radical derivative sum");
+ if(g.j.some(x=>x!==0)){leakage++;signObstructions++;if(!firstObstruction)firstObstruction={trial,k,r,bucket:g.d,cubicNumerator:g.j,denominator:D,reversedNumerator:neg(g.j)};}
  }
  }
 }
-return {status:"PASS",counts,nonlinearCases:nonlinear.length,cap:censor,rankRange:[Math.min(...nonlinear.map(x=>x.rank)),Math.max(...nonlinear.map(x=>x.rank))],nonzeroBucketNonlinearForcing:leakage,scope:"finite exact Boolean pullback (explicit cube cost), bounded verifier and original Fourier pair derivative at instantaneous rational data; not a physical trajectory or Clay theorem"};
+return {status:"PASS",counts,nonlinearCases:nonlinear.length,cap:censor,rankRange:[Math.min(...nonlinear.map(x=>x.rank)),Math.max(...nonlinear.map(x=>x.rank))],nonzeroBucketNonlinearForcing:leakage,signObstructions,radicalForcing,firstObstruction,scope:"finite exact Boolean pullback (explicit cube cost), bounded verifier and original Fourier pair derivative at instantaneous rational data; not a physical trajectory or Clay theorem"};
 }
 console.log(JSON.stringify(campaign(),null,2));
