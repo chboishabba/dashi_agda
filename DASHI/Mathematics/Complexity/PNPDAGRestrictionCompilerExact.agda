@@ -181,3 +181,40 @@ restrictedOutput : ∀ {n g} (pin : Fin n → Maybe Bool) (p : C.GateProgram n g
   observe (image c w) y (C.evaluateProgram (program c) y) ≡
   C.evaluateWire w x (C.evaluateProgram p x)
 restrictedOutput pin p w x y h = exact (compile pin p) x y h w
+
+-- Materialize the final Boolean result, charging a constant gate only
+-- when the restricted output has become a literal known value.
+finish : ∀ {n h} → C.GateProgram n h → Image n h → C.ConcreteBooleanCircuit n
+finish {h = h} p (wire w) = C.concrete-boolean-circuit h p w
+finish {h = h} p (known b) =
+  C.concrete-boolean-circuit (suc h) (C.appendGate p (C.constantGate b)) (C.gateWire fzero)
+
+finishExact : ∀ {n h} (p : C.GateProgram n h) (i : Image n h) (x : Vec Bool n) →
+  C.evaluateCircuit (finish p i) x ≡ observe i x (C.evaluateProgram p x)
+finishExact p (wire w) x = refl
+finishExact p (known b) x = refl
+
+finishBound : ∀ {n h g} (p : C.GateProgram n h) (i : Image n h) → h ≤ g →
+  C.circuitSize (finish p i) ≤ suc g
+finishBound p (wire w) h = N.≤-step h
+finishBound p (known b) h = s≤s h
+
+restrictCircuit : ∀ {n} → (Fin n → Maybe Bool) →
+  C.ConcreteBooleanCircuit n → C.ConcreteBooleanCircuit n
+restrictCircuit pin c =
+  let t = compile pin (C.program c) in finish (program t) (image t (C.outputWire c))
+
+restrictCircuitExact : ∀ {n} (pin : Fin n → Maybe Bool)
+  (c : C.ConcreteBooleanCircuit n) (x y : Vec Bool n) →
+  InputAgreement pin x y →
+  C.evaluateCircuit (restrictCircuit pin c) y ≡ C.evaluateCircuit c x
+restrictCircuitExact pin c x y h =
+  let t = compile pin (C.program c) in
+  trans (finishExact (program t) (image t (C.outputWire c)) y)
+    (exact t x y h (C.outputWire c))
+
+restrictCircuitBound : ∀ {n} (pin : Fin n → Maybe Bool) (c : C.ConcreteBooleanCircuit n) →
+  C.circuitSize (restrictCircuit pin c) ≤ suc (C.circuitSize c)
+restrictCircuitBound pin c =
+  let t = compile pin (C.program c) in
+  finishBound (program t) (image t (C.outputWire c)) (bound t)
