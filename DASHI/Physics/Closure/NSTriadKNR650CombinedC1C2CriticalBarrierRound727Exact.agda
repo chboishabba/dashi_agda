@@ -17,8 +17,12 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exa
 -- R414 then constructs the uniform signed critical family and barrier.
 --
 -- No R568 forcing-square identification is used.  No separate self/external
--- payment reappears.  This owner is a compiler only: it leaves C1a, C1b and C2
--- visibly proof-bearing.
+-- payment reappears.  The historical R726 C1b exact-zero-defect condition
+-- has strict physical-real sign countercontrols (28 Nov 2026), so the new
+-- compensated R726 route accepts a cutoff-uniform SIGNED defect ceiling and
+-- builds the SAME R410/R414 critical barrier.  Both the R723 combined bound
+-- and this physical defect ceiling, plus original positive-margin C2, remain
+-- proof-bearing mathematical inputs, not auto-constructed bounds.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
