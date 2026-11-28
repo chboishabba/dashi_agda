@@ -107,11 +107,29 @@ module Carrier {Value : Set}
 
   composeLaw : (a b : Code) (z : State) →
     apply (then a b) z ≡ apply b (apply a z)
-  composeLaw a b z =
-    tabulateExt (λ i →
-      signCompose (lookup (negative b) i)
-        (lookup (negative a) (lookup (source b) i))
-        (lookup z (lookup (source a) (lookup (source b) i))))
+  composeLaw a b z = tabulateExt (at a b z)
+    where
+      at : (a b : Code) (z : State) (i : Fin 6) →
+        lookup (apply (then a b) z) i ≡
+        lookup (apply b (apply a z)) i
+      at a b z i
+        rewrite lookupTabulate
+          (λ j → sign (lookup (negative (then a b)) j)
+            (lookup z (lookup (source (then a b)) j))) i
+          | lookupTabulate
+              (λ j → sign (lookup (negative b) j)
+                (lookup (apply a z) (lookup (source b) j))) i
+          | lookupTabulate
+              (λ j → xor (lookup (negative b) j)
+                (lookup (negative a) (lookup (source b) j))) i
+          | lookupTabulate
+              (λ j → lookup (source a) (lookup (source b) j)) i
+          | lookupTabulate
+              (λ j → sign (lookup (negative a) j)
+                (lookup z (lookup (source a) j))) (lookup (source b) i)
+          = signCompose (lookup (negative b) i)
+              (lookup (negative a) (lookup (source b) i))
+              (lookup z (lookup (source a) (lookup (source b) i)))
 
   module WithAtom (atom : Code) where
     module Collapsed = Binary.Collapsed (apply atom)
