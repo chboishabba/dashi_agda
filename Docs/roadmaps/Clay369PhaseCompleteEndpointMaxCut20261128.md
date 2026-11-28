@@ -1765,3 +1765,35 @@ no P-vs-NP result promoted.
 
 All fresh source files fetched/committed require native Agda/Lean
 typecheck. No GitHub CI or kernel proof run in this tranche.
+
+
+### Section 31 additional independent arbitrary-source check (not finite factorial fit)
+YM owner #1536 committed
+`scripts/check_ym_cmp102_generic_symbolic_fin_reindex.py` at
+67fff31d129754b2d84a502dbe1295486234eb5e.
+An independently executed equivalent SymPy script treated EVERY
+A_j and B_j as a free distinct symbol and verified for each
+c=1..12 that the original five-term G_c is exactly
+the original shifted signed Cauchy triangle plus
+(-X originalAWing + originalOmittedLinearB + X² originalBWing).
+This is a COEFFICIENT-INDEPENDENT polynomial identity; it is not
+inferred from the particular CMP109 factorial values. Its
+negative controls confirmed the omitted last B endpoint cannot
+be dropped. For all twelve c, polynomial difference was identically
+zero as a symbolic rational polynomial. The newly committed
+script includes 36 assertions (12 generic identities, 12 omitted
+last-B negatives and 12 high-degree support checks), but the
+byte-identical committed script has NOT been locally executed;
+only an equivalent independent symbolic program was.
+The mathematical all-c generalization is the finite Cauchy row
+identity, not extrapolation from c<=12. Native
+`OriginalShiftedRowFinReindex` remains explicitly unpaid.
+Additional exact rational independent NS 625/625 finite four-mode
+quarter-weight Cauchy/Hölder tests PASS; this does not test PDE
+admission or actual Lean elaboration.
+
+**Important verification:** Agda/Lean native compilers unavailable.
+Source bodies #1536/Lean #123/#124 were committed and need native
+checking, including cross-branch source signatures. Retain the
+documented original `--safe` import graph (at least thirteen
+selected safe/non-safe edges), no blind safety pragma removal.
