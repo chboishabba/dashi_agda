@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 import re
 import hashlib
+import sys
 
 P = 41
 D = P+1
@@ -112,10 +113,17 @@ def main():
         _mul.argtypes=[ctypes.c_char_p,ctypes.c_size_t,ctypes.c_char_p,ctypes.c_size_t,ctypes.c_void_p,ctypes.c_size_t]
         _mul.restype=None
         phi,diag,fixed,divisions=matrix()
-        a,b,sha=original_packet(root.parent/'DASHI/Moonshine/JInvariantBishopCM163LiteralPacketExact.agda')
         assert diag[-1]==diag[-2]==0
-        assert diag[:-2][::-1]==a and fixed[::-1]==b
-        print('PASS',divisions,'exact Newton divisions;',len(phi)**2,'symmetry entries;',len(a)+len(b),'literal packet coefficients; signed CM ratios',flush=True)
+        a,b=diag[:-2][::-1],fixed[::-1]
+        if '--digest-only' in sys.argv:
+            digest=lambda cs:hashlib.sha256(','.join(map(str,cs)).encode()).hexdigest()
+            assert digest(a)=='85132a72355a35b15add35de7941526ef7800f3fdb3daf22559b354343f263f9'
+            assert digest(b)=='3391a057a0fe7f6f6ff9151e6fbc5e826d7e3be89776145c2e58d21857b4ea96'
+            sha='digest-only: original packet blob eb41e2c937d89dfb8cf2f90d1f31e69b945ad5e0'
+        else:
+            originalD,originalS,sha=original_packet(root.parent/'DASHI/Moonshine/JInvariantBishopCM163LiteralPacketExact.agda')
+            assert a==originalD and b==originalS
+        print('PASS',divisions,'exact Newton divisions;',len(phi)**2,'symmetry entries;',len(a)+len(b),'literal packet coefficients (digest or direct); signed CM ratios',flush=True)
         print('literal blob',sha,'seconds',monotonic()-start,flush=True)
 
 if __name__=='__main__':main()
