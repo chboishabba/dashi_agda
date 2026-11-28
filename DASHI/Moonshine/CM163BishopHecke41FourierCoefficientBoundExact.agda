@@ -157,9 +157,9 @@ module At (inputs : Round11.BishopCutset) where
       let cv = Seq.xₙ→x∧x≃y⇒xₙ→y
             (Conv.mulR (Const.constantConverges two)
               (Conv.addR (Const.constantConverges M) Basel.reciprocalSequenceConvergesZero))
-            (P.*-congˡ (P.+-identityʳ M))
+            (P.*-cong P.≃-refl (P.+-identityʳ M))
           z = N.twist r f n
-      in Seq.xₙ≤yₙ⇒x₀≤y₀ (Const.constantConverges ∣ C.re z ∣) cv
-          (λ e → proj₁ (approximate M hb n e)) ,
-         Seq.xₙ≤yₙ⇒x₀≤y₀ (Const.constantConverges ∣ C.im z ∣) cv
-          (λ e → proj₂ (approximate M hb n e))
+      in Seq.xₙ≤yₙ⇒limxₙ≤limyₙ (λ e → proj₁ (approximate M hb n e))
+          (_ , Const.constantConverges ∣ C.re z ∣) (_ , cv) ,
+         Seq.xₙ≤yₙ⇒limxₙ≤limyₙ (λ e → proj₂ (approximate M hb n e))
+          (_ , Const.constantConverges ∣ C.im z ∣) (_ , cv)
