@@ -7,7 +7,7 @@ from check_pnp_source_derived_cover import Reservation, Refused, source_solve
 from check_pnp_bit_data_schedule import rref_bits, audit, Refused as DataRefused
 
 
-def reduce_source(F,n,rows,target,B,data_clock=None):
+def reduce_source(F,n,rows,target,B,data_clock=None,certificates=None):
     if n<0 or len(rows)!=len(target) or any(len(a)!=n for a in rows) or any(not 1<=abs(l)<=n for c in F for l in c):raise ValueError('source')
     C=tuple(tuple(sorted(set(c))) for c in F);A=tuple(tuple(a%3 for a in r) for r in rows);t=tuple(b%3 for b in target)
     R=tuple(range(n));pins={};trace=[]
@@ -15,6 +15,12 @@ def reduce_source(F,n,rows,target,B,data_clock=None):
         k=len(R);m=len(A)
         B.pay(1+k+sum(1+len(c) for c in C)+(m+1)*(k+1)*(1+m*k))
         rr=rref(tuple(a+(b,) for a,b in zip(A,t)),k) if data_clock is None else rref_bits(tuple(a+(b,) for a,b in zip(A,t)),k,data_clock)
+        if certificates is not None:
+            from check_pnp_rref_certificate import certified
+            original=tuple(a+(b,) for a,b in zip(A,t))
+            exact,receipt=certified(original,k,B)
+            assert exact==rr
+            certificates.append(dict(coordinates=R,original=original,receipt=receipt))
         if rr is None or () in C:return dict(status='EMPTY',trace=trace)
         eq,piv=rr;forced={};why=[]
         def put(i,b,reason):
@@ -38,9 +44,9 @@ def reduce_source(F,n,rows,target,B,data_clock=None):
         A=tuple(tuple(a[i] for i in keep) for a in eq);C=tuple(N);R=tuple(R[i] for i in keep)
 
 
-def solve_pins(F,n,rows,target,cap,data_clock=None,**kw):
+def solve_pins(F,n,rows,target,cap,data_clock=None,certificates=None,**kw):
     B=Reservation(cap);reserve=cap//16;B.pay(reserve)
-    try:q=reduce_source(F,n,rows,target,Reservation(reserve),data_clock)
+    try:q=reduce_source(F,n,rows,target,Reservation(reserve),data_clock,certificates)
     except (Refused,DataRefused):q=None
     if q is None:
         v=source_solve(F,n,rows,target,B.left,data_clock=data_clock,**kw)
