@@ -241,3 +241,10 @@ New formal DASHI #1550 DASHI/Cognition/PNF/X369E8TripleLeechGlueObstructionExact
 
 ### Native admission type repaired (75de31d)
 The chosen full-native E8 real Fourier map has a TOTAL exact inverse into R^9, but NOT into the discrete native T3^9 subset after arbitrary Weyl actions. The formal adapter X369FullNativeE8LeechPriorWeldExact now uses Maybe NineTrits for decode, proves successful just-native reopening for actual encoded source points, and explicitly permits nothing for nonternary wave images. No total native decoder is asserted for arbitrary real wave+centre pairs. Kernel check remains deferred; actual exact SymPy implementation native_admission already refuses out-of-domain coordinates.
+
+
+## 28 November controlling comprehensive pants-weld roadmap
+
+The canonical geometry-forward **full** reconciliation is now Docs/roadmaps/X369E8LeechLILAPantsFullWeld20261128.md (commit dd87dda). It names the original master owners for five-field \`InterfaceMatch\` iff, actual heterogeneous two-incidence topology merge, parametric/three-leg source seams, phase changed wave defects and the already constructed 13-stage compatible-family sheaf gluing and exact local restriction. Do not re-open those paid constructors. It also lists the genuine original same-object source-to-full-fabric, five-field source interpreter, consumer/future transport, indexed time/refinement/Frobenius, Leech lattice gluing, original LILA model and physical measurement gaps, with exact conditional equations/negative receipts.
+
+New formal source code on this branch: X369PantsFullFabricSourceWeldExact, X369PantsThreeLegConsumerCoherenceExact and X369OriginalPantsSheafSourceWeldExact. New executable code on LeechTransformer PR #5: x369_full_fabric_pants_source_weld.py with explicit source five-field validation and two/three-history byte BIDI; x369_leech24_pants_wave_weld.py with 3 native nine-trit original wave lanes plus three retained centre amplitudes and a five-field match required for finite pants merge. All source-written, with newly committed regressions, no kernel or full suite yet. Independent local SymPy BᵀB/projector/9×9 BIDI passed.
