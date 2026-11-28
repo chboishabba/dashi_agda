@@ -40,7 +40,7 @@ Below (hist a b c) (hist d e f) = (a ≤ d) × (b ≤ e) × (c ≤ f)
 
 mono : ∀ {a b c d} → Nonneg a → Nonneg b → Nonneg c → Nonneg d →
   Below a c → Below b d → Below (conv a b) (conv c d)
-mono (a0 , a1 , a2) (b0 , b1 , b2) (c0 , c1 , c2) (d0 , d1 , d2)
+mono {hist a b c} {hist d e f} {hist g h i} {hist j k l} (a0 , a1 , a2) (b0 , b1 , b2) (c0 , c1 , c2) (d0 , d1 , d2)
      (ac0 , ac1 , ac2) (bd0 , bd1 , bd2) =
   Q.+-mono-≤ (Q.+-mono-≤
     (CS.nonnegativeProductMonotone a0 b0 c0 d0 ac0 bd0)
@@ -133,9 +133,11 @@ rightExact ((h , k) ∷ xs) rewrite rightExact xs =
 -- with no square roots or assumed complex field.
 boundaryTailSquared : ∀ xs →
   CS.square (projectionSum xs) ≤ leftEnergy4 xs * rightEnergy4 xs
-boundaryTailSquared xs
-  with CS.finiteCauchySchwarzSquared (flatten xs)
-... | proof rewrite dotExact xs | leftExact xs | rightExact xs = proof
+boundaryTailSquared xs =
+  subst (λ r → CS.square (projectionSum xs) ≤ leftEnergy4 xs * r) (rightExact xs)
+    (subst (λ l → CS.square (projectionSum xs) ≤ l * CS.rightNormSquared (flatten xs)) (leftExact xs)
+      (subst (λ p → CS.square p ≤ CS.leftNormSquared (flatten xs) * CS.rightNormSquared (flatten xs))
+        (dotExact xs) (CS.finiteCauchySchwarzSquared (flatten xs))))
 
 pairSwap : ∀ sign x y → (- sign) * (y - x) ≡ sign * (x - y)
 pairSwap sign x y = solve (sign ∷ x ∷ y ∷ [])
