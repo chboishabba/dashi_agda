@@ -12,13 +12,13 @@ def orbit(key,G,B):
     B.pay(len(G)*(1+len(key)))
     return {tuple(sorted(act(g,dict(key)).items())):g for g in G}
 
-def refine(D,G,H,B):
+def refine(D,G,H,B,ops=None):
     """H <= G. Split old orbit mass by exact member count, transport witness."""
     if not H or not set(H)<=set(G):raise ValueError("subgroup")
     N={}
     for (key,s),(mass,w) in D.items():
         O=orbit(key,G,B)
-        unit,rem=divmod(mass,len(O))
+        unit,rem=divmod(mass,len(O)) if ops is None else ops.divmod(mass,len(O))
         if rem:raise AssertionError("nonuniform orbit mass")
         todo=set(O)
         while todo:
@@ -28,16 +28,17 @@ def refine(D,G,H,B):
             todo.difference_update(P)
             K=(x,s)
             assert K not in N
-            N[K]=(unit*len(P),act(O[x],w))
-    assert sum(m for m,w in D.values())==sum(m for m,w in N.values())
+            N[K]=((unit*len(P) if ops is None else ops.mul(unit,len(P))),act(O[x],w))
+    total=sum if ops is None else ops.sum
+    assert total(m for m,w in D.values())==total(m for m,w in N.values())
     return N
 
-def merge(D,H,B):
+def merge(D,H,B,ops=None):
     N={}
     for (key,s),(mass,w) in D.items():
         x,g=canonical(H,key,B);K=(x,s)
         old,rep=N.get(K,(0,act(g,w)))
-        N[K]=(old+mass,rep)
+        N[K]=((old+mass if ops is None else ops.add(old,mass)),rep)
     return N
 
 def plan(F,n,bags,rows,target,generators,B):
@@ -68,13 +69,13 @@ def plan(F,n,bags,rows,target,generators,B):
             and {g[i] for i in live}==live and moved(g,prefix)==C))
     return bags,first,last,owned,groups
 
-def advance(D,j,P,rows,B):
+def advance(D,j,P,rows,B,ops=None):
     bags,first,last,owned,groups=P
     # Intersection preserves old and new assigned sets, live sets and
     # processed clause multisets; hence fresh variables/current factors.
     G,H=groups[j:j+2];B.pay(len(G)+len(H))
     J=tuple(g for g in G if g in set(H))
-    D=refine(D,G,J,B)
+    D=refine(D,G,J,B,ops)
     fresh=tuple(i for i in bags[j] if first[i]==j);C=owned[j]
     n=len(first);r=len(rows);N={}
     B.pay(len(D)*(1<<len(fresh))*(1+n+r*n+sum(1+len(c) for c in C)))
@@ -86,9 +87,9 @@ def advance(D,j,P,rows,B):
             live=tuple(sorted((i,v) for i,v in x.items() if last[i]>j))
             k,g=canonical(J,live,B);K=(k,t)
             old,rep=N.get(K,(0,act(g,w|z)))
-            N[K]=(old+mass,rep)
+            N[K]=((old+mass if ops is None else ops.add(old,mass)),rep)
     # J-orbit masses are disjoint; H preserves the completed prefix.
-    return merge(N,H,B)
+    return merge(N,H,B,ops)
 
 def residual(P,j,key,s,rows,target):
     """Export the actual unprocessed constraints, not a fresh surrogate."""
@@ -140,24 +141,29 @@ def finish_residual(D,P,j,F,rows,target,B,data_clock=None):
 
 def solve(F,n,bags,rows,target,generators,cap,force_cut=None,data_clock=None):
     B=Budget(cap)
+    from check_pnp_nat_bit_schedule import NatOps,Refused as DataRefused
+    ops=None if data_clock is None else NatOps(data_clock)
     try:
         # Reserve a separate fallback portion up front. A failed advance
         # is charged in full and the previous immutable cut survives.
         budget=cap//2;B.pay(budget);A=Budget(budget)
         P=plan(F,n,bags,rows,target,generators,A)
         D={((),(0,)*len(rows)):(1,{})};j=0;trace=[]
+        stop="completed"
         while j<len(P[0]) and (force_cut is None or j<force_cut):
-            try:N=advance(D,j,P,rows,A)
-            except Refused:break
+            try:N=advance(D,j,P,rows,A,ops)
+            except Refused:stop="frontier_allowance";break
+            except DataRefused:stop="frontier_data_clock";break
             D=N;j+=1;trace.append((len(D),len(P[4][j])))
         if j==len(P[0]):
             k,w=D.get(((),tuple(t%3 for t in target)),(0,None))
             x=None if w is None else tuple(w[i] for i in range(n))
             if x is not None:assert accepts(F,x) and tuple(sum(a*b for a,b in zip(row,x))%3 for row in rows)==tuple(t%3 for t in target)
             return dict(status="WITNESS" if k else "EMPTY",count=k,witness=x,trace=trace,reserved=B.used)
+        if stop=="completed":stop="forced_cut"
         result=finish_residual(D,P,j,F,rows,target,B,data_clock)
-        return dict(result,trace=trace,reserved=B.used)
-    except Refused:return dict(status="UNKNOWN",reserved=B.used)
+        return dict(result,trace=trace,reserved=B.used,stop=stop,completed_cut=j)
+    except Refused:return dict(status="UNKNOWN",reserved=B.used,stop="plan_or_residual_allowance")
 
 def main():
     # S3 symmetry at the first bag; the next two asymmetric placements
