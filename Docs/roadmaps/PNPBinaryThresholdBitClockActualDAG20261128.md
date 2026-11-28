@@ -29,7 +29,7 @@ if x>=M, both outer sides equal M because 2*x+b >= M and
 2*M+b >= M. Induction on input length proves the algorithm.
 
 Machine cost: O(L) comparisons/shift-add operations on values with
-at most ceil(log_2(M+1)) bits, i.e. O(L*(log(M+1))^c) bit operations
+at most ceil(log_2(M+1)) bits, i.e. O(L*(1+log(M+1))^c) bit operations
 with a specified standard multiplication/comparison implementation
 and fixed small c. Source row traversal and M computation must also be
 charged. This is a polynomial-**representation** weld, not a polynomial
