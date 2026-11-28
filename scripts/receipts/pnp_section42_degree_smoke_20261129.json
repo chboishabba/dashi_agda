@@ -1,0 +1,10 @@
+{
+  "fixture":"scripts/fixtures/pnp_section42_degree_smoke_20261129.json",
+  "status":"PASS",
+  "degree_campaigns":[
+    {"source_id":"section42-sparse-smoke-n32","family":"smoke-only","n":32,"proof_system":"CNF clause-violation ANF Boolean quotient","degree_statuses":["STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","REFUTED"],"exact_minimum_in_tested_degrees":3},
+    {"source_id":"section42-sparse-smoke-n48","family":"smoke-only","n":48,"proof_system":"CNF clause-violation ANF Boolean quotient","degree_statuses":["STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","STABLE_NO_REFUTATION","REFUTED"],"exact_minimum_in_tested_degrees":3}
+  ],
+  "recovery_attempt_audit":{"records":0,"trend":"INSUFFICIENT_RECORDS"},
+  "scope":"smoke controls only; not the five original neutral instances"
+}
