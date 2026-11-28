@@ -154,6 +154,24 @@ def four_worlds(material,cfg):
             if not source:cc['incident_sqrt_W']=np.zeros_like(cfg['incident_sqrt_W'])
             if not active:cc['heating_W']=np.zeros_like(cfg['heating_W'])
             worlds['%s_%s'%('source' if source else 'off','active' if active else 'passive')]=cycle(material,cc)
-    a=worlds['source_active']['strict_campaign_net_J']; p=worlds['source_passive']['strict_campaign_net_J']
-    return dict(worlds=worlds,selected_passive_advantage_J=None if a is None or p is None else a-p,
+    a=worlds['source_active']['strict_campaign_net_J']
+    p=worlds['source_passive']['strict_campaign_net_J']
+    oa=worlds['off_active']['strict_campaign_net_J']
+    op=worlds['off_passive']['strict_campaign_net_J']
+    # Strict original-state restoration is required for every term in the
+    # source-specific interaction. An unrestored off-world is not silently
+    # replaced by a conditional, depletion-adjusted or sampled value.
+    interaction=None if any(z is None for z in (a,p,oa,op)) else (a-p)-(oa-op)
+    # Off-source, the net external incident work is zero. A genuinely
+    # restored source-off campaign cannot create useful net work from
+    # activation already charged to the same resource ledger.
+    for name in ('off_active','off_passive'):
+        z=worlds[name]['strict_campaign_net_J']
+        if z is not None and z>1e-8*max(1.,abs(worlds[name]['campaign_ledger']['paid_J'])):
+            raise ArithmeticError('source-off restored gain contradicts paid-energy ledger')
+    return dict(worlds=worlds,
+                selected_passive_advantage_J=None if a is None or p is None else a-p,
+                strict_source_interaction_J=interaction,
+                source_interaction_admitted=interaction is not None,
+                source_specific_causal_identification=False,
                 strongest_passive_certified=False,physical_admission=False)
