@@ -16,6 +16,8 @@ open import Agda.Builtin.Nat using (Nat; suc)
 import Real as R
 import DASHI.Foundations.BishopFiniteCauchyWeightedPowerExact as Weighted
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFinRowClosureExact as Closed
+import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailToLimitExact as ToLimit
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.YMClayCMP102OriginalOddEvenFinRowBIDIExact as Rows
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGToTailAlgebraExact as Algebra
 import DASHI.Physics.YangMills.YMClayCMP102OriginalFiniteTailGeometryExact as Tail
@@ -42,3 +44,14 @@ originalNativeFiniteGIsSourceTail :
     (Tail.originalSignedCauchyTail X n)
 originalNativeFiniteGIsSourceTail =
   Closed.originalGToActualCauchyTailClosed
+
+-- Single exact original finite positive-tail Bishop-order leaf.
+-- A genuine proof of these premises (including G_count=0) is still
+-- needed before scalar CMP102 G=0 is kernel accepted.
+originalNativeFiniteTailOrderToOriginalGZero :
+  ∀ X (inside : R._≤_ (R.∣ X ∣) Half.bishopQuarter) →
+  ToLimit.OriginalZeroCountOrder X →
+  ToLimit.OriginalPositiveTailOrder X →
+  R._≃_ (Original.originalG X inside) R.0ℝ
+originalNativeFiniteTailOrderToOriginalGZero =
+  ToLimit.originalGZeroFromActualFiniteTailOrder
