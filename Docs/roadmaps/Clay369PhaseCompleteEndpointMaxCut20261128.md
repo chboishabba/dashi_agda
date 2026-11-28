@@ -2197,3 +2197,182 @@ theorem. The locally executed 3180 test was written as a
 Python-visible exact rational programme; committed corresponding
 YM #1536 source script `scripts/check_ym_cmp102_section33_shifted_cauchy_wings.py`
 is not claimed byte-identically executed.
+
+
+## Section 34 — original CMP102 factorial coefficient-mass proof cut (2026-11-28)
+
+**Actual source heads at intake:** YM Agda #1536
+08059ff3d704ad21ad48d67ecbe6b7fa6e3aafe0;
+canonical rollup Agda #1551 48992fa312de996589f7259d8188f806978a6f44.
+No parallel branch rebase, no Agda/Lean kernel/typecheck, no GitHub
+CI. New modules are SOURCE-WRITTEN / PENDING NATIVE acceptance.
+The original source PR remains the owner. Every source claim must
+distinguish actual checked arithmetic from Agda theorem elaboration.
+
+### Existing ORIGINAL donor reconciliation
+- Original factorial series:
+  `DASHI/Physics/YangMills/BalabanCMP109BishopRootFreeSeriesExact.agda`:
+  `aCoefficient`, `bCoefficient`, `aNN`, `bNN`,
+  `aStep`, `bStep`. The old `aStep`/`bStep` prove
+  successor <= PREVIOUS coefficient (ratio <= 1), **NOT**
+  the sharper 1/12 or 1/20 ratios required for the new finite
+  mass ceiling. Do not misattribute the stronger ratio to them.
+- The true coefficients are literally the original CMP102
+  `aCoefficient,bCoefficient` aliases in
+  `YMClayCMP102OriginalEndpointCauchyShiftExact`, with
+  a_n=1/(2n+2)! and b_n=1/(2n+3)!.
+- Recovered `BishopFiniteCauchyWingAbsoluteBoundExact`,
+  `BishopFiniteCauchyTriangleInsideRectangleExact`,
+  `BishopFiniteDegreeOneGeometricBoundExact`,
+  `BalabanStepVBishopFiniteGeometricExact`,
+  and `BalabanStepVFiniteGeometricInductionExact`.
+  Existing generic Bishop geometric machinery DOES NOT
+  require a new infinite-series construction for CMP102.
+- Section33 Fin reindex closure is source-written, with the
+  all-count original G to signed Cauchy tail proof body; it is
+  NOT kernel verified. Section33 corrected c-1/c-2 shifted
+  wing bounds and exceptional c=1 B singleton are retained.
+
+### New general exact Bishop finite MASS-BANK theorem
+New on Agda #1536
+`DASHI/Foundations/BishopFiniteRatioBudgetExact.agda`
+commit 9b973e4342d07d4d499cbd83f9f82987fb004239.
+For the ORIGINAL Bishop-real finite `Seq.SeriesOf`, source
+proves by direct finite induction:
+  c_n>=0, B>=0,
+  c_(n+1)<=q*c_n,
+  1+B*q ≃ B
+   => all n: (sum_{j<n} c_j)+B*c_n <= B*c_0
+   => all n: sum_{j<n} c_j <= B*c_0.
+No infinite sum, no tail-completion authority, no hidden
+positive/symmetric truncation, no new real carrier. It
+reuses source Bishop `P.*-monoˡ-≤-nonNeg`,
+`P.+-mono-≤` and native `P.ℝ-Solver`.
+This generic theorem is SOURCE-WRITTEN and pending native
+Agda elaboration/trust graph.
+
+### CMP102 original factorial-specific installation
+New
+`YMClayCMP102OriginalFactorialMassBudgetExact.agda`
+initial commit 017c7355c1f809f26d838213867105756a662dd8,
+final source commit 51e604476bab46de3b9631208e3f968ad4fa25bf.
+It names the TRUE original sharply contracted factorial
+source obligations, not an arbitrary positive sequence:
+  OriginalARatio: a_(n+1) <= (1/12)*a_n
+  OriginalBRatio: b_(n+1) <= (1/20)*b_n.
+The two budgets are B_A=12/11 and B_B=20/19,
+with original identities
+   1+B_A*(1/12)=B_A,
+   1+B_B*(1/20)=B_B.
+Original first coefficients a0=1/2, b0=1/6 from
+`YMClayCMP102OriginalFactorialSingletonExact.agda`,
+commit 4068e3d8cdcd39504c57f42b1c0c1ceb23c3f36d.
+Real-order nonnegative rationals B_A/B_B have source-written
+embedding certificates in the final mass module, avoiding
+an extra assumed positivity field. The original CMP109
+aNN/bNN provide the true source coefficient positivity.
+As a result, **conditional ONLY on the two actual
+strong factorial-ratio inequalities**, real Bishop all-count
+native consumer bodies yield:
+  sum_{j<n} a_j <= (12/11)*(1/2)=6/11,
+  sum_{j<n} b_j <= (20/19)*(1/6)=10/57.
+No independent singleton, positivity, or finite geometric
+bound premise is required after actual source ratio proofs.
+These ratio premises are STILL OPEN AS NATIVE PROOF TERMS
+and must be proven from the exact factorial successor in
+`BalabanClayGate4BishopHalfRadiusRealEstimatesExact`
+and `Data.Nat.Properties` plus the existing
+`FiniteNatFractionOrderExact` embedding/order bridge.
+Do not claim they follow directly from donor `aStep/bStep`,
+which only prove monotonic decrease.
+
+Source acceptance root
+`YMClayCMP102Section34FactorialMassAcceptanceExact.agda`
+commit 78d90e7c6d50e41ecc0585cb38c30703af7a4357.
+It consumes the real Bishop finite coefficient mass
+proof terms with named actual factorial ratio inputs,
+plus the original shifted A/B absolute wing and signed
+tail triangle order donors. Requires native typecheck
+and transitive --safe dependency inspection.
+
+### Original exact all-index rational calculation
+The *mathematical* factorial successor ratios, independently
+of finite tests, are exact algebra:
+  a_(n+1)/a_n=1/[(2n+4)(2n+3)] <=1/12
+  b_(n+1)/b_n=1/[(2n+5)(2n+4)] <=1/20.
+Use Nat factor denominator lower bounds and reciprocal
+monotonicity to write the two native original ratio proofs.
+This is the correct coarse-to-fine finite induction; DO NOT
+reopen Bishop infinite limits.
+
+Then the original finite signed residual tail decomposition
+already derived in Sections30–33 combines the true bounds
+to yield for c>=1 and |X|<=1/4:
+  |G_c(X)|
+     <= ((6/11)^2+2*(10/57)+(10/57)^2)|X|^c
+     = (267004/393129)|X|^c
+     < (3/4)*4^-c,
+with c=0 original source G_0=1 <=3.
+This *mathematical* inequality is not a completed Agda
+Bishop real-order proof; the relevant shifted Cauchy
+monomials must still be transported through the actual
+native finite positive wing estimates. The Section33
+original direct absolute-error receiver then proves
+the original represented G(X)=0 if the order term is
+eventually native-accepted.
+
+### Executed exact regression, clearly separate from kernel
+The local user-visible Python source
+`/mnt/data/check_clay_section34_factorial_ratio_mass.py`
+was actually executed and produced
+  SECTION34 ORIGINAL CMP102 EXACT PASS
+  ratio 2000, bank 760, wing 900, disk 450
+  TOTAL 4110/4110 PASS.
+Factorial successor checks covered n=0..499,
+finite bank invariant n=0..189, and exact signed
+original G-cauchy-wing reconstruction / both signed
+quarter-disk endpoints c=1..90 with exact `Fraction`.
+The script was separately committed to #1536
+`scripts/check_ym_cmp102_section34_factorial_ratio_mass.py`
+at 53c1ae9cf49da9d05af45463f34ad12f4528d4dd;
+do not claim byte-identical source replay unless hashes
+are compared. Finite arithmetic regression is neither
+native Agda kernel proof nor universal 4D YM result.
+
+### Six Clay frontier/nonpromotion graph
+YM remaining scalar: ONLY two source-native factorial
+successor-ratio proof terms and actual original positive
+shifted-wing Bishop order-to-tail estimate, with count-zero
+exception, then complete Agda --safe/typecheck and original
+represented G convergence. HOWEVER the ORIGINAL physical
+SU(N) Wilson/connected F19 shared plaquette, CMP116 rooted
+absolute shell, interacting measure, OS positivity,
+nontriviality and SAME-H mass gap are major separate
+unproved physical requirements.
+NS: Section32 ONE original global physical Galerkin source
+has energy, dissipation, all R-shells and L4_t quarter
+energy, but still no cutoff-uniform signed N2e nonlinear
+transfer / continuum regularity / forced-unforced physical
+admission.
+BSD: original Selmer/Sha and all-degree signed Mellin
+growth present, still complex selected L-derivative Mellin
+bridge and universal rank equality/Sha finiteness.
+Hodge: original affine finite/proper and coupled deck
+five+five and nonzero signed Q0 Jacobian present, still
+actual global projective cycle/ramification glue and
+primitive nonzero cohomological pairing.
+RH: original xi/zeta Clay statement BIDI present; true
+pinned trusted external proof admission and axiom graph
+not established.
+PNP: original source F3 legal residual, actual read clock
+input ceiling and closed observer negative controls
+present; unrestricted SAT sharing-stable internal machine
+work lower bound or polynomial algorithm remains.
+
+**Next large source cut:** pay the two native factorial
+successor ratios with the REAL Nat factorial owner and
+true rational cross-multiplication; weld finite *positive
+shifted* Cauchy wing tail with those coefficient masses
+via native |X|^c power extraction. Only then consume the
+original Bishop zero receiver. Do not fabricate native
+acceptance or claim the Clay programmes solved.
