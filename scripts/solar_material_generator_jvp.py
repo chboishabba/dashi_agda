@@ -55,6 +55,43 @@ def amplitude_exchange_jvp(model,volumes,amplitude,d_amplitude):
     return dict(d_exchange=out,full_generator_jvp_admitted=False,
                 zero_support_stage_weld_required=bool(np.any((q==0)&(dq!=0))))
 
+def amplitude_material_boundary_jvp(model,volumes,q,dq,nu,dnu,gyro,axis,right_support):
+    """Explicit right-stratum limit and derivative; not a smooth generator JVP.
+
+    right_support is a path premise: q=0,dq=0 alone cannot decide whether
+    the population is identically zero or positive at higher order.
+    Gyro and axis are held fixed; all loss terms use the right support.
+    """
+    q,dq,nu,dnu,gyro,axis=map(lambda a:np.asarray(a,float),(q,dq,nu,dnu,gyro,axis))
+    active=np.asarray(right_support,bool); n=len(volumes)
+    if any(a.shape!=(n,3) for a in (q,dq,nu,dnu,gyro,axis,active)):
+        raise ValueError('right material chart shape mismatch')
+    if not all(np.isfinite(a).all() for a in (q,dq,nu,dnu,gyro,axis)):
+        raise ValueError('nonfinite right material chart')
+    if np.any(nu<0) or not np.allclose(np.linalg.norm(axis,axis=1),1):
+        raise ValueError('invalid loss or magnetic axis')
+    if np.any(((q>0)|(dq>0))&~active):
+        raise ValueError('right support contradicts amplitude path')
+    ex=amplitude_exchange_jvp(model,volumes,q,dq)['d_exchange']
+    H=np.asarray(model['generator'],float); P=H.copy(); dloss=np.zeros_like(H)
+    base_loss=np.asarray(model['loss'],float); plus_loss=base_loss.copy()
+    N=len(H); offset=N-9*n
+    for o in range(n):
+        b=axis[o]; cross=np.array([[0,-b[2],b[1]],[b[2],0,-b[0]],[-b[1],b[0],0]])
+        for j in range(3):
+            sl=slice(offset+9*o+3*j,offset+9*o+3*j+3)
+            block=-gyro[o,j]*cross-nu[o,j]*np.eye(3)
+            expected=block if q[o,j]>0 else np.zeros((3,3))
+            if not np.array_equal(H[sl,sl],expected):
+                raise ValueError('base generator does not match stated amplitude support')
+            if active[o,j]:
+                P[sl,sl]=block
+                plus_loss[sl,sl]=nu[o,j]*np.eye(3)
+                dloss[sl,sl]=dnu[o,j]*np.eye(3)
+    return dict(right_limit=P,right_loss=plus_loss,d_right_generator=ex-dloss,
+                d_right_loss=dloss,right_support=active,
+                full_generator_jvp_admitted=False)
+
 def fixtures():
     rng=np.random.default_rng(369);ne,nf,n=5,3,2;N=ne+nf+9*n
     W=rng.normal(size=(ne,3*n));me=1+rng.random(ne);vol=np.array([2.,3.])
