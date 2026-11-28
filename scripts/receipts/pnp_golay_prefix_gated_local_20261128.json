@@ -1,0 +1,156 @@
+{
+  "scope": "Local exact Python replays. New executable core hashes verified against GitHub; local donor imports previously transcribed, not full checkout. Two campaign blob identifiers differ despite fetched source text/length matching the locally authored campaigns; no byte-identity assertion for those two campaigns. Native source not kernel accepted.",
+  "blobs": {
+    "golay": "9d343336a82492b98e298162836a628c1d082b53",
+    "prefix": "8729c977e1afbda13bb3be21ad515954771fbeaa",
+    "gated": "d699467bf5342466e62b8c8aa59aa09f36bb2a50",
+    "portfolio_campaign": "8d071dddd30d08ac86186e784c676a953b8f5b91",
+    "prefix_campaign_local": "5fd31077e74ce43b07bbd84125ca608d26e18641",
+    "prefix_campaign_reported_repo": "65bc93211820e6490d2ed94133e66f3816a7afb5",
+    "gated_campaign_local": "c88576818b5a77e36506056c7ed65501ad936d87",
+    "gated_campaign_reported_repo": "7c6ca0689cd2a60b69ab8dcd9f9c5c4834955ce9"
+  },
+  "golay": {
+    "donor": "DASHI/Foundations/TernaryGolay/ExplicitCode729.agda",
+    "donor_blob": "8931778e6e6b80978fa3dadefd0824a687dcdd96",
+    "gram_checks": 108,
+    "weight_distribution": {
+      "0": 1,
+      "6": 264,
+      "9": 440,
+      "12": 24
+    },
+    "message_pairs": 531441,
+    "bidi_samples": 729,
+    "histogram": [
+      177633,
+      176904,
+      176904
+    ],
+    "character": 729
+  },
+  "prefix": {
+    "seed_base": 3692823,
+    "fixtures": 512,
+    "points": 44430,
+    "attempts": 2048,
+    "exact": 1522,
+    "partial": 128,
+    "refused": 398,
+    "directional_checks": 4950,
+    "work": 136507,
+    "chart_points": 3838,
+    "high_rank": {
+      "rank": 64,
+      "nullity": 0,
+      "points": 1,
+      "contrast": [
+        -1,
+        2,
+        -1
+      ]
+    },
+    "partial_control": {
+      "variables": 40,
+      "clauses": 31,
+      "prefix": 1,
+      "head": [
+        547608330240,
+        549755813888,
+        0
+      ],
+      "caps": [
+        64424509440,
+        0,
+        0
+      ],
+      "lo": [
+        416611827712,
+        551903297536,
+        -1097364144128
+      ],
+      "hi": [
+        545460846592,
+        616327806976,
+        -1032939634688
+      ]
+    }
+  },
+  "portfolio": {
+    "seed_base": 3692824,
+    "fixtures": 512,
+    "attempts": 2048,
+    "directional_checks": 4509,
+    "exact": 1386,
+    "partial": 117,
+    "refused": 545,
+    "successful_attempt_reservations": 4153,
+    "successful_receipt_allocated": 262752
+  },
+  "gated": {
+    "seed_base": 3692819,
+    "fixtures": 2048,
+    "raw_steps": 96970,
+    "old": {
+      "literal": 17083,
+      "jumps": 2997,
+      "probes": 69946
+    },
+    "trigger_only": {
+      "literal": 42735,
+      "jumps": 1770,
+      "probes": 18397,
+      "cooldown_skips": 2080,
+      "compile_charge": 204952113,
+      "probe_charge": 211543981,
+      "bookkeeping_charge": 828055,
+      "literal_charge": 15808546
+    },
+    "initial_rejected_policy": {
+      "probes": 325793,
+      "admission_refusals": 52026,
+      "retired": true
+    },
+    "final_admitted": {
+      "literal": 96970,
+      "jumps": 0,
+      "probes": 0,
+      "preflight_skips": 15120,
+      "discovery_disabled": 1578,
+      "bookkeeping_charge": 990588,
+      "literal_charge": 42045579
+    },
+    "cooldown_controls": 2048,
+    "huge": {
+      "raw": 1000000000001,
+      "literal": 3,
+      "jumps": 1,
+      "probes": 41,
+      "compile_charge": 1040401,
+      "probe_charge": 12086573,
+      "bookkeeping_charge": 218,
+      "literal_charge": 29092,
+      "admitted_literal_lower": 4999999999990
+    },
+    "straight_line": {
+      "raw": 12,
+      "literal": 12,
+      "probes": 0,
+      "halt": true
+    },
+    "ordered_source_attachment": "optional consumer code and acceptance fixture updated; full bridge checkout/import not run"
+  },
+  "execution": {
+    "timeout_per_batch_seconds": 90,
+    "prefix_batches": 8,
+    "gated_final_batches": 8,
+    "portfolio_batches": 1,
+    "full_checkout": false,
+    "agda_kernel": false,
+    "lean_kernel": false,
+    "ci": false,
+    "physical_bit_clock": false,
+    "self_quoted_machine_exporter": false,
+    "prior_512_continuation_replay": "not rerun this tranche; prior result retained"
+  }
+}
