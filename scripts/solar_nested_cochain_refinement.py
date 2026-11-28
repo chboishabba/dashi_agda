@@ -94,3 +94,54 @@ def signed_coefficient_complement(bundle,k,fine,coarse):
     if not np.allclose(reopened,fine,rtol=1e-12,atol=1e-12):
         raise ArithmeticError('signed refinement reopen failed')
     return dict(signed_residual=residual,spatial_complement=detail,reconstruction_error=float(np.max(abs(reopened-fine))))
+
+def metric_pullback(bundle,coarse_masses,fine_masses):
+    """Actual consistent Whitney Hodge pullback and diagonal-metric defect.
+    The signed maps act on raw cochains, never directly on energy coordinates.
+    """
+    receipts=[]
+    for k,H,F in zip((1,2),coarse_masses,fine_masses):
+        L=bundle['numerator'][k]/bundle['denominator'][k]
+        R=bundle['restriction'][k]
+        H,F=np.asarray(H,float),np.asarray(F,float)
+        if H.shape!=(L.shape[1],)*2 or F.shape!=(L.shape[0],)*2:
+            raise ValueError('Hodge and cochain shape mismatch')
+        if np.any(np.diag(H)<=0) or np.any(np.diag(F)<=0):
+            raise ValueError('nonpositive Hodge diagonal')
+        pull=L.T@(F@L)
+        diag_pull=L.T@(L.multiply(np.diag(F)[:,None]))
+        diag_defect=diag_pull.toarray()-np.diag(np.diag(H))
+        # Normalized maps for the original diagonal-Hodge candidate.
+        Ln=L.multiply(np.sqrt(np.diag(F))[:,None]).multiply(1/np.sqrt(np.diag(H))[None,:])
+        Rn=R.multiply(np.sqrt(np.diag(H))[:,None]).multiply(1/np.sqrt(np.diag(F))[None,:])
+        if not np.allclose((Rn@Ln).toarray(),np.eye(H.shape[0]),rtol=1e-12,atol=1e-12):
+            raise ArithmeticError('normalized cochain reopen failed')
+        receipts.append(dict(degree=k,consistent_relative_defect=float(np.linalg.norm(pull-H)/np.linalg.norm(H)),
+            diagonal_relative_defect=float(np.linalg.norm(diag_defect)/np.linalg.norm(np.diag(H))),
+            normalized_prolongation=Ln.tocsr(),normalized_restriction=Rn.tocsr()))
+    return receipts
+
+def endpoint_time_complement(bundle,k,fine,coarse):
+    """Nonperiodic nested endpoint grids, independent space/time transport.
+    Leading axis is time; intermediate axes can carry base/first/second jets.
+    Retain signed omitted endpoints rather than use periodic Fourier here.
+    """
+    fine,coarse=np.asarray(fine,float),np.asarray(coarse,float)
+    if len(coarse)==0 or len(fine)%len(coarse):
+        raise ValueError('nested endpoint grids required')
+    R=bundle['restriction'][k];L=bundle['numerator'][k]/bundle['denominator'][k]
+    if fine.ndim<2 or coarse.shape[1:-1]!=fine.shape[1:-1] or fine.shape[-1]!=R.shape[1] or coarse.shape[-1]!=R.shape[0]:
+        raise ValueError('coefficient history shape mismatch')
+    def apply(x,M):
+        return np.asarray(x.reshape(-1,x.shape[-1])@M.T).reshape(x.shape[:-1]+(M.shape[0],))
+    y=apply(fine,R);spatial=fine-apply(y,L)
+    stride=len(fine)//len(coarse); ix=np.arange(stride-1,len(fine),stride)
+    signed=y[ix]-coarse; temporal=y.copy();temporal[ix]=0.
+    z=temporal.copy();z[ix]=coarse+signed
+    reconstructed=apply(z,L)+spatial
+    square=y[ix]-apply(fine[ix],R)
+    if not np.allclose(reconstructed,fine,rtol=1e-12,atol=1e-12) or np.any(square!=0):
+        raise ArithmeticError('indexed space-time reopening failed')
+    return dict(signed_residual=signed,spatial_complement=spatial,temporal_complement=temporal,
+        zero_mode=y.mean(axis=0),square_residual=square,
+        reconstruction_error=float(np.max(abs(reconstructed-fine))))
